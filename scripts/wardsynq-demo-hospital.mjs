@@ -659,6 +659,13 @@ async function theatreCase(orgId, p, who, n) {
 
   await as(surgeon, "POST", "ward/surgery-consent", { orgId, caseId, consent: { procedure: book.body.procedure || (n % 2 ? "Laparoscopic appendicectomy" : "Total knee replacement"), laterality, signedByPatientOrProxy: true, givenBy: "patient", capacity: "capacitous" } }, { key: `demo-consent-${p.mrn}` });
   await as(surgeon, "POST", "ward/surgery-marksite", { orgId, caseId, marking: { laterality, site: laterality + " side" } }, { key: `demo-mark-${p.mrn}` });
+  // Sign In reads the pre-anaesthetic checkup and refuses without one, so the anaesthetist records it first.
+  await as(anaesthetist, "POST", "ward/pac", { orgId, caseId, pac: {
+    history: "Controlled hypertension. No previous anaesthetic complications. No known allergies.",
+    airway: { mallampati: "II", mouthOpeningCm: 4, thyromentalDistanceCm: 6.5, neckMovement: "normal" }, asaClass: "II",
+    fasting: { status: "adequate" }, investigations: { reviewed: true }, plan: { technique: n % 2 ? "general" : "spinal" },
+    consent: { obtained: true, givenBy: "patient" }, decision: "fit",
+  } }, { key: `demo-pac-${p.mrn}` });
   await as(anaesthetist, "POST", "ward/anesthesia-start", { orgId, caseId, asaClass: "II" }, { key: `demo-anaes-${p.mrn}` });
   /* FINDING, not a workaround: the WHO checklist REQUIRES a nurse's signature (wardsynq-surgical.js
    * REQUIRED_ROLES) but `capFor` gates surgery-signin/timeout/signout on emr.treat, which the `nurse`

@@ -236,7 +236,7 @@ async function projectStayRecord(s, parsed, { tenantId, now }) {
         documents: [narrativeDoc(`${inv.id}-text`, "Invoice Record", `Invoice ${inv.id}, total ${cur} ${total.toFixed(2)}`, generatedAt)] });
     }
   } else if (kind === "OPC" && enc.class === "ED") {
-    rec = bundle({ ...base, conditions: p.visitConditions.map((c) => condition({ id: c.id, code: codeable({ text: str(c.display || c.code) }), clinicalStatus: c.clinicalStatus })),
+    rec = bundle({ ...base, conditions: p.visitConditions.map((c) => condition({ id: c.id, code: codeable({ coding: systemUri(c.codeSystem) && str(c.code) ? [coding({ system: systemUri(c.codeSystem), code: str(c.code), display: str(c.display || c.code) })] : [], text: str(c.display || c.code) }), clinicalStatus: c.clinicalStatus })),
       allergies: s.allergies.map((a) => allergyIntolerance({ id: a.id, code: codeable({ text: str(a.substance) }), criticality: a.criticality })),
       medications: p.orders.map(projectOrder), observations: s.observations.filter((o) => o.encounterId === enc.id).map(projectObservation),
       documents: [narrativeDoc(`${enc.id}-opc`, "Clinical consultation report", p.visitNotes.map((n) => Object.values(n.sections || {}).map(str).filter(Boolean).join(" ")).filter(Boolean).join("\n") || "Emergency visit", generatedAt)] });

@@ -631,7 +631,8 @@
            * the patient in front of them. */
           '<span class="w-bed-b"><b>' + esc(p.name || p.mrn || p.patientId) + "</b><small>" +
             esc(p.mrn && p.name ? p.mrn + " · " : "") + esc(wTEn(CLASS_LABEL[p.class]) || p.class || "") +
-            (day ? " · " + esc(day) : "") + " · " + wTH("ward.admitted", "admitted {admittedAt}", { admittedAt: when(p.admittedAt) }, "admittedAt") + "</small></span>" +
+            (day ? " · " + esc(day) : "") + " · " + wTH("ward.admitted", "admitted {admittedAt}", { admittedAt: when(p.admittedAt) }, "admittedAt") +
+            (p.expectedDischarge || p.expectedDischarge === false ? " · " + eddLine(p.expectedDischarge) : "") + "</small></span>" +
           ms("chevron_right") + "</button>";
       }).join("");
       return '<div class="w-wardrow"><h4>' + (w === "No ward assigned" ? wTH("ward.no-ward-assigned", "No ward assigned") : esc(w)) + "<small>" + byWard[w].length + (byWard[w].length === 1 ? " " + wTH("ward.patient", "patient") : " " + wTH("ward.patients", "patients")) + "</small></h4>" + rows + "</div>";
@@ -772,7 +773,7 @@
       "<input id=\"wWard\" type=\"text\" placeholder=\"" + wTA("ward.ward-blank-all", "Ward (blank = all)") + "\" value=\"" + esc(state.ward) + '">' +
       "<button class=\"w-btn ghost\" data-w-act=\"setward\" type=\"button\">" + wTH("ward.apply", "Apply") + "</button></div>" +
       alertCoverHtml(state) +
-      '<div id="wRoster">' + rosterHtml(state) + "</div></div>";
+      '<div id="wRoster">' + rosterHtml(state) + "</div></div>" + transfersBoardHtml(state);
 
     return '<div class="w-split-layout">' +
       '<aside class="w-col-tools">' + leftTools + '</aside>' +
@@ -994,7 +995,7 @@
         "<label class=\"w-f\"><span>" + wTH("ward.site", "Site") + "</span><input id=\"wSurgSite\" type=\"text\" autocomplete=\"off\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.laterality", "Laterality") + "</span><select id=\"wSurgLaterality\"><option value=\"not-applicable\">" + wTH("ward.not-applicable", "Not applicable") + "</option><option value=\"left\">Left</option><option value=\"right\">Right</option><option value=\"bilateral\">Bilateral</option></select></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.theatre", "Theatre") + "</span><input id=\"wSurgTheatre\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-ot-1", "e.g. OT-1") + "\"></label>" +
-        "</div>" +
+        "</div>" + codePickerHtml(state, "surg") +
         '<button class="w-btn tiny go" data-w-act="surgerybook">' + ms("check") + wTH("ward.book-case", "Book case") + "</button>" : "") +
       "</div>";
 
@@ -1046,7 +1047,7 @@
     if (!c) return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button><div><b>" + wTH("ward.case", "Case") + "</b></div></div><div class=\"w-card\"><p class=\"w-empty\">" + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
 
     var header = "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
-      "<div><b>" + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + " &middot; " + esc(c.laterality) + " &middot; " + esc(wTEn(STAGE_WORDS[c.stage]) || c.stage) + "</small></div>" +
+      "<div><b>" + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + (c.procedureCoding ? ' <span class="w-code">' + esc(c.procedureCoding.code) + "</span>" : "") + " &middot; " + esc(c.laterality) + " &middot; " + esc(wTEn(STAGE_WORDS[c.stage]) || c.stage) + "</small></div>" +
       "<button class=\"w-ic\" data-w-act=\"surgeryload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       /* ABANDONING A CASE. A case that is not going ahead - the patient deteriorated, the list overran,
        * the consent was withdrawn - has to be ended on the record, with a reason, or it sits on the
@@ -1075,7 +1076,7 @@
       "<label class=\"w-f\"><span>" + wTH("ward.laterality-marked", "Laterality marked") + "</span><select id=\"wSurgMarkLat\"><option value=\"not-applicable\"" + (c.laterality === "not-applicable" ? " selected" : "") + ">" + wTH("ward.not-applicable", "Not applicable") + "</option><option value=\"left\"" + (c.laterality === "left" ? " selected" : "") + '>Left</option><option value="right"' + (c.laterality === "right" ? " selected" : "") + '>Right</option><option value="bilateral"' + (c.laterality === "bilateral" ? " selected" : "") + '>Bilateral</option></select></label>' +
       '<button class="w-btn go" data-w-act="surgerymarksite">' + ms("save") + wTH("ward.record-marking", "Record marking") + "</button></div>";
 
-    var checklistCard = c.stage === "marked" ? checklistForm("signIn", SIGN_IN_ITEMS, "surgeryphase")
+    var checklistCard = c.stage === "marked" ? pacSignInNote(state) + checklistForm("signIn", SIGN_IN_ITEMS, "surgeryphase")
       : c.stage === "signed-in" ? checklistForm("timeOut", TIME_OUT_ITEMS, "surgeryphase")
       : c.stage === "timed-out" ? '<div class="w-card"><div class="w-card-h">' + ms("cut") + "<h3>" + wTH("ward.incision", "Incision") + "</h3></div>" +
           '<p class="w-hint">' + ms("check_circle") + wTH("ward.sign-in-and-time-out-are", "Sign In and Time Out are both complete. Incision is unlocked.") + "</p>" +
@@ -1094,7 +1095,7 @@
       '<button class="w-btn ghost" data-w-act="surgerydisposition:direct-discharge">' + ms("home") + wTH("ward.direct-discharge", "Direct discharge") + "</button>" +
       "</div></div>";
 
-    return header + consentCard + siteCard + checklistCard + anesCard + implantCard + dispositionCard;
+    return header + consentCard + pacCard(state) + siteCard + checklistCard + anesCard + implantCard + dispositionCard;
   }
 
   function anesthesiaCard(state) {
@@ -1131,6 +1132,128 @@
       "<label class=\"w-f\"><span>" + wTH("ward.serial2", "Serial") + "</span><input id=\"wSurgImplantSerial\" type=\"text\" autocomplete=\"off\"></label>" +
       "</div>" +
       '<button class="w-btn ghost" data-w-act="surgeryimplant">' + ms("add") + wTH("ward.log-implant", "Log implant") + "</button></div>";
+  }
+
+  /* PRE-ANAESTHETIC CHECKUP (migrate-surgery.js recordPac), one per case. The screen sends what was chosen;
+   * the server keeps the closed vocabularies, adds who and when, and refuses a second checkup unless it is a
+   * revision with a reason. Nothing is preselected: a yes/no the anaesthetist never touched is not an answer.
+   * st.surgCase.pac: null = loading, false = could not be read, { rec: record or null } = read. */
+  function pacWord(kind, v) {
+    var W = {
+      neck: { normal: wT("ward.pac-neck-normal", "Normal"), restricted: wT("ward.pac-neck-restricted", "Restricted"), fixed: wT("ward.pac-neck-fixed", "Fixed") },
+      fasting: { adequate: wT("ward.pac-fasting-adequate", "Adequately fasted"), inadequate: wT("ward.pac-fasting-inadequate", "Not adequately fasted"), "not-fasted-emergency": wT("ward.pac-fasting-emergency", "Not fasted (emergency)") },
+      technique: { general: wT("ward.pac-tech-general", "General anaesthesia"), spinal: wT("ward.pac-tech-spinal", "Spinal"), epidural: wT("ward.pac-tech-epidural", "Epidural"), "combined-spinal-epidural": wT("ward.pac-tech-cse", "Combined spinal-epidural"), "regional-block": wT("ward.pac-tech-block", "Regional block"), sedation: wT("ward.pac-tech-sedation", "Sedation"), "local-with-monitoring": wT("ward.pac-tech-local", "Local with monitoring") },
+      decision: { fit: wT("ward.pac-decision-fit", "Fit for anaesthesia"), "fit-with-conditions": wT("ward.pac-decision-conditions", "Fit with conditions"), unfit: wT("ward.pac-decision-unfit", "Unfit"), missing: wT("ward.pac-decision-missing", "No checkup recorded") },
+      givenBy: { patient: wT("ward.pac-given-patient", "Patient"), guardian: wT("ward.pac-given-guardian", "Guardian"), proxy: wT("ward.pac-given-proxy", "Lawful proxy") },
+      mallampati: { "not-assessable": wT("ward.pac-mallampati-na", "Not assessable") }
+    };
+    return (W[kind] && HAS(W[kind], v)) ? W[kind][v] : String(v == null ? "" : v);
+  }
+  function pacOptions(kind, values, current) {
+    return '<option value="">' + wTH("ward.choose", "Choose&hellip;") + "</option>" + values.map(function (v) {
+      return '<option value="' + esc(v) + '"' + (current === v ? " selected" : "") + ">" + esc(pacWord(kind, v)) + "</option>";
+    }).join("");
+  }
+  function pacYesNo(id, current) {
+    return '<select id="' + id + '"><option value="">' + wTH("ward.choose", "Choose&hellip;") + "</option>" +
+      '<option value="yes"' + (current === true ? " selected" : "") + ">" + wTH("ward.pac-yes", "Yes") + "</option>" +
+      '<option value="no"' + (current === false ? " selected" : "") + ">" + wTH("ward.pac-no", "No") + "</option></select>";
+  }
+  function pacLocalInput(iso) {
+    if (!iso) return "";
+    var d = new Date(iso); if (isNaN(d.getTime())) return "";
+    var p = function (n) { return (n < 10 ? "0" : "") + n; };
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes());
+  }
+  function pacForm(rec) {
+    var r = rec || {}, a = r.airway || {}, f = r.fasting || {}, inv = r.investigations || {}, pl = r.plan || {}, co = r.consent || {};
+    var fld = function (label, input) { return '<label class="w-f"><span>' + label + "</span>" + input + "</label>"; };
+    return '<div class="w-sub">' +
+      fld(wTH("ward.pac-history", "History: conditions, previous anaesthetics, medicines, allergies"), '<textarea id="wPacHistory" rows="3">' + esc(r.history || "") + "</textarea>") +
+      "<h4>" + wTH("ward.pac-airway", "Airway") + "</h4>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-mallampati", "Mallampati class"), '<select id="wPacMallampati">' + pacOptions("mallampati", ["I", "II", "III", "IV", "not-assessable"], a.mallampati) + "</select>") +
+      fld(wTH("ward.pac-mouth", "Mouth opening (cm)"), '<input id="wPacMouth" type="number" min="0" max="10" step="0.1" inputmode="decimal" value="' + esc(a.mouthOpeningCm == null ? "" : a.mouthOpeningCm) + '">') +
+      fld(wTH("ward.pac-tmd", "Thyromental distance (cm)"), '<input id="wPacTmd" type="number" min="0" max="15" step="0.1" inputmode="decimal" value="' + esc(a.thyromentalDistanceCm == null ? "" : a.thyromentalDistanceCm) + '">') +
+      fld(wTH("ward.pac-neck", "Neck movement"), '<select id="wPacNeck">' + pacOptions("neck", ["normal", "restricted", "fixed"], a.neckMovement) + "</select>") +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.asa-class", "ASA class"), '<select id="wPacAsa">' + pacOptions("asa", ["I", "II", "III", "IV", "V", "VI"], r.asaClass) + "</select>") +
+      '<label class="w-chk"><input type="checkbox" id="wPacAsaE"' + (r.asaEmergency ? " checked" : "") + "> " + wTH("ward.pac-asa-emergency", "Emergency (E)") + "</label>" +
+      "</div>" +
+      "<h4>" + wTH("ward.pac-fasting", "Fasting") + "</h4>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-fasting-status", "Fasting status"), '<select id="wPacFasting">' + pacOptions("fasting", ["adequate", "inadequate", "not-fasted-emergency"], f.status) + "</select>") +
+      fld(wTH("ward.pac-solids", "Last solid food"), '<input id="wPacSolids" type="datetime-local" value="' + esc(pacLocalInput(f.solidsLastAt)) + '">') +
+      fld(wTH("ward.pac-clears", "Last clear fluids"), '<input id="wPacClears" type="datetime-local" value="' + esc(pacLocalInput(f.clearFluidsLastAt)) + '">') +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-inv-reviewed", "Investigations reviewed"), pacYesNo("wPacInvReviewed", inv.reviewed)) +
+      fld(wTH("ward.pac-inv-summary", "Investigations: relevant findings"), '<input id="wPacInvSummary" type="text" autocomplete="off" value="' + esc(inv.summary || "") + '">') +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-plan", "Anaesthesia plan"), '<select id="wPacTechnique">' + pacOptions("technique", ["general", "spinal", "epidural", "combined-spinal-epidural", "regional-block", "sedation", "local-with-monitoring"], pl.technique) + "</select>") +
+      fld(wTH("ward.pac-plan-notes", "Plan notes"), '<input id="wPacPlanNotes" type="text" autocomplete="off" value="' + esc(pl.notes || "") + '">') +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-consent", "Consent for anaesthesia obtained"), pacYesNo("wPacConsent", co.obtained)) +
+      fld(wTH("ward.pac-consent-by", "Consent given by"), '<select id="wPacConsentBy">' + pacOptions("givenBy", ["patient", "guardian", "proxy"], co.givenBy) + "</select>") +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-decision", "Fitness decision"), '<select id="wPacDecision">' + pacOptions("decision", ["fit", "fit-with-conditions", "unfit"], r.decision) + "</select>") +
+      fld(wTH("ward.pac-decision-reason", "Conditions, or why unfit"), '<input id="wPacDecisionReason" type="text" autocomplete="off" value="' + esc(r.decisionReason || "") + '">') +
+      "</div>" +
+      (rec ? fld(wTH("ward.pac-revision-reason", "Reason for revising this checkup"), '<input id="wPacRevisionReason" type="text" autocomplete="off">') : "") +
+      '<button class="w-btn go" data-w-act="pacsave">' + ms("save") + (rec ? wTH("ward.pac-save-revision", "Save revision") : wTH("ward.pac-save", "Record checkup")) + "</button>" +
+      (rec ? ' <button class="w-btn ghost" data-w-act="paccancel">' + wTH("ward.cancel", "Cancel") + "</button>" : "") +
+      "</div>";
+  }
+  function pacSummary(rec) {
+    var a = rec.airway || {}, f = rec.fasting || {}, inv = rec.investigations || {}, pl = rec.plan || {}, co = rec.consent || {};
+    var line = function (label, value) { return "<li><b>" + label + "</b><span>" + value + "</span></li>"; };
+    var warn = rec.decision !== "fit";
+    return '<p class="w-hint' + (warn ? " warn" : "") + '">' + ms(warn ? "warning" : "check_circle") + "<b>" + esc(pacWord("decision", rec.decision)) + "</b>" +
+      (rec.decisionReason ? ": " + esc(rec.decisionReason) : "") + "</p>" +
+      '<ul class="w-mini">' +
+      line(wTH("ward.asa-class", "ASA class"), esc(rec.asaClass) + (rec.asaEmergency ? " E" : "")) +
+      line(wTH("ward.pac-airway", "Airway"), wTH("ward.pac-airway-line", "Mallampati {m}, mouth opening {mo} cm, thyromental distance {tmd} cm, neck {neck}", { m: esc(pacWord("mallampati", a.mallampati)), mo: esc(a.mouthOpeningCm), tmd: esc(a.thyromentalDistanceCm), neck: esc(pacWord("neck", a.neckMovement)) })) +
+      line(wTH("ward.pac-fasting", "Fasting"), esc(pacWord("fasting", f.status)) +
+        (f.solidsLastAt ? " &middot; " + wTH("ward.pac-solids-at", "solids {at}", { at: when(f.solidsLastAt) }) : "") +
+        (f.clearFluidsLastAt ? " &middot; " + wTH("ward.pac-clears-at", "clear fluids {at}", { at: when(f.clearFluidsLastAt) }) : "")) +
+      line(wTH("ward.pac-inv-reviewed", "Investigations reviewed"), (inv.reviewed ? wTH("ward.pac-yes", "Yes") : wTH("ward.pac-no", "No")) + (inv.summary ? " &middot; " + esc(inv.summary) : "")) +
+      line(wTH("ward.pac-plan", "Anaesthesia plan"), esc(pacWord("technique", pl.technique)) + (pl.notes ? " &middot; " + esc(pl.notes) : "")) +
+      line(wTH("ward.pac-consent", "Consent for anaesthesia obtained"), (co.obtained ? wTH("ward.pac-yes", "Yes") : wTH("ward.pac-no", "No")) + (co.givenBy ? " &middot; " + esc(pacWord("givenBy", co.givenBy)) : "")) +
+      line(wTH("ward.pac-history-short", "History"), esc(rec.history)) +
+      "</ul>" +
+      '<p class="w-dt-times">' + wTH("ward.pac-assessed", "Assessed {at} by {who}, version {v}", { at: when(rec.assessedAt), who: staffWho(rec.assessedBy), v: esc(rec.version) }) +
+      (rec.revision ? " &middot; " + wTH("ward.pac-revised", "revised from {prev}: {reason}", { prev: esc(pacWord("decision", rec.revision.previousDecision)), reason: esc(rec.revision.reason) }) : "") + "</p>";
+  }
+  function pacCard(state) {
+    var d = state.surgCase, c = d.case, p = d.pac;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("assignment_ind") + "<h3>" + wTH("ward.pac-title", "Pre-anaesthetic checkup") + "</h3></div>";
+    var atSignIn = c.signIn && c.signIn.pac
+      ? '<p class="w-hint' + (c.signIn.pac.acknowledgement ? " warn" : "") + '">' + ms("checklist") + wTH("ward.pac-at-sign-in", "At Sign In: {status}", { status: esc(pacWord("decision", c.signIn.pac.status)) }) +
+        (c.signIn.pac.acknowledgement ? " &middot; " + wTH("ward.pac-proceeded-because", "proceeded because: {reason}", { reason: esc(c.signIn.pac.acknowledgement) }) : "") + "</p>"
+      : "";
+    if (p == null) return head + '<p class="w-empty">' + wTH("ward.pac-loading", "Loading the pre-anaesthetic checkup...") + "</p></div>";
+    if (p === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.pac-failed", "The pre-anaesthetic checkup could not be loaded. Do not read this as not done.", null, "", 1) + "</p>" +
+      '<button class="w-btn tiny ghost" data-w-act="surgeryload">' + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button>" + atSignIn + "</div>";
+    if (!p.rec) return head + '<p class="w-hint warn">' + ms("warning") + wTH("ward.pac-none", "No pre-anaesthetic checkup is recorded for this case.") + "</p>" + atSignIn + pacForm(null) + "</div>";
+    return head + pacSummary(p.rec) + atSignIn +
+      (state.surgPacEdit ? pacForm(p.rec) : '<button class="w-btn ghost sm" data-w-act="pacedit">' + ms("edit") + wTH("ward.pac-revise", "Revise checkup") + "</button>") + "</div>";
+  }
+  /* Shown above the Sign In checklist: whether a checkup exists and what it decided. The server checks again
+   * at sign in and refuses a missing or unfit checkup unless the reason for proceeding is given here. */
+  function pacSignInNote(state) {
+    var p = state.surgCase && state.surgCase.pac;
+    var ack = '<label class="w-f"><span>' + wTH("ward.pac-ack", "Why Sign In proceeds without a fit checkup") + '</span><input id="wSurgPacAck" type="text" autocomplete="off"></label>';
+    if (p == null) return '<p class="w-empty">' + wTH("ward.pac-loading", "Loading the pre-anaesthetic checkup...") + "</p>";
+    if (p === false) return '<p class="w-hint warn">' + ms("error") + wTH("ward.pac-signin-failed", "The pre-anaesthetic checkup could not be loaded. Sign In checks it again; give a reason if none is recorded.", null, "", 1) + "</p>" + ack;
+    if (!p.rec) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.pac-signin-missing", "No pre-anaesthetic checkup is recorded. Record one, or state why Sign In proceeds without it.", null, "", 1) + "</p>" + ack;
+    if (p.rec.decision === "unfit") return '<p class="w-hint warn">' + ms("warning") + wTH("ward.pac-signin-unfit", "The pre-anaesthetic checkup found the patient unfit: {reason}. State why Sign In proceeds.", { reason: esc(p.rec.decisionReason || "") }) + "</p>" + ack;
+    return '<p class="w-hint' + (p.rec.decision === "fit" ? "" : " warn") + '">' + ms(p.rec.decision === "fit" ? "check_circle" : "warning") +
+      wTH("ward.pac-signin-status", "Pre-anaesthetic checkup: {decision}, ASA {asa}", { decision: esc(pacWord("decision", p.rec.decision)), asa: esc(p.rec.asaClass) }) +
+      (p.rec.decisionReason ? " &middot; " + esc(p.rec.decisionReason) : "") + "</p>";
   }
 
   /* HELD FROM OTHER SYSTEMS. Everything here is something another system sent that WardSynQ would
@@ -1401,6 +1524,57 @@
     ["confirmed", "Confirmed"],
     ["refuted", "Refuted - considered and ruled out"]
   ];
+  /* THE CODE PICKER over the hospital's own loaded SNOMED CT, ICD-10 and LOINC codes (code-sets.js). A person searches
+   * and picks; nothing is preselected, and the server checks the code is in the set before it is stored.
+   * st.codeSets: null = loading, false = failed, [systems]. st.cp[key]: { system, results: null (searching) |
+   * false (failed) | [codes], err, chosen }. key is where the code goes: "prob", "surg" or "inv". */
+  function codePickerHtml(state, key) {
+    var cs = state.codeSets, p = (state.cp && state.cp[key]) || {};
+    var head = '<div class="w-sub w-codepick"><h4>' + ms("tag") + wTH("ward.cp-title", "Standard code (optional)") + "</h4>";
+    if (cs == null) return head + '<p class="w-hint">' + wTH("ward.cp-loading", "Loading this hospital's code sets...") + "</p></div>";
+    if (cs === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.cp-failed", "This hospital's code sets could not be loaded, so no code can be picked now. Do not read this as none loaded.", null, "", 1) + "</p></div>";
+    var loaded = cs.filter(function (s) { return s.loaded; });
+    if (!loaded.length) return head + '<p class="w-hint">' + ms("info") + wTH("ward.cp-none-loaded", "No SNOMED CT, ICD-10 or LOINC codes are loaded for this hospital. An administrator loads them in Admin, FHIR.") + "</p></div>";
+    if (p.chosen) return head + '<p class="w-hint">' + ms("check_circle") + "<b>" + esc(p.chosen.code) + "</b> " + esc(p.chosen.display) + ' <small lang="en">' + esc(p.chosen.name) + "</small> " +
+      '<button class="w-btn ghost tiny" data-w-act="cpclear:' + key + '">' + ms("close") + wTH("ward.cp-remove", "Remove code") + "</button></p></div>";
+    var res = p.results;
+    return head + '<div class="w-grid">' +
+      '<label class="w-f"><span>' + wTH("ward.cp-system", "Code system") + '</span><select id="wCp-' + key + '-sys">' + loaded.map(function (s) {
+        return '<option value="' + esc(s.system) + '"' + (p.system === s.system ? " selected" : "") + ">" + esc(s.name) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>' + wTH("ward.cp-search", "Search by code or words") + '</span><input id="wCp-' + key + '-q" type="search" autocomplete="off"></label></div>' +
+      '<button class="w-btn ghost" data-w-act="cpfind:' + key + '">' + ms("search") + wTH("ward.find-code", "Find code") + "</button>" +
+      (res === null ? '<p class="w-hint">' + wTH("ward.searching", "Searching…") + "</p>"
+        : res === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.cp-search-failed", "The code search failed. Do not read this as no match.", null, "", 1) + (p.err ? " " + esc(p.err) : "") + "</p>"
+        : Array.isArray(res) ? (res.length ? '<ul class="w-icd">' + res.map(function (c, i) {
+            return '<li><button class="w-icd-p" data-w-act="cppick:' + key + "|" + i + '"><b>' + esc(c.code) + "</b><span>" + esc(c.display) + "</span></button></li>"; }).join("") + "</ul>"
+          : '<p class="w-hint">' + wTH("ward.cp-no-match", "No code in this hospital's set matches.") + "</p>") : "") + "</div>";
+  }
+  function loadCodeSets() {
+    if (Array.isArray(st.codeSets)) return Promise.resolve();
+    st.codeSets = null;
+    return apiGet("/ward/code-sets?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.codeSets = r && r.ok ? (r.systems || []) : false; paint(); }, function () { st.codeSets = false; paint(); });
+  }
+  function codePickFind(key) {
+    var system = val("wCp-" + key + "-sys"), q = val("wCp-" + key + "-q");
+    st.cp = st.cp || {};
+    if (q.length < 2) { st.err = wT("ward.cp-type-two", "Type at least two characters of the code or its words."); paint(); return; }
+    var p = st.cp[key] = { system: system, results: null, err: "", chosen: null };
+    paint();
+    apiGet("/ward/code-search?orgId=" + encodeURIComponent(st.orgId) + "&system=" + encodeURIComponent(system) + "&q=" + encodeURIComponent(q))
+      .then(function (r) { if (st.cp[key] !== p) return; p.results = r && r.ok ? (r.codes || []) : false; p.err = r && !r.ok ? (r.detail || r.error || "") : ""; p.name = r && r.name; paint(); },
+        function () { if (st.cp[key] !== p) return; p.results = false; paint(); });
+  }
+  function codePickPick(arg) {
+    var parts = String(arg).split("|"), p = st.cp && st.cp[parts[0]], c = p && Array.isArray(p.results) && p.results[Number(parts[1])];
+    if (!c) return;
+    var sys = (st.codeSets || []).filter(function (s) { return s.system === p.system; })[0];
+    p.chosen = { system: p.system, code: c.code, display: c.display, name: (sys && sys.name) || p.system };
+    p.results = undefined;
+    paint();
+  }
+  function codeChosen(key) { var p = st.cp && st.cp[key]; return p && p.chosen ? { system: p.chosen.system, code: p.chosen.code } : undefined; }
+
   function problemsCard(state) {
     var rows = (state.problems || []).map(function (p) {
       return '<li><b>' + esc(p.display) + "</b>" + (p.codeSystem && p.codeSystem !== "text" ? ' <span class="w-code">' + esc(p.code) + "</span>" : "") +
@@ -1439,6 +1613,7 @@
       "</div>" +
       // Said plainly, because a code box beside a text box invites typing one in and hoping.
       '<p class="w-hint">' + ms("info") + wTH("ward.left-blank-the-code-is-not", "Left blank, the code is not guessed at: the diagnosis is recorded as text, and says so. Nothing here decides what the words mean.") + "</p>" +
+      codePickerHtml(state, "prob") +
       "</div></div>";
   }
 
@@ -2254,6 +2429,8 @@
       (sf.checked === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.the-safety-check-could-not-run", "The safety check could not run, so nothing about this order was checked.", null, "", 1) + "</p>" : "") +
       (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") +
       (sf.unresolvedDrug ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.this-drug-is-not-recognised-by", "This drug is not recognised by the decision-support content, so no allergy, interaction or dose check ran for it.", null, "", 1) + "</p>" : "") +
+      /* An empty pregnancy and lactation table is said where its findings would be, never left to read as checked. */
+      (sf.pregnancyLactation && sf.pregnancyLactation.rulesLoaded === 0 ? '<p class="w-hint">' + ms("info") + wTH("ward.no-pregnancy-lactation-rules-loaded", "No pregnancy or lactation rules are loaded, so this order was not checked for use in pregnancy or breastfeeding.", null, "", 1) + "</p>" : "") +
       ((sf.unresolvedActiveMeds || []).length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.not-checked-against", "Not checked against: {drugs}", { drugs: esc(sf.unresolvedActiveMeds.join(", ")) }, "drugs", 1) + "</p>" : "") +
       (rv.replaces ? '<p class="w-hint warn">' + ms("swap_horiz") + wTH("ward.this-replaces-the-active-order", "This replaces the active order for this drug ({dose} {frequency}).", { dose: dose(rv.replaces.dose), frequency: esc(rv.replaces.frequency || "") }, "dose frequency", 1) + "</p>" : "") +
       (needReason ? "<label class=\"w-f\"><span>" + wTH("ward.reason-for-prescribing-anyway", "Reason for prescribing anyway (required)") + "</span><input id=\"wMoOverride\" type=\"text\" autocomplete=\"off\"></label>" : "") +
@@ -2331,6 +2508,7 @@
       "<label class=\"w-f\"><span>" + wTH("ward.inv-other-category", "Category, for a test not on the list") + "</span><select id=\"wInvCat\">" + INV_CATEGORY.map(function (c) { return '<option value="' + esc(c[0]) + '"' + (o.category === c[0] ? " selected" : "") + ">" + esc(wTEn(c[1])) + "</option>"; }).join("") + "</select></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.inv-reason", "Reason (needed for a test not on the list)") + "</span><input id=\"wInvReason\" type=\"text\" autocomplete=\"off\"></label>" +
       "</div>" +
+      codePickerHtml(state, "inv") +
       '<button class="w-btn" data-w-act="investigation">' + ms("send") + wTH("ward.order2", "Order") + "</button>" +
       (rows ? '<div class="w-sub"><h4>' + ms("checklist") + wTH("ward.on-order", "On order") + "</h4><ul class=\"w-mini\">" + rows + "</ul></div>" : "") +
       (results ? '<div class="w-sub"><h4>' + ms("fact_check") + wTH("ward.results-imaging-reports", "Results &amp; Imaging Reports") + "</h4><ul class=\"w-mini w-results\">" + results + "</ul></div>" : "") +
@@ -2467,6 +2645,97 @@
     });
     return out;
   }
+  /* EXPECTED DISCHARGE AND TRANSFER REQUEST, on the stay's own chart (expected-discharge.js, transfer-request.js).
+   * The date is what the treating team states, never a prediction; a change needs a reason and every earlier date
+   * stays in the history. A transfer is asked for here and answered on the wards' own boards (the ward list).
+   * st.stayPlan: null = loading; { edd: {current, history} | false, xfer: [requests] | false }. */
+  function xferStatusWord(s) {
+    switch (s) {
+      case "requested": return wT("ward.xfer-st-requested", "Waiting for the receiving unit");
+      case "accepted": return wT("ward.xfer-st-accepted", "Accepted, waiting for a bed");
+      case "bed-assigned": return wT("ward.xfer-st-bed", "Bed assigned, ready to move");
+      case "completed": return wT("ward.xfer-st-completed", "Moved");
+      case "declined": return wT("ward.xfer-st-declined", "Declined");
+      case "cancelled": return wT("ward.xfer-st-cancelled", "Cancelled");
+      default: return String(s || "");
+    }
+  }
+  function xferUrgencyWord(u) {
+    return u === "emergency" ? wT("ward.xfer-urg-emergency", "Emergency") : u === "urgent" ? wT("ward.xfer-urg-urgent", "Urgent") : u === "routine" ? wT("ward.xfer-urg-routine", "Routine") : String(u || "");
+  }
+  function xferRoute(q) {
+    var to = (q.to && q.to.ward) || "?";
+    return esc((q.from && q.from.ward) || "?") + (q.from && q.from.bed ? " " + wTH("ward.bed2", "bed {bed}", { bed: esc(q.from.bed) }, "bed") : "") + " &rarr; " + esc(to) +
+      (q.to && q.to.unit === "icu" ? " " + wTH("ward.xfer-icu-tag", "(ICU)") : "") + (q.bed && q.bed.bed ? " " + wTH("ward.bed2", "bed {bed}", { bed: esc(q.bed.bed) }, "bed") : q.to && q.to.requestedBed ? " " + wTH("ward.xfer-asked-bed", "(asked for bed {bed})", { bed: esc(q.to.requestedBed) }) : "");
+  }
+  function eddLine(e) {
+    if (e === false) return '<span class="w-st overdue">' + wTH("ward.edd-unread", "expected discharge not readable") + "</span>";
+    if (!e) return "";
+    return (e.overdue ? '<span class="w-st overdue">' + wTH("ward.edd-overdue", "Discharge overdue: expected {date}", { date: esc(e.date) }) + "</span>"
+      : e.dueToday ? '<span class="w-st due">' + wTH("ward.edd-today", "Expected discharge today") + "</span>"
+      : wTH("ward.edd-on", "expected discharge {date}", { date: esc(e.date) }));
+  }
+  function stayPlanCard(state) {
+    var p = state.stayPlan;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("event") + "<h3>" + wTH("ward.stay-plan-title", "Expected discharge and transfer") + "</h3>" +
+      '<button class="w-ic" data-w-act="stayplanload" title="' + wTA("ward.refresh", "Refresh") + '">' + ms("refresh") + "</button></div>";
+    if (p == null) return head + '<p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    var edd = p.edd, cur = edd && edd.current;
+    var eddHtml = edd === false
+      ? '<p class="w-hint warn">' + ms("error") + wTH("ward.edd-failed", "The expected discharge date could not be loaded. Do not read this as not set.", null, "", 1) + "</p>"
+      : '<div class="w-sub"><h4>' + ms("event_available") + wTH("ward.edd-title", "Expected discharge date") + "</h4>" +
+        (cur ? "<p" + (cur.overdue ? ' class="w-hint warn"' : "") + "><b>" + esc(cur.date) + "</b> " + eddLine(cur) + "</p>" +
+          '<p class="w-dt-times">' + wTH("ward.edd-set-by", "Set {at} by {who}", { at: when(cur.setAt), who: staffWho(cur.setBy) }) + (cur.reason ? " &middot; " + esc(cur.reason) : "") + "</p>"
+          : '<p class="w-empty">' + wTH("ward.edd-none", "No expected discharge date is set.") + "</p>") +
+        '<div class="w-grid"><label class="w-f"><span>' + (cur ? wTH("ward.edd-new-date", "New expected date") : wTH("ward.edd-date", "Expected date")) + '</span><input id="wEddDate" type="date"></label>' +
+        '<label class="w-f"><span>' + (cur ? wTH("ward.edd-reason-required", "Reason for the change") : wTH("ward.edd-reason-optional", "Note (optional)")) + '</span><input id="wEddReason" type="text" autocomplete="off"></label></div>' +
+        '<button class="w-btn go" data-w-act="eddsave">' + ms("save") + (cur ? wTH("ward.edd-revise", "Change the date") : wTH("ward.edd-set", "Set the date")) + "</button>" +
+        (edd.history && edd.history.length > 1 ? '<ul class="w-mini">' + edd.history.slice(1).map(function (h) {
+          return "<li><b>" + esc(h.expectedDate) + "</b><span>" + when(h.setAt) + " &middot; " + staffWho(h.setBy) + (h.reason ? " &middot; " + esc(h.reason) : "") + "</span></li>";
+        }).join("") + "</ul>" : "") + "</div>";
+    var xfer = p.xfer;
+    var open = xfer && xfer.filter(function (q) { return q.status === "requested" || q.status === "accepted" || q.status === "bed-assigned"; })[0];
+    var xferHtml = '<div class="w-sub"><h4>' + ms("swap_horiz") + wTH("ward.xfer-title", "Transfer request") + "</h4>" +
+      (xfer === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.xfer-failed", "Transfer requests could not be loaded. Do not read this as none.", null, "", 1) + "</p>"
+        : open ? '<p class="w-hint' + (open.urgency === "routine" ? "" : " warn") + '">' + ms("hourglass_empty") + "<b>" + esc(xferStatusWord(open.status)) + "</b> &middot; " + xferRoute(open) + " &middot; " + esc(xferUrgencyWord(open.urgency)) + "</p>" +
+            '<p class="w-dt-times">' + wTH("ward.xfer-asked", "Asked {at} by {who}: {reason}", { at: when(open.requestedAt), who: staffWho(open.requestedBy), reason: esc(open.reason) }) + "</p>" +
+            '<p class="w-hint">' + ms("info") + wTH("ward.xfer-answered-on-board", "The receiving unit answers on its ward list, under Transfer requests.") + "</p>" +
+            '<button class="w-btn ghost sm" data-w-act="xfercancel:' + esc(open.id) + '">' + ms("close") + wTH("ward.xfer-cancel", "Cancel the request") + "</button>"
+        : '<div class="w-grid">' +
+          '<label class="w-f"><span>' + wTH("ward.xfer-to-unit", "Move to") + '</span><select id="wXferUnit"><option value="ward">' + wTH("ward.xfer-unit-ward", "Another ward") + '</option><option value="icu">' + wTH("ward.xfer-unit-icu", "ICU") + "</option></select></label>" +
+          '<label class="w-f"><span>' + wTH("ward.xfer-to-ward", "Ward or unit") + '</span><input id="wXferWard" type="text" autocomplete="off"></label>' +
+          '<label class="w-f"><span>' + wTH("ward.xfer-to-bed", "Bed asked for (optional)") + '</span><input id="wXferBed" type="text" autocomplete="off"></label>' +
+          '<label class="w-f"><span>' + wTH("ward.xfer-urgency", "Urgency") + '</span><select id="wXferUrgency"><option value="">' + wTH("ward.choose", "Choose&hellip;") + '</option><option value="routine">' + esc(xferUrgencyWord("routine")) + '</option><option value="urgent">' + esc(xferUrgencyWord("urgent")) + '</option><option value="emergency">' + esc(xferUrgencyWord("emergency")) + "</option></select></label>" +
+          "</div>" +
+          '<label class="w-f"><span>' + wTH("ward.xfer-reason", "Reason for the transfer") + '</span><input id="wXferReason" type="text" autocomplete="off"></label>' +
+          '<button class="w-btn" data-w-act="xferrequest">' + ms("send") + wTH("ward.xfer-request", "Request transfer") + "</button>") +
+      (xfer && xfer.length ? '<ul class="w-mini">' + xfer.filter(function (q) { return q !== open; }).map(function (q) {
+        return "<li><b>" + esc(xferStatusWord(q.status)) + "</b><span>" + xferRoute(q) + " &middot; " + when(q.requestedAt) +
+          (q.declineReason ? " &middot; " + esc(q.declineReason) : q.cancelReason ? " &middot; " + esc(q.cancelReason) : "") + "</span></li>";
+      }).join("") + "</ul>" : "") + "</div>";
+    return head + eddHtml + xferHtml + "</div>";
+  }
+  /* The ward list's own board: every open request this ward sends or receives, with the step each one is waiting for.
+   * st.transfers: null = loading, false = could not be read, [] = none. The server decides who may take each step. */
+  function transfersBoardHtml(state) {
+    var t = state.transfers;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>" + wTH("ward.xfer-board-title", "Transfer requests") + "</h3></div>";
+    if (t == null) return head + '<p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    if (t === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.xfer-failed", "Transfer requests could not be loaded. Do not read this as none.", null, "", 1) + "</p></div>";
+    if (!t.length) return head + '<p class="w-empty">' + wTH("ward.xfer-board-none", "No open transfer requests.") + "</p></div>";
+    return head + '<ul class="w-mini">' + t.map(function (q) {
+      var act = function (verb, icon, label) { return '<button class="w-btn ghost tiny" data-w-act="' + verb + ":" + esc(q.id) + '">' + ms(icon) + label + "</button>"; };
+      var next = q.status === "requested" ? act("xferaccept", "check", wTH("ward.xfer-accept", "Accept")) + act("xferdecline", "block", wTH("ward.xfer-decline", "Decline"))
+        : q.status === "accepted" ? act("xferbed", "bed", wTH("ward.xfer-assign-bed", "Assign bed"))
+        : act("xferexec", "move_up", wTH("ward.xfer-execute", "Move the patient")) + act("xferbed", "bed", wTH("ward.xfer-change-bed", "Change bed"));
+      return '<li class="w-mini-row"><div><b>' + esc(q.name || q.mrn || wT("ward.patient-not-readable", "patient not readable")) + "</b>" + (q.name && q.mrn ? " &middot; " + esc(q.mrn) : "") +
+        ' <span class="w-st' + (q.urgency === "routine" ? "" : " overdue") + '">' + esc(xferUrgencyWord(q.urgency)) + "</span>" +
+        '<div class="w-dt-times">' + xferRoute(q) + " &middot; " + esc(xferStatusWord(q.status)) + " &middot; " + when(q.requestedAt) + " &middot; " + esc(q.reason) + "</div>" +
+        '<div class="w-actions">' + next + act("xfercancel", "close", wTH("ward.cancel", "Cancel")) +
+        (q.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(q.encounterId) + '">' + wTH("ward.open-chart", "Open chart") + "</button>" : "") + "</div></div></li>";
+    }).join("") + "</ul></div>";
+  }
+
   function chartView(state) {
     var s = state.sel || {};
     var isEd = s.class === "ED";
@@ -2491,8 +2760,8 @@
 
     return header + registerFlagsCard(state) +
       criticalsCard(state) + (isEd ? (triageCard(state) + edTopCards) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
-      (isPediatric ? ageBandCard(state) : "") +
-      problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
+      (isPediatric ? ageBandCard(state) + growthCard(state) : "") + (apgarChart(s) ? apgarCard(state) : "") +
+      problemsCard(state) + (isEd ? "" : stayPlanCard(state)) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
       (isIcu ? icuTrendsCard(state) + icuScoresCard(state) + icuAbgCard(state) + icuVentCard(state) + icuSedationCard(state) + icuPressorCard(state) + icuRoundCard(state) : "") +
       fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
@@ -3486,11 +3755,62 @@
     return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>" + wTH("ward.delivery-newborn", "Delivery &amp; newborn") + "</h3></div>" +
       '<p class="w-hint">' + ms("check_circle") + wTH("ward.delivery2", "{mode} delivery, {deliveredAt}", { mode: esc(deliveryModeWord(d.mode)), deliveredAt: when(d.deliveredAt) }, "deliveredAt") + (d.complications ? " - " + esc(d.complications) : "") + "</p>" +
       (linksFailed ? '<p class="w-hint warn">' + ms("error") + wTH("ward.linked-newborns-could-not-be-loaded", "Linked newborns could not be loaded. Do not read this as none.", null, "", 1) + "</p>" : newbornRows ? '<ul class="w-mini">' + newbornRows + "</ul>" : "") +
+      (linksFailed ? "" : links.map(function (l) { return apgarBlock(l.relatedPatientId, state, true); }).join("")) +
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.sex", "Sex") + "</span><select id=\"wNewbornSex\"><option value=\"female\">" + wTH("ward.female", "Female") + "</option><option value=\"male\">" + wTH("ward.male", "Male") + "</option><option value=\"unknown\">" + wTH("ward.unknown", "Unknown") + "</option></select></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.name", "Name") + "</span><input id=\"wNewbornName\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.optional", "optional") + "\"></label>" +
       "</div>" +
       '<button class="w-btn go" data-w-act="newbornsave">' + ms("child_care") + wTH("ward.register-newborn", "Register newborn") + "</button></div>";
+  }
+
+  /* APGAR (migrate-maternity.js recordApgar), on the NEWBORN's own record: five signs, each 0, 1 or 2, at 1, 5 and 10
+   * minutes, each minute saved on its own. The help text is the standard sign descriptors (Apgar 1953; the AAP and ACOG
+   * table). The screen sends the five picks only: the total, who and when come back from the server. A minute not
+   * recorded says so and never shows 0. A recorded minute changes only as a correction with a reason. */
+  function apgarSigns() {
+    return [
+      { k: "appearance", s: wT("ward.apgar-appearance-short", "Appearance"), n: wT("ward.apgar-appearance", "Appearance (colour)"), d: [wT("ward.apgar-appearance-0", "Blue or pale"), wT("ward.apgar-appearance-1", "Acrocyanotic: body pink, extremities blue"), wT("ward.apgar-appearance-2", "Completely pink")] },
+      { k: "pulse", s: wT("ward.apgar-pulse-short", "Pulse"), n: wT("ward.apgar-pulse", "Pulse (heart rate)"), d: [wT("ward.apgar-pulse-0", "Absent"), wT("ward.apgar-pulse-1", "Below 100 per minute"), wT("ward.apgar-pulse-2", "100 per minute or more")] },
+      { k: "grimace", s: wT("ward.apgar-grimace-short", "Grimace"), n: wT("ward.apgar-grimace", "Grimace (reflex irritability)"), d: [wT("ward.apgar-grimace-0", "No response"), wT("ward.apgar-grimace-1", "Grimace"), wT("ward.apgar-grimace-2", "Cry or active withdrawal")] },
+      { k: "activity", s: wT("ward.apgar-activity-short", "Activity"), n: wT("ward.apgar-activity", "Activity (muscle tone)"), d: [wT("ward.apgar-activity-0", "Limp"), wT("ward.apgar-activity-1", "Some flexion"), wT("ward.apgar-activity-2", "Active motion")] },
+      { k: "respiration", s: wT("ward.apgar-respiration-short", "Respiration"), n: wT("ward.apgar-respiration", "Respiration (breathing effort)"), d: [wT("ward.apgar-respiration-0", "Absent"), wT("ward.apgar-respiration-1", "Weak cry, hypoventilation"), wT("ward.apgar-respiration-2", "Good, crying")] }
+    ];
+  }
+  function apgarDomId(pid) { return String(pid || "").replace(/[^A-Za-z0-9_-]/g, "-"); }
+  function apgarBlock(pid, state, named) {
+    var a = state.apgar && state.apgar[pid], id = apgarDomId(pid), signs = apgarSigns();
+    var head = '<div class="w-sub"><h4>' + ms("child_care") + (named ? wTH("ward.apgar-title-for", "APGAR score, newborn {id}", { id: esc(pid) }, "id") : wTH("ward.apgar-title", "APGAR score")) + "</h4>";
+    var refresh = '<button class="w-btn tiny ghost" data-w-act="apgarload:' + esc(pid) + '">' + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button>";
+    if (a == null) return head + "<p class=\"w-empty\">" + wTH("ward.apgar-loading", "Loading the APGAR score...") + "</p></div>";
+    if (a === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.apgar-failed", "The APGAR score could not be loaded. Do not read this as not recorded. Refresh before recording, so a minute is not recorded twice.", null, "", 1) + "</p>" + refresh + "</div>";
+    if (a.off) return head + "<p class=\"w-empty\">" + wTH("ward.apgar-off", "The clinical record is not switched on for this hospital, so no APGAR score can be recorded here.") + "</p></div>";
+    var rows = a.minutes.map(function (m) {
+      var r = m.record, when_ = wTH("ward.apgar-minute-n", "{n} min", { n: esc(m.minute) });
+      if (!r) return "<tr><td>" + when_ + '</td><td colspan="7"><i>' + wTH("ward.apgar-not-recorded", "not recorded") + "</i></td></tr>";
+      return "<tr><td>" + when_ + "</td><td><b>" + esc(r.total) + "/10</b></td>" +
+        signs.map(function (s) { return "<td>" + esc(r.components ? r.components[s.k] : "") + "</td>"; }).join("") +
+        "<td>" + when(r.recordedAt) + " &middot; " + wTH("ward.apgar-by", "by {who}", { who: staffWho(r.recordedBy) }) +
+        (r.correction ? '<div class="w-dt-times">' + wTH("ward.apgar-corrected", "Corrected (version {v}) from {prev}/10: {reason}", { v: esc(r.version), prev: esc(r.correction.previousTotal), reason: esc(r.correction.reason) }, "reason") + "</div>" : "") + "</td></tr>";
+    }).join("");
+    var table = '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.apgar-minute", "Minute") + "</th><th>" + wTH("ward.apgar-total", "Total") + "</th>" +
+      signs.map(function (s) { return "<th>" + esc(s.s) + "</th>"; }).join("") + "<th>" + wTH("ward.apgar-recorded", "Recorded") + "</th></tr></thead><tbody>" + rows + "</tbody></table></div>";
+    var form = '<div class="w-grid">' +
+      "<label class=\"w-f\"><span>" + wTH("ward.apgar-minute", "Minute") + '</span><select id="wApgarMin-' + id + '">' +
+        [1, 5, 10].map(function (n) { return '<option value="' + n + '">' + wTH("ward.apgar-minute-n", "{n} min", { n: n }) + "</option>"; }).join("") + "</select></label>" +
+      signs.map(function (s) {
+        return '<label class="w-f"><span>' + esc(s.n) + '</span><select id="wApgar-' + s.k + "-" + id + '"><option value="">' + wTH("ward.choose", "Choose&hellip;") + "</option>" +
+          [0, 1, 2].map(function (v) { return '<option value="' + v + '">' + v + ": " + esc(s.d[v]) + "</option>"; }).join("") + "</select></label>";
+      }).join("") + "</div>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.apgar-reason", "Correction reason (only to change a minute already recorded)") + '</span><input id="wApgarReason-' + id + '" type="text" autocomplete="off"></label>' +
+      '<p class="w-hint">' + ms("info") + wTH("ward.apgar-help", "Score each sign against the standard descriptors (Apgar 1953; AAP and ACOG). Save each minute when it is scored. The total is added up by the server from the five signs.") + "</p>" +
+      '<button class="w-btn go" data-w-act="apgarsave:' + esc(pid) + '">' + ms("save") + wTH("ward.apgar-save", "Record APGAR") + "</button> " + refresh;
+    return head + table + form + "</div>";
+  }
+  /* On the newborn's own chart (NICU, or a paediatric stay of a baby registered here at birth). */
+  function apgarChart(s) { return !!s && (s.class === "NICU" || (s.class === "PEDIATRICS" && /^opd-pat-newborn-/.test(String(s.patientId || "")))); }
+  function apgarCard(state) {
+    var s = state.sel || {};
+    return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>" + wTH("ward.apgar-title", "APGAR score") + "</h3></div>" + apgarBlock(s.patientId, state, false) + "</div>";
   }
 
   /* PARTOGRAM entry. Writes ordinary Observations, category "labour" - the flowsheet card already on
@@ -3558,6 +3878,88 @@
         : "") +
       (state.rateResult ? '<p class="w-hint' + (state.rateResult.weightWarning ? " warn" : "") + '">' + esc(state.rateResult.ratePerHour == null ? state.rateResult.reason : wT("ward.ml-h2", "{workings} = {ratePerHour} mL/h", { workings: state.rateResult.workings, ratePerHour: state.rateResult.ratePerHour })) + "</p>" : "") +
       "</div></div>";
+  }
+
+  /* GROWTH. Every z-score, centile and corrected age is the server's (wardsynq/wardsynq-growth.js, WHO's own
+   * method); this card only draws them. Weight is the one growth measurement WardSynQ records, so length, height
+   * and head circumference are named as not recorded rather than drawn as empty charts. A refused measurement
+   * shows why, never a number. The table below the chart is the accessible reading of it. */
+  function growthAge(days) {
+    if (days == null) return "";
+    if (days < 61) return wT("ward.growth-age-days", "{n} days", { n: days });
+    if (days < 731) return wT("ward.growth-age-months", "{n} months", { n: Math.round(days / 30.4375 * 10) / 10 });
+    return wT("ward.growth-age-years", "{n} years", { n: Math.round(days / 365.25 * 10) / 10 });
+  }
+  function growthRefusal(r) {
+    var why = {
+      SEX_UNKNOWN: wT("ward.growth-why-sex", "Sex is not recorded as male or female"),
+      DOB_APPROXIMATE: wT("ward.growth-why-dob", "The date of birth is approximate"),
+      AGE_UNKNOWN: wT("ward.growth-why-age", "The age at this measurement is not known"),
+      UNIT_UNKNOWN: wT("ward.growth-why-unit", "The weight's unit is not kg or lb"),
+      BEFORE_TERM: wT("ward.growth-why-before-term", "Corrected age is before term; WHO standards start at a term birth"),
+      OUT_OF_RANGE: wT("ward.growth-why-range", "Outside the WHO reference"),
+      VALUE_INVALID: wT("ward.growth-why-value", "Not a usable measurement")
+    }[r && r.code];
+    return esc(why || (r && r.reason));
+  }
+  function growthChartSvg(g) {
+    var pts = g.measurements.filter(function (m) { return m.result && m.result.ok; });
+    if (!pts.length || !g.lines.length) return "";
+    var W = 600, H = 260, L = 44, B = 28, xs = [], ys = [];
+    g.lines.forEach(function (l) { l.points.forEach(function (p) { xs.push(p[0]); ys.push(p[1]); }); });
+    pts.forEach(function (m) { xs.push(m.plotDays); ys.push(m.valueKg); });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.floor(Math.min.apply(null, ys)), y1 = Math.ceil(Math.max.apply(null, ys));
+    if (x1 === x0) x1 = x0 + 1; if (y1 === y0) y1 = y0 + 1;
+    var X = function (d) { return (L + (d - x0) / (x1 - x0) * (W - L - 30)).toFixed(1); };
+    var Y = function (v) { return (H - B - (v - y0) / (y1 - y0) * (H - B - 10)).toFixed(1); };
+    var lines = g.lines.map(function (l) {
+      if (!l.points.length) return "";
+      var last = l.points[l.points.length - 1];
+      return '<polyline fill="none" stroke="currentColor" stroke-opacity="' + (l.centile === 50 ? "0.7" : "0.3") + '" stroke-width="' + (l.centile === 50 ? 2 : 1) + '" points="' + l.points.map(function (p) { return X(p[0]) + "," + Y(p[1]); }).join(" ") + '"/>' +
+        '<text font-size="11" fill="currentColor" x="' + (Number(X(last[0])) + 4) + '" y="' + (Number(Y(last[1])) + 4) + '">' + esc(l.centile) + "</text>";
+    }).join("");
+    var dots = pts.map(function (m) {
+      return '<circle r="4" fill="currentColor" cx="' + X(m.plotDays) + '" cy="' + Y(m.valueKg) + '"><title>' + esc(when(m.at)) + ": " + esc(m.valueKg) + " " + wTH("ward.growth-kg", "kg") + "</title></circle>";
+    }).join("");
+    var axes = '<line x1="' + L + '" y1="' + (H - B) + '" x2="' + (W - 30) + '" y2="' + (H - B) + '" stroke="currentColor" stroke-opacity="0.3"/>' +
+      '<line x1="' + L + '" y1="10" x2="' + L + '" y2="' + (H - B) + '" stroke="currentColor" stroke-opacity="0.3"/>' +
+      '<text font-size="11" fill="currentColor" x="' + L + '" y="' + (H - 8) + '">' + esc(growthAge(Math.round(x0))) + "</text>" +
+      '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (W - 30) + '" y="' + (H - 8) + '">' + esc(growthAge(Math.round(x1))) + "</text>" +
+      '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (L - 4) + '" y="' + (H - B) + '">' + esc(y0) + "</text>" +
+      '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (L - 4) + '" y="18">' + esc(y1) + " " + wTH("ward.growth-kg", "kg") + "</text>";
+    return '<div style="overflow-x:auto"><svg width="100%" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' +
+      wTA("ward.growth-chart-label", "Weight for age against WHO centiles 3, 15, 50, 85 and 97. The table below lists every value.") + '">' + axes + lines + dots + "</svg></div>";
+  }
+  function growthCard(state) {
+    var g = state.growth;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("monitoring") + "<h3>" + wTH("ward.growth-title", "Growth (WHO centiles)") + "</h3>" +
+      "<button class=\"w-ic\" data-w-act=\"growthload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>";
+    if (g === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.growth-failed", "Growth could not be loaded. Do not read this as no measurements recorded.", null, "", 1) + "</p></div>";
+    if (g == null) return head + "<p class=\"w-empty\">" + wTH("ward.growth-loading", "Loading growth...") + "</p></div>";
+    if (g.off) return head + "<p class=\"w-empty\">" + wTH("ward.growth-off", "The clinical record is not switched on for this hospital, so there are no measurements to chart.") + "</p></div>";
+    var warn = function (html) { return '<p class="w-hint warn">' + ms("warning") + html + "</p>"; };
+    var gd = g.gestationDays;
+    var rows = g.measurements.map(function (m) {
+      var r = m.result || {};
+      var c = r.ok ? (r.centile >= 99.9 ? "&gt;99.9" : r.centile <= 0.1 ? "&lt;0.1" : esc(r.centile)) : "";
+      return "<tr><td>" + esc(when(m.at)) + "</td><td>" + (m.valueKg == null ? "" : esc(m.valueKg)) + "</td><td>" + esc(growthAge(m.chronologicalDays)) + "</td><td>" +
+        (m.corrected ? esc(growthAge(m.plotDays)) : "") + "</td>" +
+        (r.ok ? "<td>" + esc(r.z) + "</td><td>" + c + (r.implausible ? " " + wTH("ward.growth-implausible", "(check the measurement)") : "") + "</td>"
+          : '<td colspan="2">' + growthRefusal(r) + "</td>") + "</tr>";
+    }).join("");
+    return head +
+      (!g.sex ? warn(wTH("ward.growth-no-sex", "Sex is not recorded as male or female, so no WHO centile can be chosen.")) : "") +
+      (g.approxDob ? warn(wTH("ward.growth-approx-dob", "The date of birth was estimated from a stated age, so no centile is worked out.")) : "") +
+      '<p class="w-hint">' + ms("info") + (gd == null
+        ? wTH("ward.growth-ga-unknown", "Gestational age at birth is not recorded, so no age is corrected for prematurity.")
+        : wTH("ward.growth-ga", "Gestational age at birth {w}+{d} weeks, from the mother's recorded due date.", { w: Math.floor(gd / 7), d: gd % 7 }) +
+          (gd < 259 ? " " + wTH("ward.growth-corrected-rule", "Born before 37 weeks: plotted at corrected age (age minus the weeks born early) until 24 months of age.") : "")) + "</p>" +
+      (g.measurements.length ? growthChartSvg(g) +
+        '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.growth-when", "When") + "</th><th>" + wTH("ward.growth-weight-kg", "Weight (kg)") + "</th><th>" +
+        wTH("ward.growth-age", "Age") + "</th><th>" + wTH("ward.growth-corrected-age", "Corrected age") + "</th><th>" + wTH("ward.growth-z", "z-score") + "</th><th>" + wTH("ward.growth-centile", "Centile") + "</th></tr></thead><tbody>" + rows + "</tbody></table></div>"
+        : "<p class=\"w-empty\">" + wTH("ward.growth-no-weights", "No weights recorded. Weights charted with the vitals appear here.") + "</p>") +
+      '<p class="w-hint">' + ms("info") + wTH("ward.growth-not-recorded", "Length, height and head circumference are not recorded in WardSynQ, so only weight for age is charted.") + "</p>" +
+      '<p class="w-dt-times">' + wTH("ward.growth-source", "WHO Child Growth Standards (2006) under 5 years; WHO growth reference (2007) from 5 years. Not clinically validated in this build.") + "</p></div>";
   }
 
   /* LINES. A placement log, mirroring surgery's implant card exactly - site, type, when, by. */
@@ -5561,8 +5963,24 @@
 
       '<div class="w-card"><div class="w-card-h">' + ms("task_alt") + "<h3>" + wTH("ward.discharge", "Discharge") + "</h3></div>" +
       '<div class="w-actions">' + fc("dischargeCandidates", f.dischargeCandidates, f.dischargeCandidates === 1 ? wT("ward.stay-with-nothing-outstanding-right-now", "stay with nothing outstanding right now") : wT("ward.stays-with-nothing-outstanding-right-now", "stays with nothing outstanding right now")) + "</div>" +
-      "<p class=\"w-hint\">" + wTH("ward.this-is-a-live-fact-not", "This is a live fact, not a predicted discharge date - no expected-discharge field exists in this record.") + "</p>" +
+      "<p class=\"w-hint\">" + wTH("ward.flow-candidates-fact", "Nothing outstanding right now is a live fact, not a prediction.") + "</p>" +
       (openRows ? '<ul class="w-mini">' + openRows + "</ul>" : "") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("event_busy") + "<h3>" + wTH("ward.flow-overdue-title", "Past the expected discharge date") + "</h3></div>" +
+      (f.overdueDischarges == null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.flow-overdue-failed", "Expected discharge dates could not be read. Do not read this as none overdue.", null, "", 1) + "</p>"
+        : f.overdueDischarges.length ? '<ul class="w-mini">' + f.overdueDischarges.map(function (s) {
+          return "<li><b>" + esc(s.name || s.mrn || wT("ward.patient-not-readable", "patient not readable")) + "</b><span>" + esc(s.ward || "") + (s.bed ? " &middot; " + wTH("ward.bed2", "bed {bed}", { bed: esc(s.bed) }, "bed") : "") + " &middot; " + eddLine(s.expectedDischarge) + "</span>" +
+            (s.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(s.encounterId) + "\">" + wTH("ward.open-chart", "Open chart") + "</button>" : "") + "</li>";
+        }).join("") + "</ul>"
+        : '<p class="w-empty">' + wTH("ward.flow-overdue-none", "No open stay is past the expected discharge date its team set.") + "</p>") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>" + wTH("ward.xfer-board-title", "Transfer requests") + "</h3></div>" +
+      (f.pendingTransfers == null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.xfer-failed", "Transfer requests could not be loaded. Do not read this as none.", null, "", 1) + "</p>"
+        : f.pendingTransfers.length ? '<ul class="w-mini">' + f.pendingTransfers.map(function (q) {
+          return "<li><b>" + esc(q.name || q.mrn || wT("ward.patient-not-readable", "patient not readable")) + "</b><span>" + xferRoute(q) + " &middot; " + esc(xferUrgencyWord(q.urgency)) + " &middot; " + esc(xferStatusWord(q.status)) + "</span>" +
+            (q.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(q.encounterId) + "\">" + wTH("ward.open-chart", "Open chart") + "</button>" : "") + "</li>";
+        }).join("") + "</ul>"
+        : '<p class="w-empty">' + wTH("ward.xfer-board-none", "No open transfer requests.") + "</p>") + "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>" + wTH("ward.recent-transfers", "Recent transfers") + "</h3></div>" +
       (transferRows ? '<ul class="w-mini">' + transferRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.none-in-the-last-24-hours", "None in the last 24 hours.") + "</p>") + "</div>" +
@@ -8868,7 +9286,7 @@
   function loadWard(afterList) {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; if (r.labels) st.labels = r.labels; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover()]); })
+      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; if (r.labels) st.labels = r.labels; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover(), loadTransfers()]); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-ward", "Could not reach the ward."); st.loaded = true; paint(); });
   }
   function loadDuty() {
@@ -9280,7 +9698,7 @@
       .then(function (r) { st.busy = false; if (r && r.ok) st.surgBoard = r; else st.surgErr = (r && r.detail) || wT("ward.could-not-load-the-theatre-board", "Could not load the theatre board."); paint(); })
       .catch(function () { st.busy = false; st.surgErr = wT("ward.could-not-load-the-theatre-board", "Could not load the theatre board."); paint(); });
   }
-  function surgeryBookOpen() { st.surgBookOpen = true; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; paint(); }
+  function surgeryBookOpen() { st.surgBookOpen = true; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.cp = {}; paint(); loadCodeSets(); }
   function surgeryBookClose() { st.surgBookOpen = false; st.surgMrnLookup = null; paint(); }
   function surgMrnLookup() {
     var mrn = val("wSurgMrn");
@@ -9303,7 +9721,7 @@
     var procedure = val("wSurgProcedure"), site = val("wSurgSite"), theatre = val("wSurgTheatre");
     var laterality = (document.getElementById("wSurgLaterality") || {}).value || "not-applicable";
     st.busy = true; paint();
-    apiPost("/ward/surgery-book", { orgId: st.orgId, booking: { mrn: lookup.mrn, procedure: procedure, site: site, laterality: laterality, theatre: theatre } })
+    apiPost("/ward/surgery-book", { orgId: st.orgId, booking: { mrn: lookup.mrn, procedure: procedure, site: site, laterality: laterality, theatre: theatre, coding: codeChosen("surg") } })
       .then(function (r) {
         if (settle(r, wT("ward.case-booked", "Case booked."))) { st.surgBookOpen = false; st.surgMrnLookup = null; loadSurgeryBoard(); } else paint();
       })
@@ -9314,16 +9732,17 @@
     return apiGet("/ward/surgery-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId))
       .then(function (r) {
         if (!r || !r.ok || !r.case) { st.busy = false; st.err = wT("ward.that-case-could-not-be-loaded", "That case could not be loaded."); st.view = "surgery"; paint(); return; }
-        st.surgCase = { case: r.case, anesthesia: null, implants: [] };
+        st.surgCase = { case: r.case, anesthesia: null, implants: [], pac: null };
         paint();
         return Promise.all([
+          apiGet("/ward/pac-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId)).then(function (p) { st.surgCase.pac = p && p.ok ? { rec: p.pac || null } : false; }, function () { st.surgCase.pac = false; }),
           apiGet("/ward/anesthesia-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId)).then(function (a) { if (a && a.ok) st.surgCase.anesthesia = a.record; }),
           apiGet("/ward/implant-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(r.case.patientId) + "&caseId=" + encodeURIComponent(caseId)).then(function (i) { if (i && i.ok) st.surgCase.implants = i.implants; }),
         ]).then(function () { st.busy = false; paint(); });
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-load-the-case", "Could not load the case."); paint(); });
   }
-  function openSurgeryCase(caseId) { st.view = "surgerycase"; st.surgCase = null; loadSurgeryCase(caseId); }
+  function openSurgeryCase(caseId) { st.view = "surgerycase"; st.surgCase = null; st.surgPacEdit = false; loadSurgeryCase(caseId); }
   function surgeryLoad() { var c = st.surgCase && st.surgCase.case; if (c) loadSurgeryCase(c.id); }
   function surgeryConsent() {
     var c = st.surgCase && st.surgCase.case; if (!c) return;
@@ -9357,6 +9776,7 @@
     ["surgeon", "anaesthetist", "nurse"].forEach(function (r) { var a = role(r); if (a) signatures.push({ role: r, actorId: a }); });
     var submission = { items: itemMap, signatures: signatures };
     if (phase !== "signOut") submission.lateralityAsserted = (document.getElementById("wSurgLatAssert-" + phase) || {}).value || "not-applicable";
+    if (phase === "signIn" && val("wSurgPacAck")) submission.pacAcknowledgement = val("wSurgPacAck");
     var route = phase === "signIn" ? "/ward/surgery-signin" : phase === "timeOut" ? "/ward/surgery-timeout" : "/ward/surgery-signout";
     st.busy = true; paint();
     apiPost(route, { orgId: st.orgId, caseId: c.id, submission: submission })
@@ -9403,6 +9823,31 @@
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-disposition", "Could not record the disposition."); paint(); });
   }
+  function pacSave() {
+    var d = st.surgCase, c = d && d.case; if (!c || !d.pac) return;
+    var rec = d.pac.rec, yn = function (id) { var v = val(id); return v === "yes" ? true : v === "no" ? false : null; };
+    var iso = function (id) { var v = val(id); if (!v) return null; var t = new Date(v); return isNaN(t.getTime()) ? v : t.toISOString(); };
+    var num = function (id) { var v = val(id); return v === "" ? null : Number(v); };
+    var pac = {
+      history: val("wPacHistory"),
+      airway: { mallampati: val("wPacMallampati"), mouthOpeningCm: num("wPacMouth"), thyromentalDistanceCm: num("wPacTmd"), neckMovement: val("wPacNeck") },
+      asaClass: val("wPacAsa"), asaEmergency: !!(document.getElementById("wPacAsaE") || {}).checked,
+      fasting: { status: val("wPacFasting"), solidsLastAt: iso("wPacSolids"), clearFluidsLastAt: iso("wPacClears") },
+      investigations: { reviewed: yn("wPacInvReviewed"), summary: val("wPacInvSummary") },
+      plan: { technique: val("wPacTechnique"), notes: val("wPacPlanNotes") },
+      consent: { obtained: yn("wPacConsent"), givenBy: val("wPacConsentBy") },
+      decision: val("wPacDecision"), decisionReason: val("wPacDecisionReason")
+    };
+    var body = { orgId: st.orgId, caseId: c.id, pac: pac };
+    if (rec) { body.revisionReason = val("wPacRevisionReason"); body.expectedVersion = rec.version; }
+    st.busy = true; paint();
+    apiPost("/ward/pac", body)
+      .then(function (r) {
+        if (r && !r.ok && r.error === "pac_invalid") { st.busy = false; st.err = wT("ward.pac-invalid", "The checkup is incomplete: {detail}", { detail: r.detail || r.field || "" }); paint(); return; }
+        if (settle(r, rec ? wT("ward.pac-revised-note", "Checkup revised.") : wT("ward.pac-recorded-note", "Checkup recorded."))) { st.surgPacEdit = false; loadSurgeryCase(c.id); } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.pac-could-not-record", "Could not record the pre-anaesthetic checkup."); paint(); });
+  }
   function anesStart() {
     var c = st.surgCase && st.surgCase.case; if (!c) return;
     var asaClass = val("wSurgAsa");
@@ -9439,8 +9884,33 @@
       apiGet("/ward/meows?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.meows = r && r.ok ? r.meows : false; }, function () { st.maternity.meows = false; }),
       apiGet("/ward/blood-loss-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.losses = r && r.ok ? (r.losses || []) : false; }, function () { st.maternity.losses = false; }),
       apiGet("/ward/delivery-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.delivery = r && r.ok ? r.delivery : false; }, function () { st.maternity.delivery = false; }),
-      apiGet("/ward/family-links?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.links = r && r.ok ? (r.links || []) : false; }, function () { st.maternity.links = false; }),
+      apiGet("/ward/family-links?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) {
+        st.maternity.links = r && r.ok ? (r.links || []) : false;
+        (st.maternity.links || []).forEach(function (l) { loadApgar(l.relatedPatientId); });
+      }, function () { st.maternity.links = false; }),
     ]).then(function () { paint(); });
+  }
+  function loadApgar(pid) {
+    var s = st.sel; if (!s || !pid) return Promise.resolve();
+    st.apgar = st.apgar || {};
+    return apiGet("/ward/apgar-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(pid))
+      .then(function (r) { if (st.sel !== s) return; st.apgar[pid] = r && r.ok ? (r.apgar || (r.skipped ? { off: true } : false)) : false; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.apgar[pid] = false; paint(); });
+  }
+  function apgarSave(pid) {
+    var s = st.sel, a = st.apgar && st.apgar[pid]; if (!s || !a || !a.minutes) return;
+    var id = apgarDomId(pid), minute = Number(val("wApgarMin-" + id)), components = {}, missing = false;
+    apgarSigns().forEach(function (g) { var v = val("wApgar-" + g.k + "-" + id); if (v === "") missing = true; else components[g.k] = Number(v); });
+    if (missing) { st.err = wT("ward.apgar-score-every-sign", "Score all five signs before recording."); paint(); return; }
+    var reason = val("wApgarReason-" + id).trim();
+    var recorded = a.minutes.filter(function (m) { return m.minute === minute && m.record; })[0];
+    if (recorded && !reason) { st.err = wT("ward.apgar-already-recorded", "This minute is already recorded. To change it, give a correction reason."); paint(); return; }
+    var body = { orgId: st.orgId, patientId: pid, minute: minute, components: components };
+    if (recorded) { body.correctionReason = reason; body.expectedVersion = recorded.record.version; }
+    st.busy = true; paint();
+    apiPost("/ward/apgar", body)
+      .then(function (r) { if (settle(r, recorded ? wT("ward.apgar-corrected-note", "APGAR corrected.") : wT("ward.apgar-recorded-note", "APGAR recorded."))) loadApgar(pid); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.apgar-could-not-record", "Could not record the APGAR score."); paint(); });
   }
   function pregnancySave() {
     var s = st.sel; if (!s) return;
@@ -9550,6 +10020,12 @@
     return apiGet("/ward/line-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
       .then(function (r) { if (st.sel !== s) return; st.lines = (r && r.ok) ? (r.lines || []) : false; paint(); })
       .catch(function () { if (st.sel !== s) return; st.lines = false; paint(); });
+  }
+  function loadGrowth() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/growth?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (st.sel !== s) return; st.growth = r && r.ok ? (r.growth || (r.skipped ? { off: true } : false)) : false; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.growth = false; paint(); });
   }
   function lineSave() {
     var s = st.sel; if (!s) return;
@@ -10449,6 +10925,74 @@
    * BUG-MU08T4RL-GU0N: the destination used to be typed into a prompt beside a fixed list of department
    * names, so a transfer "to Cardiology" wrote a ward nobody had. It is picked on the bed board now: the
    * hospital's real wards, each named with its department, free beds only. */
+  function loadStayPlan() {
+    var s = st.sel; if (!s || !s.encounterId) return Promise.resolve();
+    var q = "?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(s.encounterId);
+    var plan = { edd: null, xfer: null };
+    return Promise.all([
+      apiGet("/ward/expected-discharge-history" + q).then(function (r) { plan.edd = r && r.ok ? { current: r.current || null, history: r.history || [] } : false; }, function () { plan.edd = false; }),
+      apiGet("/ward/transfer-requests" + q).then(function (r) { plan.xfer = r && r.ok ? (r.requests || []).slice().sort(function (a, b) { return String(b.requestedAt).localeCompare(String(a.requestedAt)); }) : false; }, function () { plan.xfer = false; }),
+    ]).then(function () { if (st.sel !== s) return; st.stayPlan = plan; paint(); });
+  }
+  function loadTransfers() {
+    st.transfers = st.transfers || null;
+    return apiGet("/ward/transfer-requests?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
+      .then(function (r) { st.transfers = r && r.ok ? (r.requests || []) : false; paint(); })
+      .catch(function () { st.transfers = false; paint(); });
+  }
+  function eddSave() {
+    var s = st.sel, p = st.stayPlan; if (!s || !p || !p.edd) return;
+    var date = val("wEddDate"), reason = val("wEddReason"), cur = p.edd.current;
+    if (!date) { st.err = wT("ward.edd-pick-date", "Pick the expected discharge date."); paint(); return; }
+    var body = { orgId: st.orgId, encounterId: s.encounterId, expectedDate: date, reason: reason };
+    if (cur) body.expectedVersion = cur.version;
+    st.busy = true; paint();
+    apiPost("/ward/expected-discharge", body)
+      .then(function (r) { if (settle(r, cur ? wT("ward.edd-revised-note", "Expected discharge date changed.") : wT("ward.edd-set-note", "Expected discharge date set."))) loadStayPlan(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.edd-could-not-save", "Could not save the expected discharge date."); paint(); });
+  }
+  function xferRequest() {
+    var s = st.sel; if (!s) return;
+    var body = { orgId: st.orgId, encounterId: s.encounterId, toUnit: val("wXferUnit") || "ward", toWard: val("wXferWard"), toBed: val("wXferBed"), urgency: val("wXferUrgency"), reason: val("wXferReason") };
+    st.busy = true; paint();
+    apiPost("/ward/transfer-request", body)
+      .then(function (r) { if (settle(r, wT("ward.xfer-requested-note", "Transfer requested. The receiving unit answers on its ward list."))) loadStayPlan(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.xfer-could-not-request", "Could not request the transfer."); paint(); });
+  }
+  function xferFind(id) {
+    var all = [].concat(st.transfers || [], (st.stayPlan && st.stayPlan.xfer) || []);
+    return all.filter(function (q) { return q.id === id; })[0] || null;
+  }
+  // After a step: refresh whichever screen it was taken from, and the ward list when a patient moved.
+  function xferAfter(moved) { if (st.view === "chart" && st.sel) loadStayPlan(); loadTransfers(); if (moved) loadWard(); }
+  function xferStep(route, id, extra, okMsg, moved) {
+    var q = xferFind(id); if (!q) return Promise.resolve();
+    var body = Object.assign({ orgId: st.orgId, requestId: id, expectedVersion: q.version }, extra || {});
+    st.busy = true; paint();
+    return apiPost(route, body)
+      .then(function (r) {
+        if (r && r.error === "request_not_closed") { st.busy = false; st.err = wT("ward.xfer-not-closed", "The patient was moved, but the request could not be marked complete. Refresh; do not move the patient again."); xferAfter(true); return; }
+        if (settle(r, okMsg)) xferAfter(moved); else { xferAfter(false); }
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.xfer-step-failed", "Could not record that step of the transfer."); paint(); });
+  }
+  function xferAct(cmd, id) {
+    var q = xferFind(id); if (!q) return;
+    var who = esc(q.name || q.mrn || "");
+    if (cmd === "xferaccept") askFor({ icon: "check", ok: wTH("ward.xfer-accept", "Accept"), title: wTH("ward.xfer-accept-q", "Accept {who} into {ward}?", { who: who, ward: esc(q.to && q.to.ward) }), fields: [] },
+      function () { return xferStep("/ward/transfer-respond", id, { decision: "accept" }, wT("ward.xfer-accepted-note", "Transfer accepted. Assign a bed next.")); });
+    else if (cmd === "xferdecline") askFor({ icon: "block", ok: wTH("ward.xfer-decline", "Decline"), title: wTH("ward.xfer-decline-q", "Decline the transfer of {who}?", { who: who }),
+      fields: [{ key: "reason", type: "text", label: wTH("ward.xfer-decline-why", "Why it is declined"), required: wT("ward.xfer-decline-why-needed", "Say why the transfer is declined.") }] },
+      function (v) { return xferStep("/ward/transfer-respond", id, { decision: "decline", reason: v.reason }, wT("ward.xfer-declined-note", "Transfer declined.")); });
+    else if (cmd === "xferbed") askFor({ icon: "bed", ok: wTH("ward.xfer-assign-bed", "Assign bed"), title: wTH("ward.xfer-bed-q", "Which bed on {ward}?", { ward: esc(q.to && q.to.ward) }),
+      fields: [{ key: "bed", type: "text", value: (q.bed && q.bed.bed) || (q.to && q.to.requestedBed) || "", label: wTH("ward.xfer-bed-label", "Bed"), required: wT("ward.xfer-bed-needed", "Name the bed.") }] },
+      function (v) { return xferStep("/ward/transfer-assign-bed", id, { bed: v.bed }, wT("ward.xfer-bed-note", "Bed assigned.")); });
+    else if (cmd === "xferexec") askFor({ icon: "move_up", ok: wTH("ward.xfer-execute", "Move the patient"), title: wTH("ward.xfer-exec-q", "Move {who} to {ward}, bed {bed} now?", { who: who, ward: esc(q.to && q.to.ward), bed: esc(q.bed && q.bed.bed) }), fields: [] },
+      function () { return xferStep("/ward/transfer-execute", id, {}, wT("ward.xfer-moved-note", "Patient moved."), true); });
+    else if (cmd === "xfercancel") askFor({ icon: "close", ok: wTH("ward.xfer-cancel", "Cancel the request"), title: wTH("ward.xfer-cancel-q", "Cancel the transfer request for {who}?", { who: who }),
+      fields: [{ key: "reason", type: "text", label: wTH("ward.xfer-cancel-why", "Why it is cancelled"), required: wT("ward.xfer-cancel-why-needed", "Say why the request is cancelled.") }] },
+      function (v) { return xferStep("/ward/transfer-cancel", id, { reason: v.reason }, wT("ward.xfer-cancelled-note", "Transfer request cancelled.")); });
+  }
   function transfer() {
     var s = st.sel; if (!s) return;
     st.edAdmitPending = false; st.admitTarget = null; st.boardDept = "";
@@ -10670,12 +11214,13 @@
     var display = entry ? entry.name : typed;
     st.busy = true; paint();
     apiPost("/ward/investigation", entry
-      ? { orgId: st.orgId, encounterId: s.encounterId, display: entry.name, code: entry.code, category: entry.category, priority: priority, reason: reason || undefined }
-      : { orgId: st.orgId, encounterId: s.encounterId, display: typed, code: typed, category: category, priority: priority, reason: reason, other: true }
+      ? { orgId: st.orgId, encounterId: s.encounterId, display: entry.name, code: entry.code, category: entry.category, priority: priority, reason: reason || undefined, coding: codeChosen("inv") }
+      : { orgId: st.orgId, encounterId: s.encounterId, display: typed, code: typed, category: category, priority: priority, reason: reason, other: true, coding: codeChosen("inv") }
     ).then(function (r) {
       if (settle(r, r && r.written ? wT("ward.ordered", "Ordered {display}.", { display: display }) : null)) {
         ["wInvCode", "wInvReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
         var oth = document.getElementById("wInvOther"); if (oth) oth.checked = false;
+        if (st.cp) st.cp.inv = null;
         loadInvestigations();
       } else paint();
     }).catch(function () { st.busy = false; st.err = wT("ward.could-not-order-that", "Could not order that."); paint(); });
@@ -12800,20 +13345,22 @@
 
   function addProblem() {
     var s = st.sel; if (!s) return;
-    var text = val("wProbText"), code = val("wProbCode");
+    var text = val("wProbText"), code = val("wProbCode"), picked = st.cp && st.cp.prob && st.cp.prob.chosen;
+    // A code picked from the hospital's set is sent with its system, and the server checks it is in that set.
+    if (picked) { code = picked.code; if (!text) text = picked.display; }
     if (!text && !code) { st.err = wT("ward.a-diagnosis-needs-words-a-code", "A diagnosis needs words, a code, or both."); paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/problem", {
       orgId: st.orgId,
       problem: {
         patientId: s.patientId, encounterId: s.encounterId,
-        display: text, code: code,
+        display: text, code: code, codeSystem: picked ? picked.system : undefined,
         verificationStatus: val("wProbVs") || undefined,
       },
     })
       .then(function (r) {
         if (settle(r, r && r.written ? wT("ward.recorded-as", "Recorded as {verificationStatus}.", { verificationStatus: r.verificationStatus }) : (r && r.skipped === "unchanged" ? wT("ward.already-on-the-list-unchanged", "Already on the list, unchanged.") : null))) {
-          st.probText = ""; st.probCode = ""; st.icd = undefined;
+          st.probText = ""; st.probCode = ""; st.icd = undefined; if (st.cp) st.cp.prob = null;
           ["wProbText", "wProbCode"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
           loadChart();
         } else paint();
@@ -13794,8 +14341,8 @@
       st.sel = p; st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = []; st.vitalsSaid = null;
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.timeline = null; st.activeMeds = null;
       st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
-      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
-      st.icu = null; st.flowsheetFailed = false; st.resusBundles = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.apgar = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
+      st.icu = null; st.flowsheetFailed = false; st.resusBundles = null; st.stayPlan = null; st.cp = {};
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra
        * steps, and it is the one this panel could most easily cause. */
@@ -13805,7 +14352,10 @@
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadPathology();
       if (p.class === "ICU") { loadDevices(); loadIcu(); loadResus(); }
       if (p.class === "MATERNITY") loadMaternity();
-      if (p.class === "PEDIATRICS" || p.class === "NICU") loadAgeBand();
+      if (p.class === "PEDIATRICS" || p.class === "NICU") { st.growth = null; loadAgeBand(); loadGrowth(); }
+      if (apgarChart(p)) loadApgar(p.patientId);
+      if (p.class !== "ED") loadStayPlan();
+      loadCodeSets();
       if (p.class === "NICU") loadLines();
       return;
     }
@@ -13872,6 +14422,13 @@
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
     if (cmd === "flowload") { loadFlowCommand(); return; }
+    if (cmd === "cpfind") { codePickFind(arg); return; }
+    if (cmd === "cppick") { codePickPick(arg); return; }
+    if (cmd === "cpclear") { if (st.cp) st.cp[arg] = null; paint(); return; }
+    if (cmd === "stayplanload") { st.stayPlan = null; paint(); loadStayPlan(); return; }
+    if (cmd === "eddsave") { eddSave(); return; }
+    if (cmd === "xferrequest") { xferRequest(); return; }
+    if (cmd === "xferaccept" || cmd === "xferdecline" || cmd === "xferbed" || cmd === "xferexec" || cmd === "xfercancel") { xferAct(cmd, arg); return; }
     if (cmd === "twin") { twinOpen(); return; }
     if (cmd === "twinload") { loadTwin(); return; }
     if (cmd === "twindrill") { var dp = arg.split("."); st.twin = st.twin || {}; st.twin.drill = { section: dp[0], key: dp[1] || "" }; paint(); return; }
@@ -13962,6 +14519,9 @@
     if (cmd === "surgeryphase") { surgeryPhase(arg); return; }
     if (cmd === "surgeryincise") { surgeryIncise(); return; }
     if (cmd === "surgeryimplant") { surgeryImplant(); return; }
+    if (cmd === "pacsave") { pacSave(); return; }
+    if (cmd === "pacedit") { st.surgPacEdit = true; paint(); return; }
+    if (cmd === "paccancel") { st.surgPacEdit = false; paint(); return; }
     if (cmd === "surgerynote") { surgeryNote(); return; }
     if (cmd === "surgerydisposition") { surgeryDisposition(arg); return; }
     if (cmd === "anesstart") { anesStart(); return; }
@@ -13973,10 +14533,13 @@
     if (cmd === "bloodlosssave") { bloodLossSave(); return; }
     if (cmd === "deliverysave") { deliverySave(); return; }
     if (cmd === "newbornsave") { newbornSave(); return; }
+    if (cmd === "apgarload") { if (st.apgar) st.apgar[arg] = null; paint(); loadApgar(arg); return; }
+    if (cmd === "apgarsave") { apgarSave(arg); return; }
     if (cmd === "agebandcheck") { loadAgeBand(); return; }
     if (cmd === "ratecalc") { rateCalc(); return; }
     if (cmd === "neonatalchart") { neonatalChart(); return; }
     if (cmd === "linesload") { loadLines(); return; }
+    if (cmd === "growthload") { st.growth = null; paint(); loadGrowth(); return; }
     if (cmd === "linesave") { lineSave(); return; }
     if (cmd === "lineremove") { lineRemove(arg); return; }
     if (cmd === "oncologyopen") { oncologyOpen(); return; }

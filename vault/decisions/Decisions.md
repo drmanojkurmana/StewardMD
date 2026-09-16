@@ -7122,3 +7122,64 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
   screen's package split and the bill are package-aware).
 - **Status:** built, tested (test/wardsynq-packages.test.mjs, test/ward-package-view.test.mjs, test/wsq-admin-packages.test.mjs,
   test/run-ward-package-ui.mjs headless).
+
+## 2026-09-16 WHO growth tables: shipped with citation; LICENCE NEEDS A LEGAL CHECK before commercial release (branch gap-clinical)
+
+- **Licence (open question, owner/legal).** The task brief called the WHO growth LMS tables public domain. What was
+  actually found: WHO publications are CC BY-NC-SA 3.0 IGO (non-commercial; commercial use and derivatives need
+  WHO's permission, https://www.who.int/about/policies/publishing/copyright), and the tables were taken from WHO's
+  R packages anthro (GPL-3) and anthroplus (GPL >= 3), which name WHO as copyright holder of the data. WardSynQ is
+  sold to hospitals, so whether shipping these tables inside it needs WHO permission is a legal question, not
+  decided here. Shipped for now with full citation, source URLs and the licence text found, in the JSON files and
+  wardsynq/data/WHO-GROWTH-NOTICE.txt. Before commercial release: legal check, and a WHO permission request if needed.
+- **Method.** wardsynq/wardsynq-growth.js follows WHO's own R code (anthro R/z-score-helper.R, z-score-*.R;
+  anthroplus R/zscores.R): restricted |z| > 3 adjustment for weight-for-age, weight-for-length/height and BMI only;
+  day tables with round-half-up, 0.1 cm and month interpolation; 2006 standards below 60 months (days / 30.4375),
+  2007 reference from 60 months; +/-0.7 cm length/height conversion by position. Corrected age for < 37 weeks until
+  24 months chronological; never corrected when gestation is unknown; a corrected age before term is refused.
+- **Computed on the server.** GET /api/queue/ward/growth (emr.view) returns z-scores, centiles and sampled centile
+  lines, so the 0.5 MB of tables sits in the Pages Functions bundle (JSON, compresses to roughly a fifth) and
+  ward.js carries only the drawing code. One engine, tested once, rather than a second copy in the browser.
+- **Gestational age** is taken only from the mother's recorded due date via the FamilyLink of a newborn registered
+  at this hospital (280 days minus due date minus birth date, accepted between 22 and 44 weeks). The antenatal
+  gestationWeeks is not used: it is whatever was typed weeks before delivery.
+- **Only weight is plotted.** WardSynQ records no length, height or head circumference; the screen says so. Adding
+  those measurements (with lying/standing position) is a separate change.
+
+## 2026-09-16 Pre-anaesthetic checkup gates the WHO Sign In by a stated reason, not a hard block (branch gap-clinical-2)
+
+- **One PreAnaestheticCheckup per theatre case** (id from the case), recorded with EMR_TREAT, revised only as a new
+  version with a reason and the version it replaces. Closed vocabularies (Mallampati, neck movement, ASA I-VI + E,
+  fasting status, technique, decision); nothing computes an ASA class, an airway grade or a fasting adequacy.
+- **Sign In reads it on the server.** The checklist engine runs first (its refusals come first), then a missing
+  checkup or an "unfit" decision refuses Sign In (409 PAC_MISSING / PAC_UNFIT) unless the submission states why it
+  proceeds (pacAcknowledgement, 5+ characters). Not a hard block: emergencies proceed without a checkup, and the
+  team decides. A read failure refuses (502) rather than passing. What the checkup said, or that there was none,
+  and the reason given are kept on the sign-in, so a later revision cannot rewrite what the team saw.
+
+## 2026-09-16 Expected discharge date and transfer requests are their own records (branch gap-clinical-2)
+
+- **ExpectedDischarge**, one per stay, set by emr.treat; a change is a new version with a reason and the version it
+  replaces. It is the team's stated plan, not a prediction (patient-flow.js still invents none). Overdue = the stay is
+  open and the date is before today on the hospital clock (timeZone, else utcOffsetMinutes, else IST). A date before
+  today is refused. Shown on the ward list row, the chart, and the command center (overdueDischarges; null = unread).
+- **TransferRequest**: requested -> accepted | declined -> bed-assigned -> completed, or cancelled; each step a new
+  version with who/when (and a reason on decline/cancel), one open request per stay. Asking is emr.treat; the other
+  steps are queue.add like /ward/transfer, and TransferRequest joined the queue.add write grant. The move itself is
+  transferPatient unchanged (bed collision and bed-state checks), after checking the patient is still where the
+  request found them. A move whose request could not then be closed returns 502 request_not_closed, transferred:true.
+- **Not checked:** that the person accepting belongs to the receiving ward (the server has no ward membership). An
+  ICU transfer request moves the location through the same route and does not change the stay's class.
+
+## 2026-09-16 Hospital-loaded code sets, no licensed content shipped (branch gap-clinical-2)
+
+- **SNOMED CT, ICD-10, LOINC are loaded by the hospital** (Admin > FHIR > Code sets, CSV or tab-separated release file with
+  a code and a display column), with a licence confirmation recorded on the import (who, when, the statement). No release
+  ships: SNOMED CT needs the hospital's NRCeS affiliate licence, ICD-10 is WHO-licensed, and the LOINC licence text could not
+  be retrieved on 2026-09-16 (loinc.org refused automated fetches), so no LOINC table ships either.
+- **Stored as records** (code-sets.js): CodeSetImport per system + CodeSetChunk records of 2000 codes, chunk ids carry the
+  import id so a re-import never overwrites. Search reads the whole set into memory (per-isolate cache); ceiling 100k codes
+  per system. Past that, an indexed store (D1 table with FTS) behind the repository adapter.
+- **A code is attached only from the loaded set** (resolveCoding): problems/diagnoses with codeSystem snomed|icd-10|loinc,
+  an operation booking (SurgicalCase.procedureCoding), a test order (ServiceRequest.standardCoding). The stored display is
+  the set's. FHIR Condition/Procedure/ServiceRequest and the ABDM consultation record carry the coding when present.

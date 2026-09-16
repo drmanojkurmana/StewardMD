@@ -84,6 +84,13 @@
     { k: "assessment", n: "Assessment", icon: "assignment" },
     { k: "plan", n: "Plan and follow-up", icon: "event_upcoming" }
   ];
+  /* The one section the assembler produces only on a birth stay (a maternity stay, or a newborn's own): the delivery,
+   * each newborn and its APGAR. Shown when the record has it; a signed summary shows it only if it was signed with it. */
+  var BIRTH = { k: "birth", n: "Delivery, newborn and APGAR", icon: "child_care" };
+  function sectionsOf(s) {
+    var has = function (o) { return !!o && HAS(o, "birth"); };
+    return has(s && s.sections) || (!(s && s.signed) && has(s && s.assembled)) ? SECTIONS.concat([BIRTH]) : SECTIONS;
+  }
   var NOT_RECORDED = "Not recorded.";
   function sectionName(sec) {
     switch (sec.k) {
@@ -95,6 +102,7 @@
       case "medications": return wT("ward.dc-sec-medications", "Medications");
       case "assessment": return wT("ward.dc-sec-assessment", "Assessment");
       case "plan": return wT("ward.dc-sec-plan", "Plan and follow-up");
+      case "birth": return wT("ward.dc-sec-birth", "Delivery, newborn and APGAR");
       default: return sec.n;
     }
   }
@@ -294,7 +302,7 @@
       '<div class="d-body">' + esc(text) + "</div>" +
       (s.edited && s.edited.length
         ? '<p class="d-provedit">' + ms("edit_note") + wTH("ward.dc-corrected-by-clinician", "Corrected by a clinician: {sections}. The rest is assembled from the record.", {
-            sections: esc(s.edited.map(function (k) { var f = SECTIONS.filter(function (x) { return x.k === k; })[0]; return f ? (wLang() === "en" ? f.n.toLowerCase() : sectionName(f)) : k; }).join(", ")) }) + "</p>"
+            sections: esc(s.edited.map(function (k) { var f = sectionsOf(s).filter(function (x) { return x.k === k; })[0]; return f ? (wLang() === "en" ? f.n.toLowerCase() : sectionName(f)) : k; }).join(", ")) }) + "</p>"
         : '<p class="d-provedit">' + ms("database") + wTH("ward.dc-nothing-edited", "Every section above is assembled from the record. Nothing has been edited.") + "</p>") +
     "</section>";
   }
@@ -321,7 +329,7 @@
       '<ul class="d-pending">' + rows + "</ul></div>";
   }
   function indexCard(s) {
-    var rows = SECTIONS.map(function (sec, i) {
+    var rows = sectionsOf(s).map(function (sec, i) {
       return '<a class="d-idx' + (isEdited(s, sec.k) ? " is-edited" : "") + '" href="#dsec-' + esc(sec.k) + '">' +
         '<span class="d-num sm">' + (i + 1) + "</span>" + esc(sectionName(sec)) +
         (isEdited(s, sec.k) ? ms("edit_note") : "") + "</a>";
@@ -404,7 +412,7 @@
     return '<div class="d-shell">' + topbar(s) +
       '<div class="d-canvas"><div class="d-wrap">' +
         '<div class="d-main">' + banner(s) + identity(s) + signatureBlock(s) +
-          SECTIONS.map(function (sec, i) { return section(sec, i, s); }).join("") +
+          sectionsOf(s).map(function (sec, i) { return section(sec, i, s); }).join("") +
           provenance(s) +
         "</div>" +
         '<aside class="d-rail">' + statusCard(s) + pendingCard(s) + indexCard(s) + "</aside>" +
@@ -493,7 +501,7 @@
     ].filter(function (r) { return r[1]; });
     var head = rows.map(function (r) { return '<div class="p-f"><span>' + esc(r[0]) + "</span><b>" + esc(r[1]) + "</b></div>"; }).join("");
     var headTr = rows.filter(function (r) { return r[2]; }).map(function (r) { return esc(r[0]) + ": " + T("print.dc.field." + r[2]); }).join(" &middot; ");
-    var body = SECTIONS.map(function (sec, i) {
+    var body = sectionsOf(s).map(function (sec, i) {
       return '<section><h2>' + (i + 1) + ". " + esc(sec.n) + (isEdited(s, sec.k) ? ' <em>clinician edited</em>' : "") + "</h2><p>" + esc(localTimes(textOf(s, sec.k) || NOT_RECORDED, s.print)) + "</p></section>" +
         tr("<h2>" + (i + 1) + ". " + T("print.dc.section." + sec.k) + "</h2><p>" + T("print.tr.englishOnly") + "</p>");
     }).join("");

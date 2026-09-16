@@ -104,7 +104,10 @@ const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassG
   "SurveillanceAcknowledgement",
   // Immunization (immunization.js), 2026-09-14: giving a vaccine and charting it is ward nursing work, the same
   // bedside act as a medicine round's record; a doctor holds it through EMR_TREAT's unrestricted scope.
-  "Immunization"]);
+  "Immunization",
+  // ApgarScore (migrate-maternity.js), 2026-09-16: scoring a newborn at 1, 5 and 10 minutes is the midwife's or
+  // nurse's own bedside observation at the delivery, the same act as charting a vital sign; a doctor holds it too.
+  "ApgarScore"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
@@ -174,10 +177,12 @@ function grantForCaps(caps) {
      * administrative act as registering the patient - it is not a clinical decision and asking a
      * doctor to enter a telephone number is how the field stays empty. It grants nothing clinical:
      * a receptionist still cannot write an observation or a note. */
+    /* TransferRequest joined 2026-09-16 (transfer-request.js): answering a transfer request, assigning the bed and
+     * moving the patient are the same bed-management acts /ward/transfer already grants here; asking is emr.treat. */
     const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson",
       // PrivacyAcknowledgement joined 2026-09-16 (DPDP Act 2023 s5): handing a patient the privacy notice at
       // registration and recording that they received it is the same front-desk act as registering them.
-      "PrivacyAcknowledgement"];
+      "PrivacyAcknowledgement", "TransferRequest"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,

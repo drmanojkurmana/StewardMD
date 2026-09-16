@@ -69,6 +69,7 @@ async function verifyApprovalRef(svc, ref, drug, ctx) {
 import { isActive as emergencyIsActive } from "./emergency-mode.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
 import { getWardByName, getBedByName, updateBed, listWards, listBeds, listDepartments, getOrg } from "../_opd_org_store.js";
+import { expectedDischargeMap, eddStatus, hospitalToday } from "./expected-discharge.js";
 
 const IPD = "IPD";
 // ICU joined 2026-09-08 (Task 2.2). An admission is still ONE act through this ONE file - a ward
@@ -448,6 +449,11 @@ async function listWard(request, env, ctx) {
     const roster = await svc.list("Patient", ENCOUNTER_CAP);
     byId = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
   } catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
+  /* Each stay's expected discharge date (expected-discharge.js), with overdue worked out on the hospital's clock.
+   * null = none set; false on the row = could not be read, which the screen must not show as "none set". */
+  let edds = null;
+  try { edds = await expectedDischargeMap(svc); } catch (e) { edds = false; }
+  const today = hospitalToday(Date.now(), ctx.clock);
   // BUG-MU0710W4-04KD: the ward list filters by department.
   let deptOf = new Map();
   if (ctx.orgId) { try { deptOf = await departmentNames(env, ctx.orgId, await listWards(env, ctx.orgId)); } catch { deptOf = new Map(); } }
@@ -462,6 +468,7 @@ async function listWard(request, env, ctx) {
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,
       department: (e.location && deptOf.get(e.location.ward)) || null,
       admittedAt: e.periodStart || null, attendingId: e.attendingId || null, version: e.version,
+      expectedDischarge: edds === false ? false : eddStatus(edds.get(e.id) || null, today),
     };
   });
   /* The hospital's country, so the ward screen can LABEL a temperature box with the unit this
@@ -613,7 +620,7 @@ function patientInstructionsRefusal(v) {
  * prescriber's reason for proceeding past overridable findings; it is attributed to the acting actor
  * here, never to anyone a caller names.
  *
- * ctx: { migration, order: {...}, rulePack?, checkOnly?, overrideReason?, actorDeps, recordDeps }.
+ * ctx: { migration, order: {...}, rulePack?, checkOnly?, overrideReason?, lactationWindowDays?, actorDeps, recordDeps }.
  */
 async function createWardMedicationOrder(request, env, ctx) {
   const mig = ctx.migration;
@@ -696,7 +703,8 @@ async function createWardMedicationOrder(request, env, ctx) {
     ? { orderId: current.id, version: current.version, dose: current.dose || null, route: current.route || null, frequency: current.frequency || null }
     : null;
 
-  let safety = await orderEntrySafety(svc, ctx.rulePack || null, candidate, []);
+  const safetyOpts = { lactationWindowDays: ctx.lactationWindowDays };
+  let safety = await orderEntrySafety(svc, ctx.rulePack || null, candidate, [], safetyOpts);
   if (ctx.checkOnly === true) {
     return { ...base, ok: true, written: 0, checkOnly: true, drug: candidate.drug, safety, formulary: fStatus.state,
       ...(advisories.length ? { advisories } : {}), ...(replaces ? { replaces } : {}), actor: resolved.actor.id, role: resolved.role };
@@ -711,14 +719,15 @@ async function createWardMedicationOrder(request, env, ctx) {
   let overrides = [];
   if (safety.checked && overrideReason && safety.overridables.length) {
     overrides = safety.overridables.map((f) => ({ code: f.code, targetId: f.ruleId || f.allergyId || null, reasonCode: "prescriber-judgement", rationale: overrideReason, actorId: resolved.actor.id }));
-    safety = await orderEntrySafety(svc, ctx.rulePack || null, candidate, overrides);
+    safety = await orderEntrySafety(svc, ctx.rulePack || null, candidate, overrides, safetyOpts);
   }
   /* What the prescriber was shown, ON the order: the pharmacist and the nurse read the order, not this
    * response, and a finding somebody proceeded past belongs with the prescription it was about. */
   candidate.safetyAtOrder = safety.checked
     ? { checked: true, rulePackVersion: safety.rulePackVersion, checkedAt: new Date().toISOString(),
         findings: safety.blocks.concat(safety.overridables, safety.warnings).map((f) => ({ code: f.code, disposition: f.disposition, message: f.message, ...(f.overridden ? { overridden: true } : {}) })),
-        unresolvedDrug: !!safety.unresolvedDrug, ...(overrideReason ? { reason: overrideReason, acknowledgedBy: resolved.actor.id } : {}) }
+        unresolvedDrug: !!safety.unresolvedDrug, ...(safety.pregnancyLactation ? { pregnancyLactation: safety.pregnancyLactation } : {}),
+        ...(overrideReason ? { reason: overrideReason, acknowledgedBy: resolved.actor.id } : {}) }
     : { checked: false, code: safety.code, checkedAt: new Date().toISOString() };
 
   let out;

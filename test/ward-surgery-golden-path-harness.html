@@ -15,7 +15,7 @@ window.__calls = [];
 localStorage.setItem("smd_opd_staff_tok", "harness-token");
 
 var CASE_ID = null, ENC_ID = null, PATIENT_ID = "opd-pat-smd-h1-ot01", MRN = "SMD-H1-OT01";
-var STAGE = null, CONSENT = null, MARKING = null, ASA = null, ANES_EVENTS = [], ANES_ENDED = false, IMPLANTS = [];
+var STAGE = null, CONSENT = null, MARKING = null, ASA = null, ANES_EVENTS = [], ANES_ENDED = false, IMPLANTS = [], PAC = null;
 
 window.fetch = function (url, opts) {
   var u = String(url), body = null;
@@ -40,7 +40,16 @@ window.fetch = function (url, opts) {
     MARKING = body.marking; STAGE = "marked";
     return reply({ ok: true, written: 1, caseId: CASE_ID, stage: STAGE });
   }
+  // The pre-anaesthetic checkup (migrate-surgery.js recordPac/getPac), and Sign In's refusal without one.
+  if (u.indexOf("/ward/pac-get") >= 0) return reply({ ok: true, caseId: CASE_ID, pac: PAC });
+  if (u.indexOf("/ward/pac?") < 0 && /\/ward\/pac$/.test(u.split("?")[0]) && (opts && opts.method) === "POST") {
+    PAC = Object.assign({ id: "wsq-pac-" + CASE_ID, caseId: CASE_ID, version: 1, assessedBy: "dr-b", assessedAt: new Date().toISOString(), revision: null }, body.pac);
+    return reply({ ok: true, written: 1, pacId: PAC.id, caseId: CASE_ID, decision: PAC.decision, revised: false, version: 1 });
+  }
   if (u.indexOf("/ward/surgery-signin") >= 0 && (opts && opts.method) === "POST") {
+    if (!PAC && !(body.submission && body.submission.pacAcknowledgement)) {
+      return Promise.resolve({ ok: false, status: 409, json: function () { return Promise.resolve({ ok: false, status: 409, error: "surgical_refused", code: "PAC_MISSING", detail: "no pre-anaesthetic checkup is recorded for this case; record one, or state why sign in proceeds without it", written: 0 }); } });
+    }
     STAGE = "signed-in";
     return reply({ ok: true, written: 1, caseId: CASE_ID, stage: STAGE });
   }

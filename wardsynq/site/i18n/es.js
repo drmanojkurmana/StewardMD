@@ -3133,7 +3133,6 @@
     "ward.this-hospital-has-not-set-up": "Este hospital no ha configurado ningún conjunto de órdenes.",
     "ward.this-is-a-billing-series-and": "Esta es una serie de facturación y su rol no tiene derechos de facturación.",
     "ward.this-is-a-clinical-statement-and": "Esta es una declaración clínica y queda registrada permanentemente para este paciente. Verifique que sea la persona correcta.",
-    "ward.this-is-a-live-fact-not": "Este es un dato en vivo, no una fecha de alta prevista; no existe un campo de alta esperada en este registro.",
     "ward.this-is-a-score-not-an": "Este es un puntaje, no una escalación. Nada aquí envía un busca a nadie.",
     "ward.this-is-decision-support-not-a": "Esto es un soporte para la toma de decisiones, no un bloqueo: el criterio propio del farmacéutico decide el resultado.",
     "ward.this-is-the-patient-admit": "Este es el paciente - admitir",

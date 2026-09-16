@@ -71,15 +71,16 @@ import {
   bookSurgicalCase, recordCaseConsent, markCaseSite, signInCase, timeOutCase, inciseCase,
   signOutCase, abandonCase, recordOperativeNote, dispositionCase, getSurgicalCase, listSurgicalCases,
   listOpenCases, startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
-  recordImplant, listImplants,
+  recordImplant, listImplants, recordPac, getPac,
 } from "../../_wardsynq/migrate-surgery.js";
 import {
   recordPregnancy, getPregnancy, maternityStatus, maternityMeows, recordLabourObservation,
   recordMaternalBloodLoss, listBloodLoss, recordDelivery, getDelivery, registerNewborn, listFamilyLinks,
+  recordApgar, getApgar,
 } from "../../_wardsynq/migrate-maternity.js";
 import {
   checkWeightBasedRate, checkPaediatricDoseCeiling, checkAgeBand,
-  recordNeonatalObservation, recordLine, removeLine, listLines,
+  recordNeonatalObservation, recordLine, removeLine, listLines, growthChart,
 } from "../../_wardsynq/migrate-pediatrics.js";
 import {
   linkOncologyPlan, getOncologyLink, recordOncologyDiagnosis,
@@ -146,6 +147,9 @@ import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { patientFlow } from "../../_wardsynq/patient-flow.js";
+import { importCodeSet, listCodeSets, searchCodes } from "../../_wardsynq/code-sets.js";
+import { setExpectedDischarge, expectedDischargeHistory } from "../../_wardsynq/expected-discharge.js";
+import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
@@ -1354,6 +1358,15 @@ export async function onRequest(context) {
         "alert-cover": CAPS.QUEUE_VIEW,
         // Moving a patient between beds is the same administrative act as admitting them to one.
         transfer: CAPS.QUEUE_ADD, beds: CAPS.QUEUE_VIEW,
+        /* The expected discharge date is the treating team's plan: emr.treat to set or revise, emr.view to read.
+         * Asking for a transfer is a clinical decision (emr.treat); answering it, assigning the bed, moving the
+         * patient and cancelling are the bed-management acts /ward/transfer is already gated on (queue.add). */
+        "expected-discharge": CAPS.EMR_TREAT, "expected-discharge-history": CAPS.EMR_VIEW,
+        /* Hospital-loaded code sets (code-sets.js): loading a licensed release is hospital administration
+         * (staff.admin); seeing what is loaded and searching it is anyone who reads the chart (emr.view). */
+        "code-set-import": CAPS.STAFF_ADMIN, "code-sets": CAPS.EMR_VIEW, "code-search": CAPS.EMR_VIEW,
+        "transfer-request": CAPS.EMR_TREAT, "transfer-respond": CAPS.QUEUE_ADD, "transfer-assign-bed": CAPS.QUEUE_ADD,
+        "transfer-execute": CAPS.QUEUE_ADD, "transfer-cancel": CAPS.QUEUE_ADD, "transfer-requests": CAPS.EMR_VIEW,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
          * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
          * authority as vitals. Disposition closes the visit - the SAME capability discharge already
@@ -1408,6 +1421,8 @@ export async function onRequest(context) {
         "surgery-board": CAPS.EMR_VIEW,
         "anesthesia-start": CAPS.EMR_TREAT, "anesthesia-event": CAPS.EMR_TREAT, "anesthesia-end": CAPS.EMR_TREAT,
         "anesthesia-get": CAPS.EMR_VIEW, implant: CAPS.EMR_TREAT, "implant-list": CAPS.EMR_VIEW,
+        // The pre-anaesthetic checkup is the anaesthetist's fitness decision: emr.treat to record, emr.view to read.
+        pac: CAPS.EMR_TREAT, "pac-get": CAPS.EMR_VIEW,
         /* Maternity (Task 2.4). Antenatal history, delivery and newborn linkage are clinical
          * commitments the same way a resus bundle or a surgical checklist step is - emr.treat. A
          * partogram observation is the midwife's own bedside charting - emr.vitals, the same
@@ -1417,6 +1432,9 @@ export async function onRequest(context) {
         labour: CAPS.EMR_VITALS, "blood-loss": CAPS.EMR_VITALS, "blood-loss-list": CAPS.EMR_VIEW,
         delivery: CAPS.EMR_TREAT, "delivery-get": CAPS.EMR_VIEW,
         newborn: CAPS.EMR_TREAT, "family-links": CAPS.EMR_VIEW,
+        /* APGAR at 1, 5 and 10 minutes: the delivery staff's own bedside scoring - emr.vitals (nurse, midwife,
+         * resident, doctor), the same authority as blood loss. A correction is the same write with a reason. */
+        apgar: CAPS.EMR_VITALS, "apgar-get": CAPS.EMR_VIEW,
         /* Pediatrics/NICU (Task 2.5). weight-rate/dose-ceiling/age-band are read-only calculators -
          * emr.view, the same authority as reading the chart they help interpret; they persist
          * nothing. A neonatal respiratory/device-settings reading is the same bedside charting act
@@ -1424,6 +1442,8 @@ export async function onRequest(context) {
          * migrate-surgery.js's ImplantRecord already uses - emr.treat. */
         "weight-rate": CAPS.EMR_VIEW, "dose-ceiling": CAPS.EMR_VIEW, "age-band": CAPS.EMR_VIEW,
         neonatal: CAPS.EMR_VITALS, line: CAPS.EMR_TREAT, "line-remove": CAPS.EMR_TREAT, "line-list": CAPS.EMR_VIEW,
+        /* WHO growth centiles: recorded weights read against a reference, persists nothing - emr.view. */
+        growth: CAPS.EMR_VIEW,
         /* The ONCqis bridge (Task 2.6). Linking a plan, recording the oncology diagnosis, an
          * adverse event or a chemo administration are all clinical commitments - emr.treat, the
          * same authority every other cross-module link in this file already needs. Reading any of
@@ -2040,7 +2060,9 @@ export async function onRequest(context) {
       const mig = await wsqForcedMigration(env, wOrg);
       if (!mig) return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }, 409, request);
       if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
-      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg };
+      // clock: the hospital's wall clock for calendar facts (an expected discharge date that has passed).
+      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg,
+        clock: { offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330, timeZone: (wsqCfg && wsqCfg.timeZone) || "" } };
       /* CONTROLLED DRUGS (controlled-drugs.js). Whether a drug is controlled is the hospital's drug master; who may witness
        * one is an ACTIVE member of THIS hospital who dispenses, gives medicines or keeps the NDPS register. The lookup
        * lives here because the membership store does; the domain files only ask. */
@@ -2256,7 +2278,7 @@ export async function onRequest(context) {
           medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, safety: (c.item && c.item.safety) || null,
             formulary: (wsqCfg && wsqCfg.formulary) || null,
             advisories: (wsqCfg && wsqCfg.advisories) || null,
-            ageYears: body.ageYears,
+            ageYears: body.ageYears, lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,
             requireReasonOffFormulary: !!(wsqCfg && wsqCfg.requireReasonOffFormulary),
             idempotencyKey: idemFor(body.idempotencyKey, "med", c.index) }),
           investigations: (rq, ev, c) => orderInvestigation(rq, ev, { ...c,
@@ -2463,6 +2485,14 @@ export async function onRequest(context) {
         const r = await signInCase(request, env, { ...deps, caseId: body.caseId, submission: body.submission, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "pac" && method === "POST") {
+        const r = await recordPac(request, env, { ...deps, caseId: body.caseId, pac: body.pac, revisionReason: body.revisionReason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pac-get" && method === "GET") {
+        const r = await getPac(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "surgery-timeout" && method === "POST") {
         const r = await timeOutCase(request, env, { ...deps, caseId: body.caseId, submission: body.submission, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -2563,6 +2593,14 @@ export async function onRequest(context) {
         const r = await registerNewborn(request, env, { ...deps, motherPatientId: body.motherPatientId, encounterId: body.encounterId, sex: body.sex, name: body.name, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "apgar" && method === "POST") {
+        const r = await recordApgar(request, env, { ...deps, patientId: body.patientId, minute: body.minute, components: body.components, correctionReason: body.correctionReason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "apgar-get" && method === "GET") {
+        const r = await getApgar(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "family-links" && method === "GET") {
         const r = await listFamilyLinks(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -2589,6 +2627,10 @@ export async function onRequest(context) {
       }
       if (sub === "line-remove" && method === "POST") {
         const r = await removeLine(request, env, { ...deps, lineId: body.lineId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "growth" && method === "GET") {
+        const r = await growthChart(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "line-list" && method === "GET") {
@@ -2713,6 +2755,8 @@ export async function onRequest(context) {
           // The hospital's own advisories, ORG content like everything else here. They can never
           // block: see the header of _wardsynq/advisories.js.
           advisories: (wsqCfg && wsqCfg.advisories) || null, ageYears: body.ageYears,
+          // ORG content too: the postpartum window the pregnancy and lactation check counts as breastfeeding.
+          lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,
           requireReasonOffFormulary: !!(wsqCfg && wsqCfg.requireReasonOffFormulary),
           specialty: body.specialty, approvalRef: body.approvalRef, formularyReason: body.formularyReason,
           idempotencyKey: body.idempotencyKey || null,
@@ -3820,7 +3864,7 @@ export async function onRequest(context) {
       }
       if (sub === "investigation" && method === "POST") {
         const cat = await wsqInvestigationCatalogue(env, wOrgId, wsqCfg);
-        const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, other: body.other === true, catalogue: cat.entries, idempotencyKey: body.idempotencyKey || null });
+        const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, other: body.other === true, coding: body.coding, catalogue: cat.entries, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "investigation-catalogue" && method === "GET") {
@@ -4453,6 +4497,50 @@ export async function onRequest(context) {
       }
       if (sub === "transfer" && method === "POST") {
         const r = await transferPatient(request, env, { ...deps, encounterId: body.encounterId, ward: body.ward, bed: body.bed, reason: body.reason, movedAt: body.movedAt, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "code-set-import" && method === "POST") {
+        const r = await importCodeSet(request, env, { ...deps, system: body.system, csv: body.csv, fileName: body.fileName, licenceConfirmed: body.licenceConfirmed === true });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "code-sets" && method === "GET") {
+        const r = await listCodeSets(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "code-search" && method === "GET") {
+        const r = await searchCodes(request, env, { ...deps, system: url.searchParams.get("system") || "", q: url.searchParams.get("q") || "", limit: url.searchParams.get("limit") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "expected-discharge" && method === "POST") {
+        const r = await setExpectedDischarge(request, env, { ...deps, encounterId: body.encounterId, expectedDate: body.expectedDate, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "expected-discharge-history" && method === "GET") {
+        const r = await expectedDischargeHistory(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-request" && method === "POST") {
+        const r = await requestTransfer(request, env, { ...deps, encounterId: body.encounterId, toUnit: body.toUnit, toWard: body.toWard, toBed: body.toBed, reason: body.reason, urgency: body.urgency, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-respond" && method === "POST") {
+        const r = await respondTransfer(request, env, { ...deps, requestId: body.requestId, decision: body.decision, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-assign-bed" && method === "POST") {
+        const r = await assignTransferBed(request, env, { ...deps, requestId: body.requestId, bed: body.bed, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-execute" && method === "POST") {
+        const r = await executeTransfer(request, env, { ...deps, requestId: body.requestId, expectedVersion: body.expectedVersion, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-cancel" && method === "POST") {
+        const r = await cancelTransfer(request, env, { ...deps, requestId: body.requestId, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-requests" && method === "GET") {
+        const r = await listTransferRequests(request, env, { ...deps, ward: url.searchParams.get("ward") || "", encounterId: url.searchParams.get("encounterId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "beds" && method === "GET") {

@@ -42,10 +42,12 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { patientIdForMrn } from "./opd-identity.js";
 import { recordConsent as writePatientConsent } from "./consent.js";
+import { resolveCoding } from "./code-sets.js";
 
 const CASE_TYPE = "SurgicalCase";
 const ANES_TYPE = "AnesthesiaRecord";
 const IMPLANT_TYPE = "ImplantRecord";
+const PAC_TYPE = "PreAnaestheticCheckup";
 const SURGERY = "SURGERY", PACU = "PACU";
 const OPEN = "in-progress", FINISHED = "finished";
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -57,6 +59,7 @@ function caseIdFor(patientId, procedure, bookedAt) {
 }
 function encounterIdForCase(caseId) { return caseId ? `wsq-enc-${caseId}` : null; }
 function anesthesiaIdFor(caseId) { return caseId ? `wsq-anes-${caseId}` : null; }
+function pacIdFor(caseId) { return caseId ? `wsq-pac-${slug(caseId)}` : null; }
 function implantIdFor(caseId, device, lot) {
   const c = slug(caseId), d = slug(device), l = slug(lot);
   return c && d ? `wsq-implant-${c}-${d}${l ? "-" + l : ""}` : null;
@@ -84,7 +87,7 @@ function writeFailure(e, extra) {
  *  CHECKLIST_INCOMPLETE, SIGNATURES_NOT_INDEPENDENT, SIGN_IN_INCOMPLETE, ...) - shown verbatim,
  *  never paraphrased into a generic failure. */
 function caseRefusal(base, e, extra) {
-  return { ...base, ok: false, status: e && ["NO_PATIENT", "NO_ACTOR", "NO_PROCEDURE", "NO_LATERALITY"].includes(e.code) ? 422 : 409, error: "surgical_refused", code: (e && e.code) || null, detail: str(e && e.message), ...extra };
+  return { ...base, ok: false, status: e && e.code === "PAC_READ_FAILED" ? 502 : e && ["NO_PATIENT", "NO_ACTOR", "NO_PROCEDURE", "NO_LATERALITY"].includes(e.code) ? 422 : 409, error: "surgical_refused", code: (e && e.code) || null, detail: str(e && e.message), ...extra };
 }
 
 const engine = new SurgicalCase({});
@@ -110,11 +113,16 @@ async function bookSurgicalCase(request, env, ctx) {
 
   const current = await loadCase(svc, caseId).catch(() => null);
   if (current) return { ...base, ok: true, written: 0, skipped: "unchanged", caseId, encounterId: current.encounterId, version: current.version };
+  // An optional procedure code, only from the hospital's loaded code set (code-sets.js). The words stay the booking's.
+  let procedureCoding = null;
+  try { const rc = await resolveCoding(svc, mig.tenantId, b.coding); if (rc.refuse) return { ...base, ok: false, ...rc.refuse, written: 0 }; procedureCoding = rc.coding; }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The code set could not be read, so the case was not booked.", written: 0 }; }
 
   let c;
   try { c = await engine.book({ id: patientId, mrn }, { procedure: b.procedure, site: b.site, laterality: b.laterality }, resolved.actor.id); }
   catch (e) { return caseRefusal(base, e, { written: 0 }); }
   c.id = caseId;
+  if (procedureCoding) c.procedureCoding = procedureCoding;
 
   const enc = Encounter({
     id: encounterIdForCase(caseId), patientId, class: SURGERY, status: OPEN,
@@ -194,7 +202,7 @@ async function mutateCase(request, env, ctx, apply) {
   if (!c) return { ...base, ok: false, status: 404, error: "case_not_found", caseId, written: 0 };
 
   let updated;
-  try { updated = await apply(c, resolved); }
+  try { updated = await apply(c, resolved, svc); }
   catch (e) { return caseRefusal(base, e, { caseId, written: 0 }); }
 
   try {
@@ -206,7 +214,16 @@ async function mutateCase(request, env, ctx, apply) {
 }
 
 const markCaseSite = (request, env, ctx) => mutateCase(request, env, ctx, (c, r) => engine.markSite(c, ctx.marking || {}, r.actor.id));
-const signInCase = (request, env, ctx) => mutateCase(request, env, ctx, (c) => engine.signIn(c, ctx.submission || {}));
+/* Sign In also reads the case's pre-anaesthetic checkup and never passes it silently: the checklist runs
+ * first (its own refusals come first), then a missing PAC or an "unfit" decision refuses the sign-in
+ * unless the team states, in words, why they are proceeding. What the PAC said at that moment (or that
+ * there was none) is kept on the sign-in itself, so a later revision of the PAC cannot rewrite it. */
+const signInCase = (request, env, ctx) => mutateCase(request, env, ctx, async (c, r, svc) => {
+  const submission = ctx.submission || {};
+  const out = await engine.signIn(c, submission);
+  out.signIn.pac = await pacGate(svc, c, submission.pacAcknowledgement);
+  return out;
+});
 const timeOutCase = (request, env, ctx) => mutateCase(request, env, ctx, (c) => engine.timeOut(c, ctx.submission || {}));
 const inciseCase = (request, env, ctx) => mutateCase(request, env, ctx, (c, r) => engine.incise(c, r.actor.id));
 const signOutCase = (request, env, ctx) => mutateCase(request, env, ctx, (c) => engine.signOut(c, ctx.submission || {}));
@@ -406,6 +423,139 @@ async function getAnesthesia(request, env, ctx) {
   return { ...base, ok: true, record };
 }
 
+/* ---- pre-anaesthetic checkup (PAC) ------------------------------------------------------------- */
+
+/* The PAC form's closed vocabularies. Recorded exactly as the anaesthetist chose them: nothing here
+ * computes an ASA class, grades an airway or judges a fasting interval, because those are the
+ * anaesthetist's clinical calls, not rules this build may invent. Numbers are only range-checked. */
+const PAC_MALLAMPATI = Object.freeze(["I", "II", "III", "IV", "not-assessable"]);
+const PAC_NECK = Object.freeze(["normal", "restricted", "fixed"]);
+const PAC_ASA = Object.freeze(["I", "II", "III", "IV", "V", "VI"]);
+const PAC_FASTING = Object.freeze(["adequate", "inadequate", "not-fasted-emergency"]);
+const PAC_TECHNIQUE = Object.freeze(["general", "spinal", "epidural", "combined-spinal-epidural", "regional-block", "sedation", "local-with-monitoring"]);
+const PAC_DECISION = Object.freeze(["fit", "fit-with-conditions", "unfit"]);
+// A last-intake time: null when not given, undefined when given but not a date.
+const isoOrNull = (v) => { const t = str(v); if (!t) return null; const ms = Date.parse(t); return Number.isFinite(ms) ? new Date(ms).toISOString() : undefined; };
+const cm = (v, max) => { if (v === "" || v == null || typeof v === "boolean") return null; const n = Number(v); return Number.isFinite(n) && n >= 0 && n <= max ? n : null; };
+
+/** PURE. The checkup as it will be stored, or the first reason it is refused. */
+function pacValidate(input) {
+  const f = input && typeof input === "object" ? input : {};
+  const bad = (field, detail) => ({ ok: false, error: "pac_invalid", field, detail });
+  const history = str(f.history);
+  if (!history) return bad("history", "record the history (conditions, previous anaesthetics, medicines, allergies), or say none");
+  const a = f.airway || {};
+  if (!PAC_MALLAMPATI.includes(str(a.mallampati))) return bad("airway.mallampati", `Mallampati is one of ${PAC_MALLAMPATI.join(", ")}`);
+  const mouth = cm(a.mouthOpeningCm, 10), tmd = cm(a.thyromentalDistanceCm, 15);
+  if (mouth == null) return bad("airway.mouthOpeningCm", "mouth opening in cm, 0 to 10");
+  if (tmd == null) return bad("airway.thyromentalDistanceCm", "thyromental distance in cm, 0 to 15");
+  if (!PAC_NECK.includes(str(a.neckMovement))) return bad("airway.neckMovement", `neck movement is one of ${PAC_NECK.join(", ")}`);
+  if (!PAC_ASA.includes(str(f.asaClass))) return bad("asaClass", `ASA class is one of ${PAC_ASA.join(", ")}`);
+  const fa = f.fasting || {};
+  if (!PAC_FASTING.includes(str(fa.status))) return bad("fasting.status", `fasting status is one of ${PAC_FASTING.join(", ")}`);
+  const solidsLastAt = isoOrNull(fa.solidsLastAt), clearFluidsLastAt = isoOrNull(fa.clearFluidsLastAt);
+  if (solidsLastAt === undefined || clearFluidsLastAt === undefined) return bad("fasting", "a last-intake time is not a date and time");
+  const inv = f.investigations || {};
+  if (typeof inv.reviewed !== "boolean") return bad("investigations.reviewed", "say whether the investigations were reviewed");
+  const p = f.plan || {};
+  if (!PAC_TECHNIQUE.includes(str(p.technique))) return bad("plan.technique", `the planned technique is one of ${PAC_TECHNIQUE.join(", ")}`);
+  const co = f.consent || {};
+  if (typeof co.obtained !== "boolean") return bad("consent.obtained", "say whether consent for anaesthesia was obtained");
+  const decision = str(f.decision);
+  if (!PAC_DECISION.includes(decision)) return bad("decision", `the decision is one of ${PAC_DECISION.join(", ")}`);
+  const decisionReason = str(f.decisionReason);
+  if (decision !== "fit" && decisionReason.length < 5) return bad("decisionReason", decision === "unfit" ? "say why the patient is unfit" : "state the conditions");
+  return {
+    ok: true,
+    pac: {
+      history,
+      airway: { mallampati: str(a.mallampati), mouthOpeningCm: mouth, thyromentalDistanceCm: tmd, neckMovement: str(a.neckMovement) },
+      asaClass: str(f.asaClass), asaEmergency: f.asaEmergency === true,
+      fasting: { status: str(fa.status), solidsLastAt, clearFluidsLastAt },
+      investigations: { reviewed: inv.reviewed, summary: str(inv.summary) || null },
+      plan: { technique: str(p.technique), notes: str(p.notes) || null },
+      consent: { obtained: co.obtained, givenBy: str(co.givenBy) || null },
+      decision, decisionReason: decisionReason || null,
+    },
+  };
+}
+
+/**
+ * Records a case's pre-anaesthetic checkup, or revises it (a new version with a reason, naming the
+ * version it replaces). Who and when come from the session and the server clock.
+ * ctx: { migration, caseId, pac, revisionReason?, expectedVersion?, actorDeps, recordDeps }
+ */
+async function recordPac(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+  const caseId = str(ctx.caseId);
+  if (!caseId) return { ...base, ok: false, status: 422, error: "case_required", written: 0 };
+  const v = pacValidate(ctx.pac);
+  if (!v.ok) return { ...base, status: 422, ...v, written: 0 };
+  const reason = str(ctx.revisionReason);
+
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+
+  const id = pacIdFor(caseId);
+  let c, current;
+  try { [c, current] = await Promise.all([loadCase(svc, caseId), svc.get(PAC_TYPE, id)]); }
+  catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ...writeFailure(e, { written: 0 }) };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The case could not be read, so nothing was saved.", written: 0 };
+  }
+  if (!c) return { ...base, ok: false, status: 404, error: "case_not_found", caseId, written: 0 };
+  if (current) {
+    if (reason.length < 5) return { ...base, ok: false, status: 409, error: "already_recorded", detail: "a checkup is already recorded for this case; a change is a revision with a reason", version: current.version, written: 0 };
+    if (!Number.isInteger(ctx.expectedVersion)) return { ...base, ok: false, status: 422, error: "expected_version_required", detail: "name the version being revised", version: current.version, written: 0 };
+  } else if (reason) {
+    return { ...base, ok: false, status: 409, error: "nothing_to_revise", detail: "no checkup is recorded for this case yet", written: 0 };
+  }
+
+  const record = {
+    resourceType: PAC_TYPE, id, caseId, patientId: c.patientId, encounterId: c.encounterId || null,
+    ...v.pac,
+    assessedBy: resolved.actor.id, assessedAt: new Date().toISOString(),
+    revision: current ? { reason, previousVersion: current.version, previousDecision: current.decision, previousAssessedBy: current.assessedBy || null, previousAssessedAt: current.assessedAt || null } : null,
+    source: { system: "wardsynq-native", sourceId: `pac:${caseId}` },
+  };
+  try {
+    const out = await svc.put(record, { expectedVersion: current ? ctx.expectedVersion : 0, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, pacId: id, caseId, decision: record.decision, revised: !!current, version: out.record.version, actor: resolved.actor.id };
+  } catch (e) { return { ...base, ...writeFailure(e, { caseId, written: 0, actor: resolved.actor.id }) }; }
+}
+
+/** ctx: { migration, caseId, actorDeps, recordDeps } - pac is the record, or null when none is recorded. */
+async function getPac(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", pac: null };
+  const caseId = str(ctx.caseId);
+  if (!caseId) return { ...base, ok: false, status: 422, error: "case_required", pac: null };
+  const { svc, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, pac: null };
+  try { return { ...base, ok: true, caseId, pac: (await svc.get(PAC_TYPE, pacIdFor(caseId))) || null }; }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The pre-anaesthetic checkup could not be read. Do not read this as not done.", pac: null }; }
+}
+
+/** Throws a coded refusal (shown verbatim, like the checklist's own) or returns the sign-in's PAC snapshot. */
+async function pacGate(svc, c, acknowledgement) {
+  let pac;
+  try { pac = await svc.get(PAC_TYPE, pacIdFor(c.id)); }
+  catch (e) { throw new SurgicalSafetyError("the pre-anaesthetic checkup could not be read, so sign in was not recorded; try again", "PAC_READ_FAILED"); }
+  const ack = str(acknowledgement);
+  const status = pac ? pac.decision : "missing";
+  if (status === "missing" && ack.length < 5) throw new SurgicalSafetyError("no pre-anaesthetic checkup is recorded for this case; record one, or state why sign in proceeds without it", "PAC_MISSING");
+  if (status === "unfit" && ack.length < 5) throw new SurgicalSafetyError(`the pre-anaesthetic checkup found the patient unfit (${pac.decisionReason || "no reason given"}); state why sign in proceeds`, "PAC_UNFIT");
+  return {
+    status, pacId: pac ? pac.id : null, version: pac ? pac.version : null,
+    decisionReason: pac ? pac.decisionReason || null : null, asaClass: pac ? pac.asaClass : null,
+    assessedBy: pac ? pac.assessedBy || null : null, assessedAt: pac ? pac.assessedAt || null : null,
+    acknowledgement: status === "missing" || status === "unfit" ? ack : null,
+  };
+}
+
 /* ---- implant / prosthesis traceability ---------------------------------------------------------- */
 
 /** ctx: { migration, caseId, implant: {device, lot?, serial?, site?}, actorDeps, recordDeps } */
@@ -459,4 +609,5 @@ export {
   listOpenCases,
   startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
   recordImplant, listImplants,
+  PAC_TYPE, pacIdFor, pacValidate, recordPac, getPac,
 };

@@ -36,6 +36,7 @@ import { SYSTEMS, UNCODED, UNMAPPED, INVALID, IDENTIFIER_SYSTEMS, systemUri, isU
 import { validateResource, validationOutcome, VALIDATED_TYPES } from "./fhir-validate.js";
 import { makeSafeFetch } from "../_connect/onboard/net.js";
 import { renderResource } from "./fhir-version.js";
+import { fhirCodingOf } from "./code-sets.js";
 import { fhirId, hashedId, isHashedId, RECORD_ID_SYSTEM, provenanceId, parseProvenanceId } from "./fhir-id.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -319,13 +320,23 @@ function fhirMedicationAdministration(a) {
   });
 }
 
+/* A standard code a person picked from the hospital's loaded set (code-sets.js), added beside the record's own coding. */
+function withStandardCoding(concept, c) {
+  const extra = fhirCodingOf(c);
+  if (!extra) return concept;
+  const out = { ...(concept || {}) };
+  if (!(out.coding || []).some((x) => x.system === extra.system && x.code === extra.code)) out.coding = [...(out.coding || []), clean(extra)];
+  if (!out.text) out.text = extra.display || extra.code;
+  return out;
+}
+
 function fhirServiceRequest(s) {
   return clean({
     resourceType: "ServiceRequest", id: fhirId(s.id),
     status: ["active", "completed", "revoked", "draft"].includes(str(s.status)) ? str(s.status) : "unknown",
     intent: "order",
     authoredOn: str(s.meta && s.meta.recordedAt) || undefined,
-    code: codeable(s.code, s.codeSystem, s.display, s.sourceCoding, s.terminologyStatus),
+    code: withStandardCoding(codeable(s.code, s.codeSystem, s.display, s.sourceCoding, s.terminologyStatus), s.standardCoding),
     subject: ref("Patient", s.patientId),
     encounter: ref("Encounter", s.encounterId),
     requester: practitioner(s.requesterId),
@@ -577,7 +588,8 @@ function fhirProcedure(c) {
   return clean({
     resourceType: "Procedure", id: fhirId(c.id),
     status: PROCEDURE_STATUS[str(c.stage)] || "unknown",
-    code: str(c.procedure) ? { text: str(c.procedure) } : undefined,
+    // The words are the booking's; a code travels only when a person picked one from the hospital's loaded set.
+    code: str(c.procedure) || c.procedureCoding ? withStandardCoding(str(c.procedure) ? { text: str(c.procedure) } : undefined, c.procedureCoding) : undefined,
     subject: ref("Patient", c.patientId),
     encounter: ref("Encounter", c.encounterId),
     // A period only when there is one: a case that has not been incised has no performed time, and

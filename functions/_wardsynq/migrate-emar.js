@@ -40,6 +40,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { medicationAdministrationIdFor } from "./opd-identity.js";
 import { witnessOrRefusal } from "./controlled-drugs.js";
+import { readPregnancyLactation } from "./migrate-maternity.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -130,13 +131,21 @@ function bedsideSafetyCheck(svc, rulePack) {
  * finding carries hardStop: true, so a screen labels exactly what the server refuses and nothing else. */
 const ORDER_ENTRY_HARD_STOPS = Object.freeze(["DOSE_ABSOLUTE_CEILING", "DOSE_ABSOLUTE_CEILING_DAILY", "DOSE_ABSOLUTE_CEILING_CUMULATIVE"]);
 
-async function orderEntrySafety(svc, rulePack, order, overrides) {
+/* opts.lactationWindowDays: the hospital's postpartum lactation window (wardsynqConfig). The pregnancy and
+ * lactation check reads the maternity record only when the pack has rules for it; `pregnancyLactation.rulesLoaded`
+ * is on every verdict, so a screen can say "no pregnancy or lactation rules loaded" rather than imply a check. */
+async function orderEntrySafety(svc, rulePack, order, overrides, opts) {
   if (!rulePack) return { checked: false, code: "NO_RULE_PACK", message: "no decision-support content is loaded; nothing was checked" };
   try {
-    const { allergies, activeMeds, weightKg } = await safetyFacts(svc, order);
-    // "same-drug" only here: order entry is where a second order of an active molecule is decided.
-    const v = new SafetyEngine({ rulePack, checks: ["allergy", "interaction", "dose", "renal", "same-drug"] })
-      .evaluate({ order, allergies, activeMeds, weightKg, overrides: overrides || [] });
+    const rulesLoaded = rulePack.pregnancyLactation ? rulePack.pregnancyLactation.size : 0;
+    const [{ allergies, activeMeds, weightKg }, pregnancyStatus] = await Promise.all([
+      safetyFacts(svc, order),
+      rulesLoaded ? readPregnancyLactation(svc, order && order.patientId, { lactationWindowDays: opts && opts.lactationWindowDays }) : null,
+    ]);
+    // "same-drug" and "pregnancy" only here: order entry is where a second order of an active molecule, or a
+    // medicine in pregnancy or breastfeeding, is decided.
+    const v = new SafetyEngine({ rulePack, checks: ["allergy", "interaction", "dose", "renal", "same-drug", "pregnancy"] })
+      .evaluate({ order, allergies, activeMeds, weightKg, pregnancyStatus, overrides: overrides || [] });
     const pick = (f) => ({ code: f.code, severity: f.severity || null, disposition: f.disposition, message: f.message || "",
       ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}),
       ...(f.disposition === "block" && ORDER_ENTRY_HARD_STOPS.includes(f.code) ? { hardStop: true } : {}) });
@@ -146,6 +155,7 @@ async function orderEntrySafety(svc, rulePack, order, overrides) {
       blocks, overridables: v.overridables.map(pick), warnings: v.warnings.map(pick), findings: v.findings.map(pick),
       hardStops: blocks.filter((f) => f.hardStop),
       unresolvedDrug: v.unresolvedDrug, unresolvedActiveMeds: v.unresolvedActiveMeds || [],
+      pregnancyLactation: { rulesLoaded, ...(pregnancyStatus || {}) },
     };
   } catch (e) {
     return { checked: false, code: "SAFETY_CHECK_UNAVAILABLE", message: str(e && e.message) || "decision support unavailable" };

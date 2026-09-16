@@ -26,9 +26,10 @@ async function firstItem() {
 
 test("pure: every seed list is present, every item has a fingerprint, and nothing is signed until a record exists for its current content", async () => {
   const lists = await S.seedStatus([]);
-  assert.deepEqual(lists.map((l) => l.id), ["allergy-classes", "allergy-cross-reactivity", "dose-ceilings", "critical-limits", "critical-thresholds", "pews-bands", "meows-bands", "news2-escalation", "quality-measures"]);
+  assert.deepEqual(lists.map((l) => l.id), ["allergy-classes", "allergy-cross-reactivity", "dose-ceilings", "pregnancy-lactation", "critical-limits", "critical-thresholds", "pews-bands", "meows-bands", "news2-escalation", "quality-measures"]);
   for (const l of lists) {
-    assert.ok(l.items.length > 0, l.id + " has items");
+    // Pregnancy and lactation rules ship empty (no unapproved guidance written); every other list has items.
+    if (l.id === "pregnancy-lactation") assert.equal(l.items.length, 0); else assert.ok(l.items.length > 0, l.id + " has items");
     for (const it of l.items) { assert.equal(it.status, "unapproved"); assert.match(it.contentHash, /^[0-9a-f]{64}$/); }
   }
   assert.ok(lists.find((l) => l.id === "critical-limits").items.some((i) => i.id === "2823-3" && i.label === "Potassium"));
@@ -129,6 +130,7 @@ test("screens: Admin > Clinical seed data marks unsigned items UNAPPROVED, shows
   assert.ok((owner.match(/data-seed-sign=/g) || []).length === lists.reduce((n, l) => n + l.unapproved, 0), "one Sign off button per unapproved item, none on a signed one");
   assert.match(html(c, { failed: true, message: "forbidden" }), /could not be loaded: forbidden\. Treat every item as UNAPPROVED/);
   assert.match(html(c, undefined), /Loading/);
+  assert.match(owner, /No items: this list is empty, so nothing from it is loaded or checked\./, "an empty list says so rather than drawing a bare table");
   assert.doesNotMatch(owner, /[—–]/, "no em or en dash");
   assert.match(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), /c\.api\("\/seed\/signoff"/);
 });
