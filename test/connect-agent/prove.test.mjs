@@ -3,7 +3,7 @@
 // Synthetic GHIS-shaped data (made-up ids and names); the real GHIS endpoint list is never given to discovery.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { consideredCells, overlapOf, accepted, paramsOf, todayFormat, rowsForChain, proveView, createProofBook, safeParams, learnColumns, screenRows, navToReplayEntries, INJECT_REPLAY_SRC, widenRequest } from '../../connect-agent/phone/prove.mjs';
+import { consideredCells, overlapOf, accepted, paramsOf, todayFormat, rowsForChain, proveView, createProofBook, safeParams, learnColumns, screenRows, navToReplayEntries, INJECT_REPLAY_SRC, widenRequest, reportWords } from '../../connect-agent/phone/prove.mjs';
 import { executeView, parseFetchExpression, PAGE_TOKENS, provenValue, applyColumns } from '../../connect-agent/phone/adapter-runtime.mjs';
 import { mapRows } from '../../connect-agent/phone/runtime.mjs';
 import { redactEndpoints } from '../../connect-agent/phone/deep-crawl.mjs';
@@ -16,6 +16,7 @@ const WL_JSON = JSON.stringify({ data: [
 const MEDS_HTML = '<table><tr><th>Drug</th><th>Route</th><th>Frequency</th></tr><tr><td>Tab Paracetamol 650 mg</td><td>Oral</td><td>TDS</td></tr><tr><td>Inj Ceftriaxone 1 g</td><td>IV</td><td>BD</td></tr></table>';
 const FORM_HTML = '<table><tr><th>Chief complaint</th></tr><tr><td><textarea></textarea></td></tr></table><table><tr><th>Vitals</th></tr></table>';
 const MEDS_SCREEN = ['Tab Paracetamol 650 mg', 'Oral', 'TDS', 'Inj Ceftriaxone 1 g', 'IV', 'BD'];
+const NARRATIVE_TEXT = 'no acute intracranial hemorrhage midline shift ventricles normal study reviewed impression final report issued today morning routine screening';
 
 test('overlap: the medicines fragment carries the screen, the assessment form and a signature lookup do not', () => {
   const cells = consideredCells(MEDS_SCREEN);
@@ -322,6 +323,50 @@ test('a radiology report opened by navigation is proven and keyed to its list ro
   const data = view.endpoints.find((e) => e.role === 'data');
   assert.equal(data.path.split('?')[0], '/Radiology/Home/GetRadiologyResultPrint');
   assert.deepEqual(data.params.resultid, { from: 'radiology', field: 'resultid' });
+});
+
+test('reportWords: the longest string on screen, its distinct 5+ letter words, only when there are at least 8', () => {
+  assert.deepEqual(reportWords([['a b c'], ['too short']]), [], 'fewer than 8 qualifying words is a header, not a report');
+  assert.deepEqual(
+    reportWords([['MR900010'], [NARRATIVE_TEXT]]),
+    ['acute', 'intracranial', 'hemorrhage', 'midline', 'shift', 'ventricles', 'normal', 'study', 'reviewed', 'impression', 'final', 'report', 'issued', 'today', 'morning', 'routine', 'screening'],
+  );
+});
+
+/* F2 REGRESSION (ver_05ce2f04): radiology-detail's real answer carried the report prose but only 0.14 of
+ * the demographic-header cells -- rejected outright before this fix (accepted() needs ratio>=0.5). The
+ * report's own words now decide it; the whole-page shell that also "contains" everything stays refused. */
+test('proveView: a radiology-detail report is proven by its prose when its cells barely overlap; the whole-page shell stays refused', async () => {
+  const view = { resourceHint: 'radiology-detail', detailOf: 'radiology', pathTemplate: HOST + '/Radio/Home', rowsSelector: 'body', headers: ['Impression'] };
+  const screen = [['MR900010', 'TEST GAMMA', 'IP5550010', 'STUDYCODE77', 'DRJONES'], [NARRATIVE_TEXT]];
+  const demographicCells = consideredCells(screen[0]);
+  const report = '<div><h4>CT BRAIN PLAIN</h4><p>' + NARRATIVE_TEXT + '</p></div>';
+  const entries = [
+    { seq: 81, method: 'GET', url: HOST + '/Radiology/Home/GetRadiologyResultPrint?resultid=RS44010', body: null, reqCt: '', xhr: true, status: 200, shape: { kind: 'json', keys: ['result'], rows: 1 } },
+    { seq: 82, method: 'GET', url: HOST + '/Radio/Home', body: null, reqCt: '', xhr: false, status: 200, shape: { kind: 'unknown', page: true } },
+  ];
+  const answers = {
+    81: { status: 200, contentType: 'application/json', text: JSON.stringify({ result: report }) },
+    82: { status: 200, contentType: 'text/html', text: '<html><body><h4>CT BRAIN PLAIN</h4><p>' + NARRATIVE_TEXT + '</p><p>MR900010 TEST GAMMA IP5550010</p></body></html>' },
+  };
+  // Proof the fix is needed at all: the demographic cells alone, against the real data answer, do not clear the bar.
+  assert.equal(accepted(overlapOf(demographicCells, answers[81].text, answers[81].contentType)), false, 'cells alone stay under the 0.5 ratio / 3 hits bar');
+
+  await proveView({ client: fakePage({ entries, screen, answers }), view });
+  assert.equal(view.proof.status, 'proven', JSON.stringify(view.proof));
+  const data = view.endpoints.find((e) => e.role === 'data');
+  assert.equal(data.path.split('?')[0], '/Radiology/Home/GetRadiologyResultPrint', 'the report call is proven, not the whole-page shell');
+});
+
+/* An ordinary list (no detailOf, not narrative) gets no prose fallback: weak cell overlap still fails. */
+test('proveView: a non-narrative list at 14% cell overlap is still not proven', async () => {
+  const screen = [['Haemoglobin', 'Complete blood count', 'ServiceRenderId77', 'Section Haematology', 'OrderedBy DrX', 'StatusPending', 'CollectedToday']];
+  const entries = [{ seq: 91, method: 'GET', url: HOST + '/Lab/Home/GetSomething?id=RS1', body: null, reqCt: '', xhr: true, status: 200, shape: { kind: 'json', keys: ['other'], rows: 1 } }];
+  const answers = { 91: { status: 200, contentType: 'application/json', text: '{"other":"nothing relevant except Haemoglobin mention here"}' } };
+  const view = { resourceHint: 'labs', pathTemplate: HOST + '/Lab/Home', rowsSelector: 'tr', headers: ['Test'] };
+  await proveView({ client: fakePage({ entries, screen, answers }), view });
+  assert.equal(view.proof.status, 'unproven');
+  assert.equal(view.endpoints, undefined);
 });
 
 test('widenRequest empties only the filters nothing could be traced to', () => {

@@ -28,6 +28,25 @@ const BRAIN_RESOURCES =['worklist', 'patient', 'notes', 'labs', 'radiology', 'me
 const NARRATIVE = ['radiology', 'notes', 'discharge', 'history'];
 export const ACCEPT = Object.freeze({ ratio: 0.5, hits: 3 });
 
+/* A "-detail" view of a NARRATIVE resource: its cells are the report's demographic header, not the
+ * report itself, so a low cell-overlap does not mean the candidate is wrong (owner, 2026-09-16;
+ * ver_05ce2f04: radiology-detail's real answer carried the report prose at ratio 0.14 on cells alone). */
+const isNarrativeDetail = (v) => !!(v && v.detailOf && NARRATIVE.includes(String(v.resourceHint || '').replace(/-detail$/, '')));
+
+/** The distinct 5+ letter words in the longest string PROVE_SCREEN captured (its narrative branch), or
+ *  [] when there are too few to be a report: a demographic header reads short, a report body does not. */
+export function reportWords(shown) {
+  let best = '';
+  for (const row of Array.isArray(shown) ? shown : []) {
+    for (const c of Array.isArray(row) ? row : []) {
+      const s = String(c == null ? '' : c);
+      if (s.length > best.length) best = s;
+    }
+  }
+  const words = [...new Set((best.toLowerCase().match(/[a-z]{5,}/g) || []))];
+  return words.length >= 8 ? words.slice(0, 120) : [];
+}
+
 /* ---- page realm ---------------------------------------------------------------------------------- */
 
 /* `since` < 0: everything after the mark the last armed action set (CRAWL_ARM_OBSERVER), or the whole
@@ -112,6 +131,21 @@ function PROVE_SCREEN(spec) {
         if (cells.length) addRow(cells);
       }
     }
+    if (spec.narrative) {
+      var own = function (el) {
+        var t = '';
+        for (var ci = 0; ci < el.childNodes.length; ci++) { var kid = el.childNodes[ci]; if (kid.nodeType === 3) t += kid.nodeValue; }
+        return t.replace(/\s+/g, ' ').trim();
+      };
+      var cands = document.querySelectorAll('td,p,div,pre,span,li');
+      var bestText = '';
+      for (var ni = 0; ni < cands.length; ni++) {
+        if (!cands[ni].getClientRects().length) continue;
+        var t2 = own(cands[ni]);
+        if (t2.length > bestText.length) bestText = t2;
+      }
+      if (bestText.length >= 80) out.push([bestText.slice(0, 4000)]);
+    }
   } catch (x) { /* an unreadable screen proves nothing */ }
   return JSON.stringify(out);
 }
@@ -159,7 +193,7 @@ export const PROVE_SOURCES = Object.freeze({
   list: (since) => `(${String(PROVE_LIST)})(${Number.isInteger(since) ? since : -1})`,
   exec: (seq) => `(${String(PROVE_EXEC)})(${Number(seq) || 0})`,
   execRequest: (req) => `(${String(PROVE_EXEC_REQ)})(${JSON.stringify(req)})`,
-  screen: (spec) => `(${String(PROVE_SCREEN)})(${JSON.stringify({ rowsSelector: spec.rowsSelector || '', cellSelectors: spec.cellSelectors || [], block: !!spec.block })})`,
+  screen: (spec) => `(${String(PROVE_SCREEN)})(${JSON.stringify({ rowsSelector: spec.rowsSelector || '', cellSelectors: spec.cellSelectors || [], block: !!spec.block, narrative: !!spec.narrative })})`,
 });
 
 /* ---- pure: verify ------------------------------------------------------------------------------- */
@@ -192,7 +226,7 @@ function jsonValues(v, out) {
 export function haystack(text, contentType) {
   const t = String(text || '').trim();
   if (/json/i.test(contentType || '') || t[0] === '{' || t[0] === '[') {
-    try { return jsonValues(JSON.parse(t), []).map(norm).join('|'); } catch { /* html that starts oddly */ }
+    try { return jsonValues(JSON.parse(t), []).map((v) => norm(stripHtml(v))).join('|'); } catch { /* html that starts oddly */ }
   }
   return norm(stripHtml(t).replace(/\s+/g, '|'));
 }
@@ -547,9 +581,10 @@ export async function proveView({ client, view, brain = null, since = -1, label 
   }).slice(-12);
   if (!entries.length) return done('no-requests');
 
-  const shown = screenRows(await evalJson(client, PROVE_SOURCES.screen(view), []));
+  const shown = screenRows(await evalJson(client, PROVE_SOURCES.screen(Object.assign({}, view, { narrative: isNarrativeDetail(view) })), []));
   const cells = consideredCells(shown.flat());
-  if (!cells.length) return done('no-screen-values');
+  const prose = isNarrativeDetail(view) ? reportWords(shown) : [];
+  if (!cells.length && !prose.length) return done('no-screen-values');
 
   // REASON: the brain ranks from structure; its order is the execution order.
   let order = null;
@@ -578,7 +613,13 @@ export async function proveView({ client, view, brain = null, since = -1, label 
     const e = entries[r.index];
     const resp = await evalJson(client, PROVE_SOURCES.exec(e.seq), null);
     const kind = responseKind(resp);
-    const o = kind === 'login' || kind === 'empty' ? { hits: 0, cells: cells.length, ratio: 0 } : overlapOf(cells, resp.text, resp.contentType);
+    let o = kind === 'login' || kind === 'empty' ? { hits: 0, cells: cells.length, ratio: 0 } : overlapOf(cells, resp.text, resp.contentType);
+    // A narrative detail's cells are its demographic header, not the report: a candidate the cells
+    // reject can still be the right one if its words are the report itself (owner, 2026-09-16).
+    if (prose.length && !accepted(o) && kind !== 'login' && kind !== 'empty') {
+      const w = overlapOf(prose, resp.text, resp.contentType);
+      if (accepted(w)) o = w;
+    }
     trace.tried.push({ method: e.method, path: candidateStructure(e).path.replace(/\d{3,}/g, '#'), role: r.role, kind, hits: o.hits, ratio: o.ratio });
     if (kind === 'login') return done('signed-out');
     // A whole page is layout, unless it is keyed on this patient (a report opened by navigation).
