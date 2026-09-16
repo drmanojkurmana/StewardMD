@@ -4423,8 +4423,8 @@
   }
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  // ── MaiK "Aurora" wordmark + icon set (design_handoff_maik_assistant/IMPLEMENTATION.md §2) ──
-  var MK_LOGO = function () { return (document.body.classList.contains("dark") || document.body.classList.contains("v3-dark")) ? "/maik-wordmark-white.png" : "/maik-wordmark-color.png"; };
+  var isDark = function () { return (document.body.classList.contains("dark") || document.body.classList.contains("v3-dark") || (document.documentElement && document.documentElement.classList.contains("dark")) || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)); };
+  var MK_LOGO = function () { return isDark() ? "/maik-wordmark-white.png" : "/maik-wordmark-color.png"; };
   var MK = {
     new: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
     close: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>',
