@@ -4884,6 +4884,17 @@
     "ward.roi-authority-input": "Authority (authorised attendant: the patient's signed authorisation)",
     "ward.doc-purge-reason": "Why is it being destroyed? This is kept as the destruction record.",
     "ward.doc-purge-reason-needed": "Destroying a document needs a reason.",
+    "ward.consent-parent-verify": "Child or guardian consent (DPDP Rules r.10, r.11)",
+    "ward.consent-pv-none": "Parent identity not checked",
+    "ward.consent-pv-id": "Checked against an ID the hospital holds",
+    "ward.consent-pv-digilocker": "Checked with a DigiLocker token",
+    "ward.consent-pv-ref": "ID or token reference",
+    "ward.consent-pv-name": "Parent or guardian name",
+    "ward.consent-ga-none": "Guardian appointment not recorded",
+    "ward.consent-ga-court": "Appointed by a court",
+    "ward.consent-ga-authority": "Appointed by a designated authority",
+    "ward.consent-ga-committee": "Appointed by a local level committee",
+    "ward.consent-ga-ref": "Appointment order reference",
     /* end ward.js keys */
     /* site pages keys (ui-i18n-site) */
     /* wardsynq/site/shell.js */
@@ -8335,6 +8346,22 @@
     "site.gov.rn.none": "No patient's last notice predates DPDP commencement.",
     "site.gov.ret.inactive": "Inactive since {date}: three years after death. The record is kept, never destroyed for that reason.",
     "site.gov.ret.inactiveFrom": "Becomes inactive on {date}, three years after death. The record is kept.",
+    "site.engage.pvMethod": "For a child: how the parent's identity was checked",
+    "site.engage.pvNone": "Not a child, or not checked",
+    "site.engage.pvId": "Against an ID the hospital holds",
+    "site.engage.pvDigilocker": "With a DigiLocker token",
+    "site.engage.pvRef": "ID or token reference",
+    "site.engage.pvName": "Parent or guardian name",
+    "site.patients.priv.healthConsent": "Written consent to collect health data (SPDI Rules 2011 r.5(1))",
+    "site.patients.priv.consentNotTaken": "Not taken now",
+    "site.patients.priv.consentSigned": "Signed consent form",
+    "site.patients.priv.consentE": "Electronic acknowledgement (sufficiency awaits a lawyer's review)",
+    "site.portal.pvMethod": "For a child: how the parent's identity was checked",
+    "site.portal.pvNone": "Not a child, or not checked",
+    "site.portal.pvId": "Against an ID the hospital holds",
+    "site.portal.pvDigilocker": "With a DigiLocker token",
+    "site.portal.pvRef": "ID or token reference",
+    "site.portal.pvName": "Parent or guardian name",
     /* end site pages keys */
   };
 

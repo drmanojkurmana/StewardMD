@@ -104,10 +104,16 @@
           '<option value="legal-guardian">' + esc(T(c, "site.patients.priv.guardian", "Legal guardian")) + "</option>" +
           '<option value="next-of-kin">' + esc(T(c, "site.patients.priv.kin", "Next of kin")) + "</option></select></label>" +
           '<label class="f"><span>' + esc(T(c, "site.patients.priv.name", "Their name, if not the patient")) + '</span><input id="pPrivName"></label>' +
+          /* SPDI Rules 2011 r.5(1), in force now: written consent to collecting health data, and the form it took. */
+          '<label class="f"><span>' + esc(T(c, "site.patients.priv.healthConsent", "Written consent to collect health data (SPDI Rules 2011 r.5(1))")) + '</span><select id="pPrivConsent">' +
+          '<option value="">' + esc(T(c, "site.patients.priv.consentNotTaken", "Not taken now")) + "</option>" +
+          '<option value="signed-paper">' + esc(T(c, "site.patients.priv.consentSigned", "Signed consent form")) + "</option>" +
+          '<option value="e-acknowledged">' + esc(T(c, "site.patients.priv.consentE", "Electronic acknowledgement (sufficiency awaits a lawyer's review)")) + "</option></select></label>" +
           '<button class="btn" type="button" id="pPrivSave">' + esc(T(c, "site.patients.priv.record", "Record notice given")) + '</button></div><div id="pPrivMsg"></div></div>';
         document.getElementById("pPrivSave").onclick = function () {
           var btn = this; btn.disabled = true;
-          c.api("/ward/privacy-acknowledge", { orgId: st.orgId, mrn: mrn, language: document.getElementById("pPrivLang").value, method: document.getElementById("pPrivHow").value, givenBy: document.getElementById("pPrivWho").value, giverName: document.getElementById("pPrivName").value.trim() }).then(function (x) {
+          c.api("/ward/privacy-acknowledge", { orgId: st.orgId, mrn: mrn, language: document.getElementById("pPrivLang").value, method: document.getElementById("pPrivHow").value, givenBy: document.getElementById("pPrivWho").value, giverName: document.getElementById("pPrivName").value.trim(),
+            healthDataConsent: !!document.getElementById("pPrivConsent").value, consentForm: document.getElementById("pPrivConsent").value || undefined }).then(function (x) {
             btn.disabled = false;
             var m = document.getElementById("pPrivMsg"); if (!m) return;
             if (x && x.ok) { m.innerHTML = '<div class="msg ok">' + esc(x.skipped ? T(c, "site.patients.priv.already", "Already recorded for this version of the notice.") : T(c, "site.patients.priv.saved", "Recorded.")) + "</div>"; return; }

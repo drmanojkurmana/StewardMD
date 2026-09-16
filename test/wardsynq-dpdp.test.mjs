@@ -526,4 +526,8 @@ test("children (r.10, DPDP applied early): a research consent for a child needs 
   const msg = await as(RECEPTION, "/ward/comm-preference", "POST", { orgId: ORG, patientId: "kid-1", channel: "sms", optedIn: true, mobile: "9876543210", note: "Mother signed at the desk" });
   assert.equal(msg.__status, 422, JSON.stringify(msg));
   assert.equal(msg.error, "parental_consent_required");
+  const msgOk = await as(RECEPTION, "/ward/comm-preference", "POST", { orgId: ORG, patientId: "kid-1", channel: "sms", optedIn: true, mobile: "9876543210", note: "Mother signed at the desk",
+    parentVerification: { method: "id-held", reference: "Aadhaar on file", parentName: "Lata R" } });
+  assert.equal(msgOk.__status, 200, JSON.stringify(msgOk));
+  assert.equal((await as(RECEPTION, "/ward/comm-preference", "POST", { orgId: ORG, patientId: "kid-1", channel: "sms", optedIn: false, note: "Mother asked to stop" })).__status, 200, "an opt-out is never gated");
 });

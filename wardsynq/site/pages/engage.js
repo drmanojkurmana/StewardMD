@@ -113,6 +113,10 @@
         '<label class="f"><span>' + esc(T(c, "site.engage.consent.how", "How consent was given or withdrawn")) + '</span><input id="pcN_' + ch + '" maxlength="200"></label>' +
         '<button class="btn" type="button" data-pc="pref-in" data-ch="' + ch + '">' + esc(T(c, "site.engage.consent.optIn", "Record opt-in")) + '</button> <button class="btn ghost" type="button" data-pc="pref-out" data-ch="' + ch + '">' + esc(T(c, "site.engage.consent.optOut", "Record opt-out")) + "</button></div>";
     });
+    /* DPDP Rules 2025 r.10, from 13 May 2027: messages to a child need the parent verified at the desk. The server decides when. */
+    h += '<div class="row"><label class="f"><span>' + esc(T(c, "site.engage.pvMethod", "For a child: how the parent's identity was checked")) + '</span><select id="pcPvMethod"><option value="">' + esc(T(c, "site.engage.pvNone", "Not a child, or not checked")) + '</option><option value="id-held">' + esc(T(c, "site.engage.pvId", "Against an ID the hospital holds")) + '</option><option value="digilocker-token">' + esc(T(c, "site.engage.pvDigilocker", "With a DigiLocker token")) + "</option></select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.engage.pvRef", "ID or token reference")) + '</span><input id="pcPvRef"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.engage.pvName", "Parent or guardian name")) + '</span><input id="pcPvName"></label></div>';
     return h + '<div id="pcPrefMsg" aria-live="polite"></div></div>';
   }
 
@@ -171,7 +175,8 @@
       }
       if (act === "pref-in" || act === "pref-out") {
         var ch = b.getAttribute("data-ch");
-        return c.api("/ward/comm-preference", { orgId: c.state.orgId, patientId: s.pid, channel: ch, optedIn: act === "pref-in", mobile: val("pcM_" + ch), note: val("pcN_" + ch) }).then(function (r) {
+        return c.api("/ward/comm-preference", { orgId: c.state.orgId, patientId: s.pid, channel: ch, optedIn: act === "pref-in", mobile: val("pcM_" + ch), note: val("pcN_" + ch),
+          parentVerification: val("pcPvMethod") ? { method: val("pcPvMethod"), reference: val("pcPvRef"), parentName: val("pcPvName") } : undefined }).then(function (r) {
           if (!r || !r.ok) return say(c, "pcPrefMsg", r);
           s.pref = { ok: true, preference: r.preference }; draw(); say(c, "pcPrefMsg", r, T(c, "site.engage.saved", "Saved."));
         });

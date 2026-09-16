@@ -3087,6 +3087,13 @@
       "<input id=\"wConsentGiverName\" placeholder=\"" + wTA("ward.giver-name-if-not-the-patient", "Giver name (if not the patient)") + "\">" +
       "<label><input type=\"checkbox\" id=\"wConsentCapacity\" checked> " + wTH("ward.patient-had-capacity", "Patient had capacity") + "</label>" +
       "<input id=\"wConsentValidUntil\" type=\"date\" placeholder=\"" + wTA("ward.valid-until-optional", "Valid until (optional)") + "\">" +
+      /* DPDP Rules 2025 r.10 and r.11, from 13 May 2027: a non-care consent for a child needs the parent verified; a guardian for an adult names who appointed them. The server decides when these apply. */
+      "<details><summary>" + wTH("ward.consent-parent-verify", "Child or guardian consent (DPDP Rules r.10, r.11)") + "</summary>" +
+      '<select id="wConsentPvMethod"><option value="">' + wTH("ward.consent-pv-none", "Parent identity not checked") + '</option><option value="id-held">' + wTH("ward.consent-pv-id", "Checked against an ID the hospital holds") + '</option><option value="digilocker-token">' + wTH("ward.consent-pv-digilocker", "Checked with a DigiLocker token") + "</option></select>" +
+      "<input id=\"wConsentPvRef\" placeholder=\"" + wTA("ward.consent-pv-ref", "ID or token reference") + "\">" +
+      "<input id=\"wConsentPvName\" placeholder=\"" + wTA("ward.consent-pv-name", "Parent or guardian name") + "\">" +
+      '<select id="wConsentGaSource"><option value="">' + wTH("ward.consent-ga-none", "Guardian appointment not recorded") + '</option><option value="court">' + wTH("ward.consent-ga-court", "Appointed by a court") + '</option><option value="designated-authority">' + wTH("ward.consent-ga-authority", "Appointed by a designated authority") + '</option><option value="local-level-committee">' + wTH("ward.consent-ga-committee", "Appointed by a local level committee") + "</option></select>" +
+      "<input id=\"wConsentGaRef\" placeholder=\"" + wTA("ward.consent-ga-ref", "Appointment order reference") + "\"></details>" +
       '<button class="w-btn" data-w-act="consentrecord">' + ms("fact_check") + wTH("ward.record2", "Record") + "</button></div>" +
       "</div>";
   }
@@ -13651,6 +13658,8 @@
       orgId: st.orgId, patientId: st.sel.patientId, encounterId: st.sel.encounterId, scope: scope, decision: decision,
       detail: detail || undefined, givenBy: st.consent.givenBy, giverName: val("wConsentGiverName") || undefined,
       capacity: capEl ? capEl.checked : true, validUntil: val("wConsentValidUntil") || undefined,
+      parentVerification: val("wConsentPvMethod") ? { method: val("wConsentPvMethod"), reference: val("wConsentPvRef"), parentName: val("wConsentPvName") } : undefined,
+      guardianAppointment: val("wConsentGaSource") ? { source: val("wConsentGaSource"), orderRef: val("wConsentGaRef") } : undefined,
     })
       .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadConsent(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
