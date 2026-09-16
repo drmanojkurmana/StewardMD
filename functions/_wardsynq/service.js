@@ -291,6 +291,11 @@ const RESOURCE_TYPES = Object.freeze([
    * against a hospital that can answer "which patients got lot X", so this is append-only and keyed
    * to the case it was placed in. */
   "ImplantRecord",
+  /* The pre-anaesthetic checkup for one surgical case (migrate-surgery.js recordPac): history, airway,
+   * ASA class, fasting, investigations reviewed, plan, consent for anaesthesia and the fitness decision.
+   * One record per case, a revision being a new version with a reason. The anaesthetist's clinical
+   * commitment, so EMR_TREAT's unrestricted write covers it; no grant change. */
+  "PreAnaestheticCheckup",
   /* Antenatal history and gestation (Task 2.4): gravida, para, LMP/EDD, risk factors. One current
    * episode per patient, versioned like everything else - a delivery is the fact that changes para,
    * recorded through migrate-maternity.js's recordDelivery(), never edited by hand elsewhere. */

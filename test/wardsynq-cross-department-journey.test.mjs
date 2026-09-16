@@ -180,7 +180,7 @@ test("JOURNEY: ED -> ICU -> WARD -> SURGERY -> WARD -> DISCHARGE stays ONE patie
   const consent = await as(DOCTOR, "/ward/surgery-consent", "POST", { orgId: ORG, caseId: booking.caseId, consent: { procedure: "Coronary artery bypass", laterality: "not-applicable", signedByPatientOrProxy: true } });
   assert.equal(consent.__status, 200, JSON.stringify(consent));
   await as(DOCTOR, "/ward/surgery-marksite", "POST", { orgId: ORG, caseId: booking.caseId, marking: { site: "chest", laterality: "not-applicable" } });
-  const signIn = await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId: booking.caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable" } });
+  const signIn = await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId: booking.caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable", pacAcknowledgement: "Checkup done on paper, entered later" } });
   assert.equal(signIn.__status, 200, JSON.stringify(signIn));
   const timeOut = await as(DOCTOR, "/ward/surgery-timeout", "POST", { orgId: ORG, caseId: booking.caseId, submission: { items: allOf(TIME_OUT_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable" } });
   assert.equal(timeOut.__status, 200, JSON.stringify(timeOut));

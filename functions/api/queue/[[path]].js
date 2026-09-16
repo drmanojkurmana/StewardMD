@@ -71,7 +71,7 @@ import {
   bookSurgicalCase, recordCaseConsent, markCaseSite, signInCase, timeOutCase, inciseCase,
   signOutCase, abandonCase, recordOperativeNote, dispositionCase, getSurgicalCase, listSurgicalCases,
   listOpenCases, startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
-  recordImplant, listImplants,
+  recordImplant, listImplants, recordPac, getPac,
 } from "../../_wardsynq/migrate-surgery.js";
 import {
   recordPregnancy, getPregnancy, maternityStatus, maternityMeows, recordLabourObservation,
@@ -1273,6 +1273,8 @@ export async function onRequest(context) {
         "surgery-board": CAPS.EMR_VIEW,
         "anesthesia-start": CAPS.EMR_TREAT, "anesthesia-event": CAPS.EMR_TREAT, "anesthesia-end": CAPS.EMR_TREAT,
         "anesthesia-get": CAPS.EMR_VIEW, implant: CAPS.EMR_TREAT, "implant-list": CAPS.EMR_VIEW,
+        // The pre-anaesthetic checkup is the anaesthetist's fitness decision: emr.treat to record, emr.view to read.
+        pac: CAPS.EMR_TREAT, "pac-get": CAPS.EMR_VIEW,
         /* Maternity (Task 2.4). Antenatal history, delivery and newborn linkage are clinical
          * commitments the same way a resus bundle or a surgical checklist step is - emr.treat. A
          * partogram observation is the midwife's own bedside charting - emr.vitals, the same
@@ -2157,6 +2159,14 @@ export async function onRequest(context) {
       }
       if (sub === "surgery-signin" && method === "POST") {
         const r = await signInCase(request, env, { ...deps, caseId: body.caseId, submission: body.submission, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pac" && method === "POST") {
+        const r = await recordPac(request, env, { ...deps, caseId: body.caseId, pac: body.pac, revisionReason: body.revisionReason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pac-get" && method === "GET") {
+        const r = await getPac(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "surgery-timeout" && method === "POST") {

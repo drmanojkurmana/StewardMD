@@ -1075,7 +1075,7 @@
       "<label class=\"w-f\"><span>" + wTH("ward.laterality-marked", "Laterality marked") + "</span><select id=\"wSurgMarkLat\"><option value=\"not-applicable\"" + (c.laterality === "not-applicable" ? " selected" : "") + ">" + wTH("ward.not-applicable", "Not applicable") + "</option><option value=\"left\"" + (c.laterality === "left" ? " selected" : "") + '>Left</option><option value="right"' + (c.laterality === "right" ? " selected" : "") + '>Right</option><option value="bilateral"' + (c.laterality === "bilateral" ? " selected" : "") + '>Bilateral</option></select></label>' +
       '<button class="w-btn go" data-w-act="surgerymarksite">' + ms("save") + wTH("ward.record-marking", "Record marking") + "</button></div>";
 
-    var checklistCard = c.stage === "marked" ? checklistForm("signIn", SIGN_IN_ITEMS, "surgeryphase")
+    var checklistCard = c.stage === "marked" ? pacSignInNote(state) + checklistForm("signIn", SIGN_IN_ITEMS, "surgeryphase")
       : c.stage === "signed-in" ? checklistForm("timeOut", TIME_OUT_ITEMS, "surgeryphase")
       : c.stage === "timed-out" ? '<div class="w-card"><div class="w-card-h">' + ms("cut") + "<h3>" + wTH("ward.incision", "Incision") + "</h3></div>" +
           '<p class="w-hint">' + ms("check_circle") + wTH("ward.sign-in-and-time-out-are", "Sign In and Time Out are both complete. Incision is unlocked.") + "</p>" +
@@ -1094,7 +1094,7 @@
       '<button class="w-btn ghost" data-w-act="surgerydisposition:direct-discharge">' + ms("home") + wTH("ward.direct-discharge", "Direct discharge") + "</button>" +
       "</div></div>";
 
-    return header + consentCard + siteCard + checklistCard + anesCard + implantCard + dispositionCard;
+    return header + consentCard + pacCard(state) + siteCard + checklistCard + anesCard + implantCard + dispositionCard;
   }
 
   function anesthesiaCard(state) {
@@ -1131,6 +1131,128 @@
       "<label class=\"w-f\"><span>" + wTH("ward.serial2", "Serial") + "</span><input id=\"wSurgImplantSerial\" type=\"text\" autocomplete=\"off\"></label>" +
       "</div>" +
       '<button class="w-btn ghost" data-w-act="surgeryimplant">' + ms("add") + wTH("ward.log-implant", "Log implant") + "</button></div>";
+  }
+
+  /* PRE-ANAESTHETIC CHECKUP (migrate-surgery.js recordPac), one per case. The screen sends what was chosen;
+   * the server keeps the closed vocabularies, adds who and when, and refuses a second checkup unless it is a
+   * revision with a reason. Nothing is preselected: a yes/no the anaesthetist never touched is not an answer.
+   * st.surgCase.pac: null = loading, false = could not be read, { rec: record or null } = read. */
+  function pacWord(kind, v) {
+    var W = {
+      neck: { normal: wT("ward.pac-neck-normal", "Normal"), restricted: wT("ward.pac-neck-restricted", "Restricted"), fixed: wT("ward.pac-neck-fixed", "Fixed") },
+      fasting: { adequate: wT("ward.pac-fasting-adequate", "Adequately fasted"), inadequate: wT("ward.pac-fasting-inadequate", "Not adequately fasted"), "not-fasted-emergency": wT("ward.pac-fasting-emergency", "Not fasted (emergency)") },
+      technique: { general: wT("ward.pac-tech-general", "General anaesthesia"), spinal: wT("ward.pac-tech-spinal", "Spinal"), epidural: wT("ward.pac-tech-epidural", "Epidural"), "combined-spinal-epidural": wT("ward.pac-tech-cse", "Combined spinal-epidural"), "regional-block": wT("ward.pac-tech-block", "Regional block"), sedation: wT("ward.pac-tech-sedation", "Sedation"), "local-with-monitoring": wT("ward.pac-tech-local", "Local with monitoring") },
+      decision: { fit: wT("ward.pac-decision-fit", "Fit for anaesthesia"), "fit-with-conditions": wT("ward.pac-decision-conditions", "Fit with conditions"), unfit: wT("ward.pac-decision-unfit", "Unfit"), missing: wT("ward.pac-decision-missing", "No checkup recorded") },
+      givenBy: { patient: wT("ward.pac-given-patient", "Patient"), guardian: wT("ward.pac-given-guardian", "Guardian"), proxy: wT("ward.pac-given-proxy", "Lawful proxy") },
+      mallampati: { "not-assessable": wT("ward.pac-mallampati-na", "Not assessable") }
+    };
+    return (W[kind] && HAS(W[kind], v)) ? W[kind][v] : String(v == null ? "" : v);
+  }
+  function pacOptions(kind, values, current) {
+    return '<option value="">' + wTH("ward.choose", "Choose&hellip;") + "</option>" + values.map(function (v) {
+      return '<option value="' + esc(v) + '"' + (current === v ? " selected" : "") + ">" + esc(pacWord(kind, v)) + "</option>";
+    }).join("");
+  }
+  function pacYesNo(id, current) {
+    return '<select id="' + id + '"><option value="">' + wTH("ward.choose", "Choose&hellip;") + "</option>" +
+      '<option value="yes"' + (current === true ? " selected" : "") + ">" + wTH("ward.pac-yes", "Yes") + "</option>" +
+      '<option value="no"' + (current === false ? " selected" : "") + ">" + wTH("ward.pac-no", "No") + "</option></select>";
+  }
+  function pacLocalInput(iso) {
+    if (!iso) return "";
+    var d = new Date(iso); if (isNaN(d.getTime())) return "";
+    var p = function (n) { return (n < 10 ? "0" : "") + n; };
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes());
+  }
+  function pacForm(rec) {
+    var r = rec || {}, a = r.airway || {}, f = r.fasting || {}, inv = r.investigations || {}, pl = r.plan || {}, co = r.consent || {};
+    var fld = function (label, input) { return '<label class="w-f"><span>' + label + "</span>" + input + "</label>"; };
+    return '<div class="w-sub">' +
+      fld(wTH("ward.pac-history", "History: conditions, previous anaesthetics, medicines, allergies"), '<textarea id="wPacHistory" rows="3">' + esc(r.history || "") + "</textarea>") +
+      "<h4>" + wTH("ward.pac-airway", "Airway") + "</h4>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-mallampati", "Mallampati class"), '<select id="wPacMallampati">' + pacOptions("mallampati", ["I", "II", "III", "IV", "not-assessable"], a.mallampati) + "</select>") +
+      fld(wTH("ward.pac-mouth", "Mouth opening (cm)"), '<input id="wPacMouth" type="number" min="0" max="10" step="0.1" inputmode="decimal" value="' + esc(a.mouthOpeningCm == null ? "" : a.mouthOpeningCm) + '">') +
+      fld(wTH("ward.pac-tmd", "Thyromental distance (cm)"), '<input id="wPacTmd" type="number" min="0" max="15" step="0.1" inputmode="decimal" value="' + esc(a.thyromentalDistanceCm == null ? "" : a.thyromentalDistanceCm) + '">') +
+      fld(wTH("ward.pac-neck", "Neck movement"), '<select id="wPacNeck">' + pacOptions("neck", ["normal", "restricted", "fixed"], a.neckMovement) + "</select>") +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.asa-class", "ASA class"), '<select id="wPacAsa">' + pacOptions("asa", ["I", "II", "III", "IV", "V", "VI"], r.asaClass) + "</select>") +
+      '<label class="w-chk"><input type="checkbox" id="wPacAsaE"' + (r.asaEmergency ? " checked" : "") + "> " + wTH("ward.pac-asa-emergency", "Emergency (E)") + "</label>" +
+      "</div>" +
+      "<h4>" + wTH("ward.pac-fasting", "Fasting") + "</h4>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-fasting-status", "Fasting status"), '<select id="wPacFasting">' + pacOptions("fasting", ["adequate", "inadequate", "not-fasted-emergency"], f.status) + "</select>") +
+      fld(wTH("ward.pac-solids", "Last solid food"), '<input id="wPacSolids" type="datetime-local" value="' + esc(pacLocalInput(f.solidsLastAt)) + '">') +
+      fld(wTH("ward.pac-clears", "Last clear fluids"), '<input id="wPacClears" type="datetime-local" value="' + esc(pacLocalInput(f.clearFluidsLastAt)) + '">') +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-inv-reviewed", "Investigations reviewed"), pacYesNo("wPacInvReviewed", inv.reviewed)) +
+      fld(wTH("ward.pac-inv-summary", "Investigations: relevant findings"), '<input id="wPacInvSummary" type="text" autocomplete="off" value="' + esc(inv.summary || "") + '">') +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-plan", "Anaesthesia plan"), '<select id="wPacTechnique">' + pacOptions("technique", ["general", "spinal", "epidural", "combined-spinal-epidural", "regional-block", "sedation", "local-with-monitoring"], pl.technique) + "</select>") +
+      fld(wTH("ward.pac-plan-notes", "Plan notes"), '<input id="wPacPlanNotes" type="text" autocomplete="off" value="' + esc(pl.notes || "") + '">') +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-consent", "Consent for anaesthesia obtained"), pacYesNo("wPacConsent", co.obtained)) +
+      fld(wTH("ward.pac-consent-by", "Consent given by"), '<select id="wPacConsentBy">' + pacOptions("givenBy", ["patient", "guardian", "proxy"], co.givenBy) + "</select>") +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-decision", "Fitness decision"), '<select id="wPacDecision">' + pacOptions("decision", ["fit", "fit-with-conditions", "unfit"], r.decision) + "</select>") +
+      fld(wTH("ward.pac-decision-reason", "Conditions, or why unfit"), '<input id="wPacDecisionReason" type="text" autocomplete="off" value="' + esc(r.decisionReason || "") + '">') +
+      "</div>" +
+      (rec ? fld(wTH("ward.pac-revision-reason", "Reason for revising this checkup"), '<input id="wPacRevisionReason" type="text" autocomplete="off">') : "") +
+      '<button class="w-btn go" data-w-act="pacsave">' + ms("save") + (rec ? wTH("ward.pac-save-revision", "Save revision") : wTH("ward.pac-save", "Record checkup")) + "</button>" +
+      (rec ? ' <button class="w-btn ghost" data-w-act="paccancel">' + wTH("ward.cancel", "Cancel") + "</button>" : "") +
+      "</div>";
+  }
+  function pacSummary(rec) {
+    var a = rec.airway || {}, f = rec.fasting || {}, inv = rec.investigations || {}, pl = rec.plan || {}, co = rec.consent || {};
+    var line = function (label, value) { return "<li><b>" + label + "</b><span>" + value + "</span></li>"; };
+    var warn = rec.decision !== "fit";
+    return '<p class="w-hint' + (warn ? " warn" : "") + '">' + ms(warn ? "warning" : "check_circle") + "<b>" + esc(pacWord("decision", rec.decision)) + "</b>" +
+      (rec.decisionReason ? ": " + esc(rec.decisionReason) : "") + "</p>" +
+      '<ul class="w-mini">' +
+      line(wTH("ward.asa-class", "ASA class"), esc(rec.asaClass) + (rec.asaEmergency ? " E" : "")) +
+      line(wTH("ward.pac-airway", "Airway"), wTH("ward.pac-airway-line", "Mallampati {m}, mouth opening {mo} cm, thyromental distance {tmd} cm, neck {neck}", { m: esc(pacWord("mallampati", a.mallampati)), mo: esc(a.mouthOpeningCm), tmd: esc(a.thyromentalDistanceCm), neck: esc(pacWord("neck", a.neckMovement)) })) +
+      line(wTH("ward.pac-fasting", "Fasting"), esc(pacWord("fasting", f.status)) +
+        (f.solidsLastAt ? " &middot; " + wTH("ward.pac-solids-at", "solids {at}", { at: when(f.solidsLastAt) }) : "") +
+        (f.clearFluidsLastAt ? " &middot; " + wTH("ward.pac-clears-at", "clear fluids {at}", { at: when(f.clearFluidsLastAt) }) : "")) +
+      line(wTH("ward.pac-inv-reviewed", "Investigations reviewed"), (inv.reviewed ? wTH("ward.pac-yes", "Yes") : wTH("ward.pac-no", "No")) + (inv.summary ? " &middot; " + esc(inv.summary) : "")) +
+      line(wTH("ward.pac-plan", "Anaesthesia plan"), esc(pacWord("technique", pl.technique)) + (pl.notes ? " &middot; " + esc(pl.notes) : "")) +
+      line(wTH("ward.pac-consent", "Consent for anaesthesia obtained"), (co.obtained ? wTH("ward.pac-yes", "Yes") : wTH("ward.pac-no", "No")) + (co.givenBy ? " &middot; " + esc(pacWord("givenBy", co.givenBy)) : "")) +
+      line(wTH("ward.pac-history-short", "History"), esc(rec.history)) +
+      "</ul>" +
+      '<p class="w-dt-times">' + wTH("ward.pac-assessed", "Assessed {at} by {who}, version {v}", { at: when(rec.assessedAt), who: staffWho(rec.assessedBy), v: esc(rec.version) }) +
+      (rec.revision ? " &middot; " + wTH("ward.pac-revised", "revised from {prev}: {reason}", { prev: esc(pacWord("decision", rec.revision.previousDecision)), reason: esc(rec.revision.reason) }) : "") + "</p>";
+  }
+  function pacCard(state) {
+    var d = state.surgCase, c = d.case, p = d.pac;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("assignment_ind") + "<h3>" + wTH("ward.pac-title", "Pre-anaesthetic checkup") + "</h3></div>";
+    var atSignIn = c.signIn && c.signIn.pac
+      ? '<p class="w-hint' + (c.signIn.pac.acknowledgement ? " warn" : "") + '">' + ms("checklist") + wTH("ward.pac-at-sign-in", "At Sign In: {status}", { status: esc(pacWord("decision", c.signIn.pac.status)) }) +
+        (c.signIn.pac.acknowledgement ? " &middot; " + wTH("ward.pac-proceeded-because", "proceeded because: {reason}", { reason: esc(c.signIn.pac.acknowledgement) }) : "") + "</p>"
+      : "";
+    if (p == null) return head + '<p class="w-empty">' + wTH("ward.pac-loading", "Loading the pre-anaesthetic checkup...") + "</p></div>";
+    if (p === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.pac-failed", "The pre-anaesthetic checkup could not be loaded. Do not read this as not done.", null, "", 1) + "</p>" +
+      '<button class="w-btn tiny ghost" data-w-act="surgeryload">' + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button>" + atSignIn + "</div>";
+    if (!p.rec) return head + '<p class="w-hint warn">' + ms("warning") + wTH("ward.pac-none", "No pre-anaesthetic checkup is recorded for this case.") + "</p>" + atSignIn + pacForm(null) + "</div>";
+    return head + pacSummary(p.rec) + atSignIn +
+      (state.surgPacEdit ? pacForm(p.rec) : '<button class="w-btn ghost sm" data-w-act="pacedit">' + ms("edit") + wTH("ward.pac-revise", "Revise checkup") + "</button>") + "</div>";
+  }
+  /* Shown above the Sign In checklist: whether a checkup exists and what it decided. The server checks again
+   * at sign in and refuses a missing or unfit checkup unless the reason for proceeding is given here. */
+  function pacSignInNote(state) {
+    var p = state.surgCase && state.surgCase.pac;
+    var ack = '<label class="w-f"><span>' + wTH("ward.pac-ack", "Why Sign In proceeds without a fit checkup") + '</span><input id="wSurgPacAck" type="text" autocomplete="off"></label>';
+    if (p == null) return '<p class="w-empty">' + wTH("ward.pac-loading", "Loading the pre-anaesthetic checkup...") + "</p>";
+    if (p === false) return '<p class="w-hint warn">' + ms("error") + wTH("ward.pac-signin-failed", "The pre-anaesthetic checkup could not be loaded. Sign In checks it again; give a reason if none is recorded.", null, "", 1) + "</p>" + ack;
+    if (!p.rec) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.pac-signin-missing", "No pre-anaesthetic checkup is recorded. Record one, or state why Sign In proceeds without it.", null, "", 1) + "</p>" + ack;
+    if (p.rec.decision === "unfit") return '<p class="w-hint warn">' + ms("warning") + wTH("ward.pac-signin-unfit", "The pre-anaesthetic checkup found the patient unfit: {reason}. State why Sign In proceeds.", { reason: esc(p.rec.decisionReason || "") }) + "</p>" + ack;
+    return '<p class="w-hint' + (p.rec.decision === "fit" ? "" : " warn") + '">' + ms(p.rec.decision === "fit" ? "check_circle" : "warning") +
+      wTH("ward.pac-signin-status", "Pre-anaesthetic checkup: {decision}, ASA {asa}", { decision: esc(pacWord("decision", p.rec.decision)), asa: esc(p.rec.asaClass) }) +
+      (p.rec.decisionReason ? " &middot; " + esc(p.rec.decisionReason) : "") + "</p>";
   }
 
   /* HELD FROM OTHER SYSTEMS. Everything here is something another system sent that WardSynQ would
@@ -9192,16 +9314,17 @@
     return apiGet("/ward/surgery-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId))
       .then(function (r) {
         if (!r || !r.ok || !r.case) { st.busy = false; st.err = wT("ward.that-case-could-not-be-loaded", "That case could not be loaded."); st.view = "surgery"; paint(); return; }
-        st.surgCase = { case: r.case, anesthesia: null, implants: [] };
+        st.surgCase = { case: r.case, anesthesia: null, implants: [], pac: null };
         paint();
         return Promise.all([
+          apiGet("/ward/pac-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId)).then(function (p) { st.surgCase.pac = p && p.ok ? { rec: p.pac || null } : false; }, function () { st.surgCase.pac = false; }),
           apiGet("/ward/anesthesia-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId)).then(function (a) { if (a && a.ok) st.surgCase.anesthesia = a.record; }),
           apiGet("/ward/implant-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(r.case.patientId) + "&caseId=" + encodeURIComponent(caseId)).then(function (i) { if (i && i.ok) st.surgCase.implants = i.implants; }),
         ]).then(function () { st.busy = false; paint(); });
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-load-the-case", "Could not load the case."); paint(); });
   }
-  function openSurgeryCase(caseId) { st.view = "surgerycase"; st.surgCase = null; loadSurgeryCase(caseId); }
+  function openSurgeryCase(caseId) { st.view = "surgerycase"; st.surgCase = null; st.surgPacEdit = false; loadSurgeryCase(caseId); }
   function surgeryLoad() { var c = st.surgCase && st.surgCase.case; if (c) loadSurgeryCase(c.id); }
   function surgeryConsent() {
     var c = st.surgCase && st.surgCase.case; if (!c) return;
@@ -9235,6 +9358,7 @@
     ["surgeon", "anaesthetist", "nurse"].forEach(function (r) { var a = role(r); if (a) signatures.push({ role: r, actorId: a }); });
     var submission = { items: itemMap, signatures: signatures };
     if (phase !== "signOut") submission.lateralityAsserted = (document.getElementById("wSurgLatAssert-" + phase) || {}).value || "not-applicable";
+    if (phase === "signIn" && val("wSurgPacAck")) submission.pacAcknowledgement = val("wSurgPacAck");
     var route = phase === "signIn" ? "/ward/surgery-signin" : phase === "timeOut" ? "/ward/surgery-timeout" : "/ward/surgery-signout";
     st.busy = true; paint();
     apiPost(route, { orgId: st.orgId, caseId: c.id, submission: submission })
@@ -9280,6 +9404,31 @@
         if (settle(r, wT("ward.disposition-recorded", "Disposition recorded."))) { st.view = "surgery"; st.surgCase = null; loadSurgeryBoard(); } else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-disposition", "Could not record the disposition."); paint(); });
+  }
+  function pacSave() {
+    var d = st.surgCase, c = d && d.case; if (!c || !d.pac) return;
+    var rec = d.pac.rec, yn = function (id) { var v = val(id); return v === "yes" ? true : v === "no" ? false : null; };
+    var iso = function (id) { var v = val(id); if (!v) return null; var t = new Date(v); return isNaN(t.getTime()) ? v : t.toISOString(); };
+    var num = function (id) { var v = val(id); return v === "" ? null : Number(v); };
+    var pac = {
+      history: val("wPacHistory"),
+      airway: { mallampati: val("wPacMallampati"), mouthOpeningCm: num("wPacMouth"), thyromentalDistanceCm: num("wPacTmd"), neckMovement: val("wPacNeck") },
+      asaClass: val("wPacAsa"), asaEmergency: !!(document.getElementById("wPacAsaE") || {}).checked,
+      fasting: { status: val("wPacFasting"), solidsLastAt: iso("wPacSolids"), clearFluidsLastAt: iso("wPacClears") },
+      investigations: { reviewed: yn("wPacInvReviewed"), summary: val("wPacInvSummary") },
+      plan: { technique: val("wPacTechnique"), notes: val("wPacPlanNotes") },
+      consent: { obtained: yn("wPacConsent"), givenBy: val("wPacConsentBy") },
+      decision: val("wPacDecision"), decisionReason: val("wPacDecisionReason")
+    };
+    var body = { orgId: st.orgId, caseId: c.id, pac: pac };
+    if (rec) { body.revisionReason = val("wPacRevisionReason"); body.expectedVersion = rec.version; }
+    st.busy = true; paint();
+    apiPost("/ward/pac", body)
+      .then(function (r) {
+        if (r && !r.ok && r.error === "pac_invalid") { st.busy = false; st.err = wT("ward.pac-invalid", "The checkup is incomplete: {detail}", { detail: r.detail || r.field || "" }); paint(); return; }
+        if (settle(r, rec ? wT("ward.pac-revised-note", "Checkup revised.") : wT("ward.pac-recorded-note", "Checkup recorded."))) { st.surgPacEdit = false; loadSurgeryCase(c.id); } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.pac-could-not-record", "Could not record the pre-anaesthetic checkup."); paint(); });
   }
   function anesStart() {
     var c = st.surgCase && st.surgCase.case; if (!c) return;
@@ -13735,6 +13884,9 @@
     if (cmd === "surgeryphase") { surgeryPhase(arg); return; }
     if (cmd === "surgeryincise") { surgeryIncise(); return; }
     if (cmd === "surgeryimplant") { surgeryImplant(); return; }
+    if (cmd === "pacsave") { pacSave(); return; }
+    if (cmd === "pacedit") { st.surgPacEdit = true; paint(); return; }
+    if (cmd === "paccancel") { st.surgPacEdit = false; paint(); return; }
     if (cmd === "surgerynote") { surgeryNote(); return; }
     if (cmd === "surgerydisposition") { surgeryDisposition(arg); return; }
     if (cmd === "anesstart") { anesStart(); return; }

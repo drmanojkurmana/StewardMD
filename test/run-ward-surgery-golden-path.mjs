@@ -69,6 +69,19 @@ try {
   await click('[data-w-act="surgerymarksite"]');
   ok(await waitFor(`return document.body.textContent.indexOf('Sign In') >= 0;`), "once marked, the Sign In checklist appears");
 
+  // ---- 3b. The pre-anaesthetic checkup: Sign In warns without one, then the checkup is recorded. ------
+  ok(await waitFor(`return document.body.textContent.indexOf('No pre-anaesthetic checkup is recorded. Record one, or state why Sign In proceeds without it.') >= 0;`), "above Sign In, a missing pre-anaesthetic checkup is a warning, not a silent pass");
+  await click('[data-w-act="surgeryphase:signIn"]');
+  ok(await waitFor(`return document.body.textContent.indexOf('no pre-anaesthetic checkup is recorded for this case') >= 0;`), "Sign In without a checkup or a reason shows the server's refusal");
+  await fill("wPacHistory", "No comorbidities. No known allergies.");
+  await fill("wPacMallampati", "II"); await fill("wPacMouth", "4.5"); await fill("wPacTmd", "7"); await fill("wPacNeck", "normal");
+  await fill("wPacAsa", "II"); await fill("wPacFasting", "adequate"); await fill("wPacInvReviewed", "yes");
+  await fill("wPacTechnique", "general"); await fill("wPacConsent", "yes"); await fill("wPacConsentBy", "patient"); await fill("wPacDecision", "fit");
+  await click('[data-w-act="pacsave"]');
+  ok(await waitFor(`return document.body.textContent.indexOf('Pre-anaesthetic checkup: Fit for anaesthesia, ASA II') >= 0;`), "once recorded, Sign In shows the checkup's decision and ASA class");
+  const pacBody = await ev(`var c=window.__calls.filter(function(c){return c.method==="POST" && /\\/ward\\/pac$/.test(c.url.split("?")[0])}); return JSON.stringify(c[c.length-1].body);`).then(JSON.parse);
+  ok(pacBody.pac.airway.mouthOpeningCm === 4.5 && pacBody.pac.investigations.reviewed === true && pacBody.pac.consent.obtained === true && pacBody.pac.decision === "fit" && !pacBody.pac.decisionReason, "the checkup posts what was chosen, numbers as numbers and yes as true: " + JSON.stringify(pacBody.pac));
+
   // ---- 4. Sign In. -----------------------------------------------------------------------------
   const signInItems = ["identity-confirmed", "site-confirmed", "procedure-confirmed", "consent-confirmed", "site-marked-confirmed", "anaesthesia-safety-check", "pulse-oximeter-working", "allergies-reviewed", "airway-risk-assessed", "blood-loss-risk-assessed"];
   for (const k of signInItems) await check("wSurgItem-signIn-" + k);
@@ -77,6 +90,7 @@ try {
   ok(await waitFor(`return document.body.textContent.indexOf('Anaesthesia') >= 0;`), "after Sign In, the anaesthesia card appears");
   const signInBody = await lastBody("/ward/surgery-signin");
   ok(signInBody && signInBody.submission.signatures.length === 3, "Sign In posts three real, named signatures: " + JSON.stringify(signInBody.submission.signatures));
+  ok(signInBody && !("pacAcknowledgement" in signInBody.submission), "with a fit checkup, Sign In sends no reason for proceeding without one");
 
   // ---- 5. Anaesthesia. --------------------------------------------------------------------------
   await fill("wSurgAsa", "ASA II"); await click('[data-w-act="anesstart"]');

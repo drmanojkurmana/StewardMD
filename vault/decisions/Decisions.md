@@ -6916,3 +6916,14 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
   gestationWeeks is not used: it is whatever was typed weeks before delivery.
 - **Only weight is plotted.** WardSynQ records no length, height or head circumference; the screen says so. Adding
   those measurements (with lying/standing position) is a separate change.
+
+## 2026-09-16 Pre-anaesthetic checkup gates the WHO Sign In by a stated reason, not a hard block (branch gap-clinical-2)
+
+- **One PreAnaestheticCheckup per theatre case** (id from the case), recorded with EMR_TREAT, revised only as a new
+  version with a reason and the version it replaces. Closed vocabularies (Mallampati, neck movement, ASA I-VI + E,
+  fasting status, technique, decision); nothing computes an ASA class, an airway grade or a fasting adequacy.
+- **Sign In reads it on the server.** The checklist engine runs first (its refusals come first), then a missing
+  checkup or an "unfit" decision refuses Sign In (409 PAC_MISSING / PAC_UNFIT) unless the submission states why it
+  proceeds (pacAcknowledgement, 5+ characters). Not a hard block: emergencies proceed without a checkup, and the
+  team decides. A read failure refuses (502) rather than passing. What the checkup said, or that there was none,
+  and the reason given are kept on the sign-in, so a later revision cannot rewrite what the team saw.
