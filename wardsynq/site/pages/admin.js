@@ -35,7 +35,8 @@
   var ROLES = ["admin", "doctor", "supervisor", "nurse", "intern", "resident", "reception", "cashier",
     "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist", "obstetrician", "public_health", "store_keeper", "biomedical_engineer",
     "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver",
-    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "dpo", "viewer"];
+    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "dpo",
+    "dietitian", "kitchen", "cssd", "housekeeping", "transport", "mortuary", "viewer"];
 
   // One line per common role, from the capability lists in functions/_queue_roles.js ROLE_CAPS.
   // Built at render time (not a module constant) because each note is a T() call in the staff language.
@@ -57,6 +58,12 @@
       ["supervisor", T(c, "site.admin.staff.roleNote.supervisor", "Runs the OPD queue and reads the chart. Approves stores indents for the departments in their scope.")],
       ["store_keeper", T(c, "site.admin.staff.roleNote.storeKeeper", "Runs general stores: items, store locations, issuing approved indents, receiving and ordering. No chart access.")],
       ["biomedical_engineer", T(c, "site.admin.staff.roleNote.biomedicalEngineer", "Keeps the asset register, preventive maintenance, calibration and job cards. No chart access.")],
+      ["dietitian", T(c, "site.admin.staff.roleNote.dietitian", "Reads the chart, orders and changes diets, sees the meal rounds.")],
+      ["kitchen", T(c, "site.admin.staff.roleNote.kitchen", "Meal rounds only: name, bed, diet, nil by mouth and allergies. Marks trays prepared and delivered.")],
+      ["cssd", T(c, "site.admin.staff.roleNote.cssd", "Instrument sets, steriliser loads and their indicators, issue to theatre. No chart access.")],
+      ["housekeeping", T(c, "site.admin.staff.roleNote.housekeeping", "Takes and finishes cleaning tasks. A supervisor inspects them. No chart access.")],
+      ["transport", T(c, "site.admin.staff.roleNote.transport", "Ambulance fleet, trip requests, dispatch and trip times.")],
+      ["mortuary", T(c, "site.admin.staff.roleNote.mortuary", "Receives, stores and releases bodies against the death record.")],
     ];
   }
 

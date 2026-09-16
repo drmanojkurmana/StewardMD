@@ -6958,3 +6958,18 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
   expiry from the inventory. Units from other blood centres (not registered) pass as before, marked untracked.
   Component shelf lives are defaults only (not confirmed against the Drugs and Cosmetics Rules text); the expiry on
   the label is what is recorded.
+## 2026-09-16 Hospital support services: diet, CSSD, housekeeping, ambulance, mortuary (branch gap-support)
+- Seven narrow capabilities (diet.order, diet.kitchen, cssd.process, housekeeping.task, housekeeping.inspect,
+  transport.dispatch, mortuary.manage) and six roles (dietitian, kitchen, cssd, housekeeping, transport, mortuary);
+  supervisor also holds housekeeping.inspect. Each grant in actor.js reads only what the job needs.
+- Nine record types in RecordService (DietOrder, MealRound, InstrumentSet, SterilizerLoad, CssdCycle,
+  HousekeepingTask, AmbulanceVehicle, AmbulanceTrip, MortuaryCase), all route-governed (the raw door refuses them).
+- A housekeeping bed task is derived from the bed master (state cleaning + new bed.stateSince) and written by the
+  first person who acts on it: no system actor and no second write at discharge. With
+  wardsynq.supportServices.housekeepingInspection on, a freed bed goes to cleaning and POST /bed/update refuses
+  cleaning to available; only a passed inspection by someone other than the cleaner releases it. Off by default,
+  so the bed board behaves as before.
+- A diet order carries an NBM window beside the diet; what may be served is decided per instant (diet.js dietAt).
+- A completed AmbulanceTrip is captured by charge-capture.js (code AMBULANCE-BLS/ALS); billing reads it, writes nothing.
+- The MLC flag is read (Encounter/Patient `mlc` or `medicoLegal`), never set here; unrecorded asks who confirmed.
+- Screens: wardsynq/site/pages/support.js (five pages, Map tiles in Command and operations), Diet tab on the chart.

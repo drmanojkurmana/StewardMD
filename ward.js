@@ -2355,7 +2355,9 @@
       { act: "ordersets", icon: "checklist", label: "Order sets", title: "A hospital-approved group of orders, each checked on its own" },
       { act: "medrec", icon: "medication", label: "Medicines on arrival", title: "What this patient was already taking, and what happens to each medicine" },
       { act: "referrals", icon: "send", label: "Referrals", title: "Refer this patient to another specialty or facility, and follow the reply" },
-      { act: "followup", icon: "schedule", label: "Follow-up", title: "Ask for this patient to be seen again" }] },
+      { act: "followup", icon: "schedule", label: "Follow-up", title: "Ask for this patient to be seen again" },
+      // 2026-09-16: the diet order is a clinical order written from the chart; the Diet and kitchen page (pages/support.js) keeps it.
+      { act: "dietopen", icon: "restaurant", label: "Diet", title: "Order or change this patient's diet, and see what the kitchen sees" }] },
     { id: "nursing", label: "Nursing", icon: "vital_signs", tabs: [
       // LT-23: a shift handover and a nursing task are given FROM the chart of the patient they are about.
       { act: "handoverchart", icon: "swap_horiz", label: "Hand over", title: "Hand this patient to the next shift, in SBAR" },
@@ -13722,6 +13724,7 @@
     if (cmd === "surgeryabandon") { surgeryAbandon(arg); return; }
     if (cmd === "wardcloseopen") { wardDischarge(); return; }
     if (cmd === "followup") { followUpRequest(); return; }
+    if (cmd === "dietopen") { if (st.sel && G.WSQ && G.WSQ.go) { G.WSQ.state.dietFor = { encounterId: st.sel.encounterId, patientId: st.sel.patientId, name: st.sel.name || null, mrn: st.sel.mrn || null, ward: st.sel.ward || null, bed: st.sel.bed || null }; G.WSQ.go("diet"); } return; }
     if (cmd === "followupsubmit") { followUpSubmit(); return; }
     if (cmd === "dischargecheck") { loadDischargeChecklist(); return; }
     if (cmd === "dischargesubmit") { dischargeSubmit(); return; }

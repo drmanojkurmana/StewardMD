@@ -656,7 +656,8 @@ test("role mapping: every operational role resolves to exactly the grant its cap
   assert.equal(read("pg_resident"), null);
   // supervisor gained INCIDENT_REPORT; reception did not (see ROLE_CAPS) - no longer the same list.
   assert.equal(tier("supervisor"), TIER.EXECUTE);
-  assert.deepEqual(write("supervisor"), ["Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson", "PrivacyAcknowledgement", "IncidentReport", "Indent", "IndentReceipt", "JobCard", "IndentDecision"]);
+  assert.deepEqual(write("supervisor"), ["Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson", "PrivacyAcknowledgement", "IncidentReport", "Indent", "IndentReceipt", "JobCard", "IndentDecision", "HousekeepingTask"]);
+  // 2026-09-16: supervisor inspects housekeeping cleans (housekeeping.inspect), which writes the task and nothing clinical.
   assert.equal(read("supervisor"), null);
   assert.equal(tier("reception"), TIER.EXECUTE);
   assert.deepEqual(write("reception"), ["Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson", "PrivacyAcknowledgement"]);
@@ -696,7 +697,8 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * need none of this and would bill for doses the patient refused. It is a real widening and the
    * containment is the line above: the write scope did not move. */
   assert.deepEqual(read("cashier"), ["MedicationOrder", "ServiceRequest", "Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate",
-    "MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense", "Encounter"]);
+    "MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense", "Encounter", "AmbulanceTrip"]);
+  // 2026-09-16: AmbulanceTrip joined, a completed trip is charged like anything else that happened. Still no write.
   // 2026-09-15 (LT-30): Encounter joined, because a bed day is billed from the stay. Still no write.
   assert.ok(!read("cashier").includes("ClinicalNote"), "a coder is not given the whole chart to answer one question");
   assert.ok(!read("cashier").includes("Observation"), "nor the vitals and the laboratory values");

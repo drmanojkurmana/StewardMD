@@ -254,7 +254,10 @@ function wardsynqConfig(w) {
    * Admin clinical settings screen (clinical-settings.js). Absent means no drug is flagged. */
   /* dpdp joined 2026-09-16 (dpdp.js): the hospital's own answer times for a data principal request and a breach
    * notification. Hospital-set, because the DPDP Rules 2025 times were not confirmed when this was built. */
-  for (const k of ["alerts", "abdm", "orderVerifyWithinHours", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears", "printLanguages", "labelSizes", "controlledDrugs", "dpdp"]) {
+  /* supportServices joined 2026-09-16: the hospital's meal times, its mortuary cold chambers, and whether a
+   * vacated bed waits for a housekeeping clean and an inspection before it is available again. Absent means
+   * no meal times set, no chambers, and beds freed at discharge exactly as before. */
+  for (const k of ["alerts", "abdm", "orderVerifyWithinHours", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears", "printLanguages", "labelSizes", "controlledDrugs", "dpdp", "supportServices"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
@@ -319,6 +322,10 @@ export function bed(o = {}) {
     genderRestriction: o.genderRestriction === "male" || o.genderRestriction === "female" ? o.genderRestriction : null,
     isolation: !!o.isolation,
     active: o.active !== false,
+    /* When the bed entered its current state (ms), set by the store on a state change. A housekeeping clean
+     * is timed from here, and one bed-clean episode is told from the next by it. Null for a bed whose state
+     * has not changed since this was added. */
+    stateSince: Number(o.stateSince) > 0 ? Number(o.stateSince) : null,
     /* G7 BED HISTORY, so a past day's bed count is read from what the registry held that day, not from
      * today. `since` is when the bed was added (ms); every turn off or on appends {active, at}. Only the
      * store writes these; a patch never sets them. */

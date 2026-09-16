@@ -83,6 +83,14 @@ const RESOURCE_TYPES = Object.freeze([
   /* The blood bank's registers (blood-bank.js). A unit's status (quarantine, available, reserved, issued, discarded,
    * expired) is derived from its tests, its events and the transfusion episodes that name it, never stored. */
   "BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent",
+  /* Hospital support services, 2026-09-16. A diet order is a clinical order and versioned like one; a
+   * meal round is the kitchen's prepared/delivered mark for one patient at one meal. CSSD keeps its set
+   * master, its steriliser loads with their indicator results, and one cycle per trip of a set through
+   * the department, so a failed load can be traced to every case its sets reached. A housekeeping task,
+   * an ambulance, a trip and a mortuary case are operational registers kept here for the same reason
+   * as the rest: append-only, so what was done, by whom and when cannot be edited afterwards. */
+  "DietOrder", "MealRound", "InstrumentSet", "SterilizerLoad", "CssdCycle", "HousekeepingTask",
+  "AmbulanceVehicle", "AmbulanceTrip", "MortuaryCase",
   /* Who to ring about this patient. Its own record rather than fields on Patient, because a contact
    * list changes on its own clock and an emergency contact quietly overwritten last month leaves
    * nobody to call at the moment somebody has to be called. Append-only like everything else:

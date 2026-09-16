@@ -279,7 +279,8 @@ export async function updateBed(env, bedId, patch, actorId) {
   const id = sanitize(bedId);
   const raw = await fsGet(env, "q_beds/" + id); if (!raw) return null;
   const cur = M.bed(withId(id, raw.fields));
-  const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId, since: cur.since, activeHistory: cur.activeHistory }));   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
+  const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId, since: cur.since, activeHistory: cur.activeHistory, stateSince: cur.stateSince }));
+  if (f.state !== cur.state) f.stateSince = now();   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
   if (f.active !== cur.active) f.activeHistory = cur.activeHistory.concat([{ active: f.active, at: now() }]);
   try {
     await fsCommit(env, [wUpdate(env, "q_beds/" + id, f, { updateTime: raw.updateTime })]);

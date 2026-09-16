@@ -68,7 +68,7 @@ async function verifyApprovalRef(svc, ref, drug, ctx) {
 }
 import { isActive as emergencyIsActive } from "./emergency-mode.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
-import { getWardByName, getBedByName, updateBed, listWards, listBeds, listDepartments } from "../_opd_org_store.js";
+import { getWardByName, getBedByName, updateBed, listWards, listBeds, listDepartments, getOrg } from "../_opd_org_store.js";
 
 const IPD = "IPD";
 // ICU joined 2026-09-08 (Task 2.2). An admission is still ONE act through this ONE file - a ward
@@ -307,7 +307,12 @@ async function freeMasterBed(env, orgId, wardName, bedName, actorId) {
   try {
     const w = await getWardByName(env, orgId, wardName); if (!w) return;
     const b = await getBedByName(env, orgId, w.id, bedName); if (!b) return;
-    await updateBed(env, b.id, { state: "available" }, actorId);
+    /* A hospital that asks for it (supportServices.housekeepingInspection) sends the vacated bed to cleaning,
+     * which is what raises the housekeeping task (housekeeping.js); it is available again only once that clean
+     * is finished and inspected. Otherwise the bed is freed as it always was. */
+    const org = await getOrg(env, orgId).catch(() => null);
+    const inspect = !!(org && org.wardsynq && org.wardsynq.supportServices && org.wardsynq.supportServices.housekeepingInspection === true);
+    await updateBed(env, b.id, { state: inspect ? "cleaning" : "available" }, actorId);
   } catch {}
 }
 
