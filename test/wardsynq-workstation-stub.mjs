@@ -42,8 +42,14 @@ export async function startStub(port, extraFiles) {
       const drug = String(body && body.order && body.order.drug);
       // The server's own check (functions/_wardsynq/migrate-emar.js orderEntrySafety): a penicillin for this patient is a finding.
       const allergy = /amoxicillin/i.test(drug) ? [{ code: "ALLERGY_CLASS", severity: "contraindicated", disposition: "overridable", message: "Amoxicillin belongs to penicillins, which the patient is documented allergic to (Penicillins).", allergyId: "alg-1" }] : [];
-      const safety = { checked: true, rulePackVersion: "stewardmd-harness", allowed: !allergy.length, blocks: [], overridables: allergy, warnings: [], findings: allergy, unresolvedDrug: false, unresolvedActiveMeds: [] };
+      // Retest 2026-09-16: a second paracetamol on the active one is the same drug (a reason) and, 8 g a day, a hard stop the server refuses.
+      const second = /^paracetamol 1g$/i.test(drug);
+      const dup = second ? [{ code: "SAME_DRUG_ACTIVE", severity: "major", disposition: "overridable", message: "Paracetamol is already active for this patient (Paracetamol 1000 mg QDS). This order would be given as well as that one." }] : [];
+      const blocks = second ? [{ code: "DOSE_ABSOLUTE_CEILING_CUMULATIVE", severity: "contraindicated", disposition: "block", hardStop: true, message: "With the paracetamol already active, this order makes 8000 mg a day, above the daily ceiling for paracetamol (4000 mg)." }] : [];
+      const overridables = allergy.concat(dup);
+      const safety = { checked: true, rulePackVersion: "stewardmd-harness", allowed: !overridables.length && !blocks.length, blocks, overridables, warnings: [], findings: overridables.concat(blocks), hardStops: blocks, unresolvedDrug: false, unresolvedActiveMeds: [] };
       if (body && body.checkOnly === true) return [200, { ok: true, written: 0, checkOnly: true, drug, safety, formulary: "on-formulary" }];
+      if (blocks.length) return [409, { ok: false, error: "safety_hard_stop", detail: blocks[0].message, safety, written: 0 }];
       return [200, { ok: true, written: 1, orderId: "wsq-rx-enc-qa-01-" + drug.toLowerCase(), status: "active", safety }];
     }
     return [404, { ok: false, error: "not_found" }];

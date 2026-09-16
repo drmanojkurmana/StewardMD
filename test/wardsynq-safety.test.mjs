@@ -821,3 +821,29 @@ test("LT-10: doses a day read a frequency exactly as the round schedules it", as
     assert.equal(dosesPerDay(f), perDay(parseFrequency(f)), String(f));
   }
 });
+
+/* ------------------------------------------------------------------ retest 2026-09-16: the same drug twice */
+
+test("retest 2026-09-16: same-drug check - a second active order of the molecule needs a reason, the combined day above the ceiling is a block no override clears", async () => {
+  const pack = await loadStewardMDRulePack();
+  const engine = new SafetyEngine({ rulePack: pack, checks: ["allergy", "interaction", "dose", "renal", "same-drug"] });
+  const order = (drug, value, unit, frequency) => MedicationOrder({ patientId: "p1", drug, dose: { value, unit }, frequency, prescriberId: "dr-1" });
+  const active = [{ drug: "Paracetamol", dose: { value: 1000, unit: "mg" }, frequency: "QDS" }];
+  const codes = (v) => v.findings.map((f) => f.code).sort();
+
+  const live = engine.evaluate({ order: order("Paracetamol 1g", 1000, "mg", "QDS"), activeMeds: active, weightKg: 62 });
+  assert.deepEqual(codes(live), ["DOSE_ABSOLUTE_CEILING_CUMULATIVE", "SAME_DRUG_ACTIVE"], "no 'stacking CNS depressants' for one molecule twice");
+  assert.deepEqual(live.blocks.map((f) => [f.code, f.given.value]), [["DOSE_ABSOLUTE_CEILING_CUMULATIVE", 8000]]);
+  const overridden = engine.evaluate({ order: order("Paracetamol 1g", 1000, "mg", "QDS"), activeMeds: active, weightKg: 62,
+    overrides: ["DOSE_ABSOLUTE_CEILING_CUMULATIVE", "SAME_DRUG_ACTIVE"].map((code) => ({ code, reasonCode: "x", rationale: "x", actorId: "dr-1" })) });
+  assert.equal(overridden.allowed, false, "the ceiling is Category 1");
+  assert.deepEqual(overridden.blocks.map((f) => f.code), ["DOSE_ABSOLUTE_CEILING_CUMULATIVE"]);
+
+  // Inside the ceiling (500 mg BD on 1 g TDS = 4 g): the duplicate only. A PRN is not summed.
+  assert.deepEqual(codes(engine.evaluate({ order: order("Paracetamol", 500, "mg", "BD"), activeMeds: [{ drug: "Paracetamol 1g", dose: { value: 1, unit: "g" }, frequency: "TDS" }], weightKg: 62 })), ["SAME_DRUG_ACTIVE"]);
+  assert.deepEqual(codes(engine.evaluate({ order: order("Paracetamol", 1000, "mg", "PRN"), activeMeds: active, weightKg: 62 })), ["SAME_DRUG_ACTIVE"]);
+  // No other active order of the molecule: nothing from this check.
+  assert.deepEqual(codes(engine.evaluate({ order: order("Paracetamol", 1000, "mg", "QDS"), activeMeds: [], weightKg: 62 })), []);
+  // Without the opt-in (the bedside hook, OPD advisories) the check does not run.
+  assert.deepEqual(new SafetyEngine({ rulePack: pack }).evaluate({ order: order("Paracetamol 1g", 1000, "mg", "QDS"), activeMeds: active, weightKg: 62 }).findings.filter((f) => /SAME_DRUG|CUMULATIVE/.test(f.code)), []);
+});

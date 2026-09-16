@@ -92,7 +92,8 @@ try {
   ok(await waitFor(`return !!document.getElementById("wMoReview");`), "the server's findings are shown before anything is written");
   const r1 = JSON.parse(await ev(`return JSON.stringify(window.__rx);`));
   ok(r1.checkOnly === 1 && r1.written === 0, "one check, no write: " + JSON.stringify(r1));
-  ok(await ev(`return document.getElementById("wMoReview").textContent.indexOf("ALLERGY_CLASS") >= 0;`), "the allergy finding is on screen in the engine's words");
+  // Retest 2026-09-16: headed by what the server does with it, not by the rule code.
+  ok(await ev(`var t = document.getElementById("wMoReview").textContent; return t.indexOf("Needs a reason to proceed Documented penicillin allergy; amoxicillin is a penicillin.") >= 0 && t.indexOf("ALLERGY_CLASS") < 0;`), "the allergy finding is on screen in the engine's words, headed Needs a reason to proceed");
   ok((await value("wMoDrug")) === "Amoxicillin", "the order stays on the form while it is reviewed");
   ok(await click('[data-w-act="moconfirm"]'), "Prescribe anyway pressed with no reason");
   ok(await waitFor(`return document.body.textContent.indexOf("Give a reason to prescribe past these findings") >= 0;`), "a finding that needs a reason is not prescribed without one");

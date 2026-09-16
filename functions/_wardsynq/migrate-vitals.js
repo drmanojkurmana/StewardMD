@@ -227,4 +227,13 @@ async function recordVitals(request, env, ctx) {
   return { ...base, ok, status: ok ? 200 : 403, error: ok ? undefined : "governance", written: written.length, records: written, denied, patientId, actor: resolved.actor.id, role: resolved.role, roleSource: resolved.source };
 }
 
-export { MODES, VITAL_CODES, vitalsMode, patientIdForMrn, vitalsToObservations, vitalsMigration, recordVitals };
+/* PURE. A UCUM unit as a clinician writes it (LT-07, retest 2026-09-16): the record keeps "mm[Hg]" and "Cel", which is
+ * what an interface reads, and a person reads "mmHg" and "°C". Display only; nothing stored is changed. A unit not
+ * listed is shown as recorded. ward.js carries the same list for the flowsheet (it cannot import this file). */
+const UNIT_WORDS = Object.freeze({ "mm[Hg]": "mmHg", Cel: "°C", "[degF]": "°F", "[lb_av]": "lb" });
+function displayUnit(unit) {
+  const u = unit == null ? "" : String(unit);
+  return Object.prototype.hasOwnProperty.call(UNIT_WORDS, u) ? UNIT_WORDS[u] : u;
+}
+
+export { MODES, VITAL_CODES, UNIT_WORDS, displayUnit, vitalsMode, patientIdForMrn, vitalsToObservations, vitalsMigration, recordVitals };

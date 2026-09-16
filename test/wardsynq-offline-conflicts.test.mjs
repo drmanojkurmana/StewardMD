@@ -346,15 +346,21 @@ test("G2 screen: the conflict review shows the entry beside the record now; a di
   assert.equal(calls.length, n0);
   assert.match(W._st.err, /Say why your entry should stand/);
 
+  // Retest 2026-09-16: Discard is confirmed on the ward (askFor), and nothing is sent until its own button.
   W._offlineChoice("off-1111111111111111", "discard");
+  assert.match(W._st.ask.spec.title, /Discard this Ondansetron administer\?/);
+  assert.equal(calls.length, n0, "asking sends nothing");
+  W._dispatch("askok");
   for (let i = 0; i < 10; i++) await tick();
   assert.equal(calls[calls.length - 1].u, "/api/queue/ward/offline-resolve");
   assert.equal(calls[calls.length - 1].body.choice, "discard");
   assert.equal((await dev.list()).length, 1, "the server did not record it, so it is still on the device");
-  assert.match(W._st.err, /could not be recorded/);
+  assert.match(W._st.ask.err, /could not be recorded/, "said in the question, which stays open");
+  W._dispatch("askcancel");
 
   resolveOk = true;
   W._offlineChoice("off-1111111111111111", "discard");
+  W._dispatch("askok");
   for (let i = 0; i < 10; i++) await tick();
   assert.equal((await dev.list()).length, 0);
   assert.match(W._st.note, /Discarded\. It was never in the record/);

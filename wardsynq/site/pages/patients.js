@@ -82,6 +82,9 @@
       var mode = st.org.mode === "wardsynq" ? "native" : (st.org.mode || "native");
       SMD_PATIENTREG.open({
         mode: mode, clinicName: st.org.code || st.org.name || "Check-in", region: st.org.region,
+        /* LT-29: this page registers a patient and queues nobody (onAdded only finds them), so the sheet's OPD verb
+         * "Add to queue" was wrong here, for an ED or inpatient as much as for anyone. */
+        submitLabel: T(c, "site.patients.registerSubmit", "Register patient"),
         submit: function (b) { b.orgId = st.orgId; b.workplaceMode = mode; return c.api("/patient/register", b); },
         onAdded: function (r) {
           var mrn = r && (r.mrn || (r.patient && r.patient.mrn));

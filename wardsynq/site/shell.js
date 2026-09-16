@@ -27,7 +27,10 @@
   function lsSet(k, v) { try { if (v) localStorage.setItem(k, v); else localStorage.removeItem(k); } catch (e) {} }
   function toast(msg) {
     var t = $("wsqToast"); if (!t) { t = document.createElement("div"); t.id = "wsqToast"; document.body.appendChild(t); }
-    t.textContent = msg; t.classList.add("on"); clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove("on"); }, 2600);
+    t.textContent = msg; t.classList.add("on"); clearTimeout(toast._t); clearTimeout(toast._c);
+    // LT-29: a faded toast took its words with it only visually; screen readers and the next screen still read
+    // "Registered SMD-..." at the foot of the ED board. The text goes once the fade has finished.
+    toast._t = setTimeout(function () { t.classList.remove("on"); toast._c = setTimeout(function () { t.textContent = ""; }, 400); }, 2600);
   }
   G.toast = G.toast || toast;
   function when(ms_) { return new Promise(function (r) { setTimeout(r, ms_); }); }

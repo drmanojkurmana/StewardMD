@@ -143,10 +143,42 @@ test("signing is guarded, visually distinct from saving, and warns about what is
   assert.match(html, /class="d-btn sign"/, "the locking act is not styled as another Save");
   assert.match(html, /1 outstanding/, "and the action bar says so where the button is");
 
+  // Retest 2026-09-16: the confirmation is on the screen, not a browser dialog.
   const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
-  assert.match(code, /confirmed\(/, "signing goes through an explicit confirmation");
-  assert.match(code, /CANNOT be edited/, "which states that it is irreversible");
-  assert.match(code, /still outstanding on this stay/, "and repeats what is unresolved at the moment of signing");
+  assert.doesNotMatch(code, /\b(confirm|prompt|alert)\(/, "no native browser dialog");
+  assert.ok(!/data-d-act="askyes"/.test(html), "nothing is asked before Sign is pressed");
+  const asked = W._render(S({ ask: { kind: "sign" }, pending: [{ kind: "dose", id: "m1", status: "verified", orderId: "rx-1", drug: "Paracetamol" }] }));
+  assert.match(asked, /CANNOT be edited/, "the question states that signing is irreversible");
+  assert.match(asked, /There is 1 item still outstanding on this stay/, "and repeats what is unresolved at the moment of signing");
+  assert.match(asked, /data-d-act="askyes"[^>]*>.*Sign and finalise/, "signing needs the question's own button");
+  assert.match(asked, /data-d-act="askno"/, "and it can be cancelled");
+  const revert = W._render(S({ ask: { kind: "revert", arg: "plan" } }));
+  assert.match(revert, /Discard your correction to this section/);
+});
+
+test("retest 2026-09-16: the sign question writes nothing until its own button, and Cancel writes nothing", async () => {
+  const posts = [];
+  const els = new Map();
+  const root = { classList: { add() {}, remove() {}, contains: () => true }, addEventListener(t, fn) { this["on" + t] = fn; }, removeEventListener() {}, querySelector: () => null, innerHTML: "" };
+  const doc = { getElementById: (id) => (id === "smdDischarge" ? root : els.get(id) || null), createElement: () => root, body: { appendChild() {} } };
+  const win = { fetch: (url, o) => { posts.push({ url, body: o && o.body ? JSON.parse(o.body) : null }); return Promise.resolve({ json: () => Promise.resolve({ ok: true, patient: base.patient, encounter: base.encounter, assembled: ASSEMBLED, canAuthor: true, pending: [], stored: { sections: ASSEMBLED, editedSections: [], signed: false, version: 1 } }) }); } };
+  new Function("window", "document", "location", "localStorage", "fetch", SRC)(win, doc, { search: "" }, { getItem: () => null, setItem: () => {} }, win.fetch);
+  const W = win.DISCHARGE;
+  W.open({ orgId: "org-wsq", encounterId: "wsq-adm-1" });
+  await new Promise((r) => setTimeout(r, 20));
+  const click = (act) => root.onclick({ target: { closest: () => ({ getAttribute: () => act }) } });
+  const signs = () => posts.filter((p) => /sign-discharge-summary/.test(p.url)).length;
+  click("sign");
+  assert.equal(W._st.ask && W._st.ask.kind, "sign");
+  assert.match(root.innerHTML, /data-d-act="askyes"/, "the question is on the screen");
+  assert.equal(signs(), 0, "pressing Sign only asks");
+  click("askno");
+  assert.equal(W._st.ask, null);
+  assert.equal(signs(), 0, "Cancel writes nothing");
+  click("sign"); click("askyes");
+  await new Promise((r) => setTimeout(r, 20));
+  assert.equal(signs(), 1, "the question's own button signs");
+  assert.equal(W._st.ask, null);
 });
 
 test("OUTSTANDING WORK IS SHOWN BEFORE SIGN-OFF, and restrained: it says what the discharge will ask for", () => {

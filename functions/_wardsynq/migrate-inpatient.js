@@ -30,7 +30,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { vitalsToObservations, VITAL_CODES } from "./migrate-vitals.js";
+import { vitalsToObservations, VITAL_CODES, displayUnit } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
@@ -597,7 +597,9 @@ function patientInstructionsRefusal(v) {
  * Creates an inpatient medication order. The CDSS check is run HERE, on the server, by the same engine
  * and against the same record facts as the pharmacy queue and the bedside scan (migrate-emar.js
  * orderEntrySafety), and REPORTED, never used to gate: the content is unapproved seed data (see
- * rx-safety.js and seed-signoff.js) and this file does not get to invent a new clinical control.
+ * rx-safety.js and seed-signoff.js) and this file does not get to invent a new clinical control. The one
+ * exception is a dose above an absolute ceiling, alone or summed with the patient's other active orders of
+ * the same molecule (ORDER_ENTRY_HARD_STOPS, retest 2026-09-16): that is refused, 409, nothing written.
  *
  * LT-14: this used to report whatever `safety` verdict the CALLER sent, and the ward screen sent none,
  * so every chart order was saved with `safety: null` and nothing ran. A caller's verdict is no longer
@@ -693,6 +695,12 @@ async function createWardMedicationOrder(request, env, ctx) {
   if (ctx.checkOnly === true) {
     return { ...base, ok: true, written: 0, checkOnly: true, drug: candidate.drug, safety, formulary: fStatus.state,
       ...(advisories.length ? { advisories } : {}), ...(replaces ? { replaces } : {}), actor: resolved.actor.id, role: resolved.role };
+  }
+  /* A hard stop is refused whatever reason comes with it, and nothing is written (orderEntrySafety,
+   * ORDER_ENTRY_HARD_STOPS). Every other finding stays reported and proceeds with a reason. */
+  if (safety.checked && (safety.hardStops || []).length) {
+    return { ...base, ok: false, status: 409, error: "safety_hard_stop", detail: safety.hardStops.map((f) => f.message).join(" "),
+      drug: candidate.drug, safety, ...(replaces ? { replaces } : {}), written: 0, actor: resolved.actor.id, role: resolved.role };
   }
   const overrideReason = str(ctx.overrideReason).slice(0, 500);
   let overrides = [];
@@ -1165,7 +1173,7 @@ const TIMELINE_LABEL = {
     return `${r.class || "Visit"}: ${what}${where}${who ? ` · by ${who}` : ""}`;
   },
   Condition: (r, who) => `${who ? `${who} recorded` : "Recorded"} a diagnosis: ${r.display || r.code}${r.clinicalStatus ? ` (${r.clinicalStatus})` : ""}`,
-  Observation: (r, who) => `${OBSERVATION_NAME[r.code] || r.code}${r.value != null ? `: ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}${who ? ` · by ${who}` : ""}`,
+  Observation: (r, who) => `${OBSERVATION_NAME[r.code] || r.code}${r.value != null ? `: ${r.value}${r.unit ? ` ${displayUnit(r.unit)}` : ""}` : ""}${who ? ` · by ${who}` : ""}`,
   MedicationOrder: (r, who) => `${who ? `${who} prescribed` : "Prescribed"} ${r.drug}${r.dose && r.dose.value != null ? ` ${r.dose.value}${r.dose.unit || ""}` : ""}${r.route ? ` ${r.route}` : ""}${r.frequency ? ` ${r.frequency}` : ""} — ${r.status || "draft"}`,
   MedicationAdministration: (r, who) => `${r.drug || "Medication"} — ${r.status || "ordered"}${r.holdReason ? ` (${r.holdReason})` : ""}${who ? ` · by ${who}` : ""}`,
   /* WHO ASKED FOR IT travels with the order. "Who ordered this chest film, and when" is the first

@@ -6657,3 +6657,25 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
 - The staff identity lookup matched an Access sign-in (`cfa:` + email hash, not readable by id) only against the first
   300 members. `listMembers` now pages 300 at a time ordered by document name (`fsQuery` `startAfter`), ceiling 20
   pages. Every caller (admin staff list, rota, security review) sees every member.
+## 2026-09-16 Order entry refuses an absolute dose ceiling, including one reached across orders (retest 2026-09-16)
+- Retest: a second paracetamol order on top of an active 1 g QDS came back with no finding. The SafetyEngine gains an
+  opt-in `same-drug` check (wardsynq-safety.js `checkSameDrug`), run only by order entry (migrate-emar.js
+  `orderEntrySafety`): `SAME_DRUG_ACTIVE` (overridable) when the molecule is already active on another order, and
+  `DOSE_ABSOLUTE_CEILING_CUMULATIVE` (block) when this order's day plus the other single-molecule orders' days is above
+  `absoluteCeilingDaily` (mass units summed in mg; PRN or unread frequencies and combination products are not summed
+  and are named). The order being replaced (same deterministic id) is excluded, so the chart's replace flow is neither.
+  With the check on, a duplicate-class rule needs two different molecules, so one molecule twice is one finding.
+- The findings stay REPORTED (unapproved seed content) with one exception: `ORDER_ENTRY_HARD_STOPS`
+  (`DOSE_ABSOLUTE_CEILING`, `DOSE_ABSOLUTE_CEILING_DAILY`, `DOSE_ABSOLUTE_CEILING_CUMULATIVE`) are arithmetic on the
+  order, not rule content, and `POST /ward/medication-order` refuses them (409 `safety_hard_stop`, nothing written,
+  whatever reason is sent). Each carries `hardStop: true` and the verdict lists `hardStops`; screens label only those
+  "Hard stop". Every other block or overridable finding is "Needs a reason to proceed", a warning is "Warning".
+  The bedside hook and the OPD advisory do not run `same-drug`.
+## 2026-09-16 Questions before a ward write are asked on the ward, not in browser dialogs
+- ward.js `askFor(spec, run)`: the question and every typed value live in `st.ask` (`data-w-ask`), so a repaint keeps
+  them; Cancel/Escape writes nothing; a blank required field is refused in the dialog; the write's failure is shown in
+  the dialog, which stays open. Used for lab Collect, critical acknowledge (chart, board, inbox), ED bed admit,
+  transfer, and the other clinical writes. discharge.js signs and reverts through an on-screen question (`st.ask`).
+  Native dialogs remain only in MaiK, integration, billing/claims, purchasing and scheduling screens (other lanes).
+- A paint that arrives while a pointer is down inside the ward is held until the pointer comes up (3 s cap), as a
+  paint is held for an open select: a repaint between press and release lost the click (the ED "first triage" miss).

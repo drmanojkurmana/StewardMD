@@ -227,15 +227,15 @@
     var box = outbox();
     var keep = function () {
       if (!box) { st.busy = false; st.err = wT("ward.no-connection-and-this-device-cannot", "{failMsg} No connection, and this device cannot keep it: record it on paper.", { failMsg: failMsg }); paint(); return; }
-      box.enqueue(kind, body, { label: opts.label, patientId: opts.patientId, expectedVersion: opts.expectedVersion }).then(function () {
+      return box.enqueue(kind, body, { label: opts.label, patientId: opts.patientId, expectedVersion: opts.expectedVersion }).then(function () {
         st.busy = false; st.err = ""; st.refusal = null;
         st.note = wT("ward.no-connection-saved-on-this-device", "No connection. {label} saved on this device, not yet sent: it is NOT in the record until it is sent, and it sends when the connection returns.", { label: opts.label });
         if (opts.onKept) opts.onKept();
         paint();
       }, function (e) { st.busy = false; st.err = failMsg + " " + ((e && e.message) || wT("ward.it-could-not-be-kept-on", "It could not be kept on this device")) + "."; paint(); });
     };
-    if (box && !isOnline()) { st.busy = true; paint(); keep(); return; }
-    apiPost(OFF_KIND_PATH[kind], body).then(onAnswer, keep);
+    if (box && !isOnline()) { st.busy = true; paint(); return keep(); }
+    return apiPost(OFF_KIND_PATH[kind], body).then(onAnswer, keep);
   }
 
 
@@ -519,13 +519,15 @@
         o[ks[ks.length - 1]] = String(el.value);
       });
     }
-    if (choice === "discard") {
-      var sure = true;
-      try { sure = G.confirm(wTD("ward.discard-this-it-was-never-in", "Discard this {label}? It was never in the record and it will be gone from this device. Your decision is recorded.", { label: it.label })); } catch (e) {}
-      if (!sure) return;
+    if (choice === "discard" && !(st.ask && st.ask.discardId === id)) {
+      askFor({ icon: "delete", danger: true, ok: wTH("ward.discard", "Discard"),
+        title: wTH("ward.discard-this-it-was-never-in", "Discard this {label}? It was never in the record and it will be gone from this device. Your decision is recorded.", { label: esc(it.label) }, "label", 1) },
+        function () { return offlineChoice(id, choice); });
+      st.ask.discardId = id;
+      return;
     }
     st.busy = true; paint();
-    apiPost("/ward/offline-resolve", { orgId: st.orgId, kind: it.kind, choice: choice, idempotencyKey: it.idempotencyKey, patientId: it.patientId, error: it.error,
+    return apiPost("/ward/offline-resolve", { orgId: st.orgId, kind: it.kind, choice: choice, idempotencyKey: it.idempotencyKey, patientId: it.patientId, error: it.error,
       expectedVersion: it.expectedVersion, currentVersion: it.currentVersion, reason: why, createdAt: it.createdAt })
       .then(function (r) {
         if (!r || !r.ok) { settle(r); if (!st.err && !st.refusal) st.err = wT("ward.your-decision-was-not-recorded-so", "Your decision was not recorded, so nothing changed on this device."); paint(); return; }
@@ -922,7 +924,10 @@
       (state.edMrnLookupErr ? '<p class="w-hint warn">' + ms("error") + esc(state.edMrnLookupErr) + wEnglishOf(state.edMrnLookupErr) + "</p>" : "") +
       (lookup ? '<div class="w-mrn-found"><b>' + esc(lookup.name || lookup.mrn) + "</b><span>" + esc(lookup.mrn) +
         (lookup.ageYears != null ? " &middot; <b>" + esc(lookup.ageYears) + "y</b>" : "") + (lookup.gender ? " &middot; <b>" + esc(lookup.gender) + "</b>" : "") + "</span>" +
-        '<button class="w-btn tiny go" data-w-act="edarriveknown">' + ms("check") + wTH("ward.this-is-the-patient-arrival", "This is the patient - arrival") + "</button></div>" : "") +
+        "</div>" +
+        // LT-29: a known patient arrives with a reason too; the board said "No chief complaint recorded" for every one.
+        "<label class=\"w-f\"><span>" + wTH("ward.chief-complaint", "Chief complaint") + "</span><input id=\"wEdKnownCc\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-chest-pain-since-morning", "e.g. chest pain since morning") + "\"></label>" +
+        '<button class="w-btn tiny go" data-w-act="edarriveknown">' + ms("check") + wTH("ward.this-is-the-patient-arrival", "This is the patient - arrival") + "</button>" : "") +
       "</div>" +
       '<div class="w-sub"><h4>' + ms("person_off") + wTH("ward.unidentified-patient", "Unidentified patient") + "</h4>" +
       '<p class="w-hint">' + ms("info") + wTH("ward.assigns-a-provisional-mrn-emerg-unknown", "Assigns a provisional MRN (EMERG-UNKNOWN or TRAUMA-UNKNOWN), pending identification and a later merge.") + "</p>" +
@@ -2060,7 +2065,14 @@
       // Weight is not decoration: a weight-based dose is REFUSED at the bedside until the ward has
       // actually weighed the patient, and this is where that weight comes from.
       "<p class=\"w-hint\">" + wTH("ward.blank-fields-are-not-recorded-a", "Blank fields are not recorded. A value that is not plainly one number is skipped, never guessed at.") + "</p>" +
-      '<button class="w-btn" data-w-act="vitals">' + ms("save") + wTH("ward.record-vitals", "Record vitals") + "</button></div>";
+      /* LT-07 (retest 2026-09-16): the save took two seconds with nothing to show it was happening, and its answer was a
+       * banner at the top of a long chart. The button says it is saving and cannot be pressed twice; the answer is
+       * said here, under it. */
+      (st.vitalsSaving
+        ? '<button class="w-btn" data-w-act="vitals" disabled aria-busy="true">' + ms("progress_activity") + wTH("ward.recording-vitals", "Recording vitals...") + "</button>"
+        : '<button class="w-btn" data-w-act="vitals">' + ms("save") + wTH("ward.record-vitals", "Record vitals") + "</button>") +
+      (!st.vitalsSaving && st.vitalsSaid ? '<p class="w-hint' + (st.vitalsSaid.ok ? "" : " warn") + '" role="status">' + ms(st.vitalsSaid.ok ? "check_circle" : "error") + esc(st.vitalsSaid.text) + wEnglishOf(st.vitalsSaid.text) + "</p>" : "") +
+      "</div>";
   }
 
   /* THE FLOWSHEET. A grid, not a form: hours across, the hospital's rows down, from the SAME vitals
@@ -2069,6 +2081,29 @@
    * because a blank that looked the same as a normal value would hide exactly the gap a flowsheet
    * exists to show. NEWS2/PEWS sits beside it as a score, never as an escalation: it computes, it
    * pages nobody, and the card says so in the server's own words. */
+  /* LT-07 (retest 2026-09-16): the words a nurse reads, not the record's. UCUM units as written on a chart (the record
+   * keeps "mm[Hg]" and "Cel"; migrate-vitals.js displayUnit is the server's copy of this list), and an incomplete
+   * score names what is missing in the staff language instead of the scorer's parameter codes. */
+  var UNIT_WORDS = { "mm[Hg]": "mmHg", Cel: "°C", "[degF]": "°F", "[lb_av]": "lb" };
+  function unitWord(u) { return HAS(UNIT_WORDS, String(u)) ? UNIT_WORDS[u] : u; }
+  function scoreParamWord(k) {
+    var w = {
+      respiratoryRate: wT("ward.score-param-respiratory-rate", "Respiratory rate"), oxygenSaturation: wT("ward.score-param-oxygen-saturation", "Oxygen saturation"),
+      supplementalOxygen: wT("ward.score-param-supplemental-oxygen", "Oxygen given or not"), systolicBloodPressure: wT("ward.score-param-systolic", "Systolic blood pressure"),
+      pulse: wT("ward.score-param-pulse", "Pulse"), consciousness: wT("ward.score-param-consciousness", "Consciousness (ACVPU)"), temperature: wT("ward.score-param-temperature", "Temperature"),
+      respiratoryEffort: wT("ward.score-param-respiratory-effort", "Breathing effort"), capillaryRefillSeconds: wT("ward.score-param-capillary-refill", "Capillary refill time")
+    };
+    return HAS(w, k) ? w[k] : k;
+  }
+  /* PURE. Why no score: the missing observations by name when the scorer lists them, else the server's own words. */
+  function scoreWhyNot(n) {
+    var sc = n && n.score;
+    if (sc && sc.code === "INCOMPLETE" && (sc.missing || []).length) {
+      return wTH("ward.score-incomplete-not-recorded", "Incomplete. Not recorded: {names}. The partial total of {total} is not a risk assessment and must not be read as one.",
+        { names: esc(sc.missing.map(scoreParamWord).join(", ")), total: esc(sc.total == null ? 0 : sc.total) }, "total", 1);
+    }
+    return esc((sc && sc.reason) || (n && n.note) || wT("ward.not-enough-recorded-to-score", "Not enough recorded to score."));
+  }
   function flowsheetCard(state) {
     var g = state.flowsheet, n = state.news2;
     var grid = !g && state.flowsheetFailed ? '<p class="w-hint warn">' + ms("error") + wTH("ward.the-flowsheet-could-not-be-loaded2", "The flowsheet could not be loaded. Do not read this as nothing charted.", null, "", 1) + "</p>"
@@ -2077,14 +2112,14 @@
       : '<div class="w-flowgrid"><table><thead><tr><th>' + (g.hours || []).map(function (h) { return "<th>" + when(h).replace(/^.* /, "") + "</th>"; }).join("").replace(/^<th>/, "") +
         '</tr></thead><tbody>' + g.rows.map(function (r) {
           return "<tr><th>" + esc(r.label) + "</th>" + r.cells.map(function (c) {
-            return "<td" + (c.empty ? ' class="empty"' : c.backfilled ? ' class="late"' : "") + ">" + (c.empty ? "&ndash;" : esc(c.value) + (c.unit ? " " + esc(c.unit) : "")) + "</td>";
+            return "<td" + (c.empty ? ' class="empty"' : c.backfilled ? ' class="late"' : "") + ">" + (c.empty ? "&ndash;" : esc(c.value) + (c.unit ? " " + esc(unitWord(c.unit)) : "")) + "</td>";
           }).join("") + "</tr>";
         }).join("") + "</tbody></table></div>" +
         (g.backfillReading ? '<p class="w-hint warn">' + ms("warning") + esc(g.backfillReading) + "</p>" : "") +
         (g.note ? '<p class="w-hint">' + ms("info") + esc(g.note) + "</p>" : "");
 
     var score = !n ? "" : !n.score || n.score.scorable === false
-      ? '<div class="w-news2 na"><b>' + esc(n.tool || "NEWS2") + "</b><span>" + esc((n.score && n.score.reason) || n.note || wT("ward.not-enough-recorded-to-score", "Not enough recorded to score.")) + "</span></div>"
+      ? '<div class="w-news2 na"><b>' + esc(n.tool || "NEWS2") + "</b><span>" + scoreWhyNot(n) + "</span></div>"
       : '<div class="w-news2 risk-' + esc(n.score.risk || "low") + '"><b>' + esc(n.score.total) + "</b><span>" + wTH("ward.risk", "{tool} &middot; {risk} risk", { tool: esc(n.tool), risk: esc(n.score.risk || "") }, "tool") + "</span>" +
         // A NEWS2 score is computed, never stored (news2-view.js), so there is no escalation record to link:
         // the signal names the patient and the deterioration category instead.
@@ -2206,10 +2241,15 @@
    * gets one, attributed on the server to whoever is signed in. */
   function medOrderReview(rv) {
     var sf = rv.safety || {};
-    var li = function (f, cls) { return '<li class="w-st ' + cls + '"><b lang="en">' + esc(f.code) + "</b> <span lang=\"en\">" + esc(f.message || "") + "</span></li>"; };
-    var rows = (sf.blocks || []).map(function (f) { return li(f, "overdue"); })
-      .concat((sf.overridables || []).map(function (f) { return li(f, "overdue"); }), (sf.warnings || []).map(function (f) { return li(f, "due"); })).join("");
-    var needReason = !!((sf.blocks || []).length || (sf.overridables || []).length);
+    /* Retest 2026-09-16: each finding is headed by what the server does with it, never by its code. Hard stop
+     * only for what the server refuses (hardStop, migrate-emar.js ORDER_ENTRY_HARD_STOPS); then no Prescribe
+     * anyway at all. */
+    var stops = (sf.blocks || []).filter(function (f) { return f.hardStop; });
+    var li = function (f, cls, word) { return '<li class="w-st ' + cls + '"><b>' + word + "</b> <span lang=\"en\">" + esc(f.message || f.code) + "</span></li>"; };
+    var reasonWord = wTH("ward.needs-a-reason-to-proceed", "Needs a reason to proceed");
+    var rows = (sf.blocks || []).map(function (f) { return li(f, "overdue", f.hardStop ? wTH("ward.hard-stop", "Hard stop") : reasonWord); })
+      .concat((sf.overridables || []).map(function (f) { return li(f, "overdue", reasonWord); }), (sf.warnings || []).map(function (f) { return li(f, "due", wTH("ward.warning-heading", "Warning")); })).join("");
+    var needReason = !stops.length && !!((sf.blocks || []).length || (sf.overridables || []).length);
     return '<div class="w-sub warn" id="wMoReview" role="alert"><h4>' + ms("health_and_safety") + wTH("ward.safety-check-before-prescribing", "Safety check before prescribing {drug}", { drug: esc(rv.order.drug) }, "drug", 1) + "</h4>" +
       (sf.checked === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.the-safety-check-could-not-run", "The safety check could not run, so nothing about this order was checked.", null, "", 1) + "</p>" : "") +
       (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") +
@@ -2217,7 +2257,8 @@
       ((sf.unresolvedActiveMeds || []).length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.not-checked-against", "Not checked against: {drugs}", { drugs: esc(sf.unresolvedActiveMeds.join(", ")) }, "drugs", 1) + "</p>" : "") +
       (rv.replaces ? '<p class="w-hint warn">' + ms("swap_horiz") + wTH("ward.this-replaces-the-active-order", "This replaces the active order for this drug ({dose} {frequency}).", { dose: dose(rv.replaces.dose), frequency: esc(rv.replaces.frequency || "") }, "dose frequency", 1) + "</p>" : "") +
       (needReason ? "<label class=\"w-f\"><span>" + wTH("ward.reason-for-prescribing-anyway", "Reason for prescribing anyway (required)") + "</span><input id=\"wMoOverride\" type=\"text\" autocomplete=\"off\"></label>" : "") +
-      '<div class="w-actions"><button class="w-btn warn" data-w-act="moconfirm">' + ms("send") + wTH("ward.prescribe-anyway", "Prescribe anyway") + "</button>" +
+      (stops.length ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-server-refuses-this-order-whatever", "The server refuses this order whatever the reason. Change the dose, the frequency or the drug.", null, "", 1) + "</p>" : "") +
+      '<div class="w-actions">' + (stops.length ? "" : '<button class="w-btn warn" data-w-act="moconfirm">' + ms("send") + wTH("ward.prescribe-anyway", "Prescribe anyway") + "</button>") +
       '<button class="w-btn ghost" data-w-act="mocancel">' + ms("edit") + wTH("ward.change-the-order", "Change the order") + "</button></div></div>";
   }
 
@@ -2964,7 +3005,9 @@
         "</div>" +
         (b.complete
           ? '<p class="w-hint">' + ms("check_circle") + wTH("ward.every-hour-of-this-period-has", "Every hour of this period has an entry.") + "</p>"
-          : '<p class="w-hint warn">' + ms("error") + wTH("ward.of-the-last-hours-have-nothing", "{length} of the last {v} hours have nothing charted. Read this balance as incomplete.", { length: esc(b.gaps.length), v: esc(b.gaps.length + b.hours.length) }, "length v") + "</p>");
+          : '<p class="w-hint warn">' + ms("error") + (state.balanceSinceAdmission
+            ? wTH("ward.of-the-hours-since-admission-have-nothing", "{length} of the {v} hours since admission have nothing charted. Read this balance as incomplete.", { length: esc(b.gaps.length), v: esc(b.gaps.length + b.hours.length) }, "length v")
+            : wTH("ward.of-the-last-hours-have-nothing", "{length} of the last {v} hours have nothing charted. Read this balance as incomplete.", { length: esc(b.gaps.length), v: esc(b.gaps.length + b.hours.length) }, "length v")) + "</p>");
     var curDir = state.fluidDir === "output" ? "output" : "intake";
     return '<div class="w-card"><div class="w-card-h">' + ms("water_drop") + "<h3>" + wTH("ward.fluid-balance", "Fluid balance") + "</h3>" +
       "<button class=\"w-ic\" data-w-act=\"balance\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
@@ -6127,7 +6170,7 @@
     var vitals = sc && sc.scorable !== false && sc.total != null
       ? "<p><b>" + wTH("ward.early-warning-score", "Early warning score {total}", { total: esc(sc.total) }, "total", 1) + "</b>" + (sc.risk ? " <span class=\"w-st\">" + esc(sc.risk) + "</span>" : "") + "</p>"
       : sc && sc.scorable === false
-      ? "<p><span class=\"w-st escalate\">" + wTH("ward.incomplete-some-observations-were-never-recorded", "incomplete - some observations were never recorded") + "</span> " + esc(sc.reason || n.note || "") + "</p>"
+      ? "<p><span class=\"w-st escalate\">" + wTH("ward.incomplete-some-observations-were-never-recorded", "incomplete - some observations were never recorded") + "</span> " + scoreWhyNot(n) + "</p>"
       : "<p class=\"w-empty\">" + wTH("ward.no-score-yet", "No score yet.") + "</p>";
 
     var people = state.people;
@@ -8047,7 +8090,68 @@
         : state.view === "trends" ? trendsView(state)
         : state.view === "scheduling" ? schedulingView(state)
         : state.view === "cashier" ? cashierView(state)
-        : listView(state)) + "</div></div>";
+        : listView(state)) + "</div>" + askView(state) + "</div>";
+  }
+
+  /* QUESTIONS BEFORE A WRITE ARE ASKED ON THE WARD, NOT IN A BROWSER DIALOG (retest 2026-09-16). prompt() and
+   * confirm() before a clinical write were blocked outright in phone WebViews, lost what was typed the moment they
+   * closed, showed a failure only after the question had gone, and could not be read as part of the ward. askFor()
+   * is the in-app pattern the discharge and follow-up forms set (LT-17), for any question:
+   *   - the question and every typed value live in st.ask (data-w-ask), so a repaint of the ward keeps them;
+   *   - Cancel, Escape or closing the ward writes nothing: the write runs only from the dialog's own button;
+   *   - a required field left blank is said in the dialog, and nothing is sent;
+   *   - the write's failure (what it left in st.err or st.refusal) is shown IN the dialog, which stays open with
+   *     what was typed; only a write that did not fail closes it, and its success is the ward's usual note.
+   * spec: { title (markup, translated), text? (markup), icon?, ok (markup), danger?,
+   *         fields?: [{ key, label (markup), type?: "text" | "textarea" | "select" | "date" | "datetime",
+   *                     options?: [[value, label markup]], required?: message, value?, placeholder? }] }
+   * run(values) starts the write with the trimmed values and returns its promise. */
+  function askFor(spec, run) {
+    var values = {};
+    (spec.fields || []).forEach(function (f) { values[f.key] = f.value == null ? "" : String(f.value); });
+    st.ask = { spec: spec, values: values, err: "", busy: false, run: run };
+    paint();
+    var first = typeof document !== "undefined" && document.querySelector && document.querySelector("#smdWard .w-ask [data-w-ask], #smdWard .w-ask [data-w-act=askok]");
+    if (first) { try { first.focus(); } catch (e) {} }
+  }
+  function askCancel() { if (st.ask && !st.ask.busy) { st.ask = null; paint(); } }
+  function askSubmit() {
+    var a = st.ask; if (!a || a.busy) return;
+    var v = {};
+    Object.keys(a.values).forEach(function (k) { v[k] = String(a.values[k] == null ? "" : a.values[k]).trim(); });
+    var missing = (a.spec.fields || []).filter(function (f) { return f.required && !v[f.key]; })[0];
+    if (missing) { a.err = missing.required; paint(); return; }
+    a.err = ""; a.busy = true; st.err = ""; st.refusal = null;
+    var done = function (failed) {
+      if (st.ask !== a) return;
+      a.busy = false;
+      var ref = st.refusal;
+      var why = failed || st.err || (ref ? [ref.detail].concat((ref.reasons || []).map(function (r) { return typeof r === "string" ? r : (r && (r.message || r.code)) || ""; })).filter(Boolean).join(" ") || wT("ward.refused", "Refused") : "");
+      if (why) { a.err = why; st.err = ""; st.refusal = null; }
+      else st.ask = null;
+      paint();
+    };
+    var p;
+    try { p = a.run(v); } catch (e) { done(wT("ward.could-not-record-that", "Could not record that.")); return; }
+    Promise.resolve(p).then(function () { done(); }, function () { done(wT("ward.could-not-record-that", "Could not record that.")); });
+  }
+  /* PURE. The open question, over the ward. */
+  function askView(state) {
+    var a = state.ask; if (!a) return "";
+    var s = a.spec, dis = a.busy ? " disabled" : "";
+    var fields = (s.fields || []).map(function (f) {
+      var id = "wAsk_" + f.key, v = a.values[f.key] == null ? "" : a.values[f.key], at = ' id="' + esc(id) + '" data-w-ask="' + esc(f.key) + '"' + dis;
+      var input = f.type === "textarea" ? '<textarea rows="3"' + at + ">" + esc(v) + "</textarea>"
+        : f.type === "select" ? "<select" + at + ">" + (f.options || []).map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === v ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select>"
+        : '<input type="' + (f.type === "date" ? "date" : f.type === "datetime" ? "datetime-local" : "text") + '" autocomplete="off"' + at + ' value="' + esc(v) + '"' + (f.placeholder ? ' placeholder="' + esc(f.placeholder) + '"' : "") + ">";
+      return '<label class="w-f"><span>' + f.label + "</span>" + input + "</label>";
+    }).join("");
+    return '<div class="w-ask"><div class="w-card" role="dialog" aria-modal="true" aria-labelledby="wAskTitle">' +
+      '<div class="w-card-h">' + ms(s.icon || "help") + '<h3 id="wAskTitle">' + String(s.title).replace(/\n+/g, "<br>") + "</h3></div>" +
+      (s.text ? "<p>" + String(s.text).replace(/\n+/g, "<br>") + "</p>" : "") + fields +
+      (a.err ? '<p class="w-hint warn" role="alert">' + ms("error") + esc(a.err) + wEnglishOf(a.err) + "</p>" : "") +
+      '<div class="w-actions"><button class="w-btn ' + (s.danger ? "warn" : "go") + '" data-w-act="askok"' + dis + ">" + ms(a.busy ? "progress_activity" : "check") + s.ok + "</button>" +
+      '<button class="w-btn ghost" data-w-act="askcancel"' + dis + ">" + wTH("ward.cancel", "Cancel") + "</button></div></div></div>";
   }
 
   // ---- controller --------------------------------------------------------------------------
@@ -8103,7 +8207,17 @@
     // After the change handlers have read the select's value, never before.
     if (_paintHeld) setTimeout(flushHeldPaint, 0);
   }
-  function flushHeldPaint() { if (_paintHeld && !selectIsOpen()) paint(); }
+  function flushHeldPaint() { if (_paintHeld && !selectIsOpen() && !pressHeld()) paint(); }
+  /* LT-29 (retest 2026-09-16): A PRESS IS NEVER SPLIT BY A REPAINT. A click is a press and a release on the SAME element;
+   * a late read that repainted between the two put the release on a new copy of the button, so no click happened at all.
+   * That is how the first Acuity and "Record triage" on a just-opened ED patient did nothing while the chart's reads
+   * were still landing. A paint that arrives while a pointer is down inside the ward is held until it comes up (after
+   * the click has been handled), as a paint is held for an open select. ponytail: capped at 3 s, so a release the
+   * browser never reports cannot freeze the screen. Typed values are kept across the repaint by typedRestore. */
+  var _pressAt = 0;
+  function pressHeld() { return !!_pressAt && Date.now() - _pressAt < 3000; }
+  function onPressStart(e) { if (!e || !e.button) { _pressAt = Date.now(); setTimeout(flushHeldPaint, 3050); } }
+  function onPressEnd() { if (!_pressAt) return; _pressAt = 0; if (_paintHeld) setTimeout(flushHeldPaint, 0); }
   /* LT-06 / LT-12: TYPING SURVIVES A REPAINT. Opening a chart starts about ten reads and every one of
    * them repaints when it lands, the slow ones seconds later; each repaint rebuilt the screen and emptied
    * whatever a nurse or doctor had half typed (vitals, a medication order) while focus stayed in the box.
@@ -8141,7 +8255,7 @@
     }
   }
   function paint() {
-    if (selectIsOpen()) { _paintHeld = true; return; }
+    if (selectIsOpen() || pressHeld()) { _paintHeld = true; return; }
     _paintHeld = false;
     var canvas = document.getElementById("wCanvas");
     var cy = canvas ? canvas.scrollTop : 0;
@@ -8249,10 +8363,13 @@
     /* LT-29: one click on a free bed admitted the ED patient at once, while a ward transfer asks first; a mis-click put
      * the patient in the wrong bed. The same confirmation as transferTo. */
     if (st.edAdmitPending) {
-      var sure = false;
-      try { sure = G.confirm(wTD("ward.admit-to-bed-confirm", "Admit {name} to {ward}, bed {bed}?", { name: (st.sel && (st.sel.name || st.sel.mrn)) || wT("ward.this-patient2", "this patient"), ward: ward, bed: bed || "" })); } catch (e) { sure = false; }
-      if (!sure) return;
-      st.edAdmitPending = false; edDispose("admitted", { admission: { ward: ward, bed: bed } }); return;
+      askFor({ icon: "bed", ok: wTH("ward.admit", "Admit"),
+        title: wTH("ward.admit-to-bed-confirm", "Admit {name} to {ward}, bed {bed}?", { name: esc((st.sel && (st.sel.name || st.sel.mrn)) || wT("ward.this-patient2", "this patient")), ward: esc(ward), bed: esc(bed || "") }, "name ward bed", 1) },
+        function () {
+          // Still pending only until the server has admitted: a refused admission leaves the bed choice open.
+          return edDispose("admitted", { admission: { ward: ward, bed: bed } });
+        });
+      return;
     }
     if (st.transferPending && st.sel) { transferTo(ward, bed); return; }
     st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; st.admitClass = ""; st.emergencyOverride = false; paint();
@@ -8377,7 +8494,7 @@
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-arrival", "Could not record the arrival."); paint(); });
   }
-  function edArriveKnown() { if (st.edMrnLookup) edArrive({ mrn: st.edMrnLookup.mrn }); }
+  function edArriveKnown() { if (st.edMrnLookup) edArrive({ mrn: st.edMrnLookup.mrn, chiefComplaint: val("wEdKnownCc") || undefined }); }
   function edArriveUnknown() {
     var sex = val("wEdSex"), cc = val("wEdUnkCc");
     edArrive({ unknown: { sex: sex, isTrauma: checked("wEdIsTrauma") }, chiefComplaint: cc || undefined });
@@ -8459,31 +8576,35 @@
       .then(function (r) { st.busy = false; if (r && r.ok) st.limitResult = r.result; else settle(r, null); paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-work-out-the-maximum", "Could not work out the maximum."); paint(); });
   }
+  /* One required answer, asked on the ward (askFor), before a write that needs it. */
+  function askReason(question, required, ok, run, opts) {
+    askFor({ title: question, icon: (opts && opts.icon) || "edit_note", ok: ok || wTH("ward.record2", "Record"), danger: !!(opts && opts.danger), text: opts && opts.text,
+      fields: [{ key: "reason", type: (opts && opts.type) || "textarea", label: (opts && opts.label) || question, required: required, placeholder: opts && opts.placeholder }] },
+      function (v) { return run(v.reason); });
+  }
   function resusWaive(bundleId, key) {
-    var reason = "";
-    try { reason = G.prompt(wTD("ward.why-is-this-not-appropriate-for", "Why is this not appropriate for this patient?")) || ""; } catch (e) { return; }
-    if (!reason.trim()) { st.err = wT("ward.a-waiver-needs-a-clinical-reason", "A waiver needs a clinical reason."); paint(); return; }
-    st.busy = true; paint();
-    apiPost("/ward/resus-waive", { orgId: st.orgId, bundleId: bundleId, key: key, reason: reason.trim() })
-      .then(function (r) { if (settle(r, wT("ward.recorded-as-not-appropriate", "Recorded as not appropriate."))) loadResus(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    askReason(wTH("ward.why-is-this-not-appropriate-for", "Why is this not appropriate for this patient?", null, "", 1), wT("ward.a-waiver-needs-a-clinical-reason", "A waiver needs a clinical reason."), null, function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/resus-waive", { orgId: st.orgId, bundleId: bundleId, key: key, reason: reason })
+        .then(function (r) { if (settle(r, wT("ward.recorded-as-not-appropriate", "Recorded as not appropriate."))) loadResus(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    });
   }
   function resusMark(bundleId, key) {
-    var event = "";
-    try { event = G.prompt(wTD("ward.what-actually-happened-e-g-resulted", "What actually happened (e.g. resulted, collected, administered)?")) || ""; } catch (e) { return; }
-    if (!event.trim()) { st.err = wT("ward.say-what-actually-happened-ordering-a", "Say what actually happened - ordering a thing is not doing it."); paint(); return; }
-    st.busy = true; paint();
-    apiPost("/ward/resus-mark", { orgId: st.orgId, bundleId: bundleId, key: key, event: event.trim() })
-      .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadResus(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-mark-that-element", "Could not mark that element."); paint(); });
+    askReason(wTH("ward.what-actually-happened-e-g-resulted", "What actually happened (e.g. resulted, collected, administered)?", null, "", 1), wT("ward.say-what-actually-happened-ordering-a", "Say what actually happened - ordering a thing is not doing it."), null, function (event) {
+      st.busy = true; paint();
+      return apiPost("/ward/resus-mark", { orgId: st.orgId, bundleId: bundleId, key: key, event: event })
+        .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadResus(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-mark-that-element", "Could not mark that element."); paint(); });
+    });
   }
   function resusVoid(bundleId) {
-    var reason = ""; try { reason = G.prompt(wTD("ward.why-is-this-bundle-being-voided", "Why is this bundle being voided?")) || ""; } catch (e) { return; }
-    if (!reason.trim()) { st.err = wT("ward.voiding-a-bundle-needs-a-reason", "Voiding a bundle needs a reason."); paint(); return; }
-    st.busy = true; paint();
-    apiPost("/ward/resus-void", { orgId: st.orgId, bundleId: bundleId, reason: reason.trim() })
-      .then(function (r) { if (settle(r, wT("ward.voided", "Voided."))) loadResus(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-void-the-bundle", "Could not void the bundle."); paint(); });
+    askReason(wTH("ward.why-is-this-bundle-being-voided", "Why is this bundle being voided?", null, "", 1), wT("ward.voiding-a-bundle-needs-a-reason", "Voiding a bundle needs a reason."), wTH("ward.void", "Void"), function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/resus-void", { orgId: st.orgId, bundleId: bundleId, reason: reason })
+        .then(function (r) { if (settle(r, wT("ward.voided", "Voided."))) loadResus(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-void-the-bundle", "Could not void the bundle."); paint(); });
+    }, { danger: true });
   }
   // ---- ICU device association (HAZ-DEV-01) --------------------------------------------------
   function loadDevices() {
@@ -9215,10 +9336,9 @@
       .catch(function () { st.critsBoard = false; paint(); });
   }
   function acknowledgeBoard(loopId) {
-    var why = ""; try { why = G.prompt(wTD("ward.what-did-you-do-about-this", "What did you do about this result?")) || ""; } catch (e) {}
-    if (!why.trim()) { st.err = wT("ward.an-acknowledgement-records-what-was-done", "An acknowledgement records what was done. It needs a sentence."); paint(); return; }
+    askAcknowledge(function (why) {
     st.busy = true; paint();
-    apiPost("/ward/acknowledge", { orgId: st.orgId, loopId: loopId, action: why.trim() })
+    return apiPost("/ward/acknowledge", { orgId: st.orgId, loopId: loopId, action: why })
       /* Acknowledging reloads whichever list the person is actually looking at. The same action is
        * reachable from the criticals board and from the safety inbox, and reloading the board from
        * the inbox would leave the row the person just acted on still sitting there. */
@@ -9228,6 +9348,7 @@
         } else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-acknowledgement", "Could not record the acknowledgement."); paint(); });
+    });
   }
   function cashierOpen() {
     st.view = "cashier"; st.cashier = {}; paint();
@@ -9690,27 +9811,28 @@
   }
   function txReaction() {
     var picked = st.transfusion && st.transfusion.pickedEpisodeId; if (!picked) return;
-    var detail = ""; try { detail = G.prompt(wTD("ward.describe-the-reaction", "Describe the reaction:")) || ""; } catch (e) {}
-    if (!detail.trim()) return;
-    st.busy = true; paint();
-    apiPost("/ward/transfusion-reaction", { orgId: st.orgId, episodeId: picked, detail: detail.trim() })
-      .then(function (r) { if (settle(r, wT("ward.stopped-reaction-recorded", "STOPPED. Reaction recorded."))) loadTransfusion(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-reaction", "Could not record the reaction."); paint(); });
+    askReason(wTH("ward.describe-the-reaction", "Describe the reaction:", null, "", 1), wT("ward.describe-the-reaction", "Describe the reaction:"), null, function (detail) {
+      st.busy = true; paint();
+      return apiPost("/ward/transfusion-reaction", { orgId: st.orgId, episodeId: picked, detail: detail })
+        .then(function (r) { if (settle(r, wT("ward.stopped-reaction-recorded", "STOPPED. Reaction recorded."))) loadTransfusion(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-reaction", "Could not record the reaction."); paint(); });
+    }, { icon: "bloodtype", danger: true });
   }
   function edDispose(disposition, extra) {
-    var s = st.sel; if (!s) return;
+    var s = st.sel; if (!s) return Promise.resolve();
     st.busy = true; paint();
-    apiPost("/ward/ed-disposition", Object.assign({ orgId: st.orgId, encounterId: s.encounterId, disposition: disposition }, extra || {}))
+    return apiPost("/ward/ed-disposition", Object.assign({ orgId: st.orgId, encounterId: s.encounterId, disposition: disposition }, extra || {}))
       .then(function (r) {
         if (r && r.error === "bed_occupied") { st.busy = false; st.err = r.detail; paint(); return; }
-        if (settle(r, r && r.disposition ? wT("ward.disposition", "Disposition: {disposition}.", { disposition: r.disposition }) : wT("ward.already-closed", "Already closed."))) { st.sel = null; st.view = "ed"; loadEd(); }
+        if (settle(r, r && r.disposition ? wT("ward.disposition", "Disposition: {disposition}.", { disposition: r.disposition }) : wT("ward.already-closed", "Already closed."))) { st.edAdmitPending = false; st.sel = null; st.view = "ed"; loadEd(); }
         else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-disposition", "Could not record the disposition."); paint(); });
   }
   function edDispositionHome(disposition) {
-    var reason = ""; try { reason = G.prompt(wTD("ward.reason-for-this-disposition-optional", "Reason for this disposition (optional):")) || ""; } catch (e) {}
-    edDispose(disposition, reason.trim() ? { reason: reason.trim() } : {});
+    askFor({ title: wTH("ward.disposition", "Disposition: {disposition}.", { disposition: esc(disposition) }, "disposition"), icon: "logout", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "reason", type: "textarea", label: wTH("ward.reason-for-this-disposition-optional", "Reason for this disposition (optional):") }] },
+      function (v) { return edDispose(disposition, v.reason ? { reason: v.reason } : {}); });
   }
   /* Admitting an ED patient reuses the SAME bed board an inpatient admission uses - the disposition
    * itself fires only once a real bed is picked from it, exactly as any other admission does. */
@@ -9736,16 +9858,18 @@
   }
   function transferTo(ward, bedIn) {
     var s = st.sel; if (!s || !ward) return;
-    var bed = bedIn || "", override = false;
+    var bed = bedIn || "";
     var emergencyActive = st.emergency && (st.emergency.active || []).some(function (a) { return (a.relaxations || []).indexOf("bed-assignment-conflict-override") >= 0; });
-    try {
-      if (!G.confirm(bed ? wTD("ward.transfer-to-bed", "Transfer to {ward}, bed {bed}?", { ward: ward, bed: bed }) : wTD("ward.transfer-to-no-bed", "Transfer to {ward}, no bed yet?", { ward: ward }))) return;
-      if (emergencyActive && bed) {
-        override = /^y/i.test(G.prompt(wTD("ward.emergency-bed-override-prompt", "A declared emergency permits admitting past a blocked/cleaning/maintenance/reserved bed. Use that here? (y/N)"), "") || "");
-      }
-    } catch (e) { return; }
+    askFor({ icon: "move_up", ok: wTH("ward.transfer", "Transfer"),
+      title: bed ? wTH("ward.transfer-to-bed", "Transfer to {ward}, bed {bed}?", { ward: esc(ward), bed: esc(bed) }, "ward bed", 1) : wTH("ward.transfer-to-no-bed", "Transfer to {ward}, no bed yet?", { ward: esc(ward) }, "ward", 1),
+      fields: emergencyActive && bed ? [{ key: "override", type: "select", value: "no", label: wTH("ward.emergency-bed-override-prompt", "A declared emergency permits admitting past a blocked/cleaning/maintenance/reserved bed. Use that here? (y/N)"),
+        options: [["no", wTH("ward.no", "No")], ["yes", wTH("ward.yes", "Yes")]] }] : [] },
+      function (v) { return transferSend(ward, bed, v.override === "yes"); });
+  }
+  function transferSend(ward, bed, override) {
+    var s = st.sel; if (!s) return Promise.resolve();
     st.busy = true; paint();
-    apiPost("/ward/transfer", { orgId: st.orgId, encounterId: s.encounterId, ward: ward.trim(), bed: bed.trim(), emergencyOverride: override })
+    return apiPost("/ward/transfer", { orgId: st.orgId, encounterId: s.encounterId, ward: ward.trim(), bed: bed.trim(), emergencyOverride: override })
       .then(function (r) {
         if (r && r.error === "bed_occupied") {
           st.busy = false;
@@ -9760,12 +9884,21 @@
   }
   /* The balance window is the last 12 hours: a shift. Recomputed each load rather than stored, so a
    * chart opened at the end of a shift shows that shift and not a stale window. */
+  /* PURE. LT-07 (retest 2026-09-16): the window starts at admission when the stay is younger than a shift. A patient
+   * admitted two minutes earlier was told "13 of the last 13 hours have nothing charted", eleven of them hours they
+   * were not on the ward. */
+  function balanceWindow(sel, nowMs) {
+    var to = nowMs, shift = to - 12 * 3600000;
+    var began = Date.parse((sel && (sel.admittedAt || sel.arrivedAt)) || "");
+    var since = isFinite(began) && began > shift && began < to;
+    return { from: new Date(since ? began : shift).toISOString(), to: new Date(to).toISOString(), sinceAdmission: since };
+  }
   function loadBalance() {
     var s = st.sel; if (!s) return Promise.resolve();
-    var to = new Date(), from = new Date(to.getTime() - 12 * 3600000);
+    var w = balanceWindow(s, Date.now());
     return apiGet("/ward/balance?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId) +
-      "&from=" + encodeURIComponent(from.toISOString()) + "&to=" + encodeURIComponent(to.toISOString()))
-      .then(function (r) { if (st.sel !== s) return; st.balanceFailed = !(r && r.ok); if (r && r.ok) st.balance = r.balance; paint(); })
+      "&from=" + encodeURIComponent(w.from) + "&to=" + encodeURIComponent(w.to))
+      .then(function (r) { if (st.sel !== s) return; st.balanceFailed = !(r && r.ok); if (r && r.ok) { st.balance = r.balance; st.balanceSinceAdmission = w.sinceAdmission; } paint(); })
       .catch(function () { if (st.sel !== s) return; st.balanceFailed = true; paint(); });
   }
   function chartFluid() {
@@ -9787,13 +9920,19 @@
       else paint();
     }, wT("ward.could-not-chart-that", "Could not chart that."));
   }
+  /* The question an acknowledgement asks, the same on the chart, the critical results board and the safety inbox. */
+  function askAcknowledge(send) {
+    askFor({ title: wTH("ward.acknowledge", "Acknowledge"), icon: "notification_important", ok: wTH("ward.acknowledge", "Acknowledge"), fields: [
+      { key: "why", type: "textarea", label: wTH("ward.what-did-you-do-about-this", "What did you do about this result?"), required: wT("ward.an-acknowledgement-records-what-was-done", "An acknowledgement records what was done. It needs a sentence.") }
+    ] }, function (v) { return send(v.why); });
+  }
   function acknowledge(loopId) {
-    var why = ""; try { why = G.prompt(wTD("ward.what-did-you-do-about-this", "What did you do about this result?")) || ""; } catch (e) {}
-    if (!why.trim()) { st.err = wT("ward.an-acknowledgement-records-what-was-done", "An acknowledgement records what was done. It needs a sentence."); paint(); return; }
+    askAcknowledge(function (why) {
     st.busy = true; paint();
-    apiPost("/ward/acknowledge", { orgId: st.orgId, loopId: loopId, action: why.trim() })
+    return apiPost("/ward/acknowledge", { orgId: st.orgId, loopId: loopId, action: why })
       .then(function (r) { if (settle(r, wT("ward.acknowledged", "Acknowledged."))) loadChart(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-acknowledgement", "Could not record the acknowledgement."); paint(); });
+    });
   }
   /* A datetime-local value ("YYYY-MM-DDTHH:mm") for an instant, in the BROWSER's clock, which is
    * what the input shows and what the nurse reads. The hospital's own round times come from the
@@ -9947,14 +10086,14 @@
    * asked for as a real safeguard, not a formality - the server refuses the collection outright if
    * it does not match the order's own patient (wrong-patient collection blocked). */
   function collectSpecimen(serviceRequestId) {
-    var specimenType = "", scanned = "";
-    try {
-      specimenType = G.prompt(wTD("ward.specimen-type-e-g-whole-blood", "Specimen type (e.g. Whole blood, Serum, Urine):")) || "";
-      if (!specimenType.trim()) return;
-      scanned = G.prompt(wTD("ward.scan-or-enter-the-patient-s", "Scan or enter the patient's wristband barcode/MRN, to confirm this is the right patient:")) || "";
-    } catch (e) { return; }
+    askFor({ title: wTH("ward.collect", "Collect"), icon: "colorize", ok: wTH("ward.collect", "Collect"), fields: [
+      { key: "specimenType", label: wTH("ward.specimen-type-e-g-whole-blood", "Specimen type (e.g. Whole blood, Serum, Urine):"), required: wT("ward.say-which-specimen-was-taken", "Say which specimen was taken.") },
+      { key: "scanned", label: wTH("ward.scan-or-enter-the-patient-s", "Scan or enter the patient's wristband barcode/MRN, to confirm this is the right patient:") }
+    ] }, function (v) { return collectSpecimenSend(serviceRequestId, v.specimenType, v.scanned); });
+  }
+  function collectSpecimenSend(serviceRequestId, specimenType, scanned) {
     st.busy = true; paint();
-    apiPost("/ward/collect", { orgId: st.orgId, serviceRequestId: serviceRequestId, specimenType: specimenType.trim(), scannedPatientBarcode: scanned.trim() || undefined })
+    return apiPost("/ward/collect", { orgId: st.orgId, serviceRequestId: serviceRequestId, specimenType: specimenType, scannedPatientBarcode: scanned || undefined })
       .then(function (r) {
         if (r && r.error === "wrong_patient_scan") { st.busy = false; st.err = wT("ward.the-scanned-wristband-does-not-match", "The scanned wristband does not match this patient's order. Nothing was collected."); paint(); return; }
         // LT-25: collected from the laboratory board, the board is what re-reads.
@@ -10067,11 +10206,17 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-ask-for-that", "Could not ask for that."); paint(); });
   }
   function approvalDecide(id, decision) {
-    var reason = decision === "rejected" ? (prompt(wTD("ward.why-are-you-turning-this-down", "Why are you turning this down?")) || "") : "";
     // A turn-down with no reason is one nobody can act on, so it is not sent.
-    if (decision === "rejected" && !reason) { st.err = wT("ward.a-turn-down-needs-a-reason", "A turn-down needs a reason."); paint(); return; }
+    if (decision === "rejected") {
+      askReason(wTH("ward.why-are-you-turning-this-down", "Why are you turning this down?", null, "", 1), wT("ward.a-turn-down-needs-a-reason", "A turn-down needs a reason."), null,
+        function (reason) { return approvalDecideSend(id, decision, reason); }, { danger: true });
+      return;
+    }
+    approvalDecideSend(id, decision, "");
+  }
+  function approvalDecideSend(id, decision, reason) {
     st.busy = true; paint();
-    apiPost("/ward/approval-decide", { orgId: st.orgId, verificationId: id, decision: decision, reason: reason || undefined })
+    return apiPost("/ward/approval-decide", { orgId: st.orgId, verificationId: id, decision: decision, reason: reason || undefined })
       .then(function (r) {
         if (settle(r, r && r.ok ? (r.state === "approved" ? wT("ward.approved", "Approved.") : r.state === "rejected" ? wT("ward.turned-down2", "Turned down.") : wT("ward.recorded-it-still-needs-more", "Recorded - it still needs {v} more.", { v: (r.required - r.approvals) })) : null)) loadApprovals();
         else paint();
@@ -10095,14 +10240,13 @@
   }
   function surgeryAbandon(caseId) {
     if (!caseId) return;
-    var reason = "";
-    try { reason = G.prompt(wTD("ward.why-is-this-case-not-going", "Why is this case not going ahead?")) || ""; } catch (e) {}
-    if (!reason) { st.err = wT("ward.abandoning-a-case-needs-a-reason", "Abandoning a case needs a reason."); paint(); return; }
-    if (!confirm(wTD("ward.end-this-case-on-the-record", "End this case on the record as not going ahead?"))) return;
-    st.busy = true; paint();
-    apiPost("/ward/surgery-abandon", { orgId: st.orgId, caseId: caseId, reason: reason })
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.recorded-as-not-going-ahead", "Recorded as not going ahead.") : null)) loadSurgeryCase(caseId); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    // One dialog asks both: the reason, and whether the case really ends on the record.
+    askReason(wTH("ward.end-this-case-on-the-record", "End this case on the record as not going ahead?", null, "", 1), wT("ward.abandoning-a-case-needs-a-reason", "Abandoning a case needs a reason."), null, function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/surgery-abandon", { orgId: st.orgId, caseId: caseId, reason: reason })
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.recorded-as-not-going-ahead", "Recorded as not going ahead.") : null)) loadSurgeryCase(caseId); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    }, { danger: true, icon: "cancel", label: wTH("ward.why-is-this-case-not-going", "Why is this case not going ahead?") });
   }
 
   /* ENDING A STAY AND ASKING FOR A FOLLOW-UP ARE FORMS, NOT PROMPT BOXES (LT-17).
@@ -10264,13 +10408,12 @@
 
   function dispenseReturn(dispenseId) {
     if (!dispenseId) return;
-    var reason = "";
-    try { reason = G.prompt(wTD("ward.why-was-it-returned", "Why was it returned?")) || ""; } catch (e) {}
-    if (!reason) { st.err = wT("ward.a-return-needs-a-reason", "A return needs a reason."); paint(); return; }
-    st.busy = true; paint();
-    apiPost("/ward/dispense-return", { orgId: st.orgId, dispenseId: dispenseId, reason: reason })
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.recorded-as-returned", "Recorded as returned.") : null)) loadPharmacy(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-return", "Could not record that return."); paint(); });
+    askReason(wTH("ward.why-was-it-returned", "Why was it returned?", null, "", 1), wT("ward.a-return-needs-a-reason", "A return needs a reason."), null, function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/dispense-return", { orgId: st.orgId, dispenseId: dispenseId, reason: reason })
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.recorded-as-returned", "Recorded as returned.") : null)) loadPharmacy(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-return", "Could not record that return."); paint(); });
+    });
   }
   function bloodTrace() {
     var unit = val("wTxTraceUnit");
@@ -10283,13 +10426,17 @@
 
   function specimenOutcomeAct(specimenId, state) {
     if (!specimenId) return;
-    var reason = "";
     if (state === "failed") {
-      try { reason = G.prompt(wTD("ward.why-did-it-fail-clotted-haemolysed", "Why did it fail? Clotted, haemolysed, insufficient, never arrived...")) || ""; } catch (e) {}
-      if (!reason) { st.err = wT("ward.a-failed-sample-needs-a-reason", "A failed sample needs a reason, so the ward knows what to do differently."); paint(); return; }
+      askReason(wTH("ward.why-did-it-fail-clotted-haemolysed", "Why did it fail? Clotted, haemolysed, insufficient, never arrived...", null, "", 1),
+        wT("ward.a-failed-sample-needs-a-reason", "A failed sample needs a reason, so the ward knows what to do differently."), null,
+        function (reason) { return specimenOutcomeSend(specimenId, state, reason); });
+      return;
     }
+    specimenOutcomeSend(specimenId, state, "");
+  }
+  function specimenOutcomeSend(specimenId, state, reason) {
     st.busy = true; paint();
-    apiPost("/ward/specimen-outcome", { orgId: st.orgId, specimenId: specimenId, state: state, failureReason: reason || undefined })
+    return apiPost("/ward/specimen-outcome", { orgId: st.orgId, specimenId: specimenId, state: state, failureReason: reason || undefined })
       .then(function (r) { if (settle(r, r && r.ok ? (state === "failed" ? wT("ward.recorded-as-failed-the-order-needs", "Recorded as failed. The order needs a new sample.") : wT("ward.received", "Received.")) : null)) loadLabBoard(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
   }
@@ -10353,12 +10500,12 @@
     }).catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
   }
   function histoAddendum(reportId) {
-    var text = window.prompt(wTD("ward.addendum-the-signed-report-is-not", "Addendum. The signed report is not changed.")) || "";
-    if (!text.trim()) { st.err = wT("ward.an-addendum-needs-words", "An addendum needs words."); paint(); return; }
-    st.busy = true; paint();
-    apiPost("/ward/histopathology-addendum", { orgId: st.orgId, reportId: reportId, text: text })
-      .then(function (r) { if (settle(r, wT("ward.addendum-added", "Addendum added."))) loadLabBoard(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
+    askReason(wTH("ward.addendum-the-signed-report-is-not", "Addendum. The signed report is not changed.", null, "", 1), wT("ward.an-addendum-needs-words", "An addendum needs words."), wTH("ward.save", "Save"), function (text) {
+      st.busy = true; paint();
+      return apiPost("/ward/histopathology-addendum", { orgId: st.orgId, reportId: reportId, text: text })
+        .then(function (r) { if (settle(r, wT("ward.addendum-added", "Addendum added."))) loadLabBoard(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
+    });
   }
   function loadPathology() {
     var s = st.sel; if (!s) return Promise.resolve();
@@ -10477,17 +10624,17 @@
   }
   function tagEnd(kind, tagId) {
     if (!tagId) return;
-    var reason = "", newCode = "";
-    if (kind === "replace") { try { newCode = G.prompt(wTD("ward.code-on-the-new-band", "Code on the new band")) || ""; } catch (e) {} if (!newCode) return; }
-    try { reason = G.prompt(wTD("ward.why", "Why?")) || ""; } catch (e) {}
-    if (!reason) { st.err = wT("ward.ending-or-replacing-a-band-needs", "Ending or replacing a band needs a reason."); paint(); return; }
-    var route = kind === "replace" ? "/ward/tag-replace" : kind === "lost" ? "/ward/tag-lost" : "/ward/tag-deactivate";
-    var body = { orgId: st.orgId, tagId: tagId, reason: reason };
-    if (kind === "replace") body.newCode = newCode;
-    st.busy = true; paint();
-    apiPost(route, body)
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.recorded", "Recorded.") : null)) { st.tagVerify = null; loadTags(); } else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    var fields = kind === "replace" ? [{ key: "newCode", label: wTH("ward.code-on-the-new-band", "Code on the new band"), required: wT("ward.type-the-code-printed-on-the", "Type the code printed on the band.") }] : [];
+    fields.push({ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.ending-or-replacing-a-band-needs", "Ending or replacing a band needs a reason.") });
+    askFor({ title: wTH("ward.ending-or-replacing-a-band-needs", "Ending or replacing a band needs a reason."), icon: "badge", ok: wTH("ward.record2", "Record"), fields: fields }, function (v) {
+      var route = kind === "replace" ? "/ward/tag-replace" : kind === "lost" ? "/ward/tag-lost" : "/ward/tag-deactivate";
+      var body = { orgId: st.orgId, tagId: tagId, reason: v.reason };
+      if (kind === "replace") body.newCode = v.newCode;
+      st.busy = true; paint();
+      return apiPost(route, body)
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.recorded", "Recorded.") : null)) { st.tagVerify = null; loadTags(); } else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    });
   }
 
   function mpiOpen() {
@@ -10547,16 +10694,13 @@
     var parts = String(arg || "").split("~");
     var survivorId = parts[0], mergedId = parts[1];
     if (!survivorId || !mergedId) return;
-    var reason = "";
-    try { reason = G.prompt(undo ? wTD("ward.why-is-this-merge-being-undone", "Why is this merge being undone?") : wTD("ward.why-are-these-the-same-person", "Why are these the same person? What did you check?")) || ""; } catch (e) {}
-    if (!reason) { st.err = (undo ? wT("ward.undoing", "Undoing") : wT("ward.merging", "Merging")) + " " + wT("ward.records-needs-a-reason", "records needs a reason."); paint(); return; }
-    if (!confirm(undo
-      ? wTD("ward.undo-the-merge-of-these-two", "Undo the merge of these two records?")
-      : wTD("ward.join-these-two-records-as-one", "Join these two records as one person?\n\nNo clinical data is moved or deleted, and this can be undone."))) return;
-    st.busy = true; paint();
-    apiPost(undo ? "/ward/unmerge" : "/ward/merge", { orgId: st.orgId, survivorId: survivorId, mergedId: mergedId, reason: reason })
-      .then(function (r) { if (settle(r, r && r.ok ? (undo ? wT("ward.merge-undone", "Merge undone.") : wT("ward.records-joined", "Records joined.")) : null)) { loadMpiIdentity(); mpiSearch(); } else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-do-that", "Could not do that."); paint(); });
+    askReason(undo ? wTH("ward.undo-the-merge-of-these-two", "Undo the merge of these two records?", null, "", 1) : wTH("ward.join-these-two-records-as-one", "Join these two records as one person?\n\nNo clinical data is moved or deleted, and this can be undone.", null, "", 1),
+      (undo ? wT("ward.undoing", "Undoing") : wT("ward.merging", "Merging")) + " " + wT("ward.records-needs-a-reason", "records needs a reason."), null, function (reason) {
+        st.busy = true; paint();
+        return apiPost(undo ? "/ward/unmerge" : "/ward/merge", { orgId: st.orgId, survivorId: survivorId, mergedId: mergedId, reason: reason })
+          .then(function (r) { if (settle(r, r && r.ok ? (undo ? wT("ward.merge-undone", "Merge undone.") : wT("ward.records-joined", "Records joined.")) : null)) { loadMpiIdentity(); mpiSearch(); } else paint(); })
+          .catch(function () { st.busy = false; st.err = wT("ward.could-not-do-that", "Could not do that."); paint(); });
+      }, { icon: "join", label: undo ? wTH("ward.why-is-this-merge-being-undone", "Why is this merge being undone?") : wTH("ward.why-are-these-the-same-person", "Why are these the same person? What did you check?") });
   }
 
   function infusionOpen() {
@@ -10577,38 +10721,37 @@
   }
   function infusionChart(orderId) {
     if (!orderId) return;
-    var event = "", rate = "", reason = "";
-    try {
-      event = G.prompt(wTD("ward.what-happened-started-rate-changed-paused", "What happened? started, rate-changed, paused, resumed, or stopped")) || "";
-      event = String(event).trim().toLowerCase();
-    } catch (e) {}
-    var known = INFUSION_EVENTS.some(function (x) { return x[0] === event; });
-    if (!known) { st.err = wT("ward.say-started-rate-changed-paused-resumed", "Say started, rate-changed, paused, resumed or stopped."); paint(); return; }
+    /* One dialog for the whole event. The rate is used for started, rate-changed and resumed; the bag's concentration
+     * for started and rate-changed; the reason for paused and stopped. What the event does not use is not sent. */
+    askFor({ title: wTH("ward.what-happened-started-rate-changed-paused", "What happened? started, rate-changed, paused, resumed, or stopped", null, "", 1), icon: "water_drop", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "event", type: "select", label: wTH("ward.what-happened-started-rate-changed-paused", "What happened? started, rate-changed, paused, resumed, or stopped"),
+        options: [["", wTH("ward.choose", "Choose&hellip;")]].concat(INFUSION_EVENTS.map(function (x) { return [x[0], esc(wTEn(x[1]))]; })),
+        required: wT("ward.say-started-rate-changed-paused-resumed", "Say started, rate-changed, paused, resumed or stopped.") },
+      { key: "rate", label: wTH("ward.rate-now-in-ml-per-hour", "Rate now, in mL per hour") },
+      { key: "conc", label: wTH("ward.bag-concentration-prompt", "Bag concentration, as on the label, e.g. {example} (leave blank if not needed)", { example: "4 mg in 50 mL" }), placeholder: "4 mg in 50 mL" },
+      { key: "reason", label: wTH("ward.why", "Why?") }
+    ] }, function (v) { return infusionSend(orderId, v); });
+  }
+  function infusionSend(orderId, v) {
+    var event = String(v.event).toLowerCase(), rate = "", reason = "";
     if (event === "started" || event === "rate-changed" || event === "resumed") {
-      try { rate = G.prompt(wTD("ward.rate-now-in-ml-per-hour", "Rate now, in mL per hour")) || ""; } catch (e) {}
+      rate = v.rate;
       /* A rate that is not plainly a number is refused here too, not coerced: a pump rate read wrong
        * by a factor of ten is a real dose error. The server refuses it independently. */
-      if (!/^\d+(\.\d+)?$/.test(String(rate).trim())) { st.err = wT("ward.the-rate-has-to-be-a", "The rate has to be a plain number of mL per hour."); paint(); return; }
+      if (!/^\d+(\.\d+)?$/.test(rate)) { st.err = wT("ward.the-rate-has-to-be-a", "The rate has to be a plain number of mL per hour."); return; }
     }
     /* THE BAG'S CONCENTRATION, as written on its label, so an ICU chart can work out a weight-based
      * dose from the rate. Optional and never defaulted: left blank, no dose is worked out, and the
      * ICU card says why. Anything that is not "amount unit in volume mL" is refused, not guessed. */
     var concentration;
-    if (event === "started" || event === "rate-changed") {
-      var conc = "";
-      try { conc = G.prompt(wTD("ward.bag-concentration-prompt", "Bag concentration, as on the label, e.g. {example} (leave blank if not needed)", { example: "4 mg in 50 mL" })) || ""; } catch (e) {}
-      conc = String(conc).trim();
-      if (conc) {
-        var cm = /^(\d+(?:\.\d+)?)\s*([a-zA-Z\u00b5\u03bc]+)\s+in\s+(\d+(?:\.\d+)?)\s*ml$/i.exec(conc);
-        if (!cm) { st.err = wT("ward.write-the-concentration-as", "Write the concentration as amount, unit, in, volume in mL, for example {example}.", { example: "4 mg in 50 mL" }); paint(); return; }
-        concentration = { amount: Number(cm[1]), unit: cm[2], volumeMl: Number(cm[3]) };
-      }
+    if ((event === "started" || event === "rate-changed") && v.conc) {
+      var cm = /^(\d+(?:\.\d+)?)\s*([a-zA-Z\u00b5\u03bc]+)\s+in\s+(\d+(?:\.\d+)?)\s*ml$/i.exec(v.conc);
+      if (!cm) { st.err = wT("ward.write-the-concentration-as", "Write the concentration as amount, unit, in, volume in mL, for example {example}.", { example: "4 mg in 50 mL" }); return; }
+      concentration = { amount: Number(cm[1]), unit: cm[2], volumeMl: Number(cm[3]) };
     }
-    if (event === "paused" || event === "stopped") {
-      try { reason = G.prompt(wTD("ward.why", "Why?")) || ""; } catch (e) {}
-    }
+    if (event === "paused" || event === "stopped") reason = v.reason;
     st.busy = true; paint();
-    apiPost("/ward/infusion", {
+    return apiPost("/ward/infusion", {
       orgId: st.orgId, orderId: orderId, event: event,
       ratePerHour: rate ? Number(rate) : undefined, reason: reason || undefined, concentration: concentration,
     })
@@ -10664,13 +10807,20 @@
   }
   function carePlanProgress(arg) {
     var s = st.sel; if (!s) return;
-    var p = String(arg || "").split("~"), key = p[0], state = p[1], note = "";
+    var p = String(arg || "").split("~"), key = p[0], state = p[1];
     if (state === "not-met" || state === "cancelled") {
-      try { note = G.prompt(state === "not-met" ? wTD("ward.why-was-this-goal-not-met", "Why was this goal not met?") : wTD("ward.why-is-this-goal-no-longer", "Why is this goal no longer wanted?")) || ""; } catch (e) {}
-      if (state === "not-met" && !note.trim()) return;
+      var q = state === "not-met" ? wTH("ward.why-was-this-goal-not-met", "Why was this goal not met?") : wTH("ward.why-is-this-goal-no-longer", "Why is this goal no longer wanted?");
+      askFor({ title: q, icon: "flag", ok: wTH("ward.record2", "Record"),
+        fields: [{ key: "note", type: "textarea", label: q, required: state === "not-met" ? wT("ward.why-was-this-goal-not-met", "Why was this goal not met?") : "" }] },
+        function (v) { return carePlanProgressSend(key, state, v.note); });
+      return;
     }
+    carePlanProgressSend(key, state, "");
+  }
+  function carePlanProgressSend(key, state, note) {
+    var s = st.sel; if (!s) return Promise.resolve();
     st.busy = true; paint();
-    apiPost("/ward/progress", { orgId: st.orgId, encounterId: s.encounterId, key: key, state: state, note: note.trim() || undefined })
+    return apiPost("/ward/progress", { orgId: st.orgId, encounterId: s.encounterId, key: key, state: state, note: note || undefined })
       .then(function (r) { if (settle(r, r && r.ok ? wT("ward.progress-recorded", "Progress recorded.") : null)) loadCarePlan(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-progress", "Could not record progress."); paint(); });
   }
@@ -10719,14 +10869,17 @@
     var parts = String(arg || "").split("~");
     var id = parts[0], state = parts[1];
     if (!id || !state) return;
-    var reason = "";
     if (state === "cancelled") {
-      try { reason = G.prompt(wTD("ward.why-is-this-request-being-cancelled", "Why is this request being cancelled?")) || ""; } catch (e) {}
       /* A patient who drops off a bed list with no reason is a patient nobody admitted. */
-      if (!reason) { st.err = wT("ward.a-cancellation-needs-a-reason", "A cancellation needs a reason."); paint(); return; }
+      askReason(wTH("ward.why-is-this-request-being-cancelled", "Why is this request being cancelled?", null, "", 1), wT("ward.a-cancellation-needs-a-reason", "A cancellation needs a reason."), null,
+        function (reason) { return admReqCloseSend(id, state, reason); }, { danger: true });
+      return;
     }
+    admReqCloseSend(id, state, "");
+  }
+  function admReqCloseSend(id, state, reason) {
     st.busy = true; paint();
-    apiPost("/ward/close-admission-request", { orgId: st.orgId, requestId: id, state: state, reason: reason || undefined })
+    return apiPost("/ward/close-admission-request", { orgId: st.orgId, requestId: id, state: state, reason: reason || undefined })
       .then(function (r) { if (settle(r, r && r.ok ? wT("ward.closed", "Closed.") : null)) loadAdmReqs(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-close-that-request", "Could not close that request."); paint(); });
   }
@@ -10836,23 +10989,22 @@
     var s = st.sel;
     if (!s) return;
     var parts = String(arg || "").split("~");
-    var reason = window.prompt(wTD("ward.clinical-reason-for-overriding-this-pathway", "Clinical reason for overriding this pathway step (mandatory):"));
-    if (!reason || reason.trim().length < 5) {
-      alert(wTD("ward.a-reason-of-at-least-5", "A reason of at least 5 characters is required to override a pathway step."));
-      return;
-    }
-    apiPost("/ward/pathway-override", {
-      orgId: st.orgId,
-      patientId: s.patientId,
-      enrolmentId: parts[0],
-      stepKey: parts[1],
-      reason: reason.trim()
-    }).then(function (r) {
-      if (settle(r, wT("ward.step-override-recorded", "Step override recorded."))) loadPathways();
-      else paint();
-    }).catch(function () {
-      st.err = wT("ward.could-not-record-step-override", "Could not record step override.");
-      paint();
+    var short = wT("ward.a-reason-of-at-least-5", "A reason of at least 5 characters is required to override a pathway step.");
+    askReason(wTH("ward.clinical-reason-for-overriding-this-pathway", "Clinical reason for overriding this pathway step (mandatory):", null, "", 1), short, null, function (reason) {
+      if (reason.length < 5) { st.err = short; return; }
+      return apiPost("/ward/pathway-override", {
+        orgId: st.orgId,
+        patientId: s.patientId,
+        enrolmentId: parts[0],
+        stepKey: parts[1],
+        reason: reason
+      }).then(function (r) {
+        if (settle(r, wT("ward.step-override-recorded", "Step override recorded."))) loadPathways();
+        else paint();
+      }).catch(function () {
+        st.err = wT("ward.could-not-record-step-override", "Could not record step override.");
+        paint();
+      });
     });
   }
 
@@ -10895,9 +11047,13 @@
     var reason = val("wBgReason");
     if (!reason) { st.err = wT("ward.break-glass-needs-a-reason-in", "Break-glass needs a reason in your own words."); paint(); return; }
     /* Asked twice, because this is recorded against the clinician's name and reviewed. */
-    if (!confirm(wTD("ward.break-glass-for-your-name-and", "Break glass for {name}?\n\nYour name and reason will be recorded and reviewed.", { name: (s.name || s.patientId) }))) return;
+    askFor({ icon: "lock_open", danger: true, ok: wTH("ward.continue", "Continue"),
+      title: wTH("ward.break-glass-for-your-name-and", "Break glass for {name}?\n\nYour name and reason will be recorded and reviewed.", { name: esc(s.name || s.patientId) }, "name", 1) },
+      function () { return breakGlassSend(s, reason); });
+  }
+  function breakGlassSend(s, reason) {
     st.busy = true; paint();
-    apiPost("/ward/break-glass", { orgId: st.orgId, patientId: s.patientId, reason: reason })
+    return apiPost("/ward/break-glass", { orgId: st.orgId, patientId: s.patientId, reason: reason })
       .then(function (r) {
         if (settle(r, r && r.ok ? wT("ward.emergency-access-granted-it-is-read", "Emergency access granted. It is read-only and ends on its own.") : null)) {
           var el = document.getElementById("wBgReason"); if (el) el.value = "";
@@ -10991,12 +11147,12 @@
     var parts = String(arg || "").split("~");
     var assessmentId = parts[0], action = parts.slice(1).join("~");
     if (!assessmentId || !action) return;
-    var note = "";
-    try { note = G.prompt(wTD("ward.anything-to-record-about-doing-this", "Anything to record about doing this? (optional)")) || ""; } catch (e) {}
-    st.busy = true; paint();
-    apiPost("/ward/risk-action", { orgId: st.orgId, assessmentId: assessmentId, action: action, note: note || undefined })
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.recorded", "Recorded.") : null)) loadRisks(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    askReason(wTH("ward.anything-to-record-about-doing-this", "Anything to record about doing this? (optional)"), "", null, function (note) {
+      st.busy = true; paint();
+      return apiPost("/ward/risk-action", { orgId: st.orgId, assessmentId: assessmentId, action: action, note: note || undefined })
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.recorded", "Recorded.") : null)) loadRisks(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    }, { icon: "task_alt" });
   }
 
   function medRecOpen() {
@@ -11042,18 +11198,18 @@
     var parts = String(arg || "").split("~");
     var stage = parts[0], key = parts[1], decision = parts[2];
     if (!stage || !key || !decision) return;
-    var reason = "";
     /* The module requires a reason for the decisions that change what the patient takes; asking for
      * one on every decision is simpler than encoding that rule twice, and the server is still the
-     * one that enforces it. */
-    try { reason = G.prompt(wTD("ward.why-required-for-stopping-or-changing", "Why? (required for stopping or changing a medicine)")) || ""; } catch (e) {}
-    st.busy = true; paint();
-    apiPost("/ward/med-decide", {
-      orgId: st.orgId, encounterId: s.encounterId, stage: stage, key: key,
-      decision: decision, reason: reason || undefined,
-    })
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.decided", "Decided.") : null)) loadMedRec(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-decision", "Could not record that decision."); paint(); });
+     * one that enforces it (its refusal is shown in the dialog). */
+    askReason(wTH("ward.why-required-for-stopping-or-changing", "Why? (required for stopping or changing a medicine)"), "", null, function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/med-decide", {
+        orgId: st.orgId, encounterId: s.encounterId, stage: stage, key: key,
+        decision: decision, reason: reason || undefined,
+      })
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.decided", "Decided.") : null)) loadMedRec(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-decision", "Could not record that decision."); paint(); });
+    }, { icon: "medication" });
   }
 
   function handoverOpen() {
@@ -11088,12 +11244,12 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-handover", "Could not record that handover."); paint(); });
   }
   function handoverTake(id) {
-    var note = "";
-    try { note = G.prompt(wTD("ward.anything-to-add-as-you-take", "Anything to add as you take this patient? (optional)")) || ""; } catch (e) {}
-    st.busy = true; paint();
-    apiPost("/ward/receive-handover", { orgId: st.orgId, handoverId: id, note: note || undefined })
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.taken", "Taken.") : null)) loadHandovers(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-take-that-handover", "Could not take that handover."); paint(); });
+    askReason(wTH("ward.anything-to-add-as-you-take", "Anything to add as you take this patient? (optional)"), "", null, function (note) {
+      st.busy = true; paint();
+      return apiPost("/ward/receive-handover", { orgId: st.orgId, handoverId: id, note: note || undefined })
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.taken", "Taken.") : null)) loadHandovers(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-take-that-handover", "Could not take that handover."); paint(); });
+    }, { icon: "swap_horiz" });
   }
 
   function safetyInboxOpen() {
@@ -11199,12 +11355,14 @@
   function survAck(arg) {
     var p = String(arg || "").split("~"), d = st.surveillance, row = d && d.rows && d.rows[Number(p[0])], sg = row && row.signals && row.signals[Number(p[1])];
     if (!sg) return;
-    var note = ""; try { note = G.prompt(wTD("ward.acknowledge-what-was-done-or-decided", "Acknowledge: {label}. What was done or decided?", { label: sg.label })) || ""; } catch (e) {}
-    if (note.trim().length < 3) { st.err = wT("ward.an-acknowledgement-needs-a-note", "An acknowledgement needs a note."); paint(); return; }
-    st.busy = true; paint();
-    apiPost("/ward/surveillance-ack", { orgId: st.orgId, patientId: row.patientId, encounterId: row.encounterId, signalId: sg.id, note: note.trim() })
-      .then(function (r) { if (settle(r, wT("ward.acknowledged-the-signal-stays-until-the", "Acknowledged. The signal stays until the record changes."))) loadSurveillance(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-acknowledgement", "Could not record the acknowledgement."); paint(); });
+    var needNote = wT("ward.an-acknowledgement-needs-a-note", "An acknowledgement needs a note.");
+    askReason(wTH("ward.acknowledge-what-was-done-or-decided", "Acknowledge: {label}. What was done or decided?", { label: esc(sg.label) }, "label", 1), needNote, wTH("ward.acknowledge", "Acknowledge"), function (note) {
+      if (note.length < 3) { st.err = needNote; return; }
+      st.busy = true; paint();
+      return apiPost("/ward/surveillance-ack", { orgId: st.orgId, patientId: row.patientId, encounterId: row.encounterId, signalId: sg.id, note: note })
+        .then(function (r) { if (settle(r, wT("ward.acknowledged-the-signal-stays-until-the", "Acknowledged. The signal stays until the record changes."))) loadSurveillance(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-acknowledgement", "Could not record the acknowledgement."); paint(); });
+    }, { icon: "monitor_heart" });
   }
   function loadNurseWorklist() {
     st.view = "nurseworklist"; st.nurseWorklist = null; paint();
@@ -11228,19 +11386,30 @@
     var np = st.nursingPanel; if (!np) return;
     body.orgId = st.orgId; body.encounterId = np.encounterId;
     st.busy = true; paint();
-    apiPost(path, body)
+    return apiPost(path, body)
       .then(function (r) { if (settle(r, r && r.ok ? okMsg : null)) { np.data = null; paint(); loadNursingPanel(); } else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-save-nothing-was-changed", "Could not save. Nothing was changed."); paint(); });
   }
   function referralAct(arg) {
     var p = String(arg || "").split("~"), id = p[0], action = p[1], version = Number(p[2]);
     var body = { orgId: st.orgId, referralId: id, action: action, expectedVersion: version };
-    var ask = function (q) { try { return G.prompt(q) || ""; } catch (e) { return ""; } };
-    if (action === "decline" || action === "cancel") { body.reason = ask(action === "decline" ? wT("ward.why-is-this-referral-declined-the", "Why is this referral declined? The referring team will see this.") : wT("ward.why-is-this-referral-cancelled", "Why is this referral cancelled?")); if (!body.reason.trim()) return; }
-    if (action === "respond") { body.response = ask(wT("ward.your-reply-to-the-referring-team", "Your reply to the referring team:")); if (!body.response.trim()) return; }
-    if (action === "schedule") { body.appointmentAt = ask(wT("ward.appointment-date-and-time-for-example", "Appointment date and time (for example 2026-09-20 10:30):")); if (!body.appointmentAt.trim()) return; body.appointmentAt = body.appointmentAt.trim().replace(" ", "T"); }
+    var q = action === "decline" ? wTH("ward.why-is-this-referral-declined-the", "Why is this referral declined? The referring team will see this.")
+      : action === "cancel" ? wTH("ward.why-is-this-referral-cancelled", "Why is this referral cancelled?")
+      : action === "respond" ? wTH("ward.your-reply-to-the-referring-team", "Your reply to the referring team:")
+      : action === "schedule" ? wTH("ward.appointment-date-and-time-for-example", "Appointment date and time (for example 2026-09-20 10:30):") : "";
+    if (!q) { referralSend(body); return; }
+    askFor({ title: q, icon: "forward_to_inbox", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "answer", type: action === "schedule" ? "datetime" : "textarea", label: q, required: wT("ward.a-reason-is-required", "A reason is required.") }] },
+      function (v) {
+        if (action === "decline" || action === "cancel") body.reason = v.answer;
+        if (action === "respond") body.response = v.answer;
+        if (action === "schedule") body.appointmentAt = v.answer.replace(" ", "T");
+        return referralSend(body);
+      });
+  }
+  function referralSend(body) {
     st.busy = true; paint();
-    apiPost("/ward/referral-act", body)
+    return apiPost("/ward/referral-act", body)
       .then(function (r) { if (settle(r, r && r.ok ? wT("ward.referral-updated", "Referral updated.") : null)) loadReferrals(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-update-the-referral", "Could not update the referral."); paint(); });
   }
@@ -11294,30 +11463,32 @@
       .catch(function () { st.docVersions = { id: id, failed: true }; paint(); });
   }
   function documentPurge(id) {
-    if (!confirm(wTD("ward.delete-the-stored-file-for-every", "Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone."))) return;
-    st.busy = true; paint();
-    apiPost("/ward/document-purge", { orgId: st.orgId, documentId: id })
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.file-deleted-the-record-of-the", "File deleted. The record of the document is kept.") : null)) loadDocuments(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-delete-the-file", "Could not delete the file."); paint(); });
+    askFor({ icon: "delete_forever", danger: true, ok: wTH("ward.remove", "Remove"),
+      title: wTH("ward.delete-the-stored-file-for-every", "Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone.", null, "", 1) }, function () {
+      st.busy = true; paint();
+      return apiPost("/ward/document-purge", { orgId: st.orgId, documentId: id })
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.file-deleted-the-record-of-the", "File deleted. The record of the document is kept.") : null)) loadDocuments(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-delete-the-file", "Could not delete the file."); paint(); });
+    });
   }
   function documentWithdraw(id) {
-    var reason = "";
-    try { reason = G.prompt(wTD("ward.why-is-this-document-being-withdrawn", "Why is this document being withdrawn? (For example: scanned under the wrong patient.) The file is kept.")) || ""; } catch (e) {}
-    if (!reason.trim()) return;
-    st.busy = true; paint();
-    apiPost("/ward/document-withdraw", { orgId: st.orgId, documentId: id, reason: reason.trim() })
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.document-withdrawn-the-file-is-kept", "Document withdrawn. The file is kept.") : null)) loadDocuments(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-withdraw-the-document", "Could not withdraw the document."); paint(); });
+    askReason(wTH("ward.why-is-this-document-being-withdrawn", "Why is this document being withdrawn? (For example: scanned under the wrong patient.) The file is kept.", null, "", 1), wT("ward.a-withdrawal-needs-a-reason", "A withdrawal needs a reason."), wTH("ward.withdraw", "Withdraw"), function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/document-withdraw", { orgId: st.orgId, documentId: id, reason: reason })
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.document-withdrawn-the-file-is-kept", "Document withdrawn. The file is kept.") : null)) loadDocuments(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-withdraw-the-document", "Could not withdraw the document."); paint(); });
+    }, { danger: true });
   }
   function documentRelease(arg) {
-    var p = String(arg || "").split("~"), reason = "";
-    try { reason = G.prompt(wTD("ward.release-version-of-this-document-to", "Release version {p} of this document to the patient portal?\n\nSay why, or give the consent reference. The patient, and any family member granted documents, will be able to download it.", { p: p[1] })) || ""; } catch (e) {}
-    if (!reason.trim()) return;
-    st.busy = true; paint();
-    apiPost("/ward/document-release", { orgId: st.orgId, documentId: p[0], version: Number(p[1]), reason: reason.trim() })
-      // Reloaded, so the document's release list shows this release rather than the list from before it.
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.released-to-the-patient-portal", "Released to the patient portal.") : null)) loadDocuments(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-release-the-document-nothing", "Could not release the document. Nothing was released."); paint(); });
+    var p = String(arg || "").split("~");
+    askReason(wTH("ward.release-version-of-this-document-to", "Release version {p} of this document to the patient portal?\n\nSay why, or give the consent reference. The patient, and any family member granted documents, will be able to download it.", { p: esc(p[1]) }, "p", 1),
+      wT("ward.a-reason-is-required", "A reason is required."), null, function (reason) {
+        st.busy = true; paint();
+        return apiPost("/ward/document-release", { orgId: st.orgId, documentId: p[0], version: Number(p[1]), reason: reason })
+          // Reloaded, so the document's release list shows this release rather than the list from before it.
+          .then(function (r) { if (settle(r, r && r.ok ? wT("ward.released-to-the-patient-portal", "Released to the patient portal.") : null)) loadDocuments(); else paint(); })
+          .catch(function () { st.busy = false; st.err = wT("ward.could-not-release-the-document-nothing", "Could not release the document. Nothing was released."); paint(); });
+      }, { icon: "share" });
   }
   function immunizationsOpen() {
     if (!st.sel) { st.err = wT("ward.open-a-patient-first", "Open a patient first."); paint(); return; }
@@ -11353,12 +11524,12 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-nothing-was", "Could not record that. Nothing was saved."); paint(); });
   }
   function immunizationError(id) {
-    var reason = prompt(wTD("ward.why-is-this-entry-wrong-it", "Why is this entry wrong? It stays on the record, marked as withdrawn.")) || "";
-    if (!reason) return;
-    st.busy = true; paint();
-    apiPost("/ward/immunization-error", { orgId: st.orgId, immunizationId: id, reason: reason })
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.withdrawn-it-stays-on-the-record", "Withdrawn. It stays on the record.") : null)) loadImmunizations(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-withdraw-that", "Could not withdraw that."); paint(); });
+    askReason(wTH("ward.why-is-this-entry-wrong-it", "Why is this entry wrong? It stays on the record, marked as withdrawn.", null, "", 1), wT("ward.a-withdrawal-needs-a-reason", "A withdrawal needs a reason."), wTH("ward.withdraw", "Withdraw"), function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/immunization-error", { orgId: st.orgId, immunizationId: id, reason: reason })
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.withdrawn-it-stays-on-the-record", "Withdrawn. It stays on the record.") : null)) loadImmunizations(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-withdraw-that", "Could not withdraw that."); paint(); });
+    }, { danger: true });
   }
 
   function peopleOpen() {
@@ -11392,11 +11563,12 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-contact", "Could not record that contact."); paint(); });
   }
   function personRemove(id) {
-    var reason = prompt(wTD("ward.why-is-this-contact-being-removed", "Why is this contact being removed? (optional)")) || "";
-    st.busy = true; paint();
-    apiPost("/ward/related-person-remove", { orgId: st.orgId, relatedPersonId: id, reason: reason || undefined })
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.removed-it-stays-on-the-record", "Removed. It stays on the record.") : null)) loadPeople(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-remove-that", "Could not remove that."); paint(); });
+    askReason(wTH("ward.why-is-this-contact-being-removed", "Why is this contact being removed? (optional)"), "", wTH("ward.remove", "Remove"), function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/related-person-remove", { orgId: st.orgId, relatedPersonId: id, reason: reason || undefined })
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.removed-it-stays-on-the-record", "Removed. It stays on the record.") : null)) loadPeople(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-remove-that", "Could not remove that."); paint(); });
+    }, { danger: true, icon: "person_remove" });
   }
   /* Recording a death asks twice, on purpose, and the second ask names the patient. A mis-click on
    * a ward list is exactly how the wrong person gets recorded dead, and the server refuses anything
@@ -11404,32 +11576,37 @@
   function deathRecord() {
     var s = st.sel; if (!s) return;
     var who = s.name || s.patientId;
-    if (!confirm(wTD("ward.record-that-has-died-this-is", "Record that {who} has died?\n\nThis is recorded permanently against this patient.", { who: who }))) return;
-    var at = prompt(wTD("ward.when-did-they-die-leave-blank", "When did they die? Leave blank for now.\n(YYYY-MM-DD HH:MM)")) || "";
-    var cause = prompt(wTD("ward.cause-if-known-optional", "Cause, if known (optional)")) || "";
-    var certifiedBy = prompt(wTD("ward.certified-by-optional", "Certified by (optional)")) || "";
-    var iso = "";
-    if (at) {
-      var parsed = new Date(at.replace(" ", "T"));
-      if (isNaN(parsed.getTime())) { st.err = wT("ward.that-date-could-not-be-read", "That date could not be read. Nothing was recorded."); paint(); return; }
-      iso = parsed.toISOString();
-    }
-    st.busy = true; paint();
-    apiPost("/ward/deceased", {
-      orgId: st.orgId, patientId: s.patientId, confirm: true,
-      deceased: { at: iso || undefined, cause: cause || undefined, certifiedBy: certifiedBy || undefined },
-    })
-      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.recorded", "Recorded.") : null)) loadPeople(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    // The dialog names the patient; nothing is written until its own button is pressed.
+    askFor({ icon: "deceased", danger: true, ok: wTH("ward.record2", "Record"),
+      title: wTH("ward.record-that-has-died-this-is", "Record that {who} has died?\n\nThis is recorded permanently against this patient.", { who: esc(who) }, "who", 1),
+      fields: [
+        { key: "at", type: "datetime", label: wTH("ward.when-did-they-die-leave-blank", "When did they die? Leave blank for now.\n(YYYY-MM-DD HH:MM)").replace(/\n/g, " ") },
+        { key: "cause", label: wTH("ward.cause-if-known-optional", "Cause, if known (optional)") },
+        { key: "certifiedBy", label: wTH("ward.certified-by-optional", "Certified by (optional)") }
+      ] }, function (v) {
+      var iso = "";
+      if (v.at) {
+        var parsed = new Date(v.at.replace(" ", "T"));
+        if (isNaN(parsed.getTime())) { st.err = wT("ward.that-date-could-not-be-read", "That date could not be read. Nothing was recorded."); return; }
+        iso = parsed.toISOString();
+      }
+      st.busy = true; paint();
+      return apiPost("/ward/deceased", {
+        orgId: st.orgId, patientId: s.patientId, confirm: true,
+        deceased: { at: iso || undefined, cause: v.cause || undefined, certifiedBy: v.certifiedBy || undefined },
+      })
+        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.recorded", "Recorded.") : null)) loadPeople(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    });
   }
   function deathWithdraw() {
     var s = st.sel; if (!s) return;
-    var reason = prompt(wTD("ward.why-is-this-being-withdrawn", "Why is this being withdrawn?")) || "";
-    if (!reason) { st.err = wT("ward.a-withdrawal-needs-a-reason", "A withdrawal needs a reason."); paint(); return; }
-    st.busy = true; paint();
-    apiPost("/ward/deceased-correct", { orgId: st.orgId, patientId: s.patientId, reason: reason })
-      .then(function (r) { if (settle(r, r && r.ok ? r.detail : null)) loadPeople(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-withdraw-that", "Could not withdraw that."); paint(); });
+    askReason(wTH("ward.why-is-this-being-withdrawn", "Why is this being withdrawn?", null, "", 1), wT("ward.a-withdrawal-needs-a-reason", "A withdrawal needs a reason."), wTH("ward.withdraw", "Withdraw"), function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/deceased-correct", { orgId: st.orgId, patientId: s.patientId, reason: reason })
+        .then(function (r) { if (settle(r, r && r.ok ? r.detail : null)) loadPeople(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-withdraw-that", "Could not withdraw that."); paint(); });
+    }, { danger: true });
   }
 
   function consultationOpen() {
@@ -11703,28 +11880,32 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-decision", "Could not record the decision."); paint(); });
   }
   /* Raising a signal from where it was noticed. The severity question is the same one the report form asks. */
-  function askSignal() {
-    var what = window.prompt(wTD("ward.what-happened-a-sentence-is-enough", "What happened? A sentence is enough."));
-    if (!what || what.length < 3) return null;
-    var severity = window.prompt(wTD("ward.what-reached-the-patient-near-miss", "What reached the patient? near-miss, no-harm, minor, moderate, major or catastrophic"), "near-miss");
-    if (!severity) return null;
-    severity = String(severity).trim().toLowerCase();
-    if (!INCIDENT_SEVERITY.some(function (x) { return x[0] === severity; })) { st.err = wT("ward.severity-must-be-one-of-near", "Severity must be one of near-miss, no-harm, minor, moderate, major, catastrophic."); paint(); return null; }
-    return { what: what, severity: severity };
+  function askSignal(run) {
+    var describe = wT("ward.describe-what-happened-in-a-sentence", "Describe what happened, in a sentence or two.");
+    askFor({ title: wTH("ward.what-happened-a-sentence-is-enough", "What happened? A sentence is enough."), icon: "report", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "what", type: "textarea", label: wTH("ward.what-happened-a-sentence-is-enough", "What happened? A sentence is enough."), required: describe },
+      { key: "severity", type: "select", value: "near-miss", label: wTH("ward.what-reached-the-patient-near-miss", "What reached the patient? near-miss, no-harm, minor, moderate, major or catastrophic"),
+        options: INCIDENT_SEVERITY.map(function (x) { return [x[0], esc(wTEn(x[1]))]; }), required: wT("ward.pick-what-actually-reached-the-patient", "Pick what actually reached the patient.") }
+    ] }, function (v) {
+      if (v.what.length < 3) { st.err = describe; return; }
+      return run({ what: v.what, severity: v.severity });
+    });
   }
   function incidentSignal(resourceType, id) {
-    var a = askSignal(); if (!a) return;
-    st.busy = true; paint();
-    apiPost("/ward/incident-signal", { orgId: st.orgId, what: a.what, severity: a.severity, source: { resourceType: resourceType, id: id } })
-      .then(function (r) { settle(r, r && r.written ? wT("ward.safety-signal-raised-an-investigator-will", "Safety signal raised. An investigator will confirm or reject it.") : null); paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-raise-the-signal", "Could not raise the signal."); paint(); });
+    askSignal(function (a) {
+      st.busy = true; paint();
+      return apiPost("/ward/incident-signal", { orgId: st.orgId, what: a.what, severity: a.severity, source: { resourceType: resourceType, id: id } })
+        .then(function (r) { settle(r, r && r.written ? wT("ward.safety-signal-raised-an-investigator-will", "Safety signal raised. An investigator will confirm or reject it.") : null); paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-raise-the-signal", "Could not raise the signal."); paint(); });
+    });
   }
   function incidentSignalNews2(patientId) {
-    var a = askSignal(); if (!a) return;
-    st.busy = true; paint();
-    apiPost("/ward/incident-report", { orgId: st.orgId, what: a.what, severity: a.severity, patientId: patientId, category: "deterioration-not-recognised" })
-      .then(function (r) { settle(r, r && r.written ? wT("ward.safety-signal-raised-an-investigator-will", "Safety signal raised. An investigator will confirm or reject it.") : null); paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-raise-the-signal", "Could not raise the signal."); paint(); });
+    askSignal(function (a) {
+      st.busy = true; paint();
+      return apiPost("/ward/incident-report", { orgId: st.orgId, what: a.what, severity: a.severity, patientId: patientId, category: "deterioration-not-recognised" })
+        .then(function (r) { settle(r, r && r.written ? wT("ward.safety-signal-raised-an-investigator-will", "Safety signal raised. An investigator will confirm or reject it.") : null); paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-raise-the-signal", "Could not raise the signal."); paint(); });
+    });
   }
   function incidentsOpen() {
     st.view = "incidents"; st.incidentLog = null; st.incidentHealth = null; paint(); loadIncidents();
@@ -11795,12 +11976,12 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-complete-the-action", "Could not complete the action."); paint(); });
   }
   function incidentClose(id) {
-    var by = window.prompt(wTD("ward.your-name-to-close-this-incident", "Your name, to close this incident:"));
-    if (!by) return;
-    st.busy = true; paint();
-    apiPost("/ward/incident-close", { orgId: st.orgId, incidentId: id, by: by })
-      .then(function (r) { if (settle(r, wT("ward.closed", "Closed."))) loadIncidents(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-close-the-incident", "Could not close the incident."); paint(); });
+    askReason(wTH("ward.your-name-to-close-this-incident", "Your name, to close this incident:"), wT("ward.your-name-to-close-this-incident", "Your name, to close this incident:"), null, function (by) {
+      st.busy = true; paint();
+      return apiPost("/ward/incident-close", { orgId: st.orgId, incidentId: id, by: by })
+        .then(function (r) { if (settle(r, wT("ward.closed", "Closed."))) loadIncidents(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-close-the-incident", "Could not close the incident."); paint(); });
+    }, { type: "text", icon: "task_alt" });
   }
   function emergencyAdminOpen() {
     st.view = "emergencyadmin"; st.emergencyAdmin = null; st.emergencyReconcile = null; paint(); loadEmergencyLog();
@@ -11822,12 +12003,12 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-declare-that", "Could not declare that."); paint(); });
   }
   function emergencyDeactivateAction(activationId) {
-    var reason = window.prompt(wTD("ward.reason-for-standing-this-emergency-down", "Reason for standing this emergency down:"));
-    if (!reason) return;
-    st.busy = true; paint();
-    apiPost("/ward/emergency-deactivate", { orgId: st.orgId, activationId: activationId, reason: reason })
-      .then(function (r) { if (settle(r, wT("ward.stood-down", "Stood down."))) { loadEmergencyLog(); loadEmergencyStatus(); } else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-stand-that-down", "Could not stand that down."); paint(); });
+    askReason(wTH("ward.reason-for-standing-this-emergency-down", "Reason for standing this emergency down:"), wT("ward.a-reason-is-required", "A reason is required."), null, function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/emergency-deactivate", { orgId: st.orgId, activationId: activationId, reason: reason })
+        .then(function (r) { if (settle(r, wT("ward.stood-down", "Stood down."))) { loadEmergencyLog(); loadEmergencyStatus(); } else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-stand-that-down", "Could not stand that down."); paint(); });
+    }, { icon: "emergency" });
   }
   function emergencyReconcileAction(activationId) {
     st.busy = true; paint();
@@ -11905,12 +12086,13 @@
   }
   function withdrawConsentAction(scope, detail) {
     if (!st.sel || !st.sel.patientId) return;
-    var reason = window.prompt(wTD("ward.reason-for-withdrawing-this-consent", "Reason for withdrawing this consent:"));
-    if (!reason) return;
-    st.busy = true; paint();
-    apiPost("/ward/withdraw-consent", { orgId: st.orgId, patientId: st.sel.patientId, scope: scope, detail: detail || undefined, reason: reason })
-      .then(function (r) { if (settle(r, wT("ward.withdrawn", "Withdrawn."))) loadConsent(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-withdraw-that", "Could not withdraw that."); paint(); });
+    var sel = st.sel;
+    askReason(wTH("ward.reason-for-withdrawing-this-consent", "Reason for withdrawing this consent:"), wT("ward.a-withdrawal-needs-a-reason", "A withdrawal needs a reason."), wTH("ward.withdraw", "Withdraw"), function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/withdraw-consent", { orgId: st.orgId, patientId: sel.patientId, scope: scope, detail: detail || undefined, reason: reason })
+        .then(function (r) { if (settle(r, wT("ward.withdrawn", "Withdrawn."))) loadConsent(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-withdraw-that", "Could not withdraw that."); paint(); });
+    }, { danger: true });
   }
   function completionOpen() {
     st.view = "completion"; st.completion = null; paint(); loadCompletion();
@@ -11947,39 +12129,41 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-request", "Could not record that request."); paint(); });
   }
   function roiAuthorizeAction(roiId) {
-    var basis = window.prompt(wTD("ward.authorization-basis-a-signed-release-a", "Authorization basis (a signed release, a consent on record, a court order):"));
-    if (!basis) return;
-    st.busy = true; paint();
-    apiPost("/ward/roi-authorize", { orgId: st.orgId, roiId: roiId, authorizationBasis: basis })
-      .then(function (r) { if (settle(r, wT("ward.authorized", "Authorized."))) loadRoi(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-authorize-that", "Could not authorize that."); paint(); });
+    askReason(wTH("ward.authorization-basis-a-signed-release-a", "Authorization basis (a signed release, a consent on record, a court order):"), wT("ward.a-reason-is-required", "A reason is required."), null, function (basis) {
+      st.busy = true; paint();
+      return apiPost("/ward/roi-authorize", { orgId: st.orgId, roiId: roiId, authorizationBasis: basis })
+        .then(function (r) { if (settle(r, wT("ward.authorized", "Authorized."))) loadRoi(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-authorize-that", "Could not authorize that."); paint(); });
+    }, { icon: "verified_user" });
   }
   function roiDenyAction(roiId) {
-    var reason = window.prompt(wTD("ward.reason-for-denying-this-request", "Reason for denying this request:"));
-    if (!reason) return;
-    st.busy = true; paint();
-    apiPost("/ward/roi-deny", { orgId: st.orgId, roiId: roiId, reason: reason })
-      .then(function (r) { if (settle(r, wT("ward.denied", "Denied."))) loadRoi(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-deny-that", "Could not deny that."); paint(); });
+    askReason(wTH("ward.reason-for-denying-this-request", "Reason for denying this request:"), wT("ward.a-reason-is-required", "A reason is required."), null, function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/roi-deny", { orgId: st.orgId, roiId: roiId, reason: reason })
+        .then(function (r) { if (settle(r, wT("ward.denied", "Denied."))) loadRoi(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-deny-that", "Could not deny that."); paint(); });
+    }, { danger: true });
   }
   function roiCancelAction(roiId) {
-    var reason = window.prompt(wTD("ward.reason-for-cancelling-this-authorization", "Reason for cancelling this authorization:"));
-    if (!reason) return;
-    st.busy = true; paint();
-    apiPost("/ward/roi-cancel", { orgId: st.orgId, roiId: roiId, reason: reason })
-      .then(function (r) { if (settle(r, wT("ward.cancelled", "Cancelled."))) loadRoi(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-cancel-that", "Could not cancel that."); paint(); });
+    askReason(wTH("ward.reason-for-cancelling-this-authorization", "Reason for cancelling this authorization:"), wT("ward.a-reason-is-required", "A reason is required."), null, function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/roi-cancel", { orgId: st.orgId, roiId: roiId, reason: reason })
+        .then(function (r) { if (settle(r, wT("ward.cancelled", "Cancelled."))) loadRoi(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-cancel-that", "Could not cancel that."); paint(); });
+    }, { danger: true });
   }
   function roiFulfillAction(roiId) {
-    var deliveredStatus = window.prompt(wTD("ward.delivered-how-e-g-emailed-posted", "Delivered how (e.g. emailed, posted, handed to requester)?"));
-    if (!deliveredStatus) return;
-    var countStr = window.prompt(wTD("ward.how-many-records-were-sent", "How many records were sent?"), "1");
-    var count = Number(countStr);
-    if (!Number.isFinite(count) || count < 0) { st.err = wT("ward.enter-a-real-count-of-what", "Enter a real count of what was sent."); paint(); return; }
-    st.busy = true; paint();
-    apiPost("/ward/roi-fulfill", { orgId: st.orgId, roiId: roiId, deliveredStatus: deliveredStatus, resourceCounts: { records: count } })
-      .then(function (r) { if (settle(r, wT("ward.fulfilled", "Fulfilled."))) loadRoi(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-fulfillment", "Could not record that fulfillment."); paint(); });
+    askFor({ title: wTH("ward.delivered-how-e-g-emailed-posted", "Delivered how (e.g. emailed, posted, handed to requester)?"), icon: "outbox", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "delivered", label: wTH("ward.delivered-how-e-g-emailed-posted", "Delivered how (e.g. emailed, posted, handed to requester)?"), required: wT("ward.a-reason-is-required", "A reason is required.") },
+      { key: "count", value: "1", label: wTH("ward.how-many-records-were-sent", "How many records were sent?"), required: wT("ward.enter-a-real-count-of-what", "Enter a real count of what was sent.") }
+    ] }, function (v) {
+      var count = Number(v.count);
+      if (!Number.isFinite(count) || count < 0) { st.err = wT("ward.enter-a-real-count-of-what", "Enter a real count of what was sent."); return; }
+      st.busy = true; paint();
+      return apiPost("/ward/roi-fulfill", { orgId: st.orgId, roiId: roiId, deliveredStatus: v.delivered, resourceCounts: { records: count } })
+        .then(function (r) { if (settle(r, wT("ward.fulfilled", "Fulfilled."))) loadRoi(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-fulfillment", "Could not record that fulfillment."); paint(); });
+    });
   }
   function billingOpen() {
     st.view = "billing"; st.billing = null; paint(); loadBilling();
@@ -12176,22 +12360,24 @@
   }
   function transmit(orderId) {
     if (!orderId) return;
-    var where = ""; try { where = G.prompt(wTD("ward.send-to-which-pharmacy-leave-blank", "Send to which pharmacy? (leave blank to send unaddressed)"), "") || ""; } catch (e) { return; }
-    st.busy = true; paint();
-    apiPost("/ward/transmit", { orgId: st.orgId, orderId: orderId, channel: "pharmacy", destination: where.trim() })
-      // The server's own wording is shown: it says queued, not sent, and that distinction is the
-      // entire point of the card.
-      .then(function (r) { if (settle(r, r && r.note)) loadOutbox(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-queue-the-prescription", "Could not queue the prescription."); paint(); });
+    askReason(wTH("ward.send-to-which-pharmacy-leave-blank", "Send to which pharmacy? (leave blank to send unaddressed)"), "", wTH("ward.continue", "Continue"), function (where) {
+      st.busy = true; paint();
+      return apiPost("/ward/transmit", { orgId: st.orgId, orderId: orderId, channel: "pharmacy", destination: where })
+        // The server's own wording is shown: it says queued, not sent, and that distinction is the
+        // entire point of the card.
+        .then(function (r) { if (settle(r, r && r.note)) loadOutbox(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-queue-the-prescription", "Could not queue the prescription."); paint(); });
+    }, { type: "text", icon: "send" });
   }
   function resolveTx(id) {
     if (!id) return;
-    var what = ""; try { what = G.prompt(wTD("ward.what-was-done-instead-printed-and", "What was done instead? (printed and handed over, re-sent, cancelled)"), "") || ""; } catch (e) { return; }
-    if (!what.trim()) { st.err = wT("ward.say-what-was-done-clearing-it", "Say what was done. Clearing it off the list without a reason leaves a patient with no prescription and no trace of why."); paint(); return; }
-    st.busy = true; paint();
-    apiPost("/ward/transmit-resolve", { orgId: st.orgId, transmissionId: id, resolution: what.trim() })
-      .then(function (r) { if (settle(r, wT("ward.recorded-the-transmission-still-reads-as", "Recorded. The transmission still reads as undelivered, because it was."))) loadOutbox(); else paint(); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    askReason(wTH("ward.what-was-done-instead-printed-and", "What was done instead? (printed and handed over, re-sent, cancelled)"),
+      wT("ward.say-what-was-done-clearing-it", "Say what was done. Clearing it off the list without a reason leaves a patient with no prescription and no trace of why."), null, function (what) {
+        st.busy = true; paint();
+        return apiPost("/ward/transmit-resolve", { orgId: st.orgId, transmissionId: id, resolution: what })
+          .then(function (r) { if (settle(r, wT("ward.recorded-the-transmission-still-reads-as", "Recorded. The transmission still reads as undelivered, because it was."))) loadOutbox(); else paint(); })
+          .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+      }, { icon: "task_alt" });
   }
 
   function saveVitals() {
@@ -12207,12 +12393,19 @@
     var o2 = val("wv_o2"); if (o2 !== "") { v.o2 = o2; any = true; }
     var ac = val("wv_acvpu"); if (ac) { v.acvpu = ac; any = true; }
     if (!any) { st.err = wT("ward.nothing-to-record", "Nothing to record."); paint(); return; }
+    if (st.vitalsSaving) return;
+    st.vitalsSaving = true; st.vitalsSaid = null;
     st.busy = true; paint();
     var clearVitals = function () {
       VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
       ["wv_o2", "wv_acvpu"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
     };
-    bedsideWrite("vitals", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, vitals: v, recordedAt: new Date().toISOString() },
+    var done = function () {
+      st.vitalsSaving = false;
+      if (st.sel === s) st.vitalsSaid = st.err || st.refusal ? { ok: false, text: st.err || wT("ward.vitals-not-recorded-see-above", "Not recorded. The reason is shown above.") } : st.note ? { ok: true, text: st.note } : null;
+      paint();
+    };
+    Promise.resolve(bedsideWrite("vitals", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, vitals: v, recordedAt: new Date().toISOString() },
       { label: "Vitals", patientId: s.patientId, onKept: clearVitals }, function (r) {
         // `written: 0` with ok:true is the server saying nothing was numeric. Say so plainly rather
         // than showing a success message for a save that recorded nothing.
@@ -12233,7 +12426,7 @@
           }
         }
         paint();
-      }, wT("ward.could-not-record-vitals", "Could not record vitals."));
+      }, wT("ward.could-not-record-vitals", "Could not record vitals."))).then(done, done);
   }
   function marAction(action, idx) {
     var s = st.sel, d = st.due[idx];
@@ -12254,13 +12447,16 @@
      * needed - the hospital's high-alert list does, on the server - and it never compares the witness
      * to the nurse. `WITNESS_NOT_INDEPENDENT` is the server's refusal to make. */
     if (action === "administer") { var w = val("wWitness"); if (w) body.witnessId = w; }
-    if (action === "hold" || action === "refuse" || action === "cancel") {
-      var why = ""; try { why = G.prompt(wTD("ward.reason-for", "Reason for {action}:", { action: marWord(action) })) || ""; } catch (e) {}
-      if (!why.trim()) { st.err = wT("ward.a-reason-is-required-to-a", "A reason is required to {action} a dose.", { action: marWord(action) }); paint(); return; }
-      body.reason = why.trim();
+    if ((action === "hold" || action === "refuse" || action === "cancel") && !body.reason) {
+      askReason(wTH("ward.reason-for", "Reason for {action}:", { action: esc(marWord(action)) }, "", 1), wT("ward.a-reason-is-required-to-a", "A reason is required to {action} a dose.", { action: marWord(action) }), null,
+        function (why) { return marSend(action, s, d, Object.assign(body, { reason: why })); }, { icon: "medication", danger: true });
+      return;
     }
+    marSend(action, s, d, body);
+  }
+  function marSend(action, s, d, body) {
     st.busy = true; paint();
-    bedsideWrite("mar", body, { label: (d.drug || wT("ward.dose", "Dose")) + " " + marWord(action), patientId: s.patientId, expectedVersion: d.orderVersion },
+    return bedsideWrite("mar", body, { label: (d.drug || wT("ward.dose", "Dose")) + " " + marWord(action), patientId: s.patientId, expectedVersion: d.orderVersion },
       function (r) {
         if (r && r.error === "order_changed") { st.busy = false; st.err = wT("ward.not-recorded-this-order-changed-after", "Not recorded: this order changed after the round was loaded. Reload the round and check the order before giving or charting."); paint(); return; }
         if (settle(r, r && r.to ? action + ": " + r.from + " → " + r.to : null)) loadRound(); else paint();
@@ -12392,6 +12588,8 @@
   function onKey(e) {
     var r = document.getElementById("smdWard");
     if (!r || !r.classList.contains("on")) return;
+    // An open question owns the keyboard: Escape cancels it, and no ward shortcut fires behind it.
+    if (st.ask) { if (e.key === "Escape") { e.preventDefault(); askCancel(); } return; }
     // The forced acknowledgement screen and the sheets opened over the ward own the keyboard.
     if (document.getElementById("wsq-alert")) return;
     var dc = document.getElementById("smdDischarge"); if (dc && dc.classList.contains("on")) return;
@@ -12435,6 +12633,8 @@
      * moved on, so the layer goes with it instead of staying on top and taking their next click. */
     // Who a name on the screen is: says so and changes nothing, so it never closes a layer it was clicked inside.
     if (cmd === "whoinfo") { whoInfo(arg); return; }
+    if (cmd === "askok") { askSubmit(); return; }
+    if (cmd === "askcancel") { askCancel(); return; }
     if (cmd !== "summary") closeSummaryLayer();
     if (cmd === "close") { close(); return; }
     if (cmd === "chartcat") { chartNavShow(arg); return; }
@@ -12551,7 +12751,7 @@
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
-      st.sel = p; st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = [];
+      st.sel = p; st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = []; st.vitalsSaid = null;
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.timeline = null; st.activeMeds = null;
       st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
@@ -12573,7 +12773,7 @@
       var pe = null;
       for (var k2 = 0; k2 < ((st.ed && st.ed.patients) || []).length; k2++) { if (st.ed.patients[k2].encounterId === arg) { pe = st.ed.patients[k2]; break; } }
       if (!pe) return;
-      st.sel = Object.assign({ class: "ED" }, pe); st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = [];
+      st.sel = Object.assign({ class: "ED" }, pe); st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = []; st.vitalsSaid = null;
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.resusBundles = null;
       st.edRecord = null; st.referrals = null;
       st.err = ""; st.note = ""; st.refusal = null;
@@ -12880,12 +13080,14 @@
     if (cmd === "labtmpl") { labTemplateApply(arg); return; }
     if (cmd === "labdept") { st.labDept = arg; paint(); return; }
     if (cmd === "labverify" || cmd === "labreturn") {
-      var reason = cmd === "labreturn" ? (window.prompt(wTD("ward.what-needs-checking-or-re-entering", "What needs checking or re-entering?")) || "") : "";
-      if (cmd === "labreturn" && !reason.trim()) { st.err = wT("ward.say-what-needs-checking", "Say what needs checking."); paint(); return; }
-      st.busy = true; paint();
-      apiPost("/ward/verify-result", { orgId: st.orgId, reportId: arg, decision: cmd === "labverify" ? "verify" : "return", reason: reason || undefined })
-        .then(function (r) { if (settle(r, cmd === "labverify" ? wT("ward.verified-the-result-is-final", "Verified. The result is final.") : wT("ward.returned-for-re-entry", "Returned for re-entry."))) loadLabBoard(); else paint(); })
-        .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
+      var verifySend = function (reason) {
+        st.busy = true; paint();
+        return apiPost("/ward/verify-result", { orgId: st.orgId, reportId: arg, decision: cmd === "labverify" ? "verify" : "return", reason: reason || undefined })
+          .then(function (r) { if (settle(r, cmd === "labverify" ? wT("ward.verified-the-result-is-final", "Verified. The result is final.") : wT("ward.returned-for-re-entry", "Returned for re-entry."))) loadLabBoard(); else paint(); })
+          .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
+      };
+      if (cmd === "labreturn") askReason(wTH("ward.what-needs-checking-or-re-entering", "What needs checking or re-entering?"), wT("ward.say-what-needs-checking", "Say what needs checking."), null, verifySend, { icon: "undo" });
+      else verifySend("");
       return;
     }
     if (cmd === "labresultclose") { st.labResultFor = null; st.labResultOutcome = null; paint(); return; }
@@ -12914,7 +13116,11 @@
     if (cmd === "ntaskadd") { nursingPost("/ward/nursing-task", { patientId: (st.nursingPanel || {}).patientId, title: val("wNtTitle"), dueAt: val("wNtDue") ? new Date(val("wNtDue")).toISOString() : "" }, wT("ward.task-added", "Task added.")); return; }
     if (cmd === "ntaskact") {
       var ta = String(arg || "").split("~"), tb = { taskId: ta[0], action: ta[1], expectedVersion: Number(ta[2]) };
-      if (ta[1] === "cancel") { try { tb.reason = G.prompt(wTD("ward.why-is-this-task-cancelled", "Why is this task cancelled?")) || ""; } catch (e) { tb.reason = ""; } if (!tb.reason.trim()) return; }
+      if (ta[1] === "cancel") {
+        askReason(wTH("ward.why-is-this-task-cancelled", "Why is this task cancelled?"), wT("ward.a-cancellation-needs-a-reason", "A cancellation needs a reason."), null,
+          function (why) { tb.reason = why; return nursingPost("/ward/nursing-task-act", tb, wT("ward.task-cancelled", "Task cancelled.")); }, { danger: true });
+        return;
+      }
       if (ta[1] === "done" && st.nursingPanel) {
         var np = st.nursingPanel;
         tb.orgId = st.orgId; tb.encounterId = np.encounterId;
@@ -13088,7 +13294,8 @@
   /* The discharge and follow-up forms keep what is typed in state, so a repaint cannot wipe it (LT-17). */
   function keepFormField(t) {
     if (!t || !t.getAttribute) return false;
-    var k = t.getAttribute("data-w-dc"), f = t.getAttribute("data-w-fu");
+    var k = t.getAttribute("data-w-dc"), f = t.getAttribute("data-w-fu"), q = t.getAttribute("data-w-ask");
+    if (q && st.ask) { st.ask.values[q] = String(t.value == null ? "" : t.value); return "ask"; }
     if (k && st.dc) { st.dc[k] = String(t.value == null ? "" : t.value); return k; }
     if (f && st.fu) { st.fu[f] = String(t.value == null ? "" : t.value); return f; }
     return false;
@@ -13146,6 +13353,8 @@
     el.removeEventListener("change", onFormChange); el.addEventListener("change", onFormChange);
     ["mousedown", "pointerdown", "keydown"].forEach(function (t) { el.removeEventListener(t, onSelectPress, true); el.addEventListener(t, onSelectPress, true); });
     ["change", "focusout"].forEach(function (t) { el.removeEventListener(t, selectClosed, true); el.addEventListener(t, selectClosed, true); });
+    el.removeEventListener("pointerdown", onPressStart, true); el.addEventListener("pointerdown", onPressStart, true);
+    ["pointerup", "pointercancel"].forEach(function (t) { document.removeEventListener(t, onPressEnd, true); document.addEventListener(t, onPressEnd, true); });
     // Live search: re-render only the roster so the search box keeps focus and its caret.
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     document.removeEventListener("keydown", onKey); document.addEventListener("keydown", onKey);
@@ -13185,7 +13394,7 @@
   }
   function close() {
     closeSummaryLayer();
-    st.dc = null; st.fu = null;
+    st.dc = null; st.fu = null; st.ask = null;
     var el = root(); el.classList.remove("on"); el.innerHTML = "";
     try { document.removeEventListener("keydown", onKey); } catch (e) {}
     st.list = null; st.sel = null; st.timeline = null; st.activeMeds = null; st.timelineGap = 0;
@@ -13234,7 +13443,7 @@
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut,
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _balanceWindow: balanceWindow, _scoreWhyNot: scoreWhyNot, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut,
     // The one staff identity rendering, for discharge.js (owner 2026-09-16: name and employee id wherever staff are named).
     _who: staffWho, _whoText: whoText, _whoFetch: whoFetch, _whoInfo: whoInfo };
 })();
