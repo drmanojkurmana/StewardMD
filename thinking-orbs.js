@@ -690,10 +690,10 @@
   function getOrbClusterHTML(stage, cls) {
     var primaryState = getStateForStage(stage, cls);
     var isWeb = (cls && cls.indexOf('webbusy') !== -1) || (stage && stage.toLowerCase().indexOf('web') !== -1);
-    var companions = isWeb ? ['weaving', 'connecting', 'composing'] : ['solving', 'searching', 'braid'];
+    var companions = isWeb ? ['weaving', 'connecting', 'composing'] : ['solving', 'searching', 'weaving'];
     // Filter out primary from companions
     companions = companions.filter(function (s) { return s !== primaryState; });
-    while (companions.length < 2) companions.push('orbits');
+    while (companions.length < 2) companions.push('working');
 
     return '<div class="maik-orb-cluster" data-orb-cluster="1">' +
       '<div class="maik-orb-main" title="Active Thinking Orb: ' + primaryState + '">' +

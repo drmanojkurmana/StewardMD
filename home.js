@@ -3816,7 +3816,22 @@
       maikStoreConvos(list);
     } catch (e) {}
   }
-  function maikSaveThread(h) { try { localStorage.setItem(maikThreadKey(), h || ""); } catch (e) {} maikUpsertConv(h); }
+  var _maikSaveTimer = null;
+  function maikSaveThread(h) {
+    _maikBodyHTML = h || "";
+    if (_maikSaveTimer) clearTimeout(_maikSaveTimer);
+    _maikSaveTimer = setTimeout(function () {
+      _maikSaveTimer = null;
+      try { localStorage.setItem(maikThreadKey(), _maikBodyHTML); } catch (e) {}
+      try { maikUpsertConv(_maikBodyHTML); } catch (e) {}
+    }, 120);
+  }
+  function maikFlushThread(h) {
+    if (_maikSaveTimer) { clearTimeout(_maikSaveTimer); _maikSaveTimer = null; }
+    var target = (h != null) ? h : (_maikBodyHTML || "");
+    try { localStorage.setItem(maikThreadKey(), target); } catch (e) {}
+    try { maikUpsertConv(target); } catch (e) {}
+  }
   function maikAcctLabel() { try { var a = (window.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile()) || null; return (a && a.email) || (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || ""; } catch (e) { return ""; } }
   function maikAgo(ts) { var s = Math.max(0, (Date.now() - (ts || 0)) / 1000); if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + "m ago"; if (s < 86400) return Math.floor(s / 3600) + "h ago"; if (s < 604800) return Math.floor(s / 86400) + "d ago"; try { return new Date(ts).toLocaleDateString(); } catch (e) { return ""; } }
   // ── V4: Universal Semantic Router — cached, runs on EVERY query so retrieval always keys off ONE
@@ -4662,7 +4677,8 @@ body.dark .maik-fu{background:var(--mk-field)}
    the clinician exactly what they are about to ask. */
 .maik-refine-in{display:flex;flex:1 1 100%;align-items:center;gap:6px;padding:5px 6px 5px 12px;border:1px solid var(--mk-teal);border-radius:999px;background:var(--mk-field);color:var(--mk-ink);margin:0;max-width:100%}
 .maik-refine-il{font:600 12px/1 'Inter';color:var(--mk-mut);white-space:nowrap}
-.maik-refine-inp{border:0;outline:0;background:transparent;font:500 13px/1.2 'Inter';color:var(--mk-ink);min-width:0;flex:1 1 auto;padding:2px 0}
+.maik-refine-inp{border:0 !important;outline:none !important;box-shadow:none !important;background:transparent;font:500 13px/1.2 'Inter';color:var(--mk-ink);min-width:0;flex:1 1 auto;padding:2px 0;-webkit-tap-highlight-color:transparent}
+.maik-refine-inp:focus,.maik-refine-inp:focus-visible{outline:none !important;border:0 !important;box-shadow:none !important}
 .maik-refine-inp::placeholder{color:var(--mk-faint)}
 .maik-refine-x{position:relative;flex:none;border:0;background:transparent;color:var(--mk-mut);width:24px;height:24px;border-radius:50%;font:700 15px/1 'Inter';cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;transition:background .12s,color .12s}
 .maik-refine-x:hover{background:var(--mk-bg);color:var(--mk-ink)}
@@ -4750,7 +4766,7 @@ body.dark .maik-exp{box-shadow:0 12px 34px rgba(0,0,0,.55)}
 .maik-exp .ic{color:var(--mk-teal);display:flex;flex:0 0 auto}
 .maik-ta{flex:1;border:none;background:transparent;outline:none;resize:none;font:500 14px 'Inter';color:var(--mk-ink);max-height:88px;padding:8px 0}
 .maik-ta::placeholder{color:var(--mk-faint)}
-.maik-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--mk-send);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:0 6px 16px rgba(15,118,110,.5)}#maikSheet button,#maikSheet .maik-chip,#maikSheet .maik-fu,#maikSheet .maik-more,#maikSheet [role=button],#maikSheet label{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent}#maikSheet button,#maikSheet .maik-hd,#maikSheet .maik-cmp,#maikSheet .maik-disc,#maikSheet .maik-chip,#maikSheet .maik-fu{-webkit-user-select:none;user-select:none}#maikSheet .maik-b,#maikSheet .maik-b *{-webkit-user-select:text;user-select:text}#maikSheet button,#maikSheet .maik-chip,#maikSheet .maik-fu{touch-action:manipulation}.maik-send{transition:transform .09s ease,box-shadow .12s ease,background .12s ease}.maik-send:active{transform:scale(.88);box-shadow:0 2px 6px rgba(15,118,110,.45)}.maik-mic:active,.maik-img:active,.maik-research:active{transform:scale(.9)}.maik-chip:active,.maik-fu:active{transform:scale(.97);opacity:.85}#maikSheet button:focus{outline:none}#maikSheet button:focus-visible{outline:2px solid var(--mk-teal,#0e6e63);outline-offset:2px}
+.maik-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--mk-send);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:0 6px 16px rgba(15,118,110,.5)}#maikSheet button,#maikSheet .maik-chip,#maikSheet .maik-fu,#maikSheet .maik-more,#maikSheet [role=button],#maikSheet label{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent}#maikSheet button,#maikSheet .maik-hd,#maikSheet .maik-cmp,#maikSheet .maik-disc,#maikSheet .maik-chip,#maikSheet .maik-fu{-webkit-user-select:none;user-select:none}#maikSheet .maik-b,#maikSheet .maik-b *{-webkit-user-select:text;user-select:text}#maikSheet button,#maikSheet .maik-chip,#maikSheet .maik-fu{touch-action:manipulation}.maik-send{transition:transform .09s ease,box-shadow .12s ease,background .12s ease}.maik-send:active{transform:scale(.88);box-shadow:0 2px 6px rgba(15,118,110,.45)}.maik-mic:active,.maik-img:active,.maik-research:active{transform:scale(.9)}.maik-chip:active,.maik-fu:active{transform:scale(.97);opacity:.85}#maikSheet button:focus{outline:none}#maikSheet button:focus-visible{outline:none}
 .maik-send:active{transform:scale(.94)}
 
 @keyframes maikGlow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.92;transform:scale(1.08)}}
@@ -5168,7 +5184,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // re-finds it via _live() and swaps in the answer + re-persists, so closing MaiK mid-request
           // no longer loses the answer (user: "close MaiK → never get the answer, it hangs"). If it's
           // truly stuck, the 90s watchdog replaces the same bubble with a Tap-to-retry link.
-          _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML);
+          _maikBodyHTML = body.innerHTML; maikFlushThread(_maikBodyHTML);
         }
       } catch (e) {}
       // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
@@ -5181,7 +5197,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       maikBuddyUnmount();      // stop his timer — the sheet is about to be removed
       sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260);
     }
-    function scroll() { body.scrollTop = body.scrollHeight; }
+    function scroll(smooth) {
+      if (!body) return;
+      requestAnimationFrame(function () {
+        if (!body) return;
+        if (smooth) {
+          try { body.scrollTo({ top: body.scrollHeight, behavior: "smooth" }); return; } catch (e) {}
+        }
+        body.scrollTop = body.scrollHeight;
+      });
+    }
     // Prepend the faint centered wordmark watermark (§1 .maik-wm) behind the thread the first time a
     // bubble is added. emptyState() renders its own hero logo instead, so it deliberately omits this.
     function bubble(who, html) { if (!body.querySelector(".maik-wm")) { var wm = document.createElement("img"); wm.className = "maik-wm"; wm.src = MK_LOGO(); wm.alt = ""; wm.setAttribute("aria-hidden", "true"); body.insertBefore(wm, body.firstChild); } var d = document.createElement("div"); d.className = "maik-b " + (who === "you" ? "you" : "ai"); d.innerHTML = html; body.appendChild(d); scroll(); try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {} return d; }
@@ -6335,6 +6360,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
+      try { autosizeQ(); } catch (e) {}
       try { scAbort(); } catch (e) {}   // sending stops any active dictation (red off) + keeps the box clear
       try { var _ex = sheet.querySelector("#maikExtract"); if (_ex) _ex.classList.remove("show"); } catch (e) {}
       /* Show the attached image INSIDE the question, the way any chat assistant does.
@@ -6522,14 +6548,38 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikHaptic(kind) {
       try {
         var H = window.SMD_HAPTICS;
-        if (!H) return;
-        if (kind === "stop") H.medium(); else H.tap();
+        if (H) { if (kind === "stop") H.medium(); else H.tap(); return; }
+      } catch (e) {}
+      try {
+        var C = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.Haptics;
+        if (C && C.impact) {
+          C.impact({ style: kind === "stop" ? "MEDIUM" : "LIGHT" }).catch(function () {});
+          return;
+        }
+      } catch (e) {}
+      try {
+        if (navigator.vibrate) {
+          navigator.vibrate(kind === "stop" ? [16, 20, 16] : 12);
+        }
       } catch (e) {}
     }
 
-    sendBtn.addEventListener("click", function () {
+    // Immediate native touch response:
+    // preventDefault on pointerdown keeps textarea focused so soft keyboard doesn't bounce/collapse and freeze JS layout on send.
+    sendBtn.addEventListener("pointerdown", function (ev) {
+      ev.preventDefault();
+      maikHaptic(_maikBusy ? "stop" : "send");
+      sendBtn.classList.add("btn-pressed");
+    });
+    ["pointerup", "pointercancel", "pointerleave"].forEach(function (evName) {
+      sendBtn.addEventListener(evName, function () {
+        sendBtn.classList.remove("btn-pressed");
+      });
+    });
+    sendBtn.addEventListener("click", function (ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      sendBtn.classList.remove("btn-pressed");
       if (_maikBusy) { maikHaptic("stop"); maikStopNow(); return; }
-      maikHaptic("send");
       send();
     });
     // The other composer controls get the same light tap, so the whole bar feels consistent.

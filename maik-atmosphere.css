@@ -83,3 +83,71 @@ html body:not(.dark):not(.v3-dark) #maikSheet :is(.maik-logo,.maik-side-logo,.ma
 @media (prefers-reduced-motion: reduce) {
   .maik-orb-main, .maik-thinking-orb { transition: none; }
 }
+
+/* ── Eradicate rectangular/square focus boxes on all textboxes & refine pills ── */
+#maikSheet input,
+#maikSheet textarea,
+#maikSheet select,
+#maikSheet button,
+#maikSheet input:focus,
+#maikSheet textarea:focus,
+#maikSheet select:focus,
+#maikSheet button:focus,
+#maikSheet input:focus-visible,
+#maikSheet textarea:focus-visible,
+#maikSheet select:focus-visible,
+#maikSheet button:focus-visible,
+.maik-refine-inp,
+.maik-refine-inp:focus,
+.maik-refine-inp:focus-visible {
+  outline: none !important;
+  outline-style: none !important;
+  outline-width: 0 !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.maik-refine-inp {
+  border: 0 !important;
+  background: transparent !important;
+}
+
+/* ── Native App Send & Composer Controls ── */
+html body #maikSheet .maik-send {
+  position: relative;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px;
+  height: 44px;
+  border-radius: 16px !important;
+  background: var(--mk-teal, #0e6e63) !important;
+  color: #fff !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 4px 14px rgba(14, 110, 99, 0.42) !important;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent !important;
+  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1), background 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease !important;
+  will-change: transform;
+}
+
+html body #maikSheet .maik-send:active,
+html body #maikSheet .maik-send.btn-pressed {
+  transform: scale(0.90) !important;
+  filter: brightness(1.15) !important;
+  box-shadow: 0 2px 6px rgba(14, 110, 99, 0.28) !important;
+}
+
+/* Stopping mode (generating state) - sleek native glass stop square */
+html body #maikSheet .maik-send.stopping {
+  background: rgba(239, 68, 68, 0.16) !important;
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.32) !important;
+  box-shadow: 0 2px 10px rgba(239, 68, 68, 0.15) !important;
+}
+html body #maikSheet .maik-send.stopping:hover {
+  background: rgba(239, 68, 68, 0.24) !important;
+}
+
