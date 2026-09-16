@@ -334,6 +334,34 @@ test('a radiology report opened by navigation is proven and keyed to its list ro
   assert.deepEqual(data.params.resultid, { from: 'radiology', field: 'resultid' });
 });
 
+/* B2 REGRESSION. A page-load candidate (shell: page:true, xhr:false) used to be accepted ONLY when
+ * chained(paramsOf(...)) traced its key to a parent row - so a doctor demonstrating radiology for a
+ * patient the crawl never proved a worklist row for (no parents to trace against) stayed unproven
+ * forever, even though the request plainly carries a patient/visit identifier (recordNo). Now a
+ * page-load candidate whose query carries a NON-EMPTY patient/visit key is also accepted. */
+test('proveView: a radiology report opened by navigation, with no traceable parent, is still proven because its query carries a patient key', async () => {
+  const REPORT = '<html><body><h3>CT BRAIN PLAIN</h3><p>No acute intracranial abnormality. Ventricles normal.</p></body></html>';
+  const entries = [{ seq: 61, method: 'GET', url: HOST + '/Radio/Home?recordNo=MR900001', body: null, reqCt: '', xhr: false, status: 200, shape: { kind: 'unknown', page: true } }];
+  const view = { resourceHint: 'radiology-detail', detailOf: 'radiology', pathTemplate: HOST + '/Radio/Home', rowsSelector: 'body', headers: ['Impression'] };
+  const screen = [['No acute intracranial abnormality. Ventricles normal.']];
+  // No `parents`: nothing to trace recordNo against, so chained() is false here.
+  await proveView({ client: fakePage({ entries, screen, answers: { 61: { status: 200, contentType: 'text/html', text: REPORT } } }) , view });
+  assert.equal(view.proof.status, 'proven', JSON.stringify(view.proof));
+  const data = view.endpoints.find((e) => e.role === 'data');
+  assert.equal(data.path.split('?')[0], '/Radio/Home');
+  assert.deepEqual(data.params.recordNo, { unmapped: true }, 'untraceable, but still a patient key: proven, not silently constant');
+});
+
+test('proveView: a page-load candidate with no patient/visit key in its query is still refused, even with no traceable parent', async () => {
+  const REPORT = '<html><body><h3>CT BRAIN PLAIN</h3><p>No acute intracranial abnormality. Ventricles normal.</p></body></html>';
+  const entries = [{ seq: 62, method: 'GET', url: HOST + '/Radio/Home', body: null, reqCt: '', xhr: false, status: 200, shape: { kind: 'unknown', page: true } }];
+  const view = { resourceHint: 'radiology-detail', detailOf: 'radiology', pathTemplate: HOST + '/Radio/Home', rowsSelector: 'body', headers: ['Impression'] };
+  const screen = [['No acute intracranial abnormality. Ventricles normal.']];
+  await proveView({ client: fakePage({ entries, screen, answers: { 62: { status: 200, contentType: 'text/html', text: REPORT } } }), view });
+  assert.equal(view.proof.status, 'unproven', JSON.stringify(view.proof));
+  assert.equal(view.endpoints, undefined);
+});
+
 test('reportWords: the longest string on screen, its distinct 5+ letter words, only when there are at least 8', () => {
   assert.deepEqual(reportWords([['a b c'], ['too short']]), [], 'fewer than 8 qualifying words is a header, not a report');
   assert.deepEqual(

@@ -457,6 +457,14 @@ export function safeParams(params) {
 /** The fields a proven request sends that trace to a patient or a row: what makes a prerequisite patient-bound. */
 export function chained(params) { return Object.values(params || {}).some((s) => s && s.from); }
 
+/* A page-load candidate whose query names a patient or visit field at all (traced or not - {unmapped}
+ * still counts, {empty} does not): the doctor's own navigation to a report IS the patient-bound call
+ * even when there is no parent row to trace it against (GHIS radiology, unreachable by the crawl, has
+ * no worklist row to chain to). */
+export function patientKeyed(params) {
+  return Object.keys(params || {}).some((k) => (PATIENT_KEY.test(k) || VISIT_KEY.test(k)) && !(params[k] && params[k].empty));
+}
+
 /* ---- the brain ---------------------------------------------------------------------------------- */
 
 function candidateStructure(e) {
@@ -625,8 +633,11 @@ export async function proveView({ client, view, brain = null, since = -1, label 
     }
     trace.tried.push({ method: e.method, path: candidateStructure(e).path.replace(/\d{3,}/g, '#'), role: r.role, kind, hits: o.hits, ratio: o.ratio });
     if (kind === 'login') return done('signed-out');
-    // A whole page is layout, unless it is keyed on this patient (a report opened by navigation).
-    if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr && !chained(paramsOf(e, parents)))) continue;
+    // A whole page is layout, unless it is keyed on this patient (a report opened by navigation) - traced
+    // to a parent row, or (no parent to trace against, e.g. GHIS radiology) its query names a patient or
+    // visit field at all.
+    const p = paramsOf(e, parents);
+    if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr && !chained(p) && !patientKeyed(p))) continue;
     const rows = rowsForChain(resp.text, resp.contentType);
     /* GEMINI JUDGES THE REPLY, the ward list included: an out-patient queue carries patients too, and
      * was proven as the ward list on the live run (DashboardUnit, 2026-09-15). Only column names, a row
