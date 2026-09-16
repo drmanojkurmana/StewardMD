@@ -6893,3 +6893,29 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
 - NOT built: own-bridge credentials (A1), production (A2), DPDP confirmation record, WellnessRecord and
   HealthDocumentRecord from the ward record, taxed invoices, the V3 HIU data-push route's per-hospital HIU identity
   on acknowledgement (still the deployment's), and any live sandbox run.
+
+## 2026-09-16 Scheduled backups go to a backup-destination connector, never to an existing bucket by default
+
+- **Where a backup can be written today without a new binding: nowhere safe by default.** The Pages bindings that
+  exist are CONNECT_DB (the store being backed up, same failure domain), MAIK_KV (25 MB values, not a backup store),
+  FOLLOWCARE_R2 (FollowCare photos under a 7-day lifecycle) and OTA_R2 (`stewardmd-offline`, the paid drug DB and OTA
+  files). Putting hospital records in either bucket would be a silent answer to owner decision S1 and to "where the
+  record backups live, and who holds them", and a new Cloudflare coupling in domain logic. Not done.
+- **So the destination is a per-hospital connector** (`functions/_wardsynq/backup-destinations.js`, kind `backup`,
+  Admin Center > Integrations > Backup destination): `s3` is the hospital's own S3-compatible bucket with sealed
+  credentials (works now, needs nothing from the owner); `platform` is the deployment's object store (`DOC_S3_*`,
+  object-store.js) and reports "not configured" until S1 chooses the bucket. SFTP is not offered: a Worker has no
+  SSH client without a new dependency; an S3 gateway (MinIO) in front of SFTP covers it.
+- **Schedule** (`backup-schedule.js`): the worker's existing hourly cron POSTs `/api/queue/ops/backup-all` (no new
+  cron). Per hospital: one full a month, one incremental a day from the last run's record-store sequence, a run too
+  large for one request continues next hour (`more`). Encrypted AES-256-GCM under an HKDF key per tenant from the
+  existing document key; no key, no backup. Each file read back and SHA-256 checked. Retention from the connector
+  (default 30 daily, 12 monthly); a kept restore point keeps every file of its chain before it.
+- **Verification**: weekly restore dry run into a MemoryRepository scratch tenant (never the live store): files,
+  checksums, verifyPlan over the chain, row counts per type against the runs' manifests, and the audit-chain link
+  recorded at backup time against the live chain. Recorded as an automated RestoreTest. Above 20,000 rows the
+  scratch replay is skipped and the test is recorded as partial (ponytail ceiling).
+- **Reporting**: System health's Backup line says "Backups are not running: no backup destination is configured"
+  with what to set up, or the S1 wait, or the last failure; otherwise last successful backup, size, last restore test.
+  A failure pushes to the phones of active staff.admin members once a day per failure code, and the outcome (sent n
+  of m, no device, push not configured) is shown, never "delivered".

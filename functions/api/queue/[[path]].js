@@ -215,7 +215,8 @@ import { enrolOnPathway, pathwayProgress, overridePathwayStep, resolveSpecialty 
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
 // S3 P0: critical results pushed to phones, behind org setting wardsynq.alerts.push.enabled (default off).
-import { notifyDepsFor, directoryFromEnv, smsSetup, staffReaders } from "../../_wardsynq/alert-deps.js";
+import { notifyDepsFor, directoryFromEnv, smsSetup, staffReaders, alertAdmins } from "../../_wardsynq/alert-deps.js";
+import { backupHospital, failureAlert } from "../../_wardsynq/backup-schedule.js";
 import { alertDeliveryStatus } from "../../_wardsynq/push-alerts.js";
 import { KIND, logEvent } from "../../_wardsynq/observability.js";
 import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
@@ -617,6 +618,33 @@ function opdOrgFor(env, hospitalId) {
  * a public endpoint cannot be used to run up storage calls. */
 let docProbeCache = null;
 const tickLogKey = (tenantId) => `wsq:tick:last:${tenantId}`;
+/* The scheduled backup's last outcome per hospital, for System health: outcome codes and this codebase's own
+ * sentences only, never a provider's response. The durable evidence is the BackupRun and RestoreTest records. */
+const backupLogKey = (tenantId) => `wsq:backup:last:${tenantId}`;
+/* One hospital's scheduled backup pass (backup-schedule.js), logged, and a failure pushed to its administrators
+ * at most once a day per failure code. A hospital with no destination is logged as not configured, not alerted:
+ * System health says so every time it is opened. */
+async function wsqBackup(env, org, mig) {
+  const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `backup:${mig.tenantId}`, limit: 1, windowMs: 1800000 });
+  if (!gate.allowed) return null;
+  const r = await backupHospital({ repository: wsqRecordDeps(env, mig.tenantId).repository, tenantId: mig.tenantId, env });
+  let prev = null;
+  if (env.MAIK_KV) { try { const v = await env.MAIK_KV.get(backupLogKey(mig.tenantId)); prev = v ? JSON.parse(v) : null; } catch { prev = null; } }
+  const failed = !r.ok && !r.notConfigured;
+  const entry = {
+    at: r.at, ok: !!r.ok, notConfigured: !!r.notConfigured, setup: r.setup || null, message: r.ok ? null : r.message || null,
+    backup: r.backup || null, pruned: r.pruned || 0, restoreTest: r.restoreTest ? r.restoreTest.outcome : null,
+    lastFailure: failed ? { at: r.at, step: r.step, error: r.error, message: r.message } : (prev && prev.lastFailure) || null,
+    alert: prev && prev.alert ? prev.alert : null,
+  };
+  if (failed && !(prev && prev.alert && prev.alert.error === r.error && String(prev.alert.at).slice(0, 10) === String(r.at).slice(0, 10))) {
+    try { entry.alert = { at: r.at, error: r.error, ...(await alertAdmins(env, org, failureAlert(org.name, r))) }; }
+    catch { entry.alert = { at: r.at, error: r.error, sent: 0, total: 0, reason: "ALERT_FAILED" }; }
+  }
+  if (env.MAIK_KV) await env.MAIK_KV.put(backupLogKey(mig.tenantId), JSON.stringify(entry), { expirationTtl: 90 * 86400 }).catch(() => {});
+  if (failed) console.error("wsq backup failed", mig.tenantId, r.step, r.error);
+  return r;
+}
 /* The one stock location the laboratory's own authority reaches (reagents and consumables). */
 const LAB_STOCK_LOCATION = "Laboratory";
 /* A RELEASED RESULT IS CHECKED AGAINST THE CRITICAL LIMITS, ALWAYS. openCriticalLoops was only
@@ -848,6 +876,32 @@ export async function onRequest(context) {
         }
       }
       return json({ ok: results.every((x) => !x.failed && !x.criticalsFailed), tenants: orgs.length, results }, 200, request);
+    }
+    /* THE SCHEDULED BACKUP (backup-schedule.js). The stewardmd-api worker's hourly cron POSTs here with the admin
+     * token; each WardSynQ hospital with a backup destination gets a daily backup, retention pruning and a weekly
+     * restore dry run. Hourly so a failed or unfinished backup is retried the same day; the plan inside decides
+     * whether one is due. */
+    if (method === "POST" && seg === "ops" && sub === "backup-all") {
+      if (!(await ownerOK(request, env))) {
+        const who = await resolveActor(request, env);
+        return json({ ok: false, error: who ? "forbidden" : "auth_required" }, who ? 403 : 401, request);
+      }
+      /* ponytail: sequential over at most 300 hospitals in one request, like tick-all. Fan out per hospital when
+       * backups of large hospitals near the request time limit. */
+      const orgs = (await ORG.listAllOrgs(env, 300)).filter((o) => o && o.mode === "wardsynq" && o.connectTenantId);
+      const results = [];
+      for (const o of orgs) {
+        try {
+          const mig = await wsqForcedMigration(env, o);
+          if (!mig || mig.error) { results.push({ orgId: o.id, skipped: (mig && mig.error) || "not_configured" }); continue; }
+          const r = await wsqBackup(env, o, mig);
+          results.push(r ? { orgId: o.id, ok: !!r.ok, notConfigured: !!r.notConfigured, step: r.ok ? null : r.step || null, error: r.ok ? null : r.error || null, backup: r.backup || null, pruned: r.pruned || 0, restoreTest: r.restoreTest ? r.restoreTest.outcome : null } : { orgId: o.id, skipped: "gate" });
+        } catch (e) {
+          console.error("wsq backup-all failed", o.id, String((e && e.message) || e).slice(0, 200));
+          results.push({ orgId: o.id, ok: false, failed: true });
+        }
+      }
+      return json({ ok: results.every((x) => x.skipped || x.ok || x.notConfigured), tenants: orgs.length, results }, 200, request);
     }
     /* THE LABORATORY ANALYSER CONNECTOR (lab-analysers.js). Before staff authentication on purpose: it is a
      * program on the hospital's own network, not a person, and carries no staff session. Its authority is the
@@ -3108,6 +3162,8 @@ export async function onRequest(context) {
           orgProbe: () => ORG.getOrg(env, wOrgId),
           documentProbe: async () => { const d = await documentStorageProbe(env); return { ...d, checkedAt: d.state !== "not_configured" && docProbeCache ? new Date(docProbeCache.at).toISOString() : null }; },
           lastTick: async () => { if (!env.MAIK_KV) return undefined; const v = await env.MAIK_KV.get(tickLogKey(mig.tenantId)); return v ? JSON.parse(v) : null; },
+          lastBackupRun: async () => { if (!env.MAIK_KV) return undefined; const v = await env.MAIK_KV.get(backupLogKey(mig.tenantId)); return v ? JSON.parse(v) : null; },
+          backupDestination: async () => (await activeConnectors(deps.recordDeps.repository, mig.tenantId, "backup"))[0] || null,
         });
         return json(r, 200, request);
       }

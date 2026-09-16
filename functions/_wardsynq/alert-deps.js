@@ -14,6 +14,7 @@ import { nativeTokensById, sendNativeToTokens } from "../_nativepush.js";
 import { deviceDirectory } from "./device-directory.js";
 import { serverPushChannel, smsFallbackSender } from "./push-alerts.js";
 import { sendTwoFactor } from "../_followcare_sms.js";
+import { CAPS, can } from "../_queue_roles.js";
 
 const alertsEnabled = (org) => !!(org && org.wardsynq && org.wardsynq.alerts && org.wardsynq.alerts.push && org.wardsynq.alerts.push.enabled === true);
 
@@ -69,4 +70,20 @@ function notifyDepsFor(env, org, tenantId, repository) {
   };
 }
 
-export { alertsEnabled, directoryFromEnv, smsSetup, staffReaders, notifyDepsFor };
+/* A hospital-administration alert (a failed backup) to the phones of active members holding staff.admin. Not a
+ * clinical alert, so it does not wait for alerts.push.enabled. Reports what happened: nobody, no phone, push not
+ * configured, or sent to n of m devices. Never "delivered". msg: { title, body, tag } with no patient data. */
+async function alertAdmins(env, org, msg) {
+  const members = await ORG.listMembers(env, org.id);
+  const admins = (members || []).filter((m) => m && m.active !== false && can(m.role, CAPS.STAFF_ADMIN)).map((m) => String(m.identity));
+  const directory = directoryFromEnv(env);
+  if (!admins.length) return { admins: 0, sent: 0, total: 0, reason: "NO_ADMIN" };
+  if (!directory) return { admins: admins.length, sent: 0, total: 0, reason: "PUSH_NOT_CONFIGURED" };
+  const tokenIds = new Set();
+  for (const identity of admins) (await directory.devicesFor(org.id, identity)).forEach((t) => tokenIds.add(t));
+  if (!tokenIds.size) return { admins: admins.length, sent: 0, total: 0, reason: "NO_DEVICE" };
+  const out = await sendNativeToTokens(env, await nativeTokensById(env, [...tokenIds]), { ...msg, data: { type: "wardsynq-admin", kind: "backup" } });
+  return { admins: admins.length, sent: out.sent || 0, total: out.total || 0, reason: out.disabled ? "PUSH_NOT_CONFIGURED" : null };
+}
+
+export { alertsEnabled, directoryFromEnv, smsSetup, staffReaders, notifyDepsFor, alertAdmins };

@@ -37,6 +37,8 @@
   //   lifetime (POSTs /api/connect/admin/sweep, flag-gated + no-op-safe on the Pages side).
   //   // VERIFY interval: hourly is the fail-safe default (tightly bounds sealed eph-key lifetime past TTL);
   //   the owner may relax to daily if the extra hourly no-op hits (404 while Connect is flag-OFF) are unwanted.
+  //   The same hourly cron POSTs /api/queue/ops/backup-all (WardSynQ scheduled backups; the daily plan is decided
+  //   per hospital server-side, so relaxing this to daily would stop same-day retries of a failed backup).
   // FollowCare AI voice-fallback scheduler at the IST call windows: 03:30 UTC = 09:00 IST (shares the
   //   recovery-dispatcher cron) and 11:30 UTC = 17:00 IST. Per-hospital window/tz + enable are re-checked
   //   server-side, so this is a no-op until a hospital turns voice ON.

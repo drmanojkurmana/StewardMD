@@ -50,7 +50,24 @@ const STORAGE_SETUP_CONSEQUENCE = "Document storage is not set up yet: the platf
 /* LT-34: MaiK on with no model it may send patient data to is a hospital setting, not an outage. */
 const MAIK_SETUP_CONSEQUENCE = "MaiK is not set up for this hospital: AI summaries and drafts are unavailable. Charting, prescribing and safety checks continue without it. A hospital administrator approves a model provider in Admin Center, MaiK clinical AI.";
 /* LT-34: "no backup ever recorded" says what to do, not only what is missing. */
-const BACKUP_TODO = "What to do: ask your WardSynQ support team to schedule the hospital record export, which records a backup each time it runs. Then restore one backup into a test system and record it under Admin Center, Security review, Record a restore test.";
+const BACKUP_TODO = "What to do: a hospital administrator adds a backup destination under Admin Center, Integrations, Backup destination. Backups then run daily and a restore dry run is recorded weekly; a restore into a test system can also be recorded under Admin Center, Security review, Record a restore test.";
+/* The scheduled backup (backup-schedule.js). Said plainly and never softened into "no backup yet". */
+const BACKUP_NOT_RUNNING = "Backups are not running: no backup destination is configured.";
+const BACKUP_NOT_RUNNING_CONSEQUENCE = "Backups are not running: if the record store were lost, the record could not be recovered from a backup. Nothing changes on the ward today; charting continues.";
+const sizeOf = (bytes) => { const n = Number(bytes) || 0; return n >= 1048576 ? `${(n / 1048576).toFixed(1)} MB` : n >= 1024 ? `${Math.round(n / 1024)} KB` : `${n} bytes`; };
+
+/** PURE. The facts System health shows about scheduled backups: last success and size, last restore test, last failure. */
+function backupFacts(runs, tests, log) {
+  const ok = (runs || []).filter((r) => r && r.scheduled === true && r.status === "ok" && !r.more).sort((a, b) => String(b.at).localeCompare(String(a.at)))[0] || null;
+  const test = (tests || []).filter(Boolean).sort((a, b) => String(b.at).localeCompare(String(a.at)))[0] || null;
+  const fail = log && log.lastFailure && (!ok || String(log.lastFailure.at) > String(ok.at)) ? log.lastFailure : null;
+  const facts = [
+    ok ? `Last successful backup ${ok.at}, ${sizeOf(ok.bytes)} (${ok.kind}, ${ok.rows} rows, checksum verified).` : "No scheduled backup has succeeded yet.",
+    test ? `Last restore test ${test.at}: ${test.outcome}${test.automated ? " (automatic dry run)" : ""}.` : "No restore test has been recorded.",
+  ];
+  if (fail) facts.push(`The last scheduled backup failed at ${fail.at}: ${fail.message || fail.error}${log.alert && log.alert.error === fail.error ? ` Administrators alerted: ${log.alert.sent || 0} of ${log.alert.total || 0} phones${log.alert.reason ? ` (${log.alert.reason})` : ""}.` : ""}`);
+  return { ok, test, fail, facts };
+}
 
 const TIMEOUT_MS = 3000;
 const MIN = 60000;
@@ -185,9 +202,23 @@ const DEPENDENCIES = [
       degraded: "Backup evidence incomplete: recovery of recent records is not confirmed. Nothing changes on the ward today; charting continues.",
     },
     async check(d, nowMs) {
-      const [runs, tests] = await Promise.all([d.repository.latestByType(d.tenantId, RUN_TYPE, 50), d.repository.latestByType(d.tenantId, RESTORE_TYPE, 200)]);
+      const [runs, tests] = await Promise.all([d.repository.latestByType(d.tenantId, RUN_TYPE, 50, { newest: true }), d.repository.latestByType(d.tenantId, RESTORE_TYPE, 200, { newest: true })]);
+      if (typeof d.backupDestination === "function") {
+        const [dest, log] = await Promise.all([d.backupDestination(), d.lastBackupRun ? d.lastBackupRun() : undefined]);
+        const f = backupFacts(runs, tests, log);
+        if (!dest || (log && log.notConfigured && String(log.at) > String((f.ok && f.ok.at) || ""))) {
+          const lead = !dest ? BACKUP_NOT_RUNNING : log.message || BACKUP_NOT_RUNNING;
+          return { ...down([lead, ...f.facts, !dest ? BACKUP_TODO : ""].filter(Boolean).join(" ")), consequence: BACKUP_NOT_RUNNING_CONSEQUENCE, setup: (!dest ? "hospital" : log.setup) || "hospital" };
+        }
+        if (f.fail) return down(f.facts.join(" "));
+        if (log === null && !f.ok) return degraded(`A backup destination is configured and no scheduled run has reported yet; the first runs within the hour. ${f.facts.join(" ")}`);
+      }
       const p = dataProtection(runs, tests, d.rpoMinutes, new Date(nowMs).toISOString());
       const reason = [p.reasons.join(" "), !p.lastBackup || !p.lastRestoreTest ? BACKUP_TODO : ""].filter(Boolean).join(" ") || null;
+      if (typeof d.backupDestination === "function") {
+        const facts = backupFacts(runs, tests, null).facts.join(" ");
+        return p.status === "green" ? up(facts) : p.status === "amber" ? degraded(`${reason} ${facts}`) : down(`${reason} ${facts}`);
+      }
       return p.status === "green" ? up(`Last backup ${p.lastBackup.at}; last restore test ${p.lastRestoreTest.at}.`) : p.status === "amber" ? degraded(reason) : down(reason);
     },
   },
