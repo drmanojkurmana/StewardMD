@@ -47,26 +47,40 @@ const SCCM_KIND = {
   conditions: "Condition", medications: "Medication", allergies: "AllergyIntolerance",
   observations: "Observation", diagnosticReports: "DiagnosticReport", documents: "DocumentReference",
 };
+// SECTION CODES (package ndhm.in 6.5.0, 2025-05-08). The multi-section profiles slice Composition.section on
+// code.coding.code (openAtEnd): a coded section is held to its slice's entry types, an uncoded one falls to the open
+// end. So a section is coded ONLY where every resource it accepts is a type its slice allows. DischargeSummaryRecord
+// Medications (MedicationRequest only) and Investigations (DiagnosticReportLab/Imaging only, not Observation) and
+// OPConsultRecord InvestigationAdvice (ServiceRequest only) therefore stay uncoded. All codes are SNOMED CT.
+const SECTION_CODE = {
+  dsHistory: ["1003642006", "Past medical history section"], allergy: ["722446000", "Allergy record"],
+  dsDocument: ["373942005", "Discharge summary"],
+  opHistory: ["371529009", "History and physical report"], opMedications: ["721912009", "Medication summary document"],
+  opObservations: ["404684003", "Clinical finding"], opDocument: ["371530004", "Clinical consultation report"],
+  prescription: ["440545006", "Prescription record"], immunization: ["41000179103", "Immunization record"],
+};
+const sectionCode = ([code, display]) => ({ coding: [{ system: "http://snomed.info/sct", code, display }], text: display });
 const RECORD_SHAPE = {
   OPConsultRecord: {
     type: { code: "371530004", display: "Clinical consultation report" }, encounter: true,
     sections: [
-      { name: "MedicalHistory", title: "Medical History", accepts: ["conditions"] },
-      { name: "Allergies", title: "Allergies", accepts: ["allergies"] },
-      { name: "Medications", title: "Medications", accepts: ["medications"] },
-      { name: "OtherObservations", title: "Other Observations", accepts: ["observations"] },
+      { name: "MedicalHistory", title: "Medical History", code: SECTION_CODE.opHistory, accepts: ["conditions"] },
+      { name: "Allergies", title: "Allergies", code: SECTION_CODE.allergy, accepts: ["allergies"] },
+      { name: "Medications", title: "Medications", code: SECTION_CODE.opMedications, accepts: ["medications"] },
+      { name: "OtherObservations", title: "Other Observations", code: SECTION_CODE.opObservations, accepts: ["observations"] },
       { name: "InvestigationAdvice", title: "Investigation Advice", accepts: ["diagnosticReports"] },
-      { name: "DocumentReference", title: "Document Reference", accepts: ["documents"] },
+      { name: "DocumentReference", title: "Document Reference", code: SECTION_CODE.opDocument, accepts: ["documents"] },
     ],
   },
   DischargeSummaryRecord: {
     type: { code: "373942005", display: "Discharge summary" }, encounter: true,
     sections: [
-      { name: "MedicalHistory", title: "Medical History", accepts: ["conditions"] },
-      { name: "Allergies", title: "Allergies", accepts: ["allergies"] },
+      { name: "MedicalHistory", title: "Medical History", code: SECTION_CODE.dsHistory, accepts: ["conditions"] },
+      { name: "Allergies", title: "Allergies", code: SECTION_CODE.allergy, accepts: ["allergies"] },
+      // Uncoded: the slice admits MedicationRequest only, and a StewardMD summary also carries MedicationStatements.
       { name: "Medications", title: "Medications", accepts: ["medications"] },
       { name: "Investigations", title: "Investigations", accepts: ["observations", "diagnosticReports"] },
-      { name: "DocumentReference", title: "Document Reference", accepts: ["documents"] },
+      { name: "DocumentReference", title: "Document Reference", code: SECTION_CODE.dsDocument, accepts: ["documents"] },
     ],
   },
   WellnessRecord: {
@@ -83,7 +97,7 @@ const RECORD_SHAPE = {
     // SCCM produces for a medication the patient is simply ON, rather than one prescribed here - is a
     // different resource type and is excluded. A prescription record carries prescriptions.
     type: { code: "440545006", display: "Prescription record" }, encounter: false,
-    sections: [{ title: "Prescription", accepts: ["medicationRequests"] }],
+    sections: [{ title: "Prescription", code: SECTION_CODE.prescription, accepts: ["medicationRequests"] }],
   },
   DiagnosticReportRecord: {
     // No FIXED code, but Composition.type.coding is min=1 AND its system is fixed to SNOMED - so a code
@@ -108,7 +122,7 @@ const RECORD_SHAPE = {
     // pushing a document the far end rejects.
     type: { code: "41000179103", display: "Immunization record" }, encounter: false,
     needs: ["immunizations"],
-    sections: [{ title: "Immunization", accepts: ["immunizations", "documents"] }],
+    sections: [{ title: "Immunization", code: SECTION_CODE.immunization, accepts: ["immunizations", "documents"] }],
   },
   InvoiceRecord: {
     // Same story: SCCM v1.1 added `invoices`. ABDM requires this HI type of an HMIS, and a patient asking
@@ -226,8 +240,12 @@ function buildPatient(p) {
   // NRCES Patient makes identifier min=1. The SCCM identifiers are used when present; otherwise the
   // record's own patient id is carried as a local identifier - NEVER the ABHA, which does not belong in a
   // bundle that crosses to another facility under a care-context reference.
+  // An identifier may name its own NRCES type ({system, code, display}, e.g. ndhm-identifier-type-code "ABHA"), which
+  // a hospital's own record does for the ABHA it holds under the patient's consent (functions/_wardsynq/abdm-hip.js).
+  const typeOf = (t) => (t && typeof t === "object" && t.system && t.code && t.display
+    ? { coding: [{ system: t.system, code: t.code, display: t.display }], text: t.display } : ID_TYPE_MR);
   const ids = (p.identifiers || []).filter((i) => i && i.value)
-    .map((i) => ({ type: ID_TYPE_MR, system: i.system || "https://stewardmd.in/patient-id", value: String(i.value) }));
+    .map((i) => ({ type: typeOf(i.type), system: i.system || "https://stewardmd.in/patient-id", value: String(i.value) }));
   res.identifier = ids.length ? ids : [{ type: ID_TYPE_MR, system: "https://stewardmd.in/patient-id", value: String(p.id) }];
   return stampMeta(res, { profile: [PROFILE("Patient")] });
 }
@@ -260,13 +278,24 @@ function buildHipOrg(hipId, system) {
     identifier: [{ type: ID_TYPE_PRN, system, value: String(hipId) }],
   }, { profile: [PROFILE("Organization")] });
 }
+const ACT_CODE_DISPLAY = { AMB: "ambulatory", IMP: "inpatient encounter", EMER: "emergency", ACUTE: "inpatient acute", NONAC: "inpatient non-acute", SS: "short stay", VR: "virtual", HH: "home health" };
+// The facility itself, for a hospital's own record: NRCES Organization needs identifier (type, system, value) and name.
+// System per the IG's own examples (https://facility.ndhm.gov.in, type PRN); the sandbox registry in sandbox.
+function buildFacilityOrg(f, system) {
+  const safe = String(f.hfrId).replace(/[^A-Za-z0-9_-]/g, "-");
+  return stampMeta({
+    resourceType: "Organization", id: "hfr-" + safe, name: String(f.name || ("Health facility " + f.hfrId)),
+    identifier: [{ type: ID_TYPE_PRN, system, value: String(f.hfrId) }],
+  }, { profile: [PROFILE("Organization")] });
+}
 // Composition.encounter is min=1 on OPConsultRecord and DischargeSummaryRecord. NRCES Encounter requires
 // class and status; an SCCM encounter supplies the rest when it has one.
 function buildEncounter(enc, subject) {
   const e = enc || {};
   const res = {
     resourceType: "Encounter", id: e.id || "enc-1", status: e.status || "finished",
-    class: { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: e.class || "AMB", display: e.classDisplay || "ambulatory" },
+    // The display is the v3-ActCode's own for the code sent; an inpatient stay was labelled "ambulatory" before.
+    class: { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: e.class || "AMB", display: e.classDisplay || ACT_CODE_DISPLAY[e.class || "AMB"] || "ambulatory" },
   };
   if (subject) res.subject = subject;
   if (e.period) res.period = e.period;
@@ -472,8 +501,12 @@ export function serializeNdhm(ctx, record) {
     }
 
     const patientRes = (r.patient && r.patient.id) ? buildPatient(r.patient) : null;
-    const author = buildAuthorDevice();
-    const custodian = buildCustodianOrg(tenantId);
+    // A hospital's OWN record (ctx.facility = { hfrId, name }) is authored and kept by that facility, the HFR-registered
+    // Organization, not by StewardMD decision support. Without it the R11 framing above stands unchanged.
+    const facility = ctx && ctx.facility && ctx.facility.hfrId
+      ? buildFacilityOrg(ctx.facility, (ctx && ctx.facilitySystem) || facilitySystemFor(ctx && ctx.envName)) : null;
+    const author = facility || buildAuthorDevice();
+    const custodian = facility || buildCustodianOrg(tenantId);
     const subject = patientRes ? refOf(patientRes) : null;
     const requester = refOf(custodian);        // NRCES MedicationRequest.requester is min=1
 
@@ -524,7 +557,7 @@ export function serializeNdhm(ctx, record) {
     // The attesting facility. Present only when a HIP id is configured - an unattested bundle is still a
     // valid document, but an attester pointing at a blank facility id would be worse than none.
     const hipId = (ctx && ctx.hipId) || null;
-    const hipOrg = hipId ? buildHipOrg(hipId, (ctx && ctx.facilitySystem) || facilitySystemFor(ctx && ctx.envName)) : null;
+    const hipOrg = facility || (hipId ? buildHipOrg(hipId, (ctx && ctx.facilitySystem) || facilitySystemFor(ctx && ctx.envName)) : null);
 
     // Sections, per the profile's OWN slices. A resource whose type this profile does not accept is not
     // emitted at all: five of the eight profiles slice section.entry with slicing CLOSED, so smuggling a
@@ -539,7 +572,16 @@ export function serializeNdhm(ctx, record) {
       // multi-section profile omits it, and a single-section profile has already been refused above by
       // its `needs` guard.
       if (!entries.length) continue;
-      sections.push({ title: spec.title, entry: entries });
+      sections.push(spec.code ? { title: spec.title, code: sectionCode(spec.code), entry: entries } : { title: spec.title, entry: entries });
+    }
+    // DiagnosticReport.result must RESOLVE inside the document. DiagnosticReportRecord's section lists reports only, so
+    // the Observations a report points at are carried as bundle entries reachable through result, not dangled.
+    for (const res of [...included]) {
+      if (res.resourceType !== "DiagnosticReport") continue;
+      for (const rr of (res.result || [])) {
+        const obs = built.observations.find((o) => URNS.get(o) === rr.reference);
+        if (obs && !included.includes(obs)) included.push(obs);
+      }
     }
 
     const comp = buildComposition({
@@ -549,8 +591,8 @@ export function serializeNdhm(ctx, record) {
 
     const entry = [entryOf(comp)]; // Composition FIRST
     if (patientRes) entry.push(entryOf(patientRes));
-    entry.push(entryOf(author), entryOf(custodian));
-    if (hipOrg) entry.push(entryOf(hipOrg));
+    // One entry per resource: the facility is author, custodian and attester at once.
+    for (const res of [...new Set([author, custodian, hipOrg].filter(Boolean))]) entry.push(entryOf(res));
     if (encounterRes) entry.push(entryOf(encounterRes));
     // ONLY the resources a section actually references. A document bundle whose entries are unreachable
     // from the Composition is not a document, it is a pile.

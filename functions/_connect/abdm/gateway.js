@@ -108,16 +108,20 @@ export function makeGateway({ baseUrl, cmId, hiuId, hipId, clientId: defaultClie
     return token;
   }
 
-  async function post(endpointKey, body) {
+  /* extraHeaders: a call-specific header on top of the pinned set, e.g. X-LINK-TOKEN on link/carecontext (ABDM M2
+   * document v2.7, 12-08-2025, section 4.3). The REQUEST-ID sent is returned: ABDM echoes it as response.requestId on
+   * the asynchronous reply, which is how a later callback is matched to this call. */
+  async function post(endpointKey, body, extraHeaders) {
     const path = ENDPOINTS[endpointKey];
     if (!path) throw new AbdmError("unknown endpoint key: " + endpointKey);
     const token = await session();
+    const headers = { ...gatewayHeaders({ token, cmId, hiuId, hipId, now: clock }), ...(extraHeaders || {}) };
     let res;
-    try { res = await fetch(baseUrl + path, { method: "POST", headers: gatewayHeaders({ token, cmId, hiuId, hipId, now: clock }), body: JSON.stringify(body) }); }
+    try { res = await fetch(baseUrl + path, { method: "POST", headers, body: JSON.stringify(body) }); }
     catch (e) { throw new AbdmError(endpointKey + " request failed: " + e.message); }
     if (res.status !== 202 && !res.ok) throw new AbdmError(endpointKey + " HTTP " + res.status);
     let parsed; try { parsed = await res.json(); } catch { parsed = {}; }
-    return { status: res.status, body: parsed };   // Stage-4: distinguish 202-accept from 200-inline, log status
+    return { status: res.status, body: parsed, requestId: headers["REQUEST-ID"] };   // Stage-4: distinguish 202-accept from 200-inline, log status
   }
 
   return { session, post };

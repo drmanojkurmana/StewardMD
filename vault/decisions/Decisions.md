@@ -6679,3 +6679,46 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   Native dialogs remain only in MaiK, integration, billing/claims, purchasing and scheduling screens (other lanes).
 - A paint that arrives while a pointer is down inside the ward is held until the pointer comes up (3 s cap), as a
   paint is held for an open select: a repaint between press and release lost the click (the ED "first triage" miss).
+
+## 2026-09-16 ABDM end to end at a WardSynQ hospital (S6 phases A3, A5 and the registry checks; branch gap-abdm)
+Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owner A1-A5 stand.
+- **Credentials: the shared bridge, not per-hospital secrets.** The gap brief asked for client id/secret entered per
+  hospital; owner A1 (binding, pinned by `test/wardsynq-abdm-hospital-routes.test.mjs`) says one shared StewardMD
+  bridge, no own-bridge credentials built or shown. Kept A1: the bridge secret stays the existing Pages secret
+  `ABDM_CLIENT_SECRET`; what is the hospital's own (environment from its status, HIP/HIU IDs) comes from its profile
+  through `abdmConfigFor` (config.js). No new env var. Offering own-bridge credentials is an owner change of A1.
+- **Connection** (`abdm-connect.js`): connected only when the profile is active, `sandbox-linked`, has a HIP ID and
+  the bridge secret exists; production is never connected (A2). Every ABDM screen says which of not set up,
+  switched off, not linked, suspended, production held or no bridge credential applies.
+- **Callback routing**: a saved ABDM profile is projected into `connect_connector_config` (connector `abdm`,
+  config.hipId), which `resolveHipTenant` already reads; unlinked or suspended removes the row so callbacks fail
+  closed. The v3 receiver replies with the X-HIP-ID/X-HIU-ID ABDM addressed (after the bearer check).
+- **ABHA desk** (`abdm-desk.js`, routes `/ward/abdm-desk`, `/ward/abha`): queue.add plus owner A5's
+  `abhaDeskCan`; Connect membership is not used. A verified or created ABHA returns a 30-minute HMAC proof
+  (QUEUE_TOKEN_SECRET); `/patient/register` binds the ABHA to the MR number only with a valid proof and refuses an
+  ABHA already bound to another MR before issuing a number. A typed ABHA is recorded as typed.
+- **Scan and Share** (`abdm-share.js`): QR per counter (general desk unless tokens are per department, and each
+  active department; hyphenated `hip-id`/`counter-id`, D13). A share is queued in the counter's department through
+  the queue engine with the ABDM profile sealed on the ticket (`encShare`, `abdmShareOrg`); nothing is registered
+  automatically (MPI dedupe is the desk's decision). A token that cannot be issued answers ABDM FAILURE.
+- **HIP for the inpatient record** (`abdm-hip.js`): one care context per record, `IPD:<enc>:DS|RX|IMM|DR-<h>|INV-<h>`
+  and `OPD:<enc>:OPC` for an ED visit; DiagnosticReportRecord and InvoiceRecord hold one report/invoice each per
+  the IG, so those are per record. Only final records: signed summary, released reports, coded completed
+  immunizations, untaxed single-currency invoices. Served through a READ-only service actor; the subject is
+  re-derived from the Patient record's consented ABHA address at serve time. Serializer: `ctx.facility` makes the
+  HFR Organization author, custodian and attester; patient identifiers HIN/ABHA; section codes only where the slice's
+  entry types match (ndhm.in 6.5.0).
+- **Linking**: on admission (records nothing final, audited), discharge and summary signature, after the response
+  (`waitUntil`): register rows, then link with a cached token or request one with the ABHA address only (no number,
+  FAQ Q32) and link the pending contexts when on-generate-token arrives (correlated by X-HIP-ID + abhaAddress, M2
+  document v2.7 4.3). Pending refs are kept in KV as hashes only. The chart's Link now retries.
+- **HIU from the chart** (`abdm-chart.js`, ward.js ABDM tab): request (purpose CAREMGT/BTG/HPAYMT, HI types, period,
+  access end), status from the consent row, fetch under a GRANTED verified artefact, records filed by abdm-land.js
+  listed by `meta.source.system === "abdm"`. `hiu.js` accepts a server-resolved `{ actorId, tenantId }` and the
+  hospital's HIU ID; its consent checks are unchanged.
+- **HFR/HPR** (`abdm-registry.js`): facility search pinned to the NHA HPR V2 guide section 8 body/response on the
+  V4 host (host UNCONFIRMED); professional lookup path from the M4 Postman export, body/response UNCONFIRMED, so
+  "verified" only when the answer carries the same HPR ID. Results stored on the profile record as a version, audited.
+- NOT built: own-bridge credentials (A1), production (A2), DPDP confirmation record, WellnessRecord and
+  HealthDocumentRecord from the ward record, taxed invoices, the V3 HIU data-push route's per-hospital HIU identity
+  on acknowledgement (still the deployment's), and any live sandbox run.

@@ -65,6 +65,17 @@ export function abdmConfig(env) {
   };
 }
 
+/**
+ * One hospital's configuration (design S6 3.3, Rule 3): the environment and the HIP/HIU IDs come from that
+ * hospital's own ABDM profile, never from a deployment variable; the bridge (client id) stays the shared one.
+ * `profile` = { envName: "sandbox"|"production", hipId, hiuId }. An unknown envName throws like abdmConfig.
+ */
+export function abdmConfigFor(env, profile) {
+  const p = profile || {};
+  const cfg = abdmConfig({ ...(env || {}), ABDM_ENV: p.envName || "sandbox" });
+  return { ...cfg, hipId: String(p.hipId || ""), hiuId: String(p.hiuId || p.hipId || "") };
+}
+
 /** ABHA (M1) URL. `addressFlow` selects the /phr/web base that ABHA-ADDRESS verification requires. */
 export function abhaUrl(cfg, path, addressFlow) {
   const b = addressFlow ? cfg.abhaAddressBase : cfg.abhaBase;

@@ -89,12 +89,16 @@ function validateShared(settings, _secrets, context) {
 }
 
 /** PURE. Per member, for the doctors who would request records: registration number required, HPR ID optional. */
-function doctorReadiness(members) {
+function doctorReadiness(members, registry) {
+  const checks = (registry && registry.professionals) || {};
   return (members || [])
     .filter((m) => m && m.active !== false && capsFor(m.role).includes(CAPS.EMR_TREAT))
     .map((m) => {
       const hpr = str(m.regionProfile && m.regionProfile.hprId);
-      return { identity: m.identity, email: m.email || "", role: m.role, regNoSet: !!str(m.regNo), hprId: hpr || null, hprValid: hpr ? isValidHprId(hpr) : null };
+      // A registry answer counts only for the HPR ID it was about; a changed ID is unchecked again.
+      const c = checks[m.identity] && hpr && checks[m.identity].hprId === hpr.replace(/\D/g, "") ? checks[m.identity] : null;
+      return { identity: m.identity, email: m.email || "", role: m.role, regNoSet: !!str(m.regNo), hprId: hpr || null, hprValid: hpr ? isValidHprId(hpr) : null,
+        hprRegistry: c ? { status: c.status, checkedAt: c.checkedAt, name: c.name || null } : null };
     })
     .sort((a, b) => String(a.email || a.identity).localeCompare(String(b.email || b.identity)));
 }
@@ -104,29 +108,37 @@ function doctorReadiness(members) {
  * status: "entered" (the hospital typed it; not checked against ABDM), "missing", "mismatch",
  * "not-built" (this build cannot do it yet), "blocked" (waits on something outside this build).
  */
-function checklist(settings, org, doctors) {
+function checklist(settings, org, doctors, registry) {
   const s = settings || {};
   const onOrg = str(org && org.regionProfile && org.regionProfile.hfrId);
+  const fac = registry && registry.facility && registry.facility.hfrFacilityId === onOrg ? registry.facility : null;
   const items = [];
   items.push({ key: "hfr", label: "Facility registered and verified in the Health Facility Registry",
     ...(!onOrg ? { status: "missing", detail: "No HFR facility ID on the hospital record. Enter it on the Hospital tab." }
       : str(s.hfrFacilityId) && str(s.hfrFacilityId) !== onOrg ? { status: "mismatch", detail: `The profile names ${str(s.hfrFacilityId)}; the hospital record names ${onOrg}.` }
+      /* What the registry itself answered (abdm-registry.js), for this very ID. Its own status word is shown as it wrote it. */
+      : fac && fac.status === "verified" ? { status: "verified", detail: `The Health Facility Registry lists ${onOrg}${fac.facilityName ? ` as ${fac.facilityName}` : ""}${fac.facilityStatus ? `, registry status ${fac.facilityStatus}` : ""}. Checked ${fac.checkedAt}.` }
+      : fac && fac.status === "not-found" ? { status: "not-found", detail: `The Health Facility Registry has no facility ${onOrg}. Checked ${fac.checkedAt}.` }
+      : fac ? { status: "unverified", detail: `The registry could not confirm ${onOrg} (${fac.reason || "no usable answer"}). Checked ${fac.checkedAt}; check again.` }
       : { status: "entered", detail: `${onOrg} is on the hospital record. WardSynQ has not checked it against the registry.` }) });
   items.push({ key: "linkage", label: "Software Linkage pressed for the StewardMD bridge; HIP ID entered",
     ...(str(s.hipId) ? { status: "entered", detail: `HIP ID ${str(s.hipId)} entered${str(s.hiuId) ? `, HIU ID ${str(s.hiuId)}` : ""}. Not checked against ABDM.` }
       : { status: "missing", detail: "No HIP ID yet. ABDM shows it after Software Linkage." }) });
-  items.push({ key: "session", label: "Session and bridge services checked for this facility", status: "not-built",
-    detail: "Needs the per-hospital gateway identity (phase A2). This build makes no call to ABDM." });
-  items.push({ key: "sandbox", label: "Sandbox run: verify an ABHA, link a visit, share, request records, file them", status: "not-built",
-    detail: "Phases A2 to A6. Nothing is recorded as passed." });
+  items.push({ key: "session", label: "Gateway session opened for this hospital", ...(fac && fac.reason !== "session"
+    ? { status: "verified", detail: `A session with the shared StewardMD bridge was opened when the registry was checked, ${fac.checkedAt}. Bridge services are not listed here.` }
+    : fac ? { status: "unverified", detail: `No session could be opened when the registry was checked, ${fac.checkedAt}.` }
+    : { status: "not-checked", detail: "Opened by the first registry check." }) });
+  items.push({ key: "sandbox", label: "Sandbox run: verify an ABHA, link a visit, share, request records, file them", status: "available",
+    detail: "Built: ABHA at registration, Scan and Share on the Patients page, linking at discharge, and requests from the chart. No sandbox run is recorded as passed." });
   const docs = doctors || [];
   const withReg = docs.filter((d) => d.regNoSet).length, withHpr = docs.filter((d) => d.hprValid === true).length;
+  const hprVerified = docs.filter((d) => d.hprRegistry && d.hprRegistry.status === "verified").length;
   items.push({ key: "doctors", label: "Doctors: registration number to request records, HPR ID optional",
     ...(!docs.length ? { status: "missing", detail: "No active prescriber at this hospital." }
-      : { status: withReg === docs.length ? "entered" : "missing", detail: `${withReg} of ${docs.length} have a registration number; ${withHpr} have an HPR ID.` }) });
-  items.push({ key: "counters", label: "Scan and share QR printed per counter", status: "not-built", detail: "Phase A5." });
+      : { status: withReg === docs.length ? "entered" : "missing", detail: `${withReg} of ${docs.length} have a registration number; ${withHpr} have an HPR ID; ${hprVerified} found in the Health Professional Registry.` }) });
+  items.push({ key: "counters", label: "Scan and share QR printed per counter", status: "available", detail: "Patients page, Scan and Share: one QR per counter, printable. Printing is not recorded." });
   items.push({ key: "dpdp", label: "Hospital admin confirms DPDP notices and ABHA consent text are shown at the desk", status: "not-built",
-    detail: "Phase A5. No confirmation is recorded yet." });
+    detail: "ABDM's consent text is shown and recorded on the check-in sheet before an Aadhaar OTP. The admin's confirmation is not recorded yet." });
   items.push({ key: "production", label: "Switch this hospital to production", status: "blocked", detail: `Awaiting India hosting. ${AWAITING_INDIA}` });
   return items;
 }
@@ -164,9 +176,9 @@ function externalInvoiceHandlingRefusal(wardsynqPatch) {
   return `External ABDM invoice handling "${str(v).slice(0, 60)}" was not saved. The only handling built is "${EXTERNAL_INVOICE_DEFAULT}": an invoice received from another facility is kept on the chart as a document. The billing model for external invoices is not built, so it cannot become a bill here.`;
 }
 
-function abdmView(connector, org, members) {
+function abdmView(connector, org, members, registry) {
   const settings = (connector && connector.settings) || {};
-  const doctors = doctorReadiness(members);
+  const doctors = doctorReadiness(members, registry);
   const current = connector ? settings.status || null : null;
   const options = TRANSITIONS[current] ? [current, ...TRANSITIONS[current]] : ["draft", "submitted"];
   return {
@@ -178,7 +190,7 @@ function abdmView(connector, org, members) {
       const why = st === "production-linked" && st !== current ? transitionRefusal(current, st, settings, org) : null;
       return { status: st, label: STATUS_LABELS[st], allowed: !why, reason: why };
     }),
-    doctors, checklist: checklist(settings, org, doctors),
+    doctors, checklist: checklist(settings, org, doctors, registry),
     bridge: "shared",
     invoiceHandling: externalInvoiceHandling(org && org.wardsynq),
   };

@@ -166,6 +166,12 @@ export async function addTicket(env, session, body, actor, org) {
     registeredAt: now(), calledAt: 0, consultStartAt: 0, consultEndAt: 0, etaStart: 0, etaEnd: 0, etaConfidence: 0,
     createdAt: now(), updatedAt: now(), expiresAt: session.expiresAt
   };
+  /* ABDM Scan and Share (functions/_wardsynq/abdm-share.js): the ABDM-verified profile the patient shared rides the
+   * ticket sealed like the name, so the desk can register them pre-filled. abdmShareOrg is the lookup key. */
+  if (body.abdmShare && typeof body.abdmShare === "object") {
+    f.abdmShareOrg = String(session.hospitalId || "");
+    f.encShare = await encPHI(env, JSON.stringify(body.abdmShare));
+  }
   const td = await tokenDepartment(env, session, body, org);
   // The ticket carries the resolved department's id and its CURRENT name; the name is display only.
   if (td.department) { f.departmentId = td.department.id; f.department = td.department.name; }
@@ -473,6 +479,28 @@ export async function portalContext(env, token) {
 // G3: each row is hash-chained per hospital (_q_audit_chain.js). Still best-effort; never blocks the action.
 export async function qAudit(env, ev) {
   await writeOrgAudit(env, { ...ev, ts: now() });
+}
+
+// ---- ABDM Scan and Share: the tokens issued to shared profiles, and their registration ---------------
+/** Tickets issued to an ABDM profile share at this hospital that have not expired, newest first. */
+export async function listShareTickets(env, orgId) {
+  if (!orgId) return [];
+  const rows = await fsQuery(env, "q_tickets", { where: { field: "abdmShareOrg", value: String(orgId) }, limit: 200 });
+  const t = now();
+  return (rows || []).map((r) => withId(r.id, r.fields)).filter((x) => !x.expiresAt || x.expiresAt > t)
+    .sort((a, b) => (b.registeredAt || 0) - (a.registeredAt || 0));
+}
+/** The desk registered a shared profile as MR `mrn`: the ticket carries the number, the sealed profile is dropped
+ *  (the register now holds it), and the act is audited. Refuses a ticket of another hospital or one never shared. */
+export async function attachShareRegistration(env, org, ticketId, mrn, actor) {
+  const t = await getTicket(env, ticketId);
+  if (!t || t.abdmShareOrg !== String(org.id)) throw Object.assign(new Error("not_found"), { status: 404 });
+  if (t.ghisPatientId) throw Object.assign(new Error("already_registered"), { status: 409, mrn: t.ghisPatientId });
+  const m = String(mrn || "").trim();
+  if (!m) throw Object.assign(new Error("mrn_required"), { status: 422 });
+  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { ghisPatientId: m, mrnLast4: m.replace(/\D/g, "").slice(-4), encShare: "", shareRegisteredAt: now(), updatedAt: now() })]);
+  await qAudit(env, { hospitalId: org.id, ticketId, actor, action: "abdm_share_registered", meta: "" });
+  return Object.assign({}, t, { ghisPatientId: m, encShare: "" });
 }
 
 // ---- ABDM: the mobile to send a link OTP to ------------------------------------------------------

@@ -148,6 +148,8 @@ async function saveConnector(request, env, ctx) {
     name: str(ctx.name).slice(0, 120) || null, settings: s.settings, secretsEnc: sealed,
     secretsSetAt: Object.keys(supplied).length ? at : (cur && cur.secretsSetAt) || null, active,
     createdAt: (cur && cur.createdAt) || at, createdBy: (cur && cur.createdBy) || who.actorId, writtenBy: { id: who.actorId, kind: "human", at },
+    // What ABDM's registries answered (abdm-registry.js) is kept across a settings change; it names the ID it checked.
+    ...(cur && cur.registry ? { registry: cur.registry } : {}),
   };
   const settingsChanged = [...new Set([...Object.keys(next.settings), ...Object.keys((cur && cur.settings) || {})])]
     .filter((k) => JSON.stringify(next.settings[k]) !== JSON.stringify(cur && cur.settings && cur.settings[k])).sort();

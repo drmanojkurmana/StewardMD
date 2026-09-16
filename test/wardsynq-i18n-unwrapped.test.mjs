@@ -87,6 +87,11 @@ const ALLOW = {
   "wardsynq/site/pages/admin.js": {
     "a record type or a lookup suffix, not words": ["Invoice", "Incident", "Org", "Bundle"],
   },
+  "wardsynq/site/pages/patients.js": {
+    "the print stylesheet that prints only the Scan and Share QR sheet (CSS, not words)": [
+      "@media print { body > *:not(#pSharePrint) { display: none !important; } #pSharePrint { display: block !important; } } #pSharePrint { display: none; }",
+    ],
+  },
 };
 const WARD_FILES = ["ward.js", "discharge.js", "patient-register.js"];
 const SITE_FILES = ["wardsynq/site/shell.js", "wardsynq/site/bug-reporter.js", "wardsynq/ui/wardsynq-app.js",

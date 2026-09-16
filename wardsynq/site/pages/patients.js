@@ -10,6 +10,59 @@
   function TS(c, key, en, vars) { return c && c.tSafe ? c.tSafe(key, vars, en) : String(T(c, key, en, vars)).replace(/[&<>"']/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]; }); }
   function EN(c, html) { return c && c.en ? c.en(html) : html; }
 
+  /* ---- ABDM SCAN AND SHARE (functions/_wardsynq/abdm-share.js) ------------------------------------------------
+   * The counter QRs, one per counter and printable, and today's profiles patients shared by scanning them, each with
+   * the token it was given. Register opens the check-in sheet pre-filled with the ABDM-verified profile. r: null =
+   * loading, {failed} = could not be read (never shown as "no shares"), else GET /ward/abdm-share. */
+  function qrSvg(url) {
+    if (!window.qrcode || !url) return "";
+    try { var q = window.qrcode(0, "M"); q.addData(url); q.make(); return q.createSvgTag({ cellSize: 4, margin: 4, scalable: true }); } catch (e) { return ""; }
+  }
+  function shareReason(c, code) {
+    switch (code) {
+      case "not_set_up": return T(c, "site.patients.share.notSetUp", "ABDM is not set up for this hospital. An administrator sets it up on Admin Center, Integrations, ABDM.");
+      case "inactive": return T(c, "site.patients.share.inactive", "This hospital's ABDM profile is switched off.");
+      case "not_linked": return T(c, "site.patients.share.notLinked", "This hospital is not linked to ABDM yet. ABDM has to link the facility to the StewardMD bridge and issue a HIP ID first.");
+      case "suspended": return T(c, "site.patients.share.suspended", "This hospital's ABDM connection is suspended.");
+      case "production_held": return T(c, "site.patients.share.productionHeld", "Production ABDM traffic is held until India-region hosting exists.");
+      case "bridge_not_configured": return T(c, "site.patients.share.bridgeMissing", "The StewardMD ABDM bridge credential is not configured on this server.");
+      default: return T(c, "site.patients.share.notConnectedOther", "This hospital is not connected to ABDM.");
+    }
+  }
+  function shareHtml(c, r) {
+    var esc = c.esc;
+    var h = "<h2>" + esc(T(c, "site.patients.share.title", "Scan and Share (ABDM)")) + "</h2>";
+    if (r == null) return h + '<span class="spin"></span> ' + esc(T(c, "site.patients.share.loading", "Loading the counter QR codes and today's shared profiles..."));
+    if (r.failed) return h + '<div class="msg err">' + TS(c, "site.patients.share.failed", "The Scan and Share counter could not be loaded:") + " " + EN(c, esc(r.message || "")) + ". " + TS(c, "site.patients.share.notNone", "This is not the same as there being no shared profiles.") + "</div>";
+    var conn = r.connection || {};
+    if (!conn.connected) {
+      h += '<div class="msg note"><b>' + esc(T(c, "site.patients.share.notConnected", "No QR code is shown: this hospital is not connected to ABDM.")) + "</b> " + esc(shareReason(c, conn.code)) + "</div>";
+    } else {
+      h += '<p class="quiet">' + esc(T(c, "site.patients.share.intro", "A patient scans the counter's QR code with the ABHA app. Their ABDM-verified profile arrives here with a token in that counter's queue. Print one QR code for each counter.")) + "</p>";
+      h += '<div class="row" style="flex-wrap:wrap;gap:16px">' + (r.counters || []).map(function (ct, i) {
+        var label = ct.name ? EN(c, esc(ct.name)) : esc(T(c, "site.patients.share.generalDesk", "Registration desk"));
+        return '<div class="abdm-qr" style="text-align:center;max-width:220px"><div id="pShareQr' + i + '" style="width:180px;margin:0 auto">' + qrSvg(ct.url) + "</div>" +
+          "<div><b>" + label + "</b></div><div class=\"mono quiet\">" + esc(T(c, "site.patients.share.counterCode", "Counter code {code}", { code: ct.counterId })) + "</div>" +
+          '<button type="button" class="btn ghost" data-share-print="' + i + '">' + esc(T(c, "site.patients.share.print", "Print this QR code")) + "</button></div>";
+      }).join("") + "</div>";
+      if (!(r.counters || []).length) h += '<div class="msg note">' + esc(T(c, "site.patients.share.noCounters", "No counter can take a token: this hospital numbers tokens per department and has no active department.")) + "</div>";
+    }
+    h += "<h3>" + esc(T(c, "site.patients.share.today", "Shared today")) + "</h3>";
+    var rows = r.shares || [];
+    if (!rows.length) return h + '<p class="quiet">' + esc(T(c, "site.patients.share.none", "No patient has shared a profile today.")) + "</p>";
+    return h + '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.patients.share.colToken", "Token")) + "</th><th>" + esc(T(c, "site.patients.share.colPatient", "Patient")) + "</th><th>" +
+      esc(T(c, "site.patients.share.colCounter", "Counter")) + "</th><th>" + esc(T(c, "site.patients.share.colState", "Registration")) + "</th></tr></thead><tbody>" +
+      rows.map(function (s) {
+        var p = s.profile || {};
+        var who = EN(c, esc(s.name || "")) + (p.gender || p.yearOfBirth ? ' <span class="quiet">' + EN(c, esc([p.gender, p.yearOfBirth].filter(Boolean).join(", "))) + "</span>" : "");
+        var state = s.registered ? esc(T(c, "site.patients.share.registeredAs", "Registered as {mrn}", { mrn: s.mrn }))
+          : s.profileUnreadable ? '<span class="msg err">' + esc(T(c, "site.patients.share.unreadable", "The shared profile could not be read. Register the patient by hand.")) + "</span>"
+          : '<button type="button" class="btn" data-share-register="' + esc(s.ticketId) + '">' + esc(T(c, "site.patients.share.register", "Register")) + "</button>";
+        return "<tr><td class=\"mono\"><b>" + EN(c, esc(s.token)) + "</b></td><td>" + who + "</td><td>" + (s.department ? EN(c, esc(s.department)) : esc(T(c, "site.patients.share.generalDesk", "Registration desk"))) + "</td><td>" + state + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+  }
+  WSQ._abdmShareHtml = shareHtml;
+
   WSQ.page("patients", { render: function (c) {
     var el = c.el, st = c.state, esc = c.esc, ms = c.ms;
     if (!c.can("queue.view")) { el.innerHTML = '<div class="msg note">' + TS(c, "site.patients.noAccess", "Your role ({role}) does not include queue.view, which finding a patient needs.", { role: st.who.role }) + "</div>"; return; }
@@ -20,6 +73,7 @@
         '<button class="btn" id="pFind" type="button">' + ms("search") + esc(T(c, "site.patients.find", "Find")) + "</button>" +
         (c.can("queue.add") ? '<button class="btn ghost" id="pNew" type="button">' + ms("person_add") + esc(T(c, "site.patients.registerNew", "Register new patient")) + "</button>" : "") +
       '</div><div id="pOut"></div></div>' +
+      (c.isWardsynq() ? '<div class="card" id="pShare">' + shareHtml(c, null) + "</div>" : "") +
       '<div class="card"><h2>' + esc(T(c, "site.patients.whereHeading", "Where a patient goes")) + '</h2><div class="kv">' +
         "<dt>" + esc(T(c, "site.patients.outpatient", "Outpatient")) + "</dt><dd>" + esc(T(c, "site.patients.outpatientLead", "Check in at the")) + ' <a href="#/opd">' + esc(T(c, "site.patients.opdDesk", "OPD desk")) + "</a>: " + esc(T(c, "site.patients.outpatientDesc", "queue, consult, vitals, prescriptions, investigations, results.")) + "</dd>" +
         (c.isWardsynq() ? "<dt>" + esc(T(c, "site.patients.admission", "Admission")) + "</dt><dd>" + esc(T(c, "site.patients.admissionLead", "Use the")) + ' <a href="#/ward/board">' + esc(T(c, "site.patients.bedBoard", "bed board")) + "</a>: " + esc(T(c, "site.patients.admissionDesc", "confirm the MRN, pick the ward and bed. The inpatient chart, vitals, orders, eMAR, transfer and discharge live in the ward.")) + "</dd>" +
@@ -77,21 +131,76 @@
     document.getElementById("pFind").onclick = find;
     document.getElementById("pMrn").addEventListener("keydown", function (e) { if (e.key === "Enter") find(); });
     var nb = document.getElementById("pNew");
-    if (nb) nb.onclick = function () {
+    if (nb) nb.onclick = function () { openRegister(null, null); };
+
+    /* Scan and Share: load, print a counter's QR, and register a shared profile (then put the MR number on its token). */
+    var shareCard = document.getElementById("pShare");
+    function loadShares() {
+      if (!shareCard) return;
+      shareCard.innerHTML = shareHtml(c, null);
+      c.api("/ward/abdm-share?orgId=" + encodeURIComponent(st.orgId)).then(function (r) {
+        var ok = r && r.ok && r.connection && Array.isArray(r.shares);
+        shareCard.innerHTML = shareHtml(c, ok ? r : { failed: true, message: (r && (r.message || r.error)) || T(c, "site.patients.noServerReach", "the server could not be reached") });
+        if (ok) bindShares(r);
+      });
+    }
+    function bindShares(r) {
+      Array.prototype.forEach.call(shareCard.querySelectorAll("[data-share-print]"), function (b) {
+        b.onclick = function () {
+          var i = +b.getAttribute("data-share-print"), ct = r.counters[i], qr = document.getElementById("pShareQr" + i);
+          if (!ct || !qr) return;
+          /* The printed sheet is the QR, the hospital and the counter, nothing else on the page. */
+          var sheet = document.createElement("div"), style = document.createElement("style");
+          sheet.id = "pSharePrint";
+          sheet.innerHTML = '<div style="text-align:center;font-family:sans-serif;padding:24px"><h1 style="margin:0 0 8px">' + EN(c, c.esc(st.org.name || "")) + "</h1><h2 style=\"margin:0 0 16px\">" +
+            (ct.name ? EN(c, c.esc(ct.name)) : c.esc(T(c, "site.patients.share.generalDesk", "Registration desk"))) + '</h2><div style="width:320px;margin:0 auto">' + qr.innerHTML + "</div><p>" +
+            c.esc(T(c, "site.patients.share.printHint", "Scan with the ABHA app to share your profile and get a token.")) + "</p></div>";
+          style.textContent = "@media print { body > *:not(#pSharePrint) { display: none !important; } #pSharePrint { display: block !important; } } #pSharePrint { display: none; }";
+          document.body.appendChild(style); document.body.appendChild(sheet);
+          window.print();
+          setTimeout(function () { sheet.remove(); style.remove(); }, 1000);
+        };
+      });
+      Array.prototype.forEach.call(shareCard.querySelectorAll("[data-share-register]"), function (b) {
+        b.onclick = function () {
+          var id = b.getAttribute("data-share-register"), s = (r.shares || []).filter(function (x) { return x.ticketId === id; })[0];
+          if (!s || !s.profile) return;
+          var p = s.profile, a = p.address || {};
+          openRegister({ name: p.name, mobile: p.mobile, gender: p.gender, yearOfBirth: p.yearOfBirth, monthOfBirth: p.monthOfBirth, dayOfBirth: p.dayOfBirth,
+            abhaNumber: p.abhaNumber, abhaAddress: p.abhaAddress, abhaProof: s.abhaProof || "", address: a.line, district: a.district, state: a.state, pincode: a.pinCode }, function (mrn) {
+            c.api("/ward/abdm-share-register", { orgId: st.orgId, ticketId: id, mrn: mrn }).then(function (x) {
+              if (!x || !x.ok) c.toast(T(c, "site.patients.share.tokenNotUpdated", "Registered as {mrn}, but the MR number could not be put on token {token}: {why}", { mrn: mrn, token: s.token, why: (x && (x.message || x.error)) || T(c, "site.patients.noServerReach", "the server could not be reached") }));
+              loadShares();
+            });
+          });
+        };
+      });
+    }
+    loadShares();
+
+    function openRegister(prefill, onMrn) {
       if (!(window.SMD_PATIENTREG && SMD_PATIENTREG.open)) { c.toast(T(c, "site.patients.regSheetLoading", "The registration sheet is still loading.")); return; }
       var mode = st.org.mode === "wardsynq" ? "native" : (st.org.mode || "native");
       SMD_PATIENTREG.open({
+        prefill: prefill,
         mode: mode, clinicName: st.org.code || st.org.name || "Check-in", region: st.org.region,
         /* LT-29: this page registers a patient and queues nobody (onAdded only finds them), so the sheet's OPD verb
          * "Add to queue" was wrong here, for an ED or inpatient as much as for anyone. */
         submitLabel: T(c, "site.patients.registerSubmit", "Register patient"),
         submit: function (b) { b.orgId = st.orgId; b.workplaceMode = mode; return c.api("/patient/register", b); },
+        /* S6 A5: ABHA verified or created with ABDM at this sheet, where the hospital runs WardSynQ. The server says
+         * whether this hospital is connected and which of verify and create this role may do. */
+        abdm: c.isWardsynq() ? {
+          status: function () { return c.api("/ward/abdm-desk?orgId=" + encodeURIComponent(st.orgId)); },
+          step: function (b) { b.orgId = st.orgId; return c.api("/ward/abha", b); }
+        } : null,
         onAdded: function (r) {
           var mrn = r && (r.mrn || (r.patient && r.patient.mrn));
           c.toast(mrn ? T(c, "site.patients.registeredMrn", "Registered {mrn}", { mrn: mrn }) : T(c, "site.patients.registeredPlain", "Registered."));
           if (mrn) { document.getElementById("pMrn").value = mrn; find(); }
+          if (mrn && onMrn) onMrn(mrn);
         }
       });
-    };
+    }
   } });
 })();
