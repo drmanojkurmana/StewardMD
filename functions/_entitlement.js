@@ -13,7 +13,7 @@ import { verifyFirebaseToken } from "./_fbauth.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
 import { ownerEmails } from "./_adminauth.js";
 
-const PROMO_UNTIL_DEFAULT = Date.parse("2026-09-15T23:59:59+05:30");   // 15 Sep 2026, 23:59 IST
+const PROMO_UNTIL_DEFAULT = Date.parse("2026-09-27T23:59:59+05:30");   // 27 Sep 2026, 23:59 IST (owner, 2026-09-16)
 
 export function promoUntil(env) {
   const v = cfgFlag(env, "PRO_FREE_UNTIL");   // live KV override wins over env (lets the owner end the promo now)
