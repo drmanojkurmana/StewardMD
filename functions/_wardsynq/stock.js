@@ -414,7 +414,9 @@ async function stockFefo(request, env, ctx) {
   return { ...base, ok: true, code, unit, quantity, picks: sug.picks, shortfall: sug.shortfall, excluded: sug.excluded, note: "Advice only. Check the expiry printed on the box before issuing." };
 }
 
-/** ctx: { migration, reorderLevels?, location? } - the levels, computed now. */
+/** ctx: { migration, reorderLevels?, location?, noDispenses? } - the levels, computed now.
+ *  noDispenses: the laboratory's own store (reagents and consumables), which no medicine is ever dispensed from
+ *  and whose staff cannot read dispenses. */
 async function stockLevels(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -428,7 +430,7 @@ async function stockLevels(request, env, ctx) {
     [movements, dispenses] = await Promise.all([
       /* No catch: a dispense read that failed and came back as [] would make every level too high. */
       svc.list(MOVE_TYPE, READ_CAP),
-      svc.list("MedicationDispense", READ_CAP),
+      ctx.noDispenses === true ? [] : svc.list("MedicationDispense", READ_CAP),
     ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), levels: [] };

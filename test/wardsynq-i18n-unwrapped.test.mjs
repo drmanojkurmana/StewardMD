@@ -47,6 +47,7 @@ const ALLOW = {
       "<div style=\"position:relative;\"><textarea id=\"wTlNote\" class=\"w-input\" rows=\"5\" placeholder=\"Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen.\">",
       ", Vt ", ", PEEP ", ", FiO2 ", ", EDD ",
       "4 mg in 50 mL",
+      "</span><textarea id=\"wQcmTargets\" rows=\"4\" placeholder=\"Potassium | 4.0 | 0.1 | mmol/L\"></textarea></label>",
       "AC (Doxorubicin + Cyclophosphamide)", "Doxorubicin", "AC-T (Doxorubicin + Cyclophosphamide -> Paclitaxel)", "Paclitaxel",
       "mFOLFOX6 (Oxaliplatin + Leucovorin + 5-FU)", "Oxaliplatin", "FOLFIRI (Irinotecan + Leucovorin + 5-FU)", "Irinotecan",
       "R-CHOP (Rituximab + CHOP)", "Rituximab", "ABVD (Hodgkin Lymphoma)", "Carboplatin + Paclitaxel", "Carboplatin",
@@ -60,7 +61,7 @@ const ALLOW = {
     ],
     "an internal name compared or looked up, shown only through its translation (labPartName, the ward list's no-ward group)": [
       "tests awaiting a result", "results awaiting verification", "cultures in progress", "critical results", "ward roster",
-      "imaging worklist", "critical findings", "held messages", "No ward assigned",
+      "imaging worklist", "critical findings", "held messages", "No ward assigned", "analyser results",
     ],
     "a code, an action separator, an element id suffix or a keyboard key name": ["Invoice", "Incident", "~done~", "~cancel~", "Tpl", "Escape", "Esc"],
   },
@@ -87,10 +88,13 @@ const ALLOW = {
   "wardsynq/site/pages/admin.js": {
     "a record type or a lookup suffix, not words": ["Invoice", "Incident", "Org", "Bundle"],
   },
+  "wardsynq/site/pages/lab-analysers.js": {
+    "the mapping format shown as an example: an instrument code, a laboratory test, its unit and a panel, entered as recorded": ["<textarea id=\"labAnMap\" rows=\"8\" class=\"mono\" style=\"width:100%\" placeholder=\"K | Potassium | mmol/L | Renal profile\">"],
+  },
 };
 const WARD_FILES = ["ward.js", "discharge.js", "patient-register.js"];
 const SITE_FILES = ["wardsynq/site/shell.js", "wardsynq/site/bug-reporter.js", "wardsynq/ui/wardsynq-app.js",
-  ...["abdm", "accounts", "admin", "audit", "group", "maik", "patients", "portal-access", "rota", "security"].map((p) => "wardsynq/site/pages/" + p + ".js")];
+  ...["abdm", "accounts", "admin", "audit", "group", "lab-analysers", "maik", "patients", "portal-access", "rota", "security"].map((p) => "wardsynq/site/pages/" + p + ".js")];
 
 for (const file of [...WARD_FILES, ...SITE_FILES]) {
   test("no unwrapped visible English in " + file + " beyond its allowlist", () => {
@@ -243,6 +247,7 @@ const RAW_STATUS_ALLOW = {
   "x.mode": "ICU ventilator mode (VENT_MODES in functions/_wardsynq/icu-care.js): fixed clinical abbreviations (VC-AC, PSV, HFNC, ...), not English prose words",
   "l.type": "line type: free text the clinician types (placeholder \"e.g. UVC, PICC\" at wLineType), not a server enum",
   "r.level": "a stock quantity number (inventory/pharmacy stock level), not a status code",
+  "m.level": "a QC control material's level as the laboratory named it (1, 2, Low, High), recorded content, not a server enum",
   "hit.result": "antibiotic susceptibility result (SUSCEPTIBILITY_RESULTS in functions/_wardsynq/pathology-report.js): the standard S/I/R/SDD microbiology codes, not English words",
   "b.kind": "BOTTLENECK_WORDS[b.kind] already covers the mapped word; this is its own explicit lang=\"en\" fallback for a kind the map does not know",
   "s.level": "a stock quantity inside a report row already wrapped '<span lang=\"en\">...", // the report intentionally marks its own values English

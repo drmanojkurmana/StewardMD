@@ -46,6 +46,11 @@ const TYPE = "SpecimenCollection";
 const STATES = Object.freeze(["collected", "received", "failed"]);
 /** The ones where somebody is still waiting on a sample. `failed` is outstanding: it needs redoing. */
 const OUTSTANDING = Object.freeze(["collected", "failed"]);
+/* A LABORATORY REJECTION is a failure with a CODE, so it can be counted by reason and ward. The order goes back
+ * to needing collection exactly as any failed attempt does, which is the prompt to recollect. */
+const REJECTION_REASONS = Object.freeze({
+  haemolysed: "Haemolysed", clotted: "Clotted", insufficient: "Insufficient sample", mislabelled: "Mislabelled", "wrong-container": "Wrong container",
+});
 /** Order categories (ward-order.js CATEGORIES) that are acquired, performed or referred, never collected. */
 const NO_SPECIMEN_CATEGORIES = Object.freeze(["imaging", "procedure", "referral"]);
 
@@ -65,6 +70,7 @@ function SpecimenCollection(input) {
     collectedBy: i.collectedBy || null, collectedAt: i.collectedAt || null,
     receivedAt: i.receivedAt || null, receivedBy: i.receivedBy || null,
     failureReason: i.failureReason || null, failedAt: i.failedAt || null,
+    rejection: i.rejection || null,
     // The label a ward and a laboratory read off the tube. Deterministic, so the same collection
     // relabelled is the same specimen and not a second one.
     label: i.label || null,
@@ -156,6 +162,7 @@ function summary(s) {
     collectedBy: s.collectedBy, collectedAt: s.collectedAt,
     receivedAt: s.receivedAt || null, receivedBy: s.receivedBy || null,
     failureReason: s.failureReason || null, failedAt: s.failedAt || null,
+    rejection: s.rejection || null,
     version: s.version,
   };
 }
@@ -253,7 +260,11 @@ async function specimenOutcome(request, env, ctx) {
   if (state !== "received" && state !== "failed") {
     return { ...base, ok: false, status: 400, error: "unknown_state", detail: "state must be received or failed", written: 0 };
   }
-  const failureReason = str(ctx.failureReason);
+  const rejectionCode = str(ctx.rejectionCode);
+  if (rejectionCode && (state !== "failed" || !REJECTION_REASONS[rejectionCode])) {
+    return { ...base, ok: false, status: 422, error: "unknown_rejection_reason", detail: `a rejection is recorded as failed with one of: ${Object.keys(REJECTION_REASONS).join(", ")}`, written: 0 };
+  }
+  const failureReason = str(ctx.failureReason) || (rejectionCode ? REJECTION_REASONS[rejectionCode] : "");
   // A failure with no reason cannot be acted on, and "take it again" is the action.
   if (state === "failed" && !failureReason) {
     return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why - missed vein, clotted, haemolysed, insufficient - so the ward knows what to do differently", written: 0 };
@@ -268,7 +279,15 @@ async function specimenOutcome(request, env, ctx) {
   if (!current) return { ...base, ok: false, status: 404, error: "specimen_not_found", specimenId, written: 0 };
   /* RECEIVED IS TERMINAL. The laboratory said it has the sample; a later "failed" is a statement
    * about the ASSAY, not the specimen, and it belongs on the result. */
-  if (current.state === "received") return { ...base, ok: true, written: 0, skipped: "already_received", ...summary(current) };
+  /* EXCEPT A CODED REJECTION BEFORE ANY RESULT: haemolysis is seen when the tube is spun, after it was received, and
+   * that sample still has to be taken again. Once a result exists the problem belongs on the result. */
+  if (current.state === "received" && !rejectionCode) return { ...base, ok: true, written: 0, skipped: "already_received", ...summary(current) };
+  if (current.state === "received") {
+    let reports;
+    try { reports = ((await svc.byPatient("DiagnosticReport", current.patientId)) || []).filter((r) => r && r.serviceRequestId === current.serviceRequestId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    if (reports.length) return { ...base, ok: false, status: 409, error: "already_resulted", detail: "A result has been released for this sample. Correct or annotate the result instead of rejecting the sample.", written: 0 };
+  }
 
   const now = new Date().toISOString();
   const next = SpecimenCollection({
@@ -277,12 +296,13 @@ async function specimenOutcome(request, env, ctx) {
     receivedBy: state === "received" ? resolved.actor.id : current.receivedBy,
     failureReason: state === "failed" ? failureReason : current.failureReason,
     failedAt: state === "failed" ? now : current.failedAt,
+    rejection: rejectionCode ? { code: rejectionCode, by: resolved.actor.id, at: now, fromState: current.state } : current.rejection,
   });
   try {
     const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
     return {
       ...base, ok: true, written: 1, ...summary({ ...next, version: out.record.version }),
-      ...(state === "failed" ? { note: "This sample still needs taking. The request is not waiting on a result." } : {}),
+      ...(state === "failed" ? { note: rejectionCode ? "Rejected. The sample must be collected again; the ward sees this order as awaiting collection." : "This sample still needs taking. The request is not waiting on a result." } : {}),
       actor: resolved.actor.id,
     };
   } catch (e) {
@@ -369,4 +389,52 @@ async function collectionList(request, env, ctx) {
   };
 }
 
-export { TYPE, STATES, OUTSTANDING, NO_SPECIMEN_CATEGORIES, SpecimenCollection, specimenIdFor, accessionNumberFor, isOutstanding, collectionState, collectSpecimen, specimenOutcome, collectionList };
+/**
+ * Rejected specimens in one calendar month, by reason and by ward. ctx: { migration, month: "YYYY-MM" }.
+ * Counts only; names no patient.
+ */
+async function rejectionStats(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off" };
+  const month = str(ctx.month) || new Date().toISOString().slice(0, 7);
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) return { ...base, ok: false, status: 422, error: "bad_month", detail: "month is YYYY-MM" };
+  const { svc, error } = await open(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error };
+  const CAP = 1000;
+  let rows;
+  try { rows = (await svc.list(TYPE, CAP)) || []; }
+  catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
+  }
+  const inMonth = (t) => str(t).slice(0, 7) === month;
+  const rejected = rows.filter((s) => s && s.rejection && inMonth(s.rejection.at));
+  const collected = rows.filter((s) => s && inMonth(s.collectedAt)).length;
+  /* THE WARD IS READ FROM THE ENCOUNTER THROUGH THE REPOSITORY, not the caller's scope: the laboratory's grant
+   * deliberately cannot read an Encounter, and all that leaves here is the ward's name beside a count. */
+  const wardOf = new Map();
+  let wardUnreadable = 0;
+  for (const encId of [...new Set(rejected.map((s) => str(s.encounterId)).filter(Boolean))]) {
+    try {
+      const enc = await ctx.recordDeps.repository.latest(mig.tenantId, "Encounter", encId);
+      wardOf.set(encId, str(enc && enc.location && enc.location.ward) || null);
+    } catch { wardUnreadable += 1; wardOf.set(encId, null); }
+  }
+  const byReason = {}, byWard = {}, table = {};
+  for (const s of rejected) {
+    const reason = s.rejection.code, ward = wardOf.get(str(s.encounterId)) || "";
+    byReason[reason] = (byReason[reason] || 0) + 1;
+    byWard[ward] = (byWard[ward] || 0) + 1;
+    table[ward] = table[ward] || {};
+    table[ward][reason] = (table[ward][reason] || 0) + 1;
+  }
+  return {
+    ...base, ok: true, month, rejected: rejected.length, collected, reasons: REJECTION_REASONS,
+    byReason, byWard: Object.keys(byWard).sort().map((w) => ({ ward: w || null, total: byWard[w], byReason: table[w] })),
+    ...(wardUnreadable ? { wardUnreadable } : {}),
+    ...(rows.length >= CAP ? { partial: true, partialWarning: `Only the latest ${CAP} specimens were counted; this month's figures may be low.` } : {}),
+  };
+}
+
+export { REJECTION_REASONS, rejectionStats, TYPE, STATES, OUTSTANDING, NO_SPECIMEN_CATEGORIES, SpecimenCollection, specimenIdFor, accessionNumberFor, isOutstanding, collectionState, collectSpecimen, specimenOutcome, collectionList };
