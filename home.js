@@ -6538,9 +6538,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (b) b.addEventListener("click", function () { maikHaptic("send"); });
     });
     // Buffering loader markup — a stage label + shimmering skeleton lines (the "thinking" state while
-    // MaiK waits ~15s for the first token). `cls` preserves the legacy .maik-thinking/.maik-webbusy hooks.
+    // MaiK waits ~15s for the first token). Uses Jakub Antalik's Thinking Orbs when available.
     function maikBufferHTML(stage, cls) {
-      return '<div class="maik-buffer ' + (cls || "") + '"><div class="maik-buffer-head">' + maikBotSVG(30) +
+      var orbArt = (window.ThinkingOrbs && window.ThinkingOrbs.getOrbClusterHTML)
+        ? window.ThinkingOrbs.getOrbClusterHTML(stage, cls)
+        : maikBotSVG(30);
+      return '<div class="maik-buffer ' + (cls || "") + '"><div class="maik-buffer-head">' + orbArt +
         '<span class="maik-buffer-txt">' + maikEscH(stage || "Searching StewardMD knowledge") + '</span></div>' +
         '<div class="maik-sk"><span></span><span></span><span></span></div></div>';
     }
