@@ -531,3 +531,142 @@ test("children (r.10, DPDP applied early): a research consent for a child needs 
   assert.equal(msgOk.__status, 200, JSON.stringify(msgOk));
   assert.equal((await as(RECEPTION, "/ward/comm-preference", "POST", { orgId: ORG, patientId: "kid-1", channel: "sms", optedIn: false, note: "Mother asked to stop" })).__status, 200, "an opt-out is never gated");
 });
+
+/* Owner's legal guidance of 17 Sep 2026, item 4: LEGAL_OBLIGATION only with an identified statutory provision. */
+test("pure: retention basis: each class's layers are classified from the legal opinion's citations; lengthening is policy; nothing goes below a legal floor", async () => {
+  const { CLASSES, LEGAL, POLICY } = await import("../functions/_wardsynq/retention.js");
+  const EXPECT = {
+    "clinical-ipd": [[LEGAL, /Indian Medical Council \(Professional Conduct, Etiquette and Ethics\) Regulations 2002/, /reg 1\.3\.1/, 3], [POLICY, /DGHS Office Memorandum F\. No\. A\.12034\/3\/2014/, /at least ten years/, 10]],
+    "clinical-opd": [[POLICY, /DGHS Office Memorandum/, /three years/, 3], [POLICY, /WardSynQ safest default/, /ten years/, 10]],
+    mlc: [[POLICY, /DGHS Office Memorandum/, /Medico Legal Registers/, 10]],
+    pcpndt: [[LEGAL, /Pre-Conception and Pre-Natal Diagnostic Techniques .*Rules 1996/, /r\.9\(6\); Act 1994 s\.29/, 2]],
+    mtp: [[LEGAL, /Medical Termination of Pregnancy Regulations 2003/, /reg 5/, 5]],
+    ndps: [[LEGAL, /Narcotic Drugs and Psychotropic Substances Rules 1985/, /r\.52X/, 2]],
+    h1: [[LEGAL, /Drugs and Cosmetics Rules 1945/, /r\.65\(3\)\(1\)\(h\)/, 3]],
+    "schedule-x": [[LEGAL, /Drugs and Cosmetics Rules 1945/, /r\.65\(7\); r\.65\(9\)\(a\)/, 2]],
+    "blood-centre": [[LEGAL, /Drugs and Cosmetics Rules 1945/, /Schedule F Part XII-B heading L NOTE; r\.122-P\(i\)\(c\)/, 5]],
+    art: [[LEGAL, /Assisted Reproductive Technology \(Regulation\) Act 2021/, /s\.23\(c\), \(d\)/, 10]],
+    surrogacy: [[LEGAL, /Surrogacy \(Regulation\) Act 2021/, /s\.46\(1\)/, 25]],
+    "audit-log": [[LEGAL, /CERT-In Directions No\. 20\(3\)\/2022-CERT-In/, /direction \(iv\)/, null], [LEGAL, /Digital Personal Data Protection Rules 2025/, /r\.6\(1\)\(e\); r\.8\(3\)/, 1]],
+    "consent-artefacts": [[POLICY, /Legal opinion of 17 Sep 2026, H\.4\.1/, /life of the record/, null]],
+  };
+  assert.deepEqual(Object.keys(CLASSES).sort(), Object.keys(EXPECT).sort(), "every class is classified");
+  for (const [k, layers] of Object.entries(EXPECT)) {
+    const got = CLASSES[k].bases;
+    assert.equal(got.length, layers.length, k);
+    layers.forEach(([type, instrument, provision, years], i) => {
+      assert.equal(got[i].type, type, `${k} layer ${i}`);
+      assert.match(got[i].instrument, instrument, k);
+      assert.match(got[i].provision, provision, k);
+      assert.equal(got[i].years, years, k);
+      assert.equal(got[i].jurisdiction, "IN", k);
+      assert.ok(got[i].id && got[i].sourceType, k);
+      /* An office memorandum, guideline or hospital policy is never a LEGAL_OBLIGATION. */
+      if (/Office memorandum|Guideline|Hospital policy/.test(got[i].sourceType)) assert.equal(got[i].type, POLICY, `${k}: ${got[i].sourceType}`);
+    });
+    assert.ok(CLASSES[k].floorYears == null || CLASSES[k].legalFloorYears == null || CLASSES[k].floorYears >= CLASSES[k].legalFloorYears, `${k}: the setting minimum is never below the legal floor`);
+    assert.equal(CLASSES[k].policyOnly, !layers.some((l) => l[0] === LEGAL), k);
+  }
+  assert.equal(CLASSES["audit-log"].bases[0].days, 180);
+  assert.equal(CLASSES["audit-log"].bases[1].effectiveFrom, "2027-05-13");
+  assert.ok(CLASSES["audit-log"].bases.every((b) => b.evidence.length), "each statutory layer carries its evidence");
+  const set = classesOf({ years: { "blood-centre": 3, pcpndt: 1, "clinical-ipd": 12, "clinical-opd": 5 } }).classes;
+  assert.equal(set["blood-centre"].years, 5, "no one shortens below the Rules' five years");
+  assert.equal(set.pcpndt.years, 2);
+  assert.deepEqual(set["clinical-ipd"].layers.map((l) => [l.type, l.years]), [[LEGAL, 3], [POLICY, 10], [POLICY, 12]], "a longer hospital period is a RETENTION_POLICY layer beside the law");
+  assert.deepEqual(set["clinical-opd"].layers.map((l) => l.id), ["retention.clinical-opd.dghs-om-2014", "retention.clinical-opd.hospital-setting"], "the hospital's own OPD period replaces WardSynQ's default");
+  // Before commencement the DPDP Rules' one-year log layer keeps nothing; the CERT-In 180 days do.
+  const facts = { patient: { dob: "1980-01-01" }, encounters: [{ class: "IPD", status: "finished", periodStart: "2020-01-01T00:00:00Z", periodEnd: "2020-01-10T00:00:00Z" }, { class: "OPD", status: "finished", periodStart: "2026-01-01T00:00:00Z", periodEnd: "2026-01-01T01:00:00Z" }], registers: { mlc: [], formf: [], mtp: [] }, documents: [], consents: [] };
+  const map = retentionMap(facts, null, Date.parse("2026-09-17T00:00:00Z"));
+  const ipd = map.find((x) => x.class === "clinical-ipd"), opd = map.find((x) => x.class === "clinical-opd");
+  assert.equal(ipd.legalUntil.slice(0, 10), "2023-01-01", "IMC reg 1.3.1: three years from the commencement of treatment");
+  assert.equal(ipd.basisType, POLICY, "past the statutory period, only the DGHS OM (policy) keeps it");
+  assert.equal(ipd.keepUntil.slice(0, 10), "2030-01-10");
+  assert.equal(opd.basisType, POLICY);
+  assert.equal(opd.legalUntil, null);
+});
+
+test("erasure after DPDP commencement: a legal floor keeps its class and names the law; a policy-only class needs the DPO's documented decision; a hold still refuses", async () => {
+  const { LEGAL, POLICY } = await import("../functions/_wardsynq/retention.js");
+  seedHospital(IN_FORCE);
+  await seed({ resourceType: "Patient", id: "pat-1", name: "Asha A", mrn: "M1", dob: "1980-01-01", identifiers: [] });
+  await seed({ resourceType: "PatientConsent", id: "c-research", patientId: "pat-1", scope: "research", decision: "granted", recordedAt: NOW, source: { system: "wardsynq-native" } });
+  await seed({ resourceType: "Encounter", id: "enc-ipd-1", patientId: "pat-1", class: "IPD", status: "finished", periodStart: "2026-06-01T00:00:00.000Z", periodEnd: "2026-06-05T00:00:00.000Z" });
+  await seed({ resourceType: "Encounter", id: "enc-opd-1", patientId: "pat-1", class: "OPD", status: "finished", periodStart: "2026-08-01T00:00:00.000Z", periodEnd: "2026-08-01T01:00:00.000Z" });
+  await seed({ resourceType: "_wardsynq_register_formf", id: "reg-formf-1", kind: "formf", patientId: "pat-1", serial: "F/2026/00009", eventDate: "2026-08-10", recordedAt: NOW, fields: { status: "complete" } });
+  docs.set(`q_patients/${sanitize(ORG + "__M1")}`, { fields: { orgId: ORG, mrn: "M1", district: "Guntur" }, updateTime: "t1" });
+  await as(DPO, "/ward/privacy-notice", "POST", { orgId: ORG, ...NOTICE });
+  const filed = await as(DPO, "/ward/data-request", "POST", { orgId: ORG, patientId: "pat-1", kind: "erasure", detail: "Please erase my data", receivedVia: "email" });
+  const act = (extra) => as(DPO, "/ward/data-request-act", "POST", { orgId: ORG, requestId: filed.request.id, action: "complete", response: "Answered as recorded.", ...extra });
+
+  const hold = await as(DPO, "/ward/legal-hold", "POST", { orgId: ORG, patientId: "pat-1", reason: "consumer-complaint", reference: "CC 12/2026, District Commission" });
+  const held = await act({ retentionDecisions: [{ class: "clinical-opd", decision: "erase", reason: "No continuing care need", destructionReference: "DR/1" }, { class: "consent-artefacts", decision: "erase", reason: "No purpose remains", destructionReference: "DR/1" }] });
+  assert.equal(held.__status, 409, JSON.stringify(held));
+  assert.equal(held.error, "legal_hold", "a legal hold refuses whatever the DPO decided");
+  assert.equal((await as(HIM, "/ward/legal-hold-lift", "POST", { orgId: ORG, holdId: hold.hold.id, liftReference: "Complaint withdrawn, order 3 Sep" })).__status, 200);
+
+  const asked = await act({});
+  assert.equal(asked.__status, 409, JSON.stringify(asked));
+  assert.equal(asked.error, "retention_decision_required");
+  assert.deepEqual(asked.missing, ["clinical-opd", "consent-artefacts"], "the IMC and PCPNDT periods are the law's, not the DPO's to decide");
+  assert.ok(asked.decisionsNeeded.every((x) => x.basisType === POLICY && /not a legal requirement/.test(x.answer)));
+  assert.equal((await RECORD.latest(T, "PatientConsent", "c-research")).decision, "granted", "nothing erased before the decision");
+  assert.equal((await RECORD.latest(T, "DataPrincipalRequest", filed.request.id)).state, "received");
+  const short = await act({ retentionDecisions: [{ class: "clinical-opd", decision: "retain", reason: "care" }, { class: "consent-artefacts", decision: "erase", reason: "No purpose remains now" }] });
+  assert.deepEqual(short.missing, ["clinical-opd"], "a retain decision writes its purpose or necessity");
+
+  const pending = await act({ retentionDecisions: [{ class: "clinical-opd", decision: "retain", reason: "Continuing diabetes care at this hospital" }, { class: "consent-artefacts", decision: "erase", reason: "No purpose remains now" }] });
+  assert.equal(pending.__status, 502, JSON.stringify(pending));
+  assert.equal(pending.error, "erasure_partial", "an erase decision WardSynQ cannot carry out itself is not reported done");
+  assert.deepEqual(pending.erasure.failures.map((f) => [f.step, f.class]), [["erase-class", "consent-artefacts"]]);
+  assert.equal(pending.request.state, "in-progress");
+  assert.equal(pending.request.erasureAttempt.retentionDecisions.length, 2);
+
+  const done = await act({ retentionDecisions: [{ class: "clinical-opd", decision: "retain", reason: "Continuing diabetes care at this hospital" }, { class: "consent-artefacts", decision: "erase", reason: "No purpose remains now", destructionReference: "DR/2026/0007" }] });
+  assert.equal(done.__status, 200, JSON.stringify(done));
+  assert.equal(done.request.state, "completed");
+  const by = Object.fromEntries(done.erasure.retained.classes.map((x) => [x.class, x]));
+  assert.equal(by["clinical-ipd"].basisType, LEGAL);
+  assert.match(by["clinical-ipd"].answer, /because the law requires it: Indian Medical Council .*reg 1\.3\.1\./);
+  assert.match(by["clinical-ipd"].answer, /under the hospital's retention policy \(DGHS Office Memorandum.*\), which is not a legal requirement/);
+  assert.equal(by.pcpndt.basisType, LEGAL);
+  assert.match(by.pcpndt.answer, /r\.9\(6\); Act 1994 s\.29/);
+  assert.equal(by["clinical-opd"].decision.decision, "retain");
+  assert.ok(!/law requires/.test(by["clinical-opd"].answer), "a policy class is never said to be required by law");
+  assert.equal(by["consent-artefacts"].decision.destructionReference, "DR/2026/0007");
+  assert.equal(done.erasure.retentionDecisions[0].decidedBy.length > 0, true);
+});
+
+test("before DPDP commencement erasure is unchanged, with each class's basis labelled", async () => {
+  seedHospital();
+  await seed({ resourceType: "Patient", id: "pat-1", name: "Asha A", mrn: "M1", dob: "1980-01-01", identifiers: [] });
+  await seed({ resourceType: "Encounter", id: "enc-opd-1", patientId: "pat-1", class: "OPD", status: "finished", periodStart: "2026-08-01T00:00:00.000Z", periodEnd: "2026-08-01T01:00:00.000Z" });
+  docs.set(`q_patients/${sanitize(ORG + "__M1")}`, { fields: { orgId: ORG, mrn: "M1", district: "Guntur" }, updateTime: "t1" });
+  await as(DPO, "/ward/privacy-notice", "POST", { orgId: ORG, ...NOTICE });
+  const filed = await as(DPO, "/ward/data-request", "POST", { orgId: ORG, patientId: "pat-1", kind: "erasure", detail: "Please erase my data", receivedVia: "email" });
+  const done = await as(DPO, "/ward/data-request-act", "POST", { orgId: ORG, requestId: filed.request.id, action: "complete", response: "Answered as recorded." });
+  assert.equal(done.__status, 200, JSON.stringify(done));
+  const opd = done.erasure.retained.classes.find((x) => x.class === "clinical-opd");
+  assert.equal(opd.basisType, "RETENTION_POLICY");
+  assert.equal(opd.policyOnly, true);
+  assert.match(opd.answer, /retention policy .*This is not a legal requirement\./);
+  assert.equal(done.erasure.retentionDecisions, null, "no DPO decision is asked for before commencement");
+  assert.ok(!/as long as the law requires/.test(done.erasure.retained.reason));
+});
+
+test("GET /ward/retention-classes: no session 401, wrong role 403, another hospital refused; the DPO and the records officer read every class with its layers", async () => {
+  seedHospital();
+  const path = "/ward/retention-classes?orgId=" + ORG;
+  assert.equal((await as(null, path)).__status, 401);
+  for (const who of [NURSE, RECEPTION, HR]) assert.equal((await as(who, path)).__status, 403, who);
+  const elsewhere = await as(DPO, "/ward/retention-classes?orgId=" + OTHER);
+  assert.ok(elsewhere.__status === 403 || elsewhere.__status === 404, JSON.stringify(elsewhere));
+  const r = await as(DPO, path);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.classes.length, 13);
+  assert.equal(r.law.dpdpInForce, false);
+  const ipd = r.classes.find((x) => x.key === "clinical-ipd");
+  assert.deepEqual(ipd.layers.map((l) => l.type), ["LEGAL_OBLIGATION", "RETENTION_POLICY"]);
+  assert.equal(r.classes.find((x) => x.key === "mlc").policyOnly, true);
+  assert.equal((await as(HIM, path)).__status, 200, "the medical records officer reads it too");
+});

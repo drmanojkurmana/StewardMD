@@ -25,7 +25,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { sha256Hex } from "./object-store.js";
 import { signToken, verifyToken, queueSecret } from "../_queue.js";
-import { retentionFacts, retentionView } from "./retention.js";
+import { retentionFacts, retentionView, LEGAL, POLICY } from "./retention.js";
 
 const TYPE = "DocumentReference";
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -88,7 +88,7 @@ function decodeBase64(b64) { try { return unb64u(str(b64).replace(/^data:[^,]*,/
 function summary(d) {
   return { id: d.id, version: d.version, patientId: d.patientId, encounterId: d.encounterId || null, docType: d.docType, title: d.title,
     contentType: d.contentType, sizeBytes: d.sizeBytes, sha256: d.sha256, status: d.status, uploadedBy: d.uploadedBy, uploadedAt: d.uploadedAt,
-    retainUntil: d.retainUntil, withdrawnReason: d.withdrawnReason || null, withdrawnBy: d.withdrawnBy || null, purgedAt: d.purgedAt || null, purgedBy: d.purgedBy || null, purgeReason: d.purgeReason || null };
+    retainUntil: d.retainUntil, withdrawnReason: d.withdrawnReason || null, withdrawnBy: d.withdrawnBy || null, purgedAt: d.purgedAt || null, purgedBy: d.purgedBy || null, purgeReason: d.purgeReason || null, policyOverride: d.policyOverride || null };
 }
 
 /**
@@ -226,10 +226,11 @@ async function withdrawDocument(request, env, ctx) {
 
 /**
  * Delete the stored bytes of every version, once the retention period has passed. The metadata stays.
- * Refused before retainUntil, before the patient's clinical record may go (ten years after the last
- * encounter, longer for a minor: retention.js), and under a legal hold, whoever asks. Never automatic:
- * a named person gives the reason, and the purge is the destruction record (legal opinion H.4.2).
- * ctx: { migration, store, documentId, reason, retention, actorDeps, recordDeps }
+ * Refused under a legal hold and inside a LEGAL_OBLIGATION period (retention.js), whoever asks. Inside
+ * a period only the hospital's retention policy sets (retainUntil, a class's policy layer), allowed only
+ * with the DPO's or medical records officer's confirmation and reason. Never automatic: a named person
+ * gives the reason, and the purge is the destruction record (legal opinion H.4.2).
+ * ctx: { migration, store, documentId, reason, retention, policyConfirm?, policyReason?, canConfirmPolicy?, actorDeps, recordDeps }
  */
 async function purgeDocument(request, env, ctx) {
   const mig = ctx.migration, base = baseOf(mig);
@@ -244,21 +245,41 @@ async function purgeDocument(request, env, ctx) {
   const cur = versions && versions[versions.length - 1];
   if (!cur) return { ...base, ok: false, status: 404, error: "document_not_found", written: 0 };
   if (cur.status === "purged") return { ...base, ok: true, written: 0, skipped: "already_purged" };
-  if (new Date(cur.retainUntil).getTime() > Date.now()) {
-    return { ...base, ok: false, status: 409, error: "retention_not_expired", retainUntil: cur.retainUntil, message: `This document must be kept until ${cur.retainUntil.slice(0, 10)}.`, written: 0 };
-  }
   let view;
   try { view = retentionView(await retentionFacts(svc, ctx.recordDeps.repository, mig.tenantId, cur.patientId), ctx.retention, Date.now()); }
   catch (e) { return { ...base, ok: false, status: 502, error: "retention_unreadable", message: "How long this patient's record must be kept could not be worked out, so nothing was deleted.", written: 0 }; }
   if (view.holds.length) return { ...base, ok: false, status: 409, error: "legal_hold", holds: view.holds, message: "This patient's record is under a legal hold. Nothing was deleted.", written: 0 };
-  const clinical = view.retained.filter((x) => (x.class === "clinical-ipd" || x.class === "clinical-opd" || x.class === "mlc" || x.class === "pcpndt" || x.class === "mtp") && Date.parse(x.keepUntil) > Date.now())
-    .sort((a, b) => String(b.keepUntil).localeCompare(String(a.keepUntil)))[0];
-  if (clinical) {
-    return { ...base, ok: false, status: 409, error: "retention_not_expired", retainUntil: clinical.keepUntil, retentionClass: clinical.class, rule: clinical.rule, message: `This patient's record must be kept until ${clinical.keepUntil.slice(0, 10)}.`, written: 0 };
+  /* Owner's guidance of 17 Sep 2026 (item 4). Inside a LEGAL_OBLIGATION period the deletion is refused, naming the law.
+   * Inside a period only the hospital's retention policy sets (this document's own date, from documentRetentionYears,
+   * or a class's policy layer) it needs a reason and the DPO's or medical records officer's confirmation, written on
+   * the document's purge version. */
+  const nowMs = Date.now(), CLINICAL = new Set(["clinical-ipd", "clinical-opd", "mlc", "pcpndt", "mtp"]);
+  const kept = view.retained.filter((x) => CLINICAL.has(x.class));
+  const legal = kept.filter((x) => x.legalUntil && Date.parse(x.legalUntil) > nowMs).sort((a, b) => String(b.legalUntil).localeCompare(String(a.legalUntil)))[0];
+  if (legal) {
+    const law = legal.bases.filter((b) => b.type === LEGAL && b.inForce && b.until === legal.legalUntil).map((b) => ({ id: b.id, instrument: b.instrument, provision: b.provision, jurisdiction: b.jurisdiction, until: b.until }));
+    return { ...base, ok: false, status: 409, error: "retention_not_expired", basisType: LEGAL, retainUntil: legal.legalUntil, retentionClass: legal.class, rule: legal.rule, law,
+      message: `The law requires this patient's record to be kept until ${legal.legalUntil.slice(0, 10)} (${law.map((b) => `${b.instrument}, ${b.provision}`).join("; ")}). Nothing was deleted.`, written: 0 };
+  }
+  const policy = [
+    ...(Date.parse(cur.retainUntil) > nowMs ? [{ retentionClass: "document", keepUntil: cur.retainUntil, bases: [{ type: POLICY, instrument: "This hospital's document retention period (wardsynq.documentRetentionYears; DGHS Office Memorandum, 28 Oct 2014)", provision: "retainUntil" }] }] : []),
+    ...kept.filter((x) => x.keepUntil && Date.parse(x.keepUntil) > nowMs).map((x) => ({ retentionClass: x.class, keepUntil: x.keepUntil, bases: x.bases.filter((b) => b.type === POLICY).map((b) => ({ id: b.id, type: b.type, instrument: b.instrument, provision: b.provision })) })),
+  ].sort((a, b) => String(b.keepUntil).localeCompare(String(a.keepUntil)));
+  let policyOverride = null;
+  if (policy.length) {
+    const top = policy[0], words = policy.map((p) => p.bases.map((b) => `${b.instrument}, ${b.provision}`).join("; ")).join("; ");
+    const refusal = { basisType: POLICY, retainUntil: top.keepUntil, retentionClass: top.retentionClass, policy, written: 0 };
+    if (!ctx.policyConfirm) return { ...base, ok: false, status: 409, error: "retention_policy_confirmation_required", ...refusal,
+      message: `This record is kept until ${top.keepUntil.slice(0, 10)} under the hospital's retention policy (${words}). That is not a legal requirement: the Data Protection Officer or the medical records officer may confirm the deletion with a reason. Nothing was deleted.` };
+    if (!ctx.canConfirmPolicy) return { ...base, ok: false, status: 403, error: "policy_confirmation_role", ...refusal,
+      message: "Only the Data Protection Officer or the medical records officer confirms deleting a record inside the hospital's retention policy period. Nothing was deleted." };
+    const policyReason = str(ctx.policyReason).slice(0, 2000);
+    if (policyReason.length < 10) return { ...base, ok: false, status: 422, error: "policy_reason_required", ...refusal, message: "Say why deleting inside the retention policy period is justified (at least 10 characters). Nothing was deleted." };
+    policyOverride = { reason: policyReason, confirmedBy: resolved.actor.id, confirmedAt: new Date(nowMs).toISOString(), basisType: POLICY, retainUntil: top.keepUntil, policy };
   }
   try { for (const v of versions) if (v.objectKey) await ctx.store.delete(v.objectKey); }
   catch (e) { return { ...base, ok: false, status: 502, error: "document_store_failed", detail: str(e && e.message), written: 0 }; }
-  const next = { ...cur, status: "purged", purgedAt: new Date().toISOString(), purgedBy: resolved.actor.id, purgeReason: reason };
+  const next = { ...cur, status: "purged", purgedAt: new Date().toISOString(), purgedBy: resolved.actor.id, purgeReason: reason, ...(policyOverride ? { policyOverride } : {}) };
   delete next.version;
   try {
     const out = await svc.put(next, { expectedVersion: cur.version });

@@ -13005,10 +13005,26 @@
     askReason(wTH("ward.delete-the-stored-file-for-every", "Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone.", null, "", 1),
       wT("ward.doc-purge-reason-needed", "Destroying a document needs a reason."), wTH("ward.remove", "Remove"), function (reason) {
       st.busy = true; paint();
-      return apiPost("/ward/document-purge", { orgId: st.orgId, documentId: id, reason: reason })
-        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.file-deleted-the-record-of-the", "File deleted. The record of the document is kept.") : null)) loadDocuments(); else paint(); })
-        .catch(function () { st.busy = false; st.err = wT("ward.could-not-delete-the-file", "Could not delete the file."); paint(); });
+      return documentPurgePost(id, { reason: reason });
     }, { danger: true, icon: "delete_forever", label: wTH("ward.doc-purge-reason", "Why is it being destroyed? This is kept as the destruction record.") });
+  }
+  function documentPurgePost(id, body) {
+    return apiPost("/ward/document-purge", Object.assign({ orgId: st.orgId, documentId: id }, body))
+      .then(function (r) {
+        /* Kept only under the hospital's retention policy, not by law (owner's guidance 17 Sep 2026): the DPO or the
+         * medical records officer confirms with a reason. A period the law sets is refused and named by the server. */
+        if (r && r.error === "retention_policy_confirmation_required") { st.busy = false; paint(); documentPurgeConfirm(id, body.reason, r); return; }
+        if (settle(r, r && r.ok ? wT("ward.file-deleted-the-record-of-the", "File deleted. The record of the document is kept.") : null)) loadDocuments(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-delete-the-file", "Could not delete the file."); paint(); });
+  }
+  function documentPurgeConfirm(id, reason, r) {
+    askReason(wTH("ward.doc-purge-policy-title", "Kept under the hospital's retention policy, not by law", null, "", 1),
+      wT("ward.doc-purge-policy-reason-needed", "Confirming needs a reason of at least 10 characters."), wTH("ward.doc-purge-policy-confirm", "Confirm deletion"), function (why) {
+        st.busy = true; paint();
+        return documentPurgePost(id, { reason: reason, policyConfirm: true, policyReason: why });
+      }, { danger: true, icon: "policy", text: '<span lang="en">' + esc(r.message || "") + "</span>",
+        label: wTH("ward.doc-purge-policy-label", "As the Data Protection Officer or medical records officer: why is deleting it before {date} justified?", { date: esc(String(r.retainUntil || "").slice(0, 10)) }, "date") });
   }
   function documentWithdraw(id) {
     askReason(wTH("ward.why-is-this-document-being-withdrawn", "Why is this document being withdrawn? (For example: scanned under the wrong patient.) The file is kept.", null, "", 1), wT("ward.a-withdrawal-needs-a-reason", "A withdrawal needs a reason."), wTH("ward.withdraw", "Withdraw"), function (reason) {

@@ -7430,3 +7430,31 @@ Source: the legal opinion of 17 Sep 2026 (sections A and H; research awaiting a 
   revisedEstimateRef is given; no estimate recorded, or a ledger past READ_CAP, WARNS instead (refusing a morphine delivery
   on a count that cannot be made is a patient harm). r.52V(3): a controlled transfer-out naming toInstitution needs
   controllerApprovalRef. H1 and X registers are views over the ledger (view=h1, view=schedx).
+
+## 2026-09-17 Retention basis: LEGAL_OBLIGATION or RETENTION_POLICY per layer (owner's legal guidance item 4) (branch retention-basis)
+- **Rule.** A retention period is "required by law" only with an identified statutory provision (Act, Rule, Regulation made
+  under an Act, statutory direction or notification). An office memorandum or guideline without one, WardSynQ's default
+  and the hospital's longer setting are RETENTION_POLICY. Each class in `functions/_wardsynq/retention.js` carries `BASES`
+  layers (id, type, sourceType, instrument, provision, jurisdiction, years/days, from, effectiveFrom, status, evidence,
+  note), shaped like the owner's requirement record so they can move into the legal requirement registry (branch
+  legal-registry) without change. No second registry was created.
+- **Classification.** LEGAL: IMC Regulations 2002 reg 1.3.1 (IPD, 3 years from commencement of treatment), PCPNDT r.9(6),
+  MTP Regs reg 5, NDPS r.52X, D&C r.65(3)(1)(h), r.65(7)/r.65(9)(a), Sch F XII-B L/r.122-P, ART s.23, Surrogacy s.46(1),
+  CERT-In Directions (iv) 180 days, DPDP Rules r.6(1)(e)/r.8(3) from 13 May 2027. POLICY: DGHS OM 28 Oct 2014 (IPD 10y,
+  OPD 3y, MLC 10y), WardSynQ's OPD 10-year default, the minor rule (limitation basis unconfirmed), consent artefacts.
+  Policy-only classes: clinical-opd, mlc, consent-artefacts. CERT-In counted as statutory (a direction under IT Act s.70B,
+  per its title); flagged for the lawyer.
+- **Setting minimums unchanged** (floorYears, e.g. IPD 10): never below a legal floor, and policy defaults are not
+  shortened through settings either. Lowering them to the legal floor is an owner decision, not taken here.
+- **Erasure (dpdp.js).** Legal holds refuse first. Before DPDP commencement: as before, each class labelled. From
+  commencement: a class inside a LEGAL layer is kept and the answer names the law; every other class needs the DPO's
+  `retentionDecisions` entry (retain + purpose/necessity, or erase). WardSynQ never erases a chart itself: an erase
+  decision leaves the request in progress (erasure_partial, step erase-class) until the destruction record reference is
+  given.
+- **Document purge (documents.js).** Inside a LEGAL period: refused (retention_not_expired, basisType, law). Inside only a
+  policy period (the document's own retainUntil or a class policy layer): 409 retention_policy_confirmation_required,
+  then `policyConfirm` + `policyReason` from a user holding dpdp.manage or register.records (checked in the router),
+  written on the purge version as `policyOverride`. The route stays staff.admin; no two-person rule.
+- **Screen.** Privacy and compliance > Retention and legal holds lists every class and layer (GET
+  /ward/retention-classes, dpdp.manage or register.records) and flags policy-only classes; the erasure request shows the
+  DPO decision form; ward.js documents ask for the confirmation.

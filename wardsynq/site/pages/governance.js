@@ -134,18 +134,49 @@
     return out + '<div id="gClkMsg"></div></div>';
   }
 
-  /* Each retention class the patient has records in, the rule that keeps it and the date it ends (legal opinion H.4.5).
-   * Rules and dates are server values. */
+  /* The basis of a retention layer (owner's guidance 17 Sep 2026): only an identified statutory provision is "required
+   * by law"; an office memorandum, a guideline or the hospital's own period is policy. */
+  function basisPill(c, type) {
+    if (type === "LEGAL_OBLIGATION") return '<span class="pill stop">' + c.esc(T(c, "site.gov.ret.basis.legal", "Required by law")) + "</span>";
+    if (type === "RETENTION_POLICY") return '<span class="pill warn">' + c.esc(T(c, "site.gov.ret.basis.policy", "Hospital retention policy, not a legal requirement")) + "</span>";
+    return '<span class="pill">' + c.esc(T(c, "site.gov.ret.basis.none", "No retention period running")) + "</span>";
+  }
+  function dday(iso) { var t = Date.parse(iso || ""); return isFinite(t) ? new Date(t).toLocaleDateString() : ""; }
+  /* Each retention class the patient has records in, what keeps it today and until when, each layer's instrument and
+   * provision, and the DPO's decision where the policy alone kept it (legal opinion H.4.5). Instruments, provisions
+   * and dates are server values. An answer recorded before the basis was stored shows its rule only. */
   function retainedHtml(c, classes) {
     var esc = c.esc;
     if (!classes || !classes.length) return "";
     return '<ul class="quiet">' + classes.map(function (x) {
-      var until = x.keepUntil ? new Date(Date.parse(x.keepUntil)).toLocaleDateString() : T(c, "site.gov.ret.lifeOfRecord", "for the life of the record it belongs to");
-      return "<li><b>" + EN(c, esc(x["class"])) + "</b>: " + esc(T(c, "site.gov.ret.until", "kept until {date}", { date: until })) +
+      var until = x.keepUntil ? dday(x.keepUntil) : T(c, "site.gov.ret.lifeOfRecord", "for the life of the record it belongs to");
+      var head = "<li><b>" + EN(c, esc(x["class"])) + "</b>: " + esc(T(c, "site.gov.ret.until", "kept until {date}", { date: until })) +
         (x.untilProceedingsEnd ? " " + esc(T(c, "site.gov.ret.orProceedings", "or until any court proceedings end, whichever is later")) : "") +
-        (x.minorRule ? " " + esc(T(c, "site.gov.ret.minor", "(a child's record: at least {n} years after turning 18)", { n: x.minorRule })) : "") +
-        '<br><span class="quiet">' + EN(c, esc(x.rule)) + "</span></li>";
+        (x.minorRule ? " " + esc(T(c, "site.gov.ret.minor", "(a child's record: at least {n} years after turning 18)", { n: x.minorRule })) : "");
+      if (!x.bases) return head + '<br><span class="quiet">' + EN(c, esc(x.rule)) + "</span></li>";
+      return head + " " + basisPill(c, x.basisType) +
+        (x.legalUntil ? "<br>" + esc(T(c, "site.gov.ret.legalUntil", "Required by law until {date}", { date: dday(x.legalUntil) })) : "") +
+        '<ul class="quiet">' + x.bases.map(function (b) {
+          return "<li>" + basisPill(c, b.type) + " " + EN(c, esc(b.instrument + ", " + b.provision)) + (b.until ? " &middot; " + esc(T(c, "site.gov.ret.layerUntil", "until {date}", { date: dday(b.until) })) : "") +
+            (b.inForce === false ? " " + esc(T(c, "site.gov.ret.notInForce", "(not yet in force)")) : "") + "</li>";
+        }).join("") + "</ul>" +
+        (x.decision ? "<p>" + esc(x.decision.decision === "retain" ? T(c, "site.gov.ret.decRetain", "The DPO decided to retain it:") : T(c, "site.gov.ret.decErase", "The DPO decided to erase it:")) + " " + EN(c, esc(x.decision.reason)) +
+          (x.decision.destructionReference ? " &middot; " + esc(T(c, "site.gov.ret.decDestroyed", "destruction record {ref}", { ref: x.decision.destructionReference })) : "") + "</p>" : "") + "</li>";
     }).join("") + "</ul>";
+  }
+  /* From DPDP commencement: the DPO's decision for each class kept only by policy (dpdp.js retentionDecisionsOf). */
+  function decisionsFormHtml(c, id, needed) {
+    var esc = c.esc;
+    return '<div class="msg warn"><b>' + esc(T(c, "site.gov.ret.decTitle", "Kept only under the hospital's retention policy: the DPO decides")) + "</b><p>" +
+      esc(T(c, "site.gov.ret.decIntro", "These records are not kept by any law. For each, retain it and write the purpose or necessity, or erase it. WardSynQ does not erase a clinical record itself: the medical records officer destroys or de-identifies it, and the request is completed with the destruction record reference.")) + "</p>" +
+      needed.map(function (x, i) {
+        var k = id + "_" + i;
+        return '<div class="card"><h3>' + EN(c, esc(x["class"])) + " " + basisPill(c, x.basisType) + "</h3>" + retainedHtml(c, [x]) + '<div class="row">' +
+          '<label class="f"><span>' + esc(T(c, "site.gov.ret.decision", "Decision")) + '</span><select id="gDec_' + esc(k) + '" data-gdec-class="' + esc(x["class"]) + '"><option value="retain">' + esc(T(c, "site.gov.ret.decRetainOpt", "Retain")) + '</option><option value="erase">' + esc(T(c, "site.gov.ret.decEraseOpt", "Erase")) + "</option></select></label>" +
+          '<label class="f"><span>' + esc(T(c, "site.gov.ret.decReason", "Purpose or necessity, or why it is erased (at least 10 characters)")) + '</span><input id="gDecWhy_' + esc(k) + '"></label>' +
+          '<label class="f"><span>' + esc(T(c, "site.gov.ret.decRef", "Destruction record reference (erase only, once done)")) + '</span><input id="gDecRef_' + esc(k) + '"></label></div></div>';
+      }).join("") +
+      '<button class="btn" type="button" data-gdecide="' + esc(id) + '" data-n="' + needed.length + '">' + esc(T(c, "site.gov.ret.decSubmit", "Record decisions and complete")) + "</button></div>";
   }
   function holdsHtml(c, holds, patientId) {
     var esc = c.esc;
@@ -163,7 +194,7 @@
       "<dt>" + esc(T(c, "site.gov.erasure.consents", "Consents withdrawn")) + "</dt><dd>" + list(e.consentsWithdrawn) + "</dd>" +
       "<dt>" + esc(T(c, "site.gov.erasure.removed", "Removed from the current record")) + "</dt><dd>" + list(e.removedFromCurrentRecord) + "</dd>" +
       "<dt>" + esc(T(c, "site.gov.erasure.registration", "Removed from the registration details")) + "</dt><dd>" + list(e.registrationDetailsRemoved) + "</dd>" +
-      "<dt>" + esc(T(c, "site.gov.erasure.kept", "Kept")) + "</dt><dd>" + esc(T(c, "site.gov.erasure.keptWhy", "The clinical record. Medical records must be kept for as long as the law requires; the Act allows this (s8(7), s12(3)).")) +
+      "<dt>" + esc(T(c, "site.gov.erasure.kept", "Kept")) + "</dt><dd>" + esc(T(c, "site.gov.erasure.keptWhy2", "The clinical record. Each class says whether a law keeps it, naming the law and provision (the Act allows this: s8(7), s12(3)), or only the hospital's retention policy, which is not a legal requirement.")) +
       retainedHtml(c, e.retained && e.retained.classes) + "</dd>" +
       "<dt>" + esc(T(c, "site.gov.erasure.history", "Record history")) + "</dt><dd>" + esc(T(c, "site.gov.erasure.historyWhy", "Values removed from the current record stay in its version history, which cannot be edited. They are not erased.")) + "</dd>" +
       (e.failures && e.failures.length ? "<dt>" + esc(T(c, "site.gov.erasure.notDone", "Not done")) + '</dt><dd class="err">' + EN(c, esc(e.failures.map(function (f) { return f.step + (f.detail ? ": " + f.detail : ""); }).join("; "))) + "</dd>" : "") +
@@ -239,12 +270,27 @@
           c.toast(T(c, "site.gov.req.filed", "Request recorded.")); load();
         });
       });
-      onAll(body, "data-gact", function (b) {
-        var id = b.getAttribute("data-id"), action = b.getAttribute("data-gact");
-        if (action === "complete" && b.getAttribute("data-kind") === "erasure" && !confirm(T(c, "site.gov.req.eraseConfirm", "This withdraws the patient's consents other than for treatment, removes their ABHA link and optional registration details, and keeps the clinical record. Continue?"))) return;
+      function act(b, id, action, decisions) {
         b.disabled = true;
-        c.api("/ward/data-request-act", { orgId: c.state.orgId, requestId: id, action: action, response: val("gResp_" + id) }).then(function (r) {
+        c.api("/ward/data-request-act", { orgId: c.state.orgId, requestId: id, action: action, response: val("gResp_" + id), retentionDecisions: decisions || undefined }).then(function (r) {
           b.disabled = false;
+          /* From DPDP commencement a class kept only by policy needs the DPO's decision before anything is erased. */
+          if (r && r.error === "retention_decision_required") {
+            var db = document.getElementById("gHold_" + id);
+            if (db) {
+              db.innerHTML = decisionsFormHtml(c, id, r.decisionsNeeded || []);
+              onAll(db, "data-gdecide", function (btn) {
+                var out = [];
+                for (var i = 0; i < Number(btn.getAttribute("data-n")); i++) {
+                  var k = id + "_" + i, sel = document.getElementById("gDec_" + k);
+                  out.push({ "class": sel.getAttribute("data-gdec-class"), decision: sel.value, reason: val("gDecWhy_" + k), destructionReference: val("gDecRef_" + k) });
+                }
+                act(btn, id, "complete", out);
+              });
+            }
+            c.toast(T(c, "site.gov.req.notSaved", "Not saved: {why}", { why: why(c, r) }));
+            return;
+          }
           if (!r || !r.ok) {
             // A partial erasure is written on the request and is shown by reloading it; the toast says it did not finish.
             c.toast(r && r.error === "erasure_partial" ? T(c, "site.gov.req.partial", "The erasure did not finish. The request stays open and shows what was and was not done.") : T(c, "site.gov.req.notSaved", "Not saved: {why}", { why: why(c, r) }));
@@ -255,6 +301,11 @@
           }
           c.toast(T(c, "site.gov.req.saved", "Saved.")); load();
         });
+      }
+      onAll(body, "data-gact", function (b) {
+        var id = b.getAttribute("data-id"), action = b.getAttribute("data-gact");
+        if (action === "complete" && b.getAttribute("data-kind") === "erasure" && !confirm(T(c, "site.gov.req.eraseConfirm", "This withdraws the patient's consents other than for treatment, removes their ABHA link and optional registration details, and keeps the clinical record. Continue?"))) return;
+        act(b, id, action, null);
       });
       onAll(body, "data-ghold", function (b) {
         var id = b.getAttribute("data-ghold"), pid = b.getAttribute("data-pid"), box = document.getElementById("gHold_" + id);
@@ -460,12 +511,38 @@
       pocso: T(c, "site.gov.lh.r.pocso", "POCSO report"), "pcpndt-proceedings": T(c, "site.gov.lh.r.pcpndt", "PCPNDT proceedings"), "mtp-proceedings": T(c, "site.gov.lh.r.mtp", "MTP proceedings"),
       "police-request": T(c, "site.gov.lh.r.police", "Police request") }[x] || x;
   }
+  /* Every class with its layers (retention.js BASES): basis type, instrument, provision, jurisdiction, period and
+   * evidence, and a flag on a class no law keeps. null while loading, false when it failed. */
+  function periodText(c, b) {
+    return b.days != null ? T(c, "site.gov.ret.days", "{n} days", { n: b.days }) : b.years != null ? T(c, "site.gov.ret.yearsN", "{n} years", { n: b.years }) : T(c, "site.gov.ret.lifeOfRecord", "for the life of the record it belongs to");
+  }
+  function classesHtml(c, list, law) {
+    var esc = c.esc;
+    if (list === null) return loading(c, T(c, "site.gov.ret.classesLoading", "Loading the retention classes..."));
+    if (list === false) return '<div class="msg err">' + esc(T(c, "site.gov.ret.classesFailed", "The retention classes could not be loaded. This is not the same as there being none.")) + "</div>";
+    return '<div class="card"><h2>' + esc(T(c, "site.gov.ret.classes", "Retention classes")) + "</h2>" +
+      '<p class="quiet">' + esc(law && law.dpdpInForce ? T(c, "site.gov.ret.dpdpNow", "DPDP applies: a period the law sets refuses erasure; a period only the hospital's policy sets goes to the DPO for a documented decision.")
+        : T(c, "site.gov.ret.dpdpLater", "Until DPDP commencement erasure keeps every class below. From then, only a period the law sets refuses erasure; a period only the hospital's policy sets goes to the DPO for a documented decision.")) + "</p>" +
+      '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.gov.ret.class", "Class")) + "</th><th>" + esc(T(c, "site.gov.ret.years", "Years")) + "</th><th>" + esc(T(c, "site.gov.ret.layers", "Basis: instrument, provision, jurisdiction, period, evidence")) + "</th></tr></thead><tbody>" +
+      list.map(function (x) {
+        return "<tr><td>" + EN(c, esc(x.key)) + (x.policyOnly ? '<br><span class="pill warn">' + esc(T(c, "site.gov.ret.policyOnly", "Policy only: no law identified")) + "</span>" : "") + "</td><td>" +
+          esc(x.years == null ? T(c, "site.gov.ret.lifeOfRecord", "for the life of the record it belongs to") : x.years) + (x.untilProceedingsEnd ? " " + esc(T(c, "site.gov.ret.orProceedings", "or until any court proceedings end, whichever is later")) : "") +
+          (x.source === "hospital" ? "<br>" + esc(T(c, "site.gov.ret.hospitalSet", "set by this hospital")) : "") +
+          (x.legalFloorYears != null ? "<br>" + esc(T(c, "site.gov.ret.floor", "never below the legal floor of {n} years", { n: x.legalFloorYears })) : "") + "</td><td><ul>" +
+          (x.layers || []).map(function (b) {
+            return "<li>" + basisPill(c, b.type) + " " + EN(c, esc(b.instrument + ", " + b.provision + " (" + b.sourceType + ", " + b.jurisdiction + ")")) + " &middot; " + esc(periodText(c, b)) +
+              (b.effectiveFrom ? " " + esc(T(c, "site.gov.ret.from", "from {date}", { date: b.effectiveFrom })) : "") +
+              (b.evidence && b.evidence.length ? " &middot; " + b.evidence.map(function (u) { return /^https:\/\//.test(u) ? '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(T(c, "site.gov.ret.evidence", "evidence")) + "</a>" : ""; }).join(" ") : "") +
+              (b.note ? '<br><span class="quiet">' + EN(c, esc(b.note)) + "</span>" : "") + "</li>";
+          }).join("") + "</ul></td></tr>";
+      }).join("") + "</tbody></table></div></div>";
+  }
   function retentionTab(c, body, g) {
-    var s = g.ret || (g.ret = { mrn: "", data: undefined });
+    var s = g.ret || (g.ret = { mrn: "", data: undefined, classes: null });
     var esc = c.esc;
     function paint() {
       var h = '<div class="card"><h2>' + esc(T(c, "site.gov.ret.title", "How long records are kept")) + "</h2>" +
-        '<p class="quiet">' + esc(T(c, "site.gov.ret.intro", "Nothing is deleted automatically. A patient's clinical record is kept at least ten years after the last encounter, a child's at least until three years after turning 18; a legal hold keeps everything until the matter is disposed of. Erasure requests and document destruction are refused inside these periods.")) + "</p>" +
+        '<p class="quiet">' + esc(T(c, "site.gov.ret.intro2", "Nothing is deleted automatically. Each class shows what keeps it: a law, named with its provision, or the hospital's retention policy, which is not a legal requirement. A legal hold keeps everything until the matter is disposed of. Deleting a document inside a period the law sets is refused; inside a period only the policy sets it needs the DPO's or medical records officer's confirmation.")) + "</p>" +
         '<div class="row"><label class="f"><span>' + esc(T(c, "site.gov.req.mrn", "MR number")) + '</span><input id="gRetMrn" autocapitalize="characters" spellcheck="false" value="' + esc(s.mrn) + '"></label>' +
         '<button class="btn" type="button" id="gRetFind">' + esc(T(c, "site.gov.ret.find", "Show retention")) + "</button></div></div>";
       if (s.data === null) h += loading(c, T(c, "site.gov.ret.loading", "Working out what must be kept..."));
@@ -480,11 +557,9 @@
           '<h3>' + esc(T(c, "site.gov.lh.placeTitle", "Place a legal hold")) + '</h3><div class="row">' +
           '<label class="f"><span>' + esc(T(c, "site.gov.lh.reason", "Reason")) + '</span><select id="gLhReason">' + opts(HOLD_REASONS, function (x) { return esc(holdReasonLabel(c, x)); }) + "</select></label>" +
           '<label class="f"><span>' + esc(T(c, "site.gov.lh.reference", "Case, complaint or request reference")) + '</span><input id="gLhRef"></label>' +
-          '<button class="btn" type="button" id="gLhPlace">' + esc(T(c, "site.gov.lh.place", "Place hold")) + '</button></div><div id="gLhMsg"></div></div>' +
-          '<div class="card"><h2>' + esc(T(c, "site.gov.ret.classes", "Retention classes")) + '</h2><div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.gov.ret.class", "Class")) + "</th><th>" + esc(T(c, "site.gov.ret.years", "Years")) + "</th><th>" + esc(T(c, "site.gov.ret.rule", "Rule")) + "</th></tr></thead><tbody>" +
-          d.classes.map(function (x) { return "<tr><td>" + EN(c, esc(x.key)) + "</td><td>" + esc(x.years == null ? T(c, "site.gov.ret.lifeOfRecord", "for the life of the record it belongs to") : x.years) + (x.untilProceedingsEnd ? " " + esc(T(c, "site.gov.ret.orProceedings", "or until any court proceedings end, whichever is later")) : "") + "</td><td>" + EN(c, esc(x.rule)) + "</td></tr>"; }).join("") +
-          "</tbody></table></div></div>";
+          '<button class="btn" type="button" id="gLhPlace">' + esc(T(c, "site.gov.lh.place", "Place hold")) + '</button></div><div id="gLhMsg"></div></div>';
       }
+      h += classesHtml(c, s.classes, s.law);
       body.innerHTML = h;
       on("gRetFind", function () { s.mrn = val("gRetMrn"); if (s.mrn) load(); });
       on("gLhPlace", function () {
@@ -508,7 +583,8 @@
       s.data = null; paint();
       c.api("/ward/retention" + q(c) + "&mrn=" + encodeURIComponent(s.mrn)).then(function (r) { if (r && r.ok) s.data = r; else { s.data = false; s.fail = r; } paint(); });
     }
-    paint();
+    s.classes = null; paint();
+    c.api("/ward/retention-classes" + q(c)).then(function (r) { if (r && r.ok) { s.classes = r.classes; s.law = r.law || null; } else s.classes = false; paint(); });
   }
 
   /* ---------------------------------------------------------------- NABH indicators */
@@ -755,4 +831,7 @@
   WSQ._govLawHtml = lawHtml;
   WSQ._govBreachHtml = breachHtml;
   WSQ._govHoldsHtml = holdsHtml;
+  WSQ._govRetainedHtml = retainedHtml;
+  WSQ._govClassesHtml = classesHtml;
+  WSQ._govDecisionsFormHtml = decisionsFormHtml;
 })();
