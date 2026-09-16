@@ -205,7 +205,7 @@ import { enrolOnPathway, pathwayProgress, overridePathwayStep, resolveSpecialty 
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
 // S3 P0: critical results pushed to phones, behind org setting wardsynq.alerts.push.enabled (default off).
-import { notifyDepsFor, directoryFromEnv, smsSetup, staffReaders } from "../../_wardsynq/alert-deps.js";
+import { notifyDepsFor, directoryFromEnv, smsSetup, staffReaders, commsPorts } from "../../_wardsynq/alert-deps.js";
 import { alertDeliveryStatus } from "../../_wardsynq/push-alerts.js";
 import { KIND, logEvent } from "../../_wardsynq/observability.js";
 import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
@@ -228,6 +228,10 @@ import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_w
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess, listGrants } from "../../_wardsynq/patient-access.js";
 import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
+import { clockAttendance, correctAttendance, importDeviceAttendance, attendanceMonth } from "../../_wardsynq/hr-attendance.js";
+import { saveCredential, runCredentialAlerts, acknowledgeAlert, listCredentials, saveCourse, saveSession, recordSessionAttendance, recordTraining, trainingOverview } from "../../_wardsynq/hr-records.js";
+import { staffPreference, runPatientMessaging, messageLog, retryMessage, settingsOf as commsSettingsOf } from "../../_wardsynq/patient-messaging.js";
+import { feedbackDashboard, updateRecovery } from "../../_wardsynq/patient-feedback.js";
 import { extract as analyticsExtract } from "../../_wardsynq/analytics-extract.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
@@ -605,6 +609,20 @@ const tickLogKey = (tenantId) => `wsq:tick:last:${tenantId}`;
 /* ONE HOSPITAL'S BACKGROUND PASS, from either trigger: ordinary ward traffic, or the worker's cron through
  * /ops/tick-all (S3 P0, so a quiet hospital at 03:00 still escalates). The same two-minute gate serves
  * both, so the two triggers never double-run a hospital. Returns null when the gate said not yet. */
+/** Credential expiry alerts (hr-records.js) and patient reminders and survey invitations (patient-messaging.js). */
+async function engagementTick(env, org, mig, repository) {
+  const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `engage:${mig.tenantId}`, limit: 1, windowMs: 600000 });
+  if (!gate.allowed) return null;
+  const wsqCfg = (org && org.wardsynq) || {};
+  const alerts = await runCredentialAlerts({ repository, tenantId: mig.tenantId, wsqCfg });
+  let messages = { ok: true, skipped: "off" };
+  if (commsSettingsOf(wsqCfg.patientComms).enabled || (wsqCfg.feedback && wsqCfg.feedback.enabled === true)) {
+    messages = await runPatientMessaging({ repository, tenantId: mig.tenantId, orgId: org.id, orgName: org.name, commsCfg: wsqCfg.patientComms, feedbackCfg: wsqCfg.feedback,
+      off: wsqCfg.utcOffsetMinutes != null ? Number(wsqCfg.utcOffsetMinutes) || 0 : 330, ports: await commsPorts(env, org, repository, mig.tenantId) });
+  }
+  if (!alerts.ok || !messages.ok) console.error("wsq engagement tick", mig.tenantId, JSON.stringify({ alerts: alerts.error || null, messages: messages.error || null }));
+  return { alerts, messages };
+}
 async function wsqTick(env, org, mig) {
   const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${mig.tenantId}`, limit: 1, windowMs: 120000 });
   if (!gate.allowed) return null;
@@ -620,6 +638,10 @@ async function wsqTick(env, org, mig) {
     anchorStores = anchorGate.allowed ? anchorStoresFor(env) : null;
   } catch { anchorStores = null; }
   const t = await runTick(repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: notifyDepsFor(env, org, mig.tenantId, repository), anchorStores: anchorStores || undefined, orgAuditChain: org && org.id ? orgAuditChain(env, org.id) : undefined, consumers: { ...exportConsumers({ repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }), ...webhookConsumers({ repository, tenantId: mig.tenantId, env, orgId: org.id }) } });
+  /* Gap wave 2026-09-16: credential expiry alerts and patient reminders ride the same tick, after the critical results, at most once per ten
+   * minutes per hospital. A failure here is logged by tenant id only and never stops the critical-result tick. */
+  try { await engagementTick(env, org, mig, repository); }
+  catch (e) { console.error("wsq engagement tick failed", mig.tenantId); }
   /* P2.15: the last run is kept (outcome flags only, no error text) so System health can say
    * whether escalation is actually running rather than assume it. P2.17: the anchor outcome
    * rides along the same way. A run that did not attempt an anchor carries the previous
@@ -1579,6 +1601,20 @@ export async function onRequest(context) {
          * hospital admin's: staff.admin here, and the role itself checked in the handler, so hr is refused. */
         "bug-report": CAPS.QUEUE_VIEW, "bug-reports": CAPS.QUEUE_VIEW,
         "bug-report-status": CAPS.STAFF_ADMIN, "bug-report-remove": CAPS.STAFF_ADMIN,
+        /* HR beyond the rota (hr-attendance.js, hr-records.js). Every member clocks and reads their own records
+         * (queue.view, the identity taken from their membership, never the body); everything about other staff is
+         * staff.admin, which the hr role holds without any clinical actor. */
+        "hr-my-records": CAPS.QUEUE_VIEW, "hr-clock": CAPS.QUEUE_VIEW, "hr-alert-ack": CAPS.QUEUE_VIEW,
+        "hr-attendance": CAPS.STAFF_ADMIN, "hr-attendance-correct": CAPS.STAFF_ADMIN, "hr-attendance-import": CAPS.STAFF_ADMIN,
+        "hr-credentials": CAPS.STAFF_ADMIN, "hr-credential-save": CAPS.STAFF_ADMIN, "hr-credential-alerts": CAPS.STAFF_ADMIN,
+        "hr-training": CAPS.STAFF_ADMIN, "hr-course-save": CAPS.STAFF_ADMIN, "hr-session-save": CAPS.STAFF_ADMIN,
+        "hr-session-attendance": CAPS.STAFF_ADMIN, "hr-training-record": CAPS.STAFF_ADMIN,
+        /* Patient communication (patient-messaging.js) and feedback (patient-feedback.js). Recording a patient's
+         * opt-in is the front desk's registration work (queue.add); settings, the delivery log, sending and the
+         * feedback dashboard are staff.admin. */
+        "comm-preference": CAPS.QUEUE_ADD,
+        "comm-log": CAPS.STAFF_ADMIN, "comm-run": CAPS.STAFF_ADMIN, "comm-retry": CAPS.STAFF_ADMIN,
+        "feedback-dashboard": CAPS.STAFF_ADMIN, "feedback-recovery": CAPS.STAFF_ADMIN,
       };
       /* Every eMAR transition needs MED_ADMINISTER, including verify and dispense.
        *
@@ -2344,6 +2380,73 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* CONNECTORS (connectors.js), Admin Center > Integrations. Credentials go in and never come back out. */
+      /* HR BEYOND THE ROTA and PATIENT ENGAGEMENT (gap wave 2026-09-16). The route's capability was decided above. */
+      if (sub.startsWith("hr-")) {
+        const hrCtx = { ...deps, actorId: actor.id };
+        const members = async () => (await ORG.listMembers(env, wOrgId)).map((m) => ({ identity: m.identity, role: m.role, active: m.active !== false, displayName: m.displayName || "", employeeId: m.employeeId || "", scope: m.scope || {} }));
+        const rota = { assignmentsBetween: (from, to) => ROSTER.assignmentsBetween(env, wOrgId, from, to) };
+        // The caller's own membership in this hospital, from the credential. The hospital's owner has none.
+        const me = async () => {
+          const m = (await ORG.getMembership(env, wOrgId, actor.id)) || (actor.email ? await ORG.getMembership(env, wOrgId, actor.email) : null);
+          return m && m.identity && m.active !== false ? m.identity : "";
+        };
+        let r = null;
+        if (sub === "hr-clock" && method === "POST") r = await clockAttendance(request, env, { ...hrCtx, identity: await me(), action: body.action, rota });
+        else if (sub === "hr-my-records" && method === "GET") {
+          const identity = await me();
+          if (!identity) r = { ok: true, notStaff: true };
+          else {
+            const staff = (await members()).filter((m) => m.identity === identity);
+            const month = url.searchParams.get("month") || new Date(Date.now() + ((wsqCfg && wsqCfg.utcOffsetMinutes != null ? Number(wsqCfg.utcOffsetMinutes) : 330) * 60000)).toISOString().slice(0, 7);
+            const [attendance, credentials, training] = await Promise.all([
+              attendanceMonth(request, env, { ...hrCtx, month, identity, rota }).catch(() => ({ ok: false, error: "attendance_read_failed" })),
+              listCredentials(request, env, { ...hrCtx, identity }).catch(() => ({ ok: false, error: "hr_read_failed" })),
+              trainingOverview(request, env, { ...hrCtx, identity, members: staff, departments: await ORG.listDepartments(env, wOrgId).catch(() => []) }).catch(() => ({ ok: false, error: "hr_read_failed" }))]);
+            r = { ok: true, identity, month, attendance, credentials, training };
+          }
+        }
+        else if (sub === "hr-alert-ack" && method === "POST") r = await acknowledgeAlert(request, env, { ...hrCtx, id: body.id, identity: await me(), manager: (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STAFF_ADMIN)).ok === true });
+        else if (sub === "hr-attendance" && method === "GET") {
+          const staff = await members();
+          r = await attendanceMonth(request, env, { ...hrCtx, month: url.searchParams.get("month") || "", identity: url.searchParams.get("identity") || "", format: url.searchParams.get("format") || "", rota, members: staff });
+          if (r.ok) r.staff = staff;
+        }
+        else if (sub === "hr-attendance-correct" && method === "POST") r = await correctAttendance(request, env, { ...hrCtx, members: await members(), id: body.id, identity: body.identity, clockIn: body.clockIn, clockOut: body.clockOut, void: body.void === true, reason: body.reason });
+        else if (sub === "hr-attendance-import" && method === "POST") r = await importDeviceAttendance(request, env, { ...hrCtx, members: await members(), csv: body.csv, mapping: body.mapping, commit: body.commit === true, confirmCount: body.confirmCount });
+        else if (sub === "hr-credentials" && method === "GET") { r = await listCredentials(request, env, hrCtx); if (r.ok) r.staff = await members(); }
+        else if (sub === "hr-credential-save" && method === "POST") r = await saveCredential(request, env, { ...hrCtx, members: await members(), id: body.id, identity: body.identity, kind: body.kind, category: body.category, name: body.name, number: body.number, issuer: body.issuer, validFrom: body.validFrom, validTo: body.validTo, remove: body.remove === true, reason: body.reason });
+        else if (sub === "hr-credential-alerts" && method === "POST") r = await runCredentialAlerts({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, actorId: actor.id, wsqCfg });
+        else if (sub === "hr-training" && method === "GET") {
+          const staff = await members();
+          r = await trainingOverview(request, env, { ...hrCtx, members: staff, departments: await ORG.listDepartments(env, wOrgId) });
+          if (r.ok) r.staff = staff;
+        }
+        else if (sub === "hr-course-save" && method === "POST") r = await saveCourse(request, env, { ...hrCtx, standard: body.standard === true, id: body.id, name: body.name, mandatory: body.mandatory === true, validityMonths: body.validityMonths, roles: body.roles, active: body.active !== false });
+        else if (sub === "hr-session-save" && method === "POST") r = await saveSession(request, env, { ...hrCtx, members: await members(), id: body.id, courseId: body.courseId, date: body.date, trainer: body.trainer, venue: body.venue, invitees: body.invitees, cancel: body.cancel === true, reason: body.reason });
+        else if (sub === "hr-session-attendance" && method === "POST") r = await recordSessionAttendance(request, env, { ...hrCtx, id: body.id, attendance: body.attendance });
+        else if (sub === "hr-training-record" && method === "POST") r = await recordTraining(request, env, { ...hrCtx, members: await members(), identity: body.identity, courseId: body.courseId, completedOn: body.completedOn, note: body.note });
+        if (r) return json(r, r.ok ? 200 : (r.status || 502), request);
+        return json({ ok: false, error: "not_found" }, 404, request);
+      }
+      if (sub.startsWith("comm-") || sub.startsWith("feedback-")) {
+        const commCtx = { ...deps, actorId: actor.id };
+        let r = null;
+        if (sub === "comm-preference" && (method === "GET" || method === "POST")) {
+          r = await staffPreference(request, env, { ...commCtx, method, patientId: method === "GET" ? url.searchParams.get("patientId") || "" : body.patientId, channel: body.channel, optedIn: body.optedIn === true, mobile: body.mobile, note: body.note });
+        } else if (sub === "comm-log" && method === "GET") {
+          const ports = await commsPorts(env, wOrg, deps.recordDeps.repository, mig.tenantId).catch(() => null);
+          r = ports ? await messageLog(request, env, { ...commCtx, status: url.searchParams.get("status") || "", smsMissing: ports.sms.missing, whatsappConnected: !!ports.whatsapp })
+            : { ok: false, status: 502, error: "connector_read_failed", message: "The messaging setup could not be read." };
+        } else if (sub === "comm-run" && method === "POST") {
+          const cfg = wsqCfg || {};
+          r = await runPatientMessaging({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, orgId: wOrgId, orgName: wOrg.name, commsCfg: cfg.patientComms, feedbackCfg: cfg.feedback, actorId: actor.id,
+            off: cfg.utcOffsetMinutes != null ? Number(cfg.utcOffsetMinutes) || 0 : 330, ports: await commsPorts(env, wOrg, deps.recordDeps.repository, mig.tenantId) });
+        } else if (sub === "comm-retry" && method === "POST") r = await retryMessage(request, env, { ...commCtx, id: body.id });
+        else if (sub === "feedback-dashboard" && method === "GET") r = await feedbackDashboard(request, env, { ...commCtx, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        else if (sub === "feedback-recovery" && method === "POST") r = await updateRecovery(request, env, { ...commCtx, id: body.id, status: body.status, note: body.note });
+        if (r) return json(r, r.ok ? 200 : (r.status || 502), request);
+        return json({ ok: false, error: "not_found" }, 404, request);
+      }
       if (BUG_SUBS.has(sub)) {
         const bugCtx = { ...deps, reporter: { id: actor.id, name: actor.email || actor.name || null, role: wAz.role || null },
           manager: wAz.role === "admin" || !!wAz.platformOwner };

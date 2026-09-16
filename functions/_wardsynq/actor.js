@@ -673,9 +673,18 @@ async function resolveClinicalActorNow(request, env, tenantId, need, deps) {
       if (!grant) throw new PermissionError(`role '${az.role}' has no clinical actor`);
       const actor = actorFromOpdRole({ identity, role: az.role, claims, memberRegNo: az.regNo });
       if (need === "record:write" && !actorCan(actor, TIER.DRAFT)) throw new PermissionError(`role '${az.role}' may not write the clinical record`);
+      /* THE HOSPITAL'S SIGNING RULE (hr-records.js), off unless wardsynq.hr.expiredRegistrationBlocksSigning is true:
+       * a member whose recorded registrations have all expired keeps every other permission and holds no signing
+       * credential, so every signature path refuses with NO_CREDENTIAL. Unreadable while the rule is on is blocked. */
+      let signing = null;
+      if (actor.credential && org.wardsynq && org.wardsynq.hr && org.wardsynq.hr.expiredRegistrationBlocksSigning === true) {
+        signing = deps.registrationStatus ? await deps.registrationStatus(tenantId, [identity.id, identity.email], org.wardsynq) : { blocked: true, reason: "registration_unreadable" };
+      }
+      const blocked = !!(signing && signing.blocked);
       // actorFromOpdRole's object is frozen, like every actor this file hands out - a new object
       // carries the request context rather than mutating a frozen one.
-      return { identity, tenant, role: az.role, source: "opd", org: { id: org.id, name: org.name || null }, grant, actor: { ...actor, requestContext: requestContextOf(request, identity) } };
+      return { identity, tenant, role: az.role, source: "opd", org: { id: org.id, name: org.name || null }, grant,
+        actor: { ...actor, ...(blocked ? { credential: null, credentialSource: null, signingBlocked: signing.reason } : {}), requestContext: requestContextOf(request, identity) } };
     }
     // Not a member of the linked organisation. Fall through: a Connect clinician may still be one.
   }

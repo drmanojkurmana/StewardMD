@@ -84,13 +84,19 @@ const ALLOW = {
     ],
     "a reason stored with the report, shown through reasonText()": ["no hospital is open on this device", "the server did not accept it", "no connection to the server"],
   },
+  "wardsynq/site/pages/hr.js": {
+    "a suggested council or certificate name, typed into the staff record and kept as entered (a recorded value, never translated)": ["State medical council", "State nursing council", "State pharmacy council"],
+  },
+  "wardsynq/site/pages/engage.js": {
+    "a channel order code saved to the hospital's settings, compared and sent, never shown": ["whatsapp,sms", "sms,whatsapp"],
+  },
   "wardsynq/site/pages/admin.js": {
     "a record type or a lookup suffix, not words": ["Invoice", "Incident", "Org", "Bundle"],
   },
 };
 const WARD_FILES = ["ward.js", "discharge.js", "patient-register.js"];
 const SITE_FILES = ["wardsynq/site/shell.js", "wardsynq/site/bug-reporter.js", "wardsynq/ui/wardsynq-app.js",
-  ...["abdm", "accounts", "admin", "audit", "group", "maik", "patients", "portal-access", "rota", "security"].map((p) => "wardsynq/site/pages/" + p + ".js")];
+  ...["abdm", "accounts", "admin", "audit", "engage", "group", "hr", "maik", "patients", "portal-access", "rota", "security"].map((p) => "wardsynq/site/pages/" + p + ".js")];
 
 for (const file of [...WARD_FILES, ...SITE_FILES]) {
   test("no unwrapped visible English in " + file + " beyond its allowlist", () => {
