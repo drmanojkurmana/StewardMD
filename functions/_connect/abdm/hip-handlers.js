@@ -519,17 +519,39 @@ export async function onPatientShare({ env, deps, body, headers }) {
     return;
   }
 
-  const issued = await deps.issueQueueToken(env, deps, {
-    tenantId, context, hipId,
-    patient: {
-      abhaAddress, abhaNumber: patient.abhaNumber ?? null,
-      name: patient.name ?? "", gender: patient.gender ?? "",
-      yearOfBirth: patient.yearOfBirth ?? null,
-      mobile: patient.phoneNumber ?? "",
-    },
-    hprId: meta.hprId || null,
-    now: deps.now,
-  });
+  let issued;
+  try {
+    issued = await deps.issueQueueToken(env, deps, {
+      tenantId, context, hipId,
+      patient: {
+        abhaAddress, abhaNumber: patient.abhaNumber ?? null,
+        name: patient.name ?? "", gender: patient.gender ?? "",
+        yearOfBirth: patient.yearOfBirth ?? null,
+        // The rest of the pinned profile, so a hospital that registers from the share has it pre-filled.
+        monthOfBirth: patient.monthOfBirth ?? null, dayOfBirth: patient.dayOfBirth ?? null,
+        address: patient.address ?? null,
+        mobile: patient.phoneNumber ?? "",
+      },
+      hprId: meta.hprId || null,
+      now: deps.now,
+    });
+  } catch (e) {
+    issued = null;
+  }
+  /* No token could be given (an unknown counter, a department numbering refusal, a store failure): say so to ABDM.
+   * Throwing here left the gateway with no on-share at all, and the patient at the counter with nothing. */
+  if (!issued || issued.tokenNumber == null) {
+    if (deps.audit) await deps.audit({
+      action: "abdm.patient.share", outcome: "failed", ts: now, tenantId,
+      patientRefHash: abhaAddress ? await hmacPseudonym(env, tenantId, abhaAddress) : null,
+      scope: { intent: String((body && body.intent) || ""), counter: context, reason: "no-token" },
+    }).catch(() => {});
+    await reply(deps, "patientShareOnShare", {
+      acknowledgement: { status: "FAILURE", abhaAddress, error: { code: "TOKEN_UNAVAILABLE", message: "counter is not accepting tokens" } },
+      ...respondTo(headers),
+    });
+    return;
+  }
 
   if (deps.audit) await deps.audit({
     action: "abdm.patient.share", outcome: issued && issued.tokenNumber != null ? "ok" : "failed", ts: now, tenantId,
@@ -555,7 +577,7 @@ export async function onPatientShare({ env, deps, body, headers }) {
 // link-result (our HIP-initiated /link/carecontext landed), context-notify-ack and sms-notify-ack are
 // results of calls WE made. Nothing is owed back to the gateway - answering an on-* to an on-* would be a
 // loop. They are recorded so a linking failure is visible instead of silent.
-function ackOnly(action) {
+function ackOnly(action, correlated) {
   return async ({ env, deps, body, headers }) => {
     if (!hipFlagOn(env)) return;
     const status = String(
@@ -563,9 +585,22 @@ function ackOnly(action) {
       ?? (body && body.status)
       ?? (body && body.error ? "ERROR" : "SUCCESS"));
     const err = body && body.error;
+    /* link/on_carecontext (M2 document v2.7 4.3, PINNED): { abhaAddress, status, response: { requestId } } or
+     * { error, response }. response.requestId is the REQUEST-ID of OUR link call, so the result is filed under it, and
+     * under the patient's pseudonym and tenant when the address and the HIP ID allow, which is how a chart shows
+     * whether a stay's records were linked. A lookup that fails leaves them out; it never drops the record. */
+    let tenantId, patientRefHash, ours = null;
+    if (correlated) {
+      ours = body && body.response && body.response.requestId ? String(body.response.requestId) : null;
+      try {
+        tenantId = await resolveHipTenant(env, deps, headers.entityId);
+        if (body && typeof body.abhaAddress === "string" && body.abhaAddress.trim()) patientRefHash = await hmacPseudonym(env, tenantId, body.abhaAddress.trim());
+      } catch { /* unknown facility: recorded without a tenant */ }
+    }
     if (deps.audit) await deps.audit({
       action, outcome: err ? "failed" : "ok", ts: isoOf(deps.now),
-      transactionId: headers.requestId,
+      transactionId: ours || headers.requestId,
+      ...(tenantId ? { tenantId } : {}), ...(patientRefHash ? { patientRefHash } : {}),
       scope: { status, code: err ? String(err.code ?? "") : undefined },
     }).catch(() => {});
   };
@@ -579,7 +614,7 @@ export const HIP_HANDLERS = Object.freeze({
   "consent-notify": onConsentNotify,
   "hi-request": onHiRequest,
   "patient-share": onPatientShare,
-  "link-result": ackOnly("abdm.link.result"),
+  "link-result": ackOnly("abdm.link.result", true),
   "context-notify-ack": ackOnly("abdm.context.notify"),
   "sms-notify-ack": ackOnly("abdm.sms.notify"),
 });

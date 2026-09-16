@@ -125,6 +125,13 @@ import { saveConnector, listConnectors, testConnector, activeConnectors } from "
 import { submitBugReport, listBugReports, setBugReportStatus, removeBugReport } from "../../_wardsynq/bug-reports.js";
 import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
 import { abdmView, externalInvoiceHandlingRefusal } from "../../_wardsynq/abdm-hospital.js";
+import { abhaDeskStatus, abhaDesk, checkVerifiedAbha, linkVerifiedAbha } from "../../_wardsynq/abdm-desk.js";
+import { abdmShareView, abdmShareRegister } from "../../_wardsynq/abdm-share.js";
+import { abdmRecordsView, abdmLinkStay, abdmConsentRequest, abdmFetch } from "../../_wardsynq/abdm-chart.js";
+import { abdmRegistryCheck } from "../../_wardsynq/abdm-registry.js";
+import { linkStayCareContexts } from "../../_wardsynq/abdm-hip.js";
+import { projectHipRouting } from "../../_wardsynq/abdm-connect.js";
+import { CONNECTOR_TYPE } from "../../_wardsynq/connectors.js";
 import { level2WardRuleRefusal, wardAlertCover, wardTeamGroupOf, WARD_TEAM_ROLES } from "../../_wardsynq/alert-recipients.js";
 import { payersFromConnectors, mergePayers } from "../../_wardsynq/payer-connectors.js";
 import { createPaymentLink, listPaymentRequests, receivePaymentCallback } from "../../_wardsynq/payment-links.js";
@@ -1352,6 +1359,17 @@ export async function onRequest(context) {
         connectors: CAPS.STAFF_ADMIN, "connector-save": CAPS.STAFF_ADMIN, "connector-test": CAPS.STAFF_ADMIN,
         // Owner S6 A1: the hospital's ABDM profile is the "abdm" connector; this is its checklist view.
         "abdm-profile": CAPS.STAFF_ADMIN,
+        /* S6 A5, ABHA at the check-in sheet: the person who registers patients, with owner A5's role table
+         * (abhaDeskCan) applied per step inside abdm-desk.js. */
+        "abdm-desk": CAPS.QUEUE_ADD, abha: CAPS.QUEUE_ADD,
+        /* Scan and Share (abdm-share.js): the counter QRs and today's shared profiles are the desk's queue view;
+         * putting the MR number on a shared token is registering, the desk's add. */
+        "abdm-share": CAPS.QUEUE_VIEW, "abdm-share-register": CAPS.QUEUE_ADD,
+        /* ABDM on the chart (abdm-chart.js): reading what is linked and requested is reading the chart; asking another
+         * facility for records, fetching them, and linking a stay are the treating clinician's acts. */
+        "abdm-records": CAPS.EMR_VIEW, "abdm-link-stay": CAPS.EMR_TREAT, "abdm-consent-request": CAPS.EMR_TREAT, "abdm-fetch": CAPS.EMR_TREAT,
+        // HFR and HPR checks (abdm-registry.js): the ABDM profile's own gate.
+        "abdm-registry-check": CAPS.STAFF_ADMIN,
         /* Connected apps (SMART client registration, smart-clients.js), Admin Center > Integrations.
          * staff.admin here AND a clinical actor that may write the record, inside the handlers -
          * the webhooks' own double gate, so hr is refused on every one of these too. */
@@ -1826,8 +1844,15 @@ export async function onRequest(context) {
         })());
       }
 
+      /* S6 A3: a stay's records are registered and linked to the patient's ABHA when they become final (abdm-hip.js).
+       * After the response, never in front of it: a failed link is audited and retried from the chart, and never
+       * blocks an admission, a discharge or a signature. Admission itself has nothing final and records only that. */
+      const abdmStayHook = (encounterId, trigger) => {
+        if (context.waitUntil && encounterId) context.waitUntil(linkStayCareContexts(env, { tenantId: mig.tenantId, encounterId: String(encounterId), recordDeps: deps.recordDeps, trigger }).catch(() => null));
+      };
       if (sub === "admit" && method === "POST") {
         const r = await admitPatient(request, env, { ...deps, admission: body.admission || body, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
+        if (r.ok && r.written) abdmStayHook(r.encounterId, "admission");
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* ONE CONSULTATION, ONE CALL. The writers are handed in rather than imported by
@@ -2454,6 +2479,11 @@ export async function onRequest(context) {
       if (sub === "connector-save" && method === "POST") {
         const r = await saveConnector(request, env, { ...deps, kind: body.kind, provider: body.provider, name: body.name, settings: body.settings, secrets: body.secrets,
           active: typeof body.active === "boolean" ? body.active : undefined, id: body.id, org: wOrg });
+        /* S6: ABDM's callbacks find the hospital by its HIP ID (hip-handlers.js resolveHipTenant). A saved ABDM profile is
+         * projected there; a profile that is not linked, or is switched off, is removed from it, so its callbacks fail closed. */
+        if (r.ok && !r.unchanged && body.kind === "abdm") {
+          r.hipRouting = await projectHipRouting(env, mig.tenantId, await deps.recordDeps.repository.latest(mig.tenantId, CONNECTOR_TYPE, "abdm").catch(() => null));
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* ABDM PROFILE (abdm-hospital.js), Admin Center > Integrations > ABDM. The connector list's own gate
@@ -2464,7 +2494,52 @@ export async function onRequest(context) {
         let members;
         try { members = await ORG.listMembers(env, wOrgId); }
         catch { return json({ ok: false, error: "members_read_failed", message: "The staff list could not be read, so the checklist is not shown." }, 502, request); }
-        return json({ ok: true, keyConfigured: r.keyConfigured, catalogue: r.catalogue, ...abdmView(r.connectors[0] || null, wOrg, members) }, 200, request);
+        // What ABDM's registries answered (abdm-registry.js) rides the raw record, not the connector summary.
+        let registry = null;
+        try { const raw = await deps.recordDeps.repository.latest(mig.tenantId, CONNECTOR_TYPE, "abdm"); registry = (raw && raw.registry) || null; }
+        catch { return json({ ok: false, error: "record_read_failed", message: "The ABDM profile could not be read." }, 502, request); }
+        return json({ ok: true, keyConfigured: r.keyConfigured, catalogue: r.catalogue, ...abdmView(r.connectors[0] || null, wOrg, members, registry) }, 200, request);
+      }
+      /* ABHA AT THE DESK (abdm-desk.js). The sheet asks whether this hospital is connected before it offers
+       * ABHA, then walks verify or create one step per call. Aadhaar, OTP and mobile stay in the POST body. */
+      if (sub === "abdm-desk" && method === "GET") {
+        const r = await abhaDeskStatus(request, env, { ...deps, role: wAz.role });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-records" && method === "GET") {
+        const r = await abdmRecordsView(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-link-stay" && method === "POST") {
+        const r = await abdmLinkStay(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-consent-request" && method === "POST") {
+        const r = await abdmConsentRequest(request, env, { ...deps, patientId: body.patientId, purpose: body.purpose, hiTypes: body.hiTypes, from: body.from, to: body.to, expiresOn: body.expiresOn });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-fetch" && method === "POST") {
+        const r = await abdmFetch(request, env, { ...deps, patientId: body.patientId, requestId: body.requestId });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-registry-check" && method === "POST") {
+        let members;
+        try { members = await ORG.listMembers(env, wOrgId); }
+        catch { return json({ ok: false, error: "members_read_failed", message: "The staff list could not be read, so nothing was checked." }, 502, request); }
+        const r = await abdmRegistryCheck(request, env, { ...deps, org: wOrg, members, target: body.target, identity: body.identity });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-share" && method === "GET") {
+        const r = await abdmShareView(request, env, { ...deps, org: wOrg });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-share-register" && method === "POST") {
+        const r = await abdmShareRegister(request, env, { ...deps, org: wOrg, actorId: actor.id, ticketId: body.ticketId, mrn: body.mrn });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abha" && method === "POST") {
+        const r = await abhaDesk(request, env, { ...deps, role: wAz.role, actorId: actor.id, actorName: actor.name || actor.email || "", step: body.step, body });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "connector-test" && method === "POST") {
         const r = await testConnector(request, env, { ...deps, id: body.id });
@@ -4005,6 +4080,7 @@ export async function onRequest(context) {
           : await dischargePatient(request, env, { ...common, encounterId: body.encounterId, dischargedAt: body.dischargedAt, disposition: body.disposition,
             destination: body.destination, dispositionNote: body.dispositionNote, billDeferredReason: body.billDeferredReason, overrideReason: body.overrideReason,
             idempotencyKey: body.idempotencyKey || null });
+        if (sub === "discharge" && r.ok && r.written) abdmStayHook(body.encounterId, "discharge");
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "discharge-summary" && method === "GET") {
@@ -4025,6 +4101,7 @@ export async function onRequest(context) {
       }
       if (sub === "sign-discharge-summary" && method === "POST") {
         const r = await signDischargeSummary(request, env, { ...deps, encounterId: body.encounterId, idempotencyKey: body.idempotencyKey || null });
+        if (r.ok && r.signed) abdmStayHook(body.encounterId, "summary-signed");
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* G2 conflict review (ward.js offline view, ward-offline.js). Only somebody who could have made the write
@@ -4080,7 +4157,21 @@ export async function onRequest(context) {
             : pre.department ? tokenScope(org.tokens, pre.department).error : null;
           if (why) return json({ ok: false, error: why, message: TOKEN_SAY[why], errors: { departmentId: TOKEN_SAY[why] } }, 422, request);
         }
+        /* S6 A5: an ABHA verified or created at the desk comes with abdm-desk.js's proof. It is checked BEFORE the
+         * MR number is issued, so an ABHA that already belongs to another patient here stops the registration
+         * instead of making a second chart (TAGGING_UNIQUEPATIENTID_UNIQUEABHANUMBER). A typed ABHA has no proof
+         * and is registered as typed, exactly as before. */
+        let verifiedAbha = null, abhaTenant = null;
+        if (body.abhaProof) {
+          const abhaMig = await wsqForcedMigration(env, org);
+          abhaTenant = abhaMig && !abhaMig.error ? abhaMig.tenantId : null;
+          const chk = await checkVerifiedAbha(env, { orgId: pOrg, tenantId: abhaTenant, body });
+          if (!chk.ok) return json(chk, chk.status || 422, request);
+          verifiedAbha = chk.abha;
+        }
         const r = await PAT.registerPatient(env, org, body, actor.id || "");
+        /* The binding follows the MR number. Its outcome travels beside the registration's; a failure is said. */
+        if (r.ok && verifiedAbha) r.abhaLink = await linkVerifiedAbha(env, { tenantId: abhaTenant, actorId: actor.id, mrn: r.mrn, abha: verifiedAbha, patient: body });
         /* A PATIENT WHO IS ALREADY REGISTERED STILL NEEDS A CLINICAL RECORD MASTER.
          *
          * This used to return here on "duplicate" / "mrn_taken", which is right for the form (the

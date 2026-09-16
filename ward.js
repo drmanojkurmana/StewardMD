@@ -2378,6 +2378,7 @@
       { act: "documents", icon: "description", label: "Documents", title: "Consent forms, referral letters, outside reports" },
       { act: "consentopen", icon: "fact_check", label: "Consent", title: "What this patient has agreed to and refused" },
       { act: "ipsopen", icon: "summarize", label: "IPS summary", title: "The International Patient Summary another hospital would receive for this patient" },
+      { act: "abdmrecords", icon: "cloud_sync", label: "ABDM", title: "Records linked to the patient's ABHA, and records asked for from other facilities" },
       { act: "move", icon: "swap_horiz", label: "Transfer", title: "Transfer to another ward or bed" },
       { act: "summary", icon: "description", label: "Summary", title: "Discharge summary" },
       { act: "wardcloseopen", icon: "home", label: "Discharge", title: "End this stay and record where the patient went" },
@@ -8375,6 +8376,7 @@
         : state.view === "workspace" ? workspaceView(state)
         : state.view === "people" ? peopleView(state)
         : state.view === "immunizations" ? immunizationsView(state)
+        : state.view === "abdmrecords" ? abdmRecordsView(state)
         : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
         : state.view === "qualitysafety" ? qualitySafetyView(state)
@@ -8780,6 +8782,11 @@
       // bed board the act is an admission, and the button now says which bed it is admitting to.
       submitLabel: st.admitTarget && st.admitTarget.bed ? wT("ward.register-admit-to", "Register & admit to {bed}", { bed: st.admitTarget.bed }) : wT("ward.register-and-admit", "Register & admit"),
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
+      // S6 A5: the same ABHA verify and create as the Patients page, through abdm-desk.js.
+      abdm: {
+        status: function () { return apiGet("/ward/abdm-desk?orgId=" + encodeURIComponent(st.orgId)).catch(function () { return null; }); },
+        step: function (b) { return apiPost("/ward/abha", Object.assign({ orgId: st.orgId }, b)).catch(function () { return null; }); },
+      },
       onAdded: function (r) { if (r && r.mrn) doAdmit(r.mrn); },
     });
   }
@@ -11990,6 +11997,147 @@
           .catch(function () { st.busy = false; st.err = wT("ward.could-not-release-the-document-nothing", "Could not release the document. Nothing was released."); paint(); });
       }, { icon: "share" });
   }
+  /* ---- ABDM ON THE CHART (functions/_wardsynq/abdm-chart.js) --------------------------------------------------
+   * This hospital's records linked to the patient's ABHA, requests to other facilities with their consent status, and
+   * what was filed from them. st.abdm: null = loading, false = could not be read (never shown as nothing linked). */
+  function abdmReasonText(code) {
+    switch (code) {
+      case "not_set_up": return wT("ward.reg-abdm-not-set-up", "ABDM is not set up for this hospital. An administrator sets it up on Admin Center, Integrations, ABDM.");
+      case "inactive": return wT("ward.reg-abdm-inactive", "This hospital's ABDM profile is switched off.");
+      case "not_linked": return wT("ward.reg-abdm-not-linked", "This hospital is not linked to ABDM yet. ABDM has to link the facility to the StewardMD bridge and issue a HIP ID first.");
+      case "suspended": return wT("ward.reg-abdm-suspended", "This hospital's ABDM connection is suspended.");
+      case "production_held": return wT("ward.reg-abdm-production-held", "Production ABDM traffic is held until India-region hosting exists.");
+      case "bridge_not_configured": return wT("ward.reg-abdm-bridge-missing", "The StewardMD ABDM bridge credential is not configured on this server.");
+      default: return wT("ward.reg-abdm-not-connected-other", "This hospital is not connected to ABDM.");
+    }
+  }
+  function abdmHiTypeWord(t) {
+    switch (t) {
+      case "Prescription": return wT("ward.abdm-hi-prescription", "Prescription");
+      case "DiagnosticReport": return wT("ward.abdm-hi-diagnostic-report", "Diagnostic report");
+      case "OPConsultation": return wT("ward.abdm-hi-consultation", "Consultation");
+      case "DischargeSummary": return wT("ward.abdm-hi-discharge-summary", "Discharge summary");
+      case "ImmunizationRecord": return wT("ward.abdm-hi-immunization", "Immunization");
+      case "HealthDocumentRecord": return wT("ward.abdm-hi-health-document", "Health document");
+      case "WellnessRecord": return wT("ward.abdm-hi-wellness", "Wellness record");
+      case "Invoice": return wT("ward.abdm-hi-invoice", "Invoice record");
+      default: return String(t || "");
+    }
+  }
+  function abdmConsentWord(s) {
+    switch (s) {
+      case "INITIATED": return wT("ward.abdm-consent-waiting", "Waiting for the patient");
+      case "GRANTED": return wT("ward.abdm-consent-granted", "Granted");
+      case "DENIED": return wT("ward.abdm-consent-denied", "Denied");
+      case "REVOKED": return wT("ward.abdm-consent-revoked", "Withdrawn by the patient");
+      case "EXPIRED": return wT("ward.abdm-consent-expired", "Expired");
+      default: return String(s || "");
+    }
+  }
+  function abdmEventWord(e) {
+    switch (e.action) {
+      case "abdm.hip.registered": return wT("ward.abdm-ev-registered", "Registered with ABDM discovery");
+      case "abdm.hip.link.requested": return wT("ward.abdm-ev-link-sent", "Sent to ABDM to link");
+      case "abdm.hip.linktoken.requested": return wT("ward.abdm-ev-token-requested", "Link token asked for; linked when it arrives");
+      case "abdm.hip.link.skipped": return wT("ward.abdm-ev-skipped", "Nothing final to link");
+      case "abdm.hip.link.failed": return wT("ward.abdm-ev-failed", "Linking failed");
+      case "abdm.link.result": return e.outcome === "ok" ? wT("ward.abdm-ev-linked", "ABDM confirmed the link") : wT("ward.abdm-ev-refused", "ABDM refused the link");
+      default: return String(e.action || "");
+    }
+  }
+  function abdmRecordsView(state) {
+    var s = state.sel;
+    if (!s) return "<div class=\"w-card\"><p class=\"w-empty\">" + wTH("ward.open-a-patient-first", "Open a patient first.") + "</p></div>";
+    var d = state.abdm, h = '<div class="w-card"><div class="w-card-h">' + ms("cloud_sync") + "<h3>" + wTH("ward.abdm-title", "ABDM") + "</h3>" +
+      '<button class="w-ic" data-w-act="abdmrecords" title="' + wTA("ward.refresh", "Refresh") + '">' + ms("refresh") + "</button></div>";
+    if (d == null) return h + '<p class="w-empty">' + wTH("ward.abdm-loading", "Loading what is linked and requested through ABDM...") + "</p></div>";
+    if (d === false) return h + '<p class="w-hint warn">' + ms("error") + wTH("ward.abdm-load-failed", "What this patient has linked or requested through ABDM could not be read. This is not the same as there being nothing.", null, "", 1) + "</p></div>";
+    var conn = d.connection || {};
+    if (!conn.connected) h += '<p class="w-hint warn">' + ms("link_off") + "<b>" + wTH("ward.reg-abdm-not-connected", "Not connected to ABDM.") + "</b> " + esc(abdmReasonText(conn.code)) + "</p>";
+    if (!d.abha.onRecord) return h + '<p class="w-hint">' + ms("info") + wTH("ward.abdm-no-abha", "This patient has no ABHA address on the record with their consent. Verify or create it at registration, then records can be linked and requested.") + "</p></div>";
+
+    h += '<div class="w-sub"><h4>' + ms("share") + wTH("ward.abdm-linked-heading", "This hospital's records linked to the patient's ABHA") + "</h4>";
+    if ((d.unreadableTypes || []).length) h += '<p class="w-hint warn">' + ms("warning") + wTH("ward.abdm-partial", "Your role cannot read every kind of record, so a stay may offer more than is listed here.") + "</p>";
+    h += (d.stays || []).length ? '<ul class="w-mini">' + d.stays.map(function (st2) {
+      var recs = st2.records || [];
+      return '<li class="w-mini-row"><div><b>' + wTH("ward.abdm-stay", "Stay from {from}", { from: when(st2.admittedAt) }, "from") + "</b>" + (st2.dischargedAt ? " &middot; " + wTH("ward.abdm-stay-to", "discharged {to}", { to: when(st2.dischargedAt) }, "to") : "") +
+        (recs.length ? '<ul class="w-mini">' + recs.map(function (r) {
+          return "<li>" + esc(abdmHiTypeWord(r.hiType)) + ' <span class="' + (r.registered ? "w-st ok" : "w-st due") + '">' + (r.registered ? wTH("ward.abdm-registered", "registered") : wTH("ward.abdm-not-registered", "not linked yet")) + "</span></li>";
+        }).join("") + "</ul>" : '<div class="w-dt-times">' + wTH("ward.abdm-nothing-final", "Nothing final to share yet.") + "</div>") +
+        (st2.unsignedSummary ? '<div class="w-dt-times">' + wTH("ward.abdm-unsigned-summary", "The discharge summary is not signed, so it is not shared.") + "</div>" : "") +
+        "</div><div class=\"w-mini-row-act\">" + (conn.connected && recs.length ? '<button class="w-btn ghost sm" data-w-act="abdmlink:' + esc(st2.encounterId) + '">' + ms("link") + wTH("ward.abdm-link-now", "Link now") + "</button>" : "") + "</div></li>";
+    }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.abdm-no-stays", "No admission or emergency visit here.") + "</p>";
+    if ((d.linkEvents || []).length) h += '<ul class="w-mini">' + d.linkEvents.map(function (e) {
+      return "<li>" + esc(abdmEventWord(e)) + ' <span class="w-dt-times">' + when(e.at) + (e.detail && e.detail.code ? ' &middot; <span lang="en">' + esc(e.detail.code) + "</span>" : "") + "</span></li>";
+    }).join("") + "</ul>";
+    h += "</div>";
+
+    if (conn.connected) {
+      h += '<div class="w-sub"><h4>' + ms("download") + wTH("ward.abdm-ask-heading", "Ask other facilities for this patient's records") + "</h4>" +
+        '<p class="w-hint">' + ms("info") + wTH("ward.abdm-ask-hint", "The patient approves or refuses in their ABHA app. Records that arrive are filed as drafts, marked as received under that consent, and stay on the chart even if the consent is later withdrawn.") + "</p><div class=\"w-grid\">" +
+        '<label class="w-f"><span>' + wTH("ward.abdm-purpose", "Why the records are needed") + '</span><select id="wAbdmPurpose">' + (d.purposes || []).map(function (p) { return '<option value="' + esc(p.code) + '">' + esc(p.code === "CAREMGT" ? wT("ward.abdm-purpose-care", "Care management") : p.code === "BTG" ? wT("ward.abdm-purpose-btg", "Emergency (break the glass)") : p.code === "HPAYMT" ? wT("ward.abdm-purpose-payment", "Healthcare payment") : p.text) + "</option>"; }).join("") + "</select></label>" +
+        '<label class="w-f"><span>' + wTH("ward.abdm-from", "Records from") + '</span><input id="wAbdmFrom" type="date"></label>' +
+        '<label class="w-f"><span>' + wTH("ward.abdm-to", "Records to") + '</span><input id="wAbdmTo" type="date"></label>' +
+        '<label class="w-f"><span>' + wTH("ward.abdm-until", "Keep access until") + '</span><input id="wAbdmUntil" type="date"></label></div>' +
+        '<div class="w-grid">' + (d.hiTypes || []).map(function (t) { return '<label class="w-chk"><input type="checkbox" class="wAbdmHi" value="' + esc(t) + '"> ' + esc(abdmHiTypeWord(t)) + "</label>"; }).join("") + "</div>" +
+        '<button class="w-btn" data-w-act="abdmrequest">' + ms("send") + wTH("ward.abdm-request", "Ask for the records") + "</button></div>";
+    }
+
+    h += '<div class="w-sub"><h4>' + ms("fact_check") + wTH("ward.abdm-requests-heading", "Requests from this hospital") + "</h4>";
+    h += (d.requests || []).length ? '<ul class="w-mini">' + d.requests.map(function (r) {
+      return '<li class="w-mini-row"><div><b>' + esc(abdmConsentWord(r.status)) + "</b> &middot; " + esc((r.hiTypes || []).map(abdmHiTypeWord).join(", ")) +
+        '<div class="w-dt-times">' + wTH("ward.abdm-requested-at", "asked {at}", { at: when(r.requestedAt) }, "at") + (r.lastFetchedAt ? " &middot; " + wTH("ward.abdm-fetched-at", "fetched {at}", { at: when(r.lastFetchedAt) }, "at") : "") + "</div></div>" +
+        '<div class="w-mini-row-act">' + (conn.connected && r.status === "GRANTED" && r.consentGranted ? '<button class="w-btn ghost sm" data-w-act="abdmfetch:' + esc(r.requestId) + '">' + ms("download") + wTH("ward.abdm-fetch", "Fetch the records") + "</button>" : "") + "</div></li>";
+    }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.abdm-no-requests", "No request has been made for this patient.") + "</p>";
+    h += "</div>";
+
+    h += '<div class="w-sub"><h4>' + ms("inbox") + wTH("ward.abdm-received-heading", "Received from other facilities through ABDM") + "</h4>";
+    h += (d.received || []).length ? '<ul class="w-mini">' + d.received.map(function (r) {
+      return '<li><span lang="en">' + esc(r.what) + "</span> " + (r.status ? '<span class="w-st">' + esc(r.status) + "</span> " : "") + '<span class="w-dt-times">' + when(r.recordedAt) + "</span></li>";
+    }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.abdm-none-received", "Nothing has been received through ABDM for this patient.") + "</p>";
+    return h + "</div></div>";
+  }
+  function abdmRecordsOpen() {
+    if (!st.sel) { st.err = wT("ward.open-a-patient-first", "Open a patient first."); paint(); return; }
+    st.view = "abdmrecords"; st.abdm = null; paint(); loadAbdmRecords();
+  }
+  function loadAbdmRecords() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/abdm-records?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.abdm = r && r.ok && r.connection ? r : false; if (!st.abdm) settle(r); paint(); })
+      .catch(function () { st.abdm = false; paint(); });
+  }
+  function abdmLinkStay(encounterId) {
+    var s = st.sel; if (!s) return;
+    st.busy = true; paint();
+    apiPost("/ward/abdm-link-stay", { orgId: st.orgId, patientId: s.patientId, encounterId: encounterId })
+      .then(function (r) {
+        var say = r && r.state === "linked-requested" ? wT("ward.abdm-link-sent", "Sent to ABDM to link. ABDM's answer shows here when it arrives.")
+          : r && r.state === "token-requested" ? wT("ward.abdm-token-requested", "ABDM was asked for a link token. The records are linked when it arrives.")
+          : r && r.state === "nothing-to-link" ? wT("ward.abdm-nothing-to-link", "Nothing final to link yet.")
+          : r && r.state === "no-abha" ? wT("ward.abdm-no-abha-short", "This patient has no ABHA address on the record with consent.")
+          : r && r.state === "not-connected" ? abdmReasonText(r.reason) : null;
+        settle(r, say); loadAbdmRecords();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.abdm-link-unreachable", "Could not reach the server. Nothing was linked."); paint(); });
+  }
+  function abdmRequest() {
+    var s = st.sel; if (!s) return;
+    var hi = Array.prototype.map.call(document.querySelectorAll(".wAbdmHi:checked"), function (n) { return n.value; });
+    if (!hi.length) { st.err = wT("ward.abdm-choose-type", "Choose at least one kind of record."); paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/abdm-consent-request", { orgId: st.orgId, patientId: s.patientId, purpose: val("wAbdmPurpose"), hiTypes: hi, from: val("wAbdmFrom"), to: val("wAbdmTo"), expiresOn: val("wAbdmUntil") })
+      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.abdm-requested", "Asked. The patient approves or refuses in their ABHA app.") : null)) loadAbdmRecords(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.abdm-request-unreachable", "Could not reach the server. Nothing was asked for."); paint(); });
+  }
+  function abdmFetch(requestId) {
+    var s = st.sel; if (!s) return;
+    st.busy = true; paint();
+    apiPost("/ward/abdm-fetch", { orgId: st.orgId, patientId: s.patientId, requestId: requestId })
+      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.abdm-fetching", "Asked ABDM for the records. They are filed on the chart as they arrive.") : null)) loadAbdmRecords(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.abdm-fetch-unreachable", "Could not reach the server. Nothing was fetched."); paint(); });
+  }
+
   function immunizationsOpen() {
     if (!st.sel) { st.err = wT("ward.open-a-patient-first", "Open a patient first."); paint(); return; }
     st.view = "immunizations"; st.immunizations = null; paint(); loadImmunizations();
@@ -13214,6 +13362,7 @@
       if (st.view === "workspace") { st.view = "chart"; paint(); return; }
       if (st.view === "people") { st.people = null; st.view = "chart"; paint(); return; }
       if (st.view === "immunizations") { st.immunizations = null; st.view = "chart"; paint(); return; }
+      if (st.view === "abdmrecords") { st.abdm = null; st.view = "chart"; paint(); return; }
       if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "qualitysafety") { st.qs = null; st.qsOpen = null; st.view = "list"; paint(); return; }
@@ -13743,6 +13892,10 @@
     if (cmd === "workspace") { workspaceOpen(); return; }
     if (cmd === "people") { peopleOpen(); return; }
     if (cmd === "immunizations") { immunizationsOpen(); return; }
+    if (cmd === "abdmrecords") { abdmRecordsOpen(); return; }
+    if (cmd === "abdmlink") { abdmLinkStay(arg); return; }
+    if (cmd === "abdmrequest") { abdmRequest(); return; }
+    if (cmd === "abdmfetch") { abdmFetch(arg); return; }
     if (cmd === "immadd") { immunizationAdd(); return; }
     if (cmd === "immerror") { immunizationError(arg); return; }
     if (cmd === "documents") { documentsOpen(); return; }

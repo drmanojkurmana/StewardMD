@@ -93,7 +93,7 @@ test("doctors: prescribers only, registration number required, HPR ID optional a
   assert.deepEqual(d.map((x) => [x.regNoSet, x.hprValid]), [[true, true], [false, null], [true, false]]);
 });
 
-test("checklist: nothing says verified; typed facts are entered, missing work is not built, production is blocked", () => {
+test("checklist: without a registry answer nothing says verified; typed facts are entered, dpdp is not built, production is blocked", () => {
   const docs = doctorReadiness([{ identity: "a", role: "doctor", regNo: "R", active: true }]);
   const none = checklist({}, { region: "IN", regionProfile: {} }, []);
   assert.equal(none.find((i) => i.key === "hfr").status, "missing");
@@ -104,13 +104,32 @@ test("checklist: nothing says verified; typed facts are entered, missing work is
   assert.match(typed.find((i) => i.key === "hfr").detail, /has not checked it against the registry/);
   assert.equal(typed.find((i) => i.key === "linkage").status, "entered");
   assert.equal(typed.find((i) => i.key === "doctors").status, "entered");
-  for (const k of ["session", "sandbox", "counters", "dpdp"]) assert.equal(typed.find((i) => i.key === k).status, "not-built", k);
+  // The session is opened by the first registry check; until then it is not checked, never assumed.
+  assert.equal(typed.find((i) => i.key === "session").status, "not-checked");
+  // Built screens are "available", and still nothing is recorded as passed or printed.
+  for (const k of ["sandbox", "counters"]) assert.equal(typed.find((i) => i.key === k).status, "available", k);
+  assert.match(typed.find((i) => i.key === "sandbox").detail, /No sandbox run is recorded as passed/);
+  assert.equal(typed.find((i) => i.key === "dpdp").status, "not-built");
   assert.equal(typed.find((i) => i.key === "production").status, "blocked");
   assert.equal(checklist(S({ hfrFacilityId: "IN9999999999" }), ORG, docs).find((i) => i.key === "hfr").status, "mismatch");
-  for (const list of [none, typed]) {
-    assert.ok(list.every((i) => ["entered", "missing", "mismatch", "not-built", "blocked"].includes(i.status)));
+  // A registry answer about ANOTHER facility ID says nothing about this one: still only entered, session unchecked.
+  const otherId = checklist(S({ hipId: HFR }), ORG, docs, { facility: { status: "verified", hfrFacilityId: "IN9999999999", checkedAt: "2026-09-16T00:00:00.000Z" } });
+  assert.equal(otherId.find((i) => i.key === "hfr").status, "entered");
+  assert.equal(otherId.find((i) => i.key === "session").status, "not-checked");
+  for (const list of [none, typed, otherId]) {
+    assert.ok(list.every((i) => ["entered", "missing", "mismatch", "not-built", "not-checked", "available", "blocked"].includes(i.status)));
     assert.ok(!/verified/i.test(list.map((i) => i.status + " " + i.detail).join(" ")), "no item claims verification");
   }
+  // Only the registry's own answer for this very ID moves the item.
+  const at = "2026-09-16T00:00:00.000Z";
+  const ver = checklist(S({ hipId: HFR }), ORG, docs, { facility: { status: "verified", hfrFacilityId: HFR, facilityStatus: "Approved", checkedAt: at } });
+  assert.equal(ver.find((i) => i.key === "hfr").status, "verified");
+  assert.match(ver.find((i) => i.key === "hfr").detail, /registry status Approved/);
+  assert.equal(ver.find((i) => i.key === "session").status, "verified");
+  assert.equal(checklist(S(), ORG, docs, { facility: { status: "not-found", hfrFacilityId: HFR, checkedAt: at } }).find((i) => i.key === "hfr").status, "not-found");
+  const noSession = checklist(S(), ORG, docs, { facility: { status: "unverified", reason: "session", hfrFacilityId: HFR, checkedAt: at } });
+  assert.equal(noSession.find((i) => i.key === "hfr").status, "unverified");
+  assert.equal(noSession.find((i) => i.key === "session").status, "unverified");
 });
 
 test("view: a new profile offers draft or submitted, production shows its blocker, the bridge is shared", () => {

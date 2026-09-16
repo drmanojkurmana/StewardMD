@@ -166,7 +166,10 @@ test("LT-29: the Patients page registers; it does not say it queues", () => {
 
 test("the client does not re-implement the server's validation rules", () => {
   // Local checks are UX hints; the authority is the server, whose field-keyed errors are rendered inline.
-  assert.equal(/verhoeff|Verhoeff/.test(SRC), false, "ABHA checksum stays server-side, in one place");
+  // The ABHA number's check digit stays server-side (_opd_patient.js). The one checksum here is the AADHAAR number's,
+  // which ABDM certification (CRT_ABHA_104) requires the desk to check BEFORE an OTP is requested, and it is never stored.
+  assert.equal(/verhoeffOk|abhaNumber[^\n]*verhoeff/i.test(SRC), false, "ABHA checksum stays server-side, in one place");
+  assert.match(SRC, /validAadhaar\(aad\)/, "the Aadhaar pre-check guards the OTP request");
   assert.match(SRC, /r\.errors/, "server errors are rendered per field");
   assert.match(SRC, /setErr\(/);
 });

@@ -47,6 +47,17 @@ export const CONSENT_FIELDS = {
 // already collects. hiu.id is how the gateway routes the grant back to us.
 const DEFAULT_FREQUENCY = { unit: "HOUR", value: 0, repeats: 0 };   // one-shot pull, per the collection sample
 
+/* Who is asking, for which tenant. Connect membership by default; `req.resolved = { actorId, tenantId }` when the
+ * caller is a WardSynQ route that authorised its own staff member server-side (the only place that passes it). */
+async function actorAndTenant(env, db, identifyFn, req) {
+  if (req && req.resolved && req.resolved.actorId && req.resolved.tenantId) {
+    return { actor: { id: String(req.resolved.actorId) }, tenantId: String(req.resolved.tenantId) };
+  }
+  const actor = await resolveActor(identifyFn, req.request, env);
+  const { tenant } = await resolveTenant(db, actor.id, req.tenantId);
+  return { actor, tenantId: tenant.id };
+}
+
 // Build the consentInit POST body through the field seam. The RAW ABHA is placed ONLY here (patient.id) —
 // it is HMAC'd before it touches D1/KV/audit and must never appear in a URL/log.
 export function buildConsentInitBody(F, { requestId, now, abhaAddress, purpose, hiTypes, dateRange, dataEraseAt,
@@ -81,10 +92,10 @@ export async function requestConsent(env, deps, req) {
   const now = typeof deps.now === "function" ? deps.now() : deps.now;   // injected clock only (no Date.now)
 
   // Server-derived identity + membership — NEVER trust a tenantId from the request body. A non-member
-  // tenantId throws PermissionError HERE, before any gateway call or persistence.
-  const actor = await resolveActor(identifyFn, req.request, env);
-  const { tenant } = await resolveTenant(db, actor.id, req.tenantId);
-  const tenantId = tenant.id;
+  // tenantId throws PermissionError HERE, before any gateway call or persistence. A WardSynQ hospital's own route
+  // (functions/_wardsynq/abdm-chart.js) has already resolved its staff member against the hospital and passes that
+  // server-side decision as `resolved`; it is never read from a request body.
+  const { actor, tenantId } = await actorAndTenant(env, db, identifyFn, req);
 
   // Our own correlation id — distinct from the gateway's per-HTTP REQUEST-ID header, which the gateway mints.
   const requestId = globalThis.crypto.randomUUID();
@@ -98,7 +109,7 @@ export async function requestConsent(env, deps, req) {
   }
   // One env scheme: the HIU id comes from abdmConfig (an override, else the sandbox's own identity). A
   // production configuration has none, so it fails closed here.
-  const hiuId = abdmConfig(env).hiuId || null;
+  const hiuId = req.hiuId || abdmConfig(env).hiuId || null;   // a hospital's own HIU id (its ABDM profile), else the deployment's
   if (!hiuId) throw new AbdmError("ABDM HIU id is not configured");
 
   const body = buildConsentInitBody(CONSENT_FIELDS, {
@@ -201,9 +212,7 @@ export async function requestHealthInformation(env, deps, req) {
 
   // (1a) Server-derived identity + membership — NEVER trust a body tenantId. A non-member throws PermissionError
   //      HERE, before any gateway call, key mint, or persistence.
-  const actor = await resolveActor(identifyFn, req.request, env);
-  const { tenant } = await resolveTenant(db, actor.id, req.tenantId);
-  const tenantId = tenant.id;
+  const { actor, tenantId } = await actorAndTenant(env, db, identifyFn, req);
 
   // (1b) R3 mode:live GATE — reload the ONE reconciled consent row FRESH from D1 by its durable join key
   //      (consent_id), then re-run the request-time checklist. The row is now AUTHORITATIVE for BOTH the

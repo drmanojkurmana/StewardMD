@@ -91,6 +91,11 @@ const ALLOW = {
   "wardsynq/site/pages/lab-analysers.js": {
     "the mapping format shown as an example: an instrument code, a laboratory test, its unit and a panel, entered as recorded": ["<textarea id=\"labAnMap\" rows=\"8\" class=\"mono\" style=\"width:100%\" placeholder=\"K | Potassium | mmol/L | Renal profile\">"],
   },
+  "wardsynq/site/pages/patients.js": {
+    "the print stylesheet that prints only the Scan and Share QR sheet (CSS, not words)": [
+      "@media print { body > *:not(#pSharePrint) { display: none !important; } #pSharePrint { display: block !important; } } #pSharePrint { display: none; }",
+    ],
+  },
 };
 const WARD_FILES = ["ward.js", "discharge.js", "patient-register.js"];
 const SITE_FILES = ["wardsynq/site/shell.js", "wardsynq/site/bug-reporter.js", "wardsynq/ui/wardsynq-app.js",
