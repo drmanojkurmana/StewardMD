@@ -31,7 +31,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { PatientConsent, statusOf as consentStatus, TYPE as CONSENT_TYPE } from "./consent.js";
 import { clocksOf, requestClock, lawOn, CITE, HOUR } from "./privacy-law.js";
-import { retentionFacts, retentionView } from "./retention.js";
+import { retentionFacts, retentionView, retentionAnswer, LEGAL } from "./retention.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOTICE = "PrivacyNotice", ACK = "PrivacyAcknowledgement", REQ = "DataPrincipalRequest", BREACH = "DataBreach";
@@ -44,7 +44,13 @@ const GIVERS = Object.freeze(["patient", "parent", "legal-guardian", "next-of-ki
 const CARE_CONSENTS = Object.freeze(["treatment", "blood-products", "procedure"]);
 /* Identifiers a patient chooses to give. Linking an ABHA is voluntary; the MR number is not. */
 const OPTIONAL_IDENTIFIERS = Object.freeze(["abha-number", "abha-address"]);
-const RETENTION_REASON = "Medical records must be kept for as long as the law requires. The Act allows this: s8(7) and s12(3).";
+/* Owner's guidance of 17 Sep 2026 (item 4): only a period from an identified statutory provision is "required by law".
+ * The answer says which classes the law keeps and which the hospital's retention policy keeps, and never calls a policy
+ * a legal requirement. */
+const RETENTION_REASON = "A record the law requires is kept for the period that law sets, and each such class names the law and provision; the Act allows this: s8(7) and s12(3). A record kept only under the hospital's retention policy is named as policy, not as a legal requirement.";
+/* From DPDP commencement, a class kept only under a RETENTION_POLICY layer is the DPO's documented decision: retain,
+ * with the purpose or necessity written down, or erase (destroyed or de-identified by the medical records officer). */
+const RETENTION_DECISIONS = Object.freeze(["retain", "erase"]);
 const isoOrNull = (v) => { const s = str(v); const t = Date.parse(s); return s && Number.isFinite(t) ? new Date(t).toISOString() : null; };
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const stamp = (iso) => iso.replace(/[^0-9]/g, "").slice(0, 17);
@@ -239,7 +245,7 @@ async function fileDataRequest(request, env, ctx) {
 
 /* ERASURE, done for real and reported exactly. Every step is attempted; any step that fails leaves the request in
  * progress with what did and did not happen written on it, and the answer is not ok. */
-async function runErasure(svc, req, by, ctx, retained) {
+async function runErasure(svc, req, by, ctx, retained, decisions) {
   const done = { consentsWithdrawn: [], removedFromCurrentRecord: [], registrationDetailsRemoved: [], failures: [] };
   const at = new Date().toISOString();
   let consents = [];
@@ -274,13 +280,47 @@ async function runErasure(svc, req, by, ctx, retained) {
       } catch (e) { done.failures.push({ step: "registration-details", detail: str(e && e.message) }); }
     } else done.failures.push({ step: "registration-details", detail: "the registration store is not available here" });
   } else if (!done.failures.length) done.failures.push({ step: "read-patient", detail: "patient not found" });
+  /* WardSynQ never erases or de-identifies a clinical record itself (records are append-only). A DPO decision to erase a
+   * policy-only class is carried out by the medical records officer by hand; until the destruction record's reference
+   * is given the request stays open and says so. */
+  const byClass = new Map((decisions || []).map((d) => [d.class, d]));
+  for (const d of decisions || []) {
+    if (d.decision === "erase" && !d.destructionReference) done.failures.push({ step: "erase-class", class: d.class, detail: "WardSynQ does not erase or de-identify a clinical record itself. The medical records officer destroys or de-identifies it and records the destruction; complete the request again with that reference." });
+  }
   return {
     ...done,
-    /* H.4.5: each class kept, the rule that keeps it and the date it ends. Data with no statutory basis (the consents
-     * and details above) is what was erased. */
-    retained: { what: "clinical-record", reason: RETENTION_REASON, classes: retained || [] },
+    /* H.4.5: each class kept, what keeps it (the law and provision, or the hospital's policy) and the date it ends, with
+     * the DPO's decision where the policy alone kept it. The consents and details above are what was erased. */
+    retained: { what: "clinical-record", reason: RETENTION_REASON, classes: (retained || []).map((x) => compactRetained(x, byClass.get(x.class))) },
+    retentionDecisions: decisions ? decisions.map((d) => ({ ...d, decidedBy: by, decidedAt: at })) : null,
     historyNote: "Values removed from the current record stay in its version history, which cannot be edited. They are not erased.",
   };
+}
+
+/** PURE. A retained class as written on the request: the dates, the basis and the answer, without each layer's notes. */
+function compactRetained(x, decision) {
+  const bases = (x.bases || []).map((b) => ({ id: b.id, type: b.type, sourceType: b.sourceType, instrument: b.instrument, provision: b.provision, jurisdiction: b.jurisdiction, until: b.until, inForce: b.inForce }));
+  return { class: x.class, rule: x.rule, years: x.years, source: x.source, records: x.records, lastAt: x.lastAt || null, keepUntil: x.keepUntil, legalUntil: x.legalUntil || null, policyUntil: x.policyUntil || null,
+    basisType: x.basisType || null, policyOnly: !!x.policyOnly, untilProceedingsEnd: !!x.untilProceedingsEnd, minorRule: x.minorRule || null, bases, answer: retentionAnswer(x), decision: decision || null };
+}
+
+/**
+ * PURE. From DPDP commencement every retained class not kept by a LEGAL_OBLIGATION layer needs the DPO's decision.
+ * input: [{ class, decision: retain|erase, reason, destructionReference? }]. Returns { decisions } or { error, needed, missing }.
+ */
+function retentionDecisionsOf(retained, input) {
+  const needed = (retained || []).filter((x) => x.basisType !== LEGAL).map((x) => compactRetained(x));
+  const given = new Map((Array.isArray(input) ? input : []).filter((d) => d && typeof d === "object").map((d) => [str(d.class), d]));
+  const decisions = [], missing = [];
+  for (const n of needed) {
+    const d = given.get(n.class) || {};
+    const decision = RETENTION_DECISIONS.includes(d.decision) ? d.decision : null, reason = str(d.reason).slice(0, 2000);
+    if (!decision || reason.length < 10) { missing.push(n.class); continue; }
+    decisions.push({ class: n.class, basisType: n.basisType, keepUntil: n.keepUntil, decision, reason, destructionReference: decision === "erase" ? str(d.destructionReference).slice(0, 300) || null : null });
+  }
+  if (missing.length) return { error: "retention_decision_required", needed, missing,
+    detail: `These records are kept only under the hospital's retention policy, which is not a legal requirement: ${missing.join(", ")}. The DPO decides for each: retain, with the purpose or necessity written down (at least 10 characters), or erase. Nothing was erased; the request stays open.` };
+  return { decisions };
 }
 
 /** PURE. The contact every answer carries (DPDP Rules 2025 r.9; SPDI Rules 2011 r.5(9)): the published notice's DPO or
@@ -291,7 +331,7 @@ function responseContactOf(notices) {
   return n ? { dpoContact: str(n.dpoContact) || null, grievanceContact: str(n.grievanceContact) || null, noticeId: n.id, noticeVersion: n.version || null } : null;
 }
 
-/** ctx: { migration, requestId, action: start|complete|reject, response?, retention, actorDeps, recordDeps, clearRegistrationDetails? } */
+/** ctx: { migration, requestId, action: start|complete|reject, response?, retention, dpdp, retentionDecisions?, actorDeps, recordDeps, clearRegistrationDetails? } */
 async function actOnDataRequest(request, env, ctx) {
   const base = baseOf(ctx);
   if (off(ctx)) return { ...base, ok: true, skipped: "off", written: 0 };
@@ -309,7 +349,7 @@ async function actOnDataRequest(request, env, ctx) {
     try { contact = responseContactOf(await svc.list(NOTICE, 100)); } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "the published notice could not be read, so the answer cannot carry the DPO contact", written: 0 }; }
     if (!contact) return { ...base, ok: false, status: 409, error: "contact_required", detail: "Every answer carries the Data Protection Officer or Grievance Officer contact (DPDP Rules 2025 r.9; SPDI Rules 2011 r.5(9)). Publish a privacy notice that names one first.", written: 0 };
   }
-  let retained = null;
+  let retained = null, decisions = null;
   if (action === "complete" && current.kind === "erasure") {
     /* Nothing is erased on a picture that could not be completed, and nothing under a legal hold (Act s.17(1)(a), (c)). */
     let view;
@@ -317,6 +357,12 @@ async function actOnDataRequest(request, env, ctx) {
     catch (e) { return { ...base, ok: false, status: 502, error: "retention_unreadable", detail: "What the law requires the hospital to keep could not be worked out, so nothing was erased.", written: 0 }; }
     if (view.holds.length) return { ...base, ok: false, status: 409, error: "legal_hold", holds: view.holds, retained: view.retained, detail: "This patient's record is under a legal hold. Nothing was erased; the request stays open.", written: 0 };
     retained = view.retained;
+    /* Before commencement the SPDI regime applies and erasure behaves as before, with each basis labelled. */
+    if (lawOn(ctx.dpdp, Date.now()).dpdpInForce) {
+      const d = retentionDecisionsOf(retained, ctx.retentionDecisions);
+      if (d.error) return { ...base, ok: false, status: 409, error: d.error, detail: d.detail, decisionsNeeded: d.needed, missing: d.missing, written: 0 };
+      decisions = d.decisions;
+    }
   }
   const by = resolved.actor.id, at = new Date().toISOString();
   const { meta, version, ...rest } = current;
@@ -325,7 +371,7 @@ async function actOnDataRequest(request, env, ctx) {
   if (action === "start") next.state = "in-progress";
   else if (action === "reject") Object.assign(next, { state: "rejected", response, responseContact: contact, closedAt: at, closedBy: by });
   else {
-    if (current.kind === "erasure") erasure = await runErasure(svc, current, by, ctx, retained);
+    if (current.kind === "erasure") erasure = await runErasure(svc, current, by, ctx, retained, decisions);
     const partial = erasure && erasure.failures.length > 0;
     Object.assign(next, partial ? { state: "in-progress", erasureAttempt: { at, by, ...erasure } } : { state: "completed", response, responseContact: contact, closedAt: at, closedBy: by, ...(erasure ? { erasure } : {}) });
   }
@@ -590,7 +636,7 @@ async function portalDataRequest(ctx, session) {
 }
 
 export {
-  NOTICE, ACK, REQ, BREACH, REQUEST_KINDS, RECEIVED_VIA, ACK_METHODS, CARE_CONSENTS, OPTIONAL_IDENTIFIERS, RETENTION_REASON,
+  NOTICE, ACK, REQ, BREACH, REQUEST_KINDS, RECEIVED_VIA, ACK_METHODS, CARE_CONSENTS, OPTIONAL_IDENTIFIERS, RETENTION_REASON, RETENTION_DECISIONS, retentionDecisionsOf, compactRetained,
   clocksOf, noticeInput, newRequest, applyBreachUpdate, withClock, breachClock, responseContactOf, renoticeDue, NOTICE_PARTS, PRINCIPAL_HEADINGS, BOARD_HEADINGS, HEALTH_CONSENT_FORMS,
   publishNotice, privacyNotices, acknowledgePrivacy, privacyAcknowledgements, fileDataRequest, actOnDataRequest, dpoQueue, dataHoldings,
   recordBreach, updateBreach, portalPrivacy, portalAcknowledge, portalDataRequest,

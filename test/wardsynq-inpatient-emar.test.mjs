@@ -6787,6 +6787,52 @@ test("DOCUMENTS: an administrator deletes the stored files only after retention;
   });
 });
 
+/* Owner's legal guidance of 17 Sep 2026, item 4: inside a LEGAL_OBLIGATION period deletion is refused and names the law;
+ * inside a period only the hospital's retention policy sets, it needs a reason and the DPO's or records officer's
+ * confirmation, written on the purge. */
+test("DOCUMENTS: deletion inside the law's period is refused naming the law; inside only the policy period it needs the DPO's or records officer's confirmation and reason", async () => {
+  seedHospital();
+  const ADMIN = "admin@example.test", HRS = "hr@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN))}`, { fields: { orgId: ORG, identity: idFor(ADMIN), role: "admin", active: true }, updateTime: "t1" });
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(HRS))}`, { fields: { orgId: ORG, identity: idFor(HRS), role: "hr", active: true }, updateTime: "t1" });
+  const { adm } = await admittedPatientOnDrug();
+  const enc = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
+  await RECORD.append(TENANT_ROW.id, [{ ...enc, version: enc.version + 1, status: "finished", periodEnd: "2026-09-10T08:00:00.000Z" }], { idempotencyKey: "discharge-for-basis" });
+  await withDocStore(async ({ objects }) => {
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, patientId: adm.patientId, docType: "outside-report", title: "Old echo", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    const PURGE = { orgId: ORG, documentId: up.document.id, reason: "Records committee approved destruction" };
+    const realNow = Date.now, at = (years) => { Date.now = () => Date.parse("2026-09-17T00:00:00Z") + years * 365.25 * 24 * 3600 * 1000; };
+    try {
+      at(2);
+      const legal = await as(ADMIN, "/ward/document-purge", "POST", { ...PURGE, policyConfirm: true, policyReason: "Confirmed by the DPO in writing" });
+      assert.equal(legal.__status, 409, JSON.stringify(legal));
+      assert.equal(legal.error, "retention_not_expired");
+      assert.equal(legal.basisType, "LEGAL_OBLIGATION", "a confirmation cannot override the law's period");
+      assert.equal(legal.law[0].provision, "reg 1.3.1");
+      assert.match(legal.message, /The law requires .*until 2029-09-07 \(Indian Medical Council/);
+
+      at(4);
+      const ask = await as(ADMIN, "/ward/document-purge", "POST", PURGE);
+      assert.equal(ask.__status, 409, JSON.stringify(ask));
+      assert.equal(ask.error, "retention_policy_confirmation_required");
+      assert.equal(ask.basisType, "RETENTION_POLICY");
+      assert.match(ask.message, /hospital's retention policy \(.*DGHS Office Memorandum.*\)\. That is not a legal requirement/);
+      const hr = await as(HRS, "/ward/document-purge", "POST", { ...PURGE, policyConfirm: true, policyReason: "Approved by the committee" });
+      assert.equal(hr.__status, 403, "staff administration without the DPO or records officer capability cannot confirm");
+      const short = await as(ADMIN, "/ward/document-purge", "POST", { ...PURGE, policyConfirm: true, policyReason: "ok" });
+      assert.equal(short.error, "policy_reason_required");
+      assert.equal(objects.size, 1, "nothing deleted before a confirmed reason");
+      const done = await as(ADMIN, "/ward/document-purge", "POST", { ...PURGE, policyConfirm: true, policyReason: "Patient asked; no continuing care need; DPO decision 14/2030" });
+      assert.equal(done.__status, 200, JSON.stringify(done));
+      assert.equal(objects.size, 0);
+      assert.equal(done.document.policyOverride.basisType, "RETENTION_POLICY");
+      assert.match(done.document.policyOverride.reason, /DPO decision 14\/2030/);
+      assert.ok(done.document.policyOverride.confirmedBy);
+    } finally { Date.now = realNow; }
+  });
+});
+
 test("DOCUMENTS: with no storage configured, an upload is refused and says so, and the list says storage is off rather than looking empty", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();

@@ -110,7 +110,7 @@ import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/ph
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation } from "../../_wardsynq/emergency-mode.js";
 import { publishNotice, privacyNotices, acknowledgePrivacy, privacyAcknowledgements, fileDataRequest, actOnDataRequest, dpoQueue, dataHoldings, recordBreach, updateBreach } from "../../_wardsynq/dpdp.js";
-import { patientRetention, placeLegalHold, liftLegalHold } from "../../_wardsynq/retention.js";
+import { patientRetention, retentionClassList, placeLegalHold, liftLegalHold } from "../../_wardsynq/retention.js";
 import { nabhIndicators, nabhCsv, hmisMonthly, hmisCsv, dhsChecklist, saveDhsAssessment } from "../../_wardsynq/compliance.js";
 import { runReport, saveReport, listSavedReports, reportCsv } from "../../_wardsynq/report-builder.js";
 import { reportIncident, signalIncident, confirmIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
@@ -1517,6 +1517,8 @@ export async function onRequest(context) {
          * hold; the medical records officer (register.records) may do both, and only the records officer lifts a hold,
          * with the reference to the disposal of the matter (H.4.4). */
         retention: CAPS.DPDP_MANAGE, "legal-hold": CAPS.DPDP_MANAGE, "legal-hold-lift": CAPS.REGISTER_RECORDS,
+        /* The classes with their legal and policy layers (owner's guidance 17 Sep 2026): the same readers as retention. */
+        "retention-classes": CAPS.DPDP_MANAGE,
         /* Returns (compliance.js). The indicator tables name no patient and no clinician: analytics.view, the same
          * gate as quality-safety. The DHS self-assessment is the hospital's own statement about itself: staff.admin. */
         "nabh-indicators": CAPS.ANALYTICS_VIEW, "hmis-monthly": CAPS.ANALYTICS_VIEW,
@@ -2004,7 +2006,7 @@ export async function onRequest(context) {
        * medico-legal case and opens one patient's; the nodal officer records a notification. Nothing else widens. */
       if (!wAz.ok && ((sub === "register-mlc" && method === "POST") || sub === "mlc-patient")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
       if (!wAz.ok && sub === "register-notification" && method === "POST") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_IHIP);
-      if (!wAz.ok && (sub === "retention" || sub === "legal-hold")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
+      if (!wAz.ok && (sub === "retention" || sub === "retention-classes" || sub === "legal-hold")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
       /* Legal review 2026-09-17 read-only doors. The PCPNDT nodal officer reads Form F and records the monthly report's
        * submission (B.4.5, B.4.9): GET, or POST of a return only. An NDPS inspector or auditor reads every NDPS view and
        * writes nothing; the nurse reads one patient's controlled-drug rows (F.4.10). Nothing else widens. */
@@ -2500,7 +2502,11 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "document-purge" && method === "POST") {
-        const r = await purgeDocument(request, env, { ...deps, store: documentStoreFromEnv(env), documentId: body.documentId, reason: body.reason, retention: wsqCfg && wsqCfg.retention });
+        /* Inside a period kept only by the hospital's retention policy, the deletion is confirmed by the Data Protection
+         * Officer or the medical records officer (owner's guidance 17 Sep 2026): their capability is checked here. */
+        const canConfirmPolicy = body.policyConfirm === true && ((await ORG.authorizeOrg(env, actor, wOrgId, CAPS.DPDP_MANAGE)).ok || (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS)).ok);
+        const r = await purgeDocument(request, env, { ...deps, store: documentStoreFromEnv(env), documentId: body.documentId, reason: body.reason, retention: wsqCfg && wsqCfg.retention,
+          policyConfirm: body.policyConfirm === true, policyReason: body.policyReason, canConfirmPolicy });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "tag-assign" && method === "POST") {
@@ -4480,6 +4486,7 @@ export async function onRequest(context) {
       }
       if (sub === "data-request-act" && method === "POST") {
         const r = await actOnDataRequest(request, env, { ...deps, requestId: body.requestId, action: body.action, response: body.response, retention: wsqCfg && wsqCfg.retention,
+          dpdp: dpdpCfg, retentionDecisions: body.retentionDecisions,
           /* The registration desk's copy of the patient's optional details, cleared through its own store. */
           clearRegistrationDetails: (mrn) => PAT.clearOptionalRegistration(env, wOrgId, mrn, actor.id || "") });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -4500,6 +4507,10 @@ export async function onRequest(context) {
       /* ---- Retention and legal holds (retention.js) ---- */
       if (sub === "retention" && method === "GET") {
         const r = await patientRetention(request, env, { ...deps, patientId: url.searchParams.get("patientId") || patientIdForMrn(url.searchParams.get("mrn") || ""), retention: wsqCfg && wsqCfg.retention });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "retention-classes" && method === "GET") {
+        const r = await retentionClassList(request, env, { ...deps, retention: wsqCfg && wsqCfg.retention, dpdp: dpdpCfg });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "legal-hold" && method === "POST") {
