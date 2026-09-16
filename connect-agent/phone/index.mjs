@@ -3,7 +3,7 @@
 import { createCollector, PHASE_AGENT_READ } from '../discovery.mjs';
 import { guidedPrompt, REASSURANCE } from './onboard.mjs';
 import { explorePhone, probePhone } from './explore.mjs';
-import { deepCrawlClinical, captureView, enrichView, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
+import { deepCrawlClinical, captureView, enrichView, exploreDetailOf, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
 import { verifyViews } from './verify.mjs';
 import { createProofBook, navToReplayEntries, INJECT_REPLAY_SRC } from './prove.mjs';
 /* THE CLIENT THE CRAWL ACTUALLY NEEDS, re-exported from the one module the app imports.
@@ -43,6 +43,24 @@ const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[typ
  * order a ward round reads a chart. Each ask has "Not in my EMR" in the browser header (the native
  * guideSkip event) so a hospital without, say, radiology never blocks the run. */
 export const ASK_ORDER = Object.freeze(['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history']);
+
+/* A SECOND LOOK MAY ONLY ADD. "Look again" used to assign the new walk's views straight over the old
+ * list, so a walk that came back with less silently destroyed the screens the doctor had just
+ * demonstrated - on GHIS a run with labs and radiology proven came back with both "absent", because
+ * neither is reachable by the walk alone (owner's iPhone, 2026-09-16). Keyed on resource + path so a
+ * genuinely better capture of the SAME view still replaces nothing and simply is not duplicated. */
+export function mergeObservedViews(existing, incoming) {
+  const keyOf = (v) => String((v && (v.resourceHint || v.resource)) || '') + '|' + String((v && v.pathTemplate) || '');
+  const merged = Array.isArray(existing) ? existing.slice() : [];
+  const seen = new Set(merged.map(keyOf));
+  for (const v of (Array.isArray(incoming) ? incoming : [])) {
+    const k = keyOf(v);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    merged.push(v);
+  }
+  return merged;
+}
 /* MANUAL MODE: the doctor drives using the universal 6-tap script (onboard.mjs: the six steps
  * plus the three follow-up screens). One plain sentence per ask, each ending with the reassurance
  * that the AI learns the layout automatically. The sentences themselves live in onboard.mjs so
@@ -200,6 +218,15 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
         } catch { /* best effort */ }
       }
       await book.prove({ client: plugin, view, label: 'the doctor showed the ' + gap + ' screen' });
+      /* ONE LEVEL DEEPER ON WHAT THE DOCTOR SHOWED. The crawl opens a row of every list it finds, but a
+       * screen that only arrived because the doctor demonstrated it never got that treatment, so its
+       * detail call stayed unknown and the completeness gate reported "<kind>-detail: absent" forever.
+       * GHIS radiology is the case that forces this: its module is not linked from the patient chart,
+       * so the crawl can never see it and the ask is the ONLY way radiology-detail can be learned. */
+      try {
+        const deeper = await exploreDetailOf({ client: plugin, view, book, origins, waitMs: caps?.verifyWaitMs ?? 1200 });
+        if (deeper) { observedViews.push(deeper); notify('CAPTURED', { gap: gap + '-detail', step, total, found, looking: looking() }); }
+      } catch { /* the list itself still counts; a detail we could not open is not a failed ask */ }
       await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
       if (verdict && verdict.resource && verdict.resource !== 'none' && verdict.resource !== gap && Number(verdict.confidence) >= 0.8) {
         warnings.push('the ' + gap + ' screen looks like ' + verdict.resource + ' to the model');
@@ -345,9 +372,13 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
         client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
+      /* MERGE, NEVER REPLACE. "Look again" used to overwrite observedViews with whatever the new walk
+       * returned, which threw away every screen the DOCTOR had just demonstrated in the guided asks:
+       * on GHIS a run that had labs + radiology proven came back with both "absent" because the walk
+       * cannot reach them on its own (owner's iPhone, 2026-09-16). A second look may only ADD. */
       if (Array.isArray(again.observedViews) && again.observedViews.length) {
-        observedViews = again.observedViews;
-        found = again.found || found;
+        observedViews = mergeObservedViews(observedViews, again.observedViews);
+        found = [...new Set([...(found || []), ...(again.found || [])])];
         crawlStop = again.stopReason;
       }
     } catch { break; }

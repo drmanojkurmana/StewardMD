@@ -1008,6 +1008,52 @@ function CRAWL_CLICK_FIRST_ROW(selector) {
 const CLICK_FIRST_ROW_SRC = String(CRAWL_CLICK_FIRST_ROW);
 /** Lists whose single record is worth a look: the call behind one lab result or one radiology report. */
 export const DETAIL_PARENTS = Object.freeze(['labs', 'radiology', 'history', 'discharge', 'notes']);
+
+/* OPEN ONE ROW OF A LIST AND LEARN THE CALL BEHIND IT.
+ * The crawl does this inline while it walks (see exploreDetails below), but a screen the DOCTOR had
+ * to demonstrate never went through the crawl, so its detail chain was never proven. On GHIS that is
+ * not an edge case: radiology lives in its own module (/Radio/Home) that the patient chart does not
+ * link to, so the crawl cannot reach it at all - radiology can only ever arrive as a guided ask, and
+ * radiology-detail (GetRadiologyResultPrint) was therefore unreachable by ANY path (owner's iPhone,
+ * 2026-09-16: three live runs ended with radiology-detail "absent"). Shared so askOne can call it too. */
+export async function exploreDetailOf({ client, view, book, origins = [], waitMs = 1200 }) {
+  if (!view || !view.rowsSelector || view.block) return null;
+  if (!DETAIL_PARENTS.includes(String(view.resourceHint || ''))) return null;
+  const urlNow = async () => {
+    try { const u = await client.currentUrl(); return typeof u === 'string' ? u : (u && u.url) || ''; } catch { return ''; }
+  };
+  const pathNow = async () => { try { return new URL(await urlNow()).pathname; } catch { return ''; } };
+  const before = await pathNow();
+  if (typeof client.drainRequests === 'function') { try { await client.drainRequests(); } catch { /* best effort */ } }
+  await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` }).catch(() => {});
+  let how = null;
+  try { how = await client.evaluate({ expression: `(${CLICK_FIRST_ROW_SRC})(${JSON.stringify(view.rowsSelector)})` }); } catch { how = null; }
+  if (!how || (how.result !== 'link' && how.result !== 'row')) return null;
+  await client.wait({ ms: waitMs });
+  // A report that opens as a page load is only replayable if the navigation is turned into a request.
+  if (typeof client.drainRequests === 'function') {
+    try {
+      const drained = await client.drainRequests();
+      let pageOrigin = null;
+      try { pageOrigin = new URL(await urlNow()).origin; } catch { pageOrigin = null; }
+      const nav = navToReplayEntries(drained, { pageOrigin, allowedOrigins: origins });
+      if (nav.length) await client.evaluate({ expression: '(' + INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+    } catch { /* nav capture is best effort */ }
+  }
+  let detail = null;
+  try { detail = await captureView({ client, resourceHint: view.resourceHint + '-detail' }); } catch { detail = null; }
+  if (detail && detail.rowsSelector) {
+    detail.detailOf = view.resourceHint;
+    if (book) await book.prove({ client, view: detail, label: 'open one ' + view.resourceHint + ' row', parent: view.resourceHint });
+  } else {
+    detail = null;
+  }
+  if (await pathNow() !== before) {
+    await client.evaluate({ expression: 'history.back()' }).catch(() => {});
+    await client.wait({ ms: waitMs });
+  }
+  return detail;
+}
 const FIND_CONTROLS_SRC = String(CRAWL_FIND_CONTROLS);
 const CLICK_CONTROL_SRC = String(CRAWL_CLICK_CONTROL);
 const ARM_GUIDE_SRC = String(CRAWL_ARM_GUIDE);
