@@ -50,6 +50,8 @@ import {
   recordAcknowledgement, settle, moveBalanceToPatient, costEstimate,
 } from "../../wardsynq/wardsynq-billing.js";
 import { submitViaAdapter, adapterForPayer, payerById, publicPayers, payerRuleWarnings } from "../../wardsynq/wardsynq-tpa-adapter.js";
+import { resolveParties, partiesRecord } from "./payer-contracts.js";
+import { STAY_PAYER_TYPE, stayPayerWithParties } from "./stay-payer.js";
 import { FhirClaimAdapter } from "../../wardsynq/wardsynq-fhir-claim-adapter.js";
 import { NhcxAdapter } from "../../wardsynq/wardsynq-nhcx-adapter.js";
 import { openSecret } from "./webhooks.js";
@@ -432,7 +434,9 @@ async function recordPreAuth(request, env, ctx) {
   }
 }
 
-/** ctx: { migration, patientId } - a patient's claims, and the answer about gating care. */
+/** ctx: { migration, patientId, payers, gst } - a patient's claims, and the answer about gating care. Each claim and
+ *  pre-authorisation, and each stay's payer, carries its parties (payer-contracts.js): patient, payer, insurer, TPA and the
+ *  GST recipient, resolved from the payer's contract as it stands now. */
 async function claimsForPatient(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -444,23 +448,26 @@ async function claimsForPatient(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, claims: [] };
 
-  let rows, auths, estimates, eligibility;
-  let estimatesUnreadable = false, eligibilityUnreadable = false;
+  let rows, auths, estimates, eligibility, stayPayers;
+  let estimatesUnreadable = false, eligibilityUnreadable = false, stayPayersUnreadable = false;
   try {
-    [rows, auths, estimates, eligibility] = await Promise.all([
+    [rows, auths, estimates, eligibility, stayPayers] = await Promise.all([
       svc.byPatient(CLAIM_TYPE, patientId),
       svc.byPatient(PREAUTH_TYPE, patientId).catch(() => []),
       svc.byPatient(ESTIMATE_TYPE, patientId).catch(() => { estimatesUnreadable = true; return []; }),
       // NHCX eligibility checks (nhcx.js). Unreadable is said, never shown as none.
       svc.byPatient(ELIGIBILITY_TYPE, patientId).catch(() => { eligibilityUnreadable = true; return []; }),
+      // gst-parties: who settles each stay. Unreadable is said (null), never shown as self-pay.
+      svc.byPatient(STAY_PAYER_TYPE, patientId).catch(() => { stayPayersUnreadable = true; return []; }),
     ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), claims: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), claims: [] };
   }
 
-  const claims = (rows || []).filter(Boolean);
-  const preAuthorisations = (auths || []).filter(Boolean);
+  const partiesOf = (payerId) => partiesRecord(resolveParties({ payerRef: payerId, payers: ctx.payers, gst: ctx.gst || null }), null);
+  const claims = (rows || []).filter(Boolean).map((c) => ({ ...c, parties: partiesOf(c.payerId) }));
+  const preAuthorisations = (auths || []).filter(Boolean).map((a) => ({ ...a, parties: partiesOf(a.payerId) }));
   const now = str(ctx.now) || new Date().toISOString();
   return {
     ...base, ok: true, patientId,
@@ -469,6 +476,7 @@ async function claimsForPatient(request, env, ctx) {
     estimates: (estimates || []).filter(Boolean),
     ...(estimatesUnreadable ? { estimatesUnreadable: true } : {}),
     eligibilityChecks: eligibilityUnreadable ? null : (eligibility || []).filter(Boolean).sort((a, b) => String(b.at).localeCompare(String(a.at))),
+    stayPayers: stayPayersUnreadable ? null : (stayPayers || []).filter(Boolean).map((r) => stayPayerWithParties(r, ctx)),
     // P1.5: the payer list as a screen may see it, and each claim's payer rules as warnings only.
     payers: publicPayers(ctx.payers),
     payerWarnings: Object.fromEntries(claims.map((c) => [c.id, payerRuleWarnings(c, payerById(ctx.payers, c.payerId), { preAuths: preAuthorisations, now })])),

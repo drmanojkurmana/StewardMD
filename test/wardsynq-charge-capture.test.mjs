@@ -106,7 +106,7 @@ test("CHARGE CAPTURE WIDENED BILLING'S READ AND NOT ITS WRITE", () => {
    * #939 rests on. */
   assert.ok(cashier.read.includes("MedicationAdministration"));
   assert.ok(cashier.read.includes("DiagnosticReport"));
-  assert.deepEqual(cashier.write, ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck", "PackageAssignment"]);
+  assert.deepEqual(cashier.write, ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck", "PackageAssignment", "StayPayer"]);
   assert.ok(!cashier.write.includes("MedicationAdministration"), "reading a dose never becomes recording one");
   assert.ok(!cashier.write.includes("Condition"));
   // Still not the whole chart: the notes remain out of reach.

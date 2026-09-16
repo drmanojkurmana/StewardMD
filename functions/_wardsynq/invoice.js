@@ -23,7 +23,9 @@ import { openInvoice, postEvent, voidInvoice, reconciliationOf, receiptFor, rece
 import { validateCollection, applyAdapterResult } from "../../wardsynq/wardsynq-payment-methods.js";
 import { chargesForPatient } from "./charge-capture.js";
 import { submitPaymentViaAdapter } from "../../wardsynq/wardsynq-payment-adapter.js";
-import { gstForLines, gstSplit, financialYearOf, istDateOf, section34Deadline, validateBuyer, packageRoomComponent, GST_BASIS, SAC, ROOM_GST_RATE } from "../_region_in.js";
+import { resolveParties, partiesRecord } from "./payer-contracts.js";
+import { STAY_PAYER_TYPE, stayPayerIdFor } from "./stay-payer.js";
+import { gstForLines, gstSplit, financialYearOf, istDateOf, section34Deadline, packageRoomComponent, GST_BASIS, SAC, ROOM_GST_RATE } from "../_region_in.js";
 import { ADMISSION_CLASSES, OPEN } from "./migrate-inpatient.js";
 import { ASSIGNMENT_TYPE, applyPackage, packageFlags } from "./packages.js";
 
@@ -133,11 +135,11 @@ function withSplit(inv) {
   };
 }
 function summary(inv) {
-  return { package: inv.package || null, taxRegistration: inv.taxRegistration || null, documentNumber: inv.documentNumber || null, billOfSupplyNumber: inv.billOfSupplyNumber || null,
+  return { parties: inv.parties || null, package: inv.package || null, taxRegistration: inv.taxRegistration || null, documentNumber: inv.documentNumber || null, billOfSupplyNumber: inv.billOfSupplyNumber || null,
     placeOfSupply: inv.placeOfSupply || null, documents: documentsOf(inv), buyer: inv.buyer || null, einvoices: inv.einvoices || [], ...withSplit(inv), invoiceId: inv.id, patientId: inv.patientId, encounterId: inv.encounterId, currency: inv.currency, void: inv.void, voidReason: inv.voidReason, version: inv.version, receipts: receiptsFor(inv), ...reconciliationOf(inv) };
 }
 
-/** ctx: { migration, patientId, encounterId?, tariff?, at?, actorDeps, recordDeps } */
+/** ctx: { migration, patientId, encounterId?, tariff?, at?, gst?, payersNow?(), actorDeps, recordDeps } */
 async function raiseInvoice(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -235,6 +237,22 @@ async function raiseInvoice(request, env, ctx) {
   if (room && room.error) return { ...base, ok: false, status: 422, error: "room_tariff_missing", category: room.category, written: 0, detail: `This package covers room days in ${room.category}, which has no per-day room tariff on the Price list. GST cannot be worked out. Add the tariff before issuing this bill.` };
   const carved = !!(room && room.roomValue > 0);
 
+  /* THE PARTIES (gst-parties; payer-contracts.js). The stay's payer (stay-payer.js) names the payer contract; the
+   * patient, payer, insurer, TPA and GST recipient are resolved from it and copied onto the bill as they are now. The
+   * bill's buyer on its GST documents is the RESOLVED GST RECIPIENT, never the payer: the patient (no buyer) unless the
+   * contract makes the contracting party the recipient. Not knowing who settles the stay raises nothing. */
+  let stayPayer = null, payers = [];
+  if (encounterId) {
+    try { stayPayer = await svc.get(STAY_PAYER_TYPE, stayPayerIdFor(encounterId)); }
+    catch { return { ...base, ok: false, status: 502, error: "stay_payer_unreadable", detail: "Who settles this stay could not be read, so no bill was raised.", written: 0 }; }
+  }
+  if (stayPayer && stayPayer.payerRef) {
+    try { payers = typeof ctx.payersNow === "function" ? await ctx.payersNow() : []; }
+    catch { return { ...base, ok: false, status: 502, error: "payer_registry_unread", detail: "This hospital's payer list could not be read, so no bill was raised.", written: 0 }; }
+  }
+  const parties = resolveParties({ payerRef: stayPayer && stayPayer.payerRef, payers, gst: set });
+  if (parties.gstRecipient.warning === "recipient_details_incomplete") return { ...base, ...recipientIncomplete, written: 0 };
+
   const at = str(ctx.at) || new Date().toISOString();
   const id = `wsq-invoice-${slug(patientId)}-${slug(at)}`;
 
@@ -272,6 +290,8 @@ async function raiseInvoice(request, env, ctx) {
       ...(carved ? { roomGst: { days: room.days, groups: room.groups, taxable: room.taxable, tax: room.tax, method: room.method, fallback: room.fallback, capped: room.capped,
         unrecoverableGst: room.unrecoverableGst, gstTdsPossible: (set.gstTdsDeductorSchemes || []).includes(p.scheme) } } : {}) };
   }
+  ep.parties = { ...partiesRecord(parties, at), policyNumber: (stayPayer && stayPayer.policyNumber) || null };
+  if (parties.gstRecipient.buyer) ep.buyer = parties.gstRecipient.buyer;
   if (gst.applies) ep.placeOfSupply = set.placeOfSupply || "where_performed";
   if (gst.applies && str(ctx.gstin)) ep.taxRegistration = { kind: "GSTIN", id: str(ctx.gstin) };
   /* A TAX INVOICE CARRIES A CONSECUTIVE SERIAL NUMBER of at most 16 characters, unique for the financial year (Rule
@@ -281,8 +301,10 @@ async function raiseInvoice(request, env, ctx) {
   /* A bill with nothing taxed is a Bill of Supply and takes its number from the BOS series; anything taxed takes the
    * invoice series (a Tax Invoice, or an Invoice-cum-Bill of Supply when exempt lines are on it too). */
   if (gst.applies) {
-    try { ep.documentNumber = await nextDocumentNumber(ctx.recordDeps.repository, mig.tenantId, ep.lines.some(taxedLine) ? "INV" : "BOS", at, resolved.actor.id); }
-    catch (e) { return { ...base, ok: false, status: 502, error: "document_number_failed", detail: "No invoice number could be issued, so nothing was raised.", written: 0 }; }
+    try {
+      ep.documentNumber = await nextDocumentNumber(ctx.recordDeps.repository, mig.tenantId, ep.lines.some(taxedLine) ? "INV" : "BOS", at, resolved.actor.id);
+      await billOfSupplyFor(ep, ctx, at, resolved.actor.id);
+    } catch (e) { return { ...base, ok: false, status: 502, error: "document_number_failed", detail: "No invoice number could be issued, so nothing was raised.", written: 0 }; }
   }
 
   try {
@@ -467,27 +489,35 @@ async function postNoteRoute(request, env, ctx) {
 }
 const SECTION_34_PROVISO_FROM = "2025-10-01";
 
-/** ctx: { migration, invoiceId, buyer: { gstin, legalName, address1, location, pincode, stateCode, pos } | null }.
- *  An empty GSTIN clears the buyer: the bill is then to a person (B2C). */
-async function setBuyerRoute(request, env, ctx) {
-  const v = validateBuyer(ctx.buyer);
-  if (v.errors) return { mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null, ok: false, status: 422, error: "invalid_buyer", errors: v.errors, written: 0 };
-  const set = ctx.gst || {};
-  return transition(request, env, ctx, (inv, actorId) => setBuyer(inv, v.buyer, { actorId, at: at_(ctx) }), async (inv, actorId) => {
-    if (!v.buyer || inv.void || (inv.einvoices || []).some((x) => x && x.status === "ACT")) return null;
-    /* WHO RECEIVES A CASHLESS CLAIM (s.2(93)(a) CGST Act) is the hospital's setting, default the patient: an insurer, TPA
-     * or scheme is then only the payer, and the bill stays B2C. A stay on a scheme or insurer package is a cashless
-     * claim whatever the cashier chose. */
-    const payer = v.buyer.kind === "payer" || !!(inv.package && inv.package.scheme && inv.package.scheme !== "hospital");
-    if (payer && set.recipientOfCashlessClaims !== "payer") return { ok: false, status: 422, error: "payer_not_recipient",
-      detail: "Your GST settings treat the patient as the recipient of a cashless claim, so this bill stays a bill to the patient; the insurer, TPA or scheme is named as payer only. Nothing was changed." };
-    /* A registered buyer of a bill with taxed and exempt lines gets a separate Bill of Supply for the exempt ones, with
-     * its own number, issued once. */
-    const lines = inv.lines || [];
-    if (!inv.billOfSupplyNumber && str(inv.documentNumber) && lines.some(taxedLine) && lines.some((l) => !taxedLine(l))) {
-      try { inv.billOfSupplyNumber = await nextDocumentNumber(ctx.recordDeps.repository, ctx.migration.tenantId, "BOS", at_(ctx), actorId); }
-      catch { return { ok: false, status: 502, error: "document_number_failed", detail: "No Bill of Supply number could be issued, so the buyer was not saved." }; }
-    }
+const recipientIncomplete = { ok: false, status: 422, error: "recipient_details_incomplete",
+  detail: "The payer contract makes the contracting party the GST recipient, but its GSTIN, legal name, address, place, PIN code or state code is missing or not valid. Complete the contract on Admin, Integrations, Payers. Nothing was changed." };
+
+/* A registered buyer of a bill with taxed and exempt lines gets a separate Bill of Supply for the exempt ones, with its
+ * own number, issued once. Throws when no number could be issued. */
+async function billOfSupplyFor(inv, ctx, at, actorId) {
+  const lines = inv.lines || [];
+  if (!(inv.buyer && str(inv.buyer.gstin)) || inv.billOfSupplyNumber || !str(inv.documentNumber) || !lines.some(taxedLine) || !lines.some((l) => !taxedLine(l))) return;
+  inv.billOfSupplyNumber = await nextDocumentNumber(ctx.recordDeps.repository, ctx.migration.tenantId, "BOS", at, actorId);
+}
+
+/** ctx: { migration, invoiceId, payerRef ("" = self-pay), payers (the registry, already read), gst }.
+ *  Names who settles this bill and applies what the payer's contract says (gst-parties): the parties are copied onto the
+ *  bill and the buyer on its GST documents becomes the resolved GST recipient. Never once an IRN is active. */
+async function setPartiesRoute(request, env, ctx) {
+  const base = { mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null };
+  const parties = resolveParties({ payerRef: ctx.payerRef, payers: ctx.payers, gst: ctx.gst || null });
+  if (parties.payer && parties.payer.found === false) return { ...base, ok: false, status: 422, error: "payer_not_found", written: 0, detail: "That payer is not in this hospital's payer list (Admin, Integrations, Payers). Nothing was changed." };
+  if (parties.gstRecipient.warning === "recipient_details_incomplete") return { ...base, ...recipientIncomplete, written: 0 };
+  const at = at_(ctx);
+  return transition(request, env, ctx, (inv, actorId) => {
+    setBuyer(inv, parties.gstRecipient.buyer || null, { actorId, at });
+    inv.parties = { ...partiesRecord(parties, at), policyNumber: (inv.parties && inv.parties.policyNumber) || null };
+  }, async (inv, actorId) => {
+    if (inv.void || (inv.einvoices || []).some((x) => x && x.status === "ACT")) return null;   // the engine refuses these
+    const probe = { ...inv, buyer: parties.gstRecipient.buyer || null };
+    try { await billOfSupplyFor(probe, ctx, at, actorId); }
+    catch { return { ok: false, status: 502, error: "document_number_failed", detail: "No Bill of Supply number could be issued, so the parties were not saved." }; }
+    if (probe.billOfSupplyNumber) inv.billOfSupplyNumber = probe.billOfSupplyNumber;
     return null;
   });
 }
@@ -531,5 +561,5 @@ async function invoicesForPatient(request, env, ctx) {
 export {
   TYPE, raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff,
   voidInvoiceRoute, readInvoice, invoicesForPatient, stayForInvoice, invoicesForStay,
-  postNoteRoute, setBuyerRoute, nextDocumentNumber, summary as invoiceSummary, interStateOf, open_ as openInvoiceService, writeFailure as invoiceWriteFailure,
+  postNoteRoute, setPartiesRoute, nextDocumentNumber, summary as invoiceSummary, interStateOf, open_ as openInvoiceService, writeFailure as invoiceWriteFailure,
 };
