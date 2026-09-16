@@ -2,10 +2,10 @@
 .ps-overlay {
   --ps-ink: #14202b; --ps-muted: #5a7184; --ps-line: #d7dee3; --ps-bg: #f4f6f5; --ps-card: #ffffff;
   --ps-primary: #0e6e63; --ps-danger: #c0392b; --ps-x: #b6bfc7;
-  position: fixed; inset: 0; z-index: 74; display: none; background: var(--ps-bg);
+  position: fixed; inset: 0; z-index: 15000; display: none; background: var(--ps-bg);
   font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--ps-ink);
 }
-body.dark .ps-overlay { --ps-ink: #eceef2; --ps-muted: #9aa0ab; --ps-line: #2a2d34; --ps-bg: #0e0f12; --ps-card: #16181d; --ps-primary: #4fd1c5; }
+body.dark .ps-overlay, body.v3-dark .ps-overlay, html.dark .ps-overlay { --ps-ink: #eceef2; --ps-muted: #9aa0ab; --ps-line: #2a2d34; --ps-bg: #0e0f12; --ps-card: #16181d; --ps-primary: #4fd1c5; }
 .ps-overlay .material-symbols-outlined { font-family: 'Material Symbols Outlined'; line-height: 1; vertical-align: middle; }
 .ps-wrap { display: flex; flex-direction: column; height: 100%; }
 

@@ -264,10 +264,13 @@
     var el = D.getElementById("smdProtoSheet");
     if (!el) {
       el = D.createElement("div"); el.id = "smdProtoSheet"; el.className = "ps-overlay";
+      el.style.zIndex = "15000";
       D.body.appendChild(el);
       el.addEventListener("click", onClick);
       el.addEventListener("input", onInput);
       el.addEventListener("change", onChange);
+    } else {
+      el.style.zIndex = "15000";
     }
     return el;
   }
@@ -276,7 +279,7 @@
     st.protocol = protocol; st.patient = patient ? JSON.parse(JSON.stringify(patient)) : {};
     st.verify = {}; st.sig = null; st.editing = !(patient && patient.heightCm && patient.weightKg && patient.name);
     st.ctx = opts; st.onAssign = opts.onAssign || null;
-    var el = ensureEl(); el.style.display = "block"; if (D.body) D.body.classList.add("ps-open");
+    var el = ensureEl(); el.style.display = "block"; el.style.zIndex = "15000"; if (D.body) D.body.classList.add("ps-open");
     paint();
   }
   function open(protocolOrId, patient, opts) {

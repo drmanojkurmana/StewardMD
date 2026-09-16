@@ -1627,21 +1627,25 @@
   // chart so the dose engine can compute per-drug totals. Assign routes back through the same handoff event.
   function openProtocolSheet(ref) {
     if (!G.SMD_PROTOSHEET) { try { G.toast && G.toast("Protocol sheet unavailable."); } catch (e) {} return; }
-    var p = st.protocols[ref]; if (!p) return;
+    var p = st.protocols[ref] || ref;
     var c = st.ctx || {};
     var today = "";
     try { var d = new (G.Date)(); today = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); } catch (e2) {}
     var patient = {
       caseNo: c.caseNo || c.patientId || "", name: c.name || "", age: c.age || null, sex: c.sex || "",
       heightCm: c.heightCm || null, weightKg: c.weightKg || null,
-      diagnosis: c.diagnosis || st.guideline || "", intent: (asArr(p.intentOptions)[0] || ""), consultant: c.consultant || ""
+      diagnosis: c.diagnosis || st.guideline || "", intent: (asArr(p && p.intentOptions)[0] || ""), consultant: c.consultant || ""
     };
-    G.SMD_PROTOSHEET.open(p, patient, {
-      today: today,
-      onAssign: function (payload) {
-        try { if (D && D.dispatchEvent) D.dispatchEvent(new CustomEvent("smd-oncotree-select", { detail: { protocolId: ref, template: p, patient: payload.patient, protocolSheet: payload } })); } catch (e3) {}
-      }
-    });
+    try {
+      G.SMD_PROTOSHEET.open(p, patient, {
+        today: today,
+        onAssign: function (payload) {
+          try { if (D && D.dispatchEvent) D.dispatchEvent(new CustomEvent("smd-oncotree-select", { detail: { protocolId: ref, template: (typeof p === "object" ? p : null), patient: payload.patient, protocolSheet: payload } })); } catch (e3) {}
+        }
+      });
+    } catch (err) {
+      try { G.toast && G.toast("Error opening protocol sheet: " + (err && err.message ? err.message : err)); } catch (e4) {}
+    }
   }
 
   // Hand off to the EXISTING oncology workflow. Emits a CustomEvent the host (opd-emr / onco home) can

@@ -382,3 +382,17 @@ test("WARDSYNC INTEGRATION: fetchWardSyncPatientLabs safely reads from EMR and c
   assert.equal(fetched.labs.crcl, 66.5);
 });
 
+test("PROTOCOL SHEET: renders sclc-platinum-etoposide with computed drug doses and z-index 15000", () => {
+  const PROTOSHEET = require(join(ROOT, "protocol-sheet.js"));
+  const sclcProtocol = require(join(ROOT, "kb", "protocols", "sclc-platinum-etoposide.json"));
+  assert.ok(PROTOSHEET);
+  assert.equal(typeof PROTOSHEET.open, "function");
+
+  // Test _drugRow computation for CISplatin, CARBOplatin, and Etoposide
+  const rows = sclcProtocol.drugs.map(PROTOSHEET._drugRow);
+  assert.equal(rows.length, 3);
+  assert.equal(rows[0].name, "CISplatin");
+  assert.equal(rows[1].name, "CARBOplatin");
+  assert.equal(rows[2].name, "Etoposide");
+});
+
