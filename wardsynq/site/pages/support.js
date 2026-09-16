@@ -41,6 +41,7 @@
       case "post_mortem_report": return T(c, "site.support.miss.pmReport", "the post-mortem report");
       case "post_mortem_decision": return T(c, "site.support.miss.pmDecision", "the post-mortem decision");
       case "belongings_handed_over": return T(c, "site.support.miss.belongings", "the belongings handed over");
+      case "inquest_papers": return T(c, "site.support.miss.inquest", "the inquest or Magistrate inquiry papers recorded on the medico-legal case (BNSS ss.194, 196)");
       default: return code;
     }
   }
@@ -472,9 +473,10 @@
   function mortuaryHtml(c, b, S) {
     if (b == null) return loading(c, T(c, "site.support.mortuaryRegister", "the mortuary register"));
     if (!b.ok) return failed(c, T(c, "site.support.mortuaryRegister", "the mortuary register")) + refusalHtml(c, b);
+    var warn = (b.warnings || []).map(function (w) { return '<div class="msg err">' + EN(c, c.esc(w)) + "</div>"; }).join("");
     var free = b.chambers.filter(function (x) { return !x.caseId; }).map(function (x) { return [E(c, x.chamber), EN(c, E(c, x.chamber))]; });
     var chamberOpts = [["", c.esc(T(c, "site.support.noChamber", "No chamber yet"))]].concat(free);
-    var h = "<h3>" + c.esc(T(c, "site.support.chambers", "Cold chambers")) + "</h3>" + (b.chambers.length ? "<p>" + b.chambers.map(function (x) { return pill(x.caseId ? "warn" : "ok", EN(c, E(c, x.chamber)) + " " + (x.caseId ? c.esc(T(c, "site.support.occupied", "occupied")) : c.esc(T(c, "site.support.free", "free")))); }).join(" ") + "</p>" : '<div class="msg note">' + TS(c, "site.support.noChambers", "This hospital has not listed its cold chambers. An administrator lists them below.") + "</div>");
+    var h = warn + "<h3>" + c.esc(T(c, "site.support.chambers", "Cold chambers")) + "</h3>" + (b.chambers.length ? "<p>" + b.chambers.map(function (x) { return pill(x.caseId ? "warn" : "ok", EN(c, E(c, x.chamber)) + " " + (x.caseId ? c.esc(T(c, "site.support.occupied", "occupied")) : c.esc(T(c, "site.support.free", "free")))); }).join(" ") + "</p>" : '<div class="msg note">' + TS(c, "site.support.noChambers", "This hospital has not listed its cold chambers. An administrator lists them below.") + "</div>");
     h += "<h3>" + c.esc(T(c, "site.support.awaiting", "Deaths recorded, body not yet received")) + "</h3>" + (b.awaiting.length ? '<div class="row">' +
       field(c, c.esc(T(c, "site.support.patient", "Patient")), '<select id="moPat">' + opts(b.awaiting.map(function (p) { return [E(c, p.patientId), EN(c, E(c, (p.name || "") + " " + (p.mrn || "") + ", " + String(p.deceasedAt || "").slice(0, 16).replace("T", " ")))]; }), "") + "</select>") +
       field(c, c.esc(T(c, "site.support.broughtBy", "Brought by")), '<input id="moBrought">') + field(c, c.esc(T(c, "site.support.identifiedBy", "Identified against the wristband by")), '<input id="moIdent">') +

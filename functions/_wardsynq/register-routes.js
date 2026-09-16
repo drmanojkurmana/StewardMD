@@ -10,33 +10,37 @@
  * Forms 3E, 3J and 3-I with NDPS. `kind` names which one, and only a kind of that door's family is accepted.
  *
  *   GET  register-schema        ?kind=                                              any member (form definitions, no data)
- *   GET  register-formf         ?period= | ?id= | &format=csv|monthly|print | &kind=formfprint|statreturn   register.pcpndt
- *   POST register-formf         kind formf | formfprint | statreturn                 register.pcpndt
+ *   GET  register-formf         ?period= | ?id= | &format=csv|monthly|print | &kind=formfprint|statreturn   register.pcpndt, or register.pcpndt.read
+ *   POST register-formf         kind formf | formfprint | statreturn                 register.pcpndt (statreturn also register.pcpndt.read)
  *   GET  register-mtp           ?period= | ?id= | &format=csv (with a legal authority)|form2 | &kind=mtpboard|mtpforme|statreturn   register.mtp
  *   POST register-mtp           kind mtp | mtpboard | mtpforme | statreturn          register.mtp
  *   GET  register-vital         ?kind=birth|death|stillbirth|mccd &period= | ?id= | &format=csv | ?pending=1 | ?prefill=  register.records
  *   POST register-vital         birth, death, still birth                           register.records
  *   GET  register-mccd          ?patientId=                                         emr.treat (the certifying doctor)
  *   POST register-mccd                                                               emr.treat
- *   GET  register-mlc           ?period= | ?id= | &format=csv | &kind=dyingdecl     register.records
- *   POST register-mlc           kind mlc | dyingdecl                                 mlc.record, or register.records
- *   GET  mlc-patient            ?patientId=                                         mlc.record, or register.records
+ *   GET  register-mlc           ?period= | ?id= | &format=csv|kerala (with a requisition) | &kind=dyingdecl|pocsotask   register.records
+ *   POST register-mlc           kind mlc | dyingdecl | pocsotask                     mlc.record, or register.records
+ *   GET  mlc-patient            ?patientId=                                         mlc.record, or register.records (sexual offence cases: treating team)
  *   GET  mlc-flag               ?patientId=                                         emr.view (yes/no and the MLC number, nothing else)
  *   GET  register-notification  ?week= | ?id= | &format=csv                         register.ihip
  *   POST register-notification                                                       emr.treat, or register.ihip
  *   GET  notifiable-prompts     ?patientId=                                         emr.view
- *   GET  register-ndps          ?from=&to= | ?view=annual&year= | ?view=form3e&patientId= | ?view=list&kind=   register.ndps
- *   POST register-ndps          a shift count, or kind form3e | form3esign | form3j | form3i | statreturn     register.ndps
+ *   GET  register-ndps          ?from=&to= | ?view=annual&year= | ?view=form3e&patientId= | ?view=list&kind= | ?view=h1|schedx   register.ndps, or register.ndps.read
+ *                               ?view=patient&patientId=                            also med.administer (the nurse: that patient's rows only)
+ *   POST register-ndps          a shift count, or kind form3e | form3esign | form3j | form3i | statreturn | form3hclose | quarantine | homecare | schedxsupply   register.ndps
  */
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { REGISTERS, saveEntry, listEntries, entryHistory, csvFor, schemaOf, mtpFormII, typeOf, entryHash, FORMF_DECLARATION, FREE_TREATMENT, mlcClocks, FOETAL_SEX, MAX_LIST } from "./registers.js";
-import { ndpsRegister, recordNdpsCount, ndpsAnnual, form3eView } from "./controlled-drugs.js";
+import { REGISTERS, saveEntry, listEntries, entryHistory, csvFor, schemaOf, mtpFormII, typeOf, entryHash, FORMF_DECLARATION, FREE_TREATMENT, mlcClocks, FOETAL_SEX, MAX_LIST,
+  RESTRICTED_MLC, pocsoTaskIdFor, pocsoTaskClock, keralaMlcCsv, OBSTETRIC } from "./registers.js";
+import { ndpsRegister, recordNdpsCount, ndpsAnnual, form3eView, form3hDayNumbers, rule65Register, ndpsPatientView, isControlledDrug } from "./controlled-drugs.js";
 import { notifiablePrompts, weeklyExport } from "./notifiable.js";
-import { registerSettings, NOTES, formFMonthlyClock, mtpFormIIClock, rbdClock, pcpndtCentreAlerts } from "./register-settings.js";
+import { registerSettings, NOTES, formFMonthlyClock, mtpFormIIClock, rbdClock, pcpndtCentreAlerts, mtpRetentionEnd, form3hClosureLate } from "./register-settings.js";
+import { recordMovement } from "./stock.js";
+import { quantityOf } from "./pharmacy-dispense.js";
 import { hospitalToday } from "./expected-discharge.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -49,8 +53,8 @@ const SUBS = new Set(["register-schema", "register-formf", "register-mtp", "regi
 /* The records each door keeps, the first being its own register. */
 const FAMILY = {
   "register-formf": ["formf", "formfprint", "statreturn"], "register-mtp": ["mtp", "mtpboard", "mtpforme", "statreturn"],
-  "register-mccd": ["mccd"], "register-mlc": ["mlc", "dyingdecl"], "register-notification": ["notification"],
-  "register-ndps": ["form3e", "form3esign", "form3j", "form3i", "statreturn"],
+  "register-mccd": ["mccd"], "register-mlc": ["mlc", "dyingdecl", "pocsotask"], "register-notification": ["notification"],
+  "register-ndps": ["form3e", "form3esign", "form3j", "form3i", "statreturn", "form3hclose", "quarantine", "homecare", "schedxsupply"],
 };
 /* Which returns each custodian files. */
 const RETURNS_FOR = { "register-formf": ["formf-monthly"], "register-mtp": ["mtp-form2"], "register-ndps": ["ndps-3j", "ndps-3i"] };
@@ -86,7 +90,6 @@ async function patientOf(svc, patientId, mrn) {
 /* ------------------------------------------------------------------------------------------------ PURE helpers */
 
 /** PURE. Is this imaging request an obstetric ultrasound, the procedure Form F exists for? Named, never guessed wide. */
-const OBSTETRIC = /\b(obstetric|obstetrical|antenatal|ante-natal|pregnan\w*|foetal|fetal|foetus|fetus|nt[- ]scan|nuchal|anomaly scan|growth scan|dating scan|gestation\w*|biophysical profile|umbilical artery doppler)\b/i;
 const ULTRASOUND = /\b(ultrasound|ultrasonography|usg|sonography|sonogram|doppler|\bus\b)\b/i;
 function isObstetricUltrasound(sr, modality) {
   const text = `${str(sr && sr.display)} ${str(sr && sr.code)} ${str(sr && sr.name)}`;
@@ -162,6 +165,8 @@ async function registerRoute(request, env, ctx) {
   if (sub === "register-ndps" && method === "GET") {
     if (q.view === "annual") return ndpsAnnual(request, env, { ...ctx, cfg: ctx.wsqCfg, year: q.year });
     if (q.view === "form3e") return form3eView(request, env, { ...ctx, cfg: ctx.wsqCfg, patientId: q.patientId });
+    if (q.view === "h1" || q.view === "schedx") return rule65Register(request, env, { ...ctx, cfg: ctx.wsqCfg, from: q.from, to: q.to }, q.view);
+    if (q.view === "patient") return ndpsPatientView(request, env, { ...ctx, cfg: ctx.wsqCfg, patientId: q.patientId });
     if (q.view === "list") {
       const kind = str(q.kind);
       if (!FAMILY[sub].includes(kind)) return { ok: false, status: 422, error: "unknown_register" };
@@ -191,7 +196,22 @@ async function registerRoute(request, env, ctx) {
       patientId = p.patient.id;
     }
     if (!patientId) return { ok: false, status: 422, error: "patient_required" };
-    return listEntries({ ...ctx, kind: "mlc", patientId });
+    const r = await listEntries({ ...ctx, kind: "mlc", patientId });
+    if (!r.ok) return r;
+    /* BNS s.72, POCSO Act s.23 (legal review D.4.8): a sexual offence or POCSO case opens only to the treating team, the
+     * register's keepers and the people the hospital names. To anyone else it is listed as withheld, and that is audited. */
+    const entries = [];
+    let withheld = 0;
+    for (const e of r.entries) {
+      const ok = await mlcReadable(ctx, e, settings);
+      if (ok === null) return { ok: false, status: 502, error: "record_read_failed", message: "Who may open this medico-legal case could not be checked, so the cases were not shown." };
+      if (ok) entries.push(e); else { withheld++; entries.push(withheldCase(e)); }
+    }
+    if (withheld) {
+      try { await ctx.recordDeps.repository.auditOnly(ctx.migration.tenantId, { ts: new Date().toISOString(), actor: str(ctx.actor && ctx.actor.id), connectorId: "wardsynq-registers", action: "mlc.restricted_withheld", outcome: "refused", scope: { register: "mlc", withheld }, patientRefHash: null }); }
+      catch { return { ok: false, status: 502, error: "register_read_failed", message: "The register read could not be audited, so it was not shown." }; }
+    }
+    return { ...r, entries };
   }
 
   if (sub === "notifiable-prompts" && method === "GET") {
@@ -220,15 +240,28 @@ async function registerRoute(request, env, ctx) {
   if (method === "GET") {
     if (kind === "statreturn") return readList(ctx, kind, q, null, returnsOnly);
     if (kind === "formf") return formFRead(ctx, q, settings, today);
+    if (sub === "register-mtp" && (kind === "mtpboard" || kind === "mtpforme")) return withRetention(await readList(ctx, kind, q));
     if (kind === "mtp") return mtpRead(ctx, q, settings, today);
+    /* Legal review D.4.8: an export of the medico-legal register goes to the police or a court only on a recorded
+     * requisition; the officer or court, its reference and date are required and audited. */
+    if (sub === "register-mlc" && !str(q.id) && (q.format === "csv" || q.format === "kerala")) return mlcExport(ctx, kind, q, settings);
+    if (kind === "pocsotask") {
+      const now = Date.now();
+      return readList(ctx, kind, q, (r) => ({ entries: r.entries.map((e) => ({ ...e, clock: pocsoTaskClock(e, now) })) }));
+    }
     if (kind === "mlc") {
       const now = Date.now();
+      /* The POCSO intimation tasks other registers open are part of the same dashboard. */
+      const tasks = str(q.id) ? null : await listEntries({ ...ctx, kind: "pocsotask" });
+      if (tasks && !tasks.ok) return tasks;
       return readList(ctx, kind, q, (r) => {
         const entries = r.entries.map((e) => ({ ...e, clocks: mlcClocks(e, now, settings) }));
         const all = entries.flatMap((e) => e.clocks);
+        const taskClocks = tasks.entries.map((e) => pocsoTaskClock(e, now)).filter(Boolean);
         return { entries, clockSummary: { policeIntimationPending: all.filter((c) => c.kind === "police-intimation").length, pocsoReportDue: all.filter((c) => c.kind === "pocso-report").length,
           ioReportDue: all.filter((c) => c.kind === "io-report").length, inquestPapersPending: all.filter((c) => c.kind === "inquest-papers").length,
-          overdue: all.filter((c) => c.state === "overdue").length }, medleapr: settings.mlc.medleapr };
+          pocsoTasksOpen: taskClocks.length, overdue: all.filter((c) => c.state === "overdue").length + taskClocks.filter((c) => c.state === "overdue").length },
+        medleapr: settings.mlc.medleapr, stateFormat: settings.mlc.stateFormat };
       });
     }
     if (kind === "notification" && str(q.week)) return weeklyExport(ctx, q.week, q.format);
@@ -259,6 +292,18 @@ async function registerRoute(request, env, ctx) {
     serverFields = { estimate: row.estimate, revisedEstimate: row.revisedEstimate, openingStock: row.openingStock, procured: row.procured, disbursed: row.disbursed, closingStock: row.closingStock };
     if (!correcting) entryId = `reg-form3i-${year}-${slug(row.drug)}-${slug(row.unit)}`;
   }
+  if (kind === "form3hclose") {
+    /* Form 3H closure (legal review F.4.3): the day's numbers are the ledger's, worked out now; a day not yet begun is not
+     * closed; the lateness is fixed by the first closure and kept by a correction. */
+    const prior = correcting ? await ctx.recordDeps.repository.latest(ctx.migration.tenantId, typeOf(kind), str(body.id)).catch(() => undefined) : null;
+    if (prior === undefined) return { ok: false, status: 502, error: "record_read_failed", message: "The closure could not be read, so nothing was saved.", written: 0 };
+    const at = prior ? prior.fields : fields;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(str(at.day)) || str(at.day) > today) return { ok: false, status: 422, error: "invalid_fields", problems: ["day: a day that has begun, as YYYY-MM-DD"], written: 0 };
+    const n = await form3hDayNumbers(request, env, { ...ctx, cfg: ctx.wsqCfg }, { day: at.day, drug: at.drug, unit: at.unit, location: at.location });
+    if (n.error) return { ...n.error, written: 0 };
+    serverFields = { ...n.numbers, ...(correcting ? {} : { closedLate: form3hClosureLate(str(at.day), new Date().toISOString(), ctx.clock && ctx.clock.offsetMinutes) ? "yes" : "no" }) };
+    if (!correcting) entryId = `reg-form3hclose-${slug(at.day)}-${slug(at.drug)}-${slug(at.unit)}-${slug(at.location || "main")}`;
+  }
   if (!correcting && sub === "register-ndps" && def.patient === "required") {
     /* The pharmacy keeps the NDPS register but does not read charts (its record grant has no Patient). The patient is
      * named by id, from the supply on the register, and confirmed to exist in this hospital's store; nothing else is
@@ -269,7 +314,7 @@ async function registerRoute(request, env, ctx) {
     catch { return { ok: false, status: 502, error: "record_read_failed", message: "The patient could not be checked, so nothing was saved.", written: 0 }; }
     if (!p) return { ok: false, status: 404, error: "patient_not_found", message: "No such patient in this hospital.", written: 0 };
     patientId = p.id;
-    entryId = kind === "form3e" ? `reg-form3e-${slug(patientId)}` : `reg-form3esign-${slug(fields.dispenseId)}`;
+    entryId = { form3e: `reg-form3e-${slug(patientId)}`, form3esign: `reg-form3esign-${slug(fields.dispenseId)}`, homecare: `reg-homecare-${slug(fields.dispenseId)}`, schedxsupply: `reg-schedx-${slug(fields.dispenseId)}` }[kind];
   } else if (!correcting && def.patient !== "none" && !(def.patient === "optional" && !str(body.patientId) && !str(body.mrn))) {
     const { svc, error } = await openSvc(request, env, ctx);
     if (error) return { ...error, written: 0 };
@@ -298,12 +343,39 @@ async function registerRoute(request, env, ctx) {
     if (kind === "form3e") entryId = `reg-form3e-${slug(patientId)}`;
     if (kind === "form3esign") entryId = `reg-form3esign-${slug(fields.dispenseId)}`;
   }
+  /* A sexual offence or POCSO case is corrected only by those who may open it (legal review D.4.8). */
+  if (correcting && sub === "register-mlc") {
+    let prior;
+    try { prior = await ctx.recordDeps.repository.latest(ctx.migration.tenantId, typeOf(kind), str(body.id)); }
+    catch { return { ok: false, status: 502, error: "record_read_failed", message: "The case could not be read, so nothing was saved.", written: 0 }; }
+    const may = prior ? await mlcReadable(ctx, prior, settings) : true;
+    if (may === null) return { ok: false, status: 502, error: "record_read_failed", message: "Who may open this case could not be checked, so nothing was saved.", written: 0 };
+    if (!may) return { ok: false, status: 403, error: "restricted_case", message: "A sexual offence or POCSO case is opened only by its treating team, the register's keepers and the people the hospital names (BNS s.72, POCSO Act s.23). Nothing was saved.", written: 0 };
+  }
+  let returned = null;
+  if (kind === "homecare") {
+    const h = await homeCarePrepare(request, env, ctx, { correcting, id: body.id, patientId, fields });
+    if (h.error) return { ...h.error, written: 0 };
+    serverFields = h.serverFields;
+    returned = h.movement;
+  }
   const r = await saveEntry({ ...ctx, kind, id: body.id, entryId, expectedVersion: body.expectedVersion, reason: body.reason,
     patientId, encounterId, links, fields, serverFields, idempotencyKey: body.idempotencyKey });
-  if (!r.ok) return r;
+  if (!r.ok) {
+    if (r.entry && sub === "register-mlc" && (await mlcReadable(ctx, r.entry, settings)) !== true) delete r.entry;
+    /* The unused quantity was received back into stock, but the home-care entry was not saved: said, never hidden. */
+    if (returned) return { ...r, partial: true, movementId: returned, written: 1, message: `The unused quantity was received back into stock (movement ${returned}), but the home-care entry was not saved: ${r.message || r.error}. Save it again; the receipt is not repeated.` };
+    return r;
+  }
   const out = { ...r, submission: def.internal ? undefined : SUBMISSION };
   if (kind === "mlc" && FREE_TREATMENT.includes(r.entry.fields.category)) out.freeTreatment = "BNSS s.397: first aid and medical treatment are free of cost for this case, and the police are informed immediately. Invoices for this patient are refused while the case is open.";
-  if (kind === "mtp" && Number(r.entry.fields.age) < 18 && r.entry.fields.pocsoIntimation !== "intimated" && r.entry.fields.pocsoIntimation !== "identity-withheld") out.pocso = "A minor: intimation under POCSO Act s.19(1) is still to be made and recorded.";
+  if (kind === "mtp" && Number(r.entry.fields.age) < 18) {
+    /* Legal review C.4.6: the intimation is a task on the medico-legal register, opened with this entry. */
+    const task = (r.opened || []).find((x) => x.kind === "pocsotask") || await ctx.recordDeps.repository.latest(ctx.migration.tenantId, typeOf("pocsotask"), pocsoTaskIdFor(r.entry.id)).catch(() => null);
+    if (!task || !task.complete) out.pocso = r.opened && r.opened.length ? "A minor: a POCSO intimation task (POCSO Act s.19(1)) is now open on the medico-legal register, due within 24 hours. The intimation is recorded there."
+      : "A minor: the POCSO intimation task (POCSO Act s.19(1)) on the medico-legal register is still open.";
+  }
+  if (out.opened) out.opened = out.opened.map((x) => ({ register: x.kind, id: x.id }));
   if (kind === "mccd" && r.entry.fields.mannerOfDeath && r.entry.fields.mannerOfDeath !== "natural") {
     /* A manner of death other than natural is a medico-legal case (legal review E.4.6): say so if none is open. */
     const mlc = await listEntries({ ...ctx, kind: "mlc", patientId: r.entry.patientId });
@@ -370,10 +442,128 @@ async function mtpRead(ctx, q, settings, today) {
     } catch { return { ok: false, status: 502, error: "register_read_failed", message: "The export could not be audited, so it was not produced." }; }
     return { ...csvResponse("mtp", r.entries, q.period), authority };
   }
-  return readList(ctx, "mtp", q, (r) => ({
-    entries: r.entries.map((e) => ({ ...e, flags: { formICertifiedLate: e.fields.formICertifiedLate === true, pocsoPending: Number(e.fields.age) < 18 && !["intimated", "identity-withheld"].includes(e.fields.pocsoIntimation) } })),
+  if (str(q.id)) return withRetention(await readList(ctx, "mtp", q));
+  /* The POCSO task of each minor's entry, read as a check (its id is derived from the entry), not as a register read. */
+  let tasks;
+  try { tasks = new Map(((await ctx.recordDeps.repository.latestByType(ctx.migration.tenantId, typeOf("pocsotask"), MAX_LIST, { newest: true })) || []).map((t) => [t.id, t])); }
+  catch { return { ok: false, status: 502, error: "register_read_failed", message: "The POCSO intimation tasks could not be read. Do not read this register as having none pending." }; }
+  return withRetention(await readList(ctx, "mtp", q, (r) => ({
+    entries: r.entries.map((e) => {
+      const task = Number(e.fields.age) < 18 ? tasks.get(pocsoTaskIdFor(e.id)) : null;
+      return { ...e, flags: { formICertifiedLate: e.fields.formICertifiedLate === true, pocsoPending: Number(e.fields.age) < 18 && !(task && task.complete) } };
+    }),
     form2: mtpFormIIClock(prevPeriod(today), settings, today, null), formIIRecipient: settings.mtp.formIIRecipient,
-  }));
+  })));
+}
+
+/* MTP Regulations 2003 reg 5 (legal review C.4.9): each entry shows the date its retention ends. Nothing is destroyed
+ * automatically and WardSynQ deletes nothing; after that date a custodian may destroy it only by hand, with a record. */
+function withRetention(r) {
+  if (!r || !r.ok) return r;
+  const end = (e) => mtpRetentionEnd(e.eventDate, e.writtenBy && e.writtenBy.at);
+  const note = "Nothing is deleted. After this date the custodian may destroy the entry only by hand, with a destruction record naming who, when, which serials and that no legal hold applies.";
+  if (r.entry) return { ...r, retentionEnd: end(r.entry), retentionNote: note };
+  return { ...r, entries: (r.entries || []).map((e) => ({ ...e, retentionEnd: end(e) })), retentionNote: note };
+}
+
+/* ------------------------------------------------------------------------------------------------ medico-legal access */
+
+/**
+ * May the signed-in person open this medico-legal case? BNS s.72 and POCSO Act s.23 (legal review D.4.8): a sexual offence
+ * or POCSO case opens only to the register's keepers (ctx.mlcKeeper: register.records), the doctor who recorded it or last
+ * wrote it, the doctor the stay is admitted under (Encounter.attendingId), and the people the hospital names
+ * (registers.mlc.restrictedReaders, by staff id or email). Any other case opens as before. null: could not be checked.
+ */
+async function mlcReadable(ctx, entry, settings) {
+  if (!entry || !entry.fields || !RESTRICTED_MLC.includes(entry.fields.category) || ctx.mlcKeeper === true) return true;
+  const me = [str(ctx.actor && ctx.actor.id), str(ctx.actor && ctx.actor.email)].map((x) => x.toLowerCase()).filter(Boolean);
+  if (!me.length) return false;
+  if ([entry.recordedBy, entry.writtenBy && entry.writtenBy.id].some((x) => me.includes(str(x).toLowerCase()))) return true;
+  if ((settings.mlc.restrictedReaders || []).some((x) => me.includes(x))) return true;
+  if (!entry.encounterId) return false;
+  try {
+    const enc = await ctx.recordDeps.repository.latest(ctx.migration.tenantId, "Encounter", entry.encounterId);
+    return !!(enc && enc.attendingId && me.includes(str(enc.attendingId).toLowerCase()));
+  } catch { return null; }
+}
+/** What a withheld case shows: that one exists, its number and date. Not its category, history or examination. */
+const withheldCase = (e) => ({ id: e.id, kind: e.kind, serial: e.serial, eventDate: e.eventDate, patientId: e.patientId, restricted: true,
+  message: "A restricted medico-legal case (BNS s.72, POCSO Act s.23). It opens to its treating team, the register's keepers and the people the hospital names." });
+
+/** The medico-legal register exported to the police or a court: only on a recorded requisition, audited (D.4.8). kerala:
+ * the Kerala DHS Medico-legal Register's columns, when the hospital keeps that state format (D.4.1). */
+async function mlcExport(ctx, kind, q, settings) {
+  const requisition = { from: str(q.requisitionFrom), reference: str(q.requisitionRef), date: str(q.requisitionDate) };
+  if (requisition.from.length < 3 || requisition.reference.length < 3 || !/^\d{4}-\d{2}-\d{2}$/.test(requisition.date)) {
+    return { ok: false, status: 422, error: "requisition_required", message: "The medico-legal register leaves the hospital only on a requisition. Name the police officer or court, the requisition reference and its date." };
+  }
+  if (q.format === "kerala" && (kind !== "mlc" || settings.mlc.stateFormat !== "kerala")) return { ok: false, status: 422, error: "not_this_format", message: "The Kerala format export is for the medico-legal register of a hospital that keeps that state format (Register settings)." };
+  const r = await listEntries({ ...ctx, kind, period: q.period, from: q.from, to: q.to });
+  if (!r.ok) return r;
+  let people = null;
+  try {
+    if (q.format === "kerala") {
+      people = new Map();
+      for (const pid of new Set(r.entries.map((e) => e.patientId).filter(Boolean))) {
+        const p = await ctx.recordDeps.repository.latest(ctx.migration.tenantId, "Patient", pid);
+        const dob = str(p && p.dob);
+        const age = /^\d{4}-\d{2}-\d{2}/.test(dob) ? Math.floor((Date.now() - Date.parse(dob.slice(0, 10) + "T00:00:00Z")) / (365.25 * 86400000)) : null;
+        people.set(pid, { name: p ? p.name || "" : "", age, sex: p ? p.sex || "" : "", address: "" });
+      }
+    }
+    await ctx.recordDeps.repository.auditOnly(ctx.migration.tenantId, { ts: new Date().toISOString(), actor: str(ctx.actor && ctx.actor.id), connectorId: "wardsynq-registers", action: "register.export", outcome: "ok",
+      scope: { register: kind, format: q.format, period: str(q.period) || null, rows: r.entries.length, requisition }, patientRefHash: null });
+  } catch { return { ok: false, status: 502, error: "register_read_failed", message: "The export could not be read or audited, so it was not produced." }; }
+  const base = q.format === "kerala"
+    ? { ok: true, register: kind, format: "kerala", filename: `mlc-kerala-${str(q.period) || "all"}.csv`, csv: keralaMlcCsv(r.entries, people), rows: r.entries.length, submission: SUBMISSION }
+    : csvResponse(kind, r.entries, q.period);
+  return { ...base, requisition, ...(r.truncated ? { truncated: true, truncatedWarning: r.truncatedWarning } : {}) };
+}
+
+/* ------------------------------------------------------------------------------------------------ NDPS home care */
+
+/**
+ * The home-care entry's server fields (F.4.5, r.52W): the drug and quantity out are the supply's; the unused quantity
+ * brought back is a receipt (r.52V(2)), written to the stock ledger once, before the entry, and named on it. A correction
+ * that already names its receipt never writes another. Returns { serverFields, movement } or { error }.
+ */
+async function homeCarePrepare(request, env, ctx, a) {
+  const repo = ctx.recordDeps.repository, tenantId = ctx.migration.tenantId;
+  let prior = null, dispense;
+  try {
+    if (a.correcting) prior = await repo.latest(tenantId, typeOf("homecare"), str(a.id));
+    dispense = await repo.latest(tenantId, "MedicationDispense", str(prior ? prior.fields.dispenseId : a.fields.dispenseId));
+  } catch { return { error: { ok: false, status: 502, error: "record_read_failed", message: "The supply could not be read, so nothing was saved." } }; }
+  const pid = prior ? prior.patientId : a.patientId;
+  if (!dispense || dispense.patientId !== pid) return { error: { ok: false, status: 422, error: "invalid_fields", problems: ["dispenseId: no such supply to this patient"] } };
+  if (!isControlledDrug(ctx.wsqCfg, dispense.drug, dispense.drugCode)) return { error: { ok: false, status: 422, error: "invalid_fields", problems: ["dispenseId: that supply is not of a controlled drug"] } };
+  const q = quantityOf(dispense.quantity);
+  if (!q) return { error: { ok: false, status: 422, error: "invalid_fields", problems: ["dispenseId: the supply has no quantity, so the unused quantity cannot be checked"] } };
+  const serverFields = { drug: str(dispense.drug) || str(dispense.drugCode), unit: q.unit, quantityOut: q.value };
+  const back = Number(a.fields.quantityReturned);
+  if (a.fields.quantityReturned !== undefined && a.fields.quantityReturned !== "" && Number.isFinite(back) && back > q.value) return { error: { ok: false, status: 422, error: "invalid_fields", problems: [`quantityReturned: more than the ${q.value} ${q.unit} taken out`] } };
+  if (prior && prior.fields.returnMovementId) return { serverFields };
+  if (!(Number.isFinite(back) && back > 0) || !str(a.fields.returnedOn)) return { serverFields };
+  const m = await recordMovement(request, env, { ...ctx, kind: "receipt", code: str(dispense.drugCode) || str(dispense.drug), display: str(dispense.drug) || str(dispense.drugCode), quantity: { value: back, unit: q.unit },
+    reason: "Unused quantity returned from home care (NDPS Rules r.52V(2), r.52W)", receivedFrom: "Returned unused from home care", documentNo: `home care ${str(dispense.id).slice(0, 60)}`,
+    controlled: true, rmi: null, estimateCheck: null, idempotencyKey: `homecare-return-${str(dispense.id)}` });
+  if (!m.ok) return { error: { ...m, message: m.detail || m.message || "The unused quantity could not be received back into stock, so nothing was saved." } };
+  return { serverFields: { ...serverFields, returnMovementId: m.movementId }, movement: m.movementId };
+}
+
+/* ------------------------------------------------------------------------------------------------ PCPNDT worklist flag */
+
+/** The worklist's Form F flag for an obstetric ultrasound still to be done (legal review B.4.1, B.4.3): null when Form F
+ * does not apply or is complete; otherwise what is missing. A Form F that cannot be read is said so, never passed. */
+async function formFFlag(ctx, sr, modality) {
+  if (!isObstetricUltrasound(sr, modality)) return null;
+  let entry;
+  try { entry = await ctx.recordDeps.repository.latest(ctx.migration.tenantId, typeOf("formf"), formFIdFor(sr.id)); }
+  catch { return { state: "unreadable" }; }
+  if (!entry) return { state: "no-form-f" };
+  if (!(entry.fields && entry.fields.womanDeclaration && entry.fields.declarationDate && entry.fields.declarationTime)) return { state: "no-declaration", missing: entry.missing || [] };
+  if (!entry.complete) return { state: "incomplete", missing: entry.missing || [] };
+  return null;
 }
 
 async function vitalPendingOrPrefill(request, env, ctx, kind, q, today) {
@@ -542,5 +732,5 @@ async function mtpNameMask(ctx, canMtp, sub, response) {
   return out;
 }
 
-export { SUBS as REGISTER_SUBS, registerRoute, formFGate, isObstetricUltrasound, formFIdFor, prefillFromDelivery, prefillFromDeath, SUBMISSION, FAMILY, RETURNS_FOR,
+export { SUBS as REGISTER_SUBS, registerRoute, formFGate, formFFlag, mlcReadable, isObstetricUltrasound, formFIdFor, prefillFromDelivery, prefillFromDeath, SUBMISSION, FAMILY, RETURNS_FOR,
   mtpEpisodes, maskMtpNames, mtpNameMask, MTP_MASKED_SUBS, nameParts };

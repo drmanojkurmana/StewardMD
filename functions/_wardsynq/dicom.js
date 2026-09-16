@@ -196,6 +196,7 @@ async function imagingWorklist(request, env, ctx) {
   const patients = new Map();
   const worklist = [];
   const unmapped = [];
+  const pcpndt = [];
   for (const o of pending) {
     let p = patients.get(o.patientId);
     if (p === undefined) {
@@ -208,9 +209,12 @@ async function imagingWorklist(request, env, ctx) {
     const modality = map[str(o.code).toLowerCase()] || map[str(o.display).toLowerCase()] || null;
     if (!modality) unmapped.push({ order: o.id, reason: `no modality is mapped for "${str(o.code)}"; the item is on the worklist without one` });
     worklist.push(worklistItem(o, p, modality, ctx.clock || null));
+    /* PCPNDT (legal review B.4.1, B.4.3): an obstetric ultrasound still to be done whose Form F is missing or incomplete is
+     * flagged beside the worklist, never inside the DICOM item a modality parses. The route hands in the check. */
+    if (typeof ctx.pcpndtFlag === "function") { const flag = await ctx.pcpndtFlag(o, modality); if (flag) pcpndt.push({ orderId: o.id, ...flag }); }
   }
 
-  return { ...base, ok: true, worklist, count: worklist.length, unmapped, reportedExcluded: reported.size,
+  return { ...base, ok: true, worklist, count: worklist.length, unmapped, reportedExcluded: reported.size, ...(typeof ctx.pcpndtFlag === "function" ? { pcpndt } : {}),
     ...(warnings.length ? { warnings } : {}),
     ...(rejected.length ? { configWarnings: [`these modalityMap entries name a modality DICOM does not define and were ignored: ${rejected.join(", ")}`] } : {}) };
 }

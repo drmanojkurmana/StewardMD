@@ -69,8 +69,55 @@ test("register settings: every label translates around the server's legal notes,
   assert.match(R.settingsHtml(xx.c), /Do not read this as the defaults/);
 });
 
+test("second legal pass: read-only doors show no write forms; a restricted case shows only its number; MTP rows show their retention end; the Schedule X and patient views translate; new settings read back", () => {
+  const xx = env("xx");
+  const { R, doc } = xx;
+  R.state.tab = "ndps";
+  const book = { ok: true, configured: true, rmi: { alerts: [] }, policy: "policy", items: [{ code: "Morphine", display: "Morphine", location: null, unit: "ampoule", opening: 0, closing: 5, lines: [],
+    form3h: [{ date: "2026-09-16", opening: 0, received: 5, dispensed: 0, closing: 5, closure: null, unclosedLate: true }] }], doses: [], counts: [], unwitnessed: 0, discrepancies: 0, daysUnclosed: 1 };
+  R.state.data = book;
+  const writer = R.ndpsHtml({ ...xx.c, can: (cap) => cap === "register.ndps" });
+  assert.ok(writer.includes('data-rg="closeday"') && writer.includes('data-rg="receive"') && writer.includes('data-rg="transfer"') && writer.includes('data-rg="count"'));
+  assert.match(writer, /⟦1 past days of Form 3H are not closed/);
+  const inspector = R.ndpsHtml({ ...xx.c, can: (cap) => cap === "register.ndps.read" });
+  for (const act of ["closeday", "receive", "transfer", "count", "destroy"]) assert.ok(!inspector.includes(`data-rg="${act}"`), act);
+  assert.deepEqual(leftovers(inspector, ["Morphine", "policy", "ampoule", "2026-09-16"]), []);
+
+  const table = R.entriesTable(xx.c, schemaOf("mlc"), { ok: true, entries: [{ id: "reg-mlc-1", serial: "MLC/2026/00001", restricted: true, eventDate: "2026-09-16" }] });
+  assert.match(table, /⟦Restricted case: it opens only to its treating team/);
+  assert.ok(!table.includes("data-rg=\"open\""), "a withheld case cannot be opened from the list");
+  const mtp = R.entriesTable(xx.c, schemaOf("mtp"), { ok: true, retentionNote: "x", entries: [{ id: "reg-mtp-1", serial: "1/2026", version: 1, complete: true, eventDate: "2026-09-16", retentionEnd: "2031-12-31", fields: { admissionDate: "2026-09-16" } }] });
+  assert.match(mtp, /⟦Kept until at least⟧/);
+  assert.ok(mtp.includes("2031-12-31"));
+
+  R.state.sub.ndps = "schedx";
+  R.state.data = { ok: true, configured: true, retention: "kept", rule65InpatientRegisters: true, withoutParticulars: 1, receiptsOutsideLockAndKey: 1,
+    pages: [{ drug: "Pentazocine", receipts: [{ date: "2026-09-16", quantity: "10 ampoule", supplierName: "Pharma", missing: [], lockAndKey: false }], supplies: [{ date: "2026-09-16", quantity: "1 ampoule", patientId: "p1", patientName: "A B", dispenseId: "d1", particulars: null }] }] };
+  const x = R.rule65Html({ ...xx.c, can: (cap) => cap === "register.ndps" });
+  assert.ok(x.includes('data-rg="schedx"'));
+  assert.deepEqual(leftovers(x, ["Pentazocine", "kept", "10 ampoule", "1 ampoule", "Pharma", "A B", "2026-09-16"]), []);
+  R.state.ndpsPatient = "p1";
+  R.state.data = { ok: true, readOnly: true, supplies: [{ at: "2026-09-16T10:00:00Z", drug: "Morphine", quantity: "2 ampoule", state: "returned" }], doses: [] };
+  assert.deepEqual(leftovers(R.ndpsPatientHtml(xx.c), ["2026-09-16 10:00 Morphine 2 ampoule", "p1"]), []);
+
+  xx.R.state.settings = { ok: true, settings: registerSettings(null), notes: NOTES };
+  R.settingsHtml(xx.c);
+  doc.getElementById("rgS_stateFormat").value = "kerala";
+  doc.getElementById("rgS_restricted").value = "mlo@hospital.test\n";
+  doc.getElementById("rgS_regimes").value = "Alprazolam | schedule-h1";
+  doc.getElementById("rgS_rule65").checked = false;
+  doc.getElementById("rgS_xLocations").value = "CD cupboard";
+  const s = R.readSettings();
+  assert.equal(s.mlc.stateFormat, "kerala");
+  assert.deepEqual(s.mlc.restrictedReaders, ["mlo@hospital.test"]);
+  assert.deepEqual(s.ndps.drugRegimes, [{ drug: "Alprazolam", regime: "schedule-h1" }]);
+  assert.equal(s.ndps.rule65InpatientRegisters, false);
+  assert.deepEqual(s.ndps.scheduleXLocations, ["CD cupboard"]);
+});
+
 test("the page reaches every register door and the settings route", async () => {
   const { readFileSync } = await import("node:fs");
   const page = readFileSync(new URL("../wardsynq/site/pages/registers.js", import.meta.url), "utf8");
-  for (const route of ["/org/register-settings", "/ward/register-ndps", "/ward/register-formf", "/ward/register-mtp", "/ward/register-mlc", "/ward/register-vital", "/ward/register-mccd", "/ward/stock-move", "view=annual", "view=form3e", "format=monthly", "format=print", "format=form2"]) assert.ok(page.includes(route), route);
+  for (const route of ["/org/register-settings", "/ward/register-ndps", "/ward/register-formf", "/ward/register-mtp", "/ward/register-mlc", "/ward/register-vital", "/ward/register-mccd", "/ward/stock-move", "view=annual", "view=form3e", "format=monthly", "format=print", "format=form2",
+    "&view=", "view=patient", "format=kerala", "requisitionFrom", "form3hclose", "schedxsupply", "homecare"]) assert.ok(page.includes(route), route);
 });

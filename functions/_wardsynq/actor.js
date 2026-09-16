@@ -309,6 +309,14 @@ function grantForCaps(caps) {
     };
   }
 
+  /* An NDPS inspector or auditor (legal review 2026-09-17, F.4.10): the controlled-drug registers are read from the stock
+   * ledger as the signed-in person, so the read-only door reads the four ledger types and writes nothing. */
+  if (has(CAPS.REGISTER_NDPS_READ)) {
+    const ledger = ["StockMovement", "MedicationDispense", "MedicationAdministration", "MedicationOrder"];
+    if (!grant) grant = { tier: TIER.READ, read: ledger, write: [], basis: CAPS.REGISTER_NDPS_READ };
+    else grant = { ...grant, read: grant.read === null ? null : [...new Set([...grant.read, ...ledger])], basis: grant.basis + "+" + CAPS.REGISTER_NDPS_READ };
+  }
+
   if (has(CAPS.MED_ADMINISTER)) {
     /* The bedside authority, added 2026-09-07 with the inpatient eMAR, in the same union shape as
      * QUEUE_ADD above and for the same reason: it only ever ADDS one type and only ever RAISES the

@@ -428,7 +428,7 @@ test("GET /ward/register-schema: every register's form, and the Registers page a
   seed();
   const r = await as(NURSE, "/ward/register-schema?orgId=" + ORG);
   assert.equal(r.__status, 200);
-  assert.deepEqual(r.schemas.map((s) => s.kind).sort(), ["birth", "death", "dyingdecl", "form3e", "form3esign", "form3i", "form3j", "formf", "formfprint", "mccd", "mlc", "mtp", "mtpboard", "mtpforme", "ndpscount", "notification", "statreturn", "stillbirth"]);
+  assert.deepEqual(r.schemas.map((s) => s.kind).sort(), ["birth", "death", "dyingdecl", "form3e", "form3esign", "form3hclose", "form3i", "form3j", "formf", "formfprint", "homecare", "mccd", "mlc", "mtp", "mtpboard", "mtpforme", "ndpscount", "notification", "pocsotask", "quarantine", "schedxsupply", "statreturn", "stillbirth"]);
   assert.equal(r.schemas.find((s) => s.kind === "mlc").statutoryForm, false, "the MLC record says it is not a statutory form");
   const { readFileSync } = await import("node:fs");
   const page = readFileSync(new URL("../wardsynq/site/pages/registers.js", import.meta.url), "utf8");
@@ -546,7 +546,8 @@ test("MTP (legal review C): Rule 3B list, rule 4A eligibility, guardian consent 
   assert.ok((await mtp({ age: 16 })).problems.some((p) => /guardian consents in writing/.test(p)));
   const minor = await mtp({ age: 16, consentBy: "guardian", guardianName: "Mother, S Devi" });
   assert.equal(minor.__status, 200, JSON.stringify(minor));
-  assert.ok(minor.entry.missing.includes("pocsoIntimation"));
+  // Legal review C.4.6 (second pass): the intimation is a task on the medico-legal register, not a field here.
+  assert.deepEqual(minor.opened.map((x) => x.register), ["pocsotask"]);
   assert.match(minor.pocso, /POCSO Act s\.19\(1\)/);
 
   const board = { requestDate: YESTERDAY, requestTime: "09:00", patientName: "Register Case", age: 27, caseNumber: "IP-12", reports: "Anomaly scan: anencephaly. Board concurs.", opinion: "denied",
@@ -757,5 +758,7 @@ test("NDPS (legal review F): Form 3E registration and the patient's signature pe
   await settingsAs(ADMIN, { ndps: { requireWitness: false, rmi: { form3gNumber: "RMI/7", issuedOn: "2023-01-01", expiresOn: "2025-12-31", renewalApplicationRef: "CD/REN/44", designatedDoctors: [{ name: "Dr P", overallInCharge: true }] } } });
   const unwitnessed = await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "wastage", code: "Morphine", quantity: { value: 1, unit: "ampoule" }, reason: "Ampoule broke" });
   assert.equal(unwitnessed.__status, 200, "the witness is hospital policy, switched off here");
-  assert.equal((await as(PHARM, "/ward/stock-move", "POST", receipt)).__status, 200, "renewal applied for");
+  // Renewal applied for, so recognition no longer refuses; the Form 3J estimate of 1 (r.52U) now does, until a revised estimate is named.
+  assert.equal((await as(PHARM, "/ward/stock-move", "POST", receipt)).error, "above_form3j_estimate");
+  assert.equal((await as(PHARM, "/ward/stock-move", "POST", { ...receipt, revisedEstimateRef: "CD/3J-REV/2" })).__status, 200, "renewal applied for, revised estimate named");
 });

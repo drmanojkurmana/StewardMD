@@ -320,6 +320,9 @@ const NDPSCOUNT = {
  * such record" (the formfprint register below). RETENTION: r.9(6) and s.29, two years from the procedure, or until legal
  * proceedings end, whichever is later. */
 const FOETAL_SEX = /\b(sex|gender)\s+(of\s+(the\s+)?)?(foetus|fetus|baby|child|unborn)\b|\b(foetal|fetal)\s+(sex|gender)\b|\b(male|female)\s+(foetus|fetus|baby|child)\b|\b(it'?s|is)\s+an?\s+(boy|girl)\b/i;
+/* Words that make a text obstetric: the Form F gate's test for an imaging request (register-routes.js), and the context an
+ * import must carry before FOETAL_SEX refuses it, so a paediatric report on "a female child" is still filed. */
+const OBSTETRIC = /\b(obstetric|obstetrical|antenatal|ante-natal|pregnan\w*|foetal|fetal|foetus|fetus|nt[- ]scan|nuchal|anomaly scan|growth scan|dating scan|gestation\w*|biophysical profile|umbilical artery doppler)\b/i;
 const FORMF_INDICATIONS = [
   ["i", "i. To diagnose intra-uterine and/or ectopic pregnancy and confirm viability"], ["ii", "ii. Estimation of gestational age (dating)"],
   ["iii", "iii. Detection of number of foetuses and their chorionicity"], ["iv", "iv. Suspected pregnancy with IUCD in-situ or suspected pregnancy following contraceptive failure/MTP failure"],
@@ -518,7 +521,7 @@ async function companion(c, kind, ref) {
 }
 const MTP = {
   title: "MTP Admission Register (Form III)", authority: "Chief Medical Officer (monthly statement in Form II)", citation: "MTP Act 1971 s.3, s.5, s.5A (as amended 2021); MTP Rules 2003 r.3A, r.3B, r.4A, r.9; MTP Regulations 2003 regs 3 to 7, Forms I, II, III",
-  patient: "required", dateField: "admissionDate", confidential: ["patientName", "relation", "address", "guardianName", "pocsoBasis"], serial: "MTP", retention: MTP_RETENTION,
+  patient: "required", dateField: "admissionDate", confidential: ["patientName", "relation", "address", "guardianName"], serial: "MTP", retention: MTP_RETENTION,
   serialFormat: (n, year) => `${n}/${year}`,
   fields: [
     f("admissionDate", "2. Date of admission", "date", { req: true }),
@@ -553,9 +556,6 @@ const MTP = {
     f("consentBy", "Consent (Form C) given by", "enum", { req: true, options: [["woman", "The woman"], ["guardian", "Guardian (a woman under 18 or a mentally ill woman), in writing"]] }),
     f("guardianName", "Guardian's name and relationship (Form C)", "text"),
     f("consentDate", "Date of consent (Form C)", "date", { req: true }),
-    f("pocsoIntimation", "A minor: intimation under POCSO Act s.19(1)", "enum", { options: [["intimated", "Intimated to the SJPU or local police"], ["identity-withheld", "Intimated, identity withheld on the request of the minor and guardian"], ["pending", "Not yet intimated"]] }),
-    f("pocsoBasis", "Basis for withholding the minor's identity (X v Principal Secretary, SC 2022, as summarised; on the list for a lawyer)", "longtext"),
-    f("pocsoReference", "POCSO intimation reference (medico-legal case number or police reference)", "text"),
     f("opinionCertified", "Form I: opinion certified by the practitioner recording this entry (type full name)", "attest", { req: true }),
     f("envelopeSealedBy", "Regulation 4: opinion and consent sealed in an envelope marked secret with the serial number, sealed by (type full name)", "attest"),
     f("envelopeReceivedByHead", "Regulation 4: sealed envelope received in safe custody by the head of the hospital (type full name)", "attest"),
@@ -566,8 +566,6 @@ const MTP = {
       ...(v.consentBy === "guardian" ? ["guardianName"] : []),
       ...(v.terminationDate ? ["terminationTime", "terminatedBy", "terminatedByClause", "method", "terminationCertified", "envelopeSealedBy", "envelopeReceivedByHead"] : []),
       ...(v.terminationDate && !emergency && w > 24 ? ["terminatedBy2", "terminatedBy2Clause"] : []),
-      ...(Number(v.age) < 18 ? ["pocsoIntimation"] : []),
-      ...(v.pocsoIntimation === "identity-withheld" ? ["pocsoBasis"] : []),
       ...(emergency ? ["emergencyAttestation"] : []),
     ];
   },
@@ -605,6 +603,16 @@ const MTP = {
       else if (v.terminationDate && !(d.complete && d.fields.opinion === "allowed" && d.fields.physicallyFit === "yes")) p.push("formDRef: a termination above 24 weeks needs a complete Form D with the opinion allowed and the woman physically fit");
     }
     return p;
+  },
+  /* A MINOR IS A POCSO REPORTING CASE (legal review C.4.6, D.4.3). Saving an entry for a woman under 18 opens a task on
+   * the medico-legal side, in the same append as the entry, so the intimation is kept by the register that tracks police
+   * intimations and their clocks rather than as a field nobody chases. The task names no other register (reg 5 to 7);
+   * this register finds it by its id. */
+  alsoWrite: async (entry, c) => {
+    if (!(Number(entry.fields.age) < 18)) return [];
+    const id = pocsoTaskIdFor(entry.id);
+    if (await c.repo.latest(c.tenantId, PREFIX + "pocsotask", id)) return [];
+    return [draftEntry("pocsotask", { id, patientId: entry.patientId, encounterId: entry.encounterId, fields: { reason: "minor-pregnancy", intimation: "pending" }, serverFields: { raisedAt: c.now } }, c)];
   },
   /* Regulation 3: certified within three hours of the termination. Late is FLAGGED, never refused (a late certificate
    * is still a certificate); the certification time is the server's stamp, so it cannot be back-dated. */
@@ -752,6 +760,9 @@ const FREE_TREATMENT = ["sexual-assault-adult", "acid-attack", "pocso"];
 const STATUTORY_INTIMATION = ["sexual-assault-adult", "acid-attack", "pocso", "death-in-custody", "death-woman-married-under-7-years", "bnss33-offence"];
 const EXAMINATION = ["sexual-assault-adult", "pocso"];
 const DEATH_INQUEST = ["death-in-custody", "death-woman-married-under-7-years"];
+/* BNS s.72 and POCSO Act s.23: the identity of a victim of a sexual offence is not disclosed. These cases open only to the
+ * register's keepers, the treating doctors and the people the hospital names (register-routes.js mlcReadable). */
+const RESTRICTED_MLC = ["sexual-assault-adult", "pocso"];
 const EXAM_FIELDS = ["examStartAt", "examEndAt", "dnaMaterial", "mentalCondition", "conclusionReasons", "pvExamination", "pvReason"];
 const MLC_RETENTION = "Medico-legal registers and case sheets: ten years, or until any court case is disposed of (DGHS OM of 28 Oct 2014, guidance). WardSynQ never deletes an entry.";
 const MLC = {
@@ -807,6 +818,14 @@ const MLC = {
     f("consistentWithHistory", "Opinion: consistent with the alleged history", "enum", { options: [["could-be", "Could be as alleged"], ["could-not-be", "Could not be as alleged"], ["reserved", "Opinion reserved"]] }),
     f("rtaSchemeRef", "Road accident: cashless treatment scheme reference (eDAR or TMS), if any", "text"),
     f("inquestPapersReceived", "Inquest or Magistrate inquiry papers received (BNSS ss.194, 196)", "enum", { options: YN }),
+    /* The mortuary releases a body of a custody death, or of a woman within seven years of marriage, only once these
+     * are recorded (mortuary.js releaseMissing reads them). */
+    f("inquestPapersReference", "Inquest or Magistrate inquiry papers: reference and date received", "text"),
+    /* Kerala DHS formats (legal review D.1, D.4.1), when the hospital keeps its register in that state format. */
+    f("examinationRequested", "Examination requested (Medico-legal Register, Kerala format)", "text"),
+    f("certificateIssuedTo", "Wound certificate issued to (Accident Register cum Wound Certificate, Kerala format)", "text"),
+    f("certificateRequestNo", "Wound certificate: request number", "text"),
+    f("certificateIssuedOn", "Wound certificate: date issued", "date"),
     f("samplesPreserved", "Samples or articles preserved and handed over (to whom, when)", "longtext"),
     f("medleaprReference", "MedLEaPR reference", "text", { max: 80 }),
     f("medleaprFrozenOn", "MedLEaPR report frozen on", "date"),
@@ -824,7 +843,10 @@ const MLC = {
     if (c === "sexual-assault-adult") out.push("survivorPoliceChoice");
     if (c === "pocso") out.push("pocsoReportAt", "pocsoReportTo", "personPresent");
     if (DEATH_INQUEST.includes(c)) out.push("inquestPapersReceived");
+    if (v.inquestPapersReceived === "yes") out.push("inquestPapersReference");
     if (s.medleapr && s.medleapr.enabled) out.push("medleaprReference", "medleaprFrozenOn");
+    if (s.stateFormat === "kerala") out.push("examinationRequested", "identificationMark1", "identificationMark2");
+    if (v.certificateIssuedTo) out.push("certificateRequestNo", "certificateIssuedOn");
     return out;
   },
   rules: (v) => {
@@ -904,9 +926,45 @@ const DYINGDECL = {
   listColumns: ["startDate", "mlcNumber", "magistrateCalled", "language"],
 };
 
+/* POCSO INTIMATION TASK. POCSO Act s.19(1): anyone with knowledge or apprehension of an offence "shall provide such
+ * information to (a) the Special Juvenile Police Unit; or (b) the local police"; s.21 punishes failure. A pregnancy of a
+ * person under 18 is such a case (legal review C.1 "Link to POCSO", C.4.6). The MTP register opens this task (MTP.alsoWrite)
+ * on the medico-legal side, where police intimations and their clocks are kept. It names no other register. The 24-hour
+ * clock follows POCSO Rules 2020 r.6(5) (the report on the child's condition), the nearest time the law sets; the
+ * identity-withheld path is X v Principal Secretary (SC, 29 Sep 2022) as summarised, on the list for a lawyer. */
+const pocsoTaskIdFor = (sourceEntryId) => `reg-pocsotask-${slug(String(sourceEntryId).replace(/^reg-[a-z0-9]+-/, ""))}`;
+const POCSOTASK = {
+  title: "POCSO intimation task", authority: "Special Juvenile Police Unit or local police (POCSO Act s.19(1))",
+  citation: "POCSO Act 2012 s.19(1), s.21; POCSO Rules 2020 r.6(5); X v Principal Secretary, Health and Family Welfare Department, GNCTD (SC, 29 Sep 2022), as summarised",
+  patient: "required", dateField: "raisedAt", confidential: ["identityWithheldBasis", "policeReference"], statutoryForm: false, retention: MLC_RETENTION,
+  notes: ["Opened by WardSynQ when another register records the care of a person under 18 that must be reported under POCSO Act s.19(1). Close it by recording the intimation."],
+  fields: [
+    f("reason", "Why the intimation is owed", "enum", { req: true, options: [["minor-pregnancy", "Pregnancy of a person under 18 (POCSO Act s.19(1))"]] }),
+    f("raisedAt", "Opened at", "datetime", { server: true }),
+    f("intimation", "Intimation", "enum", { req: true, options: [["pending", "Not yet intimated"], ["intimated", "Intimated to the SJPU or local police"], ["identity-withheld", "Intimated, the minor's identity withheld on the request of the minor and guardian"]] }),
+    f("intimatedAt", "Intimated at", "datetime", { req: true }),
+    f("intimatedTo", "SJPU or police station informed", "text"),
+    f("policeReference", "Police or daily diary reference", "text"),
+    f("identityWithheldBasis", "Basis for withholding the minor's identity (on the list for a lawyer)", "longtext"),
+    f("mlcNumber", "Medico-legal case number, if one is opened", "text"),
+    f("recordedBy", "Intimation recorded by (type full name)", "attest"),
+  ],
+  requiredWhen: (v) => (v.intimation && v.intimation !== "pending" ? ["intimatedTo", "recordedBy", ...(v.intimation === "identity-withheld" ? ["identityWithheldBasis"] : [])] : []),
+  rules: (v) => (v.intimation === "pending" && v.intimatedAt ? ["intimation: an intimation time is recorded, so say how the police were informed"] : []),
+  listColumns: ["raisedAt", "reason", "intimation", "intimatedAt", "intimatedTo"],
+};
+
+/** PURE. The open POCSO intimation task's clock. now: epoch ms. */
+function pocsoTaskClock(entry, now) {
+  const v = (entry && entry.fields) || {};
+  if (!entry || entry.complete || !v.raisedAt) return null;
+  const due = Date.parse(v.raisedAt) + 24 * 3600000;
+  return { kind: "pocso-intimation", dueBy: new Date(due).toISOString(), state: now > due ? "overdue" : "due", rule: "POCSO Act s.19(1); POCSO Rules 2020 r.6(5): within 24 hours" };
+}
+
 const REGISTERS = {
   birth: BIRTH, death: DEATH, stillbirth: STILLBIRTH, mccd: MCCD, ndpscount: NDPSCOUNT, formf: FORMF, formfprint: FORMFPRINT, statreturn: STATRETURN,
-  mtp: MTP, mtpboard: MTPBOARD, mtpforme: MTPFORME, mlc: MLC, dyingdecl: DYINGDECL,
+  mtp: MTP, mtpboard: MTPBOARD, mtpforme: MTPFORME, mlc: MLC, dyingdecl: DYINGDECL, pocsotask: POCSOTASK,
 };
 
 /** Registers added by their own modules (Form F, MLC, MTP, notifications) join the table here. */
@@ -1111,6 +1169,8 @@ async function saveEntry(ctx) {
       fields[fd.key] = keep || { name: fields[fd.key].name, by: str(who.id), at: now };
     }
   }
+  /* A server field (worked out by the server when the entry was made) survives a correction that does not recompute it. */
+  if (correcting) for (const fd of def.fields) if (fd.server && prior.fields && prior.fields[fd.key] !== undefined) fields[fd.key] = prior.fields[fd.key];
   for (const [k, val] of Object.entries(ctx.serverFields || {})) if (def.fields.some((x) => x.key === k && x.server)) fields[k] = val;
   Object.assign(fields, def.derive ? def.derive(fields, opts) : {});
   const patientId = correcting ? prior.patientId || null : str(ctx.patientId) || null;
@@ -1133,6 +1193,14 @@ async function saveEntry(ctx) {
 
   for (let attempt = 0; attempt < 5; attempt += 1) {
     const records = [];
+    /* Records this entry opens in another register (MTP.alsoWrite: a POCSO intimation task), in the same append, so the
+     * entry is never saved without them. */
+    let also = [];
+    if (def.alsoWrite) {
+      try { also = await def.alsoWrite(entry, { repo, tenantId, now, who, settings: opts.settings, offsetMinutes: opts.offsetMinutes }); }
+      catch { return { ...READ_FAILED, message: "A record this entry opens could not be prepared, so nothing was saved.", written: 0 }; }
+      scope.also = also.map((x) => ({ register: x.kind, id: x.id }));
+    }
     if (def.serial && !entry.serial) {
       const year = (eventDate || now).slice(0, 4);
       let s;
@@ -1140,10 +1208,10 @@ async function saveEntry(ctx) {
       entry.serial = def.serialFormat ? def.serialFormat(s.n, year) : `${def.serial}/${year}/${String(s.n).padStart(5, "0")}`;
       records.push(s.record);
     }
-    records.push(entry);
+    records.push(entry, ...also);
     try {
       await repo.append(tenantId, records, { audit: audit(correcting ? "register.correct" : "register.write", str(who.id), { ...scope, serial: entry.serial || null }, hash), idempotencyKey: attempt === 0 && ctx.idempotencyKey ? String(ctx.idempotencyKey) : null });
-      return { ok: true, written: 1, entry, ...(v.warnings.length ? { warnings: v.warnings } : {}) };
+      return { ok: true, written: 1 + also.length, entry, ...(also.length ? { opened: also } : {}), ...(v.warnings.length ? { warnings: v.warnings } : {}) };
     } catch (e) {
       if (!(e instanceof VersionConflictError)) return writeFailed(e);
       /* Two things can collide: the serial counter (another entry took the number; take the next) or the entry
@@ -1156,6 +1224,20 @@ async function saveEntry(ctx) {
     }
   }
   return { ok: false, status: 409, error: "serial_busy", message: "The register number could not be allocated. Try again; nothing was saved.", written: 0 };
+}
+
+/** A first version of an entry another entry opens (def.alsoWrite), validated like any save. Throws when invalid, which
+ * refuses the save that asked for it. c: { now, who, settings, offsetMinutes } */
+function draftEntry(kind, input, c) {
+  const def = REGISTERS[kind];
+  const v = validateFields(kind, input.fields, null, { settings: c.settings, offsetMinutes: c.offsetMinutes });
+  if (v.problems.length) throw new Error(`${kind}: ${v.problems.join("; ")}`);
+  const fields = { ...v.value };
+  for (const [k, val] of Object.entries(input.serverFields || {})) if (def.fields.some((x) => x.key === k && x.server)) fields[k] = val;
+  const eventDate = str(fields[def.dateField]).slice(0, 10);
+  return { resourceType: typeOf(kind), id: input.id, version: 1, kind, serial: null, patientId: input.patientId || null, encounterId: input.encounterId || null, links: {},
+    period: (eventDate || c.now).slice(0, 7), eventDate: eventDate || null, fields, complete: v.missing.length === 0, missing: v.missing,
+    recordedBy: str(c.who.id), recordedAt: c.now, writtenBy: { id: str(c.who.id), role: str(c.who.role) || null, at: c.now } };
 }
 
 /** What a register list shows: the form's confidential fields removed. The entry itself keeps them. */
@@ -1247,6 +1329,21 @@ function csvFor(kind, entries, opts) {
   return lines.join("\r\n") + "\r\n";
 }
 
+/** PURE. The medico-legal register in the Kerala DHS Medico-legal Register's columns (legal review D.1, "Formats"):
+ * ML number, date, name, age, sex, address, crime number and police station, requisition from and date, examination
+ * requested, medical officer, signature (left blank for the signed print). people: patientId -> { name, age, sex, address }. */
+function keralaMlcCsv(entries, people) {
+  const head = ["ML number", "Date", "Name", "Age", "Sex", "Address", "Crime number and police station", "Requisition from and date", "Examination requested", "Medical officer", "Signature"];
+  const lines = [head.map(csvCell).join(",")];
+  for (const e of entries || []) {
+    const v = e.fields || {}, p = (people && people.get(e.patientId)) || {};
+    lines.push([e.serial || e.id, str(v.arrivalAt).slice(0, 10), p.name || "", p.age == null ? "" : p.age, p.sex || "", p.address || "",
+      [v.crimeNumber, v.policeStation].filter(Boolean).join(", "), [v.requisitionFrom, v.requisitionDate].filter(Boolean).join(", "), v.examinationRequested || "",
+      (v.doctor && v.doctor.name) || "", ""].map(csvCell).join(","));
+  }
+  return lines.join("\r\n") + "\r\n";
+}
+
 /** The schema a screen renders a form from: labels, types, options. No entry data. */
 function schemaOf(kind) {
   const def = REGISTERS[kind];
@@ -1260,4 +1357,5 @@ export {
   PREFIX, SERIAL_TYPE, MAX_LIST, REGISTERS, ICD10, f, YN, YN_NA, SEX_FORM, defineRegister, typeOf,
   FOETAL_SEX, mtpFormII, validateFields, saveEntry, listEntries, entryHistory, csvFor, schemaOf, listView, printValue,
   EDUCATION, OCCUPATION, FOETAL_DEATH_CAUSES, MODE_OF_DYING, FORMF_DECLARATION, entryHash, RULE_3B, rule4AAllowed, MLC_CATEGORIES, FREE_TREATMENT, mlcClocks,
+  RESTRICTED_MLC, DEATH_INQUEST, pocsoTaskIdFor, pocsoTaskClock, draftEntry, keralaMlcCsv, csvCell, OBSTETRIC,
 };

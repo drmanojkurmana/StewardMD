@@ -33,7 +33,7 @@
    * assigning a role to a staff member - never learned they existed. Keep this in sync by hand;
    * there is no test that catches a role missing here, only a role an admin cannot find. */
   var ROLES = ["admin", "doctor", "supervisor", "nurse", "intern", "resident", "reception", "cashier",
-    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist", "obstetrician", "public_health", "store_keeper", "biomedical_engineer",
+    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist", "obstetrician", "public_health", "pcpndt_nodal", "ndps_inspector", "store_keeper", "biomedical_engineer",
     "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver",
     "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "dpo",
     "dietitian", "kitchen", "cssd", "housekeeping", "transport", "mortuary", "viewer"];
@@ -55,6 +55,8 @@
       ["radiologist", T(c, "site.admin.staff.roleNote.radiologist", "Protocols and reports imaging studies (the same authority a lab result release uses). No other chart write.")],
       ["obstetrician", T(c, "site.admin.staff.roleNote.obstetrician", "A doctor who also keeps the PCPNDT Form F and the MTP register.")],
       ["public_health", T(c, "site.admin.staff.roleNote.publicHealth", "Public health nodal officer: reads the chart and keeps the notifiable disease register and the weekly IHIP export.")],
+      ["pcpndt_nodal", T(c, "site.admin.staff.roleNote.pcpndtNodal", "PCPNDT nodal officer: reads the Form F register and records the monthly report's submission. Writes no Form F.")],
+      ["ndps_inspector", T(c, "site.admin.staff.roleNote.ndpsInspector", "NDPS inspector or auditor: reads the controlled-drug registers and their exports. Writes nothing.")],
       ["supervisor", T(c, "site.admin.staff.roleNote.supervisor", "Runs the OPD queue and reads the chart. Approves stores indents for the departments in their scope.")],
       ["store_keeper", T(c, "site.admin.staff.roleNote.storeKeeper", "Runs general stores: items, store locations, issuing approved indents, receiving and ordering. No chart access.")],
       ["biomedical_engineer", T(c, "site.admin.staff.roleNote.biomedicalEngineer", "Keeps the asset register, preventive maintenance, calibration and job cards. No chart access.")],

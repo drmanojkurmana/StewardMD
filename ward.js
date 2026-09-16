@@ -5760,6 +5760,9 @@
         .then(function (r) {
           if (r && r.ok) {
             out.requested = (r.worklist || []).map(radWorklistRow).filter(function (s) { return !reportedIds[s.orderId]; });
+            /* PCPNDT (legal review B.4.1): the server flags an obstetric ultrasound whose Form F is missing or incomplete. */
+            var flags = {}; (r.pcpndt || []).forEach(function (f) { flags[f.orderId] = f; });
+            out.requested.forEach(function (s) { s.formF = flags[s.orderId] || null; });
             (r.warnings || []).forEach(function (w) { out.errors.push(w); });
           } else out.errors.push("imaging worklist");
         })
@@ -5835,6 +5838,10 @@
         '<div class="w-crit-m">' + esc(s.procedure || wT("ward.imaging-study", "Imaging study")) +
         (s.modality ? " &middot; " + esc(s.modality) : " &middot; " + wTH("ward.modality-not-mapped", "modality not mapped")) +
         (s.orderedAt ? " &middot; " + wTH("ward.waiting", "waiting") + " " + radWaitLabel(s.orderedAt) : "") + "</div>" +
+        (s.formF ? '<p class="w-hint warn">' + ms("gavel") + (s.formF.state === "no-form-f" ? wTH("ward.pcpndt-no-form-f", "Obstetric ultrasound: no PCPNDT Form F for this request. Record the woman's declaration before the scan (rule 10(1A)).")
+          : s.formF.state === "no-declaration" ? wTH("ward.pcpndt-no-declaration", "Obstetric ultrasound: Form F has no declaration by the woman yet. It is taken before the scan (rule 10(1A)).")
+          : s.formF.state === "unreadable" ? wTH("ward.pcpndt-formf-unreadable", "Obstetric ultrasound: Form F could not be checked. Do not read this as complete.")
+          : wTH("ward.pcpndt-formf-incomplete", "Obstetric ultrasound: Form F is incomplete ({list}). An incomplete Form F is a presumed contravention (Act s.4(3)).", { list: esc((s.formF.missing || []).join(", ")) }, "list")) + "</p>" : "") +
         '<button class="w-btn tiny go" data-w-act="radboardpick:' + esc(s.orderId) + '">' + ms("edit_note") + wTH("ward.file-report", "File report") + "</button>" +
       "</li>";
     }).join("");

@@ -30,7 +30,16 @@ const NOTES = Object.freeze({
   requireIcd10: "Form No. 4 has no ICD-10 field; the statistical office codes the cause. An ICD-10 code here is the hospital's own coding.",
   requireWitness: "No NDPS rule requires a second-person witness or a shift count (Chapter VB read in full). They are this hospital's policy.",
   rmi: "NDPS Rules r.52-O: recognition (Form 3G) is valid for up to three years; apply for renewal at least sixty days before expiry. r.52Q: tell the Controller of Drugs of a change of designated doctor within seven days. r.52R(2): a change in constitution within thirty days.",
+  stateFormat: "No national statutory medico-legal register form exists. A state format adds that state's fields and export; Kerala follows the Kerala DHS Medico-legal Register and Accident Register cum Wound Certificate. Which format your state requires is for your state medico-legal manual.",
+  restrictedReaders: "Sexual offence and POCSO cases are opened only by the medical records keepers, the doctors who recorded the case, the doctor the stay is admitted under, and the people named here (BNS s.72, POCSO Act s.23). Every opening is audited.",
+  drugRegimes: "Which law a drug's records follow. Default for the controlled-drug list: essential narcotic drug under NDPS Rules Chapter VB (Forms 3E, 3H, 3J, 3-I). State rules for other narcotics were not researched, so those keep the Form 3H and 3E discipline. Schedule X and H1 drugs get the Drugs and Cosmetics Rules r.65 registers.",
+  rule65InpatientRegisters: "Whether rule 65 (Schedule X and H1 registers) applies to in-patient supply by a private hospital pharmacy is not confirmed. By default every supply, in-patient included, is on the register.",
+  scheduleXLocations: "Drugs and Cosmetics Rules r.65(12): Schedule X stock is kept under lock and key. Name the store locations that are; a Schedule X receipt anywhere else is flagged on the register.",
 });
+
+/* NDPS Rules Chapter VB (essential narcotic drugs), a state's NDPS rules for other narcotics, NDPS Rules Chapter VII
+ * (psychotropic substances, r.66(3) proper accounts), and the Drugs and Cosmetics Rules r.65 Schedule X and H1 registers. */
+const REGIMES = ["end-chapter-vb", "state-ndps", "psychotropic", "schedule-x", "schedule-h1"];
 
 const MLC_CATEGORY_KEYS = ["sexual-assault-adult", "acid-attack", "pocso", "rta", "death-in-custody", "death-woman-married-under-7-years", "bnss33-offence",
   "assault", "burns", "poisoning", "suspected-suicide", "fall-industrial", "animal-bite", "brought-dead", "unknown-unconscious", "other"];
@@ -61,6 +70,8 @@ function registerSettings(wardsynqCfg) {
       medleapr: { enabled: !!(l.medleapr && l.medleapr.enabled === true), state: str(l.medleapr && l.medleapr.state) },
       intimationCategories: Array.isArray(l.intimationCategories) ? l.intimationCategories.map(str).filter((k) => MLC_CATEGORY_KEYS.includes(k)) : MLC_CATEGORY_KEYS.slice(),
       goodSamaritanCharterDisplayed: l.goodSamaritanCharterDisplayed === true,
+      stateFormat: str(l.stateFormat) === "kerala" ? "kerala" : "hospital",
+      restrictedReaders: Array.isArray(l.restrictedReaders) ? [...new Set(l.restrictedReaders.map((x) => str(x).toLowerCase()).filter(Boolean))].slice(0, 50) : [],
     },
     rbd: {
       formVersion: str(b.formVersion) === "model-1999" ? "model-1999" : "model-2024",
@@ -69,6 +80,9 @@ function registerSettings(wardsynqCfg) {
     mccd: { requireIcd10: c.requireIcd10 === true },
     ndps: {
       requireWitness: n.requireWitness !== false,
+      drugRegimes: arr(n.drugRegimes).map((x) => ({ drug: str(x.drug), regime: REGIMES.includes(str(x.regime)) ? str(x.regime) : "" })).filter((x) => x.drug),
+      rule65InpatientRegisters: n.rule65InpatientRegisters !== false,
+      scheduleXLocations: Array.isArray(n.scheduleXLocations) ? [...new Set(n.scheduleXLocations.map(str).filter(Boolean))].slice(0, 50) : [],
       rmi: {
         form3gNumber: str(rmi.form3gNumber), issuedOn: str(rmi.issuedOn), expiresOn: str(rmi.expiresOn), renewalApplicationRef: str(rmi.renewalApplicationRef),
         designatedDoctors: arr(rmi.designatedDoctors).map((x) => ({ name: str(x.name), registrationNo: str(x.registrationNo), overallInCharge: x.overallInCharge === true, from: str(x.from) })),
@@ -94,13 +108,16 @@ function validateRegisterSettings(input) {
     if (rmi.expiresOn <= rmi.issuedOn) problems.push("ndps.rmi.expiresOn: after the issue date");
     else if (rmi.expiresOn > addDays(rmi.issuedOn, 3 * 366)) problems.push("ndps.rmi.expiresOn: a Form 3G certificate is valid for not more than three years (NDPS Rules r.52-O)");
   }
+  const nd = input.ndps && typeof input.ndps === "object" ? input.ndps : {};
+  for (const x of Array.isArray(nd.drugRegimes) ? nd.drugRegimes : []) if (x && str(x.drug) && !REGIMES.includes(str(x.regime))) problems.push(`ndps.drugRegimes: ${str(x.regime) || "(blank)"} is not a regime (${str(x.drug)})`);
+  if (input.mlc && str(input.mlc.stateFormat) && !["hospital", "kerala"].includes(str(input.mlc.stateFormat))) problems.push("mlc.stateFormat: hospital or kerala");
   if (rmi.designatedDoctors.filter((d) => d.overallInCharge).length > 1) problems.push("ndps.rmi.designatedDoctors: one over-all in-charge (NDPS Rules r.52Q)");
   if (v.pcpndt.onlinePortal.mandatory && !v.pcpndt.onlinePortal.state) problems.push("pcpndt.onlinePortal.state: name the state whose portal is mandatory");
   const m = input.mtp || {};
   if (m.formIIDueDay !== undefined && !(Number.isInteger(m.formIIDueDay) && m.formIIDueDay >= 1 && m.formIIDueDay <= 28)) problems.push("mtp.formIIDueDay: a day of the month from 1 to 28");
   const l = input.mlc || {};
   if (Array.isArray(l.intimationCategories)) for (const k of l.intimationCategories) if (!MLC_CATEGORY_KEYS.includes(str(k))) problems.push(`mlc.intimationCategories: ${str(k)} is not a category`);
-  for (const [k, list] of [["pcpndt.centre.machines", v.pcpndt.centre.machines], ["pcpndt.centre.plannedChanges", v.pcpndt.centre.plannedChanges], ["rbd.informantAuthorisations", v.rbd.informantAuthorisations], ["ndps.rmi.designatedDoctors", rmi.designatedDoctors], ["ndps.rmi.changes", rmi.changes]]) {
+  for (const [k, list] of [["pcpndt.centre.machines", v.pcpndt.centre.machines], ["pcpndt.centre.plannedChanges", v.pcpndt.centre.plannedChanges], ["rbd.informantAuthorisations", v.rbd.informantAuthorisations], ["ndps.rmi.designatedDoctors", rmi.designatedDoctors], ["ndps.rmi.changes", rmi.changes], ["ndps.drugRegimes", v.ndps.drugRegimes]]) {
     if (list.length > 50) problems.push(`${k}: at most 50 rows`);
   }
   return { value: v, problems };
@@ -168,6 +185,25 @@ function rmiStatus(settings, today) {
   return { configured: true, blocked: expired && !rmi.renewalApplicationRef, expiresOn: rmi.expiresOn, alerts };
 }
 
+/** PURE. MTP Regulations 2003 reg 5 (legal review C.4.9): the Admission Register is kept five years "from the end of the
+ * calendar year it relates to", while Form III's heading says five years "from the date of the last entry". Unsettled, so
+ * the later of the two. After it a custodian may destroy the entry only by hand, with a destruction record; WardSynQ
+ * deletes nothing. eventDate: the admission date; lastWritten: the ISO time of the entry's latest version. */
+function mtpRetentionEnd(eventDate, lastWritten) {
+  const y = Number(str(eventDate).slice(0, 4)) || Number(str(lastWritten).slice(0, 4));
+  const yearEnd = y ? `${y + 5}-12-31` : "";
+  const last = str(lastWritten).slice(0, 10);
+  const fromLast = isDate(last) ? `${Number(last.slice(0, 4)) + 5}${last.slice(4)}` : "";
+  return [yearEnd, fromLast].filter(Boolean).sort().pop() || null;
+}
+
+/** PURE. NDPS Form 3H: "Entries shall be completed for each day before the close of the day". A day closed after the
+ * hospital's local midnight is late; the late closure is recorded as it happened, never back-dated. */
+function form3hClosureLate(day, closedAtIso, offsetMinutes) {
+  const local = new Date(Date.parse(closedAtIso) + (Number.isFinite(offsetMinutes) ? offsetMinutes : 330) * 60000).toISOString().slice(0, 10);
+  return local > str(day);
+}
+
 /** PURE. PCPNDT centre panel: Form B renewal (Form A 30 days before expiry, r.8(1)), r.13 changes 30 days in advance,
  * and the r.17 notice and copies of the Act and Rules. */
 function pcpndtCentreAlerts(settings, today) {
@@ -189,4 +225,4 @@ function pcpndtCentreAlerts(settings, today) {
   return alerts;
 }
 
-export { NOTES, MLC_CATEGORY_KEYS, registerSettings, validateRegisterSettings, monthlyReturnClock, formFMonthlyClock, mtpFormIIClock, rbdClock, ndpsAnnualClocks, rmiStatus, pcpndtCentreAlerts, addDays, daysBetween };
+export { NOTES, REGIMES, MLC_CATEGORY_KEYS, registerSettings, validateRegisterSettings, mtpRetentionEnd, form3hClosureLate, monthlyReturnClock, formFMonthlyClock, mtpFormIIClock, rbdClock, ndpsAnnualClocks, rmiStatus, pcpndtCentreAlerts, addDays, daysBetween };

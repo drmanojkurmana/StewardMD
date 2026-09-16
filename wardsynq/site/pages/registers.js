@@ -25,8 +25,8 @@
 
   function tabs(c) {
     return [
-      { key: "ndps", need: ["register.ndps"], title: T(c, "site.registers.tab.ndps", "Controlled drugs (NDPS)") },
-      { key: "formf", need: ["register.pcpndt"], title: T(c, "site.registers.tab.formf", "PCPNDT Form F") },
+      { key: "ndps", need: ["register.ndps", "register.ndps.read", "med.administer"], title: T(c, "site.registers.tab.ndps", "Controlled drugs (NDPS)") },
+      { key: "formf", need: ["register.pcpndt", "register.pcpndt.read"], title: T(c, "site.registers.tab.formf", "PCPNDT Form F") },
       { key: "mlc", need: ["register.records", "mlc.record"], title: T(c, "site.registers.tab.mlc", "Medico-legal cases") },
       { key: "mtp", need: ["register.mtp"], title: T(c, "site.registers.tab.mtp", "MTP") },
       { key: "vital", need: ["register.records", "emr.treat"], title: T(c, "site.registers.tab.vital", "Births and deaths") },
@@ -36,14 +36,23 @@
   }
   /* The records each tab keeps, the register itself first. */
   function subKinds(c) {
+    var ndpsAll = [["book", T(c, "site.registers.sub.book", "Register book (Form 3H)")], ["form3eview", T(c, "site.registers.sub.form3eview", "A patient's Form 3E")], ["form3e", T(c, "site.registers.sub.form3e", "Form 3E registrations")],
+      ["annual", T(c, "site.registers.sub.annual", "Annual estimate and return (Form 3J, Form 3-I)")], ["form3j", T(c, "site.registers.sub.form3j", "Form 3J estimates recorded")], ["form3i", T(c, "site.registers.sub.form3i", "Form 3-I returns prepared")], ["statreturn", T(c, "site.registers.sub.ndpsReturns", "Returns filed")],
+      ["form3hclose", T(c, "site.registers.sub.form3hclose", "Days closed (Form 3H pages)")], ["quarantine", T(c, "site.registers.sub.quarantine", "Quarantine")], ["homecare", T(c, "site.registers.sub.homecare", "Home care (rule 52W)")],
+      ["h1", T(c, "site.registers.sub.h1", "Schedule H1 register")], ["schedx", T(c, "site.registers.sub.schedx", "Schedule X register")], ["schedxsupply", T(c, "site.registers.sub.schedxsupply", "Schedule X supply particulars")],
+      ["patient", T(c, "site.registers.sub.ndpsPatient", "One patient's controlled drugs (read only)")]];
     return {
       formf: [["formf", T(c, "site.registers.sub.formf", "Form F entries")], ["formfprint", T(c, "site.registers.sub.formfprint", "Authenticated printouts (rule 9(7))")], ["statreturn", T(c, "site.registers.sub.formfReturns", "Monthly reports filed (rule 9(8))")]],
       mtp: [["mtp", T(c, "site.registers.sub.mtp", "Admission Register (Form III)")], ["mtpboard", T(c, "site.registers.sub.mtpboard", "Medical Board opinions (Form D)")], ["mtpforme", T(c, "site.registers.sub.mtpforme", "Two practitioners' opinions (Form E)")], ["statreturn", T(c, "site.registers.sub.mtpReturns", "Form II statements filed")]],
-      mlc: [["mlc", T(c, "site.registers.sub.mlc", "Medico-legal cases")], ["dyingdecl", T(c, "site.registers.sub.dyingdecl", "Dying declarations")]],
-      ndps: [["book", T(c, "site.registers.sub.book", "Register book (Form 3H)")], ["form3eview", T(c, "site.registers.sub.form3eview", "A patient's Form 3E")], ["form3e", T(c, "site.registers.sub.form3e", "Form 3E registrations")],
-        ["annual", T(c, "site.registers.sub.annual", "Annual estimate and return (Form 3J, Form 3-I)")], ["form3j", T(c, "site.registers.sub.form3j", "Form 3J estimates recorded")], ["form3i", T(c, "site.registers.sub.form3i", "Form 3-I returns prepared")], ["statreturn", T(c, "site.registers.sub.ndpsReturns", "Returns filed")]],
+      mlc: [["mlc", T(c, "site.registers.sub.mlc", "Medico-legal cases")], ["dyingdecl", T(c, "site.registers.sub.dyingdecl", "Dying declarations")], ["pocsotask", T(c, "site.registers.sub.pocsotask", "POCSO intimation tasks")]],
+      /* A nurse without the NDPS register reads one patient's rows only (legal review F.4.10). */
+      ndps: c.can("register.ndps") || c.can("register.ndps.read") ? ndpsAll : ndpsAll.filter(function (o) { return o[0] === "patient"; }),
     };
   }
+  /* Read-only doors (legal review B.4.9, F.4.10): the PCPNDT nodal officer files only the monthly report; the NDPS inspector
+   * and the nurse write nothing. The server refuses the rest whatever this shows. */
+  function readOnly(c) { return S.tab === "formf" ? !c.can("register.pcpndt") : S.tab === "ndps" ? !c.can("register.ndps") : false; }
+  var NDPS_VIEWS = ["book", "form3eview", "annual", "h1", "schedx", "patient"];
   /* Sent to the server and recorded as written (the stock ledger's reason), never shown translated. */
   var DESTRUCTION_REASON = "Expired stock destroyed (NDPS Rules r.52V(1))";
   var RETURNS = { formf: ["formf-monthly"], mtp: ["mtp-form2"], ndps: ["ndps-3j", "ndps-3i"] };
@@ -220,11 +229,15 @@
     if (!r.entries.length) return warn + "<p>" + esc(T(c, "site.registers.noEntries", "No entries in this register for this period.")) + "</p>";
     var cols = (schema.listColumns || []).map(function (k) { return fieldOf(schema, k); }).filter(Boolean);
     var hasDue = r.entries.some(function (e) { return e.clock || e.clocks || e.flags; });
-    return warn + '<div class="tbl"><table><tr><th>' + esc(T(c, "site.registers.colNumber", "Number")) + "</th>" + cols.map(function (fd) { return "<th>" + EN(c, esc(fd.label)) + "</th>"; }).join("") +
-      "<th>" + esc(T(c, "site.registers.colComplete", "Complete")) + "</th>" + (hasDue ? "<th>" + esc(T(c, "site.registers.colDue", "Due")) + "</th>" : "") + "<th>" + esc(T(c, "site.registers.colVersion", "Version")) + "</th><th></th></tr>" +
+    var hasRetention = r.entries.some(function (e) { return e.retentionEnd; });
+    return warn + (r.retentionNote ? '<p class="quiet">' + esc(T(c, "site.registers.mtp.retentionNote", "Nothing is deleted. After the retention date the custodian may destroy an entry only by hand, with a destruction record.")) + "</p>" : "") +
+      '<div class="tbl"><table><tr><th>' + esc(T(c, "site.registers.colNumber", "Number")) + "</th>" + cols.map(function (fd) { return "<th>" + EN(c, esc(fd.label)) + "</th>"; }).join("") +
+      "<th>" + esc(T(c, "site.registers.colComplete", "Complete")) + "</th>" + (hasDue ? "<th>" + esc(T(c, "site.registers.colDue", "Due")) + "</th>" : "") + (hasRetention ? "<th>" + esc(T(c, "site.registers.colRetention", "Kept until at least")) + "</th>" : "") + "<th>" + esc(T(c, "site.registers.colVersion", "Version")) + "</th><th></th></tr>" +
       r.entries.map(function (e) {
+        /* A sexual offence or POCSO case this reader may not open (BNS s.72, POCSO Act s.23): its number only. */
+        if (e.restricted) return '<tr><td>' + EN(c, esc(e.serial || e.id)) + '</td><td colspan="' + (cols.length + 3 + (hasDue ? 1 : 0) + (hasRetention ? 1 : 0)) + '">' + esc(T(c, "site.registers.mlc.restricted", "Restricted case: it opens only to its treating team, the register's keepers and the people the hospital names (BNS s.72, POCSO Act s.23).")) + "</td></tr>";
         return "<tr" + (e.complete ? "" : ' class="warn"') + "><td>" + EN(c, esc(e.serial || e.id)) + "</td>" + cols.map(function (fd) { return "<td>" + show(c, fd, e.fields[fd.key]) + "</td>"; }).join("") +
-          "<td>" + esc(e.complete ? T(c, "site.registers.yes", "yes") : T(c, "site.registers.incomplete", "incomplete")) + "</td>" + (hasDue ? "<td>" + dueCell(c, e) + "</td>" : "") + "<td>" + esc(e.version) + (e.correction ? " " + esc(T(c, "site.registers.corrected", "corrected")) : "") +
+          "<td>" + esc(e.complete ? T(c, "site.registers.yes", "yes") : T(c, "site.registers.incomplete", "incomplete")) + "</td>" + (hasDue ? "<td>" + dueCell(c, e) + "</td>" : "") + (hasRetention ? "<td>" + esc(e.retentionEnd || "") + "</td>" : "") + "<td>" + esc(e.version) + (e.correction ? " " + esc(T(c, "site.registers.corrected", "corrected")) : "") +
           '</td><td><button class="btn quiet" type="button" data-rg="open" data-id="' + esc(e.id) + '">' + esc(T(c, "site.registers.open", "Open")) + "</button></td></tr>";
       }).join("") + "</table></div>";
   }
@@ -241,9 +254,11 @@
     var extra = "";
     if (schema.kind === "formf" && e.complete) extra += ' <button class="btn quiet" type="button" data-rg="print-formf">' + esc(T(c, "site.registers.formf.print", "Authenticated printout (rule 9(7))")) + "</button>";
     if (schema.kind === "mlc" && e.fields.goodSamaritan === "yes") extra += ' <button class="btn quiet" type="button" data-rg="gs-letter">' + esc(T(c, "site.registers.mlc.gsLetter", "Good Samaritan acknowledgement (CMVR r.168)")) + "</button>";
+    var writable = !schema.immutable && (!readOnly(c) || schema.kind === "statreturn");
     return '<div class="card"><h3>' + EN(c, esc(e.serial || e.id)) + "</h3>" + (e.complete ? "" : '<div class="msg note">' + esc(T(c, "site.registers.missing", "Incomplete. Missing: {list}", { list: (e.missing || []).join(", ") })) + "</div>") +
+      (r.retentionEnd ? '<div class="msg note">' + esc(T(c, "site.registers.mtp.retentionEnd", "Kept until at least {d}. Nothing is deleted: after that date the custodian may destroy it only by hand, with a destruction record.", { d: r.retentionEnd })) + "</div>" : "") +
       '<dl class="kv">' + body + "</dl><h4>" + esc(T(c, "site.registers.history", "History")) + "</h4><ul>" + hist + "</ul>" +
-      (schema.immutable ? "" : '<button class="btn" type="button" data-rg="correct">' + esc(T(c, "site.registers.correct", "Correct this entry")) + "</button>") + extra + ' <button class="btn quiet" type="button" data-rg="close">' + esc(T(c, "site.registers.close", "Close")) + "</button></div>";
+      (!writable ? "" : '<button class="btn" type="button" data-rg="correct">' + esc(T(c, "site.registers.correct", "Correct this entry")) + "</button>") + extra + ' <button class="btn quiet" type="button" data-rg="close">' + esc(T(c, "site.registers.close", "Close")) + "</button></div>";
   }
 
   function printTable(title, head, rows) {
@@ -313,6 +328,26 @@
         ["destroyedOn", T(c, "site.registers.ndps.destroyedOn", "Date destroyed")], ["witness", T(c, "site.registers.ndps.witness", "Witness staff ID (second person)")]].map(function (p) {
         return '<label class="f"><span>' + esc(p[1]) + '</span><input id="rgD_' + p[0] + '"' + (p[0] === "destroyedOn" ? ' type="date"' : p[0] === "quantity" ? ' type="number" min="0" step="any"' : "") + "></label>";
       }).join("") + '<button class="btn" type="button" data-rg="destroy">' + esc(T(c, "site.registers.ndps.destroySave", "Record the destruction")) + "</button></div></div>";
+    var field = function (prefix, p) { return '<label class="f"><span>' + esc(p[1]) + '</span><input id="' + prefix + p[0] + '"' + (p[2] ? ' type="' + p[2] + '"' + (p[2] === "number" ? ' min="0" step="any"' : "") : "") + "></label>"; };
+    /* A controlled receipt with the Schedule X supplier particulars (r.65(21)(b)) and, above the Form 3J estimate, the
+     * revised estimate's reference (r.52U); a transfer, loan or sale to another institution with the Controller's approval
+     * (r.52V(3)). Both go to the stock ledger, which refuses what the rules refuse. */
+    var receiveForm = '<div class="card"><h3>' + esc(T(c, "site.registers.ndps.receiveTitle", "Receive a controlled drug")) + '</h3><p class="quiet">' +
+      esc(T(c, "site.registers.ndps.receiveNote", "A receipt that would take the stock held above this year's Form 3J estimate is refused unless the revised estimate filed with the Controller of Drugs is named (rule 52U).")) + '</p><div class="row">' +
+      [["code", T(c, "site.registers.ndps.code", "Drug (code or name as in the stock register)")], ["unit", T(c, "site.registers.ndps.unit", "Unit")], ["quantity", T(c, "site.registers.ndps.receiveQty", "Quantity received"), "number"],
+        ["location", T(c, "site.registers.ndps.location", "Location (blank for the main store)")], ["batch", T(c, "site.registers.ndps.batch", "Batch")], ["expiry", T(c, "site.registers.ndps.expiry", "Expiry"), "date"],
+        ["receivedFrom", T(c, "site.registers.ndps.receivedFrom", "Received from (supplier)")], ["documentNo", T(c, "site.registers.ndps.documentNo", "Consignment note, bill or invoice number")],
+        ["supplierAddress", T(c, "site.registers.ndps.supplierAddress", "Supplier's address (Schedule X)")], ["supplierLicenceNo", T(c, "site.registers.ndps.supplierLicence", "Supplier's licence number (Schedule X)")],
+        ["manufacturer", T(c, "site.registers.ndps.manufacturer", "Manufacturer")], ["revisedEstimateRef", T(c, "site.registers.ndps.revisedRef", "Revised Form 3J estimate reference (only above the estimate)")]].map(function (p) { return field("rgR_", p); }).join("") +
+      '<button class="btn" type="button" data-rg="receive">' + esc(T(c, "site.registers.ndps.receiveSave", "Record the receipt")) + "</button></div></div>";
+    var transferForm = '<div class="card"><h3>' + esc(T(c, "site.registers.ndps.transferTitle", "Transfer, loan or sale to another institution (rule 52V(3))")) + '</h3><p class="quiet">' +
+      esc(T(c, "site.registers.ndps.transferNote", "Only with the prior approval of the Controller of Drugs. Without the approval reference nothing is recorded.")) + '</p><div class="row">' +
+      [["code", T(c, "site.registers.ndps.code", "Drug (code or name as in the stock register)")], ["unit", T(c, "site.registers.ndps.unit", "Unit")], ["quantity", T(c, "site.registers.ndps.transferQty", "Quantity sent"), "number"],
+        ["location", T(c, "site.registers.ndps.location", "Location (blank for the main store)")], ["batch", T(c, "site.registers.ndps.batch", "Batch")], ["toInstitution", T(c, "site.registers.ndps.toInstitution", "Institution sent to")],
+        ["controllerApprovalRef", T(c, "site.registers.ndps.approvalRef", "Controller of Drugs approval reference")]].map(function (p) { return field("rgT_", p); }).join("") +
+      '<label class="f"><span>' + esc(T(c, "site.registers.ndps.transferKind", "Kind")) + '</span><select id="rgT_transferKind"><option value="transfer">' + esc(T(c, "site.registers.ndps.kindTransfer", "Transfer")) + '</option><option value="loan">' + esc(T(c, "site.registers.ndps.kindLoan", "Loan")) + '</option><option value="sale">' + esc(T(c, "site.registers.ndps.kindSale", "Sale")) + "</option></select></label>" +
+      '<button class="btn" type="button" data-rg="transfer">' + esc(T(c, "site.registers.ndps.transferSave", "Record the transfer")) + "</button></div></div>";
+    if (readOnly(c)) { countForm = ""; destroyForm = ""; receiveForm = ""; transferForm = ""; }
     if (r == null) return loading(c) + countForm;
     if (!r.ok) return failedBox(c) + '<div class="msg err">' + EN(c, esc(refusal(c, r))) + "</div>" + countForm;
     var rmi = r.rmi ? alertsHtml(c, r.rmi.alerts) : "";
@@ -320,20 +355,31 @@
     var head = rmi + '<div class="msg note">' + EN(c, esc(r.policy)) + "</div>" + (r.requireWitness === false ? '<div class="msg note">' + esc(T(c, "site.registers.ndps.witnessOff", "This hospital has switched the second-person witness off (Settings).")) + "</div>" : "") +
       (r.truncated ? '<div class="msg err">' + EN(c, esc(r.truncatedWarning)) + "</div>" : "") +
       (r.withoutForm3e ? '<div class="msg err">' + esc(T(c, "site.registers.ndps.withoutForm3e", "{n} supplies name a patient with no Form 3E registration. Register them below.", { n: r.withoutForm3e })) + "</div>" : "") +
+      (r.daysUnclosed ? '<div class="msg err">' + esc(T(c, "site.registers.ndps.daysUnclosed", "{n} past days of Form 3H are not closed by the over-all in-charge. Close them below; a late closure is recorded as late.", { n: r.daysUnclosed })) + "</div>" : "") +
       "<p>" + esc(T(c, "site.registers.ndps.summary", "{items} items, {unwitnessed} unwitnessed events, {discrepancies} count discrepancies", { items: r.items.length, unwitnessed: r.unwitnessed, discrepancies: r.discrepancies })) +
       ' <button class="btn quiet" type="button" data-rg="print3h">' + esc(T(c, "site.registers.ndps.print3h", "Print Form 3H")) + '</button> <button class="btn quiet" type="button" data-rg="csv3h">' + esc(T(c, "site.registers.exportCsv", "Export CSV")) + "</button></p>";
-    var items = r.items.map(function (it) {
+    var items = r.items.map(function (it, idx) {
+      /* Form 3H day by day (legal review F.4.3): closed by the over-all in-charge on a numbered page, or not. */
+      var days = (it.form3h || []).map(function (d, di) {
+        var state = d.closure ? T(c, "site.registers.ndps.dayClosed", "closed, page {p}", { p: d.closure.page }) + (d.closure.late ? " " + T(c, "site.registers.ndps.dayLate", "(late)") : "") + (d.closure.changedSince ? " " + T(c, "site.registers.ndps.dayChanged", "(the ledger changed after closure: correct the closure with a reason)") : "")
+          : d.unclosedLate ? T(c, "site.registers.ndps.dayUnclosedLate", "not closed, and the day is over") : T(c, "site.registers.ndps.dayOpen", "not closed yet");
+        return "<tr" + (!d.closure && d.unclosedLate || (d.closure && d.closure.changedSince) ? ' class="warn"' : "") + "><td>" + esc(d.date) + "</td><td>" + esc(d.opening) + "</td><td>" + esc(d.received) + "</td><td>" + esc(d.dispensed) + "</td><td>" + esc(d.closing) + "</td><td>" + esc(state) + "</td><td>" +
+          (!d.closure && !readOnly(c) ? '<button class="btn quiet" type="button" data-rg="closeday" data-id="' + idx + ":" + di + '">' + esc(T(c, "site.registers.ndps.closeDay", "Close the day")) + "</button>" : "") + "</td></tr>";
+      }).join("");
+      var daysTable = days ? '<h4>' + esc(T(c, "site.registers.ndps.days", "Form 3H by day")) + "</h4>" + (readOnly(c) ? "" : '<label class="f"><span>' + esc(T(c, "site.registers.ndps.inCharge", "Over-all in-charge closing the day (type full name)")) + '</span><input id="rgClose_' + idx + '"></label>') +
+        '<div class="tbl"><table><tr><th>' + esc(T(c, "site.registers.ndps.h.date", "Date")) + "</th><th>" + esc(T(c, "site.registers.ndps.h.opening", "Opening stock")) + "</th><th>" + esc(T(c, "site.registers.ndps.h.received", "Quantity received")) + "</th><th>" + esc(T(c, "site.registers.ndps.h.dispensed", "Quantity dispensed")) +
+        "</th><th>" + esc(T(c, "site.registers.ndps.h.closing", "Closing stock")) + "</th><th>" + esc(T(c, "site.registers.ndps.dayState", "Closure")) + "</th><th></th></tr>" + days + "</table></div>" : "";
       var lines = it.lines.map(function (l) {
         var no3e = l.kind === "issue" && l.form3eSerial === null && l.patientId;
         var reason = l.destruction ? T(c, "site.registers.ndps.destroyedLine", "destroyed before {n}, {d}, order {o}", { n: l.destruction.nomineeName + " (" + l.destruction.nomineeDesignation + ")", d: l.destruction.destroyedOn, o: l.destruction.nominatingOrderRef }) : (l.reason || l.receivedFrom || "");
         return "<tr" + (l.unwitnessed || l.balanceAfter < 0 || no3e ? ' class="warn"' : "") + "><td>" + EN(c, esc(String(l.at).slice(0, 16).replace("T", " "))) + "</td><td>" + EN(c, esc(l.kind)) + "</td><td>" + esc(l.quantity) + "</td><td>" + esc(l.balanceAfter) +
-          "</td><td>" + EN(c, esc((l.patientId || "") + (l.form3eSerial ? " " + l.form3eSerial : ""))) + (no3e ? ' <button class="btn quiet" type="button" data-rg="reg3e" data-id="' + esc(l.patientId) + '">' + esc(T(c, "site.registers.ndps.register3e", "Register in Form 3E")) + "</button>" : "") +
+          "</td><td>" + EN(c, esc((l.patientId || "") + (l.form3eSerial ? " " + l.form3eSerial : ""))) + (no3e && !readOnly(c) ? ' <button class="btn quiet" type="button" data-rg="reg3e" data-id="' + esc(l.patientId) + '">' + esc(T(c, "site.registers.ndps.register3e", "Register in Form 3E")) + "</button>" : "") +
           "</td><td>" + EN(c, esc(l.by || "")) + "</td><td>" + (l.witnessedBy ? EN(c, esc(l.witnessedBy)) : l.needsWitness ? esc(T(c, "site.registers.ndps.noWitness", "no witness")) : "") + "</td><td>" + EN(c, esc(reason)) + "</td></tr>";
       }).join("");
       return '<div class="card"><h3>' + EN(c, esc(it.display + (it.location ? " (" + it.location + ")" : "") + ", " + it.unit)) + "</h3><p>" + esc(T(c, "site.registers.ndps.openClose", "Opening {o}, closing {cl}", { o: it.opening, cl: it.closing })) + "</p>" +
         (it.ledgerMismatch ? '<div class="msg err">' + esc(T(c, "site.registers.ndps.mismatch", "The register and the stock level disagree ({a} against {b}). Report this.", { a: it.ledgerMismatch.register, b: it.ledgerMismatch.stock })) + "</div>" : "") +
         '<div class="tbl"><table><tr><th>' + esc(T(c, "site.registers.ndps.colWhen", "When")) + "</th><th>" + esc(T(c, "site.registers.ndps.colWhat", "What")) + "</th><th>" + esc(T(c, "site.registers.ndps.colQty", "Quantity")) + "</th><th>" + esc(T(c, "site.registers.ndps.colBalance", "Balance")) +
-        "</th><th>" + esc(T(c, "site.registers.ndps.colPatient", "Patient")) + "</th><th>" + esc(T(c, "site.registers.ndps.colBy", "By")) + "</th><th>" + esc(T(c, "site.registers.ndps.colWitness", "Witness")) + "</th><th>" + esc(T(c, "site.registers.ndps.colReason", "Reason or source")) + "</th></tr>" + lines + "</table></div></div>";
+        "</th><th>" + esc(T(c, "site.registers.ndps.colPatient", "Patient")) + "</th><th>" + esc(T(c, "site.registers.ndps.colBy", "By")) + "</th><th>" + esc(T(c, "site.registers.ndps.colWitness", "Witness")) + "</th><th>" + esc(T(c, "site.registers.ndps.colReason", "Reason or source")) + "</th></tr>" + lines + "</table></div>" + daysTable + "</div>";
     }).join("");
     var doses = r.doses.length ? '<div class="card"><h3>' + esc(T(c, "site.registers.ndps.doses", "Doses given on the wards")) + "</h3><ul>" + r.doses.map(function (d) {
       return "<li" + (d.unwitnessed ? ' class="warn"' : "") + ">" + EN(c, esc(String(d.at).slice(0, 16).replace("T", " ") + " " + d.display + " " + (d.patientId || ""))) + " " + (d.witnessedBy ? EN(c, esc(d.witnessedBy)) : d.needsWitness ? esc(T(c, "site.registers.ndps.noWitness", "no witness")) : "") + "</li>";
@@ -342,7 +388,55 @@
       var f = e.fields;
       return "<li" + (Number(f.variance) !== 0 ? ' class="warn"' : "") + ">" + EN(c, esc(f.countedOn + " " + (f.shift || "") + " " + f.code + " " + (f.location || ""))) + ": " + esc(T(c, "site.registers.ndps.countLine", "counted {n}, register {e}, difference {d}", { n: f.counted, e: f.expected, d: f.variance })) + "</li>";
     }).join("") + "</ul>" : "<p>" + esc(T(c, "site.registers.ndps.noCounts", "No counts recorded in this period.")) + "</p>") + "</div>";
-    return head + countForm + items + doses + counts + destroyForm;
+    return head + countForm + items + doses + counts + receiveForm + transferForm + destroyForm;
+  }
+  /* The Drugs and Cosmetics Rules r.65 registers (legal review F.4.8, F.4.9), from the ledger. */
+  function rule65Html(c) {
+    var esc = c.esc, r = S.data, which = S.sub.ndps;
+    var pick = monthPicker(c);
+    if (r == null) return pick + loading(c);
+    if (!r.ok) return pick + failedBox(c) + '<div class="msg err">' + EN(c, esc(refusal(c, r))) + "</div>";
+    var head = pick + '<p class="quiet">' + EN(c, esc(r.retention)) + "</p>" + (r.truncated ? '<div class="msg err">' + EN(c, esc(r.truncatedWarning)) + "</div>" : "") +
+      (r.rule65InpatientRegisters ? "" : '<div class="msg note">' + esc(T(c, "site.registers.ndps.inpatientOff", "This hospital keeps in-patient supplies off the rule 65 registers (Settings).")) + "</div>");
+    if (!r.configured) return head + '<div class="msg note">' + EN(c, esc(r.message)) + "</div>";
+    if (which === "h1") {
+      return head + (r.rows.length ? '<div class="tbl"><table><tr><th>' + esc(T(c, "site.registers.ndps.h.date", "Date")) + "</th><th>" + esc(T(c, "site.registers.ndps.prescriber", "Prescriber: name and address")) + "</th><th>" + esc(T(c, "site.registers.ndps.patientName", "Name of the patient")) + "</th><th>" +
+        esc(T(c, "site.registers.ndps.h.drug", "Name of drug")) + "</th><th>" + esc(T(c, "site.registers.ndps.colQty", "Quantity")) + "</th></tr>" + r.rows.map(function (x) {
+          return "<tr" + (x.prescriberName ? "" : ' class="warn"') + "><td>" + esc(x.date) + "</td><td>" + (x.prescriberName ? EN(c, esc(x.prescriberName)) : esc(T(c, "site.registers.ndps.prescriberUnknown", "prescriber not named in the staff list"))) + EN(c, esc(x.prescriberAddress ? ", " + x.prescriberAddress : "")) + "</td><td>" + EN(c, esc(x.patientName || x.patientId)) + "</td><td>" + EN(c, esc(x.drug)) + "</td><td>" + EN(c, esc(x.quantity)) +
+            (x.returned ? " " + esc(T(c, "site.registers.ndps.returned", "returned")) : "") + "</td></tr>";
+        }).join("") + "</table></div>" : "<p>" + esc(T(c, "site.registers.noEntries", "No entries in this register for this period.")) + "</p>");
+    }
+    return head + (r.withoutParticulars ? '<div class="msg err">' + esc(T(c, "site.registers.ndps.xWithout", "{n} Schedule X supplies have no recorded prescription, bill or supervising signature.", { n: r.withoutParticulars })) + "</div>" : "") +
+      (r.receiptsOutsideLockAndKey ? '<div class="msg err">' + esc(T(c, "site.registers.ndps.xLock", "{n} Schedule X receipts went to a location not listed as under lock and key (rule 65(12)).", { n: r.receiptsOutsideLockAndKey })) + "</div>" : "") +
+      r.pages.map(function (p) {
+        var rec = p.receipts.map(function (x) {
+          return "<tr" + (x.missing.length || !x.lockAndKey ? ' class="warn"' : "") + "><td>" + esc(x.date) + "</td><td>" + EN(c, esc(x.quantity)) + "</td><td>" + EN(c, esc([x.supplierName, x.supplierAddress, x.supplierLicenceNo].filter(Boolean).join(", "))) + "</td><td>" + EN(c, esc([x.manufacturer, x.batch].filter(Boolean).join(", "))) + "</td><td>" +
+            EN(c, esc(x.documentNo || "")) + "</td><td>" + (x.missing.length ? esc(T(c, "site.registers.missing", "Incomplete. Missing: {list}", { list: x.missing.join(", ") })) : "") + "</td></tr>";
+        }).join("");
+        var sup = p.supplies.map(function (x) {
+          var q = x.particulars;
+          return "<tr" + (q || x.returned ? "" : ' class="warn"') + "><td>" + esc(x.date) + "</td><td>" + EN(c, esc(x.quantity)) + "</td><td>" + EN(c, esc((x.patientName || x.patientId) + (q ? ", " + q.patientAddress : ""))) + "</td><td>" + EN(c, esc(q ? [q.manufacturer, x.batch].filter(Boolean).join(", ") : (x.batch || ""))) +
+            "</td><td>" + EN(c, esc(q ? q.prescriptionRef + ", " + q.billNo + " " + q.billDate : "")) + "</td><td>" + (q ? EN(c, esc(q.serial + ", " + q.supervisedBy)) : readOnly(c) ? esc(T(c, "site.registers.ndps.unsigned", "not signed")) :
+              '<button class="btn quiet" type="button" data-rg="schedx" data-id="' + esc(x.dispenseId) + '" data-patient="' + esc(x.patientId) + '" data-date="' + esc(x.date) + '">' + esc(T(c, "site.registers.ndps.recordParticulars", "Record the particulars")) + "</button>") + "</td></tr>";
+        }).join("");
+        return '<div class="card"><h3>' + EN(c, esc(p.drug)) + "</h3><h4>" + esc(T(c, "site.registers.ndps.receipts", "Received")) + "</h4>" + (rec ? '<div class="tbl"><table><tr><th>' + esc(T(c, "site.registers.ndps.h.date", "Date")) + "</th><th>" + esc(T(c, "site.registers.ndps.colQty", "Quantity")) + "</th><th>" +
+          esc(T(c, "site.registers.ndps.supplier", "Supplier: name, address, licence number")) + "</th><th>" + esc(T(c, "site.registers.ndps.makerBatch", "Manufacturer, batch")) + "</th><th>" + esc(T(c, "site.registers.ndps.h.doc", "Consignment note / bill / invoice no.")) + "</th><th></th></tr>" + rec + "</table></div>" : "<p>" + esc(T(c, "site.registers.vital.noneOwed", "None.")) + "</p>") +
+          "<h4>" + esc(T(c, "site.registers.ndps.supplied", "Supplied")) + "</h4>" + (sup ? '<div class="tbl"><table><tr><th>' + esc(T(c, "site.registers.ndps.h.date", "Date")) + "</th><th>" + esc(T(c, "site.registers.ndps.colQty", "Quantity")) + "</th><th>" + esc(T(c, "site.registers.ndps.patientNameAddress", "Patient: name and address")) + "</th><th>" +
+          esc(T(c, "site.registers.ndps.makerBatch", "Manufacturer, batch")) + "</th><th>" + esc(T(c, "site.registers.ndps.rxBill", "Prescription reference, bill number and date")) + "</th><th>" + esc(T(c, "site.registers.ndps.supervisor", "Entry number, supervising person")) + "</th></tr>" + sup + "</table></div>" : "<p>" + esc(T(c, "site.registers.vital.noneOwed", "None.")) + "</p>") + "</div>";
+      }).join("");
+  }
+  /* One patient's controlled drugs, read only (legal review F.4.10: nursing reads the patient's own rows). */
+  function ndpsPatientHtml(c) {
+    var esc = c.esc, r = S.data;
+    var pick = '<div class="row"><label class="f"><span>' + esc(T(c, "site.registers.ndps.patientIdAny", "Patient id")) + '</span><input id="rgNdpsPatient" value="' + esc(S.ndpsPatient) + '"></label><button class="btn quiet" type="button" data-rg="load">' + esc(T(c, "site.registers.show", "Show")) + "</button></div>";
+    if (!S.ndpsPatient) return pick;
+    if (r == null) return pick + loading(c);
+    if (!r.ok) return pick + failedBox(c) + '<div class="msg err">' + EN(c, esc(refusal(c, r))) + "</div>";
+    var rows = function (list, cells, after) { return list.length ? "<ul>" + list.map(function (x) { return "<li>" + EN(c, esc(cells(x))) + (after ? after(x) : "") + "</li>"; }).join("") + "</ul>" : "<p>" + esc(T(c, "site.registers.vital.noneOwed", "None.")) + "</p>"; };
+    return pick + '<p class="quiet">' + esc(T(c, "site.registers.ndps.readOnly", "Read only.")) + "</p><h4>" + esc(T(c, "site.registers.ndps.supplied", "Supplied")) + "</h4>" +
+      rows(r.supplies, function (x) { return String(x.at || "").slice(0, 16).replace("T", " ") + " " + x.drug + " " + x.quantity; }, function (x) { return x.state === "returned" ? " " + esc(T(c, "site.registers.ndps.returned", "returned")) : ""; }) +
+      "<h4>" + esc(T(c, "site.registers.ndps.doses", "Doses given on the wards")) + "</h4>" +
+      rows(r.doses, function (x) { return String(x.at || "").slice(0, 16).replace("T", " ") + " " + x.drug + " " + (x.dose ? x.dose.value + " " + x.dose.unit : "") + " " + (x.by || "") + (x.witnessedBy ? " / " + x.witnessedBy : ""); });
   }
   function form3eViewHtml(c) {
     var esc = c.esc, r = S.data;
@@ -351,11 +445,13 @@
     if (r == null) return pick + loading(c);
     if (!r.ok) return pick + failedBox(c) + '<div class="msg err">' + EN(c, esc(refusal(c, r))) + "</div>";
     var reg = r.registration ? '<p>' + esc(T(c, "site.registers.ndps.registered", "Form 3E registration {n} of {d}", { n: r.registration.serial, d: r.registration.fields.registrationDate })) + "</p>"
-      : '<div class="msg err">' + esc(T(c, "site.registers.ndps.notRegistered", "This patient has no Form 3E registration.")) + ' <button class="btn quiet" type="button" data-rg="reg3e" data-id="' + esc(r.patientId) + '">' + esc(T(c, "site.registers.ndps.register3e", "Register in Form 3E")) + "</button></div>";
+      : '<div class="msg err">' + esc(T(c, "site.registers.ndps.notRegistered", "This patient has no Form 3E registration.")) + (readOnly(c) ? "" : ' <button class="btn quiet" type="button" data-rg="reg3e" data-id="' + esc(r.patientId) + '">' + esc(T(c, "site.registers.ndps.register3e", "Register in Form 3E")) + "</button>") + "</div>";
     var rows = r.rows.length ? '<div class="tbl"><table><tr><th>' + esc(T(c, "site.registers.ndps.h.date", "Date")) + "</th><th>" + esc(T(c, "site.registers.ndps.h.drug", "Name of drug")) + "</th><th>" + esc(T(c, "site.registers.ndps.colQty", "Quantity")) + "</th><th>" + esc(T(c, "site.registers.ndps.signature", "Signature / thumb impression of the patient")) + "</th></tr>" +
       r.rows.map(function (x) {
         var sig = x.signature ? EN(c, esc(x.signature.name + (x.signature.representativeName ? " (" + x.signature.representativeName + ")" : ""))) + ' <span class="quiet">(' + esc(T(c, "site.registers.attested", "attested {at}", { at: String(x.signature.at || "").slice(0, 16).replace("T", " ") })) + ")</span>"
-          : x.returned ? esc(T(c, "site.registers.ndps.returned", "returned")) : (r.registration ? '<button class="btn quiet" type="button" data-rg="sign3e" data-id="' + esc(x.dispenseId) + '">' + esc(T(c, "site.registers.ndps.recordSignature", "Record the signature")) + "</button>" : esc(T(c, "site.registers.ndps.unsigned", "not signed")));
+          : x.returned ? esc(T(c, "site.registers.ndps.returned", "returned")) : (r.registration && !readOnly(c) ? '<button class="btn quiet" type="button" data-rg="sign3e" data-id="' + esc(x.dispenseId) + '">' + esc(T(c, "site.registers.ndps.recordSignature", "Record the signature")) + "</button>" : esc(T(c, "site.registers.ndps.unsigned", "not signed")));
+        /* Rule 52W: a supply taken out for home care, and the unused quantity brought back. */
+        if (!x.returned && !readOnly(c)) sig += ' <button class="btn quiet" type="button" data-rg="homecare" data-id="' + esc(x.dispenseId) + '" data-date="' + esc(x.date) + '">' + esc(T(c, "site.registers.ndps.homeCare", "Home care")) + "</button>";
         return "<tr" + (!x.signature && !x.returned ? ' class="warn"' : "") + "><td>" + esc(x.date) + "</td><td>" + EN(c, esc(x.drug)) + "</td><td>" + EN(c, esc(x.quantity)) + "</td><td>" + sig + "</td></tr>";
       }).join("") + "</table></div>" : "<p>" + esc(T(c, "site.registers.ndps.noSupplies", "No supplies of a controlled drug to this patient.")) + "</p>";
     return pick + reg + rows;
@@ -363,7 +459,7 @@
   function annualHtml(c) {
     var esc = c.esc, r = S.data;
     var pick = '<div class="row"><label class="f"><span>' + esc(T(c, "site.registers.ndps.year", "Calendar year")) + '</span><input id="rgYear" type="number" min="2015" max="2100" value="' + esc(S.year) + '"></label><button class="btn quiet" type="button" data-rg="load">' + esc(T(c, "site.registers.show", "Show")) + "</button>" +
-      ' <button class="btn" type="button" data-rg="new-kind" data-kind="form3j">' + esc(T(c, "site.registers.ndps.new3j", "Record an estimate (Form 3J)")) + '</button> <button class="btn quiet" type="button" data-rg="new-return">' + esc(T(c, "site.registers.recordSubmission", "Record a submission")) + "</button></div>";
+      (readOnly(c) ? "" : ' <button class="btn" type="button" data-rg="new-kind" data-kind="form3j">' + esc(T(c, "site.registers.ndps.new3j", "Record an estimate (Form 3J)")) + '</button> <button class="btn quiet" type="button" data-rg="new-return">' + esc(T(c, "site.registers.recordSubmission", "Record a submission")) + "</button>") + "</div>";
     if (r == null) return pick + loading(c);
     if (!r.ok) return pick + failedBox(c) + '<div class="msg err">' + EN(c, esc(refusal(c, r))) + "</div>";
     var clocks = r.clocks.map(function (k) { return '<div class="msg ' + clockClass(k) + '">' + esc((k.what === "form3j" ? T(c, "site.registers.ndps.clock3j", "Form 3J estimate for {y}", { y: k.year }) : T(c, "site.registers.ndps.clock3i", "Form 3-I return for {y}", { y: k.year })) + ": " + clockText(c, k)) + "</div>"; }).join("");
@@ -371,7 +467,7 @@
       "</th><th>" + esc(T(c, "site.registers.ndps.procured", "Procured")) + "</th><th>" + esc(T(c, "site.registers.ndps.disbursed", "Disbursed to patients")) + "</th><th>" + esc(T(c, "site.registers.ndps.h.closing", "Closing stock")) + "</th><th></th></tr>" +
       r.form3i.map(function (x, i) {
         return "<tr" + (x.overEstimate || x.noEstimate ? ' class="warn"' : "") + "><td>" + EN(c, esc(x.drug + ", " + x.unit)) + "</td><td>" + esc(x.estimate == null ? T(c, "site.registers.ndps.noEstimate", "none recorded") : x.estimate) + "</td><td>" + esc(x.revisedEstimate == null ? "" : x.revisedEstimate) + "</td><td>" + esc(x.openingStock) + "</td><td>" + esc(x.procured) + "</td><td>" + esc(x.disbursed) +
-          (x.overEstimate ? " " + esc(T(c, "site.registers.ndps.over10", "(more than 10 per cent above the estimate: a justification is required)")) : "") + "</td><td>" + esc(x.closingStock) + '</td><td><button class="btn quiet" type="button" data-rg="prep3i" data-id="' + i + '">' + esc(T(c, "site.registers.ndps.prepare3i", "Prepare Form 3-I")) + "</button></td></tr>";
+          (x.overEstimate ? " " + esc(T(c, "site.registers.ndps.over10", "(more than 10 per cent above the estimate: a justification is required)")) : "") + "</td><td>" + esc(x.closingStock) + "</td><td>" + (readOnly(c) ? "" : '<button class="btn quiet" type="button" data-rg="prep3i" data-id="' + i + '">' + esc(T(c, "site.registers.ndps.prepare3i", "Prepare Form 3-I")) + "</button>") + "</td></tr>";
       }).join("") + "</table></div>" : "<p>" + esc(T(c, "site.registers.ndps.noControlled", "No controlled drug moved in this year.")) + "</p>";
     return pick + alertsHtml(c, r.rmi && r.rmi.alerts) + clocks + '<p class="quiet">' + EN(c, esc(r.submission)) + "</p>" + table;
   }
@@ -383,6 +479,8 @@
     if (S.tab === "ndps" && S.sub.ndps === "book" && !S.form) return subPicker(c) + monthPicker(c) + ndpsHtml(c);
     if (S.tab === "ndps" && S.sub.ndps === "form3eview" && !S.form) return subPicker(c) + form3eViewHtml(c);
     if (S.tab === "ndps" && S.sub.ndps === "annual" && !S.form) return subPicker(c) + annualHtml(c);
+    if (S.tab === "ndps" && (S.sub.ndps === "h1" || S.sub.ndps === "schedx") && !S.form) return subPicker(c) + rule65Html(c);
+    if (S.tab === "ndps" && S.sub.ndps === "patient" && !S.form) return subPicker(c) + ndpsPatientHtml(c);
     if (S.form) { var fs = S.schemas && S.schemas[S.form.kind || kind]; return fs ? formHtml(c, fs, S.form) : loading(c); }
     if (!schema) return loading(c);
     if (S.entry) return entryHtml(c, schema, S.entry);
@@ -394,8 +492,11 @@
     else tools += '<label class="f"><span>' + esc(T(c, "site.registers.month", "Month")) + '</span><input id="rgPeriod" type="month" value="' + esc(S.period) + '"></label>';
     tools += '<button class="btn quiet" type="button" data-rg="load">' + esc(T(c, "site.registers.show", "Show")) + "</button>";
     var canNew = !(S.tab === "vital" && S.vitalKind === "mccd" ? !c.can("emr.treat") : S.tab === "vital" ? !c.can("register.records") : S.tab === "mlc" ? !(c.can("mlc.record") || c.can("register.records")) : S.tab === "ihip" ? !(c.can("emr.treat") || c.can("register.ihip")) : false);
-    if (canNew && ["formfprint", "form3i", "form3esign", "form3e"].indexOf(kind) < 0) tools += ' <button class="btn" type="button" data-rg="new">' + esc(T(c, "site.registers.new", "New entry")) + "</button>";
+    if (readOnly(c) && kind !== "statreturn") canNew = false;
+    /* Records opened from another screen (a supply, the day book) or by the server (a POCSO task) have no blank "New". */
+    if (canNew && ["formfprint", "form3i", "form3esign", "form3e", "homecare", "schedxsupply", "pocsotask", "form3hclose"].indexOf(kind) < 0) tools += ' <button class="btn" type="button" data-rg="new">' + esc(T(c, "site.registers.new", "New entry")) + "</button>";
     if (canList(c)) tools += ' <button class="btn quiet" type="button" data-rg="csv">' + esc(T(c, "site.registers.exportCsv", "Export CSV")) + '</button> <button class="btn quiet" type="button" data-rg="print">' + esc(T(c, "site.registers.print", "Print register")) + "</button>";
+    if (S.tab === "mlc" && kind === "mlc" && canList(c) && S.data && S.data.stateFormat === "kerala") tools += ' <button class="btn quiet" type="button" data-rg="kerala">' + esc(T(c, "site.registers.mlc.kerala", "Export in the Kerala register format")) + "</button>";
     if (S.tab === "mtp" && kind === "mtp") tools += ' <button class="btn quiet" type="button" data-rg="form2">' + esc(T(c, "site.registers.mtp.form2", "Monthly statement (Form II)")) + "</button>";
     if (S.tab === "formf" && kind === "formf") tools += ' <button class="btn quiet" type="button" data-rg="monthly">' + esc(T(c, "site.registers.formf.monthly", "Monthly report (rule 9(8))")) + "</button>";
     if (S.tab === "vital" && c.can("register.records") && S.vitalKind !== "mccd") tools += ' <button class="btn quiet" type="button" data-rg="pending">' + esc(T(c, "site.registers.vital.pending", "Still owed to the Registrar")) + "</button>";
@@ -404,6 +505,11 @@
     if (S.tab === "mtp" && kind === "mtp") tools += '<div class="row"><span class="quiet">' + esc(T(c, "site.registers.mtp.authority", "An export or print names the legal authority it is made under (MTP Regulations reg 6):")) + "</span>" +
       [["officer", T(c, "site.registers.mtp.authOfficer", "Requesting officer")], ["law", T(c, "site.registers.mtp.authLaw", "Law")], ["reference", T(c, "site.registers.mtp.authReference", "Reference")]].map(function (p) {
         return '<label class="f"><span>' + esc(p[1]) + '</span><input id="rgAuth' + p[0] + '"></label>';
+      }).join("") + "</div>";
+    /* Legal review D.4.8: the medico-legal register is exported to the police or a court only on a recorded requisition. */
+    if (S.tab === "mlc" && canList(c)) tools += '<div class="row"><span class="quiet">' + esc(T(c, "site.registers.mlc.requisition", "An export or print names the requisition it answers:")) + "</span>" +
+      [["from", T(c, "site.registers.mlc.reqFrom", "Police officer or court"), ""], ["ref", T(c, "site.registers.mlc.reqRef", "Requisition reference"), ""], ["date", T(c, "site.registers.mlc.reqDate", "Requisition date"), "date"]].map(function (p) {
+        return '<label class="f"><span>' + esc(p[1]) + '</span><input id="rgReq' + p[0] + '"' + (p[2] ? ' type="' + p[2] + '"' : "") + "></label>";
       }).join("") + "</div>";
     var intro = '<p class="quiet">' + EN(c, esc(schema.authority)) + ". " + esc(T(c, "site.registers.manual", "Submission is manual: WardSynQ does not send registers to any authority.")) + "</p>" +
       (schema.retention ? '<p class="quiet">' + EN(c, esc(schema.retention)) + "</p>" : "") + (schema.notes || []).map(function (n) { return '<p class="quiet">' + EN(c, esc(n)) + "</p>"; }).join("") +
@@ -438,6 +544,7 @@
     if (kind === "mlc" && r.clockSummary) {
       var cs = r.clockSummary;
       out += '<div class="msg ' + (cs.overdue ? "err" : "note") + '">' + esc(T(c, "site.registers.mlc.dashboard", "Open cases: {p} police intimations pending, {c} POCSO reports due, {i} reports to the investigating officer due, {q} inquest papers pending, {o} overdue.", { p: cs.policeIntimationPending, c: cs.pocsoReportDue, i: cs.ioReportDue, q: cs.inquestPapersPending, o: cs.overdue })) + "</div>";
+      if (cs.pocsoTasksOpen) out += '<div class="msg err">' + esc(T(c, "site.registers.mlc.pocsoTasks", "{n} POCSO intimation tasks are open (POCSO Act s.19(1)). Open them from the register picker.", { n: cs.pocsoTasksOpen })) + "</div>";
       if (r.medleapr && r.medleapr.enabled) out += '<p class="quiet">' + esc(T(c, "site.registers.mlc.medleapr", "MedLEaPR is on for this hospital: a case is complete with its MedLEaPR reference and frozen date.")) + "</p>";
     }
     return out;
@@ -525,7 +632,9 @@
       box("rgS_charter", T(c, "site.registers.settings.charter", "The Good Samaritan charter is displayed at the entrance and on the website (CMVR r.168(5))"), l.goodSamaritanCharterDisplayed) + "</div>" + note("medleapr") +
       "<p>" + esc(T(c, "site.registers.settings.intimation", "Categories intimated to the police (statutory categories are always intimated)")) + '</p><div class="row">' + MLC_CATS.map(function (k) {
         return '<label class="f" style="flex-direction:row;align-items:center"><input type="checkbox" data-mlccat="' + esc(k) + '"' + (l.intimationCategories.indexOf(k) >= 0 ? " checked" : "") + ' style="width:auto;margin:0 8px 0 0"><span>' + EN(c, esc(catLabel(k))) + "</span></label>";
-      }).join("") + "</div>" + note("intimationCategories") + "</div>" +
+      }).join("") + "</div>" + note("intimationCategories") +
+      '<div class="row">' + select("rgS_stateFormat", T(c, "site.registers.settings.stateFormat", "Medico-legal register format"), l.stateFormat, [["hospital", T(c, "site.registers.settings.formatHospital", "The hospital's own record")], ["kerala", T(c, "site.registers.settings.formatKerala", "Kerala DHS formats")]]) + "</div>" + note("stateFormat") +
+      area("rgS_restricted", T(c, "site.registers.settings.restricted", "People who may open sexual offence and POCSO cases besides the keepers and the treating doctors, one staff id or email per line"), (l.restrictedReaders || []).join("\n"), T(c, "site.registers.settings.restrictedHint", "for example the medico-legal officer")) + note("restrictedReaders") + "</div>" +
       '<div class="card"><h3>' + esc(T(c, "site.registers.tab.vital", "Births and deaths")) + '</h3><div class="row">' +
       select("rgS_rbdVersion", T(c, "site.registers.settings.rbdVersion", "Forms under"), b.formVersion, [["model-2024", T(c, "site.registers.settings.rbd2024", "Model RBD (Amendment) Rules 2024")], ["model-1999", T(c, "site.registers.settings.rbd1999", "Model RBD Rules 1999 (state has not notified the 2024 forms)")]]) +
       box("rgS_icd", T(c, "site.registers.settings.icd", "Require an ICD-10 code on the cause of death certificate (hospital coding)"), s.mccd.requireIcd10) + "</div>" + note("rbdFormVersion") + " " + note("requireIcd10") +
@@ -534,7 +643,10 @@
       '<div class="row">' + input("rgS_rmiNo", T(c, "site.registers.settings.rmiNo", "Form 3G recognition number"), nd.rmi.form3gNumber) + input("rgS_rmiIssued", T(c, "site.registers.settings.rmiIssued", "Issued on"), nd.rmi.issuedOn, "date") +
       input("rgS_rmiExpires", T(c, "site.registers.settings.rmiExpires", "Valid until"), nd.rmi.expiresOn, "date") + input("rgS_rmiRenewal", T(c, "site.registers.settings.rmiRenewal", "Renewal application reference"), nd.rmi.renewalApplicationRef) + "</div>" + note("rmi") +
       area("rgS_doctors", T(c, "site.registers.settings.doctors", "Designated doctors, one per line"), lines(nd.rmi.designatedDoctors, ["name", "registrationNo", "overallInCharge", "from"]), T(c, "site.registers.settings.doctorsHint", "name | registration number | yes for the over-all in-charge | from (YYYY-MM-DD)")) +
-      area("rgS_rmiChanges", T(c, "site.registers.settings.rmiChanges", "Changes to tell the Controller of Drugs, one per line"), lines(nd.rmi.changes, ["kind", "changedOn", "intimatedOn"]), T(c, "site.registers.settings.rmiChangesHint", "designated-doctor or constitution | changed on | intimated on (blank if not yet)")) + "</div>" +
+      area("rgS_rmiChanges", T(c, "site.registers.settings.rmiChanges", "Changes to tell the Controller of Drugs, one per line"), lines(nd.rmi.changes, ["kind", "changedOn", "intimatedOn"]), T(c, "site.registers.settings.rmiChangesHint", "designated-doctor or constitution | changed on | intimated on (blank if not yet)")) +
+      area("rgS_regimes", T(c, "site.registers.settings.regimes", "Which law each drug's records follow, one drug per line"), lines(nd.drugRegimes, ["drug", "regime"]), T(c, "site.registers.settings.regimesHint", "drug | end-chapter-vb (essential narcotic), state-ndps, psychotropic, schedule-x or schedule-h1")) + note("drugRegimes") +
+      '<div class="row">' + box("rgS_rule65", T(c, "site.registers.settings.rule65", "Keep in-patient supplies on the Schedule X and H1 registers"), nd.rule65InpatientRegisters) + "</div>" + note("rule65InpatientRegisters") +
+      area("rgS_xLocations", T(c, "site.registers.settings.xLocations", "Store locations under lock and key for Schedule X, one per line"), (nd.scheduleXLocations || []).join("\n"), T(c, "site.registers.settings.xLocationsHint", "as the location is written on the stock register")) + note("scheduleXLocations") + "</div>" +
       '<button class="btn" type="button" data-rg="save-settings"' + (S.saving ? " disabled" : "") + ">" + esc(T(c, "site.registers.settings.save", "Save register settings")) + "</button>";
   }
   function readSettings() {
@@ -545,11 +657,14 @@
         centre: { formBNumber: val("rgS_formB"), formBValidUntil: val("rgS_formBUntil"), r17NoticeDisplayed: checked("rgS_r17"), actAndRulesOnPremises: checked("rgS_r17copies"),
           machines: parseLines("rgS_machines", ["make", "model", "serial"]), plannedChanges: parseLines("rgS_changes", ["what", "effectiveOn", "intimatedOn"]) } },
       mtp: { formIIRecipient: val("rgS_f2Recipient"), formIIDueDay: Number(val("rgS_f2Day")), formIIOver20Annex: checked("rgS_f2Annex") },
-      mlc: { medleapr: { enabled: checked("rgS_medleapr"), state: val("rgS_medleaprState") }, goodSamaritanCharterDisplayed: checked("rgS_charter"), intimationCategories: cats },
+      mlc: { medleapr: { enabled: checked("rgS_medleapr"), state: val("rgS_medleaprState") }, goodSamaritanCharterDisplayed: checked("rgS_charter"), intimationCategories: cats,
+        stateFormat: val("rgS_stateFormat"), restrictedReaders: String(val("rgS_restricted") || "").split(/\n/).map(function (x) { return x.trim(); }).filter(Boolean) },
       rbd: { formVersion: val("rgS_rbdVersion"), informantAuthorisations: parseLines("rgS_informants", ["name", "authorisedBy", "from"]) },
       mccd: { requireIcd10: checked("rgS_icd") },
       ndps: { requireWitness: checked("rgS_witness"), rmi: { form3gNumber: val("rgS_rmiNo"), issuedOn: val("rgS_rmiIssued"), expiresOn: val("rgS_rmiExpires"), renewalApplicationRef: val("rgS_rmiRenewal"),
-        designatedDoctors: parseLines("rgS_doctors", ["name", "registrationNo", "overallInCharge", "from"]), changes: parseLines("rgS_rmiChanges", ["kind", "changedOn", "intimatedOn"]) } },
+        designatedDoctors: parseLines("rgS_doctors", ["name", "registrationNo", "overallInCharge", "from"]), changes: parseLines("rgS_rmiChanges", ["kind", "changedOn", "intimatedOn"]) },
+        drugRegimes: parseLines("rgS_regimes", ["drug", "regime"]), rule65InpatientRegisters: checked("rgS_rule65"),
+        scheduleXLocations: String(val("rgS_xLocations") || "").split(/\n/).map(function (x) { return x.trim(); }).filter(Boolean) },
     };
   }
 
@@ -561,6 +676,8 @@
     if (!S.year) S.year = String(new Date().getUTCFullYear());
     if (!list.length) { el.innerHTML = '<div class="title"><h1>' + esc(T(c, "site.registers.heading", "Registers")) + '</h1></div><div class="msg note">' + TS(c, "site.registers.noAccess", "Your role keeps none of the statutory registers.") + "</div>"; return; }
     if (!list.some(function (t) { return t.key === S.tab; })) { S.tab = list[0].key; S.data = null; S.form = null; S.entry = null; S.extra = null; }
+    /* A nurse's NDPS tab is the one patient view (legal review F.4.10). */
+    if (S.tab === "ndps" && !subKinds(c).ndps.some(function (o) { return o[0] === S.sub.ndps; })) S.sub.ndps = subKinds(c).ndps[0][0];
     var q = "?orgId=" + encodeURIComponent(org);
     var paint = function () {
       el.innerHTML = '<div class="title"><h1>' + esc(T(c, "site.registers.heading", "Registers")) + "</h1></div>" +
@@ -578,6 +695,8 @@
       if (S.tab === "settings") { S.settings = null; paint(); return c.api("/org/register-settings" + q).then(function (r) { S.settings = r && r.ok ? r : false; paint(); }); }
       if (S.tab === "ndps" && S.sub.ndps === "book") { var mr = monthRange(S.period); return c.api("/ward/register-ndps" + q + "&from=" + mr.from + "&to=" + mr.to).then(function (r) { S.data = r || { ok: false }; paint(); }); }
       if (S.tab === "ndps" && S.sub.ndps === "annual") return c.api("/ward/register-ndps" + q + "&view=annual&year=" + encodeURIComponent(S.year)).then(function (r) { S.data = r || { ok: false }; paint(); });
+      if (S.tab === "ndps" && (S.sub.ndps === "h1" || S.sub.ndps === "schedx")) { var hr = monthRange(S.period); return c.api("/ward/register-ndps" + q + "&view=" + S.sub.ndps + "&from=" + hr.from + "&to=" + hr.to).then(function (r) { S.data = r || { ok: false }; paint(); }); }
+      if (S.tab === "ndps" && S.sub.ndps === "patient") { if (!S.ndpsPatient) { S.data = null; paint(); return; } return c.api("/ward/register-ndps" + q + "&view=patient&patientId=" + encodeURIComponent(S.ndpsPatient)).then(function (r) { S.data = r || { ok: false }; paint(); }); }
       if (S.tab === "ndps" && S.sub.ndps === "form3eview") { if (!S.ndpsPatient) { S.data = null; paint(); return; } return c.api("/ward/register-ndps" + q + "&view=form3e&patientId=" + encodeURIComponent(S.ndpsPatient)).then(function (r) { S.data = r || { ok: false }; paint(); }); }
       if (!canList(c)) { paint(); return; }
       return c.api(listPath(q, kindNow())).then(function (r) { S.data = r || { ok: false }; paint(); });
@@ -591,7 +710,10 @@
     };
     paint(); schemas();
 
-    var authQuery = function () { return S.tab === "mtp" ? "&authorityOfficer=" + encodeURIComponent(val("rgAuthofficer")) + "&authorityLaw=" + encodeURIComponent(val("rgAuthlaw")) + "&authorityReference=" + encodeURIComponent(val("rgAuthreference")) : ""; };
+    var authQuery = function () {
+      if (S.tab === "mlc") return "&requisitionFrom=" + encodeURIComponent(val("rgReqfrom")) + "&requisitionRef=" + encodeURIComponent(val("rgReqref")) + "&requisitionDate=" + encodeURIComponent(val("rgReqdate"));
+      return S.tab === "mtp" ? "&authorityOfficer=" + encodeURIComponent(val("rgAuthofficer")) + "&authorityLaw=" + encodeURIComponent(val("rgAuthlaw")) + "&authorityReference=" + encodeURIComponent(val("rgAuthreference")) : "";
+    };
     el.onclick = function (ev) {
       var b = ev.target.closest && ev.target.closest("[data-rg]"); if (!b) return;
       var act = b.getAttribute("data-rg"), id = b.getAttribute("data-id"), kind = kindNow(), schema = S.schemas && S.schemas[kind];
@@ -680,6 +802,32 @@
           S.vitalKind = pk; S.extra = null; S.form = { kind: pk, fields: r.fields, patientId: r.patientId, deliveryId: r.deliveryId || null, note: r.note }; paint();
         });
       }
+      if (act === "kerala") {
+        return c.api(DOOR.mlc + q + "&kind=mlc&period=" + S.period + "&format=kerala" + authQuery()).then(function (r) {
+          if (!r || !r.ok || !r.csv) { S.msg = { ok: false, text: refusal(c, r) }; return paint(); }
+          saveCsv(r.filename, r.csv); S.msg = { ok: true, text: T(c, "site.registers.exported", "Exported {n} rows. Submission is manual.", { n: r.rows }) }; paint();
+        });
+      }
+      if (act === "closeday" && S.data && S.data.ok) {
+        var ci = String(id).split(":"), cit = S.data.items[Number(ci[0])], cday = cit && cit.form3h[Number(ci[1])];
+        if (!cday) return;
+        return c.api("/ward/register-ndps", { orgId: org, kind: "form3hclose", fields: { day: cday.date, drug: cit.code, unit: cit.unit, location: cit.location || undefined, closedBy: val("rgClose_" + ci[0]) }, idempotencyKey: "rgh-" + Date.now() }).then(function (r) {
+          S.msg = r && r.ok ? { ok: true, text: T(c, "site.registers.ndps.dayClosedSaved", "Day {d} closed on page {p}.", { d: cday.date, p: r.entry.serial }) } : { ok: false, text: refusal(c, r) };
+          return load();
+        });
+      }
+      if (act === "receive" || act === "transfer") {
+        var pre = act === "receive" ? "rgR_" : "rgT_";
+        var mv = { orgId: org, kind: act === "receive" ? "receipt" : "transfer-out", code: val(pre + "code"), quantity: { value: Number(val(pre + "quantity")), unit: val(pre + "unit") }, location: val(pre + "location") || undefined, batch: val(pre + "batch") || undefined, idempotencyKey: "rg" + act + "-" + Date.now() };
+        if (act === "receive") ["expiry", "receivedFrom", "documentNo", "supplierAddress", "supplierLicenceNo", "manufacturer", "revisedEstimateRef"].forEach(function (k) { if (val(pre + k)) mv[k] = val(pre + k); });
+        else ["toInstitution", "controllerApprovalRef", "transferKind"].forEach(function (k) { if (val(pre + k)) mv[k] = val(pre + k); });
+        return c.api("/ward/stock-move", mv).then(function (r) {
+          S.msg = r && r.ok ? { ok: true, text: act === "receive" ? T(c, "site.registers.ndps.received", "The receipt is recorded on the register.") + (r.estimateWarning ? " " + r.estimateWarning : "") : T(c, "site.registers.ndps.transferred", "The transfer is recorded on the register.") } : { ok: false, text: refusal(c, r) };
+          return load();
+        });
+      }
+      if (act === "homecare" && S.data && S.data.ok) { S.form = { kind: "homecare", patientId: S.data.patientId, fields: { dispenseId: id, issuedOn: b.getAttribute("data-date") } }; return paint(); }
+      if (act === "schedx") { S.form = { kind: "schedxsupply", patientId: b.getAttribute("data-patient"), fields: { dispenseId: id, date: b.getAttribute("data-date") } }; return paint(); }
       if (act === "count") {
         return c.api("/ward/register-ndps", { orgId: org, code: val("rgC_code"), unit: val("rgC_unit"), location: val("rgC_location"), counted: val("rgC_counted"), shift: val("rgC_shift"), witnessId: val("rgC_witness"), note: val("rgC_note"), idempotencyKey: "rgc-" + Date.now() }).then(function (r) {
           S.msg = r && r.ok ? { ok: !r.discrepancy, text: r.note } : { ok: false, text: refusal(c, r) };
@@ -713,5 +861,5 @@
     };
   } });
 
-  WSQ._registers = { formHtml: formHtml, readForm: readForm, entriesTable: entriesTable, ndpsHtml: ndpsHtml, state: S, csvToRows: csvToRows, settingsHtml: settingsHtml, readSettings: readSettings, clockText: clockText, statusHtml: statusHtml, annualHtml: annualHtml, form3eViewHtml: form3eViewHtml };
+  WSQ._registers = { formHtml: formHtml, readForm: readForm, entriesTable: entriesTable, ndpsHtml: ndpsHtml, rule65Html: rule65Html, ndpsPatientHtml: ndpsPatientHtml, entryHtml: entryHtml, state: S, csvToRows: csvToRows, settingsHtml: settingsHtml, readSettings: readSettings, clockText: clockText, statusHtml: statusHtml, annualHtml: annualHtml, form3eViewHtml: form3eViewHtml };
 })();
