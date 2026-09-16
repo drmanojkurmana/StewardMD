@@ -157,9 +157,10 @@ async function verifyAuditChain(repository, tenantId, opts) {
   }
 }
 
-/* INDIA: Indian Medical Council regulation 1.3.1 keeps in-patient records at least three years; the
- * same citation and default as documents.js DEFAULT_RETENTION_YEARS. The audit of those records is kept
- * at least as long. No other region has a default here. */
+/* INDIA: Indian Medical Council regulation 1.3.1 keeps in-patient records at least three years, and the
+ * audit of those records is kept at least as long. It is informational (nothing deletes on it) and above
+ * the one-year log floor of DPDP Rules 2025 r.6(1)(e) and r.8(3); documents.js now keeps documents ten
+ * years (retention.js) and audit rows are never deleted. No other region has a default here. */
 const REGION_DEFAULT_YEARS = Object.freeze({ IN: { years: 3, source: "Indian Medical Council regulation 1.3.1 (records kept at least three years)" } });
 
 /** PURE. The audit retention period to show. INFORMATIONAL: nothing anywhere deletes on it. */

@@ -55,6 +55,7 @@ import { assemble as patientCopyAssemble, statements as patientStatements, readW
 import { NOT_EMERGENCY } from "./portal-requests.js";
 /* P2.9: what a proxy may see, the portal-only sections, and the patient's own consent withdrawal. */
 import { proxyFrom, grantSections, readerId, portalExtras, scopeDocument } from "./portal-view.js";
+import { lawOn, childGate } from "./privacy-law.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -175,6 +176,8 @@ function AccessGrant(input) {
     /* P2.9: a family member or carer. Which contact, what they may see, and who agreed and how. The
      * sections are enforced on every read and write FROM THIS FIELD; null means the patient's own. */
     proxy: i.proxy || null,
+    /* DPDP Rules 2025 r.10: for a child's portal account, whose identity as parent or guardian was checked, and how. */
+    parentVerification: i.parentVerification || null,
     issuedBy: i.issuedBy,
     issuedAt: i.issuedAt,
     codeHash: i.codeHash,
@@ -291,11 +294,30 @@ async function enrolPatient(request, env, ctx) {
     proxy = { ...built.proxy, relationship: person.relationship || null, name: person.name || null };
   }
 
+  /* DPDP Rules 2025 r.10, from commencement (privacy-law.js): a portal account is not a health service, so for a child
+   * (or a patient whose date of birth is not recorded) it needs a parent or guardian verified against an ID the
+   * hospital holds or a DigiLocker token. Before commencement nothing changes. */
+  let parentVerification = null;
+  const law = lawOn(ctx.dpdp, Date.now());
+  if (law.dpdpInForce) {
+    let patient;
+    try {
+      patient = await new RecordService({ repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym, tenant: resolved.tenant || { id: mig.tenantId }, actor: resolved.actor, role: resolved.role || "clinician", roleSource: resolved.source || "wardsynq" }).get("Patient", patientId);
+    } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "the patient's date of birth could not be read, so a child's account could not be checked", written: 0 }; }
+    const pv = ctx.parentVerification || null;
+    const gate = childGate({ dob: patient && patient.dob, purpose: "portal-account", atMs: Date.now(), law, givenBy: pv ? "parent" : "", verification: pv });
+    if (gate.required && !gate.satisfied) {
+      return { ...base, ok: false, status: 422, error: "parental_consent_required", reason: gate.reason, citation: gate.citation, written: 0,
+        detail: "a portal account for a child needs a parent or guardian whose identity was checked against an ID the hospital holds or a DigiLocker token" };
+    }
+    if (gate.required) parentVerification = { method: pv.method, reference: str(pv.reference).slice(0, 200), parentName: str(pv.parentName).slice(0, 200), verifiedBy: resolved.actor.id, citation: gate.citation };
+  }
+
   const at = new Date().toISOString();
   const id = `wsq-pacc-${str(patientId).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${at.replace(/[^0-9]/g, "")}`;
   const code = makeCode();
   const grant = AccessGrant({
-    id, patientId, issuedTo: proxy ? "proxy" : (str(ctx.issuedTo) || "patient"), identifiedBy, proxy,
+    id, patientId, issuedTo: proxy ? "proxy" : (str(ctx.issuedTo) || "patient"), identifiedBy, proxy, parentVerification,
     issuedBy: resolved.actor.id, issuedAt: at,
     codeHash: await hashSecret(code, id),
   });

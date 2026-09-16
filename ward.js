@@ -3087,6 +3087,13 @@
       "<input id=\"wConsentGiverName\" placeholder=\"" + wTA("ward.giver-name-if-not-the-patient", "Giver name (if not the patient)") + "\">" +
       "<label><input type=\"checkbox\" id=\"wConsentCapacity\" checked> " + wTH("ward.patient-had-capacity", "Patient had capacity") + "</label>" +
       "<input id=\"wConsentValidUntil\" type=\"date\" placeholder=\"" + wTA("ward.valid-until-optional", "Valid until (optional)") + "\">" +
+      /* DPDP Rules 2025 r.10 and r.11, from 13 May 2027: a non-care consent for a child needs the parent verified; a guardian for an adult names who appointed them. The server decides when these apply. */
+      "<details><summary>" + wTH("ward.consent-parent-verify", "Child or guardian consent (DPDP Rules r.10, r.11)") + "</summary>" +
+      '<select id="wConsentPvMethod"><option value="">' + wTH("ward.consent-pv-none", "Parent identity not checked") + '</option><option value="id-held">' + wTH("ward.consent-pv-id", "Checked against an ID the hospital holds") + '</option><option value="digilocker-token">' + wTH("ward.consent-pv-digilocker", "Checked with a DigiLocker token") + "</option></select>" +
+      "<input id=\"wConsentPvRef\" placeholder=\"" + wTA("ward.consent-pv-ref", "ID or token reference") + "\">" +
+      "<input id=\"wConsentPvName\" placeholder=\"" + wTA("ward.consent-pv-name", "Parent or guardian name") + "\">" +
+      '<select id="wConsentGaSource"><option value="">' + wTH("ward.consent-ga-none", "Guardian appointment not recorded") + '</option><option value="court">' + wTH("ward.consent-ga-court", "Appointed by a court") + '</option><option value="designated-authority">' + wTH("ward.consent-ga-authority", "Appointed by a designated authority") + '</option><option value="local-level-committee">' + wTH("ward.consent-ga-committee", "Appointed by a local level committee") + "</option></select>" +
+      "<input id=\"wConsentGaRef\" placeholder=\"" + wTA("ward.consent-ga-ref", "Appointment order reference") + "\"></details>" +
       '<button class="w-btn" data-w-act="consentrecord">' + ms("fact_check") + wTH("ward.record2", "Record") + "</button></div>" +
       "</div>";
   }
@@ -3111,7 +3118,7 @@
       "</div>";
   }
 
-  var ROI_RELATIONSHIPS = [["patient", "Patient"], ["attorney", "Attorney"], ["other-provider", "Other provider"], ["insurer", "Insurer"], ["government-agency", "Government agency"], ["employer", "Employer"], ["family-member", "Family member"], ["other", "Other"]];
+  var ROI_RELATIONSHIPS = [["patient", "Patient"], ["authorised-attendant", "Authorised attendant"], ["legal-authority", "Legal authority"], ["attorney", "Attorney"], ["other-provider", "Other provider"], ["insurer", "Insurer"], ["government-agency", "Government agency"], ["employer", "Employer"], ["family-member", "Family member"], ["other", "Other"]];
   function roiView(state) {
     var r = state.roi || {};
     var rows = (r.requests || []).map(function (req) {
@@ -3126,6 +3133,10 @@
       return '<li class="w-mini-row"><div><span class="w-st ' + esc(req.state) + '">' + esc(roiStateWord(req.state)) + "</span> " +
         "<b>" + esc(req.requester && req.requester.name) + "</b>" + (req.requester && req.requester.relationship ? " (" + esc(req.requester.relationship) + ")" : "") +
         " &middot; " + esc(req.purpose) +
+        /* IMC Regulations 2002 reg 1.3.2: documents issued within 72 hours to the patient, an authorised attendant or a legal authority. */
+        (req.imcClock ? "<div class=\"w-dt-times\">" + (req.imcClock.late ? '<span class="w-st stop">' + wTH("ward.roi-imc-late", "Past 72 hours") + "</span> " : "") +
+          wTH("ward.roi-imc-due", "Copies due within 72 hours (IMC Regulations 2002 reg 1.3.2), by {when}", { when: when(req.imcClock.dueBy) }) +
+          (req.requester && req.requester.authority ? " &middot; " + wTH("ward.roi-authority", "authority: {authority}", { authority: esc(req.requester.authority) }, "authority") : "") + "</div>" : "") +
         "<div class=\"w-dt-times\">" + wTH("ward.scope-requested", "scope: {join}{v}{v2}{v3} &middot; requested {requestedAt}", { join: esc((req.scope && req.scope.recordTypes || []).join(", ")), v: (req.authorizationBasis ? " &middot; " + wTH("ward.basis", "basis: {authorizationBasis}", { authorizationBasis: esc(req.authorizationBasis) }, "authorizationBasis") : ""), v2: (req.decisionReason ? " &middot; " + esc(req.decisionReason) : ""), v3: (req.disclosure ? " &middot; " + wTH("ward.sent", "sent {deliveredStatus} ({stringify})", { deliveredStatus: esc(req.disclosure.deliveredStatus), stringify: esc(JSON.stringify(req.disclosure.resourceCounts || {})) }, "deliveredStatus stringify") : ""), requestedAt: when(req.requestedAt) }, "join requestedAt") + "</div></div>" +
         (actions ? '<div class="w-mini-row-act">' + actions + "</div>" : "") +
         "</li>";
@@ -3139,6 +3150,7 @@
       "<input id=\"wRoiRequesterName\" placeholder=\"" + wTA("ward.requester-name", "Requester name") + "\">" +
       "<input id=\"wRoiOrg\" placeholder=\"" + wTA("ward.organization-optional", "Organization (optional)") + "\">" +
       '<select id="wRoiRelationship">' + ROI_RELATIONSHIPS.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(wTEn(x[1])) + "</option>"; }).join("") + "</select>" +
+      "<input id=\"wRoiAuthority\" placeholder=\"" + wTA("ward.roi-authority-input", "Authority (authorised attendant: the patient's signed authorisation)") + "\">" +
       "<input id=\"wRoiPurpose\" placeholder=\"" + wTA("ward.purpose", "Purpose") + "\">" +
       "<input id=\"wRoiRecipient\" placeholder=\"" + wTA("ward.recipient-where-it-goes", "Recipient (where it goes)") + "\">" +
       "<input id=\"wRoiRecordTypes\" placeholder=\"" + wTA("ward.record-types-comma-separated-e-g", "Record types, comma-separated (e.g. DiagnosticReport)") + "\">" +
@@ -12892,13 +12904,15 @@
       .catch(function () { st.docVersions = { id: id, failed: true }; paint(); });
   }
   function documentPurge(id) {
-    askFor({ icon: "delete_forever", danger: true, ok: wTH("ward.remove", "Remove"),
-      title: wTH("ward.delete-the-stored-file-for-every", "Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone.", null, "", 1) }, function () {
+    /* The purge is the destruction record (legal opinion H.4.2): a named person gives the reason. The server refuses
+     * inside the retention period and under a legal hold, and says until when. */
+    askReason(wTH("ward.delete-the-stored-file-for-every", "Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone.", null, "", 1),
+      wT("ward.doc-purge-reason-needed", "Destroying a document needs a reason."), wTH("ward.remove", "Remove"), function (reason) {
       st.busy = true; paint();
-      return apiPost("/ward/document-purge", { orgId: st.orgId, documentId: id })
+      return apiPost("/ward/document-purge", { orgId: st.orgId, documentId: id, reason: reason })
         .then(function (r) { if (settle(r, r && r.ok ? wT("ward.file-deleted-the-record-of-the", "File deleted. The record of the document is kept.") : null)) loadDocuments(); else paint(); })
         .catch(function () { st.busy = false; st.err = wT("ward.could-not-delete-the-file", "Could not delete the file."); paint(); });
-    });
+    }, { danger: true, icon: "delete_forever", label: wTH("ward.doc-purge-reason", "Why is it being destroyed? This is kept as the destruction record.") });
   }
   function documentWithdraw(id) {
     askReason(wTH("ward.why-is-this-document-being-withdrawn", "Why is this document being withdrawn? (For example: scanned under the wrong patient.) The file is kept.", null, "", 1), wT("ward.a-withdrawal-needs-a-reason", "A withdrawal needs a reason."), wTH("ward.withdraw", "Withdraw"), function (reason) {
@@ -13652,6 +13666,8 @@
       orgId: st.orgId, patientId: st.sel.patientId, encounterId: st.sel.encounterId, scope: scope, decision: decision,
       detail: detail || undefined, givenBy: st.consent.givenBy, giverName: val("wConsentGiverName") || undefined,
       capacity: capEl ? capEl.checked : true, validUntil: val("wConsentValidUntil") || undefined,
+      parentVerification: val("wConsentPvMethod") ? { method: val("wConsentPvMethod"), reference: val("wConsentPvRef"), parentName: val("wConsentPvName") } : undefined,
+      guardianAppointment: val("wConsentGaSource") ? { source: val("wConsentGaSource"), orderRef: val("wConsentGaRef") } : undefined,
     })
       .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadConsent(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
@@ -13694,7 +13710,7 @@
     st.busy = true; paint();
     apiPost("/ward/roi-request", {
       orgId: st.orgId, patientId: st.sel.patientId,
-      requester: { name: name, organization: val("wRoiOrg") || undefined, relationship: val("wRoiRelationship") },
+      requester: { name: name, organization: val("wRoiOrg") || undefined, relationship: val("wRoiRelationship"), authority: val("wRoiAuthority") || undefined },
       purpose: purpose, recipient: recipient, scope: { recordTypes: types },
     })
       .then(function (r) { if (settle(r, wT("ward.requested", "Requested."))) loadRoi(); else paint(); })

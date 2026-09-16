@@ -30,7 +30,7 @@
   function tabLabel(c, t) {
     return {
       requests: T(c, "site.gov.tab.requests", "Data requests"), breaches: T(c, "site.gov.tab.breaches", "Breaches"),
-      notices: T(c, "site.gov.tab.notices", "Privacy notices"), nabh: T(c, "site.gov.tab.nabh", "NABH indicators"),
+      notices: T(c, "site.gov.tab.notices", "Privacy notices"), retention: T(c, "site.gov.tab.retention", "Retention and legal holds"), nabh: T(c, "site.gov.tab.nabh", "NABH indicators"),
       hmis: T(c, "site.gov.tab.hmis", "HMIS monthly"), dhs: T(c, "site.gov.tab.dhs", "Digital health self-assessment"),
       reports: T(c, "site.gov.tab.reports", "Report builder")
     }[t];
@@ -67,6 +67,7 @@
     if (!c.isWardsynq()) { el.innerHTML = head + '<div class="msg note">' + esc(T(c, "site.gov.notWardsynq", "These records are kept for a WardSynQ hospital only.")) + "</div>"; return; }
     var tabs = [];
     if (c.can("dpdp.manage")) tabs.push("requests", "breaches", "notices");
+    if (c.can("dpdp.manage") || c.can("register.records")) tabs.push("retention");
     if (c.can("analytics.view")) tabs.push("nabh", "hmis");
     if (c.can("staff.admin")) tabs.push("dhs", "reports");
     if (!tabs.length) { el.innerHTML = head + '<div class="msg note">' + esc(T(c, "site.gov.noAccess", "Your role ({role}) includes none of dpdp.manage, analytics.view or staff.admin, which these pages need.", { role: st.who && st.who.role })) + "</div>"; return; }
@@ -76,28 +77,83 @@
     }).join("") + '</div><div id="govBody"></div>';
     onAll(el, "data-gtab", function (b) { g.tab = b.getAttribute("data-gtab"); WSQ.render("governance"); });
     var body = document.getElementById("govBody");
-    ({ requests: requestsTab, breaches: breachesTab, notices: noticesTab, nabh: nabhTab, hmis: hmisTab, dhs: dhsTab, reports: reportsTab })[g.tab](c, body, g);
+    ({ requests: requestsTab, breaches: breachesTab, notices: noticesTab, retention: retentionTab, nabh: nabhTab, hmis: hmisTab, dhs: dhsTab, reports: reportsTab })[g.tab](c, body, g);
   } });
+
+  /* ---------------------------------------------------------------- the law in force (privacy-law.js) */
+  /* Which regime applies today and when the DPDP duties start, from the server (legal opinion of 17 Sep 2026, section
+   * A). Dates are server values; the sentences around them are translated. */
+  function lawHtml(c, law) {
+    var esc = c.esc;
+    if (!law) return "";
+    var day = function (d) { var t = Date.parse(d + "T00:00:00+05:30"); return isFinite(t) ? new Date(t).toLocaleDateString() : d; };
+    return '<div class="card"><h2>' + esc(T(c, "site.gov.law.title", "Which privacy law applies")) + "</h2>" +
+      '<div class="msg ' + (law.dpdpInForce ? "ok" : "warn") + '">' + esc(law.dpdpInForce
+        ? T(c, "site.gov.law.dpdpNow", "The DPDP Act 2023 and DPDP Rules 2025 apply to this hospital from {date}. The SPDI Rules 2011 and CERT-In duties are kept alongside.", { date: day(law.dpdpStart) })
+        : T(c, "site.gov.law.spdiNow", "Today the IT Act s.43A with the SPDI Rules 2011 and the CERT-In Directions 2022 apply. The DPDP Act duties of a hospital (notice, consent, security, breach, rights, children) start on {date}.", { date: day(law.dpdpStart) })) + "</div>" +
+      '<div class="kv"><dt>' + esc(T(c, "site.gov.law.published", "DPDP Rules published")) + "</dt><dd>" + esc(day(law.published)) + " " + EN(c, esc("(G.S.R. 843(E), G.S.R. 846(E))")) + "</dd>" +
+      "<dt>" + esc(T(c, "site.gov.law.cm", "Consent Manager rules (r.4)")) + "</dt><dd>" + esc(day(law.consentManagerStart)) + " &middot; " + esc(law.consentManagersInForce ? T(c, "site.gov.law.inForce", "in force") : T(c, "site.gov.law.notYet", "not yet in force")) + "</dd>" +
+      "<dt>" + esc(T(c, "site.gov.law.hospital", "Hospital duties (ss.3-17, rules 3, 5-16)")) + "</dt><dd>" + esc(day(law.dpdpStart)) + " &middot; " + esc(law.dpdpInForce ? T(c, "site.gov.law.inForce", "in force") : T(c, "site.gov.law.notYet", "not yet in force")) +
+      (law.dpdpStartSource === "hospital" ? " " + esc(T(c, "site.gov.law.earlier", "(brought forward by this hospital)")) : "") + "</dd></div>" +
+      '<p class="quiet">' + esc(T(c, "site.gov.law.dayNote", "The gazette is dated 13 November 2025 and was published on the 14th; the earlier day is counted. This is legal research awaiting a practising lawyer's review, not legal advice.")) + "</p></div>";
+  }
+
+  /* Act s.5(2): patients given the notice before DPDP commencement are given a fresh one. Before commencement the list is
+   * not open; a failed read says so and never looks like nobody. */
+  function renoticeHtml(c, rn) {
+    var esc = c.esc;
+    if (rn === false) return '<div class="msg err">' + esc(T(c, "site.gov.rn.failed", "The list of patients due a fresh notice could not be read. This is not the same as there being none.")) + "</div>";
+    if (!rn || !rn.open) return "";
+    return '<div class="card"><h2>' + esc(T(c, "site.gov.rn.title", "Fresh notice due (DPDP Act s.5(2))")) + "</h2>" +
+      (rn.patients.length ? "<p>" + esc(T(c, "site.gov.rn.count", "{n} patients were last given the notice before {date}. Give each the current notice when they are next seen.", { n: rn.patients.length, date: rn.from })) + '</p><ul class="quiet">' +
+        rn.patients.slice(0, 50).map(function (p) { return "<li>" + EN(c, esc(p.patientId)) + " &middot; " + esc(dt(p.lastAcknowledgedAt)) + "</li>"; }).join("") + "</ul>"
+        : '<p class="quiet">' + esc(T(c, "site.gov.rn.none", "No patient's last notice predates DPDP commencement.")) + "</p>") + "</div>";
+  }
 
   /* ---------------------------------------------------------------- data principal requests */
   function clocksHtml(c, k) {
-    var esc = c.esc, d = (k && k.responseDays) || {};
-    var n = function (v) { return v == null ? esc(T(c, "site.gov.clocks.notSet", "not set")) : esc(T(c, "site.gov.clocks.days", "{n} days", { n: v })); };
-    var h = function (v) { return v == null ? esc(T(c, "site.gov.clocks.notSet", "not set")) : esc(T(c, "site.gov.clocks.hours", "{n} hours", { n: v })); };
+    var esc = c.esc, d = (k && k.responseDays) || {}, src = (k && k.responseSource) || {}, law = (k && k.law) || {};
+    var srcWord = function (s) { return s === "hospital" ? T(c, "site.gov.clocks.hospitalSet", "set by this hospital") : T(c, "site.gov.clocks.default", "default"); };
     var out = '<div class="card"><h2>' + esc(T(c, "site.gov.clocks.title", "Answer times")) + "</h2>" +
-      '<div class="msg warn">' + TS(c, "site.gov.clocks.notConfirmed", "These are the hospital's own times. The DPDP Rules 2025 times were not confirmed when this was built: check them before relying on these. With no time set, no due date is shown.") + "</div>" +
-      '<div class="kv">' + KINDS.map(function (x) { return "<dt>" + esc(kindLabel(c, x)) + "</dt><dd>" + n(d[x]) + "</dd>"; }).join("") +
-      "<dt>" + esc(T(c, "site.gov.clocks.board", "Breach: tell the Data Protection Board within")) + "</dt><dd>" + h(k && k.breachBoardHours) + "</dd>" +
-      "<dt>" + esc(T(c, "site.gov.clocks.principals", "Breach: tell each affected patient within")) + "</dt><dd>" + h(k && k.breachPrincipalHours) + "</dd></div>";
+      '<p class="quiet">' + esc(T(c, "site.gov.clocks.rule", "Before {date} every request is answered within the SPDI grievance time (one month, at most 30 days). From {date} each kind of request has its DPDP time (at most 90 days). A hospital may set a shorter time, never a longer one.", { date: law.dpdpStart || "" })) + "</p>" +
+      '<div class="kv"><dt>' + esc(T(c, "site.gov.clocks.spdi", "Today, every request (SPDI Rules 2011 r.5(9))")) + "</dt><dd>" + esc(T(c, "site.gov.clocks.days", "{n} days", { n: k && k.spdiDays })) + "</dd>" +
+      KINDS.map(function (x) { return "<dt>" + esc(kindLabel(c, x)) + " " + esc(T(c, "site.gov.clocks.fromDpdp", "(from DPDP commencement)")) + "</dt><dd>" + esc(T(c, "site.gov.clocks.days", "{n} days", { n: d[x] })) + " &middot; " + esc(srcWord(src[x])) + "</dd>"; }).join("") +
+      "<dt>" + esc(T(c, "site.gov.clocks.certIn", "Breach: report to CERT-In within (in force now)")) + "</dt><dd>" + esc(T(c, "site.gov.clocks.hours", "{n} hours", { n: k && k.certInHours })) + "</dd>" +
+      "<dt>" + esc(T(c, "site.gov.clocks.boardDetailed", "Breach: detailed report to the Data Protection Board within (from DPDP commencement)")) + "</dt><dd>" + esc(T(c, "site.gov.clocks.hours", "{n} hours", { n: k && k.boardDetailedHours })) + "</dd>" +
+      "<dt>" + esc(T(c, "site.gov.clocks.principalsTarget", "Breach: tell each affected patient within (hospital policy; the law says without delay)")) + "</dt><dd>" + esc(T(c, "site.gov.clocks.hours", "{n} hours", { n: k && k.breachPrincipalHours })) + " &middot; " + esc(srcWord(k && k.breachPrincipalSource)) + "</dd></div>" +
+      '<p class="quiet">' + EN(c, esc(k && k.citations ? [k.citations.spdi, k.citations.dpdp, k.citations.certIn, k.citations.board].join(" ") : "")) + "</p>";
     if (c.can("staff.admin")) {
       out += '<div class="row">' + KINDS.map(function (x) {
-        return '<label class="f"><span>' + esc(kindLabel(c, x)) + '</span><input id="gClk_' + x + '" type="number" min="1" max="365" value="' + esc(d[x] == null ? "" : d[x]) + '"></label>';
+        return '<label class="f"><span>' + esc(kindLabel(c, x)) + '</span><input id="gClk_' + x + '" type="number" min="1" max="90" value="' + esc(src[x] === "hospital" ? d[x] : "") + '"></label>';
       }).join("") +
-        '<label class="f"><span>' + esc(T(c, "site.gov.clocks.boardHours", "Board, hours")) + '</span><input id="gClkBoard" type="number" min="1" max="720" value="' + esc(k && k.breachBoardHours != null ? k.breachBoardHours : "") + '"></label>' +
-        '<label class="f"><span>' + esc(T(c, "site.gov.clocks.principalHours", "Patients, hours")) + '</span><input id="gClkPrin" type="number" min="1" max="720" value="' + esc(k && k.breachPrincipalHours != null ? k.breachPrincipalHours : "") + '"></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.gov.clocks.principalHours", "Patients, hours")) + '</span><input id="gClkPrin" type="number" min="1" max="720" value="' + esc(k && k.breachPrincipalSource === "hospital" ? k.breachPrincipalHours : "") + '"></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.gov.clocks.principalReason", "Reason, if more than 72 hours")) + '</span><input id="gClkPrinWhy" value="' + esc((k && k.breachPrincipalHoursReason) || "") + '"></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.gov.clocks.startDate", "Apply DPDP from (only earlier than 13 May 2027)")) + '</span><input id="gClkStart" type="date" min="2025-11-13" max="2027-05-13" value="' + esc(law.dpdpStartSource === "hospital" ? law.dpdpStart : "") + '"></label>' +
         '<button class="btn" type="button" id="gClkSave">' + esc(T(c, "site.gov.clocks.save", "Save answer times")) + "</button></div>";
     }
     return out + '<div id="gClkMsg"></div></div>';
+  }
+
+  /* Each retention class the patient has records in, the rule that keeps it and the date it ends (legal opinion H.4.5).
+   * Rules and dates are server values. */
+  function retainedHtml(c, classes) {
+    var esc = c.esc;
+    if (!classes || !classes.length) return "";
+    return '<ul class="quiet">' + classes.map(function (x) {
+      var until = x.keepUntil ? new Date(Date.parse(x.keepUntil)).toLocaleDateString() : T(c, "site.gov.ret.lifeOfRecord", "for the life of the record it belongs to");
+      return "<li><b>" + EN(c, esc(x["class"])) + "</b>: " + esc(T(c, "site.gov.ret.until", "kept until {date}", { date: until })) +
+        (x.untilProceedingsEnd ? " " + esc(T(c, "site.gov.ret.orProceedings", "or until any court proceedings end, whichever is later")) : "") +
+        (x.minorRule ? " " + esc(T(c, "site.gov.ret.minor", "(a child's record: at least {n} years after turning 18)", { n: x.minorRule })) : "") +
+        '<br><span class="quiet">' + EN(c, esc(x.rule)) + "</span></li>";
+    }).join("") + "</ul>";
+  }
+  function holdsHtml(c, holds, patientId) {
+    var esc = c.esc;
+    if (!holds || !holds.length) return "";
+    return '<div class="msg err"><b>' + esc(T(c, "site.gov.lh.title", "Legal hold: nothing can be erased or destroyed")) + "</b><ul>" + holds.map(function (x) {
+      return "<li>" + EN(c, esc(x.reason + ": " + (x.reference || ""))) + " &middot; " + (x.auto ? esc(T(c, "site.gov.lh.auto", "set by the medico-legal case register")) : esc(T(c, "site.gov.lh.placed", "placed {when}", { when: dt(x.placedAt) }))) +
+        (patientId ? ' <button class="btn quiet" type="button" data-glift="' + esc(x.id) + '" data-pid="' + esc(patientId) + '">' + esc(T(c, "site.gov.lh.lift", "Lift (medical records officer)")) + "</button>" : "") + "</li>";
+    }).join("") + "</ul></div>";
   }
 
   function erasureHtml(c, e) {
@@ -107,7 +163,8 @@
       "<dt>" + esc(T(c, "site.gov.erasure.consents", "Consents withdrawn")) + "</dt><dd>" + list(e.consentsWithdrawn) + "</dd>" +
       "<dt>" + esc(T(c, "site.gov.erasure.removed", "Removed from the current record")) + "</dt><dd>" + list(e.removedFromCurrentRecord) + "</dd>" +
       "<dt>" + esc(T(c, "site.gov.erasure.registration", "Removed from the registration details")) + "</dt><dd>" + list(e.registrationDetailsRemoved) + "</dd>" +
-      "<dt>" + esc(T(c, "site.gov.erasure.kept", "Kept")) + "</dt><dd>" + esc(T(c, "site.gov.erasure.keptWhy", "The clinical record. Medical records must be kept for as long as the law requires; the Act allows this (s8(7), s12(3)).")) + "</dd>" +
+      "<dt>" + esc(T(c, "site.gov.erasure.kept", "Kept")) + "</dt><dd>" + esc(T(c, "site.gov.erasure.keptWhy", "The clinical record. Medical records must be kept for as long as the law requires; the Act allows this (s8(7), s12(3)).")) +
+      retainedHtml(c, e.retained && e.retained.classes) + "</dd>" +
       "<dt>" + esc(T(c, "site.gov.erasure.history", "Record history")) + "</dt><dd>" + esc(T(c, "site.gov.erasure.historyWhy", "Values removed from the current record stay in its version history, which cannot be edited. They are not erased.")) + "</dd>" +
       (e.failures && e.failures.length ? "<dt>" + esc(T(c, "site.gov.erasure.notDone", "Not done")) + '</dt><dd class="err">' + EN(c, esc(e.failures.map(function (f) { return f.step + (f.detail ? ": " + f.detail : ""); }).join("; "))) + "</dd>" : "") +
       "</div>";
@@ -121,7 +178,9 @@
       '<p class="quiet">' + esc(T(c, "site.gov.req.received", "Received {when} by {via}", { when: dt(r.receivedAt), via: viaLabel(c, r.receivedVia) })) + " &middot; " + due + "</p>" +
       "<p>" + EN(c, esc(r.detail)) + "</p>" +
       (r.nominee ? "<p>" + esc(T(c, "site.gov.req.nominee", "Nominee")) + ": " + EN(c, esc(r.nominee.name + ", " + r.nominee.relationship + (r.nominee.contact ? ", " + r.nominee.contact : ""))) + "</p>" : "") +
+      (r.clock && r.clock.citation ? '<p class="quiet">' + esc(r.clock.regime === "dpdp-2025" ? T(c, "site.gov.req.clockDpdp", "Answer time under the DPDP Rules 2025:") : T(c, "site.gov.req.clockSpdi", "Answer time under the SPDI Rules 2011 (DPDP times apply to requests received from their commencement):")) + " " + EN(c, esc(r.clock.citation)) + "</p>" : "") +
       (r.response ? "<p><b>" + esc(T(c, "site.gov.req.answer", "Answer given")) + ":</b> " + EN(c, esc(r.response)) + "</p>" : "") +
+      (r.responseContact ? '<p class="quiet">' + esc(T(c, "site.gov.req.contact", "The answer named the contact:")) + " " + EN(c, esc([r.responseContact.dpoContact, r.responseContact.grievanceContact].filter(Boolean).join("; "))) + "</p>" : "") +
       erasureHtml(c, r.erasure || r.erasureAttempt) +
       '<div id="gHold_' + esc(r.id) + '"></div><div class="row">' +
       '<button class="btn quiet" type="button" data-ghold="' + esc(r.id) + '" data-pid="' + esc(r.patientId) + '">' + esc(T(c, "site.gov.req.holdings", "What we hold")) + "</button>";
@@ -142,8 +201,9 @@
       if (s.data === null) h = loading(c, T(c, "site.gov.req.loading", "Loading data requests..."));
       else if (s.data === false) h = failHtml(c, T(c, "site.gov.req.loadFailed", "Data requests could not be loaded. This is not the same as there being none:"), s.fail);
       else {
-        h = clocksHtml(c, s.data.clocks) +
-          '<div class="card"><h2>' + esc(T(c, "site.gov.req.fileTitle", "Record a request")) + '</h2><div class="row">' +
+        h = lawHtml(c, s.data.law) + renoticeHtml(c, s.data.renotice) + clocksHtml(c, s.data.clocks) +
+          '<div class="card"><h2>' + esc(T(c, "site.gov.req.fileTitle", "Record a request")) + '</h2>' +
+          '<p class="quiet">' + esc(T(c, "site.gov.req.copiesNote", "A request for copies of medical records by the patient, an authorised attendant or a legal authority is recorded as a release of information on the patient's chart, where its 72-hour clock runs (IMC Regulations 2002 reg 1.3.2).")) + '</p><div class="row">' +
           '<label class="f"><span>' + esc(T(c, "site.gov.req.mrn", "MR number")) + '</span><input id="gReqMrn" autocapitalize="characters" spellcheck="false"></label>' +
           '<label class="f"><span>' + esc(T(c, "site.gov.req.kind", "Request")) + '</span><select id="gReqKind">' + opts(KINDS, function (x) { return esc(kindLabel(c, x)); }) + "</select></label>" +
           '<label class="f"><span>' + esc(T(c, "site.gov.req.via", "Received by")) + '</span><select id="gReqVia">' + opts(VIAS, function (x) { return esc(viaLabel(c, x)); }) + "</select></label></div>" +
@@ -160,7 +220,11 @@
       on("gClkSave", function () {
         var num = function (id) { var v = val(id); return v === "" ? null : Number(v); };
         var days = {}; KINDS.forEach(function (x) { days[x] = num("gClk_" + x); });
-        c.api("/org/update", { orgId: c.state.orgId, wardsynq: { dpdp: { responseDays: days, breachBoardHours: num("gClkBoard"), breachPrincipalHours: num("gClkPrin") } } }).then(function (r) {
+        var dp = { responseDays: days, breachPrincipalHours: num("gClkPrin"), breachPrincipalHoursReason: val("gClkPrinWhy") || null, dpdpStartDate: val("gClkStart") || null };
+        if (dp.breachPrincipalHours > 72 && dp.breachPrincipalHoursReason && dp.breachPrincipalHoursReason.length < 10 || dp.breachPrincipalHours > 72 && !dp.breachPrincipalHoursReason) {
+          document.getElementById("gClkMsg").innerHTML = '<div class="msg err">' + esc(T(c, "site.gov.clocks.reasonNeeded", "More than 72 hours needs a reason of at least 10 characters; without one the 72-hour target is used.")) + "</div>"; return;
+        }
+        c.api("/org/update", { orgId: c.state.orgId, wardsynq: { dpdp: dp } }).then(function (r) {
           if (!r || !r.ok) { document.getElementById("gClkMsg").innerHTML = failHtml(c, T(c, "site.gov.clocks.notSaved", "Answer times not saved:"), r); return; }
           c.toast(T(c, "site.gov.clocks.saved", "Answer times saved.")); load();
         });
@@ -185,6 +249,8 @@
             // A partial erasure is written on the request and is shown by reloading it; the toast says it did not finish.
             c.toast(r && r.error === "erasure_partial" ? T(c, "site.gov.req.partial", "The erasure did not finish. The request stays open and shows what was and was not done.") : T(c, "site.gov.req.notSaved", "Not saved: {why}", { why: why(c, r) }));
             if (r && r.error === "erasure_partial") load();
+            /* A legal hold refuses the erasure outright; the holds and what is kept are shown on the request. */
+            if (r && r.error === "legal_hold") { var hb = document.getElementById("gHold_" + id); if (hb) hb.innerHTML = holdsHtml(c, r.holds) + retainedHtml(c, r.retained); }
             return;
           }
           c.toast(T(c, "site.gov.req.saved", "Saved.")); load();
@@ -198,6 +264,8 @@
           var h = res[0], a = res[1], out = "";
           out += h && h.ok ? '<div class="kv">' + (h.holdings.length ? h.holdings.map(function (x) { return "<dt>" + EN(c, esc(x.type)) + "</dt><dd>" + esc(x.count) + "</dd>"; }).join("") : "<dt></dt><dd>" + esc(T(c, "site.gov.hold.none", "No records for this patient.")) + "</dd>") + "</div>"
             : failHtml(c, T(c, "site.gov.hold.failed", "What the hospital holds could not be read:"), h);
+          if (h && h.ok) out += h.retention === false ? '<div class="msg err">' + esc(T(c, "site.gov.ret.unreadable", "What the law requires the hospital to keep could not be worked out. This is not the same as nothing being kept.")) + "</div>"
+            : h.retention ? holdsHtml(c, h.retention.holds) + retainedHtml(c, h.retention.retained) : "";
           out += a && a.ok ? "<p>" + (a.acknowledgements.length ? esc(T(c, "site.gov.hold.acked", "Privacy notice acknowledged: {list}", { list: a.acknowledgements.map(function (x) { return x.language + " v" + x.noticeVersion + " " + dt(x.acknowledgedAt); }).join("; ") })) : esc(T(c, "site.gov.hold.notAcked", "No privacy notice acknowledgement is recorded."))) + "</p>"
             : failHtml(c, T(c, "site.gov.hold.ackFailed", "Acknowledgements could not be read:"), a);
           box.innerHTML = out;
@@ -212,34 +280,65 @@
   }
 
   /* ---------------------------------------------------------------- breaches */
+  /* The five headings of what each affected patient is told (DPDP Rules 2025 r.7(1)(a) to (e)) and the five the hospital
+   * writes in the detailed report to the Board (r.7(2)(b); the sixth, the intimations given, is filled by the server). */
+  function principalHeadings(c) {
+    return [["nature", T(c, "site.gov.br.pi.nature", "(a) The nature, extent and timing of the breach")], ["consequences", T(c, "site.gov.br.pi.consequences", "(b) The likely consequences for the patient")],
+      ["mitigation", T(c, "site.gov.br.pi.mitigation", "(c) What the hospital has done to reduce the harm")], ["safetyMeasures", T(c, "site.gov.br.pi.safety", "(d) What the patient can do to protect themselves")],
+      ["contact", T(c, "site.gov.br.pi.contact", "(e) Who to contact with questions")]];
+  }
+  function boardHeadings(c) {
+    return [["facts", T(c, "site.gov.br.bh.facts", "Updated facts: nature, extent, timing, location and impact")], ["circumstances", T(c, "site.gov.br.bh.circumstances", "The circumstances and reasons")],
+      ["mitigation", T(c, "site.gov.br.bh.mitigation", "Measures taken to mitigate the risk")], ["findings", T(c, "site.gov.br.bh.findings", "Findings about the person who caused the breach")],
+      ["remedial", T(c, "site.gov.br.bh.remedial", "Remedial measures to prevent a repeat")]];
+  }
   function breachHtml(c, b) {
-    var esc = c.esc, open = b.state !== "closed";
-    var clock = function (label, due, doneAt, late) {
+    var esc = c.esc, open = b.state !== "closed" && b.state !== "withdrawn";
+    var clock = function (label, due, doneAt, late, notInForce) {
       return "<dt>" + esc(label) + "</dt><dd>" + (doneAt ? esc(T(c, "site.gov.br.toldAt", "Told {when}", { when: dt(doneAt) })) : esc(T(c, "site.gov.br.notYet", "Not yet"))) +
-        (due ? " &middot; " + esc(T(c, "site.gov.br.dueBy", "due by {when}", { when: dt(due) })) : " &middot; " + esc(T(c, "site.gov.br.noClock", "no time set"))) +
+        (due ? " &middot; " + esc(T(c, "site.gov.br.dueBy", "due by {when}", { when: dt(due) })) : notInForce ? " &middot; " + esc(T(c, "site.gov.br.boardNotInForce", "no Board duty: the hospital became aware before DPDP commencement")) : "") +
         (late ? ' <span class="pill stop">' + esc(T(c, "site.gov.br.late", "Late")) + "</span>" : "") + "</dd>";
     };
-    var h = '<div class="card"><h3>' + esc(T(c, "site.gov.br.detected", "Found {when}", { when: dt(b.detectedAt) })) + ' <span class="pill' + (open ? " warn" : " ok") + '">' + esc(stateLabel(c, b.state)) + "</span></h3>" +
+    var list = function (o, heads) { return o ? heads.map(function (x) { return o[x[0]] ? "<b>" + esc(x[1]) + ":</b> " + EN(c, esc(o[x[0]])) : ""; }).filter(Boolean).join("<br>") : ""; };
+    var h = '<div class="card"><h3>' + esc(T(c, "site.gov.br.detected", "Found {when}", { when: dt(b.detectedAt) })) + ' <span class="pill' + (open ? " warn" : " ok") + '">' + esc(b.state === "withdrawn" ? T(c, "site.gov.br.withdrawn", "Not a personal data breach (confirmed by a second person)") : stateLabel(c, b.state)) + "</span></h3>" +
       "<p>" + EN(c, esc(b.description)) + "</p>" +
       '<div class="kv">' +
+      (b.awareAt && b.awareAt !== b.detectedAt ? "<dt>" + esc(T(c, "site.gov.br.aware", "Hospital became aware")) + "</dt><dd>" + esc(dt(b.awareAt)) + "</dd>" : "") +
       (b.affectedCount != null ? "<dt>" + esc(T(c, "site.gov.br.affected", "People affected")) + "</dt><dd>" + esc(b.affectedCount) + "</dd>" : "") +
       (b.dataCategories && b.dataCategories.length ? "<dt>" + esc(T(c, "site.gov.br.categories", "Data involved")) + "</dt><dd>" + EN(c, esc(b.dataCategories.join(", "))) + "</dd>" : "") +
-      clock(T(c, "site.gov.br.board", "Data Protection Board"), b.boardDueBy, b.boardNotifiedAt, b.boardLate) +
-      clock(T(c, "site.gov.br.principals", "Affected patients"), b.principalsDueBy, b.principalsNotifiedAt, b.principalsLate) +
+      clock(T(c, "site.gov.br.certIn", "CERT-In (6 hours, in force now)"), b.certInDueBy, b.certInReportedAt, b.certInLate) +
+      (b.boardInitialAt ? "<dt>" + esc(T(c, "site.gov.br.boardInitial", "Board first told (without delay)")) + "</dt><dd>" + esc(dt(b.boardInitialAt)) + "</dd>" : "") +
+      clock(T(c, "site.gov.br.boardDetailed", "Data Protection Board, detailed report (72 hours)"), b.boardExtendedTo || b.boardDetailedDueBy || b.boardDueBy, b.boardNotifiedAt, b.boardLate, b.boardDuty === false) +
+      (b.boardExtendedTo ? "<dt>" + esc(T(c, "site.gov.br.extension", "Board extension")) + "</dt><dd>" + EN(c, esc(b.boardExtensionRef || "")) + "</dd>" : "") +
+      clock(T(c, "site.gov.br.principals2", "Affected patients (hospital target)"), b.principalsDueBy, b.principalsNotifiedAt, b.principalsLate) +
       "<dt>" + esc(T(c, "site.gov.br.assessment", "Assessment")) + "</dt><dd>" + (b.assessment ? EN(c, esc(b.assessment.text)) : esc(T(c, "site.gov.br.notAssessed", "Not assessed yet"))) + "</dd>" +
+      (b.principalIntimation ? "<dt>" + esc(T(c, "site.gov.br.toldPatients", "What the patients were told")) + "</dt><dd>" + list(b.principalIntimation, principalHeadings(c)) + "</dd>" : "") +
+      (b.boardReport ? "<dt>" + esc(T(c, "site.gov.br.boardReport", "Report to the Board")) + "</dt><dd>" + list(b.boardReport, boardHeadings(c)) + "<br><b>" + esc(T(c, "site.gov.br.bh.intimations", "Report on the intimations given")) + ":</b> " + EN(c, esc(b.boardReport.intimations)) + "</dd>" : "") +
+      (b.notBreachProposal ? "<dt>" + esc(T(c, "site.gov.br.notBreach", "Proposed as not a personal data breach")) + "</dt><dd>" + EN(c, esc(b.notBreachProposal.reasons)) + "</dd>" : "") +
       ((b.actions || []).length ? "<dt>" + esc(T(c, "site.gov.br.actions", "Actions")) + "</dt><dd>" + b.actions.map(function (a) { return EN(c, esc(dt(a.at) + ": " + a.text)); }).join("<br>") + "</dd>" : "") +
       "</div>";
     if (open) {
       var id = esc(b.id);
+      var area = function (key, label) { return '<label class="f"><span>' + esc(label) + '</span><textarea rows="2" id="gBr' + key + "_" + id + '"></textarea></label>'; };
       h += '<div class="row"><label class="f"><span>' + esc(T(c, "site.gov.br.event", "Record")) + '</span><select id="gBrEv_' + id + '">' +
         '<option value="assess">' + esc(T(c, "site.gov.br.ev.assess", "Assessment")) + "</option>" +
-        '<option value="board-notified">' + esc(T(c, "site.gov.br.ev.board", "The Board was told")) + "</option>" +
+        '<option value="cert-in-reported">' + esc(T(c, "site.gov.br.ev.certIn", "CERT-In was told")) + "</option>" +
+        '<option value="board-initial">' + esc(T(c, "site.gov.br.ev.boardInitial", "The Board was first told")) + "</option>" +
+        '<option value="board-notified">' + esc(T(c, "site.gov.br.ev.boardDetailed", "The detailed report went to the Board")) + "</option>" +
+        '<option value="board-extension">' + esc(T(c, "site.gov.br.ev.extension", "The Board allowed more time")) + "</option>" +
         '<option value="principals-notified">' + esc(T(c, "site.gov.br.ev.principals", "Affected patients were told")) + "</option>" +
         '<option value="action">' + esc(T(c, "site.gov.br.ev.action", "An action taken")) + "</option>" +
+        '<option value="not-a-breach">' + esc(T(c, "site.gov.br.ev.notBreach", "Propose: not a personal data breach")) + "</option>" +
+        (b.notBreachProposal ? '<option value="confirm-not-a-breach">' + esc(T(c, "site.gov.br.ev.confirmNotBreach", "Confirm: not a personal data breach (a second person)")) + "</option>" : "") +
         '<option value="close">' + esc(T(c, "site.gov.br.ev.close", "Close the breach")) + "</option></select></label>" +
         '<label class="f"><span>' + esc(T(c, "site.gov.br.when", "When it happened (for a notification)")) + '</span><input type="datetime-local" id="gBrAt_' + id + '"></label>' +
-        '<label class="f"><span>' + esc(T(c, "site.gov.br.count", "Patients told")) + '</span><input type="number" min="0" id="gBrN_' + id + '"></label></div>' +
-        '<label class="f"><span>' + esc(T(c, "site.gov.br.text", "Details: the assessment, the Board reference, how patients were told, the action, or why it is closed")) + '</span><textarea rows="3" id="gBrT_' + id + '"></textarea></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.gov.br.count", "Patients told")) + '</span><input type="number" min="0" id="gBrN_' + id + '"></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.gov.br.extendedTo", "Board's new date (extension only)")) + '</span><input type="datetime-local" id="gBrExt_' + id + '"></label></div>' +
+        '<label class="f"><span>' + esc(T(c, "site.gov.br.text2", "Details: the assessment, the CERT-In or Board reference, what the Board was first told, how patients were told, the action, why it is not a breach, or the closing summary")) + '</span><textarea rows="3" id="gBrT_' + id + '"></textarea></label>' +
+        "<details><summary>" + esc(T(c, "site.gov.br.piTitle", "What the patients were told (DPDP Rules 2025 r.7(1), all five)")) + "</summary>" +
+        principalHeadings(c).map(function (x) { return area("Pi" + x[0], x[1]); }).join("") + "</details>" +
+        "<details><summary>" + esc(T(c, "site.gov.br.bhTitle", "Detailed report to the Board (DPDP Rules 2025 r.7(2)(b))")) + "</summary>" +
+        boardHeadings(c).map(function (x) { return area("Bh" + x[0], x[1]); }).join("") + "</details>" +
         '<button class="btn" type="button" data-gbr="' + id + '">' + esc(T(c, "site.gov.br.save", "Save")) + "</button>";
     }
     return h + "</div>";
@@ -251,9 +350,10 @@
     function paint() {
       if (s.data === null) { body.innerHTML = loading(c, T(c, "site.gov.br.loading", "Loading the breach register...")); return; }
       if (s.data === false) { body.innerHTML = failHtml(c, T(c, "site.gov.br.loadFailed", "The breach register could not be loaded. This is not the same as there being no breaches:"), s.fail); return; }
-      body.innerHTML = '<div class="card"><h2>' + esc(T(c, "site.gov.br.recordTitle", "Record a personal data breach")) + "</h2>" +
-        '<p class="quiet">' + esc(T(c, "site.gov.br.law", "The Act requires the Data Protection Board and each affected person to be told (s8(6)). The times below are the hospital's own; the Rules were not confirmed when this was built.")) + "</p>" +
+      body.innerHTML = lawHtml(c, s.data.law) + '<div class="card"><h2>' + esc(T(c, "site.gov.br.recordTitle", "Record a personal data breach")) + "</h2>" +
+        '<p class="quiet">' + esc(T(c, "site.gov.br.law2", "Report a cyber security incident, including a data breach, to CERT-In within 6 hours of noticing it (in force now). From DPDP commencement the Data Protection Board is told without delay and sent a detailed report within 72 hours of becoming aware, and each affected patient is told without delay. There is no 'not notifiable' state: a record is withdrawn only as not a personal data breach, confirmed by a second person. Do not write the breached personal data itself here.")) + "</p>" +
         '<div class="row"><label class="f"><span>' + esc(T(c, "site.gov.br.foundAt", "Found at")) + '</span><input type="datetime-local" id="gBrFound"></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.gov.br.awareAt", "Hospital became aware at (if later)")) + '</span><input type="datetime-local" id="gBrAware"></label>' +
         '<label class="f"><span>' + esc(T(c, "site.gov.br.affected", "People affected")) + '</span><input type="number" min="0" id="gBrCount"></label>' +
         '<label class="f"><span>' + esc(T(c, "site.gov.br.categoriesInput", "Data involved, separated by commas")) + '</span><input id="gBrCats"></label></div>' +
         '<label class="f"><span>' + esc(T(c, "site.gov.br.what", "What happened")) + '</span><textarea rows="3" id="gBrDesc"></textarea></label>' +
@@ -261,7 +361,7 @@
         (s.data.breaches.length ? s.data.breaches.map(function (b) { return breachHtml(c, b); }).join("") : '<p class="quiet">' + esc(T(c, "site.gov.br.none", "No breaches have been recorded.")) + "</p>");
       on("gBrRecord", function () {
         var cats = val("gBrCats").split(",").map(function (x) { return x.trim(); }).filter(Boolean);
-        c.api("/ward/data-breach", { orgId: c.state.orgId, detectedAt: isoFromLocal(val("gBrFound")), affectedCount: val("gBrCount"), dataCategories: cats, description: val("gBrDesc") }).then(function (r) {
+        c.api("/ward/data-breach", { orgId: c.state.orgId, detectedAt: isoFromLocal(val("gBrFound")), awareAt: isoFromLocal(val("gBrAware")) || undefined, affectedCount: val("gBrCount"), dataCategories: cats, description: val("gBrDesc") }).then(function (r) {
           if (!r || !r.ok) { document.getElementById("gBrMsg").innerHTML = failHtml(c, T(c, "site.gov.br.notRecorded", "Breach not recorded:"), r); return; }
           c.toast(T(c, "site.gov.br.recorded", "Breach recorded.")); load();
         });
@@ -269,11 +369,23 @@
       onAll(body, "data-gbr", function (b) {
         var id = b.getAttribute("data-gbr"), ev = val("gBrEv_" + id), text = val("gBrT_" + id);
         var p = { orgId: c.state.orgId, breachId: id, event: ev, at: isoFromLocal(val("gBrAt_" + id)), count: val("gBrN_" + id) === "" ? null : Number(val("gBrN_" + id)) };
-        if (ev === "assess") p.assessment = text; else if (ev === "board-notified") p.reference = text; else if (ev === "principals-notified") p.method = text; else if (ev === "action") p.text = text; else p.summary = text;
+        var group = function (prefix, heads) { var o = {}; heads.forEach(function (x) { o[x[0]] = val("gBr" + prefix + x[0] + "_" + id); }); return o; };
+        if (ev === "assess") p.assessment = text;
+        else if (ev === "cert-in-reported") p.reference = text;
+        else if (ev === "board-initial" || ev === "action") p.text = text;
+        else if (ev === "board-notified") { p.reference = text; p.report = group("Bh", boardHeadings(c)); }
+        else if (ev === "board-extension") { p.reference = text; p.extendedTo = isoFromLocal(val("gBrExt_" + id)); }
+        else if (ev === "principals-notified") { p.method = text; p.intimation = group("Pi", principalHeadings(c)); }
+        else if (ev === "not-a-breach") p.reasons = text;
+        else p.summary = text;
         b.disabled = true;
         c.api("/ward/data-breach-update", p).then(function (r) {
           b.disabled = false;
-          if (!r || !r.ok) { c.toast(T(c, "site.gov.req.notSaved", "Not saved: {why}", { why: why(c, r) })); return; }
+          if (!r || !r.ok) {
+            /* Which notification or heading is missing is said in words, never left as a code. */
+            var extra = r && r.missing ? " " + T(c, "site.gov.br.missing", "Still to record: {list}.", { list: r.missing.join(", ") }) : r && r.part ? " " + T(c, "site.gov.br.part", "Missing: {part}.", { part: r.part }) : "";
+            c.toast(T(c, "site.gov.req.notSaved", "Not saved: {why}", { why: why(c, r) }) + extra); return;
+          }
           c.toast(T(c, "site.gov.req.saved", "Saved.")); load();
         });
       });
@@ -286,33 +398,47 @@
   }
 
   /* ---------------------------------------------------------------- privacy notices */
+  /* The parts a notice must itemise before the server publishes it (dpdp.js NOTICE_PARTS: DPDP Rules 2025 r.3, SPDI Rules
+   * 2011 r.5(3)). The Board complaint line is required from DPDP commencement. */
+  function noticeParts(c) {
+    return [["dataItems", T(c, "site.gov.nt.p.data", "The personal data collected, item by item")], ["purposes", T(c, "site.gov.nt.p.purposes", "Why: the specific services or uses")],
+      ["withdrawConsent", T(c, "site.gov.nt.p.withdraw", "How to withdraw consent, as easily as it was given")], ["rights", T(c, "site.gov.nt.p.rights", "How to ask for access, correction, erasure or a nominee")],
+      ["recipients", T(c, "site.gov.nt.p.recipients", "Who the data is shared with")], ["collectingAgency", T(c, "site.gov.nt.p.agency", "The hospital's name and address")],
+      ["boardComplaint", T(c, "site.gov.nt.p.board", "How to complain to the Data Protection Board (required from DPDP commencement)")]];
+  }
   function noticesTab(c, body, g) {
     var s = g.nt || (g.nt = { list: null });
     var esc = c.esc;
     function paint() {
       if (s.list === null) { body.innerHTML = loading(c, T(c, "site.gov.nt.loading", "Loading privacy notices...")); return; }
       if (s.list === false) { body.innerHTML = failHtml(c, T(c, "site.gov.nt.loadFailed", "Privacy notices could not be loaded:"), s.fail); return; }
-      body.innerHTML = '<div class="card"><h2>' + esc(T(c, "site.gov.nt.publishTitle", "Write or update a notice")) + "</h2>" +
-        '<p class="quiet">' + esc(T(c, "site.gov.nt.s5", "A notice must say what personal data is collected and why, how consent can be withdrawn (as easily as it was given), how to raise a grievance with the hospital, and how to complain to the Data Protection Board (s5). Write it in English or a language of the Eighth Schedule. Publishing again makes a new version; patients acknowledge a version.")) + "</p>" +
+      body.innerHTML = lawHtml(c, s.law) + '<div class="card"><h2>' + esc(T(c, "site.gov.nt.publishTitle", "Write or update a notice")) + "</h2>" +
+        '<p class="quiet">' + esc(T(c, "site.gov.nt.s5b", "Each part below is required before the notice is published: the data item by item, the purposes, withdrawal, the rights, the recipients and the hospital's name and address (DPDP Rules 2025 r.3; SPDI Rules 2011 r.5(3)), and the Data Protection Officer or Grievance Officer contact. Write it in English or a language of the Eighth Schedule. Publishing again makes a new version; patients acknowledge a version. From DPDP commencement, patients given a notice before then need a fresh one (s.5(2)).")) + "</p>" +
         '<div class="row"><label class="f"><span>' + esc(T(c, "site.gov.nt.language", "Language")) + '</span><select id="gNtLang">' + opts(LANGS, function (x) { return EN(c, esc(x)); }, s.lang) + "</select></label>" +
         '<label class="f"><span>' + esc(T(c, "site.gov.nt.titleLabel", "Title")) + '</span><input id="gNtTitle"></label></div>' +
-        '<label class="f"><span>' + esc(T(c, "site.gov.nt.text", "Notice text")) + '</span><textarea rows="10" id="gNtText"></textarea></label>' +
-        '<div class="row"><label class="f"><span>' + esc(T(c, "site.gov.nt.dpo", "Data Protection Officer contact (published, s8(9))")) + '</span><input id="gNtDpo"></label>' +
+        noticeParts(c).map(function (x) { return '<label class="f"><span>' + esc(x[1]) + '</span><textarea rows="3" id="gNtP_' + x[0] + '"></textarea></label>'; }).join("") +
+        '<label class="f"><span>' + esc(T(c, "site.gov.nt.textOptional", "Anything else the notice says (optional)")) + '</span><textarea rows="4" id="gNtText"></textarea></label>' +
+        '<div class="row"><label class="f"><span>' + esc(T(c, "site.gov.nt.dpo2", "Data Protection Officer or Grievance Officer contact (published)")) + '</span><input id="gNtDpo"></label>' +
         '<label class="f"><span>' + esc(T(c, "site.gov.nt.grievance", "Grievance contact")) + '</span><input id="gNtGriev"></label>' +
         '<button class="btn" type="button" id="gNtPublish">' + esc(T(c, "site.gov.nt.publish", "Publish")) + '</button></div><div id="gNtMsg"></div></div>' +
         (s.list.length ? s.list.map(function (n) {
           return '<div class="card"><h3>' + EN(c, esc(n.language + " v" + n.version + (n.title ? ": " + n.title : ""))) + "</h3>" +
             '<p class="quiet">' + esc(T(c, "site.gov.nt.published", "Published {when}", { when: dt(n.publishedAt) })) + " &middot; " + EN(c, esc(n.dpoContact)) + "</p>" +
-            '<p style="white-space:pre-wrap">' + EN(c, esc(n.text)) + "</p>" +
+            (n.dataItems ? '<div class="kv">' + noticeParts(c).map(function (x) { return n[x[0]] ? "<dt>" + esc(x[1]) + '</dt><dd style="white-space:pre-wrap">' + EN(c, esc(n[x[0]])) + "</dd>" : ""; }).join("") + "</div>"
+              : '<div class="msg warn">' + esc(T(c, "site.gov.nt.oldVersion", "This version was published before the itemised parts were required. Publish it again with each part.")) + "</div>") +
+            (n.text ? '<p style="white-space:pre-wrap">' + EN(c, esc(n.text)) + "</p>" : "") +
             '<button class="btn quiet" type="button" data-gedit="' + esc(n.language) + '">' + esc(T(c, "site.gov.nt.edit", "Edit this notice")) + "</button></div>";
         }).join("") : '<p class="quiet">' + esc(T(c, "site.gov.nt.none", "No privacy notice is published. Patients cannot be given one until it is.")) + "</p>");
       onAll(body, "data-gedit", function (b) {
         var n = s.list.filter(function (x) { return x.language === b.getAttribute("data-gedit"); })[0]; if (!n) return;
         document.getElementById("gNtLang").value = n.language; document.getElementById("gNtTitle").value = n.title || "";
-        document.getElementById("gNtText").value = n.text; document.getElementById("gNtDpo").value = n.dpoContact; document.getElementById("gNtGriev").value = n.grievanceContact || "";
+        document.getElementById("gNtText").value = n.text || ""; document.getElementById("gNtDpo").value = n.dpoContact; document.getElementById("gNtGriev").value = n.grievanceContact || "";
+        noticeParts(c).forEach(function (x) { document.getElementById("gNtP_" + x[0]).value = n[x[0]] || ""; });
       });
       on("gNtPublish", function () {
-        c.api("/ward/privacy-notice", { orgId: c.state.orgId, language: val("gNtLang"), title: val("gNtTitle"), text: val("gNtText"), dpoContact: val("gNtDpo"), grievanceContact: val("gNtGriev") }).then(function (r) {
+        var p = { orgId: c.state.orgId, language: val("gNtLang"), title: val("gNtTitle"), text: val("gNtText"), dpoContact: val("gNtDpo"), grievanceContact: val("gNtGriev") };
+        noticeParts(c).forEach(function (x) { p[x[0]] = val("gNtP_" + x[0]); });
+        c.api("/ward/privacy-notice", p).then(function (r) {
           if (!r || !r.ok) { document.getElementById("gNtMsg").innerHTML = failHtml(c, T(c, "site.gov.nt.notPublished", "Notice not published:"), r); return; }
           c.toast(T(c, "site.gov.nt.done", "Notice published as version {v}.", { v: r.notice.version })); load();
         });
@@ -320,9 +446,69 @@
     }
     function load() {
       s.list = null; paint();
-      c.api("/ward/privacy-notices" + q(c)).then(function (r) { if (r && r.ok) s.list = r.notices; else { s.list = false; s.fail = r; } paint(); });
+      c.api("/ward/privacy-notices" + q(c)).then(function (r) { if (r && r.ok) { s.list = r.notices; s.law = r.law || null; } else { s.list = false; s.fail = r; } paint(); });
     }
     load();
+  }
+
+  /* ---------------------------------------------------------------- retention and legal holds (retention.js) */
+  /* One patient at a time, by MR number: what the law keeps and until when, the holds in force, placing a hold, and
+   * lifting one (the medical records officer, with the reference to the disposal of the matter; the server decides). */
+  var HOLD_REASONS = ["mlc", "court-case", "consumer-complaint", "pocso", "pcpndt-proceedings", "mtp-proceedings", "police-request"];
+  function holdReasonLabel(c, x) {
+    return { mlc: T(c, "site.gov.lh.r.mlc", "Medico-legal case"), "court-case": T(c, "site.gov.lh.r.court", "Court case"), "consumer-complaint": T(c, "site.gov.lh.r.consumer", "Consumer complaint"),
+      pocso: T(c, "site.gov.lh.r.pocso", "POCSO report"), "pcpndt-proceedings": T(c, "site.gov.lh.r.pcpndt", "PCPNDT proceedings"), "mtp-proceedings": T(c, "site.gov.lh.r.mtp", "MTP proceedings"),
+      "police-request": T(c, "site.gov.lh.r.police", "Police request") }[x] || x;
+  }
+  function retentionTab(c, body, g) {
+    var s = g.ret || (g.ret = { mrn: "", data: undefined });
+    var esc = c.esc;
+    function paint() {
+      var h = '<div class="card"><h2>' + esc(T(c, "site.gov.ret.title", "How long records are kept")) + "</h2>" +
+        '<p class="quiet">' + esc(T(c, "site.gov.ret.intro", "Nothing is deleted automatically. A patient's clinical record is kept at least ten years after the last encounter, a child's at least until three years after turning 18; a legal hold keeps everything until the matter is disposed of. Erasure requests and document destruction are refused inside these periods.")) + "</p>" +
+        '<div class="row"><label class="f"><span>' + esc(T(c, "site.gov.req.mrn", "MR number")) + '</span><input id="gRetMrn" autocapitalize="characters" spellcheck="false" value="' + esc(s.mrn) + '"></label>' +
+        '<button class="btn" type="button" id="gRetFind">' + esc(T(c, "site.gov.ret.find", "Show retention")) + "</button></div></div>";
+      if (s.data === null) h += loading(c, T(c, "site.gov.ret.loading", "Working out what must be kept..."));
+      else if (s.data === false) h += failHtml(c, T(c, "site.gov.ret.failed", "Retention could not be worked out. This is not the same as nothing being kept:"), s.fail);
+      else if (s.data) {
+        var d = s.data;
+        h += '<div class="card"><h2>' + esc(T(c, "site.gov.ret.patient", "This patient's records")) + "</h2>" +
+          (d.holds.length ? holdsHtml(c, d.holds, d.patientId) : '<p class="quiet">' + esc(T(c, "site.gov.lh.none", "No legal hold is in force.")) + "</p>") +
+          (d.retained.length ? retainedHtml(c, d.retained) : '<p class="quiet">' + esc(T(c, "site.gov.ret.noneYet", "No records in a retention class yet.")) + "</p>") +
+          (d.deceased ? '<p class="quiet">' + esc(d.deceased.inactive ? T(c, "site.gov.ret.inactive", "Inactive since {date}: three years after death. The record is kept, never destroyed for that reason.", { date: dt(d.deceased.inactiveFrom) })
+            : T(c, "site.gov.ret.inactiveFrom", "Becomes inactive on {date}, three years after death. The record is kept.", { date: dt(d.deceased.inactiveFrom) })) + "</p>" : "") +
+          '<h3>' + esc(T(c, "site.gov.lh.placeTitle", "Place a legal hold")) + '</h3><div class="row">' +
+          '<label class="f"><span>' + esc(T(c, "site.gov.lh.reason", "Reason")) + '</span><select id="gLhReason">' + opts(HOLD_REASONS, function (x) { return esc(holdReasonLabel(c, x)); }) + "</select></label>" +
+          '<label class="f"><span>' + esc(T(c, "site.gov.lh.reference", "Case, complaint or request reference")) + '</span><input id="gLhRef"></label>' +
+          '<button class="btn" type="button" id="gLhPlace">' + esc(T(c, "site.gov.lh.place", "Place hold")) + '</button></div><div id="gLhMsg"></div></div>' +
+          '<div class="card"><h2>' + esc(T(c, "site.gov.ret.classes", "Retention classes")) + '</h2><div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.gov.ret.class", "Class")) + "</th><th>" + esc(T(c, "site.gov.ret.years", "Years")) + "</th><th>" + esc(T(c, "site.gov.ret.rule", "Rule")) + "</th></tr></thead><tbody>" +
+          d.classes.map(function (x) { return "<tr><td>" + EN(c, esc(x.key)) + "</td><td>" + esc(x.years == null ? T(c, "site.gov.ret.lifeOfRecord", "for the life of the record it belongs to") : x.years) + (x.untilProceedingsEnd ? " " + esc(T(c, "site.gov.ret.orProceedings", "or until any court proceedings end, whichever is later")) : "") + "</td><td>" + EN(c, esc(x.rule)) + "</td></tr>"; }).join("") +
+          "</tbody></table></div></div>";
+      }
+      body.innerHTML = h;
+      on("gRetFind", function () { s.mrn = val("gRetMrn"); if (s.mrn) load(); });
+      on("gLhPlace", function () {
+        c.api("/ward/legal-hold", { orgId: c.state.orgId, patientId: s.data.patientId, reason: val("gLhReason"), reference: val("gLhRef") }).then(function (r) {
+          if (!r || !r.ok) { document.getElementById("gLhMsg").innerHTML = failHtml(c, T(c, "site.gov.lh.notPlaced", "Hold not placed:"), r); return; }
+          c.toast(T(c, "site.gov.lh.placed2", "Legal hold placed.")); load();
+        });
+      });
+      onAll(body, "data-glift", function (b) {
+        var ref = prompt(T(c, "site.gov.lh.liftPrompt", "The reference to the disposal of the matter (judgment, closure order, withdrawal letter):"));
+        if (ref == null) return;
+        b.disabled = true;
+        c.api("/ward/legal-hold-lift", { orgId: c.state.orgId, holdId: b.getAttribute("data-glift"), patientId: b.getAttribute("data-pid"), liftReference: ref }).then(function (r) {
+          b.disabled = false;
+          if (!r || !r.ok) { c.toast(T(c, "site.gov.req.notSaved", "Not saved: {why}", { why: why(c, r) })); return; }
+          c.toast(T(c, "site.gov.lh.lifted", "Legal hold lifted.")); load();
+        });
+      });
+    }
+    function load() {
+      s.data = null; paint();
+      c.api("/ward/retention" + q(c) + "&mrn=" + encodeURIComponent(s.mrn)).then(function (r) { if (r && r.ok) s.data = r; else { s.data = false; s.fail = r; } paint(); });
+    }
+    paint();
   }
 
   /* ---------------------------------------------------------------- NABH indicators */
@@ -566,4 +752,7 @@
 
   WSQ._govErasureHtml = erasureHtml;
   WSQ._govRequestHtml = requestHtml;
+  WSQ._govLawHtml = lawHtml;
+  WSQ._govBreachHtml = breachHtml;
+  WSQ._govHoldsHtml = holdsHtml;
 })();

@@ -252,8 +252,11 @@ function wardsynqConfig(w) {
    * slip) for this hospital's own label printers. Bounded per kind by functions/_wardsynq/labels.js labelSizesOf. */
   /* controlledDrugs joined 2026-09-16 (statutory registers): the drug master's controlled-drug flag, set on the
    * Admin clinical settings screen (clinical-settings.js). Absent means no drug is flagged. */
-  /* dpdp joined 2026-09-16 (dpdp.js): the hospital's own answer times for a data principal request and a breach
-   * notification. Hospital-set, because the DPDP Rules 2025 times were not confirmed when this was built. */
+  /* dpdp joined 2026-09-16 (dpdp.js): the hospital's answer times for a data principal request and its policy target
+   * for telling patients of a breach. Since 2026-09-17 these have confirmed defaults and legal caps (privacy-law.js,
+   * legal opinion section A); a value past a cap is not used. dpdp.dpdpStartDate may only bring commencement earlier. */
+  /* retention joined 2026-09-17 (retention.js, legal opinion section H): years per retention class, never below the
+   * statutory minimum, and minorYearsAfter18. Absent means the safest defaults. */
   /* supportServices joined 2026-09-16: the hospital's meal times, its mortuary cold chambers, and whether a
    * vacated bed waits for a housekeeping clean and an inspection before it is available again. Absent means
    * no meal times set, no chambers, and beds freed at discharge exactly as before. */
@@ -270,7 +273,7 @@ function wardsynqConfig(w) {
   /* bloodCentre joined 2026-09-17 (legal opinion section G): NAT required, shorter component shelf lives, longer sample
    * and record retention. Validated on save and on every read (blood-centre-rules.js bloodCentreSettings), which keeps
    * the Rules' value for anything absent or looser. */
-  for (const k of ["alerts", "abdm", "orderVerifyWithinHours", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears", "printLanguages", "labelSizes", "controlledDrugs", "dpdp", "supportServices", "hr", "patientComms", "onlineBooking", "feedback", "lactationWindowDays", "bloodDonorCriteria", "bloodCentre"]) {
+  for (const k of ["alerts", "abdm", "orderVerifyWithinHours", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears", "printLanguages", "labelSizes", "controlledDrugs", "dpdp", "retention", "supportServices", "hr", "patientComms", "onlineBooking", "feedback", "lactationWindowDays", "bloodDonorCriteria", "bloodCentre"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;

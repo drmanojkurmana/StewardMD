@@ -86,6 +86,10 @@
         '<h3>' + c.esc(T(c, "site.portal.currentAccess", "Current access")) + '</h3><div id="paGrants"></div>' +
         '<h3>' + c.esc(T(c, "site.portal.newAccess", "New access")) + '</h3><div class="row"><label class="f"><span>' + c.esc(T(c, "site.portal.whoFor", "Who is this for?")) + '</span><select id="paWho"><option value="patient">' + c.esc(T(c, "site.portal.thePatient", "The patient")) + '</option></select></label>' +
         '<label class="f"><span>' + c.esc(T(c, "site.portal.howIdentified", "How did you identify them?")) + '</span><input id="paIdent" placeholder="' + c.esc(T(c, "site.portal.identPlaceholder", "e.g. Aadhaar card seen")) + '"></label></div>' +
+        /* DPDP Rules 2025 r.10, from 13 May 2027: a child's portal account needs the parent verified. The server decides when. */
+        '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.portal.pvMethod", "For a child: how the parent's identity was checked")) + '</span><select id="paPvMethod"><option value="">' + c.esc(T(c, "site.portal.pvNone", "Not a child, or not checked")) + '</option><option value="id-held">' + c.esc(T(c, "site.portal.pvId", "Against an ID the hospital holds")) + '</option><option value="digilocker-token">' + c.esc(T(c, "site.portal.pvDigilocker", "With a DigiLocker token")) + "</option></select></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.portal.pvRef", "ID or token reference")) + '</span><input id="paPvRef"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.portal.pvName", "Parent or guardian name")) + '</span><input id="paPvName"></label></div>' +
         '<div id="paProxy" class="hide"><fieldset><legend>' + c.esc(T(c, "site.portal.proxyLegend", "What may this family member see?")) + '</legend>' + SECTIONS.map(function (s) {
           return '<label><input type="checkbox" name="paSec" value="' + s[0] + '"> ' + c.esc(sectionLabel(c, s[0])) + "</label> ";
         }).join("") + "</fieldset>" +
@@ -123,6 +127,7 @@
       if (a === "enrol") {
         var who = val("paWho"), body = { orgId: org, patientId: cur.patientId, identifiedBy: val("paIdent") };
         if (!body.identifiedBy) return c.toast(T(c, "site.portal.recordIdentified", "Record how you identified them."));
+        if (val("paPvMethod")) body.parentVerification = { method: val("paPvMethod"), reference: val("paPvRef"), parentName: val("paPvName") };
         if (who !== "patient") {
           var secs = [].slice.call(document.querySelectorAll('input[name="paSec"]:checked')).map(function (x) { return x.value; });
           if (!secs.length) return c.toast(T(c, "site.portal.chooseSections", "Choose what this family member may see."));

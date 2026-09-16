@@ -53,6 +53,32 @@ test("a request with no hospital clock shows no due date; an overdue one says so
   assert.ok(!closed.includes('data-gact="complete"'), "a closed request offers no action");
 });
 
+test("the law in force: SPDI and CERT-In today with the DPDP dates, never 'not confirmed'; a breach shows the CERT-In clock and no Board duty before commencement", () => {
+  const W = govPage();
+  const c = { esc, can: () => false };
+  const law = { regime: "spdi-2011", dpdpInForce: false, dpdpStart: "2027-05-13", dpdpStartSource: "default", published: "2025-11-13", consentManagerStart: "2026-11-13", consentManagersInForce: false };
+  const banner = W._govLawHtml(c, law);
+  assert.match(banner, /SPDI Rules 2011 and the CERT-In Directions 2022 apply/);
+  assert.match(banner, /G\.S\.R\. 843\(E\)/);
+  assert.match(banner, /not yet in force/);
+  assert.match(W._govLawHtml(c, { ...law, regime: "dpdp-2025", dpdpInForce: true }), /DPDP Rules 2025 apply to this hospital/);
+  const breach = W._govBreachHtml(c, { id: "b1", state: "open", detectedAt: "2026-09-01T10:00:00Z", description: "Laptop lost", certInDueBy: "2026-09-01T16:00:00Z", certInLate: true, boardDuty: false, boardDetailedDueBy: null, principalsDueBy: "2026-09-04T10:00:00Z" });
+  assert.match(breach, /CERT-In \(6 hours, in force now\)/);
+  assert.match(breach, /no Board duty: the hospital became aware before DPDP commencement/);
+  assert.match(breach, /Late/);
+  assert.match(breach, /\(e\) Who to contact with questions/, "the five r.7(1) headings are on the form");
+  assert.ok(!/not confirmed/i.test(banner + breach), "no 'not confirmed' clock text");
+  const withdrawn = W._govBreachHtml(c, { id: "b2", state: "withdrawn", detectedAt: "2026-09-01T10:00:00Z", description: "Blank template", notBreachProposal: { reasons: "No personal data in it" } });
+  assert.ok(!withdrawn.includes("data-gbr="), "a withdrawn record offers no action");
+  const erased = W._govErasureHtml({ esc }, { consentsWithdrawn: [], removedFromCurrentRecord: [], registrationDetailsRemoved: [], failures: [],
+    retained: { classes: [{ class: "clinical-ipd", keepUntil: "2035-01-04T00:00:00Z", rule: "DGHS Office Memorandum, 28 Oct 2014" }, { class: "mlc", keepUntil: "2036-01-01T00:00:00Z", untilProceedingsEnd: true, rule: "DGHS OM: ten years or till disposal" }] } });
+  assert.match(erased, /clinical-ipd.*kept until/s);
+  assert.match(erased, /or until any court proceedings end/);
+  const holds = W._govHoldsHtml(c, [{ id: "h1", reason: "mlc", reference: "MLC/2026/00001", auto: true }], "pat-1");
+  assert.match(holds, /nothing can be erased or destroyed/);
+  assert.match(holds, /data-glift="h1"/);
+});
+
 test("portal privacy: loading, failed, none published and a proxy are four different things", () => {
   const P = portal();
   assert.match(P.privacySection(null), /data-state="loading"/);

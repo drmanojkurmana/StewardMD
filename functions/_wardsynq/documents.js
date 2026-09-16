@@ -25,15 +25,17 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { sha256Hex } from "./object-store.js";
 import { signToken, verifyToken, queueSecret } from "../_queue.js";
+import { retentionFacts, retentionView } from "./retention.js";
 
 const TYPE = "DocumentReference";
 const str = (v) => (v == null ? "" : String(v).trim());
 const DOC_TYPES = Object.freeze(["consent", "referral-letter", "outside-report", "outside-imaging", "id-proof", "insurance", "prescription-outside", "other"]);
 const CONTENT_TYPES = Object.freeze(["application/pdf", "image/jpeg", "image/png", "image/webp"]);
 const MAX_BYTES = 10 * 1024 * 1024;
-// Indian Medical Council regulation 1.3.1: in-patient records kept at least three years. A hospital
-// sets its own, longer, period in wardsynq.documentRetentionYears.
-const DEFAULT_RETENTION_YEARS = 3;
+// A patient document is part of the clinical record: DGHS Office Memorandum F. No. A.12034/3/2014-MH-II/MH-I,
+// 28 Oct 2014 keeps digitised in-patient records at least ten years (retention.js clinical-ipd; legal opinion H.4.2).
+// A hospital sets a LONGER period in wardsynq.documentRetentionYears; a shorter one is not used.
+const DEFAULT_RETENTION_YEARS = 10;
 const LINK_MS = 5 * 60 * 1000;
 
 async function open(request, env, ctx, need) {
@@ -79,14 +81,14 @@ function slug(v) { return str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").repla
 function randomHex(n) { return Array.from(crypto.getRandomValues(new Uint8Array(n)), (b) => b.toString(16).padStart(2, "0")).join(""); }
 function objectKeyFor(tenantId, docId, version) { return `t/${slug(tenantId)}/docs/${slug(docId)}/v${version}-${randomHex(12)}`; }
 function retainUntilFrom(uploadedAt, years) {
-  const d = new Date(uploadedAt); d.setUTCFullYear(d.getUTCFullYear() + (Number(years) > 0 ? Number(years) : DEFAULT_RETENTION_YEARS));
+  const d = new Date(uploadedAt); d.setUTCFullYear(d.getUTCFullYear() + Math.max(Number(years) > 0 ? Number(years) : 0, DEFAULT_RETENTION_YEARS));
   return d.toISOString();
 }
 function decodeBase64(b64) { try { return unb64u(str(b64).replace(/^data:[^,]*,/, "")); } catch { return null; } }
 function summary(d) {
   return { id: d.id, version: d.version, patientId: d.patientId, encounterId: d.encounterId || null, docType: d.docType, title: d.title,
     contentType: d.contentType, sizeBytes: d.sizeBytes, sha256: d.sha256, status: d.status, uploadedBy: d.uploadedBy, uploadedAt: d.uploadedAt,
-    retainUntil: d.retainUntil, withdrawnReason: d.withdrawnReason || null, withdrawnBy: d.withdrawnBy || null, purgedAt: d.purgedAt || null };
+    retainUntil: d.retainUntil, withdrawnReason: d.withdrawnReason || null, withdrawnBy: d.withdrawnBy || null, purgedAt: d.purgedAt || null, purgedBy: d.purgedBy || null, purgeReason: d.purgeReason || null };
 }
 
 /**
@@ -224,12 +226,17 @@ async function withdrawDocument(request, env, ctx) {
 
 /**
  * Delete the stored bytes of every version, once the retention period has passed. The metadata stays.
- * Refused before retainUntil, whoever asks.
+ * Refused before retainUntil, before the patient's clinical record may go (ten years after the last
+ * encounter, longer for a minor: retention.js), and under a legal hold, whoever asks. Never automatic:
+ * a named person gives the reason, and the purge is the destruction record (legal opinion H.4.2).
+ * ctx: { migration, store, documentId, reason, retention, actorDeps, recordDeps }
  */
 async function purgeDocument(request, env, ctx) {
   const mig = ctx.migration, base = baseOf(mig);
   if (off(mig)) return { ...base, ok: true, skipped: "off", written: 0 };
   if (!ctx.store) return { ...base, ...NO_STORE, written: 0 };
+  const reason = str(ctx.reason).slice(0, 2000);
+  if (reason.length < 5) return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why this document is being destroyed", written: 0 };
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let versions;
@@ -240,9 +247,18 @@ async function purgeDocument(request, env, ctx) {
   if (new Date(cur.retainUntil).getTime() > Date.now()) {
     return { ...base, ok: false, status: 409, error: "retention_not_expired", retainUntil: cur.retainUntil, message: `This document must be kept until ${cur.retainUntil.slice(0, 10)}.`, written: 0 };
   }
+  let view;
+  try { view = retentionView(await retentionFacts(svc, ctx.recordDeps.repository, mig.tenantId, cur.patientId), ctx.retention, Date.now()); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "retention_unreadable", message: "How long this patient's record must be kept could not be worked out, so nothing was deleted.", written: 0 }; }
+  if (view.holds.length) return { ...base, ok: false, status: 409, error: "legal_hold", holds: view.holds, message: "This patient's record is under a legal hold. Nothing was deleted.", written: 0 };
+  const clinical = view.retained.filter((x) => (x.class === "clinical-ipd" || x.class === "clinical-opd" || x.class === "mlc" || x.class === "pcpndt" || x.class === "mtp") && Date.parse(x.keepUntil) > Date.now())
+    .sort((a, b) => String(b.keepUntil).localeCompare(String(a.keepUntil)))[0];
+  if (clinical) {
+    return { ...base, ok: false, status: 409, error: "retention_not_expired", retainUntil: clinical.keepUntil, retentionClass: clinical.class, rule: clinical.rule, message: `This patient's record must be kept until ${clinical.keepUntil.slice(0, 10)}.`, written: 0 };
+  }
   try { for (const v of versions) if (v.objectKey) await ctx.store.delete(v.objectKey); }
   catch (e) { return { ...base, ok: false, status: 502, error: "document_store_failed", detail: str(e && e.message), written: 0 }; }
-  const next = { ...cur, status: "purged", purgedAt: new Date().toISOString(), purgedBy: resolved.actor.id };
+  const next = { ...cur, status: "purged", purgedAt: new Date().toISOString(), purgedBy: resolved.actor.id, purgeReason: reason };
   delete next.version;
   try {
     const out = await svc.put(next, { expectedVersion: cur.version });

@@ -10,10 +10,12 @@
  *                           hospital's own answer clock and the answer.
  *   DataBreach              detection, assessment, and WHEN the Board and each affected patient were told (s8(6)).
  *
- * WHAT IS NOT LAW HERE. The Act leaves response times and the breach reporting window to the Rules. The DPDP Rules
- * 2025 text was not confirmed when this was built, so no time is hard-coded: every clock is the hospital's own
- * setting (wardsynq.dpdp), returned with `confirmed: false`, and with no setting there is no due date at all rather
- * than an invented one.
+ * WHICH LAW, AND WHICH CLOCK. The DPDP duties of a hospital commence about 13 May 2027 (G.S.R. 843(E); Rules r.1,
+ * G.S.R. 846(E)); until then IT Act s.43A with the SPDI Rules 2011 and the CERT-In Directions 2022 apply. The dates, the
+ * confirmed periods and their citations live in privacy-law.js (legal opinion of 17 Sep 2026, section A). A DPDP clock
+ * (a request's answer period, the Board's 72-hour detailed report) runs only from commencement; the SPDI one-month
+ * grievance clock and the CERT-In 6-hour report apply today. A hospital may shorten a period, never lengthen it past
+ * the legal cap.
  *
  * TREATMENT NEEDS NO CONSENT, AND ERASURE DOES NOT ERASE A CHART. s7(f) and s7(g) let a hospital process data for a
  * medical emergency and public health without consent, and s8(7) and s12(3) keep what a law requires to be retained.
@@ -28,6 +30,8 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { PatientConsent, statusOf as consentStatus, TYPE as CONSENT_TYPE } from "./consent.js";
+import { clocksOf, requestClock, lawOn, CITE, HOUR } from "./privacy-law.js";
+import { retentionFacts, retentionView } from "./retention.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOTICE = "PrivacyNotice", ACK = "PrivacyAcknowledgement", REQ = "DataPrincipalRequest", BREACH = "DataBreach";
@@ -41,17 +45,6 @@ const CARE_CONSENTS = Object.freeze(["treatment", "blood-products", "procedure"]
 /* Identifiers a patient chooses to give. Linking an ABHA is voluntary; the MR number is not. */
 const OPTIONAL_IDENTIFIERS = Object.freeze(["abha-number", "abha-address"]);
 const RETENTION_REASON = "Medical records must be kept for as long as the law requires. The Act allows this: s8(7) and s12(3).";
-const CLOCK_NOTE = "Hospital-set. The DPDP Rules 2025 times were not confirmed when this was built; check them before relying on these.";
-
-/** PURE. The hospital's clocks, sanitised. Nothing invented: an unset clock is null. */
-function clocksOf(cfg) {
-  const c = cfg && typeof cfg === "object" ? cfg : {};
-  const n = (v, max) => { const x = Number(v); return Number.isInteger(x) && x > 0 && x <= max ? x : null; };
-  const days = {};
-  for (const k of Object.keys(REQUEST_KINDS)) days[k] = n(c.responseDays && c.responseDays[k], 365);
-  return { responseDays: days, breachBoardHours: n(c.breachBoardHours, 720), breachPrincipalHours: n(c.breachPrincipalHours, 720), confirmed: false, note: CLOCK_NOTE };
-}
-const addMs = (iso, ms) => (ms == null ? null : new Date(Date.parse(iso) + ms).toISOString());
 const isoOrNull = (v) => { const s = str(v); const t = Date.parse(s); return s && Number.isFinite(t) ? new Date(t).toISOString() : null; };
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const stamp = (iso) => iso.replace(/[^0-9]/g, "").slice(0, 17);
@@ -82,29 +75,48 @@ const strip = (r) => { if (!r) return r; const { meta, ...rest } = r; return res
 
 /* ------------------------------------------------------------------ notices */
 
-/** PURE. Validates what s5 needs a notice to be able to say. Returns { error } or { notice }. */
-function noticeInput(i) {
+/* What a notice must itemise before it is published (opinion A.4.4). DPDP Rules 2025 r.3 and Act s.5: the itemised
+ * data, the specified purposes, how to withdraw consent, how to exercise the rights and how to complain to the Board.
+ * SPDI Rules 2011 r.5(3), in force now and kept after commencement: the recipients and the collecting agency's name and
+ * address. The Board complaint line is required once DPDP applies: before then there is no Board to complain to. */
+const NOTICE_PARTS = Object.freeze([
+  ["dataItems", 10, "an itemised list of the personal data collected (DPDP Rules 2025 r.3)"],
+  ["purposes", 10, "the purposes, with the specific services or uses (DPDP Rules 2025 r.3)"],
+  ["withdrawConsent", 5, "how to withdraw consent, as easily as it was given (DPDP Rules 2025 r.3)"],
+  ["rights", 5, "how to exercise the rights to access, correct, erase and nominate (DPDP Rules 2025 r.3)"],
+  ["recipients", 3, "the intended recipients of the data (SPDI Rules 2011 r.5(3))"],
+  ["collectingAgency", 10, "the name and address of the hospital collecting the data (SPDI Rules 2011 r.5(3))"],
+]);
+
+/** PURE. Validates what the notice must say. Returns { error } or { notice }. law: lawOn(). */
+function noticeInput(i, law) {
   const language = str(i.language).toLowerCase();
   if (!/^[a-z]{2,3}$/.test(language)) return { error: "language_required", detail: "language must be a language code, e.g. en, hi, te" };
-  const text = str(i.text);
-  if (text.length < 50) return { error: "text_required", detail: "write the notice: the data collected, why, how to withdraw consent, how to raise a grievance and how to complain to the Board" };
+  const parts = {};
+  for (const [key, min, what] of NOTICE_PARTS) {
+    parts[key] = str(i[key]).slice(0, 4000);
+    if (parts[key].length < min) return { error: "notice_part_required", part: key, detail: "the notice must give " + what };
+  }
+  parts.boardComplaint = str(i.boardComplaint).slice(0, 2000) || null;
+  if (law && law.dpdpInForce && (!parts.boardComplaint || parts.boardComplaint.length < 5)) return { error: "notice_part_required", part: "boardComplaint", detail: "the notice must say how to complain to the Data Protection Board (DPDP Rules 2025 r.3)" };
   const dpoContact = str(i.dpoContact);
-  if (!dpoContact) return { error: "dpo_contact_required", detail: "s8(9): the Data Protection Officer's contact must be published" };
-  return { notice: { language, title: str(i.title).slice(0, 200) || null, text: text.slice(0, 20000), dpoContact: dpoContact.slice(0, 300), grievanceContact: str(i.grievanceContact).slice(0, 300) || null } };
+  if (!dpoContact) return { error: "dpo_contact_required", detail: "the Data Protection Officer or Grievance Officer contact must be published (DPDP Rules 2025 r.9; SPDI Rules 2011 r.5(9))" };
+  return { notice: { language, title: str(i.title).slice(0, 200) || null, text: str(i.text).slice(0, 20000) || null, ...parts, dpoContact: dpoContact.slice(0, 300), grievanceContact: str(i.grievanceContact).slice(0, 300) || null } };
 }
 
-/** ctx: { migration, language, title?, text, dpoContact, grievanceContact?, actorDeps, recordDeps } */
+/** ctx: { migration, language, title?, text?, dataItems, purposes, withdrawConsent, rights, recipients, collectingAgency, boardComplaint?, dpoContact, grievanceContact?, dpdp, actorDeps, recordDeps } */
 async function publishNotice(request, env, ctx) {
   const base = baseOf(ctx);
   if (off(ctx)) return { ...base, ok: true, skipped: "off", written: 0 };
-  const v = noticeInput(ctx);
-  if (v.error) return { ...base, ok: false, status: 422, error: v.error, detail: v.detail, written: 0 };
+  const law = lawOn(ctx.dpdp, Date.now());
+  const v = noticeInput(ctx, law);
+  if (v.error) return { ...base, ok: false, status: 422, error: v.error, part: v.part || null, detail: v.detail, written: 0 };
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   const id = `wsq-privacy-notice-${v.notice.language}`;
   let current;
   try { current = await svc.get(NOTICE, id); } catch (e) { return { ...base, ...failure(e, { written: 0 }) }; }
-  const rec = { resourceType: NOTICE, id, ...v.notice, publishedBy: resolved.actor.id, publishedAt: new Date().toISOString(), source: { system: "wardsynq-native", sourceId: `privacy-notice:${id}` } };
+  const rec = { resourceType: NOTICE, id, ...v.notice, regime: law.regime, publishedBy: resolved.actor.id, publishedAt: new Date().toISOString(), source: { system: "wardsynq-native", sourceId: `privacy-notice:${id}` } };
   try {
     const out = await svc.put(rec, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, notice: { ...strip(rec), version: out.record.version } };
@@ -119,23 +131,31 @@ async function privacyNotices(request, env, ctx) {
   if (error) return { ...base, ...error, notices: null };
   try {
     const rows = await svc.list(NOTICE, 100);
-    return { ...base, ok: true, notices: rows.filter(Boolean).map(strip).sort((a, b) => a.language.localeCompare(b.language)) };
+    return { ...base, ok: true, law: lawOn(ctx.dpdp, Date.now()), notices: rows.filter(Boolean).map(strip).sort((a, b) => a.language.localeCompare(b.language)) };
   } catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", notices: null }; }
 }
 
 /* ------------------------------------------------------------------ acknowledgements */
 
+/* SPDI Rules 2011 r.5(1), in force now: consent to collecting health data is taken in writing before collection. The
+ * desk records which written form it took: a signed paper form (its scan may be a patient document) or an electronic
+ * acknowledgement. Whether an electronic acknowledgement satisfies "in writing through letter or fax or email" is on
+ * the opinion's list for a lawyer, so the form is recorded rather than assumed. */
+const HEALTH_CONSENT_FORMS = Object.freeze(["signed-paper", "e-acknowledged"]);
 function ackRecord(patientId, notice, i, by) {
   const at = new Date().toISOString();
+  const consent = i.healthDataConsent === true && HEALTH_CONSENT_FORMS.includes(i.consentForm)
+    ? { given: true, form: i.consentForm, documentId: str(i.consentDocumentId).slice(0, 200) || null, citation: CITE.spdiConsent } : null;
   return {
     resourceType: ACK, id: `wsq-privacy-ack-${slug(patientId)}-${notice.language}-v${notice.version}`, patientId,
     noticeId: notice.id, noticeVersion: notice.version, language: notice.language,
     method: ACK_METHODS.includes(i.method) ? i.method : null, givenBy: GIVERS.includes(i.givenBy) ? i.givenBy : "patient",
-    giverName: str(i.giverName).slice(0, 200) || null, recordedBy: by, acknowledgedAt: at,
+    giverName: str(i.giverName).slice(0, 200) || null, healthDataConsent: consent, recordedBy: by, acknowledgedAt: at,
     source: { system: "wardsynq-native", sourceId: `privacy-ack:${patientId}` },
   };
 }
 async function writeAck(svc, patientId, language, i, by, idempotencyKey) {
+  if (i.healthDataConsent === true && !HEALTH_CONSENT_FORMS.includes(i.consentForm)) return { ok: false, status: 422, error: "consent_form_required", detail: `say how the written consent was taken: ${HEALTH_CONSENT_FORMS.join(" or ")} (SPDI Rules 2011 r.5(1))`, written: 0 };
   const notice = await svc.get(NOTICE, `wsq-privacy-notice-${language}`);
   if (!notice) return { ok: false, status: 409, error: "no_notice_in_language", detail: "No privacy notice is published in this language.", written: 0 };
   const rec = ackRecord(patientId, notice, i, by);
@@ -177,7 +197,7 @@ async function privacyAcknowledgements(request, env, ctx) {
 
 /* ------------------------------------------------------------------ data principal requests */
 
-/** PURE. A new request, with the hospital's clock applied (or none). */
+/** PURE. A new request, with the clock of the law in force on the day it was received (privacy-law.js requestClock). */
 function newRequest(i, clocks, by) {
   const kind = str(i.kind);
   if (!REQUEST_KINDS[kind]) return { error: "unknown_kind", detail: `kind must be one of ${Object.keys(REQUEST_KINDS).join(", ")}` };
@@ -191,12 +211,11 @@ function newRequest(i, clocks, by) {
   }
   const receivedVia = RECEIVED_VIA.includes(i.receivedVia) ? i.receivedVia : null;
   if (!receivedVia) return { error: "received_via_required", detail: `receivedVia must be one of ${RECEIVED_VIA.join(", ")}` };
-  const receivedAt = new Date().toISOString();
-  const days = clocks.responseDays[kind];
+  const receivedAt = new Date(Date.now()).toISOString();
+  const { dueBy, clock } = requestClock(kind, receivedAt, clocks);
   return { request: {
     resourceType: REQ, id: `wsq-dpr-${slug(i.patientId)}-${kind}-${stamp(receivedAt)}`, patientId: str(i.patientId),
-    kind, section: REQUEST_KINDS[kind], detail, nominee, receivedVia, receivedAt, receivedBy: by,
-    dueBy: addMs(receivedAt, days ? days * 86400000 : null), clock: { days, basis: "hospital-set", confirmed: false },
+    kind, section: REQUEST_KINDS[kind], detail, nominee, receivedVia, receivedAt, receivedBy: by, dueBy, clock,
     state: "received", history: [{ at: receivedAt, by, state: "received" }],
     source: { system: "wardsynq-native", sourceId: `dpr:${str(i.patientId)}` },
   } };
@@ -220,7 +239,7 @@ async function fileDataRequest(request, env, ctx) {
 
 /* ERASURE, done for real and reported exactly. Every step is attempted; any step that fails leaves the request in
  * progress with what did and did not happen written on it, and the answer is not ok. */
-async function runErasure(svc, req, by, ctx) {
+async function runErasure(svc, req, by, ctx, retained) {
   const done = { consentsWithdrawn: [], removedFromCurrentRecord: [], registrationDetailsRemoved: [], failures: [] };
   const at = new Date().toISOString();
   let consents = [];
@@ -257,12 +276,22 @@ async function runErasure(svc, req, by, ctx) {
   } else if (!done.failures.length) done.failures.push({ step: "read-patient", detail: "patient not found" });
   return {
     ...done,
-    retained: { what: "clinical-record", reason: RETENTION_REASON },
+    /* H.4.5: each class kept, the rule that keeps it and the date it ends. Data with no statutory basis (the consents
+     * and details above) is what was erased. */
+    retained: { what: "clinical-record", reason: RETENTION_REASON, classes: retained || [] },
     historyNote: "Values removed from the current record stay in its version history, which cannot be edited. They are not erased.",
   };
 }
 
-/** ctx: { migration, requestId, action: start|complete|reject, response?, actorDeps, recordDeps, clearRegistrationDetails? } */
+/** PURE. The contact every answer carries (DPDP Rules 2025 r.9; SPDI Rules 2011 r.5(9)): the published notice's DPO or
+ * Grievance Officer, English first. null when no notice names one. */
+function responseContactOf(notices) {
+  const rows = (notices || []).filter((n) => n && str(n.dpoContact || n.grievanceContact));
+  const n = rows.find((x) => x.language === "en") || rows[0];
+  return n ? { dpoContact: str(n.dpoContact) || null, grievanceContact: str(n.grievanceContact) || null, noticeId: n.id, noticeVersion: n.version || null } : null;
+}
+
+/** ctx: { migration, requestId, action: start|complete|reject, response?, retention, actorDeps, recordDeps, clearRegistrationDetails? } */
 async function actOnDataRequest(request, env, ctx) {
   const base = baseOf(ctx);
   if (off(ctx)) return { ...base, ok: true, skipped: "off", written: 0 };
@@ -275,16 +304,30 @@ async function actOnDataRequest(request, env, ctx) {
   try { current = await svc.get(REQ, str(ctx.requestId)); } catch (e) { return { ...base, ...failure(e, { written: 0 }) }; }
   if (!current) return { ...base, ok: false, status: 404, error: "request_not_found", written: 0 };
   if (current.state === "completed" || current.state === "rejected") return { ...base, ok: false, status: 409, error: "already_closed", state: current.state, written: 0 };
+  let contact = null;
+  if (action !== "start") {
+    try { contact = responseContactOf(await svc.list(NOTICE, 100)); } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "the published notice could not be read, so the answer cannot carry the DPO contact", written: 0 }; }
+    if (!contact) return { ...base, ok: false, status: 409, error: "contact_required", detail: "Every answer carries the Data Protection Officer or Grievance Officer contact (DPDP Rules 2025 r.9; SPDI Rules 2011 r.5(9)). Publish a privacy notice that names one first.", written: 0 };
+  }
+  let retained = null;
+  if (action === "complete" && current.kind === "erasure") {
+    /* Nothing is erased on a picture that could not be completed, and nothing under a legal hold (Act s.17(1)(a), (c)). */
+    let view;
+    try { view = retentionView(await retentionFacts(svc, ctx.recordDeps.repository, ctx.migration.tenantId, current.patientId), ctx.retention, Date.now()); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "retention_unreadable", detail: "What the law requires the hospital to keep could not be worked out, so nothing was erased.", written: 0 }; }
+    if (view.holds.length) return { ...base, ok: false, status: 409, error: "legal_hold", holds: view.holds, retained: view.retained, detail: "This patient's record is under a legal hold. Nothing was erased; the request stays open.", written: 0 };
+    retained = view.retained;
+  }
   const by = resolved.actor.id, at = new Date().toISOString();
   const { meta, version, ...rest } = current;
   const next = { ...rest, history: [...(current.history || [])] };
   let erasure = null;
   if (action === "start") next.state = "in-progress";
-  else if (action === "reject") Object.assign(next, { state: "rejected", response, closedAt: at, closedBy: by });
+  else if (action === "reject") Object.assign(next, { state: "rejected", response, responseContact: contact, closedAt: at, closedBy: by });
   else {
-    if (current.kind === "erasure") erasure = await runErasure(svc, current, by, ctx);
+    if (current.kind === "erasure") erasure = await runErasure(svc, current, by, ctx, retained);
     const partial = erasure && erasure.failures.length > 0;
-    Object.assign(next, partial ? { state: "in-progress", erasureAttempt: { at, by, ...erasure } } : { state: "completed", response, closedAt: at, closedBy: by, ...(erasure ? { erasure } : {}) });
+    Object.assign(next, partial ? { state: "in-progress", erasureAttempt: { at, by, ...erasure } } : { state: "completed", response, responseContact: contact, closedAt: at, closedBy: by, ...(erasure ? { erasure } : {}) });
   }
   next.history.push({ at, by, state: next.state, action });
   try {
@@ -295,14 +338,26 @@ async function actOnDataRequest(request, env, ctx) {
   } catch (e) { return { ...base, ...failure(e, { written: 0, ...(erasure ? { erasure } : {}) }) }; }
 }
 
-/** PURE. Overdue is computed against the hospital's clock, never invented where there is none. */
+/** PURE. Overdue against the request's own clock. A request saved before clocks existed has no due date and is not
+ * called overdue or on time. */
 function withClock(r, nowMs) {
   const open_ = r.state === "received" || r.state === "in-progress";
   const due = Date.parse(r.dueBy || "");
   return { ...r, overdue: open_ && Number.isFinite(due) ? nowMs > due : null };
 }
 
-/** ctx: { migration, dpdp, actorDeps, recordDeps } - the DPO's queue: requests, breaches and the clocks. */
+/** PURE. Patients whose every acknowledgement is dated before DPDP commencement (IST day), newest first. */
+function renoticeDue(acks, dpdpStart) {
+  const start = Date.parse(dpdpStart + "T00:00:00+05:30"), last = new Map();
+  for (const a of acks || []) {
+    if (!a || !a.patientId) continue;
+    const t = Date.parse(a.acknowledgedAt || "");
+    if (Number.isFinite(t) && (!last.has(a.patientId) || t > last.get(a.patientId))) last.set(a.patientId, t);
+  }
+  return [...last].filter(([, t]) => t < start).sort((a, b) => b[1] - a[1]).map(([patientId, t]) => ({ patientId, lastAcknowledgedAt: new Date(t).toISOString() }));
+}
+
+/** ctx: { migration, dpdp, actorDeps, recordDeps } - the DPO's queue: requests, breaches, the clocks and the re-notice list. */
 async function dpoQueue(request, env, ctx) {
   const base = baseOf(ctx);
   if (off(ctx)) return { ...base, ok: true, skipped: "off", requests: [], breaches: [] };
@@ -312,8 +367,16 @@ async function dpoQueue(request, env, ctx) {
   let reqs, breaches;
   try { [reqs, breaches] = await Promise.all([svc.list(REQ, LIMIT), svc.list(BREACH, LIMIT)]); }
   catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", requests: null, breaches: null }; }
+  const law = lawOn(ctx.dpdp, nowMs);
+  /* Act s.5(2): a patient whose notice was given before commencement gets a fresh one "as soon as it is reasonably
+   * practicable" (opinion A.4.4). Listed from commencement; before it the queue is not open. A failed read is false. */
+  let renotice = { open: law.dpdpInForce, from: law.dpdpStart, patients: [] };
+  if (law.dpdpInForce) {
+    try { renotice.patients = renoticeDue(await svc.list(ACK, LIMIT), law.dpdpStart); }
+    catch (e) { renotice = false; }
+  }
   return {
-    ...base, ok: true, clocks: clocksOf(ctx.dpdp),
+    ...base, ok: true, clocks: clocksOf(ctx.dpdp, nowMs), law, renotice,
     requests: reqs.filter(Boolean).map(strip).map((r) => withClock(r, nowMs)).sort((a, b) => String(b.receivedAt).localeCompare(String(a.receivedAt))),
     breaches: breaches.filter(Boolean).map(strip).map((b) => breachClock(b, nowMs)).sort((a, b) => String(b.detectedAt).localeCompare(String(a.detectedAt))),
     truncated: reqs.length >= LIMIT || breaches.length >= LIMIT,
@@ -332,38 +395,62 @@ async function dataHoldings(request, env, ctx) {
   try {
     const chart = await svc.chart(patientId);
     const holdings = Object.keys(chart).map((type) => ({ type, count: chart[type].length })).filter((h) => h.count > 0).sort((a, b) => a.type.localeCompare(b.type));
-    return { ...base, ok: true, patientId, holdings, retentionReason: RETENTION_REASON };
+    /* What erasure would have to keep, and why. false when it could not be read: never an empty list. */
+    let retention;
+    try { retention = retentionView(await retentionFacts(svc, ctx.recordDeps.repository, ctx.migration.tenantId, patientId), ctx.retention, Date.now()); } catch (e) { retention = false; }
+    return { ...base, ok: true, patientId, holdings, retentionReason: RETENTION_REASON, retention: retention && { retained: retention.retained, holds: retention.holds } };
   } catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", holdings: null }; }
 }
 
 /* ------------------------------------------------------------------ breaches */
 
+/* The intimation to each affected Data Principal, DPDP Rules 2025 r.7(1)(a) to (e): all five are required before the
+ * patients are marked told. The detailed report to the Board, r.7(2)(b): the first five are required; the sixth, the
+ * report on the intimations given, is filled from what was recorded about the patients. */
+const PRINCIPAL_HEADINGS = Object.freeze(["nature", "consequences", "mitigation", "safetyMeasures", "contact"]);
+const BOARD_HEADINGS = Object.freeze(["facts", "circumstances", "mitigation", "findings", "remedial"]);
+
+/** PURE. Lateness of each clock. A clock the law has not started for this breach is null, never "on time". */
 function breachClock(b, nowMs) {
   const late = (due, done) => { const d = Date.parse(due || ""); return Number.isFinite(d) ? (done ? Date.parse(done) > d : nowMs > d) : null; };
-  return { ...b, boardLate: late(b.boardDueBy, b.boardNotifiedAt), principalsLate: late(b.principalsDueBy, b.principalsNotifiedAt) };
+  const boardDue = b.boardExtendedTo || b.boardDetailedDueBy || b.boardDueBy;
+  const shut = b.state === "withdrawn";
+  return { ...b, certInLate: shut ? null : late(b.certInDueBy, b.certInReportedAt), boardLate: shut ? null : late(boardDue, b.boardNotifiedAt), principalsLate: shut ? null : late(b.principalsDueBy, b.principalsNotifiedAt) };
 }
 
-/** ctx: { migration, detectedAt, description, dataCategories, affectedCount, dpdp, actorDeps, recordDeps } */
+/** ctx: { migration, detectedAt, awareAt?, description, dataCategories, affectedCount, dpdp, actorDeps, recordDeps } */
 async function recordBreach(request, env, ctx) {
   const base = baseOf(ctx);
   if (off(ctx)) return { ...base, ok: true, skipped: "off", written: 0 };
   const detectedAt = isoOrNull(ctx.detectedAt), description = str(ctx.description).slice(0, 8000);
   if (!detectedAt || Date.parse(detectedAt) > Date.now() + 60000) return { ...base, ok: false, status: 422, error: "detected_at_required", detail: "when the breach was found, not in the future", written: 0 };
+  /* r.7 runs from "becoming aware", which may be after the incident was first noticed; stored on its own. */
+  const awareAt = ctx.awareAt ? isoOrNull(ctx.awareAt) : detectedAt;
+  if (!awareAt || Date.parse(awareAt) < Date.parse(detectedAt) || Date.parse(awareAt) > Date.now() + 60000) return { ...base, ok: false, status: 422, error: "aware_at_invalid", detail: "when the hospital became aware: not before it was found, not in the future", written: 0 };
   if (description.length < 10) return { ...base, ok: false, status: 422, error: "description_required", written: 0 };
   const count = ctx.affectedCount == null || ctx.affectedCount === "" ? null : Number(ctx.affectedCount);
   if (count != null && !(Number.isInteger(count) && count >= 0)) return { ...base, ok: false, status: 422, error: "affected_count_invalid", written: 0 };
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
-  const clocks = clocksOf(ctx.dpdp), by = resolved.actor.id, at = new Date().toISOString();
+  const clocks = clocksOf(ctx.dpdp, Date.now()), by = resolved.actor.id, at = new Date().toISOString();
+  const awareMs = Date.parse(awareAt);
+  /* The Board duty exists only for a breach the hospital became aware of from DPDP commencement. */
+  const boardDuty = awareMs >= Date.parse(clocks.law.dpdpStart + "T00:00:00+05:30");
   const rec = {
     resourceType: BREACH, id: `wsq-breach-${stamp(detectedAt)}-${slug(description).slice(0, 24)}`,
-    detectedAt, description, dataCategories: (Array.isArray(ctx.dataCategories) ? ctx.dataCategories : []).map(str).filter(Boolean).slice(0, 20),
+    detectedAt, awareAt, description, dataCategories: (Array.isArray(ctx.dataCategories) ? ctx.dataCategories : []).map(str).filter(Boolean).slice(0, 20),
     affectedCount: count, state: "open", recordedBy: by, recordedAt: at,
-    boardDueBy: addMs(detectedAt, clocks.breachBoardHours ? clocks.breachBoardHours * 3600000 : null),
-    principalsDueBy: addMs(detectedAt, clocks.breachPrincipalHours ? clocks.breachPrincipalHours * 3600000 : null),
-    clock: { boardHours: clocks.breachBoardHours, principalHours: clocks.breachPrincipalHours, basis: "hospital-set", confirmed: false },
-    assessment: null, boardNotifiedAt: null, boardReference: null, principalsNotifiedAt: null, principalsNotifiedCount: null, principalsMethod: null,
-    actions: [], history: [{ at, by, event: "recorded" }], source: { system: "wardsynq-native", sourceId: "data-breach" },
+    certInDueBy: new Date(awareMs + clocks.certInHours * HOUR).toISOString(), certInReportedAt: null, certInReference: null,
+    boardDuty, boardInitialAt: null, boardInitialText: null,
+    boardDetailedDueBy: boardDuty ? new Date(awareMs + clocks.boardDetailedHours * HOUR).toISOString() : null, boardExtensionRef: null, boardExtendedTo: null,
+    principalsDueBy: new Date(awareMs + clocks.breachPrincipalHours * HOUR).toISOString(),
+    clock: {
+      certInHours: clocks.certInHours, certInCitation: CITE.certIn,
+      boardHours: boardDuty ? clocks.boardDetailedHours : null, boardCitation: CITE.dpdpBoard, boardFrom: clocks.law.dpdpStart,
+      principalHours: clocks.breachPrincipalHours, principalBasis: "hospital-policy", principalCitation: CITE.dpdpPrincipals, regime: clocks.law.regime,
+    },
+    assessment: null, boardNotifiedAt: null, boardReference: null, boardReport: null, principalsNotifiedAt: null, principalsNotifiedCount: null, principalsMethod: null, principalIntimation: null,
+    notBreachProposal: null, actions: [], history: [{ at, by, event: "recorded" }], source: { system: "wardsynq-native", sourceId: "data-breach" },
   };
   try {
     if (await svc.get(BREACH, rec.id)) return { ...base, ok: false, status: 409, error: "already_recorded", written: 0 };
@@ -377,28 +464,59 @@ async function recordBreach(request, env, ctx) {
 function applyBreachUpdate(b, i, by, nowIso) {
   const event = str(i.event);
   const when = (v) => { const t = isoOrNull(v); return t && Date.parse(t) >= Date.parse(b.detectedAt) && Date.parse(t) <= Date.parse(nowIso) + 60000 ? t : null; };
-  if (b.state === "closed") return { error: "closed" };
+  const headings = (src, keys) => { const o = {}; for (const k of keys) { o[k] = str(src && src[k]).slice(0, 4000); if (o[k].length < 5) return { missing: k }; } return { value: o }; };
+  if (b.state === "closed" || b.state === "withdrawn") return { error: "closed" };
   const next = { ...b, actions: [...(b.actions || [])], history: [...(b.history || [])] };
   if (event === "assess") {
     const text = str(i.assessment).slice(0, 8000);
     if (text.length < 10) return { error: "assessment_required" };
     next.assessment = { text, at: nowIso, by };
+  } else if (event === "cert-in-reported") {
+    const at = when(i.at); if (!at) return { error: "time_invalid", detail: "the time CERT-In was told: after detection, not in the future" };
+    Object.assign(next, { certInReportedAt: at, certInReference: str(i.reference).slice(0, 200) || null });
+  } else if (event === "board-initial") {
+    /* r.7(2)(a): "without delay", a description of the nature, extent, timing, location and likely impact. */
+    const at = when(i.at); if (!at) return { error: "time_invalid", detail: "the time the Board was first told: after detection, not in the future" };
+    const text = str(i.text).slice(0, 8000); if (text.length < 10) return { error: "initial_text_required", detail: "the nature, extent, timing, location and likely impact given to the Board (DPDP Rules 2025 r.7(2)(a))" };
+    Object.assign(next, { boardInitialAt: at, boardInitialText: text });
+  } else if (event === "board-extension") {
+    /* r.7(2)(b): the 72 hours move only by "such longer period as the Board may allow on a request made in writing". */
+    if (!b.boardDuty) return { error: "no_board_duty", detail: "the Board report duty does not apply to a breach the hospital became aware of before DPDP commencement" };
+    const to = isoOrNull(i.extendedTo), ref = str(i.reference).slice(0, 200);
+    if (ref.length < 3) return { error: "extension_reference_required", detail: "the Board's reference allowing the longer period" };
+    if (!to || !(Date.parse(to) > Date.parse(b.boardDetailedDueBy || b.detectedAt))) return { error: "extension_date_invalid", detail: "the new date must be after the 72-hour deadline" };
+    Object.assign(next, { boardExtensionRef: ref, boardExtendedTo: to });
   } else if (event === "board-notified") {
     const at = when(i.at); if (!at) return { error: "time_invalid", detail: "the time the Board was told: after detection, not in the future" };
-    Object.assign(next, { boardNotifiedAt: at, boardReference: str(i.reference).slice(0, 200) || null });
+    const h = headings(i.report, BOARD_HEADINGS); if (h.missing) return { error: "board_report_incomplete", part: h.missing, detail: "the detailed report needs each heading of DPDP Rules 2025 r.7(2)(b)" };
+    const intimations = next.principalsNotifiedAt
+      ? `Affected patients told on ${next.principalsNotifiedAt}: ${next.principalsNotifiedCount} people, by ${next.principalsMethod || "a method not recorded"}.`
+      : "The affected patients have not yet been recorded as told.";
+    Object.assign(next, { boardNotifiedAt: at, boardReference: str(i.reference).slice(0, 200) || null, boardReport: { ...h.value, intimations } });
   } else if (event === "principals-notified") {
     const at = when(i.at); if (!at) return { error: "time_invalid", detail: "the time the patients were told: after detection, not in the future" };
     const n = Number(i.count); if (!(Number.isInteger(n) && n >= 0)) return { error: "count_required" };
-    Object.assign(next, { principalsNotifiedAt: at, principalsNotifiedCount: n, principalsMethod: str(i.method).slice(0, 200) || null });
+    const h = headings(i.intimation, PRINCIPAL_HEADINGS); if (h.missing) return { error: "intimation_incomplete", part: h.missing, detail: "what the patients were told needs each heading of DPDP Rules 2025 r.7(1)(a) to (e)" };
+    Object.assign(next, { principalsNotifiedAt: at, principalsNotifiedCount: n, principalsMethod: str(i.method).slice(0, 200) || null, principalIntimation: h.value });
   } else if (event === "action") {
     const text = str(i.text).slice(0, 4000); if (text.length < 5) return { error: "action_required" };
     next.actions.push({ text, at: nowIso, by });
+  } else if (event === "not-a-breach") {
+    /* There is no "not notifiable" state (opinion A.4.2). The only way out without telling anyone is a finding that
+     * this was not a personal data breach at all, with reasons, confirmed by a second person. */
+    const reasons = str(i.reasons).slice(0, 4000); if (reasons.length < 20) return { error: "reasons_required", detail: "why this was not a personal data breach, in at least 20 characters" };
+    next.notBreachProposal = { reasons, by, at: nowIso };
+  } else if (event === "confirm-not-a-breach") {
+    if (!next.notBreachProposal) return { error: "no_proposal" };
+    if (next.notBreachProposal.by === by) return { error: "second_approver_required", detail: "a different person confirms that this was not a personal data breach" };
+    Object.assign(next, { state: "withdrawn", withdrawnAt: nowIso, withdrawnBy: by, notBreachProposal: { ...next.notBreachProposal, confirmedBy: by, confirmedAt: nowIso } });
   } else if (event === "close") {
     const summary = str(i.summary).slice(0, 4000);
-    /* Closing without both notifications needs a stated reason: a breach closed silently without telling anyone is
-     * exactly what s8(6) is written against. */
-    if ((!next.boardNotifiedAt || !next.principalsNotifiedAt) && summary.length < 20) return { error: "reason_required", detail: "the Board or the patients were not recorded as told: say why in at least 20 characters" };
     if (!next.assessment) return { error: "assessment_required" };
+    /* A breach is closed only once everyone the law says must be told has been: CERT-In now, each affected patient,
+     * and the Board where its duty applies. */
+    const missing = [!next.certInReportedAt && "cert-in", !next.principalsNotifiedAt && "principals", next.boardDuty && !next.boardNotifiedAt && "board"].filter(Boolean);
+    if (missing.length) return { error: "notifications_required", missing, detail: "record every notification before closing, or record that this was not a personal data breach" };
     Object.assign(next, { state: "closed", closedAt: nowIso, closedBy: by, closeSummary: summary || null });
   } else return { error: "unknown_event" };
   next.history.push({ at: nowIso, by, event });
@@ -416,7 +534,7 @@ async function updateBreach(request, env, ctx) {
   if (!current) return { ...base, ok: false, status: 404, error: "breach_not_found", written: 0 };
   const { meta, version, ...rest } = current;
   const v = applyBreachUpdate(rest, ctx, resolved.actor.id, new Date().toISOString());
-  if (v.error) return { ...base, ok: false, status: v.error === "closed" ? 409 : v.error === "unknown_event" ? 400 : 422, error: v.error, detail: v.detail || null, written: 0 };
+  if (v.error) return { ...base, ok: false, status: v.error === "closed" ? 409 : v.error === "unknown_event" ? 400 : 422, error: v.error, detail: v.detail || null, part: v.part || null, missing: v.missing || null, written: 0 };
   try {
     const out = await svc.put(v.breach, { expectedVersion: version });
     return { ...base, ok: true, written: 1, breach: breachClock({ ...v.breach, version: out.record.version }, Date.now()) };
@@ -473,7 +591,7 @@ async function portalDataRequest(ctx, session) {
 
 export {
   NOTICE, ACK, REQ, BREACH, REQUEST_KINDS, RECEIVED_VIA, ACK_METHODS, CARE_CONSENTS, OPTIONAL_IDENTIFIERS, RETENTION_REASON,
-  clocksOf, noticeInput, newRequest, applyBreachUpdate, withClock, breachClock,
+  clocksOf, noticeInput, newRequest, applyBreachUpdate, withClock, breachClock, responseContactOf, renoticeDue, NOTICE_PARTS, PRINCIPAL_HEADINGS, BOARD_HEADINGS, HEALTH_CONSENT_FORMS,
   publishNotice, privacyNotices, acknowledgePrivacy, privacyAcknowledgements, fileDataRequest, actOnDataRequest, dpoQueue, dataHoldings,
   recordBreach, updateBreach, portalPrivacy, portalAcknowledge, portalDataRequest,
 };

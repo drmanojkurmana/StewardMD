@@ -270,6 +270,11 @@ test("report -> self-review refused -> another admin reviews -> restore test -> 
   assert.match(rep.dataProtection.reasons.join(" "), /No restore test has ever been recorded/);
   assert.equal(rep.auditRetention.status, "ok");
   assert.ok(rep.auditRetention.oldestAuditAt);
+  // CERT-In Directions 2022 (iv): WardSynQ's own rows are kept, but what it cannot see is never reported as met.
+  assert.equal(rep.logRetention.meetsCertIn, false);
+  assert.equal(rep.logRetention.checks.find((x) => x.id === "audit-rows").status, "met");
+  assert.equal(rep.logRetention.checks.find((x) => x.id === "location").status, "not-confirmed");
+  assert.equal(rep.logRetention.checks.find((x) => x.id === "platform-logs").status, "not-met");
   assert.equal(rep.notDetected.length, 2, "reads outside an assignment are now checked, not listed as undetected");
   assert.equal(rep.assignmentAccess.status, "not_evaluated", "no assignments recorded is not evaluated, never clean");
   assert.equal(rep.assignmentAccess.findings, undefined);
@@ -371,6 +376,12 @@ test("screen: loading, failed, unavailable and empty read differently; own actio
 
   const unavailable = html(c, { ...base, chartAccess: { status: "unavailable", detail: "storage cannot read the audit trail" } });
   assert.match(unavailable, /Could not be checked: storage cannot read the audit trail/);
+  // The log retention card: a report without the check says it was not checked, never that logs are kept.
+  assert.match(empty, /Log retention was not checked/);
+  const lr = html(c, { ...base, chartAccess: emptyOk, logRetention: SR.logRetentionCheck({ auditReadable: false, nowMs: Date.parse("2026-09-17T00:00:00Z") }) });
+  assert.match(lr, /Not shown to meet the CERT-In directions/);
+  assert.match(lr, /storage within India is not confirmed/);
+  assert.equal(SR.logRetentionCheck({ auditReadable: false }).checks[0].status, "not-confirmed", "an unreadable audit trail is not confirmed kept");
 
   const withQueue = html(c, { ...base, chartAccess: emptyOk, reviewQueue: { status: "ok", awaiting: 2, missing: [], items: [
     { kind: "privileged-action", subjectId: "e1", actor: "me", action: "member:set", at: "t", detail: "x", status: "awaiting", reviews: [], ownAction: true },
