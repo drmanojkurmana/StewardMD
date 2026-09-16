@@ -70,6 +70,9 @@ test("what was issued stays what was issued", () => {
   assert.equal(d.unverified, false);
   // A non-numeric version is null rather than a coerced 0.
   assert.equal(MedicationDispense({ id: "d", orderId: "o", orderVersion: "2" }).orderVersion, null);
+  // gst-packages: a take-home supply at discharge says so (GST taxes it apart from medicines used in the stay); nothing else carries the marker.
+  assert.equal(MedicationDispense({ id: "d", orderId: "o", takeHome: true }).takeHome, true);
+  assert.equal("takeHome" in MedicationDispense({ id: "d", orderId: "o", takeHome: "yes" }), false);
 });
 
 test("AN EXPIRY IS THE END OF ITS DAY, and an absent one is never 'checked and fine'", () => {

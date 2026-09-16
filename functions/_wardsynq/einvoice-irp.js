@@ -1,9 +1,9 @@
 /* functions/_wardsynq/einvoice-irp.js - GST e-invoicing: the connector kind, its adapters, and the IRN request.
  *
  * A hospital above the notified aggregate turnover reports each B2B tax invoice, credit note and debit note to an
- * Invoice Registration Portal (IRP) and prints the IRN and signed QR code it returns. Which IRP, and whether the
- * law applies to this hospital at all, is the hospital's own setting on Admin > Integrations; nothing here decides
- * a hospital's turnover.
+ * Invoice Registration Portal (IRP) and prints the IRN and signed QR code it returns. Which IRP is the hospital's own
+ * setting on Admin > Integrations. Whether the law applies at all follows from the aggregate turnover the hospital
+ * enters on Admin > Price list > GST settings, exempt supplies included (functions/_wardsynq/gst-settings.js).
  *
  * ADAPTERS. One per way of reaching an IRP, selected by the connector's provider. The first is the NIC IRP direct
  * API (https://einv-apisandbox.nic.in):
@@ -106,8 +106,13 @@ const HSN = /^(\d{4}|\d{6}|\d{8})$/;
 /**
  * PURE. The Generate IRN request for an invoice (note = null) or one of its credit/debit note events.
  * seller: the connector's settings. Only TAXED lines are reported: exempt lines belong to a bill of supply, not
- * the e-invoice (https://gstzen.in/einvoicing/e-invoice/exempt-supplies-and-e-invoicing.html). Returns
- * { payload } or { error, detail, codes? }.
+ * the e-invoice (GST e-invoice FAQ Q11; https://gstzen.in/einvoicing/e-invoice/exempt-supplies-and-e-invoicing.html).
+ * A bill with taxed and exempt lines to a registered buyer is two documents (functions/_wardsynq/invoice.js
+ * documentsOf): the Tax Invoice of its taxed lines, under the invoice number, is what is reported, and it is refused
+ * until the separate Bill of Supply has its own number, so the IRN never stands for a document that was not issued.
+ * Place of supply (BuyerDtls.Pos) is where the service is performed, the hospital's state, unless the bill was raised
+ * under the hospital's "recipient_state" setting (IGST Act s.12(4), probable; see invoice.js interStateOf).
+ * A note carrying no GST (financial) is not reported. Returns { payload } or { error, detail, codes? }.
  */
 function irnRequest(invoice, seller, note) {
   const buyer = invoice.buyer;
@@ -117,10 +122,14 @@ function irnRequest(invoice, seller, note) {
   const sellerState = str(seller.stateCode);
   const registered = str(invoice.taxRegistration && invoice.taxRegistration.id);
   if (registered && normalizeGstin(registered) !== normalizeGstin(seller.gstin)) return { error: "seller_gstin_mismatch", detail: "The bill was raised under a different GSTIN from the one set for e-invoicing." };
-  const inter = sellerState !== str(buyer.pos);
+  const pos = invoice.placeOfSupply === "recipient_state" ? str(buyer.pos) : sellerState;
+  const inter = sellerState !== pos;
+  const isTaxed = (l) => l && l.taxKind === "GST" && l.taxExempt !== true && Number(l.taxRate) > 0;
+  if (note && (note.financial || !(Number(note.tax) > 0))) return { error: "financial_note_not_reported", detail: "This note carries no GST, so it is a financial credit or debit note. It is not reported for e-invoicing." };
   const source = note ? note.lines || [] : invoice.lines || [];
-  const taxed = source.filter((l) => l && l.taxKind === "GST" && l.taxExempt !== true && Number(l.taxRate) > 0);
-  if (!taxed.length) return { error: "no_taxable_lines", detail: "Nothing on this document is taxed. Exempt supplies are not reported for e-invoicing." };
+  const taxed = source.filter((l) => isTaxed(l) && !(note && !(Number(l.tax) > 0)));
+  if (!taxed.length) return { error: "no_taxable_lines", detail: "Exempt supplies are not reported for e-invoicing. This Bill of Supply has no IRN." };
+  if (!note && (invoice.lines || []).some((l) => !isTaxed(l)) && !str(invoice.billOfSupplyNumber)) return { error: "bill_of_supply_number_missing", detail: "This bill has taxed and exempt charges for a registered buyer, and its separate Bill of Supply has no number yet. Save the buyer details again to issue it, then report the Tax Invoice." };
   const noHsn = taxed.filter((l) => !HSN.test(str(l.hsnSac))).map((l) => l.code);
   if (noHsn.length) return { error: "hsn_sac_missing", codes: noHsn, detail: "These taxed items have no HSN/SAC on the Price list, so the document cannot be reported." };
 
@@ -144,7 +153,7 @@ function irnRequest(invoice, seller, note) {
     TranDtls: { TaxSch: "GST", SupTyp: "B2B", RegRev: "N", IgstOnIntra: "N" },
     DocDtls: { Typ: note ? (note.kind === "credit_note" ? "CRN" : "DBN") : "INV", No: docNo, Dt: ddmmyyyy(note ? note.at : raisedAt) },
     SellerDtls: party(seller),
-    BuyerDtls: { ...party(buyer), Pos: str(buyer.pos) },
+    BuyerDtls: { ...party(buyer), Pos: pos },
     ItemList: items,
     ValDtls: { AssVal: sum("AssAmt"), CgstVal: sum("CgstAmt"), SgstVal: sum("SgstAmt"), IgstVal: sum("IgstAmt"), TotInvVal: sum("TotItemVal") },
     ...(note ? { RefDtls: { PrecDocDtls: [{ InvNo: str(invoice.documentNumber), InvDt: ddmmyyyy(raisedAt) }] } } : {}),
@@ -230,7 +239,6 @@ const EINVOICE_KIND = Object.freeze({
       label: "NIC Invoice Registration Portal (direct API)",
       help: "Credentials come from the e-invoice portal's API registration. The IRP public key is downloaded from the same portal.",
       settings: [
-        { key: "applies", label: "E-invoicing applies to us (aggregate turnover above the notified threshold)", type: "checkbox" },
         { key: "baseUrl", label: "Portal API address (sandbox: https://einv-apisandbox.nic.in)", type: "url", required: true },
         { key: "gstin", label: "Hospital GSTIN", type: "text", required: true },
         { key: "legalName", label: "Legal name (as registered for GST)", type: "text", required: true },

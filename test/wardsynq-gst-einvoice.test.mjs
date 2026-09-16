@@ -130,28 +130,39 @@ test("notes engine: own number and reason, GST follows the line, credit capped, 
   assert.throws(() => E.postNote(v, "credit_note", { noteNumber: "N", actorId: "a", at: "t", reason: "r", lines: [{ lineIndex: 0, taxable: 1 }] }), (e) => e.code === "INVOICE_VOID");
 });
 
-test("IRN request (INV-01 v1.1): B2C refused, only taxed lines, CGST/SGST within the state, IGST across, notes carry PrecDocDtls", () => {
+test("IRN request (INV-01 v1.1): B2C refused, only taxed lines, place of supply where performed (CGST/SGST) unless the bill says recipient state, notes carry PrecDocDtls", () => {
   const seller = { gstin: SELLER, legalName: "WSQ Ward Hospital", address1: "1 Main Road", location: "Pune", pincode: "411001", stateCode: "27" };
   const inv = gstInvoice("inv-p");
   assert.equal(IRP.irnRequest(inv, seller, null).error, "b2c_not_reported");
   inv.buyer = { gstin: BUYER, legalName: "Acme Insurance Ltd", address1: "5 MG Road", location: "Bengaluru", pincode: "560001", stateCode: "29", pos: "29" };
+  assert.equal(IRP.irnRequest(inv, seller, null).error, "bill_of_supply_number_missing", "a mixed B2B bill is not reported until its Bill of Supply has a number");
+  inv.billOfSupplyNumber = "BOS/2627/000001";
   const p = IRP.irnRequest(inv, seller, null).payload;
   assert.equal(p.Version, "1.1");
   assert.deepEqual(p.TranDtls, { TaxSch: "GST", SupTyp: "B2B", RegRev: "N", IgstOnIntra: "N" });
   assert.deepEqual(p.DocDtls, { Typ: "INV", No: "INV/2627/000001", Dt: "16/09/2026" });
   assert.deepEqual(p.SellerDtls, { Gstin: SELLER, LglNm: "WSQ Ward Hospital", Addr1: "1 Main Road", Loc: "Pune", Pin: 411001, Stcd: "27" });
-  assert.equal(p.BuyerDtls.Pos, "29");
+  assert.equal(p.BuyerDtls.Pos, "27", "a health service is supplied where it is performed, whatever the buyer's state");
   assert.equal(p.ItemList.length, 1, "the exempt nursing line is not reported");
-  assert.deepEqual(p.ItemList[0], { SlNo: "1", PrdDesc: "Private room", IsServc: "Y", HsnCd: "999311", UnitPrice: 6000, TotAmt: 6000, Discount: 0, AssAmt: 6000, GstRt: 5, IgstAmt: 300, CgstAmt: 0, SgstAmt: 0, TotItemVal: 6300 });
-  assert.deepEqual(p.ValDtls, { AssVal: 6000, CgstVal: 0, SgstVal: 0, IgstVal: 300, TotInvVal: 6300 });
-  inv.buyer = { ...inv.buyer, pos: "27" };
-  assert.deepEqual(IRP.irnRequest(inv, seller, null).payload.ValDtls, { AssVal: 6000, CgstVal: 150, SgstVal: 150, IgstVal: 0, TotInvVal: 6300 });
+  assert.deepEqual(p.ItemList[0], { SlNo: "1", PrdDesc: "Private room", IsServc: "Y", HsnCd: "999311", UnitPrice: 6000, TotAmt: 6000, Discount: 0, AssAmt: 6000, GstRt: 5, IgstAmt: 0, CgstAmt: 150, SgstAmt: 150, TotItemVal: 6300 });
+  assert.deepEqual(p.ValDtls, { AssVal: 6000, CgstVal: 150, SgstVal: 150, IgstVal: 0, TotInvVal: 6300 });
+  inv.placeOfSupply = "recipient_state";
+  const across = IRP.irnRequest(inv, seller, null).payload;
+  assert.deepEqual([across.BuyerDtls.Pos, across.ValDtls.IgstVal, across.ValDtls.CgstVal], ["29", 300, 0], "only the recipient_state setting makes it IGST");
+  delete inv.placeOfSupply;
+  // A B2B bill of only exempt lines is a Bill of Supply: never reported.
+  const exemptOnly = { ...gstInvoice("inv-x"), buyer: inv.buyer, lines: [gstInvoice("x").lines[1]] };
+  assert.equal(IRP.irnRequest(exemptOnly, seller, null).error, "no_taxable_lines");
+  assert.match(IRP.irnRequest(exemptOnly, seller, null).detail, /This Bill of Supply has no IRN/);
   E.postNote(inv, "credit_note", { noteNumber: "CRN/2627/000001", actorId: "a", at: "2026-09-17T05:00:00Z", reason: "r", lines: [{ lineIndex: 0, taxable: 1000 }] });
   const n = IRP.irnRequest(inv, seller, inv.events.at(-1)).payload;
   assert.deepEqual(n.DocDtls, { Typ: "CRN", No: "CRN/2627/000001", Dt: "17/09/2026" });
   assert.deepEqual(n.RefDtls, { PrecDocDtls: [{ InvNo: "INV/2627/000001", InvDt: "16/09/2026" }] });
   assert.equal(n.ItemList[0].AssAmt, 1000);
-  const noHsn = gstInvoice("inv-h"); noHsn.buyer = inv.buyer; delete noHsn.lines[0].hsnSac;
+  E.postNote(inv, "credit_note", { noteNumber: "CRN/2627/000002", actorId: "a", at: "2026-09-17T05:00:00Z", reason: "r", withoutGst: true, gstTreatment: "without_gst", lines: [{ lineIndex: 0, taxable: 100 }] });
+  assert.deepEqual([inv.events.at(-1).tax, inv.events.at(-1).financial], [0, true]);
+  assert.equal(IRP.irnRequest(inv, seller, inv.events.at(-1)).error, "financial_note_not_reported", "a note issued without GST is not reported");
+  const noHsn = gstInvoice("inv-h"); noHsn.buyer = inv.buyer; noHsn.billOfSupplyNumber = "BOS/2627/000002"; delete noHsn.lines[0].hsnSac;
   assert.deepEqual(IRP.irnRequest(noHsn, seller, null).codes, ["ROOM-PVT"]);
   const old = gstInvoice("inv-o"); old.buyer = inv.buyer; delete old.documentNumber;
   assert.equal(IRP.irnRequest(old, seller, null).error, "no_document_number");
@@ -164,7 +175,7 @@ async function seedGst(id) { const inv = gstInvoice(id); await H.RECORD.append(T
 const BUYER_BODY = { gstin: BUYER, legalName: "Acme Insurance Ltd", address1: "5 MG Road", location: "Bengaluru", pincode: "560001", stateCode: "29", pos: "29" };
 const keys = generateKeyPairSync("rsa", { modulusLength: 2048 });
 const SPKI = keys.publicKey.export({ type: "spki", format: "der" }).toString("base64");
-const EINV = { kind: "einvoice", provider: "nic-irp", settings: { applies: true, baseUrl: "https://93.184.216.36", gstin: SELLER, legalName: "WSQ Ward Hospital", address1: "1 Main Road", location: "Pune", pincode: "411001", stateCode: "27", username: "wsq_api", publicKey: SPKI },
+const EINV = { kind: "einvoice", provider: "nic-irp", settings: { baseUrl: "https://93.184.216.36", gstin: SELLER, legalName: "WSQ Ward Hospital", address1: "1 Main Road", location: "Pune", pincode: "411001", stateCode: "27", username: "wsq_api", publicKey: SPKI },
   secrets: { clientId: "client-id-never-leak", clientSecret: "client-secret-never-leak", password: "password-never-leak" } };
 const istNow = (offsetMs) => new Date(Date.now() + 330 * 60000 + (offsetMs || 0)).toISOString().replace("T", " ").slice(0, 19);
 
@@ -212,7 +223,7 @@ test("negative authorization: notes, buyer and IRN routes need billing.charge at
   assert.equal((await as(null, "/ward/connector-save", "POST", { orgId: ORG_ID, ...EINV })).__status, 401);
   for (const who of [CASHIER, NURSE, HR, OTHER_ADMIN]) assert.equal((await as(who, "/ward/connector-save", "POST", { orgId: ORG_ID, ...EINV })).__status, 403, who);
   assert.equal(writesNow(), before, "nothing written by any refused call");
-  const ok = await as(CASHIER, "/ward/invoice-credit-note", "POST", bodies["/ward/invoice-credit-note"]);
+  const ok = await as(CASHIER, "/ward/invoice-credit-note", "POST", { ...bodies["/ward/invoice-credit-note"], gstTreatment: "gst_refunded" });
   assert.equal(ok.__status, 200, ok.__text);
 });
 
@@ -238,37 +249,75 @@ test("credit and debit notes through the routes: numbered per series, audited, s
   const over = await as(CASHIER, "/ward/invoice-credit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-n", reason: "r", lines: [{ lineIndex: 0, taxable: 9000 }] });
   assert.equal(over.code, "CREDIT_EXCEEDS_LINE");
   assert.equal(await H.RECORD.latest(T, "_wardsynq_doc_series", "crn-2627"), null, "a refused note uses no number");
-  const c1 = await as(CASHIER, "/ward/invoice-credit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-n", reason: "Room downgraded", lines: [{ lineIndex: 0, taxable: 1000 }] });
+  // Section 34(2) from 1 October 2025: GST on a credit note to a patient is reduced only if it is refunded, so the cashier says which.
+  const ask = await as(CASHIER, "/ward/invoice-credit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-n", reason: "Room downgraded", lines: [{ lineIndex: 0, taxable: 1000 }] });
+  assert.deepEqual([ask.__status, ask.error, ask.recipient, ask.gst], [409, "gst_confirmation_required", "patient", 50]);
+  assert.match(ask.detail, /only if the GST is refunded to the patient\. Refund Rs 50 of GST with this note, or issue it without GST\./);
+  assert.equal(await H.RECORD.latest(T, "_wardsynq_doc_series", "crn-2627"), null, "a note waiting for the confirmation uses no number");
+  assert.equal((await H.RECORD.latest(T, "Invoice", "inv-n")).version, 1, "and writes nothing");
+  const c1 = await as(CASHIER, "/ward/invoice-credit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-n", reason: "Room downgraded", gstTreatment: "gst_refunded", gstConfirmation: "Refunded at counter 2", lines: [{ lineIndex: 0, taxable: 1000 }] });
   assert.equal(c1.__status, 200, c1.__text);
   assert.equal(c1.noteNumber, "CRN/2627/000001");
-  const c2 = await as(CASHIER, "/ward/invoice-credit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-n", reason: "Second correction", lines: [{ lineIndex: 0, taxable: 100 }] });
+  const rec = c1.events.find((e) => e.noteNumber === "CRN/2627/000001");
+  assert.deepEqual([rec.tax, rec.gstTreatment, rec.gstConfirmation.reference], [50, "gst_refunded", "Refunded at counter 2"]);
+  assert.ok(rec.gstConfirmation.by && rec.gstConfirmation.at, "the confirmation names who recorded it and when");
+  const c2 = await as(CASHIER, "/ward/invoice-credit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-n", reason: "Second correction", gstTreatment: "gst_refunded", lines: [{ lineIndex: 0, taxable: 100 }] });
   assert.equal(c2.noteNumber, "CRN/2627/000002");
+  // A note on the exempt nursing line carries no GST and needs no confirmation: a financial credit note.
+  const fin = await as(CASHIER, "/ward/invoice-credit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-n", reason: "Nursing waived", lines: [{ lineIndex: 1, taxable: 100 }] });
+  assert.equal(fin.__status, 200, fin.__text);
+  assert.deepEqual([fin.events.at(-1).tax, fin.events.at(-1).financial], [0, true]);
   const d1 = await as(CASHIER, "/ward/invoice-debit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-n", reason: "Extra day", lines: [{ lineIndex: 0, taxable: 500 }] });
   assert.equal(d1.noteNumber, "DBN/2627/000001");
-  assert.deepEqual([d1.credited, d1.debited, d1.balance], [1155, 525, 6470]);
+  assert.deepEqual([d1.credited, d1.debited, d1.balance], [1255, 525, 6370]);
   const note = d1.events.find((e) => e.noteNumber === "CRN/2627/000001");
   assert.deepEqual([note.lines[0].cgst, note.lines[0].sgst, note.lines[0].igst, note.lines[0].hsnSac], [25, 25, 0, "999311"]);
   assert.equal(d1.lines[0].tax, 300, "the original line's tax is never changed");
-  assert.equal(H.RECORD.audit.filter((a) => a.action === "document.number.issue").length, 3);
+  assert.equal(H.RECORD.audit.filter((a) => a.action === "document.number.issue").length, 4);
   const v = await as(CASHIER, "/ward/invoice-void", "POST", { orgId: ORG_ID, invoiceId: "inv-n", reason: "x" });
   assert.equal(v.code, "NOTES_EXIST");
-  // A buyer from another state turns the split into IGST, computed rather than stored.
+  assert.deepEqual(d1.documents.map((d) => [d.type, d.number, d.total]), [["invoice_cum_bill_of_supply", "INV/2627/000001", 7100]], "taxed and exempt lines to a patient: one Invoice-cum-Bill of Supply");
+  // A buyer from another state: still CGST + SGST (where the service is performed), and the bill becomes two documents.
   const b = await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: "inv-n", buyer: BUYER_BODY });
   assert.equal(b.__status, 200, b.__text);
-  assert.equal(b.interState, true); assert.deepEqual([b.lines[0].igst, b.lines[0].cgst], [300, 0]);
+  assert.equal(b.interState, false); assert.deepEqual([b.lines[0].igst, b.lines[0].cgst, b.lines[0].sgst], [0, 150, 150]);
+  assert.equal(b.billOfSupplyNumber, "BOS/2627/000001");
+  assert.deepEqual(b.documents.map((d) => [d.type, d.number, d.lineIndexes, d.taxable, d.tax, d.total]),
+    [["tax_invoice", "INV/2627/000001", [0], 6000, 300, 6300], ["bill_of_supply", "BOS/2627/000001", [1], 800, 0, 800]]);
+  assert.equal(b.documents.reduce((n, d) => n + d.total, 0), b.charged, "the two documents add up to the bill");
+  const again = await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: "inv-n", buyer: BUYER_BODY });
+  assert.equal(again.billOfSupplyNumber, "BOS/2627/000001", "the Bill of Supply number is issued once");
   const bad = await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: "inv-n", buyer: { ...BUYER_BODY, stateCode: "27", pincode: "12" } });
   assert.equal(bad.__status, 422); assert.ok(bad.errors.stateCode && bad.errors.pincode);
 });
 
-test("a credit note reversing GST after 30 November of the next financial year is recorded with a warning", async () => {
+test("a credit note after 30 November of the next financial year is issued without GST, and says so", async () => {
   seed();
   const inv = gstInvoice("inv-late");
   inv.events[0].at = "2024-06-01T04:00:00Z";
   await H.RECORD.append(T, [{ ...inv, resourceType: "Invoice", version: 1, source: { system: "wardsynq-native", sourceId: "invoice:inv-late" } }]);
   const r = await as(CASHIER, "/ward/invoice-credit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-late", reason: "Late correction", lines: [{ lineIndex: 0, taxable: 1000 }] });
   assert.equal(r.__status, 200, r.__text);
-  assert.match(r.warning, /2025-11-30.*Section 34/);
-  assert.equal(r.events.at(-1).gstReversalLate, true);
+  assert.equal(r.warning, "The last date to reduce GST for supplies of 2024-25 was 2025-11-30. This note is issued without GST.");
+  const ev = r.events.at(-1);
+  assert.deepEqual([ev.gstReversalLate, ev.tax, ev.amount, ev.gstTreatment, ev.financial], [true, 0, 1000, "without_gst", true]);
+});
+
+test("a credit note to a registered buyer reduces GST only with the buyer's input tax credit reversal recorded", async () => {
+  seed();
+  const inv = { ...gstInvoice("inv-reg"), buyer: { ...BUYER_BODY, kind: "business" }, billOfSupplyNumber: "BOS/2627/000009" };
+  await H.RECORD.append(T, [{ ...inv, resourceType: "Invoice", version: 1, source: { system: "wardsynq-native", sourceId: "invoice:inv-reg" } }]);
+  const body = { orgId: ORG_ID, invoiceId: "inv-reg", reason: "Room downgraded", lines: [{ lineIndex: 0, taxable: 1000 }] };
+  const ask = await as(CASHIER, "/ward/invoice-credit-note", "POST", body);
+  assert.deepEqual([ask.__status, ask.error, ask.recipient, ask.payerName], [409, "gst_confirmation_required", "registered", "Acme Insurance Ltd"]);
+  assert.equal(ask.detail, "GST on this credit note reduces the hospital's tax only after Acme Insurance Ltd reverses the matching input tax credit. Record their confirmation.");
+  assert.equal((await as(CASHIER, "/ward/invoice-credit-note", "POST", { ...body, gstTreatment: "itc_reversed" })).error, "gst_confirmation_required", "a reversal with no reference is not a confirmation");
+  assert.equal((await as(CASHIER, "/ward/invoice-credit-note", "POST", { ...body, gstTreatment: "gst_refunded" })).error, "gst_confirmation_required", "a registered buyer's GST is not refunded, its credit is reversed");
+  const ok = await as(CASHIER, "/ward/invoice-credit-note", "POST", { ...body, gstTreatment: "itc_reversed", gstConfirmation: "Acme letter ACM/GST/114 of 17-09-2026" });
+  assert.equal(ok.__status, 200, ok.__text);
+  assert.deepEqual([ok.events.at(-1).tax, ok.events.at(-1).gstConfirmation.reference], [50, "Acme letter ACM/GST/114 of 17-09-2026"]);
+  const without = await as(CASHIER, "/ward/invoice-credit-note", "POST", { ...body, reason: "Goodwill", gstTreatment: "without_gst" });
+  assert.deepEqual([without.events.at(-1).tax, without.events.at(-1).financial], [0, true]);
 });
 
 test("e-invoice: not connected, not enabled, B2C each refused plainly; the IRN request pinned by decrypting it; QR stored; cancel within 24 hours", async () => {
@@ -278,15 +327,21 @@ test("e-invoice: not connected, not enabled, B2C each refused plainly; the IRN r
   const none = await as(CASHIER, "/ward/invoice-irn", "POST", { orgId: ORG_ID, invoiceId: "inv-i" });
   assert.equal(none.__status, 409); assert.equal(none.error, "einvoice_not_connected");
 
-  const saved = await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, ...EINV, settings: { ...EINV.settings, applies: false } });
+  const saved = await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, ...EINV });
   assert.equal(saved.__status, 200, saved.__text);
   assert.ok(!saved.__text.includes("password-never-leak") && !saved.__text.includes("client-secret-never-leak"));
-  assert.equal((await as(CASHIER, `/ward/einvoice-status?orgId=${ORG_ID}`)).state, "not_enabled");
-  assert.ok(!(await as(CASHIER, `/ward/einvoice-status?orgId=${ORG_ID}`)).__text.includes("wsq_api"), "no setting is returned");
+  // Applicability is the aggregate turnover on the GST settings, exempt supplies included: not entered, then Rs 5 crore exactly, then above.
+  const st0 = await as(CASHIER, `/ward/einvoice-status?orgId=${ORG_ID}`);
+  assert.deepEqual([st0.state, st0.reason], ["not_enabled", "turnover_not_entered"]);
+  assert.ok(!st0.__text.includes("wsq_api"), "no setting is returned");
   const off = await as(CASHIER, "/ward/invoice-irn", "POST", { orgId: ORG_ID, invoiceId: "inv-i" });
-  assert.equal(off.error, "einvoice_not_enabled");
+  assert.equal(off.error, "einvoice_not_enabled"); assert.match(off.message, /aggregate turnover is not entered/);
+  assert.equal((await as(ADMIN, "/org/gst-settings", "POST", { orgId: ORG_ID, reason: "Turnover for 2025-26", settings: { aggregateTurnoverRs: "50000000" } })).__status, 200);
+  const st1 = await as(CASHIER, `/ward/einvoice-status?orgId=${ORG_ID}`);
+  assert.deepEqual([st1.state, st1.reason], ["not_enabled", "below_threshold"], "Rs 5 crore is not above Rs 5 crore");
+  assert.equal((await as(ADMIN, "/org/gst-settings", "POST", { orgId: ORG_ID, reason: "Turnover including exempt supplies", settings: { aggregateTurnoverRs: "50000001" } })).__status, 200);
   assert.equal((await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, ...EINV, settings: { ...EINV.settings, stateCode: "29" } })).__status, 422, "state code must match the GSTIN");
-  assert.equal((await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, ...EINV })).__status, 200);
+  assert.equal((await as(CASHIER, `/ward/einvoice-status?orgId=${ORG_ID}`)).state, "ready");
 
   const irp = mockIrp();
   ENV.WSQ_EINV_FETCH = irp.fetchImpl;
@@ -314,7 +369,8 @@ test("e-invoice: not connected, not enabled, B2C each refused plainly; the IRN r
     assert.deepEqual(Object.keys(send.body), ["Data"]);
     assert.equal(send.plain.Version, "1.1");
     assert.deepEqual(send.plain.DocDtls, { Typ: "INV", No: "INV/2627/000001", Dt: "16/09/2026" });
-    assert.deepEqual(send.plain.ItemList.map((i) => [i.HsnCd, i.AssAmt, i.IgstAmt]), [["999311", 6000, 300]]);
+    assert.deepEqual(send.plain.ItemList.map((i) => [i.HsnCd, i.AssAmt, i.IgstAmt, i.CgstAmt]), [["999311", 6000, 0, 150]], "the Tax Invoice of the taxed line only, CGST and SGST");
+    assert.equal(send.plain.BuyerDtls.Pos, "27");
     assert.equal(send.plain.BuyerDtls.Gstin, BUYER);
     assert.equal(gen.einvoices[0].irn, "a".repeat(64));
     assert.equal(gen.einvoices[0].signedQrCode, "eyJhbGciOiJSUzI1NiJ9.qr.sig");
@@ -327,7 +383,7 @@ test("e-invoice: not connected, not enabled, B2C each refused plainly; the IRN r
     assert.equal((await as(CASHIER, "/ward/invoice-void", "POST", { orgId: ORG_ID, invoiceId: "inv-i", reason: "x" })).code, "IRN_ACTIVE");
 
     // A credit note is reported as CRN with the invoice it answers.
-    const cn = await as(CASHIER, "/ward/invoice-credit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-i", reason: "Room downgraded", lines: [{ lineIndex: 0, taxable: 1000 }] });
+    const cn = await as(CASHIER, "/ward/invoice-credit-note", "POST", { orgId: ORG_ID, invoiceId: "inv-i", reason: "Room downgraded", gstTreatment: "itc_reversed", gstConfirmation: "Acme ITC reversal letter 12", lines: [{ lineIndex: 0, taxable: 1000 }] });
     irp.calls.length = 0;
     const cnIrn = await as(CASHIER, "/ward/invoice-irn", "POST", { orgId: ORG_ID, invoiceId: "inv-i", noteNumber: cn.noteNumber });
     assert.equal(cnIrn.__status, 200, cnIrn.__text);
@@ -345,7 +401,7 @@ test("e-invoice: not connected, not enabled, B2C each refused plainly; the IRN r
 });
 
 test("e-invoice: a portal refusal records nothing but is audited; an IRN older than 24 hours is not cancelled", async () => {
-  seed();
+  seed({ gst: { aggregateTurnoverRs: 120000000 } });
   await seedGst("inv-r");
   assert.equal((await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, ...EINV })).__status, 200);
   assert.equal((await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: "inv-r", buyer: BUYER_BODY })).__status, 200);

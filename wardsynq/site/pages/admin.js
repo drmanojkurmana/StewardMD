@@ -195,6 +195,7 @@
   }
   WSQ._bugsHtml = bugsHtml;
   WSQ._renderPackages = function (c, host) { return renderPackages(c, host); };
+  WSQ._renderGstSettings = function (c, host) { return renderGstSettings(c, host); };
   /** The one request each button sends. kind: in_progress | solved | open | remove. */
   function bugAction(c, kind, r, note) {
     if (kind === "remove") return c.api("/ward/bug-report-remove", { orgId: c.state.orgId, id: r.id, expectedVersion: r.version });
@@ -1011,8 +1012,21 @@
     return "";
   }
   function tariffGstLabel(c, t) {
-    if (t.kind === "bed") return t.intensiveCare ? T(c, "site.admin.tariff.gstIcu", "Intensive care room: exempt") : T(c, "site.admin.tariff.gstRoom", "Room: 5% above Rs 5,000 a day");
-    return t.gstRate === "" || t.gstRate == null ? "" : T(c, "site.admin.tariff.gstRateShown", "{rate}%", { rate: t.gstRate });
+    var hours = t.kind === "bed" && t.unitHours ? " " + T(c, "site.admin.tariff.unitHoursShown", "(price for {hours} hour(s))", { hours: t.unitHours }) : "";
+    if (t.kind === "bed" && (t.intensiveCareClass === "ICU_SPECIALTY" || t.intensiveCareClass === "HDU")) return icuClassLabel(c, t.intensiveCareClass) + hours;
+    if (t.kind === "bed") return (t.intensiveCare ? T(c, "site.admin.tariff.gstIcu", "Intensive care room: exempt") : T(c, "site.admin.tariff.gstRoom", "Room: 5% above Rs 5,000 a day")) + hours;
+    var rate = t.gstRate === "" || t.gstRate == null ? "" : T(c, "site.admin.tariff.gstRateShown", "{rate}%", { rate: t.gstRate });
+    return t.nonHealthcare ? T(c, "site.admin.tariff.nonHealthShown", "Not health care, taxed at its own rate") + (rate ? " " + rate : "") : rate;
+  }
+  /* gst-packages: which intensive care unit a bed row is (functions/_region_in.js isIntensiveCare). The four named units
+   * are exempt at any price; a specialty ICU and an HDU follow the hospital's GST setting. */
+  var ICU_CLASSES = ["", "ICU", "CCU", "ICCU", "NICU", "ICU_SPECIALTY", "HDU"];
+  function icuClassLabel(c, k) {
+    return {
+      "": T(c, "site.admin.tariff.icuNone", "Ordinary room"), ICU: T(c, "site.admin.tariff.icuIcu", "ICU (Intensive Care Unit)"), CCU: T(c, "site.admin.tariff.icuCcu", "CCU (Critical Care Unit)"),
+      ICCU: T(c, "site.admin.tariff.icuIccu", "ICCU (Intensive Cardiac Care Unit)"), NICU: T(c, "site.admin.tariff.icuNicu", "NICU (Neonatal Intensive Care Unit)"),
+      ICU_SPECIALTY: T(c, "site.admin.tariff.icuSpecialty", "Specialty ICU (PICU, MICU, SICU): follows the GST setting"), HDU: T(c, "site.admin.tariff.icuHdu", "HDU or step-down: follows the GST setting"),
+    }[k] || k;
   }
   function renderTariff(c, body) {
     body.innerHTML = '<span class="spin"></span>';
@@ -1041,13 +1055,17 @@
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + '</span><input id="admTrfPrice" inputmode="decimal"></label>' +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.hsn", "HSN/SAC (4, 6 or 8 digits)")) + '</span><input id="admTrfHsn" inputmode="numeric"></label>' +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.gstRate", "GST rate % (medicines and other taxable items)")) + '</span><input id="admTrfGst" inputmode="decimal"></label>' +
-        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.icu", "Intensive care room (ICU/CCU/ICCU/NICU), beds only")) + '</span><input id="admTrfIcu" type="checkbox"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.icu", "Intensive care room (ICU/CCU/ICCU/NICU), beds only")) + '</span><select id="admTrfIcu">' + ICU_CLASSES.map(function (k) { return '<option value="' + k + '">' + c.esc(icuClassLabel(c, k)) + "</option>"; }).join("") + "</select></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.unitHours", "Hours one bed price covers (24 a day, 8 a shift, 1 an hour), beds only")) + '</span><input id="admTrfHours" inputmode="numeric" placeholder="24"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.nonHealth", "Not health care (attendant food or bed, cosmetic procedure, retail item): taxed at its own rate even for an admitted patient")) + '</span><input id="admTrfNonHealth" type="checkbox"></label>' +
         '</div>' + (wards === null ? '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.wardsFailed", "The wards could not be loaded, so a bed price can only be set for every ward right now.")) + "</div>" : "") +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.icuQuestion", "Is this room category an Intensive Care Unit, Critical Care Unit, Intensive Cardiac Care Unit or Neonatal Intensive Care Unit? Only these are exempt at any price. High dependency, step-down, isolation and labour rooms are not on the list and follow the Rs 5,000 per day rule.")) + "</p>" +
         '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.gstRules", "GST is applied by law: a room other than an intensive care room charged above Rs 5,000 a day is taxed at 5 percent; intensive care rooms and other health care services are exempt; medicines on an inpatient bill are exempt, and medicines sold to outpatients are taxed at the rate set here. An intensive care room is marked here, never guessed from the ward name.")) + "</p>" +
         '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.howBilled", "Bed, nursing and doctor visit prices are charged for each day of an inpatient stay. Name a test or medicine exactly as it is ordered, so the bill can find its price.")) + "</p>" +
         '<button type="button" class="btn" id="admTrfAdd">' + c.esc(T(c, "site.admin.add", "Add")) + '</button><div id="admTrfMsg"></div>' +
         '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.everyChange", "Every change is recorded with the old and new price.")) + "</p></div>" +
-        '<div id="admPkgHost"></div>';
+        '<div id="admGstHost"></div><div id="admPkgHost"></div>';
+      renderGstSettings(c, document.getElementById("admGstHost"));
       renderPackages(c, document.getElementById("admPkgHost"));
 
       function save(item) {
@@ -1066,10 +1084,13 @@
         if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errPrice", "The price has to be a plain amount in rupees, like 450 or 450.50.")) + "</div>"; return; }
         var kind = document.getElementById("admTrfKind").value;
         var taxErr = tariffTaxError(c, document.getElementById("admTrfHsn").value, document.getElementById("admTrfGst").value);
+        var hours = document.getElementById("admTrfHours").value.trim();
+        if (!taxErr && kind === "bed" && hours && !(/^\d{1,2}$/.test(hours) && Number(hours) >= 1 && Number(hours) <= 24)) taxErr = T(c, "site.admin.tariff.errHours", "The hours one bed price covers are a whole number from 1 to 24.");
         if (taxErr) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(taxErr) + "</div>"; return; }
         save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: kind, ward: document.getElementById("admTrfWard").value, price: price,
           hsnSac: document.getElementById("admTrfHsn").value.trim(), gstRate: document.getElementById("admTrfGst").value.trim(),
-          intensiveCare: kind === "bed" ? document.getElementById("admTrfIcu").checked : undefined });
+          intensiveCareClass: kind === "bed" ? document.getElementById("admTrfIcu").value : undefined, unitHours: kind === "bed" ? hours : undefined,
+          nonHealthcare: document.getElementById("admTrfNonHealth").checked });
       };
       body.querySelectorAll("[data-trf-edit]").forEach(function (b) {
         b.onclick = function () {
@@ -1089,7 +1110,19 @@
           var taxErr = tariffTaxError(c, hsn, rate);
           if (taxErr) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(taxErr) + "</div>"; return; }
           var item = { id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: t.price, hsnSac: hsn.trim(), gstRate: rate.trim() };
-          if (t.kind === "bed") item.intensiveCare = confirm(T(c, "site.admin.tariff.icuConfirm", "Is {name} an intensive care room (ICU, CCU, ICCU or NICU)? OK for yes, Cancel for no.", { name: t.name }));
+          if (t.kind === "bed") {
+            if (confirm(T(c, "site.admin.tariff.icuConfirm", "Is {name} an intensive care room (ICU, CCU, ICCU or NICU)? OK for yes, Cancel for no.", { name: t.name }))) item.intensiveCareClass = "ICU";
+            else {
+              var other = prompt(T(c, "site.admin.tariff.icuOtherPrompt", "Is {name} a specialty ICU (PICU, MICU, SICU) or a high dependency or step-down unit? Type SPECIALTY or HDU, or leave empty for an ordinary room.", { name: t.name }), t.intensiveCareClass === "ICU_SPECIALTY" ? "SPECIALTY" : t.intensiveCareClass === "HDU" ? "HDU" : "");
+              if (other == null) return;
+              var o = other.trim().toUpperCase();
+              if (o && o !== "SPECIALTY" && o !== "HDU") { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errIcuOther", "Type SPECIALTY, HDU, or leave it empty.")) + "</div>"; return; }
+              item.intensiveCareClass = o === "SPECIALTY" ? "ICU_SPECIALTY" : o;
+            }
+            var hrs = prompt(T(c, "site.admin.tariff.unitHoursPrompt", "Hours one price of {name} covers (24 a day, 8 a shift, 1 an hour)", { name: t.name }), t.unitHours ? String(t.unitHours) : "24"); if (hrs == null) return;
+            if (!(/^\d{1,2}$/.test(hrs.trim()) && Number(hrs) >= 1 && Number(hrs) <= 24)) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errHours", "The hours one bed price covers are a whole number from 1 to 24.")) + "</div>"; return; }
+            item.unitHours = Number(hrs) === 24 ? "" : hrs.trim();
+          } else item.nonHealthcare = confirm(T(c, "site.admin.tariff.nonHealthConfirm", "Is {name} something other than health care (attendant food or bed, cosmetic procedure, retail item)? OK for yes, Cancel for no.", { name: t.name }));
           save(item);
         };
       });
@@ -1100,6 +1133,83 @@
           save({ id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: t.price, active: false });
         };
       });
+    });
+  }
+
+  /* GST SETTINGS (gst-packages, functions/_wardsynq/gst-settings.js). Where the law is not settled the hospital's
+   * chartered accountant decides. Each setting shows the GST treatment review's safest default, that it is the CA's
+   * decision, and the review's reason in one line. A choice other than the default needs the CA's opinion reference and
+   * date; every change needs a reason. null = loading, false = failed: never read as the defaults. */
+  var GST_CHOICE_KEYS = ["pkgRoomValuation", "recipientOfCashlessClaims", "placeOfSupply", "intensiveCareUnits", "roomChargeBasis", "dischargeMedsAsComposite"];
+  function gstChoiceText(c, key) {
+    return {
+      pkgRoomValuation: { label: T(c, "site.admin.gst.roomValuation", "Room above Rs 5,000 a day inside a package: how its value is worked out"),
+        why: T(c, "site.admin.gst.roomValuationWhy", "No rule, circular or ruling says how to value a room inside a package; the published tariff, capped at the package price, avoids paying too little tax."),
+        options: { published_tariff: T(c, "site.admin.gst.valPublished", "The hospital's published per-day room tariff, capped at the package price (default)"), scheme_rate: T(c, "site.admin.gst.valScheme", "The per-day room rate in the payer's own rate card, entered on the package"), proportional_split: T(c, "site.admin.gst.valSplit", "A proportional split of the package price by standalone prices") } },
+      recipientOfCashlessClaims: { label: T(c, "site.admin.gst.recipient", "Who receives the service in a cashless claim (insurer, TPA, CGHS, ECHS, PM-JAY)"),
+        why: T(c, "site.admin.gst.recipientWhy", "No authority settles whether the payer or the patient is the recipient (Section 2(93)(a)); with the patient, the bill stays B2C and the payer is named as payer only."),
+        options: { patient: T(c, "site.admin.gst.recipientPatient", "The patient: bill to the patient, payer named only (default)"), payer: T(c, "site.admin.gst.recipientPayer", "The insurer, TPA or scheme: a B2B tax invoice to its GSTIN") } },
+      placeOfSupply: { label: T(c, "site.admin.gst.pos", "Place of supply for health services"),
+        why: T(c, "site.admin.gst.posWhy", "A health service is supplied where it is performed (IGST Act Section 12(4), a probable reading), so CGST and SGST apply even for a payer in another state."),
+        options: { where_performed: T(c, "site.admin.gst.posPerformed", "Where the service is performed: CGST and SGST (default)"), recipient_state: T(c, "site.admin.gst.posRecipient", "The registered recipient's state: IGST across states") } },
+      intensiveCareUnits: { label: T(c, "site.admin.gst.icu", "Which units count as intensive care (exempt at any price)"),
+        why: T(c, "site.admin.gst.icuWhy", "Only ICU, CCU, ICCU and NICU are named; specialty ICUs are intensive care in substance (probable); HDU, step-down, isolation and labour rooms are not named."),
+        options: { named_and_specialty: T(c, "site.admin.gst.icuNamedSpecialty", "ICU, CCU, ICCU, NICU and specialty ICUs; HDU and step-down are rooms (default)"), named_only: T(c, "site.admin.gst.icuNamedOnly", "Only ICU, CCU, ICCU and NICU"), include_hdu: T(c, "site.admin.gst.icuHdu", "Also HDU and step-down units") } },
+      roomChargeBasis: { label: T(c, "site.admin.gst.roomBasis", "What the Rs 5,000 a day room charge includes"),
+        why: T(c, "site.admin.gst.roomBasisWhy", "The notification is silent on nursing, RMO or diet charges; by default the bed tariff as billed is the room charge, including anything bundled into it."),
+        options: { bed_tariff: T(c, "site.admin.gst.basisBed", "The bed tariff as billed (default)"), bed_and_daily_nursing: T(c, "site.admin.gst.basisNursing", "The bed tariff plus daily nursing charges billed separately") } },
+      dischargeMedsAsComposite: { label: T(c, "site.admin.gst.dischargeMeds", "Take-home medicines at discharge billed outside a package"),
+        why: T(c, "site.admin.gst.dischargeMedsWhy", "Medicines bought after discharge are taxable (Kerala AAAR); no ruling covers medicines issued at discharge, so they are taxed at the item's rate by default."),
+        options: { taxed: T(c, "site.admin.gst.medsTaxed", "Taxed at the item's own rate (default)"), composite: T(c, "site.admin.gst.medsComposite", "Part of the exempt in-patient supply") } },
+    }[key];
+  }
+  function renderGstSettings(c, host) {
+    if (!host) return;
+    var title = "<h2>" + c.esc(T(c, "site.admin.gst.title", "GST settings")) + "</h2>";
+    host.innerHTML = '<div class="card">' + title + '<span class="spin"></span></div>';
+    return c.api("/org/gst-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.gst.loadFailed", "The GST settings could not be loaded. Do not read this as the defaults.")) + "</div></div>"; return; }
+      var s = r.settings, ca = T(c, "site.admin.gst.confirmCa", "Confirm with your chartered accountant.");
+      var note = function (why) { return '<p class="quiet"><b>' + c.esc(ca) + "</b> " + c.esc(why) + "</p>"; };
+      host.innerHTML = '<div class="card">' + title +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.gst.intro", "Where the law is not settled, each setting starts at the safest reading. A choice other than the default needs your chartered accountant's written opinion. Every change is recorded with its reason.")) + "</p>" +
+        GST_CHOICE_KEYS.map(function (k) {
+          var t = gstChoiceText(c, k);
+          return '<label class="f"><span>' + c.esc(t.label) + '</span><select id="admGst_' + k + '">' + Object.keys(t.options).map(function (v) {
+            return '<option value="' + v + '"' + (s[k] === v ? " selected" : "") + ">" + c.esc(t.options[v]) + "</option>";
+          }).join("") + "</select></label>" + note(t.why) + (k === "pkgRoomValuation" ? '<div id="admGstValNote"></div>' : "");
+        }).join("") +
+        "<h4>" + c.esc(T(c, "site.admin.gst.tds", "Schemes confirmed as notified GST TDS deductors")) + '</h4><div class="row">' + ["pmjay", "state", "cghs", "echs"].map(function (k) {
+          return '<label class="f"><input type="checkbox" id="admGstTds_' + k + '"' + (s.gstTdsDeductorSchemes.indexOf(k) >= 0 ? " checked" : "") + "> " + c.esc(pkgSchemeLabel(c, k)) + "</label>";
+        }).join("") + "</div>" +
+        note(T(c, "site.admin.gst.tdsWhy", "GST TDS (Section 51) applies only to taxed supplies over Rs 2.5 lakh under a contract, and whether a scheme agency is a notified deductor is unconfirmed; the scheme's 10 percent claim deduction is income tax TDS, not GST.")) +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.gst.turnover", "Highest aggregate turnover in any financial year from 2017-18, in rupees, exempt supplies included")) + '</span><input id="admGstTurnover" inputmode="numeric" value="' + c.esc(s.aggregateTurnoverRs == null ? "" : String(s.aggregateTurnoverRs)) + '"></label>' +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.gst.turnoverWhy", "Aggregate turnover includes exempt supplies (Section 2(6)). E-invoicing applies above Rs 5 crore; until a figure is entered, nothing is reported. A Bill of Supply is never reported.")) + "</p>" +
+        '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.admin.gst.caRef", "Chartered accountant's written opinion (reference)")) + '</span><input id="admGstCaRef" value="' + c.esc(s.caOpinionRef || "") + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.gst.caDate", "Date of the opinion")) + '</span><input id="admGstCaDate" type="date" value="' + c.esc(s.caOpinionDate || "") + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.gst.reason", "Why are the settings changing?")) + '</span><input id="admGstReason"></label></div>' +
+        '<button type="button" class="btn" id="admGstSave">' + c.esc(T(c, "site.admin.gst.save", "Save GST settings")) + '</button><div id="admGstMsg"></div></div>';
+      var valNote = function (v) {
+        document.getElementById("admGstValNote").innerHTML = !gstChoiceText(c, "pkgRoomValuation").options[v] || v === "published_tariff" ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.gst.valWarning", "Room charges inside packages will be valued using {methodName} instead of your published room tariff. There is no official rule on this. Record your chartered accountant's approval.", { methodName: v === "scheme_rate" ? T(c, "site.admin.gst.methodScheme", "the payer's own per-day room rate") : T(c, "site.admin.gst.methodSplit", "a proportional split of the package price") })) + "</div>";
+      };
+      document.getElementById("admGst_pkgRoomValuation").onchange = function () { valNote(document.getElementById("admGst_pkgRoomValuation").value); };
+      valNote(s.pkgRoomValuation);
+      document.getElementById("admGstSave").onclick = function () {
+        var out = document.getElementById("admGstMsg"), settings = {};
+        GST_CHOICE_KEYS.forEach(function (k) { settings[k] = document.getElementById("admGst_" + k).value; });
+        settings.gstTdsDeductorSchemes = ["pmjay", "state", "cghs", "echs"].filter(function (k) { return document.getElementById("admGstTds_" + k).checked; });
+        settings.aggregateTurnoverRs = document.getElementById("admGstTurnover").value.trim();
+        settings.caOpinionRef = document.getElementById("admGstCaRef").value.trim();
+        settings.caOpinionDate = document.getElementById("admGstCaDate").value;
+        if (settings.aggregateTurnoverRs && !/^\d{1,14}$/.test(settings.aggregateTurnoverRs)) { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.gst.errTurnover", "Aggregate turnover is a whole number of rupees, like 62000000.")) + "</div>"; return; }
+        out.innerHTML = '<span class="spin"></span>';
+        c.api("/org/gst-settings", { orgId: c.state.orgId, settings: settings, reason: document.getElementById("admGstReason").value.trim() }).then(function (x) {
+          if (!x || !x.ok) { out.innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, x))) + "</div>"; return; }
+          c.toast(x.changed && x.changed.length ? T(c, "site.admin.saved", "Saved.") : T(c, "site.admin.gst.nothingChanged", "Nothing changed.")); renderGstSettings(c, host);
+        }, function () { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.gst.noResponse", "No response from the server. The settings may not have been saved; reload to check.")) + "</div>"; });
+      };
+    }, function () {
+      host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.gst.loadFailed", "The GST settings could not be loaded. Do not read this as the defaults.")) + "</div></div>";
     });
   }
 
@@ -1150,6 +1260,10 @@
         '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.colRate", "Rate (Rs)")) + '</span><input id="admPkgRate" inputmode="decimal" value="' + c.esc(ed ? Number(ed.rate).toFixed(2) : "") + '"></label>' +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.los", "Expected length of stay (days)")) + '</span><input id="admPkgLos" inputmode="numeric" value="' + c.esc(val("expectedLosDays", "")) + '"></label>' +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.preauth", "Pre-authorisation required")) + '</span><input id="admPkgPreauth" type="checkbox"' + (val("preAuthRequired", false) ? " checked" : "") + "></label></div>" +
+        '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.admin.pkg.roomRate", "Payer's per-day room rate in its rate card (Rs, optional)")) + '</span><input id="admPkgRoomRate" inputmode="decimal" value="' + c.esc(val("roomRatePerDay", null) == null ? "" : String(val("roomRatePerDay", ""))) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.roomRateSource", "Where the rate card states it (document and page)")) + '</span><input id="admPkgRoomSrc" value="' + c.esc(val("roomRateSource", "") || "") + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.includesGst", "The payer's rate includes GST (no GST on top)")) + '</span><input id="admPkgInclGst" type="checkbox"' + (val("priceIncludesGst", false) ? " checked" : "") + "></label></div>" +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.pkg.gstNote", "A room above Rs 5,000 a day inside the package is taxed at 5 percent and valued by the GST settings above. When the payer's rate includes GST, the GST is worked back out of it and paid by the hospital.")) + "</p>" +
         "<h4>" + c.esc(T(c, "site.admin.pkg.inclusions", "Covered by the package")) + '</h4><div class="row">' + kindBoxes("inc", cover("inclusions").kinds) + "</div>" +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.incItems", "Also covered: items by price list code or name, one per line")) + '</span><textarea id="admPkgIncItems" rows="2">' + c.esc(cover("inclusions").items.join("\n")) + "</textarea></label>" +
         "<h4>" + c.esc(T(c, "site.admin.pkg.exclusions", "Excluded, billed on top")) + '</h4><div class="row">' + kindBoxes("exc", cover("exclusions").kinds) + "</div>" +
@@ -1182,7 +1296,8 @@
           code: ed ? ed.code : document.getElementById("admPkgCode").value.trim(), name: document.getElementById("admPkgName").value.trim(), rate: rate, expectedLosDays: los,
           preAuthRequired: document.getElementById("admPkgPreauth").checked,
           inclusions: { kinds: kindsOf("inc"), items: lines("admPkgIncItems") }, exclusions: { kinds: kindsOf("exc"), items: lines("admPkgExcItems") },
-          preAuthDocuments: lines("admPkgPreDocs"), claimDocuments: lines("admPkgClaimDocs") });
+          preAuthDocuments: lines("admPkgPreDocs"), claimDocuments: lines("admPkgClaimDocs"),
+          roomRatePerDay: document.getElementById("admPkgRoomRate").value.trim(), roomRateSource: document.getElementById("admPkgRoomSrc").value.trim(), priceIncludesGst: document.getElementById("admPkgInclGst").checked });
       };
       if (ed) document.getElementById("admPkgCancel").onclick = function () { PKG_STATE.editing = null; renderPackages(c, host); };
       host.querySelectorAll("[data-pkg-edit]").forEach(function (b) { b.onclick = function () { PKG_STATE.editing = b.getAttribute("data-pkg-edit"); renderPackages(c, host); }; });
@@ -1192,7 +1307,8 @@
           var reason = prompt(p.active ? T(c, "site.admin.pkg.withdrawPrompt", "Why is {code} being withdrawn? Stays already on it keep it.", { code: p.code }) : T(c, "site.admin.pkg.restorePrompt", "Why is {code} being restored?", { code: p.code }));
           if (!reason || !reason.trim()) return;
           send({ id: p.id, expectedVersion: p.version, reason: reason.trim(), active: !p.active, scheme: p.scheme, schemeName: p.schemeName || "", code: p.code, name: p.name, rate: Number(p.rate).toFixed(2),
-            expectedLosDays: p.expectedLosDays == null ? "" : p.expectedLosDays, preAuthRequired: p.preAuthRequired, inclusions: p.inclusions, exclusions: p.exclusions, preAuthDocuments: p.preAuthDocuments, claimDocuments: p.claimDocuments });
+            expectedLosDays: p.expectedLosDays == null ? "" : p.expectedLosDays, preAuthRequired: p.preAuthRequired, inclusions: p.inclusions, exclusions: p.exclusions, preAuthDocuments: p.preAuthDocuments, claimDocuments: p.claimDocuments,
+            roomRatePerDay: p.roomRatePerDay == null ? "" : String(p.roomRatePerDay), roomRateSource: p.roomRateSource || "", priceIncludesGst: p.priceIncludesGst === true });
         };
       });
       host.querySelectorAll("[data-pkg-hist]").forEach(function (b) {

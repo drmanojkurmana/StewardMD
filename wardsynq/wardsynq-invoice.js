@@ -69,7 +69,7 @@ function invoiceLine(input) {
     ...(str(i.kind) ? { kind: str(i.kind) } : {}),
     /* Package billing (functions/_wardsynq/packages.js): the package line itself, or a charge the package covers (at
      * zero), excludes (billed on top) or names neither way (billed, flagged). Carried as the caller gave it. */
-    ...(str(i.packageCode) ? { packageCode: str(i.packageCode), ...Object.fromEntries(["packageLine", "packageIncluded", "packageExcluded", "packageOutside"].filter((k) => i[k] === true).map((k) => [k, true])) } : {}),
+    ...(str(i.packageCode) ? { packageCode: str(i.packageCode), ...Object.fromEntries(["packageLine", "packageIncluded", "packageExcluded", "packageOutside", "packageRoom"].filter((k) => i[k] === true).map((k) => [k, true])) } : {}),
   };
 }
 
@@ -170,10 +170,13 @@ function creditableOn(invoice, lineIndex) {
 }
 
 /**
- * PURE. Appends a credit or debit note. o: { noteNumber, actorId, at, reason, lines: [{ lineIndex, taxable }] }.
+ * PURE. Appends a credit or debit note. o: { noteNumber, actorId, at, reason, lines: [{ lineIndex, taxable }],
+ * withoutGst?, gstTreatment?, gstConfirmation? }.
  * Each note line names the charge line it answers; its GST follows that line's own rate (none on an exempt or
  * untaxed line), never a rate typed here. A credit cannot take back more taxable value than is still on the
- * line. Mutates and returns the invoice; the new event is its last one.
+ * line. withoutGst: the caller decided GST may not be reduced (Section 34(2)), so every line carries none. A note
+ * carrying no GST is `financial`: not a Section 34 note, never reported for e-invoicing. Mutates and returns the
+ * invoice; the new event is its last one.
  */
 function postNote(invoice, kind, opts) {
   const o = opts || {};
@@ -196,12 +199,13 @@ function postNote(invoice, kind, opts) {
       const open = creditableOn(invoice, idx);
       if (taxable > open + 0.001) throw new InvoiceRefusalError("CREDIT_EXCEEDS_LINE", `at most ${open} can be credited on ${l.display || l.code}`);
     }
-    const taxed = !!l.taxKind && l.taxExempt !== true && l.taxRate != null;
+    const taxed = !!l.taxKind && l.taxExempt !== true && l.taxRate != null && o.withoutGst !== true;
     return { lineIndex: idx, code: l.code, display: l.display, ...(l.hsnSac ? { hsnSac: l.hsnSac } : {}), ...(l.kind ? { kind: l.kind } : {}),
       taxable: round2(taxable), ...(l.taxKind ? { taxKind: l.taxKind, taxRate: l.taxRate, taxExempt: l.taxExempt === true, taxBasis: l.taxBasis || null, tax: taxed ? round2(taxable * Number(l.taxRate) / 100) : 0 } : {}) };
   });
   const taxable = round2(lines.reduce((n, l) => n + l.taxable, 0)), tax = round2(lines.reduce((n, l) => n + (Number(l.tax) || 0), 0));
-  invoice.events.push({ kind, noteNumber, amount: round2(taxable + tax), taxable, tax, lines, actorId, at, reason, reference: null });
+  invoice.events.push({ kind, noteNumber, amount: round2(taxable + tax), taxable, tax, lines, actorId, at, reason, reference: null,
+    ...(tax === 0 ? { financial: true } : {}), ...(str(o.gstTreatment) ? { gstTreatment: str(o.gstTreatment) } : {}), ...(o.gstConfirmation ? { gstConfirmation: o.gstConfirmation } : {}) });
   return invoice;
 }
 
