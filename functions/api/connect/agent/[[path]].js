@@ -383,22 +383,44 @@ function cleanProofTrace(raw) {
 const REQUIRED_RESOURCES = ["worklist", "medications", "labs", "labs-detail", "radiology", "radiology-detail"];
 function adapterCompleteness(observedViews) {
   const views = Array.isArray(observedViews) ? observedViews : [];
-  /* A DATA CALL THAT LOST THE PATIENT IS NOT ENDPOINT-BACKED. A patient-keyed field saved `unmapped`
-   * or `empty` replays with nothing in it, so the request stops being about this patient and whatever
-   * the hospital answers for everyone lands in one chart. The worklist is exempt: it is not
-   * patient-scoped, and its filters are proven empty on purpose (Task 2c). */
+  /* A DATA CALL THAT LOST THE PATIENT IS NOT ENDPOINT-BACKED. A patient-keyed field saved `empty`
+   * replays with nothing in it, so the request stops being about this patient and whatever the
+   * hospital answers for everyone lands in one chart. `unmapped` is not the same thing: the runtime
+   * never sends that blank -- adapter-runtime.mjs provenValue() falls back to idCandidates(key,
+   * patient)[0] for a patient/visit key (ver_05ce2f04: recordNo -> patientId, exactly the hand-built's
+   * /Radio/Home?recordNo=${patientId}), and unscopedField() refuses at send time if it would still be
+   * blank. Only {empty:true} replays unscoped. A {constant} is not scoped either (GHIS ver_b27ed367,
+   * 2026-09-17): a page-side JS bug recorded ?id=undefined as a "mode" value, proof matched it once, and
+   * provenValue would then send that same literal id=undefined for every patient forever -- the same
+   * wrong chart in every read, not a blank one. The worklist is exempt: it is not patient-scoped, and
+   * its filters are proven empty on purpose (Task 2c). */
   const PATIENT_ISH = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$|visit|episode|encounter|admission|ip(no|number)/i;
   const scoped = (v) => (v.endpoints || []).every((e) => {
     if (!e || e.role !== "data") return true;
     const p = e.params || {};
-    return !Object.keys(p).some((k) => PATIENT_ISH.test(k) && p[k] && (p[k].unmapped === true || p[k].empty === true));
+    return !Object.keys(p).some((k) => PATIENT_ISH.test(k) && p[k] && (p[k].empty === true || p[k].constant !== undefined));
   });
   const scopedFor = (res, v) => res === "worklist" || scoped(v);
   const provenEndpoint = (res) => views.some((v) => v && v.resourceHint === res && v.proof && v.proof.status === "proven" && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data") && scopedFor(res, v));
+  /* A LIST THAT ALREADY CARRIES THE RESULTS NEEDS NO SEPARATE DETAIL CALL (owner, 2026-09-16; GHIS
+   * ver_05ce2f04: OTLabPrints IS the results, so demanding a second labs-detail endpoint is a false
+   * requirement). A "-detail" resource is satisfied "inline" when its parent's own proven view already
+   * carries result-shaped columns -- never marked "endpoint" (no detail request was proven), and never
+   * pushed to `missing`. */
+  const RESULT_SHAPED = /result|value|unit|range|\blow\b|\bhigh\b/i;
+  const inlineDetail = (res) => {
+    const m = /^(.+)-detail$/.exec(res);
+    if (!m) return false;
+    const parent = m[1];
+    return views.some((v) => v && v.resourceHint === parent && v.proof && v.proof.status === "proven" &&
+      Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data") && scopedFor(parent, v) &&
+      Array.isArray(v.headers) && v.headers.some((h) => RESULT_SHAPED.test(String(h || ""))));
+  };
   const how = {};
   const missing = [];
   for (const res of REQUIRED_RESOURCES) {
     if (provenEndpoint(res)) how[res] = "endpoint";
+    else if (inlineDetail(res)) how[res] = "inline";
     else {
       how[res] = views.some((v) => v && v.resourceHint === res && !scopedFor(res, v)) ? "unscoped" : "absent";
       missing.push(res);
