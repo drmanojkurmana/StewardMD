@@ -399,10 +399,25 @@ function adapterCompleteness(observedViews) {
   });
   const scopedFor = (res, v) => res === "worklist" || scoped(v);
   const provenEndpoint = (res) => views.some((v) => v && v.resourceHint === res && v.proof && v.proof.status === "proven" && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data") && scopedFor(res, v));
+  /* A LIST THAT ALREADY CARRIES THE RESULTS NEEDS NO SEPARATE DETAIL CALL (owner, 2026-09-16; GHIS
+   * ver_05ce2f04: OTLabPrints IS the results, so demanding a second labs-detail endpoint is a false
+   * requirement). A "-detail" resource is satisfied "inline" when its parent's own proven view already
+   * carries result-shaped columns -- never marked "endpoint" (no detail request was proven), and never
+   * pushed to `missing`. */
+  const RESULT_SHAPED = /result|value|unit|range|\blow\b|\bhigh\b/i;
+  const inlineDetail = (res) => {
+    const m = /^(.+)-detail$/.exec(res);
+    if (!m) return false;
+    const parent = m[1];
+    return views.some((v) => v && v.resourceHint === parent && v.proof && v.proof.status === "proven" &&
+      Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data") && scopedFor(parent, v) &&
+      Array.isArray(v.headers) && v.headers.some((h) => RESULT_SHAPED.test(String(h || ""))));
+  };
   const how = {};
   const missing = [];
   for (const res of REQUIRED_RESOURCES) {
     if (provenEndpoint(res)) how[res] = "endpoint";
+    else if (inlineDetail(res)) how[res] = "inline";
     else {
       how[res] = views.some((v) => v && v.resourceHint === res && !scopedFor(res, v)) ? "unscoped" : "absent";
       missing.push(res);

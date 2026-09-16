@@ -650,3 +650,27 @@ test("an unmapped patient key is not unscoped -- the runtime backfills it; only 
   const emptyVer = await (await onRequest(get(`/api/connect/agent/versions/${emptyCand.versionId}?tenant=t1`, emptyCand.env, emptyCand.doc1.headers))).json();
   assert.equal(emptyVer.completeness.how["radiology"], "unscoped");
 });
+
+test("a list whose own proven columns are already the results needs no separate detail call (GHIS OTLabPrints)", async () => {
+  // labs proven with the real GHIS OTLabPrints headers (result-shaped), labs-detail never proven at all:
+  // labs-detail reads "inline", is not in `missing`, and the whole candidate still approves.
+  const resultShapedLabs = provenViewOf("labs", "/Doctor/Home/OTLabPrintsSecretary/", {
+    headers: ["TEST NAME (METHOD)", "TEST NAME", "RESULTS", "BIOLOGICAL REFERENCE INTERVAL", "UNITS"],
+  });
+  const inlineSet = completeSet().filter((v) => v.resourceHint !== "labs" && v.resourceHint !== "labs-detail").concat(resultShapedLabs);
+  const inlineCand = await phoneCandidate(inlineSet);
+  const inlineVer = await (await onRequest(get(`/api/connect/agent/versions/${inlineCand.versionId}?tenant=t1`, inlineCand.env, inlineCand.doc1.headers))).json();
+  assert.equal(inlineVer.completeness.how["labs-detail"], "inline");
+  assert.equal(inlineVer.completeness.missing.includes("labs-detail"), false);
+  assert.equal(inlineVer.completeness.endpointComplete, true);
+  const inlineApprove = await onRequest(post(`/api/connect/agent/versions/${inlineCand.versionId}/approve`, { tenantId: "t1" }, inlineCand.env, inlineCand.owner1.headers));
+  assert.equal(inlineApprove.status, 200, await inlineApprove.clone().text());
+
+  // labs proven with order-shaped headers (no result/value/unit/range/low/high column): still genuinely absent.
+  const orderShapedLabs = provenViewOf("labs", "/Doctor/Home/OTLabPrintsSecretary/", { headers: ["SERVICE", "ORDER DATE", "STATUS"] });
+  const orderSet = completeSet().filter((v) => v.resourceHint !== "labs" && v.resourceHint !== "labs-detail").concat(orderShapedLabs);
+  const orderCand = await phoneCandidate(orderSet);
+  const orderVer = await (await onRequest(get(`/api/connect/agent/versions/${orderCand.versionId}?tenant=t1`, orderCand.env, orderCand.doc1.headers))).json();
+  assert.equal(orderVer.completeness.how["labs-detail"], "absent");
+  assert.deepEqual(orderVer.completeness.missing, ["labs-detail"]);
+});
