@@ -2477,7 +2477,7 @@
 
     return header +
       criticalsCard(state) + (isEd ? (triageCard(state) + edTopCards) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
-      (isPediatric ? ageBandCard(state) + growthCard(state) : "") +
+      (isPediatric ? ageBandCard(state) + growthCard(state) : "") + (apgarChart(s) ? apgarCard(state) : "") +
       problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
       (isIcu ? icuTrendsCard(state) + icuScoresCard(state) + icuAbgCard(state) + icuVentCard(state) + icuSedationCard(state) + icuPressorCard(state) + icuRoundCard(state) : "") +
       fluidCard(state) +
@@ -3302,11 +3302,62 @@
     return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>" + wTH("ward.delivery-newborn", "Delivery &amp; newborn") + "</h3></div>" +
       '<p class="w-hint">' + ms("check_circle") + wTH("ward.delivery2", "{mode} delivery, {deliveredAt}", { mode: esc(deliveryModeWord(d.mode)), deliveredAt: when(d.deliveredAt) }, "deliveredAt") + (d.complications ? " - " + esc(d.complications) : "") + "</p>" +
       (linksFailed ? '<p class="w-hint warn">' + ms("error") + wTH("ward.linked-newborns-could-not-be-loaded", "Linked newborns could not be loaded. Do not read this as none.", null, "", 1) + "</p>" : newbornRows ? '<ul class="w-mini">' + newbornRows + "</ul>" : "") +
+      (linksFailed ? "" : links.map(function (l) { return apgarBlock(l.relatedPatientId, state, true); }).join("")) +
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.sex", "Sex") + "</span><select id=\"wNewbornSex\"><option value=\"female\">" + wTH("ward.female", "Female") + "</option><option value=\"male\">" + wTH("ward.male", "Male") + "</option><option value=\"unknown\">" + wTH("ward.unknown", "Unknown") + "</option></select></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.name", "Name") + "</span><input id=\"wNewbornName\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.optional", "optional") + "\"></label>" +
       "</div>" +
       '<button class="w-btn go" data-w-act="newbornsave">' + ms("child_care") + wTH("ward.register-newborn", "Register newborn") + "</button></div>";
+  }
+
+  /* APGAR (migrate-maternity.js recordApgar), on the NEWBORN's own record: five signs, each 0, 1 or 2, at 1, 5 and 10
+   * minutes, each minute saved on its own. The help text is the standard sign descriptors (Apgar 1953; the AAP and ACOG
+   * table). The screen sends the five picks only: the total, who and when come back from the server. A minute not
+   * recorded says so and never shows 0. A recorded minute changes only as a correction with a reason. */
+  function apgarSigns() {
+    return [
+      { k: "appearance", s: wT("ward.apgar-appearance-short", "Appearance"), n: wT("ward.apgar-appearance", "Appearance (colour)"), d: [wT("ward.apgar-appearance-0", "Blue or pale"), wT("ward.apgar-appearance-1", "Acrocyanotic: body pink, extremities blue"), wT("ward.apgar-appearance-2", "Completely pink")] },
+      { k: "pulse", s: wT("ward.apgar-pulse-short", "Pulse"), n: wT("ward.apgar-pulse", "Pulse (heart rate)"), d: [wT("ward.apgar-pulse-0", "Absent"), wT("ward.apgar-pulse-1", "Below 100 per minute"), wT("ward.apgar-pulse-2", "100 per minute or more")] },
+      { k: "grimace", s: wT("ward.apgar-grimace-short", "Grimace"), n: wT("ward.apgar-grimace", "Grimace (reflex irritability)"), d: [wT("ward.apgar-grimace-0", "No response"), wT("ward.apgar-grimace-1", "Grimace"), wT("ward.apgar-grimace-2", "Cry or active withdrawal")] },
+      { k: "activity", s: wT("ward.apgar-activity-short", "Activity"), n: wT("ward.apgar-activity", "Activity (muscle tone)"), d: [wT("ward.apgar-activity-0", "Limp"), wT("ward.apgar-activity-1", "Some flexion"), wT("ward.apgar-activity-2", "Active motion")] },
+      { k: "respiration", s: wT("ward.apgar-respiration-short", "Respiration"), n: wT("ward.apgar-respiration", "Respiration (breathing effort)"), d: [wT("ward.apgar-respiration-0", "Absent"), wT("ward.apgar-respiration-1", "Weak cry, hypoventilation"), wT("ward.apgar-respiration-2", "Good, crying")] }
+    ];
+  }
+  function apgarDomId(pid) { return String(pid || "").replace(/[^A-Za-z0-9_-]/g, "-"); }
+  function apgarBlock(pid, state, named) {
+    var a = state.apgar && state.apgar[pid], id = apgarDomId(pid), signs = apgarSigns();
+    var head = '<div class="w-sub"><h4>' + ms("child_care") + (named ? wTH("ward.apgar-title-for", "APGAR score, newborn {id}", { id: esc(pid) }, "id") : wTH("ward.apgar-title", "APGAR score")) + "</h4>";
+    var refresh = '<button class="w-btn tiny ghost" data-w-act="apgarload:' + esc(pid) + '">' + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button>";
+    if (a == null) return head + "<p class=\"w-empty\">" + wTH("ward.apgar-loading", "Loading the APGAR score...") + "</p></div>";
+    if (a === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.apgar-failed", "The APGAR score could not be loaded. Do not read this as not recorded. Refresh before recording, so a minute is not recorded twice.", null, "", 1) + "</p>" + refresh + "</div>";
+    if (a.off) return head + "<p class=\"w-empty\">" + wTH("ward.apgar-off", "The clinical record is not switched on for this hospital, so no APGAR score can be recorded here.") + "</p></div>";
+    var rows = a.minutes.map(function (m) {
+      var r = m.record, when_ = wTH("ward.apgar-minute-n", "{n} min", { n: esc(m.minute) });
+      if (!r) return "<tr><td>" + when_ + '</td><td colspan="7"><i>' + wTH("ward.apgar-not-recorded", "not recorded") + "</i></td></tr>";
+      return "<tr><td>" + when_ + "</td><td><b>" + esc(r.total) + "/10</b></td>" +
+        signs.map(function (s) { return "<td>" + esc(r.components ? r.components[s.k] : "") + "</td>"; }).join("") +
+        "<td>" + when(r.recordedAt) + " &middot; " + wTH("ward.apgar-by", "by {who}", { who: staffWho(r.recordedBy) }) +
+        (r.correction ? '<div class="w-dt-times">' + wTH("ward.apgar-corrected", "Corrected (version {v}) from {prev}/10: {reason}", { v: esc(r.version), prev: esc(r.correction.previousTotal), reason: esc(r.correction.reason) }, "reason") + "</div>" : "") + "</td></tr>";
+    }).join("");
+    var table = '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.apgar-minute", "Minute") + "</th><th>" + wTH("ward.apgar-total", "Total") + "</th>" +
+      signs.map(function (s) { return "<th>" + esc(s.s) + "</th>"; }).join("") + "<th>" + wTH("ward.apgar-recorded", "Recorded") + "</th></tr></thead><tbody>" + rows + "</tbody></table></div>";
+    var form = '<div class="w-grid">' +
+      "<label class=\"w-f\"><span>" + wTH("ward.apgar-minute", "Minute") + '</span><select id="wApgarMin-' + id + '">' +
+        [1, 5, 10].map(function (n) { return '<option value="' + n + '">' + wTH("ward.apgar-minute-n", "{n} min", { n: n }) + "</option>"; }).join("") + "</select></label>" +
+      signs.map(function (s) {
+        return '<label class="w-f"><span>' + esc(s.n) + '</span><select id="wApgar-' + s.k + "-" + id + '"><option value="">' + wTH("ward.choose", "Choose&hellip;") + "</option>" +
+          [0, 1, 2].map(function (v) { return '<option value="' + v + '">' + v + ": " + esc(s.d[v]) + "</option>"; }).join("") + "</select></label>";
+      }).join("") + "</div>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.apgar-reason", "Correction reason (only to change a minute already recorded)") + '</span><input id="wApgarReason-' + id + '" type="text" autocomplete="off"></label>' +
+      '<p class="w-hint">' + ms("info") + wTH("ward.apgar-help", "Score each sign against the standard descriptors (Apgar 1953; AAP and ACOG). Save each minute when it is scored. The total is added up by the server from the five signs.") + "</p>" +
+      '<button class="w-btn go" data-w-act="apgarsave:' + esc(pid) + '">' + ms("save") + wTH("ward.apgar-save", "Record APGAR") + "</button> " + refresh;
+    return head + table + form + "</div>";
+  }
+  /* On the newborn's own chart (NICU, or a paediatric stay of a baby registered here at birth). */
+  function apgarChart(s) { return !!s && (s.class === "NICU" || (s.class === "PEDIATRICS" && /^opd-pat-newborn-/.test(String(s.patientId || "")))); }
+  function apgarCard(state) {
+    var s = state.sel || {};
+    return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>" + wTH("ward.apgar-title", "APGAR score") + "</h3></div>" + apgarBlock(s.patientId, state, false) + "</div>";
   }
 
   /* PARTOGRAM entry. Writes ordinary Observations, category "labour" - the flowsheet card already on
@@ -9266,8 +9317,33 @@
       apiGet("/ward/meows?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.meows = r && r.ok ? r.meows : false; }, function () { st.maternity.meows = false; }),
       apiGet("/ward/blood-loss-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.losses = r && r.ok ? (r.losses || []) : false; }, function () { st.maternity.losses = false; }),
       apiGet("/ward/delivery-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.delivery = r && r.ok ? r.delivery : false; }, function () { st.maternity.delivery = false; }),
-      apiGet("/ward/family-links?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.links = r && r.ok ? (r.links || []) : false; }, function () { st.maternity.links = false; }),
+      apiGet("/ward/family-links?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) {
+        st.maternity.links = r && r.ok ? (r.links || []) : false;
+        (st.maternity.links || []).forEach(function (l) { loadApgar(l.relatedPatientId); });
+      }, function () { st.maternity.links = false; }),
     ]).then(function () { paint(); });
+  }
+  function loadApgar(pid) {
+    var s = st.sel; if (!s || !pid) return Promise.resolve();
+    st.apgar = st.apgar || {};
+    return apiGet("/ward/apgar-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(pid))
+      .then(function (r) { if (st.sel !== s) return; st.apgar[pid] = r && r.ok ? (r.apgar || (r.skipped ? { off: true } : false)) : false; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.apgar[pid] = false; paint(); });
+  }
+  function apgarSave(pid) {
+    var s = st.sel, a = st.apgar && st.apgar[pid]; if (!s || !a || !a.minutes) return;
+    var id = apgarDomId(pid), minute = Number(val("wApgarMin-" + id)), components = {}, missing = false;
+    apgarSigns().forEach(function (g) { var v = val("wApgar-" + g.k + "-" + id); if (v === "") missing = true; else components[g.k] = Number(v); });
+    if (missing) { st.err = wT("ward.apgar-score-every-sign", "Score all five signs before recording."); paint(); return; }
+    var reason = val("wApgarReason-" + id).trim();
+    var recorded = a.minutes.filter(function (m) { return m.minute === minute && m.record; })[0];
+    if (recorded && !reason) { st.err = wT("ward.apgar-already-recorded", "This minute is already recorded. To change it, give a correction reason."); paint(); return; }
+    var body = { orgId: st.orgId, patientId: pid, minute: minute, components: components };
+    if (recorded) { body.correctionReason = reason; body.expectedVersion = recorded.record.version; }
+    st.busy = true; paint();
+    apiPost("/ward/apgar", body)
+      .then(function (r) { if (settle(r, recorded ? wT("ward.apgar-corrected-note", "APGAR corrected.") : wT("ward.apgar-recorded-note", "APGAR recorded."))) loadApgar(pid); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.apgar-could-not-record", "Could not record the APGAR score."); paint(); });
   }
   function pregnancySave() {
     var s = st.sel; if (!s) return;
@@ -13496,7 +13572,7 @@
       st.sel = p; st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = []; st.vitalsSaid = null;
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.timeline = null; st.activeMeds = null;
       st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
-      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.apgar = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
       st.icu = null; st.flowsheetFailed = false; st.resusBundles = null;
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra
@@ -13508,6 +13584,7 @@
       if (p.class === "ICU") { loadDevices(); loadIcu(); loadResus(); }
       if (p.class === "MATERNITY") loadMaternity();
       if (p.class === "PEDIATRICS" || p.class === "NICU") { st.growth = null; loadAgeBand(); loadGrowth(); }
+      if (apgarChart(p)) loadApgar(p.patientId);
       if (p.class === "NICU") loadLines();
       return;
     }
@@ -13669,6 +13746,8 @@
     if (cmd === "bloodlosssave") { bloodLossSave(); return; }
     if (cmd === "deliverysave") { deliverySave(); return; }
     if (cmd === "newbornsave") { newbornSave(); return; }
+    if (cmd === "apgarload") { if (st.apgar) st.apgar[arg] = null; paint(); loadApgar(arg); return; }
+    if (cmd === "apgarsave") { apgarSave(arg); return; }
     if (cmd === "agebandcheck") { loadAgeBand(); return; }
     if (cmd === "ratecalc") { rateCalc(); return; }
     if (cmd === "neonatalchart") { neonatalChart(); return; }

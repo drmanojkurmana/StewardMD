@@ -31,7 +31,7 @@
  * FamilyLink, below, is its own type for exactly that: a clinical relationship between two distinct
  * patients, never a duplicate-identity claim.
  *
- * node --test test/wardsynq-maternity.test.mjs
+ * node --test test/wardsynq-maternity.test.mjs test/wardsynq-apgar.test.mjs
  */
 
 import { Patient, Observation } from "../../wardsynq/wardsynq-model.js";
@@ -444,10 +444,160 @@ async function listFamilyLinks(request, env, ctx) {
   return { ...base, ok: true, links: asMother || [] };
 }
 
+/* APGAR (Apgar 1953; the AAP/ACOG committee opinion table). Five signs, each 0, 1 or 2, at 1, 5 and 10
+ * minutes, on the NEWBORN's own chart: one ApgarScore record per (newborn, minute), saved on its own so a
+ * 1-minute score is never held back waiting for the 5-minute one. The total is added up here from the
+ * five signs and nothing a client sends is taken as a total. A minute is recorded once; changing it is a
+ * CORRECTION, a new version of the same record carrying a reason and what it replaced, so the earlier
+ * score stays readable in the record's history. Who and when come from the session and the server clock. */
+const APGAR_TYPE = "ApgarScore";
+const APGAR_MINUTES = Object.freeze([1, 5, 10]);
+const APGAR_SIGNS = Object.freeze(["appearance", "pulse", "grimace", "activity", "respiration"]);
+// A first score on a patient born more than this long ago is almost certainly the wrong chart (the mother's).
+const APGAR_NEWBORN_DAYS = 28;
+const apgarIdFor = (patientId, minute) => `wsq-apgar-${slug(patientId)}-${minute}`;
+
+/** PURE. The validated score with its total, or the reason it is refused. Strict: whole numbers only, no strings. */
+function apgarScore(minute, signs) {
+  if (!APGAR_MINUTES.includes(minute)) return { ok: false, error: "unknown_minute", detail: "minute must be 1, 5 or 10" };
+  if (!signs || typeof signs !== "object" || Array.isArray(signs)) return { ok: false, error: "signs_required", detail: `give ${APGAR_SIGNS.join(", ")}, each 0, 1 or 2` };
+  const unknown = Object.keys(signs).filter((k) => !APGAR_SIGNS.includes(k));
+  if (unknown.length) return { ok: false, error: "unknown_sign", detail: `not an APGAR sign: ${unknown.join(", ")}` };
+  const components = {};
+  let total = 0;
+  for (const k of APGAR_SIGNS) {
+    const v = signs[k];
+    if (!Number.isInteger(v) || v < 0 || v > 2) return { ok: false, error: "bad_sign", sign: k, detail: `${k} must be the whole number 0, 1 or 2` };
+    components[k] = v; total += v;
+  }
+  return { ok: true, minute, components, total };
+}
+
+/**
+ * Records one minute's APGAR, or corrects it.
+ * ctx: { migration, patientId, minute, components, correctionReason?, expectedVersion?, actorDeps, recordDeps }
+ */
+async function recordApgar(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const patientId = str(ctx.patientId);
+  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", written: 0 };
+  const score = apgarScore(ctx.minute, ctx.components);
+  if (!score.ok) return { ...base, status: 422, ...score, written: 0 };
+  const reason = str(ctx.correctionReason);
+
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+
+  const id = apgarIdFor(patientId, score.minute);
+  let patient, current;
+  try { [patient, current] = await Promise.all([svc.get("Patient", patientId), svc.get(APGAR_TYPE, id)]); }
+  catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ...writeFailure(e, { written: 0 }) };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The chart could not be read, so nothing was saved.", written: 0 };
+  }
+  if (!patient) return { ...base, ok: false, status: 404, error: "patient_not_found", written: 0 };
+
+  if (current) {
+    if (!reason) return { ...base, ok: false, status: 409, error: "already_recorded", detail: `the ${score.minute}-minute APGAR is already recorded; a change is a correction with a reason`, version: current.version, written: 0 };
+    if (reason.length < 5) return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why this score is being corrected", written: 0 };
+    if (!Number.isInteger(ctx.expectedVersion)) return { ...base, ok: false, status: 422, error: "expected_version_required", detail: "name the version being corrected", version: current.version, written: 0 };
+  } else {
+    if (reason) return { ...base, ok: false, status: 409, error: "nothing_to_correct", detail: `no ${score.minute}-minute APGAR is recorded yet`, written: 0 };
+    const days = (Date.now() - Date.parse(str(patient.dob).slice(0, 10))) / 86_400_000;
+    if (patient.approxDob || !Number.isFinite(days) || days < -1 || days > APGAR_NEWBORN_DAYS) {
+      return { ...base, ok: false, status: 422, error: "not_a_newborn", detail: `an APGAR is recorded on a newborn's chart: this patient's exact date of birth is not within ${APGAR_NEWBORN_DAYS} days`, written: 0 };
+    }
+  }
+
+  const record = {
+    resourceType: APGAR_TYPE, id, patientId, minute: score.minute, components: score.components, total: score.total,
+    recordedBy: resolved.actor.id, recordedAt: new Date().toISOString(),
+    correction: current ? { reason, previousVersion: current.version, previousTotal: current.total, previousRecordedBy: current.recordedBy || null, previousRecordedAt: current.recordedAt || null } : null,
+    source: { system: "wardsynq-native", sourceId: `apgar:${id}` },
+  };
+  try {
+    const out = await svc.put(record, { expectedVersion: current ? ctx.expectedVersion : 0, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, apgarId: id, minute: score.minute, total: score.total, corrected: !!current, version: out.record.version, actor: resolved.actor.id };
+  } catch (e) { return { ...base, ...writeFailure(e, { written: 0, actor: resolved.actor.id }) }; }
+}
+
+/** ctx: { migration, patientId, actorDeps, recordDeps } - each minute's latest score, or null where none is recorded. */
+async function getApgar(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", apgar: null };
+  const patientId = str(ctx.patientId);
+  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", apgar: null };
+  const { svc, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, apgar: null };
+  let rows;
+  try { rows = await svc.byPatient(APGAR_TYPE, patientId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The APGAR record could not be read. Do not read this as not recorded.", apgar: null }; }
+  return { ...base, ok: true, apgar: { patientId, minutes: apgarMinutes(rows) } };
+}
+
+/** PURE. [{minute, record|null}] for 1, 5 and 10. */
+function apgarMinutes(rows) {
+  return APGAR_MINUTES.map((minute) => ({ minute, record: (rows || []).find((r) => r && r.minute === minute) || null }));
+}
+
+/** PURE. One minute as a discharge-summary line; an unrecorded minute says so and is never a 0. */
+function apgarLine(m) {
+  const r = m.record;
+  if (!r) return `APGAR ${m.minute} min: not recorded.`;
+  const c = r.components || {};
+  return `APGAR ${m.minute} min: ${r.total}/10 (${APGAR_SIGNS.map((k) => `${k} ${c[k]}`).join(", ")}), recorded ${r.recordedAt}`
+    + (r.correction ? `; corrected from ${r.correction.previousTotal}/10, reason: ${r.correction.reason}` : "") + ".";
+}
+
+/**
+ * What a discharge summary says about a birth, read from the record. A MATERNITY stay: this encounter's
+ * delivery and every newborn linked to that delivery with their APGAR. A newborn's own stay (NICU or
+ * paediatrics, or a patient registered here at birth): its own APGAR. null for any other stay.
+ * Throws when a read fails, so the summary can say it could not be read instead of "not recorded".
+ */
+async function birthForSummary(svc, encounter) {
+  const patientId = str(encounter && encounter.patientId), cls = encounter && encounter.class;
+  if (cls === "MATERNITY") {
+    const [delivery, links] = await Promise.all([svc.get(DELIVERY_TYPE, `wsq-delivery-${slug(encounter.id)}`), svc.byPatient(LINK_TYPE, patientId)]);
+    const mine = delivery ? (links || []).filter((l) => l && l.relationship === "mother-newborn" && l.deliveredAt === delivery.deliveredAt) : [];
+    const newborns = await Promise.all(mine.map(async (l) => {
+      const [baby, rows] = await Promise.all([svc.get("Patient", l.relatedPatientId), svc.byPatient(APGAR_TYPE, l.relatedPatientId)]);
+      return { patientId: l.relatedPatientId, name: baby ? baby.name || null : null, mrn: baby ? baby.mrn || null : null, sex: baby ? baby.sex || null : null, minutes: apgarMinutes(rows) };
+    }));
+    return { kind: "mother", delivery: delivery || null, newborns };
+  }
+  if (cls === "NICU" || cls === "PEDIATRICS" || patientId.startsWith("opd-pat-newborn-")) {
+    const rows = await svc.byPatient(APGAR_TYPE, patientId);
+    // A paediatric stay with no APGAR on record is not a birth stay; a newborn registered here always is.
+    if (!(rows || []).length && !patientId.startsWith("opd-pat-newborn-") && cls !== "NICU") return null;
+    return { kind: "newborn", minutes: apgarMinutes(rows) };
+  }
+  return null;
+}
+
+/** PURE. The birth section's text, copied from the record. */
+function birthSectionText(b) {
+  if (b.kind === "newborn") return b.minutes.map(apgarLine).join("\n");
+  const d = b.delivery;
+  const lines = [d ? `Delivery: ${d.mode}, ${d.deliveredAt}. Complications: ${d.complications || "not recorded"}.` : "Delivery: not recorded."];
+  if (d && !b.newborns.length) lines.push("Newborns: none registered to this delivery.");
+  for (const n of b.newborns) {
+    lines.push(`Newborn: ${n.name || "name not recorded"}${n.mrn ? `, MRN ${n.mrn}` : ""}${n.sex ? `, ${n.sex}` : ""}.`);
+    for (const m of n.minutes) lines.push(apgarLine(m));
+  }
+  return lines.join("\n");
+}
+
 export {
   PREG_TYPE, DELIVERY_TYPE, LOSS_TYPE, LINK_TYPE, LABOUR_CATEGORY, LABOUR_CODES, LABOUR_STATUS_WORDS,
   pregnancyIdFor, newbornIdFor, maternityView, lactationWindowDaysOf, pregnancyLactationFrom, readPregnancyLactation,
   recordPregnancy, getPregnancy, maternityStatus, maternityMeows,
   recordLabourObservation, recordMaternalBloodLoss, listBloodLoss,
   recordDelivery, getDelivery, registerNewborn, listFamilyLinks,
+  APGAR_TYPE, APGAR_MINUTES, APGAR_SIGNS, apgarIdFor, apgarScore, apgarMinutes, apgarLine, recordApgar, getApgar,
+  birthForSummary, birthSectionText,
 };

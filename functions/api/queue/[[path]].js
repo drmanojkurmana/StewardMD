@@ -76,6 +76,7 @@ import {
 import {
   recordPregnancy, getPregnancy, maternityStatus, maternityMeows, recordLabourObservation,
   recordMaternalBloodLoss, listBloodLoss, recordDelivery, getDelivery, registerNewborn, listFamilyLinks,
+  recordApgar, getApgar,
 } from "../../_wardsynq/migrate-maternity.js";
 import {
   checkWeightBasedRate, checkPaediatricDoseCeiling, checkAgeBand,
@@ -1281,6 +1282,9 @@ export async function onRequest(context) {
         labour: CAPS.EMR_VITALS, "blood-loss": CAPS.EMR_VITALS, "blood-loss-list": CAPS.EMR_VIEW,
         delivery: CAPS.EMR_TREAT, "delivery-get": CAPS.EMR_VIEW,
         newborn: CAPS.EMR_TREAT, "family-links": CAPS.EMR_VIEW,
+        /* APGAR at 1, 5 and 10 minutes: the delivery staff's own bedside scoring - emr.vitals (nurse, midwife,
+         * resident, doctor), the same authority as blood loss. A correction is the same write with a reason. */
+        apgar: CAPS.EMR_VITALS, "apgar-get": CAPS.EMR_VIEW,
         /* Pediatrics/NICU (Task 2.5). weight-rate/dose-ceiling/age-band are read-only calculators -
          * emr.view, the same authority as reading the chart they help interpret; they persist
          * nothing. A neonatal respiratory/device-settings reading is the same bedside charting act
@@ -2253,6 +2257,14 @@ export async function onRequest(context) {
       }
       if (sub === "newborn" && method === "POST") {
         const r = await registerNewborn(request, env, { ...deps, motherPatientId: body.motherPatientId, encounterId: body.encounterId, sex: body.sex, name: body.name, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "apgar" && method === "POST") {
+        const r = await recordApgar(request, env, { ...deps, patientId: body.patientId, minute: body.minute, components: body.components, correctionReason: body.correctionReason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "apgar-get" && method === "GET") {
+        const r = await getApgar(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "family-links" && method === "GET") {

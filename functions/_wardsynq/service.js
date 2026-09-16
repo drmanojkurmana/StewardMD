@@ -311,6 +311,9 @@ const RESOURCE_TYPES = Object.freeze([
    * ResusBundle and SurgicalCase's own comments already give), and EMR_VIEW's unrestricted read
    * covers seeing one. */
   "FamilyLink",
+  /* One minute's APGAR on a newborn's own chart (migrate-maternity.js recordApgar): five signs and the total
+   * worked out from them, one record per minute, a change being a new version with a reason. */
+  "ApgarScore",
   /* A line, catheter or drain: site, type, when placed, when removed (Task 2.5). A placement log,
    * not a protocol - it carries no judgement about when a line is indicated or how to care for it,
    * the same restraint migrate-surgery.js's ImplantRecord already keeps for a prosthesis. No grant

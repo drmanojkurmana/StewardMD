@@ -42,6 +42,7 @@ import { ADMISSION_CLASSES, freeMasterBed } from "./migrate-inpatient.js";
 import { chargesForPatient } from "./charge-capture.js";
 import { reconciliationOf } from "../../wardsynq/wardsynq-invoice.js";
 import { invoicesForStay } from "./invoice.js";
+import { birthForSummary, birthSectionText } from "./migrate-maternity.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOT_RECORDED = "Not recorded.";
@@ -199,6 +200,10 @@ function assembleDischargeSummary(r) {
     homeMedicines: reconciliationForSummary(r.reconciliation) || NOT_RECORDED,
     assessment,
     plan,
+    /* Only on a birth stay (a MATERNITY stay, or a newborn's own): the delivery, each newborn and its APGAR at 1, 5
+     * and 10 minutes, or the newborn's own APGAR. Every other summary has no such section rather than a "Not recorded." */
+    ...(r.birth === false ? { birth: "The delivery and newborn record could not be read. Do not read this as not recorded." }
+      : r.birth ? { birth: birthSectionText(r.birth) } : {}),
     // Stated on the document itself, because a reader has to know what they are holding.
     provenance:
       "Assembled automatically from this admission's clinical record: the admission encounter, "
@@ -263,6 +268,8 @@ async function readStay(svc, encounterId, patientIdHint) {
     svc.get("MedicationReconciliation", reconciliationIdFor(encounterId, "admission")).catch(() => null),
     svc.get("ClinicalNote", dischargeSummaryIdFor(encounterId)).catch(() => null),
   ]);
+  // A delivery, its newborns and their APGAR, or a newborn's own APGAR. false = could not be read, never "none".
+  const birth = await birthForSummary(svc, encounter).catch(() => { failed.push("ApgarScore"); return false; });
   const native = (rows) => (rows || []).filter((r) => r && !isExternalRecord(r));
   const mine = (rows) => (rows || []).filter((x) => x && (x.encounterId === encounterId || x.id === encounterId));
   const myOrders = mine(native(orders));
@@ -279,6 +286,7 @@ async function readStay(svc, encounterId, patientIdHint) {
       notes: mine(notes),
       problems: problems || [],
       reconciliation,
+      birth,
     },
   };
 }

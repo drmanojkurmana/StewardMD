@@ -104,7 +104,10 @@ const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassG
   "SurveillanceAcknowledgement",
   // Immunization (immunization.js), 2026-09-14: giving a vaccine and charting it is ward nursing work, the same
   // bedside act as a medicine round's record; a doctor holds it through EMR_TREAT's unrestricted scope.
-  "Immunization"]);
+  "Immunization",
+  // ApgarScore (migrate-maternity.js), 2026-09-16: scoring a newborn at 1, 5 and 10 minutes is the midwife's or
+  // nurse's own bedside observation at the delivery, the same act as charting a vital sign; a doctor holds it too.
+  "ApgarScore"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers

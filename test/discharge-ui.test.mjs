@@ -235,8 +235,8 @@ test("the printed document is its own artifact, and an unsigned one says it is a
   assert.ok(!/function printable\(\)/.test(code));
   assert.match(code, /UNSIGNED DRAFT - not a final discharge summary\./);
   assert.match(code, /Signed by/);
-  // Every section reaches the paper, not just the ones that fit on screen.
-  assert.match(code, /SECTIONS\.map\(function \(sec, i\)/);
+  // Every section reaches the paper, not just the ones that fit on screen (the birth section included, when present).
+  assert.match(code, /sectionsOf\(s\)\.map\(function \(sec, i\)/);
 });
 
 test("HTML is escaped: hostile record text cannot inject markup into a clinical document", () => {
