@@ -86,7 +86,13 @@ try {
     if (rail.getAttribute('lang') !== 'te') return 'the rail container should carry lang=te';
     return true;`));
 
-  await step("the clinical tile heading falls back to English today (te.js has no site.shell.* keys yet), never a raw key", async () => ev(`
+  // te.js now carries the shell keys (2026-09-16), so the heading is Telugu. Drop that one key to see the
+  // documented fallback: the inline English, never a raw key, never blank.
+  await step("a heading whose key the staff language lacks falls back to English, never a raw key", async () => ev(`
+    var tile0 = document.querySelector('[data-go="audit"] b');
+    if (!tile0 || !/[\\u0C00-\\u0C7F]/.test(tile0.textContent)) return 'expected the Telugu heading, got: ' + (tile0 && tile0.textContent);
+    delete window.WSQI18n._catalogs.te['site.shell.home.tile.audit.title'];
+    window.WSQ.render('home');
     var tile = document.querySelector('[data-go="audit"] b');
     if (!tile || tile.textContent !== 'Audit and security') return 'expected the English fallback, got: ' + (tile && tile.textContent);
     if (/site\\.shell/.test(tile.textContent)) return 'a raw key leaked onto the screen';

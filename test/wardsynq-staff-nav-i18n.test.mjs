@@ -93,13 +93,14 @@ test("picking Telugu translates the rail; page text also goes through the staff 
   assert.ok(tilesAfter.indexOf("Audit and security") < 0, "the stale English heading is gone");
 });
 
-test("a site.shell.* key te.js does not yet have falls back to English via T(), not a raw key or blank", () => {
+test("a site.shell.* key the staff language does not have falls back to English via T(), not a raw key or blank", () => {
   const { win, doc, st } = loadEnv(true);
+  // Telugu now covers the shell tiles, so drop one key from the loaded catalog to get an untranslated
+  // heading: T() must fall back to the inline English it was called with, never a raw key or a blank.
+  delete win.WSQI18n._catalogs.te["site.shell.home.tile.audit.title"];
   st.navLang = "te";
   win.WSQ.render("home");
   const tiles = doc.getElementById("page").innerHTML;
-  // te.js and i18n.js both lack site.shell.home.tile.audit.title today, so shell.js's T() falls
-  // back to the inline English it was called with - never the raw key, never a blank heading.
   assert.ok(tiles.indexOf("Audit and security") >= 0, "the Audit tile heading falls back to its inline English");
   assert.ok(tiles.indexOf("site.shell.home.tile.audit.title") < 0, "never a raw key");
 });
