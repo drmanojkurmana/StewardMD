@@ -1,0 +1,19 @@
+/* Opaque white/Graphite base, with decorative effects underneath the reading layer. */
+html body:not(.dark):not(.v3-dark) #maikSheet.mk-atmosphere { --mk-bg:#fff; background:#fff; }
+#maikSheet.mk-atmosphere { isolation:isolate; }
+#maikSheet .mk-atmo { position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse at 0 0,#046a3820,transparent 55%),radial-gradient(ellipse at 100% 0,#ed670a24,transparent 55%); }
+#maikSheet .mk-atmo-dark { background:radial-gradient(ellipse at 0 0,#ff671f30,transparent 55%),radial-gradient(ellipse at 100% 0,#06038d70,transparent 55%); }
+#maikSheet .mk-atmo canvas { position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transition:opacity .5s ease; }
+#maikSheet .mk-atmo-aurora { opacity:.78; }
+#maikSheet .mk-atmo-code { opacity:0; }
+#maikSheet .mk-atmo-thinking { background:none; }
+#maikSheet .mk-atmo-thinking .mk-atmo-aurora { opacity:0; }
+#maikSheet .mk-atmo-thinking .mk-atmo-code { opacity:.24; }
+#maikSheet .mk-atmo-dark.mk-atmo-thinking .mk-atmo-code { opacity:.42; }
+#maikSheet .mk-atmo-veil { position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--mk-bg) 82%); }
+#maikSheet .mk-atmo-thinking .mk-atmo-veil { background:radial-gradient(ellipse at center,var(--mk-bg),transparent 90%),linear-gradient(0deg,var(--mk-bg),transparent 25%); }
+#maikSheet.mk-atmosphere>.maik-grab,#maikSheet.mk-atmosphere>.maik-hd,#maikSheet.mk-atmosphere>.maik-disc,#maikSheet.mk-atmosphere>.maik-body,#maikSheet.mk-atmosphere>.maik-cmp { position:relative;z-index:1; }
+html body #maikSheet.mk-atmosphere .maik-hd { background:transparent; }
+html body #maikSheet.mk-atmosphere .maik-disc { background:var(--mk-bg); }
+html body #maikSheet.mk-atmosphere .maik-b.ai { background:var(--mk-bg);background:color-mix(in srgb,var(--mk-bg) 95%,transparent); }
+@media(prefers-reduced-motion:reduce){#maikSheet .mk-atmo canvas{transition:none}}

@@ -5026,13 +5026,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function openAskAi(prefill, opts) {
     maikCSS(); maikSideCSS();
     var old = document.getElementById("maikSheet");
-    if (old) { var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
+    if (old) { if (old._maikAtmosphere) old._maikAtmosphere.destroy(); var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask Maik");
     sheet.classList.add("maik-polished");
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
+    try { if (window.SMD_MAIK_ATMOSPHERE) sheet._maikAtmosphere = SMD_MAIK_ATMOSPHERE.mount(sheet); } catch (e) {}
     document.body.classList.add("maik-open");
     // On-device model lifecycle: cancel any pending unload and warm the chosen local pack NOW, at the
     // moment a question is likely, instead of at app start (owner, 2026-09-04: no resident model when
@@ -5132,6 +5133,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var was = _maikBusy;
       _maikBusy = busy;
       maikBuddyBusy(!!busy);
+      if (sheet._maikAtmosphere) sheet._maikAtmosphere.setBusy(!!busy);
       if (was && !busy) { try { maikDocCue("done"); } catch (e) {} }   // wave the answer in
       if (!sendBtn) return;
       sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
@@ -5175,6 +5177,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Release the on-device model shortly after close (after any in-flight answer finishes; the
       // release never cuts a running generation), so it stops holding memory and heating the phone.
       try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.sheetClosed) SMD_MAIK_LOCAL.sheetClosed(); } catch (e) {}
+      if (sheet._maikAtmosphere) sheet._maikAtmosphere.destroy();
       maikBuddyUnmount();      // stop his timer — the sheet is about to be removed
       sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260);
     }
