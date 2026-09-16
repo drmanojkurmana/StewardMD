@@ -70,6 +70,15 @@ const CONFIG_KINDS = Object.freeze({
   }),
 });
 
+/* RETENTION (owner's guidance of 17 Sep 2026, item 4). A record with `retention` is one layer of a retention class;
+ * retention.js reads its layers only from here. basis: LEGAL_OBLIGATION only with an identified statutory provision
+ * (Act, Rule, Regulation, statutory direction or notification); an office memorandum, guideline or hospital policy is
+ * RETENTION_POLICY. retention: { class, layer (the layer id retention answers carry), years or days, from (what the
+ * period counts from), replacedBySetting, and instrument/provision only where the retention answer words the source
+ * differently from the record }. A STAYED, STRUCK_DOWN, not yet effective or expired record keeps nothing
+ * (enforcement). */
+const LEGAL_OBLIGATION = "LEGAL_OBLIGATION", RETENTION_POLICY = "RETENTION_POLICY";
+
 /* One record. ev: [url, kind (PRIMARY, MIRROR, SECONDARY, OFFICIAL_PORTAL), verified (read on 2026-09-17), note]. */
 const ev = (url, kind, verified, note) => Object.freeze({ url, kind, verified: verified === true, ...(note ? { note } : {}) });
 function req(o) {
@@ -78,6 +87,8 @@ function req(o) {
     effectiveFrom: o.effectiveFrom || null, expiresOn: o.expiresOn || null, status: o.status || "IN_FORCE",
     appliesTo: Object.freeze({ facilityTypes: Object.freeze(o.facilityTypes || []), caseTypes: Object.freeze(o.caseTypes || []), roles: Object.freeze(o.roles || []) }),
     mandatory: o.mandatory !== false, evidence: Object.freeze(o.evidence || []), notes: o.notes || "", cite: o.cite || `${o.instrument}${o.provision ? ", " + o.provision : ""}`,
+    ...(o.basis ? { basis: o.basis } : {}),
+    ...(o.retention ? { retention: Object.freeze({ years: null, days: null, ...o.retention }) } : {}),
     ...(o.challenge ? { challenge: Object.freeze(o.challenge) } : {}),
     ...(o.config ? { config: Object.freeze({ kind: o.config.kind, values: Object.freeze(o.config.values) }) } : {}),
   });
@@ -88,6 +99,9 @@ const CDSCO = "https://cdsco.gov.in/opencms/export/sites/CDSCO_WEB/Pdf-documents
 const EGAZETTE = "https://egazette.gov.in";
 const PCPNDT_RULES = "https://indiankanoon.org/doc/195755613/";
 const MTP_REGS = "https://indiankanoon.org/doc/8267811/";
+const OM_2014 = "DGHS Office Memorandum F. No. A.12034/3/2014-MH-II/MH-I, 28 Oct 2014 (Retention period of Medical Records)";
+const OM_URL = "https://www.nrces.in/sites/default/files/resources/retention_pr.pdf";
+const OM_NOTE = "An executive instruction to State and UT health secretaries and central institutions. No statutory provision identified, so it is not a period required by law until one is.";
 
 const REQUIREMENTS = Object.freeze([
   /* ------------------------------------------------------------------------------------------ PCPNDT */
@@ -121,7 +135,10 @@ const REQUIREMENTS = Object.freeze([
     effectiveFrom: "2003-06-13", roles: ["head of the hospital", "owner of the approved place"], evidence: [ev(MTP_REGS, "MIRROR", true)],
     notes: "Owner's guidance 2026-09-17: a monthly statutory report from the head of the hospital or owner of the approved place to the Chief Medical Officer of the State. Not patient-facing, not routed through billing or ordinary medical records; kept inside the restricted MTP workflow (reg 5, 6, 7; Act s.5A). No due date is prescribed: the day is hospital policy.",
     cite: "MTP Regulations 2003 reg 4(5): the head of the hospital or owner of the approved place sends the monthly statement in Form II to the Chief Medical Officer of the State." }),
-  req({ id: "IN-MTP-REG5-FORMIII", title: "Admission Register (Form III) kept five years, secret", sourceType: "REGULATION", instrument: "MTP Regulations 2003", provision: "reg 5, 6, 7", evidence: [ev(MTP_REGS, "MIRROR", true)] }),
+  req({ id: "IN-MTP-REG5-FORMIII", title: "Admission Register (Form III) kept five years, secret", sourceType: "REGULATION", instrument: "MTP Regulations 2003", provision: "reg 5, 6, 7", evidence: [ev(MTP_REGS, "MIRROR", true)],
+    notes: "Five years from the end of the calendar year the entry relates to; the Form III heading says from the last entry. The later date is used.",
+    basis: LEGAL_OBLIGATION, retention: { class: "mtp", layer: "retention.mtp.regulations-2003-reg-5", years: 5, from: "year-end-or-last-entry",
+      instrument: "Medical Termination of Pregnancy Regulations 2003 (G.S.R. 486(E))", provision: "reg 5 (Admission Register, Form III)" } }),
 
   /* ------------------------------------------------------------------------------------------ medico-legal */
   req({ id: "IN-MEDLEAPR-PLATFORM", title: "MedLEaPR: medico-legal examination and post-mortem reporting platform", sourceType: "GUIDELINE", instrument: "MedLEaPR (National Informatics Centre)", provision: "platform",
@@ -156,7 +173,8 @@ const REQUIREMENTS = Object.freeze([
   req({ id: "IN-DCR-XIIB-K-NOTE-A", title: "Pilot and recipient samples preserved 7 days after issue", sourceType: "RULE", instrument: "Drugs and Cosmetics Rules 1945", provision: "Schedule F Part XII-B, heading K Note (a)",
     evidence: [ev(CDSCO, "PRIMARY", true)], cite: "Schedule F Part XII-B, heading K Note (a)" }),
   req({ id: "IN-DCR-XIIB-L", title: "Blood centre records kept five years", sourceType: "RULE", instrument: "Drugs and Cosmetics Rules 1945", provision: "Schedule F Part XII-B, heading L NOTE; r.122-P(i)(c)",
-    evidence: [ev(CDSCO, "PRIMARY", true)], cite: "Schedule F Part XII-B, heading L NOTE; rule 122-P(i)(c)" }),
+    evidence: [ev(CDSCO, "PRIMARY", true)], cite: "Schedule F Part XII-B, heading L NOTE; rule 122-P(i)(c)",
+    basis: LEGAL_OBLIGATION, retention: { class: "blood-centre", layer: "retention.blood-centre.dc-rules-sch-f-xii-b-l", years: 5, from: "event", provision: "Schedule F Part XII-B heading L NOTE; r.122-P(i)(c)" } }),
   req({ id: "IN-DCR-SCHP-COMPONENTS", title: "Component shelf life and storage", sourceType: "RULE", instrument: "Drugs and Cosmetics Rules 1945", provision: "Schedule F Part XII-B and Schedule P",
     evidence: [ev(CDSCO, "PRIMARY", true)], cite: "Drugs and Cosmetics Rules 1945, Schedule F Part XII-B (G.S.R. 166(E), 2020) and Schedule P" }),
 
@@ -178,7 +196,11 @@ const REQUIREMENTS = Object.freeze([
   req({ id: "IN-CERTIN-2022-II", title: "Cyber incident reported to CERT-In within 6 hours", sourceType: "NOTIFICATION", instrument: "CERT-In Directions No. 20(3)/2022-CERT-In, 28 Apr 2022", provision: "(ii)",
     cite: "CERT-In Directions No. 20(3)/2022-CERT-In, 28 Apr 2022, (ii): report within 6 hours of noticing" }),
   req({ id: "IN-CERTIN-2022-IV", title: "ICT logs kept 180 days within India", sourceType: "NOTIFICATION", instrument: "CERT-In Directions No. 20(3)/2022-CERT-In, 28 Apr 2022", provision: "(iv)",
-    cite: "CERT-In Directions 2022 (iv): logs of all ICT systems kept securely for a rolling 180 days within India" }),
+    evidence: [ev("https://www.cert-in.org.in/PDF/CERT-In_Directions_70B_28.04.2022.pdf", "PRIMARY", false)],
+    notes: "Logs of all ICT systems for a rolling 180 days, within India. The enabling section is taken from the Directions' own title; the opinion did not re-read the Act.",
+    cite: "CERT-In Directions 2022 (iv): logs of all ICT systems kept securely for a rolling 180 days within India",
+    basis: LEGAL_OBLIGATION, retention: { class: "audit-log", layer: "retention.audit-log.cert-in-2022-iv", days: 180, from: "event",
+      instrument: "CERT-In Directions No. 20(3)/2022-CERT-In, 28 Apr 2022 (IT Act 2000 s.70B)", provision: "direction (iv)" } }),
   req({ id: "IN-DPDP-R14-3", title: "Data principal requests answered within the published period (not more than 90 days)", sourceType: "RULE", instrument: "DPDP Rules 2025", provision: "r.14(3)", effectiveFrom: "2027-05-13",
     cite: "DPDP Rules 2025 r.14(3): a published period not exceeding 90 days (the PIB explainer of 17 Nov 2025 reads it as covering access, correction and erasure requests)" }),
   req({ id: "IN-DPDP-R7-2B", title: "Detailed breach report to the Board within 72 hours", sourceType: "RULE", instrument: "DPDP Rules 2025", provision: "r.7(2)(b)", effectiveFrom: "2027-05-13",
@@ -187,7 +209,10 @@ const REQUIREMENTS = Object.freeze([
     notes: "No number in the Rule: the hours are the hospital's policy target.",
     cite: "DPDP Rules 2025 r.7(1): each affected Data Principal told without delay (no number; this is the hospital's policy target)" }),
   req({ id: "IN-DPDP-R6-LOGS", title: "Logs kept at least one year", sourceType: "RULE", instrument: "DPDP Rules 2025", provision: "r.6(1)(e), r.8(3)", effectiveFrom: "2027-05-13",
-    cite: "DPDP Rules 2025 r.6(1)(e), r.8(3): logs kept at least one year" }),
+    evidence: [ev("https://egazette.gov.in/WriteReadData/2025/267650.pdf", "PRIMARY", false, "G.S.R. 846(E)")], notes: "Logs of processing kept at least one year, from DPDP commencement.",
+    cite: "DPDP Rules 2025 r.6(1)(e), r.8(3): logs kept at least one year",
+    basis: LEGAL_OBLIGATION, retention: { class: "audit-log", layer: "retention.audit-log.dpdp-rules-2025-r6-r8", years: 1, from: "event",
+      instrument: "Digital Personal Data Protection Rules 2025 (G.S.R. 846(E))", provision: "r.6(1)(e); r.8(3)" } }),
   req({ id: "IN-DPDP-S5-R3", title: "Privacy notice", sourceType: "RULE", instrument: "DPDP Act 2023 s.5, DPDP Rules 2025 r.3", effectiveFrom: "2027-05-13", cite: "DPDP Act 2023 s.5, DPDP Rules 2025 r.3" }),
   req({ id: "IN-DPDP-R9", title: "DPO or contact person stated in every response", sourceType: "RULE", instrument: "DPDP Rules 2025", provision: "r.9", effectiveFrom: "2027-05-13",
     cite: "DPDP Rules 2025 r.9: the DPO or contact person is stated in every response" }),
@@ -197,6 +222,54 @@ const REQUIREMENTS = Object.freeze([
     cite: "DPDP Rules 2025 r.11: a guardian's appointment by a court, a designated authority or a local level committee is verified" }),
   req({ id: "IN-IMC-1-3-2", title: "Medical records given within 72 hours of a request", sourceType: "REGULATION", instrument: "IMC (Professional Conduct, Etiquette and Ethics) Regulations 2002", provision: "reg 1.3.2",
     cite: "IMC (Professional Conduct, Etiquette and Ethics) Regulations 2002 reg 1.3.2: documents issued within 72 hours of a request by the patient, an authorised attendant or a legal authority" }),
+
+  /* ------------------------------------------------------------------------------------------ retention periods (retention.js) */
+  req({ id: "IN-IMC-1-3-1", title: "Indoor patients' records kept three years from the commencement of treatment", sourceType: "REGULATION", instrument: "Indian Medical Council (Professional Conduct, Etiquette and Ethics) Regulations 2002", provision: "reg 1.3.1",
+    evidence: [ev("https://indiankanoon.org/doc/100527417/", "MIRROR", false)],
+    notes: "Indoor patients, three years from the commencement of treatment. The duty is the physician's; the hospital keeps the record for its doctors. The 2002 Regulations govern since the NMC 2023 Regulations were put in abeyance on 23 Aug 2023.",
+    basis: LEGAL_OBLIGATION, retention: { class: "clinical-ipd", layer: "retention.clinical-ipd.imc-2002-reg-1.3.1", years: 3, from: "start-of-treatment" } }),
+  req({ id: "IN-DGHS-OM-2014-IPD", title: "In-patient records kept digitised ten years (DGHS office memorandum)", sourceType: "OFFICE_MEMORANDUM", instrument: OM_2014, provision: "in-patient records kept digitised for at least ten years",
+    mandatory: false, evidence: [ev(OM_URL, "MIRROR", false)], notes: OM_NOTE,
+    basis: RETENTION_POLICY, retention: { class: "clinical-ipd", layer: "retention.clinical-ipd.dghs-om-2014", years: 10, from: "last-encounter" } }),
+  req({ id: "IN-DGHS-OM-2014-OPD", title: "OPD records kept three years (DGHS office memorandum)", sourceType: "OFFICE_MEMORANDUM", instrument: OM_2014, provision: "OPD records (hard copy) three years",
+    mandatory: false, evidence: [ev(OM_URL, "MIRROR", false)], notes: OM_NOTE,
+    basis: RETENTION_POLICY, retention: { class: "clinical-opd", layer: "retention.clinical-opd.dghs-om-2014", years: 3, from: "last-encounter" } }),
+  req({ id: "IN-WSQ-OPD-DEFAULT", title: "Electronic OPD records kept ten years (WardSynQ default)", sourceType: "HOSPITAL_POLICY", instrument: "WardSynQ safest default (legal opinion of 17 Sep 2026, H.4.2)", provision: "electronic OPD records ten years after the last encounter",
+    mandatory: false,
+    notes: "No statutory period for out-patient records identified: IMC reg 1.3.1 covers indoor patients, the Clinical Establishments (Central Government) Rules 2012 r.9(iv) set no period, and State clinical establishment Acts were not researched.",
+    basis: RETENTION_POLICY, retention: { class: "clinical-opd", layer: "retention.clinical-opd.wardsynq-default", years: 10, from: "last-encounter", replacedBySetting: true } }),
+  req({ id: "IN-DGHS-OM-2014-MLC", title: "Medico-legal registers and case sheets kept ten years (DGHS office memorandum)", sourceType: "OFFICE_MEMORANDUM", instrument: OM_2014, provision: "Medico Legal Registers and case sheets ten years or till the disposal of ongoing cases in any of the courts",
+    mandatory: false, evidence: [ev(OM_URL, "MIRROR", false)],
+    notes: OM_NOTE + " No national statutory MLC form or period was found; a State medico-legal manual may set one (not researched). An open matter is kept by the automatic legal hold (DPDP Act s.17(1)(a), (c)).",
+    basis: RETENTION_POLICY, retention: { class: "mlc", layer: "retention.mlc.dghs-om-2014", years: 10, from: "event" } }),
+  req({ id: "IN-PCPNDT-R9-6", title: "PCPNDT records kept two years or till legal proceedings end", sourceType: "RULE", instrument: "Pre-Conception and Pre-Natal Diagnostic Techniques (Prohibition of Sex Selection) Rules 1996", provision: "r.9(6); Act 1994 s.29",
+    evidence: [ev(PCPNDT_RULES, "MIRROR", true)],
+    notes: "Two years from completion of the procedure, or till the final disposal of legal proceedings, whichever is later: case records, consent forms, laboratory results, sonographic plates or slides, recommendations and letters.",
+    basis: LEGAL_OBLIGATION, retention: { class: "pcpndt", layer: "retention.pcpndt.rules-1996-r9-6", years: 2, from: "event" } }),
+  req({ id: "IN-NDPS-R52X", title: "NDPS records kept two years from the last entry", sourceType: "RULE", instrument: "Narcotic Drugs and Psychotropic Substances Rules 1985", provision: "r.52X; r.52R(1)(b), (c)",
+    evidence: [ev("https://indiankanoon.org/doc/184182041/", "MIRROR", false)], notes: "Two years from the date of the last entry (Forms 3E, 3H, 3-I).",
+    basis: LEGAL_OBLIGATION, retention: { class: "ndps", layer: "retention.ndps.rules-1985-r52x", years: 2, from: "event" } }),
+  req({ id: "IN-DCR-R65-3-1-H", title: "Schedule H1 register kept three years", sourceType: "RULE", instrument: "Drugs and Cosmetics Rules 1945", provision: "r.65(3)(1)(h), as substituted by G.S.R. 588(E), 30 Aug 2013",
+    evidence: [ev(CDSCO, "PRIMARY", true)],
+    basis: LEGAL_OBLIGATION, retention: { class: "h1", layer: "retention.h1.dc-rules-r65-3-1-h", years: 3, from: "event" } }),
+  req({ id: "IN-DCR-R65-7", title: "Schedule X records kept two years", sourceType: "RULE", instrument: "Drugs and Cosmetics Rules 1945", provision: "r.65(7); r.65(9)(a)",
+    evidence: [ev(CDSCO, "PRIMARY", true)], notes: "Two years from the last entry; duplicate prescriptions two years.",
+    basis: LEGAL_OBLIGATION, retention: { class: "schedule-x", layer: "retention.schedule-x.dc-rules-r65-7", years: 2, from: "event" } }),
+  req({ id: "IN-ART-S23", title: "ART clinic and bank records kept at least ten years", sourceType: "ACT", instrument: "Assisted Reproductive Technology (Regulation) Act 2021", provision: "s.23(c), (d)",
+    evidence: [ev("https://prsindia.org/files/bills_acts/acts_parliament/2021/The%20Assisted%20Reproductive%20Technology%20(Regulation)%20Act,%202021.pdf", "MIRROR", false)],
+    notes: "At least ten years, then transferred to the National Registry; kept until proceedings end.",
+    basis: LEGAL_OBLIGATION, retention: { class: "art", layer: "retention.art.act-2021-s23", years: 10, from: "event" } }),
+  req({ id: "IN-SURROGACY-S46-1", title: "Surrogacy records kept twenty-five years", sourceType: "ACT", instrument: "Surrogacy (Regulation) Act 2021", provision: "s.46(1)",
+    evidence: [ev("https://prsindia.org/files/bills_acts/acts_parliament/2021/The%20Surrogacy%20(Regulation)%20Act,%202021.pdf", "MIRROR", false)], notes: "Twenty-five years; kept until proceedings end.",
+    basis: LEGAL_OBLIGATION, retention: { class: "surrogacy", layer: "retention.surrogacy.act-2021-s46-1", years: 25, from: "event" } }),
+  req({ id: "IN-RET-CONSENT-ARTEFACTS", title: "Consent artefacts kept for the life of the record", sourceType: "GUIDELINE", instrument: "Legal opinion of 17 Sep 2026, H.4.1", provision: "kept for the life of the record it relates to",
+    mandatory: false,
+    notes: "No period of its own identified: SPDI Rules 2011 r.5(1) requires written consent but sets no retention period. A consent form inside a statutory record (PCPNDT r.9(6)) is kept under that record's class.",
+    basis: RETENTION_POLICY, retention: { class: "consent-artefacts", layer: "retention.consent-artefacts.life-of-record", from: "related-record" } }),
+  req({ id: "IN-RET-MINOR-AFTER-18", title: "A child's clinical record kept until three years after turning 18", sourceType: "HOSPITAL_POLICY", instrument: "Legal opinion of 17 Sep 2026, H.4.2 (Limitation Act 1963 s.6 basis unconfirmed)",
+    provision: "a child's record until 3 years after turning 18", mandatory: false,
+    notes: "The limitation basis is unconfirmed in the opinion, so this is policy, not law; a hospital may lengthen it (wardsynq.retention.minorYearsAfter18). Applies inside the clinical classes.",
+    basis: RETENTION_POLICY, retention: { class: null, layer: "retention.minor.after-18", years: 3, from: "age-18" } }),
 ]);
 const BY_ID = new Map(REQUIREMENTS.map((r) => [r.id, r]));
 
@@ -332,5 +405,5 @@ function legalView(stateUt, legalCfg, on, region) {
     modes: FORMF_MODES, caseTypes: MEDLEAPR_CASE_TYPES };
 }
 
-export { SOURCE_TYPES, STATUSES, ENFORCED, STATES_UTS, FORMF_MODES, MEDLEAPR_CASE_TYPES, CONFIG_KINDS, REQUIREMENTS, requirement, citeOf, enforcement, enforced,
+export { SOURCE_TYPES, STATUSES, ENFORCED, LEGAL_OBLIGATION, RETENTION_POLICY, STATES_UTS, FORMF_MODES, MEDLEAPR_CASE_TYPES, CONFIG_KINDS, REQUIREMENTS, requirement, citeOf, enforcement, enforced,
   isStateUt, stateName, stateConfigFor, validateStateConfig, formFSubmission, formFPortalClock, medleaprRequired, legalView };

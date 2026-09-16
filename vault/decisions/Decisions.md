@@ -7486,3 +7486,18 @@ Source: the legal opinion of 17 Sep 2026 (sections A and H; research awaiting a 
 - **Screen.** Privacy and compliance > Retention and legal holds lists every class and layer (GET
   /ward/retention-classes, dpdp.manage or register.records) and flags policy-only classes; the erasure request shows the
   DPO decision form; ward.js documents ask for the confirmation.
+
+## 2026-09-17 Retention layers live in the legal requirement registry (seam: retention-basis + legal-registry)
+- `retention.js` no longer holds a BASES table. Every layer is a record in `legal-requirements.js` with `basis`
+  (LEGAL_OBLIGATION or RETENTION_POLICY) and `retention: {class, layer, years|days, from, replacedBySetting}`, plus
+  `instrument`/`provision` only where the retention answer words the source differently from the record. Existing records
+  gained the attribute (IN-MTP-REG5-FORMIII, IN-DCR-XIIB-L, IN-CERTIN-2022-IV, IN-DPDP-R6-LOGS); new ones: IN-IMC-1-3-1,
+  IN-DGHS-OM-2014-IPD/OPD/MLC, IN-WSQ-OPD-DEFAULT, IN-PCPNDT-R9-6, IN-NDPS-R52X, IN-DCR-R65-3-1-H, IN-DCR-R65-7, IN-ART-S23,
+  IN-SURROGACY-S46-1, IN-RET-CONSENT-ARTEFACTS, IN-RET-MINOR-AFTER-18. The hospital's own setting layer stays in retention.js
+  (hospital configuration, not a requirement).
+- Whether a layer keeps anything today is `enforcement()` on the IST day: STAYED, STRUCK_DOWN, not yet effective or expired
+  keep nothing. legalFloorYears and policyOnly count only LEGAL layers whose registry status is enforced. The setting
+  floors (floorYears/defaultYears) are unchanged, so a class whose only law is stayed keeps its period as policy.
+- Answers are byte-identical except: CERT-In logs' layer source type now reads "Notification" (the registry's type) instead
+  of "Direction under an Act"; registry records gained notes/evidence carried over from the layers (evidence not re-read is
+  marked not verified).

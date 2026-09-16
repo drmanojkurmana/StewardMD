@@ -26,7 +26,8 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { ageAt, MAJORITY_YEARS, DPDP_START, DAY, dayMs, lawOn } from "./privacy-law.js";
+import { ageAt, MAJORITY_YEARS, DAY, lawOn } from "./privacy-law.js";
+import { REQUIREMENTS, ENFORCED, LEGAL_OBLIGATION, RETENTION_POLICY, requirement, enforced } from "./legal-requirements.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const HOLD = "LegalHold";
@@ -41,76 +42,25 @@ const REGISTER_PREFIX = "_wardsynq_register_"; // registers.js PREFIX: register 
  * layer refuses erasure for its period and names the law; a RETENTION_POLICY layer alone goes to the DPO for a
  * documented decision (dpdp.js). A legal hold refuses either way.
  *
- * The layer shape follows the owner's legal requirement record (id, source type, instrument, provision, jurisdiction,
- * effective date, status, evidence, notes), so these rows can move into a legal requirement registry unchanged. */
-const LEGAL = "LEGAL_OBLIGATION", POLICY = "RETENTION_POLICY";
+ * ONE SOURCE. Every layer except the hospital's own setting is a record of the legal requirement registry
+ * (legal-requirements.js, `retention`), and whether it keeps anything today is the registry's enforcement: a STAYED,
+ * STRUCK_DOWN, not yet effective or expired layer keeps nothing. */
+const LEGAL = LEGAL_OBLIGATION, POLICY = RETENTION_POLICY;
 const layer = (type, o) => Object.freeze({ type, jurisdiction: "IN", status: "IN_FORCE", effectiveFrom: null, years: null, days: null, note: null, ...o, evidence: Object.freeze(o.evidence || []) });
-const OM_2014 = "DGHS Office Memorandum F. No. A.12034/3/2014-MH-II/MH-I, 28 Oct 2014 (Retention period of Medical Records)";
-const OM_URL = "https://www.nrces.in/sites/default/files/resources/retention_pr.pdf";
-const OM_NOTE = "An executive instruction to State and UT health secretaries and central institutions. No statutory provision identified, so it is not a period required by law until one is.";
-const DC_RULES = "Drugs and Cosmetics Rules 1945", DC_URL = "https://cdsco.gov.in/opencms/export/sites/CDSCO_WEB/Pdf-documents/acts_rules/2016DrugsandCosmeticsAct1940Rules1945.pdf";
-const BASES = Object.freeze({
-  "clinical-ipd": Object.freeze([
-    layer(LEGAL, { id: "retention.clinical-ipd.imc-2002-reg-1.3.1", sourceType: "Regulation", instrument: "Indian Medical Council (Professional Conduct, Etiquette and Ethics) Regulations 2002", provision: "reg 1.3.1",
-      years: 3, from: "start-of-treatment", evidence: ["https://indiankanoon.org/doc/100527417/"],
-      note: "Indoor patients, three years from the commencement of treatment. The duty is the physician's; the hospital keeps the record for its doctors. The 2002 Regulations govern since the NMC 2023 Regulations were put in abeyance on 23 Aug 2023." }),
-    layer(POLICY, { id: "retention.clinical-ipd.dghs-om-2014", sourceType: "Office memorandum", instrument: OM_2014, provision: "in-patient records kept digitised for at least ten years",
-      years: 10, from: "last-encounter", evidence: [OM_URL], note: OM_NOTE }),
-  ]),
-  "clinical-opd": Object.freeze([
-    layer(POLICY, { id: "retention.clinical-opd.dghs-om-2014", sourceType: "Office memorandum", instrument: OM_2014, provision: "OPD records (hard copy) three years", years: 3, from: "last-encounter", evidence: [OM_URL], note: OM_NOTE }),
-    layer(POLICY, { id: "retention.clinical-opd.wardsynq-default", sourceType: "Hospital policy", instrument: "WardSynQ safest default (legal opinion of 17 Sep 2026, H.4.2)", provision: "electronic OPD records ten years after the last encounter",
-      years: 10, from: "last-encounter", replacedBySetting: true,
-      note: "No statutory period for out-patient records identified: IMC reg 1.3.1 covers indoor patients, the Clinical Establishments (Central Government) Rules 2012 r.9(iv) set no period, and State clinical establishment Acts were not researched." }),
-  ]),
-  mlc: Object.freeze([
-    layer(POLICY, { id: "retention.mlc.dghs-om-2014", sourceType: "Office memorandum", instrument: OM_2014, provision: "Medico Legal Registers and case sheets ten years or till the disposal of ongoing cases in any of the courts",
-      years: 10, from: "event", evidence: [OM_URL],
-      note: OM_NOTE + " No national statutory MLC form or period was found; a State medico-legal manual may set one (not researched). An open matter is kept by the automatic legal hold (DPDP Act s.17(1)(a), (c))." }),
-  ]),
-  pcpndt: Object.freeze([
-    layer(LEGAL, { id: "retention.pcpndt.rules-1996-r9-6", sourceType: "Rule", instrument: "Pre-Conception and Pre-Natal Diagnostic Techniques (Prohibition of Sex Selection) Rules 1996", provision: "r.9(6); Act 1994 s.29",
-      years: 2, from: "event", evidence: ["https://indiankanoon.org/doc/195755613/"],
-      note: "Two years from completion of the procedure, or till the final disposal of legal proceedings, whichever is later: case records, consent forms, laboratory results, sonographic plates or slides, recommendations and letters." }),
-  ]),
-  mtp: Object.freeze([
-    layer(LEGAL, { id: "retention.mtp.regulations-2003-reg-5", sourceType: "Regulation", instrument: "Medical Termination of Pregnancy Regulations 2003 (G.S.R. 486(E))", provision: "reg 5 (Admission Register, Form III)",
-      years: 5, from: "year-end-or-last-entry", evidence: ["https://indiankanoon.org/doc/8267811/"],
-      note: "Five years from the end of the calendar year the entry relates to; the Form III heading says from the last entry. The later date is used." }),
-  ]),
-  ndps: Object.freeze([
-    layer(LEGAL, { id: "retention.ndps.rules-1985-r52x", sourceType: "Rule", instrument: "Narcotic Drugs and Psychotropic Substances Rules 1985", provision: "r.52X; r.52R(1)(b), (c)",
-      years: 2, from: "event", evidence: ["https://indiankanoon.org/doc/184182041/"], note: "Two years from the date of the last entry (Forms 3E, 3H, 3-I)." }),
-  ]),
-  h1: Object.freeze([
-    layer(LEGAL, { id: "retention.h1.dc-rules-r65-3-1-h", sourceType: "Rule", instrument: DC_RULES, provision: "r.65(3)(1)(h), as substituted by G.S.R. 588(E), 30 Aug 2013", years: 3, from: "event", evidence: [DC_URL] }),
-  ]),
-  "schedule-x": Object.freeze([
-    layer(LEGAL, { id: "retention.schedule-x.dc-rules-r65-7", sourceType: "Rule", instrument: DC_RULES, provision: "r.65(7); r.65(9)(a)", years: 2, from: "event", evidence: [DC_URL], note: "Two years from the last entry; duplicate prescriptions two years." }),
-  ]),
-  "blood-centre": Object.freeze([
-    layer(LEGAL, { id: "retention.blood-centre.dc-rules-sch-f-xii-b-l", sourceType: "Rule", instrument: DC_RULES, provision: "Schedule F Part XII-B heading L NOTE; r.122-P(i)(c)", years: 5, from: "event", evidence: [DC_URL] }),
-  ]),
-  art: Object.freeze([
-    layer(LEGAL, { id: "retention.art.act-2021-s23", sourceType: "Act", instrument: "Assisted Reproductive Technology (Regulation) Act 2021", provision: "s.23(c), (d)", years: 10, from: "event",
-      evidence: ["https://prsindia.org/files/bills_acts/acts_parliament/2021/The%20Assisted%20Reproductive%20Technology%20(Regulation)%20Act,%202021.pdf"], note: "At least ten years, then transferred to the National Registry; kept until proceedings end." }),
-  ]),
-  surrogacy: Object.freeze([
-    layer(LEGAL, { id: "retention.surrogacy.act-2021-s46-1", sourceType: "Act", instrument: "Surrogacy (Regulation) Act 2021", provision: "s.46(1)", years: 25, from: "event",
-      evidence: ["https://prsindia.org/files/bills_acts/acts_parliament/2021/The%20Surrogacy%20(Regulation)%20Act,%202021.pdf"], note: "Twenty-five years; kept until proceedings end." }),
-  ]),
-  "audit-log": Object.freeze([
-    layer(LEGAL, { id: "retention.audit-log.cert-in-2022-iv", sourceType: "Direction under an Act", instrument: "CERT-In Directions No. 20(3)/2022-CERT-In, 28 Apr 2022 (IT Act 2000 s.70B)", provision: "direction (iv)",
-      days: 180, from: "event", evidence: ["https://www.cert-in.org.in/PDF/CERT-In_Directions_70B_28.04.2022.pdf"],
-      note: "Logs of all ICT systems for a rolling 180 days, within India. The enabling section is taken from the Directions' own title; the opinion did not re-read the Act." }),
-    layer(LEGAL, { id: "retention.audit-log.dpdp-rules-2025-r6-r8", sourceType: "Rule", instrument: "Digital Personal Data Protection Rules 2025 (G.S.R. 846(E))", provision: "r.6(1)(e); r.8(3)",
-      years: 1, from: "event", effectiveFrom: DPDP_START, evidence: ["https://egazette.gov.in/WriteReadData/2025/267650.pdf"], note: "Logs of processing kept at least one year, from DPDP commencement." }),
-  ]),
-  "consent-artefacts": Object.freeze([
-    layer(POLICY, { id: "retention.consent-artefacts.life-of-record", sourceType: "Guideline", instrument: "Legal opinion of 17 Sep 2026, H.4.1", provision: "kept for the life of the record it relates to", from: "related-record",
-      note: "No period of its own identified: SPDI Rules 2011 r.5(1) requires written consent but sets no retention period. A consent form inside a statutory record (PCPNDT r.9(6)) is kept under that record's class." }),
-  ]),
-});
+/* "OFFICE_MEMORANDUM" reads "Office memorandum" on the screens and in the stored answer. */
+const sourceLabel = (t) => t.charAt(0) + t.slice(1).toLowerCase().replace(/_/g, " ");
+const fromRegistry = (r) => layer(r.basis, { id: r.retention.layer, requirementId: r.id, sourceType: sourceLabel(r.sourceType),
+  instrument: r.retention.instrument || r.instrument, provision: r.retention.provision || r.provision, jurisdiction: r.jurisdiction, status: r.status,
+  effectiveFrom: r.effectiveFrom, years: r.retention.years, days: r.retention.days, from: r.retention.from, ...(r.retention.replacedBySetting ? { replacedBySetting: true } : {}),
+  note: r.notes || null, evidence: r.evidence.map((e) => e.url) });
+const RETENTION_REQUIREMENTS = REQUIREMENTS.filter((r) => r.retention);
+const BASES = Object.freeze(Object.fromEntries([...new Set(RETENTION_REQUIREMENTS.map((r) => r.retention.class).filter(Boolean))]
+  .map((k) => [k, Object.freeze(RETENTION_REQUIREMENTS.filter((r) => r.retention.class === k).map(fromRegistry))])));
+const MINOR_RULE = requirement("IN-RET-MINOR-AFTER-18");
+/* The registry's status alone (no date): a STAYED or STRUCK_DOWN law is not a legal floor for settings. */
+const statutory = (l) => l.type === LEGAL && ENFORCED.includes(l.status);
+/* Whether a layer keeps anything on this India Standard Time day. A hospital-setting layer is not a registry record. */
+const layerInForce = (l, nowMs) => !l.requirementId || enforced(l.requirementId, { on: new Date(nowMs + 19800000).toISOString().slice(0, 10) });
 const basisText = (l) => `${l.instrument}, ${l.provision}`;
 
 /* H.4.1. floorYears is the shortest a hospital setting may make a class. It is never below the class's
@@ -133,13 +83,13 @@ const CLASSES = Object.freeze(Object.fromEntries(Object.entries({
   "audit-log": { floorYears: 1, defaultYears: 1, from: "event" },
   "consent-artefacts": { floorYears: null, defaultYears: null, from: "related-record" },
 }).map(([k, c]) => {
-  const legal = BASES[k].filter((l) => l.type === LEGAL && l.years != null);
+  const legal = BASES[k].filter((l) => statutory(l) && l.years != null);
   return [k, Object.freeze({ ...c, bases: BASES[k], legalFloorYears: legal.length ? Math.max(...legal.map((l) => l.years)) : null,
-    policyOnly: !BASES[k].some((l) => l.type === LEGAL), rule: BASES[k].map((l) => `${basisText(l)} (${l.type})`).join("; ") })];
+    policyOnly: !BASES[k].some(statutory), rule: BASES[k].map((l) => `${basisText(l)} (${l.type})`).join("; ") })];
 })));
 /* H.4.2: a minor's clinical record is kept until the later of the class period and three years after turning 18.
  * The limitation basis (Limitation Act 1963 s.6) is UNCONFIRMED in the opinion, so the hospital may change it. */
-const MINOR_YEARS_AFTER_18 = 3;
+const MINOR_YEARS_AFTER_18 = MINOR_RULE.retention.years;
 const HOLD_REASONS = Object.freeze(["mlc", "court-case", "consumer-complaint", "pocso", "pcpndt-proceedings", "mtp-proceedings", "police-request"]);
 const OPD_CLASSES = new Set(["OPD", "VIRTUAL"]);
 
@@ -178,12 +128,12 @@ function dated(layers, anchorOf, keepUntil, nowMs) {
   const bases = layers.map((l) => {
     const a = anchorOf(l.from);
     const until = a == null ? null : l.days != null ? a + l.days * DAY : l.years != null ? addYears(a, l.years) : null;
-    return { ...l, until: iso(until), inForce: !l.effectiveFrom || nowMs >= dayMs(l.effectiveFrom) };
+    return { ...l, until: iso(until), inForce: layerInForce(l, nowMs) };
   });
   const latest = (type) => { const t = bases.filter((b) => b.type === type && b.inForce && b.until).map((b) => Date.parse(b.until)); return t.length ? Math.max(...t) : null; };
   const legalUntil = latest(LEGAL), policyUntil = latest(POLICY), keep = msOf(keepUntil);
   const basisType = legalUntil != null && legalUntil > nowMs ? LEGAL : keep == null || keep > nowMs ? POLICY : null;
-  return { bases, legalUntil: iso(legalUntil), policyUntil: iso(policyUntil), basisType, policyOnly: !bases.some((b) => b.type === LEGAL) };
+  return { bases, legalUntil: iso(legalUntil), policyUntil: iso(policyUntil), basisType, policyOnly: !bases.some(statutory) };
 }
 
 /**
@@ -207,8 +157,7 @@ function retentionMap(facts, cfg, nowMs) {
     const minor = ageAt(dob, last) != null && ageAt(dob, last) < MAJORITY_YEARS;
     if (minor && minorEnd != null && minorEnd > until) until = minorEnd;
     /* H.4.2: the child rule rests on a limitation basis the opinion marks UNCONFIRMED, so it is policy, not law. */
-    const layers = minor ? [...c.layers, layer(POLICY, { id: "retention.minor.after-18", sourceType: "Hospital policy", instrument: "Legal opinion of 17 Sep 2026, H.4.2 (Limitation Act 1963 s.6 basis unconfirmed)",
-      provision: `a child's record until ${minorYearsAfter18} years after turning 18`, years: minorYearsAfter18, from: "age-18" })] : c.layers;
+    const layers = minor ? [...c.layers, { ...fromRegistry(MINOR_RULE), note: null, evidence: Object.freeze([]), provision: `a child's record until ${minorYearsAfter18} years after turning 18`, years: minorYearsAfter18 }] : c.layers;
     const anchorOf = (from) => (from === "start-of-treatment" ? (open ? nowMs : started) : from === "age-18" ? (msOf(dob) == null ? null : addYears(msOf(dob), MAJORITY_YEARS)) : open ? nowMs : last);
     out.push({ class: key, rule: c.rule, years: c.years, source: c.source, records: list.length, lastAt: iso(last), keepUntil: iso(until), stillOpen: open, minorRule: minor ? minorYearsAfter18 : null,
       ...dated(layers, anchorOf, iso(until), nowMs) });
@@ -241,9 +190,11 @@ function retentionAnswer(x) {
   const day = (v) => (v ? String(v).slice(0, 10) : "the life of the record it belongs to");
   const legal = (x.bases || []).filter((b) => b.type === LEGAL && b.inForce && b.until && b.until === x.legalUntil);
   const policy = (x.bases || []).filter((b) => b.type === POLICY);
+  /* A class whose only law is stayed or struck down keeps its setting period with no policy layer to name. */
+  const named = policy.length ? ` (${policy.map(basisText).join("; ")})` : "";
   if (x.basisType === LEGAL) return `Kept until ${day(x.legalUntil)} because the law requires it: ${legal.map(basisText).join("; ")}.` +
-    (x.keepUntil && x.keepUntil > x.legalUntil ? ` After that, kept until ${day(x.keepUntil)} under the hospital's retention policy (${policy.map(basisText).join("; ")}), which is not a legal requirement.` : "");
-  if (x.basisType === POLICY) return `Kept until ${day(x.keepUntil)} under the hospital's retention policy (${policy.map(basisText).join("; ")}). This is not a legal requirement.`;
+    (x.keepUntil && x.keepUntil > x.legalUntil ? ` After that, kept until ${day(x.keepUntil)} under the hospital's retention policy${named}, which is not a legal requirement.` : "");
+  if (x.basisType === POLICY) return `Kept until ${day(x.keepUntil)} under the hospital's retention policy${named}. This is not a legal requirement.`;
   return "No retention period is running for this record.";
 }
 

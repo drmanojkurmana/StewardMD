@@ -511,7 +511,7 @@
       pocso: T(c, "site.gov.lh.r.pocso", "POCSO report"), "pcpndt-proceedings": T(c, "site.gov.lh.r.pcpndt", "PCPNDT proceedings"), "mtp-proceedings": T(c, "site.gov.lh.r.mtp", "MTP proceedings"),
       "police-request": T(c, "site.gov.lh.r.police", "Police request") }[x] || x;
   }
-  /* Every class with its layers (retention.js BASES): basis type, instrument, provision, jurisdiction, period and
+  /* Every class with its layers (retention.js, read from the legal requirement registry): basis type, instrument, provision, jurisdiction, period and
    * evidence, and a flag on a class no law keeps. null while loading, false when it failed. */
   function periodText(c, b) {
     return b.days != null ? T(c, "site.gov.ret.days", "{n} days", { n: b.days }) : b.years != null ? T(c, "site.gov.ret.yearsN", "{n} years", { n: b.years }) : T(c, "site.gov.ret.lifeOfRecord", "for the life of the record it belongs to");
