@@ -674,6 +674,14 @@
       /* Purchasing sits behind the pharmacy's own capability, not a clinical one: ordering stock is
        * the storekeeper's job and has never been the ward's. */
       tile({ go: "ward:purchasing", icon: "inventory", title: T(null, "site.shell.home.tile.purchasing.title", "Purchasing"), sub: T(null, "site.shell.home.tile.purchasing.sub", "Raise a supplier order, get it approved, and book the stock in when it arrives"), need: "order.dispense" }),
+      /* Hospital support services (pages/support.js), each on its own narrow capability. The diet tile also opens
+       * for a prescriber, who orders a diet from the chart; the kitchen, CSSD, housekeeping, transport and the
+       * mortuary see only their own. */
+      tile({ go: "diet", icon: "restaurant", title: T(null, "site.shell.home.tile.diet.title", "Diet and kitchen"), sub: T(null, "site.shell.home.tile.diet.sub", "Diet orders, meal rounds by ward and bed, nil by mouth"), need: ["diet.order", "diet.kitchen", "emr.treat"] }),
+      tile({ go: "cssd", icon: "sanitizer", title: T(null, "site.shell.home.tile.cssd.title", "CSSD"), sub: T(null, "site.shell.home.tile.cssd.sub", "Instrument sets through wash, pack, sterilise, store and issue, with load recall"), need: "cssd.process" }),
+      tile({ go: "housekeeping", icon: "cleaning_services", title: T(null, "site.shell.home.tile.housekeeping.title", "Housekeeping"), sub: T(null, "site.shell.home.tile.housekeeping.sub", "Bed cleans, spills and terminal cleans, inspection and turnaround"), need: ["housekeeping.task", "housekeeping.inspect"] }),
+      tile({ go: "transport", icon: "ambulance", title: T(null, "site.shell.home.tile.transport.title", "Ambulance"), sub: T(null, "site.shell.home.tile.transport.sub", "Fleet, trip requests, dispatch and trip times"), need: "transport.dispatch" }),
+      tile({ go: "mortuary", icon: "deceased", title: T(null, "site.shell.home.tile.mortuary.title", "Mortuary"), sub: T(null, "site.shell.home.tile.mortuary.sub", "Bodies received, cold chambers, belongings and release"), need: "mortuary.manage" }),
       tile({ go: "ward:downtime", icon: "cloud_off", title: T(null, "site.shell.home.tile.downtime.title", "Downtime pack"), sub: T(null, "site.shell.home.tile.downtime.sub", "Printable ward state for a network outage"), need: "emr.view" }),
     ] : [];
     var peopleTiles = [

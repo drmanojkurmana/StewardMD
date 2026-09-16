@@ -61,6 +61,8 @@ const HAPPENED = Object.freeze({
    * charges for supply and a hospital that charges for the dose given are both real, and a site
    * choosing one puts only that code in its tariff. Nothing here decides which. */
   MedicationDispense: Object.freeze(["dispensed", "issued"]),
+  /* An ambulance trip that reached handover (ambulance.js). A cancelled or unfinished trip is not a charge. */
+  AmbulanceTrip: Object.freeze(["completed"]),
 });
 
 /* TASK 4.18's own end-to-end journey test found this: two of the four resource models here name
@@ -70,7 +72,7 @@ const HAPPENED = Object.freeze({
  * charge: `row.status` was always undefined for those two types, so every one of them fell through
  * to "did_not_happen" regardless of its real state. Named here, once, rather than guessed per call
  * site - a second place this could drift silently if left implicit. */
-const STATUS_FIELD = Object.freeze({ MedicationDispense: "state", SpecimenCollection: "state" });
+const STATUS_FIELD = Object.freeze({ MedicationDispense: "state", SpecimenCollection: "state", AmbulanceTrip: "state" });
 
 /** PURE. The code an item is priced by, and what it is called on a bill. */
 function itemFrom(resourceType, row) {
@@ -86,6 +88,9 @@ function itemFrom(resourceType, row) {
   }
   if (resourceType === "MedicationDispense") {
     return { code: str(r.drugCode) || str(r.drug), display: str(r.drug) || str(r.drugCode), at: r.dispensedAt || r.at || null };
+  }
+  if (resourceType === "AmbulanceTrip") {
+    return { code: str(r.chargeCode), display: `Ambulance (${str(r.vehicleClass) || "type not recorded"})`, at: (r.times && r.times.handover) || null };
   }
   return null;
 }

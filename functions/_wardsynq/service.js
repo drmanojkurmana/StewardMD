@@ -73,6 +73,14 @@ const RESOURCE_TYPES = Object.freeze([
    * order - it is summed from the receipts booked against it, the same discipline stock.js keeps
    * for a stock level, so there is no counter to drift away from the events beneath it. */
   "PurchaseOrder", "Vendor",
+  /* Hospital support services, 2026-09-16. A diet order is a clinical order and versioned like one; a
+   * meal round is the kitchen's prepared/delivered mark for one patient at one meal. CSSD keeps its set
+   * master, its steriliser loads with their indicator results, and one cycle per trip of a set through
+   * the department, so a failed load can be traced to every case its sets reached. A housekeeping task,
+   * an ambulance, a trip and a mortuary case are operational registers kept here for the same reason
+   * as the rest: append-only, so what was done, by whom and when cannot be edited afterwards. */
+  "DietOrder", "MealRound", "InstrumentSet", "SterilizerLoad", "CssdCycle", "HousekeepingTask",
+  "AmbulanceVehicle", "AmbulanceTrip", "MortuaryCase",
   /* Who to ring about this patient. Its own record rather than fields on Patient, because a contact
    * list changes on its own clock and an emergency contact quietly overwritten last month leaves
    * nobody to call at the moment somebody has to be called. Append-only like everything else:

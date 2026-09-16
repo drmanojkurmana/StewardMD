@@ -35,7 +35,8 @@
   var ROLES = ["admin", "doctor", "supervisor", "nurse", "intern", "resident", "reception", "cashier",
     "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist",
     "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver",
-    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "viewer"];
+    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer",
+    "dietitian", "kitchen", "cssd", "housekeeping", "transport", "mortuary", "viewer"];
 
   // One line per common role, from the capability lists in functions/_queue_roles.js ROLE_CAPS.
   // Built at render time (not a module constant) because each note is a T() call in the staff language.
@@ -52,6 +53,12 @@
       ["blood_bank", T(c, "site.admin.staff.roleNote.bloodBank", "Crossmatches, issues and administers transfusions only.")],
       ["radiographer", T(c, "site.admin.staff.roleNote.radiographer", "Acquires the imaging study. Reads the chart, cannot file a report or protocol a study.")],
       ["radiologist", T(c, "site.admin.staff.roleNote.radiologist", "Protocols and reports imaging studies (the same authority a lab result release uses). No other chart write.")],
+      ["dietitian", T(c, "site.admin.staff.roleNote.dietitian", "Reads the chart, orders and changes diets, sees the meal rounds.")],
+      ["kitchen", T(c, "site.admin.staff.roleNote.kitchen", "Meal rounds only: name, bed, diet, nil by mouth and allergies. Marks trays prepared and delivered.")],
+      ["cssd", T(c, "site.admin.staff.roleNote.cssd", "Instrument sets, steriliser loads and their indicators, issue to theatre. No chart access.")],
+      ["housekeeping", T(c, "site.admin.staff.roleNote.housekeeping", "Takes and finishes cleaning tasks. A supervisor inspects them. No chart access.")],
+      ["transport", T(c, "site.admin.staff.roleNote.transport", "Ambulance fleet, trip requests, dispatch and trip times.")],
+      ["mortuary", T(c, "site.admin.staff.roleNote.mortuary", "Receives, stores and releases bodies against the death record.")],
     ];
   }
 

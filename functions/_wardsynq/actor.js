@@ -350,7 +350,8 @@ function grantForCaps(caps) {
     /* Encounter joined 2026-09-15 (LT-30): a bed day is billed from the stay itself, its dates and the
      * ward each day was on. It is the admission record a billing desk already works from, and the
      * write scope below still does not move. */
-    const CAPTURE_TYPES = ["MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense", "Encounter"];
+    // AmbulanceTrip joined 2026-09-16: a completed ambulance trip is charged like any other thing that happened.
+    const CAPTURE_TYPES = ["MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense", "Encounter", "AmbulanceTrip"];
     // Invoice joined 2026-09-09 (TASK 4.6): the ledger charge-capture.js's priced proposal becomes
     // once a person raises it. Read for BOTH billing.view and billing.charge - a cashier reading a
     // balance is not a coding act, it is the whole reason billing.view exists (see the Cashier task
@@ -457,6 +458,34 @@ function grantForCaps(caps) {
       write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
       writeCategories: grant.writeCategories,
       basis: grant.basis + "+" + basis,
+    };
+  }
+
+  /* Hospital support services, 2026-09-16. The same union shape as every branch above: each capability
+   * ADDS its own types and only ever raises the tier. What each reads is what the job needs and no more:
+   * the kitchen reads the name, the bed, the diet and the allergies (a tray is labelled and checked
+   * against them), never the notes; CSSD reads the theatre case a set is issued to, never the patient;
+   * housekeeping reads nothing but its own tasks (a bed and a ward, no patient); transport and the
+   * mortuary read the patient and the stay they move or receive. */
+  const DIET_READ = ["Patient", "Encounter", "AllergyIntolerance", "DietOrder", "MealRound"];
+  const SUPPORT = [
+    [CAPS.DIET_ORDER, DIET_READ, ["DietOrder"]],
+    [CAPS.DIET_KITCHEN, DIET_READ, ["MealRound"]],
+    [CAPS.CSSD_PROCESS, ["InstrumentSet", "SterilizerLoad", "CssdCycle", "SurgicalCase"], ["InstrumentSet", "SterilizerLoad", "CssdCycle"]],
+    [CAPS.HOUSEKEEPING_TASK, ["HousekeepingTask"], ["HousekeepingTask"]],
+    [CAPS.HOUSEKEEPING_INSPECT, ["HousekeepingTask"], ["HousekeepingTask"]],
+    [CAPS.TRANSPORT_DISPATCH, ["AmbulanceVehicle", "AmbulanceTrip", "Patient", "Encounter"], ["AmbulanceVehicle", "AmbulanceTrip"]],
+    [CAPS.MORTUARY_MANAGE, ["MortuaryCase", "Patient", "Encounter"], ["MortuaryCase"]],
+  ];
+  for (const [cap, canRead, canWrite] of SUPPORT) {
+    if (!has(cap)) continue;
+    if (!grant) grant = { tier: TIER.EXECUTE, read: [...canRead], write: [...canWrite], basis: cap };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...canWrite])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + cap,
     };
   }
 

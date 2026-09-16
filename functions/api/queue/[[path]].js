@@ -177,6 +177,11 @@ import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
 import { raisePurchaseOrder, receiveGoods, listPurchaseOrders } from "../../_wardsynq/purchasing.js";
+import { saveDietOrder, stopDietOrder, dietOrderHistory, mealBoard, markMeal } from "../../_wardsynq/diet.js";
+import { saveInstrumentSet, startLoad, recordLoadResult, cssdStep, cssdBoard, caseSets } from "../../_wardsynq/cssd.js";
+import { housekeepingBoard, raiseHousekeepingTask, housekeepingStep, housekeepingReport } from "../../_wardsynq/housekeeping.js";
+import { saveVehicle, requestTrip, tripStep, transportBoard } from "../../_wardsynq/ambulance.js";
+import { receiveBody, updateMortuaryCase, releaseBody, mortuaryBoard } from "../../_wardsynq/mortuary.js";
 import { recordDeath, correctDeath, addRelatedPerson, removeRelatedPerson, listRelatedPeople } from "../../_wardsynq/patient-identity.js";
 import { recordImmunization, markImmunizationError, listImmunizations } from "../../_wardsynq/immunization.js";
 import { recordDetail } from "../../_wardsynq/record-detail.js";
@@ -1134,6 +1139,20 @@ export async function onRequest(context) {
         immunization: CAPS.EMR_VITALS, "immunization-error": CAPS.EMR_VITALS, immunizations: CAPS.EMR_VIEW,
         "purchase-orders": CAPS.ORDER_DISPENSE, "purchase-order": CAPS.ORDER_DISPENSE,
         "goods-receive": CAPS.ORDER_DISPENSE,
+        /* Hospital support services (2026-09-16). A diet order is a clinical order, emr.treat, with diet.order
+         * as the dietitian's alternative (SUPPORT_ALT below); reading one is reading the chart. The kitchen's
+         * board and marks are diet.kitchen. CSSD, housekeeping, transport and the mortuary each sit on their
+         * own capability; a theatre case's sets are read with the chart. Inspecting a clean is decided below. */
+        "diet-order": CAPS.EMR_TREAT, "diet-order-stop": CAPS.EMR_TREAT, "diet-order-history": CAPS.EMR_VIEW,
+        "meal-board": CAPS.DIET_KITCHEN, "meal-mark": CAPS.DIET_KITCHEN,
+        "cssd-set": CAPS.CSSD_PROCESS, "cssd-load": CAPS.CSSD_PROCESS, "cssd-load-result": CAPS.CSSD_PROCESS,
+        "cssd-step": CAPS.CSSD_PROCESS, "cssd-board": CAPS.CSSD_PROCESS, "cssd-case-sets": CAPS.EMR_VIEW,
+        "housekeeping-board": CAPS.HOUSEKEEPING_TASK, "housekeeping-task": CAPS.HOUSEKEEPING_TASK,
+        "housekeeping-step": CAPS.HOUSEKEEPING_TASK, "housekeeping-report": CAPS.HOUSEKEEPING_TASK,
+        "ambulance-vehicle": CAPS.TRANSPORT_DISPATCH, "ambulance-trip": CAPS.TRANSPORT_DISPATCH,
+        "ambulance-trip-step": CAPS.TRANSPORT_DISPATCH, "transport-board": CAPS.TRANSPORT_DISPATCH,
+        "mortuary-receive": CAPS.MORTUARY_MANAGE, "mortuary-update": CAPS.MORTUARY_MANAGE,
+        "mortuary-release": CAPS.MORTUARY_MANAGE, "mortuary-board": CAPS.MORTUARY_MANAGE,
         "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
         "approval-decide": CAPS.EMR_TREAT,
         "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, "nurse-worklist": CAPS.EMR_VIEW, mar: CAPS.MED_ADMINISTER,
@@ -1603,6 +1622,8 @@ export async function onRequest(context) {
         // A Subscription is a webhook seen through FHIR: the webhooks' own gate.
         : (sub === "fhir" && parts[2] === "Subscription") ? capFor.webhooks
         : (sub === "discharge-summary" && method === "GET") ? CAPS.EMR_VIEW
+        /* Inspecting or cancelling a housekeeping task is the inspector's authority, never the cleaner's. */
+        : (sub === "housekeeping-step" && (body.step === "inspect" || body.step === "cancel")) ? CAPS.HOUSEKEEPING_INSPECT
         : capFor[sub];
       if (!need) return json({ ok: false, error: "not_found" }, 404, request);
       let wAz = await ORG.authorizeOrg(env, actor, wOrgId, need);
@@ -1682,6 +1703,13 @@ export async function onRequest(context) {
        * request cap (emr.vitals) is a ward one pharmacy does not hold, so "Ask for approval" on the
        * Purchasing screen was always refused. Only for supply subjects; deciding still needs emr.treat. */
       if (!wAz.ok && sub === "approval-request" && (body.subjectType === "PurchaseOrder" || body.subjectType === "StockRequisition")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_DISPENSE);
+      /* Support services: the narrow alternative authorities. A dietitian orders and reads diets without emr.treat;
+       * a CSSD technician reads a case's sets; a housekeeping supervisor (inspect) opens the board, raises a task
+       * and reports turnaround. Each grants only its own record scope in actor.js, so none opens another route. */
+      const SUPPORT_ALT = { "diet-order": [CAPS.DIET_ORDER], "diet-order-stop": [CAPS.DIET_ORDER], "diet-order-history": [CAPS.DIET_ORDER, CAPS.DIET_KITCHEN],
+        "cssd-case-sets": [CAPS.CSSD_PROCESS], "housekeeping-board": [CAPS.HOUSEKEEPING_INSPECT], "housekeeping-task": [CAPS.HOUSEKEEPING_INSPECT],
+        "housekeeping-report": [CAPS.HOUSEKEEPING_INSPECT], "housekeeping-step": body.step === "inspect" || body.step === "cancel" ? [] : [CAPS.HOUSEKEEPING_INSPECT] };
+      for (const alt of (Object.prototype.hasOwnProperty.call(SUPPORT_ALT, sub) ? SUPPORT_ALT[sub] : [])) if (!wAz.ok && wAz.reason === "forbidden") wAz = await ORG.authorizeOrg(env, actor, wOrgId, alt);
       /* P2.17 anchor acknowledgement. The capability gate cannot see hospital ownership, so a
        * StewardMD platform owner who holds no membership in this hospital would be refused here
        * before the route that is allowed to stand in for the owner ever runs. Let only that one
@@ -1808,6 +1836,48 @@ export async function onRequest(context) {
         const r = await listImmunizations(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* ---- hospital support services (diet.js, cssd.js, housekeeping.js, ambulance.js, mortuary.js) ---- */
+      const support = (wsqCfg && wsqCfg.supportServices) || {};
+      const supportOut = (r) => json(r, r.ok ? 200 : (r.status || 502), request);
+      if (sub === "diet-order" && method === "POST") return supportOut(await saveDietOrder(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, order: body.order, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "diet-order-stop" && method === "POST") return supportOut(await stopDietOrder(request, env, { ...deps, encounterId: body.encounterId, reason: body.reason, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "diet-order-history" && method === "GET") return supportOut(await dietOrderHistory(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" }));
+      const mealClock = { mealTimes: support.mealTimes || null, utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes };
+      if (sub === "meal-board" && method === "GET") return supportOut(await mealBoard(request, env, { ...deps, ...mealClock, date: url.searchParams.get("date") || "", meal: url.searchParams.get("meal") || "", ward: url.searchParams.get("ward") || "" }));
+      if (sub === "meal-mark" && method === "POST") return supportOut(await markMeal(request, env, { ...deps, ...mealClock, date: body.date, meal: body.meal, encounterId: body.encounterId, mark: body.mark, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "cssd-set" && method === "POST") return supportOut(await saveInstrumentSet(request, env, { ...deps, set: body.set || {}, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "cssd-load" && method === "POST") return supportOut(await startLoad(request, env, { ...deps, load: body.load || {}, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "cssd-load-result" && method === "POST") return supportOut(await recordLoadResult(request, env, { ...deps, loadId: body.loadId, chemicalIndicator: body.chemicalIndicator, biologicalIndicator: body.biologicalIndicator, releaseWithoutBi: body.releaseWithoutBi === true, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "cssd-step" && method === "POST") return supportOut(await cssdStep(request, env, { ...deps, step: body.step, setId: body.setId, cycleId: body.cycleId, from: body.from, caseId: body.caseId, loadId: body.loadId, expiresAt: body.expiresAt, location: body.location, to: body.to, missing: body.missing, itemsChecked: body.itemsChecked === true, method: body.method, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "cssd-board" && method === "GET") return supportOut(await cssdBoard(request, env, { ...deps }));
+      if (sub === "cssd-case-sets" && method === "GET") return supportOut(await caseSets(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" }));
+      if (sub.indexOf("housekeeping-") === 0) {
+        const canInspect = (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.HOUSEKEEPING_INSPECT)).ok === true;
+        if (sub === "housekeeping-board" && method === "GET") {
+          const r = await housekeepingBoard(request, env, { ...deps, inspectionRequired: support.housekeepingInspection === true });
+          return supportOut({ ...r, canInspect });
+        }
+        if (sub === "housekeeping-task" && method === "POST") return supportOut(await raiseHousekeepingTask(request, env, { ...deps, kind: body.kind, location: body.location, wardId: body.wardId, isolationType: body.isolationType, note: body.note, idempotencyKey: body.idempotencyKey || null }));
+        if (sub === "housekeeping-step" && method === "POST") return supportOut(await housekeepingStep(request, env, { ...deps, taskId: body.taskId, step: body.step, assignee: body.assignee, kind: body.kind, isolationType: body.isolationType, result: body.result, note: body.note, reason: body.reason, canInspect, idempotencyKey: body.idempotencyKey || null }));
+        if (sub === "housekeeping-report" && method === "GET") return supportOut(await housekeepingReport(request, env, { ...deps, days: url.searchParams.get("days") || "" }));
+      }
+      if (sub === "ambulance-vehicle" && method === "POST") return supportOut(await saveVehicle(request, env, { ...deps, vehicle: body.vehicle || {}, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "ambulance-trip" && method === "POST") return supportOut(await requestTrip(request, env, { ...deps, trip: body.trip || {}, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "ambulance-trip-step" && method === "POST") {
+        /* The crew is read against the rota at dispatch; a rota that cannot be read is recorded as unknown, never as off duty. */
+        let onDuty = null;
+        if (body.step === "dispatch") {
+          try { const d = await ROSTER.onDuty(env, wOrgId, "", wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : 330); onDuty = d && d.ok && !d.partial ? (d.onDuty || []).map((x) => x.identity) : null; }
+          catch { onDuty = null; }
+        }
+        return supportOut(await tripStep(request, env, { ...deps, tripId: body.tripId, step: body.step, vehicleId: body.vehicleId, crew: body.crew, onDuty, reason: body.reason, distanceKm: body.distanceKm, idempotencyKey: body.idempotencyKey || null }));
+      }
+      if (sub === "transport-board" && method === "GET") return supportOut(await transportBoard(request, env, { ...deps }));
+      const chambers = Array.isArray(support.mortuaryChambers) ? support.mortuaryChambers : [];
+      if (sub === "mortuary-receive" && method === "POST") return supportOut(await receiveBody(request, env, { ...deps, chambers, patientId: body.patientId, encounterId: body.encounterId, broughtBy: body.broughtBy, identifiedBy: body.identifiedBy, chamber: body.chamber, belongings: body.belongings, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "mortuary-update" && method === "POST") return supportOut(await updateMortuaryCase(request, env, { ...deps, chambers, caseId: body.caseId, chamber: body.chamber, belongings: body.belongings, postMortem: body.postMortem, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "mortuary-release" && method === "POST") return supportOut(await releaseBody(request, env, { ...deps, caseId: body.caseId, release: body.release || {}, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "mortuary-board" && method === "GET") return supportOut(await mortuaryBoard(request, env, { ...deps, chambers }));
       if (sub === "purchase-order" && method === "POST") {
         const r = await raisePurchaseOrder(request, env, { ...deps, vendor: body.vendor, lines: body.lines, note: body.note, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -4661,6 +4731,13 @@ export async function onRequest(context) {
         if (!bedNow || bedNow.orgId !== body.orgId) return json({ ok: false, error: "not_found" }, 404, request);
         // BUG-MU072XAL-4EHO: retiring is how a bed is removed. A bed with a patient in it is not retired out from under them.
         if (body.active === false && bedNow.active && bedNow.state === "occupied") return json({ ok: false, error: "bed_occupied", message: "A patient is in this bed. Transfer or discharge them before retiring it." }, 409, request);
+        /* A hospital that inspects cleans (supportServices.housekeepingInspection) gets a bed back from cleaning only
+         * through a passed housekeeping inspection (housekeeping.js). Any other state change stays the bed board's. */
+        if (bedNow.state === "cleaning" && body.state === "available") {
+          const bedOrg = await ORG.getOrg(env, body.orgId);
+          const ss = bedOrg && bedOrg.wardsynq && bedOrg.wardsynq.supportServices;
+          if (ss && ss.housekeepingInspection === true) return json({ ok: false, error: "housekeeping_inspection_required", message: "This hospital releases a cleaned bed only after the clean is inspected. Finish and inspect it on the Housekeeping screen." }, 409, request);
+        }
         try { return json({ ok: true, bed: await ORG.updateBed(env, body.bedId, body, actor.id) }, 200, request); }
         catch (e) { if (e && e.code === "bed_changed") return json({ ok: false, error: "bed_changed", message: "This bed changed under you - reload it and try again." }, 409, request); throw e; }
       }

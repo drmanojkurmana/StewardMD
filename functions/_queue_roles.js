@@ -75,6 +75,17 @@ export const CAPS = {
   // report, the same separation ONCQIS/PGLOG hold between authoring and sign-off.
   INCIDENT_REPORT: "incident.report",
   INCIDENT_INVESTIGATE: "incident.investigate",
+  // ---- Hospital support services (2026-09-16) ------------------------------------------------
+  // Each service is its own narrow authority so a kitchen, CSSD, housekeeping, transport or mortuary
+  // role holds nothing clinical. Ordering a diet is a clinical order: emr.treat (doctor) or diet.order
+  // (dietitian). Inspecting a cleaned bed is separate from cleaning it, so one person cannot do both.
+  DIET_ORDER: "diet.order",               // order or change a patient's diet (dietitian)
+  DIET_KITCHEN: "diet.kitchen",           // meal-round lists, prepared/delivered marks (kitchen)
+  CSSD_PROCESS: "cssd.process",           // instrument sets through wash, pack, sterilise, store, issue
+  HOUSEKEEPING_TASK: "housekeeping.task", // take, start and finish a cleaning task
+  HOUSEKEEPING_INSPECT: "housekeeping.inspect", // inspect a finished clean and release the bed
+  TRANSPORT_DISPATCH: "transport.dispatch", // ambulance fleet, trip requests, dispatch and times
+  MORTUARY_MANAGE: "mortuary.manage",     // receive, store and release a body
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
@@ -130,7 +141,8 @@ export const ROLE_CAPS = {
            C.ORDER_READ, C.INCIDENT_REPORT],
   // OPD supervisor: full queue control + analytics + READ clinical notes/history. NO EMR treatment.
   supervisor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY,
-               C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT],
+               C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT,
+               C.HOUSEKEEPING_INSPECT],
   // Nurse ("sister"): runs the queue at the desk — add/reorder/assign/status/priority — may record
   // vitals/temperature, and may READ a patient's clinical notes/history (view-only, e.g. from the
   // console). Explicitly NO emr.treat (no orders/prescriptions/edits). This is the owner's core ask.
@@ -243,6 +255,14 @@ export const ROLE_CAPS = {
   // holding INCIDENT_INVESTIGATE via the `admin` role above is that site's own choice, not this
   // role's default. EMR_VIEW so an investigation can read the chart an incident references.
   safety_officer: [C.QUEUE_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT, C.INCIDENT_INVESTIGATE],
+  // Hospital support services (2026-09-16). A dietitian reads the chart (diabetes, renal function)
+  // and orders diets; the kitchen sees only what a tray needs: name, bed, diet and allergies.
+  dietitian: [C.QUEUE_VIEW, C.EMR_VIEW, C.DIET_ORDER, C.DIET_KITCHEN],
+  kitchen: [C.QUEUE_VIEW, C.DIET_KITCHEN],
+  cssd: [C.QUEUE_VIEW, C.CSSD_PROCESS],
+  housekeeping: [C.QUEUE_VIEW, C.HOUSEKEEPING_TASK],
+  transport: [C.QUEUE_VIEW, C.TRANSPORT_DISPATCH],
+  mortuary: [C.QUEUE_VIEW, C.MORTUARY_MANAGE],
   // Default for a recognised-but-unmapped login: read-only.
   viewer: [C.QUEUE_VIEW]
 };
