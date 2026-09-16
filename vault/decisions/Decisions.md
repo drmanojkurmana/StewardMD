@@ -6893,3 +6893,26 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
 - NOT built: own-bridge credentials (A1), production (A2), DPDP confirmation record, WellnessRecord and
   HealthDocumentRecord from the ward record, taxed invoices, the V3 HIU data-push route's per-hospital HIU identity
   on acknowledgement (still the deployment's), and any live sandbox run.
+
+## 2026-09-16 WHO growth tables: shipped with citation; LICENCE NEEDS A LEGAL CHECK before commercial release (branch gap-clinical)
+
+- **Licence (open question, owner/legal).** The task brief called the WHO growth LMS tables public domain. What was
+  actually found: WHO publications are CC BY-NC-SA 3.0 IGO (non-commercial; commercial use and derivatives need
+  WHO's permission, https://www.who.int/about/policies/publishing/copyright), and the tables were taken from WHO's
+  R packages anthro (GPL-3) and anthroplus (GPL >= 3), which name WHO as copyright holder of the data. WardSynQ is
+  sold to hospitals, so whether shipping these tables inside it needs WHO permission is a legal question, not
+  decided here. Shipped for now with full citation, source URLs and the licence text found, in the JSON files and
+  wardsynq/data/WHO-GROWTH-NOTICE.txt. Before commercial release: legal check, and a WHO permission request if needed.
+- **Method.** wardsynq/wardsynq-growth.js follows WHO's own R code (anthro R/z-score-helper.R, z-score-*.R;
+  anthroplus R/zscores.R): restricted |z| > 3 adjustment for weight-for-age, weight-for-length/height and BMI only;
+  day tables with round-half-up, 0.1 cm and month interpolation; 2006 standards below 60 months (days / 30.4375),
+  2007 reference from 60 months; +/-0.7 cm length/height conversion by position. Corrected age for < 37 weeks until
+  24 months chronological; never corrected when gestation is unknown; a corrected age before term is refused.
+- **Computed on the server.** GET /api/queue/ward/growth (emr.view) returns z-scores, centiles and sampled centile
+  lines, so the 0.5 MB of tables sits in the Pages Functions bundle (JSON, compresses to roughly a fifth) and
+  ward.js carries only the drawing code. One engine, tested once, rather than a second copy in the browser.
+- **Gestational age** is taken only from the mother's recorded due date via the FamilyLink of a newborn registered
+  at this hospital (280 days minus due date minus birth date, accepted between 22 and 44 weeks). The antenatal
+  gestationWeeks is not used: it is whatever was typed weeks before delivery.
+- **Only weight is plotted.** WardSynQ records no length, height or head circumference; the screen says so. Adding
+  those measurements (with lying/standing position) is a separate change.

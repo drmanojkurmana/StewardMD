@@ -79,7 +79,7 @@ import {
 } from "../../_wardsynq/migrate-maternity.js";
 import {
   checkWeightBasedRate, checkPaediatricDoseCeiling, checkAgeBand,
-  recordNeonatalObservation, recordLine, removeLine, listLines,
+  recordNeonatalObservation, recordLine, removeLine, listLines, growthChart,
 } from "../../_wardsynq/migrate-pediatrics.js";
 import {
   linkOncologyPlan, getOncologyLink, recordOncologyDiagnosis,
@@ -1288,6 +1288,8 @@ export async function onRequest(context) {
          * migrate-surgery.js's ImplantRecord already uses - emr.treat. */
         "weight-rate": CAPS.EMR_VIEW, "dose-ceiling": CAPS.EMR_VIEW, "age-band": CAPS.EMR_VIEW,
         neonatal: CAPS.EMR_VITALS, line: CAPS.EMR_TREAT, "line-remove": CAPS.EMR_TREAT, "line-list": CAPS.EMR_VIEW,
+        /* WHO growth centiles: recorded weights read against a reference, persists nothing - emr.view. */
+        growth: CAPS.EMR_VIEW,
         /* The ONCqis bridge (Task 2.6). Linking a plan, recording the oncology diagnosis, an
          * adverse event or a chemo administration are all clinical commitments - emr.treat, the
          * same authority every other cross-module link in this file already needs. Reading any of
@@ -2279,6 +2281,10 @@ export async function onRequest(context) {
       }
       if (sub === "line-remove" && method === "POST") {
         const r = await removeLine(request, env, { ...deps, lineId: body.lineId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "growth" && method === "GET") {
+        const r = await growthChart(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "line-list" && method === "GET") {

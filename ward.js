@@ -2477,7 +2477,7 @@
 
     return header +
       criticalsCard(state) + (isEd ? (triageCard(state) + edTopCards) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
-      (isPediatric ? ageBandCard(state) : "") +
+      (isPediatric ? ageBandCard(state) + growthCard(state) : "") +
       problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
       (isIcu ? icuTrendsCard(state) + icuScoresCard(state) + icuAbgCard(state) + icuVentCard(state) + icuSedationCard(state) + icuPressorCard(state) + icuRoundCard(state) : "") +
       fluidCard(state) +
@@ -3374,6 +3374,88 @@
         : "") +
       (state.rateResult ? '<p class="w-hint' + (state.rateResult.weightWarning ? " warn" : "") + '">' + esc(state.rateResult.ratePerHour == null ? state.rateResult.reason : wT("ward.ml-h2", "{workings} = {ratePerHour} mL/h", { workings: state.rateResult.workings, ratePerHour: state.rateResult.ratePerHour })) + "</p>" : "") +
       "</div></div>";
+  }
+
+  /* GROWTH. Every z-score, centile and corrected age is the server's (wardsynq/wardsynq-growth.js, WHO's own
+   * method); this card only draws them. Weight is the one growth measurement WardSynQ records, so length, height
+   * and head circumference are named as not recorded rather than drawn as empty charts. A refused measurement
+   * shows why, never a number. The table below the chart is the accessible reading of it. */
+  function growthAge(days) {
+    if (days == null) return "";
+    if (days < 61) return wT("ward.growth-age-days", "{n} days", { n: days });
+    if (days < 731) return wT("ward.growth-age-months", "{n} months", { n: Math.round(days / 30.4375 * 10) / 10 });
+    return wT("ward.growth-age-years", "{n} years", { n: Math.round(days / 365.25 * 10) / 10 });
+  }
+  function growthRefusal(r) {
+    var why = {
+      SEX_UNKNOWN: wT("ward.growth-why-sex", "Sex is not recorded as male or female"),
+      DOB_APPROXIMATE: wT("ward.growth-why-dob", "The date of birth is approximate"),
+      AGE_UNKNOWN: wT("ward.growth-why-age", "The age at this measurement is not known"),
+      UNIT_UNKNOWN: wT("ward.growth-why-unit", "The weight's unit is not kg or lb"),
+      BEFORE_TERM: wT("ward.growth-why-before-term", "Corrected age is before term; WHO standards start at a term birth"),
+      OUT_OF_RANGE: wT("ward.growth-why-range", "Outside the WHO reference"),
+      VALUE_INVALID: wT("ward.growth-why-value", "Not a usable measurement")
+    }[r && r.code];
+    return esc(why || (r && r.reason));
+  }
+  function growthChartSvg(g) {
+    var pts = g.measurements.filter(function (m) { return m.result && m.result.ok; });
+    if (!pts.length || !g.lines.length) return "";
+    var W = 600, H = 260, L = 44, B = 28, xs = [], ys = [];
+    g.lines.forEach(function (l) { l.points.forEach(function (p) { xs.push(p[0]); ys.push(p[1]); }); });
+    pts.forEach(function (m) { xs.push(m.plotDays); ys.push(m.valueKg); });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.floor(Math.min.apply(null, ys)), y1 = Math.ceil(Math.max.apply(null, ys));
+    if (x1 === x0) x1 = x0 + 1; if (y1 === y0) y1 = y0 + 1;
+    var X = function (d) { return (L + (d - x0) / (x1 - x0) * (W - L - 30)).toFixed(1); };
+    var Y = function (v) { return (H - B - (v - y0) / (y1 - y0) * (H - B - 10)).toFixed(1); };
+    var lines = g.lines.map(function (l) {
+      if (!l.points.length) return "";
+      var last = l.points[l.points.length - 1];
+      return '<polyline fill="none" stroke="currentColor" stroke-opacity="' + (l.centile === 50 ? "0.7" : "0.3") + '" stroke-width="' + (l.centile === 50 ? 2 : 1) + '" points="' + l.points.map(function (p) { return X(p[0]) + "," + Y(p[1]); }).join(" ") + '"/>' +
+        '<text font-size="11" fill="currentColor" x="' + (Number(X(last[0])) + 4) + '" y="' + (Number(Y(last[1])) + 4) + '">' + esc(l.centile) + "</text>";
+    }).join("");
+    var dots = pts.map(function (m) {
+      return '<circle r="4" fill="currentColor" cx="' + X(m.plotDays) + '" cy="' + Y(m.valueKg) + '"><title>' + esc(when(m.at)) + ": " + esc(m.valueKg) + " " + wTH("ward.growth-kg", "kg") + "</title></circle>";
+    }).join("");
+    var axes = '<line x1="' + L + '" y1="' + (H - B) + '" x2="' + (W - 30) + '" y2="' + (H - B) + '" stroke="currentColor" stroke-opacity="0.3"/>' +
+      '<line x1="' + L + '" y1="10" x2="' + L + '" y2="' + (H - B) + '" stroke="currentColor" stroke-opacity="0.3"/>' +
+      '<text font-size="11" fill="currentColor" x="' + L + '" y="' + (H - 8) + '">' + esc(growthAge(Math.round(x0))) + "</text>" +
+      '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (W - 30) + '" y="' + (H - 8) + '">' + esc(growthAge(Math.round(x1))) + "</text>" +
+      '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (L - 4) + '" y="' + (H - B) + '">' + esc(y0) + "</text>" +
+      '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (L - 4) + '" y="18">' + esc(y1) + " " + wTH("ward.growth-kg", "kg") + "</text>";
+    return '<div style="overflow-x:auto"><svg width="100%" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' +
+      wTA("ward.growth-chart-label", "Weight for age against WHO centiles 3, 15, 50, 85 and 97. The table below lists every value.") + '">' + axes + lines + dots + "</svg></div>";
+  }
+  function growthCard(state) {
+    var g = state.growth;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("monitoring") + "<h3>" + wTH("ward.growth-title", "Growth (WHO centiles)") + "</h3>" +
+      "<button class=\"w-ic\" data-w-act=\"growthload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>";
+    if (g === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.growth-failed", "Growth could not be loaded. Do not read this as no measurements recorded.", null, "", 1) + "</p></div>";
+    if (g == null) return head + "<p class=\"w-empty\">" + wTH("ward.growth-loading", "Loading growth...") + "</p></div>";
+    if (g.off) return head + "<p class=\"w-empty\">" + wTH("ward.growth-off", "The clinical record is not switched on for this hospital, so there are no measurements to chart.") + "</p></div>";
+    var warn = function (html) { return '<p class="w-hint warn">' + ms("warning") + html + "</p>"; };
+    var gd = g.gestationDays;
+    var rows = g.measurements.map(function (m) {
+      var r = m.result || {};
+      var c = r.ok ? (r.centile >= 99.9 ? "&gt;99.9" : r.centile <= 0.1 ? "&lt;0.1" : esc(r.centile)) : "";
+      return "<tr><td>" + esc(when(m.at)) + "</td><td>" + (m.valueKg == null ? "" : esc(m.valueKg)) + "</td><td>" + esc(growthAge(m.chronologicalDays)) + "</td><td>" +
+        (m.corrected ? esc(growthAge(m.plotDays)) : "") + "</td>" +
+        (r.ok ? "<td>" + esc(r.z) + "</td><td>" + c + (r.implausible ? " " + wTH("ward.growth-implausible", "(check the measurement)") : "") + "</td>"
+          : '<td colspan="2">' + growthRefusal(r) + "</td>") + "</tr>";
+    }).join("");
+    return head +
+      (!g.sex ? warn(wTH("ward.growth-no-sex", "Sex is not recorded as male or female, so no WHO centile can be chosen.")) : "") +
+      (g.approxDob ? warn(wTH("ward.growth-approx-dob", "The date of birth was estimated from a stated age, so no centile is worked out.")) : "") +
+      '<p class="w-hint">' + ms("info") + (gd == null
+        ? wTH("ward.growth-ga-unknown", "Gestational age at birth is not recorded, so no age is corrected for prematurity.")
+        : wTH("ward.growth-ga", "Gestational age at birth {w}+{d} weeks, from the mother's recorded due date.", { w: Math.floor(gd / 7), d: gd % 7 }) +
+          (gd < 259 ? " " + wTH("ward.growth-corrected-rule", "Born before 37 weeks: plotted at corrected age (age minus the weeks born early) until 24 months of age.") : "")) + "</p>" +
+      (g.measurements.length ? growthChartSvg(g) +
+        '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.growth-when", "When") + "</th><th>" + wTH("ward.growth-weight-kg", "Weight (kg)") + "</th><th>" +
+        wTH("ward.growth-age", "Age") + "</th><th>" + wTH("ward.growth-corrected-age", "Corrected age") + "</th><th>" + wTH("ward.growth-z", "z-score") + "</th><th>" + wTH("ward.growth-centile", "Centile") + "</th></tr></thead><tbody>" + rows + "</tbody></table></div>"
+        : "<p class=\"w-empty\">" + wTH("ward.growth-no-weights", "No weights recorded. Weights charted with the vitals appear here.") + "</p>") +
+      '<p class="w-hint">' + ms("info") + wTH("ward.growth-not-recorded", "Length, height and head circumference are not recorded in WardSynQ, so only weight for age is charted.") + "</p>" +
+      '<p class="w-dt-times">' + wTH("ward.growth-source", "WHO Child Growth Standards (2006) under 5 years; WHO growth reference (2007) from 5 years. Not clinically validated in this build.") + "</p></div>";
   }
 
   /* LINES. A placement log, mirroring surgery's implant card exactly - site, type, when, by. */
@@ -9296,6 +9378,12 @@
       .then(function (r) { if (st.sel !== s) return; st.lines = (r && r.ok) ? (r.lines || []) : false; paint(); })
       .catch(function () { if (st.sel !== s) return; st.lines = false; paint(); });
   }
+  function loadGrowth() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/growth?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (st.sel !== s) return; st.growth = r && r.ok ? (r.growth || (r.skipped ? { off: true } : false)) : false; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.growth = false; paint(); });
+  }
   function lineSave() {
     var s = st.sel; if (!s) return;
     var type = val("wLineType"), site = val("wLineSite");
@@ -13419,7 +13507,7 @@
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadPathology();
       if (p.class === "ICU") { loadDevices(); loadIcu(); loadResus(); }
       if (p.class === "MATERNITY") loadMaternity();
-      if (p.class === "PEDIATRICS" || p.class === "NICU") loadAgeBand();
+      if (p.class === "PEDIATRICS" || p.class === "NICU") { st.growth = null; loadAgeBand(); loadGrowth(); }
       if (p.class === "NICU") loadLines();
       return;
     }
@@ -13585,6 +13673,7 @@
     if (cmd === "ratecalc") { rateCalc(); return; }
     if (cmd === "neonatalchart") { neonatalChart(); return; }
     if (cmd === "linesload") { loadLines(); return; }
+    if (cmd === "growthload") { st.growth = null; paint(); loadGrowth(); return; }
     if (cmd === "linesave") { lineSave(); return; }
     if (cmd === "lineremove") { lineRemove(arg); return; }
     if (cmd === "oncologyopen") { oncologyOpen(); return; }

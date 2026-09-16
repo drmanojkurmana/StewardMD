@@ -242,3 +242,82 @@ test("a NICU patient exports its Encounter as FHIR-CONFORMANT (class IMP), and a
   assert.equal(metrics.__status, 200, JSON.stringify(metrics));
   assert.equal(metrics.metrics.patients, 1);
 });
+
+/* GROWTH (WHO centiles), GET /api/queue/ward/growth. The engine's own numbers are pinned in
+ * test/wardsynq-growth.test.mjs; these pin the route: what it reads, the gestational age it finds, the
+ * refusals it returns instead of numbers, and who may call it. */
+async function pretermNewborn() {
+  const momReg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Growth Mother Testcase", mobile: "9876500310", gender: "female", ageYears: 30 });
+  const momAdm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: momReg.mrn, ward: "Labour Ward", bed: "2", class: "MATERNITY", admittedAt: "2026-06-30T06:00:00.000Z" });
+  // Due 2026-08-26, delivered 2026-07-01: 56 days early, so 280 - 56 = 224 days = 32+0 weeks.
+  await as(DOCTOR, "/ward/pregnancy", "POST", { orgId: ORG, patientId: momAdm.patientId, pregnancy: { gravida: 1, para: 0, edd: "2026-08-26", gestationWeeks: 31 } });
+  await as(DOCTOR, "/ward/delivery", "POST", { orgId: ORG, patientId: momAdm.patientId, encounterId: momAdm.encounterId, delivery: { mode: "caesarean", deliveredAt: "2026-07-01T10:00:00.000Z" } });
+  const newborn = await as(DOCTOR, "/ward/newborn", "POST", { orgId: ORG, motherPatientId: momAdm.patientId, encounterId: momAdm.encounterId, sex: "male", name: "Growth Baby Testcase" });
+  const baby = await RECORD.latest(TENANT_ROW.id, "Patient", newborn.newbornId);
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: baby.mrn, ward: "NICU", bed: "Cot 7", class: "NICU", admittedAt: "2026-07-01T11:00:00.000Z" });
+  assert.equal(adm.__status, 200, JSON.stringify(adm));
+  return adm;
+}
+
+test("GROWTH: a preterm newborn's weights are plotted at corrected age from the mother's due date, and a weight before term is refused, not plotted", async () => {
+  seedHospital();
+  const adm = await pretermNewborn();
+  const w1 = await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { weight: "1.6", weightUnit: "kg" }, recordedAt: "2026-07-15T06:00:00.000Z" });
+  assert.equal(w1.__status, 200, JSON.stringify(w1));
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { weight: "3.5", weightUnit: "kg" }, recordedAt: "2026-09-09T06:00:00.000Z" });
+
+  const g = await as(DOCTOR, `/ward/growth?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(g.__status, 200, JSON.stringify(g));
+  assert.equal(g.growth.sex, "male");
+  assert.equal(g.growth.gestationDays, 224, "32+0 weeks from the recorded due date, not the antenatal 31 weeks typed earlier");
+  assert.equal(g.growth.measurements.length, 2);
+  const [early, later] = g.growth.measurements;
+  assert.equal(early.chronologicalDays, 14);
+  assert.equal(early.result.ok, false); assert.equal(early.result.code, "BEFORE_TERM"); assert.equal(early.result.z, undefined);
+  assert.equal(later.chronologicalDays, 70); assert.equal(later.corrected, true); assert.equal(later.plotDays, 14);
+  assert.equal(later.result.ok, true); assert.equal(later.result.reference, "who2006");
+  assert.equal(typeof later.result.z, "number"); assert.ok(later.result.centile > 0 && later.result.centile < 100);
+  assert.deepEqual(g.growth.lines.map((l) => l.centile), [3, 15, 50, 85, 97]);
+  assert.match(g.growth.references.who2006.licence, /CC BY-NC-SA 3\.0 IGO/);
+});
+
+test("GROWTH: an approximate date of birth, a sex other than male or female, and no weights are each stated, never turned into a centile", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Growth Approx Testcase", mobile: "9876500311", gender: "female", ageYears: 3 });
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Paediatrics", bed: "4", class: "PEDIATRICS" });
+  const empty = await as(DOCTOR, `/ward/growth?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(empty.__status, 200, JSON.stringify(empty));
+  assert.deepEqual(empty.growth.measurements, []); assert.deepEqual(empty.growth.lines, []);
+  assert.equal(empty.growth.gestationDays, null); assert.equal(empty.growth.gestationReason, "not_registered_at_birth_here");
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { weight: "14" } });
+  const approx = await as(DOCTOR, `/ward/growth?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(approx.growth.approxDob, true);
+  assert.equal(approx.growth.measurements[0].result.code, "DOB_APPROXIMATE"); assert.equal(approx.growth.measurements[0].result.z, undefined);
+
+  const reg2 = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Growth Other Testcase", mobile: "9876500312", gender: "other", birthDate: "2024-03-01" });
+  const adm2 = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg2.mrn, ward: "Paediatrics", bed: "5", class: "PEDIATRICS" });
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm2.encounterId, patientId: adm2.patientId, vitals: { weight: "12" } });
+  const other = await as(DOCTOR, `/ward/growth?orgId=${ORG}&patientId=${adm2.patientId}`);
+  assert.equal(other.growth.sex, null);
+  assert.equal(other.growth.measurements[0].result.code, "SEX_UNKNOWN");
+});
+
+test("GROWTH negative authorization: no session 401, pharmacy (no emr.view) 403, another hospital's staff 403, and the route writes nothing", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Growth Auth Testcase", mobile: "9876500313", gender: "male", birthDate: "2025-01-10" });
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Paediatrics", bed: "6", class: "PEDIATRICS" });
+  const STRANGER = "stranger@example.test";
+  docs.set(`q_orgs/org-other`, { fields: { id: "org-other", code: "SMD-OTHER1", name: "Other Hospital", kind: "clinic", mode: "wardsynq", connectTenantId: "tenant-other", ownerUid: "cfa:nobody", createdAt: 1, wardsynq: {} }, updateTime: "t1" });
+  docs.set(`q_members/org-other__${sanitize(idFor(STRANGER))}`, { fields: { orgId: "org-other", identity: idFor(STRANGER), role: "doctor", active: true }, updateTime: "t1" });
+  const path = `/ward/growth?orgId=${ORG}&patientId=${adm.patientId}`;
+  const before = JSON.stringify([...docs.keys()].sort());
+
+  const res = await onRequest({ request: new Request("https://x/api/queue" + path), env: ENV });
+  assert.equal(res.status, 401);
+  assert.equal((await as(PHARM, path)).__status, 403);
+  assert.equal((await as(STRANGER, path)).__status, 403);
+  assert.equal(JSON.stringify([...docs.keys()].sort()), before, "a read route writes nothing");
+  const ok = await as(DOCTOR, path);
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.growth.sex, "male");
+});

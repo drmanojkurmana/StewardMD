@@ -62,6 +62,14 @@ try {
   ok(await waitFor(`return document.body.textContent.indexOf('neonate') >= 0;`), "the REAL wardsynq-paediatrics.js banding is shown, not a client-side guess");
   ok(await ev(`return document.body.textContent.indexOf('gestational age') >= 0;`), "a neonate with no gestational age states the refusal reason plainly");
 
+  // ---- 2b. Growth (WHO centiles): a failed read is stated, a refresh draws the chart and its table. ----
+  ok(await waitFor(`return document.body.textContent.indexOf('Growth could not be loaded') >= 0;`, 150), "a failed growth read says so, it does not look like no measurements");
+  await ev(`window.__growthFail = false; return true;`); await click('[data-w-act="growthload"]');
+  ok(await waitFor(`return !!document.querySelector('svg[aria-label^="Weight for age against WHO centiles"] circle');`), "the growth chart draws the plotted weight against the centile lines");
+  ok(await ev(`return document.querySelectorAll('svg[aria-label^="Weight for age"] polyline').length === 5;`), "five WHO centile lines are drawn");
+  ok(await ev(`var t = document.body.textContent; return t.indexOf('-0.84') >= 0 && t.indexOf('20.1') >= 0 && t.indexOf('Corrected age is before term') >= 0;`), "the table lists the z-score and centile, and the refused weight shows why instead of a number");
+  ok(await ev(`var t = document.body.textContent; return t.indexOf('32+0 weeks') >= 0 && t.indexOf('Born before 37 weeks') >= 0 && t.indexOf('head circumference are not recorded') >= 0;`), "the gestation, the correction rule and what is not recorded are stated on screen");
+
   // ---- 3. Weight-based rate calculator: a real calculation, persists nothing. --------------------
   await fill("wRateDose", "5"); await fill("wRateConc", "4"); await fill("wAgeWeight", "3.2");
   await click('[data-w-act="ratecalc"]');
