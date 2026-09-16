@@ -1,15 +1,20 @@
 {
   "name": "@stewardmd/capacitor-vision-ocr",
   "version": "1.0.0",
-  "description": "On-device text recognition via Apple Vision (VNRecognizeTextRequest). The image never leaves the device — only recognized text is returned. iOS-only.",
+  "description": "On-device text recognition via Apple Vision (VNRecognizeTextRequest) on iOS. On Android, readDigits() only, via the on-device DigitReader TFLite model (CRNN-CTC). The image never leaves the device.",
   "capacitor": {
     "ios": {
       "src": "ios"
+    },
+    "android": {
+      "src": "android"
     }
   },
   "files": [
     "ios/Sources",
     "Package.swift",
+    "android/src/main",
+    "android/build.gradle",
     "package.json"
   ],
   "author": "StewardMD",

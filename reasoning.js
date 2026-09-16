@@ -4061,7 +4061,9 @@
         img.onload = function () {
           try {
             var sx = region.x * img.naturalWidth, sy = region.y * img.naturalHeight, sw = region.w * img.naturalWidth, sh = region.h * img.naturalHeight;
-            var ow = Math.max(1, Math.round(sw * region.scale)), oh = Math.max(1, Math.round(sh * region.scale));
+            // maxLong: cap the output's long edge (AI Vision crop), never enlarging
+            var sc = region.maxLong ? Math.min(region.scale || 1, region.maxLong / Math.max(1, sw, sh)) : region.scale;
+            var ow = Math.max(1, Math.round(sw * sc)), oh = Math.max(1, Math.round(sh * sc));
             var cv = document.createElement("canvas"); cv.width = ow; cv.height = oh;
             var ctx = cv.getContext("2d"); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
             ctx.drawImage(img, sx, sy, sw, sh, 0, 0, ow, oh);
@@ -4542,6 +4544,8 @@
           return r.json();
         }).catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
+    // Crop of the original capture (normalized region, optional scale / maxLong) as a JPEG data URL, or null.
+    cropImage: function (dataUrl, region) { return smdCropDataUrl(dataUrl, region); },
     // Private Device OCR — device only, NEVER uploads. Native OCR (Apple Vision / ML Kit
     // bridge) → on-device field parse (labels + reading order preserved) + recognized lines
     // for tap-to-fill. Resolves { mode, fields, lines, source } | { error }.
@@ -4600,9 +4604,41 @@
             });
           });
         }).then(function (ctx) {
+          // on-device vital-tile detector (Core ML): associates values whose label Vision could not read;
+          // unavailable on older builds / Android, where the parser behaves exactly as before
+          var dv = window.SMD_NATIVE.detectVitals ? window.SMD_NATIVE.detectVitals(dataUrl) : Promise.resolve({ available: false, detections: [] });
+          return dv.then(function (r) { ctx.detections = r && r.available ? r.detections : null; return ctx; }, function () { return ctx; });
+        }).then(function (ctx) {
+          // tile reads: a detected tile with no digits read gets two crops of its own; read A unions (values enter
+          // unconfirmed), read B can only confirm identical digits. Sequential, at most 4 tiles.
+          var tiles = []; try { tiles = ctx.detections && ctx.imageSize && ctx.crop && !ctx.crop.error ? V2.tileRegions(ctx.obs, ctx.detections, ctx.imageSize) : []; } catch (e) {}
+          function readCrop(reg) {
+            return smdCropDataUrl(dataUrl, reg).then(function (u) {
+              return u ? window.SMD_NATIVE.ocr(u, { languageCorrection: false }).then(function (co) { return V2.tileObservations(V2.mapCropObservations(((co && co.boxes) || []).map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h }; }), reg), reg); }) : null;
+            }).catch(function () { return null; });
+          }
+          return tiles.reduce(function (p, t) {
+            return p.then(function () {
+              return readCrop(t).then(function (a) {
+                if (!a) return;
+                ctx.obs = V2.mergeObservations(ctx.obs, a);
+                return readCrop(assign2(t, { scale: t.scaleB })).then(function (b) { if (b) ctx.obs = V2.applyConfirmation(ctx.obs, b); });
+              });
+            });
+          }, Promise.resolve()).then(function () { ctx.tiles = tiles.length; return ctx; });
+        }).then(function (ctx) {
+          // on-device digit reader: an independent second reader may confirm Vision's digits or flag a conflict,
+          // never add a value (applyDigitReads)
+          if (!window.SMD_NATIVE.readDigits) return ctx;
+          var dboxes = []; try { dboxes = V2.digitReadBoxes(ctx.obs); } catch (e) {}
+          return window.SMD_NATIVE.readDigits(dataUrl, dboxes).then(function (r) {
+            if (r && r.available && r.reads.length) { try { ctx.obs = V2.applyDigitReads(ctx.obs, r.reads); ctx.digitReads = r.reads.length; } catch (e) {} }
+            return ctx;
+          }, function () { return ctx; });
+        }).then(function (ctx) {
           var px = ctx.px, obsM = ctx.obs;
           var relaxed = false; try { relaxed = localStorage.getItem("smd_icu_unlabeled_auto") === "1"; } catch (e) {}
-          var res = V2.parseMonitor(obsM, { px: px, imageSize: ctx.imageSize, twoScale: { ran: !!(ctx.crop && !ctx.crop.error) }, unlabeledAuto: relaxed });
+          var res = V2.parseMonitor(obsM, { px: px, imageSize: ctx.imageSize, twoScale: { ran: !!(ctx.crop && !ctx.crop.error) }, unlabeledAuto: relaxed, detections: ctx.detections || undefined });
           boxes = obsM;   // evidence and overlay refer to the merged observation list
           var vitals = {}; Object.keys(res.values).forEach(function (k) { if (typeof res.values[k] === "number") vitals[k] = res.values[k]; });
           var fields;
