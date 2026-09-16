@@ -1256,7 +1256,7 @@
     var title = "<h2>" + c.esc(T(c, "site.admin.gst.title", "GST settings")) + "</h2>";
     host.innerHTML = '<div class="card">' + title + '<span class="spin"></span></div>';
     return c.api("/org/gst-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
-      if (!r || !r.ok) { host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.gst.loadFailed", "The GST settings could not be loaded. Do not read this as the defaults.")) + "</div></div>"; return; }
+      if (!r || !r.ok || !r.settings) { host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.gst.loadFailed", "The GST settings could not be loaded. Do not read this as the defaults.")) + "</div></div>"; return; }
       var s = r.settings, ca = T(c, "site.admin.gst.confirmCa", "Confirm with your chartered accountant.");
       var note = function (why) { return '<p class="quiet"><b>' + c.esc(ca) + "</b> " + c.esc(why) + "</p>"; };
       host.innerHTML = '<div class="card">' + title +

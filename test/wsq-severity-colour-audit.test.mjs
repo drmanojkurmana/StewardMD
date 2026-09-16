@@ -76,6 +76,8 @@ const ALLOWLIST = [
   { file: "ward.js", hex: "b91c1c", snippet: 'var COLOR = { accepted: "currentColor", warning: "#b45309", rejected: "#b91c1c"', reason: "a rejected QC run point: patient results for that test are blocked until corrective action." },
   { file: "ward.js", hex: "b91c1c", snippet: 'stroke = a === 3 ? "#b91c1c"', reason: "the +/-3 SD rejection limit line on the Levey-Jennings chart." },
   { file: "ward.js", hex: "b45309", snippet: 'a === 2 ? "#b45309"', reason: "the +/-2 SD warning limit line on the Levey-Jennings chart." },
+  // --- blood unit label colour code (blood centre rules): group A labels are yellow by rule, not a severity signal.
+  { file: "wardsynq/site/pages/bloodbank.js", hex: "f3c300", snippet: 'yellow: "#f3c300"', reason: "blood group A unit label colour required by the blood centre labelling rules (O blue, A yellow, B pink, AB white)." },
   // --- not a colour: the HTML entity &#9744; (ballot box) in the package document checklist matches the hex pattern.
   { file: "ward.js", hex: "9744", snippet: "<li>&#9744; ", reason: "HTML entity for an empty checkbox in the package document pack, not a colour." },
 ];
