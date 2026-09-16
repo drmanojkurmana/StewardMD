@@ -4465,12 +4465,6 @@
         '<button class="maik-hd-btn" id="maikNew" type="button" title="New conversation" aria-label="New conversation">' + MK.new + '</button>' +
         '<button class="maik-hd-btn" id="maikClose" type="button" title="Close" aria-label="Close assistant">' + MK.close + '</button>' +
       '</div></div></div>' +
-      // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
-      // own weights, with no StewardMD sources, is simply untrue.
-      '<div class="maik-disc">' + MK.shield + '<span>' +
-        ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.discLabel) ? SMD_MAIK_ENGINE.discLabel()
-                                                               : "Grounded &middot; AI-generated, verify independently") +
-      '</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
       // ── Conversation sidebar (slide-in). History is stored ON-DEVICE only (privacy). ──
       '<div class="maik-side-wrap" id="maikSideWrap" hidden>' +
@@ -4499,6 +4493,12 @@
           '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '</button>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
+      // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
+      // own weights, with no StewardMD sources, is simply untrue.
+      '<div class="maik-disc">' + MK.shield + '<span>' +
+        ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.discLabel) ? SMD_MAIK_ENGINE.discLabel()
+                                                               : "Grounded &middot; AI-generated, verify independently") +
+      '</span></div>' +
       '</div>';
   }
   // ── MaiK "Aurora" styles: IMPLEMENTATION.md §1 verbatim, then a support block (retokenized to

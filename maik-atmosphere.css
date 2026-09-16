@@ -4,16 +4,33 @@ html body:not(.dark):not(.v3-dark) #maikSheet.mk-atmosphere { --mk-bg:#fff; back
 #maikSheet .mk-atmo { position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse at 0 0,#046a3820,transparent 55%),radial-gradient(ellipse at 100% 0,#ed670a24,transparent 55%); }
 #maikSheet .mk-atmo-dark { background:radial-gradient(ellipse at 0 0,#ff671f30,transparent 55%),radial-gradient(ellipse at 100% 0,#06038d70,transparent 55%); }
 #maikSheet .mk-atmo canvas { position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transition:opacity .5s ease; }
-#maikSheet .mk-atmo-aurora { opacity:.78; }
+#maikSheet .mk-atmo-aurora { opacity:.42; }
 #maikSheet .mk-atmo-code { opacity:0; }
 #maikSheet .mk-atmo-thinking { background:none; }
 #maikSheet .mk-atmo-thinking .mk-atmo-aurora { opacity:0; }
 #maikSheet .mk-atmo-thinking .mk-atmo-code { opacity:.24; }
 #maikSheet .mk-atmo-dark.mk-atmo-thinking .mk-atmo-code { opacity:.42; }
-#maikSheet .mk-atmo-veil { position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--mk-bg) 82%); }
+#maikSheet .mk-atmo-veil { position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,var(--mk-bg) 72%); }
 #maikSheet .mk-atmo-thinking .mk-atmo-veil { background:radial-gradient(ellipse at center,var(--mk-bg),transparent 90%),linear-gradient(0deg,var(--mk-bg),transparent 25%); }
 #maikSheet.mk-atmosphere>.maik-grab,#maikSheet.mk-atmosphere>.maik-hd,#maikSheet.mk-atmosphere>.maik-disc,#maikSheet.mk-atmosphere>.maik-body,#maikSheet.mk-atmosphere>.maik-cmp { position:relative;z-index:1; }
 html body #maikSheet.mk-atmosphere .maik-hd { background:transparent; }
 html body #maikSheet.mk-atmosphere .maik-disc { background:var(--mk-bg); }
 html body #maikSheet.mk-atmosphere .maik-b.ai { background:var(--mk-bg);background:color-mix(in srgb,var(--mk-bg) 95%,transparent); }
 @media(prefers-reduced-motion:reduce){#maikSheet .mk-atmo canvas{transition:none}}
+
+/* One continuous canvas, with readable frosted surfaces floating above it. */
+html body #maikSheet.mk-atmosphere { --mk-glass:rgba(255,255,255,.64);--mk-glass-edge:rgba(255,255,255,.8);--mk-glass-shadow:0 8px 28px rgba(25,55,65,.045),inset 0 1px 0 rgba(255,255,255,.75); }
+html body.dark #maikSheet.mk-atmosphere,html body.v3-dark #maikSheet.mk-atmosphere { --mk-glass:rgba(27,33,42,.68);--mk-glass-edge:rgba(255,255,255,.12);--mk-glass-shadow:0 8px 28px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.06); }
+html body #maikSheet.mk-atmosphere .maik-body,html body #maikSheet.mk-atmosphere .maik-cmp { background:transparent; }
+html body #maikSheet.mk-atmosphere .maik-b.ai,html body #maikSheet.mk-atmosphere .maik-b.you,html body #maikSheet.mk-atmosphere .maik-cmp-in { background:var(--mk-glass);border:1px solid var(--mk-glass-edge);box-shadow:var(--mk-glass-shadow);-webkit-backdrop-filter:blur(22px) saturate(125%);backdrop-filter:blur(22px) saturate(125%);border-radius:24px; }
+html body #maikSheet.mk-atmosphere .maik-b.ai { padding:18px; }
+html body #maikSheet.mk-atmosphere .maik-b.you { border-bottom-right-radius:8px; }
+html body #maikSheet.mk-atmosphere .maik-cmp { padding-bottom:max(6px,env(safe-area-inset-bottom)); }
+html body #maikSheet.mk-atmosphere .maik-disc { justify-content:center;gap:5px;padding:8px 4px 0;background:transparent;border:0; }
+html body #maikSheet.mk-atmosphere .maik-disc span { font-size:10px;line-height:1.4;text-align:center; }
+html body #maikSheet.mk-atmosphere .maik-disc svg { width:12px;height:12px; }
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) { html body #maikSheet.mk-atmosphere .maik-b,html body #maikSheet.mk-atmosphere .maik-cmp-in { background:var(--mk-bg); } }
+@media(prefers-reduced-transparency:reduce) { html body #maikSheet.mk-atmosphere .maik-b,html body #maikSheet.mk-atmosphere .maik-cmp-in { background:var(--mk-bg);backdrop-filter:none;-webkit-backdrop-filter:none; } }
+/* Theme changes also affect logos rendered before the switch. */
+html body.dark #maikSheet :is(.maik-logo,.maik-side-logo,.maik-hero-logo img,.maik-wm),html body.v3-dark #maikSheet :is(.maik-logo,.maik-side-logo,.maik-hero-logo img,.maik-wm) { filter:brightness(0) invert(1); }
+html body:not(.dark):not(.v3-dark) #maikSheet :is(.maik-logo,.maik-side-logo,.maik-hero-logo img,.maik-wm) { filter:brightness(0); }
