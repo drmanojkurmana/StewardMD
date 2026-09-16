@@ -1,18 +1,18 @@
 {
   "guideline": "hcc",
   "title": "Hepatocellular Carcinoma",
-  "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "2.0.0",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
   "diseaseId": "hcc_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "ONCOTREE navigator DRAFT for hepatocellular carcinoma. Full pathway: workup -> diagnostic confirmation -> Child-Pugh + performance status -> BCLC stage -> stage-directed arms, each refined by response / line of therapy before a recommendation. Curative arms (resection / ablation / transplant / downstaging) route through a pathology-risk or response-adapted step into surveillance. Intermediate arms (TACE / Y90) route through a response / refractoriness step. Advanced disease routes through a first-line -> on-progression -> second-line -> on-progression -> later-line spine. The one leaf with a matching StewardMD dose protocol (sorafenib) references it; every other modality and agent is shown as checklist guidance with NO dose. Workup / staging / surveillance wording is standard oncology, not proprietary guideline text; structural pathway consistent with Standard Guidelines (NCCN / BCLC). Invents no dose / regimen. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN / BCLC) for hepatocellular carcinoma. Regimen options reference existing StewardMD Standard Protocols where available; the dose engine computes patient doses.",
+  "provenanceNote": "Comprehensive NCCN v2.2026 (NCCN Guidelines Version 2.2026) clinical navigator for Hepatocellular Carcinoma. Full pathway: diagnostic workup (ACR LI-RADS imaging, AFP, Child-Pugh / ALBI, variceal screening, viral serologies) -> diagnostic confirmation -> Child-Pugh + performance status -> BCLC stage -> stage-directed arms, each refined by response / line of therapy before a recommendation. Curative arms: resection for solitary tumor without vascular invasion with preserved function, liver transplantation within Milan criteria (solitary <= 5 cm, or up to 3 lesions each <= 3 cm, no macrovascular invasion or extrahepatic spread), thermal ablation (RFA / MWA) for tumors <= 3 cm (Category 1), and downstaging toward transplant. Intermediate BCLC B: TACE or Y-90 radioembolization, then response / refractoriness triage. Advanced disease: preferred Category 1 first-line atezolizumab + bevacizumab (IMbrave150; variceal screening required) or durvalumab + tremelimumab STRIDE single high-dose priming (HIMALAYA; preferred when bevacizumab / bleeding risk contraindicated), with lenvatinib (REFLECT) or sorafenib (SHARP) as Category 1 alternatives when immunotherapy is contraindicated; biomarker-directed subsequent lines cabozantinib (CELESTIAL), regorafenib post-sorafenib (RESORCE), ramucirumab for AFP >= 400 ng/mL (REACH-2), or nivolumab + ipilimumab. Regimen options reference existing StewardMD Standard Protocols where available; agents without a matching protocol are shown as checklist guidance with NO dose. Workup / staging / surveillance wording is standard oncology, not proprietary guideline text. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Hepatocellular Carcinoma Version 2.2026 (August 14, 2026).",
   "startNodeIds": ["n_workup"],
   "footnotes": {
-    "a": { "text": "Atezolizumab + bevacizumab is a preferred first-line option for advanced disease in Child-Pugh A patients with adequate performance status; screen for and manage esophageal varices before starting because of the bleeding risk from the anti-VEGF component.", "evidence": "1" },
+    "a": { "text": "Preferred Category 1 first-line options for advanced Child-Pugh A disease with adequate performance status: atezolizumab + bevacizumab (IMbrave150) or durvalumab + tremelimumab STRIDE single high-dose priming (HIMALAYA; preferred when bevacizumab / bleeding risk is contraindicated). Screen for and manage esophageal varices before starting any bevacizumab-containing regimen because of the anti-VEGF bleeding risk.", "evidence": "1" },
     "b": { "text": "Systemic therapy data are strongest in Child-Pugh A. Child-Pugh B is under-represented in trials; treat selectively with close monitoring and avoid systemic anticancer therapy in decompensated (Child-Pugh C) liver disease.", "evidence": "2A" },
-    "c": { "text": "In an at-risk cirrhotic liver, a nodule with the characteristic arterial hyperenhancement plus washout pattern on multiphasic CT / MRI (LI-RADS 5) can establish the diagnosis without biopsy; biopsy is reserved for indeterminate lesions or a non-cirrhotic liver.", "evidence": "2A" },
+    "c": { "text": "Using ACR LI-RADS criteria on multiphase contrast CT or dynamic contrast liver MRI: LR-5 is definitive for HCC without biopsy in patients with cirrhosis or chronic HBV. Biopsy is reserved for indeterminate lesions or a non-cirrhotic, non-HBV liver.", "evidence": "2A" },
     "d": { "text": "Transplant candidacy is generally judged against accepted size / number thresholds (e.g. Milan criteria); tumors beyond criteria may be considered for downstaging before listing, with a defined observation interval to select favorable biology.", "evidence": "2A" }
   },
   "nodes": [
@@ -28,14 +28,14 @@
       "pills": ["workup"],
       "required": true,
       "bullets": [
-        { "label": "History, physical, performance status; assess cirrhosis etiology", "sub": "hepatitis B / C, alcohol, MASH, aflatoxin" },
-        { "label": "Liver function: bilirubin, albumin, INR, ascites and encephalopathy for Child-Pugh; consider ALBI grade" },
-        { "label": "Serum AFP (baseline and for later trend)" },
-        { "label": "Multiphasic contrast CT or MRI of the liver; chest CT for extent; assess portal vein for tumor thrombus" },
-        { "label": "Upper endoscopy to screen for varices if portal hypertension or before anti-VEGF therapy; viral hepatitis serologies and antiviral planning" }
+        { "label": "Multiphase contrast CT or dynamic contrast liver MRI using ACR LI-RADS criteria", "sub": "LR-5 is definitive for HCC without biopsy in cirrhosis or chronic HBV; chest CT for extent; assess portal vein for tumor thrombus" },
+        { "label": "Serum Alpha-Fetoprotein (AFP) baseline quantification", "sub": "repeat for trend at each restaging; AFP >= 400 ng/mL selects ramucirumab in later lines" },
+        { "label": "Liver function assessment: Child-Pugh class (A, B, C) and ALBI score (albumin-bilirubin)", "sub": "portal hypertension signs: splenomegaly, ascites, thrombocytopenia <100k; ICG clearance or HVPG where resection is planned" },
+        { "label": "Screening upper endoscopy (EGD) within 6 months with banding of high-risk varices", "sub": "required before starting VEGF inhibitors (bevacizumab) because of bleeding risk" },
+        { "label": "Viral hepatitis serologies with HBV DNA and HCV RNA", "sub": "start or continue antiviral suppression therapy; hepatology co-management" }
       ],
       "options": [
-        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+        { "id": "continue", "label": "Diagnostic Workup Reviewed — Proceed to BCLC Staging & Functional Assessment", "setsValue": null }
       ]
     },
     {
@@ -68,8 +68,8 @@
       "required": true,
       "footnotes": ["c"],
       "bullets": [
-        "Characteristic arterial hyperenhancement with washout (LI-RADS 5) in a cirrhotic liver is diagnostic",
-        "Biopsy for indeterminate lesions or a non-cirrhotic liver",
+        "ACR LI-RADS 5 (arterial hyperenhancement with washout) on multiphase CT or dynamic MRI is definitive for HCC without biopsy in cirrhosis or chronic HBV",
+        "Biopsy for indeterminate lesions or a non-cirrhotic, non-HBV liver",
         "Re-enter staging once the diagnosis is established"
       ],
       "options": [
@@ -109,6 +109,11 @@
       "pills": ["Child-Pugh", "PS"],
       "required": true,
       "footnotes": ["b"],
+      "bullets": [
+        "Grade liver reserve by Child-Pugh class (A, B, C) and ALBI score (albumin-bilirubin)",
+        "Record portal hypertension signs: splenomegaly, ascites, thrombocytopenia <100k, known varices",
+        "Where resection is planned, confirm normal bilirubin with ICG clearance or HVPG <= 10 mmHg"
+      ],
       "tables": [
         {
           "title": "Child-Pugh scoring (5-6 = A, 7-9 = B, 10-15 = C)",
@@ -191,9 +196,9 @@
       "required": true,
       "footnotes": ["d"],
       "bullets": [
-        { "label": "Resection", "sub": "single tumor, preserved function, no clinically significant portal hypertension" },
-        { "label": "Ablation", "sub": "small tumor(s) <= 3 cm, not a surgical candidate or as an alternative to resection" },
-        { "label": "Transplant", "sub": "within accepted criteria, especially with impaired liver function" },
+        { "label": "Resection", "sub": "solitary tumor without vascular invasion, Child-Pugh A with normal bilirubin, ICG clearance or HVPG <= 10 mmHg" },
+        { "label": "Thermal ablation (RFA or MWA)", "sub": "tumors <= 3 cm, Category 1; non-surgical candidate or alternative to resection" },
+        { "label": "Transplant", "sub": "within Milan criteria, especially with impaired liver function" },
         { "label": "Downstaging / bridging", "sub": "beyond criteria but a potential transplant candidate" }
       ],
       "options": [
@@ -209,15 +214,15 @@
       "nodeType": "end",
       "name": "Resection",
       "title": "Surgical resection",
-      "description": "Preferred curative option for a single resectable tumor with preserved liver function and no significant portal hypertension. Next: assess pathology-based recurrence risk.",
+      "description": "Preferred curative option for a solitary tumor without vascular invasion and well-preserved liver function (Child-Pugh A, normal bilirubin, ICG clearance or HVPG <= 10 mmHg). Next: assess pathology-based recurrence risk.",
       "path": "HCC / Early / Resection",
       "section": "Treatment",
       "pills": ["resection", "curative"],
       "showsRecommendation": true,
       "evidenceCategory": ["2A"],
       "bullets": [
-        "Anatomic partial hepatectomy with an adequate future liver remnant",
-        "Confirm no significant portal hypertension and Child-Pugh A function",
+        "Solitary tumor without macrovascular invasion; anatomic partial hepatectomy with an adequate future liver remnant",
+        "Confirm Child-Pugh A with normal bilirubin and ICG clearance, or HVPG <= 10 mmHg (no clinically significant portal hypertension)",
         "Continue antiviral therapy for viral hepatitis to protect the remnant",
         "Then assess resection pathology for recurrence risk (next step)"
       ]
@@ -271,7 +276,7 @@
       "nodeType": "end",
       "name": "Transplant",
       "title": "Liver transplantation",
-      "description": "Curative for early HCC within accepted criteria, treating both tumor and underlying cirrhosis. Then post-transplant surveillance.",
+      "description": "Curative for early HCC within Milan criteria (solitary <= 5 cm, or up to 3 lesions each <= 3 cm, without macrovascular invasion or extrahepatic spread), treating both tumor and underlying cirrhosis. Then post-transplant surveillance.",
       "path": "HCC / Early / Transplant",
       "section": "Treatment",
       "pills": ["transplant", "curative"],
@@ -279,7 +284,7 @@
       "evidenceCategory": ["2A"],
       "footnotes": ["d"],
       "bullets": [
-        "List if within accepted size / number criteria (e.g. Milan)",
+        "List if within Milan criteria: solitary <= 5 cm, or up to 3 lesions each <= 3 cm, without macrovascular invasion or extrahepatic spread",
         "Bridging therapy (ablation, TACE or radioembolization) to prevent dropout while waiting",
         "Preferred over resection when liver function is impaired",
         "Lifelong immunosuppression; then post-transplant surveillance (next step)"
@@ -291,14 +296,14 @@
       "nodeType": "end",
       "name": "Ablation",
       "title": "Local ablation",
-      "description": "Curative-intent for small tumors, especially when surgery is not suitable. Next: confirm complete ablation on response imaging.",
+      "description": "Curative-intent thermal ablation (RFA or MWA) for tumors <= 3 cm (Category 1), especially when surgery is not suitable. Next: confirm complete ablation on response imaging.",
       "path": "HCC / Early / Ablation",
       "section": "Treatment",
       "pills": ["ablation", "curative"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
       "bullets": [
-        "Radiofrequency or microwave ablation for tumors up to about 3 cm",
+        "Radiofrequency ablation (RFA) or microwave ablation (MWA) for tumors <= 3 cm (Category 1)",
         "Comparable to resection for very small tumors in non-surgical candidates",
         "Consider combining with TACE for tumors in the 3-5 cm range",
         "Then assess ablation response (next step)"
@@ -413,7 +418,7 @@
       "nodeType": "question",
       "name": "Intermediate choice",
       "title": "BCLC B: locoregional vs systemic",
-      "description": "Intermediate, liver-confined multinodular disease: select locoregional therapy or move to systemic if unsuitable.",
+      "description": "Unresectable intermediate (BCLC B), liver-confined multinodular disease without vascular invasion: transarterial locoregional therapy, or systemic if unsuitable.",
       "path": "HCC / Intermediate / Options",
       "section": "Treatment",
       "pills": ["B"],
@@ -435,14 +440,14 @@
       "nodeType": "end",
       "name": "TACE",
       "title": "Transarterial chemoembolization (TACE)",
-      "description": "Standard first choice for intermediate-stage, liver-confined multinodular HCC. Next: assess response and refractoriness.",
+      "description": "Standard first choice for unresectable intermediate (BCLC B), liver-confined multinodular HCC without vascular invasion. Next: assess response and refractoriness.",
       "path": "HCC / Intermediate / TACE",
       "section": "Treatment",
       "pills": ["TACE"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
       "bullets": [
-        "Selective / superselective delivery to preserve non-tumor parenchyma",
+        "Transarterial chemoembolization with selective / superselective delivery to preserve non-tumor parenchyma",
         "Repeat on-demand for viable disease; reassess response by imaging",
         "Continue liver-function monitoring between sessions",
         "Then assess response / refractoriness (next step)"
@@ -455,7 +460,7 @@
       "nodeType": "end",
       "name": "Radioembolization",
       "title": "Transarterial radioembolization (Y90)",
-      "description": "Selective internal radiation for suitable intermediate-stage disease or as a bridging / downstaging tool. Next: assess response.",
+      "description": "Selective internal radiation (transarterial radioembolization, TARE) for suitable unresectable intermediate (BCLC B) disease or as a bridging / downstaging tool. Next: assess response.",
       "path": "HCC / Intermediate / Y90",
       "section": "Treatment",
       "pills": ["Y90"],
@@ -517,21 +522,21 @@
       "nodeType": "question",
       "name": "First-line choice",
       "title": "Advanced disease: first-line systemic selection",
-      "description": "For advanced / progressing disease with preserved liver function (Child-Pugh A, selected B), select the first-line backbone by immunotherapy eligibility and bleeding / autoimmune contraindications.",
+      "description": "For advanced / progressing disease with preserved liver function (Child-Pugh A), select the first-line backbone by immunotherapy eligibility and bleeding / autoimmune contraindications.",
       "path": "HCC / Systemic / 1L",
       "section": "Treatment",
       "pills": ["systemic", "1L"],
       "required": true,
       "footnotes": ["a", "b"],
       "bullets": [
-        { "label": "Atezolizumab + bevacizumab", "sub": "preferred if no contraindication; screen / treat varices first" },
-        { "label": "Dual immunotherapy (durvalumab + tremelimumab)", "sub": "when anti-VEGF is contraindicated" },
-        { "label": "TKI (lenvatinib or sorafenib)", "sub": "when immunotherapy is contraindicated" }
+        { "label": "Atezolizumab + bevacizumab (IMbrave150) - preferred Category 1", "sub": "Child-Pugh A; screen and treat varices first (anti-VEGF bleeding risk)" },
+        { "label": "Durvalumab + tremelimumab STRIDE (HIMALAYA) - preferred Category 1", "sub": "single high-dose tremelimumab priming; preferred when bevacizumab / bleeding risk is contraindicated" },
+        { "label": "Lenvatinib (REFLECT) or sorafenib (SHARP) - Category 1 alternatives", "sub": "when immunotherapy is contraindicated; Child-Pugh A" }
       ],
       "options": [
-        { "id": "atezobev", "label": "IO-eligible, no bleeding risk (atezo + bev)", "sets": { "firstLine": "atezobev" }, "pills": ["atezo-bev"] },
-        { "id": "durvatreme", "label": "IO-eligible but anti-VEGF contraindicated (durva + treme)", "sets": { "firstLine": "durvatreme" }, "pills": ["durva-treme"] },
-        { "id": "tki", "label": "IO-ineligible - TKI", "sets": { "firstLine": "tki" }, "pills": ["TKI"] }
+        { "id": "atezobev", "label": "IO-eligible, no bleeding risk (atezo + bev, IMbrave150)", "sets": { "firstLine": "atezobev" }, "pills": ["atezo-bev"] },
+        { "id": "durvatreme", "label": "IO-eligible but anti-VEGF contraindicated (durva + treme STRIDE)", "sets": { "firstLine": "durvatreme" }, "pills": ["durva-treme"] },
+        { "id": "tki", "label": "IO-ineligible - TKI (lenvatinib or sorafenib)", "sets": { "firstLine": "tki" }, "pills": ["TKI"] }
       ]
     },
     {
@@ -539,8 +544,8 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Atezo + bev",
-      "title": "First line: atezolizumab + bevacizumab",
-      "description": "Preferred first-line regimen for advanced HCC in Child-Pugh A patients without contraindications. Next: on-progression assessment.",
+      "title": "First line: atezolizumab + bevacizumab (IMbrave150, preferred Category 1)",
+      "description": "Preferred Category 1 first-line regimen (IMbrave150) for advanced HCC in Child-Pugh A patients without contraindications; requires variceal screening. Next: on-progression assessment.",
       "path": "HCC / Systemic / 1L / Atezo-bev",
       "section": "Treatment",
       "pills": ["atezo-bev", "1L"],
@@ -548,8 +553,8 @@
       "evidenceCategory": ["1"],
       "footnotes": ["a", "b"],
       "bullets": [
-        "Confirm Child-Pugh A and adequate performance status",
-        "Endoscopy to screen for and manage varices before starting (bevacizumab bleeding risk)",
+        "Preferred Category 1 first-line backbone per IMbrave150; confirm Child-Pugh A and adequate performance status",
+        "Screening upper endoscopy (EGD) within 6 months with banding of high-risk varices before starting (bevacizumab bleeding risk)",
         "Monitor for immune-related adverse events, proteinuria and hypertension",
         "Dose protocol referenced below; then reassess on progression (next step)"
       ],
@@ -560,18 +565,18 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Durva + treme",
-      "title": "First line: durvalumab + tremelimumab (dual immunotherapy)",
-      "description": "First-line dual immune checkpoint option, useful when the anti-VEGF component of atezo-bev is contraindicated. Next: on-progression assessment.",
+      "title": "First line: durvalumab + tremelimumab STRIDE (HIMALAYA, preferred Category 1)",
+      "description": "Preferred Category 1 first-line dual checkpoint option (HIMALAYA STRIDE single high-dose priming regimen); preferred when bevacizumab / bleeding risk is contraindicated. Next: on-progression assessment.",
       "path": "HCC / Systemic / 1L / Durva-treme",
       "section": "Treatment",
       "pills": ["durva-treme", "1L"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
-      "footnotes": ["b"],
+      "footnotes": ["a", "b"],
       "bullets": [
-        "Single priming dose of tremelimumab added to durvalumab, then durvalumab maintenance (STRIDE-type schedule)",
-        "Avoids bevacizumab bleeding risk; no mandatory variceal screening for the anti-VEGF reason",
-        "Monitor for immune-related adverse events",
+        "Preferred Category 1 per HIMALAYA: single high-dose (priming) dose of tremelimumab added to durvalumab, then durvalumab maintenance (STRIDE regimen)",
+        "Preferred when bevacizumab is contraindicated or bleeding risk is high; avoids anti-VEGF bleeding risk",
+        "Confirm Child-Pugh A and adequate performance status; monitor for immune-related adverse events",
         "Dose protocol referenced below; then reassess on progression (next step)"
       ],
       "protocolRefs": ["hcc-durva-treme"]
@@ -582,15 +587,15 @@
       "nodeType": "question",
       "name": "First-line TKI",
       "title": "First-line TKI selection",
-      "description": "When immunotherapy is contraindicated, choose the oral multikinase inhibitor.",
+      "description": "When immunotherapy is contraindicated, choose the Category 1 oral multikinase inhibitor: lenvatinib (REFLECT) or sorafenib (SHARP).",
       "path": "HCC / Systemic / 1L / TKI",
       "section": "Treatment",
       "pills": ["TKI", "1L"],
       "required": true,
       "footnotes": ["b"],
       "bullets": [
-        "Lenvatinib: weight-based dosing, often higher response rate",
-        "Sorafenib: the reference first-line multikinase inhibitor",
+        "Lenvatinib (REFLECT): weight-based dosing, often higher response rate",
+        "Sorafenib (SHARP): the reference first-line multikinase inhibitor",
         "Confirm Child-Pugh A function before either"
       ],
       "options": [
@@ -603,8 +608,8 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Lenvatinib",
-      "title": "First line: lenvatinib",
-      "description": "Oral multikinase inhibitor, non-inferior first-line TKI alternative to sorafenib. Next: on-progression assessment.",
+      "title": "First line: lenvatinib (REFLECT, Category 1 alternative)",
+      "description": "Oral multikinase inhibitor, non-inferior first-line TKI alternative to sorafenib (REFLECT, Category 1). Next: on-progression assessment.",
       "path": "HCC / Systemic / 1L / Lenvatinib",
       "section": "Treatment",
       "pills": ["lenvatinib", "1L"],
@@ -612,7 +617,7 @@
       "evidenceCategory": ["1"],
       "footnotes": ["b"],
       "bullets": [
-        "Weight-based dosing; monitor blood pressure and thyroid function",
+        "Category 1 alternative per REFLECT; weight-based dosing; monitor blood pressure and thyroid function",
         "Often preferred over sorafenib for a higher response rate",
         "Confirm Child-Pugh A function; dose modify for toxicity",
         "Dose protocol referenced below; then reassess on progression (next step)"
@@ -624,8 +629,8 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Sorafenib",
-      "title": "First line: sorafenib",
-      "description": "The reference first-line multikinase inhibitor for advanced HCC. Next: on-progression assessment.",
+      "title": "First line: sorafenib (SHARP, Category 1 alternative)",
+      "description": "The reference first-line multikinase inhibitor for advanced HCC (SHARP, Category 1). Next: on-progression assessment.",
       "path": "HCC / Systemic / 1L / Sorafenib",
       "section": "Treatment",
       "pills": ["sorafenib", "1L"],
@@ -633,7 +638,7 @@
       "evidenceCategory": ["1"],
       "footnotes": ["b"],
       "bullets": [
-        "Monitor for hand-foot skin reaction, diarrhea, hypertension",
+        "Category 1 alternative per SHARP; monitor for hand-foot skin reaction, diarrhea, hypertension",
         "Confirm Child-Pugh A function; dose modify for toxicity",
         "Dose protocol referenced below",
         "Then reassess on progression (next step)"
@@ -711,7 +716,7 @@
       "nodeType": "question",
       "name": "Second-line choice",
       "title": "Second-line systemic selection",
-      "description": "After first-line progression, select by the prior agent and AFP level.",
+      "description": "After first-line progression in Child-Pugh A disease, select by the prior agent, AFP level, and immunotherapy eligibility.",
       "path": "HCC / Systemic / 2L",
       "section": "Treatment",
       "pills": ["2L"],
@@ -722,16 +727,18 @@
           "title": "Second-line direction",
           "headers": ["Situation", "Option"],
           "rows": [
-            ["Progressed on / tolerated sorafenib", "Regorafenib"],
-            ["Any prior systemic (broad)", "Cabozantinib"],
-            ["AFP >= 400 ng/mL", "Ramucirumab"]
+            ["Progressed on / tolerated sorafenib (RESORCE, Category 1)", "Regorafenib"],
+            ["Any prior systemic, broad (CELESTIAL, Category 1)", "Cabozantinib"],
+            ["AFP >= 400 ng/mL (REACH-2, Category 1)", "Ramucirumab"],
+            ["Prior TKI, IO-eligible", "Nivolumab + ipilimumab"]
           ]
         }
       ],
       "options": [
-        { "id": "post_sora", "label": "Prior sorafenib (tolerated)", "sets": { "secondLine": "regorafenib" }, "pills": ["regorafenib"] },
-        { "id": "general", "label": "General second-line (TKI)", "sets": { "secondLine": "cabozantinib" }, "pills": ["cabozantinib"] },
-        { "id": "afp_high", "label": "AFP >= 400 ng/mL", "sets": { "secondLine": "ramucirumab", "biomarkers.AFP": "high" }, "pills": ["AFP high"] }
+        { "id": "post_sora", "label": "Prior sorafenib tolerated (regorafenib, RESORCE)", "sets": { "secondLine": "regorafenib" }, "pills": ["regorafenib"] },
+        { "id": "general", "label": "General second-line TKI (cabozantinib, CELESTIAL)", "sets": { "secondLine": "cabozantinib" }, "pills": ["cabozantinib"] },
+        { "id": "afp_high", "label": "AFP >= 400 ng/mL (ramucirumab, REACH-2)", "sets": { "secondLine": "ramucirumab", "biomarkers.AFP": "high" }, "pills": ["AFP high"] },
+        { "id": "io_doublet", "label": "Dual checkpoint inhibitor (nivolumab + ipilimumab)", "sets": { "secondLine": "nivoipi" }, "pills": ["nivo-ipi"] }
       ]
     },
     {
@@ -739,8 +746,8 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Regorafenib",
-      "title": "Second line: regorafenib (post-sorafenib)",
-      "description": "For patients who tolerated and then progressed on sorafenib. Next: on-progression assessment.",
+      "title": "Second line: regorafenib post-sorafenib (RESORCE, Category 1)",
+      "description": "Category 1 for patients who tolerated and then progressed on sorafenib (RESORCE). Next: on-progression assessment.",
       "path": "HCC / Systemic / 2L / Regorafenib",
       "section": "Treatment",
       "pills": ["regorafenib", "2L"],
@@ -748,7 +755,7 @@
       "evidenceCategory": ["1"],
       "footnotes": ["b"],
       "bullets": [
-        "Indicated specifically after sorafenib tolerance and progression",
+        "Category 1 per RESORCE, indicated specifically after sorafenib tolerance and progression",
         "Monitor for hand-foot skin reaction, hypertension, hepatotoxicity",
         "Confirm Child-Pugh A function",
         "Dose protocol referenced below; then reassess on progression (next step)"
@@ -760,8 +767,8 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Cabozantinib",
-      "title": "Second / later line: cabozantinib",
-      "description": "Multikinase inhibitor active after prior systemic therapy. Next: on-progression assessment.",
+      "title": "Second / later line: cabozantinib (CELESTIAL, Category 1)",
+      "description": "Multikinase inhibitor active after prior systemic therapy (CELESTIAL, Category 1). Next: on-progression assessment.",
       "path": "HCC / Systemic / 2L / Cabozantinib",
       "section": "Treatment",
       "pills": ["cabozantinib", "2L"],
@@ -769,7 +776,7 @@
       "evidenceCategory": ["1"],
       "footnotes": ["b"],
       "bullets": [
-        "Option after progression on one or two prior systemic agents",
+        "Category 1 per CELESTIAL; option after progression on one or two prior systemic agents",
         "Monitor for hand-foot skin reaction, diarrhea, hypertension",
         "Confirm Child-Pugh A function",
         "Dose protocol referenced below; then reassess on progression (next step)"
@@ -781,8 +788,8 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Ramucirumab",
-      "title": "Second line: ramucirumab (AFP >= 400)",
-      "description": "Anti-VEGFR2 antibody for patients with AFP at or above 400 ng/mL after first-line therapy. Next: on-progression assessment.",
+      "title": "Second line: ramucirumab for AFP >= 400 (REACH-2, Category 1)",
+      "description": "Biomarker-directed anti-VEGFR2 antibody (REACH-2, Category 1) for patients with baseline AFP at or above 400 ng/mL after first-line therapy. Next: on-progression assessment.",
       "path": "HCC / Systemic / 2L / Ramucirumab",
       "section": "Treatment",
       "pills": ["ramucirumab", "AFP high"],
@@ -790,12 +797,33 @@
       "evidenceCategory": ["1"],
       "footnotes": ["b"],
       "bullets": [
-        "Biomarker-selected: baseline AFP >= 400 ng/mL",
+        "Biomarker-selected: baseline AFP >= 400 ng/mL (REACH-2, Category 1)",
         "Monitor for hypertension and proteinuria",
         "Confirm Child-Pugh A function",
         "Dose protocol referenced below; then reassess on progression (next step)"
       ],
       "protocolRefs": ["hcc-ramucirumab"]
+    },
+    {
+      "id": "n_tx_nivoipi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Nivo + ipi",
+      "title": "Second line: nivolumab + ipilimumab (dual checkpoint blockade)",
+      "description": "Dual checkpoint inhibitor option after prior systemic therapy in IO-eligible Child-Pugh A disease. Next: on-progression assessment.",
+      "path": "HCC / Systemic / 2L / Nivo-ipi",
+      "section": "Treatment",
+      "pills": ["nivo-ipi", "2L"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["b"],
+      "bullets": [
+        "Nivolumab + ipilimumab dual checkpoint blockade after progression on prior systemic therapy (including prior TKI) in IO-eligible disease",
+        "Confirm Child-Pugh A function and adequate performance status; exclude active autoimmune disease and prior severe immune-related toxicity",
+        "Monitor closely for immune-related adverse events: colitis, hepatitis, pneumonitis, endocrinopathies",
+        "Checklist guidance only (no StewardMD dose protocol for this doublet in HCC); then reassess on progression (next step)"
+      ],
+      "protocolRefs": []
     },
     {
       "id": "n_prog_2l",
@@ -996,10 +1024,12 @@
     { "id": "l_2l_rego", "from": "n_sys_2l", "to": "n_tx_regorafenib", "fromOptions": ["post_sora"], "linkCategory": "conditional" },
     { "id": "l_2l_cabo", "from": "n_sys_2l", "to": "n_tx_cabozantinib", "fromOptions": ["general"], "linkCategory": "conditional" },
     { "id": "l_2l_ram", "from": "n_sys_2l", "to": "n_tx_ramucirumab", "fromOptions": ["afp_high"], "linkCategory": "conditional" },
+    { "id": "l_2l_nivoipi", "from": "n_sys_2l", "to": "n_tx_nivoipi", "fromOptions": ["io_doublet"], "linkCategory": "conditional" },
 
     { "id": "l_rego_prog", "from": "n_tx_regorafenib", "to": "n_prog_2l", "linkCategory": "conditional" },
     { "id": "l_cabo_prog", "from": "n_tx_cabozantinib", "to": "n_prog_2l", "linkCategory": "conditional" },
     { "id": "l_ram_prog", "from": "n_tx_ramucirumab", "to": "n_prog_2l", "linkCategory": "conditional" },
+    { "id": "l_nivoipi_prog", "from": "n_tx_nivoipi", "to": "n_prog_2l", "linkCategory": "conditional" },
 
     { "id": "l_prog2_prog", "from": "n_prog_2l", "to": "n_tx_systemic_3l", "fromOptions": ["progression"], "linkCategory": "conditional" },
     { "id": "l_prog2_bsc", "from": "n_prog_2l", "to": "n_tx_bsc_late", "fromOptions": ["decline"], "linkCategory": "conditional" },

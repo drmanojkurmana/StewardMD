@@ -1,0 +1,826 @@
+{
+  "guideline": "hcl",
+  "title": "Hairy Cell Leukemia",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2027)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "hcl_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2027 clinical navigator for Hairy Cell Leukemia (Classic HCL and HCL-variant). Implements Workup First diagnostic checklists (bone marrow reticulin stain for dry tap, Annexin A1 / TRAP IHC, flow CD11c/CD25/CD103/CD123, mandatory BRAF V600E mutation testing), treatment indications vs watch-and-wait, frontline purine analogues (Cladribine / Pentostatin Category 1), and relapsed/refractory targeted therapies (Cladribine + Rituximab, Vemurafenib +/- Rituximab, Dabrafenib + Trametinib, Moxetumomab pasudotox). References StewardMD ONCQIS Standard Protocols. DRAFT - clinical decision support; physician decides.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Hairy Cell Leukemia Version 1.2027 (July 24, 2026).",
+  "startNodeIds": [
+    "n_presentation"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "BRAF V600E mutation is present in more than 95% of classic HCL cases when tested by sensitive allele-specific PCR or next-generation sequencing, and is absent in HCL-variant and in most morphologic mimics such as splenic marginal zone lymphoma. Mandatory testing distinguishes classic HCL from HCL-variant and confirms eligibility for BRAF-directed therapy at relapse.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Annexin A1 immunohistochemistry is highly specific for classic hairy cell leukemia: it is positive in classic HCL and negative in HCL-variant, splenic marginal zone lymphoma, and other small B-cell lymphomas. TRAP (tartrate-resistant acid phosphatase) and Cyclin D1 are supportive but less specific. Bone marrow is frequently a dry tap because of marked reticulin fibrosis, so trephine biopsy with reticulin stain is required.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Treatment is indicated for symptomatic active disease: ANC below 1,000/mcL, hemoglobin below 10 g/dL, platelets below 100,000/mcL, symptomatic or progressive splenomegaly, recurrent or serious infections, or systemic B-symptoms. Asymptomatic patients with preserved counts are observed, since early treatment of indolent disease has not shown a survival advantage.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Purine nucleoside analogues cause profound and prolonged CD4 T-cell depletion. Mandatory Pneumocystis jirovecii prophylaxis (trimethoprim-sulfamethoxazole) and varicella-zoster prophylaxis (acyclovir or valacyclovir) are required during and after therapy until CD4 recovery above 200/mcL. Screen for active or latent infection (including hepatitis B and C, tuberculosis, fungal and atypical mycobacterial infection) before starting therapy.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "For early relapse or purine-refractory classic HCL, options include cladribine plus rituximab (375 mg/m2 weekly for 8 doses), BRAF-directed therapy (vemurafenib with or without rituximab, or dabrafenib plus trametinib), and moxetumomab pasudotox (anti-CD22 recombinant immunotoxin). Late relapse beyond 3 to 5 years may be retreated with the same purine analogue with or without rituximab.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_presentation",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Presentation",
+      "title": "HCL: clinical presentation",
+      "section": "Diagnosis",
+      "description": "Step 1: Clinical Presentation. Select the confirmed diagnosis and treatment history.",
+      "path": "HCL / Presentation",
+      "pills": [
+        "presentation"
+      ],
+      "required": true,
+      "bullets": [
+        "Classic hairy cell leukemia, newly diagnosed (BRAF V600E positive in more than 95% of cases)",
+        "Hairy cell leukemia-variant (HCL-v): BRAF V600E negative, CD25 negative, less responsive to single-agent purine analogues",
+        "Classic HCL, previously treated, now relapsed or refractory"
+      ],
+      "options": [
+        {
+          "id": "classic_new",
+          "label": "Classic HCL, newly diagnosed (treatment naive)",
+          "sets": {
+            "presentation": "classic_new"
+          },
+          "pills": [
+            "classic"
+          ]
+        },
+        {
+          "id": "hclv",
+          "label": "Hairy cell leukemia-variant (HCL-v)",
+          "sets": {
+            "presentation": "hclv"
+          },
+          "pills": [
+            "HCL-v"
+          ]
+        },
+        {
+          "id": "rr",
+          "label": "Relapsed or refractory classic HCL (previously treated)",
+          "sets": {
+            "presentation": "relapsed"
+          },
+          "pills": [
+            "R/R"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_hcl_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Classic HCL workup",
+      "title": "Classic HCL: diagnostic workup",
+      "section": "Workup",
+      "description": "Confirm classic HCL and establish baseline disease burden and infection risk. Complete every item before triaging to watch-and-wait versus treatment.",
+      "path": "HCL / Classic / Workup",
+      "pills": [
+        "classic",
+        "workup"
+      ],
+      "required": true,
+      "footnotes": [
+        "a",
+        "b",
+        "d"
+      ],
+      "bullets": [
+        "History and physical examination: spleen palpation for splenomegaly, lymph node survey, B-symptoms (fever, night sweats, weight loss), performance status, prior infections and transfusion history",
+        "CBC with differential and comprehensive metabolic panel, LDH, renal and hepatic function; document ANC, hemoglobin, and platelet count against treatment thresholds",
+        "Peripheral blood smear examination: mature B-lymphocytes with circumferential hairy cytoplasmic projections; monocytopenia is a classic hallmark",
+        "Bone marrow aspirate and trephine biopsy: dry tap is common because of marked reticulin fibrosis, so obtain trephine core with reticulin stain; classic fried-egg appearance with widely spaced nuclei",
+        "Bone marrow immunohistochemistry panel: CD20, Annexin A1 (highly specific for classic HCL), TRAP, CD25, Cyclin D1",
+        "Multiparameter flow cytometry on blood or marrow: co-expression of mature B-cell markers with bright CD11c, CD25, CD103, and CD123",
+        "Mandatory molecular testing: BRAF V600E mutation testing by allele-specific PCR or NGS (present in more than 95% of classic HCL; absent in HCL-variant)",
+        "Spleen and nodal assessment: contrast CT of abdomen and pelvis to quantify splenomegaly and internal lymphadenopathy",
+        "Infection workup before purine analogue therapy: screen for active or latent infections including fungal, atypical mycobacterial, hepatitis B, and hepatitis C disease; plan antimicrobial prophylaxis (Bactrim plus Acyclovir) with purine analogues"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed - Proceed to Treatment Indications",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_hclv_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "HCL-variant workup",
+      "title": "HCL-variant: diagnostic workup",
+      "section": "Workup",
+      "description": "Confirm HCL-variant and distinguish it from classic HCL and splenic marginal zone lymphoma. Complete every item before selecting frontline therapy.",
+      "path": "HCL / Variant / Workup",
+      "pills": [
+        "HCL-v",
+        "workup"
+      ],
+      "required": true,
+      "footnotes": [
+        "a",
+        "b",
+        "d"
+      ],
+      "bullets": [
+        "History and physical examination: spleen palpation (often marked splenomegaly without the monocytopenia of classic HCL), lymph node survey, B-symptoms, performance status",
+        "CBC with differential and peripheral smear: hairy-appearing lymphocytes often with prominent nucleoli and higher leukocyte counts than classic HCL; typically no monocytopenia",
+        "Bone marrow aspirate and trephine biopsy with reticulin stain: hypercellular marrow with interstitial infiltrate; IHC panel including CD20, Annexin A1 (negative in HCL-v), TRAP (often negative or weak), Cyclin D1",
+        "Multiparameter flow cytometry: bright CD11c and CD103 positive, but CD25 negative and CD123 negative or dim; CD200 typically negative, distinguishing HCL-v from classic HCL",
+        "Mandatory molecular testing: BRAF V600E testing by allele-specific PCR or NGS is negative in HCL-v; assess MAP2K1 mutation and TP53 deletion or mutation, which are enriched in HCL-v and inform prognosis",
+        "Exclude mimics: splenic marginal zone lymphoma and splenic diffuse red pulp lymphoma (Annexin A1 negative, CD103 variable); confirm diagnosis with combined morphology, immunophenotype, and genetics",
+        "Contrast CT of abdomen and pelvis to quantify splenomegaly and internal lymphadenopathy",
+        "Infection workup: screening for active or latent infections (fungal, atypical mycobacteria, HBV, HCV); antimicrobial prophylaxis (Bactrim plus Acyclovir) required if a purine analogue backbone is used"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed - Proceed to Treatment Indications",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_indications",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Treatment indications",
+      "title": "Classic HCL: indications for therapy",
+      "section": "Treatment",
+      "description": "Decide between watch-and-wait and active treatment using NCCN treatment-indication criteria.",
+      "path": "HCL / Classic / Indications",
+      "pills": [
+        "classic",
+        "indications"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Asymptomatic disease with preserved counts: observe without therapy",
+        "Symptomatic active disease meeting any threshold: ANC below 1,000/mcL, hemoglobin below 10 g/dL, or platelets below 100,000/mcL",
+        "Symptomatic or progressive splenomegaly, recurrent or serious infections, or systemic B-symptoms"
+      ],
+      "options": [
+        {
+          "id": "watch",
+          "label": "Asymptomatic: normal counts or mild cytopenias without symptoms",
+          "sets": {
+            "indication": "watch"
+          },
+          "pills": [
+            "observe"
+          ]
+        },
+        {
+          "id": "active",
+          "label": "Symptomatic active disease: cytopenias, splenomegaly, infections, or B-symptoms",
+          "sets": {
+            "indication": "active"
+          },
+          "pills": [
+            "treat"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_watch",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Watch-and-wait",
+      "title": "Active surveillance (watch-and-wait)",
+      "section": "Surveillance",
+      "description": "Observation for asymptomatic classic HCL until a treatment indication develops.",
+      "path": "HCL / Classic / Watch-and-wait",
+      "pills": [
+        "watch-and-wait"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "protocolRefs": [],
+      "bullets": [
+        "Routine CBC with differential and physical examination (spleen check) every 3 to 6 months",
+        "Reassess for treatment indications at each visit: ANC below 1,000/mcL, hemoglobin below 10 g/dL, platelets below 100,000/mcL, symptomatic or progressive splenomegaly, recurrent infections, or B-symptoms",
+        "No routine CT imaging in asymptomatic patients; image new or progressive symptoms",
+        "Counsel on infection vigilance given neutropenia and monocytopenia; vaccinate per immunocompromised-host guidance and avoid live vaccines during later purine analogue therapy",
+        "Begin purine analogue therapy when active-disease criteria are met"
+      ]
+    },
+    {
+      "id": "n_frontline",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "First-line therapy",
+      "title": "Classic HCL: first-line purine analogue",
+      "section": "Treatment",
+      "description": "Select the preferred Category 1 frontline purine nucleoside analogue.",
+      "path": "HCL / Classic / First-line",
+      "pills": [
+        "classic",
+        "first-line"
+      ],
+      "required": true,
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Purine nucleoside analogues are the Category 1 preferred frontline therapy for symptomatic classic HCL",
+        "Cladribine suits patients who can receive a 5 to 7 day course with prompt count recovery planning",
+        "Pentostatin suits patients needing a dose-adjustable every-2-week schedule with renal-function monitoring",
+        "Both options require mandatory PJP and VZV prophylaxis until CD4 recovery above 200/mcL"
+      ],
+      "options": [
+        {
+          "id": "cladribine",
+          "label": "Cladribine (2-CdA) - Category 1 preferred",
+          "sets": {
+            "firstline": "cladribine"
+          },
+          "pills": [
+            "cladribine"
+          ]
+        },
+        {
+          "id": "pentostatin",
+          "label": "Pentostatin (2-prime-deoxycoformycin) - Category 1 preferred",
+          "sets": {
+            "firstline": "pentostatin"
+          },
+          "pills": [
+            "pentostatin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_cladribine",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Cladribine frontline",
+      "title": "Frontline cladribine (Category 1 preferred)",
+      "section": "Treatment",
+      "description": "Single-course cladribine for symptomatic classic HCL with mandatory infection prophylaxis.",
+      "path": "HCL / Classic / First-line / Cladribine",
+      "pills": [
+        "classic",
+        "cladribine"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "protocolRefs": [],
+      "bullets": [
+        "Cladribine 0.09 to 0.14 mg/kg/day by continuous IV infusion for 7 days, OR 0.1 mg/kg/day as a 2-hour IV infusion for 5 days; approximately 85% complete remission rate",
+        "Single course is standard; assess response with CBC, marrow evaluation, and spleen reassessment, allowing several months for full count recovery before declaring failure",
+        "Mandatory PJP prophylaxis (trimethoprim-sulfamethoxazole) and VZV prophylaxis (acyclovir or valacyclovir) during and after therapy until CD4 count recovers above 200/mcL",
+        "Monitor for prolonged myelosuppression, febrile neutropenia, and opportunistic infection; give growth-factor and transfusion support per thresholds",
+        "Avoid live vaccines during therapy and until immune reconstitution; counsel on fertility and secondary malignancy risk"
+      ]
+    },
+    {
+      "id": "n_tx_pentostatin",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Pentostatin frontline",
+      "title": "Frontline pentostatin (Category 1 preferred)",
+      "section": "Treatment",
+      "description": "Intermittent pentostatin for symptomatic classic HCL with renal monitoring and mandatory infection prophylaxis.",
+      "path": "HCL / Classic / First-line / Pentostatin",
+      "pills": [
+        "classic",
+        "pentostatin"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "protocolRefs": [],
+      "bullets": [
+        "Pentostatin 4 mg/m2 IV every 2 weeks until maximum response plus 2 consolidation doses; hold or dose-reduce for renal dysfunction and monitor creatinine before each dose",
+        "Hydrate before and after each infusion; assess response with CBC, marrow evaluation, and spleen reassessment",
+        "Mandatory PJP prophylaxis (trimethoprim-sulfamethoxazole) and VZV prophylaxis (acyclovir or valacyclovir) during and after therapy until CD4 count recovers above 200/mcL",
+        "Monitor for prolonged myelosuppression, nausea, rash, and opportunistic infection; avoid concurrent nephrotoxins",
+        "Avoid live vaccines during therapy and until immune reconstitution; counsel on fertility and secondary malignancy risk"
+      ]
+    },
+    {
+      "id": "n_rr_timing",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Relapse timing",
+      "title": "Relapsed or refractory HCL: relapse timing",
+      "section": "Treatment",
+      "description": "Stratify relapsed or refractory classic HCL by time to relapse and prior purine analogue response.",
+      "path": "HCL / Relapsed / Timing",
+      "pills": [
+        "R/R",
+        "timing"
+      ],
+      "required": true,
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Late relapse more than 3 to 5 years after first purine analogue: retreatment with the same agent remains effective",
+        "Early relapse within 2 to 3 years, or disease refractory to a purine analogue: switch to a rituximab combination, BRAF-directed therapy, or moxetumomab pasudotox",
+        "Re-biopsy and repeat BRAF V600E testing at relapse to confirm diagnosis and targeted-therapy eligibility"
+      ],
+      "options": [
+        {
+          "id": "late",
+          "label": "Late relapse: more than 3 to 5 years after prior purine analogue",
+          "sets": {
+            "relapse": "late"
+          },
+          "pills": [
+            "late"
+          ]
+        },
+        {
+          "id": "early",
+          "label": "Early relapse (under 2 to 3 years) or refractory to purine analogue",
+          "sets": {
+            "relapse": "early"
+          },
+          "pills": [
+            "early-refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_rr_retreat",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Retreat late relapse",
+      "title": "Late relapse: retreat with same purine analogue +/- rituximab",
+      "section": "Treatment",
+      "description": "Retreatment for classic HCL relapsing more than 3 to 5 years after first purine analogue.",
+      "path": "HCL / Relapsed / Late / Retreatment",
+      "pills": [
+        "R/R",
+        "late",
+        "retreatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d",
+        "e"
+      ],
+      "protocolRefs": [],
+      "bullets": [
+        "Retreat with the same purine nucleoside analogue (cladribine or pentostatin) at standard frontline dosing",
+        "Add rituximab for deeper response in fit patients: 375 mg/m2 weekly for 8 doses starting with or after the purine analogue",
+        "Mandatory PJP prophylaxis (trimethoprim-sulfamethoxazole) and VZV prophylaxis (acyclovir or valacyclovir) until CD4 count recovers above 200/mcL",
+        "Reassess marrow response and BRAF V600E status; if response is brief, move to the early-relapse pathway (cladribine plus rituximab, BRAF-directed therapy, or moxetumomab pasudotox)"
+      ]
+    },
+    {
+      "id": "n_rr_early",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Early relapse options",
+      "title": "Early relapse or refractory: salvage options",
+      "section": "Treatment",
+      "description": "Select salvage therapy for early relapse or purine-refractory classic HCL.",
+      "path": "HCL / Relapsed / Early / Options",
+      "pills": [
+        "R/R",
+        "early-refractory"
+      ],
+      "required": true,
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Cladribine plus rituximab for chemoimmunotherapy-eligible patients",
+        "BRAF V600E targeted therapy (vemurafenib with or without rituximab, or dabrafenib plus trametinib, Category 2A) for BRAF-mutated disease",
+        "Moxetumomab pasudotox (anti-CD22 recombinant immunotoxin) for purine-refractory disease",
+        "Confirm BRAF V600E status and infection screen before targeted or immunotoxin therapy"
+      ],
+      "options": [
+        {
+          "id": "clad_ritux",
+          "label": "Cladribine + Rituximab",
+          "sets": {
+            "salvage": "clad_ritux"
+          },
+          "pills": [
+            "cladribine-rituximab"
+          ]
+        },
+        {
+          "id": "braf",
+          "label": "BRAF-directed therapy (Vemurafenib +/- Rituximab, or Dabrafenib + Trametinib)",
+          "sets": {
+            "salvage": "braf"
+          },
+          "pills": [
+            "BRAF"
+          ]
+        },
+        {
+          "id": "moxe",
+          "label": "Moxetumomab pasudotox (anti-CD22 immunotoxin)",
+          "sets": {
+            "salvage": "moxe"
+          },
+          "pills": [
+            "moxetumomab"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_clad_ritux",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Cladribine rituximab",
+      "title": "Salvage cladribine + rituximab",
+      "section": "Treatment",
+      "description": "Chemoimmunotherapy for early relapse or purine-refractory classic HCL.",
+      "path": "HCL / Relapsed / Early / Cladribine-Rituximab",
+      "pills": [
+        "R/R",
+        "cladribine-rituximab"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d",
+        "e"
+      ],
+      "protocolRefs": [],
+      "bullets": [
+        "Cladribine at standard dosing (0.1 mg/kg/day 2-hour IV infusion for 5 days or 7-day continuous infusion schedule) plus rituximab 375 mg/m2 weekly for 8 doses",
+        "High complete remission and MRD-negative rates reported in relapsed classic HCL, including purine-refractory cases",
+        "Mandatory PJP prophylaxis (trimethoprim-sulfamethoxazole) and VZV prophylaxis (acyclovir or valacyclovir) until CD4 count recovers above 200/mcL",
+        "Screen for hepatitis B (HBsAg, anti-HBc) before rituximab and monitor for infusion reactions, prolonged cytopenias, and infection"
+      ]
+    },
+    {
+      "id": "n_tx_braf",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "BRAF directed therapy",
+      "title": "Salvage BRAF-directed therapy (Category 2A)",
+      "section": "Treatment",
+      "description": "BRAF inhibitor based therapy for BRAF V600E mutated early-relapse or refractory classic HCL.",
+      "path": "HCL / Relapsed / Early / BRAF",
+      "pills": [
+        "R/R",
+        "BRAF"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "e"
+      ],
+      "protocolRefs": [],
+      "bullets": [
+        "Confirm BRAF V600E mutation by allele-specific PCR or NGS before starting BRAF-directed therapy",
+        "Vemurafenib 240 to 960 mg orally twice daily, with or without rituximab 375 mg/m2; combination with rituximab deepens and prolongs response",
+        "Alternative: dabrafenib plus trametinib (Category 2A), particularly when MEK co-inhibition is preferred for tolerance or resistance planning",
+        "Monitor for cutaneous toxicity (rash, photosensitivity, squamous proliferations), arthralgia, QT prolongation, pyrexia (dabrafenib plus trametinib), and ocular events; dose-modify per toxicity",
+        "Reassess blood counts, spleen size, marrow infiltration, and BRAF allele burden on therapy"
+      ]
+    },
+    {
+      "id": "n_tx_moxe",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Moxetumomab",
+      "title": "Salvage moxetumomab pasudotox",
+      "section": "Treatment",
+      "description": "Anti-CD22 recombinant immunotoxin for purine-refractory classic HCL.",
+      "path": "HCL / Relapsed / Early / Moxetumomab",
+      "pills": [
+        "R/R",
+        "moxetumomab"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "protocolRefs": [],
+      "bullets": [
+        "Moxetumomab pasudotox (anti-CD22 recombinant immunotoxin) for classic HCL after at least two prior systemic therapies including a purine analogue, or for purine-refractory disease",
+        "Durable complete remissions including MRD-negative responses reported without further purine analogue exposure",
+        "Monitor specifically for capillary leak syndrome and hemolytic uremic syndrome: track weight, blood pressure, albumin, creatinine, LDH, platelets, and schistocytes; maintain hydration and hold therapy for grade 2 or higher toxicity",
+        "Premedicate and monitor infusions; assess marrow and MRD response after completed cycles",
+        "No PJP or VZV prophylaxis requirement intrinsic to the immunotoxin, but continue prophylaxis if CD4 depletion persists from prior purine analogues"
+      ]
+    },
+    {
+      "id": "n_hclv_frontline",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "HCL-v frontline",
+      "title": "HCL-variant: frontline therapy",
+      "section": "Treatment",
+      "description": "Select frontline therapy for HCL-variant, which responds poorly to single-agent purine analogues.",
+      "path": "HCL / Variant / First-line",
+      "pills": [
+        "HCL-v",
+        "first-line"
+      ],
+      "required": true,
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "HCL-v lacks BRAF V600E and CD25 and is less responsive to single-agent cladribine or pentostatin, so combination or BTK-inhibitor therapy is preferred",
+        "Cladribine plus rituximab is the preferred frontline for fit patients with a treatment indication",
+        "Ibrutinib is the preferred option for patients unfit for purine analogue based chemoimmunotherapy",
+        "Relapsed HCL-v after prior therapy routes to the early-relapse salvage pathway"
+      ],
+      "options": [
+        {
+          "id": "clad_ritux_v",
+          "label": "Cladribine + Rituximab (preferred frontline)",
+          "sets": {
+            "hclv_tx": "clad_ritux"
+          },
+          "pills": [
+            "cladribine-rituximab"
+          ]
+        },
+        {
+          "id": "ibrutinib",
+          "label": "Ibrutinib (purine-unfit frontline)",
+          "sets": {
+            "hclv_tx": "ibrutinib"
+          },
+          "pills": [
+            "ibrutinib"
+          ]
+        },
+        {
+          "id": "relapsed_v",
+          "label": "Relapsed HCL-v after prior therapy",
+          "sets": {
+            "hclv_tx": "relapsed"
+          },
+          "pills": [
+            "R/R"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_hclv_cladritux",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "HCL-v cladribine rituximab",
+      "title": "HCL-v frontline: cladribine + rituximab (preferred)",
+      "section": "Treatment",
+      "description": "Preferred frontline chemoimmunotherapy for HCL-variant with a treatment indication.",
+      "path": "HCL / Variant / First-line / Cladribine-Rituximab",
+      "pills": [
+        "HCL-v",
+        "cladribine-rituximab"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "protocolRefs": [],
+      "bullets": [
+        "Cladribine at standard dosing plus rituximab 375 mg/m2 weekly for 8 doses; concurrent administration yields higher complete remission rates than sequential single-agent purine therapy in HCL-v",
+        "Single-agent purine analogues alone are discouraged in HCL-v because response rates and durability are inferior",
+        "Mandatory PJP prophylaxis (trimethoprim-sulfamethoxazole) and VZV prophylaxis (acyclovir or valacyclovir) during and after the purine backbone until CD4 count recovers above 200/mcL",
+        "Screen for hepatitis B (HBsAg, anti-HBc) before rituximab; monitor for infusion reactions, prolonged cytopenias, and infection",
+        "Assess response with CBC, marrow evaluation including Annexin A1 and TRAP IHC, and spleen reassessment"
+      ]
+    },
+    {
+      "id": "n_tx_hclv_ibrutinib",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "HCL-v ibrutinib",
+      "title": "HCL-v frontline: ibrutinib (purine-unfit)",
+      "section": "Treatment",
+      "description": "BTK-inhibitor frontline option for HCL-variant patients unfit for purine analogue therapy.",
+      "path": "HCL / Variant / First-line / Ibrutinib",
+      "pills": [
+        "HCL-v",
+        "ibrutinib"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "protocolRefs": [],
+      "bullets": [
+        "Ibrutinib continuous oral therapy for HCL-v patients unfit for purine analogue based chemoimmunotherapy or with TP53 aberration",
+        "Responses occur without the profound T-cell depletion of purine analogues, so no routine PJP or VZV prophylaxis is required",
+        "Monitor for bleeding risk (hold peri-procedure), atrial fibrillation and hypertension, diarrhea, arthralgia, and drug interactions via CYP3A",
+        "Assess response with CBC, spleen reassessment, and marrow evaluation; continue until progression or unacceptable toxicity",
+        "At progression, route to the early-relapse salvage pathway and consider clinical trial enrollment"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_p_classic",
+      "from": "n_presentation",
+      "to": "n_hcl_wk",
+      "fromOptions": [
+        "classic_new"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_p_hclv",
+      "from": "n_presentation",
+      "to": "n_hclv_wk",
+      "fromOptions": [
+        "hclv"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_p_rr",
+      "from": "n_presentation",
+      "to": "n_rr_timing",
+      "fromOptions": [
+        "rr"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hclwk_cont",
+      "from": "n_hcl_wk",
+      "to": "n_indications",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "sequential"
+    },
+    {
+      "id": "l_hclvwk_cont",
+      "from": "n_hclv_wk",
+      "to": "n_hclv_frontline",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "sequential"
+    },
+    {
+      "id": "l_ind_watch",
+      "from": "n_indications",
+      "to": "n_watch",
+      "fromOptions": [
+        "watch"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ind_active",
+      "from": "n_indications",
+      "to": "n_frontline",
+      "fromOptions": [
+        "active"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_fl_clad",
+      "from": "n_frontline",
+      "to": "n_tx_cladribine",
+      "fromOptions": [
+        "cladribine"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_fl_pento",
+      "from": "n_frontline",
+      "to": "n_tx_pentostatin",
+      "fromOptions": [
+        "pentostatin"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rr_late",
+      "from": "n_rr_timing",
+      "to": "n_tx_rr_retreat",
+      "fromOptions": [
+        "late"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rr_early",
+      "from": "n_rr_timing",
+      "to": "n_rr_early",
+      "fromOptions": [
+        "early"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rre_cladritux",
+      "from": "n_rr_early",
+      "to": "n_tx_clad_ritux",
+      "fromOptions": [
+        "clad_ritux"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rre_braf",
+      "from": "n_rr_early",
+      "to": "n_tx_braf",
+      "fromOptions": [
+        "braf"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rre_moxe",
+      "from": "n_rr_early",
+      "to": "n_tx_moxe",
+      "fromOptions": [
+        "moxe"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hclv_cladritux",
+      "from": "n_hclv_frontline",
+      "to": "n_tx_hclv_cladritux",
+      "fromOptions": [
+        "clad_ritux_v"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hclv_ibr",
+      "from": "n_hclv_frontline",
+      "to": "n_tx_hclv_ibrutinib",
+      "fromOptions": [
+        "ibrutinib"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hclv_rr",
+      "from": "n_hclv_frontline",
+      "to": "n_rr_early",
+      "fromOptions": [
+        "relapsed_v"
+      ],
+      "linkCategory": "conditional"
+    }
+  ]
+}
