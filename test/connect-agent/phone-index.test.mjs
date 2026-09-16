@@ -291,3 +291,66 @@ test('askOne: the pointed table is cleared before a proven view is explored one 
   assert.ok(clickAt >= 0, 'exploreDetailOf never ran on a proven view');
   assert.ok(clearAt < clickAt, `clearPoint (index ${clearAt}) must run before the detail explore (index ${clickAt})`);
 });
+
+/* F2 REGRESSION. The autonomous crawl's inline "one level deeper" step (deep-crawl.mjs) turns a native
+ * navigation GET into a replay candidate only when its origin is in `caps.origins` - but index.mjs
+ * built that caps object as `Object.assign({ exploreDetails: true }, caps || {})`, never adding
+ * `origins`, so a secondary-origin API host (GHIS-shaped: app host serves pages, api host serves the
+ * detail print) always fell outside the allowlist and the detail request was silently dropped. */
+function crossOriginFakePlugin(state) {
+  const evals = [];
+  return {
+    platform: 'android', evals,
+    async navigate() { return { ok: true }; },
+    async wait() {},
+    async snapshot() { return { snapshot: '' }; },
+    async click() { return { result: 'ok' }; },
+    async closeTab() { return { ok: true }; },
+    async currentUrl() { return { url: 'https://emr.example/doctor/home' }; },
+    async setMode() { return { ok: true }; },
+    async drainRequests() {
+      if (state.pendingCrossOrigin) {
+        state.pendingCrossOrigin = false;
+        return { requests: [{ method: 'GET', url: 'https://api.emr.example/Lab/Home/GetLabResultPrint?id=77' }] };
+      }
+      return { requests: [] };
+    },
+    async evaluate({ expression }) {
+      const e = String(expression);
+      evals.push(e);
+      if (e.includes('__SMD_CONNECT_OBSERVER__.events')) return { result: '[]' };
+      if (e.startsWith('mw:(')) return { result: JSON.stringify({ installed: true, installId: 'i1' }) };
+      if (e.includes('function CRAWL_PAGE_STATE')) return { result: JSON.stringify({ textLen: 5000, hasPasswordInput: false, dataTableCount: 1, anyVisible: true }) };
+      if (e.includes('function CRAWL_FIND_PATIENT_ROW')) return { result: JSON.stringify(state.page === 'worklist' ? { index: 1 } : null) };
+      if (e.includes('function CRAWL_CLICK_ROW')) { state.page = 'patient'; return { result: 'ok' }; }
+      if (e.includes('function CRAWL_FIND_CONTROLS')) return { result: JSON.stringify(state.page === 'worklist' ? [] : [{ index: 1, label: 'Lab reports', clinical: true }]) };
+      if (e.includes('function CRAWL_CLICK_CONTROL')) { state.page = 'labs'; return { result: 'ok' }; }
+      if (e.includes('function CRAWL_RAW_TABLE')) {
+        if (state.page === 'worklist') return { result: JSON.stringify({ id: 'data_tables1', class: '', headers: ['Patient ID', 'Patient name'], rows: [{ isHeader: false, onclick: "openPatient('X')" }] }) };
+        if (state.page === 'labs') return { result: JSON.stringify({ id: 'labs', class: '', headers: ['Test', 'Result'], rows: [{ isHeader: false, onclick: null }] }) };
+        return { result: 'null' };
+      }
+      if (e.includes('function CRAWL_RAW_BLOCK')) return { result: 'null' };
+      if (e.includes('function CRAWL_CLICK_FIRST_ROW')) { state.pendingCrossOrigin = true; return { result: 'row' }; }
+      if (e.includes('function CRAWL_DETAIL_SETTLED')) return { result: JSON.stringify({ gone: false, newest: true }) };
+      return { result: 'null' };
+    },
+  };
+}
+
+test('runPhoneDiscovery: the autonomous crawl carries deployment.origins through to the inline detail step, so a secondary-origin request is not dropped', async () => {
+  const state = { page: 'worklist', pendingCrossOrigin: false };
+  const plugin = crossOriginFakePlugin(state);
+  const calls = {};
+  await runPhoneDiscovery({
+    plugin, api: fakeApiDetail(calls), session: { id: 's1' },
+    deployment: { origins: ['https://emr.example', 'https://api.emr.example'] },
+    caps: { maxMs: 30000, waitMs: 1, verifyWaitMs: 5, verifyBudgetMs: 50 },
+  });
+  const detail = calls.discovery?.observedViews?.find((v) => v.resourceHint === 'labs-detail');
+  assert.ok(detail, 'the crawl never opened a labs row: ' + JSON.stringify(calls.discovery?.observedViews));
+  // navToReplayEntries only injects a nav-turned request into the replay buffer when its origin is
+  // allowed: this eval only fires once the crawl's caps carried deployment.origins that far down.
+  const injected = plugin.evals.some((e) => e.includes('window.__SMD_REPLAY__=window.__SMD_REPLAY__'));
+  assert.ok(injected, 'the secondary-origin request never reached the replay buffer (origins was not passed through)');
+});

@@ -8,7 +8,7 @@ import { existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
-import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, mergeEndpointDetails, hintFromHeaders } from '../../connect-agent/phone/deep-crawl.mjs';
+import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, mergeEndpointDetails, hintFromHeaders, awaitDetailRequest, exploreDetailOf } from '../../connect-agent/phone/deep-crawl.mjs';
 import { inferHtmlOperations } from '../../connect-agent/manifest/infer-html.mjs';
 import { extractRecords, isValidSelector } from '../../connect-agent/manifest/html.mjs';
 
@@ -362,6 +362,87 @@ test('deepCrawlClinical: accordion: medications captures the MED panel table, no
   // Downstream: inference now builds the medications AND labs operations from this crawl.
   const { operations } = inferHtmlOperations(observedViews, { originId: 'o1' });
   assert.deepEqual(operations.map((o) => o.type).sort(), ['list_medications', 'list_results', 'list_worklist']);
+});
+
+// --- awaitDetailRequest: F2 regression -------------------------------------------------------------
+//
+// client.wait() (plugin-client.mjs) resolves on DOM-quiet, about 270ms after a click - well before a
+// GHIS XHR answers - so the old flat wait let captureView run before the row's request had come back
+// and proof saw "no-requests". awaitDetailRequest polls the page's replay buffer instead.
+
+function fakePollClient({ appearAfter = Infinity, gone = false, pollDelayMs = 0 } = {}) {
+  const calls = [];
+  let polls = 0;
+  return {
+    calls,
+    async wait({ ms }) {
+      calls.push({ type: 'wait', ms });
+      if (ms === 300 && pollDelayMs) await sleep(pollDelayMs);
+    },
+    async evaluate({ expression }) {
+      polls += 1;
+      calls.push({ type: 'eval', n: polls });
+      const newest = !gone && polls > appearAfter;
+      return { result: JSON.stringify({ gone, newest }) };
+    },
+  };
+}
+
+test('awaitDetailRequest: polls until a request newer than the mark completes, then waits for render', async () => {
+  const client = fakePollClient({ appearAfter: 2 }); // polls 1,2 say not yet; poll 3 says newest
+  await awaitDetailRequest({ client, maxMs: 8000 });
+  const evalCount = client.calls.filter((c) => c.type === 'eval').length;
+  assert.equal(evalCount, 3, 'stopped polling as soon as a completed request appeared');
+  const waits = client.calls.filter((c) => c.type === 'wait').map((c) => c.ms);
+  assert.deepEqual(waits, [300, 300, 1500], 'two poll ticks then the render wait, not a flat single wait');
+});
+
+test('awaitDetailRequest: a full-page navigation (buffer gone) stops polling immediately', async () => {
+  const client = fakePollClient({ gone: true });
+  await awaitDetailRequest({ client, maxMs: 8000 });
+  assert.equal(client.calls.filter((c) => c.type === 'eval').length, 1);
+  assert.deepEqual(client.calls.filter((c) => c.type === 'wait').map((c) => c.ms), [1500]);
+});
+
+test('awaitDetailRequest: samePlace() going false (an in-page navigation) stops polling too', async () => {
+  const client = fakePollClient({ appearAfter: Infinity });
+  await awaitDetailRequest({ client, samePlace: async () => false, maxMs: 8000 });
+  assert.equal(client.calls.filter((c) => c.type === 'eval').length, 1);
+});
+
+test('awaitDetailRequest: never proven -> gives up at maxMs, still waits for render', async () => {
+  const client = fakePollClient({ appearAfter: Infinity, pollDelayMs: 5 });
+  const start = Date.now();
+  await awaitDetailRequest({ client, maxMs: 12 });
+  assert.ok(Date.now() - start < 2000, 'bounded by maxMs, not an unbounded poll');
+  const waits = client.calls.filter((c) => c.type === 'wait').map((c) => c.ms);
+  assert.equal(waits[waits.length - 1], 1500, 'still gives the render its 1500ms even after giving up');
+});
+
+test('exploreDetailOf: opens a row and polls (via awaitDetailRequest), not a flat wait, before capturing the detail', async () => {
+  const LABS_RAW = { id: 'labs', class: '', headers: ['Test', 'Result'], rows: [{ isHeader: false, onclick: null }] };
+  const evals = [];
+  const client = {
+    async currentUrl() { return { url: 'https://emr.example/Lab/Home' }; },
+    async wait() {},
+    async drainRequests() { return { requests: [] }; },
+    async evaluate({ expression }) {
+      const e = String(expression);
+      evals.push(e);
+      if (e.includes('function CRAWL_CLICK_FIRST_ROW')) return { result: 'row' };
+      if (e.includes('function CRAWL_DETAIL_SETTLED')) return { result: JSON.stringify({ gone: false, newest: true }) };
+      if (e.includes('function CRAWL_RAW_TABLE')) return { result: JSON.stringify(LABS_RAW) };
+      if (e.includes('function CRAWL_RAW_BLOCK')) return { result: 'null' };
+      return { result: 'null' };
+    },
+  };
+  const view = { resourceHint: 'labs', rowsSelector: '#labs tbody tr' };
+  const detail = await exploreDetailOf({ client, view, book: null, origins: ['https://emr.example'], waitMs: 1 });
+  assert.ok(detail, 'a row that clicked and settled still yields a detail view');
+  const clickAt = evals.findIndex((e) => e.includes('function CRAWL_CLICK_FIRST_ROW'));
+  const settledAt = evals.findIndex((e) => e.includes('function CRAWL_DETAIL_SETTLED'));
+  const captureAt = evals.findIndex((e) => e.includes('function CRAWL_RAW_TABLE'));
+  assert.ok(clickAt >= 0 && settledAt > clickAt && captureAt > settledAt, evals.join('\n'));
 });
 
 // --- deepCrawlClinical: real DOM (headless Chrome), proves the page-realm functions ----------------------

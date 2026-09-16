@@ -1009,6 +1009,41 @@ const CLICK_FIRST_ROW_SRC = String(CRAWL_CLICK_FIRST_ROW);
 /** Lists whose single record is worth a look: the call behind one lab result or one radiology report. */
 export const DETAIL_PARENTS = Object.freeze(['labs', 'radiology', 'history', 'discharge', 'notes']);
 
+/* THE ROW'S REQUEST, NOT THE DOM. client.wait() (plugin-client.mjs) resolves once the DOM has been
+ * quiet for a moment - about 270ms after a click - which is well before a GHIS XHR answers, so
+ * captureView read the list again with nothing changed and proof saw no completed request
+ * ("no-requests"). window.__SMD_REPLAY__ only gains an entry once a request actually FINISHES
+ * (discovery.mjs keep() runs from the fetch/XHR response handler, never on send), so a replay entry
+ * newer than the arm mark (window.__smdProveMark, set by CRAWL_ARM_OBSERVER just before the click) is
+ * proof the answer is in. A full-page navigation resets the buffer instead of growing it (seq falls
+ * below the mark), which also means "stop waiting". */
+function CRAWL_DETAIL_SETTLED() {
+  var mark = window.__smdProveMark || 0;
+  var R = window.__SMD_REPLAY__;
+  var gone = !R || R.seq < mark;
+  var newest = !gone && R.list.some(function (e) { return e.seq > mark; });
+  return JSON.stringify({ gone: gone, newest: newest });
+}
+const DETAIL_SETTLED_SRC = String(CRAWL_DETAIL_SETTLED);
+
+/** Polls every 300ms (capped at `maxMs`) until the click's request finishes, `samePlace()` says the
+ * page has moved, or the replay buffer itself is gone (a full navigation reset it), then gives the
+ * render 1500ms more before capture. `samePlace` is the caller's own "are we still on that screen"
+ * check (exploreDetailOf's plain path, the crawl's frame-aware whereAmI) - not duplicated here. */
+export async function awaitDetailRequest({ client, samePlace, maxMs = 8000 }) {
+  const stillHere = typeof samePlace === 'function' ? samePlace : async () => true;
+  const start = Date.now();
+  while (Date.now() - start < maxMs) {
+    let state = null;
+    try { state = JSON.parse((await client.evaluate({ expression: `(${DETAIL_SETTLED_SRC})()` }))?.result ?? 'null'); } catch { state = null; }
+    let here = true;
+    try { here = await stillHere(); } catch { here = false; }
+    if (!state || state.gone || state.newest || !here) break;
+    await client.wait({ ms: 300 });
+  }
+  await client.wait({ ms: 1500 });
+}
+
 /* OPEN ONE ROW OF A LIST AND LEARN THE CALL BEHIND IT.
  * The crawl does this inline while it walks (see exploreDetails below), but a screen the DOCTOR had
  * to demonstrate never went through the crawl, so its detail chain was never proven. On GHIS that is
@@ -1029,7 +1064,7 @@ export async function exploreDetailOf({ client, view, book, origins = [], waitMs
   let how = null;
   try { how = await client.evaluate({ expression: `(${CLICK_FIRST_ROW_SRC})(${JSON.stringify(view.rowsSelector)})` }); } catch { how = null; }
   if (!how || (how.result !== 'link' && how.result !== 'row')) return null;
-  await client.wait({ ms: waitMs });
+  await awaitDetailRequest({ client, samePlace: async () => (await pathNow()) === before, maxMs: Math.max(waitMs * 5, 8000) });
   // A report that opens as a page load is only replayable if the navigation is turned into a request.
   if (typeof client.drainRequests === 'function') {
     try {
@@ -1473,7 +1508,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
       const how = await client.evaluate({ expression: `(${CLICK_FIRST_ROW_SRC})(${JSON.stringify(view.rowsSelector)})` }).catch(() => ({ result: 'e' }));
       if (how && (how.result === 'link' || how.result === 'row')) {
         clicks += 1;
-        await client.wait({ ms: waitMs });
+        await awaitDetailRequest({ client, samePlace: async () => (await whereAmI()) === beforePath, maxMs: Math.max(waitMs * 5, 8000) });
         if (typeof client.drainRequests === 'function') {
           try {
             const drained = await client.drainRequests();

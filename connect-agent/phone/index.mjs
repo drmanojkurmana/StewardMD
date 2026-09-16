@@ -271,7 +271,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     // yields no html ops.
     try {
       const crawl = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
+        client: plugin, caps: Object.assign({ exploreDetails: true, origins }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = crawl.observedViews || [];
@@ -335,7 +335,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     await setMode('agent');
     try {
       const again = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
+        client: plugin, caps: Object.assign({ exploreDetails: true, origins }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = again.observedViews || [];
@@ -371,7 +371,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     await setMode('agent');
     try {
       const again = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
+        client: plugin, caps: Object.assign({ exploreDetails: true, origins }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       /* MERGE, NEVER REPLACE. "Look again" used to overwrite observedViews with whatever the new walk
