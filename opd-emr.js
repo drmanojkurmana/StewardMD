@@ -2194,14 +2194,34 @@
 
   function oncoExportHtmlDoc(html, filename, title) {
     var name = (filename || "StewardMD-Protocol-sheet").replace(/[^\w.-]+/g, "-");
+    toast("Building PDF...");
     if (G.SMD_IS_NATIVE) {
       var N = G.SMD_NATIVE;
       if (N && N.sharePdfFromHtml) {
-        toast("Building PDF...");
-        N.sharePdfFromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () { oncoShareHtml(html, name); });
+        N.sharePdfFromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () {
+          if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+            G.SMD_PDF.fromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () { toast("PDF export failed."); });
+          } else {
+            toast("PDF export unavailable.");
+          }
+        });
         return;
       }
-      oncoShareHtml(html, name);
+    }
+    if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+      G.SMD_PDF.fromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () {
+        try {
+          var ifr = document.createElement("iframe");
+          ifr.setAttribute("aria-hidden", "true");
+          ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
+          document.body.appendChild(ifr);
+          var d = ifr.contentWindow.document; d.open(); d.write(html); d.close();
+          setTimeout(function () {
+            try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {}
+            setTimeout(function () { try { ifr.remove(); } catch (e) {} }, 1500);
+          }, 350);
+        } catch (e) { toast("Export unavailable."); }
+      });
       return;
     }
     try {

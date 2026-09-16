@@ -2067,7 +2067,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-splashat2" defer></script>
+<script src="/native-bridge.js?v=nb-pdf3" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -2099,9 +2099,8 @@ window.openExternal = function (u) {
 <script src="/nmc-register.js?v=gold1" defer></script>
 <!-- Prescription PDF/JPEG export libraries (html2canvas → canvas, jsPDF → PDF). Loaded before
      prescription.js; export is user-triggered so defer order is safe. -->
-<script src="/lazy-load.js?v=1" defer></script>
-<!-- lazy loaded: html2canvas -->
-<!-- lazy loaded: jspdf -->
+<script src="/vendor-html2canvas.js?v=1" defer></script>
+<script src="/vendor-jspdf.js?v=1" defer></script>
 <script src="/rx-brand-match.js?v=rxb1" defer></script>
 <!-- RxChoice - cost-optimization layer over a FINISHED prescription. Load order matters: the flags
      registry and the deterministic core must exist before prescription.js renders its button, and
@@ -2588,7 +2587,7 @@ window.openExternal = function (u) {
 <script src="/onco-cycle-timeline.js?v=op1" defer></script>
 <script src="/onco-ddi-sentry.js?v=op1" defer></script>
 <script src="/onco-genomics.js?v=op1" defer></script>
-<script src="/onco-home.js?v=hardlocal4" defer></script>
+<script src="/onco-home.js?v=hardlocal5" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->
@@ -2597,7 +2596,7 @@ window.openExternal = function (u) {
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot5" defer></script>
 <script src="/oncotree.js?v=nccn-nav5" defer></script>
-<script src="/protocol-sheet.js?v=ps2" defer></script>
+<script src="/protocol-sheet.js?v=ps3" defer></script>
 <script src="/protocol-maker.js?v=pm2" defer></script>
 <!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is
      UNIVERSAL: minted on sign-in for every user (kill switch smd_steward_id_mint,

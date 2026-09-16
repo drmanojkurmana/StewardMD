@@ -242,7 +242,88 @@
     }
   }
 
-  function doPrint() { commitEdits(); try { G.print(); } catch (e) {} }
+  function buildExportHtml() {
+    var pr = st.protocol || {};
+    return '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>' + esc(pr.name || "Treatment Protocol") + '</title>' +
+      '<style>' +
+      ':root{color-scheme:light}' +
+      'body{margin:0;padding:16px;background:#fff!important;color:#14202b!important;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}' +
+      '.ps-sheet{max-width:800px;margin:0 auto;background:#fff;border:none;box-shadow:none;padding:12px}' +
+      '.ps-inst{text-align:center;border-bottom:2px solid #14202b;padding-bottom:8px;margin-bottom:8px}' +
+      '.ps-inst-name{font:800 18px system-ui;letter-spacing:.01em}' +
+      '.ps-inst-dept{font:600 12px system-ui;color:#5a7184;margin-top:2px}' +
+      '.ps-inst-line{font:500 10.5px system-ui;color:#5a7184}' +
+      '.ps-title{text-align:center;font:800 15px system-ui;letter-spacing:.04em;text-transform:uppercase;margin:6px 0 12px}' +
+      '.ps-hgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px 16px;margin-bottom:12px}' +
+      '.ps-f{display:flex;align-items:baseline;gap:6px;font-size:12px}' +
+      '.ps-f>span{color:#5a7184;font-weight:600;white-space:nowrap}' +
+      '.ps-f>b{font-weight:700}' +
+      '.ps-tablewrap{border:1px solid #94a3b8;border-radius:8px;overflow:hidden;margin-top:8px}' +
+      '.ps-table{width:100%;border-collapse:collapse;font-size:11.5px}' +
+      '.ps-table th{background:#f1f5f9;color:#475569;font:700 10px system-ui;text-transform:uppercase;padding:6px 8px;border-bottom:1.5px solid #94a3b8;text-align:left}' +
+      '.ps-table td{padding:6px 8px;border-bottom:1px solid #cbd5e1;vertical-align:top}' +
+      '.ps-table tr:last-child td{border-bottom:none}' +
+      '.ps-dname{font-weight:700}' +
+      '.ps-cap{font:700 8.5px system-ui;text-transform:uppercase;color:#fff;background:#c0392b;border-radius:4px;padding:1px 4px}' +
+      '.ps-ddesc b{font-weight:800;color:#0e6e63}' +
+      '.ps-daily{font:800 11px system-ui;color:#14202b}' +
+      '.ps-permetre{display:block;color:#5a7184;font-size:10.5px;margin-top:1px}' +
+      '.ps-dnote{display:block;color:#5a7184;font-size:10px;margin-top:2px;font-style:italic}' +
+      '.ps-cyc{text-align:center;font:600 11px system-ui}' +
+      '.ps-cyc.x{color:#b6bfc7;font-weight:700}' +
+      '.ps-legend{font-size:10px;color:#5a7184;margin:6px 0 6px}' +
+      '.ps-warns{display:flex;gap:8px;font-size:11.5px;color:#92400e;background:#fef3c7;border-radius:8px;padding:8px 10px;margin:8px 0}' +
+      '.ps-block{margin-top:12px}' +
+      '.ps-block-h{font:800 10.5px system-ui;text-transform:uppercase;color:#475569;margin-bottom:4px}' +
+      '.ps-block ul{margin:0;padding-left:18px}' +
+      '.ps-block li,.ps-block p{font-size:11px;line-height:1.4;margin:2px 0}' +
+      '.ps-sig-row{display:flex;gap:16px;margin-top:16px;align-items:flex-end}' +
+      '.ps-sig-pad{flex:1 1 260px}' +
+      '.ps-sig-pad canvas{width:100%;height:100px;border:1px dashed #94a3b8;border-radius:8px}' +
+      '.ps-sig-label{font:600 10px system-ui;color:#64748b;margin-top:2px}' +
+      '.ps-sig-meta{flex:0 0 auto;display:flex;flex-direction:column;gap:6px;min-width:140px}' +
+      '.ps-foot{margin-top:16px;padding-top:10px;border-top:1px solid #cbd5e1;font-size:9.5px;color:#64748b;line-height:1.4}' +
+      '.ps-vh,.ps-verify,.ps-sig-actions{display:none!important}' +
+      '@page{margin:10mm}' +
+      '@media print{.ps-vh,.ps-verify,.ps-sig-actions{display:none!important}}' +
+      '</style></head><body>' + sheetHtml() + '</body></html>';
+  }
+
+  function doPrint() {
+    commitEdits();
+    var pr = st.protocol || {};
+    var name = ("StewardMD-" + (pr.name || pr.id || "protocol")).replace(/[^\w.-]+/g, "-");
+    var fullHtml = buildExportHtml();
+    if (G.toast) G.toast("Building PDF...");
+
+    // 1. Native bridge PDF export (shares real .pdf)
+    var N = G.SMD_NATIVE;
+    if (G.SMD_IS_NATIVE && N && N.sharePdfFromHtml) {
+      N.sharePdfFromHtml(fullHtml, name, "StewardMD - " + (pr.name || "Protocol sheet")).catch(function () {
+        if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+          G.SMD_PDF.fromHtml(fullHtml, name, "StewardMD - " + (pr.name || "Protocol sheet")).catch(function () {
+            try { G.print(); } catch (e) {}
+          });
+        } else {
+          try { G.print(); } catch (e) {}
+        }
+      });
+      return;
+    }
+
+    // 2. Client-side PDF export (downloads real .pdf)
+    if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+      G.SMD_PDF.fromHtml(fullHtml, name, "StewardMD - " + (pr.name || "Protocol sheet")).catch(function () {
+        try { G.print(); } catch (e) {}
+      });
+      return;
+    }
+
+    // 3. Desktop browser print fallback
+    try { G.print(); } catch (e) {}
+  }
 
   function doAssign() {
     commitEdits();
