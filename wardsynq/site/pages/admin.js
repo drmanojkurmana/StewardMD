@@ -594,6 +594,7 @@
         '<button class="btn ghost" id="clinApply" type="button">' + esc(T(c, "site.admin.hospital.clinical.applyTemplate", "Fill the form from the template")) + '</button></div><div id="clinTplNote" class="quiet"></div>' +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.highAlert", "High-alert drugs, one per line")) + '</span><textarea id="clinHigh" rows="4">' + lines(s.highAlertDrugs) + "</textarea></label>" +
         '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.abx", "Antibiotics counted for days of therapy, one per line")) + '</span><textarea id="clinAbx" rows="4">' + lines(s.antibiotics) + "</textarea></label></div>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.controlled", "Controlled drugs (NDPS register; a second person witnesses every dispense, dose and wastage), one per line")) + '</span><textarea id="clinControlled" rows="4">' + lines(s.controlledDrugs) + "</textarea></label></div>" +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.verify", "Pharmacy verifies an order within (hours)")) + '</span><input id="clinVerify" type="number" min="1" max="168" value="' + val(s.orderVerifyWithinHours) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label>' +
         '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.rpo", "Backup recovery point objective (minutes)")) + '</span><input id="clinRpo" type="number" min="5" max="10080" value="' + val(s.rpoMinutes) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label></div>' +
       '<p>' + esc(T(c, "site.admin.hospital.clinical.edInterval", "ED reassessment interval by acuity (minutes)")) + '</p><div class="row">' + ACUITY.map(function (a) {
@@ -611,6 +612,7 @@
     var list = function (a) { return a && a.length ? esc(a.join(", ")) : nc; };
     var ed = ACUITY.filter(function (a) { return s.edReassessMinutes && s.edReassessMinutes[a] != null; }).map(function (a) { return T(c, "site.admin.hospital.clinical.edReadback", "acuity {a}: {min} min", { a: a, min: s.edReassessMinutes[a] }); });
     return '<div class="kv"><dt>' + esc(T(c, "site.admin.hospital.clinical.highAlert2", "High-alert drugs")) + "</dt><dd>" + list(s.highAlertDrugs) + "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.abx2", "Antibiotics")) + "</dt><dd>" + list(s.antibiotics) +
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.controlled2", "Controlled drugs")) + "</dt><dd>" + list(s.controlledDrugs) +
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.verify2", "Verify within")) + "</dt><dd>" + (s.orderVerifyWithinHours != null ? esc(T(c, "site.admin.hospital.clinical.hours", "{n} hours", { n: s.orderVerifyWithinHours })) : nc) +
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.edReassess", "ED reassessment")) + "</dt><dd>" + (ed.length ? esc(ed.join(", ")) : nc) +
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.patientAccess2", "Patient access")) + "</dt><dd>" + (s.patientAccess && s.patientAccess.enabled ? esc(T(c, "site.admin.on", "on")) : esc(T(c, "site.admin.off", "off"))) +
@@ -622,7 +624,7 @@
     var num = function (v) { v = String(v == null ? "" : v).trim(); return v === "" ? null : Number(v); };
     var ed = {};
     ACUITY.forEach(function (a) { var v = num(get("ed" + a)); if (v != null) ed[a] = v; });
-    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
+    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), controlledDrugs: names("clinControlled"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
   }
   WSQ._clinicalSettings = { html: clinicalSettingsHtml, readBack: clinicalReadBackHtml, read: readClinicalSettings };
   function wireClinicalSettings(c) {

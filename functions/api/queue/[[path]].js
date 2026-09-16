@@ -203,6 +203,9 @@ function idemFor(key, piece, index) {
 }
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
+import { REGISTER_SUBS, registerRoute, formFGate } from "../../_wardsynq/register-routes.js";
+import { listEntries as listRegisterEntries } from "../../_wardsynq/registers.js";
+import { controlledSet, isControlledDrug } from "../../_wardsynq/controlled-drugs.js";
 import { imagingStudies } from "../../_wardsynq/imaging-viewer.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
 import { imagingWorklist } from "../../_wardsynq/dicom.js";
@@ -1663,6 +1666,22 @@ export async function onRequest(context) {
          * hospital admin's: staff.admin here, and the role itself checked in the handler, so hr is refused. */
         "bug-report": CAPS.QUEUE_VIEW, "bug-reports": CAPS.QUEUE_VIEW,
         "bug-report-status": CAPS.STAFF_ADMIN, "bug-report-remove": CAPS.STAFF_ADMIN,
+        /* Statutory registers (register-routes.js), 2026-09-16. Each register is its own authority and a register's
+         * custodian is named here: the pharmacist and ward in-charge keep the NDPS book, the radiologist and
+         * obstetrician Form F, the obstetrician and medical records the MTP register, medical records the births,
+         * deaths and medico-legal register, the public health nodal officer the notifiable disease register. The
+         * doctors who CREATE entries (an MLC, a cause-of-death certificate, a notification) are named per route;
+         * the alternatives are below the table. The form definitions carry no data, so any member may read them. */
+        "register-schema": CAPS.QUEUE_VIEW,
+        "register-ndps": CAPS.REGISTER_NDPS,
+        "register-formf": CAPS.REGISTER_PCPNDT,
+        "register-mtp": CAPS.REGISTER_MTP,
+        "register-vital": CAPS.REGISTER_RECORDS,
+        "register-mccd": CAPS.EMR_TREAT,
+        "register-mlc": method === "POST" ? CAPS.MLC_RECORD : CAPS.REGISTER_RECORDS, "mlc-patient": CAPS.MLC_RECORD,
+        // Yes or no and the MLC number on the chart, for everyone who may read the chart. The details stay in the register.
+        "mlc-flag": CAPS.EMR_VIEW,
+        "register-notification": method === "POST" ? CAPS.EMR_TREAT : CAPS.REGISTER_IHIP, "notifiable-prompts": CAPS.EMR_VIEW,
       };
       /* Every eMAR transition needs MED_ADMINISTER, including verify and dispense.
        *
@@ -1775,6 +1794,10 @@ export async function onRequest(context) {
        * routes - the `blood_bank` role holds TRANSFUSION_ISSUE and none of the EMR capabilities, and
        * this does not narrow what emr.treat could already do. Same shape as the two checks above. */
       if (!wAz.ok && TRANSFUSION_SUBS.has(sub)) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.TRANSFUSION_ISSUE);
+      /* Statutory registers: the custodian may also do what the creating doctor does. Medical records corrects a
+       * medico-legal case and opens one patient's; the nodal officer records a notification. Nothing else widens. */
+      if (!wAz.ok && ((sub === "register-mlc" && method === "POST") || sub === "mlc-patient")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
+      if (!wAz.ok && sub === "register-notification" && method === "POST") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_IHIP);
       /* Asking for a purchase order's approval is the pharmacy's own next step after raising it. The
        * request cap (emr.vitals) is a ward one pharmacy does not hold, so "Ask for approval" on the
        * Purchasing screen was always refused. Only for supply subjects; deciding still needs emr.treat. */
@@ -1834,6 +1857,33 @@ export async function onRequest(context) {
       if (!mig) return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }, 409, request);
       if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
       const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg };
+      /* CONTROLLED DRUGS (controlled-drugs.js). Whether a drug is controlled is the hospital's drug master; who may witness
+       * one is an ACTIVE member of THIS hospital who dispenses, gives medicines or keeps the NDPS register. The lookup
+       * lives here because the membership store does; the domain files only ask. */
+      const controlled = controlledSet(wsqCfg);
+      const isControlled = (drug, code) => isControlledDrug(null, drug, code, controlled);
+      const witnessCheck = async (witnessId) => {
+        const who = { kind: "witness", id: String(witnessId), email: String(witnessId).indexOf("@") > 0 ? String(witnessId).toLowerCase() : null };
+        for (const cap of [CAPS.ORDER_DISPENSE, CAPS.MED_ADMINISTER, CAPS.REGISTER_NDPS]) {
+          const az = await ORG.authorizeOrg(env, who, wOrgId, cap);
+          if (az && az.ok) return true;
+        }
+        return false;
+      };
+      /* The MLC flag a discharge summary and a death record carry: the numbers of this patient's open medico-legal
+       * cases, or null. Throws when the register cannot be read, so the caller refuses instead of dropping the flag. */
+      const medicoLegalFor = async (patientId) => {
+        const r = await listRegisterEntries({ ...deps, actor: { id: actor.id }, kind: "mlc", patientId });
+        if (!r.ok) throw new Error("mlc register unreadable");
+        const open = r.entries.filter((e) => e.fields && e.fields.status !== "withdrawn");
+        return open.length ? { mlc: true, numbers: open.map((e) => e.serial) } : null;
+      };
+      if (REGISTER_SUBS.has(sub)) {
+        const query = {};
+        for (const k of ["kind", "period", "from", "to", "id", "format", "patientId", "pending", "prefill", "week", "state"]) { const v = url.searchParams.get(k); if (v != null && v !== "") query[k] = v; }
+        const r = await registerRoute(request, env, { ...deps, orgName: (wOrg && wOrg.name) || "", actor: { id: actor.id, role: wAz.role || null }, sub, method, body, query, witnessCheck, isControlled });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       /* BACKGROUND WORK ON ORDINARY TRAFFIC: escalate unacknowledged critical results and drain the
        * outbox, at most once per two minutes per hospital, after the response is on its way. No
        * scheduler is required for a hospital that is in use; ops-tick.js is callable by one as well. */
@@ -1881,7 +1931,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "deceased" && method === "POST") {
-        const r = await recordDeath(request, env, { ...deps, patientId: body.patientId, deceased: body.deceased || body, confirm: body.confirm === true, correct: body.correct === true, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordDeath(request, env, { ...deps, patientId: body.patientId, deceased: body.deceased || body, confirm: body.confirm === true, correct: body.correct === true, idempotencyKey: body.idempotencyKey || null, medicoLegalFor });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "deceased-correct" && method === "POST") {
@@ -2912,7 +2962,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock-move" && method === "POST") {
-        const r = await recordMovement(request, env, { ...deps, kind: body.kind, code: body.code, display: body.display, quantity: body.quantity, location: labStockOnly ? LAB_STOCK_LOCATION : body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordMovement(request, env, { ...deps, kind: body.kind, code: body.code, display: body.display, quantity: body.quantity, location: labStockOnly ? LAB_STOCK_LOCATION : body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null,
+          receivedFrom: body.receivedFrom, documentNo: body.documentNo, controlled: isControlled(body.display, body.code), witnessId: body.witnessId, witnessCheck });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock" && method === "GET") {
@@ -2924,7 +2975,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock-reconcile" && method === "POST") {
-        const r = await reconcileCount(request, env, { ...deps, code: body.code, location: body.location, unit: body.unit, counted: body.counted, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await reconcileCount(request, env, { ...deps, code: body.code, location: body.location, unit: body.unit, counted: body.counted, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null,
+          controlled: isControlled(body.code, body.code), witnessId: body.witnessId, witnessCheck });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "charges" && method === "GET") {
@@ -3350,7 +3402,8 @@ export async function onRequest(context) {
       }
       if (sub === "report-imaging" && method === "POST") {
         const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, critical: !!body.critical, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null,
-          templateId: body.templateId, templateVersion: body.templateVersion, sections: body.sections, templates: (wsqCfg && wsqCfg.radiologyTemplates) || null });
+          templateId: body.templateId, templateVersion: body.templateVersion, sections: body.sections, templates: (wsqCfg && wsqCfg.radiologyTemplates) || null,
+          formFCheck: (sr, modality) => formFGate(deps, sr, modality) });
         /* A CRITICAL IMAGING FINDING OPENS ITS LOOP ON RELEASE - the same fix as release-result, and the
          * same bug: a report marked critical set report.critical, which openCriticalLoops reads, but nothing
          * called openCriticalLoops, so a reported pneumothorax alerted nobody. Only opened when the report is
@@ -3887,7 +3940,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense" && method === "POST") {
-        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, at: body.at, idempotencyKey: body.idempotencyKey || null,
+          isControlled, witnessId: body.witnessId, witnessCheck });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense-return" && method === "POST") {
@@ -4096,7 +4150,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "discharge-summary" && method === "POST") {
-        const r = await draftDischargeSummary(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, dischargedAt: body.dischargedAt, sections: body.sections, idempotencyKey: body.idempotencyKey || null });
+        const r = await draftDischargeSummary(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, dischargedAt: body.dischargedAt, sections: body.sections, idempotencyKey: body.idempotencyKey || null, medicoLegalFor });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "sign-discharge-summary" && method === "POST") {
@@ -4126,7 +4180,7 @@ export async function onRequest(context) {
           ...deps, action: body.action, orderId: body.orderId, dueAt: body.dueAt, expectedOrderVersion: body.expectedOrderVersion,
           patient: body.patient, scan: body.scan, reason: body.reason, witnessId: body.witnessId,
           rulePack: getRulePack(), highAlertDrugs: (wsqCfg && wsqCfg.highAlertDrugs) || [],
-          idempotencyKey: body.idempotencyKey || null,
+          idempotencyKey: body.idempotencyKey || null, isControlled, witnessCheck,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
