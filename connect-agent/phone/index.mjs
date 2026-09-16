@@ -223,11 +223,13 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
        * detail call stayed unknown and the completeness gate reported "<kind>-detail: absent" forever.
        * GHIS radiology is the case that forces this: its module is not linked from the patient chart,
        * so the crawl can never see it and the ask is the ONLY way radiology-detail can be learned. */
-      try {
-        const deeper = await exploreDetailOf({ client: plugin, view, book, origins, waitMs: caps?.verifyWaitMs ?? 1200 });
-        if (deeper) { observedViews.push(deeper); notify('CAPTURED', { gap: gap + '-detail', step, total, found, looking: looking() }); }
-      } catch { /* the list itself still counts; a detail we could not open is not a failed ask */ }
       await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
+      if (view.proof && view.proof.status === 'proven') {
+        try {
+          const deeper = await exploreDetailOf({ client: plugin, view, book, origins, waitMs: caps?.verifyWaitMs ?? 1200 });
+          if (deeper) { observedViews.push(deeper); notify('CAPTURED', { gap: gap + '-detail', step, total, found, looking: looking() }); }
+        } catch { /* the list itself still counts; a detail we could not open is not a failed ask */ }
+      }
       if (verdict && verdict.resource && verdict.resource !== 'none' && verdict.resource !== gap && Number(verdict.confidence) >= 0.8) {
         warnings.push('the ' + gap + ' screen looks like ' + verdict.resource + ' to the model');
       }

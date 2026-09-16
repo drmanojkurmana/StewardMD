@@ -204,3 +204,90 @@ test('falls back to the typed address when the browser has no usable current URL
   });
   assert.equal(navigated[0], 'https://emr.example/login');
 });
+
+/* F1 REGRESSION. window.__smdPointed (the table the doctor tapped during a guided ask) makes captureView
+ * re-read that SAME table (CRAWL_RAW_TABLE / CRAWL_RAW_BLOCK prefer a pointed table), so clearing it must
+ * happen BEFORE exploreDetailOf opens a row, not after: otherwise the "detail" captured is the list again.
+ * And a detail is only worth opening once the parent screen is actually proven; chasing a row on an
+ * unproven screen wastes the ask and can capture nothing of value. */
+const DETAIL_LABS_RAW = { id: 'labs', class: '', headers: ['Test', 'Result', 'Unit'], rows: [{ isHeader: false, onclick: null }] };
+const PROVEN_SCREEN = ['alphacbc', 'betaresult', 'gammaunit'];
+const PROVEN_ENTRIES = [{ seq: 500, method: 'GET', url: 'https://emr.example/Lab/Home/GetLabResults?pid=X', body: null, xhr: true, status: 200, shape: { kind: 'json', keys: ['Test', 'Result', 'Unit'], rows: 1 } }];
+const PROVEN_ANSWERS = { 500: { status: 200, contentType: 'application/json', text: JSON.stringify([{ Test: 'alphacbc', Result: 'betaresult', Unit: 'gammaunit' }]) } };
+
+function detailFakePlugin({ proven }) {
+  const evals = [];
+  return {
+    platform: 'android', evals,
+    async navigate() { return { ok: true }; },
+    async wait() {},
+    async snapshot() { return { snapshot: '' }; },
+    async click() { return { result: 'ok' }; },
+    async closeTab() { return { ok: true }; },
+    async currentUrl() { return { url: 'https://emr.example/doctor/home' }; },
+    async setMode() { return { ok: true }; },
+    async drainRequests() { return { requests: [] }; },
+    async evaluate({ expression }) {
+      const e = String(expression);
+      evals.push(e);
+      if (e.includes('__SMD_CONNECT_OBSERVER__.events')) return { result: '[]' };
+      if (e.startsWith('mw:(')) return { result: JSON.stringify({ installed: true, installId: 'i1' }) };
+      if (e.includes('function CRAWL_RAW_TABLE')) return { result: JSON.stringify(DETAIL_LABS_RAW) };
+      if (e.includes('function CRAWL_RAW_BLOCK')) return { result: 'null' };
+      if (e.includes('function CRAWL_GUIDE_PATH')) return { result: '[]' };
+      if (e.includes('function CRAWL_ARM_GUIDE') || e.includes('function CRAWL_ARM_OBSERVER')) return { result: 'ok' };
+      if (e.includes('function CRAWL_CLEAR_POINT')) return { result: 'ok' };
+      if (e.includes('function CRAWL_CLICK_FIRST_ROW')) return { result: 'row' };
+      if (e.includes('function PROVE_LIST(since)')) return { result: JSON.stringify(proven ? PROVEN_ENTRIES : []) };
+      if (e.includes('function PROVE_SCREEN(spec)')) return { result: JSON.stringify(PROVEN_SCREEN) };
+      if (e.includes('function PROVE_EXEC(seq)')) {
+        const m = /\)\((\d+)\)$/.exec(e);
+        return { result: JSON.stringify(PROVEN_ANSWERS[m ? Number(m[1]) : 0] || { status: 0 }) };
+      }
+      return { result: null };
+    },
+  };
+}
+
+function fakeApiDetail(calls) {
+  return {
+    plan: async () => ({ action: 'stop', reason: 'test' }),
+    progress: async () => ({ ok: true }),
+    discovery: async (body) => { calls.discovery = body; return { candidateVersionId: 'v1', manifest: { operations: [] }, probes: [] }; },
+    evidence: async (body) => { calls.evidence = body; return { capabilities: [], evidenceHash: 'sha256:x', state: 'AWAITING_APPROVAL' }; },
+  };
+}
+
+// askDoctor says Done once for 'labs', skips every other gap immediately.
+const askDoneOnceForLabs = () => {
+  let asks = 0;
+  return async ({ gap }) => {
+    if (gap !== 'labs') return { done: false };
+    asks += 1;
+    return { done: asks === 1 };
+  };
+};
+
+test('askOne: an unproven guided screen is never sent into exploreDetailOf', async () => {
+  const plugin = detailFakePlugin({ proven: false });
+  await runPhoneDiscovery({
+    plugin, api: fakeApiDetail({}), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] },
+    mode: 'manual', caps: { maxMs: 30000, waitMs: 1, verifyWaitMs: 5 },
+    askDoctor: askDoneOnceForLabs(),
+  });
+  assert.ok(!plugin.evals.some((e) => e.includes('function CRAWL_CLICK_FIRST_ROW')), 'exploreDetailOf ran on an unproven view');
+});
+
+test('askOne: the pointed table is cleared before a proven view is explored one row deeper', async () => {
+  const plugin = detailFakePlugin({ proven: true });
+  await runPhoneDiscovery({
+    plugin, api: fakeApiDetail({}), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] },
+    mode: 'manual', caps: { maxMs: 30000, waitMs: 1, verifyWaitMs: 5 },
+    askDoctor: askDoneOnceForLabs(),
+  });
+  const clearAt = plugin.evals.findIndex((e) => e.includes('function CRAWL_CLEAR_POINT'));
+  const clickAt = plugin.evals.findIndex((e) => e.includes('function CRAWL_CLICK_FIRST_ROW'));
+  assert.ok(clearAt >= 0, 'clearPoint was never called');
+  assert.ok(clickAt >= 0, 'exploreDetailOf never ran on a proven view');
+  assert.ok(clearAt < clickAt, `clearPoint (index ${clearAt}) must run before the detail explore (index ${clickAt})`);
+});
