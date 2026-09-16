@@ -133,8 +133,10 @@ function resolveGeneric(text, pack) {
  *     doseLimits: { <generic>: {maxSingle:{value,unit}, maxDaily:{value,unit},
  *                               mgPerKgSingle?, mgPerKgUpToKg?, absoluteCeilingSingle?,
  *                               absoluteCeilingDaily?} },
- *     renalAdjustments: { <generic>: { <band>: {dose, note} } }
+ *     renalAdjustments: { <generic>: { <band>: {dose, note} } },
+ *     pregnancyLactation: { <generic>: { pregnancy?: {level, text}, lactation?: {level, text} } }
  *   }
+ * A pregnancyLactation level is one of SEVERITY; its findings are always OVERRIDABLE (checkPregnancyLactation).
  */
 function compileRulePack(raw) {
   if (!raw || typeof raw !== "object") throw new SafetyEngineError("a rule pack object is required");
@@ -151,6 +153,7 @@ function compileRulePack(raw) {
   for (const g of raw.generics || []) genericIndex.add(lower(g));
   for (const g of Object.keys(raw.doseLimits || {})) genericIndex.add(lower(g));
   for (const g of Object.keys(raw.renalAdjustments || {})) genericIndex.add(lower(g));
+  for (const g of Object.keys(raw.pregnancyLactation || {})) genericIndex.add(lower(g));
 
   // Vocabulary reconciliation. Real drug data does not agree with itself: StewardMD's interaction
   // set spells amoxicillin "amoxicillin anhydrous", so an allergy list saying "amoxicillin" would
@@ -246,12 +249,20 @@ function compileRulePack(raw) {
     renalAdjustments.set(lower(generic), bands);
   }
 
+  // Only a side with a text and a known level is a rule: a malformed entry must not read as guidance.
+  const pregnancyLactation = new Map();
+  const plSide = (s) => (s && typeof s.text === "string" && s.text.trim() && SEVERITY_ORDER.includes(s.level) ? { level: s.level, text: s.text.trim() } : null);
+  for (const [generic, rule] of Object.entries(raw.pregnancyLactation || {})) {
+    const pregnancy = plSide(rule && rule.pregnancy), lactation = plSide(rule && rule.lactation);
+    if (pregnancy || lactation) pregnancyLactation.set(lower(generic), { pregnancy, lactation });
+  }
+
   return Object.freeze({
     version: raw.version || "unversioned",
     generatedAt: raw.generatedAt || null,
     drugClasses, genericIndex, aliases, combinations, interactions, byToken,
     allergyClassOf, allergyMembers, crossReactivity,
-    doseLimits, renalAdjustments,
+    doseLimits, renalAdjustments, pregnancyLactation,
   });
 }
 
@@ -781,6 +792,44 @@ function checkRenal(pack, order, clinical) {
   return out;
 }
 
+/**
+ * Pregnancy and lactation. Data-driven per generic (pack.pregnancyLactation), and ALWAYS OVERRIDABLE: whether
+ * a medicine is used in pregnancy or breastfeeding is a prescriber's judgement with the patient, never a hard
+ * stop, whatever level the rule states.
+ *
+ * `status` is the patient's recorded state, read by the caller from the record: { pregnant, lactating }, each
+ * true, false or null. null is NOT RECORDED, and it never reads as cleared: a drug with a rule for a side whose
+ * status is unknown gets a WARN finding saying the guidance was not applied, unless a rule already fired for it.
+ * Opt-in (checks: "pregnancy"): only order entry reads the maternity record.
+ */
+function checkPregnancyLactation(pack, order, status) {
+  const out = [];
+  const rules = pack.pregnancyLactation;
+  if (!rules || !rules.size) return out;
+  const s = status || {};
+  for (const generic of resolveComponents(order.drugCode || order.drug, pack)) {
+    const rule = rules.get(generic);
+    if (!rule) continue;
+    let fired = false;
+    if (rule.pregnancy && s.pregnant === true) {
+      out.push(finding("PREGNANCY_RISK", DISPOSITION.OVERRIDABLE, rule.pregnancy.level,
+        `The patient is recorded as pregnant. ${order.drug}: ${rule.pregnancy.text}`, { ruleId: `pregnancy:${generic}`, generic }));
+      fired = true;
+    }
+    if (rule.lactation && s.lactating === true) {
+      out.push(finding("LACTATION_RISK", DISPOSITION.OVERRIDABLE, rule.lactation.level,
+        `The patient is recorded as breastfeeding or within the hospital's postpartum lactation window. ${order.drug}: ${rule.lactation.text}`, { ruleId: `lactation:${generic}`, generic }));
+      fired = true;
+    }
+    const unknown = (rule.pregnancy && s.pregnant !== true && s.pregnant !== false) || (rule.lactation && s.lactating !== true && s.lactating !== false);
+    if (unknown && !fired) {
+      out.push(finding("PREGNANCY_STATUS_UNKNOWN", DISPOSITION.WARN, SEVERITY.MODERATE,
+        `Pregnancy or breastfeeding status is not recorded for this patient, so the pregnancy and lactation guidance for ${order.drug} was not applied.`, { generic }));
+    }
+  }
+  return out;
+}
+
 /* ------------------------------------------------------------------ engine */
 
 /**
@@ -831,6 +880,7 @@ class SafetyEngine {
     if (this.checks.includes("dose")) findings = findings.concat(checkDose(this.rulePack, order, clinical));
     if (this.checks.includes("renal")) findings = findings.concat(checkRenal(this.rulePack, order, clinical));
     if (this.checks.includes("same-drug")) findings = findings.concat(checkSameDrug(this.rulePack, order, activeMeds || []));
+    if (this.checks.includes("pregnancy")) findings = findings.concat(checkPregnancyLactation(this.rulePack, order, ctx.pregnancyStatus));
 
     // An override clears exactly one overridable finding, matched by code and, where the finding
     // names one, its rule/allergy id. It can never clear a block: that is what Category 1 means.
@@ -924,6 +974,6 @@ export {
   SEVERITY, SEVERITY_ORDER, DISPOSITION, NON_OVERRIDABLE_REACTIONS,
   SafetyEngine, SafetyEngineError,
   compileRulePack, emptyRulePack, defaultDisposition,
-  checkAllergies, checkInteractions, checkDose, checkRenal, checkSameDrug, collapseDuplicateFindings, dosesPerDay,
+  checkAllergies, checkInteractions, checkDose, checkRenal, checkSameDrug, checkPregnancyLactation, collapseDuplicateFindings, dosesPerDay,
   resolveGeneric, resolveComponents, renalBand, isSevereReaction, satisfyRule, satisfyDuplicationRule, isDuplicationRule,
 };

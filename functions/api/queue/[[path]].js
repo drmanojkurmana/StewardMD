@@ -1946,7 +1946,7 @@ export async function onRequest(context) {
           medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, safety: (c.item && c.item.safety) || null,
             formulary: (wsqCfg && wsqCfg.formulary) || null,
             advisories: (wsqCfg && wsqCfg.advisories) || null,
-            ageYears: body.ageYears,
+            ageYears: body.ageYears, lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,
             requireReasonOffFormulary: !!(wsqCfg && wsqCfg.requireReasonOffFormulary),
             idempotencyKey: idemFor(body.idempotencyKey, "med", c.index) }),
           investigations: (rq, ev, c) => orderInvestigation(rq, ev, { ...c,
@@ -2395,6 +2395,8 @@ export async function onRequest(context) {
           // The hospital's own advisories, ORG content like everything else here. They can never
           // block: see the header of _wardsynq/advisories.js.
           advisories: (wsqCfg && wsqCfg.advisories) || null, ageYears: body.ageYears,
+          // ORG content too: the postpartum window the pregnancy and lactation check counts as breastfeeding.
+          lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,
           requireReasonOffFormulary: !!(wsqCfg && wsqCfg.requireReasonOffFormulary),
           specialty: body.specialty, approvalRef: body.approvalRef, formularyReason: body.formularyReason,
           idempotencyKey: body.idempotencyKey || null,

@@ -141,7 +141,49 @@ async function maternityView(svc, patientId) {
   return {
     pregnant: !!pregnancy, gestationWeeks: pregnancy ? pregnancy.gestationWeeks : null,
     inLabour, deliveredAt: lastDelivery ? lastDelivery.deliveredAt : null,
+    pregnancyRecordedAt: pregnancy ? pregnancy.recordedAt || null : null,
   };
+}
+
+/* The hospital's postpartum lactation window in days (wardsynqConfig.lactationWindowDays, validated on save by
+ * clinical-settings.js and again here, since org config passes through as stored). null = not configured. */
+const lactationWindowDaysOf = (v) => (Number.isInteger(v) && v >= 1 && v <= 730 ? v : null);
+
+/**
+ * PURE. What order entry's pregnancy and lactation check is told (wardsynq-safety.js checkPregnancyLactation):
+ * { pregnant, lactating } each true, false or null, and `basis`, a code saying which record decided it.
+ * null is NOT RECORDED and never reads as "no": no maternity record is not a recorded non-pregnancy, and a
+ * delivery with no hospital lactation window says nothing about breastfeeding. Lactation is only what the
+ * record shows: a delivery here within the window the hospital set. Nothing is inferred from age or a guess.
+ */
+function pregnancyLactationFrom({ view, sex, lactationWindowDays, nowMs }) {
+  // A maternity record on the chart outranks the recorded sex: one of the two is wrong, and the record is specific.
+  if (/^m(ale)?$/i.test(str(sex)) && !(view && (view.pregnant || view.inLabour || view.deliveredAt))) return { pregnant: false, lactating: false, basis: "sex-male" };
+  if (!view) return { pregnant: null, lactating: null, basis: "maternity-record-unreadable" };
+  const windowDays = lactationWindowDaysOf(lactationWindowDays);
+  if (!view.deliveredAt) {
+    return view.pregnant || view.inLabour
+      ? { pregnant: true, lactating: null, basis: "pregnancy-episode" }
+      : { pregnant: null, lactating: null, basis: "not-recorded" };
+  }
+  const days = (nowMs - Date.parse(view.deliveredAt)) / 86_400_000;
+  if (!Number.isFinite(days) || days < 0) return { pregnant: null, lactating: null, basis: "delivery-time-unreadable" };
+  // A pregnancy episode written after the last delivery may be a new pregnancy or an edit of the old one.
+  const pregnant = view.pregnancyRecordedAt && Date.parse(view.pregnancyRecordedAt) > Date.parse(view.deliveredAt) ? null : false;
+  if (windowDays === null) return { pregnant, lactating: null, basis: "no-lactation-window" };
+  return days <= windowDays
+    ? { pregnant, lactating: true, basis: "postpartum-within-window" }
+    : { pregnant, lactating: false, basis: "postpartum-beyond-window" };
+}
+
+/** The same, read from the record. Never throws: an unreadable maternity record is status unknown, not "no". */
+async function readPregnancyLactation(svc, patientId, opts) {
+  const o = opts || {};
+  const [patient, view] = await Promise.all([
+    svc.get("Patient", patientId).catch(() => null),
+    maternityView(svc, patientId).catch(() => null),
+  ]);
+  return pregnancyLactationFrom({ view, sex: patient && patient.sex, lactationWindowDays: o.lactationWindowDays, nowMs: typeof o.nowMs === "number" ? o.nowMs : Date.now() });
 }
 
 /** ctx: { migration, patientId, actorDeps, recordDeps } */
@@ -404,7 +446,7 @@ async function listFamilyLinks(request, env, ctx) {
 
 export {
   PREG_TYPE, DELIVERY_TYPE, LOSS_TYPE, LINK_TYPE, LABOUR_CATEGORY, LABOUR_CODES, LABOUR_STATUS_WORDS,
-  pregnancyIdFor, newbornIdFor, maternityView,
+  pregnancyIdFor, newbornIdFor, maternityView, lactationWindowDaysOf, pregnancyLactationFrom, readPregnancyLactation,
   recordPregnancy, getPregnancy, maternityStatus, maternityMeows,
   recordLabourObservation, recordMaternalBloodLoss, listBloodLoss,
   recordDelivery, getDelivery, registerNewborn, listFamilyLinks,

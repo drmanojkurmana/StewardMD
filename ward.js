@@ -2254,6 +2254,8 @@
       (sf.checked === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.the-safety-check-could-not-run", "The safety check could not run, so nothing about this order was checked.", null, "", 1) + "</p>" : "") +
       (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") +
       (sf.unresolvedDrug ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.this-drug-is-not-recognised-by", "This drug is not recognised by the decision-support content, so no allergy, interaction or dose check ran for it.", null, "", 1) + "</p>" : "") +
+      /* An empty pregnancy and lactation table is said where its findings would be, never left to read as checked. */
+      (sf.pregnancyLactation && sf.pregnancyLactation.rulesLoaded === 0 ? '<p class="w-hint">' + ms("info") + wTH("ward.no-pregnancy-lactation-rules-loaded", "No pregnancy or lactation rules are loaded, so this order was not checked for use in pregnancy or breastfeeding.", null, "", 1) + "</p>" : "") +
       ((sf.unresolvedActiveMeds || []).length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.not-checked-against", "Not checked against: {drugs}", { drugs: esc(sf.unresolvedActiveMeds.join(", ")) }, "drugs", 1) + "</p>" : "") +
       (rv.replaces ? '<p class="w-hint warn">' + ms("swap_horiz") + wTH("ward.this-replaces-the-active-order", "This replaces the active order for this drug ({dose} {frequency}).", { dose: dose(rv.replaces.dose), frequency: esc(rv.replaces.frequency || "") }, "dose frequency", 1) + "</p>" : "") +
       (needReason ? "<label class=\"w-f\"><span>" + wTH("ward.reason-for-prescribing-anyway", "Reason for prescribing anyway (required)") + "</span><input id=\"wMoOverride\" type=\"text\" autocomplete=\"off\"></label>" : "") +

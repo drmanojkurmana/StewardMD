@@ -67,7 +67,7 @@ try {
         { label: "Systolic blood pressure", cells: [{ value: 120, unit: "mm[Hg]" }] }, { label: "Body temperature", cells: [{ value: 37, unit: "Cel" }] }] } });
       if (u.indexOf("/ward/news2") >= 0) return reply({ ok: true, tool: "NEWS2", patientId: "pat-1", score: { scorable: false, code: "INCOMPLETE", total: 0,
         missing: ["respiratoryRate", "oxygenSaturation", "supplementalOxygen"], reason: "incomplete: respiratoryRate, oxygenSaturation, supplementalOxygen were not recorded, so the partial total of 0 is not a risk assessment and must not be read as one" } });
-      if (u.indexOf("/ward/medication-order") >= 0) return reply({ ok: true, written: 0, checkOnly: true, drug: body.order.drug, safety: { checked: true, allowed: false, warnings: [], unresolvedDrug: false, unresolvedActiveMeds: [],
+      if (u.indexOf("/ward/medication-order") >= 0) return reply({ ok: true, written: 0, checkOnly: true, drug: body.order.drug, safety: { checked: true, allowed: false, warnings: [], unresolvedDrug: false, unresolvedActiveMeds: [], pregnancyLactation: { rulesLoaded: 0 },
         blocks: [{ code: "DOSE_ABSOLUTE_CEILING_CUMULATIVE", disposition: "block", hardStop: true, message: "With the paracetamol already active, this order makes 8000 mg a day, above the daily ceiling for paracetamol (4000 mg)." }],
         overridables: [{ code: "SAME_DRUG_ACTIVE", disposition: "overridable", message: "Paracetamol is already active for this patient (Paracetamol 1000 mg QDS)." }], hardStops: [{ code: "DOSE_ABSOLUTE_CEILING_CUMULATIVE" }] } });
       if (u.indexOf("/ward/ed-list") >= 0) return reply({ ok: true, patients: [] });
@@ -133,6 +133,7 @@ try {
   const review = await ev(`return document.getElementById("wMoReview").innerText;`);
   ok(/Hard stop/.test(review) && /Needs a reason to proceed/.test(review) && !/DOSE_ABSOLUTE_CEILING_CUMULATIVE/.test(review), "the ceiling reads Hard stop and the duplicate Needs a reason to proceed, with no rule code: " + review.replace(/\s+/g, " ").slice(0, 200));
   ok(await ev(`return !document.querySelector('[data-w-act="moconfirm"]') && !document.getElementById("wMoOverride");`), "no Prescribe anyway and no reason box past a hard stop");
+  ok(/No pregnancy or lactation rules are loaded, so this order was not checked for use in pregnancy or breastfeeding\./.test(review), "an empty pregnancy and lactation table is said, never read as checked");
   await click('[data-w-act="mocancel"]');
 
   // ---- known ED arrival with a chief complaint ---------------------------------------------------------------------

@@ -238,7 +238,8 @@
               '<td class="mono">' + esc(it.version) + "</td>" +
               "<td>" + (signed ? '<span class="pill ok">' + esc(it.signoff.text) + "</span>" : '<span class="pill stop">' + esc(T(c, "site.admin.seed.unapproved", "UNAPPROVED")) + "</span>") + "</td>" +
               (r.canSign ? "<td>" + (signed ? "" : '<button type="button" class="btn ghost" data-seed-sign="' + esc(l.id) + '" data-seed-item="' + esc(it.id) + '" data-seed-hash="' + esc(it.contentHash) + '">' + esc(T(c, "site.admin.seed.signOff", "Sign off")) + "</button>") + "</td>" : "") + "</tr>";
-          }).join("") + "</tbody></table></div>";
+          }).join("") + "</tbody></table></div>" +
+          (l.items.length ? "" : '<p class="quiet">' + esc(T(c, "site.admin.seed.emptyList", "No items: this list is empty, so nothing from it is loaded or checked.")) + "</p>");
       }).join("") + '<div id="seedMsg"></div></div>';
   }
   WSQ._seedHtml = seedHtml;
@@ -595,7 +596,8 @@
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.highAlert", "High-alert drugs, one per line")) + '</span><textarea id="clinHigh" rows="4">' + lines(s.highAlertDrugs) + "</textarea></label>" +
         '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.abx", "Antibiotics counted for days of therapy, one per line")) + '</span><textarea id="clinAbx" rows="4">' + lines(s.antibiotics) + "</textarea></label></div>" +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.verify", "Pharmacy verifies an order within (hours)")) + '</span><input id="clinVerify" type="number" min="1" max="168" value="' + val(s.orderVerifyWithinHours) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label>' +
-        '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.rpo", "Backup recovery point objective (minutes)")) + '</span><input id="clinRpo" type="number" min="5" max="10080" value="' + val(s.rpoMinutes) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label></div>' +
+        '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.rpo", "Backup recovery point objective (minutes)")) + '</span><input id="clinRpo" type="number" min="5" max="10080" value="' + val(s.rpoMinutes) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.lactation", "Days after a delivery here counted as breastfeeding (pregnancy and lactation check)")) + '</span><input id="clinLactation" type="number" min="1" max="730" value="' + val(s.lactationWindowDays) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label></div>' +
       '<p>' + esc(T(c, "site.admin.hospital.clinical.edInterval", "ED reassessment interval by acuity (minutes)")) + '</p><div class="row">' + ACUITY.map(function (a) {
         return '<label class="f" style="flex:0 1 110px"><span>' + esc(T(c, "site.admin.hospital.clinical.acuity", "Acuity {a}", { a: a })) + '</span><input class="clinEd" data-acuity="' + a + '" type="number" min="1" max="1440" value="' + val((s.edReassessMinutes || {})[a]) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.none", "none")) + '"></label>';
       }).join("") + "</div>" +
@@ -614,7 +616,8 @@
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.verify2", "Verify within")) + "</dt><dd>" + (s.orderVerifyWithinHours != null ? esc(T(c, "site.admin.hospital.clinical.hours", "{n} hours", { n: s.orderVerifyWithinHours })) : nc) +
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.edReassess", "ED reassessment")) + "</dt><dd>" + (ed.length ? esc(ed.join(", ")) : nc) +
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.patientAccess2", "Patient access")) + "</dt><dd>" + (s.patientAccess && s.patientAccess.enabled ? esc(T(c, "site.admin.on", "on")) : esc(T(c, "site.admin.off", "off"))) +
-      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.rpo2", "Recovery point objective")) + "</dt><dd>" + (s.rpoMinutes != null ? esc(T(c, "site.admin.hospital.clinical.minutes", "{n} minutes", { n: s.rpoMinutes })) : nc) + "</dd></div>";
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.rpo2", "Recovery point objective")) + "</dt><dd>" + (s.rpoMinutes != null ? esc(T(c, "site.admin.hospital.clinical.minutes", "{n} minutes", { n: s.rpoMinutes })) : nc) +
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.lactation2", "Lactation window")) + "</dt><dd>" + (s.lactationWindowDays != null ? esc(T(c, "site.admin.hospital.clinical.days", "{n} days", { n: s.lactationWindowDays })) : nc) + "</dd></div>";
   }
   /* Reads the form. Blank numbers are "not configured" (null); the server validates the rest. */
   function readClinicalSettings(get) {
@@ -622,7 +625,7 @@
     var num = function (v) { v = String(v == null ? "" : v).trim(); return v === "" ? null : Number(v); };
     var ed = {};
     ACUITY.forEach(function (a) { var v = num(get("ed" + a)); if (v != null) ed[a] = v; });
-    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
+    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), lactationWindowDays: num(get("clinLactation")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
   }
   WSQ._clinicalSettings = { html: clinicalSettingsHtml, readBack: clinicalReadBackHtml, read: readClinicalSettings };
   function wireClinicalSettings(c) {

@@ -3,7 +3,7 @@
  *
  * WHAT A SEED ITEM IS. Clinical content that ships in the code and is marked UNAPPROVED where it is defined:
  * allergy classes and cross-reactivity (wardsynq/data/allergy-classes.seed.json), dose ceilings
- * (adapters/wardsynq-rules-stewardmd.js), the default critical limits (critical-results.js) and the
+ * and pregnancy and lactation rules (adapters/wardsynq-rules-stewardmd.js), the default critical limits (critical-results.js) and the
  * critical threshold seed (wardsynq/data/critical-thresholds.seed.json), PEWS age bands, MEOWS trigger
  * bands, the NEWS2 escalation policy and responder ladder, and the quality measure definitions. Each list
  * is read from the module that USES it, so what is listed is what runs.
@@ -19,7 +19,7 @@
  */
 import ALLERGY_SEED from "../../wardsynq/data/allergy-classes.seed.json";
 import THRESHOLD_SEED from "../../wardsynq/data/critical-thresholds.seed.json";
-import { DOSE_LIMITS_SEED } from "../../wardsynq/adapters/wardsynq-rules-stewardmd.js";
+import { DOSE_LIMITS_SEED, PREGNANCY_LACTATION_SEED } from "../../wardsynq/adapters/wardsynq-rules-stewardmd.js";
 import { DEFAULT_CRITICAL_LIMITS } from "./critical-results.js";
 import { BANDS as PEWS_BANDS } from "../../wardsynq/wardsynq-pews.js";
 import { MEOWS_BANDS } from "../../wardsynq/wardsynq-obstetrics.js";
@@ -39,6 +39,9 @@ export function seedLists() {
       items: (ALLERGY_SEED.crossReactivity || []).map((x) => ({ id: x.id, label: (x.groups || []).join(" and ").replace(/_/g, " "), content: x })) },
     { id: "dose-ceilings", title: "Dose ceilings", source: "wardsynq/adapters/wardsynq-rules-stewardmd.js DOSE_LIMITS_SEED", seedVersion: "code",
       items: entries(DOSE_LIMITS_SEED).map(([k, v]) => ({ id: k, label: k, content: v })) },
+    // Ships EMPTY (see the adapter): the list is here so the first entry anyone adds is unapproved until signed.
+    { id: "pregnancy-lactation", title: "Pregnancy and lactation rules", source: "wardsynq/adapters/wardsynq-rules-stewardmd.js PREGNANCY_LACTATION_SEED", seedVersion: "code",
+      items: entries(PREGNANCY_LACTATION_SEED).map(([k, v]) => ({ id: k, label: k, content: v })) },
     { id: "critical-limits", title: "Default critical limits", source: "functions/_wardsynq/critical-results.js DEFAULT_CRITICAL_LIMITS", seedVersion: "code",
       items: entries(DEFAULT_CRITICAL_LIMITS).map(([k, v]) => ({ id: k, label: (v && v.display) || k, content: v })) },
     { id: "critical-thresholds", title: "Critical threshold seed", source: "wardsynq/data/critical-thresholds.seed.json", seedVersion: THRESHOLD_SEED.version,
