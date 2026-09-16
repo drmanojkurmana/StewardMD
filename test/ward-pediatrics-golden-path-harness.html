@@ -45,9 +45,10 @@ window.fetch = function (url, opts) {
     return reply({ ok: true, growth: { patientId: PATIENT_ID, sex: "male", dob: "2026-07-01", approxDob: false, gestationDays: 224, gestationReason: "mother_due_date",
       measurements: [
         { id: "o1", at: "2026-07-15T06:00:00.000Z", indicator: "wfa", valueKg: 1.6, chronologicalDays: 14, plotDays: null, corrected: true, correctionReason: "BEFORE_TERM", result: { ok: false, code: "BEFORE_TERM", reason: "no age to plot at" } },
-        { id: "o2", at: "2026-09-09T06:00:00.000Z", indicator: "wfa", valueKg: 3.5, chronologicalDays: 70, plotDays: 14, corrected: true, correctionReason: "PRETERM", result: { ok: true, reference: "who2006", indicator: "wfa", z: -0.84, centile: 20.1, implausible: false } }
+        { id: "o2", at: "2026-09-09T06:00:00.000Z", indicator: "wfa", valueKg: 3.5, chronologicalDays: 70, plotDays: 14, corrected: true, correctionReason: "PRETERM", result: { ok: true, reference: "cdc2000", indicator: "wfa", z: -0.84, centile: 20.1, implausible: false } }
       ],
-      lines: [line(3, 2.5), line(15, 2.9), line(50, 3.4), line(85, 3.9), line(97, 4.3)], notRecorded: ["lhfa", "hcfa", "wfl", "bmi"] } });
+      lines: [line(3, 2.5), line(10, 2.7), line(25, 3.0), line(50, 3.4), line(75, 3.7), line(90, 4.0), line(97, 4.3)], notRecorded: ["lhfa", "hcfa", "wfl", "bmi"],
+      reference: { id: "cdc2000", name: "CDC 2000 growth reference", method: "lms" } } });
   }
   if (u.indexOf("/ward/line-list") >= 0) return reply({ ok: true, lines: LINES });
   if (u.indexOf("/ward/line-remove") >= 0 && (opts && opts.method) === "POST") {

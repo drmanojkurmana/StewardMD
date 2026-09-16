@@ -329,6 +329,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* A hospital-loaded SNOMED CT / ICD-10 / LOINC release (code-sets.js): the import record (who, when, how many,
    * the licence confirmation) and the codes in chunks. Hospital-wide, no patientId. Loaded from Admin. */
   "CodeSetImport", "CodeSetChunk",
+  /* A hospital's own licensed growth reference tables (growth-tables.js): the import record (reference name, method,
+   * licence confirmation, withdrawn or not) and the LMS rows in chunks. Hospital-wide, no patientId. Loaded from Admin. */
+  "GrowthTableImport", "GrowthTableChunk",
   /* Antenatal history and gestation (Task 2.4): gravida, para, LMP/EDD, risk factors. One current
    * episode per patient, versioned like everything else - a delivery is the fact that changes para,
    * recorded through migrate-maternity.js's recordDelivery(), never edited by hand elsewhere. */

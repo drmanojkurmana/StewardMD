@@ -7125,6 +7125,8 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
 
 ## 2026-09-16 WHO growth tables: shipped with citation; LICENCE NEEDS A LEGAL CHECK before commercial release (branch gap-clinical)
 
+- **SUPERSEDED 2026-09-17** by "Growth charts use the CDC 2000 reference (public domain)" below: the WHO tables were removed.
+
 - **Licence (open question, owner/legal).** The task brief called the WHO growth LMS tables public domain. What was
   actually found: WHO publications are CC BY-NC-SA 3.0 IGO (non-commercial; commercial use and derivatives need
   WHO's permission, https://www.who.int/about/policies/publishing/copyright), and the tables were taken from WHO's
@@ -7218,3 +7220,37 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
 - **Not built:** double red cell apheresis, the Rule's pre-donation checks as separate hard gates (they are one question and
   a condition with typed days), component shelf-life changes from the legal review (Schedule P was not read here), NAT,
   pilot sample retention, the donor record 5-year retention rule.
+
+## 2026-09-17 Growth charts use the CDC 2000 reference (public domain); a hospital may load its own licensed WHO or IAP tables (branch fix-donor-growth)
+
+- **Owner decision: growth tables must permit commercial use.** The WHO Child Growth Standards tables shipped on
+  2026-09-16 (CC BY-NC-SA 3.0 IGO) were removed from the repository (wardsynq/data/who-growth-2006.json, who-growth-2007.json,
+  WHO-GROWTH-NOTICE.txt). They remain in git history before this commit; rewriting history was not done.
+- **Shipped instead: CDC 2000 growth charts, LMS data files** (wardsynq/data/cdc-growth-2000.json, 81 KB): wtageinf,
+  lenageinf, wtleninf, hcageinf (birth to 36 months), wtage, statage, bmiagerev (2 to 20 years), wtstat (weight-for-stature).
+  Only Sex, age/length/height, L, M and S are kept, values unchanged; the smoothed percentile columns are derivable.
+- **Licence verified from the publisher's own page.** CDC, Use of Agency Materials (cdc.gov/other/agencymaterials.html):
+  "Most of the information on the CDC and ATSDR websites is not subject to copyright, is in the public domain, and may be
+  freely used or reproduced without obtaining copyright permission", with four conditions: attribute CDC, state that use
+  does not imply endorsement by CDC/ATSDR/HHS/US Government, do not change substantive content, state the material is
+  available on the CDC website for no charge. The data page carries no copyright statement. The attribution and
+  non-endorsement statement are in the data file and on the chart's source line.
+- **CDC's WHO-based 0-24 month files (cdc.gov/growthcharts/who-data-files.htm) are NOT shipped.** The page states no licence
+  and the data are WHO's (CC BY-NC-SA 3.0 IGO); CDC's public-domain statement excludes material licensed from third parties.
+- **Retrieval.** cdc.gov refused automated downloads from this machine on 2026-09-17 (Akamai 403), so the eight CSVs were
+  taken from the Internet Archive captures of the same cdc.gov URLs (22 Nov 2025) and checked byte-identical to the 2021
+  captures (lenageinf.csv: 2021 capture has extra comparison columns; L, M, S identical). The Dec 2024 captures were truncated
+  and were not used. SHA-256 of each file is in the JSON.
+- **Method (wardsynq/wardsynq-growth.js), CDC's own:** LMS z and inverse as on the CDC data page; linear interpolation
+  between rows ("interpolation could be used"); no WHO |z| > 3 adjustment; age months = days / 30.4375; infant tables under
+  24 months and 2-20 year tables from 24 months; +/-0.8 cm length/height conversion and the modified z-score extreme-value
+  flags from CDC's SAS program page; BMI above P95 marked extendedBmiNotApplied (CDC 2022 extended BMI not implemented).
+  Corrected age for preterm infants unchanged. Chart centiles 3, 10, 25, 50, 75, 90, 97. Verified against CDC's worked
+  example (9-month boy: P5 7.90 kg, 9.7 kg = z 0.207, 58th centile) and several published percentiles.
+- **Hospital-licensed tables** (functions/_wardsynq/growth-tables.js), like code sets: Admin > FHIR > Growth charts, CSV
+  columns indicator, sex, x, l, m, s; method lms or who-restricted (WHO's adjustment on weight indicators); licence
+  confirmation recorded; GrowthTableImport + GrowthTableChunk records; withdraw writes a withdrawn version and the chart goes
+  back to CDC 2000. POST /api/queue/ward/growth-table-import (staff.admin), GET /api/queue/ward/growth-tables (emr.view).
+  GET /ward/growth returns `reference` (id, name, citation, licence, attribution) and the ward card names it.
+- **Not built:** CDC 2022 extended BMI-for-age; preterm charts (Fenton, INTERGROWTH-21st); recording length, height or head
+  circumference (still only weight is plotted).

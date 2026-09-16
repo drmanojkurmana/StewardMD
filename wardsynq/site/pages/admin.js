@@ -2283,12 +2283,68 @@
     });
   }
 
+  /* GROWTH CHARTS (functions/_wardsynq/growth-tables.js). The chart uses the CDC 2000 reference, which is public domain;
+   * a hospital licensed for WHO or IAP tables loads their LMS rows here with a licence confirmation, and may withdraw them.
+   * r: null = loading; a failed read says so and is never shown as "CDC 2000 in use". */
+  function growthTablesHtml(c, r, msg) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + c.ms("monitoring") + " " + esc(T(c, "site.admin.growth.title", "Growth charts")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.growth.intro", "Children's growth charts use the CDC 2000 growth reference, which is in the public domain. A hospital licensed to use other growth tables, such as WHO or IAP, can load their L, M and S values here, and the charts then use them.")) + "</p>";
+    if (r === null) return h + '<span class="spin"></span></div>';
+    if (!r || !r.ok) return h + '<div class="msg err">' + esc(T(c, "site.admin.growth.listFailed", "The growth tables could not be read. Do not read this as the CDC reference in use.")) + " " + EN(c, esc(refusal(c, r))) + "</div></div>";
+    var l = r.loaded;
+    h += "<p>" + (r.inUse === "hospital"
+      ? esc(T(c, "site.admin.growth.inUseHospital", "In use: this hospital's tables, {n} rows, loaded {at}.", { n: l.count, at: l.importedAt })) + " " + EN(c, esc(l.referenceName + (l.fileName ? " (" + l.fileName + ")" : ""))) +
+        ' <button type="button" class="btn ghost" id="admGrowthWithdraw">' + esc(T(c, "site.admin.growth.withdraw", "Stop using these tables")) + "</button>"
+      : esc(T(c, "site.admin.growth.inUseCdc", "In use: CDC 2000 growth reference."))) + "</p>" +
+      '<h3>' + esc(T(c, "site.admin.growth.loadTitle", "Load licensed growth tables")) + "</h3>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.growth.name", "Name of the reference")) + '</span><input id="admGrowthName" maxlength="120"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.admin.growth.method", "How z-scores are worked out")) + '</span><select id="admGrowthMethod"><option value="lms">' + esc(T(c, "site.admin.growth.methodLms", "LMS formula (CDC, IAP)")) + '</option><option value="who-restricted">' + esc(T(c, "site.admin.growth.methodWho", "LMS with WHO's adjustment beyond 3 SD (WHO tables)")) + "</option></select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.admin.growth.file", "CSV or tab-separated file")) + '</span><input id="admGrowthFile" type="file" accept=".csv,.txt,.tsv,text/csv,text/plain"></label></div>' +
+      '<p class="quiet">' + esc(T(c, "site.admin.growth.columns", "The first row names the columns indicator, sex, x, l, m and s. indicator is wfa (weight for age), lhfa (length or height for age), wfl (weight for length, under 2 years), wfh (weight for height, from 2 years), bmi or hcfa (head circumference); sex is 1 or 2; x is the age in months, or the length or height in cm for wfl and wfh. One bad row loads nothing.")) + "</p>" +
+      '<label class="f"><span><input id="admGrowthLicence" type="checkbox"> ' + esc(T(c, "site.admin.growth.licence", "This hospital holds a licence from the publisher of these growth tables (for example WHO or the Indian Academy of Paediatrics) that permits their use in this software for patient care.")) + "</span></label>" +
+      '<button type="button" class="btn" id="admGrowthLoad">' + esc(T(c, "site.admin.growth.load", "Load tables")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "");
+    return h + "</div>";
+  }
+  WSQ._growthTablesHtml = growthTablesHtml;
+  function renderGrowthTables(c, holder, msg) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId), esc = c.esc;
+    holder.innerHTML = growthTablesHtml(c, null);
+    var fail = function (text) { renderGrowthTables(c, holder, { ok: false, html: text }); };
+    var answer = function (okText) { return function (x) { if (x && x.ok) renderGrowthTables(c, holder, { ok: true, html: okText(x) }); else fail(esc(T(c, "site.admin.growth.notLoaded", "Nothing was changed:")) + " " + EN(c, esc((x && x.detail) || refusal(c, x)))); }; };
+    return c.api("/ward/growth-tables" + q).then(function (r) {
+      holder.innerHTML = growthTablesHtml(c, r || false, msg);
+      var wd = document.getElementById("admGrowthWithdraw"), btn = document.getElementById("admGrowthLoad");
+      if (wd) wd.onclick = function () {
+        wd.disabled = true;
+        c.api("/ward/growth-table-import", { orgId: c.state.orgId, withdraw: true }).then(answer(function () { return esc(T(c, "site.admin.growth.withdrawn", "The charts now use the CDC 2000 growth reference.")); }));
+      };
+      if (!btn) return;
+      btn.onclick = function () {
+        var file = document.getElementById("admGrowthFile").files[0], name = String(document.getElementById("admGrowthName").value || "").trim();
+        if (!name) return fail(esc(T(c, "site.admin.growth.needName", "Name the reference first.")));
+        if (!file) return fail(esc(T(c, "site.admin.growth.pickFile", "Choose the file to load.")));
+        if (!document.getElementById("admGrowthLicence").checked) return fail(esc(T(c, "site.admin.growth.confirmLicence", "Confirm this hospital's licence for these tables before loading them.")));
+        btn.disabled = true;
+        var reader = new FileReader();
+        reader.onerror = function () { fail(esc(T(c, "site.admin.growth.readFailed", "The file could not be read. Nothing was loaded."))); };
+        reader.onload = function () {
+          c.api("/ward/growth-table-import", { orgId: c.state.orgId, referenceName: name, method: document.getElementById("admGrowthMethod").value, csv: String(reader.result || ""), fileName: file.name, licenceConfirmed: true })
+            .then(answer(function (x) { return esc(T(c, "site.admin.growth.loaded", "Loaded {n} rows. The charts now use these tables.", { n: x.count })); }));
+        };
+        reader.readAsText(file);
+      };
+    }, function () { holder.innerHTML = growthTablesHtml(c, false); });
+  }
+
   function renderFhir(c, body) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
     body.innerHTML = fhirHtml(c, null, null);
     return Promise.all([c.api("/ward/fhir/metadata" + q), c.api("/ward/fhir/ValueSet" + q)]).then(function (res) {
-      body.innerHTML = '<div id="admCodeSets"></div>' + fhirHtml(c, res[0] || {}, res[1] || {});
+      body.innerHTML = '<div id="admCodeSets"></div><div id="admGrowthTables"></div>' + fhirHtml(c, res[0] || {}, res[1] || {});
       renderCodeSets(c, document.getElementById("admCodeSets"));
+      renderGrowthTables(c, document.getElementById("admGrowthTables"));
       body.querySelectorAll("[data-vs-expand]").forEach(function (b) {
         b.onclick = function () {
           var id = b.getAttribute("data-vs-expand"), out = document.getElementById("admVs-" + id);

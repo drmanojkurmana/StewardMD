@@ -3880,8 +3880,9 @@
       "</div></div>";
   }
 
-  /* GROWTH. Every z-score, centile and corrected age is the server's (wardsynq/wardsynq-growth.js, WHO's own
-   * method); this card only draws them. Weight is the one growth measurement WardSynQ records, so length, height
+  /* GROWTH. Every z-score, centile and corrected age is the server's (wardsynq/wardsynq-growth.js, the LMS method, against
+   * the CDC 2000 reference or the hospital's own licensed tables); this card only draws them and names the reference.
+   * Weight is the one growth measurement WardSynQ records, so length, height
    * and head circumference are named as not recorded rather than drawn as empty charts. A refused measurement
    * shows why, never a number. The table below the chart is the accessible reading of it. */
   function growthAge(days) {
@@ -3896,11 +3897,16 @@
       DOB_APPROXIMATE: wT("ward.growth-why-dob", "The date of birth is approximate"),
       AGE_UNKNOWN: wT("ward.growth-why-age", "The age at this measurement is not known"),
       UNIT_UNKNOWN: wT("ward.growth-why-unit", "The weight's unit is not kg or lb"),
-      BEFORE_TERM: wT("ward.growth-why-before-term", "Corrected age is before term; WHO standards start at a term birth"),
-      OUT_OF_RANGE: wT("ward.growth-why-range", "Outside the WHO reference"),
+      BEFORE_TERM: wT("ward.growth-why-before-term2", "Corrected age is before term; the growth reference starts at a term birth"),
+      OUT_OF_RANGE: wT("ward.growth-why-range2", "Outside the growth reference"),
       VALUE_INVALID: wT("ward.growth-why-value", "Not a usable measurement")
     }[r && r.code];
     return esc(why || (r && r.reason));
+  }
+  /* The reference's name: CDC 2000 in the staff language, a hospital's own tables by the name the hospital gave them. */
+  function growthReferenceName(g) {
+    var ref = g.reference || {};
+    return ref.id === "cdc2000" ? wT("ward.growth-ref-cdc2000", "CDC 2000 growth reference") : String(ref.name || "");
   }
   function growthChartSvg(g) {
     var pts = g.measurements.filter(function (m) { return m.result && m.result.ok; });
@@ -3928,11 +3934,11 @@
       '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (L - 4) + '" y="' + (H - B) + '">' + esc(y0) + "</text>" +
       '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (L - 4) + '" y="18">' + esc(y1) + " " + wTH("ward.growth-kg", "kg") + "</text>";
     return '<div style="overflow-x:auto"><svg width="100%" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' +
-      wTA("ward.growth-chart-label", "Weight for age against WHO centiles 3, 15, 50, 85 and 97. The table below lists every value.") + '">' + axes + lines + dots + "</svg></div>";
+      wTA("ward.growth-chart-label2", "Weight for age against the centiles {centiles} of the {reference}. The table below lists every value.", { centiles: g.lines.map(function (l) { return l.centile; }).join(", "), reference: esc(growthReferenceName(g)) }) + '">' + axes + lines + dots + "</svg></div>";
   }
   function growthCard(state) {
     var g = state.growth;
-    var head = '<div class="w-card"><div class="w-card-h">' + ms("monitoring") + "<h3>" + wTH("ward.growth-title", "Growth (WHO centiles)") + "</h3>" +
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("monitoring") + "<h3>" + (g && g.reference ? wTH("ward.growth-title2", "Growth ({reference})", { reference: esc(growthReferenceName(g)) }, g.reference.id === "cdc2000" ? "" : "reference") : wTH("ward.growth-title3", "Growth")) + "</h3>" +
       "<button class=\"w-ic\" data-w-act=\"growthload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>";
     if (g === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.growth-failed", "Growth could not be loaded. Do not read this as no measurements recorded.", null, "", 1) + "</p></div>";
     if (g == null) return head + "<p class=\"w-empty\">" + wTH("ward.growth-loading", "Loading growth...") + "</p></div>";
@@ -3948,7 +3954,7 @@
           : '<td colspan="2">' + growthRefusal(r) + "</td>") + "</tr>";
     }).join("");
     return head +
-      (!g.sex ? warn(wTH("ward.growth-no-sex", "Sex is not recorded as male or female, so no WHO centile can be chosen.")) : "") +
+      (!g.sex ? warn(wTH("ward.growth-no-sex2", "Sex is not recorded as male or female, so no growth centile can be chosen.")) : "") +
       (g.approxDob ? warn(wTH("ward.growth-approx-dob", "The date of birth was estimated from a stated age, so no centile is worked out.")) : "") +
       '<p class="w-hint">' + ms("info") + (gd == null
         ? wTH("ward.growth-ga-unknown", "Gestational age at birth is not recorded, so no age is corrected for prematurity.")
@@ -3959,7 +3965,9 @@
         wTH("ward.growth-age", "Age") + "</th><th>" + wTH("ward.growth-corrected-age", "Corrected age") + "</th><th>" + wTH("ward.growth-z", "z-score") + "</th><th>" + wTH("ward.growth-centile", "Centile") + "</th></tr></thead><tbody>" + rows + "</tbody></table></div>"
         : "<p class=\"w-empty\">" + wTH("ward.growth-no-weights", "No weights recorded. Weights charted with the vitals appear here.") + "</p>") +
       '<p class="w-hint">' + ms("info") + wTH("ward.growth-not-recorded", "Length, height and head circumference are not recorded in WardSynQ, so only weight for age is charted.") + "</p>" +
-      '<p class="w-dt-times">' + wTH("ward.growth-source", "WHO Child Growth Standards (2006) under 5 years; WHO growth reference (2007) from 5 years. Not clinically validated in this build.") + "</p></div>";
+      '<p class="w-dt-times">' + (g.reference && g.reference.id === "cdc2000"
+        ? wTH("ward.growth-source-cdc", "Source: CDC. The 2000 CDC growth charts (National Center for Health Statistics) are in the public domain and available on the CDC website for no charge. Their use here does not imply endorsement by CDC, HHS or the United States Government. Not clinically validated in this build.")
+        : wTH("ward.growth-source-hospital", "This hospital's own growth tables, loaded under its licence on Admin. Not clinically validated in this build.")) + "</p></div>";
   }
 
   /* LINES. A placement log, mirroring surgery's implant card exactly - site, type, when, by. */
@@ -15094,7 +15102,7 @@
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _balanceWindow: balanceWindow, _scoreWhyNot: scoreWhyNot, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut,
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _growthCard: growthCard, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _balanceWindow: balanceWindow, _scoreWhyNot: scoreWhyNot, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut,
     // The one staff identity rendering, for discharge.js (owner 2026-09-16: name and employee id wherever staff are named).
     _who: staffWho, _whoText: whoText, _whoFetch: whoFetch, _whoInfo: whoInfo };
 })();

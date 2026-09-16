@@ -148,6 +148,7 @@ import { startReconciliation, decideMedicine, readReconciliation } from "../../_
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { patientFlow } from "../../_wardsynq/patient-flow.js";
 import { importCodeSet, listCodeSets, searchCodes } from "../../_wardsynq/code-sets.js";
+import { importGrowthTables, listGrowthTables } from "../../_wardsynq/growth-tables.js";
 import { setExpectedDischarge, expectedDischargeHistory } from "../../_wardsynq/expected-discharge.js";
 import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
@@ -1366,6 +1367,9 @@ export async function onRequest(context) {
         /* Hospital-loaded code sets (code-sets.js): loading a licensed release is hospital administration
          * (staff.admin); seeing what is loaded and searching it is anyone who reads the chart (emr.view). */
         "code-set-import": CAPS.STAFF_ADMIN, "code-sets": CAPS.EMR_VIEW, "code-search": CAPS.EMR_VIEW,
+        /* A hospital's own licensed growth tables (growth-tables.js): loading or withdrawing them is hospital
+         * administration; which reference the chart uses is readable by anyone who can see the chart. */
+        "growth-table-import": CAPS.STAFF_ADMIN, "growth-tables": CAPS.EMR_VIEW,
         "transfer-request": CAPS.EMR_TREAT, "transfer-respond": CAPS.QUEUE_ADD, "transfer-assign-bed": CAPS.QUEUE_ADD,
         "transfer-execute": CAPS.QUEUE_ADD, "transfer-cancel": CAPS.QUEUE_ADD, "transfer-requests": CAPS.EMR_VIEW,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
@@ -4507,6 +4511,14 @@ export async function onRequest(context) {
       }
       if (sub === "code-sets" && method === "GET") {
         const r = await listCodeSets(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "growth-table-import" && method === "POST") {
+        const r = await importGrowthTables(request, env, { ...deps, referenceName: body.referenceName, method: body.method, csv: body.csv, fileName: body.fileName, licenceConfirmed: body.licenceConfirmed === true, withdraw: body.withdraw === true });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "growth-tables" && method === "GET") {
+        const r = await listGrowthTables(request, env, { ...deps });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "code-search" && method === "GET") {

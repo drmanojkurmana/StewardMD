@@ -35,7 +35,8 @@
 import { Observation } from "../../wardsynq/wardsynq-model.js";
 import { ageBandOf, weightLooksWrong, paediatricCeiling, neonatalReady, BAND } from "../../wardsynq/wardsynq-paediatrics.js";
 import { weightBasedRate, FlowsheetError } from "../../wardsynq/wardsynq-flowsheet.js";
-import { growthZ, correctedAge, centileLines, REFERENCES } from "../../wardsynq/wardsynq-growth.js";
+import { growthZ, correctedAge, centileLines } from "../../wardsynq/wardsynq-growth.js";
+import { growthReferenceFor } from "./growth-tables.js";
 import { weightInKg } from "../../wardsynq/wardsynq-vitals.js";
 import { PREG_TYPE, LINK_TYPE as FAMILY_LINK_TYPE, pregnancyIdFor } from "./migrate-maternity.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
@@ -231,7 +232,8 @@ async function listLines(request, env, ctx) {
   return { ...base, ok: true, lines: rows || [] };
 }
 
-/* GROWTH CHART. wardsynq-growth.js holds WHO's method; this reads what the ward actually recorded.
+/* GROWTH CHART. wardsynq-growth.js holds the LMS method; this reads what the ward actually recorded, against the
+ * reference this hospital uses: its own licensed tables when loaded (growth-tables.js), else the CDC 2000 reference.
  *
  * WHAT IS PLOTTED. Body weight (LOINC 29463-7), the only growth measurement this build records: the
  * vitals form charts it, in kg or pounds, read through the one weightInKg() conversion. No length,
@@ -272,8 +274,8 @@ async function growthChart(request, env, ctx) {
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, growth: null };
 
-  let patient, obs;
-  try { [patient, obs] = await Promise.all([svc.get("Patient", patientId), svc.byPatient("Observation", patientId)]); }
+  let patient, obs, ref;
+  try { [patient, obs, ref] = await Promise.all([svc.get("Patient", patientId), svc.byPatient("Observation", patientId), growthReferenceFor(svc, mig.tenantId)]); }
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), growth: null };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The record could not be read. Do not read this as nothing recorded.", growth: null };
@@ -296,7 +298,7 @@ async function growthChart(request, env, ctx) {
       if (!dobUsable) result = { ok: false, code: patient.approxDob ? "DOB_APPROXIMATE" : "AGE_UNKNOWN", reason: "the date of birth is not recorded exactly" };
       else if (kg === null) result = { ok: false, code: "UNIT_UNKNOWN", reason: "the weight's unit is not kg or lb" };
       else if (correction.ageDays === null) result = { ok: false, code: correction.reason === "BEFORE_TERM" ? "BEFORE_TERM" : "AGE_UNKNOWN", reason: "no age to plot at" };
-      else result = growthZ({ indicator: "wfa", sex, ageDays: correction.ageDays, value: kg });
+      else result = growthZ({ indicator: "wfa", sex, ageDays: correction.ageDays, value: kg }, ref);
       return { id: o.id, at, indicator: "wfa", valueKg: kg == null ? null : Math.round(kg * 1000) / 1000,
         chronologicalDays, plotDays: correction.ageDays, corrected: correction.corrected, correctionReason: correction.reason, result };
     })
@@ -306,12 +308,12 @@ async function growthChart(request, env, ctx) {
   let lines = [];
   if (sex && plotted.length) {
     const days = plotted.map((x) => x.plotDays);
-    lines = centileLines("wfa", sex, Math.max(0, Math.min(...days) - 30), Math.max(...days) + 30, 40);
+    lines = centileLines("wfa", sex, Math.max(0, Math.min(...days) - 30), Math.max(...days) + 30, 40, ref);
   }
   return { ...base, ok: true, growth: {
     patientId, sex, dob: patient.dob || null, approxDob: !!patient.approxDob,
     gestationDays: gestation.days, gestationReason: gestation.reason,
-    measurements, lines, notRecorded: ["lhfa", "hcfa", "wfl", "bmi"], references: REFERENCES,
+    measurements, lines, notRecorded: ["lhfa", "hcfa", "wfl", "bmi"], reference: ref.info,
   } };
 }
 
