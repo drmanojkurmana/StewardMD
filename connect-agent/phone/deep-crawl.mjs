@@ -59,6 +59,13 @@ export const SKIP_SRC =
 // (GHIS: "In patients" | "Out patients" | "Emergency" | "IP worklist" under Administration).
 export const LIST_CONTROL = /^(in|ip|inpatients?)\s*-?\s*(patients?|work\s*list|worklist)?$|^(ip|in\s*patient|ward|my\s*patients?)\s*(work\s*list|worklist|list)?$|^all\s*patients$|^admitted|^out\s*-?\s*patients?$|^opd$|^emergency$|^casualty$/i;
 
+// A list-control tab can land on a FILTER FORM (Patient ID, Floor, Nursing station, Department, Doctor)
+// over an EMPTY table instead of the list itself (GHIS "IP worklist"); this is the tight, exact, read-only
+// label of the control that reveals the list when every field is left blank. Never widen past an exact
+// match - the SKIP_SRC denylist already keeps a patient form's "Submit" (which SAVES a record) off any
+// control list, but the exact match is a second guard against ever pressing it.
+const LIST_SEARCH_CONTROL = /^(search|show|go|find|filter|display|list|view\s*list|get\s*list)$/i;
+
 const HINT_RULES = [
   /* Indian hospital EMRs rarely say "medications": GHIS and its peers label the same chart
    * "Treatment chart", "Rx", "Prescription", "Pharmacy" or "MAR". Matching only medic|drug is why a
@@ -1372,16 +1379,39 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
        * fills the table about 9 s after the tap (Pixel, 2026-09-13). Up to 15 s for a data table. */
       // The old list still shows rows for a moment: wait until the visible tables CHANGE and carry rows.
       const TABLES_SIG = "(function(){var s=[],n=0,ts=document.querySelectorAll('table');for(var i=0;i<ts.length;i++){if(!ts[i].getClientRects().length)continue;var r=0,trs=ts[i].querySelectorAll('tbody tr');for(var j=0;j<trs.length;j++){if(trs[j].querySelectorAll('td').length>=2)r++}n+=r;s.push((ts[i].id||ts[i].className)+':'+r)}return JSON.stringify({sig:s.join('|'),rows:n})})()";
+      const waitForRows = async (baselineSig) => {
+        for (let t = 0; t < 15; t += 1) {
+          await client.wait({ ms: 1000 });
+          const now = await evalJson(client, TABLES_SIG, { sig: '', rows: 0 });
+          if (now && now.rows > 0 && now.sig !== baselineSig) { await client.wait({ ms: 1500 }); return now; }
+        }
+        return evalJson(client, TABLES_SIG, { sig: '', rows: 0 });
+      };
       const before = await evalJson(client, TABLES_SIG, { sig: '' });
-      for (let t = 0; t < 15; t += 1) {
-        await client.wait({ ms: 1000 });
-        const now = await evalJson(client, TABLES_SIG, { sig: '', rows: 0 });
-        if (now && now.rows > 0 && now.sig !== (before && before.sig)) { await client.wait({ ms: 1500 }); break; }
+      let afterTap = await waitForRows(before && before.sig);
+      /* GHIS's "IP worklist" renders a FILTER FORM (Patient ID, Floor, Nursing station, Department,
+       * Doctor) over an EMPTY DataTable ("No data available in table") instead of the list itself -
+       * pressing its own "Search" with every field left blank is what returns the whole hospital
+       * (GET GetIPWL?...&Type=IPWorkList, ~730kB, every in-patient; Chrome DevTools, 2026-09-17). Only
+       * the tight LIST_SEARCH_CONTROL label is pressed - SKIP_SRC already keeps a patient form's own
+       * "Submit" (which SAVES a clinical assessment) out of the candidate list - and no input is touched. */
+      let proveLabel = 'tap ' + label;
+      if (afterTap && afterTap.rows === 0) {
+        const onScreen = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
+        const press = (Array.isArray(onScreen) ? onScreen : []).find((c) => c && LIST_SEARCH_CONTROL.test(String(c.label || '').trim()));
+        if (press) {
+          const before2 = await evalJson(client, TABLES_SIG, { sig: '' });
+          await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
+          await client.evaluate({ expression: withDocs(CLICK_CONTROL_SRC, press.index + "," + JSON.stringify(CONTROL_QUERY)) });
+          await awaitDetailRequest({ client, maxMs: Math.max(waitMs * 5, 8000) });
+          afterTap = await waitForRows(before2 && before2.sig);
+          proveLabel = 'tap ' + label + ' > ' + press.label;
+        }
       }
       trail.push(label);
       const v = await captureView({ client, resourceHint: 'worklist' });
       if (v && v.rowsSelector && !v.block) {
-        await book.prove({ client, view: v, label: 'tap ' + label });
+        await book.prove({ client, view: v, label: proveLabel });
         if (v.proof && v.proof.status === 'proven') listViews.push(v);
       }
       /* Always reload the landing page: a single-page EMR swaps the list in place with the same URL

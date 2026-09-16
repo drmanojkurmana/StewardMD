@@ -526,8 +526,14 @@ async function withChrome(fn, html = ACCORDION_HTML, navUrl = null) {
       if (r.result?.exceptionDetails) throw new Error('page error: ' + (r.result.exceptionDetails.exception?.description || r.result.exceptionDetails.text));
       return { result: r.result?.result?.value ?? null };
     };
-    for (let i = 0; i < 50; i += 1) { if ((await evaluate({ expression: 'document.readyState === "complete" && !!document.body' })).result === true) break; await sleep(100); }
-    await fn(evaluate);
+    const awaitReady = async () => {
+      for (let i = 0; i < 50; i += 1) { if ((await evaluate({ expression: 'document.readyState === "complete" && !!document.body' })).result === true) break; await sleep(100); }
+    };
+    await awaitReady();
+    // A real navigate, for a test that reloads the landing page mid-crawl (the list-control tab loop
+    // uses client.navigate, not just document mutation) - not needed by tests that only mutate the DOM.
+    const navigate = async ({ url }) => { await call('Page.navigate', { url }); await awaitReady(); };
+    await fn(evaluate, navigate);
   } finally {
     try { ws?.close(); } catch { /* ignore */ }
     const exited = new Promise((res) => proc.once('exit', res));
@@ -842,6 +848,147 @@ test('FIND_CONTROLS_SRC: a hidden <a href> inside a collapsed dropdown is a cand
         assert.ok(labels.includes('IP worklist'), JSON.stringify(out));
         assert.ok(!labels.includes('Logout'), JSON.stringify(out));
       }, MENU_HTML, url);
+    } finally {
+      await close();
+    }
+  });
+
+// --- F5: a list-control tab's filter form hides an empty table until its own blank Search is pressed ---
+//
+// Mirrors the live GHIS screen (Chrome DevTools, owner, 2026-09-17): tapping "IP worklist" (under a
+// collapsed Administration menu) renders a FILTER FORM (Patient ID, Floor left blank) over an EMPTY
+// DataTable ("No data available in table"; only GetIPWL?...&Type=IPWorkList's later Search answers with
+// rows) instead of the list itself, so the old crawl captured a screen with nothing to prove. Pressing
+// the form's own button with every field untouched is what fills it. `SUBMIT_BUTTON` mirrors GHIS's own
+// `<button id="submit" onclick="pagesubmit(event)">Submit</button>`, which SAVES a clinical assessment.
+const SEARCH_BUTTON = '<button onclick="doPress()">Search</button>';
+const SUBMIT_BUTTON = '<button id="submit" onclick="pagesubmit(event)">Submit</button>';
+
+function ipwlPage(buttonHtml) {
+  return `<!doctype html><html><body>
+<table id="mylist"><thead><tr><th>Patient ID</th><th>Patient name</th></tr></thead>
+<tbody><tr onclick="openPatient('${SENTINEL}','48213')"><td>48213</td><td>${SENTINEL}</td></tr></tbody></table>
+<nav class="navbar-nav">
+  <div class="dropdown-menu" style="display:none">
+    <a href="#" onclick="showIPWL();return false">IP worklist</a>
+  </div>
+</nav>
+<div id="ipwl" style="display:none">
+  <input id="patientId" value="">
+  <input id="floor" value="preset">
+  <table id="ipwl_table"><thead><tr><th>Patient ID</th><th>Patient name</th><th>Age</th></tr></thead>
+  <tbody><tr><td colspan="3">No data available in table</td></tr></tbody></table>
+  ${buttonHtml}
+</div>
+<script>
+window.__testClicks = 0;
+window.__testWrote = false;
+function openPatient(){}
+// GHIS's real save handler: must never run. Does not touch the table (a save is not a list refresh).
+function pagesubmit(){ window.__testWrote = true; }
+function showIPWL(){
+  document.getElementById('mylist').style.display = 'none';
+  document.getElementById('ipwl').style.display = '';
+}
+// The blank Search: fills the table by XHR-style delayed render, exactly as GHIS's GetIPWL answers.
+// Rebuilds the <table> node itself (a fresh element, not an innerHTML swap of the same one) - the same
+// destroy-and-recreate a jQuery DataTables reinit does on a live GHIS page.
+function doPress(){
+  window.__testClicks++;
+  setTimeout(function(){
+    var oldTable = document.getElementById('ipwl_table');
+    var newTable = document.createElement('table');
+    newTable.id = 'ipwl_table';
+    newTable.innerHTML =
+      '<thead><tr><th>Patient ID</th><th>Patient name</th><th>Age</th></tr></thead>' +
+      '<tbody><tr><td>1</td><td>A</td><td>30</td></tr><tr><td>2</td><td>B</td><td>40</td></tr><tr><td>3</td><td>C</td><td>50</td></tr></tbody>';
+    oldTable.parentNode.replaceChild(newTable, oldTable);
+  }, 50);
+}
+</script>
+</body></html>`;
+}
+
+// Records every book.prove() call along with the live DOM row count for the proven view's own selector
+// (so a proven EMPTY placeholder and a proven POPULATED list are told apart) and the two press-only
+// signals a real assertion needs: how many times the button actually fired, and the two input values.
+function fakeBook(evaluate) {
+  const calls = [];
+  return {
+    calls,
+    async prove({ view, label }) {
+      let rows = null;
+      if (view && view.rowsSelector) {
+        try { rows = (await evaluate({ expression: `document.querySelectorAll(${JSON.stringify(view.rowsSelector)}).length` })).result; } catch { rows = null; }
+      }
+      const clicks = (await evaluate({ expression: 'window.__testClicks || 0' }).catch(() => ({ result: null }))).result;
+      const wrote = (await evaluate({ expression: '!!window.__testWrote' }).catch(() => ({ result: null }))).result;
+      const patientId = (await evaluate({ expression: "document.getElementById('patientId') ? document.getElementById('patientId').value : null" }).catch(() => ({ result: null }))).result;
+      const floor = (await evaluate({ expression: "document.getElementById('floor') ? document.getElementById('floor').value : null" }).catch(() => ({ result: null }))).result;
+      calls.push({ label, rows, clicks, wrote, patientId, floor });
+      if (view) view.proof = { status: 'proven', tried: 0, brain: false };
+    },
+  };
+}
+
+function ipwlClient(evaluate, navigate) {
+  return {
+    evaluate,
+    navigate,
+    async wait({ ms }) { await sleep(Math.min(ms, 200)); },
+    async currentUrl() { return { url: (await evaluate({ expression: 'location.href' })).result }; },
+  };
+}
+
+test('deepCrawlClinical: a list-control tab whose filter form hides an empty table is pressed Search, and the populated list (not the placeholder) is proven (real DOM)',
+  { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+    const { url, close } = await serveHtml(ipwlPage(SEARCH_BUTTON));
+    try {
+      await withChrome(async (evaluate, navigate) => {
+        const book = fakeBook(evaluate);
+        const { stopReason } = await deepCrawlClinical({ client: ipwlClient(evaluate, navigate), book, caps: { maxViews: 2, maxMs: 60000, waitMs: 50 } });
+        assert.notEqual(stopReason, 'no-patient-row');
+        const proved = book.calls.filter((c) => c.label.includes('IP worklist'));
+        assert.equal(proved.length, 1, JSON.stringify(book.calls));
+        assert.match(proved[0].label, /IP worklist > Search$/, 'the label names the press');
+        assert.equal(proved[0].clicks, 1, 'Search pressed exactly once');
+        assert.equal(proved[0].rows, 3, 'the proven view is the post-Search list, not the empty placeholder (1 row)');
+      }, undefined, url);
+    } finally {
+      await close();
+    }
+  });
+
+test('deepCrawlClinical: a Submit button next to the same empty table is never pressed (guards the clinical-write path)',
+  { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+    const { url, close } = await serveHtml(ipwlPage(SUBMIT_BUTTON));
+    try {
+      await withChrome(async (evaluate, navigate) => {
+        const book = fakeBook(evaluate);
+        await deepCrawlClinical({ client: ipwlClient(evaluate, navigate), book, caps: { maxViews: 2, maxMs: 60000, waitMs: 50 } });
+        const proved = book.calls.filter((c) => c.label.includes('IP worklist'));
+        assert.equal(proved.length, 1, JSON.stringify(book.calls));
+        assert.equal(proved[0].label, 'tap IP worklist', 'no press was ever named in the label');
+        assert.equal(proved[0].wrote, false, 'pagesubmit() (SAVES a clinical assessment) never ran');
+        assert.equal(proved[0].rows, 1, 'the screen stayed empty: only the "No data available" placeholder row');
+      }, undefined, url);
+    } finally {
+      await close();
+    }
+  });
+
+test('deepCrawlClinical: pressing Search never fills or clears a filter input (blank stays blank, preset stays preset)',
+  { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+    const { url, close } = await serveHtml(ipwlPage(SEARCH_BUTTON));
+    try {
+      await withChrome(async (evaluate, navigate) => {
+        const book = fakeBook(evaluate);
+        await deepCrawlClinical({ client: ipwlClient(evaluate, navigate), book, caps: { maxViews: 2, maxMs: 60000, waitMs: 50 } });
+        const proved = book.calls.find((c) => c.label.includes('IP worklist'));
+        assert.ok(proved, JSON.stringify(book.calls));
+        assert.equal(proved.patientId, '', 'the empty filter field was never filled');
+        assert.equal(proved.floor, 'preset', 'the preset filter field was never cleared or changed');
+      }, undefined, url);
     } finally {
       await close();
     }
