@@ -1,0 +1,704 @@
+{
+  "guideline": "ampullary",
+  "title": "Ampullary Adenocarcinoma",
+  "subtitle": "Histologic Subtypes (Pancreatobiliary vs Intestinal) and Stage-Adapted Management",
+  "navigatorVersion": "3.0.0",
+  "diseaseId": "ampullary_cancer",
+  "matchDisease": false,
+  "status": "draft",
+  "provenanceNote": "Clinical algorithms extracted from NCCN Guidelines Version 2.2026 for Ampullary Adenocarcinoma.",
+  "sourceNote": "NCCN Guidelines Version 2.2026 - Ampullary Adenocarcinoma (AMP-1 to AMP-7, AMP-A to AMP-E)",
+  "startNodeIds": [
+    "n_amp_entry"
+  ],
+  "footnotes": {
+    "fn_histology": "Ampullary systemic therapy is strictly stratified by histologic subtype: pancreatobiliary/mixed type follows biliary regimens (Gem-Cis, FOLFIRINOX); intestinal type follows colorectal regimens (FOLFOX, CAPOX)."
+  },
+  "nodes": [
+    {
+      "id": "n_amp_entry",
+      "linkId": "amp_entry",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical Presentation",
+      "title": "Ampullary Neoplasm: Clinical Presentation & Suspicion",
+      "section": "Diagnosis",
+      "description": "Patients presenting with painless jaundice, biliary ductal dilation, unexplained pancreatitis, or an incidental mass at the ampulla of Vater.",
+      "path": "Ampullary / Presentation",
+      "pills": [
+        "ampullary",
+        "jaundice",
+        "neoplasm"
+      ],
+      "required": true,
+      "bullets": [
+        "Clinical presentation: fluctuating or progressive obstructive jaundice, pruritus, pale stools, dark urine, or unexplained weight loss.",
+        "Incidental detection: duodenal/ampullary prominence on screening endoscopy or biliary/pancreatic ductal dilation ('double-duct sign') on abdominal ultrasound/CT."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Suspicion of ampullary neoplasm - Proceed to diagnostic workup",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_amp_workup",
+      "linkId": "amp_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic Workup",
+      "title": "Ampullary Neoplasm: Imaging, Endoscopy, and Biomarker Checklist",
+      "section": "Workup",
+      "description": "High-quality thin-cut cross-sectional imaging, endoscopic ultrasound, and biomarker testing prior to intervention.",
+      "path": "Ampullary / Workup",
+      "pills": [
+        "workup",
+        "MDCT",
+        "EUS",
+        "biopsy",
+        "stenting"
+      ],
+      "required": true,
+      "bullets": [
+        "Pancreatic protocol MDCT (abdomen and pelvis): multi-detector dual-phase CT (pancreatic parenchymal and portal venous phases) with thin submillimeter axial sections; multiplanar reconstructions to assess vascular abutment (superior mesenteric vein/artery, celiac axis, hepatic artery).",
+        "MRI/MRCP: Alternative or problem-solving tool for characterizing CT-indeterminate liver lesions, ductal anatomy, or if severe iodinated contrast allergy.",
+        "Upper endoscopy: Esophagogastroduodenoscopy (EGD) with a side-viewing duodenoscope +/- endoscopic ultrasound (EUS) with fine-needle aspiration/biopsy (FNA/FNB).",
+        "Screening colonoscopy: Recommended if not previously performed according to established age-based guidelines.",
+        "Laboratory evaluation: Complete blood count, comprehensive metabolic panel (total/direct bilirubin, alkaline phosphatase, AST, ALT), baseline CA 19-9, and CEA.",
+        "Principles of Stent Management: Preoperative biliary stenting is NOT routinely recommended prior to planned surgery due to increased risk of postoperative wound infection and complications; stent placement should be reserved ONLY for patients with acute suppurative cholangitis, severe intractable pruritus, or prolonged delay before surgery.",
+        "Germline Genetic Testing: Recommended for all patients with confirmed ampullary adenocarcinoma or positive family history of cancer, utilizing comprehensive multigene panels (ATM, BRCA1, BRCA2, CDKN2A, MLH1, MSH2, MSH6, PALB2, PMS2, STK11, TP53).",
+        "Tumor Biomarker Profiling: Mandatory NGS testing for mismatch repair/microsatellite instability (MMR/MSI), HER2 amplification, KRAS, BRAF V600E, NTRK gene fusions, and RET fusions."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup completed - Classify histologic pathology",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_amp_pathology",
+      "linkId": "amp_pathology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Histopathology",
+      "title": "Ampullary Neoplasm: Histopathologic Classification",
+      "section": "Diagnosis",
+      "description": "Biopsy review distinguishes benign adenoma from invasive adenocarcinoma.",
+      "path": "Ampullary / Pathology",
+      "pills": [
+        "adenoma",
+        "adenocarcinoma",
+        "pathology"
+      ],
+      "required": true,
+      "bullets": [
+        "Ampullary adenoma: Benign glandular neoplasm with low-grade or high-grade dysplasia, without invasion through the muscularis mucosae.",
+        "Ampullary adenocarcinoma: Invasive malignant neoplasm infiltrating the submucosa, sphincter of Oddi, duodenal muscularis propria, or pancreatic parenchyma."
+      ],
+      "options": [
+        {
+          "id": "adenoma",
+          "label": "Benign Ampullary Adenoma (Low-grade or High-grade Dysplasia)",
+          "sets": {
+            "pathology": "adenoma"
+          },
+          "pills": [
+            "Adenoma"
+          ]
+        },
+        {
+          "id": "adenocarcinoma",
+          "label": "Invasive Ampullary Adenocarcinoma",
+          "sets": {
+            "pathology": "adenocarcinoma"
+          },
+          "pills": [
+            "Adenocarcinoma"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_amp_adenoma_tx",
+      "linkId": "amp_adenoma_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adenoma Resection",
+      "title": "Ampullary Adenoma: Endoscopic / Surgical Resection & Surveillance",
+      "section": "Treatment",
+      "description": "Curative local excision for benign ampullary adenomas.",
+      "path": "Ampullary / Adenoma / Treatment",
+      "pills": [
+        "adenoma",
+        "ampullectomy",
+        "endoscopy"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Endoscopic papillectomy / ampullectomy (Preferred): Complete en bloc or piecemeal endoscopic resection at a tertiary high-volume center; place temporary prophylactic pancreatic duct stent to prevent post-procedure pancreatitis.",
+        "Negative margins on pathology: Enter endoscopic surveillance (duodenoscopy with biopsy at 3, 6, and 12 months, then annually for up to 5 years).",
+        "Positive margins or residual adenoma: Repeat endoscopic re-excision if technically feasible, or proceed to surgical ampullectomy / transduodenal resection.",
+        "Unresectable endoscopically (large size >3-4 cm, intraductal extension >1 cm, or suspicion of occult invasion): Pancreatoduodenectomy (Whipple procedure) or transduodenal surgical ampullectomy."
+      ]
+    },
+    {
+      "id": "n_amp_staging",
+      "linkId": "amp_staging",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical Staging",
+      "title": "Invasive Ampullary Adenocarcinoma: Clinical Staging & Resectability",
+      "section": "Subtype & Risk",
+      "description": "Multidisciplinary determination of resectability based on MDCT imaging and metastatic survey.",
+      "path": "Ampullary / Staging",
+      "pills": [
+        "staging",
+        "resectability",
+        "Whipple"
+      ],
+      "required": true,
+      "bullets": [
+        "Multidisciplinary tumor board evaluation at high-volume hepatobiliary center (institutions performing >=15-20 pancreaticoduodenectomies annually).",
+        "Resectable: No distant metastases, no tumor abutment/encasement of the superior mesenteric artery (SMA), celiac axis, or common hepatic artery, and clear superior mesenteric vein (SMV)-portal vein confluence.",
+        "Borderline Resectable / High-Risk: Abutment of SMV/portal vein suitable for reconstruction, borderline arterial proximity, or markedly elevated CA 19-9.",
+        "Locally Advanced / Unresectable: Encasement (>180 degrees) of SMA or celiac axis, or unreconstructible SMV/portal vein occlusion.",
+        "Metastatic: Distant metastases (liver, peritoneum, lungs, distant retroperitoneal lymph nodes)."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Resectable Localized Disease",
+          "sets": {
+            "stage": "resectable"
+          },
+          "pills": [
+            "Resectable"
+          ]
+        },
+        {
+          "id": "borderline",
+          "label": "Borderline Resectable / High-Risk Localized Disease",
+          "sets": {
+            "stage": "borderline"
+          },
+          "pills": [
+            "Borderline"
+          ]
+        },
+        {
+          "id": "unresectable",
+          "label": "Locally Advanced / Unresectable Disease",
+          "sets": {
+            "stage": "unresectable"
+          },
+          "pills": [
+            "Unresectable"
+          ]
+        },
+        {
+          "id": "metastatic",
+          "label": "Distant Metastatic Disease",
+          "sets": {
+            "stage": "metastatic"
+          },
+          "pills": [
+            "Metastatic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_amp_resectable_tx",
+      "linkId": "amp_resectable_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Surgical Resection",
+      "title": "Resectable Ampullary Adenocarcinoma: Upfront Surgical Resection",
+      "section": "Primary Treatment",
+      "description": "Standard oncologic resection with regional lymphadenectomy.",
+      "path": "Ampullary / Resectable / Surgery",
+      "pills": [
+        "Whipple",
+        "pancreatoduodenectomy",
+        "surgery"
+      ],
+      "required": true,
+      "bullets": [
+        "Standard Pancreatoduodenectomy (Whipple procedure): En bloc resection of pancreatic head, duodenum, distal bile duct, and gallbladder, with regional lymphadenectomy (examination of >=12-15 lymph nodes).",
+        "Pylorus-preserving or classic Whipple: Both are acceptable oncologic approaches depending on anatomical and surgical factors.",
+        "Pathology synoptic reporting: Record primary tumor depth (pT1-pT4), nodal status (pN0-pN2), surgical margin status (R0 vs R1), lymphovascular/perineural invasion, and histological subtype (intestinal-type vs pancreatobiliary-type)."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Surgery completed - Review pathologic stage and histologic subtype for adjuvant therapy",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_amp_adjuvant_stage",
+      "linkId": "amp_adjuvant_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Adjuvant Stratification",
+      "title": "Resected Ampullary Cancer: Pathologic Stage & Histologic Subtype",
+      "section": "Primary Treatment",
+      "description": "Adjuvant systemic therapy is determined by pathologic stage (Stage I vs Stage II/III) and histologic phenotype (pancreatobiliary vs intestinal).",
+      "path": "Ampullary / Resected / Adjuvant Stratification",
+      "pills": [
+        "adjuvant",
+        "pancreatobiliary",
+        "intestinal",
+        "stage"
+      ],
+      "required": true,
+      "bullets": [
+        "Stage I (pT1 N0 M0): Highly favorable prognosis; observe or consider single-agent adjuvant therapy.",
+        "Stage II/III (pT2-T4 or pN+ M0): Adjuvant systemic chemotherapy for up to 6 months is standard.",
+        "Histologic subtyping (ESPAC-3 / NCCN):",
+        "\u2022 Pancreatobiliary/Mixed type: Infiltrating simple glands/cords with desmoplastic stroma; treated with gemcitabine/cisplatin or modified FOLFIRINOX.",
+        "\u2022 Intestinal type: Cribriform or tubular glands resembling colorectal adenocarcinoma; treated with fluorouracil/oxaliplatin (mFOLFOX6 or CAPOX)."
+      ],
+      "options": [
+        {
+          "id": "adj_stage1",
+          "label": "Pathologic Stage I (pT1 N0 M0) - Any Histology",
+          "sets": {
+            "adj_cohort": "stage1"
+          },
+          "pills": [
+            "Stage I",
+            "pT1N0"
+          ]
+        },
+        {
+          "id": "adj_stage23_pancreato",
+          "label": "Pathologic Stage II / III - Pancreatobiliary or Mixed Subtype",
+          "sets": {
+            "adj_cohort": "stage23_pancreato"
+          },
+          "pills": [
+            "Stage II/III",
+            "Pancreatobiliary"
+          ]
+        },
+        {
+          "id": "adj_stage23_intestinal",
+          "label": "Pathologic Stage II / III - Intestinal Subtype",
+          "sets": {
+            "adj_cohort": "stage23_intestinal"
+          },
+          "pills": [
+            "Stage II/III",
+            "Intestinal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_amp_adj_stage1_tx",
+      "linkId": "amp_adj_stage1_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Stage I Adjuvant",
+      "title": "Stage I (pT1 N0): Observation or Adjuvant Chemotherapy",
+      "section": "Primary Treatment",
+      "description": "Management for early resected ampullary cancer.",
+      "path": "Ampullary / Adjuvant / Stage I",
+      "pills": [
+        "Stage I",
+        "observation",
+        "gemcitabine",
+        "capecitabine"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Observation (Preferred option for selected T1aN0 tumors with R0 resection and no lymphovascular invasion).",
+        "Adjuvant Systemic Therapy: In patients with adverse features (high histologic grade, perineural invasion), consider 6 months of:",
+        "\u2022 Capecitabine monotherapy (1250 mg/m2 PO BID days 1-14 q21d), OR",
+        "\u2022 Gemcitabine monotherapy (1000 mg/m2 IV days 1, 8, 15 q28d) based on ESPAC-3 trial.",
+        "Post-treatment surveillance: Regular clinical visits, CT chest/abdomen/pelvis, and tumor markers (CA 19-9, CEA) every 3-6 months for 2 years, then every 6-12 months for up to 5 years."
+      ]
+    },
+    {
+      "id": "n_amp_adj_pancreato_tx",
+      "linkId": "amp_adj_pancreato_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adj Pancreatobiliary Tx",
+      "title": "Stage II/III Pancreatobiliary Ampullary Cancer: Adjuvant Chemotherapy",
+      "section": "Primary Treatment",
+      "description": "Adjuvant systemic regimens for pancreatobiliary/mixed ampullary adenocarcinoma.",
+      "path": "Ampullary / Adjuvant / Pancreatobiliary",
+      "pills": [
+        "pancreatobiliary",
+        "adjuvant",
+        "gem-cis",
+        "FOLFIRINOX"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "gi-ampullary",
+        "folfirinox"
+      ],
+      "bullets": [
+        "Preferred Adjuvant Regimens (Up to 6 months total duration):",
+        "\u2022 Gemcitabine + Cisplatin (gi-ampullary): Gemcitabine 1000 mg/m2 + Cisplatin 25 mg/m2 IV days 1 & 8 every 21 days for up to 8 cycles. Established biliary/ampullary standard.",
+        "\u2022 Modified FOLFIRINOX (folfirinox): Oxaliplatin 85 mg/m2, irinotecan 150-180 mg/m2, leucovorin 400 mg/m2, 5-FU 2400 mg/m2 46-h continuous infusion q14d x 12 cycles (in young, fit patients with ECOG 0-1).",
+        "\u2022 Gemcitabine + Capecitabine (GemCap): Gemcitabine 1000 mg/m2 days 1, 8, 15 q28d + Capecitabine 1660 mg/m2/day days 1-21 q28d (ESPAC-4 inspired).",
+        "\u2022 Gemcitabine monotherapy: 1000 mg/m2 days 1, 8, 15 q28d x 6 cycles (for patients unfit for doublet therapy).",
+        "Chemoradiation: May be considered for positive surgical margins (R1 resection) or extensive nodal involvement.",
+        "Surveillance: CT chest/abdomen/pelvis with contrast and CA 19-9 every 3 months for year 1-2, then every 6 months."
+      ]
+    },
+    {
+      "id": "n_amp_adj_intestinal_tx",
+      "linkId": "amp_adj_intestinal_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adj Intestinal Tx",
+      "title": "Stage II/III Intestinal Ampullary Cancer: Adjuvant Chemotherapy",
+      "section": "Primary Treatment",
+      "description": "Adjuvant systemic regimens for intestinal-type ampullary adenocarcinoma.",
+      "path": "Ampullary / Adjuvant / Intestinal",
+      "pills": [
+        "intestinal",
+        "adjuvant",
+        "FOLFOX",
+        "CAPOX"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "modified-folfox-6"
+      ],
+      "bullets": [
+        "Preferred Adjuvant Regimens (Colorectal-inspired systemic therapy x 6 months):",
+        "\u2022 Modified FOLFOX6 (modified-folfox-6): Oxaliplatin 85 mg/m2, leucovorin 400 mg/m2, 5-FU bolus 400 mg/m2 then 2400 mg/m2 46-h continuous infusion every 14 days for 12 cycles.",
+        "\u2022 CAPOX: Capecitabine 1000 mg/m2 PO BID days 1-14 + Oxaliplatin 130 mg/m2 IV day 1 every 21 days for 8 cycles.",
+        "\u2022 Capecitabine or 5-FU/leucovorin monotherapy: Acceptable options if oxaliplatin-ineligible or for low-risk Stage II disease.",
+        "Surveillance: H&P, chest/abdomen/pelvis CT with IV contrast, and CEA/CA 19-9 every 3-6 months for 2 years, then every 6-12 months for up to 5 years."
+      ]
+    },
+    {
+      "id": "n_amp_borderline_tx",
+      "linkId": "amp_borderline_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Borderline Neoadjuvant",
+      "title": "Borderline Resectable Ampullary Cancer: Neoadjuvant Therapy",
+      "section": "Primary Treatment",
+      "description": "Preoperative systemic therapy and restaging for high-risk or borderline resectable disease.",
+      "path": "Ampullary / Borderline / Neoadjuvant",
+      "pills": [
+        "borderline",
+        "neoadjuvant",
+        "restaging",
+        "FOLFIRINOX"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "folfirinox",
+        "gi-ampullary"
+      ],
+      "bullets": [
+        "Neoadjuvant Systemic Therapy (2-4 months):",
+        "\u2022 Pancreatobiliary/Mixed: Modified FOLFIRINOX (folfirinox) or Gemcitabine + Cisplatin (gi-ampullary) or Gemcitabine + Nab-paclitaxel.",
+        "\u2022 Intestinal Subtype: Modified FOLFOX6 or CAPOX.",
+        "Consider Neoadjuvant Chemoradiation: 50.4 Gy in 28 fractions with concurrent capecitabine or fluorouracil following induction chemotherapy if vascular margins remain close.",
+        "Restaging: High-resolution pancreatic protocol MDCT after 2-4 months of therapy. If stable or regression with no distant metastases, proceed to exploratory laparotomy and pancreatoduodenectomy."
+      ]
+    },
+    {
+      "id": "n_amp_unresectable_tx",
+      "linkId": "amp_unresectable_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Locally Advanced Tx",
+      "title": "Unresectable Locally Advanced Ampullary Cancer: Definitive Therapy",
+      "section": "Primary Treatment",
+      "description": "Definitive systemic chemotherapy and chemoradiation for locally advanced disease.",
+      "path": "Ampullary / Unresectable / Therapy",
+      "pills": [
+        "unresectable",
+        "chemoradiation",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "gi-ampullary",
+        "folfirinox",
+        "modified-folfox-6"
+      ],
+      "bullets": [
+        "Biliary drainage: Ensure adequate biliary decompression with permanent self-expanding metal stent (SEMS) prior to systemic therapy.",
+        "First-line Systemic Therapy: Administer full-dose combination systemic chemotherapy based on histologic subtype (Gem-Cis or mFOLFIRINOX for pancreatobiliary; mFOLFOX6 for intestinal).",
+        "Consolidative Chemoradiation: For patients with disease control (absence of progression) after 4-6 months of chemotherapy, consolidative chemoradiation (capecitabine or 5-FU concurrent with 50.4 Gy IMRT) may provide durable local control and symptom palliation.",
+        "Re-evaluate for resectability: In rare cases of dramatic tumor shrinkage, restage and discuss surgical exploration."
+      ]
+    },
+    {
+      "id": "n_amp_metastatic_histology",
+      "linkId": "amp_metastatic_histology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Metastatic Subtype",
+      "title": "Metastatic Ampullary Cancer: Histologic & Molecular Stratification",
+      "section": "Metastatic Disease",
+      "description": "Systemic therapy for metastatic ampullary cancer is strictly bifurcated by histologic subtype and molecular drivers.",
+      "path": "Ampullary / Metastatic / Histology",
+      "pills": [
+        "metastatic",
+        "pancreatobiliary",
+        "intestinal"
+      ],
+      "required": true,
+      "bullets": [
+        "Pancreatobiliary/Mixed: Managed according to NCCN Biliary Tract / Pancreatic Cancer guidelines.",
+        "Intestinal: Managed according to NCCN Colorectal / Small Bowel Cancer guidelines.",
+        "Mandatory molecular testing: MSI/dMMR, HER2, BRAF V600E, KRAS G12C, NTRK fusions, and RET fusions."
+      ],
+      "options": [
+        {
+          "id": "met_pancreato",
+          "label": "Metastatic Pancreatobiliary or Mixed Subtype",
+          "sets": {
+            "met_subtype": "pancreato"
+          },
+          "pills": [
+            "Pancreatobiliary"
+          ]
+        },
+        {
+          "id": "met_intestinal",
+          "label": "Metastatic Intestinal Subtype",
+          "sets": {
+            "met_subtype": "intestinal"
+          },
+          "pills": [
+            "Intestinal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_amp_met_pancreato_tx",
+      "linkId": "amp_met_pancreato_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Met Pancreatobiliary Tx",
+      "title": "Metastatic Pancreatobiliary Ampullary Cancer: Systemic & Targeted Regimens",
+      "section": "Metastatic Disease",
+      "description": "First-line chemotherapy backbones and biomarker-directed targeted agents.",
+      "path": "Ampullary / Metastatic / Pancreatobiliary",
+      "pills": [
+        "metastatic",
+        "pancreatobiliary",
+        "gem-cis",
+        "FOLFIRINOX",
+        "immunotherapy"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "gi-ampullary",
+        "folfirinox"
+      ],
+      "bullets": [
+        "Preferred First-Line Cytotoxic Regimens:",
+        "\u2022 Gemcitabine + Cisplatin (gi-ampullary): Gemcitabine 1000 mg/m2 + Cisplatin 25 mg/m2 IV days 1 & 8 every 21 days (can add Durvalumab or Pembrolizumab per biliary standards).",
+        "\u2022 Modified FOLFIRINOX (folfirinox): For patients with ECOG PS 0-1 and preserved hepatic function/bilirubin <1.5x ULN.",
+        "\u2022 Gemcitabine + Nab-paclitaxel: Gemcitabine 1000 mg/m2 + Nab-paclitaxel 125 mg/m2 IV days 1, 8, 15 every 28 days.",
+        "Biomarker-Directed Targeted Therapy:",
+        "\u2022 MSI-H / dMMR: Pembrolizumab (200 mg q3w or 400 mg q6w) or Dostarlimab (preferred first-line or subsequent).",
+        "\u2022 NTRK gene fusion: Larotrectinib or Entrectinib.",
+        "\u2022 RET gene fusion: Selpercatinib.",
+        "\u2022 BRAF V600E mutation: Dabrafenib + Trametinib.",
+        "\u2022 KRAS G12C mutation: Sotorasib or Adagrasib (subsequent therapy).",
+        "Supportive care: Palliative biliary stent patency monitoring, analgesia, and nutritional counseling."
+      ]
+    },
+    {
+      "id": "n_amp_met_intestinal_tx",
+      "linkId": "amp_met_intestinal_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Met Intestinal Tx",
+      "title": "Metastatic Intestinal Ampullary Cancer: Systemic & Targeted Regimens",
+      "section": "Metastatic Disease",
+      "description": "First-line colorectal-aligned systemic and targeted regimens.",
+      "path": "Ampullary / Metastatic / Intestinal",
+      "pills": [
+        "metastatic",
+        "intestinal",
+        "FOLFOX",
+        "CAPOX",
+        "HER2",
+        "MSI-H"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "modified-folfox-6",
+        "folfiri"
+      ],
+      "bullets": [
+        "Preferred First-Line Cytotoxic Regimens:",
+        "\u2022 Modified FOLFOX6 (modified-folfox-6): Oxaliplatin 85 mg/m2, leucovorin 400 mg/m2, 5-FU bolus + 2400 mg/m2 continuous infusion q14d (+/- bevacizumab).",
+        "\u2022 CAPOX: Capecitabine 1000 mg/m2 PO BID x 14d + Oxaliplatin 130 mg/m2 day 1 q21d (+/- bevacizumab).",
+        "\u2022 FOLFIRI (folfiri): Irinotecan 180 mg/m2, leucovorin, 5-FU continuous infusion (+/- bevacizumab).",
+        "Biomarker-Directed Targeted Therapy:",
+        "\u2022 MSI-H / dMMR: Pembrolizumab (preferred first-line) or Nivolumab +/- Ipilimumab.",
+        "\u2022 HER2 Amplified (RAS wild-type): Trastuzumab + Pertuzumab or Trastuzumab + Tucatinib.",
+        "\u2022 BRAF V600E mutation: Encorafenib + Cetuximab (subsequent therapy).",
+        "\u2022 NTRK / RET / KRAS G12C: Larotrectinib, Selpercatinib, or Sotorasib/Adagrasib respectively.",
+        "Oligometastatic disease: For patients with solitary liver or lung metastases achieving prolonged disease control on systemic therapy, consider surgical resection or stereotactic body radiotherapy (SBRT)."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_amp_entry_to_workup",
+      "from": "n_amp_entry",
+      "to": "n_amp_workup",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_amp_workup_to_path",
+      "from": "n_amp_workup",
+      "to": "n_amp_pathology",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_amp_path_to_adenoma",
+      "from": "n_amp_pathology",
+      "to": "n_amp_adenoma_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "adenoma"
+      ]
+    },
+    {
+      "id": "l_amp_path_to_staging",
+      "from": "n_amp_pathology",
+      "to": "n_amp_staging",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "adenocarcinoma"
+      ]
+    },
+    {
+      "id": "l_amp_stage_to_resectable",
+      "from": "n_amp_staging",
+      "to": "n_amp_resectable_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "resectable"
+      ]
+    },
+    {
+      "id": "l_amp_stage_to_borderline",
+      "from": "n_amp_staging",
+      "to": "n_amp_borderline_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "borderline"
+      ]
+    },
+    {
+      "id": "l_amp_stage_to_unresectable",
+      "from": "n_amp_staging",
+      "to": "n_amp_unresectable_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "unresectable"
+      ]
+    },
+    {
+      "id": "l_amp_stage_to_metastatic",
+      "from": "n_amp_staging",
+      "to": "n_amp_metastatic_histology",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "metastatic"
+      ]
+    },
+    {
+      "id": "l_amp_resect_to_adj_stage",
+      "from": "n_amp_resectable_tx",
+      "to": "n_amp_adjuvant_stage",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_amp_adj_to_stage1",
+      "from": "n_amp_adjuvant_stage",
+      "to": "n_amp_adj_stage1_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "adj_stage1"
+      ]
+    },
+    {
+      "id": "l_amp_adj_to_pancreato",
+      "from": "n_amp_adjuvant_stage",
+      "to": "n_amp_adj_pancreato_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "adj_stage23_pancreato"
+      ]
+    },
+    {
+      "id": "l_amp_adj_to_intestinal",
+      "from": "n_amp_adjuvant_stage",
+      "to": "n_amp_adj_intestinal_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "adj_stage23_intestinal"
+      ]
+    },
+    {
+      "id": "l_amp_met_to_pancreato",
+      "from": "n_amp_metastatic_histology",
+      "to": "n_amp_met_pancreato_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "met_pancreato"
+      ]
+    },
+    {
+      "id": "l_amp_met_to_intestinal",
+      "from": "n_amp_metastatic_histology",
+      "to": "n_amp_met_intestinal_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "met_intestinal"
+      ]
+    }
+  ]
+}

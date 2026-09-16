@@ -1,0 +1,1203 @@
+{
+  "guideline": "cml",
+  "title": "Chronic Myeloid Leukemia",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2027)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "cml",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2027 clinical navigator for Chronic Myeloid Leukemia (Chronic Phase, Accelerated Phase, Blast Phase). Implements Workup First diagnostic checklists (bone marrow karyotype for t(9;22), peripheral blood BCR::ABL1 qPCR on International Scale %IS, ELTS risk score calculation), 1L TKI selection (Imatinib vs 2G TKIs Dasatinib/Nilotinib/Bosutinib vs Asciminib STAMP inhibitor per ASC4FIRST trial), molecular milestones at 3/6/12 months, ABL1 kinase mutation gating, and T315I rescue with Ponatinib or high-dose Asciminib. References StewardMD ONCQIS Standard Protocols. DRAFT - clinical decision support; physician decides.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Chronic Myeloid Leukemia Version 2.2027 (July 10, 2026).",
+  "startNodeIds": [
+    "n_phase"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "ELTS (EUTOS Long-Term Survival) score is preferred over Sokal for 1L TKI selection: low risk 0.1611 x age is not used; score uses age, spleen size below costal margin, peripheral blast percentage, and platelet count. Cutoffs: low risk <=1.5680, intermediate 1.5680-2.2185, high >2.2185. High ELTS predicts inferior deep molecular response and CML-related death on imatinib, favoring a 2G TKI or asciminib.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "ASC4FIRST trial: asciminib 80 mg daily (STAMP inhibitor Specifically Targeting the ABL Myristoyl Pocket) achieved superior major molecular response (MMR) at 48 weeks versus investigator-selected 1L TKI (imatinib or 2G TKI) in newly diagnosed CP-CML, with fewer discontinuations for adverse events. NCCN lists asciminib as a Category 1 first-line option.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "Molecular milestones on the International Scale (%IS): BCR::ABL1 <=10% at 3 months, <=1% at 6 months, <=0.1% (MMR) at 12 months. Failure to meet milestones (ELN 2020 criteria adopted by NCCN) mandates adherence review, drug-interaction check, marrow cytogenetics, ABL1 kinase domain mutation testing, and TKI switch.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "T315I gatekeeper mutation confers resistance to imatinib, dasatinib, nilotinib, and bosutinib. Active options are ponatinib (45 mg daily, dose-reduce on response per OPTIC) or asciminib 200 mg BID. Do not cycle to another standard-dose 2G TKI for T315I-positive disease.",
+      "evidence": "1"
+    },
+    "e": {
+      "text": "OPTIC trial: ponatinib starting at 45 mg daily with mandatory reduction to 15 mg daily upon achieving BCR::ABL1 <=1% preserves response while reducing arterial occlusive events. Baseline and ongoing cardiovascular risk mitigation (blood pressure, lipids, HbA1c, smoking cessation, antiplatelet therapy when indicated) is required.",
+      "evidence": "1"
+    },
+    "f": {
+      "text": "Allogeneic hematopoietic cell transplantation (HCT) remains the only curative modality after TKI failure, for T315I-positive disease without deep response, and for AP/BP-CML. Initiate HLA typing and unrelated-donor search at first sign of resistance or at AP/BP diagnosis; refer early to a transplant center.",
+      "evidence": "2A"
+    },
+    "g": {
+      "text": "Comorbidity tailoring: avoid nilotinib with arterial occlusive disease, peripheral arterial disease, uncontrolled diabetes, hyperlipidemia, or QTc prolongation; avoid dasatinib with history of pleural effusion, pulmonary hypertension, or significant bleeding risk; avoid bosutinib with severe gastrointestinal or hepatic disease. Asciminib has a distinct tolerability profile but requires pancreatic enzyme and cardiovascular monitoring.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_phase",
+      "linkId": "cml_phase",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Disease Phase",
+      "title": "CML: Disease Phase at Presentation",
+      "section": "Diagnosis",
+      "description": "Step 1: Clinical Presentation. Assign CML phase from peripheral blood and bone marrow blast percentage, basophilia, platelet behavior, and clonal evolution. Phase determines whether the pathway is chronic-phase TKI selection or AP/BP intensification.",
+      "path": "CML / Presentation",
+      "pills": [
+        "presentation"
+      ],
+      "required": true,
+      "bullets": [
+        "Chronic Phase (CP-CML): blasts <10% in blood and marrow, basophils usually <20%, Ph chromosome t(9;22)(q34.1;q11.2) with BCR::ABL1 p210 transcript in most patients.",
+        "Accelerated Phase (AP-CML): blasts 10-19% in blood or marrow, basophils >=20%, persistent thrombocytopenia (<100 x 10^9/L) or thrombocytosis (>1000 x 10^9/L) unresponsive to therapy, or clonal evolution with major-route additional cytogenetic abnormalities.",
+        "Blast Phase (BP-CML): blasts >=20% in blood or marrow, or extramedullary blast proliferation (myeloid sarcoma). Lineage (myeloid vs lymphoid) is assigned by flow cytometry and immunohistochemistry.",
+        "Confirm BCR::ABL1 positivity in every case before TKI initiation; BCR::ABL1-negative atypical CML follows a different pathway."
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "cp",
+          "label": "Chronic phase CML (CP-CML, blasts <10%)",
+          "sets": {
+            "phase": "cp"
+          },
+          "pills": [
+            "CP"
+          ]
+        },
+        {
+          "id": "apbp",
+          "label": "Accelerated phase or blast phase CML (AP/BP-CML)",
+          "sets": {
+            "phase": "apbp"
+          },
+          "pills": [
+            "AP/BP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_cml_cp_wk",
+      "linkId": "cml_cp_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "CP-CML Workup",
+      "title": "CP-CML: Diagnostic Workup and Baseline Risk Assessment",
+      "section": "Workup",
+      "description": "Workup First: complete the diagnostic checklist establishing Ph status, baseline molecular burden, ELTS risk, and TKI-relevant comorbidities before selecting first-line therapy.",
+      "path": "CML / CP / Workup",
+      "pills": [
+        "CP",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "History and physical: spleen size in cm below costal margin (ELTS input), weight, B symptoms, bleeding or thrombotic history, full cardiovascular history including arterial occlusive disease and peripheral arterial disease, smoking status, pulmonary history (pleural effusion, pulmonary hypertension), gastrointestinal and hepatic history.",
+        "CBC with differential (blast %, basophil %, eosinophil %, platelet count), comprehensive metabolic panel with LFTs and renal function, LDH, uric acid.",
+        "Bone marrow aspirate and biopsy with conventional G-banding karyotype: confirm Ph chromosome t(9;22)(q34.1;q11.2), record percentage of Ph-positive metaphases, and screen for major-route additional cytogenetic abnormalities: trisomy 8 (+8), second Ph chromosome (+Ph), isochromosome 17q i(17q), and trisomy 19 (+19). Use FISH for BCR::ABL1 if karyotype is uninformative.",
+        "Quantitative RT-PCR (qPCR) for BCR::ABL1 on peripheral blood reported on the International Scale (%IS) as the treatment baseline; document transcript type (e13a2/e14a2 p210 typical; p190 or p230 atypical transcripts need assay-specific monitoring).",
+        "Calculate the ELTS (EUTOS Long-Term Survival) risk score from age, spleen size, peripheral blast %, and platelet count. ELTS is preferred over Sokal for 1L TKI selection.",
+        "Cardiovascular and metabolic assessment: baseline ECG for QTc interval, blood pressure, fasting lipid profile, HbA1c, ankle-brachial index if peripheral arterial disease is suspected.",
+        "ABL1 kinase domain mutation analysis is mandatory if there are AP/BP features, prior TKI exposure, or resistance; not routinely required in newly diagnosed CP-CML.",
+        "Serum pregnancy test in all patients of childbearing potential (TKIs are teratogenic); fertility counseling; hepatitis B screening before therapy; HLA typing discussion for high ELTS risk."
+      ],
+      "footnotes": [
+        "a",
+        "g"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Risk Stratification & Therapy Selection",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_cml_ap_bp_wk",
+      "linkId": "cml_ap_bp_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "AP/BP-CML Workup",
+      "title": "AP/BP-CML: Urgent Diagnostic Workup and Lineage Assignment",
+      "section": "Workup",
+      "description": "Workup First: AP/BP-CML is high risk for rapid progression. Complete lineage assignment, mutation profiling, CNS evaluation, and transplant workup without delaying TKI initiation.",
+      "path": "CML / AP-BP / Workup",
+      "pills": [
+        "AP/BP",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "CBC with differential, CMP with LFTs, LDH, uric acid, coagulation profile; tumor lysis laboratory panel (potassium, phosphate, calcium, creatinine) for blast-phase disease.",
+        "Bone marrow aspirate and biopsy with G-banding karyotype: confirm t(9;22)(q34.1;q11.2), quantify blast %, and identify major-route additional cytogenetic abnormalities (+8, +Ph, i(17q), +19) signifying clonal evolution.",
+        "Quantitative RT-PCR for BCR::ABL1 on peripheral blood on the International Scale (%IS); document transcript type.",
+        "ABL1 kinase domain mutation analysis is MANDATORY in AP/BP and before any TKI switch for resistance (gates T315I rescue with ponatinib or high-dose asciminib).",
+        "Lineage assignment by multiparameter flow cytometry and immunohistochemistry (myeloperoxidase, TdT, CD19, CD7, CD33, CD13) to distinguish myeloid from lymphoid blast phase.",
+        "CNS evaluation with diagnostic lumbar puncture for lymphoid BP (and for myeloid BP with neurologic symptoms); start CNS prophylaxis planning.",
+        "Baseline ECG (QTc), echocardiogram if anthracycline or intensive chemotherapy is anticipated, cardiovascular and metabolic assessment as for CP-CML.",
+        "Urgent HLA typing of patient and siblings plus unrelated-donor search initiation; early referral to transplant and leukemia centers; fertility counseling and pregnancy testing; leukapheresis only for symptomatic leukostasis, never as routine cytoreduction.",
+        "Calculate the ELTS (EUTOS Long-Term Survival) risk score from age, spleen size, peripheral blast %, and platelet count for baseline risk documentation."
+      ],
+      "footnotes": [
+        "d",
+        "f"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Risk Stratification & Therapy Selection",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_elts",
+      "linkId": "cml_elts",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "ELTS Risk",
+      "title": "CP-CML: ELTS Risk Stratification",
+      "section": "Risk Stratification",
+      "description": "ELTS score (age, spleen size, blast %, platelet count) stratifies CML-specific mortality and guides 1L TKI intensity: imatinib is acceptable in low risk, while intermediate/high risk favors a 2G TKI or asciminib.",
+      "path": "CML / CP / ELTS",
+      "pills": [
+        "ELTS"
+      ],
+      "required": true,
+      "bullets": [
+        "ELTS low risk (score <=1.5680): imatinib 400 mg daily, any 2G TKI, or asciminib 80 mg daily are all appropriate; comorbidity profile and treatment-free-remission goals drive the choice.",
+        "ELTS intermediate risk (score 1.5680-2.2185): preferred 2G TKI (dasatinib, nilotinib, bosutinib) or asciminib (Category 1); imatinib is acceptable only if 2G TKI and asciminib are contraindicated or unavailable.",
+        "ELTS high risk (score >2.2185): preferred 2G TKI or asciminib (Category 1) for faster and deeper molecular responses; plan early milestone scrutiny and early donor-search discussion.",
+        "ELTS is preferred over Sokal and EUTOS scores for treatment selection in the TKI era."
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "options": [
+        {
+          "id": "low",
+          "label": "ELTS low risk (score <=1.5680)",
+          "sets": {
+            "elts": "low"
+          },
+          "pills": [
+            "low"
+          ]
+        },
+        {
+          "id": "int",
+          "label": "ELTS intermediate risk (score 1.5680-2.2185)",
+          "sets": {
+            "elts": "intermediate"
+          },
+          "pills": [
+            "intermediate"
+          ]
+        },
+        {
+          "id": "high",
+          "label": "ELTS high risk (score >2.2185)",
+          "sets": {
+            "elts": "high"
+          },
+          "pills": [
+            "high"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_cp_comorb",
+      "linkId": "cml_cp_comorb",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Comorbidity Profile",
+      "title": "CP-CML: Comorbidity-Tailored TKI Selection",
+      "section": "Treatment Selection",
+      "description": "Match the 1L TKI to the patient's comorbidity profile. Each TKI has exclusionary toxicities: nilotinib (arterial occlusive, metabolic, QTc), dasatinib (pleural/pulmonary, bleeding), bosutinib (gastrointestinal, hepatic).",
+      "path": "CML / CP / Comorbidity",
+      "pills": [
+        "comorbidity"
+      ],
+      "required": true,
+      "bullets": [
+        "No major cardiopulmonary, metabolic, gastrointestinal, or hepatic comorbidity: full 1L menu is available (imatinib, dasatinib, nilotinib, bosutinib, asciminib); choose by ELTS risk, age, adherence considerations, and treatment-free-remission goals.",
+        "High cardiovascular, peripheral arterial, diabetic, or QTc risk: AVOID nilotinib; avoid ponatinib sequencing if possible; prefer imatinib, dasatinib, bosutinib, or asciminib with blood pressure, lipid, glucose, and ECG surveillance.",
+        "Pleural effusion history, pulmonary hypertension, chronic lung disease, or bleeding diathesis: AVOID dasatinib; prefer imatinib, nilotinib, bosutinib, or asciminib with chest imaging and echocardiography as indicated.",
+        "Severe gastrointestinal intolerance or hepatic dysfunction: AVOID bosutinib; prefer imatinib, dasatinib, nilotinib, or asciminib with LFT monitoring and antiemetic/antidiarrheal planning.",
+        "Review CYP3A4-mediated drug interactions, adherence barriers, pregnancy plans, and cost/access before final selection."
+      ],
+      "footnotes": [
+        "g"
+      ],
+      "options": [
+        {
+          "id": "nocomorb",
+          "label": "No major CV, pulmonary, GI, or hepatic comorbidity",
+          "sets": {
+            "comorbidity": "none"
+          },
+          "pills": [
+            "no comorbidity"
+          ]
+        },
+        {
+          "id": "cvrisk",
+          "label": "High CV/PAD, diabetes, dyslipidemia, or QTc prolongation risk",
+          "sets": {
+            "comorbidity": "cardiovascular"
+          },
+          "pills": [
+            "CV risk"
+          ]
+        },
+        {
+          "id": "pulm",
+          "label": "Pleural effusion history, pulmonary hypertension, or bleeding risk",
+          "sets": {
+            "comorbidity": "pulmonary"
+          },
+          "pills": [
+            "pulmonary"
+          ]
+        },
+        {
+          "id": "gihep",
+          "label": "Severe GI intolerance or hepatic dysfunction",
+          "sets": {
+            "comorbidity": "gi-hepatic"
+          },
+          "pills": [
+            "GI/hepatic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_cp_std",
+      "linkId": "tx_cp_std",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "CP 1L Standard",
+      "title": "CP-CML 1L Therapy: Full TKI Menu (No Major Comorbidity)",
+      "section": "Treatment",
+      "description": "First-line TKI options when no exclusionary comorbidity exists. Low ELTS risk: imatinib, any 2G TKI, or asciminib. Intermediate/high ELTS risk: preferred 2G TKI or asciminib (Category 1).",
+      "path": "CML / CP / 1L Standard",
+      "pills": [
+        "CP",
+        "1L",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Imatinib 400 mg PO daily with food and water (low ELTS risk option; monitor periorbital edema, fluid retention, muscle cramps, cytopenias, LFTs).",
+        "Dasatinib 100 mg PO daily (2G TKI; monitor for pleural effusion with chest imaging for respiratory symptoms, pulmonary hypertension, bleeding, QTc).",
+        "Nilotinib 300 mg PO BID on an empty stomach (2G TKI; monitor ECG QTc, fasting lipids and glucose, lipase, LFTs; counsel on arterial occlusive symptoms).",
+        "Bosutinib 400 mg PO daily with food (2G TKI; pre-empt diarrhea management, monitor LFTs monthly for 3 months then periodically).",
+        "Asciminib 80 mg PO daily, STAMP inhibitor, Category 1 per ASC4FIRST (preferred option including for intermediate/high ELTS risk; monitor pancreatic enzymes, blood pressure, lipids).",
+        "Counsel on lifelong adherence, CYP3A4 drug interactions, teratogenicity and contraception, and the 3/6/12-month molecular milestone schedule before starting."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "b",
+        "c"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "1L TKI started - proceed to molecular monitoring",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_tx_cp_cv",
+      "linkId": "tx_cp_cv",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "CP 1L CV Risk",
+      "title": "CP-CML 1L Therapy: High Cardiovascular/Metabolic Risk",
+      "section": "Treatment",
+      "description": "First-line TKI options when arterial occlusive disease, peripheral arterial disease, diabetes, dyslipidemia, or QTc prolongation excludes nilotinib. Intermediate/high ELTS risk still favors dasatinib, bosutinib, or asciminib.",
+      "path": "CML / CP / 1L CV Risk",
+      "pills": [
+        "CP",
+        "1L",
+        "CV risk"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "AVOID nilotinib (arterial occlusive events, peripheral arterial disease, hyperglycemia, hyperlipidemia, QTc prolongation, pancreatitis).",
+        "Imatinib 400 mg PO daily with food and water (safe cardiovascular profile; monitor fluid retention and cytopenias).",
+        "Dasatinib 100 mg PO daily with ECG and bleeding-risk review (acceptable cardiac profile at 100 mg daily; monitor pleural symptoms).",
+        "Bosutinib 400 mg PO daily with food (acceptable cardiovascular profile; monitor LFTs and diarrhea).",
+        "Asciminib 80 mg PO daily, STAMP inhibitor, Category 1 (preferred for intermediate/high ELTS risk with CV comorbidity; monitor blood pressure, lipids, pancreatic enzymes).",
+        "Institute aggressive CV risk mitigation at baseline: blood pressure control, statin therapy per lipid targets, HbA1c optimization, smoking cessation, baseline and periodic ECG."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "b",
+        "g"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "1L TKI started - proceed to molecular monitoring",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_tx_cp_pulm",
+      "linkId": "tx_cp_pulm",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "CP 1L Pulmonary",
+      "title": "CP-CML 1L Therapy: Pleural/Pulmonary or Bleeding Risk",
+      "section": "Treatment",
+      "description": "First-line TKI options when pleural effusion history, pulmonary hypertension, chronic lung disease, or bleeding risk excludes dasatinib.",
+      "path": "CML / CP / 1L Pulmonary",
+      "pills": [
+        "CP",
+        "1L",
+        "pulmonary"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "AVOID dasatinib (pleural effusion in up to one-third of patients over time, pulmonary arterial hypertension, platelet dysfunction and bleeding).",
+        "Imatinib 400 mg PO daily with food and water (monitor fluid retention and cytopenias; baseline chest imaging if prior effusion).",
+        "Nilotinib 300 mg PO BID fasting (monitor QTc, metabolic panel, vascular symptoms; requires CV risk review).",
+        "Bosutinib 400 mg PO daily with food (monitor LFTs and diarrhea; no pleural signal).",
+        "Asciminib 80 mg PO daily, STAMP inhibitor, Category 1 (preferred for intermediate/high ELTS risk with pulmonary comorbidity; monitor pancreatic enzymes).",
+        "Obtain baseline chest imaging and echocardiogram if pulmonary hypertension is suspected; hold TKI and evaluate any new dyspnea, cough, or chest pain promptly."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "b",
+        "g"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "1L TKI started - proceed to molecular monitoring",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_tx_cp_gihep",
+      "linkId": "tx_cp_gihep",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "CP 1L GI Hepatic",
+      "title": "CP-CML 1L Therapy: Severe GI or Hepatic Disease",
+      "section": "Treatment",
+      "description": "First-line TKI options when severe gastrointestinal intolerance or hepatic dysfunction excludes bosutinib.",
+      "path": "CML / CP / 1L GI-Hepatic",
+      "pills": [
+        "CP",
+        "1L",
+        "GI/hepatic"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "AVOID bosutinib (high rates of diarrhea, nausea, transaminitis; contraindicated with severe hepatic impairment).",
+        "Imatinib 400 mg PO daily with food and water (monitor LFTs, fluid retention, GI tolerance; dose-reduce for hepatic impairment per label).",
+        "Dasatinib 100 mg PO daily (monitor LFTs and GI tolerance; review pulmonary and bleeding history).",
+        "Nilotinib 300 mg PO BID fasting (monitor lipase, LFTs, bilirubin; fasting administration complicates GI tolerance counseling).",
+        "Asciminib 80 mg PO daily, STAMP inhibitor, Category 1 (preferred for intermediate/high ELTS risk with GI/hepatic comorbidity; monitor pancreatic enzymes and LFTs).",
+        "Check baseline LFTs, bilirubin, and albumin; repeat LFTs every 2 weeks for the first month then monthly; provide anticipatory antidiarrheal and antiemetic planning."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "b",
+        "g"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "1L TKI started - proceed to molecular monitoring",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_m3",
+      "linkId": "cml_m3",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "3-Month Milestone",
+      "title": "Molecular Monitoring: 3-Month Milestone (BCR::ABL1 %IS)",
+      "section": "Monitoring",
+      "description": "First molecular milestone on peripheral blood qPCR (International Scale). BCR::ABL1 <=10% IS is optimal; >10% IS is a warning requiring adherence review and closer surveillance, and failure (no hematologic or cytogenetic response) mandates switch.",
+      "path": "CML / Monitoring / 3 Month",
+      "pills": [
+        "monitoring",
+        "3 month"
+      ],
+      "required": true,
+      "bullets": [
+        "Optimal: BCR::ABL1 <=10% IS at 3 months. Continue the same TKI and repeat qPCR at 6 months.",
+        "Warning: BCR::ABL1 >10% IS at 3 months. Verify adherence and CYP3A4 interactions, repeat qPCR in 1-3 months, obtain marrow cytogenetics and ABL1 kinase domain mutation testing.",
+        "Failure: no complete hematologic response or no cytogenetic response (Ph+ metaphases >95%) at 3 months. Switch TKI per mutation profile and evaluate for transplant.",
+        "Confirm the qPCR assay is IS-standardized before acting on a single value; repeat borderline results."
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "opt",
+          "label": "Optimal: BCR::ABL1 <=10% IS (continue same TKI)",
+          "sets": {
+            "m3": "optimal"
+          },
+          "pills": [
+            "optimal"
+          ]
+        },
+        {
+          "id": "warn",
+          "label": "Warning/Failure: BCR::ABL1 >10% IS or no cytogenetic response",
+          "sets": {
+            "m3": "warning"
+          },
+          "pills": [
+            "warning"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_m3_action",
+      "linkId": "tx_m3_action",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "3-Month Warning Action",
+      "title": "3-Month Warning: Adherence, Interaction, and Mutation Workup",
+      "section": "Monitoring",
+      "description": "Structured rescue workup for BCR::ABL1 >10% IS at 3 months before the 6-month assessment: exclude non-biologic causes of poor response and genotype the clone.",
+      "path": "CML / Monitoring / 3 Month Action",
+      "pills": [
+        "warning",
+        "action"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Structured adherence review (pill counts, pharmacy refill data, dosing with food/fasting requirements, nilotinib BID spacing) and CYP3A4 inducer/inhibitor medication reconciliation.",
+        "Repeat peripheral blood qPCR on the International Scale in 4-12 weeks to confirm trajectory; do not switch on a single unconfirmed value unless failure criteria are met.",
+        "Bone marrow aspirate with karyotype to quantify Ph-positive metaphases and detect clonal evolution (major-route ACA).",
+        "ABL1 kinase domain mutation testing to gate the next TKI (T315I mandates ponatinib or high-dose asciminib).",
+        "If failure criteria are met (no CHR or Ph+ >95%), switch TKI immediately per mutation profile rather than waiting for 6 months."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "c",
+        "d"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Warning workup addressed - proceed to 6-month milestone",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_m6",
+      "linkId": "cml_m6",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "6-Month Milestone",
+      "title": "Molecular Monitoring: 6-Month Milestone (BCR::ABL1 %IS)",
+      "section": "Monitoring",
+      "description": "Second molecular milestone. BCR::ABL1 <=1% IS is optimal; >1% IS at 6 months is treatment failure requiring TKI switch per mutation testing.",
+      "path": "CML / Monitoring / 6 Month",
+      "pills": [
+        "monitoring",
+        "6 month"
+      ],
+      "required": true,
+      "bullets": [
+        "Optimal: BCR::ABL1 <=1% IS at 6 months. Continue the same TKI and repeat qPCR at 12 months.",
+        "Warning zone: BCR::ABL1 1-10% IS at 6 months. Repeat adherence and interaction review, confirm with repeat qPCR, obtain mutation testing, and plan early switch if trajectory is flat or rising.",
+        "Failure: BCR::ABL1 >1% IS (and especially >10% IS) at 6 months. Switch TKI guided by ABL1 kinase domain mutation profile; initiate HLA typing and donor search.",
+        "Marrow cytogenetics if qPCR suggests failure, to document cytogenetic response depth and clonal evolution."
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "opt",
+          "label": "Optimal: BCR::ABL1 <=1% IS (continue same TKI)",
+          "sets": {
+            "m6": "optimal"
+          },
+          "pills": [
+            "optimal"
+          ]
+        },
+        {
+          "id": "fail",
+          "label": "Failure: BCR::ABL1 >1% IS (switch TKI per mutations)",
+          "sets": {
+            "m6": "failure"
+          },
+          "pills": [
+            "failure"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_m12",
+      "linkId": "cml_m12",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "12-Month Milestone",
+      "title": "Molecular Monitoring: 12-Month Milestone (MMR, BCR::ABL1 %IS)",
+      "section": "Monitoring",
+      "description": "Third molecular milestone. BCR::ABL1 <=0.1% IS (major molecular response, MMR, MR3.0) is optimal; >0.1% IS at 12 months is failure requiring switch.",
+      "path": "CML / Monitoring / 12 Month",
+      "pills": [
+        "monitoring",
+        "12 month"
+      ],
+      "required": true,
+      "bullets": [
+        "Optimal: BCR::ABL1 <=0.1% IS (MMR, MR3.0) at 12 months. Continue the same TKI, space qPCR to every 3-6 months once MMR is stable, and track depth toward MR4.0/MR4.5 for future treatment-free-remission eligibility.",
+        "Failure: BCR::ABL1 >0.1% IS at 12 months. Switch TKI guided by ABL1 kinase domain mutation testing; marrow karyotype for clonal evolution; transplant evaluation for high-risk or multi-TKI failure.",
+        "Rising transcript on serial qPCR (e.g., 5-fold rise with loss of MMR) triggers the same resistance workup even between formal milestones.",
+        "Document MMR date: sustained deep molecular response for >=2 years on >=3 years of TKI is the gateway to a supervised treatment-free-remission attempt."
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "opt",
+          "label": "Optimal: BCR::ABL1 <=0.1% IS, MMR achieved",
+          "sets": {
+            "m12": "optimal"
+          },
+          "pills": [
+            "MMR"
+          ]
+        },
+        {
+          "id": "fail",
+          "label": "Failure: BCR::ABL1 >0.1% IS or loss of response",
+          "sets": {
+            "m12": "failure"
+          },
+          "pills": [
+            "failure"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_mmr_deep",
+      "linkId": "tx_mmr_deep",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MMR Maintenance",
+      "title": "MMR Achieved: Continue TKI, Long-Term Surveillance, TFR Planning",
+      "section": "Maintenance",
+      "description": "Optimal responders continue the tolerated TKI indefinitely with spaced molecular surveillance and long-term toxicity management; plan a supervised treatment-free-remission attempt once DMR criteria are met.",
+      "path": "CML / Maintenance / MMR",
+      "pills": [
+        "MMR",
+        "maintenance"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Continue the same TKI at the tolerated dose; do not de-escalate or stop outside a supervised treatment-free-remission protocol.",
+        "qPCR on the International Scale every 3 months until MMR is stable for 2 years, then every 3-6 months; marrow cytogenetics only if qPCR rises or response is lost.",
+        "Track depth of response (MR4.0 <=0.01%, MR4.5 <=0.0032%): eligibility for a treatment-free-remission attempt requires typically >=3 years of TKI and >=2 years of sustained deep molecular response, low-risk features, and close monthly qPCR monitoring after stopping.",
+        "Long-term TKI toxicity surveillance: annual cardiovascular and metabolic review (blood pressure, lipids, HbA1c, ECG QTc), pleural/pulmonary symptom review on dasatinib, LFTs on bosutinib/nilotinib, pancreatic enzymes on asciminib.",
+        "Maintain adherence counseling, CYP3A4 interaction review at every medication change, contraception during therapy, and bone health review for prolonged therapy."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "c"
+      ]
+    },
+    {
+      "id": "n_resistance",
+      "linkId": "cml_resistance",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Resistance Gating",
+      "title": "Resistance: ABL1 Kinase Domain Mutation Gating",
+      "section": "Resistance",
+      "description": "Milestone failure routes through ABL1 kinase domain mutation testing. T315I mandates ponatinib or high-dose asciminib; other mutations guide 2G TKI selection; no mutation triggers adherence/intolerance management and switch to a non-cross-resistant TKI.",
+      "path": "CML / Resistance / Mutation Gate",
+      "pills": [
+        "resistance"
+      ],
+      "required": true,
+      "bullets": [
+        "Before labeling resistance: re-confirm adherence, CYP3A4 drug interactions, correct dosing and administration (nilotinib fasting, bosutinib with food), pregnancy, and IS-standardized repeat qPCR.",
+        "Obtain ABL1 kinase domain mutation analysis (NGS panel preferred to detect compound mutations) plus marrow karyotype for clonal evolution with major-route ACA.",
+        "T315I gatekeeper mutation: resistant to imatinib, dasatinib, nilotinib, and bosutinib; sensitive to ponatinib and asciminib. Prepare for allogeneic HCT.",
+        "Non-T315I mutations guide selection: Y253H, E255K/V, F359V/C/I favor dasatinib; F317L/V, T315A, V299L favor nilotinib; asciminib retains activity across most single mutants except select myristoyl-pocket variants.",
+        "No detectable mutation with milestone failure or intolerance: switch to an alternative TKI with a non-overlapping toxicity profile (asciminib preferred for multi-intolerance); recheck qPCR in 1-3 months."
+      ],
+      "footnotes": [
+        "d",
+        "f"
+      ],
+      "options": [
+        {
+          "id": "t315i",
+          "label": "T315I mutation detected (gatekeeper positive)",
+          "sets": {
+            "mutation": "T315I"
+          },
+          "pills": [
+            "T315I"
+          ]
+        },
+        {
+          "id": "othermut",
+          "label": "Non-T315I ABL1 mutation detected",
+          "sets": {
+            "mutation": "other"
+          },
+          "pills": [
+            "other mutation"
+          ]
+        },
+        {
+          "id": "nomut",
+          "label": "No ABL1 mutation (adherence, interaction, or intolerance pattern)",
+          "sets": {
+            "mutation": "none"
+          },
+          "pills": [
+            "no mutation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_t315i",
+      "linkId": "tx_t315i",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "T315I Rescue",
+      "title": "T315I-Positive Resistance: Ponatinib or High-Dose Asciminib + HCT Planning",
+      "section": "Treatment",
+      "description": "T315I rescue with the two active agents (ponatinib with OPTIC dose-reduction, or asciminib 200 mg BID) while preparing for allogeneic HCT.",
+      "path": "CML / Resistance / T315I",
+      "pills": [
+        "T315I",
+        "rescue"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Ponatinib 45 mg PO daily until BCR::ABL1 <=1% IS, then MANDATORY dose reduction to 15 mg PO daily (OPTIC response-adapted strategy); hold or reduce further for arterial occlusive symptoms, pancreatitis, hepatotoxicity, or severe cytopenias.",
+        "Alternative: asciminib 200 mg PO BID (STAMP inhibitor active against T315I including compound-mutant clones; monitor pancreatic enzymes, blood pressure, lipids).",
+        "Do NOT cycle to imatinib, dasatinib, nilotinib, or bosutinib for T315I-positive disease (uniform resistance).",
+        "Cardiovascular risk mitigation is mandatory on ponatinib: baseline and serial blood pressure, lipid, HbA1c, and ECG monitoring; smoking cessation; antiplatelet therapy when not contraindicated; cardiology co-management for high-risk patients.",
+        "Initiate HLA typing and unrelated-donor search immediately; refer to a transplant center; qPCR every 1-3 months until deep response, then per maintenance schedule."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "d",
+        "e",
+        "f"
+      ]
+    },
+    {
+      "id": "n_tx_resist",
+      "linkId": "tx_resist",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Non-T315I Switch",
+      "title": "Non-T315I Resistance: Mutation-Guided TKI Switch",
+      "section": "Treatment",
+      "description": "Second/third-line TKI selected from the ABL1 mutation profile: dasatinib- or nilotinib-sensitive mutants route to the active 2G TKI; multi-resistant or compound mutants route to asciminib or ponatinib.",
+      "path": "CML / Resistance / Switch",
+      "pills": [
+        "resistance",
+        "switch"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Y253H, E255K/V, F359V/C/I mutants: switch to dasatinib 100-140 mg PO daily (review pleural, pulmonary, and bleeding history first).",
+        "F317L/V, T315A, V299L mutants: switch to nilotinib 400 mg PO BID (review cardiovascular, metabolic, and QTc status first).",
+        "Multi-resistant, compound, or uncharacterized mutants: asciminib (standard dose per label; 200 mg BID if T315I co-mutation emerges) or ponatinib 45 mg daily with OPTIC dose-reduction and cardiovascular mitigation.",
+        "Bosutinib 500 mg PO daily is an option for resistance without a dasatinib/nilotinib-sensitive mutation when GI and hepatic tolerance allow.",
+        "Marrow karyotype at switch for clonal evolution; HLA typing and donor search for second failure, high ELTS risk, or AP/BP features; qPCR every 1-3 months until milestones are re-achieved."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "d",
+        "e",
+        "f"
+      ]
+    },
+    {
+      "id": "n_tx_intol",
+      "linkId": "tx_intol",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Intolerance Switch",
+      "title": "No Mutation: Adherence Rescue and Intolerance Switch",
+      "section": "Treatment",
+      "description": "Milestone failure without an ABL1 mutation is most often adherence, interaction, or intolerance: remediate the cause and switch to a TKI with a non-overlapping toxicity profile rather than escalating dose.",
+      "path": "CML / Resistance / Intolerance",
+      "pills": [
+        "intolerance",
+        "switch"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Complete adherence rescue: dosing education (nilotinib fasting and BID spacing, bosutinib with food), pill organizer or reminder system, pharmacy refill reconciliation, and CYP3A4 medication review.",
+        "Manage grade 1-2 toxicities with dose holds and label-directed dose reductions before abandoning an effective TKI; use antiemetics, antidiarrheals, diuretics, and topical or systemic steroids per toxicity type.",
+        "For persistent intolerance, switch to a TKI with a non-overlapping toxicity profile: asciminib is preferred after multiple intolerances given its distinct STAMP-mechanism tolerability; otherwise select per the comorbidity matrix (avoid nilotinib in CV risk, dasatinib in pleural risk, bosutinib in GI/hepatic disease).",
+        "Recheck qPCR in 1-3 months after switch; if milestones remain unmet, repeat ABL1 mutation testing (clonal selection can emerge) and proceed to the resistance pathway.",
+        "Document intolerance grade, attribution, and resolution to guide future sequencing and transplant discussions."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "g"
+      ]
+    },
+    {
+      "id": "n_bp_lineage",
+      "linkId": "cml_bp_lineage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "AP/BP Assignment",
+      "title": "AP/BP-CML: Phase and Lineage Assignment",
+      "section": "Treatment Selection",
+      "description": "Assign accelerated phase versus myeloid or lymphoid blast phase from blast percentage, lineage immunophenotyping, and extramedullary disease. Each assignment has a distinct chemo-immunotherapy backbone added to TKI therapy.",
+      "path": "CML / AP-BP / Lineage",
+      "pills": [
+        "lineage"
+      ],
+      "required": true,
+      "bullets": [
+        "Accelerated phase (blasts 10-19%, basophils >=20%, refractory cytoses/cytopenias, or clonal evolution): potent TKI (2G TKI, ponatinib, or asciminib per mutation profile) with donor search and planned allogeneic HCT.",
+        "Myeloid blast phase (>=20% myeloid blasts or myeloid sarcoma): TKI plus AML-type induction (cytarabine/anthracycline 7+3 backbone) followed by allogeneic HCT.",
+        "Lymphoid blast phase (>=20% lymphoblasts, TdT/CD19 positive): TKI plus ALL-type induction (Hyper-CVAD backbone with steroids and vincristine) plus CNS prophylaxis, followed by allogeneic HCT.",
+        "Start or continue TKI immediately at AP/BP recognition; do not delay TKI while awaiting full lineage workup."
+      ],
+      "footnotes": [
+        "d",
+        "f"
+      ],
+      "options": [
+        {
+          "id": "ap",
+          "label": "Accelerated phase CML (AP-CML)",
+          "sets": {
+            "apbp": "ap"
+          },
+          "pills": [
+            "AP"
+          ]
+        },
+        {
+          "id": "bpmy",
+          "label": "Myeloid blast phase CML (myeloid BP)",
+          "sets": {
+            "apbp": "myeloid-bp"
+          },
+          "pills": [
+            "myeloid BP"
+          ]
+        },
+        {
+          "id": "bply",
+          "label": "Lymphoid blast phase CML (lymphoid BP)",
+          "sets": {
+            "apbp": "lymphoid-bp"
+          },
+          "pills": [
+            "lymphoid BP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_ap",
+      "linkId": "tx_ap",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "AP Treatment",
+      "title": "AP-CML: Potent TKI + Donor Search + Planned Allogeneic HCT",
+      "section": "Treatment",
+      "description": "Accelerated-phase therapy with a potent TKI selected by mutation profile, close surveillance for blast progression, and transplant planning.",
+      "path": "CML / AP-BP / AP Treatment",
+      "pills": [
+        "AP",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Start a potent TKI immediately: dasatinib 100-140 mg daily, nilotinib 400 mg BID, bosutinib 500 mg daily, ponatinib 45 mg daily (with OPTIC reduction), or asciminib per label, selected by ABL1 mutation profile and comorbidity matrix; T315I mandates ponatinib or asciminib 200 mg BID.",
+        "HLA typing and unrelated-donor search at diagnosis; early referral to a transplant center with intent for allogeneic HCT, particularly for clonal evolution, T315I, or incomplete response.",
+        "Monitor CBC and qPCR every 1-3 months with marrow karyotype until response; any rise to >=20% blasts reclassifies as blast phase and switches to BP therapy.",
+        "Consider clinical trial enrollment; single-agent TKI may suffice for AP-CML achieving rapid deep response, with HCT reserved for inadequate responders.",
+        "Manage TKI toxicities per the comorbidity matrix with cardiovascular, pleural, GI, and hepatic surveillance as in CP-CML."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "d",
+        "f",
+        "g"
+      ]
+    },
+    {
+      "id": "n_tx_bp_myeloid",
+      "linkId": "tx_bp_myeloid",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Myeloid BP Treatment",
+      "title": "Myeloid BP-CML: TKI + AML Induction, Then Allogeneic HCT",
+      "section": "Treatment",
+      "description": "Myeloid blast-phase therapy combining a potent TKI (dasatinib or ponatinib preferred) with AML-type 7+3 induction, followed by allogeneic HCT in responders.",
+      "path": "CML / AP-BP / Myeloid BP",
+      "pills": [
+        "myeloid BP",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "TKI backbone: dasatinib 140 mg PO daily or ponatinib 45 mg PO daily (with OPTIC dose-reduction and cardiovascular mitigation), selected by mutation profile; continue TKI through induction.",
+        "AML-type induction: cytarabine plus anthracycline 7+3 backbone (idarubicin or daunorubicin per fitness and cardiac function); tumor lysis prophylaxis with hydration, allopurinol or rasburicase, and electrolyte monitoring.",
+        "CNS assessment with lumbar puncture; intrathecal prophylaxis for high-risk or CNS-positive disease.",
+        "Reassess marrow after induction: responders proceed to allogeneic HCT without delay; primary refractory disease warrants FLAG-IDA or similar salvage per the AML pathway plus trial consideration.",
+        "Aggressive supportive care: febrile neutropenia protocols, transfusion thresholds, antifungal prophylaxis, growth factor per institutional policy."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "d",
+        "f"
+      ]
+    },
+    {
+      "id": "n_tx_bp_lymphoid",
+      "linkId": "tx_bp_lymphoid",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Lymphoid BP Treatment",
+      "title": "Lymphoid BP-CML: TKI + ALL Induction + CNS Prophylaxis, Then Allogeneic HCT",
+      "section": "Treatment",
+      "description": "Lymphoid blast-phase therapy combining a potent TKI with ALL-type Hyper-CVAD-based induction, steroids, and mandatory CNS prophylaxis, followed by allogeneic HCT.",
+      "path": "CML / AP-BP / Lymphoid BP",
+      "pills": [
+        "lymphoid BP",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "TKI backbone: dasatinib 140 mg PO daily (excellent CNS penetration) or ponatinib 45 mg PO daily for T315I-positive disease, continued through ALL induction and maintenance.",
+        "ALL-type induction: Hyper-CVAD backbone (hyperfractionated cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with high-dose methotrexate and cytarabine) with corticosteroid pre-phase per fitness.",
+        "Mandatory CNS prophylaxis: intrathecal methotrexate and cytarabine alternating during induction regardless of baseline CSF status; therapeutic intrathecal schedule if CSF positive.",
+        "Reassess marrow and MRD after induction: responders proceed to allogeneic HCT; consider blinatumomab-based bridging for persistent lymphoid MRD per the ALL pathway.",
+        "Tumor lysis prophylaxis, hepatitis B monitoring on steroids and chemotherapy, fertility preservation discussion before induction when feasible."
+      ],
+      "protocolRefs": [],
+      "footnotes": [
+        "d",
+        "f"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_phase_cp",
+      "from": "n_phase",
+      "to": "n_cml_cp_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "cp"
+      ]
+    },
+    {
+      "id": "l_phase_apbp",
+      "from": "n_phase",
+      "to": "n_cml_ap_bp_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "apbp"
+      ]
+    },
+    {
+      "id": "l_cpwk_elts",
+      "from": "n_cml_cp_wk",
+      "to": "n_elts",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_apbpwk_lineage",
+      "from": "n_cml_ap_bp_wk",
+      "to": "n_bp_lineage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_elts_low",
+      "from": "n_elts",
+      "to": "n_cp_comorb",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "low"
+      ]
+    },
+    {
+      "id": "l_elts_int",
+      "from": "n_elts",
+      "to": "n_cp_comorb",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "int"
+      ]
+    },
+    {
+      "id": "l_elts_high",
+      "from": "n_elts",
+      "to": "n_cp_comorb",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "high"
+      ]
+    },
+    {
+      "id": "l_comorb_std",
+      "from": "n_cp_comorb",
+      "to": "n_tx_cp_std",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "nocomorb"
+      ]
+    },
+    {
+      "id": "l_comorb_cv",
+      "from": "n_cp_comorb",
+      "to": "n_tx_cp_cv",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "cvrisk"
+      ]
+    },
+    {
+      "id": "l_comorb_pulm",
+      "from": "n_cp_comorb",
+      "to": "n_tx_cp_pulm",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pulm"
+      ]
+    },
+    {
+      "id": "l_comorb_gihep",
+      "from": "n_cp_comorb",
+      "to": "n_tx_cp_gihep",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "gihep"
+      ]
+    },
+    {
+      "id": "l_txstd_m3",
+      "from": "n_tx_cp_std",
+      "to": "n_m3",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_txcv_m3",
+      "from": "n_tx_cp_cv",
+      "to": "n_m3",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_txpulm_m3",
+      "from": "n_tx_cp_pulm",
+      "to": "n_m3",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_txgihep_m3",
+      "from": "n_tx_cp_gihep",
+      "to": "n_m3",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_m3_opt",
+      "from": "n_m3",
+      "to": "n_m6",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "opt"
+      ]
+    },
+    {
+      "id": "l_m3_warn",
+      "from": "n_m3",
+      "to": "n_m3_action",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "warn"
+      ]
+    },
+    {
+      "id": "l_m3act_m6",
+      "from": "n_m3_action",
+      "to": "n_m6",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_m6_opt",
+      "from": "n_m6",
+      "to": "n_m12",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "opt"
+      ]
+    },
+    {
+      "id": "l_m6_fail",
+      "from": "n_m6",
+      "to": "n_resistance",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "fail"
+      ]
+    },
+    {
+      "id": "l_m12_opt",
+      "from": "n_m12",
+      "to": "n_mmr_deep",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "opt"
+      ]
+    },
+    {
+      "id": "l_m12_fail",
+      "from": "n_m12",
+      "to": "n_resistance",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "fail"
+      ]
+    },
+    {
+      "id": "l_res_t315i",
+      "from": "n_resistance",
+      "to": "n_tx_t315i",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "t315i"
+      ]
+    },
+    {
+      "id": "l_res_other",
+      "from": "n_resistance",
+      "to": "n_tx_resist",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "othermut"
+      ]
+    },
+    {
+      "id": "l_res_nomut",
+      "from": "n_resistance",
+      "to": "n_tx_intol",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "nomut"
+      ]
+    },
+    {
+      "id": "l_lin_ap",
+      "from": "n_bp_lineage",
+      "to": "n_tx_ap",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "ap"
+      ]
+    },
+    {
+      "id": "l_lin_bpmy",
+      "from": "n_bp_lineage",
+      "to": "n_tx_bp_myeloid",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "bpmy"
+      ]
+    },
+    {
+      "id": "l_lin_bply",
+      "from": "n_bp_lineage",
+      "to": "n_tx_bp_lymphoid",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "bply"
+      ]
+    }
+  ]
+}

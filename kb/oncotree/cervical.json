@@ -1,13 +1,13 @@
 {
   "guideline": "cervical",
   "title": "Cervical Cancer",
-  "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "2.0.0",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
   "diseaseId": "cervical_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "DRAFT decision support authored from standard oncology references (NCCN/DeVita/Harrison) - the physician decides. Full pathway: presentation/histology -> workup -> FIGO 2018 staging -> stage-directed local therapy (fertility-sparing vs radical surgery vs definitive chemoradiation), each curative arm routed through pathologic-risk or response/restaging decisions before adjuvant therapy or surveillance; locally advanced concurrent cisplatin-radiation +/- pembrolizumab with response-adapted salvage; recurrent disease split by pattern; and metastatic disease as a line-of-therapy sub-tree (first line by PD-L1 CPS -> on progression -> second line -> later line). Small-cell / neuroendocrine carcinoma is a separate platinum-etoposide pathway with response-adapted relapse therapy. Systemic leaves reference existing StewardMD Standard Protocols by id where a dose regimen fits; surgery, radiation, and agents without a dose protocol are shown as checklist guidance with NO dose. Structural pathway consistent with Standard Guidelines (NCCN) Cervical Cancer; no proprietary text reproduced; invents no dose. DRAFT - not clinically activated; the physician decides and the dose engine computes patient doses.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Cervical Cancer. Regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
+  "provenanceNote": "NCCN Guidelines Version 2.2026 clinical navigator for Cervical Cancer. Full pathway: presentation/histology -> diagnostic workup (pelvic MRI, FDG-PET/CT, molecular profiling) -> FIGO 2018 staging -> stage-directed local therapy (fertility-sparing vs radical surgery vs definitive chemoradiation), each curative arm routed through pathologic-risk or response/restaging decisions before adjuvant therapy or surveillance; locally advanced disease treated with concurrent cisplatin-radiation plus pembrolizumab per KEYNOTE-A18 (Category 1 preferred for FIGO III-IVA) with response-adapted salvage; recurrent disease split by pattern with restaging and molecular workup; and metastatic disease as a line-of-therapy sub-tree (first line by PD-L1 CPS per KEYNOTE-826 -> on progression -> second line with tisotumab vedotin per innovaTV 301 -> later line). Small-cell / neuroendocrine carcinoma is a separate platinum-etoposide pathway with response-adapted relapse therapy. Systemic leaves reference existing StewardMD Standard Protocols by id where a dose regimen fits; surgery, radiation, and agents without a dose protocol are shown as checklist guidance. No proprietary text reproduced. DRAFT - not clinically activated; the physician decides and the dose engine computes patient doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Cervical Cancer Version 2.2026 (November 10, 2025).",
   "startNodeIds": [
     "n_entry"
   ],
@@ -21,11 +21,15 @@
       "evidence": "1"
     },
     "c": {
-      "text": "For higher-risk locally advanced disease (node-positive or bulky), adding pembrolizumab to concurrent cisplatin-radiation and continuing it as maintenance improved outcomes (KEYNOTE-A18 concept). Confirm eligibility and monitor for immune-related toxicity.",
+      "text": "For FIGO 2018 stage III-IVA (or node-positive IB2-IIB) cervical cancer, pembrolizumab concurrent with cisplatin-based chemoradiation followed by pembrolizumab maintenance is the NCCN v2.2026 Category 1 preferred regimen (KEYNOTE-A18: progression-free and overall survival benefit). Confirm eligibility and monitor for immune-related toxicity.",
       "evidence": "1"
     },
     "d": {
-      "text": "In persistent, recurrent, or metastatic disease, adding pembrolizumab to platinum-doublet chemotherapy plus bevacizumab benefits PD-L1 CPS >= 1 tumors (KEYNOTE-826 concept). Assess PD-L1 CPS by a validated assay before first-line therapy.",
+      "text": "In persistent, recurrent, or metastatic disease, adding pembrolizumab to platinum-doublet chemotherapy plus bevacizumab is the NCCN v2.2026 Category 1 preferred first-line regimen for PD-L1 CPS >= 1 tumors (KEYNOTE-826: overall survival benefit). Assess PD-L1 CPS by a validated 22C3 assay before first-line therapy.",
+      "evidence": "1"
+    },
+    "f": {
+      "text": "After progression on platinum-based therapy, tisotumab vedotin is the NCCN v2.2026 Category 1 preferred second-line option (innovaTV 301: overall survival superiority versus single-agent chemotherapy). Mandatory ocular prophylaxis and monitoring for bleeding and peripheral neuropathy apply.",
       "evidence": "1"
     },
     "e": {
@@ -103,15 +107,17 @@
       ],
       "bullets": [
         "History and physical with pelvic (and rectovaginal) examination; biopsy-confirmed histology and grade",
-        "Pelvic MRI to define tumor size, stromal and parametrial extension",
-        "PET-CT (or CT chest/abdomen/pelvis) for nodal and distant disease",
-        "Cystoscopy / proctosigmoidoscopy when bladder or rectal invasion is suspected",
-        "CBC, renal and liver function, HIV testing; pregnancy status where relevant; fertility counseling if applicable"
+        "Pelvic MRI with contrast - gold standard to evaluate cervical tumor dimensions, 3D stromal invasion depth, and parametrial invasion",
+        "Whole-body FDG-PET/CT - preferred Category 1 nodal staging (pelvic IIIC1 vs para-aortic IIIC2) and distant metastatic (IVB) workup; CT chest/abdomen/pelvis if PET-CT unavailable",
+        "Mandatory molecular testing for recurrent / metastatic disease: PD-L1 IHC (22C3 CPS score), MSI-H / dMMR, TMB, HER2 IHC, RET / NTRK fusions",
+        "Cystoscopy and proctosigmoidoscopy if suspected bladder or rectal mucosal invasion (FIGO IVA)",
+        "CBC, renal and liver function, HIV testing; pregnancy status where relevant",
+        "Fertility counseling and ovarian transposition planning for premenopausal patients undergoing pelvic RT"
       ],
       "options": [
         {
           "id": "continue",
-          "label": "Workup reviewed - continue to staging",
+          "label": "Diagnostic Workup Reviewed — Proceed to FIGO 2018 Staging",
           "setsValue": null
         }
       ]
@@ -159,7 +165,7 @@
         },
         {
           "id": "localadv",
-          "label": "Locally advanced (IB3, IIA2, IIB-IVA)",
+          "label": "Locally advanced (IB3, IIA2, IIB-IVA, incl. node-positive IIIC / III-IVA)",
           "sets": {
             "stage": "localadv"
           },
@@ -200,7 +206,7 @@
             [
               "IB3, IIA2, IIB-IVA",
               "Bulky > 4 cm or beyond cervix (parametria, lower vagina, pelvic wall, bladder/rectum)",
-              "Definitive concurrent chemoradiation + brachytherapy"
+              "Definitive concurrent chemoradiation + brachytherapy (+ pembrolizumab for III-IVA or node-positive disease)"
             ],
             [
               "IIIC",
@@ -712,7 +718,7 @@
       "name": "Locally advanced risk",
       "title": "Locally advanced: nodal / risk status",
       "section": "Treatment",
-      "description": "Concurrent chemoradiation is the backbone; adding immunotherapy is considered for higher-risk (node-positive or bulky) disease.",
+      "description": "Concurrent chemoradiation is the backbone; pembrolizumab added concurrently and as maintenance is the Category 1 preferred regimen for FIGO III-IVA or node-positive IB2-IIB disease (KEYNOTE-A18).",
       "path": "Cervical / Locally advanced / Risk",
       "pills": [
         "locally advanced"
@@ -721,7 +727,7 @@
       "options": [
         {
           "id": "standard",
-          "label": "Standard-risk locally advanced",
+          "label": "Standard-risk locally advanced (node-negative IB3-IIB)",
           "sets": {
             "laRisk": "standard"
           },
@@ -731,7 +737,7 @@
         },
         {
           "id": "highrisk",
-          "label": "Higher-risk (node-positive or bulky)",
+          "label": "Higher-risk: FIGO III-IVA or node-positive IB2-IIB (KEYNOTE-A18 eligible)",
           "sets": {
             "laRisk": "high"
           },
@@ -748,7 +754,7 @@
       "name": "Definitive chemoRT",
       "title": "Definitive concurrent cisplatin-radiation + brachytherapy",
       "section": "Treatment",
-      "description": "Standard curative treatment for locally advanced cervical cancer; response is then assessed.",
+      "description": "Standard curative treatment for node-negative locally advanced cervical cancer; response is then assessed.",
       "path": "Cervical / Locally advanced / ChemoRT",
       "pills": [
         "chemoRT",
@@ -759,10 +765,10 @@
         "1"
       ],
       "bullets": [
-        "External-beam pelvic radiation with concurrent weekly cisplatin as a radiosensitizer (dose per protocol - no dose asserted here)",
-        "Image-guided intracavitary +/- interstitial brachytherapy to complete the definitive dose",
+        "External-beam pelvic RT with concurrent weekly cisplatin 40 mg/m2 as a radiosensitizer (typically 5-6 weekly doses across the radiation course)",
+        "Image-guided adaptive brachytherapy (IGABT), intracavitary +/- interstitial, to complete the definitive dose",
         "Extended-field radiation for para-aortic nodal disease (IIIC2)",
-        "Complete treatment within an optimal overall time to preserve local control",
+        "Complete treatment within 8 weeks overall time to preserve local control",
         "Assess response at restaging (next step)"
       ],
       "protocolRefs": [
@@ -774,9 +780,9 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "ChemoRT + pembrolizumab",
-      "title": "Concurrent chemoradiation plus pembrolizumab (higher risk)",
+      "title": "Concurrent chemoradiation plus pembrolizumab - Category 1 preferred (KEYNOTE-A18)",
       "section": "Treatment",
-      "description": "For higher-risk locally advanced disease, pembrolizumab is added to concurrent chemoradiation and continued as maintenance; response is then assessed.",
+      "description": "NCCN v2.2026 Category 1 preferred regimen for FIGO III-IVA or node-positive IB2-IIB disease: pembrolizumab concurrent with chemoradiation followed by maintenance; response is then assessed.",
       "path": "Cervical / Locally advanced / ChemoRT + IO",
       "pills": [
         "chemoRT",
@@ -791,9 +797,11 @@
         "1"
       ],
       "bullets": [
-        "Concurrent cisplatin-radiation + brachytherapy (as above) with pembrolizumab added during and after chemoradiation",
-        "Continue pembrolizumab as maintenance per protocol; monitor for immune-related toxicity",
-        "Reserve for node-positive or bulky locally advanced disease meeting eligibility",
+        "Pembrolizumab 200 mg IV q3w concurrent with chemoradiation: weekly cisplatin 40 mg/m2 + external beam RT + image-guided adaptive brachytherapy (IGABT)",
+        "Followed by maintenance pembrolizumab 400 mg IV q6w for up to 2 years (or 200 mg IV q3w equivalent)",
+        "Extended-field radiation for para-aortic nodal disease (IIIC2); complete radiation within 8 weeks overall time",
+        "Monitor for immune-related toxicity (thyroid, hepatic, pulmonary, colitis, dermatologic, endocrine) throughout concurrent and maintenance phases",
+        "Eligibility: FIGO 2018 stage III-IVA or node-positive IB2-IIB, adequate organ function, no active autoimmune disease requiring systemic therapy",
         "Assess response at restaging (next step)"
       ],
       "protocolRefs": [
@@ -902,14 +910,17 @@
       "name": "Recurrence pattern",
       "title": "Recurrent disease: pattern and prior therapy",
       "section": "Recurrence",
-      "description": "Salvage intent depends on the site of recurrence and whether the pelvis was previously irradiated.",
+      "description": "Biopsy-confirm recurrence, complete restaging and molecular workup, then set salvage intent by the site of recurrence and whether the pelvis was previously irradiated.",
       "path": "Cervical / Recurrence / Pattern",
       "pills": [
         "recurrence"
       ],
       "required": true,
       "bullets": [
-        "Biopsy-confirm recurrence and restage (PET-CT) to define isolated vs disseminated disease"
+        "Biopsy-confirm recurrence and restage with whole-body FDG-PET/CT plus pelvic MRI with contrast to define isolated vs disseminated disease",
+        "Mandatory molecular testing at recurrence: PD-L1 IHC (22C3 CPS score), MSI-H / dMMR, TMB, HER2 IHC, RET / NTRK fusions",
+        "Cystoscopy and proctosigmoidoscopy if suspected bladder or rectal mucosal invasion (FIGO IVA)",
+        "Fertility counseling and ovarian transposition planning for premenopausal patients facing pelvic RT"
       ],
       "options": [
         {
@@ -1025,7 +1036,7 @@
       "name": "PD-L1 (metastatic)",
       "title": "Metastatic / recurrent: PD-L1 (CPS) stratification",
       "section": "Recurrence",
-      "description": "First-line systemic therapy for persistent, recurrent, or metastatic disease is directed by PD-L1 combined positive score (CPS).",
+      "description": "First-line systemic therapy for persistent, recurrent, or metastatic disease is directed by PD-L1 combined positive score (CPS) with full molecular profiling.",
       "path": "Cervical / Metastatic / PD-L1",
       "pills": [
         "metastatic",
@@ -1037,6 +1048,10 @@
       ],
       "evidenceCategory": [
         "1"
+      ],
+      "bullets": [
+        "Confirm PD-L1 IHC by validated 22C3 assay (CPS score) before first-line therapy",
+        "Complete molecular profiling: MSI-H / dMMR, TMB, HER2 IHC, RET / NTRK fusions to guide second-line and trial options"
       ],
       "options": [
         {
@@ -1088,9 +1103,9 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Pembro + chemo + bev",
-      "title": "First-line (PD-L1 CPS >= 1): pembrolizumab + chemo + bevacizumab",
+      "title": "First-line (PD-L1 CPS >= 1): pembrolizumab + chemo + bevacizumab - Category 1 preferred (KEYNOTE-826)",
       "section": "Recurrence",
-      "description": "Add pembrolizumab to a platinum-doublet plus bevacizumab for PD-L1-positive metastatic / recurrent disease; on progression, move to second line.",
+      "description": "NCCN v2.2026 Category 1 preferred first-line regimen for PD-L1 CPS >= 1 persistent, recurrent, or metastatic disease (KEYNOTE-826); on progression, move to second line.",
       "path": "Cervical / Metastatic / 1L / Pembro-chemo-bev",
       "pills": [
         "immunotherapy",
@@ -1105,10 +1120,11 @@
         "1"
       ],
       "bullets": [
-        "Carboplatin (or cisplatin) + paclitaxel + bevacizumab, with pembrolizumab added and continued as maintenance",
-        "Confirm no bevacizumab contraindication (fistula, uncontrolled hypertension, recent bleeding)",
-        "Monitor for immune-related adverse events",
-        "Chemotherapy + bevacizumab backbone referenced below (pembrolizumab added on top - no dose asserted here)",
+        "Pembrolizumab + chemotherapy (carboplatin / paclitaxel or cisplatin / paclitaxel) + bevacizumab 15 mg/kg, with pembrolizumab continued as maintenance",
+        "Chemotherapy backbone: carboplatin / paclitaxel preferred; cisplatin / paclitaxel is an alternative doublet",
+        "Confirm no bevacizumab contraindication (fistula, uncontrolled hypertension, recent bleeding or hemoptysis)",
+        "Monitor for immune-related adverse events throughout chemo-immunotherapy and maintenance",
+        "Chemotherapy + bevacizumab backbone referenced below (pembrolizumab added on top)",
         "On progression, proceed to second-line therapy (next step)"
       ],
       "protocolRefs": [
@@ -1121,9 +1137,9 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Chemo + bev",
-      "title": "First-line (PD-L1 CPS < 1): chemotherapy + bevacizumab",
+      "title": "First-line (PD-L1 CPS < 1): chemotherapy + bevacizumab - Category 1",
       "section": "Recurrence",
-      "description": "Platinum-doublet chemotherapy plus bevacizumab for PD-L1-negative metastatic / recurrent disease; on progression, move to second line.",
+      "description": "NCCN v2.2026 Category 1 first-line regimen for PD-L1 CPS < 1 persistent, recurrent, or metastatic disease; on progression, move to second line.",
       "path": "Cervical / Metastatic / 1L / Chemo-bev",
       "pills": [
         "chemotherapy",
@@ -1132,9 +1148,9 @@
       ],
       "showsRecommendation": true,
       "bullets": [
-        "Carboplatin (or cisplatin) + paclitaxel + bevacizumab",
-        "Cisplatin-paclitaxel-bevacizumab is an alternative doublet backbone",
-        "Confirm no bevacizumab contraindication",
+        "Carboplatin / paclitaxel + bevacizumab 15 mg/kg - Category 1 preferred backbone for PD-L1-negative disease",
+        "Cisplatin / paclitaxel + bevacizumab is an alternative doublet backbone",
+        "Confirm no bevacizumab contraindication (fistula, uncontrolled hypertension, recent bleeding or hemoptysis)",
         "Regimen referenced below",
         "On progression, proceed to second-line therapy (next step)"
       ],
@@ -1150,7 +1166,7 @@
       "name": "Second line",
       "title": "Metastatic: second-line therapy (on progression)",
       "section": "Recurrence",
-      "description": "After progression on first-line therapy, second-line options are directed by biomarkers and prior immunotherapy exposure.",
+      "description": "After progression on first-line (post-platinum) therapy, tisotumab vedotin is the Category 1 preferred option; biomarker-directed immunotherapy applies for IO-naive actionable disease.",
       "path": "Cervical / Metastatic / 2L",
       "pills": [
         "2nd line"
@@ -1169,7 +1185,7 @@
         },
         {
           "id": "tisotumab",
-          "label": "Antibody-drug conjugate (tisotumab vedotin)",
+          "label": "Antibody-drug conjugate: tisotumab vedotin - Category 1 preferred (innovaTV 301)",
           "sets": {
             "secondLine": "adc"
           },
@@ -1196,7 +1212,7 @@
       "name": "Second-line IO",
       "title": "Second-line immunotherapy",
       "section": "Recurrence",
-      "description": "Immunotherapy for biomarker-selected or immunotherapy-naive recurrent disease; on progression, later-line options apply.",
+      "description": "Immunotherapy or targeted therapy for biomarker-selected, immunotherapy-naive recurrent disease; on progression, later-line options apply.",
       "path": "Cervical / Metastatic / 2L / IO",
       "pills": [
         "immunotherapy",
@@ -1205,10 +1221,10 @@
       ],
       "showsRecommendation": true,
       "bullets": [
-        "Pembrolizumab for dMMR/MSI-high or TMB-high tumors (tissue-agnostic), if immunotherapy-naive",
-        "Single-agent anti-PD-1 for PD-L1-positive disease not previously treated with immunotherapy",
-        "Consider NTRK-fusion targeted therapy if an actionable fusion is present",
-        "No dose asserted here - agent regimen per protocol",
+        "Pembrolizumab for dMMR / MSI-H or TMB-high tumors (tissue-agnostic indication), if immunotherapy-naive",
+        "Single-agent anti-PD-1 for PD-L1 CPS >= 1 disease not previously treated with immunotherapy",
+        "Targeted therapy for actionable alterations: RET / NTRK fusions, HER2-positive disease per molecular profiling",
+        "Agent regimen referenced below",
         "On progression, proceed to later-line therapy (next step)"
       ],
       "protocolRefs": [
@@ -1220,9 +1236,9 @@
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Tisotumab vedotin",
-      "title": "Second-line antibody-drug conjugate (tisotumab vedotin)",
+      "title": "Second-line antibody-drug conjugate (tisotumab vedotin) - Category 1 preferred (innovaTV 301)",
       "section": "Recurrence",
-      "description": "Tissue-factor-directed antibody-drug conjugate after progression on first-line therapy; on progression, later-line options apply.",
+      "description": "NCCN v2.2026 Category 1 preferred second-line therapy after post-platinum progression: tissue-factor-directed ADC with overall survival superiority versus single-agent chemotherapy (innovaTV 301); on progression, later-line options apply.",
       "path": "Cervical / Metastatic / 2L / ADC",
       "pills": [
         "ADC",
@@ -1230,10 +1246,18 @@
         "treatment"
       ],
       "showsRecommendation": true,
+      "footnotes": [
+        "f"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
       "bullets": [
-        "Tisotumab vedotin (tissue-factor-directed ADC) after prior systemic therapy",
-        "Monitor ocular toxicity (prophylactic eye care), bleeding, and peripheral neuropathy",
-        "No dose asserted here - agent regimen per protocol",
+        "Tisotumab vedotin (Tivdak) 2.0 mg/kg IV q3w until progression or unacceptable toxicity - Category 1 preferred post-platinum",
+        "innovaTV 301: overall survival superiority versus single-agent chemotherapy (topotecan, vinorelbine, gemcitabine, pemetrexed, or irinotecan)",
+        "Mandatory ocular prophylaxis: topical vasoconstrictor and cooling eye pads at infusion plus corticosteroid eye drops, with ophthalmologic exam at baseline and before each dose",
+        "Monitor for bleeding and peripheral neuropathy before each dose",
+        "Agent regimen referenced below",
         "On progression, proceed to later-line therapy (next step)"
       ],
       "protocolRefs": [
