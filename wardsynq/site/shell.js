@@ -620,6 +620,9 @@
        * greyed out, with a tooltip explaining she lacked a capability the screen never needed.
        * Found 2026-09-12 by signing in as the pharmacist. */
       tile({ go: "ward:inventoryboard", icon: "inventory_2", title: T(null, "site.shell.home.tile.inventoryboard.title", "Pharmacy stock"), sub: T(null, "site.shell.home.tile.inventoryboard.sub", "Receive, move, waste, reconcile"), need: "order.dispense" }),
+      /* The blood bank's own registers: donors, testing, components and the unit inventory the transfusion
+       * crossmatch now checks. transfusion.issue is the blood bank's authority (admin holds it too). */
+      tile({ go: "bloodbank", icon: "bloodtype", title: T(null, "site.shell.home.tile.bloodbank.title", "Blood bank"), sub: T(null, "site.shell.home.tile.bloodbank.sub", "Donors, testing, components and unit inventory"), need: "transfusion.issue" }),
       tile({ go: "ward:scheduling", icon: "event", title: T(null, "site.shell.home.tile.scheduling.title", "Scheduling"), sub: T(null, "site.shell.home.tile.scheduling.sub", "Appointments, resources, blackout periods"), need: "queue.view" }),
       tile({ go: "opd", icon: "medical_services", title: T(null, "site.shell.home.tile.opd.title", "OPD desk"), sub: T(null, "site.shell.home.tile.opd.sub", "Queue, check-in, consult, prescriptions, results"), need: "queue.view" }),
       tile({ go: "workstation", icon: "verified", title: T(null, "site.shell.home.tile.workstation.title", "Order safety workstation"), sub: T(null, "site.shell.home.tile.workstation.sub", "Medication order with allergy and interaction checks"), need: "emr.treat" }),
@@ -673,7 +676,11 @@
       tile({ go: "ward:approvals", icon: "verified", title: T(null, "site.shell.home.tile.approvals.title", "Approvals"), sub: T(null, "site.shell.home.tile.approvals.sub", "Ask for an approval for a restricted medicine, and grant the ones waiting"), need: ["emr.vitals", "emr.treat"] }),
       /* Purchasing sits behind the pharmacy's own capability, not a clinical one: ordering stock is
        * the storekeeper's job and has never been the ward's. */
-      tile({ go: "ward:purchasing", icon: "inventory", title: T(null, "site.shell.home.tile.purchasing.title", "Purchasing"), sub: T(null, "site.shell.home.tile.purchasing.sub", "Raise a supplier order, get it approved, and book the stock in when it arrives"), need: "order.dispense" }),
+      tile({ go: "ward:purchasing", icon: "inventory", title: T(null, "site.shell.home.tile.purchasing.title", "Purchasing"), sub: T(null, "site.shell.home.tile.purchasing.sub", "Raise a supplier order, get it approved, and book the stock in when it arrives"), need: ["order.dispense", "stores.manage"] }),
+      /* General stores and biomedical equipment. Every stores role opens Stores (the ward raises and acknowledges, the
+       * in-charge approves, the store keeper issues); anyone on the floor can report broken equipment. */
+      tile({ go: "stores", icon: "shelves", title: T(null, "site.shell.home.tile.stores.title", "General stores"), sub: T(null, "site.shell.home.tile.stores.sub", "Indents, approval, issue, stock and consumption by department"), need: ["dept.request", "stores.indent.approve", "stores.manage"] }),
+      tile({ go: "assets", icon: "build", title: T(null, "site.shell.home.tile.assets.title", "Assets and maintenance"), sub: T(null, "site.shell.home.tile.assets.sub", "Report broken equipment; asset register, PM, calibration and job cards"), need: ["dept.request", "asset.manage"] }),
       tile({ go: "ward:downtime", icon: "cloud_off", title: T(null, "site.shell.home.tile.downtime.title", "Downtime pack"), sub: T(null, "site.shell.home.tile.downtime.sub", "Printable ward state for a network outage"), need: "emr.view" }),
     ] : [];
     var peopleTiles = [

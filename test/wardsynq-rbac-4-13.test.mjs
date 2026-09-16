@@ -19,7 +19,8 @@ test("him: writes and reads ROIRequest only - no clinical write, no staff.admin 
 test("blood_bank: reads/writes TransfusionEpisode, plus enough read to identify the patient, nothing more", () => {
   const g = grantForRole("blood_bank");
   assert.ok(g, "blood_bank resolves to a real grant");
-  assert.deepEqual(g.write.slice().sort(), ["TransfusionEpisode"]);
+  // The blood bank's own registers joined 2026-09-16 (blood-bank.js); none of them names a patient.
+  assert.deepEqual(g.write.slice().sort(), ["BloodDonation", "BloodDonor", "BloodTestResult", "BloodUnit", "BloodUnitEvent", "DonorScreening", "TransfusionEpisode"]);
   assert.equal(g.read.includes("TransfusionEpisode"), true);
   assert.equal(g.read.includes("Patient"), true);
   assert.equal(g.read.includes("Encounter"), true);

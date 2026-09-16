@@ -66,6 +66,14 @@ export const CAPS = {
   // folded into emr.treat (a doctor treating a patient is not the same authority as a hospital
   // declaring mass-casualty mode).
   EMERGENCY_DECLARE: "emergency.declare",
+  // ---- General stores, biomedical assets (2026-09-16) ------------------------------------------
+  // Four authorities, split for the same reason ORDER_VERIFY and ORDER_DISPENSE are: the ward that
+  // ASKS for supplies, the in-charge who SAYS YES, the store that HANDS THEM OVER and the engineer who
+  // KEEPS THE EQUIPMENT RUNNING are four different people, and none should need another's power.
+  DEPT_REQUEST: "dept.request",               // raise a stores indent, acknowledge receipt, report broken equipment
+  INDENT_APPROVE: "stores.indent.approve",    // approve an indent for a department within the member's scope
+  STORES_MANAGE: "stores.manage",             // item master, store locations, issue, receive, store purchasing
+  ASSET_MANAGE: "asset.manage",               // asset register, preventive maintenance, calibration, job cards
   // ---- WardSynQ TASK 5.14 (Clinical Incident Management) ------------------------------------
   // Filing is broad on purpose - wardsynq-incidents.js's own header names the failure mode as
   // silence, not a bad severity matrix, and every capability check between "something happened"
@@ -144,10 +152,13 @@ export const ROLE_CAPS = {
   // Doctor: own clinical workflow + full EMR. Manages their own queue; can assign/transfer.
   doctor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
            C.EMR_VITALS, C.EMR_TREAT, C.EMR_IMMUNISE, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE,
-           C.ORDER_READ, C.INCIDENT_REPORT, C.MLC_RECORD],
+           C.ORDER_READ, C.INCIDENT_REPORT, C.MLC_RECORD, C.DEPT_REQUEST],
   // OPD supervisor: full queue control + analytics + READ clinical notes/history. NO EMR treatment.
   supervisor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY,
-               C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT, C.REGISTER_NDPS],
+               C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT, C.REGISTER_NDPS,
+               // A department's in-charge approves its indents; the supervisor role is how a hospital names one,
+               // and the membership's department scope decides WHICH departments (stores.js, route check).
+               C.DEPT_REQUEST, C.INDENT_APPROVE],
   // Nurse ("sister"): runs the queue at the desk — add/reorder/assign/status/priority — may record
   // vitals/temperature, and may READ a patient's clinical notes/history (view-only, e.g. from the
   // console). Explicitly NO emr.treat (no orders/prescriptions/edits). This is the owner's core ask.
@@ -157,13 +168,13 @@ export const ROLE_CAPS = {
   // …and may RECORD A VACCINATION they administered (emr.immunise) - the nurse is usually the one giving
   // it, so withholding that would mean the doctor typing in someone else's act.
   nurse: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN,
-          C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.MED_ADMINISTER, C.INCIDENT_REPORT],
+          C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.MED_ADMINISTER, C.INCIDENT_REPORT, C.DEPT_REQUEST],
   // Intern / resident: clinical trainees — see the queue, register a walk-in, advance status, record
   // vitals, view EMR. QUEUE_ADD added 2026-08-24: an intern is often the person handed a walk-in, and
   // withholding it meant they could move patients through consultation but not enter them. Reorder and
   // assign stay OFF - deciding who is seen next is the nurse's authority, not a trainee's.
-  intern: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.INCIDENT_REPORT],
-  resident: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.INCIDENT_REPORT],
+  intern: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.INCIDENT_REPORT, C.DEPT_REQUEST],
+  resident: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.INCIDENT_REPORT, C.DEPT_REQUEST],
   // Reception / front desk: register walk-ins, mark arrived, assign to a doctor, and READ clinical
   // notes/history (view-only). No reorder/priority, no vitals, no treat/edit.
   reception: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_ASSIGN, C.EMR_VIEW],
@@ -173,7 +184,7 @@ export const ROLE_CAPS = {
   // Pharmacy: reads the patient's medication orders and marks them dispensed once paid. Deliberately
   // NOT given EMR_VIEW - dispensing needs the order, not the consultation notes - and never
   // BILLING_CHARGE, so the person handing over medicines is not the person taking the money.
-  pharmacy: [C.QUEUE_VIEW, C.ORDER_READ, C.ORDER_DISPENSE, C.ORDER_VERIFY, C.REGISTER_NDPS],
+  pharmacy: [C.QUEUE_VIEW, C.ORDER_READ, C.ORDER_DISPENSE, C.ORDER_VERIFY, C.REGISTER_NDPS, C.DEPT_REQUEST],
   /* Laboratory: sees the tests that were ordered and releases results against them. Deliberately NO
    * EMR_VIEW - resulting a potassium needs the request, not the consultation notes - and no
    * ordering, dispensing or billing capability of any kind. */
@@ -189,7 +200,7 @@ export const ROLE_CAPS = {
    * wardsynq-inpatient-emar.test.mjs ("THE LAB'S AUTHORITY IS ITS OWN") asserts 403 on both. The
    * test is right and the grant was too wide. Naming a specimen needs name, MRN and date of birth,
    * not a discharge summary, so the answer is a narrow identity capability rather than this one. */
-  lab: [C.QUEUE_VIEW, C.LAB_RESULT],
+  lab: [C.QUEUE_VIEW, C.LAB_RESULT, C.DEPT_REQUEST],
   /* Radiography and radiology, added 2026-09-12. Imaging had a worklist, a reporting endpoint and a
    * board, and nobody who could be given the job: there was no role for the people who run the
    * scanner or read the films, so a department the product already supported could not be staffed.
@@ -200,8 +211,8 @@ export const ROLE_CAPS = {
    * says so: "Reporting an imaging study is the radiologist's own act, granted by lab.result". So
    * the radiographer does NOT hold LAB_RESULT and cannot file a report or protocol a study, and the
    * radiologist does. Neither orders, prescribes, dispenses or bills. */
-  radiographer: [C.QUEUE_VIEW, C.EMR_VIEW],
-  radiologist: [C.QUEUE_VIEW, C.EMR_VIEW, C.LAB_RESULT, C.REGISTER_PCPNDT],
+  radiographer: [C.QUEUE_VIEW, C.EMR_VIEW, C.DEPT_REQUEST],
+  radiologist: [C.QUEUE_VIEW, C.EMR_VIEW, C.LAB_RESULT, C.REGISTER_PCPNDT, C.DEPT_REQUEST],
   // HR / practice manager: runs the staff list and reads operational analytics. NO queue control, NO
   // vitals, NO EMR, NO billing. Exists so onboarding a nurse does not require handing someone full
   // admin (which carries every clinical and billing capability in the system).
@@ -219,6 +230,13 @@ export const ROLE_CAPS = {
   // EMR_TREAT - see actor.js's TRANSFUSION_ISSUE branch for the narrow TransfusionEpisode-only
   // scope this composes to, the separation migrate-transfusion.js's own header names as deferred.
   blood_bank: [C.QUEUE_VIEW, C.TRANSFUSION_ISSUE],
+  // Store keeper (2026-09-16): runs general stores - the item master, store locations, issuing approved indents,
+  // receiving deliveries and ordering from suppliers. No clinical capability of any kind, and no indent approval:
+  // the store that hands supplies over is not the in-charge who decides a department should have them.
+  store_keeper: [C.QUEUE_VIEW, C.STORES_MANAGE, C.DEPT_REQUEST],
+  // Biomedical engineer (2026-09-16): the asset register, preventive maintenance, calibration and job cards,
+  // including fitting spare parts from stores. Reads no chart and issues nothing from stores except a part it fits.
+  biomedical_engineer: [C.QUEUE_VIEW, C.ASSET_MANAGE, C.DEPT_REQUEST],
   // ---- ONCQIS governance roles (oncology protocol lifecycle) --------------------------------
   // Protocol Author: create/edit DRAFT protocols + upload evidence. NO review, NO approval, NO
   // activation. Not a clinical or hospital approver.
@@ -266,7 +284,7 @@ export const ROLE_CAPS = {
    * and owns the notifiable disease register, and nothing else clinical. */
   obstetrician: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
                  C.EMR_VITALS, C.EMR_TREAT, C.EMR_IMMUNISE, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE,
-                 C.ORDER_READ, C.INCIDENT_REPORT, C.MLC_RECORD, C.REGISTER_PCPNDT, C.REGISTER_MTP],
+                 C.ORDER_READ, C.INCIDENT_REPORT, C.MLC_RECORD, C.REGISTER_PCPNDT, C.REGISTER_MTP, C.DEPT_REQUEST],
   public_health: [C.QUEUE_VIEW, C.EMR_VIEW, C.REGISTER_IHIP],
   // Data Protection Officer (DPDP Act 2023): the privacy notice, the data principal request queue and the
   // breach register. EMR_VIEW because an access request is answered by saying what the hospital holds, the
