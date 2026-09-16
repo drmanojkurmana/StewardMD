@@ -383,15 +383,19 @@ function cleanProofTrace(raw) {
 const REQUIRED_RESOURCES = ["worklist", "medications", "labs", "labs-detail", "radiology", "radiology-detail"];
 function adapterCompleteness(observedViews) {
   const views = Array.isArray(observedViews) ? observedViews : [];
-  /* A DATA CALL THAT LOST THE PATIENT IS NOT ENDPOINT-BACKED. A patient-keyed field saved `unmapped`
-   * or `empty` replays with nothing in it, so the request stops being about this patient and whatever
-   * the hospital answers for everyone lands in one chart. The worklist is exempt: it is not
-   * patient-scoped, and its filters are proven empty on purpose (Task 2c). */
+  /* A DATA CALL THAT LOST THE PATIENT IS NOT ENDPOINT-BACKED. A patient-keyed field saved `empty`
+   * replays with nothing in it, so the request stops being about this patient and whatever the
+   * hospital answers for everyone lands in one chart. `unmapped` is not the same thing: the runtime
+   * never sends that blank -- adapter-runtime.mjs provenValue() falls back to idCandidates(key,
+   * patient)[0] for a patient/visit key (ver_05ce2f04: recordNo -> patientId, exactly the hand-built's
+   * /Radio/Home?recordNo=${patientId}), and unscopedField() refuses at send time if it would still be
+   * blank. Only {empty:true} replays unscoped. The worklist is exempt: it is not patient-scoped, and
+   * its filters are proven empty on purpose (Task 2c). */
   const PATIENT_ISH = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$|visit|episode|encounter|admission|ip(no|number)/i;
   const scoped = (v) => (v.endpoints || []).every((e) => {
     if (!e || e.role !== "data") return true;
     const p = e.params || {};
-    return !Object.keys(p).some((k) => PATIENT_ISH.test(k) && p[k] && (p[k].unmapped === true || p[k].empty === true));
+    return !Object.keys(p).some((k) => PATIENT_ISH.test(k) && p[k] && p[k].empty === true);
   });
   const scopedFor = (res, v) => res === "worklist" || scoped(v);
   const provenEndpoint = (res) => views.some((v) => v && v.resourceHint === res && v.proof && v.proof.status === "proven" && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data") && scopedFor(res, v));

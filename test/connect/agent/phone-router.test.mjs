@@ -628,3 +628,25 @@ test("a phone run that found no screens at all is refused too: the worst adapter
   assert.equal(refused.status, 409, await refused.clone().text());
   assert.match(JSON.stringify(await refused.json()), /proved nothing/);
 });
+
+function radiologyView(params) {
+  return provenViewOf("radiology", "/Radio/Home?recordNo", {
+    endpoints: [{ method: "GET", path: "/Radio/Home?recordNo", xhr: true, role: "data", params, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }],
+  });
+}
+
+test("an unmapped patient key is not unscoped -- the runtime backfills it; only a sent-empty one is", async () => {
+  // adapter-runtime.mjs provenValue() falls back to idCandidates(key, patient)[0] for {unmapped:true} on a
+  // patient/visit key (ver_05ce2f04: recordNo -> patientId, exactly /Radio/Home?recordNo=${patientId}), so
+  // this view is genuinely endpoint-backed.
+  const unmappedSet = completeSet().filter((v) => v.resourceHint !== "radiology").concat(radiologyView({ recordNo: { unmapped: true } }));
+  const unmappedCand = await phoneCandidate(unmappedSet);
+  const unmappedVer = await (await onRequest(get(`/api/connect/agent/versions/${unmappedCand.versionId}?tenant=t1`, unmappedCand.env, unmappedCand.doc1.headers))).json();
+  assert.equal(unmappedVer.completeness.how["radiology"], "endpoint");
+
+  // {empty:true}: adapter-runtime.mjs unscopedField() refuses to send this at all, so it genuinely stays unscoped.
+  const emptySet = completeSet().filter((v) => v.resourceHint !== "radiology").concat(radiologyView({ recordNo: { empty: true } }));
+  const emptyCand = await phoneCandidate(emptySet);
+  const emptyVer = await (await onRequest(get(`/api/connect/agent/versions/${emptyCand.versionId}?tenant=t1`, emptyCand.env, emptyCand.doc1.headers))).json();
+  assert.equal(emptyVer.completeness.how["radiology"], "unscoped");
+});
