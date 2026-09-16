@@ -7370,3 +7370,63 @@ Source: the legal opinion of 17 Sep 2026 (sections A and H; research awaiting a 
   later days; OPD clinic billing station (q_invoices) GST.
 - **Status:** built, tested (test/wardsynq-gst-packages.test.mjs, test/wardsynq-gst-einvoice.test.mjs,
   test/wsq-admin-gst-settings.test.mjs).
+
+## 2026-09-17 Statutory registers brought to the legal review (branch legal-registers)
+- Source: a legal-research opinion (not legal advice) on sections B to F; its lawyer sign-off list is still open. Where it
+  says unconfirmed, the safest default ships with a hospital-editable setting and the note on screen:
+  `wardsynq.registers` (register-settings.js, whitelisted in _opd_org.js), edited at POST /org/register-settings
+  (staff.admin, Registers > Register settings). Clocks (Form F by the 5th, Form II by the hospital's day, RBD 21 days,
+  NDPS 3J 30 Nov / 3-I 31 Mar, recognition renewal) are pure functions there.
+- Companion records share their register's door and capability, chosen by `kind` from a fixed family
+  (register-routes.js FAMILY): formfprint and statreturn with Form F; mtpboard (Form D), mtpforme (Form E) with MTP;
+  dyingdecl with MLC; form3e, form3esign, form3j, form3i with NDPS. No new capability or router route except the settings.
+- Refusals, not warnings: a Form F declaration at or after the procedure start (r.10(1A)); any obstetric USG report,
+  preliminary included, without the woman's declaration on Form F; foetal sex text (audited without the text); MTP above
+  20 weeks without Rule 3B category and a Form E, above 24 without an allowed Form D, a rule 4A-ineligible practitioner,
+  a woman's own consent under 18 or mentally ill; MLC examination fields without consent, a male doctor for a POCSO girl;
+  Form 4A with a manner of death; controlled expired-stock wastage without the Controller's nominee; controlled receipt or
+  dispense once Form 3G has expired with no renewal reference. Flags, not refusals: Form I certified over 3 hours late,
+  Board opinion over 3 days, a Part I mode of dying.
+- MTP reg 7: for readers without register.mtp, the ward list, ED list, bed board, timeline, discharge summary and
+  /patient/get show the Admission Register serial instead of her name from admission until 42 days after discharge,
+  on the MTP stay's rows only. Identity bands, FHIR/HL7/ABDM, claims and the portal are NOT masked (patient safety;
+  claims are a lawyer item). An unreadable MTP register withholds the response.
+- BNSS s.397: POST /ward/invoice is refused while an open sexual-assault-adult, acid-attack or POCSO case exists for the
+  patient. Aadhaar is never stored in RBD registers (unknown key refused; 12-digit text refused). The pharmacy names a
+  Form 3E patient by id and the route confirms the Patient exists by repository read (its grant cannot read Patient).
+
+## 2026-09-17 Statutory registers, second pass of the legal review (branch legal-registers-2)
+- Two read-only capabilities and roles: `register.pcpndt.read` (role `pcpndt_nodal`: GET /ward/register-formf, POST only
+  kind statreturn) and `register.ndps.read` (role `ndps_inspector`: every GET of /ward/register-ndps, no POST; actor.js
+  grants READ of the four ledger types). A nurse (med.administer) reaches GET /ward/register-ndps only with view=patient.
+  All three are router alternatives after the fail-closed table; nothing else widens.
+- Form F on the worklist: GET /ward/imaging-worklist returns `pcpndt: [{orderId, state, missing}]` BESIDE the DICOM items
+  (never inside a DICOM item). Foetal sex: a staff reply to a patient (POST /ward/patient-reply) is refused and audited
+  without the text; a patient's own message is never refused. Imports (SCCM adapter): a report conclusion or imaging study
+  description that states foetal sex IN AN OBSTETRIC CONTEXT (registers.js OBSTETRIC on the text and code) is not filed and
+  raises PCPNDT_FOETAL_SEX_REFUSED; without the context it is filed, so a paediatric "female child" report is not lost.
+  There is no DICOM SR import in the product; the study description is the DICOM text that lands.
+- MTP: the POCSO intimation is a register of its own on the MLC door (`pocsotask`), opened by `def.alsoWrite` in the SAME
+  append as a minor's MTP entry; its id and fields name no other register. The MTP fields pocsoIntimation/pocsoBasis/
+  pocsoReference are gone. Retention end shown per entry: the later of 5 years after the calendar year and 5 years after
+  the entry's last version (unsettled, so the later); nothing is deleted and no destruction workflow is built.
+- MLC restricted categories (sexual-assault-adult, pocso): open to register.records keepers, the recordedBy/last writer,
+  Encounter.attendingId, and `registers.mlc.restrictedReaders`; others get a withheld row (number and date) with an audit
+  row, a correction is 403, and a refusal response never carries the entry. "Treating team" is those people, not a care
+  team model (none exists). Every MLC-door CSV and the Kerala export require requisitionFrom/Ref/Date, audited.
+  `registers.mlc.stateFormat` = hospital | kerala (Kerala DHS formats read in the review; others not built).
+- Mortuary release reads the MLC REGISTER (router hands in open cases): any open case needs the police NOC; a
+  death-in-custody or death-woman-married-under-7-years case needs inquestPapersReceived yes with a reference.
+- BNSS s.397 also locks POST /bill/invoice (OPD clinic) for a WardSynQ hospital, matching the clinic MRN and
+  patientIdForMrn(MRN); an unreadable register refuses.
+- NDPS: registers.ndps.drugRegimes (end-chapter-vb default for the controlled list, state-ndps, psychotropic, schedule-x,
+  schedule-h1). Recognition block and the Form 3J cap bind end-chapter-vb only; Form 3E problems end-chapter-vb and
+  state-ndps. The book now groups by the hospital's local day (offsetMinutes), because Form 3H closes before local
+  midnight. New records: form3hclose (numbers from the ledger, page serial 3H/yyyy, closedLate fixed at first closure,
+  signed by the over-all in-charge named in settings), quarantine (an open quarantine makes a controlled dispense name its
+  batch and refuses the quarantined one; stock stays in the book), homecare (the unused return is a stock receipt written
+  once, before the entry; a failed entry save reports partial with the movement id), schedxsupply (the r.65(21)(b) fields
+  the ledger lacks, serial X/yyyy). r.52U: a controlled receipt above the year's Form 3J (revised if any) is refused unless
+  revisedEstimateRef is given; no estimate recorded, or a ledger past READ_CAP, WARNS instead (refusing a morphine delivery
+  on a count that cannot be made is a patient harm). r.52V(3): a controlled transfer-out naming toInstitution needs
+  controllerApprovalRef. H1 and X registers are views over the ledger (view=h1, view=schedx).

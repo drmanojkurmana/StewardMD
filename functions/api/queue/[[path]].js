@@ -150,7 +150,7 @@ import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { patientFlow } from "../../_wardsynq/patient-flow.js";
 import { importCodeSet, listCodeSets, searchCodes } from "../../_wardsynq/code-sets.js";
 import { importGrowthTables, listGrowthTables } from "../../_wardsynq/growth-tables.js";
-import { setExpectedDischarge, expectedDischargeHistory } from "../../_wardsynq/expected-discharge.js";
+import { setExpectedDischarge, expectedDischargeHistory, hospitalToday } from "../../_wardsynq/expected-discharge.js";
 import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
@@ -219,9 +219,10 @@ function idemFor(key, piece, index) {
 }
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
-import { REGISTER_SUBS, registerRoute, formFGate } from "../../_wardsynq/register-routes.js";
-import { listEntries as listRegisterEntries } from "../../_wardsynq/registers.js";
-import { controlledSet, isControlledDrug } from "../../_wardsynq/controlled-drugs.js";
+import { REGISTER_SUBS, registerRoute, formFGate, formFFlag, mtpNameMask, mtpEpisodes } from "../../_wardsynq/register-routes.js";
+import { listEntries as listRegisterEntries, FREE_TREATMENT, typeOf as registerTypeOf, MAX_LIST as REGISTER_MAX } from "../../_wardsynq/registers.js";
+import { registerSettings, validateRegisterSettings, rmiStatus, NOTES as REGISTER_NOTES } from "../../_wardsynq/register-settings.js";
+import { controlledSet, isControlledDrug, regimeOf, quarantineRefusal, estimateRefusal } from "../../_wardsynq/controlled-drugs.js";
 import { imagingStudies } from "../../_wardsynq/imaging-viewer.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
 import { imagingWorklist } from "../../_wardsynq/dicom.js";
@@ -2003,6 +2004,12 @@ export async function onRequest(context) {
       if (!wAz.ok && ((sub === "register-mlc" && method === "POST") || sub === "mlc-patient")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
       if (!wAz.ok && sub === "register-notification" && method === "POST") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_IHIP);
       if (!wAz.ok && (sub === "retention" || sub === "legal-hold")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
+      /* Legal review 2026-09-17 read-only doors. The PCPNDT nodal officer reads Form F and records the monthly report's
+       * submission (B.4.5, B.4.9): GET, or POST of a return only. An NDPS inspector or auditor reads every NDPS view and
+       * writes nothing; the nurse reads one patient's controlled-drug rows (F.4.10). Nothing else widens. */
+      if (!wAz.ok && sub === "register-formf" && (method === "GET" || String(body.kind || "") === "statreturn")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_PCPNDT_READ);
+      if (!wAz.ok && sub === "register-ndps" && method === "GET") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_NDPS_READ);
+      if (!wAz.ok && sub === "register-ndps" && method === "GET" && url.searchParams.get("view") === "patient") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.MED_ADMINISTER);
       /* Asking for a purchase order's approval is the pharmacy's own next step after raising it. The
        * request cap (emr.vitals) is a ward one pharmacy does not hold, so "Ask for approval" on the
        * Purchasing screen was always refused. Only for supply subjects; deciding still needs emr.treat. */
@@ -2078,11 +2085,18 @@ export async function onRequest(context) {
       // orgRegion: the hospital's country, which decides the law a rule is checked against (donor-criteria.js jurisdictionOf).
       const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg, orgRegion: (wOrg && wOrg.region) || null,
         clock: { offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330, timeZone: (wsqCfg && wsqCfg.timeZone) || "" } };
+      /* NDPS Rules r.52-O (register-settings.js rmiStatus): an expired Form 3G recognition with no renewal applied for
+       * refuses controlled-drug receipts and dispensing (stock.js, pharmacy-dispense.js). */
+      deps.rmi = rmiStatus(registerSettings(wsqCfg), hospitalToday(Date.now(), deps.clock));
       /* CONTROLLED DRUGS (controlled-drugs.js). Whether a drug is controlled is the hospital's drug master; who may witness
        * one is an ACTIVE member of THIS hospital who dispenses, gives medicines or keeps the NDPS register. The lookup
        * lives here because the membership store does; the domain files only ask. */
       const controlled = controlledSet(wsqCfg);
       const isControlled = (drug, code) => isControlledDrug(null, drug, code, controlled);
+      /* Legal review F.5: which law a drug's records follow (registers.ndps.drugRegimes). Recognition (r.52-O) and the
+       * Form 3J cap (r.52U) are Chapter VB's, so they bind essential narcotic drugs only; the default for the list. */
+      const registerCfg = registerSettings(wsqCfg);
+      deps.rmiApplies = (drug, code) => regimeOf(registerCfg, controlled, drug, code) === "end-chapter-vb";
       const witnessCheck = async (witnessId) => {
         const who = { kind: "witness", id: String(witnessId), email: String(witnessId).indexOf("@") > 0 ? String(witnessId).toLowerCase() : null };
         for (const cap of [CAPS.ORDER_DISPENSE, CAPS.MED_ADMINISTER, CAPS.REGISTER_NDPS]) {
@@ -2101,8 +2115,15 @@ export async function onRequest(context) {
       };
       if (REGISTER_SUBS.has(sub)) {
         const query = {};
-        for (const k of ["kind", "period", "from", "to", "id", "format", "patientId", "pending", "prefill", "week", "state"]) { const v = url.searchParams.get(k); if (v != null && v !== "") query[k] = v; }
-        const r = await registerRoute(request, env, { ...deps, orgName: (wOrg && wOrg.name) || "", actor: { id: actor.id, role: wAz.role || null }, sub, method, body, query, witnessCheck, isControlled });
+        for (const k of ["kind", "period", "from", "to", "id", "format", "patientId", "pending", "prefill", "week", "state", "view", "year", "authorityOfficer", "authorityLaw", "authorityReference", "requisitionFrom", "requisitionRef", "requisitionDate"]) { const v = url.searchParams.get(k); if (v != null && v !== "") query[k] = v; }
+        /* mlcKeeper: a keeper of the medico-legal register opens every case (legal review D.4.8); staffNames: the prescriber
+         * named on the Schedule H1 register (r.65(3)(1)(h)). */
+        const staffNames = async (ids) => {
+          const found = await membersForIds(await ORG.listMembers(env, wOrgId), ids, staffDirectory(env, wOrgId));
+          return new Map(ids.map((id) => { const s = staffIdentity(found.get(id)); return [id, (s && s.name) || null]; }));
+        };
+        const r = await registerRoute(request, env, { ...deps, orgName: (wOrg && wOrg.name) || "", actor: { id: actor.id, email: actor.email || null, role: wAz.role || null }, sub, method, body, query, witnessCheck, isControlled,
+          mlcKeeper: can(wAz.role, CAPS.REGISTER_RECORDS), staffNames });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* BACKGROUND WORK ON ORDINARY TRAFFIC: escalate unacknowledged critical results and drain the
@@ -2261,8 +2282,26 @@ export async function onRequest(context) {
       const chambers = Array.isArray(support.mortuaryChambers) ? support.mortuaryChambers : [];
       if (sub === "mortuary-receive" && method === "POST") return supportOut(await receiveBody(request, env, { ...deps, chambers, patientId: body.patientId, encounterId: body.encounterId, broughtBy: body.broughtBy, identifiedBy: body.identifiedBy, chamber: body.chamber, belongings: body.belongings, idempotencyKey: body.idempotencyKey || null }));
       if (sub === "mortuary-update" && method === "POST") return supportOut(await updateMortuaryCase(request, env, { ...deps, chambers, caseId: body.caseId, chamber: body.chamber, belongings: body.belongings, postMortem: body.postMortem, idempotencyKey: body.idempotencyKey || null }));
-      if (sub === "mortuary-release" && method === "POST") return supportOut(await releaseBody(request, env, { ...deps, caseId: body.caseId, release: body.release || {}, idempotencyKey: body.idempotencyKey || null }));
-      if (sub === "mortuary-board" && method === "GET") return supportOut(await mortuaryBoard(request, env, { ...deps, chambers }));
+      /* Legal review D.4.3: the medico-legal REGISTER's open cases bind the release too (a custody death waits for the
+       * Magistrate's inquest papers). Only category, status and the inquest papers leave the register here. */
+      const openMlcCases = async (patientId) => {
+        const r = await listRegisterEntries({ ...deps, actor: { id: actor.id }, kind: "mlc", patientId: patientId || undefined });
+        if (!r.ok) return null;
+        return r.entries.filter((e) => e.fields && e.fields.status !== "withdrawn").map((e) => ({ patientId: e.patientId, serial: e.serial, category: e.fields.category, inquestPapersReceived: e.fields.inquestPapersReceived || null, inquestPapersReference: e.fields.inquestPapersReference || null }));
+      };
+      if (sub === "mortuary-release" && method === "POST") {
+        let caseRec;
+        try { caseRec = await deps.recordDeps.repository.latest(mig.tenantId, "MortuaryCase", String(body.caseId || "")); }
+        catch { return json({ ok: false, error: "record_read_failed", message: "The mortuary case could not be read, so the body was not released.", written: 0 }, 502, request); }
+        const cases = caseRec ? await openMlcCases(caseRec.patientId) : [];
+        if (cases === null) return json({ ok: false, error: "mlc_register_unreadable", message: "The medico-legal register could not be checked, so the body was not released.", written: 0 }, 502, request);
+        return supportOut(await releaseBody(request, env, { ...deps, caseId: body.caseId, release: body.release || {}, registerMlc: cases, idempotencyKey: body.idempotencyKey || null }));
+      }
+      if (sub === "mortuary-board" && method === "GET") {
+        const cases = await openMlcCases(null);
+        const byPatient = cases ? cases.reduce((m, c) => m.set(c.patientId, [...(m.get(c.patientId) || []), c]), new Map()) : null;
+        return supportOut(await mortuaryBoard(request, env, { ...deps, chambers, registerMlc: byPatient }));
+      }
       if (sub === "purchase-order" && method === "POST") {
         const r = await raisePurchaseOrder(request, env, { ...deps, vendor: body.vendor, lines: body.lines, note: body.note, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -2317,7 +2356,8 @@ export async function onRequest(context) {
         if (r.ok) { const h = Number(wsqCfg && wsqCfg.offlineCacheHours); r.offlineCacheHours = Number.isFinite(h) && h >= 1 && h <= 72 ? h : 12; }
         // The hospital's label sizes (Admin > Hospital), for the labels printed from any ward screen.
         if (r.ok) r.labels = wsqLabelSettings(wOrg);
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        const masked = await mtpNameMask(deps, can(wAz.role, CAPS.REGISTER_MTP), sub, r);
+        return json(masked, masked.ok ? 200 : (masked.status || 502), request);
       }
       if (sub === "ed-arrival" && method === "POST") {
         const r = await edArrival(request, env, { ...deps, arrival: body.arrival || body, idempotencyKey: body.idempotencyKey || null });
@@ -2341,7 +2381,8 @@ export async function onRequest(context) {
       }
       if (sub === "ed-list" && method === "GET") {
         const r = await listEd(request, env, { ...deps, reassessMinutes: (wsqCfg && wsqCfg.edReassessMinutes) || null });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        const masked = await mtpNameMask(deps, can(wAz.role, CAPS.REGISTER_MTP), sub, r);
+        return json(masked, masked.ok ? 200 : (masked.status || 502), request);
       }
       if (sub === "resus-start" && method === "POST") {
         const r = await startResusBundle(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, code: body.code, evidence: body.evidence, timeZero: body.timeZero, idempotencyKey: body.idempotencyKey || null });
@@ -3369,7 +3410,9 @@ export async function onRequest(context) {
       }
       if (sub === "stock-move" && method === "POST") {
         const r = await recordMovement(request, env, { ...deps, kind: body.kind, code: body.code, display: body.display, quantity: body.quantity, location: labStockOnly ? LAB_STOCK_LOCATION : body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null,
-          receivedFrom: body.receivedFrom, documentNo: body.documentNo, controlled: isControlled(body.display, body.code), witnessId: body.witnessId, witnessCheck });
+          receivedFrom: body.receivedFrom, documentNo: body.documentNo, controlled: isControlled(body.display, body.code), witnessId: body.witnessId, witnessCheck, destruction: body.destruction,
+          supplierAddress: body.supplierAddress, supplierLicenceNo: body.supplierLicenceNo, manufacturer: body.manufacturer, toInstitution: body.toInstitution, transferKind: body.transferKind, controllerApprovalRef: body.controllerApprovalRef, revisedEstimateRef: body.revisedEstimateRef,
+          estimateCheck: deps.rmiApplies(body.display, body.code) ? (move) => estimateRefusal(request, env, { ...deps, cfg: wsqCfg }, move) : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock" && method === "GET") {
@@ -3414,6 +3457,15 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice" && method === "POST") {
+        /* BNSS 2023 s.397: first aid and medical treatment of a victim of BNS ss.64-68, 70, 71, 124(1) or POCSO ss.4, 6,
+         * 8, 10 is "free of cost" (legal review D.4.2), and BNS s.200 punishes the person in charge. While such a
+         * medico-legal case is open for the patient, no invoice is raised. A register that cannot be read refuses too. */
+        if (String(body.patientId || "").trim()) {
+          const mlcCases = await listRegisterEntries({ ...deps, actor: { id: actor.id }, kind: "mlc", patientId: String(body.patientId).trim() });
+          if (!mlcCases.ok) return json({ ok: false, error: "mlc_register_unreadable", message: "Whether treatment must be free of cost (BNSS s.397) could not be checked, so no invoice was raised.", written: 0 }, 502, request);
+          const free = mlcCases.entries.find((e) => e.fields && e.fields.status === "open" && FREE_TREATMENT.includes(e.fields.category));
+          if (free) return json({ ok: false, error: "free_treatment_bnss_397", serial: free.serial, message: "BNSS s.397: this patient's medico-legal case requires first aid and medical treatment free of cost, so no invoice is raised.", written: 0 }, 409, request);
+        }
         const tf = await wsqTariff(env, wOrgId, wsqCfg);
         if (tf.error) return json({ ok: false, error: "price_list_unreadable", detail: tf.error, written: 0 }, 502, request);
         const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: tf.table, region: (wOrg && wOrg.region) || "IN", gstin: (wOrg && wOrg.regionProfile && wOrg.regionProfile.gstin) || "", gst: readGstSettings(wsqCfg), at: body.at, idempotencyKey: body.idempotencyKey || null });
@@ -3732,7 +3784,8 @@ export async function onRequest(context) {
       }
       if (sub === "timeline" && method === "GET") {
         const r = await patientTimeline(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        const masked = await mtpNameMask(deps, can(wAz.role, CAPS.REGISTER_MTP), sub, r);
+        return json(masked, masked.ok ? 200 : (masked.status || 502), request);
       }
       if (sub === "wound" && method === "POST") {
         const r = await chartWound(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, site: body.site, kind: body.kind, stage: body.stage, origin: body.origin, lengthCm: body.lengthCm, widthCm: body.widthCm, depthCm: body.depthCm, tissue: body.tissue, exudate: body.exudate, infectionSigns: body.infectionSigns, dressing: body.dressing, note: body.note, assessedAt: body.assessedAt, photo: body.photo, image: body.image, idempotencyKey: body.idempotencyKey || null });
@@ -3848,7 +3901,8 @@ export async function onRequest(context) {
       if (sub === "imaging-worklist" && method === "GET") {
         // LT-27: the hospital's own clock (as the MAR uses), so DICOM start times are its local wall clock with the offset beside them.
         const clock = { offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330, timeZone: (wsqCfg && wsqCfg.timeZone) || "" };
-        const r = await imagingWorklist(request, env, { ...deps, config: (wsqCfg && wsqCfg.dicom) || null, patientId: url.searchParams.get("patientId") || "", clock });
+        /* PCPNDT (legal review B.4.1): an obstetric ultrasound on the worklist without a complete Form F is flagged beside it. */
+        const r = await imagingWorklist(request, env, { ...deps, config: (wsqCfg && wsqCfg.dicom) || null, patientId: url.searchParams.get("patientId") || "", clock, pcpndtFlag: (sr, modality) => formFFlag(deps, sr, modality) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "imaging-studies" && method === "GET") {
@@ -3863,7 +3917,7 @@ export async function onRequest(context) {
       if (sub === "report-imaging" && method === "POST") {
         const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, critical: !!body.critical, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null,
           templateId: body.templateId, templateVersion: body.templateVersion, sections: body.sections, templates: (wsqCfg && wsqCfg.radiologyTemplates) || null,
-          formFCheck: (sr, modality) => formFGate(deps, sr, modality) });
+          formFCheck: (sr, modality, texts) => formFGate(deps, sr, modality, texts) });
         /* A CRITICAL IMAGING FINDING OPENS ITS LOOP ON RELEASE - the same fix as release-result, and the
          * same bug: a report marked critical set report.critical, which openCriticalLoops reads, but nothing
          * called openCriticalLoops, so a reported pneumothorax alerted nobody. Only opened when the report is
@@ -4501,7 +4555,7 @@ export async function onRequest(context) {
       }
       if (sub === "dispense" && method === "POST") {
         const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, takeHome: body.takeHome === true, at: body.at, idempotencyKey: body.idempotencyKey || null,
-          isControlled, witnessId: body.witnessId, witnessCheck });
+          isControlled, witnessId: body.witnessId, witnessCheck, quarantineCheck: (drug, code, batch) => quarantineRefusal(deps, drug, code, batch) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense-return" && method === "POST") {
@@ -4595,7 +4649,8 @@ export async function onRequest(context) {
         // The ward's bed list is ORG configuration. With none configured the board reports what is
         // occupied and says it cannot know what is free, rather than reporting zero free beds.
         const r = await bedBoard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", beds: (wsqCfg && wsqCfg.beds) || null });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        const masked = await mtpNameMask(deps, can(wAz.role, CAPS.REGISTER_MTP), sub, r);
+        return json(masked, masked.ok ? 200 : (masked.status || 502), request);
       }
       if (sub === "criticals" && method === "GET") {
         // names=1 (the hospital-wide boards, LT-28): each row names its patient, ward and bed; those reads audit together.
@@ -4759,7 +4814,8 @@ export async function onRequest(context) {
          * signing credential on their own routes regardless of what the screen chose to render. */
         if (r.ok) r.canAuthor = (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT)).ok === true;
         if (r.ok) r.print = wsqPrintSettings(wOrg);
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        const masked = await mtpNameMask(deps, can(wAz.role, CAPS.REGISTER_MTP), sub, r);
+        return json(masked, masked.ok ? 200 : (masked.status || 502), request);
       }
       if (sub === "discharge-summary" && method === "POST") {
         const r = await draftDischargeSummary(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, dischargedAt: body.dischargedAt, sections: body.sections, idempotencyKey: body.idempotencyKey || null, medicoLegalFor });
@@ -4891,6 +4947,20 @@ export async function onRequest(context) {
         const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_VIEW);
         if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
         const p = await PAT.getPatient(env, pOrg, url.searchParams.get("mrn") || "");
+        /* MTP Regulations 2003 reg 7 (register-routes.js mtpNameMask): in a current MTP episode the front desk sees the
+         * Admission Register serial number, not the woman's name, unless the reader keeps the MTP register. */
+        if (p && !can(az.role, CAPS.REGISTER_MTP)) {
+          const pOrgRec = await ORG.getOrg(env, pOrg);
+          const pMig = pOrgRec && pOrgRec.mode === "wardsynq" ? await wsqForcedMigration(env, pOrgRec) : null;
+          if (pMig && !pMig.error && pMig.tenantId) {
+            let rows;
+            try { rows = await wsqRecordDeps(env, pMig.tenantId).repository.latestByType(pMig.tenantId, registerTypeOf("mtp"), REGISTER_MAX, { newest: true }); }
+            catch { return json({ ok: false, error: "record_read_failed", message: "Whether a name must be withheld (MTP Regulations reg 7) could not be checked, so the patient was not shown." }, 502, request); }
+            const cfg = pOrgRec.wardsynq || {};
+            const ep = mtpEpisodes(rows, hospitalToday(Date.now(), { offsetMinutes: Number.isFinite(cfg.utcOffsetMinutes) ? cfg.utcOffsetMinutes : 330, timeZone: cfg.timeZone || "" })).get(patientIdForMrn(p.mrn));
+            if (ep) return json({ ok: true, patient: { ...p, name: ep[0].serial, nameWithheld: "MTP Regulations 2003 reg 7" } }, 200, request);
+          }
+        }
         return json(p ? { ok: true, patient: p } : { ok: false, error: "not_found" }, 200, request);
       }
       // The hospital EMR issued a real MR for someone queued on a provisional id.
@@ -4928,7 +4998,25 @@ export async function onRequest(context) {
       if (sub === "queue" && method === "GET") return json({ ok: true, orders: await BILL.billingQueue(env, bOrg) }, 200, request);
       if (sub === "tariff" && method === "GET") return json({ ok: true, items: await BILL.listTariff(env, bOrg) }, 200, request);
       if (sub === "tariff" && method === "POST") return json(await BILL.upsertTariff(env, bOrg, body, aid), 200, request);
-      if (sub === "invoice" && method === "POST") return json(await BILL.createInvoice(env, bOrg, body.patientId || "", aid), 200, request);
+      if (sub === "invoice" && method === "POST") {
+        /* BNSS 2023 s.397 (legal review D.4.2): the OPD clinic invoice is locked like the ward invoice while a rape, acid
+         * attack or POCSO medico-legal case is open for the patient. The clinic's patient is the hospital's OPD number, the
+         * same one the ward knows as patientIdForMrn. A register that cannot be read refuses the invoice too. */
+        const bOrgRec = await ORG.getOrg(env, bOrg);
+        if (bOrgRec && bOrgRec.mode === "wardsynq" && String(body.patientId || "").trim()) {
+          const bMig = await wsqForcedMigration(env, bOrgRec);
+          if (!bMig || bMig.error || !bMig.tenantId) return json({ ok: false, error: "mlc_register_unreadable", message: "Whether treatment must be free of cost (BNSS s.397) could not be checked, so no invoice was raised.", written: 0 }, 502, request);
+          const bDeps = { migration: bMig, recordDeps: wsqRecordDeps(env, bMig.tenantId), actor: { id: aid } };
+          let free = null;
+          for (const pid of [...new Set([String(body.patientId).trim(), patientIdForMrn(body.patientId)].filter(Boolean))]) {
+            const cases = await listRegisterEntries({ ...bDeps, kind: "mlc", patientId: pid });
+            if (!cases.ok) return json({ ok: false, error: "mlc_register_unreadable", message: "Whether treatment must be free of cost (BNSS s.397) could not be checked, so no invoice was raised.", written: 0 }, 502, request);
+            free = free || cases.entries.find((e) => e.fields && e.fields.status === "open" && FREE_TREATMENT.includes(e.fields.category)) || null;
+          }
+          if (free) return json({ ok: false, error: "free_treatment_bnss_397", serial: free.serial, message: "BNSS s.397: this patient's medico-legal case requires first aid and medical treatment free of cost, so no invoice is raised.", written: 0 }, 409, request);
+        }
+        return json(await BILL.createInvoice(env, bOrg, body.patientId || "", aid), 200, request);
+      }
       if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid), 200, request);
       if (sub === "pharmacy" && method === "GET") return json({ ok: true, orders: await BILL.pharmacyQueue(env, bOrg) }, 200, request);
@@ -5229,6 +5317,29 @@ export async function onRequest(context) {
         { action: "org:gst_settings", meta: JSON.stringify({ changed, reason: reason.slice(0, 80) }) });
       const back = await ORG.getOrg(env, orgId);
       return json({ ok: true, changed, settings: readGstSettings(back && back.wardsynq) }, 200, request);
+    }
+    /* The statutory registers' hospital-editable settings (register-settings.js): where the law is unsettled, the safest
+     * default and a setting, with the note shown beside it. staff.admin reads and saves; the audit row names the change
+     * and never the values. */
+    if (seg === "org" && sub === "register-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Register settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, settings: registerSettings(o.wardsynq), notes: REGISTER_NOTES }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, problems } = validateRegisterSettings(cb.settings);
+      if (problems.length) return json({ ok: false, error: "invalid_register_settings", problems, message: "Nothing was saved. " + problems.join("; ") }, 422, request);
+      const before = registerSettings(o.wardsynq);
+      const changed = Object.keys(value).filter((k) => JSON.stringify(before[k]) !== JSON.stringify(value[k]));
+      if (!changed.length) return json({ ok: true, changed: [], settings: before, notes: REGISTER_NOTES }, 200, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { registers: value } }, actor.id, { action: "org:register_settings", meta: JSON.stringify({ changed }) });
+      const back = await ORG.getOrg(env, orgId);
+      const saved = registerSettings(back && back.wardsynq);
+      if (JSON.stringify(saved) !== JSON.stringify(value)) return json({ ok: false, error: "not_saved", message: "The settings did not read back as sent, so do not rely on them. Try again." }, 502, request);
+      return json({ ok: true, changed, settings: saved, notes: REGISTER_NOTES }, 200, request);
     }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";

@@ -41,6 +41,15 @@ import {
   DiagnosticReport, ClinicalNote, MedicationAdministration, ServiceRequest, ImagingStudy, makeMeta,
 } from "../wardsynq-model.js";
 import { Adapter } from "../wardsynq-interop.js";
+import { FOETAL_SEX, OBSTETRIC } from "../../functions/_wardsynq/registers.js";
+
+/* PC&PNDT Act s.5(2), s.6 and Rules r.18(i) (legal review 2026-09-17, B.4.4): nothing that states the sex of a foetus is
+ * stored, whatever door it comes through. An imported report or an imaging study (the text DICOM carries: its description)
+ * that states it, in an obstetric context (its code or text names a pregnancy, a foetus or an obstetric scan), is NOT
+ * FILED, and the issue names the record and the field, never the text. Filing it without the text would land a report
+ * that silently lost its conclusion; the obstetric context keeps a paediatric report on "a female child" filed. */
+const foetalSexIssue = (what, id, field) => ({ code: "PCPNDT_FOETAL_SEX_REFUSED", message: `${what} ${id} was not filed: its ${field} states the sex of a foetus (PC&PNDT Act s.5(2), s.6)` });
+const statesFoetalSex = (text, context) => FOETAL_SEX.test(String(text || "")) && OBSTETRIC.test(`${String(text || "")} ${String(context || "")}`);
 
 /** Same sentinel the GHIS adapter uses when a source carries no date of birth. */
 const UNKNOWN_DOB = "0000-00-00";
@@ -263,6 +272,7 @@ function mapSccmBundle(bundle) {
     if (!d || !d.id) continue;
     const k = codeOf(d.code);
     if (!k.code && !k.display) { issues.push({ code: "SCCM_REPORT_NO_CODE", message: `report ${d.id} carried no code and was skipped` }); continue; }
+    if (statesFoetalSex(d.conclusion, `${k.code || ""} ${k.display || ""}`)) { issues.push(foetalSexIssue("report", d.id, "conclusion")); continue; }
     const status = ["preliminary", "final", "corrected", "cancelled"].includes(d.status) ? d.status : "preliminary";
     entities.push(DiagnosticReport({
       id: sourceId(system, "dr", d.id), patientId: patient.id,
@@ -332,6 +342,7 @@ function mapSccmBundle(bundle) {
    * never approximated - a study belonging to no order here is still a true study. */
   for (const st of bundle.imagingStudies || []) {
     if (!st || !st.id) { issues.push({ code: "SCCM_IMAGING_NO_ID", message: "an imaging study had no id and was skipped" }); continue; }
+    if (statesFoetalSex(st.description, st.bodySite)) { issues.push(foetalSexIssue("imaging study", st.id, "description")); continue; }
     const accession = st.accessionNumber ? String(st.accessionNumber) : null;
     const order = accession
       ? entities.find((e) => e && e.resourceType === "ServiceRequest" && (

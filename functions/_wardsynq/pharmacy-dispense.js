@@ -236,6 +236,16 @@ async function dispenseOrder(request, env, ctx) {
    * wastage uses, so the two cannot disagree. Asked only after the order is known to be live. */
   let witnessedBy = null;
   const controlled = typeof ctx.isControlled === "function" && ctx.isControlled(order.drug, order.drugCode) === true;
+  /* NDPS Rules r.52-O: with the Form 3G recognition expired and no renewal applied for, no controlled drug is dispensed. */
+  if (controlled && ctx.rmi && ctx.rmi.blocked && (typeof ctx.rmiApplies !== "function" || ctx.rmiApplies(order.drug, order.drugCode))) {
+    return { ...base, ok: false, status: 409, error: "rmi_recognition_expired", orderId, written: 0,
+      detail: "The hospital's NDPS recognition (Form 3G) has expired and no renewal application is recorded (NDPS Rules r.52-O). A controlled drug cannot be dispensed. Record the renewal application reference in Registers, Settings." };
+  }
+  /* Quarantined stock is not dispensed (legal review F.4.5; controlled-drugs.js quarantineRefusal, handed in by the route). */
+  if (controlled && typeof ctx.quarantineCheck === "function") {
+    const q = await ctx.quarantineCheck(order.drug, order.drugCode, ctx.batch);
+    if (q) return { ...base, ...q, orderId, written: 0 };
+  }
   if (controlled) {
     const w = await witnessOrRefusal(ctx, resolved.actor.id);
     if (w.error) return { ...base, ...w.error, orderId, written: 0 };

@@ -374,11 +374,45 @@ async function recordMovement(request, env, ctx) {
   /* A CONTROLLED DRUG IS NOT DESTROYED OR WRITTEN OFF BY ONE PERSON (controlled-drugs.js). The route decides whether
    * the item is controlled (the hospital's drug master) and hands in the check that the witness is a real, different
    * member of this hospital; a witness who is the person recording, or nobody at all, is refused and nothing lands. */
+  /* NDPS Rules r.52-O: a recognised medical institution whose Form 3G recognition has expired receives no controlled
+   * drug, unless it has applied for renewal (register-settings.js rmiStatus, computed by the route). */
+  if (ctx.controlled === true && (kind === "receipt" || kind === "transfer-in") && ctx.rmi && ctx.rmi.blocked && (typeof ctx.rmiApplies !== "function" || ctx.rmiApplies(ctx.display, code))) {
+    return { ...base, ok: false, status: 409, error: "rmi_recognition_expired", written: 0,
+      detail: "The hospital's NDPS recognition (Form 3G) has expired and no renewal application is recorded (NDPS Rules r.52-O). A controlled drug cannot be received. Record the renewal application reference in Registers, Settings." };
+  }
+  /* NDPS Rules r.52V(3): no transfer, loan or sale of an essential narcotic drug to another institution "without the prior
+   * approval of the Controller of Drugs" (legal review F.4.5). A controlled transfer out that names an institution names
+   * the approval too, or it is refused. A transfer between this hospital's own stores names no institution. */
+  const toInstitution = str(ctx.toInstitution);
+  if (ctx.controlled === true && kind === "transfer-out" && toInstitution && str(ctx.controllerApprovalRef).length < 3) {
+    return { ...base, ok: false, status: 422, error: "controller_approval_required", written: 0,
+      detail: "A controlled drug goes to another institution (transfer, loan or sale) only with the prior approval of the Controller of Drugs (NDPS Rules r.52V(3)). Record the approval reference." };
+  }
+  /* NDPS Rules r.52U: no more held than the Form 3J estimate (controlled-drugs.js estimateRefusal, handed in by the route for
+   * an essential narcotic drug). A check that could not be made is said on the response and on the movement. */
+  let estimate = null;
+  if (ctx.controlled === true && (kind === "receipt" || kind === "transfer-in") && typeof ctx.estimateCheck === "function") {
+    estimate = await ctx.estimateCheck({ code, display: str(ctx.display) || code, unit: quantity.unit, value: quantity.value, at: str(ctx.at), revisedEstimateRef: str(ctx.revisedEstimateRef) });
+    if (estimate && estimate.refuse) return { ...base, ...estimate.refuse, written: 0 };
+  }
   let witnessedBy = null;
   if (ctx.controlled === true && (kind === "wastage" || kind === "adjustment")) {
     const w = await witnessOrRefusal(ctx, resolved.actor.id);
     if (w.error) return { ...base, ...w.error, written: 0 };
     witnessedBy = w.witnessId;
+  }
+  /* NDPS Rules r.52V(1): "The expired stock of essential narcotic drugs shall be destroyed by the recognised medical
+   * institution in the presence of an officer nominated by the Controller of Drugs." A controlled wastage that is a
+   * destruction of expired stock names that officer and the nominating order, or it is refused and nothing lands. */
+  let destruction = null;
+  if (ctx.controlled === true && kind === "wastage" && (ctx.destruction || /expir/i.test(reason))) {
+    const d = ctx.destruction && typeof ctx.destruction === "object" ? ctx.destruction : {};
+    const missing = ["nomineeName", "nomineeDesignation", "nominatingOrderRef", "destroyedOn"].filter((k) => !str(d[k]));
+    if (missing.length || !/^\d{4}-\d{2}-\d{2}$/.test(str(d.destroyedOn))) {
+      return { ...base, ok: false, status: 422, error: "destruction_nominee_required", missing, written: 0,
+        detail: "Expired stock of a controlled drug is destroyed in the presence of an officer nominated by the Controller of Drugs (NDPS Rules r.52V(1)). Give the officer's name, designation, the nominating order reference and the date (YYYY-MM-DD)." };
+    }
+    destruction = { nomineeName: str(d.nomineeName).slice(0, 120), nomineeDesignation: str(d.nomineeDesignation).slice(0, 120), nominatingOrderRef: str(d.nominatingOrderRef).slice(0, 120), destroyedOn: str(d.destroyedOn) };
   }
 
   const at = str(ctx.at) || new Date().toISOString();
@@ -392,10 +426,20 @@ async function recordMovement(request, env, ctx) {
     batch: str(ctx.batch) || null, expiry: str(ctx.expiry) || null,
     reason: reason || null, at, by: resolved.actor.id,
     ...(ctx.controlled === true ? { controlled: true, witnessedBy } : {}),
+    ...(destruction ? { destruction } : {}),
     /* Form 3H (NDPS Rules r.52R) records where a receipt came from and its consignment note, bill or invoice number.
      * Optional for every drug, kept when given. */
     ...(str(ctx.receivedFrom) ? { receivedFrom: str(ctx.receivedFrom).slice(0, 200) } : {}),
     ...(str(ctx.documentNo) ? { documentNo: str(ctx.documentNo).slice(0, 80) } : {}),
+    /* Drugs and Cosmetics Rules r.65(21)(b)(ii), (v), (vi): a Schedule X receipt names the supplier's address and licence
+     * number and the manufacturer (controlled-drugs.js rule65Register). Kept when given, for any drug. */
+    ...(str(ctx.supplierAddress) ? { supplierAddress: str(ctx.supplierAddress).slice(0, 300) } : {}),
+    ...(str(ctx.supplierLicenceNo) ? { supplierLicenceNo: str(ctx.supplierLicenceNo).slice(0, 80) } : {}),
+    ...(str(ctx.manufacturer) ? { manufacturer: str(ctx.manufacturer).slice(0, 120) } : {}),
+    ...(toInstitution && kind === "transfer-out" ? { toInstitution: toInstitution.slice(0, 200), transferKind: ["transfer", "loan", "sale"].includes(str(ctx.transferKind)) ? str(ctx.transferKind) : "transfer",
+      ...(str(ctx.controllerApprovalRef) ? { controllerApprovalRef: str(ctx.controllerApprovalRef).slice(0, 120) } : {}) } : {}),
+    ...(estimate && estimate.over ? { revisedEstimateRef: str(ctx.revisedEstimateRef).slice(0, 120), aboveEstimate: estimate.over } : {}),
+    ...(estimate && estimate.warning ? { estimateUnchecked: true } : {}),
     /* What a stores movement belongs to (stores.js, assets.js): the indent it was issued against, the job card a
      * part was fitted on, the department that used it. Carried, never required: a pharmacy receipt names none. */
     ...(str(ctx.indentId) ? { indentId: str(ctx.indentId) } : {}),
@@ -406,8 +450,10 @@ async function recordMovement(request, env, ctx) {
 
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, movementId: id, kind, recordVersion: out.record.version, movement: record, actor: resolved.actor.id,
-      note: "A movement, not a gate. Nothing in stock control can refuse a dispense." };
+    /* A replayed key answers with the movement that key first wrote, not the id this retry minted. */
+    const saved = out.replayed && out.record ? out.record : record;
+    return { ...base, ok: true, written: 1, movementId: saved.id, kind, recordVersion: out.record.version, movement: saved, actor: resolved.actor.id,
+      note: "A movement, not a gate. Nothing in stock control can refuse a dispense.", ...(estimate && estimate.warning ? { estimateWarning: estimate.warning } : {}) };
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };

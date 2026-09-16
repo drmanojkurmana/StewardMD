@@ -15,6 +15,11 @@
  * RELEASE IS A CHECKLIST THE SERVER KEEPS. Who received the body, their relationship and identity proof, and
  * each document: death certificate, police no-objection (MLC), post-mortem report (when required), belongings
  * handed over. A missing item is refused by name. Nothing is ever deleted: release is the last version.
+ *
+ * THE MEDICO-LEGAL REGISTER TOO (legal review 2026-09-17, D.4.3). The route hands in this patient's open medico-legal
+ * register cases (registers.js MLC), so a case recorded there needs the police no-objection like the chart flag, and a death
+ * in custody or of a woman within seven years of marriage (BNSS ss.194, 196) is not released until the inquest or
+ * Magistrate inquiry papers are recorded on the case, with their reference.
  */
 
 import { str, baseOf, offOf, openSvc, writeFailure, readFailure } from "./support-common.js";
@@ -40,17 +45,22 @@ function belongingsFrom(list) {
   return bad >= 0 ? { error: "bad_belonging", line: bad } : { rows };
 }
 
-/** PURE. What is missing before release, or []. */
-function releaseMissing(c, rel) {
+const INQUEST_CATEGORIES = ["death-in-custody", "death-woman-married-under-7-years"];
+
+/** PURE. What is missing before release, or []. registerMlc: this patient's open medico-legal register cases
+ * [{ serial, category, inquestPapersReceived, inquestPapersReference }], or undefined when not handed in. */
+function releaseMissing(c, rel, registerMlc) {
   const r = rel || {}, d = r.documents || {}, missing = [];
+  const cases = Array.isArray(registerMlc) ? registerMlc : [];
   if (!RELEASE_TO.includes(str(r.to))) missing.push("released_to");
   if (!str(r.receiverName)) missing.push("receiver_name");
   if (str(r.to) === "relatives" && !str(r.relationship)) missing.push("relationship");
   if (!ID_PROOFS.includes(str(r.idProofType)) || !str(r.idProofNumber)) missing.push("identity_proof");
   if (r.bodyIdentified !== true) missing.push("body_identified_by_receiver");
   if (d.deathCertificate !== true) missing.push("death_certificate");
-  if (c.mlc && c.mlc.flag === true && d.policeNoc !== true) missing.push("police_noc");
-  if (c.mlc && c.mlc.flag === null && !str(r.mlcConfirmedNotBy)) missing.push("mlc_status_confirmed");
+  if (((c.mlc && c.mlc.flag === true) || cases.length) && d.policeNoc !== true) missing.push("police_noc");
+  if (c.mlc && c.mlc.flag === null && !cases.length && !str(r.mlcConfirmedNotBy)) missing.push("mlc_status_confirmed");
+  if (cases.some((x) => INQUEST_CATEGORIES.includes(x.category) && !(x.inquestPapersReceived === "yes" && str(x.inquestPapersReference)))) missing.push("inquest_papers");
   if (c.postMortem && c.postMortem.required === "yes" && d.postMortemReport !== true) missing.push("post_mortem_report");
   if (c.postMortem && c.postMortem.required === "undecided") missing.push("post_mortem_decision");
   if ((c.belongings || []).length && d.belongingsHandedOver !== true) missing.push("belongings_handed_over");
@@ -147,7 +157,7 @@ async function releaseBody(request, env, ctx) {
   if (!cur) return { ...base, ok: false, status: 404, error: "case_not_found", written: 0 };
   if (cur.state === "released") return { ...base, ok: false, status: 409, error: "released", written: 0 };
   const r = ctx.release || {};
-  const missing = releaseMissing(cur, r);
+  const missing = releaseMissing(cur, r, ctx.registerMlc);
   if (missing.length) return { ...base, ok: false, status: 422, error: "release_incomplete", missing, written: 0 };
   const d = r.documents || {};
   const next = { ...cur, state: "released", release: {
@@ -177,8 +187,9 @@ async function mortuaryBoard(request, env, ctx) {
   const received = new Set(cases.map((c) => str(c.patientId)));
   const chambers = Array.isArray(ctx.chambers) ? ctx.chambers.map(str).filter(Boolean) : [];
   const held = cases.filter((c) => c.state !== "released").map((c) => ({ ...c, ...who(c.patientId), /* What this body's release will ask for beyond the receiver and the death certificate. */
-    releaseNeeds: releaseMissing(c, {}).filter((m) => ["police_noc", "mlc_status_confirmed", "post_mortem_report", "post_mortem_decision", "belongings_handed_over"].includes(m)) }));
+    releaseNeeds: releaseMissing(c, {}, ctx.registerMlc ? ctx.registerMlc.get(str(c.patientId)) : undefined).filter((m) => ["police_noc", "mlc_status_confirmed", "post_mortem_report", "post_mortem_decision", "belongings_handed_over", "inquest_papers"].includes(m)) }));
   return { ...base, ok: true,
+    ...(ctx.registerMlc ? {} : { warnings: ["The medico-legal register could not be read, so what a release needs for a medico-legal case may be missing here. Release still checks it."] }),
     held: held.sort((a, b) => str(a.receivedAt).localeCompare(str(b.receivedAt))),
     released: cases.filter((c) => c.state === "released").sort((a, b) => str(b.release && b.release.at).localeCompare(str(a.release && a.release.at))).slice(0, 50).map((c) => ({ ...c, ...who(c.patientId) })),
     chambers: chambers.map((ch) => { const c = held.find((x) => str(x.chamber) === ch); return { chamber: ch, caseId: c ? c.id : null }; }),
@@ -186,6 +197,6 @@ async function mortuaryBoard(request, env, ctx) {
 }
 
 export {
-  CASE_TYPE, ID_PROOFS, caseIdFor, mlcOf, belongingsFrom, releaseMissing,
+  CASE_TYPE, ID_PROOFS, INQUEST_CATEGORIES, caseIdFor, mlcOf, belongingsFrom, releaseMissing,
   receiveBody, updateMortuaryCase, releaseBody, mortuaryBoard,
 };
