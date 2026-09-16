@@ -443,6 +443,9 @@
     return out;
   }
 
+  function vitalLabel(c, k) {
+    return { birth: T(c, "site.registers.vital.birth", "Births (Form 1)"), death: T(c, "site.registers.vital.death", "Deaths (Form 2)"), stillbirth: T(c, "site.registers.vital.stillbirth", "Still births (Form 3)"), mccd: T(c, "site.registers.vital.mccd", "Cause of death certificates (Form 4/4A)") }[k] || k;
+  }
   function extraHtml(c) {
     var esc = c.esc, x = S.extra;
     if (x.loading) return loading(c);
@@ -473,7 +476,7 @@
             (p.mccd ? "" : '<span class="quiet">' + esc(T(c, "site.registers.vital.mccdOwed", "cause of death certificate not yet written by the doctor")) + "</span>") + "</li>";
         }).join("") + "</ul>" : "<p>" + esc(T(c, "site.registers.vital.noneOwed", "None.")) + "</p>") +
         "<h4>" + esc(T(c, "site.registers.vital.notSubmitted", "Written but not yet recorded as submitted")) + "</h4>" + (ns.length ? "<ul>" + ns.map(function (e) {
-          return '<li><button class="btn quiet" type="button" data-rg="open-kind" data-kind="' + esc(e.kind) + '" data-id="' + esc(e.id) + '">' + EN(c, esc(e.kind + " " + (e.eventDate || ""))) + '</button> <span class="msg ' + clockClass(e.clock) + '">' + esc(clockText(c, e.clock)) + "</span></li>";
+          return '<li><button class="btn quiet" type="button" data-rg="open-kind" data-kind="' + esc(e.kind) + '" data-id="' + esc(e.id) + '">' + esc(vitalLabel(c, e.kind) + " " + (e.eventDate || "")) + '</button> <span class="msg ' + clockClass(e.clock) + '">' + esc(clockText(c, e.clock)) + "</span></li>";
         }).join("") + "</ul>" : "<p>" + esc(T(c, "site.registers.vital.noneOwed", "None.")) + "</p>") + "</div>";
     }
     if (x.what === "week") {
@@ -696,7 +699,7 @@
         return c.api("/org/register-settings", { orgId: org, settings: readSettings() }).then(function (r) {
           S.saving = false;
           if (!r || !r.ok) { S.msg = { ok: false, text: refusal(c, r) }; return paint(); }
-          S.settings = r; S.msg = { ok: true, text: r.changed.length ? T(c, "site.registers.settings.saved", "Saved: {list}. The server now holds what is shown.", { list: r.changed.join(", ") }) : T(c, "site.registers.settings.unchanged", "Nothing had changed.") };
+          S.settings = r; S.msg = { ok: true, text: r.changed.length ? T(c, "site.registers.settings.saved", "Saved: {list}. The server now holds what is shown.", { list: r.changed.map(function (k) { return { pcpndt: T(c, "site.registers.settings.pcpndt", "PCPNDT"), mtp: T(c, "site.registers.tab.mtp", "MTP"), mlc: T(c, "site.registers.tab.mlc", "Medico-legal cases"), rbd: T(c, "site.registers.tab.vital", "Births and deaths"), mccd: T(c, "site.registers.vital.mccd", "Cause of death certificates (Form 4/4A)"), ndps: T(c, "site.registers.tab.ndps", "Controlled drugs (NDPS)") }[k] || k; }).join(", ") }) : T(c, "site.registers.settings.unchanged", "Nothing had changed.") };
           paint();
         }, function () { S.saving = false; S.msg = { ok: false, text: T(c, "site.registers.noResponse", "No response from the server.") }; paint(); });
       }
