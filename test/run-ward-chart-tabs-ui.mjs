@@ -113,6 +113,12 @@ try {
   await ev(`document.activeElement && document.activeElement.blur(); return true;`);
   await press("n");
   ok((await view()) === "timeline", '"n" opens the timeline directly');
+  /* Owner 2026-09-16: the timeline names who gave the dose, by name and employee id, with the identity on hover and on a tap. */
+  ok(await waitFor(`var b = document.querySelector('#smdWard .w-timeline button.w-who'); return !!b && b.textContent === "Sister Anitha R (EMP-1042)";`), "the timeline names the nurse and her employee id");
+  ok(await ev(`return document.querySelector('#smdWard .w-timeline button.w-who').title === "Name: Sister Anitha R · Employee ID: EMP-1042 · Role: nurse";`), "the whole identity is on hover");
+  ok(await ev(`return window.__calls.filter(function (c) { return c.url.indexOf("/ward/staff-identities") >= 0; }).length >= 1;`), "the names came from /ward/staff-identities");
+  await ev(`window.__toasts = []; window.toast = function (m) { window.__toasts.push(m); }; document.querySelector('#smdWard .w-timeline button.w-who').click(); return true;`);
+  ok(await ev(`return window.__toasts.length === 1 && window.__toasts[0].indexOf("Employee ID: EMP-1042") >= 0 && WARD._st.view === "timeline";`), "a tap says the identity and leaves the timeline open");
   await press("Escape");
   ok(await waitFor(`return WARD._st.view === "chart";`) && (await selectedCat()) === "wCnav-overview", "back on the chart, Overview (where Timeline lives) is chosen");
   await ev(`WARD._dispatch("pharmacyopen"); return true;`);

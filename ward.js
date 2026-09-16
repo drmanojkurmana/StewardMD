@@ -1234,7 +1234,7 @@
       var t = c.replace(/[-_]+/g, " "); return esc(t.charAt(0).toUpperCase() + t.slice(1));
     };
     var rows = (q.notes || []).map(function (n) {
-      return "<li><div class=\"w-dose-h\"><b>" + kind(n) + "</b> " + who(n) + " <span>" + wTH("ward.written-by", "written by {authorId}", { authorId: esc(n.authorId) }, "authorId") + "</span></div>" +
+      return "<li><div class=\"w-dose-h\"><b>" + kind(n) + "</b> " + who(n) + " <span>" + wTH("ward.written-by", "written by {authorId}", { authorId: staffWho(n.authorId, n.authorName || null) }, "authorId") + "</span></div>" +
         '<div class="w-dose-s"><span class="w-due">' + ms("schedule") + wTH("ward.waiting2", "waiting {wait}", { wait: esc(wait(n.waitingMinutes)) }, "wait") + "</span>" +
         // The gap travels WITH the note to the person being asked to put their name to it. A
         // signature does not fill in a missing plan, and the signer should know before, not after.
@@ -1324,6 +1324,7 @@
         (m.route ? " <span>" + esc(m.route) + "</span>" : "") +
         (m.frequency ? " <span>" + esc(m.frequency) + "</span>" : "") +
         (m.since ? " <small>" + wTH("ward.since", "since {since}", { since: when(m.since) }, "since") + "</small>" : "") +
+        (m.prescriberId ? " <small>" + wTH("ward.prescribed-by-who", "prescribed by {who}", { who: staffWho(m.prescriberId, null) }) + "</small>" : "") +
         // LT-20: an order pharmacy has not checked yet says so (null: this reader cannot see verifications).
         (m.pharmacy && m.pharmacy !== "verified" ? ' <span class="w-st due">' + (m.pharmacy === "unverified" ? wTH("ward.awaiting-pharmacy-verification", "awaiting pharmacy verification")
           : m.pharmacy === "queried" ? wTH("ward.queried-by-pharmacy", "queried by pharmacy") : wTH("ward.changed-since-pharmacy-verified-it", "changed since pharmacy verified it")) + "</span>" : "") +
@@ -1604,10 +1605,13 @@
     if (curVitals) out.push(curVitals);
     return out.map(function (e) {
       if (e._items && e._items.length > 1) {
-        var labels = e._items.map(function (it) { return it.label; }).join(" · ");
         var crit = e._items.some(function (it) { return it.critical; });
+        /* One recorder for the set is named once; a set two people recorded keeps each reading's own words. */
+        var oneBy = e._items.every(function (it) { return it.byId && it.byId === e._items[0].byId; });
+        var labels = e._items.map(function (it) { return oneBy ? it.labelBase : it.label; }).join(" · ");
+        var set = wT("ward.vital-signs-set", "Vital signs set: {labels}", { labels: labels });
         return Object.assign({}, e, {
-          label: wT("ward.vital-signs-set", "Vital signs set: {labels}", { labels: labels }),
+          label: set, labelBase: oneBy ? set : undefined, byId: oneBy ? e._items[0].byId : undefined,
           critical: crit
         });
       }
@@ -1621,6 +1625,16 @@
    *
    * Collapsed is the default, and the preview is the real first line rather than an ellipsis, so a
    * reader can skim the assessments of a whole stay without opening one. */
+  /* Owner 2026-09-16: a timeline line names the person (staffWho) when the server sent the actor's id beside the
+   * label: prescriber, orderer, the nurse who gave, held or refused a dose and its witness, the note's author and
+   * signer, who recorded the vitals. An event without an id (an older server) keeps its label as it was. */
+  function timelineLabel(e) {
+    if (!e) return "";
+    var out = e.byId ? esc(e.labelBase || "") + " &middot; " + wTH("ward.by-who", "by {who}", { who: staffWho(e.byId, null) }) : esc(e.label);
+    if (e.witnessId) out += " &middot; " + wTH("ward.witness-who", "witness {who}", { who: staffWho(e.witnessId, null) });
+    if (e.signedById) out += " &middot; " + wTH("ward.signed-by-who", "signed by {who}", { who: staffWho(e.signedById, null) });
+    return out;
+  }
   function timelineRow(e, open) {
     var parts = e.body || [];
     var body = "";
@@ -1648,7 +1662,7 @@
     return '<li class="w-tl-' + esc(e.category || "other") + (e.critical ? " w-tl-crit" : "") + '">' +
       '<span class="w-tl-t">' + when(e.at) + "</span>" +
       '<span class="w-tl-k">' + esc(e.category || e.resourceType) + "</span>" +
-      "<span>" + esc(e.label) +
+      "<span>" + timelineLabel(e) +
       (e.critical ? " <span class=\"w-st escalate\">" + wTH("ward.critical", "critical", null, "", 1) + "</span>" : "") +
       body +
       (parts.length
@@ -1678,7 +1692,7 @@
     var versions = (d.versions || []).slice().reverse().map(function (v) {
       return "<li>" +
         '<span class="w-st ' + (v.current ? "" : v.stood ? "" : "escalate") + '">v' + esc(v.version) + (v.current ? " · " + wTH("ward.current", "current") : "") + "</span> " +
-        (v.byName ? esc(v.byName) : wTH("ward.somebody", "somebody")) +
+        (v.by ? staffWho(v.by, null) : v.byName ? esc(v.byName) : wTH("ward.somebody", "somebody")) +
         (v.onBehalfOf ? " " + wTH("ward.on-behalf-of", "on behalf of {onBehalfOf}", { onBehalfOf: esc(v.onBehalfOf) }, "onBehalfOf") : "") +
         " &middot; " + when(v.recordedAt) +
         (v.effectiveAt && v.effectiveAt !== v.recordedAt ? " &middot; " + wTH("ward.took-effect", "took effect {effectiveAt}", { effectiveAt: when(v.effectiveAt) }, "effectiveAt") : "") +
@@ -1971,7 +1985,11 @@
          * does not contain, with no reason on the row, would be right to distrust the whole round. */
         (d.adjusted ? "<small>" + wTH("ward.clock-change-does-not-exist-today", "clock change: {from} does not exist today, moved to {to}", { from: esc(d.adjusted.from), to: esc(d.adjusted.to) }, "from to") + "</small>" : "") +
         '<span class="w-st ' + esc(String(d.status || "notstarted").toLowerCase()) + '">' + esc(d.status ? marWord(d.status) : wT("ward.not-started", "not started")) + "</span>" +
-        (d.administeredAt ? "<small>" + wTH("ward.given", "given {administeredAt}", { administeredAt: when(d.administeredAt) }, "administeredAt") + "</small>" : "") + "</div>" +
+        (d.administeredAt ? "<small>" + wTH("ward.given", "given {administeredAt}", { administeredAt: when(d.administeredAt) }, "administeredAt") +
+          (d.administeredBy ? " " + wTH("ward.by-who", "by {who}", { who: staffWho(d.administeredBy, null) }) : "") + "</small>" : "") +
+        (d.witnessedBy ? "<small>" + wTH("ward.witness-who", "witness {who}", { who: staffWho(d.witnessedBy, null) }) + "</small>" : "") +
+        // Owner 2026-09-16: who held it, recorded the refusal or cancelled it (the dose's current state), by name.
+        (d.statusBy && !d.administeredAt && d.status && d.status !== "unknown" ? "<small>" + wTH("ward.by-who", "by {who}", { who: staffWho(d.statusBy, null) }) + "</small>" : "") + "</div>" +
         '<div class="w-dose-a">' + (d.readFailed ? "<small class=\"w-st overdue\">" + wTH("ward.could-not-read-whether-this-dose", "Could not read whether this dose was given. Reload before acting.", null, "", 1) + "</small>"
           : acts || "<small class=\"w-empty\">" + wTH("ward.no-further-action", "No further action.") + "</small>") + "</div></li>";
     }).join("");
@@ -3010,7 +3028,7 @@
     var latest = !wait && state.icu.rounds && state.icu.rounds.latest;
     var words = { yes: "Yes", no: "No", "not-applicable": "Not applicable", "not-assessed": "Not assessed" };
     var shown = wait || (!latest ? "<p class=\"w-empty\">" + wTH("ward.no-round-checklist-recorded", "No round checklist recorded.") + "</p>"
-      : "<p class=\"w-hint\">" + wTH("ward.last-round-of-assessed", "Last round {at}{v}: {assessed} of {of} assessed.", { at: when(latest.at), v: (latest.by ? " " + wTH("ward.by7", "by {by}", { by: esc(latest.by) }, "by") : ""), assessed: esc(latest.assessed), of: esc(latest.of) }, "at assessed of") + "</p>" +
+      : "<p class=\"w-hint\">" + wTH("ward.last-round-of-assessed", "Last round {at}{v}: {assessed} of {of} assessed.", { at: when(latest.at), v: (latest.by ? " " + wTH("ward.by7", "by {by}", { by: staffWho(latest.by, null) }, "by") : ""), assessed: esc(latest.assessed), of: esc(latest.of) }, "at assessed of") + "</p>" +
         '<ul class="w-mini">' + latest.items.map(function (i) { return "<li><b>" + esc(i.label) + "</b><span>" + esc(words[i.answer] || i.answer) + (i.note ? ": " + esc(i.note) : "") + "</span></li>"; }).join("") + "</ul>");
     var items = (state.icu && state.icu.roundItems) || [];
     var form = items.length ? '<div class="w-grid">' + items.map(function (i) {
@@ -3528,6 +3546,8 @@
         '<span class="w-st ' + esc(o.state) + '">' + esc(o.state) + "</span>" +
         (blocked ? '<span class="w-st overdue">' + ms("block") + wTH("ward.blocked", "{length} blocked", { length: safe.blocks.length }, "length") + "</span>" : "") +
         (warned ? '<span class="w-st due">' + ms("warning") + wTH("ward.warning2", "{length} warning", { length: safe.warnings.length }, "length", 1) + "</span>" : "") +
+        (o.prescriberId ? " <small>" + wTH("ward.prescribed-by-who", "prescribed by {who}", { who: staffWho(o.prescriberId, null) }) + "</small>" : "") +
+        (o.verification && o.verification.verifiedBy ? " <small>" + wTH("ward.checked-by-who", "{outcome} by {who}", { outcome: esc(o.verification.outcome || ""), who: staffWho(o.verification.verifiedBy, null) }) + "</small>" : "") +
         "</li>";
     }).join("");
 
@@ -4323,10 +4343,10 @@
       var sec = function (label, v) { return v ? "<div><b>" + esc(label) + ":</b> " + esc(v) + "</div>" : ""; };
       return "<li><div class=\"w-crit-h\"><b>" + esc(h.panel || wT("ward.histopathology", "Histopathology")) + "</b>" +
         (h.status === "final" || h.status === "corrected" ? "<span class=\"w-st\">" + wTH("ward.signed3", "Signed") + "</span>" : "<span class=\"w-st due\">" + wTH("ward.preliminary", "PRELIMINARY") + (h.awaitingVerification ? ", " + wTH("ward.awaiting-verification2", "awaiting verification") : "") + "</span>") + "</div>" +
-        "<div class=\"w-crit-m\">" + wTH("ward.reported-by", "Reported by {reportedBy}{v} &middot; {reportedAt}", { reportedBy: escOr(h.reportedBy), v: (h.verifiedBy ? ", " + wTH("ward.verified-by", "verified by {verifiedBy}", { verifiedBy: esc(h.verifiedBy) }, "verifiedBy") : ""), reportedAt: when(h.reportedAt) }, "reportedAt") + "</div>" +
+        "<div class=\"w-crit-m\">" + wTH("ward.reported-by", "Reported by {reportedBy}{v} &middot; {reportedAt}", { reportedBy: h.reportedBy ? staffWho(h.reportedBy, null) : escOr(h.reportedBy), v: (h.verifiedBy ? ", " + wTH("ward.verified-by", "verified by {verifiedBy}", { verifiedBy: staffWho(h.verifiedBy, null) }, "verifiedBy") : ""), reportedAt: when(h.reportedAt) }, "reportedAt") + "</div>" +
         sec(wT("ward.specimen", "Specimen"), h.specimen) + sec(wT("ward.clinical-details", "Clinical details"), h.clinicalDetails) + sec(wT("ward.macroscopic", "Macroscopic"), h.macroscopic) + sec(wT("ward.microscopic", "Microscopic"), h.microscopic) +
         sec(wT("ward.diagnosis", "Diagnosis"), h.diagnosis) + sec(wT("ward.coded-diagnosis", "Coded diagnosis"), h.codedDiagnosis) +
-        (h.addenda || []).map(function (a) { return "<div class=\"w-sub\"><b>" + wTH("ward.addendum", "Addendum") + "</b> " + esc(a.by) + " &middot; " + when(a.at) + "<div>" + esc(a.text) + "</div></div>"; }).join("") + "</li>";
+        (h.addenda || []).map(function (a) { return "<div class=\"w-sub\"><b>" + wTH("ward.addendum", "Addendum") + "</b> " + staffWho(a.by, null) + " &middot; " + when(a.at) + "<div>" + esc(a.text) + "</div></div>"; }).join("") + "</li>";
     }).join("");
 
     return head +
@@ -4526,12 +4546,64 @@
   /* LT-22/LT-28/LT-29: A PERSON, NEVER A SIGN-IN UID. The name the record carries beside the id when it has one; a
    * staff sign-in by its login (an email or a staff id, as the nurse picker shows it); an account id that cannot be
    * turned into words is "a clinician account", as the chart timeline already says (migrate-inpatient.js personName). */
-  function staffWho(id, name) {
+  function staffWhoFallback(id, name) {
     if (name) return esc(name);
     var s = String(id || "");
     if (!s) return wTH("ward.a-clinician", "a clinician");
     if (/^(fb|cfa):/.test(s)) return wTH("ward.a-clinician-account", "a clinician account");
     return esc(s);
+  }
+  /* OWNER 2026-09-16: "so everyone knows who gave the drugs who asked to give". THE ONE PLACE A CHART NAMES A MEMBER OF
+   * STAFF. `id` is the actor id the record keeps (never rewritten); `name` is a name the record stored beside it at
+   * write time, if any. The hospital's staff record is resolved at display (GET /ward/staff-identities, one request
+   * per screen for every id the screen named, kept until the screen changes) and shown as "Name (employee id)". The
+   * whole identity is in the tooltip, and a click or tap (touch screens have no hover) says name, employee id and
+   * role. While the lookup runs the fallback above shows, never a blank; a lookup that failed says so. */
+  var WHO = { ids: {}, names: {}, want: {}, busy: false, screen: "", gen: 0 };
+  function whoDetail(id, name) {
+    var r = WHO.ids[id], nm = (r && r.name) || name || "";
+    if (r === false) return wT("ward.identity-could-not-be-loaded", "identity could not be loaded");
+    if (!r) return wT("ward.identity-not-recorded", "identity not recorded");
+    return wT("ward.staff-identity-detail", "Name: {name} · Employee ID: {employeeId} · Role: {role}",
+      { name: nm || wT("ward.name-not-set", "Name not set"), employeeId: r.employeeId || wT("ward.not-recorded4", "not recorded"), role: r.role || wT("ward.not-recorded4", "not recorded") });
+  }
+  function staffWho(id, name) {
+    var s = String(id || ""), fb = staffWhoFallback(id, name);
+    if (!s || /^system:/.test(s)) return fb;
+    var r = WHO.ids[s], label;
+    if (name) WHO.names[s] = name;
+    if (r === undefined) { WHO.want[s] = 1; return '<span class="w-who">' + fb + "</span>"; }
+    var nm = (r && r.name) || name || "";
+    if (r === false) label = fb + ' <small class="w-who-x">(' + wTH("ward.identity-could-not-be-loaded", "identity could not be loaded") + ")</small>";
+    else if (!r) label = fb + ' <small class="w-who-x">(' + wTH("ward.identity-not-recorded", "identity not recorded") + ")</small>";
+    else if (nm) label = esc(nm) + (r.employeeId ? " (" + esc(r.employeeId) + ")" : "");
+    else if (r.employeeId) label = wTH("ward.name-not-set", "Name not set") + " (" + esc(r.employeeId) + ")";
+    else label = (r.role ? esc(r.role) + ", " : "") + wTH("ward.identity-not-recorded", "identity not recorded");
+    return '<button type="button" class="w-who" data-w-act="whoinfo:' + esc(s) + '" title="' + esc(whoDetail(s, name)) + '">' + label + "</button>";
+  }
+  /* Called by paint(): a new screen starts a new lookup, and the ids the screen just named are asked for together. */
+  function whoScreen(screen) {
+    if (screen !== WHO.screen) { WHO.screen = screen; WHO.ids = {}; WHO.names = {}; WHO.want = {}; WHO.busy = false; WHO.gen++; }
+  }
+  function whoFetch() {
+    if (WHO.busy || !st.orgId) return;
+    var ids = Object.keys(WHO.want).filter(function (k) { return WHO.ids[k] === undefined; }).slice(0, 200);
+    WHO.want = {};
+    if (!ids.length) return;
+    var gen = WHO.gen;
+    WHO.busy = true;
+    apiGet("/ward/staff-identities?orgId=" + encodeURIComponent(st.orgId) + "&ids=" + encodeURIComponent(ids.join(",")))
+      .then(function (r) { return r && r.ok && r.identities ? r.identities : null; }, function () { return null; })
+      .then(function (found) {
+        if (gen !== WHO.gen) return;
+        ids.forEach(function (k) { WHO.ids[k] = found ? (found[k] && !found[k].system ? found[k] : null) : false; });
+        WHO.busy = false;
+        paint();
+      });
+  }
+  function whoInfo(id) {
+    var s = String(id || ""), stored = WHO.names[s] || "";
+    dictSay(whoDetail(s, stored));
   }
   /* LT-28: the patient a hospital-wide row is about, the way the bed and ED boards name them: name, MRN, ward, bed.
    * The server joins these (criticals and handovers, names=1); a row it could not name keeps the record id. */
@@ -5394,7 +5466,7 @@
         '<span class="w-crit-b">' + (c.basis === "lab" ? wTH("ward.flagged-by-the-lab", "flagged by the lab") : c.basis === "limit" ? wTH("ward.outside-critical-limit", "outside critical limit", null, "", 1) : esc(c.basis || "")) + "</span></div>" +
         '<div class="w-crit-m">' + ms("schedule") + (mins == null ? "" : wTH("ward.min-since-reported", "{mins} min since reported", { mins: mins }, "mins")) +
         (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; " + wTH("ward.overdue2", "overdue") : "") +
-        (c.state === "acknowledged" ? " &middot; " + wTH("ward.acknowledged-by", "acknowledged by") + " " + esc(c.acknowledgedBy || wT("ward.a-clinician", "a clinician")) : "") + "</div>" +
+        (c.state === "acknowledged" ? " &middot; " + wTH("ward.acknowledged-by", "acknowledged by") + " " + staffWho(c.acknowledgedBy, c.acknowledgedByName) : "") + "</div>" +
         (c.state === "open" ? '<button class="w-btn tiny go" data-w-act="ack:' + esc(c.loopId) + '">' + ms("task_alt") + wTH("ward.acknowledge", "Acknowledge") + "</button>" : "") +
         '<button class="w-btn tiny ghost" data-w-act="incidentsignal:CriticalResultLoop~' + esc(c.loopId) + '">' + ms("report") + wTH("ward.raise-safety-signal", "Raise safety signal") + "</button>" +
       "</li>";
@@ -5646,7 +5718,7 @@
     var stateClass = v.state === "approved" ? "" : v.state === "rejected" ? "escalate" : "due";
     var hist = (v.history || []).map(function (h) {
       var what = h.kind === "request" ? wT("ward.approval-asked", "asked") : (h.decision === "approved" ? wT("ward.approval-approved", "approved") : h.decision === "rejected" ? wT("ward.turned-down", "turned down") : wT("ward.approval-took-back", "took back"));
-      return "<li>" + wTH("ward.by", "{what} by {by} &middot; {at}", { what: esc(what), by: esc(h.by), at: when(h.at) }, "by at") + (h.reason ? " &middot; " + esc(h.reason) : "") + "</li>";
+      return "<li>" + wTH("ward.by", "{what} by {by} &middot; {at}", { what: esc(what), by: staffWho(h.by, null), at: when(h.at) }, "by at") + (h.reason ? " &middot; " + esc(h.reason) : "") + "</li>";
     }).join("");
     return '<li class="w-mini-row"><div>' +
       '<span class="w-st ' + esc(stateClass) + '">' + esc(stateLabel) + "</span> " +
@@ -5778,7 +5850,7 @@
       (p.phone ? ' &middot; <a href="tel:' + esc(p.phone) + '">' + esc(p.phone) + "</a>" : "") +
       (roles ? ' <span class="w-st due">' + esc(roles) + "</span>" : "") +
       (p.active ? "" : " <span class=\"w-st\">" + wTH("ward.removed2", "removed") + "</span>") +
-      "<div class=\"w-dt-times\">" + wTH("ward.recorded-by", "recorded by {recordedBy} &middot; {recordedAt}", { recordedBy: esc(p.recordedBy), recordedAt: when(p.recordedAt) }, "recordedBy recordedAt") +
+      "<div class=\"w-dt-times\">" + wTH("ward.recorded-by", "recorded by {recordedBy} &middot; {recordedAt}", { recordedBy: staffWho(p.recordedBy, null), recordedAt: when(p.recordedAt) }, "recordedBy recordedAt") +
       (p.active ? "" : " &middot; " + wTH("ward.removed-by", "removed by {removedBy} {removedAt}", { removedBy: esc(p.removedBy || ""), removedAt: when(p.removedAt) }, "removedAt") +
         (p.removedReason ? " &middot; " + esc(p.removedReason) : "")) + "</div>" +
       (p.note ? "<div>" + esc(p.note) + "</div>" : "") +
@@ -5799,13 +5871,13 @@
         "<p>" + wTH("ward.died", "Died {at}", { at: when(d.deceased.at) }, "at") +
         (d.deceased.cause ? " &middot; " + esc(d.deceased.cause) : "") +
         (d.deceased.certifiedBy ? " &middot; " + wTH("ward.certified-by", "certified by {certifiedBy}", { certifiedBy: esc(d.deceased.certifiedBy) }, "certifiedBy") : "") + "</p>" +
-        "<div class=\"w-dt-times\">" + wTH("ward.recorded-by", "recorded by {recordedBy} &middot; {recordedAt}", { recordedBy: esc(d.deceased.recordedBy), recordedAt: when(d.deceased.recordedAt) }, "recordedBy recordedAt") + "</div>" +
+        "<div class=\"w-dt-times\">" + wTH("ward.recorded-by", "recorded by {recordedBy} &middot; {recordedAt}", { recordedBy: staffWho(d.deceased.recordedBy, null), recordedAt: when(d.deceased.recordedAt) }, "recordedBy recordedAt") + "</div>" +
         '<p class="w-hint">' + ms("info") + wTH("ward.the-chart-stays-open-and-readable", "The chart stays open and readable. Recording what happened after a death is normal work.") +
         "</p><button class=\"w-btn ghost\" data-w-act=\"deathwithdraw\">" + ms("undo") + wTH("ward.this-is-the-wrong-patient", "This is the wrong patient") + "</button></div>";
     } else if (d && d.deceasedCorrected) {
       deceased = "<div class=\"w-sub\"><h4>" + wTH("ward.a-death-recorded-against-this-patient", "A death recorded against this patient was withdrawn") + "</h4>" +
         "<p>" + esc(d.deceasedCorrected.reason) + "</p>" +
-        "<div class=\"w-dt-times\">" + wTH("ward.by3", "by {by} &middot; {at}", { by: esc(d.deceasedCorrected.by), at: when(d.deceasedCorrected.at) }, "by at") + "</div></div>";
+        "<div class=\"w-dt-times\">" + wTH("ward.by3", "by {by} &middot; {at}", { by: staffWho(d.deceasedCorrected.by, null), at: when(d.deceasedCorrected.at) }, "by at") + "</div></div>";
     }
     return '<div class="w-card">' +
       "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
@@ -5870,7 +5942,7 @@
      * allergy endpoint, and inventing one would be a second source of truth for the single fact a
      * prescriber most needs to be right about. */
     var allergies = ev("allergy").map(function (e) {
-      return '<li class="w-ws-alert">' + esc(e.label) + "</li>";
+      return '<li class="w-ws-alert">' + timelineLabel(e) + "</li>";
     });
     var openCriticals = (state.criticals || []).filter(function (c) { return c.state === "open"; });
     var criticalRows = openCriticals.map(function (c) {
@@ -5886,14 +5958,14 @@
         (m.route ? " " + esc(m.route) : "") + (m.frequency ? " " + esc(m.frequency) : "") + "</li>";
     });
     var resultRows = ev("result").slice(0, 5).map(function (e) {
-      return "<li" + (e.critical ? ' class="w-ws-alert"' : "") + ">" + esc(e.label) + "</li>";
+      return "<li" + (e.critical ? ' class="w-ws-alert"' : "") + ">" + timelineLabel(e) + "</li>";
     });
     var pendingRows = ev("investigation").filter(function (e) { return e.reportReady === false; })
       // LT-24: the test and its kind, not the timeline sentence with its account name and raw status.
       .map(function (e) { return "<li>" + (e.test ? esc(e.test) + (e.orderCategory ? " (" + esc(e.orderCategory) + ")" : "") : esc(e.label)) + " <span class=\"w-st due\">" + wTH("ward.waiting", "waiting") + "</span></li>"; });
     var noteRows = ev("note").slice(0, 3).map(function (e) {
       var first = e.body && e.body[0] ? String(e.body[0].text || "") : "";
-      return "<li>" + esc(e.label) + (first ? '<div class="w-dt-times">' + esc(first.length > 120 ? first.slice(0, 120) + "…" : first) + "</div>" : "") + "</li>";
+      return "<li>" + timelineLabel(e) + (first ? '<div class="w-dt-times">' + esc(first.length > 120 ? first.slice(0, 120) + "…" : first) + "</div>" : "") + "</li>";
     });
 
     var n = state.news2;
@@ -6408,7 +6480,7 @@
         return '<li class="w-mini-row"><div><span class="w-st ' + badgeCls + '">' + esc(wTEn(PW_STEP_STATUS[st.status]) || st.status) + "</span> " +
           "<b>" + esc(st.title || st.key) + "</b> (" + esc(st.kind) + ")" +
           (st.withinMinutes ? " <span class=\"w-dt-times\">&middot; " + wTH("ward.target-within-m", "target within {withinMinutes}m", { withinMinutes: esc(st.withinMinutes) }, "withinMinutes") + "</span>" : "") +
-          (ovr ? "<div class=\"w-dt-times\"><b>" + wTH("ward.override-reason", "Override reason:") + "</b> " + esc(ovr.reason) + (ovr.by ? " (" + wTH("ward.by8", "by {by})", { by: esc(ovr.by) }, "by") : "") + "</div>" : "") +
+          (ovr ? "<div class=\"w-dt-times\"><b>" + wTH("ward.override-reason", "Override reason:") + "</b> " + esc(ovr.reason) + (ovr.by ? " (" + wTH("ward.by8", "by {by})", { by: staffWho(ovr.by, null) }, "by") : "") + "</div>" : "") +
           '</div><div class="w-mini-row-act">' + act + "</div></li>";
       }).join("");
       return '<div class="w-sub"><h4>' + esc(pw.title || en.id) + " (v" + esc(pw.version || 1) + ")</h4>" +
@@ -6834,7 +6906,7 @@
             return '<li class="w-surv"><b>' + esc(sg.label) + "</b> " + esc(sg.summary) +
               "<div class=\"w-hint\">" + wTH("ward.since-rule", "Since {v} &middot; rule: {source}", { v: esc(sg.firstSeenAt ? when(sg.firstSeenAt) : "unknown"), source: esc(sg.source) }, "source") + "</div>" +
               "<div class=\"w-hint\">" + wTH("ward.evidence", "Evidence:") + " " + (evidenceLinks(sg.evidence) || wTH("ward.no-record-ids", "no record ids")) + "</div>" +
-              (acks.length ? '<div class="w-hint">' + ms("task_alt") + acks.map(function (a) { return wTH("ward.acknowledged-by-at", "Acknowledged by {by} at {at}: {note}", { by: esc(a.by), at: esc(when(a.at)), note: esc(a.note) }, "by note"); }).join("<br>") + "</div>"
+              (acks.length ? '<div class="w-hint">' + ms("task_alt") + acks.map(function (a) { return wTH("ward.acknowledged-by-at", "Acknowledged by {by} at {at}: {note}", { by: staffWho(a.by, null), at: esc(when(a.at)), note: esc(a.note) }, "by note"); }).join("<br>") + "</div>"
                 : '<div class="w-hint warn">' + ms("pending") + wTH("ward.not-acknowledged", "Not acknowledged") + "</div>") +
               '<div class="w-maik-acts"><button class="w-btn tiny" data-w-act="survack:' + ri + "~" + si + '">' + ms("check") + wTH("ward.acknowledge", "Acknowledge") + "</button>" +
               (sg.incidentSource ? ' <button class="w-btn tiny ghost" data-w-act="incidentsignal:' + esc(sg.incidentSource.resourceType) + "~" + esc(sg.incidentSource.id) + '">' + ms("report") + wTH("ward.raise-safety-signal", "Raise safety signal") + "</button>" : "") +
@@ -7012,8 +7084,8 @@
     return '<li class="w-mini-row' + (active ? "" : " w-gone") + '"><div>' +
       '<span class="w-st ' + (active ? "" : "due") + '">' + esc(t.status) + "</span> " +
       "<b>" + esc(t.tagType) + "</b> &middot; " + esc(t.code) +
-      "<div class=\"w-dt-times\">" + wTH("ward.issued2", "issued {assignedAt}", { assignedAt: when(t.assignedAt) }, "assignedAt") + (t.assignedBy ? " " + wTH("ward.by14", "by {assignedBy}", { assignedBy: esc(t.assignedBy) }, "assignedBy") : "") +
-      (t.endedAt ? " &middot; " + wTH("ward.ended", "ended {endedAt}", { endedAt: when(t.endedAt) }, "endedAt") + (t.endedBy ? " " + wTH("ward.by15", "by {endedBy}", { endedBy: esc(t.endedBy) }, "endedBy") : "") + (t.endedReason ? ": " + esc(t.endedReason) : "") : "") +
+      "<div class=\"w-dt-times\">" + wTH("ward.issued2", "issued {assignedAt}", { assignedAt: when(t.assignedAt) }, "assignedAt") + (t.assignedBy ? " " + wTH("ward.by14", "by {assignedBy}", { assignedBy: staffWho(t.assignedBy, null) }, "assignedBy") : "") +
+      (t.endedAt ? " &middot; " + wTH("ward.ended", "ended {endedAt}", { endedAt: when(t.endedAt) }, "endedAt") + (t.endedBy ? " " + wTH("ward.by15", "by {endedBy}", { endedBy: staffWho(t.endedBy, null) }, "endedBy") : "") + (t.endedReason ? ": " + esc(t.endedReason) : "") : "") +
       "</div></div><div class=\"w-mini-row-act\">" +
       (active
         ? '<button class="w-btn ghost sm" data-w-act="tagreplace:' + esc(t.id) + "\">" + wTH("ward.replace", "Replace") + "</button>" +
@@ -7107,9 +7179,10 @@
       (i.statusReason ? "<div>" + wTH("ward.reason5", "Reason: {statusReason}", { statusReason: esc(i.statusReason) }, "statusReason") + "</div>" : "") +
       '<div class="w-dt-times">' +
       [i.lotNumber ? wTH("ward.lot", "lot {lot}", { lot: esc(i.lotNumber) }, "lot") : "", i.site ? esc(i.site) : "", i.route ? esc(i.route) : "",
-        i.performerName || i.performerId ? wTH("ward.given-by-name", "given by {by}", { by: esc(i.performerName || i.performerId) }, "by") : ""].filter(Boolean).join(" &middot; ") +
+        i.performerId ? wTH("ward.given-by-name", "given by {by}", { by: staffWho(i.performerId, i.performerName || null) }, "by")
+          : i.performerName ? wTH("ward.given-by-name", "given by {by}", { by: esc(i.performerName) }, "by") : ""].filter(Boolean).join(" &middot; ") +
       (i.lotNumber || i.site || i.route || i.performerName || i.performerId ? " &middot; " : "") +
-      wTH("ward.recorded-by2", "recorded by {recordedBy} {recordedAt}", { recordedBy: esc(i.recordedBy), recordedAt: when(i.recordedAt) }, "recordedBy recordedAt") +
+      wTH("ward.recorded-by2", "recorded by {recordedBy} {recordedAt}", { recordedBy: staffWho(i.recordedBy, null), recordedAt: when(i.recordedAt) }, "recordedBy recordedAt") +
       (gone ? " &middot; " + wTH("ward.withdrawn-by", "withdrawn by {errorBy} {errorAt}", { errorBy: esc(i.errorBy || ""), errorAt: when(i.errorAt) }, "errorAt") + " &middot; " + esc(i.errorReason || "") : "") + "</div>" +
       (i.note ? "<div>" + esc(i.note) + "</div>" : "") +
       '</div><div class="w-mini-row-act">' +
@@ -7570,7 +7643,7 @@
     var recBlock = "";
     if (rec) {
       var recRows = (rec.overrides || []).map(function (o) {
-        return "<li>" + wTH("ward.overrode", "{relaxation} overrode", { relaxation: esc(o.relaxation) }, "relaxation") + " <b>" + esc(o.overriddenState) + "</b> " + wTH("ward.on-by", "on {sourceType} {sourceId} &middot; by {by} &middot; {at}", { sourceType: esc(o.sourceType), sourceId: esc(o.sourceId), by: esc(o.by), at: when(o.at) }, "sourceType sourceId by at") + "</li>";
+        return "<li>" + wTH("ward.overrode", "{relaxation} overrode", { relaxation: esc(o.relaxation) }, "relaxation") + " <b>" + esc(o.overriddenState) + "</b> " + wTH("ward.on-by", "on {sourceType} {sourceId} &middot; by {by} &middot; {at}", { sourceType: esc(o.sourceType), sourceId: esc(o.sourceId), by: staffWho(o.by, null), at: when(o.at) }, "sourceType sourceId by at") + "</li>";
       }).join("");
       recBlock = "<div class=\"w-sub\"><h4>" + wTH("ward.reconciliation", "Reconciliation: {activationId}", { activationId: esc(rec.activationId) }, "activationId") + "</h4>" +
         "<p>" + esc(rec.note || "") + "</p>" +
@@ -7871,7 +7944,9 @@
     var typed = screen === _typedScreen ? typedControls(el) : {};
     // The staff site's page language follows the picker; elsewhere (the StewardMD app) the page's own stays.
     if (G.WSQ && G.WSQ.state && typeof document !== "undefined") document.documentElement.lang = wLang();
+    whoScreen(screen);
     el.innerHTML = _render(st);
+    whoFetch();
     typedRestore(typed, el);
     _typedScreen = screen; _typedDrop = null;
     markShortcuts(el);
@@ -12123,6 +12198,8 @@
     var i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     /* LT-19: the discharge summary is a layer over the ward. Any other ward action means the person has
      * moved on, so the layer goes with it instead of staying on top and taking their next click. */
+    // Who a name on the screen is: says so and changes nothing, so it never closes a layer it was clicked inside.
+    if (cmd === "whoinfo") { whoInfo(arg); return; }
     if (cmd !== "summary") closeSummaryLayer();
     if (cmd === "close") { close(); return; }
     if (cmd === "chartcat") { chartNavShow(arg); return; }

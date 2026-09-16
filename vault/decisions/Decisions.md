@@ -6591,3 +6591,17 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   the alert-cover tests pin cannot survive a single plural form, and no other language pluralises like English.
 - Icon ligature names (card/icuHead/wsBlock's icon argument) are never catalog words: a translated "verified" put
   Telugu where the Material Symbols glyph belongs.
+## 2026-09-16 A chart names the staff member: name and employee id, resolved at display
+- Owner: "timeline shows by clinician account it should state his/her employee id and name ... so everyone knows who
+  gave the drugs who asked to give". Records keep the actor id they were written with; nothing is rewritten.
+- Source: the hospital's member row gains `displayName` and `employeeId` (Admin Center > Staff; a name that is a
+  mobile number, an email or an account id is refused). An employee id falls back to the staff sign-in ID the hospital
+  chose; an email, a mobile number or an account id is never shown as either.
+- One lookup (functions/_wardsynq/staff-identity.js) serves `GET /ward/actor-names` (audit screen, staff.admin) and the
+  new `GET /ward/staff-identities` (emr.view, or order.read / lab.result / transfusion.issue): name, employeeId, role
+  only, this hospital's members only (disabled members included), one audit row `staff.identity.read` per request.
+- ward.js `staffWho(id, storedName)` is the one renderer: "Name (EMP-1042)", full identity in the title and on a
+  click or tap (`whoinfo`). All ids named on a screen go in one request per screen; the fallback shows while it runs,
+  and a failed lookup says "identity could not be loaded". The live staff record wins over a name stored at write
+  time. Timeline events carry `byId`/`labelBase` (and `signedById`, `witnessId`); the round carries `witnessedBy` and
+  `statusBy`.

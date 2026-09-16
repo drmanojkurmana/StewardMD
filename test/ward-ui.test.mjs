@@ -231,7 +231,8 @@ test("critical results sit ABOVE everything else on the chart, and say whose cal
   // An open loop can be acknowledged; one already acknowledged names who saw it and offers nothing.
   assert.match(html, /data-w-act="ack:l1"/);
   assert.ok(!html.includes('data-w-act="ack:l2"'));
-  assert.match(html, /acknowledged by cfa:doc/);
+  // Owner 2026-09-16: never the raw account id; while the staff record loads the chart says "a clinician account" (ward-staff-identity-view.test.mjs).
+  assert.match(html, /acknowledged by <span class="w-who">a clinician account<\/span>/);
   assert.match(html, /It is not a way to clear the list\./);
 });
 
@@ -555,7 +556,7 @@ test("THE CO-SIGN WORKLIST SAYS WHO WROTE IT, HOW LONG IT HAS WAITED, AND WHAT I
     mine: [],
   };
   const html = W._render(Object.assign({}, base, { cosign: q }));
-  assert.match(html, /written by cfa:locum/, "the author is named, not replaced by the signer");
+  assert.match(html, /written by <span class="w-who">a clinician account<\/span>/, "the author is named (resolved to a person at display), not replaced by the signer");
   assert.match(html, /waiting 3 h 15 min/);
   /* The gap travels WITH the note to the person being asked to put their name to it: a signature
    * does not fill in a missing plan, and the signer should know before they sign, not after. */
