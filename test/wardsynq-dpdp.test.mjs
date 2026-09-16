@@ -188,6 +188,15 @@ test("pure: a breach closes only once CERT-In, the patients and (where it applie
   assert.equal(applyBreachUpdate(spdi, { event: "close" }, "u", now).breach.state, "closed");
 });
 
+test("pure: s.5(2) re-notice: a patient whose last acknowledgement predates commencement is listed; one acknowledged since is not", async () => {
+  const { renoticeDue } = await import("../functions/_wardsynq/dpdp.js");
+  const acks = [
+    { patientId: "p1", acknowledgedAt: "2027-01-10T10:00:00.000Z" },
+    { patientId: "p2", acknowledgedAt: "2027-02-01T10:00:00.000Z" }, { patientId: "p2", acknowledgedAt: "2027-05-20T10:00:00.000Z" },
+  ];
+  assert.deepEqual(renoticeDue(acks, "2027-05-13").map((x) => x.patientId), ["p1"]);
+});
+
 test("pure: children's data (r.10): care is exempt, a non-care purpose for a minor needs a verified parent, only from commencement", () => {
   const atMs = Date.parse("2027-06-01T00:00:00Z");
   const law = lawOn(null, atMs), early = lawOn(null, Date.parse("2026-09-17T00:00:00Z"));
@@ -202,7 +211,7 @@ test("pure: children's data (r.10): care is exempt, a non-care purpose for a min
   assert.equal(guardianGate({ givenBy: "legal-guardian", law, minor: false, appointment: { source: "court" } }).satisfied, false);
 });
 
-test("pure: retention (H.4): ten years after the last in-patient stay, a child's until 21 at least; an MLC entry holds the record", () => {
+test("pure: retention (H.4): ten years after the last in-patient stay, a child's until 21 at least; an MLC entry holds the record", async () => {
   const facts = { patient: { dob: "2020-03-01" }, encounters: [{ class: "IPD", status: "finished", periodStart: "2024-01-01T00:00:00Z", periodEnd: "2024-01-05T00:00:00Z" }],
     registers: { mlc: [{ id: "reg-mlc-1", serial: "MLC/2024/00001", eventDate: "2024-01-01", recordedAt: "2024-01-01T00:00:00Z", fields: { status: "open" } }], formf: [], mtp: [] }, documents: [], consents: [], placed: [] };
   const map = retentionMap(facts, null, Date.parse("2026-09-17T00:00:00Z"));
@@ -215,6 +224,12 @@ test("pure: retention (H.4): ten years after the last in-patient stay, a child's
   assert.equal(holds.length, 1);
   assert.equal(holds[0].auto, true);
   assert.equal(activeHolds([{ id: holds[0].id, state: "lifted" }], facts.registers.mlc).length, 0);
+  // H.4.8: inactive three years after death, never destroyed for that reason.
+  const { retentionView } = await import("../functions/_wardsynq/retention.js");
+  const dead = retentionView({ ...facts, patient: { dob: "1950-01-01", deceased: { at: "2022-01-01T00:00:00Z" } } }, null, Date.parse("2026-09-17T00:00:00Z"));
+  assert.equal(dead.deceased.inactiveFrom.slice(0, 10), "2025-01-01");
+  assert.equal(dead.deceased.inactive, true);
+  assert.ok(dead.retained.length > 0, "an inactive record keeps its retention classes");
 });
 
 test("no session: 401 on /ward/data-requests and /ward/privacy-notice", async () => {
@@ -392,6 +407,10 @@ test("portal: the patient reads the notice, acknowledges it and makes a request;
 
 test("breach under DPDP (applied early): 72-hour Board report from awareness, all five patient headings, no close until everyone is told, not-a-breach needs a second person", async () => {
   seedHospital(IN_FORCE);
+  await seed({ resourceType: "PrivacyAcknowledgement", id: "ack-old", patientId: "pat-old", noticeId: "wsq-privacy-notice-en", noticeVersion: 1, language: "en", acknowledgedAt: "2025-10-01T10:00:00.000Z" });
+  const queue = await as(DPO, "/ward/data-requests?orgId=" + ORG);
+  assert.equal(queue.renotice.open, true, "s.5(2) re-notice list opens at commencement");
+  assert.deepEqual(queue.renotice.patients.map((x) => x.patientId), ["pat-old"]);
   const detectedAt = new Date(Date.now() - 5 * 3600000).toISOString(), awareAt = new Date(Date.now() - 4 * 3600000).toISOString();
   const b = await as(DPO, "/ward/data-breach", "POST", { orgId: ORG, detectedAt, awareAt, description: "Ward laptop stolen with an unencrypted census sheet", affectedCount: 40 });
   assert.equal(b.__status, 200, JSON.stringify(b));

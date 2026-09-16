@@ -8329,6 +8329,12 @@
     "site.gov.lh.placed2": "Legal hold placed.",
     "site.gov.lh.liftPrompt": "The reference to the disposal of the matter (judgment, closure order, withdrawal letter):",
     "site.gov.lh.lifted": "Legal hold lifted.",
+    "site.gov.rn.failed": "The list of patients due a fresh notice could not be read. This is not the same as there being none.",
+    "site.gov.rn.title": "Fresh notice due (DPDP Act s.5(2))",
+    "site.gov.rn.count": "{n} patients were last given the notice before {date}. Give each the current notice when they are next seen.",
+    "site.gov.rn.none": "No patient's last notice predates DPDP commencement.",
+    "site.gov.ret.inactive": "Inactive since {date}: three years after death. The record is kept, never destroyed for that reason.",
+    "site.gov.ret.inactiveFrom": "Becomes inactive on {date}, three years after death. The record is kept.",
     /* end site pages keys */
   };
 

@@ -98,6 +98,18 @@
       '<p class="quiet">' + esc(T(c, "site.gov.law.dayNote", "The gazette is dated 13 November 2025 and was published on the 14th; the earlier day is counted. This is legal research awaiting a practising lawyer's review, not legal advice.")) + "</p></div>";
   }
 
+  /* Act s.5(2): patients given the notice before DPDP commencement are given a fresh one. Before commencement the list is
+   * not open; a failed read says so and never looks like nobody. */
+  function renoticeHtml(c, rn) {
+    var esc = c.esc;
+    if (rn === false) return '<div class="msg err">' + esc(T(c, "site.gov.rn.failed", "The list of patients due a fresh notice could not be read. This is not the same as there being none.")) + "</div>";
+    if (!rn || !rn.open) return "";
+    return '<div class="card"><h2>' + esc(T(c, "site.gov.rn.title", "Fresh notice due (DPDP Act s.5(2))")) + "</h2>" +
+      (rn.patients.length ? "<p>" + esc(T(c, "site.gov.rn.count", "{n} patients were last given the notice before {date}. Give each the current notice when they are next seen.", { n: rn.patients.length, date: rn.from })) + '</p><ul class="quiet">' +
+        rn.patients.slice(0, 50).map(function (p) { return "<li>" + EN(c, esc(p.patientId)) + " &middot; " + esc(dt(p.lastAcknowledgedAt)) + "</li>"; }).join("") + "</ul>"
+        : '<p class="quiet">' + esc(T(c, "site.gov.rn.none", "No patient's last notice predates DPDP commencement.")) + "</p>") + "</div>";
+  }
+
   /* ---------------------------------------------------------------- data principal requests */
   function clocksHtml(c, k) {
     var esc = c.esc, d = (k && k.responseDays) || {}, src = (k && k.responseSource) || {}, law = (k && k.law) || {};
@@ -189,7 +201,7 @@
       if (s.data === null) h = loading(c, T(c, "site.gov.req.loading", "Loading data requests..."));
       else if (s.data === false) h = failHtml(c, T(c, "site.gov.req.loadFailed", "Data requests could not be loaded. This is not the same as there being none:"), s.fail);
       else {
-        h = lawHtml(c, s.data.law) + clocksHtml(c, s.data.clocks) +
+        h = lawHtml(c, s.data.law) + renoticeHtml(c, s.data.renotice) + clocksHtml(c, s.data.clocks) +
           '<div class="card"><h2>' + esc(T(c, "site.gov.req.fileTitle", "Record a request")) + '</h2>' +
           '<p class="quiet">' + esc(T(c, "site.gov.req.copiesNote", "A request for copies of medical records by the patient, an authorised attendant or a legal authority is recorded as a release of information on the patient's chart, where its 72-hour clock runs (IMC Regulations 2002 reg 1.3.2).")) + '</p><div class="row">' +
           '<label class="f"><span>' + esc(T(c, "site.gov.req.mrn", "MR number")) + '</span><input id="gReqMrn" autocapitalize="characters" spellcheck="false"></label>' +
@@ -463,6 +475,8 @@
         h += '<div class="card"><h2>' + esc(T(c, "site.gov.ret.patient", "This patient's records")) + "</h2>" +
           (d.holds.length ? holdsHtml(c, d.holds, d.patientId) : '<p class="quiet">' + esc(T(c, "site.gov.lh.none", "No legal hold is in force.")) + "</p>") +
           (d.retained.length ? retainedHtml(c, d.retained) : '<p class="quiet">' + esc(T(c, "site.gov.ret.noneYet", "No records in a retention class yet.")) + "</p>") +
+          (d.deceased ? '<p class="quiet">' + esc(d.deceased.inactive ? T(c, "site.gov.ret.inactive", "Inactive since {date}: three years after death. The record is kept, never destroyed for that reason.", { date: dt(d.deceased.inactiveFrom) })
+            : T(c, "site.gov.ret.inactiveFrom", "Becomes inactive on {date}, three years after death. The record is kept.", { date: dt(d.deceased.inactiveFrom) })) + "</p>" : "") +
           '<h3>' + esc(T(c, "site.gov.lh.placeTitle", "Place a legal hold")) + '</h3><div class="row">' +
           '<label class="f"><span>' + esc(T(c, "site.gov.lh.reason", "Reason")) + '</span><select id="gLhReason">' + opts(HOLD_REASONS, function (x) { return esc(holdReasonLabel(c, x)); }) + "</select></label>" +
           '<label class="f"><span>' + esc(T(c, "site.gov.lh.reference", "Case, complaint or request reference")) + '</span><input id="gLhRef"></label>' +

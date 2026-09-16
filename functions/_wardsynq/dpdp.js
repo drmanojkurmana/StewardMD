@@ -346,7 +346,18 @@ function withClock(r, nowMs) {
   return { ...r, overdue: open_ && Number.isFinite(due) ? nowMs > due : null };
 }
 
-/** ctx: { migration, dpdp, actorDeps, recordDeps } - the DPO's queue: requests, breaches and the clocks. */
+/** PURE. Patients whose every acknowledgement is dated before DPDP commencement (IST day), newest first. */
+function renoticeDue(acks, dpdpStart) {
+  const start = Date.parse(dpdpStart + "T00:00:00+05:30"), last = new Map();
+  for (const a of acks || []) {
+    if (!a || !a.patientId) continue;
+    const t = Date.parse(a.acknowledgedAt || "");
+    if (Number.isFinite(t) && (!last.has(a.patientId) || t > last.get(a.patientId))) last.set(a.patientId, t);
+  }
+  return [...last].filter(([, t]) => t < start).sort((a, b) => b[1] - a[1]).map(([patientId, t]) => ({ patientId, lastAcknowledgedAt: new Date(t).toISOString() }));
+}
+
+/** ctx: { migration, dpdp, actorDeps, recordDeps } - the DPO's queue: requests, breaches, the clocks and the re-notice list. */
 async function dpoQueue(request, env, ctx) {
   const base = baseOf(ctx);
   if (off(ctx)) return { ...base, ok: true, skipped: "off", requests: [], breaches: [] };
@@ -356,8 +367,16 @@ async function dpoQueue(request, env, ctx) {
   let reqs, breaches;
   try { [reqs, breaches] = await Promise.all([svc.list(REQ, LIMIT), svc.list(BREACH, LIMIT)]); }
   catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", requests: null, breaches: null }; }
+  const law = lawOn(ctx.dpdp, nowMs);
+  /* Act s.5(2): a patient whose notice was given before commencement gets a fresh one "as soon as it is reasonably
+   * practicable" (opinion A.4.4). Listed from commencement; before it the queue is not open. A failed read is false. */
+  let renotice = { open: law.dpdpInForce, from: law.dpdpStart, patients: [] };
+  if (law.dpdpInForce) {
+    try { renotice.patients = renoticeDue(await svc.list(ACK, LIMIT), law.dpdpStart); }
+    catch (e) { renotice = false; }
+  }
   return {
-    ...base, ok: true, clocks: clocksOf(ctx.dpdp, nowMs), law: lawOn(ctx.dpdp, nowMs),
+    ...base, ok: true, clocks: clocksOf(ctx.dpdp, nowMs), law, renotice,
     requests: reqs.filter(Boolean).map(strip).map((r) => withClock(r, nowMs)).sort((a, b) => String(b.receivedAt).localeCompare(String(a.receivedAt))),
     breaches: breaches.filter(Boolean).map(strip).map((b) => breachClock(b, nowMs)).sort((a, b) => String(b.detectedAt).localeCompare(String(a.detectedAt))),
     truncated: reqs.length >= LIMIT || breaches.length >= LIMIT,
@@ -572,7 +591,7 @@ async function portalDataRequest(ctx, session) {
 
 export {
   NOTICE, ACK, REQ, BREACH, REQUEST_KINDS, RECEIVED_VIA, ACK_METHODS, CARE_CONSENTS, OPTIONAL_IDENTIFIERS, RETENTION_REASON,
-  clocksOf, noticeInput, newRequest, applyBreachUpdate, withClock, breachClock, responseContactOf, NOTICE_PARTS, PRINCIPAL_HEADINGS, BOARD_HEADINGS, HEALTH_CONSENT_FORMS,
+  clocksOf, noticeInput, newRequest, applyBreachUpdate, withClock, breachClock, responseContactOf, renoticeDue, NOTICE_PARTS, PRINCIPAL_HEADINGS, BOARD_HEADINGS, HEALTH_CONSENT_FORMS,
   publishNotice, privacyNotices, acknowledgePrivacy, privacyAcknowledgements, fileDataRequest, actOnDataRequest, dpoQueue, dataHoldings,
   recordBreach, updateBreach, portalPrivacy, portalAcknowledge, portalDataRequest,
 };

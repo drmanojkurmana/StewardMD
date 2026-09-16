@@ -143,9 +143,14 @@ async function retentionFacts(svc, repo, tenantId, patientId) {
   return { patient, encounters: encounters || [], placed: placed || [], documents: documents || [], consents: consents || [], registers: { mlc: mlc || [], formf: formf || [], mtp: mtp || [] } };
 }
 
-/** PURE. The whole answer for one patient. */
+/** PURE. The whole answer for one patient. A deceased patient's record is marked inactive three years after death and never
+ * destroyed for that reason (MoHFW EHR Standards for India 2016, p.40; opinion H.4.8); the class rules still apply. */
 function retentionView(facts, cfg, nowMs) {
-  return { retained: retentionMap(facts, cfg, nowMs), holds: activeHolds(facts.placed, facts.registers.mlc), classes: Object.values(classesOf(cfg).classes) };
+  const died = msOf(facts.patient && facts.patient.deceased && facts.patient.deceased.at);
+  return {
+    retained: retentionMap(facts, cfg, nowMs), holds: activeHolds(facts.placed, facts.registers.mlc), classes: Object.values(classesOf(cfg).classes),
+    deceased: died == null ? null : { at: iso(died), inactiveFrom: iso(addYears(died, 3)), inactive: nowMs >= addYears(died, 3), rule: "EHR Standards for India 2016: records inactive three years after death, never destroyed for that reason" },
+  };
 }
 
 async function open(request, env, ctx, need) {
