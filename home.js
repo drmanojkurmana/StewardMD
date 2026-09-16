@@ -4423,8 +4423,8 @@
   }
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  // ── MaiK "Aurora" wordmark + icon set (design_handoff_maik_assistant/IMPLEMENTATION.md §2) ──
-  var MK_LOGO = function () { return (document.body.classList.contains("dark") || document.body.classList.contains("v3-dark")) ? "/maik-wordmark-white.png" : "/maik-wordmark-color.png"; };
+  var isDark = function () { return (document.body.classList.contains("dark") || document.body.classList.contains("v3-dark") || (document.documentElement && document.documentElement.classList.contains("dark")) || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)); };
+  var MK_LOGO = function () { return isDark() ? "/maik-wordmark-white.png" : "/maik-wordmark-color.png"; };
   var MK = {
     new: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
     close: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>',
@@ -4465,12 +4465,6 @@
         '<button class="maik-hd-btn" id="maikNew" type="button" title="New conversation" aria-label="New conversation">' + MK.new + '</button>' +
         '<button class="maik-hd-btn" id="maikClose" type="button" title="Close" aria-label="Close assistant">' + MK.close + '</button>' +
       '</div></div></div>' +
-      // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
-      // own weights, with no StewardMD sources, is simply untrue.
-      '<div class="maik-disc">' + MK.shield + '<span>' +
-        ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.discLabel) ? SMD_MAIK_ENGINE.discLabel()
-                                                               : "Grounded &middot; AI-generated, verify independently") +
-      '</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
       // ── Conversation sidebar (slide-in). History is stored ON-DEVICE only (privacy). ──
       '<div class="maik-side-wrap" id="maikSideWrap" hidden>' +
@@ -4499,6 +4493,12 @@
           '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '</button>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
+      // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
+      // own weights, with no StewardMD sources, is simply untrue.
+      '<div class="maik-disc">' + MK.shield + '<span>' +
+        ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.discLabel) ? SMD_MAIK_ENGINE.discLabel()
+                                                               : "Grounded &middot; AI-generated, verify independently") +
+      '</span></div>' +
       '</div>';
   }
   // ── MaiK "Aurora" styles: IMPLEMENTATION.md §1 verbatim, then a support block (retokenized to
@@ -5026,13 +5026,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function openAskAi(prefill, opts) {
     maikCSS(); maikSideCSS();
     var old = document.getElementById("maikSheet");
-    if (old) { var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
+    if (old) { if (old._maikAtmosphere) old._maikAtmosphere.destroy(); var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask Maik");
     sheet.classList.add("maik-polished");
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
+    try { if (window.SMD_MAIK_ATMOSPHERE) sheet._maikAtmosphere = SMD_MAIK_ATMOSPHERE.mount(sheet); } catch (e) {}
     document.body.classList.add("maik-open");
     // On-device model lifecycle: cancel any pending unload and warm the chosen local pack NOW, at the
     // moment a question is likely, instead of at app start (owner, 2026-09-04: no resident model when
@@ -5132,6 +5133,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var was = _maikBusy;
       _maikBusy = busy;
       maikBuddyBusy(!!busy);
+      if (sheet._maikAtmosphere) sheet._maikAtmosphere.setBusy(!!busy);
       if (was && !busy) { try { maikDocCue("done"); } catch (e) {} }   // wave the answer in
       if (!sendBtn) return;
       sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
@@ -5175,6 +5177,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Release the on-device model shortly after close (after any in-flight answer finishes; the
       // release never cuts a running generation), so it stops holding memory and heating the phone.
       try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.sheetClosed) SMD_MAIK_LOCAL.sheetClosed(); } catch (e) {}
+      if (sheet._maikAtmosphere) sheet._maikAtmosphere.destroy();
       maikBuddyUnmount();      // stop his timer — the sheet is about to be removed
       sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260);
     }

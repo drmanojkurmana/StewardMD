@@ -150,3 +150,9 @@ The original wordmark and engine selector share the first header row. Conversati
 The existing 107px solid StewardMD mark remains present throughout startup. Light and dark appearance each use the owner's selected animation below. Reduced-motion users see only the static mark.
 
 Selected modes: light uses variant 5, Quiet Focus (a gentle focus reveal followed by a masked silver reflection); dark uses variant 1, Pearl Circuit (a pearl-white contour over a pale teal mask that deepens as drawing completes). No background halo. Drawing completes in 1.12 seconds so the luminous finish appears before the personalised-screen transition at 1.56 seconds. Logo dimensions remain 107px; reduced-motion suppresses overlays and immediately shows the static mark. All motion waits for the native splash handoff class.
+
+## September 2026 atmospheric backgrounds
+
+`maik-atmosphere.js` / `.css` mount decorative Aurora and Letter Glitch canvases on the MaiK sheet. Light uses a pure white base and green/white/orange stops; Graphite uses saffron/green/navy. The existing `maikSetSendMode` controls the generation effect, including stop/error/completion. No prompts or patient text enter the renderer. Motion pauses when hidden, is static under Reduce Motion, and releases WebGL/listeners when the sheet closes or is replaced. The existing Medibot artwork, size, and animation remain unchanged. React Bits attribution is in `licenses/react-bits.txt`.
+
+The atmosphere refinement softens Aurora and gives messages and composer translucent, blurred surfaces. The engine-aware verification notice now sits beneath the composer in the footer; its wording still follows the selected engine. Original bot unchanged.
