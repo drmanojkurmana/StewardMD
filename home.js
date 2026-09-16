@@ -852,12 +852,17 @@
       var oncoOn = true; try { var qot = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; oncoOn = (qot != null) ? (qot === "1" || qot === "on" || qot === "true") : (localStorage.getItem("smd_onco_navigator") !== "0"); } catch (e) {}
       // OPD Queue is PUBLIC-RELEASE-GATE def:false; gate the hub tile too (fail-closed) so it is not a dead tile for reviewers.
       var queueOn = false; try { var qq = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (qq != null) queueOn = (qq === "1" || qq === "on" || qq === "true"); else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) queueOn = SMD_QUEUE_FLAGS.on(); else queueOn = (localStorage.getItem("smd_opd_queue") === "1"); } catch (e) {}
-      openSheet('<div class="hv-sh-t">Hospital</div><div class="hv-tiles">' +
-        (queueOn ? tile("list", "OPD Queue", "Smart out-patient queue", "opd") : "") +
-        tile("icu", "ICU &amp; Ward", "Critical care + inpatient", "icu", true) +
-        tile("ward", "Ward Sync", "Inpatient labs &amp; imaging (GHIS)", "ward") +
-        (oncoOn ? tile("ribbon", "OncoTree", "Cancer pathway navigator", "oncotree") : "") +
-        tile("pills", "Protocol", "Assign a treatment protocol", "protocol") +
+      openSheet('<div class="rds-hospital">' +
+        '<header class="rds-hospital-head"><div><div class="rds-hospital-brand">StewardMD</div>' +
+        '<h2 class="hv-sh-t" id="rdsHospitalTitle">Hospital</h2>' +
+        '<p class="rds-hospital-sub">Your clinical workspace</p></div>' +
+        '<button type="button" class="rds-hospital-close" aria-label="Close Hospital">' + svg("close") + '</button></header>' +
+        '<section aria-labelledby="rdsHospitalCare"><h3 id="rdsHospitalCare" class="rds-hospital-label">Patient care</h3><div class="hv-tiles">' +
+        tile("icu", "ICU &amp; Ward", "Critical care &amp; inpatients", "icu", true) +
+        (queueOn ? tile("list", "OPD Queue", "Outpatient visits", "opd") : "") +
+        tile("ward", "Ward Sync", "Labs &amp; imaging (GHIS)", "ward") +
+        tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
+        '</div></section><section aria-labelledby="rdsHospitalTreatment"><h3 id="rdsHospitalTreatment" class="rds-hospital-label">Treatment &amp; reference</h3>' +
         // The Rx pad was only reachable from inside a MaiK answer or a consult, so writing a
         // prescription for the patient in front of you meant going through something else first.
         // It belongs under the same roof as the other patient-facing tools.
@@ -865,10 +870,13 @@
           { label: "Create", act: "rx", pri: true },
           { label: "Verify", act: "rxverify" }
         ]) +
-        tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
+        '<div class="hv-tiles">' +
+        (oncoOn ? tile("ribbon", "OncoTree", "Cancer pathways", "oncotree") : "") +
+        tile("pills", "Protocol", "Treatment protocols", "protocol") +
         // Govt Schemes: same flag gate as the HOME_TOOLS tile (default OFF, ?gs=1 per device) - flag off = no tile.
         (govschemesOn() ? tile("hospital", "Scheme Search", "Package codes and rates", "govschemes") : "") +
         tile("search", "Search ICD", "ICD-10 / ICD-11 diagnosis codes", "icdsearch") +
+        '</div></section><div class="rds-hospital-connect">' +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         // Agent Connect: the doctor onboards their OWN hospital by signing in to its EMR themselves.
         // Same flag as the boot module (smd_connect_agent, default OFF) - the boot module owns that
@@ -876,7 +884,10 @@
         // without it and the flag logic is not duplicated here.
         ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
           ? tile("hospital", "Connect Hospital", "Onboard your hospital EMR", "agentconnect") : "") +
-        '</div>');
+        '</div></div>');
+      sheetEl().classList.add("rds-hospital-sheet");
+      sheetEl().setAttribute("aria-labelledby", "rdsHospitalTitle");
+      sheetEl().querySelector(".rds-hospital-close").addEventListener("click", closeSheet);
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
@@ -1185,6 +1196,16 @@
       ".hv-t2b.pri{background:var(--hp);border-color:var(--hp);color:#fff}",
       "@media (prefers-reduced-motion:no-preference){.hv-tile{animation:hvTileIn .3s cubic-bezier(.2,.7,.2,1) both}.hv-tile:nth-child(2){animation-delay:.05s}.hv-tile:nth-child(3){animation-delay:.1s}.hv-tile:nth-child(4){animation-delay:.15s}}",
       "@keyframes hvTileIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}",
+      // Hospital Soft Glass: one 12px grid, equal tile rows, full-width action bands.
+      // Scoped overrides preserve every other sheet and inherit the Graphite palette.
+      ".rds-hospital-sheet{background:var(--hpanel);background:linear-gradient(145deg,color-mix(in srgb,var(--hps) 46%,var(--hpanel)),var(--hpanel) 55%,color-mix(in srgb,var(--hbg) 85%,var(--hps)));border:1px solid var(--hbd);border-bottom:0;border-radius:28px 28px 0 0;overscroll-behavior:contain;scrollbar-width:thin}.rds-hospital-sheet .hv-sheet-wrap{max-width:520px;padding:8px 20px calc(24px + env(safe-area-inset-bottom))}",
+      ".rds-hospital-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 4px}.rds-hospital-brand{font:600 11px var(--hfont);letter-spacing:.12em;text-transform:uppercase;color:var(--hmut)}.rds-hospital .hv-sh-t{font:700 30px/1.15 var(--hfont);letter-spacing:-.035em;margin:6px 0}.rds-hospital-sub{font:400 13px/1.5 var(--hfont);color:var(--hmut);margin:0}.rds-hospital-close{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;padding:0;border:1px solid var(--hbd);border-radius:50%;background:var(--hpanel);color:var(--hmut);cursor:pointer}.rds-hospital-close svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round}",
+      ".rds-hospital-label{font:600 11px/1.4 var(--hfont);letter-spacing:.1em;text-transform:uppercase;color:var(--hmut);margin:24px 0 12px}.rds-hospital .hv-tiles{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:12px;margin:0}.rds-hospital .hv-tiles>.hv-tile:last-child:nth-child(odd){grid-column:1/-1}",
+      ".rds-hospital .hv-tile{box-sizing:border-box;min-width:0;min-height:136px;padding:16px;border:1px solid var(--hbd);border-radius:20px;background:var(--hpanel);background:color-mix(in srgb,var(--hpanel) 88%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--hink) 4%,transparent),0 4px 14px rgba(0,0,0,.025);color:var(--hink);animation:none;transition:transform .16s,box-shadow .16s,border-color .16s}.rds-hospital .hv-tile>svg{box-sizing:content-box;width:22px;height:22px;padding:9px;border-radius:12px;background:var(--hps);color:var(--hp);stroke-width:1.7;flex-shrink:0}.rds-hospital .hv-tile .tl{font:600 14px/1.35 var(--hfont);letter-spacing:-.01em;margin-top:12px}.rds-hospital .hv-tile .tc{font:400 12px/1.4 var(--hfont);color:var(--hmut);margin-top:4px}.rds-hospital .hv-tile.pri{background:var(--hps);background:color-mix(in srgb,var(--hps) 50%,var(--hpanel));border-color:var(--hbd)}.rds-hospital .hv-tile.pri>svg{background:var(--hpanel);color:var(--hp)}",
+      ".rds-hospital .hv-tile2{display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:12px;min-height:0;margin-bottom:12px}.rds-hospital .hv-tile2>svg{grid-column:1;grid-row:1/3}.rds-hospital .hv-tile2 .tl{grid-column:2;margin-top:0;align-self:end}.rds-hospital .hv-tile2 .tc{grid-column:2}.rds-hospital .hv-t2{grid-column:1/-1;gap:12px;margin-top:16px;padding:0}.rds-hospital .hv-t2b{min-height:44px;border-width:1px;border-radius:12px;font-weight:600}.rds-hospital .hv-t2b.pri{background:var(--hp);color:#fff}",
+      ".rds-hospital-connect{display:grid;gap:12px;margin-top:24px}.rds-hospital-connect .hv-tile{display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:12px;width:100%;min-height:0}.rds-hospital-connect .hv-tile>svg{grid-row:1/3}.rds-hospital-connect .hv-tile .tl{margin-top:0;align-self:end}.rds-hospital-connect .hv-tile .tc{grid-column:2}.rds-hospital button:focus-visible{outline:2px solid var(--hp);outline-offset:3px}.rds-hospital .hv-tile2:active{transform:none}",
+      "body.dark .rds-hospital .hv-t2b.pri,body.v3-dark .rds-hospital .hv-t2b.pri{color:var(--hbg)}",
+      "@media(hover:hover){.rds-hospital button.hv-tile:hover{border-color:var(--hp);box-shadow:0 6px 18px rgba(0,0,0,.07)}}@media(max-width:360px){.rds-hospital-sheet .hv-sheet-wrap{padding-left:16px;padding-right:16px}.rds-hospital .hv-tile{padding:14px}}@media(prefers-reduced-motion:reduce){.rds-hospital-sheet,.rds-hospital .hv-tile,.rds-hospital .hv-t2b{transition:none}.rds-hospital .hv-tile:active,.rds-hospital .hv-t2b:active{transform:none}}",
       // Customize-tools sheet (Add Tool): row toggles.
       ".hv-sub2{font:500 12.5px var(--hfont);color:var(--hmut);margin:-6px 0 14px}",
       ".hv-mi .rds-icon{font-size:22px;color:var(--hp);width:22px;text-align:center}",
@@ -2185,7 +2206,7 @@
     }
     return s;
   }
-  function openSheet(html) { var s = sheetEl(); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); document.body.classList.add("hv-sheet-open"); }
+  function openSheet(html) { var s = sheetEl(); s.classList.remove("rds-hospital-sheet"); s.removeAttribute("aria-labelledby"); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; s.scrollTop = 0; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); document.body.classList.add("hv-sheet-open"); }
   function closeSheet() { var s = sheetEl(); s.classList.remove("on"); document.getElementById("hvScrim").classList.remove("on"); document.body.classList.remove("hv-sheet-open"); }
 
   // ---- Knowledge Units: header chip + progress panel ----
