@@ -7125,6 +7125,8 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
 
 ## 2026-09-16 WHO growth tables: shipped with citation; LICENCE NEEDS A LEGAL CHECK before commercial release (branch gap-clinical)
 
+- **SUPERSEDED 2026-09-17** by "Growth charts use the CDC 2000 reference (public domain)" below: the WHO tables were removed.
+
 - **Licence (open question, owner/legal).** The task brief called the WHO growth LMS tables public domain. What was
   actually found: WHO publications are CC BY-NC-SA 3.0 IGO (non-commercial; commercial use and derivatives need
   WHO's permission, https://www.who.int/about/policies/publishing/copyright), and the tables were taken from WHO's
@@ -7183,3 +7185,110 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
 - **A code is attached only from the loaded set** (resolveCoding): problems/diagnoses with codeSystem snomed|icd-10|loinc,
   an operation booking (SurgicalCase.procedureCoding), a test order (ServiceRequest.standardCoding). The stored display is
   the set's. FHIR Condition/Procedure/ServiceRequest and the ABDM consultation record carry the coding when present.
+
+## 2026-09-17 Blood donor criteria: the stricter of WHO 2012 and the law of the hospital's country, per hospital stricter only (branch fix-donor-growth)
+
+- **Owner decision, corrected the same day by the legal review (section G).** The owner asked for international criteria
+  (WHO) instead of the unconfirmed secondary-source values. The legal review found that in India the donor criteria of the
+  Drugs and Cosmetics Rules 1945, Schedule F Part XII-B, "H. Criteria for Blood Donation" (substituted by G.S.R. 166(E),
+  11 March 2020) are licence conditions of a blood centre (r.122-P, r.122-O), so a WHO value looser than the Rule would breach
+  the licence. Rule: **each criterion in force is the stricter of WHO and the law**; a hospital may only make it stricter.
+- **Sources read, not assumed (2026-09-17).** WHO, Blood donor selection (2012), ISBN 978 92 4 154851 9, on NCBI Bookshelf
+  (ch. 4 NBK138219, ch. 6 NBK138208, ch. 7 NBK138223); no later WHO edition found. The gazette text of G.S.R. 166(E), items
+  1-104, from https://drugscontrol.py.gov.in/sites/default/files/GSR-166-E.pdf. Council of Europe (EDQM) Guide, 22nd ed.
+  (2025), standard 2.4.1.4, for the yearly whole blood maximum WHO does not set. Every value in
+  functions/_wardsynq/donor-criteria.js carries its WHO section or its item number.
+- **Resulting values in India:** age 18-65, first-time donors up to 60, apheresis 18-60, no physician's discretion past an
+  age limit (item 2); 45 kg for 350 mL, **more than** 55 kg for 450 mL (item 3, the old `>= 55` was a bug), 50 kg for apheresis;
+  Hb 12.5 women (item 9) and 13.0 men (WHO 4.6.1); 90/120 days (item 4); apheresis 28 days between platelet collections and
+  14 for plasma (WHO 4.6.2, stricter than the Rule's 48 h), at most 2 in 7 days and 24 in a year, 28 days after whole blood,
+  whole blood 28 days after apheresis or 90 if the red cells were not all returned (item 4); platelet count above 150 and
+  total protein above 60 g/L (WHO 4.10); BP 100-140/60-90, pulse 60-100 and regular, temperature measured (items 5-7).
+  Outside India: WHO values, CoE 6/4 donations a year, BP and pulse not checked unless the hospital sets a limit, and the
+  WHO physician's discretion for older donors (named on the record).
+- **Deferral table as data.** Each yes on the questionnaire is deferred against a condition (35 conditions, WHO and Rule
+  periods, the longer or permanent wins); the period is worked out from the date given, a longer typed period is allowed,
+  a shorter one never. Conditions with no fixed period (breastfeeding, minor illness in the Rule) need days typed.
+  Item 52 is kept as the Rule states (sub judice); changing it is a code release citing the amending notification.
+- **Temperature.** Item 7 says "Afebrile; 37 C/98.4 F". Read as normal body temperature, not a ceiling: febrile is WHO
+  4.5.2's more than 37.6 C, and a centre that reads 37.0 as the ceiling sets it on Admin. Flagged for the legal reviewer.
+- **Jurisdiction** = the hospital's region: India when the region is IN or not set (as the rest of WardSynQ reads it), none
+  for another country until its law is reviewed (`legalMinimums` is keyed by jurisdiction).
+- **Settings** live in `wardsynq.bloodDonorCriteria` (org whitelist), edited at Admin > Hospital > Blood donor selection
+  criteria through GET/POST /api/queue/org/blood-donor-criteria (staff.admin, audited by criterion name). Validated on save
+  and again on every read; a stored value that is looser is ignored.
+- **Not built:** double red cell apheresis, the Rule's pre-donation checks as separate hard gates (they are one question and
+  a condition with typed days), component shelf-life changes from the legal review (Schedule P was not read here), NAT,
+  pilot sample retention, the donor record 5-year retention rule.
+
+## 2026-09-17 Growth charts use the CDC 2000 reference (public domain); a hospital may load its own licensed WHO or IAP tables (branch fix-donor-growth)
+
+- **Owner decision: growth tables must permit commercial use.** The WHO Child Growth Standards tables shipped on
+  2026-09-16 (CC BY-NC-SA 3.0 IGO) were removed from the repository (wardsynq/data/who-growth-2006.json, who-growth-2007.json,
+  WHO-GROWTH-NOTICE.txt). They remain in git history before this commit; rewriting history was not done.
+- **Shipped instead: CDC 2000 growth charts, LMS data files** (wardsynq/data/cdc-growth-2000.json, 81 KB): wtageinf,
+  lenageinf, wtleninf, hcageinf (birth to 36 months), wtage, statage, bmiagerev (2 to 20 years), wtstat (weight-for-stature).
+  Only Sex, age/length/height, L, M and S are kept, values unchanged; the smoothed percentile columns are derivable.
+- **Licence verified from the publisher's own page.** CDC, Use of Agency Materials (cdc.gov/other/agencymaterials.html):
+  "Most of the information on the CDC and ATSDR websites is not subject to copyright, is in the public domain, and may be
+  freely used or reproduced without obtaining copyright permission", with four conditions: attribute CDC, state that use
+  does not imply endorsement by CDC/ATSDR/HHS/US Government, do not change substantive content, state the material is
+  available on the CDC website for no charge. The data page carries no copyright statement. The attribution and
+  non-endorsement statement are in the data file and on the chart's source line.
+- **CDC's WHO-based 0-24 month files (cdc.gov/growthcharts/who-data-files.htm) are NOT shipped.** The page states no licence
+  and the data are WHO's (CC BY-NC-SA 3.0 IGO); CDC's public-domain statement excludes material licensed from third parties.
+- **Retrieval.** cdc.gov refused automated downloads from this machine on 2026-09-17 (Akamai 403), so the eight CSVs were
+  taken from the Internet Archive captures of the same cdc.gov URLs (22 Nov 2025) and checked byte-identical to the 2021
+  captures (lenageinf.csv: 2021 capture has extra comparison columns; L, M, S identical). The Dec 2024 captures were truncated
+  and were not used. SHA-256 of each file is in the JSON.
+- **Method (wardsynq/wardsynq-growth.js), CDC's own:** LMS z and inverse as on the CDC data page; linear interpolation
+  between rows ("interpolation could be used"); no WHO |z| > 3 adjustment; age months = days / 30.4375; infant tables under
+  24 months and 2-20 year tables from 24 months; +/-0.8 cm length/height conversion and the modified z-score extreme-value
+  flags from CDC's SAS program page; BMI above P95 marked extendedBmiNotApplied (CDC 2022 extended BMI not implemented).
+  Corrected age for preterm infants unchanged. Chart centiles 3, 10, 25, 50, 75, 90, 97. Verified against CDC's worked
+  example (9-month boy: P5 7.90 kg, 9.7 kg = z 0.207, 58th centile) and several published percentiles.
+- **Hospital-licensed tables** (functions/_wardsynq/growth-tables.js), like code sets: Admin > FHIR > Growth charts, CSV
+  columns indicator, sex, x, l, m, s; method lms or who-restricted (WHO's adjustment on weight indicators); licence
+  confirmation recorded; GrowthTableImport + GrowthTableChunk records; withdraw writes a withdrawn version and the chart goes
+  back to CDC 2000. POST /api/queue/ward/growth-table-import (staff.admin), GET /api/queue/ward/growth-tables (emr.view).
+  GET /ward/growth returns `reference` (id, name, citation, licence, attribution) and the ward card names it.
+- **Not built:** CDC 2022 extended BMI-for-age; preterm charts (Fenton, INTERGROWTH-21st); recording length, height or head
+  circumference (still only weight is plotted).
+
+## 2026-09-17 Blood centre after collection follows Schedule F Part XII-B and Schedule P (legal opinion section G) (branch blood-legal)
+
+- **Source:** legal opinion 2026-09-17, section G (G.1 tables, G.5 requirements 3 to 8). Rules and citations are one pure
+  module, `functions/_wardsynq/blood-centre-rules.js`; `blood-bank.js` enforces them. This closes the "Not built" list of
+  the donor-criteria entry above, except what is listed below.
+- **Shelf life is computed, not typed.** Expiry = collection time + the Rules' shelf life for the component, the bag's
+  anticoagulant (whole blood ACD 21 days, CPDA 35, Schedule P item 7) and the additive (SAGM/ADSOL/NUTRICEL 42 days); FFP
+  and cryo one year, platelets 5 days, granulocytes 24 hours, an open-system pool 6 hours. An entered expiry may only be
+  earlier; a later one is refused. Red cells without an additive are capped at the whole blood limit (the opinion reads no
+  separate value). FFP frozen, and platelets separated from whole blood, within 6 hours of collection or refused. Storage
+  is recorded as the Rules' range, not free text. The donation records its anticoagulant and voluntary/replacement kind.
+- **Tests (heading K, L):** every result names its method; the irregular antibody screen is recorded (shown and printed,
+  not a release gate: the opinion names the field, not a hold); NAT is a hospital setting (not required by the Rules), and a
+  reactive NAT discards whether or not required. **Any reactive result in a donation's history keeps it reactive**: before
+  this, the latest result counted, so a retest could clear a reactive donation, contrary to the module header.
+- **Label:** printed from the unit's server record only when it may be issued, with every result, method, antibody screen
+  and the group colour (O blue, A yellow, B pink, AB white).
+- **Pooling:** one BloodUnit record naming its source units and donations; sources derive status "pooled". One group only.
+- **Samples:** `BloodSample` register; retain-until = 7 days (or the hospital's longer setting) after the last of the
+  covered units left (issued, discarded, expired); a discard before then is refused. Discard is a new version.
+- **Confidential (G.5.8):** `DonorNotification` (notified, counselled, referred) only for a reactive donation, blood
+  centre role only. `service.js BLOOD_CENTRE_ONLY` (BloodDonor, DonorScreening, BloodTestResult, DonorNotification,
+  BloodUnitEvent) is withheld from the change feed and from `/ward/record-detail` unless the reader's grant names the type:
+  a null read scope admitted every type, so any doctor or nurse could sync item 52 deferral reasons and HIV results. The
+  crossmatch gate says "not available", never "reactive". The Blood bank routes still read through list/get (gated by
+  transfusion.issue), so admin's null scope keeps the screen.
+- **Look-back (G.5.6):** derived on read: reactions on episodes traced unit -> donation -> donor; each reactive donation's
+  earlier donations from the same donor with their units' status and recipient MRN.
+- **Charges (G.5.7):** `_clinic_billing.js validateTariff` refuses a tariff line named as a price/cost/sale of blood or a
+  component. Only names are checked; NBTC rates are not encoded.
+- **Settings:** `wardsynq.bloodCentre` { natRequired, shelfHours (shorter only), sampleRetentionDays (>= 7),
+  recordRetentionYears (>= 5) }, Admin > Hospital, GET/POST /api/queue/org/blood-centre-settings (staff.admin, audited by
+  name). **Merge note:** branch legal-privacy adds `retention.js` with a "blood-centre" class of five years; after both merge,
+  recordRetentionYears should come from that class. Nothing in WardSynQ purges blood centre records today.
+- **Not built:** frozen red cells (storage -80 to -196 C, no shelf life in the opinion); donor consent form fields (not
+  listed in section G); bag batch and kit/reagent registers (heading L lists them, G.5 does not); a Medical Officer name on
+  screening (the signed-in actor is recorded); NBTC processing-charge rates; storage temperature logs.

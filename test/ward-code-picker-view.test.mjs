@@ -1,4 +1,5 @@
-/* test/ward-code-picker-view.test.mjs - the code picker in ward.js and the Code sets card on Admin > FHIR.
+/* test/ward-code-picker-view.test.mjs - the code picker in ward.js, the Code sets and Growth charts cards on Admin > FHIR, and
+ * the growth card naming the reference in use.
  *
  * The picker never shows loading, failed, "none loaded" or "no match" as the same thing, offers only the systems that
  * are loaded, and a picked code is sent with its system on a problem, an operation booking and a test order. The Admin
@@ -76,4 +77,41 @@ test("ADMIN code sets card on Admin > FHIR: loading, a failed list not read as n
   assert.match(text(html), /SNOMED CT affiliate licence \(in India, through NRCeS\)/);
   assert.match(text(card(c, { ok: true, systems: [] }, { ok: false, html: "Nothing was loaded: bad" })), /Nothing was loaded: bad/);
   assert.ok(read("wardsynq/site/pages/admin.js").includes('c.api("/ward/code-set-import", {'), "the card posts to the real import route");
+});
+
+test("ADMIN growth charts card on Admin > FHIR: loading, a failed read not taken as CDC in use, CDC 2000 or the hospital's tables in use, the licence to confirm", () => {
+  const win = { addEventListener() {} };
+  const doc = { readyState: "complete", getElementById: () => ({ innerHTML: "", querySelectorAll: () => [] }), createElement: () => ({ innerHTML: "" }), body: { appendChild() {} }, addEventListener() {} };
+  const ls = { getItem: () => null, setItem() {}, removeItem() {} };
+  const run = (src) => new Function("window", "document", "location", "localStorage", src)(win, doc, { hash: "", search: "" }, ls);
+  run(read("wardsynq/site/shell.js")); run(read("wardsynq/site/pages/admin.js"));
+  const c = { esc: win.WSQ.esc, ms: win.WSQ.ms }, card = win.WSQ._growthTablesHtml;
+  assert.match(card(c, null), /class="spin"/);
+  assert.match(text(card(c, { ok: false, error: "permission" })).replace(/&#39;/g, "'"), /could not be read\. Do not read this as the CDC reference in use\. permission/);
+  const cdc = text(card(c, { ok: true, inUse: "cdc2000", loaded: null }));
+  assert.match(cdc, /In use: CDC 2000 growth reference\./);
+  assert.match(cdc.replace(/&#39;/g, "'"), /holds a licence from the publisher of these growth tables/);
+  assert.doesNotMatch(card(c, { ok: true, inUse: "cdc2000", loaded: null }), /admGrowthWithdraw/);
+  const hosp = card(c, { ok: true, inUse: "hospital", loaded: { referenceName: "WHO Child Growth Standards 2006", count: 25000, importedAt: "2026-09-17T04:00:00.000Z", fileName: "who.csv" } });
+  assert.match(text(hosp).replace(/&#39;/g, "'"), /In use: this hospital.s tables, 25000 rows, loaded 2026-09-17T04:00:00\.000Z\. WHO Child Growth Standards 2006 \(who\.csv\)/);
+  assert.ok(hosp.includes('id="admGrowthWithdraw"') && hosp.includes('id="admGrowthFile" type="file"') && hosp.includes('id="admGrowthLicence" type="checkbox"') && hosp.includes('value="who-restricted"'));
+  const src = read("wardsynq/site/pages/admin.js");
+  assert.ok(src.includes('c.api("/ward/growth-tables" + q)') && src.includes('c.api("/ward/growth-table-import", {'), "the card reads and posts to the real routes");
+});
+
+test("WARD growth card names the reference in use: CDC 2000 with CDC's attribution, or the hospital's own tables by their name", () => {
+  const { W } = loadWard();
+  assert.ok(W && W._growthCard, "ward.js exposes the growth card for this test");
+  const line = (c) => ({ centile: c, points: [[0, 3 + c / 50], [30, 4 + c / 50]] });
+  const g = (reference) => ({ sex: "male", approxDob: false, gestationDays: null, lines: [3, 10, 25, 50, 75, 90, 97].map(line), notRecorded: [], reference,
+    measurements: [{ at: "2026-07-01T06:00:00.000Z", valueKg: 3.5, chronologicalDays: 20, plotDays: 20, corrected: false, result: { ok: true, reference: reference.id, z: 0.1, centile: 54, implausible: false } }] });
+  const cdc = W._growthCard({ growth: g({ id: "cdc2000", name: "CDC 2000 growth reference" }) });
+  assert.match(cdc, /Growth \(CDC 2000 growth reference\)/);
+  assert.match(cdc, /aria-label="Weight for age against the centiles 3, 10, 25, 50, 75, 90, 97 of the CDC 2000 growth reference\./);
+  assert.match(cdc, /Source: CDC\..*does not imply endorsement by CDC/);
+  assert.doesNotMatch(cdc, /WHO/);
+  const hosp = W._growthCard({ growth: g({ id: "hospital", name: "IAP 2015 <licensed>" }) });
+  assert.match(hosp, /Growth \(IAP 2015 &lt;licensed&gt;\)/, "the hospital's name is its data, escaped");
+  assert.match(hosp, /This hospital's own growth tables, loaded under its licence/);
+  assert.doesNotMatch(hosp, /Source: CDC/);
 });

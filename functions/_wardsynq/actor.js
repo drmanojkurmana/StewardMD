@@ -426,8 +426,9 @@ function grantForCaps(caps) {
    * else clinical, never a narrowing of what a doctor can already do. */
   if (has(CAPS.TRANSFUSION_ISSUE)) {
     /* The blood bank's own registers joined 2026-09-16 (blood-bank.js): donors, their screening, the donation, the
-     * mandatory tests, the units separated from it and what happened to each. None names a patient. */
-    const added = ["TransfusionEpisode", "BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent"];
+     * mandatory tests, the units separated from it and what happened to each. None names a patient. The sample
+     * register and a reactive donor's confidential notification joined 2026-09-17 (legal opinion G.5.5, G.5.8). */
+    const added = ["TransfusionEpisode", "BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent", "BloodSample", "DonorNotification"];
     const canRead = [...added, "Patient", "Encounter"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: added, basis: CAPS.TRANSFUSION_ISSUE };
     else grant = {

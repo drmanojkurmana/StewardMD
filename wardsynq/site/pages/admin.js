@@ -684,6 +684,91 @@
     draw(undefined);
     c.api("/org/clinical-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
   }
+  /* BLOOD DONOR CRITERIA (functions/_wardsynq/blood-bank.js, owner decision 2026-09-17). WHO 2012 by default; this
+   * hospital may only make a criterion stricter. The table is the blood bank page's own (WSQ._bloodbank), so both
+   * screens name each criterion and its source the same way. r: undefined = loading, null = could not be loaded (said,
+   * never drawn as the standard's values), else the server's { criteria, saved }; after a save, its read-back. */
+  function donorCriteriaHtml(c, r, msg) {
+    var esc = c.esc, B = WSQ._bloodbank;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.hospital.donor.title", "Blood donor selection criteria")) + "</h2>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.hospital.donor.loading", "Loading donor criteria...")) + "</p></div>";
+    if (!r || !B) return h + '<div class="msg err">' + esc(T(c, "site.admin.hospital.donor.loadFailed", "The donor criteria could not be loaded. Do not read this as the standard's values being in force.")) + "</div></div>";
+    return h + '<p class="quiet">' + esc(T(c, "site.admin.hospital.donor.intro", "The blood bank screens donors against the stricter of the WHO blood donor selection guidelines (2012) and the law of this hospital's country (in India, the Drugs and Cosmetics Rules 1945, Schedule F Part XII-B). A blood centre may apply a stricter rule here: each value can only be made stricter. Blank uses the standard.")) + "</p>" +
+      B.criteriaTableHtml(c, r.criteria, true, r.saved) +
+      '<button class="btn" id="donorCritSave" type="button">' + esc(T(c, "site.admin.hospital.donor.save", "Save donor criteria")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "") + "</div>";
+  }
+  WSQ._donorCriteriaHtml = donorCriteriaHtml;
+  /* BLOOD CENTRE SETTINGS (functions/_wardsynq/blood-centre-rules.js, legal opinion 2026-09-17 section G). Each may only
+   * be stricter than the Drugs and Cosmetics Rules: NAT required, shorter shelf lives, longer retention. r: undefined =
+   * loading, null = could not be loaded (said, never drawn as the Rules' values), else the server's { centre }. */
+  function bloodCentreHtml(c, r, msg) {
+    var esc = c.esc, B = WSQ._bloodbank;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.hospital.bloodCentre.title", "Blood centre: tests, shelf lives and retention")) + "</h2>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.hospital.bloodCentre.loading", "Loading blood centre settings...")) + "</p></div>";
+    if (!r || !r.centre || !B) return h + '<div class="msg err">' + esc(T(c, "site.admin.hospital.bloodCentre.loadFailed", "The blood centre settings could not be loaded. Do not read this as the Rules' values being in force.")) + "</div></div>";
+    var ce = r.centre, saved = ce.saved || {}, sh = saved.shelfHours || {};
+    var num = function (id, value, placeholder, label) { return '<label class="f"><span>' + esc(label) + '</span><input type="number" min="1" step="1" id="' + id + '" value="' + (value == null ? "" : esc(value)) + '" placeholder="' + esc(placeholder) + '"></label>'; };
+    return h + '<p class="quiet">' + esc(T(c, "site.admin.hospital.bloodCentre.intro", "The Drugs and Cosmetics Rules 1945 set these for a licensed blood centre. This hospital may only make them stricter: require NAT, shorten a shelf life, keep samples or records longer. Blank uses the Rules.")) + "</p>" +
+      '<label class="f"><span><input type="checkbox" id="bcNat"' + (ce.natRequired ? " checked" : "") + "> " + esc(T(c, "site.admin.hospital.bloodCentre.nat", "Require NAT on every donation before release")) + "</span></label>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.hospital.bloodCentre.natNote", "Not required by the Rules. Reports say the government declined to make NAT mandatory in March 2026; that is not confirmed from a primary text.")) + "</p>" +
+      '<div class="row">' + num("bcSample", saved.sampleRetentionDays, ce.sampleRetention.days, T(c, "site.admin.hospital.bloodCentre.sampleDays", "Days to keep pilot and recipient samples after issue")) +
+      num("bcRecords", saved.recordRetentionYears, ce.recordRetention.years, T(c, "site.admin.hospital.bloodCentre.recordYears", "Years to keep blood centre records")) + "</div>" +
+      "<h3>" + esc(T(c, "site.admin.hospital.bloodCentre.shelfHeading", "Shorter shelf lives (hours)")) + '</h3><div class="row">' +
+      ce.components.map(function (k) {
+        return '<label class="f"><span>' + B.componentWord(c, k.component) + ": " + esc(T(c, "site.admin.hospital.bloodCentre.shelfFor", "the Rules allow up to {limit}", { limit: B.shelfWords(c, k.longestHours) })) +
+          '</span><input type="number" min="1" step="1" data-shelf="' + esc(k.component) + '" value="' + (sh[k.component] == null ? "" : esc(sh[k.component])) + '" placeholder="' + esc(k.longestHours) + '"></label>';
+      }).join("") + "</div>" +
+      '<p class="quiet">' + esc(T(c, "site.blood.shelfUnconfirmed", "Not confirmed in the Rules as read, so not allowed here: a longer shelf life for fresh frozen plasma kept at -40 C or colder (one year is kept), and a separate shelf life for red cells without an additive solution (they keep no longer than whole blood in the same anticoagulant).")) + "</p>" +
+      '<button class="btn" id="bcSave" type="button">' + esc(T(c, "site.admin.hospital.bloodCentre.save", "Save blood centre settings")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "") + "</div>";
+  }
+  WSQ._bloodCentreHtml = bloodCentreHtml;
+  function wireBloodCentre(c) {
+    var box = document.getElementById("bloodCentreCard");
+    if (!box) return;
+    var draw = function (r, msg) {
+      box.innerHTML = bloodCentreHtml(c, r, msg);
+      var btn = document.getElementById("bcSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var v = function (id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; };
+        var shelf = {};
+        Array.prototype.forEach.call(box.querySelectorAll("[data-shelf]"), function (el) { var x = String(el.value || "").trim(); shelf[el.getAttribute("data-shelf")] = x === "" ? null : Number(x); });
+        var nat = document.getElementById("bcNat");
+        btn.disabled = true;
+        c.api("/org/blood-centre-settings", { orgId: c.state.orgId, settings: { natRequired: !!(nat && nat.checked), sampleRetentionDays: v("bcSample") === "" ? null : Number(v("bcSample")), recordRetentionYears: v("bcRecords") === "" ? null : Number(v("bcRecords")), shelfHours: shelf } }).then(function (x) {
+          if (!x || !x.ok) { btn.disabled = false; box.querySelector(".msg") && box.querySelector(".msg").remove(); box.insertAdjacentHTML("beforeend", '<div class="msg err">' + c.esc(T(c, "site.admin.hospital.donor.notSaved", "Nothing was saved.")) + " " + EN(c, c.esc(refusal(c, x))) + "</div>"); return; }
+          draw(x, { ok: true, html: c.esc(x.changed && x.changed.length ? T(c, "site.admin.hospital.bloodCentre.saved", "Saved. The server now holds the settings shown above.") : T(c, "site.admin.hospital.donor.savedNoChange", "Saved: nothing had changed.")) });
+          c.toast(T(c, "site.admin.hospital.bloodCentre.toast", "Blood centre settings saved."));
+        });
+      };
+    };
+    draw(undefined);
+    c.api("/org/blood-centre-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
+  }
+  function wireDonorCriteria(c) {
+    var box = document.getElementById("donorCritCard");
+    if (!box) return;
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    var draw = function (r, msg) {
+      box.innerHTML = donorCriteriaHtml(c, r, msg);
+      var btn = document.getElementById("donorCritSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var criteria = {};
+        Array.prototype.forEach.call(box.querySelectorAll("[data-crit]"), function (el) { var v = String(el.value || "").trim(); criteria[el.getAttribute("data-crit")] = v === "" ? null : Number(v); });
+        btn.disabled = true;
+        c.api("/org/blood-donor-criteria", { orgId: c.state.orgId, criteria: criteria }).then(function (x) {
+          if (!x || !x.ok) { btn.disabled = false; box.querySelector(".msg") && box.querySelector(".msg").remove(); box.insertAdjacentHTML("beforeend", '<div class="msg err">' + c.esc(T(c, "site.admin.hospital.donor.notSaved", "Nothing was saved.")) + " " + EN(c, c.esc(refusal(c, x))) + "</div>"); return; }
+          draw(x, { ok: true, html: x.changed && x.changed.length ? c.esc(T(c, "site.admin.hospital.donor.saved", "Saved. The server now holds the criteria shown above.")) : c.esc(T(c, "site.admin.hospital.donor.savedNoChange", "Saved: nothing had changed.")) });
+          c.toast(T(c, "site.admin.hospital.donor.toast", "Donor criteria saved."));
+        });
+      };
+    };
+    draw(undefined);
+    c.api("/org/blood-donor-criteria" + q).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
+  }
   /* CRITICAL RESULT ALERTS TO PHONES (S3 P0). Whether a critical result is pushed through the StewardMD
    * app, who each level tells, the SMS fallback when no phone confirms, and - loudest - every open result
    * that told nobody. Everything shown comes from GET /ward/alert-status, so this card never has its own
@@ -835,7 +920,7 @@
       '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.countryNote", "The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.")) + '</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.hospital.needsWardsynq", "Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.")) + '</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
       /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
       (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
         ? '<div class="card"><h2>' + c.esc(T(c, "site.admin.hospital.removeTitle", "Remove this hospital")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.hospital.removeIntro", "Removes it from every hospital list. Patient records, documents and the audit trail are kept.")) + '</p>' +
@@ -858,6 +943,7 @@
       });
     };
     wireClinicalSettings(c);
+    wireDonorCriteria(c); wireBloodCentre(c);
     wireNoteWriters(c);
     wirePrintLang(c);
     wireLabelSizes(c);
@@ -2245,12 +2331,68 @@
     });
   }
 
+  /* GROWTH CHARTS (functions/_wardsynq/growth-tables.js). The chart uses the CDC 2000 reference, which is public domain;
+   * a hospital licensed for WHO or IAP tables loads their LMS rows here with a licence confirmation, and may withdraw them.
+   * r: null = loading; a failed read says so and is never shown as "CDC 2000 in use". */
+  function growthTablesHtml(c, r, msg) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + c.ms("monitoring") + " " + esc(T(c, "site.admin.growth.title", "Growth charts")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.growth.intro", "Children's growth charts use the CDC 2000 growth reference, which is in the public domain. A hospital licensed to use other growth tables, such as WHO or IAP, can load their L, M and S values here, and the charts then use them.")) + "</p>";
+    if (r === null) return h + '<span class="spin"></span></div>';
+    if (!r || !r.ok) return h + '<div class="msg err">' + esc(T(c, "site.admin.growth.listFailed", "The growth tables could not be read. Do not read this as the CDC reference in use.")) + " " + EN(c, esc(refusal(c, r))) + "</div></div>";
+    var l = r.loaded;
+    h += "<p>" + (r.inUse === "hospital"
+      ? esc(T(c, "site.admin.growth.inUseHospital", "In use: this hospital's tables, {n} rows, loaded {at}.", { n: l.count, at: l.importedAt })) + " " + EN(c, esc(l.referenceName + (l.fileName ? " (" + l.fileName + ")" : ""))) +
+        ' <button type="button" class="btn ghost" id="admGrowthWithdraw">' + esc(T(c, "site.admin.growth.withdraw", "Stop using these tables")) + "</button>"
+      : esc(T(c, "site.admin.growth.inUseCdc", "In use: CDC 2000 growth reference."))) + "</p>" +
+      '<h3>' + esc(T(c, "site.admin.growth.loadTitle", "Load licensed growth tables")) + "</h3>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.growth.name", "Name of the reference")) + '</span><input id="admGrowthName" maxlength="120"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.admin.growth.method", "How z-scores are worked out")) + '</span><select id="admGrowthMethod"><option value="lms">' + esc(T(c, "site.admin.growth.methodLms", "LMS formula (CDC, IAP)")) + '</option><option value="who-restricted">' + esc(T(c, "site.admin.growth.methodWho", "LMS with WHO's adjustment beyond 3 SD (WHO tables)")) + "</option></select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.admin.growth.file", "CSV or tab-separated file")) + '</span><input id="admGrowthFile" type="file" accept=".csv,.txt,.tsv,text/csv,text/plain"></label></div>' +
+      '<p class="quiet">' + esc(T(c, "site.admin.growth.columns", "The first row names the columns indicator, sex, x, l, m and s. indicator is wfa (weight for age), lhfa (length or height for age), wfl (weight for length, under 2 years), wfh (weight for height, from 2 years), bmi or hcfa (head circumference); sex is 1 or 2; x is the age in months, or the length or height in cm for wfl and wfh. One bad row loads nothing.")) + "</p>" +
+      '<label class="f"><span><input id="admGrowthLicence" type="checkbox"> ' + esc(T(c, "site.admin.growth.licence", "This hospital holds a licence from the publisher of these growth tables (for example WHO or the Indian Academy of Paediatrics) that permits their use in this software for patient care.")) + "</span></label>" +
+      '<button type="button" class="btn" id="admGrowthLoad">' + esc(T(c, "site.admin.growth.load", "Load tables")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "");
+    return h + "</div>";
+  }
+  WSQ._growthTablesHtml = growthTablesHtml;
+  function renderGrowthTables(c, holder, msg) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId), esc = c.esc;
+    holder.innerHTML = growthTablesHtml(c, null);
+    var fail = function (text) { renderGrowthTables(c, holder, { ok: false, html: text }); };
+    var answer = function (okText) { return function (x) { if (x && x.ok) renderGrowthTables(c, holder, { ok: true, html: okText(x) }); else fail(esc(T(c, "site.admin.growth.notLoaded", "Nothing was changed:")) + " " + EN(c, esc((x && x.detail) || refusal(c, x)))); }; };
+    return c.api("/ward/growth-tables" + q).then(function (r) {
+      holder.innerHTML = growthTablesHtml(c, r || false, msg);
+      var wd = document.getElementById("admGrowthWithdraw"), btn = document.getElementById("admGrowthLoad");
+      if (wd) wd.onclick = function () {
+        wd.disabled = true;
+        c.api("/ward/growth-table-import", { orgId: c.state.orgId, withdraw: true }).then(answer(function () { return esc(T(c, "site.admin.growth.withdrawn", "The charts now use the CDC 2000 growth reference.")); }));
+      };
+      if (!btn) return;
+      btn.onclick = function () {
+        var file = document.getElementById("admGrowthFile").files[0], name = String(document.getElementById("admGrowthName").value || "").trim();
+        if (!name) return fail(esc(T(c, "site.admin.growth.needName", "Name the reference first.")));
+        if (!file) return fail(esc(T(c, "site.admin.growth.pickFile", "Choose the file to load.")));
+        if (!document.getElementById("admGrowthLicence").checked) return fail(esc(T(c, "site.admin.growth.confirmLicence", "Confirm this hospital's licence for these tables before loading them.")));
+        btn.disabled = true;
+        var reader = new FileReader();
+        reader.onerror = function () { fail(esc(T(c, "site.admin.growth.readFailed", "The file could not be read. Nothing was loaded."))); };
+        reader.onload = function () {
+          c.api("/ward/growth-table-import", { orgId: c.state.orgId, referenceName: name, method: document.getElementById("admGrowthMethod").value, csv: String(reader.result || ""), fileName: file.name, licenceConfirmed: true })
+            .then(answer(function (x) { return esc(T(c, "site.admin.growth.loaded", "Loaded {n} rows. The charts now use these tables.", { n: x.count })); }));
+        };
+        reader.readAsText(file);
+      };
+    }, function () { holder.innerHTML = growthTablesHtml(c, false); });
+  }
+
   function renderFhir(c, body) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
     body.innerHTML = fhirHtml(c, null, null);
     return Promise.all([c.api("/ward/fhir/metadata" + q), c.api("/ward/fhir/ValueSet" + q)]).then(function (res) {
-      body.innerHTML = '<div id="admCodeSets"></div>' + fhirHtml(c, res[0] || {}, res[1] || {});
+      body.innerHTML = '<div id="admCodeSets"></div><div id="admGrowthTables"></div>' + fhirHtml(c, res[0] || {}, res[1] || {});
       renderCodeSets(c, document.getElementById("admCodeSets"));
+      renderGrowthTables(c, document.getElementById("admGrowthTables"));
       body.querySelectorAll("[data-vs-expand]").forEach(function (b) {
         b.onclick = function () {
           var id = b.getAttribute("data-vs-expand"), out = document.getElementById("admVs-" + id);

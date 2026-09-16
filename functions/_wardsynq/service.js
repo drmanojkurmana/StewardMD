@@ -83,6 +83,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* The blood bank's registers (blood-bank.js). A unit's status (quarantine, available, reserved, issued, discarded,
    * expired) is derived from its tests, its events and the transfusion episodes that name it, never stored. */
   "BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent",
+  /* Pilot and recipient samples with their discard log, and the confidential notification of a reactive donor
+   * (legal opinion 2026-09-17, G.5.5 and G.5.8). */
+  "BloodSample", "DonorNotification",
   /* Hospital support services, 2026-09-16. A diet order is a clinical order and versioned like one; a
    * meal round is the kitchen's prepared/delivered mark for one patient at one meal. CSSD keeps its set
    * master, its steriliser loads with their indicator results, and one cycle per trip of a set through
@@ -329,6 +332,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* A hospital-loaded SNOMED CT / ICD-10 / LOINC release (code-sets.js): the import record (who, when, how many,
    * the licence confirmation) and the codes in chunks. Hospital-wide, no patientId. Loaded from Admin. */
   "CodeSetImport", "CodeSetChunk",
+  /* A hospital's own licensed growth reference tables (growth-tables.js): the import record (reference name, method,
+   * licence confirmation, withdrawn or not) and the LMS rows in chunks. Hospital-wide, no patientId. Loaded from Admin. */
+  "GrowthTableImport", "GrowthTableChunk",
   /* Antenatal history and gestation (Task 2.4): gravida, para, LMP/EDD, risk factors. One current
    * episode per patient, versioned like everything else - a delivery is the fact that changes para,
    * recorded through migrate-maternity.js's recordDelivery(), never edited by hand elsewhere. */
@@ -484,7 +490,18 @@ const RESOURCE_TYPES = Object.freeze([
   "DhsAssessment", "SavedReport",
 ]);
 
-const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
+/* BLOOD CENTRE ONLY (legal opinion 2026-09-17, G.5.8): donor deferral reasons (item 52 among them), infection results
+ * and the notification of a reactive donor are visible to blood centre staff only. A null read scope admits every type,
+ * so these are withheld from the change feed and the record door unless the reader's grant NAMES the type (the
+ * blood_bank role's does). The Blood bank routes, gated by transfusion.issue, still read them through list and get. */
+const BLOOD_CENTRE_ONLY = Object.freeze(["BloodDonor", "DonorScreening", "BloodTestResult", "DonorNotification", "BloodUnitEvent"]);
+function bloodCentreOnlyReadable(actor, resourceType) {
+  if (!BLOOD_CENTRE_ONLY.includes(resourceType)) return true;
+  const read = actor && actor.scope ? actor.scope.read : null;
+  return Array.isArray(read) && read.includes(resourceType);
+}
+
+const MODE =Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
 
 /** Provenance value the model stamps on records WardSynQ itself originated. */
 const NATIVE_SYSTEM = "wardsynq-native";
@@ -814,7 +831,8 @@ class RecordService {
     /* The statutory registers (registers.js) share this store as internal types and are NEVER handed out here: a null
      * read scope admits every type, and a Form F, an MTP case or a medico-legal case must reach nobody except
      * through its own register's route. */
-    const page = { records: raw.records.filter((r) => canRead(this.actor, r.resourceType) && !String(r.resourceType || "").startsWith("_wardsynq_register")), cursor: raw.cursor };
+    /* The blood centre's confidential registers likewise reach only a grant that names them (bloodCentreOnlyReadable). */
+    const page = { records: raw.records.filter((r) => canRead(this.actor, r.resourceType) && !String(r.resourceType || "").startsWith("_wardsynq_register") && bloodCentreOnlyReadable(this.actor, r.resourceType)), cursor: raw.cursor };
     await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, ...(newest ? { newest: true, before: Number(opts.before) || null } : {}), cursor: page.cursor, withheld: raw.records.length - page.records.length }, resourceCounts: { records: page.records.length } }));
     return page;
   }
@@ -1015,7 +1033,7 @@ class RecordService {
 }
 
 export {
-  RESOURCE_TYPES, MODE, NATIVE_SYSTEM, isExternalRecord,
+  RESOURCE_TYPES, BLOOD_CENTRE_ONLY, bloodCentreOnlyReadable, MODE, NATIVE_SYSTEM, isExternalRecord,
   AuthorityError, RecordRequestError, IdempotencyConflictError,
   TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
 };

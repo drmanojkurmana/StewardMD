@@ -1,70 +1,66 @@
-/* wardsynq/wardsynq-growth.js — WHO growth z-scores and centiles, and corrected age for preterm infants.
+/* wardsynq/wardsynq-growth.js — growth z-scores and centiles by the LMS method, and corrected age for preterm infants.
  *
- * THE METHOD IS WHO'S OWN, NOT A RE-DERIVATION. Every rule below is read from WHO's official R code,
- * and each function names the file it follows:
- *   anthro (0 to 5 years, WHO Child Growth Standards 2006), github.com/WorldHealthOrganization/anthro
- *     R/z-score-helper.R       compute_zscore, compute_zscore_adjusted, round_up, adjust_lenhei,
- *                              apply_zscore_and_growthstandards, anthro_zscore_adjusted
- *     R/z-score.R              anthro_zscores: height measured under 9 months is implausible
- *     R/z-score-weight-for-age.R, -length-for-age.R, -bmi-for-age.R, -head-circumference-for-age.R
- *     R/z-score-weight-for-lenhei.R   0.1 cm interpolation, 45-110 cm lying / 65-120 cm standing
- *     R/utils.R, R/anthro-package.R   age in months = days / 30.4375
- *   anthroplus (5 to 19 years, WHO 2007 reference), github.com/WorldHealthOrganization/anthroplus
- *     R/zscores.R              zscore_indicator: month interpolation, 60 <= months < 121 (weight)
- *                              or < 229 (height, BMI)
+ * WHICH REFERENCE. By default the CDC 2000 growth charts, wardsynq/data/cdc-growth-2000.json: a United States Government
+ * work in the public domain, with its citation, sources, CDC's attribution and non-endorsement statement inside the file
+ * (owner decision 2026-09-17, vault/decisions/Decisions.md). A hospital that holds its own licence for other tables (WHO,
+ * IAP) loads them on Admin > FHIR > Growth charts (functions/_wardsynq/growth-tables.js), and hospitalReference() turns
+ * those rows into the same shape, so the chart uses them. The WHO Child Growth Standards tables shipped before 2026-09-17
+ * were removed from the repository: CC BY-NC-SA 3.0 IGO does not permit commercial use.
  *
- * WHICH INDICATORS GET THE RESTRICTED ADJUSTMENT. WHO applies its |z| > 3 adjustment (distance
- * beyond the 3 SD line measured in units of the 2-to-3 SD gap) to weight-for-age, weight-for-length,
- * weight-for-height and BMI-for-age, because those distributions are skewed in the tails. It does
- * NOT apply it to length/height-for-age or head circumference-for-age. This file does exactly that.
+ * THE METHOD IS CDC'S, as its data page states it (https://www.cdc.gov/growthcharts/cdc-data-files.htm, read 2026-09-17):
+ *   z = ((X/M)^L - 1) / (L S) when L is not 0, z = ln(X/M) / S when L is 0; the value at z is M (1 + L S z)^(1/L), or
+ *   M exp(S z). "Age is listed at the half month point for the entire month ... To obtain L, M, and S values at finer age
+ *   or length/stature intervals interpolation could be used." This file interpolates linearly between table rows.
+ *   There is NO restricted |z| > 3 adjustment in CDC's method: that is WHO's (anthro), applied here only to a hospital's
+ *   own tables loaded with the method "who-restricted", on the same four indicators WHO applies it to.
+ * CDC's SAS program page (https://www.cdc.gov/growth-chart-training/hcp/computer-programs/sas.html, read 2026-09-17):
+ *   age in months is days / 30.4375; height is recumbent length under 24 months and standing height from 24 months, and
+ *   "If standing height was measured for children under 24 months of age, you should add 0.8 cm ... If recumbent length
+ *   was measured for children >= 24 months, subtract 0.8 cm"; extreme values are flagged on the modified z-score (half the
+ *   distance between 0 and +2, or 0 and -2, z-scores as the unit): weight-for-age below -5 or above 8, height-for-age
+ *   below -5 or above 4, weight-for-height below -4 or above 8, BMI below -4 or above 8, head circumference below -5 or
+ *   above 5. BMI above the 95th centile: CDC's extended BMI-for-age method (2022) is not implemented, and the result says so.
  *
- * TABLE CHOICE. The 2006 standards for age under 60 months (days / 30.4375 < 60, anthro's
- * valid_age), the 2007 reference from 60 months (anthroplus's lower bound). WHO publishes no head
- * circumference or weight-for-length/height reference past 5 years, and no weight-for-age past
- * 121 months; those are refused, not extrapolated.
+ * TABLES. Under 24 months the birth-to-36-months tables (recumbent length), from 24 months the 2-to-20-years tables
+ * (stature); head circumference to 36 months; weight-for-length (45 to 103.5 cm) under 24 months and weight-for-stature
+ * (77 to 121.5 cm) from 24 months. Outside a table the answer is a refusal, never an extrapolation.
  *
- * WHAT A REFUSAL LOOKS LIKE. Unknown sex, an unknown or negative age, a value that is not a positive
- * number, or an age or length outside the table: the result is {ok: false, code, reason}, never a
- * number. A centile nobody can compute must not look like one.
+ * WHAT A REFUSAL LOOKS LIKE. Unknown sex, an unknown or negative age, a value that is not a positive number, or an age or
+ * length outside the table: {ok: false, code, reason}, never a number. A centile nobody can compute must not look like one.
  *
- * CORRECTED AGE. Conventional rule, stated here once: a baby born before 37 completed weeks is
- * plotted at corrected age = chronological age minus (40 weeks minus gestational age at birth),
- * until 24 months chronological age, then at chronological age. Gestational age unknown means NO
- * correction, and the result says so. A corrected age before term (below zero) is refused: the WHO
- * standards start at a term birth and are not a preterm chart.
+ * CORRECTED AGE. Conventional rule, stated here once: a baby born before 37 completed weeks is plotted at corrected age =
+ * chronological age minus (40 weeks minus gestational age at birth), until 24 months chronological age, then at
+ * chronological age. Gestational age unknown means NO correction, and the result says so. A corrected age before term
+ * (below zero) is refused: these references start at a term birth and are not a preterm chart.
  *
- * DATA AND LICENCE. The LMS tables are wardsynq/data/who-growth-2006.json and who-growth-2007.json,
- * built from WHO's data-raw/growthstandards/*.txt; the citation, source and licence text travel
- * inside each file and in wardsynq/data/WHO-GROWTH-NOTICE.txt. The licence for commercial use is an
- * open question (vault/decisions/Decisions.md).
- *
- * ROUNDING. z is rounded to 2 decimals as WHO does (round(z, 2)); JavaScript rounds an exact half
- * up where R rounds to even, a difference only at the third decimal's exact .5.
- *
- * STATUS: IMPLEMENTED and TESTED against published WHO values. NOT clinically validated.
+ * STATUS: IMPLEMENTED and TESTED against values CDC publishes. NOT clinically validated.
  *
  * node --test test/wardsynq-growth.test.mjs
  */
 
-import WHO2006 from "./data/who-growth-2006.json";
-import WHO2007 from "./data/who-growth-2007.json";
+import CDC_DATA from "./data/cdc-growth-2000.json";
 
-const DAYS_PER_MONTH = 30.4375;                 // anthro R/anthro-package.R ANTHRO_DAYS_OF_MONTH
+const DAYS_PER_MONTH = 30.4375;                 // CDC SAS program page: days / 30.4375
 const INDICATORS = Object.freeze(["wfa", "lhfa", "wfl", "wfh", "bmi", "hcfa"]);
+/* WHO's restricted adjustment, for a hospital's tables loaded as "who-restricted" only (anthro R/z-score-helper.R). */
 const ADJUSTED = Object.freeze({ wfa: true, wfl: true, wfh: true, bmi: true, lhfa: false, hcfa: false });
-/* Implausibility flags, anthro R/z-score-*.R flag_threshold and anthroplus R/zscores.R flag_scores. */
-const FLAG = Object.freeze({ wfa: [-6, 5], lhfa: [-6, 6], wfl: [-5, 5], wfh: [-5, 5], bmi: [-5, 5], hcfa: [-5, 5] });
+/* CDC's extreme-value cut-offs on the modified z-score (SAS program page, Table 2). */
+const CDC_EXTREME = Object.freeze({ wfa: [-5, 8], lhfa: [-5, 4], wfl: [-4, 8], wfh: [-4, 8], bmi: [-4, 8], hcfa: [-5, 5] });
+/* WHO's implausibility flags on z (anthro R/z-score-*.R), for a hospital's "who-restricted" tables. */
+const WHO_FLAG = Object.freeze({ wfa: [-6, 5], lhfa: [-6, 6], wfl: [-5, 5], wfh: [-5, 5], bmi: [-5, 5], hcfa: [-5, 5] });
 const PRETERM_BELOW_WEEKS = 37;
 const CORRECT_UNTIL_MONTHS = 24;
-const CHART_CENTILES = Object.freeze([3, 15, 50, 85, 97]);
+const LENGTH_UNTIL_MONTHS = 24;
+const CHART_CENTILES = Object.freeze([3, 10, 25, 50, 75, 90, 97]);   // the smoothed percentiles CDC tabulates, 5 and 95 aside
+const METHODS = Object.freeze(["lms", "who-restricted"]);
 
-/** anthro R/utils.R round_up: halves round up. */
-function roundUp(x) { const f = Math.floor(x); return x - f >= 0.5 ? f + 1 : f; }
-
-/** anthro R/z-score-helper.R compute_zscore. L = 0 is the log limit (no WHO table row has it). */
+/** CDC data page: the LMS z-score. */
 function zscoreLms(y, l, m, s) { return l === 0 ? Math.log(y / m) / s : (Math.pow(y / m, l) - 1) / (s * l); }
 
-/** anthro R/z-score-helper.R compute_zscore_adjusted. */
+/** CDC data page: the measurement at a given z (the inverse LMS transform), for centile lines. */
+function valueAtZ(z, l, m, s) { return l === 0 ? m * Math.exp(s * z) : m * Math.pow(1 + l * s * z, 1 / l); }
+
+/** WHO anthro R/z-score-helper.R compute_zscore_adjusted: beyond |z| 3, distance in units of the 2-to-3 SD gap. */
 function zscoreAdjusted(y, l, m, s) {
   const sd = (z) => valueAtZ(z, l, m, s);
   const z = zscoreLms(y, l, m, s);
@@ -73,8 +69,10 @@ function zscoreAdjusted(y, l, m, s) {
   return z;
 }
 
-/** The measurement at a given z (the inverse LMS transform), for drawing centile lines. */
-function valueAtZ(z, l, m, s) { return l === 0 ? m * Math.exp(s * z) : m * Math.pow(1 + l * s * z, 1 / l); }
+/** CDC SAS program page: the modified z-score, half the distance from 0 to +/-2 z as the unit. */
+function modifiedZ(y, l, m, s) {
+  return y >= m ? (y - m) / ((valueAtZ(2, l, m, s) - m) / 2) : (y - m) / ((m - valueAtZ(-2, l, m, s)) / 2);
+}
 
 /* Standard normal CDF and its inverse. erf by Abramowitz and Stegun 7.1.26 (error below 1.5e-7),
  * ample for a centile shown to one decimal. */
@@ -83,118 +81,115 @@ function normalCdf(z) {
   const e = 1 - t * (0.254829592 + t * (-0.284496736 + t * (1.421413741 + t * (-1.453152027 + t * 1.061405429)))) * Math.exp(-z * z / 2);
   return z >= 0 ? (1 + e) / 2 : (1 - e) / 2;
 }
-function zForCentile(c) {                      // bisection on normalCdf; only used for the five chart lines
+function zForCentile(c) {                      // bisection on normalCdf; only used for the chart lines
   let lo = -8, hi = 8;
   for (let i = 0; i < 80; i++) { const mid = (lo + hi) / 2; if (normalCdf(mid) * 100 < c) lo = mid; else hi = mid; }
   return (lo + hi) / 2;
 }
 
-const index = new Map();
-/** Rows keyed by integer age (days or months) or by length in tenths of a cm. */
-function rowsOf(ref, indicator, sex) {
-  const key = `${ref}:${indicator}:${sex}`;
-  if (!index.has(key)) {
-    const t = (ref === "who2006" ? WHO2006 : WHO2007).indicators[indicator];
-    const m = new Map();
-    if (t) for (const r of t[sex]) m.set(Math.round(r[0] * (t.unit_x === "cm" ? 10 : 1)), r);
-    index.set(key, m);
-  }
-  return index.get(key);
-}
-
 const refuse = (code, reason) => ({ ok: false, code, reason });
 
-/** Which reference applies, and the L, M, S for this age (and length, for weight-for-length). */
-function lmsFor(indicator, sex, ageDays, lenheiCm) {
+/* A reference: { id, name, method, positionOffsetCm, info, tables: { indicator: [segment] } }; a segment is
+ * { x: "months" | "cm", ageFromMonths, ageToMonths, male: [[x, L, M, S]], female: [...] } with rows sorted by x. */
+const CDC2000 = Object.freeze({
+  id: "cdc2000", name: CDC_DATA.name, method: "lms", positionOffsetCm: 0.8,
+  info: Object.freeze({ id: "cdc2000", name: CDC_DATA.name, citation: CDC_DATA.citation, source: CDC_DATA.source, licence: CDC_DATA.licence, attribution: CDC_DATA.attribution, method: "lms" }),
+  tables: CDC_DATA.indicators,
+});
+
+/**
+ * A hospital's own tables as a reference. rows: [[indicator, "male"|"female", x, L, M, S]] (x in months, or cm for wfl
+ * and wfh). No length/height conversion is assumed for another publisher's tables: the position is flagged as recorded.
+ */
+function hospitalReference({ name, method, rows, info }) {
+  const tables = {};
+  for (const [ind, sex, x, l, m, s] of rows || []) {
+    const seg = tables[ind] || (tables[ind] = [{ x: ind === "wfl" || ind === "wfh" ? "cm" : "months", male: [], female: [] }]);
+    seg[0][sex].push([x, l, m, s]);
+  }
+  for (const [ind, [seg]] of Object.entries(tables)) {
+    for (const sex of ["male", "female"]) seg[sex].sort((a, b) => a[0] - b[0]);
+    if (ind === "wfl") { seg.ageFromMonths = 0; seg.ageToMonths = LENGTH_UNTIL_MONTHS; }
+    else if (ind === "wfh") { seg.ageFromMonths = LENGTH_UNTIL_MONTHS; seg.ageToMonths = Infinity; }
+    else {
+      const xs = seg.male.concat(seg.female).map((r) => r[0]);
+      seg.ageFromMonths = Math.min(...xs); seg.ageToMonths = Math.max(...xs);
+    }
+  }
+  const m = METHODS.includes(method) ? method : "lms";
+  return { id: "hospital", name, method: m, positionOffsetCm: 0, info: { ...(info || {}), id: "hospital", name, method: m }, tables };
+}
+
+/** L, M, S at x by linear interpolation between the rows either side; null outside the table. */
+function interpolate(rows, x) {
+  if (!rows || !rows.length || !(x >= rows[0][0] && x <= rows[rows.length - 1][0])) return null;
+  let lo = 0, hi = rows.length - 1;
+  while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (rows[mid][0] <= x) lo = mid; else hi = mid; }
+  const a = rows[lo], b = rows[hi];
+  if (x === a[0] || a === b) return { l: a[1], m: a[2], s: a[3] };
+  if (x === b[0]) return { l: b[1], m: b[2], s: b[3] };
+  const f = (x - a[0]) / (b[0] - a[0]);
+  return { l: a[1] + f * (b[1] - a[1]), m: a[2] + f * (b[2] - a[2]), s: a[3] + f * (b[3] - a[3]) };
+}
+
+/** Which table applies, and the L, M, S for this age (and length or height, for weight-for-length/height). */
+function lmsFor(indicator, sex, ageDays, lenheiCm, ref = CDC2000) {
   if (!INDICATORS.includes(indicator)) return refuse("UNKNOWN_INDICATOR", `unknown growth indicator ${indicator}`);
-  if (sex !== "male" && sex !== "female") return refuse("SEX_UNKNOWN", "sex is not recorded as male or female, so no WHO reference can be chosen");
+  if (sex !== "male" && sex !== "female") return refuse("SEX_UNKNOWN", "sex is not recorded as male or female, so no growth reference can be chosen");
   if (typeof ageDays !== "number" || !Number.isFinite(ageDays) || ageDays < 0) return refuse("AGE_UNKNOWN", "the age is not established");
   const months = ageDays / DAYS_PER_MONTH;
-
-  if (months < 60) {
-    // anthro: 0 to 5 years, WHO Child Growth Standards 2006.
-    const day = roundUp(ageDays);
-    if (indicator === "wfl" || indicator === "wfh") {
-      // anthro R/z-score-weight-for-lenhei.R: the table follows the age (lying under 731 days), and the
-      // L, M, S are interpolated between the two 0.1 cm rows either side.
-      const lying = day < 731;
-      const ind = lying ? "wfl" : "wfh";
-      const [min, max] = lying ? [45, 110] : [65, 120];
-      if (!(typeof lenheiCm === "number" && lenheiCm >= min && lenheiCm <= max)) {
-        return refuse("OUT_OF_RANGE", `weight-for-${lying ? "length" : "height"} covers ${min} to ${max} cm`);
-      }
-      const low = Math.trunc(lenheiCm * 10), upp = Math.trunc(lenheiCm * 10 + 1);
-      const diff = (lenheiCm - low / 10) / 0.1;
-      const rows = rowsOf("who2006", ind, sex), a = rows.get(low), b = rows.get(upp);
-      if (!a) return refuse("OUT_OF_RANGE", "no WHO row for this length");
-      if (diff > 0 && !b) return refuse("OUT_OF_RANGE", "no WHO row for this length");
-      const lerp = (i) => (diff > 0 ? a[i] + diff * (b[i] - a[i]) : a[i]);
-      return { ok: true, reference: "who2006", indicator: ind, l: lerp(1), m: lerp(2), s: lerp(3) };
-    }
-    const r = rowsOf("who2006", indicator, sex).get(day);
-    if (!r) return refuse("OUT_OF_RANGE", "no WHO row for this age");
-    return { ok: true, reference: "who2006", indicator, l: r[1], m: r[2], s: r[3] };
-  }
-
-  // anthroplus: 5 to 19 years, WHO 2007 reference, R/zscores.R zscore_indicator.
-  if (indicator === "hcfa" || indicator === "wfl" || indicator === "wfh") {
-    return refuse("OUT_OF_RANGE", "WHO publishes this indicator for children under 5 years only");
-  }
-  const upper = indicator === "wfa" ? 121 : 229;
-  if (!(months >= 60 && months < upper)) {
-    return refuse("OUT_OF_RANGE", indicator === "wfa" ? "WHO weight-for-age stops at 10 years" : "the WHO reference stops at 19 years");
-  }
-  const low = Math.trunc(months), upp = Math.trunc(months + 1), diff = months - low;
-  const rows = rowsOf("who2007", indicator, sex), a = rows.get(low), b = rows.get(upp);
-  if (!a || (diff > 0 && !b)) return refuse("OUT_OF_RANGE", "no WHO row for this age");
-  const lerp = (i) => (diff > 0 ? a[i] + diff * (b[i] - a[i]) : a[i]);
-  return { ok: true, reference: "who2007", indicator, l: lerp(1), m: lerp(2), s: lerp(3) };
+  const byLength = indicator === "wfl" || indicator === "wfh";
+  const ind = byLength ? (months < LENGTH_UNTIL_MONTHS ? "wfl" : "wfh") : indicator;
+  const segs = (ref.tables && ref.tables[ind]) || [];
+  const seg = segs.find((s, i) => months >= s.ageFromMonths && (months < s.ageToMonths || (i === segs.length - 1 && months <= s.ageToMonths)));
+  if (!seg) return refuse("OUT_OF_RANGE", `${ref.name} has no ${ind} table for this age`);
+  if (byLength && !(typeof lenheiCm === "number" && lenheiCm > 0)) return refuse("VALUE_INVALID", "a length or height is needed");
+  const lms = interpolate(seg[sex], byLength ? lenheiCm : months);
+  if (!lms) return refuse("OUT_OF_RANGE", byLength ? `${ref.name} ${ind} covers other lengths or heights` : `${ref.name} ${ind} does not cover this age`);
+  return { ok: true, reference: ref.id, indicator: ind, ...lms };
 }
 
 /**
- * anthro R/z-score-helper.R adjust_lenhei and R/z-score.R: all z-scores are length-based under 731
- * days and height-based from 731 days, so a standing height under 731 days gains 0.7 cm and a lying
- * length from 731 days loses 0.7 cm. A standing height under 9 months is implausible and is not
- * converted (WHO sets the position to missing). position: "lying" | "standing" | null (not recorded).
+ * CDC SAS program page: length under 24 months, height from 24 months, so a standing height under 24 months gains the
+ * reference's offset (0.8 cm for CDC) and a recumbent length from 24 months loses it. position: "lying" | "standing" |
+ * null (not recorded, stated as assumed).
  */
-function standardLenhei(lenheiCm, ageDays, position) {
-  const day = roundUp(ageDays);
-  if (position === "standing" && ageDays / DAYS_PER_MONTH < 9) return { cm: lenheiCm, positionImplausible: true, positionAssumed: false };
-  if (position === "standing" && day < 731) return { cm: lenheiCm + 0.7, positionImplausible: false, positionAssumed: false };
-  if (position === "lying" && day >= 731) return { cm: lenheiCm - 0.7, positionImplausible: false, positionAssumed: false };
-  return { cm: lenheiCm, positionImplausible: false, positionAssumed: position !== "lying" && position !== "standing" };
+function standardLenhei(lenheiCm, ageDays, position, ref = CDC2000) {
+  const under = ageDays / DAYS_PER_MONTH < LENGTH_UNTIL_MONTHS, off = ref.positionOffsetCm || 0;
+  if (position === "standing" && under) return { cm: lenheiCm + off, positionAssumed: false };
+  if (position === "lying" && !under) return { cm: lenheiCm - off, positionAssumed: false };
+  return { cm: lenheiCm, positionAssumed: position !== "lying" && position !== "standing" };
 }
 
 /**
- * One measurement's z-score and centile.
+ * One measurement's z-score and centile against a reference (CDC 2000 unless a hospital's).
  * @param {{indicator: string, sex: string, ageDays: number, value: number, lenheiCm?: number, position?: string}} p
  *   value: kg (wfa, wfl, wfh), cm (lhfa, hcfa) or kg/m2 (bmi); lenheiCm for weight-for-length/height.
  */
-function growthZ(p) {
+function growthZ(p, ref = CDC2000) {
   p = p || {};
   if (!(typeof p.value === "number" && Number.isFinite(p.value) && p.value > 0)) return refuse("VALUE_INVALID", "the measurement is not a positive number");
-  let value = p.value, lenhei = p.lenheiCm, positionNote = null;
-  if (p.indicator === "lhfa" || p.indicator === "wfl" || p.indicator === "wfh") {
+  let value = p.value, lenhei = p.lenheiCm, position = null;
+  if (["lhfa", "wfl", "wfh"].includes(p.indicator) && typeof p.ageDays === "number" && p.ageDays >= 0) {
     const raw = p.indicator === "lhfa" ? p.value : p.lenheiCm;
-    if (!(typeof raw === "number" && raw > 0) || !(typeof p.ageDays === "number" && p.ageDays >= 0)) {
-      if (p.indicator !== "lhfa") return refuse("VALUE_INVALID", "a length or height is needed");
-    } else {
-      positionNote = standardLenhei(raw, p.ageDays, p.position || null);
-      if (p.indicator === "lhfa") value = positionNote.cm; else lenhei = positionNote.cm;
+    if (typeof raw === "number" && raw > 0) {
+      position = standardLenhei(raw, p.ageDays, p.position || null, ref);
+      if (p.indicator === "lhfa") value = position.cm; else lenhei = position.cm;
     }
   }
-  const lms = lmsFor(p.indicator, p.sex, p.ageDays, lenhei);
+  const lms = lmsFor(p.indicator, p.sex, p.ageDays, lenhei, ref);
   if (!lms.ok) return lms;
-  const raw = ADJUSTED[p.indicator] ? zscoreAdjusted(value, lms.l, lms.m, lms.s) : zscoreLms(value, lms.l, lms.m, lms.s);
+  const raw = ref.method === "who-restricted" && ADJUSTED[lms.indicator] ? zscoreAdjusted(value, lms.l, lms.m, lms.s) : zscoreLms(value, lms.l, lms.m, lms.s);
   if (!Number.isFinite(raw)) return refuse("OUT_OF_RANGE", "no z-score can be computed for this value");
   const z = Math.round(raw * 100) / 100;
-  const [lo, hi] = FLAG[p.indicator];
+  let implausible = false;
+  if (ref.id === "cdc2000") { const mz = modifiedZ(value, lms.l, lms.m, lms.s), [lo, hi] = CDC_EXTREME[lms.indicator]; implausible = mz < lo || mz > hi; }
+  else if (ref.method === "who-restricted") { const [lo, hi] = WHO_FLAG[lms.indicator]; implausible = z < lo || z > hi; }
   return {
     ok: true, reference: lms.reference, indicator: lms.indicator, z,
     centile: Math.round(normalCdf(raw) * 1000) / 10,
-    implausible: z < lo || z > hi,
-    positionAssumed: !!(positionNote && positionNote.positionAssumed),
-    positionImplausible: !!(positionNote && positionNote.positionImplausible),
+    implausible, positionAssumed: !!(position && position.positionAssumed),
+    ...(ref.id === "cdc2000" && lms.indicator === "bmi" && raw > zForCentile(95) ? { extendedBmiNotApplied: true } : {}),
   };
 }
 
@@ -218,16 +213,16 @@ function correctedAge(chronologicalDays, gestationalAgeDays) {
 }
 
 /**
- * The centile lines (3, 15, 50, 85, 97) for an age-based indicator between two ages, sampled at
- * `points` ages. A point with no reference is left out, never extrapolated.
+ * The centile lines for an age-based indicator between two ages, sampled at `points` ages. A point with no reference
+ * row is left out, never extrapolated.
  */
-function centileLines(indicator, sex, fromDays, toDays, points) {
+function centileLines(indicator, sex, fromDays, toDays, points, ref = CDC2000) {
   const n = Math.max(2, points || 40), out = [];
   for (const c of CHART_CENTILES) {
     const z = zForCentile(c), pts = [];
     for (let i = 0; i < n; i++) {
       const d = fromDays + ((toDays - fromDays) * i) / (n - 1);
-      const lms = lmsFor(indicator, sex, d);
+      const lms = lmsFor(indicator, sex, d, undefined, ref);
       if (lms.ok) pts.push([Math.round(d * 10) / 10, Math.round(valueAtZ(z, lms.l, lms.m, lms.s) * 1000) / 1000]);
     }
     out.push({ centile: c, points: pts });
@@ -235,13 +230,8 @@ function centileLines(indicator, sex, fromDays, toDays, points) {
   return out;
 }
 
-const REFERENCES = Object.freeze({
-  who2006: { citation: WHO2006.citation, source: WHO2006.source, licence: WHO2006.licence },
-  who2007: { citation: WHO2007.citation, source: WHO2007.source, licence: WHO2007.licence },
-});
-
 export {
-  DAYS_PER_MONTH, INDICATORS, ADJUSTED, CHART_CENTILES, PRETERM_BELOW_WEEKS, CORRECT_UNTIL_MONTHS, REFERENCES,
-  roundUp, zscoreLms, zscoreAdjusted, valueAtZ, normalCdf, zForCentile, lmsFor, standardLenhei,
-  growthZ, correctedAge, centileLines,
+  DAYS_PER_MONTH, INDICATORS, ADJUSTED, CDC_EXTREME, CHART_CENTILES, PRETERM_BELOW_WEEKS, CORRECT_UNTIL_MONTHS, METHODS, CDC2000,
+  zscoreLms, zscoreAdjusted, valueAtZ, modifiedZ, normalCdf, zForCentile, interpolate, lmsFor, standardLenhei,
+  growthZ, correctedAge, centileLines, hospitalReference,
 };

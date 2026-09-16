@@ -46,6 +46,11 @@ export function rupees(paise) { return "₹" + (Math.round(paise || 0) / 100).to
 // Validate a tariff (price-catalog) item before save. Price is integer paise.
 export function validateTariff(item) {
   if (!item || !String(item.name || "").trim()) return { ok: false, error: "name_required" };
+  /* Blood is not for sale (DCGI advisory, January 2024; legal opinion 2026-09-17 G.1 and G.5.7): only processing charges at
+   * the NBTC rates the hospital enters. A line priced as the blood itself is refused by its name. */
+  if (/\b(price|cost|sale|selling)\s+(of\s+)?(a\s+|one\s+)?(blood|whole blood|red cells?|packed (red )?cells?|plasma|platelets?|cryo(precipitate)?)\b|\b(blood|plasma|platelets?)\s+(unit\s+)?(price|cost|sale)\b/i.test(String(item.name))) {
+    return { ok: false, error: "blood_not_for_sale", detail: "Blood is not for sale: a blood centre bills only processing charges at the NBTC rates. Name the line as a processing charge." };
+  }
   const price = Math.round(Number(item.price));
   if (!isFinite(price) || price < 0) return { ok: false, error: "bad_price" };
   /* bed, nursing and visit joined 2026-09-15 (LT-30): charges per day of an inpatient stay, priced by the
