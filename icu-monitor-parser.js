@@ -45,7 +45,7 @@
     rr:    [/\b(?:RR|Resp|RESP|awRR|Resp\w*)(?=\b|\d)/,  /\b(?:R\s*R|RESP\w*)(?=\b|\d)/i],
     pulse: [/\b(?:Pulse|PULSE|PR)(?=\b|\d)/,             /\bPuls\w*(?=\b|\d)/i],
     temp:  [/\b(?:Temp|TEMP|Tcore|T1|T2)(?=\b|\d)/,      /\bT\s*emp\w*(?=\b|\d)/i],
-    etco2: [/\b(?:EtCO2|etCO₂|ETCO2|EtCO₂)(?=\b|\d)/,    /\bCO\s*2\b/i],
+    etco2: [/\b(?:EtCO2|etCO2|etCO₂|ETCO2|EtCO₂)(?=\b|\d)/,    /\bCO\s*2\b/i],
     cvp:   [/\bCVP(?=\b|\d)/,                            /\bC\s*V\s*P\b/i],
     pvc:   [/\bPVCs?(?=\b|\d)/,                          /\bP\s*V\s*C\b/i]
   };
@@ -61,7 +61,7 @@
    *   onelabel one pressure-source label serves only its nearest reading
    *   limit1   a small number directly left of a much larger value is that value's alarm limit
    *   mapcheck displayed MAP vs (SBP + 2 DBP) / 3 as a consistency check only (never fills MAP) */
-  var FEATURES = ["norm", "vocab", "ecg", "pap", "onelabel", "limit1", "mapcheck", "color"];   // "color": ablation switch for colour evidence (on by default, predates pass 3)
+  var FEATURES = ["norm", "vocab", "ecg", "pap", "onelabel", "limit1", "mapcheck", "color", "detector"];   // "color": ablation switch for colour evidence (on by default, predates pass 3)
   var MAP_CONSISTENCY_TOL = 25;   // mmHg; displayed-vs-formula spread on 212 labelled readings: median 3, max 15.3
   function on(opts, f) { return !(opts && opts.disable && opts.disable.indexOf(f) >= 0); }
   var LOOKALIKE = { "А": "A", "В": "B", "Е": "E", "К": "K", "М": "M", "Н": "H", "О": "O", "Р": "P", "С": "C", "Т": "T", "Х": "X", "а": "a", "е": "e", "о": "o", "р": "p", "с": "c", "у": "y", "х": "x", "г": "r", "Г": "r",
@@ -319,6 +319,105 @@
     });
     out.notes = notes;
     return out;
+  }
+
+  /* Tile reads (on-device detector). A detector tile with no digits read inside it gets its own two crops of the
+   * ORIGINAL at two different scales: read A is unioned in (mergeObservations, values enter UNCONFIRMED), read B
+   * can only confirm identical digits (applyConfirmation). No new trust path: every parser gate still applies.
+   * Returns [{x,y,w,h,scale,scaleB,cls}] in the full image frame, best tile first, at most `max` (default 4). */
+  var TILE_MIN = 0.5, TILE_CLS = { hr: 1, spo2: 1, rr: 1, pulse: 1, etco2: 1 };   // pressures need a source label anyway
+  function tileRegions(obs, detections, imageSize, max) {
+    var SW = imageSize && imageSize.w || 1000, SH = imageSize && imageSize.h || 1000, out = [];
+    (detections || []).filter(function (d) { return d && TILE_CLS[d.cls] && d.conf >= TILE_MIN && d.w > 0 && d.h > 0; })
+      .sort(function (a, b) { return b.conf - a.conf; })
+      .forEach(function (d) {
+        // any digits already overlapping the tile: a crop would only cut through them (a cut "150/54" read "I54")
+        var read = (obs || []).some(function (o) { return digitsOf(o.text) && overlapMin(o, d) > 0.2; });
+        if (read || out.some(function (r) { return overlapMin(r.core, d) > 0.5; })) return;
+        var px = d.w * 0.15, py = d.h * 0.2;
+        var reg = { x: clamp(d.x - px, 0, 1), y: clamp(d.y - py, 0, 1), cls: d.cls, core: { x: d.x, y: d.y, w: d.w, h: d.h } };
+        reg.w = clamp(d.x + d.w + px, 0, 1) - reg.x; reg.h = clamp(d.y + d.h + py, 0, 1) - reg.y;
+        var hPx = reg.h * SH, longPx = Math.max(reg.w * SW, hPx);
+        // tile ~260 px tall for read A, ~400 px for read B; never downscale, cap the long edge at 1600 px
+        var cap = 1600 / Math.max(1, longPx);
+        reg.scale = +Math.max(1, Math.min(260 / Math.max(1, hPx), cap)).toFixed(2);
+        reg.scaleB = +Math.max(1.05, Math.min(400 / Math.max(1, hPx), cap)).toFixed(2);
+        if (reg.scaleB === reg.scale) reg.scaleB = +(reg.scale * 1.3).toFixed(2);
+        out.push(reg);
+      });
+    return out.slice(0, max || 4);
+  }
+  /* Hybrid check (device OCR + AI Vision on the monitor crop). Two independent readers:
+   *   device AUTO  + AI same or silent   -> stays AUTO
+   *   device AUTO  + AI different        -> NEEDS_REVIEW (both shown)
+   *   device REVIEW(suggested s) + AI s  -> AUTO, unless the block is a pressure SOURCE (ART/NIBP) question,
+   *                                         which digit agreement cannot answer
+   *   device REVIEW/NOT_FOUND + AI only  -> NEEDS_REVIEW with the AI value as a suggestion, never AUTO
+   * `fields` = the flat values the app fills, `meta` = r.monitor ({fields:{k:{status,suggested,reason,source}}}),
+   * `ai` = AI Vision fields. Returns { fields, meta, changed:[k...] } without mutating the inputs. */
+  var HYBRID_KEYS = ["hr", "spo2", "rr", "sbp", "dbp", "map", "etco2", "temp", "cvp"];
+  function hybridMerge(fields, meta, ai) {
+    var out = assign({}, fields || {}), mf = {}, changed = [];
+    var src = (meta && meta.fields) || {};
+    Object.keys(src).forEach(function (k) { mf[k] = assign({}, src[k]); });
+    function num(v) { var n = typeof v === "number" ? v : typeof v === "string" && /^\s*-?\d+(?:\.\d+)?\s*$/.test(v) ? +v : NaN; return isFinite(n) ? n : null; }
+    function same(a, b, k) { return a != null && b != null && (k === "temp" ? Math.abs(a - b) < 0.05 : a === b); }
+    HYBRID_KEYS.forEach(function (k) {
+      var a = num(ai && ai[k]), d = mf[k] || { status: "NOT_FOUND" }, dv = num(out[k]);
+      if (a == null) return;
+      if (d.status === "AUTO_ACCEPTED" || dv != null) {
+        if (same(dv, a, k)) { mf[k] = assign(d, { aiVision: a, source: (d.source ? d.source + "; " : "") + "AI Vision agrees" }); return; }
+        delete out[k];
+        mf[k] = assign(d, { status: "NEEDS_REVIEW", suggested: dv, aiVision: a, reason: "device read " + dv + ", AI Vision reads " + a });
+        changed.push(k); return;
+      }
+      var s = num(d.suggested);
+      if (d.status === "NEEDS_REVIEW" && same(s, a, k) && !/pressure source/.test(d.reason || "")) {
+        out[k] = s;
+        mf[k] = assign(d, { status: "AUTO_ACCEPTED", value: s, aiVision: a, reason: null, source: "device OCR and AI Vision read the same value (" + (d.reason || "was review") + ")" });
+        changed.push(k); return;
+      }
+      mf[k] = assign(d, { status: "NEEDS_REVIEW", suggested: s != null ? s : a, aiVision: a, reason: (d.reason ? d.reason + "; " : "") + (s != null && !same(s, a, k) ? "AI Vision reads " + a : "AI Vision only, not confirmed on device") });
+      changed.push(k);
+    });
+    // a pressure pair only fills together: if either half went to review, both do
+    if ((out.sbp == null) !== (out.dbp == null)) { ["sbp", "dbp", "map"].forEach(function (k) { if (out[k] != null) { mf[k] = assign(mf[k] || {}, { status: "NEEDS_REVIEW", suggested: out[k], reason: "the other half of the pressure needs review" }); delete out[k]; changed.push(k); } }); }
+    var m2 = assign({}, meta || {}, { fields: mf, review: Object.keys(mf).filter(function (k) { return mf[k].status === "NEEDS_REVIEW"; }), hybrid: true });
+    return { fields: out, meta: m2, changed: changed };
+  }
+
+  /* Digit reader (on-device CRNN, a reader independent of Apple Vision). It may only CONFIRM a box whose digits it
+   * reads identically, or mark a box CONFLICTED when it reads different digits; like applyConfirmation it never
+   * adds a value. Reads below DIGIT_MIN abstain. digitReadBoxes lists the boxes worth reading (raw geometry; the
+   * reader pads ~10% of the height); applyDigitReads matches reads back by geometry. */
+  var DIGIT_MIN = 0.999;
+  function digitReadBoxes(obs, max) {
+    return (obs || []).filter(function (o) { var d = digitsOf(o.text); return d && d.length <= 8 && String(o.text).length <= 14 && o.w > 0 && o.h > 0; })
+      .sort(function (a, b) { return b.h - a.h; })
+      .slice(0, max || 60)
+      .map(function (o) { return { x: o.x, y: o.y, w: o.w, h: o.h }; });
+  }
+  function applyDigitReads(obs, reads) {
+    var notes = (obs.notes || []).slice();
+    var out = (obs || []).map(function (o) { return assign({}, o); });
+    out.forEach(function (o) {
+      var d = digitsOf(o.text); if (!d || o.ocrConflict) return;
+      var r = (reads || []).filter(function (x) { return x && Math.abs(x.x - o.x) < 1e-6 && Math.abs(x.y - o.y) < 1e-6 && Math.abs(x.w - o.w) < 1e-6 && Math.abs(x.h - o.h) < 1e-6; })[0];
+      if (!r || !(r.conf >= DIGIT_MIN)) return;
+      var rd = String(r.text || "").replace(/\D/g, "");
+      if (!rd) return;
+      // same comparison as the two OCR passes: stray label glyphs ("3° 22", "2 118/76 (90)") are not a disagreement
+      if (rd === d || digitsAgree(o.text, r.text)) { if (!o.confirmed) { o.confirmed = true; o.confirmedBy = "digit reader"; } o.digitReader = { text: r.text, conf: r.conf }; }
+      else { o.ocrConflict = "digit reader " + r.text; o.confirmed = false; notes.push("digit reader disagrees: " + JSON.stringify(o.text) + " vs " + JSON.stringify(r.text)); }
+    });
+    out.notes = notes;
+    return out;
+  }
+
+  // A tile read's boxes (already mapped to the full frame) that belong to the tile: centre inside the detector box.
+  function tileObservations(mapped, region) {
+    var c = region && region.core; if (!c) return mapped || [];
+    return (mapped || []).filter(function (o) { var cx = o.x + o.w / 2, cy = o.y + o.h / 2; return cx >= c.x && cx <= c.x + c.w && cy >= c.y && cy <= c.y + c.h; });
   }
 
   /* ------------------------------------------------------------------ colour sampling
@@ -772,7 +871,7 @@
     var boxIdx = f.box != null ? f.box : null;
     if (boxIdx == null && f.candidates) for (var i = 0; i < f.candidates.length; i++) if (f.candidates[i].value === f.value) { boxIdx = f.candidates[i].box; break; }
     var o = boxIdx != null ? G.src[boxIdx] : null;
-    var kind = f.label ? (f.label.glued || f.glued ? "glued-label" : "label") : "layout+colour";
+    var kind = f.label ? (f.label.detector ? "detector" : f.label.glued || f.glued ? "glued-label" : "label") : "layout+colour";
     var src = f.source || (f.label ? "label " + JSON.stringify(f.label.text) : "layout slot + channel colour (unlabeledAuto)");
     var ev = {
       ocr: o ? { text: o.text, conf: o.conf == null ? null : +(+o.conf).toFixed(2), scale: o.scale || "full" } : null,
@@ -949,19 +1048,29 @@
     }
     var pr = parsePressures(G, px, claimed, claimedLabels, opts);
     fields.sbp = pr.sbp; fields.dbp = pr.dbp; fields.map = pr.map; if (pr.art) fields.art = pr.art; if (pr.nibp) fields.nibp = pr.nibp;
+    // On-device vital-tile detector (opts.detections from Core ML): a detector box of a field's class can
+    // stand in for an UNREAD label. It only associates; digits are still Vision's, and every gate still applies.
+    var DET_MIN = 0.5;
+    var dets = on(opts, "detector") ? (opts.detections || []).filter(function (d) { return d && d.conf >= DET_MIN && d.w > 0 && d.h > 0; }) : [];
+    function inDet(b, d) { var cx = b.x + b.w / 2, cy = b.y + b.h / 2, mx = d.w * 0.1, my = d.h * 0.1; return cx >= d.x - mx && cx <= d.x + d.w + mx && cy >= d.y - my && cy <= d.y + d.h + my; }
+    function bestDet(field) { var best = null; dets.forEach(function (d) { if (d.cls === field && (!best || d.conf > best.conf)) best = d; }); return best; }
+    function claimedByOther(b, field, d) { return dets.some(function (o) { return o !== d && o.cls !== field && o.conf > d.conf && inDet(b, o); }); }
     var ORDER = ["hr", "spo2", "rr", "pulse", "temp", "etco2", "cvp", "pvc"];
     ORDER.forEach(function (field) {
       var f = FIELDS[field], label = findLabel(G, field, claimedLabels), L = label && label.box;
-      var chan = L && px ? channelColor(L, px) : null;
+      var det = !L ? bestDet(field) : null;      var chan = L && px ? channelColor(L, px) : null;
       var cands = [];
-      G.B.forEach(function (b) {
+      function gather() { G.B.forEach(function (b) {
         if (claimed[b.i] || (L && b === L)) return;
         if (b.role !== "numeric" && b.role !== "limit" && b.role !== "limitRange") return;
         if (!valueLike(b.t, f)) return;
         if (L) { var dx = b.x - L.x, dy = b.y - L.y; if (dx < -4 * L.h || dx > 30 * L.h || dy < -1.5 * L.h || dy > 7 * L.h + 0.01) return; }
-        else { if (G.order.indexOf(field) < 0 || field === "temp") return; if (G.colX == null || Math.abs(b.cx - G.colX) > 0.12 || b.h < G.maxH * 0.55) return; }
+        else if (det) { if (!inDet(b, det) || claimedByOther(b, field, det)) return; }        else { if (G.order.indexOf(field) < 0 || field === "temp") return; if (G.colX == null || Math.abs(b.cx - G.colX) > 0.12 || b.h < G.maxH * 0.55) return; }
         cands.push(scoreCandidate(G, field, b, label, px, chan));
-      });
+      }); }
+      gather();
+      // a detector box with no OCR value inside it proves nothing: fall back to the unlabelled slot path
+      if (det && !cands.length) { det = null; gather(); }
       if (L) {
         var gv = gluedValue(L, field);
         if (gv != null) {
@@ -976,7 +1085,8 @@
           cands.push(own);
         }
       }
-      var d = decide(cands, !!L, assign({}, opts, { __field: field }));
+      if (det) cands.forEach(function (c) { c.parts.label = det.conf; c.viaDetector = det; c.why.push("inside detector box " + field + " " + det.conf.toFixed(2)); });
+      var d = decide(cands, !!L || (!!det && cands.length > 0), assign({}, opts, { __field: field }));
       // independent digit verification gate: a second OCR pass can repeat Vision's misread, the pixels cannot
       if (verifyRequired(field, opts)) {
         d.verifyRequired = true;
@@ -987,8 +1097,8 @@
         }
       }
       if (d.status === "AUTO_ACCEPTED") { claimed[cands[0].box.i] = true; if (L) claimedLabels[L.i] = true; if (field === "hr") G.hrBox = cands[0].box; d.box = cands[0].box.i; d.glued = !!cands[0].glued; }
-      d.label = L ? { text: L.t, box: L.i, strength: label.strength, glued: d.status === "AUTO_ACCEPTED" && !!cands[0].glued } : null;
-      d.source = L ? "label " + JSON.stringify(L.t) : (d.status === "AUTO_ACCEPTED" ? "layout slot + channel colour (unlabeledAuto)" : null);
+      d.label = L ? { text: L.t, box: L.i, strength: label.strength, glued: d.status === "AUTO_ACCEPTED" && !!cands[0].glued } : det && cands.length ? { text: "detector:" + field, box: null, strength: +det.conf.toFixed(2), detector: { x: det.x, y: det.y, w: det.w, h: det.h, conf: det.conf } } : null;
+      d.source = L ? "label " + JSON.stringify(L.t) : det && cands.length ? "on-device detector (" + field + " " + det.conf.toFixed(2) + ")" : (d.status === "AUTO_ACCEPTED" ? "layout slot + channel colour (unlabeledAuto)" : null);
       d.channel = chan && chan.reliable ? { kind: chan.kind, h: chan.h == null ? null : +chan.h.toFixed(0) } : null;
       d.candidates = cands.map(function (c) { return { text: c.box.t, value: c.value, score: +c.score.toFixed(2), role: c.role, box: c.box.i, scale: c.box.scale, parts: roundParts(c.parts), why: c.why }; });
       fields[field] = d;
@@ -1060,7 +1170,7 @@
     return out.join("");
   }
 
-  return { VERSION: VERSION, THRESH: THRESH, QUALITY: QUALITY, parseMonitor: parseMonitor, monitorRegion: monitorRegion, mapCropObservations: mapCropObservations, mergeObservations: mergeObservations, confirmationRegion: confirmationRegion, applyConfirmation: applyConfirmation, sampleColors: sampleColors, explain: explain, overlaySVG: overlaySVG,
+  return { VERSION: VERSION, THRESH: THRESH, QUALITY: QUALITY, parseMonitor: parseMonitor, monitorRegion: monitorRegion, mapCropObservations: mapCropObservations, mergeObservations: mergeObservations, confirmationRegion: confirmationRegion, applyConfirmation: applyConfirmation, tileRegions: tileRegions, tileObservations: tileObservations, hybridMerge: hybridMerge, digitReadBoxes: digitReadBoxes, applyDigitReads: applyDigitReads, sampleColors: sampleColors, explain: explain, overlaySVG: overlaySVG,
     verifyDigits: verifyDigits, VERIFY: VERIFY, VERIFY_FIELDS: VERIFY_FIELDS,
     _internals: { DIGIT_TEMPLATES: DIGIT_TEMPLATES, readGlyphs: readGlyphs, classifyGlyph: classifyGlyph, buildGraph: buildGraph, assessQuality: assessQuality, blurOf: blurOf, tiltOf: tiltOf, digitsOf: digitsOf, similarity: similarity, gluedValue: gluedValue, FIELDS: FIELDS, LABELS: LABELS, rgbToHsv: rgbToHsv, sampleRegion: sampleRegion, channelColorAtValue: channelColorAtValue, channelColor: channelColor } };
 });

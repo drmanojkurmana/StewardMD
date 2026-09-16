@@ -37,19 +37,29 @@
     { id: "headneck", title: "Head & Neck Cancer", sub: "Locoregional / recurrent-metastatic; PD-L1", icon: "face", ready: true },
     { id: "ovarian", title: "Ovarian Cancer", sub: "Primary chemo; PARP maintenance by HRD", icon: "female", ready: true },
     { id: "myeloma", title: "Multiple Myeloma", sub: "Newly diagnosed / maintenance / relapsed", icon: "bloodtype", ready: true },
+    { id: "amyloidosis", title: "Systemic AL Amyloidosis", sub: "Mayo cardiac staging; Dara-CyBorD + autologous HCT", icon: "bloodtype", ready: true },
+    { id: "castleman", title: "Castleman Disease", sub: "UCD vs iMCD (Siltuximab) & HHV-8+ MCD (Rituximab)", icon: "bloodtype", ready: true },
     { id: "thyroid", title: "Thyroid Cancer", sub: "Anaplastic (BRAF) / medullary (RET)", icon: "biotech", ready: true },
     { id: "cervical", title: "Cervical Cancer", sub: "FIGO stage; chemoRT vs surgery; recurrent by PD-L1", icon: "female", ready: true },
     { id: "uterine", title: "Uterine / Endometrial", sub: "Molecular class; risk-adapted adjuvant; MMR / HER2", icon: "female", ready: true },
     { id: "pancreatic", title: "Pancreatic Cancer", sub: "Resectable vs metastatic; FOLFIRINOX vs gem-nab", icon: "gastroenterology", ready: true },
+    { id: "ampullary", title: "Ampullary Adenocarcinoma", sub: "Pancreatobiliary vs intestinal; Whipple + adjuvant", icon: "gastroenterology", ready: true },
+    { id: "biliary", title: "Biliary Tract Cancers", sub: "GBC & Cholangiocarcinoma; BILCAP adjuvant; TOPAZ-1 & NGS targets", icon: "gastroenterology", ready: true },
+    { id: "appendiceal", title: "Appendiceal Neoplasms", sub: "LAMN/PMP vs adenocarcinoma; CRS + HIPEC", icon: "gastroenterology", ready: true },
     { id: "hcc", title: "Hepatocellular Carcinoma", sub: "BCLC + Child-Pugh; local vs systemic by line", icon: "gastroenterology", ready: true },
     { id: "anal", title: "Anal Cancer", sub: "Definitive chemoRT; metastatic immunotherapy", icon: "gastroenterology", ready: true },
     { id: "gist", title: "GI Stromal Tumor (GIST)", sub: "Risk-adapted imatinib; TKI by line + mutation", icon: "gastroenterology", ready: true },
     { id: "sarcoma", title: "Soft Tissue Sarcoma", sub: "Grade / size; surgery +/- RT; histology-directed", icon: "healing", ready: true },
+    { id: "bone", title: "Bone Cancer", sub: "Osteosarcoma (MAP), Ewing (VDC/IE), Chondrosarcoma, GCTB", icon: "orthopedics", ready: true },
     { id: "cns", title: "CNS / Glioma", sub: "IDH / 1p19q class; Stupp protocol; recurrence", icon: "neurology", ready: true },
     { id: "aml", title: "Acute Myeloid Leukemia", sub: "ELN risk; fit vs unfit; targeted + transplant", icon: "bloodtype", ready: true },
+    { id: "all", title: "Acute Lymphoblastic Leukemia", sub: "Ph+ / Ph- B-ALL & T-ALL; MRD-directed", icon: "bloodtype", ready: true },
+    { id: "cml", title: "Chronic Myeloid Leukemia", sub: "ELTS risk; 1L TKIs & Asciminib; molecular milestones", icon: "bloodtype", ready: true },
     { id: "cll", title: "Chronic Lymphocytic Leukemia", sub: "Watch vs treat; TP53 / IGHV; BTKi vs venetoclax", icon: "bloodtype", ready: true },
+    { id: "bcell", title: "B-Cell Lymphomas", sub: "Follicular, Mantle Cell (TP53), MZL, Burkitt", icon: "bloodtype", ready: true },
     { id: "dlbcl", title: "Diffuse Large B-Cell Lymphoma", sub: "IPI; R-CHOP vs pola-R-CHP; relapsed CAR-T", icon: "bloodtype", ready: true },
-    { id: "hodgkin", title: "Hodgkin Lymphoma", sub: "Early vs advanced; PET-adapted ABVD / BV", icon: "bloodtype", ready: true }
+    { id: "hodgkin", title: "Hodgkin Lymphoma", sub: "Early vs advanced; PET-adapted ABVD / BV", icon: "bloodtype", ready: true },
+    { id: "cutaneous_lymphoma", title: "Cutaneous Lymphomas", sub: "MF/SS TNMB; CD30+ LyP/pcALCL; CBCL indolent vs leg-type", icon: "dermatology", ready: true }
   ];
 
   var st = {

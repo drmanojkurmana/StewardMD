@@ -1,0 +1,470 @@
+{
+  "guideline": "appendiceal",
+  "title": "Appendiceal Neoplasms & Cancers",
+  "subtitle": "LAMN / HAMN (Pseudomyxoma Peritonei) and Adenocarcinoma / Goblet Cell Pathways",
+  "navigatorVersion": "3.0.0",
+  "diseaseId": "appendiceal_cancer",
+  "matchDisease": false,
+  "status": "draft",
+  "provenanceNote": "Clinical algorithms extracted from NCCN Guidelines Version 2.2026 for Appendiceal Neoplasms and Cancers.",
+  "sourceNote": "NCCN Guidelines Version 2.2026 - Appendiceal Neoplasms and Cancers (APP-1 to APP-9, APP-A to APP-E)",
+  "startNodeIds": [
+    "n_app_entry"
+  ],
+  "footnotes": {
+    "fn_pmp": "Cytoreductive surgery (CRS) +/- HIPEC should be performed at specialized peritoneal surface oncology centers.",
+    "fn_gca": "Goblet cell adenocarcinoma requires oncologic right hemicolectomy and behaves like aggressive adenocarcinoma."
+  },
+  "nodes": [
+    {
+      "id": "n_app_entry",
+      "linkId": "app_entry",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical Presentation",
+      "title": "Appendiceal Neoplasm: Clinical Presentation & Diagnostic Suspicion",
+      "section": "Diagnosis",
+      "description": "Incidental finding on appendectomy, acute appendicitis presentation, palpable abdominal mass, or new mucinous ascites / pseudomyxoma peritonei.",
+      "path": "Appendiceal / Presentation",
+      "pills": [
+        "appendiceal",
+        "incidental",
+        "appendectomy"
+      ],
+      "required": true,
+      "bullets": [
+        "Clinical presentation: incidental finding during appendectomy for acute appendicitis (~1-2% of appendectomies), unexplained right lower quadrant mass, new ovarian mass (Krukenberg tumor), or mucinous ascites (pseudomyxoma peritonei).",
+        "Operative note review: meticulously examine operative reports from prior surgery for signs of gross rupture/perforation, presence of intraperitoneal mucin, or serosal implants."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Suspicion / confirmation of appendiceal neoplasm - Proceed to workup",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_app_workup",
+      "linkId": "app_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic Workup",
+      "title": "Appendiceal Neoplasms: Mandatory Staging & Laboratory Checklist",
+      "section": "Workup",
+      "description": "High-resolution cross-sectional staging, serum tumor marker panel, and colonoscopy.",
+      "path": "Appendiceal / Workup",
+      "pills": [
+        "workup",
+        "CT",
+        "CEA",
+        "CA19-9",
+        "CA-125",
+        "colonoscopy"
+      ],
+      "required": true,
+      "bullets": [
+        "Staging Imaging: Contrast-enhanced CT of chest, abdomen, and pelvis (C/A/P) with oral and IV contrast. Non-contrast chest CT + abdominal/pelvic MRI is preferred if iodinated contrast is contraindicated.",
+        "FDG-PET/CT is generally NOT indicated: Low-grade mucinous tumors have minimal FDG uptake and high false-negative rates; reserve PET/CT only for equivocal CT findings in high-grade non-mucinous adenocarcinomas.",
+        "Serum Tumor Marker Triad: Mandatory baseline measurement of Carcinoembryonic Antigen (CEA), Carbohydrate Antigen 19-9 (CA 19-9), and Cancer Antigen 125 (CA-125; particularly elevated in women with peritoneal/ovarian involvement).",
+        "Screening Colonoscopy: Mandatory for all confirmed appendiceal neoplasms to rule out synchronous colorectal adenomas or adenocarcinomas prior to definitive surgical therapy.",
+        "DPYD Testing (NCCN / FDA Boxed Warning): Pre-treatment testing for DPYD gene variants (*2A, *13, c.2846A>T, HapB3) recommended prior to initiating fluoropyrimidine-based chemotherapy (5-FU or capecitabine).",
+        "Molecular Profiling: Mandatory testing for MMR/MSI status, KRAS, NRAS, and BRAF V600E mutations in advanced/metastatic disease."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup completed - Classify histologic subtype",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_app_histology",
+      "linkId": "app_histology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Histopathology Subtype",
+      "title": "Appendiceal Neoplasm: Histopathologic Classification",
+      "section": "Subtype & Risk",
+      "description": "Pathology review by an experienced gastrointestinal pathologist distinguishes mucinous neoplasms from invasive adenocarcinoma and goblet cell adenocarcinoma.",
+      "path": "Appendiceal / Pathology",
+      "pills": [
+        "LAMN",
+        "HAMN",
+        "adenocarcinoma",
+        "GCA"
+      ],
+      "required": true,
+      "bullets": [
+        "Low-Grade Appendiceal Mucinous Neoplasm (LAMN): Villous/flat proliferation of low-grade mucinous epithelium with pushing borders, attenuation of muscularis, and potential to shed mucin causing pseudomyxoma peritonei (PMP).",
+        "High-Grade Appendiceal Mucinous Neoplasm (HAMN): Cytologic high-grade atypia in a mucinous neoplasm with pushing invasion (no infiltrative invasion).",
+        "Appendiceal Adenocarcinoma (AA): Infiltrative glandular proliferation (mucinous or non-mucinous / signet ring cell) with desmoplastic stroma and high risk of lymph node metastasis.",
+        "Goblet Cell Adenocarcinoma (GCA): Amphicrine neoplasm composed of clusters of mucin-filled goblet-like cells with neuroendocrine features; aggressive behavior requiring oncologic colectomy."
+      ],
+      "options": [
+        {
+          "id": "lamn_hamn",
+          "label": "Mucinous Neoplasm: LAMN or HAMN",
+          "sets": {
+            "histology": "lamn_hamn"
+          },
+          "pills": [
+            "LAMN/HAMN"
+          ]
+        },
+        {
+          "id": "aa_gca",
+          "label": "Invasive Cancer: Appendiceal Adenocarcinoma (AA) or Goblet Cell (GCA)",
+          "sets": {
+            "histology": "aa_gca"
+          },
+          "pills": [
+            "AA/GCA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_app_lamn_extent",
+      "linkId": "app_lamn_extent",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "LAMN/HAMN Extent",
+      "title": "LAMN / HAMN: Staging & Extraperitoneal / Peritoneal Extent",
+      "section": "Subtype & Risk",
+      "description": "Assess whether mucinous disease is confined to appendix or has caused peritoneal mucinous seeding (pseudomyxoma peritonei).",
+      "path": "Appendiceal / LAMN-HAMN / Extent",
+      "pills": [
+        "LAMN",
+        "HAMN",
+        "PMP",
+        "peritoneal"
+      ],
+      "required": true,
+      "bullets": [
+        "Appendix-only: Confined to the appendix with clear surgical resection margins, no perforation, and no extra-appendiceal mucin or cells.",
+        "Peritoneal-only: Disseminated peritoneal mucin or mucinous deposits (pseudomyxoma peritonei, PMP), without hematogenous or parenchymal metastasis."
+      ],
+      "options": [
+        {
+          "id": "lamn_localized",
+          "label": "Confined to Appendix (Negative margins, no peritoneal mucin)",
+          "sets": {
+            "stage": "localized"
+          },
+          "pills": [
+            "Localized"
+          ]
+        },
+        {
+          "id": "lamn_peritoneal",
+          "label": "Peritoneal-Only Disease (Pseudomyxoma Peritonei / Mucin in Peritoneum)",
+          "sets": {
+            "stage": "peritoneal"
+          },
+          "pills": [
+            "Peritoneal/PMP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_app_lamn_localized_tx",
+      "linkId": "app_lamn_localized_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Localized LAMN/HAMN Tx",
+      "title": "Localized LAMN / HAMN: Surgical Margins & Long-Term Surveillance",
+      "section": "Primary Treatment",
+      "description": "Complete surgical resection without lymphadenectomy, followed by long-term surveillance.",
+      "path": "Appendiceal / LAMN-HAMN / Localized Tx",
+      "pills": [
+        "LAMN",
+        "appendectomy",
+        "margins",
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Resection Margin Assessment:",
+        "\u2022 Negative appendiceal base margin: Simple appendectomy is completely curative. Routine right hemicolectomy is NOT indicated (LAMN does not spread via lymphatics in the absence of invasive carcinoma).",
+        "\u2022 Positive margin at appendiceal base: Partial cecectomy or cecal wedge resection to achieve an R0 negative margin.",
+        "No adjuvant chemotherapy: Cytotoxic chemotherapy has no proven role in localized LAMN/HAMN.",
+        "Surveillance Protocol (Long-term 10-year follow-up):",
+        "\u2022 H&P and tumor markers (CEA, CA 19-9, CA-125) every 6-12 months for 2 years, then annually for up to 10 years.",
+        "\u2022 Abdominal/pelvic CT or MRI with contrast every 6-12 months for 2 years, then every 12-24 months for up to 10 years (delayed peritoneal recurrences can occur up to a decade later)."
+      ]
+    },
+    {
+      "id": "n_app_lamn_peritoneal_tx",
+      "linkId": "app_lamn_peritoneal_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "PMP Cytoreduction (CRS)",
+      "title": "Peritoneal LAMN/HAMN (Pseudomyxoma Peritonei): CRS +/- HIPEC",
+      "section": "Primary Treatment",
+      "description": "Multidisciplinary management at high-volume peritoneal surface malignancy center.",
+      "path": "Appendiceal / LAMN-HAMN / PMP Treatment",
+      "pills": [
+        "PMP",
+        "CRS",
+        "HIPEC",
+        "mitomycin"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Multidisciplinary evaluation at an experienced peritoneal surface oncology center.",
+        "Cytoreductive Surgery (CRS) with intent of complete gross resection:",
+        "\u2022 Peritonectomy procedures and visceral resections (greater omentectomy, right hemicolectomy, bilateral salpingo-oophorectomy in women, pelvic peritonectomy, stripping of diaphragmatic peritoneum) to achieve Completeness of Cytoreduction score CC-0 (no visible residual) or CC-1 (residual nodules <2.5 mm).",
+        "Hyperthermic Intraperitoneal Chemotherapy (HIPEC):",
+        "\u2022 Intraperitoneal perfusion with heated Mitomycin C (41-43\u00b0C x 60-90 minutes) or Oxaliplatin upon completion of cytoreduction.",
+        "Unresectable / Debilitated Patients: Serial debulking for symptom relief, or observation for asymptomatic indolent acellular mucin deposits.",
+        "Post-CRS Surveillance: Follow-up CT A/P and tumor marker panel every 6 months for 2 years, then annually for up to 10 years."
+      ]
+    },
+    {
+      "id": "n_app_aa_extent",
+      "linkId": "app_aa_extent",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "AA/GCA Clinical Extent",
+      "title": "Appendiceal Adenocarcinoma (AA) / Goblet Cell (GCA): Staging",
+      "section": "Subtype & Risk",
+      "description": "Delineate localized, peritoneal-only, or systemic extraperitoneal metastatic disease.",
+      "path": "Appendiceal / AA-GCA / Staging",
+      "pills": [
+        "AA",
+        "GCA",
+        "resectable",
+        "metastatic"
+      ],
+      "required": true,
+      "bullets": [
+        "Localized Disease: Confined to appendix and regional mesentery without peritoneal seeding or distant metastasis.",
+        "Peritoneal-Only Metastases: Peritoneal carcinomatosis / deposits without extraperitoneal visceral involvement.",
+        "Extraperitoneal Metastatic Disease: Liver metastases (within parenchyma), distant retroperitoneal nodes, or lung/pleural metastases."
+      ],
+      "options": [
+        {
+          "id": "aa_localized",
+          "label": "Localized Disease (Candidates for Right Hemicolectomy)",
+          "sets": {
+            "stage": "localized"
+          },
+          "pills": [
+            "Localized"
+          ]
+        },
+        {
+          "id": "aa_peritoneal",
+          "label": "Peritoneal-Only Metastatic Disease",
+          "sets": {
+            "stage": "peritoneal"
+          },
+          "pills": [
+            "Peritoneal"
+          ]
+        },
+        {
+          "id": "aa_extraperitoneal",
+          "label": "Extraperitoneal Metastatic Disease (Liver Parenchyma, Lung, Distant)",
+          "sets": {
+            "stage": "extraperitoneal"
+          },
+          "pills": [
+            "Extraperitoneal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_app_aa_localized_tx",
+      "linkId": "app_aa_localized_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "AA/GCA Resection & Adjuvant",
+      "title": "Localized AA / GCA: Right Hemicolectomy & Risk-Adapted Adjuvant Chemotherapy",
+      "section": "Primary Treatment",
+      "description": "Oncologic right hemicolectomy followed by colorectal-aligned adjuvant systemic chemotherapy.",
+      "path": "Appendiceal / AA-GCA / Resection & Adjuvant",
+      "pills": [
+        "right-hemicolectomy",
+        "adjuvant",
+        "FOLFOX",
+        "CAPOX"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "modified-folfox-6"
+      ],
+      "bullets": [
+        "Definitive Surgical Resection: Right hemicolectomy with ileocolic lymphadenectomy (examination of >=12 lymph nodes is mandatory for accurate pathological staging). In women, bilateral oophorectomy should be strongly considered (high rate of synchronous/metachronous ovarian involvement).",
+        "Pathologic Staging & Adjuvant Chemotherapy Decision (Colorectal-extrapolated guidelines):",
+        "\u2022 Stage I (pT1-2 N0 M0): Observation; adjuvant chemotherapy not indicated.",
+        "\u2022 Stage II (pT3-4 N0 M0) High-Risk (perforated primary, T4, poorly differentiated/signet ring, <12 nodes examined) or Stage III (pN+ M0): Adjuvant systemic chemotherapy for 3 to 6 months.",
+        "Preferred Adjuvant Regimens (modified-folfox-6):",
+        "\u2022 Modified FOLFOX6 (modified-folfox-6): Oxaliplatin 85 mg/m2, leucovorin 400 mg/m2, 5-FU bolus + 46-h continuous infusion q14d.",
+        "\u2022 CAPOX: Capecitabine 1000 mg/m2 PO BID x 14d + Oxaliplatin 130 mg/m2 day 1 q21d.",
+        "Surveillance: H&P, C/A/P CT with contrast, and CEA/CA 19-9/CA-125 every 3-6 months for 2 years, then every 6 months for a total of 5 years."
+      ]
+    },
+    {
+      "id": "n_app_aa_peritoneal_tx",
+      "linkId": "app_aa_peritoneal_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Peritoneal AA/GCA Therapy",
+      "title": "Peritoneal AA / GCA: Systemic Chemotherapy +/- Cytoreductive Surgery (CRS)",
+      "section": "Primary Treatment",
+      "description": "Perioperative systemic chemotherapy and cytoreduction at specialized peritoneal malignancy center.",
+      "path": "Appendiceal / AA-GCA / Peritoneal Therapy",
+      "pills": [
+        "peritoneal-carcinomatosis",
+        "CRS",
+        "HIPEC",
+        "FOLFOX"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "modified-folfox-6",
+        "folfiri"
+      ],
+      "bullets": [
+        "Multidisciplinary tumor board at specialized peritoneal center.",
+        "Neoadjuvant / Induction Systemic Chemotherapy (2-4 months):",
+        "\u2022 Modified FOLFOX6 (modified-folfox-6) or CAPOX (+/- Bevacizumab) to assess tumor biology and achieve disease stability before major cytoreduction.",
+        "Cytoreductive Surgery (CRS) + HIPEC consideration:",
+        "\u2022 In patients with responsive or stable disease and low-to-moderate Peritoneal Cancer Index (PCI) amenable to complete cytoreduction (CC-0/1), complete CRS +/- HIPEC significantly improves survival.",
+        "Postoperative Systemic Chemotherapy: Complete remaining cycles of systemic therapy to achieve 6 months total perioperative duration.",
+        "Unresectable Peritoneal Disease: Continued systemic chemotherapy (mFOLFOX6, FOLFIRI, or FOLFOXIRI +/- bevacizumab); palliative surgical bypass or stenting as needed for bowel obstruction."
+      ]
+    },
+    {
+      "id": "n_app_aa_extraperitoneal_tx",
+      "linkId": "app_aa_extraperitoneal_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Extraperitoneal Metastatic Tx",
+      "title": "Extraperitoneal Metastatic AA / GCA: Systemic Chemotherapy & Targeted Biologics",
+      "section": "Metastatic Disease",
+      "description": "Systemic palliative therapy for parenchymal liver, lung, or distant nodal metastases.",
+      "path": "Appendiceal / AA-GCA / Extraperitoneal Tx",
+      "pills": [
+        "metastatic",
+        "extraperitoneal",
+        "FOLFOX",
+        "FOLFIRI",
+        "targeted"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "modified-folfox-6",
+        "folfiri"
+      ],
+      "bullets": [
+        "First-Line Systemic Chemotherapy:",
+        "\u2022 Modified FOLFOX6 (modified-folfox-6) or CAPOX combined with Bevacizumab (5 mg/kg q2w or 7.5 mg/kg q3w).",
+        "\u2022 FOLFIRI (folfiri) + Bevacizumab: Preferred second-line or alternative first-line.",
+        "Biomarker-Directed Targeted Options:",
+        "\u2022 MSI-H / dMMR: Pembrolizumab or Dostarlimab (preferred first-line or subsequent therapy).",
+        "\u2022 KRAS/NRAS/BRAF wild-type: Consider Anti-EGFR monoclonal antibody (Cetuximab or Panitumumab) in later lines.",
+        "Oligometastatic Disease: In patients with solitary liver or lung metastasis achieving durable response to chemotherapy, surgical resection or thermal ablation can be considered.",
+        "Palliative & Best Supportive Care: Early involvement of palliative care team for symptom management, pain control, and nutritional support."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_app_entry_to_workup",
+      "from": "n_app_entry",
+      "to": "n_app_workup",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_app_workup_to_hist",
+      "from": "n_app_workup",
+      "to": "n_app_histology",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_app_hist_to_lamn",
+      "from": "n_app_histology",
+      "to": "n_app_lamn_extent",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "lamn_hamn"
+      ]
+    },
+    {
+      "id": "l_app_hist_to_aa",
+      "from": "n_app_histology",
+      "to": "n_app_aa_extent",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "aa_gca"
+      ]
+    },
+    {
+      "id": "l_app_lamn_to_local",
+      "from": "n_app_lamn_extent",
+      "to": "n_app_lamn_localized_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "lamn_localized"
+      ]
+    },
+    {
+      "id": "l_app_lamn_to_peritoneal",
+      "from": "n_app_lamn_extent",
+      "to": "n_app_lamn_peritoneal_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "lamn_peritoneal"
+      ]
+    },
+    {
+      "id": "l_app_aa_to_local",
+      "from": "n_app_aa_extent",
+      "to": "n_app_aa_localized_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "aa_localized"
+      ]
+    },
+    {
+      "id": "l_app_aa_to_peritoneal",
+      "from": "n_app_aa_extent",
+      "to": "n_app_aa_peritoneal_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "aa_peritoneal"
+      ]
+    },
+    {
+      "id": "l_app_aa_to_extraperitoneal",
+      "from": "n_app_aa_extent",
+      "to": "n_app_aa_extraperitoneal_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "aa_extraperitoneal"
+      ]
+    }
+  ]
+}

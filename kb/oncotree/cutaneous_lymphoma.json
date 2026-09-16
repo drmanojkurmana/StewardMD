@@ -1,0 +1,725 @@
+{
+  "guideline": "cutaneous_lymphoma",
+  "title": "Cutaneous Lymphomas",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "cutaneous_lymphoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Cutaneous Lymphomas (Mycosis Fungoides MF, Sezary Syndrome SS, Primary Cutaneous CD30+ Disorders LyP/pcALCL, and Cutaneous B-Cell Lymphomas). Implements Workup First diagnostic checklists (serial punch biopsies, IHC panel CD3/4/8/30/56, blood Sezary flow cytometry, TCR gene rearrangement clonality), TNMB stage-directed therapies (early MF skin-directed topical steroids / mechlorethamine / phototherapy vs advanced/Sezary systemic Mogamulizumab, Brentuximab vedotin, Bexarotene, Romidepsin, ECP). References StewardMD ONCQIS Standard Protocols. DRAFT - clinical decision support; physician decides.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Cutaneous Lymphomas Version 2.2026 (February 13, 2026).",
+  "startNodeIds": [
+    "n_subtype"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "TNMB blood (B) classification: B0 is <5 percent atypical circulating lymphocytes with negative TCR clone; B1 is >=5 percent atypical cells without B2 criteria; B2 is Sezary count >=1,000/mcL with clonal TCR rearrangement, or CD4+CD7- >=30 percent, or CD4+CD26- >=30-40 percent of lymphocytes. B2 with erythroderma (T4) defines Sezary syndrome.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Mogamulizumab (anti-CCR4) is Category 1 preferred for Sezary syndrome and MF with blood involvement (B1/B2). The MAVORIC phase 3 trial versus vorinostat improved progression-free survival, with the greatest benefit in Sezary syndrome and B2 blood disease.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "Brentuximab vedotin (anti-CD30 antibody-drug conjugate) is Category 1 preferred for CD30-expressing MF based on the ALCANZA phase 3 trial versus methotrexate or bexarotene, and is preferred systemic therapy for multifocal primary cutaneous anaplastic large cell lymphoma.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "Skin-directed therapy is preferred first-line for early-stage MF (IA-IIA) because early disease has excellent disease-specific survival and durable remissions are achievable without systemic toxicity. Systemic therapy is reserved for refractory early disease or advanced stages.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Primary cutaneous diffuse large B-cell lymphoma, leg type is aggressive with inferior survival versus indolent PCMZL/PCFCL and is treated as systemic DLBCL with R-CHOP with or without involved-field radiation (Category 1). Solitary pcALCL has an excellent prognosis and is managed with excision or local RT 24-30 Gy.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_subtype",
+      "linkId": "cutl_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Lymphoma Subtype",
+      "title": "Cutaneous lymphoma subtype",
+      "section": "Diagnosis",
+      "description": "Step 1: Clinical Presentation. Select the confirmed clinicopathologic subtype. Each subtype has its own Workup First checklist before TNMB staging and therapy.",
+      "path": "Cutaneous Lymphoma / Presentation",
+      "pills": [
+        "presentation"
+      ],
+      "required": true,
+      "bullets": [
+        "Mycosis Fungoides (MF) / Sezary Syndrome (SS): Mature cutaneous T-cell lymphomas presenting with patches, plaques, tumors, or generalized erythroderma with leukemic blood involvement in SS.",
+        "Primary Cutaneous CD30+ Lymphoproliferative Disorders: Lymphomatoid papulosis (LyP, chronic self-healing papulonodules) or primary cutaneous anaplastic large cell lymphoma (pcALCL, solitary or multifocal nodules/tumors).",
+        "Primary Cutaneous B-Cell Lymphomas (CBCL): Indolent PCMZL / PCFCL versus aggressive PCDLBCL, leg type. Histology determines curability and whether anthracycline chemoimmunotherapy is indicated.",
+        "Subtype assignment requires expert dermatopathology review correlating skin histology, immunophenotype, TCR or IgH clonality, and clinical behavior; re-biopsy when clinicopathologic discordance exists."
+      ],
+      "options": [
+        {
+          "id": "mf_ss",
+          "label": "Mycosis fungoides or Sezary syndrome (mature cutaneous T-cell)",
+          "sets": {
+            "subtype": "mf_ss"
+          },
+          "pills": [
+            "MF/SS"
+          ]
+        },
+        {
+          "id": "cd30",
+          "label": "Primary cutaneous CD30+ disorder (LyP or pcALCL)",
+          "sets": {
+            "subtype": "cd30"
+          },
+          "pills": [
+            "CD30+"
+          ]
+        },
+        {
+          "id": "cbcl",
+          "label": "Primary cutaneous B-cell lymphoma (PCMZL, PCFCL, or PCDLBCL leg type)",
+          "sets": {
+            "subtype": "cbcl"
+          },
+          "pills": [
+            "CBCL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_mf_ss_wk",
+      "linkId": "cutl_mf_ss_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MF/SS workup",
+      "title": "MF/SS: diagnostic workup and TNMB staging workup",
+      "section": "Workup",
+      "description": "Workup First: complete the high-yield diagnostic checklist establishing skin burden, blood involvement, nodal and visceral stage before any therapy is selected.",
+      "path": "Cutaneous Lymphoma / MF-SS / Workup",
+      "pills": [
+        "MF/SS",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete skin exam: measure total Body Surface Area (BSA) affected (<10 percent = T1, >=10 percent = T2); document lesion types (patches, plaques, tumors >=1 cm = T3, generalized erythroderma >=80 percent BSA = T4); record baseline photography and mSWAT-style severity.",
+        "Multiple 4-mm punch biopsies from the most indurated or suspicious untreated lesions; avoid recently steroid-treated sites; take serial repeat biopsies when the first sample is nondiagnostic because early MF mimics eczema or psoriasis.",
+        "Skin IHC panel: CD2, CD3, CD4, CD5, CD7, CD8, CD20, CD30, CD56; assess epidermotropism with Pautrier microabscesses, loss of CD7/CD26, and CD4:CD8 ratio >10:1; quantify percent CD30+ large cells.",
+        "TCR gene rearrangement by PCR (gamma/beta) on skin for clonality; compare the skin clone with the blood clone to establish clonal identity.",
+        "Peripheral blood flow cytometry to quantify Sezary cells (CD4+CD7- or CD4+CD26- >=1,000/mcL or >=30-40 percent of lymphocytes = B2; >=5 percent without B2 criteria = B1) plus blood TCR clonality; CBC with differential.",
+        "Serum LDH, CBC with differential, CMP; HTLV-1 serology when adult T-cell leukemia/lymphoma is in the differential.",
+        "Staging imaging: contrast CT neck/chest/abdomen/pelvis or FDG-PET/CT is mandatory for Stage >=IIB cutaneous tumors, erythroderma, palpable adenopathy, elevated LDH, or B2 blood; excisional biopsy of a dominant node (preferred over FNA) with TCR clonality when nodes are palpable.",
+        "Bone marrow biopsy only for unexplained cytopenias or aggressive clinical course; pregnancy testing and fertility counseling before systemic therapy in patients of childbearing potential."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed - Proceed to TNMB Staging and Therapy",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_cd30_wk",
+      "linkId": "cutl_cd30_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "CD30+ workup",
+      "title": "CD30+ disorders: diagnostic workup",
+      "section": "Workup",
+      "description": "Workup First: confirm LyP versus pcALCL histology, quantify CD30, and exclude systemic ALCL before selecting local versus systemic therapy.",
+      "path": "Cutaneous Lymphoma / CD30 / Workup",
+      "pills": [
+        "CD30+",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete skin exam: measure total BSA affected; document lesion types (self-healing papulonodules in crops suggesting LyP types A-E versus persistent nodules/tumors suggesting pcALCL, including ulceration and solitary versus multifocal distribution).",
+        "Multiple 4-mm punch biopsies (or incisional/excisional biopsy for large tumors) from representative lesions; serial re-biopsy of persistent, enlarging, or non-regressing lesions to exclude pcALCL arising in LyP.",
+        "Skin IHC panel: CD2, CD3, CD4, CD5, CD7, CD8, CD20, CD30, CD56; quantify percent CD30+ large/atypical cells; ALK testing (pcALCL is ALK-negative); DUSP22/IRF4 rearrangement assessment when available for prognostic correlation.",
+        "TCR gene rearrangement by PCR (gamma/beta) on skin for clonality; correlate clone across separate lesions and over time.",
+        "Peripheral blood: CBC with differential, flow cytometry for circulating atypical cells, LDH, CMP; blood TCR clonality when leukemic involvement is suspected.",
+        "Staging imaging: contrast CT neck/chest/abdomen/pelvis or FDG-PET/CT to exclude systemic ALCL, especially with B symptoms, bulky or rapidly progressive tumors, palpable adenopathy beyond the draining basin, or elevated LDH.",
+        "Excisional nodal biopsy (preferred over FNA) for suspicious nodes; bone marrow only for cytopenias or suspected extracutaneous spread."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed - Proceed to TNMB Staging and Therapy",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_cbcl_wk",
+      "linkId": "cutl_cbcl_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "CBCL workup",
+      "title": "Cutaneous B-cell lymphoma: diagnostic workup",
+      "section": "Workup",
+      "description": "Workup First: confirm indolent PCMZL/PCFCL versus aggressive PCDLBCL leg type and exclude systemic B-cell lymphoma before selecting local versus R-CHOP therapy.",
+      "path": "Cutaneous Lymphoma / CBCL / Workup",
+      "pills": [
+        "CBCL",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete skin exam: measure total BSA affected; document lesion types (papules, plaques, nodules, tumors), anatomic distribution (leg involvement raises leg-type suspicion), and solitary versus regional versus generalized pattern.",
+        "Punch, incisional, or excisional biopsy deep enough to assess architecture; B-cell IHC panel including CD20, CD79a, PAX5, BCL2, BCL6, MUM1/IRF4, CD10, Ki-67, CD30, and CD56 context markers; expert hematopathology review to separate PCFCL with large-cell morphology (indolent) from PCDLBCL leg type (aggressive).",
+        "IgH gene rearrangement by PCR for B-cell clonality; FISH or molecular studies (BCL2/BCL6/MYC) when double-hit or transformed disease is suspected.",
+        "Peripheral blood: CBC with differential, LDH, CMP; serum protein electrophoresis when indicated; Borrelia serology for PCMZL in endemic regions.",
+        "Staging imaging: contrast CT neck/chest/abdomen/pelvis or FDG-PET/CT (mandatory for suspected leg type, tumors, elevated LDH, or B symptoms) plus bone marrow biopsy to exclude systemic marginal zone, follicular, or diffuse large B-cell lymphoma.",
+        "Baseline cardiac assessment (ECHO/MUGA), hepatitis B/C and HIV screening before rituximab or anthracycline therapy; pregnancy testing and fertility counseling in patients of childbearing potential."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed - Proceed to TNMB Staging and Therapy",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_mf_stage",
+      "linkId": "cutl_mf_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MF/SS TNMB stage",
+      "title": "MF/SS: TNMB stage and blood class",
+      "section": "Staging",
+      "description": "Assign TNMB stage and blood class. Early skin-limited disease takes skin-directed therapy; tumors, erythroderma, nodal/visceral, or B2 disease takes systemic therapy.",
+      "path": "Cutaneous Lymphoma / MF-SS / Stage",
+      "pills": [
+        "TNMB",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Early stage: IA (T1 <10 percent BSA, N0, B0), IB (T2 >=10 percent BSA patches/plaques, N0, B0), IIA (T1-T2 with N1/N2 reactive nodes, B0). Skin-directed therapy preferred.",
+        "Advanced MF: IIB (T3 cutaneous tumors, any N, B0-1), III (T4 erythroderma, B0-1), IVA (N3 effaced nodes or B2 blood), IVB (M1 visceral disease). Systemic therapy indicated.",
+        "Sezary syndrome: T4 erythroderma plus B2 clonal blood (Sezary cells >=1,000/mcL with clonal TCR, or CD4+CD7- / CD4+CD26- criteria). Leukemic disease requiring blood-directed systemic therapy, usually ECP-based combinations or mogamulizumab.",
+        "Nodal assessment: N1/N2 are clinically abnormal nodes with dermatopathic or early involvement; N3 is effaced nodal architecture. Confirm with excisional biopsy, not FNA alone.",
+        "Re-stage skin (BSA, photography, mSWAT-style assessment), blood Sezary count with flow, LDH, and PET/CT response after each treatment phase before switching lines."
+      ],
+      "options": [
+        {
+          "id": "early",
+          "label": "Early stage IA, IB, or IIA (T1-T2 patches/plaques, N0-N2, B0)",
+          "sets": {
+            "stage": "early"
+          },
+          "pills": [
+            "IA-IIA"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Advanced stage IIB (tumors), III (erythroderma B0-1), IVA-B (nodal/visceral)",
+          "sets": {
+            "stage": "advanced"
+          },
+          "pills": [
+            "IIB-IV"
+          ]
+        },
+        {
+          "id": "sezary",
+          "label": "Sezary syndrome (T4 erythroderma with B2 clonal blood)",
+          "sets": {
+            "stage": "sezary"
+          },
+          "pills": [
+            "Sezary"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_cd30_type",
+      "linkId": "cutl_cd30_type",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "CD30+ entity and extent",
+      "title": "CD30+ disorder: entity and extent of skin disease",
+      "section": "Staging",
+      "description": "Separate self-healing LyP from pcALCL, then separate solitary/localized pcALCL (local therapy) from multifocal disease (systemic therapy).",
+      "path": "Cutaneous Lymphoma / CD30 / Entity",
+      "pills": [
+        "entity",
+        "extent"
+      ],
+      "required": true,
+      "bullets": [
+        "Lymphomatoid papulosis (LyP): chronic recurrent self-healing papulonodules; diagnosis is clinicopathologic (waxing/waning course plus CD30+ histology types A-E). Excellent prognosis with a small lifelong risk of second lymphoma.",
+        "pcALCL solitary/localized: single lesion or grouped regional lesions without extracutaneous disease on PET/CT. Managed with local excision or RT alone.",
+        "pcALCL multifocal/extensive: scattered lesions across regions or bulky tumors not amenable to local therapy. Requires systemic therapy (brentuximab vedotin or methotrexate).",
+        "Exclude systemic ALCL in every case: B symptoms, nodal disease beyond draining basin, visceral lesions, or ALK positivity redirect to systemic ALCL management, not this pathway."
+      ],
+      "options": [
+        {
+          "id": "lyp",
+          "label": "Lymphomatoid papulosis (self-healing papulonodules)",
+          "sets": {
+            "entity": "lyp"
+          },
+          "pills": [
+            "LyP"
+          ]
+        },
+        {
+          "id": "pcalcl_local",
+          "label": "pcALCL solitary or localized (single/grouped lesions)",
+          "sets": {
+            "entity": "pcalcl_local"
+          },
+          "pills": [
+            "pcALCL local"
+          ]
+        },
+        {
+          "id": "pcalcl_multi",
+          "label": "pcALCL multifocal or extensive skin disease",
+          "sets": {
+            "entity": "pcalcl_multi"
+          },
+          "pills": [
+            "pcALCL multifocal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_cbcl_type",
+      "linkId": "cutl_cbcl_type",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "CBCL entity and extent",
+      "title": "CBCL: histology and extent of skin disease",
+      "section": "Staging",
+      "description": "Histology decides intensity: indolent PCMZL/PCFCL takes local therapy or rituximab, while PCDLBCL leg type takes R-CHOP chemoimmunotherapy.",
+      "path": "Cutaneous Lymphoma / CBCL / Entity",
+      "pills": [
+        "entity",
+        "extent"
+      ],
+      "required": true,
+      "bullets": [
+        "Indolent localized: PCMZL or PCFCL with solitary or regional lesions and no systemic disease. Curable with local RT or excision.",
+        "Indolent generalized: PCMZL or PCFCL with widespread skin lesions not amenable to local therapy. Managed with systemic rituximab, not anthracycline chemotherapy.",
+        "Aggressive: PCDLBCL leg type (sheets of large B cells, usually MUM1/BCL2 positive, frequent leg involvement, inferior survival). Treated as systemic DLBCL with R-CHOP with or without involved-field RT (Category 1).",
+        "Expert hematopathology review is mandatory before committing to R-CHOP: PCFCL with large-cell morphology can mimic leg type but follows an indolent course and must not receive anthracycline chemotherapy."
+      ],
+      "options": [
+        {
+          "id": "indolent_local",
+          "label": "Indolent PCMZL/PCFCL, localized (solitary or regional)",
+          "sets": {
+            "entity": "indolent_local"
+          },
+          "pills": [
+            "indolent local"
+          ]
+        },
+        {
+          "id": "indolent_general",
+          "label": "Indolent PCMZL/PCFCL, generalized skin disease",
+          "sets": {
+            "entity": "indolent_general"
+          },
+          "pills": [
+            "indolent generalized"
+          ]
+        },
+        {
+          "id": "aggressive",
+          "label": "Aggressive PCDLBCL, leg type",
+          "sets": {
+            "entity": "aggressive"
+          },
+          "pills": [
+            "leg type"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_mf_early",
+      "linkId": "tx_mf_early",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Early MF skin-directed therapy",
+      "title": "Early-Stage MF (IA-IIA): Skin-Directed Therapy",
+      "section": "Treatment",
+      "description": "Skin-directed therapy is preferred first-line for Stage IA-IIA MF. Escalate to systemic therapy only for refractory or progressive disease.",
+      "path": "Cutaneous Lymphoma / MF-SS / Early Treatment",
+      "pills": [
+        "early",
+        "skin-directed",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Topical corticosteroids: potent Class I/II agents (e.g., clobetasol propionate 0.05%) applied to limited patches/plaques with taper to intermittent maintenance; monitor skin atrophy, striae, and adrenal suppression with prolonged use.",
+        "Topical mechlorethamine 0.016% gel applied once daily to affected skin; counsel on expected irritant/contact dermatitis (manage with treatment breaks, emollients, topical steroids); avoid eyes, face folds, and genitalia initially.",
+        "Phototherapy 2-3 times weekly: narrowband UVB for thin patches (preferred in fair skin and hypopigmented variants) or PUVA (oral 8-methoxypsoralen plus UVA) for thicker plaques; eye protection during PUVA and lifelong skin-cancer surveillance.",
+        "Local radiation therapy 8-12 Gy (e.g., 8 Gy in 2 fractions) for refractory solitary plaques or tumors; consider low-dose total skin electron beam (12 Gy TSEBT) for extensive refractory early-stage disease.",
+        "Topical retinoids (bexarotene gel) or intralesional corticosteroids for selected refractory limited lesions; avoid systemic chemotherapy for skin-confined early disease.",
+        "Reassess every 8-12 weeks with BSA, photography, response criteria, Sezary flow when indicated, and LDH; switch to the advanced/systemic pathway on tumor development, erythroderma, nodal progression, or B1/B2 blood; dermatology follow-up every 3-6 months lifelong."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_mf_advanced",
+      "linkId": "tx_mf_advanced",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Advanced MF systemic therapy",
+      "title": "Advanced MF (IIB-IV): Systemic Therapy",
+      "section": "Treatment",
+      "description": "Systemic therapy for tumors, erythroderma B0-1, nodal, or visceral MF. Prefer blood- and CD30-directed agents with trial consideration at every line.",
+      "path": "Cutaneous Lymphoma / MF-SS / Advanced Treatment",
+      "pills": [
+        "advanced",
+        "systemic",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Mogamulizumab 1 mg/kg IV weekly for 4 weeks then every 2 weeks for MF with blood involvement (B1/B2; Category 1 preferred, MAVORIC trial); monitor infusion reactions, drug rash, hepatitis, and thyroid function.",
+        "Brentuximab vedotin 1.8 mg/kg IV every 3 weeks (up to 16 cycles) for CD30-expressing MF (Category 1 preferred, ALCANZA trial); monitor peripheral neuropathy, neutropenia, and glycemic control.",
+        "Bexarotene 300 mg/m2 PO daily with prophylactic fenofibrate and levothyroxine; monitor fasting triglycerides, TSH, CBC, and LFTs; teratogenic, strict contraception required.",
+        "HDAC inhibitors: romidepsin 14 mg/m2 IV on days 1, 8, and 15 every 28 days or vorinostat 400 mg PO daily; monitor ECG/QT interval, platelets, nausea, and fatigue.",
+        "Refractory or high-burden disease: single-agent gemcitabine or liposomal (pegylated) doxorubicin; avoid prolonged multi-agent chemotherapy given short response durations in CTCL.",
+        "Allogeneic hematopoietic cell transplantation for young fit patients with refractory advanced disease achieving response; offer a clinical trial at every line; reassess skin, blood Sezary count, nodes, and PET/CT response every 2-3 cycles."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_sezary",
+      "linkId": "tx_sezary",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Sezary syndrome therapy",
+      "title": "Sezary Syndrome: Blood-Directed Systemic Therapy",
+      "section": "Treatment",
+      "description": "Leukemic erythrodermic disease requires blood-directed therapy, usually ECP-based combinations or mogamulizumab, with intensive supportive skin care.",
+      "path": "Cutaneous Lymphoma / MF-SS / Sezary Treatment",
+      "pills": [
+        "Sezary",
+        "systemic",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Mogamulizumab preferred first systemic therapy for B2 Sezary syndrome (Category 1; greatest MAVORIC benefit in SS and B2 blood disease); same dosing and toxicity monitoring as advanced MF.",
+        "Extracorporeal photopheresis (ECP) every 2-4 weeks alone or combined with bexarotene, interferon alfa, or phototherapy for erythrodermic disease; plan durable central venous access and monitor citrate reactions and volume shifts.",
+        "Combine ECP with a systemic agent (bexarotene or mogamulizumab) when single-modality response is inadequate; add HDAC inhibitor (romidepsin or vorinostat) or brentuximab vedotin (if CD30+) per advanced MF options for refractory disease.",
+        "Monitor blood Sezary count with flow cytometry every 4-8 weeks plus skin BSA, pruritus scores, LDH, and nodal exam; restage with PET/CT for suspected visceral spread.",
+        "Supportive care: aggressive emollients and wet wraps, antihistamines and gabapentinoids for pruritus, surveillance for skin superinfection and colonization, fluid/electrolyte and thermoregulation monitoring in erythroderma.",
+        "Discuss allogeneic transplantation eligibility early for fit patients; offer a clinical trial at every line; avoid multi-agent chemotherapy outside palliation of rapidly progressive disease."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_lyp",
+      "linkId": "tx_lyp",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "LyP therapy",
+      "title": "Lymphomatoid Papulosis: Observation and Low-Intensity Therapy",
+      "section": "Treatment",
+      "description": "LyP is chronic and self-healing. Observe localized disease and reserve low-dose methotrexate or phototherapy for extensive symptomatic cases. No multi-agent chemotherapy.",
+      "path": "Cutaneous Lymphoma / CD30 / LyP Treatment",
+      "pills": [
+        "LyP",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Observation for confirmed localized self-healing papulonodules without extracutaneous disease; counsel on the waxing/waning course, expected scarring, and the small lifelong risk of a second lymphoma requiring long-term follow-up.",
+        "Topical corticosteroids (or intralesional steroids for bothersome lesions) for symptomatic localized disease; no excision or RT needed for routinely regressing lesions.",
+        "Low-dose oral methotrexate 10-25 mg once weekly with folic acid for extensive, frequently relapsing, or cosmetically burdensome disease; monitor CBC, LFTs, creatinine, and pulmonary symptoms with baseline and periodic chest imaging.",
+        "Phototherapy (narrowband UVB or PUVA) as an alternative for extensive disease or methotrexate-intolerant patients, with standard phototherapy skin-cancer surveillance.",
+        "Never give multi-agent chemotherapy for LyP; re-biopsy persistent, ulcerated, or enlarging lesions to exclude pcALCL or transformed disease; obtain PET/CT for atypical or extracutaneous features; follow every 6-12 months lifelong."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_pcalcl_local",
+      "linkId": "tx_pcalcl_local",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Localized pcALCL therapy",
+      "title": "pcALCL Solitary/Localized: Excision or Radiation",
+      "section": "Treatment",
+      "description": "Solitary or grouped pcALCL without extracutaneous disease is managed with local therapy alone and carries an excellent prognosis.",
+      "path": "Cutaneous Lymphoma / CD30 / pcALCL Local Treatment",
+      "pills": [
+        "pcALCL",
+        "local",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Complete surgical excision with clear margins for solitary lesions amenable to resection; observe after complete excision without adjuvant systemic therapy.",
+        "Definitive local radiation therapy 24-30 Gy to the involved field for lesions not resected, with positive margins, or grouped regional disease; salvage persistent disease after excision with RT.",
+        "Confirm ALK-negative pcALCL histology and exclude systemic ALCL with PET/CT before committing to local-only therapy; excise and study any draining palpable node.",
+        "Counsel on excellent disease-specific survival with frequent cutaneous relapses managed by repeat local therapy; skin surveillance every 3-6 months; re-biopsy new persistent tumors and restage dissemination."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_pcalcl_multi",
+      "linkId": "tx_pcalcl_multi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Multifocal pcALCL therapy",
+      "title": "pcALCL Multifocal/Extensive: Systemic Therapy",
+      "section": "Treatment",
+      "description": "Multifocal skin disease not amenable to local therapy requires systemic treatment, preferring brentuximab vedotin or low-dose methotrexate.",
+      "path": "Cutaneous Lymphoma / CD30 / pcALCL Multifocal Treatment",
+      "pills": [
+        "pcALCL",
+        "systemic",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Brentuximab vedotin 1.8 mg/kg IV every 3 weeks (preferred) for multifocal or extensive pcALCL; monitor peripheral neuropathy, neutropenia, and infusion reactions.",
+        "Low-dose methotrexate 10-25 mg PO once weekly with folic acid as an alternative, especially for slower-paced multifocal disease; monitor CBC, LFTs, creatinine, and pulmonary status.",
+        "Low-dose involved-field RT for symptomatic bulky lesions alongside systemic therapy; do not use CHOP-type multi-agent chemotherapy for skin-confined multifocal pcALCL.",
+        "Restage with skin photography, lesion counts, and PET/CT after 3-4 cycles; biopsy nonresponding lesions to exclude transformed or systemic disease; reserve transplantation and trials for extracutaneous dissemination."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_cbcl_indolent_local",
+      "linkId": "tx_cbcl_indolent_local",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Indolent CBCL local therapy",
+      "title": "Indolent CBCL Localized (PCMZL/PCFCL): Radiation or Excision",
+      "section": "Treatment",
+      "description": "Localized indolent CBCL is curable with local therapy. Confirm indolent histology and exclude systemic lymphoma first.",
+      "path": "Cutaneous Lymphoma / CBCL / Indolent Local Treatment",
+      "pills": [
+        "indolent",
+        "local",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Definitive low-dose involved-site radiation therapy for solitary or regional PCMZL/PCFCL lesions (excellent local control); preferred for lesions not easily excised or in cosmetically sensitive areas.",
+        "Complete surgical excision with clear margins as an alternative for small solitary lesions; observe completely excised lesions without adjuvant therapy.",
+        "Confirm indolent histology (no sheets of large cells, no leg-type immunophenotype) with expert review and exclude systemic marginal zone or follicular lymphoma (CT or PET/CT, marrow when indicated) before local-only management.",
+        "Intralesional corticosteroids or intralesional rituximab for cosmetically sensitive or recurrent limited lesions; follow every 3-6 months; re-biopsy rapidly growing lesions with LDH rise to exclude transformation."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_cbcl_indolent_general",
+      "linkId": "tx_cbcl_indolent_general",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Indolent CBCL systemic therapy",
+      "title": "Indolent CBCL Generalized (PCMZL/PCFCL): Rituximab",
+      "section": "Treatment",
+      "description": "Generalized indolent CBCL is managed with systemic rituximab. Anthracycline chemotherapy is not indicated.",
+      "path": "Cutaneous Lymphoma / CBCL / Indolent Generalized Treatment",
+      "pills": [
+        "indolent",
+        "rituximab",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Systemic rituximab 375 mg/m2 IV weekly for 4 weeks for generalized PCMZL/PCFCL skin disease; premedicate for infusion reactions and screen for hepatitis B (surface antigen, core antibody) before therapy.",
+        "Intralesional rituximab for select symptomatic lesions when systemic therapy is not desired; low-dose involved-site RT to symptomatic fields as an adjunct.",
+        "Consider a doxycycline trial for Borrelia-associated PCMZL in endemic regions alongside lymphoma-directed therapy per infectious-disease guidance.",
+        "Never give anthracycline-based chemotherapy for indolent CBCL; restage skin (photography, lesion counts) every 8-12 weeks; re-biopsy nonresponding or transforming lesions."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_cbcl_aggressive",
+      "linkId": "tx_cbcl_aggressive",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Leg-type CBCL therapy",
+      "title": "PCDLBCL Leg Type: R-CHOP With or Without Radiation (Category 1)",
+      "section": "Treatment",
+      "description": "Leg-type CBCL is aggressive and treated as systemic DLBCL with R-CHOP chemoimmunotherapy with or without involved-field radiation.",
+      "path": "Cutaneous Lymphoma / CBCL / Leg-Type Treatment",
+      "pills": [
+        "leg type",
+        "R-CHOP",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "R-CHOP-21 for 6 cycles (rituximab plus cyclophosphamide, doxorubicin, vincristine, prednisone) with or without involved-field radiation to bulky or residual sites (Category 1); full-dose intensity preserved in fit patients.",
+        "Baseline cardiac assessment (ECHO or MUGA), hepatitis B/C and HIV screening, CBC, LDH, CMP, and pregnancy testing before therapy; G-CSF primary prophylaxis per age and comorbidity; antiemetics and tumor-lysis precautions for bulky disease.",
+        "Interim and end-of-treatment FDG-PET/CT response assessment by Lugano criteria; biopsy residual PET-avid skin or nodal disease; salvage nonresponders per the systemic DLBCL pathway with clinical trial priority.",
+        "Expert hematopathology review is mandatory before cycle 1 to exclude PCFCL with large-cell morphology (indolent, no anthracycline); long-term surveillance for relapse and late anthracycline or RT toxicity."
+      ],
+      "protocolRefs": []
+    }
+  ],
+  "links": [
+    {
+      "id": "l_sub_mf",
+      "from": "n_subtype",
+      "to": "n_mf_ss_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mf_ss"
+      ]
+    },
+    {
+      "id": "l_sub_cd30",
+      "from": "n_subtype",
+      "to": "n_cd30_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "cd30"
+      ]
+    },
+    {
+      "id": "l_sub_cbcl",
+      "from": "n_subtype",
+      "to": "n_cbcl_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "cbcl"
+      ]
+    },
+    {
+      "id": "l_mfwk_stage",
+      "from": "n_mf_ss_wk",
+      "to": "n_mf_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_cd30wk_type",
+      "from": "n_cd30_wk",
+      "to": "n_cd30_type",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_cbclwk_type",
+      "from": "n_cbcl_wk",
+      "to": "n_cbcl_type",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_early",
+      "from": "n_mf_stage",
+      "to": "n_tx_mf_early",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "early"
+      ]
+    },
+    {
+      "id": "l_stage_advanced",
+      "from": "n_mf_stage",
+      "to": "n_tx_mf_advanced",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "advanced"
+      ]
+    },
+    {
+      "id": "l_stage_sezary",
+      "from": "n_mf_stage",
+      "to": "n_tx_sezary",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sezary"
+      ]
+    },
+    {
+      "id": "l_cd30_lyp",
+      "from": "n_cd30_type",
+      "to": "n_tx_lyp",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "lyp"
+      ]
+    },
+    {
+      "id": "l_cd30_pclocal",
+      "from": "n_cd30_type",
+      "to": "n_tx_pcalcl_local",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pcalcl_local"
+      ]
+    },
+    {
+      "id": "l_cd30_pcmulti",
+      "from": "n_cd30_type",
+      "to": "n_tx_pcalcl_multi",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pcalcl_multi"
+      ]
+    },
+    {
+      "id": "l_cbcl_indloc",
+      "from": "n_cbcl_type",
+      "to": "n_tx_cbcl_indolent_local",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "indolent_local"
+      ]
+    },
+    {
+      "id": "l_cbcl_indgen",
+      "from": "n_cbcl_type",
+      "to": "n_tx_cbcl_indolent_general",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "indolent_general"
+      ]
+    },
+    {
+      "id": "l_cbcl_aggr",
+      "from": "n_cbcl_type",
+      "to": "n_tx_cbcl_aggressive",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "aggressive"
+      ]
+    }
+  ]
+}

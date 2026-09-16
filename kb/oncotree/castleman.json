@@ -1,0 +1,778 @@
+{
+  "guideline": "castleman",
+  "title": "Castleman Disease",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "castleman_disease_multicentric",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Castleman Disease (Unicentric Castleman Disease UCD, Idiopathic Multicentric Castleman Disease iMCD, and HHV-8-associated MCD). Implements Workup First diagnostic checklists (excisional biopsy, LANA-1, IL-6, CDCN severity criteria), complete surgical resection for UCD, Siltuximab / Tocilizumab anti-IL-6 therapy for iMCD, and Rituximab-based regimens for HHV-8+ MCD. References StewardMD ONCQIS Standard Protocols. DRAFT - clinical decision support; physician decides.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Castleman Disease Version 2.2026 (April 28, 2026).",
+  "startNodeIds": [
+    "n_presentation"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Excisional lymph node biopsy is required for diagnosis. Core needle biopsy and FNA are inadequate to evaluate Castleman nodal architecture (regressed germinal centers, onion-skin mantle zones, sheet-like plasmacytosis) and cannot reliably exclude lymphoma.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Siltuximab 11 mg/kg IV every 3 weeks is the Category 1 preferred first-line therapy for iMCD based on the phase II randomized trial (van Rhee et al.) showing durable tumor and symptomatic response versus placebo; give with corticosteroids at initiation and continue indefinitely in responders.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "Rituximab 375 mg/m2 weekly for 4 weeks is the backbone of HHV-8-associated MCD therapy and markedly improved overall survival in the HIV-positive MCD cohorts; observe after response and retreat at progression. Occult Kaposi sarcoma may flare after rituximab or corticosteroids, so screen at baseline and continue KS-directed therapy for about 3 months after the last rituximab dose.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Severe iMCD is defined by CDCN criteria including ECOG performance status >=2, eGFR <60 mL/min, hemoglobin <=8 g/dL, anasarca or effusions, pulmonary involvement, or other organ dysfunction; iMCD-TAFRO (thrombocytopenia, anasarca, fever, reticulin fibrosis, organomegaly) behaves as severe disease and is managed as such.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Complete surgical excision is curative for unicentric Castleman disease with near-100% long-term survival when fully resected; unresectable UCD may be downsized with anti-IL-6 therapy, rituximab, or embolization to enable resection, or treated with definitive radiotherapy (30-40 Gy).",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_presentation",
+      "linkId": "castleman_presentation",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical Presentation",
+      "title": "Castleman Disease: Extent of Presentation",
+      "section": "Diagnosis",
+      "description": "Step 1: Clinical Presentation. Distinguish unicentric disease (single lymph node region, usually asymptomatic mass) from multicentric disease (generalized lymphadenopathy with systemic inflammatory symptoms). Extent directs the diagnostic workup checklist.",
+      "path": "Castleman / Presentation",
+      "pills": [
+        "presentation"
+      ],
+      "required": true,
+      "bullets": [
+        "Unicentric Castleman Disease (UCD): single enlarged lymph node or single-regional nodal mass, often hyaline-vascular histology; systemic symptoms uncommon.",
+        "Multicentric Castleman Disease (MCD): generalized lymphadenopathy plus systemic features (fever, night sweats, weight loss, fatigue), cytopenias, anasarca or effusions, organomegaly, renal or pulmonary dysfunction.",
+        "Document HIV status, immunosuppression, Kaposi sarcoma lesions, and autoimmune or POEMS-associated features at first contact; do not start therapy before excisional tissue diagnosis."
+      ],
+      "options": [
+        {
+          "id": "ucd",
+          "label": "Unicentric: single node or single-regional mass",
+          "sets": {
+            "presentation": "unicentric"
+          },
+          "pills": [
+            "UCD"
+          ]
+        },
+        {
+          "id": "mcd",
+          "label": "Multicentric: generalized nodes with systemic inflammation",
+          "sets": {
+            "presentation": "multicentric"
+          },
+          "pills": [
+            "MCD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_ucd_wk",
+      "linkId": "castleman_ucd_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "UCD Workup",
+      "title": "Suspected UCD: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Confirm unicentric extent, secure excisional tissue, and exclude lymphoma before any resection planning.",
+      "path": "Castleman / UCD / Workup",
+      "pills": [
+        "UCD",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Excisional lymph node biopsy of the dominant node (entire node preferred). Core needle biopsy and FNA are inadequate to evaluate Castleman architecture and cannot reliably exclude lymphoma.",
+        "Pathology panel: LANA-1 IHC for HHV-8, CD20, CD3, CD138, kappa/lambda light chains with clonality assessment; hyaline-vascular versus plasma-cell variant; explicit lymphoma exclusion.",
+        "Virology: quantitative PCR for HHV-8 viral load; HIV-1/2 serology; hepatitis B screening (HBsAg, anti-HBc, anti-HBs) before any rituximab exposure.",
+        "Inflammatory and organ labs: serum IL-6, CRP, ESR, SPEP with serum free light chains, CBC with differential, comprehensive metabolic panel, LDH, beta-2 microglobulin.",
+        "Imaging: whole-body contrast-enhanced CT or FDG-PET/CT to confirm single-station disease and plan resectability; chest/abdomen/pelvis coverage.",
+        "Surgical consult: assess resectability, vascular encasement, and airway or compressive risk; record baseline performance status and comorbidities."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Severity & Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_mcd_wk",
+      "linkId": "castleman_mcd_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MCD Workup",
+      "title": "Suspected MCD: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Confirm multicentric extent, establish HHV-8/HIV status, quantify IL-6-driven inflammation, and grade CDCN severity criteria before systemic therapy.",
+      "path": "Castleman / MCD / Workup",
+      "pills": [
+        "MCD",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Excisional lymph node biopsy of the most accessible FDG-avid node. Core needle biopsy and FNA are inadequate to evaluate Castleman architecture and cannot reliably exclude lymphoma, plasmablastic lymphoma, or Kaposi sarcoma.",
+        "Pathology panel: LANA-1 IHC for HHV-8, CD20, CD3, CD138, kappa/lambda light chains with clonality assessment; plasmablastic or plasmacytic features; explicit lymphoma exclusion.",
+        "Virology: quantitative PCR for HHV-8 viral load; HIV-1/2 serology with CD4 count and HIV RNA if positive; hepatitis B screening before any rituximab exposure.",
+        "Inflammatory and organ labs: serum IL-6, CRP, ESR, SPEP with serum free light chains, CBC with differential, comprehensive metabolic panel (creatinine/eGFR, LFTs, albumin), LDH, beta-2 microglobulin; coagulation profile if TAFRO features (thrombocytopenia, anasarca, fever, reticulin fibrosis, organomegaly).",
+        "Imaging: whole-body contrast-enhanced CT or FDG-PET/CT to map all involved stations, spleen/liver size, effusions, and Kaposi sarcoma visceral sites.",
+        "Severity baseline for CDCN triage: ECOG performance status, eGFR, hemoglobin, anasarca or effusion volume, pulmonary function/oxygen need, and organ dysfunction inventory; dermatologic and pulmonary KS screen."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Severity & Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_ucd_resect",
+      "linkId": "castleman_ucd_resect",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "UCD Resectability",
+      "title": "UCD: Surgical Resectability Assessment",
+      "section": "Staging",
+      "description": "Workup confirmed unicentric disease. Determine whether complete surgical excision is feasible, which is the curative standard.",
+      "path": "Castleman / UCD / Resectability",
+      "pills": [
+        "UCD",
+        "resectability"
+      ],
+      "required": true,
+      "bullets": [
+        "Resectable: single-station mass removable with clear margins without unacceptable vascular, airway, or neurologic sacrifice.",
+        "Unresectable: bulky or anatomically critical disease (mediastinal vascular encasement, deep cervical or retroperitoneal fixation) where upfront complete excision is unsafe.",
+        "Reconfirm single-station extent on contrast CT or PET/CT before committing to a curative resection plan."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Resectable: complete excision feasible",
+          "sets": {
+            "resectability": "resectable"
+          },
+          "pills": [
+            "UCD",
+            "resectable"
+          ]
+        },
+        {
+          "id": "unresectable",
+          "label": "Unresectable: upfront complete excision unsafe",
+          "sets": {
+            "resectability": "unresectable"
+          },
+          "pills": [
+            "UCD",
+            "unresectable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_ucd_resected",
+      "linkId": "castleman_tx_ucd_resected",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "UCD Resected Treatment",
+      "title": "UCD, Resectable: Complete Surgical Excision (Curative)",
+      "section": "Treatment",
+      "description": "Curative-intent complete resection followed by surveillance; no adjuvant systemic therapy when fully excised.",
+      "path": "Castleman / UCD / Resected",
+      "pills": [
+        "UCD",
+        "resectable",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Complete surgical excision with curative intent: remove the involved node(s) en bloc with clear margins; confirm unicentric extent intraoperatively.",
+        "No adjuvant systemic therapy or radiotherapy is indicated after complete (R0) resection; systemic IL-6 blockade is not required.",
+        "If pathology on the resected specimen shows HHV-8 positivity or multicentric features, re-stage as MCD and redirect to the multicentric pathway.",
+        "Surveillance: history, examination, CBC, CRP, and contrast CT or PET/CT at 6 and 12 months, then annually for 3 years; recurrence after complete resection is rare and long-term survival approaches 100%.",
+        "Incomplete (R1/R2) resection: re-resect when feasible; otherwise manage residual disease as unresectable UCD (downsizing therapy or definitive RT)."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_ucd_unresect_plan",
+      "linkId": "castleman_ucd_unresect_plan",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Unresectable UCD Strategy",
+      "title": "UCD, Unresectable: Downsizing Versus Definitive RT",
+      "section": "Treatment",
+      "description": "Select between downsizing therapy to enable delayed resection and definitive radiotherapy for disease that will remain unresectable.",
+      "path": "Castleman / UCD / Unresectable",
+      "pills": [
+        "UCD",
+        "unresectable"
+      ],
+      "required": true,
+      "bullets": [
+        "Downsizing path suits bulky but potentially resectable disease and younger, fit patients who can tolerate systemic therapy and a second surgical assessment.",
+        "Definitive RT suits disease fixed to critical structures where resection will never be safe, or patients unfit for systemic downsizing.",
+        "Reassess resectability with contrast CT or PET/CT after any downsizing course before declaring definitive management."
+      ],
+      "options": [
+        {
+          "id": "downsize",
+          "label": "Downsize first: systemic therapy or embolization, then re-attempt resection",
+          "sets": {
+            "ucd_strategy": "downsize"
+          },
+          "pills": [
+            "UCD",
+            "downsizing"
+          ]
+        },
+        {
+          "id": "definitive_rt",
+          "label": "Definitive radiotherapy (resection never feasible)",
+          "sets": {
+            "ucd_strategy": "definitive_rt"
+          },
+          "pills": [
+            "UCD",
+            "radiotherapy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_ucd_downsize",
+      "linkId": "castleman_tx_ucd_downsize",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "UCD Downsizing Treatment",
+      "title": "UCD, Unresectable: Downsize to Enable Resection",
+      "section": "Treatment",
+      "description": "Shrink disease with anti-IL-6 therapy, rituximab, or embolization, then re-attempt curative resection.",
+      "path": "Castleman / UCD / Downsizing",
+      "pills": [
+        "UCD",
+        "unresectable",
+        "downsizing"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Siltuximab (anti-IL-6, 11 mg/kg IV every 3 weeks) with or without a corticosteroid taper to reduce IL-6-driven bulk and vascularity before surgery.",
+        "Alternative downsizing: rituximab 375 mg/m2 weekly for 4 weeks (particularly for plasma-cell variant or when anti-IL-6 therapy is unavailable), with hepatitis B screening completed before the first dose.",
+        "Selective arterial embolization by interventional radiology for hypervascular masses as a bridge to resection or when systemic therapy is unsuitable.",
+        "Reassess with contrast CT or PET/CT after 3-4 cycles (or 6-8 weeks post-embolization); proceed to complete surgical excision as soon as resectable.",
+        "If disease becomes resectable and is fully excised, follow the resected-UCD surveillance schedule; if it remains unresectable, offer definitive radiotherapy (30-40 Gy)."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_ucd_rt",
+      "linkId": "castleman_tx_ucd_rt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "UCD Radiotherapy Treatment",
+      "title": "UCD, Unresectable: Definitive Radiotherapy 30-40 Gy",
+      "section": "Treatment",
+      "description": "Definitive involved-site radiotherapy for UCD that cannot be resected now or after downsizing.",
+      "path": "Castleman / UCD / Radiotherapy",
+      "pills": [
+        "UCD",
+        "unresectable",
+        "radiotherapy"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Definitive involved-site radiotherapy 30-40 Gy in conventional fractionation (commonly 36 Gy in 18 fractions) to the unresectable nodal mass with image-guided planning.",
+        "Short corticosteroid course for compressive or airway-adjacent symptoms during radiotherapy planning and delivery.",
+        "Response assessment with contrast CT or PET/CT at 8-12 weeks post-RT; durable local control exceeds 85% in reported series.",
+        "Salvage options for in-field progression: re-consider surgical excision, downsizing systemic therapy (siltuximab or rituximab), or re-irradiation only after multidisciplinary review.",
+        "Surveillance: clinical review with CBC and CRP every 3-6 months for 2 years, then annually; cross-sectional imaging at 6 and 12 months post-RT."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_mcd_subtype",
+      "linkId": "castleman_mcd_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MCD Subtype",
+      "title": "MCD: HHV-8 / HIV Subtype Classification",
+      "section": "Staging",
+      "description": "Workup established multicentric disease. Classify by HHV-8 LANA-1 and viral load plus HIV status: HHV-8-associated MCD versus HHV-8-negative iMCD. This single fork determines systemic therapy.",
+      "path": "Castleman / MCD / Subtype",
+      "pills": [
+        "MCD",
+        "subtyping"
+      ],
+      "required": true,
+      "bullets": [
+        "HHV-8-associated MCD: LANA-1 IHC positive and/or detectable HHV-8 viremia, in HIV-positive or HIV-negative (often immunocompromised or elderly) patients; plasmablastic features common.",
+        "iMCD (HHV-8 negative): LANA-1 negative with undetectable HHV-8 viral load and negative HIV serology; requires CDCN diagnostic criteria (major: characteristic histopathology plus multicentric lymphadenopathy; minor: laboratory and clinical features) with exclusion of mimics.",
+        "Indeterminate or non-diagnostic histology: repeat excisional biopsy rather than starting empiric therapy, and exclude lymphoma, plasmablastic lymphoma, Kaposi sarcoma, POEMS syndrome, IgG4-related disease, and active autoimmune disease."
+      ],
+      "options": [
+        {
+          "id": "hhv8_pos",
+          "label": "HHV-8-associated MCD (LANA-1 positive or HHV-8 viremia)",
+          "sets": {
+            "biomarkers.HHV8": "positive"
+          },
+          "pills": [
+            "MCD",
+            "HHV-8+"
+          ]
+        },
+        {
+          "id": "hhv8_neg",
+          "label": "iMCD (HHV-8 negative, HIV negative)",
+          "sets": {
+            "biomarkers.HHV8": "negative"
+          },
+          "pills": [
+            "MCD",
+            "iMCD"
+          ]
+        },
+        {
+          "id": "indeterminate",
+          "label": "Indeterminate histology or mimics not yet excluded",
+          "pills": [
+            "MCD",
+            "indeterminate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_mcd_rebiopsy",
+      "linkId": "castleman_tx_mcd_rebiopsy",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MCD Re-biopsy",
+      "title": "MCD, Indeterminate: Repeat Excisional Biopsy (Do Not Treat Empirically)",
+      "section": "Treatment",
+      "description": "No Castleman-directed therapy until excisional histology plus HHV-8/HIV status firmly establish the subtype and exclude mimics.",
+      "path": "Castleman / MCD / Re-biopsy",
+      "pills": [
+        "MCD",
+        "indeterminate",
+        "biopsy"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Repeat excisional biopsy of a different, preferably FDG-avid node; send for LANA-1 IHC, CD20/CD3/CD138, kappa/lambda clonality, EBER-ISH, and lymphoma gene rearrangement studies.",
+        "Re-check quantitative HHV-8 PCR, HIV-1/2 serology, SPEP with free light chains (POEMS screen), IgG4 levels, and autoimmune serologies (ANA, RF, anti-CCP) to exclude mimics.",
+        "Provide supportive care only (antipyretics, transfusion, albumin, effusion drainage) while awaiting histology; corticosteroids only as a bridge for compressive or organ-threatening symptoms because they obscure histology.",
+        "Multidisciplinary hematopathology review is mandatory before any siltuximab, rituximab, or cytotoxic therapy is started.",
+        "Once subtype is established, re-enter the navigator at MCD subtype classification."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_imcd_severity",
+      "linkId": "castleman_imcd_severity",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "iMCD Severity",
+      "title": "iMCD: CDCN Severity Triage (Non-Severe vs Severe vs Refractory)",
+      "section": "Staging",
+      "description": "Triage HHV-8-negative iMCD by CDCN severity criteria. Severe disease (including iMCD-TAFRO) needs siltuximab plus high-dose corticosteroids; refractory disease needs second-line agents.",
+      "path": "Castleman / iMCD / Severity",
+      "pills": [
+        "iMCD",
+        "severity"
+      ],
+      "required": true,
+      "bullets": [
+        "Non-severe iMCD: ECOG 0-1, eGFR >=60 mL/min, hemoglobin >8 g/dL, no anasarca or significant effusions, no pulmonary failure or major organ dysfunction.",
+        "Severe iMCD: any organ dysfunction, ECOG >=2, eGFR <60 mL/min, hemoglobin <=8 g/dL, anasarca or large effusions, pulmonary involvement with hypoxia, or iMCD-TAFRO phenotype (thrombocytopenia, anasarca, fever, reticulin fibrosis, organomegaly).",
+        "Refractory or relapsed iMCD: no meaningful response after at least 3-4 cycles of siltuximab-based therapy, or progression after an initial response; confirm adherence, infusion adequacy, and that mimics remain excluded."
+      ],
+      "options": [
+        {
+          "id": "non_severe",
+          "label": "Non-severe iMCD (no organ dysfunction, ECOG 0-1)",
+          "sets": {
+            "severity": "non-severe"
+          },
+          "pills": [
+            "iMCD",
+            "non-severe"
+          ]
+        },
+        {
+          "id": "severe",
+          "label": "Severe iMCD or iMCD-TAFRO (organ dysfunction present)",
+          "sets": {
+            "severity": "severe"
+          },
+          "pills": [
+            "iMCD",
+            "severe"
+          ]
+        },
+        {
+          "id": "refractory",
+          "label": "Refractory or relapsed after anti-IL-6 therapy",
+          "sets": {
+            "severity": "refractory"
+          },
+          "pills": [
+            "iMCD",
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_imcd_nonsevere",
+      "linkId": "castleman_tx_imcd_nonsevere",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "iMCD Non-Severe Treatment",
+      "title": "iMCD, Non-Severe: Siltuximab 11 mg/kg q3w (Category 1 Preferred)",
+      "section": "Treatment",
+      "description": "First-line anti-IL-6 therapy with or without corticosteroids; continue indefinitely in responders with IL-6/CRP monitoring.",
+      "path": "Castleman / iMCD / Non-severe",
+      "pills": [
+        "iMCD",
+        "non-severe",
+        "anti-IL-6"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Siltuximab 11 mg/kg IV every 3 weeks (Category 1 preferred) with or without prednisone approximately 1 mg/kg daily tapered over 4-6 weeks; continue siltuximab indefinitely in responders.",
+        "Tocilizumab 8 mg/kg IV every 2 weeks is the accepted anti-IL-6 alternative where siltuximab is unavailable, with the same corticosteroid-taper backbone.",
+        "Response assessment every 3 cycles: lymph node size (contrast CT or PET/CT), CRP and ESR normalization, hemoglobin and albumin recovery, eGFR trend, and symptom scores; IL-6 levels may paradoxically rise on therapy and must be read alongside CRP.",
+        "Prophylaxis and monitoring: PJP prophylaxis during prolonged steroids, glycemic and blood pressure control, lipid panel on tocilizumab, bowel-perforation vigilance (diverticulitis history), and tuberculosis/hepatitis B screening before therapy.",
+        "Non-response after 3-4 cycles or any progression to organ dysfunction: re-triage as severe or refractory iMCD and escalate without delay."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_imcd_severe",
+      "linkId": "castleman_tx_imcd_severe",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "iMCD Severe Treatment",
+      "title": "iMCD, Severe / TAFRO: Siltuximab + High-Dose Methylprednisolone (Category 1)",
+      "section": "Treatment",
+      "description": "Combined anti-IL-6 plus high-dose IV corticosteroids with ICU-capable organ support; TAFRO managed as severe disease.",
+      "path": "Castleman / iMCD / Severe",
+      "pills": [
+        "iMCD",
+        "severe",
+        "anti-IL-6"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Siltuximab 11 mg/kg IV every 3 weeks (Category 1) plus high-dose IV methylprednisolone (for example 500 mg to 1 g daily for 3 days, then prednisone 1-2 mg/kg with taper) started together without waiting for further deterioration.",
+        "Organ support in parallel: ICU or high-dependency care for anasarca with albumin and diuresis, effusion drainage, transfusion for hemoglobin <=8 g/dL, renal replacement planning for eGFR <60 mL/min with rising creatinine, and oxygen or ventilatory support for pulmonary involvement.",
+        "iMCD-TAFRO specifics: platelet transfusion thresholds per bleeding risk, thrombosis vigilance despite thrombocytopenia, fever workup excluding sepsis before attributing fever to disease, and early nephrology and pulmonology involvement.",
+        "Reassess severity weekly: ECOG, fluid balance and weights, creatinine/eGFR, hemoglobin, CRP/ESR, and repeat cross-sectional imaging at 6-9 weeks; de-escalate steroids as soon as organ dysfunction reverses while continuing siltuximab.",
+        "No improvement within 2-3 weeks or further organ failure: switch to refractory-pathway therapy (rituximab, cyclosporine A, or cytotoxic chemotherapy) and consider clinical trial referral."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_imcd_refractory",
+      "linkId": "castleman_tx_imcd_refractory",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "iMCD Refractory Treatment",
+      "title": "iMCD, Refractory: Rituximab / Cyclosporine A / Cytotoxic Chemotherapy",
+      "section": "Treatment",
+      "description": "Second-line options after anti-IL-6 failure: rituximab, cyclosporine A (especially TAFRO), or CHOP-type cytotoxic chemotherapy; trial preferred.",
+      "path": "Castleman / iMCD / Refractory",
+      "pills": [
+        "iMCD",
+        "refractory",
+        "second-line"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Rituximab 375 mg/m2 IV weekly for 4 weeks, particularly for plasma-cell-rich or autoimmune-featured iMCD; complete hepatitis B screening before the first dose and monitor for infusion reactions and hypogammaglobulinemia.",
+        "Cyclosporine A (target trough per local protocol, commonly 150-250 ng/mL) with corticosteroids, preferred for iMCD-TAFRO with thrombocytopenia and anasarca; monitor blood pressure, creatinine, magnesium, and drug levels weekly at initiation.",
+        "Cytotoxic chemotherapy for rapidly progressive or multiorgan-refractory disease: CHOP (cyclophosphamide, doxorubicin, vincristine, prednisone) every 3 weeks, with baseline LVEF, growth-factor support per febrile-neutropenia risk, and antiemetic prophylaxis.",
+        "Clinical trial enrollment is preferred at this stage (JAK inhibitors, mTOR inhibitors, anti-CD38 or B-cell-directed strategies) where available.",
+        "Re-stage with PET/CT after 2-3 cycles of any second-line regimen; durable responders may return to siltuximab maintenance, and allogeneic transplant discussion is reserved for young, fit, multiply-relapsed patients after expert review."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_hhv8_profile",
+      "linkId": "castleman_hhv8_profile",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "HHV-8 MCD Course",
+      "title": "HHV-8+ MCD: Standard Course vs Severe / KS-Visceral Course",
+      "section": "Staging",
+      "description": "Stratify HHV-8-associated MCD by concurrent HIV control, Kaposi sarcoma burden, and organ failure to choose rituximab alone versus rituximab plus cytotoxic therapy.",
+      "path": "Castleman / HHV-8 MCD / Course",
+      "pills": [
+        "MCD",
+        "HHV-8+"
+      ],
+      "required": true,
+      "bullets": [
+        "Standard course: controlled or absent HIV, no visceral Kaposi sarcoma, no KSHV inflammatory cytokine syndrome with organ failure; rituximab monotherapy backbone applies.",
+        "Severe course: KSHV inflammatory cytokine syndrome with hypotension or organ failure, visceral or pulmonary Kaposi sarcoma, severe cytopenias or hemophagocytosis, or fulminant flare despite ART; add cytotoxic therapy to rituximab.",
+        "Both courses require concurrent ART optimization in HIV-positive patients, KS surveillance, hepatitis B screening, and antiviral consideration."
+      ],
+      "options": [
+        {
+          "id": "standard",
+          "label": "Standard course: no visceral KS or organ failure",
+          "sets": {
+            "hhv8_course": "standard"
+          },
+          "pills": [
+            "HHV-8+",
+            "standard"
+          ]
+        },
+        {
+          "id": "severe_course",
+          "label": "Severe course: KICS with organ failure, visceral KS, or fulminant flare",
+          "sets": {
+            "hhv8_course": "severe"
+          },
+          "pills": [
+            "HHV-8+",
+            "severe"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_hhv8_ritux",
+      "linkId": "castleman_tx_hhv8_ritux",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HHV-8 MCD Rituximab Treatment",
+      "title": "HHV-8+ MCD, Standard: Rituximab Weekly x4 + ART + Antiviral",
+      "section": "Treatment",
+      "description": "Time-limited rituximab backbone with concurrent ART for HIV-positive patients and antiviral therapy; observe and retreat at progression.",
+      "path": "Castleman / HHV-8 MCD / Rituximab",
+      "pills": [
+        "MCD",
+        "HHV-8+",
+        "rituximab"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Rituximab 375 mg/m2 IV weekly for 4 weeks as the treatment backbone; add a short prednisone course only for compressive symptoms, then observe; retreat with rituximab at progression (time-limited therapy).",
+        "Concurrent antiretroviral therapy (ART): continue and optimize ART in all HIV-positive patients throughout MCD therapy; coordinate with HIV medicine for immune reconstitution monitoring.",
+        "Antiviral therapy: ganciclovir or valganciclovir per local dosing for active HHV-8 viremia or severe flare, with CBC and renal monitoring.",
+        "Kaposi sarcoma caution: screen skin, lungs, and GI tract for occult KS at baseline because KS may flare after rituximab or corticosteroids; continue or initiate KS-directed therapy for about 3 months after the last rituximab dose.",
+        "Safety: hepatitis B screening and prophylaxis before rituximab, infusion-reaction premedication (acetaminophen plus antihistamine), immunoglobulin monitoring, and response review with HHV-8 viral load, CRP, hemoglobin, and PET/CT at 8-12 weeks."
+      ],
+      "protocolRefs": [
+        "rare-castleman-rituximab"
+      ]
+    },
+    {
+      "id": "n_tx_hhv8_combo",
+      "linkId": "castleman_tx_hhv8_combo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HHV-8 MCD Combination Treatment",
+      "title": "HHV-8+ MCD, Severe: Rituximab + Liposomal Doxorubicin / Etoposide",
+      "section": "Treatment",
+      "description": "Rituximab backbone plus cytotoxic therapy for KICS with organ failure, visceral KS, or fulminant flare, with ART and antiviral cover.",
+      "path": "Castleman / HHV-8 MCD / Combination",
+      "pills": [
+        "MCD",
+        "HHV-8+",
+        "combination"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Rituximab 375 mg/m2 IV weekly for 4 weeks plus liposomal doxorubicin (preferred when concurrent Kaposi sarcoma needs treatment) or etoposide for KICS with organ failure or severe cytopenias; baseline LVEF and CBC required.",
+        "Concurrent antiretroviral therapy (ART): continue and optimize ART in all HIV-positive patients; manage drug interactions between ART, chemotherapy, and antifungals via HIV pharmacy review.",
+        "Antiviral therapy: ganciclovir or valganciclovir during the acute flare with CBC and renal monitoring.",
+        "Add high-dose corticosteroids only for immediately life-threatening inflammation or airway compression, then taper rapidly because steroids worsen KS and obscure response assessment.",
+        "Supportive and follow-up care: growth-factor support per febrile-neutropenia risk, PJP prophylaxis, KS-directed therapy continued about 3 months past the last rituximab dose, and PET/CT plus HHV-8 viral load reassessment after 2 cycles; de-escalate to rituximab-alone retreat at progression once the severe phase resolves."
+      ],
+      "protocolRefs": [
+        "rare-castleman-rituximab"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_pres_ucd",
+      "from": "n_presentation",
+      "to": "n_ucd_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "ucd"
+      ]
+    },
+    {
+      "id": "l_pres_mcd",
+      "from": "n_presentation",
+      "to": "n_mcd_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mcd"
+      ]
+    },
+    {
+      "id": "l_ucdwk_resect",
+      "from": "n_ucd_wk",
+      "to": "n_ucd_resect",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_mcdwk_subtype",
+      "from": "n_mcd_wk",
+      "to": "n_mcd_subtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_resect_yes",
+      "from": "n_ucd_resect",
+      "to": "n_tx_ucd_resected",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "resectable"
+      ]
+    },
+    {
+      "id": "l_resect_no",
+      "from": "n_ucd_resect",
+      "to": "n_ucd_unresect_plan",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "unresectable"
+      ]
+    },
+    {
+      "id": "l_unresect_down",
+      "from": "n_ucd_unresect_plan",
+      "to": "n_tx_ucd_downsize",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "downsize"
+      ]
+    },
+    {
+      "id": "l_unresect_rt",
+      "from": "n_ucd_unresect_plan",
+      "to": "n_tx_ucd_rt",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "definitive_rt"
+      ]
+    },
+    {
+      "id": "l_sub_hhv8pos",
+      "from": "n_mcd_subtype",
+      "to": "n_hhv8_profile",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "hhv8_pos"
+      ]
+    },
+    {
+      "id": "l_sub_hhv8neg",
+      "from": "n_mcd_subtype",
+      "to": "n_imcd_severity",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "hhv8_neg"
+      ]
+    },
+    {
+      "id": "l_sub_ind",
+      "from": "n_mcd_subtype",
+      "to": "n_tx_mcd_rebiopsy",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "indeterminate"
+      ]
+    },
+    {
+      "id": "l_sev_non",
+      "from": "n_imcd_severity",
+      "to": "n_tx_imcd_nonsevere",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "non_severe"
+      ]
+    },
+    {
+      "id": "l_sev_sev",
+      "from": "n_imcd_severity",
+      "to": "n_tx_imcd_severe",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "severe"
+      ]
+    },
+    {
+      "id": "l_sev_ref",
+      "from": "n_imcd_severity",
+      "to": "n_tx_imcd_refractory",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "refractory"
+      ]
+    },
+    {
+      "id": "l_hhv8_std",
+      "from": "n_hhv8_profile",
+      "to": "n_tx_hhv8_ritux",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "standard"
+      ]
+    },
+    {
+      "id": "l_hhv8_sev",
+      "from": "n_hhv8_profile",
+      "to": "n_tx_hhv8_combo",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "severe_course"
+      ]
+    }
+  ]
+}

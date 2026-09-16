@@ -5,6 +5,77 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
+
+**Decision:** `recommendFor()` now recommends Private Device OCR - relabeled "Hybrid" in the UI whenever
+its automatic second-reader check can actually engage (`hybridReady()`) - ahead of AI Vision, which
+drops to second, then plain on-device OCR/On-device AI last. Two independent readers agreeing is safer
+than either alone, and it is free when the on-device model does the checking. Falls back to the old
+AI-Vision-first order when hybrid cannot engage (no consent yet and no local vision pack downloaded, or
+`smd_icu_hybrid=0`, or no device OCR at all as on web). The engine-card copy and Settings list relabel
+the "device" option "Hybrid" with an updated description under the same condition, so the picker and
+Settings never disagree about what the recommended option actually does.
+
+Added a "Don't ask me again" button to the chooser sheet, distinct from the existing "Remember my
+choice" checkbox: remembering only pre-selects the radio next time, the sheet still shows; the new
+button (`localStorage.stewardmd.imageEngineSkipChooser`) skips the sheet entirely and routes straight to
+the remembered engine. Re-enabled from Settings ("Ask which engine to use every time"), shown only while
+skipped.
+
+**Bug fixed in passing:** `getPref()`/`setPref()` only ever persisted `"ai"` or `"device"` -  choosing
+"On-device AI" and checking "Remember my choice" silently reverted to Device on the next photo. Found
+because the skip button is pointless if the remembered engine isn't the one actually chosen. Now all
+three values round-trip.
+
+## 2026-09-16 · ICU OCR digit reader ported to Android (TFLite), not a second cloud model
+
+**Decision:** The on-device CRNN-CTC digit reader (1.5M params, 3MB, iOS Core ML since 2026-09-15) is
+now on Android too, via the SAME training checkpoint (`best.pt`) converted PyTorch -> ONNX -> TFLite
+with `onnx2tf`, not retrained. Verified before shipping: 50/50 exact text match and ~0.00002 max logit
+diff against the original PyTorch model on the held-out parity set (tighter than the Core ML export's
+own 0.028). Ships as a new Android source set on the existing `@stewardmd/capacitor-vision-ocr` local
+plugin (`local-plugins/capacitor-vision-ocr/android/`), registered under the SAME Capacitor plugin name
+(`VisionOcr`) and the SAME `readDigits({base64Image, boxes}) -> {available, reads}` contract as iOS, so
+`native-bridge.js` / `reasoning.js` needed ZERO platform-specific changes - `window.SMD_NATIVE.readDigits`
+just starts working on Android because `Capacitor.Plugins.VisionOcr.readDigits` now exists there.
+
+**Why this instead of a small vision-language model:** the owner asked for "any small image reading
+model, fewer parameters" after seeing the local-hybrid MedGemma check take 2-5+ minutes per photo on
+Android. Every vision-capable MaiK pack is 4B-class (2.5-3.1 GB); there is no smaller VLM in the app,
+and reaching for an off-the-shelf small VLM (SmolVLM, Moondream) would mean unproven digit-reading
+accuracy plus real GGUF/TFLite integration work. The digit reader already exists, is purpose-built for
+exactly this (7-segment/LCD monitor numerals, not general images), and was proven safe on iOS. Porting
+it is strictly cheaper and safer than adopting a new general model.
+
+**Gotcha found during conversion:** onnx2tf's fast "flatbuffer_direct" path (used automatically when
+`onnxsim` isn't installed) does NOT apply the usual NCHW->NHWC transpose to the OUTPUT tensor the way it
+does the input. Confirmed by inspecting the compiled `.tflite`'s IO shapes directly: input is `(1,48,192,1)`
+NHWC as expected, but output is `(1,16,48)` - `(batch, class, time)`, NOT the PyTorch/Core ML model's
+`(1,48,16)` `(batch, time, class)`. The Kotlin decode indexes `logits[0][k][t]` accordingly - verified
+against the PyTorch parity data before writing the Android decode, not assumed from the PyTorch shape.
+
+**Verified live on the Pixel 9** (no stubs): `VisionOcr.readDigits` against two real detected OCR boxes
+(ground truth HR=95, MAP=68) returned `95` at conf 0.9999999884 and `68` at conf 0.9999978847 - both
+correct, both comfortably above the 0.999 threshold, in 46ms total (vs. 2-5+ minutes for the MedGemma
+hybrid path on the same hardware). `window.SMD_NATIVE.readDigits` and `V2.digitReadBoxes`/`applyDigitReads`
+confirmed reachable and wired with no code changes beyond the plugin itself.
+
+**Open question, not yet resolved:** in a full `readImageLocal` run on the same fixture, the confirmed
+"95" did NOT flip HR from `NEEDS_REVIEW` to `AUTO_ACCEPTED`. `applyDigitReads`'s own contract is "confirm
+or conflict, never add a value" - it only satisfies the *two-scale-confirmation* blocker specifically,
+not every reason a field can be held for review, and this fixture is a deliberately hard adversarial
+photo (glare, invalid-values banner, big-clock distractor). This may be correct, existing, cross-platform
+behavior (unrelated to the Android port) rather than a defect - not confirmed either way before this
+entry was written, since the phone disconnected (owner picked it up) mid-investigation. Check whether
+the SAME non-promotion happens on iOS with this fixture before concluding anything is broken.
+
+**Build note:** the local Capacitor plugin's `android/` folder must be mirrored into BOTH the worktree
+(source of truth, committed) and the real checkout at `~/Developer/StewardMD/local-plugins/...` - Gradle
+resolves the plugin through `node_modules/@stewardmd/capacitor-vision-ocr`, which is a relative symlink
+(`../../local-plugins/...`) that resolves against wherever `node_modules` physically lives, which for
+this worktree is a symlink back to the real checkout. A worktree-only edit to a local plugin's Android
+source is invisible to a build run from the same worktree until it's copied to the real checkout too.
+
 ## 2026-09-12 · Connect Hospital: explore everything, then ask the doctor
 
 **Decision:** The phone crawl is exhaustive (every control under one patient record, read-only SKIP list, keywords only order the walk) and captures label/value report blocks as well as tables; whatever is still missing is asked of the doctor in a new plugin `guide` mode (question banner, Done, no touch overlay) and the tap path is saved as the replay pattern. Details in `connect-hospital-next-2026-09-12.md`.
@@ -6431,6 +6502,66 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
 - Translations of the new keys are not written here (another builder fills them, `reviewed:false`).
 - Tests: `test/wardsynq-print-lang.test.mjs`, `test/wardsynq-print-lang-routes.test.mjs`, `test/run-print-lang-ui.mjs`
   (headless Chrome print preview and PDF), `test/wardsynq-i18n.test.mjs` (negation).
+
+## 2026-09-15 ICU OCR: on-device vital-tile detector + tile re-reads; Apple on-device LLM rejected
+- **Detector**: YOLO11s (8 classes hr/spo2/rr/sbp/dbp/map/pulse/etco2, val mAP50 0.937) compiled to
+  `VitalDetector.mlmodelc` inside the VisionOcr plugin (`detectVitals`). It only ASSOCIATES a value with a field
+  when no label was read; digits stay Vision's and every parser gate applies. ~20-400 ms on iPhone 15 Pro.
+- **Tile re-reads** (`tileRegions` / `tileObservations`): a detected HR/SpO2/RR/Pulse/EtCO2 tile with no digits
+  overlapping it gets two crops; read A unions (values enter unconfirmed), read B can only confirm. Pressure
+  tiles are excluded (a crop cut "150/54" to "I54" and turned two correct ART readings into scale conflicts).
+- **Apple Foundation Models (on-device ~3B LLM) tried and REMOVED**: on 4 screens it put RR/HR on alarm limits,
+  RR on the HR value and picked label text as values, at 3-10 s per photo. As evidence it would promote wrong
+  values. Do not re-add without a benchmark showing 0 wrong picks.
+- Result on the iPhone (installed app, readImageLocal, 26 owner photos): 21/99 visible values auto-filled,
+  0 wrong, 0 network calls. Remaining misses are mostly deliberate gates (two-pass disagreement, BP source
+  unknown, confidence) and photos where Vision reads no digits at all.
+
+## 2026-09-15 ICU OCR hybrid: device OCR + AI Vision must AGREE to auto-fill
+- Owner chose hybrid. When a monitor read leaves core vitals in review and cloud consent was already given,
+  `image-engine.js hybridCheck` sends ONLY the monitor crop (`SMD_AI.cropImage`, long edge <= 1280 px) to
+  AI Vision and merges with `SMD_ICU_MONITOR.hybridMerge`: device AUTO + AI same stays; device AUTO + AI
+  different -> review; device review suggestion == AI -> AUTO (except pressure-source questions);
+  AI-only -> review suggestion, never AUTO; BP halves fill together. Any AI failure keeps the device result.
+- Replaces the old "Use AI Vision (Pro)" fallback that overwrote the device read with Gemini's values.
+- Without prior consent the dialog asks ("Check with AI Vision"); `localStorage smd_icu_hybrid=0` turns the
+  automatic check off. Choosing AI Vision as the engine explicitly is unchanged (fills from AI directly).
+- Sending OCR text instead of the image was rejected: similar or higher token cost and it loses layout/colour.
+- Tests: `test/icu-hybrid-merge.test.mjs` (merge rules + end-to-end through image-engine with stubs).
+
+## 2026-09-15 ICU OCR: on-device digit reader as an independent second reader
+- `DigitReader.mlmodelc` (3 MB CRNN-CTC, 48x192 gray; trained on 900k synthetic + 27.5k real crops pseudo-labelled
+  where EasyOCR, TrOCR and PARSeq agreed exactly). Held-out real crops: 88.7% exact; conf >= 0.999 covers 73.5% at
+  99.7% precision (1 confidently wrong: upside-down photo). So it is NEVER a sole source of a value.
+- `applyDigitReads`: a read >= 0.999 CONFIRMS a Vision box with the same digits (digitsAgree, so stray label glyphs
+  are not disagreement) or CONFLICTS it when digits differ; it never adds a value. Native `readDigits` in the
+  VisionOcr plugin (preprocessing ported from the training code, see spec in the job's digits/out/spec.json).
+- Benchmark (268 cases, cached OCR): 0 wrong before and after; 11 fields review -> correct (owner 97c20181 NIBP
+  73/36 (49), MP40 RR 22 on two perturbations, 2 draft externals), 0 lost.
+
+## 2026-09-16 ICU OCR hybrid: routes to the user's OWN engine choice (Cloud -> AI Vision, Local -> on-device)
+- Owner: "local or cloud is decided by user when user select local ai models its routed to local models
+  like medgemma or bonsai". hybridCheck's caller now reads the SAME `aiAvailable()` policy the rest of
+  MaiK already uses: Cloud/Auto + consent + online -> AI Vision on the crop (unchanged). Local (cloudAllowed
+  false) + a vision-ready pack downloaded (MedGemma 1.5 4B / Gemma 4 E2B — the text-only Bonsai packs have
+  no projector, cannot see) -> `localHybridCheck`, same crop, same `hybridMerge` agree-to-fill rule, nothing
+  leaves the device, no consent needed. Neither available -> unchanged (dialog / device result stands).
+- **Real bug found and fixed**: image-engine.js's own `assign(a,b)` only took 2 args; `hybridCheck` (already
+  shipped) and `localHybridCheck` both called it with 3, so the 3rd arg (`{monitor:m.meta, hybrid:{...}}`)
+  was silently dropped — the merged monitor/status update never reached the caller, only masked in the
+  original cloud test because the fixture's stale field happened to match. Fixed by making `assign` variadic
+  like icu-monitor-parser.js's own (mutates a fresh `{}` first arg, N sources) — every call site already
+  passed a fresh `{}`, so no behavior change elsewhere.
+- Verified live: (1) Android's ML Kit OCR end-to-end on the owner's Pixel 9, 26 owner photos, 13/103 values
+  auto-filled, 0 wrong (weaker than iOS's 21/99 since Android has neither the tile detector nor the digit
+  reader yet — both Core ML, iOS-only). (2) Discovered `@capgo/capacitor-updater` (autoUpdate:"off" in
+  config, but a bundle was live-swapped anyway) silently replaces the installed JS with whatever is on
+  stewardmd.in — any Android test must call `CapacitorUpdater.reset({})` and check `current()` first, or it
+  silently tests production code, not the local build. (3) Local-hybrid path fired correctly on this
+  Local-engine phone via a live JS injection over the WebView's own CDP (no reinstall needed for a JS-only
+  change): rr promoted to AUTO on agreement, spo2 correctly stayed review on disagreement, 0 network calls.
+- Tests: `test/icu-hybrid-merge.test.mjs` (+2: local engine runs on-device with no upload/consent; no vision
+  pack ready -> no automatic check), `test/icu-ocr-v2-integration.test.mjs` updated for the new gating.
 
 ## 2026-09-15 Removing a hospital is the owner's act: soft delete, typed DELETE, audited in the same commit (BUG-MU2PHANW-T18X)
 - `POST /api/queue/org/delete` was open to any staff admin with no confirmation. It now needs the hospital's owner

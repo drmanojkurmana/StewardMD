@@ -44,7 +44,13 @@ const PARSE_OPTS = POLICY === "relaxed" ? { unlabeledAuto: true } : {};
 const VERIFY_OPT = opt("--verify", null);
 if (VERIFY_OPT) PARSE_OPTS.verifyFields = VERIFY_OPT === "none" ? [] : VERIFY_OPT.split(",");
 // --disable rule,rule: switch parser rules off for ablation (icu-monitor-parser.js FEATURES)
+// --detections <json>: on-device vital-tile detector output per image ({ "<abs jpg path>": [{cls,conf,x,y,w,h}] })
+const DETECTIONS = opt("--detections", null) ? JSON.parse(readFileSync(opt("--detections", null), "utf8")) : null;
 const DISABLE_OPT = opt("--disable", null);
+const NO_TILES = args.includes("--no-tiles");
+// digit reader: --dump-digit-boxes <json> writes {img: [{x,y,w,h}]}; --digits <json> ({img: [{x,y,w,h,text,conf}]}) applies reads
+const DUMP_DIGITS = opt("--dump-digit-boxes", null), DIGITS = opt("--digits", null) ? JSON.parse(readFileSync(opt("--digits", null), "utf8")) : null;
+const digitBoxes = {};
 if (DISABLE_OPT) PARSE_OPTS.disable = DISABLE_OPT.split(",");
 const FIX = join(HERE, "fixtures");
 mkdirSync(OUT, { recursive: true });
@@ -171,10 +177,26 @@ for (const casePath of cases) {
       } catch (e) { console.error("confirmation OCR failed for", gt.id, String(e.message).slice(0, 120)); }
     }
   }
+  // tile reads: detector tiles with no digits read get two crops of their own (A unions, B only confirms)
+  let tilesRan = 0;
+  if (SCALES === 2 && DETECTIONS && !NO_TILES) {
+    for (const [ti, t] of M.tileRegions(obs, DETECTIONS[img] || [], imageSize).entries()) {
+      try {
+        const a = cropPass(casePath.replace(/\.json$/, `.tile${ti}a.json`), img, t);
+        obs = M.mergeObservations(obs, M.tileObservations(M.mapCropObservations(a.obs.map((o) => ({ text: o.text, conf: o.conf, x: o.x, y: o.y, w: o.w, h: o.h, q: o.q })), t), t));
+        const tb = Object.assign({}, t, { scale: t.scaleB });
+        const b = cropPass(casePath.replace(/\.json$/, `.tile${ti}b.json`), img, tb);
+        obs = M.applyConfirmation(obs, M.tileObservations(M.mapCropObservations(b.obs.map((o) => ({ text: o.text, conf: o.conf, x: o.x, y: o.y, w: o.w, h: o.h })), tb), tb));
+        tilesRan++;
+      } catch (e) { console.error("tile OCR failed for", gt.id, String(e.message).slice(0, 120)); }
+    }
+  }
+  if (DUMP_DIGITS) digitBoxes[img] = M.digitReadBoxes(obs);
+  if (DIGITS) { obs = M.applyDigitReads(obs, DIGITS[img] || []); mergeNotes = obs.notes || mergeNotes; }
   let px = null; try { if (existsSync(img)) px = pixelSource(img); } catch (e) { /* colour + quality pixel checks become neutral */ }
   const t0 = Date.now();
   const twoScale = SCALES === 2 ? { ran: !!crop || confirmRan } : null;
-  const res = M.parseMonitor(obs, Object.assign({ px, imageSize, twoScale }, PARSE_OPTS));
+  const res = M.parseMonitor(obs, Object.assign({ px, imageSize, twoScale, detections: DETECTIONS ? DETECTIONS[img] || [] : undefined }, PARSE_OPTS));
   const parseMs = Date.now() - t0;
   const fields = scoreCase(gt, res);
   const incomplete = Object.entries(res.fields).filter(([, f]) => f.status === "AUTO_ACCEPTED" && !(f.proof && f.proof.complete)).map(([k]) => k);
@@ -276,6 +298,7 @@ if (SWEEP) {
   }
 }
 
+if (DUMP_DIGITS) writeFileSync(DUMP_DIGITS, JSON.stringify(digitBoxes));
 writeFileSync(join(OUT, "results.json"), JSON.stringify({ generated: new Date().toISOString(), parser: M.VERSION, policy: POLICY, scales: SCALES, thresholds: M.THRESH, quality: M.QUALITY, groups: byGroup, regressions, sweep, cases: results }, null, 2));
 
 /* ------------------------------------------------------------------ report */

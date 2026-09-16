@@ -10,7 +10,7 @@ const CUT = Date.parse("2026-09-15T23:59:59+05:30");
  * byte for byte. The enforcement path has its own suite in test/verify-gate.test.mjs. */
 const OFF = { VERIFY_REQUIRED_FOR_PRO: "0" };
 const promoPast = { ...OFF, PRO_FREE_UNTIL: "2020-01-01" };   // promo OFF → real gating
-const promoOn = { ...OFF };                                    // default promo (far future) ON
+const promoOn = { ...OFF, PRO_FREE_UNTIL: "2099-01-01" };     // promo (far future) ON
 const now = Date.parse("2026-10-01T10:00:00Z");        // after cutover + after promoPast
 
 test("trialDaysFor: 14 up to cutover, 7 after", () => {
