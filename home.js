@@ -5576,9 +5576,61 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return out.slice(0, 3);
       } catch (e) { return []; }
     }
+    // Validate whether an assumed topic actually has meaningful relevance to the user question
+    // or answer text. Suppresses false/accidental topic assumptions (e.g. stopword matches like 'than').
+    function maikIsAssumeRelevant(assume, question, answerText) {
+      if (!assume || !assume.name) return false;
+      var aName = String(assume.name).toLowerCase();
+      var q = String(question || "").toLowerCase();
+      if (q.indexOf(aName) >= 0 || aName.indexOf(q) >= 0) return true;
+
+      var STOP = {
+        than:1, then:1, other:1, others:1, more:1, most:1, less:1, least:1, much:1, many:1,
+        over:1, under:1, with:1, from:1, about:1, what:1, which:1, when:1, where:1, why:1, how:1,
+        does:1, need:1, needs:1, want:1, give:1, have:1, been:1, were:1, will:1, could:1, would:1,
+        should:1, that:1, this:1, these:1, those:1, drug:1, drugs:1, cure:1, line:1, test:1, dose:1,
+        treatment:1, treat:1, therapy:1, manage:1, management:1, patient:1, adult:1, child:1
+      };
+
+      var aToks = aName.replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) {
+        return t.length >= 4 && !STOP[t];
+      });
+      if (!aToks.length) return false;
+
+      var qToks = q.replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) {
+        return t.length >= 2 && !STOP[t];
+      });
+
+      var hasOverlap = aToks.some(function (at) {
+        return qToks.some(function (qt) {
+          return at === qt || (at.length >= 5 && qt.length >= 5 && (at.indexOf(qt) >= 0 || qt.indexOf(at) >= 0));
+        });
+      });
+      if (hasOverlap) return true;
+
+      var hasFuzzy = aToks.some(function (at) {
+        return qToks.some(function (qt) {
+          if (Math.abs(at.length - qt.length) <= 2 && at.length >= 5 && qt.length >= 5) {
+            if (at.slice(0, 5) === qt.slice(0, 5)) return true;
+          }
+          return false;
+        });
+      });
+      if (hasFuzzy) return true;
+
+      if (answerText) {
+        var ans = String(answerText).toLowerCase();
+        var inAns = aToks.some(function (t) { return ans.indexOf(t) >= 0; });
+        if (inAns) return true;
+      }
+
+      return false;
+    }
+
     // Chips are emitted as data-attribute buttons (not live listeners) so they survive the
     // innerHTML answer-cache and are handled by ONE delegated listener on the chat body.
     function maikFollowupsHTML(pkg, question, assume) {
+      if (assume && !maikIsAssumeRelevant(assume, question, "")) assume = null;
       var chips = maikFollowupChips(pkg, question), html = "";
       chips.forEach(function (c) { html += '<button class="maik-fu" data-maik-q="' + maikEscH(c.q) + '">' + maikEscH(c.label) + '</button>'; });
       if (assume) html += '<button class="maik-fu" data-maik-web="' + maikEscH(question) + '">' + svg("search", "smd-ico") + ' Different topic: search the web</button>';
@@ -5748,6 +5800,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + bookSvg + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + '</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
       // MaiK attribution row (sparkle + MAIK) atop every answer bubble.
       var attrHTML = '<div class="maik-attr">' + MK.spark + '<span>MaiK</span>' + ((r && r.kb) ? '<span class="maik-kbbadge" title="Answered instantly from the StewardMD Knowledge Base — no external AI call">&#9889; Instant &middot; StewardMD KB</span>' : '') + '</div>';
+      if (assume && !maikIsAssumeRelevant(assume, question, (r && r.text))) assume = null;
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> · not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference. Verify with local protocol.</div>');
       var full = attrHTML + eduHTML + rendered + srcHTML;
@@ -6005,6 +6058,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // under a STATED assumption; maikRenderAnswer prints the banner + refine chips. Same single
           // grounded call as the confident path — no extra tokens, we just stopped dead-ending.
           var assume = (tm && tm.mode === "assume") ? tm.assume : null;
+          if (assume && !maikIsAssumeRelevant(assume, question, "")) assume = null;
           // Phase 2 — stream tokens live (UpToDate-style), then maikRenderAnswer re-renders the final
           // answer with sources/chips/collapse. Fully additive: explainGroundedStream self-falls-back
           // to the non-stream call on any hiccup, so this can't regress the answer.
