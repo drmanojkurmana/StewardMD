@@ -59,6 +59,7 @@ mock.module("../functions/_wardsynq/deps.js", {
   namedExports: {
     claimsOf: async () => ({}),
     actorDeps: () => ({ db: tenantDb, identifyFn: identify, staffSession: verifyStaffSession, orgForTenant, authorizeOrg,
+      registrationStatus: async (tenantId, ids, cfg) => (await import("../functions/_wardsynq/hr-records.js")).registrationStatus(H.RECORD, tenantId, ids, cfg),
       claimsFn: async (request) => (String(request.headers.get("Cf-Access-Authenticated-User-Email") || "").toLowerCase() === DOCTOR ? { regNo: "TSMC-2019-44821", name: "Dr Test" } : {}) }),
     recordDeps: () => ({ repository: H.RECORD, pseudonym: async (id) => "ref-" + id }),
   },

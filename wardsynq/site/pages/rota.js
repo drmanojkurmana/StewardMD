@@ -106,6 +106,8 @@
     var q = "?orgId=" + encodeURIComponent(org);
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.rota.heading", "Staff rota")) + '</h1></div>' +
       '<div class="card"><h2>' + c.esc(T(c, "site.rota.myShiftsCard", "My shifts")) + '</h2><div id="rotaMine"></div><div id="rotaMsg"></div></div>' +
+      /* Gap wave 2026-09-16: clock in and out, and the member's own attendance, credentials and training (pages/hr.js). */
+      (c.isWardsynq() && WSQ._hr ? '<div class="card"><h2>' + c.esc(T(c, "site.rota.myHrCard", "My attendance, credentials and training")) + '</h2><div id="rotaHr"></div></div>' : "") +
       '<div class="card"><h2>' + c.esc(T(c, "site.rota.onDutyNowCard", "On duty now")) + '</h2><div id="rotaDuty"></div></div>' +
       (admin ? '<div class="card"><h2>' + c.esc(T(c, "site.rota.dutyByWardCard", "On and off duty by ward")) + '</h2><div id="rotaDutyWards"></div></div>' +
         '<div class="card"><h2>' + c.esc(T(c, "site.rota.shiftsCard", "Shifts")) + '</h2><div id="rotaShifts"></div>' +
@@ -126,6 +128,8 @@
 
     set("rotaMine", mineHtml(c, null));
     c.api("/roster/mine" + q).then(function (r) { set("rotaMine", mineHtml(c, r && r.ok ? r : { ok: false })); });
+    var hrEl = document.getElementById("rotaHr");
+    if (hrEl && WSQ._hr) WSQ._hr.selfCard(c, hrEl);
     set("rotaDuty", loading(c, T(c, "site.rota.whoOnDuty", "who is on duty")));
     c.api("/roster/on-duty" + q).then(function (r) { set("rotaDuty", dutyHtml(c, r || { ok: false })); });
     if (admin) {

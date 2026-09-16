@@ -132,6 +132,110 @@
     return '<section class="card" aria-labelledby="h-privacy" data-section="privacy"><h2 id="h-privacy">' + esc(tr("privacy.title")) + "</h2>" + body + "</section>";
   }
 
+  /* ---- gap wave 2026-09-16: booking, message preferences and surveys ------------------------------------------
+   * Each loads after the record on its own and redraws only its own section. null = loading, false = failed. */
+  function dayTime(iso) { var t = Date.parse(iso || ""); return isFinite(t) ? new Date(t).toLocaleString([], { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : ""; }
+  function loadingCard(id, title) { return '<section class="card" data-section="' + id + '"><h2>' + esc(title) + '</h2><p role="status"><span class="spin"></span> ' + esc(tr("phase.loading")) + "</p></section>"; }
+  function failedCard(id, title) { return '<section class="card" data-section="' + id + '"><h2>' + esc(title) + '</h2><div class="msg err" role="alert">' + esc(tr("section.failed")) + "</div></section>"; }
+
+  /** PURE. b: the booking-options answer (null loading, false failed). ui: { dept, pick, moving, msg }. */
+  function bookingSection(b, ui) {
+    ui = ui || {};
+    if (b == null) return loadingCard("booking", tr("book.title"));
+    if (b === false) return failedCard("booking", tr("book.title"));
+    if (!b.enabled) return '<section data-section="booking" hidden></section>';
+    var dept = ui.dept || "";
+    var slots = b.slots.filter(function (x) { return !dept || x.department === dept; });
+    var who = function (x) { return x.clinicianName || tr("book.aDoctor"); };
+    var h = '<section class="card" data-section="booking"><h2>' + esc(tr("book.title")) + '</h2><p class="quiet">' + esc(tr("book.rules", { cancel: b.rules.cancelHoursBefore, move: b.rules.rescheduleHoursBefore })) + "</p>";
+    if (b.mine.length) h += "<h3>" + esc(tr("book.mine")) + '</h3><ul class="plist">' + b.mine.map(function (m) {
+      var name = (b.clinicians.filter(function (x) { return x.clinicianId === m.clinicianId; })[0] || {}).name;
+      return "<li><b>" + esc(dayTime(m.startAt)) + "</b>" + (name ? " " + esc(tr("appt.with", { who: name })) : "") +
+        (m.canCancel ? ' <button class="btn" type="button" data-act="book-cancel" data-id="' + esc(m.appointmentId) + '">' + esc(tr("book.cancel")) + "</button>" : "") +
+        (m.canReschedule ? ' <button class="btn" type="button" data-act="book-move" data-id="' + esc(m.appointmentId) + '">' + esc(tr("book.move")) + "</button>" : "") +
+        (!m.online ? '<br><span class="quiet">' + esc(tr("book.byHospital")) + "</span>" : !m.canCancel ? '<br><span class="quiet">' + esc(tr("book.tooLate")) + "</span>" : "") + "</li>";
+    }).join("") + "</ul>";
+    if (ui.moving) h += '<div class="msg note">' + esc(tr("book.movingNote")) + ' <button class="btn" type="button" data-act="book-move-stop">' + esc(tr("book.keep")) + "</button></div>";
+    h += '<label class="f"><span>' + esc(tr("book.department")) + '</span><select id="pBookDept"><option value="">' + esc(tr("book.anyDepartment")) + "</option>" +
+      b.departments.map(function (d) { return '<option value="' + esc(d) + '"' + (d === dept ? " selected" : "") + ">" + esc(d) + "</option>"; }).join("") + "</select></label>";
+    if (!slots.length) h += '<p class="quiet" data-empty="booking">' + esc(tr("book.noSlots", { days: b.rules.maxDaysAhead })) + "</p>";
+    else h += '<label class="f"><span>' + esc(tr("book.time")) + '</span><select id="pBookSlot">' + slots.slice(0, 400).map(function (x, i) {
+      return '<option value="' + i + '"' + (ui.pick === x.clinicianId + "|" + x.startAt ? " selected" : "") + ' data-clinician="' + esc(x.clinicianId) + '" data-start="' + esc(x.startAt) + '">' + esc(dayTime(x.startAt) + ", " + who(x) + " (" + x.department + ")") + "</option>";
+    }).join("") + "</select></label>";
+    var pick = ui.confirm ? b.slots.filter(function (x) { return x.clinicianId + "|" + x.startAt === ui.confirm; })[0] : null;
+    if (pick) h += '<div class="msg note" role="note">' + esc(tr(ui.moving ? "book.confirmMove" : "book.confirmText", { when: dayTime(pick.startAt), who: who(pick), department: pick.department })) +
+      '<br><button class="btn primary" type="button" data-act="book-confirm">' + esc(tr("book.confirm")) + '</button> <button class="btn" type="button" data-act="book-back">' + esc(tr("book.back")) + "</button></div>";
+    else if (slots.length) h += '<button class="btn primary" type="button" data-act="book-ask">' + esc(tr(ui.moving ? "book.moveHere" : "book.book")) + "</button>";
+    return h + '<div id="pBookMsg" aria-live="polite">' + (ui.msg ? '<div class="msg ' + (ui.msg.ok ? "ok" : "err") + '">' + esc(ui.msg.text) + "</div>" : "") + "</div></section>";
+  }
+
+  /** PURE. p: the comm-preferences answer. */
+  function commSection(p) {
+    if (p == null) return loadingCard("comm", tr("comm.title"));
+    if (p === false) return failedCard("comm", tr("comm.title"));
+    var h = '<section class="card" data-section="comm"><h2>' + esc(tr("comm.title")) + '</h2><p class="quiet">' + esc(tr("comm.intro")) + "</p>";
+    ["sms", "whatsapp"].forEach(function (ch) {
+      var x = p.preference.channels[ch];
+      h += "<h3>" + esc(tr("comm." + ch)) + "</h3><p>" + esc(x.optedIn ? tr("comm.on", { number: x.mobile }) : tr("comm.off")) + "</p>";
+      if (p.canChange) h += '<label class="f"><span>' + esc(tr("comm.mobile")) + '</span><input id="pComm_' + ch + '" inputmode="tel" autocomplete="tel"></label>' +
+        '<button class="btn primary" type="button" data-act="comm-in" data-ch="' + ch + '">' + esc(tr("comm.yes")) + "</button> " +
+        (x.optedIn ? '<button class="btn" type="button" data-act="comm-out" data-ch="' + ch + '">' + esc(tr("comm.stop")) + "</button>" : "");
+    });
+    if (!p.canChange) h += '<p class="quiet">' + esc(tr("comm.patientOnly")) + "</p>";
+    return h + '<div id="pCommMsg" aria-live="polite"></div></section>';
+  }
+
+  /** PURE. One survey's questions: NPS, the hospital's questions, a comment. prefix keeps two forms apart. */
+  function surveyForm(sv, prefix, sendAttrs) {
+    var nps = "";
+    for (var i = 0; i <= 10; i++) nps += '<label class="nps"><input type="radio" name="' + prefix + 'nps" value="' + i + '"> ' + i + "</label> ";
+    return '<fieldset><legend>' + esc(tr("fb.nps")) + "</legend>" + nps + '<p class="quiet">' + esc(tr("fb.npsScale")) + "</p></fieldset>" +
+      (sv.questions || []).map(function (q) {
+        var name = prefix + "q_" + q.id;
+        if (q.kind === "text") return '<label class="f"><span>' + esc(q.text) + '</span><textarea id="' + name + '" rows="2" maxlength="1000"></textarea></label>';
+        var opts = q.kind === "yesno" ? [["true", tr("fb.yes")], ["false", tr("fb.no")]] : [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]];
+        return "<fieldset><legend>" + esc(q.text) + "</legend>" + opts.map(function (o) { return '<label><input type="radio" name="' + name + '" value="' + o[0] + '"> ' + esc(o[1]) + "</label> "; }).join("") +
+          (q.kind === "rating5" ? '<p class="quiet">' + esc(tr("fb.ratingScale")) + "</p>" : "") + "</fieldset>";
+      }).join("") +
+      '<label class="f"><span>' + esc(tr("fb.comment")) + '</span><textarea id="' + prefix + 'comment" rows="3" maxlength="2000"></textarea></label>' +
+      '<button class="btn primary" type="button" data-act="survey-send" ' + sendAttrs + ">" + esc(tr("fb.send")) + '</button><div id="' + prefix + 'msg" aria-live="polite"></div>';
+  }
+
+  /** PURE. The signed-in patient's open surveys. */
+  function surveysSection(r) {
+    if (r == null) return loadingCard("surveys", tr("fb.title"));
+    if (r === false) return failedCard("surveys", tr("fb.title"));
+    if (!r.surveys.length) return '<section data-section="surveys" hidden></section>';
+    return '<section class="card" data-section="surveys"><h2>' + esc(tr("fb.title")) + "</h2>" + r.surveys.map(function (sv, i) {
+      return "<article><h3>" + esc(tr(sv.kind === "discharge" ? "fb.afterStay" : "fb.afterVisit")) + (sv.department ? ", " + esc(sv.department) : "") + "</h3>" +
+        (r.canAnswer ? surveyForm(sv, "pS" + i + "_", 'data-invite="' + esc(sv.inviteId) + '" data-prefix="pS' + i + '_"') : '<p class="quiet">' + esc(tr("fb.patientOnly")) + "</p>") + "</article>";
+    }).join("") + "</section>";
+  }
+
+  /** PURE. The survey opened from a link, without signing in. p: { phase: loading|failed|closed|answered|open|thanks, survey, hospital } */
+  function surveyPage(p) {
+    if (p.phase === "loading") return '<div class="card" role="status"><span class="spin"></span> ' + esc(tr("phase.loading")) + "</div>";
+    if (p.phase === "failed") return '<div class="card" role="alert"><div class="msg err">' + esc(tr("fb.linkFailed")) + "</div></div>";
+    if (p.phase === "thanks" || p.phase === "answered") return '<div class="card" role="status"><h1>' + esc(tr("fb.thanksTitle")) + "</h1><p>" + esc(tr(p.phase === "thanks" ? "fb.thanks" : "fb.alreadyAnswered")) + "</p></div>";
+    if (p.phase !== "open") return '<div class="card" role="alert"><div class="msg note">' + esc(tr("fb.closed")) + "</div></div>";
+    return '<form class="card" onsubmit="return false"><h1>' + esc(tr("fb.linkTitle", { hospital: p.hospital || "" })) + "</h1><p>" + esc(tr(p.survey.kind === "discharge" ? "fb.afterStay" : "fb.afterVisit")) + "</p>" + surveyForm(p.survey, "pL_", 'data-link="1" data-prefix="pL_"') + "</form>";
+  }
+
+  /** From a survey form in the page: the answers object, or null when no score was chosen. */
+  function answersFrom(prefix, questions) {
+    var picked = function (name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : null; };
+    var nps = picked(prefix + "nps");
+    if (nps == null) return null;
+    var answers = {};
+    (questions || []).forEach(function (q) {
+      if (q.kind === "text") { var t = document.getElementById(prefix + "q_" + q.id); if (t && t.value.trim()) answers[q.id] = t.value.trim(); return; }
+      var v = picked(prefix + "q_" + q.id);
+      if (v != null) answers[q.id] = q.kind === "yesno" ? v === "true" : Number(v);
+    });
+    var c = document.getElementById(prefix + "comment");
+    return { nps: Number(nps), comment: c ? c.value.trim() : "", answers: answers };
+  }
+
   /** PURE. The whole signed-in page from the server's answer. Only granted sections are drawn. */
   function renderRecord(r) {
     var access = r.access || { kind: "patient", sections: [] };
@@ -154,6 +258,7 @@
         '<label class="f"><span>' + esc(tr("appt.reason")) + '</span><input id="pApptReason" maxlength="300"></label>' +
         '<label class="f"><span>' + esc(tr("appt.pref")) + '</span><input id="pApptPref" maxlength="200"></label>' +
         '<button class="btn primary" type="button" data-act="appt">' + esc(tr("appt.send")) + '</button><div id="pApptMsg" aria-live="polite"></div></section>');
+      out.push(bookingSection(null));
     }
     if (has("medicines")) out.push(section("medicines", tr("meds.title"), "ok", doc.medicines, function (m) {
       return "<b>" + esc(m.drug) + "</b>" + [m.dose, m.route, m.frequency].filter(Boolean).map(function (x) { return " " + esc(typeof x === "object" ? (x.value + " " + x.unit) : x); }).join(",") + (m.note ? "<br>" + esc(m.note) : "");
@@ -180,6 +285,7 @@
         (c.canWithdraw ? '<br><button class="btn danger" type="button" data-act="withdraw" data-id="' + esc(c.consentId) + '">' + esc(tr("consents.withdraw")) + "</button>"
           : c.status === "granted" && access.kind === "patient" ? '<br><span class="quiet">' + esc(tr("consents.speak")) + "</span>" : "");
     }, tr("consents.empty")));
+    out.push(commSection(null), surveysSection(null));
     if (has("messages")) {
       out.push('<section class="card" data-section="messages"><h2>' + esc(tr("msg.title")) + '</h2>' +
         '<div class="msg err" role="note"><b>' + esc(r.notEmergency || tr("msg.notEmergency")) + "</b></div>" +
@@ -209,6 +315,7 @@
   }
 
   var api = {
+    bookingSection: bookingSection, commSection: commSection, surveysSection: surveysSection, surveyPage: surveyPage,
     esc: esc, section: section, privacySection: privacySection, renderRecord: renderRecord, renderPhase: renderPhase, statusSection: statusSection, dischargeItem: dischargeItem, dischargeSection: dischargeSection, documentItem: documentItem
   };
   if (typeof window !== "undefined") window.WSQPortal = api;
@@ -256,7 +363,7 @@
     if (!s) return show({ phase: "signin", orgId: orgFromHash() });
     show({ phase: "loading" });
     post("record", s).then(function (r) {
-      if (r && r.ok) { show({ phase: "ready", data: r }); if (r.access && (r.access.sections || []).indexOf("status") >= 0) loadQueue(s); loadPrivacy(s); return; }
+      if (r && r.ok) { show({ phase: "ready", data: r }); if (r.access && (r.access.sections || []).indexOf("status") >= 0) loadQueue(s); loadPrivacy(s); loadEngage(s, r.access); return; }
       if (r && r.httpStatus === 401) { save(null); return show({ phase: "ended", detail: r.detail }); }
       show({ phase: "failed" });
     }, function () { show({ phase: "failed" }); });
@@ -281,6 +388,30 @@
       if (p && p.httpStatus === 401) { save(null); return show({ phase: "ended", detail: p.detail }); }
       put(p && p.ok ? p : false);
     }, function () { put(false); });
+  }
+  /* Booking, message preferences and surveys: each loads on its own and redraws only its section. */
+  var book = { data: null, ui: {} }, surveys = null;
+  function putSection(id, html) { var el = root.querySelector('[data-section="' + id + '"]'); if (el) el.outerHTML = html; }
+  function sessionBody(s, extra) { var b = { orgId: s.orgId, grantId: s.grantId, token: s.token }; for (var k in extra) b[k] = extra[k]; return b; }
+  function ended(r) { if (r && r.httpStatus === 401) { save(null); show({ phase: "ended", detail: r.detail }); return true; } return false; }
+  function loadBooking(s) {
+    post("booking-options", sessionBody(s, {})).then(function (r) { if (ended(r)) return; book.data = r && r.ok ? r : false; putSection("booking", bookingSection(book.data, book.ui)); }, function () { book.data = false; putSection("booking", bookingSection(false)); });
+  }
+  function loadEngage(s, access) {
+    if ((access.sections || []).indexOf("appointments") >= 0) { book.ui = {}; loadBooking(s); }
+    post("comm-preferences", sessionBody(s, {})).then(function (r) { if (ended(r)) return; putSection("comm", commSection(r && r.ok ? r : false)); }, function () { putSection("comm", commSection(false)); });
+    post("feedback-pending", sessionBody(s, {})).then(function (r) { if (ended(r)) return; surveys = r && r.ok ? r : false; putSection("surveys", surveysSection(surveys)); }, function () { putSection("surveys", surveysSection(false)); });
+  }
+  function surveyFromHash() { var m = /(?:^|[#&])survey=([A-Za-z0-9_-]+)/.exec(location.hash || ""); return m ? m[1] : ""; }
+  var linkSurvey = null;
+  function showSurvey(p) { root.innerHTML = langSwitcher() + surveyPage(p); lastPhase = { survey: p }; }
+  function openLinkSurvey() {
+    showSurvey({ phase: "loading" });
+    post("feedback-open", { orgId: orgFromHash(), surveyToken: surveyFromHash() }).then(function (r) {
+      if (!r || !r.ok) return showSurvey({ phase: "failed" });
+      linkSurvey = r.survey;
+      showSurvey({ phase: r.state, survey: r.survey, hospital: r.hospital });
+    }, function () { showSurvey({ phase: "failed" }); });
   }
 
   /* The bytes come back in the response and are saved from a local object URL: the page never holds an
@@ -330,10 +461,11 @@
   });
 
   root.addEventListener("change", function (ev) {
+    if (ev.target.id === "pBookDept" && book.data) { book.ui.dept = ev.target.value; book.ui.confirm = null; return putSection("booking", bookingSection(book.data, book.ui)); }
     if (ev.target.id !== "pLang") return;
     var code = ev.target.value;
     saveLang(code);
-    ensureLangLoaded(code, function () { document.documentElement.lang = code; show(lastPhase || { phase: "loading" }); });
+    ensureLangLoaded(code, function () { document.documentElement.lang = code; if (lastPhase && lastPhase.survey) return showSurvey(lastPhase.survey); show(lastPhase || { phase: "loading" }); });
   });
 
   root.addEventListener("click", function (ev) {
@@ -342,6 +474,15 @@
     if (act === "retry") return refresh();
     if (act === "signout") { save(null); return refresh(); }
     if (act === "print") return printSummary(b);
+    if (act === "survey-send" && b.getAttribute("data-link")) {
+      var la = answersFrom("pL_", linkSurvey && linkSurvey.questions);
+      if (!la) { document.getElementById("pL_msg").innerHTML = '<div class="msg err">' + esc(tr("fb.chooseScore")) + "</div>"; return; }
+      b.disabled = true;
+      return post("feedback-submit", { orgId: orgFromHash(), surveyToken: surveyFromHash(), answers: la }).then(function (r) {
+        if (r && r.ok) return showSurvey({ phase: "thanks" });
+        b.disabled = false; document.getElementById("pL_msg").innerHTML = '<div class="msg err">' + esc((r && r.message) || tr("action.failed")) + "</div>";
+      }, function () { b.disabled = false; document.getElementById("pL_msg").innerHTML = '<div class="msg err">' + esc(tr("action.failed")) + "</div>"; });
+    }
     if (!s) return refresh();
     if (act === "queue") return loadQueue(s);
     if (act === "doc") { b.disabled = true; return downloadDocument(s, b); }
@@ -374,6 +515,49 @@
         say("pDprMsg", r, "");
       }, function () { b.disabled = false; say("pDprMsg", null); });
     }
+    if (act === "book-ask") {
+      b.disabled = false;
+      var sel = document.getElementById("pBookSlot"), opt = sel && sel.options[sel.selectedIndex];
+      if (!opt) return;
+      book.ui.confirm = opt.getAttribute("data-clinician") + "|" + opt.getAttribute("data-start"); book.ui.pick = book.ui.confirm; book.ui.msg = null;
+      return putSection("booking", bookingSection(book.data, book.ui));
+    }
+    if (act === "book-back" || act === "book-move-stop") { b.disabled = false; book.ui.confirm = null; if (act === "book-move-stop") book.ui.moving = null; return putSection("booking", bookingSection(book.data, book.ui)); }
+    if (act === "book-move") { b.disabled = false; book.ui.moving = b.getAttribute("data-id"); book.ui.confirm = null; return putSection("booking", bookingSection(book.data, book.ui)); }
+    if (act === "book-confirm" || act === "book-cancel") {
+      if (act === "book-cancel" && !confirm(tr("book.cancelConfirm"))) { b.disabled = false; return; }
+      var parts = String(book.ui.confirm || "").split("|");
+      var moving = book.ui.moving;
+      var req = act === "book-cancel" ? post("booking-cancel", sessionBody(s, { appointmentId: b.getAttribute("data-id") }))
+        : moving ? post("booking-reschedule", sessionBody(s, { appointmentId: moving, clinicianId: parts[0], startAt: parts.slice(1).join("|") }))
+        : post("booking-book", sessionBody(s, { clinicianId: parts[0], startAt: parts.slice(1).join("|") }));
+      return req.then(function (r) {
+        if (ended(r)) return;
+        book.ui = { msg: { ok: !!(r && r.ok), text: r && r.ok ? tr(act === "book-cancel" ? "book.cancelled" : moving ? "book.moved" : "book.booked") : ((r && r.detail) || tr("action.failed")) } };
+        post("booking-options", sessionBody(s, {})).then(function (o) { book.data = o && o.ok ? o : false; putSection("booking", bookingSection(book.data, book.ui)); });
+      }, function () { b.disabled = false; book.ui.msg = { ok: false, text: tr("action.failed") }; putSection("booking", bookingSection(book.data, book.ui)); });
+    }
+    if (act === "comm-in" || act === "comm-out") {
+      var ch = b.getAttribute("data-ch");
+      return post("comm-preference-set", sessionBody(s, { channel: ch, optedIn: act === "comm-in", mobile: act === "comm-in" ? (document.getElementById("pComm_" + ch) || {}).value : "" })).then(function (r) {
+        if (ended(r)) return;
+        if (!(r && r.ok)) { b.disabled = false; say("pCommMsg", { ok: false, detail: r && (r.detail || r.message) }); return; }
+        post("comm-preferences", sessionBody(s, {})).then(function (p) { putSection("comm", commSection(p && p.ok ? p : false)); var m = document.getElementById("pCommMsg"); if (m) m.innerHTML = '<div class="msg ok">' + esc(tr("comm.saved")) + "</div>"; });
+      }, function () { b.disabled = false; say("pCommMsg", null); });
+    }
+    if (act === "survey-send") {
+      var prefix = b.getAttribute("data-prefix"), inviteId = b.getAttribute("data-invite");
+      var sv = surveys && surveys.surveys.filter(function (x) { return x.inviteId === inviteId; })[0];
+      var ans = answersFrom(prefix, sv && sv.questions);
+      if (!ans) { b.disabled = false; return say(prefix + "msg", { ok: false, detail: tr("fb.chooseScore") }); }
+      return post("feedback-submit", sessionBody(s, { inviteId: inviteId, answers: ans })).then(function (r) {
+        if (ended(r)) return;
+        if (!(r && r.ok)) { b.disabled = false; return say(prefix + "msg", { ok: false, detail: (r && r.message) || tr("action.failed") }); }
+        surveys.surveys = surveys.surveys.filter(function (x) { return x.inviteId !== inviteId; });
+        putSection("surveys", surveysSection(surveys));
+        if (!surveys.surveys.length) { var el = root.querySelector('[data-section="surveys"]'); if (el) el.outerHTML = '<section class="card" data-section="surveys"><div class="msg ok">' + esc(tr("fb.thanks")) + "</div></section>"; }
+      }, function () { b.disabled = false; say(prefix + "msg", null); });
+    }
     if (act === "withdraw") {
       if (!confirm(tr("consents.confirm"))) { b.disabled = false; return; }
       return post("consent-withdraw", { orgId: s.orgId, grantId: s.grantId, token: s.token, consentId: b.getAttribute("data-id") })
@@ -382,5 +566,5 @@
   });
 
   var savedLang = window.WSQI18n && window.WSQI18n.offered(loadLang()) ? loadLang() : "en";
-  ensureLangLoaded(savedLang, function () { document.documentElement.lang = savedLang; refresh(); });
+  ensureLangLoaded(savedLang, function () { document.documentElement.lang = savedLang; if (surveyFromHash()) return openLinkSurvey(); refresh(); });
 })();

@@ -6973,3 +6973,38 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
 - A completed AmbulanceTrip is captured by charge-capture.js (code AMBULANCE-BLS/ALS); billing reads it, writes nothing.
 - The MLC flag is read (Encounter/Patient `mlc` or `medicoLegal`), never set here; unrecorded asks who confirmed.
 - Screens: wardsynq/site/pages/support.js (five pages, Map tiles in Command and operations), Diet tab on the chart.
+
+### Gap wave 2026-09-16: HR beyond the rota, and patient engagement
+- HR records (hr-attendance.js, hr-records.js) are internal append-only types in the hospital's record store
+  (`_wardsynq_hr_*`), not RecordService types: `hr` holds staff.admin and no clinical actor, and a RESOURCE_TYPES
+  entry would be readable by every emr.view role through the raw record door. Same reasoning as bug-reports.js.
+  Routes under /ward/hr-*: own records and clocking are queue.view with the identity taken from the caller's
+  membership; everything about other staff is staff.admin. Payroll is not built (owner).
+- Attendance links a clock-in to the caller's rota assignment whose window (two hours before start to end) holds
+  now. The monthly summary is computed, never stored; absent only once a shift has ended. Device CSV import is
+  three steps on one route (map, preview, commit with the previewed count), deterministic ids plus a two-minute
+  duplicate window make a re-import write nothing.
+- Credential alerts (60/30/7 days) are in-app records for the member and HR, raised by the tick or "Check expiries
+  now"; no SMS or push to staff. `wardsynq.hr.expiredRegistrationBlocksSigning` (off by default) clears the
+  signing credential in resolveClinicalActor when every recorded registration has expired, so all signing paths
+  refuse NO_CREDENTIAL; unreadable records while the rule is on block signing. No registration on file is not blocked.
+- Patient messaging (patient-messaging.js): five types, each off until enabled with its template. SMS reuses the
+  existing 2Factor DLT path and the hospital's DLT sender ID (alerts.sms.senderId) with a DLT template name per
+  type; the 2Factor API key is still the existing TWOFACTOR_API_KEY secret, no new env. WhatsApp Business Cloud API
+  is a new connector kind (`whatsapp`, provider `meta_cloud`), token sealed per hospital via connectors.js; request
+  shape from Meta's messages reference (URL in the file header), contract-tested with mocked fetch. A message is
+  `sent` only when the provider accepted it (WhatsApp message_status accepted); held/paused/refused/unreachable is
+  failed or retrying (max 3), with the reason on Admin > Patient communication. Delivery receipts (WhatsApp status
+  webhooks, SMS DLRs) are not consumed: the screen says delivery is not confirmed. Consent per channel with the
+  consented number is `_wardsynq_comm_pref`, recorded by the patient in the portal or by the desk (queue.add) with a
+  note; opt-out is re-checked at send. Quiet hours hold; an expired moment is never sent late.
+- Portal self-booking (online-booking.js) narrows portal-requests.js's "a patient cannot book": only sessions the
+  hospital publishes in wardsynq.onlineBooking are bookable, only free non-blacked-out slots, written as an ordinary
+  Appointment by the patient's own DRAFT actor. A `_wardsynq_slot_hold` record appended at the next version decides
+  a race between two patients; a staff booking at the same instant does not take the hold (scheduling.js's existing
+  residual). Patients change only bookings made online, within the hospital's notice hours.
+- Feedback (patient-feedback.js): one invitation per finished IPD/OPD encounter, questions copied onto it; the link
+  token is in the URL fragment and indexed by its SHA-256. The feedback message stores the link it sent (so a retry
+  can resend it). NPS plus hospital questions; low scores go to a service-recovery queue resolved with a note.
+- Not built: payroll, staff SMS/push for credential alerts, delivery receipts, a patient-visible reminder history,
+  booking a slot through the staff diary's holds, per-department NPS trend charts.
