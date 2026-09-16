@@ -90,7 +90,7 @@ const ALLOW = {
 };
 const WARD_FILES = ["ward.js", "discharge.js", "patient-register.js"];
 const SITE_FILES = ["wardsynq/site/shell.js", "wardsynq/site/bug-reporter.js", "wardsynq/ui/wardsynq-app.js",
-  ...["abdm", "accounts", "admin", "audit", "group", "maik", "patients", "portal-access", "rota", "security"].map((p) => "wardsynq/site/pages/" + p + ".js")];
+  ...["abdm", "accounts", "admin", "audit", "governance", "group", "maik", "patients", "portal-access", "rota", "security"].map((p) => "wardsynq/site/pages/" + p + ".js")];
 
 for (const file of [...WARD_FILES, ...SITE_FILES]) {
   test("no unwrapped visible English in " + file + " beyond its allowlist", () => {

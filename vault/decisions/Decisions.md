@@ -6679,3 +6679,24 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   Native dialogs remain only in MaiK, integration, billing/claims, purchasing and scheduling screens (other lanes).
 - A paint that arrives while a pointer is down inside the ward is held until the pointer comes up (3 s cap), as a
   paint is held for an open select: a repaint between press and release lost the click (the ED "first triage" miss).
+## 2026-09-16 DPDP Act 2023, NABH and HMIS returns, DHS self-assessment, report builder
+- New capability `dpdp.manage` and role `dpo` (queue.view, emr.view, dpdp.manage). Its grant writes PrivacyNotice,
+  PrivacyAcknowledgement, DataPrincipalRequest, DataBreach, PatientConsent and Patient, nothing clinical. The front-desk
+  (queue.add) grant gains PrivacyAcknowledgement. functions/_wardsynq/dpdp.js; screen wardsynq/site/pages/governance.js.
+- DPDP Rules 2025 text was not confirmed: every answer and breach-notification time is hospital-set
+  (`wardsynq.dpdp.responseDays`, `breachBoardHours`, `breachPrincipalHours`), returned with `confirmed: false`, and
+  with no setting there is no due date. No time from the Rules is hard-coded.
+- Erasure withdraws consents other than treatment, blood products and procedures (s7 makes care independent of
+  consent), removes ABHA identifiers from the current Patient version and clears optional OPD registration details
+  (address, district, state, PIN, referral, ABHA link) through `_opd_patient_store.clearOptionalRegistration`. The
+  clinical record is kept (s8(7), s12(3)); a value removed from the current record stays in version history and is
+  never called erased. An erasure that cannot finish leaves the request in progress with what was and was not done.
+- `PatientConsent` gains the `marketing` scope (s7(a)), withdrawable in the portal.
+- NABH: no monthly submission format is published, so the 32 PSQ 3a-3d indicators are a monthly table
+  (functions/_wardsynq/compliance.js). 8 are computed from the record; 24 are marked not computable with the missing data.
+- HMIS monthly (Other Secondary Care Facility, Pvt): items WardSynQ supports are filled; every other item says not available.
+- DHS 2nd ed.: one `DhsAssessment` record per hospital, a self-assessment, never a certification. FPM.1 prints "d" twice;
+  the second is keyed FPM.1.d-2.
+- Report builder: named datasets only, no query language; staff.admin at the door, each dataset re-checks its own read
+  capability and any patient-identifying column needs emr.view; `SavedReport` shared within the hospital; CSV built
+  server-side, formula-looking cells defused.

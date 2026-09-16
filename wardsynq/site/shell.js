@@ -341,7 +341,7 @@
     if (native) h += item("workstation", "nav.workstation") + item("ward:", "nav.ward") + item("ward:board", "nav.beds") + item("ward:edboard", "nav.emergency") + item("ward:critsboard", "nav.criticals") + item("ward:labboard", "nav.lab") + item("ward:radboard", "nav.radiology");
     h += item("opd", "nav.opd") + item("patients", "nav.patients");
     if (native) h += heading("nav.command") + item("ward:flowcommand", "nav.commandCenter") + item("ward:twin", "nav.twin") + item("ward:reports", "nav.reports") + item("ward:cashier", "nav.billing") + item("ward:integration", "nav.integration") + item("maik", "nav.maik");
-    h += heading("nav.administration") + item("admin", "nav.adminCenter") + item("audit", "nav.audit") + item("security", "nav.security") + item("rota", "nav.rota") + item("accounts", "nav.accounts") + item("group", "nav.group") + "</div>";
+    h += heading("nav.administration") + item("admin", "nav.adminCenter") + item("audit", "nav.audit") + item("security", "nav.security") + item("governance", "nav.governance") + item("rota", "nav.rota") + item("accounts", "nav.accounts") + item("group", "nav.group") + "</div>";
     return h;
   }
   function render(page, extra) {
@@ -685,6 +685,9 @@
       tile({ go: "admin", icon: "admin_panel_settings", title: T(null, "site.shell.home.tile.admin.title", "Admin Center"), sub: T(null, "site.shell.home.tile.admin.sub", "Wards, beds, departments, rooms, staff and roles"), need: "staff.admin" }),
       tile({ go: "audit", icon: "policy", title: T(null, "site.shell.home.tile.audit.title", "Audit and security"), sub: T(null, "site.shell.home.tile.audit.sub", "Record changes, emergency access, source grants, service health"), need: "emr.view" }),
     ];
+    /* DPDP Act 2023, NABH and HMIS returns, the digital health self-assessment and the report builder: the Data
+     * Protection Officer's own way in, and the administrator's (pages/governance.js offers each tab to its capability). */
+    if (native) adminTiles.push(tile({ go: "governance", icon: "shield_person", title: T(null, "site.shell.home.tile.governance.title", "Privacy and compliance"), sub: T(null, "site.shell.home.tile.governance.sub", "DPDP requests and breaches, NABH and HMIS returns, reports"), need: ["dpdp.manage", "analytics.view", "staff.admin"] }));
     if (native) adminTiles.push(tile({ go: "ward:bedmgmt", icon: "dashboard_customize", title: T(null, "site.shell.home.tile.bedmgmt.title", "Bed management"), sub: T(null, "site.shell.home.tile.bedmgmt.sub", "Bed master: block, release, housekeeping"), need: "staff.admin" }));
     el.innerHTML = head + sec(esc(T(null, "site.shell.home.sec.clinical", "Clinical")), wardTiles) + (cmdTiles.length ? sec(esc(T(null, "site.shell.home.sec.command", "Command and operations")), cmdTiles) : "") + sec(esc(T(null, "site.shell.home.sec.patientsAI", "Patients and AI")), peopleTiles) + sec(esc(T(null, "site.shell.home.sec.admin", "Administration")), adminTiles);
     if (!native) return;

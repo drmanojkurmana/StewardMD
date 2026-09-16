@@ -25,6 +25,7 @@ import { recordDeps } from "../../_wardsynq/deps.js";
 import { redeemCode, portalRead, sessionPatient } from "../../_wardsynq/patient-access.js";
 import { sendMessage, requestAppointment } from "../../_wardsynq/portal-requests.js";
 import { withdrawOwnConsent, portalDocumentFile, queueStatus } from "../../_wardsynq/portal-view.js";
+import { portalPrivacy, portalAcknowledge, portalDataRequest } from "../../_wardsynq/dpdp.js";
 import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
 import { queueEnabled } from "../../_queue.js";
 import { listSessions, listTickets, opdDate } from "../../_queue_engine.js";
@@ -106,6 +107,16 @@ export async function onRequest(context) {
       "Content-Type": r.contentType || "application/octet-stream", "Cache-Control": "no-store",
       "Content-Disposition": `attachment; filename="${r.filename}"`, "X-Content-Type-Options": "nosniff",
     }, corsHeaders(request)) });
+  }
+  /* DPDP Act 2023: the hospital's privacy notice in the patient's language, their acknowledgement of it, and their own
+   * access / correction / erasure / grievance / nomination request. Session first, patient from the grant, as below;
+   * a proxy may read the notice and never acknowledges or requests on the patient's behalf (dpdp.js refuses it). */
+  if (sub === "privacy" || sub === "privacy-acknowledge" || sub === "data-request") {
+    const session = await sessionPatient({ ...deps, grantId: body.grantId, token: body.token });
+    if (!session.ok) return json({ ok: false, error: session.error, detail: session.detail || null }, session.status || 401, request);
+    const dctx = { ...deps, language: body.language, kind: body.kind, detail: body.detail, nominee: body.nominee, dpdp: (cfg && cfg.dpdp) || null };
+    const r = sub === "privacy" ? await portalPrivacy(dctx, session) : sub === "privacy-acknowledge" ? await portalAcknowledge(dctx, session) : await portalDataRequest(dctx, session);
+    return json(r, r.ok ? 200 : (r.status || 502), request);
   }
   /* The two write routes. Both check the session FIRST and then take the patient id from the grant -
    * a caller cannot name whose record it writes onto, exactly as on the read side. */

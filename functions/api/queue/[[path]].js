@@ -108,6 +108,9 @@ import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation } from "../../_wardsynq/emergency-mode.js";
+import { publishNotice, privacyNotices, acknowledgePrivacy, privacyAcknowledgements, fileDataRequest, actOnDataRequest, dpoQueue, dataHoldings, recordBreach, updateBreach } from "../../_wardsynq/dpdp.js";
+import { nabhIndicators, nabhCsv, hmisMonthly, hmisCsv, dhsChecklist, saveDhsAssessment } from "../../_wardsynq/compliance.js";
+import { runReport, saveReport, listSavedReports, reportCsv } from "../../_wardsynq/report-builder.js";
 import { reportIncident, signalIncident, confirmIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
 import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
 import { uploadDocument, listDocuments, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink } from "../../_wardsynq/documents.js";
@@ -144,7 +147,7 @@ import { bookAppointment, setAppointmentState, requestFollowUp, listSchedule } f
 import { setCarePlan, recordProgress, readCarePlan } from "../../_wardsynq/care-plan.js";
 import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-templates.js";
 import { recordOfflineChoice } from "../../_wardsynq/offline-resolve.js";
-import { encounterIdForTicket } from "../../_wardsynq/opd-identity.js";
+import { encounterIdForTicket, patientIdForMrn } from "../../_wardsynq/opd-identity.js";
 /* Aliased: `recordAssessment` is already the OPD assessment writer in this file, and a risk
  * assessment is a different thing entirely. Two names that read the same for two different
  * clinical acts is how the wrong one gets called. */
@@ -438,6 +441,7 @@ const CAP_SAY = {
   "lab.result": "release a result", "billing.view": "see billing", "billing.charge": "take payment",
   "staff.admin": "manage staff and roles", "analytics.view": "see reports",
   "him.roi": "release records to a third party", "incident.report": "file an incident report",
+  "incident.investigate": "investigate incidents", "dpdp.manage": "manage privacy notices, data requests and breaches",
 };
 function azRefusal(az) {
   const reason = (az && az.reason) || "forbidden";
@@ -1081,7 +1085,7 @@ export async function onRequest(context) {
       /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
        * deliberate, and because they are the one shape that turns an authenticated account into a
        * bulk exfiltration tool in a loop. */
-      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health", "security-report", "system-health", "fhir-export"]);
+      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health", "security-report", "system-health", "fhir-export", "nabh-indicators", "hmis-monthly", "report-run", "report-csv"]);
       /* Emergency access is bounded but never scarce: the limit is here to make scripted break-glass
        * abuse visible and finite, and it sits far above the handful of declarations a real shift
        * produces. Refusing a genuine emergency to enforce a quota would be the worse failure. */
@@ -1275,6 +1279,19 @@ export async function onRequest(context) {
         "incident-triage": CAPS.INCIDENT_INVESTIGATE, "incident-rca": CAPS.INCIDENT_INVESTIGATE,
         "incident-capa": CAPS.INCIDENT_INVESTIGATE, "incident-capa-complete": CAPS.INCIDENT_INVESTIGATE,
         "incident-close": CAPS.INCIDENT_INVESTIGATE, "incident-log": CAPS.INCIDENT_INVESTIGATE,
+        /* DPDP Act 2023 (dpdp.js). Reading the published notice is for anyone at the desk; recording that a patient
+         * was given it is the registering act (queue.add). Publishing it, the data principal request queue, the
+         * access answer and the breach register are the Data Protection Officer's (dpdp.manage). */
+        "privacy-notices": CAPS.QUEUE_VIEW, "privacy-acknowledgements": CAPS.QUEUE_VIEW, "privacy-acknowledge": CAPS.QUEUE_ADD,
+        "privacy-notice": CAPS.DPDP_MANAGE, "data-requests": CAPS.DPDP_MANAGE, "data-request": CAPS.DPDP_MANAGE,
+        "data-request-act": CAPS.DPDP_MANAGE, "data-holdings": CAPS.DPDP_MANAGE, "data-breach": CAPS.DPDP_MANAGE, "data-breach-update": CAPS.DPDP_MANAGE,
+        /* Returns (compliance.js). The indicator tables name no patient and no clinician: analytics.view, the same
+         * gate as quality-safety. The DHS self-assessment is the hospital's own statement about itself: staff.admin. */
+        "nabh-indicators": CAPS.ANALYTICS_VIEW, "hmis-monthly": CAPS.ANALYTICS_VIEW,
+        "dhs-checklist": CAPS.STAFF_ADMIN, "dhs-checklist-save": CAPS.STAFF_ADMIN,
+        /* The report builder (report-builder.js). staff.admin at the door, and each dataset re-checks its own read
+         * capability, plus emr.view for any column that identifies a patient, inside. */
+        "report-run": CAPS.STAFF_ADMIN, "report-save": CAPS.STAFF_ADMIN, "reports-saved": CAPS.STAFF_ADMIN, "report-csv": CAPS.STAFF_ADMIN,
         /* The FHIR export. emr.view because it renders the chart: exporting a record is reading it,
          * and an export door that was easier to open than the chart itself would be the way around
          * every other control on this file. The record service still applies the actor's own read
@@ -3685,6 +3702,88 @@ export async function onRequest(context) {
       if (sub === "incident-log" && method === "GET") {
         const r = await incidentLog(request, env, { ...deps, state: url.searchParams.get("state") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- DPDP Act 2023 (dpdp.js) ---- */
+      const dpdpCfg = (wsqCfg && wsqCfg.dpdp) || null;
+      if (sub === "privacy-notices" && method === "GET") {
+        const r = await privacyNotices(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "privacy-notice" && method === "POST") {
+        const r = await publishNotice(request, env, { ...deps, language: body.language, title: body.title, text: body.text, dpoContact: body.dpoContact, grievanceContact: body.grievanceContact, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "privacy-acknowledge" && method === "POST") {
+        const r = await acknowledgePrivacy(request, env, { ...deps, patientId: body.patientId || patientIdForMrn(body.mrn), language: body.language, method: body.method, givenBy: body.givenBy, giverName: body.giverName, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "privacy-acknowledgements" && method === "GET") {
+        const r = await privacyAcknowledgements(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-requests" && method === "GET") {
+        const r = await dpoQueue(request, env, { ...deps, dpdp: dpdpCfg });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-request" && method === "POST") {
+        const r = await fileDataRequest(request, env, { ...deps, dpdp: dpdpCfg, patientId: body.patientId || patientIdForMrn(body.mrn), kind: body.kind, detail: body.detail, receivedVia: body.receivedVia, nominee: body.nominee, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-request-act" && method === "POST") {
+        const r = await actOnDataRequest(request, env, { ...deps, requestId: body.requestId, action: body.action, response: body.response,
+          /* The registration desk's copy of the patient's optional details, cleared through its own store. */
+          clearRegistrationDetails: (mrn) => PAT.clearOptionalRegistration(env, wOrgId, mrn, actor.id || "") });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-holdings" && method === "GET") {
+        const r = await dataHoldings(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-breach" && method === "POST") {
+        const r = await recordBreach(request, env, { ...deps, dpdp: dpdpCfg, detectedAt: body.detectedAt, description: body.description, dataCategories: body.dataCategories, affectedCount: body.affectedCount, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-breach-update" && method === "POST") {
+        const r = await updateBreach(request, env, { ...deps, breachId: body.breachId, event: body.event, assessment: body.assessment, at: body.at, reference: body.reference, count: body.count, method: body.method, text: body.text, summary: body.summary });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- Returns and reports (compliance.js, report-builder.js) ---- */
+      const csvOut = (text, name) => new Response(text, { status: 200, headers: Object.assign({ "Content-Type": "text/csv; charset=utf-8", "Cache-Control": "no-store", "Content-Disposition": `attachment; filename="${name}"`, "X-Content-Type-Options": "nosniff" }, corsHeaders(request)) });
+      if (sub === "nabh-indicators" && method === "GET") {
+        const r = await nabhIndicators(request, env, { ...deps, months: url.searchParams.get("months") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes });
+        if (r.ok && !r.skipped && url.searchParams.get("format") === "csv") return csvOut(nabhCsv(r), "nabh-indicators.csv");
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "hmis-monthly" && method === "GET") {
+        const r = await hmisMonthly(request, env, { ...deps, month: url.searchParams.get("month") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes });
+        if (r.ok && !r.skipped && url.searchParams.get("format") === "csv") return csvOut(hmisCsv(r), `hmis-${r.month}.csv`);
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dhs-checklist" && method === "GET") {
+        const r = await dhsChecklist(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dhs-checklist-save" && method === "POST") {
+        const r = await saveDhsAssessment(request, env, { ...deps, entries: body.entries, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      const hasCap = async (cap) => !!(await ORG.authorizeOrg(env, actor, wOrgId, cap)).ok;
+      if (sub === "report-run" && method === "POST") {
+        const r = await runReport(request, env, { ...deps, spec: body.spec, hasCap });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-save" && method === "POST") {
+        const r = await saveReport(request, env, { ...deps, reportId: body.reportId, name: body.name, spec: body.spec, shared: body.shared === true, deleted: body.deleted === true, hasCap });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "reports-saved" && method === "GET") {
+        const r = await listSavedReports(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-csv" && method === "GET") {
+        const r = await reportCsv(request, env, { ...deps, reportId: url.searchParams.get("reportId") || "", hasCap });
+        if (r.ok) return csvOut(r.csv, r.filename);
+        return json(r, r.status || 502, request);
       }
       if (sub === "verify-order" && method === "POST") {
         const r = await verifyOrder(request, env, { ...deps, orderId: body.orderId, outcome: body.outcome, reason: body.reason, idempotencyKey: body.idempotencyKey || null });

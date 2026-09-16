@@ -35,7 +35,7 @@
   var ROLES = ["admin", "doctor", "supervisor", "nurse", "intern", "resident", "reception", "cashier",
     "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist",
     "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver",
-    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "viewer"];
+    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "dpo", "viewer"];
 
   // One line per common role, from the capability lists in functions/_queue_roles.js ROLE_CAPS.
   // Built at render time (not a module constant) because each note is a T() call in the staff language.
@@ -80,13 +80,13 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["seed", "nav.admin.seed"], ["maik", "nav.admin.maik"], ["security", "nav.admin.security"], ["health", "nav.admin.health"], ["export", "nav.admin.export"], ["fhir", "nav.admin.fhir"], ["integrations", "nav.admin.integrations"], ["bugs", "nav.admin.bugs"]);
+    if (c.isWardsynq()) tabs.push(["seed", "nav.admin.seed"], ["maik", "nav.admin.maik"], ["security", "nav.admin.security"], ["health", "nav.admin.health"], ["export", "nav.admin.export"], ["fhir", "nav.admin.fhir"], ["integrations", "nav.admin.integrations"], ["bugs", "nav.admin.bugs"], ["governance", "nav.admin.governance"]);
     // #/admin/tariff opens that tab: the cashier's "no price set" message links straight to the Price list (LT-30).
     // Applied once per arrival, so the tab buttons still work while the address says /tariff.
     if (st.page === "admin" && st.arg && st._adminArg !== st.arg && tabs.some(function (t) { return t[0] === st.arg; })) st._adminTab = st.arg;
     st._adminArg = st.page === "admin" ? st.arg : "";
     var tab = st._adminTab || "hospital";
-    if ((tab === "seed" || tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations" || tab === "bugs") && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "seed" || tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations" || tab === "bugs" || tab === "governance") && !c.isWardsynq()) tab = "hospital";
     var navTr = c.navTr || function (k) { return k; };
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.admin.title", "Admin Center")) + '</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist" lang="' + c.esc(c.navLang || "en") + '">' + tabs.map(function (t) {
@@ -96,7 +96,9 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs };
+    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs,
+      // Privacy and compliance is its own page (pages/governance.js); the tab is the Admin Center's door to it.
+      governance: function () { st._adminTab = "hospital"; WSQ.go("governance"); } };
     return renderers[tab](c, body);
   } });
 

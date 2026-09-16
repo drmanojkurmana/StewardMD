@@ -174,7 +174,10 @@ function grantForCaps(caps) {
      * administrative act as registering the patient - it is not a clinical decision and asking a
      * doctor to enter a telephone number is how the field stays empty. It grants nothing clinical:
      * a receptionist still cannot write an observation or a note. */
-    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson"];
+    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson",
+      // PrivacyAcknowledgement joined 2026-09-16 (DPDP Act 2023 s5): handing a patient the privacy notice at
+      // registration and recording that they received it is the same front-desk act as registering them.
+      "PrivacyAcknowledgement"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,
@@ -457,6 +460,23 @@ function grantForCaps(caps) {
       write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
       writeCategories: grant.writeCategories,
       basis: grant.basis + "+" + basis,
+    };
+  }
+
+  /* DPDP Act 2023, 2026-09-16 (dpdp.js). The Data Protection Officer's records: the notice, the
+   * acknowledgements, the data principal requests and the breach register. PatientConsent, because an
+   * erasure request is honoured by withdrawing the consents that are not needed for treatment, and
+   * Patient, because it removes the identifiers a patient chose to give (ABHA) from the current record.
+   * Nothing clinical: this grant cannot write a note, an order or a result. */
+  if (has(CAPS.DPDP_MANAGE)) {
+    const added = ["PrivacyNotice", "PrivacyAcknowledgement", "DataPrincipalRequest", "DataBreach", "PatientConsent", "Patient"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.DPDP_MANAGE };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + CAPS.DPDP_MANAGE,
     };
   }
 
