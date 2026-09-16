@@ -259,7 +259,7 @@ import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_w
 import { storesOverview, saveStoreItem, saveStoreLocation, storeMovement, raiseIndent, decideIndent, issueIndent, acknowledgeIndent, closeIndent, storeConsumption, purchaseFromIndent } from "../../_wardsynq/stores.js";
 import { assetsOverview, saveAsset, recordAssetEvent, saveSchedule, openJobCard, updateJobCard } from "../../_wardsynq/assets.js";
 import { bloodBankOverview, registerDonor, screenDonor, recordDonation, recordBloodTests, separateComponents, bloodUnitEvent, bloodUnitGate, poolUnits, registerSample, discardSample, recordDonorNotification } from "../../_wardsynq/blood-bank.js";
-import { bloodCentreView, validateBloodCentreSettings } from "../../_wardsynq/blood-centre-rules.js";
+import { bloodCentreView, validateBloodCentreSettings, retentionWithRecordYears } from "../../_wardsynq/blood-centre-rules.js";
 import { donorCriteriaFor, validateDonorCriteria } from "../../_wardsynq/donor-criteria.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess, listGrants } from "../../_wardsynq/patient-access.js";
@@ -5197,7 +5197,10 @@ export async function onRequest(context) {
       const b1 = flat(before), a1 = flat(value);
       const changed = [...new Set([...Object.keys(b1), ...Object.keys(a1)])].filter((k) => (b1[k] == null ? null : b1[k]) !== (a1[k] == null ? null : a1[k]));
       if (!changed.length) return json({ ok: true, centre: bloodCentreView(o.wardsynq), changed: [] }, 200, request);
-      await ORG.updateOrg(env, orgId, { wardsynq: { bloodCentre: value } }, actor.id, { action: "org:blood_centre_settings", meta: JSON.stringify({ changed }) });
+      /* The record period is retention.js's blood-centre class (floor five years), so it is saved there, not in bloodCentre. */
+      const { recordRetentionYears, ...centre } = value, patch = { bloodCentre: centre };
+      if (changed.includes("recordRetentionYears")) patch.retention = retentionWithRecordYears(o.wardsynq && o.wardsynq.retention, recordRetentionYears);
+      await ORG.updateOrg(env, orgId, { wardsynq: patch }, actor.id, { action: "org:blood_centre_settings", meta: JSON.stringify({ changed }) });
       const back = await ORG.getOrg(env, orgId);
       return json({ ok: true, centre: bloodCentreView(back && back.wardsynq), changed }, 200, request);
     }

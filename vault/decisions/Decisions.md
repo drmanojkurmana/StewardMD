@@ -7287,8 +7287,9 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
   component. Only names are checked; NBTC rates are not encoded.
 - **Settings:** `wardsynq.bloodCentre` { natRequired, shelfHours (shorter only), sampleRetentionDays (>= 7),
   recordRetentionYears (>= 5) }, Admin > Hospital, GET/POST /api/queue/org/blood-centre-settings (staff.admin, audited by
-  name). **Merge note:** branch legal-privacy adds `retention.js` with a "blood-centre" class of five years; after both merge,
-  recordRetentionYears should come from that class. Nothing in WardSynQ purges blood centre records today.
+  name). **Merged with legal-privacy (2026-09-17):** the record period is `retention.js`'s "blood-centre" class (floor five
+  years). The Admin card still edits recordRetentionYears, saved as `wardsynq.retention.years["blood-centre"]`, never in
+  `bloodCentre`; classesOf never reads below the floor. Nothing in WardSynQ purges blood centre records today.
 - **Not built:** frozen red cells (storage -80 to -196 C, no shelf life in the opinion); donor consent form fields (not
   listed in section G); bag batch and kit/reagent registers (heading L lists them, G.5 does not); a Medical Officer name on
   screening (the signed-in actor is recorded); NBTC processing-charge rates; storage temperature logs.

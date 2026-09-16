@@ -18,7 +18,7 @@ const cfg = () => docs.get("q_orgs/org-a").fields.wardsynq || {};
 const events = () => [...docs.values()].map((d) => d.fields).filter((f) => f.action === "org:blood_centre_settings");
 function seedWsq() {
   H.seed();
-  Object.assign(docs.get("q_orgs/org-a").fields, { mode: "wardsynq", wardsynq: { lactationWindowDays: 42 } });
+  Object.assign(docs.get("q_orgs/org-a").fields, { mode: "wardsynq", wardsynq: { lactationWindowDays: 42, retention: { years: { "clinical-opd": 12 }, minorYearsAfter18: 4 } } });
 }
 const STRICTER = { natRequired: true, sampleRetentionDays: 10, recordRetentionYears: 8, shelfHours: { platelets: 72, prbc: "" } };
 
@@ -65,7 +65,9 @@ test("POST /api/queue/org/blood-centre-settings: the admin saves stricter settin
   assert.deepEqual(r.changed.sort(), names);
   assert.deepEqual([r.centre.natRequired, r.centre.sampleRetentionDays, r.centre.recordRetentionYears], [true, 10, 8]);
   assert.equal(r.centre.components.find((c) => c.component === "platelets").variants[0].hours, 72);
-  assert.deepEqual(cfg().bloodCentre, { natRequired: true, sampleRetentionDays: 10, recordRetentionYears: 8, shelfHours: { platelets: 72 } });
+  assert.deepEqual(cfg().bloodCentre, { natRequired: true, sampleRetentionDays: 10, shelfHours: { platelets: 72 } });
+  // The record period is retention.js's blood-centre class (merge 2026-09-17), not a second setting in bloodCentre.
+  assert.deepEqual(cfg().retention, { years: { "clinical-opd": 12, "blood-centre": 8 }, minorYearsAfter18: 4 }, "saved into the class; other classes kept");
   assert.equal(cfg().lactationWindowDays, 42, "other hospital config untouched");
   const ev = events();
   assert.equal(ev.length, 1);
@@ -74,6 +76,17 @@ test("POST /api/queue/org/blood-centre-settings: the admin saves stricter settin
   assert.deepEqual((await api("/org/blood-centre-settings", "POST", { orgId: "org-a", settings: STRICTER }, H.HR_A)).changed, []);
   assert.equal(events().length, 1, "a save that changes nothing writes no audit row");
   const back = await api("/org/blood-centre-settings", "POST", { orgId: "org-a", settings: {} }, H.HR_A);
-  assert.deepEqual([back.centre.natRequired, back.centre.sampleRetentionDays], [false, 7]);
+  assert.deepEqual([back.centre.natRequired, back.centre.sampleRetentionDays, back.centre.recordRetentionYears], [false, 7, 5]);
   assert.deepEqual(cfg().bloodCentre, {});
+  assert.deepEqual(cfg().retention, { years: { "clinical-opd": 12 }, minorYearsAfter18: 4 }, "blank returns the class to its floor");
+});
+
+test("GET /api/queue/org/blood-centre-settings: the record period is the retention class, never below five years", async () => {
+  seedWsq();
+  docs.get("q_orgs/org-a").fields.wardsynq.retention = { years: { "blood-centre": 3 } };
+  const low = await api("/org/blood-centre-settings?orgId=org-a", "GET", null, H.HR_A);
+  assert.deepEqual([low.centre.recordRetentionYears, low.centre.saved.recordRetentionYears], [5, undefined]);
+  docs.get("q_orgs/org-a").fields.wardsynq.retention = { years: { "blood-centre": 9 } };
+  const long = await api("/org/blood-centre-settings?orgId=org-a", "GET", null, H.HR_A);
+  assert.deepEqual([long.centre.recordRetentionYears, long.centre.saved.recordRetentionYears], [9, 9]);
 });

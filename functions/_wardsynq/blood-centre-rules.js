@@ -17,6 +17,8 @@
  * node --test --experimental-test-module-mocks --test-concurrency=1 test/wardsynq-blood-centre.test.mjs
  */
 
+import { CLASSES, classesOf } from "./retention.js";
+
 const DAY_H = 24;
 const str = (v) => (v == null ? "" : String(v).trim());
 const RULES = "Drugs and Cosmetics Rules 1945, Schedule F Part XII-B (G.S.R. 166(E), 2020) and Schedule P";
@@ -107,28 +109,40 @@ const GROUP_COLOURS = Object.freeze({ O: "blue", A: "yellow", B: "pink", AB: "wh
 
 /* HOW LONG THINGS ARE KEPT. K Note (a): pilot and recipient samples "preserved for 7 days after issue". Heading L NOTE:
  * "The above records shall be kept by the licensee for a period of five years"; r.122-P(i)(c) likewise.
- * MERGE NOTE: branch legal-privacy adds functions/_wardsynq/retention.js with a "blood-centre" class of the same five
- * years; when both are merged, recordRetentionYears should come from that class and this setting be retired. */
+ * The record period is retention.js's "blood-centre" class, not a setting of its own: its floor is the five years, and
+ * the hospital's longer period is that class's wardsynq.retention.years["blood-centre"] (classesOf never goes below the
+ * floor). The Admin blood centre card still edits it as recordRetentionYears; the route saves it into the class. */
 const SAMPLE_RETENTION = Object.freeze({ days: 7, ref: "Schedule F Part XII-B, heading K Note (a)" });
-const RECORD_RETENTION = Object.freeze({ years: 5, ref: "Schedule F Part XII-B, heading L NOTE; rule 122-P(i)(c)" });
+const RETENTION_CLASS = "blood-centre";
+const RECORD_RETENTION = Object.freeze({ years: CLASSES[RETENTION_CLASS].floorYears, retentionClass: RETENTION_CLASS, ref: "Schedule F Part XII-B, heading L NOTE; rule 122-P(i)(c)" });
 
 /**
- * PURE. The settings in force: wsqCfg.bloodCentre, each value used only where it is stricter than the Rules.
+ * PURE. The settings in force: wsqCfg.bloodCentre, each value used only where it is stricter than the Rules, and the
+ * record period from wsqCfg.retention's blood-centre class. A recordRetentionYears left inside bloodCentre is ignored.
  * Returns { natRequired, shelfHours, sampleRetentionDays, recordRetentionYears, saved }.
  */
 function bloodCentreSettings(wsqCfg) {
-  const s = (wsqCfg && wsqCfg.bloodCentre) || {};
+  const { recordRetentionYears: ignored, ...s } = (wsqCfg && wsqCfg.bloodCentre) || {};
   const { value } = validateBloodCentreSettings(s);
+  const cls = classesOf(wsqCfg && wsqCfg.retention).classes[RETENTION_CLASS];
   return {
     natRequired: value.natRequired === true,
     shelfHours: value.shelfHours || {},
     sampleRetentionDays: value.sampleRetentionDays || SAMPLE_RETENTION.days,
-    recordRetentionYears: value.recordRetentionYears || RECORD_RETENTION.years,
-    saved: value,
+    recordRetentionYears: cls.years,
+    saved: cls.years > cls.floorYears ? { ...value, recordRetentionYears: cls.years } : value,
   };
 }
 
-/** PURE. A hospital's settings from Admin: { value, errors }. Blank means the Rules' value and is not stored. */
+/** PURE. wardsynq.retention with the blood-centre class at `years` (null: back to the floor). Every other class kept. */
+function retentionWithRecordYears(retention, years) {
+  const r = retention && typeof retention === "object" && !Array.isArray(retention) ? retention : {};
+  const { [RETENTION_CLASS]: old, ...others } = r.years && typeof r.years === "object" ? r.years : {};
+  return { ...r, years: years ? { ...others, [RETENTION_CLASS]: years } : others };
+}
+
+/** PURE. A hospital's settings from Admin: { value, errors }. Blank means the Rules' value and is not stored.
+ * value.recordRetentionYears is not stored in bloodCentre: the route writes it with retentionWithRecordYears. */
 function validateBloodCentreSettings(input) {
   const errors = {}, value = {};
   if (!input || typeof input !== "object" || Array.isArray(input)) return { value, errors: { settings: "Send the settings as an object." } };
@@ -199,5 +213,5 @@ function sampleRetainUntil(endTimes, days) {
 export {
   RULES, ANTICOAGULANTS, ADDITIVES, COMPONENT_RULES, POOLABLE, POOLED_OPEN_HOURS, TRANSPORT, TEST_METHODS, TEST_REFS,
   ANTIBODY_SCREEN, GROUP_COLOURS, SAMPLE_RETENTION, RECORD_RETENTION,
-  storageText, shelfFor, longestShelfHours, bloodCentreSettings, validateBloodCentreSettings, bloodCentreView, sampleRetainUntil,
+  storageText, shelfFor, longestShelfHours, bloodCentreSettings, retentionWithRecordYears, validateBloodCentreSettings, bloodCentreView, sampleRetainUntil,
 };

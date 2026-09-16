@@ -14,7 +14,8 @@ import { as, seedHospital, recordsOf, auditsOf, U, ORG, ORG2 } from "./wardsynq-
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { donationTests, unitTests, samplesOf, lookbackOf } from "../functions/_wardsynq/blood-bank.js";
-import { shelfFor, storageText, validateBloodCentreSettings, bloodCentreSettings, sampleRetainUntil, COMPONENT_RULES, GROUP_COLOURS } from "../functions/_wardsynq/blood-centre-rules.js";
+import { shelfFor, storageText, validateBloodCentreSettings, bloodCentreSettings, retentionWithRecordYears, sampleRetainUntil, COMPONENT_RULES, GROUP_COLOURS, RECORD_RETENTION } from "../functions/_wardsynq/blood-centre-rules.js";
+import { CLASSES } from "../functions/_wardsynq/retention.js";
 import { bloodCentreOnlyReadable, RecordService } from "../functions/_wardsynq/service.js";
 import { makeActor, KIND, TIER } from "../wardsynq/wardsynq-actors.js";
 import { H, TENANT } from "./wardsynq-ops-harness.mjs";
@@ -56,6 +57,12 @@ test("rules: shelf life by component, anticoagulant and additive; storage words;
   assert.deepEqual(Object.keys(v.errors).sort(), ["natRequired", "recordRetentionYears", "sampleRetentionDays", "shelfHours.ffp"]);
   assert.deepEqual(v.value, {}, "a value equal to the Rules is not stored");
   assert.deepEqual(bloodCentreSettings({ bloodCentre: { sampleRetentionDays: 3, recordRetentionYears: 2 } }), { natRequired: false, shelfHours: {}, sampleRetentionDays: 7, recordRetentionYears: 5, saved: {} }, "a looser value stored outside the screen is ignored");
+  // The record period is retention.js's blood-centre class: lengthened by the hospital, never below its five-year floor.
+  assert.equal(RECORD_RETENTION.years, CLASSES["blood-centre"].floorYears);
+  assert.deepEqual([bloodCentreSettings({ retention: { years: { "blood-centre": 2 } } }).recordRetentionYears, bloodCentreSettings({ bloodCentre: { recordRetentionYears: 9 } }).recordRetentionYears], [5, 5]);
+  assert.deepEqual(bloodCentreSettings({ retention: { years: { "blood-centre": 9 } } }).saved, { recordRetentionYears: 9 });
+  assert.deepEqual(retentionWithRecordYears({ years: { mtp: 6, "blood-centre": 7 }, minorYearsAfter18: 4 }, null), { years: { mtp: 6 }, minorYearsAfter18: 4 });
+  assert.deepEqual(retentionWithRecordYears(undefined, 8), { years: { "blood-centre": 8 } });
   assert.equal(sampleRetainUntil(["2026-09-01T00:00:00.000Z", "2026-09-03T00:00:00.000Z"], 7), "2026-09-10T00:00:00.000Z");
   assert.equal(sampleRetainUntil(["2026-09-01T00:00:00.000Z", null], 7), null, "a unit still in the blood centre keeps the sample");
   assert.equal(sampleRetainUntil([], 7), null);

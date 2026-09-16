@@ -271,8 +271,8 @@ function wardsynqConfig(w) {
    * validated on save (blood-bank.js validateDonorCriteria) and again on every read (donorCriteriaFor), which falls back
    * to the WHO default for anything absent or not allowed. */
   /* bloodCentre joined 2026-09-17 (legal opinion section G): NAT required, shorter component shelf lives, longer sample
-   * and record retention. Validated on save and on every read (blood-centre-rules.js bloodCentreSettings), which keeps
-   * the Rules' value for anything absent or looser. */
+   * retention. Validated on save and on every read (blood-centre-rules.js bloodCentreSettings), which keeps the Rules'
+   * value for anything absent or looser. The blood centre record period is retention.years["blood-centre"], not here. */
   for (const k of ["alerts", "abdm", "orderVerifyWithinHours", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears", "printLanguages", "labelSizes", "controlledDrugs", "dpdp", "retention", "supportServices", "hr", "patientComms", "onlineBooking", "feedback", "lactationWindowDays", "bloodDonorCriteria", "bloodCentre"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
