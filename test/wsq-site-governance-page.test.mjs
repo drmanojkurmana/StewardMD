@@ -39,6 +39,21 @@ test("erasure outcome: the clinical record is kept with the reason, removed valu
   assert.ok(!/\berased\b(?! )/.test(h.replace("They are not erased.", "")), "nothing is reported erased");
 });
 
+test("a retention layer that keeps nothing says why, from the registry status: not yet in force, stayed, struck down, expired", () => {
+  const W = govPage();
+  const layer = (id, notInForce) => ({ id, type: "LEGAL_OBLIGATION", instrument: "Instrument " + id, provision: "p", until: null, inForce: notInForce === null, ...(notInForce ? { notInForce } : {}) });
+  const cls = { class: "clinical-ipd", keepUntil: "2036-01-10T00:00:00Z", basisType: "RETENTION_POLICY", bases: [layer("a", "not-yet-effective"), layer("b", "stayed"), layer("c", "struck-down"), layer("d", "expired"), layer("e", null)] };
+  const items = W._govRetainedHtml({ esc }, [cls]).split("<li>").filter((x) => x.includes("Instrument "));
+  const word = (id) => items.find((x) => x.includes("Instrument " + id + ","));
+  assert.match(word("a"), /\(not yet in force\)/);
+  assert.match(word("b"), /\(stayed by a court\)/);
+  assert.match(word("c"), /\(struck down by a court\)/);
+  assert.match(word("d"), /\(expired\)/);
+  assert.ok(!/not yet in force/.test(word("b") + word("c") + word("d")), "a stayed, struck-down or expired law is never 'not yet in force'");
+  assert.ok(!/\((not|stayed|struck|expired)/.test(word("e")), "a layer in force carries no label");
+  assert.match(W._govRetainedHtml({ esc }, [{ ...cls, bases: [{ ...layer("f", null), inForce: false }] }]), /\(not in force\)/, "an answer recorded before the reason was stored");
+});
+
 test("a request with no hospital clock shows no due date; an overdue one says so; erasure asks before acting", () => {
   const W = govPage();
   const base = { id: "r1", patientId: "p1", kind: "access", state: "received", receivedAt: "2026-09-01T00:00:00Z", receivedVia: "email", detail: "copy" };

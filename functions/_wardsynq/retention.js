@@ -27,7 +27,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { ageAt, MAJORITY_YEARS, DAY, lawOn } from "./privacy-law.js";
-import { REQUIREMENTS, ENFORCED, LEGAL_OBLIGATION, RETENTION_POLICY, requirement, enforced } from "./legal-requirements.js";
+import { REQUIREMENTS, ENFORCED, LEGAL_OBLIGATION, RETENTION_POLICY, requirement, enforcement } from "./legal-requirements.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const HOLD = "LegalHold";
@@ -59,8 +59,10 @@ const BASES = Object.freeze(Object.fromEntries([...new Set(RETENTION_REQUIREMENT
 const MINOR_RULE = requirement("IN-RET-MINOR-AFTER-18");
 /* The registry's status alone (no date): a STAYED or STRUCK_DOWN law is not a legal floor for settings. */
 const statutory = (l) => l.type === LEGAL && ENFORCED.includes(l.status);
-/* Whether a layer keeps anything on this India Standard Time day. A hospital-setting layer is not a registry record. */
-const layerInForce = (l, nowMs) => !l.requirementId || enforced(l.requirementId, { on: new Date(nowMs + 19800000).toISOString().slice(0, 10) });
+/* Whether a layer keeps anything on this India Standard Time day, and the registry's reason when it does not
+ * ("not-yet-effective", "stayed", "struck-down", "expired", ...), so a screen never calls a stayed law "not yet in
+ * force". A hospital-setting layer is not a registry record. */
+const layerEnforcement = (l, nowMs) => (!l.requirementId ? { applies: true } : enforcement(requirement(l.requirementId), { on: new Date(nowMs + 19800000).toISOString().slice(0, 10) }));
 const basisText = (l) => `${l.instrument}, ${l.provision}`;
 
 /* H.4.1. floorYears is the shortest a hospital setting may make a class. It is never below the class's
@@ -128,7 +130,8 @@ function dated(layers, anchorOf, keepUntil, nowMs) {
   const bases = layers.map((l) => {
     const a = anchorOf(l.from);
     const until = a == null ? null : l.days != null ? a + l.days * DAY : l.years != null ? addYears(a, l.years) : null;
-    return { ...l, until: iso(until), inForce: layerInForce(l, nowMs) };
+    const e = layerEnforcement(l, nowMs);
+    return { ...l, until: iso(until), inForce: e.applies, ...(e.applies ? {} : { notInForce: e.reason }) };
   });
   const latest = (type) => { const t = bases.filter((b) => b.type === type && b.inForce && b.until).map((b) => Date.parse(b.until)); return t.length ? Math.max(...t) : null; };
   const legalUntil = latest(LEGAL), policyUntil = latest(POLICY), keep = msOf(keepUntil);

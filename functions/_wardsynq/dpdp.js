@@ -299,7 +299,7 @@ async function runErasure(svc, req, by, ctx, retained, decisions) {
 
 /** PURE. A retained class as written on the request: the dates, the basis and the answer, without each layer's notes. */
 function compactRetained(x, decision) {
-  const bases = (x.bases || []).map((b) => ({ id: b.id, type: b.type, sourceType: b.sourceType, instrument: b.instrument, provision: b.provision, jurisdiction: b.jurisdiction, until: b.until, inForce: b.inForce }));
+  const bases = (x.bases || []).map((b) => ({ id: b.id, type: b.type, sourceType: b.sourceType, instrument: b.instrument, provision: b.provision, jurisdiction: b.jurisdiction, until: b.until, inForce: b.inForce, ...(b.notInForce ? { notInForce: b.notInForce } : {}) }));
   return { class: x.class, rule: x.rule, years: x.years, source: x.source, records: x.records, lastAt: x.lastAt || null, keepUntil: x.keepUntil, legalUntil: x.legalUntil || null, policyUntil: x.policyUntil || null,
     basisType: x.basisType || null, policyOnly: !!x.policyOnly, untilProceedingsEnd: !!x.untilProceedingsEnd, minorRule: x.minorRule || null, bases, answer: retentionAnswer(x), decision: decision || null };
 }

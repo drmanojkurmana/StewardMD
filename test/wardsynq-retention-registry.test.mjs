@@ -45,6 +45,9 @@ test("a registry status change removes a legal layer's effect: STAYED IMC reg 1.
   assert.equal(ipd.legalUntil, null);
   assert.equal(ipd.basisType, S.POLICY, "only the DGHS OM keeps it now");
   assert.equal(ipd.bases.find((b) => b.requirementId === "IN-IMC-1-3-1").inForce, false);
+  assert.equal(ipd.bases.find((b) => b.requirementId === "IN-IMC-1-3-1").notInForce, "stayed", "the registry's reason travels with the layer");
+  assert.equal(pc.bases.find((b) => b.requirementId === "IN-PCPNDT-R9-6").notInForce, "struck-down");
+  assert.ok(ipd.bases.filter((b) => b.inForce).every((b) => b.notInForce === undefined), "a layer in force carries no reason");
   assert.match(S.retentionAnswer(ipd), /This is not a legal requirement/);
   assert.equal(pc.legalUntil, null, "a struck-down rule keeps nothing");
   assert.equal(pc.basisType, S.POLICY, "the class's setting period (not lowered here) is policy, not law");

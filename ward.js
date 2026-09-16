@@ -6492,6 +6492,27 @@
     }
     return "";
   }
+  /* PURE. The stay the cashier's bill is for: her choice, else the stay in hospital now, else the latest stay.
+   * "" = no stay (an outpatient bill), offered only when no stay is open: the server bills an open stay otherwise. */
+  function cashStayChoice(c) {
+    var stays = (c && c.stays) || [];
+    if (!stays.length) return "";
+    var open = stays.filter(function (s) { return s.status === "in-progress"; });
+    if (c.stayId != null && (c.stayId === "" ? !open.length : stays.some(function (s) { return s.id === c.stayId; }))) return c.stayId;
+    var latest = function (list) { return list.slice().sort(function (a, b) { return String(b.periodStart || "").localeCompare(String(a.periodStart || "")); })[0].id; };
+    return open.length ? latest(open) : latest(stays);
+  }
+  function cashStayHtml(c) {
+    if (c.stays === false) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.cash-stays-unreadable", "The stays could not be read, so this bill goes to the stay in hospital now, if any.", null, "", 1) + "</p>";
+    var stays = c.stays || [];
+    if (!stays.length) return "";
+    var pick = cashStayChoice(c), anyOpen = stays.some(function (s) { return s.status === "in-progress"; });
+    var opts = stays.map(function (s) {
+      var label = esc(when(s.periodStart)) + (s.ward ? " &middot; " + esc(s.ward) : "") + " (" + (s.status === "in-progress" ? wTH("ward.pkg-stay-open", "in hospital") : wTH("ward.cash-stay-discharged", "discharged {date}", { date: esc(when(s.periodEnd)) }, "date")) + ")";
+      return '<option value="' + esc(s.id) + '"' + (s.id === pick ? " selected" : "") + ">" + label + "</option>";
+    }).join("") + (anyOpen ? "" : '<option value=""' + (pick === "" ? " selected" : "") + ">" + wTH("ward.cash-stay-none", "No stay: an outpatient bill") + "</option>");
+    return '<label class="w-f"><span>' + wTH("ward.cash-stay", "Stay this bill is for") + '</span><select id="wCashStay">' + opts + "</select></label>";
+  }
   function cashierView(state) {
     var c = state.cashier || {};
     var invoices = c.invoices || [];
@@ -6567,6 +6588,7 @@
 
       (c.patientId ? '<div class="w-card"><div class="w-card-h">' + ms("account_balance") + "<h3>" + wTH("ward.outstanding-balance", "Outstanding balance") + "</h3></div>" +
         "<p><b>" + esc(c.outstandingBalance == null ? "-" : c.outstandingBalance) + "</b></p>" +
+        cashStayHtml(c) +
         '<button class="w-btn" data-w-act="cashraise">' + ms("receipt_long") + wTH("ward.raise-invoice-from-today-s-charges", "Raise invoice from today's charges") + "</button>" +
         cashRaisedHtml(c.raised) +
         (c.invoicesFailed
@@ -10564,6 +10586,12 @@
     apiGet("/ward/upcoding?" + q)
       .then(function (r) { st.cashier.watch = r && r.ok ? r : { failed: true }; paint(); })
       .catch(function () { st.cashier.watch = { failed: true }; paint(); });
+    /* THE STAY THIS BILL IS FOR (2026-09-17). With no stay named the server bills the open stay, so a DISCHARGED
+     * cashless stay's final bill came out self-pay. The cashier now names the stay; null = loading, false = unreadable. */
+    st.cashier.stays = null;
+    apiGet("/ward/stay-packages?" + q)
+      .then(function (r) { st.cashier.stays = r && r.ok && !r.staysUnreadable ? (r.stays || []) : false; paint(); })
+      .catch(function () { st.cashier.stays = false; paint(); });
     // E-invoicing at this hospital (gap-claims-gst B). null = asking, false = could not be read.
     st.cashier.einvoice = null;
     apiGet("/ward/einvoice-status?orgId=" + encodeURIComponent(st.orgId))
@@ -10585,7 +10613,8 @@
   function cashRaise() {
     if (!st.cashier || !st.cashier.patientId) return;
     st.cashier.err = ""; st.cashier.raised = null; st.busy = true; paint();
-    apiPost("/ward/invoice", { orgId: st.orgId, patientId: st.cashier.patientId })
+    var stay = cashStayChoice(st.cashier);
+    apiPost("/ward/invoice", { orgId: st.orgId, patientId: st.cashier.patientId, encounterId: stay || undefined })
       .then(function (r) {
         st.busy = false;
         /* EVERY OUTCOME IS SAID (LT-30). "Nothing priced" came back ok with nothing written and the
@@ -12906,6 +12935,7 @@
       var r0 = document.getElementById("wRoster"); if (r0) { var m0 = focusMark(); r0.innerHTML = rosterHtml(st); focusRestore(m0); } else paint();
       return;
     }
+    if (st.view === "cashier" && t && t.id === "wCashStay") { st.cashier.stayId = t.value; return; }
     if (st.view === "pcopy" && t && t.id === "wPcopyScope") { st.pcopyScope = t.value === "full" ? "full" : "patient-copy"; paint(); return; }
     // The print's second language: its catalog file is loaded before the page is drawn with it.
     if (st.view === "pcopy" && t && t.id === "wPcopyLang") { st.pcopyLang = t.value; if (G.WSQPrint) G.WSQPrint.ensureLoaded(t.value, paint); else paint(); return; }

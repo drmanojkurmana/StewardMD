@@ -214,6 +214,25 @@ test("POST /ward/invoice: a stay settled under a corporate contract is raised to
   assert.ok(/^INV\//.test(inv.documentNumber) && /^BOS\//.test(inv.billOfSupplyNumber));
 });
 
+test("POST /ward/invoice naming a DISCHARGED stay: the final bill carries that stay's payer parties and resolved recipient, not self-pay; another patient's stay is refused", async () => {
+  await hospital();
+  const P2 = "opd-pat-parties-2", DISCHARGED = "enc-parties-2";
+  const start = new Date(Date.now() - 6 * 86400000).toISOString(), end = new Date(Date.now() - 3 * 86400000).toISOString();
+  await H.RECORD.append(T, [
+    { resourceType: "Encounter", id: DISCHARGED, version: 1, patientId: P2, class: "IPD", status: "finished", periodStart: start, periodEnd: end, location: { ward: "Private" } },
+    { resourceType: "DiagnosticReport", id: "dr-cbc-d", version: 1, patientId: P2, encounterId: DISCHARGED, code: "CBC", status: "final", reportedAt: start },
+  ]);
+  assert.equal((await as(CASHIER, "/ward/stay-payer", "POST", { orgId: ORG_ID, patientId: P2, encounterId: DISCHARGED, payerRef: "acme" })).__status, 200);
+  const wrong = await as(CASHIER, "/ward/invoice", "POST", { orgId: ORG_ID, patientId: P2, encounterId: ENC });
+  assert.deepEqual([wrong.__status, wrong.error, wrong.written], [422, "encounter_not_this_patient", 0], "the open stay of another patient");
+  assert.equal((await H.RECORD.byPatient(T, "Invoice", P2)).length, 0, "no bill raised");
+  const inv = await as(CASHIER, "/ward/invoice", "POST", { orgId: ORG_ID, patientId: P2, encounterId: DISCHARGED });
+  assert.equal(inv.written, 1, inv.__text);
+  assert.equal(inv.encounterId, DISCHARGED);
+  assert.deepEqual([inv.parties.payer.ref, inv.parties.gstRecipient.party, inv.parties.gstRecipient.source, inv.buyer.gstin, inv.documents.map((d) => d.type)],
+    ["acme", "payer", "contract", CORP_GSTIN, ["tax_invoice", "bill_of_supply"]]);
+});
+
 /* ---- screens -------------------------------------------------------------------------------------- */
 
 const WARD_SRC = readFileSync(new URL("../ward.js", import.meta.url), "utf8");
@@ -244,6 +263,19 @@ test("cashier screen: the invoice names patient, payer, insurer and TPA, and the
   const scheme = render("cashier", { cashier: { patientId: "p1", payers: [], invoices: [{ ...INV, parties: SCHEME_PARTIES }], payLinks: [] } });
   assert.match(scheme, /Not determined on this payer's contract\. The patient is treated as the GST recipient until an administrator records the determination on Admin, Integrations, Payers\./);
   assert.ok(render("cashier", { cashier: { patientId: "p1", payLinks: [], invoices: [{ ...INV }] } }).includes('data-w-act="invparties:inv1"'), "the parties can be set from the bill");
+});
+
+test("cashier screen: the bill names its stay; a discharged stay is chosen when none is open, the open stay otherwise", () => {
+  const OPEN = { id: "e-open", status: "in-progress", periodStart: "2026-09-10T05:00:00Z", periodEnd: null, ward: "Private" };
+  const GONE = { id: "e-gone", status: "finished", periodStart: "2026-08-01T05:00:00Z", periodEnd: "2026-08-05T05:00:00Z", ward: "General" };
+  const gone = render("cashier", { cashier: { patientId: "p1", payLinks: [], invoices: [], stays: [GONE] } });
+  assert.match(gone, /<span>Stay this bill is for<\/span><select id="wCashStay"><option value="e-gone" selected>[^<]*General \(discharged [^)]+\)<\/option><option value="">No stay: an outpatient bill<\/option>/);
+  const both = render("cashier", { cashier: { patientId: "p1", payLinks: [], invoices: [], stays: [GONE, OPEN] } });
+  assert.match(both, /<option value="e-open" selected>/);
+  assert.ok(!both.includes("No stay: an outpatient bill"), "with a stay open the server would bill it: no outpatient choice");
+  assert.match(render("cashier", { cashier: { patientId: "p1", payLinks: [], invoices: [], stays: [GONE, OPEN], stayId: "e-gone" } }), /<option value="e-gone" selected>/);
+  assert.match(render("cashier", { cashier: { patientId: "p1", payLinks: [], invoices: [], stays: false } }), /The stays could not be read/);
+  assert.match(WARD_SRC, /apiPost\("\/ward\/invoice", \{ orgId: st\.orgId, patientId: st\.cashier\.patientId, encounterId: stay \|\| undefined \}\)/);
 });
 
 test("claims screen: each stay's payer, and each claim and pre-authorisation, shows the same parties", () => {

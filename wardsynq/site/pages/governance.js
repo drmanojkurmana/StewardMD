@@ -141,6 +141,15 @@
     if (type === "RETENTION_POLICY") return '<span class="pill warn">' + c.esc(T(c, "site.gov.ret.basis.policy", "Hospital retention policy, not a legal requirement")) + "</span>";
     return '<span class="pill">' + c.esc(T(c, "site.gov.ret.basis.none", "No retention period running")) + "</span>";
   }
+  /* Why a layer keeps nothing today, from the registry (legal-requirements.js enforcement): a stayed or struck-down law
+   * is not "not yet in force". An answer recorded before the reason was stored says only that it is not in force. */
+  function notInForceWord(c, reason) {
+    return reason === "not-yet-effective" ? T(c, "site.gov.ret.notInForce", "(not yet in force)")
+      : reason === "stayed" ? T(c, "site.gov.ret.stayed", "(stayed by a court)")
+      : reason === "struck-down" ? T(c, "site.gov.ret.struckDown", "(struck down by a court)")
+      : reason === "expired" ? T(c, "site.gov.ret.expired", "(expired)")
+      : T(c, "site.gov.ret.notInForceNow", "(not in force)");
+  }
   function dday(iso) { var t = Date.parse(iso || ""); return isFinite(t) ? new Date(t).toLocaleDateString() : ""; }
   /* Each retention class the patient has records in, what keeps it today and until when, each layer's instrument and
    * provision, and the DPO's decision where the policy alone kept it (legal opinion H.4.5). Instruments, provisions
@@ -158,7 +167,7 @@
         (x.legalUntil ? "<br>" + esc(T(c, "site.gov.ret.legalUntil", "Required by law until {date}", { date: dday(x.legalUntil) })) : "") +
         '<ul class="quiet">' + x.bases.map(function (b) {
           return "<li>" + basisPill(c, b.type) + " " + EN(c, esc(b.instrument + ", " + b.provision)) + (b.until ? " &middot; " + esc(T(c, "site.gov.ret.layerUntil", "until {date}", { date: dday(b.until) })) : "") +
-            (b.inForce === false ? " " + esc(T(c, "site.gov.ret.notInForce", "(not yet in force)")) : "") + "</li>";
+            (b.inForce === false ? " " + esc(notInForceWord(c, b.notInForce)) : "") + "</li>";
         }).join("") + "</ul>" +
         (x.decision ? "<p>" + esc(x.decision.decision === "retain" ? T(c, "site.gov.ret.decRetain", "The DPO decided to retain it:") : T(c, "site.gov.ret.decErase", "The DPO decided to erase it:")) + " " + EN(c, esc(x.decision.reason)) +
           (x.decision.destructionReference ? " &middot; " + esc(T(c, "site.gov.ret.decDestroyed", "destruction record {ref}", { ref: x.decision.destructionReference })) : "") + "</p>" : "") + "</li>";

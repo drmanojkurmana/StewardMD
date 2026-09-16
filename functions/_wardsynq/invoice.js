@@ -52,12 +52,14 @@ function writeFailure(e, extra) {
   if (e instanceof VersionConflictError) return { ok: false, status: 409, error: "version_conflict", detail: e.detail, ...extra };
   return { ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), ...extra };
 }
-/** Which inpatient stay an invoice is raised for: the named one (it must be this patient's), else the patient's
- * open stay (the latest if somehow more than one), else none (an outpatient bill). Never throws. */
+/** Which inpatient stay an invoice is raised for: the named one (it must be this patient's inpatient stay at this
+ * hospital, open or discharged: the repository read is tenant-scoped), else the patient's open stay (the latest if
+ * somehow more than one), else none (an outpatient bill). Never throws. The cashier screen names the stay it bills
+ * (2026-09-17), so a DISCHARGED stay's final bill carries that stay's payer and package, not self-pay. */
 async function stayForInvoice(svc, patientId, named) {
   if (named) {
     const enc = await svc.get("Encounter", named).catch(() => null);
-    if (!enc || str(enc.patientId) !== patientId) return { error: { ok: false, status: 422, error: "encounter_not_this_patient", detail: "That stay is not this patient's." } };
+    if (!enc || str(enc.patientId) !== patientId || isExternalRecord(enc) || !ADMISSION_CLASSES.includes(enc.class)) return { error: { ok: false, status: 422, error: "encounter_not_this_patient", detail: "That stay is not this patient's." } };
     return { encounterId: enc.id };
   }
   let stays;
