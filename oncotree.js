@@ -103,7 +103,15 @@
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function ms(name) { return '<span class="material-symbols-outlined">' + name + "</span>"; }
-  function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_navigator")); } catch (e) { return false; } }
+  function flagOn() {
+    try {
+      if (G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool) return G.SMD_QUEUE_FLAGS.bool("smd_onco_navigator");
+      var q = (G.location && G.location.search && (G.location.search.match(/[?&]qoncotree=([^&]+)/) || []))[1];
+      if (q != null) return (q === "1" || q === "on" || q === "true");
+      if (G.localStorage) return G.localStorage.getItem("smd_onco_navigator") !== "0";
+      return true;
+    } catch (e) { return true; }
+  }
   function ENG() { return G.SMD_ONCOTREE_ENGINE; }
   function REC() { return G.SMD_ONCOTREE_RECOMMEND; }
 
@@ -1226,6 +1234,22 @@
         : '<div class="ot-empty">Answer the questions above to see applicable protocols.</div>';
     }
     return railHtml(state) + missingHtml(state) + '<div class="ot-body-main">' + mid + "</div>" + disabledPanelHtml(state) + footnoteSheetHtml() + summarySheetHtml();
+  }
+
+  function superpowerModalHtml() {
+    if (!st.superpowerModal) return "";
+    var m = st.superpowerModal;
+    return '<div class="ot-superpower-backdrop" data-ot-act="superpower-modal-close">' +
+      '<div class="ot-superpower-modal" data-ot-act="footnote-stop">' +
+      '<div class="ot-superpower-hd">' +
+      '<span class="ot-superpower-title">' + esc(m.title || "Clinical Evaluation") + '</span>' +
+      '<button class="ot-superpower-x" data-ot-act="superpower-modal-close" aria-label="Close">' + ms("close") + '</button>' +
+      '</div>' +
+      '<div class="ot-superpower-body">' + (m.html || "") + '</div>' +
+      '<div class="ot-superpower-ft">' +
+      '<button class="ot-btn primary sm" data-ot-act="superpower-modal-close">Close</button>' +
+      '</div>' +
+      '</div></div>';
   }
 
   // ---- shell + paint -----------------------------------------------------------------------------
