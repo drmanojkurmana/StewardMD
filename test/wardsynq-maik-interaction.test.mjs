@@ -486,6 +486,23 @@ test("13. a model that cannot answer refuses plainly and records nothing", async
   assert.equal((await interactions(DOCTOR, "pat-1")).interactions.length, 0);
 });
 
+test("13b. LT-40: POST /api/queue/ward/maik-ask never shows the provider's error (project id, model path, URL); it is logged under the reference shown", async () => {
+  const raw = "Publisher model projects/stewardmd-498ec/locations/us-central1/publishers/google/models/gemini-3.6-flash was not found, see https://cloud.google.com/vertex-ai/docs";
+  seed(undefined, { fetchImpl: async () => { throw new Error(raw); } });
+  await patient("pat-1", "GH-1", "Anjali Menon");
+  const logged = [], orig = console.error;
+  console.error = (...a) => logged.push(a.join(" "));
+  let r;
+  try { r = await ask(DOCTOR, { patientId: "pat-1", task: TASK.SUMMARISE }); } finally { console.error = orig; }
+  assert.equal(r.__status, 503, JSON.stringify(r));
+  assert.equal(r.error, "model_unavailable");
+  assert.match(r.ref, /^MK-[0-9A-F]{8}$/);
+  assert.equal(r.detail, `The AI service did not answer. Nothing was written. Reference ${r.ref}.`);
+  assert.ok(!/stewardmd-498ec|gemini-3\.6-flash|https?:|projects\//.test(JSON.stringify(r)), JSON.stringify(r));
+  assert.ok(logged.some((l) => l.includes(r.ref) && l.includes("stewardmd-498ec")), "the operator finds the cause by the reference");
+  assert.ok(!logged.some((l) => l.includes("pat-1") || l.includes("Anjali")), "no patient in the log line");
+});
+
 /* ---- 14: the list, and the counts a ward actually needs ------------------------------------------- */
 
 test("14. the interactions list shows what is still unreviewed", async () => {

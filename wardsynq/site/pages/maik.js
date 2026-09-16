@@ -38,8 +38,11 @@
     var detail = r && (r.detail || r.message) ? '<br><span class="quiet">' + EN(c, c.esc(r.detail || r.message)) + "</span>" : "";
     if (r && (r.notConfigured || NOT_CONFIGURED.indexOf(r.error) >= 0))
       return TS(c, "site.maik.notConfigured", "MaiK is not set up for this hospital. A hospital administrator turns it on and approves a model provider in Admin Center, MaiK clinical AI. Charting and safety checks work without it.") + detail;
+    /* LT-40: an AI service failure shows the translated sentence and the reference the server logged the cause under,
+     * never the server's detail (which used to carry the provider's error, project id and model path). */
     if (r.error === "bad_response" || r.error === "network" || r.error === "model_unavailable" || r.error === "empty_answer" || (r.status && r.status >= 500))
-      return TS(c, "site.maik.notAnswering", "MaiK did not answer: the AI service is not reachable right now. Nothing was written. Charting and safety checks work without it; try again later.") + detail;
+      return TS(c, "site.maik.notAnswering", "MaiK did not answer: the AI service is not reachable right now. Nothing was written. Charting and safety checks work without it; try again later.") +
+        (r.ref ? '<br><span class="quiet">' + TS(c, "site.maik.reference", "Reference {ref}. Give it to your WardSynQ support team if this keeps happening.", { ref: String(r.ref) }) + "</span>" : "");
     return TS(c, "site.maik.askRefused", "MaiK could not answer this request.") + (detail || '<br><span class="quiet">' + EN(c, c.esc(r.error || "")) + "</span>");
   }
 

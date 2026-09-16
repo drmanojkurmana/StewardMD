@@ -36,7 +36,7 @@ const ENVS = {
     identity: null,                                  // none: a hospital's production IDs come from its own abdm profile
     // Owner A2 (2026-09-14): NO production ABDM traffic until India-region hosting from the AWS move exists.
     // gateway.js refuses every outbound call while this is set.
-    trafficHeld: "production ABDM traffic is held until India-region hosting exists (owner decision A2)",
+    trafficHeld: "production ABDM traffic is held until India-region hosting exists",
   },
 };
 

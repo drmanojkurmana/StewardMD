@@ -220,10 +220,26 @@
     return '<span class="d-chip info">' + ms("bed") + wTH("ward.dc-still-admitted", "Still admitted &middot; the stay is open") + "</span>";
   }
 
+  /* WHO SIGNED, as every chart screen names staff (ward.js staffWho): "Name (employee id)", the whole identity on hover
+   * and on a tap. signedBy is the signer's sign-in id ("cfa:...", "fb:...", a staff ID), never shown as it is. Without
+   * ward.js on the page an account id or a mobile number reads as "a clinician account". */
+  function signerHtml(s) {
+    var W = G.WARD, id = String(s.signedBy || "");
+    if (!id) return wTH("ward.dc-clinician", "clinician");
+    if (W && W._who) return W._who(id, null);
+    return esc(signerText(s));
+  }
+  function signerText(s) {
+    var W = G.WARD, id = String(s.signedBy || "");
+    if (!id) return wT("ward.dc-clinician", "clinician");
+    if (W && W._whoText) return W._whoText(id);
+    return /^(fb|cfa|ghis):/.test(id) || /^\+?[\d\s().-]{7,}$/.test(id) ? wT("ward.a-clinician-account", "a clinician account") : id;
+  }
+
   function signatureBlock(s) {
     if (!s.signed) return "";
     return '<div class="d-signed">' + ms("verified") +
-      "<div><b>" + wTH("ward.dc-signed", "Signed") + "</b><span>" + esc(s.signedBy || wT("ward.dc-clinician", "clinician")) + (s.recordedAt ? " &middot; " + esc(when(s.recordedAt, true, s.print)) : "") +
+      "<div><b>" + wTH("ward.dc-signed", "Signed") + "</b><span>" + signerHtml(s) + (s.recordedAt ? " &middot; " + esc(when(s.recordedAt, true, s.print)) : "") +
       "</span><small>" + wTH("ward.dc-version-immutable", "This version is immutable. A correction is a new signed version, not a change to this one.") + "</small></div>" +
       '<span class="d-ver">v' + esc(s.version == null ? "?" : s.version) + "</span></div>";
   }
@@ -342,7 +358,7 @@
       // Signed off: the locked idiom the assessment screen already uses. No Save, because offering
       // one that must fail is worse than not offering it.
       return '<div class="d-actions locked"><div class="d-lock">' + ms("lock") + "<span>" + wTH("ward.dc-signed-off", "Signed off") + "</span></div>" +
-        '<div class="d-lockmsg">' + ms("verified") + (s.signedBy ? wTH("ward.dc-signed-by-locked", "Signed by {by} &middot; this version is locked", { by: esc(s.signedBy) }) : wTH("ward.dc-signed-locked", "Signed &middot; this version is locked")) + "</div>" +
+        '<div class="d-lockmsg">' + ms("verified") + (s.signedBy ? wTH("ward.dc-signed-by-locked", "Signed by {by} &middot; this version is locked", { by: signerHtml(s) }) : wTH("ward.dc-signed-locked", "Signed &middot; this version is locked")) + "</div>" +
         langPicker(s) + '<button class="d-btn ghost" data-d-act="print">' + ms("print") + wTH("ward.dc-print", "Print") + "</button></div>";
     }
     if (!s.canAuthor) {
@@ -382,9 +398,12 @@
 
   // ---- controller ----------------------------------------------------------------------------
   function root() { var el = document.getElementById("smdDischarge"); if (!el) { el = document.createElement("div"); el.id = "smdDischarge"; document.body.appendChild(el); } return el; }
+  function repaintIfOpen() { var el = document.getElementById("smdDischarge"); if (el && el.classList.contains("on")) paint(); }
   function paint() {
     var r = root(), prev = r.querySelector(".d-canvas"), top = prev ? prev.scrollTop : 0;
     r.innerHTML = _render(st);
+    // The signer named by staffWho is looked up with the ward's one staff lookup, and this overlay repainted when it answers.
+    if (G.WARD && G.WARD._whoFetch) G.WARD._whoFetch(repaintIfOpen, st.orgId);
     var next = r.querySelector(".d-canvas"); if (next && top) next.scrollTop = top;
     var ta = document.getElementById("dEdit"); if (ta) { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); }
   }
@@ -462,7 +481,7 @@
     }).join("");
     var prov = (s.sections && s.sections.provenance) || (s.assembled && s.assembled.provenance) || "";
     var sig = s.signed
-      ? '<div class="p-sig"><div class="ln"></div><span>Signed by ' + esc(s.signedBy || "") + (s.recordedAt ? " on " + esc(pd(s.recordedAt)) : "") + " &middot; version " + esc(s.version) + "</span></div>" +
+      ? '<div class="p-sig"><div class="ln"></div><span>Signed by ' + esc(signerText(s)) + (s.recordedAt ? " on " + esc(pd(s.recordedAt)) : "") + " &middot; version " + esc(s.version) + "</span></div>" +
         tr("<p>" + T("print.dc.signedBy") + "</p>")
       : '<div class="p-sig"><div class="ln"></div><span>Signature</span><p class="p-draft">UNSIGNED DRAFT - not a final discharge summary.</p></div>' +
         tr('<p class="p-draft">' + T("print.dc.unsigned") + "</p>");
@@ -484,6 +503,9 @@
   }
 
   function onClick(e) {
+    // A tap on the signer says name, employee id and role (touch screens have no hover), as on every chart screen.
+    var w = e.target.closest && e.target.closest('[data-w-act^="whoinfo:"]');
+    if (w && G.WARD && G.WARD._whoInfo) { G.WARD._whoInfo(w.getAttribute("data-w-act").slice(8)); return; }
     var b = e.target.closest && e.target.closest("[data-d-act]"); if (!b) return;
     var a = b.getAttribute("data-d-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") { close(); return; }

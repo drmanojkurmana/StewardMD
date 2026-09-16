@@ -90,6 +90,23 @@ test("GET /api/queue/ward/staff-identities: a nurse gets name, employee id and r
   assert.deepEqual(rows[0].scope, { purpose: "chart-actor-names", asked: ids.length, resolved: 4 });
 });
 
+test("GET /api/queue/ward/staff-identities: a hospital of 305 staff; an Access sign-in beyond the first 300 members is still named (listMembers pages)", async () => {
+  seedHospital();
+  for (let i = 0; i < 305; i++) member("staff-" + String(i).padStart(3, "0"), { role: "nurse", displayName: "Nurse " + i });
+  // Sorts after every other member, so it is on the second page. Its "cfa:" id is an email hash: no direct read finds it.
+  member("zz-late-joiner", { role: "doctor", displayName: "Dr Late Joiner", employeeId: "EMP-9305", email: "late.joiner@h.test" });
+  const lateId = idFor("late.joiner@h.test");
+  const r = await as(NURSE, PATH + encodeURIComponent(lateId + ",staff-304"));
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.deepEqual(r.identities[lateId], { name: "Dr Late Joiner", employeeId: "EMP-9305", role: "doctor" });
+  assert.equal(r.identities["staff-304"].name, "Nurse 304");
+  const { listMembers } = await import("../functions/_opd_org_store.js");
+  const all = await listMembers({}, ORG);
+  assert.equal(all.filter((m) => m.orgId === ORG).length, all.length, "this hospital's members only");
+  assert.ok(all.length >= 306, "every member, not the first 300: " + all.length);
+  assert.equal(new Set(all.map((m) => m.id)).size, all.length, "no member twice across pages");
+});
+
 test("GET /api/queue/ward/staff-identities: a pharmacist (orders, no emr.view) may read who prescribed and verified", async () => {
   seedHospital();
   member(idFor("pharm@h.test"), { role: "pharmacy" });

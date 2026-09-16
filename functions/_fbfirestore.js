@@ -157,6 +157,12 @@ export async function fsQuery(env, collectionId, opts) {
     };
   }
   if (opts.limit) structuredQuery.limit = opts.limit;
+  /* Paging: opts.startAfter is the full `name` of the last document of the previous page. Ordered by document name,
+   * which an equality filter can use without a composite index. */
+  if (opts.startAfter) {
+    structuredQuery.orderBy = [{ field: { fieldPath: "__name__" }, direction: "ASCENDING" }];
+    structuredQuery.startAt = { values: [{ referenceValue: opts.startAfter }], before: false };
+  } else if (opts.orderByName) structuredQuery.orderBy = [{ field: { fieldPath: "__name__" }, direction: "ASCENDING" }];
   const res = await fetch(fsUrl(env, ":runQuery"), {
     method: "POST",
     headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json" },

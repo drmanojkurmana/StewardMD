@@ -59,7 +59,8 @@ test("transitions need their facts: submitted needs the matching HFR, sandbox-li
   assert.match(transitionRefusal("draft", "submitted", S({ hfrFacilityId: "IN0000000000" }), ORG), /must match/);
   assert.match(transitionRefusal("submitted", "sandbox-linked", S(), ORG), /Enter the HIP ID/);
   assert.equal(transitionRefusal("submitted", "sandbox-linked", S({ hipId: HFR }), ORG), null);
-  assert.match(transitionRefusal("sandbox-linked", "production-linked", S({ hipId: HFR }), ORG), /held until India-region hosting exists \(owner decision A2\)/);
+  assert.match(transitionRefusal("sandbox-linked", "production-linked", S({ hipId: HFR }), ORG), /held until India-region hosting exists, and needs/);
+  assert.doesNotMatch(transitionRefusal("sandbox-linked", "production-linked", S({ hipId: HFR }), ORG), /owner decision/, "LT-35: no internal decision reference on screen");
 });
 
 test("identifiers are frozen once linked, and change again from draft", () => {

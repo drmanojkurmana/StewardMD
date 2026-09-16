@@ -137,3 +137,19 @@ test("12. the card is on the patient's chart, not a screen of its own", () => {
   const list = load()._render(Object.assign({}, base, { view: "list", sel: null, maik: {} }));
   assert.ok(!list.includes("<h3>MaiK</h3>"), "and it does not appear on the ward list, where there is no patient");
 });
+
+test("LT-40 retest: an AI service failure on the chart shows words and the reference, never the server's detail", async () => {
+  const el = { innerHTML: "", classList: { add() {}, remove() {}, contains() { return false; } }, querySelector: () => null, querySelectorAll: () => [], addEventListener() {}, removeEventListener() {}, appendChild() {}, style: {}, setAttribute() {} };
+  const win = {};
+  const doc = { getElementById: () => el, createElement: () => el, body: el, querySelector: () => null, querySelectorAll: () => [], addEventListener() {}, documentElement: {} };
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({ json: async () => ({ ok: false, status: 503, error: "model_unavailable", ref: "MK-1A2B3C4D", detail: "vertex-flash could not answer: Publisher model projects/stewardmd-498ec/locations/us-central1/..." }) });
+  try {
+    new Function("window", "document", "location", "localStorage", SRC)(win, doc, { search: "", hash: "" }, { getItem: () => null, setItem: () => {} });
+    const W = win.WARD;
+    Object.assign(W._st, { orgId: "org-wsq", view: "chart", loaded: true, sel: base.sel });
+    W._dispatch("maikask:summarise");
+    for (let i = 0; i < 50 && !(W._st.maik && W._st.maik.busy === false); i++) await new Promise((r) => setTimeout(r, 10));
+    assert.equal(W._st.maik.err, "The AI service is not reachable right now. Nothing was written. Reference MK-1A2B3C4D.");
+  } finally { globalThis.fetch = realFetch; }
+});

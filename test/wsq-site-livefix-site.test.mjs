@@ -45,7 +45,10 @@ test("LT-40 MaiK: not set up, not answering and refused each say so in words, wi
   const html502 = f(C, { ok: false, error: "bad_response", status: 502 });
   assert.match(html502, /MaiK did not answer: the AI service is not reachable right now\. Nothing was written\./);
   assert.ok(!/bad_response/.test(html502), "never the bare code");
-  assert.match(f(C, { ok: false, error: "model_unavailable", detail: "vertex-flash could not answer: timeout. Nothing was written." }), /did not answer[\s\S]*vertex-flash could not answer/);
+  // LT-40 retest: the reference the server logged the cause under, and never the server's detail about a provider.
+  const failed = f(C, { ok: false, error: "model_unavailable", ref: "MK-1A2B3C4D", detail: "vertex-flash could not answer: Publisher model projects/stewardmd-498ec/... https://cloud.google.com" });
+  assert.match(failed, /did not answer[\s\S]*Reference MK-1A2B3C4D\./);
+  assert.ok(!/stewardmd-498ec|vertex-flash|https?:/.test(failed), failed);
   assert.match(f(C, { ok: false, error: "network" }), /did not answer/);
   assert.match(f(C, null), /MaiK could not be reached/);
   assert.match(f(C, { ok: false, error: "patient_required", detail: "a MaiK request is always about one identified patient" }), /MaiK could not answer this request\.[\s\S]*one identified patient/);

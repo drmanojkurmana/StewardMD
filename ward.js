@@ -295,6 +295,126 @@
   }
   function nextFor(status) { return NEXT[status == null ? "" : String(status).toLowerCase()] || []; }
 
+  /* Server status/enum codes shown as on-screen words, same shape as marWord() above: the machine's
+   * own spelling is what is sent and compared, only the word on screen changes, and an unknown code
+   * is shown as the server sent it. One function per enum domain (see each domain's server file for
+   * where the code list comes from), so a screen can never show two different words for the same
+   * code depending on which view rendered it. */
+  function priorityWord(w) {
+    var words = { stat: wT("ward.priority-stat", "stat"), urgent: wT("ward.priority-urgent", "urgent"), routine: wT("ward.priority-routine", "routine") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function severityWord(w) {
+    var words = { mild: wT("ward.severity-mild", "mild"), moderate: wT("ward.severity-moderate", "moderate"), severe: wT("ward.severity-severe", "severe"), unknown: wT("ward.severity-unknown", "unknown") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function readKindWord(w) {
+    var words = { opened: wT("ward.read-kind-opened", "opened"), expanded: wT("ward.read-kind-expanded", "opened its provenance"), printed: wT("ward.read-kind-printed", "printed"),
+      "acted-on": wT("ward.read-kind-acted-on", "acted on"), handover: wT("ward.read-kind-handover", "read at handover") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function bundleStateWord(w) {
+    var words = { running: wT("ward.bundle-state-running", "running"), complete: wT("ward.bundle-state-complete", "complete"), breached: wT("ward.bundle-state-breached", "breached"), voided: wT("ward.bundle-state-voided", "voided") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function consentStatusWord(w) {
+    var words = { granted: wT("ward.consent-status-granted", "granted"), refused: wT("ward.consent-status-refused", "refused"), withdrawn: wT("ward.consent-status-withdrawn", "withdrawn"),
+      expired: wT("ward.consent-status-expired", "expired"), "not-yet-valid": wT("ward.consent-status-not-yet-valid", "not yet valid") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function roiStateWord(w) {
+    var words = { requested: wT("ward.roi-state-requested", "requested"), authorized: wT("ward.roi-state-authorized", "authorized"), denied: wT("ward.roi-state-denied", "denied"),
+      fulfilled: wT("ward.roi-state-fulfilled", "fulfilled"), cancelled: wT("ward.roi-state-cancelled", "cancelled") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function claimStateWord(w) {
+    var words = { draft: wT("ward.claim-state-draft", "draft"), coded: wT("ward.claim-state-coded", "coded"), submitted: wT("ward.claim-state-submitted", "submitted"),
+      queried: wT("ward.claim-state-queried", "queried"), denied: wT("ward.claim-state-denied", "denied"), paid: wT("ward.claim-state-paid", "paid"), "written-off": wT("ward.claim-state-written-off", "written off") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function preauthStateWord(w) {
+    var words = { requested: wT("ward.preauth-state-requested", "requested"), approved: wT("ward.preauth-state-approved", "approved"), refused: wT("ward.preauth-state-refused", "refused"), expired: wT("ward.preauth-state-expired", "expired") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function grantStateWord(w) {
+    var words = { active: wT("ward.grant-state-active", "active"), expired: wT("ward.grant-state-expired", "expired"), revoked: wT("ward.grant-state-revoked", "revoked") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function deliveryStateWord(w) {
+    var words = { queued: wT("ward.delivery-state-queued", "queued"), delivered: wT("ward.delivery-state-delivered", "delivered"), failed: wT("ward.delivery-state-failed", "failed"),
+      "dead-letter": wT("ward.delivery-state-dead-letter", "dead letter"), cancelled: wT("ward.delivery-state-cancelled", "cancelled"), "not-recorded": wT("ward.delivery-state-not-recorded", "not recorded") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function orderCategoryWord(w) {
+    var words = { laboratory: wT("ward.order-category-laboratory", "laboratory"), imaging: wT("ward.order-category-imaging", "imaging"), procedure: wT("ward.order-category-procedure", "procedure"),
+      referral: wT("ward.order-category-referral", "referral"), other: wT("ward.order-category-other", "other") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function reviewStateWord(w) {
+    var words = { pending: wT("ward.review-state-pending", "pending"), accepted: wT("ward.review-state-accepted", "accepted"), rejected: wT("ward.review-state-rejected", "rejected"), edited: wT("ward.review-state-edited", "edited") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function resourceKindWord(w) {
+    var words = { room: wT("ward.resource-kind-room", "room"), theatre: wT("ward.resource-kind-theatre", "theatre"), equipment: wT("ward.resource-kind-equipment", "equipment"), other: wT("ward.resource-kind-other", "other") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function inboxItemTypeWord(w) {
+    var words = { "critical-result": wT("ward.inbox-type-critical-result", "critical result"), "unsigned-notes": wT("ward.inbox-type-unsigned-notes", "unsigned notes"),
+      "discharge-summary": wT("ward.inbox-type-discharge-summary", "discharge summary"), "operative-note": wT("ward.inbox-type-operative-note", "operative note"),
+      "med-reconciliation": wT("ward.inbox-type-med-reconciliation", "medication reconciliation"), consent: wT("ward.inbox-type-consent", "consent"),
+      handover: wT("ward.inbox-type-handover", "handover"), reassessment: wT("ward.inbox-type-reassessment", "reassessment") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function pathwayStepKindWord(w) {
+    var words = { orders: wT("ward.pathway-kind-orders", "orders"), assessment: wT("ward.pathway-kind-assessment", "assessment"), goal: wT("ward.pathway-kind-goal", "goal") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function admissionRequestStateWord(w) {
+    var words = { waiting: wT("ward.admission-req-state-waiting", "waiting"), admitted: wT("ward.admission-req-state-admitted", "admitted"), cancelled: wT("ward.admission-req-state-cancelled", "cancelled") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function referralUrgencyWord(w) {
+    var words = { emergency: wT("ward.referral-urgency-emergency", "emergency"), urgent: wT("ward.referral-urgency-urgent", "urgent"), routine: wT("ward.referral-urgency-routine", "routine") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function tagStatusWord(w) {
+    var words = { active: wT("ward.tag-status-active", "active"), replaced: wT("ward.tag-status-replaced", "replaced"), deactivated: wT("ward.tag-status-deactivated", "deactivated"), lost: wT("ward.tag-status-lost", "lost") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function capaStateWord(w) {
+    var words = { open: wT("ward.capa-state-open", "open"), complete: wT("ward.capa-state-complete", "complete") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function incidentSeverityWord(w) {
+    var words = { "near-miss": wT("ward.incident-severity-near-miss", "near miss"), "no-harm": wT("ward.incident-severity-no-harm", "no harm"), minor: wT("ward.incident-severity-minor", "minor"),
+      moderate: wT("ward.incident-severity-moderate", "moderate"), major: wT("ward.incident-severity-major", "major"), catastrophic: wT("ward.incident-severity-catastrophic", "catastrophic") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function confirmOutcomeWord(w) {
+    var words = { confirmed: wT("ward.confirm-outcome-confirmed", "confirmed"), "not-an-incident": wT("ward.confirm-outcome-not-an-incident", "not an incident"), duplicate: wT("ward.confirm-outcome-duplicate", "duplicate") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  function deliveryModeWord(w) {
+    var words = { vaginal: wT("ward.vaginal", "Vaginal"), caesarean: wT("ward.caesarean", "Caesarean"), instrumental: wT("ward.instrumental", "Instrumental") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  /* A checklist row is either a MAR dose (marWord's own vocabulary) or a pending investigation, which
+   * this screen only ever shows as "active" (migrate-discharge.js filters pending, so nothing else
+   * reaches here). Tries marWord first so a dose keeps its own word. */
+  function checklistStatusWord(w) {
+    var mw = marWord(w);
+    if (mw !== w) return mw;
+    var words = { active: wT("ward.checklist-status-active", "active") };
+    return HAS(words, w) ? words[w] : w;
+  }
+  /* Looks a code up in a [code, English label] pairs array already used to build a <select>'s own
+   * options (WOUND_KINDS, ADM_URGENCY, EMERGENCY_KINDS, ...) and translates the label the same way
+   * those options already do - no separate word list to keep in sync with the select. */
+  function pairWord(pairs, w) {
+    for (var i = 0; i < pairs.length; i++) { if (pairs[i][0] === w) return wTEn(pairs[i][1]); }
+    return w;
+  }
+
   function banner(state) {
     // TASK 4.15: on EVERY screen, not just the ward list - an emergency declared while a nurse has a
     // chart open must still be visible without them backing out to find it.
@@ -1793,7 +1913,7 @@
     if (x.busy) return "<div class=\"w-dt-times\">" + wTH("ward.looking-up-who-saw-this-version", "Looking up who saw this version...") + "</div>";
     if (!x.ok) return '<p class="w-hint warn">' + ms("error") + wTH("ward.could-not-find-out-who-saw", "Could not find out who saw this version{v}. Do not read this as nobody.", { v: (x.detail ? ": " + esc(x.detail) : "") }, "", 1) + "</p>";
     var people = (x.people || []).map(function (p) {
-      return "<li><b>" + esc(p.person) + "</b><span>" + esc(p.kind) + " " + when(p.readAt) + (p.actedOn ? " <span class=\"w-st overdue\">" + wTH("ward.acted-on-it", "acted on it") + "</span>" : "") + "</span></li>";
+      return "<li><b>" + esc(p.person) + "</b><span>" + esc(readKindWord(p.kind)) + " " + when(p.readAt) + (p.actedOn ? " <span class=\"w-st overdue\">" + wTH("ward.acted-on-it", "acted on it") + "</span>" : "") + "</span></li>";
     }).join("");
     return (people ? '<ul class="w-mini">' + people + "</ul>" : "") + '<p class="w-hint">' + ms("info") + esc(x.note || "") + "</p>";
   }
@@ -2126,7 +2246,7 @@
       // (dicom.js isPendingImaging), so the row says so and opens it there. A procedure is performed.
       var canCollect = kind === "specimen" && (st_ === "none" || st_ === "failed");
       var stLabel = kind === "imaging" ? wT("ward.sent-for-imaging", "sent for imaging") : kind === "procedure" ? wT("ward.to-be-performed", "to be performed") : kind === "referral" ? "referral" : st_ === "none" ? wT("ward.awaiting-collection", "Awaiting collection") : st_.replace(/_/g, " ");
-      return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(c.priority).toUpperCase() : "") + "</span>" +
+      return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(priorityWord(c.priority)).toUpperCase() : "") + "</span>" +
         " " + '<span class="w-st ' + esc(kind === "specimen" ? st_ : "ordered") + '">' + esc(stLabel) + "</span>" +
         (canCollect ? '<button class="w-btn tiny go" data-w-act="collectspecimen:' + esc(c.serviceRequestId) + '">' + ms("colorize") + wTH("ward.collect", "Collect") + "</button>" : "") +
         (kind === "imaging" ? '<button class="w-btn tiny go" data-w-act="radiologyopen:' + esc(c.serviceRequestId) + '">' + ms("radiology") + wTH("ward.open-in-radiology", "Open in Radiology") + "</button>" : "") +
@@ -2371,7 +2491,7 @@
             '<button class="w-btn tiny ghost" data-w-act="resuswaive:' + esc(b.bundleId) + "|" + esc(e.key) + '">' + ms("block") + wTH("ward.not-appropriate2", "Not appropriate") + "</button></div>" : "") +
           "</li>";
       }).join("");
-      return '<div class="w-sub"><h4>' + ms("emergency") + esc(b.label) + '<span class="w-st ' + (b.state === "breached" ? "overdue" : "") + '">' + esc(b.state) + "</span></h4>" +
+      return '<div class="w-sub"><h4>' + ms("emergency") + esc(b.label) + '<span class="w-st ' + (b.state === "breached" ? "overdue" : "") + '">' + esc(bundleStateWord(b.state)) + "</span></h4>" +
         "<ul class=\"w-doses\">" + els + "</ul>" +
         '<button class="w-btn tiny warn" data-w-act="resusvoid:' + esc(b.bundleId) + '">' + ms("cancel") + wTH("ward.void-bundle", "Void bundle") + "</button></div>";
     }).join("");
@@ -2604,7 +2724,7 @@
     };
     var rows = (c.consents || []).map(function (r) {
       var canWithdraw = r.status === "granted" || r.status === "refused";
-      return '<li class="w-mini-row"><div><b>' + esc(r.scopeLabel || r.scope) + '</b> &middot; <span class="w-st ' + esc(r.status) + '">' + esc(r.status) + "</span>" +
+      return '<li class="w-mini-row"><div><b>' + esc(r.scopeLabel || r.scope) + '</b> &middot; <span class="w-st ' + esc(r.status) + '">' + esc(consentStatusWord(r.status)) + "</span>" +
         (r.detail ? " &middot; " + esc(r.detail) : "") + '<div class="w-dt-times">' + esc(r.givenBy || "") + (r.giverName ? " (" + esc(r.giverName) + ")" : "") +
         (r.recordedAt ? " &middot; " + when(r.recordedAt) : "") + (r.validUntil ? " &middot; " + wTH("ward.until", "until {validUntil}", { validUntil: when(r.validUntil) }, "validUntil") : "") + "</div></div>" +
         (canWithdraw ? '<button class="w-btn ghost sm" data-w-act="consentwithdraw:' + esc(r.scope) + "|" + esc(r.detail || "") + '">' + ms("cancel") + wTH("ward.withdraw", "Withdraw") + "</button>" : "") +
@@ -2635,7 +2755,7 @@
   function completionView(state) {
     var c = state.completion || {};
     var rows = (c.items || []).map(function (i) {
-      return '<li class="w-mini-row"><div><span class="w-st ' + esc(i.escalation.level) + '">' + esc(i.escalation.level) + "</span> " +
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(i.escalation.level) + '">' + esc(wTEn(INBOX_LEVEL[i.escalation.level]) || i.escalation.level) + "</span> " +
         "<b>" + esc(wTEn(COMPLETION_LABELS[i.type]) || i.type) + "</b> &middot; " + esc(i.detail || "") +
         (i.responsibleRole ? '<div class="w-dt-times">' + esc(i.responsibleRole) + (i.escalation.hoursOpen ? " &middot; " + wTH("ward.open-h", "open {hoursOpen}h", { hoursOpen: i.escalation.hoursOpen }, "hoursOpen") : "") + "</div>" : "") +
         "</div></li>";
@@ -2659,7 +2779,7 @@
         actions = '<button class="w-btn ghost sm" data-w-act="roifulfill:' + esc(req.roiId) + '">' + ms("outbox") + wTH("ward.fulfill", "Fulfill") + "</button>" +
           '<button class="w-btn ghost sm" data-w-act="roicancel:' + esc(req.roiId) + '">' + ms("cancel") + wTH("ward.cancel", "Cancel") + "</button>";
       }
-      return '<li class="w-mini-row"><div><span class="w-st ' + esc(req.state) + '">' + esc(req.state) + "</span> " +
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(req.state) + '">' + esc(roiStateWord(req.state)) + "</span> " +
         "<b>" + esc(req.requester && req.requester.name) + "</b>" + (req.requester && req.requester.relationship ? " (" + esc(req.requester.relationship) + ")" : "") +
         " &middot; " + esc(req.purpose) +
         "<div class=\"w-dt-times\">" + wTH("ward.scope-requested", "scope: {join}{v}{v2}{v3} &middot; requested {requestedAt}", { join: esc((req.scope && req.scope.recordTypes || []).join(", ")), v: (req.authorizationBasis ? " &middot; " + wTH("ward.basis", "basis: {authorizationBasis}", { authorizationBasis: esc(req.authorizationBasis) }, "authorizationBasis") : ""), v2: (req.decisionReason ? " &middot; " + esc(req.decisionReason) : ""), v3: (req.disclosure ? " &middot; " + wTH("ward.sent", "sent {deliveredStatus} ({stringify})", { deliveredStatus: esc(req.disclosure.deliveredStatus), stringify: esc(JSON.stringify(req.disclosure.resourceCounts || {})) }, "deliveredStatus stringify") : ""), requestedAt: when(req.requestedAt) }, "join requestedAt") + "</div></div>" +
@@ -2669,7 +2789,7 @@
     return '<div class="w-card">' +
       "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
       "<h3>" + wTH("ward.release-of-information", "Release of information") + "</h3><button class=\"w-btn ghost\" data-w-act=\"roiopen\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" +
-      (r.shareExternalConsent ? "<p class=\"w-dt-times\">" + wTH("ward.share-external-consent", "Share-external consent: {status}", { status: esc(r.shareExternalConsent.status) }, "status") + "</p>" : "") +
+      (r.shareExternalConsent ? "<p class=\"w-dt-times\">" + wTH("ward.share-external-consent", "Share-external consent: {status}", { status: esc(consentStatusWord(r.shareExternalConsent.status)) }) + "</p>" : "") +
       (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-release-request-has-ever-been", "No release request has ever been made for this patient.") + "</p>") +
       "<div class=\"w-sub\"><h4>" + wTH("ward.new-request", "New request") + "</h4>" +
       "<input id=\"wRoiRequesterName\" placeholder=\"" + wTA("ward.requester-name", "Requester name") + "\">" +
@@ -2718,7 +2838,7 @@
       }
       var resubs = (c.submissions || []).filter(function (x) { return x.resubmission; });
       var warns = warnMap[c.id] || [];
-      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state) + '">' + esc(c.state) + "</span> " +
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state) + '">' + esc(claimStateWord(c.state)) + "</span> " +
         "<b>" + esc((c.codes || []).map(function (x) { return x.code; }).join(", ")) + "</b>" +
         (c.submittedAmount != null ? " &middot; " + wTH("ward.submitted", "submitted {submittedAmount}", { submittedAmount: esc(c.submittedAmount) }, "submittedAmount") : "") +
         (c.approvedAmount != null ? " &middot; " + wTH("ward.approved2", "approved {approvedAmount}", { approvedAmount: esc(c.approvedAmount) }, "approvedAmount") : "") +
@@ -2736,7 +2856,7 @@
         "</div>" + (actions ? '<div class="w-mini-row-act">' + actions + "</div>" : "") + "</li>";
     }).join("");
     var authRows = (t.preAuthorisations || []).map(function (a) {
-      return '<li class="w-mini-row"><div><span class="w-st ' + esc(a.state) + '">' + esc(a.state) + "</span> " +
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(a.state) + '">' + esc(preauthStateWord(a.state)) + "</span> " +
         "<b>" + esc(a.treatment) + "</b>" + (a.scheme ? " &middot; " + esc(a.scheme) : "") +
         (a.authorizedAmount != null ? " &middot; " + esc(a.authorizedAmount) : "") +
         (a.reason ? " &middot; " + esc(a.reason) : "") +
@@ -2787,12 +2907,12 @@
   function billingView(state) {
     var b = state.billing || {};
     var invRows = (b.invoices || []).map(function (inv) {
-      return '<li class="w-mini-row"><div><span class="w-st ' + esc(inv.status) + '">' + esc(inv.status) + "</span> " +
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(inv.status) + '">' + esc(wTEn(INVOICE_STATUS_WORDS[inv.status]) || inv.status) + "</span> " +
         "<b>" + esc(inv.invoiceId) + "</b> &middot; " + wTH("ward.charged-balance", "charged {charged} &middot; balance {balance}", { charged: esc(inv.charged), balance: esc(inv.balance) }, "charged balance") +
         (inv.void ? " &middot; VOID" + (inv.voidReason ? ": " + esc(inv.voidReason) : "") : "") + "</div></li>";
     }).join("");
     var claimRows = (b.claims || []).map(function (c) {
-      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state) + '">' + esc(c.state) + "</span> " +
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state) + '">' + esc(claimStateWord(c.state)) + "</span> " +
         "<b>" + esc((c.codes || []).map(function (x) { return x.code; }).join(", ")) + "</b>" +
         (c.submittedAmount != null ? " &middot; " + wTH("ward.submitted", "submitted {submittedAmount}", { submittedAmount: esc(c.submittedAmount) }, "submittedAmount") : "") +
         (c.approvedAmount != null ? " &middot; " + wTH("ward.approved2", "approved {approvedAmount}", { approvedAmount: esc(c.approvedAmount) }, "approvedAmount") : "") + "</div></li>";
@@ -3117,7 +3237,7 @@
         '<button class="w-btn go" data-w-act="deliverysave">' + ms("save") + wTH("ward.record-delivery", "Record delivery") + "</button></div>";
     }
     return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>" + wTH("ward.delivery-newborn", "Delivery &amp; newborn") + "</h3></div>" +
-      '<p class="w-hint">' + ms("check_circle") + wTH("ward.delivery2", "{mode} delivery, {deliveredAt}", { mode: esc(d.mode), deliveredAt: when(d.deliveredAt) }, "mode deliveredAt") + (d.complications ? " - " + esc(d.complications) : "") + "</p>" +
+      '<p class="w-hint">' + ms("check_circle") + wTH("ward.delivery2", "{mode} delivery, {deliveredAt}", { mode: esc(deliveryModeWord(d.mode)), deliveredAt: when(d.deliveredAt) }, "deliveredAt") + (d.complications ? " - " + esc(d.complications) : "") + "</p>" +
       (linksFailed ? '<p class="w-hint warn">' + ms("error") + wTH("ward.linked-newborns-could-not-be-loaded", "Linked newborns could not be loaded. Do not read this as none.", null, "", 1) + "</p>" : newbornRows ? '<ul class="w-mini">' + newbornRows + "</ul>" : "") +
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.sex", "Sex") + "</span><select id=\"wNewbornSex\"><option value=\"female\">" + wTH("ward.female", "Female") + "</option><option value=\"male\">" + wTH("ward.male", "Male") + "</option><option value=\"unknown\">" + wTH("ward.unknown", "Unknown") + "</option></select></label>" +
@@ -3423,12 +3543,12 @@
     var studyRows = studies.map(function (s) {
       return '<li' + (s.serviceRequestId === picked ? ' class="picked"' : '') + '>' +
         '<button class="w-btn ghost tiny" data-w-act="radpick:' + esc(s.serviceRequestId) + '"><b>' + esc(s.display || s.code) + "</b></button>" +
-        "<span>" + (s.priority && s.priority !== "routine" ? esc(s.priority).toUpperCase() + " &middot; " : "") + wTH("ward.on-the-imaging-worklist", "on the imaging worklist") + "</span></li>";
+        "<span>" + (s.priority && s.priority !== "routine" ? esc(priorityWord(s.priority)).toUpperCase() + " &middot; " : "") + wTH("ward.on-the-imaging-worklist", "on the imaging worklist") + "</span></li>";
     }).join("");
 
     var allergyRows = pc && pc.contrastAllergies && pc.contrastAllergies.length
       ? '<ul class="w-mini">' + pc.contrastAllergies.map(function (a) {
-          return "<li><b>" + esc(a.substance) + "</b><span>" + esc(a.reaction || "") + (a.severity ? " &middot; " + esc(a.severity) : "") + "</span></li>";
+          return "<li><b>" + esc(a.substance) + "</b><span>" + esc(a.reaction || "") + (a.severity ? " &middot; " + esc(severityWord(a.severity)) : "") + "</span></li>";
         }).join("") + "</ul>"
       : "";
 
@@ -3543,7 +3663,7 @@
       var warned = safe.warnings && safe.warnings.length;
       return '<li' + (o.orderId === picked ? ' class="picked"' : '') + '>' +
         '<button class="w-btn ghost tiny" data-w-act="phpick:' + esc(o.orderId) + '"><b>' + esc(o.drug) + "</b></button>" +
-        '<span class="w-st ' + esc(o.state) + '">' + esc(o.state) + "</span>" +
+        '<span class="w-st ' + esc(o.state) + '">' + esc(marWord(o.state)) + "</span>" +
         (blocked ? '<span class="w-st overdue">' + ms("block") + wTH("ward.blocked", "{length} blocked", { length: safe.blocks.length }, "length") + "</span>" : "") +
         (warned ? '<span class="w-st due">' + ms("warning") + wTH("ward.warning2", "{length} warning", { length: safe.warnings.length }, "length", 1) + "</span>" : "") +
         (o.prescriberId ? " <small>" + wTH("ward.prescribed-by-who", "prescribed by {who}", { who: staffWho(o.prescriberId, null) }) + "</small>" : "") +
@@ -3552,7 +3672,7 @@
     }).join("");
 
     var allergyRows = (q && q.allergies || []).map(function (a) {
-      return "<li><b>" + esc(a.substance) + "</b>" + (a.severity ? "<span>" + esc(a.severity) + "</span>" : "") + "</li>";
+      return "<li><b>" + esc(a.substance) + "</b>" + (a.severity ? "<span>" + esc(severityWord(a.severity)) + "</span>" : "") + "</li>";
     }).join("");
 
     var pickedOrder = picked && q ? q.orders.filter(function (o) { return o.orderId === picked; })[0] : null;
@@ -3762,7 +3882,7 @@
         "<small>" + esc(r.actorId || "") + (r.grantedAt ? " &middot; " + wTH("ward.granted", "granted {grantedAt}", { grantedAt: when(r.grantedAt) }, "grantedAt") : "") +
         (r.state === "expired" ? " &middot; " + wTH("ward.expired2", "expired {expiresAt}", { expiresAt: when(r.expiresAt) }, "expiresAt") : "") +
         (r.state === "revoked" ? " &middot; " + wTH("ward.revoked", "revoked") + (r.revokedReason ? ": " + esc(r.revokedReason) : "") : "") + "</small></div>" +
-        '<span class="w-int-tag">' + esc(r.state) + "</span>" +
+        '<span class="w-int-tag">' + esc(grantStateWord(r.state)) + "</span>" +
         (r.state === "active" ? '<button class="w-btn tiny" data-w-act="srcrevoke:' + esc(r.sourceSystem) + "|" + esc(r.actorId || "") + '">' + ms("block") + wTH("ward.revoke", "Revoke") + "</button>" : "") +
         "</li>";
     }).join("");
@@ -3785,7 +3905,7 @@
         "<small>" + esc(t.id || "") + " " + ((d.attempts || []).length === 1 ? wTH("ward.v-attempt", "v{version} &middot; {length} attempt", { version: esc(t.version || ""), length: 1 }, "length") : wTH("ward.v-attempts", "v{version} &middot; {length} attempts", { version: esc(t.version || ""), length: (d.attempts || []).length }, "length")) +
         (d.nextAttemptAt ? " &middot; " + wTH("ward.next", "next {nextAttemptAt}", { nextAttemptAt: when(d.nextAttemptAt) }, "nextAttemptAt") : "") + "</small>" +
         (d.lastError ? '<small class="warn">' + esc(d.lastError) + "</small>" : "") + "</div>" +
-        '<span class="w-int-tag">' + esc(d.state) + "</span>" +
+        '<span class="w-int-tag">' + esc(deliveryStateWord(d.state)) + "</span>" +
         (d.state === "dead-letter" ? '<button class="w-btn tiny go" data-w-act="outreplay:' + esc(d.id) + '">' + ms("replay") + wTH("ward.send-again", "Send again") + "</button>" : "") +
         "</li>";
     }).join("");
@@ -4121,9 +4241,9 @@
     var pri = function (s) { return s.priority === "stat" ? "overdue" : s.priority === "urgent" ? "failed" : ""; };
     var specRow = function (s) {
       return '<li class="' + pri(s) + '"><div class="w-crit-h"><b>' + esc(s.display || s.code) + "</b>" +
-        (s.priority && s.priority !== "routine" ? '<span class="w-st ' + esc(s.priority) + '">' + esc(String(s.priority).toUpperCase()) + "</span>" : "") +
+        (s.priority && s.priority !== "routine" ? '<span class="w-st ' + esc(s.priority) + '">' + esc(priorityWord(s.priority)).toUpperCase() + "</span>" : "") +
         "</div><div class=\"w-crit-m\">" + ms("person") + labWho(s.patientId) +
-        (s.category ? " &middot; " + esc(s.category) : "") + "</div></li>";
+        (s.category ? " &middot; " + esc(orderCategoryWord(s.category)) : "") + "</div></li>";
     };
     /* LT-25: the bench can take the sample itself. A result is refused for a sample nobody collected, so the row
      * that needs one carries the button that records who took it and when (the server stamps both). */
@@ -4550,7 +4670,8 @@
     if (name) return esc(name);
     var s = String(id || "");
     if (!s) return wTH("ward.a-clinician", "a clinician");
-    if (/^(fb|cfa):/.test(s)) return wTH("ward.a-clinician-account", "a clinician account");
+    // A mobile-number sign-in ID is not shown either (LT-36/LT-35).
+    if (/^(fb|cfa|ghis):/.test(s) || /^\+?[\d\s().-]{7,}$/.test(s)) return wTH("ward.a-clinician-account", "a clinician account");
     return esc(s);
   }
   /* OWNER 2026-09-16: "so everyone knows who gave the drugs who asked to give". THE ONE PLACE A CHART NAMES A MEMBER OF
@@ -4585,21 +4706,34 @@
   function whoScreen(screen) {
     if (screen !== WHO.screen) { WHO.screen = screen; WHO.ids = {}; WHO.names = {}; WHO.want = {}; WHO.busy = false; WHO.gen++; }
   }
-  function whoFetch() {
-    if (WHO.busy || !st.orgId) return;
+  /* `after` (the discharge summary overlay, discharge.js) repaints another screen that named staff through staffWho. */
+  function whoFetch(after, orgId) {
+    if (after) WHO.after = after;
+    var org = orgId || st.orgId;
+    if (WHO.busy || !org) return;
     var ids = Object.keys(WHO.want).filter(function (k) { return WHO.ids[k] === undefined; }).slice(0, 200);
     WHO.want = {};
     if (!ids.length) return;
     var gen = WHO.gen;
     WHO.busy = true;
-    apiGet("/ward/staff-identities?orgId=" + encodeURIComponent(st.orgId) + "&ids=" + encodeURIComponent(ids.join(",")))
+    apiGet("/ward/staff-identities?orgId=" + encodeURIComponent(org) + "&ids=" + encodeURIComponent(ids.join(",")))
       .then(function (r) { return r && r.ok && r.identities ? r.identities : null; }, function () { return null; })
       .then(function (found) {
         if (gen !== WHO.gen) return;
         ids.forEach(function (k) { WHO.ids[k] = found ? (found[k] && !found[k].system ? found[k] : null) : false; });
         WHO.busy = false;
         paint();
+        if (WHO.after) WHO.after();
       });
+  }
+  /* PLAIN TEXT for a printout (the discharge summary's signature line): "Name (employee id)" once resolved, otherwise
+   * the same words staffWho falls back to. Never an account id or a mobile number. */
+  function whoText(id) {
+    var s = String(id || ""), r = WHO.ids[s];
+    if (r && r.name) return r.name + (r.employeeId ? " (" + r.employeeId + ")" : "");
+    if (r && r.employeeId) return wT("ward.name-not-set", "Name not set") + " (" + r.employeeId + ")";
+    if (!s || /^(fb|cfa|ghis):/.test(s) || /^\+?[\d\s().-]{7,}$/.test(s)) return wT("ward.a-clinician-account", "a clinician account");
+    return s;
   }
   function whoInfo(id) {
     var s = String(id || ""), stored = WHO.names[s] || "";
@@ -4948,7 +5082,7 @@
         (copilot.interaction && copilot.interaction.review && copilot.interaction.review.state === "pending" ?
           '<div class="w-actions"><button class="w-btn ghost tiny" data-w-act="twincopilotreview:accepted">' + ms("check") + wTH("ward.helpful", "Helpful") + "</button>" +
           '<button class="w-btn ghost tiny" data-w-act="twincopilotreview:rejected">' + ms("close") + wTH("ward.not-helpful", "Not helpful") + "</button></div>" :
-          copilot.interaction && copilot.interaction.review ? '<p class="w-hint">' + ms("task_alt") + esc(copilot.interaction.review.state) + "</p>" : "");
+          copilot.interaction && copilot.interaction.review ? '<p class="w-hint">' + ms("task_alt") + esc(reviewStateWord(copilot.interaction.review.state)) + "</p>" : "");
 
     var flowDrill = function (key, n, label) {
       var d = s.flow && s.flow.data && s.flow.data.flow && s.flow.data.flow.drill && s.flow.data.flow.drill[key];
@@ -5116,7 +5250,7 @@
         return "<li><b>" + esc(when(b.startAt)) + "</b> &middot; " + esc(b.minutes) + "m" + (b.purpose ? " &middot; " + esc(b.purpose) : "") +
           '<button class="w-btn tiny ghost" data-w-act="rescancel:' + esc(b.bookingId) + '">' + ms("close") + wTH("ward.cancel", "Cancel") + "</button></li>";
       }).join("");
-      return '<div class="w-sub"><h4>' + esc(r.name) + " (" + esc(r.kind) + ")</h4>" + (bookingRows ? '<ul class="w-mini">' + bookingRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-bookings", "No bookings.") + "</p>") + "</div>";
+      return '<div class="w-sub"><h4>' + esc(r.name) + " (" + esc(resourceKindWord(r.kind)) + ")</h4>" + (bookingRows ? '<ul class="w-mini">' + bookingRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-bookings", "No bookings.") + "</p>") + "</div>";
     }).join("");
     var blackoutRows = (sc.blackouts || []).map(function (b) {
       return "<li><b>" + esc(b.clinicianId || b.resourceId) + "</b> " + esc(when(b.from)) + " &rarr; " + esc(when(b.to)) +
@@ -5233,7 +5367,7 @@
         // in this build, so a payment/deposit is honestly shown as recorded through the hospital's
         // own process, never as a channel it never actually went through.
         return "<li><b>" + esc(r.receiptNumber) + "</b> " + esc(wTEn(EVENT_KIND_WORDS[r.kind]) || r.kind) + " " + esc(r.amount) + " " + esc(r.currency || "") + '<span>' + esc(when(r.at)) +
-          (r.adapter ? " &middot; " + esc(r.adapter.state) : "") + "</span></li>";
+          (r.adapter ? " &middot; " + esc(wTEn(TPA_CHANNEL_WORDS[r.adapter.state]) || r.adapter.state) : "") + "</span></li>";
       }).join("");
       var live = inv.status !== "void";
       var links = c.payLinks === undefined ? "" : c.payLinks === null ? "<p class=\"w-hint\">" + wTH("ward.loading-payment-links", "Loading payment links...") + "</p>"
@@ -6040,7 +6174,7 @@
       "<b>" + esc(p.name || p.patientId || wT("ward.patient3", "Patient")) + "</b>" +
       (p.bed ? " &middot; " + wTH("ward.bed2", "bed {bed}", { bed: esc(p.bed) }, "bed") : "") + (p.ward ? " &middot; " + esc(p.ward) : "") +
       "<div>" + esc(it.detail || it.type) + "</div>" +
-      '<div class="w-dt-times">' + esc(it.type) +
+      '<div class="w-dt-times">' + esc(inboxItemTypeWord(it.type)) +
       (it.since ? " &middot; " + wTH("ward.since", "since {since}", { since: when(it.since) }, "since") : "") +
       (it.escalation && it.escalation.hoursOpen != null ? " &middot; " + esc(it.escalation.hoursOpen) + "h" : "") +
       "</div></div>" +
@@ -6227,7 +6361,7 @@
   function woundRow(w) {
     var c = w.comparison || {};
     return '<li class="w-mini-row' + (w.origin === "acquired-here" ? " w-ib-overdue" : "") + '"><div>' +
-      "<b>" + esc(w.site) + "</b> &middot; " + esc(w.kind) +
+      "<b>" + esc(w.site) + "</b> &middot; " + esc(pairWord(WOUND_KINDS, w.kind)) +
       ' <span class="w-st">' + esc(w.stage ? wT("ward.stage2", "stage {stage}", { stage: w.stage }) : wT("ward.not-staged", "not staged")) + "</span>" +
       /* Never hidden behind the current reading. */
       (w.worstStage && w.worstStage !== w.stage
@@ -6478,7 +6612,7 @@
         var ovr = st.override;
         var act = (!isDone) ? '<button class="w-btn ghost sm" data-w-act="pwoverride:' + esc(en.id) + "~" + esc(st.key) + "\">" + wTH("ward.override-step", "Override step") + "</button>" : "";
         return '<li class="w-mini-row"><div><span class="w-st ' + badgeCls + '">' + esc(wTEn(PW_STEP_STATUS[st.status]) || st.status) + "</span> " +
-          "<b>" + esc(st.title || st.key) + "</b> (" + esc(st.kind) + ")" +
+          "<b>" + esc(st.title || st.key) + "</b> (" + esc(pathwayStepKindWord(st.kind)) + ")" +
           (st.withinMinutes ? " <span class=\"w-dt-times\">&middot; " + wTH("ward.target-within-m", "target within {withinMinutes}m", { withinMinutes: esc(st.withinMinutes) }, "withinMinutes") + "</span>" : "") +
           (ovr ? "<div class=\"w-dt-times\"><b>" + wTH("ward.override-reason", "Override reason:") + "</b> " + esc(ovr.reason) + (ovr.by ? " (" + wTH("ward.by8", "by {by})", { by: staffWho(ovr.by, null) }, "by") : "") + "</div>" : "") +
           '</div><div class="w-mini-row-act">' + act + "</div></li>";
@@ -6543,11 +6677,11 @@
   function admReqRow(r) {
     var hot = r.urgency === "emergency" || r.urgency === "urgent";
     return '<li class="w-mini-row' + (r.state === "waiting" && hot ? " w-ib-escalate" : r.state === "waiting" ? " w-ib-overdue" : "") + '"><div>' +
-      '<span class="w-st ' + (hot ? "escalate" : "due") + '">' + esc(r.urgency) + "</span> " +
+      '<span class="w-st ' + (hot ? "escalate" : "due") + '">' + esc(pairWord(ADM_URGENCY, r.urgency)) + "</span> " +
       "<b>" + esc(r.mrn || r.patientId) + "</b>" + (r.specialty ? " &middot; " + esc(r.specialty) : "") + (r.ward ? " &middot; " + wTH("ward.for", "for {ward}", { ward: esc(r.ward) }, "ward") : "") +
       "<div>" + esc(r.reason || "") + "</div>" +
       "<div class=\"w-dt-times\">" + wTH("ward.asked-by", "asked by {requestedBy} &middot; {requestedAt}", { requestedBy: esc(r.requestedBy), requestedAt: when(r.requestedAt) }, "requestedBy requestedAt") +
-      (r.state === "waiting" ? " &middot; " + wTH("ward.waiting-h", "waiting {waitingHours}h", { waitingHours: esc(r.waitingHours) }, "waitingHours") : " &middot; " + esc(r.state) + (r.closeReason ? ": " + esc(r.closeReason) : "")) +
+      (r.state === "waiting" ? " &middot; " + wTH("ward.waiting-h", "waiting {waitingHours}h", { waitingHours: esc(r.waitingHours) }, "waitingHours") : " &middot; " + esc(admissionRequestStateWord(r.state)) + (r.closeReason ? ": " + esc(r.closeReason) : "")) +
       "</div></div>" +
       '<div class="w-mini-row-act">' +
       (r.state === "waiting"
@@ -6832,7 +6966,7 @@
   var REF_ACT_LABEL = { accept: "Accept", decline: "Decline", cancel: "Cancel", schedule: "Book appointment", seen: "Mark seen", respond: "Send reply", close: "Close" };
   function referralRow(x) {
     return '<li class="w-mini-row"><div>' +
-      '<span class="w-st ' + (x.urgency === "emergency" ? "escalate" : x.urgency === "urgent" ? "due" : "done") + '">' + esc(x.urgency) + "</span> " +
+      '<span class="w-st ' + (x.urgency === "emergency" ? "escalate" : x.urgency === "urgent" ? "due" : "done") + '">' + esc(referralUrgencyWord(x.urgency)) + "</span> " +
       "<b>" + esc(x.specialty) + "</b>" + (x.kind === "external" ? " " + wTH("ward.at", "at {destinationFacility}", { destinationFacility: esc(x.destinationFacility) }, "destinationFacility") : "") + " &middot; " + esc(wTEn(REF_LABEL[x.status]) || x.status) +
       '<div class="w-dt-times">' + wTH("ward.from4", "{reason} &middot; from {referringProvider} &middot; {requestedAt}", { reason: esc(x.reason), referringProvider: esc(x.referringProvider), requestedAt: when(x.requestedAt) }, "reason referringProvider requestedAt") +
       (x.appointmentAt ? " &middot; " + wTH("ward.appointment", "appointment {appointmentAt}", { appointmentAt: when(x.appointmentAt) }, "appointmentAt") : "") + "</div>" +
@@ -7082,7 +7216,7 @@
   function tagRow(t) {
     var active = t.status === "active";
     return '<li class="w-mini-row' + (active ? "" : " w-gone") + '"><div>' +
-      '<span class="w-st ' + (active ? "" : "due") + '">' + esc(t.status) + "</span> " +
+      '<span class="w-st ' + (active ? "" : "due") + '">' + esc(tagStatusWord(t.status)) + "</span> " +
       "<b>" + esc(t.tagType) + "</b> &middot; " + esc(t.code) +
       "<div class=\"w-dt-times\">" + wTH("ward.issued2", "issued {assignedAt}", { assignedAt: when(t.assignedAt) }, "assignedAt") + (t.assignedBy ? " " + wTH("ward.by14", "by {assignedBy}", { assignedBy: staffWho(t.assignedBy, null) }, "assignedBy") : "") +
       (t.endedAt ? " &middot; " + wTH("ward.ended", "ended {endedAt}", { endedAt: when(t.endedAt) }, "endedAt") + (t.endedBy ? " " + wTH("ward.by15", "by {endedBy}", { endedBy: staffWho(t.endedBy, null) }, "endedBy") : "") + (t.endedReason ? ": " + esc(t.endedReason) : "") : "") +
@@ -7371,7 +7505,7 @@
   function incidentRow(inc) {
     var stage = inc.stage || "signal";
     var capaRows = (inc.capas || []).map(function (c) {
-      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state === "complete" ? "" : "due") + '">' + esc(c.state) + "</span> " +
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state === "complete" ? "" : "due") + '">' + esc(capaStateWord(c.state)) + "</span> " +
         wTH("ward.due3", "{action} &middot; {owner} &middot; due {dueBy}", { action: esc(c.action), owner: esc(c.owner), dueBy: esc(c.dueBy) }, "action owner dueBy") +
         (c.strengthLabel ? '<div class="w-dt-times">' + esc(c.strengthLabel) + (c.weak ? " - " + wTH("ward.weak-on-its-own", "weak on its own") : "") + "</div>" : "") +
         (c.state === "complete" ? "<div class=\"w-dt-times\">" + wTH("ward.completed-by", "completed by {completedBy}: {evidence}", { completedBy: esc(c.completedBy), evidence: esc(c.evidence) }, "completedBy evidence") + "</div>" : "") + "</div>" +
@@ -7413,12 +7547,12 @@
       : "";
     return '<li class="w-mini-row"><div>' +
       '<span class="w-st ' + esc(stage === "closed" || stage === "rejected" ? "" : inc.severity === "catastrophic" || inc.severity === "major" ? "escalate" : "due") + '">' + esc(wTEn(INCIDENT_STAGE[stage]) || stage) + "</span> " +
-      "<b>" + esc(inc.severity) + "</b> &middot; " + esc(categoryLabel(inc.category)) + (inc.sac ? " &middot; " + wTH("ward.sac", "SAC {sac} - {response}", { sac: esc(inc.sac.sac), response: esc(inc.sac.response) }, "sac response") : "") +
+      "<b>" + esc(incidentSeverityWord(inc.severity)) + "</b> &middot; " + esc(categoryLabel(inc.category)) + (inc.sac ? " &middot; " + wTH("ward.sac", "SAC {sac} - {response}", { sac: esc(inc.sac.sac), response: esc(inc.sac.response) }, "sac response") : "") +
       (inc.anonymous ? " &middot; " + wTH("ward.anonymous", "anonymous") : "") +
       '<div class="w-dt-times">' + esc(inc.what) + "</div>" +
       "<div class=\"w-dt-times\">" + wTH("ward.reported2", "reported {reportedAt}", { reportedAt: when(inc.reportedAt) }, "reportedAt") + (inc.patientId ? " &middot; " + wTH("ward.patient2", "patient {patientId}", { patientId: esc(inc.patientId) }, "patientId") : "") + "</div>" +
       (inc.source ? "<div class=\"w-dt-times\">" + wTH("ward.raised-from", "raised from {resourceType} {id}", { resourceType: esc(inc.source.resourceType), id: esc(inc.source.id) }, "resourceType id") + "</div>" : "") +
-      (inc.confirmation ? "<div class=\"w-dt-times\">" + wTH("ward.decision3", "decision: {outcome}{v} - {reason}", { outcome: esc(inc.confirmation.outcome), v: (inc.confirmation.duplicateOf ? " " + wTH("ward.of5", "of {duplicateOf}", { duplicateOf: esc(inc.confirmation.duplicateOf) }, "duplicateOf") : ""), reason: esc(inc.confirmation.reason) }, "outcome reason") + "</div>" : "") +
+      (inc.confirmation ? "<div class=\"w-dt-times\">" + wTH("ward.decision3", "decision: {outcome}{v} - {reason}", { outcome: esc(confirmOutcomeWord(inc.confirmation.outcome)), v: (inc.confirmation.duplicateOf ? " " + wTH("ward.of5", "of {duplicateOf}", { duplicateOf: esc(inc.confirmation.duplicateOf) }, "duplicateOf") : ""), reason: esc(inc.confirmation.reason) }, "reason") + "</div>" : "") +
       (inc.rca ? "<div class=\"w-dt-times\">" + wTH("ward.root-cause", "root cause: {rootCause}", { rootCause: esc(inc.rca.rootCause) }, "rootCause") + "</div>" : "") +
       (capaRows ? "<ul class=\"w-mini\">" + capaRows + "</ul>" : "") + confirmForm + next + rcaForm + capaAdd +
       '</div><div class="w-mini-row-act">' +
@@ -7630,7 +7764,7 @@
     var e = state.emergencyAdmin || {};
     var rows = (e.activations || []).map(function (a) {
       return '<li class="w-mini-row"><div><span class="w-st ' + esc(a.active ? "escalate" : a.revokedAt ? "" : "due") + '">' + esc(a.active ? "active" : (a.revokedAt ? wT("ward.stood-down2", "stood down") : "expired")) + "</span> " +
-        "<b>" + esc(a.kind) + "</b> &middot; " + esc(a.reason) +
+        "<b>" + esc(pairWord(EMERGENCY_KINDS, a.kind)) + "</b> &middot; " + esc(a.reason) +
         (a.relaxations && a.relaxations.length ? " &middot; " + wTH("ward.relaxes", "relaxes: {join}", { join: esc(a.relaxations.join(", ")) }, "join") : "") +
         "<div class=\"w-dt-times\">" + wTH("ward.declared-until", "declared {declaredAt} &middot; until {expiresAt}", { declaredAt: when(a.declaredAt), expiresAt: when(a.expiresAt) }, "declaredAt expiresAt") +
         (a.revokedAt ? " &middot; " + wTH("ward.stood-down3", "stood down {revokedAt}", { revokedAt: when(a.revokedAt) }, "revokedAt") + (a.revokedReason ? ": " + esc(a.revokedReason) : "") : "") + "</div></div>" +
@@ -8903,7 +9037,9 @@
         if (r && r.ok) { st.maik.interaction = r.interaction; st.maik.err = ""; }
         /* The server's own sentence, verbatim. "MaiK is not enabled" and "this hospital has approved
          * no model provider" are different facts and a clinician acts on them differently; flattening
-         * both into "AI unavailable" would hide which one it is. */
+         * both into "AI unavailable" would hide which one it is. LT-40: an AI service failure is translated words
+         * and the reference the server logged the cause under; its detail is never shown. */
+        else if (r && r.ref) st.maik.err = wT("ward.maik-service-failed-ref", "The AI service is not reachable right now. Nothing was written. Reference {ref}.", { ref: r.ref });
         else st.maik.err = (r && (r.detail || r.message || r.error)) || wT("ward.maik-could-not-be-reached", "MaiK could not be reached.");
         paint();
       })
@@ -9947,7 +10083,7 @@
       unreadable: wTH("ward.the-bill-could-not-be-checked", "The bill could not be checked. Do not read this as settled.", null, "", 1)
     };
     var itemList = function (rows, what) {
-      return rows.length ? '<ul class="w-mini">' + rows.map(function (p) { return "<li><b>" + esc(what(p)) + "</b> " + (p.status ? '<span class="w-st due">' + esc(p.status) + "</span>" : "") + "</li>"; }).join("") + "</ul>"
+      return rows.length ? '<ul class="w-mini">' + rows.map(function (p) { return "<li><b>" + esc(what(p)) + "</b> " + (p.status ? '<span class="w-st due">' + esc(checklistStatusWord(p.status)) + "</span>" : "") + "</li>"; }).join("") + "</ul>"
         : '<p class="w-empty">' + wTH("ward.nothing-open", "Nothing open.") + "</p>";
     };
     var checklist = !c
@@ -12993,5 +13129,7 @@
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut };
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut,
+    // The one staff identity rendering, for discharge.js (owner 2026-09-16: name and employee id wherever staff are named).
+    _who: staffWho, _whoText: whoText, _whoFetch: whoFetch, _whoInfo: whoInfo };
 })();

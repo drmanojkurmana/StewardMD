@@ -6605,3 +6605,28 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   and a failed lookup says "identity could not be loaded". The live staff record wins over a name stored at write
   time. Timeline events carry `byId`/`labelBase` (and `signedById`, `witnessId`); the round carries `witnessedBy` and
   `statusBy`.
+## 2026-09-16 MaiK asks the model where Google serves it; health probes that path; errors carry a reference, not the provider's words
+- Live retest LT-40/LT-34: Ask MaiK 503 `model_unavailable`, Vertex NOT_FOUND for
+  `projects/<project>/locations/us-central1/publishers/google/models/gemini-3.6-flash`, and the raw provider error
+  (project id, model path, docs URL) printed to the clinician. System health said MaiK Up at the same time.
+- Root cause 1: the gateway put the model in the deployment's single region (GCP_LOCATION, else asia-south1). Google's
+  Gemini 3.6 Flash page (read 2026-09-16) lists global and the US/EU multi-regions only. The registry entry now carries
+  `vertexLocations: ["global","us","eu"]`; `vertexEndpoint()` keeps GCP_LOCATION when it serves the model, otherwise
+  uses the multi-region containing it (us-* -> `aiplatform.us.rep.googleapis.com`, europe-* -> eu), else global
+  (`aiplatform.googleapis.com`). Production (us-central1) goes to the US multi-region, which keeps the US processing
+  the deployment already had. No env var and no per-hospital model id added: the model id was verified to exist, the
+  location was the fault. vertex-pro (gemini-3.1-pro-preview, opt-in by name) has no verified location list and keeps
+  GCP_LOCATION. NOT verified live: the call against the real project.
+- Root cause 2: health read model metadata with the AI Studio key; clinical requests go to Vertex under the service
+  account. `probeClinicalPath()` takes the same route() decision askAboutPatient gets (summary, phi) and calls
+  countTokens (free, generates nothing) on the same host/location/model with the same token, or a hospital model
+  server's /models. MaiK on with nothing approved for patient data is "Not set up yet" (`setup: "hospital"`), not Up.
+- Root cause 3: askAboutPatient returned invoke()'s diagnostic detail. `publicRefusal()` passes setup refusals
+  through; a runtime refusal (model_unavailable, empty_answer, no_provider) is logged server-side as
+  `[maik] MK-XXXXXXXX <code>: <scrubbed provider text, 300 chars>` (no patient id, no prompt) and the response carries
+  `ref` and a plain sentence. invoke() itself keeps its diagnostic detail for server callers and tests.
+
+## 2026-09-16 listMembers pages through every member
+- The staff identity lookup matched an Access sign-in (`cfa:` + email hash, not readable by id) only against the first
+  300 members. `listMembers` now pages 300 at a time ordered by document name (`fsQuery` `startAfter`), ceiling 20
+  pages. Every caller (admin staff list, rota, security review) sees every member.
