@@ -6,6 +6,7 @@ import { explorePhone, probePhone } from './explore.mjs';
 import { deepCrawlClinical, captureView, enrichView, exploreDetailOf, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
 import { verifyViews } from './verify.mjs';
 import { createProofBook, navToReplayEntries, INJECT_REPLAY_SRC } from './prove.mjs';
+import { PATIENT_KEY, VISIT_KEY } from './adapter-runtime.mjs';
 /* THE CLIENT THE CRAWL ACTUALLY NEEDS, re-exported from the one module the app imports.
  * connect-agent-onboarding.js calls engine.createPluginClient(); it lived only in plugin-client.mjs
  * and was never re-exported here, so that call returned undefined, the RAW Capacitor plugin was
@@ -49,15 +50,24 @@ export const ASK_ORDER = Object.freeze(['worklist', 'patient', 'notes', 'labs', 
  * demonstrated - on GHIS a run with labs and radiology proven came back with both "absent", because
  * neither is reachable by the walk alone (owner's iPhone, 2026-09-16). Keyed on resource + path so a
  * genuinely better capture of the SAME view still replaces nothing and simply is not duplicated. */
+/* Same resource+path proven twice with different patient keys (GHIS ver_b27ed367, 2026-09-17): the
+ * crawl's Administration > Lab reports click proved OTLabPrintsSecretary/?id=undefined (a page-side JS
+ * bug -- paramsOf recorded the id as {constant:'undefined'}) while the doctor's own guided walk proved
+ * the same path with id traced to the worklist row. Keying merge on resource+path alone kept whichever
+ * arrived first, which on that run was the crawl's wrong constant-id view -- every patient's labs read
+ * would have replayed id=undefined. A view whose data call's patient/visit key is traced to a row now
+ * beats one whose key is {constant}/{empty}/{unmapped}; when neither or both are traced, first still wins. */
+const tracedPatientKey = (v) => (Array.isArray(v && v.endpoints) ? v.endpoints : []).some((e) => e && e.role === 'data' && e.params &&
+  Object.keys(e.params).some((k) => (PATIENT_KEY.test(k) || VISIT_KEY.test(k)) && e.params[k] && e.params[k].from));
 export function mergeObservedViews(existing, incoming) {
   const keyOf = (v) => String((v && (v.resourceHint || v.resource)) || '') + '|' + String((v && v.pathTemplate) || '');
   const merged = Array.isArray(existing) ? existing.slice() : [];
-  const seen = new Set(merged.map(keyOf));
+  const indexOf = new Map(merged.map((v, i) => [keyOf(v), i]));
   for (const v of (Array.isArray(incoming) ? incoming : [])) {
     const k = keyOf(v);
-    if (seen.has(k)) continue;
-    seen.add(k);
-    merged.push(v);
+    if (!indexOf.has(k)) { indexOf.set(k, merged.length); merged.push(v); continue; }
+    const i = indexOf.get(k);
+    if (!tracedPatientKey(merged[i]) && tracedPatientKey(v)) merged[i] = v;
   }
   return merged;
 }

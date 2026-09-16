@@ -39,3 +39,24 @@ test('an empty or missing second walk changes nothing', () => {
   assert.deepEqual(mergeObservedViews(demonstrated, []), demonstrated);
   assert.deepEqual(mergeObservedViews(demonstrated, undefined), demonstrated);
 });
+
+// GHIS ver_b27ed367 2026-09-17: the crawl's Administration > Lab reports click proved
+// OTLabPrintsSecretary/?id=undefined (a page-side JS bug, id constant) at the same resource+path the
+// doctor's own guided walk proved with id traced to the worklist row. Keying merge on resource+path
+// alone kept whichever arrived first -- on that run, the crawl's wrong constant-id view.
+function viewWithId(resourceHint, pathTemplate, idParam) {
+  return { resourceHint, pathTemplate, rowsSelector: 'table tr', endpoints: [{ method: 'GET', path: pathTemplate, role: 'data', params: { id: idParam } }] };
+}
+
+test('a view whose patient key is traced to a row wins over one whose key is constant, in either order', () => {
+  const constView = viewWithId('labs', '/Doctor/Home/OTLabPrintsSecretary/', { constant: 'undefined' });
+  const tracedView = viewWithId('labs', '/Doctor/Home/OTLabPrintsSecretary/', { from: 'worklist', field: 'Patient ID' });
+
+  const crawlFirst = mergeObservedViews([constView], [tracedView]);
+  assert.equal(crawlFirst.length, 1);
+  assert.deepEqual(crawlFirst[0].endpoints[0].params.id, { from: 'worklist', field: 'Patient ID' });
+
+  const guidedFirst = mergeObservedViews([tracedView], [constView]);
+  assert.equal(guidedFirst.length, 1);
+  assert.deepEqual(guidedFirst[0].endpoints[0].params.id, { from: 'worklist', field: 'Patient ID' });
+});
