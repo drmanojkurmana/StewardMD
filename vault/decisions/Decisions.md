@@ -6679,3 +6679,19 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   Native dialogs remain only in MaiK, integration, billing/claims, purchasing and scheduling screens (other lanes).
 - A paint that arrives while a pointer is down inside the ward is held until the pointer comes up (3 s cap), as a
   paint is held for an open select: a repaint between press and release lost the click (the ED "first triage" miss).
+## 2026-09-16 Printed labels and camera scanning are generated in the browser, printed one label per page
+- `ward-labels.js` (ES5, no dependency) encodes Code 128 (set B, with set C for runs of numerals) and QR (byte mode,
+  level M, versions 1-10) itself and draws SVG; no generator library and no network call, so an MRN or accession never
+  leaves the page. Vectors pinned from the published tables (test/ward-labels.test.mjs); whole symbols decoded by
+  Chrome's BarcodeDetector in test/run-ward-labels-ui.mjs.
+- A label prints through a hidden iframe whose document is exactly the label (`@page` size from Admin > Hospital
+  `wardsynq.labelSizes`, bounded in `functions/_wardsynq/labels.js`), so the ward behind it never prints and the ward's
+  A4 print stylesheet is untouched. The screen says the print dialog opened, never that a label printed.
+- Wristband, tube label and ID slip read `GET /ward/label-data` (emr.view, or lab.result for the laboratory board);
+  a wristband is not printed when allergies could not be read, and an estimated DOB is printed as an age. The QR is the
+  active band's code, else the bedside value (wristbandBarcode or MRN), and the screen warns when they differ. The
+  pharmacy label uses the pharmacy screen's own reads (the pharmacy role does not read Patient); its size comes with
+  `GET /ward/dispenses`. Printed labels are English whole, like the printed discharge summary.
+- "Scan with camera" (BarcodeDetector + getUserMedia) only fills the field a wedge scanner types into; the same button
+  sends it through the same server check. Specimen receipt by scan sends `scannedAccession`, and the server refuses a
+  label that is not the specimen's own accession (409 `wrong_specimen_scan`).

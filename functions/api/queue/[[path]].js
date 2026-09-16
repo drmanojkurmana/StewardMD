@@ -110,6 +110,7 @@ import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wa
 import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation } from "../../_wardsynq/emergency-mode.js";
 import { reportIncident, signalIncident, confirmIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
 import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
+import { labelData, labelSizesOf } from "../../_wardsynq/labels.js";
 import { uploadDocument, listDocuments, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink } from "../../_wardsynq/documents.js";
 import { createReferral, actOnReferral, patientReferrals, referralInbox } from "../../_wardsynq/referral.js";
 import { assignNurse, setObservationFrequency, createNursingTask, actOnNursingTask, nursingPatient, nursingWard } from "../../_wardsynq/nursing.js";
@@ -376,6 +377,11 @@ function wsqPrintSettings(org) {
   const c = (org && org.wardsynq) || {};
   return { languagesEnabled: !!(c.printLanguages && c.printLanguages.enabled === true), timeZone: (typeof c.timeZone === "string" && c.timeZone) || null,
     utcOffsetMinutes: Number.isFinite(c.utcOffsetMinutes) ? c.utcOffsetMinutes : (org && org.region === "US" ? null : 330) };
+}
+/* The printed labels' settings: each label's size in mm, and the hospital's clock for the times printed on them. */
+function wsqLabelSettings(org) {
+  const p = wsqPrintSettings(org);
+  return { sizes: labelSizesOf(org && org.wardsynq && org.wardsynq.labelSizes), timeZone: p.timeZone, utcOffsetMinutes: p.utcOffsetMinutes };
 }
 function activeStandardProtocols() { return Object.keys(ONCO_PROTOCOLS).map(function (k) { return ONCO_PROTOCOLS[k]; }).filter(function (p) { return p && p.status === "ACTIVE"; }); }
 
@@ -1195,6 +1201,8 @@ export async function onRequest(context) {
         "document-release": CAPS.EMR_TREAT,
         "tag-assign": CAPS.EMR_VITALS, "tag-verify": CAPS.EMR_VITALS, "tag-replace": CAPS.EMR_VITALS,
         "tag-deactivate": CAPS.EMR_VITALS, "tag-lost": CAPS.EMR_VITALS, "tag-log": CAPS.EMR_VITALS,
+        // What a printed wristband, tube label or ID slip says about the patient. A read; printing writes nothing.
+        "label-data": CAPS.EMR_VIEW,
         "device-ingest": CAPS.EMR_VITALS, "device-status": CAPS.EMR_VIEW, "device-list": CAPS.EMR_VIEW,
         /* The WHO checklist gate (Task 2.3). Every write here is "a clinical commitment" in the same
          * sense wardsynq-emergency.js's own resus bundle already is - emr.treat, unrestricted.
@@ -1666,6 +1674,9 @@ export async function onRequest(context) {
       /* LT-25: the laboratory board's Collect. A phlebotomist on the laboratory's staff takes the sample the result
        * now needs first; same narrow alternative authority as specimen-outcome, and the store still checks the write. */
       if (!wAz.ok && sub === "collect") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+      /* The tube label printed at the laboratory board's Collect names the patient; the lab grant already reads Patient
+       * (actor.js) and nothing else this read touches beyond the allergies it also holds. */
+      if (!wAz.ok && sub === "label-data") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
       /* Owner 2026-09-16: the prescriber and verifier on the pharmacy queue, the collector on the laboratory board and
        * whoever acted on a blood unit are named to the staff who work from those records without emr.view. Names,
        * employee ids and roles of this hospital's staff only; it opens no chart and no other route. */
@@ -1860,6 +1871,8 @@ export async function onRequest(context) {
         const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
         // P2.4: how long a device may show an offline copy of a chart. Hospital config, 1-72 hours, default 12.
         if (r.ok) { const h = Number(wsqCfg && wsqCfg.offlineCacheHours); r.offlineCacheHours = Number.isFinite(h) && h >= 1 && h <= 72 ? h : 12; }
+        // The hospital's label sizes (Admin > Hospital), for the labels printed from any ward screen.
+        if (r.ok) r.labels = wsqLabelSettings(wOrg);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "ed-arrival" && method === "POST") {
@@ -2020,6 +2033,11 @@ export async function onRequest(context) {
       }
       if (sub === "tag-lost" && method === "POST") {
         const r = await reportPatientTagLost(request, env, { ...deps, tagId: body.tagId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "label-data" && method === "GET") {
+        const r = await labelData(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        if (r.ok) r.labels = wsqLabelSettings(wOrg);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "tag-log" && method === "GET") {
@@ -3224,7 +3242,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "specimen-outcome" && method === "POST") {
-        const r = await specimenOutcome(request, env, { ...deps, specimenId: body.specimenId, state: body.state, failureReason: body.failureReason, idempotencyKey: body.idempotencyKey || null });
+        const r = await specimenOutcome(request, env, { ...deps, specimenId: body.specimenId, state: body.state, failureReason: body.failureReason, scannedAccession: body.scannedAccession, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "collections" && method === "GET") {
@@ -3704,6 +3722,8 @@ export async function onRequest(context) {
       }
       if (sub === "dispenses" && method === "GET") {
         const r = await listDispenses(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        // The pharmacy label's size and clock: the pharmacy role does not read the ward list that carries them.
+        if (r.ok) r.labels = wsqLabelSettings(wOrg);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "handover" && method === "POST") {

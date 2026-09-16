@@ -332,6 +332,63 @@
       });
     };
   }
+  /* LABEL SIZES (printed labels, ward-labels.js). The size of each label this hospital's printers take, in mm. The
+   * print makes the page exactly this size, so a wrong size is a clipped or shrunken label, never a guessed one.
+   * Blank means the default shown. The server bounds each (functions/_wardsynq/labels.js labelSizesOf). */
+  var LABEL_KIND_IDS = [["wristband", 75, 25], ["specimen", 50, 25], ["pharmacy", 75, 50], ["slip", 80, 60]];
+  function labelKindName(c, id) {
+    return {
+      wristband: T(c, "site.admin.hospital.labels.wristband", "Patient wristband"),
+      specimen: T(c, "site.admin.hospital.labels.specimen", "Specimen tube label"),
+      pharmacy: T(c, "site.admin.hospital.labels.pharmacy", "Pharmacy dispensing label"),
+      slip: T(c, "site.admin.hospital.labels.slip", "ID slip"),
+    }[id] || id;
+  }
+  function labelSizesCard(c, o) {
+    var cur = (o && o.wardsynq && o.wardsynq.labelSizes) || {};
+    var num = function (id, v, dflt) {
+      return '<input type="number" min="15" max="300" step="1" inputmode="numeric" id="' + id + '" value="' + c.esc(v == null ? "" : String(v)) + '" placeholder="' + c.esc(String(dflt)) + '" style="width:6em">';
+    };
+    return '<div class="card"><h2>' + c.ms("label") + " " + c.esc(T(c, "site.admin.hospital.labels.title", "Label sizes")) + "</h2>" +
+      '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.labels.intro", "Width and height in millimetres of each label your printers take, from 15 to 300. The print is made exactly this size. Leave both blank to use the size shown.")) + "</p>" +
+      LABEL_KIND_IDS.map(function (k) {
+        var s = cur[k[0]] || {};
+        return '<div class="f"><span>' + c.esc(labelKindName(c, k[0])) + "</span> " +
+          num("admLbl_" + k[0] + "_w", s.widthMm, k[1]) + " &times; " + num("admLbl_" + k[0] + "_h", s.heightMm, k[2]) + " " + c.esc(T(c, "site.admin.hospital.labels.mm", "mm")) + "</div>";
+      }).join("") +
+      '<button class="btn" id="admLblSave" type="button">' + c.esc(T(c, "site.admin.save", "Save")) + '</button><div id="admLblMsg"></div></div>';
+  }
+  /* PURE. typed: { wristband: [width, height], ... } as typed. Both blank = the default; anything else must be two sizes in range. */
+  function readLabelSizes(c, typed) {
+    var sizes = {}, bad = "";
+    LABEL_KIND_IDS.forEach(function (k) {
+      var t = typed[k[0]] || [], w = String(t[0] == null ? "" : t[0]).trim(), h = String(t[1] == null ? "" : t[1]).trim();
+      if (!w && !h) return;
+      var wn = Number(w), hn = Number(h);
+      if (!(wn >= 15 && wn <= 300 && hn >= 15 && hn <= 300)) { bad = bad || labelKindName(c, k[0]); return; }
+      sizes[k[0]] = { widthMm: wn, heightMm: hn };
+    });
+    return bad ? { error: T(c, "site.admin.hospital.labels.bad", "{kind}: give both a width and a height from 15 to 300 mm. Nothing was saved.", { kind: bad }) } : { labelSizes: sizes };
+  }
+  WSQ._labelSizes = { html: labelSizesCard, read: readLabelSizes };
+  function wireLabelSizes(c) {
+    var btn = document.getElementById("admLblSave");
+    if (!btn) return;
+    btn.onclick = function () {
+      var m = document.getElementById("admLblMsg"), typed = {};
+      LABEL_KIND_IDS.forEach(function (k) { typed[k[0]] = [document.getElementById("admLbl_" + k[0] + "_w").value, document.getElementById("admLbl_" + k[0] + "_h").value]; });
+      var out = readLabelSizes(c, typed), sizes = out.labelSizes;
+      if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, wardsynq: { labelSizes: sizes } }).then(function (r) {
+        btn.disabled = false;
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, r))) + "</div>"; return; }
+        m.innerHTML = "";
+        c.state.org = r.org;
+        c.toast(T(c, "site.admin.hospital.labels.saved", "Saved. Labels print at these sizes."));
+      });
+    };
+  }
   /* APPROVAL RULES (P1.3). How many people must approve each kind of request, which roles may, how
    * long a request stays open, and extra approvers above an amount. The amount is always the one the
    * server works out from the thing itself (a purchase order's priced lines); a request with no known
@@ -752,7 +809,7 @@
       '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.countryNote", "The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.")) + '</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.hospital.needsWardsynq", "Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.")) + '</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
       /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
       (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
         ? '<div class="card"><h2>' + c.esc(T(c, "site.admin.hospital.removeTitle", "Remove this hospital")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.hospital.removeIntro", "Removes it from every hospital list. Patient records, documents and the audit trail are kept.")) + '</p>' +
@@ -777,6 +834,7 @@
     wireClinicalSettings(c);
     wireNoteWriters(c);
     wirePrintLang(c);
+    wireLabelSizes(c);
     wireApprovalRules(c);
     wireLabCheck(c);
     wireTokenCard(c);

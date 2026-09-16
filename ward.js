@@ -2184,8 +2184,8 @@
       "<div class=\"w-filter\"><input id=\"wFrom\" type=\"datetime-local\" aria-label=\"" + wTA("ward.round-window-from", "Round window from") + "\" value=\"" + esc(state.from) + '">' +
       "<input id=\"wTo\" type=\"datetime-local\" aria-label=\"" + wTA("ward.round-window-to", "Round window to") + "\" value=\"" + esc(state.to) + '">' +
       "<button class=\"w-btn ghost\" data-w-act=\"round\">" + wTH("ward.load", "Load") + "</button></div>" +
-      "<div class=\"w-scan\"><label class=\"w-f\"><span>" + wTH("ward.wristband-scan", "Wristband scan") + "</span><input id=\"wScanP\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.patient-barcode", "Patient barcode") + "\"></label>" +
-      "<label class=\"w-f\"><span>" + wTH("ward.drug-scan", "Drug scan") + "</span><input id=\"wScanD\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.drug-barcode", "Drug barcode") + "\"></label>" +
+      "<div class=\"w-scan\"><label class=\"w-f\"><span>" + wTH("ward.wristband-scan", "Wristband scan") + "</span><input id=\"wScanP\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.patient-barcode", "Patient barcode") + "\"></label>" + camBtn("wScanP") +
+      "<label class=\"w-f\"><span>" + wTH("ward.drug-scan", "Drug scan") + "</span><input id=\"wScanD\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.drug-barcode", "Drug barcode") + "\"></label>" + camBtn("wScanD") +
       /* The second nurse. The hospital's own high-alert list decides which drugs need one, and the
        * SERVER refuses without it - insulin, heparin, opioids. Before this field existed the refusal
        * was correct and unanswerable: a nurse at the bedside had no way to name the witness, so a
@@ -2297,6 +2297,7 @@
       return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(priorityWord(c.priority)).toUpperCase() : "") + "</span>" +
         " " + '<span class="w-st ' + esc(kind === "specimen" ? st_ : "ordered") + '">' + esc(stLabel) + "</span>" +
         (canCollect ? '<button class="w-btn tiny go" data-w-act="collectspecimen:' + esc(c.serviceRequestId) + '">' + ms("colorize") + wTH("ward.collect", "Collect") + "</button>" : "") +
+        (kind === "specimen" && st_ === "collected" ? '<button class="w-btn tiny ghost" data-w-act="speclabel:' + esc(c.serviceRequestId) + '">' + ms("label") + wTH("ward.print-tube-label", "Print tube label") + "</button>" : "") +
         (kind === "imaging" ? '<button class="w-btn tiny go" data-w-act="radiologyopen:' + esc(c.serviceRequestId) + '">' + ms("radiology") + wTH("ward.open-in-radiology", "Open in Radiology") + "</button>" : "") +
       "</li>";
     }).join("");
@@ -3746,7 +3747,8 @@
          * the ward. Returned ones say so and are never returned twice. */
         (d.returnedAt
           ? " <span class=\"w-st\">" + wTH("ward.returned", "returned {returnedAt}", { returnedAt: when(d.returnedAt) }, "returnedAt") + (d.returnReason ? ": " + esc(d.returnReason) : "") + "</span>"
-          : ' <button class="w-btn ghost tiny" data-w-act="dispensereturn:' + esc(d.dispenseId) + '">' + ms("undo") + wTH("ward.returned2", "Returned") + "</button>") +
+          : ' <button class="w-btn ghost tiny" data-w-act="dispensereturn:' + esc(d.dispenseId) + '">' + ms("undo") + wTH("ward.returned2", "Returned") + "</button>" +
+            ' <button class="w-btn ghost tiny" data-w-act="pharmlabel:' + esc(d.dispenseId) + '">' + ms("label") + wTH("ward.print-pharmacy-label", "Print pharmacy label") + "</button>") +
         "</li>";
     }).join("");
 
@@ -3792,7 +3794,7 @@
         '<div class="w-grid">' +
         "<label class=\"w-f\"><span>" + wTH("ward.quantity", "Quantity") + "</span><input id=\"wPhQty\" type=\"text\" inputmode=\"decimal\" autocomplete=\"off\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wPhUnit\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-tablet-ml", "e.g. tablet, mL") + "\"></label>" +
-        "<label class=\"w-f\"><span>" + wTH("ward.batch4", "Batch") + "</span><input id=\"wPhBatch\" type=\"text\" autocomplete=\"off\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.batch4", "Batch") + "</span><input id=\"wPhBatch\" type=\"text\" autocomplete=\"off\"></label>" + camBtn("wPhBatch") +
         "<label class=\"w-f\"><span>" + wTH("ward.expiry", "Expiry") + "</span><input id=\"wPhExpiry\" type=\"date\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.destination", "Destination") + "</span><input id=\"wPhDest\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-ward-a-cabinet", "e.g. Ward A cabinet") + "\"></label>" +
         "</div>" +
@@ -4383,9 +4385,14 @@
           '<div class="w-crit-m">' + ms("colorize") + wTH("ward.collected-by", "collected {at} by {who}", { at: when(sp.collection.at), who: staffWho(sp.collection.by, null) }, "at who") + "</div>" +
           (id
             ? '<button class="w-btn ghost sm" data-w-act="specreceived:' + esc(id) + '">' + ms("check") + wTH("ward.received2", "Received") + "</button>" +
+              '<button class="w-btn ghost sm" data-w-act="speclabel:' + esc(sp.serviceRequestId) + '">' + ms("label") + wTH("ward.print-tube-label", "Print tube label") + "</button>" +
               '<button class="w-btn ghost sm" data-w-act="specfailed:' + esc(id) + '">' + ms("close") + wTH("ward.failed", "Failed") + "</button>"
             : "") + "</li>";
       }).join(""), wT("ward.nothing-in-transit", "Nothing in transit."), "specimens") : "") +
+      /* The tube in the laboratory's hand, scanned or typed: found by its label, and refused on the server if the label is not its own. */
+      (showHemaBio && inTransit.length ? '<div class="w-card w-scanrecv"><div class="w-card-h">' + ms("qr_code_scanner") + "<h3>" + wTH("ward.receive-by-scanning-the-tube", "Receive by scanning the tube") + "</h3></div>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.tube-label", "Label on the tube") + "</span><input id=\"wSpecScan\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.accession-number", "Accession number") + "\"></label>" +
+        camBtn("wSpecScan") + '<button class="w-btn go" data-w-act="specscanreceive">' + ms("check") + wTH("ward.receive-this-tube", "Receive this tube") + "</button></div>" : "") +
       (showHemaBio ? labResultForm(state) : "") +
       (showHemaBio && ((b.toVerify || []).length || failed["results awaiting verification"]) ? card("verified", wT("ward.awaiting-verification", "Awaiting verification"), (b.toVerify || []).length, (b.toVerify || []).map(labVerifyRow).join(""), "", "results awaiting verification") : "") +
       card("biotech", wT("ward.awaiting-a-result", "Awaiting a result"), pendingLab.length, pendingLab.map(pendRow).join(""), wT("ward.no-tests-awaiting-a-result", "No tests awaiting a result."), "tests awaiting a result") +
@@ -7308,14 +7315,18 @@
       "<button class=\"w-ic\" data-w-act=\"tags\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       verdict +
       "<div class=\"w-sub\"><h4>" + wTH("ward.check-the-band-on-the-patient", "Check the band on the patient") + "</h4>" +
-      "<input id=\"wTgScan\" placeholder=\"" + wTA("ward.scan-or-type-the-code-on2", "Scan or type the code on the band") + "\">" +
+      "<input id=\"wTgScan\" placeholder=\"" + wTA("ward.scan-or-type-the-code-on2", "Scan or type the code on the band") + "\">" + camBtn("wTgScan") +
       '<button class="w-btn" data-w-act="tagverify">' + ms("fact_check") + wTH("ward.check", "Check") + "</button></div>" +
       (d && d.active && !d.active.length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.this-patient-has-no-active-band", "This patient has no active band.") + "</p>" : "") +
       "<div class=\"w-sub\"><h4>" + wTH("ward.issue-a-band", "Issue a band") + "</h4>" +
       "<div class=\"w-grid\"><label class=\"w-f\"><span>" + wTH("ward.kind", "Kind") + "</span><select id=\"wTgType\">" +
       TAG_TYPE_WORDS.map(function (k) { return '<option value="' + esc(k[0]) + '">' + esc(wTEn(k[1])) + "</option>"; }).join("") + "</select></label>" +
-      "<label class=\"w-f\"><span>" + wTH("ward.code-on-the-band", "Code on the band") + "</span><input id=\"wTgCode\"></label></div>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.code-on-the-band", "Code on the band") + "</span><input id=\"wTgCode\"></label>" + camBtn("wTgCode") + "</div>" +
       '<button class="w-btn ghost" data-w-act="tagassign">' + ms("save") + wTH("ward.issue", "Issue") + "</button></div>" +
+      /* Printed from the record: the band's QR is the active band's code, else what the bedside scans compare with. */
+      "<div class=\"w-sub w-noprint\"><h4>" + wTH("ward.print-labels", "Print") + "</h4>" +
+      '<button class="w-btn ghost" data-w-act="tagprint:wristband">' + ms("badge") + wTH("ward.print-wristband", "Print wristband") + "</button>" +
+      '<button class="w-btn ghost" data-w-act="tagprint:slip">' + ms("receipt") + wTH("ward.print-id-slip", "Print ID slip") + "</button></div>" +
       (d == null ? "<p class=\"w-empty\">" + wTH("ward.loading3", "Loading.") + "</p>"
         : rows ? "<div class=\"w-sub\"><h4>" + wTH("ward.bands-newest-first", "Bands, newest first") + "</h4><ul class=\"w-mini\">" + rows + "</ul></div>"
         : "<p class=\"w-empty\">" + wTH("ward.no-band-has-ever-been-issued", "No band has ever been issued.") + "</p>") +
@@ -8025,7 +8036,7 @@
       (state.demo ? "<span class=\"w-demo\" title=\"" + wTA("ward.fabricated-patients-for-demonstration-nothing-he", "Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.") + "\">DEMO</span>" : "") +
       (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") +
       "<button class=\"w-ic\" data-w-act=\"keys\" aria-label=\"" + wTA("ward.keyboard-shortcuts", "Keyboard shortcuts") + "\" aria-keyshortcuts=\"?\">" + ms("keyboard") + "</button></header>" +
-      '<div class="w-canvas" id="wCanvas">' + banner(state) + offlineBar(state) +
+      '<div class="w-canvas" id="wCanvas">' + banner(state) + labelOfferBar(state) + offlineBar(state) +
       (state.view === "offline" ? offlineView(state)
         : state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
@@ -8144,7 +8155,7 @@
       var input = f.type === "textarea" ? '<textarea rows="3"' + at + ">" + esc(v) + "</textarea>"
         : f.type === "select" ? "<select" + at + ">" + (f.options || []).map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === v ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select>"
         : '<input type="' + (f.type === "date" ? "date" : f.type === "datetime" ? "datetime-local" : "text") + '" autocomplete="off"' + at + ' value="' + esc(v) + '"' + (f.placeholder ? ' placeholder="' + esc(f.placeholder) + '"' : "") + ">";
-      return '<label class="w-f"><span>' + f.label + "</span>" + input + "</label>";
+      return '<label class="w-f"><span>' + f.label + "</span>" + input + "</label>" + (f.scan ? camBtn(id) : "");
     }).join("");
     return '<div class="w-ask"><div class="w-card" role="dialog" aria-modal="true" aria-labelledby="wAskTitle">' +
       '<div class="w-card-h">' + ms(s.icon || "help") + '<h3 id="wAskTitle">' + String(s.title).replace(/\n+/g, "<br>") + "</h3></div>" +
@@ -8296,7 +8307,7 @@
   function loadWard(afterList) {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover()]); })
+      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; if (r.labels) st.labels = r.labels; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover()]); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-ward", "Could not reach the ward."); st.loaded = true; paint(); });
   }
   function loadDuty() {
@@ -8388,6 +8399,7 @@
    * here). */
   function doAdmit(mrn) {
     var t = st.admitTarget; if (!t || !mrn) return;
+    var who = (st.mrnLookup && st.mrnLookup.name) || mrn;
     st.busy = true; paint();
     apiPost("/ward/admit", { orgId: st.orgId, mrn: mrn, ward: t.ward, bed: t.bed, admittedAt: new Date().toISOString(), class: st.admitClass || undefined, emergencyOverride: st.emergencyOverride === true })
       .then(function (r) {
@@ -8398,6 +8410,8 @@
            * the shell's address still said #/ward/board. Now the note survives, the list scrolls to the
            * new row, and the address says #/ward. */
           var admittedNote = st.note;
+          // The wristband and ID slip are printed at admission; offered on the ward list the admission lands on.
+          if (r.written && r.patientId) st.labelOffer = { kind: "admission", view: "list", patientId: r.patientId, who: who };
           st.admitTarget = null; st.mrnLookup = null; st.view = "list";
           if (G.WSQ && typeof location !== "undefined" && /^#\/ward\//.test(location.hash)) { try { history.replaceState(null, "", "#/ward"); } catch (e) {} }
           loadWard(function () { if (!st.err && !st.refusal) st.note = admittedNote; st.landOn = { ward: t.ward, bed: String(t.bed) }; });
@@ -9142,6 +9156,8 @@
     ]).then(function (rs) {
       st.pharmacy.queue = (rs[0] && rs[0].ok) ? rs[0] : null;
       st.pharmacy.dispenses = (rs[1] && rs[1].ok) ? rs[1].dispenses : [];
+      // The pharmacy role does not read the ward roster, so the label settings come with its own dispense list.
+      if (rs[1] && rs[1].labels) st.labels = rs[1].labels;
       paint();
     }).catch(function () { paint(); });
   }
@@ -9187,7 +9203,11 @@
         var msg = wT("ward.dispensed", "Dispensed.");
         if (r && r.expiryWarning) msg = wT("ward.dispensed", "Dispensed.") + " " + r.expiryWarning;
         if (r && r.warning) msg = wT("ward.dispensed", "Dispensed.") + " " + r.warning;
-        if (settle(r, msg)) loadPharmacy(); else paint();
+        if (settle(r, msg)) {
+          // Labelled where it was issued. The dispense row this names arrives with the reload below.
+          if (r && r.dispenseId && r.written) st.labelOffer = { kind: "pharmacy", view: st.view, dispenseId: r.dispenseId, drug: r.drug || "" };
+          loadPharmacy();
+        } else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-dispense", "Could not record the dispense."); paint(); });
   }
@@ -10088,7 +10108,7 @@
   function collectSpecimen(serviceRequestId) {
     askFor({ title: wTH("ward.collect", "Collect"), icon: "colorize", ok: wTH("ward.collect", "Collect"), fields: [
       { key: "specimenType", label: wTH("ward.specimen-type-e-g-whole-blood", "Specimen type (e.g. Whole blood, Serum, Urine):"), required: wT("ward.say-which-specimen-was-taken", "Say which specimen was taken.") },
-      { key: "scanned", label: wTH("ward.scan-or-enter-the-patient-s", "Scan or enter the patient's wristband barcode/MRN, to confirm this is the right patient:") }
+      { key: "scanned", scan: true, label: wTH("ward.scan-or-enter-the-patient-s", "Scan or enter the patient's wristband barcode/MRN, to confirm this is the right patient:") }
     ] }, function (v) { return collectSpecimenSend(serviceRequestId, v.specimenType, v.scanned); });
   }
   function collectSpecimenSend(serviceRequestId, specimenType, scanned) {
@@ -10097,7 +10117,16 @@
       .then(function (r) {
         if (r && r.error === "wrong_patient_scan") { st.busy = false; st.err = wT("ward.the-scanned-wristband-does-not-match", "The scanned wristband does not match this patient's order. Nothing was collected."); paint(); return; }
         // LT-25: collected from the laboratory board, the board is what re-reads.
-        if (settle(r, r && r.accessionNumber ? wT("ward.collected-accession", "Collected. Accession {accessionNumber}.", { accessionNumber: r.accessionNumber }) : wT("ward.collected", "Collected."))) { if (st.view === "labboard") loadLabBoard(); else loadInvestigations(); }
+        if (settle(r, r && r.accessionNumber ? wT("ward.collected-accession", "Collected. Accession {accessionNumber}.", { accessionNumber: r.accessionNumber }) : wT("ward.collected", "Collected."))) {
+          // The tube is labelled where it was taken: the label is offered on this screen at once.
+          if (r && r.accessionNumber) {
+            var srRow = null, look = function (list) { (list || []).forEach(function (x) { if (x && x.serviceRequestId === serviceRequestId) srRow = x; }); };
+            look(st.labBoard && st.labBoard.specimens); look(st.investigations && st.investigations.requests);
+            st.labelOffer = { kind: "specimen", view: st.view, spec: { patientId: r.patientId, serviceRequestId: serviceRequestId, display: (srRow && (srRow.display || srRow.code)) || "",
+              accessionNumber: r.accessionNumber, specimenType: r.specimenType, collectedAt: r.collectedAt, collectedBy: r.collectedBy } };
+          }
+          if (st.view === "labboard") loadLabBoard(); else loadInvestigations();
+        }
         else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-collection", "Could not record the collection."); paint(); });
@@ -10434,10 +10463,12 @@
     }
     specimenOutcomeSend(specimenId, state, "");
   }
-  function specimenOutcomeSend(specimenId, state, reason) {
+  function specimenOutcomeSend(specimenId, state, reason, scannedAccession) {
     st.busy = true; paint();
-    return apiPost("/ward/specimen-outcome", { orgId: st.orgId, specimenId: specimenId, state: state, failureReason: reason || undefined })
-      .then(function (r) { if (settle(r, r && r.ok ? (state === "failed" ? wT("ward.recorded-as-failed-the-order-needs", "Recorded as failed. The order needs a new sample.") : wT("ward.received", "Received.")) : null)) loadLabBoard(); else paint(); })
+    return apiPost("/ward/specimen-outcome", { orgId: st.orgId, specimenId: specimenId, state: state, failureReason: reason || undefined, scannedAccession: scannedAccession || undefined })
+      .then(function (r) {
+        if (r && r.error === "wrong_specimen_scan") { st.busy = false; st.err = wT("ward.the-scanned-label-is-not-this", "The scanned label is not this sample's accession number. Nothing was received."); paint(); return; }
+        if (settle(r, r && r.ok ? (state === "failed" ? wT("ward.recorded-as-failed-the-order-needs", "Recorded as failed. The order needs a new sample.") : wT("ward.received", "Received.")) : null)) loadLabBoard(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
   }
 
@@ -10581,6 +10612,165 @@
         paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-release-that-result", "Could not release that result."); paint(); });
+  }
+
+  /* PRINTED LABELS AND CAMERA SCANNING (ward-labels.js draws and prints; this decides what goes on a label).
+   *
+   * A label prints what the RECORD says: the wristband, tube label and ID slip read GET /ward/label-data first, and
+   * a wristband whose allergies could not be read is not printed at all. Printing opens the browser's print dialog
+   * for that one label; the screen says the dialog was opened, never that a label came out of a printer it cannot see.
+   *
+   * THE CAMERA ONLY FILLS A FIELD. "Scan with camera" puts what it read into the same input a keyboard-wedge scanner
+   * types into; the nurse still presses the same button, which sends it through the same server check. */
+  function camBtn(inputId) {
+    return '<button type="button" class="w-btn ghost sm w-cam w-noprint" data-w-act="camscan:' + esc(inputId) + '">' + ms("photo_camera") + wTH("ward.cam-scan", "Scan with camera") + "</button>";
+  }
+  function camScan(inputId) {
+    var WL = G.WARD_LABELS;
+    if (!WL || !WL.cameraSupported()) { st.err = wT("ward.cam-unsupported", "This browser cannot scan with the camera. Use the barcode scanner or type the code."); paint(); return; }
+    return WL.scan(wT).then(function (r) {
+      var el = document.getElementById(inputId);
+      if (r && r.cancelled) return;
+      if (r && r.code && el) {
+        el.value = r.code;
+        keepFormField(el);
+        try { el.focus(); } catch (e) {}
+        st.err = ""; st.refusal = null;
+        st.note = wT("ward.cam-scanned", "Scanned into the field. Check it, then press the same button you would after a barcode scanner.");
+        paint();
+        return;
+      }
+      st.err = r && r.code ? wT("ward.cam-field-gone", "The screen changed while scanning, so nothing was filled in. Scan again.")
+        : r && r.error === "denied" ? wT("ward.cam-denied", "The camera was not allowed. Allow it in the browser, or use the barcode scanner or type the code.")
+        : r && r.error === "unsupported" ? wT("ward.cam-unsupported", "This browser cannot scan with the camera. Use the barcode scanner or type the code.")
+        : wT("ward.cam-failed", "The camera could not be started. Use the barcode scanner or type the code.");
+      paint();
+    });
+  }
+  function labelTime(iso, lb) {
+    var P = G.WSQPrint;
+    return P && P.date ? P.date(iso, lb ? { timeZone: lb.timeZone, utcOffsetMinutes: lb.utcOffsetMinutes } : null, true) : String(iso || "");
+  }
+  /* A person's name for a printed label, looked up the way the screen names staff (staff-identities), as plain text. */
+  function whoPlain(id) {
+    var s = String(id || "");
+    if (!s || WHO.ids[s] !== undefined) return Promise.resolve(s ? whoText(s) : "");
+    return apiGet("/ward/staff-identities?orgId=" + encodeURIComponent(st.orgId) + "&ids=" + encodeURIComponent(s))
+      .then(function (r) { var f = r && r.ok && r.identities ? r.identities[s] : null; if (f && !f.system) WHO.ids[s] = f; return whoText(s); }, function () { return whoText(s); });
+  }
+  function labelSent(kind, ok, extra) {
+    st.busy = false;
+    if (!ok) { st.err = wT("ward.label-print-failed", "This browser could not open printing. Nothing was printed."); paint(); return; }
+    st.err = ""; st.refusal = null;
+    st.note = (kind === "wristband" ? wT("ward.label-dialog-wristband", "The print dialog is open for the wristband.")
+      : kind === "slip" ? wT("ward.label-dialog-slip", "The print dialog is open for the ID slip.")
+      : kind === "specimen" ? wT("ward.label-dialog-specimen", "The print dialog is open for the tube label.")
+      : wT("ward.label-dialog-pharmacy", "The print dialog is open for the pharmacy label.")) + (extra && extra.trim() ? " " + extra.trim() : "");
+    paint();
+  }
+  function labelRead(patientId) {
+    return apiGet("/ward/label-data?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(patientId))
+      .then(function (r) { return r && r.ok && r.patient ? r : { failed: r || null }; }, function () { return { failed: null }; });
+  }
+  function labelReadFailed(f) {
+    st.busy = false;
+    if (f && f.status === 403) settle(f, null);
+    else st.err = wT("ward.label-patient-unread", "The patient's details could not be read. Nothing was printed.");
+    paint();
+  }
+  /* The wristband or the ID slip, for one patient. */
+  function printPatientLabel(kind, patientId) {
+    var WL = G.WARD_LABELS;
+    if (!WL) { st.err = wT("ward.label-unavailable", "Label printing is unavailable on this build."); paint(); return; }
+    if (!patientId) return;
+    st.busy = true; paint();
+    return labelRead(patientId).then(function (r) {
+      if (r.failed !== undefined) { labelReadFailed(r.failed); return; }
+      var p = r.patient, sizes = r.labels && r.labels.sizes;
+      if (kind === "wristband") {
+        if (r.allergies === null) { st.busy = false; st.err = wT("ward.label-allergies-unread", "The allergies could not be read, so the wristband was not printed. A band must never say none recorded because a read failed. Try again."); paint(); return; }
+        if (!r.band || !r.band.value) { st.busy = false; st.err = wT("ward.label-no-band-value", "This patient has no MRN or band code to print. Nothing was printed."); paint(); return; }
+        var ok = WL.print("wristband", { name: p.name, mrn: p.mrn, dob: p.dob, ageYears: p.ageYears, sex: p.sex, allergies: r.allergies, bandValue: r.band.value }, sizes);
+        labelSent("wristband", ok, (r.band.matchesBedside ? "" : wT("ward.label-band-not-bedside", "Its code is this patient's band on record, which is not the MRN the medication and specimen scans compare with: those scans will refuse it.")) +
+          (r.band.tagsUnread ? " " + wT("ward.label-band-tags-unread", "The bands already issued could not be read, so this band carries the MRN. Check it against any band the patient wears.") : ""));
+        return;
+      }
+      var row = null;
+      (st.patients || []).forEach(function (x) { if (x && x.patientId === patientId) row = x; });
+      labelSent("slip", WL.print("slip", { name: p.name, mrn: p.mrn, ageYears: p.ageYears, sex: p.sex, ward: row && row.ward, bed: row && row.bed, issuedAt: labelTime(new Date().toISOString(), r.labels) }, sizes));
+    });
+  }
+  /* spec: { patientId, serviceRequestId, display, accessionNumber, specimenType, collectedAt, collectedBy } */
+  function printSpecimenLabel(spec) {
+    var WL = G.WARD_LABELS;
+    if (!WL) { st.err = wT("ward.label-unavailable", "Label printing is unavailable on this build."); paint(); return; }
+    if (!spec || !spec.accessionNumber) { st.err = wT("ward.label-no-accession", "This sample has no accession number on record, so no tube label was printed."); paint(); return; }
+    st.busy = true; paint();
+    return labelRead(spec.patientId).then(function (r) {
+      if (r.failed !== undefined) { labelReadFailed(r.failed); return; }
+      return whoPlain(spec.collectedBy).then(function (by) {
+        labelSent("specimen", WL.print("specimen", { name: r.patient.name, mrn: r.patient.mrn, accessionNumber: spec.accessionNumber, test: spec.display,
+          specimenType: spec.specimenType, collectedAt: labelTime(spec.collectedAt, r.labels), collectedBy: by }, r.labels && r.labels.sizes));
+      });
+    });
+  }
+  function specimenLabelFor(serviceRequestId) {
+    var found = null, look = function (list) { (list || []).forEach(function (x) { if (x && x.serviceRequestId === serviceRequestId) found = x; }); };
+    look(st.labBoard && st.labBoard.specimens); look(st.investigations && st.investigations.requests);
+    var c = found && found.collection;
+    if (!c || c.state !== "collected") { st.err = wT("ward.label-not-collected", "That sample is not recorded as collected, so there is no tube label to print."); paint(); return; }
+    return printSpecimenLabel({ patientId: found.patientId || (st.sel && st.sel.patientId), serviceRequestId: serviceRequestId, display: found.display || found.code,
+      accessionNumber: c.accessionNumber, specimenType: c.specimenType, collectedAt: c.at, collectedBy: c.by });
+  }
+  /* The pharmacy label for one recorded dispense. The pharmacy role reads the order, not the chart, so the patient is the
+   * one this pharmacy screen is open for and the dose, route and frequency are the order's own. */
+  function printPharmacyLabel(dispenseId) {
+    var WL = G.WARD_LABELS, ph = st.pharmacy || {}, s = st.sel, d = null, o = null;
+    if (!WL) { st.err = wT("ward.label-unavailable", "Label printing is unavailable on this build."); paint(); return; }
+    (ph.dispenses || []).forEach(function (x) { if (x && x.dispenseId === dispenseId) d = x; });
+    if (d) ((ph.queue && ph.queue.orders) || []).forEach(function (x) { if (x && x.orderId === d.orderId) o = x; });
+    if (!d || !s || !s.name) { st.err = wT("ward.label-dispense-unknown", "That dispense is not on this screen any more. Reload the pharmacy screen. Nothing was printed."); paint(); return; }
+    if (!o) { st.err = wT("ward.label-order-unknown", "The order for this dispense is not on the queue, so its dose, route and frequency are not known here. Nothing was printed."); paint(); return; }
+    if (!st.labels) { st.err = wT("ward.label-settings-unread", "The hospital's label settings have not loaded. Reload the ward and try again. Nothing was printed."); paint(); return; }
+    st.busy = true; paint();
+    return whoPlain(d.dispensedBy).then(function (by) {
+      labelSent("pharmacy", WL.print("pharmacy", { name: s.name, mrn: s.mrn, drug: d.drug || o.drug, dose: o.dose && o.dose.value != null ? o.dose.value + " " + (o.dose.unit || "") : "",
+        route: o.route, frequency: o.frequency, quantity: d.quantity ? d.quantity.value + " " + d.quantity.unit : "", batch: d.batch, expiry: d.expiry,
+        dispensedAt: labelTime(d.dispensedAt, st.labels), dispensedBy: by }, st.labels.sizes));
+    });
+  }
+  /* Offered where the act happened (admission, collection, dispense), on that screen only, until dismissed. */
+  function labelOfferBar(state) {
+    var o = state.labelOffer;
+    if (!o || o.view !== state.view) return "";
+    var b = function (act, icon, words) { return '<button class="w-btn ghost sm" data-w-act="labelprint:' + act + '">' + ms(icon) + words + "</button>"; };
+    var text = o.kind === "admission" ? wTH("ward.label-offer-admission", "Admitted {who}. Print the wristband and ID slip now.", { who: esc(o.who || "") }, "who")
+      : o.kind === "specimen" ? wTH("ward.label-offer-specimen", "Collected {test}. Label the tube before it leaves the bedside.", { test: esc((o.spec && o.spec.display) || "") }, "test")
+      : wTH("ward.label-offer-pharmacy", "Dispensed {drug}. Print the label for the supply.", { drug: esc(o.drug || "") }, "drug");
+    var btns = o.kind === "admission" ? b("wristband", "badge", wTH("ward.print-wristband", "Print wristband")) + b("slip", "receipt", wTH("ward.print-id-slip", "Print ID slip"))
+      : o.kind === "specimen" ? b("specimen", "label", wTH("ward.print-tube-label", "Print tube label"))
+      : b("pharmacy", "label", wTH("ward.print-pharmacy-label", "Print pharmacy label"));
+    return '<div class="w-labeloffer w-noprint">' + ms("print") + "<p>" + text + "</p>" + btns +
+      "<button class=\"w-x\" data-w-act=\"labeloffer-x\" aria-label=\"" + wTA("ward.dismiss", "Dismiss") + "\">" + ms("close") + "</button></div>";
+  }
+  function labelOfferPrint(kind) {
+    var o = st.labelOffer; if (!o) return;
+    if (kind === "wristband" || kind === "slip") return printPatientLabel(kind, o.patientId);
+    if (kind === "specimen") return printSpecimenLabel(o.spec);
+    if (kind === "pharmacy") return printPharmacyLabel(o.dispenseId);
+  }
+  /* The laboratory receives the tube in its hand: the scanned (or typed) label finds the specimen on this board, and the
+   * server refuses the receipt if that label is not the specimen's own accession number. */
+  function specimenScanReceive() {
+    var code = val("wSpecScan");
+    if (!code) { st.err = wT("ward.scan-or-type-the-tube-label", "Scan or type the label on the tube."); paint(); return; }
+    var norm = function (v) { return String(v || "").trim().toUpperCase(); }, hit = null;
+    ((st.labBoard && st.labBoard.specimens) || []).forEach(function (sp) {
+      var c = sp && sp.collection;
+      if (c && c.state === "collected" && c.accessionNumber && norm(c.accessionNumber) === norm(code)) hit = c;
+    });
+    if (!hit) { st.err = wT("ward.no-tube-in-transit-carries-that", "No sample in transit on this board carries that label. Nothing was received."); paint(); return; }
+    return specimenOutcomeSend(hit.specimenId, "received", "", code);
   }
 
   function tagsOpen() {
@@ -12635,6 +12825,8 @@
     if (cmd === "whoinfo") { whoInfo(arg); return; }
     if (cmd === "askok") { askSubmit(); return; }
     if (cmd === "askcancel") { askCancel(); return; }
+    // Fills one field and changes nothing else, so it never closes a layer it was pressed inside (the Collect question).
+    if (cmd === "camscan") { camScan(arg); return; }
     if (cmd !== "summary") closeSummaryLayer();
     if (cmd === "close") { close(); return; }
     if (cmd === "chartcat") { chartNavShow(arg); return; }
@@ -12973,6 +13165,12 @@
     }
     if (cmd === "ack") { acknowledge(arg); return; }
     if (cmd === "collectspecimen") { collectSpecimen(arg); return; }
+    if (cmd === "labelprint") { labelOfferPrint(arg); return; }
+    if (cmd === "labeloffer-x") { st.labelOffer = null; paint(); return; }
+    if (cmd === "speclabel") { specimenLabelFor(arg); return; }
+    if (cmd === "specscanreceive") { specimenScanReceive(); return; }
+    if (cmd === "tagprint") { if (st.sel) printPatientLabel(arg === "slip" ? "slip" : "wristband", st.sel.patientId); return; }
+    if (cmd === "pharmlabel") { printPharmacyLabel(arg); return; }
     if (cmd === "move") { transfer(); return; }
     if (cmd === "fluid") { chartFluid(); return; }
     // The picked direction and kind live in state, so a repaint before Chart redraws what was picked.

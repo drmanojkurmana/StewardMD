@@ -684,3 +684,15 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard span.w-who { cursor: default; text-decoration: none; }
 #smdWard .w-who:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
 #smdWard .w-who-x { color: var(--muted, #666); }
+
+/* Printed labels and camera scanning (ward-labels.js). The offer sits under the banner on the screen where the act
+ * happened; "Scan with camera" sits beside the field it fills. The camera layer is on <body>, above the ward. */
+#smdWard .w-labeloffer { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; border-radius: 14px; padding: 10px 14px; margin-top: 8px; font-size: 13px;
+  background: var(--sc-lowest, #fff); border: 1px solid var(--outline-variant, #ccc); }
+#smdWard .w-labeloffer p { margin: 0; flex: 1 1 220px; }
+#smdWard .w-cam { justify-self: start; align-self: end; }
+.w-camscan { position: fixed; inset: 0; z-index: 13000; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(0, 0, 0, .8); }
+.w-camscan-in { width: min(480px, 100%); display: flex; flex-direction: column; gap: 10px; align-items: center; color: #fff; font: 14px/1.4 system-ui, sans-serif; text-align: center; }
+.w-camscan video { width: 100%; max-height: 60vh; border-radius: 12px; background: #000; object-fit: cover; }
+.w-camscan p { margin: 0; }
+.w-camscan button { min-height: 44px; padding: 0 20px; border-radius: 22px; border: 1px solid #fff; background: transparent; color: #fff; font: inherit; cursor: pointer; }

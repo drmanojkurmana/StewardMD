@@ -121,7 +121,8 @@ function collectionState(specimens) {
   if (received) return { state: "received", at: received.receivedAt, specimenId: received.id };
   const collected = rows.filter((s) => s.state === "collected")
     .sort((a, b) => String(b.collectedAt || "").localeCompare(String(a.collectedAt || "")))[0];
-  if (collected) return { state: "collected", at: collected.collectedAt, by: collected.collectedBy || null, specimenId: collected.id };
+  // The accession and the specimen type travel with it: the laboratory board matches a scanned tube and reprints its label from them.
+  if (collected) return { state: "collected", at: collected.collectedAt, by: collected.collectedBy || null, specimenId: collected.id, accessionNumber: collected.accessionNumber || null, specimenType: collected.specimenType || null };
   /* Every attempt failed. This is the state that must never read as "in progress": the order needs
    * doing again and nobody is going to be told by a result arriving. */
   const failed = rows.sort((a, b) => String(b.failedAt || "").localeCompare(String(a.failedAt || "")))[0];
@@ -241,7 +242,11 @@ async function collectSpecimen(request, env, ctx) {
 
 /**
  * The laboratory has it, or the attempt failed.
- * ctx: { migration, specimenId, state: "received" | "failed", failureReason?, ... }
+ * ctx: { migration, specimenId, state: "received" | "failed", failureReason?, scannedAccession?, ... }
+ *
+ * WRONG TUBE REFUSED: when the laboratory scanned the tube's label (scannedAccession), it must be THIS specimen's
+ * accession number, compared with the same normaliseBarcode as the wristband check. A tube picked up beside the
+ * one on the board is never received under the other's name.
  */
 async function specimenOutcome(request, env, ctx) {
   const mig = ctx.migration;
@@ -269,6 +274,10 @@ async function specimenOutcome(request, env, ctx) {
   /* RECEIVED IS TERMINAL. The laboratory said it has the sample; a later "failed" is a statement
    * about the ASSAY, not the specimen, and it belongs on the result. */
   if (current.state === "received") return { ...base, ok: true, written: 0, skipped: "already_received", ...summary(current) };
+  const scannedAccession = str(ctx.scannedAccession);
+  if (scannedAccession && normaliseBarcode(scannedAccession) !== normaliseBarcode(current.accessionNumber || "")) {
+    return { ...base, ok: false, status: 409, error: "wrong_specimen_scan", detail: "the scanned label is not this specimen's accession number", specimenId, written: 0 };
+  }
 
   const now = new Date().toISOString();
   const next = SpecimenCollection({
