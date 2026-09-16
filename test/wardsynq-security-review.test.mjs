@@ -380,3 +380,48 @@ test("screen: loading, failed, unavailable and empty read differently; own actio
   assert.equal((withQueue.match(/data-sec-review="/g) || []).length, 2, "two buttons for the one reviewable item only");
   assert.ok(!/[—–]/.test(loading + failed + empty + unavailable + withQueue), "no em or en dash on screen");
 });
+
+// ---------------------------------------------------------------------------------------------
+// LT-35 (live retest 2026-09-16): Security review named people as "fb:<uid>" and a mobile number; the Hospital tab showed
+// internal ids and an internal decision reference.
+// ---------------------------------------------------------------------------------------------
+test("LT-35 screen: every person on the security review is the staff member (name, employee id, role), never an account id or a mobile", () => {
+  const win = { addEventListener() {} };
+  const doc = { readyState: "complete", getElementById: () => ({ innerHTML: "", querySelectorAll: () => [] }), createElement: () => ({ innerHTML: "" }), body: { appendChild() {} }, addEventListener() {} };
+  const ls = { getItem: () => null, setItem() {}, removeItem() {} };
+  const run = (src) => new Function("window", "document", "location", "localStorage", src)(win, doc, { hash: "", search: "" }, ls);
+  for (const f of ["shell.js", "pages/admin.js", "pages/audit.js"]) run(readFileSync(new URL("../wardsynq/site/" + f, import.meta.url), "utf8"));
+  const c = { esc: win.WSQ.esc };
+  const UID = "fb:DcGIzIXwxURU0G9L4J5jehluENl1", MOBILE = "8897298117";
+  const ev = [{ id: "a1", ts: "t", action: "record.read", actor: UID }];
+  const report = { days: 7, note: "n", counts: {}, notDetected: [], dataProtection: { status: "red", reasons: [] }, auditRetention: { status: "ok" },
+    chartAccess: { status: "ok", findings: [{ type: "chart-access-volume", actor: UID, summary: "97 distinct patients read.", method: "m", evidence: ev, evidenceTotal: 1 }] },
+    exports: { status: "ok", findings: [{ type: "unusual-export", actor: MOBILE, summary: "13108 rows via roster in the period.", method: "m", evidence: [], evidenceTotal: 0 }] },
+    logins: { status: "ok", findings: [] },
+    assignmentAccess: { status: "ok", readsInPeriod: 1, assignedReads: 0, incomplete: [], exemptions: [],
+      findings: [{ type: "out-of-assignment", actor: "doc@h.test", signIns: [UID, MOBILE], summary: "1 read.", method: "m", evidence: ev, evidenceTotal: 1 }],
+      notEvaluated: [{ actor: MOBILE, reason: "No data.", reads: 1, evidence: [] }], exempt: [] },
+    reviewQueue: { status: "ok", awaiting: 1, missing: [], items: [{ kind: "break-glass", subjectId: "g1", actor: UID, action: "break-glass", at: "t", detail: "arrest", status: "appropriate", reviews: [{ decision: "appropriate", reviewedBy: MOBILE, at: "t" }], ownAction: false }] } };
+  const ids = win.WSQ._secActorIds(report);
+  for (const id of [UID, MOBILE, "doc@h.test"]) assert.ok(ids.includes(id), "looked up once: " + id);
+  const names = { [UID]: { name: "Dr Manoj Kurmana", employeeId: "EMP-1001", role: "admin" }, [MOBILE]: { name: null, employeeId: null, role: "doctor" }, "doc@h.test": { name: "Dr Rao", employeeId: "EMP-7", role: "doctor" } };
+  const page = win.WSQ._securityReviewHtml(c, report, names);
+  assert.ok(!page.includes("DcGIzIXwxURU0G9L4J5jehluENl1") && !page.includes(MOBILE), page);
+  assert.match(page, /Unusually many patients read<\/b>: Dr Manoj Kurmana \(EMP-1001\), admin\./);
+  assert.match(page, /Unusual export volume<\/b>: Staff account, name not set, doctor\./);
+  assert.match(page, /Dr Rao \(EMP-7\), doctor/);
+  assert.match(page, /by Staff account, name not set, doctor/);
+  const unnamed = win.WSQ._securityReviewHtml(c, report, null);
+  assert.ok(!unnamed.includes("DcGIzIXwxURU0G9L4J5jehluENl1") && !unnamed.includes(MOBILE), "the lookup failed: still no raw id");
+  const rows = win.WSQ._auditRowsHtml(c, { rows: [{ id: "a1", ts: "t", action: "record.read", actor: UID, chainSeq: 1 }], missing: [] }, names);
+  assert.match(rows, /Dr Manoj Kurmana \(EMP-1001\), admin/);
+  assert.ok(!rows.includes("DcGIzIXwxURU0G9L4J5jehluENl1"));
+});
+
+test("LT-35 source: the Hospital tab shows no organisation id, no Connect tenant id and no internal decision reference", () => {
+  const src = readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8");
+  const at = src.indexOf("function renderHospital(");
+  const hospital = src.slice(at, at + 4000);
+  assert.ok(!/esc\(o\.id\b/.test(hospital) && !/o\.connectTenantId/.test(hospital), "no internal id on the Hospital tab");
+  assert.ok(!src.includes("site.admin.hospital.alert.ownerDecision") && !/owner decision/i.test(src.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, "")), "no owner decision reference in on-screen text");
+});

@@ -39,7 +39,7 @@ const EDITABLE_FROM = new Set(["draft", "submitted"]);
 const ID_KEYS = ["hfrFacilityId", "hipId", "hiuId"];
 
 /* Owner A2: no production ABDM traffic until the India-region hosting from the AWS move exists. */
-const AWAITING_INDIA = "Production ABDM traffic is held until India-region hosting exists (owner decision A2), and needs the software's production ABDM credentials after certification.";
+const AWAITING_INDIA = "Production ABDM traffic is held until India-region hosting exists, and needs the software's production ABDM credentials after certification.";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const isGatewayId = (v) => /^[A-Za-z0-9][A-Za-z0-9_.-]{2,49}$/.test(str(v));

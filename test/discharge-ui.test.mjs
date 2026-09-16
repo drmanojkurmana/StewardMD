@@ -224,6 +224,31 @@ test("no emoji anywhere: icons are the bundled Material Symbols, as everywhere e
   assert.match(SRC, /function ms\(name, fill\)/);
 });
 
+/* ---- live retest 2026-09-16: who signed is the staff member, never the sign-in id ------------------------------- */
+test("the signer on the screen and on paper is the staff identity (ward.js staffWho), never a raw signedBy", () => {
+  const signed = S({ signed: true, signedBy: "cfa:3f9a2b", recordedAt: "2026-09-10T07:00:00.000Z", version: 3 });
+  // Without ward.js on the page: an account id reads as a clinician account, on screen and on paper.
+  const bare = load();
+  const alone = bare._render(signed);
+  assert.ok(!alone.includes("cfa:3f9a2b"), alone);
+  assert.match(alone, /a clinician account/);
+  assert.ok(!bare._printable(signed).includes("cfa:3f9a2b"));
+  assert.ok(!load()._render(S({ signed: true, signedBy: "8897298117", version: 1 })).includes("8897298117"), "a mobile number is never shown");
+  // With ward.js: the one rendering every chart screen uses, and its plain text on the printout.
+  const win = {};
+  const asked = [];
+  win.WARD = { _who: (id) => { asked.push(id); return '<button type="button" class="w-who" data-w-act="whoinfo:' + id + '" title="Name: Dr Asha Rao">Dr Asha Rao (EMP-1042)</button>'; },
+    _whoText: () => "Dr Asha Rao (EMP-1042)", _whoFetch() {}, _whoInfo() {} };
+  const doc = { getElementById: () => null, createElement: () => ({ classList: { add() {}, remove() {} } }), body: { appendChild() {} } };
+  new Function("window", "document", "location", "localStorage", SRC)(win, doc, { search: "" }, { getItem: () => null, setItem: () => {} });
+  const html = win.DISCHARGE._render(signed);
+  assert.match(html, /Dr Asha Rao \(EMP-1042\)<\/button>/);
+  assert.match(html, /Signed by <button[^>]*data-w-act="whoinfo:cfa:3f9a2b"/, "tap for name, employee id and role");
+  assert.ok(asked.every((id) => id === "cfa:3f9a2b") && asked.length >= 2, "the signature block and the locked bar");
+  const paper = win.DISCHARGE._printable(signed);
+  assert.match(paper, /Signed by Dr Asha Rao \(EMP-1042\)/);
+});
+
 /* ---- LT-19 (live test 2026-09-15) ------------------------------------------------------------------------- */
 function loadWithPrintHelper() {
   const win = {};

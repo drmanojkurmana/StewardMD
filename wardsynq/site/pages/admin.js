@@ -648,7 +648,7 @@
       '<label class="f"><span><input type="checkbox" id="alEnabled"' + (s.enabled ? " checked" : "") + "> " + esc(T(c, "site.admin.hospital.alert.pushToggle", "Push critical results to phones through the StewardMD app")) + "</span></label>" +
       '<p class="quiet">' + esc(T(c, "site.admin.hospital.alert.pushIntro", "The push names the ward and bed only, never the patient. The detail opens after the phone is unlocked, and only for the people it was sent to. Acknowledging is still done with a sentence saying what was done.")) + "</p>" +
       "<h3>" + esc(T(c, "site.admin.hospital.alert.whoTells", "Who each level tells")) + "</h3>" +
-      (lv.approval ? '<p class="msg ok">' + esc(T(c, "site.admin.hospital.alert.defaultApproved", "Default ladder approved by")) + " " + EN(c, esc(ap.approvedBy)) + " " + esc(T(c, "site.admin.hospital.alert.on", "on")) + " " + EN(c, esc(ap.approvedOn)) + " " + esc(T(c, "site.admin.hospital.alert.ownerDecision", "(owner decision {decision}).", { decision: ap.decision })) + "</p>"
+      (lv.approval ? '<p class="msg ok">' + esc(T(c, "site.admin.hospital.alert.defaultApproved", "Default ladder approved by")) + " " + EN(c, esc(ap.approvedBy)) + " " + esc(T(c, "site.admin.hospital.alert.on", "on")) + " " + EN(c, esc(ap.approvedOn)) + ".</p>"   /* LT-35: no internal decision reference on a hospital's screen */
         : '<p class="msg note">' + esc(T(c, "site.admin.hospital.alert.ownLadderLead", "This hospital has set its own ladder. The approved default ({by}, {on}) is ordering clinician and on-duty doctors, then supervisors and nurses on duty, then named contacts.", { by: EN(c, esc(ap.approvedBy)), on: EN(c, esc(ap.approvedOn)) })) + "</p>") +
       '<p class="quiet">' + esc(T(c, "site.admin.hospital.alert.eachLevelTells", "Each level tells the people of the levels before it again. On-duty roles come from the rota for the patient's ward.")) + "</p>" +
       wardRuleHtml(c, s.wardRule) +
@@ -737,9 +737,9 @@
       '<div class="kv"><dt>' + c.esc(T(c, "site.admin.hospital.name", "Name")) + "</dt><dd>" + c.esc(o.name || "") + "</dd>" +
       '<dt>' + c.esc(T(c, "site.admin.hospital.code", "Code")) + '</dt><dd class="mono">' + c.esc(o.code || "") + "</dd>" +
       "<dt>" + c.esc(T(c, "site.admin.hospital.mode", "Mode")) + "</dt><dd>" + c.esc(o.mode || "") + "</dd>" +
-      "<dt>" + c.esc(T(c, "site.admin.hospital.countryLabel", "Country")) + "</dt><dd>" + c.esc(countryLabel(o.region)) + "</dd>" +
-      '<dt>' + c.esc(T(c, "site.admin.hospital.id", "Id")) + '</dt><dd class="mono">' + c.esc(o.id || "") + "</dd>" +
-      '<dt>' + c.esc(T(c, "site.admin.hospital.connectTenant", "Connect tenant")) + '</dt><dd class="mono">' + c.esc(o.connectTenantId || T(c, "site.admin.hospital.none", "none")) + "</dd></div>" +
+      /* LT-35: the organisation id and the Connect tenant id are internal keys, not something a hospital admin reads or
+       * acts on; the hospital code above is how support identifies the hospital. */
+      "<dt>" + c.esc(T(c, "site.admin.hospital.countryLabel", "Country")) + "</dt><dd>" + c.esc(countryLabel(o.region)) + "</dd></div>" +
       '<h3>' + c.esc(T(c, "site.admin.hospital.nameAndCountry", "Name and country")) + '</h3><div class="row"><label class="f"><span>' + c.esc(T(c, "site.admin.hospital.nameField", "Hospital name")) + '</span><input id="admHospName" value="' + c.esc(o.name || "") + '"></label>' +
       '<label class="f" style="flex:0 1 180px"><span>' + c.esc(T(c, "site.admin.hospital.countryLabel", "Country")) + '</span><select id="admHospRegion">' +
         '<option value="IN"' + (o.region === "US" ? "" : " selected") + ">" + c.esc(T(c, "site.admin.hospital.country.in", "India")) + "</option>" +
@@ -1536,7 +1536,30 @@
     }[s];
   }
 
-  function secSection(c, title, s, days) {
+  /* LT-35: every person on the security review is the staff member (GET /ward/actor-names, the staff identity resolver
+   * functions/_wardsynq/staff-identity.js), rendered the way the audit screen renders them (audit.js actorHtml): name,
+   * employee id and role, never an account id ("fb:..."), an Access hash or a mobile number. `names` is that lookup,
+   * null while it has not answered. */
+  function who(c, id, names) {
+    if (WSQ._audit && WSQ._audit.actorHtml) return WSQ._audit.actorHtml(c, id, names);
+    // audit.js not on the page: still never an account id or a mobile number.
+    id = String(id || "");
+    return /^(fb|cfa|ghis):/.test(id) || /^\+?[\d\s().-]{7,}$/.test(id) ? c.esc(T(c, "site.audit.actorUnnamed", "Staff account, name not set")) : EN(c, c.esc(id));
+  }
+  /** Every actor id a security report names, for one lookup. */
+  function secActorIds(r) {
+    var ids = [], add = function (id) { id = String(id || ""); if (id && id.indexOf("system:") !== 0 && ids.indexOf(id) < 0) ids.push(id); };
+    [r.chartAccess, r.exports, r.logins, r.assignmentAccess].forEach(function (s) {
+      if (!s) return;
+      (s.findings || []).forEach(function (f) { add(f.actor); (f.signIns || []).forEach(add); (f.evidence || []).forEach(function (e) { add(e.actor); }); });
+      (s.notEvaluated || []).concat(s.exempt || []).forEach(function (x) { add(x.actor); });
+    });
+    ((r.reviewQueue && r.reviewQueue.items) || []).forEach(function (i) { add(i.actor); (i.reviews || []).forEach(function (v) { add(v.reviewedBy); }); });
+    return ids;
+  }
+  WSQ._secActorIds = secActorIds;
+
+  function secSection(c, title, s, days, names) {
     var esc = c.esc;
     var h = "<h3>" + esc(title) + "</h3>";
     if (!s || s.status !== "ok") return h + '<div class="msg err">' + esc(T(c, "site.admin.security.couldNotCheckLead", "Could not be checked")) + (s && s.detail ? ": " + EN(c, esc(s.detail)) : "") + ". " + esc(T(c, "site.admin.security.notSameAsNoneFound", "This is not the same as nothing being found.")) + "</div>";
@@ -1545,9 +1568,9 @@
     return h + s.findings.map(function (f) {
       /* G11: an out-of-assignment finding shows the ward history behind each read. */
       var wards = f.type === "out-of-assignment";
-      return "<details><summary><b>" + esc(secTypeLabel(c, f.type)) + "</b>: " + esc(f.actor) + ". " + esc(f.summary) + "</summary>" +
+      return "<details><summary><b>" + esc(secTypeLabel(c, f.type)) + "</b>: " + who(c, f.actor, names) + ". " + esc(f.summary) + "</summary>" +
         '<p class="quiet">' + esc(f.method) + "</p>" +
-        ((f.signIns || []).length ? '<p class="quiet">' + esc(T(c, "site.admin.security.countedAsOne", "Counted as one reader across these sign-ins:")) + ' <span class="mono">' + f.signIns.map(esc).join(", ") + "</span></p>" : "") +
+        ((f.signIns || []).length ? '<p class="quiet">' + esc(T(c, "site.admin.security.countedAsOne", "Counted as one reader across these sign-ins:")) + " " + f.signIns.map(function (s) { return who(c, s, names); }).join("; ") + "</p>" : "") +
         '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.security.colWhen", "When")) + "</th><th>" + esc(T(c, "site.admin.security.colAction", "Action")) + "</th><th>" + esc(T(c, "site.admin.security.colType", "Type")) + "</th><th>" + esc(T(c, "site.admin.security.colPatientRef", "Patient ref")) + "</th>" + (wards ? "<th>" + String(T(c, "site.admin.security.colWardThen", "Patient's ward then")).replace(/[&<>]/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[ch]; }) + "</th><th>" + esc(T(c, "site.admin.security.colRosteredThen", "Reader rostered on then")) + "</th>" : "") + "<th>" + esc(T(c, "site.admin.security.colOutcome", "Outcome")) + "</th><th>" + esc(T(c, "site.admin.security.colDetail", "Detail")) + "</th><th>" + esc(T(c, "site.admin.security.colAuditRow", "Audit row")) + "</th></tr></thead><tbody>" +
         f.evidence.map(function (e) {
           return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td>" +
@@ -1565,7 +1588,7 @@
     if (!ids.length) return "";
     return '<button type="button" class="btn ghost sm" data-sec-rows="' + c.esc(ids.join(",")) + '">' + c.esc(T(c, "site.admin.security.openAuditRows", "Open these audit rows")) + '</button><div class="sec-rows-out"></div>';
   }
-  function auditRowsHtml(c, r) {
+  function auditRowsHtml(c, r, names) {
     var esc = c.esc;
     if (r == null) return '<p class="quiet"><span class="spin"></span> ' + esc(T(c, "site.admin.security.readingRows", "Reading the audit rows...")) + "</p>";
     if (r.failed) return '<div class="msg err">' + esc(T(c, "site.admin.security.rowsFailedLead", "The audit rows could not be loaded:")) + " " + EN(c, esc(r.message || "failed")) + ". " + esc(T(c, "site.admin.security.notSameAsNone", "This is not the same as there being none.")) + "</div>";
@@ -1573,14 +1596,14 @@
     if (!(r.rows || []).length) return h + '<p class="quiet">' + esc(T(c, "site.admin.security.noRowReturned", "No audit row was returned.")) + "</p>";
     return h + '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.security.colWhen", "When")) + "</th><th>" + esc(T(c, "site.admin.security.colBy", "By")) + "</th><th>" + esc(T(c, "site.admin.security.colAction", "Action")) + "</th><th>" + esc(T(c, "site.admin.security.colType", "Type")) + "</th><th>" + esc(T(c, "site.admin.security.colRecord", "Record")) + "</th><th>" + esc(T(c, "site.admin.security.colPatientRef", "Patient ref")) + "</th><th>" + esc(T(c, "site.admin.security.colOutcome", "Outcome")) + "</th><th>" + esc(T(c, "site.admin.security.colChainedRow", "Chained row")) + "</th><th>" + esc(T(c, "site.admin.security.colAuditRow", "Audit row")) + "</th></tr></thead><tbody>" +
       r.rows.map(function (e) {
-        return "<tr><td>" + esc(e.ts) + '</td><td class="mono">' + esc(e.actor || "") + "</td><td>" + esc(e.action || "") + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.recordId || "") +
+        return "<tr><td>" + esc(e.ts) + "</td><td>" + who(c, e.actor, names) + "</td><td>" + esc(e.action || "") + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.recordId || "") +
           '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + (e.chainSeq == null ? esc(T(c, "site.admin.security.notLinked", "Not linked")) : esc(e.chainSeq)) + '</td><td class="mono">' + esc(e.id || "") + "</td></tr>";
       }).join("") + "</tbody></table></div>";
   }
   WSQ._auditRowsHtml = auditRowsHtml;
 
   /* Reads outside an assignment. "Not evaluated" is its own state and never renders as no findings. */
-  function secAssignment(c, s, days) {
+  function secAssignment(c, s, days, names) {
     var esc = c.esc;
     var h = "<h3>" + esc(T(c, "site.admin.security.outOfAssignmentTitle", "Reads outside an assignment")) + "</h3>";
     if (!s || (s.status !== "ok" && s.status !== "not_evaluated")) return h + '<div class="msg err">' + esc(T(c, "site.admin.security.couldNotCheckLead", "Could not be checked")) + (s && s.detail ? ": " + EN(c, esc(s.detail)) : "") + ". " + esc(T(c, "site.admin.security.notSameAsNoneFound", "This is not the same as nothing being found.")) + "</div>";
@@ -1590,17 +1613,17 @@
     if ((s.incomplete || []).length) h += '<div class="msg note">' + esc(T(c, "site.admin.security.incompleteLead", "Incomplete:")) + " " + EN(c, esc(s.incomplete.join("; "))) + ".</div>";
     if ((s.matching || []).length) h += '<div class="msg note">' + EN(c, esc(s.matching.join(" "))) + "</div>";
     h += '<p class="quiet">' + esc(T(c, "site.admin.security.readsInPeriod", "{n} reads in the period: {assigned} within an assignment.", { n: s.readsInPeriod, assigned: s.assignedReads })) + "</p>";
-    h += s.findings.length ? secSection(c, "", { status: "ok", findings: s.findings }, days).replace("<h3></h3>", "") : '<p class="quiet">' + esc(T(c, "site.admin.security.noOutOfAssignment", "No reads outside an assignment among the reads that could be compared.")) + "</p>";
+    h += s.findings.length ? secSection(c, "", { status: "ok", findings: s.findings }, days, names).replace("<h3></h3>", "") : '<p class="quiet">' + esc(T(c, "site.admin.security.noOutOfAssignment", "No reads outside an assignment among the reads that could be compared.")) + "</p>";
     var list = function (title, rows, field) {
       return rows.length ? "<details><summary>" + esc(T(c, "site.admin.security.readsCount", "{title} ({n} reads)", { title: title, n: rows.reduce(function (n, x) { return n + x.reads; }, 0) })) + "</summary><ul>" +
         rows.map(function (x) {
-          return "<li>" + esc(x.actor) + ": " + esc(T(c, "site.admin.security.readsN", "{n} reads.", { n: x.reads })) + " " + esc(x[field]) + ' <span class="quiet mono">' + x.evidence.map(function (e) { return esc(e.id); }).join(", ") + "</span> " + openRowsHtml(c, x.evidence) + "</li>";
+          return "<li>" + who(c, x.actor, names) + ": " + esc(T(c, "site.admin.security.readsN", "{n} reads.", { n: x.reads })) + " " + esc(x[field]) + ' <span class="quiet mono">' + x.evidence.map(function (e) { return esc(e.id); }).join(", ") + "</span> " + openRowsHtml(c, x.evidence) + "</li>";
         }).join("") + "</ul></details>" : "";
     };
     return h + list(T(c, "site.admin.security.notEvaluated", "Not evaluated"), s.notEvaluated || [], "reason") + list(T(c, "site.admin.security.exemptShort", "Exempt"), s.exempt || [], "exemption") + ex;
   }
 
-  function securityReviewHtml(c, r) {
+  function securityReviewHtml(c, r, names) {
     var esc = c.esc;
     if (r == null) return '<div class="card"><span class="spin"></span> ' + esc(T(c, "site.admin.security.loading", "Loading the security review...")) + "</div>";
     if (r.failed) return '<div class="card"><div class="msg err">' + esc(T(c, "site.admin.security.loadFailedLead", "The security review could not be loaded:")) + " " + EN(c, esc(r.message || "failed")) + ". " + esc(T(c, "site.admin.security.notSameAsNothing", "This is not the same as there being nothing to review.")) + "</div></div>";
@@ -1610,7 +1633,7 @@
     h += types.length ? '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.security.colFinding", "Finding")) + "</th><th>" + esc(T(c, "site.admin.security.colCount", "Count")) + "</th></tr></thead><tbody>" +
       types.map(function (t) { return "<tr><td>" + esc(secTypeLabel(c, t)) + "</td><td>" + esc(r.counts[t]) + "</td></tr>"; }).join("") + "</tbody></table></div>"
       : '<p class="quiet">' + esc(T(c, "site.admin.security.noFindingsChecked", "No findings in the sections that could be checked. Check each section below for any that could not.")) + "</p>";
-    h += secSection(c, T(c, "site.admin.security.chartAccess", "Chart access"), r.chartAccess, r.days) + secAssignment(c, r.assignmentAccess, r.days) + secSection(c, T(c, "site.admin.security.exports", "Exports"), r.exports, r.days) + secSection(c, T(c, "site.admin.security.signIns", "Sign-ins"), r.logins, r.days);
+    h += secSection(c, T(c, "site.admin.security.chartAccess", "Chart access"), r.chartAccess, r.days, names) + secAssignment(c, r.assignmentAccess, r.days, names) + secSection(c, T(c, "site.admin.security.exports", "Exports"), r.exports, r.days, names) + secSection(c, T(c, "site.admin.security.signIns", "Sign-ins"), r.logins, r.days, names);
     h += "<h3>" + esc(T(c, "site.admin.security.notCheckedTitle", "Not checked, and why")) + "</h3><ul>" + (r.notDetected || []).map(function (n) { return "<li>" + esc(n.rule) + ": " + esc(n.reason) + "</li>"; }).join("") + "</ul></div>";
 
     var q = r.reviewQueue || {};
@@ -1621,8 +1644,8 @@
         '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.security.colWhat", "What")) + "</th><th>" + esc(T(c, "site.admin.security.colBy", "By")) + "</th><th>" + esc(T(c, "site.admin.security.colWhen", "When")) + "</th><th>" + esc(T(c, "site.admin.security.colDetail", "Detail")) + "</th><th>" + esc(T(c, "site.admin.security.colStatus", "Status")) + "</th><th></th></tr></thead><tbody>" +
         q.items.map(function (i) {
           var key = esc(i.kind + "|" + i.subjectId);
-          var hist = i.reviews.map(function (v) { return esc(v.decision) + " " + esc(T(c, "site.admin.security.by", "by")) + " " + esc(v.reviewedBy) + " (" + esc(v.at) + ")" + (v.note ? ": " + esc(v.note) : ""); }).join("<br>");
-          return "<tr><td>" + esc(i.kind === "break-glass" ? T(c, "site.admin.security.breakGlass", "Break-glass") : i.action) + "</td><td>" + esc(i.actor) + "</td><td>" + esc(i.at || "") + "</td><td>" + esc(i.detail) + "</td><td>" +
+          var hist = i.reviews.map(function (v) { return esc(v.decision) + " " + esc(T(c, "site.admin.security.by", "by")) + " " + who(c, v.reviewedBy, names) + " (" + esc(v.at) + ")" + (v.note ? ": " + esc(v.note) : ""); }).join("<br>");
+          return "<tr><td>" + esc(i.kind === "break-glass" ? T(c, "site.admin.security.breakGlass", "Break-glass") : i.action) + "</td><td>" + who(c, i.actor, names) + "</td><td>" + esc(i.at || "") + "</td><td>" + esc(i.detail) + "</td><td>" +
             esc(i.status === "awaiting" ? T(c, "site.admin.security.awaiting", "Awaiting review") : i.status === "appropriate" ? T(c, "site.admin.security.appropriate", "Reviewed, appropriate") : T(c, "site.admin.security.followUp", "Needs follow-up")) + (hist ? '<br><span class="quiet">' + hist + "</span>" : "") + "</td><td>" +
             (i.ownAction ? '<span class="quiet">' + esc(T(c, "site.admin.security.ownAction", "Your own action: another administrator must review it.")) + '</span>'
               : '<button type="button" class="btn ghost" data-sec-review="' + key + '|appropriate">' + esc(T(c, "site.admin.security.appropriate", "Reviewed, appropriate")) + '</button> ' +
@@ -1955,8 +1978,14 @@
   function renderSecurity(c, body) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
     body.innerHTML = securityReviewHtml(c, null);
+    var names = null;
     return c.api("/ward/security-report" + q + "&days=7").then(function (r) {
-      body.innerHTML = securityReviewHtml(c, r && r.ok ? r : { failed: true, message: refusal(c, r) });
+      // LT-35: the people named, looked up once before the review is drawn; a failed lookup still shows no raw id.
+      var ids = r && r.ok ? secActorIds(r) : [];
+      if (!ids.length) return r;
+      return c.api("/ward/actor-names" + q + "&ids=" + encodeURIComponent(ids.slice(0, 100).join(","))).then(function (nr) { names = nr && nr.ok ? nr.names : null; return r; }, function () { return r; });
+    }).then(function (r) {
+      body.innerHTML = securityReviewHtml(c, r && r.ok ? r : { failed: true, message: refusal(c, r) }, names);
       if (!r || !r.ok) return;
       body.querySelectorAll("[data-sec-review]").forEach(function (b) {
         b.onclick = function () {
@@ -1977,7 +2006,7 @@
           out.innerHTML = auditRowsHtml(c, null);
           c.api("/ward/audit-rows" + q + "&ids=" + encodeURIComponent(b.getAttribute("data-sec-rows"))).then(function (x) {
             b.disabled = false;
-            out.innerHTML = auditRowsHtml(c, x && x.ok ? x : { failed: true, message: refusal(c, x) });
+            out.innerHTML = auditRowsHtml(c, x && x.ok ? x : { failed: true, message: refusal(c, x) }, names);
           }, function () { b.disabled = false; out.innerHTML = auditRowsHtml(c, { failed: true, message: T(c, "site.admin.err.noResponse", "No response from the server.") }); });
         };
       });
@@ -2043,8 +2072,8 @@
     return '<div class="card"><h2>' + esc(T(c, "site.admin.health.title", "System health")) + '</h2><p class="quiet">' + esc(T(c, "site.admin.health.checkedAt", "Checked {at}. Each check gives up after {ms} ms and counts as down.", { at: localAt(r.generatedAt), ms: r.timeoutMs })) + "</p>" + head +
       '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.health.colDependency", "Dependency")) + "</th><th>" + esc(T(c, "site.admin.health.colStatus", "Status")) + "</th><th>" + esc(T(c, "site.admin.health.colChecked", "Checked")) + "</th><th>" + esc(T(c, "site.admin.health.colMeaning", "What it means")) + "</th></tr></thead><tbody>" +
       r.dependencies.map(function (d) {
-        // LT-34: never set up (the platform owner's pending choice) reads as that, not as a bare Down.
-        var label = d.setup === "platform" ? T(c, "site.admin.health.notSetUp", "Not set up yet") : healthLabel(c, d.status);
+        // LT-34: never set up (the platform owner's pending choice, or MaiK with no approved model) reads as that, not as a bare Down.
+        var label = d.setup ? T(c, "site.admin.health.notSetUp", "Not set up yet") : healthLabel(c, d.status);
         return '<tr class="' + (d.status === "up" ? "" : "warn") + '"><td>' + esc(d.name) + "</td><td><b>" + esc(label || T(c, "site.admin.health.unknown", "Unknown")) + "</b></td><td>" + esc(localAt(d.checkedAt)) + "</td><td>" +
           (d.consequence ? EN(c, esc(d.consequence)) + "<br>" : "") + (d.reason ? '<span class="quiet">' + EN(c, esc(d.reason)) + "</span>" : "") + "</td></tr>";
       }).join("") + '</tbody></table></div><button type="button" class="btn ghost" id="healthRecheck">' + esc(T(c, "site.admin.health.checkAgain", "Check again")) + "</button></div>";

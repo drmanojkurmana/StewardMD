@@ -2905,7 +2905,8 @@ export async function onRequest(context) {
           const m = found.get(id);
           // The name the hospital recorded first; the audit screen (staff.admin) may still read a sign-in email.
           const label = m ? (staffIdentity(m).name || [m.email, m.identity].find((v) => v && !notALabel(v)) || null) : null;
-          names[id] = m ? { name: label, role: m.role || null } : { name: null, role: null };
+          // LT-35: with the employee id, as the chart names staff (staff-identity.js); never an account id or a mobile.
+          names[id] = m ? { name: label, employeeId: staffIdentity(m).employeeId, role: m.role || null } : { name: null, employeeId: null, role: null };
         }
         return json({ ok: true, names }, 200, request);
       }
@@ -2940,6 +2941,8 @@ export async function onRequest(context) {
       if (sub === "system-health" && method === "GET") {
         const r = await systemHealthReport({
           repository: deps.recordDeps.repository, tenantId: mig.tenantId, env, maik: (wsqCfg && wsqCfg.maik) || null, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
+          // LT-34: MaiK is probed over the same transport maik-ask uses.
+          fetchImpl: env && typeof env.WSQ_MAIK_FETCH === "function" ? env.WSQ_MAIK_FETCH : undefined,
           anchorStores: anchorStoresFor(env), orgAuditChain: orgAuditChain(env, wOrgId),
           orgProbe: () => ORG.getOrg(env, wOrgId),
           documentProbe: async () => { const d = await documentStorageProbe(env); return { ...d, checkedAt: d.state !== "not_configured" && docProbeCache ? new Date(docProbeCache.at).toISOString() : null }; },
@@ -4239,7 +4242,7 @@ export async function onRequest(context) {
         const item = list && list.items.find((i) => i.id === sb.itemId);
         if (!item) return json({ ok: false, error: "not_found", message: "No such seed item." }, 404, request);
         if (sb.attest !== true) return json({ ok: false, error: "attestation_required", message: "Confirm that you have reviewed this item's content." }, 422, request);
-        if (String(sb.signatory || "").trim() !== SEED.SIGNATORY) return json({ ok: false, error: "wrong_signatory", message: "Clinical seed data is signed off by " + SEED.SIGNATORY + " (owner decision D10)." }, 422, request);
+        if (String(sb.signatory || "").trim() !== SEED.SIGNATORY) return json({ ok: false, error: "wrong_signatory", message: "Clinical seed data is signed off by " + SEED.SIGNATORY + "." }, 422, request);
         const hash = await SEED.fingerprint(item.content);
         if (sb.contentHash !== hash) return json({ ok: false, error: "content_changed", message: "This item's content is not what was shown for signing. Reload and review it again." }, 409, request);
         const at = new Date().toISOString();

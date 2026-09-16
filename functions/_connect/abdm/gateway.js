@@ -75,7 +75,7 @@ export function makeGateway({ baseUrl, cmId, hiuId, hipId, clientId: defaultClie
   const clock = now || (() => new Date());
 
   async function session() {
-    if (trafficHeld || productionHeld(baseUrl)) throw new AbdmError(trafficHeld || "production ABDM traffic is held until India-region hosting exists (owner decision A2)");
+    if (trafficHeld || productionHeld(baseUrl)) throw new AbdmError(trafficHeld || "production ABDM traffic is held until India-region hosting exists");
     try {
       const cached = await kv.get(tokKey);
       if (cached) { const c = JSON.parse(cached); if (c.exp > clock().getTime()) return c.token; }

@@ -74,8 +74,10 @@
     id = String(id || "");
     if (!id || id.indexOf("system:") === 0) return c.esc(T(c, "site.audit.actorSystem", "System"));
     var n = names && names[id];
-    if (n && n.name) return EN(c, c.esc(n.name)) + (n.role ? ", " + EN(c, c.esc(n.role)) : "");
-    if (/^(fb|cfa|ghis):/.test(id) || /^\+?[\d\s().-]{7,}$/.test(id)) return c.esc(T(c, "site.audit.actorUnnamed", "Staff account, name not set")) + (n && n.role ? ", " + EN(c, c.esc(n.role)) : "");
+    // LT-35: the employee id beside the name, as a chart names staff ("Name (employee id)"). Also used by the security review.
+    var emp = n && n.employeeId ? " (" + EN(c, c.esc(n.employeeId)) + ")" : "";
+    if (n && n.name) return EN(c, c.esc(n.name)) + emp + (n.role ? ", " + EN(c, c.esc(n.role)) : "");
+    if (/^(fb|cfa|ghis):/.test(id) || /^\+?[\d\s().-]{7,}$/.test(id)) return c.esc(T(c, "site.audit.actorUnnamed", "Staff account, name not set")) + emp + (n && n.role ? ", " + EN(c, c.esc(n.role)) : "");
     return EN(c, c.esc(id));
   }
   /** "_wardsynq_bed_claim" -> "bed claim": the application's own bookkeeping types, in words. Record types stay as they are. */

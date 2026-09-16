@@ -343,9 +343,21 @@ function publicMember(id, f) {
   const m = M.membership(withId(id, f));
   return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, regionProfile: m.regionProfile, alertMobile: m.alertMobile, displayName: m.displayName, employeeId: m.employeeId, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
 }
+/* EVERY member, in pages of 300 (includes disabled so admin can restore; active flag shown). One query of 300 used to be
+ * the whole answer, so a staff member beyond the first 300 was not named on a chart: an Access sign-in id ("cfa:" +
+ * email hash) cannot be read directly by id and is only matched against this list (staff-identity.js).
+ * ponytail: 20 pages (6000 members) is the ceiling; a hospital near it wants an identity index instead of a scan. */
+const MEMBER_PAGE = 300;
 export async function listMembers(env, orgId) {
-  const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });
-  return r.map((x) => publicMember(x.id, x.fields));   // includes disabled so admin can restore; active flag shown
+  const out = [];
+  let after = null;
+  for (let page = 0; page < 20; page++) {
+    const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: MEMBER_PAGE, orderByName: true, ...(after ? { startAfter: after } : {}) });
+    for (const x of r) out.push(publicMember(x.id, x.fields));
+    if (r.length < MEMBER_PAGE) break;
+    after = r[r.length - 1].name;
+  }
+  return out;
 }
 /* wUpdate UPSERTS. Without this check a mistyped identity on disable/restore/PIN/password/reset
  * created a brand-new member row, and a PIN or password on it was a working sign-in (getMemberAuth

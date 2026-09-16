@@ -228,3 +228,51 @@ test("icon ligature names are never catalog words, and no count is pluralised by
   assert.doesNotMatch(w, /wsBlock\(wT\("[^"]*", "[^"]*"\), wT/, "an icon argument went through the catalog");
   assert.doesNotMatch(w, /\? "s" : ""\)|\? "" : "s"\)|"y" : "ies"/, "a plural glued as a suffix: use a key for one and a key for many");
 });
+
+// ---- server status codes rendered untranslated as text (WardSynQ live retest item) --------------------------------
+/* A server enum code (o.state, inv.status, r.urgency, ...) reaching esc() directly, with no *Word()/WORDS+wTEn
+ * lookup in between, is either a CSS class token (never read as a word: fine, unlisted) or English leaking onto a
+ * translated screen exactly as this item describes. A field expression is allowlisted below ONLY when it is not a
+ * class token, with the reason it is deliberately left raw. A general parse of "is this inside a class attribute" is
+ * not attempted (no HTML-in-JS parser here) - instead, a hit whose nearby text contains `class=` is trusted as a
+ * class token, matching every real class-attribute usage in this file (`class="w-st ' + esc(x.state) + '"` and
+ * `class="st-' + esc(x.state) + '"` are the only two shapes ward.js uses). Anything else must be in ALLOW or the
+ * test fails - so a NEW raw esc(x.status) rendered as text fails here until it is wrapped or allowlisted with why. */
+const RAW_STATUS_FIELD = /esc\(([A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\[[^\]]+\])*\.(?:state|status|kind|priority|urgency|phase|stage|outcome|decision|disposition|category|type|mode|level|severity|result))\)/g;
+const RAW_STATUS_ALLOW = {
+  "x.mode": "ICU ventilator mode (VENT_MODES in functions/_wardsynq/icu-care.js): fixed clinical abbreviations (VC-AC, PSV, HFNC, ...), not English prose words",
+  "l.type": "line type: free text the clinician types (placeholder \"e.g. UVC, PICC\" at wLineType), not a server enum",
+  "r.level": "a stock quantity number (inventory/pharmacy stock level), not a status code",
+  "hit.result": "antibiotic susceptibility result (SUSCEPTIBILITY_RESULTS in functions/_wardsynq/pathology-report.js): the standard S/I/R/SDD microbiology codes, not English words",
+  "b.kind": "BOTTLENECK_WORDS[b.kind] already covers the mapped word; this is its own explicit lang=\"en\" fallback for a kind the map does not know",
+  "s.level": "a stock quantity inside a report row already wrapped '<span lang=\"en\">...", // the report intentionally marks its own values English
+  "c.stage": "a wound stage (mostly the digits 1-4) interpolated through wTH's own wrap list, which already marks it lang=\"en\" by the file's own convention for values not treated as translatable words",
+  "c.bill.state": "BILL_WORDS[c.bill.state] already covers every known code; this is its own explicit fallback for one it does not know",
+};
+test("ward.js: a raw server state/status/kind code is never rendered as visible text (only as a CSS class, or explicitly allowlisted with why)", () => {
+  const w = read("ward.js"), lines = w.split("\n");
+  const fresh = [];
+  lines.forEach((line, i) => {
+    RAW_STATUS_FIELD.lastIndex = 0;
+    let m;
+    while ((m = RAW_STATUS_FIELD.exec(line))) {
+      const before = line.slice(Math.max(0, m.index - 30), m.index);
+      if (/class=/.test(before)) continue; // a CSS class token, never read as a word
+      if (HAS(RAW_STATUS_ALLOW, m[1])) continue;
+      fresh.push("ward.js:" + (i + 1) + " esc(" + m[1] + ")");
+    }
+  });
+  assert.deepEqual(fresh, [], "a server status/kind code rendered as raw text: wrap it in a *Word()/WORDS+wTEn lookup, or allowlist it above with why");
+  // a stale allowlist entry (the field no longer appears raw at all) would hide a real fix going forward
+  const stillRaw = new Set();
+  lines.forEach((line) => {
+    RAW_STATUS_FIELD.lastIndex = 0;
+    let m;
+    while ((m = RAW_STATUS_FIELD.exec(line))) {
+      const before = line.slice(Math.max(0, m.index - 30), m.index);
+      if (!/class=/.test(before)) stillRaw.add(m[1]);
+    }
+  });
+  for (const field of Object.keys(RAW_STATUS_ALLOW)) assert.ok(stillRaw.has(field), "allowlist entry no longer raw in ward.js, remove it: " + field);
+});
+function HAS(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
