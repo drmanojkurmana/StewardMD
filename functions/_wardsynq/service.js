@@ -296,6 +296,12 @@ const RESOURCE_TYPES = Object.freeze([
    * One record per case, a revision being a new version with a reason. The anaesthetist's clinical
    * commitment, so EMR_TREAT's unrestricted write covers it; no grant change. */
   "PreAnaestheticCheckup",
+  /* A stay's expected discharge date as the treating team states it (expected-discharge.js): one record per
+   * encounter, each change a new version with a reason. A plan, never a prediction. EMR_TREAT writes it. */
+  "ExpectedDischarge",
+  /* A request to move a patient to another ward or unit, and the receiving unit's answer (transfer-request.js):
+   * requested, accepted or declined, bed assigned, completed or cancelled, each step a new version. */
+  "TransferRequest",
   /* Antenatal history and gestation (Task 2.4): gravida, para, LMP/EDD, risk factors. One current
    * episode per patient, versioned like everything else - a delivery is the fact that changes para,
    * recorded through migrate-maternity.js's recordDelivery(), never edited by hand elsewhere. */

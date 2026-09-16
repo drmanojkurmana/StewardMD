@@ -177,7 +177,9 @@ function grantForCaps(caps) {
      * administrative act as registering the patient - it is not a clinical decision and asking a
      * doctor to enter a telephone number is how the field stays empty. It grants nothing clinical:
      * a receptionist still cannot write an observation or a note. */
-    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson"];
+    /* TransferRequest joined 2026-09-16 (transfer-request.js): answering a transfer request, assigning the bed and
+     * moving the patient are the same bed-management acts /ward/transfer already grants here; asking is emr.treat. */
+    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson", "TransferRequest"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,

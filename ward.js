@@ -631,7 +631,8 @@
            * the patient in front of them. */
           '<span class="w-bed-b"><b>' + esc(p.name || p.mrn || p.patientId) + "</b><small>" +
             esc(p.mrn && p.name ? p.mrn + " · " : "") + esc(wTEn(CLASS_LABEL[p.class]) || p.class || "") +
-            (day ? " · " + esc(day) : "") + " · " + wTH("ward.admitted", "admitted {admittedAt}", { admittedAt: when(p.admittedAt) }, "admittedAt") + "</small></span>" +
+            (day ? " · " + esc(day) : "") + " · " + wTH("ward.admitted", "admitted {admittedAt}", { admittedAt: when(p.admittedAt) }, "admittedAt") +
+            (p.expectedDischarge || p.expectedDischarge === false ? " · " + eddLine(p.expectedDischarge) : "") + "</small></span>" +
           ms("chevron_right") + "</button>";
       }).join("");
       return '<div class="w-wardrow"><h4>' + (w === "No ward assigned" ? wTH("ward.no-ward-assigned", "No ward assigned") : esc(w)) + "<small>" + byWard[w].length + (byWard[w].length === 1 ? " " + wTH("ward.patient", "patient") : " " + wTH("ward.patients", "patients")) + "</small></h4>" + rows + "</div>";
@@ -772,7 +773,7 @@
       "<input id=\"wWard\" type=\"text\" placeholder=\"" + wTA("ward.ward-blank-all", "Ward (blank = all)") + "\" value=\"" + esc(state.ward) + '">' +
       "<button class=\"w-btn ghost\" data-w-act=\"setward\" type=\"button\">" + wTH("ward.apply", "Apply") + "</button></div>" +
       alertCoverHtml(state) +
-      '<div id="wRoster">' + rosterHtml(state) + "</div></div>";
+      '<div id="wRoster">' + rosterHtml(state) + "</div></div>" + transfersBoardHtml(state);
 
     return '<div class="w-split-layout">' +
       '<aside class="w-col-tools">' + leftTools + '</aside>' +
@@ -2575,6 +2576,97 @@
     return true;
   }
 
+  /* EXPECTED DISCHARGE AND TRANSFER REQUEST, on the stay's own chart (expected-discharge.js, transfer-request.js).
+   * The date is what the treating team states, never a prediction; a change needs a reason and every earlier date
+   * stays in the history. A transfer is asked for here and answered on the wards' own boards (the ward list).
+   * st.stayPlan: null = loading; { edd: {current, history} | false, xfer: [requests] | false }. */
+  function xferStatusWord(s) {
+    switch (s) {
+      case "requested": return wT("ward.xfer-st-requested", "Waiting for the receiving unit");
+      case "accepted": return wT("ward.xfer-st-accepted", "Accepted, waiting for a bed");
+      case "bed-assigned": return wT("ward.xfer-st-bed", "Bed assigned, ready to move");
+      case "completed": return wT("ward.xfer-st-completed", "Moved");
+      case "declined": return wT("ward.xfer-st-declined", "Declined");
+      case "cancelled": return wT("ward.xfer-st-cancelled", "Cancelled");
+      default: return String(s || "");
+    }
+  }
+  function xferUrgencyWord(u) {
+    return u === "emergency" ? wT("ward.xfer-urg-emergency", "Emergency") : u === "urgent" ? wT("ward.xfer-urg-urgent", "Urgent") : u === "routine" ? wT("ward.xfer-urg-routine", "Routine") : String(u || "");
+  }
+  function xferRoute(q) {
+    var to = (q.to && q.to.ward) || "?";
+    return esc((q.from && q.from.ward) || "?") + (q.from && q.from.bed ? " " + wTH("ward.bed2", "bed {bed}", { bed: esc(q.from.bed) }, "bed") : "") + " &rarr; " + esc(to) +
+      (q.to && q.to.unit === "icu" ? " " + wTH("ward.xfer-icu-tag", "(ICU)") : "") + (q.bed && q.bed.bed ? " " + wTH("ward.bed2", "bed {bed}", { bed: esc(q.bed.bed) }, "bed") : q.to && q.to.requestedBed ? " " + wTH("ward.xfer-asked-bed", "(asked for bed {bed})", { bed: esc(q.to.requestedBed) }) : "");
+  }
+  function eddLine(e) {
+    if (e === false) return '<span class="w-st overdue">' + wTH("ward.edd-unread", "expected discharge not readable") + "</span>";
+    if (!e) return "";
+    return (e.overdue ? '<span class="w-st overdue">' + wTH("ward.edd-overdue", "Discharge overdue: expected {date}", { date: esc(e.date) }) + "</span>"
+      : e.dueToday ? '<span class="w-st due">' + wTH("ward.edd-today", "Expected discharge today") + "</span>"
+      : wTH("ward.edd-on", "expected discharge {date}", { date: esc(e.date) }));
+  }
+  function stayPlanCard(state) {
+    var p = state.stayPlan;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("event") + "<h3>" + wTH("ward.stay-plan-title", "Expected discharge and transfer") + "</h3>" +
+      '<button class="w-ic" data-w-act="stayplanload" title="' + wTA("ward.refresh", "Refresh") + '">' + ms("refresh") + "</button></div>";
+    if (p == null) return head + '<p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    var edd = p.edd, cur = edd && edd.current;
+    var eddHtml = edd === false
+      ? '<p class="w-hint warn">' + ms("error") + wTH("ward.edd-failed", "The expected discharge date could not be loaded. Do not read this as not set.", null, "", 1) + "</p>"
+      : '<div class="w-sub"><h4>' + ms("event_available") + wTH("ward.edd-title", "Expected discharge date") + "</h4>" +
+        (cur ? "<p" + (cur.overdue ? ' class="w-hint warn"' : "") + "><b>" + esc(cur.date) + "</b> " + eddLine(cur) + "</p>" +
+          '<p class="w-dt-times">' + wTH("ward.edd-set-by", "Set {at} by {who}", { at: when(cur.setAt), who: staffWho(cur.setBy) }) + (cur.reason ? " &middot; " + esc(cur.reason) : "") + "</p>"
+          : '<p class="w-empty">' + wTH("ward.edd-none", "No expected discharge date is set.") + "</p>") +
+        '<div class="w-grid"><label class="w-f"><span>' + (cur ? wTH("ward.edd-new-date", "New expected date") : wTH("ward.edd-date", "Expected date")) + '</span><input id="wEddDate" type="date"></label>' +
+        '<label class="w-f"><span>' + (cur ? wTH("ward.edd-reason-required", "Reason for the change") : wTH("ward.edd-reason-optional", "Note (optional)")) + '</span><input id="wEddReason" type="text" autocomplete="off"></label></div>' +
+        '<button class="w-btn go" data-w-act="eddsave">' + ms("save") + (cur ? wTH("ward.edd-revise", "Change the date") : wTH("ward.edd-set", "Set the date")) + "</button>" +
+        (edd.history && edd.history.length > 1 ? '<ul class="w-mini">' + edd.history.slice(1).map(function (h) {
+          return "<li><b>" + esc(h.expectedDate) + "</b><span>" + when(h.setAt) + " &middot; " + staffWho(h.setBy) + (h.reason ? " &middot; " + esc(h.reason) : "") + "</span></li>";
+        }).join("") + "</ul>" : "") + "</div>";
+    var xfer = p.xfer;
+    var open = xfer && xfer.filter(function (q) { return q.status === "requested" || q.status === "accepted" || q.status === "bed-assigned"; })[0];
+    var xferHtml = '<div class="w-sub"><h4>' + ms("swap_horiz") + wTH("ward.xfer-title", "Transfer request") + "</h4>" +
+      (xfer === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.xfer-failed", "Transfer requests could not be loaded. Do not read this as none.", null, "", 1) + "</p>"
+        : open ? '<p class="w-hint' + (open.urgency === "routine" ? "" : " warn") + '">' + ms("hourglass_empty") + "<b>" + esc(xferStatusWord(open.status)) + "</b> &middot; " + xferRoute(open) + " &middot; " + esc(xferUrgencyWord(open.urgency)) + "</p>" +
+            '<p class="w-dt-times">' + wTH("ward.xfer-asked", "Asked {at} by {who}: {reason}", { at: when(open.requestedAt), who: staffWho(open.requestedBy), reason: esc(open.reason) }) + "</p>" +
+            '<p class="w-hint">' + ms("info") + wTH("ward.xfer-answered-on-board", "The receiving unit answers on its ward list, under Transfer requests.") + "</p>" +
+            '<button class="w-btn ghost sm" data-w-act="xfercancel:' + esc(open.id) + '">' + ms("close") + wTH("ward.xfer-cancel", "Cancel the request") + "</button>"
+        : '<div class="w-grid">' +
+          '<label class="w-f"><span>' + wTH("ward.xfer-to-unit", "Move to") + '</span><select id="wXferUnit"><option value="ward">' + wTH("ward.xfer-unit-ward", "Another ward") + '</option><option value="icu">' + wTH("ward.xfer-unit-icu", "ICU") + "</option></select></label>" +
+          '<label class="w-f"><span>' + wTH("ward.xfer-to-ward", "Ward or unit") + '</span><input id="wXferWard" type="text" autocomplete="off"></label>' +
+          '<label class="w-f"><span>' + wTH("ward.xfer-to-bed", "Bed asked for (optional)") + '</span><input id="wXferBed" type="text" autocomplete="off"></label>' +
+          '<label class="w-f"><span>' + wTH("ward.xfer-urgency", "Urgency") + '</span><select id="wXferUrgency"><option value="">' + wTH("ward.choose", "Choose&hellip;") + '</option><option value="routine">' + esc(xferUrgencyWord("routine")) + '</option><option value="urgent">' + esc(xferUrgencyWord("urgent")) + '</option><option value="emergency">' + esc(xferUrgencyWord("emergency")) + "</option></select></label>" +
+          "</div>" +
+          '<label class="w-f"><span>' + wTH("ward.xfer-reason", "Reason for the transfer") + '</span><input id="wXferReason" type="text" autocomplete="off"></label>' +
+          '<button class="w-btn" data-w-act="xferrequest">' + ms("send") + wTH("ward.xfer-request", "Request transfer") + "</button>") +
+      (xfer && xfer.length ? '<ul class="w-mini">' + xfer.filter(function (q) { return q !== open; }).map(function (q) {
+        return "<li><b>" + esc(xferStatusWord(q.status)) + "</b><span>" + xferRoute(q) + " &middot; " + when(q.requestedAt) +
+          (q.declineReason ? " &middot; " + esc(q.declineReason) : q.cancelReason ? " &middot; " + esc(q.cancelReason) : "") + "</span></li>";
+      }).join("") + "</ul>" : "") + "</div>";
+    return head + eddHtml + xferHtml + "</div>";
+  }
+  /* The ward list's own board: every open request this ward sends or receives, with the step each one is waiting for.
+   * st.transfers: null = loading, false = could not be read, [] = none. The server decides who may take each step. */
+  function transfersBoardHtml(state) {
+    var t = state.transfers;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>" + wTH("ward.xfer-board-title", "Transfer requests") + "</h3></div>";
+    if (t == null) return head + '<p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    if (t === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.xfer-failed", "Transfer requests could not be loaded. Do not read this as none.", null, "", 1) + "</p></div>";
+    if (!t.length) return head + '<p class="w-empty">' + wTH("ward.xfer-board-none", "No open transfer requests.") + "</p></div>";
+    return head + '<ul class="w-mini">' + t.map(function (q) {
+      var act = function (verb, icon, label) { return '<button class="w-btn ghost tiny" data-w-act="' + verb + ":" + esc(q.id) + '">' + ms(icon) + label + "</button>"; };
+      var next = q.status === "requested" ? act("xferaccept", "check", wTH("ward.xfer-accept", "Accept")) + act("xferdecline", "block", wTH("ward.xfer-decline", "Decline"))
+        : q.status === "accepted" ? act("xferbed", "bed", wTH("ward.xfer-assign-bed", "Assign bed"))
+        : act("xferexec", "move_up", wTH("ward.xfer-execute", "Move the patient")) + act("xferbed", "bed", wTH("ward.xfer-change-bed", "Change bed"));
+      return '<li class="w-mini-row"><div><b>' + esc(q.name || q.mrn || wT("ward.patient-not-readable", "patient not readable")) + "</b>" + (q.name && q.mrn ? " &middot; " + esc(q.mrn) : "") +
+        ' <span class="w-st' + (q.urgency === "routine" ? "" : " overdue") + '">' + esc(xferUrgencyWord(q.urgency)) + "</span>" +
+        '<div class="w-dt-times">' + xferRoute(q) + " &middot; " + esc(xferStatusWord(q.status)) + " &middot; " + when(q.requestedAt) + " &middot; " + esc(q.reason) + "</div>" +
+        '<div class="w-actions">' + next + act("xfercancel", "close", wTH("ward.cancel", "Cancel")) +
+        (q.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(q.encounterId) + '">' + wTH("ward.open-chart", "Open chart") + "</button>" : "") + "</div></div></li>";
+    }).join("") + "</ul></div>";
+  }
+
   function chartView(state) {
     var s = state.sel || {};
     var isEd = s.class === "ED";
@@ -2600,7 +2692,7 @@
     return header +
       criticalsCard(state) + (isEd ? (triageCard(state) + edTopCards) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
       (isPediatric ? ageBandCard(state) + growthCard(state) : "") + (apgarChart(s) ? apgarCard(state) : "") +
-      problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
+      problemsCard(state) + (isEd ? "" : stayPlanCard(state)) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
       (isIcu ? icuTrendsCard(state) + icuScoresCard(state) + icuAbgCard(state) + icuVentCard(state) + icuSedationCard(state) + icuPressorCard(state) + icuRoundCard(state) : "") +
       fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
@@ -5627,8 +5719,24 @@
 
       '<div class="w-card"><div class="w-card-h">' + ms("task_alt") + "<h3>" + wTH("ward.discharge", "Discharge") + "</h3></div>" +
       '<div class="w-actions">' + fc("dischargeCandidates", f.dischargeCandidates, f.dischargeCandidates === 1 ? wT("ward.stay-with-nothing-outstanding-right-now", "stay with nothing outstanding right now") : wT("ward.stays-with-nothing-outstanding-right-now", "stays with nothing outstanding right now")) + "</div>" +
-      "<p class=\"w-hint\">" + wTH("ward.this-is-a-live-fact-not", "This is a live fact, not a predicted discharge date - no expected-discharge field exists in this record.") + "</p>" +
+      "<p class=\"w-hint\">" + wTH("ward.flow-candidates-fact", "Nothing outstanding right now is a live fact, not a prediction.") + "</p>" +
       (openRows ? '<ul class="w-mini">' + openRows + "</ul>" : "") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("event_busy") + "<h3>" + wTH("ward.flow-overdue-title", "Past the expected discharge date") + "</h3></div>" +
+      (f.overdueDischarges == null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.flow-overdue-failed", "Expected discharge dates could not be read. Do not read this as none overdue.", null, "", 1) + "</p>"
+        : f.overdueDischarges.length ? '<ul class="w-mini">' + f.overdueDischarges.map(function (s) {
+          return "<li><b>" + esc(s.name || s.mrn || wT("ward.patient-not-readable", "patient not readable")) + "</b><span>" + esc(s.ward || "") + (s.bed ? " &middot; " + wTH("ward.bed2", "bed {bed}", { bed: esc(s.bed) }, "bed") : "") + " &middot; " + eddLine(s.expectedDischarge) + "</span>" +
+            (s.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(s.encounterId) + "\">" + wTH("ward.open-chart", "Open chart") + "</button>" : "") + "</li>";
+        }).join("") + "</ul>"
+        : '<p class="w-empty">' + wTH("ward.flow-overdue-none", "No open stay is past the expected discharge date its team set.") + "</p>") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>" + wTH("ward.xfer-board-title", "Transfer requests") + "</h3></div>" +
+      (f.pendingTransfers == null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.xfer-failed", "Transfer requests could not be loaded. Do not read this as none.", null, "", 1) + "</p>"
+        : f.pendingTransfers.length ? '<ul class="w-mini">' + f.pendingTransfers.map(function (q) {
+          return "<li><b>" + esc(q.name || q.mrn || wT("ward.patient-not-readable", "patient not readable")) + "</b><span>" + xferRoute(q) + " &middot; " + esc(xferUrgencyWord(q.urgency)) + " &middot; " + esc(xferStatusWord(q.status)) + "</span>" +
+            (q.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(q.encounterId) + "\">" + wTH("ward.open-chart", "Open chart") + "</button>" : "") + "</li>";
+        }).join("") + "</ul>"
+        : '<p class="w-empty">' + wTH("ward.xfer-board-none", "No open transfer requests.") + "</p>") + "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>" + wTH("ward.recent-transfers", "Recent transfers") + "</h3></div>" +
       (transferRows ? '<ul class="w-mini">' + transferRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.none-in-the-last-24-hours", "None in the last 24 hours.") + "</p>") + "</div>" +
@@ -8876,7 +8984,7 @@
   function loadWard(afterList) {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; if (r.labels) st.labels = r.labels; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover()]); })
+      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; if (r.labels) st.labels = r.labels; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover(), loadTransfers()]); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-ward", "Could not reach the ward."); st.loaded = true; paint(); });
   }
   function loadDuty() {
@@ -10502,6 +10610,74 @@
    * BUG-MU08T4RL-GU0N: the destination used to be typed into a prompt beside a fixed list of department
    * names, so a transfer "to Cardiology" wrote a ward nobody had. It is picked on the bed board now: the
    * hospital's real wards, each named with its department, free beds only. */
+  function loadStayPlan() {
+    var s = st.sel; if (!s || !s.encounterId) return Promise.resolve();
+    var q = "?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(s.encounterId);
+    var plan = { edd: null, xfer: null };
+    return Promise.all([
+      apiGet("/ward/expected-discharge-history" + q).then(function (r) { plan.edd = r && r.ok ? { current: r.current || null, history: r.history || [] } : false; }, function () { plan.edd = false; }),
+      apiGet("/ward/transfer-requests" + q).then(function (r) { plan.xfer = r && r.ok ? (r.requests || []).slice().sort(function (a, b) { return String(b.requestedAt).localeCompare(String(a.requestedAt)); }) : false; }, function () { plan.xfer = false; }),
+    ]).then(function () { if (st.sel !== s) return; st.stayPlan = plan; paint(); });
+  }
+  function loadTransfers() {
+    st.transfers = st.transfers || null;
+    return apiGet("/ward/transfer-requests?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
+      .then(function (r) { st.transfers = r && r.ok ? (r.requests || []) : false; paint(); })
+      .catch(function () { st.transfers = false; paint(); });
+  }
+  function eddSave() {
+    var s = st.sel, p = st.stayPlan; if (!s || !p || !p.edd) return;
+    var date = val("wEddDate"), reason = val("wEddReason"), cur = p.edd.current;
+    if (!date) { st.err = wT("ward.edd-pick-date", "Pick the expected discharge date."); paint(); return; }
+    var body = { orgId: st.orgId, encounterId: s.encounterId, expectedDate: date, reason: reason };
+    if (cur) body.expectedVersion = cur.version;
+    st.busy = true; paint();
+    apiPost("/ward/expected-discharge", body)
+      .then(function (r) { if (settle(r, cur ? wT("ward.edd-revised-note", "Expected discharge date changed.") : wT("ward.edd-set-note", "Expected discharge date set."))) loadStayPlan(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.edd-could-not-save", "Could not save the expected discharge date."); paint(); });
+  }
+  function xferRequest() {
+    var s = st.sel; if (!s) return;
+    var body = { orgId: st.orgId, encounterId: s.encounterId, toUnit: val("wXferUnit") || "ward", toWard: val("wXferWard"), toBed: val("wXferBed"), urgency: val("wXferUrgency"), reason: val("wXferReason") };
+    st.busy = true; paint();
+    apiPost("/ward/transfer-request", body)
+      .then(function (r) { if (settle(r, wT("ward.xfer-requested-note", "Transfer requested. The receiving unit answers on its ward list."))) loadStayPlan(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.xfer-could-not-request", "Could not request the transfer."); paint(); });
+  }
+  function xferFind(id) {
+    var all = [].concat(st.transfers || [], (st.stayPlan && st.stayPlan.xfer) || []);
+    return all.filter(function (q) { return q.id === id; })[0] || null;
+  }
+  // After a step: refresh whichever screen it was taken from, and the ward list when a patient moved.
+  function xferAfter(moved) { if (st.view === "chart" && st.sel) loadStayPlan(); loadTransfers(); if (moved) loadWard(); }
+  function xferStep(route, id, extra, okMsg, moved) {
+    var q = xferFind(id); if (!q) return Promise.resolve();
+    var body = Object.assign({ orgId: st.orgId, requestId: id, expectedVersion: q.version }, extra || {});
+    st.busy = true; paint();
+    return apiPost(route, body)
+      .then(function (r) {
+        if (r && r.error === "request_not_closed") { st.busy = false; st.err = wT("ward.xfer-not-closed", "The patient was moved, but the request could not be marked complete. Refresh; do not move the patient again."); xferAfter(true); return; }
+        if (settle(r, okMsg)) xferAfter(moved); else { xferAfter(false); }
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.xfer-step-failed", "Could not record that step of the transfer."); paint(); });
+  }
+  function xferAct(cmd, id) {
+    var q = xferFind(id); if (!q) return;
+    var who = esc(q.name || q.mrn || "");
+    if (cmd === "xferaccept") askFor({ icon: "check", ok: wTH("ward.xfer-accept", "Accept"), title: wTH("ward.xfer-accept-q", "Accept {who} into {ward}?", { who: who, ward: esc(q.to && q.to.ward) }), fields: [] },
+      function () { return xferStep("/ward/transfer-respond", id, { decision: "accept" }, wT("ward.xfer-accepted-note", "Transfer accepted. Assign a bed next.")); });
+    else if (cmd === "xferdecline") askFor({ icon: "block", ok: wTH("ward.xfer-decline", "Decline"), title: wTH("ward.xfer-decline-q", "Decline the transfer of {who}?", { who: who }),
+      fields: [{ key: "reason", type: "text", label: wTH("ward.xfer-decline-why", "Why it is declined"), required: wT("ward.xfer-decline-why-needed", "Say why the transfer is declined.") }] },
+      function (v) { return xferStep("/ward/transfer-respond", id, { decision: "decline", reason: v.reason }, wT("ward.xfer-declined-note", "Transfer declined.")); });
+    else if (cmd === "xferbed") askFor({ icon: "bed", ok: wTH("ward.xfer-assign-bed", "Assign bed"), title: wTH("ward.xfer-bed-q", "Which bed on {ward}?", { ward: esc(q.to && q.to.ward) }),
+      fields: [{ key: "bed", type: "text", value: (q.bed && q.bed.bed) || (q.to && q.to.requestedBed) || "", label: wTH("ward.xfer-bed-label", "Bed"), required: wT("ward.xfer-bed-needed", "Name the bed.") }] },
+      function (v) { return xferStep("/ward/transfer-assign-bed", id, { bed: v.bed }, wT("ward.xfer-bed-note", "Bed assigned.")); });
+    else if (cmd === "xferexec") askFor({ icon: "move_up", ok: wTH("ward.xfer-execute", "Move the patient"), title: wTH("ward.xfer-exec-q", "Move {who} to {ward}, bed {bed} now?", { who: who, ward: esc(q.to && q.to.ward), bed: esc(q.bed && q.bed.bed) }), fields: [] },
+      function () { return xferStep("/ward/transfer-execute", id, {}, wT("ward.xfer-moved-note", "Patient moved."), true); });
+    else if (cmd === "xfercancel") askFor({ icon: "close", ok: wTH("ward.xfer-cancel", "Cancel the request"), title: wTH("ward.xfer-cancel-q", "Cancel the transfer request for {who}?", { who: who }),
+      fields: [{ key: "reason", type: "text", label: wTH("ward.xfer-cancel-why", "Why it is cancelled"), required: wT("ward.xfer-cancel-why-needed", "Say why the request is cancelled.") }] },
+      function (v) { return xferStep("/ward/transfer-cancel", id, { reason: v.reason }, wT("ward.xfer-cancelled-note", "Transfer request cancelled.")); });
+  }
   function transfer() {
     var s = st.sel; if (!s) return;
     st.edAdmitPending = false; st.admitTarget = null; st.boardDept = "";
@@ -13722,7 +13898,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.timeline = null; st.activeMeds = null;
       st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.apgar = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
-      st.icu = null; st.flowsheetFailed = false; st.resusBundles = null;
+      st.icu = null; st.flowsheetFailed = false; st.resusBundles = null; st.stayPlan = null;
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra
        * steps, and it is the one this panel could most easily cause. */
@@ -13734,6 +13910,7 @@
       if (p.class === "MATERNITY") loadMaternity();
       if (p.class === "PEDIATRICS" || p.class === "NICU") { st.growth = null; loadAgeBand(); loadGrowth(); }
       if (apgarChart(p)) loadApgar(p.patientId);
+      if (p.class !== "ED") loadStayPlan();
       if (p.class === "NICU") loadLines();
       return;
     }
@@ -13800,6 +13977,10 @@
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
     if (cmd === "flowload") { loadFlowCommand(); return; }
+    if (cmd === "stayplanload") { st.stayPlan = null; paint(); loadStayPlan(); return; }
+    if (cmd === "eddsave") { eddSave(); return; }
+    if (cmd === "xferrequest") { xferRequest(); return; }
+    if (cmd === "xferaccept" || cmd === "xferdecline" || cmd === "xferbed" || cmd === "xferexec" || cmd === "xfercancel") { xferAct(cmd, arg); return; }
     if (cmd === "twin") { twinOpen(); return; }
     if (cmd === "twinload") { loadTwin(); return; }
     if (cmd === "twindrill") { var dp = arg.split("."); st.twin = st.twin || {}; st.twin.drill = { section: dp[0], key: dp[1] || "" }; paint(); return; }

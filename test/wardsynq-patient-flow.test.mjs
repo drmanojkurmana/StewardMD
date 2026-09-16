@@ -172,8 +172,10 @@ test("EVERY NUMBER TRACES BACK TO A REAL RECORD: ED arrival, admissions pending,
   assert.ok(kinds.includes("stays_with_open_items"));
   assert.ok(!("severity" in (f.bottlenecks[0] || {})), "no invented severity field - a plain count only");
 
-  // Never a fabricated field: no expected/predicted discharge date exists anywhere in the response.
-  assert.equal(JSON.stringify(f).indexOf("xpectedDischarge"), -1);
+  // Never a fabricated field: no predicted discharge date. An expected date appears only when a clinician stated one
+  // (expected-discharge.js), and none was stated here, so nothing is overdue and no stay carries a date.
+  assert.deepEqual(f.overdueDischarges, []);
+  assert.ok(!/"expectedDischarge":\{/.test(JSON.stringify(f)), "no stay carries a date nobody set");
   assert.equal(JSON.stringify(f).indexOf("redictedDischarge"), -1);
 });
 

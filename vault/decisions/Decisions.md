@@ -6927,3 +6927,17 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
   proceeds (pacAcknowledgement, 5+ characters). Not a hard block: emergencies proceed without a checkup, and the
   team decides. A read failure refuses (502) rather than passing. What the checkup said, or that there was none,
   and the reason given are kept on the sign-in, so a later revision cannot rewrite what the team saw.
+
+## 2026-09-16 Expected discharge date and transfer requests are their own records (branch gap-clinical-2)
+
+- **ExpectedDischarge**, one per stay, set by emr.treat; a change is a new version with a reason and the version it
+  replaces. It is the team's stated plan, not a prediction (patient-flow.js still invents none). Overdue = the stay is
+  open and the date is before today on the hospital clock (timeZone, else utcOffsetMinutes, else IST). A date before
+  today is refused. Shown on the ward list row, the chart, and the command center (overdueDischarges; null = unread).
+- **TransferRequest**: requested -> accepted | declined -> bed-assigned -> completed, or cancelled; each step a new
+  version with who/when (and a reason on decline/cancel), one open request per stay. Asking is emr.treat; the other
+  steps are queue.add like /ward/transfer, and TransferRequest joined the queue.add write grant. The move itself is
+  transferPatient unchanged (bed collision and bed-state checks), after checking the patient is still where the
+  request found them. A move whose request could not then be closed returns 502 request_not_closed, transferred:true.
+- **Not checked:** that the person accepting belongs to the receiving ward (the server has no ward membership). An
+  ICU transfer request moves the location through the same route and does not change the stay's class.

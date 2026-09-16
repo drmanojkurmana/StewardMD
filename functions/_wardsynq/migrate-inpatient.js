@@ -69,6 +69,7 @@ async function verifyApprovalRef(svc, ref, drug, ctx) {
 import { isActive as emergencyIsActive } from "./emergency-mode.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
 import { getWardByName, getBedByName, updateBed, listWards, listBeds, listDepartments } from "../_opd_org_store.js";
+import { expectedDischargeMap, eddStatus, hospitalToday } from "./expected-discharge.js";
 
 const IPD = "IPD";
 // ICU joined 2026-09-08 (Task 2.2). An admission is still ONE act through this ONE file - a ward
@@ -443,6 +444,11 @@ async function listWard(request, env, ctx) {
     const roster = await svc.list("Patient", ENCOUNTER_CAP);
     byId = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
   } catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
+  /* Each stay's expected discharge date (expected-discharge.js), with overdue worked out on the hospital's clock.
+   * null = none set; false on the row = could not be read, which the screen must not show as "none set". */
+  let edds = null;
+  try { edds = await expectedDischargeMap(svc); } catch (e) { edds = false; }
+  const today = hospitalToday(Date.now(), ctx.clock);
   // BUG-MU0710W4-04KD: the ward list filters by department.
   let deptOf = new Map();
   if (ctx.orgId) { try { deptOf = await departmentNames(env, ctx.orgId, await listWards(env, ctx.orgId)); } catch { deptOf = new Map(); } }
@@ -457,6 +463,7 @@ async function listWard(request, env, ctx) {
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,
       department: (e.location && deptOf.get(e.location.ward)) || null,
       admittedAt: e.periodStart || null, attendingId: e.attendingId || null, version: e.version,
+      expectedDischarge: edds === false ? false : eddStatus(edds.get(e.id) || null, today),
     };
   });
   /* The hospital's country, so the ward screen can LABEL a temperature box with the unit this

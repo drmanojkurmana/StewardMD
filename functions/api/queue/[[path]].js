@@ -143,6 +143,8 @@ import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { patientFlow } from "../../_wardsynq/patient-flow.js";
+import { setExpectedDischarge, expectedDischargeHistory } from "../../_wardsynq/expected-discharge.js";
+import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
@@ -1219,6 +1221,12 @@ export async function onRequest(context) {
         "alert-cover": CAPS.QUEUE_VIEW,
         // Moving a patient between beds is the same administrative act as admitting them to one.
         transfer: CAPS.QUEUE_ADD, beds: CAPS.QUEUE_VIEW,
+        /* The expected discharge date is the treating team's plan: emr.treat to set or revise, emr.view to read.
+         * Asking for a transfer is a clinical decision (emr.treat); answering it, assigning the bed, moving the
+         * patient and cancelling are the bed-management acts /ward/transfer is already gated on (queue.add). */
+        "expected-discharge": CAPS.EMR_TREAT, "expected-discharge-history": CAPS.EMR_VIEW,
+        "transfer-request": CAPS.EMR_TREAT, "transfer-respond": CAPS.QUEUE_ADD, "transfer-assign-bed": CAPS.QUEUE_ADD,
+        "transfer-execute": CAPS.QUEUE_ADD, "transfer-cancel": CAPS.QUEUE_ADD, "transfer-requests": CAPS.EMR_VIEW,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
          * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
          * authority as vitals. Disposition closes the visit - the SAME capability discharge already
@@ -1841,7 +1849,9 @@ export async function onRequest(context) {
       const mig = await wsqForcedMigration(env, wOrg);
       if (!mig) return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }, 409, request);
       if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
-      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg };
+      // clock: the hospital's wall clock for calendar facts (an expected discharge date that has passed).
+      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg,
+        clock: { offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330, timeZone: (wsqCfg && wsqCfg.timeZone) || "" } };
       /* BACKGROUND WORK ON ORDINARY TRAFFIC: escalate unacknowledged critical results and drain the
        * outbox, at most once per two minutes per hospital, after the response is on its way. No
        * scheduler is required for a hospital that is in use; ops-tick.js is callable by one as well. */
@@ -3953,6 +3963,38 @@ export async function onRequest(context) {
       }
       if (sub === "transfer" && method === "POST") {
         const r = await transferPatient(request, env, { ...deps, encounterId: body.encounterId, ward: body.ward, bed: body.bed, reason: body.reason, movedAt: body.movedAt, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "expected-discharge" && method === "POST") {
+        const r = await setExpectedDischarge(request, env, { ...deps, encounterId: body.encounterId, expectedDate: body.expectedDate, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "expected-discharge-history" && method === "GET") {
+        const r = await expectedDischargeHistory(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-request" && method === "POST") {
+        const r = await requestTransfer(request, env, { ...deps, encounterId: body.encounterId, toUnit: body.toUnit, toWard: body.toWard, toBed: body.toBed, reason: body.reason, urgency: body.urgency, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-respond" && method === "POST") {
+        const r = await respondTransfer(request, env, { ...deps, requestId: body.requestId, decision: body.decision, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-assign-bed" && method === "POST") {
+        const r = await assignTransferBed(request, env, { ...deps, requestId: body.requestId, bed: body.bed, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-execute" && method === "POST") {
+        const r = await executeTransfer(request, env, { ...deps, requestId: body.requestId, expectedVersion: body.expectedVersion, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-cancel" && method === "POST") {
+        const r = await cancelTransfer(request, env, { ...deps, requestId: body.requestId, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-requests" && method === "GET") {
+        const r = await listTransferRequests(request, env, { ...deps, ward: url.searchParams.get("ward") || "", encounterId: url.searchParams.get("encounterId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "beds" && method === "GET") {

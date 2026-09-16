@@ -4,19 +4,17 @@
  * Every number here is derived live from a real record; nothing is stored, nothing is scored.
  *
  * NOT BUILT, STATED - not silent gaps:
- *   - NO expected/predicted discharge date. Grepping the whole encounter/discharge model finds
- *     none - nobody has specified what one would mean here, and inventing a clinical estimate of
- *     when a patient SHOULD leave is exactly the kind of judgment this codebase's own conventions
- *     (never invent a clinical threshold) forbid. "Discharge candidates" below means stays with
- *     ZERO open items right now (migrate-discharge.js's own pendingItems(), unchanged) - a fact,
- *     never a prediction.
+ *   - NO predicted discharge date. The EXPECTED discharge date shown here is the one the treating
+ *     team stated (expected-discharge.js, 2026-09-16), and "overdue" means that date has passed with
+ *     the stay still open - a calendar fact. Nothing estimates when a patient should leave.
+ *     "Discharge candidates" below means stays with ZERO open items right now
+ *     (migrate-discharge.js's own pendingItems(), unchanged) - a fact, never a prediction.
  *   - NO bottleneck-severity/escalation algorithm. "Bottlenecks" is a plain ranking of counts this
  *     file already computes (most unplaced patients, longest ED wait) - never a traffic light or a
  *     threshold nobody configured.
- *   - NO transfer-approval workflow. Nothing in this codebase models a pending transfer as its own
- *     resource (transferPatient() is an immediate, atomically-guarded action, not a request). This
- *     file's "transfer requests" is RECENT TRANSFERS - the movedAt/movedFrom/moveReason already
- *     written to the Encounter by every real transfer - stated as such everywhere it is shown.
+ *   - Transfer requests (transfer-request.js, 2026-09-16) are their own records now; the open ones
+ *     are listed as pendingTransfers. "recentTransfers" is still the moves that HAPPENED - the
+ *     movedAt/movedFrom/moveReason every real transfer writes to the Encounter.
  *
  * LINKS, DOES NOT REBUILD: listEd() (migrate-ed.js), bedBoard() (migrate-inpatient.js) and
  * admissionWaitingList() (admission-request.js) are called unchanged for ED/bed/waiting-list
@@ -33,6 +31,8 @@ import { admissionWaitingList } from "./admission-request.js";
 import { pendingItems, lengthOfStayDays } from "./migrate-discharge.js";
 import { listBeds } from "../_opd_org_store.js";
 import { patientLabels, labelKey } from "./patient-label.js";
+import { expectedDischargeMap, eddStatus, hospitalToday } from "./expected-discharge.js";
+import { listTransferRequests } from "./transfer-request.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const RECENT_TRANSFER_MS = 24 * 60 * 60 * 1000;
@@ -97,6 +97,9 @@ async function patientFlow(request, env, ctx) {
 
   const nowIso = str(ctx.now) || new Date().toISOString();
   const nowMs = Date.parse(nowIso) || Date.now();
+  // false = the stated dates could not be read: overdue is then unknown, never zero.
+  const edds = await expectedDischargeMap(svc).catch(() => false);
+  const today = hospitalToday(nowMs, ctx.clock);
   const openStays = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN);
 
   const stays = openStays.map((e) => {
@@ -112,6 +115,7 @@ async function patientFlow(request, env, ctx) {
       lengthOfStayDays: e.periodStart ? lengthOfStayDays(e.periodStart, nowIso) : null,
       openItems: pending.length,
       movedAt: e.movedAt || null, movedFrom: e.movedFrom || null, moveReason: e.moveReason || null,
+      expectedDischarge: edds === false ? false : eddStatus(edds.get(e.id) || null, today),
     };
   });
 
@@ -122,11 +126,15 @@ async function patientFlow(request, env, ctx) {
   const recentTransfers = stays.filter((s) => s.movedAt && (nowMs - Date.parse(s.movedAt)) <= RECENT_TRANSFER_MS)
     .sort((a, b) => String(b.movedAt).localeCompare(String(a.movedAt)));
 
-  const [ed, beds, waiting, masterBeds] = await Promise.all([
+  const overdueDischarges = edds === false ? null : stays.filter((s) => s.expectedDischarge && s.expectedDischarge.overdue)
+    .sort((a, b) => a.expectedDischarge.date.localeCompare(b.expectedDischarge.date));
+
+  const [ed, beds, waiting, masterBeds, transfers] = await Promise.all([
     listEd(request, env, ctx),
     bedBoard(request, env, ctx),
     admissionWaitingList(request, env, ctx),
     ctx.orgId ? listBeds(env, ctx.orgId).catch(() => []) : Promise.resolve([]),
+    listTransferRequests(request, env, { ...ctx, ward: "", encounterId: "" }),
   ]);
 
   const bedStates = bedStateCounts(masterBeds);
@@ -150,7 +158,7 @@ async function patientFlow(request, env, ctx) {
    * stay's current location. Only when asked (ctx.withPatients, the command center's own route): the digital twin
    * reuses this computation at executive level, where no name or MRN belongs. */
   const dischargeRows = [...staysWithOpenItems.slice(0, 50), ...dischargeCandidates.slice(0, DRILL_CAP)];
-  const labels = ctx.withPatients ? await patientLabels(svc, dischargeRows.map((s) => ({ patientId: s.patientId }))) : null;
+  const labels = ctx.withPatients ? await patientLabels(svc, [...dischargeRows, ...(overdueDischarges || [])].map((s) => ({ patientId: s.patientId }))) : null;
   const named = (s) => { if (!labels) return s; const l = labels.get(labelKey({ patientId: s.patientId })) || {}; return { ...s, name: l.name || null, mrn: l.mrn || null }; };
   const candidatesDrill = drillList(dischargeCandidates);
   if (labels) candidatesDrill.items = candidatesDrill.items.map((it) => { const n = named(it); return { ...n, label: [n.name, n.mrn].filter(Boolean).join(" · ") || null }; });
@@ -163,6 +171,12 @@ async function patientFlow(request, env, ctx) {
     dischargeCandidates: dischargeCandidates.length,
     staysWithOpenItems: staysWithOpenItems.slice(0, 50).map(named),
     recentTransfers: recentTransfers.slice(0, 50),
+    // null = could not be read (never an empty list). Names only on the command center's own route.
+    overdueDischarges: overdueDischarges ? overdueDischarges.slice(0, 50).map(named) : null,
+    pendingTransfers: transfers && transfers.ok ? transfers.requests.slice(0, 50).map((q) => ({
+      requestId: q.id, encounterId: q.encounterId, status: q.status, urgency: q.urgency, from: q.from, to: q.to,
+      requestedAt: q.requestedAt, ...(ctx.withPatients ? { name: q.name, mrn: q.mrn } : {}),
+    })) : null,
     bottlenecks,
     /* P1.13 drill-down: the patients BEHIND each headline count, capped and saying so. */
     drill: {
