@@ -399,6 +399,16 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
    * the server keeps it as the integer `rows`. Digits -> #, any address -> [email]. */
   const scrubReason = (r) => typeof r === 'string' ? r.replace(/\S+@\S+/g, '[email]').replace(/\d{3,}/g, '#').slice(0, 200) : r;
   for (const v of observedViews) { if (v && v.verified && typeof v.verified.reason === 'string') v.verified.reason = scrubReason(v.verified.reason); }
+  /* THE SERVER REFUSES MORE THAN 40 VIEWS OUTRIGHT (cleanObservedViews, functions/api/connect/agent),
+   * and mergeObservedViews only ever ADDS ("look again" may not delete a demonstrated view), so a long
+   * run with several redo walks can grow past that cap. api.discovery is not wrapped in a try below, so
+   * an unhandled throw there loses the ENTIRE run. Trim to 40 first: proven views are worth the most,
+   * so they are kept ahead of everything else, and each group otherwise keeps its original order. */
+  if (observedViews.length > 40) {
+    const proven = observedViews.filter((v) => v && v.proof && v.proof.status === 'proven');
+    const rest = observedViews.filter((v) => !(v && v.proof && v.proof.status === 'proven'));
+    observedViews = proven.concat(rest).slice(0, 40);
+  }
   const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews, proofs: book.trace });
   notify('COMPILING', { steps: explored.steps.length, events: collector.raw().length, found });
 

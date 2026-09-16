@@ -1500,7 +1500,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
      * opens one on tap and that tap is the call the runtime needs (GHIS: a render id, a result id).
      * Open the first row once per list kind, capture what it shows as "<kind>-detail" with the
      * call it made, and come back. */
-    if (caps.exploreDetails === true && view && view.rowsSelector && !view.block && DETAIL_PARENTS.includes(view.resourceHint) && !detailSeen.has(view.resourceHint) && clicks < maxClicks) {
+    if (caps.exploreDetails === true && view && view.rowsSelector && !view.block && DETAIL_PARENTS.includes(view.resourceHint) && !detailSeen.has(view.resourceHint) && clicks < maxClicks && observedViews.length < maxViews) {
       detailSeen.add(view.resourceHint);
       const beforePath = await whereAmI();
       if (typeof client.drainRequests === 'function') { try { await client.drainRequests(); } catch {} }
