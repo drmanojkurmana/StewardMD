@@ -891,18 +891,16 @@ function showIPWL(){
   document.getElementById('ipwl').style.display = '';
 }
 // The blank Search: fills the table by XHR-style delayed render, exactly as GHIS's GetIPWL answers.
-// Rebuilds the <table> node itself (a fresh element, not an innerHTML swap of the same one) - the same
-// destroy-and-recreate a jQuery DataTables reinit does on a live GHIS page.
+// Swaps the contents of the SAME <table> element, which is what the live IP worklist does: pressing
+// #btnsearch on ghis.gitam.edu took the table from 0 to 10 rows with the node identity unchanged
+// (owner's session, Chrome, 2026-09-17). A fixture that replaced the node instead would pass even
+// when the crawl cannot see an in-place refresh.
 function doPress(){
   window.__testClicks++;
   setTimeout(function(){
-    var oldTable = document.getElementById('ipwl_table');
-    var newTable = document.createElement('table');
-    newTable.id = 'ipwl_table';
-    newTable.innerHTML =
+    document.getElementById('ipwl_table').innerHTML =
       '<thead><tr><th>Patient ID</th><th>Patient name</th><th>Age</th></tr></thead>' +
       '<tbody><tr><td>1</td><td>A</td><td>30</td></tr><tr><td>2</td><td>B</td><td>40</td></tr><tr><td>3</td><td>C</td><td>50</td></tr></tbody>';
-    oldTable.parentNode.replaceChild(newTable, oldTable);
   }, 50);
 }
 </script>

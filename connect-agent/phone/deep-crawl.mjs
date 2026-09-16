@@ -427,7 +427,11 @@ function CRAWL_RAW_TABLE() {
   // 1 = inside (or is) a subtree the last click added/re-styled, or newly added / newly visible.
   function changedBy(t) {
     if (!obs) return 0;
-    for (var c = 0; c < obs.changed.length; c++) { if (obs.changed[c] === t || obs.changed[c].contains(t)) return 1; }
+    /* A LIST THAT REFILLS ITSELF CHANGED. Checking only the table and its ancestors misses the common
+     * case: a blank Search that swaps the rows INSIDE the same <table> (live GHIS IP worklist went 0 ->
+     * 10 rows with the node identity unchanged, owner's session 2026-09-17), which read as "unchanged"
+     * and threw the freshly filled list away. A change anywhere inside the table is the table changing. */
+    for (var c = 0; c < obs.changed.length; c++) { if (obs.changed[c] === t || obs.changed[c].contains(t) || t.contains(obs.changed[c])) return 1; }
     for (var s = 0; s < obs.tables.length; s++) {
       if (obs.tables[s].el === t) return (!obs.tables[s].visible && isVisible(t)) ? 1 : 0;
     }
