@@ -108,7 +108,8 @@ test("Admin card: shows the sign-off and what is missing, and saves exactly the 
     failures: [{ loopId: "wsq-crit-x", level: "due", at: "2026-09-14T10:00:00Z", reason: "NO_RECIPIENT" }], noDevice: [{ identity: "o~nurse1", times: 2 }],
     sms: { ready: false, missing: ["This hospital's DLT template name for critical-result SMS is not set."], senderId: "", templateName: "" } };
   const html = C.html(c, status);
-  assert.match(html, /approved by Dr Manoj Kurmana on 2026-09-14 \(owner decision O5\)/);
+  assert.match(html, /approved by Dr Manoj Kurmana on 2026-09-14/);
+  assert.ok(!/owner decision/.test(html), "internal decision references are not shown in Admin Center (LT-35)");
   assert.match(html, /id="alEnabled" checked/);
   assert.match(html, /SMS fallback is not configured/);
   assert.match(html, /template name for critical-result SMS is not set/);

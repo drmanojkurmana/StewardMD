@@ -52,7 +52,11 @@ test("a signal shows its rule, evidence links, acknowledgement state, and the in
   assert.match(html, /Not built: readmission-risk/);
   assert.match(html, /Nothing has been paged/);
   const acked = board({ ok: true, rows: [row({ signals: [{ ...SIGNAL, incidentSource: null, acknowledgements: [{ by: "cfa:nurse", at: "2026-09-13T08:10:00.000Z", note: "Doctor informed" }] }] })] });
-  assert.match(acked, /Acknowledged by cfa:nurse/);
+  // Owner 2026-09-16: staff are named, never shown by account id. Until the identity lookup answers, the
+  // acknowledger reads "a clinician account"; the raw cfa: id never reaches the screen.
+  assert.match(acked, /Acknowledged by <span class="w-who">a clinician account<\/span>/);
+  assert.ok(!/cfa:nurse/.test(acked.replace(/data-[\w-]+="[^"]*"/g, "")), "the raw account id is not shown");
+  assert.match(acked, /Doctor informed/);
   assert.ok(!/incidentsignal:/.test(acked), "no incident action without a source the incident route accepts");
 });
 
