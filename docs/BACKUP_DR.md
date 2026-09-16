@@ -94,3 +94,22 @@ cross-account replication for the DR copy.
 ## Ownership
 - Weekly: `scripts/backup-d1.sh` (automate in CI). Monthly: verify Firestore export ran + a spot restore.
 - Before any risky migration/deploy: take a manual D1 export + note the Time Travel bookmark.
+
+## 5. WardSynQ scheduled backups (per hospital)
+The worker's hourly cron (`0 * * * *`) POSTs `/api/queue/ops/backup-all` with the admin token. For each WardSynQ
+hospital with a **backup destination** (Admin Center > Integrations > Backup destination):
+- The first run of each UTC day takes a backup: a full on the first run of a month, otherwise an incremental from
+  the last run's record sequence. Files are encrypted per hospital (AES-256-GCM, key derived from the document key)
+  and stored as `wardsynq-backups/<tenant>/<yyyy-mm>/<run>.jsonl.aesgcm`, read back and SHA-256 verified, and
+  recorded as a `BackupRun` record (audited). A failed run is retried the next hour.
+- Retention is set on the connector (default 30 daily, 12 monthly); expired files are deleted only when no kept
+  restore point needs them, each deletion audited.
+- Weekly, the newest restore point is restored into a scratch in-memory copy and compared (files, checksums,
+  version chains, counts per resource type, audit-chain head); the result is an automated `RestoreTest`.
+- System health shows the last successful backup and size, the last restore test and the last failure; a failure
+  is pushed to the hospital's administrators once a day.
+**Destinations.** `s3`: the hospital's own S3-compatible bucket (AWS S3, R2, MinIO, Wasabi), credentials sealed.
+`platform`: this deployment's object store, which needs the `DOC_S3_*` settings, i.e. owner decision S1 (the
+storage bucket). Until one is configured, System health reads "Backups are not running: no backup destination is
+configured". The bucket holder cannot read the files; restoring one needs WardSynQ (the document key) and
+`backup.js verifyPlan` before any import. SFTP is not supported.
