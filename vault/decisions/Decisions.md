@@ -7430,3 +7430,27 @@ Source: the legal opinion of 17 Sep 2026 (sections A and H; research awaiting a 
   revisedEstimateRef is given; no estimate recorded, or a ledger past READ_CAP, WARNS instead (refusing a morphine delivery
   on a count that cannot be made is a patient harm). r.52V(3): a controlled transfer-out naming toInstitution needs
   controllerApprovalRef. H1 and X registers are views over the ledger (view=h1, view=schedx).
+
+## 2026-09-17 Patient, payer, insurer, TPA and GST recipient kept apart; the recipient decided per payer contract (branch gst-parties)
+Owner's binding legal guidance item 6 (s.2(93) CGST Act; TTK Healthcare TPA; Karnataka HC, Healthcare Global Enterprises
+Ltd, April 2026). Supersedes the `gst.recipientOfCashlessClaims` part of the gst-packages entry above.
+- The payer master is the existing payer connector (Admin, Integrations, Payers; payer-connectors.js), not a new record:
+  every payer, whatever its adapter, carries its CONTRACT in its versioned, audited settings (payer-contracts.js): payerKind
+  (insurer, tpa, government_scheme, corporate, other), legalName, GSTIN and address, insurerRef (a TPA's principal), and
+  gstRecipient (patient | contracting_party) with gstBasisType (ca_opinion | contract_clause), gstBasisRef, gstBasisDate.
+  Choosing the contracting party is refused without the basis (an opinion needs its date) and, for a non-TPA, without
+  valid recipient details. payerKind is not required on save, so legacy connectors keep working; they resolve as "kind not
+  recorded" with a warning.
+- Resolution (pure, resolveParties): no payer = self-pay, the patient. Insurer or TPA with no determination: the patient,
+  source default_cashless. Scheme, corporate, other or kind not recorded with no determination: NOT DETERMINED, treated as
+  the patient, warning on every screen. A TPA's contracting party is the insurer it acts for (never the TPA); an unknown
+  insurer is a warning, never a guess. The retired global value is read only when saved as "payer" (it needed a CA opinion)
+  and only for contracts with no determination (source legacy_global, basis the global opinion); a saved "patient" is the
+  old default and is not a determination. The setting can no longer be set; a save keeps the saved value.
+- Stays: new record `StayPayer` (one per inpatient stay, versioned, billing.charge writes, billing.view reads, like Claim),
+  POST /ward/stay-payer, read inside GET /ward/claims (stayPayers, null when unreadable). Claims and pre-authorisations
+  keep their payerId and are shown with parties resolved from the contract NOW (they are not GST documents). An invoice
+  COPIES the parties when raised (and via POST /ward/invoice-parties, which replaced /ward/invoice-buyer): the buyer on its
+  GST documents is the resolved recipient, so Tax Invoice vs Bill of Supply, the BOS number and the IRN follow the
+  recipient, never the payer. A contracting-party recipient with incomplete GST details refuses the bill. The manual
+  buyer entry (typing a GSTIN on a bill) is gone: a buyer that is not a payer contract is not offered.

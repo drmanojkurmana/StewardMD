@@ -11,10 +11,14 @@
  * Adapters: "fhir-claim" (the existing generic FHIR R4 Claim adapter), "nhcx" (the HCX protocol: JWE to the
  * payer's certificate, answers through the verified callback in nhcx.js; see wardsynq-nhcx-adapter.js), "manual" (the hospital's own portal, email
  * or paper process: queued, never sent). The credential is opened at send time only, for that payer.
+ *
+ * gst-parties (2026-09-17): every payer, whatever its adapter, also carries its CONTRACT (payer-contracts.js): its
+ * kind, legal name and GSTIN, the insurer a TPA acts for, and who the contract makes the GST recipient, with the basis.
  */
 
 import { importEncryptionKey, importVerifyKey, importDecryptionKey, generateToken } from "../../wardsynq/wardsynq-nhcx-adapter.js";
 import { makeSafeFetch } from "../_connect/onboard/net.js";
+import { CONTRACT_FIELDS, contractOf, contractProblem, resolveParties, partiesRecord } from "./payer-contracts.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const REF = { key: "ref", label: "Payer reference (used on claims)", type: "text", required: true };
@@ -34,12 +38,12 @@ const NHCX_SECRETS = Object.freeze([
 
 function numbersValid(settings) {
   for (const f of RULES) if (settings[f.key] != null && settings[f.key] !== "" && !(Number(settings[f.key]) >= 0)) return `${f.label} must be a number.`;
-  return null;
+  return contractProblem(settings, settings.ref);
 }
 
 const PAYER_KIND = Object.freeze({
-  label: "Insurance payers and TPAs", singleton: false,
-  help: "Each payer your hospital claims from. A claim names the payer by its reference. Payer rules are warnings only; they never block care or change a claim.",
+  label: "Payers: insurers, TPAs, government schemes and corporates", singleton: false,
+  help: "Each payer your hospital claims from, with its contract. A claim names the payer by its reference. Payer rules are warnings only; they never block care or change a claim. The GST recipient is decided on each contract: choosing the contracting party needs your chartered accountant's basis.",
   providers: {
     "fhir-claim": {
       label: "FHIR R4 Claim endpoint",
@@ -50,7 +54,7 @@ const PAYER_KIND = Object.freeze({
         { key: "providerName", label: "Hospital name as the payer knows it", type: "text" },
         { key: "authType", label: "Authentication", type: "select", required: true, options: [["bearer", "Bearer token"], ["header", "Named header"], ["none", "None"]] },
         { key: "headerName", label: "Header name (for a named header)", type: "text" },
-        ...RULES],
+        ...RULES, ...CONTRACT_FIELDS],
       secrets: [{ key: "token", label: "Token or API key" }],
       validate(settings, present) {
         const auth = str(settings.authType);
@@ -69,7 +73,7 @@ const PAYER_KIND = Object.freeze({
         { key: "recipientCode", label: "The payer's participant code", type: "text", required: true },
         { key: "username", label: "NHCX user name (for the access token)", type: "text", required: true },
         { key: "providerName", label: "Hospital name as the payer knows it", type: "text", required: true },
-        ...RULES],
+        ...RULES, ...CONTRACT_FIELDS],
       secrets: NHCX_SECRETS,
       validate(settings, present) {
         const need = NHCX_SECRETS.filter((f) => !(present && present[f.key])).map((f) => f.label);
@@ -88,7 +92,7 @@ const PAYER_KIND = Object.freeze({
     },
     manual: {
       label: "Manual (portal, email or paper)",
-      settings: [REF, ...RULES],
+      settings: [REF, ...RULES, ...CONTRACT_FIELDS],
       secrets: [],
       validate: (settings) => numbersValid(settings),
     },
@@ -109,15 +113,22 @@ function payersFromConnectors(records) {
       auth: authType === "none" ? "none" : { type: authType, headerName: str(s.headerName) || undefined, connectorSecret: (r.secretsEnc && r.secretsEnc.token) || null },
       // NHCX opens several sealed values at send time (nhcx.js); the seals stay server-side, like the token above.
       ...(r.provider === "nhcx" ? { connectorId: r.id, username: str(s.username) || undefined, connectorSecrets: r.secretsEnc || {} } : {}),
-      rules, source: "connector",
+      rules, contract: contractOf(s), source: "connector",
     };
   });
+}
+
+/** PURE. The parties a payer connector's contract resolves to, active or not, against every payer connector. */
+function connectorParties(rec, records, gst) {
+  const all = payersFromConnectors((records || []).map((r) => (r && r.kind === "payer" ? { ...r, active: true } : r)));
+  return partiesRecord(resolveParties({ payerRef: str(rec && rec.settings && rec.settings.ref), payers: all, gst }), null);
 }
 
 /** PURE. Connector payers first; an org-document payer with the same id is shadowed, never merged. */
 function mergePayers(fromConnectors, fromOrg) {
   const ids = new Set(fromConnectors.map((p) => p.id));
-  return [...fromConnectors, ...(Array.isArray(fromOrg) ? fromOrg : []).filter((p) => p && !ids.has(str(p.id)))];
+  // An org-document payer's contract, if it has one, is read from the same keys as a connector's settings.
+  return [...fromConnectors, ...(Array.isArray(fromOrg) ? fromOrg : []).filter((p) => p && !ids.has(str(p.id))).map((p) => ({ ...p, contract: contractOf(p) }))];
 }
 
-export { PAYER_KIND, NHCX_SECRETS, payersFromConnectors, mergePayers };
+export { PAYER_KIND, NHCX_SECRETS, payersFromConnectors, mergePayers, connectorParties };

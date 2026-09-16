@@ -6,7 +6,8 @@
  * tariff); functions/_wardsynq/gst-settings.js; the TAN-based GSTIN of a government TDS deductor.
  * Routes: GET/POST /api/queue/org/gst-settings (negative authorization, the chartered accountant's opinion, the reason,
  * the audit row), POST /api/queue/ward/invoice on a package stay (the carved-out room line, the refusals), POST
- * /api/queue/ward/invoice-buyer (who receives a cashless claim).
+ * /api/queue/ward/invoice-parties (who receives a cashless claim: the payer contract decides, gst-parties 2026-09-17;
+ * the full party tests are test/wardsynq-gst-parties.test.mjs).
  *
  * node --test --experimental-test-module-mocks --test-concurrency=1 test/wardsynq-gst-packages.test.mjs
  */
@@ -43,7 +44,7 @@ const day = (code, enc, n, extra) => ({ code, sourceType: "Encounter", sourceId:
 /* ---- pure ----------------------------------------------------------------------------------------- */
 
 test("settings: every default is the review's safest reading; a non-default needs the chartered accountant's opinion", () => {
-  assert.deepEqual(DEF, { pkgRoomValuation: "published_tariff", recipientOfCashlessClaims: "patient", placeOfSupply: "where_performed", intensiveCareUnits: "named_and_specialty",
+  assert.deepEqual(DEF, { pkgRoomValuation: "published_tariff", recipientOfCashlessClaims: null, placeOfSupply: "where_performed", intensiveCareUnits: "named_and_specialty",
     roomChargeBasis: "bed_tariff", dischargeMedsAsComposite: "taxed", gstTdsDeductorSchemes: [], aggregateTurnoverRs: null, caOpinionRef: null, caOpinionDate: null });
   assert.deepEqual(G.readGstSettings({ gst: { pkgRoomValuation: "whole_package_exempt", gstTdsDeductorSchemes: ["pmjay", "nhs"] } }).pkgRoomValuation, "published_tariff", "an unknown value reads as the default");
   assert.match(G.validateGstSettings({ placeOfSupply: "recipient_state" }, null).errors.caOpinionRef, /chartered accountant's written opinion reference and its date/);
@@ -184,21 +185,24 @@ test("negative authorization: GET/POST /api/queue/org/gst-settings need staff.ad
 
 test("POST /api/queue/org/gst-settings: a non-default needs the CA's opinion, a change needs a reason, the save is audited by setting and read back", async () => {
   seed({ tariff: { KEEP: { amount: 1 } } });
-  const noCa = await as(ADMIN, "/org/gst-settings", "POST", { orgId: ORG_ID, reason: "x", settings: { recipientOfCashlessClaims: "payer" } });
+  const noCa = await as(ADMIN, "/org/gst-settings", "POST", { orgId: ORG_ID, reason: "x", settings: { placeOfSupply: "recipient_state" } });
   assert.deepEqual([noCa.__status, noCa.error], [422, "invalid_gst_settings"]); assert.match(noCa.message, /Nothing was saved/);
   const noReason = await as(ADMIN, "/org/gst-settings", "POST", { orgId: ORG_ID, settings: { aggregateTurnoverRs: "60000000" } });
   assert.deepEqual([noReason.__status, noReason.error], [422, "reason_required"]);
   assert.equal(gstCfg(), undefined, "nothing saved by either");
   const ok = await as(ADMIN, "/org/gst-settings", "POST", { orgId: ORG_ID, reason: "CA opinion on cashless claims",
-    settings: { recipientOfCashlessClaims: "payer", intensiveCareUnits: "include_hdu", aggregateTurnoverRs: "60000000", caOpinionRef: "Rao & Co letter 22", caOpinionDate: "2026-09-12" } });
+    settings: { placeOfSupply: "recipient_state", intensiveCareUnits: "include_hdu", aggregateTurnoverRs: "60000000", caOpinionRef: "Rao & Co letter 22", caOpinionDate: "2026-09-12" } });
   assert.equal(ok.__status, 200, ok.__text);
-  assert.deepEqual(ok.changed.sort(), ["aggregateTurnoverRs", "caOpinionDate", "caOpinionRef", "intensiveCareUnits", "recipientOfCashlessClaims"]);
-  assert.deepEqual([ok.settings.recipientOfCashlessClaims, ok.settings.aggregateTurnoverRs, gstCfg().intensiveCareUnits], ["payer", 60000000, "include_hdu"]);
+  assert.deepEqual(ok.changed.sort(), ["aggregateTurnoverRs", "caOpinionDate", "caOpinionRef", "intensiveCareUnits", "placeOfSupply"]);
+  assert.deepEqual([ok.settings.placeOfSupply, ok.settings.aggregateTurnoverRs, gstCfg().intensiveCareUnits], ["recipient_state", 60000000, "include_hdu"]);
+  // gst-parties: the hospital-wide GST recipient is retired; it is determined on each payer contract.
+  const retired = await as(ADMIN, "/org/gst-settings", "POST", { orgId: ORG_ID, reason: "x", settings: { recipientOfCashlessClaims: "payer" } });
+  assert.deepEqual([retired.__status, retired.error], [422, "invalid_gst_settings"]); assert.match(retired.message, /determined on each payer contract/);
   assert.deepEqual(docs.get(`q_orgs/${ORG_ID}`).fields.wardsynq.tariff, { KEEP: { amount: 1 } }, "the rest of the hospital's config is untouched");
   const ev = orgAudit("org:gst_settings");
   assert.equal(ev.length, 1);
   assert.deepEqual(JSON.parse(ev[0].meta).changed.sort(), ok.changed);
-  const same = await as(ADMIN, "/org/gst-settings", "POST", { orgId: ORG_ID, settings: { recipientOfCashlessClaims: "payer" } });
+  const same = await as(ADMIN, "/org/gst-settings", "POST", { orgId: ORG_ID, settings: { placeOfSupply: "recipient_state" } });
   assert.deepEqual([same.__status, same.changed], [200, []], "a save that changes nothing needs no reason and writes no audit row");
   assert.equal(orgAudit("org:gst_settings").length, 1);
 });
@@ -240,14 +244,18 @@ test("POST /ward/invoice on a package stay: a Rs 6,000 room is carved out and ta
   assert.equal(inv.placeOfSupply, "where_performed");
   assert.deepEqual(inv.documents.map((d) => [d.type, d.number, d.total]), [["invoice_cum_bill_of_supply", inv.documentNumber, 65900]]);
   assert.match(inv.warning, /still open/);
-  // A PM-JAY stay is a cashless claim: with the default setting, the scheme cannot be made the buyer.
-  const payer = await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: inv.invoiceId, buyer: { gstin: "29AAACB1234C1Z" + R.gstinCheckChar("29AAACB1234C1Z"), kind: "business", legalName: "SHA Karnataka", address1: "1 Road", location: "Bengaluru", pincode: "560001", stateCode: "29" } });
-  assert.deepEqual([payer.__status, payer.error], [422, "payer_not_recipient"]);
-  assert.match(payer.detail, /treat the patient as the recipient of a cashless claim/);
-  assert.equal((await H.RECORD.latest(T, "Invoice", inv.invoiceId)).version, 1, "nothing changed");
+  /* A PM-JAY stay is a cashless claim. gst-parties: a registered scheme whose contract has no determination is named as
+   * payer; the bill stays to the patient, with the warning that the recipient is not determined. */
+  assert.equal((await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, kind: "payer", provider: "manual", name: "SHA Karnataka",
+    settings: { ref: "sha", payerKind: "government_scheme", legalName: "SHA Karnataka", gstin: "29AAACB1234C1Z" + R.gstinCheckChar("29AAACB1234C1Z"), address1: "1 Road", location: "Bengaluru", pincode: "560001", stateCode: "29" } })).__status, 200);
+  const payer = await as(CASHIER, "/ward/invoice-parties", "POST", { orgId: ORG_ID, invoiceId: inv.invoiceId, payerRef: "sha" });
+  assert.equal(payer.__status, 200, payer.__text);
+  assert.deepEqual([payer.buyer, payer.parties.payer.ref, payer.parties.gstRecipient.party, payer.parties.gstRecipient.warning, payer.documents.map((d) => d.type)],
+    [null, "sha", "patient", "recipient_not_determined", ["invoice_cum_bill_of_supply"]]);
 });
 
 test("POST /ward/invoice: the package rate includes GST (worked back, borne by the hospital); a scheme marked a GST TDS deductor is flagged; the payer setting makes the scheme the buyer with its own Bill of Supply", async () => {
+  // An old saved hospital-wide "payer" (retired): read only as the migration default for a contract with no determination.
   await packageStay(2, { gstTdsDeductorSchemes: ["pmjay"], recipientOfCashlessClaims: "payer", caOpinionRef: "CA 1", caOpinionDate: "2026-09-01" });
   const pkg = (await as(CASHIER, `/ward/packages?orgId=${ORG_ID}`)).packages[0];
   const upd = await as(ADMIN, "/ward/package-save", "POST", { orgId: ORG_ID, ...PKG, id: pkg.id, expectedVersion: 1, reason: "Scheme pays no GST on top", priceIncludesGst: true });
@@ -261,8 +269,11 @@ test("POST /ward/invoice: the package rate includes GST (worked back, borne by t
   assert.equal(inv.charged, 45000 + 20000, "a GST-inclusive rate: the bill total is the package price");
   assert.deepEqual([inv.package.roomGst.unrecoverableGst, inv.package.roomGst.gstTdsPossible, inv.package.priceIncludesGst], [571.43, true, true]);
   const tan = "29BLRA12345B1D", gstin = tan + R.gstinCheckChar(tan);
-  const b = await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: inv.invoiceId, buyer: { gstin, kind: "payer", legalName: "Suvarna Arogya Suraksha Trust", address1: "1 Road", location: "Bengaluru", pincode: "560001", stateCode: "29" } });
+  assert.equal((await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, kind: "payer", provider: "manual", name: "SAST",
+    settings: { ref: "sast", payerKind: "government_scheme", legalName: "Suvarna Arogya Suraksha Trust", gstin, address1: "1 Road", location: "Bengaluru", pincode: "560001", stateCode: "29" } })).__status, 200);
+  const b = await as(CASHIER, "/ward/invoice-parties", "POST", { orgId: ORG_ID, invoiceId: inv.invoiceId, payerRef: "sast" });
   assert.equal(b.__status, 200, b.__text);
+  assert.deepEqual([b.buyer.gstin, b.parties.gstRecipient.source, b.parties.gstRecipient.basis.ref], [gstin, "legacy_global", "CA 1"]);
   assert.deepEqual(b.documents.map((d) => d.type), ["tax_invoice", "bill_of_supply"]);
   assert.ok(/^BOS\//.test(b.billOfSupplyNumber) && /^INV\//.test(b.documentNumber));
   assert.equal(b.documents.reduce((n, d) => n + d.total, 0), b.charged);
@@ -341,10 +352,10 @@ test("cashier screen: a B2B Bill of Supply has no IRN; turnover not entered is s
   assert.match(cashierHtml({ invoices: [exempt], einvoice: { state: "not_enabled", reason: "turnover_not_entered" } }), /aggregate turnover, exempt supplies included, is not entered on Admin, Price list, GST settings/);
 });
 
-test("ward.js wiring: a credit note asks the Section 34 question on the ward; the buyer says whether it is a cashless payer; a dispense can be take-home; the raise refusals are translated", () => {
+test("ward.js wiring: a credit note asks the Section 34 question on the ward; the bill's payer is chosen from the payer contracts; a dispense can be take-home; the raise refusals are translated", () => {
   assert.match(WARD_SRC, /if \(r && r\.error === "gst_confirmation_required"\) \{ invoiceNoteGst\(body, r\); return; \}/);
   assert.match(WARD_SRC, /Object\.assign\(\{\}, body, \{ gstTreatment: v\.gstTreatment, gstConfirmation: v\.gstConfirmation \|\| undefined \}\)/);
-  assert.match(WARD_SRC, /\{ key: "kind", type: "select", label: wTH\("ward\.buyer-kind"/);
+  assert.match(WARD_SRC, /cashWrite\("\/ward\/invoice-parties", \{ orgId: st\.orgId, invoiceId: invoiceId, payerRef: v\.payerRef \|\| "" \}/);
   assert.match(WARD_SRC, /takeHome: checked\("wPhTakeHome"\) \|\| undefined/);
   assert.match(WARD_SRC, /r\.error === "room_tariff_missing"\) st\.cashier\.err = wT\("ward\.gst-room-tariff-missing"/);
   assert.match(WARD_SRC, /r\.error === "gst_rate_missing"\) st\.cashier\.err = wT\("ward\.gst-rate-missing"/);

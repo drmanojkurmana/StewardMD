@@ -9,8 +9,9 @@
  *   pkgRoomValuation           a room above Rs 5,000 a day inside a package is carved out and taxed at 5 percent;
  *                              valued at the hospital's published per-day tariff (default), the payer's own per-day
  *                              room rate on the package, or a proportional split of the package price (review 2.3).
- *   recipientOfCashlessClaims  who receives the service in a cashless claim (s.2(93)(a) CGST Act): the patient
- *                              (default, B2C, insurer named as payer only) or the insurer, TPA or scheme (B2B).
+ *   recipientOfCashlessClaims  RETIRED 2026-09-17 (gst-parties). The GST recipient is determined on each payer contract
+ *                              (payer-contracts.js), never hospital-wide. A saved "payer" is still read, only as the
+ *                              migration default for a contract with no determination; it cannot be set any more.
  *   placeOfSupply              where a health service is performed (default, CGST + SGST; IGST Act s.12(4), probable)
  *                              or the registered recipient's state (IGST across states).
  *   intensiveCareUnits         only ICU, CCU, ICCU and NICU are named; specialty ICUs (PICU, MICU, SICU) are exempt
@@ -31,13 +32,13 @@ export const TDS_SCHEMES = Object.freeze(["pmjay", "state", "cghs", "echs"]);
 /* Each choice setting: its allowed values, the first being the default. */
 export const GST_CHOICES = Object.freeze({
   pkgRoomValuation: Object.freeze(["published_tariff", "scheme_rate", "proportional_split"]),
-  recipientOfCashlessClaims: Object.freeze(["patient", "payer"]),
   placeOfSupply: Object.freeze(["where_performed", "recipient_state"]),
   intensiveCareUnits: Object.freeze(["named_and_specialty", "named_only", "include_hdu"]),
   roomChargeBasis: Object.freeze(["bed_tariff", "bed_and_daily_nursing"]),
   dischargeMedsAsComposite: Object.freeze(["taxed", "composite"]),
 });
-export const GST_SETTING_KEYS = Object.freeze([...Object.keys(GST_CHOICES), "gstTdsDeductorSchemes", "aggregateTurnoverRs", "caOpinionRef", "caOpinionDate"]);
+export const GST_SETTING_KEYS = Object.freeze([...Object.keys(GST_CHOICES), "gstTdsDeductorSchemes", "aggregateTurnoverRs", "caOpinionRef", "caOpinionDate", "recipientOfCashlessClaims"]);
+const RETIRED_KEYS = Object.freeze(["recipientOfCashlessClaims"]);
 
 const str = (v) => (v == null ? "" : String(v)).trim();
 
@@ -51,20 +52,27 @@ export function readGstSettings(wardsynqCfg) {
   out.aggregateTurnoverRs = g.aggregateTurnoverRs == null || g.aggregateTurnoverRs === "" || !Number.isFinite(t) ? null : t;
   out.caOpinionRef = str(g.caOpinionRef) || null;
   out.caOpinionDate = str(g.caOpinionDate) || null;
+  // Retired: kept only as saved, so a later save does not erase the migration default payer-contracts.js reads.
+  out.recipientOfCashlessClaims = g.recipientOfCashlessClaims === "payer" || g.recipientOfCashlessClaims === "patient" ? g.recipientOfCashlessClaims : null;
   return out;
 }
 
 /** PURE. Which settings differ from the review's default (the ones that need the chartered accountant's opinion). */
 export function nonDefaultKeys(settings) {
   const s = settings || {};
-  return Object.keys(GST_CHOICES).filter((k) => s[k] !== GST_CHOICES[k][0]).concat((s.gstTdsDeductorSchemes || []).length ? ["gstTdsDeductorSchemes"] : []);
+  return Object.keys(GST_CHOICES).filter((k) => s[k] !== GST_CHOICES[k][0]).concat((s.gstTdsDeductorSchemes || []).length ? ["gstTdsDeductorSchemes"] : [])
+    // A saved "payer" still decides bills for contracts with no determination, so the CA's opinion stays required for it.
+    .concat(s.recipientOfCashlessClaims === "payer" ? ["recipientOfCashlessClaims"] : []);
 }
 
 /** PURE. A full settings object from what the screen sent: { value, errors }. Absent keys keep what is saved. */
 export function validateGstSettings(input, beforeCfg) {
   const errors = {};
   if (!input || typeof input !== "object" || Array.isArray(input)) return { value: null, errors: { settings: "Send the settings as an object." } };
-  for (const k of Object.keys(input)) if (!GST_SETTING_KEYS.includes(k)) errors[k] = "This is not one of the GST settings.";
+  for (const k of Object.keys(input)) {
+    if (RETIRED_KEYS.includes(k)) errors[k] = "The GST recipient is now determined on each payer contract (Admin, Integrations, Payers), not for the whole hospital.";
+    else if (!GST_SETTING_KEYS.includes(k)) errors[k] = "This is not one of the GST settings.";
+  }
   const value = readGstSettings(beforeCfg);
   for (const k of Object.keys(GST_CHOICES)) {
     if (input[k] === undefined) continue;

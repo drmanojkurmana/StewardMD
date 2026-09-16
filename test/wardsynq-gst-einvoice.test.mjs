@@ -3,7 +3,7 @@
  * Pure: functions/_region_in.js gstForLines (room rent over Rs 5000 a day, ICU, exempt health care, the in-patient
  * composite supply), validateTariff's GST fields, the note engine in wardsynq/wardsynq-invoice.js, and the portable
  * AES-ECB / RSA PKCS#1 v1.5 in functions/_wardsynq/einvoice-irp.js checked against node:crypto.
- * Routes: POST /api/queue/ward/invoice-credit-note, /ward/invoice-debit-note, /ward/invoice-buyer, /ward/invoice-irn,
+ * Routes: POST /api/queue/ward/invoice-credit-note, /ward/invoice-debit-note, /ward/invoice-parties, /ward/invoice-irn,
  * /ward/invoice-irn-cancel, /ward/connector-save (kind einvoice), with a mocked NIC IRP whose captured payloads are
  * decrypted here to pin the request shape (https://einv-apisandbox.nic.in/version1.03/generate-irn.html).
  *
@@ -173,6 +173,11 @@ test("IRN request (INV-01 v1.1): B2C refused, only taxed lines, place of supply 
 const PATIENT = "opd-pat-gst-001", RAISED = "2026-09-16T04:00:00Z";
 async function seedGst(id) { const inv = gstInvoice(id); await H.RECORD.append(T, [{ ...inv, resourceType: "Invoice", version: 1, source: { system: "wardsynq-native", sourceId: `invoice:${id}` } }]); }
 const BUYER_BODY = { gstin: BUYER, legalName: "Acme Insurance Ltd", address1: "5 MG Road", location: "Bengaluru", pincode: "560001", stateCode: "29", pos: "29" };
+/* gst-parties (2026-09-17): the buyer on a bill is the GST recipient its payer's contract resolves to, never typed on the
+ * bill. This contract makes the contracting party the recipient, on the contract clause. */
+const ACME = { kind: "payer", provider: "manual", name: "Acme Insurance", settings: { ref: "acme", payerKind: "corporate", legalName: BUYER_BODY.legalName, gstin: BUYER,
+  address1: BUYER_BODY.address1, location: BUYER_BODY.location, pincode: BUYER_BODY.pincode, stateCode: "29", gstRecipient: "contracting_party", gstBasisType: "contract_clause", gstBasisRef: "Acme agreement clause 7" } };
+const acmeContract = async () => assert.equal((await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, ...ACME })).__status, 200);
 const keys = generateKeyPairSync("rsa", { modulusLength: 2048 });
 const SPKI = keys.publicKey.export({ type: "spki", format: "der" }).toString("base64");
 const EINV = { kind: "einvoice", provider: "nic-irp", settings: { baseUrl: "https://93.184.216.36", gstin: SELLER, legalName: "WSQ Ward Hospital", address1: "1 Main Road", location: "Pune", pincode: "411001", stateCode: "27", username: "wsq_api", publicKey: SPKI },
@@ -206,11 +211,12 @@ function mockIrp(opts) {
 test("negative authorization: notes, buyer and IRN routes need billing.charge at this hospital; e-invoice settings are admin-only", async () => {
   seed();
   await seedGst("inv-a");
+  await acmeContract();
   const before = writesNow();
   const bodies = {
     "/ward/invoice-credit-note": { orgId: ORG_ID, invoiceId: "inv-a", reason: "r", lines: [{ lineIndex: 0, taxable: 100 }] },
     "/ward/invoice-debit-note": { orgId: ORG_ID, invoiceId: "inv-a", reason: "r", lines: [{ lineIndex: 0, taxable: 100 }] },
-    "/ward/invoice-buyer": { orgId: ORG_ID, invoiceId: "inv-a", buyer: BUYER_BODY },
+    "/ward/invoice-parties": { orgId: ORG_ID, invoiceId: "inv-a", payerRef: "acme" },
     "/ward/invoice-irn": { orgId: ORG_ID, invoiceId: "inv-a" },
     "/ward/invoice-irn-cancel": { orgId: ORG_ID, invoiceId: "inv-a", reasonCode: "2" },
   };
@@ -278,17 +284,19 @@ test("credit and debit notes through the routes: numbered per series, audited, s
   assert.equal(v.code, "NOTES_EXIST");
   assert.deepEqual(d1.documents.map((d) => [d.type, d.number, d.total]), [["invoice_cum_bill_of_supply", "INV/2627/000001", 7100]], "taxed and exempt lines to a patient: one Invoice-cum-Bill of Supply");
   // A buyer from another state: still CGST + SGST (where the service is performed), and the bill becomes two documents.
-  const b = await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: "inv-n", buyer: BUYER_BODY });
+  await acmeContract();
+  const b = await as(CASHIER, "/ward/invoice-parties", "POST", { orgId: ORG_ID, invoiceId: "inv-n", payerRef: "acme" });
   assert.equal(b.__status, 200, b.__text);
   assert.equal(b.interState, false); assert.deepEqual([b.lines[0].igst, b.lines[0].cgst, b.lines[0].sgst], [0, 150, 150]);
   assert.equal(b.billOfSupplyNumber, "BOS/2627/000001");
   assert.deepEqual(b.documents.map((d) => [d.type, d.number, d.lineIndexes, d.taxable, d.tax, d.total]),
     [["tax_invoice", "INV/2627/000001", [0], 6000, 300, 6300], ["bill_of_supply", "BOS/2627/000001", [1], 800, 0, 800]]);
   assert.equal(b.documents.reduce((n, d) => n + d.total, 0), b.charged, "the two documents add up to the bill");
-  const again = await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: "inv-n", buyer: BUYER_BODY });
+  const again = await as(CASHIER, "/ward/invoice-parties", "POST", { orgId: ORG_ID, invoiceId: "inv-n", payerRef: "acme" });
   assert.equal(again.billOfSupplyNumber, "BOS/2627/000001", "the Bill of Supply number is issued once");
-  const bad = await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: "inv-n", buyer: { ...BUYER_BODY, stateCode: "27", pincode: "12" } });
-  assert.equal(bad.__status, 422); assert.ok(bad.errors.stateCode && bad.errors.pincode);
+  // The recipient's details are checked on the contract: a state code that does not match the GSTIN is refused there.
+  const bad = await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, ...ACME, settings: { ...ACME.settings, stateCode: "27", pincode: "12" } });
+  assert.equal(bad.__status, 422); assert.match(bad.message, /PIN code is 6 digits\. The state code does not match the GSTIN\./);
 });
 
 test("a credit note after 30 November of the next financial year is issued without GST, and says so", async () => {
@@ -355,7 +363,8 @@ test("e-invoice: not connected, not enabled, B2C each refused plainly; the IRN r
     const tested = await as(ADMIN, "/ward/connector-test", "POST", { orgId: ORG_ID, id: "einvoice" });
     assert.equal(tested.test.passed, true, tested.__text);
 
-    assert.equal((await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: "inv-i", buyer: BUYER_BODY })).__status, 200);
+    await acmeContract();
+    assert.equal((await as(CASHIER, "/ward/invoice-parties", "POST", { orgId: ORG_ID, invoiceId: "inv-i", payerRef: "acme" })).__status, 200);
     irp.calls.length = 0;
     const gen = await as(CASHIER, "/ward/invoice-irn", "POST", { orgId: ORG_ID, invoiceId: "inv-i" });
     assert.equal(gen.__status, 200, gen.__text);
@@ -379,7 +388,7 @@ test("e-invoice: not connected, not enabled, B2C each refused plainly; the IRN r
     assert.ok(!JSON.stringify(H.RECORD.audit).includes("never-leak"));
 
     assert.equal((await as(CASHIER, "/ward/invoice-irn", "POST", { orgId: ORG_ID, invoiceId: "inv-i" })).error, "irn_exists");
-    assert.equal((await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: "inv-i", buyer: null })).code, "IRN_ACTIVE");
+    assert.equal((await as(CASHIER, "/ward/invoice-parties", "POST", { orgId: ORG_ID, invoiceId: "inv-i", payerRef: "" })).code, "IRN_ACTIVE");
     assert.equal((await as(CASHIER, "/ward/invoice-void", "POST", { orgId: ORG_ID, invoiceId: "inv-i", reason: "x" })).code, "IRN_ACTIVE");
 
     // A credit note is reported as CRN with the invoice it answers.
@@ -404,7 +413,8 @@ test("e-invoice: a portal refusal records nothing but is audited; an IRN older t
   seed({ gst: { aggregateTurnoverRs: 120000000 } });
   await seedGst("inv-r");
   assert.equal((await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, ...EINV })).__status, 200);
-  assert.equal((await as(CASHIER, "/ward/invoice-buyer", "POST", { orgId: ORG_ID, invoiceId: "inv-r", buyer: BUYER_BODY })).__status, 200);
+  await acmeContract();
+  assert.equal((await as(CASHIER, "/ward/invoice-parties", "POST", { orgId: ORG_ID, invoiceId: "inv-r", payerRef: "acme" })).__status, 200);
   ENV.WSQ_EINV_FETCH = mockIrp({ refuse: true }).fetchImpl;
   try {
     const v = (await H.RECORD.latest(T, "Invoice", "inv-r")).version;
@@ -443,7 +453,7 @@ test("cashier screen: HSN/SAC and GST per line, notes, and each e-invoice state 
   assert.match(html, /CGST 150/); assert.match(html, /SGST 150/);
   assert.match(html, /CRN\/2627\/000001/); assert.match(html, /Room downgraded/);
   assert.match(html, /E-invoicing is not connected/);
-  assert.ok(html.includes('data-w-act="invcredit:inv1"') && html.includes('data-w-act="invdebit:inv1"') && html.includes('data-w-act="invbuyer:inv1"') && html.includes('data-w-act="invprint:inv1"'));
+  assert.ok(html.includes('data-w-act="invcredit:inv1"') && html.includes('data-w-act="invdebit:inv1"') && html.includes('data-w-act="invparties:inv1"') && html.includes('data-w-act="invprint:inv1"'));
   assert.match(cashierHtml({ invoices: [inv], payLinks: [], einvoice: { state: "not_enabled" } }), /not enabled for this hospital/);
   assert.match(cashierHtml({ invoices: [inv], payLinks: [], einvoice: { state: "ready" } }), /B2C, not reported/);
   const b2b = { ...inv, buyer: { gstin: BUYER, legalName: "Acme" } };

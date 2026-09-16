@@ -72,7 +72,7 @@ test("tpa: channel, warnings, settlement, resubmissions, estimates and the expli
   const html = tpa(W, {
     payers: [{ id: "nhcx", name: "NHCX Test", adapter: "fhir-claim", endpointConfigured: true }],
     claims: [
-      { id: "c1", state: "submitted", payerId: "nokey", codes: [{ code: "E11.9" }], adapter: { state: "not_configured", note: "not_configured: credentials missing." }, submissions: [{}, { resubmission: true, reason: "missing discharge summary" }] },
+      { id: "c1", state: "submitted", payerId: "nokey", parties: { selfPay: false, payer: { ref: "nokey", name: null, found: false }, insurer: null, tpa: null, gstRecipient: { party: "patient", determined: false, source: "not_determined", warning: "payer_not_found" } }, codes: [{ code: "E11.9" }], adapter: { state: "not_configured", note: "not_configured: credentials missing." }, submissions: [{}, { resubmission: true, reason: "missing discharge summary" }] },
       { id: "c2", state: "paid", payerId: "nhcx", payerReference: "CR-1", codes: [{ code: "I10" }], settlement: { paidAmount: 11000, approvedAmount: 12000, shortPaidAmount: 1000, shortPaymentReason: "co-pay", disallowances: [{ reason: "consumables", amount: 3000 }], outstandingAmount: 4000, balanceWith: "unassigned" } },
     ],
     preAuthorisations: [{ state: "requested", treatment: "PTCA", payerId: "nhcx", adapter: { state: "acknowledged" } }],
@@ -80,7 +80,7 @@ test("tpa: channel, warnings, settlement, resubmissions, estimates and the expli
     payerWarnings: { c1: ["Payer \"nokey\" is not configured; its rules cannot be checked."] },
   });
   assert.match(html, /not configured, nothing sent - not_configured: credentials missing/);
-  assert.match(html, /nokey \(not configured\)/);
+  assert.match(html, /Payer: <b>nokey<\/b> \(not in the payer list\)/, "gst-parties: the claim names its parties");
   assert.match(html, /resubmitted 1 time: missing discharge summary/);
   assert.match(html, /Payer &quot;nokey&quot; is not configured/);
   assert.match(html, /paid 11000 of 12000 approved &middot; short 1000: co-pay &middot; disallowed: consumables \(3000\) &middot; outstanding 4000 &middot; balance with unassigned/);

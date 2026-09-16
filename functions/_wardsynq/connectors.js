@@ -28,7 +28,7 @@ import { VersionConflictError } from "./repository.js";
 import { docKey } from "./documents.js";
 import { sealSecret, openSecret, checkDestination } from "./webhooks.js";
 import { DICOM_KIND } from "./dicomweb.js";
-import { PAYER_KIND } from "./payer-connectors.js";
+import { PAYER_KIND, connectorParties } from "./payer-connectors.js";
 import { PAYMENT_KIND } from "./payment-gateways.js";
 import { ABDM_KIND } from "./abdm-hospital.js";
 import { WHATSAPP_KIND } from "./patient-messaging.js";
@@ -171,7 +171,8 @@ async function saveConnector(request, env, ctx) {
   return { ok: true, connector: summaryOf(next), ...(secretsReplaced.length ? { secretsNote: "Credentials stored encrypted. They are not shown again; enter new ones to rotate." } : {}) };
 }
 
-/** ctx: { kind? }. This hospital's connectors, the catalogue, and whether credentials can be stored. */
+/** ctx: { kind?, gst? }. This hospital's connectors, the catalogue, and whether credentials can be stored. A payer also
+ *  carries the parties its contract resolves to (payer-contracts.js), so the screen shows the GST recipient the bills use. */
 async function listConnectors(request, env, ctx) {
   const who = await open(request, env, ctx);
   if (who.error) return who.error;
@@ -181,7 +182,8 @@ async function listConnectors(request, env, ctx) {
   const kind = str(ctx.kind);
   return {
     ok: true, keyConfigured: !!(await docKey(env)), catalogue: catalogue().filter((c) => !kind || c.kind === kind),
-    connectors: rows.filter((r) => r && KINDS[r.kind] && (!kind || r.kind === kind)).map(summaryOf).sort((a, b) => a.id.localeCompare(b.id)),
+    connectors: rows.filter((r) => r && KINDS[r.kind] && (!kind || r.kind === kind))
+      .map((r) => (r.kind === "payer" ? { ...summaryOf(r), parties: connectorParties(r, rows, ctx.gst || null) } : summaryOf(r))).sort((a, b) => a.id.localeCompare(b.id)),
   };
 }
 

@@ -213,6 +213,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* gap-claims-gst-2 (2026-09-16): a package on an inpatient stay (functions/_wardsynq/packages.js), with a copy of the
    * package version it was attached with and its pre-authorisation link. Financial, versioned, granted with Claim. */
   "PackageAssignment",
+  /* gst-parties (2026-09-17): who settles an inpatient stay's bill (functions/_wardsynq/stay-payer.js), a reference to a
+   * payer contract or self-pay. Financial, versioned, granted with Claim. */
+  "StayPayer",
   /* TASK 4.6: the charge-to-reconciliation ledger. Every discount/deposit/payment/refund/
    * adjustment/write-off is an append to the SAME invoice record, never a mutation of its charge
    * lines - "what was billed" and "what happened to the bill since" are different facts. A

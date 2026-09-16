@@ -3231,6 +3231,43 @@
     return (f.losExceeded ? '<div class="w-warn">' + ms("schedule") + wTH("ward.pkg-los-exceeded", "Length of stay exceeded: day {days}, the package expects {expected}.", { days: esc(f.stayDays), expected: esc(f.expectedLosDays) }, "days expected") + "</div>" : "") +
       (f.preAuthProblem ? '<div class="w-warn">' + ms("fact_check") + wTH("ward.pkg-preauth-problem", "This package needs an approved pre-authorisation: {state}.", { state: esc(pkgPreauthWord(f.preAuthState)) }, "") + "</div>" : "");
   }
+  /* WHO SETTLES EACH STAY (gst-parties, functions/_wardsynq/stay-payer.js). A bill raised for the stay copies these
+   * parties. Unreadable (null) is said, never shown as self-pay. */
+  function stayPayerSection(state) {
+    var t = state.tpa || {}, p = state.tpaPkg;
+    var h = "<div class=\"w-sub\"><h4>" + wTH("ward.stay-payer-title", "Who settles each stay") + "</h4>";
+    if (t.stayPayers === null) return h + '<p class="w-hint warn">' + ms("warning") + wTH("ward.stay-payer-unreadable", "Who settles each stay could not be read. This is not the same as self-pay.", null, "", 1) + "</p></div>";
+    var stayWord = function (id) {
+      var s = ((p && p.stays) || []).filter(function (x) { return x.id === id; })[0];
+      return s ? esc(when(s.periodStart)) + (s.ward ? " &middot; " + esc(s.ward) : "") : esc(id);
+    };
+    var rows = (t.stayPayers || []).map(function (sp) {
+      return '<li class="w-mini-row"><div><b>' + stayWord(sp.encounterId) + "</b>" + (sp.policyNumber ? " &middot; " + wTH("ward.stay-payer-policy", "Policy {policy}", { policy: esc(sp.policyNumber) }, "policy") : "") + partiesHtml(sp.parties) + "</div>" +
+        '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="staypayer:' + esc(sp.encounterId) + '">' + ms("edit") + wTH("ward.pkg-change", "Change") + "</button></div></li>";
+    }).join("");
+    return h + (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">' + wTH("ward.stay-payer-none", "No payer is recorded for any stay of this patient. A stay with none is billed as self-pay.") + "</p>") +
+      (p && (p.stays || []).length ? '<button class="w-btn" data-w-act="staypayer">' + ms("handshake") + wTH("ward.stay-payer-set", "Record who settles a stay") + "</button>" : "") + "</div>";
+  }
+  function stayPayerAction(encounterId) {
+    var p = st.tpaPkg, t = st.tpa; if (!p || !t || !st.sel) return;
+    var cur = encounterId ? (t.stayPayers || []).filter(function (x) { return x.encounterId === encounterId; })[0] : null;
+    var stays = (p.stays || []).map(function (s) { return [s.id, esc(when(s.periodStart)) + (s.ward ? " &middot; " + esc(s.ward) : "") + (s.status === "in-progress" ? " (" + wTH("ward.pkg-stay-open", "in hospital") + ")" : "")]; });
+    var payers = [["", wTH("ward.parties-self-pay-option", "Self-pay (the patient)")]].concat((t.payers || []).map(function (x) { return [x.id, esc(x.name)]; }));
+    askFor({ icon: "handshake", ok: wTH("ward.save", "Save"), title: wTH("ward.stay-payer-set", "Record who settles a stay"),
+      text: wTH("ward.stay-payer-text", "The payer's contract decides the insurer, the TPA and the GST recipient. A bill raised for the stay copies them."),
+      fields: [
+        { key: "encounterId", type: "select", label: wTH("ward.pkg-stay", "Stay"), options: stays, value: encounterId || (stays[0] && stays[0][0]) || "" },
+        { key: "payerRef", type: "select", label: wTH("ward.parties-payer-field", "Payer"), options: payers, value: cur ? cur.payerRef || "" : "" },
+        { key: "policyNumber", label: wTH("ward.policy-number-optional", "Policy number (optional)"), value: cur ? cur.policyNumber || "" : "" },
+      ].concat(cur ? [{ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.stay-payer-reason-required", "Say why the payer on this stay is changing.") }] : []) }, function (v) {
+      var existing = (t.stayPayers || []).filter(function (x) { return x.encounterId === v.encounterId; })[0];
+      st.busy = true; paint();
+      return apiPost("/ward/stay-payer", { orgId: st.orgId, patientId: st.sel.patientId, encounterId: v.encounterId, payerRef: v.payerRef || "", policyNumber: v.policyNumber || undefined,
+        reason: v.reason || undefined, expectedVersion: existing ? existing.version : undefined })
+        .then(function (r) { if (settle(r, wT("ward.pkg-saved", "Recorded."))) { loadTpa(); return; } paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.stay-payer-not-saved", "Could not reach the server. The payer may not have changed; reload to check."); paint(); });
+    });
+  }
   function packageSection(state) {
     var p = state.tpaPkg, t = state.tpa || {};
     var h = "<div class=\"w-sub\"><h4>" + wTH("ward.pkg-title", "Package billing") + "</h4>";
@@ -3368,7 +3405,7 @@
         ((c.queries || []).length ? '<div class="w-dt-times">' + c.queries.map(function (q) { return esc(q.question); }).join(" ") + "</div>" : "") +
         // The adapter boundary, stated honestly: no live payer connector exists in this build, so a
         // submission is queued for the hospital's own process, never shown as sent to anyone.
-        "<div class=\"w-dt-times\">" + wTH("ward.payer", "payer: {tpaPayerName}", { tpaPayerName: esc(tpaPayerName(t.payers, c.payerId)) }, "tpaPayerName") + (c.payerReference ? " &middot; " + wTH("ward.payer-ref", "payer ref {payerReference}", { payerReference: esc(c.payerReference) }, "payerReference") : "") + "</div>" +
+        partiesHtml(c.parties) + (c.payerReference ? "<div class=\"w-dt-times\">" + wTH("ward.payer-ref", "payer ref {payerReference}", { payerReference: esc(c.payerReference) }, "payerReference") + "</div>" : "") +
         (c.adapter ? "<div class=\"w-dt-times\">" + wTH("ward.payer-channel", "payer channel: {TPA_CHANNEL_WORDS}", { TPA_CHANNEL_WORDS: esc(wTEn(TPA_CHANNEL_WORDS[c.adapter.state]) || c.adapter.state) }, "") + (c.adapter.note ? " - " + esc(c.adapter.note) : "") + "</div>" : "") +
         nhcxExchangeLine("claim", c, t.payers) +
         (resubs.length ? "<div class=\"w-dt-times\">" + (resubs.length > 1 ? wTH("ward.resubmitted-times", "resubmitted {length} times:", { length: resubs.length }, "length") : wTH("ward.resubmitted-time-once", "resubmitted {length} time:", { length: resubs.length }, "length")) + " " + resubs.map(function (x) { return x.reason ? esc(x.reason) : wTH("ward.no-reason-recorded", "no reason recorded"); }).join("; ") + "</div>" : "") +
@@ -3381,7 +3418,7 @@
         "<b>" + esc(a.treatment) + "</b>" + (a.scheme ? " &middot; " + esc(a.scheme) : "") +
         (a.authorizedAmount != null ? " &middot; " + esc(a.authorizedAmount) : "") +
         (a.reason ? " &middot; " + esc(a.reason) : "") +
-        (a.payerId ? "<div class=\"w-dt-times\">" + wTH("ward.payer", "payer: {tpaPayerName}", { tpaPayerName: esc(tpaPayerName(t.payers, a.payerId)) }, "tpaPayerName") + (a.adapter ? " &middot; " + esc(wTEn(TPA_CHANNEL_WORDS[a.adapter.state]) || a.adapter.state) + (a.adapter.note ? " - " + esc(a.adapter.note) : "") : "") + "</div>" : "") +
+        partiesHtml(a.parties) + (a.adapter ? "<div class=\"w-dt-times\">" + esc(wTEn(TPA_CHANNEL_WORDS[a.adapter.state]) || a.adapter.state) + (a.adapter.note ? " - " + esc(a.adapter.note) : "") + "</div>" : "") +
         nhcxExchangeLine("preauth", a, t.payers) +
         '<div class="w-dt-times">' + esc(a.note || "") + "</div></div></li>";
     }).join("");
@@ -3414,6 +3451,7 @@
       "<input id=\"wTpaAuthCodes\" placeholder=\"" + wTA("ward.nhcx-preauth-codes", "Diagnosis codes on the problem list, comma-separated (NHCX needs them)") + "\">" +
       "<input id=\"wTpaAuthPolicy\" placeholder=\"" + wTA("ward.nhcx-preauth-policy", "Policy number (NHCX needs it)") + "\">" +
       '<button class="w-btn" data-w-act="preauth">' + ms("fact_check") + wTH("ward.record2", "Record") + "</button></div>" +
+      stayPayerSection(state) +
       packageSection(state) +
       "<div class=\"w-sub\"><h4>" + wTH("ward.estimates", "Estimates") + "</h4>" +
       (t.estimatesUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.estimates-could-not-be-read", "Estimates could not be read.", null, "", 1) + "</p>"
@@ -6490,6 +6528,7 @@
         (inv.package ? "<p>" + wTH("ward.pkg-invoice", "Package {code}: {name}, rate {rate}", { code: esc(inv.package.code), name: esc(inv.package.name), rate: esc(inv.package.rate) }, "code name rate") + "</p>" + pkgFlagsHtml(inv.package) : "") +
         (lineRows ? '<ul class="w-mini">' + lineRows + "</ul>" : "") + cashGstNotesHtml(inv) +
         "<p>" + (inv.buyer && inv.buyer.gstin ? wTH("ward.buyer-b2b", "Billed to {name}, GSTIN {gstin}", { name: esc(inv.buyer.legalName), gstin: esc(inv.buyer.gstin) }, "name gstin") : wTH("ward.buyer-b2c", "Billed to the patient (no buyer GSTIN)")) + "</p>" +
+        partiesHtml(inv.parties) +
         cashEinvHtml(c.einvoice, inv) +
         "<p>" + wTH("ward.charged-paid-in-balance", "Charged {charged} &middot; Paid in {paidIn} &middot; Balance {balance}", { charged: esc(inv.charged), paidIn: esc(inv.paidIn), balance: esc(inv.balance) }, "charged paidIn balance") + (inv.creditBalance ? " &middot; " + wTH("ward.credit", "Credit {creditBalance}", { creditBalance: esc(inv.creditBalance) }, "creditBalance") : "") + "</p>" +
         (eventRows ? '<ul class="w-mini">' + eventRows + "</ul>" : "") +
@@ -6505,7 +6544,7 @@
           '<button class="w-btn tiny ghost" data-w-act="invvoid:' + esc(inv.invoiceId) + '">' + ms("block") + wTH("ward.cancel-this-bill", "Cancel this bill") + "</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invcredit:' + esc(inv.invoiceId) + '">' + ms("remove") + wTH("ward.credit-note", "Credit note") + "</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invdebit:' + esc(inv.invoiceId) + '">' + ms("add") + wTH("ward.debit-note", "Debit note") + "</button>" +
-          '<button class="w-btn tiny ghost" data-w-act="invbuyer:' + esc(inv.invoiceId) + '">' + ms("business") + wTH("ward.buyer-details", "Buyer details (B2B)") + "</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invparties:' + esc(inv.invoiceId) + '">' + ms("handshake") + wTH("ward.parties-button", "Payer and GST recipient") + "</button>" +
           "</div>" : "") +
         '<div class="w-actions"><button class="w-btn tiny ghost" data-w-act="invprint:' + esc(inv.invoiceId) + '">' + ms("print") + wTH("ward.print-invoice", "Print invoice") + "</button></div>" + "</div>";
     }).join("");
@@ -11680,25 +11719,46 @@
       return cashWrite("/ward/invoice-credit-note", Object.assign({}, body, { gstTreatment: v.gstTreatment, gstConfirmation: v.gstConfirmation || undefined }));
     });
   }
-  function invoiceBuyer(invoiceId) {
+  /* THE PARTIES (gst-parties, functions/_wardsynq/payer-contracts.js): patient, payer, insurer and TPA as named parties,
+   * and the GST recipient on its own line with its basis, exactly as the server resolved them from the payer's contract.
+   * A recipient not determined on the contract is said as a warning, never shown as settled. */
+  var PARTY_BASIS_WORDS = { ca_opinion: "chartered accountant's opinion", contract_clause: "contract clause" };
+  function partiesHtml(p) {
+    if (!p) return "";
+    var b = function (s) { return " <b>" + s + "</b>"; };
+    var segs = [p.selfPay ? wTH("ward.parties-payer", "Payer:") + b(wTH("ward.parties-self-pay", "the patient (self-pay)"))
+      : wTH("ward.parties-payer", "Payer:") + b(esc((p.payer && (p.payer.name || p.payer.ref)) || "")) + (p.payer && p.payer.found === false ? " " + wTH("ward.parties-payer-missing", "(not in the payer list)") : "")];
+    if (p.insurer) segs.push(wTH("ward.parties-insurer", "Insurer:") + b(esc(p.insurer.name || p.insurer.ref)));
+    if (p.tpa) segs.push(wTH("ward.parties-tpa", "TPA:") + b(esc(p.tpa.name || p.tpa.ref)) + " (" + wTH("ward.parties-tpa-settles", "settles for the insurer") + ")");
+    if (p.partiesWarning === "tpa_insurer_not_found") segs.push('<span class="w-warn">' + wTH("ward.parties-tpa-no-insurer", "The insurer this TPA acts for is not in the payer list.") + "</span>");
+    var g = p.gstRecipient || {};
+    var who = g.party === "patient" ? b(wTH("ward.parties-the-patient", "the patient"))
+      : b(esc(g.legalName || g.name || "")) + (g.gstin ? ", " + wTH("ward.parties-gstin", "GSTIN {gstin}", { gstin: esc(g.gstin) }, "gstin") : " " + wTH("ward.parties-unregistered", "(not GST registered)"));
+    var basis = g.source === "default_cashless" ? wTH("ward.parties-default-cashless", "Default for an insurer or TPA: ordinary cashless treatment is a supply to the patient; the insurer or TPA settles as payer.")
+      : g.source === "legacy_global" ? wTH("ward.parties-legacy", "From the old hospital-wide GST setting, used only because this payer's contract has no determination.") + (g.basis && g.basis.ref ? " " + wTH("ward.parties-basis-opinion", "Chartered accountant's opinion: {ref}, {date}", { ref: esc(g.basis.ref), date: esc(g.basis.date || "") }, "ref date") : "")
+      : g.source === "contract" && g.basis && g.basis.ref ? wTH("ward.parties-basis", "Basis: {type}, {ref}", { type: esc(wTEn(PARTY_BASIS_WORDS[g.basis.type]) || ""), ref: esc(g.basis.ref) }, "ref") + (g.basis.date ? " (" + esc(g.basis.date) + ")" : "")
+      : g.source === "contract" ? wTH("ward.parties-basis-contract", "Determined on the payer's contract.") : "";
+    var warn = g.warning ? '<span class="w-warn">' + wTH("ward.parties-not-determined", "Not determined on this payer's contract. The patient is treated as the GST recipient until an administrator records the determination on Admin, Integrations, Payers.") + "</span>" : "";
+    return '<div class="w-dt-times">' + segs.join(" &middot; ") + "</div>" +
+      '<div class="w-dt-times">' + wTH("ward.parties-recipient", "GST recipient:") + who + (warn ? " &middot; " + warn : "") + (basis ? " &middot; " + basis : "") + "</div>";
+  }
+  /* Who settles a bill: chosen from the hospital's payer contracts (or self-pay); the server resolves the GST recipient. */
+  function invoiceParties(invoiceId) {
     var inv = cashInvoice(invoiceId); if (!inv) return;
-    var b = inv.buyer || {};
-    askFor({ icon: "business", ok: wTH("ward.save", "Save"), title: wTH("ward.buyer-details-title", "Buyer details for a B2B tax invoice"),
-      text: wTH("ward.buyer-details-text", "For a company, insurer or other GST-registered buyer. Leave the GSTIN empty for a bill to the patient."),
-      fields: [
-        { key: "kind", type: "select", label: wTH("ward.buyer-kind", "Who is this buyer?"), value: b.kind || "business",
-          options: [["business", wTH("ward.buyer-kind-business", "A company or other buyer that itself pays")], ["payer", wTH("ward.buyer-kind-payer", "An insurer, TPA or scheme paying a cashless claim")]] },
-        { key: "gstin", label: wTH("ward.buyer-gstin", "Buyer GSTIN"), value: b.gstin || "" },
-        { key: "legalName", label: wTH("ward.buyer-legal-name", "Legal name"), value: b.legalName || "" },
-        { key: "address1", label: wTH("ward.buyer-address", "Address"), value: b.address1 || "" },
-        { key: "location", label: wTH("ward.buyer-place", "Place"), value: b.location || "" },
-        { key: "pincode", label: wTH("ward.buyer-pincode", "PIN code"), value: b.pincode || "" },
-        { key: "stateCode", label: wTH("ward.buyer-state-code", "State code (2 digits)"), value: b.stateCode || "" },
-        { key: "pos", label: wTH("ward.buyer-place-of-supply", "Place of supply (state code)"), value: b.pos || "" },
-      ] }, function (v) {
-      return cashWrite("/ward/invoice-buyer", { orgId: st.orgId, invoiceId: invoiceId, buyer: v.gstin ? v : null }, {
-        payer_not_recipient: wT("ward.buyer-payer-not-recipient", "Your GST settings treat the patient as the recipient of a cashless claim, so this bill stays a bill to the patient; the insurer, TPA or scheme is named as payer only. Nothing was changed.") });
-    });
+    var patientId = inv.patientId || (st.cashier && st.cashier.patientId);
+    st.busy = true; paint();
+    apiGet("/ward/claims?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(patientId)).then(function (r) {
+      st.busy = false;
+      if (!r || !r.ok || !r.payers) { st.err = wT("ward.parties-payers-unread", "The payer list could not be read, so the payer cannot be changed now."); paint(); return; }
+      var cur = inv.parties ? (inv.parties.selfPay ? "" : inv.parties.payer && inv.parties.payer.ref) : "";
+      askFor({ icon: "handshake", ok: wTH("ward.save", "Save"), title: wTH("ward.parties-title", "Who settles this bill?"),
+        text: wTH("ward.parties-text", "The payer's contract decides who the GST recipient is. The bill's GST documents follow that recipient, not the payer. Not possible once an IRN is registered."),
+        fields: [{ key: "payerRef", type: "select", label: wTH("ward.parties-payer-field", "Payer"), value: cur || "",
+          options: [["", wTH("ward.parties-self-pay-option", "Self-pay (the patient)")]].concat(r.payers.map(function (x) { return [x.id, esc(x.name)]; })) }] }, function (v) {
+        return cashWrite("/ward/invoice-parties", { orgId: st.orgId, invoiceId: invoiceId, payerRef: v.payerRef || "" }, {
+          recipient_details_incomplete: wT("ward.parties-recipient-incomplete", "The payer contract makes the contracting party the GST recipient, but its GST details are incomplete. Complete the contract on Admin, Integrations, Payers. Nothing was changed.") });
+      });
+    }, function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
   }
   function invoiceIrn(arg) {
     var p = String(arg || "").split("~");
@@ -11754,6 +11814,7 @@
       var html = "<title>" + esc(inv.documentNumber || inv.invoiceId) + "</title><body style=\"font-family:sans-serif\">" +
         (inv.taxRegistration ? "<p>" + wTH("ward.print-seller-gstin", "GSTIN {gstin}", { gstin: esc(inv.taxRegistration.id) }, "gstin") + "</p>" : "") +
         "<p>" + (inv.buyer && inv.buyer.gstin ? wTH("ward.buyer-b2b", "Billed to {name}, GSTIN {gstin}", { name: esc(inv.buyer.legalName), gstin: esc(inv.buyer.gstin) }, "name gstin") + "<br>" + esc([inv.buyer.address1, inv.buyer.location, inv.buyer.pincode].join(", ")) : wTH("ward.buyer-b2c", "Billed to the patient (no buyer GSTIN)")) + "</p>" +
+        partiesHtml(inv.parties) +
         docHtml + printNotes +
         "<p>" + wTH("ward.charged-paid-in-balance", "Charged {charged} &middot; Paid in {paidIn} &middot; Balance {balance}", { charged: esc(inv.charged), paidIn: esc(inv.paidIn), balance: esc(inv.balance) }, "charged paidIn balance") + "</p>" +
         notes.map(function (ev) {
@@ -14605,7 +14666,7 @@
     if (cmd === "invwriteoff") { cashPost(arg, "writeoff"); return; }
     if (cmd === "invcredit") { invoiceNote(arg, "credit"); return; }
     if (cmd === "invdebit") { invoiceNote(arg, "debit"); return; }
-    if (cmd === "invbuyer") { invoiceBuyer(arg); return; }
+    if (cmd === "invparties") { invoiceParties(arg); return; }
     if (cmd === "invirn") { invoiceIrn(arg); return; }
     if (cmd === "invirncancel") { invoiceIrnCancel(arg); return; }
     if (cmd === "invprint") { invoicePrint(arg); return; }
@@ -15043,6 +15104,7 @@
     if (cmd === "nhcxelig") { nhcxEligibilityAction(); return; }
     if (cmd === "hcxstatus") { hcxStatusAction(arg); return; }
     if (cmd === "pkgset") { pkgSetAction(arg); return; }
+    if (cmd === "staypayer") { stayPayerAction(arg); return; }
     if (cmd === "pkgremove") { pkgRemoveAction(arg); return; }
     if (cmd === "pkgpack") { pkgPackAction(arg); return; }
     if (cmd === "cosign") { cosign(arg); return; }

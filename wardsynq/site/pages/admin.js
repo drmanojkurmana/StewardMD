@@ -1227,16 +1227,15 @@
   /* GST SETTINGS (gst-packages, functions/_wardsynq/gst-settings.js). Where the law is not settled the hospital's
    * chartered accountant decides. Each setting shows the GST treatment review's safest default, that it is the CA's
    * decision, and the review's reason in one line. A choice other than the default needs the CA's opinion reference and
-   * date; every change needs a reason. null = loading, false = failed: never read as the defaults. */
-  var GST_CHOICE_KEYS = ["pkgRoomValuation", "recipientOfCashlessClaims", "placeOfSupply", "intensiveCareUnits", "roomChargeBasis", "dischargeMedsAsComposite"];
+   * date; every change needs a reason. null = loading, false = failed: never read as the defaults.
+   * gst-parties (2026-09-17): the GST recipient is no longer a hospital-wide setting. It is determined on each payer
+   * contract (Integrations, Payers); a saved old value is said here, and used only for contracts with no determination. */
+  var GST_CHOICE_KEYS = ["pkgRoomValuation", "placeOfSupply", "intensiveCareUnits", "roomChargeBasis", "dischargeMedsAsComposite"];
   function gstChoiceText(c, key) {
     return {
       pkgRoomValuation: { label: T(c, "site.admin.gst.roomValuation", "Room above Rs 5,000 a day inside a package: how its value is worked out"),
         why: T(c, "site.admin.gst.roomValuationWhy", "No rule, circular or ruling says how to value a room inside a package; the published tariff, capped at the package price, avoids paying too little tax."),
         options: { published_tariff: T(c, "site.admin.gst.valPublished", "The hospital's published per-day room tariff, capped at the package price (default)"), scheme_rate: T(c, "site.admin.gst.valScheme", "The per-day room rate in the payer's own rate card, entered on the package"), proportional_split: T(c, "site.admin.gst.valSplit", "A proportional split of the package price by standalone prices") } },
-      recipientOfCashlessClaims: { label: T(c, "site.admin.gst.recipient", "Who receives the service in a cashless claim (insurer, TPA, CGHS, ECHS, PM-JAY)"),
-        why: T(c, "site.admin.gst.recipientWhy", "No authority settles whether the payer or the patient is the recipient (Section 2(93)(a)); with the patient, the bill stays B2C and the payer is named as payer only."),
-        options: { patient: T(c, "site.admin.gst.recipientPatient", "The patient: bill to the patient, payer named only (default)"), payer: T(c, "site.admin.gst.recipientPayer", "The insurer, TPA or scheme: a B2B tax invoice to its GSTIN") } },
       placeOfSupply: { label: T(c, "site.admin.gst.pos", "Place of supply for health services"),
         why: T(c, "site.admin.gst.posWhy", "A health service is supplied where it is performed (IGST Act Section 12(4), a probable reading), so CGST and SGST apply even for a payer in another state."),
         options: { where_performed: T(c, "site.admin.gst.posPerformed", "Where the service is performed: CGST and SGST (default)"), recipient_state: T(c, "site.admin.gst.posRecipient", "The registered recipient's state: IGST across states") } },
@@ -1261,6 +1260,8 @@
       var note = function (why) { return '<p class="quiet"><b>' + c.esc(ca) + "</b> " + c.esc(why) + "</p>"; };
       host.innerHTML = '<div class="card">' + title +
         '<p class="quiet">' + c.esc(T(c, "site.admin.gst.intro", "Where the law is not settled, each setting starts at the safest reading. A choice other than the default needs your chartered accountant's written opinion. Every change is recorded with its reason.")) + "</p>" +
+        '<div class="msg note">' + c.esc(T(c, "site.admin.gst.recipientPerContract", "The GST recipient (Section 2(93) CGST Act) is determined on each payer contract under Integrations, Payers, from who is liable to pay under that contract, not from who transfers the money. Insurers and TPAs default to the patient; government schemes and corporates stay not determined, and are billed to the patient with a warning, until you choose.")) +
+          (s.recipientOfCashlessClaims === "payer" ? "<br>" + c.esc(T(c, "site.admin.gst.recipientLegacy", "Your earlier hospital-wide setting made the insurer, TPA or scheme the GST recipient. It is used only for payer contracts with no determination of their own, on the chartered accountant's opinion below, until each contract records one.")) : "") + "</div>" +
         GST_CHOICE_KEYS.map(function (k) {
           var t = gstChoiceText(c, k);
           return '<label class="f"><span>' + c.esc(t.label) + '</span><select id="admGst_' + k + '">' + Object.keys(t.options).map(function (v) {
@@ -2902,12 +2903,13 @@
     }).join("") + "</select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.admin.connectors.label", "Label (optional)")) + '</span><input class="cnName" maxlength="120" value="' + esc((cur && cur.name) || "") + '"></label></div>';
     if (p.help) h += '<p class="quiet">' + esc(p.help) + "</p>";
+    var contract = kind.kind === "payer" ? payerContractText(c) : {};
     h += '<div class="row">' + p.settings.map(function (f) {
-      var v = settings[f.key];
-      if (f.type === "checkbox") return '<label class="f"><span><input type="checkbox" class="cnSet" data-key="' + esc(f.key) + '" data-type="checkbox"' + (v ? " checked" : "") + "> " + esc(f.label) + "</span></label>";
-      if (f.type === "select") return '<label class="f"><span>' + esc(f.label) + '</span><select class="cnSet" data-key="' + esc(f.key) + '">' + f.options.map(function (o) {
-        return '<option value="' + esc(o[0]) + '"' + (v === o[0] ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select></label>";
-      return '<label class="f"><span>' + esc(f.label) + (f.required ? " *" : "") + '</span><input class="cnSet" data-key="' + esc(f.key) + '"' + (f.type === "url" ? ' type="url" placeholder="https://"' : "") +
+      var v = settings[f.key], ct = contract[f.key], label = ct ? ct.label : f.label;
+      if (f.type === "checkbox") return '<label class="f"><span><input type="checkbox" class="cnSet" data-key="' + esc(f.key) + '" data-type="checkbox"' + (v ? " checked" : "") + "> " + esc(label) + "</span></label>";
+      if (f.type === "select") return '<label class="f"><span>' + esc(label) + '</span><select class="cnSet" data-key="' + esc(f.key) + '">' + f.options.map(function (o) {
+        return '<option value="' + esc(o[0]) + '"' + ((v || "") === o[0] ? " selected" : "") + ">" + esc(ct && ct.options && ct.options[o[0]] || o[1]) + "</option>"; }).join("") + "</select></label>";
+      return '<label class="f"><span>' + esc(label) + (f.required ? " *" : "") + '</span><input class="cnSet" data-key="' + esc(f.key) + '"' + (f.type === "url" ? ' type="url" placeholder="https://"' : "") +
         ' value="' + esc(v == null ? "" : v) + '"' + (cur && f.key === "ref" ? " readonly" : "") + "></label>";
     }).join("") + "</div>";
     if (p.secrets.length) h += '<div class="row">' + p.secrets.map(function (f) {
@@ -2916,6 +2918,43 @@
     }).join("") + "</div>";
     return h + '<button type="button" class="btn" data-cn-save="' + esc(kind.kind) + '"' + (cur ? ' data-cn-id="' + esc(cur.id) + '"' : "") + ">" + esc(T(c, "site.admin.save", "Save")) + "</button>" +
       (cur ? ' <button type="button" class="btn ghost" data-cn-cancel="1">' + esc(T(c, "site.admin.connectors.cancel", "Cancel")) + '</button>' : "") + "</div>";
+  }
+  /* A payer's CONTRACT (gst-parties, functions/_wardsynq/payer-contracts.js): its fields in the hospital's language, and
+   * the GST recipient the server resolved from it, with its basis or the warning that it is not determined. */
+  function payerContractText(c) {
+    return {
+      payerKind: { label: T(c, "site.admin.payerContract.kind", "Kind of payer"), options: { "": T(c, "site.admin.payerContract.kindNone", "Not recorded"), insurer: T(c, "site.admin.payerContract.kindInsurer", "Insurer"),
+        tpa: T(c, "site.admin.payerContract.kindTpa", "TPA (acts for an insurer)"), government_scheme: T(c, "site.admin.payerContract.kindScheme", "Government scheme (PM-JAY, State scheme, CGHS, ECHS)"),
+        corporate: T(c, "site.admin.payerContract.kindCorporate", "Corporate"), other: T(c, "site.admin.payerContract.kindOther", "Other") } },
+      legalName: { label: T(c, "site.admin.payerContract.legalName", "Legal name") },
+      gstin: { label: T(c, "site.admin.payerContract.gstin", "GSTIN (if registered)") },
+      address1: { label: T(c, "site.admin.payerContract.address", "Registered address") },
+      location: { label: T(c, "site.admin.payerContract.place", "Place") },
+      pincode: { label: T(c, "site.admin.payerContract.pincode", "PIN code") },
+      stateCode: { label: T(c, "site.admin.payerContract.stateCode", "State code (2 digits)") },
+      insurerRef: { label: T(c, "site.admin.payerContract.insurerRef", "Insurer this TPA acts for (its payer reference)") },
+      gstRecipient: { label: T(c, "site.admin.payerContract.recipient", "GST recipient under this contract (s.2(93) CGST Act)"), options: { "": T(c, "site.admin.payerContract.recipientNone", "Not determined"),
+        patient: T(c, "site.admin.payerContract.recipientPatient", "The patient"), contracting_party: T(c, "site.admin.payerContract.recipientParty", "The contracting party (for a TPA, the insurer it acts for)") } },
+      gstBasisType: { label: T(c, "site.admin.payerContract.basisType", "Basis for the GST recipient"), options: { "": T(c, "site.admin.payerContract.basisNone", "None recorded"),
+        ca_opinion: T(c, "site.admin.payerContract.basisCa", "Chartered accountant's opinion"), contract_clause: T(c, "site.admin.payerContract.basisClause", "Contract clause") } },
+      gstBasisRef: { label: T(c, "site.admin.payerContract.basisRef", "Opinion reference, or contract and clause") },
+      gstBasisDate: { label: T(c, "site.admin.payerContract.basisDate", "Date of the opinion or contract (YYYY-MM-DD)") },
+    };
+  }
+  function payerPartiesHtml(c, x) {
+    var p = x.parties, esc = c.esc;
+    if (!p || !p.gstRecipient) return "";
+    var g = p.gstRecipient, words = payerContractText(c);
+    var kind = (x.settings && x.settings.payerKind) || "";
+    var who = g.party === "patient" ? T(c, "site.admin.payerContract.isPatient", "the patient") : (g.legalName || g.name || "") + (g.gstin ? " (" + g.gstin + ")" : "");
+    var line = T(c, "site.admin.payerContract.summary", "{kind}. GST recipient: {who}", { kind: words.payerKind.options[kind] || words.payerKind.options[""], who: who });
+    var extra = g.source === "default_cashless" ? T(c, "site.admin.payerContract.defaultCashless", "Default: ordinary cashless treatment is a supply to the patient.")
+      : g.source === "legacy_global" ? T(c, "site.admin.payerContract.legacy", "From the old hospital-wide GST setting, because this contract has no determination.")
+      : g.basis && g.basis.ref ? T(c, "site.admin.payerContract.basis", "Basis: {ref}", { ref: g.basis.ref + (g.basis.date ? ", " + g.basis.date : "") }) : "";
+    var warn = g.warning === "recipient_details_incomplete" ? T(c, "site.admin.payerContract.incomplete", "The GST recipient's details are incomplete, so bills for this payer cannot be raised. Complete them.")
+      : g.warning ? T(c, "site.admin.payerContract.notDetermined", "Not determined: bills treat the patient as the GST recipient until you choose.") : "";
+    var tpa = p.partiesWarning === "tpa_insurer_not_found" ? T(c, "site.admin.payerContract.tpaNoInsurer", "The insurer this TPA acts for is not in the payer list.") : "";
+    return '<br><span class="quiet">' + esc(line) + (extra ? " " + esc(extra) : "") + "</span>" + (warn || tpa ? '<br><span class="msg err">' + esc([warn, tpa].filter(Boolean).join(" ")) + "</span>" : "");
   }
   function connectorsHtml(c, r) {
     var esc = c.esc;
@@ -2934,7 +2973,7 @@
           /* NHCX appends /claim/on_submit and the rest to the endpoint URL; the bearer token and this hospital's key are what is trusted. */
           : x.kind === "payer" && x.provider === "nhcx"
           ? '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.nhcxCallback", "NHCX endpoint URL to register for this hospital:")) + ' <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/nhcx-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>" : "";
-        return '<tr class="' + (x.active ? "" : "warn") + '"><td>' + esc(x.name || x.id) + callback + (res ? '<br><span class="msg ' + (res.passed ? "ok" : "err") + '">' + esc(res.detail) + "</span>" : "") + "</td><td>" + esc(prov.label || x.provider) + "</td><td><b>" + esc(x.active ? T(c, "site.admin.connectors.on", "On") : T(c, "site.admin.connectors.off", "Off")) + "</b></td><td>" +
+        return '<tr class="' + (x.active ? "" : "warn") + '"><td>' + esc(x.name || x.id) + callback + (x.kind === "payer" ? payerPartiesHtml(c, x) : "") + (res ? '<br><span class="msg ' + (res.passed ? "ok" : "err") + '">' + esc(res.detail) + "</span>" : "") + "</td><td>" + esc(prov.label || x.provider) + "</td><td><b>" + esc(x.active ? T(c, "site.admin.connectors.on", "On") : T(c, "site.admin.connectors.off", "Off")) + "</b></td><td>" +
           (x.secretsSet.length ? esc(x.secretsSet.join(", ")) + '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.setAt", "set {at}", { at: x.secretsSetAt || "" })) + "</span>" : '<span class="quiet">' + esc(T(c, "site.admin.connectors.noneSet", "none")) + "</span>") + "</td><td>" +
           '<button type="button" class="btn ghost" data-cn-edit="' + esc(x.id) + '">' + esc(T(c, "site.admin.connectors.change2", "Change")) + '</button> ' +
           (prov.testable ? '<button type="button" class="btn ghost" data-cn-test="' + esc(x.id) + '">' + esc(T(c, "site.admin.connectors.testConnection", "Test connection")) + '</button> ' : "") +

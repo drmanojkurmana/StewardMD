@@ -254,7 +254,8 @@ import { acknowledgeAnchorBreak } from "../../_wardsynq/audit-chain.js";
 import { orgAuditChain, firestoreAnchorStore } from "../../_q_audit_chain.js";
 import { chargesForPatient, tariffTable } from "../../_wardsynq/charge-capture.js";
 import { catalogue as investigationCatalogue } from "../../_wardsynq/investigation-catalogue.js";
-import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient, postNoteRoute, setBuyerRoute } from "../../_wardsynq/invoice.js";
+import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient, postNoteRoute, setPartiesRoute } from "../../_wardsynq/invoice.js";
+import { setStayPayer } from "../../_wardsynq/stay-payer.js";
 import { generateIrnRoute, cancelIrnRoute, einvoiceStatus } from "../../_wardsynq/einvoice.js";
 import { listPackages, packageVersions, savePackage, setStayPackage, stayPackages, packagePack } from "../../_wardsynq/packages.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
@@ -1770,13 +1771,15 @@ export async function onRequest(context) {
         // Owner S2: asking the gateway for a link is taking money (billing.charge); reading them is reading bills.
         "invoice-payment-link": CAPS.BILLING_CHARGE, "payment-requests": CAPS.BILLING_VIEW,
         "invoice-writeoff": CAPS.BILLING_CHARGE, "invoice-void": CAPS.BILLING_CHARGE,
-        // gap-claims-gst B: notes, the buyer on a B2B bill and e-invoice reporting all change a bill.
-        "invoice-credit-note": CAPS.BILLING_CHARGE, "invoice-debit-note": CAPS.BILLING_CHARGE, "invoice-buyer": CAPS.BILLING_CHARGE,
+        // gap-claims-gst B: notes, the parties on a bill (gst-parties) and e-invoice reporting all change a bill.
+        "invoice-credit-note": CAPS.BILLING_CHARGE, "invoice-debit-note": CAPS.BILLING_CHARGE, "invoice-parties": CAPS.BILLING_CHARGE,
         "invoice-irn": CAPS.BILLING_CHARGE, "invoice-irn-cancel": CAPS.BILLING_CHARGE, "einvoice-status": CAPS.BILLING_VIEW,
         /* gap-claims-gst-2 (packages.js): the package master is price list authority (staff.admin writes, as the Price
          * list does); putting a stay on a package changes its bill (billing.charge); reading either is reading bills. */
         packages: CAPS.BILLING_VIEW, "package-versions": CAPS.BILLING_VIEW, "package-save": CAPS.STAFF_ADMIN,
         "stay-package": CAPS.BILLING_CHARGE, "stay-packages": CAPS.BILLING_VIEW, "package-pack": CAPS.BILLING_VIEW,
+        // gst-parties (stay-payer.js): who settles a stay changes its bill, the same authority as putting it on a package.
+        "stay-payer": CAPS.BILLING_CHARGE,
         invoices: CAPS.BILLING_VIEW,
         /* Stock control is the dispensing side of pharmacy. Nothing behind these routes can refuse a
          * dispense: a count is a belief and the box in the pharmacist's hand is the fact. */
@@ -2962,7 +2965,7 @@ export async function onRequest(context) {
         return json({ ok: false, error: "not_found" }, 404, request);
       }
       if (sub === "connectors" && method === "GET") {
-        const r = await listConnectors(request, env, { ...deps, kind: url.searchParams.get("kind") || "" });
+        const r = await listConnectors(request, env, { ...deps, kind: url.searchParams.get("kind") || "", gst: readGstSettings(wsqCfg) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "connector-save" && method === "POST") {
@@ -3365,7 +3368,7 @@ export async function onRequest(context) {
       }
       if (sub === "claims" && method === "GET") {
         let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
-        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", payers });
+        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", payers, gst: readGstSettings(wsqCfg) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "upcoding" && method === "GET") {
@@ -3468,7 +3471,7 @@ export async function onRequest(context) {
         }
         const tf = await wsqTariff(env, wOrgId, wsqCfg);
         if (tf.error) return json({ ok: false, error: "price_list_unreadable", detail: tf.error, written: 0 }, 502, request);
-        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: tf.table, region: (wOrg && wOrg.region) || "IN", gstin: (wOrg && wOrg.regionProfile && wOrg.regionProfile.gstin) || "", gst: readGstSettings(wsqCfg), at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: tf.table, region: (wOrg && wOrg.region) || "IN", gstin: (wOrg && wOrg.regionProfile && wOrg.regionProfile.gstin) || "", gst: readGstSettings(wsqCfg), payersNow, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice" && method === "GET") {
@@ -3565,8 +3568,13 @@ export async function onRequest(context) {
           gstTreatment: body.gstTreatment, gstConfirmation: body.gstConfirmation });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
-      if (sub === "invoice-buyer" && method === "POST") {
-        const r = await setBuyerRoute(request, env, { ...deps, invoiceId: body.invoiceId, buyer: body.buyer, at: body.at, idempotencyKey: body.idempotencyKey || null, gst: readGstSettings(wsqCfg) });
+      /* gst-parties: who settles a stay, and who settles a bill. The payer's contract decides the GST recipient. */
+      if ((sub === "invoice-parties" || sub === "stay-payer") && method === "POST") {
+        let payers; try { payers = await payersNow(); } catch { return json({ ...payersUnread, written: 0 }, 502, request); }
+        const r = sub === "invoice-parties"
+          ? await setPartiesRoute(request, env, { ...deps, invoiceId: body.invoiceId, payerRef: body.payerRef, payers, at: body.at, idempotencyKey: body.idempotencyKey || null, gst: readGstSettings(wsqCfg) })
+          : await setStayPayer(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, payerRef: body.payerRef, policyNumber: body.policyNumber, reason: body.reason,
+            expectedVersion: body.expectedVersion, payers, gst: readGstSettings(wsqCfg), idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "einvoice-status" && method === "GET") {
