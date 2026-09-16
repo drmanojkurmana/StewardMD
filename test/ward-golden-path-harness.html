@@ -80,6 +80,10 @@ window.fetch = function (url, opts) {
     return reply({ ok: true, from: from || "ordered", to: DUE_STATUS });
   }
 
+  // LT-15: the test is picked from the hospital's list; the harness hospital prices a chest X-ray.
+  if (u.indexOf("/ward/investigation-catalogue") >= 0) {
+    return reply({ ok: true, entries: [{ code: "CXR-PA", name: "Chest X-ray", category: "imaging", source: "price-list" }] });
+  }
   if (u.indexOf("/ward/investigation") >= 0 && (opts && opts.method) === "POST") {
     SR_ID = "wsq-sr-" + ENC_ID; invStage = "ordered";
     return reply({ ok: true, written: 1, serviceRequestId: SR_ID });

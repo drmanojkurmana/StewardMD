@@ -159,6 +159,17 @@ const LABS = [
   { code: "2160-0", test: "Creatinine", unit: "mg/dL", normal: 0.9, critical: 8.2 },
 ];
 
+/* A price list is a commercial document with no default - the product refuses to invent one. These are FABRICATED demo
+ * prices in INR, not any hospital's real rate card, and they go on the Price list (Admin Center) where anybody can see
+ * and change them. They used to sit in wardsynq.tariff, which no screen shows, so the retest of 2026-09-16 found a bill
+ * priced while the Price list said "No prices set yet". Prices in paise. */
+const DEMO_PRICE_LIST = [
+  { name: "Specimen collection (DEMO price)", code: "specimen-collection", kind: "service", price: 6000 },
+  ...DRUGS.map((d) => ({ name: d.drug + " unit dose (DEMO price)", code: d.drug, kind: "medication", price: 4500 })),
+  ...LABS.map((l) => ({ name: l.test + " (DEMO price)", code: l.code, kind: "investigation", price: 32000 })),
+  { name: "X-ray chest (DEMO price)", code: "CXR", kind: "investigation", price: 55000 },
+];
+
 /* The hospital's own WardSynQ configuration. Every one of these is hospital-owned clinical or
  * commercial content the product deliberately refuses to default (see _opd_org.js wardsynqConfig). */
 const WSQ_CONFIG = {
@@ -171,14 +182,6 @@ const WSQ_CONFIG = {
     { id: "ot-1", name: "Theatre 1", kind: "theatre" }, { id: "ot-2", name: "Theatre 2", kind: "theatre" },
     { id: "ot-3", name: "Theatre 3 (Emergency)", kind: "theatre" }, { id: "cath-1", name: "Cath Lab", kind: "theatre" },
   ],
-  /* A tariff is a commercial document with no default - the product says so and refuses to invent
-   * one. These are FABRICATED demo prices in INR, not any hospital's real rate card. */
-  tariff: Object.assign(
-    { "specimen-collection": { amount: 60, currency: "INR", description: "Specimen collection (DEMO price)" } },
-    ...DRUGS.map((d) => ({ [d.drug]: { amount: 45, currency: "INR", description: d.drug + " unit dose (DEMO price)" } })),
-    ...LABS.map((l) => ({ [l.code]: { amount: 320, currency: "INR", description: l.test + " (DEMO price)" } })),
-    { "CXR-PA": { amount: 550, currency: "INR", description: "Chest radiograph (DEMO price)" } },
-  ),
   /* MaiK is OFF unless WSQ_DEMO_MAIK=1.
    *
    * Off by default because a fabricated AI answer on a fabricated chart is the one artefact here
@@ -382,6 +385,8 @@ async function resolveOrg(bootstrapActor) {
 
 async function setupOrg(admin, orgId) {
   await as(admin, "POST", "org/update", { orgId, name: DEMO_ORG_NAME, wardsynq: WSQ_CONFIG });
+  const priced = new Set((((await as(admin, "GET", `bill/tariff?orgId=${orgId}`, null, { tolerate: true })).body || {}).items || []).map((t) => t.code || t.name));
+  await pool(DEMO_PRICE_LIST.filter((t) => !priced.has(t.code)), CONCURRENCY, (t) => as(admin, "POST", "bill/tariff", { orgId, ...t }));
 
   const existingDepts = ((await as(admin, "GET", `org?orgId=${orgId}`, null, { tolerate: true })).body || {}).departments || [];
   const haveDept = new Set(existingDepts.map((d) => d.name));
@@ -775,8 +780,11 @@ async function billingJourney(orgId, p, who) {
   const cashier = who.cashier();
   const inv = await as(cashier, "POST", "ward/invoice", { orgId, patientId: p.patientId, encounterId: p.encounterId, at: new Date(Date.parse(p.admittedAt) + 86400000).toISOString() }, { key: `demo-inv-${p.mrn}` });
   if (inv.ok && inv.body.invoiceId) {
-    await as(cashier, "POST", "ward/invoice-deposit", { orgId, invoiceId: inv.body.invoiceId, amount: 500, reference: "DEMO-DEP-" + p.seq }, { key: `demo-dep-${p.mrn}` });
-    await as(cashier, "POST", "ward/invoice-payment", { orgId, invoiceId: inv.body.invoiceId, amount: 300, reference: "DEMO-PAY-" + p.seq }, { key: `demo-pay-${p.mrn}` });
+    /* The money taken is what the bill says, never a fixed sum: a fixed 500 + 300 against bills of about 120 made the
+     * Reports page read "charged 1455, collected 9660" (LT-38). Half as a deposit, the rest as the payment. */
+    const owed = Number(inv.body.balance) || 0, dep = Math.round(owed / 2);
+    if (dep > 0) await as(cashier, "POST", "ward/invoice-deposit", { orgId, invoiceId: inv.body.invoiceId, amount: dep, reference: "DEMO-DEP-" + p.seq }, { key: `demo-dep-${p.mrn}` });
+    if (owed - dep > 0) await as(cashier, "POST", "ward/invoice-payment", { orgId, invoiceId: inv.body.invoiceId, amount: owed - dep, reference: "DEMO-PAY-" + p.seq }, { key: `demo-pay-${p.mrn}` });
   }
   // The billing clerk who CODES is deliberately not the cashier who COLLECTS.
   const clerk = who.billing();
@@ -902,7 +910,7 @@ async function main() {
 
   // Radiology: a doctor requests, the radiologist reports under their own lab.result authority.
   await pool(admitted.slice(0, 3), 3, async (p) => {
-    const req = await as(who.doctor(), "POST", "ward/investigation", { orgId, patientId: p.patientId, encounterId: p.encounterId, code: "CXR-PA", display: "Chest radiograph PA", category: "imaging" }, { key: `demo-rad-${p.mrn}` });
+    const req = await as(who.doctor(), "POST", "ward/investigation", { orgId, patientId: p.patientId, encounterId: p.encounterId, code: "CXR", display: "X-ray chest", category: "imaging" }, { key: `demo-rad-${p.mrn}` });
     if (!req.ok) return;
     await as(who.lab(), "POST", "ward/report-imaging", { orgId, serviceRequestId: req.body.orderId, modality: "CR", findings: "DEMO: clear lung fields, normal cardiac silhouette.", impression: "No acute abnormality (DEMO).", status: "final" }, { key: `demo-radrep-${p.mrn}` });
   });

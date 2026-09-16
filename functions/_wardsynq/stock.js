@@ -113,6 +113,21 @@ function levelsFrom(movements, dispenses) {
     else if (kind === "transfer-out") row.issued += 0;
   }
 
+  /* AN ISSUE LEAVES THE STORE IT CAME FROM, NOT THE WARD IT WENT TO (LT-38). A dispense's `destination` is the
+   * ward the medicine was sent to, and this subtracted it THERE: the pharmacy's received stock never went down, and
+   * every ward that was sent a dose, having received nothing on record, read negative ("Amoxicillin, General
+   * Medicine A, -12 dose"). A dispense names no source location (pharmacy-dispense.js), so it comes out of the one
+   * place that item and unit were ever received into; received into several places, or nowhere, it comes out of the
+   * unnamed main store (location null), where a level with no receipt at all still shows negative, as it should. */
+  const receivedAt = new Map();
+  for (const m of movements || []) {
+    const qty = m && quantityOf(m.quantity);
+    if (!qty || (str(m.kind) !== "receipt" && str(m.kind) !== "transfer-in") || !str(m.code)) continue;
+    const k = `${key(m.code)}|${key(qty.unit)}`;
+    const set = receivedAt.get(k) || new Set();
+    set.add(str(m.location) || null);
+    receivedAt.set(k, set);
+  }
   for (const d of dispenses || []) {
     if (!d) continue;
     const qty = quantityOf(d.quantity);
@@ -124,7 +139,8 @@ function levelsFrom(movements, dispenses) {
       problems.push({ dispenseId: d.id || null, reason: "dispense_not_countable" });
       continue;
     }
-    const row = bump(code, d.drug, d.destination, qty, -1);
+    const from = receivedAt.get(`${key(code)}|${key(qty.unit)}`);
+    const row = bump(code, d.drug, from && from.size === 1 ? [...from][0] : null, qty, -1);
     row.issued += qty.value;
   }
 

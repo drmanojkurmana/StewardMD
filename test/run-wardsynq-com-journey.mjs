@@ -236,8 +236,10 @@ try {
       await ev(`document.querySelector(${JSON.stringify(sel)}).click(); return 1;`);
       await until(`return !WARD._st.busy ? 'y' : '';`, 15000);
     }
-    await ev(`document.getElementById('wInvCode').value='Chest X-ray'; document.querySelector('[data-w-act="investigation"]').click(); return 1;`);
-    await waitText("Chest X-ray", 15000);
+    // LT-15: the test is picked from the hospital's list (the built-in "X-ray chest (CXR)" when nothing is priced).
+    await until(`return document.querySelector('#wInvList option') ? 'y' : '';`, 15000);
+    await ev(`document.getElementById('wInvCode').value='X-ray chest (CXR)'; document.querySelector('[data-w-act="investigation"]').click(); return 1;`);
+    await waitText("X-ray chest", 15000);
     await click('[data-w-act="investigations"]'); await until(`return !WARD._st.busy ? 'y' : '';`, 15000);
     return { note: "vitals, order, verify/dispense/scan/administer, investigation ordered, results card read" };
   });

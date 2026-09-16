@@ -52,6 +52,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { zoneOffsetAt } from "./mar-schedule.js";
 import { reportIdFor as radiologyReportIdFor } from "./radiology-report.js";
+import { effectiveCategory } from "./investigation-catalogue.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -143,7 +144,8 @@ function modalityMapOf(config) {
 
 /** PURE. Is this order one a modality should see: an imaging request that is still to be done. */
 function isPendingImaging(o) {
-  if (!o || o.resourceType !== "ServiceRequest" || o.category !== "imaging") return false;
+  // LT-15: a catalogued imaging test filed as laboratory (the demo's "CXR") is on the radiology worklist too.
+  if (!o || o.resourceType !== "ServiceRequest" || effectiveCategory(o) !== "imaging") return false;
   // An imported order carries the sender's own status; a native one carries ours. Either way a
   // cancelled or completed order is not on anybody's worklist.
   const status = str(o.externalStatus) || str(o.status);

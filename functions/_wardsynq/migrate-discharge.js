@@ -41,6 +41,7 @@ import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliat
 import { ADMISSION_CLASSES, freeMasterBed } from "./migrate-inpatient.js";
 import { chargesForPatient } from "./charge-capture.js";
 import { reconciliationOf } from "../../wardsynq/wardsynq-invoice.js";
+import { invoicesForStay } from "./invoice.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOT_RECORDED = "Not recorded.";
@@ -426,19 +427,24 @@ const DISCHARGE_DISPOSITIONS = Object.freeze(["home", "transferred", "left-again
  * settled = nothing owed on any bill and nothing done on this stay left off one. An item with no
  * price is not settled: it is a charge nobody has billed yet.
  */
-function billState(charges, invoices) {
+function billState(charges, invoices, encounter, nowMs) {
   if (!charges || !charges.ok || (charges.unreadable && charges.unreadable.length) || !Array.isArray(invoices)) {
     return { state: "unreadable", balance: null, unbilled: [], unpriced: [] };
   }
   const live = invoices.filter((i) => i && !isExternalRecord(i) && !i.void);
+  // An item on ANY of the patient's bills is billed: the same event is never billed twice (invoice.js).
   const onBill = new Set();
   for (const inv of live) for (const l of inv.lines || []) if (l.sourceType && l.sourceId) onBill.add(`${l.sourceType}:${l.sourceId}`);
   const unbilled = (charges.priced || []).filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)))
     .map((it) => ({ display: it.display || it.code, code: it.code, amount: it.line }));
   const unpriced = (charges.unpriced || []).map((it) => ({ display: it.display || it.code, code: it.code }));
-  const balance = Math.round(live.reduce((n, inv) => n + (Number(reconciliationOf(inv).balance) || 0), 0) * 100) / 100;
+  /* What is owed is read from THIS STAY's invoices (retest 2026-09-16): an invoice carrying the stay's id, or an older
+   * one with no id matched by its lines or its date (invoice.js invoicesForStay). With no stay given, every bill. */
+  const stayKeys = new Set([...(charges.priced || []), ...(charges.unpriced || [])].map((it) => `${it.sourceType}:${it.sourceId}`));
+  const owedOn = encounter ? invoicesForStay(live, encounter, stayKeys, nowMs) : live;
+  const balance = Math.round(owedOn.reduce((n, inv) => n + (Number(reconciliationOf(inv).balance) || 0), 0) * 100) / 100;
   const state = balance > 0 ? "balance_due" : (unbilled.length || unpriced.length) ? "unbilled" : "settled";
-  return { state, balance, unbilled, unpriced };
+  return { state, balance, unbilled, unpriced, invoiceIds: owedOn.map((i) => i.id) };
 }
 
 /**
@@ -478,7 +484,7 @@ async function checklistFor(request, env, ctx, svc, stay) {
       .catch((e) => ({ ok: false, error: "charges_failed", detail: str(e && e.message) })),
     svc.byPatient("Invoice", encounter.patientId).catch(() => null),
   ]);
-  const checklist = dischargeChecklist(pendingItems(stay.inputs), billState(charges, invoices), stay.failed);
+  const checklist = dischargeChecklist(pendingItems(stay.inputs), billState(charges, invoices, encounter), stay.failed);
   if (ctx.tariffError) checklist.bill = { state: "unreadable", balance: null, unbilled: [], unpriced: [], detail: ctx.tariffError };
   return checklist;
 }

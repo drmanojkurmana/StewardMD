@@ -901,9 +901,7 @@ async function bedBoard(request, env, ctx) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), wards: [] };
   }
 
-  const want = str(ctx.ward).toLowerCase();
-  const open = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)
-    .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
+  const allOpen = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN);
 
   // TASK 4.2: the real Ward/Bed master data from TASK 4.1 wins over the free-text org config the
   // moment a hospital has actually created any - this is what turns the config blob's own
@@ -913,22 +911,41 @@ async function bedBoard(request, env, ctx) {
   let cfg = ctx.beds && typeof ctx.beds === "object" ? ctx.beds : null;
   const bedStateOf = new Map();   // "ward|bed" (lowercased) -> real state, only when master data exists
   const deptOf = new Map();       // ward name -> its department's name, from the hospital's own master data
+  const canonical = new Map();    // lowercased ward name or code -> the ward's own name (LT-03)
+  const retired = new Set();      // lowercased names and codes of wards the hospital has turned off
+  let masterKnown = false, bedsUnread = false;
   if (ctx.orgId) {
-    let masterWards = [];
-    try { masterWards = (await listWards(env, ctx.orgId)).filter((w) => w.active); } catch { masterWards = []; }
+    let allWards = [];
+    try { allWards = await listWards(env, ctx.orgId); } catch { allWards = []; }
+    const masterWards = allWards.filter((w) => w.active);
+    for (const w of allWards.filter((x) => !x.active)) { retired.add(str(w.name).toLowerCase()); if (str(w.code)) retired.add(str(w.code).toLowerCase()); }
     /* BUG-MU06Z46U-DMDX / BUG-MU08T4RL-GU0N: admitting and transferring pick a department by picking one of
      * its wards, so the board names each ward's department. Unreadable departments leave it null. */
     for (const [k, v] of await departmentNames(env, ctx.orgId, masterWards)) deptOf.set(k, v);
     if (masterWards.length) {
+      masterKnown = true;
       cfg = {};
+      /* One read of the hospital's beds, grouped by ward. A read that fails is not "this ward has no beds": it
+       * leaves every ward's bed list unknown and says so. */
+      let beds = null;
+      try { beds = (await listBeds(env, ctx.orgId)).filter((b) => b.active); } catch { beds = null; bedsUnread = true; }
       for (const w of masterWards) {
-        let beds = [];
-        try { beds = (await listBeds(env, ctx.orgId, w.id)).filter((b) => b.active); } catch { beds = []; }
-        cfg[w.name] = beds.map((b) => b.name);
-        for (const b of beds) bedStateOf.set(`${w.name.toLowerCase()}|${b.name.toLowerCase()}`, b.state);
+        canonical.set(str(w.name).toLowerCase(), w.name);
+        if (str(w.code) && !canonical.has(str(w.code).toLowerCase())) canonical.set(str(w.code).toLowerCase(), w.name);
+        if (!beds) { cfg[w.name] = null; continue; }
+        const mine = beds.filter((b) => b.wardId === w.id);
+        cfg[w.name] = mine.map((b) => b.name);
+        for (const b of mine) bedStateOf.set(`${w.name.toLowerCase()}|${b.name.toLowerCase()}`, b.state);
       }
     }
   }
+  /* LT-03: an encounter's ward is the name somebody typed or picked. ADT matches it to the hospital's wards without
+   * regard to case (getWardByName), but this board grouped by the exact text, so "cardiology ward" or the ward code
+   * "CAR" made a second, bed-less row beside "Cardiology Ward" that read "Bed list not configured". Matched here the
+   * same way, by name or code, never by a partial name: "cardio" is not guessed to be Cardiology Ward. */
+  const wardNameOf = (name) => canonical.get(str(name).toLowerCase()) || str(name);
+  const want = str(ctx.ward).toLowerCase();
+  const open = allOpen.filter((e) => !want || wardNameOf(e.location && e.location.ward).toLowerCase() === wardNameOf(ctx.ward).toLowerCase());
   const byWard = new Map();
   const wardOf = (name) => {
     const key = str(name) || "(no ward recorded)";
@@ -956,7 +973,7 @@ async function bedBoard(request, env, ctx) {
   } catch (e) { /* the beds are still worth showing; the tiles simply carry no name */ }
 
   for (const e of open) {
-    const w = wardOf(e.location && e.location.ward);
+    const w = wardOf(wardNameOf(e.location && e.location.ward));
     const p = nameById.get(e.patientId) || null;
     const row = {
       encounterId: e.id, patientId: e.patientId,
@@ -969,8 +986,13 @@ async function bedBoard(request, env, ctx) {
   for (const w of byWard.values()) {
     w.department = deptOf.get(w.ward) || null;
     const list = cfg && Array.isArray(cfg[w.ward]) ? cfg[w.ward].map(String) : null;
-    if (!list) { w.free = []; w.bedsKnown = false; continue; }
+    /* LT-03: WHY a ward has no bed list, said plainly. A ward the hospital's ward list does not have (typed free text
+     * at admission, or a ward since turned off) is not a ward whose beds were never set up, and the fix differs:
+     * move the patient to a real ward, or add the ward. The patients in it are still shown. */
+    if (masterKnown && !Object.prototype.hasOwnProperty.call(cfg, w.ward)) w.notInWardList = retired.has(w.ward.toLowerCase()) ? "retired" : "unknown";
+    if (!list) { w.free = []; w.bedsKnown = false; if (bedsUnread) w.bedsUnread = true; continue; }
     w.bedsKnown = true;
+    if (!list.length) w.noBeds = true;
     const taken = new Set(w.occupied.map((o) => String(o.bed).toLowerCase()));
     // A bed with no patient in it is not automatically free: the master record may say blocked,
     // cleaning or maintenance, and that is the hospital's own call, not this board's to overrule.

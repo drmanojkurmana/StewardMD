@@ -6605,3 +6605,30 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   and a failed lookup says "identity could not be loaded". The live staff record wins over a name stored at write
   time. Timeline events carry `byId`/`labelBase` (and `signedById`, `witnessId`); the round carries `witnessedBy` and
   `statusBy`.
+## 2026-09-16 Billing and reports from the live retest: one price table, invoices carry the stay, catalogue of tests
+- THE PRICE LIST IS THE ONLY PRICE TABLE where it exists (clinic billing store on). The retest billed "Specimen
+  collection 60" while the Price list said "No prices set yet": the demo seed had written fabricated prices into
+  wardsynq.tariff, which no screen shows. `wsqTariff` now ignores wardsynq.tariff whenever the Price list store is on;
+  the configured tariff prices only a deployment with no Price list store. An item with no Price list price is listed
+  as "no price set". The demo seed writes its (labelled DEMO) prices to the Price list instead. Production demo data
+  is not changed.
+- AN INVOICE CARRIES THE STAY. `raiseInvoice` stores the named encounter (refused 422 if it is not this patient's) or
+  the patient's open inpatient stay. The discharge checklist's "bill settled" sums only that stay's invoices
+  (`invoicesForStay`): an invoice with the stay's id, or one with no id (every invoice before this change) matched by a
+  line from this stay's charges or a bed day of it, or by being raised between admission and discharge (or now).
+  Whether an item is on a bill still reads every one of the patient's bills, so nothing is billed twice.
+- REPORTS: the billing footing shows credit held beyond the bills and nets refunds, void invoices are counted apart,
+  and it states whether it balances. A dispense is taken out of the one location that item was received into (else the
+  unnamed main store), not the ward it was sent to. Billing, claims and pharmacy reports take `from`/`to` (a date is a
+  whole day on the hospital's clock) defaulting to the last 7 days; a bad date is 422. CSV per table is built in the
+  browser from the table on screen.
+- INVESTIGATION CATALOGUE (functions/_wardsynq/investigation-catalogue.js): Price list items of kind
+  investigation/radiology, the hospital's order-set investigations, then a built-in list of common tests with WardSynQ
+  short codes (not LOINC). A catalogued test's category is the catalogue's. The chart orders anything else only as
+  `other: true` with a reason (422 without); an API order with an unknown code is still accepted, unmarked, so order
+  sets, integrations and older clients keep working. Existing orders filed as laboratory whose code or name is exactly
+  a built-in imaging test are READ as imaging (`effectiveCategory`) by the laboratory and radiology worklists and by
+  specimen collection; stored records are not rewritten. Words in a free-text name never overrule a category.
+- BED BOARD: a stay's ward is matched to the hospital's ward by name or ward code without regard to case, as ADT
+  already does; never by a partial name. A ward not on the ward list (or turned off) and a ward with no bed rows each
+  say so instead of "Bed list not configured".

@@ -34,6 +34,7 @@ import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { LAB_CODE_SEED } from "../../wardsynq/adapters/wardsynq-ghis-adapter.js";
 import { deltaCheck, autoVerify } from "./lab-delta.js";
+import { effectiveCategory } from "./investigation-catalogue.js";
 import { TYPE as SPECIMEN_TYPE, NO_SPECIMEN_CATEGORIES, SpecimenCollection, collectionState } from "./specimen.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -397,7 +398,8 @@ async function pendingRequests(request, env, ctx) {
     .filter((s) => s && s.status !== "completed" && s.status !== "revoked" && s.status !== "cancelled" && !isExternalRecord(s))
     .filter((s) => !resulted.has(s.id))
     // patientId travels so a hospital-wide caller can say whose test this is.
-    .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, patientId: s.patientId || null, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
+    // LT-15: the category the boards file it under, a catalogued imaging test filed as laboratory read as imaging.
+    .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, category: effectiveCategory(s), patientId: s.patientId || null, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
   return { ...base, ok: true, patientId: patientId || null, scope: hospitalWide ? "hospital" : "patient", pending };
 }
 

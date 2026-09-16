@@ -52,6 +52,18 @@ try {
   ok(await ev(`return document.body.lastElementChild.textContent.indexOf('Invoice') >= 0;`), "the billing report's own stated data source is shown, not hidden");
   ok(await ev(`return document.body.lastElementChild.textContent.indexOf('admin') >= 0;`), "the permission scope this report ran as is shown");
 
+  // LT-38: a date range sent to the server (default the last 7 days), and a CSV of each table.
+  ok(await ev(`return __calls.some(function (c) { return /report-billing\\?.*&from=\\d{4}-\\d{2}-\\d{2}&to=\\d{4}-\\d{2}-\\d{2}/.test(c.url); });`), "the billing report is asked for a period by default");
+  await ev(`document.getElementById('wRptFrom').value = '2026-09-01'; document.getElementById('wRptTo').value = '2026-09-07'; __calls.length = 0; return true;`);
+  await click('[data-w-act="reportsrange"]');
+  ok(await waitFor(`return __calls.some(function (c) { return c.url.indexOf('report-pharmacy') >= 0 && c.url.indexOf('from=2026-09-01&to=2026-09-07') >= 0; });`), "the chosen period is sent to the server");
+  ok(await waitFor(`return !!document.querySelector('[data-w-act^="rptcsv:"]') && document.body.lastElementChild.textContent.indexOf('42000') >= 0;`), "the reports redraw with a CSV button");
+  ok(await ev(`return document.querySelectorAll('[data-w-act^="rptcsv:"]').length === document.querySelectorAll('table.w-tbl[id^="wRptT"]').length;`), "one CSV button per table");
+  await ev(`var t = [].filter.call(document.querySelectorAll('table.w-tbl[id^="wRptT"]'), function (x) { return x.textContent.indexOf('Charged') >= 0; })[0];
+    document.querySelector('[data-w-act="rptcsv:' + t.id + '"]').click(); return true;`);
+  ok(await waitFor(`return typeof __csv === "string" && /Charged,42000/.test(__csv) && /Outstanding,6100/.test(__csv);`), "the billing table downloads as CSV with its figures");
+  ok(await ev(`return /^wardsynq-billing-table\\d+-2026-09-01_2026-09-07\\.csv$/.test(window.__downloadName || "");`), "the file is named for the report and the period");
+
 } catch (e) { ok(false, "harness error: " + (e && e.message || e)); }
 finally { try { chrome.kill(); } catch {} }
 console.log(fails ? `\n${fails} check(s) failed` : "\nALL CHECKS PASSED");

@@ -35,6 +35,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { priorityRank } from "./ward-order.js";
+import { effectiveCategory } from "./investigation-catalogue.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 // The SAME wristband comparator wardsynq-meds.js's five-rights scan already uses (HAZ-MED-04) and
@@ -191,9 +192,9 @@ async function collectSpecimen(request, env, ctx) {
   }
   // BUG-MU2PR8I2: an imaging study, a procedure or a referral has no sample. A "collected" chest X-ray
   // would put an accession number on the laboratory's board for a tube that does not exist. Read from
-  // the order's own category, never its name.
-  if (NO_SPECIMEN_CATEGORIES.includes(str(sr.category))) {
-    return { ...base, ok: false, status: 409, error: "not_a_specimen_order", detail: `this is a ${sr.category} order; there is no sample to collect`, serviceRequestId, written: 0 };
+  // the order's own category, never its name. LT-15: a catalogued imaging test filed as laboratory reads as imaging.
+  if (NO_SPECIMEN_CATEGORIES.includes(effectiveCategory(sr))) {
+    return { ...base, ok: false, status: 409, error: "not_a_specimen_order", detail: `this is a ${effectiveCategory(sr)} order; there is no sample to collect`, serviceRequestId, written: 0 };
   }
 
   const scanned = str(ctx.scannedPatientBarcode);
@@ -342,7 +343,7 @@ async function collectionList(request, env, ctx) {
     // An order another hospital placed is on this chart for the record, not for this ward's phlebotomist.
     .filter((o) => o && o.status !== "revoked" && o.status !== "completed" && !isExternalRecord(o))
     .map((o) => ({
-      serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: o.category || null,
+      serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: (o.category || effectiveCategory(o) === "imaging") ? effectiveCategory(o) : null,
       // Carried so a hospital-wide caller can say WHOSE specimen this is. Harmless per-patient
       // (the caller already knows), and the one thing a department board cannot work without.
       patientId: o.patientId || null,

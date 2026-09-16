@@ -115,7 +115,8 @@ test("billing report: sums real invoices, never presents an estimate", async () 
       events: [{ kind: "raised", amount: 0, actorId: idFor(ADMIN), at: "2026-09-01T00:00:00.000Z" }, { kind: "payment", amount: 300, actorId: idFor(ADMIN), at: "2026-09-01T01:00:00.000Z" }],
       lines: [{ code: "CONSULT", display: "Consultation", quantity: 1, amount: 500, line: 500 }] },
   ]);
-  const r = await as(ADMIN, `/ward/report-billing?orgId=${ORG}`);
+  // LT-38: the period is applied server-side and defaults to the last 7 days, so a fixture dated 1 September names its period.
+  const r = await as(ADMIN, `/ward/report-billing?orgId=${ORG}&from=2026-09-01&to=2026-09-03`);
   envelopeOk(r);
   assert.equal(r.invoiceCount, 1);
   assert.equal(r.charged, 500);
@@ -130,7 +131,7 @@ test("claims report: counts real claims by state, sums outstanding submitted amo
     { resourceType: "Claim", id: "claim-2", version: 1, patientId: "p2", state: "denied", submittedAmount: 500, deniedAmount: 500, submittedAt: "2026-09-01T00:00:00.000Z" },
     { resourceType: "Claim", id: "claim-3", version: 1, patientId: "p3", state: "paid", submittedAmount: 700, approvedAmount: 700, submittedAt: "2026-09-01T00:00:00.000Z" },
   ]);
-  const r = await as(ADMIN, `/ward/report-claims?orgId=${ORG}`);
+  const r = await as(ADMIN, `/ward/report-claims?orgId=${ORG}&from=2026-09-01&to=2026-09-03`);
   envelopeOk(r);
   assert.equal(r.claimCount, 3);
   assert.equal(r.submitted, 1);
@@ -145,7 +146,7 @@ test("pharmacy report: real dispense volume and pending-verification count, reus
     { resourceType: "MedicationOrder", id: "order-1", version: 1, patientId: "p1", drug: "Amoxicillin", status: "active" },
     { resourceType: "MedicationDispense", id: "disp-1", version: 1, patientId: "p1", orderId: "order-1", drug: "Amoxicillin", quantity: 30, state: "issued", dispensedAt: "2026-09-01T00:00:00.000Z" },
   ]);
-  const r = await as(ADMIN, `/ward/report-pharmacy?orgId=${ORG}`);
+  const r = await as(ADMIN, `/ward/report-pharmacy?orgId=${ORG}&from=2026-09-01&to=2026-09-03`);
   envelopeOk(r);
   assert.equal(r.dispenseCount, 1);
   assert.equal(r.dispenseVolume.Amoxicillin, 30);
@@ -154,7 +155,7 @@ test("pharmacy report: real dispense volume and pending-verification count, reus
     { resourceType: "MedicationDispense", id: "disp-2", version: 1, patientId: "p1", orderId: "order-1", drug: "Amoxicillin", quantity: { value: 28, unit: "tablet" }, state: "issued", dispensedAt: "2026-09-02T00:00:00.000Z" },
     { resourceType: "MedicationDispense", id: "disp-3", version: 1, patientId: "p1", orderId: "order-1", drug: "Amoxicillin", quantity: { value: 12, unit: "tablet" }, state: "issued", dispensedAt: "2026-09-03T00:00:00.000Z" },
   ]);
-  const r2 = await as(ADMIN, `/ward/report-pharmacy?orgId=${ORG}`);
+  const r2 = await as(ADMIN, `/ward/report-pharmacy?orgId=${ORG}&from=2026-09-01&to=2026-09-03`);
   assert.equal(r2.dispenseVolume["Amoxicillin (tablet)"], 40, JSON.stringify(r2.dispenseVolume));
   assert.equal(r.pendingVerification, 1, "the active order with no MedicationVerification row is pending");
   assert.ok(Array.isArray(r.stock), "stockLevels() is reused unchanged: " + JSON.stringify(r.stock));

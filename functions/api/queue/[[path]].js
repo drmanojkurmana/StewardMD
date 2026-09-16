@@ -222,6 +222,7 @@ import { systemHealthReport } from "../../_wardsynq/system-health.js";
 import { acknowledgeAnchorBreak } from "../../_wardsynq/audit-chain.js";
 import { orgAuditChain, firestoreAnchorStore } from "../../_q_audit_chain.js";
 import { chargesForPatient, tariffTable } from "../../_wardsynq/charge-capture.js";
+import { catalogue as investigationCatalogue } from "../../_wardsynq/investigation-catalogue.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
@@ -334,14 +335,42 @@ function wsqSchedule(c) {
 /* Bilingual prints (owner decision 2026-09-15): whether this hospital offers a second language on the patient's
  * prescription and discharge summary prints, and the clock their dates are written in. Display facts from org
  * config only; English is always printed whole. India without a configured offset is IST, as elsewhere here. */
-/* ONE PRICE TABLE FOR THE WARD BILL (LT-30): the hospital's configured wardsynq.tariff and the Price list
- * the Admin Center edits (q_tariff, behind the clinic billing store). The ward bill read only the first
- * while the screen wrote only the second. An unreadable price list is an error, never an empty one. */
+/* ONE PRICE TABLE FOR THE WARD BILL (LT-30). Where the Price list exists (the clinic billing store is on), it is the
+ * ONLY price table: the retest of 2026-09-16 found "Specimen collection 60" billed while the Price list said "No
+ * prices set yet", because the demo seed had written fabricated prices into wardsynq.tariff, a configuration blob no
+ * screen shows. A price nobody can see on the Price list is not the hospital's price, so it prices nothing and the
+ * item is listed as "no price set". The configured tariff remains the price table only for a deployment with no
+ * Price list store at all. An unreadable price list is an error, never an empty one. */
 async function wsqTariff(env, orgId, wsqCfg) {
-  const cfg = (wsqCfg && wsqCfg.tariff) || null;
-  if (!BILL.billingEnabled(env)) return { table: tariffTable(cfg, []), error: null };
-  try { return { table: tariffTable(cfg, await BILL.listTariff(env, orgId)), error: null }; }
-  catch { return { table: tariffTable(cfg, []), error: "The price list could not be read, so prices cannot be checked." }; }
+  if (!BILL.billingEnabled(env)) return { table: tariffTable((wsqCfg && wsqCfg.tariff) || null, []), error: null };
+  try { return { table: tariffTable(null, await BILL.listTariff(env, orgId)), error: null }; }
+  catch { return { table: {}, error: "The price list could not be read, so prices cannot be checked." }; }
+}
+/* LT-15: what a ward can order, from the Price list, the hospital's order sets and the built-in common tests. A Price
+ * list that cannot be read leaves the rest of the list usable and says so; it never blocks an order. */
+async function wsqInvestigationCatalogue(env, orgId, wsqCfg) {
+  const sets = (wsqCfg && wsqCfg.orderSets) || [];
+  if (!BILL.billingEnabled(env)) return { entries: investigationCatalogue([], sets), error: null };
+  try { return { entries: investigationCatalogue(await BILL.listTariff(env, orgId), sets), error: null }; }
+  catch { return { entries: investigationCatalogue([], sets), error: "The price list could not be read, so its tests are not on this list right now." }; }
+}
+/* PURE. A report's period (LT-38): `from`/`to` as a date (YYYY-MM-DD, a whole day on the hospital's clock) or an ISO
+ * instant; both absent means the last 7 days up to now. Returns {from, to} as ISO instants, or {error}. */
+function reportRange(fromQ, toQ, wsqCfg, nowMs) {
+  const offsetMs = (Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330) * 60000;
+  const at = (v, endOfDay) => {
+    const s = String(v || "").trim();
+    if (!s) return null;
+    const t = /^\d{4}-\d{2}-\d{2}$/.test(s) ? Date.parse(s + "T00:00:00.000Z") - offsetMs + (endOfDay ? 86400000 - 1 : 0) : Date.parse(s);
+    return Number.isFinite(t) ? t : NaN;
+  };
+  const now = Number.isFinite(nowMs) ? nowMs : Date.now();
+  let from = at(fromQ, false), to = at(toQ, true);
+  if (Number.isNaN(from) || Number.isNaN(to)) return { error: "from and to must be dates (YYYY-MM-DD)." };
+  if (to === null) to = now;
+  if (from === null) from = to - 7 * 86400000;
+  if (from > to) return { error: "from is after to." };
+  return { from: new Date(from).toISOString(), to: new Date(to).toISOString() };
 }
 function wsqPrintSettings(org) {
   const c = (org && org.wardsynq) || {};
@@ -1377,6 +1406,8 @@ export async function onRequest(context) {
         collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
         // Asking for an investigation is a clinical act, like prescribing.
         investigation: CAPS.EMR_TREAT,
+        // LT-15: the list a test is picked from. Reading it is reading the chart's order form, nothing more.
+        "investigation-catalogue": CAPS.EMR_VIEW,
         /* Reporting an imaging study is the radiologist's own act, granted by lab.result - the same
          * authority the laboratory reports under. A reporter is a reporter, and it writes only its
          * own report. */
@@ -2743,6 +2774,24 @@ export async function onRequest(context) {
           encounterId: url.searchParams.get("encounterId") || "",
           tariff: tf.table,
         });
+        /* "Not billed yet" means NOT ON A BILL (retest 2026-09-16): after the invoice was raised and paid, Specimen
+         * collection 60 was still listed here, because this list never looked at the invoices. Items already on a
+         * live invoice are taken off; if the invoices cannot be read the list stays whole and says so. */
+        if (r.ok && Array.isArray(r.priced)) {
+          const invs = await invoicesForPatient(request, env, { ...deps, patientId: r.patientId });
+          if (invs.ok) {
+            const onBill = new Set();
+            for (const i of invs.invoices) if (i.status !== "void") for (const l of i.lines || []) if (l.sourceType && l.sourceId) onBill.add(`${l.sourceType}:${l.sourceId}`);
+            const before = r.priced.length;
+            r.priced = r.priced.filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)));
+            r.unpriced = (r.unpriced || []).filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)));
+            r.alreadyInvoiced = before - r.priced.length;
+            r.total = Math.round(r.priced.reduce((n, it) => n + (Number(it.line) || 0), 0) * 100) / 100;
+          } else {
+            r.unreadable = [...(r.unreadable || []), "Invoice"];
+            r.unreadableWarning = "Could not read this patient's invoices, so items listed here may already be on a bill.";
+          }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice" && method === "POST") {
@@ -3159,8 +3208,13 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "investigation" && method === "POST") {
-        const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        const cat = await wsqInvestigationCatalogue(env, wOrgId, wsqCfg);
+        const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, other: body.other === true, catalogue: cat.entries, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "investigation-catalogue" && method === "GET") {
+        const cat = await wsqInvestigationCatalogue(env, wOrgId, wsqCfg);
+        return json({ ok: true, entries: cat.entries, ...(cat.error ? { priceListUnreadable: true, warning: cat.error } : {}) }, 200, request);
       }
       if (sub === "collect" && method === "POST") {
         const r = await collectSpecimen(request, env, { ...deps, serviceRequestId: body.serviceRequestId, specimenType: body.specimenType, container: body.container, at: body.at, scannedPatientBarcode: body.scannedPatientBarcode, idempotencyKey: body.idempotencyKey || null });
@@ -3394,7 +3448,11 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-flow" && method === "GET") {
-        const r = await patientFlow(request, env, { ...deps, escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        // LT-39: the discharge rows name their patients; those reads audit together, as the critical results board's do.
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const r = await patientFlow(request, env, { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository }, withPatients: true, escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        try { await audits.flush(); }
+        catch { return json({ ok: false, error: "audit_write_failed", message: "Patient flow was read but could not be recorded in the audit trail, so it is not shown. Try again." }, 502, request); }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "report-patient-flow" && method === "GET") {
@@ -3512,17 +3570,23 @@ export async function onRequest(context) {
         const r = await prepareOverdueWorkQueue(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
-      if (sub === "report-billing" && method === "GET") {
-        const r = await billingReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
-      }
-      if (sub === "report-claims" && method === "GET") {
-        const r = await claimsReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
-      }
-      if (sub === "report-pharmacy" && method === "GET") {
-        const r = await pharmacyReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+      if (sub === "report-billing" || sub === "report-claims" || sub === "report-pharmacy") {
+        /* LT-38: a date range on every period report, applied HERE, defaulting to the last 7 days. A date that does
+         * not parse is refused: read as "no filter" it would silently widen the report to everything. */
+        const range = reportRange(url.searchParams.get("from"), url.searchParams.get("to"), wsqCfg);
+        if (range.error) return json({ ok: false, error: "bad_date", detail: range.error }, 422, request);
+        if (method === "GET" && sub === "report-billing") {
+          const r = await billingReport(request, env, { ...deps, ...range });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (method === "GET" && sub === "report-claims") {
+          const r = await claimsReport(request, env, { ...deps, ...range });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (method === "GET" && sub === "report-pharmacy") {
+          const r = await pharmacyReport(request, env, { ...deps, ...range, reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
       }
       if (sub === "report-him" && method === "GET") {
         const r = await himReport(request, env, { ...deps, patientRules: (wsqCfg && wsqCfg.chartCompletion) || null, criticalPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null, riskTools: (wsqCfg && wsqCfg.riskTools) || [] });
