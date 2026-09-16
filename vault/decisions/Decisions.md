@@ -7183,3 +7183,26 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
 - **A code is attached only from the loaded set** (resolveCoding): problems/diagnoses with codeSystem snomed|icd-10|loinc,
   an operation booking (SurgicalCase.procedureCoding), a test order (ServiceRequest.standardCoding). The stored display is
   the set's. FHIR Condition/Procedure/ServiceRequest and the ABDM consultation record carry the coding when present.
+## 2026-09-17 Statutory registers brought to the legal review (branch legal-registers)
+- Source: a legal-research opinion (not legal advice) on sections B to F; its lawyer sign-off list is still open. Where it
+  says unconfirmed, the safest default ships with a hospital-editable setting and the note on screen:
+  `wardsynq.registers` (register-settings.js, whitelisted in _opd_org.js), edited at POST /org/register-settings
+  (staff.admin, Registers > Register settings). Clocks (Form F by the 5th, Form II by the hospital's day, RBD 21 days,
+  NDPS 3J 30 Nov / 3-I 31 Mar, recognition renewal) are pure functions there.
+- Companion records share their register's door and capability, chosen by `kind` from a fixed family
+  (register-routes.js FAMILY): formfprint and statreturn with Form F; mtpboard (Form D), mtpforme (Form E) with MTP;
+  dyingdecl with MLC; form3e, form3esign, form3j, form3i with NDPS. No new capability or router route except the settings.
+- Refusals, not warnings: a Form F declaration at or after the procedure start (r.10(1A)); any obstetric USG report,
+  preliminary included, without the woman's declaration on Form F; foetal sex text (audited without the text); MTP above
+  20 weeks without Rule 3B category and a Form E, above 24 without an allowed Form D, a rule 4A-ineligible practitioner,
+  a woman's own consent under 18 or mentally ill; MLC examination fields without consent, a male doctor for a POCSO girl;
+  Form 4A with a manner of death; controlled expired-stock wastage without the Controller's nominee; controlled receipt or
+  dispense once Form 3G has expired with no renewal reference. Flags, not refusals: Form I certified over 3 hours late,
+  Board opinion over 3 days, a Part I mode of dying.
+- MTP reg 7: for readers without register.mtp, the ward list, ED list, bed board, timeline, discharge summary and
+  /patient/get show the Admission Register serial instead of her name from admission until 42 days after discharge,
+  on the MTP stay's rows only. Identity bands, FHIR/HL7/ABDM, claims and the portal are NOT masked (patient safety;
+  claims are a lawyer item). An unreadable MTP register withholds the response.
+- BNSS s.397: POST /ward/invoice is refused while an open sexual-assault-adult, acid-attack or POCSO case exists for the
+  patient. Aadhaar is never stored in RBD registers (unknown key refused; 12-digit text refused). The pharmacy names a
+  Form 3E patient by id and the route confirms the Patient exists by repository read (its grant cannot read Patient).

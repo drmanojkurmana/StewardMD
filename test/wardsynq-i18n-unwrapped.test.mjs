@@ -104,6 +104,7 @@ const ALLOW = {
   },
   "wardsynq/site/pages/registers.js": {
     "the print window's stylesheet, not words": ["</title><style>body{font:12px sans-serif}table{border-collapse:collapse;width:100%}td,th{border:1px solid #444;padding:3px;vertical-align:top}</style><h2>"],
+    "the reason sent to the stock ledger with a destruction of expired controlled drugs, recorded as written": ["Expired stock destroyed (NDPS Rules r.52V(1))"],
   },
 };
 const WARD_FILES = ["ward.js", "discharge.js", "patient-register.js"];

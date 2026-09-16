@@ -115,15 +115,18 @@ async function reportImaging(request, env, ctx) {
   try { sr = await svc.get("ServiceRequest", serviceRequestId); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!sr) return { ...base, ok: false, status: 404, error: "request_not_found", serviceRequestId, written: 0 };
-  /* PCPNDT: AN OBSTETRIC ULTRASOUND IS NOT FINALISED WITHOUT A COMPLETED FORM F (register-routes.js formFGate). A
-   * preliminary report is not blocked, so an urgent finding still reaches the ward; the final one waits for the form.
+  /* PCPNDT (register-routes.js formFGate), legal review B.4.3 and B.4.4. Every report of an obstetric ultrasound needs
+   * the pregnant woman's declaration recorded on Form F before the procedure (rule 10(1A)); a final report needs the
+   * complete Form F and carries the doctor's declaration. A report naming the sex of the foetus is refused (s.5(2), s.6).
    * A gate that could not be checked refuses too, because "could not check" is not "complete". */
-  if (status !== "preliminary" && typeof ctx.formFCheck === "function") {
+  let pcpndt = null;
+  if (typeof ctx.formFCheck === "function") {
     let gate;
-    try { gate = await ctx.formFCheck(sr, ctx.modality); } catch { gate = { required: true, ok: false, error: "formf_unreadable", detail: "Form F could not be checked, so the report was not finalised." }; }
+    try { gate = await ctx.formFCheck(sr, ctx.modality, { findings, impression, status, actorId: resolved.actor.id }); } catch { gate = { required: true, ok: false, error: "formf_unreadable", detail: "Form F could not be checked, so the report was not saved." }; }
     if (gate && gate.required && !gate.ok) {
-      return { ...base, ok: false, status: gate.error === "formf_unreadable" ? 502 : 409, error: gate.error, detail: gate.detail, missing: gate.missing || [], serviceRequestId, written: 0 };
+      return { ...base, ok: false, status: gate.status || (gate.error === "formf_unreadable" ? 502 : 409), error: gate.error, detail: gate.detail, missing: gate.missing || [], serviceRequestId, written: 0 };
     }
+    if (gate && gate.declaration) pcpndt = gate.declaration;
   }
 
   const id = reportIdFor(serviceRequestId);
@@ -164,6 +167,8 @@ async function reportImaging(request, env, ctx) {
   // before this; the closed-loop notification/acknowledgement/escalation machinery was built and
   // waiting, unreachable for imaging until this one flag is wired through.
   if (ctx.critical === true) report.critical = true;
+  // PC&PNDT Rules r.10(1A): the doctor's declaration goes on each report, as recorded on Form F.
+  if (pcpndt) report.pcpndtDeclaration = pcpndt;
   if (changed) {
     report.impressionChangedFrom = current.impression || null;
     report.discrepancy = true;
@@ -177,6 +182,7 @@ async function reportImaging(request, env, ctx) {
       findings, impression: report.impression, version: out.record.version,
       ...(templated ? { template: templated.template, sections: templated.sections } : {}),
       critical: !!report.critical,
+      ...(pcpndt ? { pcpndtDeclaration: pcpndt } : {}),
       supersedes: current ? { status: current.status, version: current.version } : null,
       ...(changed ? {
         discrepancy: true,

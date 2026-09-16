@@ -374,11 +374,30 @@ async function recordMovement(request, env, ctx) {
   /* A CONTROLLED DRUG IS NOT DESTROYED OR WRITTEN OFF BY ONE PERSON (controlled-drugs.js). The route decides whether
    * the item is controlled (the hospital's drug master) and hands in the check that the witness is a real, different
    * member of this hospital; a witness who is the person recording, or nobody at all, is refused and nothing lands. */
+  /* NDPS Rules r.52-O: a recognised medical institution whose Form 3G recognition has expired receives no controlled
+   * drug, unless it has applied for renewal (register-settings.js rmiStatus, computed by the route). */
+  if (ctx.controlled === true && (kind === "receipt" || kind === "transfer-in") && ctx.rmi && ctx.rmi.blocked) {
+    return { ...base, ok: false, status: 409, error: "rmi_recognition_expired", written: 0,
+      detail: "The hospital's NDPS recognition (Form 3G) has expired and no renewal application is recorded (NDPS Rules r.52-O). A controlled drug cannot be received. Record the renewal application reference in Registers, Settings." };
+  }
   let witnessedBy = null;
   if (ctx.controlled === true && (kind === "wastage" || kind === "adjustment")) {
     const w = await witnessOrRefusal(ctx, resolved.actor.id);
     if (w.error) return { ...base, ...w.error, written: 0 };
     witnessedBy = w.witnessId;
+  }
+  /* NDPS Rules r.52V(1): "The expired stock of essential narcotic drugs shall be destroyed by the recognised medical
+   * institution in the presence of an officer nominated by the Controller of Drugs." A controlled wastage that is a
+   * destruction of expired stock names that officer and the nominating order, or it is refused and nothing lands. */
+  let destruction = null;
+  if (ctx.controlled === true && kind === "wastage" && (ctx.destruction || /expir/i.test(reason))) {
+    const d = ctx.destruction && typeof ctx.destruction === "object" ? ctx.destruction : {};
+    const missing = ["nomineeName", "nomineeDesignation", "nominatingOrderRef", "destroyedOn"].filter((k) => !str(d[k]));
+    if (missing.length || !/^\d{4}-\d{2}-\d{2}$/.test(str(d.destroyedOn))) {
+      return { ...base, ok: false, status: 422, error: "destruction_nominee_required", missing, written: 0,
+        detail: "Expired stock of a controlled drug is destroyed in the presence of an officer nominated by the Controller of Drugs (NDPS Rules r.52V(1)). Give the officer's name, designation, the nominating order reference and the date (YYYY-MM-DD)." };
+    }
+    destruction = { nomineeName: str(d.nomineeName).slice(0, 120), nomineeDesignation: str(d.nomineeDesignation).slice(0, 120), nominatingOrderRef: str(d.nominatingOrderRef).slice(0, 120), destroyedOn: str(d.destroyedOn) };
   }
 
   const at = str(ctx.at) || new Date().toISOString();
@@ -392,6 +411,7 @@ async function recordMovement(request, env, ctx) {
     batch: str(ctx.batch) || null, expiry: str(ctx.expiry) || null,
     reason: reason || null, at, by: resolved.actor.id,
     ...(ctx.controlled === true ? { controlled: true, witnessedBy } : {}),
+    ...(destruction ? { destruction } : {}),
     /* Form 3H (NDPS Rules r.52R) records where a receipt came from and its consignment note, bill or invoice number.
      * Optional for every drug, kept when given. */
     ...(str(ctx.receivedFrom) ? { receivedFrom: str(ctx.receivedFrom).slice(0, 200) } : {}),
