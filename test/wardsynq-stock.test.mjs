@@ -87,7 +87,7 @@ test("PURE: a quantity is a number and a unit, and 'some' is not a stock record"
 test("AN ISSUE IS NOT A MOVEMENT KIND, so nobody can decrement stock without a patient record", () => {
   assert.ok(!KINDS.includes("issue"));
   assert.ok(!KINDS.includes("dispense"));
-  assert.deepEqual([...KINDS], ["receipt", "adjustment", "wastage", "transfer-out", "transfer-in"]);
+  assert.deepEqual([...KINDS], ["receipt", "adjustment", "wastage", "transfer-out", "transfer-in", "consumption"]);
 });
 
 test("stock is the dispensing side of pharmacy, and confers nothing clinical", () => {

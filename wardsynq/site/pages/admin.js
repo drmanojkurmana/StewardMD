@@ -33,7 +33,7 @@
    * assigning a role to a staff member - never learned they existed. Keep this in sync by hand;
    * there is no test that catches a role missing here, only a role an admin cannot find. */
   var ROLES = ["admin", "doctor", "supervisor", "nurse", "intern", "resident", "reception", "cashier",
-    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist",
+    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist", "store_keeper", "biomedical_engineer",
     "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver",
     "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "viewer"];
 
@@ -52,6 +52,9 @@
       ["blood_bank", T(c, "site.admin.staff.roleNote.bloodBank", "Crossmatches, issues and administers transfusions only.")],
       ["radiographer", T(c, "site.admin.staff.roleNote.radiographer", "Acquires the imaging study. Reads the chart, cannot file a report or protocol a study.")],
       ["radiologist", T(c, "site.admin.staff.roleNote.radiologist", "Protocols and reports imaging studies (the same authority a lab result release uses). No other chart write.")],
+      ["supervisor", T(c, "site.admin.staff.roleNote.supervisor", "Runs the OPD queue and reads the chart. Approves stores indents for the departments in their scope.")],
+      ["store_keeper", T(c, "site.admin.staff.roleNote.storeKeeper", "Runs general stores: items, store locations, issuing approved indents, receiving and ordering. No chart access.")],
+      ["biomedical_engineer", T(c, "site.admin.staff.roleNote.biomedicalEngineer", "Keeps the asset register, preventive maintenance, calibration and job cards. No chart access.")],
     ];
   }
 

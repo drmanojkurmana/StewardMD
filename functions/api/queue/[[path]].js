@@ -225,6 +225,9 @@ import { chargesForPatient, tariffTable } from "../../_wardsynq/charge-capture.j
 import { catalogue as investigationCatalogue } from "../../_wardsynq/investigation-catalogue.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
+import { storesOverview, saveStoreItem, saveStoreLocation, storeMovement, raiseIndent, decideIndent, issueIndent, acknowledgeIndent, closeIndent, storeConsumption, purchaseFromIndent } from "../../_wardsynq/stores.js";
+import { assetsOverview, saveAsset, recordAssetEvent, saveSchedule, openJobCard, updateJobCard } from "../../_wardsynq/assets.js";
+import { bloodBankOverview, registerDonor, screenDonor, recordDonation, recordBloodTests, separateComponents, bloodUnitEvent, bloodUnitGate } from "../../_wardsynq/blood-bank.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess, listGrants } from "../../_wardsynq/patient-access.js";
 import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
@@ -1134,6 +1137,23 @@ export async function onRequest(context) {
         immunization: CAPS.EMR_VITALS, "immunization-error": CAPS.EMR_VITALS, immunizations: CAPS.EMR_VIEW,
         "purchase-orders": CAPS.ORDER_DISPENSE, "purchase-order": CAPS.ORDER_DISPENSE,
         "goods-receive": CAPS.ORDER_DISPENSE,
+        /* General stores (stores.js). The overview is every stores role's own screen; each write sits on the
+         * authority of the person who does it: the ward raises and acknowledges, the in-charge decides (and the
+         * route narrows that to the departments in the membership's scope), the store keeper runs the store. */
+        stores: CAPS.DEPT_REQUEST, indent: CAPS.DEPT_REQUEST, "indent-acknowledge": CAPS.DEPT_REQUEST,
+        "indent-decide": CAPS.INDENT_APPROVE,
+        "store-item": CAPS.STORES_MANAGE, "store-location": CAPS.STORES_MANAGE, "store-move": CAPS.STORES_MANAGE,
+        "indent-issue": CAPS.STORES_MANAGE, "indent-close": CAPS.STORES_MANAGE, "store-purchase-order": CAPS.STORES_MANAGE,
+        "store-consumption": CAPS.STORES_MANAGE,
+        /* Biomedical assets (assets.js). Anyone on the floor may see the register and report a fault; the register,
+         * schedules and job cards are the engineer's. */
+        assets: CAPS.DEPT_REQUEST, "equipment-complaint": CAPS.DEPT_REQUEST,
+        asset: CAPS.ASSET_MANAGE, "asset-event": CAPS.ASSET_MANAGE, "maintenance-schedule": CAPS.ASSET_MANAGE,
+        "job-card": CAPS.ASSET_MANAGE, "job-card-update": CAPS.ASSET_MANAGE,
+        /* The blood bank's registers (blood-bank.js): the blood bank's own authority, which admin also holds. */
+        "blood-bank": CAPS.TRANSFUSION_ISSUE, "blood-donor": CAPS.TRANSFUSION_ISSUE, "donor-screening": CAPS.TRANSFUSION_ISSUE,
+        "blood-donation": CAPS.TRANSFUSION_ISSUE, "blood-test-result": CAPS.TRANSFUSION_ISSUE, "blood-components": CAPS.TRANSFUSION_ISSUE,
+        "blood-unit-event": CAPS.TRANSFUSION_ISSUE,
         "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
         "approval-decide": CAPS.EMR_TREAT,
         "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, "nurse-worklist": CAPS.EMR_VIEW, mar: CAPS.MED_ADMINISTER,
@@ -1682,6 +1702,12 @@ export async function onRequest(context) {
        * request cap (emr.vitals) is a ward one pharmacy does not hold, so "Ask for approval" on the
        * Purchasing screen was always refused. Only for supply subjects; deciding still needs emr.treat. */
       if (!wAz.ok && sub === "approval-request" && (body.subjectType === "PurchaseOrder" || body.subjectType === "StockRequisition")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_DISPENSE);
+      /* General stores: the store keeper orders and books in through the same purchasing routes the pharmacy uses,
+       * and the in-charge and the store open the stores overview without raising indents themselves. */
+      if (!wAz.ok && (sub === "purchase-orders" || sub === "goods-receive" || (sub === "approval-request" && body.subjectType === "PurchaseOrder"))) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
+      if (!wAz.ok && sub === "stores") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
+      if (!wAz.ok && (sub === "stores" || sub === "store-consumption")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.INDENT_APPROVE);
+      if (!wAz.ok && sub === "assets") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ASSET_MANAGE);
       /* P2.17 anchor acknowledgement. The capability gate cannot see hospital ownership, so a
        * StewardMD platform owner who holds no membership in this hospital would be refused here
        * before the route that is allowed to stand in for the owner ever runs. Let only that one
@@ -1807,6 +1833,40 @@ export async function onRequest(context) {
       if (sub === "immunizations" && method === "GET") {
         const r = await listImmunizations(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- general stores, biomedical assets, blood bank (2026-09-16) ---- */
+      {
+        const R = (r) => json(r, r.ok ? 200 : (r.status || 502), request);
+        const departments = async () => { try { return await ORG.listDepartments(env, wOrgId); } catch { return null; } };
+        const inDept = (cap) => (departmentId) => ORG.authorizeOrg(env, actor, wOrgId, cap, { departmentId });
+        const needDepts = departments;
+        const deptsFailed = () => json({ ok: false, error: "departments_unreadable", detail: "The hospital's departments could not be read. Nothing was recorded." }, 502, request);
+        const key = body.idempotencyKey || null;
+        if (sub === "stores" && method === "GET") return R(await storesOverview(request, env, { ...deps, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null }));
+        if (sub === "store-item" && method === "POST") return R(await saveStoreItem(request, env, { ...deps, code: body.code, name: body.name, unit: body.unit, category: body.category, reorderLevel: body.reorderLevel, active: body.active, idempotencyKey: key }));
+        if (sub === "store-location" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await saveStoreLocation(request, env, { ...deps, departments: d, code: body.code, name: body.name, kind: body.kind, departmentId: body.departmentId, active: body.active, idempotencyKey: key })); }
+        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
+        if (sub === "indent" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await raiseIndent(request, env, { ...deps, departments: d, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), departmentId: body.departmentId, fromLocation: body.fromLocation, toLocation: body.toLocation, lines: body.lines, note: body.note, idempotencyKey: key })); }
+        if (sub === "indent-decide" && method === "POST") return R(await decideIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.INDENT_APPROVE), indentId: body.indentId, decision: body.decision, lines: body.lines, reason: body.reason, idempotencyKey: key }));
+        if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines }));
+        if (sub === "indent-acknowledge" && method === "POST") return R(await acknowledgeIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), indentId: body.indentId, lines: body.lines, note: body.note, idempotencyKey: key }));
+        if (sub === "indent-close" && method === "POST") return R(await closeIndent(request, env, { ...deps, indentId: body.indentId, reason: body.reason, idempotencyKey: key }));
+        if (sub === "store-consumption" && method === "GET") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await storeConsumption(request, env, { ...deps, departments: d, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" })); }
+        if (sub === "store-purchase-order" && method === "POST") return R(await purchaseFromIndent(request, env, { ...deps, indentId: body.indentId, vendor: body.vendor, note: body.note, idempotencyKey: key }));
+        if (sub === "assets" && method === "GET") return R(await assetsOverview(request, env, { ...deps }));
+        if (sub === "asset" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await saveAsset(request, env, { ...deps, departments: d, tag: body.tag, name: body.name, category: body.category, make: body.make, model: body.model, serial: body.serial, departmentId: body.departmentId, location: body.location, purchaseDate: body.purchaseDate, costPaise: body.costPaise, vendor: body.vendor, warrantyUntil: body.warrantyUntil, contracts: body.contracts, critical: body.critical === true, expectedVersion: body.expectedVersion, idempotencyKey: key })); }
+        if (sub === "asset-event" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await recordAssetEvent(request, env, { ...deps, departments: d, assetId: body.assetId, kind: body.kind, status: body.status, departmentId: body.departmentId, location: body.location, reason: body.reason, idempotencyKey: key })); }
+        if (sub === "maintenance-schedule" && method === "POST") return R(await saveSchedule(request, env, { ...deps, assetId: body.assetId, scheduleId: body.scheduleId, kind: body.kind, intervalDays: body.intervalDays, checklist: body.checklist, startFrom: body.startFrom, active: body.active, idempotencyKey: key }));
+        if (sub === "equipment-complaint" && method === "POST") return R(await openJobCard(request, env, { ...deps, complaint: true, assetId: body.assetId, description: body.description, idempotencyKey: key }));
+        if (sub === "job-card" && method === "POST") return R(await openJobCard(request, env, { ...deps, assetId: body.assetId, kind: body.kind, scheduleId: body.scheduleId, description: body.description, idempotencyKey: key }));
+        if (sub === "job-card-update" && method === "POST") return R(await updateJobCard(request, env, { ...deps, jobCardId: body.jobCardId, action: body.action, engineer: body.engineer, code: body.code, quantity: body.quantity, location: body.location, resolution: body.resolution, checklist: body.checklist, calibrationResult: body.calibrationResult, downtimeMinutes: body.downtimeMinutes, statusAfter: body.statusAfter, idempotencyKey: key }));
+        if (sub === "blood-bank" && method === "GET") return R(await bloodBankOverview(request, env, { ...deps }));
+        if (sub === "blood-donor" && method === "POST") return R(await registerDonor(request, env, { ...deps, name: body.name, sex: body.sex, dateOfBirth: body.dateOfBirth, phone: body.phone, address: body.address, idempotencyKey: key }));
+        if (sub === "donor-screening" && method === "POST") return R(await screenDonor(request, env, { ...deps, donorId: body.donorId, answers: body.answers, weightKg: body.weightKg, hbGdl: body.hbGdl, bp: body.bp, pulse: body.pulse, temperature: body.temperature, outcome: body.outcome, deferralReason: body.deferralReason, deferralDays: body.deferralDays, permanent: body.permanent === true, idempotencyKey: key }));
+        if (sub === "blood-donation" && method === "POST") return R(await recordDonation(request, env, { ...deps, screeningId: body.screeningId, bagNumber: body.bagNumber, volumeMl: body.volumeMl, bagType: body.bagType, adverseReaction: body.adverseReaction, idempotencyKey: key }));
+        if (sub === "blood-test-result" && method === "POST") return R(await recordBloodTests(request, env, { ...deps, donationId: body.donationId, tti: body.tti, abo: body.abo, rhD: body.rhD, method: body.method, idempotencyKey: key }));
+        if (sub === "blood-components" && method === "POST") return R(await separateComponents(request, env, { ...deps, donationId: body.donationId, components: body.components }));
+        if (sub === "blood-unit-event" && method === "POST") return R(await bloodUnitEvent(request, env, { ...deps, unitId: body.unitId, kind: body.kind, reason: body.reason, idempotencyKey: key }));
       }
       if (sub === "purchase-order" && method === "POST") {
         const r = await raisePurchaseOrder(request, env, { ...deps, vendor: body.vendor, lines: body.lines, note: body.note, idempotencyKey: body.idempotencyKey || null });
@@ -2230,13 +2290,21 @@ export async function onRequest(context) {
         const r = await requestTransfusion(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, encounterId: body.encounterId, component: body.component, units: body.units, indication: body.indication, aboGroup: body.aboGroup, rhD: body.rhD, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* A unit this blood bank registered is crossmatched only while it is on the shelf, and with the group, RhD,
+       * component and expiry its own records carry (blood-bank.js bloodUnitGate). A unit it never registered passes
+       * as before. The gate reads and never writes; a gate that cannot read refuses. */
       if (sub === "transfusion-crossmatch" && method === "POST") {
-        const r = await recordCrossmatch(request, env, { ...deps, episodeId: body.episodeId, unitId: body.unitId, aboGroup: body.aboGroup, rhD: body.rhD, component: body.component, expiresAt: body.expiresAt, idempotencyKey: body.idempotencyKey || null });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        const gate = await bloodUnitGate(request, env, { ...deps, unitId: body.unitId, episodeId: body.episodeId, aboGroup: body.aboGroup, rhD: body.rhD, component: body.component }, "crossmatch");
+        if (!gate.ok) return json({ ...gate, written: 0 }, gate.status || 502, request);
+        const u = gate.tracked ? gate.unit : { unitId: body.unitId, aboGroup: body.aboGroup, rhD: body.rhD, component: body.component, expiresAt: body.expiresAt };
+        const r = await recordCrossmatch(request, env, { ...deps, episodeId: body.episodeId, unitId: u.unitId, aboGroup: u.aboGroup, rhD: u.rhD, component: u.component, expiresAt: u.expiresAt, idempotencyKey: body.idempotencyKey || null });
+        return json({ ...r, inventory: gate.tracked ? "tracked" : "untracked" }, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfusion-issue" && method === "POST") {
+        const gate = await bloodUnitGate(request, env, { ...deps, episodeId: body.episodeId }, "issue");
+        if (!gate.ok) return json({ ...gate, written: 0 }, gate.status || 502, request);
         const r = await issueUnit(request, env, { ...deps, episodeId: body.episodeId, idempotencyKey: body.idempotencyKey || null });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        return json({ ...r, inventory: gate.tracked ? "tracked" : "untracked" }, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfusion-bedside-check" && method === "POST") {
         const r = await recordBedsideCheck(request, env, { ...deps, episodeId: body.episodeId, checkerId: body.checkerId, secondCheckerId: body.secondCheckerId, scannedPatientBarcode: body.scannedPatientBarcode, scannedUnitId: body.scannedUnitId, patient: body.patient, unitInHand: body.unitInHand, idempotencyKey: body.idempotencyKey || null });

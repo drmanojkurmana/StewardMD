@@ -410,7 +410,9 @@ function grantForCaps(caps) {
    * unrestricted, unchanged) - this is an ALTERNATIVE authority for a role that should hold nothing
    * else clinical, never a narrowing of what a doctor can already do. */
   if (has(CAPS.TRANSFUSION_ISSUE)) {
-    const added = ["TransfusionEpisode"];
+    /* The blood bank's own registers joined 2026-09-16 (blood-bank.js): donors, their screening, the donation, the
+     * mandatory tests, the units separated from it and what happened to each. None names a patient. */
+    const added = ["TransfusionEpisode", "BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent"];
     const canRead = [...added, "Patient", "Encounter"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: added, basis: CAPS.TRANSFUSION_ISSUE };
     else grant = {
@@ -458,6 +460,38 @@ function grantForCaps(caps) {
       writeCategories: grant.writeCategories,
       basis: grant.basis + "+" + basis,
     };
+  }
+
+  /* General stores and biomedical assets, 2026-09-16 (stores.js, assets.js). Four narrow authorities, each over
+   * operational records that name no patient, in the same union shape as every branch above. Who may do WHICH act
+   * (approve an indent for this department, issue it, close a job card) is decided at the route and in the module;
+   * the type lists here only keep each authority out of the others' records - the ward that raises an indent cannot
+   * write its approval, and the store that issues it cannot approve it. */
+  const widen = (read, write, basis) => {
+    if (!grant) { grant = { tier: TIER.EXECUTE, read, write, basis }; return; }
+    grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...read])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...write])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + basis,
+    };
+  };
+  if (has(CAPS.DEPT_REQUEST)) {
+    const w = ["Indent", "IndentReceipt", "JobCard"];
+    widen([...w, "IndentDecision", "IndentClosure", "StoreItem", "StoreLocation", "StockMovement", "Asset", "AssetEvent", "JobCardEvent"], w, CAPS.DEPT_REQUEST);
+  }
+  if (has(CAPS.INDENT_APPROVE)) {
+    const w = ["IndentDecision"];
+    widen([...w, "Indent", "IndentReceipt", "IndentClosure", "StoreItem", "StoreLocation", "StockMovement"], w, CAPS.INDENT_APPROVE);
+  }
+  if (has(CAPS.STORES_MANAGE)) {
+    const w = ["StoreItem", "StoreLocation", "StockMovement", "IndentClosure", "PurchaseOrder", "Vendor", "Verification"];
+    widen([...w, "Indent", "IndentDecision", "IndentReceipt"], w, CAPS.STORES_MANAGE);
+  }
+  if (has(CAPS.ASSET_MANAGE)) {
+    const w = ["Asset", "AssetEvent", "MaintenanceSchedule", "JobCard", "JobCardEvent", "StockMovement"];
+    widen([...w, "StoreItem", "StoreLocation"], w, CAPS.ASSET_MANAGE);
   }
 
   /* An unconstrained write scope cannot be partly constrained. A role that ends up with `write: null`

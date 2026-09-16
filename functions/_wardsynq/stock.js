@@ -55,11 +55,14 @@ const MOVE_TYPE = "StockMovement";
  *   adjustment  a count correction, always with a reason
  *   wastage     destroyed, spilled, expired off the shelf
  *   transfer    moved between locations; written as two movements, out and in
+ *   consumption used up by the hospital itself, never by a patient: a spare part fitted on a job card
+ *               (assets.js). It names the job card and the department, so the store level and the
+ *               consumption report read the same one movement.
  */
-const KINDS = Object.freeze(["receipt", "adjustment", "wastage", "transfer-out", "transfer-in"]);
+const KINDS = Object.freeze(["receipt", "adjustment", "wastage", "transfer-out", "transfer-in", "consumption"]);
 
 /** Which kinds add to a level and which take away. An issue is handled separately. */
-const SIGN = Object.freeze({ receipt: 1, "transfer-in": 1, adjustment: 1, wastage: -1, "transfer-out": -1 });
+const SIGN = Object.freeze({ receipt: 1, "transfer-in": 1, adjustment: 1, wastage: -1, "transfer-out": -1, consumption: -1 });
 
 /**
  * PURE. A quantity is a number and a unit, or it is nothing.
@@ -111,6 +114,7 @@ function levelsFrom(movements, dispenses) {
     else if (kind === "wastage") row.wasted += qty.value;
     else if (kind === "adjustment") row.adjusted += qty.value;
     else if (kind === "transfer-out") row.issued += 0;
+    else if (kind === "consumption") row.issued += qty.value;
   }
 
   /* AN ISSUE LEAVES THE STORE IT CAME FROM, NOT THE WARD IT WENT TO (LT-38). A dispense's `destination` is the
@@ -374,6 +378,11 @@ async function recordMovement(request, env, ctx) {
     quantity, location: str(ctx.location) || null,
     batch: str(ctx.batch) || null, expiry: str(ctx.expiry) || null,
     reason: reason || null, at, by: resolved.actor.id,
+    /* What a stores movement belongs to (stores.js, assets.js): the indent it was issued against, the job card a
+     * part was fitted on, the department that used it. Carried, never required: a pharmacy receipt names none. */
+    ...(str(ctx.indentId) ? { indentId: str(ctx.indentId) } : {}),
+    ...(str(ctx.jobCardId) ? { jobCardId: str(ctx.jobCardId) } : {}),
+    ...(str(ctx.departmentId) ? { departmentId: str(ctx.departmentId) } : {}),
     source: { system: "wardsynq-native", sourceId: `stock:${id}` },
   };
 

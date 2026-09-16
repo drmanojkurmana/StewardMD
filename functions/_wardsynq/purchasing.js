@@ -192,6 +192,8 @@ async function raisePurchaseOrder(request, env, ctx) {
     const po = {
       resourceType: PO_TYPE, id, vendor, lines, raisedBy: resolved.actor.id, raisedAt: at,
       ...(str(ctx.note) ? { note: str(ctx.note) } : {}),
+      /* Raised from a stores indent's back-order (stores.js): the indent it will fill, so the store can see why. */
+      ...(str(ctx.indentId) ? { indentId: str(ctx.indentId) } : {}),
     };
     const out = await svc.put(po, { idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, purchaseOrderId: id, vendor, lines, totalPaise: poTotalPaise(po),
@@ -329,6 +331,7 @@ async function listPurchaseOrders(request, env, ctx) {
     const want = levelsFor(ctx, PO_TYPE, reqRow ? amountOf(reqRow) : poTotalPaise(po) === null ? undefined : poTotalPaise(po));
     const approval = chain.length ? chainState(chain, want) : { state: "none", approvals: 0, required: want, approvers: [] };
     return { purchaseOrderId: id, vendor: str(po.vendor), raisedBy: str(po.raisedBy), raisedAt: str(po.raisedAt),
+      ...(str(po.indentId) ? { indentId: str(po.indentId) } : {}),
       totalPaise: poTotalPaise(po), ...orderState(po, mine, approval), approval };
   }).sort((a, b) => str(b.raisedAt).localeCompare(str(a.raisedAt)));
 

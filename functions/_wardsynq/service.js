@@ -73,6 +73,16 @@ const RESOURCE_TYPES = Object.freeze([
    * order - it is summed from the receipts booked against it, the same discipline stock.js keeps
    * for a stock level, so there is no counter to drift away from the events beneath it. */
   "PurchaseOrder", "Vendor",
+  /* General stores (stores.js): the non-drug item master, store locations, a department's indent and the in-charge's
+   * decision on it, the department's acknowledgement of what arrived, and the store closing a back-order. What was
+   * ISSUED is never stored on the indent: it is the StockMovement transfers booked against it, summed on read. */
+  "StoreItem", "StoreLocation", "Indent", "IndentDecision", "IndentReceipt", "IndentClosure",
+  /* Biomedical assets (assets.js): the register, where each asset went and what state it is in, its maintenance
+   * schedules, and job cards with every step taken on them. Status and location are derived from the events. */
+  "Asset", "AssetEvent", "MaintenanceSchedule", "JobCard", "JobCardEvent",
+  /* The blood bank's registers (blood-bank.js). A unit's status (quarantine, available, reserved, issued, discarded,
+   * expired) is derived from its tests, its events and the transfusion episodes that name it, never stored. */
+  "BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent",
   /* Who to ring about this patient. Its own record rather than fields on Patient, because a contact
    * list changes on its own clock and an emergency contact quietly overwritten last month leaves
    * nobody to call at the moment somebody has to be called. Append-only like everything else:

@@ -6679,3 +6679,26 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   Native dialogs remain only in MaiK, integration, billing/claims, purchasing and scheduling screens (other lanes).
 - A paint that arrives while a pointer is down inside the ward is held until the pointer comes up (3 s cap), as a
   paint is held for an open select: a repaint between press and release lost the click (the ED "first triage" miss).
+## 2026-09-16 General stores, biomedical assets and the blood bank inventory reuse the one stock ledger
+- Stores issues are stock.js transfers (out of the central store, into the department's sub-store) naming the indent;
+  a spare part fitted on a job card is a new stock.js kind, `consumption`, naming the job card and department. There
+  is no second ledger: the store level, the pharmacy level and the consumption report read the same movements.
+  Indent state (approved, part issued, back-ordered, acknowledged, closed) is derived from Indent, IndentDecision,
+  IndentReceipt, IndentClosure and the transfers, never stored. Back-orders are ordered through purchasing.js
+  (`indentId` on the purchase order); approval stays on the existing approval chain.
+- Four capabilities in _queue_roles.js: `dept.request` (raise and acknowledge an indent, report broken equipment;
+  hospital-floor roles only: doctor, supervisor, nurse, intern, resident, pharmacy, lab, radiographer, radiologist and
+  the two new roles), `stores.indent.approve` (supervisor; the membership's department scope decides which
+  departments, and nobody approves their own indent), `stores.manage` (new role `store_keeper`), `asset.manage`
+  (new role `biomedical_engineer`). Desk roles (reception, cashier, billing, hr, him) were left out because their
+  record grants are pinned as having no, or read-only, clinical actor.
+- Asset status and location are AssetEvent records; job card state and downtime are JobCardEvents; overdue PM is
+  computed from the last closed job against the schedule.
+- Blood units are a per-unit register (BloodUnit), not stock movements: each bag is traced individually. A unit's
+  status is derived from its donation's tests (quarantine until all five mandatory tests are non-reactive and the
+  group is recorded), its own events (discard, release) and the TransfusionEpisode that names it: a crossmatch
+  reserves it and the episode's issue takes it off the shelf, so issue writes nothing new. The crossmatch and issue
+  routes refuse a registered unit that is not available/reserved for that episode and take group, RhD, component and
+  expiry from the inventory. Units from other blood centres (not registered) pass as before, marked untracked.
+  Component shelf lives are defaults only (not confirmed against the Drugs and Cosmetics Rules text); the expiry on
+  the label is what is recorded.
