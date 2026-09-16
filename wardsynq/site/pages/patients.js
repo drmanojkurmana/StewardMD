@@ -80,6 +80,44 @@
         "<dt>" + esc(T(c, "site.patients.emergency", "Emergency")) + "</dt><dd>" + esc(T(c, "site.patients.emergencyLead", "Arrive them in the")) + ' <a href="#/ward/edboard">' + esc(T(c, "site.patients.emergencyDept", "emergency department")) + "</a>, " + esc(T(c, "site.patients.emergencyDesc", "known MRN or unknown identity.")) + "</dd>" : "") +
       "</div></div>";
     var out = document.getElementById("pOut");
+    /* DPDP Act 2023 s5: the patient is given the hospital's privacy notice, and the desk records which version, in which
+     * language and how. Offered straight after registering and on any patient found. The notices are the hospital's
+     * own text (Privacy and compliance), shown as written. null = loading, false = failed, [] = none published. */
+    var offerPrivacy = false;
+    function privacyPanel(mrn) {
+      var box = document.getElementById("pPriv"); if (!box) return;
+      var paint = function (list, fail) {
+        var b = document.getElementById("pPriv"); if (!b) return;
+        if (list === null) { b.innerHTML = '<span class="spin"></span> ' + esc(T(c, "site.patients.priv.loading", "Loading the privacy notice...")); return; }
+        if (list === false) { b.innerHTML = '<div class="msg err">' + esc(T(c, "site.patients.priv.failed", "The privacy notice could not be loaded:")) + " " + EN(c, esc((fail && (fail.detail || fail.message || fail.error)) || "")) + "</div>"; return; }
+        if (!list.length) { b.innerHTML = '<div class="msg note">' + esc(T(c, "site.patients.priv.none", "This hospital has not published a privacy notice yet, so none can be given.")) + "</div>"; return; }
+        b.innerHTML = '<div class="card"><h3>' + esc(T(c, "site.patients.priv.title", "Privacy notice")) + "</h3>" +
+          '<p class="quiet">' + esc(T(c, "site.patients.priv.intro", "Give the patient the notice in a language they read, then record it.")) + "</p>" +
+          '<div class="row"><label class="f"><span>' + esc(T(c, "site.patients.priv.language", "Notice")) + '</span><select id="pPrivLang">' + list.map(function (n) { return '<option value="' + esc(n.language) + '">' + EN(c, esc(n.language + " v" + n.version + (n.title ? ": " + n.title : ""))) + "</option>"; }).join("") + "</select></label>" +
+          '<label class="f"><span>' + esc(T(c, "site.patients.priv.method", "How it was given")) + '</span><select id="pPrivHow">' +
+          '<option value="given-printed">' + esc(T(c, "site.patients.priv.printed", "Printed copy given")) + "</option>" +
+          '<option value="read-aloud">' + esc(T(c, "site.patients.priv.readAloud", "Read aloud")) + "</option>" +
+          '<option value="shown-on-screen">' + esc(T(c, "site.patients.priv.onScreen", "Shown on screen")) + "</option></select></label>" +
+          '<label class="f"><span>' + esc(T(c, "site.patients.priv.givenTo", "Given to")) + '</span><select id="pPrivWho">' +
+          '<option value="patient">' + esc(T(c, "site.patients.priv.patient", "The patient")) + "</option>" +
+          '<option value="parent">' + esc(T(c, "site.patients.priv.parent", "Parent")) + "</option>" +
+          '<option value="legal-guardian">' + esc(T(c, "site.patients.priv.guardian", "Legal guardian")) + "</option>" +
+          '<option value="next-of-kin">' + esc(T(c, "site.patients.priv.kin", "Next of kin")) + "</option></select></label>" +
+          '<label class="f"><span>' + esc(T(c, "site.patients.priv.name", "Their name, if not the patient")) + '</span><input id="pPrivName"></label>' +
+          '<button class="btn" type="button" id="pPrivSave">' + esc(T(c, "site.patients.priv.record", "Record notice given")) + '</button></div><div id="pPrivMsg"></div></div>';
+        document.getElementById("pPrivSave").onclick = function () {
+          var btn = this; btn.disabled = true;
+          c.api("/ward/privacy-acknowledge", { orgId: st.orgId, mrn: mrn, language: document.getElementById("pPrivLang").value, method: document.getElementById("pPrivHow").value, givenBy: document.getElementById("pPrivWho").value, giverName: document.getElementById("pPrivName").value.trim() }).then(function (x) {
+            btn.disabled = false;
+            var m = document.getElementById("pPrivMsg"); if (!m) return;
+            if (x && x.ok) { m.innerHTML = '<div class="msg ok">' + esc(x.skipped ? T(c, "site.patients.priv.already", "Already recorded for this version of the notice.") : T(c, "site.patients.priv.saved", "Recorded.")) + "</div>"; return; }
+            m.innerHTML = '<div class="msg err">' + esc(T(c, "site.patients.priv.notSaved", "Not recorded:")) + " " + EN(c, esc((x && (x.detail || x.message || x.error)) || T(c, "site.patients.noServerReach", "the server could not be reached"))) + "</div>";
+          });
+        };
+      };
+      paint(null);
+      c.api("/ward/privacy-notices?orgId=" + encodeURIComponent(st.orgId)).then(function (r) { paint(r && r.ok ? r.notices : false, r); });
+    }
     function find() {
       var mrn = (document.getElementById("pMrn").value || "").trim();
       if (!mrn) { out.innerHTML = '<div class="msg err">' + esc(T(c, "site.patients.enterMrn", "Enter an MR number.")) + "</div>"; return; }
@@ -107,7 +145,11 @@
           '<button class="btn quiet" type="button" data-go="opd">' + ms("medical_services") + esc(T(c, "site.patients.opdDesk", "OPD desk")) + "</button>" +
           (c.isWardsynq() && c.can("queue.add") ? '<button class="btn quiet" type="button" data-go="ward:board">' + ms("hotel") + esc(T(c, "site.patients.admitBedBoard", "Admit (bed board)")) + "</button>" : "") +
           (c.isWardsynq() ? '<button class="btn quiet" type="button" data-go="ward:">' + ms("bed") + esc(T(c, "site.patients.inpatientWard", "Inpatient ward")) + "</button>" : "") +
-          "</div>";
+          (c.isWardsynq() && c.can("queue.add") ? '<button class="btn quiet" type="button" id="pPrivOpen">' + ms("privacy_tip") + esc(T(c, "site.patients.priv.open", "Privacy notice")) + "</button>" : "") +
+          '</div><div id="pPriv"></div>';
+        var pb = document.getElementById("pPrivOpen");
+        if (pb) pb.onclick = function () { privacyPanel(p.mrn || mrn); };
+        if (pb && offerPrivacy) { offerPrivacy = false; privacyPanel(p.mrn || mrn); }
         var lb = document.getElementById("pLink");
         if (lb) lb.onclick = function () {
           var real = (document.getElementById("pLinkMrn").value || "").trim();
@@ -197,7 +239,7 @@
         onAdded: function (r) {
           var mrn = r && (r.mrn || (r.patient && r.patient.mrn));
           c.toast(mrn ? T(c, "site.patients.registeredMrn", "Registered {mrn}", { mrn: mrn }) : T(c, "site.patients.registeredPlain", "Registered."));
-          if (mrn) { document.getElementById("pMrn").value = mrn; find(); }
+          if (mrn) { document.getElementById("pMrn").value = mrn; offerPrivacy = true; find(); }
           if (mrn && onMrn) onMrn(mrn);
         }
       });

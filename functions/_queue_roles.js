@@ -85,6 +85,13 @@ export const CAPS = {
   REGISTER_RECORDS: "register.records", // births, deaths, still births, MLC register (medical records officer)
   MLC_RECORD: "mlc.record",             // mark a patient's stay medico-legal and record the police intimation (treating doctor)
   REGISTER_IHIP: "register.ihip",       // notifiable disease register and the weekly IHIP export (public health nodal officer)
+  // ---- DPDP Act 2023 (2026-09-16) -------------------------------------------------------------
+  // Publishing the privacy notice, answering a data principal's access / correction / erasure /
+  // grievance / nomination request and recording a personal data breach are the Data Protection
+  // Officer's own acts (s8(9), s8(10), s8(6), s11-s14). Its own capability, not staff.admin: `hr` holds
+  // staff.admin and has no business with a patient's data, and not emr.treat: answering a request is
+  // not treating anyone.
+  DPDP_MANAGE: "dpdp.manage",
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
@@ -261,6 +268,10 @@ export const ROLE_CAPS = {
                  C.EMR_VITALS, C.EMR_TREAT, C.EMR_IMMUNISE, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE,
                  C.ORDER_READ, C.INCIDENT_REPORT, C.MLC_RECORD, C.REGISTER_PCPNDT, C.REGISTER_MTP],
   public_health: [C.QUEUE_VIEW, C.EMR_VIEW, C.REGISTER_IHIP],
+  // Data Protection Officer (DPDP Act 2023): the privacy notice, the data principal request queue and the
+  // breach register. EMR_VIEW because an access request is answered by saying what the hospital holds, the
+  // same reason `him` reads the chart to decide a release. No treatment, billing or staff administration.
+  dpo: [C.QUEUE_VIEW, C.EMR_VIEW, C.DPDP_MANAGE],
   // Default for a recognised-but-unmapped login: read-only.
   viewer: [C.QUEUE_VIEW]
 };

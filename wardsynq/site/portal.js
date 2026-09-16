@@ -103,6 +103,35 @@
   /** PURE. The discharge section. The staff Patient copy screen (ward.js) draws its preview with this too. */
   function dischargeSection(state, list) { return section("discharge", tr("dc.title"), state, list, dischargeItem, tr("dc.empty")); }
 
+  /** PURE. DPDP Act 2023: the hospital's privacy notice, the patient's acknowledgement of it and their own requests about
+   * their data. p: null = loading, false = failed, else the /api/portal/privacy answer. The notice is the hospital's own
+   * text in the language it was written in, shown as written. A proxy reads it and cannot act on the patient's behalf. */
+  function privacySection(p) {
+    var body;
+    if (p == null) body = '<p role="status" data-state="loading"><span class="spin"></span> ' + esc(tr("privacy.loading")) + "</p>";
+    else if (p === false) body = '<div class="msg err" role="alert" data-state="failed">' + esc(tr("privacy.failed")) + "</div>";
+    else {
+      var n = p.notice;
+      body = n ? '<article class="privacy-notice">' + (n.title ? "<h3>" + esc(n.title) + "</h3>" : "") + '<p style="white-space:pre-wrap">' + esc(n.text) + "</p>" +
+          "<p><b>" + esc(tr("privacy.dpo")) + "</b> " + esc(n.dpoContact) + (n.grievanceContact ? "<br><b>" + esc(tr("privacy.grievance")) + "</b> " + esc(n.grievanceContact) : "") + "</p></article>" +
+          (p.acknowledged ? '<p class="quiet" data-state="acknowledged">' + esc(tr("privacy.acknowledged")) + "</p>"
+            : !p.proxy ? '<button class="btn" type="button" data-act="privacy-ack" data-lang="' + esc(n.language) + '">' + esc(tr("privacy.acknowledge")) + "</button>" : "")
+        : '<p class="quiet" data-empty="privacy">' + esc(tr("privacy.none")) + "</p>";
+      if (p.proxy) body += '<p class="quiet">' + esc(tr("privacy.proxy")) + "</p>";
+      else body += "<h3>" + esc(tr("privacy.ask")) + "</h3>" +
+        '<label class="f"><span>' + esc(tr("privacy.kind")) + '</span><select id="pDprKind">' + ["access", "correction", "erasure", "grievance", "nomination"].map(function (k) { return '<option value="' + k + '">' + esc(tr("privacy.kind." + k)) + "</option>"; }).join("") + "</select></label>" +
+        '<label class="f"><span>' + esc(tr("privacy.detail")) + '</span><textarea id="pDprDetail" rows="3" maxlength="4000"></textarea></label>' +
+        '<label class="f"><span>' + esc(tr("privacy.nominee")) + '</span><input id="pDprNomName"></label>' +
+        '<label class="f"><span>' + esc(tr("privacy.nomineeRel")) + '</span><input id="pDprNomRel"></label>' +
+        '<button class="btn primary" type="button" data-act="data-request">' + esc(tr("privacy.send")) + '</button><div id="pDprMsg" aria-live="polite"></div>';
+      body += "<h3>" + esc(tr("privacy.yours")) + "</h3>" + (p.requests && p.requests.length ? '<ul class="plist">' + p.requests.map(function (r) {
+        return "<li><b>" + esc(tr("privacy.kind." + r.kind)) + "</b>: " + esc(tr("privacy.state." + r.state)) + '<br><span class="quiet">' + esc(when(r.receivedAt)) + "</span>" +
+          (r.response ? "<br>" + esc(r.response) : "") + "</li>";
+      }).join("") + "</ul>" : '<p class="quiet" data-empty="data-requests">' + esc(tr("privacy.noRequests")) + "</p>");
+    }
+    return '<section class="card" aria-labelledby="h-privacy" data-section="privacy"><h2 id="h-privacy">' + esc(tr("privacy.title")) + "</h2>" + body + "</section>";
+  }
+
   /** PURE. The whole signed-in page from the server's answer. Only granted sections are drawn. */
   function renderRecord(r) {
     var access = r.access || { kind: "patient", sections: [] };
@@ -161,6 +190,7 @@
             (m.reply ? '<div class="msg ok">' + esc(tr("msg.reply", { when: when(m.answeredAt) })) + " " + esc(m.reply) + "</div>" : '<div class="quiet">' + esc(tr("msg.unanswered")) + "</div>") + "</li>";
         }).join("") + "</ul>" : '<p class="quiet" data-empty="messages">' + esc(tr("msg.empty")) + "</p>") + "</section>");
     }
+    out.push(privacySection(null));
     return out.join("");
   }
 
@@ -179,7 +209,7 @@
   }
 
   var api = {
-    esc: esc, section: section, renderRecord: renderRecord, renderPhase: renderPhase, statusSection: statusSection, dischargeItem: dischargeItem, dischargeSection: dischargeSection, documentItem: documentItem
+    esc: esc, section: section, privacySection: privacySection, renderRecord: renderRecord, renderPhase: renderPhase, statusSection: statusSection, dischargeItem: dischargeItem, dischargeSection: dischargeSection, documentItem: documentItem
   };
   if (typeof window !== "undefined") window.WSQPortal = api;
   if (typeof document === "undefined" || !document.getElementById("portal")) return;
@@ -226,7 +256,7 @@
     if (!s) return show({ phase: "signin", orgId: orgFromHash() });
     show({ phase: "loading" });
     post("record", s).then(function (r) {
-      if (r && r.ok) { show({ phase: "ready", data: r }); if (r.access && (r.access.sections || []).indexOf("status") >= 0) loadQueue(s); return; }
+      if (r && r.ok) { show({ phase: "ready", data: r }); if (r.access && (r.access.sections || []).indexOf("status") >= 0) loadQueue(s); loadPrivacy(s); return; }
       if (r && r.httpStatus === 401) { save(null); return show({ phase: "ended", detail: r.detail }); }
       show({ phase: "failed" });
     }, function () { show({ phase: "failed" }); });
@@ -240,6 +270,16 @@
     post("queue", { orgId: s.orgId, grantId: s.grantId, token: s.token }).then(function (q) {
       if (q && q.httpStatus === 401) { save(null); return show({ phase: "ended", detail: q.detail }); }
       put(q && q.ok ? q : false);
+    }, function () { put(false); });
+  }
+
+  /* The privacy section loads after the record and redraws only itself, like the queue status. */
+  function loadPrivacy(s) {
+    var put = function (p) { var el = root.querySelector('[data-section="privacy"]'); if (el) el.outerHTML = privacySection(p); };
+    put(null);
+    post("privacy", { orgId: s.orgId, grantId: s.grantId, token: s.token, language: document.documentElement.lang || "en" }).then(function (p) {
+      if (p && p.httpStatus === 401) { save(null); return show({ phase: "ended", detail: p.detail }); }
+      put(p && p.ok ? p : false);
     }, function () { put(false); });
   }
 
@@ -318,6 +358,21 @@
     if (act === "appt") {
       return post("appointment-request", { orgId: s.orgId, grantId: s.grantId, token: s.token, reason: document.getElementById("pApptReason").value.trim(), preference: document.getElementById("pApptPref").value.trim() })
         .then(function (r) { b.disabled = false; say("pApptMsg", r, r.note || tr("appt.sent")); }, function () { b.disabled = false; say("pApptMsg", null); });
+    }
+    if (act === "privacy-ack") {
+      return post("privacy-acknowledge", { orgId: s.orgId, grantId: s.grantId, token: s.token, language: b.getAttribute("data-lang") })
+        .then(function (r) { if (r && r.ok) return loadPrivacy(s); b.disabled = false; alert((r && r.detail) || tr("action.failedShort")); }, function () { b.disabled = false; alert(tr("action.failedShort")); });
+    }
+    if (act === "data-request") {
+      var kind = document.getElementById("pDprKind").value, detail = document.getElementById("pDprDetail").value.trim();
+      if (!detail) { b.disabled = false; return say("pDprMsg", { ok: false, detail: tr("privacy.writeFirst") }); }
+      var req = { orgId: s.orgId, grantId: s.grantId, token: s.token, kind: kind, detail: detail };
+      if (kind === "nomination") req.nominee = { name: document.getElementById("pDprNomName").value.trim(), relationship: document.getElementById("pDprNomRel").value.trim() };
+      return post("data-request", req).then(function (r) {
+        b.disabled = false;
+        if (r && r.ok) { say("pDprMsg", r, tr("privacy.sent")); return setTimeout(function () { loadPrivacy(s); }, 1200); }
+        say("pDprMsg", r, "");
+      }, function () { b.disabled = false; say("pDprMsg", null); });
     }
     if (act === "withdraw") {
       if (!confirm(tr("consents.confirm"))) { b.disabled = false; return; }

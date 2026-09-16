@@ -71,7 +71,7 @@ const WITHHELD_SAY = "Withheld until your care team discusses it with you.";
 const STRUCTURED = Object.freeze(["diagnoses", "investigations"]);
 const ITEM_WITHHELD_SAY = "One entry is withheld here until your care team discusses it with you. Please ask your care team.";
 /** Consents a patient may withdraw from the portal. Data use only - see the header. */
-const PATIENT_WITHDRAWABLE = Object.freeze(["share-external", "share-registry", "research", "photography"]);
+const PATIENT_WITHDRAWABLE = Object.freeze(["share-external", "share-registry", "research", "photography", "marketing"]);
 /** Who may agree to a proxy. The patient, or the person legally deciding for them. Never the proxy. */
 const PROXY_CONSENT_FROM = Object.freeze(["patient", "legal-guardian", "power-of-attorney"]);
 const PROXY_CONSENT_METHOD = Object.freeze(["in-person-verbal", "in-person-written"]);

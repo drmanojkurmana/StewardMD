@@ -2751,7 +2751,7 @@
     ["treatment", "General treatment"], ["share-external", "Sharing the record outside this hospital"],
     ["share-registry", "Sharing with a registry or exchange"], ["research", "Use of the record for research"],
     ["photography", "Clinical photography"], ["blood-products", "Transfusion of blood products"],
-    ["procedure", "A specific procedure"], ["other", "Other"],
+    ["procedure", "A specific procedure"], ["marketing", "Offers and news from the hospital"], ["other", "Other"],
   ];
   var CONSENT_GIVERS = [
     ["patient", "Patient"], ["parent", "Parent"], ["legal-guardian", "Legal guardian"],

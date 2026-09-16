@@ -433,6 +433,14 @@ const RESOURCE_TYPES = Object.freeze([
   /* P2.12 (pathways.js): a patient enrolled on one published pathway version, and each step override with its
    * reason as its own record, never edited. Written through EMR_TREAT; no narrower grant writes either. */
   "PathwayEnrolment", "PathwayStepOverride",
+  /* DPDP Act 2023 (dpdp.js), 2026-09-16: the hospital's privacy notice (one record per language, a version per
+   * edit), a patient's acknowledgement that they were given it, a data principal's request and its answer, and
+   * a personal data breach with its notification times. Append-only like everything else: "we answered on the
+   * 3rd" and "the Board was told at 14:00" are exactly the facts that must not be editable afterwards. */
+  "PrivacyNotice", "PrivacyAcknowledgement", "DataPrincipalRequest", "DataBreach",
+  /* Compliance reporting, 2026-09-16: the hospital's own self-assessment against the NABH Digital Health
+   * Standards (compliance.js) and a saved report definition (report-builder.js). No patient on either. */
+  "DhsAssessment", "SavedReport",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

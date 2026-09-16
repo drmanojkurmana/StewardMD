@@ -55,6 +55,9 @@ const SCOPES = Object.freeze({
   "photography": "Clinical photography",
   "blood-products": "Transfusion of blood products",
   "procedure": "A specific procedure",
+  /* DPDP Act 2023 s7(a): sending a patient offers and news is a purpose they must agree to, unlike treatment,
+   * which s7 lets a hospital process without consent. Withdrawable by the patient in the portal. */
+  "marketing": "Offers and news from the hospital",
   "other": "Other",
 });
 
