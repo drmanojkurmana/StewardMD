@@ -330,10 +330,31 @@ export function todayFormat(value, now = new Date()) {
   return null;
 }
 
+/* VALUE -> KEY, OVER EVERY ROW. findField used to stop looking past the first 200 rows, so a widened
+ * hospital-wide worklist (757 rows on a live run) left any row past #200 unmapped: the doctor's
+ * radiology patient sat at row 600 and its recordNo/resultid never traced to the ward list, so the
+ * server marked radiology "unscoped". Built once per rows array and cached on the array itself (a
+ * WeakMap keyed on identity, guarded by length too since createProofBook.prove replaces - never
+ * mutates - a resource's rows with a fresh concat().slice() array each time more are proven, so a
+ * stale index is never reused for a grown or replaced list). */
+const fieldIndexCache = new WeakMap();
+function fieldIndexFor(rows) {
+  const cached = fieldIndexCache.get(rows);
+  if (cached && cached.length === rows.length) return cached.index;
+  const index = new Map();
+  for (const r of rows) {
+    if (!r || typeof r !== 'object') continue;
+    for (const k of Object.keys(r)) {
+      if (k.charAt(0) === '_' && k.indexOf('.') <= 0) continue;
+      const v = String(r[k]).trim();
+      if (!index.has(v)) index.set(v, k); // first row in order, first key in order wins
+    }
+  }
+  fieldIndexCache.set(rows, { length: rows.length, index });
+  return index;
+}
 function findField(rows, value) {
-  const want = String(value);
-  for (const r of rows.slice(0, 200)) for (const k of Object.keys(r)) if (k.charAt(0) !== '_' || k.indexOf('.') > 0) { if (String(r[k]).trim() === want) return k; }
-  return null;
+  return fieldIndexFor(rows).get(String(value)) || null;
 }
 
 /**

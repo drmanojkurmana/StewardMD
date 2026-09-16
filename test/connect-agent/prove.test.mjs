@@ -44,6 +44,21 @@ test('paramsOf traces every field: ward-list column, joined visit id, parent row
   assert.deepEqual(safeParams({ id: { from: 'worklist', field: 'col123' }, x: { constant: 'a' } }), { id: { unmapped: true }, x: { constant: 'a' } });
 });
 
+/* F3 REGRESSION: findField used to stop at row 200, so a widened hospital-wide worklist (757 rows on a
+ * live run) left the doctor's own row unmapped whenever it sat past that cutoff. */
+test('paramsOf: a 757-row worklist maps a field whose only matching row is past the old 200-row cutoff', () => {
+  const rows = [];
+  for (let i = 0; i < 757; i += 1) rows.push({ MRNo: 'MR9' + String(100000 + i), VisitNo: 'IP5' + String(550000 + i), PatientName: 'PATIENT ' + i });
+  const wl = { label: 'worklist', rows };
+  // Row 600: single-field match.
+  assert.deepEqual(paramsOf({ url: HOST + '/Doctor/Home/GetMedicines/?id=MR9100600', body: null }, [wl]), { id: { from: 'worklist', field: 'MRNo' } });
+  // Row 650: a joined id where BOTH halves are past row 200.
+  assert.deepEqual(
+    paramsOf({ url: HOST + '/Doctor/Home/Searchnew', body: 'recordNo=MR9100650-IP5550650' }, [wl]),
+    { recordNo: { from: 'worklist', fields: ['MRNo', 'VisitNo'], join: '-' } },
+  );
+});
+
 test('learnColumns binds each screen column to the response field by VALUE, never by what the key is named', () => {
   // The real GHIS lab-result defect: the payload puts ValueType and LowValue AHEAD of the result, and
   // a name guess (/value|result/) grabs ValueType. The screen shows test, result, units, range.
