@@ -464,6 +464,7 @@ async function portalRead(request, env, ctx) {
     ...(extras.documents ? { documents: extras.documents } : {}),
     ...(extras.bills ? { bills: extras.bills } : {}),
     ...(extras.consents ? { consents: extras.consents } : {}),
+    ...(extras.education ? { education: extras.education } : {}),
     failedSections: extras.failed,
     /* Carried on the read so the page can show it above the message box rather than under the send
      * button. The person about to type "my chest hurts" is the one who most needs to read it first. */

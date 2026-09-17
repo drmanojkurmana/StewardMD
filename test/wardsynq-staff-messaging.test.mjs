@@ -312,3 +312,87 @@ test("PURE threadsOf: unread counts only others' unrecalled messages after the l
   assert.equal(SM.threadsOf(msgs, new Map(), "c", "doctor")[0].forMe, false);
 });
 
+/* Named people (R2-3). GET /api/queue/ward/staff-message-people and toPeople on POST /api/queue/ward/staff-message-send. */
+const NURSE2 = "nurse2@example.test";
+function secondNurse() { docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(NURSE2))}`, { fields: { orgId: ORG, identity: idFor(NURSE2), role: "nurse", active: true, displayName: "Sister Two", email: NURSE2 }, updateTime: "t1" }); }
+
+test("a thread to one named nurse is seen by that nurse and not by another nurse, who cannot open, reply to or mark it either", async () => {
+  seedHospital(); secondNurse();
+  const a = await admitted("08");
+  const sent = await as(DOCTOR, "/ward/staff-message-send", "POST", { orgId: ORG, patientId: a.patientId, subject: "Just you", body: "Please check her cannula.", toPeople: [idFor(NURSE)] });
+  assert.equal(sent.__status, 200, JSON.stringify(sent));
+  const stored = await RECORD.latest(T, "StaffMessage", sent.messageId);
+  assert.deepEqual(stored.toPeople.map((p) => p.identity), [idFor(NURSE)]);
+  assert.deepEqual(stored.toRoles, []);
+
+  const hers = await as(NURSE, "/ward/staff-messages" + q("&view=mine"));
+  assert.equal(hers.threads.length, 1, "the named nurse has it in her own inbox");
+  assert.equal(hers.threads[0].forMe, true);
+  for (const extra of ["&view=mine", "", "&patientId=" + a.patientId]) {
+    const other = await as(NURSE2, "/ward/staff-messages" + q(extra));
+    assert.equal(other.__status, 200, JSON.stringify(other));
+    assert.equal(other.threads.length, 0, "another nurse does not see it" + extra);
+  }
+  const n0 = await count("StaffMessage"), r0 = await count("StaffMessageRead");
+  assert.equal((await as(NURSE2, "/ward/staff-message-send", "POST", { orgId: ORG, threadId: sent.threadId, body: "me too" })).__status, 403);
+  assert.equal((await as(NURSE2, "/ward/staff-message-read", "POST", { orgId: ORG, threadId: sent.threadId })).__status, 403);
+  assert.equal((await as(NURSE2, "/ward/staff-message-escalate", "POST", { orgId: ORG, messageId: sent.messageId })).__status, 403);
+  assert.equal(await count("StaffMessage"), n0);
+  assert.equal(await count("StaffMessageRead"), r0);
+
+  const reply = await as(NURSE, "/ward/staff-message-send", "POST", { orgId: ORG, threadId: sent.threadId, body: "Resited." });
+  assert.equal(reply.__status, 200, JSON.stringify(reply));
+  assert.deepEqual((await RECORD.latest(T, "StaffMessage", reply.messageId)).toPeople.map((p) => p.identity), [idFor(NURSE)], "a reply inherits the named addressees");
+  assert.equal((await as(DOCTOR, "/ward/staff-messages" + q())).threads[0].messages.length, 2, "the sender still sees the thread");
+});
+
+test("naming a member of another hospital, or someone whose role cannot see the patient, is refused naming who, and nothing is written", async () => {
+  seedHospital(); otherHospital();
+  const a = await admitted("09");
+  const stranger = await as(DOCTOR, "/ward/staff-message-send", "POST", { orgId: ORG, patientId: a.patientId, subject: "s", body: "b", toPeople: [idFor(STRANGER)] });
+  assert.equal(stranger.__status, 422, JSON.stringify(stranger));
+  assert.equal(stranger.error, "people_refused");
+  assert.equal(stranger.refused[0].reason, "not_member");
+  assert.ok(stranger.detail.includes(idFor(STRANGER)), "the refusal names who");
+  const cashier = await as(DOCTOR, "/ward/staff-message-send", "POST", { orgId: ORG, patientId: a.patientId, subject: "s", body: "b", toRoles: ["nurse"], toPeople: [idFor(NURSE), idFor(CASHIER)] });
+  assert.equal(cashier.__status, 422, JSON.stringify(cashier));
+  assert.deepEqual(cashier.refused.map((r) => [r.identity, r.reason]), [[idFor(CASHIER), "cannot_read"]]);
+  assert.equal(await count("StaffMessage"), 0);
+});
+
+test("an alert on a named thread goes to the named person who has not read it, not to other members of their role", async () => {
+  seedHospital(); secondNurse();
+  const kv = new Map();
+  ENV.PUSH_KV = { get: async (k, type) => (kv.has(k) ? (type === "json" ? JSON.parse(kv.get(k)) : kv.get(k)) : null), put: async (k, v) => { kv.set(k, v); }, delete: async (k) => { kv.delete(k); } };
+  const org = docs.get(`q_orgs/${ORG}`);
+  docs.set(`q_orgs/${ORG}`, { ...org, fields: { ...org.fields, wardsynq: { alerts: { push: { enabled: true } } } } });
+  for (const [email, tok] of [[NURSE, "tok-n1"], [NURSE2, "tok-n2"]]) {
+    kv.set(`push:who:${ORG}~${idFor(email)}`, JSON.stringify({ tokenIds: [tok] }));
+    kv.set(`push:native:${tok}`, JSON.stringify({ token: "device-" + tok, platform: "android" }));
+  }
+  try {
+    const a = await admitted("10");
+    const m = await as(DOCTOR, "/ward/staff-message-send", "POST", { orgId: ORG, patientId: a.patientId, subject: "Named", body: "See bed 4.", toPeople: [idFor(NURSE2)] });
+    const e = await as(DOCTOR, "/ward/staff-message-escalate", "POST", { orgId: ORG, messageId: m.messageId });
+    assert.equal(e.__status, 200, JSON.stringify(e));
+    assert.equal(e.escalation.recipients, 1, "only the named nurse");
+    assert.equal(e.escalation.total, 1);
+  } finally { delete ENV.PUSH_KV; }
+});
+
+test("GET /api/queue/ward/staff-message-people: label and role only, never the caller or a role that cannot see patients; negative authorization", async () => {
+  seedHospital(); secondNurse(); otherHospital();
+  assert.equal(await anon("/ward/staff-message-people" + q()), 401);
+  assert.equal((await as(CASHIER, "/ward/staff-message-people" + q())).__status, 403);
+  assert.equal((await as(STRANGER, "/ward/staff-message-people" + q())).__status, 403, "other hospital");
+  const r = await as(DOCTOR, "/ward/staff-message-people" + q());
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  const ids = r.people.map((p) => p.identity);
+  assert.ok(ids.includes(idFor(NURSE)) && ids.includes(idFor(NURSE2)));
+  assert.ok(!ids.includes(idFor(DOCTOR)), "not the caller");
+  assert.ok(!ids.includes(idFor(CASHIER)) && !ids.includes(idFor(PHARM)), "not a role that cannot read the chart");
+  assert.ok(!ids.includes(idFor(STRANGER)), "not another hospital's member");
+  assert.equal(r.people.find((p) => p.identity === idFor(NURSE2)).label, "Sister Two");
+  for (const p of r.people) assert.deepEqual(Object.keys(p).sort(), ["identity", "label", "role"]);
+});
+

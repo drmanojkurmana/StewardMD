@@ -515,6 +515,10 @@ const RESOURCE_TYPES = Object.freeze([
    * recall as a new version, and each reader's last read of a thread. Patient-bound messages carry patientId, so they
    * sit in the patient compartment and are read only after the patient is. */
   "StaffMessage", "StaffMessageRead",
+  /* Patient education, 2026-09-17 (patient-education.js): a hospital-authored leaflet (no patient; a draft until a second
+   * clinician approves a version) and, per stay, the approved copies given to that patient (patient compartment). Written
+   * through EMR_TREAT, whose write scope is unconstrained; no narrower grant writes either. */
+  "EducationLeaflet", "EducationAttachment",
 ]);
 
 /* BLOOD CENTRE ONLY (legal opinion 2026-09-17, G.5.8): donor deferral reasons (item 52 among them), infection results

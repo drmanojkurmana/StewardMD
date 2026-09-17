@@ -4,6 +4,10 @@
  * patient has agreed to) for their own access, see and revoke those grants, and answer the messages
  * patients send. Enrolment and replies are emr.treat; the worklist is emr.view. The access code is
  * shown ONCE, here, to be read to the person in front of you: it is not stored and nothing sends it.
+ *
+ * A fourth: the hospital's patient education leaflets (functions/_wardsynq/patient-education.js). Written here as drafts
+ * and approved here by a second clinician; WardSynQ ships none. A leaflet is given to a patient on the discharge summary
+ * (discharge.js) and then shows on their portal.
  */
 (function () {
   "use strict";
@@ -19,7 +23,7 @@
    * configuration value (stays as is); its label is staff-facing UI text and is translated below. */
   var SECTIONS = [["status", "OPD queue status"], ["appointments", "Appointments"], ["medicines", "Medicines"], ["results", "Results"], ["diagnoses", "Diagnoses and allergies"],
     ["discharge", "Discharge summaries (patient copy)"], ["discharge-full", "Full discharge summary"], ["documents", "Released documents"],
-    ["bills", "Bills"], ["consents", "Consents (view only)"], ["messages", "Messages"]];
+    ["bills", "Bills"], ["consents", "Consents (view only)"], ["messages", "Messages"], ["education", "Education leaflets given"]];
   function sectionLabel(c, code) {
     switch (code) {
       case "status": return T(c, "site.portal.section.status", "OPD queue status");
@@ -33,6 +37,7 @@
       case "bills": return T(c, "site.portal.section.bills", "Bills");
       case "consents": return T(c, "site.portal.section.consents", "Consents (view only)");
       case "messages": return T(c, "site.portal.section.messages", "Messages");
+      case "education": return T(c, "site.portal.section.education", "Education leaflets given");
       default: return code;
     }
   }
@@ -52,6 +57,29 @@
         /* P6: a MaiK draft of the reply, through the governed route. It fills the box; a person still presses Send. */
         (c.can && c.can("emr.treat") ? '<button class="btn quiet" type="button" data-pa="draft" data-id="' + c.esc(m.messageId) + '" data-patient="' + c.esc(m.patientId) + '">' + c.esc(T(c, "site.portal.draftWithMaik", "Draft with MaiK")) + "</button>" : "") +
         '</div><div id="pd-' + c.esc(m.messageId) + '" aria-live="polite"></div></li>';
+    }).join("") + "</ul>";
+  }
+
+  function eduState(c, st) {
+    if (st === "approved") return T(c, "site.portal.edu.approved", "Approved");
+    if (st === "retired") return T(c, "site.portal.edu.retired", "Retired");
+    return T(c, "site.portal.edu.draft", "Draft, not yet given to patients");
+  }
+  /** PURE. The leaflet library, with loading, failed and empty distinct. Titles, text and names are data. */
+  function libraryHtml(c, r, treat) {
+    if (r == null) return '<span class="spin"></span> ' + c.esc(T(c, "site.portal.edu.loading", "Loading leaflets..."));
+    if (!r.ok) return '<div class="msg err">' + TS(c, "site.portal.edu.failed", "The leaflet library could not be loaded. Do not read this as no leaflets.") + "</div>";
+    if (!r.leaflets.length) return '<p data-empty="leaflets">' + c.esc(T(c, "site.portal.edu.none", "This hospital has written no leaflet yet.")) + "</p>";
+    return (r.warning ? '<div class="msg err">' + EN(c, c.esc(r.warning)) + "</div>" : "") + "<ul>" + r.leaflets.map(function (l) {
+      var mine = (l.draftedBy || []).indexOf(r.me) >= 0;
+      return "<li><b>" + EN(c, c.esc(l.title)) + "</b> (" + EN(c, c.esc(l.language)) + "), " + c.esc(eduState(c, l.state)) + ", " + c.esc(T(c, "site.portal.edu.version", "version {n}", { n: l.version })) +
+        (l.approval ? "<br>" + c.esc(T(c, "site.portal.edu.approvedBy", "Approved by")) + " " + EN(c, c.esc(l.approval.byName || l.approval.by)) : "") +
+        (l.retired ? "<br>" + c.esc(T(c, "site.portal.edu.retiredWhy", "Retired:")) + " " + EN(c, c.esc(l.retired.reason)) : "") +
+        '<details><summary>' + c.esc(T(c, "site.portal.edu.read", "Read")) + '</summary><div style="white-space:pre-wrap" lang="' + c.esc(l.language) + '">' + EN(c, c.esc(l.body)) + "</div></details>" +
+        (treat && l.state !== "retired" ? '<div class="row"><button class="btn quiet" type="button" data-pa="eduedit" data-id="' + c.esc(l.leafletId) + '">' + c.esc(T(c, "site.portal.edu.edit", "Edit")) + "</button>" +
+          (l.state === "draft" && !mine ? '<button class="btn primary" type="button" data-pa="eduapprove" data-id="' + c.esc(l.leafletId) + '" data-v="' + c.esc(l.version) + '">' + c.esc(T(c, "site.portal.edu.approve", "Approve this version")) + "</button>" : "") +
+          (l.state === "draft" && mine ? ' <span class="quiet">' + c.esc(T(c, "site.portal.edu.needsSecond", "Another clinician approves what you wrote.")) + "</span>" : "") +
+          '<button class="btn danger" type="button" data-pa="eduretire" data-id="' + c.esc(l.leafletId) + '">' + c.esc(T(c, "site.portal.edu.retire", "Retire")) + "</button></div>" : "") + "</li>";
     }).join("") + "</ul>";
   }
 
@@ -81,7 +109,20 @@
       (treat ? '<div class="card"><h2>' + c.esc(T(c, "site.portal.giveAccessCard", "Give a patient or family member access")) + '</h2>' +
         '<p class="quiet">' + c.esc(T(c, "site.portal.giveAccessNote1", "Only with the person in front of you. The code is shown once; read it to them. Patients sign in at")) + ' <b>/portal.html#org=' + EN(c, c.esc(org)) + "</b>.</p>" +
         '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.portal.mrnLabel", "MR number")) + '</span><input id="paMrn" autocapitalize="characters"></label><button class="btn quiet" type="button" data-pa="find">' + c.esc(T(c, "site.portal.find", "Find")) + "</button></div>" +
-        '<div id="paPatient"></div></div>' : "");
+        '<div id="paPatient"></div></div>' : "") +
+      '<div class="card"><h2>' + c.esc(T(c, "site.portal.edu.card", "Patient education leaflets")) + '</h2><p class="quiet">' + c.esc(T(c, "site.portal.edu.intro", "The hospital's own leaflets. WardSynQ ships none. A leaflet reaches a patient only after a second clinician approves the version, and only when a clinician gives it on the discharge summary.")) + "</p>" +
+        (treat ? '<div class="row"><label class="f" style="flex:2 1 260px"><span>' + c.esc(T(c, "site.portal.edu.title", "Title")) + '</span><input id="paEduTitle" maxlength="160"></label>' +
+          '<label class="f"><span>' + c.esc(T(c, "site.portal.edu.language", "Language code (en, hi, ta)")) + '</span><input id="paEduLang" maxlength="12"></label>' +
+          '<label class="f"><span>' + c.esc(T(c, "site.portal.edu.tags", "Conditions or procedures, separated by commas")) + '</span><input id="paEduTags"></label></div>' +
+          '<div class="row"><label class="f" style="flex:2 1 260px"><span>' + c.esc(T(c, "site.portal.edu.body", "Leaflet text")) + '</span><textarea id="paEduBody" rows="6" maxlength="20000"></textarea></label></div>' +
+          '<button class="btn primary" type="button" data-pa="edusave">' + c.esc(T(c, "site.portal.edu.save", "Save draft")) + '</button> <button class="btn quiet" type="button" data-pa="edunew">' + c.esc(T(c, "site.portal.edu.new", "New leaflet")) + '</button><div id="paEduOut" aria-live="polite"></div>' : "") +
+        '<div id="paEduLib"></div></div>';
+    var edu = { lib: null, editing: null };
+    function loadLib() { set("paEduLib", libraryHtml(c, null, treat)); c.api("/ward/education-leaflets" + q).then(function (r) { edu.lib = r && r.ok ? r : { ok: false }; set("paEduLib", libraryHtml(c, edu.lib, treat)); }); }
+    function eduForm(l) {
+      edu.editing = l ? { id: l.leafletId, v: l.version } : null;
+      [["paEduTitle", l ? l.title : ""], ["paEduLang", l ? l.language : ""], ["paEduTags", l ? (l.tags || []).join(", ") : ""], ["paEduBody", l ? l.body : ""]].forEach(function (x) { var e = document.getElementById(x[0]); if (e) e.value = x[1]; });
+    }
     function loadWork() { set("paWork", worklistHtml(c, null)); c.api("/ward/patient-messages" + q).then(function (r) { set("paWork", worklistHtml(c, r || { ok: false })); }); }
     function loadGrants() { set("paGrants", grantsHtml(c, null)); c.api("/ward/patient-grants" + q + "&patientId=" + encodeURIComponent(cur.patientId)).then(function (r) { set("paGrants", grantsHtml(c, r || { ok: false })); }); }
     function showPatient(p) {
@@ -111,9 +152,38 @@
       });
     }
     loadWork();
+    loadLib();
     el.onclick = function (ev) {
       var b = ev.target.closest && ev.target.closest("[data-pa]"); if (!b) return;
       var a = b.getAttribute("data-pa");
+      var eduDone = function (r) {
+        b.disabled = false;
+        if (!r || !r.ok) { set("paEduOut", '<div class="msg err">' + TS(c, "site.portal.edu.notSaved", "Not saved: {why}", { why: (r && (r.detail || r.error)) || T(c, "site.portal.noAnswer", "no answer") }) + "</div>"); return; }
+        set("paEduOut", '<div class="msg ok">' + TS(c, "site.portal.edu.saved", "Saved.") + "</div>");
+        loadLib();
+      };
+      if (a === "edunew") { eduForm(null); set("paEduOut", ""); return; }
+      if (a === "eduedit") {
+        var hit = edu.lib && edu.lib.ok && edu.lib.leaflets.filter(function (x) { return x.leafletId === b.getAttribute("data-id"); })[0];
+        if (hit) { eduForm(hit); set("paEduOut", '<div class="msg note">' + TS(c, "site.portal.edu.editing", "Editing. Saving an approved leaflet makes it a draft again, to be approved again.") + "</div>"); }
+        return;
+      }
+      if (a === "edusave") {
+        var eb = { orgId: org, title: val("paEduTitle"), language: val("paEduLang"), body: val("paEduBody"), tags: val("paEduTags").split(",").map(function (x) { return x.trim(); }).filter(Boolean) };
+        if (edu.editing) { eb.leafletId = edu.editing.id; eb.expectedVersion = edu.editing.v; }
+        b.disabled = true;
+        return c.api("/ward/education-leaflet-save", eb).then(function (r) { if (r && r.ok) eduForm(null); eduDone(r); });
+      }
+      if (a === "eduapprove") {
+        b.disabled = true;
+        return c.api("/ward/education-leaflet-approve", { orgId: org, leafletId: b.getAttribute("data-id"), expectedVersion: Number(b.getAttribute("data-v")) }).then(eduDone);
+      }
+      if (a === "eduretire") {
+        var ew = ""; try { ew = prompt(T(c, "site.portal.edu.retirePrompt", "Why is this leaflet retired? Leaflets already given stay readable.")) || ""; } catch (e) {}
+        if (!ew.trim()) return;
+        b.disabled = true;
+        return c.api("/ward/education-leaflet-retire", { orgId: org, leafletId: b.getAttribute("data-id"), reason: ew.trim() }).then(eduDone);
+      }
       if (a === "draft") {
         var dId = b.getAttribute("data-id");
         b.disabled = true;
@@ -190,5 +260,5 @@
       }
     };
   } });
-  WSQ._portalAccess = { worklistHtml: worklistHtml, grantsHtml: grantsHtml, patientIdForMrn: patientIdForMrn };
+  WSQ._portalAccess = { libraryHtml: libraryHtml, worklistHtml: worklistHtml, grantsHtml: grantsHtml, patientIdForMrn: patientIdForMrn };
 })();

@@ -70,6 +70,7 @@ const ALLOW = {
       ", bed ", " <em>clinician edited</em>", "<div class=\"p-sig\"><div class=\"ln\"></div><span>Signed by ", " &middot; version ",
       "<div class=\"p-sig\"><div class=\"ln\"></div><span>Signature</span><p class=\"p-draft\">UNSIGNED DRAFT - not a final discharge summary.</p></div>",
       "<h1>Discharge summary</h1><div class=\"p-head\">", "<section class=\"p-prov\"><h2>Provenance</h2><p>",
+      "<p class=\"p-prov\">Patient information leaflet approved by ", ", given ",
     ],
     "a class name; the assembler's absence marker compared against; the English original under a translated refusal": [
       " fill", "Not recorded.", "<span class=\"en-orig\" lang=\"en\">Refused</span>",

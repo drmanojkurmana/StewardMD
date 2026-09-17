@@ -115,7 +115,10 @@ const INSTRUCTION_TYPES = Object.freeze([
 /* StaffMessage joined 2026-09-17 (staff-messaging.js): a message between staff is a person speaking. An AI actor inherits
  * the scope of the human it runs for, and a model sending a message to a colleague in that person's name is exactly
  * what a draft must never become, so no non-human kind may originate one. */
-const HUMAN_ORIGINATED = Object.freeze(["PrescriptionTransmission", "StaffMessage"]);
+/* EducationLeaflet and EducationAttachment joined 2026-09-17 (patient-education.js): the words a hospital hands a patient
+ * are written, approved and given by named clinicians. A model drafting a leaflet in a clinician's name, or giving one, is
+ * the unreviewed patient-facing content the approval step exists to stop. */
+const HUMAN_ORIGINATED = Object.freeze(["PrescriptionTransmission", "StaffMessage", "EducationLeaflet", "EducationAttachment"]);
 
 /**
  * THE ONE NARROW GRANT the comment above said would be needed, made explicit rather than the rule

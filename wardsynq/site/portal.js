@@ -278,6 +278,10 @@
     }
     if (has("discharge") || has("discharge-full")) out.push(dischargeSection(failed("discharge"), r.dischargeSummaries));
     if (has("documents")) out.push(section("documents", tr("docs.title"), failed("documents"), r.documents, documentItem, tr("docs.empty")));
+    /* The approved leaflets a clinician gave, in the leaflet's own language; the words are the hospital's, never translated here. */
+    if (has("education")) out.push(section("education", tr("edu.title"), failed("education"), r.education, function (x) {
+      return '<b lang="' + esc(x.language) + '">' + esc(x.title) + '</b> <span class="quiet">' + esc(tr("edu.given", { when: when(x.attachedAt) })) + '</span><div lang="' + esc(x.language) + '">' + lines(x.body) + "</div>";
+    }, tr("edu.empty")));
     if (has("bills")) out.push(section("bills", tr("bills.title"), failed("bills"), r.bills, function (b) {
       var state = b.status === "void" ? tr("bills.cancelled") : b.status === "paid" ? tr("bills.paid") : tr("bills.due", { amount: money(b.balance, b.currency) });
       return "<b>" + esc(state) + "</b><br>" + esc(tr("bills.summary", { charged: money(b.charged, b.currency), paid: money(b.paid, b.currency) })) +

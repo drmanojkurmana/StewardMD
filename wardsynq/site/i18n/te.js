@@ -9600,7 +9600,6 @@
     "site.inbasket.subtitle": "staff మెసేజ్‌లు మరియు మీ వద్ద పెండింగ్‌లో ఉన్నవి",
     "site.inbasket.messagesCard": "Staff మెసేజ్‌లు",
     "site.inbasket.show": "చూపించు",
-    "site.inbasket.forMe": "నా రోల్ కోసం లేదా నేను స్టార్ట్ చేసినవి",
     "site.inbasket.all": "నేను చూడగలిగేవి అన్నీ",
     "site.inbasket.refresh": "రిఫ్రెష్ చేయండి",
     "site.inbasket.newCard": "కొత్త థ్రెడ్",

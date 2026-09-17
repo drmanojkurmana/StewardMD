@@ -6,8 +6,10 @@
  *
  * ONE MESSAGE IS ONE StaffMessage RECORD, bound to a patient (and optionally the stay) or to a unit. A reply names the
  * thread it answers and inherits the thread's binding and addressees, so a thread about Bed 4 cannot drift onto
- * another patient. Addressed by ROLE (doctor, nurse, ...) rather than by person: the inbox shows a thread to the
- * roles it is for, and nobody needs a staff directory to write one.
+ * another patient. Addressed by ROLE (doctor, nurse, ...), by NAMED PEOPLE, or both. A named person must be an active
+ * member of this hospital whose role may read the patient (checked at send, against this hospital's member list, so a
+ * member of another hospital cannot be named). A thread addressed only to named people is shown to them and its sender,
+ * not to everyone else who may read the patient; the record itself is unchanged and still readable for an investigation.
  *
  * WHO MAY SEE A PATIENT THREAD is who may see the patient. Every read of a patient thread first reads the Patient
  * record as the caller, through their own governed service, so the same grant that opens the chart opens the thread
@@ -29,10 +31,10 @@
  */
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
-import { resolveClinicalActor } from "./actor.js";
+import { resolveClinicalActor, grantForRole } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { ROLES } from "../_queue_roles.js";
+import { ROLES, CAPS, can } from "../_queue_roles.js";
 import { FOETAL_SEX } from "./registers.js";
 import { patientLabels, labelKey, actorName } from "./patient-label.js";
 
@@ -40,6 +42,8 @@ const MSG = "StaffMessage";
 const READ = "StaffMessageRead";
 const MAX_BODY = 2000;
 const MAX_SUBJECT = 120;
+/* ponytail: a named address is for a few colleagues; a larger group is a role. */
+const MAX_PEOPLE = 20;
 /* ponytail: one page of the newest messages and read marks per inbox load; an index by thread and reader when a
  * hospital outgrows it. A full page is reported as partial, never as everything. */
 const SCAN = 500;
@@ -84,13 +88,21 @@ async function patientGate(svc, patientId) {
   }
 }
 
-/** A message by id, with its patient gate applied. { msg, version } or { refuse }. */
-async function loadMessage(svc, id) {
+/** PURE. Whether `me` may open a message's thread: a thread addressed only to named people is theirs and its sender's. */
+function openTo(m, me) {
+  const people = (m && m.toPeople) || [];
+  if (!people.length || ((m.toRoles || []).length)) return true;
+  return m.from === me || people.some((p) => p && p.identity === me);
+}
+
+/** A message by id, with its patient gate and its named-people gate applied. { msg, version } or { refuse }. */
+async function loadMessage(svc, id, me) {
   let cur;
   try { cur = await svc.get(MSG, id); }
   catch (e) { return { refuse: e instanceof GovernanceError ? { ok: false, status: 403, error: "permission" } : { ok: false, status: 502, error: "record_read_failed" } }; }
   if (!cur) return { refuse: { ok: false, status: 404, error: "message_not_found" } };
   if (cur.patientId) { const g = await patientGate(svc, cur.patientId); if (!g.ok) return { refuse: g }; }
+  if (!openTo(cur, me)) return { refuse: { ok: false, status: 403, error: "not_addressed", detail: "this thread is addressed to named people and you are not one of them" } };
   const { rec, version } = stripMeta(cur);
   return { msg: rec, version };
 }
@@ -120,7 +132,8 @@ async function escalate(svc, ctx, msg, version, by, reads) {
     if (!members) entry = { at, by, recipients: 0, sent: 0, total: 0, reason: "STAFF_UNREADABLE" };
     else {
       const readers = reads || new Map();
-      const ids = members.filter((m) => m && m.active !== false && (msg.toRoles || []).includes(str(m.role)))
+      const named = new Set((msg.toPeople || []).map((p) => p && p.identity));
+      const ids = members.filter((m) => m && m.active !== false && ((msg.toRoles || []).includes(str(m.role)) || named.has(str(m.identity))))
         .map((m) => str(m.identity)).filter((id) => id && id !== msg.from && !(str(readers.get(id)) >= str(msg.sentAt)));
       if (!ids.length) entry = { at, by, recipients: 0, sent: 0, total: 0, reason: "NO_RECIPIENT" };
       else {
@@ -135,6 +148,55 @@ async function escalate(svc, ctx, msg, version, by, reads) {
     const put = await svc.put(next, { expectedVersion: version });
     return { ok: true, escalation: entry, version: put.record.version, message: next };
   } catch (e) { return { ...writeFailure(e), escalation: entry, detail: "the push was attempted but could not be recorded on the message" }; }
+}
+
+/** PURE. A member as a picker shows them: a label, nothing else. */
+const memberLabel = (m) => str(m.displayName) || str(m.email) || str(m.identity);
+
+/** PURE. Whether a member's role may be addressed on a thread: it opens the chart and reads messages (and the patient). */
+function roleMayRead(role, patientBound) {
+  if (!can(role, CAPS.EMR_VIEW)) return false;
+  const g = grantForRole(role);
+  const reads = (t) => !!g && (g.read === null || g.read.includes(t));
+  return reads("StaffMessage") && (!patientBound || reads("Patient"));
+}
+
+/**
+ * The named addressees, checked against this hospital's active members. { people } or { refuse }. Everyone refused is
+ * named in the refusal, so the sender knows whom to take off.
+ */
+async function resolvePeople(ctx, ids, patientBound) {
+  if (!ids.length) return { people: [] };
+  if (ids.length > MAX_PEOPLE) return { refuse: { ok: false, status: 422, error: "too_many_people", detail: `name at most ${MAX_PEOPLE} people; address a role instead` } };
+  let members;
+  try { members = await ctx.members(); } catch { members = null; }
+  if (!Array.isArray(members)) return { refuse: { ok: false, status: 502, error: "staff_unreadable", detail: "the staff list could not be read, so the named people could not be checked. Nothing was sent." } };
+  const byId = new Map(members.filter((m) => m && m.active !== false).map((m) => [str(m.identity), m]));
+  const people = [], refused = [];
+  for (const id of ids) {
+    const m = byId.get(id);
+    if (!m) refused.push({ identity: id, label: id, reason: "not_member" });
+    else if (!roleMayRead(str(m.role), patientBound)) refused.push({ identity: id, label: memberLabel(m), reason: "cannot_read" });
+    else people.push({ identity: id, label: memberLabel(m) });
+  }
+  if (refused.length) return { refuse: { ok: false, status: 422, error: "people_refused", refused,
+    detail: `not sent. These people cannot be addressed (not an active member of this hospital, or their role may not see this ${patientBound ? "patient" : "thread"}): ${refused.map((r) => r.label).join(", ")}` } };
+  return { people };
+}
+
+/** GET /ward/staff-message-people. Active members who may be named on a patient thread, label and role only. */
+async function listMessagePeople(request, env, ctx) {
+  const mig = ctx.migration, base = baseOf(mig);
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", people: [] };
+  const { resolved, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error };
+  let members;
+  try { members = await ctx.members(); } catch { members = null; }
+  if (!Array.isArray(members)) return { ...base, ok: false, status: 502, error: "staff_unreadable" };
+  const people = members.filter((m) => m && m.active !== false && str(m.identity) !== resolved.actor.id && roleMayRead(str(m.role), true))
+    .map((m) => ({ identity: str(m.identity), label: memberLabel(m), role: str(m.role) }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+  return { ...base, ok: true, people };
 }
 
 /** Read marks for these threads by this reader: Map(threadId -> lastReadAt). Throws when unreadable. */
@@ -152,7 +214,7 @@ async function threadReads(svc, msg) {
 
 /**
  * POST /ward/staff-message-send. ctx: { migration, threadId? | (patientId, encounterId?) | unit, subject?, body,
- * toRoles?, urgent?, push, members }
+ * toRoles?, toPeople? (member identities), urgent?, push, members }
  */
 async function sendStaffMessage(request, env, ctx) {
   const mig = ctx.migration, base = baseOf(mig);
@@ -163,17 +225,18 @@ async function sendStaffMessage(request, env, ctx) {
   const toRoles = Array.isArray(ctx.toRoles) ? [...new Set(ctx.toRoles.map(str).filter(Boolean))] : [];
   const unknown = toRoles.filter((r) => !ROLES.includes(r));
   if (unknown.length) return { ...base, ok: false, status: 422, error: "role_unknown", detail: `not a role here: ${unknown.join(", ")}`, written: 0 };
+  const toPeopleIds = Array.isArray(ctx.toPeople) ? [...new Set(ctx.toPeople.map(str).filter(Boolean))] : [];
 
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let binding;
   const threadId = str(ctx.threadId);
   if (threadId) {
-    const got = await loadMessage(svc, threadId);
+    const got = await loadMessage(svc, threadId, resolved.actor.id);
     if (got.refuse) return { ...base, ...got.refuse, written: 0 };
     const root = got.msg;
     if (root.threadId !== root.id) return { ...base, ok: false, status: 422, error: "not_a_thread", detail: "reply to the first message of a thread", written: 0 };
-    binding = { threadId, patientId: root.patientId, encounterId: root.encounterId, unit: root.unit, subject: root.subject, toRoles: root.toRoles || [] };
+    binding = { threadId, patientId: root.patientId, encounterId: root.encounterId, unit: root.unit, subject: root.subject, toRoles: root.toRoles || [], toPeople: root.toPeople || [] };
   } else {
     const patientId = str(ctx.patientId), unit = str(ctx.unit).slice(0, 60);
     if (!!patientId === !!unit) return { ...base, ok: false, status: 422, error: "binding_required", detail: "a thread is about one patient or one unit, not both and not neither", written: 0 };
@@ -190,13 +253,15 @@ async function sendStaffMessage(request, env, ctx) {
         if (!enc || str(enc.patientId) !== patientId) return { ...base, ok: false, status: 409, error: "encounter_mismatch", detail: "that stay is not this patient's", written: 0 };
       }
     }
-    binding = { threadId: null, patientId: patientId || null, encounterId, unit: unit || null, subject, toRoles };
+    const named = await resolvePeople(ctx, toPeopleIds, !!patientId);
+    if (named.refuse) return { ...base, ...named.refuse, written: 0 };
+    binding = { threadId: null, patientId: patientId || null, encounterId, unit: unit || null, subject, toRoles, toPeople: named.people };
   }
   const nowMs = Date.now(), sentAt = new Date(nowMs).toISOString();
   const id = `wsq-smsg-${nowMs.toString(36)}-${crypto.randomUUID().slice(0, 8)}`;
   const msg = {
     resourceType: MSG, id, threadId: binding.threadId || id,
-    patientId: binding.patientId, encounterId: binding.encounterId, unit: binding.unit, subject: binding.subject, toRoles: binding.toRoles,
+    patientId: binding.patientId, encounterId: binding.encounterId, unit: binding.unit, subject: binding.subject, toRoles: binding.toRoles, toPeople: binding.toPeople,
     body, urgent: ctx.urgent === true, from: resolved.actor.id, fromName: actorName(resolved.actor), fromRole: resolved.role || null, sentAt,
     editedAt: null, recalled: null, escalations: [],
     source: { system: "wardsynq-native", sourceId: "staff-messaging" },
@@ -220,7 +285,7 @@ async function authorChange(request, env, ctx, change) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
-  const got = await loadMessage(svc, str(ctx.messageId));
+  const got = await loadMessage(svc, str(ctx.messageId), resolved.actor.id);
   if (got.refuse) return { ...base, ...got.refuse, written: 0 };
   if (got.msg.from !== resolved.actor.id) return { ...base, ok: false, status: 403, error: "not_author", detail: "only the person who sent a message may change it", written: 0 };
   if (got.msg.recalled) return { ...base, ok: false, status: 409, error: "recalled", detail: "this message was recalled", written: 0 };
@@ -257,7 +322,7 @@ async function markThreadRead(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
-  const got = await loadMessage(svc, str(ctx.threadId));
+  const got = await loadMessage(svc, str(ctx.threadId), resolved.actor.id);
   if (got.refuse) return { ...base, ...got.refuse, written: 0 };
   const me = resolved.actor.id;
   const id = `${got.msg.threadId}.read.${me.replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 60)}`;
@@ -277,10 +342,10 @@ async function escalateStaffMessage(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
-  const got = await loadMessage(svc, str(ctx.messageId));
+  const got = await loadMessage(svc, str(ctx.messageId), resolved.actor.id);
   if (got.refuse) return { ...base, ...got.refuse, written: 0 };
   if (got.msg.recalled) return { ...base, ok: false, status: 409, error: "recalled", written: 0 };
-  if (!(got.msg.toRoles || []).length) return { ...base, ok: false, status: 422, error: "no_addressees", detail: "this thread is addressed to no role, so there is nobody to alert", written: 0 };
+  if (!(got.msg.toRoles || []).length && !(got.msg.toPeople || []).length) return { ...base, ok: false, status: 422, error: "no_addressees", detail: "this thread is addressed to no role and no person, so there is nobody to alert", written: 0 };
   let reads;
   try { reads = await threadReads(svc, got.msg); } catch { return { ...base, ok: false, status: 502, error: "record_read_failed", written: 0 }; }
   const out = await escalate(svc, ctx, got.msg, got.version, resolved.actor.id, reads);
@@ -306,12 +371,14 @@ function threadsOf(messages, reads, me, myRole) {
     list.sort((a, b) => str(a.sentAt).localeCompare(str(b.sentAt)));
     const root = list.find((m) => m.id === threadId);
     if (!root) continue; // a reply whose first message is outside this page is shown with its thread, or not at all
+    if (!openTo(root, me)) continue; // addressed only to named people, and `me` is not one of them
     const last = str(reads.get(threadId));
     const unread = list.filter((m) => m.from !== me && !m.recalled && str(m.sentAt) > last).length;
-    const toRoles = root.toRoles || [];
+    const toRoles = root.toRoles || [], toPeople = root.toPeople || [];
     out.push({
       threadId, subject: root.subject, patientId: root.patientId || null, encounterId: root.encounterId || null, unit: root.unit || null,
-      toRoles, forMe: !toRoles.length || toRoles.includes(myRole) || list.some((m) => m.from === me),
+      toRoles, toPeople,
+      forMe: (!toRoles.length && !toPeople.length) || toRoles.includes(myRole) || toPeople.some((p) => p && p.identity === me) || list.some((m) => m.from === me),
       startedBy: root.from, startedAt: root.sentAt, lastAt: list[list.length - 1].sentAt, unread, lastReadAt: last || null,
       messages: list.map(shown),
     });
@@ -352,6 +419,6 @@ async function listStaffMessages(request, env, ctx) {
 }
 
 export {
-  MSG, READ, MAX_BODY, SCAN, messagePushPayload, textRefusal, threadsOf, shown,
-  sendStaffMessage, editStaffMessage, recallStaffMessage, markThreadRead, escalateStaffMessage, listStaffMessages,
+  MSG, READ, MAX_BODY, MAX_PEOPLE, SCAN, messagePushPayload, textRefusal, threadsOf, shown, openTo, roleMayRead,
+  sendStaffMessage, listMessagePeople, editStaffMessage, recallStaffMessage, markThreadRead, escalateStaffMessage, listStaffMessages,
 };
