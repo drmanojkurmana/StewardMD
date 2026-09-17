@@ -2267,17 +2267,18 @@ test("a merge whose chain check cannot read the existing links is refused, not w
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
   const b = await secondPatient("Medical A", "34");
-  const real = RECORD.latestByType.bind(RECORD);
-  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+  // R4-2: the chain check pages every link (pageByType), so the fault is injected there.
+  const real = RECORD.pageByType.bind(RECORD);
+  RECORD.pageByType = async (tenantId, resourceType, opts) => {
     if (resourceType === "PatientLink") throw new Error("store unavailable");
-    return real(tenantId, resourceType, limit);
+    return real(tenantId, resourceType, opts);
   };
   try {
     const r = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason: "Same date of birth and mobile; confirmed at the desk." });
     assert.equal(r.__status, 502, JSON.stringify(r));
     assert.equal(r.error, "record_read_failed");
     assert.equal(r.written, 0);
-  } finally { RECORD.latestByType = real; }
+  } finally { RECORD.pageByType = real; }
   assert.equal((await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length, 0, "nothing was joined");
 });
 
