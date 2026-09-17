@@ -7435,6 +7435,15 @@
       "<b>" + esc(v.subjectId) + "</b> &middot; " + wTH("ward.of-approved", "{subjectType} &middot; {approvals} of {required} approved", { subjectType: esc(v.subjectType), approvals: esc(v.approvals), required: esc(v.required) }, "subjectType approvals required") +
       (v.withdrawn ? " &middot; " + wTH("ward.something-was-taken-back", "something was taken back") : "") +
       '<div class="w-dt-times">' + esc(v.reason || "") + "</div>" +
+      /* A purchase order's rate contract check (purchasing.js contractWarnings): a price above contract is a warning to
+       * the approver and never changes the order; a check that could not be made is said, never shown as no warning. */
+      (v.priceCheck === "failed" ? '<p class="w-hint warn">' + ms("error") + wTH("ward.po-price-check-failed", "The prices could not be checked against rate contracts. Do not read this as within contract.", null, "", 1) + "</p>" : "") +
+      (v.priceWarnings || []).map(function (w) {
+        return '<p class="w-hint warn">' + ms("warning") + wTH("ward.po-above-contract", "{item} ({unit}) is priced at Rs {price}, above the rate contract price of Rs {contract}.", { item: esc(w.item), unit: esc(w.unit), price: rupeesOf(w.pricePaise).slice(3), contract: rupeesOf(w.contractPricePaise).slice(3) }, "item unit") + "</p>";
+      }).join("") +
+      (v.unpricedAgainstContract || []).map(function (w) {
+        return '<p class="w-hint">' + ms("info") + wTH("ward.po-unpriced-contract", "{item} ({unit}) has no price on the order. The rate contract price is Rs {contract}.", { item: esc(w.item), unit: esc(w.unit), contract: rupeesOf(w.contractPricePaise).slice(3) }, "item unit") + "</p>";
+      }).join("") +
       (hist ? '<ul class="w-mini">' + hist + "</ul>" : "") +
       "<div class=\"w-dt-times\">" + wTH("ward.reference", "Reference: {verificationId}", { verificationId: esc(v.verificationId) }, "verificationId") + "</div>" +
       "</div><div class=\"w-mini-row-act\">" +

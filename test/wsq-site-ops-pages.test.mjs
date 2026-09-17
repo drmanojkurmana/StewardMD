@@ -190,3 +190,35 @@ test("home map: General stores, Assets and maintenance, and Blood bank tiles, ea
   assert.ok(/disabled/.test(tile("bloodbank")), "but not the blood bank");
   assert.ok(tile("ward:purchasing") && !/disabled/.test(tile("ward:purchasing")), "and orders through Purchasing");
 });
+
+/* R2-4 supply chain depth: GET /api/queue/ward/supply-chain, /ward/reorder-suggestions and /org/reorder-policy as
+ * purchasing.js answers them. */
+const SC = { ok: true,
+  receipts: [{ receiptId: "r1", code: "GLOVE-M", display: "Gloves medium", unit: "box", location: "CS", at: "2026-09-10T08:00:00Z", supplier: "Acme Supplies", received: 50, returned: 5, remaining: 45 }],
+  returns: [{ movementId: "m1", receiptId: "r1", display: "Gloves medium", quantity: 5, unit: "box", supplier: "Acme Supplies", reason: "Torn", debitNoteNo: "DN-7", at: "2026-09-11T08:00:00Z" }],
+  vendors: [{ vendorId: "v1", name: "Acme Supplies", contracts: [{ item: "GLOVE-M", unit: "box", pricePaise: 12050, validFrom: "2026-01-01", validTo: "2026-12-31", inDate: true }, { item: "GAUZE", unit: "roll", pricePaise: 900, validFrom: "2025-01-01", validTo: "2025-12-31", inDate: false }] }] };
+const REORDER = { ok: true, configured: true, policy: { windowDays: 30, leadTimeDays: 7, safetyDays: 3, minDataDays: 14 }, suggestions: [
+  { code: "GLOVE-M", display: "Gloves medium", location: "CS", unit: "box", level: 12, onOrder: 4, used: 60, daysUsed: 30, windowDays: 30, avgDaily: 2, suggestedQuantity: 4 },
+  { code: "GAUZE", display: "Gauze", location: "CS", unit: "roll", level: 40, onOrder: 0, used: 0, daysOfData: 60, windowDays: 30, refused: "no_usage" },
+  { code: "ORS", display: "ORS", location: "CS", unit: "sachet", level: 50, onOrder: 0, used: 0, daysOfData: 3, minDataDays: 14, windowDays: 30, refused: "insufficient_data" }] };
+
+test("supply chain (stores page): returns, contracts, reorder drafts and settings never read a failed load as empty, name refusals, and every word is translated", () => {
+  const en = load("en"), c = ctxOf(en), S = en.win.WSQ._stores;
+  assert.match(S.returnsHtml(c, null), /Loading/);
+  assert.match(S.returnsHtml(c, { ok: false }), /Do not read this as none/);
+  assert.match(S.contractsHtml(c, { ok: false }), /Do not read this as none/);
+  assert.match(S.returnsHtml(c, SC), /data-st="return"/);
+  assert.match(S.returnsHtml(c, { ...SC, receipts: [] }), /No receipt has stock left/);
+  const k = S.contractsHtml(c, SC);
+  assert.match(k, /120\.50/); assert.match(k, /not in date/);
+  assert.match(S.reorderHtml(c, { ok: true, configured: false, suggestions: [] }), /not configured/);
+  assert.match(S.reorderHtml(c, { ok: false }), /Do not read this as nothing to order/);
+  const r = S.reorderHtml(c, REORDER);
+  assert.match(r, /<b>4 box<\/b>/); assert.match(r, /no use recorded in the last 30 days/); assert.match(r, /3 days of data, 14 needed/); assert.match(r, /nothing is ordered/);
+  assert.match(S.policyHtml(c, { ok: true, policy: null }), /Not configured/);
+  assert.match(S.policyHtml(c, { ok: false }), /Do not read this as none/);
+
+  const xx = load("xx"), cx = ctxOf(xx), X = xx.win.WSQ._stores;
+  const html = X.returnsHtml(cx, SC) + X.contractsHtml(cx, SC) + X.reorderHtml(cx, REORDER) + X.policyHtml(cx, { ok: true, policy: REORDER.policy });
+  assert.deepEqual(leftovers(html, ["Gloves medium", "Acme Supplies", "GLOVE-M", "GAUZE", "Gauze", "ORS", "CS", "Torn", "DN-7", "box", "roll", "12 box", "40 roll", "50 sachet", "5 box", "4 box", "Gloves medium · 2026-09-10 · Acme Supplies"]), []);
+});
