@@ -163,3 +163,17 @@ test("reorder arithmetic (pure): dispenses count as use from the store they came
   assert.deepEqual(contractWarnings({ vendor: "X", lines: [{ item: "A", unit: "box", unitPricePaise: 90 }, { item: "A", unit: "strip", unitPricePaise: 900 }] },
     [{ name: "x", rateContracts: [{ item: "a", unit: "BOX", pricePaise: 100, validFrom: "2026-01-01", validTo: "2026-12-31" }] }], "2026-09-17"), { warnings: [], unpriced: [] }, "below contract, and another unit is never compared");
 });
+
+test("R3-1 reorder arithmetic (pure): an order for store A no longer lowers store B's draft; an order naming no store still counts against both and is marked", () => {
+  const now = "2026-09-17T12:00:00.000Z", ago = (n) => new Date(Date.parse(now) - n * 86400000).toISOString();
+  const movements = ["CS", "OT"].flatMap((loc) => [
+    { id: "r-" + loc, kind: "receipt", code: "GLOVE", quantity: { value: 30, unit: "box" }, location: loc, at: ago(20) },
+    { id: "o-" + loc, kind: "consumption", code: "GLOVE", quantity: { value: 20, unit: "box" }, location: loc, at: ago(5) }]);
+  const policy = { windowDays: 10, leadTimeDays: 10, safetyDays: 5, minDataDays: 7 };
+  const at = (rows, loc) => rows.find((r) => r.location === loc);
+  const forA = reorderSuggestionsFrom({ movements, dispenses: [], onOrder: new Map(), onOrderAt: new Map([["GLOVE|CS|BOX", 15]]), policy, now });
+  assert.equal(at(forA, "CS").onOrder, 15); assert.equal(at(forA, "CS").suggestedQuantity, 5, "30 needed, 10 on hand, 15 on order for this store");
+  assert.equal(at(forA, "OT").onOrder, 0); assert.equal(at(forA, "OT").suggestedQuantity, 20, "store B is not told stock is coming that is not");
+  const noStore = reorderSuggestionsFrom({ movements, dispenses: [], onOrder: new Map([["GLOVE|BOX", 15]]), onOrderAt: new Map(), policy, now });
+  assert.deepEqual([at(noStore, "CS").onOrder, at(noStore, "OT").onOrder, at(noStore, "OT").onOrderNoStore], [15, 15, 15], "today's behaviour, labelled");
+});

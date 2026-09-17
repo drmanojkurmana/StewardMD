@@ -469,7 +469,8 @@ async function purchaseFromIndent(request, env, ctx) {
   if (cur.tooMany) return { ...base, ok: false, status: 409, error: "too_many_records", written: 0 };
   const lines = cur.state.lines.filter((l) => l.backOrder > 0).map((l) => ({ item: l.code, quantity: l.backOrder, unit: l.unit }));
   if (!lines.length || !["approved", "part-issued"].includes(cur.state.state)) return { ...base, ok: false, status: 409, error: "nothing_back_ordered", written: 0 };
-  const out = await raisePurchaseOrder(request, env, { ...ctx, lines, note: `For indent ${indentId} (${cur.indent.departmentName || cur.indent.departmentId}).` + (str(ctx.note) ? " " + str(ctx.note) : ""), indentId });
+  /* Bought to refill the central store the indent is issued from, so it is on order for that store only (R3-1). */
+  const out = await raisePurchaseOrder(request, env, { ...ctx, lines, note: `For indent ${indentId} (${cur.indent.departmentName || cur.indent.departmentId}).` + (str(ctx.note) ? " " + str(ctx.note) : ""), indentId, location: cur.indent.fromLocation });
   return { ...out, indentId };
 }
 

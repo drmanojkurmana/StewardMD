@@ -2388,7 +2388,7 @@ export async function onRequest(context) {
         return supportOut(await mortuaryBoard(request, env, { ...deps, chambers, registerMlc: byPatient }));
       }
       if (sub === "purchase-order" && method === "POST") {
-        const r = await raisePurchaseOrder(request, env, { ...deps, vendor: body.vendor, lines: body.lines, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        const r = await raisePurchaseOrder(request, env, { ...deps, vendor: body.vendor, lines: body.lines, note: body.note, location: body.location, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "goods-receive" && method === "POST") {

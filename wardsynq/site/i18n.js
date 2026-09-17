@@ -8320,7 +8320,6 @@
     "site.stores.sc.pressShow": "Press Show to work out drafts from recorded use.",
     "site.stores.sc.reorderFailed": "Reorder drafts could not be worked out. Do not read this as nothing to order.",
     "site.stores.sc.notConfigured": "Reorder suggestions are not configured. An administrator sets the window, lead time, safety days and minimum days of data first.",
-    "site.stores.sc.method": "Average daily use (dispensed, issued out or consumed) over the last {window} days, or the days of data if fewer, times {lead} lead days plus {safety} safety days, minus the level and what is on order, rounded up. Orders name no store, so what is on order counts against each store holding the item. A draft: nothing is ordered until somebody raises a purchase order.",
     "site.stores.sc.noItemsToSuggest": "No stock is recorded to work from.",
     "site.stores.sc.onOrder": "On order",
     "site.stores.sc.used": "Used",
@@ -10055,6 +10054,10 @@
     "site.admin.import.commit": "Import these {n} rows",
     "site.admin.import.nothing": "Nothing in this file would be added.",
     "site.admin.import.chooseFile": "Choose the CSV file first.",
+    "site.stores.po.forStore": "For store {store}",
+    "site.stores.po.noStore": "Names no store",
+    "site.stores.sc.methodStores": "Average daily use (dispensed, issued out or consumed) over the last {window} days, or the days of data if fewer, times {lead} lead days plus {safety} safety days, minus the level and what is on order, rounded up. An order that names a store counts only against that store; one that names no store counts against each store holding the item, and is marked. A draft: nothing is ordered until somebody raises a purchase order.",
+    "site.stores.sc.onOrderNoStore": "({n} on orders naming no store)",
     /* end site pages keys */
   };
 
