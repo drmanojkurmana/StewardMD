@@ -2765,7 +2765,10 @@
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
     el.className = "dx-mgmt dx-reader";
-    el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">‹ Library</button>' +
+    var backLabel = "‹ Back to differential";
+    if (opts && opts.from === "onco-home") backLabel = "‹ ONCQIS";
+    else if (opts && opts.standalone) backLabel = "‹ Library";
+    el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
         '<section class="dx-reader-hero"><div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
@@ -2791,13 +2794,25 @@
     el.classList.add("on"); el.scrollTop = 0;
     var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () {
       el.classList.remove("on");
+      if (opts && typeof opts.onBack === "function") {
+        try { close(); } catch (e) {}
+        try { opts.onBack(); } catch (e2) {}
+        return;
+      }
+      if ((opts && opts.from === "onco-home") || (window.SMD_ONCOHOME && document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on"))) {
+        try { close(); } catch (e) {}
+        try { if (window.SMD_ONCOHOME && SMD_ONCOHOME.foreground) SMD_ONCOHOME.foreground(); } catch (e) {}
+        return;
+      }
       // Opened standalone from the Knowledge Library / global search? The reasoning
       // workspace was turned on ONLY to host this reference panel — so Back must exit
       // it and return the user to the library they were browsing, NOT drop them into
       // the (empty) clinical-reasoning view underneath.
       if (opts && opts.standalone) {
         try { close(); } catch (e) {}
-        try { if (window.SB && SB.openRef) SB.openRef("syndromes"); } catch (e) {}
+        if (opts.from === "syndromes" || (!opts.from && _libReturnScroll !== null)) {
+          try { if (window.SB && SB.openRef) SB.openRef("syndromes"); } catch (e) {}
+        }
         if (_libReturnScroll !== null) {
           var libraryBody = document.getElementById("sbrefBody");
           if (libraryBody) libraryBody.scrollTop = _libReturnScroll;
@@ -3642,10 +3657,11 @@
     },
     // open ANY disease's reference panel from outside the reasoning workspace
     // (global search, knowledge library): open the panel, then show the ref.
-    openRef: function (id) {
+    openRef: function (id, opts) {
+      opts = opts || {};
       var wasOpen = !!(root && root.classList.contains("on"));
       ensureRoot();
-      openDiseaseRef(id, { standalone: !wasOpen });
+      openDiseaseRef(id, Object.assign({ standalone: !wasOpen }, opts));
       root.classList.add("dx-reference-mode", "on");
       document.body.classList.add("dx-lock");
     },

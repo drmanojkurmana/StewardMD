@@ -2160,10 +2160,10 @@ window.openExternal = function (u) {
 <script src="/dxmgmt.js?v=gold363" defer></script>
 <script src="/clinical-nlp.js?v=gold363" defer></script>
 <script src="/id-token.js?v=idtok2" defer></script>
-<link rel="stylesheet" href="/reasoning-workspace.css?v=dxfit8">
+<link rel="stylesheet" href="/reasoning-workspace.css?v=dxfit9">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall5">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
-<script src="/reasoning.js?v=hardlocal3" defer></script>
+<script src="/reasoning.js?v=hardlocal4" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2561,14 +2561,14 @@ window.openExternal = function (u) {
      honest gaps for sites not yet added), ISMP tall-man drug names, onco drug+interaction view, and a
      read-only protocol reference library. onco-tallman.js + onco-staging.js load before onco-home.js. -->
 <script src="/onco-tallman.js?v=oh2" defer></script>
-<script src="/onco-staging.js?v=op6" defer></script>
+<script src="/onco-staging.js?v=op7" defer></script>
 <!-- Onco Home Phase 8 P2 (flags smd_onco_ctcae / smd_onco_iotox / smd_onco_recist / smd_onco_favorites,
      all DEFAULT OFF): CTCAE v5.0 grading engine (curated public-domain grades, R1-flagged, honest gaps +
      fail-closed fabrication auditor), irAE management-principles reference (ASCO/NCCN/SITC by name, no
      doses), RECIST 1.1 target-lesion response calculator, and localStorage Favorites/Recent. These load
      before onco-home.js so their globals + SMD_ONCOFAV exist when the grid renders. -->
-<script src="/onco-ctcae.js?v=op2" defer></script>
-<script src="/onco-iotox.js?v=op3" defer></script>
+<script src="/onco-ctcae.js?v=op3" defer></script>
+<script src="/onco-iotox.js?v=op4" defer></script>
 <script src="/onco-recist.js?v=op1" defer></script>
 <script src="/onco-favorites.js?v=oh3" defer></script>
 <!-- ONCQIS Phase B (flag smd_onco_recommend, DEFAULT OFF): pure protocol RECOMMENDATION engine
@@ -2587,7 +2587,7 @@ window.openExternal = function (u) {
 <script src="/onco-cycle-timeline.js?v=op1" defer></script>
 <script src="/onco-ddi-sentry.js?v=op1" defer></script>
 <script src="/onco-genomics.js?v=op1" defer></script>
-<script src="/onco-home.js?v=hardlocal6" defer></script>
+<script src="/onco-home.js?v=hardlocal7" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->
@@ -2595,7 +2595,7 @@ window.openExternal = function (u) {
 <script src="/assets/vendor/motion.min.js?v=motion10" defer></script>
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot5" defer></script>
-<script src="/oncotree.js?v=nccn-nav7" defer></script>
+<script src="/oncotree.js?v=nccn-nav8" defer></script>
 <script src="/protocol-sheet.js?v=ps5" defer></script>
 <script src="/protocol-maker.js?v=pm2" defer></script>
 <!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is

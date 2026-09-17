@@ -1711,7 +1711,12 @@
     if (!t) return;
     var act = t.getAttribute("data-ot-act");
     var node = t.getAttribute("data-ot-node"), opt = t.getAttribute("data-ot-opt"), proto = t.getAttribute("data-ot-proto");
-    if (act === "close") return close();
+    if (act === "close") {
+      if (st.openedProtocol) { st.openedProtocol = null; paint(); return; }
+      if (st.superpowerModal) { st.superpowerModal = null; try { renderSuperpowerModal(); } catch (e) {} paint(); return; }
+      if (st.graph) { st.graph = null; st.guideline = null; st.byId = {}; st.answers = {}; st.protocols = {}; st.openedProtocol = null; st.selection = null; st.view = "navigator"; paint(); return; }
+      close(); return;
+    }
     if (act === "pick") { loadGuideline(t.getAttribute("data-ot-guideline")); return; }
     if (act === "change-disease") {
       st.graph = null; st.guideline = null; st.byId = {}; st.answers = {}; st.protocols = {};
@@ -2213,6 +2218,7 @@
     var el = D && D.getElementById("smdOncoTree");
     if (el) el.style.display = "none";
     if (D && D.body) D.body.classList.remove("ot-open");
+    try { if (D && D.getElementById("smdOncoHome") && D.getElementById("smdOncoHome").classList.contains("on") && G.SMD_ONCOHOME && G.SMD_ONCOHOME.foreground) G.SMD_ONCOHOME.foreground(); } catch (e) {}
   }
 
   // React Bits Spotlight tracking: calculates cursor/pointer offset for luminous gradients
