@@ -8330,13 +8330,15 @@
       '<span class="w-st ' + (hot ? "escalate" : "due") + '">' + esc(pairWord(ADM_URGENCY, r.urgency)) + "</span> " +
       "<b>" + esc(r.mrn || r.patientId) + "</b>" + (r.specialty ? " &middot; " + esc(r.specialty) : "") + (r.ward ? " &middot; " + wTH("ward.for", "for {ward}", { ward: esc(r.ward) }, "ward") : "") +
       "<div>" + esc(r.reason || "") + "</div>" +
+      (r.plannedFor ? "<div class=\"w-dt-times\">" + wTH("ward.intake-planned-for", "planned for {date}", { date: esc(r.plannedFor) }, "date") + "</div>" : "") +
       "<div class=\"w-dt-times\">" + wTH("ward.asked-by", "asked by {requestedBy} &middot; {requestedAt}", { requestedBy: esc(r.requestedBy), requestedAt: when(r.requestedAt) }, "requestedBy requestedAt") +
       (r.state === "waiting" ? " &middot; " + wTH("ward.waiting-h", "waiting {waitingHours}h", { waitingHours: esc(r.waitingHours) }, "waitingHours") : " &middot; " + esc(admissionRequestStateWord(r.state)) + (r.closeReason ? ": " + esc(r.closeReason) : "")) +
       "</div></div>" +
       '<div class="w-mini-row-act">' +
       (r.state === "waiting"
         ? '<button class="w-btn ghost sm" data-w-act="admreqclose:' + esc(r.requestId) + '~admitted">' + ms("bed") + wTH("ward.admitted2", "Admitted") + "</button>" +
-          '<button class="w-btn ghost sm" data-w-act="admreqclose:' + esc(r.requestId) + '~cancelled">' + ms("close") + wTH("ward.cancel", "Cancel") + "</button>"
+          '<button class="w-btn ghost sm" data-w-act="admreqclose:' + esc(r.requestId) + '~cancelled">' + ms("close") + wTH("ward.cancel", "Cancel") + "</button>" +
+          (r.plannedFor ? '<button class="w-btn ghost sm" data-w-act="intakeopen:' + esc(r.requestId) + "~" + esc(r.patientId) + '">' + ms("assignment") + wTH("ward.intake-open", "Pre-admission forms") + "</button>" : "")
         : "") +
       "</div></li>";
   }
@@ -8353,13 +8355,67 @@
       "<label class=\"w-f\"><span>" + wTH("ward.how-soon", "How soon") + "</span><select id=\"wArUrg\">" + ADM_URGENCY.map(function (u) { return '<option value="' + esc(u[0]) + '">' + esc(wTEn(u[1])) + "</option>"; }).join("") + "</select></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.specialty", "Specialty") + "</span><input id=\"wArSpec\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.ward-optional", "Ward (optional)") + "</span><input id=\"wArWard\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.intake-planned-date", "Planned admission date (optional)") + "</span><input id=\"wArPlanned\" type=\"date\"></label>" +
       "</div>" +
       "<textarea id=\"wArReason\" rows=\"2\" placeholder=\"" + wTA("ward.why-this-patient-needs-to-come", "Why this patient needs to come in") + "\"></textarea>" +
       '<button class="w-btn" data-w-act="admreqask">' + ms("send") + wTH("ward.ask-for-a-bed", "Ask for a bed") + "</button></div>" +
       (d == null ? "<p class=\"w-empty\">" + wTH("ward.loading3", "Loading.") + "</p>"
         : rows ? '<ul class="w-mini">' + rows + "</ul>"
         : "<p class=\"w-empty\">" + wTH("ward.nobody-is-waiting-for-a-bed", "Nobody is waiting for a bed.") + "</p>") +
+      intakePanel(state.intake) +
       "</div>";
+  }
+  /* PRE-ADMISSION FORMS (form-response.js). What a patient filled in on the portal for a planned admission. It is shown as
+   * the patient's own words, never as checked chart data. Accepting records that this clinician read that version;
+   * nothing is copied into allergies, medicines or problems, which stay the clinician's own entries. null = loading,
+   * false = could not load (never drawn as "none sent"). */
+  function intakeStateWord(r) {
+    if (r.reviewState === "accepted") return wTH("ward.intake-accepted", "Reviewed by {who} &middot; {at}", { who: esc(r.reviewedBy), at: when(r.reviewedAt) }, "who at");
+    if (r.reviewState === "returned") return wTH("ward.intake-returned", "Returned to the patient by {who}: {reason}", { who: esc(r.reviewedBy), reason: esc(r.reviewReason) }, "who reason");
+    return wTH("ward.intake-waiting-review", "Waiting for review");
+  }
+  function intakePanel(ik) {
+    if (!ik) return "";
+    var rows = ik.rows;
+    return '<div class="w-sub" data-w-intake="' + esc(ik.requestId) + '"><h4>' + wTH("ward.intake-title", "Pre-admission forms from the patient") + "</h4>" +
+      '<p class="w-hint warn">' + ms("info") + wTH("ward.intake-not-verified", "Reported by the patient or their family on the portal, not checked. Accepting records that you read this version. It adds nothing to allergies, medicines or problems: enter those yourself if they belong in the chart.") + "</p>" +
+      (rows == null ? '<p class="w-hint">' + ms("hourglass_empty") + wTH("ward.loading3", "Loading.") + "</p>"
+        : rows === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.intake-load-failed", "Could not load the pre-admission forms. Do not read this as none sent.", null, "", 1) + "</p>"
+        : !rows.length ? '<p class="w-empty">' + wTH("ward.intake-none", "The patient has not sent a pre-admission form for this admission.") + "</p>"
+        : '<ul class="w-mini">' + rows.map(function (x) {
+          return '<li class="w-mini-row"><div><b>' + esc(x.formTitle) + "</b> v" + esc(x.formVersion) + ' <span class="w-dt-times">' + wTH("ward.intake-sent-by", "sent by {who} &middot; {at}", { who: esc(x.submittedBy), at: when(x.submittedAt) }, "who at") + "</span>" +
+            '<div class="w-dt-times">' + esc(Object.keys(x.answers || {}).map(function (k) { return k + ": " + JSON.stringify(x.answers[k]); }).join("; ")) + "</div>" +
+            '<div class="w-dt-times">' + intakeStateWord(x) + "</div></div>" +
+            (x.reviewState === "submitted" ? '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="intakereview:' + esc(x.responseId) + "~" + esc(x.version) + '~accept">' + ms("done") + wTH("ward.intake-accept", "Accept as reviewed") + "</button>" +
+              '<button class="w-btn ghost sm" data-w-act="intakereview:' + esc(x.responseId) + "~" + esc(x.version) + '~return">' + ms("undo") + wTH("ward.intake-return", "Return to patient") + "</button></div>" : "") +
+            "</li>";
+        }).join("") + "</ul>") + "</div>";
+  }
+  function intakeOpen(arg) {
+    var parts = String(arg || "").split("~");
+    if (!parts[0] || !parts[1]) return;
+    st.intake = { requestId: parts[0], patientId: parts[1], rows: null }; paint(); loadIntake();
+  }
+  function loadIntake() {
+    var ik = st.intake; if (!ik) return;
+    return apiGet("/ward/intake-responses?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(ik.patientId) + "&requestId=" + encodeURIComponent(ik.requestId))
+      .then(function (r) { if (st.intake !== ik) return; ik.rows = r && r.ok ? r.responses : false; if (!(r && r.ok)) settle(r); paint(); },
+        function () { if (st.intake !== ik) return; ik.rows = false; paint(); });
+  }
+  function intakeReview(arg) {
+    var parts = String(arg || "").split("~"), id = parts[0], version = Number(parts[1]), decision = parts[2];
+    if (!id || !version || !decision) return;
+    function send(reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/intake-review", { orgId: st.orgId, responseId: id, version: version, decision: decision, reason: reason || undefined })
+        .then(function (r) { if (settle(r, r && r.ok ? (decision === "accept" ? wT("ward.intake-accepted-note", "Marked as reviewed. Nothing was added to the chart.") : wT("ward.intake-returned-note", "Returned. The patient sees your reason.")) : null)) loadIntake(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.intake-review-failed", "Could not record the review."); paint(); });
+    }
+    if (decision === "return") {
+      askReason(wTH("ward.intake-return-why", "What does the patient need to change? They will read this.", null, "", 1), wT("ward.intake-return-needs-reason", "Returning a form needs a reason."), wTH("ward.intake-return", "Return to patient"), send);
+      return;
+    }
+    send("");
   }
 
   /* INFUSIONS AND THE CARE PLAN. Both modules were complete and unreachable.
@@ -13103,7 +13159,7 @@
   }
 
   function admReqOpen() {
-    st.view = "admreqs"; st.admReqs = null; paint(); loadAdmReqs();
+    st.view = "admreqs"; st.admReqs = null; st.intake = null; paint(); loadAdmReqs();
   }
   function loadAdmReqs() {
     st.busy = true; paint();
@@ -13123,11 +13179,11 @@
     st.busy = true; paint();
     apiPost("/ward/request-admission", {
       orgId: st.orgId, mrn: mrn, urgency: val("wArUrg"), specialty: val("wArSpec") || undefined,
-      ward: val("wArWard") || undefined, reason: reason,
+      ward: val("wArWard") || undefined, reason: reason, plannedFor: val("wArPlanned") || undefined,
     })
       .then(function (r) {
         if (settle(r, r && r.ok ? wT("ward.on-the-waiting-list", "On the waiting list.") : null)) {
-          ["wArMrn", "wArSpec", "wArWard", "wArReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          ["wArMrn", "wArSpec", "wArWard", "wArReason", "wArPlanned"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
           loadAdmReqs();
         } else paint();
       })
@@ -15345,7 +15401,7 @@
       if (st.view === "careplan") { st.carePlan = null; st.view = "chart"; paint(); return; }
       if (st.view === "pathways") { st.pathwaysData = null; st.view = "chart"; paint(); return; }
       if (st.view === "specialty") { st.specialtyData = null; st.view = "chart"; paint(); return; }
-      if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
+      if (st.view === "admreqs") { st.admReqs = null; st.intake = null; st.view = "list"; paint(); return; }
       if (st.view === "dcboard") { st.dcBoard = null; st.view = "list"; paint(); return; }
       if (st.view === "tcentre") { st.tc = null; st.view = "list"; paint(); return; }
       if (st.view === "ordersets") { st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; st.view = "chart"; paint(); return; }
@@ -15899,6 +15955,8 @@
     if (cmd === "admreqs") { admReqOpen(); return; }
     if (cmd === "admreqask") { admReqAsk(); return; }
     if (cmd === "admreqclose") { admReqClose(arg); return; }
+    if (cmd === "intakeopen") { intakeOpen(arg); return; }
+    if (cmd === "intakereview") { intakeReview(arg); return; }
     if (cmd === "dcboard") { dcBoardOpen(); return; }
     if (cmd === "dcstep") { dcStep(arg); return; }
     if (cmd === "admarrive") { admArrive(arg === "change"); return; }
