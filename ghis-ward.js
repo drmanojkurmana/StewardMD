@@ -598,9 +598,9 @@
                     .then(function () {
                       polls++;
                       if (quiet >= 2 && ctx.listeners.length) { off(); resolve(); return; }
-                      if (polls < 12 && ctx.listeners.length) { setTimeout(look, 700); return; }
+                      if (polls < 40 && ctx.listeners.length) { setTimeout(look, 700); return; }   // ~28 s: a cold sign-in redirect chain on hospital wifi took longer than 8 s (owner, 2026-09-17)
                       /* OUT OF POLLS IS AN ANSWER, NOT A WAIT. A login form on screen is the doctor's turn
-                       * (the loggedIn listener stays armed). Anything else after twelve polls means the
+                       * (the loggedIn listener stays armed). Anything else after forty polls (about thirty seconds) means the
                        * hospital page never loaded, and Ward Sync used to sit on "Signing in to ..." for
                        * ever with nothing to tap (owner, 2026-09-17). Say so, so the doctor can retry. */
                       if (lastState !== 'login' && ctx.listeners.length) { off(); reject(new Error('Could not reach ' + host + ' in the in-app browser (the page did not load). Check the connection and try again.')); }
