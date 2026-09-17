@@ -1,0 +1,109 @@
+{
+  "generic": "Ivosidenib",
+  "cls": "Antineoplastic - isocitrate dehydrogenase-1 (IDH1) inhibitor",
+  "pharm": "Small-molecule inhibitor of mutant isocitrate dehydrogenase-1 (IDH1); lowers the oncometabolite 2-hydroxyglutarate (2-HG) to restore differentiation in IDH1-mutant AML and cholangiocarcinoma",
+  "tags": ["Rx only", "Oral IDH1 inhibitor", "AML with IDH1 mutation", "Cholangiocarcinoma with IDH1 mutation", "Boxed warning: differentiation syndrome (AML/MDS)", "QTc prolongation", "Embryo-fetal toxicity"],
+  "quick": [
+    ["Adult dose", "500 mg orally once daily until progression or unacceptable toxicity"],
+    ["Meal", "Take with or without food; do not take with a high-fat meal"],
+    ["Pregnancy", "Can cause fetal harm; avoid - use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 1 month after the last dose"],
+    ["Renal", "No adjustment in mild-moderate; not studied in severe"],
+    ["Hepatic", "No adjustment in mild-moderate; use caution in severe"],
+    ["Alcohol", "Avoid excess; additive QT and hepatic risk"],
+    ["Monitoring", "ECG/QTc and electrolytes, CBC, LFTs, differentiation syndrome signs, pregnancy status"]
+  ],
+  "summary": "Ivosidenib (Tibsovo) is an oral inhibitor of mutant IDH1 indicated for acute myeloid leukemia (AML) with a susceptible IDH1 mutation (newly diagnosed in combination with azacitidine or as monotherapy when ineligible for intensive therapy, and relapsed or refractory monotherapy) and for previously treated locally advanced or metastatic cholangiocarcinoma with an IDH1 mutation. The dose is 500 mg once daily. It carries a boxed warning for differentiation syndrome in AML (and MDS), which can be fatal without prompt corticosteroids and hydroxyurea. Other major risks are QTc prolongation, Guillain-Barre syndrome, hepatotoxicity, and embryo-fetal toxicity.",
+  "indications": [
+    "Treatment of newly diagnosed AML with a susceptible IDH1 mutation in combination with azacitidine, or as monotherapy in patients 75 years or older or with comorbidities precluding intensive induction chemotherapy",
+    "Treatment of relapsed or refractory AML with a susceptible IDH1 mutation as detected by an FDA-approved test",
+    "Treatment of adults with previously treated, locally advanced or metastatic cholangiocarcinoma with an IDH1 mutation as detected by an FDA-approved test"
+  ],
+  "dosage": [
+    {"c": "AML or cholangiocarcinoma with IDH1 mutation", "r": "Adult oral", "d": "500 mg once daily", "t": "Once daily until progression or unacceptable toxicity", "n": "Select patients with a susceptible IDH1 mutation using an FDA-approved test; treat AML for at least 6 months if no progression or intolerable toxicity"},
+    {"c": "With unavoidable strong CYP3A inhibitor", "r": "Adult oral", "d": "250 mg once daily", "t": "Once daily during coadministration", "n": "Resume 500 mg after stopping the inhibitor; monitor QTc closely"},
+    {"c": "QTc prolongation management", "r": "Adult oral", "d": "Withhold for QTc >480 to 500 msec; resume at 250 mg after recovery to <=480 msec", "t": "Per ECG monitoring", "n": "Permanently discontinue for QTc >500 msec with life-threatening arrhythmia or recurrent severe prolongation"},
+    {"c": "Differentiation syndrome management", "r": "Adult oral", "d": "Start dexamethasone 10 mg every 12 hours with taper, plus hydroxyurea for leukocytosis", "t": "At first suspected signs; continue steroids at least 3 days", "n": "Withhold ivosidenib if severe pulmonary or renal symptoms require ventilation or dialysis; resume only after resolution"}
+  ],
+  "admin": [
+    "Take 500 mg (two 250 mg tablets) by mouth once daily at about the same time each day, with or without food",
+    "Do not take with a high-fat meal; swallow tablets whole with water",
+    "Obtain baseline ECG and electrolytes; monitor ECG weekly for the first 3 weeks, then monthly, and after dose changes",
+    "Monitor blood counts and chemistries before starting, every 2 weeks for the first 3 months, then monthly",
+    "If a dose is missed or vomiting occurs after a dose, take the next dose at the scheduled time the following day"
+  ],
+  "moa": "Ivosidenib inhibits mutant forms of isocitrate dehydrogenase-1 (notably R132 substitutions) that convert alpha-ketoglutarate to the oncometabolite 2-hydroxyglutarate (2-HG). By lowering 2-HG, it reverses epigenetic blockade of cellular differentiation, allowing IDH1-mutant myeloid blasts and cholangiocarcinoma cells to differentiate. In AML this therapeutic differentiation underlies both response and the risk of differentiation syndrome.",
+  "contra": {
+    "absolute": [
+      "Known serious hypersensitivity to ivosidenib or any excipient"
+    ],
+    "relative": [
+      "Pregnancy and breastfeeding (embryo-fetal toxicity; avoid)",
+      "History or risk of QT prolongation (congenital long QT, electrolyte abnormalities, other QT-prolonging drugs)",
+      "Severe hepatic impairment",
+      "Concomitant strong CYP3A inducers, sensitive CYP3A substrates, or QT-prolonging drugs"
+    ],
+    "monitor": [
+      "Fever, dyspnea, hypoxia, pulmonary infiltrates, effusions, rash, rapid weight gain, or leukocytosis for differentiation syndrome",
+      "ECG for QTc prolongation and electrolytes (potassium, magnesium)",
+      "Neurologic symptoms for Guillain-Barre syndrome",
+      "Liver function tests for hepatotoxicity",
+      "Pregnancy status before starting in females of reproductive potential"
+    ]
+  },
+  "preg": "Based on its mechanism and animal findings, ivosidenib can cause fetal harm including embryofetal mortality and growth retardation. Verify pregnancy status before starting in females of reproductive potential and advise effective contraception during treatment and for 1 month after the last dose. Advise males with female partners of reproductive potential to use effective contraception during treatment and for 1 month after the last dose.",
+  "lact": "There are no data on the presence of ivosidenib in human milk or its effects on the breastfed child or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 1 month after the final dose.",
+  "renal": "No dose adjustment is recommended for mild to moderate renal impairment. Ivosidenib has not been studied in severe renal impairment; use with caution and monitor closely.",
+  "hepatic": "No dose adjustment is recommended for mild to moderate hepatic impairment. Use with caution in severe hepatic impairment and monitor for QTc prolongation and hepatotoxicity.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A inhibitors (e.g., itraconazole, clarithromycin, grapefruit) - substantially increase ivosidenib exposure and QT risk; reduce ivosidenib to 250 mg daily if coadministration cannot be avoided",
+      "Strong CYP3A inducers (e.g., rifampin, carbamazepine, phenytoin, St John's wort) - substantially reduce ivosidenib exposure; avoid concomitant use",
+      "QT-prolonging drugs (e.g., antiarrhythmics, certain antipsychotics, methadone, some antibiotics) - additive QT prolongation and torsades risk; avoid or monitor ECG closely",
+      "Sensitive CYP3A substrates (e.g., midazolam) - ivosidenib induces CYP3A and may reduce their exposure; monitor"
+    ],
+    "moderate": [
+      "Moderate CYP3A inhibitors - may increase ivosidenib exposure; monitor QTc",
+      "Drugs that lower potassium/magnesium (diuretics) - worsen QT risk; correct electrolytes",
+      "P-gp substrates - ivosidenib may alter their exposure; monitor"
+    ],
+    "minor": ["H2 antagonists and antacids may be used with separation if acid suppression is required"],
+    "food": "Take with or without food but do not take with a high-fat meal, which increases exposure and QT risk.",
+    "alcohol": "Avoid excess alcohol due to additive QT, hepatic, and constitutional effects.",
+    "diagnostics": "Monitor ECG (QTc), serum potassium and magnesium, CBC with differential, and liver function tests; monitor 2-HG only in research settings."
+  },
+  "se": {
+    "common": ["Fatigue", "Nausea, vomiting, and diarrhea", "Decreased appetite", "Abdominal pain and constipation", "Rash", "Arthralgia and myalgia", "Dyspnea and cough", "Fever", "Edema", "Leukocytosis", "Anemia", "Increased liver enzymes"],
+    "serious": ["Differentiation syndrome (boxed warning in AML/MDS; fever, dyspnea, hypoxia, infiltrates, effusions, rash, renal impairment - can be fatal)", "QTc prolongation and ventricular arrhythmia", "Guillain-Barre syndrome", "Hepatotoxicity"],
+    "rare": ["Tumor lysis syndrome", "Progressive multifocal leukoencephalopathy-type events not established - severe neurotoxicity is uncommon"],
+    "emergency": ["Fever with shortness of breath, chest pain, rapid weight gain, or swelling (differentiation syndrome) - seek emergency care and start steroids", "Fainting, palpitations, or irregular heartbeat (QT prolongation/arrhythmia)", "Ascending weakness, numbness, or difficulty walking or breathing (Guillain-Barre syndrome)"]
+  },
+  "monitoring": ["Signs of differentiation syndrome (fever, dyspnea, hypoxia, effusions, rash, leukocytosis); start dexamethasone and hydroxyurea promptly if suspected", "ECG for QTc weekly for 3 weeks, then monthly, plus electrolytes (potassium, magnesium) with repletion", "Complete blood counts and chemistries every 2 weeks for 3 months, then monthly", "Liver function tests for hepatotoxicity; neurologic exam for ascending weakness suggesting Guillain-Barre syndrome", "Pregnancy status before starting in females of reproductive potential"],
+  "counsel": [
+    "Take two 250 mg tablets once a day at about the same time; you may take with food but avoid a high-fat meal",
+    "BOXED WARNING: fever, trouble breathing, chest pain, rapid weight gain, or swelling can signal differentiation syndrome - get emergency care right away; steroids treat it",
+    "Tell your team about fainting, palpitations, muscle weakness, numbness, or trouble walking immediately",
+    "You will need frequent heart tracings (ECG), blood counts, and liver tests, especially in the first months",
+    "Use effective contraception and do not breastfeed; avoid grapefruit and tell your doctor about all heart-rhythm medicines"
+  ],
+  "pk": [
+    ["Onset", "2-HG reduction within days; clinical responses and differentiation syndrome typically over weeks to 3 months"],
+    ["Peak", "Median plasma Tmax approximately 3 hours after oral dosing"],
+    ["Half-life", "Mean terminal elimination half-life approximately 93 hours"],
+    ["Duration", "Steady state reached within about 14 days with once-daily dosing; effect persists for weeks after stopping"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted)"]
+  ],
+  "pearls": [
+    "Boxed warning: differentiation syndrome in AML/MDS can be fatal - treat first signs with dexamethasone 10 mg q12h plus hydroxyurea for leukocytosis without waiting for confirmation",
+    "QTc prolongation is exposure-driven: avoid high-fat meals, strong CYP3A inhibitors (or reduce to 250 mg), and QT-prolonging drugs; correct K and Mg",
+    "Guillain-Barre syndrome is a labeled serious risk - any ascending weakness needs urgent neurology evaluation",
+    "Long half-life (~93 hours) means interactions and toxicity persist for weeks after stopping",
+    "Requires susceptible IDH1 mutation by an FDA-approved test; AML monotherapy needs at least 6 months without progression before judging response"
+  ],
+  "missed": "If you miss a dose of ivosidenib, or if you vomit after taking a dose, skip the missed dose and take the next dose at the regular time the following day. Do not take two doses at once.",
+  "overdose": "There is no specific treatment for ivosidenib overdose. Symptoms are not well defined but may reflect exaggerated adverse effects including QTc prolongation, differentiation syndrome, and hepatotoxicity. Manage with supportive care including cardiac monitoring (ECG for QT prolongation), correction of electrolytes, and monitoring of blood counts and liver function.",
+  "refs": [
+    ["FDA Label - Ivosidenib / TIBSOVO (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ivosidenib%22"],
+    ["DailyMed - Ivosidenib (TIBSOVO)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=ivosidenib"]
+  ]
+}

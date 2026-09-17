@@ -1,0 +1,85 @@
+{
+  "generic": "Tislelizumab",
+  "cls": "Antineoplastic - anti-programmed death receptor-1 (PD-1) monoclonal antibody",
+  "pharm": "Humanized IgG4 anti-PD-1 monoclonal antibody with engineered Fc region to minimize Fc-gamma receptor binding; blocks PD-1/PD-L1 inhibitory signaling to restore T-cell antitumor activity; used in esophageal and gastric/GEJ cancers",
+  "tags": ["Rx only", "Anti-PD-1 immunotherapy", "Esophageal squamous cell carcinoma", "Gastric/GEJ adenocarcinoma", "Immune-mediated adverse reactions", "Infusion reactions", "Embryo-fetal toxicity"],
+  "quick": [
+    ["Adult dose", "200 mg IV infusion every 3 weeks"],
+    ["Meal", "Not applicable (IV)"],
+    ["Pregnancy", "Can cause fetal harm; avoid - use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 4 months after the last dose"],
+    ["Renal", "No standard adjustment defined; monitor for immune-mediated nephritis"],
+    ["Hepatic", "No standard adjustment defined; monitor for immune-mediated hepatitis"],
+    ["Alcohol", "No specific interaction; limit due to additive liver effects"],
+    ["Monitoring", "Immune-mediated toxicities (lung, bowel, liver, endocrine, kidney, skin), infusion reactions, LFTs, TFTs"]
+  ],
+  "summary": "Tislelizumab (Tevimbra) is an anti-PD-1 monoclonal antibody with an engineered Fc region designed to reduce Fc-gamma receptor binding and macrophage-mediated T-cell clearance. By blocking the PD-1/PD-L1 inhibitory checkpoint it restores T-cell activity against tumor cells. It is indicated as a single agent for adults with unresectable or metastatic esophageal squamous cell carcinoma after prior systemic chemotherapy not including a PD-(L)1 inhibitor, and in combination regimens for advanced gastric or gastroesophageal junction adenocarcinoma. The dose is 200 mg by intravenous infusion every 3 weeks until progression or unacceptable toxicity. The dominant risks are severe and fatal immune-mediated adverse reactions (pneumonitis, colitis, hepatitis, endocrinopathies, nephritis, dermatitis, and others) plus infusion-related reactions and embryo-fetal toxicity. There are no dose reductions; management is by withholding or permanently discontinuing plus corticosteroids.",
+  "indications": [
+    "Treatment of adults with unresectable or metastatic esophageal squamous cell carcinoma after prior systemic chemotherapy that did not include a PD-(L)1 inhibitor, as a single agent",
+    "Treatment of adults with advanced unresectable or metastatic gastric or gastroesophageal junction adenocarcinoma, in combination with chemotherapy (including HER2-directed combinations per labeling)"
+  ],
+  "dosage": [
+    {"c": "Esophageal squamous cell carcinoma or gastric/GEJ adenocarcinoma", "r": "Adult IV", "d": "200 mg by IV infusion once every 3 weeks", "t": "Every 3 weeks", "n": "Continue until disease progression or unacceptable toxicity; give combination chemotherapy partners per their schedules"},
+    {"c": "Immune-mediated adverse reactions", "r": "Adult IV", "d": "No dose reduction; withhold for moderate (grade 2) events and resume only on full resolution to grade 0-1 with steroids tapered; permanently discontinue for severe, recurrent, or life-threatening (grade 3-4) events per labeling tables", "t": "Per toxicity grade", "n": "Give systemic corticosteroids (e.g., prednisone 1-2 mg/kg/day) and taper over at least 1 month; add other immunosuppressants if no improvement"},
+    {"c": "Infusion-related reactions", "r": "Adult IV", "d": "Slow or interrupt for grade 1-2 reactions; permanently discontinue for grade 3-4 reactions", "t": "During infusion", "n": "Consider premedication for subsequent infusions after a mild reaction"}
+  ],
+  "admin": [
+    "Give 200 mg as an intravenous infusion over 60 minutes for the first infusion; subsequent infusions may be given over 30 minutes if well tolerated",
+    "Do not give as IV push or bolus; use a sterile, preservative-free dilution with the recommended line filter",
+    "Inspect solution before use; do not use if particulate matter or discoloration is present",
+    "Monitor during and after infusion for infusion-related reactions; have emergency treatment available",
+    "Withhold or discontinue for immune-mediated adverse reactions per grade; do not attempt dose reduction"
+  ],
+  "moa": "Tislelizumab is a humanized immunoglobulin G4 (IgG4) monoclonal antibody against programmed death receptor-1 (PD-1). PD-1 on T cells normally binds PD-L1/PD-L2 on tumor and stromal cells, delivering an inhibitory signal that suppresses T-cell proliferation and cytotoxic function. Tislelizumab blocks this interaction, releasing the brake on T cells and restoring antitumor immune responses. Its Fc region is specifically engineered to minimize binding to Fc-gamma receptors on macrophages, which is intended to reduce antibody-dependent phagocytosis of PD-1-positive T cells seen with some other IgG4 antibodies.",
+  "contra": {
+    "absolute": ["Known serious hypersensitivity to tislelizumab or any excipient"],
+    "relative": ["Pregnancy and breastfeeding (embryo-fetal toxicity; avoid)", "Active autoimmune disease requiring systemic immunosuppression", "Prior severe immune-mediated reaction to a PD-(L)1 inhibitor", "Solid organ transplant recipient (risk of rejection)"],
+    "monitor": ["Respiratory symptoms for pneumonitis", "Diarrhea/colitis symptoms", "Liver tests for hepatitis", "Thyroid, pituitary, and adrenal function for endocrinopathies", "Creatinine for nephritis and skin for dermatitis"]
+  },
+  "preg": "Based on its mechanism, tislelizumab can cause fetal harm including increased risk of miscarriage, stillbirth, and neonatal death by disrupting maternal immune tolerance. Verify pregnancy status before starting in females of reproductive potential and advise effective contraception during treatment and for 4 months after the last dose.",
+  "lact": "There are no data on the presence of tislelizumab in human milk or its effects on the breastfed child or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 4 months after the final dose.",
+  "renal": "No dose adjustment is defined for renal impairment in the labeling summary. Monitor serum creatinine for immune-mediated nephritis; withhold or discontinue plus corticosteroids per grade rather than reducing the dose.",
+  "hepatic": "No dose adjustment is defined for hepatic impairment in the labeling summary. Monitor liver tests for immune-mediated hepatitis; withhold or discontinue plus corticosteroids per grade rather than reducing the dose.",
+  "interactions": {
+    "major": ["Systemic corticosteroids or other immunosuppressants before starting - may blunt antitumor activity; avoid prophylactic use, though steroids are required to treat immune reactions", "Other immune checkpoint combinations - additive immune-mediated toxicity"],
+    "moderate": ["Live vaccines during treatment - avoid in patients receiving immunotherapy; use inactivated vaccines per guidelines"],
+    "minor": ["No classic CYP-mediated interactions expected for a monoclonal antibody"],
+    "food": "Not applicable (IV); no food effect.",
+    "alcohol": "No specific interaction is described; limit alcohol due to additive hepatic effects with hepatitis risk.",
+    "diagnostics": "Monitor LFTs, creatinine, thyroid function, cortisol/ACTH as indicated, glucose, and creatine kinase; evaluate new pulmonary, bowel, skin, or neurologic symptoms promptly."
+  },
+  "se": {
+    "common": ["Fatigue", "Anemia", "Decreased appetite", "Nausea", "Hypothyroidism", "Rash/pruritus", "Cough", "Musculoskeletal pain"],
+    "serious": ["Immune-mediated pneumonitis", "Immune-mediated colitis", "Immune-mediated hepatitis", "Immune-mediated endocrinopathies (thyroiditis, hypophysitis, adrenal insufficiency, type 1 diabetes)", "Immune-mediated nephritis", "Immune-mediated dermatitis including Stevens-Johnson syndrome", "Infusion-related reactions"],
+    "rare": ["Immune-mediated myocarditis or pericarditis", "Immune-mediated neurologic events (encephalitis, Guillain-Barre syndrome, myasthenia)", "Immune-mediated ocular events (uveitis)", "Solid organ transplant rejection", "Hemolytic anemia or aplastic anemia"],
+    "emergency": ["New cough, chest pain, or breathlessness (pneumonitis)", "Severe diarrhea, bloody stools, or severe abdominal pain (colitis)", "Yellowing of skin/eyes, dark urine, or severe fatigue (hepatitis)", "Chest pain, palpitations, muscle weakness, or neurologic changes (myocarditis/neurologic events)"]
+  },
+  "monitoring": ["Respiratory status and imaging for pneumonitis; bowel habits for colitis", "Liver tests before each dose and for hepatic symptoms", "Thyroid function, glucose, and pituitary/adrenal testing for endocrinopathies", "Creatinine, creatine kinase, and skin exams for nephritis, myositis, and dermatitis", "Infusion tolerance during and after each dose"],
+  "counsel": [
+    "This IV immunotherapy is given every 3 weeks; it works by activating your immune system, which can also attack healthy organs",
+    "Report new cough, chest pain, or trouble breathing right away (lung inflammation)",
+    "Report diarrhea, bloody stools, belly pain, yellow skin or eyes, dark urine, or severe tiredness promptly",
+    "Report hormone symptoms such as unusual headache, extreme fatigue, rapid heartbeat, weight change, thirst, or frequent urination",
+    "Report rash, mouth sores, muscle pain, or vision changes; use effective birth control during and for 4 months after treatment"
+  ],
+  "pk": [
+    ["Onset", "PD-1 receptor occupancy from first infusion; tumor responses assessed over weeks"],
+    ["Peak", "End of IV infusion"],
+    ["Half-life", "Terminal half-life approximately 3-4 weeks, supporting every-3-week dosing"],
+    ["Duration", "Steady state over several cycles; dosed every 3 weeks until progression or unacceptable toxicity"],
+    ["Storage", "Refrigerate vials at 2-8 C; diluted solution per labeling time limits; do not freeze or shake; protect from light"]
+  ],
+  "pearls": [
+    "Engineered Fc region minimizes Fc-gamma receptor binding, a design difference from some other anti-PD-1 antibodies",
+    "No dose reductions exist - toxicity management is hold versus permanently stop, plus steroids tapered over at least 1 month",
+    "Endocrinopathies (especially hypothyroidism) are common and usually managed with hormone replacement while continuing therapy",
+    "Pneumonitis, colitis, and hepatitis drive most permanent discontinuations - evaluate new symptoms before the next dose",
+    "Contraception extends 4 months after the last dose because of the long half-life and immune mechanism"
+  ],
+  "missed": "Tislelizumab is given as a supervised IV infusion every 3 weeks, so there is no patient-managed missed dose. If an appointment is missed, contact the oncology team to reschedule as soon as possible.",
+  "overdose": "There is no specific antidote for tislelizumab overdose. Overdose may produce exaggerated immune-mediated or infusion reactions. Monitor closely for pulmonary, gastrointestinal, hepatic, endocrine, renal, cardiac, and dermatologic toxicity and provide supportive care including corticosteroids as indicated. Contact Poison Help (1-800-222-1222).",
+  "refs": [
+    ["FDA Prescribing Information: Tislelizumab (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tislelizumab%22"],
+    ["DailyMed - Tislelizumab", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=tislelizumab"]
+  ]
+}

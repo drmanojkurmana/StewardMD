@@ -1,0 +1,84 @@
+{
+  "generic": "Iberdomide",
+  "cls": "Antineoplastic - cereblon E3 ligase modulator (CELMoD)",
+  "pharm": "Cereblon E3 ubiquitin ligase modulator; binds cereblon to induce ubiquitination and degradation of Ikaros (IKZF1) and Aiolos (IKZF3), causing direct myeloma cell death and immunomodulation; used in combination with daratumumab and dexamethasone",
+  "tags": ["Rx only", "CELMoD", "Relapsed/refractory multiple myeloma", "Neutropenia/febrile neutropenia", "Thromboembolism risk with dexamethasone", "Embryo-fetal toxicity - REMS restricted distribution"],
+  "quick": [
+    ["Adult dose", "1 mg orally once daily on days 1-21 of each 28-day cycle, with daratumumab and dexamethasone"],
+    ["Meal", "Take with or without food at about the same time each day"],
+    ["Pregnancy", "Can cause fetal harm; avoid - effective contraception required (REMS program)"],
+    ["Lactation", "Do not breastfeed during treatment"],
+    ["Renal", "No standard adjustment defined; monitor blood counts closely"],
+    ["Hepatic", "No standard adjustment defined; monitor closely"],
+    ["Alcohol", "No specific interaction; limit due to additive fatigue and infection risk"],
+    ["Monitoring", "CBC (neutropenia), infection signs, VTE signs, pregnancy status"]
+  ],
+  "summary": "Iberdomide (Zenbexus) is a cereblon E3 ligase modulator (CELMoD) granted accelerated FDA approval in August 2026 for adults with relapsed or refractory multiple myeloma who have received at least one prior line of therapy including a proteasome inhibitor and an immunomodulatory agent, in combination with daratumumab and hyaluronidase-fihj plus dexamethasone. It binds cereblon to trigger degradation of the transcription factors Ikaros and Aiolos, producing direct tumoricidal and immune-stimulatory effects. The recommended dose is 1 mg orally once daily on days 1 through 21 of each 28-day cycle until disease progression or unacceptable toxicity. Key risks are neutropenia including febrile neutropenia, thrombocytopenia, infections, venous thromboembolism (with dexamethasone), and embryo-fetal toxicity; it is available only through the ZENBEXUS REMS restricted distribution program with required contraception.",
+  "indications": [
+    "Treatment of adults with relapsed or refractory multiple myeloma who have received at least one prior line of therapy including a proteasome inhibitor and an immunomodulatory agent, in combination with daratumumab and hyaluronidase-fihj and dexamethasone"
+  ],
+  "dosage": [
+    {"c": "Relapsed/refractory multiple myeloma (with daratumumab and dexamethasone)", "r": "Adult oral", "d": "1 mg once daily on days 1-21 of each 28-day cycle", "t": "Once daily, with or without food", "n": "Continue until disease progression or unacceptable toxicity; give with daratumumab and hyaluronidase-fihj plus dexamethasone per schedule"},
+    {"c": "Dose interruption or reduction (toxicity)", "r": "Adult oral", "d": "Withhold for grade 3-4 neutropenia with fever, prolonged grade 4 neutropenia, grade 3-4 thrombocytopenia, or serious infection; resume at same or reduced dose per labeling when recovered", "t": "Per toxicity recovery", "n": "Use growth factor support per guidelines; permanently discontinue for unacceptable toxicity"},
+    {"c": "Thromboprophylaxis setting (with dexamethasone)", "r": "Adult oral", "d": "Iberdomide 1 mg days 1-21 plus VTE prophylaxis (e.g., aspirin or anticoagulant per risk assessment)", "t": "Each 28-day cycle", "n": "Assess VTE risk factors and select prophylaxis accordingly"}
+  ],
+  "admin": [
+    "Take 1 mg by mouth once daily on days 1 through 21 of each 28-day cycle, with or without food, at about the same time each day",
+    "Swallow capsules whole with water; do not open, crush, or chew",
+    "Give only in combination with daratumumab and hyaluronidase-fihj plus dexamethasone per the prescribed schedule",
+    "Dispense only through the ZENBEXUS REMS program; verify negative pregnancy test and contraception compliance before each cycle",
+    "If a dose is missed, take it as soon as possible the same day and resume the regular schedule the next day; do not double up"
+  ],
+  "moa": "Iberdomide is a cereblon E3 ubiquitin ligase modulator (CELMoD). It binds to cereblon, a component of the CRL4-CRBN E3 ubiquitin ligase complex, and redirects its activity toward the lymphoid transcription factors Ikaros (IKZF1) and Aiolos (IKZF3), causing their ubiquitination and proteasomal degradation. Loss of these factors produces direct killing of multiple myeloma cells and stimulates immune effector function, including T-cell and NK-cell activation. Combined with the anti-CD38 antibody daratumumab and the corticosteroid dexamethasone, this yields enhanced anti-myeloma activity.",
+  "contra": {
+    "absolute": ["Pregnancy (embryo-fetal toxicity; REMS contraindication unless requirements met)", "Known serious hypersensitivity to iberdomide or any excipient"],
+    "relative": ["Females of reproductive potential not using effective contraception", "Active uncontrolled infection", "History of venous thromboembolism or high VTE risk (with dexamethasone combination)", "Severe baseline neutropenia or thrombocytopenia"],
+    "monitor": ["Complete blood counts for neutropenia and thrombocytopenia", "Signs of infection including febrile neutropenia", "Signs and symptoms of venous thromboembolism", "Pregnancy status before starting and during treatment"]
+  },
+  "preg": "Iberdomide can cause fetal harm based on its mechanism as a cereblon modulator related to thalidomide analogues. It is available only through the ZENBEXUS REMS program. Verify pregnancy status before starting. Females of reproductive potential must use effective contraception during treatment and for at least 4 weeks after the last dose. Males with female partners of reproductive potential must use condoms during treatment and for at least 4 weeks after the last dose. Do not donate sperm during this period.",
+  "lact": "There are no data on the presence of iberdomide in human milk or its effects on the breastfed child or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment.",
+  "renal": "No specific dose adjustment is defined for renal impairment in the labeling summary. Monitor complete blood counts and for infection closely, as cytopenias are the principal toxicities, and adjust for toxicity per labeling.",
+  "hepatic": "No specific dose adjustment is defined for hepatic impairment in the labeling summary. Monitor closely for cytopenias and infection, and adjust for toxicity per labeling.",
+  "interactions": {
+    "major": ["Dexamethasone combination - increased risk of venous thromboembolism; give appropriate thromboprophylaxis", "Other myelosuppressive agents - additive neutropenia and thrombocytopenia; monitor CBC closely"],
+    "moderate": ["Strong CYP modulators - iberdomide exposure may be altered; monitor for toxicity or loss of effect", "Agents that increase infection risk (prolonged steroids, other immunosuppressants) - additive infection risk"],
+    "minor": ["No clinically significant food effect - may take with or without food"],
+    "food": "May be taken with or without food; no clinically significant food effect described.",
+    "alcohol": "No specific interaction is described; limit alcohol due to additive fatigue and infection susceptibility.",
+    "diagnostics": "Monitor CBC with differential, platelets, pregnancy testing per REMS, and signs of thrombosis."
+  },
+  "se": {
+    "common": ["Neutropenia", "Thrombocytopenia", "Anemia", "Fatigue", "Diarrhea", "Upper respiratory infection", "Musculoskeletal pain"],
+    "serious": ["Febrile neutropenia and severe neutropenia", "Serious infections including pneumonia", "Severe thrombocytopenia with bleeding risk", "Venous thromboembolism (with dexamethasone)", "Embryo-fetal toxicity"],
+    "rare": ["Tumor lysis-like events", "Severe cutaneous reactions", "Second primary malignancies (class concern with immunomodulatory combinations)"],
+    "emergency": ["Fever with low neutrophils, chills, or signs of sepsis - seek urgent care", "Unusual bleeding, bruising, or petechiae (severe thrombocytopenia)", "Leg swelling or pain, chest pain, or sudden breathlessness (possible thromboembolism)"]
+  },
+  "monitoring": ["Complete blood count with differential before each cycle and as needed for neutropenia and thrombocytopenia", "Signs of infection; hold drug and treat promptly for febrile neutropenia", "Signs and symptoms of venous thromboembolism during dexamethasone combination therapy", "Pregnancy status per ZENBEXUS REMS requirements", "Disease response and tolerability each cycle"],
+  "counsel": [
+    "Take 1 mg once daily on days 1-21 of each 28-day cycle, with or without food; swallow whole and do not double up a missed dose",
+    "Report fever, chills, sore throat, or any sign of infection right away - low white cells are common",
+    "Report unusual bleeding, bruising, or tiny red spots on the skin (low platelets)",
+    "Report leg swelling or pain, chest pain, or sudden trouble breathing (possible blood clot), especially while on dexamethasone",
+    "You must not become pregnant or father a child on this drug; use required birth control during and for 4 weeks after treatment, and do not donate blood or sperm during this time"
+  ],
+  "pk": [
+    ["Onset", "Pharmacodynamic target degradation within days; clinical responses assessed over cycles"],
+    ["Peak", "Median Tmax a few hours after oral dosing"],
+    ["Half-life", "Effective half-life supports once-daily dosing on a 21-of-28-day schedule"],
+    ["Duration", "Dosed days 1-21 of each 28-day cycle until progression or unacceptable toxicity"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted); keep in original container to protect from moisture"]
+  ],
+  "pearls": [
+    "First CELMoD approved in myeloma; accelerated approval based on MRD-negative complete response rate in combination with daratumumab and dexamethasone",
+    "Standard dose is flat 1 mg daily on days 1-21 of a 28-day cycle, not weight based",
+    "Neutropenia and febrile neutropenia drive dose holds; use growth factor support per guidelines rather than pushing through fever",
+    "Always pair with VTE risk assessment and thromboprophylaxis because of the dexamethasone combination",
+    "REMS restricted distribution: verify pregnancy testing and contraception (females and males) before every cycle"
+  ],
+  "missed": "If you miss a dose, take it as soon as possible on the same day and resume the regular schedule the next day. If the whole day has passed, skip the missed dose and take the next dose at the regular time. Do not take two doses at once, and do not extend dosing beyond day 21 of the cycle.",
+  "overdose": "There is no specific antidote for iberdomide overdose. Overdose may produce exaggerated myelosuppression with infection or bleeding. Withhold the drug, monitor complete blood counts closely, and provide supportive care including growth factors, antimicrobials, and transfusions as indicated. Contact Poison Help (1-800-222-1222).",
+  "refs": [
+    ["FDA Prescribing Information: Iberdomide (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22iberdomide%22"],
+    ["DailyMed - Iberdomide", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=iberdomide"]
+  ]
+}

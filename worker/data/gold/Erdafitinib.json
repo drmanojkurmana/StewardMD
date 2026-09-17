@@ -1,0 +1,86 @@
+{
+  "generic": "Erdafitinib",
+  "cls": "Antineoplastic - pan-FGFR (FGFR1-4) tyrosine kinase inhibitor",
+  "pharm": "Selective inhibitor of fibroblast growth factor receptors FGFR1 through FGFR4; blocks FGFR signaling in urothelial tumors with susceptible FGFR3 genetic alterations",
+  "tags": ["Rx only", "Oral pan-FGFR inhibitor", "FGFR3-altered urothelial carcinoma", "Ocular toxicity (CSR/RPED)", "Hyperphosphatemia", "Embryo-fetal toxicity"],
+  "quick": [
+    ["Adult dose", "8 mg orally once daily; may increase to 9 mg based on phosphate at day 14-21"],
+    ["Meal", "Take with or without food at about the same time each day"],
+    ["Pregnancy", "Can cause fetal harm; avoid - use effective contraception"],
+    ["Lactation", "Do not breastfeed during treatment and for 1 month after the last dose"],
+    ["Renal", "No adjustment in mild-moderate; not established in severe"],
+    ["Hepatic", "No adjustment in mild; not established in moderate-severe"],
+    ["Alcohol", "No specific interaction; limit due to hepatic and mucosal effects"],
+    ["Monitoring", "Serum phosphate, eye exams (CSR/RPED), LFTs, nails/skin/mouth"]
+  ],
+  "summary": "Erdafitinib (Balversa) is an oral pan-FGFR (FGFR1-4) tyrosine kinase inhibitor for locally advanced or metastatic urothelial carcinoma with susceptible FGFR3 genetic alterations after prior systemic therapy. The starting dose is 8 mg orally once daily, increased to 9 mg once daily at day 14 to 21 if serum phosphate is below 5.5 mg/dL with no ocular disorders or grade 2 or higher toxicity. Key risks are ocular disorders including central serous retinopathy/retinal pigment epithelial detachment (CSR/RPED), hyperphosphatemia, stomatitis, hand-foot syndrome, nail disorders, and embryo-fetal toxicity.",
+  "indications": [
+    "Treatment of adult patients with locally advanced or metastatic urothelial carcinoma with susceptible FGFR3 genetic alterations, with progression during or after at least one line of prior systemic therapy"
+  ],
+  "dosage": [
+    {"c": "Starting dose (FGFR3-altered urothelial carcinoma)", "r": "Adult oral", "d": "8 mg once daily", "t": "Once daily with or without food", "n": "Confirm susceptible FGFR3 alteration with an FDA-approved test before starting"},
+    {"c": "Phosphate-guided titration", "r": "Adult oral", "d": "Increase to 9 mg once daily if serum phosphate is below 5.5 mg/dL at day 14 to 21 with no ocular disorder and no grade 2 or higher adverse reaction", "t": "Assess phosphate 14 to 21 days after starting", "n": "If phosphate is 5.5 mg/dL or higher, or ocular/grade 2 toxicity is present, continue at 8 mg"},
+    {"c": "Dose holds and reductions (toxicity)", "r": "Adult oral", "d": "Withhold then resume at next lower level: 9 mg to 8 mg to 6 mg to 5 mg to 4 mg once daily", "t": "Per toxicity grade", "n": "Permanently discontinue for confirmed CSR/RPED with certain severity, retinal vascular occlusion, or intolerance at 4 mg"},
+    {"c": "Hyperphosphatemia management", "r": "Adult oral", "d": "Continue same dose with phosphate binder and diet review for phosphate 7.0 to 8.9 mg/dL; withhold and reduce for 9.0 mg/dL or higher or persistent elevation", "t": "Monitor phosphate monthly after titration", "n": "Use non-calcium binders such as sevelamer with food per labeling"}
+  ],
+  "admin": [
+    "Take once daily with or without food at about the same time each day; swallow tablets whole with water",
+    "Check serum phosphate 14 to 21 days after starting to decide on escalation from 8 mg to 9 mg",
+    "Perform baseline ophthalmologic exam including optical coherence tomography (OCT), repeat at month 1 to 2, then as clinically indicated and urgently for visual symptoms",
+    "Follow a low-phosphate diet review and start a phosphate binder with food if hyperphosphatemia develops",
+    "Withhold for new visual symptoms, grade 3 or higher stomatitis, hand-foot syndrome, or persistent hyperphosphatemia per labeling"
+  ],
+  "moa": "Erdafitinib is a selective, ATP-competitive inhibitor of fibroblast growth factor receptors FGFR1, FGFR2, FGFR3, and FGFR4. In urothelial carcinoma with susceptible FGFR3 alterations (mutations or fusions), constitutive FGFR signaling drives proliferation and survival through MAPK and PI3K/AKT pathways. Erdafitinib blocks FGFR phosphorylation and downstream signaling, inhibiting growth of FGFR-dependent tumor cells. On-target FGFR inhibition also raises serum phosphate through altered FGF23-mediated phosphate homeostasis, which serves as a pharmacodynamic marker for titration.",
+  "contra": {
+    "absolute": ["Known serious hypersensitivity to erdafitinib or any excipient"],
+    "relative": ["Pregnancy and breastfeeding (embryo-fetal toxicity; avoid)", "Active ocular disorder involving retina or cornea", "Severe uncorrected hyperphosphatemia or hypercalcemia", "Moderate to severe hepatic impairment (not established)", "Concomitant strong CYP3A inducers"],
+    "monitor": ["Visual symptoms and OCT for CSR/RPED", "Serum phosphate, calcium, and renal function", "Mouth, skin, nails, and palms/soles for mucocutaneous toxicity", "Concomitant phosphate-altering and CYP3A/P-gp modulators"]
+  },
+  "preg": "Based on mechanism and animal findings, erdafitinib can cause fetal harm including malformations and embryolethality. Verify pregnancy status before starting in females of reproductive potential and advise effective contraception during treatment and for 1 month after the last dose. Advise males with female partners of reproductive potential to use effective contraception during treatment and for 1 month after the last dose.",
+  "lact": "There are no data on erdafitinib in human milk or its effects on the breastfed child or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 1 month after the final dose.",
+  "renal": "No dose adjustment is recommended for mild to moderate renal impairment. Erdafitinib has not been adequately studied in severe renal impairment; use with caution and monitor phosphate, calcium, and renal function closely.",
+  "hepatic": "No dose adjustment is recommended for mild hepatic impairment. Erdafitinib has not been adequately studied in moderate to severe hepatic impairment; use with caution and monitor closely for toxicity.",
+  "interactions": {
+    "major": ["Strong CYP3A inducers (e.g., rifampin, carbamazepine, phenytoin, St John's wort) - substantially reduce erdafitinib exposure; avoid", "Moderate CYP3A inducers - may reduce exposure; consider dose increase or avoid", "Strong CYP2C9 inhibitors - may increase exposure; monitor toxicity"],
+    "moderate": ["P-gp substrates with narrow therapeutic index (e.g., digoxin) - erdafitinib may alter exposure; monitor", "OCT2 substrates (e.g., metformin) - erdafitinib may increase exposure; monitor", "Serum phosphate-altering agents (phosphate supplements, vitamin D, binders, diuretics) - confound titration; review and adjust"],
+    "minor": ["Acid-reducing agents - no major interaction described; take consistently with respect to food"],
+    "food": "May be taken with or without food; take consistently at the same time each day. Follow low-phosphate diet counseling when hyperphosphatemia occurs.",
+    "alcohol": "No specific interaction described; limit alcohol because of hepatic, mucosal, and ocular effects.",
+    "diagnostics": "Monitor serum phosphate (titration and monthly), calcium, creatinine, LFTs, and CBC; OCT for CSR/RPED; phosphate binders and supplements alter labs."
+  },
+  "se": {
+    "common": ["Hyperphosphatemia", "Stomatitis and dry mouth", "Diarrhea, constipation, abdominal pain, nausea", "Fatigue", "Decreased appetite and weight loss", "Dry skin, alopecia, hand-foot syndrome (palmar-plantar erythrodysesthesia)", "Nail disorders (onycholysis, paronychia)", "Dry eye, blurred vision", "Increased creatinine, ALT/AST", "Dysgeusia"],
+    "serious": ["Central serous retinopathy / retinal pigment epithelial detachment (CSR/RPED) with vision loss", "Severe hyperphosphatemia with soft-tissue calcification risk", "Severe stomatitis, hand-foot syndrome, and nail toxicity", "Hepatotoxicity", "Embryo-fetal toxicity"],
+    "rare": ["Retinal vascular occlusion", "Corneal ulceration or severe keratitis", "Calciphylaxis-type calcification with prolonged severe hyperphosphatemia"],
+    "emergency": ["Sudden vision loss, flashing lights, new blind spots, or severe eye pain - seek same-day eye care", "Signs of severe hyperphosphatemia with muscle cramps, tingling, or confusion", "Severe mouth sores preventing fluids, or blistering/peeling palms and soles"]
+  },
+  "monitoring": ["Serum phosphate 14 to 21 days after starting for titration, then monthly for hyperphosphatemia", "Ophthalmologic exam with OCT at baseline, at 1 to 2 months, and urgently for any visual symptoms", "Serum calcium, creatinine, LFTs, and CBC periodically", "Mouth, skin, nails, palms/soles, and nutritional status each visit", "Pregnancy status before starting; contraception during and for 1 month after treatment"],
+  "counsel": [
+    "Take once daily at the same time, with or without food; swallow tablets whole",
+    "Your phosphate blood test at week 2 to 3 decides whether the dose goes from 8 mg to 9 mg; keep all lab visits",
+    "Report any vision change (blur, blind spots, flashes, distortion, eye pain) immediately and keep all eye exams",
+    "Mouth sores, dry mouth, rash, peeling hands or feet, and nail changes are common: report sores that stop eating or drinking",
+    "Follow low-phosphate diet advice and take any prescribed phosphate binder with food",
+    "Use effective birth control during treatment and for 1 month after the last dose (both partners); do not breastfeed"
+  ],
+  "pk": [
+    ["Onset", "FGFR inhibition within hours; phosphate rises within days to weeks and guides titration"],
+    ["Peak", "Median Tmax about 2 to 3 hours after oral dosing"],
+    ["Half-life", "Mean elimination half-life about 59 hours"],
+    ["Duration", "Steady state reached in about 2 weeks with once-daily dosing"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted) in original container; protect from moisture"]
+  ],
+  "pearls": [
+    "Requires an FDA-approved test confirming susceptible FGFR3 alteration before starting for urothelial carcinoma",
+    "Unique phosphate-guided titration: escalate 8 mg to 9 mg only if day 14-21 phosphate is below 5.5 mg/dL without ocular or grade 2 or higher toxicity",
+    "CSR/RPED occurs in a substantial minority: baseline and early OCT plus urgent evaluation for any visual symptom; withhold or discontinue per grade",
+    "Hyperphosphatemia is an on-target pharmacodynamic effect: manage with diet, binders, holds, and reductions rather than stopping outright where possible",
+    "Mucocutaneous toxicities (stomatitis, hand-foot syndrome, nail disorders, dry eye) need proactive supportive care and early dose holds"
+  ],
+  "missed": "If a dose is missed, take it as soon as possible on the same day. Resume the regular schedule the next day. Do not take two doses on the same day to make up for a missed dose. If vomiting occurs after a dose, do not take an extra dose; take the next dose at the regular time.",
+  "overdose": "There is no specific antidote for erdafitinib overdose. Expected effects include hyperphosphatemia, ocular toxicity, mucositis, hand-foot syndrome, and hepatic injury. Withhold drug, check phosphate, calcium, renal function, and eye exam, give supportive care with phosphate lowering as needed, and monitor closely. Contact Poison Help (1-800-222-1222).",
+  "refs": [
+    ["FDA Prescribing Information: Erdafitinib (Balversa) (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22erdafitinib%22"],
+    ["DailyMed - Erdafitinib (Balversa)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=erdafitinib"]
+  ]
+}
