@@ -10031,7 +10031,9 @@
     "site.admin.import.notInFile": "Not in the file",
     "site.admin.import.column": "Column {n}",
     "site.admin.import.mapTitle": "Match the columns",
-    "site.admin.import.rows": "{n} rows in the file. One run takes at most {cap}; split a larger file.",
+    "site.admin.import.rowsRuns": "{n} rows in the file. They are checked and imported in {runs} parts of at most {cap} rows each, one after another.",
+    "site.admin.import.part": "Working on part {i} of {n}. Keep this page open.",
+    "site.admin.import.stopped": "{n} rows were imported before part {part} of {parts} stopped. Run the dry run again: what was imported shows as already here, and importing adds only what is missing.",
     "site.admin.import.required": "(required)",
     "site.admin.import.dateOrder": "Dates in the file are written",
     "site.admin.import.dmy": "day/month/year",
@@ -10051,7 +10053,6 @@
     "site.admin.import.newMrn": "MR number {mrn}",
     "site.admin.import.existingPrice": "Price on the list: Rs {price}",
     "site.admin.import.commit": "Import these {n} rows",
-    "site.admin.import.partial": "What is already held could not be read in full, so this file cannot be imported.",
     "site.admin.import.nothing": "Nothing in this file would be added.",
     "site.admin.import.chooseFile": "Choose the CSV file first.",
     /* end site pages keys */
