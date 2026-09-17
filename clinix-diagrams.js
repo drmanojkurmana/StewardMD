@@ -458,6 +458,166 @@
       '<div class="cx-dia-note">A spleen you can feel has already doubled or tripled in size, and it enlarges along this one diagonal, from the left costal margin towards the umbilicus and the right iliac fossa, never in a random direction.</div>';
   }
 
+  /* ── 16. Precordial auscultation and murmur radiation map ───────────────── */
+
+  var PRECORDIAL = [
+    { id: "aortic", cx: 136, cy: 74, tag: "A", label: "Aortic area (2nd R ICS)", sound: "as_murmur", radiation: "Carotids",
+      note: "2nd right intercostal space, sternal edge. Harsh ejection systolic murmur of aortic stenosis radiates upwards to the carotids. Have the patient sit up and lean forward in full expiration." },
+    { id: "pulm", cx: 184, cy: 74, tag: "P", label: "Pulmonary area (2nd L ICS)", sound: "s1s2_split", radiation: "Left clavicle",
+      note: "2nd left intercostal space, sternal edge. Physiological splitting of S2 (A2 preceding P2 on inspiration). Widely fixed split indicates an ASD; loud P2 indicates pulmonary arterial hypertension." },
+    { id: "erbs", cx: 180, cy: 100, tag: "E", label: "Erb's Point (3rd L ICS)", sound: "ar_murmur", radiation: "Apex / Left lower sternum",
+      note: "3rd left intercostal space, sternal edge. High-pitched early diastolic blowing decrescendo murmur of aortic regurgitation is loudest here using the diaphragm with the patient leaning forward in expiration." },
+    { id: "tricuspid", cx: 174, cy: 126, tag: "T", label: "Tricuspid area (4th L ICS)", sound: "s1s2_normal", radiation: "Right sternal edge",
+      note: "4th/5th left intercostal space, lower sternal border. Pansystolic murmur of tricuspid regurgitation is accentuated during inspiration (Carvallo's sign), distinguishing it from mitral regurgitation." },
+    { id: "mitral", cx: 212, cy: 152, tag: "M", label: "Mitral / Apex (5th L ICS MCL)", sound: "mr_murmur", radiation: "Left axilla",
+      note: "5th left intercostal space, midclavicular line (apex beat). Holosystolic murmur of mitral regurgitation radiates into the left axilla. Mid-diastolic low-frequency rumble of mitral stenosis is best heard here with the bell in the left lateral decubitus position." }
+  ];
+
+  function precordiumMap(o) {
+    var sel = (o && o.selected) || null, html = "", i;
+    html += '<svg class="cx-dia cx-dia--precordium" viewBox="0 0 320 230" role="img" aria-label="Precordial auscultation sites and murmur radiation paths">' +
+      '<defs>' +
+        '<marker id="cxAuscArr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">' +
+          '<path d="M0 0 L10 5 L0 10 z" class="cx-dia-arrowhead"/>' +
+        '</marker>' +
+      '</defs>' +
+      chestOutline() +
+      '<path class="cx-dia-heart-bg" d="M152 64 C132 64 126 96 136 126 C146 156 186 172 212 160 C232 148 228 112 216 88 C204 68 174 64 152 64 Z" fill="var(--cx-primary-2)" opacity="0.14" stroke="var(--cx-line)" stroke-dasharray="3 3"/>' +
+      '<path class="cx-dia-clav" d="M96 46 C128 58 192 58 224 46" stroke="var(--cx-line)" stroke-width="1.5" fill="none"/>' +
+      '<rect x="154" y="58" width="12" height="96" rx="4" fill="var(--cx-surface)" stroke="var(--cx-line)" stroke-width="1.2"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--faint" x="160" y="106" text-anchor="middle" transform="rotate(-90 160 106)">STERNUM</text>' +
+      '<path class="cx-dia-rad cx-dia-rad--carotid' + (sel === "aortic" ? " cx-dia-rad--active" : "") + '" d="M136 60 L142 34 M136 60 L176 34" marker-end="url(#cxAuscArr)"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="160" y="24" text-anchor="middle">Carotid Radiation (AS)</text>' +
+      '<path class="cx-dia-rad cx-dia-rad--axilla' + (sel === "mitral" ? " cx-dia-rad--active" : "") + '" d="M224 154 L262 134" marker-end="url(#cxAuscArr)"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="272" y="132" text-anchor="start">Axilla (MR)</text>';
+
+    for (i = 0; i < PRECORDIAL.length; i++) {
+      var p = PRECORDIAL[i], on = sel === p.id;
+      html += '<g class="cx-dia-zone cx-dia-zone--ausc' + (on ? " cx-dia-zone--on" : "") + '" data-act="cx-dia-ausc" data-id="' + p.id + '" role="button" tabindex="0" aria-label="' + esc(p.label) + '">' +
+        '<circle cx="' + p.cx + '" cy="' + p.cy + '" r="14"/>' +
+        '<text x="' + p.cx + '" y="' + (p.cy + 4) + '" text-anchor="middle">' + p.tag + '</text></g>';
+    }
+    html += "</svg>";
+    var chosen = null;
+    for (i = 0; i < PRECORDIAL.length; i++) if (PRECORDIAL[i].id === sel) chosen = PRECORDIAL[i];
+    html += '<div class="cx-dia-note">' + (chosen
+      ? '<b>' + esc(chosen.label) + '</b> (' + esc(chosen.radiation) + '): ' + esc(chosen.note) + '<span class="cx-dia-playing">playing: ' + esc(chosen.sound) + '</span>'
+      : "Tap an auscultation valve site (Aortic, Pulmonary, Erb's, Tricuspid, Mitral) to hear its murmur model and inspect characteristic radiation paths.") + "</div>";
+    return html;
+  }
+
+  /* ── 17. Jugular venous pulse (JVP) waveform simulator ──────────────────── */
+
+  function jvpWaveform(o) {
+    var mode = (o && o.mode) || "normal";
+    var pathD = "";
+    var noteText = "";
+    var titleTag = "";
+
+    if (mode === "cannon") {
+      titleTag = "Cannon 'a' Wave";
+      pathD = "M20 130 L40 130 C48 130 52 26 64 26 C76 26 80 118 96 118 L114 96 L134 116 C150 116 164 78 184 78 C204 78 214 122 234 122 L310 122";
+      noteText = "<b>Cannon 'a' Wave</b>: Giant presystolic venous surge. Right atrium contracts against a CLOSED tricuspid valve during ventricular systole. Characteristic of complete heart block (AV dissociation - variable cannon waves) or junctional rhythm (regular cannon waves).";
+    } else if (mode === "absent_a") {
+      titleTag = "Absent 'a' Wave (Atrial Fibrillation)";
+      pathD = "M20 130 L64 130 C76 130 88 126 100 126 L118 108 L136 122 C152 122 168 66 190 66 C212 66 224 122 246 122 L310 122";
+      noteText = "<b>Absent 'a' Wave</b>: In <b>Atrial Fibrillation</b>, the absence of organized atrial contraction completely abolishes the 'a' wave. The pulse shows only an exaggerated systolic 'v' wave and irregular diastolic intervals.";
+    } else if (mode === "giant_v") {
+      titleTag = "Giant 'v' / Lancisi's Sign (Tricuspid Regurgitation)";
+      pathD = "M20 130 L44 130 C52 130 58 74 68 74 C78 74 86 112 98 112 C120 106 142 36 178 36 C210 36 226 126 248 126 L310 126";
+      noteText = "<b>Giant 'v' (cv) Wave / Lancisi's Sign</b>: In severe <b>Tricuspid Regurgitation</b>, retrograde systolic flow jets directly from the right ventricle into the right atrium, obliterating the normal 'x' descent and creating a massive fused 'cv' wave with earlobe pulsation.";
+    } else if (mode === "friedreich") {
+      titleTag = "Friedreich's Sign (Constrictive Pericarditis)";
+      pathD = "M20 130 L44 130 C52 130 58 68 68 68 C78 68 86 112 98 112 L114 90 L132 114 C150 114 164 68 184 68 C192 68 196 142 206 142 L224 142 C240 142 254 122 274 122 L310 122";
+      noteText = "<b>Friedreich's Sign (Rapid 'y' Descent)</b>: In <b>Constrictive Pericarditis</b>, elevated systemic venous pressure produces a very steep, rapid early diastolic collapse ('y' descent) as blood rushes into the ventricle before abruptly encountering the rigid non-compliant pericardium. Blunted in cardiac tamponade.";
+    } else {
+      titleTag = "Normal JVP Waveform";
+      pathD = "M20 130 L44 130 C52 130 58 66 68 66 C78 66 84 108 98 108 L114 88 L132 114 C150 114 164 74 184 74 C204 74 214 120 234 120 L310 120";
+      noteText = "<b>Normal JVP</b>: Two positive waves (<b>a</b> = atrial contraction, <b>v</b> = venous filling) and two descents (<b>x</b> = atrial relaxation + ventricular descent, <b>y</b> = ventricular filling). S1/carotid pulse coincides with the peak of the 'c' wave.";
+    }
+
+    var html = '<svg class="cx-dia cx-dia--jvp" viewBox="0 0 340 220" role="img" aria-label="' + esc(titleTag) + '">' +
+      '<line class="cx-dia-axis" x1="20" y1="130" x2="320" y2="130"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="24" y="22">' + esc(titleTag) + '</text>' +
+      '<line x1="68" y1="28" x2="68" y2="200" stroke="var(--cx-line)" stroke-dasharray="2 2"/>' +
+      '<line x1="114" y1="28" x2="114" y2="200" stroke="var(--cx-line)" stroke-dasharray="2 2"/>' +
+      '<line x1="184" y1="28" x2="184" y2="200" stroke="var(--cx-line)" stroke-dasharray="2 2"/>' +
+      '<path d="' + pathD + '" fill="none" stroke="var(--cx-primary)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>';
+
+    if (mode !== "absent_a") {
+      html += '<circle cx="68" cy="' + (mode === "cannon" ? 26 : 66) + '" r="3.5" fill="var(--cx-primary)"/>' +
+        '<text class="cx-dia-lbl cx-dia-lbl--normal" x="68" y="' + (mode === "cannon" ? 20 : 58) + '" text-anchor="middle">a</text>';
+    } else {
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="68" y="118" text-anchor="middle">no a</text>';
+    }
+
+    if (mode !== "giant_v") {
+      html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="98" y="122" text-anchor="middle">x</text>' +
+        '<circle cx="114" cy="88" r="3" fill="var(--cx-muted)"/>' +
+        '<text class="cx-dia-lbl cx-dia-lbl--mute" x="114" y="80" text-anchor="middle">c</text>';
+    } else {
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="140" y="60" text-anchor="middle">giant cv fusion</text>';
+    }
+
+    html += '<circle cx="184" cy="' + (mode === "giant_v" ? 36 : 74) + '" r="3.5" fill="var(--cx-teach)"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="184" y="' + (mode === "giant_v" ? 30 : 64) + '" text-anchor="middle">v</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="234" y="' + (mode === "friedreich" ? 154 : 132) + '" text-anchor="middle">y' + (mode === "friedreich" ? " (steep)" : "") + '</text>' +
+      '<line class="cx-dia-axis" x1="20" y1="184" x2="320" y2="184" stroke="var(--cx-line)"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--faint" x="24" y="176">ECG (timing reference)</text>' +
+      '<path d="M20 184 L40 184 Q48 174 56 184 L104 184 L108 190 L112 156 L118 194 L122 184 L162 184 Q178 168 194 184 L310 184" fill="none" stroke="var(--cx-muted)" stroke-width="1.5"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--faint" x="48" y="196">P</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--faint" x="112" y="152">QRS (S1)</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--faint" x="178" y="196">T</text>' +
+      '</svg>' +
+      '<div class="cx-dia-toggle" style="flex-wrap:wrap">' +
+        btn("cx-dia-mode", "normal", "Normal", mode === "normal") +
+        btn("cx-dia-mode", "cannon", "Cannon 'a'", mode === "cannon") +
+        btn("cx-dia-mode", "absent_a", "AF (No 'a')", mode === "absent_a") +
+        btn("cx-dia-mode", "giant_v", "Giant 'v' (TR)", mode === "giant_v") +
+        btn("cx-dia-mode", "friedreich", "Friedreich 'y'", mode === "friedreich") +
+      '</div>' +
+      '<div class="cx-dia-note">' + noteText + '</div>';
+    return html;
+  }
+
+  /* ── 18. Dermatomes & deep tendon reflex landmarks ───────────────────────── */
+
+  var DERMATOMES = [
+    { id: "c5", cy: 68, cx: 80, label: "C5 Dermatome", root: "C5", landmark: "Lateral shoulder / deltoid", reflex: "Biceps reflex (C5, C6) — Musculocutaneous nerve", pearl: "Test pinprick over the lateral deltoid. Motor check: shoulder abduction (deltoid)." },
+    { id: "c6", cy: 96, cx: 70, label: "C6 Dermatome", root: "C6", landmark: "Lateral forearm, thumb and index finger", reflex: "Supinator / Brachioradialis reflex (C5, C6) — Radial nerve", pearl: "Sensory check on the volar tip of the thumb. Motor check: elbow flexion and wrist extension." },
+    { id: "c7", cy: 122, cx: 62, label: "C7 Dermatome", root: "C7", landmark: "Middle finger (dorsal and palmar)", reflex: "Triceps reflex (C7, C8) — Radial nerve", pearl: "Sensory check on the middle finger. Motor check: elbow extension and wrist flexion." },
+    { id: "c8", cy: 146, cx: 66, label: "C8 Dermatome", root: "C8", landmark: "Little finger, medial border of hand", reflex: "Finger flexors (C8, T1) — Median / Ulnar nerves", pearl: "Sensory check over hypothenar eminence. Motor check: finger flexion (grip strength)." },
+    { id: "t4", cy: 92, cx: 160, label: "T4 Sensory Level", root: "T4", landmark: "Nipple line (4th intercostal space)", reflex: "No peripheral tendon reflex (Cord level landmark)", pearl: "Crucial landmark for acute spinal cord lesions (e.g. transverse myelitis, epidural compression)." },
+    { id: "t10", cy: 136, cx: 160, label: "T10 Sensory Level", root: "T10", landmark: "Umbilicus", reflex: "Superficial abdominal reflex (T9-T11)", pearl: "Umbilical level. Visceral referred pain of acute appendicitis starts at T10 before somatic localization." },
+    { id: "l4", cy: 198, cx: 142, label: "L4 Dermatome", root: "L4", landmark: "Anterior knee, medial shin & malleolus", reflex: "Knee jerk / Patellar reflex (L3, L4) — Femoral nerve", pearl: "Sensory check over medial malleolus. Motor check: knee extension (quadriceps) and ankle dorsiflexion." },
+    { id: "l5", cy: 236, cx: 138, label: "L5 Dermatome", root: "L5", landmark: "Dorsum of foot, first webspace, great toe", reflex: "No distinct tendon reflex (Hamstrings medial L5/S1)", pearl: "Sensory check in webspace between great and 2nd toe. Motor check: great toe dorsiflexion (EHL) — look for foot drop!" },
+    { id: "s1", cy: 264, cx: 132, label: "S1 Dermatome", root: "S1", landmark: "Lateral border of foot, sole, Achilles", reflex: "Ankle jerk / Achilles reflex (S1, S2) — Tibial nerve", pearl: "Sensory check over lateral heel. Motor check: plantarflexion (gastrocnemius/soleus) and eversion." }
+  ];
+
+  function dermatomeMap(o) {
+    var sel = (o && o.selected) || null, html = "", i;
+    html += '<svg class="cx-dia cx-dia--dermatomes" viewBox="0 0 320 290" role="img" aria-label="Key dermatomes and deep tendon reflex landmarks">' +
+      '<path class="cx-dia-body" d="M160 14 C150 14 144 22 144 32 C144 42 150 48 156 50 L126 58 C108 62 82 72 74 88 L60 148 C56 160 64 164 70 156 L86 112 L96 112 L96 172 L116 172 L120 274 C122 284 136 284 138 274 L146 196 L174 196 L182 274 C184 284 198 284 200 274 L204 172 L224 172 L224 112 L234 112 L250 156 C256 164 264 160 260 148 L246 88 C238 72 212 62 194 58 L164 50 C170 48 176 42 176 32 C176 22 170 14 160 14 Z"/>' +
+      '<line x1="126" y1="92" x2="194" y2="92" stroke="var(--cx-line)" stroke-dasharray="2 2"/>' +
+      '<line x1="126" y1="136" x2="194" y2="136" stroke="var(--cx-line)" stroke-dasharray="2 2"/>';
+
+    for (i = 0; i < DERMATOMES.length; i++) {
+      var d = DERMATOMES[i], on = sel === d.id;
+      html += '<g class="cx-dia-zone' + (on ? " cx-dia-zone--on" : "") + '" data-act="cx-dia-zone" data-id="' + d.id + '" role="button" tabindex="0" aria-label="' + esc(d.label) + '">' +
+        '<circle cx="' + d.cx + '" cy="' + d.cy + '" r="12"/>' +
+        '<text x="' + d.cx + '" y="' + (d.cy + 4) + '" text-anchor="middle" font-size="9.5">' + esc(d.root) + '</text></g>';
+    }
+    html += "</svg>";
+    var chosen = null;
+    for (i = 0; i < DERMATOMES.length; i++) if (DERMATOMES[i].id === sel) chosen = DERMATOMES[i];
+    html += '<div class="cx-dia-note">' + (chosen
+      ? '<b>' + esc(chosen.label) + '</b> (' + esc(chosen.landmark) + ')<br>' +
+        '<b>Reflex Arc:</b> ' + esc(chosen.reflex) + '<br>' +
+        '<b>Clinical Pearl:</b> ' + esc(chosen.pearl)
+      : "Tap a spinal root landmark (C5-C8 upper limb, T4/T10 trunk milestones, L4-S1 lower limb) to inspect its sensory test point and corresponding deep tendon reflex arc.") + '</div>';
+    return html;
+  }
+
   /* ── registry ────────────────────────────────────────────────────────────── */
 
 
@@ -478,7 +638,10 @@
     "diagram.abdregions":    { title: "Nine regions of the abdomen", render: abdRegions, interactive: true },
     "diagram.liverpalp":     { title: "Liver palpation, preferred method", render: liverPalp },
     "diagram.spleenpalp":    { title: "Splenic enlargement, direction of spread", render: spleenPalp },
-    "diagram.stemi":         { title: "STEMI evolution on serial ECGs", render: stemiEvolution }
+    "diagram.stemi":         { title: "STEMI evolution on serial ECGs", render: stemiEvolution },
+    "diagram.precordium":    { title: "Precordium Auscultation & Radiation Map", render: precordiumMap, interactive: true, audio: true },
+    "diagram.jvp":           { title: "JVP Waveform & Pathologies", render: jvpWaveform, interactive: true },
+    "diagram.dermatomes":    { title: "Dermatome & Reflex Landmarks", render: dermatomeMap, interactive: true }
   };
 
   function has(id) { return Object.prototype.hasOwnProperty.call(DIAGRAMS, id); }
@@ -489,10 +652,11 @@
   function titleOf(id) { return has(id) ? DIAGRAMS[id].title : ""; }
   function soundFor(zoneId) {
     for (var i = 0; i < AUSC.length; i++) if (AUSC[i].id === zoneId) return AUSC[i].sound;
+    for (var j = 0; j < PRECORDIAL.length; j++) if (PRECORDIAL[j].id === zoneId) return PRECORDIAL[j].sound;
     return null;
   }
 
-  var API = { DIAGRAMS: DIAGRAMS, ZONES: ZONES, AUSC: AUSC, has: has, render: render, titleOf: titleOf, soundFor: soundFor };
+  var API = { DIAGRAMS: DIAGRAMS, ZONES: ZONES, AUSC: AUSC, PRECORDIAL: PRECORDIAL, DERMATOMES: DERMATOMES, has: has, render: render, titleOf: titleOf, soundFor: soundFor };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_CLINIX_DIAGRAMS = API;
 })();

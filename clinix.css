@@ -770,3 +770,78 @@ html.cx-lock .mc-overlay { z-index: 1300; }
 #clinixRoot .cx-input:focus {
   outline: none; border-color: var(--cx-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25);
 }
+
+/* ── Bedside Simulation Cockpit & Vitals Monitor ───────────────────────────── */
+
+#clinixRoot .cx-vitals-monitor {
+  display: flex; gap: 8px; overflow-x: auto; padding: 10px 14px;
+  background: var(--cx-surface-2); border-bottom: 1px solid var(--cx-line);
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+#clinixRoot .cx-vitals-monitor::-webkit-scrollbar { display: none; }
+
+#clinixRoot .cx-vital-pill {
+  flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;
+  padding: 6px 10px; background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r-ctl); min-width: 62px; text-align: center;
+}
+#clinixRoot .cx-vital-label { font-size: 10px; font-weight: 700; color: var(--cx-muted); letter-spacing: .04em; text-transform: uppercase; }
+#clinixRoot .cx-vital-val { font-size: 14px; font-weight: 700; color: var(--cx-ink); font-variant-numeric: tabular-nums; }
+#clinixRoot .cx-vital-val--alert { color: var(--cx-bad); }
+#clinixRoot .cx-vital-val--warn { color: var(--cx-warn); }
+
+#clinixRoot .cx-maneuver-bar {
+  display: flex; gap: 6px; overflow-x: auto; padding: 8px 14px;
+  background: var(--cx-surface); border-bottom: 1px solid var(--cx-line);
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+#clinixRoot .cx-maneuver-bar::-webkit-scrollbar { display: none; }
+#clinixRoot .cx-maneuver-btn {
+  flex: 0 0 auto; padding: 5px 11px; font-size: 11.5px; font-weight: 600;
+  border-radius: 14px; border: 1px solid var(--cx-line); background: var(--cx-surface-2);
+  color: var(--cx-muted); cursor: pointer; transition: all .15s ease;
+}
+#clinixRoot .cx-maneuver-btn--on {
+  background: var(--cx-primary); color: #fff; border-color: transparent;
+}
+
+#clinixRoot .cx-card-diag {
+  margin: 10px 0; padding: 12px 14px; background: var(--cx-surface);
+  border: 1px solid var(--cx-line); border-radius: var(--cx-r);
+}
+#clinixRoot .cx-card-diag-title {
+  display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--cx-ink); margin-bottom: 6px;
+}
+#clinixRoot .cx-card-diag-result { font-size: 13.5px; line-height: 1.5; color: var(--cx-ink); }
+#clinixRoot .cx-card-diag-note { margin-top: 6px; font-size: 12px; color: var(--cx-muted); line-height: 1.45; }
+
+/* ── Blind Examination & Synthesis Card ────────────────────────────────────── */
+
+#clinixRoot .cx-blind-banner {
+  display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+  background: var(--cx-teach-soft); border-bottom: 1px solid var(--cx-teach);
+  color: var(--cx-teach); font-size: 13px; font-weight: 600;
+}
+#clinixRoot .cx-synthesis-box {
+  margin: 14px 0; padding: 16px; background: var(--cx-surface);
+  border: 1px solid var(--cx-line); border-radius: var(--cx-r);
+}
+#clinixRoot .cx-synth-section { margin-bottom: 12px; }
+#clinixRoot .cx-synth-h { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--cx-muted); margin-bottom: 4px; }
+#clinixRoot .cx-synth-list { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.5; color: var(--cx-ink); }
+
+/* ── Physiology Sandbox ────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-physio-ctrl {
+  display: flex; flex-direction: column; gap: 4px; margin: 12px 0;
+}
+#clinixRoot .cx-physio-slider-row {
+  display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+}
+#clinixRoot .cx-physio-slider-val { font-weight: 700; color: var(--cx-primary); }
+#clinixRoot .cx-physio-range {
+  width: 100%; -webkit-appearance: none; height: 6px; border-radius: 3px; background: var(--cx-line); outline: none; margin: 6px 0;
+}
+#clinixRoot .cx-physio-range::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--cx-primary); cursor: pointer;
+}
