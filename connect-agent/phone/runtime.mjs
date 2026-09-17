@@ -451,23 +451,27 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
        * still go out, and answer as they did before, rather than nothing at all. */
     }
   }
-  for (const r of DETAIL_RESOURCES) {
+  /* THE THREE READS RUN TOGETHER. The hand-built adapter's getOpdProfile issues labs, radiology and
+   * medicines in parallel from its one session; the doctor waits for the slowest read, not the sum.
+   * Each resource is one task; the sections come back in the fixed DETAIL_RESOURCES order. */
+  async function readOne(r) {
+    const out = [];
     const v = views[r];
-    if (!v) continue;
+    if (!v) return out;
     /* NEVER A PAGE. A screen discovery could not prove is reported unreadable, never loaded and scraped:
      * reading GHIS pages for one patient sat on a two-link menu for 30 minutes on the owner's iPhone
      * (2026-09-15). The hand-built adapter never loads a page either. */
-    if (!provenView(v)) { sections.push({ resource: r, unreadable: 'not-proven' }); continue; }
+    if (!provenView(v)) { out.push({ resource: r, unreadable: 'not-proven' }); return out; }
     let replayed = null;
     const vo = viewOrigin(v, origin);
     try { replayed = await replayFirst({ plugin, origin: vo, view: afterActivation(v), patient, onRead }); } catch (e) {
       if (e && e.name === 'NotSignedIn') throw e;
-      if (e && e.name === 'UnscopedRequest') { sections.push({ resource: r, unreadable: 'not-scoped' }); continue; }
-      sections.push({ resource: r, error: String((e && e.message) || e) });
-      continue;
+      if (e && e.name === 'UnscopedRequest') { out.push({ resource: r, unreadable: 'not-scoped' }); return out; }
+      out.push({ resource: r, error: String((e && e.message) || e) });
+      return out;
     }
     if (replayed) {
-      sections.push(withRoles({ resource: r, rows: replayed, via: 'endpoint' }, v));
+      out.push(withRoles({ resource: r, rows: replayed, via: 'endpoint' }, v));
       /* THE CHAIN: a proven detail view (one lab result, one radiology report) is read for each row of
        * this list, its fields filled from that row (render id, result id). */
       const d = views[r + '-detail'];
@@ -507,13 +511,16 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
           }
           rowIndex++;
         }
-        if (detailRows.length) { sections.push(withRoles({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }, d)); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
+        if (detailRows.length) { out.push(withRoles({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }, d)); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
       }
-      continue;
+      return out;
     }
     // Proven, and this patient has none (no medicines charted): an empty answer, not a missing one.
-    sections.push(withRoles({ resource: r, rows: [], via: 'endpoint' }, v));
+    out.push(withRoles({ resource: r, rows: [], via: 'endpoint' }, v));
+    return out;
   }
+  const results = await Promise.all(DETAIL_RESOURCES.map(readOne));
+  for (const part of results) sections.push(...part);
   return sections;
 }
 

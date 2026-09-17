@@ -261,3 +261,32 @@ test('readPatientDetails posts every proven patient-level prerequisite once, bef
   assert.deepEqual(secs.find((s) => s.resource === 'labs').rows, [{ Test: 'Hb' }]);
   assert.deepEqual(secs.find((s) => s.resource === 'medications').rows, [{ Test: 'Hb' }]);
 });
+
+/* THE THREE READS RUN TOGETHER. The hand-built adapter's getOpdProfile issues labs, radiology and
+ * medicines in parallel from the one session; a doctor waits for the slowest, not the sum. */
+test('readPatientDetails issues the detail reads in parallel after the activation', async () => {
+  const { PAGE_TOKENS } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  const started = [];
+  let inFlight = 0, peak = 0;
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ tok: 'T' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      started.push(req.url.replace('https://h', ''));
+      inFlight++; peak = Math.max(peak, inFlight);
+      await new Promise((r) => setTimeout(r, 30));
+      inFlight--;
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[{"a":"1"}]' }) };
+    },
+  };
+  const data = (path) => ({ method: 'GET', path, role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } });
+  const view = (resourceHint, endpoints) => ({ resourceHint, pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['a'], proof: { status: 'proven' }, endpoints });
+  const replay = [view('labs', [data('/GetLabs?id')]), view('medications', [data('/GetMeds?id')]), view('radiology', [data('/GetRad?id')])];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  assert.equal(peak, 3, 'all three reads were in flight at once (peak ' + peak + '): ' + started.join(' | '));
+  assert.deepEqual(secs.map((s) => s.resource), ['medications', 'labs', 'radiology'], 'sections keep their fixed order');
+  assert.ok(secs.every((s) => s.rows.length === 1));
+});
