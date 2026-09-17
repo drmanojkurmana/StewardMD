@@ -4,6 +4,87 @@
   "gapMessage": "Staging for this cancer site is being added.",
   "sites": [
     {
+      "id": "bclc_hcc",
+      "name": "Liver (HCC) - BCLC 2022 Staging",
+      "system": "Clinical System / BCLC (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "liver",
+      "status": "scaffold",
+      "file": "bclc_hcc.json"
+    },
+    {
+      "id": "myeloma_riss",
+      "name": "Multiple Myeloma - R-ISS / R2-ISS Staging",
+      "system": "Clinical System / IMWG (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "myeloma",
+      "status": "scaffold",
+      "file": "myeloma_riss.json"
+    },
+    {
+      "id": "lymphoma_lugano",
+      "name": "Lymphoma - Lugano / Ann Arbor Staging",
+      "system": "Clinical System / Lugano (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "nhl",
+      "status": "scaffold",
+      "file": "lymphoma_lugano.json"
+    },
+    {
+      "id": "cll_rai_binet",
+      "name": "CLL - Rai & Binet Staging Systems",
+      "system": "Clinical System / iwCLL (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "nhl",
+      "status": "scaffold",
+      "file": "cll_rai_binet.json"
+    },
+    {
+      "id": "cervix_figo",
+      "name": "Cervix - FIGO 2018 Staging System",
+      "system": "Clinical System / FIGO (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "cervix",
+      "status": "scaffold",
+      "file": "cervix_figo.json"
+    },
+    {
+      "id": "endometrium_figo",
+      "name": "Endometrium - FIGO 2023 Molecular Staging",
+      "system": "Clinical System / FIGO (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "endometrium",
+      "status": "scaffold",
+      "file": "endometrium_figo.json"
+    },
+    {
+      "id": "prostate_nccn",
+      "name": "Prostate - NCCN Risk Stratification",
+      "system": "Clinical System / NCCN (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "prostate",
+      "status": "scaffold",
+      "file": "prostate_nccn.json"
+    },
+    {
+      "id": "gist_afip",
+      "name": "GIST - Modified NIH / AFIP Risk Criteria",
+      "system": "Clinical System / AFIP (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "gist",
+      "status": "scaffold",
+      "file": "gist_afip.json"
+    },
+    {
+      "id": "mds_ipssr",
+      "name": "MDS - IPSS-R Prognostic Staging",
+      "system": "Clinical System / IPSS-R (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "nhl",
+      "status": "scaffold",
+      "file": "mds_ipssr.json"
+    },
+    {
       "id": "bladder",
       "name": "Bladder (urothelial)",
       "system": "Oncology / Bladder (urothelial)",

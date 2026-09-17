@@ -1,0 +1,99 @@
+{
+  "site": "myeloma_riss",
+  "name": "Multiple Myeloma - R-ISS / R2-ISS Staging",
+  "system": "Oncology / Haematologic (Clinical)",
+  "versions": [
+    {
+      "version": "R-ISS & R2-ISS (IMWG)",
+      "seeded": true,
+      "provenance": "International Myeloma Working Group (IMWG) Revised International Staging System (R-ISS) and Second Revision (R2-ISS); licensed clinical reference.",
+      "introduction": "Multiple myeloma does NOT use anatomical TNM staging. Instead, the Revised International Staging System (R-ISS) and R2-ISS are the universal standards of care. They stratify patients by tumor burden (beta-2 microglobulin, albumin), disease biology/proliferation (serum LDH), and cytogenetic risk profiles determined by interphase FISH on CD138-purified plasma cells.",
+      "t": [
+        {
+          "code": "B2M <3.5 mg/L",
+          "label": "Serum beta-2 microglobulin < 3.5 mg/L (low tumor burden)"
+        },
+        {
+          "code": "B2M 3.5-5.4 mg/L",
+          "label": "Serum beta-2 microglobulin 3.5 to 5.4 mg/L (intermediate tumor burden)"
+        },
+        {
+          "code": "B2M >=5.5 mg/L",
+          "label": "Serum beta-2 microglobulin >= 5.5 mg/L (high tumor burden)"
+        }
+      ],
+      "n": [
+        {
+          "code": "Albumin >=3.5 g/dL",
+          "label": "Serum albumin >= 3.5 g/dL"
+        },
+        {
+          "code": "Albumin <3.5 g/dL",
+          "label": "Serum albumin < 3.5 g/dL (compromised hepatic synthetic function / IL-6 suppression)"
+        }
+      ],
+      "m": [
+        {
+          "code": "Standard Cytogenetics",
+          "label": "No high-risk cytogenetic abnormalities detected by iFISH; normal serum LDH"
+        },
+        {
+          "code": "High-Risk Cytogenetics",
+          "label": "Presence of del(17p) and/or translocation t(4;14) and/or t(14;16)"
+        },
+        {
+          "code": "High LDH",
+          "label": "Serum LDH above institutional upper limit of normal (>ULN)"
+        },
+        {
+          "code": "1q21 Gain/Amp",
+          "label": "Chromosome 1q21 copy number gain (3 copies) or amplification (>=4 copies) [R2-ISS criteria]"
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "R-ISS I",
+          "t": "B2M <3.5 mg/L",
+          "n": "Albumin >=3.5 g/dL",
+          "m": "Standard Cytogenetics & Normal LDH",
+          "basis": "ISS Stage I with standard-risk cytogenetics and normal LDH. 5-year OS ~82%, median PFS ~60 months."
+        },
+        {
+          "stage": "R-ISS II",
+          "t": "Not Stage I or III",
+          "n": "Any Albumin",
+          "m": "Intermediate / Mixed biology",
+          "basis": "Includes ISS Stage I with high-risk CA or high LDH, or ISS Stage II, or ISS Stage III with standard risk CA and normal LDH. 5-year OS ~62%, median PFS ~42 months."
+        },
+        {
+          "stage": "R-ISS III",
+          "t": "B2M >=5.5 mg/L",
+          "n": "Any Albumin",
+          "m": "High-Risk CA or High LDH",
+          "basis": "ISS Stage III (B2M >=5.5 mg/L) combined with high-risk cytogenetics [del(17p), t(4;14), t(14;16)] OR elevated LDH (>ULN). 5-year OS ~40%, median PFS ~24 months."
+        },
+        {
+          "stage": "R2-ISS IV (Double-Hit)",
+          "t": "B2M >=5.5 mg/L",
+          "n": "Any Albumin",
+          "m": "High-Risk CA + 1q21 Amp",
+          "basis": "R2-ISS high risk (score 1.5-2.5): co-occurrence of high-risk cytogenetics with 1q21 gain/amplification and elevated LDH. High unmet clinical need requiring quadruplet induction."
+        }
+      ],
+      "regionalNodes": "N/A for Multiple Myeloma. Assessment focuses on bone marrow plasma cell percentage and end-organ damage (CRAB criteria: Hypercalcemia, Renal insufficiency, Anemia, Bone lesions).",
+      "histologicGrade": "Plasma cell morphology (mature vs plasmablastic vs immature/pleomorphic).",
+      "histopathologicTypes": "Secretory myeloma (IgG, IgA, light chain only), non-secretory myeloma, plasma cell leukemia, smoldering multiple myeloma.",
+      "prognosticFactors": [
+        "High-risk cytogenetics by iFISH: del(17p), t(4;14), t(14;16), t(14;20), gain/amp(1q21)",
+        "Serum free light chain ratio (involved to uninvolved FLC >=100)",
+        "Bone marrow plasma cell percentage (>=60% defined as myeloma-defining event)",
+        "Circulating plasma cells (>=5% indicates aggressive plasma cell leukemia transition)",
+        "Renal function (eGFR and serum creatinine)"
+      ]
+    },
+    {
+      "version": "ISS 2005 (historical)",
+      "seeded": false
+    }
+  ]
+}

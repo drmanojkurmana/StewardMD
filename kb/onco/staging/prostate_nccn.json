@@ -1,0 +1,134 @@
+{
+  "site": "prostate_nccn",
+  "name": "Prostate - NCCN Risk Stratification",
+  "system": "Oncology / Prostate (Clinical)",
+  "versions": [
+    {
+      "version": "NCCN Risk Groups (2024)",
+      "seeded": true,
+      "provenance": "NCCN Clinical Practice Guidelines in Oncology: Prostate Cancer (Version 2024); licensed clinical reference.",
+      "introduction": "In localized prostate cancer, anatomical TNM staging alone is insufficient for clinical management. The NCCN Risk Stratification system is the universal standard that combines clinical T category, serum PSA, and biopsy Gleason Grade Group to guide therapy selection across active surveillance, surgery, definitive radiation, and androgen deprivation therapy (ADT).",
+      "t": [
+        {
+          "code": "cT1c-cT2a",
+          "label": "Non-palpable or palpable tumor involving <= half of one lobe"
+        },
+        {
+          "code": "cT2b-cT2c",
+          "label": "Palpable tumor involving > half of one lobe (T2b) or bilateral lobes (T2c)"
+        },
+        {
+          "code": "cT3a-cT3b",
+          "label": "Extraprostatic extension (T3a) or seminal vesicle invasion (T3b)"
+        },
+        {
+          "code": "cT4",
+          "label": "Tumor fixed or invades adjacent structures (bladder neck, external sphincter, rectum, levator)"
+        }
+      ],
+      "n": [
+        {
+          "code": "Grade Group 1",
+          "label": "Gleason score <= 6 (3+3)"
+        },
+        {
+          "code": "Grade Group 2-3",
+          "label": "Gleason score 7 (Grade Group 2: 3+4; Grade Group 3: 4+3)"
+        },
+        {
+          "code": "Grade Group 4-5",
+          "label": "Gleason score 8 (4+4) or Gleason 9-10 (4+5, 5+4, 5+5)"
+        }
+      ],
+      "m": [
+        {
+          "code": "PSA <10 ng/mL",
+          "label": "Serum PSA < 10 ng/mL"
+        },
+        {
+          "code": "PSA 10-20 ng/mL",
+          "label": "Serum PSA 10 to 20 ng/mL"
+        },
+        {
+          "code": "PSA >20 ng/mL",
+          "label": "Serum PSA > 20 ng/mL"
+        },
+        {
+          "code": "Metastatic (M1)",
+          "label": "Distant bone, visceral, or non-regional nodal metastases"
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "Very Low Risk",
+          "t": "cT1c, <3 positive cores",
+          "n": "Grade Group 1 (3+3)",
+          "m": "PSA <10 ng/mL & PSA density <0.15",
+          "basis": "Active Surveillance standard of care. Treatment deferred unless reclassification."
+        },
+        {
+          "stage": "Low Risk",
+          "t": "cT1-cT2a",
+          "n": "Grade Group 1 (3+3)",
+          "m": "PSA <10 ng/mL",
+          "basis": "Active Surveillance preferred. Alternatives: Radical prostatectomy or definitive EBRT/brachytherapy alone."
+        },
+        {
+          "stage": "Favorable Intermediate",
+          "t": "cT2a or PSA 10-20",
+          "n": "Grade Group 1-2 (<50% cores)",
+          "m": "PSA 10-20 or Grade Group 2",
+          "basis": "Radical prostatectomy OR EBRT alone / EBRT + brachytherapy boost. Short-course ADT usually omitted."
+        },
+        {
+          "stage": "Unfavorable Intermediate",
+          "t": "cT2b-cT2c",
+          "n": "Grade Group 3 (4+3) or >=2 int factors",
+          "m": "PSA 10-20 or >=50% positive cores",
+          "basis": "EBRT + 4 to 6 months ADT OR Radical prostatectomy + pelvic lymph node dissection (PLND)."
+        },
+        {
+          "stage": "High Risk",
+          "t": "cT3a OR Grade Group 4-5 OR PSA >20",
+          "n": "Grade Group 4-5",
+          "m": "PSA >20 ng/mL",
+          "basis": "EBRT + 18 to 24 months ADT (+/- abiraterone) OR Radical prostatectomy + extended PLND by high-volume surgeon."
+        },
+        {
+          "stage": "Very High Risk",
+          "t": "cT3b-cT4 or >4 cores GG4-5",
+          "n": "Grade Group 4-5",
+          "m": "PSA >20 ng/mL",
+          "basis": "EBRT + 2 years ADT + 2 years Abiraterone (STAMPEDE protocol) OR Radical prostatectomy + extended PLND in selected patients."
+        },
+        {
+          "stage": "Regional N1",
+          "t": "Any cT",
+          "n": "Pelvic node metastasis",
+          "m": "M0",
+          "basis": "EBRT to prostate and pelvic lymph nodes + 2 years ADT + Abiraterone."
+        },
+        {
+          "stage": "Metastatic M1",
+          "t": "Any cT",
+          "n": "Any N",
+          "m": "Metastatic (M1)",
+          "basis": "Systemic therapy: ADT + ARPI (Enzalutamide, Apalutamide, Abiraterone) +/- Docetaxel triplet (PEACE-1 / ARASENS)."
+        }
+      ],
+      "regionalNodes": "Pelvic lymph nodes below the bifurcation of the common iliac arteries: obturator, internal iliac, external iliac, presacral.",
+      "histologicGrade": "Grade Group 1 (Gleason <=6), Grade Group 2 (Gleason 3+4=7), Grade Group 3 (Gleason 4+3=7), Grade Group 4 (Gleason 8), Grade Group 5 (Gleason 9-10).",
+      "histopathologicTypes": "Acinar adenocarcinoma (95%), ductal adenocarcinoma, neuroendocrine / small cell prostate cancer.",
+      "prognosticFactors": [
+        "Pre-treatment serum PSA and PSA doubling time (PSADT)",
+        "Gleason Grade Group (primary vs secondary pattern, presence of cribriform or intraductal carcinoma)",
+        "Genomic classifier score (Decipher, Oncotype DX, Prolaris)",
+        "Germline and somatic homologous recombination repair (HRR) gene mutations (BRCA1, BRCA2, ATM for PARP inhibitor eligibility)"
+      ]
+    },
+    {
+      "version": "D Amico Risk 1998 (historical)",
+      "seeded": false
+    }
+  ]
+}
