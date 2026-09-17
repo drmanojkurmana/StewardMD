@@ -247,6 +247,16 @@ test("negative authorization on every education route: no session 401, wrong rol
   assert.equal((await RECORD.latest(T, "EducationAttachment", "wsq-edu-given-" + a.encounterId.replace(/[^A-Za-z0-9_-]/g, "-"))).items[0].detached, null);
 });
 
+test("a leaflet and a given leaflet are human-originated: an AI actor cannot write either, even on a clinician's scope", async () => {
+  const { makeActor, KIND, TIER, authoriseWrite } = await import("../wardsynq/wardsynq-actors.js");
+  const ai = makeActor({ id: "ai:maik", kind: KIND.AI, tier: TIER.DRAFT, scope: { read: null, write: null } });
+  for (const resourceType of ["EducationLeaflet", "EducationAttachment"]) {
+    const r = authoriseWrite(ai, { resourceType, id: "x", state: "draft" });
+    assert.equal(r.allowed, false, resourceType);
+    assert.ok(r.reasons.some((x) => x.code === "HUMAN_ONLY"), resourceType);
+  }
+});
+
 test("PURE: a leaflet needs a title, a language code and text; the portal copy never carries a taken-back leaflet", async () => {
   const E = await import("../functions/_wardsynq/patient-education.js");
   assert.equal(E.leafletFields({ title: "t", language: "Hindi", body: "b" }).refuse.error, "invalid_leaflet");

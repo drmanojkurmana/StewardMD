@@ -7685,3 +7685,23 @@ of compliance.js is untouched.
 - Unified in-basket is a screen (pages/inbasket.js) over the existing routes (patient-messages, referral-inbox,
   cosign-queue, safety-inbox), each shown loading, failed, not for this role, or its items with age and owner. No new
   aggregation route. No NABH KPI entry is owned by this package; compliance.js untouched.
+## 2026-09-17 Staff messages to named people; patient education leaflets (branch messaging-people-and-education, R2-3)
+- B9. `toPeople` on staff-message-send alongside `toRoles`. Each named identity must be an active member of THIS hospital
+  (ORG.listMembers of the route's org, so another hospital's member is "not_member") whose role holds emr.view and whose
+  grant reads StaffMessage, and Patient for a patient thread; otherwise 422 people_refused naming each refused person,
+  nothing written. Stored as {identity, label}; replies inherit. Picker: GET /ward/staff-message-people, label and role only.
+  A thread addressed ONLY to named people is listed, opened, replied to, marked read and escalated only by its sender and
+  the named people (403 not_addressed otherwise); the record itself is unchanged in the store. With a role address too,
+  role visibility applies as before. Push goes to named people and role members who have not read; payload unchanged.
+- B12. patient-education.js. `EducationLeaflet` (no patient): title, language code, body, tags, state draft/approved/
+  retired, versions. Approval needs expectedVersion (the version read) and an approver who wrote none of the current
+  draft (`draftedBy`); editing an approved leaflet makes it a draft again. `EducationAttachment` (one per stay, patient
+  compartment): giving accepts only an approved leaflet at the version shown and COPIES that version's words, approver
+  and time, so a later edit or retirement never changes what the patient was given; taking back is a new version with a
+  reason. Both types HUMAN_ORIGINATED. Author, approve, retire, give, take back: emr.treat; read: emr.view.
+- DEVIATIONS from the audit brief: the library screen is a card on the Patient portal page (portal-access.js), not a new
+  page; giving and printing are on the discharge summary screen (discharge.js, which owns that print), through its own
+  GET education-attachments, so migrate-discharge.js and ward.js are untouched. The portal shows given leaflets in a new
+  grant section "education" without a PatientRecordRelease: the clinician's act of giving an approved hospital leaflet is
+  the handover (a discharge summary is the clinician's clinical document and keeps its release rule). No retention class
+  added. No leaflet content shipped (owner item O6).
