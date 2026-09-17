@@ -304,7 +304,8 @@ async function checkMasterBed(env, orgId, wardName, bedName, patientSex, relaxed
 async function bedOverrideActive(svc, wanted) {
   if (!wanted) return null;
   let rows;
-  try { rows = await svc.list("EmergencyActivation", 50); } catch { return null; }
+  // Every activation (the old read was the oldest 50, so a new declaration was never seen); a failed read is no override.
+  try { rows = (await svc.listAll("EmergencyActivation", { max: 50000, throwOnTruncate: true })).rows; } catch { return null; }
   const nowMs = Date.now();
   const matches = (rows || []).filter((a) => a && emergencyIsActive(a, nowMs) && (a.relaxations || []).includes(EMERGENCY_BED_RELAXATION));
   matches.sort((a, b) => String(b.declaredAt || "").localeCompare(String(a.declaredAt || "")));

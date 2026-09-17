@@ -92,7 +92,11 @@ const NOT_BUILT = Object.freeze({
 
 /* ---- P1.13 command-center helpers. PURE, exported for tests. -------------------------------------- */
 
+/* R4-2: a live section reads the NEWEST LIST_CAP records of a type ({ newest: true }), not the oldest: a snapshot of "now"
+ * (outstanding specimens, doses in 12 hours, the last 7 days of results) lives in the newest records, and the oldest-first
+ * read stopped seeing today once a hospital passed the cap. Past the cap the section still says capped. */
 const LIST_CAP = 1000;
+const NEWEST = { newest: true };
 const HOUR = 3600000;
 
 /** PURE. Nearest-rank percentile of a numeric list; null for an empty list, never 0. */
@@ -258,7 +262,7 @@ async function buildTwinSnapshot(request, env, ctx) {
       repository: c.recordDeps.repository, pseudonym: c.recordDeps.pseudonym,
       tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source,
     });
-    const rows = await svc.list("SpecimenCollection", 1000);
+    const rows = await svc.list("SpecimenCollection", LIST_CAP, NEWEST);
     const outstanding = (rows || []).filter(Boolean).filter(isOutstanding);
     return { ok: true, generatedAt: new Date().toISOString(), outstanding: outstanding.length, checked: (rows || []).length,
       drill: { outstanding: drillList(outstanding.map((x) => ({ patientId: x.patientId, encounterId: x.encounterId }))) } };
@@ -309,7 +313,7 @@ async function buildTwinSnapshot(request, env, ctx) {
     const encounters = (await svc.listByStatus("Encounter", [OPEN])) || [];
     const open = encounters.filter((x) => x && x.class === "ICU" && x.status === OPEN);
     const ids = new Set(open.map((x) => x.id));
-    const [icuRecords, orders] = await Promise.all([svc.list("IcuRecord", LIST_CAP), svc.list("MedicationOrder", LIST_CAP)]);
+    const [icuRecords, orders] = await Promise.all([svc.list("IcuRecord", LIST_CAP, NEWEST), svc.list("MedicationOrder", LIST_CAP, NEWEST)]);
     const ventIds = new Set((icuRecords || []).filter((r) => r && r.kind === "ventilator" && ids.has(r.encounterId) && nowMs - Date.parse(r.at || "") <= 12 * HOUR).map((r) => r.encounterId));
     const pressorIds = new Set((orders || []).filter((o) => o && o.status === "active" && ids.has(o.encounterId) && isVasoactive(o.drug || o.display || o.code)).map((o) => o.encounterId));
     const rowsOf = (set) => open.filter((x) => set.has(x.id)).map((x) => ({ patientId: x.patientId, encounterId: x.id, ward: x.location && x.location.ward, bed: x.location && x.location.bed }));
@@ -347,7 +351,7 @@ async function buildTwinSnapshot(request, env, ctx) {
   /* Lab TAT and the radiology backlog share one read of requests and reports. */
   const diagRead = (async () => {
     const svc = await openSvc(request, env, ctx);
-    const [requests, reports] = await Promise.all([svc.list("ServiceRequest", LIST_CAP), svc.list("DiagnosticReport", LIST_CAP)]);
+    const [requests, reports] = await Promise.all([svc.list("ServiceRequest", LIST_CAP, NEWEST), svc.list("DiagnosticReport", LIST_CAP, NEWEST)]);
     return { requests: requests || [], reports: reports || [] };
   })();
   diagRead.catch(() => {});
@@ -515,7 +519,7 @@ async function operationalHealthReport(request, env, ctx) {
    * near-misses this file did not invent a category for; they were always on the record. */
   let ai = { status: "unavailable", error: null };
   try {
-    const interactions = (await svc.list("MaiKInteraction", 1000)) || [];
+    const interactions = (await svc.list("MaiKInteraction", LIST_CAP, NEWEST)) || [];
     const withheld = interactions.filter((i) => i && i.security && i.security.released === false).length;
     const injectionSignals = interactions.reduce((n, i) => n + ((i && i.security && i.security.injectionFindings) || []).length, 0);
     ai = { status: "ok", interactionsSampled: interactions.length, withheldRate: rate(withheld, interactions.length), injectionSignalsObserved: injectionSignals };
@@ -527,8 +531,8 @@ async function operationalHealthReport(request, env, ctx) {
   let notifications = { status: "unavailable", error: null };
   try {
     const [grants, loops] = await Promise.all([
-      svc.list("BreakGlassGrant", 500).catch(() => []),
-      svc.list("CriticalResultLoop", 500).catch(() => []),
+      svc.list("BreakGlassGrant", 500, NEWEST).catch(() => []),
+      svc.list("CriticalResultLoop", 500, NEWEST).catch(() => []),
     ]);
     const attempts = [...grants, ...loops].filter((r) => r && r.notification && r.notification.attempted);
     const delivered = attempts.filter((r) => r.notification.delivered === true).length;
@@ -550,7 +554,7 @@ async function operationalHealthReport(request, env, ctx) {
    * backup meets its objective AND a successful restore test is recorded; never inferred. */
   let dataProtectionStatus = { status: "unavailable", error: null };
   try {
-    const [runs, tests] = await Promise.all([svc.list(BACKUP_RUN_TYPE, 50), svc.list(RESTORE_TYPE, 200)]);
+    const [runs, tests] = await Promise.all([svc.list(BACKUP_RUN_TYPE, 50, NEWEST), svc.list(RESTORE_TYPE, 200, NEWEST)]);
     dataProtectionStatus = dataProtection(runs, tests, ctx.rpoMinutes, new Date().toISOString());
   } catch (e) { dataProtectionStatus = { status: "unavailable", error: str(e && e.message) }; }
 

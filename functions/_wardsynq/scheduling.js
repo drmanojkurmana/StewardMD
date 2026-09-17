@@ -183,8 +183,11 @@ async function bookAppointment(request, env, ctx) {
   const id = appointmentIdFor(clinicianId, startAt, patientId);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
+  /* R4-2: every appointment/booking and blackout (service.listAll, paged). The old reads were the OLDEST 500, so a clash
+   * with a newer booking or leave was not seen. Past 50,000 the read throws and nothing is booked (502 with the reason).
+   * ponytail: a by-clinician or by-resource index is the upgrade; audit O20 for the paging cost. */
   let all, blackouts;
-  try { [all, blackouts] = await Promise.all([svc.list(TYPE, 500), svc.list("Blackout", 500).catch(() => [])]); }
+  try { [all, blackouts] = await Promise.all([svc.listAll(TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows), svc.listAll("Blackout", { max: 50000, throwOnTruncate: true }).then((g) => g.rows, (e) => { if (e && e.name === "ListCeilingError") throw e; return []; })]); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
   const candidate = { startAt, minutes };
@@ -361,8 +364,9 @@ async function listSchedule(request, env, ctx) {
   let appts, recalls;
   try {
     [appts, recalls] = await Promise.all([
-      patientId ? svc.byPatient(TYPE, patientId) : svc.list(TYPE, 500),
-      (patientId ? svc.byPatient(RECALL_TYPE, patientId) : svc.list(RECALL_TYPE, 500)).catch(() => []),
+      // Hospital-wide: every appointment and recall (listAll; the old read was the oldest 500).
+      patientId ? svc.byPatient(TYPE, patientId) : svc.listAll(TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows),
+      (patientId ? svc.byPatient(RECALL_TYPE, patientId) : svc.listAll(RECALL_TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows)).catch((e) => { if (e && e.name === "ListCeilingError") throw e; return []; }),
     ]);
   } catch (e) {
     /* A SCOPE REFUSAL IS A 403, NOT A SERVER ERROR. A role can hold queue.view (which opens this

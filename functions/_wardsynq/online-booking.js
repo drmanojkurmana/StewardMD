@@ -88,7 +88,10 @@ const holdId = (clinicianId, startAt) => `hold-${slug(clinicianId)}-${slug(start
 
 async function diary(ctx, session) {
   const svc = svcFor(ctx, session);
-  const [appointments, blackouts] = await Promise.all([svc.list(APPT, 1000), svc.list("Blackout", 500).catch(() => [])]);
+  /* R4-2: every appointment/booking and blackout (service.listAll, paged). The old reads were the OLDEST 500, so a clash
+   * with a newer booking or leave was not seen. Past 50,000 the read throws and nothing is booked (502 with the reason).
+   * ponytail: a by-clinician or by-resource index is the upgrade; audit O20 for the paging cost. */
+  const [appointments, blackouts] = await Promise.all([svc.listAll(APPT, { max: 50000, throwOnTruncate: true }).then((g) => g.rows), svc.listAll("Blackout", { max: 50000, throwOnTruncate: true }).then((g) => g.rows, (e) => { if (e && e.name === "ListCeilingError") throw e; return []; })]);
   return { svc, appointments: (appointments || []).filter(Boolean), blackouts: blackouts || [] };
 }
 

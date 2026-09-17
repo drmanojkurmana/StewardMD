@@ -218,7 +218,7 @@ async function emergencyStatus(request, env, ctx) {
   if (error) return { ...base, ...error, active: [], any: false };
 
   let rows;
-  try { rows = await svc.list(TYPE, 200); }
+  try { rows = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; } // every activation (the old read was the oldest 200)
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), active: [], any: false }; }
 
   const nowMs = Date.now();
@@ -241,7 +241,7 @@ async function emergencyLog(request, env, ctx) {
   if (error) return { ...base, ...error, activations: [] };
 
   let rows;
-  try { rows = await svc.list(TYPE, 200); }
+  try { rows = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; } // every activation (the old read was the oldest 200)
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), activations: [] }; }
 
   const nowMs = Date.now();
