@@ -100,7 +100,7 @@ import {
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary, readDischargeChecklist } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
-import { marSchedule } from "../../_wardsynq/mar-schedule.js";
+import { marSchedule, zoneOffsetAt } from "../../_wardsynq/mar-schedule.js";
 import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
 import { bufferReadAudits } from "../../_wardsynq/repository.js";
 import { membersForIds, staffIdentity, idsParam } from "../../_wardsynq/staff-identity.js";
@@ -6195,7 +6195,14 @@ export async function onRequest(context) {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.ANALYTICS_VIEW);
       const analytics = await Q.analytics(env, s);
-      try { const rev = await BILL.revenueToday(env, s.orgId || s.hospitalId); if (rev) Object.assign(analytics, rev); } catch (e) {}   // clinic revenue dashboard: today's paid total (null when billing off)
+      /* Clinic revenue dashboard: today's paid total on the hospital's clock (null when billing off). A read that fails
+       * says so on the tile (revenueUnread) instead of the tile quietly disappearing. */
+      try {
+        const rOrg = BILL.billingEnabled(env) ? await ORG.getOrg(env, s.orgId || s.hospitalId) : null, rc = (rOrg && rOrg.wardsynq) || {};
+        const tzOff = rc.timeZone ? zoneOffsetAt(rc.timeZone, Date.now()) : null;
+        const rev = await BILL.revenueToday(env, s.orgId || s.hospitalId, Number.isFinite(tzOff) ? tzOff : Number.isFinite(rc.utcOffsetMinutes) ? rc.utcOffsetMinutes : undefined);
+        if (rev) Object.assign(analytics, rev);
+      } catch (e) { analytics.revenueUnread = true; }
       return json({ ok: true, analytics: analytics }, 200, request);
     }
 

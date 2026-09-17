@@ -18,6 +18,21 @@ let failOnCall = 0;     // 1-based call number that answers 500
 const enc = (v) => (typeof v === "number" ? { integerValue: String(v) } : typeof v === "boolean" ? { booleanValue: v } : { stringValue: String(v) });
 const dec = (v) => ("integerValue" in v ? Number(v.integerValue) : "booleanValue" in v ? v.booleanValue : v.stringValue);
 globalThis.fetch = async (url, init) => {
+  // Documents by path and a commit of updates: enough for payInvoice's own write (R4-3 paidUtcDay).
+  if (String(url).endsWith(":commit")) {
+    for (const w of JSON.parse(init.body).writes) {
+      const [coll, id] = w.update.name.split("/documents/")[1].split("/");
+      let d = docs.find((x) => x.coll === coll && x.id === id);
+      if (!d) docs.push(d = { coll, id, fields: {} });
+      Object.entries(w.update.fields).forEach(([k, v]) => { d.fields[k] = dec(v); });
+    }
+    return new Response("{}", { status: 200 });
+  }
+  if (!init || !init.method) {
+    const [coll, id] = String(url).split("/documents/")[1].split("/"), d = docs.find((x) => x.coll === coll && x.id === id);
+    if (!d) return new Response("", { status: 404 });
+    return new Response(JSON.stringify({ name: ROOT + coll + "/" + id, fields: Object.fromEntries(Object.entries(d.fields).map(([k, v]) => [k, enc(v)])) }), { status: 200 });
+  }
   assert.match(String(url), /:runQuery$/);
   const q = JSON.parse(init.body).structuredQuery;
   calls.push(q);
@@ -97,4 +112,55 @@ test("a patient's unbilled orders past 200 are all billed", async () => {
   for (let i = 0; i < 450; i++) docs.push({ coll: "q_orders", id: "c" + pad(i), fields: { orgId: "o1", patientId: "P1", status: i < 400 ? "paid" : "ordered", kind: "service" } });
   const list = await BILL.ordersForPatient({}, "o1", "P1", "ordered");
   assert.equal(list.length, 50);
+});
+
+/* R4-3 revenueToday: every invoice paid on the hospital's day, on its clock. */
+const ON = { CLINIC_BILLING_ENABLED: "1" };
+const DAY = 86400000;
+const localDayStart = (offMin) => { const now = Date.now(), off = offMin * 60000; return now - ((((now + off) % DAY) + DAY) % DAY); };
+const utcDay = (ms) => new Date(ms).toISOString().slice(0, 10);
+const paid = (id, orgId, paidAt, total) => ({ coll: "q_invoices", id, fields: { orgId, status: "paid", paidAt, paidUtcDay: utcDay(paidAt), total } });
+
+test("1,500 invoices with 2 paid today: revenue sums the 2 (it read the first 1,000 of the org and filtered)", async () => {
+  reset();
+  const start = localDayStart(330);
+  for (let i = 0; i < 1498; i++) docs.push(paid("inv" + pad(i), "o1", start - DAY + 1000 + i, 10000));    // yesterday
+  docs.push(paid("invzz1", "o1", start + 1, 25000));
+  docs.push(paid("invzz2", "o1", start + 2, 5000));
+  docs.push(paid("invzz3", "o2", start + 1, 99900));                                                     // other hospital
+  docs.push({ coll: "q_invoices", id: "invzz4", fields: { orgId: "o1", status: "open", paidAt: 0, total: 70000 } });
+  const r = await BILL.revenueToday(ON, "o1", 330);
+  assert.deepEqual(r, { revenueToday: 300, invoicesPaidToday: 2 });
+  for (const q of calls) assert.ok(q.where.compositeFilter, "asked by orgId AND paidUtcDay, not the org's whole history");
+});
+
+test("the day is the hospital's clock: a US offset and IST draw the line at different instants; none set is IST", async () => {
+  for (const off of [330, -300]) {
+    reset();
+    const start = localDayStart(off);
+    docs.push(paid("a", "o1", start - 1, 10000));        // one millisecond before local midnight
+    docs.push(paid("b", "o1", start, 20000));            // local midnight
+    assert.deepEqual(await BILL.revenueToday(ON, "o1", off), { revenueToday: 200, invoicesPaidToday: 1 }, "offset " + off);
+  }
+  reset();
+  docs.push(paid("c", "o1", localDayStart(330) - 1, 10000));
+  docs.push(paid("d", "o1", localDayStart(330), 10000));
+  assert.equal((await BILL.revenueToday(ON, "o1")).invoicesPaidToday, 1);
+});
+
+test("an invoice paid through payInvoice carries paidUtcDay and counts today", async () => {
+  reset();
+  docs.push({ coll: "q_invoices", id: "invP", fields: { orgId: "o1", patientId: "P1", status: "open", paidAt: 0, total: 0, lines: "[]" } });
+  assert.equal((await BILL.payInvoice(ON, "o1", "invP", "cash", "u1")).ok, true);
+  const d = docs.find((x) => x.id === "invP");
+  assert.equal(d.fields.paidUtcDay, utcDay(d.fields.paidAt));
+  assert.equal((await BILL.revenueToday(ON, "o1", 330)).invoicesPaidToday, 1);
+});
+
+test("a revenue page that fails is an error, not a short total; billing off is null", async () => {
+  reset();
+  for (let i = 0; i < 700; i++) docs.push(paid("inv" + pad(i), "o1", localDayStart(0) + i, 100));
+  failOnCall = 2;
+  await assert.rejects(() => BILL.revenueToday(ON, "o1", 0), /fs_query_failed/);
+  assert.equal(await BILL.revenueToday({}, "o1", 0), null);
 });

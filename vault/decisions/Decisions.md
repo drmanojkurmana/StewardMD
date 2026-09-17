@@ -7922,3 +7922,23 @@ of compliance.js is untouched.
   Nothing leaves WardSynQ.
 - Not built: offering forms for a booked appointment (the brief's optional hospital setting); no setting exists, so it
   behaves as off. Staff form-submit still accepts a patient-audience form as a staff-completed response.
+
+## 2026-09-17 Shared Firestore stores read every page with a ceiling (branch shared-store-caps, R4-3)
+
+- `readAll` moved from `_clinic_billing_store.js` to `functions/_fs_read_all.js` (re-exported by billing), plus
+  `readAllOrThrow` (507 past the ceiling). A new module rather than an import of billing: billing imports the queue
+  engine, and the org, queue and accounts stores need the helper too.
+- Read whole, throwing past the ceiling (never a partial list): beds (10,000), wards, rooms, departments (5,000 each,
+  also the queue engine's token department read), queue tickets per session, ABDM share tickets, staff mappings,
+  sessions (5,000), a patient's tickets for the ABDM link OTP mobile, chart of accounts (5,000).
+- `listSessions` asks by hospitalId AND date (it read the hospital's first 200 sessions ever and filtered by day).
+- Events timeline: verified that `q_events` rows carry no session field (`_q_audit_chain.js eventFields`: ts,
+  hospitalId, ticketId, actor, action, meta). Asked per ticket by hospitalId AND ticketId, 10 queries at a time. Not
+  adding a session field: the chain row's field list is hashed and fixed.
+- `revenueToday`: DEVIATION from the brief's "query paid invoices by orgId+status". Paid invoices grow forever, so that
+  query would reach any ceiling and fail for good. `payInvoice` now stores `paidUtcDay`; the hospital's local day
+  touches at most two UTC dates, each asked by orgId AND paidUtcDay, bounded by paidAt. Clock: `wardsynq.timeZone`
+  (offset at now), else `utcOffsetMinutes`, else IST. Invoices paid before this deploy have no `paidUtcDay`, so only
+  the deploy day's total can be short. A failed read shows "Could not be read" on the doctor app's Revenue today tile
+  (queue.js is the untranslated StewardMD OPD app, not a WardSynQ screen) instead of the tile vanishing.
+- Not changed: accounts `entriesFor` (SCAN 2,000 per period, already flags `partial`), StewardMD followcare and PG log.

@@ -1,7 +1,8 @@
 // Clinic BILLING - Firestore/PHI I/O (the impure half; pure logic is in _clinic_billing.js).
 // Collections: q_patients (registry, PHI-encrypted), q_orders, q_tariff, q_invoices, q_patient_seq.
 // Not node-testable (needs Firestore) - verify on-device. Additive + gated by CLINIC_BILLING_ENABLED.
-import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsGet, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { PAGE_SIZE, readAll } from "./_fs_read_all.js";
 import { encPHI, decPHI } from "./_queue.js";
 import { qAudit, getSession, getTicket } from "./_queue_engine.js";
 import { appendTimeline } from "./_queue_timeline.js";
@@ -76,24 +77,11 @@ export async function createOrder(env, orgId, o, actor) {
   await qAudit(env, { hospitalId: orgId, ticketId: v.order.patientId, actor: actor || "doctor", action: "order_create", meta: v.order.kind });
   return { ok: true, id };
 }
-/* EVERY matching row, in pages ordered by document name. A single query used to be read as the whole answer (500
- * orders of the org, 500 Price list rows), so past that size new work vanished from a station and priced items billed
- * as "no price set". maxRows is the hard bound: past it the answer carries truncated:true and the caller decides
- * whether a partial answer can be shown (a station queue, flagged on screen) or must fail (the Price list). */
-export const PAGE_SIZE = 500;
+/* EVERY matching row (readAll, functions/_fs_read_all.js). Past maxRows the answer carries truncated:true and the caller
+ * decides whether a partial answer can be shown (a station queue, flagged on screen) or must fail (the Price list). */
+export { PAGE_SIZE, readAll };
 export const QUEUE_CAP = 5000;
 export const TARIFF_CAP = 20000;
-export async function readAll(env, collectionId, where, maxRows) {
-  const rows = [];
-  let after = null;
-  for (;;) {
-    const page = (await fsQuery(env, collectionId, { where, limit: PAGE_SIZE, orderByName: true, ...(after ? { startAfter: after } : {}) })) || [];
-    rows.push(...page);
-    if (rows.length > maxRows) return { rows: rows.slice(0, maxRows), truncated: true };
-    if (page.length < PAGE_SIZE) return { rows, truncated: false };
-    after = page[page.length - 1].name;
-  }
-}
 const asOrders = (rows) => rows.map((r) => Object.assign({ id: r.id }, r.fields));
 
 export async function ordersForPatient(env, orgId, patientId, status) {
@@ -179,7 +167,8 @@ export async function payInvoice(env, orgId, invoiceId, method, actor) {
   if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
   if (d.fields.status === "paid") return { ok: true, already: true };
   const lines = JSON.parse(d.fields.lines || "[]");
-  const writes = [wUpdate(env, "q_invoices/" + invoiceId, { status: "paid", paidMethod: method || "cash", paidAt: Date.now() })];
+  const paidAt = Date.now();
+  const writes = [wUpdate(env, "q_invoices/" + invoiceId, { status: "paid", paidMethod: method || "cash", paidAt, paidUtcDay: utcDay(paidAt) })];
   lines.forEach((l) => { if (l.orderId) writes.push(wUpdate(env, "q_orders/" + l.orderId, { status: "paid", updatedAt: Date.now() })); });
   await fsCommit(env, writes);
   await qAudit(env, { hospitalId: orgId, ticketId: d.fields.patientId, actor: actor || "cashier", action: "invoice_pay", meta: method || "cash" });
@@ -207,14 +196,26 @@ export async function getInvoice(env, orgId, invoiceId) {
   if (!d || !d.fields || d.fields.orgId !== orgId) return null;
   return Object.assign({ id: invoiceId }, d.fields, { lines: JSON.parse(d.fields.lines || "[]") });
 }
-// Paid revenue for TODAY (IST) across the org, in rupees + the count of invoices paid today. Returns null
-// when billing is off, so the analytics dashboard simply hides the tile. fsQuery is single-field (orgId),
-// so status/date are filtered in JS. IST day boundary (UTC+5:30) matches the clinic's calendar day.
-export async function revenueToday(env, orgId) {
+/* Paid revenue for the hospital's TODAY across the org, in rupees + the count of invoices paid today. Returns null when
+ * billing is off, so the analytics dashboard simply hides the tile. offsetMinutes is the hospital's clock (the caller
+ * resolves wardsynq.timeZone / utcOffsetMinutes); IST (330) only when the hospital set none.
+ * It used to read the org's first 1,000 invoices ever and filter in JS, so from invoice 1,001 on today's takings read
+ * as zero. Paid invoices carry paidUtcDay (the UTC date of paidAt): the local day touches at most two UTC dates, each
+ * asked for by orgId AND paidUtcDay (equality only, no composite index), every page read, paidAt then bounds the day.
+ * Past REVENUE_CAP invoices paid in one UTC day it throws rather than show a short total. Invoices paid before
+ * paidUtcDay existed have none and are not counted: only the deploy day itself can be short. */
+export const REVENUE_CAP = 20000;
+const utcDay = (ms) => new Date(ms).toISOString().slice(0, 10);
+export async function revenueToday(env, orgId, offsetMinutes) {
   if (!billingEnabled(env) || !orgId) return null;
-  const rows = await fsQuery(env, "q_invoices", { where: { field: "orgId", value: orgId }, limit: 1000 });
-  const now = Date.now(), dayStart = now - ((now + 19800000) % 86400000);
+  const off = (Number.isFinite(offsetMinutes) ? offsetMinutes : 330) * 60000;
+  const now = Date.now(), dayStart = now - ((((now + off) % 86400000) + 86400000) % 86400000), dayEnd = dayStart + 86400000;
+  const days = [...new Set([utcDay(dayStart), utcDay(dayEnd - 1)])];
   let paise = 0, count = 0;
-  (rows || []).forEach((r) => { const f = r.fields || {}; if (f.status === "paid" && (f.paidAt || 0) >= dayStart) { paise += (f.total || 0); count++; } });
+  for (const day of days) {
+    const { rows, truncated } = await readAll(env, "q_invoices", [{ field: "orgId", value: orgId }, { field: "paidUtcDay", value: day }], REVENUE_CAP);
+    if (truncated) throw Object.assign(new Error("revenue_too_many_invoices"), { status: 507, detail: `More than ${REVENUE_CAP} invoices paid on ${day}.` });
+    rows.forEach((r) => { const f = r.fields || {}; if (f.orgId === orgId && f.status === "paid" && (f.paidAt || 0) >= dayStart && f.paidAt < dayEnd) { paise += (f.total || 0); count++; } });
+  }
   return { revenueToday: Math.round(paise / 100), invoicesPaidToday: count };
 }
