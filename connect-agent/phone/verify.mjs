@@ -40,6 +40,11 @@ export function localVerdict(resource, rows, kind) {
  */
 const ROW_HUNT_PATIENTS = 8;
 
+/** The doctor walked to this view during a guided ask (index.mjs records the taps as view.guidedPath). */
+function shownByDoctor(view) {
+  return !!(view && Array.isArray(view.guidedPath) && view.guidedPath.length);
+}
+
 export async function verifyViews({ plugin, origin, views, brain = null, book = null, notify = null, stopped = () => false, skipAt = () => 0, maxPatients = 2, waitMs = 6000, parseHtml = null }) {
   const proven = (v) => !!(v && v.proof && v.proof.status === 'proven');
   const say = (extra) => { try { if (notify) notify('VERIFYING', extra); } catch { /* UI must never break the check */ } };
@@ -143,9 +148,13 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
         if (again && usableRows(again.rows)) { best = again; listRows[view.resourceHint] = { rows: again.rows, patient: sample[0] }; }
       }
     }
-    /* THE CHAIN AFTER A SEARCH: the list the search showed is still on screen; open one of its rows and
-     * prove the detail call (GHIS: the result print behind an order). */
-    if (book && view.searched && best && usableRows(best.rows) && !list.some((d) => d && d.detailOf === view.resourceHint && proven(d))) {
+    /* THE CHAIN AFTER A SEARCH OR A SHOWING: the list is on screen; open one of its rows and prove the
+     * detail call (GHIS: the result print behind an order). This ran only for a list the agent had
+     * found by searching for the patient itself, so when the doctor showed the lab list during the
+     * guided ask no chain was ever attempted and the run finished with no labs-detail at all, which the
+     * approval gate requires (live GHIS run 3, 2026-09-18). Being shown a screen is not a reason to
+     * skip learning what opening a row does; exploreDetailOf still ignores lists that have no detail. */
+    if (book && (view.searched || shownByDoctor(view)) && best && usableRows(best.rows) && !list.some((d) => d && d.detailOf === view.resourceHint && proven(d))) {
       let detail = null;
       try { detail = await exploreDetailOf({ client: plugin, view, book, origins: [origin], waitMs: Math.min(3000, waitMs) }); } catch (e) { detail = null; view.chain = { error: String((e && e.message) || e).replace(/\d{3,}/g, '#').slice(0, 120) }; }
       if (detail) view.chain = { status: (detail.proof && detail.proof.status) || 'none', rows: detail.rowsSelector || '', endpoints: (detail.endpoints || []).map((e) => e.method + ' ' + e.path) };

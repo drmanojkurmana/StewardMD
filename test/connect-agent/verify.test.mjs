@@ -141,3 +141,43 @@ test('verifyViews keeps looking for a patient who has one when the first patient
   assert.ok(!out.failed.includes('radiology'), 'a correct call is not condemned by patients who have no scans');
   assert.equal(views[1].proof.status, 'proven', 'its proof stands');
 });
+
+
+/* A LIST THE DOCTOR SHOWED STILL NEEDS ITS DETAIL. The chain was explored only for a list the agent had
+ * found by searching for the patient itself (view.searched). On the live ward the doctor showed the lab
+ * list during the guided ask, so searched was never set, no chain was ever attempted and the run
+ * finished with no labs-detail at all - which the approval gate requires (live GHIS run 3, 2026-09-18).
+ * Being shown a screen is not a reason to skip learning what opening a row does. */
+test('verifyViews explores the detail chain for a list the doctor showed, not only one it searched for', async () => {
+  const plugin = {
+    async navigate() {}, async wait() {},
+    async currentUrl() { return { url: ORIGIN + '/Lab/Home' }; },
+    async drainRequests() { return { requests: [] }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ __RequestVerificationToken: 't' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '[]' };
+      const reply = (o) => ({ result: JSON.stringify(Object.assign({ status: 200, contentType: 'application/json', url: req.url }, o)) });
+      if (req.url.indexOf('/GetIPWL') >= 0) return reply({ text: JSON.stringify([{ patientId: 'MR1', patientFirstName: 'A', episodeId: 'V1' }]) });
+      if (req.url.indexOf('/GetSearchPatientId') >= 0) {
+        return reply({ contentType: 'text/html', text: '<table><tr><th>Order ID</th><th>Test</th></tr><tr><td>OR1</td><td>CBC</td></tr></table>' });
+      }
+      return reply({ text: '' });
+    },
+  };
+  const labs = {
+    resourceHint: 'labs', pathTemplate: ORIGIN + '/Lab/Home', rowsSelector: '#example15 tbody tr',
+    headers: ['Order ID', 'Test'], proof: { status: 'proven' },
+    // the doctor walked here during the guided ask; the agent never had to search
+    guidedPath: ['a "Lab reports"', 'td "CBC"'],
+    endpoints: [{ method: 'POST', path: '/Lab/Home/GetSearchPatientId', role: 'data', bodyKeys: ['patient_id'], params: { patient_id: { from: 'worklist', field: 'patientId' } } }],
+  };
+  const views = [
+    { resourceHint: 'worklist', pathTemplate: ORIGIN + '/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['Patient ID'], endpoints: [{ method: 'GET', path: '/Doctor/Home/GetIPWL?Type&start&length' }] },
+    labs,
+  ];
+  const book = { prove: async () => null, note: () => {} };
+  const brain = { verify: async (p) => ({ ok: true, resource: p.resource, confidence: 0.9, reason: 'looks right', suggestion: 'ok' }) };
+  await verifyViews({ plugin, origin: ORIGIN, views, brain, book, parseHtml: miniParse });
+  assert.ok(labs.chain, 'the chain was attempted for the list the doctor showed');
+});
