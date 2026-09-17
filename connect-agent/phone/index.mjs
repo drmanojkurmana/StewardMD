@@ -236,6 +236,15 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
         prompt = 'I could not read a table on that screen. Open the ' + GAP_NAMES[gap] + ' for a patient, tap inside the list so it turns green, then tap Done.';
         continue;
       }
+      /* AN EMPTY LIST IS THE RIGHT SCREEN FOR THE WRONG PATIENT. A table with no data rows (buildTableView:
+       * singleRecord) proves nothing, and the old re-ask ("none of the requests returned the radiology
+       * reports") read as a wrong screen when the doctor had opened the right one for a patient who has
+       * none yet (live GHIS, 2026-09-17). Say so and ask for a patient who has some; no proof is spent. */
+      if (view.singleRecord && !view.block) {
+        await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
+        prompt = 'This patient has no ' + GAP_NAMES[gap] + ' yet. Open the ' + GAP_NAMES[gap] + ' of a patient who has some, tap inside the list so it turns green, then tap Done.';
+        continue;
+      }
       view.guided = true;
       if (Array.isArray(guidedPath) && guidedPath.length) view.guidedPath = guidedPath.slice(0, 20).map((s) => String(s).slice(0, 120));
       const verdict = await enrichView(view, brain, { ask: gap, keepHint: true });
