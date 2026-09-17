@@ -34,7 +34,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { priorityRank } from "./ward-order.js";
+import { priorityRank, OPEN_ORDER_STATUSES, isOpenOrder } from "./ward-order.js";
 import { effectiveCategory } from "./investigation-catalogue.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -135,12 +135,27 @@ function collectionState(specimens) {
   return { state: "failed", attempts: rows.length, reason: failed.failureReason || null, detail: "Every attempt failed. This sample still needs taking." };
 }
 
-/* A hospital-wide worklist reads every order (service.listAll, paged): the old roster of 300 was the OLDEST 300, so a new
- * order never reached the list. Past WORKLIST_MAX it throws ListCeilingError (answered 503) rather than show a short list.
- * ponytail: an open-status read (listByStatus) once every order status is enumerated; audit O20 for the paging cost. */
+/* A whole-type read (service.listAll, paged) is still right for the monthly rejection count below: that
+ * figure IS a history, and it says so when it is truncated. It is wrong for a bench worklist, which is
+ * about the work in front of the hospital - see collectionList for what replaced it and why. */
 const WORKLIST_MAX = 50000;
-const whole = async (svc, type) => (await svc.listAll(type, { max: WORKLIST_MAX, throwOnTruncate: true })).rows;
 const ceilingRefusal = (e) => ({ ok: false, status: 503, error: e.code, detail: str(e.message) });
+
+/**
+ * The records of one type belonging to a bounded set of patients, through the caller's own governed
+ * read, eight at a time (as service.histories() fans out). A read that FAILS throws: a collection
+ * worklist that quietly dropped one patient's specimens would tell a phlebotomist to go and bleed
+ * somebody who has already been bled.
+ */
+async function byPatients(svc, type, patientIds) {
+  const ids = [...new Set((patientIds || []).map(str).filter(Boolean))];
+  const out = [];
+  for (let i = 0; i < ids.length; i += 8) {
+    const got = await Promise.all(ids.slice(i, i + 8).map((pid) => svc.byPatient(type, pid)));
+    for (const rows of got) for (const r of rows || []) out.push(r);
+  }
+  return out;
+}
 
 async function open(request, env, ctx, need) {
   try {
@@ -357,12 +372,26 @@ async function collectionList(request, env, ctx) {
 
   let orders, specimens;
   try {
-    [orders, specimens] = hospitalWide
-      ? await Promise.all([whole(svc, "ServiceRequest"), whole(svc, TYPE).catch((e) => { if (e instanceof ListCeilingError) throw e; return []; })])
-      : await Promise.all([
+    if (hospitalWide) {
+      /* R5-2: THE OPEN ORDERS, not every order this hospital has ever placed. Reading the whole type
+       * (and the whole specimen archive beside it) grew with history: tens of thousands of parsed
+       * records in one Worker within weeks on a busy hospital, and the board then failed with a 500
+       * rather than the designed message. Releasing a result now closes the order it answers
+       * (ward-order.js closeOrderOnResult), so this read is bounded by the samples still owed. Past
+       * OPEN_CENSUS_MAX it refuses out loud (503) - orders nobody has ever resulted, which a
+       * laboratory has to see rather than have hidden behind a short list.
+       * ponytail: the per-page group-by inside the store is unchanged (audit O20). */
+      orders = await svc.listByStatus("ServiceRequest", OPEN_ORDER_STATUSES);
+      /* Only these orders' patients. SpecimenCollection carries `state`, not `status`, so the store
+       * cannot filter it (repository pageByType reads $.status) - but nothing here needs the archive:
+       * a specimen matters for exactly one question, which is where the orders ON THIS LIST stand. */
+      specimens = await byPatients(svc, TYPE, orders.map((o) => o && o.patientId));
+    } else {
+      [orders, specimens] = await Promise.all([
         svc.byPatient("ServiceRequest", patientId),
         svc.byPatient(TYPE, patientId).catch(() => []),
       ]);
+    }
   } catch (e) {
     if (e instanceof ListCeilingError) return { ...base, ...ceilingRefusal(e), requests: [] };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), requests: [] };
@@ -378,7 +407,8 @@ async function collectionList(request, env, ctx) {
 
   const requests = (orders || [])
     // An order another hospital placed is on this chart for the record, not for this ward's phlebotomist.
-    .filter((o) => o && o.status !== "revoked" && o.status !== "completed" && !isExternalRecord(o))
+    // isOpenOrder is the SAME open/closed vocabulary the status-scoped read above asks the store for.
+    .filter((o) => o && isOpenOrder(o) && !isExternalRecord(o))
     .map((o) => ({
       serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: (o.category || effectiveCategory(o) === "imaging") ? effectiveCategory(o) : null,
       // Carried so a hospital-wide caller can say WHOSE specimen this is. Harmless per-patient

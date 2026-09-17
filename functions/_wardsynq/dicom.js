@@ -53,6 +53,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { zoneOffsetAt } from "./mar-schedule.js";
 import { reportIdFor as radiologyReportIdFor } from "./radiology-report.js";
 import { effectiveCategory } from "./investigation-catalogue.js";
+import { OPEN_ORDER_STATUSES } from "./ward-order.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -178,9 +179,14 @@ async function imagingWorklist(request, env, ctx) {
   try {
     orders = str(ctx.patientId)
       ? await svc.byPatient("ServiceRequest", str(ctx.patientId))
-      /* Every order (listAll, paged): the old roster was the OLDEST 500, so a new study never reached the worklist. Past
-       * the ceiling the worklist refuses (503) rather than show a short list. ponytail: an open-status read is the upgrade. */
-      : (await svc.listAll("ServiceRequest", { max: 50000, throwOnTruncate: true })).rows;
+      /* R5-2: THE OPEN ORDERS, not every order this hospital has ever placed (service.listByStatus,
+       * filtered in SQL). Reading the whole type grew with history - tens of thousands of parsed
+       * records in one Worker within weeks on a busy hospital, and a 500 rather than a message. A
+       * radiology report now closes the order it answers (radiology-report.js), so what comes back
+       * here is bounded by the studies still to be done. Past OPEN_CENSUS_MAX it refuses out loud
+       * (503) - on this read that means unreported studies piling up, which has to be seen.
+       * ponytail: the per-page group-by inside the store is unchanged (audit O20). */
+      : await svc.listByStatus("ServiceRequest", OPEN_ORDER_STATUSES);
   } catch (e) {
     if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: e.code, detail: str(e.message), worklist: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), worklist: [] };

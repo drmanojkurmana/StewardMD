@@ -24,7 +24,7 @@
  */
 
 import { ServiceRequest } from "../../wardsynq/wardsynq-model.js";
-import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
+import { makeActor, KIND, TIER, GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
@@ -37,6 +37,82 @@ const str = (v) => (v == null ? "" : String(v).trim());
 /** The model's own vocabulary. Ordered worst-first: it is what the collection worklist sorts by. */
 const PRIORITIES = Object.freeze(["stat", "urgent", "routine"]);
 const CATEGORIES = Object.freeze(["laboratory", "imaging", "procedure", "referral", "other"]);
+
+/* R5-2: THE ORDER STATUS VOCABULARY, IN ONE PLACE, SPLIT INTO DONE AND NOT DONE.
+ *
+ * A worklist used to read EVERY ServiceRequest the hospital had ever held and throw away the closed
+ * ones in JavaScript, so its cost grew with history and it 500'd (not refused - 500'd) within weeks
+ * on a busy hospital. It now asks the store for the open ones (service.listByStatus, which filters in
+ * SQL), which is bounded by the work in front of the hospital instead.
+ *
+ * THAT MAKES THIS LIST A SAFETY BOUNDARY: a status missing from BOTH lists is a status whose orders
+ * would silently vanish off every worklist. CLOSED is therefore the whole of the closed vocabulary
+ * (native, HL7 ORC and SCCM), OPEN is everything else any writer can produce, and
+ * test/wardsynq-ward-order.test.mjs pins the union against every writer in the tree.
+ *
+ * `entered-in-error` and `unknown` sit in OPEN deliberately: the worklists have always shown them
+ * (they filtered out completed/revoked/cancelled and nothing else), and a status nobody understands
+ * must stay visible to a human rather than be disappeared by a read.
+ */
+const CLOSED_ORDER_STATUSES = Object.freeze(["completed", "revoked", "cancelled"]);
+const OPEN_ORDER_STATUSES = Object.freeze(["active", "draft", "scheduled", "on-hold", "entered-in-error", "unknown"]);
+/** PURE. Is this order still work somebody owes? Reads externalStatus first, as the worklists do. */
+function isOpenOrder(o) {
+  const status = str(o && o.externalStatus) || str(o && o.status);
+  return !CLOSED_ORDER_STATUSES.includes(status);
+}
+
+/**
+ * R5-2: AN ORDER IS CLOSED WHEN ITS RESULT IS FILED, and until this existed nothing ever closed one.
+ *
+ * Every native ServiceRequest was written `active` and stayed `active` for ever - releasing a
+ * laboratory result or filing a radiology report left the order exactly as it was, and the worklists
+ * compensated by reading EVERY order the hospital had ever held and subtracting the ones that had a
+ * report. That read grows with history, which is what made the worklists fail (with a 500, not a
+ * message) within weeks on a busy hospital. An open-status read only helps if something actually
+ * closes an order, so this is the half that had to come first.
+ *
+ * WHY ITS OWN ACTOR. The laboratory's grant (actor.js CAPS.LAB_RESULT) deliberately cannot write a
+ * ServiceRequest: a role that could would be able to post orders for itself through the raw record
+ * API, which is the billing hazard that grant's comments keep citing. Widening it would open order
+ * CREATION to solve order CLOSURE. So the closure gets a purpose-built actor whose whole scope is
+ * ServiceRequest - the same pattern online-booking.js uses for the patient portal - stamped with the
+ * id of the person who released the result, so the write is governed, audited and attributed to a
+ * human exactly as any other. It can only ever put an order that already exists, at its expected
+ * version, with one field changed.
+ *
+ * NEVER THROWS. A result that is on the chart is on the chart; an order that would not close is not a
+ * reason to fail the release. The caller is told `closed: false` and says so, rather than reporting a
+ * tidiness it did not achieve.
+ *
+ * WHAT CLOSED IT travels with the record. `deps.on` is "result" (a result was filed, the live path)
+ * or "backfill" (order-backfill.js, closing orders that were resulted before this existed). Same
+ * writer, same status, same append-only version - the word only lets an auditor tell a retrospective
+ * tidy-up from a result being released, which is exactly the question they will ask of a run that
+ * closed ten thousand orders in an afternoon.
+ *
+ * @param {{repository: object, pseudonym?: function, tenant: object, actorId: string, on?: string}} deps
+ * @param {object} order the ServiceRequest as read, with its version
+ * @returns {Promise<{closed: boolean, reason?: string}>}
+ */
+async function closeOrderOnResult(deps, order) {
+  if (!order || !order.id) return { closed: false, reason: "no_order" };
+  if (CLOSED_ORDER_STATUSES.includes(str(order.status))) return { closed: true };
+  const on = str(deps && deps.on) === "backfill" ? "backfill" : "result";
+  let svc;
+  try {
+    svc = new RecordService({
+      repository: deps.repository, pseudonym: deps.pseudonym,
+      tenant: deps.tenant, role: "wardsynq-order-closure", roleSource: on === "backfill" ? "wardsynq-order-backfill" : "wardsynq-result-filed",
+      actor: makeActor({ id: str(deps.actorId) || "wardsynq", kind: KIND.HUMAN, tier: TIER.EXECUTE,
+        display: "order closure on result", scope: { read: ["ServiceRequest"], write: ["ServiceRequest"] } }),
+    });
+  } catch (e) { return { closed: false, reason: str(e && e.message) }; }
+  const next = { ...order, status: "completed", completedAt: new Date().toISOString(), completedBy: str(deps.actorId) || null, completedOn: on };
+  delete next.version; delete next.meta; delete next.writtenBy;
+  try { await svc.put(next, { expectedVersion: order.version }); return { closed: true }; }
+  catch (e) { return { closed: false, reason: str(e && e.message) }; }
+}
 
 /** PURE. An unknown priority becomes routine - never refused, never trusted as it stands. */
 function normalisePriority(value) {
@@ -157,4 +233,7 @@ async function orderInvestigation(request, env, ctx) {
   }
 }
 
-export { PRIORITIES, CATEGORIES, normalisePriority, priorityRank, wardOrderIdFor, orderInvestigation };
+export {
+  PRIORITIES, CATEGORIES, OPEN_ORDER_STATUSES, CLOSED_ORDER_STATUSES, isOpenOrder,
+  normalisePriority, priorityRank, wardOrderIdFor, orderInvestigation, closeOrderOnResult,
+};

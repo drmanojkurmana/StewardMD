@@ -848,6 +848,31 @@ class RecordService {
   }
 
   /**
+   * ONE PAGE of the open-status read above, at the store's own cursor, for a job that cannot hold the
+   * whole set in one request: `afterSeq` is the previous page's `next`, and `next` is null on the last
+   * page. Governed and audited exactly as listByStatus.
+   *
+   * Deliberately NOT capped by OPEN_CENSUS_MAX, and that is the whole point of it: the one caller is
+   * the backfill that exists BECAUSE a hospital is past that ceiling (order-backfill.js), and a read
+   * that refused there could never be the read that fixes it. The bound is the page instead - it holds
+   * `limit` records and hands back a cursor, so no amount of history changes what one request costs.
+   *
+   * -> { rows, next }
+   */
+  async pageByStatus(resourceType, statuses, opts) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    if (typeof this.repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+    const want = (Array.isArray(statuses) ? statuses : [statuses]).filter((x) => typeof x === "string" && x);
+    if (!want.length) return { rows: [], next: null };
+    const limit = Math.max(1, Math.min(PAGE, Number(opts && opts.limit) || PAGE));
+    const page = await this.repository.pageByType(this.tenantId, resourceType, { afterSeq: Math.max(0, Number(opts && opts.afterSeq) || 0), limit, statuses: want });
+    const rows = page.records || [];
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, statuses: want, page: true, afterSeq: Math.max(0, Number(opts && opts.afterSeq) || 0) }, resourceCounts: { [resourceType]: rows.length } }));
+    return { rows, next: page.next == null ? null : page.next };
+  }
+
+  /**
    * EVERY record of one type (latest version each), oldest first, paged. For a count, a sum or a ledger.
    * opts.max: the caller's ceiling (default LIST_ALL_DEFAULT, never above LIST_ALL_MAX).
    * -> { rows, truncated }: past max, rows holds the oldest max and truncated is true - or, with

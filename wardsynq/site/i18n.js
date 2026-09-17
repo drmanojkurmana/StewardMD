@@ -388,6 +388,7 @@
     "nav.admin.onlineBooking": "Online booking",
     "nav.admin.patientFeedback": "Patient feedback",
     "nav.admin.legacyImport": "Import from old system",
+    "nav.admin.orderBackfill": "Close finished orders",
 
     /* ward.js keys (ui-i18n-ward) */
     "ward.bg-chart-unreadable": "These parts of the chart could not be read: {types}. Do not read them as nothing recorded.",
@@ -10411,6 +10412,27 @@
     "site.dialysis.dzRecorded": "Dialyzer event recorded.",
     "site.dialysis.sessionSaved": "Session saved.",
     "site.dialysis.settingsSaved": "Dialysis settings saved.",
+    "site.admin.orderBackfill.title": "Close finished orders",
+    "site.admin.orderBackfill.intro": "Investigation orders resulted before this hospital was updated were never marked finished, so they still count as work in front of the laboratory and radiology. Checking reads the orders and writes nothing. Closing marks only the orders whose result is already on the chart; an order with no result, an imaging study with only a preliminary report, and an order another system owns are all left alone.",
+    "site.admin.orderBackfill.failed": "The job stopped because something could not be read or written. This is not the same as there being nothing left to do; what is reported below is only what was reached before it stopped.",
+    "site.admin.orderBackfill.notCheckedYet": "Nothing has been checked yet.",
+    "site.admin.orderBackfill.scanned": "Open orders looked at: {n}",
+    "site.admin.orderBackfill.remaining": "Still to close: {n}",
+    "site.admin.orderBackfill.closedSoFar": "Closed so far: {n}",
+    "site.admin.orderBackfill.reason.noReport": "no result on the chart, so the test is still owed",
+    "site.admin.orderBackfill.reason.preliminary": "imaging read only preliminarily, so the final report is still owed",
+    "site.admin.orderBackfill.reason.external": "placed by another system, which owns them",
+    "site.admin.orderBackfill.reason.readFailed": "their results could not be read, so nothing was decided about them",
+    "site.admin.orderBackfill.reason.alreadyClosed": "already finished, and left exactly as they are",
+    "site.admin.orderBackfill.stayOpenLead": "Staying open:",
+    "site.admin.orderBackfill.partial": "Some results could not be read, so this count is not the whole picture. Check again once the record store is answering.",
+    "site.admin.orderBackfill.finished": "{n} orders are now marked finished. The laboratory, specimen and imaging boards show only current work.",
+    "site.admin.orderBackfill.nothingToClose": "There was nothing to close. Every finished order is already marked finished.",
+    "site.admin.orderBackfill.check": "Check what would close",
+    "site.admin.orderBackfill.close": "Close {n} finished orders",
+    "site.admin.orderBackfill.checking": "Checking orders ({n} looked at so far)...",
+    "site.admin.orderBackfill.closing": "Closing orders ({n} of {total} done)...",
+    "site.admin.orderBackfill.someRefused": "{n} orders could not be closed and are listed on the server response. Check again to see where they stand.",
     /* end site pages keys */
   };
 

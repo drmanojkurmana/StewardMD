@@ -90,7 +90,10 @@ async function diary(ctx, session) {
   const svc = svcFor(ctx, session);
   /* R4-2: every appointment/booking and blackout (service.listAll, paged). The old reads were the OLDEST 500, so a clash
    * with a newer booking or leave was not seen. Past 50,000 the read throws and nothing is booked (502 with the reason).
-   * ponytail: a by-clinician or by-resource index is the upgrade; audit O20 for the paging cost. */
+   * R5-2 could not move this onto an open-state read for the reason written out in scheduling.js
+   * bookAppointment: an Appointment keeps where it stands in `state`, and the store filters on
+   * `status`. The port change (R5-3) comes first; guessing here would mean a portal that offers a
+   * slot somebody already holds. */
   const [appointments, blackouts] = await Promise.all([svc.listAll(APPT, { max: 50000, throwOnTruncate: true }).then((g) => g.rows), svc.listAll("Blackout", { max: 50000, throwOnTruncate: true }).then((g) => g.rows, (e) => { if (e && e.name === "ListCeilingError") throw e; return []; })]);
   return { svc, appointments: (appointments || []).filter(Boolean), blackouts: blackouts || [] };
 }

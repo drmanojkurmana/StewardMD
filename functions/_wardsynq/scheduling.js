@@ -185,7 +185,18 @@ async function bookAppointment(request, env, ctx) {
 
   /* R4-2: every appointment/booking and blackout (service.listAll, paged). The old reads were the OLDEST 500, so a clash
    * with a newer booking or leave was not seen. Past 50,000 the read throws and nothing is booked (502 with the reason).
-   * ponytail: a by-clinician or by-resource index is the upgrade; audit O20 for the paging cost. */
+   *
+   * R5-2 LOOKED AT THIS AND COULD NOT MOVE IT, and the reason is worth writing down rather than
+   * rediscovering. The lab, specimen and imaging worklists now read only what is OPEN
+   * (service.listByStatus), which the store filters in SQL on the record's `status`. An Appointment
+   * has no `status`: where it stands lives in `state` (booked / arrived / completed / cancelled /
+   * did-not-attend), and AppointmentRequest and SpecimenCollection are the same. Mirroring `state`
+   * into a `status` on new writes would leave every appointment already in the hospital's diary with
+   * no status at all, and a clash check that silently skipped those is a double-booking - the one
+   * thing this file exists to prevent. So the port change comes first: pageByType needs to filter on
+   * a named field, or take `states` beside `statuses` (audit E3 / R5-3 owns repository*.js).
+   * ponytail: a by-clinician index (ids are wsq-appt-<clinician>-<time>-<patient>, so pageByIdPrefix
+   * is a range seek) is the other upgrade; audit O20 for the paging cost. */
   let all, blackouts;
   try { [all, blackouts] = await Promise.all([svc.listAll(TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows), svc.listAll("Blackout", { max: 50000, throwOnTruncate: true }).then((g) => g.rows, (e) => { if (e && e.name === "ListCeilingError") throw e; return []; })]); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
