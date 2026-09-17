@@ -39,11 +39,16 @@ export function fetchExpression(req) {
     timeoutMs: Number(req.timeoutMs) > 0 ? Number(req.timeoutMs) : FETCH_TIMEOUT_MS,
   };
   return '(function(){var req=' + JSON.stringify(safe) + ';' +
-    'var init={method:req.method,credentials:"include",headers:req.headers,redirect:"follow"};' +
+    /* A REDIRECT IS AN ANSWER. GHIS answers an expired EMR-host session with a 302 to its login host;
+     * following it cross-origin is refused by the browser and every read came back as the bare
+     * "Load failed" (owner's iPhone drawer, 2026-09-17), indistinguishable from a dead network. With
+     * redirect:"manual" the redirect arrives as an opaqueredirect, reported as status 302 and
+     * classified as the login page, which the runtime already turns into "not signed in". */
+    'var init={method:req.method,credentials:"include",headers:req.headers,redirect:"manual"};' +
     'if(req.body!=null){init.body=req.body;if(!init.headers["Content-Type"])init.headers["Content-Type"]="application/x-www-form-urlencoded; charset=UTF-8";}' +
     'if(typeof AbortController==="function"){var ac=new AbortController();init.signal=ac.signal;setTimeout(function(){ac.abort();},req.timeoutMs);}' +
-    'return fetch(req.url,init).then(function(r){return r.text().then(function(t){return JSON.stringify({status:r.status,contentType:r.headers.get("content-type")||"",url:r.url,text:t.length>req.max?t.slice(0,req.max):t,truncated:t.length>req.max});});})' +
-    '.catch(function(e){return JSON.stringify({status:0,contentType:"",url:req.url,text:"",error:String(e&&e.message||e)});});})()';
+    'return fetch(req.url,init).then(function(r){if(r.type==="opaqueredirect")return JSON.stringify({status:302,contentType:"",url:req.url,text:"",redirected:true});return r.text().then(function(t){return JSON.stringify({status:r.status,contentType:r.headers.get("content-type")||"",url:r.url,text:t.length>req.max?t.slice(0,req.max):t,truncated:t.length>req.max});});})' +
+    '.catch(function(e){return JSON.stringify({status:0,contentType:"",url:req.url,text:"",error:String(e&&e.message||e),host:(typeof location!=="undefined"?location.host:"")});});})()';
 }
 
 /** Test seam: the request a fetchExpression() carries, or null. */
@@ -60,7 +65,7 @@ export async function fetchInPage(plugin, req) {
   let out = null;
   try { out = JSON.parse(typeof raw === 'string' ? raw : JSON.stringify(raw)); } catch { out = null; }
   if (!out || typeof out !== 'object') throw new Error('the page returned no response for ' + (req.method || 'GET') + ' ' + req.url);
-  if (out.error) throw new Error('request failed in the page: ' + out.error);
+  if (out.error) throw new Error('request failed in the page: ' + out.error + ' (' + (req.method || 'GET') + ' ' + String(req.url || '').replace(/^https?:\/\/[^/]+/, '').replace(/\?.*$/, '') + (out.host ? ' from ' + out.host : '') + ')');
   return out;
 }
 
@@ -189,7 +194,7 @@ export function replayPlan(view, patient, tokens = null) {
 /** 'login' | 'json' | 'html' | 'empty' */
 export function classifyResponse(resp) {
   if (!resp) return 'empty';
-  if (resp.status === 401 || resp.status === 403) return 'login';
+  if (resp.status === 401 || resp.status === 403 || resp.redirected === true) return 'login';
   const text = String(resp.text || '');
   if (!text.trim()) return 'empty';
   if (/<input[^>]+type=["']?password/i.test(text) || /\/(login|signin|account\/login)\b/i.test(String(resp.url || '')) && /<form/i.test(text)) return 'login';

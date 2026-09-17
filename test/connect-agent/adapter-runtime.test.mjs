@@ -198,3 +198,15 @@ test('provenValue: a worklist column name from another proven list falls back to
   assert.equal(provenValue('id', { from: 'worklist', field: 'patientId' }, { patient }), 'MR900001', 'a matching key is read from the row');
   assert.equal(provenValue('Dept_ID', { from: 'worklist', field: 'Department' }, { patient }), '', 'a non-patient key with no such column stays blank');
 });
+
+/* An expired GHIS session answers a 302 to the login host; following it cross-origin gave the bare
+ * "Load failed" for every read (owner's iPhone, 2026-09-17). The page-side fetch no longer follows,
+ * reports the redirect as status 302, and the runtime reads that as the login page. */
+test('fetchExpression: a redirect is reported as the login page, never followed cross-origin', () => {
+  const expr = fetchExpression({ method: 'GET', url: 'https://ghis.example/Doctor/Home/GetMedicines/?id=MR1' });
+  assert.ok(expr.includes('redirect:"manual"'), 'redirects must not be followed');
+  assert.ok(expr.includes('opaqueredirect'), 'an opaque redirect must be turned into a status');
+  assert.ok(parseFetchExpression(expr), 'the test seam still parses the request out');
+  assert.equal(classifyResponse({ status: 302, redirected: true, text: '' }), 'login');
+  assert.equal(classifyResponse({ status: 200, contentType: 'application/json', text: '[]' }), 'json');
+});
