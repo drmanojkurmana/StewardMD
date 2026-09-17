@@ -232,6 +232,10 @@ function readerAliases(links, preferred) {
   return out;
 }
 
+/* R5-4: the ward history of a transferred admission is one extra read per admission, so it is
+ * bounded. The bound is NOT a failure: past it the remaining transfers are counted and named
+ * separately from the ones whose history genuinely could not be read, because "we did not look" and
+ * "we looked and could not read it" are different facts to whoever acts on this report. */
 const HISTORY_READ_MAX = 200;
 const ACCOUNT_LOOKUP_MAX = 200;
 
@@ -699,19 +703,22 @@ async function securityReport(request, env, ctx) {
       /* G11: a transferred admission's wards over time come from its version history, read only for
        * admissions that have moved (movedAt), bounded. A history that cannot be read is named. */
       const stays = [];
-      let historyReads = 0, historyFailed = 0;
+      let historyReads = 0, historyFailed = 0, historyNotRead = 0;
       for (const enc of encounters.v) {
         if (!enc) continue;
         const ref = await refOf(enc.patientId);
-        if (enc.movedAt && typeof repository.history === "function" && historyReads < HISTORY_READ_MAX) {
+        const canRead = typeof repository.history === "function";
+        if (enc.movedAt && canRead && historyReads < HISTORY_READ_MAX) {
           historyReads += 1;
           try { const vs = await repository.history(tenantId, "Encounter", enc.id); if (Array.isArray(vs) && vs.length) { stays.push(...wardHistoryStays(vs, ref)); continue; } }
           catch { /* counted below */ }
           historyFailed += 1;
-        } else if (enc.movedAt) historyFailed += 1;
+        } else if (enc.movedAt && canRead) historyNotRead += 1;
+        else if (enc.movedAt) historyFailed += 1;
         stays.push({ patientRef: ref, ward: enc.location && enc.location.ward, attendingId: enc.attendingId || null, from: enc.periodStart || null, to: enc.periodEnd || null });
       }
       if (historyFailed) incomplete.push(`the ward history of ${historyFailed} transferred admission${historyFailed === 1 ? "" : "s"} could not be read, so only the current ward is known for ${historyFailed === 1 ? "it" : "them"}`);
+      if (historyNotRead) incomplete.push(`more than ${HISTORY_READ_MAX} admissions were transferred in this period, so the ward history of ${historyNotRead} of them was not read and only the current ward is known for ${historyNotRead === 1 ? "it" : "them"}`);
       const breakGlass = [];
       for (const g of grants.v || []) if (g) breakGlass.push({ actorId: g.actorId, patientRef: await refOf(g.patientId), from: g.grantedAt, to: g.expiresAt });
       if (grants.e) incomplete.push("break-glass grants could not be read");

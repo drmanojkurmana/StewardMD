@@ -241,7 +241,11 @@ async function saveQcMaterial(request, env, ctx) {
 
 /* ---- corrective actions, blocks and overrides ----------------------------------------------------------------- */
 
-/** Every block in force. Throws when the record cannot be read: a block that could not be checked must not read as no block. */
+/** Every block in force. Throws when the record cannot be read: a block that could not be checked must not read as no block.
+ *  ponytail: bounded by READ_CAP newest runs and actions, which is a real ceiling on the block window - a
+ *  rejected run older than the newest READ_CAP runs cannot block. The QC screen says so (qcOverview's
+ *  truncatedWarning). Upgrade path when a laboratory passes it: read the runs by status (rejected) rather
+ *  than by count, which the record port's status filter already supports. */
 async function currentBlocks(repo, tenantId) {
   const [runs, actions] = await Promise.all([
     repo.latestByType(tenantId, RUN_TYPE, READ_CAP, { newest: true }),
@@ -312,7 +316,14 @@ async function qcOverview(request, env, ctx) {
     blocks: blocksFrom(runs, actions),
     actions: (actions || []).filter(Boolean).slice(0, 100),
     overrides: (overrides || []).filter(Boolean),
-    ...((runs || []).length >= READ_CAP ? { truncated: true, truncatedWarning: `Only the latest ${READ_CAP} QC results were read; older points are not on the charts.` } : {}),
+    /* R5-4: the corrective actions are read under the same ceiling as the runs, and a truncated ACTION
+     * read changes what a block is, not just what a chart shows: a block is a rejected run newer than
+     * the last corrective action for that analyser and test, so a rejected run or an action outside
+     * the newest READ_CAP cannot be weighed. The warning names both reads and what may be missing from
+     * the block list, rather than mentioning the charts alone. */
+    ...((runs || []).length >= READ_CAP || (actions || []).length >= READ_CAP
+      ? { truncated: true, truncatedWarning: `Only the latest ${READ_CAP} QC results and ${READ_CAP} corrective actions were read. Older points are not on the charts, and a block from a rejected run older than that is not listed here.` }
+      : {}),
   };
 }
 

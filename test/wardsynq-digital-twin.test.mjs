@@ -287,6 +287,45 @@ test("11. reconstruction refuses a missing or invalid timestamp rather than gues
   assert.equal(bad.__status, 422);
 });
 
+test("11b. R5-4: past the per-type bound the reconstruction reads the NEWEST records, and says the oldest were not read", async () => {
+  seed();
+  /* 505 critical-result loops: five more than the rebuild's per-type bound. The bound is real (each
+   * record read costs one further history read), so what matters is WHICH end of the type it reads.
+   * It used to read the oldest 500, which is exactly the half an as-of question is never about. */
+  const rows = [];
+  for (let i = 0; i < 505; i++) {
+    rows.push({ resourceType: "CriticalResultLoop", id: `crl-${String(i).padStart(3, "0")}`, version: 1, patientId: "twin-pat-11b",
+      reportedAt: new Date(Date.parse("2026-01-01T00:00:00.000Z") + i * 60000).toISOString(), status: "open", meta: meta() });
+  }
+  await RECORD.append(TENANT.id, rows);
+
+  const r = await call(ADMIN, `/ward/twin-reconstruct?orgId=${ORG}&at=${encodeURIComponent(new Date().toISOString())}`);
+  assert.equal(r.__status, 200, JSON.stringify(r).slice(0, 400));
+  const s = r.reconstruction.state.CriticalResultLoop;
+  assert.equal(s.status, "partial");
+  assert.equal(s.capped, true, "the ceiling is stated, never silently applied");
+  assert.equal(s.count, 500);
+  const ids = new Set(s.records.map((x) => x.id));
+  assert.ok(ids.has("crl-504"), "the newest record must be in a reconstruction of a recent moment");
+  assert.ok(ids.has("crl-005"), "the newest 500 are crl-005 .. crl-504");
+  assert.ok(!ids.has("crl-000"), "and the OLDEST are the ones dropped, which is what the screen says");
+});
+
+test("20b. R5-4: a notification read that FAILED reports unavailable, never a delivery rate over an empty sample", async () => {
+  seed();
+  const realLatestByType = RECORD.latestByType.bind(RECORD);
+  RECORD.latestByType = async (tenantId, type, limit, opts) => {
+    if (type === "BreakGlassGrant") throw new Error("simulated storage fault");
+    return realLatestByType(tenantId, type, limit, opts);
+  };
+  const r = await call(ADMIN, `/ward/operational-health?orgId=${ORG}`);
+  RECORD.latestByType = realLatestByType;
+  assert.equal(r.__status, 200, "one dead read does not blank the report");
+  assert.equal(r.health.notifications.status, "unavailable", "a failed read is not a hospital that sent nothing");
+  assert.ok(r.health.notifications.error, "and it says why");
+  assert.equal(r.health.notifications.rate, undefined, "no rate is computed over records that were never read");
+});
+
 /* ---- 12: freshnessOf, pure --------------------------------------------------------------------------- */
 
 test("12. freshnessOf is pure and classifies by age, never by content", () => {

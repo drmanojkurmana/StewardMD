@@ -97,6 +97,9 @@ const NOT_BUILT = Object.freeze({
  * read stopped seeing today once a hospital passed the cap. Past the cap the section still says capped. */
 const LIST_CAP = 1000;
 const NEWEST = { newest: true };
+/* R5-4: the point-in-time rebuild's per-type bound. Each record read costs one further history read,
+ * so this is a real ceiling, stated on the screen, not a number to raise quietly. */
+const AS_OF_CAP = 500;
 const HOUR = 3600000;
 
 /** PURE. Nearest-rank percentile of a numeric list; null for an empty list, never 0. */
@@ -439,7 +442,12 @@ async function reconstructTwinAsOf(request, env, ctx, atIso) {
   const asOf = {};
   for (const type of RECONSTRUCTED_TYPES) {
     let ids;
-    try { ids = (await svc.list(type, 500)) || []; }
+    /* R5-4: the NEWEST AS_OF_CAP, not the oldest. This walks each record's own version history, so the
+     * bound cannot be lifted by reading more (it would be AS_OF_CAP history reads more); what it can
+     * do is read the end of the type a reconstruction is actually asked about. Past the cap the
+     * OLDEST records were not read, and `capped` says so - the screen prints "only the latest 500
+     * checked". */
+    try { ids = (await svc.list(type, AS_OF_CAP, NEWEST)) || []; }
     catch { asOf[type] = { status: "unavailable" }; continue; }
     const rows = [];
     let unreadable = 0;
@@ -457,8 +465,8 @@ async function reconstructTwinAsOf(request, env, ctx, atIso) {
       if (asOfVersion) rows.push(asOfVersion);
     }
     asOf[type] = unreadable
-      ? { status: "partial", count: rows.length, unreadable, records: rows }
-      : { status: "ok", count: rows.length, ...(ids.length >= 500 ? { status: "partial", capped: true } : {}), records: rows };
+      ? { status: "partial", count: rows.length, unreadable, ...(ids.length >= AS_OF_CAP ? { capped: true } : {}), records: rows }
+      : { status: "ok", count: rows.length, ...(ids.length >= AS_OF_CAP ? { status: "partial", capped: true } : {}), records: rows };
   }
 
   return {
@@ -531,8 +539,10 @@ async function operationalHealthReport(request, env, ctx) {
   let notifications = { status: "unavailable", error: null };
   try {
     const [grants, loops] = await Promise.all([
-      svc.list("BreakGlassGrant", 500, NEWEST).catch(() => []),
-      svc.list("CriticalResultLoop", 500, NEWEST).catch(() => []),
+      /* R5-4: no .catch(() => []) here. A read that failed is not a hospital with no notifications:
+       * it falls to the outer catch and the section reports unavailable with the reason. */
+      svc.list("BreakGlassGrant", 500, NEWEST),
+      svc.list("CriticalResultLoop", 500, NEWEST),
     ]);
     const attempts = [...grants, ...loops].filter((r) => r && r.notification && r.notification.attempted);
     const delivered = attempts.filter((r) => r.notification.delivered === true).length;
