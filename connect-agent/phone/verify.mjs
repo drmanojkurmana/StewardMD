@@ -38,6 +38,8 @@ export function localVerdict(resource, rows, kind) {
  * checks: [{ resource, ok, via, rows, kind, reason, url }] one per verifiable view; `failed` lists the
  * resources the doctor should be asked for. Each verified view gets `view.verified` (PHI-free).
  */
+const ROW_HUNT_PATIENTS = 8;
+
 export async function verifyViews({ plugin, origin, views, brain = null, book = null, notify = null, stopped = () => false, skipAt = () => 0, maxPatients = 2, waitMs = 6000, parseHtml = null }) {
   const proven = (v) => !!(v && v.proof && v.proof.status === 'proven');
   const say = (extra) => { try { if (notify) notify('VERIFYING', extra); } catch { /* UI must never break the check */ } };
@@ -69,6 +71,13 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
 
   // 2. Every other view with a discovered call, for up to two real patients.
   const sample = patients.slice(0, maxPatients);
+  /* AN EMPTY LIST IS NOT A BROKEN CALL. Most inpatients have no scans: on the owner's live ward only
+   * one of seven had a radiology study. Checking the first two patients, finding an honest empty list
+   * for both and withdrawing the proof condemned a perfectly good endpoint ("radiology: not proven
+   * (no rows came back)"), which left radiology-detail with no row to open and blocked approval
+   * (live GHIS run 3, 2026-09-18). Rows are hunted further down the ward; the loop still stops at the
+   * first patient who has any, so a resource everyone has costs exactly one call as before. */
+  const rowHunt = patients.slice(0, Math.max(maxPatients, ROW_HUNT_PATIENTS));
   const listRows = {};
   for (const view of list) {
     if (stopped()) break;
@@ -107,7 +116,7 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
     say({ checking: view.resourceHint });
     let best = null;
     let lastError = '';
-    for (const patient of sample) {
+    for (const patient of rowHunt) {
       let out = null;
       try { out = await executeView({ plugin, origin, view, patient, parseHtml }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; out = null; lastError = String((e && e.message) || e).replace(/\d{3,}/g, '#').slice(0, 120); }
       if (out && out.rows.length) { best = out; listRows[view.resourceHint] = { rows: out.rows, patient }; break; }

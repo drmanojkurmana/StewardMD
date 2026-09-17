@@ -98,3 +98,46 @@ test('verifyViews withdraws the proof of a call that answers no rows for every r
   assert.equal(shell.proof.wasProven, true);
   assert.equal(views[1].proof, undefined, 'a view that verified with rows is untouched');
 });
+
+
+/* AN EMPTY LIST IS NOT A BROKEN CALL. Most inpatients have no scans: on the owner's live ward only one
+ * of seven had a radiology study. Verification sampled the first two patients, both answered an honest
+ * empty list, and the agent withdrew the proof of a perfectly good endpoint - "radiology: not proven
+ * (no rows came back)", which then left radiology-detail with no row to open and blocked approval
+ * (live GHIS run 3, 2026-09-18). It must keep looking down the ward before condemning the call. */
+test('verifyViews keeps looking for a patient who has one when the first patients have an empty list', async () => {
+  const WARD = [1, 2, 3, 4, 5, 6, 7].map((n) => ({ patientId: 'MR' + n, patientFirstName: 'P' + n, episodeId: 'V' + n, bedName: 'B' + n }));
+  const tried = [];
+  const plugin = {
+    async navigate() {}, async wait() {},
+    async currentUrl() { return { url: ORIGIN + '/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ __RequestVerificationToken: 't' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '[]' };
+      const reply = (o) => ({ result: JSON.stringify(Object.assign({ status: 200, contentType: 'application/json', url: req.url }, o)) });
+      if (req.url.indexOf('/GetIPWL') >= 0) return reply({ text: JSON.stringify(WARD) });
+      const who = (req.url.match(/recordNo=(MR\d+)/) || [])[1];
+      if (who) {
+        tried.push(who);
+        // only the sixth patient on the ward has had a scan; everyone else gets a well-formed empty list
+        const rows = who === 'MR6' ? '<tr><td>21710420</td><td>17-Dec-2024</td><td>MRI BRAIN PLAIN</td></tr>' : '';
+        return reply({ contentType: 'text/html', text: '<table><tr><th>Service ID</th><th>Date</th><th>Description</th></tr>' + rows + '</table>' });
+      }
+      return reply({ text: '' });
+    },
+  };
+  const views = [
+    { resourceHint: 'worklist', pathTemplate: ORIGIN + '/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['Patient ID', 'Patient name'], endpoints: [{ method: 'GET', path: '/Doctor/Home/GetIPWL?Type&start&length' }] },
+    { resourceHint: 'radiology', pathTemplate: ORIGIN + '/Radio/Home', rowsSelector: '#r tr', headers: ['Service ID', 'Date', 'Description'], proof: { status: 'proven' },
+      endpoints: [{ method: 'GET', path: '/Radio/Home?recordNo', params: { recordNo: { from: 'worklist', field: 'patientId' } } }] },
+  ];
+  const brain = { verify: async (p) => ({ ok: true, resource: p.resource, confidence: 0.9, reason: 'looks right', suggestion: 'ok' }) };
+  const out = await verifyViews({ plugin, origin: ORIGIN, views, brain, parseHtml: miniParse });
+  const by = Object.fromEntries(out.checks.map((c) => [c.resource, c]));
+  assert.ok(tried.length > 2, 'more than the first two patients were tried: ' + tried.join(','));
+  assert.equal(by.radiology.ok, true, 'the endpoint is verified once a patient with a scan is found: ' + by.radiology.reason);
+  assert.equal(by.radiology.rows, 1);
+  assert.ok(!out.failed.includes('radiology'), 'a correct call is not condemned by patients who have no scans');
+  assert.equal(views[1].proof.status, 'proven', 'its proof stands');
+});
