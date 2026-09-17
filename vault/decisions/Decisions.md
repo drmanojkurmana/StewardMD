@@ -8183,3 +8183,49 @@ of compliance.js is untouched.
 - Not done: no cron or scheduled runner (the job is admin-triggered on purpose; the person who starts it is
   the person it is audited to), and no total-remaining figure before a full scan pass - the count comes from
   the scan itself, batch by batch, because counting the archive is the same walk as scanning it.
+
+## 2026-09-18 R6-3: an order the SENDING system has finished is closed here, by a local actor
+
+Round 6 audit §2(b): an ingested ServiceRequest lands as `draft` (service.js `governedForIngest` writes as the
+adapter actor, and the adapter ceiling caps it there), so if its result is filed upstream nothing in WardSynQ
+ever closes it. `draft` is an OPEN status, so every order a real LIS feed ever sent counts against
+OPEN_CENSUS_MAX (5,000) for ever, and the day that is reached the laboratory, specimen and imaging boards
+refuse. Branch `external-order-closure`.
+
+- THE ADAPTER CEILING IS NOT MOVED. An adapter still writes `draft` and still may not assert a clinical
+  status; the governance test is unchanged and still passing.
+- THE SENDER'S ASSERTION WAS ALREADY PRESERVED, so no ingest change was needed. The audit proposed a new
+  `meta.sourceStatus`; the code already carries the sender's own word as `externalStatus`
+  (wardsynq-sccm-adapter.js, from FHIR `ServiceRequest.status` or the HL7 ORC, on both the FHIR and HL7
+  doors), audited with the rest of the record and never read as the record's own status. Adding a second
+  field for the same fact would have been a second source of truth. Followed the code; fhir-inbound.js and
+  hl7-normalize.js are untouched, and a test pins the adapter's behaviour so it stays that way.
+- THE CLOSING WRITE IS LOCAL AND GOVERNED, never the adapter's. `functions/_wardsynq/source-order-close.js`
+  is shaped exactly like `order-backfill.js` - dry run first, one page per request at the store's own cursor,
+  resumable, safe to run twice, nothing partial reported as success - and closes through
+  `closeOrderOnResult()` with a new `deps.on: "source-terminal"` (`roleSource: "wardsynq-source-terminal"`),
+  on the authority of the administrator who pressed the button, whose id lands on the new version. The
+  record keeps `externalStatus` and `meta.source` and gains `completedOn: "source-terminal"`, so the audit
+  trail says the assertion came from outside and the closure was made here.
+- ONE NARROW EXCEPTION TO EXTERNAL AUTHORITY, in `service.js sourceTerminalClosure()`: that role AND that
+  roleSource, ServiceRequest only, the sender's terminal word as the STORE holds it (never as the incoming
+  entity asserts it), the status being written is `completed`, and every other field on the record must be
+  byte-identical. Anything else is still refused with EXTERNAL_AUTHORITY, so this cannot widen into a general
+  door onto another system's records. The terminal vocabulary is `CLOSED_ORDER_STATUSES` and is spelled twice
+  (ward-order.js imports service.js, so the import cannot go the other way); the test pins the two equal.
+- An order whose sender says `active`, says `unknown`, or says nothing is never closed. Neither is this
+  hospital's own order: those are order-backfill.js's, closed on a filed result.
+- The closing version KEEPS `meta`. The two native paths delete it, which for an externally owned record
+  would leave the new version with no `meta.source` at all - read everywhere as "this hospital owns it", so
+  tidying the order would quietly transfer another system's record to us.
+- CORRECTION TO THE AUDIT: it says an ingested order "appears on the board". It does not. specimen.js and
+  lab-result.js both drop `isExternalRecord`, so another system's order was never on this ward's collection
+  or pending-tests boards. What it does is sit in the OPEN CENSUS, which is what refuses. The test asserts
+  the census, and asserts the boards do not change.
+- Screen: Admin Center > Close finished orders now carries both panels - the existing result backfill and
+  "Close orders another system has finished" - each with its own state. Routes
+  `POST /api/queue/ward/source-order-scan` and `POST /api/queue/ward/source-order-close`, both staff.admin.
+  The scan names the sending system per order, so an administrator can see whose "finished" they are acting on.
+- Not done: no cron (admin-triggered on purpose, as the backfill is), and no per-adapter policy for which
+  senders may be trusted - every connected system's terminal word counts the same today. If one hospital
+  finds a feed whose `completed` is unreliable, that is a per-adapter setting and a new decision.
