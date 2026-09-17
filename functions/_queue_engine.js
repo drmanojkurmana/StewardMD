@@ -6,7 +6,8 @@
  * can't reach Firestore). Every DECISION (transitions, ordering, ETA, learning) is delegated to the
  * unit-tested _queue_eta.js, so the untested surface here is thin CRUD.
  */
-import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsGet, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { readAllOrThrow } from "./_fs_read_all.js";
 import { brandingFor } from "./_clinic_branding.js";
 import { writeOrgAudit, appendOrgAudit } from "./_q_audit_chain.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
@@ -41,8 +42,11 @@ export async function getOrCreateSession(env, p) {
 export async function getSession(env, id) { const d = await fsGet(env, "q_sessions/" + id); return d ? withId(id, d.fields) : null; }
 export async function getTicket(env, id) { const d = await fsGet(env, "q_tickets/" + id); return d ? withId(id, d.fields) : null; }
 
+/* Lists here read every page (R4-3): one query of 500 tickets, 200 sessions or 200 staff used to be the whole answer.
+ * A session's queue is ordered and reflowed from its tickets, so a partial read throws (507) rather than reorder half. */
+export const LIST_CAP = 5000;
 export async function listTickets(env, sid) {
-  const rows = await fsQuery(env, "q_tickets", { where: { field: "sessionId", value: sid }, limit: 500 });
+  const rows = await readAllOrThrow(env, "q_tickets", { field: "sessionId", value: sid }, LIST_CAP, "tickets_too_many");
   return rows.map((r) => withId(r.id, r.fields));
 }
 // Doctor-facing view: decrypt name/mobile (the authed owner may see them). Never sent to a patient page.
@@ -114,7 +118,7 @@ async function tokenDepartment(env, session, body, org) {
   cfg = tokenConfig(cfg);
   const hosp = (org && org.id) || session.hospitalId || "";
   if (!hosp || (cfg.scope !== "department" && !body.departmentId)) return { cfg, department: null };
-  const rows = await fsQuery(env, "q_departments", { where: { field: "orgId", value: sanitize(hosp) }, limit: 200 });
+  const rows = await readAllOrThrow(env, "q_departments", { field: "orgId", value: sanitize(hosp) }, LIST_CAP, "departments_too_many");
   const departments = rows.map((r) => M_department(withId(r.id, r.fields)));
   let roomDepartmentId = "";
   const roomId = body.roomId || session.roomId;
@@ -314,14 +318,24 @@ export async function assignTicket(env, fromSession, ticketId, toDoctorUid, opts
 
 // ---- audit timeline: decode q_events for a session's tickets (newest first). NO PHI (ticketId +
 // masked mrnLast4 only). `meta` for move/assign is JSON; left as-is for the client to render. --------
+/* q_events rows carry no session field (_q_audit_chain.js eventFields: ts, hospitalId, ticketId, actor, action, meta),
+ * so each ticket's events are asked for by hospitalId AND ticketId, every page. It used to read the hospital's first
+ * 500 events of all kinds and filter, so once a hospital passed 500 events every timeline came back empty.
+ * ponytail: one query per ticket, EVENT_BATCH at a time; a session field on the chain row is the upgrade if a large
+ * session makes this slow. More than LIST_CAP events on one ticket throws rather than show part of its history. */
+const EVENT_BATCH = 10;
 export async function auditTimeline(env, session, limit) {
   const tickets = await listTickets(env, session.id);
   const byId = {}; tickets.forEach((t) => (byId[t.id] = t));
-  const ids = new Set(tickets.map((t) => t.id));
-  const rows = await fsQuery(env, "q_events", { where: { field: "hospitalId", value: session.hospitalId }, limit: 500 });
+  const rows = [];
+  for (let i = 0; i < tickets.length; i += EVENT_BATCH) {
+    const pages = await Promise.all(tickets.slice(i, i + EVENT_BATCH).map((t) =>
+      readAllOrThrow(env, "q_events", [{ field: "hospitalId", value: session.hospitalId }, { field: "ticketId", value: t.id }], LIST_CAP, "events_too_many")));
+    pages.forEach((p) => rows.push(...p));
+  }
   return rows
     .map((r) => withId(r.id, r.fields))
-    .filter((e) => e.ticketId && ids.has(e.ticketId))
+    .filter((e) => e.ticketId && byId[e.ticketId] && e.hospitalId === session.hospitalId)
     .sort((a, b) => (b.ts || 0) - (a.ts || 0))
     .slice(0, Math.max(1, Math.min(200, Number(limit) || 100)))
     .map((e) => ({ ts: e.ts, actor: e.actor, action: e.action, meta: e.meta,
@@ -355,12 +369,14 @@ export async function removeStaff(env, employeeId, actor) {
   return { ok: true };
 }
 export async function listStaff(env, hospitalId) {
-  const rows = await fsQuery(env, "q_staff", hospitalId ? { where: { field: "hospitalId", value: hospitalId }, limit: 200 } : { limit: 200 });
+  const rows = await readAllOrThrow(env, "q_staff", hospitalId ? { field: "hospitalId", value: hospitalId } : null, LIST_CAP, "staff_too_many");
   return rows.map((r) => withId(r.id, r.fields)).filter((s) => s.removedAt == null);
 }
 // ---- sessions for a hospital+day (the multi-doctor front-desk board) -------------------------------
 export async function listSessions(env, hospitalId, date) {
-  const rows = await fsQuery(env, "q_sessions", { where: { field: "hospitalId", value: hospitalId }, limit: 200 });
+  // By hospital AND day (both equality): the hospital's whole history used to fill the 200 first, so today's board went empty.
+  const where = [{ field: "hospitalId", value: hospitalId }, ...(date ? [{ field: "date", value: date }] : [])];
+  const rows = await readAllOrThrow(env, "q_sessions", where, LIST_CAP, "sessions_too_many");
   return rows.map((r) => withId(r.id, r.fields)).filter((s) => !date || s.date === date);
 }
 // Call the next queued patient (used by slide-to-checkout: close one -> call the next). No-op if none
@@ -485,7 +501,7 @@ export async function qAudit(env, ev) {
 /** Tickets issued to an ABDM profile share at this hospital that have not expired, newest first. */
 export async function listShareTickets(env, orgId) {
   if (!orgId) return [];
-  const rows = await fsQuery(env, "q_tickets", { where: { field: "abdmShareOrg", value: String(orgId) }, limit: 200 });
+  const rows = await readAllOrThrow(env, "q_tickets", { field: "abdmShareOrg", value: String(orgId) }, LIST_CAP, "share_tickets_too_many");
   const t = now();
   return (rows || []).map((r) => withId(r.id, r.fields)).filter((x) => !x.expiresAt || x.expiresAt > t)
     .sort((a, b) => (b.registeredAt || 0) - (a.registeredAt || 0));
@@ -508,11 +524,11 @@ export async function attachShareRegistration(env, org, ticketId, mrn, actor) {
 // most recent ticket for this MR# carries it under encPHI, which is the same number the queue already
 // texts. Returned for ONE send; never stored, never logged, never audited.
 //
-// fsQuery takes a single field filter, so the org is filtered in JS - and it MUST be filtered: another
-// hospital's ticket for a colliding MR# would be somebody else's phone number.
+// Asked for by MR# AND hospital, every page (it read 50 tickets of the MR# and could miss the newest number); the org is
+// still checked in JS - it MUST be: another hospital's ticket for a colliding MR# would be somebody else's phone number.
 export async function findMobileByPatientId(env, hospitalId, patientId) {
   if (!hospitalId || !patientId) return null;
-  const rows = await fsQuery(env, "q_tickets", { where: { field: "ghisPatientId", value: String(patientId) }, limit: 50 });
+  const rows = await readAllOrThrow(env, "q_tickets", [{ field: "ghisPatientId", value: String(patientId) }, { field: "hospitalId", value: hospitalId }], LIST_CAP, "tickets_too_many");
   const mine = (rows || []).filter((r) => r.fields && r.fields.hospitalId === hospitalId)
     .sort((a, b) => (b.fields.registeredAt || 0) - (a.fields.registeredAt || 0));
   for (const r of mine) {
