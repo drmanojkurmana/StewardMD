@@ -488,7 +488,7 @@ function returnableFrom(receipt, movements) {
 
 /**
  * Sends stock back to the supplier it came from, against the receipt that brought it in.
- * ctx: { migration, receiptId, quantity, reason, supplier?, debitNoteNo?, controlled?, witnessId?, witnessCheck?,
+ * ctx: { migration, receiptId, quantity, reason, supplier?, debitNoteNo?, isControlled(display, code), witnessId?, witnessCheck?,
  *        controllerApprovalRef?, at?, idempotencyKey? }
  *
  * NEVER MORE THAN ARRIVED. The receipt and every earlier return against it are read, and a quantity above what is
@@ -533,8 +533,11 @@ async function returnToSupplier(request, env, ctx) {
   const supplier = str(receipt.receivedFrom) || str(po && po.vendor) || str(ctx.supplier);
   if (!supplier) return { ...base, ok: false, status: 422, error: "supplier_required", detail: "The receipt does not name its supplier. Say who the stock is going back to.", written: 0 };
 
+  /* Controlled or not is the hospital's drug master applied to the receipt's own item, never the caller's word. A route
+   * that cannot say is refused rather than treated as not controlled. */
+  if (typeof ctx.isControlled !== "function") return { ...base, ok: false, status: 502, error: "controlled_check_unavailable", detail: "Whether this is a controlled drug could not be checked, so nothing was recorded.", written: 0 };
   const moved = await recordMovement(request, env, {
-    ...ctx, kind: "supplier-return", code: str(receipt.code), display: str(receipt.display) || str(receipt.code),
+    ...ctx, kind: "supplier-return", controlled: ctx.isControlled(receipt.display, receipt.code) === true, code: str(receipt.code), display: str(receipt.display) || str(receipt.code),
     quantity: { value, unit: left.unit }, location: receipt.location || null, batch: receipt.batch || null, expiry: receipt.expiry || null, reason,
     supplierReturn: { receiptId, supplier, purchaseOrderId: str(receipt.purchaseOrderId), debitNoteNo: ctx.debitNoteNo },
   });
