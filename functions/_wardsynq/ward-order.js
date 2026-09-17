@@ -85,23 +85,30 @@ function isOpenOrder(o) {
  * reason to fail the release. The caller is told `closed: false` and says so, rather than reporting a
  * tidiness it did not achieve.
  *
- * @param {{repository: object, pseudonym?: function, tenant: object, actorId: string}} deps
+ * WHAT CLOSED IT travels with the record. `deps.on` is "result" (a result was filed, the live path)
+ * or "backfill" (order-backfill.js, closing orders that were resulted before this existed). Same
+ * writer, same status, same append-only version - the word only lets an auditor tell a retrospective
+ * tidy-up from a result being released, which is exactly the question they will ask of a run that
+ * closed ten thousand orders in an afternoon.
+ *
+ * @param {{repository: object, pseudonym?: function, tenant: object, actorId: string, on?: string}} deps
  * @param {object} order the ServiceRequest as read, with its version
  * @returns {Promise<{closed: boolean, reason?: string}>}
  */
 async function closeOrderOnResult(deps, order) {
   if (!order || !order.id) return { closed: false, reason: "no_order" };
   if (CLOSED_ORDER_STATUSES.includes(str(order.status))) return { closed: true };
+  const on = str(deps && deps.on) === "backfill" ? "backfill" : "result";
   let svc;
   try {
     svc = new RecordService({
       repository: deps.repository, pseudonym: deps.pseudonym,
-      tenant: deps.tenant, role: "wardsynq-order-closure", roleSource: "wardsynq-result-filed",
+      tenant: deps.tenant, role: "wardsynq-order-closure", roleSource: on === "backfill" ? "wardsynq-order-backfill" : "wardsynq-result-filed",
       actor: makeActor({ id: str(deps.actorId) || "wardsynq", kind: KIND.HUMAN, tier: TIER.EXECUTE,
         display: "order closure on result", scope: { read: ["ServiceRequest"], write: ["ServiceRequest"] } }),
     });
   } catch (e) { return { closed: false, reason: str(e && e.message) }; }
-  const next = { ...order, status: "completed", completedAt: new Date().toISOString(), completedBy: str(deps.actorId) || null, completedOn: "result" };
+  const next = { ...order, status: "completed", completedAt: new Date().toISOString(), completedBy: str(deps.actorId) || null, completedOn: on };
   delete next.version; delete next.meta; delete next.writtenBy;
   try { await svc.put(next, { expectedVersion: order.version }); return { closed: true }; }
   catch (e) { return { closed: false, reason: str(e && e.message) }; }
