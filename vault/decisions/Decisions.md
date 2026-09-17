@@ -8260,3 +8260,52 @@ coercion, so `true`, `"5"`, `Infinity`, `NaN`, `2.7` and `-3` all produce no sen
 "1 patients discharged this month have not heard from you." Pinned by `test/quota-meters.test.mjs`
 (21 tests, +2) and `test/run-quota-topup-ui.mjs` (27 browser checks, +7: the nudge renders verbatim from
 a real count, exactly once, leading the deck, with no identifier, and vanishes at 0).
+
+## 2026-09-18 — Credit model: one credit = one bounded EPISODE; new prices; web pricing kept out of iOS
+
+Owner decisions, implemented on `nudge-unheard-count`. Still fully inert behind `QUOTA_METERS_ON`.
+
+**1. One credit = one bounded episode, charged once at enrol.** An episode is day 0 the 7-day
+FollowCare SMS/WhatsApp check-in course, day 3 a MAiTRI call *only* if the patient has not responded,
+day 7 a MAiTRI call *only* if there is still no response, plus feedback capture, the ambulance alert by
+WhatsApp/SMS, the doctor-app alert and in-app patient messaging. At most two calls, both conditional on
+non-response. Nothing else in the episode deducts.
+
+This made `followcare/voice/call` a **bug, not a gap**: it was deducting a second credit for the
+doctor-initiated MAiTRI call. That route 404s without an existing `episodeId`, so every call it can
+place belongs to an episode already paid for at enrol - the deduction was double-charging the doctor
+for what they had bought. Removed (`functions/api/followcare/[[path]].js:415`). `enroll` is now the
+only care deduction in the codebase, and `test/quota-meters.test.mjs` asserts exactly that by counting
+the `careCredit(` call sites in the router and asserting the scheduler dispatch path never imports the
+meter. The scheduler-initiated calls that were already unmetered were correct all along.
+
+**2. New prices** (verified live in App Store Connect): `in.stewardmd.care.25` ₹2,499 (was ₹1,099),
+`in.stewardmd.care.100` ₹8,999 (was ₹3,499). Scribe unchanged at ₹999 / ₹3,999. Per-patient copy is
+₹100 and ₹90, and `perUnit` is **derived** from `amount / units` rather than typed, so the two cannot
+drift apart. Rationale in the code: an episode costs us ~₹32 worst case (SMS ₹10 + up to two calls at
+₹10 + ~₹2 of alerts) and ~₹19 typical, so ₹100 holds 55% margin even for a patient who needs both calls.
+
+**3. Web pricing, and why it never appears on iOS.** `quotaPacks()` now carries `amount` (store) and
+`webAmount` (web): care.25 ₹2,199, care.100 ₹7,999. The discount is funded by the payment fee we save
+(Razorpay ~2% against Apple's 15%), not out of margin. Scribe deliberately has **no** `webAmount`, so
+nothing can advertise a discount that does not exist.
+
+The India storefront's anti-steering rules make a "cheaper on the web" hint anywhere in the iOS app a
+straight rejection, and this app is mid-submission. Apple's 2021 anti-steering settlement permits
+telling users about other payment methods *outside* the app, with consent. So the two halves are
+separated **structurally**, not by discipline:
+- The outbound SMS/WhatsApp/email copy is `webUpsellSms()` in `functions/_quota.js`. `functions/` is
+  excluded from the app bundle by `scripts/build-www.sh`, so that string physically cannot reach an
+  iOS screen.
+- The sheet renderer gates every web price on `var webOk = plat() !== "ios";`
+  (`pro-paywall.js` `openTopUp`). On iOS the card shows the App Store price and the store-derived
+  per-patient figure; on the web it shows the web price and the web-derived figure. There is no
+  comparison shown anywhere, on either platform, so there is nothing to steer with.
+
+Asserted three ways: a node test that the in-app refusal copy contains no web price, no `stewardmd.in`,
+and no steering wording, that `pro-paywall.js` reads `webAmount` only behind the platform gate and
+ships no purchase URL; and a headless-Chrome test that re-renders the *same* sheet with
+`Capacitor.getPlatform() === "ios"` and asserts ₹2,499 / ₹8,999 are shown while `2,199`, `7,999`,
+`219900`, `799900` and `stewardmd.in` appear nowhere in the sheet's **markup**, not merely its text.
+
+Tests: `test/quota-meters.test.mjs` 24/24 (+3), `test/run-quota-topup-ui.mjs` 36/36 browser checks (+9).

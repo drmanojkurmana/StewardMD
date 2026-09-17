@@ -94,7 +94,7 @@ try {
 
   const t = String(await sheetText() || "");
   ok(/The clinic that calls is the clinic they come back to\./.test(t), "renders the owner-approved benefit headline");
-  ok(/₹44 per patient\. One patient who comes back pays for 15 follow-ups\./.test(t), "renders the price-per-patient line");
+  ok(/₹100 per patient, or ₹90 in the 100 pack\. One patient who comes back pays for the pack\./.test(t), "renders the price-per-patient line");
   ok(/Credits never expire\./.test(t), "says credits never expire (removes the main purchase hesitation)");
   ok(!/have not heard from you/.test(t), "the low-state sentence is absent when the server sends no real count");
   ok(!/—/.test(t), "no em-dash in the rendered sheet");
@@ -105,8 +105,30 @@ try {
   const P = JSON.parse(packs || "[]");
   ok(P.length === 2, `both care packs are offered (got ${P.length})`);
   ok(P.map(p => p.k).sort().join(",") === "care.100,care.25", "buttons carry the server pack keys care.25 / care.100");
-  ok(/25 patients ₹1,099/.test(P.map(p => p.t).join(" | ")), `the ₹1,099 / 25-patient pack is priced on the card (got ${JSON.stringify(P.map(p => p.t))})`);
-  ok(/100 patients ₹3,499/.test(P.map(p => p.t).join(" | ")), "the ₹3,499 / 100-patient pack is priced on the card");
+  // No Capacitor on this page, so plat() === "web": the web prices are the ones a browser may see.
+  ok(/25 patients ₹2,199/.test(P.map(p => p.t).join(" | ")), `the web ₹2,199 / 25-patient pack is priced on the card (got ${JSON.stringify(P.map(p => p.t))})`);
+  ok(/100 patients ₹7,999/.test(P.map(p => p.t).join(" | ")), "the web ₹7,999 / 100-patient pack is priced on the card");
+  ok(/₹88 each/.test(P.map(p => p.t).join(" | ")), "the per-patient figure follows the web price");
+
+  // ── ANTI-STEERING: the same sheet on iOS shows the STORE price and nothing about the web ──
+  await close();
+  await ev(`window.Capacitor = { getPlatform: function(){ return "ios"; } }; return 1;`);
+  await refuse(CARE);
+  await sleep(400);
+  const ios = String(await sheetText() || "");
+  ok(/₹2,499/.test(ios), "iOS renders the App Store price ₹2,499");
+  ok(/₹8,999/.test(ios), "iOS renders the App Store price ₹8,999");
+  ok(!/2,199|7,999/.test(ios), "iOS renders NO web price anywhere on the sheet");
+  ok(!/stewardmd\.in/i.test(ios), "iOS renders no stewardmd.in link or hint");
+  ok(!/cheaper (on|at|via)|on the web|our website|in your browser/i.test(ios), "iOS carries no steering wording");
+  ok(/₹100 each/.test(ios), "iOS per-patient figure follows the store price");
+  const iosHtml = String(await ev(`var p=document.getElementById("proPay"); return p ? p.outerHTML : "";`) || "");
+  ok(!/stewardmd\.in|2,199|7,999|219900|799900/.test(iosHtml), "not even the iOS sheet's MARKUP carries a web price or purchase URL");
+  await ev(`try { delete window.Capacitor; } catch(e) { window.Capacitor = undefined; } return 1;`);
+  await close();
+  await refuse(CARE);
+  await sleep(400);
+  ok(/₹2,199/.test(String(await sheetText() || "")), "back on the web the web price returns");
 
   // ── the nudge: it renders with a real count and vanishes at 0 ──
   await close();

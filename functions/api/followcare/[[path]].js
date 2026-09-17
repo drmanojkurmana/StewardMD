@@ -412,7 +412,11 @@ export async function onRequest(context) {
       if (!ep) return json({ error: "not_found" }, 404, request);
       if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403, request);
       const settings = await FCV.getHospitalSettings(env, ep.hospitalId);
-      const _q = await careCredit(env, request, uid); if (_q) return _q;
+      /* NO CREDIT DEDUCTION HERE (owner-decided 2026-09-18). One credit = one bounded EPISODE, paid at
+       * enrol, and it already includes the day-3 and day-7 non-response calls. This route loads an
+       * existing episode (404s without one), so every call it can place belongs to an episode already
+       * paid for; charging again was double-charging the doctor for the thing they bought. `enroll`
+       * below is now the only care deduction in the codebase and test/quota-meters pins that. */
       const r = await FCV.queueVoiceCall(env, ep, settings, Date.now(), { manual: true, actor: "doctor:" + uid });
       return json(r, r.ok ? 200 : 400, request);
     }
