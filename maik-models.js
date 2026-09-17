@@ -303,16 +303,16 @@
      * MedMCQA 58.0. bytes and sha256 are the HF API's exact size and lfs.oid. UNVERIFIED on device:
      * a qwen3vl-architecture GGUF loading text-only in the plugin's llama.cpp has not been run here. */
     "medmo-4b": {
-      label: "MAiK MedMO",
+      label: "MAiK Cortex",   // owner, 2026-09-18: shipped under the MAiK name; `actual` keeps the honest provenance
       actual: "MedMO-4B (MBZUAI, Qwen3-VL-4B base, Q4_K_M)",
       tier: 2.5,
       noThink: true,
-      note: "Medical foundation model from MBZUAI, strong on medical text QA. Text only: this download carries no vision file. Checked against the Knowledge Base.",
+      note: "Medical foundation model (MBZUAI MedMO-4B), strong on medical text QA, with every answer checked claim by claim against the Knowledge Base. Text only: this download carries no vision file.",
       guide: {
         speed: 2, medical: 3, general: 2,
         bestFor: "Clinical questions answered from a medical foundation model, checked against the Knowledge Base.",
         why: "Trained on 26M medical samples; MedQA 78.5 and MMLU-Med 75.7 on its model card, the strongest text scores of the 4B packs.",
-        pick: "Pick this for medical depth without a 3 GB download. Expect 30 to 50 seconds per answer. It cannot read photos."
+        pick: "Pick this for medical depth without a 3 GB download, answered from the Knowledge Base. Expect 30 to 50 seconds per answer. It cannot read photos."
       },
       nCtx: 4096,
       nPredict: 768,

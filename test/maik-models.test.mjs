@@ -88,6 +88,12 @@ function fakeModel(n) {
   ok("primary pack exact byte count", M.totalBytes("maik-mxcore") === 2489894976);
   ok("primary pack sizeLabel", M.sizeLabel("maik-mxcore") === "2.49 GB");
   ok("third tier is MAiK Horizon", M.PACKS["maik-horizon"].label === "MAiK Horizon");
+  // MedMO-4B ships in the offline model list as MAiK Cortex (owner, 2026-09-18), RAG-connected:
+  // CAPS.kb is what maik-local.ragEligible() reads, so the pack is checked against the KB like Lite.
+  ok("MedMO-4B ships as MAiK Cortex", M.PACKS["medmo-4b"].label === "MAiK Cortex");
+  ok("Cortex keeps its honest provenance in `actual`", /MedMO-4B \(MBZUAI/.test(M.PACKS["medmo-4b"].actual));
+  ok("Cortex is RAG-connected (CAPS.kb)", M.caps("medmo-4b").kb === true);
+  ok("Cortex is text-only (no vision file)", !M.PACKS["medmo-4b"].vision);
   // maik-lite (MedPsy 1.7B) is tier 0: the entry pack, smallest download, offered first.
   ok("tiers come back in recommended order", M.packIds().join(",") === "maik-lite,bonsai-ternary-8b,bonsai-8b,maik-mxcore,maik-neural,medmo-4b,maik-horizon,maik-apex,bonsai-27b");
   ok("MAiK Neural (Q5) present with the exact size", M.totalBytes("maik-neural") === 2829699136);

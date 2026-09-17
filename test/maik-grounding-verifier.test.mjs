@@ -105,7 +105,7 @@ function loadLocal({ replies, kb = true }) {
   const win = {
     Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
     SMD_MAIK_RAG: R, SMD_MAIK_GROUND: G, SMD_MAIK_KB_STORE: { loadBook: () => Promise.resolve(book) },
-    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true }, "medmo-4b": { label: "MAiK MedMO", nCtx: 4096, nPredict: 768, noThink: true } },
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true }, "medmo-4b": { label: "MAiK Cortex", nCtx: 4096, nPredict: 768, noThink: true } },
       caps: (id) => ({ id, kb: kb }), pathFor: async () => "/tmp/x.gguf", totalBytes: () => 1e9 },
     localStorage: { getItem: () => null, setItem() {}, removeItem() {} }
   };

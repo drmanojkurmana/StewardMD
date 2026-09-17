@@ -5,6 +5,46 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-18 · A dose question is a database lookup, not a model question
+
+**Owner:** "tell me dose of ondansetron … we already have the drug database it can redirect … dose of
+parecetmal it should understand correct spelling" — and, on the drug source: "check drug database
+medapi, all drugs in the world are there."
+
+**Decision.** `kb/ai/drug-dose.js` (`window.SMD_DOSE`) intercepts dose-intent questions in
+`maik-engine.js route()` — BEFORE the engine choice, so cloud and on-device behave identically — and
+answers from `window.MEDAPI`: `searchCompositions` / `searchBrands` resolve the molecule, `structured`
+supplies the figures (`gold.dosage` rows, else `adult_dose` / `ped_dose` / `renal_adjust` /
+`hepatic_adjust` / `pregnancy`). **No model is in the loop for the numbers**, so a dose cannot be
+invented. The adult answer also carries the renal and hepatic lines, because a dose question is
+rarely only about the adult dose.
+
+**Spelling.** The full-text search finds nothing for "parecetmal", so the router re-searches on the
+first 4 then 3 letters — a typo is almost never in them — and fuzzy-matches inside that short
+candidate list with the existing `DrugFuzzy` (Scan-Meds'), widened to distance 3 for a TYPED name.
+A corrected or brand-resolved name is always STATED back ("You typed …", "Pantocid is Pantoprazole"),
+never silently substituted.
+
+**Trade-off / status.** Fails OPEN at every step: no dose intent, no confident molecule, or no dose
+text in the record returns null and the normal grounded answer runs. Online only — the offline drug DB
+carries brands and compositions, not the structured label — so offline the KB-grounded model answers
+as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `test/maik-engine.test.mjs`
+(4, including "the on-device model is never asked for the number"), and the real-browser
+`test/run-maik-dose.mjs` (9 checks against the shipped bundle).
+
+## 2026-09-18 · MedMO-4B ships as MAiK Cortex, RAG-connected like every other text pack
+
+**Decision.** The `medmo-4b` pack is labelled **MAiK Cortex** in the offline model list; `actual`
+keeps the honest provenance (MedMO-4B, MBZUAI, Qwen3-VL-4B base, Q4_K_M). Its `CAPS.kb` is true, which
+is exactly what the capability-based `maik-local.ragEligible()` reads, so every Cortex answer goes
+through retrieval and the claim-level grounding verifier (`kb/ai/maik-grounding.js`) — unsupported
+statements are removed or qualified, never the whole answer, and the evidence gate is untouched.
+
+**Trade-off / status.** The pack id stays `medmo-4b` so existing downloads and prefs keep working;
+only the visible label changed. Still UNVERIFIED on device: a qwen3vl-architecture GGUF loading
+text-only in the plugin's llama.cpp has not been run on a phone, and the per-model grounding battery
+(`bench/rag-grounding/run.mjs --live`) has not been run for it. Pinned in `test/maik-models.test.mjs`.
+
 ## 2026-09-18 · On-device MaiK: conversation continuity by default (three live failures)
 
 **Owner:** "I can't treat every question as a new question." Live: "FUO" then "tell me the exact
