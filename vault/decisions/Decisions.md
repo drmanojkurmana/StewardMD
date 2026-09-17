@@ -8076,3 +8076,36 @@ of compliance.js is untouched.
 - Existing tenants: orders resulted BEFORE this branch stay `active` and count against the 5,000 open census. A
   hospital past that sees a visible 503 on these three boards until a backfill closes them. No backfill is built
   (it is a resumable job, not a request-scoped read).
+
+## 2026-09-18 The backfill that closes orders resulted before anything closed one (branch order-close-backfill, R5-3)
+
+- The gap R5-2 wrote down: an existing hospital's orders were resulted while NOTHING in the tree closed an
+  order, so they are all still `active`. They count against OPEN_CENSUS_MAX (5,000) and the lab, specimen and
+  imaging boards - now status-scoped reads - answer 503 `too_many_open` on a hospital that has simply been
+  open for a while. `functions/_wardsynq/order-backfill.js` closes them.
+- SAME CLOSURE, NOT A SECOND ONE. Every order goes through `ward-order.js closeOrderOnResult()`: same writer,
+  same `completed` status, same append-only new version, same governed audited put, the releasing person's id
+  stamped on it. The one added field is `completedOn: "backfill"` (a new optional `deps.on`, default
+  `"result"`), so an auditor can tell a retrospective tidy-up from a result being filed. A second closure path
+  with its own vocabulary is how a board ends up showing an order nobody can explain.
+- THE RELEASE RULE IS THE LIVE PATH'S, read off the order's effective category: any DiagnosticReport for a
+  laboratory order (lab-result.js closes on any release), final or corrected only for imaging
+  (radiology-report.js, and dicom.js's worklist). Never closed: an order with no report (the test is genuinely
+  owed - closing it is a missed result), an imaging order read only preliminarily, an order another system
+  owns (the adapter draft tier R5-2 documented; that still needs a governance change, not a job).
+- TWO STEPS, AND THEY DO NOT COLLAPSE. `POST /ward/order-backfill-scan` writes nothing and answers with the
+  order ids it would close plus a grouped tally of why the rest stay open; `POST /ward/order-backfill-close`
+  takes those ids and re-checks every one from the store before writing, so a stale list cannot close an order
+  whose situation has changed. Both staff.admin. Re-running writes nothing: a closed order is not in the
+  store's open page any more and is refused by name if it is sent again.
+- RESUMABLE, via `service.pageByStatus()` - one page of the open-status read at the store's own cursor
+  (repository pageByType), governed and audited exactly as listByStatus. It is deliberately NOT capped by
+  OPEN_CENSUS_MAX: a read that refused past the ceiling could never be the read that fixes being past it. The
+  bound is the page (default 100 orders) instead, so no amount of history changes what one request costs.
+- Screen: Admin Center > Close finished orders (wardsynq/site/pages/admin.js, `orderBackfill` tab). It drives
+  batch after batch and shows the remaining count as it goes. A batch that fails STOPS the run and says so -
+  "could not be read" and "nothing left to do" are different sentences on a screen whose whole job is to say
+  how much work is left.
+- Not done: no cron or scheduled runner (the job is admin-triggered on purpose; the person who starts it is
+  the person it is audited to), and no total-remaining figure before a full scan pass - the count comes from
+  the scan itself, batch by batch, because counting the archive is the same walk as scanning it.
