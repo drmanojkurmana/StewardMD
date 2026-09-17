@@ -7558,3 +7558,33 @@ of compliance.js is untouched.
 - Screen: wardsynq/site/pages/quality.js "Infection control and quality", tabs by capability. The brief named
   pages/governance.js; a separate page was used because governance.js is the DPO's and the analytics page and the ward's
   own staff (ADR, stock-outs, returns) needed a door that does not open privacy administration.
+
+## 2026-09-17 Theatre sessions, theatre times and outpatient access times (branch theatre-opd-access, P3)
+
+- Theatre sessions (`TheatreSession`, theatre.js): a block of a configured theatre's time held for a unit or a surgeon.
+  While held, a theatre booking by another owner is refused (`session_held`, resource-booking.js asks `heldSessionFor`).
+  Release is computed, never stored as a state: a person releases with a reason, or the hospital's
+  `wardsynq.theatre.releaseHours` releases it that many hours before the start. No rule configured means no automatic
+  release. Written under queue.add, the same authority as booking the theatre.
+- Case timing lives on the existing `SurgicalCase`, not a new record (followed the code): scheduled start and planned
+  minutes at booking (optional; a case booked with no time has none, the booking moment is not used), in-room and
+  out-of-room times recorded by a person (a change needs a reason and keeps the old value), reschedules (postponed or
+  cancelled before incision, reason code from `theatre.rescheduleReasons` when the hospital set any), and the surgeon's
+  unplanned-return answer after an incision. All under emr.treat, like every other case write.
+- Utilisation (GET /ward/theatre-utilisation): booked minutes (ResourceBooking inside sessions) and used minutes
+  (in-room to out-of-room) over session minutes, with the minutes returned beside each percentage. A case missing a time
+  is listed and adds nothing. First case on time needs `theatre.firstCaseGraceMinutes`; without it lateness is shown and
+  not judged. Turnover is out-of-room to next in-room, same theatre, same local day.
+- NABH #19 counts cases first planned in the month that were cancelled before surgery, or postponed to (or entered the
+  theatre) more than 4 hours after the first booked time (the NABH definition, not a hospital setting). #6 counts
+  surgeon-flagged returns over cases incised in the month, unanswered cases shown beside.
+- Appointments already had arrived, completed and did-not-attend (the audit said only booked/cancelled; the code differs).
+  Added: a no-show is refused before the slot starts and after an arrival; `arrivedAt` and `completedAt` are kept.
+- OPD waits (#22): the OPD Encounter written from the queue ticket now also carries `consultStartAt`, so the wait survives
+  the ticket's expiry. Clock starts at arrival, or at the appointment time when later (the one same-patient same-day
+  appointment marked arrived or completed; with two or more none is used). Seen before the appointment is zero. Fixed on the
+  way: a ticket's 0 (time not reached) was read as the year 2000 by migrate-encounter.js toIso.
+- Diagnostic waits (#23): new `DiagnosticVisit` written at the counter (queue.add): requisition presented, optional
+  appointment, test start. Only outpatient visits count. The laboratory role alone (no queue.add) cannot write it; a
+  counter needs a desk role. Screens: surgery board "Theatre sessions and use", the case's Theatre times card, and
+  Scheduling's Waiting times card with the diagnostics counter.
