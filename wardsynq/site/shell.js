@@ -610,6 +610,9 @@
        * invented. */
       tile({ go: "ward:labboard", icon: "science", title: T(null, "site.shell.home.tile.labboard.title", "Laboratory"), sub: T(null, "site.shell.home.tile.labboard.sub", "Specimens, bench worklist, results and release"), need: ["emr.view", "lab.result"], liveId: "lvLab" }),
       tile({ go: "ward:radboard", icon: "radiology", title: T(null, "site.shell.home.tile.radboard.title", "Radiology"), sub: T(null, "site.shell.home.tile.radboard.sub", "Imaging worklist, acquisition, reporting"), need: ["emr.view", "lab.result"], liveId: "lvRad" }),
+      /* The dialysis unit (R3-4): schedule by station, sessions, dialyzer reuse and URR. Reading it is emr.view; recording is
+       * emr.vitals on the server. */
+      tile({ go: "dialysis", icon: "water_drop", title: T(null, "site.shell.home.tile.dialysis.title", "Dialysis unit"), sub: T(null, "site.shell.home.tile.dialysis.sub", "Stations, haemodialysis sessions, dialyzer reuse and URR"), need: "emr.view" }),
       tile({ go: "ward:surgeryboard", icon: "surgical", title: T(null, "site.shell.home.tile.surgeryboard.title", "Theatre"), sub: T(null, "site.shell.home.tile.surgeryboard.sub", "Cases, WHO checklist, anaesthesia, implants"), need: "emr.view" }),
       /* order.dispense, NOT emr.view, and this one locked the pharmacist out of pharmacy.
        * The stock reads and writes behind this tile are gated ORDER_DISPENSE server-side
