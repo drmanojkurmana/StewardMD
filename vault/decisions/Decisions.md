@@ -7814,3 +7814,31 @@ of compliance.js is untouched.
   a 12-digit Aadhaar-shaped value in name or address refuses the row and is masked in the mapping sample.
 - ponytail ceilings: 100 patients / 500 prices / 500 suppliers per run (Worker request budget); a Price list or supplier
   list of 500 or more cannot rule out a match and refuses the commit.
+
+## 2026-09-17 Scale ceilings: whole Price list, station queues by status, imports in runs, orders name a store (branch scale-ceilings, R3-1)
+
+- Firestore filters: several EQUALITY filters in one runQuery (compositeFilter AND) are served by merging the automatic
+  single-field indexes; no composite index is added (Firestore "Index overview": compound equality queries run on
+  single-field indexes). Ordering stays on __name__ only, which needs no index. `fsQuery` opts.where now takes one
+  `{field, value}` or an array. firestore.indexes.json has no exemption for q_orders or q_tariff fields.
+- Paging lives in `_clinic_billing_store.js` (`readAll`, pages of 500 by document name) rather than a new
+  `_fbfirestore.js` export, because 119 test files mock that module's named exports.
+- Price list (`listTariff`): every page; past 20,000 rows it THROWS, so wsqTariff and the catalogue say "could not be
+  read" instead of billing the rest as "no price set". A partial Price list is never returned.
+- Station queues (`billingQueue` by orgId+status ordered; `pharmacyQueue` by orgId+status paid+kind medication): every
+  page up to 5,000, then `truncated: true` and the cap, shown on /clinic-billing ("Showing the first N only"). The JS
+  state filter stays. `ordersForPatient` also pages (it stopped at 200) and throws past 5,000.
+  DEVIATION: /clinic-billing is the untranslated StewardMD station page (no i18n catalog), so its note is English like
+  the rest of that page.
+- Legacy import: the Price list is read whole and suppliers are looked up by id (`RecordService.histories`), so the
+  "500 or more refuses the commit" ceiling and `store_too_large_to_check` are gone. Per-run row caps stay (Worker
+  budget); a larger file is sent whole with `run {from,to}` and the Import screen runs it part by part (dry runs, one
+  merged report, commits run by run with each run's planId; a stop names what was imported and a new dry run adds only
+  what is missing). Repeats are checked across the whole file. The name + date of birth pool stays 500 (no name/DOB
+  index exists; identifiers only), and is now actually the NEWEST 500 as the screen said (`RecordService.list` opts.newest;
+  it was oldest first).
+- Purchase orders: optional `location` (free text, as a receipt's location is; not validated against StoreLocation
+  because pharmacy locations are free text). An indent back-order is raised for the indent's central store. Reorder
+  drafts count outstanding only against the order's store; an order naming no store keeps counting against every store
+  holding the item and is marked (`onOrderNoStore`).
+- Not changed: `revenueToday` still reads the newest 1,000 invoices of the org (dashboard tile, not a bill).
