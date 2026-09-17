@@ -7947,3 +7947,34 @@ of compliance.js is untouched.
 - Left for R4-2: counting and summing callers (quality, security-review, analytics-extract, discharge-milestones,
   reports, fhir-group, hospital-group and the ledgers) still use list(); they move to listAll. Open OPD visits that never
   close count against the 5,000 open ceiling; reaching it is visible (503), not silent.
+
+## 2026-09-17 Whole-type reads for reports, registers, ledgers and worklists (branch whole-type-reads, R4-2)
+
+- Problem: after R4-1 about 150 callers still used `service.list(type, N)`, which serves the OLDEST min(N, 1,000) records.
+  Callers asking for 2,000 or 5,000 compared against their own number, so `truncated` never fired; ledgers refused at
+  1,000; worklists capped at 200 to 500 never showed a new item; warnings said "only the latest were read".
+- Rule applied (per caller): a count, sum, ledger, clash check or worklist reads every record through `service.listAll`
+  (ceiling 50,000 per module unless stated; Patient reads 100,000). Past the ceiling a ledger, clash check, worklist or
+  refusal-bearing report throws `ListCeilingError` and answers 409 or 503 with nothing written; a read-only return or
+  register reports `truncated` with "the newest were not read". Open things with a real `status` field read by status
+  (`listByStatus`): results awaiting verification and cultures in progress (preliminary), ward dashboard open stays,
+  doses in flight and active orders, HIM open stays, FHIR Group census, group counts. Snapshots of "now" (digital twin live
+  sections, backup and restore evidence, MaiK interaction list, patient name pools) read the NEWEST N via
+  `list(..., {newest: true})` and keep their capped flags. A patient's dialyzer events read by index (`byPatient`).
+- Actor-less service reads (escalation timer, hospital group counts) page through `repository.js pagedLatest`. The
+  escalation timer read the oldest 500 loops: past that no new critical result was escalated. `StagedRepository` now
+  passes `pageByType` through with its staged records on the last page.
+- Screens: the quality and governance page notes are new translated keys (`site.qual.truncated`,
+  `site.gov.truncatedNewest`), replacing keys whose English said the oldest were missing. Server warning strings shown
+  through EN() (stores, blood bank, dialysis, registers, mortuary) follow the existing pattern and were reworded. ward.js
+  was not touched (R4-5): `ward.dc-truncated` and `ward.rcm-truncated` still say "latest"; they fire only past 50,000.
+  Access times past the ceiling show "could not be read" on the ward screen (the read is refused, not shown short).
+- Kept as bounded by nature: fleet vehicles, saved reports, privacy notice versions, feed source grants, outbound
+  destinations, leaflet library, advisory sample, lab QC and analyser reads (newest first; Westgard needs recent points),
+  FHIR search pool (stated in the bundle), legacy import name pool (newest).
+- ponytail: every whole-type read re-groups all versions per page and holds up to 50,000 rows in a Worker. High-volume
+  types (MedicationAdministration, DiagnosticReport, ServiceRequest, Appointment) reach the ceiling within weeks to months
+  at a busy hospital and then refuse or flag visibly. The upgrade is audit O20 (a latest-version table) plus period or
+  owner indexes (by clinician, by resource, by order); not built here.
+- Not done: patient-flow.js order, MAR, request, problem and report reads (still the oldest 1,000, `.catch(() => [])`),
+  digital-twin as-of reconstruction reads (500), Form 3E not exercised by a route test.
