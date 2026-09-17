@@ -32,6 +32,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { templatesOf, applyTemplate } from "./imaging-viewer.js";
+import { closeOrderOnResult } from "./ward-order.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const STATUSES = Object.freeze(["preliminary", "final", "corrected"]);
@@ -176,8 +177,17 @@ async function reportImaging(request, env, ctx) {
 
   try {
     const out = await svc.put(report, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
+    /* R5-2 / LT-27: A REPORTED STUDY IS NOT STILL TO BE DONE, and now the ORDER says so. This used to
+     * leave the order `active` for ever, so the modality worklist had to read every order the hospital
+     * had ever held and subtract the reported ones - the read that failed with a 500 within weeks.
+     * Only a FINAL or CORRECTED reading closes it: a preliminary report still owes a final one, which
+     * is exactly the rule dicom.js's worklist already applied. Never allowed to fail the report. */
+    const closure = (status === "final" || status === "corrected")
+      ? await closeOrderOnResult({ repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym, tenant: resolved.tenant, actorId: resolved.actor.id }, sr)
+      : null;
     return {
       ...base, ok: true, written: 1, reportId: id, patientId: report.patientId,
+      ...(closure ? { orderClosed: closure.closed === true, ...(closure.closed ? {} : { orderCloseFailed: closure.reason || null }) } : {}),
       serviceRequestId, status, modality: report.modality,
       findings, impression: report.impression, version: out.record.version,
       ...(templated ? { template: templated.template, sections: templated.sections } : {}),
