@@ -19,7 +19,9 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { computeQualitySafety } from "./quality.js";
+import { computeQualitySafety, INPATIENT } from "./quality.js";
+import { HAI_EVENTS, deviceDays, confirmedIn } from "./infection-control.js";
+import { auditSummary, edReturnPairs } from "./quality-registers.js";
 import { NABH_KPIS } from "./nabh-kpi-defs.js";
 import { HMIS_FORMAT, HMIS_SECTIONS, HMIS_ITEMS } from "./hmis-items.js";
 import { DHS_CHAPTERS, DHS_ELEMENTS } from "./dhs-elements.js";
@@ -61,13 +63,19 @@ function monthWindows(nowMs, count, offsetMinutes) {
     const y = local.getUTCFullYear(), m = local.getUTCMonth() - k;
     const from = Date.UTC(y, m, 1) - off, to = Date.UTC(y, m + 1, 1) - off - 1;
     const d = new Date(Date.UTC(y, m, 1));
-    out.push({ month: `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`, fromMs: from, toMs: to, offsetMs: off });
+    out.push({ month: `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`, fromMs: from, toMs: to, offsetMs: off, nowMs });
   }
   return out;
 }
 
 const inW = (t, w) => { const v = ms(t); return v != null && v >= w.fromMs && v <= w.toMs; };
 const val = (numerator, denominator, multiplier) => ({ numerator, denominator, value: denominator > 0 ? round((numerator / denominator) * multiplier, 2) : null });
+
+/* P5 infection-ams-quality (2026-09-17): the cells for indicators 5, 11, 13-18, 25-27, 31 and 32, from the registers in
+ * infection-control.js and quality-registers.js. An HAI is counted only when the infection control nurse confirmed it. */
+const deviceCell = (event) => (r, w) => val(confirmedIn(r.HaiCase, event, w).length, deviceDays(r.LineRecord, HAI_EVENTS[event].device, w.fromMs, w.toMs, w.offsetMs, w.nowMs), 1000);
+const auditCell = (kind) => (r, w) => { const s = auditSummary(r.QualityAudit, w)[kind]; return val(s.compliant, s.audited, 100); };
+const stayIn = (e, w) => e && INPATIENT.has(e.class) && e.status !== "cancelled" && ms(e.periodStart) != null && ms(e.periodStart) <= w.toMs && (ms(e.periodEnd) == null || ms(e.periodEnd) >= w.fromMs);
 
 /* ================================================================== NABH indicators */
 
@@ -80,7 +88,16 @@ const NABH_SOURCES = {
     compute: (r, w) => { const rep = r.DiagnosticReport.filter((x) => (x.status === "final" || x.status === "corrected") && inW(x.reportedAt, w)); return val(rep.filter((x) => x.status === "corrected").length, rep.length, 1000); } },
   3: { missing: "An audit of staff adherence to safety precautions in diagnostics; WardSynQ holds no such audit." },
   4: { missing: "The number of opportunities for a medication error. Confirmed medication-error incidents are recorded, but the denominator is not." },
-  5: { missing: "An adverse drug reaction record. Incidents have no adverse drug reaction category." },
+  5: { needs: ["AdverseDrugReaction", "Encounter"], source: "Suspected adverse drug reaction reports (PvPI form) whose reaction started in the month while the patient was on an inpatient stay, over inpatient stays open in the month.",
+    note: "Counts reports, as filed; causality assessment at the ADR monitoring centre is not recorded.",
+    compute: (r, w) => {
+      const stays = r.Encounter.filter((e) => stayIn(e, w));
+      const adrs = r.AdverseDrugReaction.filter((a) => {
+        const t = ms(a.reaction && a.reaction.startDate + "T12:00:00Z");
+        return t != null && t >= w.fromMs && t <= w.toMs && stays.some((e) => str(e.patientId) === str(a.patientId) && ms(e.periodStart) <= t + 12 * HOUR && (ms(e.periodEnd) == null || ms(e.periodEnd) >= t - 12 * HOUR));
+      });
+      return val(adrs.length, stays.length, 100);
+    } },
   6: { missing: "Whether a surgical case is an unplanned return to theatre; a surgical case does not record it." },
   7: { needs: ["SurgicalCase"], source: "Surgical cases with an incision in the month; the checklist was followed when sign in, time out and sign out were all completed.",
     note: "Every case is counted, not an audited sample.",
@@ -96,14 +113,34 @@ const NABH_SOURCES = {
       const back = ended.filter((e) => icu.some((o) => o !== e && str(o.patientId) === str(e.patientId) && ms(o.periodStart) > ms(e.periodEnd) && ms(o.periodStart) <= ms(e.periodEnd) + 48 * HOUR));
       return val(back.length, ended.length, 100);
     } },
-  11: { missing: "Whether a return to the emergency department was with a similar presenting complaint; complaints are not recorded in a comparable coded form." },
+  11: { needs: ["Encounter", "EdReturnReview"], source: "Emergency visits in the month that followed another within 72 hours and a clinician reviewed as a similar presenting complaint, over emergency visits in the month.",
+    note: "A return nobody has reviewed yet is not counted as similar; the number waiting is shown beside the value.",
+    compute: (r, w) => {
+      const pairs = edReturnPairs(r.Encounter, w), reviewed = new Map(r.EdReturnReview.map((x) => [x.encounterId, x]));
+      const visits = r.Encounter.filter((e) => e.class === "ED" && e.status !== "cancelled" && inW(e.periodStart, w)).length;
+      return { ...val(pairs.filter((p) => reviewed.get(p.encounterId) && reviewed.get(p.encounterId).similar === true).length, visits, 100), unreviewed: pairs.filter((p) => !reviewed.has(p.encounterId)).length };
+    } },
   12: { needs: ["Encounter", "IncidentReport", "WoundAssessment"], source: "Confirmed pressure-injury incidents per 1000 occupied bed-days (quality.js).", qs: "pressure-injuries" },
-  13: { missing: "Urinary catheter-days and a catheter-associated infection record." },
-  14: { missing: "Ventilator-days and a ventilator-associated pneumonia record." },
-  15: { missing: "Central line days and a line-associated bloodstream infection record." },
-  16: { missing: "A surgical site infection record linked to the procedure." },
-  17: { missing: "A hand hygiene compliance audit." },
-  18: { missing: "The time a prophylactic antibiotic was given relative to incision on the surgical case." },
+  13: { needs: ["HaiCase", "LineRecord"], source: "CAUTI cases confirmed by infection control (CDC/NHSN) with the date of event in the month, per 1000 urinary catheter-days from the line log.", compute: deviceCell("CAUTI"),
+    note: "Device-days are counted electronically from lines logged with a device class; NHSN accepts electronic counts after they are validated against manual daily counts." },
+  14: { needs: ["HaiCase", "LineRecord"], source: "VAP cases confirmed by infection control (CDC/NHSN) with the date of event in the month, per 1000 ventilator-days from the line log.", compute: deviceCell("VAP"),
+    note: "Device-days are counted electronically from lines logged with a device class; NHSN accepts electronic counts after they are validated against manual daily counts." },
+  15: { needs: ["HaiCase", "LineRecord"], source: "CLABSI cases confirmed by infection control (CDC/NHSN) with the date of event in the month, per 1000 central line days from the line log.", compute: deviceCell("CLABSI"),
+    note: "Device-days are counted electronically from lines logged with a device class; NHSN accepts electronic counts after they are validated against manual daily counts." },
+  16: { needs: ["HaiCase", "SurgicalCase"], source: "SSI cases confirmed by infection control (CDC/NHSN), counted in the month of the operation, per 100 surgical cases with an incision in the month.",
+    note: "Preliminary until the 30 or 90 day surveillance period of the month's operations has passed.",
+    compute: (r, w) => {
+      const ops = r.SurgicalCase.filter((c) => inW(c.incisionAt, w)), ids = new Set(ops.map((c) => c.id));
+      return val(confirmedIn(r.HaiCase, "SSI", { fromMs: -8.64e15, toMs: 8.64e15, offsetMs: w.offsetMs }).filter((c) => ids.has(c.surgicalCaseId)).length, ops.length, 100);
+    } },
+  17: { needs: ["QualityAudit"], source: "Hand hygiene audits in the month: each audit is one observed opportunity, compliant when no checklist item is answered no.", compute: auditCell("hand-hygiene"),
+    note: "The checklist is the hospital's own." },
+  18: { needs: ["SurgicalCase", "SurgicalProphylaxis"], source: "Surgical cases with an incision in the month whose prophylaxis review found it appropriate: a listed antibiotic of the policy agent given within the hospital's window before incision when indicated, none given in the window when not indicated.",
+    note: "A case nobody has reviewed yet is not counted as appropriate; the number waiting is shown beside the value.",
+    compute: (r, w) => {
+      const ops = r.SurgicalCase.filter((c) => inW(c.incisionAt, w)), rev = new Map(r.SurgicalProphylaxis.map((x) => [x.caseId, x]));
+      return { ...val(ops.filter((c) => rev.get(c.id) && rev.get(c.id).appropriate === true).length, ops.length, 100), unreviewed: ops.filter((c) => !rev.has(c.id)).length };
+    } },
   19: { missing: "Rescheduling of a surgery; a surgical case does not record it." },
   20: { needs: ["TransfusionEpisode"], source: "Minutes from the transfusion request to the unit being issued, for units issued in the month.",
     compute: (r, w) => {
@@ -121,15 +158,24 @@ const NABH_SOURCES = {
   22: { missing: "Outpatient arrival and consultation start times; these live in the OPD queue, not in the clinical record." },
   23: { missing: "The time a patient arrived for a diagnostic test and the time it started." },
   24: { missing: "The time discharge was advised and the time the patient left; neither is recorded separately." },
-  25: { missing: "An audit of consent forms in medical records." },
-  26: { missing: "A list of emergency medications and their stock-out events." },
-  27: { missing: "Mock drill records." },
+  25: { needs: ["QualityAudit", "Encounter"], source: "Consent audits in the month that found a record's consent incomplete or improper (an item answered no), over inpatient stays that ended in the month (discharges and deaths).",
+    note: "Only records that were audited can be found incomplete; the number audited is shown beside the value.",
+    compute: (r, w) => {
+      const s = auditSummary(r.QualityAudit, w).consent;
+      return { ...val(s.audited - s.compliant, r.Encounter.filter((e) => INPATIENT.has(e.class) && e.status !== "cancelled" && inW(e.periodEnd, w)).length, 100), audited: s.audited };
+    } },
+  26: { needs: ["EmergencyStockOut"], source: "Stock-out events of medicines on the hospital's emergency medicine list that began in the month, each medicine counted separately.",
+    compute: (r, w) => { const n = r.EmergencyStockOut.filter((x) => inW(x.occurredAt, w)).length; return { numerator: n, denominator: null, value: n }; } },
+  27: { needs: ["MockDrill"], source: "Variations recorded in the mock drills held in the month.",
+    compute: (r, w) => { const n = r.MockDrill.filter((x) => inW(x.at, w)).reduce((a, x) => a + (Array.isArray(x.variations) ? x.variations.length : 0), 0); return { numerator: n, denominator: null, value: n }; } },
   28: { needs: ["Encounter", "IncidentReport", "WoundAssessment"], source: "Confirmed fall incidents per 1000 occupied bed-days (quality.js).", qs: "falls" },
   29: { needs: ["IncidentReport"], source: "Incident reports in the month whose severity is near-miss, over all incident reports in the month.",
     compute: (r, w) => { const inc = r.IncidentReport.filter((x) => inW(x.reportedAt || x.when, w)); return val(inc.filter((x) => x.severity === "near-miss").length, inc.length, 100); } },
   30: { missing: "Needlestick injury reports; staff injuries are not an incident category." },
-  31: { missing: "An audit of whether handovers were appropriate. Handovers are recorded; their quality is not." },
-  32: { missing: "An audit of prescriptions against a safe and rational prescribing checklist." },
+  31: { needs: ["QualityAudit"], source: "Handover audits in the month: each audit is one handover, appropriate when no checklist item is answered no.", compute: auditCell("handover"),
+    note: "The checklist is the hospital's own (for example every SBAR component filled)." },
+  32: { needs: ["QualityAudit"], source: "Prescription audits in the month: each audit is one prescription, safe and rational when no checklist item is answered no.", compute: auditCell("prescription"),
+    note: "The checklist is the hospital's own, per NABH's document on prescription audit." },
 };
 const NABH_TYPES = [...new Set(Object.values(NABH_SOURCES).flatMap((s) => s.needs || []))];
 

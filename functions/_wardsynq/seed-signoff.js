@@ -5,7 +5,8 @@
  * allergy classes and cross-reactivity (wardsynq/data/allergy-classes.seed.json), dose ceilings
  * and pregnancy and lactation rules (adapters/wardsynq-rules-stewardmd.js), the default critical limits (critical-results.js) and the
  * critical threshold seed (wardsynq/data/critical-thresholds.seed.json), PEWS age bands, MEOWS trigger
- * bands, the NEWS2 escalation policy and responder ladder, and the quality measure definitions. Each list
+ * bands, the NEWS2 escalation policy and responder ladder, the quality measure definitions and the CDC/NHSN
+ * healthcare-associated infection criteria (infection-control.js). Each list
  * is read from the module that USES it, so what is listed is what runs.
  *
  * A SIGN-OFF NAMES THE EXACT CONTENT. Each item's fingerprint is a SHA-256 of its content (function bodies
@@ -25,6 +26,7 @@ import { BANDS as PEWS_BANDS } from "../../wardsynq/wardsynq-pews.js";
 import { MEOWS_BANDS } from "../../wardsynq/wardsynq-obstetrics.js";
 import { ESCALATION as NEWS2_ESCALATION, RESPONDER_LADDER } from "../../wardsynq/wardsynq-deterioration.js";
 import { MEASURES } from "../../wardsynq/wardsynq-quality.js";
+import { HAI_EVENTS } from "./infection-control.js";
 
 /** The owner's decision D10 names the signatory. A sign-off in any other name is refused. */
 export const SIGNATORY = "Dr Manoj Kurmana";
@@ -54,6 +56,9 @@ export function seedLists() {
       items: entries(NEWS2_ESCALATION).map(([k, v]) => ({ id: k, label: "Risk " + k, content: v })).concat([{ id: "responder-ladder", label: "Responder ladder", content: RESPONDER_LADDER }]) },
     { id: "quality-measures", title: "Quality measure definitions", source: "wardsynq/wardsynq-quality.js MEASURES", seedVersion: "code",
       items: entries(MEASURES).map(([k, v]) => ({ id: k, label: (v && v.label) || k, content: v })) },
+    // P5 (2026-09-17): the CDC/NHSN criterion names an infection control nurse may confirm a case against, per event.
+    { id: "hai-criteria", title: "Healthcare-associated infection criteria (CDC/NHSN)", source: "functions/_wardsynq/infection-control.js HAI_EVENTS", seedVersion: "code",
+      items: entries(HAI_EVENTS).map(([k, v]) => ({ id: k, label: (v && v.label) || k, content: v })) },
   ];
 }
 

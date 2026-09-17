@@ -35,7 +35,7 @@
   var ROLES = ["admin", "doctor", "supervisor", "nurse", "intern", "resident", "reception", "cashier",
     "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist", "obstetrician", "public_health", "pcpndt_nodal", "ndps_inspector", "store_keeper", "biomedical_engineer",
     "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver",
-    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "dpo",
+    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "infection_control", "dpo",
     "dietitian", "kitchen", "cssd", "housekeeping", "transport", "mortuary", "viewer"];
 
   // One line per common role, from the capability lists in functions/_queue_roles.js ROLE_CAPS.
@@ -622,7 +622,10 @@
         '<button class="btn ghost" id="clinApply" type="button">' + esc(T(c, "site.admin.hospital.clinical.applyTemplate", "Fill the form from the template")) + '</button></div><div id="clinTplNote" class="quiet"></div>' +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.highAlert", "High-alert drugs, one per line")) + '</span><textarea id="clinHigh" rows="4">' + lines(s.highAlertDrugs) + "</textarea></label>" +
         '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.abx", "Antibiotics counted for days of therapy, one per line")) + '</span><textarea id="clinAbx" rows="4">' + lines(s.antibiotics) + "</textarea></label></div>" +
-      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.controlled", "Controlled drugs (NDPS register; a second person witnesses every dispense, dose and wastage), one per line")) + '</span><textarea id="clinControlled" rows="4">' + lines(s.controlledDrugs) + "</textarea></label></div>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.controlled", "Controlled drugs (NDPS register; a second person witnesses every dispense, dose and wastage), one per line")) + '</span><textarea id="clinControlled" rows="4">' + lines(s.controlledDrugs) + "</textarea></label>" +
+        '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.emergencyMeds", "Emergency medicines (a stock-out of any is counted for NABH), one per line")) + '</span><textarea id="clinEmergency" rows="4">' + lines(s.emergencyMedicines) + "</textarea></label></div>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.sapWindow", "A prophylactic antibiotic counts as on time when given within this many minutes before incision")) + '</span><input id="clinSap" type="number" min="1" max="1440" value="' + val(s.prophylaxisWindowMinutes) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.abgMin", "Antibiogram: fewest isolates for a percentage (CLSI M39 recommends 30)")) + '</span><input id="clinAbgMin" type="number" min="1" max="1000" value="' + val(s.antibiogramMinIsolates) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label></div>' +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.verify", "Pharmacy verifies an order within (hours)")) + '</span><input id="clinVerify" type="number" min="1" max="168" value="' + val(s.orderVerifyWithinHours) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label>' +
         '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.rpo", "Backup recovery point objective (minutes)")) + '</span><input id="clinRpo" type="number" min="5" max="10080" value="' + val(s.rpoMinutes) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label>' +
         '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.lactation", "Days after a delivery here counted as breastfeeding (pregnancy and lactation check)")) + '</span><input id="clinLactation" type="number" min="1" max="730" value="' + val(s.lactationWindowDays) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label></div>' +
@@ -646,7 +649,10 @@
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.edReassess", "ED reassessment")) + "</dt><dd>" + (ed.length ? esc(ed.join(", ")) : nc) +
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.patientAccess2", "Patient access")) + "</dt><dd>" + (s.patientAccess && s.patientAccess.enabled ? esc(T(c, "site.admin.on", "on")) : esc(T(c, "site.admin.off", "off"))) +
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.rpo2", "Recovery point objective")) + "</dt><dd>" + (s.rpoMinutes != null ? esc(T(c, "site.admin.hospital.clinical.minutes", "{n} minutes", { n: s.rpoMinutes })) : nc) +
-      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.lactation2", "Lactation window")) + "</dt><dd>" + (s.lactationWindowDays != null ? esc(T(c, "site.admin.hospital.clinical.days", "{n} days", { n: s.lactationWindowDays })) : nc) + "</dd></div>";
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.lactation2", "Lactation window")) + "</dt><dd>" + (s.lactationWindowDays != null ? esc(T(c, "site.admin.hospital.clinical.days", "{n} days", { n: s.lactationWindowDays })) : nc) +
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.emergencyMeds2", "Emergency medicines")) + "</dt><dd>" + list(s.emergencyMedicines) +
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.sapWindow2", "Prophylaxis window")) + "</dt><dd>" + (s.prophylaxisWindowMinutes != null ? esc(T(c, "site.admin.hospital.clinical.minutes", "{n} minutes", { n: s.prophylaxisWindowMinutes })) : nc) +
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.abgMin2", "Antibiogram minimum isolates")) + "</dt><dd>" + (s.antibiogramMinIsolates != null ? esc(s.antibiogramMinIsolates) : nc) + "</dd></div>";
   }
   /* Reads the form. Blank numbers are "not configured" (null); the server validates the rest. */
   function readClinicalSettings(get) {
@@ -654,7 +660,7 @@
     var num = function (v) { v = String(v == null ? "" : v).trim(); return v === "" ? null : Number(v); };
     var ed = {};
     ACUITY.forEach(function (a) { var v = num(get("ed" + a)); if (v != null) ed[a] = v; });
-    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), controlledDrugs: names("clinControlled"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), lactationWindowDays: num(get("clinLactation")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
+    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), controlledDrugs: names("clinControlled"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), lactationWindowDays: num(get("clinLactation")), emergencyMedicines: names("clinEmergency"), prophylaxisWindowMinutes: num(get("clinSap")), antibiogramMinIsolates: num(get("clinAbgMin")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
   }
   WSQ._clinicalSettings = { html: clinicalSettingsHtml, readBack: clinicalReadBackHtml, read: readClinicalSettings };
   function wireClinicalSettings(c) {

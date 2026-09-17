@@ -43,6 +43,7 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
+import { DEVICE_CLASSES } from "./infection-control.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const NEONATAL_CATEGORY = "neonatal";
@@ -186,8 +187,12 @@ async function recordLine(request, env, ctx) {
   const current = await svc.get(LINE_TYPE, id).catch(() => null);
   if (current) return { ...base, ok: true, written: 0, skipped: "already_recorded", lineId: id };
 
+  /* The device class a line is counted under for device-days (infection-control.js). Optional and closed: a line of
+   * any other kind is still logged, and simply not counted as a central line, urinary catheter or ventilator day. */
+  const deviceClass = str(l.deviceClass) || null;
+  if (deviceClass && !DEVICE_CLASSES.includes(deviceClass)) return { ...base, ok: false, status: 422, error: "bad_device_class", detail: `deviceClass is one of ${DEVICE_CLASSES.join(", ")}, or left out`, written: 0 };
   const record = {
-    resourceType: LINE_TYPE, id, patientId, encounterId, type, site: str(l.site) || null,
+    resourceType: LINE_TYPE, id, patientId, encounterId, type, site: str(l.site) || null, deviceClass,
     insertedAt, insertedBy: resolved.actor.id, removedAt: null, removedBy: null,
     source: { system: "wardsynq-native", sourceId: `line:${id}` },
   };

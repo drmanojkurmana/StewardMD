@@ -420,6 +420,13 @@ const RESOURCE_TYPES = Object.freeze([
    * conclusions cannot be edited away after the fact - the same property Claim's coding history
    * and TransfusionEpisode's traceability already depend on. */
   "IncidentReport",
+  /* Infection control and quality, 2026-09-17. A healthcare-associated infection case confirmed or ruled out by the
+   * infection control nurse against the CDC/NHSN definition (infection-control.js) and the review of one theatre case's
+   * prophylactic antibiotic; a suspected adverse drug reaction on the PvPI form, a hospital-authored audit checklist and
+   * each audit against it, a mock drill, an emergency medicine stock-out and a clinician's review of an emergency return
+   * within 72 hours (quality-registers.js). Append-only: a ruled-out case, a withdrawn confirmation or a corrected audit
+   * is a new version beside the old one. */
+  "HaiCase", "SurgicalProphylaxis", "AdverseDrugReaction", "QualityAuditTemplate", "QualityAudit", "MockDrill", "EmergencyStockOut", "EdReturnReview",
   /* TASK 6.14: a wristband/QR/NFC tag's own lifecycle - the persisted state of
    * wardsynq-identity-tag.js's assign/verify/replace/deactivate/lost engine. Its own type, not a
    * field mutation on Patient: wristbandBarcode has been comparable since early in this build, but a

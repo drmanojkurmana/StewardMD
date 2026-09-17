@@ -33,7 +33,7 @@ test("GET /api/queue/org/clinical-settings: 401, 403 without staff.admin, anothe
   assert.ok(other.__status === 403 || other.__status === 404, JSON.stringify(other));
   const r = await api("/org/clinical-settings?orgId=org-a", "GET", null, H.HR_A);
   assert.equal(r.__status, 200, JSON.stringify(r));
-  assert.deepEqual(r.settings, { highAlertDrugs: [], antibiotics: [], orderVerifyWithinHours: null, edReassessMinutes: {}, patientAccess: { enabled: false }, rpoMinutes: null, controlledDrugs: [], lactationWindowDays: null });
+  assert.deepEqual(r.settings, { highAlertDrugs: [], antibiotics: [], orderVerifyWithinHours: null, edReassessMinutes: {}, patientAccess: { enabled: false }, rpoMinutes: null, controlledDrugs: [], lactationWindowDays: null, emergencyMedicines: [], prophylaxisWindowMinutes: null, antibiogramMinIsolates: null });
   assert.ok(r.templates["not-configured"]);
   H.org("org-n", H.OWNER_A);
   assert.equal((await api("/org/clinical-settings?orgId=org-n", "GET", null, H.OWNER_A)).__status, 409, "only a WardSynQ hospital has these settings");
@@ -62,7 +62,7 @@ test("POST /api/queue/org/clinical-settings: the admin saves; the response is th
   seedWsq();
   const r = await api("/org/clinical-settings", "POST", { orgId: "org-a", settings: GOOD, templateId: "not-configured" }, H.HR_A);
   assert.equal(r.__status, 200, JSON.stringify(r));
-  assert.deepEqual(r.settings, { highAlertDrugs: ["Insulin", "Heparin"], antibiotics: ["Ceftriaxone"], orderVerifyWithinHours: 4, edReassessMinutes: { 2: 15, 3: 60 }, patientAccess: { enabled: true }, rpoMinutes: 60, controlledDrugs: [], lactationWindowDays: 42 });
+  assert.deepEqual(r.settings, { highAlertDrugs: ["Insulin", "Heparin"], antibiotics: ["Ceftriaxone"], orderVerifyWithinHours: 4, edReassessMinutes: { 2: 15, 3: 60 }, patientAccess: { enabled: true }, rpoMinutes: 60, controlledDrugs: [], lactationWindowDays: 42, emergencyMedicines: [], prophylaxisWindowMinutes: null, antibiogramMinIsolates: null });
   assert.deepEqual(r.changed.sort(), ["antibiotics", "edReassessMinutes", "highAlertDrugs", "lactationWindowDays", "orderVerifyWithinHours", "patientAccess", "rpoMinutes"]);
   const w = cfg();
   assert.equal(w.orderVerifyWithinHours, 4, "orderVerifyWithinHours survives the org whitelist (surveillance.js reads it)");
@@ -114,7 +114,7 @@ test("screens: Admin > Hospital clinical settings card: loading, failed and save
   assert.match(html, /id="clinLactation" type="number" min="1" max="730" value="42"/);
   const vals = { clinHigh: "Insulin\n\n Heparin ", clinAbx: "", clinVerify: "", clinRpo: "90", clinLactation: "", ed2: "15", ed3: "", clinPortal: false };
   const form = K.read((id) => vals[id]);
-  assert.deepEqual(JSON.parse(JSON.stringify(form)), { highAlertDrugs: ["Insulin", "Heparin"], antibiotics: [], controlledDrugs: [], orderVerifyWithinHours: null, rpoMinutes: 90, lactationWindowDays: null, edReassessMinutes: { 2: 15 }, patientAccess: { enabled: false } });
+  assert.deepEqual(JSON.parse(JSON.stringify(form)), { highAlertDrugs: ["Insulin", "Heparin"], antibiotics: [], controlledDrugs: [], orderVerifyWithinHours: null, rpoMinutes: 90, lactationWindowDays: null, emergencyMedicines: [], prophylaxisWindowMinutes: null, antibiogramMinIsolates: null, edReassessMinutes: { 2: 15 }, patientAccess: { enabled: false } });
   assert.deepEqual(C.validateClinicalSettings(form).errors, {}, "what the form reads, the server accepts");
   assert.doesNotMatch(html, /[—–]/, "no em or en dash");
   assert.match(readFileSync(new URL("../wardsynq/site/index.html", import.meta.url), "utf8"), /pages\/admin\.js\?v=\d+/);

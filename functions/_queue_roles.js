@@ -83,6 +83,13 @@ export const CAPS = {
   // report, the same separation ONCQIS/PGLOG hold between authoring and sign-off.
   INCIDENT_REPORT: "incident.report",
   INCIDENT_INVESTIGATE: "incident.investigate",
+  // ---- Infection control and quality (2026-09-17, P5 infection-ams-quality) ------------------
+  // Confirming a healthcare-associated infection against the CDC/NHSN definition is the infection control
+  // nurse's own act (NABH PSQ 3b says "as per the latest CDC/NHSN definition"), never a clinician's by
+  // default and never software's: nothing computes a diagnosis. Quality audits, mock drills and the
+  // review of adverse drug reaction reports and emergency-medicine stock-outs are the quality team's.
+  INFECTION_CONTROL: "infection.control", // HAI cases, surgical prophylaxis review, antibiogram (infection control nurse)
+  QUALITY_AUDIT: "quality.audit",         // audit checklists, mock drills, ADR and stock-out registers (quality team)
   // ---- Statutory registers (functions/_wardsynq/registers.js), 2026-09-16 ----------------------
   // Each register is its own authority because each is a legal record with its own custodian, and the
   // confidential ones (PCPNDT Form F, MTP, medico-legal cases) must not open to everyone who can read a
@@ -293,7 +300,11 @@ export const ROLE_CAPS = {
   // this without also gaining staff/billing/technical administration, and a technical admin
   // holding INCIDENT_INVESTIGATE via the `admin` role above is that site's own choice, not this
   // role's default. EMR_VIEW so an investigation can read the chart an incident references.
-  safety_officer: [C.QUEUE_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT, C.INCIDENT_INVESTIGATE],
+  safety_officer: [C.QUEUE_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT, C.INCIDENT_INVESTIGATE, C.QUALITY_AUDIT],
+  /* Infection control nurse (2026-09-17). Reads the chart (a case is checked against it), confirms or rules out a
+   * healthcare-associated infection, reviews surgical prophylaxis, reads the antibiogram, and runs the hand hygiene
+   * and other audits. Treats nobody, orders nothing. */
+  infection_control: [C.QUEUE_VIEW, C.EMR_VIEW, C.INFECTION_CONTROL, C.QUALITY_AUDIT, C.INCIDENT_REPORT],
   /* Statutory registers, 2026-09-16. An obstetrician is a doctor who also keeps the PCPNDT Form F and the MTP
    * register; a plain doctor holds neither, which is what keeps those two registers closed to the rest of the
    * medical staff. The public health nodal officer reads the chart (a notification has to be checked against it)

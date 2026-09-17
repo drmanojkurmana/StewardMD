@@ -71,6 +71,7 @@ export const U = {
   ADMIN: "admin@example.test", DOCTOR: "doctor@example.test", NURSE: "nurse@example.test", NURSE2: "nurse2@example.test",
   INCHARGE: "incharge@example.test", INCHARGE_OTHER: "incharge2@example.test", STORE: "store@example.test",
   ENGINEER: "engineer@example.test", BLOOD: "blood@example.test", BLOOD2: "blood2@example.test", HR: "hr@example.test", PHARMACY: "pharmacy@example.test", CASHIER: "cashier@example.test",
+  ICN: "icn@example.test", SAFETY: "safety@example.test", LAB: "lab@example.test",
 };
 const ENV = { QUEUE_ENABLED: "1", CLINIC_BILLING_ENABLED: "1", QUEUE_TOKEN_SECRET: "test-secret-that-is-long-enough-for-hmac", FOLLOWCARE_PHI_KEY: Buffer.alloc(32, 7).toString("base64url"), CONNECT_DB: tenantDb };
 
@@ -85,6 +86,7 @@ export function seedHospital() {
     [U.DOCTOR, "doctor"], [U.NURSE, "nurse", ["dept-med"]], [U.NURSE2, "nurse", ["dept-med"]], [U.INCHARGE, "supervisor", ["dept-med"]],
     [U.INCHARGE_OTHER, "supervisor", ["dept-sur"]], [U.STORE, "store_keeper"], [U.ENGINEER, "biomedical_engineer"],
     [U.BLOOD, "blood_bank"], [U.BLOOD2, "blood_bank"], [U.HR, "hr"], [U.PHARMACY, "pharmacy"], [U.CASHIER, "cashier"],
+    [U.ICN, "infection_control"], [U.SAFETY, "safety_officer"], [U.LAB, "lab"],
   ];
   for (const [email, role, depts] of members) {
     docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(email))}`, { fields: { orgId: ORG, identity: idFor(email), role, active: true, ...(depts ? { scope: { departments: depts } } : {}) }, updateTime: "t1" });

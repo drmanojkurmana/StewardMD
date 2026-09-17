@@ -26,7 +26,7 @@ async function firstItem() {
 
 test("pure: every seed list is present, every item has a fingerprint, and nothing is signed until a record exists for its current content", async () => {
   const lists = await S.seedStatus([]);
-  assert.deepEqual(lists.map((l) => l.id), ["allergy-classes", "allergy-cross-reactivity", "dose-ceilings", "pregnancy-lactation", "critical-limits", "critical-thresholds", "pews-bands", "meows-bands", "news2-escalation", "quality-measures"]);
+  assert.deepEqual(lists.map((l) => l.id), ["allergy-classes", "allergy-cross-reactivity", "dose-ceilings", "pregnancy-lactation", "critical-limits", "critical-thresholds", "pews-bands", "meows-bands", "news2-escalation", "quality-measures", "hai-criteria"]);
   for (const l of lists) {
     // Pregnancy and lactation rules ship empty (no unapproved guidance written); every other list has items.
     if (l.id === "pregnancy-lactation") assert.equal(l.items.length, 0); else assert.ok(l.items.length > 0, l.id + " has items");

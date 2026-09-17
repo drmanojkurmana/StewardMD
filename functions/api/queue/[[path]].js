@@ -112,6 +112,8 @@ import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, e
 import { publishNotice, privacyNotices, acknowledgePrivacy, privacyAcknowledgements, fileDataRequest, actOnDataRequest, dpoQueue, dataHoldings, recordBreach, updateBreach } from "../../_wardsynq/dpdp.js";
 import { patientRetention, retentionClassList, placeLegalHold, liftLegalHold } from "../../_wardsynq/retention.js";
 import { nabhIndicators, nabhCsv, hmisMonthly, hmisCsv, dhsChecklist, saveDhsAssessment } from "../../_wardsynq/compliance.js";
+import { recordHaiCase, recordProphylaxisReview, infectionControlView, antibiogramReport } from "../../_wardsynq/infection-control.js";
+import { saveAuditTemplate, recordAudit, recordMockDrill, qualityRegisters, reportAdr, emergencyStock, recordStockOut, restoreStockOut, edReturns, reviewEdReturn } from "../../_wardsynq/quality-registers.js";
 import { runReport, saveReport, listSavedReports, reportCsv } from "../../_wardsynq/report-builder.js";
 import { reportIncident, signalIncident, confirmIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
 import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
@@ -488,6 +490,7 @@ const CAP_SAY = {
   "staff.admin": "manage staff and roles", "analytics.view": "see reports",
   "him.roi": "release records to a third party", "incident.report": "file an incident report",
   "incident.investigate": "investigate incidents", "dpdp.manage": "manage privacy notices, data requests and breaches",
+  "infection.control": "confirm infections and review surgical prophylaxis", "quality.audit": "keep quality audits, drills and registers",
 };
 function azRefusal(az) {
   const reason = (az && az.reason) || "forbidden";
@@ -1523,6 +1526,17 @@ export async function onRequest(context) {
         /* Returns (compliance.js). The indicator tables name no patient and no clinician: analytics.view, the same
          * gate as quality-safety. The DHS self-assessment is the hospital's own statement about itself: staff.admin. */
         "nabh-indicators": CAPS.ANALYTICS_VIEW, "hmis-monthly": CAPS.ANALYTICS_VIEW,
+        /* Infection control and quality (infection-control.js, quality-registers.js). Confirming an HAI, reviewing surgical
+         * prophylaxis and the antibiogram are infection.control (the laboratory may also read the antibiogram, below);
+         * checklists, audits, drills and the registers they feed are quality.audit. Filing an ADR is as broad as filing an
+         * incident. An emergency medicine stock-out is written by the ward or pharmacy that finds it. Whether an emergency
+         * return was for a similar complaint is a prescriber's call; the list is reading the chart. */
+        "infection-control": CAPS.INFECTION_CONTROL, "hai-case": CAPS.INFECTION_CONTROL, "surgical-prophylaxis": CAPS.INFECTION_CONTROL,
+        antibiogram: CAPS.INFECTION_CONTROL,
+        "quality-registers": CAPS.QUALITY_AUDIT, "audit-template": CAPS.QUALITY_AUDIT, "quality-audit": CAPS.QUALITY_AUDIT, "mock-drill": CAPS.QUALITY_AUDIT,
+        "adr-report": CAPS.INCIDENT_REPORT,
+        "emergency-stock": CAPS.DEPT_REQUEST, "stock-out": CAPS.DEPT_REQUEST, "stock-out-restore": CAPS.DEPT_REQUEST,
+        "ed-returns": CAPS.EMR_VIEW, "ed-return-review": CAPS.EMR_TREAT,
         "dhs-checklist": CAPS.STAFF_ADMIN, "dhs-checklist-save": CAPS.STAFF_ADMIN,
         /* The report builder (report-builder.js). staff.admin at the door, and each dataset re-checks its own read
          * capability, plus emr.view for any column that identifies a patient, inside. */
@@ -1993,6 +2007,9 @@ export async function onRequest(context) {
       }
       // Rejection counts name no patient: whoever reads the hospital's operational analytics may read them too.
       if (!wAz.ok && sub === "specimen-rejections") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ANALYTICS_VIEW);
+      /* The cumulative antibiogram is the microbiology laboratory's report as much as infection control's; lab.result reads
+       * the reports it is built from and nothing else this route touches (days of therapy then says it could not be read). */
+      if (!wAz.ok && sub === "antibiogram") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
       /* Owner 2026-09-16: the prescriber and verifier on the pharmacy queue, the collector on the laboratory board and
        * whoever acted on a blood unit are named to the staff who work from those records without emr.view. Names,
        * employee ids and roles of this hospital's staff only; it opens no chart and no other route. */
@@ -4534,6 +4551,69 @@ export async function onRequest(context) {
       if (sub === "nabh-indicators" && method === "GET") {
         const r = await nabhIndicators(request, env, { ...deps, months: url.searchParams.get("months") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes });
         if (r.ok && !r.skipped && url.searchParams.get("format") === "csv") return csvOut(nabhCsv(r), "nabh-indicators.csv");
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- Infection control and quality registers (infection-control.js, quality-registers.js) ---- */
+      const utcOffsetMinutes = wsqCfg && wsqCfg.utcOffsetMinutes;
+      const cfgList = (k) => (wsqCfg && Array.isArray(wsqCfg[k]) ? wsqCfg[k] : []);
+      if (sub === "infection-control" && method === "GET") {
+        const r = await infectionControlView(request, env, { ...deps, month: url.searchParams.get("month") || "", antibiotics: cfgList("antibiotics"), windowMinutes: wsqCfg && wsqCfg.prophylaxisWindowMinutes, utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "hai-case" && method === "POST") {
+        const r = await recordHaiCase(request, env, { ...deps, action: body.action, caseId: body.caseId, patientId: body.patientId, event: body.event, dateOfEvent: body.dateOfEvent, lineId: body.lineId, surgicalCaseId: body.surgicalCaseId,
+          ssiDepth: body.ssiDepth, surveillanceDays: body.surveillanceDays, criteriaMet: body.criteriaMet, organisms: body.organisms, eligibilityNote: body.eligibilityNote, reason: body.reason, note: body.note,
+          expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null, utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgical-prophylaxis" && method === "POST") {
+        const r = await recordProphylaxisReview(request, env, { ...deps, caseId: body.caseId, indicated: body.indicated, agentPerPolicy: body.agentPerPolicy, note: body.note, expectedVersion: body.expectedVersion,
+          antibiotics: cfgList("antibiotics"), windowMinutes: wsqCfg && wsqCfg.prophylaxisWindowMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "antibiogram" && method === "GET") {
+        const r = await antibiogramReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", minIsolates: wsqCfg && wsqCfg.antibiogramMinIsolates, antibiotics: cfgList("antibiotics"), utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "quality-registers" && method === "GET") {
+        const r = await qualityRegisters(request, env, { ...deps, month: url.searchParams.get("month") || "", utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "audit-template" && method === "POST") {
+        const r = await saveAuditTemplate(request, env, { ...deps, templateId: body.templateId, name: body.name, kind: body.kind, items: body.items, active: body.active, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "quality-audit" && method === "POST") {
+        const r = await recordAudit(request, env, { ...deps, templateId: body.templateId, at: body.at, unit: body.unit, patientId: body.patientId || (body.mrn ? patientIdForMrn(body.mrn) : ""), answers: body.answers, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "mock-drill" && method === "POST") {
+        const r = await recordMockDrill(request, env, { ...deps, drillType: body.drillType, at: body.at, location: body.location, scenario: body.scenario, participants: body.participants, variations: body.variations, correctiveActions: body.correctiveActions, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "adr-report" && method === "POST") {
+        const r = await reportAdr(request, env, { ...deps, patientId: body.patientId || (body.mrn ? patientIdForMrn(body.mrn) : ""), reaction: body.reaction, medicines: body.medicines, concomitant: body.concomitant,
+          relevantTests: body.relevantTests, history: body.history, reporterOccupation: body.reporterOccupation, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "emergency-stock" && method === "GET") {
+        const r = await emergencyStock(request, env, { ...deps, month: url.searchParams.get("month") || "", emergencyMedicines: cfgList("emergencyMedicines"), utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "stock-out" && method === "POST") {
+        const r = await recordStockOut(request, env, { ...deps, emergencyMedicines: cfgList("emergencyMedicines"), medicine: body.medicine, location: body.location, occurredAt: body.occurredAt, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "stock-out-restore" && method === "POST") {
+        const r = await restoreStockOut(request, env, { ...deps, stockOutId: body.stockOutId, restoredAt: body.restoredAt, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-returns" && method === "GET") {
+        const r = await edReturns(request, env, { ...deps, month: url.searchParams.get("month") || "", utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-return-review" && method === "POST") {
+        const r = await reviewEdReturn(request, env, { ...deps, encounterId: body.encounterId, similar: body.similar, note: body.note, expectedVersion: body.expectedVersion });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "hmis-monthly" && method === "GET") {

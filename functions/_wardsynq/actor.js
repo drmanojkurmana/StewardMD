@@ -474,8 +474,11 @@ function grantForCaps(caps) {
    * (report vs triage/RCA/CAPA/close) is enforced at the route, exactly as EMERGENCY_DECLARE's
    * declare/deactivate both resolve to one EmergencyActivation scope above. A role holding either
    * capability can read and write IncidentReport; a role holding neither cannot reach it at all. */
+  /* AdverseDrugReaction joined 2026-09-17 (quality-registers.js): a suspected ADR report on the PvPI form is filed by
+   * any healthcare professional (PvPI: "All healthcare professionals ... can report"), the same broad authority as an
+   * incident report. It is a report ABOUT a medicine, never a diagnosis written to the chart. */
   if (has(CAPS.INCIDENT_REPORT) || has(CAPS.INCIDENT_INVESTIGATE)) {
-    const added = ["IncidentReport"];
+    const added = ["IncidentReport", "AdverseDrugReaction"];
     const basis = has(CAPS.INCIDENT_INVESTIGATE) ? CAPS.INCIDENT_INVESTIGATE : CAPS.INCIDENT_REPORT;
     if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis };
     else grant = {
@@ -534,8 +537,10 @@ function grantForCaps(caps) {
       basis: grant.basis + "+" + basis,
     };
   };
+  // EmergencyStockOut joined 2026-09-17 (quality-registers.js): the ward or pharmacy that finds an emergency medicine
+  // missing writes it down (NABH PSQ 3c #26), the same floor-level act as reporting broken equipment.
   if (has(CAPS.DEPT_REQUEST)) {
-    const w = ["Indent", "IndentReceipt", "JobCard"];
+    const w = ["Indent", "IndentReceipt", "JobCard", "EmergencyStockOut"];
     widen([...w, "IndentDecision", "IndentClosure", "StoreItem", "StoreLocation", "StockMovement", "Asset", "AssetEvent", "JobCardEvent"], w, CAPS.DEPT_REQUEST);
   }
   if (has(CAPS.INDENT_APPROVE)) {
@@ -549,6 +554,19 @@ function grantForCaps(caps) {
   if (has(CAPS.ASSET_MANAGE)) {
     const w = ["Asset", "AssetEvent", "MaintenanceSchedule", "JobCard", "JobCardEvent", "StockMovement"];
     widen([...w, "StoreItem", "StoreLocation"], w, CAPS.ASSET_MANAGE);
+  }
+
+  /* Infection control and quality, 2026-09-17 (infection-control.js, quality-registers.js). The infection control nurse
+   * writes the HAI case and the surgical prophylaxis review and reads exactly what checking them needs: the lines, the
+   * theatre case, the doses given and the cultures. The quality team writes its audits and drills and reads the ADR and
+   * stock-out registers it reviews. Neither writes anything a patient is treated from. */
+  if (has(CAPS.INFECTION_CONTROL)) {
+    const w = ["HaiCase", "SurgicalProphylaxis"];
+    widen([...w, "Patient", "Encounter", "LineRecord", "SurgicalCase", "MedicationAdministration", "AnesthesiaRecord", "DiagnosticReport"], w, CAPS.INFECTION_CONTROL);
+  }
+  if (has(CAPS.QUALITY_AUDIT)) {
+    const w = ["QualityAuditTemplate", "QualityAudit", "MockDrill"];
+    widen([...w, "AdverseDrugReaction", "EmergencyStockOut", "Encounter"], w, CAPS.QUALITY_AUDIT);
   }
 
   /* Hospital support services, 2026-09-16. The same union shape as every branch above: each capability
