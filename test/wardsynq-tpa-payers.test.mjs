@@ -283,7 +283,13 @@ test("a payer with a sealed credential is authenticated, sends a real FHIR Claim
   const claim = await as(CASHIER, "/ward/claim", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, codes: ["I10"], payerId: "nhcx" });
   assert.equal(claim.__status, 200, JSON.stringify(claim));
 
-  const submitted = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: claim.claimId, action: "submit", submittedAmount: 15000 });
+  /* rcm-claims-ops: the payer's pre-authorisation amount is now a blocking checklist finding (claims-ops.js), not only a
+   * warning. Nothing is sent until a person records why it goes anyway. */
+  const blocked = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: claim.claimId, action: "submit", submittedAmount: 15000 });
+  assert.equal(blocked.__status, 422, JSON.stringify(blocked));
+  assert.equal(blocked.error, "claim_checklist_blocked");
+  assert.equal(tpaCalls.length, 0, "a blocked claim is never sent");
+  const submitted = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: claim.claimId, action: "submit", submittedAmount: 15000, overrideReason: "emergency admission, pre-authorisation applied for" });
   assert.equal(submitted.__status, 200, JSON.stringify(submitted));
   assert.equal(submitted.claim.adapter.state, "acknowledged", JSON.stringify(submitted.claim.adapter));
   assert.equal(submitted.claim.adapter.payerReference, "CR-1");
@@ -325,7 +331,7 @@ test("settle and balance-to-patient through /ward/claim-state, and acknowledge w
   await seedHospital();
   const adm = await admitWithProblem();
   const claim = await as(CASHIER, "/ward/claim", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, codes: ["I10"], payerId: "nhcx" });
-  await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: claim.claimId, action: "submit", submittedAmount: 15000 });
+  await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: claim.claimId, action: "submit", submittedAmount: 15000, overrideReason: "pre-authorisation applied for" });
 
   const noReason = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: claim.claimId, action: "settle", paidAmount: 11000 });
   assert.equal(noReason.__status, 422, JSON.stringify(noReason));
