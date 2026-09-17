@@ -67,8 +67,14 @@ test("CONTRAST IS NOT BLOCKED, but a reaction on file makes the reason mandatory
 test("AN UNREADABLE ALLERGY LIST IS NOT A CLEAR ONE: contrast fails closed", () => {
   /* Proceeding with an empty list would look identical to proceeding with a clear one, which is the
    * exact situation this file exists to prevent. */
-  assert.ok(/allergy_read_failed/.test(SRC));
+  /* R6-1, 2026-09-18: the refusal is `clinical_read_failed` now (it covers the renal Observation
+   * too), and until R6-1 it was unreachable code - both reads carried their own `.catch(() => [])`
+   * so the Promise.all never rejected. Proven end to end against a faulted read in
+   * test/wardsynq-no-unchecked-safety.test.mjs. */
+  assert.ok(/clinical_read_failed/.test(SRC));
   assert.ok(/An unreadable allergy list is not a clear one/.test(SRC));
+  assert.equal(/\.catch\(\(\) => \[\]\)/.test(SRC.split("\n").filter((l) => !/^\s*(\*|\/\*|\/\/)/.test(l)).join("\n")), false,
+    "a per-read swallow here makes the refusal above unreachable");
 });
 
 test("IT COMPUTES NO eGFR, because a number it invented would be trusted like a laboratory's", () => {
