@@ -211,7 +211,12 @@ async function dispenseOrder(request, env, ctx) {
   let order, verifications;
   try {
     order = await svc.get("MedicationOrder", orderId);
-    verifications = order ? await svc.byPatient("MedicationVerification", order.patientId).catch(() => []) : [];
+    /* R6-1, 2026-09-18: this read used to carry `.catch(() => [])`. An unreadable verification list
+     * then reached verificationFor() as "none", which both recorded `unverified: true` on a supply
+     * that may well have been verified AND skipped the `superseded` refusal - the one check that
+     * stops stock going out against a prescription the pharmacist never saw at its current version.
+     * A read that failed is a refusal (the catch below), never a verification state. */
+    verifications = order ? await svc.byPatient("MedicationVerification", order.patientId) : [];
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!order) return { ...base, ok: false, status: 404, error: "order_not_found", orderId, written: 0 };
   // A stopped or draft prescription is not supplied. Only a live order gets stock issued against it.
@@ -269,8 +274,11 @@ async function dispenseOrder(request, env, ctx) {
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
   let current;
+  /* This read is the only thing that stops the same supply being issued twice. Swallowing its
+   * failure to null said "no dispense exists" about a dispense nobody could look for (R6-1). */
   try { current = await svc.get(TYPE, id); }
-  catch { current = null; }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), orderId, written: 0,
+    message: "Whether this supply was already issued could not be read, so nothing was issued. Try again." }; }
   if (current) return { ...base, ok: true, written: 0, skipped: "already_dispensed", ...summary(current) };
 
   const record = MedicationDispense({

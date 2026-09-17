@@ -496,8 +496,13 @@ async function icuChart(request, env, ctx) {
   try {
     [records, observations, infusions, orders, patient] = await Promise.all([
       svc.byPatient(TYPE, patientId), svc.byPatient("Observation", patientId),
-      svc.byPatient("InfusionRate", patientId), svc.byPatient("MedicationOrder", patientId).catch(() => []),
-      svc.get("Patient", patientId).catch(() => null),
+      /* R6-1, 2026-09-18: these two carried their own catches. An unreadable MedicationOrder list
+       * left every running infusion without its drug name, so isVasoactive() dropped it and the
+       * pressor simply vanished off the ICU card; an unreadable Patient turned the sepsis screen
+       * into "cannot screen: age unknown", which blames the record rather than the store. Both are
+       * the outer refusal's business now. */
+      svc.byPatient("InfusionRate", patientId), svc.byPatient("MedicationOrder", patientId),
+      svc.get("Patient", patientId),
     ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
