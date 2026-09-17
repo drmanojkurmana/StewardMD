@@ -384,4 +384,28 @@ test("DOCTOR CLINICAL NOTES & PRINT PAGINATION: preserves notes, quick-insert ch
   assert.ok(html.includes("Check CBC on Day 10 Nadir"), "Export HTML must display nadir instruction");
   assert.ok(html.includes("MEDICOLEGAL DISCLAIMER:"), "Export HTML must include medicolegal disclaimer");
   assert.ok(html.includes("ps-page-break-auto"), "Export HTML must include intelligent page-break classes");
+  assert.ok(html.includes("ps-page-break-deliberate"), "Export HTML for big protocol must include deliberate page-break");
+  assert.ok(html.includes("ps-page2-header"), "Export HTML for big protocol must render running header for page 2");
 });
+
+test("MODAL EVENT DELEGATION & NO STOPPROPAGATION: modal cards allow click event bubbling for save and reduction shortcuts", () => {
+  const { API } = loadSheetEnv();
+  const proto = JSON.parse(readFileSync(join(ROOT, "kb/protocols/gyn-carbo-paclitaxel.json"), "utf8"));
+  API._st.protocol = proto;
+  API._st.patient = { name: "Jane Doe", heightCm: 165, weightKg: 65, age: 55, sex: "female", creatinine: 0.8 };
+
+  // Verify shell and modal HTML outputs contain NO inline stopPropagation
+  API._st.activeDoseEditModal = "paclitaxel";
+  API._st.showBrandingModal = true;
+  API._st.showAddDrugModal = true;
+  API._st.showAddToxModal = true;
+
+  const shell = API.shellHtml();
+  assert.equal(shell.includes("event.stopPropagation()"), false, "No modal card may contain event.stopPropagation() blocking delegated listeners");
+  assert.ok(shell.includes('data-ps-act="quick-dose-pct"'), "Must render quick dose percentage reduction buttons");
+  assert.ok(shell.includes('data-ps-act="save-drug-dose"'), "Must render save dose adjustment button");
+  assert.ok(shell.includes('data-ps-act="save-branding"'), "Must render save branding button");
+  assert.ok(shell.includes('data-ps-act="save-add-drug"'), "Must render save custom drug button");
+  assert.ok(shell.includes('data-ps-act="save-add-tox"'), "Must render save toxicity button");
+});
+

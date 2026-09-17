@@ -263,6 +263,7 @@
   function quickActionsHtml() {
     return '<div class="oh-quick">' +
       '<button class="oh-qa" data-oh-act="oncotree-open">' + ms("account_tree") + "OncoTree</button>" +
+      '<button class="oh-qa" data-oh-act="staging-open">' + ms("stairs") + "Staging</button>" +
       '<button class="oh-qa" data-oh-act="protocol-open">' + ms("clinical_notes") + "Protocols</button>" +
       '<button class="oh-qa" data-oh-act="calc-cat">' + ms("calculate") + "Calculators</button>" +
       '<button class="oh-qa" data-oh-act="drug-browse">' + ms("pill") + "Drugs</button>" +

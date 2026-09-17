@@ -1555,11 +1555,13 @@
       '<button class="ot-vt' + (st.view === "navigator" ? " on" : "") + '" data-ot-act="view-navigator">' + ms("account_tree") + "Navigator</button>" +
       '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" data-ot-act="view-pathway">' + ms("format_list_bulleted") + "Step Flow</button>" +
       '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" data-ot-act="view-map">' + ms("map") + "Overview</button>" +
+      '<button class="ot-vt ot-vt-stg" data-ot-act="open-staging" title="TNM Staging for this cancer">' + ms("stairs") + "Staging</button>" +
       '<button class="ot-vt ot-vt-act" data-ot-act="summary">' + ms("summarize") + "Summary</button></div>") : "";
     var kicker = hasGraph
       ? '<button class="ot-hkicker ot-hkicker-btn" data-ot-act="change-disease">' + ms("swap_horiz") + "Change cancer</button>"
       : '<span class="ot-hkicker">STEWARDMD ONCOLOGY</span>';
     var rightBtn = '<div class="ot-h-actions">' +
+      '<button type="button" class="ot-hbtn ot-hbtn-stg" data-ot-act="open-staging" aria-label="TNM Cancer Staging" title="TNM Cancer Staging">' + ms("stairs") + '</button>' +
       '<button type="button" class="ot-hbtn ot-hbtn-calc" data-ot-act="open-calvert-calc" aria-label="Creatinine & Calvert Calculator" title="Creatinine & Calvert Calculator">' + ms("calculate") + '</button>' +
       (hasGraph ? '<button class="ot-hbtn" data-ot-act="reset" aria-label="Restart">' + ms("restart_alt") + '</button>' : '<span class="ot-hbtn" aria-hidden="true" style="opacity:0;pointer-events:none;"></span>') +
       '</div>';
@@ -1741,6 +1743,28 @@
       if (pClearBtn) pClearBtn.style.display = "none";
       var dList2 = D && D.getElementById("otDiseaseList");
       if (dList2) dList2.innerHTML = diseaseCardsHtml();
+      return;
+    }
+    if (act === "open-staging") {
+      var gid = (st.guideline || (st.graph && st.graph.id) || "").toLowerCase();
+      var map = {
+        cervical: "cervix",
+        anal: "anus",
+        rcc: "kidney",
+        headneck: "oral_cavity",
+        cutaneous_melanoma: "melanoma",
+        rectal: "colorectal"
+      };
+      var siteId = map[gid] || gid;
+      if (window.SMD_ONCOSTAGING) {
+        if (siteId && SMD_ONCOSTAGING.open) {
+          SMD_ONCOSTAGING.open(siteId);
+        } else if (SMD_ONCOSTAGING.openList) {
+          SMD_ONCOSTAGING.openList();
+        }
+      } else if (G.toast) {
+        G.toast("Cancer Staging loading…");
+      }
       return;
     }
     if (act === "open-calvert-calc") {

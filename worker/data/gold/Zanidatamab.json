@@ -1,0 +1,85 @@
+{
+  "generic": "Zanidatamab",
+  "cls": "Antineoplastic - HER2-targeted bispecific monoclonal antibody (biparatopic ECD2 and ECD4)",
+  "pharm": "Bispecific antibody binding two distinct HER2 extracellular domains (ECD2 and ECD4); blocks HER2 signaling, induces receptor internalization, and mediates antibody-dependent cellular cytotoxicity; used in HER2-positive biliary tract and gastric/GEJ cancers",
+  "tags": ["Rx only", "HER2 bispecific antibody", "HER2-positive biliary tract cancer", "HER2-positive gastric/GEJ adenocarcinoma", "Diarrhea", "Infusion-related reactions", "LVEF decrease", "Embryo-fetal toxicity"],
+  "quick": [
+    ["Adult dose", "20 mg/kg IV infusion every 2 weeks until progression or unacceptable toxicity"],
+    ["Meal", "Not applicable (IV); maintain hydration if diarrhea occurs"],
+    ["Pregnancy", "Can cause fetal harm; avoid - use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 4 months after the last dose"],
+    ["Renal", "No standard adjustment defined; monitor closely"],
+    ["Hepatic", "No standard adjustment defined; monitor closely"],
+    ["Alcohol", "No specific interaction; limit due to additive GI effects"],
+    ["Monitoring", "Diarrhea, IRR symptoms, LVEF, HER2 status, pregnancy status"]
+  ],
+  "summary": "Zanidatamab (Ziihera) is a HER2-targeted bispecific monoclonal antibody that binds two distinct HER2 extracellular domains (ECD2 and ECD4) on the same receptor. By dual-epitope binding it inhibits HER2-driven signaling, promotes receptor clustering and internalization, and recruits immune effector killing of HER2-positive tumor cells. It is indicated for adults with previously treated unresectable or metastatic HER2-positive (IHC 3+) biliary tract cancer, and for HER2-positive gastric or gastroesophageal junction adenocarcinoma. The dose is 20 mg/kg by intravenous infusion every 2 weeks until disease progression or unacceptable toxicity, with premedication to reduce infusion-related reactions. Major risks are diarrhea (which can be severe), infusion-related reactions, left ventricular dysfunction with decreased ejection fraction, and embryo-fetal toxicity.",
+  "indications": [
+    "Treatment of adults with previously treated, unresectable or metastatic HER2-positive (IHC 3+) biliary tract cancer, as detected by an FDA-approved test",
+    "Treatment of adults with previously treated unresectable or metastatic HER2-positive gastric or gastroesophageal junction adenocarcinoma"
+  ],
+  "dosage": [
+    {"c": "HER2-positive biliary tract cancer or gastric/GEJ adenocarcinoma", "r": "Adult IV", "d": "20 mg/kg by IV infusion once every 2 weeks", "t": "Every 2 weeks", "n": "Continue until disease progression or unacceptable toxicity; confirm HER2-positive status with an FDA-approved test"},
+    {"c": "Dose hold or discontinuation (toxicity)", "r": "Adult IV", "d": "Withhold for grade 3 diarrhea despite optimal management, grade 2-3 infusion reactions, or asymptomatic LVEF decline; permanently discontinue for grade 4 diarrhea, grade 4 infusion reaction, or symptomatic heart failure", "t": "Per recovery", "n": "No dose reduction schedule defined; resume only when toxicity resolves to grade 1 or baseline"},
+    {"c": "Premedication (all doses)", "r": "Adult IV", "d": "Premedicate 30-60 minutes before each infusion (e.g., acetaminophen, antihistamine, with or without corticosteroid per protocol)", "t": "30-60 minutes before each dose", "n": "Slowing or interrupting the infusion may be needed for infusion-related reactions"}
+  ],
+  "admin": [
+    "Give 20 mg/kg as an intravenous infusion once every 2 weeks; do not give as IV push or bolus",
+    "Premedicate all patients 30 to 60 minutes before each dose to reduce infusion-related reactions",
+    "Use a sterile, preservative-free preparation; inspect for particulate matter and use the recommended infusion line filter per labeling",
+    "Monitor during the infusion and after completion for infusion-related reactions; slow, interrupt, or stop the infusion for reactions",
+    "Confirm HER2-positive status with an FDA-approved test before starting; assess LVEF at baseline and periodically"
+  ],
+  "moa": "Zanidatamab is a bispecific IgG1-like antibody that simultaneously binds two non-overlapping epitopes on HER2: extracellular domain 2 (ECD2, the pertuzumab site) and extracellular domain 4 (ECD4, the trastuzumab site). Biparatopic binding drives HER2 clustering, blocks ligand-independent signaling through MAPK and PI3K/AKT pathways, promotes receptor internalization and downregulation, and engages Fc-mediated effector functions such as antibody-dependent cellular cytotoxicity. This dual targeting produces activity in HER2-amplified tumors including biliary tract and gastric/GEJ adenocarcinomas.",
+  "contra": {
+    "absolute": ["Known serious hypersensitivity to zanidatamab or any excipient"],
+    "relative": ["Pregnancy and breastfeeding (embryo-fetal toxicity; avoid)", "Symptomatic heart failure or clinically significant decreased LVEF", "History of severe infusion-related reaction to zanidatamab", "Chronic diarrhea or colitis that would complicate GI toxicity"],
+    "monitor": ["Diarrhea severity and hydration status", "Infusion-related reaction symptoms during and after infusion", "Left ventricular ejection fraction at baseline and periodically", "Pregnancy status in females of reproductive potential"]
+  },
+  "preg": "Based on its mechanism of HER2 blockade, zanidatamab can cause fetal harm including oligohydramnios and fetal abnormalities. Verify pregnancy status before starting in females of reproductive potential and advise effective contraception during treatment and for 4 months after the last dose.",
+  "lact": "There are no data on the presence of zanidatamab in human milk or its effects on the breastfed child or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 4 months after the final dose.",
+  "renal": "No dose adjustment is defined for renal impairment in the labeling summary. Monitor hydration and electrolytes closely if diarrhea occurs, and monitor overall tolerability.",
+  "hepatic": "No dose adjustment is defined for hepatic impairment in the labeling summary. Monitor closely, particularly in biliary tract cancer with biliary obstruction, and adjust only for toxicity per labeling.",
+  "interactions": {
+    "major": ["Other cardiotoxic or LVEF-lowering agents (e.g., anthracyclines) - additive left ventricular dysfunction; assess LVEF before combining", "Other agents causing severe diarrhea - additive GI toxicity and dehydration risk"],
+    "moderate": ["Antihypertensives in volume-depleted patients with diarrhea - risk of hypotension and renal injury; correct volume first"],
+    "minor": ["Premedication agents (antihistamines, acetaminophen) - expected additive sedation with antihistamines only"],
+    "food": "Not applicable (IV); maintain oral hydration and electrolytes during diarrhea episodes.",
+    "alcohol": "No specific interaction is described; limit alcohol which may worsen diarrhea and dehydration.",
+    "diagnostics": "Confirm HER2 positivity (IHC 3+) with an FDA-approved test; monitor LVEF by echocardiography or MUGA and monitor stool frequency and electrolytes."
+  },
+  "se": {
+    "common": ["Diarrhea", "Infusion-related reactions (chills, fever, flushing)", "Nausea and vomiting", "Abdominal pain", "Fatigue", "Decreased appetite"],
+    "serious": ["Severe diarrhea with dehydration and electrolyte loss", "Severe infusion-related reactions", "Left ventricular dysfunction with decreased ejection fraction and heart failure", "Embryo-fetal toxicity"],
+    "rare": ["Interstitial lung disease/pneumonitis (HER2-agent class concern)", "Severe hypersensitivity"],
+    "emergency": ["Severe or bloody diarrhea with dizziness or reduced urination - seek urgent care", "Chest pain, sudden breathlessness, or leg swelling (heart failure)", "Breathing difficulty, throat tightness, or facial swelling during or after infusion"]
+  },
+  "monitoring": ["Stool frequency, hydration, and electrolytes for diarrhea; start antidiarrheals promptly", "Infusion-related reaction signs during and after each infusion", "Left ventricular ejection fraction at baseline and periodically, and for cardiac symptoms", "Pregnancy status before starting in females of reproductive potential", "Tumor response and HER2 test documentation"],
+  "counsel": [
+    "You will receive this drug as an IV infusion every 2 weeks, with medicines beforehand to lower infusion reaction risk",
+    "Diarrhea is very common and can be severe - tell your team at the first loose stool so treatment can start and fluids can be replaced",
+    "Report chills, fever, flushing, or trouble breathing during or after the infusion",
+    "Report new breathlessness, swelling of the legs, or fast weight gain (possible heart effects)",
+    "Use effective birth control during and for 4 months after treatment and do not breastfeed in that period"
+  ],
+  "pk": [
+    ["Onset", "HER2 target engagement from first infusion; tumor responses assessed over weeks"],
+    ["Peak", "End of IV infusion"],
+    ["Half-life", "Elimination half-life on the order of days, supporting every-2-week dosing"],
+    ["Duration", "Dosed every 2 weeks until disease progression or unacceptable toxicity"],
+    ["Storage", "Refrigerate lyophilized vials at 2-8 C; reconstituted and diluted solutions per labeling time limits; do not freeze or shake"]
+  ],
+  "pearls": [
+    "First dual HER2-targeted bispecific antibody: binds ECD2 plus ECD4 on the same HER2 molecule for clustering and internalization",
+    "BTC indication requires HER2 IHC 3+ by an FDA-approved test; confirm before starting",
+    "Diarrhea is the dominant toxicity - start loperamide or per-protocol antidiarrheals early and monitor electrolytes",
+    "Premedicate every infusion and keep the infusion slow enough to manage reactions",
+    "Check LVEF at baseline and periodically; hold for asymptomatic decline and stop for symptomatic heart failure"
+  ],
+  "missed": "Zanidatamab is given as a supervised IV infusion every 2 weeks, so there is no patient-managed missed dose. If an appointment is missed, contact the oncology team to reschedule as soon as possible and maintain the every-2-week interval from the new date.",
+  "overdose": "There is no specific antidote for zanidatamab overdose. Overdose may produce exaggerated diarrhea, infusion reactions, or cardiac effects. Stop or slow the infusion, monitor cardiac function, hydration, and electrolytes, and provide supportive care. Contact Poison Help (1-800-222-1222).",
+  "refs": [
+    ["FDA Prescribing Information: Zanidatamab (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22zanidatamab%22"],
+    ["DailyMed - Zanidatamab", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=zanidatamab"]
+  ]
+}
