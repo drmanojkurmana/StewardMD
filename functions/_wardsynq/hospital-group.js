@@ -21,22 +21,11 @@
 
 import { summariseWard } from "./ward-metrics.js";
 import { bedStateCounts } from "./patient-flow.js";
+import { pagedLatest } from "./repository.js";
 
-/* Open encounters (an ED wait, a stay) are read by status and every critical loop is paged (the repository's pageByType),
- * no longer the OLDEST 1,000 of each. Past a ceiling the read stops and the counts say capped.
- * ponytail: the same paging service.js listByStatus/listAll does, without an actor (this is a service read). */
+/* Open encounters (an ED wait, a stay) are read by status and every critical loop is paged (repository.js pagedLatest),
+ * no longer the OLDEST 1,000 of each. Past a ceiling the read stops and the counts say capped. */
 const OPEN_MAX = 5000, LOOPS_MAX = 50000;
-async function paged(repo, tenantId, type, statuses, max) {
-  const byId = new Map();
-  let after = 0;
-  for (;;) {
-    const page = await repo.pageByType(tenantId, type, { afterSeq: after, limit: 1000, ...(statuses ? { statuses } : {}) });
-    for (const r of page.records || []) if (r && r.id != null) { byId.delete(r.id); byId.set(r.id, r); }
-    if (byId.size > max) return { rows: [...byId.values()].slice(0, max), capped: true };
-    if (page.next == null) return { rows: [...byId.values()], capped: false };
-    after = page.next;
-  }
-}
 export const COUNT_KEYS = Object.freeze(["census", "bedsFree", "edWaiting", "criticalOpen", "staffShort"]);
 
 /** PURE. The projection: a fixed set of numbers and reason codes. Exported for the test. */
@@ -77,8 +66,8 @@ export async function hospitalCounts(deps) {
   if (!d.repository || !d.tenantId) return { ...projectCounts({}), status: "unreadable", why: "no_wardsynq_record" };
   const safe = (fn) => Promise.resolve().then(fn).catch(() => null);
   const [encounters, criticalLoops, beds, staffing] = await Promise.all([
-    safe(() => paged(d.repository, d.tenantId, "Encounter", ["in-progress"], OPEN_MAX)),
-    safe(() => paged(d.repository, d.tenantId, "CriticalResultLoop", null, LOOPS_MAX)),
+    safe(() => pagedLatest(d.repository, d.tenantId, "Encounter", { statuses: ["in-progress"], max: OPEN_MAX })),
+    safe(() => pagedLatest(d.repository, d.tenantId, "CriticalResultLoop", { max: LOOPS_MAX })),
     safe(() => d.listBeds()),
     safe(() => d.staffing()),
   ]);

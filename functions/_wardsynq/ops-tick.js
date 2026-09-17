@@ -20,20 +20,22 @@
 import { drainOutbox } from "./outbox.js";
 import { anchorHead, anchorStoresOf } from "./audit-chain.js";
 import { escalationOf } from "./critical-results.js";
-import { VersionConflictError } from "./repository.js";
+import { VersionConflictError, pagedLatest } from "./repository.js";
 import { dispatchLevel, smsFallbackDue } from "./push-alerts.js";
 
 const RANK = { none: 0, due: 0, overdue: 1, escalate: 2 };
 /* ponytail: no downstream consumer is registered yet, so drained events are marked done. A consumer
  * (billing, analytics, an integration) is added here by topic when one exists. */
 const CONSUMERS = Object.freeze({});
-const SCAN = 500;
+/* R4-2: every loop is paged (pagedLatest). The old read was the OLDEST 500 loops, so once a hospital had 500 critical
+ * results no NEW one was ever escalated. Past SCAN the newest are not read and the tick says partial. */
+const SCAN = 50000;
 
 async function escalateCriticals(repository, tenantId, opts) {
   const o = opts || {};
   const nowMs = o.nowMs || Date.now();
-  const loops = await repository.latestByType(tenantId, "CriticalResultLoop", SCAN);
-  const out = { checked: 0, escalated: 0, texted: 0, conflicts: 0, partial: loops.length >= SCAN };
+  const { rows: loops, capped } = await pagedLatest(repository, tenantId, "CriticalResultLoop", { max: SCAN });
+  const out = { checked: 0, escalated: 0, texted: 0, conflicts: 0, partial: capped };
   for (const loop of loops || []) {
     if (!loop || loop.state !== "open") continue;
     out.checked += 1;

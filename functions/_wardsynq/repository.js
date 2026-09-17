@@ -586,4 +586,25 @@ function bufferReadAudits(repository) {
 }
 const AUDIT_FLUSH_BATCH = 40;
 
-export { VersionConflictError, IdentityConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit, AUDIT_READ_MAX, bufferReadAudits };
+/**
+ * R4-2: every latest record of one type straight from the port, for a service read with no clinical actor (the
+ * escalation timer, a group's counts). The same paging as RecordService._pageAll: pageByType pages of 1,000, oldest first,
+ * a record amended between pages kept at its later copy. Stops once more than `max` ids are held.
+ * -> { rows, capped }: capped true means the NEWEST records past max were not read, and the caller must say so.
+ * ponytail: each page re-groups every version of the type (audit O20 is the upgrade).
+ */
+async function pagedLatest(repository, tenantId, resourceType, opts) {
+  if (typeof repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+  const max = Math.max(1, Number(opts && opts.max) || 50000), statuses = opts && opts.statuses;
+  const byId = new Map();
+  let after = 0;
+  for (;;) {
+    const page = await repository.pageByType(tenantId, resourceType, { afterSeq: after, limit: MAX_ROSTER, ...(statuses ? { statuses } : {}) });
+    for (const r of page.records || []) if (r && r.id != null) { byId.delete(r.id); byId.set(r.id, r); }
+    if (byId.size > max) return { rows: [...byId.values()].slice(0, max), capped: true };
+    if (page.next == null) return { rows: [...byId.values()], capped: false };
+    after = page.next;
+  }
+}
+
+export { VersionConflictError, IdentityConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit, AUDIT_READ_MAX, bufferReadAudits, pagedLatest };
