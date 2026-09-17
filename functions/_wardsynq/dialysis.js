@@ -25,13 +25,17 @@
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { bookResource } from "./resource-booking.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
-const READ_CAP = 1000;
+/* Every record of a kind is read (service.listAll, paged, oldest first). Past READ_CAP the NEWEST are the ones not read:
+ * a register or board says so (truncated), a write that checks against the records refuses (409 too_many_records).
+ * ponytail: each page re-groups every version; audit O20 (a latest-version table) is the upgrade if paging is slow. */
+const READ_CAP = 50000;
+const every = async (svc, type) => (await svc.listAll(type, { max: READ_CAP, throwOnTruncate: true })).rows;
 const ACCESS_TYPES = Object.freeze(["av-fistula", "av-graft", "tunnelled-catheter", "non-tunnelled-catheter"]);
 const DIALYZER_KINDS = Object.freeze(["first-use", "reuse", "discard"]);
 const STATION_PREFIX = "dialysis-";
@@ -136,6 +140,7 @@ function writeFailure(e) {
 }
 function readFailure(e) {
   if (e instanceof GovernanceError) return { ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
+  if (e instanceof ListCeilingError) return { ok: false, status: 409, error: "too_many_records", detail: str(e.message) };
   return { ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
 }
 const baseOf = (ctx) => ({ mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null });
@@ -184,9 +189,12 @@ async function dialysisUnit(request, env, ctx) {
   const day = ISO_DAY.test(str(ctx.date)) ? str(ctx.date) : new Date(Date.now() + offsetMin * 60000).toISOString().slice(0, 10);
   const from = Date.parse(day + "T00:00:00Z") - offsetMin * 60000, to = from + 86400000;
   const inDay = (iso) => { const t = Date.parse(str(iso)); return Number.isFinite(t) && t >= from && t < to; };
-  let bookings, sessions, events;
-  try { [bookings, sessions, events] = await Promise.all([svc.list("ResourceBooking", READ_CAP), svc.list("DialysisSession", READ_CAP), svc.list("DialyzerEvent", READ_CAP)]); }
-  catch (e) { return { ...base, ...readFailure(e) }; }
+  let bookings, sessions, events, truncated;
+  try {
+    const got = await Promise.all(["ResourceBooking", "DialysisSession", "DialyzerEvent"].map((t) => svc.listAll(t, { max: READ_CAP })));
+    [bookings, sessions, events] = got.map((g) => g.rows);
+    truncated = got.some((g) => g.truncated);
+  } catch (e) { return { ...base, ...readFailure(e) }; }
   const all = latest(sessions).map(sessionView);
   const ids = new Set([...latest(bookings).filter((b) => str(b.resourceId).startsWith(STATION_PREFIX)).map((b) => b.patientId), ...all.map((s) => s.patientId)].filter(Boolean));
   const names = new Map();
@@ -200,12 +208,11 @@ async function dialysisUnit(request, env, ctx) {
       .map((b) => ({ bookingId: b.id, patientId: b.patientId, ...who(b.patientId), startAt: b.startAt, minutes: b.minutes })),
   }));
   const withName = (s) => ({ ...s, ...who(s.patientId) });
-  const truncated = [bookings, sessions, events].some((r) => (r || []).length >= READ_CAP);
   return {
     ...base, ok: true, date: day, settings, accessTypes: ACCESS_TYPES, stations,
     sessions: all.filter((s) => inDay(s.startAt)).sort((a, b) => str(a.startAt).localeCompare(str(b.startAt))).map(withName),
     missingPost: all.filter((s) => s.missingPost.length).sort((a, b) => str(a.startAt).localeCompare(str(b.startAt))).map(withName),
-    ...(truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} dialysis records of one kind exist and only the latest ${READ_CAP} were read, so this list may be incomplete.` } : {}),
+    ...(truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} dialysis records of one kind exist and the newest were not read, so this list may be incomplete.` } : {}),
   };
 }
 
@@ -222,7 +229,7 @@ async function dialysisPatient(request, env, ctx) {
   try {
     [serology, encounters, observations, sessions, events] = await Promise.all([
       svc.byPatient("DialysisSerology", patient.id), svc.byPatient("Encounter", patient.id), svc.byPatient("Observation", patient.id),
-      svc.byPatient("DialysisSession", patient.id), svc.list("DialyzerEvent", READ_CAP)]);
+      svc.byPatient("DialysisSession", patient.id), svc.byPatient("DialyzerEvent", patient.id)]);
   } catch (e) { return { ...base, ...readFailure(e) }; }
   const sero = latest(serology).sort((a, b) => str(b.at).localeCompare(str(a.at)))[0] || null;
   const dialyzerIds = [...new Set((events || []).filter((e) => e && e.patientId === patient.id).map((e) => e.dialyzerId))];
@@ -357,7 +364,7 @@ async function saveSession(request, env, ctx) {
   let dialyzerId = str(pick("dialyzerId")) || null, reuseNumber = null;
   if (dialyzerId) {
     let events;
-    try { events = await svc.list("DialyzerEvent", READ_CAP); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+    try { events = await every(svc, "DialyzerEvent"); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
     const d = dialyzerState(dialyzerId, events);
     if (!d) return refuse(422, "dialyzer_not_logged", "Log the dialyzer's first use before naming it on a session.");
     if (d.patientId !== patientId) return refuse(409, "dialyzer_other_patient", "This dialyzer is logged for another patient.");
@@ -401,7 +408,7 @@ async function dialyzerEvent(request, env, ctx) {
   const { patient, error: pe } = await patientOf(svc, ctx.patientId, ctx.mrn);
   if (pe) return { ...base, ...pe, written: 0 };
   let events;
-  try { events = await svc.list("DialyzerEvent", READ_CAP); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+  try { events = await every(svc, "DialyzerEvent"); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   const d = dialyzerState(dialyzerId, events);
   if (kind === "first-use" && d) return { ...base, ok: false, status: 409, error: "dialyzer_exists", detail: "This dialyzer label is already logged.", written: 0 };
   if (kind !== "first-use") {
