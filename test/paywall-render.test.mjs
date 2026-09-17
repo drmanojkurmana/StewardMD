@@ -200,6 +200,49 @@ test("every card carries its benefit line, and Physician carries the second line
     "a diagnostic or infallibility claim reached the sheet");
 });
 
+const SPEND = {
+  monthly: { student: "Less than a pizza.", coresident: "Less than one movie ticket, split two ways.",
+    pro: "Less than a movie night with the family.", physician: "Less than one dinner out.",
+    physicianpro: "Less than a tank of petrol." },
+  annual: { student: "Less than a pair of good shoes.", coresident: "Less than one weekend away, for the two of you.",
+    pro: "Less than one family holiday weekend.", physician: "Less than one family dinner a month.",
+    physicianpro: "Less than a new phone, and it runs your clinic for a year." },
+};
+
+test("the everyday-spend line comes from the map and differs between yearly and monthly", async () => {
+  const r = await open("web");
+  r.tap("showall");
+  for (const cycle of ["annual", "monthly"]) {
+    r.tap("cycle", "data-cycle", cycle);
+    for (const id of Object.keys(SPEND[cycle])) {
+      const c = text(card(r.html, id));
+      assert.ok(c.includes(SPEND[cycle][id]), cycle + "/" + id + " spend line missing: " + JSON.stringify(c.slice(0, 160)));
+    }
+  }
+  for (const id of Object.keys(SPEND.annual)) {
+    assert.notEqual(SPEND.annual[id], SPEND.monthly[id], id + ": the yearly and monthly lines must differ");
+    // and the card really did change when the cycle did
+    assert.ok(!text(card(r.html, id)).includes(SPEND.annual[id]), id + ": the monthly card still shows the yearly line");
+  }
+  // one sentence, no figure of its own: the only rupee amounts on a card are the server's
+  for (const id of Object.keys(SPEND.annual)) {
+    assert.ok(!/[\u20b90-9]/.test(SPEND.annual[id] + SPEND.monthly[id]), id + ": a spend line quotes a number");
+  }
+  assert.match(r.html, /Less than a coffee\./, "the add-on carries its own line");
+});
+
+test("a tier with no spend line renders nothing rather than borrowing one", async () => {
+  // `founding` is in no TIER_SPEND cycle: it must render with no comparison sentence at all.
+  const extra = JSON.parse(JSON.stringify(TIERS));
+  extra.founding = { amount: 39900, annual: 399000, label: "Founding Doctor" };
+  const r = await open("web", plansWith(extra));
+  const c = text(card(r.html, "founding"));
+  for (const line of [...Object.values(SPEND.annual), ...Object.values(SPEND.monthly)]) {
+    assert.ok(!c.includes(line), "an unmapped tier borrowed: " + line);
+  }
+  assert.ok(text(card(r.html, "physician")).includes(SPEND.annual.physician), "mapped tiers unaffected");
+});
+
 test("no card shows a rupee figure that is not derived from the plans payload", async () => {
   const r = await open("web");
   for (const cycle of ["annual", "monthly"]) {

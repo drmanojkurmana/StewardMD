@@ -110,6 +110,7 @@ try {
   ok(/Runs your clinic: queue, billing, recovery calls, and notes that think with you\./.test(phyA), "benefit line");
   ok(/MaiK Voice Scribe writes the note, then offers the differentials worth considering\./.test(phyA), "second line");
   ok(/Subscribe to Physician · ₹7,490\/year/.test(String(await ctaText())), "CTA: " + JSON.stringify(await ctaText()));
+  ok(/Less than one family dinner a month\./.test(phyA), "everyday-spend line, yearly");
   await shot("01-default-annual");
 
   // ── switch cycle ──────────────────────────────────────────────────────────
@@ -120,6 +121,7 @@ try {
   ok(/₹749/.test(phyM) && /₹25 a day/.test(phyM), "monthly price + per-day: " + JSON.stringify(phyM.split("\n").slice(0, 4)));
   ok(/₹1,499/.test(phyM) && /SAVE 50%/.test(phyM), "monthly anchor and SAVE 50%");
   ok(/Subscribe to Physician · ₹749\/month/.test(String(await ctaText())), "CTA follows the cycle: " + JSON.stringify(await ctaText()));
+  ok(/Less than one dinner out\./.test(phyM) && !/family dinner a month/.test(phyM), "everyday-spend line switches with the cycle");
   await shot("02-monthly");
 
   // ── switch tier ───────────────────────────────────────────────────────────
@@ -144,6 +146,7 @@ try {
 
   // ── the add-on is there for a trainee too ─────────────────────────────────
   const all = String(await sheetText());
+  ok(/Less than a coffee\./.test(all), "add-on everyday-spend line");
   ok(/Oncology AI add-on/.test(all) && /₹89/.test(all) && /₹3 a day/.test(all), "Onco add-on present and priced from the server");
   ok(!/days free|free trial|limited time|only \d+ left/i.test(all), "no invented trial and no fake scarcity");
   ok(!/—/.test(all), "no em-dash in the rendered sheet");

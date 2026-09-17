@@ -48,6 +48,38 @@
     physicianpro: "We host it. Your records, every device, nothing to set up.",
   };
   var TIER_NOTE = { physician: "MaiK Voice Scribe writes the note, then offers the differentials worth considering." };
+  /* Everyday-spend comparison, keyed by CYCLE then tier: what a year costs is not what a month
+   * costs, so the sentence differs. Words only, never a number: the price itself is already on the
+   * card and comes from the server, so a KV price edit can never make one of these lines quote a
+   * figure we no longer charge. quarterly/halfyearly are here for the day those cycles are shown;
+   * a tier or cycle with no entry renders NOTHING rather than borrowing another tier's line. */
+  var TIER_SPEND = {
+    monthly: {
+      student: "Less than a pizza.",
+      coresident: "Less than one movie ticket, split two ways.",
+      pro: "Less than a movie night with the family.",
+      physician: "Less than one dinner out.",
+      physicianpro: "Less than a tank of petrol.",
+    },
+    annual: {
+      student: "Less than a pair of good shoes.",
+      coresident: "Less than one weekend away, for the two of you.",
+      pro: "Less than one family holiday weekend.",
+      physician: "Less than one family dinner a month.",
+      physicianpro: "Less than a new phone, and it runs your clinic for a year.",
+    },
+    quarterly: {
+      pro: "Less than a family lunch out.",
+      physician: "Less than a weekend away.",
+      physicianpro: "Less than a month of school fees.",
+    },
+    halfyearly: {
+      pro: "Less than one wedding gift.",
+      physician: "Less than a new pair of spectacles.",
+      physicianpro: "Less than a weekend at a resort.",
+    },
+  };
+  var ADDON_SPEND = { onco: "Less than a coffee." };
   /* The per-day hero line. The WORDS are fixed here; the NUMBER is always recomputed from the
    * server price for the selected cycle, so a KV price override moves the figure and leaves the
    * comparison alone. A tier with no entry shows the bare "\u20b9N a day" and invents nothing. */
@@ -110,6 +142,7 @@
     return d >= 1 ? ("₹" + d.toLocaleString("en-IN") + " a day" + each) : ("Under ₹1 a day" + each);
   }
   function perDayLine(id, t) { var n = TIER_DAY_NOTE[id]; return perDayTxt(t) + "." + (n ? " " + n : ""); }
+  function spendLine(id, t) { var m = TIER_SPEND[isAnnual(t) ? "annual" : _cycle] || TIER_SPEND.monthly; return (m && m[id]) || ""; }
   function tierOf(id) { return (_plans && _plans.tiers && _plans.tiers[id]) || null; }
 
   function cycleToggle() {
@@ -136,6 +169,7 @@
         (strike ? '<span style="font:600 12px var(--sans);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span>' : '') +
       '</div>' +
       '<div style="font:700 13px/1.4 var(--sans);color:var(--teal,#0e6e63);margin-top:4px">' + esc(perDayLine(id, t)) + '</div>' +
+      (spendLine(id, t) ? '<div style="font:600 11.5px/1.4 var(--sans);color:var(--slate,#2d4356);margin-top:3px">' + esc(spendLine(id, t)) + '</div>' : '') +
       (TIER_BENEFIT[id] ? '<div style="font:700 12px/1.45 var(--sans);color:var(--ink);margin-top:4px">' + esc(TIER_BENEFIT[id]) + '</div>' : '') +
       (note ? '<div style="font:600 11px/1.4 var(--sans);color:var(--slate,#2d4356);margin-top:2px">' + esc(note) + '</div>' : '') +
       '<div style="font:500 11.5px/1.45 var(--sans);color:var(--slate-soft);margin-top:5px">' + esc(TIER_BLURB[id] || "") + '</div>' +
@@ -166,7 +200,7 @@
       '<div style="font:800 13px var(--sans);color:var(--ink)">+' + inr(a.amount) + '<span style="font:600 10.5px var(--sans);color:var(--slate-soft)">/month</span></div></div>' +
       '<div style="font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);margin-top:5px">Protocols, staging and toxicity are free on every plan. This adds the AI that reads the evidence with you: evidence overlay, protocol recommendations and higher onco AI limits.' +
       (trialDays ? ' Everyone gets a ' + trialDays + '-day trial first.' : '') + '</div>' +
-      '<div style="font:700 12px var(--sans);color:var(--teal,#0e6e63);margin-top:4px">' + esc("₹" + Math.round((a.amount / 100) / 30).toLocaleString("en-IN") + " a day.") + '</div>' +
+      '<div style="font:700 12px var(--sans);color:var(--teal,#0e6e63);margin-top:4px">' + esc("₹" + Math.round((a.amount / 100) / 30).toLocaleString("en-IN") + " a day.") + (ADDON_SPEND.onco ? ' <span style="font:600 11.5px var(--sans);color:var(--slate,#2d4356)">' + esc(ADDON_SPEND.onco) + '</span>' : '') + '</div>' +
       '<button data-pp="buy-addon" data-addon="onco" style="margin-top:9px;width:100%;min-height:44px;border:1.5px solid var(--teal,#0e6e63);background:transparent;color:var(--teal,#0e6e63);border-radius:10px;padding:10px;font:800 12.5px var(--sans);cursor:pointer">Add to any plan</button></div>';
   }
 
