@@ -7922,3 +7922,22 @@ of compliance.js is untouched.
   Nothing leaves WardSynQ.
 - Not built: offering forms for a booked appointment (the brief's optional hospital setting); no setting exists, so it
   behaves as off. Staff form-submit still accepts a patient-audience form as a staff-completed response.
+
+## 2026-09-17 Clinical content editors: critical limits, delta limits, autoverify, MAR times, note templates (branch clinical-settings-editors, R4-4)
+- Routes: GET/POST /org/clinical-settings/<setting> for criticalLimits, deltaLimits, autoVerify, marTimes, noteTemplates
+  (functions/_wardsynq/clinical-content-settings.js). The formulary pattern: dry run item by item, any problem refuses the
+  whole save, commit needs confirmCount, planId, a reason and signedOffBy, audited (org:clinical_content) and read back.
+- DEVIATION from the brief: functions/_wardsynq/clinical-settings.js already exists (D11 A, /org/clinical-settings with no
+  suffix), so the new module is clinical-content-settings.js; the suffixed route sits in front of the existing one.
+- Sign-off: wardsynq.clinicalContentSignOff[setting] = { signedOffBy, reason, by, at, planId }, whitelisted in _opd_org.js,
+  written only by this route and shown on the card.
+- /org/update refuses the five keys and clinicalContentSignOff (422 use_clinical_settings_route). A group recommendation
+  carrying any of them is checked when set and again on adoption.
+- Capability: staff.admin AND lab.result (critical, delta, autoverify), order.verify (MAR times), emr.treat (note templates).
+  No settings capability exists; today that is the admin role and the owner only.
+- Checks are the consumers' own readings made strict: codes must be LAB_CODE_SEED codes (a local-name test cannot be
+  configured here); critical limits need a unit and low below high; MAR times HH:MM, in order, and exactly the frequency's
+  default count (the 1-0-1 notation takes TDS times by position); resolveTemplate problems refused.
+- DEVIATION from the brief: "a delta limit without unit" is not checked because lab-delta.js limitFor has no unit field
+  (the change is in the result's own unit and mismatched units are never compared); adding one would store a value nothing reads.
+- Empty is "not configured" exactly as today; the draft starts from what is saved, never from a default. No clinical values ship.
