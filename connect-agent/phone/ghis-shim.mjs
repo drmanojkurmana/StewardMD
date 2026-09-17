@@ -311,6 +311,20 @@ function dropHeaderRows(rows) {
   });
 }
 
+/** An HTML report fragment as readable text: block tags become line breaks, entities are decoded,
+ * every other tag is dropped (the hand-built adapter's htmlToText). Plain text passes through. */
+export function reportText(raw) {
+  const s = String(raw == null ? '' : raw);
+  if (!/<[a-z!\/]/i.test(s)) return s.trim();
+  return s
+    .replace(/<\s*(br|\/p|\/div|\/tr|\/li|\/h[1-6])\s*\/?>/gi, '\n')
+    .replace(/<(script|style)\b[\s\S]*?<\/\1>/gi, ' ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
+    .replace(/&#x([0-9a-f]+);/gi, (m, h) => String.fromCodePoint(parseInt(h, 16))).replace(/&#(\d+);/g, (m, d) => String.fromCodePoint(Number(d)))
+    .replace(/[ \t]{2,}/g, ' ').replace(/[ \t]*\n[ \t]*/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
 export function radiologyOrders(sections, patient) {
   const rows = dropHeaderRows(rowsOf(sections, 'radiology'));
   const titleOf = (r) => col(r, /description|study|test_?desc|examination|procedure/i) || col(r, RX.name, /\bid\b|code/i) || firstText(r) || 'Radiology';
@@ -328,7 +342,11 @@ export function radiologyOrders(sections, patient) {
       const own = rowsOf(sections, 'radiology-detail').filter((d) => d._of === title || d._of === firstText(r) || d.testdesc === title || d.test_desc === title || (r['Service ID'] && (d._key === String(r['Service ID']) || d.resultid === String(r['Service ID']))) || d._rowIndex === Number(String(resultid).slice(1)));
       if (own.length) {
         const d = own[0];
-        const rep = d.report || d.result || d.final_rad_result || col(d, RX.text) || '';
+        /* THE REPORT IS TEXT, NOT MARKUP. GHIS's result field is an HTML fragment (paragraphs, spans,
+         * font runs); the hand-built adapter runs it through htmlToText and the drawer showed the raw
+         * tags otherwise (owner's iPhone, 2026-09-17). Block tags become line breaks first so the
+         * IMPRESSION / FINDINGS headings still stand on their own lines for parseReportSections. */
+        const rep = reportText(d.report || d.result || d.final_rad_result || col(d, RX.text) || '');
         const raw = rep || Object.keys(d).filter((k) => k.charAt(0) !== '_').map((k) => k + ': ' + d[k]).join('\n');
         const parts = parseReportSections(raw);
         return {
@@ -343,7 +361,7 @@ export function radiologyOrders(sections, patient) {
           enteredBy: d.enteredBy || d.generated_by_name || ''
         };
       }
-      const rep = r.report || r.result || r.final_rad_result || col(r, RX.text, /description|service|visit/i);
+      const rep = reportText(r.report || r.result || r.final_rad_result || col(r, RX.text, /description|service|visit/i));
       const raw = rep || Object.keys(r).filter((k) => k !== '_href' && k !== '_args' && !/id$|code/i.test(k)).map((k) => k + ': ' + r[k]).join('\n');
       const parts = parseReportSections(raw);
       return {

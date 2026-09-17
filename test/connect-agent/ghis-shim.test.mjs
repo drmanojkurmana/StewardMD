@@ -248,3 +248,21 @@ test('absent is not negative: a section the adapter could not read says so, an e
   assert.match(body.unreadable, /^Lab results were not read/);
   assert.equal(/—/.test(body.unreadable), false, 'no em-dash');
 });
+
+/* THE REPORT IS TEXT. GHIS's radiology result is an HTML fragment; the hand-built adapter runs it
+ * through htmlToText, the shim served the tags raw (owner's iPhone, 2026-09-17). */
+test('reportText: an HTML report fragment becomes readable text with its headings on their own lines', async () => {
+  const { reportText, serveGhisProxy } = await import('../../connect-agent/phone/ghis-shim.mjs');
+  const html = '<p align="center" style="margin:0"><span style="font-size:12pt"><b><u>COLOR DOPPLER</u></b></span></p><p>FINDINGS:</p><p>Normal flow&nbsp;seen.</p><p>IMPRESSION:</p><p>No DVT &amp; no thrombus.</p>';
+  const t = reportText(html);
+  assert.equal(t, 'COLOR DOPPLER\nFINDINGS:\nNormal flow seen.\nIMPRESSION:\nNo DVT & no thrombus.');
+  assert.equal(reportText('plain text'), 'plain text');
+  const sections = [
+    { resource: 'radiology', rows: [{ 'Service ID': '77', 'Visit ID ID': 'V1', Date: '17-Sep-2026', Description: 'U/S DOPPLER', Report: '' }] },
+    { resource: 'radiology-detail', rows: [{ _of: 'U/S DOPPLER', _key: '77', _rowIndex: 0, result: html, testdesc: 'U/S DOPPLER', result_enteredtime: '17-Sep-2026 3:10 PM', doctor_name: 'Dr X' }] },
+  ];
+  const r = serveGhisProxy({ method: 'GET', path: '/radiology-report?patientId=K1&resultid=a0', sections, patient: { patientId: 'K1' } });
+  assert.equal(r.status, 200);
+  assert.ok(!/<[a-z]/i.test(r.body.report), 'no tags in the report: ' + r.body.report.slice(0, 80));
+  assert.equal(r.body.impression, 'No DVT & no thrombus.');
+});
