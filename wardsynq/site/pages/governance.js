@@ -252,7 +252,7 @@
           '<label class="f"><span>' + esc(T(c, "site.gov.req.nomRel", "Relationship")) + '</span><input id="gReqNomRel"></label>' +
           '<label class="f"><span>' + esc(T(c, "site.gov.req.nomContact", "Nominee contact")) + '</span><input id="gReqNomContact"></label>' +
           '<button class="btn" type="button" id="gReqFile">' + esc(T(c, "site.gov.req.file", "Record request")) + '</button></div><div id="gReqMsg"></div></div>' +
-          (s.data.truncated ? '<div class="msg note">' + esc(T(c, "site.gov.truncated", "Only the most recent records were read; older ones may be missing.")) + "</div>" : "") +
+          (s.data.truncated ? '<div class="msg note">' + esc(T(c, "site.gov.truncatedNewest", "More records exist than can be read at once; the newest were not read, so this may be incomplete.")) + "</div>" : "") +
           (s.data.requests.length ? s.data.requests.map(function (r) { return requestHtml(c, r, s); }).join("") : '<p class="quiet">' + esc(T(c, "site.gov.req.none", "No data requests have been recorded.")) + "</p>");
       }
       body.innerHTML = h;
@@ -645,7 +645,7 @@
       else {
         var d = s.data;
         h += '<p>' + esc(T(c, "site.gov.nabh.counts", "{a} of 32 computable from WardSynQ data; {b} need data WardSynQ does not hold.", { a: d.computable, b: d.notComputable })) + "</p>" +
-          (d.truncated ? '<div class="msg note">' + esc(T(c, "site.gov.truncated", "Only the most recent records were read; older ones may be missing.")) + "</div>" : "") +
+          (d.truncated ? '<div class="msg note">' + esc(T(c, "site.gov.truncatedNewest", "More records exist than can be read at once; the newest were not read, so this may be incomplete.")) + "</div>" : "") +
           '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.gov.nabh.no", "No.")) + "</th><th>" + esc(T(c, "site.gov.nabh.indicator", "Indicator")) + "</th>" +
           d.months.map(function (m) { return "<th>" + EN(c, esc(m)) + "</th>"; }).join("") + "</tr></thead><tbody>" +
           d.indicators.map(function (i) {
@@ -689,7 +689,7 @@
         (d.sections || []).forEach(function (x) { sec[x.code] = x.title; });
         var last = "";
         h += "<p>" + esc(T(c, "site.gov.hmis.counts", "{a} items filled from WardSynQ; {b} not available from WardSynQ data.", { a: d.filled, b: d.notAvailable })) + "</p>" +
-          (d.truncated ? '<div class="msg note">' + esc(T(c, "site.gov.truncated", "Only the most recent records were read; older ones may be missing.")) + "</div>" : "") +
+          (d.truncated ? '<div class="msg note">' + esc(T(c, "site.gov.truncatedNewest", "More records exist than can be read at once; the newest were not read, so this may be incomplete.")) + "</div>" : "") +
           '<div class="tbl"><table><tbody>' + d.items.map(function (i) {
             var row = "";
             if (i.section !== last) { last = i.section; row += '<tr><th colspan="3">' + EN(c, esc(i.section + " " + (sec[i.section] || ""))) + "</th></tr>"; }
@@ -818,7 +818,7 @@
         else if (res === false) h += failHtml(c, T(c, "site.gov.rb.failed", "The report could not be run:"), s.fail);
         else if (res) {
           h += "<p>" + esc(T(c, "site.gov.rb.matched", "{n} records matched; showing {shown} of {total} rows.", { n: res.matched, shown: res.shown, total: res.total })) + "</p>" +
-            (res.truncated ? '<div class="msg note">' + esc(T(c, "site.gov.truncated", "Only the most recent records were read; older ones may be missing.")) + "</div>" : "") +
+            (res.truncated ? '<div class="msg note">' + esc(T(c, "site.gov.truncatedNewest", "More records exist than can be read at once; the newest were not read, so this may be incomplete.")) + "</div>" : "") +
             '<div class="tbl"><table><thead><tr>' + res.header.map(function (x) { return "<th>" + EN(c, esc(x)) + "</th>"; }).join("") + "</tr></thead><tbody>" +
             res.rows.map(function (r) { return "<tr>" + r.map(function (v) { return "<td>" + EN(c, esc(v == null ? "" : v)) + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>";
         }

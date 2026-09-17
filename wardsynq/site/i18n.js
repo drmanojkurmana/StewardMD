@@ -7863,7 +7863,7 @@
     "site.gov.req.nomRel": "Relationship",
     "site.gov.req.nomContact": "Nominee contact",
     "site.gov.req.file": "Record request",
-    "site.gov.truncated": "Only the most recent records were read; older ones may be missing.",
+    "site.gov.truncatedNewest": "More records exist than can be read at once; the newest were not read, so this may be incomplete.",
     "site.gov.req.none": "No data requests have been recorded.",
     "site.gov.clocks.notSaved": "Answer times not saved:",
     "site.gov.clocks.saved": "Answer times saved.",
