@@ -8183,3 +8183,38 @@ of compliance.js is untouched.
 - Not done: no cron or scheduled runner (the job is admin-triggered on purpose; the person who starts it is
   the person it is audited to), and no total-remaining figure before a full scan pass - the count comes from
   the scan itself, batch by batch, because counting the archive is the same walk as scanning it.
+
+## 2026-09-18 - R6-2: a chart that could not be read is never drawn as a chart with nothing in it (branch no-silent-empty-chart)
+
+R5-1 fixed this swallow in three files; the audit found it in about fifteen. This branch takes the six
+it owns (patient-record.js, chart-completion.js, billing.js pre-auth, hl7v2.js, lab-result.js,
+specimen.js). The rule, unchanged from R5-1: a read that FAILED and a read that came back EMPTY are
+different facts and are never rendered the same way.
+
+- SHAPE, per site, chosen by what the caller can honestly do with a partial answer:
+  - `patient-record.js assemble()` - per-type `null` plus `unreadableTypes`, the break-glass.js pattern
+    verbatim. Six of seven types failing independently is the common case and blanking the whole chart
+    for one of them would be its own lie.
+  - `chart-completion.js` - per-detector, so one unreadable section is `unknownSections: [{type, reason}]`
+    and the other six checks still run. The audit asks for a completion percentage; this file computes
+    none (it is a deficiency queue), so the count of unknown sections is what is reported instead.
+  - `billing.js claimsForPatient` - `preAuthorisations: null` beside the three lists R5-4 already did,
+    and every payer rule that turns on a pre-authorisation is reported UNCHECKED rather than as "none
+    recorded", which is what the rule engine would otherwise state as a fact.
+  - `hl7v2.js`, `lab-result.js`, `specimen.js` - REFUSED (the 502 the surrounding code already returns).
+    An outbound ORU with no OBX is filed by the receiver as a report with no results, and an empty
+    laboratory or phlebotomy board is read as work already done. There is no partial answer worth giving.
+- A HANDOVER IS NOT RECORDED OFF A CHART THAT COULD NOT BE READ. `releaseToPatient` refuses with 502 and
+  writes nothing: its receipt counts allergies, medicines and diagnoses, and a zero taken from a failed
+  read is an answerable written statement that the patient was handed a page with none.
+- WITH THE CRITICAL-RESULT LOOPS UNREADABLE, NO RESULT IS RELEASED. Releasability is "no OPEN loop covers
+  this report"; unreadable loops used to mean no loops, which is the potassium-of-7.2 failure the file's
+  own header is about.
+- Screens: ward Patient copy names the unreadable parts above the chart and draws each missing section as
+  unknown rather than empty (the second-language aside is DROPPED for such a section rather than printing
+  the catalog's "nothing recorded" in the patient's own language - a new print-lang.js catalog word was
+  not invented for it); Chart check will not print "Nothing outstanding" while a section is unknown; the
+  TPA screen says the pre-authorisations could not be read; the patient portal reuses its own existing
+  `section(..., "failed", ...)` state.
+- Not done here: `patient-access.js:441` (the portal's own PatientMessage read) and the sites owned by
+  R6-1/R6-3/R6-4/R6-5.
