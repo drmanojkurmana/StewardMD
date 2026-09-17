@@ -1,6 +1,7 @@
 /* wardsynq/site/pages/inbasket.js - "In-basket": staff messages and everything else waiting on this person, in one place.
  *
- * Staff messages (functions/_wardsynq/staff-messaging.js): threads about a patient or a unit, addressed to roles, with
+ * Staff messages (functions/_wardsynq/staff-messaging.js): threads about a patient or a unit, addressed to roles or named
+ * colleagues (picked from GET /ward/staff-message-people, label and role only), with
  * read state, edit and recall kept as versions, and an alert by push that carries no patient details. Nothing here
  * sends SMS, WhatsApp or email.
  *
@@ -32,6 +33,16 @@
     return '<div class="msg err" role="alert">' + TS(c, "site.inbasket.notDone", "That did not go through. Nothing was changed.") + (why ? '<br><span class="quiet">' + EN(c, c.esc(why)) + "</span>" : "") + "</div>";
   }
 
+  /** PURE. The named-people picker: loading, failed and empty distinct. Labels and role codes are data. */
+  function peopleHtml(c, r) {
+    if (r == null) return '<p aria-live="polite"><span class="spin"></span> ' + c.esc(T(c, "site.inbasket.peopleLoading", "Loading staff...")) + "</p>";
+    if (!r.ok) return '<div class="msg err" role="alert">' + TS(c, "site.inbasket.peopleFailed", "The staff list could not be loaded, so nobody can be named now. Address a role instead.") + "</div>";
+    if (!r.people.length) return '<p data-empty="people">' + c.esc(T(c, "site.inbasket.peopleNone", "No other staff member can be named.")) + "</p>";
+    return '<label class="f"><span>' + c.esc(T(c, "site.inbasket.peopleLegend", "Named people")) + '</span><select id="ibPeople" multiple size="6">' + r.people.map(function (p) {
+      return '<option value="' + c.esc(p.identity) + '">' + EN(c, c.esc(p.label)) + " (" + EN(c, c.esc(p.role)) + ")</option>";
+    }).join("") + "</select></label>" + '<p class="quiet">' + c.esc(T(c, "site.inbasket.namedOnly", "A thread addressed only to named people is seen by them and by you, not by everyone who may see the patient.")) + "</p>";
+  }
+
   /** PURE. The thread list, with loading, failed and empty distinct. */
   function threadsHtml(c, r, open) {
     if (r == null) return '<p aria-live="polite"><span class="spin"></span> ' + c.esc(T(c, "site.inbasket.loadingThreads", "Loading messages...")) + "</p>";
@@ -60,12 +71,13 @@
         (mine ? '<div class="row"><button class="btn quiet" type="button" data-ib="edit" data-id="' + c.esc(m.messageId) + '" data-v="' + c.esc(m.version) + '">' + c.esc(T(c, "site.inbasket.edit", "Edit")) + '</button><button class="btn danger" type="button" data-ib="recall" data-id="' + c.esc(m.messageId) + '" data-v="' + c.esc(m.version) + '">' + c.esc(T(c, "site.inbasket.recall", "Recall")) + "</button></div>" : "") +
         (m.escalations && m.escalations.length ? '<div class="quiet">' + m.escalations.map(function (e) { return c.esc(escalationText(c, e)); }).join("<br>") + "</div>" : "") + "</li>";
     }).join("");
-    var last = t.messages[t.messages.length - 1];
-    return '<ul class="ib-messages">' + rows + "</ul>" +
+    var last = t.messages[t.messages.length - 1], people = t.toPeople || [];
+    return (people.length ? '<p>' + c.esc(T(c, "site.inbasket.toPeopleLead", "Addressed to:")) + " " + people.map(function (p) { return EN(c, c.esc(p.label || p.identity)); }).join(", ") + "</p>" : "") +
+      '<ul class="ib-messages">' + rows + "</ul>" +
       '<div class="row"><label class="f" style="flex:2 1 260px"><span>' + c.esc(T(c, "site.inbasket.replyLabel", "Reply")) + '</span><textarea id="ibReply" rows="2" maxlength="2000"></textarea></label>' +
       '<button class="btn primary" type="button" data-ib="reply" data-id="' + c.esc(t.threadId) + '">' + c.esc(T(c, "site.inbasket.send", "Send")) + "</button>" +
-      (t.toRoles.length && last && !last.recalled ? '<button class="btn quiet" type="button" data-ib="escalate" data-id="' + c.esc(last.messageId) + '">' + c.esc(T(c, "site.inbasket.alert", "Alert by push")) + "</button>" : "") + "</div>" +
-      '<p class="quiet">' + c.esc(T(c, "site.inbasket.pushNote", "An alert tells the addressed roles who have not read this that a message is waiting. It carries no patient name, number, ward or text.")) + "</p>";
+      ((t.toRoles.length || people.length) && last && !last.recalled ? '<button class="btn quiet" type="button" data-ib="escalate" data-id="' + c.esc(last.messageId) + '">' + c.esc(T(c, "site.inbasket.alert", "Alert by push")) + "</button>" : "") + "</div>" +
+      '<p class="quiet">' + c.esc(T(c, "site.inbasket.pushNotePeople", "An alert tells the people and roles addressed who have not read this that a message is waiting. It carries no patient name, number, ward or text.")) + "</p>";
   }
 
   /** PURE. What a push attempt did, as plain text, never "delivered". */
@@ -100,7 +112,7 @@
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.inbasket.title", "In-basket")) + '</h1><span class="sub">' + c.esc(T(c, "site.inbasket.subtitle", "staff messages and what is waiting on you")) + "</span></div>" +
       '<div class="msg note">' + TS(c, "site.inbasket.keepInside", "Messages stay inside WardSynQ: nothing is sent by SMS, WhatsApp or email. A message about a patient is seen only by staff who may see that patient, and every edit or recall is kept.") + "</div>" +
       '<div class="card"><h2>' + c.esc(T(c, "site.inbasket.messagesCard", "Staff messages")) + "</h2>" +
-      '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.inbasket.show", "Show")) + '</span><select id="ibView"><option value="mine">' + c.esc(T(c, "site.inbasket.forMe", "For my role or started by me")) + '</option><option value="">' + c.esc(T(c, "site.inbasket.all", "All I may see")) + "</option></select></label>" +
+      '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.inbasket.show", "Show")) + '</span><select id="ibView"><option value="mine">' + c.esc(T(c, "site.inbasket.forMeOrNamed", "For me, my role, or started by me")) + '</option><option value="">' + c.esc(T(c, "site.inbasket.all", "All I may see")) + "</option></select></label>" +
       '<button class="btn quiet" type="button" data-ib="refresh">' + c.esc(T(c, "site.inbasket.refresh", "Refresh")) + "</button></div>" +
       '<div id="ibThreads"></div></div>' +
       '<div class="card"><h2>' + c.esc(T(c, "site.inbasket.newCard", "New thread")) + "</h2>" +
@@ -110,6 +122,7 @@
       '<div class="row"><label class="f" style="flex:2 1 260px"><span>' + c.esc(T(c, "site.inbasket.subject", "Subject")) + '</span><input id="ibSubject" maxlength="120"></label></div>' +
       '<div class="row"><label class="f" style="flex:2 1 260px"><span>' + c.esc(T(c, "site.inbasket.message", "Message")) + '</span><textarea id="ibBody" rows="3" maxlength="2000"></textarea></label></div>' +
       '<fieldset><legend>' + c.esc(T(c, "site.inbasket.toLegend", "For")) + "</legend>" + ROLES.map(function (r) { return '<label><input type="checkbox" name="ibTo" value="' + r + '"> ' + c.esc(roleLabel(c, r)) + "</label> "; }).join("") +
+      '<div id="ibPeopleBox"></div>' +
       '<label><input type="checkbox" id="ibUrgent"> ' + c.esc(T(c, "site.inbasket.urgentBox", "Urgent: alert their phones now")) + "</label></fieldset>" +
       '<button class="btn primary" type="button" data-ib="new">' + c.esc(T(c, "site.inbasket.startThread", "Send")) + '</button><div id="ibNewOut" aria-live="polite"></div></div>' +
       '<div class="card"><h2>' + c.esc(T(c, "site.inbasket.waitingCard", "Waiting on you")) + '</h2><div id="ibPortal"></div><div id="ibReferrals"></div><div id="ibCosign"></div><div id="ibSafety"></div></div>';
@@ -156,6 +169,8 @@
       });
     }
 
+    set("ibPeopleBox", peopleHtml(c, null));
+    c.api("/ward/staff-message-people" + q).then(function (r) { set("ibPeopleBox", peopleHtml(c, r && r.ok ? r : { ok: false })); });
     c.api("/ward/list" + q).then(function (w) {
       var sel = document.getElementById("ibAbout"); if (!sel) return;
       if (!w || !w.ok) { set("ibNewOut", '<div class="msg err">' + TS(c, "site.inbasket.patientsFailed", "The ward list could not be loaded, so only unit threads can be started now.") + "</div>"); return; }
@@ -201,7 +216,8 @@
       if (a === "new") {
         var ix = val("ibAbout"), p = ix === "" ? null : S.patients[Number(ix)];
         var body = { orgId: org, subject: val("ibSubject"), body: val("ibBody"), urgent: !!(document.getElementById("ibUrgent") || {}).checked,
-          toRoles: [].slice.call(document.querySelectorAll('input[name="ibTo"]:checked')).map(function (x) { return x.value; }) };
+          toRoles: [].slice.call(document.querySelectorAll('input[name="ibTo"]:checked')).map(function (x) { return x.value; }),
+          toPeople: [].slice.call(document.querySelectorAll("#ibPeople option:checked")).map(function (x) { return x.value; }) };
         if (p) { body.patientId = p.patientId; if (p.encounterId) body.encounterId = p.encounterId; } else body.unit = val("ibUnit");
         if (!body.subject || !body.body) { c.toast(T(c, "site.inbasket.subjectAndMessage", "Write a subject and a message.")); return; }
         b.disabled = true;
@@ -209,6 +225,7 @@
           b.disabled = false;
           if (after(r, "ibNewOut")) {
             set("ibNewOut", '<div class="msg ok">' + TS(c, "site.inbasket.sent", "Sent.") + (r.escalation ? " " + c.esc(escalationText(c, r.escalation)) : "") + "</div>");
+            [].slice.call(document.querySelectorAll("#ibPeople option:checked")).forEach(function (o) { o.selected = false; });
             ["ibSubject", "ibBody"].forEach(function (k) { var e = document.getElementById(k); if (e) e.value = ""; });
           }
         });
@@ -217,5 +234,5 @@
     loadThreads();
     loadWaiting();
   } });
-  WSQ._inbasket = { threadsHtml: threadsHtml, threadHtml: threadHtml, sourceHtml: sourceHtml, escalationText: escalationText };
+  WSQ._inbasket = { peopleHtml: peopleHtml, threadsHtml: threadsHtml, threadHtml: threadHtml, sourceHtml: sourceHtml, escalationText: escalationText };
 })();

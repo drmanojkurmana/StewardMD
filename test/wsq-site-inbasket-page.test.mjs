@@ -47,6 +47,27 @@ test("an open thread: a recalled message shows who recalled it and why, never it
   assert.match(I.escalationText(c, { recipients: 3, sent: 2, total: 4 }), /Sent is not read/);
 });
 
+test("named people: the picker keeps loading, failed and empty apart; an open named thread says who it is addressed to", () => {
+  const en = loadSite({ lang: "en", pages: ["inbasket.js"] });
+  const c = ctxOf(en), I = en.win.WSQ._inbasket;
+  assert.match(I.peopleHtml(c, null), /Loading staff/);
+  const bad = I.peopleHtml(c, { ok: false });
+  assert.match(bad, /nobody can be named now/);
+  assert.ok(!/data-empty/.test(bad), "a failed staff list never renders as nobody to name");
+  assert.match(I.peopleHtml(c, { ok: true, people: [] }), /data-empty="people"/);
+  const list = I.peopleHtml(c, { ok: true, people: [{ identity: "cfa:n1", label: "Sister One", role: "nurse" }] });
+  assert.match(list, /<option value="cfa:n1">Sister One \(nurse\)<\/option>/);
+  const named = I.threadHtml(c, { ...THREAD, messages: THREAD.messages.slice(0, 1), toRoles: [], toPeople: [{ identity: "cfa:n1", label: "Sister One" }] }, "cfa:doc");
+  assert.match(named, /Addressed to: Sister One/);
+  assert.match(named, /data-ib="escalate"/, "a thread to named people can still be alerted");
+  const xx = loadSite({ lang: "xx", pages: ["inbasket.js"] });
+  const cx = ctxOf(xx), X = xx.win.WSQ._inbasket;
+  const html = X.peopleHtml(cx, null) + X.peopleHtml(cx, { ok: true, people: [] }) +
+    X.peopleHtml(cx, { ok: true, people: [{ identity: "cfa:n1", label: "Sister One", role: "nurse" }] }) + X.threadHtml(cx, { ...THREAD, toRoles: [], toPeople: [{ identity: "cfa:n1", label: "Sister One" }] }, "cfa:doc");
+  const left = leftovers(html, ["Sister One", "nurse", "Bed 4 fluids", "Dr Mehta", "doctor", "Recheck output", "wrong thread", "(", ")", ",", ":"]).filter((s) => !/\d{1,2}[/:.]\d{1,2}|\b\d{2} ?[ap]m\b|2026/i.test(s));
+  assert.deepEqual(left, []);
+});
+
 test("waiting on you: a source the role cannot open says so, a failed source is not 'nothing waiting'", () => {
   const en = loadSite({ lang: "en", pages: ["inbasket.js"] });
   const c = ctxOf(en), I = en.win.WSQ._inbasket;

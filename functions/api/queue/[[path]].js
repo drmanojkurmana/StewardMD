@@ -159,7 +159,7 @@ import { setExpectedDischarge, expectedDischargeHistory, hospitalToday } from ".
 import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
 import { recordDischargeMilestone, dischargeProgress } from "../../_wardsynq/discharge-milestones.js";
 import { createInboundTransfer, decideInboundTransfer, cancelInboundTransfer, listInboundTransfers } from "../../_wardsynq/transfer-centre.js";
-import { sendStaffMessage, editStaffMessage, recallStaffMessage, markThreadRead, escalateStaffMessage, listStaffMessages } from "../../_wardsynq/staff-messaging.js";
+import { sendStaffMessage, editStaffMessage, recallStaffMessage, markThreadRead, escalateStaffMessage, listStaffMessages, listMessagePeople } from "../../_wardsynq/staff-messaging.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
@@ -1404,6 +1404,7 @@ export async function onRequest(context) {
          * patient thread is decided again inside, by reading the patient as the caller; only the author edits or recalls. */
         "staff-messages": CAPS.EMR_VIEW, "staff-message-send": CAPS.EMR_VIEW, "staff-message-edit": CAPS.EMR_VIEW,
         "staff-message-recall": CAPS.EMR_VIEW, "staff-message-read": CAPS.EMR_VIEW, "staff-message-escalate": CAPS.EMR_VIEW,
+        "staff-message-people": CAPS.EMR_VIEW,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
          * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
          * authority as vitals. Disposition closes the visit - the SAME capability discharge already
@@ -4911,7 +4912,11 @@ export async function onRequest(context) {
           return json(r, r.ok ? 200 : (r.status || 502), request);
         }
         if (sub === "staff-message-send" && method === "POST") {
-          const r = await sendStaffMessage(request, env, { ...deps, threadId: body.threadId, patientId: body.patientId, encounterId: body.encounterId, unit: body.unit, subject: body.subject, body: body.body, toRoles: body.toRoles, urgent: body.urgent === true, push, members, idempotencyKey: body.idempotencyKey || null });
+          const r = await sendStaffMessage(request, env, { ...deps, threadId: body.threadId, patientId: body.patientId, encounterId: body.encounterId, unit: body.unit, subject: body.subject, body: body.body, toRoles: body.toRoles, toPeople: body.toPeople, urgent: body.urgent === true, push, members, idempotencyKey: body.idempotencyKey || null });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-people" && method === "GET") {
+          const r = await listMessagePeople(request, env, { ...deps, members });
           return json(r, r.ok ? 200 : (r.status || 502), request);
         }
         if (sub === "staff-message-edit" && method === "POST") {
