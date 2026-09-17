@@ -778,10 +778,11 @@ class RecordService {
    * A roster: the latest version of every record of one type in this tenant. Capped, and audited
    * as a list rather than a read, because a ward list is the one legitimate cross-patient query.
    */
-  async list(resourceType, limit) {
+  async list(resourceType, limit, opts) {
     this._assertType(resourceType);
     this.governed._assertRead(this.actor, resourceType);
-    const rows = await this.repository.latestByType(this.tenantId, resourceType, limit);
+    // opts.newest: the most recently written first (the repository port's own option); oldest first otherwise.
+    const rows = await this.repository.latestByType(this.tenantId, resourceType, limit, opts && opts.newest ? { newest: true } : undefined);
     await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, limit: Number(limit) || null }, resourceCounts: { [resourceType]: rows.length } }));
     return rows;
   }

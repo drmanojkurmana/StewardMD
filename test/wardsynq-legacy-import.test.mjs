@@ -189,9 +189,71 @@ test("an imported supplier keeps its GSTIN, phone and address after a rate contr
   assert.deepEqual([v.gstin, v.phone, v.address], ["36AABCU9603R1ZM", "040222", "12 Market Road"]);
 });
 
-test("a file over the row cap is refused with the cap named", async () => {
+test("R3-1: a file over the row cap is read whole, a run over the cap is refused with the cap named, a run outside the file is refused", async () => {
   seed();
   const csv = "No,Name,Mobile,Sex,Age\n" + Array.from({ length: 101 }, (_, i) => `L-${i},Person ${i},98765${String(i).padStart(5, "0")},M,30`).join("\n");
-  const r = await as(ADMIN, R, "POST", { orgId: ORG_ID, kind: "patients", csv });
+  const map = await as(ADMIN, R, "POST", { orgId: ORG_ID, kind: "patients", csv });
+  assert.equal(map.__status, 200, map.__text); assert.deepEqual([map.rowCount, map.rowCap], [101, 100]);
+  const mapping = { legacyMrn: 0, name: 1, mobile: 2, gender: 3, ageYears: 4 };
+  const r = await as(ADMIN, R, "POST", { orgId: ORG_ID, kind: "patients", csv, mapping });
   assert.equal(r.__status, 413); assert.equal(r.rowCap, 100);
+  const out = await as(ADMIN, R, "POST", { orgId: ORG_ID, kind: "patients", csv, mapping, run: { from: 100, to: 102 } });
+  assert.equal(out.__status, 422); assert.equal(out.error, "bad_run");
+});
+
+test("R3-1: a 250-row patient file commits in three runs; re-running after a failed second run adds only the missing rows", async () => {
+  seed();
+  /* Every patient has a different date of birth, so the name and date of birth check never pairs two of them. */
+  const csv = "No,Name,Mobile,Sex,DOB\n" + Array.from({ length: 250 }, (_, i) => `L-${i},Person ${i},98766${String(i).padStart(5, "0")},${i % 2 ? "M" : "F"},${1 + (i % 28)}/${1 + Math.floor(i / 28)}/1970`).join("\n");
+  const mapping = { legacyMrn: 0, name: 1, mobile: 2, gender: 3, birthDate: 4, dateOrder: "dmy" };
+  const runs = [{ from: 0, to: 100 }, { from: 100, to: 200 }, { from: 200, to: 250 }];
+  const step = async (run, commit, dry) => as(ADMIN, R, "POST", { orgId: ORG_ID, kind: "patients", csv, mapping, run, ...(commit ? { commit: true, confirmCount: dry.counts.create, planId: dry.planId } : {}) });
+  const d1 = await step(runs[0]);
+  assert.equal(d1.__status, 200, d1.__text); assert.equal(d1.counts.create, 100); assert.equal(d1.rows[0].row, 2, "row numbers are the file's own");
+  assert.equal((await step(runs[0], true, d1)).written, 100);
+
+  const d2 = await step(runs[1]);
+  assert.equal(d2.counts.create, 100, JSON.stringify([d2.counts, d2.rows.slice(0, 2)])); assert.equal(d2.rows[0].row, 102);
+  const append = H.RECORD.append.bind(H.RECORD);
+  let patientsWritten = 0;
+  H.RECORD.append = async (t, records, ctx) => {
+    if ((records || []).some((x) => x && x.resourceType === "Patient") && ++patientsWritten > 30) throw new Error("store down");
+    return append(t, records, ctx);
+  };
+  let failed;
+  try { failed = await step(runs[1], true, d2); } finally { H.RECORD.append = append; }
+  assert.equal(failed.__status, 502); assert.equal(failed.error, "import_incomplete");
+  assert.equal(failed.written, 31, "30 complete, and the 31st was issued an MR number whose chart record failed");
+
+  const again = await step(runs[1]);
+  assert.equal(again.__status, 200, again.__text);
+  assert.deepEqual(again.counts, { create: 69, matched: 30, duplicate: 1, invalid: 0 }, "only what is missing is added; the half-written patient is named, never registered twice");
+  assert.equal((await step(runs[1], true, again)).written, 69);
+  const d3 = await step(runs[2]);
+  assert.equal((await step(runs[2], true, d3)).written, 50);
+  assert.equal(stored("q_patients/"), 250, "every patient registered exactly once");
+  const last = await step(runs[0]);
+  assert.equal(last.counts.create, 0);
+});
+
+test("R3-1: a repeat across two runs of one file is caught", async () => {
+  seed();
+  const csv = "No,Name,Mobile,Sex,Age\n" + Array.from({ length: 120 }, (_, i) => `L-${i === 110 ? 5 : i},Person ${i},98767${String(i).padStart(5, "0")},M,30`).join("\n");
+  const r = await as(ADMIN, R, "POST", { orgId: ORG_ID, kind: "patients", csv, mapping: { legacyMrn: 0, name: 1, mobile: 2, gender: 3, ageYears: 4 }, run: { from: 100, to: 120 } });
+  assert.equal(r.__status, 200, r.__text);
+  const row = r.rows.find((x) => x.row === 112);
+  assert.equal(row.status, "invalid"); assert.match(row.reason, /Repeats row 7/);
+});
+
+test("R3-1: a Price list of 700 rows is read whole: a file row matching row 650 is matched, not added", async () => {
+  seed();
+  for (let i = 0; i < 700; i++) docs.set(`q_tariff/trf${String(i).padStart(4, "0")}`, { fields: { orgId: ORG_ID, active: true, name: `Test ${i}`, code: `T${i}`, kind: "investigation", price: 10000 + i }, updateTime: "t1" });
+  const csv = "Item,Code,Type,Rate\nTest six fifty,T650,investigation,120\nNew test,NEW1,investigation,90\n";
+  const dry = await as(ADMIN, R, "POST", { orgId: ORG_ID, kind: "prices", csv, mapping: { name: 0, code: 1, kind: 2, price: 3 } });
+  assert.equal(dry.__status, 200, dry.__text);
+  assert.equal(dry.rows[0].status, "matched"); assert.equal(dry.rows[0].existing.price, 10650);
+  assert.equal(dry.rows[1].status, "create");
+  const done = await as(ADMIN, R, "POST", { orgId: ORG_ID, kind: "prices", csv, mapping: { name: 0, code: 1, kind: 2, price: 3 }, commit: true, confirmCount: 1, planId: dry.planId });
+  assert.equal(done.__status, 200, done.__text); assert.equal(done.written, 1);
+  assert.equal(stored("q_tariff/"), 701);
 });

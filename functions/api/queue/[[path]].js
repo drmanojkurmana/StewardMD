@@ -3018,7 +3018,7 @@ export async function onRequest(context) {
         if (!kindCap) return json({ ok: false, error: "unknown_kind", message: "Choose what the file holds: patients, prices or suppliers." }, 422, request);
         const kAz = await ORG.authorizeOrg(env, actor, wOrgId, kindCap);
         if (!kAz.ok) return json(azRefusal(kAz), 403, request);
-        const r = await importLegacy(request, env, { ...deps, kind: body.kind, csv: body.csv, mapping: body.mapping, commit: body.commit === true, confirmCount: body.confirmCount, planId: body.planId,
+        const r = await importLegacy(request, env, { ...deps, kind: body.kind, csv: body.csv, mapping: body.mapping, run: body.run, commit: body.commit === true, confirmCount: body.confirmCount, planId: body.planId,
           region: (wOrg && wOrg.region) || undefined, externalMrn: !!(wsqCfg && wsqCfg.externalMrn),
           patients: { byMrn: (mrn) => PAT.getPatient(env, wOrgId, mrn), mobileTaken: (mobile) => PAT.mobileDuplicateOf(env, wOrgId, mobile), register: (b) => PAT.registerPatient(env, wOrg, b, actor.id || "") },
           // The Price list is the one table the invoice paths read (wsqTariff); without its store there is nowhere to import to.
