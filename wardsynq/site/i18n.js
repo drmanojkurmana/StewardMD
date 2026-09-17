@@ -9782,7 +9782,7 @@
     "site.qual.abg.dotNot": "Days of therapy not computable:",
     "site.qual.abg.notConfigured": "The minimum number of isolates is not configured. An administrator sets it in Admin, clinical settings (CLSI M39 recommends 30).",
     "site.qual.abg.summary": "{from} to {to}: {n} first isolates from {r} final reports, {dup} repeat isolates left out. Minimum {min} isolates.",
-    "site.qual.abg.truncated": "More reports exist than were read; the oldest may be missing.",
+    "site.qual.truncated": "More records exist than can be read at once; the newest were not read, so this may be incomplete.",
     "site.qual.abg.none": "No final cultures with organisms in this period.",
     "site.qual.abg.isolates": "{n} isolates",
     "site.qual.abg.insufficient": "Too few isolates for a percentage.",

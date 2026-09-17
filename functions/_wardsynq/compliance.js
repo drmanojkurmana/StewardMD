@@ -34,7 +34,9 @@ const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000, HOUR = 3600000;
 const ms = (t) => { const v = Date.parse(str(t)); return Number.isFinite(v) ? v : null; };
 const round = (v, dp) => (v == null ? null : Math.round(v * 10 ** dp) / 10 ** dp);
-const READ_LIMIT = 5000;
+/* A whole-type read (service.listAll), oldest first. Past READ_LIMIT the newest records of that type are the ones not
+ * read, and the table says so. ponytail: each page re-groups every version (audit O20 is the upgrade if slow). */
+const READ_LIMIT = 50000;
 
 async function open(request, env, ctx, need) {
   try {
@@ -52,7 +54,7 @@ async function readTypes(svc, types) {
   const rows = {}, unreadable = {};
   let truncated = false;
   await Promise.all(types.map(async (t) => {
-    try { rows[t] = (await svc.list(t, READ_LIMIT)).filter(Boolean); if (rows[t].length >= READ_LIMIT) truncated = true; }
+    try { const got = await svc.listAll(t, { max: READ_LIMIT }); rows[t] = got.rows.filter(Boolean); if (got.truncated) truncated = true; }
     catch (e) { unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : str(e && e.message) || "read failed"; rows[t] = []; }
   }));
   return { rows, unreadable, truncated };
@@ -312,7 +314,7 @@ async function nabhIndicators(request, env, ctx) {
   return {
     ...base, ok: true, months: windows.map((w) => w.month), indicators,
     computable: indicators.filter((i) => i.computable).length, notComputable: indicators.filter((i) => !i.computable).length,
-    truncated, ...(truncated ? { truncatedNote: `At least one record type has more than ${READ_LIMIT} records; older months may be incomplete.` } : {}),
+    truncated, ...(truncated ? { truncatedNote: `At least one record type has more than ${READ_LIMIT} records; the newest were not read, so recent months may be incomplete.` } : {}),
     formatNote: NABH_FORMAT_NOTE, source: "NABH Accreditation Standards for Hospitals, 6th edition (January 2025), PSQ 3a-3d",
   };
 }
@@ -429,7 +431,7 @@ async function hmisMonthly(request, env, ctx) {
   return {
     ...base, ok: true, month: window.month, format: HMIS_FORMAT, sections: HMIS_SECTIONS, items,
     filled: items.filter((i) => i.available === true).length, notAvailable: items.filter((i) => i.available === false).length,
-    truncated, ...(truncated ? { truncatedNote: `At least one record type has more than ${READ_LIMIT} records; counts may be incomplete.` } : {}),
+    truncated, ...(truncated ? { truncatedNote: `At least one record type has more than ${READ_LIMIT} records; the newest were not read, so counts may be incomplete.` } : {}),
     note: "Items WardSynQ's record supports are filled from it. Every other item is marked not available and must be filled from the hospital's own registers before the return is submitted.",
   };
 }
