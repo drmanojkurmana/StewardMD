@@ -149,6 +149,10 @@ function encounterFromTicket(input) {
   });
   enc.location = { facilityId: input.tenantId || null, ward: ticket.department || null, bed: ticket.roomId || null };
   enc.attendingId = input.attendingId || null;
+  /* P3 theatre-opd-access (2026-09-17): when the consultant's consultation began, as the ticket recorded it (the move
+   * into in_consultation), so the OPD waiting time survives the ticket's expiry. periodStart is the arrival. A ticket sent
+   * back to the waiting hall drops its consult start, and so does this; a close keeps the last one recorded. */
+  enc.consultStartAt = toIso(ticket.consultStartAt);
   return enc;
 }
 
@@ -158,6 +162,8 @@ function sameEncounter(a, b) {
   return a.status === b.status && a.patientId === b.patientId
     && (a.periodEnd || null) === (b.periodEnd || null)
     && (a.attendingId || null) === (b.attendingId || null)
+    // An encounter written before consultStartAt existed is not "changed" by the field appearing.
+    && (a.consultStartAt === undefined || (a.consultStartAt || null) === (b.consultStartAt || null))
     && JSON.stringify(a.location || null) === JSON.stringify(b.location || null)
     && JSON.stringify(a.identifiers || []) === JSON.stringify(b.identifiers || []);
 }

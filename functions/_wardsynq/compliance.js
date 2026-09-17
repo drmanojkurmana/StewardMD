@@ -25,6 +25,8 @@ import { auditSummary, edReturnPairs } from "./quality-registers.js";
 import { NABH_KPIS } from "./nabh-kpi-defs.js";
 import { HMIS_FORMAT, HMIS_SECTIONS, HMIS_ITEMS } from "./hmis-items.js";
 import { DHS_CHAPTERS, DHS_ELEMENTS } from "./dhs-elements.js";
+import { rescheduleCell, unplannedReturnCell } from "./theatre.js";
+import { opdWaits, diagnosticWaits, waitCell } from "./access-times.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000, HOUR = 3600000;
@@ -98,7 +100,11 @@ const NABH_SOURCES = {
       });
       return val(adrs.length, stays.length, 100);
     } },
-  6: { missing: "Whether a surgical case is an unplanned return to theatre; a surgical case does not record it." },
+  /* P3 theatre-opd-access (2026-09-17): 6 and 19 from the theatre case (migrate-surgery.js, theatre.js), 22 and 23 from the
+   * OPD visit and the diagnostic counter (access-times.js). */
+  6: { needs: ["SurgicalCase"], source: "Surgical cases with an incision in the month that the surgeon marked as an unplanned return to theatre, over surgical cases with an incision in the month.",
+    note: "A case the surgeon has not answered is not counted as a return; the number waiting is shown beside the value. Surgeries under local anaesthesia are not told apart. NABH asks for a 30 day delay before the month is final.",
+    compute: (r, w) => unplannedReturnCell(r.SurgicalCase, w) },
   7: { needs: ["SurgicalCase"], source: "Surgical cases with an incision in the month; the checklist was followed when sign in, time out and sign out were all completed.",
     note: "Every case is counted, not an audited sample.",
     compute: (r, w) => { const cs = r.SurgicalCase.filter((c) => inW(c.incisionAt, w)); return val(cs.filter((c) => c.signIn && c.timeOut && c.signOut).length, cs.length, 100); } },
@@ -141,7 +147,8 @@ const NABH_SOURCES = {
       const ops = r.SurgicalCase.filter((c) => inW(c.incisionAt, w)), rev = new Map(r.SurgicalProphylaxis.map((x) => [x.caseId, x]));
       return { ...val(ops.filter((c) => rev.get(c.id) && rev.get(c.id).appropriate === true).length, ops.length, 100), unreviewed: ops.filter((c) => !rev.has(c.id)).length };
     } },
-  19: { missing: "Rescheduling of a surgery; a surgical case does not record it." },
+  19: { needs: ["SurgicalCase"], source: "Surgical cases first planned for the month (the first scheduled time, or the booking time when none was given) that were cancelled before surgery, postponed to more than 4 hours after the first scheduled time, or entered the theatre more than 4 hours after it.",
+    compute: (r, w) => rescheduleCell(r.SurgicalCase, w) },
   20: { needs: ["TransfusionEpisode"], source: "Minutes from the transfusion request to the unit being issued, for units issued in the month.",
     compute: (r, w) => {
       const mins = [];
@@ -155,8 +162,12 @@ const NABH_SOURCES = {
       return { numerator: round(sum, 1), denominator: mins.length, value: mins.length ? round(sum / mins.length, 1) : null };
     } },
   21: { missing: "Nurses on duty per shift against occupied beds; the rota is not linked to bed occupancy." },
-  22: { missing: "Outpatient arrival and consultation start times; these live in the OPD queue, not in the clinical record." },
-  23: { missing: "The time a patient arrived for a diagnostic test and the time it started." },
+  22: { needs: ["Encounter", "Appointment"], source: "Minutes from arrival at the OPD desk (or the appointment time, when later) to the start of the consultation in the consultant's queue, for outpatient visits that arrived in the month.",
+    note: "A visit with no recorded consultation start is not averaged; the number missing is shown beside the value. The appointment is the one for the same patient that day marked arrived or completed, used only when there is exactly one. Only visits recorded on the OPD visit record are counted.",
+    compute: (r, w) => waitCell(opdWaits(r.Encounter, r.Appointment, w)) },
+  23: { needs: ["DiagnosticVisit"], source: "Minutes from the requisition being presented at the laboratory or imaging counter (or the appointment time, when later) to the start of the test, for outpatient visits that arrived in the month.",
+    note: "A visit with no recorded test start is not averaged; the number missing is shown beside the value.",
+    compute: (r, w) => waitCell(diagnosticWaits(r.DiagnosticVisit, w)) },
   24: { missing: "The time discharge was advised and the time the patient left; neither is recorded separately." },
   25: { needs: ["QualityAudit", "Encounter"], source: "Consent audits in the month that found a record's consent incomplete or improper (an item answered no), over inpatient stays that ended in the month (discharges and deaths).",
     note: "Only records that were audited can be found incomplete; the number audited is shown beside the value.",

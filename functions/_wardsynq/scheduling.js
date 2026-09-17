@@ -67,6 +67,8 @@ function Appointment(input) {
     /* The recall this appointment answers, when it answers one. That link is what lets a promised
      * follow-up be seen through to an actual booking. */
     requestId: i.requestId || null,
+    arrivedAt: i.arrivedAt || null,
+    completedAt: i.completedAt || null,
     source: { system: "wardsynq-native", sourceId: `appointment:${i.id}` },
   };
 }
@@ -151,7 +153,7 @@ function apptSummary(a) {
     overbooked: !!a.overbooked, overbookReason: a.overbookReason || null,
     bookedBy: a.bookedBy, bookedAt: a.bookedAt,
     changedBy: a.changedBy || null, changedAt: a.changedAt || null, changeReason: a.changeReason || null,
-    requestId: a.requestId || null, version: a.version,
+    requestId: a.requestId || null, arrivedAt: a.arrivedAt || null, completedAt: a.completedAt || null, version: a.version,
   };
 }
 
@@ -278,10 +280,19 @@ async function setAppointmentState(request, env, ctx) {
   if (["completed", "cancelled", "did-not-attend"].includes(current.state)) {
     return { ...base, ok: false, status: 409, error: "already_closed", detail: `this appointment is ${current.state}; book a new one`, appointmentId, written: 0 };
   }
+  /* A NO-SHOW IS A FACT ABOUT A SLOT THAT HAS BEGUN. Before the start the patient can still come, and a patient who
+   * arrived did attend (P3 theatre-opd-access, 2026-09-17). */
+  if (state === "did-not-attend") {
+    if (current.state === "arrived") return { ...base, ok: false, status: 409, error: "patient_arrived", detail: "this patient arrived; they did attend", appointmentId, written: 0 };
+    if (!(Date.parse(current.startAt) <= Date.now())) return { ...base, ok: false, status: 409, error: "before_slot_start", detail: `the slot starts at ${current.startAt}; a no-show is recorded only after it starts`, appointmentId, written: 0 };
+  }
 
+  const now = new Date().toISOString();
   const next = Appointment({
     ...current, state,
-    changedBy: resolved.actor.id, changedAt: new Date().toISOString(), changeReason: reason || null,
+    changedBy: resolved.actor.id, changedAt: now, changeReason: reason || null,
+    // When the desk marked the patient arrived, and when the visit was marked done: the times access reports read.
+    arrivedAt: state === "arrived" ? now : current.arrivedAt, completedAt: state === "completed" ? now : current.completedAt,
   });
   try {
     const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
