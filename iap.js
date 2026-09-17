@@ -92,6 +92,11 @@
       onco:         { monthly: "in.stewardmd.onco.monthly",         annual: "in.stewardmd.onco.annual" }
     },
     // Consumable MaiK Token top-up packs:
-    TOKENS: { boost: "in.stewardmd.tokens.boost", plus: "in.stewardmd.tokens.plus", power: "in.stewardmd.tokens.power" }
+    TOKENS: { boost: "in.stewardmd.tokens.boost", plus: "in.stewardmd.tokens.plus", power: "in.stewardmd.tokens.power" },
+    // Consumable patient-credit / Scribe-consult top-up packs (functions/_quota.js is the server meter):
+    PACKS: {
+      "care.25": "in.stewardmd.care.25", "care.100": "in.stewardmd.care.100",
+      "scribe.50": "in.stewardmd.scribe.50", "scribe.250": "in.stewardmd.scribe.250"
+    }
   };
 })();
