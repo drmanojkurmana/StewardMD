@@ -158,6 +158,7 @@ import { importGrowthTables, listGrowthTables } from "../../_wardsynq/growth-tab
 import { setExpectedDischarge, expectedDischargeHistory, hospitalToday } from "../../_wardsynq/expected-discharge.js";
 import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
 import { recordDischargeMilestone, dischargeProgress } from "../../_wardsynq/discharge-milestones.js";
+import { recordBedArrival, markInitialAssessment, admissionTimes } from "../../_wardsynq/admission-times.js";
 import { createInboundTransfer, decideInboundTransfer, cancelInboundTransfer, listInboundTransfers } from "../../_wardsynq/transfer-centre.js";
 import { saveLeaflet, approveLeaflet, retireLeaflet, listLeaflets, attachLeaflet, detachLeaflet, listAttachments } from "../../_wardsynq/patient-education.js";
 import { sendStaffMessage, editStaffMessage, recallStaffMessage, markThreadRead, escalateStaffMessage, listStaffMessages, listMessagePeople } from "../../_wardsynq/staff-messaging.js";
@@ -1388,6 +1389,9 @@ export async function onRequest(context) {
          * Asking for a transfer is a clinical decision (emr.treat); answering it, assigning the bed, moving the
          * patient and cancelling are the bed-management acts /ward/transfer is already gated on (queue.add). */
         "expected-discharge": CAPS.EMR_TREAT, "expected-discharge-history": CAPS.EMR_VIEW,
+        /* NABH KPI 1 times (admission-times.js): the receiving nurse records when the patient reached the bed (emr.vitals);
+         * a doctor marks the signed note that is the initial assessment (emr.treat); anyone who reads the chart sees both. */
+        "bed-arrival": CAPS.EMR_VITALS, "initial-assessment": CAPS.EMR_TREAT, "admission-times": CAPS.EMR_VIEW,
         /* Hospital-loaded code sets (code-sets.js): loading a licensed release is hospital administration
          * (staff.admin); seeing what is loaded and searching it is anyone who reads the chart (emr.view). */
         "code-set-import": CAPS.STAFF_ADMIN, "code-sets": CAPS.EMR_VIEW, "code-search": CAPS.EMR_VIEW,
@@ -2717,7 +2721,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "anesthesia-start" && method === "POST") {
-        const r = await startAnesthesia(request, env, { ...deps, caseId: body.caseId, asaClass: body.asaClass, idempotencyKey: body.idempotencyKey || null });
+        const r = await startAnesthesia(request, env, { ...deps, caseId: body.caseId, asaClass: body.asaClass, technique: body.technique, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "anesthesia-event" && method === "POST") {
@@ -2725,7 +2729,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "anesthesia-end" && method === "POST") {
-        const r = await endAnesthesia(request, env, { ...deps, caseId: body.caseId, idempotencyKey: body.idempotencyKey || null });
+        const r = await endAnesthesia(request, env, { ...deps, caseId: body.caseId, technique: body.technique, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "anesthesia-get" && method === "GET") {
@@ -4886,6 +4890,18 @@ export async function onRequest(context) {
       }
       if (sub === "expected-discharge" && method === "POST") {
         const r = await setExpectedDischarge(request, env, { ...deps, encounterId: body.encounterId, expectedDate: body.expectedDate, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "bed-arrival" && method === "POST") {
+        const r = await recordBedArrival(request, env, { ...deps, encounterId: body.encounterId, at: body.at, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "initial-assessment" && method === "POST") {
+        const r = await markInitialAssessment(request, env, { ...deps, encounterId: body.encounterId, noteId: body.noteId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "admission-times" && method === "GET") {
+        const r = await admissionTimes(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "expected-discharge-history" && method === "GET") {

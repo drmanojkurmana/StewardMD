@@ -28,6 +28,7 @@ import { DHS_CHAPTERS, DHS_ELEMENTS } from "./dhs-elements.js";
 import { milestoneTimes, dischargeMinutes } from "./discharge-milestones.js";
 import { rescheduleCell, unplannedReturnCell } from "./theatre.js";
 import { opdWaits, diagnosticWaits, waitCell } from "./access-times.js";
+import { initialAssessmentCell } from "./admission-times.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000, HOUR = 3600000;
@@ -92,7 +93,10 @@ const stayIn = (e, w) => e && INPATIENT.has(e.class) && e.status !== "cancelled"
 /* What each indicator is computed from, or what the record lacks. `needs` are the types read; `compute` returns a
  * month cell. An indicator with `missing` is not computable and says what would have to be recorded. */
 const NABH_SOURCES = {
-  1: { missing: "The time a patient reached the ward bed and the time the doctor's initial assessment was completed are not recorded as two separate times." },
+  /* R2-2 ward-times-and-desk (2026-09-17): 1 from the stay's admission times (admission-times.js). */
+  1: { needs: ["AdmissionTimes", "Encounter"], source: "Inpatient admissions that started in the month (day care not included): minutes from the time the nurse recorded the patient reached the ward bed to the signing of the note a doctor marked as the initial assessment.",
+    note: "An admission missing either time is not averaged; the numbers missing each are shown beside the value. A stay whose assessment was signed before the recorded bed arrival (recorded with a reason) is counted beside, not averaged. Every admission is counted, not an audited sample.",
+    compute: (r, w) => initialAssessmentCell(r.AdmissionTimes, r.Encounter, w) },
   2: { needs: ["DiagnosticReport"], source: "Diagnostic reports released in the month (final or corrected); a report corrected after release counts as a reporting error.",
     note: "Counted per report, not per test within a report as the standard counts.",
     compute: (r, w) => { const rep = r.DiagnosticReport.filter((x) => (x.status === "final" || x.status === "corrected") && inW(x.reportedAt, w)); return val(rep.filter((x) => x.status === "corrected").length, rep.length, 1000); } },
@@ -118,9 +122,14 @@ const NABH_SOURCES = {
     } },
   /* P3 theatre-opd-access (2026-09-17): 6 and 19 from the theatre case (migrate-surgery.js, theatre.js), 22 and 23 from the
    * OPD visit and the diagnostic counter (access-times.js). */
-  6: { needs: ["SurgicalCase", "PreAnaestheticCheckup"], source: "Surgical cases with an incision in the month that the surgeon marked as an unplanned return to theatre, over surgical cases with an incision in the month, leaving out cases whose pre-anaesthetic checkup planned local anaesthesia with monitoring.",
-    note: "A case the surgeon has not answered is not counted as a return; the number waiting is shown beside the value. The technique is the one planned at the pre-anaesthetic checkup, as the anaesthesia record holds none; a case with no checkup stays in and is counted beside. NABH asks for a 30 day delay before the month is final.",
-    compute: (r, w) => unplannedReturnCell(r.SurgicalCase, w, new Map((r.PreAnaestheticCheckup || []).filter((p) => p && p.caseId).map((p) => [p.caseId, str(p.plan && p.plan.technique) || null]))) },
+  6: { needs: ["SurgicalCase", "PreAnaestheticCheckup", "AnesthesiaRecord"], source: "Surgical cases with an incision in the month that the surgeon marked as an unplanned return to theatre, over surgical cases with an incision in the month, leaving out cases done under local anaesthesia with monitoring.",
+    note: "A case the surgeon has not answered is not counted as a return; the number waiting is shown beside the value. The technique is the one the anaesthesia record says was given (a case converted from local to another technique stays in); where the record states none, the one planned at the pre-anaesthetic checkup; a case with neither stays in and is counted beside. NABH asks for a 30 day delay before the month is final.",
+    /* R2-2: the technique given wins over the planned one. */
+    compute: (r, w) => {
+      const tech = new Map((r.PreAnaestheticCheckup || []).filter((p) => p && p.caseId).map((p) => [p.caseId, str(p.plan && p.plan.technique) || null]));
+      for (const a of r.AnesthesiaRecord || []) if (a && a.caseId && str(a.technique)) tech.set(a.caseId, str(a.technique));
+      return unplannedReturnCell(r.SurgicalCase, w, tech);
+    } },
   7: { needs: ["SurgicalCase"], source: "Surgical cases with an incision in the month; the checklist was followed when sign in, time out and sign out were all completed.",
     note: "Every case is counted, not an audited sample.",
     compute: (r, w) => { const cs = r.SurgicalCase.filter((c) => inW(c.incisionAt, w)); return val(cs.filter((c) => c.signIn && c.timeOut && c.signOut).length, cs.length, 100); } },

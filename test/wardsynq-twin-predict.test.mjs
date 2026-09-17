@@ -101,13 +101,9 @@ test("3. the shape never resembles a twin snapshot 'sections' object - a caller 
 
 /* ---- 4: honest inventory ----------------------------------------------------------------------------- */
 
-test("4. seven of the eight named metrics are wired, from real data; ot-delays says why honestly", () => {
-  for (const key of ["discharge-volume", "critical-backlog", "bed-demand", "ed-load", "diagnostic-workload", "pharmacy-workload", "blood-demand"]) {
+test("4. all eight named metrics are wired, from real data", () => {
+  for (const key of ["discharge-volume", "critical-backlog", "bed-demand", "ed-load", "diagnostic-workload", "pharmacy-workload", "blood-demand", "ot-delays"]) {
     assert.equal(PREDICTORS[key].wired, true, key);
-  }
-  for (const key of ["ot-delays"]) {
-    assert.equal(PREDICTORS[key].wired, false, key);
-    assert.ok(PREDICTORS[key].reason, key);
   }
 });
 
@@ -216,12 +212,23 @@ test("6. an unknown metric is refused, never silently answered by the nearest wi
   assert.equal(r.error, "unknown_metric");
 });
 
-test("7. a named-but-unwired metric returns 501, not a fabricated number", async () => {
+test("7. GET /api/queue/ward/twin-predict?metric=ot-delays: the mean of each day's minutes from scheduled start to in room, cases without a scheduled start left out and counted; no cases is a refusal", async () => {
   seed();
+  const none = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=ot-delays`);
+  assert.equal(none.__status, 200, JSON.stringify(none));
+  assert.equal(none.error, "insufficient_data"); assert.equal(none.prediction, null); assert.equal(none.casesMeasured, 0);
+  const day = (d, h) => new Date(Date.parse(new Date(Date.now() - d * 86400000).toISOString().slice(0, 10) + "T00:00:00.000Z") + h * 3600000).toISOString();
+  const kase = (id, sched, inRoom) => ({ resourceType: "SurgicalCase", id, version: 1, patientId: "p-" + id, scheduledAt: sched, theatreTimes: { inRoomAt: inRoom }, meta: meta() });
+  await RECORD.append(TENANT.id, [kase("c1", day(3, 8), day(3, 8.5)), kase("c2", day(3, 10), day(3, 10.5))]);
+  const one = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=ot-delays`);
+  assert.equal(one.error, "insufficient_data", "one day of cases is not enough to forecast");
+  await RECORD.append(TENANT.id, [kase("c3", day(1, 9), day(1, 10)), kase("c4", null, day(1, 11)), kase("c5", day(1, 12), null)]);
   const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=ot-delays`);
-  assert.equal(r.__status, 501);
-  assert.equal(r.error, "not_built");
-  assert.match(r.detail, /scheduled start/);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.deepEqual(r.prediction.inputs.map((x) => [x.value, x.cases]), [[30, 2], [60, 1]], "a day with no case is not a day of zero delay");
+  assert.equal(r.prediction.pointEstimate, 45); assert.equal(r.prediction.unit, "minutes");
+  assert.equal(r.casesMeasured, 3); assert.equal(r.casesWithoutScheduledStart, 1);
+  assert.match(r.prediction.method, /scheduled start to the patient entering the theatre/);
 });
 
 test("8. ADVERSARIAL: cross-tenant data cannot leak into a prediction", async () => {

@@ -7759,3 +7759,27 @@ of compliance.js is untouched.
   grant section "education" without a PatientRecordRelease: the clinician's act of giving an approved hospital leaflet is
   the handover (a discharge summary is the clinician's clinical document and keeps its release rule). No retention class
   added. No leaflet content shipped (owner item O6).
+
+## 2026-09-17 Ward times and claims desk: NABH KPI 1, theatre delays, desk period, technique given (branch ward-times-and-desk, R2-2)
+- Audit's open point checked: bed placement stores no bed-arrival time. The admission Encounter's periodStart is when the
+  admission was entered (or a time the desk stated) and a transfer's movedAt is when the bed changed on the record; both are
+  clerical, and admitPatient/transferPatient rebuild the Encounter so a field bolted onto it would be lost on the next
+  transfer. So the times live on a new per-stay record type `AdmissionTimes` (admission-times.js, service.js), the
+  DischargeMilestone pattern: bedArrival recorded by the nurse (emr.vitals; type added to VITALS_TYPES, so the pinned write
+  lists of nurse, intern, resident and pg_resident grew by one), initialAssessment marked by a doctor (emr.treat route).
+- The assessment time is the marked note's signedAt, never typed. Only a signed, non-nursing note of the same stay can be
+  marked; the first mark wins and a second is refused naming the note. DEVIATION from the brief's "negative intervals
+  refused at write": following discharge-milestones.js, an out-of-order time is refused unless a reason is given; with a
+  reason it is stored flagged and KPI 1 counts it beside, never averaged. A bed-arrival change needs expectedVersion and a
+  reason. Routes: POST /ward/bed-arrival, POST /ward/initial-assessment, GET /ward/admission-times (emr.view).
+- KPI 1 (compliance.js entry 1 only): admissions of the inpatient classes that started in the month (day care excluded),
+  mean minutes over admissions with both times in order; missing each time and out of order counted beside.
+- ot-delays wired (twin-predict.js): per case, minutes from `scheduledAt` (current plan) to `theatreTimes.inRoomAt`; one
+  sample per UTC day that had a measured case (mean of that day), NOT zero-filled, unlike the counting predictors, since a
+  day without cases has no delay. Cases without a scheduled start are excluded and counted. Envelope carries unit minutes
+  and cases per day. Fewer than 2 days refuses insufficient_data.
+- Anaesthesia technique given: `technique` on AnesthesiaRecord (the field migrate-inpatient.js's timeline label already read),
+  optional at /ward/anesthesia-start and /ward/anesthesia-end from PAC_TECHNIQUE; a different one at the end keeps
+  `techniqueChangedFrom` (conversion). KPI 6 (entry 6) now prefers it over the PAC plan and reads AnesthesiaRecord.
+- Claims desk: from/to date inputs send the whole local days as ISO to the existing /ward/rcm-worklists parameters; the
+  denial panel shows the period the server returned, or says all time.

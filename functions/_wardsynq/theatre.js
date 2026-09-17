@@ -305,9 +305,9 @@ function rescheduleCell(cases, w) {
   return { numerator: n, denominator: planned.length, value: planned.length ? Math.round((n / planned.length) * 10000) / 100 : null };
 }
 
-/* NABH #6 remarks: "shall not include surgeries under LA". The anaesthesia technique recorded in WardSynQ is the planned
- * technique on the pre-anaesthetic checkup (migrate-surgery.js PAC_TECHNIQUE); the anaesthesia record itself carries none.
- * Of that closed list only local-with-monitoring is local anaesthesia; a regional block or spinal is not. */
+/* NABH #6 remarks: "shall not include surgeries under LA". The technique is the one the anaesthesia record says was given,
+ * else the one planned at the pre-anaesthetic checkup (both from migrate-surgery.js PAC_TECHNIQUE; compliance.js builds the
+ * map). Of that closed list only local-with-monitoring is local anaesthesia; a regional block or spinal is not. */
 const LOCAL_TECHNIQUES = Object.freeze(["local-with-monitoring"]);
 
 /** PURE. Month cell for #6: cases with an incision in the month flagged by the surgeon as an unplanned return. With

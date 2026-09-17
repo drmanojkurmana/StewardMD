@@ -600,6 +600,12 @@
   /* The inputs beside a month's value that the definition needs read with it (R2-1: indicators 3, 6, 21 and 30). */
   function nabhCellNote(c, no, m) {
     var out = [];
+    /* R2-2: indicator 1's admissions that are not averaged, and why. */
+    if (no === 1 && m.admissions != null) {
+      if (m.missingBedArrival) out.push(T(c, "site.gov.nabh.k1noArrival", "{n} admissions with no bed arrival time", { n: m.missingBedArrival }));
+      if (m.missingInitialAssessment) out.push(T(c, "site.gov.nabh.k1noAssessment", "{n} admissions with no initial assessment marked", { n: m.missingInitialAssessment }));
+      if (m.outOfOrder) out.push(T(c, "site.gov.nabh.k1outOfOrder", "{n} assessed before the recorded bed arrival, not averaged", { n: m.outOfOrder }));
+    }
     if (no === 3 && m.byDepartment) {
       var lab = m.byDepartment.laboratory, rad = m.byDepartment.radiology;
       if (lab) out.push(T(c, "site.gov.nabh.k3lab", "Laboratory {a} of {b}", { a: lab.compliant, b: lab.audited }));

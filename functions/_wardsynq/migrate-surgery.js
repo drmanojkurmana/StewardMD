@@ -430,12 +430,20 @@ async function listSurgicalCases(request, env, ctx) {
 
 /* ---- anaesthesia record: induction/maintenance/emergence, drugs given ------------------------- */
 
-/** ctx: { migration, caseId, asaClass?, actorDeps, recordDeps } */
+/* The technique ACTUALLY GIVEN (R2-2, 2026-09-17), from the same closed list as the checkup's plan (PAC_TECHNIQUE). Stated
+ * when the record starts and, when the case was converted, again when it ends; a change keeps the earlier one as
+ * `techniqueChangedFrom`. NABH #6 leaves out surgeries under local anaesthesia, and a case planned under local that
+ * was converted to a general anaesthetic is not one. Optional: none stated means none recorded, never assumed. */
+const techniqueRefusal = (base, t) => (t && !PAC_TECHNIQUE.includes(t) ? { ...base, ok: false, status: 422, error: "bad_technique", detail: `the technique is one of ${PAC_TECHNIQUE.join(", ")}`, written: 0 } : null);
+
+/** ctx: { migration, caseId, asaClass?, technique?, actorDeps, recordDeps } */
 async function startAnesthesia(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
-  const caseId = str(ctx.caseId);
+  const caseId = str(ctx.caseId), technique = str(ctx.technique);
+  const badTechnique = techniqueRefusal(base, technique);
+  if (badTechnique) return badTechnique;
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   const c = await loadCase(svc, caseId).catch(() => null);
@@ -447,7 +455,7 @@ async function startAnesthesia(request, env, ctx) {
     resourceType: ANES_TYPE, id, caseId, patientId: c.patientId, encounterId: c.encounterId,
     startedAt: new Date().toISOString(), startedBy: resolved.actor.id,
     // ASA physical status is recorded exactly as entered - never computed or inferred here.
-    asaClass: str(ctx.asaClass) || null, events: [], endedAt: null,
+    asaClass: str(ctx.asaClass) || null, technique: technique || null, events: [], endedAt: null,
   };
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
@@ -477,12 +485,14 @@ async function recordAnesthesiaEvent(request, env, ctx) {
   } catch (e) { return { ...base, ...writeFailure(e, { caseId, written: 0, actor: resolved.actor.id }) }; }
 }
 
-/** ctx: { migration, caseId, actorDeps, recordDeps } */
+/** ctx: { migration, caseId, technique?, actorDeps, recordDeps } */
 async function endAnesthesia(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
-  const caseId = str(ctx.caseId);
+  const caseId = str(ctx.caseId), technique = str(ctx.technique);
+  const badTechnique = techniqueRefusal(base, technique);
+  if (badTechnique) return badTechnique;
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   const id = anesthesiaIdFor(caseId);
@@ -490,8 +500,11 @@ async function endAnesthesia(request, env, ctx) {
   if (!current) return { ...base, ok: false, status: 404, error: "anesthesia_not_started", caseId, written: 0 };
   if (current.endedAt) return { ...base, ok: true, written: 0, skipped: "already_ended", caseId, version: current.version };
   try {
-    const out = await svc.put({ ...current, endedAt: new Date().toISOString(), endedBy: resolved.actor.id }, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, caseId, version: out.record.version, actor: resolved.actor.id };
+    const changed = technique && technique !== (current.technique || null);
+    const next = { ...current, endedAt: new Date().toISOString(), endedBy: resolved.actor.id,
+      ...(changed ? { technique, techniqueChangedFrom: current.technique || null } : {}) };
+    const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, caseId, technique: next.technique || null, techniqueChangedFrom: next.techniqueChangedFrom || null, version: out.record.version, actor: resolved.actor.id };
   } catch (e) { return { ...base, ...writeFailure(e, { caseId, written: 0, actor: resolved.actor.id }) }; }
 }
 
