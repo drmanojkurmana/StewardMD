@@ -365,6 +365,192 @@
     draw();
   }
 
+  // ---- Formulary (R3-2, functions/_wardsynq/formulary-settings.js) ------------------------------------------------
+  /* What this hospital stocks and restricts, edited here or loaded from a CSV. Every change is a dry run first: the server
+   * lists each entry (or file row) as added, changed, removed or refused with its reason, and Save sends exactly that plan
+   * back (count and plan id) with a reason. Any refused entry stops the whole save. Drug names, codes, specialties and
+   * approvers are the hospital's own values and are never translated.
+   * s.r: undefined = loading, null = could not be loaded, else the saved list. s.pv / s.csvPv: null = not run, false = the
+   * request failed, else the server's report. s.draft is the list being edited, saved only through its dry run. */
+  var FML_FIELDS = ["drug", "code", "aliases", "restricted", "requiresApproval", "restrictedTo", "approvedBy", "note", "controlled"];
+  var FML_BOOL = { restricted: 1, requiresApproval: 1, controlled: 1 };
+  var FML_LIST = { aliases: 1, restrictedTo: 1 };
+  function fmlFieldLabel(c, f) {
+    return { drug: T(c, "site.admin.fml.f.drug", "Drug name"), code: T(c, "site.admin.fml.f.code", "Code"), aliases: T(c, "site.admin.fml.f.aliases", "Other names, separated by ;"),
+      restricted: T(c, "site.admin.fml.f.restricted", "Restricted"), requiresApproval: T(c, "site.admin.fml.f.requiresApproval", "Needs an approval"),
+      restrictedTo: T(c, "site.admin.fml.f.restrictedTo", "Specialties that may prescribe it, separated by ;"), approvedBy: T(c, "site.admin.fml.f.approvedBy", "Who approves"),
+      note: T(c, "site.admin.fml.f.note", "Note shown with a refusal"), controlled: T(c, "site.admin.fml.f.controlled", "Controlled drug") }[f] || f;
+  }
+  function fmlStatusLabel(c, st) {
+    return { add: T(c, "site.admin.fml.stAdd", "Will be added"), change: T(c, "site.admin.fml.stChange", "Will be changed"), unchanged: T(c, "site.admin.fml.stUnchanged", "Left as it is"),
+      invalid: T(c, "site.admin.fml.stInvalid", "Refused"), remove: T(c, "site.admin.fml.stRemove", "Will be removed"), setting: T(c, "site.admin.fml.stSetting", "Reason switch changed") }[st] || st;
+  }
+  // Returns HTML: translated reason, or the server's English when the code is not known here.
+  function fmlReason(c, p) {
+    var t = { no_drug_or_code: T(c, "site.admin.fml.r.noDrug", "An entry needs a drug name or a code."),
+      restriction_has_no_route: T(c, "site.admin.fml.r.noRoute", "A restricted drug needs an approval or at least one specialty that may prescribe it, or nobody could ever order it."),
+      duplicate: T(c, "site.admin.fml.r.duplicate", "Another entry already uses this name, alias or code."), too_long: T(c, "site.admin.fml.r.tooLong", "A value is longer than allowed."),
+      too_many: T(c, "site.admin.fml.r.tooMany", "More than 20 other names or specialties on one entry."), bad_yes_no: T(c, "site.admin.fml.r.yesNo", "Use yes or no."),
+      bad_value: T(c, "site.admin.fml.r.badValue", "This value could not be read."), too_many_entries: T(c, "site.admin.fml.r.tooManyEntries", "The formulary has more entries than this hospital's settings can hold.") }[p.reason];
+    return (p.field ? c.esc(fmlFieldLabel(c, p.field)) + ": " : "") + (t ? c.esc(t) : EN(c, c.esc(p.message || p.reason))) + (p.clash ? " " + EN(c, c.esc(p.clash)) : "");
+  }
+  function fmlReportHtml(c, pv, act) {
+    var esc = c.esc;
+    var h = "<h3>" + esc(T(c, "site.admin.fml.reportTitle", "Dry run result")) + "</h3>";
+    if (pv === false) return h + '<div class="msg err">' + esc(T(c, "site.admin.fml.dryFailed", "The dry run could not be completed. Nothing was saved.")) + "</div>";
+    if (!pv.rows) return h + '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+    if (!pv.ok) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+    if (pv.ok && pv.step === "done") h += '<div class="msg ok">' + esc(T(c, "site.admin.fml.saved", "Saved {n} changes. The formulary above is what the server now holds.", { n: pv.written })) + "</div>";
+    var n = pv.counts || {};
+    h += "<p>" + ["add", "change", "remove", "invalid", "setting"].map(function (k) { return '<span class="pill' + (k === "invalid" ? " stop" : "") + '">' + esc(fmlStatusLabel(c, k)) + ": " + esc(String(n[k] || 0)) + "</span>"; }).join(" ") + "</p>";
+    (pv.listProblems || []).forEach(function (p) { h += '<div class="msg err">' + fmlReason(c, p) + "</div>"; });
+    if (pv.rows.length) h += '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.fml.colRow", "Row")) + "</th><th>" + esc(T(c, "site.admin.fml.colDrug", "Drug")) + "</th><th>" + esc(T(c, "site.admin.fml.colResult", "Result")) + "</th><th>" + esc(T(c, "site.admin.fml.colWhy", "Why")) + "</th></tr></thead><tbody>" +
+      pv.rows.map(function (r) {
+        // The file row number, the entry's place in the editor's list, or an entry already on the list (CSV merge).
+        var where = r.row != null ? String(r.row) : r.row === undefined ? String(r.index + 1) : T(c, "site.admin.fml.onList", "On the list");
+        return '<tr><td class="mono">' + esc(where) + "</td><td>" + EN(c, esc(r.label || "")) + "</td><td>" + esc(fmlStatusLabel(c, r.status)) + "</td><td>" +
+          (r.problems || []).map(function (p) { return fmlReason(c, p); }).join("<br>") + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+    if ((pv.removed || []).length) h += "<p>" + esc(fmlStatusLabel(c, "remove")) + ": " + EN(c, esc(pv.removed.join(", "))) + "</p>";
+    if (pv.ok && pv.step === "preview") {
+      h += pv.changeCount ? '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.fml.reason", "Why the formulary is changing (required)")) + '</span><input data-fml-reason="' + act + '" maxlength="200"></label>' +
+        '<button type="button" class="btn" data-fml="' + act + '-commit" data-count="' + esc(String(pv.changeCount)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.fml.commit", "Save these {n} changes", { n: pv.changeCount })) + "</button></div>"
+        : '<p class="quiet">' + esc(T(c, "site.admin.fml.nothing", "Nothing would change.")) + "</p>";
+    }
+    return h;
+  }
+  function fmlText(e, f) { var v = e && e[f]; return FML_LIST[f] ? (v || []).join("; ") : v == null ? "" : String(v); }
+  function formularyHtml(c, s) {
+    var esc = c.esc, r = s.r;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.fml.title", "Formulary")) + "</h2>";
+    if (!c.can("order.verify")) return h + '<div class="msg note">' + esc(T(c, "site.admin.fml.noAccess", "Changing the formulary needs both staff administration and pharmacy verification. Your role does not include both.")) + "</div></div>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.fml.loading", "Loading the formulary...")) + "</p></div>";
+    if (r === null) return h + '<div class="msg err">' + esc(T(c, "site.admin.fml.loadFailed", "The formulary could not be loaded. Do not read this as no formulary configured.")) + "</div></div>";
+    h += '<p class="quiet">' + esc(T(c, "site.admin.fml.intro", "What this hospital stocks and what it restricts. A drug not on the list is flagged on the order, never blocked; a restricted one is blocked until its approval or specialty is given. Retired entries stay listed and match no order. Nothing ships with WardSynQ: the list is this hospital's own.")) + "</p>";
+    if ((r.problems || []).length) h += '<div class="msg err">' + esc(T(c, "site.admin.fml.savedProblems", "The saved formulary has {n} problems ordering cannot use. Correct them before saving any change.", { n: r.problems.length })) + "</div>";
+    h += '<label class="f"><span><input type="checkbox" id="fmlReason"' + (s.draft.requireReasonOffFormulary ? " checked" : "") + "> " + esc(T(c, "site.admin.fml.requireReason", "Require a reason when a drug not on the formulary is ordered")) + "</span></label>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.fml.search", "Search")) + '</span><input id="fmlSearch" value="' + esc(s.q || "") + '"></label>' +
+      '<button type="button" class="btn ghost" data-fml="new">' + esc(T(c, "site.admin.fml.add", "Add an entry")) + "</button></div>";
+    if (s.edit != null) {
+      var e = s.edit >= 0 ? s.draft.entries[s.edit] : {};
+      h += '<div class="card"><div class="row">' + FML_FIELDS.map(function (f) {
+        return FML_BOOL[f] ? '<label class="f"><span><input type="checkbox" data-fml-f="' + f + '"' + (e[f] === true ? " checked" : "") + "> " + esc(fmlFieldLabel(c, f)) + "</span></label>"
+          : '<label class="f"><span>' + esc(fmlFieldLabel(c, f)) + '</span><input data-fml-f="' + f + '" value="' + esc(fmlText(e, f)) + '"></label>';
+      }).join("") + '</div><button type="button" class="btn" data-fml="apply">' + esc(T(c, "site.admin.fml.apply", "Put in the draft")) + '</button> <button type="button" class="btn ghost" data-fml="cancel">' + esc(T(c, "site.admin.fml.cancel", "Cancel")) + "</button>" +
+        '<p class="quiet">' + esc(T(c, "site.admin.fml.draftNote", "The draft is checked and saved only by the dry run below.")) + "</p></div>";
+    }
+    var q = String(s.q || "").toLowerCase();
+    var shown = s.draft.entries.map(function (x, i) { return [x, i]; }).filter(function (p) { return !q || [p[0].drug, p[0].code].concat(p[0].aliases || []).join(" ").toLowerCase().indexOf(q) >= 0; });
+    h += s.draft.entries.length ? '<div class="tbl"><table><thead><tr><th>' + esc(fmlFieldLabel(c, "drug")) + "</th><th>" + esc(fmlFieldLabel(c, "code")) + "</th><th>" + esc(T(c, "site.admin.fml.colRule", "Rule")) + "</th><th></th></tr></thead><tbody>" +
+      shown.map(function (p) {
+        var x = p[0], rule = [];
+        if (x.restricted) rule.push(esc(T(c, "site.admin.fml.restrictedShort", "Restricted")) + (x.requiresApproval ? " " + esc(T(c, "site.admin.fml.approvalShort", "(approval)")) : "") + ((x.restrictedTo || []).length ? " " + EN(c, esc(x.restrictedTo.join(", "))) : ""));
+        if (x.controlled) rule.push(esc(T(c, "site.admin.fml.controlledShort", "Controlled")));
+        if (x.retired) rule.push(esc(T(c, "site.admin.fml.retiredShort", "Retired")));
+        return "<tr><td>" + EN(c, esc(x.drug || "")) + ((x.aliases || []).length ? ' <span class="quiet">' + EN(c, esc(x.aliases.join(", "))) + "</span>" : "") + '</td><td class="mono">' + EN(c, esc(x.code || "")) + "</td><td>" + rule.join(", ") + "</td><td>" +
+          '<button type="button" class="btn ghost" data-fml="edit" data-i="' + p[1] + '">' + esc(T(c, "site.admin.fml.edit", "Edit")) + '</button> <button type="button" class="btn ghost" data-fml="retire" data-i="' + p[1] + '">' + esc(x.retired ? T(c, "site.admin.fml.restore", "Put back on the formulary") : T(c, "site.admin.fml.retire", "Retire")) + "</button></td></tr>";
+      }).join("") + "</tbody></table></div>" : '<p class="quiet">' + esc(T(c, "site.admin.fml.empty", "No formulary is configured. Orders are not checked against one until entries are saved.")) + "</p>";
+    h += '<button type="button" class="btn" data-fml="dry">' + esc(T(c, "site.admin.fml.dryRun", "Dry run the changes")) + "</button>";
+    if (s.pv != null) h += fmlReportHtml(c, s.pv, "ed");
+    h += "<h3>" + esc(T(c, "site.admin.fml.csvTitle", "Load from a CSV file")) + '</h3><div class="row"><label class="f"><span>' + esc(T(c, "site.admin.fml.file", "CSV file")) + '</span><input id="fmlFile" type="file" accept=".csv,text/csv"></label>' +
+      '<button type="button" class="btn ghost" data-fml="read">' + esc(T(c, "site.admin.fml.read", "Read the file")) + "</button></div>";
+    if (s.map) {
+      h += '<p class="quiet">' + esc(T(c, "site.admin.fml.rows", "{n} rows in the file.", { n: s.map.rowCount })) + '</p><div class="row">' + s.map.fields.map(function (f) {
+        var cur = s.mapping && s.mapping[f] != null ? String(s.mapping[f]) : "";
+        return '<label class="f"><span>' + esc(fmlFieldLabel(c, f)) + '</span><select data-fml-col="' + f + '"><option value="">' + esc(T(c, "site.admin.fml.notInFile", "Not in the file")) + "</option>" +
+          (s.map.headers || []).map(function (hd, i) { return '<option value="' + i + '"' + (cur === String(i) ? " selected" : "") + ">" + EN(c, esc(hd || T(c, "site.admin.fml.column", "Column {n}", { n: i + 1 }))) + "</option>"; }).join("") + "</select></label>";
+      }).join("") + "</div>" +
+        '<p class="quiet">' + esc(T(c, "site.admin.fml.yesNoNote", "Restricted, needs an approval and controlled read yes or no. Lists are separated by ;.")) + "</p>" +
+        '<div class="row"><label class="f"><span><input type="radio" name="fmlMode" value="merge"' + (s.mode === "merge" ? " checked" : "") + "> " + esc(T(c, "site.admin.fml.merge", "Add to the formulary: a row replaces the entry with the same code or name, every other entry stays")) + "</span></label>" +
+        '<label class="f"><span><input type="radio" name="fmlMode" value="replace"' + (s.mode === "replace" ? " checked" : "") + "> " + esc(T(c, "site.admin.fml.replace", "Replace the formulary: the file becomes the whole list, and entries not in it are removed")) + "</span></label></div>" +
+        '<button type="button" class="btn" data-fml="csv-dry">' + esc(T(c, "site.admin.fml.dryRun", "Dry run the changes")) + "</button>";
+      if (s.csvPv != null) h += fmlReportHtml(c, s.csvPv, "csv");
+    }
+    return h + '<div id="fmlMsg" aria-live="polite"></div></div>';
+  }
+  WSQ._formularyHtml = formularyHtml;
+  function wireFormulary(c) {
+    var box = document.getElementById("fmlCard");
+    if (!box) return;
+    var s = { r: undefined, draft: { entries: [], requireReasonOffFormulary: false }, edit: null, q: "", pv: null, csv: "", map: null, mapping: null, mode: "", csvPv: null };
+    var draw = function () { box.innerHTML = formularyHtml(c, s); };
+    var load = function () {
+      return c.api("/org/formulary?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+        s.r = r && r.ok ? r : null;
+        if (s.r) s.draft = { entries: JSON.parse(JSON.stringify(s.r.entries || [])), requireReasonOffFormulary: s.r.requireReasonOffFormulary === true };
+        draw();
+      }, function () { s.r = null; draw(); });
+    };
+    var say = function (text) { var m = document.getElementById("fmlMsg"); if (m) m.innerHTML = '<div class="msg err">' + EN(c, c.esc(text)) + "</div>"; };
+    var reasonOf = function (act) { var e = box.querySelector('[data-fml-reason="' + act + '"]'); return e ? String(e.value || "").trim() : ""; };
+    var edSend = function (extra) { return c.api("/org/formulary", Object.assign({ orgId: c.state.orgId, entries: s.draft.entries, requireReasonOffFormulary: s.draft.requireReasonOffFormulary }, extra || {})); };
+    var csvSend = function (extra) { return c.api("/org/formulary-import", Object.assign({ orgId: c.state.orgId, csv: s.csv }, extra || {})); };
+    box.onchange = function (ev) {
+      var t = ev.target || {};
+      if (t.id === "fmlSearch") { s.q = t.value; draw(); }
+      if (t.id === "fmlReason") { s.draft.requireReasonOffFormulary = !!t.checked; s.pv = null; }
+      if (t.name === "fmlMode") { s.mode = t.value; s.csvPv = null; }
+    };
+    box.onclick = function (ev) {
+      var b = ev.target.closest && ev.target.closest("[data-fml]"); if (!b) return;
+      var act = b.getAttribute("data-fml"), i = Number(b.getAttribute("data-i"));
+      if (act === "new") { s.edit = -1; draw(); return; }
+      if (act === "edit") { s.edit = i; draw(); return; }
+      if (act === "cancel") { s.edit = null; draw(); return; }
+      if (act === "retire") { var x = s.draft.entries[i]; if (x.retired) delete x.retired; else x.retired = true; s.pv = null; draw(); return; }
+      if (act === "apply") {
+        var old = s.edit >= 0 ? s.draft.entries[s.edit] : {}, e = old.retired ? { retired: true } : {};
+        box.querySelectorAll("[data-fml-f]").forEach(function (el) {
+          var f = el.getAttribute("data-fml-f");
+          if (FML_BOOL[f]) { if (el.checked) e[f] = true; }
+          else if (FML_LIST[f]) { var l = String(el.value || "").split(/[;|]/).map(function (v) { return v.trim(); }).filter(Boolean); if (l.length) e[f] = l; }
+          else if (String(el.value || "").trim()) e[f] = String(el.value).trim();
+        });
+        if (s.edit >= 0) s.draft.entries[s.edit] = e; else s.draft.entries.push(e);
+        s.edit = null; s.pv = null; draw(); return;
+      }
+      if (act === "dry") { b.disabled = true; edSend().then(function (r) { s.pv = r || false; draw(); }, function () { s.pv = false; draw(); }); return; }
+      if (act === "ed-commit" || act === "csv-commit") {
+        var csvAct = act === "csv-commit", reason = reasonOf(csvAct ? "csv" : "ed");
+        if (!reason) { say(T(c, "site.admin.fml.reasonFirst", "Say why the formulary is changing first.")); return; }
+        b.disabled = true;
+        var extra = { commit: true, reason: reason, confirmCount: Number(b.getAttribute("data-count")), planId: b.getAttribute("data-plan") };
+        var p = csvAct ? csvSend(Object.assign(extra, { mapping: s.mapping, mode: s.mode })) : edSend(extra);
+        p.then(function (r) {
+          if (csvAct) s.csvPv = r || false; else s.pv = r || false;
+          // After a save the list is read again, so what is shown is what the server holds, never the draft.
+          if (r && r.ok && r.step === "done") return load();
+          draw();
+        }, function () { if (csvAct) s.csvPv = false; else s.pv = false; draw(); });
+        return;
+      }
+      if (act === "read") {
+        var f = document.getElementById("fmlFile"), file = f && f.files && f.files[0];
+        if (!file) { say(T(c, "site.admin.fml.chooseFile", "Choose the CSV file first.")); return; }
+        var reader = new FileReader();
+        reader.onload = function () {
+          s.csv = String(reader.result || ""); s.map = null; s.mapping = null; s.csvPv = null;
+          csvSend().then(function (r) {
+            if (!r || !r.ok) { draw(); say(refusal(c, r)); return; }
+            s.map = r; draw();
+          }, function () { draw(); say(T(c, "site.admin.fml.readFailed", "The file could not be read by the server. Nothing was saved.")); });
+        };
+        reader.readAsText(file);
+        return;
+      }
+      if (act === "csv-dry") {
+        var mp = {};
+        box.querySelectorAll("[data-fml-col]").forEach(function (el) { if (el.value !== "") mp[el.getAttribute("data-fml-col")] = Number(el.value); });
+        s.mapping = mp;
+        if (!s.mode) { say(T(c, "site.admin.fml.chooseMode", "Choose whether the file is added to the formulary or replaces it.")); return; }
+        b.disabled = true;
+        csvSend({ mapping: mp, mode: s.mode }).then(function (r) { s.csvPv = r || false; draw(); }, function () { s.csvPv = false; draw(); });
+      }
+    };
+    draw();
+    if (c.can("order.verify")) load();
+  }
+
   // ---- Clinical seed data (D10) ------------------------------------------------------------------
   /* Clinical content that ships with WardSynQ (allergy classes, dose ceilings, default critical limits and
    * the other seed lists), item by item. An item is UNAPPROVED until signed off by the named signatory for its
@@ -1056,7 +1242,7 @@
       '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.countryNote", "The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.")) + '</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.hospital.needsWardsynq", "Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.")) + '</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="fmlCard"></div><div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
       /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
       (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
         ? '<div class="card"><h2>' + c.esc(T(c, "site.admin.hospital.removeTitle", "Remove this hospital")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.hospital.removeIntro", "Removes it from every hospital list. Patient records, documents and the audit trail are kept.")) + '</p>' +
@@ -1079,6 +1265,7 @@
       });
     };
     wireClinicalSettings(c);
+    wireFormulary(c);
     wireDonorCriteria(c); wireBloodCentre(c);
     wireNoteWriters(c);
     wirePrintLang(c);
