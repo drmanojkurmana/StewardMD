@@ -317,10 +317,16 @@ export function applyColumns(view, rows) {
   const cols = view && view.columns && typeof view.columns === 'object' ? view.columns : null;
   if (!cols || !Array.isArray(rows)) return rows;
   const txt = (v) => (v == null ? '' : String(v).trim());
+  const labels = Object.keys(cols);
   return rows.map((r) => {
     if (!r || typeof r !== 'object') return r;
+    /* A ROW ALREADY LABELLED BY THE SCREEN'S OWN HEADERS IS LEFT ALONE. An HTML answer whose header row
+     * is the screen's header row (GHIS GetMedicines) needs no remap at all; applying the learned one
+     * (traced by value, "Date & Time" -> Prod. Code) to its blank cells put product codes in the date
+     * column and graded dateTime 47 of 158 equal (gold audit, 2026-09-17). */
+    if (labels.filter((h) => h in r).length >= Math.min(2, labels.length)) return r;
     const out = {};
-    for (const h of Object.keys(cols)) {
+    for (const h of labels) {
       const c = cols[h] || {};
       /* A ROW ALREADY KEYED BY THE SCREEN'S OWN LABEL keeps it. An HTML answer whose header row IS the
        * screen's header row (GHIS GetMedicines) needs no learned remap; the learned one, traced by

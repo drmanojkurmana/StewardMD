@@ -203,6 +203,9 @@ export function norm(s) { return String(s == null ? '' : s).toLowerCase().replac
 
 const FILLER = /^(yes|no|nil|null|none|na|nan|true|false|active|pending|done|normal|male|female|select|view|open|more|details?)$/;
 /** The screen values worth matching: distinct, with a letter and 3+ characters, or a 5+ digit number. */
+/* A cell that merely names the patient (a header block's "Patient ID", "Visit ID", "Age / Gender"). */
+const IDENTITY_LABEL = /^\s*(patient|visit|episode|mrn?|uhid|ip\s*no|admission|name|age|gender|sex|dob|bed|ward|room|doctor|consultant|department|dept)(\s*(id|no|number|name|type|\/\s*(sex|gender)))?\s*:?\s*$/i;
+
 export function consideredCells(texts) {
   const out = [];
   for (const t of Array.isArray(texts) ? texts : []) {
@@ -593,7 +596,18 @@ export async function proveView({ client, view, brain = null, since = -1, label 
   if (!entries.length) return done('no-requests');
 
   const shown = screenRows(await evalJson(client, PROVE_SOURCES.screen(Object.assign({}, view, { narrative: isNarrativeDetail(view) })), []));
-  const cells = consideredCells(shown.flat());
+  let cells = consideredCells(shown.flat());
+  /* IDENTITY CELLS PROVE NOTHING ABOUT A RESOURCE. A print shell carries the patient's id, name and
+   * visit in a header block plus the column labels, and every one of those is on the screen too:
+   * GHIS's lab print page reached the overlap bar that way with zero result rows, was approved as
+   * "labs", and every patient's labs read empty (owner's iPhone, 2026-09-17). For any resource but
+   * the ward list, the patient's own identifiers and the view's labels are left out: only the
+   * resource's own values (a test name, a result, a drug) can prove its call. */
+  if (String(view.resourceHint || '') !== 'worklist') {
+    const parentRows = parents.flatMap((p) => (p && Array.isArray(p.rows) ? p.rows.slice(0, 4) : [p]));
+    const skip = new Set(consideredCells(identityValues(parentRows).concat(Array.isArray(view.headers) ? view.headers : [])));
+    cells = consideredCells(shown.flat().filter((t) => !IDENTITY_LABEL.test(String(t || '')))).filter((c) => !skip.has(c));
+  }
   const prose = isNarrativeDetail(view) ? reportWords(shown) : [];
   if (!cells.length && !prose.length) return done('no-screen-values');
 

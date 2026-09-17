@@ -538,3 +538,26 @@ test('the widened ward list round-trips: what proof saved is what replay sends',
   assert.match(url, /__RequestVerificationToken=tok9/, 'the live page token is replayed');
   assert.match(url, /Emp_ID=(&|$)/, 'the doctor filter is replayed EMPTY');
 });
+
+/* IDENTITY CELLS PROVE NOTHING ABOUT A RESOURCE. GHIS's lab print page answers a shell for every patient:
+ * the patient's id, name and visit in a header block, column labels, and no result rows. Those cells
+ * are on the doctor's screen too, so the shell reached the overlap bar and was approved as "labs";
+ * every patient's labs then read empty (owner's iPhone, 2026-09-17). For a resource other than the
+ * ward list, the patient's own identifiers and the view's column labels are left out of the screen
+ * cells before a reply is graded: only the resource's own values can prove it. */
+test('proveView: a reply carrying only the patient header and column labels is not proven; one carrying results is', async () => {
+  const wl = { label: 'worklist', rows: rowsForChain(WL_JSON, 'application/json') };
+  const SHELL = '<table><tr><th>TEST NAME</th><th>RESULTS</th><th>UNITS</th></tr><tr><td><table><tr><td>Patient ID</td><td>:</td><td>MR900001</td></tr><tr><td>Patient name</td><td>:</td><td>TEST ALPHA</td></tr><tr><td>Visit ID</td><td>:</td><td>IP5550001</td></tr></table></td></tr></table>';
+  const RESULTS = '<table><tr><th>TEST NAME</th><th>RESULTS</th><th>UNITS</th></tr><tr><td>Haemoglobin</td><td>11.2</td><td>g/dL</td></tr><tr><td>Platelet count</td><td>210</td><td>10^3/uL</td></tr></table>';
+  const entries = [
+    { seq: 21, method: 'GET', url: HOST + '/Doctor/Home/OTLabPrintsSecretary/?id=MR900001', body: null, reqCt: '', xhr: true, status: 200, shape: { kind: 'html', keys: ['TEST NAME', 'RESULTS', 'UNITS'], rows: 4, tables: 2 } },
+  ];
+  const screen = ['Patient ID', 'MR900001', 'Patient name', 'TEST ALPHA', 'Visit ID', 'IP5550001', 'TEST NAME', 'RESULTS', 'UNITS', 'Haemoglobin', '11.2', 'g/dL', 'Platelet count', '210'];
+  const view = () => ({ resourceHint: 'labs', pathTemplate: HOST + '/Doctor/Home', rowsSelector: '#divLabSaveResult table tbody tr', headers: ['TEST NAME', 'RESULTS', 'UNITS'] });
+  const shell = view();
+  await proveView({ client: fakePage({ entries, screen, answers: { 21: { status: 200, contentType: 'text/html', text: SHELL } } }), view: shell, parents: [wl] });
+  assert.notEqual(shell.proof.status, 'proven', 'a shell of identity cells and labels must not prove labs: ' + JSON.stringify(shell.proof));
+  const real = view();
+  await proveView({ client: fakePage({ entries, screen, answers: { 21: { status: 200, contentType: 'text/html', text: RESULTS } } }), view: real, parents: [wl] });
+  assert.equal(real.proof.status, 'proven');
+});

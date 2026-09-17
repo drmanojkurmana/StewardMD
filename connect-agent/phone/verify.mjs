@@ -119,6 +119,12 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
     const c = { resource: view.resourceHint, ok: verdict.ok, via: best ? 'endpoint' : 'none', rows: rows.length, kind: best ? best.kind : 'none', reason: (!best && lastError) ? 'replay failed: ' + lastError : verdict.reason, resourceSeen: verdict.resource, url: best ? best.url : null };
     checks.push(c); view.verified = c;
     if (!verdict.ok) failed.push(view.resourceHint);
+    /* VERIFIED ON A REAL PATIENT, OR NOT PROVEN. A call that answers no rows for every real patient
+     * checked, or rows the brain says are another resource, is not an adapter for that resource
+     * however well it matched the screen it was proven on (GHIS's lab print shell, approved and
+     * read empty for every patient, 2026-09-17). Its proof is withdrawn here, so the approval gate
+     * refuses it and the doctor is asked to show the screen again. */
+    if (!verdict.ok && proven(view)) view.proof = Object.assign({}, view.proof, { status: rows.length ? 'unproven' : 'no-rows', wasProven: true });
   }
 
   // 3. The chains: a proven detail view (one lab result, one report) for a row of its proven list.
