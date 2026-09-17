@@ -1,0 +1,210 @@
+{
+  "site": "skin_scc",
+  "name": "Cutaneous squamous cell carcinoma (head/neck + body)",
+  "system": "Oncology / Skin",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Cutaneous SCC of the head and neck is staged with 8th-edition criteria that add high-risk features to size: tumours 2 cm and 4 cm are the T1/T2/T3 size cutoffs, but minor bone erosion, perineural invasion of nerves 0.1 mm or larger in calibre, and deep invasion beyond subcutaneous fat or thicker than 6 mm each upstage to T3 regardless of size. Gross cortical or marrow invasion is T4a; skull-base or axial-skeleton invasion is T4b. Trunk/extremity SCC uses the same T with parotid nodes replaced by the draining basin. The Brigham and Women (BWH) alternative (risk factors: size 2 cm+, poor differentiation, perineural invasion 0.1 mm+, invasion beyond fat) predicts nodal metastasis and is recorded alongside. Nodal staging uses extranodal extension (ENE).",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Carcinoma in situ (Bowen disease)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour smaller than 2 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour 2 cm or larger up to 4 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour 4 cm or larger, or any tumour with minor bone erosion, perineural invasion of a nerve 0.1 mm or larger, or deep invasion beyond subcutaneous fat or thicker than 6 mm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4a",
+          "label": "Tumour with gross cortical bone or marrow invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4b",
+          "label": "Tumour with skull-base invasion and/or skull-base foramen involvement, or axial skeleton invasion",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Single ipsilateral node 3 cm or smaller, extranodal extension negative (ENE-)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2a",
+          "label": "Single ipsilateral node larger than 3 cm up to 6 cm, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2b",
+          "label": "Multiple ipsilateral nodes 6 cm or smaller, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2c",
+          "label": "Bilateral or contralateral nodes 6 cm or smaller, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3a",
+          "label": "Any node larger than 6 cm, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3b",
+          "label": "Any node with clinically overt extranodal extension (ENE+)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "In situ",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Large or high-risk-feature tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T1, T2 or T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Single small node, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4a",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T1-T4a",
+          "n": "N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "N3",
+          "m": "M0",
+          "basis": "ENE+ or node over 6 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "T4b",
+          "n": "any N",
+          "m": "M0",
+          "basis": "Unresectable skull-base/axial disease",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVC",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Head/neck: parotid (intra- and periparotid), submandibular, submental and upper jugular nodes. Trunk/extremity: the draining axillary, inguinal or epitrochlear basin. Bilateral or contralateral nodes upstage to N2c.",
+      "histologicGrade": "Well differentiated (G1), moderately differentiated (G2), poorly differentiated (G3), including desmoplastic and spindle-cell patterns. Poor differentiation is a BWH high-risk factor alongside size, perineural invasion and deep invasion.",
+      "histopathologicTypes": "Conventional cutaneous SCC; keratoacanthoma-like (low risk); desmoplastic, spindle-cell and adenosquamous variants (high risk); SCC arising in chronic ulcer, scar (Marjolin), discoid lupus or epidermolysis bullosa (aggressive).",
+      "prognosticFactors": [
+        "Tumour diameter (2 cm and 4 cm cutoffs)",
+        "Deep invasion beyond fat or over 6 mm thick",
+        "Perineural invasion of nerves 0.1 mm or larger",
+        "Poor differentiation",
+        "Minor vs gross bone invasion",
+        "Extranodal extension (ENE)",
+        "Immune suppression (transplant, CLL, HIV)",
+        "BWH risk-factor count (T2b with 2-3 factors behaves aggressively)"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

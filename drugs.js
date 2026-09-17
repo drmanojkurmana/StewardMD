@@ -53,6 +53,7 @@
     { cat:"Cardiac", generic:"Amlodipine", cls:"Calcium channel blocker", brands:["amlong","amlokind","ccb"], dose:"5–10 mg PO once daily.", notes:"Ankle oedema common." },
     { cat:"Cardiac", generic:"Ramipril", cls:"ACE inhibitor", brands:["cardace","ramistar","acei"], dose:"2.5–10 mg PO once daily.", notes:"Watch K+, creatinine, cough, angioedema." },
     { cat:"Cardiac", generic:"Telmisartan", cls:"Angiotensin receptor blocker (ARB)", brands:["telma","telsar","arb"], dose:"40–80 mg PO once daily.", notes:"" },
+    { cat:"Cardiac", generic:"Sacubitril / Valsartan", cls:"Neprilysin inhibitor + ARB (ARNI)", brands:["entresto","sacubitril","valsartan","arni"], dose:"Start 49/51 mg PO BD; double every 2–4 wk to target 97/103 mg BD. ACE-washout 36 h.", notes:"HFrEF. Contra with ACEi (36 h washout), angioedema Hx, pregnancy (boxed fetal toxicity)." },
     { cat:"Cardiac", generic:"Atorvastatin", cls:"Statin", brands:["atorva","storvas","lipitor","statin"], dose:"10–80 mg PO at night.", notes:"Check LFTs; myopathy risk." },
     { cat:"Cardiac", generic:"Rosuvastatin", cls:"Statin", brands:["rosuvas","crestor","statin"], dose:"5–40 mg PO once daily.", notes:"" },
     { cat:"Cardiac", generic:"Nitroglycerin (GTN)", cls:"Nitrate / vasodilator", brands:["gtn","nitrocontin","angised","ntg"], dose:"Infusion 5–200 mcg/min titrated; SL 0.4 mg PRN.", notes:"Avoid if SBP <90 or recent PDE5 inhibitor." },
@@ -80,6 +81,7 @@
     { cat:"Endocrine", generic:"Metformin", cls:"Biguanide (antidiabetic)", brands:["glycomet","glucophage"], dose:"500 mg–1 g PO twice daily with meals.", notes:"Hold if eGFR <30, sepsis, contrast, acidosis." },
     { cat:"Endocrine", generic:"Glimepiride", cls:"Sulfonylurea", brands:["amaryl"], dose:"1–4 mg PO once daily before breakfast.", notes:"Hypoglycaemia risk." },
     { cat:"Endocrine", generic:"Levothyroxine", cls:"Thyroid hormone", brands:["thyronorm","eltroxin"], dose:"1.6 mcg/kg PO once daily, empty stomach.", notes:"Start low in elderly/cardiac." },
+    { cat:"Endocrine", generic:"Tirzepatide", cls:"Dual GIP/GLP-1 receptor agonist", brands:["mounjaro","zepbound","tirzepatide","gip","glp1"], dose:"Start 2.5 mg SC once weekly x4 weeks; then 5 mg weekly. May increase by 2.5 mg every 4 weeks to 7.5 mg, 10 mg, 12.5 mg, max 15 mg weekly.", notes:"Boxed warning: Thyroid C-cell tumors / MTC. Contraindicated in MEN2 or personal/family Hx MTC. Delayed gastric emptying alters oral drug absorption (use barrier contraception during escalation)." },
 
     /* ---- Neuro / sedation ---- */
     { cat:"Neuro/Sedation", generic:"Phenytoin", cls:"Anticonvulsant", brands:["eptoin","dilantin"], dose:"Load 15–20 mg/kg IV (≤50 mg/min); maintenance 100 mg PO TDS.", notes:"Correct level for albumin; cardiac monitoring on IV load." },
@@ -101,7 +103,12 @@
     { cat:"Electrolytes", generic:"Magnesium sulfate", cls:"Electrolyte", brands:["magsulf","mgso4"], dose:"1–2 g IV (arrhythmia). Eclampsia: 4 g load then 1 g/h.", notes:"Monitor reflexes/RR." },
     { cat:"Electrolytes", generic:"Potassium chloride", cls:"Electrolyte", brands:["kcl","potklor"], dose:"20–40 mmol IV in fluids. Peripheral max 10 mmol/h.", notes:"Never IV push. Central line for high rates." },
     { cat:"Electrolytes", generic:"Sodium bicarbonate", cls:"Alkalinising agent", brands:["nahco3","sodabicarb"], dose:"50–100 mEq IV for severe metabolic acidosis / hyperkalaemia.", notes:"" },
-    { cat:"Electrolytes", generic:"Mannitol", cls:"Osmotic diuretic", brands:["mannitol"], dose:"0.25–1 g/kg IV over 20 min for raised ICP.", notes:"Monitor osmolar gap, volume." }
+    { cat:"Electrolytes", generic:"Mannitol", cls:"Osmotic diuretic", brands:["mannitol"], dose:"0.25–1 g/kg IV over 20 min for raised ICP.", notes:"Monitor osmolar gap, volume." },
+
+    /* ---- Oncology (targeted / immunotherapy reference) ---- */
+    { cat:"Oncology", generic:"Trastuzumab deruxtecan", cls:"HER2-directed antibody-drug conjugate", brands:["enhertu","her2 adc"], dose:"5.4 mg/kg IV q3w (breast/NSCLC); 6.4 mg/kg IV q3w (gastric).", notes:"Boxed: ILD/pneumonitis (fatal risk, hold early), LVEF decline, embryo-fetal toxicity. Not interchangeable with trastuzumab." },
+    { cat:"Oncology", generic:"Zanubrutinib", cls:"BTK inhibitor (2nd generation, covalent)", brands:["brukinsa","btk"], dose:"160 mg PO BD or 320 mg PO once daily.", notes:"B-cell malignancies (MCL, CLL, Waldenstrom, MZL). Bleeding, AF, cytopenias; hold peri-operatively." },
+    { cat:"Oncology", generic:"Cemiplimab", cls:"Anti-PD-1 monoclonal antibody", brands:["libtayo","pd1"], dose:"350 mg IV every 3 weeks.", notes:"Cutaneous SCC, basal cell, NSCLC. Immune-mediated toxicities (colitis, pneumonitis, hepatitis, endocrinopathies)." }
   ];
 
   /* ---- search helpers (self-contained fuzzy) ---- */

@@ -1,0 +1,144 @@
+{
+  "site": "nhl",
+  "name": "Non-Hodgkin lymphoma",
+  "system": "Oncology / Haematologic",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Non-Hodgkin lymphomas are staged with the Lugano modification of the Ann Arbor system (2014), not with solid-tumour TNM; this file maps Lugano extent onto the engine's T/N/M slots so the overlay can render it. Stage depends on the number and distribution of involved nodal regions relative to the diaphragm, localised extranodal (E) involvement, bulky disease (X, 10 cm or mediastinal widening), and spleen (S) involvement. FDG-PET/CT defines response and upstages CT-only disease; bone marrow biopsy is reserved for selected histologies. B symptoms do not change the stage but guide therapy.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Extent of disease cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of lymphoma",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Involvement of a single lymphatic region (Stage I pattern)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Two or more lymphatic regions on the same side of the diaphragm (Stage II pattern)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Lymphatic regions on both sides of the diaphragm (Stage III pattern)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Diffuse or disseminated extranodal involvement beyond E/S disease (Stage IV pattern)",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Nodal regions cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No involved lymphatic region",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Single involved lymphatic region (cervical, axillary, mediastinal, para-aortic, mesenteric, inguinal-femoral and Waldeyer ring count as regions)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Two or more involved regions on the same side of the diaphragm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3",
+          "label": "Involved regions on both sides of the diaphragm, and/or splenic involvement (S)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No disseminated extranodal disease",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Disseminated extranodal disease (marrow, liver, lung, bone, CNS, multiple extranodal sites)",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "One nodal region; IE adds a single localised extranodal site",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IE",
+          "t": "T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Single nodal region with direct extension into one adjacent extranodal site",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Same side of diaphragm; IIE with localised extranodal extension; add X if bulky 10 cm or larger",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T3",
+          "n": "N3",
+          "m": "M0",
+          "basis": "Both sides of diaphragm; IIIS includes spleen",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "T4",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Disseminated extranodal disease with or without nodal involvement",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Each nodal region (Waldeyer ring, cervical/supraclavicular, axillary, epitrochlear, mediastinal/hilar, para-aortic, mesenteric, iliac, inguinal-femoral, popliteal) plus spleen (S). Waldeyer ring and spleen involvement count as nodal-region equivalents for stage grouping.",
+      "histologicGrade": "Histologic grade follows WHO classification by entity (indolent vs aggressive) rather than G1-G3: e.g. follicular lymphoma graded 1, 2, 3A, 3B by centroblast count; Burkitt and DLBCL are high-grade by definition; Ki-67 and double-hit (MYC/BCL2/BCL6) status are reported.",
+      "histopathologicTypes": "Diffuse large B-cell lymphoma (including double-hit/triple-hit), follicular lymphoma, mantle cell lymphoma, marginal zone lymphomas, Burkitt lymphoma, peripheral T-cell lymphomas, anaplastic large-cell lymphoma, lymphoplasmacytic lymphoma.",
+      "prognosticFactors": [
+        "Lugano stage (I-IV with E/X/S modifiers)",
+        "Bulky disease (X, 10 cm or larger)",
+        "B symptoms (fever, night sweats, weight loss over 10 percent)",
+        "International Prognostic Index (age, LDH, performance status, stage, extranodal sites)",
+        "Cell of origin and double-hit genetics in DLBCL",
+        "FDG-PET avidity and interim response",
+        "Bone marrow and CNS involvement"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

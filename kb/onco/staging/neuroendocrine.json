@@ -1,0 +1,152 @@
+{
+  "site": "neuroendocrine",
+  "name": "Neuroendocrine tumours (pancreatic + GI)",
+  "system": "Oncology / Gastrointestinal",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Well-differentiated neuroendocrine tumours (NETs) of the pancreas and gastrointestinal tract share WHO grading by Ki-67 proliferation index and mitotic count (G1: Ki-67 below 3 percent; G2: 3-20 percent; G3: above 20 percent well-differentiated), while poorly differentiated neuroendocrine carcinomas (NECs, small/large cell) are high-grade by definition and staged by the corresponding exocrine scheme. Pancreatic NET T reflects size and invasion (confined, duodenal/bile-duct invasion, major vascular or adjacent-organ invasion); GI NET T reflects depth of wall invasion and size. Functioning syndromes (insulinoma, gastrinoma, VIPoma, carcinoid) guide management but not stage.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour limited to organ of origin: PanNET below 2 cm confined to pancreas; GI NET invading mucosa/submucosa and 1 cm or smaller",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "PanNET 2-4 cm confined to pancreas, or invasion of duodenum/bile duct; GI NET invading muscularis propria or larger than 1 cm up to 2 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "PanNET larger than 4 cm, or invasion of duodenum/bile duct/peripancreatic tissues; GI NET invading through muscularis into subserosa or larger than 2 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumour invades adjacent organs or major vessels (coeliac axis, SMA): PanNET T4 requires arterial encasement or organ invasion; GI NET perforates serosa or invades neighbours",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Regional lymph node metastasis present (PanNET: any positive node; small-bowel NET schemes count mesenteric nodal masses)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1a",
+          "label": "Metastasis confined to liver",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1b",
+          "label": "Metastasis to extrahepatic site(s), with or without liver involvement",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1c",
+          "label": "Both hepatic and extrahepatic metastases (pancreatic scheme)",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Small confined tumour, node negative",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T4",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Locally advanced, node negative",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "any T",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Any nodal metastasis without distant spread",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis (liver-dominant)",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Pancreatic: peripancreatic, pyloric, hepatic-artery and splenic-hilar nodes. Small bowel: mesenteric nodes (bulky mesenteric masses recorded). Colorectal: pericolic/perirectal and intermediate nodes. Distant liver, bone and lung deposits are M1.",
+      "histologicGrade": "WHO grade by Ki-67 index and mitotic count per 2 sq mm: G1 (Ki-67 below 3 percent, mitoses below 2), G2 (Ki-67 3-20 percent, mitoses 2-20), G3 well-differentiated NET (Ki-67 above 20 percent, mitoses above 20, retained differentiation); poorly differentiated NEC (small/large cell) is high-grade by definition.",
+      "histopathologicTypes": "Well-differentiated NET G1/G2/G3 (insulinoma, gastrinoma, glucagonoma, VIPoma, somatostatinoma, non-functioning); poorly differentiated NEC (small-cell, large-cell); mixed neuroendocrine-non-neuroendocrine neoplasm (MiNEN); appendiceal, rectal and gastric type-specific variants.",
+      "prognosticFactors": [
+        "WHO grade and Ki-67 index",
+        "Differentiation (NET vs NEC)",
+        "Primary site (appendiceal/rectal favourable; pancreatic/colonic worse)",
+        "Functioning syndrome and hormone secretion",
+        "Somatostatin-receptor imaging status (theranostic)",
+        "Hepatic tumour burden",
+        "DAXX/ATRX and MEN1 status (pancreatic)"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

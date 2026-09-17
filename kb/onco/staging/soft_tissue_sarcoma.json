@@ -1,0 +1,150 @@
+{
+  "site": "soft_tissue_sarcoma",
+  "name": "Soft tissue sarcoma (extremity/trunk)",
+  "system": "Oncology / Sarcoma",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Staging applies to soft tissue sarcomas of the extremity and trunk (the 8th edition stages head/neck, retroperitoneal, visceral and other sites separately). T is purely size-based with 5 cm increments, a distinctive 8th-edition feature; grade uses the FNCLCC system (differentiation, mitotic count, necrosis). Nodal metastasis is rare but upstages to IIIB; pulmonary metastases dominate M1. Superficial vs deep location no longer changes T.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour 5 cm or smaller in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour larger than 5 cm up to 10 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour larger than 10 cm up to 15 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumour larger than 15 cm in greatest dimension",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Regional lymph node metastasis (uncommon in most subtypes; more frequent in epithelioid, synovial, clear-cell and angiosarcoma)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "IA",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Low grade (G1), small tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T2, T3 or T4",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Low grade (G1), larger tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "High grade (G2/G3), small tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "High grade (G2/G3), intermediate tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T3 or T4",
+          "n": "N0",
+          "m": "M0",
+          "basis": "High grade (G2/G3), large tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "any T",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Any regional nodal metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis, usually pulmonary",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional basins follow the anatomic site of the primary (e.g. axillary/inguinal for limb primaries); most sarcomas spread haematogenously, so enlarged nodes are biopsied before being called N1.",
+      "histologicGrade": "FNCLCC grade: tumour differentiation (1-3) + mitotic count per 10 HPF (1-3) + tumour necrosis (0-2). Total 2-3 = G1 (low), 4-5 = G2 (intermediate), 6-8 = G3 (high). Grade drives stage more than size does.",
+      "histopathologicTypes": "Undifferentiated pleomorphic sarcoma, liposarcoma (well-differentiated, dedifferentiated, myxoid, pleomorphic), leiomyosarcoma, synovial sarcoma, malignant peripheral nerve sheath tumour, epithelioid sarcoma, clear-cell sarcoma, angiosarcoma, dermatofibrosarcoma protuberans (rarely metastasises).",
+      "prognosticFactors": [
+        "FNCLCC grade",
+        "Tumour size (5/10/15 cm cutoffs)",
+        "Depth relative to fascia and margin status",
+        "Histologic subtype",
+        "Nodal involvement (rare, poor prognosis)",
+        "Pulmonary metastasis",
+        "Prior radiation field"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}
