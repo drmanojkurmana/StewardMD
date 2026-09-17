@@ -489,14 +489,15 @@ test("/ward/cashless-stays: 401 without a session, 403 for a role without billin
   assert.deepEqual(r.stays[0].issues.find((x) => x.code === "expired"), { code: "expired", validUntil: "2026-01-31" });
   assert.equal(r.stays[0].payerName, "Star TPA");
 
-  const orig = RECORD.latestByType.bind(RECORD);
-  RECORD.latestByType = async (tenant, type, limit) => { if (type === "PreAuthorisation") throw new Error("store down"); return orig(tenant, type, limit); };
+  // R4-2: the desk reads every record through the paged whole-type read (pageByType).
+  const orig = RECORD.pageByType.bind(RECORD);
+  RECORD.pageByType = async (tenant, type, opts) => { if (type === "PreAuthorisation") throw new Error("store down"); return orig(tenant, type, opts); };
   try {
     const bad = await as(CASHIER, path);
     assert.equal(bad.__status, 200, JSON.stringify(bad));
     assert.equal(bad.stays, null);
     assert.equal(bad.unreadable, "PreAuthorisation: could not be read");
-  } finally { RECORD.latestByType = orig; }
+  } finally { RECORD.pageByType = orig; }
 });
 
 test("/org/rcm-settings: staff.admin reads and saves with a reason; others refused and nothing saved", async () => {

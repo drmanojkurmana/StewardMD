@@ -19,7 +19,7 @@
  */
 
 import { listWard, ADMISSION_CLASSES, OPEN } from "./migrate-inpatient.js";
-import { str, baseOf, offOf, isoOk, openSvc, writeFailure, readFailure } from "./support-common.js";
+import { str, baseOf, offOf, isoOk, openSvc, writeFailure, readFailure, readAllOf } from "./support-common.js";
 
 const DIET_TYPE = "DietOrder";
 const ROUND_TYPE = "MealRound";
@@ -215,8 +215,8 @@ async function mealBoard(request, env, ctx) {
   if (error) return { ...base, ...error, rows: [] };
   let orders, rounds;
   try {
-    orders = new Map(((await svc.list(DIET_TYPE, 1000)) || []).map((o) => [str(o.encounterId), o]));
-    rounds = (await svc.list(ROUND_TYPE, 5000)) || [];
+    orders = new Map((await readAllOf(svc, DIET_TYPE)).map((o) => [str(o.encounterId), o]));
+    rounds = await readAllOf(svc, ROUND_TYPE);
   } catch (e) { return { ...base, ...readFailure(e), rows: [] }; }
   /* Allergies per patient; one that cannot be read is left out of the map and reads as "could not be read". */
   const allergies = new Map();
