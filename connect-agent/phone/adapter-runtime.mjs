@@ -15,6 +15,9 @@
 import { READ_ROWS, isGimsrOrigin } from './runtime.mjs';
 
 export const TOKEN_KEY = /token|verification|csrf|xsrf|antiforgery|nonce/i;
+/* How long a page is given to settle after a move (the token inputs are server-rendered). */
+export let PAGE_SETTLE_MS = 2500;
+export function setPageSettleMs(ms) { PAGE_SETTLE_MS = ms; }
 export const PATIENT_KEY = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$/i;
 export const VISIT_KEY = /visit|episode|encounter|admission|ip(no|number)/i;
 export const PAGE_SIZE_KEY = /^(length|limit|pagesize|page_size|size|rows|per_page|count|top)$/i;
@@ -527,7 +530,21 @@ export async function executeProven({ plugin, origin, view, patient = null, pare
   await onDataHost(plugin, view, patient, base);
   const eps = view.endpoints.filter((e) => e && (e.role === 'prerequisite' || e.role === 'data'));
   const wantsToken = eps.some((e) => Object.values(e.params || {}).some((s) => s && s.token) || (e.bodyKeys || []).some((k) => TOKEN_KEY.test(k)));
-  const toks = tokens || (wantsToken ? await pageTokens(plugin) : {});
+  let toks = tokens || (wantsToken ? await pageTokens(plugin) : {});
+  /* THE TOKEN LIVES ON THE PAGE IT WAS PROVEN ON. The hidden browser opens the hospital root; the
+   * anti-forgery token a POST (GHIS Searchnew) needs was proven on /Doctor/Home. Sent empty, the
+   * hospital refuses the activation silently and every read that follows answers nothing. With no
+   * token on the current page, move to the call's own page once and read it there. */
+  if (wantsToken && !tokens && !Object.keys(toks).length && typeof plugin.navigate === 'function' && /^https:/i.test(String(view.pathTemplate || ''))) {
+    const page = String(view.pathTemplate).replace(/\{[^}]*\}/g, encodeURIComponent((patient && patient.patientId) || ''));
+    let here = '';
+    try { const cur = typeof plugin.currentUrl === 'function' ? await plugin.currentUrl() : null; here = typeof cur === 'string' ? cur : (cur && cur.url) || ''; } catch { here = ''; }
+    if (here.replace(/\/$/, '') !== page.replace(/\/$/, '')) {
+      await plugin.navigate({ url: page });
+      await new Promise((r) => setTimeout(r, PAGE_SETTLE_MS));
+      toks = await pageTokens(plugin);
+    }
+  }
   let out = null;
   for (const ep of eps) {
     const req = provenRequest(ep, { patient, parentRow, tokens: toks, now });

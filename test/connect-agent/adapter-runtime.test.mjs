@@ -224,3 +224,39 @@ test('provenValue: a joined worklist field falls back to the patient ids when th
   Object.defineProperty(p3, '_row', { value: { 'Patient ID': 'P9', 'Visit ID': 'V9' }, enumerable: false });
   assert.equal(provenValue('recordNo', src, { patient: p3 }), 'P9-V9', 'a row that carries the columns wins');
 });
+
+/* THE TOKEN LIVES ON THE PAGE IT WAS PROVEN ON. The hidden browser opens the hospital root; the
+ * anti-forgery token a POST (GHIS Searchnew) needs was proven on /Doctor/Home. A page without the
+ * token would send the POST with an empty one and the hospital would refuse it silently. When the
+ * current page has no token, the call moves to its own page first and reads it there. */
+test('executeProven: a call that needs a token and finds none moves to its proven page to read it', async () => {
+  const { setPageSettleMs } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  setPageSettleMs(0);
+  const navigated = [];
+  let here = 'https://h/';
+  const posted = [];
+  const plugin = {
+    async navigate({ url }) { navigated.push(url); here = url; },
+    async currentUrl() { return { url: here }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify(here === 'https://h/home' ? { __RequestVerificationToken: 'T9' } : {}) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      if (req.method === 'POST') posted.push(req.body);
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[{"a":1}]' }) };
+    },
+  };
+  const view = { resourceHint: 'patient', pathTemplate: 'https://h/home', proof: { status: 'proven' }, endpoints: [
+    { method: 'POST', path: '/Searchnew', role: 'prerequisite', bodyKeys: ['__RequestVerificationToken', 'recordNo'], params: { __RequestVerificationToken: { token: true }, recordNo: { from: 'worklist', field: 'patientId' } } },
+    { method: 'GET', path: '/Get?id', role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } },
+  ] };
+  const out = await executeProven({ plugin, origin: 'https://h', view, patient: { patientId: 'K1' } });
+  assert.deepEqual(navigated, ['https://h/home'], 'moved once, to the proven page');
+  assert.deepEqual(posted, ['__RequestVerificationToken=T9&recordNo=K1']);
+  assert.equal(out.rows.length, 1);
+  // Already on the page with the token: no move at all.
+  navigated.length = 0; posted.length = 0;
+  await executeProven({ plugin, origin: 'https://h', view, patient: { patientId: 'K1' } });
+  assert.deepEqual(navigated, []);
+  assert.deepEqual(posted, ['__RequestVerificationToken=T9&recordNo=K1']);
+});
