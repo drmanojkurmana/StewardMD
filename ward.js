@@ -2765,7 +2765,7 @@
       (isIcu ? icuTrendsCard(state) + icuScoresCard(state) + icuAbgCard(state) + icuVentCard(state) + icuSedationCard(state) + icuPressorCard(state) + icuRoundCard(state) : "") +
       fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
-      (isNicu ? neonatalCard() + linesCard(state) : "") +
+      (isNicu ? neonatalCard() : "") + (isEd ? "" : linesCard(state)) +
       ((isEd || isMaternity || isIcu) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
       medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) + pathologyCard(state) +
       (isMaternity ? deliveryCard(state) : "") +
@@ -4020,10 +4020,14 @@
         : wTH("ward.growth-source-hospital", "This hospital's own growth tables, loaded under its licence on Admin. Not clinically validated in this build.")) + "</p></div>";
   }
 
-  /* LINES. A placement log, mirroring surgery's implant card exactly - site, type, when, by. */
+  /* LINES. A placement log, mirroring surgery's implant card exactly - site, type, when, by. The device class (P5) says
+   * which NHSN device-days the line counts towards; a line of any other kind is logged and counted as none. */
+  function lineClassWord(k) {
+    return k === "central-line" ? wTH("ward.line-class-central", "Central line") : k === "urinary-catheter" ? wTH("ward.line-class-urinary", "Urinary catheter") : k === "ventilator" ? wTH("ward.line-class-ventilator", "Ventilator (invasive)") : esc(k);
+  }
   function linesCard(state) {
     var rows = (state.lines || []).map(function (l) {
-      return "<li><b>" + esc(l.type) + "</b><span>" + (l.site ? esc(l.site) + " &middot; " : "") + wTH("ward.placed", "placed {insertedAt}", { insertedAt: when(l.insertedAt) }, "insertedAt") + (l.removedAt ? " &middot; " + wTH("ward.removed", "removed {removedAt}", { removedAt: when(l.removedAt) }, "removedAt") : "") + "</span>" +
+      return "<li><b>" + esc(l.type) + "</b><span>" + (l.deviceClass ? lineClassWord(l.deviceClass) + " &middot; " : "") + (l.site ? esc(l.site) + " &middot; " : "") + wTH("ward.placed", "placed {insertedAt}", { insertedAt: when(l.insertedAt) }, "insertedAt") + (l.removedAt ? " &middot; " + wTH("ward.removed", "removed {removedAt}", { removedAt: when(l.removedAt) }, "removedAt") : "") + "</span>" +
         (!l.removedAt ? '<button class="w-btn tiny warn" data-w-act="lineremove:' + esc(l.id) + '">' + ms("close") + wTH("ward.remove", "Remove") + "</button>" : "") + "</li>";
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("device_hub") + "<h3>" + wTH("ward.lines", "Lines") + "</h3>" +
@@ -4034,6 +4038,8 @@
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.type", "Type") + "</span><input id=\"wLineType\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-uvc-picc", "e.g. UVC, PICC") + "\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.site", "Site") + "</span><input id=\"wLineSite\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.line-counts-as", "Counts for infection rates as") + "</span><select id=\"wLineClass\"><option value=\"\">" + wTH("ward.line-class-none", "None of these") + "</option>" +
+      ["central-line", "urinary-catheter", "ventilator"].map(function (k) { return "<option value=\"" + k + "\">" + lineClassWord(k) + "</option>"; }).join("") + "</select></label>" +
       "</div>" +
       '<button class="w-btn go" data-w-act="linesave">' + ms("add") + wTH("ward.record-line", "Record line") + "</button></div>";
   }
@@ -10163,10 +10169,10 @@
   }
   function lineSave() {
     var s = st.sel; if (!s) return;
-    var type = val("wLineType"), site = val("wLineSite");
+    var type = val("wLineType"), site = val("wLineSite"), deviceClass = val("wLineClass");
     if (!type) { st.err = wT("ward.enter-the-line-type", "Enter the line type."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/line", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, line: { type: type, site: site || undefined } })
+    apiPost("/ward/line", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, line: { type: type, site: site || undefined, deviceClass: deviceClass || undefined } })
       .then(function (r) { if (settle(r, wT("ward.line-recorded", "Line recorded."))) loadLines(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-line", "Could not record the line."); paint(); });
   }
@@ -14583,7 +14589,8 @@
       if (apgarChart(p)) loadApgar(p.patientId);
       if (p.class !== "ED") loadStayPlan();
       loadCodeSets();
-      if (p.class === "NICU") loadLines();
+      // Lines on every inpatient chart (P5): a central line, urinary catheter or ventilator logged here gives the device-days infection rates use.
+      if (p.class !== "ED") loadLines();
       return;
     }
     if (cmd === "openEd") {

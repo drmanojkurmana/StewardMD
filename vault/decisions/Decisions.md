@@ -7525,3 +7525,36 @@ Ltd, April 2026). Supersedes the `gst.recipientOfCashlessClaims` part of the gst
   GST documents is the resolved recipient, so Tax Invoice vs Bill of Supply, the BOS number and the IRN follow the
   recipient, never the payer. A contracting-party recipient with incomplete GST details refuses the bill. The manual
   buyer entry (typing a GSTIN on a bill) is gone: a buyer that is not a payer contract is not offered.
+
+## 2026-09-17 Infection control, antimicrobial stewardship data and quality registers (branch infection-ams-quality, P5)
+Gaps 4, 5 and 11 of the 2026-09-17 commercial gap audit. NABH KPIs 5, 11, 13-18, 25-27, 31 and 32 now compute; the rest
+of compliance.js is untouched.
+- HAI definitions are CDC/NHSN (Patient Safety Component Manual, January 2026, ch.4, 6, 7, 9), because NABH PSQ 3a-3b
+  says "as per the latest CDC/NHSN definition" and the ICMR HAI surveillance network uses the same. New record `HaiCase`,
+  written only by a new capability `infection.control` (new role `infection_control`; admin holds it). A case is opened
+  under review, then confirmed naming the NHSN criterion met, ruled out or withdrawn, each a version. Nothing computes a
+  diagnosis. The server computes and stores only the NHSN timing arithmetic (device day > 2 and in place on the date of
+  event or the day before; SSI within 30 or 90 days); a case the arithmetic calls ineligible can still be confirmed with
+  a written reason, because the line log may be late. The criterion names are unapproved seed content ("hai-criteria" in
+  seed-signoff.js). The existing incident-based "hai" measure in quality.js is left as it was.
+- Device-days: the existing LineRecord gained an optional closed `deviceClass` (central-line, urinary-catheter,
+  ventilator); counted as NHSN counts the denominator (one per patient per calendar day present, insertion and removal
+  days included). The Lines card now shows on every non-ED chart, not only NICU. Ventilator days are read from lines, not
+  from IcuRecord ventilator settings, because settings are snapshots with no start and stop. The brief's "DeviceLine"
+  record was not added: LineRecord already is one (followed the code).
+- Surgical prophylaxis (#18): `SurgicalProphylaxis` review per theatre case by infection control. Doses are listed
+  antibiotics (the existing `antibiotics` setting) from the eMAR and the anaesthesia record; on time within the new
+  hospital setting `prophylaxisWindowMinutes`; the reviewer says whether prophylaxis was indicated and the agent matches
+  policy, and "appropriate" is derived per the NABH remark. An unreviewed case is not counted as appropriate.
+- Microbiology was already structured (pathology-report.js), and days of therapy already existed (quality.js); both are
+  reused, not rebuilt. The cumulative antibiogram follows CLSI M39: final results, first isolate per species per patient per
+  period, %S without I, and a hospital minimum (`antibiogramMinIsolates`, no default; M39 recommends 30) below which no
+  percentage is shown. No MIC interpretation (breakpoint licensing is an owner question).
+- Quality registers (quality-registers.js): hospital-authored audit checklists (`QualityAuditTemplate`, `QualityAudit`, one
+  audit per observed unit, compliant when no item is "no", a copy of the item text kept), `MockDrill` with its variations,
+  `EmergencyStockOut` against the hospital's `emergencyMedicines` list, `AdverseDrugReaction` on the PvPI form v1.3
+  (filed with incident.report, causality not recorded here), `EdReturnReview` where a prescriber says whether a return
+  within 72 hours of leaving was a similar complaint. New capability `quality.audit` (safety_officer, infection_control).
+- Screen: wardsynq/site/pages/quality.js "Infection control and quality", tabs by capability. The brief named
+  pages/governance.js; a separate page was used because governance.js is the DPO's and the analytics page and the ward's
+  own staff (ADR, stock-outs, returns) needed a door that does not open privacy administration.

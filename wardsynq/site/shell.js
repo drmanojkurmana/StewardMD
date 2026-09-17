@@ -707,6 +707,10 @@
     /* DPDP Act 2023, NABH and HMIS returns, the digital health self-assessment and the report builder: the Data
      * Protection Officer's own way in, and the administrator's (pages/governance.js offers each tab to its capability). */
     if (native) adminTiles.push(tile({ go: "governance", icon: "shield_person", title: T(null, "site.shell.home.tile.governance.title", "Privacy and compliance"), sub: T(null, "site.shell.home.tile.governance.sub", "DPDP requests and breaches, NABH and HMIS returns, reports"), need: ["dpdp.manage", "analytics.view", "staff.admin", "register.records"] }));
+    /* Infection control and quality (pages/quality.js): the infection control nurse's cases, prophylaxis review and
+     * antibiogram, the quality team's audits and drills, and the ward's ADR reports, emergency medicine stock-outs and
+     * emergency returns. Each tab is offered to its own capability. */
+    if (native) adminTiles.push(tile({ go: "quality", icon: "coronavirus", title: T(null, "site.shell.home.tile.quality.title", "Infection control and quality"), sub: T(null, "site.shell.home.tile.quality.sub", "HAI cases, prophylaxis, antibiogram, audits, drills, ADR reports, stock-outs"), need: ["infection.control", "quality.audit", "lab.result", "incident.report", "dept.request", "emr.view"] }));
     if (native) adminTiles.push(tile({ go: "ward:bedmgmt", icon: "dashboard_customize", title: T(null, "site.shell.home.tile.bedmgmt.title", "Bed management"), sub: T(null, "site.shell.home.tile.bedmgmt.sub", "Bed master: block, release, housekeeping"), need: "staff.admin" }));
     el.innerHTML = head + sec(esc(T(null, "site.shell.home.sec.clinical", "Clinical")), wardTiles) + (cmdTiles.length ? sec(esc(T(null, "site.shell.home.sec.command", "Command and operations")), cmdTiles) : "") + sec(esc(T(null, "site.shell.home.sec.patientsAI", "Patients and AI")), peopleTiles) + sec(esc(T(null, "site.shell.home.sec.admin", "Administration")), adminTiles);
     if (!native) return;
