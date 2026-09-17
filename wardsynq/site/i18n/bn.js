@@ -8044,7 +8044,6 @@
     "site.stores.sc.pressShow": "রেকর্ডকৃত ব্যবহার থেকে ড্রাফট তৈরি করতে Show প্রেস করুন।",
     "site.stores.sc.reorderFailed": "Reorder ড্রাফট হিসাব করা যায়নি। অর্ডারের কিছু নেই বলে এটি ধরে নেবেন না।",
     "site.stores.sc.notConfigured": "Reorder পরামর্শ কনফিগার করা নেই। একজন অ্যাডমিনিস্ট্রেটর প্রথমে উইন্ডো, লিড টাইম, সেফটি ডে এবং ডেটার ন্যূনতম দিন সেট করবেন।",
-    "site.stores.sc.method": "গত {window} দিনে গড় দৈনিক ব্যবহার (ডিস্তারিত, ইস্যু করা বা ব্যবহৃত), অথবা কম হলে প্রাপ্ত ডেটার দিন, গুণিতক {lead} লিড ডেস যোগ {safety} সেফটি ডেস, বিয়োগ বর্তমান লেভেল এবং যা অর্ডারে আছে, যা রাউন্ড আপ করা হয়েছে। অর্ডারে কোনো স্টোরের নাম উল্লেখ থাকে না, তাই অর্ডারে থাকা আইটেম প্রতিটি স্টোরের বিপরীতে গণনা করা হয়। এটি একটি ড্রাফট: কেউ পারচেজ অর্ডার না করা পর্যন্ত কিছুই অর্ডার হয় না।",
     "site.stores.sc.noItemsToSuggest": "হিসাব করার মতো কোনো স্টক রেকর্ড করা নেই।",
     "site.stores.sc.onOrder": "অর্ডারে আছে",
     "site.stores.sc.used": "ব্যবহৃত",
@@ -9743,7 +9742,6 @@
     "site.admin.import.notInFile": "ফাইলে নেই",
     "site.admin.import.column": "কলাম {n}",
     "site.admin.import.mapTitle": "কলাম মিলান",
-    "site.admin.import.rows": "ফাইলে {n} টি সারি আছে। একবারে সর্বাধিক {cap} টি নেওয়া যায়; বড় ফাইল হলে ভাগ করুন।",
     "site.admin.import.required": "(আবশ্যক)",
     "site.admin.import.dateOrder": "ফাইলে তারিখ লেখার ক্রম",
     "site.admin.import.dmy": "দিন/মাস/বছর",
@@ -9763,7 +9761,6 @@
     "site.admin.import.newMrn": "MR নম্বর {mrn}",
     "site.admin.import.existingPrice": "তালিকায় মূল্য: Rs {price}",
     "site.admin.import.commit": "এই {n} টি সারির Import সম্পাদন করুন",
-    "site.admin.import.partial": "পূর্বে সংরক্ষিত তথ্য সম্পূর্ণ পড়া যায়নি, তাই এই ফাইলটি Import করা যাবে না।",
     "site.admin.import.nothing": "এই ফাইলের কোনো কিছুই যুক্ত করা হবে না।",
     "site.admin.import.chooseFile": "প্রথমে CSV ফাইলটি নির্বাচন করুন।"
   };

@@ -146,11 +146,14 @@
     if (!mine.length) return "<p>" + esc(T(c, "site.stores.noOrders", "No purchase orders raised from indents.")) + "</p>";
     var stateWords = { "awaiting-approval": T(c, "site.stores.po.awaiting", "Waiting for approval on the Purchasing screen"), rejected: T(c, "site.stores.po.rejected", "Rejected"),
       open: T(c, "site.stores.po.open", "Ordered, nothing in yet"), "part-received": T(c, "site.stores.po.part", "Part delivered"), received: T(c, "site.stores.po.received", "All in"), cancelled: T(c, "site.stores.po.cancelled", "Cancelled") };
-    var locs = (d && d.ok ? d.locations : []).map(function (l) { return '<option value="' + esc(l.code) + '">' + EN(c, esc(l.name)) + "</option>"; }).join("");
+    var all = d && d.ok ? d.locations : [];
     return mine.map(function (o) {
       var id = esc(o.purchaseOrderId);
+      /* The store the order was raised for is offered first (R3-1); another can still be chosen if it arrives elsewhere. */
+      var locs = all.map(function (l) { return '<option value="' + esc(l.code) + '"' + (o.location && l.code === o.location ? " selected" : "") + ">" + EN(c, esc(l.name)) + "</option>"; }).join("");
       var canBook = o.state === "open" || o.state === "part-received";
       return '<div class="card"><h3>' + EN(c, esc(o.vendor)) + " · " + (Object.prototype.hasOwnProperty.call(stateWords, o.state) ? esc(stateWords[o.state]) : EN(c, esc(o.state))) + "</h3>" +
+        '<p class="note">' + (o.location ? esc(T(c, "site.stores.po.forStore", "For store {store}", { store: o.location })) : esc(T(c, "site.stores.po.noStore", "Names no store"))) + "</p>" +
         '<div class="tbl"><table><tr><th>' + esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.colOrdered", "Ordered")) + "</th><th>" + esc(T(c, "site.stores.colReceived", "Received")) + "</th><th></th></tr>" + o.lines.map(function (l) {
           var book = canBook && l.outstanding > 0 ? '<input type="number" min="1" id="stPoQty-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.quantity", "Quantity")) + '"> <select id="stPoLoc-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.colStore", "Store")) + '">' + locs + "</select> " +
             '<button class="btn quiet" type="button" data-st="bookin" data-id="' + id + '" data-po-line="' + esc(l.index) + '" data-item="' + esc(l.item) + '" data-unit="' + esc(l.unit) + '">' + esc(T(c, "site.stores.bookIn", "Book in")) + "</button>" : "";
@@ -211,7 +214,7 @@
     if (!r.ok) return '<div class="msg err">' + TS(c, "site.stores.sc.reorderFailed", "Reorder drafts could not be worked out. Do not read this as nothing to order.") + (r.detail ? " " + EN(c, esc(r.detail)) : "") + "</div>";
     if (!r.configured) return '<div class="msg note">' + esc(T(c, "site.stores.sc.notConfigured", "Reorder suggestions are not configured. An administrator sets the window, lead time, safety days and minimum days of data first.")) + "</div>";
     var p = r.policy;
-    var head = '<p class="note">' + esc(T(c, "site.stores.sc.method", "Average daily use (dispensed, issued out or consumed) over the last {window} days, or the days of data if fewer, times {lead} lead days plus {safety} safety days, minus the level and what is on order, rounded up. Orders name no store, so what is on order counts against each store holding the item. A draft: nothing is ordered until somebody raises a purchase order.", { window: p.windowDays, lead: p.leadTimeDays, safety: p.safetyDays })) + "</p>";
+    var head = '<p class="note">' + esc(T(c, "site.stores.sc.methodStores", "Average daily use (dispensed, issued out or consumed) over the last {window} days, or the days of data if fewer, times {lead} lead days plus {safety} safety days, minus the level and what is on order, rounded up. An order that names a store counts only against that store; one that names no store counts against each store holding the item, and is marked. A draft: nothing is ordered until somebody raises a purchase order.", { window: p.windowDays, lead: p.leadTimeDays, safety: p.safetyDays })) + "</p>";
     if (!r.suggestions.length) return head + "<p>" + esc(T(c, "site.stores.sc.noItemsToSuggest", "No stock is recorded to work from.")) + "</p>";
     return head + '<div class="tbl"><table><tr><th>' + esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.colStore", "Store")) + "</th><th>" + esc(T(c, "site.stores.colLevel", "Level")) + "</th><th>" + esc(T(c, "site.stores.sc.onOrder", "On order")) + "</th><th>" + esc(T(c, "site.stores.sc.used", "Used")) + "</th><th>" + esc(T(c, "site.stores.sc.perDay", "Per day")) + "</th><th>" + esc(T(c, "site.stores.sc.draft", "Draft to order")) + "</th></tr>" + r.suggestions.map(function (s) {
       var out = s.refused === "insufficient_data" ? esc(T(c, "site.stores.sc.refusedData", "No draft: {days} days of data, {min} needed", { days: s.daysOfData, min: s.minDataDays }))
@@ -219,7 +222,7 @@
         : s.refused === "negative_level" ? esc(T(c, "site.stores.sc.refusedNegative", "No draft: the level is negative, which cannot be true"))
         : s.refused ? esc(T(c, "site.stores.sc.refusedOther", "No draft"))
         : "<b>" + EN(c, esc(s.suggestedQuantity + " " + s.unit)) + "</b>";
-      return "<tr><td>" + EN(c, esc(s.display)) + "</td><td>" + EN(c, esc(s.location || "")) + "</td><td>" + EN(c, esc(s.level + " " + s.unit)) + "</td><td>" + esc(s.onOrder) + "</td><td>" +
+      return "<tr><td>" + EN(c, esc(s.display)) + "</td><td>" + EN(c, esc(s.location || "")) + "</td><td>" + EN(c, esc(s.level + " " + s.unit)) + "</td><td>" + esc(s.onOrder) + (s.onOrderNoStore ? " " + esc(T(c, "site.stores.sc.onOrderNoStore", "({n} on orders naming no store)", { n: s.onOrderNoStore })) : "") + "</td><td>" +
         esc(T(c, "site.stores.sc.usedIn", "{used} in {days} days", { used: s.used, days: s.daysUsed || s.windowDays })) + "</td><td>" + (s.refused ? "" : esc(s.avgDaily)) + "</td><td>" + out + "</td></tr>";
     }).join("") + "</table></div>";
   }

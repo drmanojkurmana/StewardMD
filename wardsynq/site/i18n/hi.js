@@ -8199,7 +8199,6 @@
     "site.stores.sc.pressShow": "दर्ज उपयोग से drafts तैयार करने के लिए Show दबाएं।",
     "site.stores.sc.reorderFailed": "Reorder drafts तैयार नहीं किए जा सके। इसे 'कुछ भी order नहीं करना है' न समझें।",
     "site.stores.sc.notConfigured": "Reorder सुझाव configured नहीं हैं। एक administrator पहले window, lead time, safety days और डेटा के न्यूनतम days सेट करता है।",
-    "site.stores.sc.method": "पिछले {window} दिनों में औसत दैनिक उपयोग (dispensed, issued out या consumed), या डेटा के दिन यदि कम हों, गुणा {lead} lead days प्लस {safety} safety days, माइनस current level और जो order पर है, जिसे ऊपर round off किया गया है। Orders में किसी store का नाम नहीं होता, इसलिए जो order पर है वह item रखने वाले प्रत्येक store के खिलाफ गिना जाता है। यह एक draft है: जब तक कोई purchase order raise नहीं करता तब तक कुछ भी order नहीं होता है।",
     "site.stores.sc.noItemsToSuggest": "काम करने के लिए कोई stock दर्ज नहीं है।",
     "site.stores.sc.onOrder": "ऑन ऑर्डर्ड",
     "site.stores.sc.used": "उपयोग किया गया",
@@ -9894,7 +9893,6 @@
     "site.admin.import.notInFile": "फ़ाइल में नहीं है",
     "site.admin.import.column": "कॉलम {n}",
     "site.admin.import.mapTitle": "कॉलम मिलाएँ",
-    "site.admin.import.rows": "फ़ाइल में {n} पंक्तियाँ हैं। एक बार में अधिकतम {cap} ली जाती हैं; बड़ी फ़ाइल को विभाजित करें।",
     "site.admin.import.required": "(आवश्यक)",
     "site.admin.import.dateOrder": "फ़ाइल में तिथियाँ इस प्रकार लिखी हैं",
     "site.admin.import.dmy": "दिन/माह/वर्ष",
@@ -9914,7 +9912,6 @@
     "site.admin.import.newMrn": "MR नंबर {mrn}",
     "site.admin.import.existingPrice": "सूची पर मूल्य: Rs {price}",
     "site.admin.import.commit": "इन {n} पंक्तियों को Import करें",
-    "site.admin.import.partial": "जो पहले से मौजूद है उसे पूरी तरह से पढ़ा नहीं जा सका, इसलिए इस फ़ाइल को Import नहीं किया जा सकता।",
     "site.admin.import.nothing": "इस फ़ाइल में ऐसा कुछ भी नहीं है जिसे जोड़ा जाए।",
     "site.admin.import.chooseFile": "पहले CSV फ़ाइल चुनें।"
   };

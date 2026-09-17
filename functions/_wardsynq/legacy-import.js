@@ -36,11 +36,14 @@ const str = (v) => (v == null ? "" : String(v).trim());
 const refuse = (status, error, message, extra) => ({ ok: false, status, error, message, written: 0, ...(extra || {}) });
 const MAX_CSV_BYTES = 2 * 1024 * 1024;
 /* ponytail: row caps per run. A patient costs several store calls one after another inside one request, so a run is kept
- * well inside a Worker's budget; a larger file is split. Raise with a queued import if a hospital needs one file. */
+ * well inside a Worker's budget. A larger file is sent whole with `run` { from, to } (data rows, 0-based, to exclusive):
+ * the Import screen splits it into successive runs, each dry run and committed with its own planId. Raise with a queued
+ * import if a hospital needs one request. */
 const ROW_CAP = { patients: 100, prices: 500, vendors: 500 };
-// ponytail: the name and date of birth comparison reads one page of patients (as mpi-view.js); exact checks are index seeks.
+/* ponytail: the name and date of birth comparison reads one page of patients (as mpi-view.js), because the record store
+ * has no name or date of birth index (repository.js: identifiers only); exact checks (legacy MR number, MR number,
+ * mobile) are index seeks over everyone. The screen says when the page was full. */
 const NAME_POOL = 500;
-const LIST_CAP = 500;   // BILL.listTariff and the Vendor list read at most this many; a full page cannot rule out a match
 const AADHAAR = /(^|\D)\d{4}\s?\d{4}\s?\d{4}(\D|$)/;
 
 const FIELDS = {
@@ -144,9 +147,10 @@ const failOf = (e) => (e instanceof AuthError ? refuse(401, "auth", "Sign in aga
   : e instanceof PermissionError || e instanceof GovernanceError ? refuse(403, "permission", "Your role cannot read or write these records, so nothing was imported.")
   : refuse(502, "import_read_failed", "What the hospital already holds could not be read, so nothing was imported."));
 
-/** Marks each create line matched, duplicate or a repeat, against the store and the rest of the file. Returns { partial }. */
-async function checkAgainstStore(request, env, ctx, kind, rows) {
-  const lines = rows.filter((r) => r.status === "create");
+/** Marks each create line a repeat against the WHOLE file (so a repeat across two runs is caught), then matched or
+ * duplicate against the store for the rows of this run only. Returns { namePoolPartial }. */
+async function checkAgainstStore(request, env, ctx, kind, allRows, rows) {
+  const lines = allRows.filter((r) => r.status === "create");
   const repeat = (keyOf, why) => {
     const first = new Map();
     for (const r of lines) {
@@ -159,32 +163,40 @@ async function checkAgainstStore(request, env, ctx, kind, rows) {
   };
   if (kind === "prices") {
     repeat((r) => `${r.item.kind}|${(r.item.code || r.item.name).toUpperCase()}|${str(r.item.ward).toUpperCase()}`, "name");
+    /* The whole Price list (BILL.listTariff pages; one it cannot read in full throws, and nothing is imported). */
     const have = await ctx.prices.list();
-    for (const r of lines) {
+    for (const r of rows) {
       if (r.status !== "create") continue;
       const hit = have.find((t) => t.kind === r.item.kind && str(t.ward).toUpperCase() === str(r.item.ward).toUpperCase()
         && (r.item.code ? str(t.code).toUpperCase() === r.item.code.toUpperCase() : str(t.name).toUpperCase() === r.item.name.toUpperCase()));
       if (hit) Object.assign(r, { status: "matched", existing: { name: hit.name, code: hit.code || "", price: hit.price } });
     }
-    return { partial: have.length >= LIST_CAP };
+    return {};
   }
   if (kind === "vendors") {
     repeat((r) => r.vendor.id, "name");
+    /* A supplier's id is its name, so each row is looked up by id: no roster, no ceiling. A history that could not be
+     * read is an error, never "not here". */
     const svc = await openSvc(request, env, ctx, "record:read");
-    const have = (await svc.list("Vendor", LIST_CAP)) || [];
-    const ids = new Set(have.filter(Boolean).map((v) => v.id));
-    for (const r of lines) if (r.status === "create" && ids.has(r.vendor.id)) Object.assign(r, { status: "matched", existing: { name: r.vendor.name } });
-    return { partial: have.length >= LIST_CAP };
+    const live = rows.filter((r) => r.status === "create");
+    const found = live.length ? await svc.histories("Vendor", live.map((r) => r.vendor.id)) : new Map();
+    for (const r of live) {
+      const h = found.get(r.vendor.id);
+      if (h === null || h === undefined) throw new Error("vendor_unreadable");
+      if (h.length) Object.assign(r, { status: "matched", existing: { name: r.vendor.name } });
+    }
+    return {};
   }
   // patients
   repeat((r) => r.legacyMrn.toUpperCase(), "legacyMrn");
   repeat((r) => r.patient.mobile, "mobile");
   const svc = await openSvc(request, env, ctx, "record:read");
-  const live = lines.filter((r) => r.status === "create");
+  const live = rows.filter((r) => r.status === "create");
   const indexed = live.length ? await svc.findPatientsByIdentifier({ identifiers: live.map((r) => ({ system: "legacy-mrn", value: r.legacyMrn })) }) : [];
   const byLegacy = new Map();
   for (const p of indexed || []) for (const i of p.identifiers || []) if (i && i.system === "legacy-mrn") byLegacy.set(str(i.value).toUpperCase(), p);
-  const pool = (await svc.list("Patient", NAME_POOL)) || [];
+  // The NEWEST patients, as the screen says; the list was oldest first, so a recent registration was never compared.
+  const pool = (await svc.list("Patient", NAME_POOL, { newest: true })) || [];
   for (const r of live) {
     const known = byLegacy.get(r.legacyMrn.toUpperCase());
     if (known) { Object.assign(r, { status: "matched", existing: { mrn: known.mrn } }); continue; }
@@ -196,7 +208,7 @@ async function checkAgainstStore(request, env, ctx, kind, rows) {
       .find((h) => { const agreed = (h.match.breakdown || []).filter((f) => f.agreed).map((f) => f.field); return agreed.includes("name") && agreed.includes("dob"); });
     if (hit) Object.assign(r, { status: "duplicate", existing: { mrn: hit.patient.mrn }, reason: "A patient with the same name and date of birth is already registered." });
   }
-  return { partial: false, namePoolPartial: pool.length >= NAME_POOL };
+  return { namePoolPartial: pool.length >= NAME_POOL };
 }
 
 /**
@@ -214,35 +226,39 @@ async function importLegacy(request, env, ctx) {
   if (csv.length > MAX_CSV_BYTES) return refuse(413, "csv_too_large", "The file is larger than 2 MB. Split it.");
   const lines = parseCsv(csv).filter((l) => l.some((x) => str(x)));
   const cap = ROW_CAP[kind], dataRows = Math.max(0, lines.length - 1);
-  if (dataRows > cap) return refuse(413, "too_many_rows", `The file has ${dataRows} rows. One run takes at most ${cap}; split the file.`, { rowCap: cap });
   const mp = ctx.mapping;
   if (!mp || typeof mp !== "object") {
     // What the columns look like, so a person can map them. Aadhaar-shaped values are masked even here.
     const mask = (x) => (AADHAAR.test(str(x)) ? "XXXX XXXX XXXX" : str(x).slice(0, 60));
     return { ok: true, step: "map", kind, fields: FIELDS[kind], headers: (lines[0] || []).map(mask), sample: lines.slice(1, 4).map((l) => l.map(mask)), rowCount: dataRows, rowCap: cap };
   }
+  const run = ctx.run && typeof ctx.run === "object" ? { from: Number(ctx.run.from), to: Number(ctx.run.to) } : { from: 0, to: dataRows };
+  if (ctx.run && (!Number.isInteger(run.from) || !Number.isInteger(run.to) || run.from < 0 || run.to > dataRows || run.from >= run.to)) {
+    return refuse(422, "bad_run", "The part of the file to run is not within the file. Read the file again; nothing was imported.", { rowCount: dataRows });
+  }
+  if (run.to - run.from > cap) return refuse(413, "too_many_rows", `This run has ${run.to - run.from} rows. One run takes at most ${cap}.`, { rowCap: cap, rowCount: dataRows });
   const missing = FIELDS[kind].required.filter((f) => mp[f] === undefined || mp[f] === null || mp[f] === "");
   if (missing.length) return refuse(422, "mapping_incomplete", `Choose a column for: ${missing.join(", ")}.`, { missing });
   const dateOrder = ["ymd", "dmy", "mdy"].includes(str(mp.dateOrder)) ? str(mp.dateOrder) : "dmy";
   const fields = [...FIELDS[kind].required, ...FIELDS[kind].optional];
   const rowCtx = { dateOrder, nowMs: Number(ctx.nowMs) || Date.now(), region: ctx.region };
-  const rows = lines.slice(1).map((l, i) => {
+  const allRows = lines.slice(1).map((l, i) => {
     const cells = cellsOf(l, mp, fields);
     return kind === "patients" ? patientRow(i + 2, cells, rowCtx) : kind === "prices" ? priceRow(i + 2, cells) : vendorRow(i + 2, cells);
   });
+  const rows = allRows.slice(run.from, run.to);
 
   let check;
-  try { check = await checkAgainstStore(request, env, ctx, kind, rows); }
+  try { check = await checkAgainstStore(request, env, ctx, kind, allRows, rows); }
   catch (e) { return failOf(e); }
   const creates = rows.filter((r) => r.status === "create");
   const count = (s) => rows.filter((r) => r.status === s).length;
   const planId = await sha16(kind + "\n" + creates.map((r) => `${r.row}|${r.label}`).join("\n"));
-  const report = { kind, rowCap: cap, planId, counts: { create: creates.length, matched: count("matched"), duplicate: count("duplicate"), invalid: count("invalid") },
+  const report = { kind, rowCap: cap, rowCount: dataRows, run, planId, counts: { create: creates.length, matched: count("matched"), duplicate: count("duplicate"), invalid: count("invalid") },
     rows: rows.map((r) => ({ row: r.row, status: r.status, label: r.label, ...(r.field ? { field: r.field } : {}), ...(r.reason ? { reason: r.reason } : {}), ...(r.existing ? { existing: r.existing } : {}) })),
-    partial: !!check.partial, ...(check.namePoolPartial ? { namePoolPartial: true } : {}) };
+    ...(check.namePoolPartial ? { namePoolPartial: true } : {}) };
   if (ctx.commit !== true) return { ok: true, step: "preview", ...report };
 
-  if (check.partial) return { ...refuse(409, "store_too_large_to_check", "What is already held could not be read in full, so matches cannot be ruled out and nothing was imported."), ...report };
   if (Number(ctx.confirmCount) !== creates.length || str(ctx.planId) !== planId) return { ...refuse(409, "preview_changed", "What would be imported changed since the dry run. Run the dry run again; nothing was imported."), ...report };
   if (!creates.length) return { ok: true, step: "done", written: 0, ...report };
 

@@ -195,9 +195,12 @@ async function raisePurchaseOrder(request, env, ctx) {
       ...(str(ctx.note) ? { note: str(ctx.note) } : {}),
       /* Raised from a stores indent's back-order (stores.js): the indent it will fill, so the store can see why. */
       ...(str(ctx.indentId) ? { indentId: str(ctx.indentId) } : {}),
+      /* R3-1: the store it is bought for (free text, as a receipt's location is). Reorder drafts count what is still to
+       * arrive only against this store; an order that names none counts against every store holding the item. */
+      ...(str(ctx.location) ? { location: str(ctx.location) } : {}),
     };
     const out = await svc.put(po, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, purchaseOrderId: id, vendor, lines, totalPaise: poTotalPaise(po),
+    return { ...base, ok: true, written: 1, purchaseOrderId: id, vendor, lines, totalPaise: poTotalPaise(po), location: po.location || null,
       /* Said on the way out, because an order that looks placed and is only raised is how a ward
        * ends up waiting for stock nobody ever bought. */
       state: "awaiting-approval",
@@ -338,6 +341,7 @@ function ordersFrom(pos, moves, verifs, ctx) {
     const approval = chain.length ? chainState(chain, want) : { state: "none", approvals: 0, required: want, approvers: [] };
     return { purchaseOrderId: id, vendor: str(po.vendor), raisedBy: str(po.raisedBy), raisedAt: str(po.raisedAt),
       ...(str(po.indentId) ? { indentId: str(po.indentId) } : {}),
+      location: str(po.location) || null,
       totalPaise: poTotalPaise(po), ...orderState(po, mine, approval), approval };
   }).sort((a, b) => str(b.raisedAt).localeCompare(str(a.raisedAt)));
 }
@@ -499,11 +503,12 @@ function readReorderPolicy(wsqCfg) {
 }
 
 /**
- * PURE. One draft per (item, store, unit). movements/dispenses as stock.js reads them; onOrder: Map "ITEM|UNIT" -> quantity
- * still to arrive on orders that are not cancelled, rejected or received (an order carries no store, so it counts
- * against each store holding that item, and the screen says so).
+ * PURE. One draft per (item, store, unit). movements/dispenses as stock.js reads them. What is still to arrive on orders
+ * that are not cancelled, rejected or received: onOrderAt Map "ITEM|STORE|UNIT" for orders naming a store, counted only
+ * against that store; onOrder Map "ITEM|UNIT" for orders naming none, counted against each store holding the item
+ * (onOrderNoStore on the row, so the screen can say so).
  */
-function reorderSuggestionsFrom({ movements, dispenses, onOrder, policy, now }) {
+function reorderSuggestionsFrom({ movements, dispenses, onOrder, onOrderAt, policy, now }) {
   const nowMs = Date.parse(str(now)) || Date.now();
   const since = nowMs - policy.windowDays * DAY_MS;
   const { levels } = levelsFrom(movements, dispenses);
@@ -539,8 +544,9 @@ function reorderSuggestionsFrom({ movements, dispenses, onOrder, policy, now }) 
   return levels.map((r) => {
     const s = stat.get(k3(r.code, r.location, r.unit)) || { first: Infinity, used: 0 };
     const daysOfData = Number.isFinite(s.first) ? Math.floor((nowMs - s.first) / DAY_MS) : 0;
-    const ordered = (onOrder && onOrder.get(`${key(r.code)}|${key(r.unit)}`)) || 0;
-    const row = { code: r.code, display: r.display, location: r.location, unit: r.unit, level: r.level, onOrder: ordered, daysOfData, used: s.used,
+    const noStore = (onOrder && onOrder.get(`${key(r.code)}|${key(r.unit)}`)) || 0;
+    const ordered = ((onOrderAt && onOrderAt.get(k3(r.code, r.location, r.unit))) || 0) + noStore;
+    const row = { code: r.code, display: r.display, location: r.location, unit: r.unit, level: r.level, onOrder: ordered, ...(noStore ? { onOrderNoStore: noStore } : {}), daysOfData, used: s.used,
       windowDays: policy.windowDays, leadTimeDays: policy.leadTimeDays, safetyDays: policy.safetyDays };
     if (r.level < 0) return { ...row, refused: "negative_level" };
     if (daysOfData < policy.minDataDays) return { ...row, refused: "insufficient_data", minDataDays: policy.minDataDays };
@@ -571,12 +577,16 @@ async function reorderSuggestions(request, env, ctx) {
   if ((moves || []).length >= 1000 || (dispenses || []).length >= 1000 || (pos || []).length >= 200) {
     return { ...base, ok: false, status: 409, error: "too_many_records", detail: "More stock or order records exist than can be read at once, so usage cannot be worked out safely. No suggestion was made.", suggestions: [] };
   }
-  const onOrder = new Map();
+  const onOrder = new Map(), onOrderAt = new Map();
   for (const o of ordersFrom((pos || []).filter(Boolean), (moves || []).filter((m) => m && str(m.purchaseOrderId)), (verifs || []).filter(Boolean), ctx)) {
     if (!["open", "part-received", "awaiting-approval"].includes(o.state)) continue;
-    for (const l of o.lines) if (l.outstanding > 0) { const k = `${key(l.item)}|${key(l.unit)}`; onOrder.set(k, (onOrder.get(k) || 0) + l.outstanding); }
+    for (const l of o.lines) {
+      if (!(l.outstanding > 0)) continue;
+      const [map, k] = o.location ? [onOrderAt, `${key(l.item)}|${key(o.location)}|${key(l.unit)}`] : [onOrder, `${key(l.item)}|${key(l.unit)}`];
+      map.set(k, (map.get(k) || 0) + l.outstanding);
+    }
   }
-  let suggestions = reorderSuggestionsFrom({ movements: (moves || []).filter(Boolean), dispenses: (dispenses || []).filter(Boolean), onOrder, policy: ctx.policy, now: ctx.now });
+  let suggestions = reorderSuggestionsFrom({ movements: (moves || []).filter(Boolean), dispenses: (dispenses || []).filter(Boolean), onOrder, onOrderAt, policy: ctx.policy, now: ctx.now });
   if (ctx.storesOnly) { const codes = new Set((items || []).map((i) => key(i && i.code))); suggestions = suggestions.filter((r) => codes.has(key(r.code))); }
   return { ...base, ok: true, configured: true, policy: ctx.policy, suggestions, draft: true };
 }

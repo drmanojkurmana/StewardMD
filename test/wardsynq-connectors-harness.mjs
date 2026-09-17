@@ -14,10 +14,14 @@ mock.module("../functions/_fbfirestore.js", {
   namedExports: {
     fsGet: async (_e, path) => { const d = docs.get(path); return d ? { id: path, name: path, fields: { ...d.fields }, updateTime: d.updateTime } : null; },
     fsQuery: async (_e, coll, opts) => {
-      const where = opts && opts.where, limit = (opts && opts.limit) || 100, out = [];
-      for (const [path, d] of docs) {
+      // Equality filters (one or an AND array), and paging by name as Firestore does when orderByName/startAfter is asked.
+      const where = [].concat((opts && opts.where) || []), limit = (opts && opts.limit) || 100, out = [];
+      const byName = opts && (opts.orderByName || opts.startAfter);
+      const entries = byName ? [...docs].sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)) : docs;
+      for (const [path, d] of entries) {
         if (!path.startsWith(coll + "/")) continue;
-        if (where && String(d.fields[where.field]) !== String(where.value)) continue;
+        if (opts && opts.startAfter && path <= opts.startAfter) continue;
+        if (where.some((w) => String(d.fields[w.field]) !== String(w.value))) continue;
         out.push({ id: path.slice(coll.length + 1), name: path, fields: { ...d.fields }, updateTime: d.updateTime });
         if (out.length >= limit) break;
       }

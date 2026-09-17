@@ -9846,7 +9846,6 @@
     "site.admin.import.notInFile": "ఫైల్‌లో లేదు",
     "site.admin.import.column": "కాలమ్ {n}",
     "site.admin.import.mapTitle": "కాలమ్‌లను మ్యాచ్ చేయండి",
-    "site.admin.import.rows": "ఫైల్‌లో {n} రోలు ఉన్నాయి. ఒక రన్ గరిష్టంగా {cap} తీసుకుంటుంది; పెద్ద ఫైల్‌ను విడదీయండి.",
     "site.admin.import.required": "(తప్పనిసరి)",
     "site.admin.import.dateOrder": "ఫైల్‌లోని తేదీలు ఇలా రాయబడ్డాయి",
     "site.admin.import.dmy": "రోజు/నెలా/సంవత్సరం",
@@ -9866,7 +9865,6 @@
     "site.admin.import.newMrn": "MR నంబర్ {mrn}",
     "site.admin.import.existingPrice": "జాబితాలోని ధర: రూ {price}",
     "site.admin.import.commit": "ఈ {n} వరుసలను ఇంపోర్ట్ చేయండి",
-    "site.admin.import.partial": "ఇప్పటికే ఉన్న డేటాను పూర్తిగా చదవలేకపోయాము, కాబట్టి ఈ ఫైల్‌ను ఇంపోర్ట్ చేయడం కుదరదు.",
     "site.admin.import.chooseFile": "మొదట CSV ఫైల్‌ను ఎంచుకోండి."
   };
 

@@ -285,7 +285,7 @@
       }).join("");
     };
     h += '<div class="card"><h2>' + esc(T(c, "site.admin.import.mapTitle", "Match the columns")) + "</h2>" +
-      '<p class="quiet">' + esc(T(c, "site.admin.import.rows", "{n} rows in the file. One run takes at most {cap}; split a larger file.", { n: m.rowCount, cap: m.rowCap })) + "</p><div class=\"row\">" +
+      '<p class="quiet">' + esc(T(c, "site.admin.import.rowsRuns", "{n} rows in the file. They are checked and imported in {runs} parts of at most {cap} rows each, one after another.", { n: m.rowCount, cap: m.rowCap, runs: importRuns(m.rowCount, m.rowCap).length })) + "</p><div class=\"row\">" +
       m.fields.required.concat(m.fields.optional).map(function (f) {
         var req = m.fields.required.indexOf(f) >= 0;
         return '<label class="f"><span>' + esc(importFieldLabel(c, f)) + (req ? " " + esc(T(c, "site.admin.import.required", "(required)")) : "") + '</span><select data-imp-field="' + f + '">' + opts(f) + "</select></label>";
@@ -300,6 +300,7 @@
     if (pv === false) return h + '<div class="msg err">' + esc(T(c, "site.admin.import.failed", "The dry run could not be completed. Nothing was imported.")) + "</div></div>";
     if (!pv.ok && !pv.rows) return h + '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div></div>";
     if (!pv.ok) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+    if (pv.stopped) h += '<div class="msg err">' + esc(T(c, "site.admin.import.stopped", "{n} rows were imported before part {part} of {parts} stopped. Run the dry run again: what was imported shows as already here, and importing adds only what is missing.", pv.stopped)) + "</div>";
     var n = pv.counts || {};
     if (pv.step === "done" && pv.ok) h += '<div class="msg ok">' + esc(T(c, "site.admin.import.done", "Imported {n}. Every row below is as it was saved.", { n: pv.written })) + "</div>";
     h += "<p>" + [["create", "ok"], ["matched", ""], ["duplicate", "warn"], ["invalid", "stop"]].map(function (x) {
@@ -316,13 +317,27 @@
         return '<tr><td class="mono">' + esc(String(r.row)) + "</td><td>" + EN(c, esc(r.label || "")) + "</td><td>" + esc(importStatusLabel(c, r.status)) + "</td><td>" + why + "</td></tr>";
       }).join("") + "</tbody></table></div>";
     if (pv.step === "preview" && pv.ok) {
-      h += n.create ? '<button type="button" class="btn" data-imp="commit" data-count="' + esc(String(n.create)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.import.commit", "Import these {n} rows", { n: n.create })) + "</button>" +
-        (pv.partial ? '<div class="msg err">' + esc(T(c, "site.admin.import.partial", "What is already held could not be read in full, so this file cannot be imported.")) + "</div>" : "")
+      h += n.create ? '<button type="button" class="btn" data-imp="commit" data-count="' + esc(String(n.create)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.import.commit", "Import these {n} rows", { n: n.create })) + "</button>"
         : '<p class="quiet">' + esc(T(c, "site.admin.import.nothing", "Nothing in this file would be added.")) + "</p>";
     }
     return h + '<div id="admImpDoneMsg" aria-live="polite"></div></div>';
   }
   WSQ._importHtml = importHtml;
+  /* R3-1: a file larger than one run is checked and imported in successive runs of at most rowCap rows (the server's
+   * `run`), each with its own dry-run plan. The parts' reports are shown as one; row numbers are the file's own. */
+  function importRuns(rowCount, cap) {
+    var out = [], n = Number(rowCount) || 0, k = Number(cap) || 1;
+    for (var f = 0; f < n; f += k) out.push({ from: f, to: Math.min(n, f + k) });
+    return out;
+  }
+  function importMerge(parts) {
+    var first = parts[0] || {}, counts = { create: 0, matched: 0, duplicate: 0, invalid: 0 }, rows = [];
+    parts.forEach(function (p) { Object.keys(counts).forEach(function (k) { counts[k] += (p.counts && p.counts[k]) || 0; }); rows = rows.concat(p.rows || []); });
+    return { ok: true, step: "preview", kind: first.kind, rowCount: first.rowCount, rowCap: first.rowCap, counts: counts, rows: rows,
+      planId: parts.map(function (p) { return p.planId; }).join(","), namePoolPartial: parts.some(function (p) { return p.namePoolPartial; }),
+      runs: parts.map(function (p) { return { run: p.run, planId: p.planId, create: (p.counts && p.counts.create) || 0 }; }) };
+  }
+  WSQ._importRuns = importRuns; WSQ._importMerge = importMerge;
   function renderImport(c, body) {
     var s = c.state._import = c.state._import || { kind: "patients", csv: "", map: null, mapping: null, preview: null };
     var draw = function () { body.innerHTML = importHtml(c, s); };
@@ -354,13 +369,44 @@
         reader.readAsText(file);
         return;
       }
-      if (act === "dry" || act === "commit") {
-        if (act === "dry") s.mapping = mapping();
-        b.disabled = true;
-        var extra = { mapping: s.mapping };
-        if (act === "commit") { extra.commit = true; extra.confirmCount = Number(b.getAttribute("data-count")); extra.planId = b.getAttribute("data-plan"); }
-        send(extra).then(function (r) { s.preview = r || false; draw(); }, function () { s.preview = false; draw(); });
+      if (act === "dry") {
+        s.mapping = mapping(); b.disabled = true;
+        var runs = importRuns(s.map.rowCount, s.map.rowCap), parts = [];
+        var dryNext = function (i) {
+          if (i >= runs.length) { s.preview = importMerge(parts); draw(); return; }
+          progress(i, runs.length);
+          send({ mapping: s.mapping, run: runs[i] }).then(function (r) {
+            if (!r || !r.ok) { s.preview = r || false; draw(); return; }
+            parts.push(r); dryNext(i + 1);
+          }, function () { s.preview = false; draw(); });
+        };
+        dryNext(0);
+        return;
       }
+      if (act === "commit") {
+        b.disabled = true;
+        var pv = s.preview, todo = (pv.runs || []).filter(function (x) { return x.create > 0; }), written = 0;
+        var byRow = {}; pv.rows.forEach(function (r, i) { byRow[r.row] = i; });
+        var keep = function (r) { ((r && r.rows) || []).forEach(function (x) { if (byRow[x.row] != null) pv.rows[byRow[x.row]] = x; }); };
+        var commitNext = function (i) {
+          if (i >= todo.length) { pv.step = "done"; pv.written = written; s.preview = pv; draw(); return; }
+          progress(i, todo.length);
+          var stop = function (r) {
+            s.preview = { ok: false, message: r ? r.message : "", error: r ? r.error : "", counts: pv.counts, rows: pv.rows, stopped: { n: written, part: i + 1, parts: todo.length } };
+            draw();
+          };
+          send({ mapping: s.mapping, run: todo[i].run, commit: true, confirmCount: todo[i].create, planId: todo[i].planId }).then(function (r) {
+            written += (r && Number(r.written)) || 0; keep(r);
+            if (!r || !r.ok) return stop(r);
+            commitNext(i + 1);
+          }, function () { stop(null); });
+        };
+        commitNext(0);
+      }
+    };
+    var progress = function (i, n) {
+      var m = document.getElementById("admImpMsg");
+      if (m) m.innerHTML = '<p class="quiet">' + c.esc(T(c, "site.admin.import.part", "Working on part {i} of {n}. Keep this page open.", { i: i + 1, n: n })) + "</p>";
     };
     draw();
   }

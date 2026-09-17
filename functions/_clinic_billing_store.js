@@ -76,24 +76,48 @@ export async function createOrder(env, orgId, o, actor) {
   await qAudit(env, { hospitalId: orgId, ticketId: v.order.patientId, actor: actor || "doctor", action: "order_create", meta: v.order.kind });
   return { ok: true, id };
 }
+/* EVERY matching row, in pages ordered by document name. A single query used to be read as the whole answer (500
+ * orders of the org, 500 Price list rows), so past that size new work vanished from a station and priced items billed
+ * as "no price set". maxRows is the hard bound: past it the answer carries truncated:true and the caller decides
+ * whether a partial answer can be shown (a station queue, flagged on screen) or must fail (the Price list). */
+export const PAGE_SIZE = 500;
+export const QUEUE_CAP = 5000;
+export const TARIFF_CAP = 20000;
+export async function readAll(env, collectionId, where, maxRows) {
+  const rows = [];
+  let after = null;
+  for (;;) {
+    const page = (await fsQuery(env, collectionId, { where, limit: PAGE_SIZE, orderByName: true, ...(after ? { startAfter: after } : {}) })) || [];
+    rows.push(...page);
+    if (rows.length > maxRows) return { rows: rows.slice(0, maxRows), truncated: true };
+    if (page.length < PAGE_SIZE) return { rows, truncated: false };
+    after = page[page.length - 1].name;
+  }
+}
+const asOrders = (rows) => rows.map((r) => Object.assign({ id: r.id }, r.fields));
+
 export async function ordersForPatient(env, orgId, patientId, status) {
-  const rows = await fsQuery(env, "q_orders", { where: { field: "patientId", value: patientId }, limit: 200 });
-  let list = (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter((o) => o.orgId === orgId);
+  // A patient's whole history, not the first 200 orders: a regular patient's newest unbilled order was missed.
+  const where = [{ field: "patientId", value: patientId }, ...(status ? [{ field: "status", value: status }] : [])];
+  const { rows, truncated } = await readAll(env, "q_orders", where, QUEUE_CAP);
+  if (truncated) throw Object.assign(new Error("orders_too_many"), { status: 507 });
+  let list = asOrders(rows).filter((o) => o.orgId === orgId);
   if (status) list = list.filter((o) => o.status === status);
   return list;
 }
-// billing station inbox: every 'ordered' order in the org (fsQuery is single-field, so filter status in JS).
+/* Billing station inbox: every 'ordered' order in the org, asked for by status (orgId AND status, both equality, so no
+ * composite index) instead of the first 500 orders the org ever raised filtered afterwards. { orders, truncated }. */
 export async function billingQueue(env, orgId) {
-  const rows = await fsQuery(env, "q_orders", { where: { field: "orgId", value: orgId }, limit: 500 });
-  return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter((o) => o.status === "ordered");
+  const { rows, truncated } = await readAll(env, "q_orders", [{ field: "orgId", value: orgId }, { field: "status", value: "ordered" }], QUEUE_CAP);
+  return { orders: asOrders(rows).filter((o) => o.orgId === orgId && o.status === "ordered"), truncated };
 }
 
 // ---- pharmacy station ----------------------------------------------------------------------
 // What the pharmacy still owes patients: medication orders that are PAID but not yet handed over.
-// Investigations and services never appear here - they have no dispensing step.
+// Investigations and services never appear here - they have no dispensing step. { orders, truncated }.
 export async function pharmacyQueue(env, orgId) {
-  const rows = await fsQuery(env, "q_orders", { where: { field: "orgId", value: orgId }, limit: 500 });
-  return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter(isDispensable);
+  const { rows, truncated } = await readAll(env, "q_orders", [{ field: "orgId", value: orgId }, { field: "status", value: "paid" }, { field: "kind", value: "medication" }], QUEUE_CAP);
+  return { orders: asOrders(rows).filter((o) => o.orgId === orgId && isDispensable(o)), truncated };
 }
 // Hand the medicines over. Guarded by the state machine rather than by the pharmacist remembering:
 // only paid + medication can reach "dispensed", so an unpaid order cannot be released.
@@ -109,9 +133,12 @@ export async function dispenseOrder(env, orgId, orderId, actor) {
 }
 
 // ---- tariff (price catalog, integer paise) ----
+/* The WHOLE Price list. Every bill prices from it, so a partial list is never returned: past TARIFF_CAP rows this throws,
+ * and the screens say the Price list could not be read rather than billing the missing rows as "no price set". */
 export async function listTariff(env, orgId) {
-  const rows = await fsQuery(env, "q_tariff", { where: { field: "orgId", value: orgId }, limit: 500 });
-  return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter((t) => t.active !== false);
+  const { rows, truncated } = await readAll(env, "q_tariff", { field: "orgId", value: orgId }, TARIFF_CAP);
+  if (truncated) throw Object.assign(new Error("tariff_too_large"), { status: 507, detail: `More than ${TARIFF_CAP} Price list rows.` });
+  return asOrders(rows).filter((t) => t.orgId === orgId && t.active !== false);
 }
 export async function upsertTariff(env, orgId, item, actor) {
   const v = validateTariff(item); if (!v.ok) return v;

@@ -222,3 +222,17 @@ test("supply chain (stores page): returns, contracts, reorder drafts and setting
   const html = X.returnsHtml(cx, SC) + X.contractsHtml(cx, SC) + X.reorderHtml(cx, REORDER) + X.policyHtml(cx, { ok: true, policy: REORDER.policy });
   assert.deepEqual(leftovers(html, ["Gloves medium", "Acme Supplies", "GLOVE-M", "GAUZE", "Gauze", "ORS", "CS", "Torn", "DN-7", "box", "roll", "12 box", "40 roll", "50 sachet", "5 box", "4 box", "Gloves medium · 2026-09-10 · Acme Supplies"]), []);
 });
+
+test("R3-1 stores page: an order shows the store it is for and books in there by default; on-order stock from orders naming no store is marked", () => {
+  const en = load("en"), c = ctxOf(en), S = en.win.WSQ._stores;
+  const locs = { ok: true, locations: [{ code: "CS", name: "Central store", kind: "central", active: true }, { code: "OT", name: "OT store", kind: "central", active: true }] };
+  const line = { index: 0, item: "GLOVE-M", unit: "box", ordered: 10, received: 0, outstanding: 10 };
+  const oh = S.ordersHtml(c, { ok: true, orders: [{ purchaseOrderId: "po1", indentId: "i1", vendor: "Acme", state: "open", location: "OT", lines: [line] }, { purchaseOrderId: "po2", indentId: "i2", vendor: "Acme", state: "open", lines: [line] }] }, locs);
+  assert.match(oh, /For store OT/); assert.match(oh, /Names no store/);
+  assert.match(oh, /<option value="OT" selected>/);
+  const r = S.reorderHtml(c, { ...REORDER, suggestions: [{ ...REORDER.suggestions[0], onOrder: 9, onOrderNoStore: 5 }] });
+  assert.match(r, /9 \(5 on orders naming no store\)/); assert.match(r, /counts only against that store/);
+  const xx = load("xx"), X = xx.win.WSQ._stores, cx = ctxOf(xx);
+  const html = X.ordersHtml(cx, { ok: true, orders: [{ purchaseOrderId: "po1", indentId: "i1", vendor: "Acme", state: "open", location: "OT", lines: [line] }] }, locs) + X.reorderHtml(cx, { ...REORDER, suggestions: [{ ...REORDER.suggestions[0], onOrder: 9, onOrderNoStore: 5 }] });
+  assert.deepEqual(leftovers(html, ["Acme", "GLOVE-M", "Central store", "OT store", "Gloves medium", "CS", "OT", "10 box", "12 box", "4 box", "box"]), []);
+});

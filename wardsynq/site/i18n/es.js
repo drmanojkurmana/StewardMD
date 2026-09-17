@@ -8151,7 +8151,6 @@
     "site.stores.sc.pressShow": "Presione Mostrar para generar borradores a partir del uso registrado.",
     "site.stores.sc.reorderFailed": "No se pudieron generar los borradores de reordenamiento. No interprete esto como que no hay nada para pedir.",
     "site.stores.sc.notConfigured": "Las sugerencias de reordenamiento no están configuradas. Un administrador debe configurar primero la ventana, el tiempo de entrega, los días de reserva y los días mínimos de datos.",
-    "site.stores.sc.method": "Uso diario promedio (dispensado, entregado o consumido) durante los últimos {window} días, o los días de datos si son menos, multiplicado por {lead} días de entrega más {safety} días de reserva, menos el nivel y lo que está pedido, redondeado hacia arriba. Las órdenes no especifican almacén, por lo que lo pedido cuenta para cada almacén que tenga el ítem. Es un borrador: no se pide nada hasta que alguien genere una orden de compra.",
     "site.stores.sc.noItemsToSuggest": "No hay stock registrado para procesar.",
     "site.stores.sc.onOrder": "En pedido",
     "site.stores.sc.used": "Usado",
@@ -9821,7 +9820,6 @@
     "site.admin.import.notInFile": "No está en el archivo",
     "site.admin.import.column": "Columna {n}",
     "site.admin.import.mapTitle": "Mapear las columnas",
-    "site.admin.import.rows": "{n} filas en el archivo. Una ejecución procesa como máximo {cap}; divida un archivo más grande.",
     "site.admin.import.required": "(requerido)",
     "site.admin.import.dateOrder": "Las fechas en el archivo están escritas como",
     "site.admin.import.dmy": "día/mes/año",
@@ -9841,7 +9839,6 @@
     "site.admin.import.newMrn": "Número de MR {mrn}",
     "site.admin.import.existingPrice": "Precio en la lista: Rs {price}",
     "site.admin.import.commit": "Importar estas {n} filas",
-    "site.admin.import.partial": "No se pudo leer por completo lo que ya está guardado, por lo que este archivo no se puede importar.",
     "site.admin.import.nothing": "No se agregaría nada de este archivo.",
     "site.admin.import.chooseFile": "Seleccione primero el archivo CSV."
   };

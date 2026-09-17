@@ -8155,7 +8155,6 @@
     "site.stores.sc.pressShow": "नोंदवलेल्या वापरावरून ड्राफ्ट तयार करण्यासाठी Show वर क्लिक करा.",
     "site.stores.sc.reorderFailed": "Reorder ड्राफ्ट्स तयार करता आले नाहीत. याचा अर्थ ऑर्डर करण्यासाठी काहीही नाही असा घेऊ नका.",
     "site.stores.sc.notConfigured": "Reorder सूचना कॉन्फिगर केलेल्या नाहीत. ॲडमिनिस्ट्रेटरने आधी विंडो, लीड टाइम, सेफ्टी दिवस आणि डेटाचे किमान दिवस सेट करणे आवश्यक आहे.",
-    "site.stores.sc.method": "मागील {window} दिवसांमधील सरासरी दैनंदिन वापर (डिस्पेंस केलेला, इश्यू केलेला किंवा वापरलेला), किंवा कमी दिवस असल्यास उपलब्ध डेटाचे दिवस, गुणिले {lead} लीड दिवस अधिक {safety} सेफ्टी दिवस, उणे सध्याचा स्टॉक आणि ऑन-ऑर्डर असलेला साठा, वरच्या संख्येपर्यंत राऊंड ऑफ केला जातो. ऑर्डर्समध्ये स्टोअरचे नाव नसते, त्यामुळे ऑन-ऑर्डर असलेला साठा ही आयटम असलेल्या प्रत्येक स्टोअरसाठी गणला जातो. हा एक ड्राफ्ट आहे: कोणी खरेदी ऑर्डर (purchase order) तयार करेपर्यंत काहीही ऑर्डर केले जात नाही.",
     "site.stores.sc.noItemsToSuggest": "गणना करण्यासाठी कोणतीही स्टॉक नोंद उपलब्ध नाही.",
     "site.stores.sc.onOrder": "ऑन ऑर्डर",
     "site.stores.sc.used": "वापरलेले",
@@ -9851,7 +9850,6 @@
     "site.admin.import.notInFile": "फाईलमध्ये नाही",
     "site.admin.import.column": "कॉलम {n}",
     "site.admin.import.mapTitle": "कॉलम जुळवा (Match columns)",
-    "site.admin.import.rows": "फाईलमध्ये {n} ओळी आहेत. एका रनमध्ये जास्तीत जास्त {cap} घेता येतात; मोठी फाईल असल्यास तिचे भाग करा.",
     "site.admin.import.required": "(आवश्यक)",
     "site.admin.import.dateOrder": "फाईलमधील तारखा या स्वरूपात लिहिल्या आहेत",
     "site.admin.import.dmy": "दिवस/महिना/वर्ष",
@@ -9871,7 +9869,6 @@
     "site.admin.import.newMrn": "MR नंबर {mrn}",
     "site.admin.import.existingPrice": "यादीतील किंमत: Rs {price}",
     "site.admin.import.commit": "हे {n} रो (rows) इम्पोर्ट करा",
-    "site.admin.import.partial": "पूर्वी साठवलेला डेटा पूर्णपणे वाचता आला नाही, त्यामुळे ही फाइल इंपोर्ट करता येणार नाही.",
     "site.admin.import.nothing": "या फाइलमधील काहीही जोडले जाणार नाही.",
     "site.admin.import.chooseFile": "प्रथम CSV टाईल निवडा."
   };
