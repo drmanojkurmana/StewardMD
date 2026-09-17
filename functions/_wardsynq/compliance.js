@@ -154,7 +154,17 @@ const NABH_SOURCES = {
       const sum = mins.reduce((a, b) => a + b, 0);
       return { numerator: round(sum, 1), denominator: mins.length, value: mins.length ? round(sum / mins.length, 1) : null };
     } },
-  21: { missing: "Nurses on duty per shift against occupied beds; the rota is not linked to bed occupancy." },
+  /* P4 nursing-staffing (2026-09-17): from the shift staffing recorded on the Staff rota screen (nurse-staffing.js), which
+   * counts the nurses on duty with the in-charge left out and the occupied beds at the moment it was recorded. */
+  21: { needs: ["StaffingShift"], source: "Shifts whose staffing was recorded in the month: nurses on duty (the in-charge not counted) over occupied beds at the time of recording, ICUs and wards also shown apart by the hospital's unit types.",
+    note: "Only recorded shifts are counted; the number recorded is shown beside the value. Ventilated and non-ventilated ICU patients are not told apart.",
+    compute: (r, w) => {
+      const recs = r.StaffingShift.filter((x) => inW(x.recordedAt, w) && Number.isFinite(Number(x.nursesCounted)) && Number.isFinite(Number(x.occupiedBeds)));
+      const byUnitType = {};
+      for (const x of recs) { const k = str(x.unitType) || "unknown"; byUnitType[k] = byUnitType[k] || { nurses: 0, beds: 0, shifts: 0 }; byUnitType[k].nurses += Number(x.nursesCounted); byUnitType[k].beds += Number(x.occupiedBeds); byUnitType[k].shifts++; }
+      for (const k of Object.keys(byUnitType)) byUnitType[k].value = byUnitType[k].beds > 0 ? round(byUnitType[k].nurses / byUnitType[k].beds, 2) : null;
+      return { ...val(recs.reduce((a, x) => a + Number(x.nursesCounted), 0), recs.reduce((a, x) => a + Number(x.occupiedBeds), 0), 1), shiftsRecorded: recs.length, byUnitType };
+    } },
   22: { missing: "Outpatient arrival and consultation start times; these live in the OPD queue, not in the clinical record." },
   23: { missing: "The time a patient arrived for a diagnostic test and the time it started." },
   24: { missing: "The time discharge was advised and the time the patient left; neither is recorded separately." },
@@ -171,13 +181,24 @@ const NABH_SOURCES = {
   28: { needs: ["Encounter", "IncidentReport", "WoundAssessment"], source: "Confirmed fall incidents per 1000 occupied bed-days (quality.js).", qs: "falls" },
   29: { needs: ["IncidentReport"], source: "Incident reports in the month whose severity is near-miss, over all incident reports in the month.",
     compute: (r, w) => { const inc = r.IncidentReport.filter((x) => inW(x.reportedAt || x.when, w)); return val(inc.filter((x) => x.severity === "near-miss").length, inc.length, 100); } },
-  30: { missing: "Needlestick injury reports; staff injuries are not an incident category." },
+  30: { needs: ["StaffInjury", "Encounter"], source: "Needlestick and sharps injuries reported in the month (Staff rota screen), over the average occupied beds: inpatient bed-days in the month divided by its days so far.",
+    note: "The month's own rate; NABH reports it cumulatively year to date. Splash and other injuries are reported but not counted here.",
+    compute: (r, w) => {
+      const n = r.StaffInjury.filter((x) => (x.kind === "needlestick" || x.kind === "sharp") && inW(x.occurredAt, w)).length;
+      const end = Math.min(w.toMs, w.nowMs != null ? w.nowMs : w.toMs), days = Math.max(0, (end - w.fromMs) / DAY);
+      const bedDays = r.Encounter.filter((e) => e && INPATIENT.has(e.class) && e.status !== "cancelled" && ms(e.periodStart) != null)
+        .reduce((a, e) => a + Math.max(0, Math.min(ms(e.periodEnd) != null ? ms(e.periodEnd) : end, end) - Math.max(ms(e.periodStart), w.fromMs)) / DAY, 0);
+      const avg = days > 0 ? round(bedDays / days, 2) : 0;
+      return { numerator: n, denominator: avg, value: avg > 0 ? round((n / avg) * 1000, 2) : null };
+    } },
   31: { needs: ["QualityAudit"], source: "Handover audits in the month: each audit is one handover, appropriate when no checklist item is answered no.", compute: auditCell("handover"),
     note: "The checklist is the hospital's own (for example every SBAR component filled)." },
   32: { needs: ["QualityAudit"], source: "Prescription audits in the month: each audit is one prescription, safe and rational when no checklist item is answered no.", compute: auditCell("prescription"),
     note: "The checklist is the hospital's own, per NABH's document on prescription audit." },
 };
 const NABH_TYPES = [...new Set(Object.values(NABH_SOURCES).flatMap((s) => s.needs || []))];
+/* Staff data kept outside the record service (nurse-staffing.js): the caller supplies a reader for them. */
+const STAFF_TYPES = ["StaffingShift", "StaffInjury"];
 
 /** PURE. input: { rows: {Type: [...]}, unreadable: {Type: reason}, windows } */
 function computeNabhIndicators(input) {
@@ -212,7 +233,13 @@ async function nabhIndicators(request, env, ctx) {
   if (error) return { ...base, ...error, indicators: null };
   const count = Math.min(12, Math.max(1, Number(ctx.months) || 6));
   const windows = monthWindows(Date.parse(str(ctx.now)) || Date.now(), count, ctx.utcOffsetMinutes);
-  const { rows, unreadable, truncated } = await readTypes(svc, NABH_TYPES);
+  const { rows, unreadable, truncated } = await readTypes(svc, NABH_TYPES.filter((t) => !STAFF_TYPES.includes(t)));
+  let staff = null;
+  try { staff = typeof ctx.staffRows === "function" ? await ctx.staffRows(windows.map((w) => w.month)) : null; } catch { staff = null; }
+  for (const t of STAFF_TYPES) {
+    rows[t] = (staff && staff.rows && staff.rows[t]) || [];
+    if (!staff || (staff.unreadable && staff.unreadable[t])) unreadable[t] = (staff && staff.unreadable[t]) || "not read";
+  }
   const indicators = computeNabhIndicators({ rows, unreadable, windows });
   return {
     ...base, ok: true, months: windows.map((w) => w.month), indicators,
