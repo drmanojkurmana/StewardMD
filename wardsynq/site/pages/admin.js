@@ -101,13 +101,15 @@
       ["hrAttendance", "nav.admin.hrAttendance"], ["hrCredentials", "nav.admin.hrCredentials"], ["hrTraining", "nav.admin.hrTraining"],
       ["patientComms", "nav.admin.patientComms"], ["onlineBooking", "nav.admin.onlineBooking"], ["patientFeedback", "nav.admin.patientFeedback"],
       // R2-5: patients, prices and suppliers from the system being replaced (legacy-import.js).
-      ["legacyImport", "nav.admin.legacyImport"]);
+      ["legacyImport", "nav.admin.legacyImport"],
+      // R5-3: closing orders this hospital resulted before anything closed one (order-backfill.js).
+      ["orderBackfill", "nav.admin.orderBackfill"]);
     // #/admin/tariff opens that tab: the cashier's "no price set" message links straight to the Price list (LT-30).
     // Applied once per arrival, so the tab buttons still work while the address says /tariff.
     if (st.page === "admin" && st.arg && st._adminArg !== st.arg && tabs.some(function (t) { return t[0] === st.arg; })) st._adminTab = st.arg;
     st._adminArg = st.page === "admin" ? st.arg : "";
     var tab = st._adminTab || "hospital";
-    if (["seed", "maik", "security", "health", "export", "fhir", "integrations", "bugs", "governance", "legal", "hrAttendance", "hrCredentials", "hrTraining", "patientComms", "onlineBooking", "patientFeedback", "legacyImport"].indexOf(tab) >= 0 && !c.isWardsynq()) tab = "hospital";
+    if (["seed", "maik", "security", "health", "export", "fhir", "integrations", "bugs", "governance", "legal", "hrAttendance", "hrCredentials", "hrTraining", "patientComms", "onlineBooking", "patientFeedback", "legacyImport", "orderBackfill"].indexOf(tab) >= 0 && !c.isWardsynq()) tab = "hospital";
     var navTr = c.navTr || function (k) { return k; };
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.admin.title", "Admin Center")) + '</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist" lang="' + c.esc(c.navLang || "en") + '">' + tabs.map(function (t) {
@@ -117,7 +119,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, legacyImport: renderImport, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs,
+    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, legacyImport: renderImport, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs, orderBackfill: renderOrderBackfill,
       // Privacy and compliance is its own page (pages/governance.js); the tab is the Admin Center's door to it.
       governance: function () { st._adminTab = "hospital"; WSQ.go("governance"); },
       legal: function (x, y) { return WSQ._legal.render(x, y); },
@@ -3254,6 +3256,111 @@
       var again = document.getElementById("healthRecheck");
       if (again) again.onclick = function () { WSQ.render("admin"); };
     }, function () { body.innerHTML = systemHealthHtml(c, { failed: true, message: T(c, "site.admin.err.noResponse", "No response from the server.") }); });
+  }
+
+  // ---- Close finished orders (order-backfill.js) ----------------------------------------------
+  /* Orders this hospital resulted before a released result closed anything are still open, count
+   * against the 5,000 open-order ceiling, and make the laboratory, specimen and imaging boards refuse
+   * with "too many open" until something closes them. This screen runs that job.
+   *
+   * TWO STEPS THAT CANNOT BE COLLAPSED. Check writes nothing and says what would close and why the
+   * rest would not; Close then sends back exactly the order ids that check handed over, and the
+   * server re-checks every one of them before writing. The state below is the honest middle: `ids`
+   * null = not checked yet, and a failure sets `failed` rather than leaving a count that would read
+   * as "nothing left to do".
+   */
+  function backfillHtml(c, s) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.orderBackfill.title", "Close finished orders")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.orderBackfill.intro", "Investigation orders resulted before this hospital was updated were never marked finished, so they still count as work in front of the laboratory and radiology. Checking reads the orders and writes nothing. Closing marks only the orders whose result is already on the chart; an order with no result, an imaging study with only a preliminary report, and an order another system owns are all left alone.")) + "</p>";
+    if (s.failed) {
+      h += '<div class="msg err">' + esc(T(c, "site.admin.orderBackfill.failed", "The job stopped because something could not be read or written. This is not the same as there being nothing left to do; what is reported below is only what was reached before it stopped.")) + " " + EN(c, esc(s.failMsg || "")) + "</div>";
+    }
+    if (s.busy) h += '<p><span class="spin"></span> ' + esc(s.busy) + "</p>";
+    if (s.ids === null && !s.busy && !s.failed) h += "<p>" + esc(T(c, "site.admin.orderBackfill.notCheckedYet", "Nothing has been checked yet.")) + "</p>";
+    if (s.scanned) {
+      h += "<p>" + esc(T(c, "site.admin.orderBackfill.scanned", "Open orders looked at: {n}", { n: s.scanned })) + "<br>" +
+        "<b>" + esc(T(c, "site.admin.orderBackfill.remaining", "Still to close: {n}", { n: (s.ids || []).length })) + "</b>" +
+        (s.closed ? "<br>" + esc(T(c, "site.admin.orderBackfill.closedSoFar", "Closed so far: {n}", { n: s.closed })) : "") + "</p>";
+      var reasons = [
+        ["no_report", T(c, "site.admin.orderBackfill.reason.noReport", "no result on the chart, so the test is still owed")],
+        ["report_preliminary", T(c, "site.admin.orderBackfill.reason.preliminary", "imaging read only preliminarily, so the final report is still owed")],
+        ["external_order", T(c, "site.admin.orderBackfill.reason.external", "placed by another system, which owns them")],
+        ["report_read_failed", T(c, "site.admin.orderBackfill.reason.readFailed", "their results could not be read, so nothing was decided about them")],
+        ["already_closed", T(c, "site.admin.orderBackfill.reason.alreadyClosed", "already finished, and left exactly as they are")],
+      ].filter(function (r) { return (s.stayOpen || {})[r[0]]; });
+      if (reasons.length) {
+        h += "<p>" + esc(T(c, "site.admin.orderBackfill.stayOpenLead", "Staying open:")) + '</p><ul class="quiet">' + reasons.map(function (r) {
+          return "<li>" + esc(String(s.stayOpen[r[0]])) + " " + esc(r[1]) + "</li>";
+        }).join("") + "</ul>";
+      }
+      if (s.partial) h += '<div class="msg warn">' + esc(T(c, "site.admin.orderBackfill.partial", "Some results could not be read, so this count is not the whole picture. Check again once the record store is answering.")) + "</div>";
+    }
+    if (s.doneClosing && !s.failed) {
+      h += '<div class="msg ok">' + esc(s.closed
+        ? T(c, "site.admin.orderBackfill.finished", "{n} orders are now marked finished. The laboratory, specimen and imaging boards show only current work.", { n: s.closed })
+        : T(c, "site.admin.orderBackfill.nothingToClose", "There was nothing to close. Every finished order is already marked finished.")) + "</div>";
+    }
+    h += '<div class="row"><button class="btn" type="button" id="obCheck"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.orderBackfill.check", "Check what would close")) + "</button>" +
+      ((s.ids && s.ids.length) ? '<button class="btn" type="button" id="obClose"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.orderBackfill.close", "Close {n} finished orders", { n: s.ids.length })) + "</button>" : "") +
+      "</div></div>";
+    return h;
+  }
+
+  function renderOrderBackfill(c, body) {
+    var s = { ids: null, scanned: 0, closed: 0, stayOpen: {}, busy: "", failed: false, failMsg: "", partial: false, doneClosing: false };
+    var orgQ = { orgId: c.state.orgId };
+    function paint() {
+      body.innerHTML = backfillHtml(c, s);
+      var chk = document.getElementById("obCheck"); if (chk) chk.onclick = check;
+      var cls = document.getElementById("obClose"); if (cls) cls.onclick = closeAll;
+    }
+    function stop(r) {
+      s.busy = ""; s.failed = true; s.failMsg = refusal(c, r); paint();
+    }
+    /* One batch at a time, each starting where the last one stopped: a hospital's archive is far more
+     * than one request can hold, and the server hands back the cursor for the next page. */
+    function check() {
+      s.ids = []; s.scanned = 0; s.closed = 0; s.stayOpen = {}; s.failed = false; s.partial = false; s.doneClosing = false;
+      var step = function (cursor) {
+        s.busy = T(c, "site.admin.orderBackfill.checking", "Checking orders ({n} looked at so far)...", { n: s.scanned });
+        paint();
+        return c.api("/ward/order-backfill-scan", { orgId: orgQ.orgId, cursor: cursor }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.scanned += r.scanned;
+          s.ids = s.ids.concat(r.orderIds || []);
+          Object.keys(r.stayOpen || {}).forEach(function (k) { s.stayOpen[k] = (s.stayOpen[k] || 0) + r.stayOpen[k]; });
+          if (r.partial) s.partial = true;
+          if (!r.done) return step(r.nextCursor);
+          s.busy = ""; paint();
+        }, function () { stop(null); });
+      };
+      return step(0);
+    }
+    /* Only the ids the check handed back, in the batches it handed them back in. An order the server
+     * no longer agrees about is skipped there, not here: this screen is not the authority. */
+    function closeAll() {
+      var todo = s.ids.slice(), BATCH = 100;
+      s.failed = false;
+      var step = function () {
+        if (!todo.length) { s.busy = ""; s.ids = []; s.doneClosing = true; paint(); return; }
+        s.busy = T(c, "site.admin.orderBackfill.closing", "Closing orders ({n} of {total} done)...", { n: s.closed, total: s.closed + todo.length });
+        paint();
+        var batch = todo.splice(0, BATCH);
+        return c.api("/ward/order-backfill-close", { orgId: orgQ.orgId, orderIds: batch }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.closed += r.closed;
+          // What is left to do is what is left to do: the button never offers a count already spent.
+          s.ids = todo.slice();
+          // Anything the server would not close stops the run and is said out loud, never dropped.
+          if (r.incomplete) { s.busy = ""; s.failed = true; s.failMsg = T(c, "site.admin.orderBackfill.someRefused", "{n} orders could not be closed and are listed on the server response. Check again to see where they stand.", { n: r.failures.length }); paint(); return; }
+          return step();
+        }, function () { stop(null); });
+      };
+      return step();
+    }
+    paint();
+    return check();
   }
 
   // ---- Integrations > Webhooks (P2.13) --------------------------------------------------------
