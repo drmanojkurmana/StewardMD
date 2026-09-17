@@ -581,3 +581,23 @@ test('proveView: a medications view without column headers is not proven, whatev
   assert.equal(view.proof.status, 'no-headers');
   assert.equal(view.endpoints, undefined);
 });
+
+/* A DETAIL THAT LEAVES THE SCREEN IS PROVEN BY ITS TRACE (GHIS lab result opened through a print icon
+ * renders into an off-screen print frame; nothing on screen matches, 2026-09-17). */
+test('proveView: a chained detail with no screen cells is proven when its call traces to the parent row and answers rows', async () => {
+  const labsRows = [{ parameter_long_desc: 'CBC', ServiceRenderId: '770001', episode_id: 'IP5550001' }];
+  const entries = [
+    { seq: 31, method: 'POST', url: HOST + '/Lab/Home/LabPrintSave', body: '__RequestVerificationToken=abc&Rendered_Id=770001&Episode_Id=IP5550001&Patientid=MR900001&Issue_to=', reqCt: 'application/x-www-form-urlencoded', xhr: true, status: 200, shape: { kind: 'text' } },
+    { seq: 32, method: 'POST', url: HOST + '/Lab/Home/GetPrintLabResultDetailsAuth', body: '__RequestVerificationToken=abc&Render_ID=770001&Episode_Id=IP5550001&Result_Type=a', reqCt: 'application/x-www-form-urlencoded', xhr: true, status: 200, shape: { kind: 'json', keys: ['TestName', 'Result'], rows: 2 } },
+  ];
+  const answers = { 32: { status: 200, contentType: 'application/json', text: JSON.stringify([{ TestName: 'Haemoglobin', Result: '11.2', Units: 'g/dL' }, { TestName: 'Platelets', Result: '210', Units: '10^3/uL' }]) } };
+  const view = { resourceHint: 'labs-detail', detailOf: 'labs', pathTemplate: HOST + '/Doctor/Home', rowsSelector: '#example15 tbody tr', headers: [] };
+  const { proven } = await proveView({ client: fakePage({ entries, screen: [], answers }), view, parents: [{ label: 'labs', rows: labsRows }] });
+  assert.equal(view.proof.status, 'proven');
+  assert.equal(view.proof.chained, true);
+  assert.equal(view.endpoints.length, 1);
+  assert.equal(view.endpoints[0].path, '/Lab/Home/GetPrintLabResultDetailsAuth');
+  assert.deepEqual(view.endpoints[0].params.Render_ID, { from: 'labs', field: 'ServiceRenderId' });
+  assert.equal(proven.rows.length, 2);
+  assert.ok(!/LabPrintSave/.test(JSON.stringify(view)), 'the write fired by the print icon is never kept');
+});
