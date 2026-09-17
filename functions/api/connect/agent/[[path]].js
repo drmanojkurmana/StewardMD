@@ -708,9 +708,11 @@ export async function onRequest(context) {
       if (runnerPhone) {
         sessionResp.deployment = { id: deployment.id, origins: deploymentOrigins(deployment), activeVersionId: deployment.active_version_id || null };
         /* REUSE IS ABOUT THE ADAPTER, NOT ABOUT A LEFTOVER JOB. When an approved adapter is active,
-         * every phone session reuses it unless the doctor explicitly requested purpose: "discover".
-         * Stale draft jobs from previous onboarding must never force a doctor into a 5-10 minute crawl. */
-        sessionResp.reuse = !!deployment.active_version_id && !discover;
+         * every phone session reuses it unless the doctor explicitly requested purpose: "discover"
+         * or a live onboarding job is actively running that this session needs to resume.
+         * Stale draft jobs from completed onboarding must never force a doctor into a 5-10 minute crawl. */
+        const jobBusy = !!job && ["CREATED", "AUTHENTICATED", "DISCOVERING", "COMPILING", "VALIDATING"].includes(job.state);
+        sessionResp.reuse = !!deployment.active_version_id && !discover && (body.purpose === "read" || !jobBusy);
       }
       return jsonResponse(sessionResp);
     }
