@@ -3,7 +3,7 @@
  "generated": "2026-09-17",
  "languages": {
   "es": {
-   "count": 122,
+   "count": 121,
    "keys": [
     "fb.no",
     "intake.no",
@@ -114,6 +114,7 @@
     "site.blood.retentionNote",
     "site.gov.rn.none",
     "site.admin.gst.roomValuationWhy",
+    "site.admin.intake.nothingChanged",
     "site.qual.no",
     "site.qual.noResponse",
     "site.staff.noResponse",
@@ -124,13 +125,11 @@
     "site.staff.no",
     "site.admin.fml.r.yesNo",
     "site.admin.fml.yesNoNote",
-    "site.dialysis.urea.none",
-    "site.dialysis.noDialyzer",
-    "site.dialysis.noResponse"
+    "site.dialysis.urea.none"
    ]
   },
   "te": {
-   "count": 105,
+   "count": 104,
    "keys": [
     "comm.whatsapp",
     "comm.off",
@@ -209,6 +208,7 @@
     "site.blood.preparedAt",
     "site.blood.retentionNote",
     "site.blood.testsLaw",
+    "site.admin.intake.intro",
     "site.admin.gst.intro",
     "site.admin.staff.roleNote.pcpndtNodal",
     "site.admin.staff.roleNote.ndpsInspector",
@@ -228,19 +228,17 @@
     "site.admin.import.intro",
     "site.admin.import.nothing",
     "site.stores.sc.methodStores",
-    "site.stores.sc.onOrderNoStore",
     "site.admin.fml.nothing",
-    "site.admin.fml.savedProblems",
     "site.admin.fml.requireReason",
     "site.admin.fml.replace",
-    "site.dialysis.access.avFistula",
-    "site.dialysis.access.avGraft",
-    "site.dialysis.urrNot",
+    "site.admin.ccs.critical.intro",
+    "site.admin.ccs.mar.intro",
+    "site.admin.ccs.defaults",
     "site.dialysis.anticoagNote"
    ]
   },
   "hi": {
-   "count": 58,
+   "count": 41,
    "keys": [
     "comm.whatsapp",
     "privacy.kind.nomination",
@@ -278,28 +276,11 @@
     "site.support.docNoc",
     "site.engage.ready.wa",
     "site.engage.ready.waLabel",
-    "site.qual.tab.adr",
     "site.qual.device.central",
     "site.qual.device.urinary",
     "site.qual.device.ventilator",
     "site.qual.ssi.superficial",
-    "site.qual.ssi.deep",
-    "site.staff.vIncomplete",
-    "site.staff.kNeedlestick",
-    "site.staff.wardLabel",
-    "site.shell.home.tile.inbasket.title",
-    "site.admin.fml.restrictedShort",
-    "site.admin.fml.controlledShort",
-    "site.admin.fml.retiredShort",
-    "site.dialysis.preWeight",
-    "site.dialysis.postWeight",
-    "site.dialysis.preSys",
-    "site.dialysis.preDia",
-    "site.dialysis.postSys",
-    "site.dialysis.postDia",
-    "site.dialysis.targetUf",
-    "site.dialysis.achievedUf",
-    "site.dialysis.dialyzer"
+    "site.staff.vIncomplete"
    ]
   },
   "bn": {
@@ -405,7 +386,6 @@
     "ward.the-bill-could-not-be-found",
     "ward.the-server-did-not-send-the",
     "ward.this-hospital-has-not-published-any",
-    "ward.this-hospital-has-not-set-up",
     "ward.vitals",
     "ward.rpt-claims",
     "ward.part-of-the-record-could-not",
@@ -432,7 +412,10 @@
     "ward.line-class-central",
     "ward.line-class-urinary",
     "ward.line-class-ventilator",
+    "ward.dc-truncated",
     "ward.intake-none",
+    "ward.intake-appt-none",
+    "ward.admreq-admitted-unknown",
     "site.shell.home.tile.claimsdesk.title",
     "site.shell.download.unreachable",
     "site.shell.loadOrg.notMember",
@@ -469,8 +452,6 @@
     "site.admin.pkg.historyFailed",
     "site.group.loadFailedLead",
     "site.maik.askRefused",
-    "site.portal.edu.approved",
-    "site.portal.edu.retired",
     "site.portal.edu.none",
     "site.rota.wardAPlaceholder",
     "site.security.wrongCode",
@@ -484,10 +465,7 @@
     "site.registers.ndps.h.doc",
     "site.registers.ndps.h.patients",
     "site.registers.part.houseNo",
-    "site.registers.settings.rbd2024",
     "site.gov.nabh.format",
-    "site.gov.hmis.counts",
-    "site.gov.hmis.notAvailable",
     "site.blood.comp.cryo",
     "site.blood.tti.hbv",
     "site.blood.tti.hcv",
@@ -506,12 +484,15 @@
     "site.admin.payerContract.stateCode",
     "site.qual.dept.laboratory",
     "site.inbasket.patientsFailed",
-    "site.admin.fml.f.restricted",
     "site.admin.fml.r.tooMany",
     "site.admin.fml.r.badValue",
     "site.admin.fml.restrictedShort",
     "site.admin.fml.controlledShort",
     "site.admin.fml.retiredShort",
+    "site.admin.ccs.delta.intro",
+    "site.admin.ccs.auto.title",
+    "site.admin.ccs.mar.intro",
+    "site.admin.ccs.r.shape",
     "site.shell.home.tile.dialysis.title",
     "site.dialysis.access.avFistula",
     "site.dialysis.access.avGraft",
@@ -534,7 +515,6 @@
     "ward.flow-ed-untriaged",
     "ward.reg-mr-issued-by-emr",
     "ward.reg-leave-blank-if-not-issued",
-    "ward.reg-abdm-aadhaar-invalid",
     "ward.invoice-number",
     "site.admin.maik.timeoutMs",
     "site.admin.tariff.gstRoom",
@@ -557,14 +537,15 @@
     "site.admin.fml.title",
     "site.admin.fml.restrictedShort",
     "site.admin.fml.controlledShort",
+    "site.admin.ccs.r.number",
+    "site.admin.ccs.defaults",
     "site.dialysis.access.avFistula",
     "site.dialysis.access.avGraft",
-    "site.dialysis.access.tunnelled",
-    "site.dialysis.doctor"
+    "site.dialysis.access.tunnelled"
    ]
   },
   "ta": {
-   "count": 100,
+   "count": 97,
    "keys": [
     "comm.whatsapp",
     "privacy.kind.erasure",
@@ -615,10 +596,7 @@
     "ward.line-class-central",
     "ward.line-class-urinary",
     "ward.line-class-ventilator",
-    "ward.tc-unit-ward",
     "site.admin.payerRules.notRequired",
-    "site.shell.home.tile.claimsdesk.title",
-    "site.shell.home.tile.claimsdesk.sub",
     "site.admin.hospital.printLang.intro",
     "site.admin.hospital.labCheck.toggle",
     "site.admin.hospital.token.staleLead",
@@ -647,7 +625,6 @@
     "site.blood.standardNote",
     "site.blood.crit.apheresisAfterIncomplete",
     "site.blood.crit.wholeBloodAfterIncomplete",
-    "site.qual.tab.abg",
     "site.qual.kind.handover",
     "site.qual.kind.prescription",
     "site.qual.dept.laboratory",
@@ -660,16 +637,17 @@
     "site.stores.sc.onOrderNoStore",
     "site.admin.fml.title",
     "site.admin.fml.requireReason",
-    "site.admin.fml.controlledShort",
     "site.admin.fml.replace",
+    "site.admin.ccs.critical.intro",
+    "site.admin.ccs.auto.title",
+    "site.admin.ccs.mar.intro",
+    "site.admin.ccs.defaults",
     "site.dialysis.access.avFistula",
-    "site.dialysis.access.avGraft",
-    "site.dialysis.access.tunnelled",
-    "site.dialysis.access.nonTunnelled"
+    "site.dialysis.access.avGraft"
    ]
   },
   "ml": {
-   "count": 81,
+   "count": 74,
    "keys": [
     "comm.whatsapp",
     "ward.rcm-blocked-title",
@@ -688,7 +666,6 @@
     "ward.not-helpful",
     "ward.peep-cmh2o",
     "ward.plateau-pressure",
-    "ward.recorded-as-not-appropriate",
     "ward.ref",
     "ward.room-air",
     "ward.route",
@@ -708,7 +685,6 @@
     "ward.line-class-none",
     "site.abdm.notAvailable",
     "site.admin.maik.timeoutMs",
-    "site.admin.security.notSameAsEveryLinked",
     "site.admin.fhir.smart",
     "site.admin.tariff.gstRoom",
     "site.rota.wardAPlaceholder",
@@ -735,6 +711,8 @@
     "site.staff.kNeedlestick",
     "site.shell.home.tile.inbasket.title",
     "site.inbasket.title",
+    "site.admin.ccs.auto.title",
+    "site.admin.ccs.col.unit",
     "site.shell.home.tile.dialysis.title",
     "site.dialysis.access.avFistula",
     "site.dialysis.access.avGraft",
@@ -744,21 +722,13 @@
     "site.dialysis.urrPost",
     "site.dialysis.urrWhy.zero",
     "site.dialysis.access",
-    "site.dialysis.preWeight",
-    "site.dialysis.postWeight",
-    "site.dialysis.preSys",
-    "site.dialysis.preDia",
-    "site.dialysis.postSys",
-    "site.dialysis.postDia",
-    "site.dialysis.dialyzer",
-    "site.dialysis.preUrea"
+    "site.dialysis.preWeight"
    ]
   },
   "mr": {
-   "count": 95,
+   "count": 97,
    "keys": [
     "comm.whatsapp",
-    "privacy.kind.nomination",
     "ward.rcm-open",
     "ward.tu-booked",
     "ward.at-dx",
@@ -850,8 +820,11 @@
     "site.stores.sc.onOrderNoStore",
     "site.admin.fml.requireReason",
     "site.admin.fml.replace",
-    "site.dialysis.access.avFistula",
-    "site.dialysis.access.avGraft"
+    "site.admin.ccs.critical.intro",
+    "site.admin.ccs.auto.title",
+    "site.admin.ccs.mar.intro",
+    "site.admin.ccs.col.unit",
+    "site.admin.ccs.defaults"
    ]
   }
  }
