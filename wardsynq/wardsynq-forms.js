@@ -14,8 +14,16 @@
  * { field, op, value } (ops: eq, ne, gt, gte, lt, lte, in, filled, empty) or { all: [...] } / { any: [...] };
  * a calculation is { op: "sum"|"product"|"bmi"|"count_true", fields: [...] }. There is no string that is ever
  * executed, so a form definition cannot run anything.
+ *
+ * AUDIENCE. A form is for staff unless its definition says `audience: "patient"`. Only a patient form can be
+ * answered from the portal (pre-admission intake, form-response.js), and a patient form names no staff roles:
+ * a patient holds none, so a role list would make it unanswerable by the only person it is for. WardSynQ ships
+ * no questions of its own: every patient form is the hospital's.
  */
 
+const AUDIENCES = Object.freeze(["staff", "patient"]);
+/** PURE. Whether a definition is for patients to answer. Absent means staff, never patients by default. */
+const isPatientForm = (def) => !!def && def.audience === "patient";
 const FIELD_TYPES = Object.freeze(["text", "textarea", "number", "integer", "date", "datetime", "boolean", "single_choice", "multi_choice", "calculated"]);
 const OPS = Object.freeze(["eq", "ne", "gt", "gte", "lt", "lte", "in", "filled", "empty"]);
 const CALCS = Object.freeze(["sum", "product", "bmi", "count_true"]);
@@ -73,6 +81,8 @@ function validateDefinition(def) {
     if (f.code && !(f.code.system && f.code.code)) p.push(`field "${f.key}" has a terminology code without system and code`);
   }
   if (def.effectiveFrom && def.effectiveTo && def.effectiveFrom > def.effectiveTo) p.push("effective dates are the wrong way round");
+  if (def.audience != null && !AUDIENCES.includes(def.audience)) p.push(`audience must be one of ${AUDIENCES.join(", ")}`);
+  if (isPatientForm(def) && Array.isArray(def.roles) && def.roles.length) p.push("a form for patients cannot be limited to staff roles");
   return p;
 }
 
@@ -161,4 +171,4 @@ function publish(def, version, at) {
   return { ...def, status: "published", version, publishedAt: at };
 }
 
-export { FIELD_TYPES, OPS, CALCS, FormError, validateDefinition, evaluateResponse, applicabilityProblem, publish, fieldsOf };
+export { AUDIENCES, isPatientForm, FIELD_TYPES, OPS, CALCS, FormError, validateDefinition, evaluateResponse, applicabilityProblem, publish, fieldsOf };

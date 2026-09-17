@@ -6869,6 +6869,7 @@
     "site.portal.section.consents": "Consents (view only)",
     "site.portal.section.messages": "Messages",
     "site.portal.section.education": "Education leaflets given",
+    "site.portal.section.forms": "Pre-admission forms (fill in)",
     "site.portal.edu.approved": "Approved",
     "site.portal.edu.retired": "Retired",
     "site.portal.edu.draft": "Draft, not yet given to patients",

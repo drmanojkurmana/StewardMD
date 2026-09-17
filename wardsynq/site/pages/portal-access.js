@@ -23,7 +23,7 @@
    * configuration value (stays as is); its label is staff-facing UI text and is translated below. */
   var SECTIONS = [["status", "OPD queue status"], ["appointments", "Appointments"], ["medicines", "Medicines"], ["results", "Results"], ["diagnoses", "Diagnoses and allergies"],
     ["discharge", "Discharge summaries (patient copy)"], ["discharge-full", "Full discharge summary"], ["documents", "Released documents"],
-    ["bills", "Bills"], ["consents", "Consents (view only)"], ["messages", "Messages"], ["education", "Education leaflets given"]];
+    ["bills", "Bills"], ["consents", "Consents (view only)"], ["messages", "Messages"], ["education", "Education leaflets given"], ["forms", "Pre-admission forms (fill in)"]];
   function sectionLabel(c, code) {
     switch (code) {
       case "status": return T(c, "site.portal.section.status", "OPD queue status");
@@ -38,6 +38,7 @@
       case "consents": return T(c, "site.portal.section.consents", "Consents (view only)");
       case "messages": return T(c, "site.portal.section.messages", "Messages");
       case "education": return T(c, "site.portal.section.education", "Education leaflets given");
+      case "forms": return T(c, "site.portal.section.forms", "Pre-admission forms (fill in)");
       default: return code;
     }
   }
