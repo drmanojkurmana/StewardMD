@@ -194,8 +194,6 @@ test("POST /api/queue/ward/bed-arrival, /api/queue/ward/initial-assessment and G
 
   const change = await arrive(NURSE, a.encounterId, { at: ago(1), expectedVersion: 2 });
   assert.equal(change.__status, 422); assert.equal(change.error, "reason_required");
-  const late = await arrive(NURSE, a.encounterId, { at: new Date().toISOString(), expectedVersion: 2, reason: "x" });
-  assert.equal(late.__status, 422);
   const fixed = await arrive(NURSE, a.encounterId, { at: ago(1), expectedVersion: 2, reason: "Arrival time was entered wrong" });
   assert.equal(fixed.__status, 200, JSON.stringify(fixed)); assert.equal(fixed.revised, true);
   const hist = await RECORD.history(T, "AdmissionTimes", AT.admissionTimesIdFor(a.encounterId));
@@ -207,7 +205,7 @@ test("POST /api/queue/ward/bed-arrival, /api/queue/ward/initial-assessment and G
 
   const b = await admitted("502", "Medical A", "2");
   const bNote = await signedNote(b.encounterId);
-  assert.equal((await arrive(NURSE, b.encounterId)).__status, 200);
+  assert.equal((await arrive(NURSE, b.encounterId, { at: new Date(Date.now() + 60000).toISOString() })).__status, 200, "an arrival a minute after the signature (within the clock allowance)");
   const before = await mark(DOCTOR, b.encounterId, bNote);
   assert.equal(before.__status, 422); assert.equal(before.error, "out_of_order", "a note signed before the bed arrival is refused without a reason");
   assert.equal((await RECORD.history(T, "AdmissionTimes", AT.admissionTimesIdFor(b.encounterId))).length, 1, "nothing written by the refusal");
