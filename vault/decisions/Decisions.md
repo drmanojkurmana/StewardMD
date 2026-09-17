@@ -5,6 +5,53 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-18 · On-device RAG for every text pack; the whole-answer gate replaced by claim-level grounding
+
+**Decision (owner):** RAG eligibility is a CAPABILITY (`maik-models.js CAPS[id].kb`, read by
+`maik-local.js ragEligible()`), not the `packId === "maik-lite"` allow-list, and every text pack now
+has `kb: true`, including the new text-only `medmo-4b` (MBZUAI MedMO-4B Q4_K_M, 2,716,064,480 bytes,
+no vision projector published). This deliberately supersedes the 2026-09-03 reversal that made Bonsai
+ungrounded: that reversal was a reaction to the GATE, not to grounding itself.
+
+**Why the old gate lost half of a larger model's answers:** `evidenceGate` (kept in
+`kb/ai/maik-lite-rag.js` for `webAnswer` and as the fallback when the new module is absent) failed
+the WHOLE answer when any number or drug-suffixed token was not literally in the passages: "1 g" for
+"1000 mg", "twice daily", "7-10 days", an alternative named in passing. Paraphrase was punished as
+hallucination.
+
+**What replaced it:** `kb/ai/maik-grounding.js` (`window.SMD_MAIK_GROUND`, ES5, deterministic, no
+dependencies). The answer is split into claims; each claim is verified on FACTS: numbers are
+unit-normalised (mass to mg, frequency/route words to one token so bd == twice daily == every 12
+hours), a drug+dose pair must co-occur in ONE passage (a dose from passage A on a drug from passage B
+is not support), a different dose for that drug in the evidence is a CONTRADICTION (removed, never
+qualified), prose claims need concept overlap with a passage (stemmed, UK/US, abbreviations expanded
+through the retrieval module's own table), never phrase overlap. Figures from the clinician's own
+question stay allowed, as before. Outcomes per claim: supported (with [n] provenance to the passage),
+clinician, unsupported (left out; or under "Not in the StewardMD Knowledge Base (general model
+knowledge, unverified):" only when `localStorage smd_maik_general_knowledge=1`, off by default),
+contradicted (left out), meta (verify line etc., kept, never cited). If NOTHING is supported the
+model gets ONE regeneration constrained to the reference material (`_regen`), and only then does the
+reference passage stand in for the answer. The gate was not weakened: nothing the passages do not
+support is ever shown as Knowledge-Base-backed, and a count of left-out statements is printed.
+
+**Measured** (`test/maik-grounding-verifier.test.mjs`, `bench/rag-grounding/run.mjs`, 31 gold-labelled
+claims across supported paraphrase, unsupported, partial, multi-source, conflicting passages,
+numerical/dosage, terminology): valid grounded claims accepted 100%, false rejection 0%, unsupported
+blocked 100%, precision 1.0, recall 1.0; every contradicted dose classed as contradicted, not merely
+unsupported. The two paraphrases the old gate rejected are accepted by name in the suite.
+
+**NOT measured yet:** per-model behaviour on real answers (MaiK Lite, MedMO-4B, MedGemma, Bonsai).
+`bench/rag-grounding/run.mjs --live` asks each installed pack on the connected phone and records the
+answers; `--answers <file>` replays a recording. No phone was attached when this shipped, so the
+per-model table is empty until someone runs it. Per-model "false rejection" additionally needs a
+clinician to gold-label each free-form answer; the battery prints what was removed for that review
+rather than guessing. `medmo-4b` loading text-only (qwen3vl GGUF, no mmproj) in the plugin's
+llama.cpp is also unverified on device.
+
+**Trade-off accepted:** concept-overlap support (COV_MIN 0.5 of a claim's stemmed content tokens in one
+passage) is a heuristic; it errs toward leaving a correct prose sentence out, never toward keeping an
+unsupported dose in. Tune COV_MIN from the live battery, not from intuition.
+
 ## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
 
 **Decision:** `recommendFor()` now recommends Private Device OCR - relabeled "Hybrid" in the UI whenever

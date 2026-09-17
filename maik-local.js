@@ -485,7 +485,21 @@
    * ("the model we trained"), and widening it needs its own verification pass.
    */
   // Owner decision 2026-09-03: MaiK Lite ONLY. The Bonsai packs answer from their own weights.
-  function ragEligible(packId) { return packId === "maik-lite"; }
+  /* Capability-based, not model-id-based (owner, 2026-09-18): any pack the registry marks `kb` reads
+   * the Knowledge Base and is checked claim by claim (kb/ai/maik-grounding.js). The old
+   * `packId === "maik-lite"` allow-list existed because the whole-answer gate rejected half of a
+   * larger model's answers for paraphrase; the claim-level verifier removes that reason. A harness
+   * with no registry keeps the old behaviour. */
+  function ragEligible(packId) {
+    try { var M = models(); if (M && M.caps) { var c = M.caps(packId); return !!(c && c.kb); } } catch (e) {}
+    return packId === "maik-lite";
+  }
+  // General model knowledge next to a grounded answer is a PRODUCT switch, off by default: unsupported
+  // claims are left out unless the owner turns this on, and then they appear under their own heading,
+  // never mixed into the Knowledge-Base-backed text.
+  function generalKnowledgeAllowed() { try { return localStorage.getItem("smd_maik_general_knowledge") === "1"; } catch (e) { return false; } }
+  var GENERAL_HEAD = "Not in the StewardMD Knowledge Base (general model knowledge, unverified):";
+  var REGEN_NUDGE = "\nState only the drugs, doses and figures that appear in the reference material above. Where the material does not cover part of the question, say so in one line.";
 
   /** Resolves {evidenceText, passages, RAG} from the on-device book index, or null if ungrounded
    * (no KB yet, no hit, or anything failed) - grounding is a strict improvement when available,
@@ -620,6 +634,8 @@
       }
       // Retry-after-blank: nudge the model out of the deliberation attractor it fell into.
       if (opts && opts.nudge) prompt += "\nGive the final answer directly, no deliberation.";
+      // Regenerate-on-evidence (claim-level grounding found nothing it could support the first time).
+      if (opts && opts._regen && grounding) prompt += REGEN_NUDGE;
 
       // Stream tokens into the caller's typewriter. Accumulate: onDelta wants the full text so far.
       var attach = (typeof onDelta === "function" && L.addListener)
@@ -726,7 +742,41 @@
         // NOT surface as an error - it shows the real book passages instead of a wrong paraphrase,
         // which is strictly more useful to a doctor than either a blank screen or a wrong answer.
         var quotedPassage = false;   // a verbatim book passage is shown as written, never re-emphasized
-        if (grounding) {
+        var groundingOut = null;
+        var G = (typeof window !== "undefined") && window.SMD_MAIK_GROUND;
+        if (grounding && G && G.groundAnswer) {
+          /* CLAIM-LEVEL GROUNDING (owner, 2026-09-18). The answer is split into claims and each is
+           * checked on facts against the retrieved passages: supported claims stay with [n]
+           * provenance; a claim the evidence contradicts (a different dose for that drug) is removed;
+           * a claim the evidence says nothing about is removed, or shown under its own heading when
+           * the product allows general knowledge. Paraphrase is free; the bar on figures and drugs is
+           * unchanged. If NOTHING can be supported, the model gets ONE more attempt constrained to the
+           * reference material, and only then does the reference passage stand in for the answer. */
+          var g = G.groundAnswer(text, grounding.passages, pkg && pkg.question, {
+            allowGeneral: generalKnowledgeAllowed(), inlineRefs: true,
+            expand: (grounding.RAG && grounding.RAG.expand) ? function (q) { return grounding.RAG.expand(q)[0]; } : null
+          });
+          try { window.__smdLastGate = { q: pkg && pkg.question, verdict: g.verdict, stats: g.stats, removed: g.removed, anchors: grounding.anchors, heads: grounding.passages.map(function (p) { return String(p.heading || "").slice(0, 60); }) }; } catch (e) {}
+          if (g.verdict === "ungrounded") {
+            if (!(opts && opts._regen)) {
+              var go = { _regen: true, temperature: 0.2, pack: packId };
+              if (opts) { for (var k3 in opts) { if (!(k3 in go)) go[k3] = opts[k3]; } }
+              return answer(pkg, go, onDelta);
+            }
+            var pass0 = grounding.passages[0]; quotedPassage = true;
+            var shown0 = cleanPassage(pass0.text);
+            if (shown0.length > 700) shown0 = shown0.slice(0, 700).replace(/\s+\S*$/, "") + "…";
+            text = "The on-device model's answer could not be verified against the StewardMD Knowledge Base " +
+              "(none of its statements were supported there). Here is the reference passage on this topic instead:\n\n" + shown0;
+          } else {
+            text = g.text;
+            if (g.general) text += "\n\n" + GENERAL_HEAD + "\n" + g.general;
+            if (g.removed.length) text += "\n\nLeft out: " + g.removed.length + " statement" + (g.removed.length === 1 ? "" : "s") + " the Knowledge Base did not support.";
+            text += "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
+          }
+          groundingOut = { verdict: g.verdict, stats: g.stats, claims: g.claims, removed: g.removed, citations: g.citations };
+        } else if (grounding) {
+          // Legacy whole-answer gate: only when the claim-level module is not loaded (older bundles, harnesses).
           var gate = grounding.RAG.evidenceGate(text, grounding.evidenceText, pkg && pkg.question);
           if (!gate.ok) {
             // Diagnostics only (never shown): what the gate rejected, for the live battery and the
@@ -752,6 +802,7 @@
           // which needs no UI change and cannot be silently dropped by a different code path.
           sources: [],
           grounded: !!grounding,
+          grounding: groundingOut,
           engine: "local",
           images: images.length,
           model: (models() && models().PACKS[packId] && models().PACKS[packId].label) || packId,
@@ -773,7 +824,7 @@
       if (sub && sub.remove) { try { sub.remove(); } catch (e) {} }
       return out;
     });
-    }, { reentrant: !!(opts && (opts._retried || opts._ungrounded)) });
+    }, { reentrant: !!(opts && (opts._retried || opts._ungrounded || opts._regen)) });
     });
   }
 
