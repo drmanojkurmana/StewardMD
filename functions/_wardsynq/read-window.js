@@ -96,4 +96,76 @@ async function readWindowed(svc, resourceType, opts) {
   return svc.listSince(resourceType, { ...pass, stopWhen: (r) => outsideWindow(r, from) });
 }
 
-export { LOOKBACK_MS, SPANNING_TYPES, periodScoped, latestStampMs, outsideWindow, readWindowed };
+/* ---------------------------------------------------------------------------------------------
+ * THE CLASH WINDOW (R6-4). A booking clash check is the other read that took the hospital's whole
+ * diary: scheduling.js bookAppointment and online-booking.js diary() both read every Appointment ever
+ * made (listAll, 50,000 ceiling) because an Appointment keeps where it stands in `state` and the store
+ * filters on `status`, so the open-state read (R5-2) could not be used.
+ *
+ * A `states` filter in the port is NOT what was built. A clash is by definition time-bounded - two
+ * appointments can only collide if they are near each other in time - so the period read R5-3 already
+ * built answers it with no port change, no schema change and no new filter on three adapters. That is
+ * why the two files now call readClashDiary instead of listAll.
+ *
+ * WHY THE STOP TEST LOOKS AT TWO THINGS. The read pages by write order (seq); the window is on startAt.
+ * A booking made long ago FOR a date inside the window has an old seq, so stopping on startAt alone
+ * could walk past it and book over it. A record is behind the window only when BOTH hold: its slot is
+ * older than the window floor AND it was last written longer ago than the longest lead a booking is
+ * made with (WRITE_LOOKBACK_MS). An appointment booked further ahead than that and never touched since
+ * is the stated residual; at 400 days it is outside any real outpatient diary. A record with no
+ * readable slot time is never judged behind, as everywhere else in this file.
+ */
+
+/** The longest appointment bookAppointment permits (480 minutes) plus a week of margin. */
+const CLASH_LOOKBACK_MS = 480 * 60000 + 7 * 86400000;
+/** The longest lead a booking is assumed to be made with: the bound that makes a seq-paged read safe
+ *  for a startAt window. See the note above. */
+const WRITE_LOOKBACK_MS = 400 * 86400000;
+
+/** PURE. Is this appointment behind the clash window, by its slot AND by when it was last written? */
+function outsideClashWindow(record, floorMs, writtenBeforeMs) {
+  const start = Date.parse((record && record.startAt) || "");
+  if (!Number.isFinite(start)) return false;
+  if (start >= floorMs) return false;
+  const wrote = latestStampMs(record, 0);
+  return wrote != null && wrote < writtenBeforeMs;
+}
+
+/**
+ * The diary a clash check needs: every appointment that could overlap a slot at or after `fromMs`,
+ * oldest first, exactly listAll's `{ rows, truncated }`. Falls back to listAll on a store that cannot
+ * page backwards, so no adapter has to change.
+ */
+async function readClashDiary(svc, resourceType, opts) {
+  const o = opts || {};
+  const from = Number(o.fromMs);
+  const pass = { ...(o.max ? { max: o.max } : {}), ...(o.throwOnTruncate ? { throwOnTruncate: true } : {}) };
+  if (!Number.isFinite(from) || typeof svc.listSince !== "function") return svc.listAll(resourceType, pass);
+  const floor = from - CLASH_LOOKBACK_MS;
+  const writtenBefore = Date.now() - WRITE_LOOKBACK_MS;
+  return svc.listSince(resourceType, { ...pass, stopWhen: (r) => outsideClashWindow(r, floor, writtenBefore) });
+}
+
+/**
+ * THE AMENDMENT RE-READ. pageByType's newest-first cursor can miss a record amended DURING the read:
+ * the amendment moves it past a cursor already handed out (repository.js:302-306). For a month report
+ * that is the documented price; for a clash check it would be a double booking, so it is not accepted
+ * here. An amendment lands at the very top of the write order, so ONE page of the newest records taken
+ * after the decision and before the append holds every record that could have moved. The caller runs
+ * the same overlap test over it and refuses if a slot appeared.
+ *
+ * Bounded by construction: stopWhen answers true for every record, so listSince returns after one page.
+ * ponytail: that page is 1,000 records - more than 1,000 writes landing inside one clash read would
+ * push an amendment off it. A per-clinician index (ids are wsq-appt-<clinician>-<time>-<patient>, so
+ * pageByIdPrefix is a range seek) is the upgrade if a hospital ever writes at that rate.
+ */
+async function readRecentWrites(svc, resourceType) {
+  if (typeof svc.listSince !== "function") return [];
+  const got = await svc.listSince(resourceType, { stopWhen: () => true });
+  return got.rows || [];
+}
+
+export {
+  LOOKBACK_MS, SPANNING_TYPES, periodScoped, latestStampMs, outsideWindow, readWindowed,
+  CLASH_LOOKBACK_MS, WRITE_LOOKBACK_MS, outsideClashWindow, readClashDiary, readRecentWrites,
+};
