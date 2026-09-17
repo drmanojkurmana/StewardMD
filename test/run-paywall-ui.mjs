@@ -108,7 +108,7 @@ try {
   ok(/SAVE 58%/.test(phyA), "SAVE 58% computed from regular");
   ok(/₹21 a day\. Less than a samosa, and it runs your clinic\./.test(phyA), "per-day hero line, annual");
   ok(/Runs your clinic: queue, billing, recovery calls, and notes that think with you\./.test(phyA), "benefit line");
-  ok(/Scribe writes the note, then offers the differentials worth considering\./.test(phyA), "second line");
+  ok(/MaiK Voice Scribe writes the note, then offers the differentials worth considering\./.test(phyA), "second line");
   ok(/Subscribe to Physician · ₹7,490\/year/.test(String(await ctaText())), "CTA: " + JSON.stringify(await ctaText()));
   await shot("01-default-annual");
 

@@ -47,7 +47,7 @@
     physician: "Runs your clinic: queue, billing, recovery calls, and notes that think with you.",
     physicianpro: "We host it. Your records, every device, nothing to set up.",
   };
-  var TIER_NOTE = { physician: "Scribe writes the note, then offers the differentials worth considering." };
+  var TIER_NOTE = { physician: "MaiK Voice Scribe writes the note, then offers the differentials worth considering." };
   /* The per-day hero line. The WORDS are fixed here; the NUMBER is always recomputed from the
    * server price for the selected cycle, so a KV price override moves the figure and leaves the
    * comparison alone. A tier with no entry shows the bare "\u20b9N a day" and invents nothing. */
@@ -62,7 +62,7 @@
     student: "Full MaiK AI · voice dictation · learn atlases",
     coresident: "2 accounts · shared AI pool · 4 imaging/day each",
     pro: "Imaging AI · Patient Summary · Research · Lab Watch · Ultra voice",
-    physician: "Your clinic (own Drive) · FollowCare · Scribe · unlimited billing",
+    physician: "Your clinic (own Drive) · FollowCare · MaiK Voice Scribe · unlimited billing",
     physicianpro: "Cloud clinic (we host) · more AI · OncoTree + ONCQIS included",
   };
   var TIER_IAP = { student: "trainee", coresident: "coresident", pro: "pro", physician: "physician", physicianpro: "physicianpro" };

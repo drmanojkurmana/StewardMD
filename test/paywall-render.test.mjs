@@ -190,7 +190,7 @@ test("every card carries its benefit line, and Physician carries the second line
   for (const id of Object.keys(BENEFIT)) {
     assert.ok(text(card(r.html, id)).includes(BENEFIT[id]), "benefit line missing on " + id);
   }
-  assert.ok(text(card(r.html, "physician")).includes("Scribe writes the note, then offers the differentials worth considering."));
+  assert.ok(text(card(r.html, "physician")).includes("MaiK Voice Scribe writes the note, then offers the differentials worth considering."));
   // no clinical outcome claim and no invented statistic anywhere in the sheet
   assert.ok(!/readmission|mortality|complication rate|recovery rate|\d+% (more|fewer|better)/i.test(text(r.html)),
     "an outcome claim or a made-up statistic reached the sheet");

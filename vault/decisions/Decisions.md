@@ -27,7 +27,7 @@ and three were changed:
 3. **The add-on’s "3-day trial everyone gets" renders only if the server sends `addons.onco.trialDays`.**
    Nothing server-side grants an onco trial today, so the sentence stays off until it does.
 No countdown, no scarcity, no clinical outcome claim, no statistic, and only assistive framing for
-Scribe ("offers the differentials worth considering"), because a doctor who trusts the AI not to miss
+MaiK Voice Scribe ("offers the differentials worth considering"), because a doctor who trusts the AI not to miss
 checks less carefully.
 
 **Trade-off:** the default view hides two real tiers behind a tap, and the strike-through disappears
