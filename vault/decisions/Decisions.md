@@ -8071,6 +8071,35 @@ of compliance.js is untouched.
   DiagnosticReport are the real narrowings and are left to it. The ABDM chart screen already renders its
   `unreadableTypes` (ward.js abdmRecordsView) - it names no types, but it is not silent, so it was left alone.
 
+## 2026-09-17 A month's report reads a month (branch period-scoped-reports, R5-3)
+
+- Port: `pageByType` gains `newest: true` with a `beforeSeq` cursor (memory and D1; repository-sqlite.js is a binding
+  over D1Repository, so it needed no change). The oldest-first cursor is untouched, so every existing caller is
+  unaffected. Newest-first reverses the amendment rule: a record amended DURING the read moves ahead of a cursor
+  already handed out and can be missed, so ledgers and counts that must balance stay on the oldest-first cursor.
+- Service: `listSince(type, {stopWhen, max, throwOnTruncate})` walks back and stops at the first whole page whose
+  records are all behind the window. Same grant check, same single audited list row and the same `{rows, truncated}`
+  answer as `listAll`, oldest first - except that a truncated period read keeps the NEWEST records, because the end
+  of the window is what the caller asked for.
+- `read-window.js` holds the one clinical decision: which types may be read as a period. A record is judged behind the
+  window by the LATEST instant anywhere in its body (its own times, and meta.recordedAt, which every canonical record
+  carries); a record naming no instant is never judged behind. Types whose records can belong to a month they hold no
+  timestamp in are read whole - an open stay, a line still in place, a booking or request for a later date, and the
+  masters other records point at (SPANNING_TYPES). A 90-day lookback covers a child record dated just before its
+  parent (a pre-anaesthetic check, the request behind a report).
+- Moved: compliance.js (NABH and HMIS), infection-control.js (the measured types, not the case register),
+  quality-registers.js (audits, drills, ADRs, ED reviews; not the templates and not an unrestored stock-out),
+  access-times.js (the diagnostic counter), trends.js, quality.js. NOT registry.js: a chronic-disease registry needs
+  each patient's LAST qualifying observation at any age, so a period read would turn "current" into "never". The audit
+  named it; the code says otherwise.
+- Honest limit, stated in repository-d1.js and in each module: the status and seq predicates sit OUTSIDE the derived
+  `MAX(version) GROUP BY id`, so a page still costs a whole-type group-by. What this removes is pages, rows returned,
+  parsed bodies and isolate memory - the memory and time cliff at roughly 25-50k records - not the per-page scan.
+  O20 (a latest-version flag or table in the schema) remains the owner's decision and the only fix for the scan.
+- Measured on the seeded tenant in test/wardsynq-repository-window.test.mjs: a one-month NABH table over 3,004
+  DiagnosticReports asks the port for 2 pages of that type instead of 4, and stays at 2 however much older history
+  the hospital holds.
+
 ## 2026-09-18 The last capped reads, and an unreadable token family (R5-4, branch remaining-caps)
 
 - A read that fails must not answer with a plausible empty value. Two swallows removed rather than widened:

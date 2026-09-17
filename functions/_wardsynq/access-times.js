@@ -21,6 +21,7 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, ListCeilingError } from "./service.js";
+import { readWindowed } from "./read-window.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const READ_MAX = 50000;
@@ -166,9 +167,11 @@ async function accessTimes(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, opd: null, diagnostics: null };
   const w = { fromMs, toMs, offsetMs: off };
-  /* Every record of the type (service.listAll, oldest first). Past READ_MAX the newest, which hold this window's waits, are
-   * the ones not read, so that read fails visibly (null with the reason) rather than showing short waits. */
-  const read = async (t) => { try { return { rows: (await svc.listAll(t, { max: READ_MAX, throwOnTruncate: true })).rows.filter(Boolean) }; } catch (e) { return { failed: e instanceof GovernanceError ? "not readable with this role" : e instanceof ListCeilingError ? "more records than can be read at once; the newest were not read" : "read failed" }; } };
+  /* R5-3: read from the start of the window asked for rather than from the hospital's first record, for the types
+   * whose records cannot belong to a window written after them (read-window.js: the diagnostic counter here; the
+   * visits and the bookings are still read whole, a stay or a booking outlives its write). Past READ_MAX the read
+   * fails visibly (null with the reason) rather than showing short waits. */
+  const read = async (t) => { try { return { rows: (await readWindowed(svc, t, { sinceMs: fromMs, max: READ_MAX, throwOnTruncate: true })).rows.filter(Boolean) }; } catch (e) { return { failed: e instanceof GovernanceError ? "not readable with this role" : e instanceof ListCeilingError ? "more records than can be read at once; not all of this window was read" : "read failed" }; } };
   const [enc, appt, dx] = await Promise.all([read("Encounter"), read("Appointment"), read(TYPE)]);
   /* A role that may read neither the visits nor the diagnostic counter has no waits to see: refused, not an empty 200. */
   if (enc.failed === "not readable with this role" && dx.failed === "not readable with this role") return { ...base, ok: false, status: 403, error: "permission", detail: "Visits and diagnostic visits are not readable with this role.", opd: null, diagnostics: null };

@@ -39,6 +39,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { readWindowed } from "./read-window.js";
 import { computeQualitySafety } from "./quality.js";
 
 const HAI_TYPE = "HaiCase", SAP_TYPE = "SurgicalProphylaxis";
@@ -231,12 +232,17 @@ function writeFailure(e, extra) {
 }
 const baseOf = (mig) => ({ mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null });
 const bare = (rec) => { const n = { ...rec }; delete n.version; delete n.meta; delete n.writtenBy; return n; };
-/** Reads each type on its own: an unreadable type is named, never read as empty; a type past READ_LIMIT sets truncated. */
-async function readTypes(svc, types) {
+/** Reads each type on its own: an unreadable type is named, never read as empty; a type past READ_LIMIT sets truncated.
+ *
+ * R5-3: a type in `windowed` is read from `sinceMs` rather than from the hospital's first record
+ * (read-window.js). Only the types this view MEASURES over its period are listed there; the case
+ * register itself is shown whole, so it is not. */
+async function readTypes(svc, types, opts) {
   const rows = {}, unreadable = {};
+  const sinceMs = opts && opts.sinceMs, windowed = new Set((opts && opts.windowed) || []);
   let truncated = false;
   await Promise.all(types.map(async (t) => {
-    try { const got = await svc.listAll(t, { max: READ_LIMIT }); rows[t] = got.rows.filter(Boolean); if (got.truncated) truncated = true; }
+    try { const got = windowed.has(t) ? await readWindowed(svc, t, { sinceMs, max: READ_LIMIT }) : await svc.listAll(t, { max: READ_LIMIT }); rows[t] = got.rows.filter(Boolean); if (got.truncated) truncated = true; }
     catch (e) { unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : str(e && e.message) || "read failed"; rows[t] = null; }
   }));
   return { rows, unreadable, truncated };
@@ -388,7 +394,8 @@ async function infectionControlView(request, env, ctx) {
   if (!w) return { ...base, ok: false, status: 422, error: "bad_month", detail: "month as YYYY-MM", cases: null };
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, cases: null };
-  const { rows, unreadable, truncated } = await readTypes(svc, [HAI_TYPE, "LineRecord", "SurgicalCase", SAP_TYPE, "MedicationAdministration", "AnesthesiaRecord"]);
+  const { rows, unreadable, truncated } = await readTypes(svc, [HAI_TYPE, "LineRecord", "SurgicalCase", SAP_TYPE, "MedicationAdministration", "AnesthesiaRecord"],
+    { sinceMs: w.fromMs, windowed: [SAP_TYPE, "MedicationAdministration", "AnesthesiaRecord"] });
 
   const cases = rows[HAI_TYPE] && [...rows[HAI_TYPE]].sort((a, b) => str(b.openedAt).localeCompare(str(a.openedAt)));
   const rates = Object.entries(HAI_EVENTS).map(([event, def]) => {
@@ -446,7 +453,8 @@ async function antibiogramReport(request, env, ctx) {
   const fromMs = fromDay * DAY - off, toMs = (toDay + 1) * DAY - off - 1;
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, organisms: null };
-  const { rows, unreadable, truncated } = await readTypes(svc, ["DiagnosticReport", "MedicationAdministration", "Encounter"]);
+  const { rows, unreadable, truncated } = await readTypes(svc, ["DiagnosticReport", "MedicationAdministration", "Encounter"],
+    { sinceMs: fromMs, windowed: ["DiagnosticReport", "MedicationAdministration"] });
   const period = { from: new Date(fromDay * DAY).toISOString().slice(0, 10), to: new Date(toDay * DAY).toISOString().slice(0, 10) };
   if (unreadable.DiagnosticReport) return { ...base, ok: false, status: 502, error: "record_read_failed", detail: `Microbiology reports could not be read (${unreadable.DiagnosticReport}).`, organisms: null };
   const ab = computeAntibiogram(rows.DiagnosticReport, { fromMs, toMs, minIsolates: Number(ctx.minIsolates) });

@@ -31,6 +31,7 @@
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
+import { readWindowed } from "./read-window.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { INPATIENT, DEATH } from "./quality.js";
 import { percentile } from "./digital-twin.js";
@@ -552,9 +553,13 @@ async function run(request, env, ctx, eventsFor) {
   if (error) return { ...base, ...error };
 
   const rows = {}, unreadable = {}, capped = [];
+  /* R5-3: the chart's own range is the read's range for every source type whose records cannot belong to a bucket
+   * written after them (read-window.js). Stays, requests and the patient master are still read whole: a stay open
+   * across the range is what an occupancy bucket is made of. */
+  const since = bk.buckets.length ? bk.buckets[0].startMs : null;
   let refused = false;
   await Promise.all(def.sources.map(async (t) => {
-    try { const got = await svc.listAll(t, { max: READ_CAP }); rows[t] = got.rows; if (got.truncated) capped.push(t); }
+    try { const got = await readWindowed(svc, t, { sinceMs: since, max: READ_CAP }); rows[t] = got.rows; if (got.truncated) capped.push(t); }
     catch (e) { refused = refused || e instanceof GovernanceError; unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : "read failed"; rows[t] = []; }
   }));
   /* The event list names records. A reader who may not read a source type is refused outright, the way
