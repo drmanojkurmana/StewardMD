@@ -68,7 +68,7 @@
   /** PURE. The leaflet library, with loading, failed and empty distinct. Titles, text and names are data. */
   function libraryHtml(c, r, treat) {
     if (r == null) return '<span class="spin"></span> ' + c.esc(T(c, "site.portal.edu.loading", "Loading leaflets..."));
-    if (!r.ok) return '<div class="msg err">' + TS(c, "site.portal.edu.failed", "The leaflet library could not be loaded. Do not read this as no leaflets.") + "</div>";
+    if (!r.ok || !Array.isArray(r.leaflets)) return '<div class="msg err">' + TS(c, "site.portal.edu.failed", "The leaflet library could not be loaded. Do not read this as no leaflets.") + "</div>";
     if (!r.leaflets.length) return '<p data-empty="leaflets">' + c.esc(T(c, "site.portal.edu.none", "This hospital has written no leaflet yet.")) + "</p>";
     return (r.warning ? '<div class="msg err">' + EN(c, c.esc(r.warning)) + "</div>" : "") + "<ul>" + r.leaflets.map(function (l) {
       var mine = (l.draftedBy || []).indexOf(r.me) >= 0;
@@ -118,7 +118,7 @@
           '<button class="btn primary" type="button" data-pa="edusave">' + c.esc(T(c, "site.portal.edu.save", "Save draft")) + '</button> <button class="btn quiet" type="button" data-pa="edunew">' + c.esc(T(c, "site.portal.edu.new", "New leaflet")) + '</button><div id="paEduOut" aria-live="polite"></div>' : "") +
         '<div id="paEduLib"></div></div>';
     var edu = { lib: null, editing: null };
-    function loadLib() { set("paEduLib", libraryHtml(c, null, treat)); c.api("/ward/education-leaflets" + q).then(function (r) { edu.lib = r && r.ok ? r : { ok: false }; set("paEduLib", libraryHtml(c, edu.lib, treat)); }); }
+    function loadLib() { set("paEduLib", libraryHtml(c, null, treat)); c.api("/ward/education-leaflets" + q).then(function (r) { edu.lib = r && r.ok && Array.isArray(r.leaflets) ? r : { ok: false }; set("paEduLib", libraryHtml(c, edu.lib, treat)); }); }
     function eduForm(l) {
       edu.editing = l ? { id: l.leafletId, v: l.version } : null;
       [["paEduTitle", l ? l.title : ""], ["paEduLang", l ? l.language : ""], ["paEduTags", l ? (l.tags || []).join(", ") : ""], ["paEduBody", l ? l.body : ""]].forEach(function (x) { var e = document.getElementById(x[0]); if (e) e.value = x[1]; });
