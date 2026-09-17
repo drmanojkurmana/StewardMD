@@ -78,6 +78,10 @@ test("a signed-out reader is asked to sign in, not told their connection failed"
   assert.match(e.cta, /sign in/i);
   assert.ok(!/could not confirm|connection/i.test(e.body), `must not blame the network: ${e.body}`);
   assert.match(e.title, /CliniX/);
+  // Signing in does NOT by itself unlock a Pro feature. Promising "a free account" would send a
+  // student through sign-in only to meet the same lock, which reads as bait.
+  assert.ok(!/free account/i.test(e.title + e.body), `must not imply a free account unlocks it: ${e.title}`);
+  assert.match(e.title, /Pro/, "name the thing that actually unlocks it");
 });
 
 test("signed out as the SERVER reports it (/api/billing/status answers signedIn:false) also asks to sign in", () => {

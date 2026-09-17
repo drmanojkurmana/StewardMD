@@ -94,8 +94,8 @@
     if (r === "signin") {
       return {
         kind: r,
-        title: name + " needs a free account",
-        body: "Sign in to see what your account includes. Registered doctors get Pro free for 7 days once their registration is verified.",
+        title: name + " is part of StewardMD Pro",
+        body: "Sign in to see what your plan includes. Registered doctors get Pro free for 7 days once their registration is verified.",
         cta: "Sign in", act: "signin"
       };
     }
