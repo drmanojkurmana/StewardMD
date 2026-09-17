@@ -253,7 +253,13 @@ function mapSccmBundle(bundle) {
     const req = ServiceRequest({
       id: sourceId(system, "sr", s.id), patientId: patient.id, encounterId: encRef(s.encounter),
       code: k.code || k.display, category, priority: ["routine", "urgent", "stat"].includes(s.priority) ? s.priority : (s.priority === "asap" ? "urgent" : "routine"),
-      requesterId: `external:${system}`, status: "draft",
+      requesterId: `external:${system}`,
+      /* R5-2: an order the SENDER says is finished is filed FINISHED, not draft. Draft was right for a
+       * live external order (nothing here may collect or bill against it) and wrong for a dead one: a
+       * worklist asks the store for open orders now (ward-order.js OPEN_ORDER_STATUSES), and an order
+       * the other hospital completed or cancelled months ago would otherwise sit in that answer for
+       * ever. Only the three closed words are taken from the sender; everything else is still draft. */
+      status: ["completed", "revoked", "cancelled"].includes(String(s.status || "")) ? String(s.status) : "draft",
       source: src("sr", s.id),
     });
     req.codeSystem = k.system || "unspecified";
