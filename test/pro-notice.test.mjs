@@ -69,6 +69,28 @@ test("a plain non-Pro feature gets the paywall too", () => {
   assert.equal(N.explain("queue-branding").act, "paywall");
 });
 
+test("a signed-out reader is asked to sign in, not told their connection failed", () => {
+  const { N, win } = load({ pro: false, state: undefined });
+  win.SMD_AUTH = { currentUser: null };
+  const e = N.explain("clinix");
+  assert.equal(e.kind, "signin");
+  assert.equal(e.act, "signin");
+  assert.match(e.cta, /sign in/i);
+  assert.ok(!/could not confirm|connection/i.test(e.body), `must not blame the network: ${e.body}`);
+  assert.match(e.title, /CliniX/);
+});
+
+test("signed out as the SERVER reports it (/api/billing/status answers signedIn:false) also asks to sign in", () => {
+  const { N } = load({ pro: false, state: { signedIn: false, pro: false, promoUntil: 0 } });
+  assert.equal(N.explain("clinix").kind, "signin");
+});
+
+test("a signed-in account is never told to sign in, even before Firebase has restored the user", () => {
+  const { N, win } = load({ pro: false, state: { signedIn: true, pro: false, reason: "none", verified: true } });
+  win.SMD_AUTH = { currentUser: null };
+  assert.equal(N.explain("clinix").kind, "none");
+});
+
 test("an unknown entitlement admits it rather than inventing a cause", () => {
   const { N } = load({ pro: false, state: undefined });
   const e = N.explain("maik");

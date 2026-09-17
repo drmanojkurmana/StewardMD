@@ -45,6 +45,20 @@
   function P() { try { return window.SMD_CLINIX_PROGRESS || null; } catch (e) { return null; } }
   function flag(k) { try { return !!(window.SMD_CLINIX_FLAGS && SMD_CLINIX_FLAGS.bool(k)); } catch (e) { return false; } }
 
+  /* Pro lock: one system is free (manifest `free: true`), the rest need Pro. Decided at render and at
+   * every door (system card, disease/module open, resume), so a stale screen cannot leak content. */
+  function isPro() { try { return !!(window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()); } catch (e) { return false; } }
+  function locked(system) { return M() ? M().systemLocked(system, isPro()) : false; }
+  function showLocked() {
+    try { if (window.SMD_PRO_NOTICE && SMD_PRO_NOTICE.show) { SMD_PRO_NOTICE.show("clinix"); return; } } catch (e) {}
+    try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall("clinix"); return; } } catch (e) {}
+    toast("This system is part of StewardMD Pro");
+  }
+  function diseaseLocked(diseaseId) {
+    var found = C() && state.catalog && C().diseaseEntry(state.catalog, diseaseId);
+    return !!found && locked(found.system);
+  }
+
   /* ── state ───────────────────────────────────────────────────────────────── */
 
   var state = {
@@ -165,10 +179,13 @@
         : chapters ? (chapters + (chapters === 1 ? " chapter" : " chapters"))
         : "Coming soon";
       var empty = !n && !chapters;
-      html += '<button type="button" class="cx-sys' + (empty ? " cx-sys--empty" : "") + '" data-act="cx-system" data-id="' + esc(s.id) + '">' +
+      var lock = locked(s);
+      html += '<button type="button" class="cx-sys' + (empty ? " cx-sys--empty" : "") + (lock ? " cx-sys--locked" : "") + '" data-act="cx-system" data-id="' + esc(s.id) + '"' +
+        (lock ? ' aria-label="' + esc(s.title) + ', Pro"' : "") + ">" +
         '<span class="cx-sys-ic">' + ic(s.icon || "stethoscope") + "</span>" +
         '<span class="cx-sys-t">' + esc(s.title) + "</span>" +
         '<span class="cx-sys-n">' + esc(label) + "</span>" +
+        (lock ? '<span class="cx-sys-pro">' + ic("lock") + "Pro</span>" : "") +
         "</button>";
     }
     html += "</div></section>";
@@ -325,8 +342,9 @@
 
   function openSkills() {
     state.loading = true;
+    state.skillsAll = null;
     go("skills");
-    C().loadAllSkills().then(function (b) {
+    C().loadAllSkills(isPro()).then(function (b) {
       state.skillsAll = b;
       if (!b) { toast("Could not load the skill library"); back(); return; }
       repaint();
@@ -1347,6 +1365,7 @@
   /* ── actions ─────────────────────────────────────────────────────────────── */
 
   function openDisease(id) {
+    if (diseaseLocked(id)) { haptic("light"); showLocked(); return; }
     state.diseaseId = id;
     state.loading = true;
     go("disease");
@@ -1356,6 +1375,7 @@
       // vivaAnswer's state.vivaCurrent !== cur check).
       if (state.diseaseId !== id) return;
       state.loading = false;
+      if (built && locked(built.system)) { state.built = null; back(); showLocked(); return; }
       state.built = built;
       if (!built) { toast("Could not load this topic"); back(); return; }
       repaint();
@@ -1855,7 +1875,9 @@
       case "cx-close": haptic("light"); closeMod(); return;
       case "cx-back": haptic("light"); back(); return;
 
-      case "cx-system": state.systemId = id; haptic("tap"); go("system"); return;
+      case "cx-system":
+        if (locked(C() && C().systemById(state.catalog, id))) { haptic("light"); showLocked(); return; }
+        state.systemId = id; haptic("tap"); go("system"); return;
       case "cx-disease": haptic("tap"); openDisease(id); return;
       case "cx-chapter": state.chapterId = id; haptic("tap"); go("chapter"); return;
       case "cx-lesson": haptic("tap"); openLesson(id); return;
@@ -1984,6 +2006,7 @@
       // disease while this fetch was in flight.
       if (state.diseaseId !== pos.diseaseId) return;
       if (!built) { toast("Could not load that topic"); return; }
+      if (locked(built.system)) { showLocked(); return; }
       state.built = built;
       state.systemId = built.system.id;
       go("disease");
@@ -2014,6 +2037,13 @@
       r._cxWired = true;
       r.addEventListener("click", onClick);
       r.addEventListener("keydown", onKeydown);
+      // Buying Pro (or a free verified week starting) must unlock the grid without a relaunch.
+      try {
+        if (window.SMD_PRO && SMD_PRO.onProChange) SMD_PRO.onProChange(function () {
+          var top = state.stack[state.stack.length - 1];
+          if (top === "home") repaint(); else if (top === "skills") openSkills();
+        });
+      } catch (e) {}
     }
     wireSignout();
   }

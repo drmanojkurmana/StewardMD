@@ -163,17 +163,21 @@
   /* Every skill in every pack, with NO disease attached. This is what makes "learn how to percuss"
    * reachable on its own: a skill is the atom, so it was always teachable standalone - there simply
    * was no door to it. Shaped like a loadDisease() result so every renderer works unchanged. */
+  /* `pro` scopes it: without Pro only shared packs and the free system's packs load, so a locked
+   * system's skills are not reachable through the library either. Cached per pack set. */
   var _allCache = null;
-  function loadAllSkills() {
-    if (_allCache) return Promise.resolve(_allCache);
+  function loadAllSkills(pro) {
     return loadCatalog().then(function (cat) {
-      var packs = (cat.skillPacks || []).map(function (p) { return p.id; });
+      var M = model();
+      var packs = M ? M.openPackIds(cat, !!pro) : (cat.skillPacks || []).map(function (p) { return p.id; });
+      var key = packs.join(",");
+      if (_allCache && _allCache.key === key) return _allCache;
       var jobs = [loadMedia()];
       for (var i = 0; i < packs.length; i++) jobs.push(loadPack(packs[i]));
       return Promise.all(jobs).then(function (res) {
         var media = res[0] || {}, skills = {};
         for (var k = 1; k < res.length; k++) if (res[k]) copyInto(skills, res[k]);
-        _allCache = { disease: null, system: null, skills: skills, media: media };
+        _allCache = { key: key, disease: null, system: null, skills: skills, media: media };
         return _allCache;
       });
     }).catch(function () { return null; });

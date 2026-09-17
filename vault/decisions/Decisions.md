@@ -5,6 +5,30 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-17 · ONCQIS and SURGX free; CliniX one system free, the rest Pro
+
+**Decision (owner):** ONCQIS (oncology) and SURGX are included free on every account. CliniX gives
+Respiratory free and locks the other four systems (Cardiovascular, GIT and abdomen, Neurology, Short
+cases) behind Pro.
+
+**How:** ONCQIS and SURGX already had no Pro check in code; only copy changed (website pricing, in-app
+paywall blurbs, and the +₹89 OncoTree + ONCQIS add-on row removed). CliniX: `free: true` on the
+system in `clinix/manifest.json` (data, not code); pure `systemLocked()` / `openPackIds()` in
+`clinix-model.js`; enforced at every door in `clinix-screens.js` (system card, disease/module open,
+resume) and in `loadAllSkills(pro)` so a locked system's skills are not reachable through the skills
+library. Refusals route through `SMD_PRO_NOTICE` ("clinix"). `pro-notice.js` gained a `signin` reason
+so a signed-out reader is asked to sign in instead of being told their connection failed.
+
+**Trade-off:** client-side only. CliniX content ships inside the native bundle, so a determined user
+can read the JSON; same ceiling as every other client gate. Pro here is `SMD_PRO.isProSync()`, which
+with `VERIFY_REQUIRED_FOR_PRO` on (default) means verified (7-day free Pro) or paid; unverified
+signed-up users see the lock immediately, the launch promo does not open it.
+
+**Open for owner:** the App Store product `in.stewardmd.onco.monthly` (Onco add-on, READY_TO_SUBMIT)
+is now unsold; leave it out of the review submission or delete it. Website plan ladder
+(Student/Intern/Resident/Physician Pro/Onco+ at ₹129-799) still differs from the in-app/App Store
+ladder (Trainee/Co-Resident/Pro/Physician/Physician Pro at ₹199-2,499).
+
 ## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
 
 **Decision:** `recommendFor()` now recommends Private Device OCR - relabeled "Hybrid" in the UI whenever

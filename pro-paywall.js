@@ -31,17 +31,16 @@
   var _root = null, _tier = "pro", _cycle = "monthly", _status = null, _plans = null;
   var TIER_ORDER = ["student", "coresident", "pro", "physician", "physicianpro"];
   var TIER_BLURB = {
-    student: "Full MaiK AI · voice dictation · learn atlases",
+    student: "Full MaiK AI · voice dictation · every CliniX system",
     coresident: "2 accounts · shared AI pool · 4 imaging/day each",
     pro: "Imaging AI · Patient Summary · Research · Lab Watch · Ultra voice",
     physician: "Your clinic (own Drive) · FollowCare · Scribe · unlimited billing",
-    physicianpro: "Cloud clinic (we host) · more AI · OncoTree + ONCQIS included",
+    physicianpro: "Cloud clinic (we host) · more AI",
   };
   var TIER_IAP = { student: "trainee", coresident: "coresident", pro: "pro", physician: "physician", physicianpro: "physicianpro" };
   function iosNativeIap() { return plat() === "ios" && window.SMD_IAP && typeof SMD_IAP.purchase === "function"; }
   function productIdFor(body) {
     if (body.tier) return "in.stewardmd." + (TIER_IAP[body.tier] || body.tier) + "." + (body.cycle === "annual" ? "annual" : "monthly");
-    if (body.addon === "onco") return "in.stewardmd.onco.monthly";
     if (body.pack) return "in.stewardmd.tokens." + body.pack;
     return null;
   }
@@ -76,14 +75,6 @@
       (strike ? '<span style="font:600 12px var(--sans);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span>' : '') +
       '<div style="font:800 18px var(--serif,Georgia,serif);color:var(--ink)">' + inr(tierPrice(t)) + '<span style="font:600 11px var(--sans);color:var(--slate-soft)">' + tierPer(t) + '</span></div></div>' +
       '<div style="font:500 11.5px/1.4 var(--sans);color:var(--slate-soft);margin-top:3px">' + esc(TIER_BLURB[id] || "") + (t.requiresVerify ? " · verified trainee" : "") + '</div></button>';
-  }
-  function addonRow() {
-    // Onco add-on only for Trainee/Pro/Physician (Physician Pro includes it).
-    if (_tier === "physicianpro" || _tier === "student" || _tier === "coresident") return "";
-    var a = _plans && _plans.addons && _plans.addons.onco; if (!a) return "";
-    return '<div style="display:flex;align-items:center;gap:9px;margin:0 18px 6px;padding:10px 12px;border:1px solid var(--line,#d7dee3);border-radius:11px;background:var(--panel,#fff);font:600 12.5px var(--sans);color:var(--ink)">' +
-      ppIco("plus") + ' OncoTree + ONCQIS <span style="flex:1"></span><span style="color:var(--slate-soft);margin-right:8px">+' + inr(a.amount) + '/mo</span>' +
-      '<button data-pp="buy-addon" data-addon="onco" style="border:1.5px solid var(--teal,#0e6e63);background:transparent;color:var(--teal,#0e6e63);border-radius:9px;padding:6px 12px;font:800 12px var(--sans);cursor:pointer">Add</button></div>';
   }
   function tokenStore() {
     var tk = _plans && _plans.tokens; if (!tk) return "";
@@ -150,7 +141,7 @@
     var ios = plat() === "ios", body;
     if (_plans && _plans.tiers) {
       var tiers = TIER_ORDER.filter(function (id) { return _plans.tiers[id]; }).map(function (id) { return tierCard(id, _plans.tiers[id]); }).join("");
-      body = cycleToggle() + '<div style="padding:2px 18px 4px">' + tiers + '</div>' + addonRow() + ctaBlock() + tokenStore();
+      body = cycleToggle() + '<div style="padding:2px 18px 4px">' + tiers + '</div>' + ctaBlock() + tokenStore();
     } else {
       body = '<div style="padding:20px 18px;text-align:center;color:var(--slate-soft);font:500 13px var(--sans)">Loading plans…</div>';
     }
@@ -169,7 +160,6 @@
         if (k === "cycle") { _cycle = b.getAttribute("data-cycle"); return paint(); }
         if (k === "signin") { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
         if (k === "buy") return doBuy({ tier: _tier, cycle: _cycle }, b);
-        if (k === "buy-addon") return doBuy({ addon: b.getAttribute("data-addon") }, b);
         if (k === "token") return doBuy({ pack: b.getAttribute("data-pack") }, b);
         if (k === "redeem") return redeem();
         if (k === "ailimit-upgrade") { close(); return openPaywall(); }

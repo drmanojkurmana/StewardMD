@@ -86,7 +86,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/thorex-screens.css?v=tx12">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx18-calm">
 <link rel="stylesheet" href="/insulin.css?v=ins15">
-<link rel="stylesheet" href="/clinix.css?v=cx17-annex">
+<link rel="stylesheet" href="/clinix.css?v=cx18-prolock">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
 <link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
@@ -2087,11 +2087,11 @@ window.openExternal = function (u) {
 <!-- Guest session bar: the 300 s auto-sign-out clock, across the top instead of buried in
      the account chip. Additive, reads app.js's account record; never edits app.js. -->
 <script src="/guest-timer.js?v=gold1200-guestbar2" defer></script>
-<script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold990-resync1" defer></script>
+<script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold991-oncofree" defer></script>
 <script src="/pro-badge.js?v=gold692" defer></script>
 <!-- "Why is this locked?" - the one place that turns a Pro refusal into a sentence and the
      RIGHT button (verify vs subscribe). A silent Pro gate reads as a broken app. -->
-<script src="/pro-notice.js?v=gold1200-why" defer></script>
+<script src="/pro-notice.js?v=gold1202-signin" defer></script>
 <script src="/signout-fix.js?v=gold342-bkstatus-wsqfu3" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
 <script src="/verify.js?v=gold1026-roles-auth1-resync1-wsqfu3" defer></script>
@@ -2408,13 +2408,13 @@ window.openExternal = function (u) {
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
 <script src="/clinix-flags.js?v=cx14-session" defer></script>
-<script src="/clinix-model.js?v=cx20-annex" defer></script>
-<script src="/clinix-content.js?v=cx15-ver" defer></script>
+<script src="/clinix-model.js?v=cx21-prolock" defer></script>
+<script src="/clinix-content.js?v=cx16-prolock" defer></script>
 <script src="/clinix-diagrams.js?v=cx13" defer></script>
 <script src="/clinix-audio.js?v=cx-stridor2" defer></script>
 <script src="/clinix-store.js?v=cx12" defer></script>
 <script src="/clinix-tutor.js?v=cx14" defer></script>
-<script src="/clinix-screens.js?v=cx24-session" defer></script>
+<script src="/clinix-screens.js?v=cx25-prolock" defer></script>
 <script src="/clinix.js?v=cx12" defer></script>
 <!-- SURGX (SURGˣ) · Surgical Intelligence (additive, flag-gated smd_surgx; ON for testers, flip to
      false before any non-tester release - see surgx-flags.js). Scoped #surgxRoot + .sgx-* +

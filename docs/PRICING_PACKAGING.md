@@ -123,6 +123,10 @@ Over any daily cap or monthly quota → **top up tokens** (§7) or upgrade; neve
 
 ## 5. Oncology — Physician Onco add-on (NEW)
 
+> **SUPERSEDED 2026-09-17 (owner decision):** ONCQIS and OncoTree are free on every account, so the
+> +₹89 Onco add-on is withdrawn from the paywall. SURGX is also free. CliniX: Respiratory free, other
+> systems Pro. See `vault/decisions/Decisions.md`. The rest of this section is kept for history.
+
 Oncology is monetized: **only disease reference + AJCC/TNM staging are free** (the hook). Everything clinical-decision in onco is the **Physician Onco** pack.
 
 - **Physician Onco — +₹89/month add-on on the Physician tier** (optional). Physician + Onco = **₹1,588/mo**. 🔧 annual +₹899/yr. **Included free in Physician Pro** (no add-on needed).
