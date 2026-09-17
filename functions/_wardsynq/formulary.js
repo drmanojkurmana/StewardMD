@@ -45,6 +45,9 @@ function resolveFormulary(list) {
 
   rows.forEach((raw, index) => {
     const r = raw && typeof raw === "object" ? raw : {};
+    /* RETIRED is kept on the list (Admin > Hospital > Formulary) so the audit and a later re-listing find the same row, and
+     * is no longer on the formulary: it matches nothing here. controlled-drugs.js still reads its controlled flag. */
+    if (r.retired === true) return;
     const drug = str(r.drug);
     const code = str(r.code);
     if (!drug && !code) { problems.push({ index, reason: "no_drug_or_code" }); return; }

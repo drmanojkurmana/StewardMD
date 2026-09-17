@@ -7842,3 +7842,20 @@ of compliance.js is untouched.
   drafts count outstanding only against the order's store; an order naming no store keeps counting against every store
   holding the item and is marked (`onOrderNoStore`).
 - Not changed: `revenueToday` still reads the newest 1,000 invoices of the org (dashboard tile, not a bill).
+
+## 2026-09-17 Formulary screen: editor and CSV load through one checked door (branch formulary-screen, R3-2)
+- Routes: GET/POST /org/formulary (editor, whole list) and POST /org/formulary-import (CSV: map, then dry run with an
+  explicit mode merge or replace). Both dry run first with a row-by-row report; a commit needs a reason, confirmCount equal
+  to the dry run's change count and its planId (which covers the list as it stood), and any problem refuses the whole save.
+- /org/update refuses wardsynq.formulary and requireReasonOffFormulary (422 use_formulary_route). A group recommendation
+  carrying a formulary is checked when set and again on adoption.
+- Capability: no pharmacy or formulary capability exists (verified in _queue_roles.js). Chosen: staff.admin AND
+  order.verify, which is the admin role and the owner; hr (staff.admin only) and pharmacy (order.verify only) get 403.
+  A pharmacist who should edit the formulary needs the admin role until a formulary.manage capability is decided.
+- Retire: an entry with retired:true stays stored and matches no order (formulary.js resolveFormulary skips it);
+  controlled-drugs.js still reads its controlled flag.
+- Audit: one org chain row (org:formulary) in the same commit as the change, naming added (+), changed (~) and removed (-)
+  entries by drug or code with counts, reason and plan id. ponytail: the chain keeps 200 characters of meta, so a large
+  load names its first entries and counts the rest.
+- ponytail ceilings: 3000 entries (the list lives in the org document, 1 MiB shared with every setting); a 2 MB CSV.
+- No formulary content ships.

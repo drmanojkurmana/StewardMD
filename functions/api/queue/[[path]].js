@@ -185,6 +185,7 @@ import { buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport, roster
 import * as GROUP from "../../_hospital_group_store.js";
 import { hospitalCounts } from "../../_wardsynq/hospital-group.js";
 import * as CLINICAL from "../../_wardsynq/clinical-settings.js";
+import * as FORMULARY from "../../_wardsynq/formulary-settings.js";
 import { readGstSettings, validateGstSettings, changedGstKeys } from "../../_wardsynq/gst-settings.js";
 import * as SEED from "../../_wardsynq/seed-signoff.js";
 import * as SEEDSTORE from "../../_seed_signoff_store.js";
@@ -1183,6 +1184,9 @@ export async function onRequest(context) {
         // A group recommendation is copied into hospitals on adoption, so it may not carry an unbuilt level-2 ward rule either.
         const groupWardRule = level2WardRuleRefusal(p && p.criticalEscalation);
         if (groupWardRule) return refuse(422, "level2_ward_rule_not_built", groupWardRule);
+        // R3-2: a recommended formulary is copied into hospitals on adoption, so it passes the same check as the hospital's own.
+        if (p && p.formulary != null && (!Array.isArray(p.formulary) || FORMULARY.checkFormulary(p.formulary).problems.length))
+          return refuse(422, "invalid_formulary", "The recommended formulary has entries a hospital could not use (a restriction nobody can clear, a name or code used twice, or a value that cannot be read). Nothing was saved.");
         return json({ ok: true, group: await GROUP.setPolicy(env, g, p, actor.id) }, 200, request);
       }
       if (sub === "overview") {
@@ -1236,6 +1240,9 @@ export async function onRequest(context) {
         if (!l || l.state !== "member") return refuse(409, "not_a_member", "This hospital is not a member of that group.");
         const [gr, o] = await Promise.all([GROUP.getGroup(env, arg("groupId")), ORG.getOrg(env, arg("orgId"))]);
         if (!gr || !o) return refuse(404, "not_found", "The group or the hospital could not be found.");
+        // A recommendation saved before the formulary was checked is refused here rather than copied in unchecked (R3-2).
+        if (gr.policy && gr.policy.formulary != null && (!Array.isArray(gr.policy.formulary) || FORMULARY.checkFormulary(gr.policy.formulary).problems.length))
+          return refuse(422, "invalid_formulary", "The group's recommended formulary has entries this hospital could not use, so nothing was adopted. Ask the group to correct it.");
         return done(await GROUP.adoptPolicy(env, o, gr, actor.id));
       }
     }
@@ -5786,6 +5793,59 @@ export async function onRequest(context) {
       if (JSON.stringify(back) !== JSON.stringify(value)) return json({ ok: false, error: "not_saved", message: "The settings did not read back as sent, so do not rely on them. Try again." }, 502, request);
       return json({ ok: true, changed, policy: back }, 200, request);
     }
+    /* R3-2: the hospital's formulary (formulary-settings.js), on Admin > Hospital. The editor (POST /org/formulary, the whole
+     * list) and the CSV load (POST /org/formulary-import) both dry run first, row by row; a commit writes only the dry run's
+     * result (confirmCount, planId), refuses the whole save on any problem, needs a reason, and its audit row names the
+     * entries. staff.admin AND order.verify: no formulary capability exists, and this pair is admin (and the owner) without
+     * hr, which holds staff.admin and has no business with what the pharmacy stocks and restricts. /org/update refuses the key. */
+    if (seg === "org" && (sub === "formulary" || sub === "formulary-import")) {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      if (capsFor(az.role).indexOf(CAPS.ORDER_VERIFY) < 0) return json({ ok: false, error: "forbidden", role: az.role, message: 'Your role here is "' + az.role + '", which cannot change the formulary. It needs both staff administration and pharmacy verification (the admin role).' }, 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The formulary belongs to a WardSynQ hospital." }, 409, request);
+      const w = o.wardsynq || {};
+      const current = Array.isArray(w.formulary) ? w.formulary : [];
+      const flagNow = w.requireReasonOffFormulary === true;
+      if (method === "GET" && sub === "formulary") {
+        const chk = FORMULARY.checkFormulary(current);
+        return json({ ok: true, entries: chk.entries, requireReasonOffFormulary: flagNow, problems: chk.problems, maxEntries: FORMULARY.MAX_ENTRIES }, 200, request);
+      }
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      let plan, rows, fileProblems = false;
+      if (sub === "formulary") {
+        if (!Array.isArray(cb.entries)) return json({ ok: false, error: "entries_required", message: "Send the whole formulary as a list. Nothing was saved." }, 422, request);
+        plan = await FORMULARY.planFormulary(current, cb.entries, flagNow, cb.requireReasonOffFormulary === undefined ? flagNow : cb.requireReasonOffFormulary === true);
+        rows = plan.rows.filter((r) => r.status !== "unchanged");
+      } else {
+        const read = FORMULARY.readFormularyCsv(cb.csv, cb.mapping, cb.mode, current);
+        if (read.error) return json({ ok: false, error: read.error, message: read.message }, read.status, request);
+        if (read.step === "map") return json({ ok: true, ...read }, 200, request);
+        plan = await FORMULARY.planFormulary(current, read.list, flagNow, flagNow);
+        // Every file row, in file order; an entry already on the list appears only when it has a problem of its own.
+        rows = plan.rows.map((r) => {
+          const row = read.sourceRow[r.index], extra = row == null ? [] : read.rowProblems.get(row) || [];
+          if (extra.length) fileProblems = true;
+          return { ...r, row, ...(extra.length ? { status: "invalid", problems: [...extra, ...(r.problems || [])] } : {}) };
+        }).filter((r) => r.row != null || r.status === "invalid").sort((a, b) => (a.row == null ? 0 : a.row) - (b.row == null ? 0 : b.row));
+      }
+      const report = { step: "preview", planId: plan.planId, counts: plan.counts, changeCount: plan.changeCount, rows, removed: plan.removed, requireReasonOffFormulary: plan.requireReasonOffFormulary,
+        ...(plan.problems.some((p) => p.index < 0) ? { listProblems: plan.problems.filter((p) => p.index < 0) } : {}) };
+      if (!plan.ok || fileProblems) return json({ ok: false, error: "invalid_formulary", message: "Nothing was saved. Every entry with a problem is listed with the reason; correct them and run the dry run again.", ...report }, 422, request);
+      if (cb.commit !== true) return json({ ok: true, ...report }, 200, request);
+      if (!plan.changeCount) return json({ ok: true, ...report, step: "done", written: 0 }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the formulary is being changed. Nothing was saved.", ...report }, 422, request);
+      if (Number(cb.confirmCount) !== plan.changeCount || String(cb.planId || "") !== plan.planId) return json({ ok: false, error: "preview_changed", message: "The formulary or the changes differ from the dry run. Run the dry run again; nothing was saved.", ...report }, 409, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { formulary: plan.entries, requireReasonOffFormulary: plan.requireReasonOffFormulary } }, actor.id,
+        { action: "org:formulary", meta: FORMULARY.auditMeta(plan, reason, sub === "formulary" ? "editor" : "csv-" + cb.mode) });
+      const back = ((await ORG.getOrg(env, orgId)) || {}).wardsynq || {};
+      if (JSON.stringify(back.formulary || []) !== JSON.stringify(plan.entries) || (back.requireReasonOffFormulary === true) !== plan.requireReasonOffFormulary)
+        return json({ ok: false, error: "not_saved", message: "The formulary did not read back as sent, so do not rely on it. Open it again and check." }, 502, request);
+      return json({ ok: true, ...report, step: "done", written: plan.changeCount }, 200, request);
+    }
     if (seg === "org" && sub === "rcm-settings") {
       const cb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || cb.orgId || "";
@@ -6173,6 +6233,10 @@ export async function onRequest(context) {
         /* Owner decision 2026-09-14: an external ABDM invoice is a clinical document; no other handling is built. */
         const invoiceRefusal = externalInvoiceHandlingRefusal(body.wardsynq);
         if (invoiceRefusal) return json({ ok: false, error: "abdm_invoice_handling_not_built", message: invoiceRefusal }, 422, request);
+        /* R3-2: the formulary is saved only through /org/formulary and /org/formulary-import (dry run, checked, reason, audited). */
+        const wb = body.wardsynq;
+        if (wb && typeof wb === "object" && ("formulary" in wb || "requireReasonOffFormulary" in wb))
+          return json({ ok: false, error: "use_formulary_route", message: "The formulary is changed on Admin Center > Hospital > Formulary (POST /org/formulary), where it is checked and audited. Nothing was saved." }, 422, request);
         /* Owner decision 2026-09-15: level 2 tells the on-duty ward team by a named rule; only the rules built may be saved. */
         const wardRuleRefusal = level2WardRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
         if (wardRuleRefusal) return json({ ok: false, error: "level2_ward_rule_not_built", message: wardRuleRefusal }, 422, request);
