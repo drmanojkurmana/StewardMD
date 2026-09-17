@@ -7685,3 +7685,33 @@ of compliance.js is untouched.
 - Unified in-basket is a screen (pages/inbasket.js) over the existing routes (patient-messages, referral-inbox,
   cosign-queue, safety-inbox), each shown loading, failed, not for this role, or its items with age and owner. No new
   aggregation route. No NABH KPI entry is owned by this package; compliance.js untouched.
+
+## 2026-09-17 Supplier returns, vendor rate contracts, reorder drafts from recorded use (branch supply-chain-depth, R2-4)
+
+- Supplier return is a StockMovement kind `supplier-return` (stock.js returnToSupplier), written only against the receipt
+  it came in on: the receipt and every earlier return naming it are read, and more than the receipt brought is refused
+  with the numbers. recordMovement refuses the kind from any other door (stock-move). Supplier is the receipt's
+  receivedFrom, else its purchase order's vendor, else typed. A GST debit or credit note number is kept when given;
+  nothing is computed (purchasing.js has no purchase-side GST model). Ceiling: two concurrent returns against one receipt
+  are not serialised; the level would show any excess.
+- Controlled drugs: controlled or not is the drug master applied to the receipt's own item (route passes isControlled).
+  A controlled return needs the witness (hospital policy, registers.ndps.requireWitness) and the Controller of Drugs
+  approval reference, the same rule as a controlled transfer out to another institution (NDPS r.52V(3)). The register
+  book (controlled-drugs.js registerBook) counts it as a disbursement in `wasted`, as transfer-out already was, so the
+  Form 3H day still closes, and names it separately as `returnedToSupplier`. Quarantine rows are closed by hand in
+  Registers as before.
+- Rate contracts live on the existing Vendor record (rateContracts[]), one version per change, no new resource type or
+  grant. DEVIATION from "versioned per contract": the version is the vendor's. Overlapping contracts for one item and unit
+  are refused; changing a recorded contract needs a reason. Prices are paise before GST, compared only in the same unit.
+  GET ward/approvals attaches the check to pending PurchaseOrder approvals (in date on the order's raisedAt); a check
+  that failed is shown as failed. ward.js approvalRow shows it (the one ward.js change).
+- Reorder drafts (purchasing.js reorderSuggestionsFrom): use is dispenses (not returned), transfer-out and consumption out
+  of that store in the window; wastage, adjustments and supplier returns are not use. Suggested = ceil(avg daily use x
+  (lead + safety days) - level - outstanding on open, part-received or awaiting-approval orders). Orders carry no store,
+  so the outstanding quantity counts against each store holding the item (said on screen). Refused per row: fewer days of
+  data than the minimum, no use in the window, negative level. The whole read is refused past 1000 movements/dispenses.
+  A store keeper (no order.dispense) reads no dispenses and sees general stores items only.
+- Settings `wardsynq.reorderPolicy` {windowDays, leadTimeDays, safetyDays, minDataDays}, all or none, no default, on
+  /org/reorder-policy (staff.admin, reason required, audited). Screens: General stores page cards (order.dispense or
+  stores.manage; settings card for staff.admin). Routes: GET ward/supply-chain, POST ward/supplier-return, POST
+  ward/rate-contract, GET ward/reorder-suggestions (order.dispense, stores.manage fallback).
