@@ -417,9 +417,15 @@ export function historyEntries(sections, patient) {
 export function notRead(sections, resource, label) {
   const own = (Array.isArray(sections) ? sections : []).filter((s) => s && s.resource === resource);
   if (own.some((s) => Array.isArray(s.rows))) return {};
+  /* SAY WHAT ACTUALLY HAPPENED. "The hospital did not answer" hid every read error behind one sentence,
+   * so a failing radiology read on the owner's iPhone (2026-09-17) could not be told apart from a
+   * timeout, a sign-out or a refused request. The recorded message follows, digit runs masked; it
+   * carries no patient data (request errors name a path or a status, never a row). */
+  const failed = own.find((s) => s.error);
+  const detail = failed ? ' (' + String(failed.error).replace(/\d{3,}/g, '#').slice(0, 140) + ')' : '';
   const why = own.some((s) => s.unreadable === 'not-scoped')
     ? 'the agent never learned which field carries the patient, so the request could not be limited to this patient.'
-    : own.some((s) => s.error) ? 'the hospital did not answer.' : 'the agent never learned this screen for this hospital. Run Connect Hospital again to teach it.';
+    : failed ? 'the hospital did not answer' + detail + '.' : 'the agent never learned this screen for this hospital. Run Connect Hospital again to teach it.';
   return { unreadable: label + ' were not read: ' + why };
 }
 

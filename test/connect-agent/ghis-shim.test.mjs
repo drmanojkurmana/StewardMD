@@ -240,7 +240,7 @@ test('absent is not negative: a section the adapter could not read says so, an e
     { resource: 'medications', rows: [], via: 'endpoint' },
   ];
   assert.match(notRead(sections, 'labs', 'Lab results').unreadable, /^Lab results were not read: the agent never learned this screen for this hospital\./);
-  assert.match(notRead(sections, 'radiology', 'Radiology reports').unreadable, /^Radiology reports were not read: the hospital did not answer\./);
+  assert.match(notRead(sections, 'radiology', 'Radiology reports').unreadable, /^Radiology reports were not read: the hospital did not answer \(request failed in the page: aborted\)\./);
   assert.deepEqual(notRead(sections, 'medications', 'Medications'), {}, 'proven and empty is "none"');
   assert.match(notRead([], 'medications', 'Medications').unreadable, /never learned/, 'no screen at all is not read either');
   const body = serveGhisProxy({ path: '/lab?patientId=K1', sections, patient: { patientId: 'K1' } }).body;
