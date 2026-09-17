@@ -28,6 +28,7 @@ import { DHS_CHAPTERS, DHS_ELEMENTS } from "./dhs-elements.js";
 import { milestoneTimes, dischargeMinutes } from "./discharge-milestones.js";
 import { rescheduleCell, unplannedReturnCell } from "./theatre.js";
 import { opdWaits, diagnosticWaits, waitCell } from "./access-times.js";
+import { initialAssessmentCell } from "./admission-times.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000, HOUR = 3600000;
@@ -92,7 +93,10 @@ const stayIn = (e, w) => e && INPATIENT.has(e.class) && e.status !== "cancelled"
 /* What each indicator is computed from, or what the record lacks. `needs` are the types read; `compute` returns a
  * month cell. An indicator with `missing` is not computable and says what would have to be recorded. */
 const NABH_SOURCES = {
-  1: { missing: "The time a patient reached the ward bed and the time the doctor's initial assessment was completed are not recorded as two separate times." },
+  /* R2-2 ward-times-and-desk (2026-09-17): 1 from the stay's admission times (admission-times.js). */
+  1: { needs: ["AdmissionTimes", "Encounter"], source: "Inpatient admissions that started in the month (day care not included): minutes from the time the nurse recorded the patient reached the ward bed to the signing of the note a doctor marked as the initial assessment.",
+    note: "An admission missing either time is not averaged; the numbers missing each are shown beside the value. A stay whose assessment was signed before the recorded bed arrival (recorded with a reason) is counted beside, not averaged. Every admission is counted, not an audited sample.",
+    compute: (r, w) => initialAssessmentCell(r.AdmissionTimes, r.Encounter, w) },
   2: { needs: ["DiagnosticReport"], source: "Diagnostic reports released in the month (final or corrected); a report corrected after release counts as a reporting error.",
     note: "Counted per report, not per test within a report as the standard counts.",
     compute: (r, w) => { const rep = r.DiagnosticReport.filter((x) => (x.status === "final" || x.status === "corrected") && inW(x.reportedAt, w)); return val(rep.filter((x) => x.status === "corrected").length, rep.length, 1000); } },

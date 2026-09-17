@@ -335,6 +335,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* One stay's discharge relay (discharge-milestones.js): advised, pharmacy cleared, bill ready, TPA final approval asked
    * and received, left, each with who recorded it and when. Each step is written by the role whose act it is. */
   "DischargeMilestone",
+  /* One stay's two NABH KPI 1 times (admission-times.js): when the patient reached the ward bed, recorded by the nurse
+   * (EMR_VITALS, VITALS_TYPES in actor.js), and which signed note a doctor marked as the initial assessment. */
+  "AdmissionTimes",
   /* A patient another hospital asks us to take (transfer-centre.js): the call, the consultant's answer with the capacity
    * of that moment, and the admission request it became. No patientId until the patient is registered and accepted. */
   "TransferCentreRequest",
