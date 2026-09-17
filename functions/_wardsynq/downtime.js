@@ -28,7 +28,7 @@
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { scheduleSlots, parseFrequency } from "./mar-schedule.js";
 
@@ -142,8 +142,10 @@ async function downtimePack(request, env, ctx) {
   if (error) return { ...base, ...error, patients: [] };
 
   let encounters;
-  try { encounters = await svc.list("Encounter", 200); }
+  // R4-1: every open stay (was the oldest 200 encounters, so a printed pack missed the newest patients).
+  try { encounters = await svc.listByStatus("Encounter", [OPEN]); }
   catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: "too_many_open", detail: str(e.message), patients: [] };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), patients: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), patients: [] };
   }

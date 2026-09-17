@@ -305,7 +305,8 @@ async function buildTwinSnapshot(request, env, ctx) {
    * "recorded" counts: no record means not known, never "not on one". */
   const icu = await section("icu", ["Encounter", "IcuRecord", "MedicationOrder"], async (rq, e, c) => {
     const svc = await openSvc(rq, e, c);
-    const encounters = (await svc.list("Encounter", 500)) || [];
+    // R4-1: the open stays only, read whole (a census past the ceiling throws and the section says unavailable).
+    const encounters = (await svc.listByStatus("Encounter", [OPEN])) || [];
     const open = encounters.filter((x) => x && x.class === "ICU" && x.status === OPEN);
     const ids = new Set(open.map((x) => x.id));
     const [icuRecords, orders] = await Promise.all([svc.list("IcuRecord", LIST_CAP), svc.list("MedicationOrder", LIST_CAP)]);
@@ -314,7 +315,7 @@ async function buildTwinSnapshot(request, env, ctx) {
     const rowsOf = (set) => open.filter((x) => set.has(x.id)).map((x) => ({ patientId: x.patientId, encounterId: x.id, ward: x.location && x.location.ward, bed: x.location && x.location.bed }));
     return {
       ok: true, generatedAt: new Date().toISOString(),
-      occupied: open.length, encounterReadCapped: encounters.length >= 500,
+      occupied: open.length,
       ventilatedRecorded: ventIds.size, vasopressorsRecorded: pressorIds.size,
       recordsCapped: (icuRecords || []).length >= LIST_CAP || (orders || []).length >= LIST_CAP,
       drill: { occupied: drillList(rowsOf(ids)), ventilated: drillList(rowsOf(ventIds)), vasopressors: drillList(rowsOf(pressorIds)) },

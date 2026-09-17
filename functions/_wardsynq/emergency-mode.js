@@ -34,7 +34,7 @@
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError, LIST_ALL_MAX } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -285,8 +285,14 @@ async function emergencyReconciliation(request, env, ctx) {
   // (admission/transfer's own bed-assignment-conflict-override) - a second relaxation on a second
   // type extends this list, not the shape of what it returns.
   let encounters;
-  try { encounters = await svc.list("Encounter", 500); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), overrides: [] }; }
+  /* R4-1: EVERY encounter, discharged included (an override outlives the stay it was used for). This was the
+   * oldest 500, so a declaration made after the hospital's 500th encounter listed none of its overrides. Past
+   * the ceiling the reconciliation is refused rather than shown short. */
+  try { encounters = (await svc.listAll("Encounter", { max: LIST_ALL_MAX, throwOnTruncate: true })).rows; }
+  catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: "too_many_records", detail: str(e.message), overrides: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), overrides: [] };
+  }
 
   const overrides = (encounters || []).filter(Boolean)
     .filter((e) => e.emergencyOverride && e.emergencyOverride.activationId === activationId)

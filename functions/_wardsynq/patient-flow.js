@@ -23,7 +23,7 @@
  */
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { listEd } from "./migrate-ed.js";
 import { bedBoard, ADMISSION_CLASSES, OPEN } from "./migrate-inpatient.js";
@@ -82,7 +82,8 @@ async function patientFlow(request, env, ctx) {
   let encounters, orders, administrations, serviceRequests, problems, reports;
   try {
     [encounters, orders, administrations, serviceRequests, problems, reports] = await Promise.all([
-      svc.list("Encounter", 500),
+      // R4-1: the open stays, however much closed history is on record (was the oldest 500 of every encounter).
+      svc.listByStatus("Encounter", [OPEN]),
       svc.list("MedicationOrder", 1000).catch(() => []),
       svc.list("MedicationAdministration", 1000).catch(() => []),
       svc.list("ServiceRequest", 1000).catch(() => []),
@@ -91,6 +92,7 @@ async function patientFlow(request, env, ctx) {
       svc.list("DiagnosticReport", 1000).catch(() => []),
     ]);
   } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: "too_many_open", detail: str(e.message), flow: null };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), flow: null };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), flow: null };
   }

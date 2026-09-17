@@ -28,7 +28,7 @@ import { Encounter, MedicationOrder } from "../../wardsynq/wardsynq-model.js";
 import { GovernanceError, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { vitalsToObservations, VITAL_CODES, displayUnit } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
@@ -93,6 +93,13 @@ const ADMISSION_CLASSES = Object.freeze([IPD, ICU, MATERNITY, PEDIATRICS, NICU])
 const OPEN = "in-progress";
 
 const str = (v) => (v == null ? "" : String(v).trim());
+
+/* R4-1: every OPEN encounter, however many closed stays and OPD visits the hospital has on record. It used
+ * to be list("Encounter", 200..1000), oldest first: past that the newest admission was the one a ward list
+ * left off and a bed check did not see. More open than the service's ceiling throws ListCeilingError. */
+const openEncounters = (svc) => svc.listByStatus("Encounter", [OPEN]);
+/** The refusal for a census that could not be read whole. Never a short list, never an admission. */
+const censusRefusal = (e) => ({ ok: false, status: 503, error: "too_many_open", detail: str(e.message) });
 
 /** Builds the per-request governed service, or a shaped refusal. Never throws. */
 async function openService(request, env, ctx, need) {
@@ -190,10 +197,13 @@ async function admitPatient(request, env, ctx) {
    * patient on a ward awaiting one. */
   let admissionOverride = null;
   if (candidate.location.bed) {
-    let openEncounters;
-    try { openEncounters = await svc.list("Encounter", 200); }
-    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
-    const clash = (openEncounters || []).find((e) => e && e.id !== candidate.id && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, candidate.location));
+    let open;
+    try { open = await openEncounters(svc); }
+    catch (e) {
+      if (e instanceof ListCeilingError) return { ...base, ...censusRefusal(e), written: 0 };
+      return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+    }
+    const clash = (open || []).find((e) => e && e.id !== candidate.id && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, candidate.location));
     if (clash) return bedOccupied(base, candidate);
 
     // TASK 4.2: the bed's own administrative state (blocked/cleaning/maintenance) and any stated
@@ -396,6 +406,22 @@ async function releaseBedClaim(svc, candidate) {
  * A caller with no read grant gets a refusal, not an empty list — an empty ward and a forbidden ward
  * must never look the same to a nurse.
  */
+/**
+ * Patient id -> Patient for these ids. The newest 1,000 patients in one read (an admitted patient is almost
+ * always a recently registered one), then a read by id for any still missing: a roster read alone, oldest
+ * first, left the newest patients on a ward list nameless once a hospital passed 1,000 patients.
+ */
+async function patientsFor(svc, ids) {
+  const want = [...new Set((ids || []).filter(Boolean))];
+  const byId = new Map(((await svc.list("Patient", 1000, { newest: true })) || []).filter((p) => p && p.id).map((p) => [p.id, p]));
+  const missing = want.filter((id) => !byId.has(id));
+  for (let i = 0; i < missing.length; i += 8) {
+    const got = await Promise.all(missing.slice(i, i + 8).map((id) => svc.get("Patient", id).catch(() => null)));
+    got.forEach((p) => { if (p && p.id) byId.set(p.id, p); });
+  }
+  return byId;
+}
+
 /* Ward name -> its department's name, from the hospital's own master data (Admin, departments and wards).
  * A ward with no department, or departments that cannot be read, is simply absent: never guessed. */
 async function departmentNames(env, orgId, wards) {
@@ -416,11 +442,11 @@ async function listWard(request, env, ctx) {
   if (error) return { ...base, ...error, patients: [] };
 
   let encounters;
-  /* LT-21: this read 200 encounters, oldest first, every discharged stay included, and said nothing when there
-   * were more: the newest admissions were the ones silently left off the ward list and the nurse worklist. */
-  const ENCOUNTER_CAP = 1000;
-  try { encounters = await svc.list("Encounter", ENCOUNTER_CAP); }
+  /* LT-21 then R4-1: this read the OLDEST 200, then 1,000, encounters with every discharged stay included, so the
+   * newest admissions were the ones left off the ward list and the nurse worklist. It reads the open ones only. */
+  try { encounters = await openEncounters(svc); }
   catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...censusRefusal(e), patients: [] };
     /* A SCOPE REFUSAL IS A 403, NOT A SERVER ERROR. A role can hold queue.view (which opens this
      * route) and still have no read scope on Encounter - pharmacy is exactly that - and answering
      * 502 told the caller the server was broken when in fact it had simply said no. */
@@ -445,10 +471,8 @@ async function listWard(request, env, ctx) {
    * that cannot be read stays null and the caller falls back as before - a missing name must never
    * turn a readable ward list into an error. */
   let byId = new Map();
-  try {
-    const roster = await svc.list("Patient", ENCOUNTER_CAP);
-    byId = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
-  } catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
+  try { byId = await patientsFor(svc, open.map((e) => e.patientId)); }
+  catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
   /* Each stay's expected discharge date (expected-discharge.js), with overdue worked out on the hospital's clock.
    * null = none set; false on the row = could not be read, which the screen must not show as "none set". */
   let edds = null;
@@ -474,8 +498,7 @@ async function listWard(request, env, ctx) {
   /* The hospital's country, so the ward screen can LABEL a temperature box with the unit this
    * server will store it in. Without it the two were inferred separately and disagreed: the box
    * said Fahrenheit, the server stored Celsius, and 98.6 went into the record as 98.6 Cel. */
-  return { ...base, ok: true, patients, region: str(ctx.region) || "IN",
-    ...((encounters || []).length >= ENCOUNTER_CAP ? { partial: true, partialWarning: `Only the first ${ENCOUNTER_CAP} stays on record were read; an admitted patient may be missing from this list.` } : {}) };
+  return { ...base, ok: true, patients, region: str(ctx.region) || "IN" };
 }
 
 /**
@@ -806,8 +829,11 @@ async function transferPatient(request, env, ctx) {
   let current, all;
   try {
     current = await svc.get("Encounter", encounterId);
-    all = await svc.list("Encounter", 200);
-  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    all = await openEncounters(svc);
+  } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...censusRefusal(e), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+  }
 
   if (!current) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId, written: 0 };
   if (!ADMISSION_CLASSES.includes(current.class)) return { ...base, ok: false, status: 409, error: "not_an_admission", detail: "only an inpatient or ICU stay can be transferred", encounterId, written: 0 };
@@ -905,8 +931,9 @@ async function bedBoard(request, env, ctx) {
   if (error) return { ...base, ...error, wards: [] };
 
   let encounters;
-  try { encounters = await svc.list("Encounter", 200); }
+  try { encounters = await openEncounters(svc); }
   catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...censusRefusal(e), wards: [] };
     /* A REFUSAL IS NOT A SERVER FAULT, and calling it one made this screen unreadable.
      *
      * Every exception here became a 502 "record_read_failed". When the exception is the record
@@ -1398,7 +1425,7 @@ async function patientTimeline(request, env, ctx) {
 }
 
 export {
-  IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN,
+  IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN, patientsFor,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
   recordWardVitals, orderFromWardRequest, createWardMedicationOrder, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
   sameBed, transferPatient, bedBoard,
