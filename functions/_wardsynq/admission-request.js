@@ -235,7 +235,8 @@ async function admissionWaitingList(request, env, ctx) {
   let rows, encounters;
   try {
     [rows, encounters] = await Promise.all([
-      svc.list(TYPE, 500),
+      // R4-2: every request (listAll, paged; was the oldest 500, so a new request was missing), refused past 50,000.
+      svc.listAll(TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows),
       // R4-1: the open stays, however many are on record (was the oldest 500). null = could not be read.
       svc.listByStatus("Encounter", ["in-progress"]).catch(() => null),
     ]);

@@ -92,7 +92,8 @@ async function capacityNow(env, orgId, svc, nowIso) {
   const [wards, beds, waiting] = await Promise.all([
     orgId ? listWards(env, orgId).catch(() => null) : Promise.resolve(null),
     orgId ? listBeds(env, orgId).catch(() => null) : Promise.resolve(null),
-    svc.list("AdmissionRequest", 500).then((r) => (r || []).filter((x) => x && x.state === "waiting").length, () => null),
+    // R4-2: every request (listAll; was the oldest 500), null when unread or past 50,000.
+    svc.listAll("AdmissionRequest", { max: 50000, throwOnTruncate: true }).then((g) => g.rows.filter((x) => x && x.state === "waiting").length, () => null),
   ]);
   return capacityFrom(wards || [], beds, waiting, nowIso);
 }
@@ -279,7 +280,7 @@ async function listInboundTransfers(request, env, ctx) {
       cancelled: decided.filter((q) => q.status === "cancelled").length, medianMinutesToDecision: median(answered.map((q) => q.minutesToDecision)),
     },
     capacityNow: await capacityNow(env, ctx.orgId, svc, new Date(nowMs).toISOString()),
-    truncated: rows.length >= 2000,
+    truncated: false,
   };
 }
 
