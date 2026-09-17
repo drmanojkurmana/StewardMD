@@ -89,6 +89,8 @@ window.Capacitor.Plugins.ConnectBrowser = {
     }
     if (e.indexOf("CRAWL_RAW_TABLE") >= 0) return Promise.resolve({ result: JSON.stringify(window.__rawTables[window.__url] || null) });
     if (e.indexOf("CRAWL_RAW_BLOCK") >= 0) return Promise.resolve({ result: "null" });
+    /* The patient read's readiness probe: "<readyState> <host>" (ghis-ward.js landed()), a login form as 'login'. */
+    if (e.indexOf(":document.readyState)") >= 0) { var lh = ""; try { lh = new URL(window.__url).host; } catch (x) {} return Promise.resolve({ result: (window.__loginForm ? "login" : "complete") + " " + lh }); }
     if (e.indexOf('password') >= 0) return Promise.resolve({ result: "ok" });
     if (e.indexOf("_length") >= 0) return Promise.resolve({ result: "0" });
     return Promise.resolve({ result: JSON.stringify(window.__pages[window.__url] || []) });
@@ -199,20 +201,23 @@ try {
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/patients").then(function(r){return r.json();}).then(function(j){ return Array.isArray(j) && j.length===2 && j[0].patientId==="K001"; });`) === true, "GET /patients is the adapter's roster in the proxy's array shape");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.rows && j.rows.length===0 && /^Medications were not read/.test(j.unreadable); });`) === true, "GET /medications for a screen the agent never proved says it was not read");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/profile?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.medications.length===0 && Array.isArray(j.labs) && Array.isArray(j.radiology); });`) === true, "GET /profile merges the cached patient views without a second browser read");
-  ok(await ev(`return window.__pluginCalls.filter(function(c){return c.m==="open";}).length===2;`) === true, "one browser read per patient, then the cache serves every endpoint");
+  // ONE SESSION. The browser opened once for the sign-in serves the ward list and every patient read,
+  // as the hand-built adapter's cookie jar does; it is never closed and reopened per patient.
+  ok(await ev(`return window.__pluginCalls.filter(function(c){return c.m==="open";}).length===1;`) === true, "one browser for the whole session: the patient read reused it, then the cache serves every endpoint");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/prescribe",{method:"POST",body:"{}"}).then(function(r){return r.status;});`) === 501, "writes through an adapter answer 501 emr_write_disabled");
   ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="setMode"&&c.a.mode==="agent"&&c.a.banner==="Reading hims.kims.example for your ward list";});`) === true, "browser was switched to agent mode with the reading banner");
   ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="navigate"&&c.a.url==="https://hims.kims.example/ip/worklist";});`) === true, "runtime navigated to the worklist path");
-  ok(await ev(`return window.__open===false && window.__pluginCalls[window.__pluginCalls.length-1].m==="close";`) === true, "browser closed after the read");
+  ok(await ev(`return window.__open===true && !window.__pluginCalls.some(function(c){return c.m==="close";});`) === true, "browser stays open and signed in after the read (keep-alive holds the session)");
   ok(await ev(`return document.getElementById("ghisFBranch").innerText.indexOf("MICU")>=0;`) === true, "branch filter populated from the adapter rows");
 
   await ev(`document.querySelector("#ghisPatientList .ghis-pt-card").click(); return 1;`);
   ok(await waitFor(`return document.getElementById("ghisLabBody").innerText.indexOf("Medications were not read")>=0;`, 8000), "the drawer says medications were not read instead of showing nothing");
   ok(await ev(`return document.getElementById("ghisLabTitle").textContent==="Ravi Kumar (K001)";`) === true, "drawer titled with the patient");
-  ok(await ev(`return !window.__pluginCalls.some(function(c){return c.m==="navigate"&&/\\/ip\\/meds\\//.test(c.a.url);}) && window.__open===false;`) === true, "the patient read never loaded a page and closed the browser");
+  ok(await ev(`return !window.__pluginCalls.some(function(c){return c.m==="navigate"&&/\\/ip\\/meds\\//.test(c.a.url);}) && window.__open===true;`) === true, "the patient read never loaded a page and kept the session's browser open");
 
   await ev(`window.closeLabDrawer(); window.ghisDisconnect(); return 1;`);
   ok(await ev(`return document.getElementById("ghisHospital").style.display!=="none";`) === true, "sign out returns to the hospital picker");
+  ok(await ev(`return window.__open===false;`) === true, "sign out closes the session's browser");
 
   // ENDPOINT REPLAY IS THE PRIMARY PATH. A hospital whose adapter recorded its data calls is read by
   // replaying them inside the doctor's browser session (activation POST with the page token, then the
@@ -276,7 +281,7 @@ try {
   ok(await waitFor(`return document.querySelectorAll("#ghisPatientList .ghis-pt-card").length===3;`, 15000), "the screen the doctor showed is read at once and its three patients render");
   ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair"&&x.method==="POST";}); return c.length===1 && Array.isArray(c[0].body.view.endpoints) && c[0].body.view.endpoints.some(function(e){return e.role==="data";});`, 8000), "repair posts a proven backend request, not a page selector");
   ok(await ev(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair";})[0]; return JSON.stringify(c.body).indexOf("Ravi")<0 && JSON.stringify(c.body).indexOf("K001")<0;`) === true, "no patient cell text leaves the phone in the repair");
-  ok(await ev(`return window.__open===false;`) === true, "the browser is closed after the repaired read");
+  ok(await ev(`return window.__open===true;`) === true, "the browser stays open and signed in after the repaired read (one session)");
   await ev(`window.ghisDisconnect(); return 1;`);
 
   // LAW III COVERS THE REPAIR READ TOO: the screen the doctor showed is read only out of sight.

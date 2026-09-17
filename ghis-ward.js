@@ -233,7 +233,39 @@
        * Sync and Assess looked dead (owner, 2026-09-12). A ward read through an approved adapter
        * keeps the doctor signed in for thirty minutes: the hospital cookies live in the native
        * browser, and every read reopens it without a second login. */
-      var ADAPTER_SESSION_MS = 30 * 60 * 1000;
+      /* ONE SESSION, HELD. The hand-built adapter (functions/api/ghis/[[path]].js) signs in once, keeps
+       * the cookie jar, and slides its session forward on every call so GHIS's ~20-minute idle window
+       * never passes. The phone does the same: the hidden browser stays open and signed in for the
+       * whole day, a keep-alive re-issues the ward list call every ten minutes, and every patient read
+       * goes through that one browser. Closing it after the ward list and reopening it per patient
+       * landed on the hospital signed out ("answered its login page", owner's iPhone, 2026-09-17). */
+      var ADAPTER_SESSION_MS = 24 * 60 * 60 * 1000;
+      var ADAPTER_KEEPALIVE_MS = 10 * 60 * 1000;
+      function adapterStopKeepAlive(ctx) { if (ctx && ctx.keepAlive) { clearInterval(ctx.keepAlive); ctx.keepAlive = null; } }
+      function adapterCloseBrowser(ctx, plugin) {
+        adapterStopKeepAlive(ctx);
+        if (!ctx) return;
+        ctx.browserOpen = false;
+        try { (plugin || connectPlugin()).close(); } catch (e) {}
+      }
+      function adapterStartKeepAlive(ctx, plugin, rt) {
+        adapterStopKeepAlive(ctx);
+        ctx.keepAlive = setInterval(function () {
+          if (_adapterCtx !== ctx || !ctx.browserOpen || ctx.reading) { if (_adapterCtx !== ctx) adapterStopKeepAlive(ctx); return; }
+          ctx.reading = true;
+          rt.readWorklist({ plugin: plugin, origin: ctx.origin, replay: ctx.replay }).then(function (patients) {
+            ctx.reading = false;
+            if (_adapterCtx !== ctx) return;
+            ctx.at = Date.now();
+            if (patients && patients.length) _patients = patients;
+          }, function (e) {
+            ctx.reading = false;
+            /* The hospital let the session go: say so quietly where the next read will show it; the
+             * browser is closed so the next open starts a fresh sign-in instead of reading nothing. */
+            if (/not signed in/i.test(String(e && e.message))) { ctx.signedOut = String(e.message); adapterCloseBrowser(ctx, plugin); }
+          });
+        }, ADAPTER_KEEPALIVE_MS);
+      }
       function adapterSessionFresh() { return !!(_adapterCtx && _adapterCtx.at && (Date.now() - _adapterCtx.at) < ADAPTER_SESSION_MS); }
       function checkSession() {
         if (adapterSessionFresh()) return Promise.resolve(true);
@@ -378,6 +410,7 @@
         var p = null;
         for (var i = 0; i < _patients.length; i++) if (String(_patients[i].patientId) === String(patientId)) p = _patients[i];
         ctx.sections[patientId] = withDeadline(loadWardRuntime().then(function (rt) {
+          var reuse = ctx.browserOpen === true;
           ctx.browserOpen = true;
           var targetOrigin = ctx.origin;
           if (ctx.origins && ctx.origins.length) {
@@ -388,10 +421,13 @@
           /* LAW III, ENFORCED HERE. The iPhone showed the hospital page over the whole screen during a
            * patient read although hidden was asked for (2026-09-15): a build can carry a plugin that
            * ignores the flag. The native side must confirm hidden, or nothing is read. */
-          return plugin.open({ url: targetOrigin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '', hidden: true }).then(function (opened) {
-            if (!opened || opened.hidden !== true) throw new Error(HIDDEN_REFUSED);
-            return plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins, hidden: true });
-          }).then(function (moded) {
+          var opening = reuse
+            ? Promise.resolve({ ok: true, hidden: true })
+            : plugin.open({ url: targetOrigin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '', hidden: true }).then(function (opened) {
+                if (!opened || opened.hidden !== true) throw new Error(HIDDEN_REFUSED);
+                return plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins, hidden: true });
+              });
+          return opening.then(function (moded) {
             if (!moded || moded.hidden !== true) throw new Error(HIDDEN_REFUSED);
             /* READ FROM THE HOSPITAL, NOT FROM A BLANK TAB. plugin.open resolves when the hidden tab exists,
              * before its page has loaded; reading right away fired every request from about:blank and the
@@ -416,11 +452,15 @@
             });
           });
         }), window.__SMD_ADAPTER_DEADLINE_MS__ || ADAPTER_READ_DEADLINE_MS).then(function (sections) {
-          ctx.browserOpen = false; try { plugin.close(); } catch (e) {}
+          /* The browser stays open and signed in for the next patient (one session, as the hand-built
+           * adapter keeps its cookie jar). */
           ctx.at = Date.now();
           return sections;
         }, function (e) {
-          ctx.browserOpen = false; try { plugin.close(); } catch (x) {}
+          /* A read that failed or hung leaves the browser in an unknown state: close it so the next
+           * read opens afresh, and say when the session itself is gone. */
+          adapterCloseBrowser(ctx, plugin);
+          if (/not signed in/i.test(String(e && e.message))) ctx.signedOut = String(e.message);
           delete ctx.sections[patientId];
           throw e;
         });
@@ -535,7 +575,7 @@
       function adapterFail(msg) {
         var el = document.getElementById('ghisPatientList');
         if (el) el.innerHTML = '<div class="ghis-empty">' + esc(msg) + '</div>';
-        try { var p = connectPlugin(); if (p && _adapterCtx && _adapterCtx.browserOpen) { _adapterCtx.browserOpen = false; p.close(); } } catch (e) {}
+        try { if (_adapterCtx && _adapterCtx.browserOpen) adapterCloseBrowser(_adapterCtx, connectPlugin()); } catch (e) {}
       }
       /* READ-TIME SELF-REPAIR. An approved adapter that reads zero rows is not the end: the browser
        * goes back to the doctor with one ask in its header, the screen they show is captured (labels
@@ -667,10 +707,9 @@
             return selfRepair(e);
           });
         }).then(function (patients) {
-          ctx.browserOpen = false;
-          try { plugin.close(); } catch (e) {}
-          if (_adapterCtx !== ctx) return;
+          if (_adapterCtx !== ctx) { adapterCloseBrowser(ctx, plugin); return; }
           ctx.at = Date.now();
+          adapterStartKeepAlive(ctx, plugin, rt);
           _connected = true; try { dot(true); } catch (e) {}
           _patients = patients;
           populateFilterOptions();
@@ -1563,7 +1602,7 @@
       };
     
       window.ghisDisconnect = function() {
-        if (_adapterCtx) { _adapterCtx = null; _patients = []; try { GHIS.clearSelectedPatient(); } catch (e) {} showScreen('hospital'); return; }
+        if (_adapterCtx) { var actx = _adapterCtx; _adapterCtx = null; adapterCloseBrowser(actx); _patients = []; try { GHIS.clearSelectedPatient(); } catch (e) {} showScreen('hospital'); return; }
         DEMO = null;
         var t = getToken();
         if (t) { fetch(PROXY + '/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + t } }).catch(function(){}); }
