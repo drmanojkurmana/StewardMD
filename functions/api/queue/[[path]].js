@@ -29,7 +29,7 @@ import * as ROSTER from "../../_roster_store.js";
 import * as ACCOUNTS from "../../_accounts_store.js";
 import * as FORMS from "../../_forms_store.js";
 import * as PATHWAYS from "../../_pathways_store.js";
-import { submitFormResponse, patientFormResponses } from "../../_wardsynq/form-response.js";
+import { submitFormResponse, patientFormResponses, intakeResponses, reviewIntake } from "../../_wardsynq/form-response.js";
 import { vaccineCatalogue, buildImmunisation } from "../../_vaccines.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
@@ -1468,6 +1468,9 @@ export async function onRequest(context) {
         "nursing-task-act": CAPS.EMR_VITALS, "obs-frequency": CAPS.EMR_VITALS,
         // Completed hospital forms: nurses document them too (FormResponse is in the nurse write scope).
         "form-responses": CAPS.EMR_VIEW, "form-submit": CAPS.EMR_VITALS,
+        /* Pre-admission forms a patient filled in on the portal. Reading them is chart access; accepting or returning one is a
+         * clinician's act (it says a clinician read what the patient reported), emr.treat. */
+        "intake-responses": CAPS.EMR_VIEW, "intake-review": CAPS.EMR_TREAT,
         "document-upload": CAPS.EMR_TREAT, "document-withdraw": CAPS.EMR_TREAT, "document-purge": CAPS.STAFF_ADMIN,
         // Releasing a document version to the patient portal is the same act as handing over the patient's copy.
         "document-release": CAPS.EMR_TREAT,
@@ -2573,6 +2576,14 @@ export async function onRequest(context) {
       if (sub === "form-submit" && method === "POST") {
         const definition = await FORMS.publishedVersion(env, wOrgId, body.formKey, body.formVersion);
         const r = await submitFormResponse(request, env, { ...deps, definition, patientId: body.patientId, encounterId: body.encounterId, answers: body.answers, department: body.department, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "intake-responses" && method === "GET") {
+        const r = await intakeResponses(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", requestId: url.searchParams.get("requestId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "intake-review" && method === "POST") {
+        const r = await reviewIntake(request, env, { ...deps, responseId: body.responseId, version: body.version, decision: body.decision, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "referrals" && method === "GET") {

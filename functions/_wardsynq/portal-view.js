@@ -62,7 +62,8 @@ const str = (v) => (v == null ? "" : String(v).trim());
 const RELEASE_TYPE = "PatientRecordRelease";
 
 /** Everything the portal can show. A patient's own grant sees all of it; a proxy sees what it names. */
-const SECTIONS = Object.freeze(["status", "appointments", "medicines", "results", "diagnoses", "discharge", "discharge-full", "documents", "bills", "consents", "messages", "education"]);
+/* "forms": the hospital's pre-admission forms for a planned admission (form-response.js portalIntake). */
+const SECTIONS = Object.freeze(["status", "appointments", "medicines", "results", "diagnoses", "discharge", "discharge-full", "documents", "bills", "consents", "messages", "education", "forms"]);
 /** How a discharge summary was released. Absent means patient copy: every release before P2 was one. */
 const DISCHARGE_SCOPES = Object.freeze(["patient-copy", "full"]);
 /** The signed summary's sections, in reading order. `provenance` is a note to the signing clinician. */
