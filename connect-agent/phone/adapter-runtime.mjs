@@ -445,8 +445,11 @@ export function provenValue(key, src, { patient = null, parentRow = null, tokens
   if (src.page) return ({ size: '1000', start: '0', number: '1' })[src.page] || '';
   if (src.today) return formatToday(src.today, now);
   const row = src.from === 'worklist' ? (patient && patient._row) : parentRow;
+  if (!row && src.from === 'worklist' && Array.isArray(src.fields)) return src.fields.map((f) => idCandidates(f, patient)[0] || '').join(src.join || '');
   if (!row) return src.from === 'worklist' ? (idCandidates(key, patient)[0] || '') : '';
-  if (Array.isArray(src.fields)) return src.fields.map((f) => fieldOf(row, f)).join(src.join || '');
+  /* A joined key (GHIS recordNo = "Patient ID"-"Visit ID") was traced against one list; each part that
+   * this row does not carry falls back to the patient's own id for that name, as a single field does. */
+  if (Array.isArray(src.fields)) return src.fields.map((f) => fieldOf(row, f) || (src.from === 'worklist' ? (idCandidates(f, patient)[0] || '') : '')).join(src.join || '');
   const v = fieldOf(row, src.field);
   /* THE TRACED COLUMN NAME BELONGS TO THE LIST IT WAS TRACED AGAINST. Two ward lists can both be proven
    * (GHIS: the doctor's own HTML list with a "Patient ID" header, and the hospital-wide JSON list keyed

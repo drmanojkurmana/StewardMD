@@ -221,3 +221,43 @@ test('reproveWorklist proves a backend request on the screen the doctor showed',
   assert.ok(out, 'a backend request was proven');
   assert.equal(out.endpoints.find((e) => e.role === 'data').path.split('?')[0], '/Doctor/Home/GetIPWL');
 });
+
+/* THE PATIENT IS ACTIVATED ONCE, BEFORE THE READS. GHIS keeps the current patient in its server-side
+ * session: the hand-built adapter posts Searchnew before every read. The approved adapter
+ * (ver_64609954) proved that POST on its 'patient' view only, and the labs and medicines views it
+ * picked carry no prerequisite, so every read went out unactivated and the drawer showed empty
+ * tables for all patients (owner's iPhone, 2026-09-17). */
+test('readPatientDetails posts every proven patient-level prerequisite once, before the detail reads', async () => {
+  const { PAGE_TOKENS } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  const calls = [];
+  let activated = '';
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ __RequestVerificationToken: 'T1' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      calls.push(req.method + ' ' + req.url.replace('https://h', '') + (req.body ? ' ' + req.body : ''));
+      if (/Searchnew/.test(req.url)) { activated = String(req.body || ''); return { result: JSON.stringify({ status: 200, contentType: 'text/html', url: req.url, text: '<div>ok</div>' }) }; }
+      const text = activated === '__RequestVerificationToken=T1&recordNo=K1-E1' ? '[{"Test":"Hb"}]' : '[]';
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text }) };
+    },
+  };
+  const pre = { method: 'POST', path: '/Searchnew', role: 'prerequisite', bodyKeys: ['__RequestVerificationToken', 'recordNo'], params: { __RequestVerificationToken: { token: true }, recordNo: { from: 'worklist', fields: ['Patient ID', 'Visit ID'], join: '-' } } };
+  const data = (path) => ({ method: 'GET', path, role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } });
+  const view = (resourceHint, endpoints, extra) => Object.assign({ resourceHint, pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' }, endpoints }, extra || {});
+  const replay = [
+    view('patient', [pre, data('/GetAssessment?id')], { singleRecord: true }),
+    view('labs', [data('/GetLabs?id')]),
+    view('medications', [data('/GetMeds?id')]),
+    // a detail view's own prerequisite is keyed on its list row: not a patient-level activation
+    view('labs-detail', [{ method: 'POST', path: '/OpenResult', role: 'prerequisite', bodyKeys: ['rid'], params: { rid: { from: 'labs', field: 'Render_ID' } } }, data('/GetResult?id')], { detailOf: 'labs' }),
+  ];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1', episodeId: 'E1' }, settleMs: 0 });
+  assert.equal(calls.filter((c) => /Searchnew/.test(c)).length, 1, 'activation is posted exactly once per patient: ' + calls.join(' | '));
+  assert.ok(/Searchnew/.test(calls[0]), 'activation comes before every read: ' + calls.join(' | '));
+  assert.ok(!calls.some((c) => /OpenResult/.test(c)), 'a row-keyed prerequisite is not an activation');
+  assert.deepEqual(secs.find((s) => s.resource === 'labs').rows, [{ Test: 'Hb' }]);
+  assert.deepEqual(secs.find((s) => s.resource === 'medications').rows, [{ Test: 'Hb' }]);
+});

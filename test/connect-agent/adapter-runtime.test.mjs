@@ -210,3 +210,17 @@ test('fetchExpression: a redirect is reported as the login page, never followed 
   assert.equal(classifyResponse({ status: 302, redirected: true, text: '' }), 'login');
   assert.equal(classifyResponse({ status: 200, contentType: 'application/json', text: '[]' }), 'json');
 });
+
+/* A joined worklist field (GHIS recordNo = "Patient ID"-"Visit ID") was traced against the doctor's own
+ * HTML list; the hospital-wide JSON list has no such columns and the patient read carries no list row
+ * at all. Each part falls back to the id the patient carries, as a single field already does. */
+test('provenValue: a joined worklist field falls back to the patient ids when the row lacks the columns', () => {
+  const src = { from: 'worklist', fields: ['Patient ID', 'Visit ID'], join: '-' };
+  assert.equal(provenValue('recordNo', src, { patient: { patientId: 'K1', episodeId: 'E1' } }), 'K1-E1');
+  const p2 = { patientId: 'K1', episodeId: 'E1' };
+  Object.defineProperty(p2, '_row', { value: { patientId: 'K1', episodeId: 'E1' }, enumerable: false });
+  assert.equal(provenValue('recordNo', src, { patient: p2 }), 'K1-E1');
+  const p3 = { patientId: 'K1', episodeId: 'E1' };
+  Object.defineProperty(p3, '_row', { value: { 'Patient ID': 'P9', 'Visit ID': 'V9' }, enumerable: false });
+  assert.equal(provenValue('recordNo', src, { patient: p3 }), 'P9-V9', 'a row that carries the columns wins');
+});

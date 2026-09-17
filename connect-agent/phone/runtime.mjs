@@ -229,6 +229,33 @@ export function viewsByResource(replay) {
   return by;
 }
 
+/**
+ * activationEndpoints(replay) -> { view, endpoints }: every proven prerequisite that is keyed on the
+ * patient alone (its fields come from the ward list, a token, a constant, or nothing), one per
+ * method+path, in replay order. A prerequisite keyed on a detail row (a result id) is a chain step of
+ * that view, not a patient activation, and stays with its view.
+ */
+export function endpointKey(e) { return String((e && e.method) || 'GET') + ' ' + String((e && e.path) || '').split('?')[0]; }
+
+export function activationEndpoints(replay) {
+  const seen = new Set();
+  const endpoints = [];
+  let view = null;
+  for (const v of Array.isArray(replay) ? replay : []) {
+    if (!provenView(v)) continue;
+    for (const e of v.endpoints || []) {
+      if (!e || e.role !== 'prerequisite') continue;
+      if (Object.values(e.params || {}).some((src) => src && src.from && src.from !== 'worklist')) continue;
+      const k = endpointKey(e);
+      if (seen.has(k)) continue;
+      seen.add(k);
+      endpoints.push(e);
+      if (!view) view = v;
+    }
+  }
+  return { view, endpoints };
+}
+
 /** A view discovery proved: its data call is known and was replayed against the screen. */
 export function provenView(v) {
   return !!(v && v.proof && v.proof.status === 'proven' && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === 'data'));
@@ -401,6 +428,29 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
    * not the target). What discovery did not prove is read from the page or reported missing. */
   const views = viewsByResource(replay);
   const sections = [];
+  /* THE PATIENT IS ACTIVATED FIRST, ONCE. GHIS keeps the current patient in its server-side session: the
+   * hand-built adapter posts Searchnew (recordNo=MR-visit) before every read. Discovery proved that POST
+   * as a prerequisite of whichever view the crawl or the doctor happened to open first (ver_64609954:
+   * the 'patient' view and the guided labs view only), while the labs and medicines views picked for
+   * reading carry none, so every read went out unactivated and the drawer showed empty tables for
+   * every patient (owner's iPhone, 2026-09-17). Every proven, patient-level prerequisite of this adapter
+   * runs once here, before the reads, exactly as the page ran it. */
+  const activation = activationEndpoints(replay);
+  const activated = new Set(activation.endpoints.map(endpointKey));
+  // A view's own copy of an activation already posted is not posted again: once per patient.
+  const afterActivation = (v) => (activated.size && Array.isArray(v.endpoints))
+    ? Object.assign({}, v, { endpoints: v.endpoints.filter((e) => !(e && e.role === 'prerequisite' && activated.has(endpointKey(e)))) })
+    : v;
+  if (activation.endpoints.length) {
+    const ar = await import('./adapter-runtime.mjs');
+    try {
+      await ar.executeProven({ plugin, origin: viewOrigin(activation.view, origin), view: { pathTemplate: activation.view.pathTemplate, resourceHint: 'patient', proof: { status: 'proven' }, endpoints: activation.endpoints }, patient });
+    } catch (e) {
+      if (e && e.name === 'NotSignedIn') throw e;
+      /* An activation this patient's row cannot fill (UnscopedRequest) or the hospital refused: the reads
+       * still go out, and answer as they did before, rather than nothing at all. */
+    }
+  }
   for (const r of DETAIL_RESOURCES) {
     const v = views[r];
     if (!v) continue;
@@ -410,7 +460,7 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     if (!provenView(v)) { sections.push({ resource: r, unreadable: 'not-proven' }); continue; }
     let replayed = null;
     const vo = viewOrigin(v, origin);
-    try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) {
+    try { replayed = await replayFirst({ plugin, origin: vo, view: afterActivation(v), patient, onRead }); } catch (e) {
       if (e && e.name === 'NotSignedIn') throw e;
       if (e && e.name === 'UnscopedRequest') { sections.push({ resource: r, unreadable: 'not-scoped' }); continue; }
       sections.push({ resource: r, error: String((e && e.message) || e) });
