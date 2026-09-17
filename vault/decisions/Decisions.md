@@ -8183,3 +8183,30 @@ of compliance.js is untouched.
 - Not done: no cron or scheduled runner (the job is admin-triggered on purpose; the person who starts it is
   the person it is audited to), and no total-remaining figure before a full scan pass - the count comes from
   the scan itself, batch by batch, because counting the archive is the same walk as scanning it.
+
+## 2026-09-18 - A safety check that could not read the record says so (R6-1, no-unchecked-safety)
+- THE BUG, stated once: `svc.byPatient("AllergyIntolerance", id).catch(() => [])` inside a safety path. The
+  store faults, the check receives an empty list, and a patient with a documented penicillin allergy is
+  presented to the prescriber, the pharmacist or the radiologist as a patient with no allergy. Worse, the
+  per-read catch swallowed the failure before the file's own outer catch could see it, so the degraded branch
+  in rx-safety.js and the fail-closed contrast refusal in radiology-protocol.js were unreachable code.
+- THE SHAPE is R5-1's, not a new one (break-glass.js `unreadableTypes`, migrate-inpatient.js
+  `advisoriesUnavailable`): null is a read that did not happen, [] is a read that happened and found nothing.
+  `functions/_wardsynq/unreadable.js` holds the two helpers - `readOrNull(promise, type, failures)` and
+  `unavailable(failures) -> { notChecked: [type], reason }` - so the verdict shape is one contract the tests
+  and the screens can both pin.
+- REPORT OR REFUSE, per path, decided by whether the function is allowed to stop the clinician:
+  - rx-safety.js NEVER gates (unapproved content, its own header): it reports `notChecked` on the verdict and
+    the prescribe confirm names the record it could not read, first, before any finding.
+  - radiology-protocol.js protocol CONTEXT reports (`contrastAllergies: null`, `renal: null`, `notChecked`);
+    recording a CONTRAST protocol refuses 502 `clinical_read_failed` (renamed from `allergy_read_failed`,
+    which now also covers the renal Observation). A non-contrast protocol is still recordable and carries
+    `notCheckedAtProtocol` on the record itself.
+  - pharmacy-verify.js: the allergy read reports (the orders stay on screen), the MedicationVerification read
+    refuses - an unreadable verification list made every order read as `unverified`, which hides exactly the
+    stale-verification state the file exists to show.
+  - pharmacy-dispense.js and icu-care.js refuse: issuing stock against a verification nobody could read, or
+    dropping a running pressor because its drug name did not load, are not states worth reporting around.
+- NOT DONE HERE, by the conflict map: patient-record.js, chart-completion.js, billing.js, hl7v2.js,
+  lab-result.js, specimen.js (R6-2), the ingest files (R6-3), scheduling/online-booking (R6-4), registry.js
+  (R6-5). migrate-emar.js's bedsideSafetyCheck already reports NOT_CHECKED_* itself and was left alone.
