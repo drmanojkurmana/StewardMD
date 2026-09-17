@@ -188,8 +188,10 @@ test("LT-25: the laboratory collects from its own board, then releases; the spec
   assert.equal(spec.state, "received");
   assert.equal(spec.receivedBy, idFor(LAB));
   assert.equal(spec.receivedOnRelease, true, "said plainly that receipt was recorded by the release");
+  // The release closes the order (R5-2), so it leaves the collection board altogether; the specimen
+  // record above still says who received it and when.
   const b2 = await board();
-  assert.equal(b2.coll.collection.state, "received", "not awaiting collection, not in transit");
+  assert.equal(b2.coll, undefined, "off the board once the order is finished, not awaiting collection or in transit");
   assert.equal(b2.pending, false, "not awaiting a result");
 });
 
@@ -284,7 +286,9 @@ test("LT-27: GET /api/queue/ward/imaging-worklist carries the offset, and a FINA
   const ids = w1.worklist.map((i) => i["00080050"].Value[0]);
   assert.ok(!ids.includes(cxr.orderId), "a finally reported study is not still requested");
   assert.ok(ids.includes(ct.orderId), "a preliminary reading still owes the final one");
-  assert.equal(w1.reportedExcluded, 1);
+  // A finally reported study's order is closed (R5-2), so the worklist never reads it; only studies
+  // still open and already reported count here, and a preliminary read leaves the order open.
+  assert.equal(w1.reportedExcluded, 0);
 });
 
 /* ---- LT-22 / LT-23 ------------------------------------------------------------------------------------------ */

@@ -171,9 +171,9 @@ test("HMIS and NABH: 1,300 outpatient visits this month count 1,300 (the old rea
     const t = await as(OWNER, `/ward/hmis-monthly?orgId=${ORG}`);
     assert.equal(t.__status, 200);
     assert.equal(t.truncated, true);
-    assert.match(t.truncatedNote, /newest were not read/);
+    assert.match(t.truncatedNote, /not all of them were read/);
     const k = await as(OWNER, `/ward/nabh-indicators?orgId=${ORG}&months=1`);
-    assert.equal(k.truncated, true); assert.match(k.truncatedNote, /newest were not read/);
+    assert.equal(k.truncated, true); assert.match(k.truncatedNote, /not all of them were read/);
   } finally { restore(); }
   assert.equal((await as(null, `/ward/hmis-monthly?orgId=${ORG}`)).__status, 401);
   assert.equal((await as(CASHIER, `/ward/hmis-monthly?orgId=${ORG}`)).__status, 403);
