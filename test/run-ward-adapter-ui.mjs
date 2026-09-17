@@ -50,12 +50,13 @@ window.__url = "";
 window.Capacitor = window.Capacitor || {};
 window.Capacitor.Plugins = window.Capacitor.Plugins || {};
 window.Capacitor.Plugins.ConnectBrowser = {
-  open: function (a) { window.__pluginCalls.push({ m: "open", a: a }); window.__url = a.url; window.__open = true; return Promise.resolve({ ok: true }); },
+  open: function (a) { window.__pluginCalls.push({ m: "open", a: a }); window.__url = a.url; window.__open = true; return Promise.resolve(window.__staleHidden ? { ok: true } : { ok: true, hidden: a.hidden === true, contract: "hidden-v2" }); },
   navigate: function (a) { window.__pluginCalls.push({ m: "navigate", a: a }); window.__url = a.url; return Promise.resolve({ ok: true }); },
   evaluate: function (a) {
     var e = String(a && a.expression || "");
     window.__pluginCalls.push({ m: "evaluate", url: window.__url });
     if (e.indexOf("var req={") === 0 || e.indexOf("(function(){var req={") === 0) {
+      if (window.__hang) return new Promise(function () {});
       var m = /var req=(\\{[\\s\\S]*?\\});var init=/.exec(e); var req = m ? JSON.parse(m[1]) : null;
       if (!req) return Promise.resolve({ result: "" });
       window.__fetches.push({ method: req.method, url: req.url, body: req.body });
@@ -63,14 +64,40 @@ window.Capacitor.Plugins.ConnectBrowser = {
       return Promise.resolve({ result: JSON.stringify({ status: r.status || 200, contentType: r.contentType || "application/json", url: req.url, text: typeof r.text === "string" ? r.text : JSON.stringify(r.text) }) });
     }
     if (e.indexOf("input[type=\\"hidden\\"]") >= 0) return Promise.resolve({ result: JSON.stringify({ __RequestVerificationToken: "tok-1" }) });
+    /* The page-realm proof surface (connect-agent/phone/prove.mjs): the replay buffer the observer
+     * keeps, the cells on screen, and re-issuing a buffered request. Used by the repair scenario, where
+     * the doctor's screen must yield a BACKEND REQUEST, never a selector. */
+    if (e.indexOf("__SMD_REPLAY__") >= 0 && e.indexOf("PROVE") < 0) {
+      var inj = /\\)\\((\\[[\\s\\S]*\\])\\)$/.exec(e);
+      var add = inj ? JSON.parse(inj[1]) : [];
+      window.__replayBuf = window.__replayBuf || [];
+      for (var ii = 0; ii < add.length; ii++) {
+        window.__replayBuf.push({ seq: window.__replayBuf.length + 1, method: "GET", url: add[ii].url, body: null, reqCt: "", xhr: false, status: 200, shape: { kind: "unknown", page: true } });
+      }
+      return Promise.resolve({ result: String(window.__replayBuf.length) });
+    }
+    if (e.indexOf("PROVE_LIST") >= 0) return Promise.resolve({ result: JSON.stringify(window.__replayBuf || []) });
+    if (e.indexOf("PROVE_SCREEN") >= 0) {
+      var scr = (window.__pages[window.__url] || []).map(function (r) { return Object.keys(r).map(function (k) { return String(r[k]); }); });
+      return Promise.resolve({ result: JSON.stringify(scr) });
+    }
+    if (e.indexOf("PROVE_EXEC") >= 0) {
+      var sq = Number((/\\)\\((\\d+)\\)$/.exec(e) || [0, 0])[1]);
+      var ent = (window.__replayBuf || []).filter(function (x) { return x.seq === sq; })[0];
+      var rr = ent ? window.__routes["GET " + ent.url] : null;
+      return Promise.resolve({ result: JSON.stringify(rr ? { status: 200, contentType: rr.contentType || "application/json", url: ent.url, text: typeof rr.text === "string" ? rr.text : JSON.stringify(rr.text) } : { status: 0 }) });
+    }
     if (e.indexOf("CRAWL_RAW_TABLE") >= 0) return Promise.resolve({ result: JSON.stringify(window.__rawTables[window.__url] || null) });
     if (e.indexOf("CRAWL_RAW_BLOCK") >= 0) return Promise.resolve({ result: "null" });
+    /* The patient read's readiness probe: "<readyState> <host>" (ghis-ward.js landed()), a login form as 'login'. */
+    if (e.indexOf(":document.readyState)") >= 0) { var lh = ""; try { lh = new URL(window.__url).host; } catch (x) {} return Promise.resolve({ result: (window.__loginForm ? "login" : "complete") + " " + lh }); }
     if (e.indexOf('password') >= 0) return Promise.resolve({ result: "ok" });
     if (e.indexOf("_length") >= 0) return Promise.resolve({ result: "0" });
     return Promise.resolve({ result: JSON.stringify(window.__pages[window.__url] || []) });
   },
   currentUrl: function () { return Promise.resolve({ url: window.__url, title: "" }); },
-  setMode: function (a) { window.__pluginCalls.push({ m: "setMode", a: a }); return Promise.resolve({ ok: true }); },
+  drainRequests: function () { return Promise.resolve({ requests: window.__navLog || [] }); },
+  setMode: function (a) { window.__pluginCalls.push({ m: "setMode", a: a }); return Promise.resolve(window.__staleHidden ? { ok: true } : { ok: true, hidden: a.hidden === true && a.mode !== "login" }); },
   close: function () { window.__pluginCalls.push({ m: "close" }); window.__open = false; return Promise.resolve({ ok: true }); },
   addListener: function (name, fn) { (window.__pluginListeners[name] = window.__pluginListeners[name] || []).push(fn); return { remove: function () { var l = window.__pluginListeners[name]; var i = l.indexOf(fn); if (i >= 0) l.splice(i, 1); } }; },
   __fire: function (name, p) { (window.__pluginListeners[name] || []).slice().forEach(function (fn) { fn(p); }); }
@@ -93,13 +120,22 @@ window.GHIS.__setAgentApi(function (path, tid, opts) {
     { resourceHint: "worklist", pathTemplate: "https://his.apollo.example/ward/list", method: "GET", rowsSelector: "#wl tbody tr", headers: ["MRN", "Patient Name", "Age/Sex", "Ward"], singleRecord: false,
       endpoints: [ { method: "GET", path: "/ward/list" }, { method: "GET", path: "/api/ward/patients?unit&start&length" } ] },
     { resourceHint: "medications", pathTemplate: "https://his.apollo.example/ward/list", method: "GET", rowsSelector: "#rx tbody tr", headers: ["Drug", "Dose", "Route"], singleRecord: false,
-      endpoints: [ { method: "POST", path: "/api/visit/activate", bodyKeys: ["__RequestVerificationToken", "recordNo"], requestKind: "form" }, { method: "GET", path: "/api/ward/medications?mrn" } ] } ] } });
+      proof: { status: "proven", kind: "html" },
+      endpoints: [
+        { method: "POST", path: "/api/visit/activate", bodyKeys: ["__RequestVerificationToken", "recordNo"], requestKind: "form", role: "prerequisite", params: { __RequestVerificationToken: { token: true }, recordNo: { from: "worklist", field: "MRN" } } },
+        { method: "GET", path: "/api/ward/medications?mrn", role: "data", params: { mrn: { from: "worklist", field: "MRN" } } } ] } ] } });
   if (path === "/sessions" && opts.method === "POST" && window.__replayHospital) return Promise.resolve({ s: 200, d: { ok: true, sessionId: "sess-1", deploymentId: "dep-r", state: "CREATED", reuse: true, deployment: { id: "dep-r", origins: ["https://his.apollo.example"], activeVersionId: "ver-r" } } });
   if (path === "/sessions" && opts.method === "POST") return Promise.resolve(window.__sessionResp || { s: 200, d: { ok: true, sessionId: "sess-1", deploymentId: "dep-kims", state: "CREATED", reuse: true, deployment: { id: "dep-kims", origins: ["https://hims.kims.example"], activeVersionId: "ver-1" } } });
   if (path === "/sessions/sess-1/handoff") return Promise.resolve({ s: 200, d: { ok: true, origins: ["https://hims.kims.example"], pendingOrigins: [] } });
   if (path === "/versions/ver-1/repair" && opts.method === "POST") return Promise.resolve({ s: 200, d: { ok: true, candidateVersionId: "ver-2", state: "AWAITING_APPROVAL", parentVersionId: "ver-1" } });
+  // KIMS is the DOM-only EMR (no endpoint discovered, so its page may still be read) until the repair
+  // scenario flips __kimsProvenWorklist: then its ward list is endpoint-backed and scraping is refused.
   if (path === "/versions/ver-1") return Promise.resolve({ s: 200, d: { ok: true, id: "ver-1", state: "ACTIVE", replay: [
-    { resourceHint: "worklist", pathTemplate: "/ip/worklist", method: "GET", rowsSelector: "#wl tbody tr", headers: ["S.No", "UHID", "Patient Name", "Age/Sex", "Bed No", "Ward", "Consultant"], singleRecord: false },
+    window.__kimsProvenWorklist
+      ? { resourceHint: "worklist", pathTemplate: "/ip/worklist", method: "GET", rowsSelector: "#wl tbody tr", headers: ["S.No", "UHID", "Patient Name", "Age/Sex", "Bed No", "Ward", "Consultant"], singleRecord: false,
+          proof: { status: "proven", kind: "json" },
+          endpoints: [{ method: "GET", path: "/api/ward/patients?unit&start&length", role: "data", params: {} }] }
+      : { resourceHint: "worklist", pathTemplate: "/ip/worklist", method: "GET", rowsSelector: "#wl tbody tr", headers: ["S.No", "UHID", "Patient Name", "Age/Sex", "Bed No", "Ward", "Consultant"], singleRecord: false },
     { resourceHint: "medications", pathTemplate: "/ip/meds/{id}", method: "GET", rowsSelector: "#rx tr", headers: ["Drug", "Dose"], singleRecord: false } ] } });
   return Promise.resolve({ s: 404, d: { ok: false, error: "not_found" } });
 });
@@ -109,6 +145,7 @@ window.__pages["https://hims.kims.example/ip/worklist"] = [
 window.__pages["https://hims.kims.example/ip/meds/K001"] = [ { "Drug": "Amoxicillin", "Dose": "500 mg TDS" } ];
 window.__rawTables = window.__rawTables || {};
 window.__fetches = []; window.__routes = window.__routes || {};
+window.__replayBuf = []; window.__navLog = []; window.__kimsProvenWorklist = false;
 return 1;`;
 
 try {
@@ -162,22 +199,25 @@ try {
   ok(await ev(`return window.GHIS.ensureSession().then(function(ok){ return ok; });`) === true, "ensureSession is true through an adapter session (Assess can open)");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/status").then(function(r){return r.json();}).then(function(j){ return j.connected===true && j.userId==="adapter"; });`) === true, "GET /status through the adapter says connected");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/patients").then(function(r){return r.json();}).then(function(j){ return Array.isArray(j) && j.length===2 && j[0].patientId==="K001"; });`) === true, "GET /patients is the adapter's roster in the proxy's array shape");
-  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.rows && j.rows.length===1 && j.rows[0].drugText==="Amoxicillin" && j.rows[0].dosage==="500 mg TDS"; });`) === true, "GET /medications reads the adapter's medications view into the proxy row shape");
-  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/profile?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.medications.length===1 && Array.isArray(j.labs) && Array.isArray(j.radiology); });`) === true, "GET /profile merges the cached patient views without a second browser read");
-  ok(await ev(`return window.__pluginCalls.filter(function(c){return c.m==="open";}).length===2;`) === true, "one browser read per patient, then the cache serves every endpoint");
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.rows && j.rows.length===0 && /^Medications were not read/.test(j.unreadable); });`) === true, "GET /medications for a screen the agent never proved says it was not read");
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/profile?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.medications.length===0 && Array.isArray(j.labs) && Array.isArray(j.radiology); });`) === true, "GET /profile merges the cached patient views without a second browser read");
+  // ONE SESSION. The browser opened once for the sign-in serves the ward list and every patient read,
+  // as the hand-built adapter's cookie jar does; it is never closed and reopened per patient.
+  ok(await ev(`return window.__pluginCalls.filter(function(c){return c.m==="open";}).length===1;`) === true, "one browser for the whole session: the patient read reused it, then the cache serves every endpoint");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/prescribe",{method:"POST",body:"{}"}).then(function(r){return r.status;});`) === 501, "writes through an adapter answer 501 emr_write_disabled");
   ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="setMode"&&c.a.mode==="agent"&&c.a.banner==="Reading hims.kims.example for your ward list";});`) === true, "browser was switched to agent mode with the reading banner");
   ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="navigate"&&c.a.url==="https://hims.kims.example/ip/worklist";});`) === true, "runtime navigated to the worklist path");
-  ok(await ev(`return window.__open===false && window.__pluginCalls[window.__pluginCalls.length-1].m==="close";`) === true, "browser closed after the read");
+  ok(await ev(`return window.__open===true && !window.__pluginCalls.some(function(c){return c.m==="close";});`) === true, "browser stays open and signed in after the read (keep-alive holds the session)");
   ok(await ev(`return document.getElementById("ghisFBranch").innerText.indexOf("MICU")>=0;`) === true, "branch filter populated from the adapter rows");
 
   await ev(`document.querySelector("#ghisPatientList .ghis-pt-card").click(); return 1;`);
-  ok(await waitFor(`return document.getElementById("ghisLabBody").innerText.indexOf("Amoxicillin")>=0;`, 8000), "tapping a patient reads the adapter's medications view into the detail drawer");
+  ok(await waitFor(`return document.getElementById("ghisLabBody").innerText.indexOf("Medications were not read")>=0;`, 8000), "the drawer says medications were not read instead of showing nothing");
   ok(await ev(`return document.getElementById("ghisLabTitle").textContent==="Ravi Kumar (K001)";`) === true, "drawer titled with the patient");
-  ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="navigate"&&c.a.url==="https://hims.kims.example/ip/meds/K001";}) && window.__open===false;`) === true, "detail read navigated to the filled path and closed the browser");
+  ok(await ev(`return !window.__pluginCalls.some(function(c){return c.m==="navigate"&&/\\/ip\\/meds\\//.test(c.a.url);}) && window.__open===true;`) === true, "the patient read never loaded a page and kept the session's browser open");
 
   await ev(`window.closeLabDrawer(); window.ghisDisconnect(); return 1;`);
   ok(await ev(`return document.getElementById("ghisHospital").style.display!=="none";`) === true, "sign out returns to the hospital picker");
+  ok(await ev(`return window.__open===false;`) === true, "sign out closes the session's browser");
 
   // ENDPOINT REPLAY IS THE PRIMARY PATH. A hospital whose adapter recorded its data calls is read by
   // replaying them inside the doctor's browser session (activation POST with the page token, then the
@@ -195,11 +235,29 @@ try {
   ok(await ev(`return !window.__pluginCalls.some(function(c){return c.m==="navigate"&&c.a.url==="https://his.apollo.example/ward/list";});`) === true, "the rendered worklist page was never loaded: replay is primary, scraping is fallback");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=A100").then(function(r){return r.json();}).then(function(j){ return j.rows && j.rows.length===1 && j.rows[0].drugText==="Metoprolol" && j.rows[0].route==="PO"; });`) === true, "medications replay: activation POST then the keyed GET, HTML fragment parsed into the proxy row shape");
   ok(await ev(`var f=window.__fetches; var i=f.findIndex(function(x){return x.method==="POST"&&x.url==="https://his.apollo.example/api/visit/activate";}); var j=f.findIndex(function(x){return x.url==="https://his.apollo.example/api/ward/medications?mrn=A100";}); return i>=0 && j>i && f[i].body==="__RequestVerificationToken=tok-1&recordNo=A100";`) === true, "the activation POST carried the page token and the record number, before the data call");
+
+  // EVERY READ ENDS: a hospital that never answers is stopped at the deadline with a reason.
+  await ev(`window.__SMD_ADAPTER_DEADLINE_MS__ = 600; window.__hang = true; return 1;`);
+  const t0 = Date.now();
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=A101").then(function(r){return r.json();}).then(function(j){ return j.error==="adapter_read_failed" && /did not answer in time/.test(j.detail); });`) === true, "a read that never answers is stopped with a reason");
+  ok(Date.now() - t0 < 5000, "stopped at the deadline, not after minutes");
+  ok(await ev(`return window.__open===false;`) === true, "the browser is closed after a timed-out read");
+  await ev(`window.__hang = false; window.__SMD_ADAPTER_DEADLINE_MS__ = 0; return 1;`);
+
+  // LAW III: a native browser that does not confirm it is hidden is never read through.
+  await ev(`window.__staleHidden = true; window.__fetchMark = window.__fetches.length; return 1;`);
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=A101").then(function(r){return r.json();}).then(function(j){ return j.error==="adapter_read_failed" && /out of sight/.test(j.detail); });`) === true, "a browser that does not confirm hidden reads nothing and says why");
+  ok(await ev(`return window.__fetches.length===window.__fetchMark && window.__open===false;`) === true, "no hospital request was issued and the browser was closed");
+  await ev(`window.__staleHidden = false; return 1;`);
   await ev(`window.ghisDisconnect(); window.__replayHospital = false; return 1;`);
 
   // Read-time self-repair: the approved adapter's worklist path reads nothing, so the browser asks the
   // doctor for the list once, reads the screen they show, and posts the correction as a new candidate.
-  await ev(`window.__pages["https://hims.kims.example/ip/worklist"] = []; window.__pluginCalls = []; window.__calls = []; return 1;`);
+  // KIMS now has a PROVEN ward-list call that answers with nothing: the runtime refuses to scrape and
+  // goes to repair, which must re-prove a backend request on the screen the doctor shows.
+  await ev(`window.__kimsProvenWorklist = true; window.__replayBuf = []; window.__navLog = [];
+    window.__routes["GET https://hims.kims.example/api/ward/patients?unit=&start=0&length=1000"] = { text: { data: [] } };
+    window.__pages["https://hims.kims.example/ip/worklist"] = []; window.__pluginCalls = []; window.__calls = []; return 1;`);
   await ev(`document.querySelector('[data-adapter-dep="dep-kims"]').click(); return 1;`);
   await waitFor(`return (window.__pluginListeners.loggedIn||[]).length>0;`, 5000);
   await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://hims.kims.example/home"}); return 1;`);
@@ -213,13 +271,29 @@ try {
       { "UHID": "K001", "Patient Name": "Ravi Kumar", "Age/Sex": "45 / M", "Ward": "MICU" },
       { "UHID": "K002", "Patient Name": "Sita Devi", "Age/Sex": "30 / F", "Ward": "General" },
       { "UHID": "K003", "Patient Name": "Arun Rao", "Age/Sex": "62 / M", "Ward": "MICU" } ];
+    /* The screen the doctor showed fires its own ward-list call; the page observer buffered it, and the
+     * native navigation log carries it too. Repair proves THAT, and saves the request, not the table. */
+    window.__routes["GET https://hims.kims.example/api/ward/all?unit=&start=0&length=1000"] = { text: { data: window.__pages["https://hims.kims.example/ip/all"] } };
+    window.__replayBuf = [{ seq: 1, method: "GET", url: "https://hims.kims.example/api/ward/all?unit=&start=0&length=1000", body: null, reqCt: "", xhr: true, status: 200, shape: { kind: "json", keys: ["UHID"], rows: 3 } }];
+    window.__navLog = [{ method: "GET", url: "https://hims.kims.example/api/ward/all?unit=&start=0&length=1000" }];
     window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://hims.kims.example/ip/all"});
     return 1;`);
   ok(await waitFor(`return document.querySelectorAll("#ghisPatientList .ghis-pt-card").length===3;`, 15000), "the screen the doctor showed is read at once and its three patients render");
-  ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair"&&x.method==="POST";}); return c.length===1 && c[0].body.sessionId==="sess-1" && c[0].body.view.rowsSelector==="#allpts tbody tr" && c[0].body.view.resourceHint==="worklist" && c[0].body.view.guided===true;`, 8000), "the corrected view (selector and headers only) is posted as a repair candidate for approval");
+  ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair"&&x.method==="POST";}); return c.length===1 && Array.isArray(c[0].body.view.endpoints) && c[0].body.view.endpoints.some(function(e){return e.role==="data";});`, 8000), "repair posts a proven backend request, not a page selector");
   ok(await ev(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair";})[0]; return JSON.stringify(c.body).indexOf("Ravi")<0 && JSON.stringify(c.body).indexOf("K001")<0;`) === true, "no patient cell text leaves the phone in the repair");
-  ok(await ev(`return window.__open===false;`) === true, "the browser is closed after the repaired read");
+  ok(await ev(`return window.__open===true;`) === true, "the browser stays open and signed in after the repaired read (one session)");
   await ev(`window.ghisDisconnect(); return 1;`);
+
+  // LAW III COVERS THE REPAIR READ TOO: the screen the doctor showed is read only out of sight.
+  await ev(`window.__calls = []; window.__pluginCalls = []; window.__replayBuf = []; window.__navLog = []; return 1;`);
+  await ev(`document.querySelector('[data-adapter-dep="dep-kims"]').click(); return 1;`);
+  await waitFor(`return (window.__pluginListeners.loggedIn||[]).length>0;`, 5000);
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://hims.kims.example/home"}); return 1;`);
+  ok(await waitFor(`return window.__pluginCalls.some(function(c){return c.m==="setMode"&&c.a.mode==="guide";});`, 30000), "the empty read asks the doctor again");
+  await ev(`window.__staleHidden = true; window.__url = "https://hims.kims.example/ip/all"; window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://hims.kims.example/ip/all"}); return 1;`);
+  ok(await waitFor(`return document.getElementById("ghisPatientList").innerText.indexOf("out of sight")>=0;`, 8000), "a repair read on a browser that will not confirm hidden reads nothing and says why");
+  ok(await ev(`return !window.__calls.some(function(x){return x.path==="/versions/ver-1/repair";});`) === true, "nothing was posted as a repair from a read that never happened");
+  await ev(`window.__staleHidden = false; window.ghisDisconnect(); window.__kimsProvenWorklist = false; window.__navLog = []; window.__replayBuf = []; return 1;`);
 
   await ev(`window.__sessionResp = { s: 403, d: { ok: false, error: "forbidden", detail: "not a member of this tenant" } }; document.querySelector('[data-adapter-dep="dep-kims"]').click(); return 1;`);
   ok(await waitFor(`return document.getElementById("ghisPatientList").innerText.indexOf("not a member of this tenant")>=0;`, 8000), "a server failure names its reason");

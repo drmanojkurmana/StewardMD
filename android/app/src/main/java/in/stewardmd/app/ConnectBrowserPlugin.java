@@ -82,6 +82,13 @@ public class ConnectBrowserPlugin extends Plugin {
     // Automatic sign-in detection state (see maybeAutoLoggedIn). Reset with every browser open.
     private boolean sawPasswordField = false;
     private boolean autoLoginNotified = false;
+    /* A SIGN-IN IS NOT ALWAYS A NAVIGATION. maybeAutoLoggedIn ran only from onPageFinished, which
+     * misses the EMR that signs the doctor in on the same page and swaps the body in place (no later
+     * onPageFinished ever arrives, so the "password field is gone" second look never happens and the
+     * sheet waits forever). Found on iOS against GHIS, 2026-09-15; the same gap was here. The browser
+     * now also watches itself while it waits. Idempotent: autoLoginNotified still fires once. */
+    private android.os.Handler loginPoll;
+    private Runnable loginPollTick;
     private Set<String> allowedOrigins = Collections.emptySet();
     private String hostTitle = "";
     private String pendingLateInitScript; // non-null only when DOCUMENT_START_SCRIPT is unsupported
@@ -182,6 +189,7 @@ public class ConnectBrowserPlugin extends Plugin {
                 buildDialog(activity);
                 webView.loadUrl(urlStr);
                 dialog.show();
+                startLoginPoll(webView);
 
                 JSObject opened = new JSObject();
                 opened.put("initScriptMode", initMode);
@@ -190,6 +198,8 @@ public class ConnectBrowserPlugin extends Plugin {
 
                 JSObject ret = new JSObject();
                 ret.put("ok", true);
+                ret.put("hidden", hidden);
+                ret.put("contract", "hidden-v2");
                 call.resolve(ret);
             }
         });
@@ -381,6 +391,8 @@ public class ConnectBrowserPlugin extends Plugin {
                 mode = newMode;
                 compact = newCompact;
                 if (newHidden != null) hidden = newHidden;
+                // Entering login mode arms the sign-in watcher; leaving it disarms.
+                if ("login".equals(mode) && !autoLoginNotified) startLoginPoll(webView); else if (!"login".equals(mode)) stopLoginPoll();
                 if (originsArr != null) {
                     try {
                         Set<String> next = new HashSet<>();
@@ -391,6 +403,7 @@ public class ConnectBrowserPlugin extends Plugin {
                 applyModeUi(banner);
                 JSObject ret = new JSObject();
                 ret.put("ok", true);
+                ret.put("hidden", hidden);
                 call.resolve(ret);
             }
         });
@@ -772,6 +785,28 @@ public class ConnectBrowserPlugin extends Plugin {
      * Fires at most once per session, only in login mode, and the Done button still works for the
      * EMR that keeps a password field on every page. No credential is read - only whether such a
      * field EXISTS. */
+    /** Watch for a sign-in that never fires onPageFinished. Stops at the first answer, or with the browser. */
+    private void startLoginPoll(final WebView view) {
+        stopLoginPoll();
+        if (view == null) return;
+        loginPoll = new android.os.Handler(android.os.Looper.getMainLooper());
+        loginPollTick = new Runnable() {
+            @Override
+            public void run() {
+                if (autoLoginNotified || !"login".equals(mode)) { stopLoginPoll(); return; }
+                maybeAutoLoggedIn(view, view.getUrl());
+                if (loginPoll != null) loginPoll.postDelayed(this, 1500);
+            }
+        };
+        loginPoll.postDelayed(loginPollTick, 1500);
+    }
+
+    private void stopLoginPoll() {
+        if (loginPoll != null && loginPollTick != null) loginPoll.removeCallbacks(loginPollTick);
+        loginPoll = null;
+        loginPollTick = null;
+    }
+
     private void maybeAutoLoggedIn(final WebView view, final String url) {
         if (autoLoginNotified || !"login".equals(mode) || view == null) return;
         try {
@@ -785,6 +820,7 @@ public class ConnectBrowserPlugin extends Plugin {
                         if (value == null || value.contains("e")) return;   // could not tell: say nothing
                         if (!sawPasswordField || autoLoginNotified) return;
                         autoLoginNotified = true;
+                        stopLoginPoll();
                         JSObject data = new JSObject();
                         data.put("url", url == null ? "" : url);
                         data.put("auto", true);
@@ -812,6 +848,7 @@ public class ConnectBrowserPlugin extends Plugin {
     }
 
     private void teardown(boolean notify) {
+        stopLoginPoll();
         boolean had = dialog != null;
         if (dialog != null) {
             try {

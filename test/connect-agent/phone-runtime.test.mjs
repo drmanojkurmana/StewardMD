@@ -3,7 +3,8 @@
 // against a fake plugin.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { fieldForHeader, mapRow, mapRows, READ_ROWS, readRowsExpression, hospitalLabel, isGimsrOrigin, fillPath, readWorklist, readPatientDetails } from '../../connect-agent/phone/runtime.mjs';
+import { fieldForHeader, mapRow, mapRows, READ_ROWS, readRowsExpression, hospitalLabel, isGimsrOrigin, fillPath, readWorklist, readPatientDetails, reproveWorklist } from '../../connect-agent/phone/runtime.mjs';
+import { parseFetchExpression } from '../../connect-agent/phone/adapter-runtime.mjs';
 
 test('fieldForHeader tolerates the labels Indian EMRs actually use', () => {
   assert.equal(fieldForHeader('UHID'), 'mrn');
@@ -130,12 +131,200 @@ test('readWorklist names the reason when nothing usable comes back', async () =>
   await assert.rejects(readWorklist({ plugin: fakePlugin({ 'https://h/x': [{ 'S.No': '1' }] }), origin: 'https://h', replay, settleMs: 0 }), /no patient rows found at \/x \(1 rows read/);
 });
 
-test('readPatientDetails reads each detail view for the patient and keeps per-view errors', async () => {
-  const plugin = fakePlugin({ 'https://h/meds/K1': [{ Drug: 'Amox' }] });
-  plugin.evaluate = async () => { throw new Error('page gone'); };
-  const bad = await readPatientDetails({ plugin, origin: 'https://h', replay: [{ resourceHint: 'labs', pathTemplate: '/labs/{id}', rowsSelector: 'tr', headers: [] }], patient: { patientId: 'K1' }, settleMs: 0 });
-  assert.deepEqual(bad, [{ resource: 'labs', error: 'page gone' }]);
-  const good = fakePlugin({ 'https://h/meds/K1': [{ Drug: 'Amox' }] });
-  const secs = await readPatientDetails({ plugin: good, origin: 'https://h', replay: [{ resourceHint: 'medications', pathTemplate: '/meds/{id}', rowsSelector: 'tr', headers: ['Drug'] }], patient: { patientId: 'K1' }, settleMs: 0 });
-  assert.deepEqual(secs, [{ resource: 'medications', rows: [{ Drug: 'Amox' }], via: 'page' }]);
+test('readPatientDetails never opens a page: an unproven screen is unreadable, a proven one replays its call', async () => {
+  const navigated = [];
+  const plugin = {
+    async navigate(a) { navigated.push(a.url); },
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate({ expression }) {
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      const text = /GetMeds/.test(req.url) ? '[{"Drug":"Amox"}]' : '[]';
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text }) };
+    },
+  };
+  const proven = (resourceHint, path) => ({ resourceHint, pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['Drug'], proof: { status: 'proven' }, endpoints: [{ method: 'GET', path, role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } }] });
+  const replay = [
+    { resourceHint: 'labs', pathTemplate: 'https://h/labs/{id}', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'unproven' } },
+    proven('medications', '/GetMeds?id'),
+    proven('radiology', '/GetRad?id'),
+  ];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  assert.deepEqual(navigated, [], 'no page was loaded');
+  assert.deepEqual(secs.find((s) => s.resource === 'labs'), { resource: 'labs', unreadable: 'not-proven' });
+  assert.deepEqual(secs.find((s) => s.resource === 'medications').rows, [{ Drug: 'Amox' }]);
+  assert.deepEqual(secs.find((s) => s.resource === 'radiology').rows, [], 'proven and empty is an empty answer, not a missing one');
+});
+
+test('the GIMSR sign-in host gets no built-in ward list call: only what discovery recorded is sent', async () => {
+  const sent = [];
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://ghis.gitam.edu/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      const req = parseFetchExpression(expression);
+      if (req) { sent.push(req.url); return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[]' }) }; }
+      return { result: '[]' };
+    },
+  };
+  const replay = [{ resourceHint: 'worklist', pathTemplate: 'https://ghis.gitam.edu/Doctor/Home', rowsSelector: 'tr', headers: ['Patient ID'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Doctor/Home/DashboardUnit?type', role: 'data', params: { type: { constant: 'docopdlist' } } }] }];
+  await assert.rejects(readWorklist({ plugin, origin: 'https://gimsrlogin.gitam.edu', replay, settleMs: 0, maxWaitMs: 5 }), /no patient rows found/);
+  assert.ok(sent.length > 0, 'the recorded call was sent');
+  assert.ok(!sent.some((u) => /GetIPWL/.test(u)), 'no call the adapter never recorded: ' + JSON.stringify(sent));
+});
+
+test('a refused unscoped request is reported unreadable, not as an empty result', async () => {
+  const plugin = {
+    async navigate() { throw new Error('the patient read must never navigate'); },
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate() { return { result: '{}' }; },
+  };
+  const replay = [{ resourceHint: 'labs', pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Lab/Get?patient_id', role: 'data', params: { patient_id: { empty: true } } }] }];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  assert.deepEqual(secs.find((s) => s.resource === 'labs'), { resource: 'labs', unreadable: 'not-scoped' });
+});
+
+test('a proven worklist that returns nothing does not scrape: it throws for repair', async () => {
+  let navigated = 0;
+  const plugin = {
+    async navigate() { navigated += 1; },
+    async currentUrl() { return { url: 'https://ghis.gitam.edu/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      const req = parseFetchExpression(expression);
+      if (req) return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[]' }) };
+      return { result: '[]' };
+    },
+  };
+  const replay = [{ resourceHint: 'worklist', pathTemplate: 'https://ghis.gitam.edu/Doctor/Home', rowsSelector: 'tr', headers: ['Patient ID'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Doctor/Home/GetIPWL?Type=IPWorkList', role: 'data', params: { Type: { constant: 'IPWorkList' } } }] }];
+  await assert.rejects(readWorklist({ plugin, origin: 'https://gimsrlogin.gitam.edu', replay, settleMs: 0, maxWaitMs: 5 }), /no patient rows found/);
+  assert.equal(navigated, 0, 'a proven adapter never navigates a page to scrape');
+});
+
+test('reproveWorklist proves a backend request on the screen the doctor showed', async () => {
+  const IPWL = JSON.stringify([{ patientId: 'MR1', patientFirstName: 'A', bedName: 'B1' }, { patientId: 'MR2', patientFirstName: 'C', bedName: 'B2' }]);
+  const plugin = {
+    async currentUrl() { return { url: 'https://ghis.gitam.edu/Doctor/Home/Nurseipwlnew' }; },
+    async drainRequests() { return { requests: [] }; },
+    async evaluate({ expression }) {
+      if (expression.indexOf('__SMD_REPLAY__') >= 0 && expression.indexOf('PROVE') < 0) return { result: '0' };
+      if (expression.indexOf('PROVE_LIST') >= 0) return { result: JSON.stringify([{ seq: 1, method: 'GET', url: 'https://ghis.gitam.edu/Doctor/Home/GetIPWL?Type=IPWorkList', body: null, xhr: true, status: 200, shape: { kind: 'json', keys: ['patientId'], rows: 2 } }]) };
+      if (expression.indexOf('PROVE_SCREEN') >= 0) return { result: JSON.stringify([['MR1', 'A', 'B1'], ['MR2', 'C', 'B2']]) };
+      if (expression.indexOf('PROVE_EXEC') >= 0) return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: 'x', text: IPWL }) };
+      return { result: '[]' };
+    },
+  };
+  const view = { resourceHint: 'worklist', pathTemplate: 'https://ghis.gitam.edu/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['UHID', 'Name', 'Bed'] };
+  const out = await reproveWorklist({ plugin, origin: 'https://ghis.gitam.edu', view });
+  assert.ok(out, 'a backend request was proven');
+  assert.equal(out.endpoints.find((e) => e.role === 'data').path.split('?')[0], '/Doctor/Home/GetIPWL');
+});
+
+/* THE PATIENT IS ACTIVATED ONCE, BEFORE THE READS. GHIS keeps the current patient in its server-side
+ * session: the hand-built adapter posts Searchnew before every read. The approved adapter
+ * (ver_64609954) proved that POST on its 'patient' view only, and the labs and medicines views it
+ * picked carry no prerequisite, so every read went out unactivated and the drawer showed empty
+ * tables for all patients (owner's iPhone, 2026-09-17). */
+test('readPatientDetails posts every proven patient-level prerequisite once, before the detail reads', async () => {
+  const { PAGE_TOKENS } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  const calls = [];
+  let activated = '';
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ __RequestVerificationToken: 'T1' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      calls.push(req.method + ' ' + req.url.replace('https://h', '') + (req.body ? ' ' + req.body : ''));
+      if (/Searchnew/.test(req.url)) { activated = String(req.body || ''); return { result: JSON.stringify({ status: 200, contentType: 'text/html', url: req.url, text: '<div>ok</div>' }) }; }
+      const text = activated === '__RequestVerificationToken=T1&recordNo=K1-E1' ? '[{"Test":"Hb"}]' : '[]';
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text }) };
+    },
+  };
+  const pre = { method: 'POST', path: '/Searchnew', role: 'prerequisite', bodyKeys: ['__RequestVerificationToken', 'recordNo'], params: { __RequestVerificationToken: { token: true }, recordNo: { from: 'worklist', fields: ['Patient ID', 'Visit ID'], join: '-' } } };
+  const data = (path) => ({ method: 'GET', path, role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } });
+  const view = (resourceHint, endpoints, extra) => Object.assign({ resourceHint, pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' }, endpoints }, extra || {});
+  const replay = [
+    view('patient', [pre, data('/GetAssessment?id')], { singleRecord: true }),
+    view('labs', [data('/GetLabs?id')]),
+    view('medications', [data('/GetMeds?id')]),
+    // a detail view's own prerequisite is keyed on its list row: not a patient-level activation
+    view('labs-detail', [{ method: 'POST', path: '/OpenResult', role: 'prerequisite', bodyKeys: ['rid'], params: { rid: { from: 'labs', field: 'Render_ID' } } }, data('/GetResult?id')], { detailOf: 'labs' }),
+  ];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1', episodeId: 'E1' }, settleMs: 0 });
+  assert.equal(calls.filter((c) => /Searchnew/.test(c)).length, 1, 'activation is posted exactly once per patient: ' + calls.join(' | '));
+  assert.ok(/Searchnew/.test(calls[0]), 'activation comes before every read: ' + calls.join(' | '));
+  assert.ok(!calls.some((c) => /OpenResult/.test(c)), 'a row-keyed prerequisite is not an activation');
+  assert.deepEqual(secs.find((s) => s.resource === 'labs').rows, [{ Test: 'Hb' }]);
+  assert.deepEqual(secs.find((s) => s.resource === 'medications').rows, [{ Test: 'Hb' }]);
+});
+
+/* THE THREE READS RUN TOGETHER. The hand-built adapter's getOpdProfile issues labs, radiology and
+ * medicines in parallel from the one session; a doctor waits for the slowest, not the sum. */
+test('readPatientDetails issues the detail reads in parallel after the activation', async () => {
+  const { PAGE_TOKENS } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  const started = [];
+  let inFlight = 0, peak = 0;
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ tok: 'T' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      started.push(req.url.replace('https://h', ''));
+      inFlight++; peak = Math.max(peak, inFlight);
+      await new Promise((r) => setTimeout(r, 30));
+      inFlight--;
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[{"a":"1"}]' }) };
+    },
+  };
+  const data = (path) => ({ method: 'GET', path, role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } });
+  const view = (resourceHint, endpoints) => ({ resourceHint, pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['a'], proof: { status: 'proven' }, endpoints });
+  const replay = [view('labs', [data('/GetLabs?id')]), view('medications', [data('/GetMeds?id')]), view('radiology', [data('/GetRad?id')])];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  assert.equal(peak, 3, 'all three reads were in flight at once (peak ' + peak + '): ' + started.join(' | '));
+  assert.deepEqual(secs.map((s) => s.resource), ['medications', 'labs', 'radiology'], 'sections keep their fixed order');
+  assert.ok(secs.every((s) => s.rows.length === 1));
+});
+
+/* A REDIRECT FROM ONE CALL IS THAT CALL'S ANSWER. GHIS answers GetInitialAssessmentnew with a 302 to
+ * SSO for every session (the hand-built adapter notes it and reads labs, medicines and radiology
+ * regardless). The runtime took one redirect as the session's end and threw all three reads away:
+ * "answered its login page to /Doctor/Home/GetInitialAssessmentnew/" three times (owner's iPhone,
+ * 2026-09-17 16:55). One resource's redirect is now that resource's error; only when every read is
+ * refused is the session gone. */
+test('readPatientDetails: one resource answering the login page does not end the other reads', async () => {
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate({ expression }) {
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      if (/GetAssess/.test(req.url)) return { result: JSON.stringify({ status: 302, redirected: true, url: req.url, text: '' }) };
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[{"a":"1"}]' }) };
+    },
+  };
+  const data = (path) => ({ method: 'GET', path, role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } });
+  const view = (resourceHint, endpoints, extra) => Object.assign({ resourceHint, pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['a'], proof: { status: 'proven' }, endpoints }, extra || {});
+  const replay = [view('patient', [data('/GetAssess?id')], { singleRecord: true }), view('labs', [data('/GetLabs?id')]), view('medications', [data('/GetMeds?id')])];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  assert.equal(secs.find((s) => s.resource === 'labs').rows.length, 1);
+  assert.equal(secs.find((s) => s.resource === 'medications').rows.length, 1);
+  assert.match(secs.find((s) => s.resource === 'patient').error, /not signed in/);
+  // Every read refused: that is the session gone, and the caller must sign in again.
+  const gone = { ...plugin, async evaluate({ expression }) { const req = parseFetchExpression(expression); if (!req) return { result: '{}' }; return { result: JSON.stringify({ status: 302, redirected: true, url: req.url, text: '' }) }; } };
+  await assert.rejects(readPatientDetails({ plugin: gone, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 }), (e) => e.name === 'NotSignedIn');
+});
+
+/* THE ROW'S OWN FIELD WINS over a screen column mapped onto it by value (gold audit 2026-09-17:
+ * episodeId 0 of 769 equal because "Visit ID" had been learned as generatedDate). */
+test('mapRow: a row carrying episodeId and bedName keeps them over mapped screen columns', () => {
+  const p = mapRow({ 'Patient ID': 'MR1', 'Visit ID': '12 - Sep - 2026', Bed: 'AC SINGLE', patientId: 'MR1', episodeId: 'IPMR7', bedName: 'B-12', generatedDate: '12 - Sep - 2026', rateTypeDesc: 'AC SINGLE' });
+  assert.equal(p.episodeId, 'IPMR7');
+  assert.equal(p.bedName, 'B-12');
+  assert.equal(p.patientId, 'MR1');
 });

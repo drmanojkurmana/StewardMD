@@ -83,3 +83,18 @@ test('the brain verify op passes the gate with counts and columns only, and its 
   assert.equal(shapeAnswer(g.clean, { ok: 'yes', suggestion: 'delete' }).ok, false);
   assert.equal(shapeAnswer(g.clean, { ok: false, suggestion: 'delete' }).suggestion, 'ask-doctor');
 });
+
+/* VERIFIED ON A REAL PATIENT, OR NOT PROVEN. A proven call that answers no rows for every real patient
+ * checked loses its proof, so the approval gate refuses it and the doctor is asked again (GHIS's lab
+ * print shell was approved as labs and read empty for every patient, 2026-09-17). */
+test('verifyViews withdraws the proof of a call that answers no rows for every real patient', async () => {
+  const plugin = fakePlugin();
+  const views = VIEWS();
+  const shell = { resourceHint: 'labs', pathTemplate: ORIGIN + '/Doctor/Home', rowsSelector: '#divLabSaveResult table tbody tr', headers: ['TEST NAME', 'RESULTS'], proof: { status: 'proven', kind: 'html', hits: 3, cells: 3, overlap: 1 }, endpoints: [{ method: 'GET', path: '/Doctor/Home/OTLabPrintsSecretary/?id', role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } }] };
+  views[3] = shell;
+  const out = await verifyViews({ plugin, origin: ORIGIN, views, parseHtml: miniParse });
+  assert.ok(out.failed.includes('labs'));
+  assert.equal(shell.proof.status, 'no-rows');
+  assert.equal(shell.proof.wasProven, true);
+  assert.equal(views[1].proof, undefined, 'a view that verified with rows is untouched');
+});

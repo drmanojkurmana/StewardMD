@@ -27,6 +27,27 @@ export async function captureWorklist({ plugin }) {
   return view;
 }
 
+/* REPAIR RE-PROVES, IT DOES NOT SCRAPE (owner, 2026-09-16). The doctor showed the patient list; the
+ * requests their taps fired (fetch/XHR in the page buffer, and navigations injected from the native
+ * log) are proven against the screen, exactly as discovery does. A proven view carries a backend
+ * request the runtime replays; an unproven one is not saved. */
+export async function reproveWorklist({ plugin, origin, view, parents = [] }) {
+  const prove = await import('./prove.mjs');
+  const client = { currentUrl: () => plugin.currentUrl(), evaluate: (a) => plugin.evaluate(a) };
+  if (typeof plugin.drainRequests === 'function') {
+    try {
+      const drained = await plugin.drainRequests();
+      let pageOrigin = null;
+      try { const cur = await plugin.currentUrl(); pageOrigin = new URL(typeof cur === 'string' ? cur : cur && cur.url).origin; } catch { pageOrigin = null; }
+      const nav = prove.navToReplayEntries(drained, { pageOrigin, allowedOrigins: [origin] });
+      if (nav.length) await plugin.evaluate({ expression: '(' + prove.INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+    } catch { /* best effort */ }
+  }
+  const book = prove.createProofBook({ brain: null });
+  await book.prove({ client, view, label: 'the doctor showed the patient list', since: -1 });
+  return provenView(view) ? view : null;
+}
+
 const HEADER_MAP = [
   ['mrn', /\b(mrn?|uhid|mr\.?\s*no|patient\s*(id|no)|reg(istration)?\s*(no|#)|hosp(ital)?\s*(id|no)|ip\s*(no|#)|umr)\b|^patient_?id$/i],
   ['episode', /\b(visit|episode|admission|encounter|ip\s*number)\b|^episode_?id$/i],
@@ -68,11 +89,14 @@ export function mapRow(row) {
     if (f === 'gender' && out.gender) continue;
     if (!out[dest[f]]) out[dest[f]] = v;
   }
+  /* THE ROW'S OWN FIELD WINS. A hospital's JSON row that already carries patientId, episodeId or bedName
+   * is the truth for that field; a screen column mapped onto it by value can be wrong (GHIS GetIPWL:
+   * "Visit ID" learned as generatedDate, "Bed" as rateTypeDesc, and the gold audit graded episodeId
+   * 0 of 769 and bedName 0 of 768 equal, 2026-09-17). The hand-built adapter returns the row's own
+   * fields; so does this. */
   const DIRECT = ['patientId', 'episodeId', 'patientFirstName', 'dob', 'gender', 'bedName', 'deptDescription', 'employeeFirstName', 'queueStatus'];
   for (const k of DIRECT) {
-    if (!out[k] && row[k] != null && String(row[k]).trim()) {
-      out[k] = String(row[k]).trim();
-    }
+    if (row[k] != null && String(row[k]).trim()) out[k] = String(row[k]).trim();
   }
   if (!out.episodeId) out.episodeId = out.patientId;
   return out;
@@ -127,6 +151,15 @@ export function READ_ROWS(doc, view) {
         var t = txt(cells[c]);
         if (t) { rec[headers[c] || ('col' + c)] = t; filled++; }
       }
+      /* A HEADER ROW RENDERED IN CELLS IS NOT DATA. Some tables (DataTables' fixed header, a
+       * radiology list) repeat their column labels as a row of <td>s; read as a record it became
+       * eight "studies" called Patient ID, Age / Gender, ... (iPhone, 2026-09-15). When every cell
+       * of a row is one of the table's own labels, skip it. */
+      if (filled && headers.length) {
+        var labelHits = 0, labelNorm = headers.map(function (h) { return String(h).toLowerCase().replace(/[^a-z0-9]/g, ''); });
+        for (var lk in rec) { if (lk.charAt(0) !== '_' && labelNorm.indexOf(String(rec[lk]).toLowerCase().replace(/[^a-z0-9]/g, '')) >= 0) labelHits++; }
+        if (labelHits === filled) continue;
+      }
     }
     /* ROW-LEVEL IDENTIFIERS stay with the row (on the phone only): the first link's href and the
      * arguments of the row's onclick, so a detail call (a lab render, a radiology report) can be
@@ -146,9 +179,27 @@ export function READ_ROWS(doc, view) {
   return JSON.stringify(out);
 }
 
+/* THE DOCUMENT THE TABLE IS ACTUALLY IN. A frameset EMR keeps every clinical screen in a child frame,
+ * so reading `document` there reads the <frameset> itself and finds nothing. `framePath` is the list
+ * of frame indexes the crawl recorded when it captured the view; an absent or unreachable path falls
+ * back to the top document, which is what almost every EMR needs. */
+export function FRAME_DOC(path) {
+  var win = window;
+  var list = path || [];
+  for (var i = 0; i < list.length; i++) {
+    try {
+      var next = win.frames[list[i]];
+      if (!next || !next.document) return document;
+      win = next;
+    } catch (e) { return document; } // cross-origin: not ours to read
+  }
+  try { return win.document || document; } catch (e) { return document; }
+}
+
 export function readRowsExpression(view) {
   const safe = { rowsSelector: view.rowsSelector, headers: view.headers || [], cellSelectors: view.cellSelectors || null };
-  return `(${String(READ_ROWS)})(document,${JSON.stringify(safe)})`;
+  const path = Array.isArray(view.framePath) ? view.framePath.slice(0, 3) : [];
+  return `(${String(READ_ROWS)})((${String(FRAME_DOC)})(${JSON.stringify(path)}),${JSON.stringify(safe)})`;
 }
 
 // Picker label: short name from the tenant ("KIMS Hospital" -> "KIMS"), else the origin host's
@@ -179,6 +230,38 @@ export function viewsByResource(replay) {
     if (!by[r] || (proven(v) && !proven(by[r]))) by[r] = v;
   }
   return by;
+}
+
+/**
+ * activationEndpoints(replay) -> { view, endpoints }: every proven prerequisite that is keyed on the
+ * patient alone (its fields come from the ward list, a token, a constant, or nothing), one per
+ * method+path, in replay order. A prerequisite keyed on a detail row (a result id) is a chain step of
+ * that view, not a patient activation, and stays with its view.
+ */
+export function endpointKey(e) { return String((e && e.method) || 'GET') + ' ' + String((e && e.path) || '').split('?')[0]; }
+
+export function activationEndpoints(replay) {
+  const seen = new Set();
+  const endpoints = [];
+  let view = null;
+  for (const v of Array.isArray(replay) ? replay : []) {
+    if (!provenView(v)) continue;
+    for (const e of v.endpoints || []) {
+      if (!e || e.role !== 'prerequisite') continue;
+      if (Object.values(e.params || {}).some((src) => src && src.from && src.from !== 'worklist')) continue;
+      const k = endpointKey(e);
+      if (seen.has(k)) continue;
+      seen.add(k);
+      endpoints.push(e);
+      if (!view) view = v;
+    }
+  }
+  return { view, endpoints };
+}
+
+/** A view discovery proved: its data call is known and was replayed against the screen. */
+export function provenView(v) {
+  return !!(v && v.proof && v.proof.status === 'proven' && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === 'data'));
 }
 
 function pathToUrl(origin, path) {
@@ -285,29 +368,19 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
    * then the page. */
   const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length)
     .sort((a, b) => Number(!!(b.proof && b.proof.status === 'proven')) - Number(!!(a.proof && a.proof.status === 'proven')));
-  if (isGimsrOrigin(origin) && !candidates.some((c) => (c.endpoints || []).some((e) => /GetIPWL/i.test(e.path)))) {
-    candidates.unshift({
-      resourceHint: 'worklist',
-      pathTemplate: 'https://ghis.gitam.edu/Doctor/Home',
-      proof: { status: 'proven', kind: 'json' },
-      endpoints: [{
-        method: 'GET',
-        path: '/Doctor/Home/GetIPWL?NursingStationId&PatientId&FloorId&Emp_ID&Dept_ID&Type=IPWorkList&__RequestVerificationToken',
-        role: 'data',
-        params: {
-          Type: { constant: 'IPWorkList' },
-          __RequestVerificationToken: { token: true }
-        },
-        proof: { status: 'proven', kind: 'json' }
-      }]
-    });
-  }
   for (const cand of candidates.length ? candidates : [view]) {
     let got = null;
     try { got = await replayFirst({ plugin, origin, view: cand, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
     if (got && mapRows(got).length) { rows = got; break; }
   }
   if (!rows) {
+    /* NO SCRAPE FOR AN ENDPOINT ADAPTER (owner, 2026-09-16). A proven worklist, or one that recorded
+     * any endpoint, that returns nothing is a drift, not a licence to read the page: it goes to repair,
+     * which re-proves a backend request. Only a worklist with no endpoint at all (a DOM-only EMR) is
+     * read from its page, the one labeled last resort. */
+    if (provenView(view) || (Array.isArray(view.endpoints) && view.endpoints.length)) {
+      throw new Error('no patient rows found at ' + (view.pathTemplate || view.path || origin) + ' through the proven request; the hospital layout may have changed');
+    }
     rows = await readView({ plugin, origin, view, settleMs, toggleAll: true, maxWaitMs: maxWaitMs || 20000 });
     if (onRead) onRead({ resource: 'worklist', via: 'page', url: view.pathTemplate || view.path });
   }
@@ -352,32 +425,60 @@ export function endpointCandidates(view, patient) {
   return out;
 }
 
-/* A recorded selector names a panel inside the full page ("#accordionEx table ... tr"); the data call
- * answers with the fragment alone, where that container is missing. Fall back to any table's rows,
- * or the block's own root, before concluding there is nothing. */
-function fallbackView(view) {
-  if (view.block) return Object.assign({}, view, { rowsSelector: view.rowsSelector.replace(/^#[\w-]+\s+/, '') });
-  return Object.assign({}, view, { rowsSelector: 'table tbody tr', headers: [] });
-}
-
 export async function readPatientDetails({ plugin, origin, replay, patient, settleMs, maxWaitMs = 8000, onRead }) {
   /* NO HOSPITAL IS SPECIAL HERE. The views are exactly what discovery proved for this hospital; the
    * runtime never injects an endpoint it knows from elsewhere (owner, 2026-09-13: GHIS is the test,
    * not the target). What discovery did not prove is read from the page or reported missing. */
   const views = viewsByResource(replay);
   const sections = [];
-  for (const r of DETAIL_RESOURCES) {
+  /* THE PATIENT IS ACTIVATED FIRST, ONCE. GHIS keeps the current patient in its server-side session: the
+   * hand-built adapter posts Searchnew (recordNo=MR-visit) before every read. Discovery proved that POST
+   * as a prerequisite of whichever view the crawl or the doctor happened to open first (ver_64609954:
+   * the 'patient' view and the guided labs view only), while the labs and medicines views picked for
+   * reading carry none, so every read went out unactivated and the drawer showed empty tables for
+   * every patient (owner's iPhone, 2026-09-17). Every proven, patient-level prerequisite of this adapter
+   * runs once here, before the reads, exactly as the page ran it. */
+  const activation = activationEndpoints(replay);
+  const activated = new Set(activation.endpoints.map(endpointKey));
+  // A view's own copy of an activation already posted is not posted again: once per patient.
+  const afterActivation = (v) => (activated.size && Array.isArray(v.endpoints))
+    ? Object.assign({}, v, { endpoints: v.endpoints.filter((e) => !(e && e.role === 'prerequisite' && activated.has(endpointKey(e)))) })
+    : v;
+  if (activation.endpoints.length) {
+    const ar = await import('./adapter-runtime.mjs');
+    try {
+      await ar.executeProven({ plugin, origin: viewOrigin(activation.view, origin), view: { pathTemplate: activation.view.pathTemplate, resourceHint: 'patient', proof: { status: 'proven' }, endpoints: activation.endpoints }, patient });
+    } catch (e) {
+      /* An activation this patient's row cannot fill (UnscopedRequest), or one the hospital refused or
+       * redirected: the reads still go out and answer for themselves. A session that is really gone
+       * refuses every read below, which is where it is said. */
+    }
+  }
+  /* THE THREE READS RUN TOGETHER. The hand-built adapter's getOpdProfile issues labs, radiology and
+   * medicines in parallel from its one session; the doctor waits for the slowest read, not the sum.
+   * Each resource is one task; the sections come back in the fixed DETAIL_RESOURCES order. */
+  async function readOne(r) {
+    const out = [];
     const v = views[r];
-    if (!v) continue;
-    /* Where to look, in order: the view's own page with the patient filled in (a labs page by
-     * recordNo), then the data calls that page made (the medicines fragment by id). A page shared with
-     * the worklist (the single-page Doctor Home) is skipped: it never shows this patient's panel on
-     * its own. Each place is read with the recorded selector, then with the fallback. */
+    if (!v) return out;
+    /* NEVER A PAGE. A screen discovery could not prove is reported unreadable, never loaded and scraped:
+     * reading GHIS pages for one patient sat on a two-link menu for 30 minutes on the owner's iPhone
+     * (2026-09-15). The hand-built adapter never loads a page either. */
+    if (!provenView(v)) { out.push({ resource: r, unreadable: 'not-proven' }); return out; }
     let replayed = null;
     const vo = viewOrigin(v, origin);
-    try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; replayed = null; }
+    try { replayed = await replayFirst({ plugin, origin: vo, view: afterActivation(v), patient, onRead }); } catch (e) {
+      /* A REDIRECT FROM ONE CALL IS THAT CALL'S ANSWER. GHIS answers GetInitialAssessmentnew with a 302
+       * to SSO in every session (the hand-built adapter notes it and reads the rest regardless). One
+       * resource's login answer is recorded on that resource; the session is gone only when every
+       * read says so (checked after all of them). */
+      if (e && e.name === 'NotSignedIn') { out.push({ resource: r, error: String(e.message || e), login: true }); return out; }
+      if (e && e.name === 'UnscopedRequest') { out.push({ resource: r, unreadable: 'not-scoped' }); return out; }
+      out.push({ resource: r, error: String((e && e.message) || e) });
+      return out;
+    }
     if (replayed) {
-      sections.push(withRoles({ resource: r, rows: replayed, via: 'endpoint' }, v));
+      out.push(withRoles({ resource: r, rows: replayed, via: 'endpoint' }, v));
       /* THE CHAIN: a proven detail view (one lab result, one radiology report) is read for each row of
        * this list, its fields filled from that row (render id, result id). */
       const d = views[r + '-detail'];
@@ -390,7 +491,13 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
         let rowIndex = 0;
         for (const row of replayed.slice(0, MAX_DETAIL_ROWS)) {
           let got = null;
-          try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
+          /* A row whose chain key is missing is skipped, not guessed at and not fatal: the other rows
+           * of this list are still read (adapter-runtime brokenChainField). */
+          try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) {
+            if (e && e.name === 'NotSignedIn') break;   // the detail chain stops; the list itself was read
+            if (e && e.name === 'UnscopedRequest') { rowIndex++; continue; }
+            got = null;
+          }
           // The row's title: prefer description / study / parameter / test name over IDs / numeric strings
           let title = '';
           for (const k of Object.keys(row)) {
@@ -411,28 +518,20 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
           }
           rowIndex++;
         }
-        if (detailRows.length) { sections.push(withRoles({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }, d)); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
+        if (detailRows.length) { out.push(withRoles({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }, d)); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
       }
-      continue;
+      return out;
     }
-    const own = fillPath(v.pathTemplate || v.path, patient);
-    const origin_ = vo;
-    const shared = views.worklist && samePage(pathToUrl(origin, own), pathToUrl(origin, views.worklist.pathTemplate || views.worklist.path));
-    const places = [];
-    if (!shared) places.push(own);
-    for (const c of endpointCandidates(v, patient)) places.push(c);
-    let rows = [];
-    let lastErr = null;
-    for (const place of places) {
-      for (const candidate of [Object.assign({}, v, { pathTemplate: place }), Object.assign(fallbackView(v), { pathTemplate: place })]) {
-        try { rows = await readView({ plugin, origin: vo, view: candidate, settleMs, maxWaitMs }); } catch (e) { lastErr = e; rows = []; }
-        if (rows.length) break;
-      }
-      if (rows.length) break;
-    }
-    if (!rows.length && lastErr) { sections.push({ resource: r, error: lastErr.message }); continue; }
-    if (rows.length && onRead) onRead({ resource: r, via: 'page' });
-    sections.push(withRoles({ resource: r, rows, via: 'page' }, v));
+    // Proven, and this patient has none (no medicines charted): an empty answer, not a missing one.
+    out.push(withRoles({ resource: r, rows: [], via: 'endpoint' }, v));
+    return out;
+  }
+  const results = await Promise.all(DETAIL_RESOURCES.map(readOne));
+  for (const part of results) sections.push(...part);
+  const attempted = sections.filter((x) => x.rows || x.error);
+  if (attempted.length && attempted.every((x) => x.login)) {
+    const ar = await import('./adapter-runtime.mjs');
+    throw new ar.NotSignedIn(attempted[0].error);
   }
   return sections;
 }

@@ -33,6 +33,38 @@ export const GOLD_ENDPOINTS = Object.freeze([
 ]);
 
 function n(v) { return String(v == null ? '' : v).toLowerCase().replace(/[^a-z0-9]/g, ''); }
+
+/* THE SAME DAY WRITTEN TWO WAYS IS THE SAME DAY. Two adapters reading one hospital field print it
+ * however their own code prints it: 01/02/2026, 2026-02-01, 1-Feb-2026. Stripping punctuation is not
+ * enough, and parsing is worse than useless here - 01/02/2026 is January 2nd to Date.parse and
+ * February 1st to the hospital that wrote it, so a parse would call two identical dates different
+ * and, occasionally, two different dates the same. Comparing the NUMBERS PRESENT, without caring
+ * which is the day and which the month, is the honest test: it cannot be fooled by field order and
+ * it never invents a match between dates that do not share their parts. A time, when both carry one,
+ * has to agree too. Used only after the plain comparison has already failed. */
+const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+function dateParts(v) {
+  let s = String(v == null ? '' : v);
+  // "1-Feb-2026" is the same day as "2026-02-01"; a month name carries a number, it just does not show it.
+  s = s.replace(/[a-z]+/gi, (w) => {
+    const i = MONTHS.indexOf(w.slice(0, 3).toLowerCase());
+    return i >= 0 && w.length <= 9 ? ' ' + (i + 1) + ' ' : ' ';
+  });
+  // A zero part says nothing: "10:30:00" is the moment "10:30" is, and midnight is the day itself.
+  const nums = (s.match(/\d+/g) || []).map((x) => Number(x)).filter((x) => x !== 0);
+  if (nums.length < 3) return null;                       // not a date: two numbers cannot be one
+  if (!nums.some((x) => x >= 1000 && x <= 3000)) return null; // no year, no date
+  return nums.slice().sort((a, b) => a - b).join('.');
+}
+
+/** Same value, allowing for one adapter writing a date in a different order than the other. */
+function sameValue(x, y, rawX, rawY) {
+  if (x && x === y) return true;
+  if (x && y && x.length > 40 && y.length > 40 && (x.includes(y.slice(0, 40)) || y.includes(x.slice(0, 40)))) return true;
+  if (!x || !y) return false;
+  const dx = dateParts(rawX), dy = dateParts(rawY);
+  return !!dx && dx === dy;
+}
 function keyOf(row, key) { return key.map((k) => n(row[k]).slice(0, 60)).join('|'); }
 
 /** compareRows(spec, goldBody, adapterBody) -> PHI-free grade for one endpoint and one patient. */
@@ -42,7 +74,10 @@ export function compareRows(spec, goldBody, adapterBody) {
   const byKey = new Map();
   for (const r of mine) { const k = keyOf(r, spec.key); if (!byKey.has(k)) byKey.set(k, r); }
   const fields = {};
-  for (const f of spec.fields) fields[f] = { gold: 0, adapter: 0, equal: 0 };
+  // Per field, how many of the rows the adapter DID return carried a gold value: the yardstick for
+  // "the rows it returned are right", which fields[f].gold (every gold row) can never be on a short list.
+  const matchedGold = {};
+  for (const f of spec.fields) { fields[f] = { gold: 0, adapter: 0, equal: 0 }; matchedGold[f] = 0; }
   let matched = 0;
   for (const g of gold) {
     const a = byKey.get(keyOf(g, spec.key));
@@ -50,20 +85,27 @@ export function compareRows(spec, goldBody, adapterBody) {
     if (!a) continue;
     matched += 1;
     for (const f of spec.fields) {
+      if (n(g[f])) matchedGold[f] += 1;
       if (n(a[f])) fields[f].adapter += 1;
       // A long text field (a report) counts as equal when one contains the other.
       const x = n(g[f]), y = n(a[f]);
-      if (x && (x === y || (x.length > 40 && y.length > 40 && (x.includes(y.slice(0, 40)) || y.includes(x.slice(0, 40)))))) fields[f].equal += 1;
+      if (sameValue(x, y, g[f], a[f])) fields[f].equal += 1;
     }
   }
   const filled = spec.fields.filter((f) => fields[f].gold > 0);
   const fieldsSame = filled.every((f) => fields[f].equal === fields[f].gold);
+  // A short list is only a clean subset when every row it DID return agrees field for field.
+  const matchedFieldsSame = spec.fields.every((f) => fields[f].equal === matchedGold[f]);
+  /* A SUBSET IS A FAILURE WITH ITS OWN NAME (owner, 2026-09-16). An adapter that returns some of the
+   * ward is more dangerous than one that returns none: the missing patients look like patients who do
+   * not exist. It is never folded into "partial". */
   let verdict;
   if (!gold.length && !mine.length) verdict = 'both-empty';
   else if (!mine.length) verdict = 'missing';
   else if (matched === gold.length && mine.length === gold.length && fieldsSame) verdict = 'same';
+  else if (mine.length < gold.length && matched === mine.length && matchedFieldsSame) verdict = 'subset';
   else verdict = 'partial';
-  return { endpoint: spec.endpoint, gold: gold.length, adapter: mine.length, matched, fields, verdict };
+  return { endpoint: spec.endpoint, gold: gold.length, adapter: mine.length, matched, missing: Math.max(0, gold.length - matched), fields, verdict };
 }
 
 function callOf(view) {

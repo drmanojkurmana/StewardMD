@@ -233,7 +233,39 @@
        * Sync and Assess looked dead (owner, 2026-09-12). A ward read through an approved adapter
        * keeps the doctor signed in for thirty minutes: the hospital cookies live in the native
        * browser, and every read reopens it without a second login. */
-      var ADAPTER_SESSION_MS = 30 * 60 * 1000;
+      /* ONE SESSION, HELD. The hand-built adapter (functions/api/ghis/[[path]].js) signs in once, keeps
+       * the cookie jar, and slides its session forward on every call so GHIS's ~20-minute idle window
+       * never passes. The phone does the same: the hidden browser stays open and signed in for the
+       * whole day, a keep-alive re-issues the ward list call every ten minutes, and every patient read
+       * goes through that one browser. Closing it after the ward list and reopening it per patient
+       * landed on the hospital signed out ("answered its login page", owner's iPhone, 2026-09-17). */
+      var ADAPTER_SESSION_MS = 24 * 60 * 60 * 1000;
+      var ADAPTER_KEEPALIVE_MS = 10 * 60 * 1000;
+      function adapterStopKeepAlive(ctx) { if (ctx && ctx.keepAlive) { clearInterval(ctx.keepAlive); ctx.keepAlive = null; } }
+      function adapterCloseBrowser(ctx, plugin) {
+        adapterStopKeepAlive(ctx);
+        if (!ctx) return;
+        ctx.browserOpen = false;
+        try { (plugin || connectPlugin()).close(); } catch (e) {}
+      }
+      function adapterStartKeepAlive(ctx, plugin, rt) {
+        adapterStopKeepAlive(ctx);
+        ctx.keepAlive = setInterval(function () {
+          if (_adapterCtx !== ctx || !ctx.browserOpen || ctx.reading) { if (_adapterCtx !== ctx) adapterStopKeepAlive(ctx); return; }
+          ctx.reading = true;
+          rt.readWorklist({ plugin: plugin, origin: ctx.origin, replay: ctx.replay }).then(function (patients) {
+            ctx.reading = false;
+            if (_adapterCtx !== ctx) return;
+            ctx.at = Date.now();
+            if (patients && patients.length) _patients = patients;
+          }, function (e) {
+            ctx.reading = false;
+            /* The hospital let the session go: say so quietly where the next read will show it; the
+             * browser is closed so the next open starts a fresh sign-in instead of reading nothing. */
+            if (/not signed in/i.test(String(e && e.message))) { ctx.signedOut = String(e.message); adapterCloseBrowser(ctx, plugin); }
+          });
+        }, ADAPTER_KEEPALIVE_MS);
+      }
       function adapterSessionFresh() { return !!(_adapterCtx && _adapterCtx.at && (Date.now() - _adapterCtx.at) < ADAPTER_SESSION_MS); }
       function checkSession() {
         if (adapterSessionFresh()) return Promise.resolve(true);
@@ -321,7 +353,8 @@
       // session (the server reuses the active adapter), sign in inside the native ConnectBrowser, hand off,
       // then the phone runtime (connect-agent/phone/runtime.mjs) reads the ward list from the hospital's
       // own pages in the doctor's session. Cell text never leaves the phone.
-      var AGENT_BASE = '/api/connect/agent';
+      // Absolute on native (SMD_API_BASE), relative on the web: a bare /api path is dead on iOS's capacitor:// origin.
+      var AGENT_BASE = (window.SMD_API_BASE || '') + '/api/connect/agent';
       var _agentApi = function (path, tid, opts) {
         var q = tid ? (path.indexOf('?') >= 0 ? '&' : '?') + 'tenant=' + encodeURIComponent(tid) : '';
         var tok;
@@ -357,6 +390,18 @@
         if (window.__SMD_WARD_SHIM_TEST__) return Promise.resolve(window.__SMD_WARD_SHIM_TEST__);
         try { return (new Function('p', 'return import(p)'))('/connect-agent/phone/ghis-shim.mjs'); } catch (e) { return Promise.reject(e); }
       }
+      /* EVERY READ ENDS. Each hospital request is bounded (adapter-runtime FETCH_TIMEOUT_MS); this bounds
+       * the whole patient read, so a hospital that stops answering can never hold the drawer open for
+       * 30 minutes again (owner's iPhone, 2026-09-15). */
+      var ADAPTER_READ_DEADLINE_MS = 30000;
+      var READ_TIMED_OUT = 'The hospital did not answer in time, so the reading was stopped. Try again.';
+      var HIDDEN_REFUSED = 'This app version cannot read the hospital out of sight, so nothing was read. Update the app and try again.';
+      function withDeadline(promise, ms) {
+        return new Promise(function (resolve, reject) {
+          var t = setTimeout(function () { reject(new Error(READ_TIMED_OUT)); }, ms);
+          promise.then(function (v) { clearTimeout(t); resolve(v); }, function (e) { clearTimeout(t); reject(e); });
+        });
+      }
       function adapterSections(patientId) {
         var ctx = _adapterCtx, plugin = connectPlugin();
         if (!ctx || !plugin) return Promise.reject(new Error('no adapter session'));
@@ -364,7 +409,8 @@
         if (ctx.sections[patientId]) return ctx.sections[patientId];
         var p = null;
         for (var i = 0; i < _patients.length; i++) if (String(_patients[i].patientId) === String(patientId)) p = _patients[i];
-        ctx.sections[patientId] = loadWardRuntime().then(function (rt) {
+        ctx.sections[patientId] = withDeadline(loadWardRuntime().then(function (rt) {
+          var reuse = ctx.browserOpen === true;
           ctx.browserOpen = true;
           var targetOrigin = ctx.origin;
           if (ctx.origins && ctx.origins.length) {
@@ -372,16 +418,49 @@
               if (/ghis\.gitam\.edu/i.test(ctx.origins[oi])) { targetOrigin = ctx.origins[oi]; break; }
             }
           }
-          return plugin.open({ url: targetOrigin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '', hidden: true }).then(function () {
-            try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins, hidden: true }); } catch (e) {}
-            return rt.readPatientDetails({ plugin: plugin, origin: targetOrigin, replay: ctx.replay, patient: p || { patientId: patientId } });
+          /* LAW III, ENFORCED HERE. The iPhone showed the hospital page over the whole screen during a
+           * patient read although hidden was asked for (2026-09-15): a build can carry a plugin that
+           * ignores the flag. The native side must confirm hidden, or nothing is read. */
+          var opening = reuse
+            ? Promise.resolve({ ok: true, hidden: true })
+            : plugin.open({ url: targetOrigin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '', hidden: true }).then(function (opened) {
+                if (!opened || opened.hidden !== true) throw new Error(HIDDEN_REFUSED);
+                return plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins, hidden: true });
+              });
+          return opening.then(function (moded) {
+            if (!moded || moded.hidden !== true) throw new Error(HIDDEN_REFUSED);
+            /* READ FROM THE HOSPITAL, NOT FROM A BLANK TAB. plugin.open resolves when the hidden tab exists,
+             * before its page has loaded; reading right away fired every request from about:blank and the
+             * drawer said "Load failed" for labs, medicines and radiology with no page host at all (owner's
+             * iPhone, 2026-09-17). The ward-list path waits for the page; this one now does too: up to
+             * thirty seconds for the hospital host with the document complete. A login form there means
+             * the session is gone, which is said as such. */
+            var wantHost = targetOrigin.replace(/^https?:\/\//, '');
+            var tries = 0;
+            function landed() {
+              return plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':document.readyState)+' '+location.host})()" })
+                .then(function (r) { return String((r && r.result) || '').split(' '); }, function () { return ['error', '']; })
+                .then(function (v) {
+                  if (v[0] === 'login') throw new Error('not signed in: ' + wantHost + ' answered its login page. Open Ward Sync again to sign in.');
+                  if (v[0] === 'complete' && v[1] === wantHost) return true;
+                  if (++tries >= 60) throw new Error('Could not reach ' + wantHost + ' in the in-app browser (the page did not load). Check the connection and try again.');
+                  return new Promise(function (res) { setTimeout(res, 500); }).then(landed);
+                });
+            }
+            return landed().then(function () {
+              return rt.readPatientDetails({ plugin: plugin, origin: targetOrigin, replay: ctx.replay, patient: p || { patientId: patientId } });
+            });
           });
-        }).then(function (sections) {
-          ctx.browserOpen = false; try { plugin.close(); } catch (e) {}
+        }), window.__SMD_ADAPTER_DEADLINE_MS__ || ADAPTER_READ_DEADLINE_MS).then(function (sections) {
+          /* The browser stays open and signed in for the next patient (one session, as the hand-built
+           * adapter keeps its cookie jar). */
           ctx.at = Date.now();
           return sections;
         }, function (e) {
-          ctx.browserOpen = false; try { plugin.close(); } catch (x) {}
+          /* A read that failed or hung leaves the browser in an unknown state: close it so the next
+           * read opens afresh, and say when the session itself is gone. */
+          adapterCloseBrowser(ctx, plugin);
+          if (/not signed in/i.test(String(e && e.message))) ctx.signedOut = String(e.message);
           delete ctx.sections[patientId];
           throw e;
         });
@@ -403,6 +482,11 @@
           if (!r) return null;
           return new Response(JSON.stringify(r.body), { status: r.status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
         });
+      }
+      /* ABSENT IS NOT NEGATIVE: a section the adapter could not read says why, never "none found". */
+      function notReadHtml(j) {
+        var why = j && (j.unreadable || (j.error === 'adapter_read_failed' ? (j.detail || 'The hospital could not be read.') : ''));
+        return why ? '<div class="ghis-lab-empty">' + esc(why) + '</div>' : '';
       }
       (function installAdapterProxy() {
         if (window.__smdAdapterProxyInstalled) return;
@@ -434,7 +518,7 @@
          * this app) and once by the approved adapter. Returns counts and names, never a value. Needs an
          * adapter session open (the Connect Agent hospital's ward list loaded) and a GHIS sign-in. */
         GHIS.goldAudit = function (opts) {
-          if (!_adapterCtx) return Promise.reject(new Error('open the Connect Agent hospital ward list first'));
+          if (!_adapterCtx || !_adapterCtx.replay) return Promise.reject(new Error(_adapterCtx ? 'the Connect Agent ward list is still loading; wait for it, then run the audit' : 'open the Connect Agent hospital ward list first'));
           var viaGold = function (path) {
             var t = getToken();
             if (!t) return Promise.reject(new Error('sign in to GHIS in Ward Sync first'));
@@ -491,7 +575,7 @@
       function adapterFail(msg) {
         var el = document.getElementById('ghisPatientList');
         if (el) el.innerHTML = '<div class="ghis-empty">' + esc(msg) + '</div>';
-        try { var p = connectPlugin(); if (p && _adapterCtx && _adapterCtx.browserOpen) { _adapterCtx.browserOpen = false; p.close(); } } catch (e) {}
+        try { if (_adapterCtx && _adapterCtx.browserOpen) adapterCloseBrowser(_adapterCtx, connectPlugin()); } catch (e) {}
       }
       /* READ-TIME SELF-REPAIR. An approved adapter that reads zero rows is not the end: the browser
        * goes back to the doctor with one ask in its header, the screen they show is captured (labels
@@ -510,16 +594,24 @@
           try { plugin.setMode({ mode: 'guide', banner: rt.REPAIR_ASK, origins: ctx.origins }); } catch (e) { reject(err); }
         }).then(function () {
           if (el) el.innerHTML = '<div class="ghis-loading">Reading the screen you showed me...</div>';
-          try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for your ward list', origins: ctx.origins }); } catch (e) {}
-          return rt.captureWorklist({ plugin: plugin });
+          /* LAW III COVERS THE REPAIR READ TOO: the screen the doctor showed is read out of sight or
+           * not at all, exactly as adapterSections requires. */
+          return Promise.resolve(plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for your ward list', origins: ctx.origins, hidden: true })).then(function (moded) {
+            if (!moded || moded.hidden !== true) throw new Error(HIDDEN_REFUSED);
+            return rt.captureWorklist({ plugin: plugin });
+          });
         }).then(function (view) {
-          return rt.readView({ plugin: plugin, origin: ctx.origin, view: view, navigate: false }).then(function (rows) {
-            var patients = rt.mapRows(rows);
-            if (!patients.length) throw new Error('Still no patient rows on the screen you showed me (' + rows.length + ' rows read, none with a name or id). ' + err.message);
-            agentApi('/versions/' + encodeURIComponent(ctx.versionId) + '/repair', ctx.tid, { method: 'POST', body: JSON.stringify({ sessionId: ctx.sessionId, view: view }) }).then(function (r) {
-              if (r.s === 200 && r.d && r.d.ok !== false) { try { if (window.toast) window.toast('Thanks. A corrected adapter was sent for approval.'); } catch (e) {} }
+          return rt.reproveWorklist({ plugin: plugin, origin: ctx.origin, view: view }).then(function (proven) {
+            if (!proven) {
+              throw new Error('I could not find a data request behind your patient list on ' + ctx.host + '. This hospital needs a fresh Connect Hospital run so the agent can learn it. ' + err.message);
+            }
+            return rt.readWorklist({ plugin: plugin, origin: ctx.origin, replay: [proven] }).then(function (patients) {
+              if (!patients.length) throw new Error('The request I learned from that screen returned no patients. ' + err.message);
+              agentApi('/versions/' + encodeURIComponent(ctx.versionId) + '/repair', ctx.tid, { method: 'POST', body: JSON.stringify({ sessionId: ctx.sessionId, view: proven }) }).then(function (r) {
+                if (r.s === 200 && r.d && r.d.ok !== false) { try { if (window.toast) window.toast('Thanks. A corrected adapter was sent for approval.'); } catch (e) {} }
+              });
+              return patients;
             });
-            return patients;
           });
         });
       }
@@ -558,12 +650,21 @@
                  * detection has nothing to see. Two quiet polls without a password field, after the
                  * page has had time to load, count as signed in; the doctor never taps Done again
                  * inside the thirty-minute window. */
-                var quiet = 0, polls = 0;
+                var quiet = 0, polls = 0, lastState = '';
                 function look() {
                   if (!ctx.listeners.length) return;   // already resolved or rejected
-                  plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':(document.body&&document.body.innerText.length>200?'ok':'blank'))+' '+location.host})()" })
-                    .then(function (r) { var v = String((r && r.result) || '').split(' '); if (v[0] === 'ok') quiet += (v[1] && v[1] !== host) ? 2 : 1; else quiet = 0; }, function () { quiet = 0; })
-                    .then(function () { polls++; if (quiet >= 2 && ctx.listeners.length) { off(); resolve(); return; } if (polls < 12 && ctx.listeners.length) setTimeout(look, 700); });
+                  plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':(document.readyState==='complete'?'ok':'blank'))+' '+location.host})()" })
+                    .then(function (r) { var v = String((r && r.result) || '').split(' '); lastState = v[0] || ''; if (v[0] === 'ok') quiet += (v[1] && v[1] !== host) ? 2 : 1; else quiet = 0; }, function () { lastState = 'error'; quiet = 0; })
+                    .then(function () {
+                      polls++;
+                      if (quiet >= 2 && ctx.listeners.length) { off(); resolve(); return; }
+                      if (polls < 40 && ctx.listeners.length) { setTimeout(look, 700); return; }   // ~28 s: a cold sign-in redirect chain on hospital wifi took longer than 8 s (owner, 2026-09-17)
+                      /* OUT OF POLLS IS AN ANSWER, NOT A WAIT. A login form on screen is the doctor's turn
+                       * (the loggedIn listener stays armed). Anything else after forty polls (about thirty seconds) means the
+                       * hospital page never loaded, and Ward Sync used to sit on "Signing in to ..." for
+                       * ever with nothing to tap (owner, 2026-09-17). Say so, so the doctor can retry. */
+                      if (lastState !== 'login' && ctx.listeners.length) { off(); reject(new Error('Could not reach ' + host + ' in the in-app browser (the page did not load). Check the connection and try again.')); }
+                    });
                 }
                 setTimeout(look, 1200);
               })
@@ -590,8 +691,10 @@
           return waitSignedIn();
         }).then(function () {
           if (el) el.innerHTML = '<div class="ghis-loading">Reading ' + esc(host) + ' for your ward list...</div>';
-          try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + host + ' for your ward list', origins: ctx.origins }); } catch (e) {}
-          return agentApi('/sessions/' + encodeURIComponent(ctx.sessionId) + '/handoff', it.tid, { method: 'POST', body: JSON.stringify({ visitedOrigins: [origin] }) });
+          return Promise.resolve(plugin.setMode({ mode: 'agent', banner: 'Reading ' + host + ' for your ward list', origins: ctx.origins, hidden: true })).then(function (moded) {
+            if (!moded || moded.hidden !== true) { ctx.browserOpen = false; try { plugin.close(); } catch (x) {} throw new Error(HIDDEN_REFUSED); }
+            return agentApi('/sessions/' + encodeURIComponent(ctx.sessionId) + '/handoff', it.tid, { method: 'POST', body: JSON.stringify({ visitedOrigins: [origin] }) });
+          });
         }).then(function (r) {
           if (r.s !== 200 || !r.d || r.d.ok === false) throw new Error(agentReason(r, 'confirm the sign in with ' + host));
           return agentApi('/versions/' + encodeURIComponent(ctx.versionId), it.tid);
@@ -604,10 +707,9 @@
             return selfRepair(e);
           });
         }).then(function (patients) {
-          ctx.browserOpen = false;
-          try { plugin.close(); } catch (e) {}
-          if (_adapterCtx !== ctx) return;
+          if (_adapterCtx !== ctx) { adapterCloseBrowser(ctx, plugin); return; }
           ctx.at = Date.now();
+          adapterStartKeepAlive(ctx, plugin, rt);
           _connected = true; try { dot(true); } catch (e) {}
           _patients = patients;
           populateFilterOptions();
@@ -617,42 +719,6 @@
           adapterFail(e && e.message ? e.message : 'Could not read the ward list from ' + host + '.');
         });
       };
-      // Patient details from the adapter's other views (medications, labs, radiology, history, discharge),
-      // shown in the existing lab drawer. The browser is reopened in agent mode for the read, then closed.
-      function ghisOpenAdapterPatient(patientId, name) {
-        var ctx = _adapterCtx, plugin = connectPlugin();
-        var drawer = document.getElementById('ghisLabDrawer'), title = document.getElementById('ghisLabTitle'), body = document.getElementById('ghisLabBody');
-        if (!drawer || !ctx) return;
-        var p = null; for (var i = 0; i < _patients.length; i++) if (String(_patients[i].patientId) === String(patientId)) p = _patients[i];
-        GHIS._selectedPatient = { patientId: patientId, name: name, episodeId: (p && p.episodeId) || '' };
-        title.textContent = name + ' (' + patientId + ')';
-        body.innerHTML = '<div class="ghis-loading">Reading ' + esc(ctx.host) + ' for ' + esc(name) + '...</div>';
-        drawer.style.display = '';
-        if (!plugin) { body.innerHTML = '<div class="ghis-lab-empty">The in-app hospital browser is not available on this device.</div>'; return; }
-        loadWardRuntime().then(function (rt) {
-          ctx.browserOpen = true;
-          return plugin.open({ url: ctx.origin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '' }).then(function () {
-            try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for ' + name, origins: ctx.origins }); } catch (e) {}
-            return rt.readPatientDetails({ plugin: plugin, origin: ctx.origin, replay: ctx.replay, patient: p || { patientId: patientId } });
-          });
-        }).then(function (sections) {
-          ctx.browserOpen = false; try { plugin.close(); } catch (e) {}
-          if (!sections.length) { body.innerHTML = '<div class="ghis-lab-empty">The approved adapter for ' + esc(ctx.host) + ' has no patient views (medications, labs, radiology, history, discharge).</div>'; return; }
-          body.innerHTML = sections.map(function (sec) {
-            var h = '<div class="ghis-lab-group"><div class="ghis-lab-group-name">' + esc(sec.resource) + '</div>';
-            if (sec.error) return h + '<div class="ghis-lab-detail-empty">' + esc(sec.error) + '</div></div>';
-            if (!sec.rows.length) return h + '<div class="ghis-lab-detail-empty">Nothing recorded.</div></div>';
-            return h + sec.rows.map(function (row) {
-              return '<div class="ghis-lab-row" style="display:block">' + Object.keys(row).filter(function (k) { return k.charAt(0) !== '_'; }).map(function (k) {
-                return '<div><span class="ghis-lab-date">' + esc(k) + '</span> <span class="ghis-lab-test">' + esc(row[k]) + '</span></div>';
-              }).join('') + '</div>';
-            }).join('') + '</div>';
-          }).join('');
-        }).catch(function (e) {
-          ctx.browserOpen = false; try { plugin.close(); } catch (x) {}
-          body.innerHTML = '<div class="ghis-lab-empty">' + esc(e && e.message ? e.message : 'Could not read ' + ctx.host + ' for this patient.') + '</div>';
-        });
-      }
       // "My Ward" tab — open the StewardMD ward dashboard (the ICU dashboard tuned for ward patients:
       // ventilator hidden, "Ward" labels, own patient list; Treatment / instructions / deep review /
       // imaging / discharge reused). The Ward Sync panel (z 18000) sits ABOVE the dashboard (z 10000),
@@ -1242,11 +1308,16 @@
         loadMedications: function(patientId) {
           var sec = document.getElementById('ghisMedSection');
           if (!sec) return;
+          // Medications sit LAST in the drawer and fold shut: a 166-item chart pushed labs and imaging
+          // off the screen (owner, 2026-09-15). Labs and imaging are what the doctor opened this for.
+          try { if (sec.parentNode && sec.parentNode.lastElementChild !== sec) sec.parentNode.appendChild(sec); } catch (e) {}
           authFetch('/medications?patientId=' + encodeURIComponent(patientId))
             .then(function(j) {
+              var nr = notReadHtml(j);
+              if (nr) { sec.innerHTML = nr; return; }
               var rows = (j && j.rows) || [];
               if (rows.length === 0) { sec.innerHTML = ''; return; }
-              var html = '<div class="ghis-lab-section-title">' + wIco("pills") + ' Medications · ' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + '</div>';
+              var html = '<details class="ghis-med-fold"><summary class="ghis-lab-section-title" style="cursor:pointer;list-style:none">' + wIco("pills") + ' Medications · ' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + ' <span style="font-weight:400;opacity:.6">(tap to expand)</span></summary>';
               rows.forEach(function(m) {
                 var title = m.drugText || m.genericName || 'Medication';
                 var sub = [m.dosage, m.route, m.frequency, m.duration].filter(Boolean).join(' · ');
@@ -1258,7 +1329,7 @@
                   (sub ? '<div class="ghis-pt-meta" style="margin-top:4px">' + esc(sub) + '</div>' : '') +
                 '</div>';
               });
-              html += '<div class="ghis-rad-divider"></div>';
+              html += '</details><div class="ghis-rad-divider"></div>';
               sec.innerHTML = html;
             })
             .catch(function() { sec.innerHTML = ''; });
@@ -1272,6 +1343,8 @@
                 body.innerHTML = '<div class="ghis-lab-empty">Your session expired — sign in again in the Ward panel.</div>';
                 return;
               }
+              var nr = notReadHtml(j);
+              if (nr) { body.innerHTML = nr; return; }
               var orders = (j && j.orders) || [];
               if (orders.length === 0) {
                 body.innerHTML = '<div class="ghis-lab-empty">No lab orders found for this patient.</div>';
@@ -1310,6 +1383,8 @@
           if (!sec) return;
           authFetch('/radiology?patientId=' + encodeURIComponent(patientId))
             .then(function(j) {
+              var nr = notReadHtml(j);
+              if (nr) { sec.innerHTML = nr; return; }
               var orders = (j && j.orders) || [];
               if (orders.length === 0) { sec.innerHTML = ''; return; }
               var html = '<div class="ghis-lab-section-title">' + wIco("xray") + ' Imaging · ' + orders.length + ' stud' + (orders.length === 1 ? 'y' : 'ies') + '</div>';
@@ -1527,7 +1602,7 @@
       };
     
       window.ghisDisconnect = function() {
-        if (_adapterCtx) { _adapterCtx = null; _patients = []; try { GHIS.clearSelectedPatient(); } catch (e) {} showScreen('hospital'); return; }
+        if (_adapterCtx) { var actx = _adapterCtx; _adapterCtx = null; adapterCloseBrowser(actx); _patients = []; try { GHIS.clearSelectedPatient(); } catch (e) {} showScreen('hospital'); return; }
         DEMO = null;
         var t = getToken();
         if (t) { fetch(PROXY + '/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + t } }).catch(function(){}); }

@@ -7,14 +7,52 @@ import { serveGhisProxy } from '../../connect-agent/phone/ghis-shim.mjs';
 
 const spec = (name) => GOLD_ENDPOINTS.find((s) => s.endpoint === name);
 
-test('compareRows: same rows and fields is "same"; a missing field or row is "partial"; nothing is "missing"', () => {
+/* WAS: "a missing field OR ROW is partial". A short list is now its own verdict, "subset" (Task 2c,
+ * owner 2026-09-16), so the partial case here keeps every row and drops only a field. */
+test('compareRows: same rows and fields is "same"; a missing field is "partial"; a short list is "subset"; nothing is "missing"', () => {
   const gold = { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: 'Oral', frequency: 'TDS' }, { drugText: 'Inj Ceftriaxone 1 g', route: 'IV', frequency: 'BD' }] };
   assert.equal(compareRows(spec('medications'), gold, { rows: gold.rows.map((r) => ({ ...r, drugText: r.drugText.toUpperCase() })) }).verdict, 'same');
-  const partial = compareRows(spec('medications'), gold, { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: '', frequency: 'TDS' }] });
+  const partial = compareRows(spec('medications'), gold, { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: '', frequency: 'TDS' }, { drugText: 'Inj Ceftriaxone 1 g', route: 'IV', frequency: 'BD' }] });
   assert.equal(partial.verdict, 'partial');
-  assert.deepEqual(partial.fields.route, { gold: 2, adapter: 0, equal: 0 });
+  assert.deepEqual(partial.fields.route, { gold: 2, adapter: 1, equal: 1 });
+  const short = compareRows(spec('medications'), gold, { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: 'Oral', frequency: 'TDS' }] });
+  assert.equal(short.verdict, 'subset', 'a row the adapter never returned is never folded into "partial"');
+  assert.equal(short.missing, 1);
+  // A short list whose one returned row is also wrong is not a clean subset: it stays "partial".
+  const shortAndWrong = compareRows(spec('medications'), gold, { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: 'IV', frequency: 'TDS' }] });
+  assert.equal(shortAndWrong.verdict, 'partial');
   assert.equal(compareRows(spec('medications'), gold, { rows: [] }).verdict, 'missing');
   assert.ok(!JSON.stringify(partial).includes('Paracetamol'), 'the grade carries no value');
+});
+
+test('an adapter that returns only some of the ward FAILS the audit as a subset', () => {
+  const spec = GOLD_ENDPOINTS[0]; // patients
+  const gold = [{ patientId: 'MR1' }, { patientId: 'MR2' }, { patientId: 'MR3' }];
+  const mine = [{ patientId: 'MR1' }, { patientId: 'MR2' }];
+  const out = compareRows(spec, gold, mine);
+  assert.equal(out.verdict, 'subset', 'fewer patients than the hand-built adapter is a named failure, not a pass');
+  assert.equal(out.missing, 1);
+  assert.equal(compareRows(spec, gold, gold).verdict, 'same');
+});
+
+test('the same day written two ways counts as the same day, and two different days never do', () => {
+  const row = (dateTime) => ({ drugText: 'Tab Paracetamol 650 mg', route: 'Oral', dateTime });
+  const same = (a, b) => compareRows(spec('medications'), { rows: [row(a)] }, { rows: [row(b)] }).fields.dateTime.equal === 1;
+
+  // One hospital field, two adapters printing it their own way.
+  assert.ok(same('01/02/2026', '2026-02-01'), 'day-first and year-first are the same date');
+  assert.ok(same('1-Feb-2026 10:30', '2026-02-01 10:30'), 'a month name does not change the day');
+  assert.ok(same('2026-02-01T10:30:00', '01/02/2026 10:30'), 'the same instant, written differently');
+
+  // And the rule must not turn "close enough" into "the same".
+  assert.ok(!same('01/02/2026', '03/02/2026'), 'a different day is a different day');
+  assert.ok(!same('01/02/2026', '01/02/2025'), 'a different year is a different year');
+  assert.ok(!same('01/02/2026 10:30', '01/02/2026 18:45'), 'a different time is a different time');
+  // Not everything with numbers in it is a date.
+  assert.ok(!same('500 mg', '2026-02-01'), 'a dose is not a date');
+  const dose = (a, b) => compareRows(spec('medications'), { rows: [{ drugText: 'x', dosage: a }] }, { rows: [{ drugText: 'x', dosage: b }] }).fields.dosage.equal === 1;
+  assert.ok(dose('500 mg', '500mg'), 'punctuation and case never mattered');
+  assert.ok(!dose('500 mg', '250 mg'), 'a different dose is never the same dose');
 });
 
 test('endpointAudit reports the proven call per view against the proxy\'s upstream call', () => {

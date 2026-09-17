@@ -15,8 +15,8 @@ const RX = {
   result: /result|value|finding/i,
   units: /unit/i,
   range: /range|reference|normal|biological/i,
-  low: /\blow\b|\bmin/i,
-  high: /\bhigh\b|\bmax/i,
+  low: /\blow\b|^low(value|limit|range)?$|\bmin|lower/i,
+  high: /\bhigh\b|^high(value|limit|range)?$|\bmax|upper/i,
   drug: /drug|medicine|medication|product\s*name|item|generic|brand/i,
   code: /code/i,
   dosage: /dos/i,
@@ -28,9 +28,18 @@ const RX = {
   visit: /visit|episode|admission|encounter|ip\s*no/i,
 };
 
+/* EXACT BEATS FUZZY. A payload that carries ResultDate, Result_Type and Result answers "result" with
+ * the key named exactly `result`, not whichever fuzzy match came first in key order (that is how a
+ * live adapter read 0 of 14 lab values right, 2026-09-15). Exact match on the bare word first, then the
+ * fuzzy fallback for views no brain mapped. */
 function col(row, re, not) {
-  for (const k of Object.keys(row || {})) {
-    if (k.charAt(0) === '_') continue;
+  const keys = Object.keys(row || {}).filter((k) => k.charAt(0) !== '_');
+  const word = String(re.source).replace(/^[^a-z]*/i, '').match(/^[a-z]+/i);
+  if (word) {
+    const exact = keys.find((k) => k.toLowerCase().replace(/[^a-z]/g, '') === word[0].toLowerCase() && !(not && not.test(k)));
+    if (exact) { const v = String(row[exact] == null ? '' : row[exact]).trim(); if (v) return v; }
+  }
+  for (const k of keys) {
     if (re.test(k) && !(not && not.test(k))) { const v = String(row[k] == null ? '' : row[k]).trim(); if (v) return v; }
   }
   return '';
@@ -288,8 +297,36 @@ export function sectionBody(sections, heading) {
 }
 
 /** GET /radiology -> { orders }; GET /radiology-report -> the report text of one row. */
+/* A HEADER ROW IS NOT A STUDY. A radiology list read from a page can leak its column labels as a row
+ * ({col0:'Patient ID'}, {col1:'Age / Gender'}, ...): every value is a label that also names a column
+ * somewhere in the rows. Those rows are dropped, as is any "order" with neither a date nor a title
+ * beyond a label - the live drawer once showed eight such "studies" for a patient with none. */
+function dropHeaderRows(rows) {
+  const labels = new Set();
+  for (const r of rows) for (const k of Object.keys(r)) if (k.charAt(0) !== '_') labels.add(String(k).toLowerCase().replace(/[^a-z0-9]/g, ''));
+  return rows.filter((r) => {
+    const vals = Object.keys(r).filter((k) => k.charAt(0) !== '_').map((k) => String(r[k] == null ? '' : r[k]).trim()).filter(Boolean);
+    if (!vals.length) return false;
+    return !vals.every((v) => labels.has(v.toLowerCase().replace(/[^a-z0-9]/g, '')));
+  });
+}
+
+/** An HTML report fragment as readable text: block tags become line breaks, entities are decoded,
+ * every other tag is dropped (the hand-built adapter's htmlToText). Plain text passes through. */
+export function reportText(raw) {
+  const s = String(raw == null ? '' : raw);
+  if (!/<[a-z!\/]/i.test(s)) return s.trim();
+  return s
+    .replace(/<\s*(br|\/p|\/div|\/tr|\/li|\/h[1-6])\s*\/?>/gi, '\n')
+    .replace(/<(script|style)\b[\s\S]*?<\/\1>/gi, ' ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
+    .replace(/&#x([0-9a-f]+);/gi, (m, h) => String.fromCodePoint(parseInt(h, 16))).replace(/&#(\d+);/g, (m, d) => String.fromCodePoint(Number(d)))
+    .replace(/[ \t]{2,}/g, ' ').replace(/[ \t]*\n[ \t]*/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
 export function radiologyOrders(sections, patient) {
-  const rows = rowsOf(sections, 'radiology');
+  const rows = dropHeaderRows(rowsOf(sections, 'radiology'));
   const titleOf = (r) => col(r, /description|study|test_?desc|examination|procedure/i) || col(r, RX.name, /\bid\b|code/i) || firstText(r) || 'Radiology';
   /* The hand-built proxy's radiology orders carry no status field: mirror it exactly. */
   const orders = rows.map((r, i) => ({
@@ -305,7 +342,11 @@ export function radiologyOrders(sections, patient) {
       const own = rowsOf(sections, 'radiology-detail').filter((d) => d._of === title || d._of === firstText(r) || d.testdesc === title || d.test_desc === title || (r['Service ID'] && (d._key === String(r['Service ID']) || d.resultid === String(r['Service ID']))) || d._rowIndex === Number(String(resultid).slice(1)));
       if (own.length) {
         const d = own[0];
-        const rep = d.report || d.result || d.final_rad_result || col(d, RX.text) || '';
+        /* THE REPORT IS TEXT, NOT MARKUP. GHIS's result field is an HTML fragment (paragraphs, spans,
+         * font runs); the hand-built adapter runs it through htmlToText and the drawer showed the raw
+         * tags otherwise (owner's iPhone, 2026-09-17). Block tags become line breaks first so the
+         * IMPRESSION / FINDINGS headings still stand on their own lines for parseReportSections. */
+        const rep = reportText(d.report || d.result || d.final_rad_result || col(d, RX.text) || '');
         const raw = rep || Object.keys(d).filter((k) => k.charAt(0) !== '_').map((k) => k + ': ' + d[k]).join('\n');
         const parts = parseReportSections(raw);
         return {
@@ -320,7 +361,7 @@ export function radiologyOrders(sections, patient) {
           enteredBy: d.enteredBy || d.generated_by_name || ''
         };
       }
-      const rep = r.report || r.result || r.final_rad_result || col(r, RX.text, /description|service|visit/i);
+      const rep = reportText(r.report || r.result || r.final_rad_result || col(r, RX.text, /description|service|visit/i));
       const raw = rep || Object.keys(r).filter((k) => k !== '_href' && k !== '_args' && !/id$|code/i.test(k)).map((k) => k + ': ' + r[k]).join('\n');
       const parts = parseReportSections(raw);
       return {
@@ -389,6 +430,23 @@ export function historyEntries(sections, patient) {
   return { entries };
 }
 
+/* ABSENT IS NOT NEGATIVE (rulebook 5.2). A resource the adapter could not read says so, so "no
+ * medicines" on screen always means the hospital has none. */
+export function notRead(sections, resource, label) {
+  const own = (Array.isArray(sections) ? sections : []).filter((s) => s && s.resource === resource);
+  if (own.some((s) => Array.isArray(s.rows))) return {};
+  /* SAY WHAT ACTUALLY HAPPENED. "The hospital did not answer" hid every read error behind one sentence,
+   * so a failing radiology read on the owner's iPhone (2026-09-17) could not be told apart from a
+   * timeout, a sign-out or a refused request. The recorded message follows, digit runs masked; it
+   * carries no patient data (request errors name a path or a status, never a row). */
+  const failed = own.find((s) => s.error);
+  const detail = failed ? ' (' + String(failed.error).replace(/\d{3,}/g, '#').slice(0, 140) + ')' : '';
+  const why = own.some((s) => s.unreadable === 'not-scoped')
+    ? 'the agent never learned which field carries the patient, so the request could not be limited to this patient.'
+    : failed ? 'the hospital did not answer' + detail + '.' : 'the agent never learned this screen for this hospital. Run Connect Hospital again to teach it.';
+  return { unreadable: label + ' were not read: ' + why };
+}
+
 /**
  * serveGhisProxy({ method, path, patients, sections, patient }) -> { status, body } | null
  * `path` is the proxy path with query (e.g. "/lab?patientId=MR1"). null = not an endpoint this shim
@@ -409,11 +467,11 @@ export function serveGhisProxy({ method = 'GET', path, patients = [], sections =
     case 'demographics': return { status: 200, body: { phone: '', region: '' } };
     case 'assessment': return { status: 200, body: { fields: [], authorized: null, raw: '', htmlLen: 0 } };
     case 'inv-search': case 'drug-search': return { status: 200, body: { rows: [] } };
-    case 'lab': return { status: 200, body: { orders: labOrders(sections, patient).orders } };
+    case 'lab': return { status: 200, body: Object.assign({ orders: labOrders(sections, patient).orders }, notRead(sections, 'labs', 'Lab results')) };
     case 'lab-detail': { const d = labOrders(sections, patient); const det = d.detailOf ? d.detailOf(q.get('renderId')) : null; return { status: 200, body: det || { group: '', department: '', tests: [] } }; }
-    case 'radiology': return { status: 200, body: { orders: radiologyOrders(sections, patient).orders } };
+    case 'radiology': return { status: 200, body: Object.assign({ orders: radiologyOrders(sections, patient).orders }, notRead(sections, 'radiology', 'Radiology reports')) };
     case 'radiology-report': return { status: 200, body: radiologyOrders(sections, patient).reportOf(q.get('resultid')) };
-    case 'medications': return { status: 200, body: medicationRows(sections) };
+    case 'medications': return { status: 200, body: Object.assign(medicationRows(sections), notRead(sections, 'medications', 'Medications')) };
     case 'history': return { status: 200, body: historyEntries(sections, patient) };
     case 'profile': return { status: 200, body: { labs: labOrders(sections, patient).orders, radiology: radiologyOrders(sections, patient).orders, medications: medicationRows(sections).rows, phone: '' } };
     default: return null;

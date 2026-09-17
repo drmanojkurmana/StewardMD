@@ -4,11 +4,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
+import { createServer } from 'node:http';
 import { existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
-import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, mergeEndpointDetails, hintFromHeaders } from '../../connect-agent/phone/deep-crawl.mjs';
+import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, mergeEndpointDetails, hintFromHeaders, awaitDetailRequest, exploreDetailOf, LIST_CONTROL, FIND_CONTROLS_SRC, CLINICAL_KEYWORDS_SRC, SKIP_SRC, CONTROL_QUERY, withDocs, searchPatientOnScreen } from '../../connect-agent/phone/deep-crawl.mjs';
 import { inferHtmlOperations } from '../../connect-agent/manifest/infer-html.mjs';
 import { extractRecords, isValidSelector } from '../../connect-agent/manifest/html.mjs';
 
@@ -228,7 +229,7 @@ test('deepCrawlClinical: (B) dead shell (tiny text, no data table, no password i
   assert.deepEqual(observedViews, []);
   assert.deepEqual(trail, []);
   assert.equal(clicks, 0);
-  assert.equal(states, 2); // confirmed once after a wait: a slow worklist may still be loading its rows
+  assert.equal(states, 4); // confirmed after three waits: a slow worklist may need a token round trip first
 });
 
 test('deepCrawlClinical: (B) slow worklist: shell-like on first look, rows arrive by the recheck -> crawl proceeds', async () => {
@@ -364,6 +365,87 @@ test('deepCrawlClinical: accordion: medications captures the MED panel table, no
   assert.deepEqual(operations.map((o) => o.type).sort(), ['list_medications', 'list_results', 'list_worklist']);
 });
 
+// --- awaitDetailRequest: F2 regression -------------------------------------------------------------
+//
+// client.wait() (plugin-client.mjs) resolves on DOM-quiet, about 270ms after a click - well before a
+// GHIS XHR answers - so the old flat wait let captureView run before the row's request had come back
+// and proof saw "no-requests". awaitDetailRequest polls the page's replay buffer instead.
+
+function fakePollClient({ appearAfter = Infinity, gone = false, pollDelayMs = 0 } = {}) {
+  const calls = [];
+  let polls = 0;
+  return {
+    calls,
+    async wait({ ms }) {
+      calls.push({ type: 'wait', ms });
+      if (ms === 300 && pollDelayMs) await sleep(pollDelayMs);
+    },
+    async evaluate({ expression }) {
+      polls += 1;
+      calls.push({ type: 'eval', n: polls });
+      const newest = !gone && polls > appearAfter;
+      return { result: JSON.stringify({ gone, newest }) };
+    },
+  };
+}
+
+test('awaitDetailRequest: polls until a request newer than the mark completes, then waits for render', async () => {
+  const client = fakePollClient({ appearAfter: 2 }); // polls 1,2 say not yet; poll 3 says newest
+  await awaitDetailRequest({ client, maxMs: 8000 });
+  const evalCount = client.calls.filter((c) => c.type === 'eval').length;
+  assert.equal(evalCount, 3, 'stopped polling as soon as a completed request appeared');
+  const waits = client.calls.filter((c) => c.type === 'wait').map((c) => c.ms);
+  assert.deepEqual(waits, [300, 300, 1500], 'two poll ticks then the render wait, not a flat single wait');
+});
+
+test('awaitDetailRequest: a full-page navigation (buffer gone) stops polling immediately', async () => {
+  const client = fakePollClient({ gone: true });
+  await awaitDetailRequest({ client, maxMs: 8000 });
+  assert.equal(client.calls.filter((c) => c.type === 'eval').length, 1);
+  assert.deepEqual(client.calls.filter((c) => c.type === 'wait').map((c) => c.ms), [1500]);
+});
+
+test('awaitDetailRequest: samePlace() going false (an in-page navigation) stops polling too', async () => {
+  const client = fakePollClient({ appearAfter: Infinity });
+  await awaitDetailRequest({ client, samePlace: async () => false, maxMs: 8000 });
+  assert.equal(client.calls.filter((c) => c.type === 'eval').length, 1);
+});
+
+test('awaitDetailRequest: never proven -> gives up at maxMs, still waits for render', async () => {
+  const client = fakePollClient({ appearAfter: Infinity, pollDelayMs: 5 });
+  const start = Date.now();
+  await awaitDetailRequest({ client, maxMs: 12 });
+  assert.ok(Date.now() - start < 2000, 'bounded by maxMs, not an unbounded poll');
+  const waits = client.calls.filter((c) => c.type === 'wait').map((c) => c.ms);
+  assert.equal(waits[waits.length - 1], 1500, 'still gives the render its 1500ms even after giving up');
+});
+
+test('exploreDetailOf: opens a row and polls (via awaitDetailRequest), not a flat wait, before capturing the detail', async () => {
+  const LABS_RAW = { id: 'labs', class: '', headers: ['Test', 'Result'], rows: [{ isHeader: false, onclick: null }] };
+  const evals = [];
+  const client = {
+    async currentUrl() { return { url: 'https://emr.example/Lab/Home' }; },
+    async wait() {},
+    async drainRequests() { return { requests: [] }; },
+    async evaluate({ expression }) {
+      const e = String(expression);
+      evals.push(e);
+      if (e.includes('function CRAWL_CLICK_FIRST_ROW')) return { result: 'row' };
+      if (e.includes('function CRAWL_DETAIL_SETTLED')) return { result: JSON.stringify({ gone: false, newest: true }) };
+      if (e.includes('function CRAWL_RAW_TABLE')) return { result: JSON.stringify(LABS_RAW) };
+      if (e.includes('function CRAWL_RAW_BLOCK')) return { result: 'null' };
+      return { result: 'null' };
+    },
+  };
+  const view = { resourceHint: 'labs', rowsSelector: '#labs tbody tr' };
+  const detail = await exploreDetailOf({ client, view, book: null, origins: ['https://emr.example'], waitMs: 1 });
+  assert.ok(detail, 'a row that clicked and settled still yields a detail view');
+  const clickAt = evals.findIndex((e) => e.includes('function CRAWL_CLICK_FIRST_ROW'));
+  const settledAt = evals.findIndex((e) => e.includes('function CRAWL_DETAIL_SETTLED'));
+  const captureAt = evals.findIndex((e) => e.includes('function CRAWL_RAW_TABLE'));
+  assert.ok(clickAt >= 0 && settledAt > clickAt && captureAt > settledAt, evals.join('\n'));
+});
+
 // --- deepCrawlClinical: real DOM (headless Chrome), proves the page-realm functions ----------------------
 //
 // The fake above proves the crawler's sequencing; this proves CRAWL_ARM_OBSERVER / CRAWL_RAW_TABLE against a
@@ -408,7 +490,18 @@ window.__writes=0;
 function loadView(id){var v=VIEWS[id];setTimeout(function(){document.getElementById(v[0]).innerHTML=v[1];},30);}
 </script></body></html>`;
 
-async function withChrome(fn, html = ACCORDION_HTML) {
+// Serves `html` off a real http://127.0.0.1 origin instead of a data: URI: a data: page's location.origin
+// is opaque ("null"), so CRAWL_FIND_CONTROLS's same-site href check (new URL(href, location.href), then
+// comparing .origin) throws/never matches there -- fine for onclick-driven fixtures, useless for testing
+// a plain <a href>. Only needed when a test exercises that path.
+function serveHtml(html) {
+  const server = createServer((req, res) => { res.setHeader('content-type', 'text/html'); res.end(html); });
+  return new Promise((resolve) => {
+    server.listen(0, '127.0.0.1', () => resolve({ url: `http://127.0.0.1:${server.address().port}/`, close: () => new Promise((r) => server.close(r)) }));
+  });
+}
+
+async function withChrome(fn, html = ACCORDION_HTML, navUrl = null) {
   const port = 9400 + Math.floor(Math.random() * 400);
   const userDir = join(tmpdir(), 'deep-crawl-chrome-' + process.pid + '-' + port);
   const proc = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${userDir}`, '--no-first-run', '--disable-gpu', '--mute-audio', 'about:blank'], { stdio: 'ignore' });
@@ -427,14 +520,20 @@ async function withChrome(fn, html = ACCORDION_HTML) {
     const { result: { targetId } } = await call('Target.createTarget', { url: 'about:blank' });
     ({ result: { sessionId } } = await call('Target.attachToTarget', { targetId, flatten: true }));
     await call('Runtime.enable');
-    await call('Page.navigate', { url: 'data:text/html;charset=utf-8,' + encodeURIComponent(html) });
+    await call('Page.navigate', { url: navUrl || ('data:text/html;charset=utf-8,' + encodeURIComponent(html)) });
     const evaluate = async ({ expression }) => {
       const r = await call('Runtime.evaluate', { expression, returnByValue: true });
       if (r.result?.exceptionDetails) throw new Error('page error: ' + (r.result.exceptionDetails.exception?.description || r.result.exceptionDetails.text));
       return { result: r.result?.result?.value ?? null };
     };
-    for (let i = 0; i < 50; i += 1) { if ((await evaluate({ expression: 'document.readyState === "complete" && !!document.body' })).result === true) break; await sleep(100); }
-    await fn(evaluate);
+    const awaitReady = async () => {
+      for (let i = 0; i < 50; i += 1) { if ((await evaluate({ expression: 'document.readyState === "complete" && !!document.body' })).result === true) break; await sleep(100); }
+    };
+    await awaitReady();
+    // A real navigate, for a test that reloads the landing page mid-crawl (the list-control tab loop
+    // uses client.navigate, not just document mutation) - not needed by tests that only mutate the DOM.
+    const navigate = async ({ url }) => { await call('Page.navigate', { url }); await awaitReady(); };
+    await fn(evaluate, navigate);
   } finally {
     try { ws?.close(); } catch { /* ignore */ }
     const exited = new Promise((res) => proc.once('exit', res));
@@ -668,6 +767,24 @@ test('deepCrawlClinical: real DOM, dead shell -> session-expired-or-shell, nothi
   }, SHELL_HTML);
 });
 
+// A MODERN EMR MAY HAVE NO <table> AT ALL: cards drawn from JSON, one real link into a patient. That
+// used to look exactly like the dead shell above (no data table, little text) and the whole crawl was
+// abandoned with "the browser was not on the EMR after sign-in". The difference is that this page has
+// somewhere to go; the shell's nav links are all href="#".
+const SPA_HTML = `<!doctype html><html><body>
+<div id="ready">authenticated</div>
+<a id="summary" href="/patients/pt-482910">Open patient summary</a>
+</body></html>`;
+
+test('deepCrawlClinical: real DOM, table-less SPA screen with a real link is NOT a dead shell', { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+  await withChrome(async (evaluate) => {
+    const client = { evaluate, async wait({ ms }) { await sleep(Math.min(ms, 200)); }, async currentUrl() { return { url: 'https://emr.example/worklist' }; } };
+    const { stopReason } = await deepCrawlClinical({ client, caps: { maxMs: 60000, waitMs: 200 } });
+    assert.notEqual(stopReason, 'session-expired-or-shell', 'a table-less SPA screen must be walked, not abandoned');
+    assert.notEqual(stopReason, 'login-required');
+  }, SPA_HTML);
+});
+
 test('deepCrawlClinical: real DOM, login form -> login-required', { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
   await withChrome(async (evaluate) => {
     const client = { evaluate, async wait() {}, async currentUrl() { return { url: 'https://emr.example/login' }; } };
@@ -694,4 +811,227 @@ test('guided ask: the table the doctor taps inside turns green and is the one ca
     await evaluate({ expression: GUIDE_SOURCES.clearPoint });
     assert.equal((await evaluate({ expression: "document.getElementById('meds').style.outline" })).result, '');
   }, html);
+});
+
+// --- F4: a collapsed menu's plain <a href> is a candidate too, not only an el.onclick --------------
+
+test('LIST_CONTROL matches every patient-list tab (including the ones behind a menu), not a record-scoped item', () => {
+  for (const label of ['In patients', 'IP worklist', 'Out patients', 'Outpatients', 'OPD', 'Emergency', 'Casualty', 'All patients', 'Admitted patients']) {
+    assert.ok(LIST_CONTROL.test(label), label + ' should match');
+  }
+  for (const label of ['Final discharge', 'Diet Reports']) {
+    assert.ok(!LIST_CONTROL.test(label), label + ' should not match');
+  }
+});
+
+const MENU_HTML = `<!doctype html><html><body>
+<a href="/Doctor/Home">Dashboard</a>
+<nav class="navbar-nav">
+  <div class="dropdown-menu" style="display:none">
+    <a href="/Doctor/IPWorkList">IP worklist</a>
+    <a href="/Account/Logout">Logout</a>
+  </div>
+</nav>
+</body></html>`;
+
+test('FIND_CONTROLS_SRC: a hidden <a href> inside a collapsed dropdown is a candidate; a hidden Logout <a href> in the same menu is not (real DOM)',
+  { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+    // A real http:// origin, not a data: URI: CRAWL_FIND_CONTROLS's same-site check resolves the <a href>
+    // against location.href, and a data: page's origin is opaque ("null"), which would never match.
+    const { url, close } = await serveHtml(MENU_HTML);
+    try {
+      await withChrome(async (evaluate) => {
+        const expr = withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + ',' + JSON.stringify(SKIP_SRC) + ',' + JSON.stringify(CONTROL_QUERY));
+        const { result } = await evaluate({ expression: expr });
+        const out = JSON.parse(result);
+        const labels = out.map((c) => c.label);
+        assert.ok(labels.includes('IP worklist'), JSON.stringify(out));
+        assert.ok(!labels.includes('Logout'), JSON.stringify(out));
+      }, MENU_HTML, url);
+    } finally {
+      await close();
+    }
+  });
+
+// --- F5: a list-control tab's filter form hides an empty table until its own blank Search is pressed ---
+//
+// Mirrors the live GHIS screen (Chrome DevTools, owner, 2026-09-17): tapping "IP worklist" (under a
+// collapsed Administration menu) renders a FILTER FORM (Patient ID, Floor left blank) over an EMPTY
+// DataTable ("No data available in table"; only GetIPWL?...&Type=IPWorkList's later Search answers with
+// rows) instead of the list itself, so the old crawl captured a screen with nothing to prove. Pressing
+// the form's own button with every field untouched is what fills it. `SUBMIT_BUTTON` mirrors GHIS's own
+// `<button id="submit" onclick="pagesubmit(event)">Submit</button>`, which SAVES a clinical assessment.
+const SEARCH_BUTTON = '<button onclick="doPress()">Search</button>';
+const SUBMIT_BUTTON = '<button id="submit" onclick="pagesubmit(event)">Submit</button>';
+
+function ipwlPage(buttonHtml) {
+  return `<!doctype html><html><body>
+<table id="mylist"><thead><tr><th>Patient ID</th><th>Patient name</th></tr></thead>
+<tbody><tr onclick="openPatient('${SENTINEL}','48213')"><td>48213</td><td>${SENTINEL}</td></tr></tbody></table>
+<nav class="navbar-nav">
+  <div class="dropdown-menu" style="display:none">
+    <a href="#" onclick="showIPWL();return false">IP worklist</a>
+  </div>
+</nav>
+<div id="ipwl" style="display:none">
+  <input id="patientId" value="">
+  <input id="floor" value="preset">
+  <table id="ipwl_table"><thead><tr><th>Patient ID</th><th>Patient name</th><th>Age</th></tr></thead>
+  <tbody><tr><td colspan="3">No data available in table</td></tr></tbody></table>
+  ${buttonHtml}
+</div>
+<script>
+window.__testClicks = 0;
+window.__testWrote = false;
+function openPatient(){}
+// GHIS's real save handler: must never run. Does not touch the table (a save is not a list refresh).
+function pagesubmit(){ window.__testWrote = true; }
+function showIPWL(){
+  document.getElementById('mylist').style.display = 'none';
+  document.getElementById('ipwl').style.display = '';
+}
+// The blank Search: fills the table by XHR-style delayed render, exactly as GHIS's GetIPWL answers.
+// Swaps the contents of the SAME <table> element, which is what the live IP worklist does: pressing
+// #btnsearch on ghis.gitam.edu took the table from 0 to 10 rows with the node identity unchanged
+// (owner's session, Chrome, 2026-09-17). A fixture that replaced the node instead would pass even
+// when the crawl cannot see an in-place refresh.
+function doPress(){
+  window.__testClicks++;
+  setTimeout(function(){
+    document.getElementById('ipwl_table').innerHTML =
+      '<thead><tr><th>Patient ID</th><th>Patient name</th><th>Age</th></tr></thead>' +
+      '<tbody><tr><td>1</td><td>A</td><td>30</td></tr><tr><td>2</td><td>B</td><td>40</td></tr><tr><td>3</td><td>C</td><td>50</td></tr></tbody>';
+  }, 50);
+}
+</script>
+</body></html>`;
+}
+
+// Records every book.prove() call along with the live DOM row count for the proven view's own selector
+// (so a proven EMPTY placeholder and a proven POPULATED list are told apart) and the two press-only
+// signals a real assertion needs: how many times the button actually fired, and the two input values.
+function fakeBook(evaluate) {
+  const calls = [];
+  return {
+    calls,
+    async prove({ view, label }) {
+      let rows = null;
+      if (view && view.rowsSelector) {
+        try { rows = (await evaluate({ expression: `document.querySelectorAll(${JSON.stringify(view.rowsSelector)}).length` })).result; } catch { rows = null; }
+      }
+      const clicks = (await evaluate({ expression: 'window.__testClicks || 0' }).catch(() => ({ result: null }))).result;
+      const wrote = (await evaluate({ expression: '!!window.__testWrote' }).catch(() => ({ result: null }))).result;
+      const patientId = (await evaluate({ expression: "document.getElementById('patientId') ? document.getElementById('patientId').value : null" }).catch(() => ({ result: null }))).result;
+      const floor = (await evaluate({ expression: "document.getElementById('floor') ? document.getElementById('floor').value : null" }).catch(() => ({ result: null }))).result;
+      calls.push({ label, rows, clicks, wrote, patientId, floor });
+      if (view) view.proof = { status: 'proven', tried: 0, brain: false };
+    },
+  };
+}
+
+function ipwlClient(evaluate, navigate) {
+  return {
+    evaluate,
+    navigate,
+    async wait({ ms }) { await sleep(Math.min(ms, 200)); },
+    async currentUrl() { return { url: (await evaluate({ expression: 'location.href' })).result }; },
+  };
+}
+
+test('deepCrawlClinical: a list-control tab whose filter form hides an empty table is pressed Search, and the populated list (not the placeholder) is proven (real DOM)',
+  { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+    const { url, close } = await serveHtml(ipwlPage(SEARCH_BUTTON));
+    try {
+      await withChrome(async (evaluate, navigate) => {
+        const book = fakeBook(evaluate);
+        const { stopReason } = await deepCrawlClinical({ client: ipwlClient(evaluate, navigate), book, caps: { maxViews: 2, maxMs: 60000, waitMs: 50 } });
+        assert.notEqual(stopReason, 'no-patient-row');
+        const proved = book.calls.filter((c) => c.label.includes('IP worklist'));
+        assert.equal(proved.length, 1, JSON.stringify(book.calls));
+        assert.match(proved[0].label, /IP worklist > Search$/, 'the label names the press');
+        assert.equal(proved[0].clicks, 1, 'Search pressed exactly once');
+        assert.equal(proved[0].rows, 3, 'the proven view is the post-Search list, not the empty placeholder (1 row)');
+      }, undefined, url);
+    } finally {
+      await close();
+    }
+  });
+
+test('deepCrawlClinical: a Submit button next to the same empty table is never pressed (guards the clinical-write path)',
+  { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+    const { url, close } = await serveHtml(ipwlPage(SUBMIT_BUTTON));
+    try {
+      await withChrome(async (evaluate, navigate) => {
+        const book = fakeBook(evaluate);
+        await deepCrawlClinical({ client: ipwlClient(evaluate, navigate), book, caps: { maxViews: 2, maxMs: 60000, waitMs: 50 } });
+        const proved = book.calls.filter((c) => c.label.includes('IP worklist'));
+        assert.equal(proved.length, 1, JSON.stringify(book.calls));
+        assert.equal(proved[0].label, 'tap IP worklist', 'no press was ever named in the label');
+        assert.equal(proved[0].wrote, false, 'pagesubmit() (SAVES a clinical assessment) never ran');
+        assert.equal(proved[0].rows, 1, 'the screen stayed empty: only the "No data available" placeholder row');
+      }, undefined, url);
+    } finally {
+      await close();
+    }
+  });
+
+test('deepCrawlClinical: pressing Search never fills or clears a filter input (blank stays blank, preset stays preset)',
+  { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+    const { url, close } = await serveHtml(ipwlPage(SEARCH_BUTTON));
+    try {
+      await withChrome(async (evaluate, navigate) => {
+        const book = fakeBook(evaluate);
+        await deepCrawlClinical({ client: ipwlClient(evaluate, navigate), book, caps: { maxViews: 2, maxMs: 60000, waitMs: 50 } });
+        const proved = book.calls.find((c) => c.label.includes('IP worklist'));
+        assert.ok(proved, JSON.stringify(book.calls));
+        assert.equal(proved.patientId, '', 'the empty filter field was never filled');
+        assert.equal(proved.floor, 'preset', 'the preset filter field was never cleared or changed');
+      }, undefined, url);
+    } finally {
+      await close();
+    }
+  });
+
+/* SEARCH FOR THE PATIENT THE WAY THE DOCTOR DOES (real DOM). GHIS "Lab reports" is a search form: a
+ * patient box with an autocomplete, a hidden id the suggestion fills, and a search link with an icon
+ * for a label. The owner typed a patient id there to build the hand-made adapter; the agent only ever
+ * saw the empty form and proved the print shell behind it as labs (2026-09-17). */
+const LAB_SEARCH_HTML = `<!doctype html><html><body>
+<select id="dselect"><option value="PatientID">PatientID</option></select>
+<input id="txtAuto" type="text" placeholder="">
+<input type="hidden" id="hfAutoID"><input type="hidden" id="hfsearchpatientId"><input type="hidden" name="__RequestVerificationToken" value="tok">
+<a href="#" id="btnGo" onclick="SearchPatientId(); return false;"><i class="fa fa-search"></i></a>
+<div id="res"></div>
+<script>
+  document.getElementById('txtAuto').addEventListener('input', function () {
+    var ul = document.getElementById('sug') || document.body.appendChild(Object.assign(document.createElement('ul'), { id: 'sug' }));
+    ul.innerHTML = '<li class="ui-menu-item">' + this.value + ' => TEST ALPHA</li>';
+    ul.firstChild.onclick = function () { document.getElementById('hfAutoID').value = this.textContent.split('=>')[0].trim(); ul.remove(); };
+  });
+  function SearchPatientId() {
+    var id = document.getElementById('hfAutoID').value; if (!id) return;
+    window.__searched = id;
+    document.getElementById('res').innerHTML = '<table id="tblSearch"><thead><tr><th>Test</th><th>Date</th></tr></thead><tbody><tr onclick="openRow(1)"><td>Complete blood count</td><td>17-Sep-2026</td></tr></tbody></table>';
+  }
+</script></body></html>`;
+
+test('searchPatientOnScreen: types the id, takes the suggestion, presses the icon-labelled search, and the list appears (real DOM)', { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+  await withChrome(async (evaluate) => {
+    const client = { evaluate, wait: ({ ms }) => sleep(ms), currentUrl: async () => ({ url: 'https://h/Doctor/Home' }) };
+    const out = await searchPatientOnScreen({ client, patientId: 'MR900001', waitMs: 300 });
+    assert.ok(out, 'the screen has a patient box');
+    assert.equal(out.typed, 'txtAuto');
+    assert.equal(out.picked, 'picked');
+    assert.match(out.pressed, /^pressed/);
+    assert.equal((await evaluate({ expression: 'window.__searched' })).result, 'MR900001', 'the form searched for this patient');
+    assert.equal((await evaluate({ expression: "document.querySelectorAll('#tblSearch tbody tr').length" })).result, 1, 'the result list is on screen');
+    assert.equal((await evaluate({ expression: "document.getElementById('txtAuto').value" })).result, 'MR900001', 'nothing else was typed or cleared');
+  }, LAB_SEARCH_HTML);
+});
+
+test('searchPatientOnScreen: a screen without a patient box is left alone', { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+  await withChrome(async (evaluate) => {
+    const client = { evaluate, wait: ({ ms }) => sleep(ms) };
+    assert.equal(await searchPatientOnScreen({ client, patientId: 'MR900001', waitMs: 100 }), null);
+  }, '<!doctype html><html><body><table id="t"><tr><th>Drug</th></tr><tr><td>X</td></tr></table></body></html>');
 });
