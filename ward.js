@@ -2624,6 +2624,13 @@
       /* An empty pregnancy and lactation table is said where its findings would be, never left to read as checked. */
       (sf.pregnancyLactation && sf.pregnancyLactation.rulesLoaded === 0 ? '<p class="w-hint">' + ms("info") + wTH("ward.no-pregnancy-lactation-rules-loaded", "No pregnancy or lactation rules are loaded, so this order was not checked for use in pregnancy or breastfeeding.", null, "", 1) + "</p>" : "") +
       ((sf.unresolvedActiveMeds || []).length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.not-checked-against", "Not checked against: {drugs}", { drugs: esc(sf.unresolvedActiveMeds.join(", ")) }, "drugs", 1) + "</p>" : "") +
+      /* THIS HOSPITAL'S OWN REMINDERS, and whether they could be evaluated at all. An unreadable
+       * Observation or Condition list used to leave this card silent, which reads as "nothing to say"
+       * (R5-1). The advisory text is the hospital's own words, never translated. */
+      (rv.advisoriesUnavailable ? '<p class="w-hint warn">' + ms("error") + wTH("ward.mo-advisories-unavailable", "This hospital's own prescribing reminders could not be checked for this patient, because the results and diagnoses could not be read. Do not read this as no warnings.", null, "", 1) + "</p>" : "") +
+      ((rv.advisories || []).length ? '<ul class="w-mini">' + rv.advisories.map(function (a) {
+        return '<li class="w-st due"><b>' + wTH("ward.mo-hospital-advisory", "Hospital advisory") + "</b> <span lang=\"en\">" + esc(a.message || a.id || "") + (a.action ? " " + esc(a.action) : "") + "</span></li>";
+      }).join("") + "</ul>" : "") +
       (rv.replaces ? '<p class="w-hint warn">' + ms("swap_horiz") + wTH("ward.this-replaces-the-active-order", "This replaces the active order for this drug ({dose} {frequency}).", { dose: dose(rv.replaces.dose), frequency: esc(rv.replaces.frequency || "") }, "dose frequency", 1) + "</p>" : "") +
       (needReason ? "<label class=\"w-f\"><span>" + wTH("ward.reason-for-prescribing-anyway", "Reason for prescribing anyway (required)") + "</span><input id=\"wMoOverride\" type=\"text\" autocomplete=\"off\"></label>" : "") +
       (stops.length ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-server-refuses-this-order-whatever", "The server refuses this order whatever the reason. Change the dose, the frequency or the drug.", null, "", 1) + "</p>" : "") +
@@ -12058,9 +12065,13 @@
     apiPost("/ward/medication-order", { orgId: st.orgId, order: f.order, checkOnly: true }).then(function (r) {
       if (!settle(r)) { paint(); return; }
       var sf = r.safety || {};
-      var clean = sf.checked === true && !(sf.blocks || []).length && !(sf.overridables || []).length && !(sf.warnings || []).length && !sf.unresolvedDrug && !(sf.unresolvedActiveMeds || []).length && !r.replaces;
+      /* R5-1: advisories that could NOT be evaluated are not a clean order. An order placed straight
+       * through here would have shown the prescriber nothing, which reads as "nothing to say" - and
+       * an advisory that fired must be seen for the same reason. */
+      var clean = sf.checked === true && !(sf.blocks || []).length && !(sf.overridables || []).length && !(sf.warnings || []).length && !sf.unresolvedDrug && !(sf.unresolvedActiveMeds || []).length && !r.replaces
+        && !r.advisoriesUnavailable && !(r.advisories || []).length;
       if (clean) { placeMedOrder(f.order, ""); return; }
-      st.moReview = { order: f.order, safety: sf, replaces: r.replaces || null };
+      st.moReview = { order: f.order, safety: sf, replaces: r.replaces || null, advisories: r.advisories || [], advisoriesUnavailable: r.advisoriesUnavailable || null };
       paint();
     }).catch(function () { st.busy = false; st.err = wT("ward.could-not-place-the-order", "Could not place the order."); paint(); });
   }

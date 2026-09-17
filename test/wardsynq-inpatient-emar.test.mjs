@@ -4379,6 +4379,36 @@ test("A HOSPITAL'S OWN ADVISORY APPEARS AND CANNOT BLOCK", async () => {
 
   // A different drug on the same patient does not fire it: every condition must hold.
   assert.equal((await order("Paracetamol")).advisories, undefined);
+
+  /* R5-1 (2026-09-17): the Observation and Condition reads used to be `.catch(() => [])` inside a
+   * `catch { advisories = [] }`, so a failed read produced a response with no advisories on it -
+   * on screen indistinguishable from "this hospital's reminders found nothing about this drug". */
+  const real = RECORD.byPatient.bind(RECORD);
+  RECORD.byPatient = async (tenantId, type, patientId) => {
+    if (type === "Observation") throw new Error("record store unavailable");
+    return real(tenantId, type, patientId);
+  };
+  try {
+    const blind = await order("Gentamicin");
+    assert.equal(blind.__status, 200, "the medicine is never withheld over a hospital reminder");
+    assert.equal(blind.written, 1);
+    assert.equal(blind.advisories, undefined, "nothing was evaluated, so nothing is claimed");
+    assert.equal(blind.advisoriesUnavailable.reason, "record_read_failed", JSON.stringify(blind.advisoriesUnavailable));
+
+    // The same on the pre-prescribing check, which is what the screen shows before anything is written.
+    const check = await as(DOCTOR, "/ward/medication-order", "POST", {
+      orgId: ORG, checkOnly: true,
+      order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Gentamicin", dose: { value: 240, unit: "mg" }, route: "iv", frequency: "OD" },
+    });
+    assert.equal(check.__status, 200);
+    assert.equal(check.written, 0);
+    assert.equal(check.advisoriesUnavailable.reason, "record_read_failed");
+  } finally { delete RECORD.byPatient; }
+
+  // Read whole again: the flag is gone and the advisory is back. The two states are distinct.
+  const back = await order("Gentamicin");
+  assert.equal(back.advisoriesUnavailable, undefined);
+  assert.equal(back.advisories.length, 1);
 });
 
 /* ---- what this hospital stocks, and what it guards ---------------------------------------------- */

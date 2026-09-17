@@ -700,23 +700,32 @@ async function createWardMedicationOrder(request, env, ctx) {
   if (fStatus.satisfiedBy === "approval") candidate.restrictionApprovalRef = str(ctx.approvalRef);
 
   /* THE HOSPITAL'S OWN ADVISORIES, evaluated AFTER the formulary and unable to affect the write.
-   * They are read from records the ward already has, and a failure to read them costs the prescriber
-   * nothing: an advisory that could not be computed is simply absent, and losing a hospital's own
-   * reminder must never cost a patient their medicine. */
-  let advisories = [];
+   * They are read from records the ward already has, and a failure to read them never costs the
+   * prescriber their medicine - but it is SAID (R5-1, 2026-09-17). Until now a failed Observation or
+   * Condition read became `[]` and then no advisories at all, which on screen is indistinguishable
+   * from "this hospital's reminders found nothing about this drug for this patient". The read is
+   * either done or reported as not done; it is never quietly skipped.
+   * `advisories: null` = could not be evaluated, [] = evaluated and nothing fired. */
+  let advisories = [], advisoriesUnavailable = null;
   try {
     const compiled = compileAdvisories(ctx.advisories);
     if (compiled.rules.length) {
       const [obsRows, probRows] = await Promise.all([
-        svc.byPatient("Observation", candidate.patientId).catch(() => []),
-        svc.byPatient("Condition", candidate.patientId).catch(() => []),
+        svc.byPatient("Observation", candidate.patientId),
+        svc.byPatient("Condition", candidate.patientId),
       ]);
       advisories = evaluateAdvisories({
         compiled, drug: candidate.drug, observations: obsRows || [], problems: probRows || [],
         ageYears: ctx.ageYears, nowMs: Date.now(),
       });
     }
-  } catch { advisories = []; }
+  } catch (e) {
+    advisories = null;
+    advisoriesUnavailable = {
+      reason: e instanceof GovernanceError ? "permission" : "record_read_failed",
+      detail: str(e && e.message),
+    };
+  }
 
   let current;
   try { current = await svc.get("MedicationOrder", candidate.id); }
@@ -731,7 +740,8 @@ async function createWardMedicationOrder(request, env, ctx) {
   let safety = await orderEntrySafety(svc, ctx.rulePack || null, candidate, [], safetyOpts);
   if (ctx.checkOnly === true) {
     return { ...base, ok: true, written: 0, checkOnly: true, drug: candidate.drug, safety, formulary: fStatus.state,
-      ...(advisories.length ? { advisories } : {}), ...(replaces ? { replaces } : {}), actor: resolved.actor.id, role: resolved.role };
+      ...(advisories && advisories.length ? { advisories } : {}), ...(advisoriesUnavailable ? { advisoriesUnavailable } : {}),
+      ...(replaces ? { replaces } : {}), actor: resolved.actor.id, role: resolved.role };
   }
   /* A hard stop is refused whatever reason comes with it, and nothing is written (orderEntrySafety,
    * ORDER_ENTRY_HARD_STOPS). Every other finding stays reported and proceeds with a reason. */
@@ -783,7 +793,10 @@ async function createWardMedicationOrder(request, env, ctx) {
     safety, ...(replaces ? { replaced: replaces } : {}),
     /* The hospital's own advice, alongside the safety engine's findings and never mixed into them.
      * Every entry carries source:"hospital-advisory" and blocking:false. */
-    ...(advisories.length ? { advisories } : {}),
+    ...(advisories && advisories.length ? { advisories } : {}),
+    // The hospital's reminders could not be evaluated at all: said on the order's own response, so
+    // nothing downstream reads their absence as "nothing to say".
+    ...(advisoriesUnavailable ? { advisoriesUnavailable } : {}),
     formulary: fStatus.state,
     // `fired` is included: an evaluation where the rule was RESPECTED writes a firing and no
     // override, and leaving that off the response made the denominator invisible to the caller.

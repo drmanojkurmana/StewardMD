@@ -392,6 +392,8 @@
     /* ward.js keys (ui-i18n-ward) */
     "ward.bg-chart-unreadable": "These parts of the chart could not be read: {types}. Do not read them as nothing recorded.",
     "ward.cl-admitted": "admitted {at}",
+    "ward.mo-advisories-unavailable": "This hospital's own prescribing reminders could not be checked for this patient, because the results and diagnoses could not be read. Do not read this as no warnings.",
+    "ward.mo-hospital-advisory": "Hospital advisory",
     "ward.cl-awaiting": "Requested {age} ago, no decision recorded.",
     "ward.cl-before-edd": "The approval is valid until {until}, before the expected discharge on {edd}.",
     "ward.cl-below-bill": "Approved {amount} is below the running bill of {bill}.",
