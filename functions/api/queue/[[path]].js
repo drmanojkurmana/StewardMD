@@ -29,7 +29,7 @@ import * as ROSTER from "../../_roster_store.js";
 import * as ACCOUNTS from "../../_accounts_store.js";
 import * as FORMS from "../../_forms_store.js";
 import * as PATHWAYS from "../../_pathways_store.js";
-import { submitFormResponse, patientFormResponses, intakeResponses, reviewIntake } from "../../_wardsynq/form-response.js";
+import { submitFormResponse, patientFormResponses, intakeResponses, reviewIntake, intakeSettings } from "../../_wardsynq/form-response.js";
 import { vaccineCatalogue, buildImmunisation } from "../../_vaccines.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
@@ -5833,6 +5833,29 @@ export async function onRequest(context) {
     /* gst-packages: the hospital's GST settings where the law is not settled (functions/_wardsynq/gst-settings.js), on
      * Admin > Price list. staff.admin reads and saves; a choice other than the review's default needs the chartered
      * accountant's opinion reference and date, every change needs a reason, and the audit row names the settings changed. */
+    /* R4-5 follow-up: patient forms before a booked appointment (form-response.js intakeSettings), on Admin > Hospital. Off
+     * unless set. staff.admin reads and saves with a reason; the audit names the change. /org/update refuses wardsynq.intake. */
+    if (seg === "org" && sub === "intake-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Intake settings belong to a WardSynQ hospital." }, 409, request);
+      const before = intakeSettings(o.wardsynq && o.wardsynq.intake);
+      if (method === "GET") return json({ ok: true, settings: before }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const v = cb.settings && cb.settings.forAppointments;
+      if (typeof v !== "boolean") return json({ ok: false, error: "invalid_intake_settings", message: "Say whether patient forms are offered before an appointment (true) or not (false). Nothing was saved." }, 422, request);
+      if (v === before.forAppointments) return json({ ok: true, changed: [], settings: before }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the intake settings are being changed. Nothing was saved." }, 422, request);
+      const value = { ...((o.wardsynq && o.wardsynq.intake) || {}), forAppointments: v };
+      await ORG.updateOrg(env, orgId, { wardsynq: { intake: value } }, actor.id, { action: "org:intake_settings", meta: JSON.stringify({ changed: ["forAppointments"], to: v, reason: reason.slice(0, 80) }) });
+      const saved = intakeSettings((((await ORG.getOrg(env, orgId)) || {}).wardsynq || {}).intake);
+      if (saved.forAppointments !== v) return json({ ok: false, error: "not_saved", message: "The setting did not read back as sent, so do not rely on it. Try again." }, 502, request);
+      return json({ ok: true, changed: ["forAppointments"], settings: saved }, 200, request);
+    }
     if (seg === "org" && sub === "gst-settings") {
       const cb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || cb.orgId || "";
@@ -6356,6 +6379,9 @@ export async function onRequest(context) {
         /* R4-4: the same for critical limits, delta limits, autoverification, MAR times, note templates and their sign-off record. */
         if (wb && typeof wb === "object" && CONTENT.CONTENT_KEYS.concat(CONTENT.SIGNOFF_KEY).some((k) => k in wb))
           return json({ ok: false, error: "use_clinical_settings_route", message: "Critical limits, delta limits, autoverification, MAR times and note templates are changed on Admin Center > Hospital (POST /org/clinical-settings/<setting>), where they are checked, signed off and audited. Nothing was saved." }, 422, request);
+        /* R4-5 follow-up: forms before an appointment are switched on Admin > Hospital (POST /org/intake-settings), with a reason. */
+        if (wb && typeof wb === "object" && "intake" in wb)
+          return json({ ok: false, error: "use_intake_settings_route", message: "Patient forms before an appointment are switched on Admin Center > Hospital (POST /org/intake-settings), where the change is recorded with its reason. Nothing was saved." }, 422, request);
         /* Owner decision 2026-09-15: level 2 tells the on-duty ward team by a named rule; only the rules built may be saved. */
         const wardRuleRefusal = level2WardRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
         if (wardRuleRefusal) return json({ ok: false, error: "level2_ward_rule_not_built", message: wardRuleRefusal }, 422, request);

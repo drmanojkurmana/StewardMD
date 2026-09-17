@@ -171,7 +171,7 @@
     if (canOrder) {
       c.api("/ward/list" + q).then(function (r) {
         var sel = document.getElementById("dtPatient"); if (!sel) return;
-        if (!r || !r.ok) { sel.innerHTML = '<option value="">' + c.esc(T(c, "site.support.patientsFailed", "Patients could not be loaded")) + "</option>"; return; }
+        if (!r || !r.ok) { sel.innerHTML = '<option value="">' + c.esc(WSQ.tooManyOpen(r) || T(c, "site.support.patientsFailed", "Patients could not be loaded")) + "</option>"; return; }
         var cur = c.state.dietFor && c.state.dietFor.encounterId;
         sel.innerHTML = '<option value="">' + c.esc(T(c, "site.support.choosePatient", "Choose a patient")) + "</option>" + (r.patients || []).map(function (p) {
           return '<option value="' + E(c, p.encounterId) + '"' + (p.encounterId === cur ? " selected" : "") + ">" + EN(c, E(c, (p.ward || "") + " " + (p.bed || "") + ", " + (p.name || "") + " " + (p.mrn || ""))) + "</option>";
@@ -442,7 +442,7 @@
     c.api("/roster/on-duty" + q).then(function (r) { duty = r && r.ok ? r : { ok: false }; paint(); });
     c.api("/ward/list" + q).then(function (r) {
       var sel = document.getElementById("trStay"); if (!sel) return;
-      sel.innerHTML = !r || !r.ok ? '<option value="">' + c.esc(T(c, "site.support.patientsFailed", "Patients could not be loaded")) + "</option>" : '<option value="">' + c.esc(T(c, "site.support.noStay", "No admitted patient")) + "</option>" + (r.patients || []).map(function (p) { return '<option value="' + E(c, p.encounterId) + '">' + EN(c, E(c, (p.ward || "") + " " + (p.bed || "") + ", " + (p.name || "") + " " + (p.mrn || ""))) + "</option>"; }).join("");
+      sel.innerHTML = !r || !r.ok ? '<option value="">' + c.esc(WSQ.tooManyOpen(r) || T(c, "site.support.patientsFailed", "Patients could not be loaded")) + "</option>" : '<option value="">' + c.esc(T(c, "site.support.noStay", "No admitted patient")) + "</option>" + (r.patients || []).map(function (p) { return '<option value="' + E(c, p.encounterId) + '">' + EN(c, E(c, (p.ward || "") + " " + (p.bed || "") + ", " + (p.name || "") + " " + (p.mrn || ""))) + "</option>"; }).join("");
     });
     el.onclick = function (ev) {
       var b = ev.target.closest && ev.target.closest("[data-sup]"); if (!b) return;

@@ -1225,6 +1225,31 @@
     draw(undefined);
     c.api("/org/clinical-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
   }
+  /* PATIENT FORMS BEFORE AN APPOINTMENT (R4-5, functions/_wardsynq/form-response.js intakeSettings): one switch through
+   * GET/POST /org/intake-settings, with a reason. Off unless saved on; a failed load is said, never read as off. */
+  function renderIntakeSettings(c, host) {
+    if (!host) return;
+    var title = "<h2>" + c.esc(T(c, "site.admin.intake.title", "Patient forms before an appointment")) + "</h2>";
+    var failed = function () { host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.intake.loadFailed", "The setting could not be loaded. Do not read this as off.")) + "</div></div>"; };
+    host.innerHTML = '<div class="card">' + title + '<span class="spin"></span></div>';
+    return c.api("/org/intake-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok || !r.settings) { failed(); return; }
+      host.innerHTML = '<div class="card">' + title +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.intake.intro", "When on, a patient with a booked appointment still to come is offered the patient forms marked for appointments on the portal. Staff review the answers; nothing is written into the chart. Every change is recorded with its reason.")) + "</p>" +
+        '<label class="f"><span><input type="checkbox" id="admIntakeAppt"' + (r.settings.forAppointments ? " checked" : "") + "> " + c.esc(T(c, "site.admin.intake.forAppointments", "Offer patient forms before a booked appointment")) + "</span></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.intake.reason", "Why is this setting changing?")) + '</span><input id="admIntakeReason"></label>' +
+        '<button type="button" class="btn" id="admIntakeSave">' + c.esc(T(c, "site.admin.intake.save", "Save")) + '</button><div id="admIntakeMsg"></div></div>';
+      document.getElementById("admIntakeSave").onclick = function () {
+        var out = document.getElementById("admIntakeMsg");
+        out.innerHTML = '<span class="spin"></span>';
+        c.api("/org/intake-settings", { orgId: c.state.orgId, settings: { forAppointments: document.getElementById("admIntakeAppt").checked }, reason: document.getElementById("admIntakeReason").value.trim() }).then(function (x) {
+          if (!x || !x.ok) { out.innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, x))) + "</div>"; return; }
+          c.toast(x.changed && x.changed.length ? T(c, "site.admin.saved", "Saved.") : T(c, "site.admin.intake.nothingChanged", "Nothing changed.")); renderIntakeSettings(c, host);
+        }, function () { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.intake.noResponse", "No response from the server. The setting may not have been saved; reload to check.")) + "</div>"; });
+      };
+    }, failed);
+  }
+  WSQ._intakeSettings = renderIntakeSettings;
   /* BLOOD DONOR CRITERIA (functions/_wardsynq/blood-bank.js, owner decision 2026-09-17). WHO 2012 by default; this
    * hospital may only make a criterion stricter. The table is the blood bank page's own (WSQ._bloodbank), so both
    * screens name each criterion and its source the same way. r: undefined = loading, null = could not be loaded (said,
@@ -1461,7 +1486,7 @@
       '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.countryNote", "The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.")) + '</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.hospital.needsWardsynq", "Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.")) + '</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="fmlCard"></div>' + CCS_KEYS.map(function (k) { return '<div id="ccsCard-' + k + '"></div>'; }).join("") + '<div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="intakeCard"></div><div id="fmlCard"></div>' + CCS_KEYS.map(function (k) { return '<div id="ccsCard-' + k + '"></div>'; }).join("") + '<div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
       /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
       (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
         ? '<div class="card"><h2>' + c.esc(T(c, "site.admin.hospital.removeTitle", "Remove this hospital")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.hospital.removeIntro", "Removes it from every hospital list. Patient records, documents and the audit trail are kept.")) + '</p>' +
@@ -1484,6 +1509,7 @@
       });
     };
     wireClinicalSettings(c);
+    renderIntakeSettings(c, document.getElementById("intakeCard"));
     wireFormulary(c);
     CCS_KEYS.forEach(function (k) { wireContentSetting(c, k); });
     wireDonorCriteria(c); wireBloodCentre(c);

@@ -199,10 +199,40 @@ test("POST /api/portal/intake-forms and /intake-submit, setting absent: a patien
   assert.equal(await H.RECORD.latest(T, "FormResponse", R.intakeId("before_visit", "apt-1")), null);
   const off = await setupAppointments({ forAppointments: false });
   assert.deepEqual((await portal("intake-forms", off.me)).appointments, []);
-  // Turned on through POST /api/queue/org/update (the hospital settings route): now offered.
-  const on = await as(ADMIN, "/org/update", "POST", { orgId: ORG_ID, wardsynq: { intake: { forAppointments: true } } });
+  // Turned on through POST /api/queue/org/intake-settings (Admin > Hospital, with a reason): now offered.
+  const on = await as(ADMIN, "/org/intake-settings", "POST", { orgId: ORG_ID, settings: { forAppointments: true }, reason: "Clinic forms approved" });
   assert.equal(on.__status, 200, on.__text);
+  assert.deepEqual(on.settings, { forAppointments: true });
   assert.deepEqual((await portal("intake-forms", off.me)).appointments.map((a) => a.appointmentId), ["apt-1"]);
+});
+
+test("GET/POST /api/queue/org/intake-settings: 401, 403 for a nurse and another hospital's admin with nothing saved; a reason is required; audited; /org/update refuses wardsynq.intake", async () => {
+  seed({ patientAccess: { enabled: true } });
+  const cfg = () => docs.get(`q_orgs/${ORG_ID}`).fields.wardsynq;
+  const audits = () => [...docs.values()].filter((d) => d && d.fields && d.fields.action === "org:intake_settings");
+  const body = { orgId: ORG_ID, settings: { forAppointments: true }, reason: "Clinic forms approved" };
+  assert.equal((await as(null, "/org/intake-settings", "POST", body)).__status, 401);
+  assert.equal((await as(NURSE, "/org/intake-settings", "POST", body)).__status, 403);
+  assert.equal((await as(CASHIER, "/org/intake-settings", "POST", body)).__status, 403);
+  assert.equal((await as(OTHER_ADMIN, "/org/intake-settings", "POST", body)).__status, 403);
+  assert.equal((await as(NURSE, `/org/intake-settings?orgId=${ORG_ID}`)).__status, 403);
+  assert.equal(cfg().intake, undefined, "nothing saved by a refused caller");
+  assert.deepEqual((await as(ADMIN, `/org/intake-settings?orgId=${ORG_ID}`)).settings, { forAppointments: false }, "absent is off");
+  const noReason = await as(ADMIN, "/org/intake-settings", "POST", { ...body, reason: " " });
+  assert.deepEqual([noReason.__status, noReason.error], [422, "reason_required"]);
+  assert.equal((await as(ADMIN, "/org/intake-settings", "POST", { ...body, settings: { forAppointments: "true" } })).__status, 422);
+  const viaUpdate = await as(ADMIN, "/org/update", "POST", { orgId: ORG_ID, wardsynq: { intake: { forAppointments: true } } });
+  assert.deepEqual([viaUpdate.__status, viaUpdate.error], [422, "use_intake_settings_route"]);
+  assert.equal(cfg().intake, undefined);
+  assert.equal(audits().length, 0);
+  const saved = await as(ADMIN, "/org/intake-settings", "POST", body);
+  assert.deepEqual([saved.__status, saved.changed, saved.settings], [200, ["forAppointments"], { forAppointments: true }]);
+  assert.equal(cfg().intake.forAppointments, true);
+  assert.equal(audits().length, 1);
+  assert.match(String(audits()[0].fields.meta), /Clinic forms approved/);
+  const same = await as(ADMIN, "/org/intake-settings", "POST", { ...body, reason: "" });
+  assert.deepEqual([same.__status, same.changed], [200, []], "no change needs no reason and writes no audit");
+  assert.equal(audits().length, 1);
 });
 
 test("setting on: forms before a booked appointment through the same review; staff forms, forms not marked for appointments, another patient's, past appointments and no session are refused", async () => {
@@ -344,4 +374,31 @@ test("R4-5 screens: the portal lists a booked appointment's forms and sends appo
   assert.match(panel, /Forms from the patient before this appointment/);
   assert.match(panel, /The patient has not sent a form for this appointment/);
   assert.doesNotMatch(W._render({ ...W._st, view: "admreqs", admReqs: { ok: true, requests: [] } }), /before this appointment/, "the waiting list never shows an appointment's panel");
+});
+
+test("Admin > Hospital intake card: reads GET /org/intake-settings, sends the switch with its reason, a failed load is not off, every word translated", async () => {
+  const { loadSite, leftovers } = await import("./wsq-site-i18n-harness.mjs");
+  const run = async (lang, answer) => {
+    const site = loadSite({ lang, pages: ["admin.js"] });
+    const sent = [];
+    const c = { esc: site.win.WSQ.esc, t: site.win.WSQ.t, tSafe: site.win.WSQ.tSafe, en: site.win.WSQ.en, state: { orgId: "o1" }, toast() {},
+      api: (p, body) => { sent.push([p, body]); return Promise.resolve(body ? { ok: true, changed: ["forAppointments"], settings: body.settings } : answer); } };
+    const host = site.doc.getElementById("intakeCard");
+    await site.win.WSQ._intakeSettings(c, host);
+    return { site, host, sent };
+  };
+  const on = await run("en", { ok: true, settings: { forAppointments: true } });
+  assert.equal(on.sent[0][0], "/org/intake-settings?orgId=o1");
+  assert.match(on.host.innerHTML, /id="admIntakeAppt" checked/);
+  assert.match(on.host.innerHTML, /id="admIntakeReason"/);
+  on.site.doc.getElementById("admIntakeAppt").checked = false;
+  on.site.doc.getElementById("admIntakeReason").value = " Paused ";
+  on.site.doc.getElementById("admIntakeSave").onclick();
+  assert.deepEqual(on.sent[1], ["/org/intake-settings", { orgId: "o1", settings: { forAppointments: false }, reason: "Paused" }]);
+  const failed = await run("en", { ok: false });
+  assert.match(failed.host.innerHTML, /Do not read this as off/);
+  assert.doesNotMatch(failed.host.innerHTML, /admIntakeAppt/);
+  const xx = await run("xx", { ok: true, settings: { forAppointments: false } });
+  assert.deepEqual(leftovers(xx.host.innerHTML), []);
+  assert.match(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), /<div id="clinCard"><\/div><div id="intakeCard"><\/div>/);
 });

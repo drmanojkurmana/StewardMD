@@ -8032,3 +8032,15 @@ of compliance.js is untouched.
   `forAppointments: true` (patient forms only). A FormResponse carries `appointmentId` instead of `admissionRequestId`;
   review, origin and "never the chart" are unchanged. The portal UI is wardsynq/site/portal.js (the brief named
   portal.html). No settings screen: the flag is set through /org/update (admin settings screens belong to R4-4).
+
+## 2026-09-17 Merge of whole-type-reads and small-closures, with two follow-ups (wardsynq-product)
+
+- `ward.dc-truncated` and `ward.rcm-truncated` English now say the newest records were not read (R4-2 reads oldest-first
+  pages up to a ceiling). Language files keep their older wording until retranslated.
+- Appointment intake switch: GET/POST `/org/intake-settings` (staff.admin, reason required on a change, audited as
+  `org:intake_settings`, read back), a card on Admin > Hospital under the clinical settings. `/org/update` now refuses
+  `wardsynq.intake` (422 `use_intake_settings_route`). A dedicated route rather than a key on `/org/clinical-settings`:
+  that route takes no reason and its read shape is asserted whole by existing tests.
+- Site pages: shell.js's transport gives a 503 `too_many_open` the ward.js sentence (key `ward.too-many-open-stays`, shared
+  catalog); the home ward and ED tiles, MaiK patient list, In-basket patient picker and the support diet and transport
+  pickers show it before their own "could not be loaded" text (`WSQ.tooManyOpen(r)`).
