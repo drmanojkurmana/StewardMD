@@ -15,7 +15,6 @@
     "transmit-outcome": "The outside system reports back here.",
     "outbound-send": "Outbound message to an outside system.",
     "outbound-destination": "Configuration read by the outbound sender, not a screen.",
-    "registries": "Statutory reporting to an outside registry.",
     "source-grant": "Health-ID consent handshake between systems.",
     "twin-agent-queue": "Background worker queue.",
     "onco-ae-list": "Superseded by onco-timeline, which the Oncology screen calls and which reads the same record types (link, adverse events, chemotherapy). Verified 2026-09-14; a separate screen would duplicate it.",
@@ -36,6 +35,8 @@
     "analyser-results": "The on-premises analyser connector files a received result or a QC run here; it lands on the Laboratory board for a technologist, never on a chart.",
     "analyser-orders": "The on-premises analyser connector asks which tests were ordered on a specimen when an analyser sends an ASTM host query."
   },
-  "knownGaps": {},
+  "knownGaps": {
+    "registries": "A clinician-facing recall register, not machine-to-machine: registry.js names the patients in a cohort who are overdue a review, gated on chart-read authority. It needs a screen and has none. Verified 2026-09-18: nothing under wardsynq/ calls ward/registries. Was wrongly filed under byDesign as \"statutory reporting to an outside registry\"."
+  },
   "untestedRoutes": []
 }
