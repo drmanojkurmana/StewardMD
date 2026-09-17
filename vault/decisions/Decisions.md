@@ -8044,3 +8044,22 @@ of compliance.js is untouched.
 - Site pages: shell.js's transport gives a 503 `too_many_open` the ward.js sentence (key `ward.too-many-open-stays`, shared
   catalog); the home ward and ED tiles, MaiK patient list, In-basket patient picker and the support diet and transport
   pickers show it before their own "could not be loaded" text (`WSQ.tooManyOpen(r)`).
+
+## 2026-09-18 The last capped reads, and an unreadable token family (R5-4, branch remaining-caps)
+
+- A read that fails must not answer with a plausible empty value. Two swallows removed rather than widened:
+  digital-twin's notification-reliability read (a failed BreakGlassGrant/CriticalResultLoop read now makes that
+  section `unavailable` with its reason instead of a delivery rate over an empty sample), and smart-server's
+  refresh-reuse revocation.
+- SMART refresh reuse: an unreadable token family, or any revocation write that fails, now REFUSES the revocation.
+  The token in hand and the family root are still revoked by id (both addressable without the list), the audit row
+  carries `revoked: "incomplete"` with `outcome: "error"`, and the endpoint answers 503 `temporarily_unavailable`
+  rather than the flat 400 `invalid_grant` that reads as handled. Accepted cost: a reuse against a broken store is
+  distinguishable from a random bad token, which needs possession of a real rotated token to observe.
+- The digital twin's point-in-time rebuild reads the NEWEST 500 per type, not the oldest. The bound stays 500
+  because each record read costs one further history read; the screen already said "only the latest 500 checked",
+  which is now true. Raising it is an O20 question, not a constant to bump.
+- Ceilings that were reached are stated in the same sentence as what they cost: lab-qc's QC screen names both the
+  runs and the corrective actions read (a truncated action read changes what a block IS, not just what a chart
+  shows), and security-review counts a ward history not read past HISTORY_READ_MAX separately from one that could
+  not be read.

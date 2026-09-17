@@ -340,6 +340,35 @@ test("a storage port that cannot read the audit trail reports UNAVAILABLE, never
   assert.equal(rep.chartAccess.findings, undefined);
 });
 
+test("R5-4: a ward history NOT READ (past the bound) is said separately from one that could not be read", async () => {
+  seedHospital();
+  const now = Date.now();
+  await RECORD.auditOnly(TENANT_ROW.id, { ts: new Date(now - H).toISOString(), actor: "cfa:reader", action: "record.read", patientRefHash: "ref-1", scope: { resourceType: "Patient" }, outcome: "ok" });
+  /* 201 transferred admissions: one more than the report's per-admission history bound. Past it the
+   * remaining transfers were never looked at - which is a different fact from a history read that
+   * failed, and the report has to keep the two apart for an admin acting on it. */
+  const meta = { recordedAt: new Date(now - H).toISOString(), effectiveAt: new Date(now - H).toISOString(), amendedAt: null, source: { system: "wardsynq-native", sourceId: null, importedAt: new Date(now - H).toISOString() }, derivedFrom: [] };
+  const rows = [];
+  for (let i = 0; i < 201; i++) {
+    rows.push({ resourceType: "Encounter", id: `enc-${i}`, version: 1, patientId: `pat-${i}`, class: "IPD", status: "in-progress", identifiers: [],
+      periodStart: new Date(now - 2 * H).toISOString(), periodEnd: null, movedAt: new Date(now - H).toISOString(), location: { ward: "Ward A", bed: String(i) }, meta });
+  }
+  await RECORD.append(TENANT_ROW.id, rows);
+  const realHistory = RECORD.history.bind(RECORD);
+  RECORD.history = async (tenantId, type, id) => {
+    if (id === "enc-0") throw new Error("simulated storage fault");
+    return realHistory(tenantId, type, id);
+  };
+  const rep = await as(ADMIN, `/ward/security-report?orgId=${ORG_ID}&days=7`);
+  RECORD.history = realHistory;
+  assert.equal(rep.__status, 200, JSON.stringify(rep).slice(0, 300));
+  /* With no rota and no nurse assignment on record the section is not evaluated, and what could not
+   * be read is spelled out in its reason - which is where these two sentences have to land. */
+  const said = [(rep.assignmentAccess.incomplete || []).join(" | "), rep.assignmentAccess.reason || ""].join(" | ");
+  assert.match(said, /ward history of 1 transferred admission could not be read/, "a failed read is named as a failure");
+  assert.match(said, /more than 200 admissions were transferred[\s\S]*was not read/, "and a ceiling is named as a ceiling, not as a failure");
+});
+
 // ---------------------------------------------------------------------------------------------
 // ADMIN SCREEN
 // ---------------------------------------------------------------------------------------------
