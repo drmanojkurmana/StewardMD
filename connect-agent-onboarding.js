@@ -520,6 +520,32 @@
     if (S) show(S.screen);
   }
 
+  /* THE FIRST RE-ARM LANDS TOO EARLY. The native plugin announces "navigated" from didCommit, while the
+   * new document is still being built, so WebKit rejects that evaluate; the error was swallowed and
+   * nothing tried again, leaving the guide unarmed for the rest of the ask. The doctor's tap then never
+   * turned green and Done captured nothing (owner's iPhone, live GHIS radiology page, 2026-09-18).
+   * GUIDE_ARM is idempotent (it removes any previous handler first), so it is simply fired again a
+   * couple of times as the page settles; each attempt stops if the ask it belongs to is already over. */
+  var GUIDE_ARM_DELAYS = [0, 700, 2000];
+  function armGuideWithRetries() {
+    if (!S || !S.engine || !S.engine.GUIDE_ARM) return;
+    var expression = S.engine.GUIDE_ARM;
+    var forAsk = S.guide;
+    for (var i = 0; i < GUIDE_ARM_DELAYS.length; i++) {
+      (function (ms) {
+        setTimeout(function () {
+          if (!S || !S.guide || S.guide !== forAsk) return;   // the ask was answered or skipped
+          var c = S.pluginClient || getPlugin();
+          if (!c || !c.evaluate) return;
+          try {
+            var p = c.evaluate({ expression: expression });
+            if (p && p.catch) p.catch(function () {});
+          } catch (e) { /* the browser is between documents; a later attempt covers it */ }
+        }, ms);
+      }(GUIDE_ARM_DELAYS[i]));
+    }
+  }
+
   /* ---- Plugin event wiring (phone runner) ---- */
   function bindPluginListeners(plugin) {
     removePluginListeners();
@@ -535,10 +561,7 @@
        * is evaluated once per ask and dies with the document, so the doctor's own navigation during a
        * guided ask (S.guide: an ask is on screen) silently drops tap-to-point and the green outline.
        * Best-effort: errors are swallowed, never surfaced to the doctor. */
-      if (S && S.guide && S.engine && S.engine.GUIDE_ARM) {
-        var armClient = S.pluginClient || getPlugin();
-        if (armClient && armClient.evaluate) { try { armClient.evaluate({ expression: S.engine.GUIDE_ARM }).catch(function () {}); } catch (e2) {} }
-      }
+      if (S && S.guide && S.engine && S.engine.GUIDE_ARM) armGuideWithRetries();
     });
     on("loggedIn", function () {
       if (!S) return;

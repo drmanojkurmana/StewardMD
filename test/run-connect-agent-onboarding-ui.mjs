@@ -446,6 +446,27 @@ try {
   await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/Radio/Home"}); return 1;`);
   ok(await waitFor(guideArmed, 3000), "a navigated event during an active guided ask re-evaluates GUIDE_ARM on the plugin");
 
+  /* THE FIRST RE-ARM LANDS TOO EARLY. The native plugin announces "navigated" from didCommit, while the
+   * new document is still being built, so that evaluate is rejected by WebKit and the swallowed error
+   * left the guide unarmed for the rest of the ask: the doctor's tap never turned green and Done could
+   * capture nothing (owner's iPhone, live GHIS radiology page, 2026-09-18). The re-arm must be retried. */
+  await ev(`
+    window.__pluginCalls = window.__pluginCalls.filter(function(c){return !(c.m==="evaluate" && c.a && c.a.expression==="SMD_TEST_GUIDE_ARM_MARKER");});
+    window.__armAttempts = 0;
+    var p = window.Capacitor.Plugins.ConnectBrowser;
+    p.evaluate = function (args) {
+      window.__pluginCalls.push({ m: "evaluate", a: args });
+      if (args && args.expression === "SMD_TEST_GUIDE_ARM_MARKER") {
+        window.__armAttempts++;
+        if (window.__armAttempts === 1) return Promise.reject(new Error("WebKit: page is navigating"));
+      }
+      return Promise.resolve({ result: "" });
+    };
+    return 1;
+  `);
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/Radio/Home"}); return 1;`);
+  ok(await waitFor(`return window.__armAttempts >= 2;`, 6000), "the guide is re-armed again after the first attempt fails on a still-loading page");
+
   await ev(`document.getElementById("smd-connect-guideskip").click(); return 1;`);
   ok(await waitFor(`return window.__ask1 && window.__ask1.done === false && !document.getElementById("smd-connect-guideskip");`, 3000), "Skip resolves the ask with done:false and removes the instruction");
   await ev(`window.__pluginCalls = window.__pluginCalls.filter(function(c){return !(c.m==="evaluate" && c.a && c.a.expression==="SMD_TEST_GUIDE_ARM_MARKER");}); return 1;`);
