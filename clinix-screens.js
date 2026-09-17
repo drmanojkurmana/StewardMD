@@ -665,6 +665,35 @@
       }
       html += "</tbody></table></div>";
     }
+    if (b.analogy) {
+      html += '<div class="cx-teach-analogy">' +
+        '<div class="cx-teach-analogy-h">' + ic("lightbulb") + " Physical Intuition & Everyday Analogy</div>" +
+        '<p class="cx-teach-analogy-p">' + esc(b.analogy) + "</p></div>";
+    }
+    if (b.technique && b.technique.length) {
+      html += '<div class="cx-teach-technique">' +
+        '<div class="cx-teach-technique-h">' + ic("pan_tool") + " Step-by-Step Bedside Technique</div>" +
+        '<ol class="cx-teach-technique-steps">';
+      for (var ti = 0; ti < b.technique.length; ti++) {
+        html += "<li>" + esc(b.technique[ti]) + "</li>";
+      }
+      html += "</ol></div>";
+    }
+    if (b.sensory && (b.sensory.normal || b.sensory.abnormal)) {
+      html += '<div class="cx-teach-sensory">' +
+        (b.sensory.normal ? '<div class="cx-sensory-box cx-sensory-norm"><div class="cx-sensory-h">' + ic("check_circle") + ' What Normal Feels & Sounds Like</div><p class="cx-sensory-b">' + esc(b.sensory.normal) + '</p></div>' : "") +
+        (b.sensory.abnormal ? '<div class="cx-sensory-box cx-sensory-abnorm"><div class="cx-sensory-h">' + ic("warning") + ' What Pathology Feels & Sounds Like</div><p class="cx-sensory-b">' + esc(b.sensory.abnormal) + '</p></div>' : "") +
+        '</div>';
+    }
+    if (b.traps && b.traps.length) {
+      html += '<div class="cx-teach-traps">' +
+        '<div class="cx-teach-traps-h">' + ic("error") + " Common Rookie Traps & OSCE Pitfalls</div>" +
+        '<ul class="cx-teach-traps-list">';
+      for (var tri = 0; tri < b.traps.length; tri++) {
+        html += "<li>" + esc(b.traps[tri]) + "</li>";
+      }
+      html += "</ul></div>";
+    }
     if (b.wideTable) html += wideTableHtml(b.wideTable);
     if (b.note) html += '<div class="cx-teach-note">' + ic("lightbulb") + "<span>" + esc(b.note) + "</span></div>";
     return html;

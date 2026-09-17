@@ -618,9 +618,506 @@
     return html;
   }
 
+  /* ── 19. Cranial Nerves I-XII Interactive Pathway Map ───────────────────── */
+
+  var CRANIAL_NERVES = [
+    { id: "cn1", num: "I", name: "Olfactory", type: "Sensory", exit: "Cribriform plate", test: "Smell identification (coffee, vanilla) one nostril at a time with eyes closed", lesion: "Anosmia (head trauma, Kallmann, Parkinson's, frontal meningioma)" },
+    { id: "cn2", num: "II", name: "Optic", type: "Sensory", exit: "Optic canal", test: "Visual acuity (Snellen), visual fields (confrontation), fundoscopy, pupillary light reflex (afferent)", lesion: "Monocular vision loss, bitemporal hemianopia (chiasm), homonymous hemianopia (tract/radiations)" },
+    { id: "cn3", num: "III", name: "Oculomotor", type: "Motor", exit: "Superior orbital fissure", test: "Eye movements (SR, IR, MR, IO), eyelid elevation (levator), pupil constriction (efferent)", lesion: "Ptosis, 'down-and-out' eye position, fixed dilated pupil (blown pupil in uncal herniation)" },
+    { id: "cn4", num: "IV", name: "Trochlear", type: "Motor", exit: "Superior orbital fissure", test: "Superior oblique: moves eye downwards and inwards", lesion: "Vertical diplopia, head tilt away from lesion side, difficulty walking downstairs" },
+    { id: "cn5", num: "V", name: "Trigeminal", type: "Both", exit: "Superior orbital fissure (V1), Rotundum (V2), Ovale (V3)", test: "Facial pinprick/cotton (V1 ophthalmic, V2 maxillary, V3 mandibular), corneal reflex (afferent), jaw clench (masseters)", lesion: "Facial numbness, absent corneal reflex, jaw deviates TOWARDS weak pterygoid side" },
+    { id: "cn6", num: "VI", name: "Abducens", type: "Motor", exit: "Superior orbital fissure", test: "Lateral rectus: abducts the eye laterally", lesion: "Inability to abduct eye past midline, horizontal diplopia looking towards lesion side. Long intracranial course makes it a false localising sign in raised ICP!" },
+    { id: "cn7", num: "VII", name: "Facial", type: "Both", exit: "Internal acoustic meatus -> Stylomastoid foramen", test: "Facial expression: raise eyebrows, squeeze eyes shut, puff cheeks, show teeth; taste anterior 2/3 tongue", lesion: "Bell's palsy (LMN: entire ipsilateral face paralyzed including forehead) vs Stroke (UMN: forehead spared due to bilateral cortical innervation!)" },
+    { id: "cn8", num: "VIII", name: "Vestibulocochlear", type: "Sensory", exit: "Internal acoustic meatus", test: "Whisper voice test, Rinne tuning fork test (air > bone normal), Weber test (lateralization)", lesion: "Sensorineural hearing loss, tinnitus, vertigo, horizontal-torsional nystagmus" },
+    { id: "cn9", num: "IX", name: "Glossopharyngeal", type: "Both", exit: "Jugular foramen", test: "Gag reflex (afferent sensory limb with cotton tip on posterior pharynx), taste posterior 1/3 tongue", lesion: "Loss of gag reflex sensation, dysphagia, glossopharyngeal neuralgia" },
+    { id: "cn10", num: "X", name: "Vagus", type: "Both", exit: "Jugular foramen", test: "Inspect uvula on phonation ('say ahh'), gag reflex (efferent motor limb), swallow test, voice quality", lesion: "Uvula deviates to the NORMAL (contralateral) side; hoarse voice (recurrent laryngeal nerve palsy), bovine cough" },
+    { id: "cn11", num: "XI", name: "Spinal Accessory", type: "Motor", exit: "Jugular foramen", test: "Turn head against resistance (sternocleidomastoid), shrug shoulders against resistance (trapezius)", lesion: "Weakness turning head to OPPOSITE side (SCM turns head contralaterally!), shoulder droop" },
+    { id: "cn12", num: "XII", name: "Hypoglossal", type: "Motor", exit: "Hypoglossal canal", test: "Inspect tongue on floor of mouth (atrophy, fasciculations), protrude tongue straight out", lesion: "Tongue deviates TOWARDS the side of the lesion ('lick the wound' due to unopposed action of normal genioglossus)" }
+  ];
+
+  function cranialMap(o) {
+    var sel = (o && o.selected) || "cn7";
+    var chosen = CRANIAL_NERVES[6];
+    for (var i = 0; i < CRANIAL_NERVES.length; i++) if (CRANIAL_NERVES[i].id === sel) chosen = CRANIAL_NERVES[i];
+
+    var html = '<div class="cx-dia-toggle" style="flex-wrap:wrap; margin-bottom:8px;">';
+    for (var j = 0; j < CRANIAL_NERVES.length; j++) {
+      var n = CRANIAL_NERVES[j];
+      html += btn("cx-dia-zone", n.id, n.num, sel === n.id);
+    }
+    html += '</div>';
+
+    html += '<svg class="cx-dia cx-dia--cranial" viewBox="0 0 340 160" role="img" aria-label="Cranial Nerve Functional Map">' +
+      '<rect x="20" y="20" width="300" height="120" rx="10" fill="var(--cx-surface)" stroke="var(--cx-line)"/>' +
+      '<circle cx="65" cy="80" r="30" fill="var(--cx-primary-soft)" stroke="var(--cx-primary)" stroke-width="2"/>' +
+      '<text class="cx-dia-lbl" x="65" y="86" text-anchor="middle" font-size="20" font-weight="700" fill="var(--cx-primary)">' + esc(chosen.num) + '</text>' +
+      '<text class="cx-dia-lbl" x="110" y="52" font-size="15" font-weight="700" fill="var(--cx-ink)">CN ' + esc(chosen.num) + ': ' + esc(chosen.name) + '</text>' +
+      '<text class="cx-dia-lbl" x="110" y="74" font-size="12" fill="var(--cx-teach)">Functional Type: ' + esc(chosen.type) + '</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="110" y="94" font-size="11.5">Exit: ' + esc(chosen.exit) + '</text>' +
+      '<path d="M65 50 C65 25 150 25 240 25" fill="none" stroke="var(--cx-primary)" stroke-width="1.5" stroke-dasharray="3 3"/>' +
+      '</svg>';
+
+    html += '<div class="cx-dia-note">' +
+      '<b>Bedside Examination Test:</b><br>' + esc(chosen.test) + '<br><br>' +
+      '<b>Pathognomonic Clinical Lesion:</b><br>' + esc(chosen.lesion) +
+      '</div>';
+    return html;
+  }
+
+  /* ── 20. Deep Tendon Reflex Arc ─────────────────────────────────────────── */
+
+  function reflexArc(o) {
+    var mode = (o && o.mode) || "normal"; // normal | umn | lmn
+    var arcTitle = mode === "umn" ? "Upper Motor Neuron (Brisk Reflex 4+ / Hyperreflexia)"
+      : mode === "lmn" ? "Lower Motor Neuron (Absent / Diminished Reflex 0-1+)"
+      : "Normal Monosynaptic Stretch Reflex Arc (2+)";
+
+    var html = '<svg class="cx-dia cx-dia--reflex" viewBox="0 0 340 210" role="img" aria-label="' + esc(arcTitle) + '">' +
+      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="14" y="20">' + esc(arcTitle) + '</text>' +
+      // Muscle
+      '<path d="M40 70 C55 45 75 45 90 70 L90 140 C75 165 55 165 40 140 Z" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="1.8"/>' +
+      '<text class="cx-dia-lbl" x="65" y="105" text-anchor="middle" font-size="11" fill="#ef4444">Muscle</text>' +
+      // Spindle
+      '<ellipse cx="65" cy="115" rx="10" ry="5" fill="#ef4444"/>' +
+      // Spinal cord
+      '<path d="M220 50 C200 70 200 130 220 150 C240 170 290 170 310 150 C330 130 330 70 310 50 C290 30 240 30 220 50 Z" fill="var(--cx-surface)" stroke="var(--cx-line)" stroke-width="2"/>' +
+      // Butterfly grey matter
+      '<path d="M245 80 Q255 100 245 120 Q265 100 285 120 Q275 100 285 80 Q265 100 245 80 Z" fill="var(--cx-line)"/>' +
+      // Afferent Ia sensory neuron (blue)
+      '<path d="M75 115 C130 115 160 70 240 85" fill="none" stroke="#2563eb" stroke-width="2.2"/>' +
+      '<circle cx="160" cy="80" r="5" fill="#2563eb"/>' +
+      '<text class="cx-dia-lbl" x="160" y="70" text-anchor="middle" font-size="10" fill="#2563eb">Dorsal Root Ganglion</text>' +
+      // Efferent alpha motor neuron (red)
+      '<path d="M245 115 C170 145 120 135 75 130" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-dasharray="' + (mode === "lmn" ? "3 3" : "none") + '"/>' +
+      '<text class="cx-dia-lbl" x="140" y="160" text-anchor="middle" font-size="10" fill="#dc2626">Alpha Motor Axon</text>' +
+      // Descending corticospinal tract (purple)
+      '<path d="M260 20 L260 95" fill="none" stroke="#9333ea" stroke-width="' + (mode === "umn" ? "1" : "2.5") + '" stroke-dasharray="' + (mode === "umn" ? "2 2" : "none") + '"/>' +
+      '<text class="cx-dia-lbl" x="260" y="16" text-anchor="middle" font-size="9.5" fill="#9333ea">' + (mode === "umn" ? "CUT (Loss of Brakes!)" : "Descending UMN Inhibitory Brakes") + '</text>' +
+      // Hammer
+      '<path d="M15 110 L30 110 L25 120 L10 120 Z" fill="var(--cx-muted)"/>' +
+      '<text class="cx-dia-lbl" x="20" y="138" font-size="9">Tap</text>' +
+      '</svg>' +
+      '<div class="cx-dia-toggle">' +
+        btn("cx-dia-mode", "normal", "Normal (2+)", mode === "normal") +
+        btn("cx-dia-mode", "umn", "UMN Lesion (4+)", mode === "umn") +
+        btn("cx-dia-mode", "lmn", "LMN Lesion (0)", mode === "lmn") +
+      '</div>' +
+      '<div class="cx-dia-note">' +
+      (mode === "umn"
+        ? "<b>Upper Motor Neuron Lesion</b>: The brain and descending corticospinal tract normally send constant <i>inhibitory dampening signals</i> ('brakes') to the spinal reflex arc. When an UMN lesion (stroke, MS, cord compression) cuts this pathway, the spinal loop fires unchecked $\\rightarrow$ <b>hyperreflexia, clonus, and spasticity</b>."
+        : mode === "lmn"
+          ? "<b>Lower Motor Neuron Lesion</b>: Destruction of the anterior horn cell, spinal root, or peripheral motor axon (e.g. polio, Guillain-Barré, peripheral neuropathy) breaks the physical electrical cable to the muscle $\\rightarrow$ <b>hyporeflexia or completely absent reflex (0)</b>, flaccidity, and rapid neurogenic atrophy."
+          : "<b>Normal Reflex Arc</b>: A swift tap stretches muscle spindles $\\rightarrow$ fires Ia sensory fibers through dorsal root ganglion $\\rightarrow$ monosynaptic excitation in ventral horn $\\rightarrow$ alpha motor neuron fires back $\\rightarrow$ brisk muscle contraction. Balanced by descending corticospinal tone.") +
+      '</div>';
+    return html;
+  }
+
+  /* ── 21. Corticospinal Decussation (UMN vs LMN) ─────────────────────────── */
+
+  function corticospinal(o) {
+    var mode = (o && o.mode) || "compare"; // compare | pathway
+
+    var html = '<svg class="cx-dia cx-dia--corticospinal" viewBox="0 0 340 180" role="img" aria-label="Corticospinal Tract Decussation">' +
+      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="14" y="20">Corticospinal Decussation (Motor Pathway)</text>' +
+      // Motor cortex
+      '<path d="M60 30 C90 10 130 10 160 30" fill="none" stroke="var(--cx-primary)" stroke-width="3"/>' +
+      '<text class="cx-dia-lbl" x="110" y="24" text-anchor="middle" font-size="10" fill="var(--cx-primary)">Primary Motor Cortex (Precentral Gyrus)</text>' +
+      // Corona radiata & internal capsule
+      '<path d="M110 30 L110 70" fill="none" stroke="var(--cx-primary)" stroke-width="2.5"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="150" y="55" font-size="10">Internal Capsule (Post Limb)</text>' +
+      // Brainstem / Medulla
+      '<rect x="80" y="70" width="60" height="40" rx="4" fill="var(--cx-surface)" stroke="var(--cx-line)"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="110" y="90" text-anchor="middle" font-size="9.5">Medullary Pyramids</text>' +
+      // DECUSSATION X
+      '<path d="M100 105 L180 145" fill="none" stroke="#ef4444" stroke-width="2.5"/>' +
+      '<path d="M120 105 L40 145" fill="none" stroke="#2563eb" stroke-width="2.5"/>' +
+      '<text class="cx-dia-lbl" x="170" y="118" font-size="11" font-weight="700" fill="#ef4444">Decussation (85% Cross!)</text>' +
+      // Spinal cord
+      '<line x1="180" y1="145" x2="180" y2="175" stroke="#ef4444" stroke-width="2.5"/>' +
+      '<circle cx="180" cy="175" r="4" fill="#ef4444"/>' +
+      '<text class="cx-dia-lbl" x="195" y="178" font-size="10" fill="#ef4444">Contralateral Anterior Horn</text>' +
+      '</svg>' +
+      '<div class="cx-dia-toggle">' +
+        btn("cx-dia-mode", "compare", "Bedside Signs Comparison", mode === "compare") +
+        btn("cx-dia-mode", "pathway", "Clinical Rule", mode === "pathway") +
+      '</div>' +
+      '<div class="cx-dia-note">' +
+      (mode === "compare"
+        ? '<div class="cx-tablewrap"><table class="cx-table" style="font-size:12px;">' +
+          '<thead><tr><th>Feature</th><th>Upper Motor Neuron (UMN)</th><th>Lower Motor Neuron (LMN)</th></tr></thead>' +
+          '<tbody>' +
+          '<tr><td><b>Tone</b></td><td>Spastic (clasp-knife, velocity-dependent)</td><td>Flaccid (hypotonic, floppy)</td></tr>' +
+          '<tr><td><b>Reflexes</b></td><td>Brisk (hyperreflexia, clonus)</td><td>Diminished or absent (0-1+)</td></tr>' +
+          '<tr><td><b>Plantar (Babinski)</b></td><td>Extensor (dorsiflexion of big toe + fan)</td><td>Flexor (normal downgoing)</td></tr>' +
+          '<tr><td><b>Wasting</b></td><td>Minimal (disuse only, late)</td><td>Severe, rapid neurogenic atrophy</td></tr>' +
+          '<tr><td><b>Fasciculations</b></td><td>Absent</td><td>Present (visible muscle twitching)</td></tr>' +
+          '</tbody></table></div>'
+        : "<b>The Anatomical Rule of Hemiplegia</b>: Because the motor fibers decussate (cross over) in the lower medulla:<br>• A lesion <b>ABOVE the medulla</b> (cortex, internal capsule, brainstem) produces <b>CONTRALATERAL UMN weakness</b>.<br>• A lesion <b>IN the spinal cord</b> produces <b>IPSILATERAL UMN weakness</b> below the lesion level, and <b>LMN weakness AT the level</b> of the damaged root!") +
+      '</div>';
+    return html;
+  }
+
+  /* ── 22. Cerebellar Signs (VANISHED Mnemonic) ───────────────────────────── */
+
+  var CEREBELLAR_ITEMS = [
+    { id: "v", letter: "V", title: "Vertigo", test: "Hallpike maneuver, visual fixation suppression", pearl: "Vestibulocerebellar lesion. Vertigo worsens with head movement, associated with nausea." },
+    { id: "a", letter: "A", title: "Ataxia", test: "Tandem walking (heel-to-toe), broad-based gait", pearl: "Truncal ataxia points to midline VERMIS lesion; appendicular limb ataxia points to ipsilateral HEMISPHERE." },
+    { id: "n", letter: "N", title: "Nystagmus", test: "Follow finger horizontally and vertically", pearl: "Gaze-evoked horizontal nystagmus with fast component beating TOWARDS the side of the lesion." },
+    { id: "i", letter: "I", title: "Intention Tremor", test: "Finger-to-nose test: touch doctor's finger, then own nose", pearl: "Tremor amplitude INCREASES dramatically as the finger reaches its target (kinetic/terminal tremor)." },
+    { id: "s", letter: "S", title: "Slurred Speech", test: "Repeat 'Baby hippopotamus' or 'British constitution'", pearl: "Scanning / staccato dysarthria: words are broken into individual syllables with explosive, irregular emphasis." },
+    { id: "h", letter: "H", title: "Hypotonia", test: "Pendular knee jerk: tap patellar tendon with legs hanging", pearl: "Normally leg swings 1-2 times; in cerebellar hypotonia, the lower leg swings back and forth like a pendulum 4+ times!" },
+    { id: "e", letter: "E", title: "Extremity Dysmetria", test: "Heel-to-shin test: run heel smoothly down the opposite shin", pearl: "Past-pointing and overshoot: patient's heel repeatedly slips off the shin due to lack of distance calibration." },
+    { id: "d", letter: "D", title: "Dysdiadochokinesia", test: "Rapid alternating pronation and supination of hands on thigh", pearl: "Inability to perform rapid alternating movements smoothly; clumsy, slow, arrhythmic slap-and-turn." }
+  ];
+
+  function cerebellumMap(o) {
+    var sel = (o && o.selected) || "i";
+    var chosen = CEREBELLAR_ITEMS[3];
+    for (var i = 0; i < CEREBELLAR_ITEMS.length; i++) if (CEREBELLAR_ITEMS[i].id === sel) chosen = CEREBELLAR_ITEMS[i];
+
+    var html = '<svg class="cx-dia cx-dia--cerebellum" viewBox="0 0 340 150" role="img" aria-label="Cerebellar Signs VANISHED Map">' +
+      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="14" y="20">Cerebellar Examination Mnemonic: VANISHED</text>' +
+      '<path d="M40 50 Q170 20 300 50 Q310 110 240 135 Q170 145 100 135 Q30 110 40 50 Z" fill="rgba(14, 165, 233, 0.08)" stroke="#0ea5e9" stroke-width="2"/>' +
+      '<line x1="170" y1="35" x2="170" y2="140" stroke="#0ea5e9" stroke-dasharray="3 3"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="170" y="80" text-anchor="middle" font-size="10">Vermis (Trunk/Gait)</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="100" y="90" text-anchor="middle" font-size="9.5">Left Hemisphere (Limb)</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="240" y="90" text-anchor="middle" font-size="9.5">Right Hemisphere (Limb)</text>' +
+      '</svg>';
+
+    html += '<div class="cx-dia-toggle" style="flex-wrap:wrap; margin:8px 0;">';
+    for (var j = 0; j < CEREBELLAR_ITEMS.length; j++) {
+      var item = CEREBELLAR_ITEMS[j];
+      html += btn("cx-dia-zone", item.id, item.letter + ": " + item.title, sel === item.id);
+    }
+    html += '</div>';
+
+    html += '<div class="cx-dia-note">' +
+      '<b>' + esc(chosen.letter) + ' — ' + esc(chosen.title) + '</b><br>' +
+      '<b>How to Test at Bedside:</b> ' + esc(chosen.test) + '<br>' +
+      '<b>Clinical Pearl:</b> ' + esc(chosen.pearl) + '<br><br>' +
+      '<i>Golden Rule: Unlike cerebral lesions which are contralateral, cerebellar hemisphere lesions are always <b>IPSILATERAL</b> (same side as the signs)!</i>' +
+      '</div>';
+    return html;
+  }
+
+  /* ── 23. Wiggers Cardiac Cycle & Auscultation Timing ─────────────────────── */
+
+  function wiggers(o) {
+    var mode = (o && o.mode) || "normal"; // normal | s3 | s4
+    var title = mode === "s3" ? "Wiggers Diagram: S3 Ventricular Gallop in Early Diastole"
+      : mode === "s4" ? "Wiggers Diagram: S4 Atrial Gallop in Late Diastole (Presystole)"
+      : "Wiggers Cardiac Cycle: Pressures, Valves & Heart Sounds";
+
+    var html = '<svg class="cx-dia cx-dia--wiggers" viewBox="0 0 340 220" role="img" aria-label="' + esc(title) + '">' +
+      '<line class="cx-dia-axis" x1="20" y1="160" x2="320" y2="160"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="14" y="20">' + esc(title) + '</text>' +
+      // Systole vs Diastole shading
+      '<rect x="70" y="30" width="100" height="130" fill="rgba(239, 68, 68, 0.05)"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--faint" x="120" y="42" text-anchor="middle">SYSTOLE</text>' +
+      '<rect x="170" y="30" width="130" height="130" fill="rgba(37, 99, 235, 0.05)"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--faint" x="235" y="42" text-anchor="middle">DIASTOLE</text>' +
+      // Left Ventricle Pressure (red)
+      '<path d="M30 155 L70 155 C72 70 85 45 120 45 C155 45 168 70 170 155 L300 155" fill="none" stroke="#dc2626" stroke-width="2.5"/>' +
+      '<text class="cx-dia-lbl" x="120" y="60" text-anchor="middle" font-size="10" fill="#dc2626">LV Pressure (120 mmHg)</text>' +
+      // Aortic Pressure (amber)
+      '<path d="M30 90 L70 90 L85 75 C110 50 140 50 170 80 L174 74 L180 82 C210 86 260 88 300 90" fill="none" stroke="#d97706" stroke-width="2"/>' +
+      '<text class="cx-dia-lbl" x="240" y="80" font-size="9" fill="#d97706">Aortic Pressure</text>' +
+      // S1 line
+      '<line x1="70" y1="30" x2="70" y2="200" stroke="var(--cx-primary)" stroke-width="2" stroke-dasharray="2 2"/>' +
+      '<circle cx="70" cy="180" r="10" fill="var(--cx-primary)"/>' +
+      '<text class="cx-dia-lbl" x="70" y="184" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">S1</text>' +
+      '<text class="cx-dia-lbl" x="70" y="202" text-anchor="middle" font-size="8.5">Mitral Closes</text>' +
+      // S2 line
+      '<line x1="170" y1="30" x2="170" y2="200" stroke="var(--cx-teach)" stroke-width="2" stroke-dasharray="2 2"/>' +
+      '<circle cx="170" cy="180" r="10" fill="var(--cx-teach)"/>' +
+      '<text class="cx-dia-lbl" x="170" y="184" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">S2</text>' +
+      '<text class="cx-dia-lbl" x="170" y="202" text-anchor="middle" font-size="8.5">Aortic Closes</text>';
+
+    if (mode === "s3") {
+      html += '<line x1="210" y1="30" x2="210" y2="200" stroke="#059669" stroke-width="2"/>' +
+        '<circle cx="210" cy="180" r="10" fill="#059669"/>' +
+        '<text class="cx-dia-lbl" x="210" y="184" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">S3</text>' +
+        '<text class="cx-dia-lbl" x="210" y="202" text-anchor="middle" font-size="8.5">Rapid Filling (Ken-tuc-ky)</text>';
+    } else if (mode === "s4") {
+      html += '<line x1="50" y1="30" x2="50" y2="200" stroke="#7c3aed" stroke-width="2"/>' +
+        '<circle cx="50" cy="180" r="10" fill="#7c3aed"/>' +
+        '<text class="cx-dia-lbl" x="50" y="184" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">S4</text>' +
+        '<text class="cx-dia-lbl" x="50" y="202" text-anchor="middle" font-size="8.5">Atrial Kick (Ten-nes-see)</text>';
+    }
+
+    html += '</svg>' +
+      '<div class="cx-dia-toggle">' +
+        btn("cx-dia-mode", "normal", "Normal S1/S2", mode === "normal") +
+        btn("cx-dia-mode", "s3", "S3 Ventricular Gallop", mode === "s3") +
+        btn("cx-dia-mode", "s4", "S4 Atrial Gallop", mode === "s4") +
+      '</div>' +
+      '<div class="cx-dia-note">' +
+      (mode === "s3"
+        ? "<b>S3 Ventricular Gallop ('Ken-tuc-ky')</b>: Occurs in early diastole during the rapid ventricular filling phase (~120-170 ms after S2). Caused by large volume of blood crashing into a dilated, non-compliant ventricle. Hallmarked in <b>heart failure with reduced ejection fraction (HFrEF)</b> and severe mitral regurgitation."
+        : mode === "s4"
+          ? "<b>S4 Atrial Gallop ('Ten-nes-see')</b>: Occurs in late diastole immediately before S1. Caused by active atrial contraction pushing blood against a stiff, hypertrophied, non-compliant ventricular wall. Classically heard in <b>chronic hypertension, aortic stenosis, and hypertrophic cardiomyopathy</b>. NEVER heard in AFib!"
+          : "<b>The Mechanical Rule of Heart Sounds</b>: Heart sounds are not murmurs; they are the crisp closure of valves like slamming doors! S1 = Mitral & Tricuspid closing (start of systole). S2 = Aortic & Pulmonary closing (end of systole / start of diastole).") +
+      '</div>';
+    return html;
+  }
+
+  /* ── 24. Cardiac Murmur Timing Strip ────────────────────────────────────── */
+
+  function murmurTiming(o) {
+    var mode = (o && o.mode) || "as"; // as | mr | ar | ms
+
+    var desc = mode === "as" ? "Aortic Stenosis: Ejection Systolic (Crescendo-Decrescendo Diamond)"
+      : mode === "mr" ? "Mitral Regurgitation: Pansystolic / Holosystolic (Plateau Band)"
+      : mode === "ar" ? "Aortic Regurgitation: Early Diastolic (High-Pitched Decrescendo Blow)"
+      : "Mitral Stenosis: Mid-Diastolic Rumbling Murmur with Opening Snap";
+
+    var html = '<svg class="cx-dia cx-dia--murmurtiming" viewBox="0 0 340 180" role="img" aria-label="' + esc(desc) + '">' +
+      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="14" y="20">' + esc(desc) + '</text>' +
+      // Baseline timeline
+      '<line class="cx-dia-axis" x1="20" y1="110" x2="320" y2="110"/>' +
+      // S1
+      '<rect x="50" y="60" width="16" height="100" fill="var(--cx-primary)" rx="4"/>' +
+      '<text class="cx-dia-lbl" x="58" y="115" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">S1</text>' +
+      '<text class="cx-dia-lbl" x="58" y="52" text-anchor="middle" font-size="9.5">Systole Starts</text>' +
+      // S2
+      '<rect x="180" y="60" width="16" height="100" fill="var(--cx-teach)" rx="4"/>' +
+      '<text class="cx-dia-lbl" x="188" y="115" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">S2</text>' +
+      '<text class="cx-dia-lbl" x="188" y="52" text-anchor="middle" font-size="9.5">Diastole Starts</text>' +
+      // Next S1
+      '<rect x="300" y="60" width="16" height="100" fill="var(--cx-primary)" rx="4"/>' +
+      '<text class="cx-dia-lbl" x="308" y="115" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">S1</text>';
+
+    if (mode === "as") {
+      // Diamond shape between S1 and S2
+      html += '<path d="M72 110 L125 72 L174 110 L125 148 Z" fill="rgba(217, 119, 6, 0.25)" stroke="#d97706" stroke-width="2"/>' +
+        '<text class="cx-dia-lbl" x="125" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#d97706">Ejection Systolic</text>';
+    } else if (mode === "mr") {
+      // Continuous plateau rectangle from S1 through S2
+      html += '<rect x="66" y="80" width="114" height="60" fill="rgba(220, 38, 38, 0.22)" stroke="#dc2626" stroke-width="2"/>' +
+        '<text class="cx-dia-lbl" x="123" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Pansystolic (Holosystolic)</text>';
+    } else if (mode === "ar") {
+      // Early diastolic decrescendo wedge
+      html += '<path d="M196 75 L300 110 L196 145 Z" fill="rgba(37, 99, 235, 0.22)" stroke="#2563eb" stroke-width="2"/>' +
+        '<text class="cx-dia-lbl" x="235" y="115" text-anchor="middle" font-size="9.5" font-weight="700" fill="#2563eb">Early Diastolic Decrescendo</text>';
+    } else if (mode === "ms") {
+      // Opening snap line + mid-diastolic rumble
+      html += '<line x1="208" y1="70" x2="208" y2="150" stroke="#7c3aed" stroke-width="2.5"/>' +
+        '<text class="cx-dia-lbl" x="208" y="65" text-anchor="middle" font-size="9" font-weight="700" fill="#7c3aed">OS</text>' +
+        '<path d="M214 110 Q240 92 260 110 Q280 128 298 102 L298 118 Z" fill="rgba(124, 58, 237, 0.25)" stroke="#7c3aed" stroke-width="2"/>' +
+        '<text class="cx-dia-lbl" x="255" y="115" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7c3aed">Diastolic Rumble</text>';
+    }
+
+    html += '</svg>' +
+      '<div class="cx-dia-toggle">' +
+        btn("cx-dia-mode", "as", "Aortic Stenosis (Systolic)", mode === "as") +
+        btn("cx-dia-mode", "mr", "Mitral Regurg (Systolic)", mode === "mr") +
+        btn("cx-dia-mode", "ar", "Aortic Regurg (Diastolic)", mode === "ar") +
+        btn("cx-dia-mode", "ms", "Mitral Stenosis (Diastolic)", mode === "ms") +
+      '</div>' +
+      '<div class="cx-dia-note">' +
+      (mode === "as"
+        ? "<b>Aortic Stenosis (AS)</b>: Harsh, diamond-shaped crescendo-decrescendo ejection systolic murmur. Starts shortly after S1 (after isovolumetric contraction opens aortic valve), peaks mid-systole, and fades before S2. Radiates directly to the right carotid artery."
+        : mode === "mr"
+          ? "<b>Mitral Regurgitation (MR)</b>: High-pitched blowing holosystolic/pansystolic murmur. Runs continuously from S1 to S2 with no gap, because the left ventricle pressure immediately exceeds left atrial pressure. Loudest at apex, radiates to left axilla."
+          : mode === "ar"
+            ? "<b>Aortic Regurgitation (AR)</b>: High-pitched, early diastolic blowing decrescendo murmur. Starts immediately at S2 when aortic pressure is highest, fading throughout diastole. Heard best sitting forward in full expiration at Erb's point (3rd left ICS)."
+            : "<b>Mitral Stenosis (MS)</b>: Mid-diastolic low-pitched rumbling murmur preceded by a sharp Opening Snap (OS). Features presystolic accentuation if in sinus rhythm (disappears in AFib!). Best heard at the apex with the bell in the left lateral position.") +
+      '</div>';
+    return html;
+  }
+
+  /* ── diagram: spirometry curves ─────────────────────────────────────────── */
+  function spirometryCurves(opts) {
+    opts = opts || {};
+    var mode = opts.mode || "normal";
+    var html = '<svg viewBox="0 0 340 210" class="cx-dia-svg" role="img" aria-label="Spirometry loops and curves">' +
+      '<defs><pattern id="spiro-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-opacity="0.06"/></pattern></defs>' +
+      '<rect width="340" height="210" fill="url(#spiro-grid)"/>' +
+      '<line x1="30" y1="20" x2="30" y2="175" class="cx-dia-axis"/>' +
+      '<line x1="30" y1="125" x2="160" y2="125" class="cx-dia-axis"/>' +
+      '<text class="cx-dia-lbl" x="35" y="28" font-size="8.5">Flow (L/s)</text>' +
+      '<text class="cx-dia-lbl" x="135" y="120" font-size="8">Vol (L)</text>' +
+      '<text class="cx-dia-lbl" x="95" y="195" text-anchor="middle" font-size="9" font-weight="700">Flow-Volume Loop</text>' +
+      '<line x1="190" y1="20" x2="190" y2="175" class="cx-dia-axis"/>' +
+      '<line x1="190" y1="175" x2="325" y2="175" class="cx-dia-axis"/>' +
+      '<text class="cx-dia-lbl" x="195" y="28" font-size="8.5">Vol (L)</text>' +
+      '<text class="cx-dia-lbl" x="305" y="170" font-size="8">Time (s)</text>' +
+      '<text class="cx-dia-lbl" x="255" y="195" text-anchor="middle" font-size="9" font-weight="700">Volume-Time Curve</text>';
+
+    if (mode === "normal") {
+      html += '<path d="M40 125 L65 35 L145 125 C125 155 60 155 40 125 Z" fill="rgba(16,185,129,0.18)" stroke="#10b981" stroke-width="2.2"/>' +
+        '<text class="cx-dia-lbl" x="65" y="30" font-size="8" fill="#10b981" text-anchor="middle">PEF ~8L/s</text>' +
+        '<path d="M190 175 Q215 70 250 50 L320 48" fill="none" stroke="#10b981" stroke-width="2.2"/>' +
+        '<line x1="225" y1="175" x2="225" y2="75" stroke="#10b981" stroke-dasharray="2,2"/>' +
+        '<circle cx="225" cy="75" r="3" fill="#10b981"/>' +
+        '<text class="cx-dia-lbl" x="232" y="80" font-size="8" fill="#10b981">FEV1 3.2L</text>' +
+        '<text class="cx-dia-lbl" x="315" y="42" font-size="8" fill="#10b981" text-anchor="end">FVC 4.0L</text>';
+    } else if (mode === "obstructive") {
+      html += '<path d="M40 125 L60 65 Q85 118 145 125 C125 155 60 155 40 125 Z" fill="rgba(239,68,68,0.2)" stroke="#ef4444" stroke-width="2.2"/>' +
+        '<text class="cx-dia-lbl" x="90" y="105" font-size="8.5" font-weight="700" fill="#ef4444">Scooping (Obstruction)</text>' +
+        '<path d="M190 175 Q240 140 320 85" fill="none" stroke="#ef4444" stroke-width="2.2"/>' +
+        '<line x1="225" y1="175" x2="225" y2="150" stroke="#ef4444" stroke-dasharray="2,2"/>' +
+        '<circle cx="225" cy="150" r="3" fill="#ef4444"/>' +
+        '<text class="cx-dia-lbl" x="232" y="148" font-size="8" fill="#ef4444">FEV1 1.5L</text>' +
+        '<text class="cx-dia-lbl" x="315" y="78" font-size="8" fill="#ef4444" text-anchor="end">Slow Rise (Ratio 43%)</text>';
+    } else if (mode === "restrictive") {
+      html += '<path d="M40 125 L55 50 L95 125 C85 145 50 145 40 125 Z" fill="rgba(59,130,246,0.2)" stroke="#3b82f6" stroke-width="2.2"/>' +
+        '<text class="cx-dia-lbl" x="70" y="44" font-size="8" fill="#3b82f6" text-anchor="middle">Miniature Witch\'s Hat</text>' +
+        '<path d="M190 175 Q210 100 235 90 L320 90" fill="none" stroke="#3b82f6" stroke-width="2.2"/>' +
+        '<line x1="225" y1="175" x2="225" y2="95" stroke="#3b82f6" stroke-dasharray="2,2"/>' +
+        '<circle cx="225" cy="95" r="3" fill="#3b82f6"/>' +
+        '<text class="cx-dia-lbl" x="232" y="105" font-size="8" fill="#3b82f6">FEV1 2.1L / FVC 2.4L</text>' +
+        '<text class="cx-dia-lbl" x="315" y="82" font-size="8" fill="#3b82f6" text-anchor="end">Ratio 88% (Normal/High)</text>';
+    }
+
+    html += '</svg>' +
+      '<div class="cx-dia-toggle">' +
+        btn("cx-dia-mode", "normal", "Normal", mode === "normal") +
+        btn("cx-dia-mode", "obstructive", "Obstructive (Asthma/COPD)", mode === "obstructive") +
+        btn("cx-dia-mode", "restrictive", "Restrictive (Fibrosis)", mode === "restrictive") +
+      '</div>' +
+      '<div class="cx-dia-note">' +
+      (mode === "normal"
+        ? "<b>Normal Pattern</b>: FEV1/FVC ≥ 0.70 (70–80%). Rapid emptying of >75% lung volume in the very first second, with linear expiratory descent."
+        : mode === "obstructive"
+          ? "<b>Obstructive Defect (COPD / Asthma)</b>: FEV1/FVC < 0.70. Airway collapse on forced expiration creates the hallmark <i>concave scooping</i>. Volume-time curve shows prolonged slow exhalation."
+          : "<b>Restrictive Defect (Pulmonary Fibrosis, Kyphoscoliosis)</b>: FEV1/FVC normal or increased (≥ 0.70), but both FEV1 and FVC are proportionally reduced (<80% predicted). Produces a shrunken 'miniature' loop.") +
+      '</div>';
+    return html;
+  }
+
+  /* ── diagram: pleural signs matrix ──────────────────────────────────────── */
+  function pleuralSigns(opts) {
+    opts = opts || {};
+    var mode = opts.mode || "consolidation";
+    var html = '<svg viewBox="0 0 340 200" class="cx-dia-svg" role="img" aria-label="Pleural and pulmonary physical signs">' +
+      '<path d="M120 20 C120 15 220 15 220 20 L240 60 C280 90 280 160 250 180 C210 195 130 195 90 180 C60 160 60 90 100 60 Z" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="2"/>' +
+      (mode === "effusion"
+        ? '<line x1="170" y1="20" x2="152" y2="70" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/><text class="cx-dia-lbl" x="140" y="35" font-size="8" fill="#ef4444">Pushed away</text>'
+        : mode === "pneumothorax"
+          ? '<line x1="170" y1="20" x2="148" y2="70" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/><text class="cx-dia-lbl" x="135" y="35" font-size="8" fill="#ef4444">Pushed (Tension)</text>'
+          : '<line x1="170" y1="20" x2="170" y2="70" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/><text class="cx-dia-lbl" x="175" y="35" font-size="8" fill="#10b981">Central</text>') +
+      '<path d="M110 65 C85 85 85 140 105 165 C130 170 160 160 160 140 L160 65 Z" fill="rgba(16,185,129,0.12)" stroke="#10b981" stroke-width="1"/>' +
+      '<text class="cx-dia-lbl" x="130" y="115" text-anchor="middle" font-size="8.5" fill="#10b981">Normal Lung</text>';
+
+    if (mode === "consolidation") {
+      html += '<path d="M230 65 C255 85 255 140 235 165 C210 170 180 160 180 140 L180 65 Z" fill="rgba(245,158,11,0.3)" stroke="#f59e0b" stroke-width="2"/>' +
+        '<circle cx="218" cy="130" r="22" fill="#f59e0b" fill-opacity="0.45"/>' +
+        '<text class="cx-dia-lbl" x="218" y="126" text-anchor="middle" font-size="9" font-weight="700" fill="#d97706">Consolidation</text>' +
+        '<text class="cx-dia-lbl" x="218" y="139" text-anchor="middle" font-size="7.5" fill="#b45309">Dull / Bronchial BS / ↑TVF</text>';
+    } else if (mode === "effusion") {
+      html += '<path d="M230 65 C255 85 255 140 235 165 C210 170 180 160 180 140 L180 65 Z" fill="rgba(59,130,246,0.1)" stroke="#3b82f6" stroke-width="1.5"/>' +
+        '<path d="M180 120 Q215 130 250 110 L242 160 C220 170 185 165 180 140 Z" fill="rgba(37,99,235,0.4)" stroke="#2563eb" stroke-width="2"/>' +
+        '<text class="cx-dia-lbl" x="215" y="145" text-anchor="middle" font-size="9" font-weight="700" fill="#1d4ed8">Pleural Fluid</text>' +
+        '<text class="cx-dia-lbl" x="215" y="157" text-anchor="middle" font-size="7.5" fill="#1e40af">Stony Dull / Absent BS / ↓TVF</text>';
+    } else if (mode === "pneumothorax") {
+      html += '<path d="M230 65 C255 85 255 140 235 165 C210 170 180 160 180 140 L180 65 Z" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,3"/>' +
+        '<circle cx="192" cy="100" r="14" fill="rgba(107,114,128,0.6)" stroke="#4b5563" stroke-width="1.5"/>' +
+        '<text class="cx-dia-lbl" x="192" y="103" text-anchor="middle" font-size="7" fill="#fff">Collapsed</text>' +
+        '<text class="cx-dia-lbl" x="228" y="135" text-anchor="middle" font-size="9" font-weight="700" fill="#dc2626">Pleural Air</text>' +
+        '<text class="cx-dia-lbl" x="228" y="148" text-anchor="middle" font-size="7.5" fill="#b91c1c">Hyperresonant / Silent BS</text>';
+    }
+
+    html += '</svg>' +
+      '<div class="cx-dia-toggle">' +
+        btn("cx-dia-mode", "consolidation", "Consolidation", mode === "consolidation") +
+        btn("cx-dia-mode", "effusion", "Pleural Effusion", mode === "effusion") +
+        btn("cx-dia-mode", "pneumothorax", "Pneumothorax", mode === "pneumothorax") +
+      '</div>' +
+      '<div class="cx-dia-note">' +
+      (mode === "consolidation"
+        ? "<b>Lobar Consolidation (Pneumonia)</b>: Alveoli filled with solid exudate with patent bronchus. Sound travels <i>faster and clearer</i> through solid: Percussion is <b>dull</b>, breath sounds are <b>bronchial</b> (tubular with high pitch), Vocal Fremitus/Resonance is <b>increased</b>, with whispered pectoriloquy and aegophony (E-to-A change)."
+        : mode === "effusion"
+          ? "<b>Pleural Effusion</b>: Fluid occupies the pleural space between chest wall and lung, acting as an acoustic barrier. Percussion is hallmark <b>stony dull</b> (like tapping a brick wall), breath sounds are <b>greatly reduced or absent</b>, and vocal resonance is <b>diminished</b>. Large effusions push trachea away."
+          : "<b>Pneumothorax</b>: Air in the pleural space breaks lung contact. Percussion is <b>hyperresonant</b> (like an inflated drum), breath sounds are <b>silent/absent</b>, and vocal resonance is <b>diminished</b>. In a tension pneumothorax, mediastinum and trachea are actively pushed away with hemodynamic collapse.") +
+      '</div>';
+    return html;
+  }
+
+  /* ── diagram: shifting dullness in ascites ───────────────────────────────── */
+  function shiftingDullness(opts) {
+    opts = opts || {};
+    var mode = opts.mode || "supine";
+    var html = '<svg viewBox="0 0 340 200" class="cx-dia-svg" role="img" aria-label="Shifting dullness and ascites mechanics">' +
+      '<defs><linearGradient id="fluid-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.35"/><stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.6"/></linearGradient></defs>';
+
+    if (mode === "supine") {
+      html += '<path d="M50 110 C50 60 290 60 290 110 C290 150 50 150 50 110 Z" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="2.5"/>' +
+        '<path d="M52 110 C60 145 100 148 100 148 L100 115 C80 115 52 112 52 110 Z" fill="url(#fluid-grad)" stroke="#2563eb" stroke-width="1.5"/>' +
+        '<path d="M288 110 C280 145 240 148 240 148 L240 115 C260 115 288 112 288 110 Z" fill="url(#fluid-grad)" stroke="#2563eb" stroke-width="1.5"/>' +
+        '<circle cx="170" cy="90" r="18" fill="rgba(245,158,11,0.25)" stroke="#f59e0b" stroke-width="2"/>' +
+        '<circle cx="150" cy="102" r="13" fill="rgba(245,158,11,0.25)" stroke="#f59e0b" stroke-width="1.8"/>' +
+        '<circle cx="190" cy="102" r="13" fill="rgba(245,158,11,0.25)" stroke="#f59e0b" stroke-width="1.8"/>' +
+        '<text class="cx-dia-lbl" x="170" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#d97706">Umbilicus (Air-Filled Bowel Floats)</text>' +
+        '<text class="cx-dia-lbl" x="170" y="65" text-anchor="middle" font-size="8.5" fill="#10b981">RESONANT</text>' +
+        '<text class="cx-dia-lbl" x="65" y="165" text-anchor="middle" font-size="8.5" font-weight="700" fill="#2563eb">Left Flank DULL</text>' +
+        '<text class="cx-dia-lbl" x="275" y="165" text-anchor="middle" font-size="8.5" font-weight="700" fill="#2563eb">Right Flank DULL</text>';
+    } else {
+      html += '<path d="M50 110 C50 60 290 60 290 110 C290 150 50 150 50 110 Z" transform="rotate(35 170 110)" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="2.5"/>' +
+        '<path d="M120 160 C150 178 260 165 270 120 C250 125 180 135 120 160 Z" fill="url(#fluid-grad)" stroke="#2563eb" stroke-width="1.8"/>' +
+        '<circle cx="115" cy="80" r="16" fill="rgba(245,158,11,0.25)" stroke="#f59e0b" stroke-width="2"/>' +
+        '<circle cx="95" cy="92" r="12" fill="rgba(245,158,11,0.25)" stroke="#f59e0b" stroke-width="1.8"/>' +
+        '<text class="cx-dia-lbl" x="90" y="55" text-anchor="middle" font-size="9.5" font-weight="700" fill="#10b981">Left Flank SHIFTED to RESONANT</text>' +
+        '<text class="cx-dia-lbl" x="210" y="185" text-anchor="middle" font-size="9.5" font-weight="700" fill="#2563eb">Dependent Flank SHIFTED to DULL</text>';
+    }
+
+    html += '</svg>' +
+      '<div class="cx-dia-toggle">' +
+        btn("cx-dia-mode", "supine", "1. Patient Supine", mode === "supine") +
+        btn("cx-dia-mode", "lateral", "2. Rolled onto Side (Wait 30s)", mode === "lateral") +
+      '</div>' +
+      '<div class="cx-dia-note">' +
+      (mode === "supine"
+        ? "<b>Patient Supine</b>: Gravity pulls heavy ascitic fluid down into the flanks (producing dull percussion bilaterally), while air-filled gas loops in bowel float to the highest point in the center (producing resonant percussion around umbilicus)."
+        : "<b>Patient Rolled on Side</b>: When the patient rolls onto their side, gravity shifts all peritoneal fluid down to the dependent flank within 30 seconds. The previously dull upper flank is now occupied by floating bowel and becomes <b>resonant</b>! Percussing from the new resonant zone down to the new dullness proves shifting dullness (>500 mL fluid).") +
+      '</div>';
+    return html;
+  }
+
+  /* ── diagram: Murphy sign ────────────────────────────────────────────────── */
+  function murphySign(opts) {
+    opts = opts || {};
+    var mode = opts.mode || "rest";
+    var html = '<svg viewBox="0 0 340 200" class="cx-dia-svg" role="img" aria-label="Murphy sign inspiratory catch mechanics">' +
+      '<path d="M50 40 Q170 30 290 40 L290 170 Q170 180 50 170 Z" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="2"/>' +
+      '<path d="M70 45 Q120 70 170 85" fill="none" stroke="#6b7280" stroke-width="3"/>' +
+      '<text class="cx-dia-lbl" x="110" y="62" font-size="8" fill="#6b7280">Right Costal Margin</text>' +
+      '<line x1="130" y1="35" x2="130" y2="175" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="3,3"/>' +
+      '<text class="cx-dia-lbl" x="130" y="32" font-size="7.5" fill="#9ca3af" text-anchor="middle">Midclavicular line</text>' +
+      '<path d="M75 55 Q130 85 170 95 L170 60 Z" fill="rgba(180,83,9,0.2)" stroke="#b45309" stroke-width="1.5"/>';
+
+    if (mode === "rest") {
+      html += '<ellipse cx="130" cy="82" rx="14" ry="18" fill="rgba(239,68,68,0.3)" stroke="#ef4444" stroke-width="2"/>' +
+        '<text class="cx-dia-lbl" x="155" y="86" font-size="8" fill="#ef4444">Inflamed Gallbladder</text>' +
+        '<path d="M122 130 L122 105 Q125 100 130 100 Q135 100 138 105 L138 130 Z" fill="rgba(59,130,246,0.3)" stroke="#2563eb" stroke-width="2"/>' +
+        '<text class="cx-dia-lbl" x="130" y="145" text-anchor="middle" font-size="8" fill="#2563eb">Examiner fingers gentle pressure</text>' +
+        '<text class="cx-dia-lbl" x="240" y="90" font-size="8.5" fill="#10b981">Diaphragm relaxed</text>' +
+        '<text class="cx-dia-lbl" x="240" y="105" font-size="8.5" fill="#10b981">Patient breathing quietly</text>';
+    } else {
+      html += '<path d="M70 30 Q170 50 270 30" fill="none" stroke="#10b981" stroke-width="2"/>' +
+        '<text class="cx-dia-lbl" x="240" y="60" font-size="8" fill="#10b981">Diaphragm descends 4-5cm ↓</text>' +
+        '<ellipse cx="130" cy="106" rx="14" ry="18" fill="rgba(239,68,68,0.6)" stroke="#b91c1c" stroke-width="2.5"/>' +
+        '<path d="M122 140 L122 110 Q125 105 130 105 Q135 105 138 110 L138 140 Z" fill="rgba(59,130,246,0.5)" stroke="#1d4ed8" stroke-width="2"/>' +
+        '<path d="M130 105 L118 95 M130 105 L142 95 M130 105 L130 88 M130 105 L145 108 M130 105 L115 108" stroke="#ef4444" stroke-width="2.5"/>' +
+        '<text class="cx-dia-lbl" x="240" y="105" font-size="9" font-weight="700" fill="#dc2626">INSPIRATORY CATCH!</text>' +
+        '<text class="cx-dia-lbl" x="240" y="120" font-size="8" fill="#dc2626">Sudden arrest in breathing</text>' +
+        '<text class="cx-dia-lbl" x="240" y="132" font-size="8" fill="#dc2626">due to acute peritoneal pain</text>';
+    }
+
+    html += '</svg>' +
+      '<div class="cx-dia-toggle">' +
+        btn("cx-dia-mode", "rest", "1. Gentle Subcostal Palpation at Rest", mode === "rest") +
+        btn("cx-dia-mode", "inspiration", "2. Deep Inspiration (Diaphragm Descends)", mode === "inspiration") +
+      '</div>' +
+      '<div class="cx-dia-note">' +
+      (mode === "rest"
+        ? "<b>Step 1</b>: Gently press the palpating hand under the right costal margin at the lateral border of the rectus muscle (mid-clavicular line) while the patient relaxes."
+        : "<b>Step 2 (Positive Murphy Sign)</b>: Ask the patient to take a deep breath. As the diaphragm contracts and descends, it pushes the acutely inflamed gallbladder directly down onto the examiner's palpating fingertips. The sudden, intense peritoneal pain forces an involuntary sharp arrest in breathing ('inspiratory catch'). Must repeat on the left side to confirm specificity for acute cholecystitis.") +
+      '</div>';
+    return html;
+  }
+
   /* ── registry ────────────────────────────────────────────────────────────── */
-
-
 
   var DIAGRAMS = {
     "diagram.flowvolume":   { title: "Flow-volume loop", render: flowVolume, interactive: true },
@@ -641,7 +1138,17 @@
     "diagram.stemi":         { title: "STEMI evolution on serial ECGs", render: stemiEvolution },
     "diagram.precordium":    { title: "Precordium Auscultation & Radiation Map", render: precordiumMap, interactive: true, audio: true },
     "diagram.jvp":           { title: "JVP Waveform & Pathologies", render: jvpWaveform, interactive: true },
-    "diagram.dermatomes":    { title: "Dermatome & Reflex Landmarks", render: dermatomeMap, interactive: true }
+    "diagram.dermatomes":    { title: "Dermatome & Reflex Landmarks", render: dermatomeMap, interactive: true },
+    "diagram.cranial":       { title: "Cranial Nerves I-XII Map", render: cranialMap, interactive: true },
+    "diagram.reflexarc":     { title: "Deep Tendon Reflex Arc Circuit", render: reflexArc, interactive: true },
+    "diagram.corticospinal": { title: "Corticospinal Decussation & Motor Signs", render: corticospinal, interactive: true },
+    "diagram.cerebellum":    { title: "Cerebellar Signs & Coordination", render: cerebellumMap, interactive: true },
+    "diagram.wiggers":       { title: "Wiggers Cardiac Cycle & Auscultation", render: wiggers, interactive: true },
+    "diagram.murmurtiming":  { title: "Murmur Timing Strip", render: murmurTiming, interactive: true },
+    "diagram.spirocurves":   { title: "Spirometry Loops & Curves (Obstructive vs Restrictive)", render: spirometryCurves, interactive: true },
+    "diagram.pleuralsigns":  { title: "Pleural & Pulmonary Signs (Consolidation, Effusion, PTX)", render: pleuralSigns, interactive: true },
+    "diagram.shiftingdullness": { title: "Ascites Mechanics: Shifting Dullness", render: shiftingDullness, interactive: true },
+    "diagram.murphysign":    { title: "Murphy Sign & Gallbladder Anatomy", render: murphySign, interactive: true }
   };
 
   function has(id) { return Object.prototype.hasOwnProperty.call(DIAGRAMS, id); }

@@ -189,7 +189,7 @@ try {
 
   // Walk to the first question and prove no answer is on screen before the student commits.
   let foundAsk = false;
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 24; i++) {
     if (await ev("!!document.querySelector('#clinixRoot .cx-turn--ask')")) { foundAsk = true; break; }
     const next = await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-turn-next\"]')");
     if (!next) break;

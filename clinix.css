@@ -845,3 +845,69 @@ html.cx-lock .mc-overlay { z-index: 1300; }
 #clinixRoot .cx-physio-range::-webkit-slider-thumb {
   -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--cx-primary); cursor: pointer;
 }
+
+/* ── 10x Pedagogical Enrichment: Universal Bedside Cards ────────────────── */
+
+#clinixRoot .cx-teach-analogy {
+  margin: 14px 0; padding: 14px 16px; border-radius: var(--cx-r);
+  background: rgba(245, 158, 11, 0.08); border: 1.5px solid rgba(245, 158, 11, 0.35);
+  display: flex; flex-direction: column; gap: 6px;
+}
+#clinixRoot .cx-teach-analogy-h {
+  display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: #d97706;
+}
+#clinixRoot .cx-teach-analogy-p {
+  margin: 0; font-size: 14px; line-height: 1.55; color: var(--cx-ink); font-style: italic;
+}
+
+#clinixRoot .cx-teach-sensory {
+  margin: 14px 0; display: grid; grid-template-columns: 1fr; gap: 10px;
+}
+@media (min-width: 600px) {
+  #clinixRoot .cx-teach-sensory { grid-template-columns: 1fr 1fr; }
+}
+#clinixRoot .cx-sensory-box {
+  padding: 12px 14px; border-radius: var(--cx-r); border: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-sensory-norm {
+  background: rgba(16, 185, 129, 0.07); border-color: rgba(16, 185, 129, 0.3);
+}
+#clinixRoot .cx-sensory-norm .cx-sensory-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; color: #059669; margin-bottom: 4px;
+}
+#clinixRoot .cx-sensory-abnorm {
+  background: rgba(239, 68, 68, 0.07); border-color: rgba(239, 68, 68, 0.3);
+}
+#clinixRoot .cx-sensory-abnorm .cx-sensory-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; color: #dc2626; margin-bottom: 4px;
+}
+#clinixRoot .cx-sensory-b {
+  font-size: 13px; line-height: 1.45; color: var(--cx-ink); margin: 0;
+}
+
+#clinixRoot .cx-teach-traps {
+  margin: 14px 0; padding: 14px 16px; border-radius: var(--cx-r);
+  background: rgba(225, 29, 72, 0.07); border-left: 4px solid #e11d48;
+}
+#clinixRoot .cx-teach-traps-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: #be123c; margin-bottom: 6px;
+}
+#clinixRoot .cx-teach-traps-list {
+  margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: var(--cx-ink);
+}
+
+#clinixRoot .cx-teach-technique {
+  margin: 14px 0; padding: 14px 16px; border-radius: var(--cx-r);
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-teach-technique-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--cx-primary); margin-bottom: 8px;
+}
+#clinixRoot .cx-teach-technique-steps {
+  margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.55; color: var(--cx-ink);
+}
