@@ -137,7 +137,7 @@ test("the dietitian's grant writes a diet and nothing else; the kitchen writes o
   const { grantForRole } = await import("../functions/_wardsynq/actor.js");
   assert.deepEqual(grantForRole("kitchen").write, ["MealRound"]);
   assert.ok(!grantForRole("kitchen").read.includes("ClinicalNote"));
-  assert.deepEqual(grantForRole("dietitian").write, ["DietOrder", "MealRound"]);
+  assert.deepEqual(grantForRole("dietitian").write, ["DietOrder", "MealRound", "StaffMessage", "StaffMessageRead"]);
   assert.deepEqual(grantForRole("cssd").write, ["InstrumentSet", "SterilizerLoad", "CssdCycle"]);
   assert.ok(!grantForRole("cssd").read.includes("Patient"));
 });
