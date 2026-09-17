@@ -118,7 +118,9 @@ function encounterStatusFor(ticketStatus) {
 /** PURE. Epoch-ms (this codebase's `now()` convention) or an ISO string, to ISO. `null` if neither. */
 function toIso(v) {
   if (v == null || v === "") return null;
-  if (typeof v === "number" && Number.isFinite(v) && v > 0) return new Date(v).toISOString();
+  /* The queue writes 0 for a time not yet reached. A number that is not a positive epoch is no time at all; before
+   * 2026-09-17 a 0 fell through to Date.parse("0"), which reads as the year 2000. */
+  if (typeof v === "number") return Number.isFinite(v) && v > 0 ? new Date(v).toISOString() : null;
   const parsed = Date.parse(String(v));
   return Number.isNaN(parsed) ? null : new Date(parsed).toISOString();
 }
