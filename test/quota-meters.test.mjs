@@ -185,7 +185,9 @@ test("the refusal body carries the count as a bare number and no patient identif
   assert.equal(body.copy.lines[0], "4 patients discharged this month have not heard from you.");
   const json = JSON.stringify(body);
   // Nothing that could identify a patient (or leak the doctor's uid) may ride the payload.
-  for (const leak of [/fbuid-123/, /\bmrn\b/i, /episodeId/, /patientKeyHash/, /phone/i, /mobile/i, /\b\d{10}\b/]) {
+  /* Phone/mobile are matched as JSON FIELD NAMES, not as the word: the everyday-spend comparison
+     line on the 100 pack is "Less than a new phone.", which is copy, not a patient identifier. */
+  for (const leak of [/fbuid-123/, /\bmrn\b/i, /episodeId/, /patientKeyHash/, /"(phone|mobile)[A-Za-z]*"\s*:/i, /encMobile/i, /\b\d{10}\b/]) {
     assert.ok(!leak.test(json), "refusal payload leaks: " + leak);
   }
   assert.deepEqual(Object.keys(body).sort(), ["copy", "error", "feature", "packs", "remaining"]);
