@@ -201,6 +201,7 @@
   WSQ._bugsHtml = bugsHtml;
   WSQ._renderPackages = function (c, host) { return renderPackages(c, host); };
   WSQ._renderGstSettings = function (c, host) { return renderGstSettings(c, host); };
+  WSQ._renderRcmSettings = function (c, host) { return renderRcmSettings(c, host); };
   /** The one request each button sends. kind: in_progress | solved | open | remove. */
   function bugAction(c, kind, r, note) {
     if (kind === "remove") return c.api("/ward/bug-report-remove", { orgId: c.state.orgId, id: r.id, expectedVersion: r.version });
@@ -1155,8 +1156,9 @@
         '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.howBilled", "Bed, nursing and doctor visit prices are charged for each day of an inpatient stay. Name a test or medicine exactly as it is ordered, so the bill can find its price.")) + "</p>" +
         '<button type="button" class="btn" id="admTrfAdd">' + c.esc(T(c, "site.admin.add", "Add")) + '</button><div id="admTrfMsg"></div>' +
         '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.everyChange", "Every change is recorded with the old and new price.")) + "</p></div>" +
-        '<div id="admGstHost"></div><div id="admPkgHost"></div>';
+        '<div id="admGstHost"></div><div id="admRcmHost"></div><div id="admPkgHost"></div>';
       renderGstSettings(c, document.getElementById("admGstHost"));
+      renderRcmSettings(c, document.getElementById("admRcmHost"));
       renderPackages(c, document.getElementById("admPkgHost"));
 
       function save(item) {
@@ -1303,6 +1305,40 @@
     }, function () {
       host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.gst.loadFailed", "The GST settings could not be loaded. Do not read this as the defaults.")) + "</div></div>";
     });
+  }
+
+  /* CLAIMS SETTINGS (rcm-claims-ops, functions/_wardsynq/claims-ops.js): the hospital's own denial reasons, one per line
+   * as CODE: label, and the receivables ageing bands in days. Nothing is preset; with no bands the desk shows totals by
+   * payer without ageing. null = loading, failed = said, never read as none. */
+  function renderRcmSettings(c, host) {
+    if (!host) return;
+    var title = "<h2>" + c.esc(T(c, "site.admin.rcm.title", "Claims settings")) + "</h2>";
+    host.innerHTML = '<div class="card">' + title + '<span class="spin"></span></div>';
+    var failed = function () { host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.rcm.loadFailed", "The claims settings could not be loaded. Do not read this as none set.")) + "</div></div>"; };
+    return c.api("/org/rcm-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok || !r.settings) { failed(); return; }
+      var s = r.settings;
+      host.innerHTML = '<div class="card">' + title +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.rcm.intro", "Denial reasons are this hospital's own list; the billing desk classifies each denial against it with a root cause. Ageing bands group unpaid bills by days since they were raised.")) + "</p>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.rcm.reasons", "Denial reasons, one per line, as CODE: label")) + '</span><textarea id="admRcmReasons" rows="6">' +
+          c.esc((s.denialReasons || []).map(function (x) { return x.code + ": " + x.label; }).join("\n")) + "</textarea></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.rcm.bands", "Ageing bands in days, rising, separated by commas (for example 30, 60, 90)")) + '</span><input id="admRcmBands" value="' + c.esc((s.ageingBands || []).join(", ")) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.rcm.reason", "Why are the settings changing?")) + '</span><input id="admRcmReason"></label>' +
+        '<button type="button" class="btn" id="admRcmSave">' + c.esc(T(c, "site.admin.rcm.save", "Save claims settings")) + '</button><div id="admRcmMsg"></div></div>';
+      document.getElementById("admRcmSave").onclick = function () {
+        var out = document.getElementById("admRcmMsg");
+        var lines = document.getElementById("admRcmReasons").value.split("\n").map(function (x) { return x.trim(); }).filter(Boolean);
+        var bad = lines.filter(function (x) { return x.indexOf(":") < 1; })[0];
+        if (bad) { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.rcm.errLine", "Each denial reason is CODE: label.")) + "</div>"; return; }
+        var reasons = lines.map(function (x) { var i = x.indexOf(":"); return { code: x.slice(0, i).trim(), label: x.slice(i + 1).trim() }; });
+        var bands = document.getElementById("admRcmBands").value.split(",").map(function (x) { return x.trim(); }).filter(Boolean).map(Number);
+        out.innerHTML = '<span class="spin"></span>';
+        c.api("/org/rcm-settings", { orgId: c.state.orgId, settings: { denialReasons: reasons, ageingBands: bands }, reason: document.getElementById("admRcmReason").value.trim() }).then(function (x) {
+          if (!x || !x.ok) { out.innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, x))) + "</div>"; return; }
+          c.toast(x.changed && x.changed.length ? T(c, "site.admin.saved", "Saved.") : T(c, "site.admin.rcm.nothingChanged", "Nothing changed.")); renderRcmSettings(c, host);
+        }, function () { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.rcm.noResponse", "No response from the server. The settings may not have been saved; reload to check.")) + "</div>"; });
+      };
+    }, failed);
   }
 
   /* PACKAGES (gap-claims-gst-2, functions/_wardsynq/packages.js). A package price for a whole episode under a scheme:
@@ -2942,6 +2978,11 @@
         ca_opinion: T(c, "site.admin.payerContract.basisCa", "Chartered accountant's opinion"), contract_clause: T(c, "site.admin.payerContract.basisClause", "Contract clause") } },
       gstBasisRef: { label: T(c, "site.admin.payerContract.basisRef", "Opinion reference, or contract and clause") },
       gstBasisDate: { label: T(c, "site.admin.payerContract.basisDate", "Date of the opinion or contract (YYYY-MM-DD)") },
+      // rcm-claims-ops: the payer's claim checklist (functions/_wardsynq/claims-ops.js).
+      queryResponseDays: { label: T(c, "site.admin.payerRules.queryDays", "Days this payer gives to answer a query") },
+      claimDocuments: { label: T(c, "site.admin.payerRules.claimDocs", "Documents required with a claim, separated by semicolons") },
+      requireSignedDischargeSummary: { label: T(c, "site.admin.payerRules.signedSummary", "A signed discharge summary is required"), options: { "": T(c, "site.admin.payerRules.notRequired", "Not required"), yes: T(c, "site.admin.payerRules.required", "Required") } },
+      requireIcd10Codes: { label: T(c, "site.admin.payerRules.icd10", "Diagnoses must be ICD-10 codes from the loaded code set"), options: { "": T(c, "site.admin.payerRules.notRequired", "Not required"), yes: T(c, "site.admin.payerRules.required", "Required") } },
     };
   }
   function payerPartiesHtml(c, x) {

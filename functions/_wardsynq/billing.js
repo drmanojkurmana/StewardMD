@@ -59,6 +59,7 @@ import { nhcxAdapterDeps, ELIGIBILITY_TYPE } from "./nhcx.js";
 import { makeSafeFetch } from "../_connect/onboard/net.js";
 import { makeSecrets } from "../_connect/secrets.js";
 import { priceWith } from "./charge-capture.js";
+import { scrubClaim, claimFacts, checklistOf, recordPayerQuery, answerOpenQueries, markDocuments, classifyDenial } from "./claims-ops.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -249,11 +250,13 @@ async function codeClaimForEncounter(request, env, ctx) {
   }
 }
 
-const ACTIONS = Object.freeze(["submit", "deny", "resubmit", "adjudicate", "acknowledge", "settle", "balance-to-patient"]);
+/* rcm-claims-ops (claims-ops.js): a payer query arriving, documents obtained for the claim, and the hospital's own reason
+ * code and root cause on a denial. Each is recorded by a person and sends nothing. */
+const ACTIONS = Object.freeze(["submit", "deny", "resubmit", "adjudicate", "acknowledge", "settle", "balance-to-patient", "query", "documents", "classify-denial"]);
 
 /**
  * Moves a claim through its lifecycle.
- * ctx: { migration, claimId, action, reason?, codes?, now? }
+ * ctx: { migration, claimId, action, reason?, codes?, now?, overrideReason?, text?, receivedAt?, documents?, denialCode?, rootCause?, rcm?, payers? }
  */
 async function claimAction(request, env, ctx) {
   const mig = ctx.migration;
@@ -291,12 +294,29 @@ async function claimAction(request, env, ctx) {
     };
   }
 
+  /* THE CHECKLIST BEFORE A CLAIM LEAVES (claims-ops.js scrubClaim). A blocking finding refuses the submission and names
+   * itself; a person may still send it with a reason, kept on the claim with who, when and what was overridden. The
+   * facts are read through this actor's own grants, and a fact the grant cannot read is said as unchecked. */
+  let scrub = null;
+  const overrideReason = str(ctx.overrideReason).slice(0, 1000);
+  if (action === "submit" || action === "resubmit") {
+    const payerId = str(ctx.payerId) || claim.payerId;
+    scrub = scrubClaim({ ...claim, payerId }, await claimFacts(svc, claim), { payer: payerById(ctx.payers, payerId), submittedAmount: ctx.submittedAmount, now });
+    if (!scrub.clean && !overrideReason) {
+      return {
+        ...base, ok: false, status: 422, error: "claim_checklist_blocked", findings: scrub.blocking, warnings: scrub.warnings, claim: null,
+        detail: `Not sent: ${scrub.blocking.map((f) => f.text).join(" ")} Fix these, or send it anyway with a reason, which is recorded permanently on the claim.`,
+      };
+    }
+  }
+
   let next;
   try {
     if (action === "submit") next = submit(claim, { by, now, submittedAmount: ctx.submittedAmount });
     else if (action === "deny") {
       if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "a denial carries the payer's reason", claim: null };
       next = deny(claim, { reason, by, now, deniedAmount: ctx.deniedAmount });
+      if (str(ctx.denialCode)) classifyDenial(next, { denialCode: ctx.denialCode, rootCause: ctx.rootCause, rcm: ctx.rcm, by, now });
     } else if (action === "resubmit") {
       if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "a resubmission names why", claim: null };
       /* Re-coding on resubmission is re-checked against the CHART AS IT IS NOW, not against the view
@@ -311,12 +331,25 @@ async function claimAction(request, env, ctx) {
         view = clinicalView(conditions);
       }
       next = resubmit(claim, { codes: ctx.codes || null, record: view, by, reason, now, submittedAmount: ctx.submittedAmount });
+      // A resubmission after a payer query is the answer to it: the open queries close with its reason and their clocks stop.
+      if ((next.payerQueries || []).some((q) => !q.answeredAt)) answerOpenQueries(next, { answer: reason, by, now });
     } else if (action === "acknowledge") {
       next = recordAcknowledgement(claim, { payerReference: str(ctx.payerReference), by, now, note: reason || null });
     } else if (action === "settle") {
       next = settle(claim, { paidAmount: ctx.paidAmount, disallowances: ctx.disallowances, shortPaymentReason: str(ctx.shortPaymentReason) || null, by, now, payerReference: str(ctx.payerReference) || null });
     } else if (action === "balance-to-patient") {
       next = moveBalanceToPatient(claim, { amount: ctx.amount, reason, by, now });
+    } else if (action === "query") {
+      if (![CLAIM_STATE.SUBMITTED, CLAIM_STATE.QUERIED].includes(claim.state)) throw new BillingError("a payer query is recorded on a submitted claim", "NOT_SUBMITTED");
+      recordPayerQuery(claim, { text: ctx.text, receivedAt: ctx.receivedAt, responseDays: checklistOf(payerById(ctx.payers, claim.payerId)).queryResponseDays, by, now });
+      claim.state = CLAIM_STATE.QUERIED;
+      next = claim;
+    } else if (action === "documents") {
+      if (!markDocuments(claim, { documents: ctx.documents, by, now })) return { ...base, ok: true, claimId, action, unchanged: true, state: claim.state, claim, actor: by };
+      next = claim;
+    } else if (action === "classify-denial") {
+      classifyDenial(claim, { denialCode: ctx.denialCode, rootCause: ctx.rootCause, rcm: ctx.rcm, by, now });
+      next = claim;
     } else {
       // adjudicate: records what the payer said it will pay. Never moves claim.state - that stays
       // submit/deny/resubmit's job alone.
@@ -326,6 +359,13 @@ async function claimAction(request, env, ctx) {
      * would put the words "unsupported severity" into the history of a claim that had none. */
     if (reason && action === "submit" && claim.upcoding && !claim.upcoding.clean) {
       next.history.push({ at: now, event: "submitted-with-unsupported-severity", by, detail: reason });
+    }
+    if (scrub) {
+      next.checklist = { at: now, blocking: scrub.blocking, warnings: scrub.warnings };
+      if (!scrub.clean) {
+        next.checklistOverrides = (claim.checklistOverrides || []).concat([{ at: now, by, reason: overrideReason, action, findings: scrub.blocking.map((f) => ({ code: f.code, text: f.text })) }]);
+        next.history.push({ at: now, event: "sent-over-checklist-findings", by, detail: `${overrideReason} (${scrub.blocking.map((f) => f.code).join(", ")})` });
+      }
     }
   } catch (e) {
     if (e instanceof BillingError) return { ...base, ok: false, status: 422, error: "billing_refused", code: e.code, detail: e.message, claim: null };
@@ -391,6 +431,13 @@ async function recordPreAuth(request, env, ctx) {
     auth.payerId = str(ctx.payerId) || null;
     if (Number.isFinite(Number(ctx.requestedAmount)) && ctx.requestedAmount !== "" && ctx.requestedAmount != null) auth.requestedAmount = Number(ctx.requestedAmount);
     if (str(ctx.policyNumber)) auth.policyNumber = str(ctx.policyNumber);
+    /* rcm-claims-ops: the last day the payer's approval letter says it is valid, as the payer wrote it. The claims
+     * checklist (claims-ops.js) blocks a claim whose only approval ran out before the admission. */
+    if (str(ctx.validUntil)) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(str(ctx.validUntil)) || !Number.isFinite(Date.parse(str(ctx.validUntil)))) throw new BillingError("the validity date is a date (YYYY-MM-DD)", "BAD_VALID_UNTIL");
+      if (state !== PREAUTH_STATE.APPROVED) throw new BillingError("a validity date belongs to an approved pre-authorisation", "VALID_UNTIL_NOT_APPROVED");
+      auth.validUntil = str(ctx.validUntil);
+    }
   } catch (e) {
     if (e instanceof BillingError) return { ...base, ok: false, status: 422, error: "preauth_refused", code: e.code, detail: e.message, preAuth: null };
     throw e;
