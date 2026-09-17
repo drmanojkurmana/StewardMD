@@ -200,6 +200,12 @@ test("5. ADVERSARIAL: a broken subsystem is UNAVAILABLE by name, and everything 
     if (type === "CriticalResultLoop") throw new Error("simulated storage fault");
     return realLatestByType(tenantId, type, limit);
   };
+  // R4-2: the hospital-wide criticals list pages every loop (pageByType), so the fault is injected there too.
+  const realPageByType = RECORD.pageByType.bind(RECORD);
+  RECORD.pageByType = async (tenantId, type, opts) => {
+    if (type === "CriticalResultLoop") throw new Error("simulated storage fault");
+    return realPageByType(tenantId, type, opts);
+  };
   const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
   assert.equal(r.__status, 200, "the whole request must not fail because one section did");
   assert.equal(r.twin.sections.criticals.status, "unavailable");
