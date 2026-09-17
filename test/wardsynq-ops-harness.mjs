@@ -110,3 +110,9 @@ export async function recordsOf(type) {
 export function auditsOf(type) {
   return (H.RECORD.audit || []).filter((e) => JSON.stringify(e).includes(`"resourceType":"${type}"`));
 }
+
+/** Merge into a hospital's wardsynq config, for settings no admin screen in the test saves (riskTools). */
+export function patchOrgConfig(orgId, patch) {
+  const d = docs.get(`q_orgs/${orgId}`);
+  d.fields.wardsynq = { ...(d.fields.wardsynq || {}), ...patch };
+}

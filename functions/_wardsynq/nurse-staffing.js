@@ -180,7 +180,7 @@ function rostered(assignments, date, shiftId, roleOf) {
  */
 function draftRoster(ctx) {
   const shifts = ctx.shifts || {}, pending = [], unfilled = [];
-  const existing = (ctx.assignments || []).filter((a) => a && a.status !== "cancelled");
+  const existing = (ctx.assignments || []).filter((a) => a && a.status !== "cancelled").map((a, k) => (a.id ? a : { ...a, id: "rota-" + k }));
   const load = new Map();
   for (const a of existing) load.set(a.identity, (load.get(a.identity) || 0) + 1);
   const nurses = (ctx.members || []).filter((m) => m && m.active !== false && isNurse(m.role)).map((m) => m.identity).sort();
@@ -192,13 +192,14 @@ function draftRoster(ctx) {
       .sort((x, y) => (load.get(x) || 0) - (load.get(y) || 0) || x.localeCompare(y));
     for (const id of pool) {
       if (!(short > 0)) break;
-      pending.push({ identity: id, date: t.date, shiftId: t.shiftId });
+      // An id, because assignmentProblem skips a row whose id equals its (absent) ignoreId: an id-less row would never clash.
+      pending.push({ id: "draft-" + pending.length, identity: id, date: t.date, shiftId: t.shiftId });
       load.set(id, (load.get(id) || 0) + 1);
       short--;
     }
     if (short > 0) unfilled.push({ date: t.date, shiftId: t.shiftId, short });
   }
-  return { entries: pending, unfilled };
+  return { entries: pending.map((p) => ({ identity: p.identity, date: p.date, shiftId: p.shiftId })), unfilled };
 }
 
 /* ------------------------------------------------------------------ census and dependency (read through the record) */
