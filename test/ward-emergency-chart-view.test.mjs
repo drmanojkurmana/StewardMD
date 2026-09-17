@@ -31,3 +31,24 @@ test("a chart that could not be opened under the grant says why", () => {
   const html = W._render({ ...W._st, view: "breakglass", breakGlass: { ok: true, active: 0, grants: [] }, emergencyChart: { ok: false, detail: "No active emergency access for this patient." } });
   assert.match(html, /No active emergency access for this patient/);
 });
+
+/* R5-1: a failed per-type read used to arrive as [] and render as "none" - "no known allergies",
+ * mid-emergency. The screen now names every part it could not read. */
+test("a part of the chart that could not be read is NAMED, never rendered as none", () => {
+  const W = loadWard();
+  const html = W._render({
+    ...W._st, view: "breakglass", breakGlass: { ok: true, active: 1, grants: [{ ...G, active: true }] },
+    emergencyChart: { ok: true, patientId: "p1", chart: { AllergyIntolerance: null, MedicationOrder: [] }, unreadableTypes: ["AllergyIntolerance"] },
+  });
+  assert.match(html, /could not be read: AllergyIntolerance/);
+  assert.match(html, /Do not read them as nothing recorded/);
+});
+
+test("a chart read whole says nothing about unreadable parts", () => {
+  const W = loadWard();
+  const html = W._render({
+    ...W._st, view: "breakglass", breakGlass: { ok: true, active: 1, grants: [{ ...G, active: true }] },
+    emergencyChart: { ok: true, patientId: "p1", chart: { AllergyIntolerance: [] }, unreadableTypes: [] },
+  });
+  assert.ok(!/could not be read/.test(html));
+});

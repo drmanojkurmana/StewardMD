@@ -390,6 +390,7 @@
     "nav.admin.legacyImport": "Import from old system",
 
     /* ward.js keys (ui-i18n-ward) */
+    "ward.bg-chart-unreadable": "These parts of the chart could not be read: {types}. Do not read them as nothing recorded.",
     "ward.cl-admitted": "admitted {at}",
     "ward.cl-awaiting": "Requested {age} ago, no decision recorded.",
     "ward.cl-before-edd": "The approval is valid until {until}, before the expected discharge on {edd}.",

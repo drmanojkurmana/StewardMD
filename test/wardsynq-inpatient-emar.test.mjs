@@ -2808,6 +2808,37 @@ test("BREAK-GLASS IS READ ONLY, one patient, and never implicit", async () => {
   assert.equal((await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 200, "her ordinary access is unchanged either way");
 });
 
+/* R5-1 (2026-09-17): a per-type read failure used to become `chart[type] = []` with nothing
+ * recorded, so an allergy list the store refused rendered exactly like "no known allergies" -
+ * mid-emergency, to a clinician who has no other chart to check. */
+test("BREAK-GLASS: a part of the chart that could NOT be read is named, never handed back as an empty list", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/break-glass", "POST", {
+    orgId: ORG, patientId: adm.patientId, reason: "Found unresponsive on the ward, treating team unreachable.",
+  });
+
+  const real = RECORD.byPatient.bind(RECORD);
+  RECORD.byPatient = async (tenantId, type, patientId) => {
+    if (type === "AllergyIntolerance") throw new Error("record store unavailable");
+    return real(tenantId, type, patientId);
+  };
+  try {
+    const chart = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+    assert.equal(chart.__status, 200, JSON.stringify(chart));
+    assert.deepEqual(chart.unreadableTypes, ["AllergyIntolerance"], "the failed type is named on the response");
+    assert.equal(chart.chart.AllergyIntolerance, null, "never [] - an empty allergy list reads as 'no known allergies'");
+    // The rest of the chart is still delivered: the emergency read is not refused wholesale.
+    assert.ok(Array.isArray(chart.chart.MedicationOrder), JSON.stringify(chart.chart.MedicationOrder));
+    assert.ok(chart.chart.MedicationOrder.length >= 1);
+  } finally { delete RECORD.byPatient; }
+
+  // With nothing faulted the array is empty and unreadableTypes is empty: the two states are distinct.
+  const whole = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.deepEqual(whole.unreadableTypes, []);
+  assert.ok(Array.isArray(whole.chart.AllergyIntolerance));
+});
+
 test("THE ACCOUNTABILITY SURFACE: every declaration is on the record, with its reason and its use", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();

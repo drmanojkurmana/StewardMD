@@ -8182,6 +8182,10 @@
         : '<p class="w-hint">' + ms("info") + wTH("ward.open-a-patient-from-the-ward2", "Open a patient from the ward list to request emergency access to their chart.") + "</p>") +
       (state.emergencyChart
         ? '<div class="w-sub w-dead"><h4>' + ms("warning") + wTH("ward.emergency-read-only-chart", "Emergency read-only chart") + "</h4>" +
+          /* A part of the chart the store refused is NAMED here, above the chart itself. Without this an
+           * unreadable allergy list rendered exactly like "no known allergies", mid-emergency. */
+          (state.emergencyChart.ok && (state.emergencyChart.unreadableTypes || []).length
+            ? '<p class="w-hint warn">' + ms("error") + wTH("ward.bg-chart-unreadable", "These parts of the chart could not be read: {types}. Do not read them as nothing recorded.", { types: esc(state.emergencyChart.unreadableTypes.join(", ")) }, "types", 1) + "</p>" : "") +
           (state.emergencyChart.ok ? reportValue(state.emergencyChart.chart) : '<p class="w-hint warn">' + esc(state.emergencyChart.detail || state.emergencyChart.error || wT("ward.could-not-open-the-chart", "Could not open the chart.")) + "</p>") +
           "</div>"
         : "") +
