@@ -9,7 +9,8 @@ mock.module("../functions/_fbfirestore.js", {
     fsGet: async (_e, path) => { const d = docs.get(path); return d ? { fields: { ...d.fields }, updateTime: d.updateTime } : null; },
     fsQuery: async (_e, coll, q) => {
       if (failQuery) throw new Error("firestore down");
-      return [...docs.entries()].filter(([p, d]) => p.startsWith(coll + "/") && d.fields[q.where.field] === q.where.value).map(([p, d]) => ({ id: p.split("/")[1], fields: d.fields }));
+      const ws = [].concat(q.where);
+      return [...docs.entries()].filter(([p, d]) => p.startsWith(coll + "/") && ws.every((w) => d.fields[w.field] === w.value)).map(([p, d]) => ({ id: p.split("/")[1], fields: d.fields }));
     },
     fsCommit: async (_e, writes) => {
       for (const w of writes) { const cur = docs.get(w.path); if (w.pre && w.pre.exists === false && cur) throw Object.assign(new Error("exists"), { code: "precondition" }); if (w.pre && w.pre.updateTime && (!cur || cur.updateTime !== w.pre.updateTime)) throw Object.assign(new Error("stale"), { code: "precondition" }); }

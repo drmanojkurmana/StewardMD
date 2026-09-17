@@ -5395,7 +5395,7 @@ export async function onRequest(context) {
       if (sub === "patient" && method === "GET") { const p = await BILL.getPatient(env, bOrg, url.searchParams.get("id") || ""); return json(p ? Object.assign({ ok: true }, p) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "order" && method === "POST") return json(await BILL.createOrder(env, bOrg, body, aid), 200, request);
       if (sub === "orders" && method === "GET") return json({ ok: true, orders: await BILL.ordersForPatient(env, bOrg, url.searchParams.get("patientId") || "", url.searchParams.get("status") || "") }, 200, request);
-      if (sub === "queue" && method === "GET") return json({ ok: true, orders: await BILL.billingQueue(env, bOrg) }, 200, request);
+      if (sub === "queue" && method === "GET") return json({ ok: true, ...(await BILL.billingQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
       if (sub === "tariff" && method === "GET") return json({ ok: true, items: await BILL.listTariff(env, bOrg) }, 200, request);
       if (sub === "tariff" && method === "POST") return json(await BILL.upsertTariff(env, bOrg, body, aid), 200, request);
       if (sub === "invoice" && method === "POST") {
@@ -5419,7 +5419,7 @@ export async function onRequest(context) {
       }
       if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid), 200, request);
-      if (sub === "pharmacy" && method === "GET") return json({ ok: true, orders: await BILL.pharmacyQueue(env, bOrg) }, 200, request);
+      if (sub === "pharmacy" && method === "GET") return json({ ok: true, ...(await BILL.pharmacyQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
       if (sub === "dispense" && method === "POST") return json(await BILL.dispenseOrder(env, bOrg, body.orderId || "", aid), 200, request);
       return json({ ok: false, error: "not_found" }, 404, request);
     }
