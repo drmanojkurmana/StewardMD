@@ -239,6 +239,73 @@
     return { nps: Number(nps), comment: c ? c.value.trim() : "", answers: answers };
   }
 
+  /* ---- pre-admission forms (form-response.js portalIntake) ----------------------------------------------------
+   * The hospital's own forms, for a planned admission only. The questions and their labels are the hospital's words,
+   * shown as written. What the patient sends is labelled as theirs until a member of staff reviews it. */
+  function intakeVisible(cond, a) {
+    if (!cond) return true;
+    if (cond.all) return cond.all.every(function (c) { return intakeVisible(c, a); });
+    if (cond.any) return cond.any.some(function (c) { return intakeVisible(c, a); });
+    var v = a[cond.field], filled = !(v == null || v === "" || (v && v.length === 0));
+    return cond.op === "filled" ? filled : cond.op === "empty" ? !filled : cond.op === "eq" ? v === cond.value : cond.op === "ne" ? v !== cond.value
+      : cond.op === "in" ? (cond.value || []).indexOf(v) >= 0 : cond.op === "gt" ? +v > +cond.value : cond.op === "gte" ? +v >= +cond.value : cond.op === "lt" ? +v < +cond.value : cond.op === "lte" ? +v <= +cond.value : false;
+  }
+  function intakeField(f, a, err) {
+    var id = "pIf_" + f.key, v = a[f.key], attr = ' id="' + esc(id) + '" data-intake-field="' + esc(f.key) + '"';
+    var input = f.type === "textarea" ? "<textarea" + attr + ' rows="3" maxlength="8000">' + esc(v || "") + "</textarea>"
+      : f.type === "boolean" ? "<select" + attr + '><option value="">-</option><option value="true"' + (v === true ? " selected" : "") + ">" + esc(tr("intake.yes")) + '</option><option value="false"' + (v === false ? " selected" : "") + ">" + esc(tr("intake.no")) + "</option></select>"
+      : f.type === "single_choice" ? "<select" + attr + '><option value="">-</option>' + f.options.map(function (o) { return '<option value="' + esc(o.value) + '"' + (v === o.value ? " selected" : "") + ">" + esc(o.label || o.value) + "</option>"; }).join("") + "</select>"
+      : f.type === "multi_choice" ? f.options.map(function (o) { return '<label><input type="checkbox" data-intake-multi="' + esc(f.key) + '" value="' + esc(o.value) + '"' + ((v || []).indexOf(o.value) >= 0 ? " checked" : "") + "> " + esc(o.label || o.value) + "</label>"; }).join(" ")
+      : f.type === "calculated" ? '<span class="quiet">' + esc(tr("intake.calculated")) + "</span>"
+      : "<input" + attr + ' type="' + (f.type === "number" || f.type === "integer" ? "number" : f.type === "date" ? "date" : f.type === "datetime" ? "datetime-local" : "text") + '" value="' + esc(v == null ? "" : v) + '">';
+    return '<label class="f"><span>' + esc(f.label) + (f.required ? " *" : "") + "</span>" + input + (err ? '<span class="msg err" role="alert">' + esc(err) + "</span>" : "") + "</label>";
+  }
+  /** PURE. d: the intake-forms answer (null loading, false failed). ui: { open: "requestId|formKey", answers, errors, msg }. */
+  function intakeSection(d, ui) {
+    ui = ui || {};
+    if (d == null) return loadingCard("intake", tr("intake.title"));
+    if (d === false) return failedCard("intake", tr("intake.title"));
+    // Nothing planned: nothing to offer, and no empty card to wonder about.
+    if (!d.admissions.length) return '<section data-section="intake" hidden></section>';
+    var h = '<section class="card" data-section="intake"><h2>' + esc(tr("intake.title")) + '</h2><p class="msg note">' + esc(tr("intake.notVerified")) + '</p><p class="quiet">' + esc(tr("intake.privacy")) + "</p>";
+    d.admissions.forEach(function (adm) {
+      h += "<h3>" + esc(tr("intake.for", { date: adm.plannedFor })) + (adm.specialty ? ", " + esc(adm.specialty) : "") + "</h3>";
+      if (!d.forms.length) { h += '<p class="quiet" data-empty="intake">' + esc(tr("intake.noForms")) + "</p>"; return; }
+      d.forms.forEach(function (f) {
+        var mine = d.responses.filter(function (x) { return x.admissionRequestId === adm.requestId && x.formKey === f.key; })[0];
+        var key = adm.requestId + "|" + f.key;
+        h += '<article data-intake-form="' + esc(key) + '"><h4>' + esc(f.title) + "</h4>";
+        if (mine) h += mine.reviewState === "accepted" ? '<p class="msg ok" data-intake-state="accepted">' + esc(tr("intake.accepted", { when: when(mine.reviewedAt) })) + "</p>"
+          : mine.reviewState === "returned" ? '<p class="msg err" data-intake-state="returned">' + esc(tr("intake.returned")) + " " + esc(mine.reviewReason) + "</p>"
+          : '<p class="quiet" data-intake-state="submitted">' + esc(tr("intake.sent", { when: when(mine.submittedAt) })) + "</p>";
+        if (mine && mine.reviewState === "accepted") { h += "</article>"; return; }
+        if (ui.open !== key) { h += '<button class="btn" type="button" data-act="intake-open" data-key="' + esc(key) + '">' + esc(tr(mine ? "intake.change" : "intake.fill")) + "</button></article>"; return; }
+        var a = ui.answers || {}, errs = ui.errors || {};
+        h += (f.sections || []).map(function (sec) {
+          return "<fieldset><legend>" + esc(sec.title) + "</legend>" + (sec.fields || []).filter(function (fd) { return intakeVisible(fd.showWhen, a); }).map(function (fd) { return intakeField(fd, a, errs[fd.key]); }).join("") + "</fieldset>";
+        }).join("") +
+          '<button class="btn primary" type="button" data-act="intake-send" data-key="' + esc(key) + '" data-version="' + esc(f.version) + '">' + esc(tr("intake.send")) + '</button> <button class="btn" type="button" data-act="intake-close">' + esc(tr("intake.close")) + "</button></article>";
+      });
+    });
+    return h + '<div id="pIntakeMsg" aria-live="polite">' + (ui.msg ? '<div class="msg ' + (ui.msg.ok ? "ok" : "err") + '">' + esc(ui.msg.text) + "</div>" : "") + "</div></section>";
+  }
+  /** From the open form in the page: the answers as typed, numbers as numbers. */
+  function intakeAnswersFrom(f) {
+    var a = {};
+    (f.sections || []).forEach(function (sec) { (sec.fields || []).forEach(function (fd) {
+      if (fd.type === "calculated") return;
+      if (fd.type === "multi_choice") {
+        var boxes = document.querySelectorAll('[data-intake-multi="' + fd.key + '"]'), picked = [];
+        for (var i = 0; i < boxes.length; i++) if (boxes[i].checked) picked.push(boxes[i].value);
+        if (picked.length) a[fd.key] = picked; return;
+      }
+      var el = document.getElementById("pIf_" + fd.key), v = el ? String(el.value || "").trim() : "";
+      if (v === "") return;
+      a[fd.key] = fd.type === "number" || fd.type === "integer" ? Number(v) : fd.type === "boolean" ? v === "true" : v;
+    }); });
+    return a;
+  }
+
   /** PURE. The whole signed-in page from the server's answer. Only granted sections are drawn. */
   function renderRecord(r) {
     var access = r.access || { kind: "patient", sections: [] };
@@ -252,6 +319,7 @@
     if (access.kind === "proxy") out.push('<div class="msg note">' + esc(tr("portal.proxyNote", { relationship: access.relationship || tr("portal.familyMember") })) + "</div>");
     if (r.statements && r.statements.length && (has("results") || has("diagnoses"))) out.push('<div class="msg note">' + r.statements.map(esc).join("<br>") + "</div>");
     if (has("status")) out.push(statusSection(r.queue));
+    if (has("forms")) out.push(intakeSection(null));
 
     if (has("appointments")) {
       out.push(section("appointments", tr("appt.title"), "ok", doc.appointments, function (a) {
@@ -322,7 +390,7 @@
   }
 
   var api = {
-    bookingSection: bookingSection, commSection: commSection, surveysSection: surveysSection, surveyPage: surveyPage,
+    bookingSection: bookingSection, intakeSection: intakeSection, commSection: commSection, surveysSection: surveysSection, surveyPage: surveyPage,
     esc: esc, section: section, privacySection: privacySection, renderRecord: renderRecord, renderPhase: renderPhase, statusSection: statusSection, dischargeItem: dischargeItem, dischargeSection: dischargeSection, documentItem: documentItem
   };
   if (typeof window !== "undefined") window.WSQPortal = api;
@@ -397,7 +465,7 @@
     }, function () { put(false); });
   }
   /* Booking, message preferences and surveys: each loads on its own and redraws only its section. */
-  var book = { data: null, ui: {} }, surveys = null;
+  var book = { data: null, ui: {} }, surveys = null, intake = { data: null, ui: {} };
   function putSection(id, html) { var el = root.querySelector('[data-section="' + id + '"]'); if (el) el.outerHTML = html; }
   function sessionBody(s, extra) { var b = { orgId: s.orgId, grantId: s.grantId, token: s.token }; for (var k in extra) b[k] = extra[k]; return b; }
   function ended(r) { if (r && r.httpStatus === 401) { save(null); show({ phase: "ended", detail: r.detail }); return true; } return false; }
@@ -406,9 +474,15 @@
   }
   function loadEngage(s, access) {
     if ((access.sections || []).indexOf("appointments") >= 0) { book.ui = {}; loadBooking(s); }
+    if ((access.sections || []).indexOf("forms") >= 0) { intake.ui = {}; loadIntake(s); }
     post("comm-preferences", sessionBody(s, {})).then(function (r) { if (ended(r)) return; putSection("comm", commSection(r && r.ok ? r : false)); }, function () { putSection("comm", commSection(false)); });
     post("feedback-pending", sessionBody(s, {})).then(function (r) { if (ended(r)) return; surveys = r && r.ok ? r : false; putSection("surveys", surveysSection(surveys)); }, function () { putSection("surveys", surveysSection(false)); });
   }
+  function loadIntake(s) {
+    post("intake-forms", sessionBody(s, {})).then(function (r) { if (ended(r)) return; intake.data = r && r.ok ? r : false; putSection("intake", intakeSection(intake.data, intake.ui)); },
+      function () { intake.data = false; putSection("intake", intakeSection(false)); });
+  }
+  function intakeForm(key) { var k = String(key || "").split("|"); return intake.data && intake.data.forms ? intake.data.forms.filter(function (f) { return f.key === k[1]; })[0] : null; }
   function surveyFromHash() { var m = /(?:^|[#&])survey=([A-Za-z0-9_-]+)/.exec(location.hash || ""); return m ? m[1] : ""; }
   var linkSurvey = null;
   function showSurvey(p) { root.innerHTML = langSwitcher() + surveyPage(p); lastPhase = { survey: p }; }
@@ -468,6 +542,11 @@
   });
 
   root.addEventListener("change", function (ev) {
+    // A controlling answer can show or hide other questions: redraw only the intake section, keeping what was typed.
+    if (ev.target.hasAttribute && (ev.target.hasAttribute("data-intake-field") || ev.target.hasAttribute("data-intake-multi")) && intake.ui.open) {
+      var of = intakeForm(intake.ui.open); if (of) { intake.ui.answers = intakeAnswersFrom(of); putSection("intake", intakeSection(intake.data, intake.ui)); }
+      return;
+    }
     if (ev.target.id === "pBookDept" && book.data) { book.ui.dept = ev.target.value; book.ui.confirm = null; return putSection("booking", bookingSection(book.data, book.ui)); }
     if (ev.target.id !== "pLang") return;
     var code = ev.target.value;
@@ -543,6 +622,28 @@
         book.ui = { msg: { ok: !!(r && r.ok), text: r && r.ok ? tr(act === "book-cancel" ? "book.cancelled" : moving ? "book.moved" : "book.booked") : ((r && r.detail) || tr("action.failed")) } };
         post("booking-options", sessionBody(s, {})).then(function (o) { book.data = o && o.ok ? o : false; putSection("booking", bookingSection(book.data, book.ui)); });
       }, function () { b.disabled = false; book.ui.msg = { ok: false, text: tr("action.failed") }; putSection("booking", bookingSection(book.data, book.ui)); });
+    }
+    if (act === "intake-open" || act === "intake-close") {
+      b.disabled = false;
+      var ok = act === "intake-open" ? b.getAttribute("data-key") : null, prev = null;
+      if (ok) { var mk = ok.split("|"); prev = (intake.data.responses || []).filter(function (x) { return x.admissionRequestId === mk[0] && x.formKey === mk[1]; })[0]; }
+      intake.ui = { open: ok, answers: prev ? prev.answers : {}, errors: {} };
+      return putSection("intake", intakeSection(intake.data, intake.ui));
+    }
+    if (act === "intake-send") {
+      var ik = b.getAttribute("data-key"), kf = intakeForm(ik), parts2 = ik.split("|");
+      if (!kf) { b.disabled = false; return; }
+      intake.ui.answers = intakeAnswersFrom(kf);
+      return post("intake-submit", sessionBody(s, { requestId: parts2[0], formKey: parts2[1], formVersion: Number(b.getAttribute("data-version")), answers: intake.ui.answers })).then(function (r) {
+        if (ended(r)) return;
+        if (r && r.ok) {
+          intake.ui = { msg: { ok: true, text: tr("intake.thanks") } };
+          return post("intake-forms", sessionBody(s, {})).then(function (o) { intake.data = o && o.ok ? o : false; putSection("intake", intakeSection(intake.data, intake.ui)); });
+        }
+        intake.ui.errors = (r && r.errors) || {};
+        intake.ui.msg = { ok: false, text: r && r.errors ? tr("intake.fix") : ((r && r.detail) || tr("action.failed")) };
+        putSection("intake", intakeSection(intake.data, intake.ui));
+      }, function () { b.disabled = false; intake.ui.msg = { ok: false, text: tr("action.failed") }; putSection("intake", intakeSection(intake.data, intake.ui)); });
     }
     if (act === "comm-in" || act === "comm-out") {
       var ch = b.getAttribute("data-ch");
