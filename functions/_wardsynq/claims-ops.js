@@ -36,6 +36,7 @@ import { reconciliationOf } from "../../wardsynq/wardsynq-invoice.js";
 import { ADMISSION_CLASSES } from "./migrate-inpatient.js";
 import { dischargeSummaryIdFor } from "./migrate-discharge.js";
 import { assignmentIdFor, packageFlags } from "./packages.js";
+import { hospitalToday } from "./expected-discharge.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const num = (v) => (v == null || v === "" || !Number.isFinite(Number(v)) ? null : Number(v));
@@ -644,9 +645,136 @@ async function rcmWorklists(request, env, ctx) {
     ...buildWorklists({ rows, unreadable, payers: ctx.payers, rcm: ctx.rcm, nowMs, fromMs, toMs }) };
 }
 
+/* ---- the cashless desk (R3-5): current stays whose pre-authorisation needs action ------------------------------------ */
+
+/* A payer kind that funds a stay on a pre-authorisation. A corporate or other payer settles on credit terms and is not on
+ * this list; a payer whose kind is not recorded (or not in the payer list) stays on it and says so, never assumed away. */
+const CASHLESS_KINDS = Object.freeze(["insurer", "tpa", "government_scheme"]);
+const OPEN_STAY = "in-progress";
+const NOTE_ONLY = Object.freeze(["payer_not_in_list", "payer_kind_not_recorded"]);
+
+/**
+ * PURE. Every open inpatient stay on an insurer, TPA or scheme payer whose pre-authorisation needs action, with the inputs
+ * each finding was computed from. rows: Encounter, StayPayer, PreAuthorisation, PackageAssignment, ExpectedDischarge,
+ * Invoice. bills: Map encounterId -> { total, unpriced } or { unreadable } (charge capture, for a stay with no live bill).
+ * today: YYYY-MM-DD on the hospital's clock. Returns { stays, unreadable }; stays is null when a type it needs is unread.
+ *
+ * Findings: no_preauth; awaiting_decision (hours since it was recorded); refused; expired (state, or validUntil before
+ * today); expires_before_discharge (validUntil before the stated expected discharge date); amount_not_recorded;
+ * below_bill (approved amount below the running bill, a plain comparison); bill_unreadable and discharge_date_unreadable
+ * (an input that could not be read, never taken as fine); payer_query_open. No hospital threshold is applied.
+ */
+function cashlessWorklist({ rows, unreadable, payers, nowMs, today, bills }) {
+  const R = rows || {}, U = unreadable || {};
+  const why = ["Encounter", "StayPayer", "PreAuthorisation"].filter((t) => U[t]).map((t) => `${t}: ${U[t]}`).join("; ");
+  if (why) return { stays: null, unreadable: why };
+  const encs = (R.Encounter || []).filter((e) => e && !isExternalRecord(e) && ADMISSION_CLASSES.includes(e.class));
+  const payerOf = new Map((R.StayPayer || []).filter(Boolean).map((sp) => [str(sp.encounterId), sp]));
+  const eddOf = U.ExpectedDischarge ? null : new Map((R.ExpectedDischarge || []).filter(Boolean).map((x) => [str(x.encounterId), x]));
+  const all = (R.PreAuthorisation || []).filter(Boolean);
+  const out = [];
+  for (const e of encs.filter((x) => x.status === OPEN_STAY)) {
+    const sp = payerOf.get(str(e.id));
+    if (!sp || !str(sp.payerRef)) continue;                                   // no payer recorded on the stay, or self-pay
+    const payer = payerById(payers, sp.payerRef);
+    const kind = payer && payer.contract ? payer.contract.payerKind || null : null;
+    if (kind && !CASHLESS_KINDS.includes(kind)) continue;
+    const insurerRef = payer && payer.contract ? str(payer.contract.insurerRef) : "";
+    const issues = [];
+    if (!payer) issues.push({ code: "payer_not_in_list" });
+    else if (!kind) issues.push({ code: "payer_kind_not_recorded" });
+
+    /* The stay's pre-authorisation: the one its package links when it names one; else the newest of this patient's for this
+     * payer (or the insurer a TPA acts for, or no payer named) recorded after the patient's previous stay ended. */
+    const startMs = ms(e.periodStart);
+    const prevEnd = encs.filter((x) => str(x.patientId) === str(e.patientId) && x.id !== e.id && ms(x.periodEnd) != null && (startMs == null || ms(x.periodEnd) <= startMs))
+      .reduce((m, x) => Math.max(m, ms(x.periodEnd)), -Infinity);
+    const pa = U.PackageAssignment ? null : (R.PackageAssignment || []).find((a) => a && a.status === "active" && str(a.encounterId) === str(e.id) && str(a.preAuthId));
+    const linked = pa ? all.find((a) => str(a.id) === str(pa.preAuthId)) || null : null;
+    const mine = linked ? [linked] : all.filter((a) => str(a.patientId) === str(e.patientId)
+      && (!str(a.payerId) || str(a.payerId) === str(sp.payerRef) || (insurerRef && str(a.payerId) === insurerRef))
+      && (ms(a.decidedAt) == null || ms(a.decidedAt) > prevEnd));
+    // ponytail: the newest record is the stay's pre-authorisation; two treatments authorised separately on one stay show the newer only.
+    const cur = mine.slice().sort((a, b) => str(b.decidedAt).localeCompare(str(a.decidedAt)))[0] || null;
+    const amount = cur ? num(cur.authorizedAmount) : null;
+    const edd = eddOf === null ? undefined : eddOf.get(str(e.id)) || null;
+
+    /* The running bill: the live bills raised for the stay, else what charge capture prices now. Unknown is never zero. */
+    let bill;
+    if (U.Invoice) bill = { unreadable: `Invoice: ${U.Invoice}` };
+    else {
+      const live = (R.Invoice || []).filter((i) => i && !isExternalRecord(i) && stayBilled([i], e.id));
+      const c = bills && bills.get(str(e.id));
+      bill = live.length ? { source: "invoice", amount: round2(live.reduce((t, i) => t + reconciliationOf(i).charged, 0)), invoices: live.length }
+        : !c ? { unreadable: "the running charges were not computed" } : c.unreadable ? { unreadable: c.unreadable }
+        : { source: "charge_capture", amount: round2(c.total), unpricedItems: c.unpriced || 0 };
+    }
+
+    if (!cur) issues.push({ code: "no_preauth" });
+    else if (cur.state === PREAUTH_STATE.REQUESTED) issues.push({ code: "awaiting_decision", recordedAt: cur.decidedAt || null, ageHours: ms(cur.decidedAt) == null ? null : Math.max(0, Math.floor((nowMs - ms(cur.decidedAt)) / HOUR)) });
+    else if (cur.state === PREAUTH_STATE.REFUSED) issues.push({ code: "refused", decidedAt: cur.decidedAt || null, reason: cur.reason || null });
+    else if (cur.state === PREAUTH_STATE.EXPIRED) issues.push({ code: "expired", validUntil: cur.validUntil || null });
+    else if (cur.state === PREAUTH_STATE.APPROVED) {
+      const until = str(cur.validUntil);
+      if (until && until < today) issues.push({ code: "expired", validUntil: until });
+      else if (until && edd === undefined) issues.push({ code: "discharge_date_unreadable", validUntil: until, why: `ExpectedDischarge: ${U.ExpectedDischarge}` });
+      else if (until && edd && str(edd.expectedDate) > until) issues.push({ code: "expires_before_discharge", validUntil: until, expectedDischarge: edd.expectedDate });
+      if (amount == null) issues.push({ code: "amount_not_recorded" });
+      else if (bill.unreadable) issues.push({ code: "bill_unreadable", authorizedAmount: amount, why: bill.unreadable });
+      else if (amount < bill.amount) issues.push({ code: "below_bill", authorizedAmount: amount, bill: bill.amount, source: bill.source });
+    }
+    const openQueries = cur ? (cur.payerQueries || []).filter((q) => q && !q.answeredAt).length : 0;
+    if (openQueries) issues.push({ code: "payer_query_open", count: openQueries });
+    if (!issues.some((x) => !NOTE_ONLY.includes(x.code))) continue;
+    out.push({ patientId: e.patientId, mrn: mrnOf(e.patientId), encounterId: e.id, class: e.class, ward: (e.location && e.location.ward) || null, admittedAt: e.periodStart || null,
+      payerRef: sp.payerRef, payerName: payerLabel(payers, sp.payerRef), payerKind: kind, policyNumber: sp.policyNumber || null,
+      preAuth: cur ? { id: cur.id, state: cur.state, treatment: cur.treatment || null, recordedAt: cur.decidedAt || null, validUntil: cur.validUntil || null, authorizedAmount: amount, linkedByPackage: !!linked } : null,
+      expectedDischarge: edd === undefined ? false : edd ? edd.expectedDate : null, bill, issues });
+  }
+  return { stays: out.sort((a, b) => str(a.admittedAt).localeCompare(str(b.admittedAt))), unreadable: null };
+}
+
+/* Charge capture reads several record types per stay, so it runs for this many stays per request and says so beyond. */
+const CAPTURE_LIMIT = 50;
+
+/** GET /ward/cashless-stays. ctx: { migration, payers, clock, chargesFor?(patientId, encounterId) -> chargesForPatient's
+ *  result, or null when the price list could not be read }. Reads only; nothing is sent to a payer. */
+async function cashlessStays(request, env, ctx) {
+  const base = baseOf(ctx.migration);
+  const o = await open(request, env, ctx, "record:read");
+  if (o.error) return o.error;
+  const types = ["Encounter", "StayPayer", "PreAuthorisation", "PackageAssignment", "ExpectedDischarge", "Invoice"];
+  const rows = {}, unreadable = {};
+  let truncated = false;
+  await Promise.all(types.map(async (t) => {
+    try { rows[t] = ((await o.svc.list(t, READ_LIMIT)) || []).filter(Boolean); if (rows[t].length >= READ_LIMIT) truncated = true; }
+    catch (e) { unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : "could not be read"; rows[t] = []; }
+  }));
+  const nowMs = Date.now();
+  /* Running charges only where the comparison could need them: an open stay with a payer and no live bill. */
+  const bills = new Map();
+  let captureSkipped = 0;
+  if (!unreadable.Invoice && !unreadable.Encounter && !unreadable.StayPayer) {
+    const withPayer = new Set(rows.StayPayer.filter((sp) => str(sp.payerRef)).map((sp) => str(sp.encounterId)));
+    const need = rows.Encounter.filter((e) => e.status === OPEN_STAY && ADMISSION_CLASSES.includes(e.class) && withPayer.has(str(e.id)) && !stayBilled(rows.Invoice, e.id));
+    for (const [k, e] of need.entries()) {
+      if (k >= CAPTURE_LIMIT) { captureSkipped += 1; bills.set(str(e.id), { unreadable: `running charges are computed for ${CAPTURE_LIMIT} stays per load` }); continue; }
+      let c = null;
+      try { c = typeof ctx.chargesFor === "function" ? await ctx.chargesFor(e.patientId, e.id) : null; } catch { c = null; }
+      bills.set(str(e.id), !c ? { unreadable: "the running charges could not be computed (price list or records unread)" }
+        : !c.ok ? { unreadable: "the running charges could not be computed" }
+        : c.unreadable && c.unreadable.length ? { unreadable: `the running charges could not read ${c.unreadable.join(", ")}` }
+        : { total: num(c.total) || 0, unpriced: (c.unpriced || []).length });
+    }
+  }
+  const today = hospitalToday(nowMs, ctx.clock);
+  return { ...base, ok: true, generatedAt: new Date(nowMs).toISOString(), today, truncated, readLimit: READ_LIMIT, captureSkipped,
+    ...cashlessWorklist({ rows, unreadable, payers: ctx.payers, nowMs, today, bills }) };
+}
+
 export {
   mrnOf, rcmSettings, validateRcmSettings, checklistOf, scrubClaim, codingCandidates,
   recordPayerQuery, answerOpenQueries, requestEnhancement, decideEnhancement, markDocuments, classifyDenial,
   claimFacts, evidencePack, stayBilled, ageingOf, denialAnalytics, buildWorklists,
-  claimChecks, preAuthEvent, claimEvidence, saveClaimEvidence, rcmWorklists,
+  claimChecks, preAuthEvent, claimEvidence, saveClaimEvidence, rcmWorklists, cashlessWorklist, cashlessStays,
 };

@@ -258,7 +258,7 @@ import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
 import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList, raiseEstimate } from "../../_wardsynq/billing.js";
-import { rcmSettings, validateRcmSettings, claimChecks, preAuthEvent, claimEvidence, saveClaimEvidence, rcmWorklists } from "../../_wardsynq/claims-ops.js";
+import { rcmSettings, validateRcmSettings, claimChecks, preAuthEvent, claimEvidence, saveClaimEvidence, rcmWorklists, cashlessStays } from "../../_wardsynq/claims-ops.js";
 import { requestRelease, authorizeRelease, denyRelease, cancelRelease, fulfillRelease, readRoi, roiRequestsForPatient } from "../../_wardsynq/roi.js";
 import { patientCopy, releaseToPatient, releaseDocumentToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
@@ -1839,7 +1839,7 @@ export async function onRequest(context) {
         "claim-estimate": CAPS.BILLING_CHARGE,
         /* rcm-claims-ops (claims-ops.js): reading the checklist, the evidence pack and the desk's lists is reading bills;
          * a payer query or enhancement on a pre-authorisation and saving an evidence pack change a claim record. */
-        "claim-checks": CAPS.BILLING_VIEW, "rcm-worklists": CAPS.BILLING_VIEW, "preauth-event": CAPS.BILLING_CHARGE,
+        "claim-checks": CAPS.BILLING_VIEW, "rcm-worklists": CAPS.BILLING_VIEW, "cashless-stays": CAPS.BILLING_VIEW, "preauth-event": CAPS.BILLING_CHARGE,
         "claim-evidence": method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW,
         // TASK 4.9: a third-party record request is a records-custody function, not clinical or
         // billing work - staff.admin, the same authority every other org-administration action in
@@ -3554,6 +3554,18 @@ export async function onRequest(context) {
           : sub === "preauth-event" && method === "POST" ? await preAuthEvent(request, env, { ...deps, preAuthId: body.preAuthId, action: body.action, text: body.text, receivedAt: body.receivedAt, answer: body.answer, queryId: body.queryId,
             requestedAmount: body.requestedAmount, reason: body.reason, enhancementId: body.enhancementId, state: body.state, approvedAmount: body.approvedAmount, note: body.note, decidedAt: body.decidedAt, payers, idempotencyKey: body.idempotencyKey || null })
           : { ok: false, status: 404, error: "not_found" };
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* R3-5 cashless desk (claims-ops.js cashlessStays): open stays on an insurer, TPA or scheme payer whose pre-authorisation
+       * needs action. The running bill of a stay with no bill yet is charge capture against the price list, read once. */
+      if (sub === "cashless-stays" && method === "GET") {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
+        let tf = null;
+        const chargesFor = async (patientId, encounterId) => {
+          if (!tf) tf = await wsqTariff(env, wOrgId, wsqCfg);
+          return tf.error ? null : chargesForPatient(request, env, { ...deps, patientId, encounterId, tariff: tf.table });
+        };
+        const r = await cashlessStays(request, env, { ...deps, payers, chargesFor });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "preauth" && method === "POST") {

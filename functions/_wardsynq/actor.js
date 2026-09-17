@@ -615,8 +615,10 @@ function grantForCaps(caps) {
   const DISCHARGE = [
     [CAPS.QUEUE_ADD, ["DischargeMilestone", "TransferCentreRequest"], ["DischargeMilestone", "TransferCentreRequest"]],
     [CAPS.ORDER_VERIFY, ["DischargeMilestone"], ["DischargeMilestone"]],
-    [CAPS.BILLING_CHARGE, ["DischargeMilestone"], ["DischargeMilestone"]],
-    [CAPS.BILLING_VIEW, ["DischargeMilestone"], []],
+    /* ExpectedDischarge joined 2026-09-17 (cashless desk, claims-ops.js cashlessWorklist): the TPA desk reads the treating
+     * team's stated date to see an approval that runs out before it. Read only; the date stays emr.treat's to set. */
+    [CAPS.BILLING_CHARGE, ["DischargeMilestone", "ExpectedDischarge"], ["DischargeMilestone"]],
+    [CAPS.BILLING_VIEW, ["DischargeMilestone", "ExpectedDischarge"], []],
   ];
   for (const [cap, canRead, canWrite] of DISCHARGE) {
     if (!has(cap) || !grant) continue;

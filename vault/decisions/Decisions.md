@@ -7882,3 +7882,21 @@ of compliance.js is untouched.
   haemodialysis adequacy 2015 update, Am J Kidney Dis 2015;66(5):884-930 (both checked on PubMed). Kt/V not built (owner O12).
 - ponytail ceilings: reads cap at 1000 records per type with a truncation warning; serology group "tag" is exact string
   match; a station needs a group whenever groups are set (no untagged general station).
+
+## 2026-09-17 Cashless desk: stays whose pre-authorisation needs action (branch cashless-desk, R3-5)
+- Separate route GET /ward/cashless-stays (billing.view), not a seventh list inside /ward/rcm-worklists: it runs charge
+  capture per stay, and the claims desk must stay readable when that fails. ward.js loads both into the Claims desk.
+- A stay is listed when it is open (in-progress, an admission class), its StayPayer names a payer whose contract kind is
+  insurer, TPA or government scheme (a payer not in the list or with no kind recorded stays on and says so; corporate and
+  other are off), and one of: no pre-authorisation, requested (hours since recorded), refused, expired (state, or
+  validUntil before today on the hospital's clock), validUntil before the ExpectedDischarge date, approved amount not
+  recorded, approved amount below the running bill, the bill or discharge date unreadable, or an open payer query.
+- DEVIATION from the brief ("expected discharge date (DischargeMilestone if recorded)"): DischargeMilestone has no expected
+  date; the treating team's date is the ExpectedDischarge record. billing.view and billing.charge now READ ExpectedDischarge
+  (actor.js DISCHARGE block; test/wardsynq-record-service pinned). No write widened.
+- Which pre-authorisation: PreAuthorisation carries no encounterId. The one the stay's active package links wins; else the
+  newest by decidedAt of the patient's for this payer (or the insurer a TPA acts for, or none named) recorded after the
+  patient's previous stay ended. ponytail: two separately authorised treatments on one stay show the newer only.
+- Running bill: charged total of live bills raised for the stay; with none, the charge-capture total now (stated as not yet
+  billed, with the count of unpriced items). Unreadable anything is said, never zero. Capture runs for 50 stays per load.
+- Nothing is sent to a payer.

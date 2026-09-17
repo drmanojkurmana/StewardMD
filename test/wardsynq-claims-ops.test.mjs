@@ -1,6 +1,6 @@
 /* test/wardsynq-claims-ops.test.mjs - rcm-claims-ops: the claim checklist, payer queries and enhancements, denial reasons,
  * receivables ageing, the desk's lists, coding candidates and the evidence pack. PURE, then through the real routes
- * (/ward/claim-state, /ward/claim-checks, /ward/preauth-event, /ward/claim-evidence, /ward/rcm-worklists,
+ * (/ward/claim-state, /ward/claim-checks, /ward/preauth-event, /ward/claim-evidence, /ward/rcm-worklists, /ward/cashless-stays,
  * /org/rcm-settings) with negative authorization on each, then the screens rendered in a sandbox.
  *
  * node --test --experimental-test-module-mocks test/wardsynq-claims-ops.test.mjs
@@ -17,7 +17,7 @@ import vm from "node:vm";
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
 
 /* Imported after the Firestore and deps mocks below: claims-ops.js reaches the org store. */
-let scrubClaim, codingCandidates, ageingOf, buildWorklists, validateRcmSettings, rcmSettings, recordPayerQuery, requestEnhancement, decideEnhancement, classifyDenial, mrnOf, evidencePack, payersFromConnectors, BillingError;
+let scrubClaim, codingCandidates, ageingOf, buildWorklists, validateRcmSettings, rcmSettings, recordPayerQuery, requestEnhancement, decideEnhancement, classifyDenial, mrnOf, evidencePack, cashlessWorklist, payersFromConnectors, BillingError;
 
 /* ---- HARNESS (as test/wardsynq-tpa-payers.test.mjs) -------------------------------------------------------- */
 
@@ -88,7 +88,7 @@ mock.module("../functions/_wardsynq/deps.js", {
 });
 
 const { onRequest } = await import("../functions/api/queue/[[path]].js");
-({ scrubClaim, codingCandidates, ageingOf, buildWorklists, validateRcmSettings, rcmSettings, recordPayerQuery, requestEnhancement, decideEnhancement, classifyDenial, mrnOf, evidencePack } = await import("../functions/_wardsynq/claims-ops.js"));
+({ scrubClaim, codingCandidates, ageingOf, buildWorklists, validateRcmSettings, rcmSettings, recordPayerQuery, requestEnhancement, decideEnhancement, classifyDenial, mrnOf, evidencePack, cashlessWorklist } = await import("../functions/_wardsynq/claims-ops.js"));
 ({ payersFromConnectors } = await import("../functions/_wardsynq/payer-connectors.js"));
 ({ BillingError } = await import("../wardsynq/wardsynq-billing.js"));
 
@@ -417,6 +417,86 @@ test("/ward/rcm-worklists and /ward/claim-checks: 401 without a session, 403 for
   assert.equal(ok.__status, 200, JSON.stringify(ok));
   assert.deepEqual(ok.dnfb, []);
   assert.equal(ok.ageing.bandsConfigured, true);
+});
+
+/* ---- R3-5 the cashless desk ---- */
+
+test("cashless worklist: expired, awaiting, below the bill, before the expected discharge and none are found with their inputs; covered, self-pay and corporate stays are not listed", () => {
+  const now = Date.parse("2026-09-17T06:00:00Z"), today = "2026-09-17";
+  const payers = [{ id: "star", name: "Star Health", contract: { payerKind: "insurer" } }, { id: "mdi", name: "MD India", contract: { payerKind: "tpa", insurerRef: "star" } },
+    { id: "acme", name: "Acme Ltd", contract: { payerKind: "corporate" } }, { id: "pmjay", name: "PM-JAY", contract: { payerKind: "government_scheme" } }];
+  const stay = (id, pid) => ({ id, patientId: pid, class: "IPD", status: "in-progress", periodStart: "2026-09-10T06:00:00Z", location: { ward: "Medical A" } });
+  const rows = {
+    Encounter: [stay("e1", "opd-pat-a1"), stay("e2", "opd-pat-a2"), stay("e3", "opd-pat-a3"), stay("e4", "opd-pat-a4"), stay("e5", "opd-pat-a5"), stay("e6", "opd-pat-a6"), stay("e7", "opd-pat-a7"), stay("e8", "opd-pat-a8"),
+      { id: "e0", patientId: "opd-pat-a1", class: "IPD", status: "finished", periodStart: "2026-08-01T00:00:00Z", periodEnd: "2026-08-05T00:00:00Z" }],
+    StayPayer: [{ encounterId: "e1", payerRef: "star" }, { encounterId: "e2", payerRef: "mdi" }, { encounterId: "e3", payerRef: "star" }, { encounterId: "e4", payerRef: "pmjay" },
+      { encounterId: "e5", payerRef: null }, { encounterId: "e6", payerRef: "acme" }, { encounterId: "e7", payerRef: "star" }, { encounterId: "e8", payerRef: "star" }],
+    PreAuthorisation: [
+      { id: "old", patientId: "opd-pat-a1", payerId: "star", state: "approved", authorizedAmount: 99999, validUntil: "2026-12-31", decidedAt: "2026-08-02T00:00:00Z" },
+      { id: "p1", patientId: "opd-pat-a1", payerId: "star", state: "approved", authorizedAmount: 50000, validUntil: "2026-09-15", decidedAt: "2026-09-10T08:00:00Z", treatment: "Admission" },
+      { id: "p2", patientId: "opd-pat-a2", payerId: "star", state: "requested", decidedAt: "2026-09-16T06:00:00Z", treatment: "Admission" },
+      { id: "p3", patientId: "opd-pat-a3", payerId: "star", state: "approved", authorizedAmount: 20000, validUntil: "2026-09-30", decidedAt: "2026-09-10T08:00:00Z",
+        payerQueries: [{ id: "q1", text: "send notes", answeredAt: null }] },
+      { id: "p7", patientId: "opd-pat-a7", payerId: "star", state: "approved", authorizedAmount: 90000, validUntil: "2026-09-30", decidedAt: "2026-09-10T08:00:00Z" },
+      { id: "p8", patientId: "opd-pat-a8", payerId: "star", state: "approved", authorizedAmount: 90000, validUntil: "2026-09-20", decidedAt: "2026-09-10T08:00:00Z" },
+    ],
+    PackageAssignment: [], ExpectedDischarge: [{ encounterId: "e8", expectedDate: "2026-09-22" }],
+    Invoice: [{ id: "i3", encounterId: "e3", lines: [{ line: 30000 }], events: [{ kind: "raised", at: "2026-09-12T00:00:00Z" }], void: false }],
+  };
+  const bills = new Map([["e1", { total: 1000, unpriced: 0 }], ["e2", { total: 1000, unpriced: 0 }], ["e4", { total: 1000, unpriced: 0 }], ["e7", { total: 40000, unpriced: 2 }], ["e8", { total: 100, unpriced: 0 }]]);
+  const w = cashlessWorklist({ rows, unreadable: {}, payers, nowMs: now, today, bills });
+  const by = Object.fromEntries(w.stays.map((s) => [s.encounterId, s]));
+  assert.deepEqual(Object.keys(by).sort(), ["e1", "e2", "e3", "e4", "e8"], "covered (e7), self-pay (e5) and corporate (e6) stays are not listed");
+  assert.deepEqual(by.e1.issues, [{ code: "expired", validUntil: "2026-09-15" }], "the previous stay's approval is not this stay's");
+  assert.equal(by.e1.preAuth.id, "p1");
+  assert.deepEqual(by.e2.issues, [{ code: "awaiting_decision", recordedAt: "2026-09-16T06:00:00Z", ageHours: 24 }], "a TPA's stay matches its insurer's pre-authorisation");
+  assert.deepEqual(by.e3.issues, [{ code: "below_bill", authorizedAmount: 20000, bill: 30000, source: "invoice" }, { code: "payer_query_open", count: 1 }]);
+  assert.deepEqual(by.e3.bill, { source: "invoice", amount: 30000, invoices: 1 });
+  assert.deepEqual(by.e4.issues, [{ code: "no_preauth" }]);
+  assert.deepEqual(by.e8.issues, [{ code: "expires_before_discharge", validUntil: "2026-09-20", expectedDischarge: "2026-09-22" }]);
+  assert.equal(by.e8.mrn, "A8");
+
+  /* An input that could not be read is said, never taken as covered. */
+  const noBill = cashlessWorklist({ rows, unreadable: { Invoice: "could not be read", ExpectedDischarge: "not readable with this role" }, payers, nowMs: now, today, bills });
+  const nb = Object.fromEntries(noBill.stays.map((s) => [s.encounterId, s]));
+  assert.ok(nb.e7, "a stay whose bill could not be read is listed");
+  assert.deepEqual(nb.e7.issues.map((x) => x.code), ["discharge_date_unreadable", "bill_unreadable"]);
+  assert.equal(nb.e7.expectedDischarge, false);
+  const unread = cashlessWorklist({ rows: { ...rows, PreAuthorisation: [] }, unreadable: { PreAuthorisation: "could not be read" }, payers, nowMs: now, today, bills });
+  assert.equal(unread.stays, null, "an unreadable pre-authorisation read is not an empty list");
+  assert.equal(unread.unreadable, "PreAuthorisation: could not be read");
+});
+
+test("/ward/cashless-stays: 401 without a session, 403 for a role without billing, another hospital refused; an expired approval is listed with its date, a self-pay stay is not, an unreadable read says why", async () => {
+  seedHospital();
+  const path = `/ward/cashless-stays?orgId=${ORG}`;
+  assert.equal((await as(null, path)).__status, 401);
+  assert.equal((await as(PHARMACY, path)).__status, 403);
+  assert.ok([403, 404].includes((await as(OUTSIDER, path)).__status));
+
+  const cash = await admitWithProblem();
+  const self = await admitWithProblem();
+  const sp = await as(CASHIER, "/ward/stay-payer", "POST", { orgId: ORG, patientId: cash.patientId, encounterId: cash.encounterId, payerRef: "star", policyNumber: "POL-1" });
+  assert.equal(sp.__status, 200, JSON.stringify(sp));
+  const selfSp = await as(CASHIER, "/ward/stay-payer", "POST", { orgId: ORG, patientId: self.patientId, encounterId: self.encounterId, payerRef: "" });
+  assert.equal(selfSp.__status, 200, JSON.stringify(selfSp));
+  const pa = await as(CASHIER, "/ward/preauth", "POST", { orgId: ORG, patientId: cash.patientId, treatment: "Admission", state: "approved", payerId: "star", authorizedAmount: 50000, validUntil: "2026-01-31" });
+  assert.equal(pa.__status, 200, JSON.stringify(pa));
+
+  const r = await as(CASHIER, path);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.deepEqual(r.stays.map((s) => s.encounterId), [cash.encounterId], "the self-pay stay is not listed");
+  assert.deepEqual(r.stays[0].issues.find((x) => x.code === "expired"), { code: "expired", validUntil: "2026-01-31" });
+  assert.equal(r.stays[0].payerName, "Star TPA");
+
+  const orig = RECORD.latestByType.bind(RECORD);
+  RECORD.latestByType = async (tenant, type, limit) => { if (type === "PreAuthorisation") throw new Error("store down"); return orig(tenant, type, limit); };
+  try {
+    const bad = await as(CASHIER, path);
+    assert.equal(bad.__status, 200, JSON.stringify(bad));
+    assert.equal(bad.stays, null);
+    assert.equal(bad.unreadable, "PreAuthorisation: could not be read");
+  } finally { RECORD.latestByType = orig; }
 });
 
 test("/org/rcm-settings: staff.admin reads and saves with a reason; others refused and nothing saved", async () => {
