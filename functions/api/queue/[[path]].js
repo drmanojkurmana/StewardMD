@@ -186,6 +186,7 @@ import * as GROUP from "../../_hospital_group_store.js";
 import { hospitalCounts } from "../../_wardsynq/hospital-group.js";
 import * as CLINICAL from "../../_wardsynq/clinical-settings.js";
 import * as FORMULARY from "../../_wardsynq/formulary-settings.js";
+import * as CONTENT from "../../_wardsynq/clinical-content-settings.js";
 import { readGstSettings, validateGstSettings, changedGstKeys } from "../../_wardsynq/gst-settings.js";
 import * as SEED from "../../_wardsynq/seed-signoff.js";
 import * as SEEDSTORE from "../../_seed_signoff_store.js";
@@ -1188,6 +1189,9 @@ export async function onRequest(context) {
         // R3-2: a recommended formulary is copied into hospitals on adoption, so it passes the same check as the hospital's own.
         if (p && p.formulary != null && (!Array.isArray(p.formulary) || FORMULARY.checkFormulary(p.formulary).problems.length))
           return refuse(422, "invalid_formulary", "The recommended formulary has entries a hospital could not use (a restriction nobody can clear, a name or code used twice, or a value that cannot be read). Nothing was saved.");
+        // R4-4: recommended critical limits, delta limits, autoverification, MAR times and note templates pass the hospital's own check.
+        const badContent = p ? CONTENT.CONTENT_KEYS.filter((k) => p[k] != null && CONTENT.checkContent(k, p[k]).problems.length) : [];
+        if (badContent.length) return refuse(422, "invalid_clinical_content", "The recommendation has settings a hospital could not use (" + badContent.join(", ") + "). Nothing was saved.");
         return json({ ok: true, group: await GROUP.setPolicy(env, g, p, actor.id) }, 200, request);
       }
       if (sub === "overview") {
@@ -1244,6 +1248,8 @@ export async function onRequest(context) {
         // A recommendation saved before the formulary was checked is refused here rather than copied in unchecked (R3-2).
         if (gr.policy && gr.policy.formulary != null && (!Array.isArray(gr.policy.formulary) || FORMULARY.checkFormulary(gr.policy.formulary).problems.length))
           return refuse(422, "invalid_formulary", "The group's recommended formulary has entries this hospital could not use, so nothing was adopted. Ask the group to correct it.");
+        const badAdopt = gr.policy ? CONTENT.CONTENT_KEYS.filter((k) => gr.policy[k] != null && CONTENT.checkContent(k, gr.policy[k]).problems.length) : [];
+        if (badAdopt.length) return refuse(422, "invalid_clinical_content", "The group's recommended " + badAdopt.join(", ") + " could not be used by this hospital, so nothing was adopted. Ask the group to correct it.");
         return done(await GROUP.adoptPolicy(env, o, gr, actor.id));
       }
     }
@@ -5673,6 +5679,45 @@ export async function onRequest(context) {
       }
       return json({ ok: false, error: "not_found" }, 404, request);
     }
+    /* R4-4: critical limits, delta limits, autoverification, MAR times and note templates (clinical-content-settings.js), one card
+     * each on Admin > Hospital. The formulary pattern: a dry run item by item, any problem refuses the whole save, a commit writes
+     * only the dry run's result (confirmCount, planId) with a reason and the name of who signed the values off, audited and read
+     * back. staff.admin AND the key's clinical capability (CAP_FOR). /org/update refuses these keys. */
+    if (seg === "org" && sub === "clinical-settings" && parts[2]) {
+      const key = parts[2];
+      if (!CONTENT.CONTENT_KEYS.includes(key) || parts[3]) return json({ ok: false, error: "not_found" }, 404, request);
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      if (capsFor(az.role).indexOf(CONTENT.CAP_FOR[key]) < 0) return json({ ok: false, error: "forbidden", role: az.role, need: [CAPS.STAFF_ADMIN, CONTENT.CAP_FOR[key]], message: 'Your role here is "' + az.role + '", which cannot change this setting. It needs staff administration and ' + CONTENT.CAP_FOR[key] + " (the admin role)." }, 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Clinical settings belong to a WardSynQ hospital." }, 409, request);
+      const w = o.wardsynq || {};
+      const signOff = (w[CONTENT.SIGNOFF_KEY] && w[CONTENT.SIGNOFF_KEY][key]) || null;
+      if (method === "GET") {
+        const chk = CONTENT.checkContent(key, w[key]);
+        return json({ ok: true, key, configured: w[key] != null, saved: w[key] == null ? CONTENT.emptyOf(key) : w[key], problems: chk.problems, signOff, reference: CONTENT.referenceFor(key) }, 200, request);
+      }
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      if (cb.value === undefined) return json({ ok: false, error: "value_required", message: "Send the whole setting. Nothing was saved." }, 422, request);
+      const plan = await CONTENT.planContent(key, w[key], cb.value);
+      const report = { step: "preview", key, planId: plan.planId, counts: plan.counts, changeCount: plan.changeCount, rows: plan.rows };
+      if (!plan.ok) return json({ ok: false, error: "invalid_clinical_content", message: "Nothing was saved. Every item with a problem is listed with the reason; correct them and run the dry run again.", ...report }, 422, request);
+      if (cb.commit !== true) return json({ ok: true, ...report }, 200, request);
+      if (!plan.changeCount) return json({ ok: true, ...report, step: "done", written: 0 }, 200, request);
+      const reason = String(cb.reason || "").trim().slice(0, 200), signedOffBy = String(cb.signedOffBy || "").trim().slice(0, 120);
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why this setting is being changed. Nothing was saved.", ...report }, 422, request);
+      if (!signedOffBy) return json({ ok: false, error: "signoff_required", message: "Name who signed these values off clinically (a person and role, or a committee). Nothing was saved.", ...report }, 422, request);
+      if (Number(cb.confirmCount) !== plan.changeCount || String(cb.planId || "") !== plan.planId) return json({ ok: false, error: "preview_changed", message: "The setting or the changes differ from the dry run. Run the dry run again; nothing was saved.", ...report }, 409, request);
+      const record = { signedOffBy, reason, by: actor.id, at: new Date().toISOString(), planId: plan.planId };
+      await ORG.updateOrg(env, orgId, { wardsynq: { [key]: plan.value, [CONTENT.SIGNOFF_KEY]: { ...(w[CONTENT.SIGNOFF_KEY] || {}), [key]: record } } }, actor.id,
+        { action: "org:clinical_content", meta: CONTENT.auditMeta(key, plan, reason, signedOffBy) });
+      const back = ((await ORG.getOrg(env, orgId)) || {}).wardsynq || {};
+      if (JSON.stringify(back[key]) !== JSON.stringify(plan.value) || !back[CONTENT.SIGNOFF_KEY] || JSON.stringify(back[CONTENT.SIGNOFF_KEY][key]) !== JSON.stringify(record))
+        return json({ ok: false, error: "not_saved", message: "The setting did not read back as sent, so do not rely on it. Open it again and check." }, 502, request);
+      return json({ ok: true, ...report, step: "done", written: plan.changeCount, signOff: record }, 200, request);
+    }
     /* D11 A: the hospital's clinical settings template (Admin Center > Hospital). staff.admin reads and saves;
      * only a WardSynQ hospital has these settings. The read is what the screen shows as "what is saved". */
     if (seg === "org" && sub === "clinical-settings") {
@@ -6308,6 +6353,9 @@ export async function onRequest(context) {
         const wb = body.wardsynq;
         if (wb && typeof wb === "object" && ("formulary" in wb || "requireReasonOffFormulary" in wb))
           return json({ ok: false, error: "use_formulary_route", message: "The formulary is changed on Admin Center > Hospital > Formulary (POST /org/formulary), where it is checked and audited. Nothing was saved." }, 422, request);
+        /* R4-4: the same for critical limits, delta limits, autoverification, MAR times, note templates and their sign-off record. */
+        if (wb && typeof wb === "object" && CONTENT.CONTENT_KEYS.concat(CONTENT.SIGNOFF_KEY).some((k) => k in wb))
+          return json({ ok: false, error: "use_clinical_settings_route", message: "Critical limits, delta limits, autoverification, MAR times and note templates are changed on Admin Center > Hospital (POST /org/clinical-settings/<setting>), where they are checked, signed off and audited. Nothing was saved." }, 422, request);
         /* Owner decision 2026-09-15: level 2 tells the on-duty ward team by a named rule; only the rules built may be saved. */
         const wardRuleRefusal = level2WardRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
         if (wardRuleRefusal) return json({ ok: false, error: "level2_ward_rule_not_built", message: wardRuleRefusal }, 422, request);

@@ -597,6 +597,179 @@
     if (c.can("order.verify")) load();
   }
 
+  // ---- Critical limits, delta limits, autoverification, MAR times, note templates (R4-4) --------------------------------------
+  /* One card per setting, each through GET/POST /org/clinical-settings/<setting> (functions/_wardsynq/clinical-content-settings.js).
+   * The formulary card's pattern: the draft is a table of rows, Dry run sends it whole, the server lists each item as added,
+   * changed, removed or refused with its reason, and Save sends exactly that plan back (count and plan id) with a reason and who
+   * signed the values off. The draft starts from what is SAVED, never from a built-in default: empty is "not configured".
+   * Codes, units, times, template text and names are the hospital's own values and are never translated.
+   * s.r: undefined = loading, null = could not be loaded, else the server's read. s.pv: null = not run, false = failed, else the report. */
+  var CCS_KEYS = ["criticalLimits", "deltaLimits", "autoVerify", "marTimes", "noteTemplates"];
+  var CCS_CAP = { criticalLimits: "lab.result", deltaLimits: "lab.result", autoVerify: "lab.result", marTimes: "order.verify", noteTemplates: "emr.treat" };
+  var CCS_COLS = { criticalLimits: ["code", "display", "unit", "low", "high"], deltaLimits: ["code", "maxAbsolute", "maxPercent", "withinHours"], autoVerify: ["code"], marTimes: ["frequency", "times"], noteTemplates: ["id", "name", "noteType", "sections"] };
+  function ccsText(c, key) {
+    return {
+      criticalLimits: [T(c, "site.admin.ccs.critical.title", "Critical limits"), T(c, "site.admin.ccs.critical.intro", "The low and high values at or beyond which a laboratory result opens a critical result loop. The laboratory's own critical flag always counts as well. An analyte not listed here uses the built-in adult default shown below."), T(c, "site.admin.ccs.critical.empty", "No critical limits are saved for this hospital. The built-in adult defaults below apply until limits are saved.")],
+      deltaLimits: [T(c, "site.admin.ccs.delta.title", "Delta check limits"), T(c, "site.admin.ccs.delta.intro", "The largest change from the patient's previous result, as a value in the result's own unit or as a percentage, before a result is flagged for a sample identity check. A result is never withheld. Results in different units are not compared. The previous result counts for 72 hours unless another window is given."), T(c, "site.admin.ccs.delta.empty", "No delta limits are saved. Results are not delta checked, and each result says so.")],
+      autoVerify: [T(c, "site.admin.ccs.auto.title", "Autoverification"), T(c, "site.admin.ccs.auto.intro", "Tests that may be released without a human look when the result is numeric, inside its reference range, not flagged critical by the laboratory and has no delta breach. Anything else is looked at."), T(c, "site.admin.ccs.auto.empty", "Autoverification is not configured. Every result is looked at.")],
+      marTimes: [T(c, "site.admin.ccs.mar.title", "Medication round times"), T(c, "site.admin.ccs.mar.intro", "The clock times a named frequency is due, on the 24 hour clock, in order through the day. TDS and QID times also place the 1-0-1 and 1-0-0-1 notations. A frequency not listed here uses the built-in round shown below."), T(c, "site.admin.ccs.mar.empty", "No round times are saved. The built-in round below applies until times are saved.")],
+      noteTemplates: [T(c, "site.admin.ccs.notes.title", "Note templates"), T(c, "site.admin.ccs.notes.intro", "The headings of this hospital's clinical notes. A section asks a question and never carries default text. One section per line: key | title | question | required. A template with the id of a built-in note replaces it."), T(c, "site.admin.ccs.notes.empty", "No note templates are saved. The built-in notes are offered until templates are saved.")],
+    }[key];
+  }
+  function ccsColLabel(c, col) {
+    return { code: T(c, "site.admin.ccs.col.code", "Test code"), display: T(c, "site.admin.ccs.col.display", "Name shown"), unit: T(c, "site.admin.ccs.col.unit", "Unit"), low: T(c, "site.admin.ccs.col.low", "Low limit"), high: T(c, "site.admin.ccs.col.high", "High limit"),
+      maxAbsolute: T(c, "site.admin.ccs.col.maxAbsolute", "Largest change (value)"), maxPercent: T(c, "site.admin.ccs.col.maxPercent", "Largest change (%)"), withinHours: T(c, "site.admin.ccs.col.withinHours", "Previous result within (hours)"),
+      frequency: T(c, "site.admin.ccs.col.frequency", "Frequency"), times: T(c, "site.admin.ccs.col.times", "Times, separated by commas"),
+      id: T(c, "site.admin.ccs.col.id", "Template id"), name: T(c, "site.admin.ccs.col.name", "Template name"), noteType: T(c, "site.admin.ccs.col.noteType", "Note type"), sections: T(c, "site.admin.ccs.col.sections", "Sections, one per line") }[col] || col;
+  }
+  function ccsReason(c, p) {
+    var t = { not_an_object: T(c, "site.admin.ccs.r.shape", "This could not be read."), unknown_code: T(c, "site.admin.ccs.r.unknownCode", "No laboratory result carries this code, so the rule would never be applied."),
+      unit_required: T(c, "site.admin.ccs.r.unit", "Give the unit the limit is written in."), no_bound: T(c, "site.admin.ccs.r.noBound", "Give a low limit, a high limit or both."),
+      bad_number: T(c, "site.admin.ccs.r.number", "A value is not a number above zero."), low_not_below_high: T(c, "site.admin.ccs.r.lowHigh", "The low limit must be below the high limit."),
+      no_threshold: T(c, "site.admin.ccs.r.noThreshold", "Give a largest change as a value, as a percentage, or both."), enabled_not_yes_no: T(c, "site.admin.ccs.r.onOff", "Say whether autoverification is on or off."),
+      enabled_without_codes: T(c, "site.admin.ccs.r.noCodes", "Autoverification is on but no test is listed. Turn it off or list the tests."), duplicate: T(c, "site.admin.ccs.r.duplicate", "This is listed twice."),
+      unknown_frequency: T(c, "site.admin.ccs.r.frequency", "This is not a frequency the medication round schedules (OD, BD, TDS, QID, OM, HS)."), bad_time: T(c, "site.admin.ccs.r.time", "A time must be written as HH:MM on the 24 hour clock."),
+      wrong_count: T(c, "site.admin.ccs.r.count", "The number of times must match the frequency ({n} here).", { n: p.expected }), times_out_of_order: T(c, "site.admin.ccs.r.order", "Give the times in order through the day."),
+      template_incomplete: T(c, "site.admin.ccs.r.templateIncomplete", "A template needs an id and a name."), template_empty: T(c, "site.admin.ccs.r.templateEmpty", "A template needs at least one section."),
+      no_key: T(c, "site.admin.ccs.r.noKey", "A section needs a key or a title."), default_text_not_allowed: T(c, "site.admin.ccs.r.defaultText", "A section may carry a question, never default text."),
+      too_long: T(c, "site.admin.ccs.r.tooLong", "A value is longer than 200 characters."), too_many: T(c, "site.admin.ccs.r.tooMany", "More templates or sections than this setting can hold.") }[p.reason];
+    return (t ? c.esc(t) : EN(c, c.esc(p.message || p.reason))) + (p.section ? " " + EN(c, c.esc(p.section)) : "");
+  }
+  // The saved value as editable rows of strings; and back. Numbers stay strings until the server checks them.
+  function ccsRows(key, v) {
+    var s = function (x) { return x == null ? "" : String(x); };
+    if (key === "noteTemplates") return (v || []).map(function (t) { return { id: s(t.id), name: s(t.name), noteType: s(t.noteType), sections: (t.sections || []).map(function (x) { return [s(x.key), s(x.title), s(x.prompt), x.required ? "required" : ""].join(" | ").replace(/( \| )+$/, ""); }).join("\n") }; });
+    if (key === "autoVerify") return ((v && v.codes) || []).map(function (code) { return { code: code }; });
+    return Object.keys(v || {}).map(function (k) {
+      var x = v[k];
+      if (key === "marTimes") return { frequency: k, times: (x || []).join(", ") };
+      var row = { code: k };
+      CCS_COLS[key].slice(1).forEach(function (col) { row[col] = s(x && x[col]); });
+      return row;
+    });
+  }
+  function ccsValue(key, rows, enabled) {
+    var tr = function (x) { return String(x == null ? "" : x).trim(); };
+    if (key === "autoVerify") return { enabled: !!enabled, codes: rows.map(function (r) { return tr(r.code); }).filter(Boolean) };
+    if (key === "noteTemplates") return rows.map(function (r) {
+      var t = { id: tr(r.id), name: tr(r.name) };
+      if (tr(r.noteType)) t.noteType = tr(r.noteType);
+      t.sections = String(r.sections || "").split("\n").map(tr).filter(Boolean).map(function (line) {
+        var p = line.split("|").map(tr), sec = { key: p[0], title: p[1] || p[0] };
+        if (p[2]) sec.prompt = p[2];
+        if (/^(required|yes)$/i.test(p[3] || "")) sec.required = true;
+        return sec;
+      });
+      return t;
+    });
+    var out = {};
+    rows.forEach(function (r) {
+      var k = tr(key === "marTimes" ? r.frequency : r.code);
+      if (!k) return;
+      if (key === "marTimes") { out[k] = tr(r.times).split(",").map(tr).filter(Boolean); return; }
+      var x = {};
+      CCS_COLS[key].slice(1).forEach(function (col) { if (tr(r[col])) x[col] = tr(r[col]); });
+      out[k] = x;
+    });
+    return out;
+  }
+  function ccsStatusLabel(c, st) {
+    return { add: T(c, "site.admin.fml.stAdd", "Will be added"), change: T(c, "site.admin.fml.stChange", "Will be changed"), unchanged: T(c, "site.admin.fml.stUnchanged", "Left as it is"), invalid: T(c, "site.admin.fml.stInvalid", "Refused"), remove: T(c, "site.admin.fml.stRemove", "Will be removed") }[st] || st;
+  }
+  function ccsHtml(c, key, s) {
+    var esc = c.esc, r = s.r, text = ccsText(c, key);
+    var h = '<div class="card"><h2>' + esc(text[0]) + "</h2>";
+    if (!c.can(CCS_CAP[key])) return h + '<div class="msg note">' + esc(T(c, "site.admin.ccs.noAccess", "Changing this setting needs staff administration and the clinical capability that uses it ({cap}). Your role does not include both.", { cap: CCS_CAP[key] })) + "</div></div>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.ccs.loading", "Loading...")) + "</p></div>";
+    if (r === null) return h + '<div class="msg err">' + esc(T(c, "site.admin.ccs.loadFailed", "This setting could not be loaded. Do not read this as not configured.")) + "</div></div>";
+    h += '<p class="quiet">' + esc(text[1]) + "</p>";
+    if (!r.configured) h += '<div class="msg note">' + esc(text[2]) + "</div>";
+    if ((r.problems || []).length) h += '<div class="msg err">' + esc(T(c, "site.admin.ccs.savedProblems", "The saved setting has {n} problems. Correct them before saving any change.", { n: r.problems.length })) + "</div>";
+    if (r.signOff) h += '<p class="quiet">' + esc(T(c, "site.admin.ccs.lastSaved", "Last saved {at}.", { at: String(r.signOff.at || "").slice(0, 16).replace("T", " ") })) + " " + esc(T(c, "site.admin.ccs.signedOffBy", "Signed off by:")) + " " + EN(c, esc(r.signOff.signedOffBy)) + ". " + esc(T(c, "site.admin.ccs.why", "Reason:")) + " " + EN(c, esc(r.signOff.reason)) + "</p>";
+    var ref = r.reference || {};
+    if (key === "autoVerify") h += '<label class="f"><span><input type="checkbox" data-ccs-on' + (s.enabled ? " checked" : "") + "> " + esc(T(c, "site.admin.ccs.auto.on", "Autoverification on for the tests listed")) + "</span></label>";
+    var cols = CCS_COLS[key];
+    h += '<div class="tbl"><table><thead><tr>' + cols.map(function (col) { return "<th>" + esc(ccsColLabel(c, col)) + "</th>"; }).join("") + "<th></th></tr></thead><tbody>" +
+      s.rows.map(function (row, i) {
+        return "<tr>" + cols.map(function (col) {
+          var v = row[col] == null ? "" : String(row[col]);
+          if (col === "code" && ref.knownCodes) return '<td><select data-ccs-f="' + col + '" data-i="' + i + '"><option value=""></option>' + Object.keys(ref.knownCodes).map(function (k) { return '<option value="' + esc(k) + '"' + (k === v ? " selected" : "") + ">" + EN(c, esc(k + " " + ref.knownCodes[k])) + "</option>"; }).join("") + "</select></td>";
+          if (col === "frequency") return '<td><select data-ccs-f="' + col + '" data-i="' + i + '"><option value=""></option>' + Object.keys(ref.frequencies || {}).map(function (k) { return '<option value="' + esc(k) + '"' + (k === v ? " selected" : "") + ">" + EN(c, esc(k)) + "</option>"; }).join("") + "</select></td>";
+          if (col === "sections") return '<td><textarea rows="3" data-ccs-f="' + col + '" data-i="' + i + '">' + esc(v) + "</textarea></td>";
+          return '<td><input data-ccs-f="' + col + '" data-i="' + i + '" value="' + esc(v) + '"></td>';
+        }).join("") + '<td><button type="button" class="btn ghost" data-ccs="del" data-i="' + i + '">' + esc(T(c, "site.admin.ccs.remove", "Remove")) + "</button></td></tr>";
+      }).join("") + "</tbody></table></div>" +
+      '<div class="row"><button type="button" class="btn ghost" data-ccs="add">' + esc(T(c, "site.admin.ccs.addRow", "Add a row")) + '</button> <button type="button" class="btn" data-ccs="dry">' + esc(T(c, "site.admin.fml.dryRun", "Dry run the changes")) + "</button></div>";
+    if (ref.defaults) {
+      h += "<details><summary>" + esc(T(c, "site.admin.ccs.defaults", "Built-in values that apply where nothing is saved")) + '</summary><pre class="mono" style="white-space:pre-wrap">' +
+        EN(c, esc(Object.keys(ref.defaults).map(function (k) { var d = ref.defaults[k]; return Array.isArray(d) ? k + ": " + d.join(", ") : k + " " + d.display + ": " + (d.low == null ? "" : "<= " + d.low + " ") + (d.high == null ? "" : ">= " + d.high + " ") + d.unit; }).join("\n"))) + "</pre></details>";
+    }
+    if (ref.builtIn) h += '<p class="quiet">' + esc(T(c, "site.admin.ccs.builtIn", "Built-in notes:")) + " " + EN(c, esc(ref.builtIn.map(function (b) { return b.id; }).join(", "))) + "</p>";
+    var pv = s.pv;
+    if (pv != null) {
+      h += "<h3>" + esc(T(c, "site.admin.fml.reportTitle", "Dry run result")) + "</h3>";
+      if (pv === false) h += '<div class="msg err">' + esc(T(c, "site.admin.fml.dryFailed", "The dry run could not be completed. Nothing was saved.")) + "</div>";
+      else if (!pv.rows) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+      else {
+        if (!pv.ok) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+        if (pv.ok && pv.step === "done") h += '<div class="msg ok">' + esc(T(c, "site.admin.ccs.saved", "Saved {n} changes. The table above is what the server now holds.", { n: pv.written })) + "</div>";
+        var n = pv.counts || {};
+        h += "<p>" + ["add", "change", "remove", "invalid"].map(function (k) { return '<span class="pill' + (k === "invalid" ? " stop" : "") + '">' + esc(ccsStatusLabel(c, k)) + ": " + esc(String(n[k] || 0)) + "</span>"; }).join(" ") + "</p>";
+        var shown = pv.rows.filter(function (x) { return x.status !== "unchanged"; });
+        if (shown.length) h += '<div class="tbl"><table><tbody>' + shown.map(function (x) { return '<tr><td class="mono">' + EN(c, esc(x.item)) + "</td><td>" + esc(ccsStatusLabel(c, x.status)) + "</td><td>" + (x.problems || []).map(function (p) { return ccsReason(c, p); }).join("<br>") + "</td></tr>"; }).join("") + "</tbody></table></div>";
+        if (pv.ok && pv.step === "preview") {
+          h += pv.changeCount ? '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.ccs.reason", "Why this is changing (required)")) + '</span><input data-ccs-reason maxlength="200"></label>' +
+            '<label class="f"><span>' + esc(T(c, "site.admin.ccs.signOff", "Signed off clinically by (name and role, or committee; required)")) + '</span><input data-ccs-signoff maxlength="120"></label>' +
+            '<button type="button" class="btn" data-ccs="commit" data-count="' + esc(String(pv.changeCount)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.fml.commit", "Save these {n} changes", { n: pv.changeCount })) + "</button></div>"
+            : '<p class="quiet">' + esc(T(c, "site.admin.fml.nothing", "Nothing would change.")) + "</p>";
+        }
+      }
+    }
+    return h + '<div data-ccs-msg aria-live="polite"></div></div>';
+  }
+  WSQ._ccs = { html: ccsHtml, rows: ccsRows, value: ccsValue, keys: CCS_KEYS };
+  function wireContentSetting(c, key) {
+    var box = document.getElementById("ccsCard-" + key);
+    if (!box) return;
+    var s = { r: undefined, rows: [], enabled: false, pv: null };
+    var draw = function () { box.innerHTML = ccsHtml(c, key, s); };
+    var load = function () {
+      return c.api("/org/clinical-settings/" + key + "?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+        s.r = r && r.ok ? r : null;
+        if (s.r) { s.rows = ccsRows(key, s.r.saved); s.enabled = !!(s.r.saved && s.r.saved.enabled === true); }
+        draw();
+      }, function () { s.r = null; draw(); });
+    };
+    var send = function (extra) { return c.api("/org/clinical-settings/" + key, Object.assign({ orgId: c.state.orgId, value: ccsValue(key, s.rows, s.enabled) }, extra || {})); };
+    box.onchange = box.oninput = function (ev) {
+      var t = ev.target || {};
+      if (t.hasAttribute && t.hasAttribute("data-ccs-on")) { s.enabled = !!t.checked; s.pv = null; return; }
+      var f = t.getAttribute && t.getAttribute("data-ccs-f");
+      if (f) { s.rows[Number(t.getAttribute("data-i"))][f] = t.value; if (s.pv && ev.type === "change") { s.pv = null; draw(); } }
+    };
+    box.onclick = function (ev) {
+      var b = ev.target.closest && ev.target.closest("[data-ccs]"); if (!b) return;
+      var act = b.getAttribute("data-ccs");
+      if (act === "add") { s.rows.push({}); s.pv = null; draw(); return; }
+      if (act === "del") { s.rows.splice(Number(b.getAttribute("data-i")), 1); s.pv = null; draw(); return; }
+      if (act === "dry") { b.disabled = true; send().then(function (r) { s.pv = r || false; draw(); }, function () { s.pv = false; draw(); }); return; }
+      if (act === "commit") {
+        var reason = String((box.querySelector("[data-ccs-reason]") || {}).value || "").trim(), by = String((box.querySelector("[data-ccs-signoff]") || {}).value || "").trim();
+        var m = box.querySelector("[data-ccs-msg]");
+        if (!reason || !by) { if (m) m.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.ccs.reasonFirst", "Say why this is changing and who signed it off first.")) + "</div>"; return; }
+        b.disabled = true;
+        send({ commit: true, reason: reason, signedOffBy: by, confirmCount: Number(b.getAttribute("data-count")), planId: b.getAttribute("data-plan") }).then(function (r) {
+          s.pv = r || false;
+          // After a save the setting is read again, so the table shows what the server holds, never the draft.
+          if (r && r.ok && r.step === "done") return load();
+          draw();
+        }, function () { s.pv = false; draw(); });
+      }
+    };
+    draw();
+    if (c.can(CCS_CAP[key])) load();
+  }
+
   // ---- Clinical seed data (D10) ------------------------------------------------------------------
   /* Clinical content that ships with WardSynQ (allergy classes, dose ceilings, default critical limits and
    * the other seed lists), item by item. An item is UNAPPROVED until signed off by the named signatory for its
@@ -1288,7 +1461,7 @@
       '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.countryNote", "The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.")) + '</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.hospital.needsWardsynq", "Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.")) + '</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="fmlCard"></div><div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="fmlCard"></div>' + CCS_KEYS.map(function (k) { return '<div id="ccsCard-' + k + '"></div>'; }).join("") + '<div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
       /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
       (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
         ? '<div class="card"><h2>' + c.esc(T(c, "site.admin.hospital.removeTitle", "Remove this hospital")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.hospital.removeIntro", "Removes it from every hospital list. Patient records, documents and the audit trail are kept.")) + '</p>' +
@@ -1312,6 +1485,7 @@
     };
     wireClinicalSettings(c);
     wireFormulary(c);
+    CCS_KEYS.forEach(function (k) { wireContentSetting(c, k); });
     wireDonorCriteria(c); wireBloodCentre(c);
     wireNoteWriters(c);
     wirePrintLang(c);
