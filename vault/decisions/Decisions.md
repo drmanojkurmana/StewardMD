@@ -7922,3 +7922,28 @@ of compliance.js is untouched.
   Nothing leaves WardSynQ.
 - Not built: offering forms for a booked appointment (the brief's optional hospital setting); no setting exists, so it
   behaves as off. Staff form-submit still accepts a patient-audience form as a staff-completed response.
+
+## 2026-09-17 Open census by status and a paged whole-type read (branch census-by-status, R4-1)
+
+- Problem: every roster read (`service.list`) was clamped to 1,000 records, oldest first, and silent. The ward list,
+  nurse worklist, bed board, admission bed clash (200), transfer (200), patient flow, ICU occupancy, ED board, theatre
+  list, downtime pack, waiting list and emergency reconciliation all read encounters that way, discharged stays and OPD
+  visits included (OPD visits ARE Encounters, class OPD, via migrate-encounter.js).
+- Port: new OPTIONAL `pageByType(tenantId, type, {afterSeq, limit, statuses})` -> `{records, next}`, oldest first by
+  each id's latest seq, one page of at most 1,000. Memory and D1; the on-premise sqlite adapter is a binding into
+  D1Repository, so it has it too. An id amended between pages is met again later; the reader keeps the later copy.
+- Service: `listByStatus(type, statuses, max)` pages the open records only, ceiling `OPEN_CENSUS_MAX` 5,000, past it
+  throws `ListCeilingError` code `too_many_open` (never a short census). `listAll(type, {max, throwOnTruncate})` pages
+  every record, default 50,000, hard ceiling 100,000; past max returns `{rows (oldest max), truncated: true}` or throws
+  `too_many_records`. Both govern and audit exactly as `list` (one record.list row). A store without pageByType refuses.
+- Callers moved: the Encounter reads named above now use listByStatus("in-progress"); emergency reconciliation uses
+  listAll (an override outlives the stay) and refuses past the ceiling. A census refusal answers 503 `too_many_open`,
+  written 0: an admission or transfer is refused, not made on a short read. Ward and ED boards name patients from the
+  newest 1,000 Patients plus a read by id for any missing (the oldest-first roster left new patients nameless).
+- Checked, audit uncertainty: `checkMasterBed` reads the bed's administrative state only, not occupancy; occupancy is the
+  census scan plus the bed claim. A stay without a claim (imported, migrated, moved by transfer) is seen by the scan only.
+- ponytail: D1 re-groups every version of the type per page (same GROUP BY as latestByType). The open census is one
+  page; a whole-type read is N/1,000 pages. A latest-version flag or table (audit O20) is the upgrade if that is slow.
+- Left for R4-2: counting and summing callers (quality, security-review, analytics-extract, discharge-milestones,
+  reports, fhir-group, hospital-group and the ledgers) still use list(); they move to listAll. Open OPD visits that never
+  close count against the 5,000 open ceiling; reaching it is visible (503), not silent.
