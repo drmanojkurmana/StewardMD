@@ -189,7 +189,7 @@ try {
 
   // Walk to the first question and prove no answer is on screen before the student commits.
   let foundAsk = false;
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 24; i++) {
     if (await ev("!!document.querySelector('#clinixRoot .cx-turn--ask')")) { foundAsk = true; break; }
     const next = await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-turn-next\"]')");
     if (!next) break;
@@ -665,18 +665,18 @@ try {
   ok(afterPg && afterPg.pgOn === true, "switching to PG restarts the viva and marks PG as the active tier");
   ok(afterPg && /level 2/.test(afterPg.levelText), "PG starts one level harder than MBBS (level 2, not 1)");
 
-  // Voice mode: off by default, and turning it on must not crash the screen even though no real
-  // STT plugin exists in this headless test - the mic tap must degrade to a toast, never hang.
-  const voiceOff = await ev("!document.querySelector('#clinixRoot .cx-voice-btn--on')");
-  ok(voiceOff === true, "voice mode is off by default");
-  await ev('document.querySelector(\'#clinixRoot [data-act="cx-viva-voice-toggle"]\').click()');
-  await sleep(200);
-  ok((await ev("!!document.querySelector('#clinixRoot .cx-voice-btn--on')")) === true, "the voice toggle turns on and the UI reflects it");
+  // Voice mode: on by default by decision (2026-08-26), and toggling it must update the UI.
+  // Mic tap must degrade to toast, never hang.
+  const voiceOn = await ev("!!document.querySelector('#clinixRoot .cx-voice-btn--on')");
+  ok(voiceOn === true, "voice mode is on by default");
   ok((await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-viva-mic\"]')")) === true, "a mic control appears once voice mode is on");
   await ev('document.querySelector(\'#clinixRoot [data-act="cx-viva-mic"]\').click()');
   await sleep(300);
   ok((await ev("!!document.getElementById('clinixRoot')")) === true,
     "tapping the mic with no real STT plugin present degrades safely - no real device here, so no crash is the whole test");
+  await ev('document.querySelector(\'#clinixRoot [data-act="cx-viva-voice-toggle"]\').click()');
+  await sleep(200);
+  ok((await ev("!document.querySelector('#clinixRoot .cx-voice-btn--on')")) === true, "the voice toggle turns off and the UI reflects it");
 
   /* ── 9. No prescribing surface anywhere in CliniX ──────────────────────── */
   console.log("\n--- safety ---");

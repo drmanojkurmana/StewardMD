@@ -629,6 +629,12 @@ export async function proveView({ client, view, brain = null, since = -1, label 
   let pageOrigin = null;
   try { pageOrigin = new URL(pageUrl || view.pathTemplate).origin; } catch { pageOrigin = null; }
 
+  /* A LIST RESOURCE HAS COLUMNS. A medicines chart, a lab list or a radiology list is a table with named
+   * columns; a block of label/value cells with no header row is a patient details panel, whatever the
+   * crawl hinted. Proving such a block as "medications" against the visit-activation reply (Searchnew,
+   * an assessment page with tables) passed the gate on the live run (candidate ver_6918814c, 2026-09-17)
+   * and would have put the assessment form in the medicines drawer. */
+  if (['medications', 'labs', 'radiology'].includes(String(view.resourceHint || '')) && !view.block && (!Array.isArray(view.headers) || view.headers.filter(Boolean).length < 1)) return done('no-headers');
   const all = await evalJson(client, PROVE_SOURCES.list(since), []);
   const entries = (Array.isArray(all) ? all : []).filter((e) => {
     if (!e || (e.method !== 'GET' && e.method !== 'POST')) return false;
@@ -651,6 +657,29 @@ export async function proveView({ client, view, brain = null, since = -1, label 
     cells = consideredCells(shown.flat().filter((t) => !IDENTITY_LABEL.test(String(t || '')))).filter((c) => !skip.has(c));
   }
   const prose = isNarrativeDetail(view) ? reportWords(shown) : [];
+  /* A DETAIL THAT LEAVES THE SCREEN IS PROVEN BY ITS TRACE. GHIS opens a lab result from the order list
+   * through a print icon: the result call answers, the page writes it into an off-screen print frame,
+   * and nothing on the screen can be matched (live run, 2026-09-17). The call is still the row's own:
+   * its fields trace to the parent row (render id, episode) and its reply carries rows. That is the
+   * same guard the runtime replays it under, so it is accepted as the chained detail. */
+  if (!cells.length && !prose.length && view.detailOf && parents.length) {
+    for (const e of entries.slice().reverse()) {
+      const p = paramsOf(e, parents);
+      if (!chained(p)) continue;
+      const resp = await evalJson(client, PROVE_SOURCES.exec(e.seq), null);
+      const kind = responseKind(resp);
+      if (kind === 'login') return done('signed-out');
+      if (kind !== 'json' && kind !== 'html') continue;
+      const rows = rowsForChain(resp.text, resp.contentType);
+      if (!rows.length) continue;
+      trace.tried.push({ method: e.method, path: candidateStructure(e).path.replace(/\d{3,}/g, '#'), role: 'data', kind, hits: 0, ratio: 0, chained: true });
+      const [red] = redactEndpoints([{ method: e.method, url: e.url, bodyKeys: candidateStructure(e).bodyKeys, requestKind: /json/i.test(e.reqCt) ? 'json' : (e.body ? 'form' : undefined), xhr: e.xhr }], e.url);
+      if (!red) continue;
+      view.endpoints = [Object.assign(red, { role: 'data', params: safeParams(p), proof: { kind, hits: 0, cells: 0, overlap: 0, rows: rows.length, chained: true } })];
+      view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: 0, hits: 0, cells: 0, kind, population: rows.length, chained: true }, trace.model ? { model: trace.model } : {});
+      return { proven: { label: view.resourceHint, rows }, trace };
+    }
+  }
   if (!cells.length && !prose.length) return done('no-screen-values');
 
   // REASON: the brain ranks from structure; its order is the execution order.

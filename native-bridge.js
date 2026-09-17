@@ -138,7 +138,7 @@
         var imgH = canvas.height * (pw / canvas.width);
         if (imgH <= ph) {
           if (pageCount > 0) pdf.addPage();
-          pdf.addImage(canvas.toDataURL("image/jpeg", 0.95), "JPEG", 0, 0, imgW, imgH);
+          pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, imgW, imgH);
           pageCount++;
           return;
         }
@@ -189,7 +189,7 @@
 
           if (pageCount > 0) pdf.addPage();
           var slicePtH = sliceHeightCanvas * (pw / canvas.width);
-          pdf.addImage(sliceCanvas.toDataURL("image/jpeg", 0.95), "JPEG", 0, 0, pw, slicePtH);
+          pdf.addImage(sliceCanvas.toDataURL("image/png"), "PNG", 0, 0, pw, slicePtH);
           pageCount++;
           currentY = splitY;
         }
@@ -203,7 +203,7 @@
         for (var pi = 0; pi < pageNodes.length; pi++) {
           (function (pageElem) {
             pChain = pChain.then(function () {
-              return H(pageElem, { scale: 2, backgroundColor: "#ffffff", useCORS: true }).then(function (pageCanvas) {
+              return H(pageElem, { scale: 3, backgroundColor: "#ffffff", useCORS: true }).then(function (pageCanvas) {
                 addCanvasSlice(pageCanvas, pageElem);
               });
             });
@@ -212,7 +212,7 @@
         renderPromise = pChain;
       } else {
         var container = host.querySelector(".smd-pdf-container") || host;
-        renderPromise = H(container, { scale: 2, backgroundColor: "#ffffff", useCORS: true }).then(function (canvas) {
+        renderPromise = H(container, { scale: 3, backgroundColor: "#ffffff", useCORS: true }).then(function (canvas) {
           addCanvasSlice(canvas, container);
         });
       }

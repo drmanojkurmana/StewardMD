@@ -368,7 +368,7 @@
     if (t.hasAttribute("data-lock")) { W.locked = t.getAttribute("data-lock"); W.step = 4; render(); return; }
     if (act === "groupnext") { openNextGroup(); return; }
     if (act === "clearall") { W.findings = {}; W.locked = null; render(); return; }
-    if (act === "openref") { try { if (window.DX && DX.openRef) DX.openRef(t.getAttribute("data-ref")); } catch (x) {} return; }
+    if (act === "openref") { try { if (window.DX && DX.openRef) DX.openRef(t.getAttribute("data-ref"), { from: "abx-wizard", standalone: true }); } catch (x) {} return; }
     if (act === "openreasoning") { close(); setTimeout(function () { try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (x) {} }, 60); return; }  // close the wizard first so reasoning (z-index 850) isn't hidden behind the overlay (z 12000)
   }
   function onInput(e) {

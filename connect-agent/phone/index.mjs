@@ -22,6 +22,12 @@ export { createPluginClient } from './plugin-client.mjs';
  * loses tap-to-point and the green outline, with nothing telling them why. connect-agent-onboarding.js
  * re-evaluates this on every native `navigated` event while an ask is on screen, best-effort. */
 export const GUIDE_ARM = GUIDE_SOURCES.arm + ';' + GUIDE_SOURCES.armGuide;
+/* THE TAP HANDLER ALONE. CRAWL_ARM_OBSERVER sets window.__smdProveMark, the floor prove.mjs uses to
+ * decide which requests belong to this action, so re-running the full arm THROWS AWAY every request the
+ * doctor has already made: they open the lab list, tap Done, and are told none of the requests returned
+ * the lab results (owner's iPhone, 2026-09-18). Only the click/point handler dies with the document, so
+ * only that is re-applied while a question is on screen. */
+export const GUIDE_ARM_TAP = GUIDE_SOURCES.armGuide;
 
 function browserOf(plugin) {
   if (plugin && plugin.platform === 'android') return 'phone-android';

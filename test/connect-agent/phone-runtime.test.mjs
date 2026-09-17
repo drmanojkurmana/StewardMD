@@ -3,7 +3,7 @@
 // against a fake plugin.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { fieldForHeader, mapRow, mapRows, READ_ROWS, readRowsExpression, hospitalLabel, isGimsrOrigin, fillPath, readWorklist, readPatientDetails, reproveWorklist } from '../../connect-agent/phone/runtime.mjs';
+import { fieldForHeader, mapRow, mapRows, READ_ROWS, readRowsExpression, hospitalLabel, isGimsrOrigin, fillPath, readWorklist, readPatientDetails, reproveWorklist, viewsByResource } from '../../connect-agent/phone/runtime.mjs';
 import { parseFetchExpression } from '../../connect-agent/phone/adapter-runtime.mjs';
 
 test('fieldForHeader tolerates the labels Indian EMRs actually use', () => {
@@ -327,4 +327,64 @@ test('mapRow: a row carrying episodeId and bedName keeps them over mapped screen
   assert.equal(p.episodeId, 'IPMR7');
   assert.equal(p.bedName, 'B-12');
   assert.equal(p.patientId, 'MR1');
+});
+
+
+/* THE CHAIN FANS OUT. Each list row's detail (one lab result, one radiology report) was read one after
+ * the other, up to 15 round trips per resource per patient; the hand-built adapter's single session
+ * carries concurrent calls (getOpdProfile). Rows are read a few at a time and keep their order. */
+test('readPatientDetails reads the detail chain a few rows at a time, in order', async () => {
+  const { PAGE_TOKENS } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  let inFlight = 0, peak = 0;
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ tok: 'T' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      if (/GetLabs/.test(req.url)) {
+        const rows = [1, 2, 3, 4, 5, 6].map((n) => ({ Render_ID: 'R' + n, Description: 'Test ' + n }));
+        return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: JSON.stringify(rows) }) };
+      }
+      const rid = (req.url.match(/rid=(R\d)/) || [])[1];
+      inFlight++; peak = Math.max(peak, inFlight);
+      await new Promise((r) => setTimeout(r, rid === 'R1' ? 60 : 10));   // the first row is the slowest
+      inFlight--;
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: JSON.stringify([{ Value: rid }]) }) };
+    },
+  };
+  const view = (resourceHint, endpoints, extra) => Object.assign({ resourceHint, pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' }, endpoints }, extra || {});
+  const replay = [
+    view('labs', [{ method: 'GET', path: '/GetLabs?id', role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } }]),
+    view('labs-detail', [{ method: 'GET', path: '/GetResult?rid', role: 'data', params: { rid: { from: 'labs', field: 'Render_ID' } } }], { detailOf: 'labs' }),
+  ];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  const detail = secs.find((s) => s.resource === 'labs-detail');
+  assert.ok(detail, 'labs-detail section read: ' + JSON.stringify(secs));
+  assert.ok(peak >= 2, 'detail reads overlap (peak ' + peak + ')');
+  assert.deepEqual(detail.rows.map((r) => r._rowIndex), [0, 1, 2, 3, 4, 5], 'rows keep the list order even when the first is slowest');
+  assert.deepEqual(detail.rows.map((r) => [r._key, r.Value, r._of]), [1, 2, 3, 4, 5, 6].map((n) => ['R' + n, 'R' + n, 'Test ' + n]));
+});
+
+
+/* THE VIEW THAT ACTUALLY READ ROWS WINS. A run can end with two views claiming the same resource: the
+ * owner's live run produced two worklists (762 rows and 3), two patient-details and two lab views, one
+ * of which had read nothing (2026-09-18). Taking whichever came first would show the doctor three
+ * patients instead of the whole ward, or an empty lab list, from an adapter that looks approved.
+ * Verification already recorded what each view read for real patients; that is what decides. */
+test('viewsByResource keeps the view that actually read rows for real patients', () => {
+  const thin = { resourceHint: 'worklist', proof: { status: 'proven' }, verified: { ok: true, rows: 3 }, endpoints: [{ method: 'GET', path: '/Thin' }] };
+  const whole = { resourceHint: 'worklist', proof: { status: 'proven' }, verified: { ok: true, rows: 762 }, endpoints: [{ method: 'GET', path: '/Whole' }] };
+  assert.equal(viewsByResource([thin, whole]).worklist.endpoints[0].path, '/Whole', 'the ward list that read 762 patients is the adapter, not the one that read 3');
+  assert.equal(viewsByResource([whole, thin]).worklist.endpoints[0].path, '/Whole', 'and replay order does not decide it');
+
+  const empty = { resourceHint: 'labs', proof: { status: 'proven' }, verified: { ok: false, rows: 0 }, endpoints: [{ method: 'GET', path: '/Empty' }] };
+  const real = { resourceHint: 'labs', proof: { status: 'proven' }, verified: { ok: true, rows: 33 }, endpoints: [{ method: 'GET', path: '/Real' }] };
+  assert.equal(viewsByResource([empty, real]).labs.endpoints[0].path, '/Real', 'a proven lab view that read nothing loses to one that read 33 orders');
+
+  // unchanged: a proven view still beats an unproven one when neither was verified
+  const unproven = { resourceHint: 'radiology', endpoints: [{ method: 'GET', path: '/No' }] };
+  const provenOnly = { resourceHint: 'radiology', proof: { status: 'proven' }, endpoints: [{ method: 'GET', path: '/Yes' }] };
+  assert.equal(viewsByResource([unproven, provenOnly]).radiology.endpoints[0].path, '/Yes');
 });

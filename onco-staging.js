@@ -284,7 +284,7 @@
     var listBody = (stg.loaded || !G.fetch) ? siteListHtml() : skelHtml();
     var body = stg.site ? siteDetailHtml() : listBody;
     el.innerHTML =
-      '<div class="oh-top"><button class="oh-back" data-stg-act="close" aria-label="Close">&lsaquo; Close</button>' +
+      '<div class="oh-top"><button class="oh-back" data-stg-act="close" aria-label="Close">' + (stg.site ? "&lsaquo; All sites" : "&lsaquo; Close") + '</button>' +
       '<div class="oh-title">Cancer Staging Engine</div><span style="width:64px"></span></div>' +
       '<div class="oh-body"><div id="stgResults">' + body + "</div>" +
       '<div class="stg-license">' + esc(STAGING_ATTRIB) + "</div></div>";
@@ -316,7 +316,7 @@
     if (!b) return;
     var act = b.getAttribute("data-stg-act") || "";
     var i = act.indexOf(":"), verb = i >= 0 ? act.slice(0, i) : act, arg = i >= 0 ? act.slice(i + 1) : "";
-    if (verb === "close") { close(); return; }
+    if (verb === "close") { if (stg.site) { stg.site = null; stg.version = null; render(); return; } close(); return; }
     if (verb === "list") { stg.site = null; stg.version = null; render(); return; }
     if (verb === "site") { openSite(arg); return; }
     if (verb === "ver") { stg.version = arg; render(); return; }
@@ -334,7 +334,7 @@
     el.classList.add("on"); document.body.classList.add("oh-lock");
   }
   function open(id) { openList(); if (id) openSite(id); }
-  function close() { var el = document.getElementById("smdOncoStaging"); if (el) el.classList.remove("on"); if (!document.getElementById("smdOncoHome") || !document.getElementById("smdOncoHome").classList.contains("on")) document.body.classList.remove("oh-lock"); }
+  function close() { var el = document.getElementById("smdOncoStaging"); if (el) el.classList.remove("on"); try { if (document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on") && window.SMD_ONCOHOME && SMD_ONCOHOME.foreground) SMD_ONCOHOME.foreground(); } catch (e) {} if (!document.getElementById("smdOncoHome") || !document.getElementById("smdOncoHome").classList.contains("on")) document.body.classList.remove("oh-lock"); }
 
   try { document.addEventListener("keydown", function (e) { if (e.key === "Escape") { var el = document.getElementById("smdOncoStaging"); if (el && el.classList.contains("on")) close(); } }); } catch (e) {}
 

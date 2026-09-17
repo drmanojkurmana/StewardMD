@@ -18,6 +18,14 @@
   var native = !!(C && (typeof C.isNativePlatform === "function"
     ? C.isNativePlatform()
     : (C.platform && C.platform !== "web")));
+
+  if (typeof window !== "undefined") {
+    window.SMD_CLINIX_WATCH = window.SMD_CLINIX_WATCH || {
+      publishPulse: function (pulseData) { return Promise.resolve({ ok: true, simulated: true, pulse: pulseData }); },
+      publishOSCE: function (osceData) { return Promise.resolve({ ok: true, simulated: true, osce: osceData }); }
+    };
+  }
+
   // Apple Watch bridge is iOS-ONLY. On Android the WatchBridge plugin is absent so this was already a
   // no-op, but gate explicitly so the Apple-Watch machinery never runs on Android (Wear OS is separate).
   var isIOS = (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) === "ios";
@@ -540,6 +548,29 @@
   window.SMD_ROLE = {
     seniorMost: function () { return roleForRelay(); },
     isRestricted: function () { var r = roleForRelay(); return r === "junior_resident" || r === "intern"; }
+  };
+
+  window.SMD_CLINIX_WATCH = {
+    publishPulse: function (pulseData) {
+      try {
+        var p = plugin();
+        if (p && p.publishPulse) return p.publishPulse(pulseData);
+        if (p && p.sendMessage) return p.sendMessage({ type: "clinix_pulse", pulse: pulseData });
+        return Promise.resolve({ ok: true, simulated: true, pulse: pulseData });
+      } catch (e) {
+        return Promise.resolve({ ok: false, error: e.message });
+      }
+    },
+    publishOSCE: function (osceData) {
+      try {
+        var p = plugin();
+        if (p && p.publishOSCE) return p.publishOSCE(osceData);
+        if (p && p.sendMessage) return p.sendMessage({ type: "clinix_osce", osce: osceData });
+        return Promise.resolve({ ok: true, simulated: true, osce: osceData });
+      } catch (e) {
+        return Promise.resolve({ ok: false, error: e.message });
+      }
+    }
   };
   // Auto-triggered sync respects the toggle and battery-optimization throttle
   // (min 2h between background syncs when low-power is on).

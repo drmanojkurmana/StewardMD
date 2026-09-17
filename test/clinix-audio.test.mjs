@@ -124,3 +124,31 @@ test("a pleural rub sounds in BOTH phases and is low pitched", () => {
   // The clinically important trap: it disappearing is not improvement.
   assert.match(r.hint, /not improvement|disappears/i);
 });
+
+// ── Cardiovascular sound suite ─────────────────────────────────────────────
+
+const CARDIAC = ["s1s2_normal", "s1s2_split", "s3_gallop", "s4_gallop", "as_murmur", "mr_murmur", "ms_murmur", "ar_murmur"];
+
+test("every cardiac sound is defined with frequency, timing and clinical hints", () => {
+  for (const n of CARDIAC) {
+    const s = spec(n);
+    assert.ok(s.band > 0, `${n} has no band`);
+    assert.ok(s.hint.length > 30, `${n} has no detailed clinical hint`);
+  }
+});
+
+test("S1 is lower pitched than S2 (lub vs dub mechanical closure)", () => {
+  const normal = spec("s1s2_normal");
+  const s1 = Number((/s1Hz:\s*(\d+)/.exec(SRC) || [])[1]);
+  const s2 = Number((/s2Hz:\s*(\d+)/.exec(SRC) || [])[1]);
+  assert.ok(s1 < s2, `S1 (${s1} Hz) must be lower pitched than S2 (${s2} Hz)`);
+  assert.match(normal.hint, /mitral.*closure|onset of systole/i);
+});
+
+test("cardiac murmurs have correct phase and acoustic envelope shapes", () => {
+  assert.ok(/as_murmur:[\s\S]*?crescendo_decrescendo/.test(SRC), "AS is crescendo-decrescendo ejection systolic");
+  assert.ok(/mr_murmur:[\s\S]*?plateau/.test(SRC), "MR is uniform plateau holosystolic");
+  assert.ok(/ms_murmur:[\s\S]*?openingSnap/.test(SRC), "MS includes high-pitched opening snap");
+  assert.ok(/ms_murmur:[\s\S]*?rumble/.test(SRC), "MS includes low-frequency mid-diastolic rumble");
+  assert.ok(/ar_murmur:[\s\S]*?decrescendo/.test(SRC), "AR is early diastolic decrescendo");
+});

@@ -222,12 +222,30 @@ export function isGimsrOrigin(origin) {
 
 // Pick the replay views by resource. The worklist is the one the ward list is read from.
 // A view whose data call was proven wins over an unproven one for the same resource.
+/* THE VIEW THAT ACTUALLY READ ROWS WINS. A run can end with two views claiming the same resource: the
+ * owner's live run produced two worklists (762 rows and 3), two patient-details and two lab views, one
+ * of which had read nothing (2026-09-18). Keeping whichever came first would show the doctor three
+ * patients instead of the whole ward, or an empty lab list, from an adapter that looks approved.
+ * Verification already recorded what each view read for real patients (view.verified), so that decides;
+ * proof only breaks the tie when nothing was verified. */
+export function viewRank(view) {
+  if (!view) return -1;
+  const v = view.verified;
+  const rows = v ? Math.max(0, Number(v.rows) || 0) : 0;
+  let tier = 0;
+  if (v && v.ok && rows > 0) tier = 3;              // read real rows for a real patient
+  else if (view.proof && view.proof.status === 'proven') tier = 2;
+  else if (rows > 0) tier = 1;
+  // Within a tier the view that read MORE real rows wins: the ward list that answered 762 patients is
+  // the adapter, not the one that answered 3.
+  return tier * 1e9 + Math.min(rows, 1e9 - 1);
+}
+
 export function viewsByResource(replay) {
   const by = {};
-  const proven = (v) => !!(v && v.proof && v.proof.status === 'proven');
   for (const v of Array.isArray(replay) ? replay : []) {
     const r = String(v.resourceHint || v.resource || 'unknown');
-    if (!by[r] || (proven(v) && !proven(by[r]))) by[r] = v;
+    if (!by[r] || viewRank(v) > viewRank(by[r])) by[r] = v;
   }
   return by;
 }
@@ -367,7 +385,7 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
    * both). Rows that are not patients (a doctor list, a dashboard count) are not a ward: next call,
    * then the page. */
   const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length)
-    .sort((a, b) => Number(!!(b.proof && b.proof.status === 'proven')) - Number(!!(a.proof && a.proof.status === 'proven')));
+    .sort((a, b) => viewRank(b) - viewRank(a));
   for (const cand of candidates.length ? candidates : [view]) {
     let got = null;
     try { got = await replayFirst({ plugin, origin, view: cand, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
@@ -393,6 +411,7 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
 // of [{header: text}] rows. Path placeholders ({id}, {mrn}, :id, #) are filled with the patient id.
 export const DETAIL_RESOURCES = Object.freeze(['medications', 'labs', 'radiology', 'history', 'discharge', 'patient']);
 const MAX_DETAIL_ROWS = 15;
+const DETAIL_CHAIN_WIDTH = 4;   // detail rows read at once; one session carries them (hand-built getOpdProfile)
 
 export function fillPath(path, patient, which = 'patientId') {
   const id = encodeURIComponent((which === 'episodeId' ? patient.episodeId : patient.patientId) || patient.patientId || '');
@@ -488,14 +507,14 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
         /* The list field the detail call was proven to send (its render id, its result id): the key
          * that ties each detail row back to its list row. Learned, never a guessed column name. */
         const keyField = (d.endpoints || []).flatMap((e) => Object.values(e.params || {})).map((s) => s && s.field).find((f) => typeof f === 'string' && f) || null;
-        let rowIndex = 0;
-        for (const row of replayed.slice(0, MAX_DETAIL_ROWS)) {
+        /* THE CHAIN FANS OUT. Up to 15 rows were read one after the other (15 round trips per resource
+         * per patient); they are read DETAIL_CHAIN_WIDTH at a time now, and the rows keep the list order. */
+        const readRow = async (row, rowIndex) => {
           let got = null;
           /* A row whose chain key is missing is skipped, not guessed at and not fatal: the other rows
            * of this list are still read (adapter-runtime brokenChainField). */
           try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) {
-            if (e && e.name === 'NotSignedIn') break;   // the detail chain stops; the list itself was read
-            if (e && e.name === 'UnscopedRequest') { rowIndex++; continue; }
+            if (e && e.name === 'NotSignedIn') return { stop: true };   // the detail chain stops; the list itself was read
             got = null;
           }
           // The row's title: prefer description / study / parameter / test name over IDs / numeric strings
@@ -513,10 +532,13 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
               .find((v) => v && !/^\d+$/.test(v)) || '';
           }
           const rowKey = keyField ? String(row[keyField] == null ? '' : row[keyField]) : '';
-          for (const dr of (got && got.rows) || []) {
-            detailRows.push(Object.assign({ _of: title, _key: rowKey, _rowIndex: rowIndex }, dr));
-          }
-          rowIndex++;
+          return { rows: ((got && got.rows) || []).map((dr) => Object.assign({ _of: title, _key: rowKey, _rowIndex: rowIndex }, dr)) };
+        };
+        const chainRows = replayed.slice(0, MAX_DETAIL_ROWS);
+        for (let at = 0; at < chainRows.length; at += DETAIL_CHAIN_WIDTH) {
+          const batch = await Promise.all(chainRows.slice(at, at + DETAIL_CHAIN_WIDTH).map((row, i) => readRow(row, at + i)));
+          for (const b of batch) if (b.rows) detailRows.push(...b.rows);
+          if (batch.some((b) => b.stop)) break;
         }
         if (detailRows.length) { out.push(withRoles({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }, d)); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
       }

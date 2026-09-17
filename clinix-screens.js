@@ -81,7 +81,10 @@
     viva: null,
     vivaState: null,
     vivaCurrent: null,
-    loading: false
+    loading: false,
+    physioMode: "cvs",
+    physioCvs: { preload: 100, afterload: 100, contractility: 100, heartRate: 72, rhythm: "sinus", valve: "none" },
+    physioResp: { airwayResistance: 1.0, compliance: 1.0, deadSpaceFraction: 0.3, minuteVentilation: 6.0, fiO2: 0.21 }
   };
 
   /* ── shared chrome ───────────────────────────────────────────────────────── */
@@ -178,6 +181,7 @@
     html += '<section class="cx-sec"><div class="cx-sec-h">Practice</div><div class="cx-rows">' +
       row("cx-practice-osce", "assignment_turned_in", "OSCE stations", "Timed, with a marking scheme") +
       row("cx-practice-viva", "record_voice_over", "Viva", "An examiner that adapts to your answers") +
+      row("cx-sandbox", "tune", "Physiology sandbox", "Interactive hemodynamic and gas exchange simulator") +
       "</div></section>";
 
     // Weak areas, driven by the same competency records every mode writes.
@@ -661,6 +665,35 @@
       }
       html += "</tbody></table></div>";
     }
+    if (b.analogy) {
+      html += '<div class="cx-teach-analogy">' +
+        '<div class="cx-teach-analogy-h">' + ic("lightbulb") + " Physical Intuition & Everyday Analogy</div>" +
+        '<p class="cx-teach-analogy-p">' + esc(b.analogy) + "</p></div>";
+    }
+    if (b.technique && b.technique.length) {
+      html += '<div class="cx-teach-technique">' +
+        '<div class="cx-teach-technique-h">' + ic("pan_tool") + " Step-by-Step Bedside Technique</div>" +
+        '<ol class="cx-teach-technique-steps">';
+      for (var ti = 0; ti < b.technique.length; ti++) {
+        html += "<li>" + esc(b.technique[ti]) + "</li>";
+      }
+      html += "</ol></div>";
+    }
+    if (b.sensory && (b.sensory.normal || b.sensory.abnormal)) {
+      html += '<div class="cx-teach-sensory">' +
+        (b.sensory.normal ? '<div class="cx-sensory-box cx-sensory-norm"><div class="cx-sensory-h">' + ic("check_circle") + ' What Normal Feels & Sounds Like</div><p class="cx-sensory-b">' + esc(b.sensory.normal) + '</p></div>' : "") +
+        (b.sensory.abnormal ? '<div class="cx-sensory-box cx-sensory-abnorm"><div class="cx-sensory-h">' + ic("warning") + ' What Pathology Feels & Sounds Like</div><p class="cx-sensory-b">' + esc(b.sensory.abnormal) + '</p></div>' : "") +
+        '</div>';
+    }
+    if (b.traps && b.traps.length) {
+      html += '<div class="cx-teach-traps">' +
+        '<div class="cx-teach-traps-h">' + ic("error") + " Common Rookie Traps & OSCE Pitfalls</div>" +
+        '<ul class="cx-teach-traps-list">';
+      for (var tri = 0; tri < b.traps.length; tri++) {
+        html += "<li>" + esc(b.traps[tri]) + "</li>";
+      }
+      html += "</ul></div>";
+    }
     if (b.wideTable) html += wideTableHtml(b.wideTable);
     if (b.note) html += '<div class="cx-teach-note">' + ic("lightbulb") + "<span>" + esc(b.note) + "</span></div>";
     return html;
@@ -904,12 +937,54 @@
     return s ? s.title : prettySkill(id);
   }
 
+  function caseVitalsMonitor(cd) {
+    var v = state.caseVitals || (cd && cd.initialVitals) || { hr: 78, bpSystolic: 124, bpDiastolic: 80, rr: 16, spo2: 96, temp: 36.8, gcs: 15 };
+    var hrCls = v.hr > 100 ? " cx-vital-val--alert" : (v.hr < 55 ? " cx-vital-val--warn" : "");
+    var bpCls = (v.bpSystolic > 150 || v.bpSystolic < 90) ? " cx-vital-val--warn" : "";
+    var o2Cls = v.spo2 < 92 ? " cx-vital-val--alert" : "";
+
+    return '<div class="cx-vitals-monitor">' +
+      '<div class="cx-vital-pill"><span class="cx-vital-label">HR</span><span class="cx-vital-val' + hrCls + '">' + v.hr + '</span></div>' +
+      '<div class="cx-vital-pill"><span class="cx-vital-label">BP</span><span class="cx-vital-val' + bpCls + '">' + v.bpSystolic + '/' + v.bpDiastolic + '</span></div>' +
+      '<div class="cx-vital-pill"><span class="cx-vital-label">RR</span><span class="cx-vital-val">' + v.rr + '</span></div>' +
+      '<div class="cx-vital-pill"><span class="cx-vital-label">SpO2</span><span class="cx-vital-val' + o2Cls + '">' + v.spo2 + '%</span></div>' +
+      '<div class="cx-vital-pill"><span class="cx-vital-label">Temp</span><span class="cx-vital-val">' + v.temp + '°C</span></div>' +
+      '<div class="cx-vital-pill"><span class="cx-vital-label">GCS</span><span class="cx-vital-val">' + (v.gcs || 15) + '</span></div>' +
+    '</div>';
+  }
+
+  function caseManeuverBar() {
+    var m = state.activeManeuver || "baseline";
+    var MANEUVERS = [
+      { id: "baseline", name: "Rest" },
+      { id: "valsalva", name: "Valsalva" },
+      { id: "handgrip", name: "Handgrip" },
+      { id: "squatting", name: "Squatting" },
+      { id: "inspiration", name: "Inspiration" },
+      { id: "hjr", name: "HJR" }
+    ];
+    var html = '<div class="cx-maneuver-bar"><span style="font-size:11px;font-weight:700;color:var(--cx-muted);align-self:center;margin-right:4px;">MANEUVER:</span>';
+    for (var i = 0; i < MANEUVERS.length; i++) {
+      var item = MANEUVERS[i];
+      var on = m === item.id;
+      html += '<button type="button" class="cx-maneuver-btn' + (on ? " cx-maneuver-btn--on" : "") + '" data-act="cx-case-maneuver" data-id="' + item.id + '">' + esc(item.name) + '</button>';
+    }
+    html += '</div>';
+    return html;
+  }
+
   function renderCase(host) {
     var cd = state.caseDef;
     if (!cd) { host.innerHTML = header("Case") + emptyState("error", "Case unavailable", "This case is not available yet."); return; }
     if (state.caseResult) { renderCaseResult(host, cd); return; }
 
-    var html = header(cd.title, "Clinical case");
+    var title = state.caseBlind ? "Unknown Bedside Patient" : cd.title;
+    var html = header(title, state.caseBlind ? "Blind Examination Simulation" : "Clinical case");
+    if (state.caseBlind) {
+      html += '<div class="cx-blind-banner"><span class="material-symbols-rounded">visibility_off</span> Blind Mode: Formulate your clinical synthesis without knowing the underlying diagnosis.</div>';
+    }
+    html += caseVitalsMonitor(cd);
+    html += caseManeuverBar();
     html += casePhaseBar();
 
     if (state.casePhase === "history") html += casePhaseHistory(cd);
@@ -1048,15 +1123,29 @@
       '<div class="cx-weak-b">' + progressBar(pct) + "</div></div>";
   }
 
-  function startCase(id) {
+  function startCase(id, opts) {
     var cd = C().caseFor(state.built, id);
     if (!cd) { toast("Case unavailable"); return; }
     state.caseDef = cd;
+    state.caseBlind = !!(opts && opts.blind);
     state.casePhase = "history";
     state.caseLog = [];
     state.caseReveal = {};
     state.caseResult = null;
     state.caseTaken = { asked: [], examined: [], investigated: [], differential: null, diagnosis: null, management: null };
+    state.activeManeuver = "baseline";
+    state.caseVitals = Object.assign({ hr: 78, bpSystolic: 124, bpDiastolic: 80, rr: 16, spo2: 96, temp: 36.8, gcs: 15 }, cd.initialVitals || {});
+
+    if (window.SMD_CLINIX_ENGINE) {
+      state.engineCaseState = SMD_CLINIX_ENGINE.createCaseState(cd, { blind: !!state.caseBlind });
+      state.caseVitals = state.engineCaseState.currentVitals;
+      if (window.SMD_CLINIX_WATCH) {
+        try {
+          var pulse = SMD_CLINIX_ENGINE.getPulseProfile(state.engineCaseState);
+          SMD_CLINIX_WATCH.publishPulse(pulse);
+        } catch (e) {}
+      }
+    }
     go("case");
   }
 
@@ -1234,12 +1323,183 @@
     host.innerHTML = html;
   }
 
+  function renderPhysiologySandbox(host) {
+    if (!window.SMD_CLINIX_PHYSIOLOGY) {
+      host.innerHTML = header("Physiology Sandbox", "Simulator") +
+        emptyState("tune", "Simulator unavailable", "The physiology engine is loading.");
+      return;
+    }
+    var mode = state.physioMode || "cvs";
+    var html = header("Physiology Sandbox", "Bedside hemodynamics & gas exchange");
+
+    html += '<div class="cx-physio-ctrl" style="margin-bottom: 16px;"><div class="cx-maneuver-bar">' +
+      '<button type="button" class="cx-maneuver-btn' + (mode === "cvs" ? " cx-maneuver-btn--on" : "") + '" data-act="cx-physio-mode" data-id="cvs">Cardiovascular & Auscultation</button>' +
+      '<button type="button" class="cx-maneuver-btn' + (mode === "resp" ? " cx-maneuver-btn--on" : "") + '" data-act="cx-physio-mode" data-id="resp">Respiratory & ABG</button>' +
+      '</div></div>';
+
+    if (mode === "cvs") {
+      var cvs = state.physioCvs;
+      var cvsRes = SMD_CLINIX_PHYSIOLOGY.simulateCardiovascular({
+        preload: cvs.preload,
+        afterload: cvs.afterload,
+        contractility: cvs.contractility,
+        heartRate: cvs.heartRate,
+        rhythm: cvs.rhythm,
+        valveLesion: { type: cvs.valve, severity: "moderate" }
+      });
+
+      if (window.SMD_CLINIX_WATCH && SMD_CLINIX_WATCH.publishPulse) {
+        try {
+          SMD_CLINIX_WATCH.publishPulse({
+            rate: cvs.heartRate,
+            rhythm: cvs.rhythm === "afib" ? "irregularly_irregular" : "regular",
+            character: cvsRes.pulseCharacter,
+            volume: cvsRes.pulsePressure > 60 ? "bounding" : cvsRes.pulsePressure < 25 ? "thready" : "normal"
+          });
+        } catch (e) {}
+      }
+
+      html += '<div class="cx-vitals-monitor" style="margin-bottom:12px;">' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">HR</span><span class="cx-vital-val">' + cvs.heartRate + ' <small>bpm</small></span></div>' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">BP</span><span class="cx-vital-val">' + cvsRes.bpSystolic + '/' + cvsRes.bpDiastolic + '</span></div>' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">MAP</span><span class="cx-vital-val">' + cvsRes.meanArterialPressure + ' <small>mmHg</small></span></div>' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">SV</span><span class="cx-vital-val">' + cvsRes.strokeVolume + ' <small>mL</small></span></div>' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">CO</span><span class="cx-vital-val">' + cvsRes.cardiacOutput + ' <small>L/min</small></span></div>' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">JVP</span><span class="cx-vital-val">+' + cvsRes.jvpHeightCm + ' <small>cm</small></span></div>' +
+        '</div>';
+
+      var playingSound = state.audioKind === cvsRes.heartSoundKind;
+      html += '<div class="cx-card-diag" style="margin-bottom:12px;">' +
+        '<div class="cx-card-diag-h">' + ic("hearing") + ' Bedside Auscultation & Pulse</div>' +
+        '<div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">' +
+        '<div><strong>Sound: </strong>' + esc(cvsRes.heartSoundKind.replace(/_/g, " ").toUpperCase()) + '<br>' +
+        '<strong>Pulse: </strong>' + esc(cvsRes.pulseCharacter.replace(/_/g, " ")) + '</div>' +
+        '<button type="button" class="cx-btn ' + (playingSound ? 'cx-btn--danger' : 'cx-btn--primary') + '" data-act="cx-physio-play-cvs" data-id="' + cvsRes.heartSoundKind + '">' +
+        ic(playingSound ? "stop" : "volume_up") + ' ' + (playingSound ? "Stop" : "Listen") + '</button>' +
+        '</div>';
+
+      if (cvsRes.clinicalSigns && cvsRes.clinicalSigns.length) {
+        html += '<div class="cx-synthesis-box" style="margin-top:10px;"><div class="cx-synth-h">Clinical Hallmarks</div>' +
+          '<ul class="cx-synth-list">';
+        for (var si = 0; si < cvsRes.clinicalSigns.length; si++) {
+          html += '<li>' + esc(cvsRes.clinicalSigns[si]) + '</li>';
+        }
+        html += '</ul></div>';
+      }
+      html += '</div>';
+
+      html += '<div class="cx-sec"><div class="cx-sec-h">Hemodynamic Variables</div>';
+
+      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Preload (EDV / venous return)</span><span class="cx-physio-slider-val">' + cvs.preload + '%</span></div>' +
+        '<input type="range" class="cx-physio-range" data-param="preload" min="50" max="200" step="5" value="' + cvs.preload + '"></div>';
+
+      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Afterload (SVR / arterial impedance)</span><span class="cx-physio-slider-val">' + cvs.afterload + '%</span></div>' +
+        '<input type="range" class="cx-physio-range" data-param="afterload" min="50" max="200" step="5" value="' + cvs.afterload + '"></div>';
+
+      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Myocardial Contractility (Inotropy)</span><span class="cx-physio-slider-val">' + cvs.contractility + '%</span></div>' +
+        '<input type="range" class="cx-physio-range" data-param="contractility" min="30" max="160" step="5" value="' + cvs.contractility + '"></div>';
+
+      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Heart Rate</span><span class="cx-physio-slider-val">' + cvs.heartRate + ' bpm</span></div>' +
+        '<input type="range" class="cx-physio-range" data-param="heartRate" min="40" max="180" step="2" value="' + cvs.heartRate + '"></div>';
+
+      html += '<div style="margin-top:12px;"><span style="font-size:12px; font-weight:700; color:var(--cx-muted); text-transform:uppercase;">Cardiac Rhythm</span>' +
+        '<div class="cx-maneuver-bar" style="margin-top:6px;">';
+      var rhythms = [
+        { id: "sinus", label: "Sinus" },
+        { id: "afib", label: "AFib (absent a wave)" },
+        { id: "chb", label: "Complete Heart Block (cannon a)" }
+      ];
+      for (var ri = 0; ri < rhythms.length; ri++) {
+        var rOn = cvs.rhythm === rhythms[ri].id;
+        html += '<button type="button" class="cx-maneuver-btn' + (rOn ? " cx-maneuver-btn--on" : "") + '" data-act="cx-physio-rhythm" data-id="' + rhythms[ri].id + '">' + esc(rhythms[ri].label) + '</button>';
+      }
+      html += '</div></div>';
+
+      html += '<div style="margin-top:12px;"><span style="font-size:12px; font-weight:700; color:var(--cx-muted); text-transform:uppercase;">Valvular Pathology</span>' +
+        '<div class="cx-maneuver-bar" style="margin-top:6px;">';
+      var valves = [
+        { id: "none", label: "None (Healthy)" },
+        { id: "as", label: "Aortic Stenosis" },
+        { id: "mr", label: "Mitral Regurgitation" },
+        { id: "ms", label: "Mitral Stenosis" },
+        { id: "ar", label: "Aortic Regurgitation" },
+        { id: "tr", label: "Tricuspid Regurgitation" }
+      ];
+      for (var vi = 0; vi < valves.length; vi++) {
+        var vOn = cvs.valve === valves[vi].id;
+        html += '<button type="button" class="cx-maneuver-btn' + (vOn ? " cx-maneuver-btn--on" : "") + '" data-act="cx-physio-valve" data-id="' + valves[vi].id + '">' + esc(valves[vi].label) + '</button>';
+      }
+      html += '</div></div>';
+
+      html += '</div>';
+    } else {
+      var resp = state.physioResp;
+      var respRes = SMD_CLINIX_PHYSIOLOGY.simulateRespiratory({
+        airwayResistance: resp.airwayResistance,
+        compliance: resp.compliance,
+        deadSpaceFraction: resp.deadSpaceFraction,
+        minuteVentilation: resp.minuteVentilation,
+        fiO2: resp.fiO2
+      });
+
+      html += '<div class="cx-vitals-monitor" style="margin-bottom:12px;">' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">RR</span><span class="cx-vital-val">' + respRes.respiratoryRate + ' <small>/min</small></span></div>' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">SpO2</span><span class="cx-vital-val">' + respRes.spO2 + '%</span></div>' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">PaO2</span><span class="cx-vital-val">' + respRes.paO2 + ' <small>mmHg</small></span></div>' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">PaCO2</span><span class="cx-vital-val">' + respRes.paCO2 + ' <small>mmHg</small></span></div>' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">pH</span><span class="cx-vital-val">' + respRes.pH.toFixed(2) + '</span></div>' +
+        '<div class="cx-vital-pill"><span class="cx-vital-label">WOB</span><span class="cx-vital-val">' + esc(respRes.workOfBreathing.toUpperCase()) + '</span></div>' +
+        '</div>';
+
+      var playingRespSound = state.audioKind === respRes.breathSoundKind;
+      html += '<div class="cx-card-diag" style="margin-bottom:12px;">' +
+        '<div class="cx-card-diag-h">' + ic("air") + ' Respiratory Mechanics & Auscultation</div>' +
+        '<div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">' +
+        '<div><strong>Breath Sound: </strong>' + esc(respRes.breathSoundKind.toUpperCase()) + '<br>' +
+        '<strong>Work of Breathing: </strong>' + esc(respRes.workOfBreathing) + '</div>' +
+        '<button type="button" class="cx-btn ' + (playingRespSound ? 'cx-btn--danger' : 'cx-btn--primary') + '" data-act="cx-physio-play-resp" data-id="' + respRes.breathSoundKind + '">' +
+        ic(playingRespSound ? "stop" : "volume_up") + ' ' + (playingRespSound ? "Stop" : "Listen") + '</button>' +
+        '</div>';
+
+      if (respRes.clinicalSigns && respRes.clinicalSigns.length) {
+        html += '<div class="cx-synthesis-box" style="margin-top:10px;"><div class="cx-synth-h">Clinical Hallmarks</div>' +
+          '<ul class="cx-synth-list">';
+        for (var rsi = 0; rsi < respRes.clinicalSigns.length; rsi++) {
+          html += '<li>' + esc(respRes.clinicalSigns[rsi]) + '</li>';
+        }
+        html += '</ul></div>';
+      }
+      html += '</div>';
+
+      html += '<div class="cx-sec"><div class="cx-sec-h">Pulmonary & Ventilatory Variables</div>';
+
+      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Airway Resistance (Raw)</span><span class="cx-physio-slider-val">' + resp.airwayResistance.toFixed(1) + ' cmH2O/L/s</span></div>' +
+        '<input type="range" class="cx-physio-range" data-param="airwayResistance" min="0.5" max="5.0" step="0.1" value="' + resp.airwayResistance + '"></div>';
+
+      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Lung Compliance (CL)</span><span class="cx-physio-slider-val">' + resp.compliance.toFixed(1) + ' L/cmH2O</span></div>' +
+        '<input type="range" class="cx-physio-range" data-param="compliance" min="0.2" max="2.0" step="0.1" value="' + resp.compliance + '"></div>';
+
+      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Minute Ventilation (VE)</span><span class="cx-physio-slider-val">' + resp.minuteVentilation.toFixed(1) + ' L/min</span></div>' +
+        '<input type="range" class="cx-physio-range" data-param="minuteVentilation" min="2.0" max="15.0" step="0.5" value="' + resp.minuteVentilation + '"></div>';
+
+      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Dead Space Fraction (VD/VT)</span><span class="cx-physio-slider-val">' + Math.round(resp.deadSpaceFraction * 100) + '%</span></div>' +
+        '<input type="range" class="cx-physio-range" data-param="deadSpaceFraction" min="0.1" max="0.7" step="0.05" value="' + resp.deadSpaceFraction + '"></div>';
+
+      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Inspired Oxygen (FiO2)</span><span class="cx-physio-slider-val">' + Math.round(resp.fiO2 * 100) + '%</span></div>' +
+        '<input type="range" class="cx-physio-range" data-param="fiO2" min="0.21" max="1.00" step="0.05" value="' + resp.fiO2 + '"></div>';
+
+      html += '</div>';
+    }
+
+    host.innerHTML = html;
+  }
+
   /* ── router ──────────────────────────────────────────────────────────────── */
 
   var SCREENS = {
     home: renderHome, system: renderSystem, disease: renderDisease, chapter: renderChapter,
     lesson: renderLesson, station: renderStation, viva: renderViva, competency: renderCompetency,
-    tutor: renderTutor, case: renderCase, skills: renderSkills
+    tutor: renderTutor, case: renderCase, skills: renderSkills, sandbox: renderPhysiologySandbox
   };
 
   function host() { return document.getElementById("clinixScroll"); }
@@ -1339,7 +1599,7 @@
       state.audioKind = kind;
       SMD_CLINIX_AUDIO.play(kind, { breaths: 3, onEnd: function () {
         state.audioKind = null;
-        if (state.stack[state.stack.length - 1] === "lesson") repaint();
+        if (state.stack[state.stack.length - 1] === "lesson" || state.stack[state.stack.length - 1] === "sandbox") repaint();
       } });
     } catch (e) { state.audioKind = null; }
   }
@@ -1922,6 +2182,22 @@
         haptic("tap"); repaint(); return;
       }
       case "cx-case": haptic("tap"); startCase(id); return;
+      case "cx-case-blind": haptic("tap"); startCase(id, { blind: true }); return;
+      case "cx-case-maneuver": {
+        state.activeManeuver = id;
+        if (window.SMD_CLINIX_ENGINE && state.caseDef) {
+          if (!state.engineCaseState) state.engineCaseState = SMD_CLINIX_ENGINE.createCaseState(state.caseDef, { blind: !!state.caseBlind });
+          var mRes = SMD_CLINIX_ENGINE.applyManeuver(state.engineCaseState, id);
+          if (mRes && mRes.vitals) state.caseVitals = mRes.vitals;
+          if (window.SMD_CLINIX_WATCH) {
+            try {
+              var pProfile = SMD_CLINIX_ENGINE.getPulseProfile(state.engineCaseState);
+              SMD_CLINIX_WATCH.publishPulse(pProfile);
+            } catch (e) {}
+          }
+        }
+        haptic("tap"); repaint(); return;
+      }
       case "cx-case-ask": {
         var ce = document.getElementById("cxCaseQ");
         var cq = ce ? String(ce.value || "").trim() : "";
@@ -1956,6 +2232,20 @@
       case "cx-practice-osce":
       case "cx-practice-viva":
         toast("Open a topic first, then choose a station or viva from its page"); return;
+
+      case "cx-sandbox": haptic("tap"); go("sandbox"); return;
+      case "cx-physio-mode": state.physioMode = id; haptic("tap"); repaint(); return;
+      case "cx-physio-rhythm": state.physioCvs.rhythm = id; haptic("tap"); repaint(); return;
+      case "cx-physio-valve": state.physioCvs.valve = id; haptic("tap"); repaint(); return;
+      case "cx-physio-play-cvs":
+      case "cx-physio-play-resp": {
+        if (state.audioKind === id) {
+          stopAudio();
+        } else {
+          playAudio(id);
+        }
+        haptic("tap"); repaint(); return;
+      }
 
       case "cx-resume": resume(); return;
       case "cx-ask": askMaik(); return;
@@ -2008,12 +2298,27 @@
     onClick({ target: t });
   }
 
+  function onInput(e) {
+    var t = e.target;
+    if (!t || !t.classList || !t.classList.contains("cx-physio-range")) return;
+    var param = t.getAttribute("data-param");
+    if (!param) return;
+    var val = parseFloat(t.value);
+    if (state.physioMode === "resp") {
+      state.physioResp[param] = val;
+    } else {
+      state.physioCvs[param] = val;
+    }
+    repaint();
+  }
+
   function init(root) {
     var r = root || document.getElementById("clinixRoot");
     if (r && !r._cxWired) {
       r._cxWired = true;
       r.addEventListener("click", onClick);
       r.addEventListener("keydown", onKeydown);
+      r.addEventListener("input", onInput);
     }
     wireSignout();
   }

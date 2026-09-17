@@ -465,6 +465,7 @@
   }
 
   function close(fromAnim) {
+    if (!fromAnim) forgetRun();   // the doctor closed the sheet on purpose: nothing to resume
     var ov = overlay();
     if (!ov) { S = null; return; }
     if (!fromAnim && S && !reducedMotion() && sheet()) {
@@ -519,6 +520,45 @@
     if (S) show(S.screen);
   }
 
+  /* THE FIRST RE-ARM LANDS TOO EARLY. The native plugin announces "navigated" from didCommit, while the
+   * new document is still being built, so WebKit rejects that evaluate; the error was swallowed and
+   * nothing tried again, leaving the guide unarmed for the rest of the ask. The doctor's tap then never
+   * turned green and Done captured nothing (owner's iPhone, live GHIS radiology page, 2026-09-18).
+   * GUIDE_ARM is idempotent (it removes any previous handler first), so it is simply fired again a
+   * couple of times as the page settles; each attempt stops if the ask it belongs to is already over. */
+  /* A HEARTBEAT, NOT AN EVENT. Re-arming only when the native browser announced a navigation was not
+   * enough: on the live GHIS radiology page the guide was still unarmed ten seconds after a full page
+   * load, so the doctor's tap turned nothing green and Done captured nothing (owner's iPhone, v90,
+   * 2026-09-18). A missed event, a document replaced after the arm, or an ask re-issued under a new
+   * identity all had the same effect. While a question is on screen the arm is simply re-applied every
+   * GUIDE_ARM_EVERY_MS; it is idempotent (it removes any previous handler first) and one small evaluate
+   * every couple of seconds costs nothing next to a doctor losing the step. */
+  var GUIDE_ARM_EVERY_MS = 2000;
+  function armGuideOnce(full) {
+    if (!S || !S.guide || !S.engine || !S.engine.GUIDE_ARM) return;
+    var c = S.pluginClient || getPlugin();
+    if (!c || !c.evaluate) return;
+    /* Only the first arm of a question runs the observer: it sets the mark that decides which requests
+     * count as this step's answer, and re-running it would discard everything the doctor already did. */
+    var expression = full ? S.engine.GUIDE_ARM : (S.engine.GUIDE_ARM_TAP || S.engine.GUIDE_ARM);
+    try {
+      var p = c.evaluate({ expression: expression });
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) { /* between documents; the next beat covers it */ }
+  }
+  function startGuideHeartbeat() {
+    stopGuideHeartbeat();
+    armGuideOnce(true);
+    S.guideBeat = setInterval(function () {
+      if (!S || !S.guide) { stopGuideHeartbeat(); return; }
+      armGuideOnce();
+    }, GUIDE_ARM_EVERY_MS);
+  }
+  function stopGuideHeartbeat() {
+    if (S && S.guideBeat) { try { clearInterval(S.guideBeat); } catch (e) {} S.guideBeat = null; }
+  }
+  function armGuideWithRetries() { startGuideHeartbeat(); }
+
   /* ---- Plugin event wiring (phone runner) ---- */
   function bindPluginListeners(plugin) {
     removePluginListeners();
@@ -534,15 +574,12 @@
        * is evaluated once per ask and dies with the document, so the doctor's own navigation during a
        * guided ask (S.guide: an ask is on screen) silently drops tap-to-point and the green outline.
        * Best-effort: errors are swallowed, never surfaced to the doctor. */
-      if (S && S.guide && S.engine && S.engine.GUIDE_ARM) {
-        var armClient = S.pluginClient || getPlugin();
-        if (armClient && armClient.evaluate) { try { armClient.evaluate({ expression: S.engine.GUIDE_ARM }).catch(function () {}); } catch (e2) {} }
-      }
+      if (S && S.guide && S.engine && S.engine.GUIDE_ARM) armGuideWithRetries();
     });
     on("loggedIn", function () {
       if (!S) return;
       /* Guided step: the agent asked the doctor to show it a screen; Done resolves that ask. */
-      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; r({ done: true }); paintProgress(); return; }
+      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r({ done: true }); paintProgress(); return; }
       if (S.loginHandled) return;
       S.loginHandled = true;
       stopPhoneSignInPoll();
@@ -550,11 +587,11 @@
     });
     on("guideSkip", function () {
       /* "Not in my EMR" in the browser header: the ask is answered, the resource is recorded missing. */
-      if (S && S.guideResolve) { var r3 = S.guideResolve; S.guideResolve = null; S.guide = null; r3({ done: false, missing: true }); paintProgress(); }
+      if (S && S.guideResolve) { var r3 = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r3({ done: false, missing: true }); paintProgress(); }
     });
     on("stopped", function () {
       if (S) S.stopRequested = true;
-      if (S && S.guideResolve) { var r2 = S.guideResolve; S.guideResolve = null; S.guide = null; r2({ done: false }); }
+      if (S && S.guideResolve) { var r2 = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r2({ done: false }); }
       if (S && S.screen === "progress") stopDiscovery();
     });
   }
@@ -1161,7 +1198,30 @@
     };
   }
 
+  /* A RUN SURVIVES A RELOAD. The phone reloaded the StewardMD page under memory pressure while the
+   * doctor was on step 5 of 6; the hospital browser and its Done banner stayed, but the screen that
+   * listens for Done was gone, so Done did nothing and the whole run was lost (owner's iPhone,
+   * 2026-09-17). The open run is remembered here and picked up again on the next load. */
+  var RUN_KEY = "smd_connect_run";
+  function rememberRun() {
+    try { localStorage.setItem(RUN_KEY, JSON.stringify({ tenant: S.tenant, session: S.session, deployment: S.deployment, emrUrl: S.emrUrl, selected: S.selected, at: Date.now() })); } catch (e) {}
+  }
+  function forgetRun() { try { localStorage.removeItem(RUN_KEY); } catch (e) {} }
+  function resumeRun() {
+    var run = null;
+    try { run = JSON.parse(localStorage.getItem(RUN_KEY) || "null"); } catch (e) { run = null; }
+    if (!run || !run.session || !run.deployment || Date.now() - (run.at || 0) > 30 * 60 * 1000) { forgetRun(); return false; }
+    if (!hasPlugin()) return false;
+    open();
+    S.tenant = run.tenant || S.tenant; S.session = run.session; S.deployment = run.deployment; S.emrUrl = run.emrUrl || ""; S.selected = run.selected || null;
+    S.runner = "phone"; S.resumed = true;
+    show("progress");
+    setStatus("", "Resuming your connection where it stopped.");
+    beginAgentMode();
+    return true;
+  }
   function beginAgentMode() {
+    rememberRun();
     var plugin = getPlugin();
     if (plugin && plugin.setMode) {
       try { plugin.setMode({ mode: "agent", origins: S.deployment.origins, compact: wantsCompact() }); } catch (e) {}
@@ -1260,6 +1320,7 @@
           return new Promise(function (resolve) {
             if (!S || S.screen !== "progress" || S.stopRequested) { resolve({ done: false }); return; }
             S.guide = { gap: q.gap, text: q.text, step: q.step || 0, total: q.total || 0 };
+            startGuideHeartbeat();
             S.guideResolve = resolve;
             S.bannerLine = null;
             paintProgress();
@@ -1563,7 +1624,7 @@
       S.skipRequested = (S.skipRequested || 0) + 1;
       S.lastProgressAt = Date.now();            // the doctor acted: the stall clock starts over
       // If the agent is waiting on a question right now, this answers it too, so one Skip is enough.
-      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; r({ done: false }); paintProgress(); }
+      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r({ done: false }); paintProgress(); }
       flashAction(b, "#smd-connect-skipstep", "Skipping");
     };
     /* Look again: re-walk this hospital for whatever is still missing. */
@@ -1633,7 +1694,7 @@
       var el = b.querySelector(id);
       if (el) el.onclick = function () {
         if (!S || !S.guideResolve) return;
-        var r = S.guideResolve; S.guideResolve = null; S.guide = null;
+        var r = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat();
         r(value);
         paintProgress();
       };
@@ -1806,6 +1867,7 @@
 
   /* ---- Screen 7: result (capabilities + reviewer approval) ---- */
   function loadVersionAndShowResult() {
+    forgetRun();
     /* Every path to a result screen closes the hospital browser: left open, it sat on top of the result
      * with a dead "Done, I'm signed in" and no sign-in detection (owner, 2026-09-13). */
     try { stopDiscoveryPlugin(); } catch (e) {}
@@ -2002,8 +2064,10 @@
     pickTenantThenLoad();
   }
 
+  setTimeout(function () { try { resumeRun(); } catch (e) {} }, 1500);
   window.SMD_CONNECT_AGENT = {
     open: open,
+    __resumeRun: resumeRun,
     close: function () { close(); },
     refresh: refresh,
     __setApi: function (fn) { apiImpl = fn; },

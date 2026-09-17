@@ -199,7 +199,7 @@
     var el = rootEl();
     var body = (cx.loading && !cx.loaded) ? skelHtml() : (cx.ae ? aeDetailHtml() : aeListHtml());
     el.innerHTML =
-      '<div class="oh-top"><button class="oh-back" data-ctc-act="close" aria-label="Close">&lsaquo; Close</button>' +
+      '<div class="oh-top"><button class="oh-back" data-ctc-act="close" aria-label="Close">' + (cx.ae ? "&lsaquo; All terms" : "&lsaquo; Close") + '</button>' +
       '<div class="oh-title">CTCAE grading</div><span style="width:64px"></span></div>' +
       '<div class="oh-body"><div id="ctcResults">' + body + "</div></div>";
   }
@@ -219,7 +219,7 @@
     if (!b) return;
     var act = b.getAttribute("data-ctc-act") || "";
     var i = act.indexOf(":"), verb = i >= 0 ? act.slice(0, i) : act, arg = i >= 0 ? act.slice(i + 1) : "";
-    if (verb === "close") { close(); return; }
+    if (verb === "close") { if (cx.ae) { cx.ae = null; render(); return; } close(); return; }
     if (verb === "list") { cx.ae = null; render(); return; }
     if (verb === "ae") { cx.ae = arg; render(); return; }
     if (verb === "ver") { cx.version = arg; cx.ae = null; render(); return; }
@@ -236,7 +236,7 @@
     el.classList.add("on"); document.body.classList.add("oh-lock");
   }
   function open(aeId) { openList(); if (aeId) { cx.ae = aeId; render(); } }
-  function close() { var el = document.getElementById("smdOncoCtcae"); if (el) el.classList.remove("on"); if (!document.getElementById("smdOncoHome") || !document.getElementById("smdOncoHome").classList.contains("on")) document.body.classList.remove("oh-lock"); }
+  function close() { var el = document.getElementById("smdOncoCtcae"); if (el) el.classList.remove("on"); try { if (document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on") && window.SMD_ONCOHOME && SMD_ONCOHOME.foreground) SMD_ONCOHOME.foreground(); } catch (e) {} if (!document.getElementById("smdOncoHome") || !document.getElementById("smdOncoHome").classList.contains("on")) document.body.classList.remove("oh-lock"); }
 
   try { document.addEventListener("keydown", function (e) { if (e.key === "Escape") { var el = document.getElementById("smdOncoCtcae"); if (el && el.classList.contains("on")) close(); } }); } catch (e) {}
 
