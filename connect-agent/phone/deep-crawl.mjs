@@ -1098,6 +1098,12 @@ export async function exploreDetailOf({ client, view, book, origins = [], waitMs
   if (detail && detail.rowsSelector) {
     detail.detailOf = view.resourceHint;
     if (book) await book.prove({ client, view: detail, label: 'open one ' + view.resourceHint + ' row', parent: view.resourceHint });
+  } else if (book) {
+    /* NOTHING NEW ON SCREEN (the detail went to a print frame or a download): the row's own call can
+     * still be proven by its trace to the row (prove.mjs). */
+    detail = { resourceHint: view.resourceHint + '-detail', detailOf: view.resourceHint, pathTemplate: view.pathTemplate, rowsSelector: view.rowsSelector, headers: [], block: false, singleRecord: false };
+    await book.prove({ client, view: detail, label: 'open one ' + view.resourceHint + ' row', parent: view.resourceHint });
+    if (!(detail.proof && detail.proof.status === 'proven')) detail = null;
   } else {
     detail = null;
   }
