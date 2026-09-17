@@ -6761,7 +6761,9 @@
           (a.state === "booked" ? '<button class="w-btn tiny" data-w-act="apptarrived:' + esc(a.appointmentId) + '">' + ms("how_to_reg") + wTH("ward.appt-mark-arrived", "Arrived") + "</button>" : "") +
           '<button class="w-btn tiny" data-w-act="apptseen:' + esc(a.appointmentId) + '">' + ms("task_alt") + wTH("ward.appt-mark-seen", "Seen") + "</button>" +
           '<button class="w-btn tiny ghost" data-w-act="apptcancel:' + esc(a.appointmentId) + '">' + ms("close") + wTH("ward.cancel", "Cancel") + "</button>" +
-          (a.state === "booked" ? '<button class="w-btn tiny ghost" data-w-act="apptdna:' + esc(a.appointmentId) + '">' + ms("event_busy") + "DNA</button>" : "") + "</div>" : "") +
+          (a.state === "booked" ? '<button class="w-btn tiny ghost" data-w-act="apptdna:' + esc(a.appointmentId) + '">' + ms("event_busy") + "DNA</button>" : "") +
+          // R4-5: what the patient sent before this appointment on the portal (only when the hospital offers forms for appointments).
+          (a.patientId ? '<button class="w-btn tiny ghost" data-w-act="intakeopen:' + esc(a.appointmentId) + "~" + esc(a.patientId) + '~appt">' + ms("assignment") + wTH("ward.intake-appt-open", "Patient's forms") + "</button>" : "") + "</div>" : "") +
         "</li>";
     }).join("");
     var recallRows = (diary.recalls || []).map(function (r) {
@@ -6788,6 +6790,7 @@
 
       '<div class="w-card"><div class="w-card-h">' + ms("event") + "<h3>" + wTH("ward.appointments", "Appointments") + "</h3></div>" +
       (apptRows ? '<ul class="w-mini">' + apptRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-appointments-loaded-set-a-clinician", "No appointments loaded. Set a clinician and load.") + "</p>") +
+      intakePanel(state.intake && state.intake.appointmentId ? state.intake : null) +
       (recallRows ? "<h4>" + wTH("ward.unbooked-follow-ups", "Unbooked follow-ups") + "</h4><ul class=\"w-mini\">" + recallRows + "</ul>" : "") +
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.clinician", "Clinician") + "</span><input id=\"wSchedClinician\" type=\"text\" autocomplete=\"off\" value=\"" + esc(sc.clinicianId || "") + '"></label>' +
@@ -8381,7 +8384,7 @@
       (d == null ? "<p class=\"w-empty\">" + wTH("ward.loading3", "Loading.") + "</p>"
         : rows ? '<ul class="w-mini">' + rows + "</ul>"
         : "<p class=\"w-empty\">" + wTH("ward.nobody-is-waiting-for-a-bed", "Nobody is waiting for a bed.") + "</p>") +
-      intakePanel(state.intake) +
+      intakePanel(state.intake && state.intake.requestId ? state.intake : null) +
       "</div>";
   }
   /* PRE-ADMISSION FORMS (form-response.js). What a patient filled in on the portal for a planned admission. It is shown as
@@ -8393,14 +8396,15 @@
     if (r.reviewState === "returned") return wTH("ward.intake-returned", "Returned to the patient by {who}: {reason}", { who: esc(r.reviewedBy), reason: esc(r.reviewReason) }, "who reason");
     return wTH("ward.intake-waiting-review", "Waiting for review");
   }
+  /* ik: { requestId (a planned admission) or appointmentId (R4-5, a booked appointment), patientId, rows }. */
   function intakePanel(ik) {
     if (!ik) return "";
-    var rows = ik.rows;
-    return '<div class="w-sub" data-w-intake="' + esc(ik.requestId) + '"><h4>' + wTH("ward.intake-title", "Pre-admission forms from the patient") + "</h4>" +
+    var rows = ik.rows, appt = !!ik.appointmentId;
+    return '<div class="w-sub" data-w-intake="' + esc(ik.requestId || ik.appointmentId) + '"><h4>' + (appt ? wTH("ward.intake-appt-title", "Forms from the patient before this appointment") : wTH("ward.intake-title", "Pre-admission forms from the patient")) + "</h4>" +
       '<p class="w-hint warn">' + ms("info") + wTH("ward.intake-not-verified", "Reported by the patient or their family on the portal, not checked. Accepting records that you read this version. It adds nothing to allergies, medicines or problems: enter those yourself if they belong in the chart.") + "</p>" +
       (rows == null ? '<p class="w-hint">' + ms("hourglass_empty") + wTH("ward.loading3", "Loading.") + "</p>"
         : rows === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.intake-load-failed", "Could not load the pre-admission forms. Do not read this as none sent.", null, "", 1) + "</p>"
-        : !rows.length ? '<p class="w-empty">' + wTH("ward.intake-none", "The patient has not sent a pre-admission form for this admission.") + "</p>"
+        : !rows.length ? '<p class="w-empty">' + (appt ? wTH("ward.intake-appt-none", "The patient has not sent a form for this appointment.") : wTH("ward.intake-none", "The patient has not sent a pre-admission form for this admission.")) + "</p>"
         : '<ul class="w-mini">' + rows.map(function (x) {
           return '<li class="w-mini-row"><div><b>' + esc(x.formTitle) + "</b> v" + esc(x.formVersion) + ' <span class="w-dt-times">' + wTH("ward.intake-sent-by", "sent by {who} &middot; {at}", { who: esc(x.submittedBy), at: when(x.submittedAt) }, "who at") + "</span>" +
             '<div class="w-dt-times">' + esc(Object.keys(x.answers || {}).map(function (k) { return k + ": " + JSON.stringify(x.answers[k]); }).join("; ")) + "</div>" +
@@ -8413,11 +8417,12 @@
   function intakeOpen(arg) {
     var parts = String(arg || "").split("~");
     if (!parts[0] || !parts[1]) return;
-    st.intake = { requestId: parts[0], patientId: parts[1], rows: null }; paint(); loadIntake();
+    st.intake = parts[2] === "appt" ? { appointmentId: parts[0], patientId: parts[1], rows: null } : { requestId: parts[0], patientId: parts[1], rows: null };
+    paint(); loadIntake();
   }
   function loadIntake() {
     var ik = st.intake; if (!ik) return;
-    return apiGet("/ward/intake-responses?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(ik.patientId) + "&requestId=" + encodeURIComponent(ik.requestId))
+    return apiGet("/ward/intake-responses?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(ik.patientId) + (ik.appointmentId ? "&appointmentId=" + encodeURIComponent(ik.appointmentId) : "&requestId=" + encodeURIComponent(ik.requestId)))
       .then(function (r) { if (st.intake !== ik) return; ik.rows = r && r.ok ? r.responses : false; if (!(r && r.ok)) settle(r); paint(); },
         function () { if (st.intake !== ik) return; ik.rows = false; paint(); });
   }
@@ -11376,7 +11381,7 @@
       .catch(function () { st.busy = false; st.cashier.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
   }
   function schedulingOpen() {
-    st.view = "scheduling"; st.scheduling = {}; paint(); loadScheduling();
+    st.view = "scheduling"; st.scheduling = {}; st.intake = null; paint(); loadScheduling();
   }
   function loadScheduling() {
     if (!st.scheduling) st.scheduling = {};

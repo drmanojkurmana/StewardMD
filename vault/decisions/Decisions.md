@@ -7947,3 +7947,18 @@ of compliance.js is untouched.
 - Left for R4-2: counting and summing callers (quality, security-review, analytics-extract, discharge-milestones,
   reports, fhir-group, hospital-group and the ledgers) still use list(); they move to listAll. Open OPD visits that never
   close count against the 5,000 open ceiling; reaching it is visible (503), not silent.
+
+## 2026-09-17 Small closures: census refusal on screen, PO store, forms before an appointment (branch small-closures, R4-5)
+
+- Census 503: ward.js turns any answer with error `too_many_open` into one translated sentence in the transport
+  (apiGet/apiPost set message and detail), so every screen that already shows the server's message says the same
+  thing. A failed ward list or downtime pack now says not loaded instead of "no patients" / "Preparing the pack".
+  Twin sections keep a thrown error's code (digital-twin.js section); the waiting list reports `admittedCheckError`.
+  The ICU card's `encounterReadCapped` check was dead after R4-1 and is removed; `recordsCapped` still warns.
+- PO store: the audit said "StoreLocation names". The reorder drafts match an order's `location` against stock ledger
+  locations (StockMovement.location), not StoreLocation records (stores.manage), so the form offers the stores the
+  hospital's stock is held in (GET /ward/stock, same capability as the PO route); free text stays allowed.
+- Appointment intake: setting `wardsynq.intake.forAppointments` (absent or anything but true = off) and a form flag
+  `forAppointments: true` (patient forms only). A FormResponse carries `appointmentId` instead of `admissionRequestId`;
+  review, origin and "never the chart" are unchanged. The portal UI is wardsynq/site/portal.js (the brief named
+  portal.html). No settings screen: the flag is set through /org/update (admin settings screens belong to R4-4).

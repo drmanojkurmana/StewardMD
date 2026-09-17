@@ -260,20 +260,34 @@
       : "<input" + attr + ' type="' + (f.type === "number" || f.type === "integer" ? "number" : f.type === "date" ? "date" : f.type === "datetime" ? "datetime-local" : "text") + '" value="' + esc(v == null ? "" : v) + '">';
     return '<label class="f"><span>' + esc(f.label) + (f.required ? " *" : "") + "</span>" + input + (err ? '<span class="msg err" role="alert">' + esc(err) + "</span>" : "") + "</label>";
   }
-  /** PURE. d: the intake-forms answer (null loading, false failed). ui: { open: "requestId|formKey", answers, errors, msg }. */
+  /** PURE. Which admission or appointment an open-form key names: "requestId|formKey", or "appt:appointmentId|formKey". */
+  function intakeTarget(key) {
+    var k = String(key || "").split("|"), appt = k[0].indexOf("appt:") === 0;
+    return { requestId: appt ? null : k[0], appointmentId: appt ? k[0].slice(5) : null, formKey: k.slice(1).join("|") };
+  }
+  /** PURE. The patient's own response for one open-form key, if any. */
+  function intakeMine(d, key) {
+    var t = intakeTarget(key);
+    return (d.responses || []).filter(function (x) { return x.formKey === t.formKey && (t.appointmentId ? x.appointmentId === t.appointmentId : x.admissionRequestId === t.requestId); })[0];
+  }
+  /** PURE. d: the intake-forms answer (null loading, false failed). ui: { open: "requestId|formKey" or "appt:id|formKey", answers, errors, msg }.
+   * R4-5: a booked appointment still to come is listed like a planned admission, with the forms the hospital marked for
+   * appointments (the server sends none unless the hospital turned that on). */
   function intakeSection(d, ui) {
     ui = ui || {};
     if (d == null) return loadingCard("intake", tr("intake.title"));
     if (d === false) return failedCard("intake", tr("intake.title"));
+    var appts = d.appointments || [];
     // Nothing planned: nothing to offer, and no empty card to wonder about.
-    if (!d.admissions.length) return '<section data-section="intake" hidden></section>';
+    if (!d.admissions.length && !appts.length) return '<section data-section="intake" hidden></section>';
     var h = '<section class="card" data-section="intake"><h2>' + esc(tr("intake.title")) + '</h2><p class="msg note">' + esc(tr("intake.notVerified")) + '</p><p class="quiet">' + esc(tr("intake.privacy")) + "</p>";
-    d.admissions.forEach(function (adm) {
-      h += "<h3>" + esc(tr("intake.for", { date: adm.plannedFor })) + (adm.specialty ? ", " + esc(adm.specialty) : "") + "</h3>";
-      if (!d.forms.length) { h += '<p class="quiet" data-empty="intake">' + esc(tr("intake.noForms")) + "</p>"; return; }
-      d.forms.forEach(function (f) {
-        var mine = d.responses.filter(function (x) { return x.admissionRequestId === adm.requestId && x.formKey === f.key; })[0];
-        var key = adm.requestId + "|" + f.key;
+    var groups = d.admissions.map(function (adm) { return { id: adm.requestId, head: tr("intake.for", { date: adm.plannedFor }) + (adm.specialty ? ", " + adm.specialty : ""), forms: d.forms }; })
+      .concat(appts.map(function (a) { return { id: "appt:" + a.appointmentId, head: tr("intake.forAppointment", { when: when(a.startAt) }) + (a.department ? ", " + a.department : ""), forms: d.appointmentForms || [] }; }));
+    groups.forEach(function (g) {
+      h += "<h3>" + esc(g.head) + "</h3>";
+      if (!g.forms.length) { h += '<p class="quiet" data-empty="intake">' + esc(tr("intake.noForms")) + "</p>"; return; }
+      g.forms.forEach(function (f) {
+        var key = g.id + "|" + f.key, mine = intakeMine(d, key);
         h += '<article data-intake-form="' + esc(key) + '"><h4>' + esc(f.title) + "</h4>";
         if (mine) h += mine.reviewState === "accepted" ? '<p class="msg ok" data-intake-state="accepted">' + esc(tr("intake.accepted", { when: when(mine.reviewedAt) })) + "</p>"
           : mine.reviewState === "returned" ? '<p class="msg err" data-intake-state="returned">' + esc(tr("intake.returned")) + " " + esc(mine.reviewReason) + "</p>"
@@ -482,7 +496,10 @@
     post("intake-forms", sessionBody(s, {})).then(function (r) { if (ended(r)) return; intake.data = r && r.ok ? r : false; putSection("intake", intakeSection(intake.data, intake.ui)); },
       function () { intake.data = false; putSection("intake", intakeSection(false)); });
   }
-  function intakeForm(key) { var k = String(key || "").split("|"); return intake.data && intake.data.forms ? intake.data.forms.filter(function (f) { return f.key === k[1]; })[0] : null; }
+  function intakeForm(key) {
+    var t = intakeTarget(key), list = intake.data ? (t.appointmentId ? intake.data.appointmentForms : intake.data.forms) : null;
+    return list ? list.filter(function (f) { return f.key === t.formKey; })[0] : null;
+  }
   function surveyFromHash() { var m = /(?:^|[#&])survey=([A-Za-z0-9_-]+)/.exec(location.hash || ""); return m ? m[1] : ""; }
   var linkSurvey = null;
   function showSurvey(p) { root.innerHTML = langSwitcher() + surveyPage(p); lastPhase = { survey: p }; }
@@ -626,18 +643,18 @@
     if (act === "intake-open" || act === "intake-close") {
       b.disabled = false;
       var ok = act === "intake-open" ? b.getAttribute("data-key") : null, prev = null;
-      if (ok) { var mk = ok.split("|"); prev = (intake.data.responses || []).filter(function (x) { return x.admissionRequestId === mk[0] && x.formKey === mk[1]; })[0]; }
+      if (ok) prev = intakeMine(intake.data, ok);
       intake.ui = { open: ok, answers: prev ? prev.answers : {}, errors: {} };
       return putSection("intake", intakeSection(intake.data, intake.ui));
     }
     if (act === "intake-send") {
-      var ik = b.getAttribute("data-key"), kf = intakeForm(ik), parts2 = ik.split("|");
+      var ik = b.getAttribute("data-key"), kf = intakeForm(ik), it = intakeTarget(ik);
       if (!kf) { b.disabled = false; return; }
       intake.ui.answers = intakeAnswersFrom(kf);
-      return post("intake-submit", sessionBody(s, { requestId: parts2[0], formKey: parts2[1], formVersion: Number(b.getAttribute("data-version")), answers: intake.ui.answers })).then(function (r) {
+      return post("intake-submit", sessionBody(s, { requestId: it.requestId || undefined, appointmentId: it.appointmentId || undefined, formKey: it.formKey, formVersion: Number(b.getAttribute("data-version")), answers: intake.ui.answers })).then(function (r) {
         if (ended(r)) return;
         if (r && r.ok) {
-          intake.ui = { msg: { ok: true, text: tr("intake.thanks") } };
+          intake.ui = { msg: { ok: true, text: tr(it.appointmentId ? "intake.thanksAppointment" : "intake.thanks") } };
           return post("intake-forms", sessionBody(s, {})).then(function (o) { intake.data = o && o.ok ? o : false; putSection("intake", intakeSection(intake.data, intake.ui)); });
         }
         intake.ui.errors = (r && r.errors) || {};

@@ -306,3 +306,42 @@ test("ward.js waiting list, rendered: a planned request offers its forms; the pa
   assert.ok(!done.includes("intakereview:"), "a reviewed form offers no second review");
   assert.match(done, /Reviewed by dr\.x/);
 });
+
+test("R4-5 screens: the portal lists a booked appointment's forms and sends appointmentId; the scheduling diary opens that appointment's forms", async () => {
+  const read = (p) => readFileSync(new URL("../" + p, import.meta.url), "utf8");
+  const window = {};
+  vm.runInNewContext(read("wardsynq/site/i18n.js"), { window });
+  vm.runInNewContext(read("wardsynq/site/portal.js"), { window });
+  const P = window.WSQPortal;
+  const pub = F.publish(APPT_FORM, 1, NOW);
+  const d = { admissions: [], forms: [], appointments: [{ appointmentId: "apt-1", startAt: SOON, department: "OPD" }], appointmentForms: [pub], responses: [] };
+  const html = P.intakeSection(d);
+  assert.doesNotMatch(html, /hidden/, "an appointment alone opens the section");
+  assert.match(html, /For your appointment on/);
+  assert.ok(html.includes('data-key="appt:apt-1|before_visit"'));
+  const open = P.intakeSection(d, { open: "appt:apt-1|before_visit", answers: {}, errors: {} });
+  assert.match(open, /id="pIf_concern"/);
+  const sent = P.intakeSection({ ...d, responses: [{ appointmentId: "apt-1", admissionRequestId: null, formKey: "before_visit", reviewState: "submitted", submittedAt: NOW, answers: {} }] });
+  assert.match(sent, /data-intake-state="submitted"/);
+  assert.match(P.intakeSection({ admissions: [], forms: [], responses: [] }), /hidden/, "an older answer without appointments still hides");
+  assert.match(read("wardsynq/site/portal.js"), /appointmentId: it\.appointmentId/);
+
+  const src = read("ward.js");
+  const sandbox = { navigator: { userAgent: "node" }, location: { hash: "", href: "" },
+    document: { getElementById: () => null, createElement: () => ({ style: {}, classList: { add() {}, remove() {} }, appendChild() {}, setAttribute() {} }), addEventListener() {}, body: { appendChild() {} }, querySelector: () => null, querySelectorAll: () => [] },
+    localStorage: { getItem: () => "", setItem() {}, removeItem() {} }, fetch: (u) => { sandbox.calls.push(String(u)); return Promise.resolve({ json: () => Promise.resolve({ ok: true, responses: [] }) }); }, calls: [], setTimeout, clearTimeout, console, Promise, Date };
+  sandbox.window = sandbox; sandbox.self = sandbox;
+  vm.createContext(sandbox); vm.runInContext(src, sandbox);
+  const W = sandbox.window.WARD; W._st.orgId = ORG_ID;
+  const sched = { diary: { appointments: [{ appointmentId: "apt-1", patientId: "pat-1", clinicianId: "dr:1", startAt: SOON, minutes: 15, state: "booked" }] } };
+  const diary = W._render({ ...W._st, view: "scheduling", scheduling: sched, intake: null });
+  assert.ok(diary.includes('data-w-act="intakeopen:apt-1~pat-1~appt"'));
+  W._st.view = "scheduling"; W._st.scheduling = sched;
+  W._dispatch("intakeopen:apt-1~pat-1~appt");
+  await new Promise((r) => setTimeout(r, 20));
+  assert.ok(sandbox.calls.some((u) => u.includes("/ward/intake-responses?") && u.includes("appointmentId=apt-1") && !u.includes("requestId=")));
+  const panel = W._render(W._st);
+  assert.match(panel, /Forms from the patient before this appointment/);
+  assert.match(panel, /The patient has not sent a form for this appointment/);
+  assert.doesNotMatch(W._render({ ...W._st, view: "admreqs", admReqs: { ok: true, requests: [] } }), /before this appointment/, "the waiting list never shows an appointment's panel");
+});
