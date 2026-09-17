@@ -17,6 +17,7 @@ import { READ_ROWS, isGimsrOrigin } from './runtime.mjs';
 export const TOKEN_KEY = /token|verification|csrf|xsrf|antiforgery|nonce/i;
 /* How long a page is given to settle after a move (the token inputs are server-rendered). */
 export let PAGE_SETTLE_MS = 2500;
+const TOKEN_SOUGHT = new WeakSet();
 export function setPageSettleMs(ms) { PAGE_SETTLE_MS = ms; }
 export const PATIENT_KEY = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$/i;
 export const VISIT_KEY = /visit|episode|encounter|admission|ip(no|number)/i;
@@ -548,7 +549,8 @@ export async function executeProven({ plugin, origin, view, patient = null, pare
    * anti-forgery token a POST (GHIS Searchnew) needs was proven on /Doctor/Home. Sent empty, the
    * hospital refuses the activation silently and every read that follows answers nothing. With no
    * token on the current page, move to the call's own page once and read it there. */
-  if (wantsToken && !tokens && !Object.keys(toks).length && typeof plugin.navigate === 'function' && /^https:/i.test(String(view.pathTemplate || ''))) {
+  if (wantsToken && !tokens && !Object.keys(toks).length && typeof plugin.navigate === 'function' && /^https:/i.test(String(view.pathTemplate || '')) && !TOKEN_SOUGHT.has(plugin)) {
+    TOKEN_SOUGHT.add(plugin);   // once per browser: a page that carries no token will not grow one on a second visit
     const page = String(view.pathTemplate).replace(/\{[^}]*\}/g, encodeURIComponent((patient && patient.patientId) || ''));
     let here = '';
     try { const cur = typeof plugin.currentUrl === 'function' ? await plugin.currentUrl() : null; here = typeof cur === 'string' ? cur : (cur && cur.url) || ''; } catch { here = ''; }
