@@ -205,7 +205,7 @@ import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
-import { raisePurchaseOrder, receiveGoods, listPurchaseOrders } from "../../_wardsynq/purchasing.js";
+import { raisePurchaseOrder, receiveGoods, listPurchaseOrders, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview, validateReorderPolicy, readReorderPolicy, reorderSuggestions } from "../../_wardsynq/purchasing.js";
 import { saveDietOrder, stopDietOrder, dietOrderHistory, mealBoard, markMeal } from "../../_wardsynq/diet.js";
 import { saveInstrumentSet, startLoad, recordLoadResult, cssdStep, cssdBoard, caseSets } from "../../_wardsynq/cssd.js";
 import { housekeepingBoard, raiseHousekeepingTask, housekeepingStep, housekeepingReport } from "../../_wardsynq/housekeeping.js";
@@ -268,7 +268,7 @@ import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postA
 import { setStayPayer } from "../../_wardsynq/stay-payer.js";
 import { generateIrnRoute, cancelIrnRoute, einvoiceStatus } from "../../_wardsynq/einvoice.js";
 import { listPackages, packageVersions, savePackage, setStayPackage, stayPackages, packagePack } from "../../_wardsynq/packages.js";
-import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
+import { recordMovement, stockLevels, reconcileCount, stockFefo, returnToSupplier } from "../../_wardsynq/stock.js";
 import { storesOverview, saveStoreItem, saveStoreLocation, storeMovement, raiseIndent, decideIndent, issueIndent, acknowledgeIndent, closeIndent, storeConsumption, purchaseFromIndent } from "../../_wardsynq/stores.js";
 import { assetsOverview, saveAsset, recordAssetEvent, saveSchedule, openJobCard, updateJobCard } from "../../_wardsynq/assets.js";
 import { bloodBankOverview, registerDonor, screenDonor, recordDonation, recordBloodTests, separateComponents, bloodUnitEvent, bloodUnitGate, poolUnits, registerSample, discardSample, recordDonorNotification } from "../../_wardsynq/blood-bank.js";
@@ -1327,6 +1327,9 @@ export async function onRequest(context) {
         immunization: CAPS.EMR_VITALS, "immunization-error": CAPS.EMR_VITALS, immunizations: CAPS.EMR_VIEW,
         "purchase-orders": CAPS.ORDER_DISPENSE, "purchase-order": CAPS.ORDER_DISPENSE,
         "goods-receive": CAPS.ORDER_DISPENSE,
+        /* Supply chain depth (R2-4): returning stock to a supplier, rate contracts and reorder drafts are the same
+         * purchasing authority as raising an order; the store keeper reaches them through the stores fallback below. */
+        "supply-chain": CAPS.ORDER_DISPENSE, "supplier-return": CAPS.ORDER_DISPENSE, "rate-contract": CAPS.ORDER_DISPENSE, "reorder-suggestions": CAPS.ORDER_DISPENSE,
         /* General stores (stores.js). The overview is every stores role's own screen; each write sits on the
          * authority of the person who does it: the ward raises and acknowledges, the in-charge decides (and the
          * route narrows that to the departments in the membership's scope), the store keeper runs the store. */
@@ -2080,7 +2083,7 @@ export async function onRequest(context) {
       if (!wAz.ok && sub === "approval-request" && (body.subjectType === "PurchaseOrder" || body.subjectType === "StockRequisition")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_DISPENSE);
       /* General stores: the store keeper orders and books in through the same purchasing routes the pharmacy uses,
        * and the in-charge and the store open the stores overview without raising indents themselves. */
-      if (!wAz.ok && (sub === "purchase-orders" || sub === "goods-receive" || (sub === "approval-request" && body.subjectType === "PurchaseOrder"))) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
+      if (!wAz.ok && (sub === "purchase-orders" || sub === "goods-receive" || sub === "supply-chain" || sub === "supplier-return" || sub === "rate-contract" || sub === "reorder-suggestions" || (sub === "approval-request" && body.subjectType === "PurchaseOrder"))) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
       if (!wAz.ok && sub === "stores") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
       if (!wAz.ok && (sub === "stores" || sub === "store-consumption")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.INDENT_APPROVE);
       if (!wAz.ok && sub === "assets") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ASSET_MANAGE);
@@ -2380,6 +2383,27 @@ export async function onRequest(context) {
         const r = await listPurchaseOrders(request, env, { ...deps });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "supply-chain" && method === "GET") {
+        const r = await supplyChainOverview(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "supplier-return" && method === "POST") {
+        /* Whether the stock is a controlled drug is decided from the receipt's own item (isControlled, the drug master),
+         * never from anything the screen sends. */
+        const r = await returnToSupplier(request, env, { ...deps, receiptId: body.receiptId, quantity: body.quantity, reason: body.reason, supplier: body.supplier, debitNoteNo: body.debitNoteNo,
+          isControlled, witnessId: body.witnessId, witnessCheck, controllerApprovalRef: body.controllerApprovalRef, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "rate-contract" && method === "POST") {
+        const r = await saveRateContract(request, env, { ...deps, vendor: body.vendor, item: body.item, unit: body.unit, pricePaise: body.pricePaise, validFrom: body.validFrom, validTo: body.validTo, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "reorder-suggestions" && method === "GET") {
+        /* A store keeper reads no dispenses, so the drafts are limited to the general stores item master for them. */
+        const pharmacy = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_DISPENSE);
+        const r = await reorderSuggestions(request, env, { ...deps, policy: readReorderPolicy(wsqCfg), storesOnly: !(pharmacy && pharmacy.ok) });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "approval-request" && method === "POST") {
         const r = await requestVerification(request, env, { ...deps, subjectType: body.subjectType, subjectId: body.subjectId, reason: body.reason, context: body.context, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -2390,6 +2414,17 @@ export async function onRequest(context) {
       }
       if (sub === "approvals" && method === "GET") {
         const r = await listVerifications(request, env, { ...deps, subjectId: url.searchParams.get("subjectId") || "" });
+        /* A purchase order waiting for approval carries its rate contract check (purchasing.js contractWarnings), so the
+         * approver sees a price above contract. A check that could not be made says so; it never reads as "no warning". */
+        const poIds = r.ok ? r.verifications.filter((v) => v.subjectType === "PurchaseOrder" && v.state === "pending").map((v) => v.subjectId) : [];
+        if (poIds.length) {
+          const pc = await purchaseOrderPriceChecks(request, env, { ...deps, purchaseOrderIds: poIds });
+          for (const v of r.verifications) {
+            if (v.subjectType !== "PurchaseOrder" || v.state !== "pending") continue;
+            if (!pc.ok) v.priceCheck = "failed";
+            else if (pc.checks[v.subjectId]) Object.assign(v, { priceCheck: "done", priceWarnings: pc.checks[v.subjectId].warnings, unpricedAgainstContract: pc.checks[v.subjectId].unpriced });
+          }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "consultation" && method === "POST") {
@@ -5653,6 +5688,29 @@ export async function onRequest(context) {
     /* rcm-claims-ops: the hospital's claims settings (functions/_wardsynq/claims-ops.js), on Admin > Price list: its own
      * denial reasons and the receivables ageing bands. staff.admin reads and saves; every change needs a reason and the
      * audit row names what changed. */
+    /* R2-4: the hospital's reorder suggestion numbers (purchasing.js readReorderPolicy): window, lead time, safety days and
+     * minimum days of data, all four or none, no default. staff.admin reads and saves with a reason; the audit names the change. */
+    if (seg === "org" && sub === "reorder-policy") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Reorder settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, policy: readReorderPolicy(o.wardsynq) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateReorderPolicy(cb.policy);
+      if (!value) return json({ ok: false, error: "invalid_reorder_policy", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const before = readReorderPolicy(o.wardsynq);
+      const changed = Object.keys(value).filter((k) => !before || before[k] !== value[k]);
+      if (!changed.length) return json({ ok: true, changed: [], policy: before }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the reorder settings are being changed. Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { reorderPolicy: value } }, actor.id, { action: "org:reorder_policy", meta: JSON.stringify({ changed, reason: reason.slice(0, 80) }) });
+      const back = readReorderPolicy((await ORG.getOrg(env, orgId) || {}).wardsynq);
+      if (JSON.stringify(back) !== JSON.stringify(value)) return json({ ok: false, error: "not_saved", message: "The settings did not read back as sent, so do not rely on them. Try again." }, 502, request);
+      return json({ ok: true, changed, policy: back }, 200, request);
+    }
     if (seg === "org" && sub === "rcm-settings") {
       const cb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || cb.orgId || "";
