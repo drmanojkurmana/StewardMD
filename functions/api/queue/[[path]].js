@@ -208,6 +208,7 @@ import { dialysisUnit, dialysisPatient, recordSerology, bookStation, saveSession
 import { blockPeriod, cancelBlackout, listBlackouts } from "../../_wardsynq/blackout.js";
 import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
+import { scanOrderClosures, closeOrderBacklog } from "../../_wardsynq/order-backfill.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
 import { raisePurchaseOrder, receiveGoods, listPurchaseOrders, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview, validateReorderPolicy, readReorderPolicy, reorderSuggestions } from "../../_wardsynq/purchasing.js";
@@ -1415,6 +1416,12 @@ export async function onRequest(context) {
         /* Hospital-loaded code sets (code-sets.js): loading a licensed release is hospital administration
          * (staff.admin); seeing what is loaded and searching it is anyone who reads the chart (emr.view). */
         "code-set-import": CAPS.STAFF_ADMIN, "code-sets": CAPS.EMR_VIEW, "code-search": CAPS.EMR_VIEW,
+        /* Closing the orders this hospital resulted before a result closed anything (order-backfill.js).
+         * staff.admin, both halves: it is a maintenance job over the whole archive, not a clinical act,
+         * and the dry run reads every open order in the hospital rather than one patient's chart. The
+         * write it performs is the ordinary order closure, through the closure actor, on this admin's
+         * authority and with their id on every version. */
+        "order-backfill-scan": CAPS.STAFF_ADMIN, "order-backfill-close": CAPS.STAFF_ADMIN,
         /* A hospital's own licensed growth tables (growth-tables.js): loading or withdrawing them is hospital
          * administration; which reference the chart uses is readable by anyone who can see the chart. */
         "growth-table-import": CAPS.STAFF_ADMIN, "growth-tables": CAPS.EMR_VIEW,
@@ -4188,6 +4195,17 @@ export async function onRequest(context) {
       if (sub === "investigation" && method === "POST") {
         const cat = await wsqInvestigationCatalogue(env, wOrgId, wsqCfg);
         const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, other: body.other === true, coding: body.coding, catalogue: cat.entries, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* The backfill, in two steps that cannot be collapsed into one: the scan writes nothing and says
+       * what it would close, and the close takes the order ids that scan handed back. Both are batched
+       * with the store's own cursor, so neither depends on how much history the hospital holds. */
+      if (sub === "order-backfill-scan" && method === "POST") {
+        const r = await scanOrderClosures(request, env, { ...deps, cursor: body.cursor, limit: body.limit });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "order-backfill-close" && method === "POST") {
+        const r = await closeOrderBacklog(request, env, { ...deps, orderIds: body.orderIds });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "investigation-catalogue" && method === "GET") {
