@@ -435,6 +435,8 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .p-tr-l { display: block; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--on-surface-variant); }
 #smdWard .p-tr-auth { font-weight: 600; }
 
+/* rcm-claims-ops: the evidence pack's print copy, shown only on paper (the screen edits the textarea). */
+#smdWard .w-evidence-print { display: none; }
 @media print {
   /* The pack is the page. Everything else in the app is hidden, and the shell's fixed positioning is
      undone so more than the first screenful reaches the paper. */
@@ -445,6 +447,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
   #smdWard { position: static; background: #fff; color: #000; }
   #smdWard .w-shell, #smdWard .w-canvas { display: block; height: auto; overflow: visible; padding: 0; }
   #smdWard .w-top, #smdWard .w-noprint, #smdWard .w-refusal, #smdWard .w-err, #smdWard .w-ok { display: none !important; }
+  #smdWard .w-evidence-print { display: block !important; }
   #smdWard .w-dt-p { page-break-inside: avoid; break-inside: avoid; border: 0; border-bottom: 1.5pt solid #000; border-radius: 0; padding: 0 0 10pt; margin-bottom: 12pt; }
   #smdWard .w-dt-h { border: 0; border-bottom: 2pt solid #000; border-radius: 0; padding: 0 0 8pt; }
   #smdWard .w-dt-bed { background: #000; color: #fff; border-radius: 0; }

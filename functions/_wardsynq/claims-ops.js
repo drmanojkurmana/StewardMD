@@ -366,7 +366,7 @@ async function claimChecks(request, env, ctx) {
     const facts = await claimFacts(o.svc, c, { conditions, preAuths });
     checks[c.id] = scrubClaim(c, facts, { payer: payerById(ctx.payers, c.payerId), now });
   }
-  return { ...base, ok: true, patientId, checks, candidates: conditions === undefined ? null : codingCandidates(conditions, ctx.encounterId),
+  return { ...base, ok: true, patientId, checks, denialReasons: (ctx.rcm && ctx.rcm.denialReasons) || [], candidates: conditions === undefined ? null : codingCandidates(conditions, ctx.encounterId),
     ...(conditions === undefined ? { candidatesUnreadable: "The problem list is not readable with this role, so no coding candidates are shown." } : {}) };
 }
 

@@ -3366,7 +3366,7 @@ export async function onRequest(context) {
       if ((sub === "claim-checks" || sub === "rcm-worklists" || sub === "claim-evidence" || sub === "preauth-event") && (method === "GET" || method === "POST")) {
         let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const q = (k) => url.searchParams.get(k) || "";
-        const r = sub === "claim-checks" && method === "GET" ? await claimChecks(request, env, { ...deps, patientId: q("patientId"), encounterId: q("encounterId"), payers })
+        const r = sub === "claim-checks" && method === "GET" ? await claimChecks(request, env, { ...deps, patientId: q("patientId"), encounterId: q("encounterId"), payers, rcm: rcmSettings(wsqCfg) })
           : sub === "rcm-worklists" && method === "GET" ? await rcmWorklists(request, env, { ...deps, payers, rcm: rcmSettings(wsqCfg), from: q("from"), to: q("to") })
           : sub === "claim-evidence" && method === "GET" ? await claimEvidence(request, env, { ...deps, claimId: q("claimId"), payers })
           : sub === "claim-evidence" ? await saveClaimEvidence(request, env, { ...deps, claimId: body.claimId, text: body.text, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null })
