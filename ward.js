@@ -7575,7 +7575,8 @@
       "<div class=\"w-dt-times\">" + wTH("ward.raised-by-approvals-of", "raised by {raisedBy} &middot; {raisedAt} &middot; approvals {approval} of {approval2}", { raisedBy: esc(o.raisedBy), raisedAt: when(o.raisedAt), approval: esc(o.approval && o.approval.approvals || 0), approval2: esc(o.approval && o.approval.required || 1) }, "raisedBy raisedAt approval approval2") +
       " &middot; " + (o.totalPaise == null ? wTH("ward.total-not-known-a-line-has", "total not known (a line has no price)") : wTH("ward.total", "total") + " " + rupeesOf(o.totalPaise)) + "</div>" +
       '<ul class="w-mini">' + (o.lines || []).map(poLineRow).join("") + "</ul>" +
-      "<div class=\"w-dt-times\">" + wTH("ward.reference2", "Reference: {purchaseOrderId}", { purchaseOrderId: esc(o.purchaseOrderId) }, "purchaseOrderId") + "</div></div>" +
+      "<div class=\"w-dt-times\">" + wTH("ward.reference2", "Reference: {purchaseOrderId}", { purchaseOrderId: esc(o.purchaseOrderId) }, "purchaseOrderId") +
+      (o.location ? " &middot; " + wTH("ward.po-for-store", "for {store}", { store: esc(o.location) }, "store") : "") + "</div></div>" +
       '<div class="w-mini-row-act">' +
       (o.state === "awaiting-approval"
         ? '<button class="w-btn ghost sm" data-w-act="poask:' + esc(o.purchaseOrderId) + '">' + ms("send") + wTH("ward.ask-for-approval", "Ask for approval") + "</button>"
@@ -7597,7 +7598,13 @@
       "<label class=\"w-f\"><span>" + wTH("ward.how-many2", "How many") + "</span><input id=\"wPoQty\" inputmode=\"decimal\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.counted-in", "Counted in") + "</span><input id=\"wPoUnit\" placeholder=\"" + wTA("ward.box-strip-vial", "box, strip, vial") + "\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.price-per-unit-rs", "Price per unit (Rs)") + "</span><input id=\"wPoPrice\" inputmode=\"decimal\" placeholder=\"" + wTA("ward.optional", "optional") + "\"></label>" +
+      /* R4-5: the store the order is bought for. The names offered are the stores this hospital's stock is held in
+       * (/ward/stock, the ledger the reorder drafts read); any other name may be typed, as a receipt's location is. */
+      "<label class=\"w-f\"><span>" + wTH("ward.po-store", "For which store") + "</span><input id=\"wPoStore\" list=\"wPoStores\" placeholder=\"" + wTA("ward.optional", "optional") + "\"></label>" +
+      '<datalist id="wPoStores">' + (state.poStores || []).map(function (n) { return '<option value="' + esc(n) + '"></option>'; }).join("") + "</datalist>" +
       "</div>" +
+      (state.poStores === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.po-stores-failed", "The store names could not be loaded. Type the store, or leave it empty.", null, "", 1) + "</p>" : "") +
+      '<p class="w-hint">' + ms("info") + wTH("ward.po-store-hint", "With a store named, the reorder suggestions count this order as on its way to that store only. Without one, it counts for every store that holds the item.") + "</p>" +
       '<p class="w-hint">' + ms("info") + wTH("ward.one-item-per-order-for-now", "One item per order for now. The unit is recorded as you type it and is never converted, so a delivery in a different unit will not count against this line. Without a price the order total is unknown, and the hospital's strictest approval level applies.") +
       "</p><button class=\"w-btn\" data-w-act=\"poraise\">" + ms("save") + wTH("ward.raise", "Raise") + "</button></div>" +
       (state.purchaseOrdersFailed ? '<p class="w-hint warn">' + ms("error") + wTH("ward.purchase-orders-could-not-be-loaded", "Purchase orders could not be loaded. Do not read this as none.", null, "", 1) + (state.purchaseOrders ? " " + wTH("ward.the-list-below-may-be-out", "The list below may be out of date.") : "") + "</p>" : "") +
@@ -12183,7 +12190,14 @@
    * patient identifier is sent, because a lookup that carried the patient it was for would leak a
    * diagnosis to a reference service that has no business knowing one. */
   function purchasingOpen() {
-    st.view = "purchasing"; st.purchaseOrders = null; paint(); loadPurchaseOrders();
+    st.view = "purchasing"; st.purchaseOrders = null; st.poStores = null; paint(); loadPurchaseOrders();
+    apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        var seen = {};
+        st.poStores = r && r.ok ? (r.levels || []).map(function (l) { return l && l.location ? String(l.location) : ""; })
+          .filter(function (n) { return n && !seen[n.toLowerCase()] && (seen[n.toLowerCase()] = 1); }).sort() : false;
+        paint();
+      }, function () { st.poStores = false; paint(); });
   }
   function loadPurchaseOrders() {
     st.busy = true; paint();
@@ -12192,17 +12206,17 @@
       .catch(function () { st.busy = false; st.purchaseOrdersFailed = true; paint(); });
   }
   function poRaise() {
-    var vendor = val("wPoVendor"), item = val("wPoItem"), qty = val("wPoQty"), unit = val("wPoUnit"), price = val("wPoPrice");
+    var vendor = val("wPoVendor"), item = val("wPoItem"), qty = val("wPoQty"), unit = val("wPoUnit"), price = val("wPoPrice"), store = val("wPoStore");
     if (!vendor) { st.err = wT("ward.say-who-this-is-being-ordered", "Say who this is being ordered from."); paint(); return; }
     if (!item || !qty || !unit) { st.err = wT("ward.an-order-line-needs-the-item", "An order line needs the item, how many, and what they are counted in."); paint(); return; }
     if (price && !/^\d+(\.\d{1,2})?$/.test(price)) { st.err = wT("ward.write-the-price-in-rupees-for", "Write the price in rupees, for example 125.50."); paint(); return; }
     var line = { item: item, quantity: qty, unit: unit };
     if (price) line.unitPricePaise = Math.round(Number(price) * 100);
     st.busy = true; paint();
-    apiPost("/ward/purchase-order", { orgId: st.orgId, vendor: vendor, lines: [line] })
+    apiPost("/ward/purchase-order", { orgId: st.orgId, vendor: vendor, lines: [line], location: store || undefined })
       .then(function (r) {
         if (settle(r, r && r.ok ? r.detail : null)) {
-          ["wPoVendor", "wPoItem", "wPoQty", "wPoUnit", "wPoPrice"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          ["wPoVendor", "wPoItem", "wPoQty", "wPoUnit", "wPoPrice", "wPoStore"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
           loadPurchaseOrders();
         } else paint();
       })

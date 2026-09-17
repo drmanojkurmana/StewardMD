@@ -5427,6 +5427,10 @@
     "ward.too-many-open-stays": "Too many open stays to show safely. Close visits that are finished (discharge or end them), or contact support.",
     "ward.list-not-loaded": "The ward list was not loaded. Do not read this as an empty ward.",
     "ward.admreq-admitted-unknown": "Who is already admitted could not be checked: a patient on this list may already be in a bed.",
+    "ward.po-store": "For which store",
+    "ward.po-for-store": "for {store}",
+    "ward.po-stores-failed": "The store names could not be loaded. Type the store, or leave it empty.",
+    "ward.po-store-hint": "With a store named, the reorder suggestions count this order as on its way to that store only. Without one, it counts for every store that holds the item.",
     /* end ward.js keys */
     /* site pages keys (ui-i18n-site) */
     "site.admin.rcm.title": "Claims settings",
