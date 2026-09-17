@@ -5423,6 +5423,10 @@
     "ward.intake-review-failed": "Could not record the review.",
     "ward.intake-return-why": "What does the patient need to change? They will read this.",
     "ward.intake-return-needs-reason": "Returning a form needs a reason.",
+    /* R4-5 small-closures */
+    "ward.too-many-open-stays": "Too many open stays to show safely. Close visits that are finished (discharge or end them), or contact support.",
+    "ward.list-not-loaded": "The ward list was not loaded. Do not read this as an empty ward.",
+    "ward.admreq-admitted-unknown": "Who is already admitted could not be checked: a patient on this list may already be in a bed.",
     /* end ward.js keys */
     /* site pages keys (ui-i18n-site) */
     "site.admin.rcm.title": "Claims settings",

@@ -232,12 +232,12 @@ async function admissionWaitingList(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, requests: [] };
 
-  let rows, encounters;
+  let rows, encounters, admittedCheckError = null;
   try {
     [rows, encounters] = await Promise.all([
       svc.list(TYPE, 500),
       // R4-1: the open stays, however many are on record (was the oldest 500). null = could not be read.
-      svc.listByStatus("Encounter", ["in-progress"]).catch(() => null),
+      svc.listByStatus("Encounter", ["in-progress"]).catch((e) => { admittedCheckError = (e && e.code) || "record_read_failed"; return null; }),
     ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), requests: [] };
@@ -272,7 +272,7 @@ async function admissionWaitingList(request, env, ctx) {
   return {
     ...base, ok: true, requests,
     // The open stays could not be read: "already admitted" is then unknown for every row, never "no".
-    ...(encounters === null ? { admittedCheckFailed: true } : {}),
+    ...(encounters === null ? { admittedCheckFailed: true, admittedCheckError } : {}),
     waiting: requests.filter((r) => r.state === "waiting").length,
     longestWaitHours: requests.reduce((m, r) => (r.waitingHours !== null && r.waitingHours > m ? r.waitingHours : m), 0),
     note: "A waiting list, not a bed allocation. No bed is held for anybody on it.",

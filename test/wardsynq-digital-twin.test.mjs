@@ -486,6 +486,19 @@ test("P1.13 ICU occupancy, ventilation and vasopressors carry the encounter ids 
   assert.equal(occ.total, r.twin.sections.flow.data.flow.beds.occupied);
 });
 
+test("R4-5: an open census past its ceiling makes the ICU and flow sections say too_many_open, not a bare 'threw'", async () => {
+  seed();
+  const { RecordService, ListCeilingError } = await import("../functions/_wardsynq/service.js");
+  const real = RecordService.prototype.listByStatus;
+  RecordService.prototype.listByStatus = async function (type) { throw new ListCeilingError("too_many_open", type, 5000); };
+  try {
+    const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+    assert.equal(r.twin.sections.icu.status, "unavailable");
+    assert.equal(r.twin.sections.icu.error, "too_many_open");
+    assert.equal(r.twin.sections.flow.error, "too_many_open");
+  } finally { RecordService.prototype.listByStatus = real; }
+});
+
 test("P1.13 lab TAT and radiology backlog are computed from real timestamps, with exclusions counted", async () => {
   seed();
   await patient("cc-lab-p1");

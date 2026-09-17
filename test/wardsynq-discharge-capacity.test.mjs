@@ -338,6 +338,16 @@ test("TRANSFER CENTRE POST /api/queue/ward/transfer-centre-request, transfer-cen
   assert.equal(again.__status, 409); assert.equal(again.error, "wrong_state");
   const waiting = await as(NURSE, `/ward/waiting-list?orgId=${ORG}`);
   assert.equal(waiting.requests.length, 1, "the accepted transfer waits on the ordinary list");
+  assert.equal(waiting.admittedCheckFailed, undefined);
+  { // R4-5: the open census past its ceiling: the list still loads, and says why "already admitted" is unknown.
+    const { RecordService, ListCeilingError } = await import("../functions/_wardsynq/service.js");
+    const real = RecordService.prototype.listByStatus;
+    RecordService.prototype.listByStatus = async function (type) { throw new ListCeilingError("too_many_open", type, 5000); };
+    try {
+      const w2 = await as(NURSE, `/ward/waiting-list?orgId=${ORG}`);
+      assert.equal(w2.__status, 200); assert.equal(w2.admittedCheckFailed, true); assert.equal(w2.admittedCheckError, "too_many_open");
+    } finally { RecordService.prototype.listByStatus = real; }
+  }
 
   const r2 = await as(DESK, "/ward/transfer-centre-request", "POST", { ...call, facility: "City Clinic", urgency: "routine", receivedAt: undefined });
   const noWhy = await as(DOCTOR, "/ward/transfer-centre-decide", "POST", { orgId: ORG, requestId: r2.requestId, decision: "decline", expectedVersion: 1 });

@@ -157,7 +157,13 @@
       return new Promise(function (res) { setTimeout(res, 700); }).then(function () { return fetchRetry(url, opts, tries - 1); });
     });
   }
-  function apiGet(path) { return authHeaders().then(function (h) { return fetchRetry(API + path, { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }); }
+  /* R4-1: a census route (ward list, nurse worklist, bed board, patient flow, ED board, theatre board, downtime pack,
+   * admission, transfer) answers 503 error "too_many_open" when more stays are open than it can read whole, rather than
+   * a short list. Every screen shows the server's message field; here that message becomes one translated sentence
+   * saying what to do, so no screen shows a bare code or reads as an empty ward. */
+  function tooManyOpenText() { return wT("ward.too-many-open-stays", "Too many open stays to show safely. Close visits that are finished (discharge or end them), or contact support."); }
+  function censusAnswer(j) { if (j && j.error === "too_many_open") j.message = j.detail = tooManyOpenText(); return j; }
+  function apiGet(path) { return authHeaders().then(function (h) { return fetchRetry(API + path, { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }).then(censusAnswer); }
   /* The ICD reference API is public, read-only, non-PHI and lives on its own path. It is fetched
    * separately rather than through apiGet so no patient identifier can ever be sent to it: a
    * terminology lookup that carried the patient it was for would leak a diagnosis to a service that
@@ -172,6 +178,7 @@
   function apiPost(path, body) {
     return authHeaders().then(function (h) { return fetchRetry(API + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) }); })
       .then(function (r) { return r.json(); })
+      .then(censusAnswer)
       // A write the server accepted empties the form it came from on the next repaint (see paint()); a check or a
       // write that recorded nothing keeps what was typed.
       .then(function (j) { if (j && j.ok && !j.checkOnly && j.written !== 0) _typedDrop = _typedAct; return j; });
@@ -638,6 +645,7 @@
       return '<div class="w-wardrow"><h4>' + (w === "No ward assigned" ? wTH("ward.no-ward-assigned", "No ward assigned") : esc(w)) + "<small>" + byWard[w].length + (byWard[w].length === 1 ? " " + wTH("ward.patient", "patient") : " " + wTH("ward.patients", "patients")) + "</small></h4>" + rows + "</div>";
     }).join("");
     var empty = !state.loaded ? "<p class=\"w-empty\">" + wTH("ward.loading-the-ward2", "Loading the ward…") + "</p>"
+      : state.listFailed && !all.length ? '<p class="w-hint warn">' + ms("error") + wTH("ward.list-not-loaded", "The ward list was not loaded. Do not read this as an empty ward.", null, "", 1) + "</p>"
       : !all.length ? "<p class=\"w-empty\">" + wTH("ward.no-patients-are-currently-admitted", "No patients are currently admitted{v}.", { v: (state.ward ? " " + wTH("ward.to", "to {ward}", { ward: esc(state.ward) }, "ward") : "") }) + "</p>"
       : !shown.length ? "<p class=\"w-empty\">" + wTH("ward.no-patients-match-clear-the-search", "No patients match. Clear the search or the filter.") + "</p>" : "";
     return '<p class="w-count">' + wTH("ward.of2", "{length} of {length2}", { length: shown.length, length2: all.length }, "length length2") + (all.length === 1 ? " " + wTH("ward.patient", "patient") : " " + wTH("ward.patients", "patients")) + (wards.length ? " · " + wards.length + (wards.length === 1 ? " " + wTH("ward.ward", "ward") : " " + wTH("ward.wards", "wards")) : "") + "</p>" + filterRow + chips + (groups || empty);
@@ -6520,7 +6528,8 @@
       : '<span class="w-st overdue">' + ms("block") + wTH("ward.unavailable", "Unavailable") + "</span>";
     return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + esc(title) + "</h3>" + badge + "</div>" +
       (section.status === "ok" ? body(section.data) + "<p class=\"w-dt-times\">" + wTH("ward.computed", "Computed {generatedAt}", { generatedAt: when(section.generatedAt) }, "generatedAt") + "</p>"
-        : '<p class="w-hint warn">' + ms("warning") + esc(section.error || "unavailable") + (section.detail ? ": " + esc(section.detail) : "") + "<br><small>" + wTH("ward.this-section-is-unavailable-not-zero", "This section is UNAVAILABLE, not zero - the rest of this screen is unaffected.") + "</small></p>") +
+        : '<p class="w-hint warn">' + ms("warning") + (section.error === "too_many_open" ? wTH("ward.too-many-open-stays", "Too many open stays to show safely. Close visits that are finished (discharge or end them), or contact support.", null, "", 1)
+          : esc(section.error || "unavailable") + (section.detail ? ": " + esc(section.detail) : "")) + "<br><small>" + wTH("ward.this-section-is-unavailable-not-zero", "This section is UNAVAILABLE, not zero - the rest of this screen is unaffected.") + "</small></p>") +
       "</div>";
   }
   /* P1.13 DRILL-DOWN. A count with ids behind it is a button that lists them; a count with none
@@ -6613,7 +6622,7 @@
           twinCount(s.icu, "icu", "ventilated", d.ventilatedRecorded, wT("ward.ventilator-charted-in-12-h", "ventilator charted in 12 h")) +
           twinCount(s.icu, "icu", "vasopressors", d.vasopressorsRecorded, wT("ward.on-a-vasoactive-order", "on a vasoactive order")) + "</div>" +
           "<p class=\"w-hint\">" + wTH("ward.ventilation-and-vasopressors-count-what-is", "Ventilation and vasopressors count what is charted. A patient with nothing charted is not known, not \"off\".") + "</p>" +
-          (d.encounterReadCapped || d.recordsCapped ? "<p class=\"w-hint warn\">" + wTH("ward.read-limit-reached-these-counts-may", "Read limit reached: these counts may be low.") + "</p>" : "");
+          (d.recordsCapped ? "<p class=\"w-hint warn\">" + wTH("ward.read-limit-reached-these-counts-may", "Read limit reached: these counts may be low.") + "</p>" : "");
       }) +
       twinSectionCard("groups", wT("ward.opd-queue-today", "OPD queue today"), s.opdQueue, function (d) {
         return "<p>" + drillCount(d.waiting, "waiting") + " &middot; " + drillCount(d.inConsultation, wT("ward.in-consultation", "in consultation")) + " &middot; " + wTH("ward.session-s", "{sessions} session(s)", { sessions: esc(d.sessions) }, "sessions") + "</p>" +
@@ -8359,6 +8368,9 @@
       "</div>" +
       "<textarea id=\"wArReason\" rows=\"2\" placeholder=\"" + wTA("ward.why-this-patient-needs-to-come", "Why this patient needs to come in") + "\"></textarea>" +
       '<button class="w-btn" data-w-act="admreqask">' + ms("send") + wTH("ward.ask-for-a-bed", "Ask for a bed") + "</button></div>" +
+      (d && d.admittedCheckFailed ? '<p class="w-hint warn">' + ms("error") + (d.admittedCheckError === "too_many_open"
+          ? wTH("ward.too-many-open-stays", "Too many open stays to show safely. Close visits that are finished (discharge or end them), or contact support.", null, "", 1) + " " : "") +
+        wTH("ward.admreq-admitted-unknown", "Who is already admitted could not be checked: a patient on this list may already be in a bed.", null, "", 1) + "</p>" : "") +
       (d == null ? "<p class=\"w-empty\">" + wTH("ward.loading3", "Loading.") + "</p>"
         : rows ? '<ul class="w-mini">' + rows + "</ul>"
         : "<p class=\"w-empty\">" + wTH("ward.nobody-is-waiting-for-a-bed", "Nobody is waiting for a bed.") + "</p>") +
@@ -9565,7 +9577,8 @@
 
   function downtimeView(state) {
     var d = state.downtime;
-    if (!d) return "<div class=\"w-card\"><p class=\"w-empty\">" + wTH("ward.preparing-the-pack", "Preparing the pack…") + "</p></div>";
+    if (!d) return "<div class=\"w-card\">" + (state.busy ? "<p class=\"w-empty\">" + wTH("ward.preparing-the-pack", "Preparing the pack…") + "</p>"
+      : '<p class="w-hint warn">' + ms("error") + wTH("ward.could-not-build-the-downtime-pack", "Could not build the downtime pack. Do not print an older one.", null, "", 1) + "</p>") + "</div>";
 
     var pages = (d.patients || []).map(function (p) {
       var allergies = p.allergies === null
@@ -9953,8 +9966,8 @@
   function loadWard(afterList) {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; if (r.labels) st.labels = r.labels; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover(), loadTransfers()]); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-ward", "Could not reach the ward."); st.loaded = true; paint(); });
+      .then(function (r) { st.listFailed = !settle(r); if (!st.listFailed) { st.patients = r.patients || []; if (r.region) st.region = r.region; if (r.labels) st.labels = r.labels; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover(), loadTransfers()]); })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-ward", "Could not reach the ward."); st.loaded = true; st.listFailed = true; paint(); });
   }
   function loadDuty() {
     st.duty = null;
@@ -11584,7 +11597,8 @@
     if (onList()) { dispatch("open:" + encounterId); return; }
     apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) {
-        if (r && r.ok && r.patients) { st.ward = ""; st.patients = r.patients; }
+        if (!(r && r.ok)) { settle(r); paint(); return; }
+        if (r.patients) { st.ward = ""; st.patients = r.patients; }
         if (onList()) { dispatch("open:" + encounterId); return; }
         st.err = wT("ward.that-patient-is-not-on-an", "That patient is not on an inpatient ward list. Open the board for them instead."); paint();
       })
@@ -13731,7 +13745,7 @@
         if (r && r.ok) st.inbox = r;
         /* A failed LOAD is not an empty inbox. Said in the same words the list itself uses, because
          * the reader has to end up with the same belief either way: this is not a quiet ward. */
-        else { st.inbox = null; st.err = wT("ward.could-not-load-the-safety-inbox", "Could not load the safety inbox. Do not read this as a quiet ward."); }
+        else { st.inbox = null; st.err = r && r.error === "too_many_open" ? r.message : wT("ward.could-not-load-the-safety-inbox", "Could not load the safety inbox. Do not read this as a quiet ward."); }
         paint();
       })
       .catch(function () { st.busy = false; st.inbox = null; st.err = wT("ward.could-not-load-the-safety-inbox", "Could not load the safety inbox. Do not read this as a quiet ward."); paint(); });
@@ -14647,7 +14661,7 @@
   function loadDowntime() {
     st.busy = true; st.view = "downtime"; paint();
     return apiGet("/ward/downtime?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.downtime = r; paint(); })
+      .then(function (r) { st.downtime = settle(r) ? r : null; paint(); })
       /* A pack that failed to load must never leave the previous one on screen: the whole hazard of
        * this feature is a clinician reading a sheet that is older than they think. */
       .catch(function () { st.busy = false; st.downtime = null; st.err = wT("ward.could-not-build-the-downtime-pack", "Could not build the downtime pack. Do not print an older one."); paint(); });
