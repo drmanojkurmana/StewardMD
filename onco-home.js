@@ -262,10 +262,11 @@
 
   function quickActionsHtml() {
     return '<div class="oh-quick">' +
+      '<button class="oh-qa" data-oh-act="oncotree-open">' + ms("account_tree") + "OncoTree</button>" +
+      '<button class="oh-qa" data-oh-act="protocol-open">' + ms("clinical_notes") + "Protocols</button>" +
       '<button class="oh-qa" data-oh-act="calc-cat">' + ms("calculate") + "Calculators</button>" +
       '<button class="oh-qa" data-oh-act="drug-browse">' + ms("pill") + "Drugs</button>" +
       '<button class="oh-qa" data-oh-act="drug-interactions">' + ms("compare_arrows") + "Interactions</button>" +
-      '<button class="oh-qa" data-oh-act="protocol-open">' + ms("clinical_notes") + "Protocols</button>" +
       "</div>";
   }
 
@@ -275,6 +276,7 @@
       { title: "Cancer staging (TNM)", sub: "Full TNM staging by cancer site", act: "staging-open", flag: "smd_onco_staging", icon: "stairs" }
     ] },
     { group: "Treatment", cards: [
+      { title: "OncoTree", sub: "NCCN disease pathway navigator & standard protocols", act: "oncotree-open", icon: "account_tree" },
       { title: "Treatment-plan protocols", sub: "Regimens, dose calculator and printable sheet", act: "protocol-open", icon: "clinical_notes" },
       { title: "Protocol reference", sub: "Read-only library (lifecycle badges)", act: "protoref-open", flag: "smd_onco_protoref", icon: "menu_book" }
     ] },
@@ -571,6 +573,7 @@
     if (verb === "ctcae-open") { openOverlay("CTCAE grading", G.SMD_ONCOCTCAE && G.SMD_ONCOCTCAE.openList, function () { G.SMD_ONCOCTCAE.openList(); }); return; }
     if (verb === "iotox-open") { openOverlay("Immunotherapy toxicity", G.SMD_ONCOIOTOX && G.SMD_ONCOIOTOX.openList, function () { G.SMD_ONCOIOTOX.openList(); }); return; }
     if (verb === "recist-open") { openOverlay("RECIST", G.SMD_ONCORECIST && G.SMD_ONCORECIST.open, function () { G.SMD_ONCORECIST.open(); }); return; }
+    if (verb === "oncotree-open") { close(); if (G.SMD_ONCOTREE && G.SMD_ONCOTREE.open) G.SMD_ONCOTREE.open(); else if (G.toast) G.toast("OncoTree loading…"); return; }
     if (verb === "protocol-open") { st.mode = "protoref"; renderResults(); return; }   // browse the library -> tap a protocol for its regimen/calc/PDF (no hospital needed)
   }
 

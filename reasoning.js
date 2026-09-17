@@ -4182,10 +4182,11 @@
           var per = Math.max(1, Math.ceil(words.length / frames));
           var raf = window.requestAnimationFrame || function (f) { return setTimeout(f, 16); };
           var n = 0, acc = "";
+          var safety = setTimeout(function () { try { onDelta(full); } catch (e) {} resolve(res); }, 4500);
           (function tick() {
             for (var end = Math.min(words.length, n + per); n < end; n++) acc += words[n];
             try { onDelta(acc); } catch (e) {}
-            if (n >= words.length) return resolve(res);
+            if (n >= words.length) { clearTimeout(safety); return resolve(res); }
             raf(tick);
           })();
         });
