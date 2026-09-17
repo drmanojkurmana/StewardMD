@@ -667,6 +667,10 @@
       /* The bed waiting list sits at the capability that registers a patient - asking for a bed and
        * closing a request are front-desk and bed-management acts, and the module gates them itself. */
       tile({ go: "ward:admreqs", icon: "bed", title: T(null, "site.shell.home.tile.admreqs.title", "Waiting for a bed"), sub: T(null, "site.shell.home.tile.admreqs.sub", "Ask for a bed, see who is waiting and for how long"), need: "queue.add" }),
+      /* Discharge progress: every desk that records a discharge step opens it; the server decides which step each may
+       * record. The transfer centre carries clinical summaries, so it sits at the chart's own capability. */
+      tile({ go: "ward:dcboard", icon: "timer", title: T(null, "site.shell.home.tile.dcboard.title", "Discharge progress"), sub: T(null, "site.shell.home.tile.dcboard.sub", "Each discharge step by step, and how long each step takes"), need: ["emr.view", "order.verify", "billing.charge", "queue.add"] }),
+      tile({ go: "ward:tcentre", icon: "call", title: T(null, "site.shell.home.tile.tcentre.title", "Transfer centre"), sub: T(null, "site.shell.home.tile.tcentre.sub", "Patients other hospitals ask us to take, answered against the beds we have"), need: "emr.view" }),
       tile({ go: "ward:nurseworklist", icon: "checklist", title: T(null, "site.shell.home.tile.nurseworklist.title", "Nurse worklist"), sub: T(null, "site.shell.home.tile.nurseworklist.sub", "Every patient: overdue doses, what is due next, early-warning score"), need: "emr.view" }),
       tile({ go: "ward:surveillance", icon: "monitor_heart", title: T(null, "site.shell.home.tile.surveillance.title", "Surveillance"), sub: T(null, "site.shell.home.tile.surveillance.sub", "Rising NEWS2, sepsis screens, worsening labs, overdue care, with the evidence"), need: "emr.view" }),
       tile({ go: "ward:referralinbox", icon: "send", title: T(null, "site.shell.home.tile.referralinbox.title", "Referral inbox"), sub: T(null, "site.shell.home.tile.referralinbox.sub", "Referrals waiting for your specialty, and the ones you sent"), need: "emr.view" }),
