@@ -1035,3 +1035,21 @@ test('searchPatientOnScreen: a screen without a patient box is left alone', { sk
     assert.equal(await searchPatientOnScreen({ client, patientId: 'MR900001', waitMs: 100 }), null);
   }, '<!doctype html><html><body><table id="t"><tr><th>Drug</th></tr><tr><td>X</td></tr></table></body></html>');
 });
+
+
+/* RE-ARMING MUST NOT ERASE THE DOCTOR'S TAPS. CRAWL_ARM_GUIDE is re-applied every couple of seconds
+ * while a question is on screen (the onboarding heartbeat, so the capture survives a page load). It
+ * used to clear window.__smdGuidePath on every call, which would wipe the recorded walk continuously
+ * and leave view.guidedPath empty at Done - defeating the detail chain for a list the doctor showed. */
+test('CRAWL_ARM_GUIDE: re-arming keeps the taps already recorded for this question', async () => {
+  const { GUIDE_SOURCES } = await import('../../connect-agent/phone/deep-crawl.mjs');
+  const src = GUIDE_SOURCES.armGuide;
+  const calls = [];
+  const win = { __smdGuidePath: undefined, __smdGuideOff: null, __smdPointed: null };
+  const doc = { addEventListener: (n, fn) => calls.push(fn), removeEventListener: () => {} };
+  const run = new Function('window', 'document', 'return ' + src.replace(/^\(/, '(').replace(/\)\(\)$/, ')') + '();');
+  run(win, doc);
+  win.__smdGuidePath.push('a "Lab reports"');   // the doctor's first tap
+  run(win, doc);                                 // heartbeat re-arms
+  assert.deepEqual(win.__smdGuidePath, ['a "Lab reports"'], 'the recorded tap survives the re-arm');
+});

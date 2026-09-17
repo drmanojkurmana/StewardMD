@@ -953,7 +953,11 @@ function CRAWL_CLICK_CONTROL(idx, query) {
 // class, redacted label) into window.__smdGuidePath so the pattern can be replayed later. Values never
 // recorded: only the control's own short label with digit runs replaced.
 function CRAWL_ARM_GUIDE() {
-  window.__smdGuidePath = [];
+  /* KEEP THE TAPS ALREADY RECORDED. This is re-applied every couple of seconds while a question is on
+   * screen, so the capture survives a page load; clearing the path on every call wiped the doctor's
+   * walk continuously and left view.guidedPath empty at Done, which defeats the detail chain for a list
+   * they showed. CRAWL_GUIDE_PATH nulls it when the answer is read, so the next question starts fresh. */
+  if (!Array.isArray(window.__smdGuidePath)) window.__smdGuidePath = [];
   if (window.__smdGuideOff) { try { window.__smdGuideOff(); } catch (e) { /* ignore */ } }
   var handler = function (ev) {
     var el = ev.target && ev.target.nodeType === 1 ? ev.target : null;
