@@ -79,7 +79,7 @@
 
   var stg = { index: [], gapMessage: GAP_MESSAGE, files: {}, site: null, version: null, loaded: false };
 
-  function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_staging")); } catch (e) { return false; } }
+  function flagOn() { try { if (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool) return true; return G.SMD_QUEUE_FLAGS.bool("smd_onco_staging") !== false; } catch (e) { return true; } }
   function toast(m) { try { var f = G.toast || G.SMD_toast; if (f) f(m); } catch (e) {} }
 
   function loadIndex() {

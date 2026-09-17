@@ -838,13 +838,35 @@
     "</div>";
   }
 
+  function isBigProtocol(pr) {
+    if (!pr) return false;
+    var numDrugs = asArr(pr.drugs).length;
+    var numPre = asArr(pr.premedications).length;
+    var hasTox = getRegimenToxicities(pr).length > 0;
+    var hasOral = hasOralMedications(pr);
+    var hasNotes = !!(st.doctorNotes && st.doctorNotes.trim() && st.includeDoctorNotesInPrint);
+    return numDrugs > 2 || (numDrugs >= 2 && (numPre > 1 || hasTox || hasOral || hasNotes));
+  }
+
   function sheetHtml(isExport) {
     var pr = st.protocol || {};
+    var big = isBigProtocol(pr);
+    var inst = getInstitution();
+    var p = st.patient || {};
+
+    var page2RunningHeader = (isExport && big) ? (
+      "<div class=\"ps-page2-header\">" +
+        "<span class=\"ps-page2-inst\">" + esc(inst.name) + " &bull; " + esc(inst.dept || "Oncology") + "</span>" +
+        "<span class=\"ps-page2-meta\">" + esc(pr.name || "Treatment Protocol") + " &bull; Pt: " + esc(p.name || "Patient") + (p.mrn ? " (" + esc(p.mrn) + ")" : "") + " &bull; Page 2 of 2</span>" +
+      "</div>"
+    ) : "";
+
     return "<div class=\"ps-sheet" + (isExport ? " ps-sheet-export" : "") + "\" id=\"psSheet\">" +
       headerHtml(isExport) +
       "<div class=\"ps-warns-container\">" + warningsHtml() + "</div>" +
       "<div class=\"ps-tablewrap-container\">" + tableHtml(isExport) + "</div>" +
       listBlock("Premedications & Hydration", asArr(pr.premedications)) +
+      (big ? "<div class=\"ps-page-break-deliberate\"></div>" + page2RunningHeader : "") +
       listBlock("Supportive Care & Emesis Prophylaxis", asArr(pr.supportiveCare)) +
       listBlock("Monitoring & Lab Safety Parameters", asArr(pr.monitoring)) +
       toxicitiesHtml(isExport) +
@@ -865,11 +887,11 @@
     if (!drug) return "";
     var row = drugRow(drug);
     var ov = st.overrides[did] || {};
-    var currentDose = ov.customDoseMg != null ? ov.customDoseMg : (row.origTotal != null ? round2(row.origTotal) : "");
-    var baseDose = row.origTotal != null ? round2(row.origTotal) : null;
+    var currentDose = ov.customDoseMg != null ? ov.customDoseMg : (row.origTotal != null ? round2(row.origTotal) : (row.total != null ? round2(row.total) : ""));
+    var baseDose = row.origTotal != null ? round2(row.origTotal) : (row.total != null ? round2(row.total) : (drug.basis === "flat" && num(drug.dosePerUnit) ? num(drug.dosePerUnit) : null));
 
     return "<div class=\"ps-modal-backdrop\" data-ps-act=\"close-dose-modal\">" +
-      "<div class=\"ps-modal-card\" onclick=\"event.stopPropagation()\">" +
+      "<div class=\"ps-modal-card\">" +
         "<div class=\"ps-modal-h\">" +
           "<div class=\"ps-modal-title\">" + ms("tune") + " <span>Adjust Dosage: " + esc(row.name) + "</span></div>" +
           "<button type=\"button\" class=\"ps-modal-close\" data-ps-act=\"close-dose-modal\">" + ms("close") + "</button>" +
@@ -912,7 +934,7 @@
   function addDrugModalHtml() {
     if (!st.showAddDrugModal) return "";
     return "<div class=\"ps-modal-backdrop\" data-ps-act=\"close-add-drug\">" +
-      "<div class=\"ps-modal-card\" onclick=\"event.stopPropagation()\">" +
+      "<div class=\"ps-modal-card\">" +
         "<div class=\"ps-modal-h\">" +
           "<div class=\"ps-modal-title\">" + ms("add_circle") + " <span>Add Drug to Regimen</span></div>" +
           "<button type=\"button\" class=\"ps-modal-close\" data-ps-act=\"close-add-drug\">" + ms("close") + "</button>" +
@@ -983,7 +1005,7 @@
     var currentLogo = st.tempLogoDataUrl || inst.logoDataUrl;
 
     return "<div class=\"ps-modal-backdrop\" data-ps-act=\"close-branding\">" +
-      "<div class=\"ps-modal-card\" onclick=\"event.stopPropagation()\">" +
+      "<div class=\"ps-modal-card\">" +
         "<div class=\"ps-modal-h\">" +
           "<div class=\"ps-modal-title\">" + ms("local_hospital") + " <span>Customize Hospital &amp; Logo</span></div>" +
           "<button type=\"button\" class=\"ps-modal-close\" data-ps-act=\"close-branding\">" + ms("close") + "</button>" +
@@ -1027,7 +1049,7 @@
   function addToxModalHtml() {
     if (!st.showAddToxModal) return "";
     return "<div class=\"ps-modal-backdrop\" data-ps-act=\"close-add-tox\">" +
-      "<div class=\"ps-modal-card\" onclick=\"event.stopPropagation()\">" +
+      "<div class=\"ps-modal-card\">" +
         "<div class=\"ps-modal-h\">" +
           "<div class=\"ps-modal-title\">" + ms("add_moderator") + " <span>Add Custom Adverse Effect &amp; Antidote</span></div>" +
           "<button type=\"button\" class=\"ps-modal-close\" data-ps-act=\"close-add-tox\">" + ms("close") + "</button>" +
@@ -1109,6 +1131,9 @@
   function onClick(e) {
     var t = e.target && e.target.closest ? e.target.closest("[data-ps-act]") : null;
     if (t) {
+      // If t is a modal backdrop, only dismiss if clicked directly on the backdrop itself (not inside the card)
+      if (t.classList.contains("ps-modal-backdrop") && e.target !== t) return;
+
       var act = t.getAttribute("data-ps-act");
       if (act === "close") return close();
       if (act === "edit") { commitEdits(); st.editing = !st.editing; paint(); return; }
@@ -1128,10 +1153,11 @@
         var bLine = (D.getElementById("psBrandLine") || {}).value || "";
         var curInst = getInstitution();
         var finalLogo = st.tempLogoDataUrl !== null ? (st.tempLogoDataUrl || null) : curInst.logoDataUrl;
-        saveInstitution({ name: bName, dept: bDept, line: bLine, logoDataUrl: finalLogo });
+        saveInstitution({ name: bName.trim() || DEFAULT_INSTITUTION.name, dept: bDept.trim(), line: bLine.trim(), logoDataUrl: finalLogo });
         st.showBrandingModal = false;
         st.tempLogoDataUrl = null;
         paint();
+        try { if (G.toast) G.toast("Hospital branding saved successfully."); } catch (eBr) {}
         return;
       }
 
@@ -1154,9 +1180,25 @@
         var dObj = asArr(prDose.drugs).find(function (x) { return x.id === didDose; });
         if (dObj) {
           var rDose = drugRow(dObj);
-          if (rDose.origTotal != null) {
+          var base = rDose.origTotal != null ? rDose.origTotal : (rDose.total != null ? rDose.total : (dObj.basis === "flat" && num(dObj.dosePerUnit) ? num(dObj.dosePerUnit) : null));
+          if (base != null) {
             var inputEl = D.getElementById("psCustomDoseInput");
-            if (inputEl) inputEl.value = round2(rDose.origTotal * pct);
+            if (inputEl) {
+              inputEl.value = round2(base * pct);
+              inputEl.focus();
+            }
+            if (t.parentElement) {
+              var pBtns = t.parentElement.querySelectorAll(".ps-pct-btn");
+              for (var bi = 0; bi < pBtns.length; bi++) pBtns[bi].classList.remove("on");
+            }
+            t.classList.add("on");
+            var pctText = Math.round((1 - pct) * 100) + "% dose reduction applied";
+            var rEl = D.getElementById("psCustomDoseReason");
+            if (rEl) {
+              if (!rEl.value || rEl.value.indexOf("reduction") !== -1) {
+                rEl.value = pctText;
+              }
+            }
           }
         }
         return;
@@ -1164,7 +1206,14 @@
       if (act === "quick-reason-chip") {
         var reason = t.getAttribute("data-ps-reason");
         var rEl = D.getElementById("psCustomDoseReason");
-        if (rEl) rEl.value = reason;
+        if (rEl) {
+          var curVal = (rEl.value || "").trim();
+          if (curVal && curVal.indexOf(reason) === -1) {
+            rEl.value = curVal + "; " + reason;
+          } else {
+            rEl.value = reason;
+          }
+        }
         return;
       }
       if (act === "reset-drug-dose") {
@@ -1187,6 +1236,7 @@
         }
         st.activeDoseEditModal = null;
         paint();
+        try { if (G.toast) G.toast("Dose adjustment saved."); } catch (eSd) {}
         return;
       }
 
@@ -1344,8 +1394,33 @@
       if (file) {
         var reader = new FileReader();
         reader.onload = function (evt) {
-          st.tempLogoDataUrl = evt.target.result;
-          paint();
+          try {
+            var img = new Image();
+            img.onload = function () {
+              try {
+                var maxW = 320, maxH = 120;
+                var w = img.width, h = img.height;
+                if (w > maxW || h > maxH) {
+                  var scale = Math.min(maxW / w, maxH / h);
+                  w = Math.round(w * scale);
+                  h = Math.round(h * scale);
+                }
+                var canvas = D.createElement("canvas");
+                canvas.width = w;
+                canvas.height = h;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, w, h);
+                st.tempLogoDataUrl = canvas.toDataURL("image/png");
+              } catch (err) {
+                st.tempLogoDataUrl = evt.target.result;
+              }
+              paint();
+            };
+            img.src = evt.target.result;
+          } catch (e2) {
+            st.tempLogoDataUrl = evt.target.result;
+            paint();
+          }
         };
         reader.readAsDataURL(file);
       }
@@ -1470,12 +1545,16 @@
       ".ps-foot-disclaimer{font-size:8pt;color:#64748b;line-height:1.35;margin-bottom:4px;background:#f8fafc;padding:5px 8px;border-radius:4px;border:1px solid #e2e8f0}" +
       ".ps-foot-meta{font-size:7.5pt;color:#94a3b8;text-align:center;letter-spacing:.02em}" +
       ".ps-vh,.ps-verify,.ps-sig-actions,.ps-emr-bar,.ps-table-actions,.ps-dose-edit-btn,.ps-inst-editbtn,.ps-lang-picker,.ps-tox-actions,.ps-note-chips,.ps-drug-del-btn,.ps-tox-del-btn{display:none!important}" +
+      ".ps-page-break-deliberate{display:none}" +
+      ".ps-page2-header{display:none}" +
       "@page{size:A4 portrait;margin:8mm 10mm}" +
       "@media print{" +
         "body{padding:0!important}" +
         ".ps-vh,.ps-verify,.ps-sig-actions,.ps-emr-bar,.ps-table-actions,.ps-dose-edit-btn,.ps-inst-editbtn,.ps-lang-picker,.ps-tox-actions,.ps-note-chips,.ps-drug-del-btn,.ps-tox-del-btn{display:none!important}" +
         ".ps-sheet{max-width:100%!important;border:none!important;box-shadow:none!important}" +
         ".ps-page-break-auto{page-break-inside:avoid;break-inside:avoid}" +
+        ".ps-page-break-deliberate{display:block!important;page-break-before:always!important;break-before:page!important;height:0!important;margin:0!important;padding:0!important}" +
+        ".ps-page2-header{display:flex!important;justify-content:space-between;align-items:center;border-bottom:1.5px solid #0f766e;padding-bottom:5px;margin-bottom:12px;font-size:8.5pt;color:#64748b;font-weight:600}" +
       "}" +
       "</style></head><body>" + sheetHtml(true) + "</body></html>";
   }
@@ -1607,7 +1686,9 @@
     bsa: bsa,
     crcl: crcl,
     sheetHtml: sheetHtml,
+    shellHtml: shellHtml,
     buildExportHtml: buildExportHtml,
+    onClick: onClick,
     fetchWardSync: fetchWardSync,
     getInstitution: getInstitution,
     saveInstitution: saveInstitution,
