@@ -8044,3 +8044,29 @@ of compliance.js is untouched.
 - Site pages: shell.js's transport gives a 503 `too_many_open` the ward.js sentence (key `ward.too-many-open-stays`, shared
   catalog); the home ward and ED tiles, MaiK patient list, In-basket patient picker and the support diet and transport
   pickers show it before their own "could not be loaded" text (`WSQ.tooManyOpen(r)`).
+
+## 2026-09-17 No silent empty clinical reads (branch no-silent-empty-clinical, R5-1)
+
+- break-glass.js `openEmergencyChart`: a per-type read failure sets `chart[type] = null` and pushes the type onto
+  `unreadableTypes` (the abdm-chart.js pattern), returned on GET /ward/emergency-chart. The break-glass screen names
+  those parts above the chart. It used to be `chart[type] = []`, so an allergy list the store refused rendered exactly
+  like "no known allergies" mid-emergency. The chart is NOT refused wholesale: the readable parts still arrive.
+- migrate-inpatient.js prescribing advisories: the Observation and Condition reads lost their `.catch(() => [])` and
+  the outer `catch { advisories = [] }` now sets `advisories = null` plus `advisoriesUnavailable {reason, detail}` on
+  both the checkOnly and the written response. The prescribe screen shows that and no longer treats such an order as
+  clean, so the review card is always seen. The order is still written: a hospital advisory is not the safety engine
+  (that one already refuses on `safety.checked === false`), and losing a hospital's own reminder must not cost a
+  patient their medicine. Advisories that DID fire are now rendered too; they were computed and never shown.
+- patient-flow.js companion reads: MedicationOrder / MedicationAdministration / ServiceRequest move to `listByStatus`
+  on the statuses `pendingItems()` selects (ORDER_OPEN / ADMIN_OPEN / SR_OPEN in that file). Condition cannot be
+  status-scoped - it carries `clinicalStatus`, not `status`, and `pageByType` filters `body.status` - and
+  DiagnosticReport cannot either, because a RELEASED report is what decides a request is done; both are `listAll`
+  with `max: 50000`. Truncation of either makes `openItems: false` per stay, `dischargeCandidates: null` and
+  `openItemsUnknown: [types]`, which the screen states. Doses are matched to a stay by patientId rather than by a
+  join onto the (now active-only) orders.
+- Two swallows found in the same files by the sweep: patient-flow's bed master read is `null` rather than `[]` on
+  failure (`beds.states: null`, said on screen; a histogram of zeros reads as "no bed blocked, none in cleaning"),
+  and bedBoard's ward master read sets `wardsUnread: true` rather than falling back silently to the configured list.
+- Not done here: R5-3 owns the port, so a `clinicalStatus` predicate for Condition and a period-scoped read for
+  DiagnosticReport are the real narrowings and are left to it. The ABDM chart screen already renders its
+  `unreadableTypes` (ward.js abdmRecordsView) - it names no types, but it is not silent, so it was left alone.

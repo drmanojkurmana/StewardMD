@@ -79,6 +79,49 @@ test("digital twin ICU card: a census refusal is the sentence; the removed encou
   assert.match(html, /Read limit reached/);
 });
 
+/* R5-1: the flow board's companion reads. A truncated Condition / DiagnosticReport read makes open
+ * items UNKNOWN for every stay, and an unread bed master makes the bed states unknown. Neither may
+ * render as a zero. */
+const FLOW = {
+  computedAt: "2026-09-17T10:00:00Z",
+  ed: { arrivals: 0, untriaged: 0 }, admissionsPending: { waiting: 0, longestWaitHours: 0 },
+  beds: { occupied: 2, unplacedPatients: 0, wardsKnown: 1, states: { available: 1, reserved: 0, occupied: 2, blocked: 0, cleaning: 0, maintenance: 0 } },
+  dischargeCandidates: 0, openItemsUnknown: [], staysWithOpenItems: [], recentTransfers: [],
+  overdueDischarges: [], pendingTransfers: [], bottlenecks: [], drill: {},
+};
+test("patient flow: open items that could not be counted say so, and never read as 'ready to leave'", () => {
+  const { W } = loadWard(() => ({ ok: true }));
+  const unknown = W._render({ ...W._st, view: "flowcommand", flow: { loaded: true, flow: { ...FLOW, dischargeCandidates: null, openItemsUnknown: ["Condition", "DiagnosticReport"] } } });
+  assert.match(unknown, /Open items could not be counted for any stay/);
+  assert.match(unknown, /Condition, DiagnosticReport/);
+  assert.ok(!/Nothing outstanding right now is a live fact/.test(unknown), "the fact sentence is not shown when nothing was counted");
+  assert.match(unknown, /stays with nothing outstanding right now: not known/);
+
+  const counted = W._render({ ...W._st, view: "flowcommand", flow: { loaded: true, flow: FLOW } });
+  assert.ok(!/could not be counted/.test(counted));
+  assert.match(counted, /Nothing outstanding right now is a live fact/);
+});
+
+test("patient flow: a bed master that could not be read is said, not drawn as zero blocked beds", () => {
+  const { W } = loadWard(() => ({ ok: true }));
+  const unread = W._render({ ...W._st, view: "flowcommand", flow: { loaded: true, flow: { ...FLOW, beds: { ...FLOW.beds, states: null } } } });
+  assert.match(unread, /The bed list could not be read/);
+  assert.ok(!/Blocked 0/.test(unread));
+
+  const read = W._render({ ...W._st, view: "flowcommand", flow: { loaded: true, flow: FLOW } });
+  assert.match(read, /Blocked 0/);
+  assert.ok(!/The bed list could not be read/.test(read));
+});
+
+test("bed board: a ward master that could not be read is said, not drawn as a hospital with no wards", () => {
+  const { W } = loadWard(() => ({ ok: true }));
+  const unread = W._render({ ...W._st, view: "board", board: { ok: true, wards: [], bedsConfigured: false, wardsUnread: true } });
+  assert.match(unread, /ward list could not be read/);
+  const read = W._render({ ...W._st, view: "board", board: { ok: true, wards: [], bedsConfigured: false } });
+  assert.ok(!/ward list could not be read/.test(read));
+  assert.match(read, /No admissions and no bed lists configured/);
+});
+
 test("waiting list: who is admitted could not be checked is said, with the census sentence when that is why", () => {
   const { W } = loadWard(() => ({ ok: true }));
   const html = W._render({ ...W._st, view: "admreqs", admReqs: { ok: true, requests: [], admittedCheckFailed: true, admittedCheckError: "too_many_open" } });

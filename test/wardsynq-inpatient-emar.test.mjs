@@ -2808,6 +2808,37 @@ test("BREAK-GLASS IS READ ONLY, one patient, and never implicit", async () => {
   assert.equal((await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 200, "her ordinary access is unchanged either way");
 });
 
+/* R5-1 (2026-09-17): a per-type read failure used to become `chart[type] = []` with nothing
+ * recorded, so an allergy list the store refused rendered exactly like "no known allergies" -
+ * mid-emergency, to a clinician who has no other chart to check. */
+test("BREAK-GLASS: a part of the chart that could NOT be read is named, never handed back as an empty list", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/break-glass", "POST", {
+    orgId: ORG, patientId: adm.patientId, reason: "Found unresponsive on the ward, treating team unreachable.",
+  });
+
+  const real = RECORD.byPatient.bind(RECORD);
+  RECORD.byPatient = async (tenantId, type, patientId) => {
+    if (type === "AllergyIntolerance") throw new Error("record store unavailable");
+    return real(tenantId, type, patientId);
+  };
+  try {
+    const chart = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+    assert.equal(chart.__status, 200, JSON.stringify(chart));
+    assert.deepEqual(chart.unreadableTypes, ["AllergyIntolerance"], "the failed type is named on the response");
+    assert.equal(chart.chart.AllergyIntolerance, null, "never [] - an empty allergy list reads as 'no known allergies'");
+    // The rest of the chart is still delivered: the emergency read is not refused wholesale.
+    assert.ok(Array.isArray(chart.chart.MedicationOrder), JSON.stringify(chart.chart.MedicationOrder));
+    assert.ok(chart.chart.MedicationOrder.length >= 1);
+  } finally { delete RECORD.byPatient; }
+
+  // With nothing faulted the array is empty and unreadableTypes is empty: the two states are distinct.
+  const whole = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.deepEqual(whole.unreadableTypes, []);
+  assert.ok(Array.isArray(whole.chart.AllergyIntolerance));
+});
+
 test("THE ACCOUNTABILITY SURFACE: every declaration is on the record, with its reason and its use", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
@@ -4348,6 +4379,36 @@ test("A HOSPITAL'S OWN ADVISORY APPEARS AND CANNOT BLOCK", async () => {
 
   // A different drug on the same patient does not fire it: every condition must hold.
   assert.equal((await order("Paracetamol")).advisories, undefined);
+
+  /* R5-1 (2026-09-17): the Observation and Condition reads used to be `.catch(() => [])` inside a
+   * `catch { advisories = [] }`, so a failed read produced a response with no advisories on it -
+   * on screen indistinguishable from "this hospital's reminders found nothing about this drug". */
+  const real = RECORD.byPatient.bind(RECORD);
+  RECORD.byPatient = async (tenantId, type, patientId) => {
+    if (type === "Observation") throw new Error("record store unavailable");
+    return real(tenantId, type, patientId);
+  };
+  try {
+    const blind = await order("Gentamicin");
+    assert.equal(blind.__status, 200, "the medicine is never withheld over a hospital reminder");
+    assert.equal(blind.written, 1);
+    assert.equal(blind.advisories, undefined, "nothing was evaluated, so nothing is claimed");
+    assert.equal(blind.advisoriesUnavailable.reason, "record_read_failed", JSON.stringify(blind.advisoriesUnavailable));
+
+    // The same on the pre-prescribing check, which is what the screen shows before anything is written.
+    const check = await as(DOCTOR, "/ward/medication-order", "POST", {
+      orgId: ORG, checkOnly: true,
+      order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Gentamicin", dose: { value: 240, unit: "mg" }, route: "iv", frequency: "OD" },
+    });
+    assert.equal(check.__status, 200);
+    assert.equal(check.written, 0);
+    assert.equal(check.advisoriesUnavailable.reason, "record_read_failed");
+  } finally { delete RECORD.byPatient; }
+
+  // Read whole again: the flag is gone and the advisory is back. The two states are distinct.
+  const back = await order("Gentamicin");
+  assert.equal(back.advisoriesUnavailable, undefined);
+  assert.equal(back.advisories.length, 1);
 });
 
 /* ---- what this hospital stocks, and what it guards ---------------------------------------------- */

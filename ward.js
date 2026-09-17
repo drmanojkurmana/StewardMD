@@ -901,6 +901,9 @@
       "<button class=\"w-ic\" data-w-act=\"board\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       mode + deptPick +
       '<div class="w-card">' +
+      // R5-1: the hospital's ward list could not be read at all. Without this the board falls back to
+      // the old configured names and reads as though no wards, departments or bed states were set up.
+      (state.board && state.board.wardsUnread ? '<p class="w-hint warn">' + ms("error") + wTH("ward.board-wards-unread", "This hospital's ward list could not be read, so ward states, departments and bed lists are missing here. Do not read this as no wards being set up.", null, "", 1) + "</p>" : "") +
       (state.boardErr ? '<p class="w-hint warn">' + ms("error") + esc(state.boardErr) + wEnglishOf(state.boardErr) + "</p>"
         : !state.board ? "<p class=\"w-empty\">" + wTH("ward.loading-the-bed-board", "Loading the bed board...") + "</p>"
         : wardsHtml || "<p class=\"w-empty\">" + wTH("ward.no-admissions-and-no-bed-lists", "No admissions and no bed lists configured.") + "</p>") +
@@ -2624,6 +2627,13 @@
       /* An empty pregnancy and lactation table is said where its findings would be, never left to read as checked. */
       (sf.pregnancyLactation && sf.pregnancyLactation.rulesLoaded === 0 ? '<p class="w-hint">' + ms("info") + wTH("ward.no-pregnancy-lactation-rules-loaded", "No pregnancy or lactation rules are loaded, so this order was not checked for use in pregnancy or breastfeeding.", null, "", 1) + "</p>" : "") +
       ((sf.unresolvedActiveMeds || []).length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.not-checked-against", "Not checked against: {drugs}", { drugs: esc(sf.unresolvedActiveMeds.join(", ")) }, "drugs", 1) + "</p>" : "") +
+      /* THIS HOSPITAL'S OWN REMINDERS, and whether they could be evaluated at all. An unreadable
+       * Observation or Condition list used to leave this card silent, which reads as "nothing to say"
+       * (R5-1). The advisory text is the hospital's own words, never translated. */
+      (rv.advisoriesUnavailable ? '<p class="w-hint warn">' + ms("error") + wTH("ward.mo-advisories-unavailable", "This hospital's own prescribing reminders could not be checked for this patient, because the results and diagnoses could not be read. Do not read this as no warnings.", null, "", 1) + "</p>" : "") +
+      ((rv.advisories || []).length ? '<ul class="w-mini">' + rv.advisories.map(function (a) {
+        return '<li class="w-st due"><b>' + wTH("ward.mo-hospital-advisory", "Hospital advisory") + "</b> <span lang=\"en\">" + esc(a.message || a.id || "") + (a.action ? " " + esc(a.action) : "") + "</span></li>";
+      }).join("") + "</ul>" : "") +
       (rv.replaces ? '<p class="w-hint warn">' + ms("swap_horiz") + wTH("ward.this-replaces-the-active-order", "This replaces the active order for this drug ({dose} {frequency}).", { dose: dose(rv.replaces.dose), frequency: esc(rv.replaces.frequency || "") }, "dose frequency", 1) + "</p>" : "") +
       (needReason ? "<label class=\"w-f\"><span>" + wTH("ward.reason-for-prescribing-anyway", "Reason for prescribing anyway (required)") + "</span><input id=\"wMoOverride\" type=\"text\" autocomplete=\"off\"></label>" : "") +
       (stops.length ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-server-refuses-this-order-whatever", "The server refuses this order whatever the reason. Change the dose, the frequency or the drug.", null, "", 1) + "</p>" : "") +
@@ -6479,14 +6489,20 @@
 
       '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>" + wTH("ward.beds", "Beds") + "</h3></div>" +
       '<div class="w-actions">' + fc("occupied", f.beds.occupied, "occupied") + fc("unplaced", f.beds.unplacedPatients, wT("ward.admitted-with-no-bed-yet", "admitted with no bed yet")) + "</div>" +
-      "<p class=\"w-hint\">" + wTH("ward.available-reserved-blocked-cleaning-maintenance", "Available {available} &middot; Reserved {reserved} &middot; Blocked {blocked} &middot; Cleaning {cleaning} &middot; Maintenance {maintenance}", { available: esc(f.beds.states.available), reserved: esc(f.beds.states.reserved), blocked: esc(f.beds.states.blocked), cleaning: esc(f.beds.states.cleaning), maintenance: esc(f.beds.states.maintenance) }, "available reserved blocked cleaning maintenance") + "</p></div>" +
+      // R5-1: a bed master that could not be read is said, never drawn as a histogram of zeros.
+      (f.beds.states
+        ? "<p class=\"w-hint\">" + wTH("ward.available-reserved-blocked-cleaning-maintenance", "Available {available} &middot; Reserved {reserved} &middot; Blocked {blocked} &middot; Cleaning {cleaning} &middot; Maintenance {maintenance}", { available: esc(f.beds.states.available), reserved: esc(f.beds.states.reserved), blocked: esc(f.beds.states.blocked), cleaning: esc(f.beds.states.cleaning), maintenance: esc(f.beds.states.maintenance) }, "available reserved blocked cleaning maintenance") + "</p>"
+        : '<p class="w-hint warn">' + ms("warning") + wTH("ward.flow-bed-states-unread", "The bed list could not be read, so how many beds are blocked or in cleaning is not known. Do not read this as none.", null, "", 1) + "</p>") + "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("schedule") + "<h3>" + wTH("ward.admissions-pending", "Admissions pending") + "</h3></div>" +
       "<p>" + wTH("ward.waiting-longest-wait-h", "{waiting} waiting &middot; longest wait {longestWaitHours} h", { waiting: esc(f.admissionsPending.waiting), longestWaitHours: esc(f.admissionsPending.longestWaitHours) }, "waiting longestWaitHours") + "</p></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("task_alt") + "<h3>" + wTH("ward.discharge", "Discharge") + "</h3></div>" +
       '<div class="w-actions">' + fc("dischargeCandidates", f.dischargeCandidates, f.dischargeCandidates === 1 ? wT("ward.stay-with-nothing-outstanding-right-now", "stay with nothing outstanding right now") : wT("ward.stays-with-nothing-outstanding-right-now", "stays with nothing outstanding right now")) + "</div>" +
-      "<p class=\"w-hint\">" + wTH("ward.flow-candidates-fact", "Nothing outstanding right now is a live fact, not a prediction.") + "</p>" +
+      // R5-1: past the read ceiling nothing is counted, and the screen says which read ran short.
+      ((f.openItemsUnknown || []).length
+        ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.flow-open-items-unknown", "Open items could not be counted for any stay: there are more records than one read can hold ({types}). Nothing here means a patient is ready to leave.", { types: esc(f.openItemsUnknown.join(", ")) }, "types", 1) + "</p>"
+        : "<p class=\"w-hint\">" + wTH("ward.flow-candidates-fact", "Nothing outstanding right now is a live fact, not a prediction.") + "</p>") +
       '<div class="w-actions"><button class="w-btn ghost tiny" data-w-act="dcboard">' + ms("timer") + wTH("ward.dc-open-board", "Open Discharge progress") + "</button>" +
       '<button class="w-btn ghost tiny" data-w-act="tcentre">' + ms("call") + wTH("ward.tc-title", "Transfer centre") + "</button></div>" +
       (openRows ? '<ul class="w-mini">' + openRows + "</ul>" : "") + "</div>" +
@@ -8182,6 +8198,10 @@
         : '<p class="w-hint">' + ms("info") + wTH("ward.open-a-patient-from-the-ward2", "Open a patient from the ward list to request emergency access to their chart.") + "</p>") +
       (state.emergencyChart
         ? '<div class="w-sub w-dead"><h4>' + ms("warning") + wTH("ward.emergency-read-only-chart", "Emergency read-only chart") + "</h4>" +
+          /* A part of the chart the store refused is NAMED here, above the chart itself. Without this an
+           * unreadable allergy list rendered exactly like "no known allergies", mid-emergency. */
+          (state.emergencyChart.ok && (state.emergencyChart.unreadableTypes || []).length
+            ? '<p class="w-hint warn">' + ms("error") + wTH("ward.bg-chart-unreadable", "These parts of the chart could not be read: {types}. Do not read them as nothing recorded.", { types: esc(state.emergencyChart.unreadableTypes.join(", ")) }, "types", 1) + "</p>" : "") +
           (state.emergencyChart.ok ? reportValue(state.emergencyChart.chart) : '<p class="w-hint warn">' + esc(state.emergencyChart.detail || state.emergencyChart.error || wT("ward.could-not-open-the-chart", "Could not open the chart.")) + "</p>") +
           "</div>"
         : "") +
@@ -12054,9 +12074,13 @@
     apiPost("/ward/medication-order", { orgId: st.orgId, order: f.order, checkOnly: true }).then(function (r) {
       if (!settle(r)) { paint(); return; }
       var sf = r.safety || {};
-      var clean = sf.checked === true && !(sf.blocks || []).length && !(sf.overridables || []).length && !(sf.warnings || []).length && !sf.unresolvedDrug && !(sf.unresolvedActiveMeds || []).length && !r.replaces;
+      /* R5-1: advisories that could NOT be evaluated are not a clean order. An order placed straight
+       * through here would have shown the prescriber nothing, which reads as "nothing to say" - and
+       * an advisory that fired must be seen for the same reason. */
+      var clean = sf.checked === true && !(sf.blocks || []).length && !(sf.overridables || []).length && !(sf.warnings || []).length && !sf.unresolvedDrug && !(sf.unresolvedActiveMeds || []).length && !r.replaces
+        && !r.advisoriesUnavailable && !(r.advisories || []).length;
       if (clean) { placeMedOrder(f.order, ""); return; }
-      st.moReview = { order: f.order, safety: sf, replaces: r.replaces || null };
+      st.moReview = { order: f.order, safety: sf, replaces: r.replaces || null, advisories: r.advisories || [], advisoriesUnavailable: r.advisoriesUnavailable || null };
       paint();
     }).catch(function () { st.busy = false; st.err = wT("ward.could-not-place-the-order", "Could not place the order."); paint(); });
   }

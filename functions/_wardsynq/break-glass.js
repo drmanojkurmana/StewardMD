@@ -255,10 +255,15 @@ async function openEmergencyChart(request, env, ctx) {
     tenant: resolved.tenant, actor: reader, role: resolved.role, roleSource: "break-glass",
   });
 
-  const chart = {};
+  /* A PART OF THE CHART THAT COULD NOT BE READ IS NAMED, NEVER SHOWN AS NOTHING (R5-1, the
+   * abdm-chart.js:76 pattern). This used to be `chart[type] = []` on a failed read, so an
+   * allergy list the store refused rendered exactly like "no known allergies" - mid-emergency,
+   * to a clinician who has no other chart to check. null is the failed read; the type is listed
+   * in unreadableTypes and the screen says so above the chart. */
+  const chart = {}, unreadableTypes = [];
   for (const type of EMERGENCY_SCOPE) {
     try { chart[type] = type === "Patient" ? [await emergency.get("Patient", patientId)].filter(Boolean) : await emergency.byPatient(type, patientId); }
-    catch { chart[type] = []; }
+    catch { chart[type] = null; unreadableTypes.push(type); }
   }
 
   // Count the read on the grant, so "declared and never used" and "declared and read forty times"
@@ -267,7 +272,7 @@ async function openEmergencyChart(request, env, ctx) {
   try { await svc.put(BreakGlassGrant({ ...grant, reads: (grant.reads || 0) + 1 }), { expectedVersion: grant.version }); } catch { /* counted best-effort */ }
 
   return {
-    ...base, ok: true, patientId, chart,
+    ...base, ok: true, patientId, chart, unreadableTypes,
     // The reader is always told what they are holding and under what.
     underGrant: { grantId: grant.id, reason: grant.reason, expiresAt: grant.expiresAt, declaredAt: grant.grantedAt },
     scope: [...EMERGENCY_SCOPE],
