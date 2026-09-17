@@ -136,46 +136,67 @@ async function open_(request, env, ctx, need) {
   }
 }
 
-/** Reads every part of the handout. Writes nothing. */
+/**
+ * Reads every part of the handout. Writes nothing.
+ *
+ * R6-2, the break-glass.js:263-275 pattern: A PART THAT COULD NOT BE READ IS NAMED, NEVER SHOWN AS
+ * NOTHING. Every one of these reads used to be `.catch(() => [])`, so a store hiccup printed "No
+ * allergies are recorded for you" on the page a patient carries to the next hospital, and an
+ * unreadable diagnosis list printed as a patient with no diagnoses. A failed read now leaves its
+ * section `null` - which is not an empty list and is drawn differently - and names the type in
+ * `unreadableTypes`. A GovernanceError is not a failed read and is not caught here: it is the 403
+ * the callers already answer.
+ */
 async function assemble(svc, patientId, neverRelease) {
+  const unreadableTypes = [];
+  const read = async (type, p) => {
+    try { return await p; }
+    catch (e) { if (e instanceof GovernanceError) throw e; unreadableTypes.push(type); return null; }
+  };
   const [patient, conditions, allergies, meds, reports, loops, appointments] = await Promise.all([
-    svc.get("Patient", patientId).catch(() => null),
-    svc.byPatient("Condition", patientId).catch(() => []),
-    svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
-    svc.byPatient("MedicationOrder", patientId).catch(() => []),
-    svc.byPatient("DiagnosticReport", patientId).catch(() => []),
-    svc.byPatient("CriticalResultLoop", patientId).catch(() => []),
-    svc.byPatient("Appointment", patientId).catch(() => []),
+    read("Patient", svc.get("Patient", patientId)),
+    read("Condition", svc.byPatient("Condition", patientId)),
+    read("AllergyIntolerance", svc.byPatient("AllergyIntolerance", patientId)),
+    read("MedicationOrder", svc.byPatient("MedicationOrder", patientId)),
+    read("DiagnosticReport", svc.byPatient("DiagnosticReport", patientId)),
+    read("CriticalResultLoop", svc.byPatient("CriticalResultLoop", patientId)),
+    read("Appointment", svc.byPatient("Appointment", patientId)),
   ]);
+  /* A report is releasable only if no OPEN critical-result loop covers it. With the loops unreadable
+   * that question cannot be answered, so no result is released rather than every result being
+   * released as if no loop existed - the one failure this file's header calls the oldest in the area. */
+  const resultsUnreadable = reports === null || loops === null;
 
   const openIds = openCriticalReportIds(loops);
   const withheld = [];
   const released = [];
-  for (const r of (reports || []).filter(Boolean)) {
+  for (const r of (resultsUnreadable ? [] : reports).filter(Boolean)) {
     const verdict = releasableReport(r, openIds, neverRelease);
     if (verdict.ok) released.push({ id: r.id, name: r.panel || r.display || r.code || "Test result", reportedAt: r.reportedAt || null, status: r.status, conclusion: r.conclusion || null });
     else withheld.push({ reason: verdict.reason, say: verdict.say, reportedAt: r.reportedAt || null });
   }
 
-  const diagnoses = (conditions || []).map(diagnosisFor).filter(Boolean);
+  const diagnoses = conditions === null ? null : conditions.map(diagnosisFor).filter(Boolean);
   /* Counted, because "we left three things out" and "there was nothing else" are different
-   * statements and only one of them is true here. */
-  const excludedDiagnoses = (conditions || []).filter(Boolean).length - diagnoses.length;
+   * statements and only one of them is true here. null when the conditions could not be read: a
+   * count of zero exclusions from a list nobody read is a claim this file cannot make. */
+  const excludedDiagnoses = diagnoses === null ? null : conditions.filter(Boolean).length - diagnoses.length;
 
   return {
+    unreadableTypes,
     /* LT-24: a date of birth worked out from a typed age is not a date of birth. It is left off a page
      * the patient is handed rather than printed as if somebody had recorded it. */
     patient: patient ? { id: patient.id, name: patient.name, mrn: patient.mrn, dob: patient.approxDob ? null : patient.dob } : null,
     diagnoses, excludedDiagnoses,
     /* Never filtered by anything in this file. The value of an allergy list is that the patient
      * carries it to the next hospital, and one this file could trim would not be worth carrying. */
-    allergies: (allergies || []).filter(Boolean).map((a) => ({ substance: a.substance, reaction: a.reaction || null, severity: a.severity || null, criticality: a.criticality || null })),
-    medicines: (meds || []).filter(Boolean).filter((m) => str(m.status) !== "stopped" && str(m.status) !== "cancelled")
+    allergies: allergies === null ? null : allergies.filter(Boolean).map((a) => ({ substance: a.substance, reaction: a.reaction || null, severity: a.severity || null, criticality: a.criticality || null })),
+    medicines: meds === null ? null : meds.filter(Boolean).filter((m) => str(m.status) !== "stopped" && str(m.status) !== "cancelled")
       .map((m) => ({ drug: m.drug || m.drugCode, dose: m.dose || null, route: m.route || null, frequency: m.frequency || null, note: m.note || null,
         // Closed-list codes (migrate-inpatient.js PATIENT_INSTRUCTIONS); the page prints their catalog wording.
         ...(Array.isArray(m.patientInstructions) && m.patientInstructions.length ? { patientInstructions: m.patientInstructions.map(String) } : {}) })),
-    results: released, withheldResults: withheld,
-    appointments: (appointments || []).filter(Boolean).map((a) => ({ at: a.startsAt || a.at || null, with: a.clinicianName || a.clinicianId || null, kind: a.kind || null })),
+    results: resultsUnreadable ? null : released, withheldResults: resultsUnreadable ? null : withheld,
+    appointments: appointments === null ? null : appointments.filter(Boolean).map((a) => ({ at: a.startsAt || a.at || null, with: a.clinicianName || a.clinicianId || null, kind: a.kind || null })),
   };
 }
 
@@ -239,12 +260,21 @@ async function portalPreview(svc, patientId, neverRelease) {
  */
 function statements(doc) {
   const out = [];
-  if (doc.withheldResults.length) {
+  /* R6-2: FIRST, because everything under it is then read in the right light. A section that could
+   * not be read is not a section with nothing in it, and a patient handed this page has no other
+   * way to tell the two apart. */
+  if ((doc.unreadableTypes || []).length) {
+    out.push("Part of your record could not be read when this page was made, so something may be missing from it. Ask your care team before you rely on this page.");
+  }
+  if (doc.withheldResults === null) {
+    out.push("Your results could not be read when this page was made, so none of them are shown here. That does not mean you have none.");
+  }
+  if (doc.withheldResults && doc.withheldResults.length) {
     /* Named, never silently absent: a missing result reads as a test nobody did, which is more
      * reassuring than the truth and in the wrong direction. */
     out.push(`${doc.withheldResults.length} result${doc.withheldResults.length === 1 ? " is" : "s are"} not included here. Your care team will discuss ${doc.withheldResults.length === 1 ? "it" : "them"} with you.`);
   }
-  if (doc.excludedDiagnoses > 0) {
+  if (doc.excludedDiagnoses !== null && doc.excludedDiagnoses > 0) {
     out.push("Some entries on your record are possibilities your team was still considering, or have been ruled out. Those are not listed here because they are not diagnoses.");
   }
   out.push("This is a summary your care team has given you. It is not your complete medical record - you can ask the hospital for that separately.");
@@ -252,9 +282,16 @@ function statements(doc) {
 }
 
 /** PURE. What the clinician must read BEFORE handing the page over. Never printed on it. */
-function clinicianWarnings(neverReleaseConfigured) {
-  if (neverReleaseConfigured) return [];
-  return ["This hospital has not chosen any results to withhold from patients, so no result is withheld from this page on grounds of sensitivity. Read it before you hand it over."];
+function clinicianWarnings(neverReleaseConfigured, unreadableTypes) {
+  const out = [];
+  /* R6-2: the clinician is the one who can still act on this, and they are told in their own words
+   * which parts of the chart the store would not give up. The patient's own sentence (statements)
+   * says it without the type names. */
+  if ((unreadableTypes || []).length) {
+    out.push(`This page is incomplete: ${unreadableTypes.join(", ")} could not be read. Do not hand it over as a full summary, and do not read a blank section as nothing recorded.`);
+  }
+  if (!neverReleaseConfigured) out.push("This hospital has not chosen any results to withhold from patients, so no result is withheld from this page on grounds of sensitivity. Read it before you hand it over.");
+  return out;
 }
 
 /** ctx: { migration, patientId, neverRelease? } - what the patient would be given. Writes nothing. */
@@ -279,8 +316,9 @@ async function patientCopy(request, env, ctx) {
 
   return {
     ...base, ok: true, patientId, document: doc,
+    unreadableTypes: doc.unreadableTypes,
     statements: statements(doc),
-    clinicianWarnings: clinicianWarnings(neverRelease.length > 0),
+    clinicianWarnings: clinicianWarnings(neverRelease.length > 0, doc.unreadableTypes),
     sensitivityConfigured: neverRelease.length > 0,
     portalPreview: await portalPreview(svc, patientId, neverRelease),
     /* Said on the preview, which is the moment a clinician can still act on it. */
@@ -313,6 +351,15 @@ async function releaseToPatient(request, env, ctx) {
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+  }
+
+  /* R6-2: A HANDOVER IS NOT RECORDED OFF A CHART THAT COULD NOT BE READ. The receipt below counts
+   * allergies, medicines and diagnoses, and a count of zero taken from a read that failed is a
+   * written statement that this patient was handed a page with none - answerable later, and wrong.
+   * The clinician is told which part failed and asked to try again; nothing is written. */
+  if (doc.unreadableTypes.length) {
+    return { ...base, ok: false, status: 502, error: "record_read_failed", unreadableTypes: doc.unreadableTypes,
+      detail: `${doc.unreadableTypes.join(", ")} could not be read, so this handover is not recorded: the receipt would say the patient was given a page these were absent from`, written: 0 };
   }
 
   /* P2.9: the signed discharge summaries handed over with this release, by exact version. The patient
@@ -357,7 +404,7 @@ async function releaseToPatient(request, env, ctx) {
     return {
       ...base, ok: true, written: 1, releaseId: id, at, recordVersion: out.record.version,
       document: doc, statements: statements(doc),
-      clinicianWarnings: clinicianWarnings(neverRelease.length > 0),
+      clinicianWarnings: clinicianWarnings(neverRelease.length > 0, doc.unreadableTypes),
       release: record, actor: resolved.actor.id,
       /* Read after the write, so it includes this release: what the patient's portal now shows. */
       portalPreview: await portalPreview(svc, patientId, neverRelease),
