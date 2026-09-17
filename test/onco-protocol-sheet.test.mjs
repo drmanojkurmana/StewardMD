@@ -180,3 +180,208 @@ test('ALL 281 PROTOCOLS IN KB ARE VALID & PRINTABLE', () => {
     assert.ok(exportHtml.includes('ps-table'), `Export HTML must contain drug table for ${f}`);
   }
 });
+
+
+test("HOSPITAL BRANDING & LOGO: custom branding saves, updates header, and renders in print export with StewardMD footer", () => {
+  const { API } = loadSheetEnv();
+  const proto = JSON.parse(readFileSync(join(ROOT, "kb/protocols/gyn-carbo-paclitaxel.json"), "utf8"));
+  API._st.protocol = proto;
+  API._st.patient = { name: "Jane Doe", heightCm: 160, weightKg: 60 };
+
+  // Set custom institution branding
+  API.saveInstitution({
+    name: "Apollo Comprehensive Cancer Centre",
+    dept: "Department of Medical Oncology and Blood Disorders",
+    line: "Specialized Chemotherapy Protocol & Verification Sheet",
+    logoDataUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+  });
+
+  const exportHtml = API.buildExportHtml();
+  assert.ok(exportHtml.includes("Apollo Comprehensive Cancer Centre"), "Print export must contain custom hospital name");
+  assert.ok(exportHtml.includes("Department of Medical Oncology and Blood Disorders"), "Print export must contain custom department");
+  assert.ok(exportHtml.includes("Specialized Chemotherapy Protocol"), "Print export must contain custom subtitle");
+  assert.ok(exportHtml.includes("ps-inst-logo-img"), "Print export must embed custom hospital logo");
+  assert.ok(exportHtml.includes("Made using StewardMD Oncology Clinical Care"), "Footer must state Made using StewardMD");
+  assert.ok(exportHtml.includes("MEDICOLEGAL DISCLAIMER:"), "Footer must include medicolegal disclaimer");
+});
+
+test("DOCTOR DOSAGE OVERRIDE: inline adjustment overrides formula dose, applies Doctor Adjusted badge, and tracks original dose footnote", () => {
+  const { API } = loadSheetEnv();
+  const proto = JSON.parse(readFileSync(join(ROOT, "kb/protocols/gyn-carbo-paclitaxel.json"), "utf8"));
+  API._st.protocol = proto;
+  API._st.patient = { age: 60, sex: "female", heightCm: 165, weightKg: 68, creatinine: 0.9 };
+
+  // Standard calculated paclitaxel: 175 mg/m2 * 1.7654 m2 = 308.95 mg
+  const rowBefore = API._drugRow(proto.drugs.find(d => d.id === "paclitaxel"));
+  assert.equal(rowBefore.totalTxt, "308.95 mg");
+  assert.equal(rowBefore.isAdjusted, false);
+
+  // Doctor modifies dose to 240 mg with clinical reason
+  API._st.overrides["paclitaxel"] = {
+    customDoseMg: 240,
+    reason: "20% dose reduction due to grade 3 neutropenia in cycle 1"
+  };
+
+  const rowAfter = API._drugRow(proto.drugs.find(d => d.id === "paclitaxel"));
+  assert.equal(rowAfter.totalTxt, "240 mg");
+  assert.equal(rowAfter.isAdjusted, true);
+  assert.equal(rowAfter.origTotalTxt, "308.95 mg");
+  assert.equal(rowAfter.adjustReason, "20% dose reduction due to grade 3 neutropenia in cycle 1");
+
+  const html = API.buildExportHtml();
+  assert.ok(html.includes("240 mg"), "Export HTML must display doctor-adjusted dose");
+  assert.ok(html.includes("Doctor Adjusted"), "Export HTML must display Doctor Adjusted badge");
+  assert.ok(html.includes("308.95 mg"), "Export HTML must display original standard dose in footnote");
+  assert.ok(html.includes("grade 3 neutropenia"), "Export HTML must display adjustment reason");
+});
+
+test("ADD DRUG TO PROTOCOL: custom medication calculates dynamically by BSA/weight/flat and integrates into cycle schedule", () => {
+  const { API } = loadSheetEnv();
+  const proto = JSON.parse(readFileSync(join(ROOT, "kb/protocols/gyn-carbo-paclitaxel.json"), "utf8"));
+  API._st.protocol = JSON.parse(JSON.stringify(proto));
+  API._st.patient = { heightCm: 165, weightKg: 68, age: 60, sex: "female", creatinine: 0.9 };
+  // BSA = 1.7654 m2
+
+  // Add custom Mesna (fixed flat dose 400 mg)
+  API._st.protocol.drugs.push({
+    id: "custom-mesna",
+    name: "Mesna Uroprotection",
+    dosePerUnit: 400,
+    unit: "mg",
+    basis: "flat",
+    route: "IV Bolus",
+    days: [1],
+    notes: "Administer at 0, 4, 8 hours",
+    custom: true
+  });
+
+  // Add custom Filgrastim (weight-based 5 mcg/kg)
+  API._st.protocol.drugs.push({
+    id: "custom-filgrastim",
+    name: "Filgrastim (G-CSF)",
+    dosePerUnit: 5,
+    unit: "mcg/kg",
+    basis: "mgkg",
+    route: "Subcutaneous",
+    days: [3, 4, 5],
+    notes: "Support for nadir",
+    custom: true
+  });
+
+  const mesnaRow = API._drugRow(API._st.protocol.drugs.find(d => d.id === "custom-mesna"));
+  assert.equal(mesnaRow.totalTxt, "400 mg");
+  assert.equal(mesnaRow.custom, true);
+
+  const filgRow = API._drugRow(API._st.protocol.drugs.find(d => d.id === "custom-filgrastim"));
+  // 5 mcg/kg * 68 kg = 340 mcg
+  assert.equal(filgRow.totalTxt, "340 mcg");
+
+  const html = API.buildExportHtml();
+  assert.ok(html.includes("Mesna Uroprotection"), "Export HTML must render added custom drug");
+  assert.ok(html.includes("400 mg"), "Export HTML must display flat calculated dose");
+  assert.ok(html.includes("Filgrastim (G-CSF)"), "Export HTML must render custom G-CSF");
+  assert.ok(html.includes("340 mcg"), "Export HTML must display weight-based calculated dose");
+  assert.ok(html.includes("Added by Doctor"), "Export HTML must display Added by Doctor badge");
+});
+
+test("ADVERSE EFFECTS & ANTIDOTES: automatically detects high-grade toxicities (Irinotecan -> Atropine, Cisplatin -> Hydration/NK1, Oxaliplatin -> Cold Spasm, etc.)", () => {
+  const { API } = loadSheetEnv();
+  
+  // Test Irinotecan protocol (e.g. FOLFIRI or Colorectal Irinotecan)
+  const irinoProto = {
+    id: "gi-folfiri",
+    name: "FOLFIRI (Irinotecan, Leucovorin, 5-FU)",
+    drugs: [
+      { id: "irinotecan", name: "Irinotecan", dosePerUnit: 180, unit: "mg/m2", basis: "bsa", route: "IV Infusion" },
+      { id: "fluorouracil-bolus", name: "Fluorouracil (5-FU)", dosePerUnit: 400, unit: "mg/m2", basis: "bsa", route: "IV Bolus" }
+    ]
+  };
+  const irinoTox = API.getRegimenToxicities(irinoProto);
+  assert.ok(irinoTox.some(t => t.id === "irinotecan-cholinergic"), "Must detect Irinotecan acute cholinergic syndrome");
+  const cholTox = irinoTox.find(t => t.id === "irinotecan-cholinergic");
+  assert.ok(cholTox.management.includes("Atropine 0.25 mg to 1.0 mg IV or SC immediately"), "Must prescribe Atropine as antidote");
+  assert.ok(cholTox.management.includes("High-dose Loperamide"), "Must prescribe High-dose Loperamide for delayed diarrhea");
+
+  // Test Cisplatin protocol
+  const cisProto = {
+    id: "lung-cisplatin-gemcitabine",
+    name: "Cisplatin + Gemcitabine",
+    drugs: [{ id: "cisplatin", name: "Cisplatin", dosePerUnit: 75, unit: "mg/m2", basis: "bsa", route: "IV Infusion" }]
+  };
+  const cisTox = API.getRegimenToxicities(cisProto);
+  assert.ok(cisTox.some(t => t.id === "cisplatin-nephro-emesis"), "Must detect Cisplatin nephrotoxicity and emesis");
+  const cTox = cisTox.find(t => t.id === "cisplatin-nephro-emesis");
+  assert.ok(cTox.management.includes("Pre-hydration: 1000 mL Normal Saline"), "Must prescribe saline pre-hydration");
+  assert.ok(cTox.management.includes("NK1 receptor antagonist"), "Must prescribe NK1 antiemetic triplet");
+
+  // Test Oxaliplatin cold sensitivity
+  const oxProto = {
+    id: "gi-folfox",
+    name: "FOLFOX",
+    drugs: [{ id: "oxaliplatin", name: "Oxaliplatin", dosePerUnit: 85, unit: "mg/m2", basis: "bsa", route: "IV Infusion" }]
+  };
+  const oxTox = API.getRegimenToxicities(oxProto);
+  assert.ok(oxTox.some(t => t.id === "oxaliplatin-cold-spasm"), "Must detect Oxaliplatin cold-induced spasm");
+});
+
+test("MULTILINGUAL ORAL INSTRUCTIONS: provides mandatory English + selectable Telugu, Tamil, Kannada, Hindi, and Malayalam instructions", () => {
+  const { API } = loadSheetEnv();
+  const capecitabineProto = {
+    id: "gi-xelox",
+    name: "CAPOX / XELOX (Capecitabine + Oxaliplatin)",
+    drugs: [
+      { id: "capecitabine", name: "Capecitabine", dosePerUnit: 1000, unit: "mg/m2", basis: "bsa", route: "Oral" }
+    ]
+  };
+  API._st.protocol = capecitabineProto;
+  API._st.patient = { heightCm: 165, weightKg: 65, age: 55, sex: "female" };
+  assert.equal(API.hasOralMedications(capecitabineProto), true, "Must recognize Capecitabine as oral medication");
+
+  // Test Telugu
+  API._st.oralLang = "te";
+  const htmlTe = API.buildExportHtml();
+  assert.ok(htmlTe.includes("English (Mandatory Instructions)"), "Must include mandatory English instructions");
+  assert.ok(htmlTe.includes("Telugu (తెలుగు)"), "Must include Telugu language title");
+  assert.ok(htmlTe.includes("మాత్రలను నమలకుండా"), "Must include localized Telugu swallowing instruction");
+
+  // Test Tamil
+  API._st.oralLang = "ta";
+  const htmlTa = API.buildExportHtml();
+  assert.ok(htmlTa.includes("Tamil (தமிழ்)"), "Must include Tamil language title");
+  assert.ok(htmlTa.includes("மாத்திரைகளை மெல்லவோ"), "Must include localized Tamil swallowing instruction");
+
+  // Test Kannada
+  API._st.oralLang = "kn";
+  const htmlKn = API.buildExportHtml();
+  assert.ok(htmlKn.includes("Kannada (ಕನ್ನಡ)"), "Must include Kannada language title");
+  assert.ok(htmlKn.includes("ಮಾತ್ರೆಗಳನ್ನು ಅಗಿಯಬೇಡಿ"), "Must include localized Kannada swallowing instruction");
+
+  // Test Hindi
+  API._st.oralLang = "hi";
+  const htmlHi = API.buildExportHtml();
+  assert.ok(htmlHi.includes("Hindi (हिन्दी)"), "Must include Hindi language title");
+  assert.ok(htmlHi.includes("गोलियों को चबाएं"), "Must include localized Hindi swallowing instruction");
+
+  // Test Malayalam
+  API._st.oralLang = "ml";
+  const htmlMl = API.buildExportHtml();
+  assert.ok(htmlMl.includes("Malayalam (മലയാളം)"), "Must include Malayalam language title");
+  assert.ok(htmlMl.includes("ഗുളികകൾ ചവച്ചരയ്ക്കാനോ"), "Must include localized Malayalam swallowing instruction");
+});
+
+test("DOCTOR CLINICAL NOTES & PRINT PAGINATION: preserves notes, quick-insert chips, and clean 1-page/2-page A4 print layout with disclaimer", () => {
+  const { API } = loadSheetEnv();
+  const proto = JSON.parse(readFileSync(join(ROOT, "kb/protocols/gyn-carbo-paclitaxel.json"), "utf8"));
+  API._st.protocol = proto;
+  API._st.patient = { name: "Robert Langdon", heightCm: 175, weightKg: 78, age: 62, sex: "male", creatinine: 1.1 };
+
+  API._st.doctorNotes = "• PICC line insertion confirmed.\n• Check CBC on Day 10 Nadir.\n• Hydration 1000 mL NS pre-infusion.";
+  API._st.includeDoctorNotesInPrint = true;
+
+  const html = API.buildExportHtml();
+  assert.ok(html.includes("Prescribing Oncologist Clinical Notes"), "Export HTML must have doctor notes header");
+  assert.ok(html.includes("PICC line insertion confirmed"), "Export HTML must display custom clinical notes");
+  assert.ok(html.includes("Check CBC on Day 10 Nadir"), "Export HTML must display nadir instruction");
+  assert.ok(html.includes("MEDICOLEGAL DISCLAIMER:"), "Export HTML must include medicolegal disclaimer");
+  assert.ok(html.includes("ps-page-break-auto"), "Export HTML must include intelligent page-break classes");
+});
