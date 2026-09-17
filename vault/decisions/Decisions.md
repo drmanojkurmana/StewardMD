@@ -8044,3 +8044,35 @@ of compliance.js is untouched.
 - Site pages: shell.js's transport gives a 503 `too_many_open` the ward.js sentence (key `ward.too-many-open-stays`, shared
   catalog); the home ward and ED tiles, MaiK patient list, In-basket patient picker and the support diet and transport
   pickers show it before their own "could not be loaded" text (`WSQ.tooManyOpen(r)`).
+
+## 2026-09-18 Status-scoped worklists, and the order closure they needed first (branch status-scoped-worklists, R5-2)
+
+- The audit's premise did not hold: `service.listByStatus` bounds a worklist only if something closes an order,
+  and NOTHING in the tree ever did. Every native ServiceRequest was written `active` and stayed `active` after its
+  result was filed, so "open orders" and "every order this hospital has ever placed" were the same set. Converting
+  the reads alone would have refused (503 at OPEN_CENSUS_MAX 5,000) where the old read still worked. So the closure
+  came first: `ward-order.js closeOrderOnResult()`, called by `lab-result.js releaseResult` (any report) and
+  `radiology-report.js reportImaging` (final or corrected only, matching the rule dicom.js's worklist already
+  applied). It never throws - a result on the chart is on the chart - and the response carries `orderClosed`.
+- It writes through its OWN actor, scoped to ServiceRequest and stamped with the releasing person's id (the pattern
+  online-booking.js uses for the portal), because the laboratory grant deliberately cannot write a ServiceRequest:
+  widening actor.js would open order CREATION to a role, which is the billing hazard that grant's comments cite.
+- Converted: `lab-result.js pendingRequests` (hospital scope), `specimen.js collectionList` (hospital scope),
+  `dicom.js imagingWorklist`. Each reads open orders by status, then the reports or specimens of only THOSE orders'
+  patients (governed `byPatient`, eight at a time) instead of the whole type. `specimen.js rejectionStats` keeps
+  `listAll`: a monthly count IS a history and flags its own truncation.
+- `ward-order.js` owns the vocabulary: OPEN_ORDER_STATUSES / CLOSED_ORDER_STATUSES / isOpenOrder. That list is a
+  safety boundary - a status in neither would silently drop an order off every board - and
+  test/wardsynq-ward-order.test.mjs pins it against every writer (native, hl7-normalize ORC maps, SCCM draft).
+- NOT converted, and the reason: Appointment, AppointmentRequest and SpecimenCollection keep where they stand in
+  `state`, not `status`, and `pageByType` filters `$.status` only. Mirroring `state` into `status` on new writes
+  would leave every appointment already in the diary invisible to the filter - a double booking. So scheduling.js
+  and online-booking.js still read `listAll`; the port change (a named field, or `states` beside `statuses`) is
+  R5-3's, and the blocker is written out in both files.
+- Also not done: an order the SENDER closed still lands as `draft`. Filing it closed was tried and reverted - an
+  adapter actor holds the draft tier and the governed store refuses it any other status, rejecting the whole
+  transaction, so a cancellation would never land. An integration-mode hospital's external orders therefore still
+  accumulate against the open census. Closing them needs an actor that may, which is a governance change.
+- Existing tenants: orders resulted BEFORE this branch stay `active` and count against the 5,000 open census. A
+  hospital past that sees a visible 503 on these three boards until a backfill closes them. No backfill is built
+  (it is a resumable job, not a request-scoped read).

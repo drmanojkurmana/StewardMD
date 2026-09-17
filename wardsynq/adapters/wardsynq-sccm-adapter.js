@@ -253,13 +253,13 @@ function mapSccmBundle(bundle) {
     const req = ServiceRequest({
       id: sourceId(system, "sr", s.id), patientId: patient.id, encounterId: encRef(s.encounter),
       code: k.code || k.display, category, priority: ["routine", "urgent", "stat"].includes(s.priority) ? s.priority : (s.priority === "asap" ? "urgent" : "routine"),
-      requesterId: `external:${system}`,
-      /* R5-2: an order the SENDER says is finished is filed FINISHED, not draft. Draft was right for a
-       * live external order (nothing here may collect or bill against it) and wrong for a dead one: a
-       * worklist asks the store for open orders now (ward-order.js OPEN_ORDER_STATUSES), and an order
-       * the other hospital completed or cancelled months ago would otherwise sit in that answer for
-       * ever. Only the three closed words are taken from the sender; everything else is still draft. */
-      status: ["completed", "revoked", "cancelled"].includes(String(s.status || "")) ? String(s.status) : "draft",
+      requesterId: `external:${system}`, status: "draft",
+      /* R5-2 TRIED to file an order the sender calls finished as finished, so that the status-scoped
+       * worklists (ward-order.js OPEN_ORDER_STATUSES) would stop carrying other hospitals' dead orders
+       * for ever, and REVERTED it: an adapter actor holds the DRAFT tier and the governed store
+       * refuses it any other status ("adapter actor ... holds draft and cannot commit a ServiceRequest
+       * with status revoked"), so the whole transaction is rejected and the cancellation never lands.
+       * Closing an external order needs an actor that may, which is a governance change, not this. */
       source: src("sr", s.id),
     });
     req.codeSystem = k.system || "unspecified";
