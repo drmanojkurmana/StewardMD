@@ -507,6 +507,10 @@ const RESOURCE_TYPES = Object.freeze([
   /* Compliance reporting, 2026-09-16: the hospital's own self-assessment against the NABH Digital Health
    * Standards (compliance.js) and a saved report definition (report-builder.js). No patient on either. */
   "DhsAssessment", "SavedReport",
+  /* Staff messaging, 2026-09-17 (staff-messaging.js): one message between staff about a patient or a unit, an edit or a
+   * recall as a new version, and each reader's last read of a thread. Patient-bound messages carry patientId, so they
+   * sit in the patient compartment and are read only after the patient is. */
+  "StaffMessage", "StaffMessageRead",
 ]);
 
 /* BLOOD CENTRE ONLY (legal opinion 2026-09-17, G.5.8): donor deferral reasons (item 52 among them), infection results

@@ -156,6 +156,7 @@ import { setExpectedDischarge, expectedDischargeHistory, hospitalToday } from ".
 import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
 import { recordDischargeMilestone, dischargeProgress } from "../../_wardsynq/discharge-milestones.js";
 import { createInboundTransfer, decideInboundTransfer, cancelInboundTransfer, listInboundTransfers } from "../../_wardsynq/transfer-centre.js";
+import { sendStaffMessage, editStaffMessage, recallStaffMessage, markThreadRead, escalateStaffMessage, listStaffMessages } from "../../_wardsynq/staff-messaging.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
@@ -240,7 +241,7 @@ import { enrolOnPathway, pathwayProgress, overridePathwayStep, resolveSpecialty 
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
 // S3 P0: critical results pushed to phones, behind org setting wardsynq.alerts.push.enabled (default off).
-import { notifyDepsFor, directoryFromEnv, smsSetup, staffReaders, commsPorts, alertAdmins } from "../../_wardsynq/alert-deps.js";
+import { notifyDepsFor, directoryFromEnv, smsSetup, staffReaders, commsPorts, alertAdmins, alertsEnabled, pushToIdentities } from "../../_wardsynq/alert-deps.js";
 import { backupHospital, failureAlert } from "../../_wardsynq/backup-schedule.js";
 import { alertDeliveryStatus } from "../../_wardsynq/push-alerts.js";
 import { KIND, logEvent } from "../../_wardsynq/observability.js";
@@ -1396,6 +1397,10 @@ export async function onRequest(context) {
          * admission desk's act (queue.add); accepting or declining a patient is a consultant's (emr.treat); reading the
          * calls, which carry a clinical summary, is a chart read (emr.view). */
         "transfer-centre-request": CAPS.QUEUE_ADD, "transfer-centre-cancel": CAPS.QUEUE_ADD, "transfer-centre-decide": CAPS.EMR_TREAT, "transfer-centre": CAPS.EMR_VIEW,
+        /* Staff messaging (staff-messaging.js): whoever may read the chart may talk to colleagues about it. Who may see a
+         * patient thread is decided again inside, by reading the patient as the caller; only the author edits or recalls. */
+        "staff-messages": CAPS.EMR_VIEW, "staff-message-send": CAPS.EMR_VIEW, "staff-message-edit": CAPS.EMR_VIEW,
+        "staff-message-recall": CAPS.EMR_VIEW, "staff-message-read": CAPS.EMR_VIEW, "staff-message-escalate": CAPS.EMR_VIEW,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
          * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
          * authority as vitals. Disposition closes the visit - the SAME capability discharge already
@@ -3938,7 +3943,7 @@ export async function onRequest(context) {
          * gateway and the hospital's configuration. No caller can choose a provider. */
         const r = await askAboutPatient(request, env, { ...deps, config: (wsqCfg && wsqCfg.maik) || null,
           patientId: body.patientId, encounterId: body.encounterId, task: body.task, question: body.question,
-          sections: body.sections, idempotencyKey: body.idempotencyKey || null, facts,
+          sections: body.sections, idempotencyKey: body.idempotencyKey || null, facts, messageId: body.messageId, claimId: body.claimId,
           fetchImpl: env && typeof env.WSQ_MAIK_FETCH === "function" ? env.WSQ_MAIK_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -4808,6 +4813,36 @@ export async function onRequest(context) {
         try { await audits.flush(); }
         catch { return json({ ok: false, error: "audit_write_failed", message: "Transfer centre requests were read but could not be recorded in the audit trail, so they are not shown. Try again." }, 502, request); }
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub.indexOf("staff-message") === 0) {
+        /* Escalation is a fixed push (no patient, ward or text) to members of the addressed roles, only when this hospital
+         * turned push alerts on. Never SMS, WhatsApp or email. */
+        const push = alertsEnabled(wOrg) ? (ids, msg) => pushToIdentities(env, wOrg, ids, msg) : null;
+        const members = () => ORG.listMembers(env, wOrgId);
+        if (sub === "staff-messages" && method === "GET") {
+          const r = await listStaffMessages(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", unit: url.searchParams.get("unit") || "", view: url.searchParams.get("view") || "" });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-send" && method === "POST") {
+          const r = await sendStaffMessage(request, env, { ...deps, threadId: body.threadId, patientId: body.patientId, encounterId: body.encounterId, unit: body.unit, subject: body.subject, body: body.body, toRoles: body.toRoles, urgent: body.urgent === true, push, members, idempotencyKey: body.idempotencyKey || null });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-edit" && method === "POST") {
+          const r = await editStaffMessage(request, env, { ...deps, messageId: body.messageId, body: body.body, expectedVersion: body.expectedVersion });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-recall" && method === "POST") {
+          const r = await recallStaffMessage(request, env, { ...deps, messageId: body.messageId, reason: body.reason, expectedVersion: body.expectedVersion });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-read" && method === "POST") {
+          const r = await markThreadRead(request, env, { ...deps, threadId: body.threadId });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-escalate" && method === "POST") {
+          const r = await escalateStaffMessage(request, env, { ...deps, messageId: body.messageId, push, members });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
       }
       if (sub === "transfer-requests" && method === "GET") {
         const r = await listTransferRequests(request, env, { ...deps, ward: url.searchParams.get("ward") || "", encounterId: url.searchParams.get("encounterId") || "" });

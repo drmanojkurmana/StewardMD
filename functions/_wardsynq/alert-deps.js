@@ -100,14 +100,20 @@ async function commsPorts(env, org, repository, tenantId) {
 async function alertAdmins(env, org, msg) {
   const members = await ORG.listMembers(env, org.id);
   const admins = (members || []).filter((m) => m && m.active !== false && can(m.role, CAPS.STAFF_ADMIN)).map((m) => String(m.identity));
-  const directory = directoryFromEnv(env);
   if (!admins.length) return { admins: 0, sent: 0, total: 0, reason: "NO_ADMIN" };
-  if (!directory) return { admins: admins.length, sent: 0, total: 0, reason: "PUSH_NOT_CONFIGURED" };
-  const tokenIds = new Set();
-  for (const identity of admins) (await directory.devicesFor(org.id, identity)).forEach((t) => tokenIds.add(t));
-  if (!tokenIds.size) return { admins: admins.length, sent: 0, total: 0, reason: "NO_DEVICE" };
-  const out = await sendNativeToTokens(env, await nativeTokensById(env, [...tokenIds]), { ...msg, data: { type: "wardsynq-admin", kind: "backup" } });
-  return { admins: admins.length, sent: out.sent || 0, total: out.total || 0, reason: out.disabled ? "PUSH_NOT_CONFIGURED" : null };
+  return { admins: admins.length, ...(await pushToIdentities(env, org, admins, { ...msg, data: { type: "wardsynq-admin", kind: "backup" } })) };
 }
 
-export { alertsEnabled, directoryFromEnv, smsSetup, staffReaders, notifyDepsFor, commsPorts, alertAdmins };
+/* A push to named members' registered phones: { sent, total, reason }. The caller owns the payload and keeps patient data
+ * out of it (alertAdmins above; staff-messaging.js messagePushPayload). */
+async function pushToIdentities(env, org, identities, msg) {
+  const directory = directoryFromEnv(env);
+  if (!directory) return { sent: 0, total: 0, reason: "PUSH_NOT_CONFIGURED" };
+  const tokenIds = new Set();
+  for (const identity of identities) (await directory.devicesFor(org.id, identity)).forEach((t) => tokenIds.add(t));
+  if (!tokenIds.size) return { sent: 0, total: 0, reason: "NO_DEVICE" };
+  const out = await sendNativeToTokens(env, await nativeTokensById(env, [...tokenIds]), msg);
+  return { sent: out.sent || 0, total: out.total || 0, reason: out.disabled ? "PUSH_NOT_CONFIGURED" : null };
+}
+
+export { alertsEnabled, directoryFromEnv, smsSetup, staffReaders, notifyDepsFor, commsPorts, alertAdmins, pushToIdentities };

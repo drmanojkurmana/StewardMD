@@ -618,6 +618,19 @@ function grantForCaps(caps) {
     };
   }
 
+  /* Staff messaging, 2026-09-17 (staff-messaging.js). Whoever may read the chart may message colleagues about it and
+   * mark a thread read. A READ-tier role is raised to DRAFT, not EXECUTE: the two message types are all it writes. */
+  if (has(CAPS.EMR_VIEW) && grant) {
+    const added = ["StaffMessage", "StaffMessageRead"];
+    grant = {
+      tier: grant.tier === TIER.READ ? TIER.DRAFT : grant.tier,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis,
+    };
+  }
+
   /* An unconstrained write scope cannot be partly constrained. A role that ends up with `write: null`
    * may write every type, and leaving a category allow-list attached to that would refuse the one
    * type it names while permitting every other - a rule that reads as tighter and behaves as
