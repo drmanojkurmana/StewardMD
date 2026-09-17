@@ -392,6 +392,8 @@
     /* ward.js keys (ui-i18n-ward) */
     "ward.bg-chart-unreadable": "These parts of the chart could not be read: {types}. Do not read them as nothing recorded.",
     "ward.cl-admitted": "admitted {at}",
+    "ward.flow-bed-states-unread": "The bed list could not be read, so how many beds are blocked or in cleaning is not known. Do not read this as none.",
+    "ward.flow-open-items-unknown": "Open items could not be counted for any stay: there are more records than one read can hold ({types}). Nothing here means a patient is ready to leave.",
     "ward.mo-advisories-unavailable": "This hospital's own prescribing reminders could not be checked for this patient, because the results and diagnoses could not be read. Do not read this as no warnings.",
     "ward.mo-hospital-advisory": "Hospital advisory",
     "ward.cl-awaiting": "Requested {age} ago, no decision recorded.",

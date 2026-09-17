@@ -6486,14 +6486,20 @@
 
       '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>" + wTH("ward.beds", "Beds") + "</h3></div>" +
       '<div class="w-actions">' + fc("occupied", f.beds.occupied, "occupied") + fc("unplaced", f.beds.unplacedPatients, wT("ward.admitted-with-no-bed-yet", "admitted with no bed yet")) + "</div>" +
-      "<p class=\"w-hint\">" + wTH("ward.available-reserved-blocked-cleaning-maintenance", "Available {available} &middot; Reserved {reserved} &middot; Blocked {blocked} &middot; Cleaning {cleaning} &middot; Maintenance {maintenance}", { available: esc(f.beds.states.available), reserved: esc(f.beds.states.reserved), blocked: esc(f.beds.states.blocked), cleaning: esc(f.beds.states.cleaning), maintenance: esc(f.beds.states.maintenance) }, "available reserved blocked cleaning maintenance") + "</p></div>" +
+      // R5-1: a bed master that could not be read is said, never drawn as a histogram of zeros.
+      (f.beds.states
+        ? "<p class=\"w-hint\">" + wTH("ward.available-reserved-blocked-cleaning-maintenance", "Available {available} &middot; Reserved {reserved} &middot; Blocked {blocked} &middot; Cleaning {cleaning} &middot; Maintenance {maintenance}", { available: esc(f.beds.states.available), reserved: esc(f.beds.states.reserved), blocked: esc(f.beds.states.blocked), cleaning: esc(f.beds.states.cleaning), maintenance: esc(f.beds.states.maintenance) }, "available reserved blocked cleaning maintenance") + "</p>"
+        : '<p class="w-hint warn">' + ms("warning") + wTH("ward.flow-bed-states-unread", "The bed list could not be read, so how many beds are blocked or in cleaning is not known. Do not read this as none.", null, "", 1) + "</p>") + "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("schedule") + "<h3>" + wTH("ward.admissions-pending", "Admissions pending") + "</h3></div>" +
       "<p>" + wTH("ward.waiting-longest-wait-h", "{waiting} waiting &middot; longest wait {longestWaitHours} h", { waiting: esc(f.admissionsPending.waiting), longestWaitHours: esc(f.admissionsPending.longestWaitHours) }, "waiting longestWaitHours") + "</p></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("task_alt") + "<h3>" + wTH("ward.discharge", "Discharge") + "</h3></div>" +
       '<div class="w-actions">' + fc("dischargeCandidates", f.dischargeCandidates, f.dischargeCandidates === 1 ? wT("ward.stay-with-nothing-outstanding-right-now", "stay with nothing outstanding right now") : wT("ward.stays-with-nothing-outstanding-right-now", "stays with nothing outstanding right now")) + "</div>" +
-      "<p class=\"w-hint\">" + wTH("ward.flow-candidates-fact", "Nothing outstanding right now is a live fact, not a prediction.") + "</p>" +
+      // R5-1: past the read ceiling nothing is counted, and the screen says which read ran short.
+      ((f.openItemsUnknown || []).length
+        ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.flow-open-items-unknown", "Open items could not be counted for any stay: there are more records than one read can hold ({types}). Nothing here means a patient is ready to leave.", { types: esc(f.openItemsUnknown.join(", ")) }, "types", 1) + "</p>"
+        : "<p class=\"w-hint\">" + wTH("ward.flow-candidates-fact", "Nothing outstanding right now is a live fact, not a prediction.") + "</p>") +
       '<div class="w-actions"><button class="w-btn ghost tiny" data-w-act="dcboard">' + ms("timer") + wTH("ward.dc-open-board", "Open Discharge progress") + "</button>" +
       '<button class="w-btn ghost tiny" data-w-act="tcentre">' + ms("call") + wTH("ward.tc-title", "Transfer centre") + "</button></div>" +
       (openRows ? '<ul class="w-mini">' + openRows + "</ul>" : "") + "</div>" +

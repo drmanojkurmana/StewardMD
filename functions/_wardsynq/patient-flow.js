@@ -37,6 +37,20 @@ import { listTransferRequests } from "./transfer-request.js";
 const str = (v) => (v == null ? "" : String(v).trim());
 const RECENT_TRANSFER_MS = 24 * 60 * 60 * 1000;
 
+/* R5-1: what "still open" means for each companion type, so the flow board reads THROUGHPUT and not
+ * history. Each list is the one pendingItems() (migrate-discharge.js) actually selects from:
+ *   - an order is outstanding while it is active;
+ *   - a dose is outstanding in any pre-given state of the eMAR machine;
+ *   - a request is outstanding until it is completed, cancelled or revoked ("unknown" is an inbound
+ *     HL7 status nobody has resolved yet, which is not the same as done).
+ * Past the open-census ceiling listByStatus refuses rather than answering short: stale open records
+ * on that scale are themselves the finding. */
+const ORDER_OPEN = ["active"];
+const ADMIN_OPEN = ["ordered", "verified", "dispensed", "scanned", "held"];
+const SR_OPEN = ["draft", "active", "on-hold", "unknown"];
+// The two types that cannot be status-scoped here; stated, and the truncation is shown on screen.
+const COMPANION_MAX = 50000;
+
 async function openService(request, env, ctx, need) {
   try {
     const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, need, ctx.actorDeps);
@@ -79,23 +93,40 @@ async function patientFlow(request, env, ctx) {
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, flow: null };
 
-  let encounters, orders, administrations, serviceRequests, problems, reports;
+  let encounters, orders, administrations, serviceRequests, problemsGot, reportsGot;
   try {
-    [encounters, orders, administrations, serviceRequests, problems, reports] = await Promise.all([
+    [encounters, orders, administrations, serviceRequests, problemsGot, reportsGot] = await Promise.all([
       // R4-1: the open stays, however much closed history is on record (was the oldest 500 of every encounter).
       svc.listByStatus("Encounter", [OPEN]),
-      svc.list("MedicationOrder", 1000).catch(() => []),
-      svc.list("MedicationAdministration", 1000).catch(() => []),
-      svc.list("ServiceRequest", 1000).catch(() => []),
-      svc.list("Condition", 1000).catch(() => []),
-      // A test with a released result is not open (LT-31): the report decides, as on the discharge summary.
-      svc.list("DiagnosticReport", 1000).catch(() => []),
+      /* R5-1: each companion read is now scoped to what "open" means for its own type, and NONE of them
+       * is `.catch(() => [])` any more. The oldest 1,000 with a swallowed failure meant the open-items
+       * count for a current patient read 0 once the hospital passed 1,000 of any of these - wrong
+       * clinical data on the flow board, silently, from about day one for MedicationOrder. */
+      svc.listByStatus("MedicationOrder", ORDER_OPEN),
+      svc.listByStatus("MedicationAdministration", ADMIN_OPEN),
+      svc.listByStatus("ServiceRequest", SR_OPEN),
+      /* Condition carries clinicalStatus, not status, so the status-scoped page cannot select it
+       * (pageByType filters body.status). Read whole with a stated ceiling and the truncation surfaced.
+       * ponytail: a clinicalStatus predicate in the port would narrow this; R5-3 owns repository*.js. */
+      svc.listAll("Condition", { max: COMPANION_MAX }),
+      /* A test with a released result is not open (LT-31): the report decides, as on the discharge
+       * summary - so the released ones are needed too, which is why this is not status-scoped. */
+      svc.listAll("DiagnosticReport", { max: COMPANION_MAX }),
     ]);
   } catch (e) {
     if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: "too_many_open", detail: str(e.message), flow: null };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), flow: null };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), flow: null };
   }
+
+  /* Truncation is NOT a smaller answer here, it is an unknown one: a missing DiagnosticReport makes a
+   * resulted test look outstanding, and a missing Condition hides an unconfirmed problem. Every stay's
+   * openItems then reads false (unknown), exactly as expectedDischarge already does. */
+  const problems = problemsGot.rows, reports = reportsGot.rows;
+  const openItemsUnknown = [
+    ...(problemsGot.truncated ? ["Condition"] : []),
+    ...(reportsGot.truncated ? ["DiagnosticReport"] : []),
+  ];
 
   const nowIso = str(ctx.now) || new Date().toISOString();
   const nowMs = Date.parse(nowIso) || Date.now();
@@ -106,7 +137,10 @@ async function patientFlow(request, env, ctx) {
 
   const stays = openStays.map((e) => {
     const myOrders = (orders || []).filter((o) => o && o.encounterId === e.id);
-    const myAdmins = (administrations || []).filter((a) => a && myOrders.some((o) => o.id === a.orderId));
+    /* By PATIENT, not by a join onto myOrders: the orders read is now the active ones only, and a dose
+     * still waiting against an order that has since been completed is still a dose waiting. Every
+     * administration here is already in a pre-given state (ADMIN_OPEN). */
+    const myAdmins = (administrations || []).filter((a) => a && a.patientId === e.patientId);
     const mySr = (serviceRequests || []).filter((s) => s && s.encounterId === e.id);
     const myProblems = (problems || []).filter((c) => c && c.patientId === e.patientId);
     const pending = pendingItems({ orders: myOrders, administrations: myAdmins, serviceRequests: mySr, problems: myProblems, reports });
@@ -115,7 +149,8 @@ async function patientFlow(request, env, ctx) {
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,
       admittedAt: e.periodStart || null,
       lengthOfStayDays: e.periodStart ? lengthOfStayDays(e.periodStart, nowIso) : null,
-      openItems: pending.length,
+      // false = could not be counted (a companion read was truncated), never 0. Same convention as expectedDischarge.
+      openItems: openItemsUnknown.length ? false : pending.length,
       movedAt: e.movedAt || null, movedFrom: e.movedFrom || null, moveReason: e.moveReason || null,
       expectedDischarge: edds === false ? false : eddStatus(edds.get(e.id) || null, today),
     };
@@ -135,11 +170,14 @@ async function patientFlow(request, env, ctx) {
     listEd(request, env, ctx),
     bedBoard(request, env, ctx),
     admissionWaitingList(request, env, ctx),
-    ctx.orgId ? listBeds(env, ctx.orgId).catch(() => []) : Promise.resolve([]),
+    // R5-1: null = the bed master could not be read. [] would count every state as zero, which reads
+    // as "no bed is blocked and none is in cleaning" - the opposite of what an unread list means.
+    ctx.orgId ? listBeds(env, ctx.orgId).catch(() => null) : Promise.resolve([]),
     listTransferRequests(request, env, { ...ctx, ward: "", encounterId: "" }),
   ]);
 
-  const bedStates = bedStateCounts(masterBeds);
+  // null = the bed master was not read; never a histogram of zeros.
+  const bedStates = masterBeds ? bedStateCounts(masterBeds) : null;
   const wards = (beds && beds.wards) || [];
   const totalUnplaced = wards.reduce((n, w) => n + (w.unplaced ? w.unplaced.length : 0), 0);
   const totalOccupied = wards.reduce((n, w) => n + (w.occupied ? w.occupied.length : 0), 0);
@@ -149,8 +187,8 @@ async function patientFlow(request, env, ctx) {
   const bottlenecks = [
     ...(wards.filter((w) => w.unplaced && w.unplaced.length).map((w) => ({ kind: "unplaced_patients", ward: w.ward, count: w.unplaced.length }))),
     ...((ed && ed.patients || []).filter((p) => !p.triagedAt).length ? [{ kind: "ed_untriaged", count: (ed && ed.patients || []).filter((p) => !p.triagedAt).length }] : []),
-    ...(bedStates.blocked ? [{ kind: "beds_blocked", count: bedStates.blocked }] : []),
-    ...(bedStates.cleaning ? [{ kind: "beds_in_cleaning_turnover", count: bedStates.cleaning }] : []),
+    ...(bedStates && bedStates.blocked ? [{ kind: "beds_blocked", count: bedStates.blocked }] : []),
+    ...(bedStates && bedStates.cleaning ? [{ kind: "beds_in_cleaning_turnover", count: bedStates.cleaning }] : []),
     ...(staysWithOpenItems.length ? [{ kind: "stays_with_open_items", count: staysWithOpenItems.length }] : []),
   ].sort((a, b) => b.count - a.count);
 
@@ -170,7 +208,10 @@ async function patientFlow(request, env, ctx) {
     ed: { arrivals: (ed && ed.patients || []).length, untriaged: (ed && ed.patients || []).filter((p) => !p.triagedAt).length },
     admissionsPending: { waiting: (waiting && waiting.waiting) || 0, longestWaitHours: (waiting && waiting.longestWaitHours) || 0 },
     beds: { occupied: totalOccupied, unplacedPatients: totalUnplaced, wardsKnown: wards.length, states: bedStates },
-    dischargeCandidates: dischargeCandidates.length,
+    // null = not counted, never 0: "nothing outstanding" is a clinical claim and must not be guessed.
+    dischargeCandidates: openItemsUnknown.length ? null : dischargeCandidates.length,
+    // The types whose read was truncated, so the screen can say WHY the count is missing. [] = all read.
+    openItemsUnknown,
     staysWithOpenItems: staysWithOpenItems.slice(0, 50).map(named),
     recentTransfers: recentTransfers.slice(0, 50),
     // null = could not be read (never an empty list). Names only on the command center's own route.
@@ -186,7 +227,7 @@ async function patientFlow(request, env, ctx) {
       edUntriaged: drillList(((ed && ed.patients) || []).filter((p) => !p.triagedAt)),
       occupied: drillList(wards.flatMap((w) => (w.occupied || []).map((o) => ({ ...o, ward: w.ward })))),
       unplaced: drillList(wards.flatMap((w) => (w.unplaced || []).map((o) => ({ ...o, ward: w.ward })))),
-      dischargeCandidates: candidatesDrill,
+      dischargeCandidates: openItemsUnknown.length ? null : candidatesDrill,
     },
   };
   return { ...base, ok: true, flow, ...( (ed && !ed.ok) || (beds && !beds.ok) || (waiting && !waiting.ok) ? { partial: true } : {}) };
