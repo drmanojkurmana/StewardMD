@@ -169,3 +169,17 @@ test("R2-1 NABH table: the inputs for indicators 3, 6, 21 and 30 are shown besid
     } else assert.deepEqual(leftovers(html, ["ICU"]), []);
   }
 });
+
+test("R2-2 NABH table: indicator 1 says how many admissions miss each time and how many were out of order", async () => {
+  const { loadSite, leftovers } = await import("./wsq-site-i18n-harness.mjs");
+  for (const lang of ["en", "xx"]) {
+    const e = loadSite({ lang, pages: ["governance.js"] });
+    const W = e.win.WSQ, c = { esc: W.esc, t: W.t, tSafe: W.tSafe, en: W.en };
+    const html = W._govNabhCellNote(c, 1, { admissions: 5, missingBedArrival: 1, missingInitialAssessment: 2, outOfOrder: 1 });
+    if (lang === "en") {
+      assert.match(html, /1 admissions with no bed arrival time/); assert.match(html, /2 admissions with no initial assessment marked/);
+      assert.match(html, /1 assessed before the recorded bed arrival, not averaged/);
+      assert.equal(W._govNabhCellNote(c, 1, { admissions: 3, missingBedArrival: 0, missingInitialAssessment: 0, outOfOrder: 0 }), "", "nothing missing, nothing said");
+    } else assert.deepEqual(leftovers(html, []), []);
+  }
+});
