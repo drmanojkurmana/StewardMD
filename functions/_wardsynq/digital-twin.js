@@ -214,7 +214,7 @@ async function section(label, dataSource, fn, request, env, ctx) {
   } catch (e) {
     return {
       status: "unavailable", freshness: FRESHNESS.UNAVAILABLE, label, dataSource,
-      error: "threw", detail: str(e && e.message) || "the read failed", data: null,
+      error: (e && typeof e.code === "string" && e.code) || "threw", detail: str(e && e.message) || "the read failed", data: null,
     };
   }
 }

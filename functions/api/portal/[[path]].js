@@ -154,12 +154,12 @@ export async function onRequest(context) {
     if (sub === "intake-forms") {
       let published = null;
       try { published = (await listFormDefinitions(env, org.id)).published; } catch (_) { published = null; }
-      r = await portalIntake({ ...deps, published }, session);
+      r = await portalIntake({ ...deps, published, intake: cfg && cfg.intake }, session);
     } else {
       let definition = null;
       try { definition = str(body.formKey) && Number.isInteger(Number(body.formVersion)) ? await publishedFormVersion(env, org.id, str(body.formKey), Number(body.formVersion)) : null; }
       catch (_) { return json({ ok: false, error: "forms_read_failed", written: 0 }, 502, request); }
-      r = await portalSubmitIntake({ ...deps, definition, requestId: body.requestId, answers: body.answers }, session);
+      r = await portalSubmitIntake({ ...deps, definition, requestId: body.requestId, appointmentId: body.appointmentId, answers: body.answers, intake: cfg && cfg.intake }, session);
     }
     return json(r, r.ok ? 200 : (r.status || 502), request);
   }

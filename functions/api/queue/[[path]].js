@@ -2585,7 +2585,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "intake-responses" && method === "GET") {
-        const r = await intakeResponses(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", requestId: url.searchParams.get("requestId") || "" });
+        const r = await intakeResponses(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", requestId: url.searchParams.get("requestId") || "", appointmentId: url.searchParams.get("appointmentId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "intake-review" && method === "POST") {

@@ -177,3 +177,30 @@ test("R3-1 reorder arithmetic (pure): an order for store A no longer lowers stor
   const noStore = reorderSuggestionsFrom({ movements, dispenses: [], onOrder: new Map([["GLOVE|BOX", 15]]), onOrderAt: new Map(), policy, now });
   assert.deepEqual([at(noStore, "CS").onOrder, at(noStore, "OT").onOrder, at(noStore, "OT").onOrderNoStore], [15, 15, 15], "today's behaviour, labelled");
 });
+
+test("R4-5 POST /api/queue/ward/purchase-order with location (the ward screen's store field): 401/403 and another hospital write nothing; the order names its store and GET /api/queue/ward/reorder-suggestions counts it only there", async () => {
+  seedHospital();
+  const body = { orgId: ORG, vendor: "Acme", lines: [{ item: "GLOVE", quantity: 15, unit: "box" }], location: "CS" };
+  assert.equal((await as(null, "/ward/purchase-order", "POST", body)).__status, 401);
+  assert.equal((await as(U.NURSE, "/ward/purchase-order", "POST", body)).__status, 403);
+  assert.equal((await as(U.PHARMACY, "/ward/purchase-order", "POST", { ...body, orgId: ORG2 })).__status, 403);
+  assert.equal((await recordsOf("PurchaseOrder")).length, 0, "no refused order was written");
+
+  const policy = { windowDays: 10, leadTimeDays: 10, safetyDays: 5, minDataDays: 7 };
+  assert.equal((await as(U.ADMIN, "/org/reorder-policy", "POST", { orgId: ORG, policy, reason: "Stores committee" })).__status, 200);
+  for (const loc of ["CS", "OT"]) {
+    const rc = await receive(U.PHARMACY, { code: "GLOVE", quantity: { value: 30, unit: "box" }, location: loc, at: daysAgo(20) });
+    assert.equal(rc.__status, 200, JSON.stringify(rc));
+    const use = await as(U.PHARMACY, "/ward/stock-move", "POST", { orgId: ORG, kind: "consumption", code: "GLOVE", quantity: { value: 20, unit: "box" }, location: loc, at: daysAgo(5), reason: "used" });
+    assert.equal(use.__status, 200, JSON.stringify(use));
+  }
+  const po = await as(U.PHARMACY, "/ward/purchase-order", "POST", body);
+  assert.equal(po.__status, 200, JSON.stringify(po));
+  assert.equal(po.location, "CS");
+  assert.equal((await as(U.PHARMACY, `/ward/purchase-orders?orgId=${ORG}`)).orders[0].location, "CS");
+  const r = await as(U.PHARMACY, `/ward/reorder-suggestions?orgId=${ORG}`);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  const at = (loc) => r.suggestions.find((s) => s.code === "GLOVE" && s.location === loc);
+  assert.equal(at("CS").onOrder, 15);
+  assert.equal(at("OT").onOrder, 0, "the other store is not told stock is coming");
+});

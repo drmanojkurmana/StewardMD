@@ -22,7 +22,12 @@
  * again is a new version of it. Once accepted it is closed; returned with a reason, it opens again.
  *
  * A REVIEWER ACCEPTS THE VERSION THEY READ. The review names the version, so a patient's later correction is
- * never accepted by somebody who never saw it. */
+ * never accepted by somebody who never saw it.
+ *
+ * BEFORE AN APPOINTMENT (R4-5). Off unless the hospital sets wardsynq.intake.forAppointments to true. When on, a patient
+ * with a booked appointment still to come is offered the patient forms marked `forAppointments: true`, one response per
+ * form per appointment (`appointmentId` in place of `admissionRequestId`), through the same review and under the same
+ * four rules. With the setting off, an appointment opens no form, whatever is sent. */
 import { GovernanceError, makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
@@ -32,6 +37,7 @@ import { evaluateResponse, applicabilityProblem, fieldsOf, isPatientForm } from 
 
 const TYPE = "FormResponse";
 const ADMISSION_TYPE = "AdmissionRequest";
+const APPOINTMENT_TYPE = "Appointment";
 const ORIGIN_PATIENT = "patient";
 const REVIEW_DECISIONS = Object.freeze({ accept: "accepted", return: "returned" });
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -95,7 +101,7 @@ const today = () => new Date().toISOString().slice(0, 10);
 
 /** The portal writer: the patient (or a proxy, under its own id), drafting one type and reading two. */
 function intakeActor(session) {
-  return makeActor({ id: str(session.readerId) || `patient:${str(session.patientId)}`, kind: KIND.HUMAN, tier: TIER.DRAFT, scope: { read: [TYPE, ADMISSION_TYPE], write: [TYPE] } });
+  return makeActor({ id: str(session.readerId) || `patient:${str(session.patientId)}`, kind: KIND.HUMAN, tier: TIER.DRAFT, scope: { read: [TYPE, ADMISSION_TYPE, APPOINTMENT_TYPE], write: [TYPE] } });
 }
 function portalService(ctx, session) {
   return new RecordService({ repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym, tenant: { id: ctx.migration.tenantId },
@@ -109,9 +115,22 @@ function plannedAdmissions(requests) {
     .sort((a, b) => String(a.plannedFor).localeCompare(String(b.plannedFor)));
 }
 
+/** PURE. The hospital's intake setting. Only an explicit true turns appointment forms on. */
+function intakeSettings(cfg) {
+  return { forAppointments: !!cfg && typeof cfg === "object" && cfg.forAppointments === true };
+}
+
+/** PURE. The appointments a patient may answer forms for: booked, and not yet started. */
+function bookedAppointments(appointments, nowMs) {
+  return (appointments || []).filter((a) => a && a.state === "booked" && Date.parse(str(a.startAt)) > nowMs)
+    .map((a) => ({ appointmentId: a.id, startAt: a.startAt, department: a.department || null }))
+    .sort((a, b) => String(a.startAt).localeCompare(String(b.startAt)));
+}
+const isAppointmentForm = (d) => isPatientForm(d) && d.forAppointments === true;
+
 /** PURE. What either side is shown of one intake response. */
 function intakeView(r) {
-  return { responseId: r.id, admissionRequestId: r.admissionRequestId, formKey: r.formKey, formVersion: r.formVersion, formTitle: r.formTitle,
+  return { responseId: r.id, admissionRequestId: r.admissionRequestId || null, appointmentId: r.appointmentId || null, formKey: r.formKey, formVersion: r.formVersion, formTitle: r.formTitle,
     answers: r.answers, origin: r.origin, reviewState: r.reviewState, submittedBy: r.completedBy, submittedAt: r.completedAt,
     reviewedBy: r.reviewedBy || null, reviewedAt: r.reviewedAt || null, reviewReason: r.reviewReason || null, version: r.version };
 }
@@ -121,26 +140,32 @@ const NOT_VERIFIED = "What you send is kept as what you told the hospital. It is
 
 /**
  * The portal read: the patient's planned admissions, the hospital's patient forms and their own answers so far.
- * ctx: { migration, recordDeps, published: the latest published definitions (null when they could not be read) }
+ * ctx: { migration, recordDeps, published: the latest published definitions (null when they could not be read),
+ *        intake: intakeSettings(wardsynq.intake) }
  */
 async function portalIntake(ctx, session) {
   const base = baseOf(ctx.migration);
   if (!session.sections.includes("forms")) return { ...base, ...notInGrant };
   if (!Array.isArray(ctx.published)) return { ...base, ok: false, status: 502, error: "forms_read_failed" };
-  let requests, responses;
+  const withAppointments = intakeSettings(ctx.intake).forAppointments;
+  let requests, responses, appts;
   try {
     const svc = portalService(ctx, session);
-    [requests, responses] = await Promise.all([svc.byPatient(ADMISSION_TYPE, session.patientId), svc.byPatient(TYPE, session.patientId)]);
+    [requests, responses, appts] = await Promise.all([svc.byPatient(ADMISSION_TYPE, session.patientId), svc.byPatient(TYPE, session.patientId),
+      withAppointments ? svc.byPatient(APPOINTMENT_TYPE, session.patientId) : []]);
   } catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "governance" : "record_read_failed" }; }
   const admissions = plannedAdmissions(requests);
-  // No planned admission, no forms: the list is not offered to somebody it is not for.
-  const forms = admissions.length ? ctx.published.filter((d) => isPatientForm(d) && !applicabilityProblem(d, { role: null, department: "", date: today() })) : [];
-  const open = new Set(admissions.map((a) => a.requestId));
-  return { ...base, ok: true, admissions, forms, notVerified: NOT_VERIFIED,
-    responses: (responses || []).filter((r) => r && r.origin === ORIGIN_PATIENT && open.has(r.admissionRequestId)).map(intakeView) };
+  const appointments = withAppointments ? bookedAppointments(appts, Date.now()) : [];
+  const applicable = (d) => !applicabilityProblem(d, { role: null, department: "", date: today() });
+  // No planned admission (or booked appointment), no forms: the list is not offered to somebody it is not for.
+  const forms = admissions.length ? ctx.published.filter((d) => isPatientForm(d) && applicable(d)) : [];
+  const appointmentForms = appointments.length ? ctx.published.filter((d) => isAppointmentForm(d) && applicable(d)) : [];
+  const open = new Set(admissions.map((a) => a.requestId)), openAppt = new Set(appointments.map((a) => a.appointmentId));
+  return { ...base, ok: true, admissions, forms, appointments, appointmentForms, notVerified: NOT_VERIFIED,
+    responses: (responses || []).filter((r) => r && r.origin === ORIGIN_PATIENT && (open.has(r.admissionRequestId) || openAppt.has(r.appointmentId))).map(intakeView) };
 }
 
-/** The portal write. ctx: { migration, recordDeps, definition (the exact published version named), requestId, answers } */
+/** The portal write. ctx: { migration, recordDeps, definition (the exact published version named), requestId | appointmentId, answers, intake } */
 async function portalSubmitIntake(ctx, session) {
   const base = baseOf(ctx.migration);
   if (!session.sections.includes("forms")) return { ...base, ...notInGrant, written: 0 };
@@ -151,22 +176,34 @@ async function portalSubmitIntake(ctx, session) {
   const notFor = applicabilityProblem(def, { role: null, department: "", date: today() });
   if (notFor) return { ...base, ok: false, status: 403, error: "form_not_applicable", detail: notFor, written: 0 };
   const svc = portalService(ctx, session);
-  const requestId = str(ctx.requestId);
-  let adm;
-  try { adm = requestId ? await svc.get(ADMISSION_TYPE, requestId) : null; }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", written: 0 }; }
-  // Another patient's request and no request answer alike: a caller learns nothing about ids that are not theirs.
-  if (!adm || str(adm.patientId) !== str(session.patientId) || !plannedAdmissions([adm]).length) {
-    return { ...base, ok: false, status: 403, error: "no_planned_admission", detail: "There is no planned admission to fill this form in for.", written: 0 };
+  const requestId = str(ctx.requestId), appointmentId = requestId ? "" : str(ctx.appointmentId);
+  let adm = null, appt = null;
+  if (appointmentId) {
+    /* Setting off, a form not marked for appointments, another patient's appointment or one not booked and still to
+     * come all answer alike, and nothing is read before the setting is checked. */
+    const noAppt = { ...base, ok: false, status: 403, error: "no_booked_appointment", detail: "There is no booked appointment to fill this form in for.", written: 0 };
+    if (!intakeSettings(ctx.intake).forAppointments) return noAppt;
+    if (!isAppointmentForm(def)) return { ...base, ok: false, status: 403, error: "not_for_appointments", detail: "This form is not one the hospital asks for before an appointment.", written: 0 };
+    try { appt = await svc.get(APPOINTMENT_TYPE, appointmentId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", written: 0 }; }
+    if (!appt || str(appt.patientId) !== str(session.patientId) || !bookedAppointments([appt], Date.now()).length) return noAppt;
+  } else {
+    try { adm = requestId ? await svc.get(ADMISSION_TYPE, requestId) : null; }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", written: 0 }; }
+    // Another patient's request and no request answer alike: a caller learns nothing about ids that are not theirs.
+    if (!adm || str(adm.patientId) !== str(session.patientId) || !plannedAdmissions([adm]).length) {
+      return { ...base, ok: false, status: 403, error: "no_planned_admission", detail: "There is no planned admission to fill this form in for.", written: 0 };
+    }
   }
+  const target = adm || appt;
   let evaluated;
   try { evaluated = evaluateResponse(def, ctx.answers); } catch (e) { return { ...base, ok: false, status: 422, error: e.code, detail: e.message, written: 0 }; }
   if (!evaluated.valid) return { ...base, ok: false, status: 422, error: "invalid_response", errors: evaluated.errors, written: 0 };
-  const id = intakeId(def.key, adm.id);
+  const id = intakeId(def.key, target.id);
   try {
     const current = await svc.get(TYPE, id);
     if (current && current.reviewState === "accepted") return { ...base, ok: false, status: 409, error: "already_reviewed", detail: "The hospital has already reviewed this form. Contact the hospital to change anything in it.", written: 0 };
-    const rec = { resourceType: TYPE, id, patientId: adm.patientId, encounterId: null, admissionRequestId: adm.id,
+    const rec = { resourceType: TYPE, id, patientId: target.patientId, encounterId: null, admissionRequestId: adm ? adm.id : null, ...(appt ? { appointmentId: appt.id } : {}),
       formKey: def.key, formVersion: def.version, formTitle: def.title, answers: evaluated.answers,
       /* Terminology codes are not attached: a coded value reads as a clinical finding to anything downstream. */
       codes: [], origin: ORIGIN_PATIENT, reviewState: "submitted", reviewedBy: null, reviewedAt: null, reviewReason: null,
@@ -180,7 +217,7 @@ async function portalSubmitIntake(ctx, session) {
   }
 }
 
-/** Staff read of one patient's intake answers. ctx: { migration, patientId, requestId? } */
+/** Staff read of one patient's intake answers. ctx: { migration, patientId, requestId?, appointmentId? } */
 async function intakeResponses(request, env, ctx) {
   const mig = ctx.migration, base = baseOf(mig);
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", responses: [] };
@@ -190,8 +227,8 @@ async function intakeResponses(request, env, ctx) {
   if (error) return { ...base, ...error, responses: null };
   try {
     const rows = await svc.byPatient(TYPE, patientId);
-    const want = str(ctx.requestId);
-    return { ...base, ok: true, responses: rows.filter((r) => r && r.origin === ORIGIN_PATIENT && (!want || r.admissionRequestId === want)).map(intakeView)
+    const want = str(ctx.requestId), wantAppt = str(ctx.appointmentId);
+    return { ...base, ok: true, responses: rows.filter((r) => r && r.origin === ORIGIN_PATIENT && (!want || r.admissionRequestId === want) && (!wantAppt || r.appointmentId === wantAppt)).map(intakeView)
       .sort((a, b) => String(b.submittedAt).localeCompare(String(a.submittedAt))) };
   } catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", responses: null }; }
 }
@@ -232,4 +269,4 @@ async function reviewIntake(request, env, ctx) {
   }
 }
 
-export { TYPE, ORIGIN_PATIENT, submitFormResponse, patientFormResponses, plannedAdmissions, intakeId, portalIntake, portalSubmitIntake, intakeResponses, reviewIntake };
+export { TYPE, ORIGIN_PATIENT, submitFormResponse, patientFormResponses, plannedAdmissions, intakeSettings, bookedAppointments, intakeId, portalIntake, portalSubmitIntake, intakeResponses, reviewIntake };
