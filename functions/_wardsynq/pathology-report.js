@@ -28,7 +28,7 @@ import { DiagnosticReport } from "../../wardsynq/wardsynq-model.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -259,16 +259,21 @@ async function culturesInProgress(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", cultures: [] };
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, cultures: [] };
-  const CAP = 500;
-  let rows;
-  try { rows = (await svc.list("DiagnosticReport", CAP)) || []; }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), cultures: [] }; }
-  const cultures = rows.filter((r) => r && r.category === MICRO && r.status === "preliminary").map(cultureSummary)
+  /* Cultures in progress are the preliminary reports (the open read, every one of them); the histopathology list is the
+   * newest RECENT reports, most recently written first. The old read was the OLDEST 500 for both. */
+  const RECENT = 1000;
+  let prelim, rows;
+  try { [prelim, rows] = await Promise.all([svc.listByStatus("DiagnosticReport", ["preliminary"]), svc.list("DiagnosticReport", RECENT, { newest: true })]); rows = rows || []; }
+  catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: e.code, detail: str(e.message), cultures: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), cultures: [] };
+  }
+  const cultures = prelim.filter((r) => r && r.category === MICRO).map(cultureSummary)
     .sort((a, b) => str(a.reportedAt).localeCompare(str(b.reportedAt)));
   // The bench's histopathology reports too, newest first: a signed one is where an addendum is added.
   const histopathology = rows.filter((r) => r && r.category === HISTO).map(histologySummary)
     .sort((a, b) => str(b.reportedAt).localeCompare(str(a.reportedAt))).slice(0, 50);
-  return { ...base, ok: true, cultures, histopathology, ...(rows.length >= CAP ? { partial: true, partialWarning: `Only the latest ${CAP} reports were checked; older cultures in progress may be missing.` } : {}) };
+  return { ...base, ok: true, cultures, histopathology, ...(rows.length >= RECENT ? { partial: true, partialWarning: `Only the latest ${RECENT} reports were checked for histopathology; older histopathology reports are not listed here.` } : {}) };
 }
 
 /** ctx: { migration, serviceRequestId, status, specimen, clinicalDetails?, macroscopic?, microscopic?, diagnosis?,

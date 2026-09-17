@@ -36,7 +36,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService, ListCeilingError } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { chainState, approvalCovers, levelsFor, amountOf } from "./verification.js";
+import { chainState, approvalCovers, levelsFor, amountOf, allVerifications } from "./verification.js";
 import { levelsFrom, quantityOf, returnableFrom, MOVE_TYPE as STOCK_TYPE } from "./stock.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -283,7 +283,7 @@ async function receiveGoods(request, env, ctx) {
 async function approvalFor(svc, poId, ctx) {
   let rows;
   try {
-    const all = await every(svc, "Verification");
+    const all = await allVerifications(svc);
     rows = all.filter((r) => r && (str(r.subjectId) === poId) && str(r.subjectType) === PO_TYPE);
   } catch { return null; }
   if (!rows.length) return null;

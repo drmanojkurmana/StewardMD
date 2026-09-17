@@ -48,7 +48,7 @@
  */
 
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { zoneOffsetAt } from "./mar-schedule.js";
 import { reportIdFor as radiologyReportIdFor } from "./radiology-report.js";
@@ -178,8 +178,13 @@ async function imagingWorklist(request, env, ctx) {
   try {
     orders = str(ctx.patientId)
       ? await svc.byPatient("ServiceRequest", str(ctx.patientId))
-      : await svc.list("ServiceRequest", 500);
-  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), worklist: [] }; }
+      /* Every order (listAll, paged): the old roster was the OLDEST 500, so a new study never reached the worklist. Past
+       * the ceiling the worklist refuses (503) rather than show a short list. ponytail: an open-status read is the upgrade. */
+      : (await svc.listAll("ServiceRequest", { max: 50000, throwOnTruncate: true })).rows;
+  } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: e.code, detail: str(e.message), worklist: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), worklist: [] };
+  }
 
   /* LT-27: A REPORTED STUDY IS NOT STILL TO BE DONE. reportImaging() never changes the order's status, so a study
    * with a final report stayed on the worklist with File Report beside it and could be reported twice. A final or

@@ -34,7 +34,7 @@ import { vitalsToObservations, VITAL_CODES, displayUnit } from "./migrate-vitals
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
-import { chainState, approvalCovers, levelsFor } from "./verification.js";
+import { chainState, approvalCovers, levelsFor, allVerifications } from "./verification.js";
 import { orderEntrySafety } from "./migrate-emar.js";
 import { verificationState } from "./pharmacy-verify.js";
 
@@ -56,8 +56,8 @@ async function verifyApprovalRef(svc, ref, drug, ctx) {
   try {
     // Every record in the chain carries the request's id, so the chain is the request plus every
     // decision pointing back at it.
-    const all = await svc.list("Verification", 500);
-    rows = (all || []).filter((r) => r && (str(r.id) === ref || str(r.parentVerificationId) === ref));
+    const all = await allVerifications(svc);
+    rows = all.filter((r) => r && (str(r.id) === ref || str(r.parentVerificationId) === ref));
   } catch { return false; }
   if (!rows.length) return false;
   /* How many people this hospital wants on a restricted-drug approval, read the same way the approval
