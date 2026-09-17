@@ -28,8 +28,36 @@
 
   function ppIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
 
-  var _root = null, _tier = "pro", _cycle = "monthly", _status = null, _plans = null;
+  /* Default view: ANNUAL, three cards, Physician preselected. Trainee and Co-Resident are one tap
+   * away behind the "I'm a student or resident" link — self-selection, not a hidden price: every
+   * tier stays reachable and buyable, and the link opens automatically if one of them is selected. */
+  var _root = null, _tier = "physician", _cycle = "annual", _status = null, _plans = null, _showAll = false;
   var TIER_ORDER = ["student", "coresident", "pro", "physician", "physicianpro"];
+  var TIER_MAIN = ["pro", "physician", "physicianpro"];
+  var TIER_QUIET = ["student", "coresident"];
+  var TIER_BADGE = { pro: "MOST POPULAR", physician: "BEST VALUE", physicianpro: "BEST FOR CLINICS" };
+  /* What the doctor GETS, one short sentence per card. Benefit statements only: no clinical
+   * outcome claim (readmissions, recovery, complications, mortality), no statistic, no testimonial.
+   * Unproven medical claims fail App Store review and cost a clinician's trust, which is worth more
+   * than the conversion they would buy. */
+  var TIER_BENEFIT = {
+    student: "Learn the examination, not just the textbook.",
+    coresident: "Split it with your co-resident. Two logins, one bill.",
+    pro: "The whole clinical engine, on call at the bedside.",
+    physician: "Runs your clinic: queue, billing, recovery calls, and notes that think with you.",
+    physicianpro: "We host it. Your records, every device, nothing to set up.",
+  };
+  var TIER_NOTE = { physician: "Scribe writes the note, then offers the differentials worth considering." };
+  /* The per-day hero line. The WORDS are fixed here; the NUMBER is always recomputed from the
+   * server price for the selected cycle, so a KV price override moves the figure and leaves the
+   * comparison alone. A tier with no entry shows the bare "\u20b9N a day" and invents nothing. */
+  var TIER_DAY_NOTE = {
+    student: "Less than a cup of chai.",
+    coresident: "Split with your co-resident.",
+    pro: "Less than a samosa.",
+    physician: "Less than a samosa, and it runs your clinic.",
+    physicianpro: "One consultation fee covers your month.",
+  };
   var TIER_BLURB = {
     student: "Full MaiK AI · voice dictation · learn atlases",
     coresident: "2 accounts · shared AI pool · 4 imaging/day each",
@@ -58,33 +86,90 @@
       (sub ? '<div style="font:500 12.5px var(--sans);color:var(--slate-soft,#5a7184);margin-top:2px">' + sub + '</div>' : '') + '</div>' +
       '<button data-pp="close" aria-label="Close" style="flex:none;width:34px;height:34px;border-radius:50%;border:none;background:var(--panel,#fff);color:var(--slate,#2d4356);font-size:18px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)">' + ppIco("close") + '</button></div>';
   }
-  function tierPrice(t) { return (_cycle === "annual" && t.annual) ? t.annual : t.amount; }
-  function tierPer(t) { return (_cycle === "annual" && t.annual) ? "/yr" : "/mo"; }
+  /* PRICING IS SERVER TRUTH. Every number below is derived from /api/billing/plans:
+   *   t.amount  — monthly price now        t.annual  — annual price now
+   *   t.regular — the price we charge from the end of the launch window. It is the ONLY anchor
+   *               allowed in a strike-through; nothing here invents a "was" price, and a tier whose
+   *               payload has no `regular` (or a `regular` that is not higher) shows no strike-through
+   *               and no SAVE pill. Indian MRP law and App Store review both turn on exactly this.
+   */
+  function isAnnual(t) { return _cycle === "annual" && !!(t && t.annual); }   // per CARD: a tier with no annual price stays monthly
+  function tierPrice(t) { return isAnnual(t) ? t.annual : t.amount; }
+  function tierPer(t) { return isAnnual(t) ? "/year" : "/month"; }
+  // The true anchor: regular (x12 when the card is showing a year). 0 = show nothing.
   function tierStrike(t) {
-    if (_cycle === "annual" && t.annual) { var m12 = (t.amount || 0) * 12; return m12 > t.annual ? m12 : 0; }
-    return (t.regular && t.regular > t.amount) ? t.regular : 0;
+    if (!t || !t.regular || !(t.regular > t.amount)) return 0;
+    var a = isAnnual(t) ? t.regular * 12 : t.regular;
+    return a > tierPrice(t) ? a : 0;
   }
+  function savePct(t) { var a = tierStrike(t); return a ? Math.round((1 - tierPrice(t) / a) * 100) : 0; }
+  function seatsOf(t) { return Math.max(1, +((t && t.seats) || 1)); }   // Co-Resident is 2 accounts: the per-day figure is per doctor
+  function perDay(t) { var days = isAnnual(t) ? 365 : 30; return Math.round((tierPrice(t) / 100) / seatsOf(t) / days); }
+  function perDayTxt(t) {
+    var d = perDay(t), each = seatsOf(t) > 1 ? " each" : "";
+    return d >= 1 ? ("₹" + d.toLocaleString("en-IN") + " a day" + each) : ("Under ₹1 a day" + each);
+  }
+  function perDayLine(id, t) { var n = TIER_DAY_NOTE[id]; return perDayTxt(t) + "." + (n ? " " + n : ""); }
+  function tierOf(id) { return (_plans && _plans.tiers && _plans.tiers[id]) || null; }
+
   function cycleToggle() {
-    function seg(id, label) { var on = _cycle === id; return '<button data-pp="cycle" data-cycle="' + id + '" style="flex:1;padding:8px;border:none;border-radius:9px;background:' + (on ? "var(--teal,#0e6e63)" : "transparent") + ';color:' + (on ? "#fff" : "var(--slate,#2d4356)") + ';font:800 12px var(--sans);cursor:pointer">' + label + '</button>'; }
-    return '<div style="margin:8px 18px 4px;display:flex;gap:2px;background:var(--panel,#eef2f0);border:1px solid var(--line,#d7dee3);border-radius:11px;padding:3px">' + seg("monthly", "Monthly") + seg("annual", "Annual · 2 months free") + '</div>';
+    function seg(id, label) {
+      var on = _cycle === id;
+      return '<button data-pp="cycle" data-cycle="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="flex:1;min-height:44px;padding:9px 6px;border:none;border-radius:9px;background:' + (on ? "var(--teal,#0e6e63)" : "transparent") + ';color:' + (on ? "#fff" : "var(--slate,#2d4356)") + ';font:800 12.5px var(--sans);cursor:pointer">' + label + '</button>';
+    }
+    return '<div role="group" aria-label="Billing period" style="margin:8px 18px 6px;display:flex;gap:4px;background:var(--panel,#eef2f0);border:1px solid var(--line,#d7dee3);border-radius:11px;padding:3px">' + seg("monthly", "Monthly") + seg("annual", "Annual") + '</div>';
   }
+
   function tierCard(id, t) {
-    var on = _tier === id, strike = tierStrike(t), badge = t.popular ? "Most popular" : (t.premium ? "Premium" : "");
-    return '<button data-pp="tier" data-tier="' + id + '" style="width:100%;text-align:left;border:2px solid ' + (on ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';background:' + (on ? "var(--teal-soft,#e3f1ee)" : "var(--panel,#fff)") + ';border-radius:14px;padding:12px 13px;cursor:pointer;position:relative;margin-bottom:8px">' +
-      (badge ? '<span style="position:absolute;top:-9px;right:12px;font:800 9px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:#fff;background:' + (t.premium ? "var(--gold,#b9852a)" : "var(--teal,#0e6e63)") + ';border-radius:999px;padding:3px 9px">' + badge + '</span>' : '') +
-      '<div style="display:flex;align-items:baseline;gap:8px"><div style="font:800 15px var(--sans);color:var(--ink);flex:1">' + esc(t.label) + '</div>' +
-      (strike ? '<span style="font:600 12px var(--sans);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span>' : '') +
-      '<div style="font:800 18px var(--serif,Georgia,serif);color:var(--ink)">' + inr(tierPrice(t)) + '<span style="font:600 11px var(--sans);color:var(--slate-soft)">' + tierPer(t) + '</span></div></div>' +
-      '<div style="font:500 11.5px/1.4 var(--sans);color:var(--slate-soft);margin-top:3px">' + esc(TIER_BLURB[id] || "") + (t.requiresVerify ? " · verified trainee" : "") + '</div></button>';
+    var on = _tier === id, strike = tierStrike(t), pct = savePct(t);
+    var badge = TIER_BADGE[id] || (t.popular ? "MOST POPULAR" : "");
+    var note = TIER_NOTE[id] || "";
+    return '<button data-pp="tier" data-tier="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="width:100%;text-align:left;border:2px solid ' + (on ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';background:' + (on ? "var(--teal-soft,#e3f1ee)" : "var(--panel,#fff)") + ';border-radius:14px;padding:13px 13px 11px;cursor:pointer;position:relative;margin-bottom:10px">' +
+      (badge ? '<span style="position:absolute;top:-9px;left:12px;font:800 9px var(--sans);letter-spacing:.05em;color:#fff;background:' + (t.premium ? "var(--gold,#b9852a)" : "var(--teal,#0e6e63)") + ';border-radius:999px;padding:3px 9px">' + esc(badge) + '</span>' : '') +
+      '<div style="display:flex;align-items:center;gap:8px">' +
+        '<div style="font:800 15px var(--sans);color:var(--ink);flex:1">' + esc(t.label) + (t.requiresVerify ? '<span style="font:600 10.5px var(--sans);color:var(--slate-soft)"> · verified trainee</span>' : '') + '</div>' +
+        (pct ? '<span style="flex:none;font:800 10px var(--sans);letter-spacing:.03em;color:var(--green,#1c7a4a);background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);border-radius:999px;padding:3px 8px">SAVE ' + pct + '%</span>' : '') +
+      '</div>' +
+      '<div style="display:flex;align-items:baseline;gap:8px;margin-top:5px">' +
+        '<span style="font:800 22px var(--serif,Georgia,serif);color:var(--ink)">' + inr(tierPrice(t)) + '</span>' +
+        '<span style="font:700 11.5px var(--sans);color:var(--slate-soft)">' + tierPer(t) + '</span>' +
+        (strike ? '<span style="font:600 12px var(--sans);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span>' : '') +
+      '</div>' +
+      '<div style="font:700 13px/1.4 var(--sans);color:var(--teal,#0e6e63);margin-top:4px">' + esc(perDayLine(id, t)) + '</div>' +
+      (TIER_BENEFIT[id] ? '<div style="font:700 12px/1.45 var(--sans);color:var(--ink);margin-top:4px">' + esc(TIER_BENEFIT[id]) + '</div>' : '') +
+      (note ? '<div style="font:600 11px/1.4 var(--sans);color:var(--slate,#2d4356);margin-top:2px">' + esc(note) + '</div>' : '') +
+      '<div style="font:500 11.5px/1.45 var(--sans);color:var(--slate-soft);margin-top:5px">' + esc(TIER_BLURB[id] || "") + '</div>' +
+      '</button>';
   }
+
+  function cardsFor(ids) {
+    return ids.filter(function (id) { return tierOf(id); }).map(function (id) { return tierCard(id, tierOf(id)); }).join("");
+  }
+  // Quiet self-selection link. Nothing is hidden from someone who needs it; the default view just
+  // does not open on the two cheapest cards.
+  function moreTiersLink() {
+    if (!TIER_QUIET.filter(function (id) { return tierOf(id); }).length) return "";
+    if (_showAll) return '<div style="padding:0 18px 4px;font:600 11px var(--sans);color:var(--slate-soft)">Trainee and resident plans need a verified registration.</div>';
+    return '<div style="padding:0 18px 10px"><button data-pp="showall" style="width:100%;min-height:44px;background:none;border:none;padding:6px;font:700 12.5px var(--sans);color:var(--teal,#0e6e63);text-decoration:underline;cursor:pointer;text-align:center">I\u2019m a student or resident</button></div>';
+  }
+
+  /* Onco add-on: available on EVERY tier, because browsing oncology is free for everyone and the
+   * add-on is what buys the oncology AI. Priced from the server (plans.addons.onco); the trial line
+   * only appears if the server sends a trial length, so the sheet never promises one that does not
+   * exist. */
   function addonRow() {
-    // Onco add-on only for Trainee/Pro/Physician (Physician Pro includes it).
-    if (_tier === "physicianpro" || _tier === "student" || _tier === "coresident") return "";
     var a = _plans && _plans.addons && _plans.addons.onco; if (!a) return "";
-    return '<div style="display:flex;align-items:center;gap:9px;margin:0 18px 6px;padding:10px 12px;border:1px solid var(--line,#d7dee3);border-radius:11px;background:var(--panel,#fff);font:600 12.5px var(--sans);color:var(--ink)">' +
-      ppIco("plus") + ' OncoTree + ONCQIS <span style="flex:1"></span><span style="color:var(--slate-soft);margin-right:8px">+' + inr(a.amount) + '/mo</span>' +
-      '<button data-pp="buy-addon" data-addon="onco" style="border:1.5px solid var(--teal,#0e6e63);background:transparent;color:var(--teal,#0e6e63);border-radius:9px;padding:6px 12px;font:800 12px var(--sans);cursor:pointer">Add</button></div>';
+    var trialDays = +(a.trialDays || 0);
+    return '<div style="margin:2px 18px 10px;padding:12px 13px;border:1px solid var(--line,#d7dee3);border-radius:12px;background:var(--panel,#fff)">' +
+      '<div style="display:flex;align-items:center;gap:8px">' + ppIco("plus") +
+      '<div style="flex:1;font:800 13px var(--sans);color:var(--ink)">Oncology AI add-on</div>' +
+      '<div style="font:800 13px var(--sans);color:var(--ink)">+' + inr(a.amount) + '<span style="font:600 10.5px var(--sans);color:var(--slate-soft)">/month</span></div></div>' +
+      '<div style="font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);margin-top:5px">Protocols, staging and toxicity are free on every plan. This adds the AI that reads the evidence with you: evidence overlay, protocol recommendations and higher onco AI limits.' +
+      (trialDays ? ' Everyone gets a ' + trialDays + '-day trial first.' : '') + '</div>' +
+      '<div style="font:700 12px var(--sans);color:var(--teal,#0e6e63);margin-top:4px">' + esc("₹" + Math.round((a.amount / 100) / 30).toLocaleString("en-IN") + " a day.") + '</div>' +
+      '<button data-pp="buy-addon" data-addon="onco" style="margin-top:9px;width:100%;min-height:44px;border:1.5px solid var(--teal,#0e6e63);background:transparent;color:var(--teal,#0e6e63);border-radius:10px;padding:10px;font:800 12.5px var(--sans);cursor:pointer">Add to any plan</button></div>';
   }
+
   function tokenStore() {
     var tk = _plans && _plans.tokens; if (!tk) return "";
     var packs = ["boost", "plus", "power"].filter(function (k) { return tk[k]; });
@@ -98,14 +183,26 @@
           '<div style="margin-top:5px">' + (strike ? '<span style="font:600 10px var(--sans);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span> ' : '') + '<span style="font:800 13px var(--sans);color:var(--teal,#0e6e63)">' + inr(p.amount) + '</span></div></button>';
       }).join("") + '</div></div>';
   }
+  /* Sticky CTA. It always states exactly what the tap does: the tier, the amount, and the period,
+   * read off the SELECTED card and cycle. It does NOT say "start N days free": no purchase path here
+   * begins with a free period (Razorpay charges on the spot, and no StoreKit introductory offer is
+   * configured), so that sentence would be a false claim to a doctor and to App Store review. The
+   * free access some accounts already have is stated by the banner above, from the server payload. */
+  function ctaLabel() {
+    var t = tierOf(_tier);
+    if (!t) return "Subscribe";
+    return "Subscribe to " + t.label + " \u00b7 " + inr(tierPrice(t)) + tierPer(t);
+  }
+  function ctaBar(inner) {
+    return '<div style="position:sticky;bottom:0;z-index:3;background:var(--paper,#f6f7f5);border-top:1px solid var(--line,#d7dee3);padding:10px 18px calc(12px + env(safe-area-inset-bottom,0px))">' + inner + '</div>';
+  }
   function ctaBlock() {
-    if (!fbUser()) return '<div style="padding:8px 18px 4px"><button data-pp="signin" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Sign in to subscribe</button></div>';
-    var t = _plans && _plans.tiers && _plans.tiers[_tier];
-    if (plat() === "ios" && !iosNativeIap()) return '<div style="padding:8px 18px 4px"><button disabled style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--line,#d7dee3);color:var(--slate,#2d4356);font:800 14px var(--sans)">Subscriptions coming soon on iOS</button></div>';
-    var label = t ? ("Subscribe to " + t.label + " · " + inr(tierPrice(t)) + tierPer(t)) : "Subscribe";
-    var via = plat() === "ios" ? "the App Store" : "PhonePe · UPI / cards / netbanking";
-    return '<div style="padding:8px 18px 4px"><button data-pp="buy" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans);cursor:pointer">' + esc(label) + '</button>' +
-      '<div style="font:500 10.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:7px">Secure payment via ' + via + ' · cancel anytime</div></div>';
+    if (!fbUser()) return ctaBar('<button data-pp="signin" style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Sign in to subscribe</button>');
+    if (plat() === "ios" && !iosNativeIap()) return ctaBar('<button disabled style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--line,#d7dee3);color:var(--slate,#2d4356);font:800 14px var(--sans)">Subscriptions coming soon on iOS</button>');
+    var t = tierOf(_tier);
+    var via = plat() === "ios" ? "the App Store" : "PhonePe \u00b7 UPI / cards / netbanking";
+    return ctaBar('<button data-pp="buy" style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 14.5px var(--sans);cursor:pointer">' + esc(ctaLabel()) + '</button>' +
+      '<div style="font:500 10.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:6px">Cancel anytime' + (t ? " \u00b7 " + esc(perDayTxt(t)) : "") + '<br>Secure payment via ' + via + '</div>');
   }
 
   // Institution coupon redeem — a doctor whose hospital paid enters the code to unlock Pro.
@@ -144,18 +241,23 @@
     var promoOn = _status && _status.promo;
     var isPaid = _status && _status.pro && !promoOn;
     var banner = "";
-    if (promoOn) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);font:600 12.5px/1.5 var(--sans);color:var(--green,#1c7a4a)">' + ppIco("spark") + ' Launch period — Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
+    if (promoOn) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);font:600 12.5px/1.5 var(--sans);color:var(--green,#1c7a4a)">' + ppIco("spark") + ' Launch period: Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
     else if (isPaid) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 12.5px var(--sans);color:var(--teal,#0e6e63)">' + ppIco("check") + ' Pro active' + (_status.until ? ' until ' + esc(fdate(_status.until)) : '') + '. Thank you!</div>';
 
     var ios = plat() === "ios", body;
     if (_plans && _plans.tiers) {
-      var tiers = TIER_ORDER.filter(function (id) { return _plans.tiers[id]; }).map(function (id) { return tierCard(id, _plans.tiers[id]); }).join("");
-      body = cycleToggle() + '<div style="padding:2px 18px 4px">' + tiers + '</div>' + addonRow() + ctaBlock() + tokenStore();
+      if (!tierOf(_tier)) { for (var i = TIER_ORDER.length - 1; i >= 0; i--) if (tierOf(TIER_ORDER[i])) _tier = TIER_ORDER[i]; }
+      if (TIER_QUIET.indexOf(_tier) > -1) _showAll = true;   // a revealed tier never re-hides itself
+      body = cycleToggle() +
+        '<div style="padding:4px 18px 2px">' + cardsFor(TIER_MAIN) + '</div>' +
+        (_showAll ? '<div style="padding:0 18px 2px">' + cardsFor(TIER_QUIET) + '</div>' : "") +
+        moreTiersLink() + addonRow() + tokenStore();
     } else {
       body = '<div style="padding:20px 18px;text-align:center;color:var(--slate-soft);font:500 13px var(--sans)">Loading plans…</div>';
     }
     var sub = promoOn ? "Everything unlocked, free until the launch period ends" : (isPaid ? "You’re a Pro member" : "Choose your plan");
-    _root.querySelector("#proPay > div").innerHTML = header(sub) + banner + body + (ios ? "" : redeemBlock());   // coupon hidden on iOS
+    // The CTA is LAST in the DOM so position:sticky pins it to the bottom of the scrolling sheet.
+    _root.querySelector("#proPay > div").innerHTML = header(sub) + banner + body + (ios ? "" : redeemBlock()) + (_plans && _plans.tiers ? ctaBlock() : "");   // coupon hidden on iOS
     wire();
   }
 
@@ -167,6 +269,7 @@
         if (k === "close") return close();
         if (k === "tier") { _tier = b.getAttribute("data-tier"); return paint(); }
         if (k === "cycle") { _cycle = b.getAttribute("data-cycle"); return paint(); }
+        if (k === "showall") { _showAll = true; return paint(); }
         if (k === "signin") { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
         if (k === "buy") return doBuy({ tier: _tier, cycle: _cycle }, b);
         if (k === "buy-addon") return doBuy({ addon: b.getAttribute("data-addon") }, b);
@@ -219,7 +322,7 @@
       .then(function (x) {
         if (x.s !== 200 || !x.d || !x.d.orderId) {
           if (btn) btn.disabled = false;
-          toast(x.d && x.d.error === "razorpay-not-configured" ? "Payments aren’t switched on yet." : (x.d && x.d.error === "signin-required" ? "Sign in first." : "Couldn’t start checkout — try again."));
+          toast(x.d && x.d.error === "razorpay-not-configured" ? "Payments aren’t switched on yet." : (x.d && x.d.error === "signin-required" ? "Sign in first." : "Couldn’t start checkout. Try again."));
           return;
         }
         var o = x.d;
@@ -227,13 +330,13 @@
           key: o.keyId, amount: o.amount, currency: o.currency, order_id: o.orderId,
           name: "StewardMD", description: o.label || "StewardMD Pro",
           theme: { color: "#0e6e63" },
-          handler: function () { toast("Payment received — activating…"); pollProUntilActive().then(function () { if (btn) btn.disabled = false; }); },
+          handler: function () { toast("Payment received. Activating…"); pollProUntilActive().then(function () { if (btn) btn.disabled = false; }); },
           modal: { ondismiss: function () { if (btn) btn.disabled = false; } },
         });
-        rzp.on("payment.failed", function () { if (btn) btn.disabled = false; toast("Payment failed — try again."); });
+        rzp.on("payment.failed", function () { if (btn) btn.disabled = false; toast("Payment failed. Try again."); });
         rzp.open();
       })
-      .catch(function () { if (btn) btn.disabled = false; toast("Network error — try again."); });
+      .catch(function () { if (btn) btn.disabled = false; toast("Network error. Try again."); });
   }
 
   function loadAndPaint() {
@@ -338,7 +441,7 @@
       var tries = 0;
       var iv = setInterval(function () {
         tries++;
-        refresh().then(function (s) { if ((s && s.pro && !s.promo) || tries >= 8) { clearInterval(iv); if (s && s.pro && !s.promo) toast("Pro activated — thank you!"); } });
+        refresh().then(function (s) { if ((s && s.pro && !s.promo) || tries >= 8) { clearInterval(iv); if (s && s.pro && !s.promo) toast("Pro activated. Thank you!"); } });
       }, 2500);
       try { history.replaceState(null, "", location.pathname); } catch (e) {}
     }, 700);
