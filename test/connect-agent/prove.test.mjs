@@ -573,3 +573,11 @@ test('dataRowCount: a print shell with the header row and a nested patient block
   assert.equal(dataRowCount('<table><tr><th>Drug</th></tr></table>', headers), 0, 'a table of other columns is no data for this view');
   assert.equal(dataRowCount(results, ['x']), -1, 'a view without two known columns is not judged here');
 });
+
+/* A LIST RESOURCE HAS COLUMNS: a header-less label/value block is never proven as medications. */
+test('proveView: a medications view without column headers is not proven, whatever the reply', async () => {
+  const view = { resourceHint: 'medications', pathTemplate: HOST + '/Doctor/Home', rowsSelector: '#patient_details_table table tbody tr', headers: [] };
+  await proveView({ client: fakePage({ entries: MEDS_ENTRIES, screen: MEDS_SCREEN, answers: MEDS_ANSWERS }), view });
+  assert.equal(view.proof.status, 'no-headers');
+  assert.equal(view.endpoints, undefined);
+});

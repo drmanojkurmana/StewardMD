@@ -629,6 +629,12 @@ export async function proveView({ client, view, brain = null, since = -1, label 
   let pageOrigin = null;
   try { pageOrigin = new URL(pageUrl || view.pathTemplate).origin; } catch { pageOrigin = null; }
 
+  /* A LIST RESOURCE HAS COLUMNS. A medicines chart, a lab list or a radiology list is a table with named
+   * columns; a block of label/value cells with no header row is a patient details panel, whatever the
+   * crawl hinted. Proving such a block as "medications" against the visit-activation reply (Searchnew,
+   * an assessment page with tables) passed the gate on the live run (candidate ver_6918814c, 2026-09-17)
+   * and would have put the assessment form in the medicines drawer. */
+  if (['medications', 'labs', 'radiology'].includes(String(view.resourceHint || '')) && !view.block && (!Array.isArray(view.headers) || view.headers.filter(Boolean).length < 1)) return done('no-headers');
   const all = await evalJson(client, PROVE_SOURCES.list(since), []);
   const entries = (Array.isArray(all) ? all : []).filter((e) => {
     if (!e || (e.method !== 'GET' && e.method !== 'POST')) return false;
