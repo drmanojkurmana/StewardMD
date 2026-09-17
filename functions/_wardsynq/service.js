@@ -332,6 +332,12 @@ const RESOURCE_TYPES = Object.freeze([
   /* A request to move a patient to another ward or unit, and the receiving unit's answer (transfer-request.js):
    * requested, accepted or declined, bed assigned, completed or cancelled, each step a new version. */
   "TransferRequest",
+  /* One stay's discharge relay (discharge-milestones.js): advised, pharmacy cleared, bill ready, TPA final approval asked
+   * and received, left, each with who recorded it and when. Each step is written by the role whose act it is. */
+  "DischargeMilestone",
+  /* A patient another hospital asks us to take (transfer-centre.js): the call, the consultant's answer with the capacity
+   * of that moment, and the admission request it became. No patientId until the patient is registered and accepted. */
+  "TransferCentreRequest",
   /* A hospital-loaded SNOMED CT / ICD-10 / LOINC release (code-sets.js): the import record (who, when, how many,
    * the licence confirmation) and the codes in chunks. Hospital-wide, no patientId. Loaded from Admin. */
   "CodeSetImport", "CodeSetChunk",

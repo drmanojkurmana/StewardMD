@@ -23,6 +23,7 @@ import { computeQualitySafety } from "./quality.js";
 import { NABH_KPIS } from "./nabh-kpi-defs.js";
 import { HMIS_FORMAT, HMIS_SECTIONS, HMIS_ITEMS } from "./hmis-items.js";
 import { DHS_CHAPTERS, DHS_ELEMENTS } from "./dhs-elements.js";
+import { milestoneTimes, dischargeMinutes } from "./discharge-milestones.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000, HOUR = 3600000;
@@ -120,7 +121,22 @@ const NABH_SOURCES = {
   21: { missing: "Nurses on duty per shift against occupied beds; the rota is not linked to bed occupancy." },
   22: { missing: "Outpatient arrival and consultation start times; these live in the OPD queue, not in the clinical record." },
   23: { missing: "The time a patient arrived for a diagnostic test and the time it started." },
-  24: { missing: "The time discharge was advised and the time the patient left; neither is recorded separately." },
+  24: { needs: ["DischargeMilestone", "Encounter"], source: "Inpatient stays that left the clinical unit in the month: minutes from the recorded discharge advice to the recorded departure, less any time the patient asked to stay (discharge-milestones.js).",
+    note: "Only stays where discharge advice was recorded are counted. Where the departure was not recorded, the time the stay was closed in WardSynQ is used.",
+    compute: (r, w) => {
+      const enc = new Map(r.Encounter.map((e) => [e.id, e]));
+      const mins = [];
+      for (const d of r.DischargeMilestone) {
+        const e = enc.get(d.encounterId) || null;
+        if (d.class === "DAYCARE" || (e && e.class === "DAYCARE")) continue;
+        const left = milestoneTimes(d, { encounter: e }).left;
+        if (!left || !inW(left.at, w)) continue;
+        const m = dischargeMinutes(d, e);
+        if (m != null) mins.push(m);
+      }
+      const sum = mins.reduce((a, b) => a + b, 0);
+      return { numerator: sum, denominator: mins.length, value: mins.length ? round(sum / mins.length, 1) : null };
+    } },
   25: { missing: "An audit of consent forms in medical records." },
   26: { missing: "A list of emergency medications and their stock-out events." },
   27: { missing: "Mock drill records." },
