@@ -677,6 +677,45 @@ function externallyOwned(record) {
   return !!sys && sys !== NATIVE_SYSTEM;
 }
 
+/* R6-3. The closed order vocabulary, which MUST stay identical to ward-order.js
+ * CLOSED_ORDER_STATUSES; it is spelled again here because ward-order.js imports this file and the
+ * import cannot go the other way. test/wardsynq-source-order-close.test.mjs pins the two equal. */
+const SOURCE_TERMINAL_STATUSES = Object.freeze(["completed", "revoked", "cancelled"]);
+/** PURE. Which fields a source-terminal closure is allowed to differ in. Nothing clinical. */
+const CLOSURE_FIELDS = Object.freeze(["status", "completedAt", "completedBy", "completedOn", "version", "meta", "writtenBy"]);
+
+/**
+ * R6-3. THE ONE EXCEPTION TO EXTERNAL AUTHORITY, and it is deliberately the narrowest one that
+ * closes the gap it exists for.
+ *
+ * An order ingested from a laboratory or an EMR lands as `draft` (the adapter ceiling), and its
+ * sender's own word for it travels beside it as `externalStatus`. When that word is terminal the
+ * work is finished upstream, but nothing in WardSynQ may say so: the record is externally owned, so
+ * every native write to it is refused, and the order sits in the open census for ever until
+ * listByStatus hits OPEN_CENSUS_MAX and the boards refuse.
+ *
+ * THE SENDER'S ASSERTION ALONE NEVER CLOSES ANYTHING. What closes it is a local, governed,
+ * audited pass (source-order-close.js) run by a person, writing through the order closure actor.
+ * This function only says whether THAT write is the one being attempted, and it checks the whole of
+ * it: the closure role and its own roleSource, the type, the sender's terminal word on the record
+ * as stored (never on the incoming entity), the status being written, and that NOTHING else on the
+ * record changes. A write that differs anywhere else is still refused, so this cannot become a
+ * general door onto another system's records.
+ */
+function sourceTerminalClosure(svc, current, entity, opts) {
+  if (!opts || opts.sourceTerminalClosure !== true) return false;
+  if (svc.role !== "wardsynq-order-closure" || svc.roleSource !== "wardsynq-source-terminal") return false;
+  if (current.resourceType !== "ServiceRequest" || entity.resourceType !== "ServiceRequest") return false;
+  // The sender's word, as the STORE holds it. An incoming entity does not get to assert it.
+  if (!SOURCE_TERMINAL_STATUSES.includes(String(current.externalStatus == null ? "" : current.externalStatus).trim())) return false;
+  if (String(entity.status || "").trim() !== "completed") return false;
+  for (const k of new Set([...Object.keys(current), ...Object.keys(entity)])) {
+    if (CLOSURE_FIELDS.includes(k)) continue;
+    if (JSON.stringify(current[k]) !== JSON.stringify(entity[k])) return false;
+  }
+  return true;
+}
+
 class RecordService {
   /**
    * @param {{repository: object, tenant: {id: string, settings?: any}, actor: object, role: string,
@@ -1118,7 +1157,7 @@ class RecordService {
     // Authority. A record another system owns is corrected by that system, through its connector,
     // not by the native door. This holds in BOTH modes: a lab result a LIS reported is not edited by
     // hand in a system-of-record deployment either.
-    if (current && externallyOwned(current)) {
+    if (current && externallyOwned(current) && !sourceTerminalClosure(this, current, entity, opts)) {
       throw new AuthorityError(
         `${entity.resourceType}/${entity.id} is owned by ${current.meta.source.system}; changes to it arrive through that system's connector`,
         "EXTERNAL_AUTHORITY", { system: current.meta.source.system, current }
@@ -1227,5 +1266,6 @@ class RecordService {
 export {
   RESOURCE_TYPES, BLOOD_CENTRE_ONLY, bloodCentreOnlyReadable, MODE, NATIVE_SYSTEM, isExternalRecord,
   AuthorityError, RecordRequestError, IdempotencyConflictError, ListCeilingError, OPEN_CENSUS_MAX, LIST_ALL_MAX, LIST_ALL_DEFAULT,
+  SOURCE_TERMINAL_STATUSES,
   TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
 };
