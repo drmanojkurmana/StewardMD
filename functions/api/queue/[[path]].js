@@ -113,6 +113,7 @@ import { publishNotice, privacyNotices, acknowledgePrivacy, privacyAcknowledgeme
 import { patientRetention, retentionClassList, placeLegalHold, liftLegalHold } from "../../_wardsynq/retention.js";
 import { nabhIndicators, nabhCsv, hmisMonthly, hmisCsv, dhsChecklist, saveDhsAssessment } from "../../_wardsynq/compliance.js";
 import { recordHaiCase, recordProphylaxisReview, infectionControlView, antibiogramReport } from "../../_wardsynq/infection-control.js";
+import { readStaffingNorms, validateStaffingNorms, nurseStaffingView, recordShiftStaffing, staffingDraft, reportStaffInjury, staffInjuries, readStaffingRows } from "../../_wardsynq/nurse-staffing.js";
 import { saveAuditTemplate, recordAudit, recordMockDrill, qualityRegisters, reportAdr, emergencyStock, recordStockOut, restoreStockOut, edReturns, reviewEdReturn } from "../../_wardsynq/quality-registers.js";
 import { runReport, saveReport, listSavedReports, reportCsv } from "../../_wardsynq/report-builder.js";
 import { reportIncident, signalIncident, confirmIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
@@ -1552,6 +1553,12 @@ export async function onRequest(context) {
         "emergency-stock": CAPS.DEPT_REQUEST, "stock-out": CAPS.DEPT_REQUEST, "stock-out-restore": CAPS.DEPT_REQUEST,
         "ed-returns": CAPS.EMR_VIEW, "ed-return-review": CAPS.EMR_TREAT,
         "dhs-checklist": CAPS.STAFF_ADMIN, "dhs-checklist-save": CAPS.STAFF_ADMIN,
+        /* Nurse staffing (nurse-staffing.js, P4). The staffing table reads the ward census, so it is emr.view; recording the
+         * running shift's staffing is the ward nurse's act (emr.vitals); a draft roster is the rota manager's (staff.admin),
+         * and publishing it is /roster/draft-publish, staff.admin again. A staff injury is reported as broadly as an incident
+         * and read by the quality team, the NABH #30 register. */
+        "nurse-staffing": CAPS.EMR_VIEW, "nurse-staffing-record": CAPS.EMR_VITALS, "staffing-draft": CAPS.STAFF_ADMIN,
+        "staff-injury": CAPS.INCIDENT_REPORT, "staff-injuries": CAPS.QUALITY_AUDIT,
         /* The report builder (report-builder.js). staff.admin at the door, and each dataset re-checks its own read
          * capability, plus emr.view for any column that identifies a patient, inside. */
         "report-run": CAPS.STAFF_ADMIN, "report-save": CAPS.STAFF_ADMIN, "reports-saved": CAPS.STAFF_ADMIN, "report-csv": CAPS.STAFF_ADMIN,
@@ -4583,8 +4590,39 @@ export async function onRequest(context) {
       /* ---- Returns and reports (compliance.js, report-builder.js) ---- */
       const csvOut = (text, name) => new Response(text, { status: 200, headers: Object.assign({ "Content-Type": "text/csv; charset=utf-8", "Cache-Control": "no-store", "Content-Disposition": `attachment; filename="${name}"`, "X-Content-Type-Options": "nosniff" }, corsHeaders(request)) });
       if (sub === "nabh-indicators" && method === "GET") {
-        const r = await nabhIndicators(request, env, { ...deps, months: url.searchParams.get("months") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes });
+        const r = await nabhIndicators(request, env, { ...deps, months: url.searchParams.get("months") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes,
+          staffRows: (months) => readStaffingRows(deps.recordDeps.repository, mig.tenantId, months) });
         if (r.ok && !r.skipped && url.searchParams.get("format") === "csv") return csvOut(nabhCsv(r), "nabh-indicators.csv");
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- Nurse staffing and staff injuries (nurse-staffing.js). The rota comes from the org store, the census and the
+       * dependency levels from the record; the module joins them. ---- */
+      if ((sub === "nurse-staffing" && method === "GET") || (sub === "nurse-staffing-record" && method === "POST") || (sub === "staffing-draft" && method === "GET")) {
+        const nowMs = Date.now(), off = wsqCfg && wsqCfg.utcOffsetMinutes != null ? Number(wsqCfg.utcOffsetMinutes) : 330;
+        const day = new Date(nowMs + off * 60000).toISOString().slice(0, 10);
+        const date = (sub === "nurse-staffing-record" ? body.date : url.searchParams.get(sub === "staffing-draft" ? "from" : "date")) || day;
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(String(date)) || !Number.isFinite(Date.parse(date + "T00:00:00Z"))) return json({ ok: false, error: "bad_date", message: "A date is YYYY-MM-DD." }, 422, request);
+        const to = sub === "staffing-draft" ? new Date(Date.parse(date + "T00:00:00Z") + 7 * 86400000).toISOString().slice(0, 10) : date;
+        let rota;
+        try {
+          rota = await Promise.all([ROSTER.assignmentsBetween(env, wOrgId, date, to), ORG.listMembers(env, wOrgId), ROSTER.onDuty(env, wOrgId, "", off), ROSTER.dutyStatuses(env, wOrgId),
+            sub === "staffing-draft" ? ROSTER.leaveBetween(env, wOrgId, date, to) : { ok: true, leave: [] }]);
+        } catch { return json({ ok: false, error: "rota_unavailable", message: "The rota could not be read, so staffing cannot be shown." }, 502, request); }
+        const [asg, members, duty, statuses, leave] = rota;
+        const sctx = { ...deps, actorId: actor.id, bedBoard, beds: (wsqCfg && wsqCfg.beds) || null, shifts: asg.shifts, assignments: asg.assignments, members: members.filter((m) => m.active !== false),
+          onDuty: duty.onDuty, statuses: statuses.statuses, leaves: leave.leave, rotaPartial: !!(asg.partial || duty.partial || statuses.partial || leave.partial), nowMs };
+        const r = sub === "nurse-staffing" ? await nurseStaffingView(request, env, { ...sctx, date, ward: url.searchParams.get("ward") || "" })
+          : sub === "staffing-draft" ? await staffingDraft(request, env, { ...sctx, from: date, ward: url.searchParams.get("ward") || "", days: url.searchParams.get("days") })
+          : await recordShiftStaffing(request, env, { ...sctx, date, shiftId: body.shiftId });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "staff-injury" && method === "POST") {
+        const r = await reportStaffInjury(request, env, { ...deps, actorId: actor.id, occurredAt: body.occurredAt, kind: body.kind, injuredStaff: body.injuredStaff, unit: body.unit, device: body.device,
+          description: body.description, sourceKnown: body.sourceKnown, firstAid: body.firstAid, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "staff-injuries" && method === "GET") {
+        const r = await staffInjuries(request, env, { ...deps, month: url.searchParams.get("month") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* ---- Infection control and quality registers (infection-control.js, quality-registers.js) ---- */
@@ -5302,7 +5340,7 @@ export async function onRequest(context) {
     if (seg === "roster") {
       const rb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || rb.orgId || "";
-      const ADMIN_SUBS = new Set(["shift", "assign", "unassign", "leave-decide", "swap-approve", "leave-pending", "swap-pending", "duty"]);
+      const ADMIN_SUBS = new Set(["shift", "assign", "unassign", "leave-decide", "swap-approve", "leave-pending", "swap-pending", "duty", "draft-publish"]);
       const az = await ORG.authorizeOrg(env, actor, orgId, ADMIN_SUBS.has(sub) ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
       if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
       const me = actor.id;
@@ -5342,6 +5380,8 @@ export async function onRequest(context) {
       if (method === "GET" && sub === "swap-pending") return out(await ROSTER.pendingSwaps(env, orgId));
       if (method === "POST" && sub === "shift") return out(await ROSTER.saveShift(env, orgId, rb, me));
       if (method === "POST" && sub === "assign") return out(await ROSTER.assign(env, orgId, rb, me));
+      // P4: a draft roster (GET /ward/staffing-draft) becomes the rota only here, each entry checked again, all or nothing.
+      if (method === "POST" && sub === "draft-publish") return out(await ROSTER.publishDraft(env, orgId, rb.entries, me));
       if (method === "POST" && sub === "unassign") return out(await ROSTER.unassign(env, orgId, rb.assignmentId, rb.reason, me));
       if (method === "POST" && sub === "leave-request") return out(await ROSTER.requestLeave(env, orgId, me, rb));
       if (method === "POST" && sub === "leave-decide") return out(await ROSTER.decideLeave(env, orgId, rb.leaveId, rb.approve === true, me));
@@ -5413,6 +5453,27 @@ export async function onRequest(context) {
         { action: "org:clinical_settings", meta: JSON.stringify({ changed, template: cb.templateId || null }) });
       const back = await ORG.getOrg(env, orgId);
       return json({ ok: true, changed, settings: CLINICAL.readClinicalSettings(back && back.wardsynq) }, 200, request);
+    }
+    /* P4 nursing-staffing: the hospital's staffing norms (nurse-staffing.js), on the Staff rota screen. staff.admin reads and
+     * saves. WardSynQ ships no ratio: every unit type, dependency level and patients-per-nurse figure is the hospital's own,
+     * checked against its risk tools and rota shifts. The audit row counts what changed, not the values. */
+    if (seg === "org" && sub === "staffing-norms") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Staffing norms belong to a WardSynQ hospital." }, 409, request);
+      const tools = (o.wardsynq && Array.isArray(o.wardsynq.riskTools) ? o.wardsynq.riskTools : []).map((t) => ({ id: t && t.id, name: t && t.name, bands: ((t && t.bands) || []).map((b) => b && b.band).filter(Boolean) }));
+      const shifts = (await ROSTER.listShifts(env, orgId)).shifts.map((x) => ({ id: x.id, name: x.name, unit: x.unit }));
+      const view = (cfg) => ({ ok: true, settings: readStaffingNorms(cfg), tools, shifts });
+      if (method === "GET") return json(view(o.wardsynq), 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateStaffingNorms(cb.settings, o.wardsynq && o.wardsynq.riskTools, shifts.map((x) => x.id));
+      if (errors.length) return json({ ok: false, error: "invalid_staffing_norms", errors, message: "Nothing was saved. " + errors.slice(0, 5).join(" ") }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { staffing: value } }, actor.id, { action: "org:staffing_norms", meta: JSON.stringify({ wards: Object.keys(value.wardTypes).length, norms: value.norms.length, tool: !!value.dependencyToolId }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json(view(back && back.wardsynq), 200, request);
     }
     /* Blood donor selection criteria (donor-criteria.js, owner decision 2026-09-17 as corrected by the legal review): the
      * stricter of WHO 2012 and the law of the hospital's region is in force, and a hospital may only make a criterion
