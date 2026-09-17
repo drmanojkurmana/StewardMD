@@ -38,7 +38,7 @@ import { Encounter } from "../../wardsynq/wardsynq-model.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { patientIdForMrn } from "./opd-identity.js";
 import { recordConsent as writePatientConsent } from "./consent.js";
@@ -383,8 +383,10 @@ async function listOpenCases(request, env, ctx) {
   if (error) return { ...base, ...error, cases: [] };
 
   let encounters;
-  try { encounters = await svc.list("Encounter", 200); }
+  // R4-1: every open encounter (was the oldest 200, so a case booked later never appeared on the theatre list).
+  try { encounters = await svc.listByStatus("Encounter", [OPEN]); }
   catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: "too_many_open", detail: str(e.message), cases: [] };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), cases: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), cases: [] };
   }

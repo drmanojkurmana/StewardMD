@@ -30,7 +30,7 @@ import { Observation, DiagnosticReport, numericValue } from "../../wardsynq/ward
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService, isExternalRecord } from "./service.js";
+import { RecordService, isExternalRecord, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { LAB_CODE_SEED } from "../../wardsynq/adapters/wardsynq-ghis-adapter.js";
 import { deltaCheck, autoVerify } from "./lab-delta.js";
@@ -357,6 +357,13 @@ async function verifyResult(request, env, ctx) {
   }
 }
 
+/* A hospital-wide worklist reads every order (service.listAll, paged): the old roster of 300 was the OLDEST 300, so a new
+ * order never reached the list. Past WORKLIST_MAX it throws ListCeilingError (answered 503) rather than show a short list.
+ * ponytail: an open-status read (listByStatus) once every order status is enumerated; audit O20 for the paging cost. */
+const WORKLIST_MAX = 50000;
+const whole = async (svc, type) => (await svc.listAll(type, { max: WORKLIST_MAX, throwOnTruncate: true })).rows;
+const ceilingRefusal = (e) => ({ ok: false, status: 503, error: e.code, detail: str(e.message) });
+
 /** Every result waiting for a second person, with the reasons autoverification gave. */
 async function resultsToVerify(request, env, ctx) {
   const mig = ctx.migration;
@@ -364,10 +371,13 @@ async function resultsToVerify(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", results: [] };
   const { svc, resolved, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, results: [] };
-  const CAP = 500;
   let reports;
-  try { reports = (await svc.list("DiagnosticReport", CAP)) || []; }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), results: [] }; }
+  /* A result waiting for a second person is stored preliminary (releaseResult): the open read, not the oldest 500. */
+  try { reports = await svc.listByStatus("DiagnosticReport", ["preliminary"]); }
+  catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...ceilingRefusal(e), results: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), results: [] };
+  }
   const waiting = reports.filter((r) => r && r.awaitingVerification);
   const results = [];
   for (const r of waiting) {
@@ -383,7 +393,7 @@ async function resultsToVerify(request, env, ctx) {
       mine: str(r.releasedBy) === resolved.actor.id, version: r.version, observations: obs, ...(unread ? { unreadObservations: unread } : {}) });
   }
   results.sort((a, b) => str(a.reportedAt).localeCompare(str(b.reportedAt)));
-  return { ...base, ok: true, results, ...(reports.length >= CAP ? { partial: true, partialWarning: `Only the latest ${CAP} reports were checked; older results waiting for verification may be missing.` } : {}) };
+  return { ...base, ok: true, results };
 }
 
 /** The tests still waiting on a result. ctx: { migration, patientId, actorDeps, recordDeps } */
@@ -407,12 +417,15 @@ async function pendingRequests(request, env, ctx) {
   let requests, reports;
   try {
     [requests, reports] = hospitalWide
-      ? await Promise.all([svc.list("ServiceRequest", 300), svc.list("DiagnosticReport", 300).catch(() => [])])
+      ? await Promise.all([whole(svc, "ServiceRequest"), whole(svc, "DiagnosticReport").catch((e) => { if (e instanceof ListCeilingError) throw e; return []; })])
       : await Promise.all([
         svc.byPatient("ServiceRequest", patientId),
         svc.byPatient("DiagnosticReport", patientId).catch(() => []),
       ]);
-  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), pending: [] }; }
+  } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...ceilingRefusal(e), pending: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), pending: [] };
+  }
 
   const resulted = new Set((reports || []).filter((r) => r && r.serviceRequestId).map((r) => r.serviceRequestId));
   const pending = (requests || [])

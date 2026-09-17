@@ -701,7 +701,8 @@ async function token(request, env, ctx) {
        * The server cannot tell which, so the whole family dies: every live token descended from the
        * same authorisation is revoked, and the person authorises again. */
       let family = [];
-      try { family = ((await svc.list(GRANT_TYPE, 1000)) || []).filter((x) => x && x.familyId === g.familyId && !x.revokedAt && (x.kind === "refresh" || x.kind === "token")); } catch { family = []; }
+      // R4-2: every grant (listAll, paged; the old 1,000 were the OLDEST, so a newer token in the family survived revocation).
+      try { family = (await svc.listAll(GRANT_TYPE, { max: 100000, throwOnTruncate: true })).rows.filter((x) => x && x.familyId === g.familyId && !x.revokedAt && (x.kind === "refresh" || x.kind === "token")); } catch { family = []; }
       for (const x of [...family, ...(g.familyId ? [] : [])]) { try { const { meta, version, ...rest } = x; await svc.put({ ...rest, revokedAt: now.toISOString(), revokedBy: "smart:refresh-reuse" }, { expectedVersion: version }); } catch { /* best effort, one by one */ } }
       try { const fam = await svc.get(GRANT_TYPE, g.familyId); if (fam && !fam.revokedAt) { const { meta, version, ...rest } = fam; await svc.put({ ...rest, revokedAt: now.toISOString(), revokedBy: "smart:refresh-reuse" }, { expectedVersion: version }); } } catch { /* the first token of the family */ }
       await audit(ctx, "smart.refresh.reuse", { actor: g.subject, scope: { clientId: client.clientId, family: g.familyId } });
@@ -809,7 +810,7 @@ async function revoke(request, env, ctx) {
     const { meta, version, ...rest } = g;
     await svc.put({ ...rest, revokedAt: now, revokedBy: by }, { expectedVersion: version });
     if (g.kind === "refresh" && g.familyId) {
-      const family = ((await svc.list(GRANT_TYPE, 1000)) || []).filter((x) => x && x.familyId === g.familyId && !x.revokedAt && x.id !== g.id);
+      const family = (await svc.listAll(GRANT_TYPE, { max: 100000, throwOnTruncate: true })).rows.filter((x) => x && x.familyId === g.familyId && !x.revokedAt && x.id !== g.id);
       for (const x of family) { try { const { meta: xm, version: xv, ...xr } = x; await svc.put({ ...xr, revokedAt: now, revokedBy: by }, { expectedVersion: xv }); } catch { /* one by one */ } }
     }
   } catch { return oauthError(500, "server_error", "could not record the revocation"); }

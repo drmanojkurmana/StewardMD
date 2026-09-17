@@ -226,7 +226,7 @@ async function messageWorklist(request, env, ctx) {
   if (error) return { ...base, ...error, open: 0, messages: [] };
 
   let rows;
-  try { rows = await svc.list(MESSAGE_TYPE, 200); }
+  try { rows = (await svc.listAll(MESSAGE_TYPE, { max: 50000, throwOnTruncate: true })).rows; } // R4-2: every record (listAll, paged; was the oldest N), past 50,000 refused rather than short
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), open: 0, messages: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), open: 0, messages: [] };

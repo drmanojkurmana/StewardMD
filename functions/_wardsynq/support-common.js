@@ -5,7 +5,7 @@
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
@@ -37,8 +37,15 @@ function writeFailure(e) {
   return { ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message) };
 }
 
+/* Every record of one type (service.listAll, oldest first), for a board, a clash check or a recall. Past READ_MAX it
+ * throws ListCeilingError: the newest records are the ones a short read would drop, so the read is refused (503), never
+ * answered short. ponytail: each page re-groups every version; audit O20 (a latest-version table) if that is slow. */
+const READ_MAX = 50000;
+async function readAllOf(svc, type) { return (await svc.listAll(type, { max: READ_MAX, throwOnTruncate: true })).rows; }
+
 function readFailure(e) {
   if (e instanceof GovernanceError) return { ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
+  if (e instanceof ListCeilingError) return { ok: false, status: 503, error: e.code, detail: str(e.message) };
   return { ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
 }
 
@@ -50,4 +57,4 @@ function spread(mins) {
   return { count: xs.length, medianMinutes: Math.round(at(0.5)), p90Minutes: Math.round(at(0.9)) };
 }
 
-export { str, slug, baseOf, offOf, isoOk, newId, openSvc, writeFailure, readFailure, spread };
+export { str, slug, baseOf, offOf, isoOk, newId, openSvc, writeFailure, readFailure, spread, READ_MAX, readAllOf };

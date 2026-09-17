@@ -227,7 +227,7 @@ async function incidentLog(request, env, ctx) {
   if (error) return { ...base, ...error, incidents: [] };
 
   let rows;
-  try { rows = await svc.list(TYPE, 200); }
+  try { rows = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; } // R4-2: every record (listAll, paged; was the oldest N), past 50,000 refused rather than short
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), incidents: [] }; }
 
   let incidents = (rows || []).filter(Boolean);

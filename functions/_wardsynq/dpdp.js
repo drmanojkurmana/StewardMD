@@ -409,23 +409,28 @@ async function dpoQueue(request, env, ctx) {
   if (off(ctx)) return { ...base, ok: true, skipped: "off", requests: [], breaches: [] };
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, requests: null, breaches: null };
-  const nowMs = Date.now(), LIMIT = 1000;
-  let reqs, breaches;
-  try { [reqs, breaches] = await Promise.all([svc.list(REQ, LIMIT), svc.list(BREACH, LIMIT)]); }
+  /* Every request and breach (service.listAll, paged; the old read was the OLDEST 1,000, so a new request never reached
+   * the DPO). Past LIMIT the newest are not read and truncated says so. */
+  const nowMs = Date.now(), LIMIT = 50000;
+  let reqs, breaches, truncated;
+  try {
+    const [r, b] = await Promise.all([svc.listAll(REQ, { max: LIMIT }), svc.listAll(BREACH, { max: LIMIT })]);
+    reqs = r.rows; breaches = b.rows; truncated = r.truncated || b.truncated;
+  }
   catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", requests: null, breaches: null }; }
   const law = lawOn(ctx.dpdp, nowMs);
   /* Act s.5(2): a patient whose notice was given before commencement gets a fresh one "as soon as it is reasonably
    * practicable" (opinion A.4.4). Listed from commencement; before it the queue is not open. A failed read is false. */
   let renotice = { open: law.dpdpInForce, from: law.dpdpStart, patients: [] };
   if (law.dpdpInForce) {
-    try { renotice.patients = renoticeDue(await svc.list(ACK, LIMIT), law.dpdpStart); }
+    try { const a = await svc.listAll(ACK, { max: LIMIT }); renotice.patients = renoticeDue(a.rows, law.dpdpStart); if (a.truncated) truncated = true; }
     catch (e) { renotice = false; }
   }
   return {
     ...base, ok: true, clocks: clocksOf(ctx.dpdp, nowMs), law, renotice,
     requests: reqs.filter(Boolean).map(strip).map((r) => withClock(r, nowMs)).sort((a, b) => String(b.receivedAt).localeCompare(String(a.receivedAt))),
     breaches: breaches.filter(Boolean).map(strip).map((b) => breachClock(b, nowMs)).sort((a, b) => String(b.detectedAt).localeCompare(String(a.detectedAt))),
-    truncated: reqs.length >= LIMIT || breaches.length >= LIMIT,
+    truncated,
   };
 }
 

@@ -158,10 +158,13 @@ async function wardMetrics(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx);
   if (error) return { ...base, ...error, metrics: null };
 
-  const read = async (type, limit) => { try { return await svc.list(type, limit || 300); } catch { return null; } };
+  /* R4-2: this read the OLDEST 300 of each type, so past 300 encounters the ward's census and work were wrong. Open stays,
+   * doses in flight and active orders are read by status; the rest whole (listAll). A read past its ceiling is null, so
+   * that count is blank and named unreadable, never short. ponytail: audit O20 if paging is slow. */
+  const read = async (type, statuses) => { try { return statuses ? await svc.listByStatus(type, statuses) : (await svc.listAll(type, { max: 50000, throwOnTruncate: true })).rows; } catch { return null; } };
   const [encounters, criticalLoops, administrations, handovers, reconciliations, orders, verifications] = await Promise.all([
-    read("Encounter"), read("CriticalResultLoop"), read("MedicationAdministration"),
-    read("ShiftHandover"), read("MedicationReconciliation"), read("MedicationOrder"), read("MedicationVerification"),
+    read("Encounter", [OPEN_ENC]), read("CriticalResultLoop"), read("MedicationAdministration", IN_FLIGHT),
+    read("ShiftHandover"), read("MedicationReconciliation"), read("MedicationOrder", ["active"]), read("MedicationVerification"),
   ]);
 
   /* A type this actor may not read comes back null, and its counts are OMITTED rather than reported

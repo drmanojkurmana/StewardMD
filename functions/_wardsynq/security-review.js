@@ -660,13 +660,17 @@ async function securityReport(request, env, ctx) {
     ? { status: "unavailable", error: "signin_log_unreadable", detail: str(orgEvents.error) }
     : { ...section(loginFindings(orgEvents.events, period)), partial: !!orgEvents.partial };
 
+  /* Grants, reviews, assignments and admissions are read whole (service.listAll, paged, oldest first); past READ_MAX the
+   * newest are the ones not read and the section says so (t: truncated). Backup runs and restore tests are the NEWEST
+   * (the old oldest-first read of 50 showed a hospital's first backups as its latest). */
+  const whole = (type) => svc.listAll(type, { max: READ_MAX }).then((g) => ({ v: g.rows, t: g.truncated }), (e) => ({ e }));
   const [grants, reviews, runs, tests, nurseAssignments, encounters] = await Promise.all([
-    svc.list("BreakGlassGrant", 1000).then((v) => ({ v }), (e) => ({ e })),
-    svc.list(REVIEW_TYPE, 1000).then((v) => ({ v }), (e) => ({ e })),
-    svc.list(RUN_TYPE, 50).then((v) => ({ v }), (e) => ({ e })),
-    svc.list(RESTORE_TYPE, 200).then((v) => ({ v }), (e) => ({ e })),
-    svc.list("NurseAssignment", 1000).then((v) => ({ v }), (e) => ({ e })),
-    svc.list("Encounter", 1000).then((v) => ({ v }), (e) => ({ e })),
+    whole("BreakGlassGrant"),
+    whole(REVIEW_TYPE),
+    svc.list(RUN_TYPE, 50, { newest: true }).then((v) => ({ v }), (e) => ({ e })),
+    svc.list(RESTORE_TYPE, 200, { newest: true }).then((v) => ({ v }), (e) => ({ e })),
+    whole("NurseAssignment"),
+    whole("Encounter"),
   ]);
 
   /* OUT-OF-ASSIGNMENT. Needs the audit rows, the admissions (ward, attending), and at least one
@@ -683,7 +687,7 @@ async function securityReport(request, env, ctx) {
       const intervals = [];
       if (nurseAssignments.e) incomplete.push("nurse assignments could not be read");
       else {
-        if (nurseAssignments.v.length >= 1000) incomplete.push("only the first 1000 nurse assignments were read");
+        if (nurseAssignments.t) incomplete.push(`more than ${READ_MAX} nurse assignments exist and the newest were not read`);
         for (const a of nurseAssignments.v) if (a) intervals.push(...nurseAssignmentIntervals(a, await refOf(a.patientId)));
       }
       if (!src.roster || src.roster.error) incomplete.push("the rota could not be read");
@@ -691,7 +695,7 @@ async function securityReport(request, env, ctx) {
         if (src.roster.partial) incomplete.push("only part of the rota could be read");
         intervals.push(...rosterIntervals(src.roster, src.utcOffsetMinutes));
       }
-      if (encounters.v.length >= 1000) incomplete.push("only the first 1000 admissions were read");
+      if (encounters.t) incomplete.push(`more than ${READ_MAX} admissions exist and the newest were not read`);
       /* G11: a transferred admission's wards over time come from its version history, read only for
        * admissions that have moved (movedAt), bounded. A history that cannot be read is named. */
       const stays = [];
@@ -711,6 +715,7 @@ async function securityReport(request, env, ctx) {
       const breakGlass = [];
       for (const g of grants.v || []) if (g) breakGlass.push({ actorId: g.actorId, patientRef: await refOf(g.patientId), from: g.grantedAt, to: g.expiresAt });
       if (grants.e) incomplete.push("break-glass grants could not be read");
+      else if (grants.t) incomplete.push(`more than ${READ_MAX} break-glass grants exist and the newest were not read`);
       const roles = Array.isArray(src.members) ? Object.fromEntries(src.members.filter((m) => m && m.identity).map((m) => [str(m.identity), str(m.role)])) : null;
       const matching = [];
       const aliases = await readerAliasesFor(ctx.readerDirectory, Array.isArray(src.members) ? src.members : [], auditRead.events, matching);
@@ -725,8 +730,9 @@ async function securityReport(request, env, ctx) {
   else {
     const items = reviewItems(grants.v || [], orgEvents.events || [], period);
     queue = {
-      status: grants.e || orgEvents.error ? "partial" : "ok",
-      missing: [grants.e ? "break-glass grants could not be read" : null, orgEvents.error ? "admin actions could not be read" : null].filter(Boolean),
+      status: grants.e || grants.t || reviews.t || orgEvents.error ? "partial" : "ok",
+      missing: [grants.e ? "break-glass grants could not be read" : grants.t ? `more than ${READ_MAX} break-glass grants exist and the newest were not read` : null,
+        reviews.t ? `more than ${READ_MAX} review decisions exist and the newest were not read` : null, orgEvents.error ? "admin actions could not be read" : null].filter(Boolean),
       items: reviewQueue(items, reviews.v, [resolved.actor.id, ctx.viewerId]),
     };
     queue.awaiting = queue.items.filter((i) => i.status === "awaiting").length;
@@ -752,6 +758,8 @@ async function securityReport(request, env, ctx) {
 }
 
 const AUDIT_ROWS_MAX = 200;
+/* ponytail: each listAll page re-groups every version of the type; audit O20 (a latest-version table) is the upgrade. */
+const READ_MAX = 50000;
 const AUDIT_ID_RE = /^[A-Za-z0-9_.:-]{1,120}$/;
 
 /**

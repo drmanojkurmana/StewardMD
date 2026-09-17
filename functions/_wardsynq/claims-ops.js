@@ -46,7 +46,8 @@ const DAY = 86400000, HOUR = 3600000;
 const ms = (t) => { const v = Date.parse(str(t)); return Number.isFinite(v) ? v : null; };
 const dayOf = (t) => { const v = ms(t); return v == null ? null : new Date(v).toISOString().slice(0, 10); };
 const NOT_EVIDENCE = Object.freeze(["refuted", "differential"]);
-const READ_LIMIT = 2000;
+/* A whole-type read (service.listAll), oldest first: past READ_LIMIT the NEWEST of a type are not read and truncated says so. */
+const READ_LIMIT = 50000;
 const baseOf = (mig) => ({ mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null });
 const F = (code, text, extra) => ({ code, text, ...(extra || {}) });
 
@@ -634,7 +635,7 @@ async function rcmWorklists(request, env, ctx) {
   const rows = {}, unreadable = {};
   let truncated = false;
   await Promise.all(types.map(async (t) => {
-    try { rows[t] = ((await o.svc.list(t, READ_LIMIT)) || []).filter(Boolean); if (rows[t].length >= READ_LIMIT) truncated = true; }
+    try { const got = await o.svc.listAll(t, { max: READ_LIMIT }); rows[t] = got.rows.filter(Boolean); if (got.truncated) truncated = true; }
     catch (e) { unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : "could not be read"; rows[t] = []; }
   }));
   const nowMs = Date.now();
@@ -747,7 +748,7 @@ async function cashlessStays(request, env, ctx) {
   const rows = {}, unreadable = {};
   let truncated = false;
   await Promise.all(types.map(async (t) => {
-    try { rows[t] = ((await o.svc.list(t, READ_LIMIT)) || []).filter(Boolean); if (rows[t].length >= READ_LIMIT) truncated = true; }
+    try { const got = await o.svc.listAll(t, { max: READ_LIMIT }); rows[t] = got.rows.filter(Boolean); if (got.truncated) truncated = true; }
     catch (e) { unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : "could not be read"; rows[t] = []; }
   }));
   const nowMs = Date.now();

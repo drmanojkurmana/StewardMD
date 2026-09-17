@@ -137,6 +137,8 @@ async function open(request, env, ctx, need) {
 }
 
 /** ctx: { migration, registries, registryId?, overdueOnly?, now?, actorDeps, recordDeps } */
+const READ_MAX = 50000;
+
 async function registryReport(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -150,13 +152,15 @@ async function registryReport(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, registries: [] };
 
-  let conditions, observations, patients;
+  /* Every record of each type (service.listAll, oldest first). Past READ_MAX the newest are not read: truncated says so,
+   * because a short read leaves patients out of a cohort or shows them as never reviewed. An observation or patient read
+   * that fails is named (unreadable), never taken as none. */
+  let conditions, observations, patients, truncated = false;
+  const unreadable = [];
+  const all = (t, soft) => svc.listAll(t, { max: READ_MAX }).then((g) => { if (g.truncated) truncated = true; return g.rows; },
+    (e) => { if (!soft) throw e; unreadable.push(t); return []; });
   try {
-    [conditions, observations, patients] = await Promise.all([
-      svc.list("Condition", 2000),
-      svc.list("Observation", 5000).catch(() => []),
-      svc.list("Patient", 2000).catch(() => []),
-    ]);
+    [conditions, observations, patients] = await Promise.all([all("Condition"), all("Observation", true), all("Patient", true)]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), registries: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), registries: [] };
@@ -206,7 +210,7 @@ async function registryReport(request, env, ctx) {
   }
 
   return {
-    ...base, ok: true, registries: out,
+    ...base, ok: true, registries: out, truncated, ...(unreadable.length ? { unreadable } : {}),
     ...(defs.problems ? { problems: defs.problems } : {}),
     /* Stated, because this is the one report in WardSynQ that names people. */
     note: "A registry NAMES PATIENTS - that is what makes a recall possible. Membership is derived "

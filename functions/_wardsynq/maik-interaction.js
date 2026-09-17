@@ -496,7 +496,7 @@ async function listInteractions(request, env, ctx) {
   if (error) return { ...base, ...error, interactions: [] };
   const patientId = str(ctx.patientId);
   let rows;
-  try { rows = patientId ? await recorder.byPatient(TYPE, patientId) : await recorder.list(TYPE, 200); }
+  try { rows = patientId ? await recorder.byPatient(TYPE, patientId) : await recorder.list(TYPE, 200, { newest: true }); } // the newest 200 (was the oldest)
   catch (e) { return { ...base, ok: false, status: UNAVAILABLE, error: "record_read_failed", detail: str(e && e.message), interactions: [] }; }
   const interactions = (rows || []).filter(Boolean)
     .sort((a, b) => str(b.requestedAt).localeCompare(str(a.requestedAt)));

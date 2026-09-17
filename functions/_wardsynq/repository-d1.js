@@ -152,6 +152,32 @@ class D1Repository {
   }
 
   /**
+   * OPTIONAL (see repository.js): one page, oldest first, of the latest version per id after the
+   * `afterSeq` cursor, optionally only ids whose latest status is one of `statuses` (json_extract, as
+   * latestByStatus). One row past the page is asked for, so the last page answers next: null without a
+   * second, empty round trip.
+   *
+   * ponytail: every page re-groups all versions of the type (the same GROUP BY as latestByType). An
+   * open census is one page; a whole-type read of N rows is N/1000 of these. A latest-version flag or
+   * table (audit O20) is the upgrade if that proves slow on a large tenant.
+   */
+  async pageByType(tenantId, resourceType, opts) {
+    const max = rosterLimit(opts && opts.limit), after = Number(opts && opts.afterSeq) || 0;
+    const want = opts && Array.isArray(opts.statuses) ? opts.statuses.filter((s) => typeof s === "string") : null;
+    if (want && !want.length) return { records: [], next: null };
+    const r = await this.db
+      .prepare(
+        "SELECT r.body, r.seq FROM wardsynq_record r " +
+        "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? GROUP BY id) m " +
+        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=? AND r.seq>?" +
+        (want ? " AND json_extract(r.body, '$.status') IN (" + want.map(() => "?").join(",") + ")" : "") + " ORDER BY r.seq ASC LIMIT ?"
+      )
+      .bind(...[tenantId, resourceType, tenantId, resourceType, after, ...(want || []), max + 1]).all();
+    const rows = r.results || [];
+    return { records: rows.slice(0, max).map(parseBody), next: rows.length > max ? rows[max - 1].seq : null };
+  }
+
+  /**
    * OPTIONAL (see repository.js): one page, newest first, of the latest version per id starting with
    * `prefix`. The prefix is a RANGE on the UNIQUE (tenant_id, resource_type, id, version) index, not a
    * LIKE, so a hospital's other rows are never walked. The cursor is the seq of the last row handed back.

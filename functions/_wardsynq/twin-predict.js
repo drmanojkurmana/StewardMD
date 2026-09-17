@@ -124,13 +124,17 @@ const COUNTS = {
     events: (rows) => rows.map((e) => { const r = (Array.isArray(e.ledger) ? e.ledger : []).find((x) => x && x.event === "requested"); return { atMs: at(r && r.at), weight: Number(e.unitsRequested) || 1 }; }) },
 };
 
+/* A prediction is built from every record of its type (service.listAll, paged; the old read was the OLDEST 2,000, so a
+ * busy hospital's recent days were missing and read as quiet). past 50,000 it throws (ListCeilingError) rather than answer short. ponytail: audit O20 is the upgrade if paging is slow. */
+const everyRecord = async (svc, type) => (await svc.listAll(type, { max: 50000, throwOnTruncate: true })).rows;
+
 function countingPredictor(metric) {
   const spec = COUNTS[metric];
   return async function predict(svc, { lookbackDays, horizonDays = 1, now } = {}) {
     const nowMs = Number.isFinite(now) ? now : Date.now();
     const fromMs = nowMs - (lookbackDays || spec.lookbackDays) * DAY_MS;
     let rows;
-    try { rows = (await svc.list(spec.type, 2000)).filter(Boolean); }
+    try { rows = (await everyRecord(svc, spec.type)).filter(Boolean); }
     catch (e) { return { ok: false, metric, error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
     return governedPrediction({ metric, samples: dailySamples(spec.events(rows), fromMs, nowMs), horizonDays, generatedAt: new Date(nowMs).toISOString(), method: `mean of ${spec.method}` });
   };
@@ -151,7 +155,7 @@ async function predictCriticalBacklog(svc, { lookbackDays = 7, horizonDays = 1, 
   const nowMs = Number.isFinite(now) ? now : Date.now();
   const endMs = Date.parse(dayOf(nowMs) + "T00:00:00.000Z");
   let loops;
-  try { loops = (await svc.list("CriticalResultLoop", 2000)).filter((l) => l && at(l.reportedAt) != null); }
+  try { loops = (await everyRecord(svc, "CriticalResultLoop")).filter((l) => l && at(l.reportedAt) != null); }
   catch (e) { return { ok: false, metric: "critical-backlog", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
   const firstMs = loops.reduce((m, l) => Math.min(m, at(l.reportedAt)), Infinity);
   const samples = [];
@@ -177,7 +181,7 @@ async function predictOtDelays(svc, { lookbackDays = 28, horizonDays = 1, now } 
   const nowMs = Number.isFinite(now) ? now : Date.now();
   const fromMs = nowMs - lookbackDays * DAY_MS, endMs = Date.parse(dayOf(nowMs) + "T00:00:00.000Z");
   let cases;
-  try { cases = (await svc.list("SurgicalCase", 2000)).filter(Boolean); }
+  try { cases = (await everyRecord(svc, "SurgicalCase")).filter(Boolean); }
   catch (e) { return { ok: false, metric: "ot-delays", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
   const byDay = new Map();
   let excluded = 0, measured = 0;

@@ -30,7 +30,9 @@ import { raisePurchaseOrder } from "./purchasing.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const key = (v) => str(v).toUpperCase();
-const READ_CAP = 1000;
+/* Every stores record of a kind is read (service.listAll, paged, oldest first). Past READ_CAP the NEWEST are the ones not
+ * read: an overview or report says so, an indent step refuses (409). ponytail: audit O20 is the upgrade if paging is slow. */
+const READ_CAP = 50000;
 
 const CATEGORIES = Object.freeze(["consumables", "linen", "stationery", "housekeeping", "surgical-supplies", "other"]);
 const LOCATION_KINDS = Object.freeze(["central", "sub-store"]);
@@ -147,8 +149,9 @@ function consumptionByDepartment(movements, locations, fromIso, toIso) {
 
 async function readAll(svc, types) {
   const out = {};
-  for (const t of types) out[t] = (await svc.list(t, READ_CAP)) || [];
-  return out;
+  let truncated = false;
+  for (const t of types) { const got = await svc.listAll(t, { max: READ_CAP }); out[t] = got.rows; if (got.truncated) truncated = true; }
+  return { all: out, truncated };
 }
 
 /** GET /ward/stores - the item master, locations, store levels, below-reorder and near-expiry lists, and every indent. */
@@ -157,8 +160,8 @@ async function storesOverview(request, env, ctx) {
   if (!ctx.migration || ctx.migration.mode === "off") return { ...base, ok: true, skipped: "off" };
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
-  let all;
-  try { all = await readAll(svc, ["StoreItem", "StoreLocation", MOVE_TYPE, "Indent", "IndentDecision", "IndentReceipt", "IndentClosure"]); }
+  let all, truncated;
+  try { ({ all, truncated } = await readAll(svc, ["StoreItem", "StoreLocation", MOVE_TYPE, "Indent", "IndentDecision", "IndentReceipt", "IndentClosure"])); }
   catch (e) { return { ...base, ...readFailure(e) }; }
   const items = latest(all.StoreItem).sort((a, b) => str(a.name).localeCompare(str(b.name)));
   const locations = latest(all.StoreLocation).sort((a, b) => str(a.name).localeCompare(str(b.name)));
@@ -174,7 +177,6 @@ async function storesOverview(request, env, ctx) {
   const subLevels = computed.levels.filter((r) => !central.has(key(r.location)));
   const indents = all.Indent.filter(Boolean).map((i) => indentState(i, all.IndentDecision, all[MOVE_TYPE], all.IndentReceipt, all.IndentClosure))
     .sort((a, b) => b.raisedAt.localeCompare(a.raisedAt));
-  const truncated = Object.values(all).some((rows) => rows.length >= READ_CAP);
   return {
     ...base, ok: true, categories: CATEGORIES,
     items: items.map((i) => ({ code: i.code, name: i.name, category: i.category, unit: i.unit, reorderLevel: i.reorderLevel == null ? null : i.reorderLevel, active: i.active !== false })),
@@ -183,7 +185,7 @@ async function storesOverview(request, env, ctx) {
     belowReorder: flagged.belowReorder, negative: flagged.negative,
     expiring: nearExpiry(storeMoves, ctx.nearExpiryDays, ctx.now),
     indents, problems: computed.problems,
-    ...(truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} stores records of one kind exist and only the latest ${READ_CAP} were read, so these levels and indents may be incomplete.` } : {}),
+    ...(truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} stores records of one kind exist and the newest were not read, so these levels and indents may be incomplete.` } : {}),
   };
 }
 
@@ -227,7 +229,8 @@ async function saveStoreLocation(request, env, ctx) {
 }
 
 async function itemsAndLocations(svc) {
-  const [items, locs] = await Promise.all([svc.list("StoreItem", READ_CAP), svc.list("StoreLocation", READ_CAP)]);
+  // The item master and locations check a movement: past the ceiling this throws rather than refuse a real item.
+  const [items, locs] = await Promise.all(["StoreItem", "StoreLocation"].map(async (t) => (await svc.listAll(t, { max: READ_CAP, throwOnTruncate: true })).rows));
   return { items: latest(items), locations: latest(locs) };
 }
 
@@ -296,12 +299,10 @@ async function raiseIndent(request, env, ctx) {
 }
 
 async function readIndent(svc, indentId) {
-  const [indent, decisions, moves, receipts, closures] = await Promise.all([
-    svc.get("Indent", indentId), svc.list("IndentDecision", READ_CAP), svc.list(MOVE_TYPE, READ_CAP),
-    svc.list("IndentReceipt", READ_CAP), svc.list("IndentClosure", READ_CAP),
-  ]);
+  const [indent, got] = await Promise.all([svc.get("Indent", indentId), readAll(svc, ["IndentDecision", MOVE_TYPE, "IndentReceipt", "IndentClosure"])]);
   if (!indent) return null;
-  if ((moves || []).length >= READ_CAP) return { tooMany: true };
+  if (got.truncated) return { tooMany: true };
+  const { IndentDecision: decisions, [MOVE_TYPE]: moves, IndentReceipt: receipts, IndentClosure: closures } = got.all;
   return { indent, state: indentState(indent, decisions, moves, receipts, closures) };
 }
 
@@ -448,12 +449,12 @@ async function storeConsumption(request, env, ctx) {
   if (!day.test(from) || !day.test(to) || from > to) return { ...base, ok: false, status: 422, error: "bad_date_range", rows: [] };
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, rows: [] };
-  let moves, locs;
-  try { [moves, locs] = await Promise.all([svc.list(MOVE_TYPE, READ_CAP), svc.list("StoreLocation", READ_CAP)]); }
+  let moves, locs, truncated;
+  try { ({ all: { [MOVE_TYPE]: moves, StoreLocation: locs }, truncated } = await readAll(svc, [MOVE_TYPE, "StoreLocation"])); }
   catch (e) { return { ...base, ...readFailure(e), rows: [] }; }
   const names = new Map((ctx.departments || []).map((d) => [str(d.id), str(d.name)]));
   const rows = consumptionByDepartment(moves, latest(locs), from, to + "T23:59:59.999Z").map((r) => ({ ...r, departmentName: names.get(r.departmentId) || r.departmentName || r.departmentId }));
-  return { ...base, ok: true, from, to, rows, ...((moves || []).length >= READ_CAP ? { truncated: true, truncatedWarning: `More than ${READ_CAP} stock records exist, so this report may be incomplete.` } : {}) };
+  return { ...base, ok: true, from, to, rows, ...(truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} stock records exist and the newest were not read, so this report may be incomplete.` } : {}) };
 }
 
 /** POST /ward/store-purchase-order - order what an indent is still waiting for, through purchasing.js. */

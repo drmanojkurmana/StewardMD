@@ -92,7 +92,8 @@ async function capacityNow(env, orgId, svc, nowIso) {
   const [wards, beds, waiting] = await Promise.all([
     orgId ? listWards(env, orgId).catch(() => null) : Promise.resolve(null),
     orgId ? listBeds(env, orgId).catch(() => null) : Promise.resolve(null),
-    svc.list("AdmissionRequest", 500).then((r) => (r || []).filter((x) => x && x.state === "waiting").length, () => null),
+    // R4-2: every request (listAll; was the oldest 500), null when unread or past 50,000.
+    svc.listAll("AdmissionRequest", { max: 50000, throwOnTruncate: true }).then((g) => g.rows.filter((x) => x && x.state === "waiting").length, () => null),
   ]);
   return capacityFrom(wards || [], beds, waiting, nowIso);
 }
@@ -256,8 +257,9 @@ async function listInboundTransfers(request, env, ctx) {
   if (error) return { ...base, ...error, open: null, decided: null };
   const nowMs = ms(ctx.now) || Date.now(), days = Math.min(90, Math.max(1, Number(ctx.days) || 30));
   let rows;
-  // ponytail: one capped list of the latest version of every request; archive by month if a hospital outgrows it.
-  try { rows = (await svc.list(TCR_TYPE, 2000)).filter(Boolean); }
+  // Every request (service.listAll, paged; the old read was the OLDEST 2,000, so a new referral was missing).
+  // past 50,000 it throws (ListCeilingError) rather than answer short. ponytail: audit O20 is the upgrade if paging is slow.
+  try { rows = (await svc.listAll(TCR_TYPE, { max: 50000, throwOnTruncate: true })).rows.filter(Boolean); }
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", open: null, decided: null };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "Transfer centre requests could not be read. Do not read this as none.", open: null, decided: null };
@@ -278,7 +280,7 @@ async function listInboundTransfers(request, env, ctx) {
       cancelled: decided.filter((q) => q.status === "cancelled").length, medianMinutesToDecision: median(answered.map((q) => q.minutesToDecision)),
     },
     capacityNow: await capacityNow(env, ctx.orgId, svc, new Date(nowMs).toISOString()),
-    truncated: rows.length >= 2000,
+    truncated: false,
   };
 }
 

@@ -23,14 +23,18 @@
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { recordMovement } from "./stock.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const key = (v) => str(v).toUpperCase();
-const READ_CAP = 1000;
+/* Every record of a kind is read (service.listAll, paged, oldest first). Past READ_CAP the NEWEST are the ones not read:
+ * a register or board says so (truncated), a write that checks against the records refuses (409 too_many_records).
+ * ponytail: each page re-groups every version; audit O20 (a latest-version table) is the upgrade if paging is slow. */
+const READ_CAP = 50000;
+const every = async (svc, type) => (await svc.listAll(type, { max: READ_CAP, throwOnTruncate: true })).rows;
 const DAY = 86400000;
 
 const CATEGORIES = Object.freeze(["life-support", "monitoring", "diagnostic", "therapeutic", "imaging", "laboratory", "surgical", "other"]);
@@ -59,6 +63,7 @@ function writeFailure(e) {
 }
 function readFailure(e) {
   if (e instanceof GovernanceError) return { ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
+  if (e instanceof ListCeilingError) return { ok: false, status: 409, error: "too_many_records", detail: str(e.message) };
   return { ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
 }
 const baseOf = (ctx) => ({ mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null });
@@ -161,11 +166,13 @@ async function assetsOverview(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
   const readable = (t) => { const r = resolved.grant ? resolved.grant.read : null; return r === null || r === undefined || r.includes(t); };
-  let assets, events, schedules, cards, cardEvents;
+  let assets, events, schedules, cards, cardEvents, truncated = false;
   try {
-    [assets, events, cards, cardEvents] = await Promise.all([svc.list("Asset", READ_CAP), svc.list("AssetEvent", READ_CAP), svc.list("JobCard", READ_CAP), svc.list("JobCardEvent", READ_CAP)]);
+    const got = await Promise.all(["Asset", "AssetEvent", "JobCard", "JobCardEvent"].map((t) => svc.listAll(t, { max: READ_CAP })));
+    [assets, events, cards, cardEvents] = got.map((g) => g.rows);
+    truncated = got.some((g) => g.truncated);
     /* The ward reads the register to report a fault; the schedules are the engineer's. Not readable is not "none". */
-    schedules = readable("MaintenanceSchedule") ? await svc.list("MaintenanceSchedule", READ_CAP) : null;
+    if (readable("MaintenanceSchedule")) { const g = await svc.listAll("MaintenanceSchedule", { max: READ_CAP }); schedules = g.rows; truncated = truncated || g.truncated; } else schedules = null;
   } catch (e) { return { ...base, ...readFailure(e) }; }
   const now = ctx.now || new Date().toISOString();
   const alertDays = Number.isFinite(Number(ctx.contractAlertDays)) && str(ctx.contractAlertDays) !== "" ? Number(ctx.contractAlertDays) : 60;
@@ -187,7 +194,6 @@ async function assetsOverview(request, env, ctx) {
     return { scheduleId: s.id, assetId: s.assetId, tag: asset ? asset.tag : null, name: asset ? asset.name : null, kind: s.kind, intervalDays: s.intervalDays, checklist: s.checklist || [], condemned: !!(asset && asset.status === "condemned"), ...scheduleDue(s, jobs, now) };
   });
   const due = (sched || []).filter((s) => !s.condemned);
-  const truncated = [assets, events, cards, cardEvents].some((r) => (r || []).length >= READ_CAP);
   return {
     ...base, ok: true, now, categories: CATEGORIES, statuses: STATUSES,
     assets: list, jobCards: jobs, schedules: sched,
@@ -195,7 +201,7 @@ async function assetsOverview(request, env, ctx) {
     calibrationDue: schedules === null ? null : due.filter((s) => s.kind === "calibration" && (s.overdue || s.dueSoon)),
     contractAlerts: live.flatMap((a) => contractAlerts({ id: a.assetId, tag: a.tag, name: a.name, warrantyUntil: a.warrantyUntil, vendor: a.vendor, contracts: a.contracts }, now, alertDays)),
     uptime: live.filter((a) => a.critical).map((a) => ({ assetId: a.assetId, tag: a.tag, name: a.name, windowDays: 90, ...a.uptime90 })),
-    ...(truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} asset records of one kind exist and only the latest ${READ_CAP} were read, so this register may be incomplete.` } : {}),
+    ...(truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} asset records of one kind exist and the newest were not read, so this register may be incomplete.` } : {}),
   };
 }
 
@@ -263,7 +269,7 @@ async function recordAssetEvent(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let asset, events;
-  try { [asset, events] = await Promise.all([svc.get("Asset", assetId), svc.list("AssetEvent", READ_CAP)]); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+  try { [asset, events] = await Promise.all([svc.get("Asset", assetId), every(svc, "AssetEvent")]); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   if (!asset) return { ...base, ok: false, status: 404, error: "asset_not_found", written: 0 };
   if (assetPosition(assetId, events).status === "condemned") return { ...base, ok: false, status: 409, error: "asset_condemned", detail: "A condemned asset is not moved or returned to service.", written: 0 };
   const at = new Date().toISOString();
@@ -308,7 +314,7 @@ async function openJobCard(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let asset, events;
-  try { [asset, events] = await Promise.all([svc.get("Asset", assetId), svc.list("AssetEvent", READ_CAP)]); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+  try { [asset, events] = await Promise.all([svc.get("Asset", assetId), every(svc, "AssetEvent")]); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   if (!asset) return { ...base, ok: false, status: 404, error: "asset_not_found", written: 0 };
   if (assetPosition(assetId, events).status === "condemned") return { ...base, ok: false, status: 409, error: "asset_condemned", written: 0 };
   let scheduleId = null;
@@ -337,8 +343,8 @@ async function updateJobCard(request, env, ctx) {
   if (error) return { ...base, ...error, written: 0 };
   let card, events, schedule = null, asset = null, assetEvents = [];
   try {
-    [card, events] = await Promise.all([svc.get("JobCard", jobCardId), svc.list("JobCardEvent", READ_CAP)]);
-    if (card) [asset, assetEvents] = await Promise.all([svc.get("Asset", card.assetId), svc.list("AssetEvent", READ_CAP)]);
+    [card, events] = await Promise.all([svc.get("JobCard", jobCardId), every(svc, "JobCardEvent")]);
+    if (card) [asset, assetEvents] = await Promise.all([svc.get("Asset", card.assetId), every(svc, "AssetEvent")]);
     if (card && card.scheduleId) schedule = await svc.get("MaintenanceSchedule", card.scheduleId);
   } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   if (!card) return { ...base, ok: false, status: 404, error: "job_card_not_found", written: 0 };
@@ -354,7 +360,7 @@ async function updateJobCard(request, env, ctx) {
     const q = Number(ctx.quantity);
     if (!str(ctx.code) || !str(ctx.location) || !(q > 0)) return { ...base, ok: false, status: 422, error: "part_incomplete", detail: "A part needs the stores item, the quantity and the store it came from.", written: 0 };
     let items;
-    try { items = latest(await svc.list("StoreItem", READ_CAP)); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+    try { items = latest(await every(svc, "StoreItem")); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
     const item = items.find((i) => key(i.code) === key(ctx.code));
     if (!item) return { ...base, ok: false, status: 422, error: "unknown_item", detail: "That part is not in the stores item master.", written: 0 };
     const pos = assetPosition(card.assetId, assetEvents);

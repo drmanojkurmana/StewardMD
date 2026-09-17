@@ -32,7 +32,7 @@
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService, isExternalRecord } from "./service.js";
+import { RecordService, isExternalRecord, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { priorityRank } from "./ward-order.js";
 import { effectiveCategory } from "./investigation-catalogue.js";
@@ -134,6 +134,13 @@ function collectionState(specimens) {
   const failed = rows.sort((a, b) => String(b.failedAt || "").localeCompare(String(a.failedAt || "")))[0];
   return { state: "failed", attempts: rows.length, reason: failed.failureReason || null, detail: "Every attempt failed. This sample still needs taking." };
 }
+
+/* A hospital-wide worklist reads every order (service.listAll, paged): the old roster of 300 was the OLDEST 300, so a new
+ * order never reached the list. Past WORKLIST_MAX it throws ListCeilingError (answered 503) rather than show a short list.
+ * ponytail: an open-status read (listByStatus) once every order status is enumerated; audit O20 for the paging cost. */
+const WORKLIST_MAX = 50000;
+const whole = async (svc, type) => (await svc.listAll(type, { max: WORKLIST_MAX, throwOnTruncate: true })).rows;
+const ceilingRefusal = (e) => ({ ok: false, status: 503, error: e.code, detail: str(e.message) });
 
 async function open(request, env, ctx, need) {
   try {
@@ -351,12 +358,13 @@ async function collectionList(request, env, ctx) {
   let orders, specimens;
   try {
     [orders, specimens] = hospitalWide
-      ? await Promise.all([svc.list("ServiceRequest", 300), svc.list(TYPE, 300).catch(() => [])])
+      ? await Promise.all([whole(svc, "ServiceRequest"), whole(svc, TYPE).catch((e) => { if (e instanceof ListCeilingError) throw e; return []; })])
       : await Promise.all([
         svc.byPatient("ServiceRequest", patientId),
         svc.byPatient(TYPE, patientId).catch(() => []),
       ]);
   } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...ceilingRefusal(e), requests: [] };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), requests: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), requests: [] };
   }
@@ -410,9 +418,8 @@ async function rejectionStats(request, env, ctx) {
   if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) return { ...base, ok: false, status: 422, error: "bad_month", detail: "month is YYYY-MM" };
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
-  const CAP = 1000;
-  let rows;
-  try { rows = (await svc.list(TYPE, CAP)) || []; }
+  let rows, truncated;
+  try { ({ rows, truncated } = await svc.listAll(TYPE, { max: WORKLIST_MAX })); }
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
@@ -442,7 +449,7 @@ async function rejectionStats(request, env, ctx) {
     ...base, ok: true, month, rejected: rejected.length, collected, reasons: REJECTION_REASONS,
     byReason, byWard: Object.keys(byWard).sort().map((w) => ({ ward: w || null, total: byWard[w], byReason: table[w] })),
     ...(wardUnreadable ? { wardUnreadable } : {}),
-    ...(rows.length >= CAP ? { partial: true, partialWarning: `Only the latest ${CAP} specimens were counted; this month's figures may be low.` } : {}),
+    ...(truncated ? { partial: true, partialWarning: `More than ${WORKLIST_MAX} specimens exist and the newest were not counted; this month's figures may be low.` } : {}),
   };
 }
 

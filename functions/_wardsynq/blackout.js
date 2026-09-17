@@ -156,7 +156,7 @@ async function listBlackouts(request, env, ctx) {
   if (error) return { ...base, ...error, blackouts: [] };
 
   let rows;
-  try { rows = (await svc.list(TYPE, 500)) || []; }
+  try { rows = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; } // every blackout (the old read was the oldest 500)
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), blackouts: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), blackouts: [] };

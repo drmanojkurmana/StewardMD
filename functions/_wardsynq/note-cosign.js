@@ -201,7 +201,7 @@ async function listAwaitingCoSign(request, env, ctx) {
 
   let rows;
   try {
-    rows = str(ctx.patientId) ? await svc.byPatient(TYPE, str(ctx.patientId)) : await svc.list(TYPE, 300);
+    rows = str(ctx.patientId) ? await svc.byPatient(TYPE, str(ctx.patientId)) : (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; // R4-2: every record (listAll, paged; was the oldest N), past 50,000 refused rather than short
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), notes: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), notes: [] };

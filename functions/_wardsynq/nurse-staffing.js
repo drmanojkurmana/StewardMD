@@ -41,7 +41,7 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 
 const SHIFT_TYPE = "_wardsynq_staffing_shift", INJURY_TYPE = "_wardsynq_staff_injury";
 const INJURY_KINDS = Object.freeze(["needlestick", "sharp", "splash", "other"]);
-const HOUR = 3600000, DAY = 86400000, PAGE = 1000, MAX_PAGES = 10, ASSESS_READ = 5000;
+const HOUR = 3600000, DAY = 86400000, PAGE = 1000, MAX_PAGES = 10, ASSESS_READ = 50000;
 const DRAFT_DAYS = 7;
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -256,20 +256,23 @@ async function censusAndDependency(request, env, ctx) {
   const board = await ctx.bedBoard(request, env, { ...ctx, ward: "" });
   if (!board || !board.ok) return { error: { ok: false, status: (board && board.status) || 502, error: (board && board.error) || "census_unavailable", message: "The ward census could not be read, so the nurses required cannot be worked out." } };
   const settings = readStaffingNorms(ctx.wsqCfg);
-  let assessments = [], tool = null;
+  let assessments = [], tool = null, assessmentsCapped = false;
   if (settings.dependencyToolId) {
     tool = (Array.isArray(ctx.wsqCfg && ctx.wsqCfg.riskTools) ? ctx.wsqCfg.riskTools : []).find((t) => t && str(t.id) === settings.dependencyToolId) || null;
     try {
       const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, "record:read", ctx.actorDeps);
       const svc = new RecordService({ repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym, tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source });
-      assessments = ((await svc.list("RiskAssessment", ASSESS_READ)) || []).filter((a) => a && a.toolId === settings.dependencyToolId);
+      // Every assessment (service.listAll, paged; the old read was the OLDEST 5,000, so today's scores were missing).
+      const got = await svc.listAll("RiskAssessment", { max: ASSESS_READ });
+      assessmentsCapped = got.truncated;
+      assessments = got.rows.filter((a) => a && a.toolId === settings.dependencyToolId);
     } catch (e) {
       const status = e instanceof AuthError ? 401 : e instanceof PermissionError || e instanceof GovernanceError ? 403 : 502;
       return { error: { ok: false, status, error: "dependency_unavailable", message: "The dependency assessments could not be read, so the nurses required cannot be worked out." } };
     }
   }
   const wards = (board.wards || []).map((w) => ({ ward: w.ward, patients: [...(w.occupied || []), ...(w.unplaced || [])].map((p) => ({ encounterId: p.encounterId, patientId: p.patientId || null, bed: p.bed || null })) }));
-  return { settings, tool, assessments, wards, assessmentsCapped: assessments.length >= ASSESS_READ };
+  return { settings, tool, assessments, wards, assessmentsCapped };
 }
 
 function withBands(patients, settings, tool, assessments, startMs, endMs, mode) {

@@ -116,6 +116,9 @@ test("5. ADVERSARIAL: a broken critical-results read marks the queue incomplete,
   seed();
   const real = RECORD.latestByType.bind(RECORD);
   RECORD.latestByType = async (t, type, l) => { if (type === "CriticalResultLoop") throw new Error("fault"); return real(t, type, l); };
+  // R4-2: the hospital-wide criticals list pages every loop (pageByType), so the fault is injected there too.
+  const realPage = RECORD.pageByType.bind(RECORD);
+  RECORD.pageByType = async (t, type, o) => { if (type === "CriticalResultLoop") throw new Error("fault"); return realPage(t, type, o); };
   const r = await call(DOCTOR, `/ward/twin-agent-queue?orgId=${ORG}`);
   assert.equal(r.__status, 200);
   assert.equal(r.incomplete, true);

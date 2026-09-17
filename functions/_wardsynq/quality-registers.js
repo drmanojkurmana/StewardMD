@@ -39,7 +39,8 @@ const ADR_SERIOUS = Object.freeze(["death", "life-threatening", "hospitalisation
 const ADR_OUTCOMES = Object.freeze(["recovered", "recovering", "not-recovered", "fatal", "recovered-with-sequelae", "unknown"]);
 const ADR_ACTIONS = Object.freeze(["withdrawn", "dose-increased", "dose-reduced", "dose-not-changed", "not-applicable", "unknown"]);
 const ADR_REAPPEARED = Object.freeze(["yes", "no", "effect-unknown", "not-reintroduced"]);
-const DAY = 86400000, HOUR = 3600000, READ_LIMIT = 5000;
+/* READ_LIMIT: a whole-type read (service.listAll), oldest first; past it the newest are not read and the view says so. */
+const DAY = 86400000, HOUR = 3600000, READ_LIMIT = 50000;
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -166,7 +167,7 @@ const bare = (rec) => { const n = { ...rec }; delete n.version; delete n.meta; d
 const off = (mig) => !mig || mig.mode === "off";
 const expected = (ctx, current) => (ctx.expectedVersion != null && ctx.expectedVersion !== "" ? Number(ctx.expectedVersion) : current.version);
 async function list(svc, type) {
-  try { return { rows: ((await svc.list(type, READ_LIMIT)) || []).filter(Boolean) }; }
+  try { const got = await svc.listAll(type, { max: READ_LIMIT }); return { rows: got.rows.filter(Boolean), truncated: got.truncated }; }
   catch (e) { return { rows: null, reason: e instanceof GovernanceError ? "not readable with this role" : str(e && e.message) || "read failed" }; }
 }
 
@@ -250,7 +251,7 @@ async function qualityRegisters(request, env, ctx) {
   const [tpl, aud, dr, so, adr] = await Promise.all([list(svc, TPL), list(svc, AUDIT), list(svc, DRILL), list(svc, STOCKOUT), list(svc, ADR)]);
   const byTime = (k) => (a, b) => str(b[k]).localeCompare(str(a[k]));
   return {
-    ...base, ok: true, month: w.month, kinds: AUDIT_KINDS,
+    ...base, ok: true, month: w.month, kinds: AUDIT_KINDS, truncated: [tpl, aud, dr, so, adr].some((x) => x.truncated),
     templates: tpl.rows && tpl.rows.sort((a, b) => a.name.localeCompare(b.name)), templatesError: tpl.reason || null,
     audits: aud.rows && aud.rows.filter((a) => inW(a.at, w)).sort(byTime("at")), auditsError: aud.reason || null,
     summary: aud.rows ? auditSummary(aud.rows, w) : null,
@@ -299,7 +300,7 @@ async function emergencyStock(request, env, ctx) {
   const so = await list(svc, STOCKOUT);
   if (!so.rows) return { ...base, ok: false, status: 502, error: "record_read_failed", detail: `Stock-outs could not be read (${so.reason}).`, stockOuts: null };
   const medicines = Array.isArray(ctx.emergencyMedicines) ? ctx.emergencyMedicines : [];
-  return { ...base, ok: true, month: w.month, medicines, configured: medicines.length > 0,
+  return { ...base, ok: true, month: w.month, medicines, configured: medicines.length > 0, truncated: !!so.truncated,
     open: so.rows.filter((s) => !s.restoredAt).sort((a, b) => str(a.occurredAt).localeCompare(str(b.occurredAt))),
     stockOuts: so.rows.filter((s) => inW(s.occurredAt, w)).sort((a, b) => str(b.occurredAt).localeCompare(str(a.occurredAt))) };
 }
@@ -361,7 +362,7 @@ async function edReturns(request, env, ctx) {
   for (const id of [...new Set(returns.map((r) => str(r.patientId)))].slice(0, 150)) {
     try { const p = await svc.get("Patient", id); if (p) patients[id] = { name: p.name || null, mrn: p.mrn || null }; } catch { /* shown as unknown */ }
   }
-  return { ...base, ok: true, month: w.month, returns, patients, edVisits: enc.rows.filter((e) => e.class === "ED" && e.status !== "cancelled" && inW(e.periodStart, w)).length };
+  return { ...base, ok: true, month: w.month, truncated: !!(enc.truncated || rev.truncated), returns, patients, edVisits: enc.rows.filter((e) => e.class === "ED" && e.status !== "cancelled" && inW(e.periodStart, w)).length };
 }
 
 /** ctx: { migration, encounterId, similar (boolean), note?, expectedVersion? } */

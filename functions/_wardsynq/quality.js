@@ -53,6 +53,12 @@ function measure(id, title, numerator, denominator, extra) {
 }
 
 /** PURE. A measure the record cannot support, named with the reason rather than left off. */
+/* Every record of a source type is read (service.listAll, paged, oldest first). Past READ_MAX the NEWEST, the ones a
+ * period measure needs most, are not read: every measure built on that type is not computable, with the reason, never a
+ * short rate. ponytail: each page re-groups every version; a period-indexed read (audit O20) is the upgrade. */
+const READ_MAX = 50000;
+const TRUNCATED_WHY = "more records exist than can be read at once; the newest were not read";
+
 function notComputable(id, title, reason, reasonCode, reasonVars) {
   return { id, title, numerator: null, denominator: null, rate: null, computable: false, reason, ...(reasonCode ? { reasonCode, ...(reasonVars ? { reasonVars } : {}) } : {}) };
 }
@@ -192,23 +198,25 @@ async function qualityReport(request, env, ctx) {
   const days = Math.min(365, Math.max(1, Number(ctx.days) || 30));
   const fromMs = nowMs - days * 86400000;
 
-  let loops, administrations, encounters, summaries;
+  const SOURCES = ["CriticalResultLoop", "MedicationAdministration", "Encounter", "ClinicalNote"];
+  let loops, administrations, encounters, summaries, truncated;
   try {
-    [loops, administrations, encounters, summaries] = await Promise.all([
-      svc.list("CriticalResultLoop", 1000),
-      svc.list("MedicationAdministration", 1000),
-      svc.list("Encounter", 1000),
-      svc.list("ClinicalNote", 1000),
-    ]);
+    const got = await Promise.all(SOURCES.map((t) => svc.listAll(t, { max: READ_MAX })));
+    [loops, administrations, encounters, summaries] = got.map((g) => g.rows);
+    truncated = new Set(SOURCES.filter((t, k) => got[k].truncated));
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), measures: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), measures: [] };
   }
 
+  const NEEDS = { "critical-ack-within-window": ["CriticalResultLoop"], "dose-on-time": ["MedicationAdministration"], "discharge-summary-signed": ["Encounter", "ClinicalNote"] };
   const measures = computeMeasures({
     loops, administrations, encounters, summaries,
     fromMs, toMs: nowMs,
     ackWindowMinutes: ctx.ackWindowMinutes, graceMinutes: ctx.graceMinutes,
+  }).map((m) => {
+    const t = (NEEDS[m.id] || []).find((x) => truncated.has(x));
+    return t ? notComputable(m.id, m.title, `${t} records could not be read: ${TRUNCATED_WHY}`, "type-unreadable", { type: t, why: TRUNCATED_WHY }) : m;
   });
 
   return {
@@ -471,7 +479,7 @@ async function qualitySafetyReport(request, env, ctx) {
    * null with the reason, not the whole report a failure and not a row of zeros. */
   const unreadable = {}, rows = {};
   await Promise.all(QS_TYPES.map(async (t) => {
-    try { rows[t] = await svc.list(t, 1000); }
+    try { const got = await svc.listAll(t, { max: READ_MAX }); rows[t] = got.rows; if (got.truncated) unreadable[t] = TRUNCATED_WHY; }
     catch (e) { unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : str(e && e.message) || "read failed"; rows[t] = []; }
   }));
   const r = computeQualitySafety({

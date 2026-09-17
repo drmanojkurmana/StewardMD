@@ -453,7 +453,7 @@ test("wrong-patient / bed-safety, THE ATOMIC PATH ITSELF: forced to race inside 
   const regA = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Barrier Claimant A", mobile: "9876500073", gender: "female", ageYears: 42 });
   const regB = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Barrier Claimant B", mobile: "9876500074", gender: "male", ageYears: 43 });
 
-  const realLatestByType = RECORD.latestByType.bind(RECORD);
+  const realPageByType = RECORD.pageByType.bind(RECORD);   // the open census (R4-1)
   const realAppend = RECORD.append.bind(RECORD);
   const realLatest = RECORD.latest.bind(RECORD);
   let arrived = 0, releaseGate, claimConflicts = 0, claimReads = 0, releaseClaim;
@@ -466,13 +466,13 @@ test("wrong-patient / bed-safety, THE ATOMIC PATH ITSELF: forced to race inside 
     if (resourceType === "_wardsynq_bed_claim") { claimReads += 1; if (claimReads === 2) releaseClaim(); await claimGate; }
     return realLatest(tenantId, resourceType, id);
   };
-  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+  RECORD.pageByType = async (tenantId, resourceType, opts) => {
     if (resourceType === "Encounter") {
       arrived += 1;
       if (arrived === 2) releaseGate();          // both callers have now asked "who is here" -
       await gate;                                // neither has seen the other's answer yet.
     }
-    return realLatestByType(tenantId, resourceType, limit);
+    return realPageByType(tenantId, resourceType, opts);
   };
   // Instrumented, not assumed: this is the SAME evidence a prior review demanded before trusting
   // this test's own claim - proof the bed-claim row itself, not the ordinary list-scan, is what
@@ -488,7 +488,7 @@ test("wrong-patient / bed-safety, THE ATOMIC PATH ITSELF: forced to race inside 
       as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regA.mrn, ward: "ICU", bed: "6", admittedAt: "2026-09-07T08:00:00.000Z" }),
       as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regB.mrn, ward: "ICU", bed: "6", admittedAt: "2026-09-07T08:00:01.000Z" }),
     ]);
-  } finally { RECORD.latestByType = realLatestByType; RECORD.append = realAppend; RECORD.latest = realLatest; }
+  } finally { RECORD.pageByType = realPageByType; RECORD.append = realAppend; RECORD.latest = realLatest; }
 
   assert.equal(arrived, 2, "both requests genuinely reached the list-scan before either was released - the race was real, not assumed");
   assert.equal(claimConflicts, 1, "claimBed()'s own append() genuinely threw VersionConflictError for the loser - the atomic path, not the list-scan, decided this");
@@ -2267,17 +2267,18 @@ test("a merge whose chain check cannot read the existing links is refused, not w
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
   const b = await secondPatient("Medical A", "34");
-  const real = RECORD.latestByType.bind(RECORD);
-  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+  // R4-2: the chain check pages every link (pageByType), so the fault is injected there.
+  const real = RECORD.pageByType.bind(RECORD);
+  RECORD.pageByType = async (tenantId, resourceType, opts) => {
     if (resourceType === "PatientLink") throw new Error("store unavailable");
-    return real(tenantId, resourceType, limit);
+    return real(tenantId, resourceType, opts);
   };
   try {
     const r = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason: "Same date of birth and mobile; confirmed at the desk." });
     assert.equal(r.__status, 502, JSON.stringify(r));
     assert.equal(r.error, "record_read_failed");
     assert.equal(r.written, 0);
-  } finally { RECORD.latestByType = real; }
+  } finally { RECORD.pageByType = real; }
   assert.equal((await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length, 0, "nothing was joined");
 });
 

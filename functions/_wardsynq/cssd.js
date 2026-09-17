@@ -20,7 +20,7 @@
  * (checked to exist), and the case's sets are listed from it: traceability from a patient to a load and back.
  */
 
-import { str, slug, baseOf, offOf, isoOk, newId, openSvc, writeFailure, readFailure } from "./support-common.js";
+import { str, slug, baseOf, offOf, isoOk, newId, openSvc, writeFailure, readFailure, readAllOf } from "./support-common.js";
 
 const SET_TYPE = "InstrumentSet";
 const LOAD_TYPE = "SterilizerLoad";
@@ -143,7 +143,7 @@ async function recordLoadResult(request, env, ctx) {
 
   /* The recall. Every cycle in the load gets a new version saying so; one that fails to write is named. */
   let cycles;
-  try { cycles = (await svc.list(CYCLE_TYPE, 5000)) || []; }
+  try { cycles = await readAllOf(svc, CYCLE_TYPE); }
   catch (e) { return { ...base, ok: false, status: 502, error: "recall_incomplete", written: 1, detail: "The failed result is recorded, but the sets in this load could not be read to recall them. Recall them by hand now.", loadId }; }
   const scope = recallScope(loadId, cycles);
   const notWritten = [];
@@ -174,7 +174,7 @@ async function cssdStep(request, env, ctx) {
     let set, cycles, kase;
     try {
       set = await svc.get(SET_TYPE, setId);
-      cycles = ((await svc.list(CYCLE_TYPE, 5000)) || []).filter((c) => str(c.setId) === setId);
+      cycles = (await readAllOf(svc, CYCLE_TYPE)).filter((c) => str(c.setId) === setId);
       kase = await caseFor(svc, ctx.caseId);
     } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
     if (!set) return { ...base, ok: false, status: 404, error: "set_not_found", written: 0 };
@@ -251,11 +251,11 @@ async function cssdBoard(request, env, ctx) {
   if (error) return { ...base, ...error };
   let sets, loads, cycles, cases;
   try {
-    [sets, loads, cycles] = await Promise.all([svc.list(SET_TYPE, 1000), svc.list(LOAD_TYPE, 1000), svc.list(CYCLE_TYPE, 5000)]);
+    [sets, loads, cycles] = await Promise.all([readAllOf(svc, SET_TYPE), readAllOf(svc, LOAD_TYPE), readAllOf(svc, CYCLE_TYPE)]);
     /* Theatre cases a set can be issued to or come back from: every case not abandoned, newest first. The
      * procedure and side, never the patient: CSSD links a set to a case, and the case knows the patient. */
     const at = (c) => str(c.ledger && c.ledger[0] && c.ledger[0].at);
-    cases = ((await svc.list("SurgicalCase", 1000)) || []).filter((c) => c && str(c.stage) !== "abandoned")
+    cases = (await readAllOf(svc, "SurgicalCase")).filter((c) => c && str(c.stage) !== "abandoned")
       .sort((a, b) => at(b).localeCompare(at(a))).slice(0, 100)
       .map((c) => ({ caseId: c.id, procedure: c.procedure || null, laterality: c.laterality || null, stage: c.stage || null, bookedAt: at(c) || null }));
   } catch (e) { return { ...base, ...readFailure(e) }; }
@@ -279,7 +279,7 @@ async function caseSets(request, env, ctx) {
   const { svc, error } = await openSvc(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, sets: [] };
   let cycles, loads;
-  try { cycles = (await svc.list(CYCLE_TYPE, 5000)) || []; loads = new Map(((await svc.list(LOAD_TYPE, 1000)) || []).map((l) => [l.id, l])); }
+  try { cycles = await readAllOf(svc, CYCLE_TYPE); loads = new Map((await readAllOf(svc, LOAD_TYPE)).map((l) => [l.id, l])); }
   catch (e) { return { ...base, ...readFailure(e), sets: [] }; }
   const sets = cycles.filter((c) => str(c.issued && c.issued.caseId) === caseId || str(c.usedInCaseId) === caseId).map((c) => {
     const l = loads.get(str(c.sterilised && c.sterilised.loadId));

@@ -21,7 +21,7 @@
  */
 
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { reconciliationOf } from "../../wardsynq/wardsynq-invoice.js";
 import { CLAIM_STATE } from "../../wardsynq/wardsynq-billing.js";
@@ -31,6 +31,14 @@ import { DETECTORS } from "./chart-completion.js";
 import { ADMISSION_CLASSES, OPEN } from "./migrate-inpatient.js";
 import { patientFlow } from "./patient-flow.js";
 import { wardMetrics } from "./ward-metrics.js";
+
+/* A report sums every record of its types (service.listAll, paged). Past READ_MAX the read throws and the report refuses
+ * (409) rather than print a short total. ponytail: each page re-groups every version; audit O20 is the upgrade. */
+const READ_MAX = 50000;
+const every = async (svc, type) => (await svc.listAll(type, { max: READ_MAX, throwOnTruncate: true })).rows;
+const readRefusal = (e) => e instanceof ListCeilingError
+  ? { ok: false, status: 409, error: e.code, detail: str(e.message) }
+  : { ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -84,8 +92,8 @@ async function billingReport(request, env, ctx) {
 
   const fromMs = Date.parse(str(ctx.from)), toMs = Date.parse(str(ctx.to));
   let invoices;
-  try { invoices = await svc.list("Invoice", 1000); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) }; }
+  try { invoices = await every(svc, "Invoice"); }
+  catch (e) { return { ...base, ...readRefusal(e) }; }
 
   const raised = (invoices || []).filter(Boolean).filter((inv) => {
     const raisedAt = ((inv.events || [])[0] || {}).at;
@@ -136,8 +144,8 @@ async function claimsReport(request, env, ctx) {
 
   const fromMs = Date.parse(str(ctx.from)), toMs = Date.parse(str(ctx.to));
   let claims;
-  try { claims = await svc.list("Claim", 1000); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) }; }
+  try { claims = await every(svc, "Claim"); }
+  catch (e) { return { ...base, ...readRefusal(e) }; }
 
   const rows = (claims || []).filter(Boolean).filter((c) => {
     const at = c.submittedAt || c.codedAt;
@@ -183,9 +191,9 @@ async function pharmacyReport(request, env, ctx) {
   let dispenses, orders, verifications;
   try {
     [dispenses, orders, verifications] = await Promise.all([
-      svc.list("MedicationDispense", 1000), svc.list("MedicationOrder", 1000), svc.list("MedicationVerification", 1000).catch(() => []),
+      every(svc, "MedicationDispense"), every(svc, "MedicationOrder"), every(svc, "MedicationVerification").catch((e) => { if (e instanceof ListCeilingError) throw e; return []; }),
     ]);
-  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) }; }
+  } catch (e) { return { ...base, ...readRefusal(e) }; }
 
   const issued = (dispenses || []).filter(Boolean).filter((d) =>
     !Number.isFinite(fromMs) && !Number.isFinite(toMs) ? true : inPeriod(d.dispensedAt, fromMs, toMs));
@@ -222,8 +230,9 @@ async function himReport(request, env, ctx) {
 
   let encounters, roiRequests;
   try {
-    [encounters, roiRequests] = await Promise.all([svc.list("Encounter", 500), svc.list("ROIRequest", 1000)]);
-  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) }; }
+    /* Open stays are the open census (listByStatus), not the oldest 500 encounters of every class. */
+    [encounters, roiRequests] = await Promise.all([svc.listByStatus("Encounter", [OPEN]), every(svc, "ROIRequest")]);
+  } catch (e) { return { ...base, ...readRefusal(e) }; }
 
   const rules = (ctx.patientRules && typeof ctx.patientRules === "object") ? ctx.patientRules : {};
   const openTypes = Object.keys(rules).filter((t) => DETECTORS[t] && rules[t]);

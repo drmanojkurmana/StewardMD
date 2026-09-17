@@ -599,8 +599,13 @@ async function vitalPendingOrPrefill(request, env, ctx, kind, q, today) {
   if (!/^\d{4}-\d{2}$/.test(period)) return { ok: false, status: 422, error: "bad_period", message: "Give the month as YYYY-MM." };
   /* WHAT IS STILL OWED TO THE REGISTRAR: every delivery and every death recorded on a chart this month that has no
    * report yet. Read from the record, so a birth nobody reported cannot fall out of the register by being forgotten. */
-  let deliveries, patients;
-  try { [deliveries, patients] = await Promise.all([svc.list("DeliveryRecord", 1000), svc.list("Patient", 1000)]); }
+  /* Every delivery and every chart (service.listAll, paged; the old read was the OLDEST 1,000 of each, so a new birth or
+   * death was never owed). Past the ceiling the newest are not read and truncated says so. */
+  let deliveries, patients, truncated;
+  try {
+    const [d, p] = await Promise.all([svc.listAll("DeliveryRecord", { max: 50000 }), svc.listAll("Patient", { max: 100000 })]);
+    deliveries = d.rows; patients = p.rows; truncated = d.truncated || p.truncated;
+  }
   catch (e) { return { ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", message: "Deliveries and deaths could not be read. Do not read this as nothing owed." }; }
   const [births, stills, deaths, mccds] = await Promise.all(["birth", "stillbirth", "death", "mccd"].map((k) => listEntries({ ...ctx, kind: k })));
   const failed = [births, stills, deaths, mccds].find((x) => !x.ok);
@@ -617,7 +622,7 @@ async function vitalPendingOrPrefill(request, env, ctx, kind, q, today) {
     /* Reports written but not yet recorded as submitted to the Registrar, with their clocks. */
     notSubmitted: [...births.entries, ...stills.entries, ...deaths.entries].filter((e) => !(e.fields && e.fields.submittedOn))
       .map((e) => ({ kind: e.kind, id: e.id, eventDate: e.eventDate, clock: rbdClock(e.eventDate, today) })),
-    ...(deliveries.length >= 1000 || patients.length >= 1000 ? { truncated: true, truncatedWarning: "More than 1000 deliveries or patients exist; only the newest were read, so something owed may be missing here." } : {}),
+    ...(truncated ? { truncated: true, truncatedWarning: "More deliveries or patients exist than can be read at once; the newest were not read, so something owed may be missing here." } : {}),
     rule: "Model RBD Rules 1999 r.5(3): reported within twenty one days of the birth, death or still birth. After thirty days a late registration needs the District Registrar's permission and a fee (RBD Act s.13).",
   };
 }

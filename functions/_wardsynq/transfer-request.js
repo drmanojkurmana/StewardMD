@@ -204,8 +204,9 @@ async function listTransferRequests(request, env, ctx) {
   const encounterId = str(ctx.encounterId), ward = low(ctx.ward);
   let rows;
   try {
-    // ponytail: capped list of the latest version of every request; archive closed ones if a hospital outgrows it.
-    rows = await svc.list(XFER_TYPE, 2000);
+    // Every request (service.listAll, paged; the old read was the OLDEST 2,000, so a new request was missing).
+    // past 50,000 it throws (ListCeilingError) rather than answer short. ponytail: audit O20 is the upgrade if paging is slow.
+    rows = (await svc.listAll(XFER_TYPE, { max: 50000, throwOnTruncate: true })).rows;
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((x) => x.code), requests: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "Transfer requests could not be read. Do not read this as none.", requests: [] };
