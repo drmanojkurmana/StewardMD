@@ -73,7 +73,7 @@ import {
   listOpenCases, startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
   recordImplant, listImplants, recordPac, getPac, rescheduleCase, recordTheatreTime, flagUnplannedReturn,
 } from "../../_wardsynq/migrate-surgery.js";
-import { createTheatreSession, releaseTheatreSession, theatreUtilisation } from "../../_wardsynq/theatre.js";
+import { createTheatreSession, releaseTheatreSession, theatreUtilisation, theatreSettings } from "../../_wardsynq/theatre.js";
 import { recordDiagnosticArrival, recordDiagnosticStart, accessTimes } from "../../_wardsynq/access-times.js";
 import {
   recordPregnancy, getPregnancy, maternityStatus, maternityMeows, recordLabourObservation,
@@ -2630,6 +2630,8 @@ export async function onRequest(context) {
       }
       if (sub === "surgery-get" && method === "GET") {
         const r = await getSurgicalCase(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" });
+        // The hospital's reschedule reason codes, so the case screen offers exactly the codes the server accepts.
+        if (r.ok) r.theatreRules = theatreSettings((wsqCfg && wsqCfg.theatre) || null);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "surgery-list" && method === "GET") {
