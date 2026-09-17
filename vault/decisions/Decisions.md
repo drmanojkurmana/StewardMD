@@ -7814,3 +7814,25 @@ of compliance.js is untouched.
   a 12-digit Aadhaar-shaped value in name or address refuses the row and is masked in the mapping sample.
 - ponytail ceilings: 100 patients / 500 prices / 500 suppliers per run (Worker request budget); a Price list or supplier
   list of 500 or more cannot rule out a match and refuses the commit.
+
+## 2026-09-17 Pre-admission intake on the portal (branch pre-admission-intake, R3-3)
+
+- A form definition may say `audience: "patient"` (wardsynq-forms.js). Absent means staff. A patient form cannot name
+  staff roles. WardSynQ ships no questions: the hospital writes the form in Admin > Forms (JSON) and publishes it.
+- Portal routes POST /api/portal/intake-forms and /api/portal/intake-submit: session first, patient from the grant, new
+  grant section `forms` (a proxy needs it granted). Forms are listed and accepted only while the patient holds a waiting
+  AdmissionRequest with `plannedFor`; the submit names the request, checked to be the session patient's. A staff form
+  is refused 403 `not_for_patients`.
+- Stored as FormResponse `wsq-intake-<formKey>-<requestId>` with `origin: "patient"` and `reviewState`
+  submitted/accepted/returned. DEVIATION from the brief's `source: "patient"`: `source` on a record is its provenance
+  system; AppointmentRequest already marks a patient's own request with `origin: "patient"`. No terminology codes are
+  attached to patient answers. A resubmit is a new version until accepted; returned reopens it.
+- Staff: GET /ward/intake-responses (emr.view), POST /ward/intake-review (emr.treat, accept or return with a reason,
+  must name the version read). Accepting writes that FormResponse only; nothing goes into allergies, medicines or
+  problems. pathways.js never counts a patient-origin FormResponse as an assessment step, even once accepted.
+- Screen: ward.js bed waiting list (planned date input on "Ask for a bed"; "Pre-admission forms" on a planned row).
+- Privacy: portal access for a child is already gated at enrolment (DPDP r.10 via privacy-law.js childGate); intake is
+  for the patient's own care, so no second gate. The section points to the hospital's privacy notice on the same page.
+  Nothing leaves WardSynQ.
+- Not built: offering forms for a booked appointment (the brief's optional hospital setting); no setting exists, so it
+  behaves as off. Staff form-submit still accepts a patient-audience form as a staff-completed response.
