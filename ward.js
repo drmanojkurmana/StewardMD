@@ -11037,7 +11037,12 @@
    * payer, scheme, service and reason. st.desk: null = loading, { failed } = not loaded; each list is null when the
    * server could not read it, and says why. A row names the patient by MRN and opens the TPA screen for that patient. */
   function claimsDeskOpen() {
-    st.view = "claimsdesk"; st.desk = null; paint();
+    st.view = "claimsdesk"; st.desk = null; st.cashless = null; paint();
+    /* R3-5: current cashless stays whose pre-authorisation needs action (claims-ops.js cashlessStays), loaded on its own so
+     * either list failing leaves the other readable. st.cashless: null = loading, { failed } = not loaded. */
+    apiGet("/ward/cashless-stays?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (st.view !== "claimsdesk") return; st.cashless = r && r.ok ? r : { failed: true, status: r && r.__status }; paint(); })
+      .catch(function () { if (st.view === "claimsdesk") { st.cashless = { failed: true }; paint(); } });
     /* R2-2: the period the denial analytics cover, sent as the server's own from/to (claims-ops.js). A day picked here is
      * the whole local day. Neither set is all time, and the panel says which the server applied. */
     var from = st.deskFrom ? new Date(st.deskFrom + "T00:00:00") : null, to = st.deskTo ? new Date(st.deskTo + "T23:59:59.999") : null;
@@ -11059,8 +11064,8 @@
       '<label class="w-f"><span>' + wTH("ward.rcm-period-to", "to") + '</span><input id="wDeskTo" type="date" value="' + esc(state.deskTo || "") + '"></label>' +
       '<button class="w-btn ghost" data-w-act="deskperiod">' + ms("filter_alt") + wTH("ward.rcm-period-apply", "Show this period") + "</button>" +
       (state.deskFrom || state.deskTo ? '<button class="w-btn ghost" data-w-act="deskperiod:clear">' + ms("close") + wTH("ward.rcm-period-clear", "All time") + "</button>" : "") + "</div>";
-    if (!d) return '<div class="w-card">' + head + "<p class=\"w-empty\">" + wTH("ward.loading4", "Loading...") + "</p></div>";
-    if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("warning") + (d.status === 403
+    if (!d) return '<div class="w-card">' + head + cashlessDeskSection(state) + "<p class=\"w-empty\">" + wTH("ward.loading4", "Loading...") + "</p></div>";
+    if (d.failed) return '<div class="w-card">' + head + cashlessDeskSection(state) + '<p class="w-hint warn">' + ms("warning") + (d.status === 403
       ? wTH("ward.rcm-desk-forbidden", "Your role cannot open the claims desk.", null, "", 1)
       : wTH("ward.rcm-desk-failed", "The claims desk could not be loaded. Do not read this as nothing outstanding.", null, "", 1)) + "</p></div>";
     var who = function (r) { return "<b>" + esc(r.mrn || r.patientId) + "</b>"; };
@@ -11133,7 +11138,53 @@
     return '<div class="w-card">' + head +
       (d.truncated ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-truncated", "Only the latest {n} records of a kind were read, so these lists may be incomplete.", { n: esc(d.readLimit) }, "", 1) + "</p>" : "") +
       '<p class="w-hint">' + ms("info") + wTH("ward.rcm-desk-note", "Nothing here is sent to a payer. Queries, enhancements and denials are recorded as they arrive.") + "</p>" +
-      dnfb + unsub + queries + ageing + denials + "</div>";
+      cashlessDeskSection(state) + dnfb + unsub + queries + ageing + denials + "</div>";
+  }
+  /* R3-5 THE CASHLESS DESK: each current stay on an insurer, TPA or scheme payer whose pre-authorisation needs action, with
+   * the inputs every finding was computed from. An input that could not be read is said, never shown as covered. */
+  function cashlessDeskSection(state) {
+    var c = state.cashless;
+    var title = "<h4>" + wTH("ward.cl-title", "Cashless stays needing pre-authorisation action") + "</h4>";
+    if (!c) return '<div class="w-sub">' + title + '<p class="w-empty">' + wTH("ward.loading4", "Loading...") + "</p></div>";
+    if (c.failed) return '<div class="w-sub">' + title + '<p class="w-hint warn">' + ms("warning") + (c.status === 403
+      ? wTH("ward.cl-forbidden", "Your role cannot open the cashless stays list.", null, "", 1)
+      : wTH("ward.cl-failed", "The cashless stays could not be loaded. Do not read this as none needing action.", null, "", 1)) + "</p></div>";
+    if (c.stays == null) return '<div class="w-sub">' + title + '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-list-unreadable", "Could not be read, so this is not a list of none: {why}", { why: esc(c.unreadable || "") }, "why", 1) + "</p></div>";
+    var age = function (h) { return h == null ? "-" : h < 48 ? wT("ward.rcm-hours", "{n} h", { n: h }) : wT("ward.rcm-days", "{n} d", { n: Math.floor(h / 24) }); };
+    var issue = function (x) {
+      var warn = function (html) { return '<div class="w-warn">' + html + "</div>"; };
+      if (x.code === "no_preauth") return warn(wTH("ward.cl-no-preauth", "No pre-authorisation is recorded for this stay."));
+      if (x.code === "awaiting_decision") return warn(wTH("ward.cl-awaiting", "Requested {age} ago, no decision recorded.", { age: esc(age(x.ageHours)) }));
+      if (x.code === "refused") return warn(wTH("ward.cl-refused", "The payer refused the pre-authorisation on {at}.", { at: when(x.decidedAt) }) + (x.reason ? " " + esc(x.reason) : ""));
+      if (x.code === "expired") return warn(x.validUntil ? wTH("ward.cl-expired", "The approval was valid until {date}.", { date: esc(x.validUntil) }) : wTH("ward.cl-expired-state", "The pre-authorisation is recorded as expired."));
+      if (x.code === "expires_before_discharge") return warn(wTH("ward.cl-before-edd", "The approval is valid until {until}, before the expected discharge on {edd}.", { until: esc(x.validUntil), edd: esc(x.expectedDischarge) }));
+      if (x.code === "discharge_date_unreadable") return warn(wTH("ward.cl-edd-unreadable", "The expected discharge date could not be read, so the approval's validity was not checked against it: {why}", { why: esc(x.why) }, "why", 1));
+      if (x.code === "amount_not_recorded") return warn(wTH("ward.cl-no-amount", "The approved amount is not recorded, so it was not compared with the running bill."));
+      if (x.code === "bill_unreadable") return warn(wTH("ward.cl-bill-unreadable", "The running bill could not be read, so the approved {amount} was not compared with it: {why}", { amount: esc(x.authorizedAmount), why: esc(x.why) }, "why", 1));
+      if (x.code === "below_bill") return warn(wTH("ward.cl-below-bill", "Approved {amount} is below the running bill of {bill}.", { amount: esc(x.authorizedAmount), bill: esc(x.bill) }));
+      if (x.code === "payer_query_open") return warn(wTH("ward.cl-queries", "Open payer queries: {n}.", { n: esc(x.count) }));
+      if (x.code === "payer_not_in_list") return '<div class="w-dt-times">' + wTH("ward.cl-payer-missing", "This payer is not in the hospital's payer list, so its kind is not known.") + "</div>";
+      if (x.code === "payer_kind_not_recorded") return '<div class="w-dt-times">' + wTH("ward.cl-kind-missing", "The kind of payer is not recorded on its contract.") + "</div>";
+      return "";
+    };
+    var inputs = function (r) {
+      var p = r.preAuth, b = r.bill || {};
+      return '<div class="w-dt-times">' + (p
+        ? wTH("ward.cl-preauth-input", "Pre-authorisation: {state}, recorded {at}, valid until {until}, approved {amount}", { state: p.state === "approved" ? wTH("ward.cl-state-approved", "approved") : p.state === "requested" ? wTH("ward.cl-state-requested", "requested")
+          : p.state === "refused" ? wTH("ward.cl-state-refused", "refused") : p.state === "expired" ? wTH("ward.cl-state-expired", "expired") : "-", at: when(p.recordedAt), until: esc(p.validUntil || "-"), amount: esc(p.authorizedAmount == null ? "-" : p.authorizedAmount) })
+        : wTH("ward.cl-preauth-none-input", "Pre-authorisation: none")) +
+        " &middot; " + (b.unreadable ? wTH("ward.cl-bill-input-unread", "Running bill: not read")
+          : b.source === "invoice" ? wTH("ward.cl-bill-input-invoice", "Running bill: {amount} on {n} bills raised", { amount: esc(b.amount), n: esc(b.invoices) })
+          : wTH("ward.cl-bill-input-capture", "Running bill: {amount} captured so far, not yet billed", { amount: esc(b.amount) }) + (b.unpricedItems ? " (" + wTH("ward.cl-unpriced", "{n} items have no price, so the bill may be higher", { n: esc(b.unpricedItems) }) + ")" : "")) +
+        " &middot; " + (r.expectedDischarge === false ? wTH("ward.cl-edd-input-unread", "Expected discharge: not read") : wTH("ward.cl-edd-input", "Expected discharge: {date}", { date: esc(r.expectedDischarge || "-") })) + "</div>";
+    };
+    return '<div class="w-sub">' + title +
+      (c.truncated ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-truncated", "Only the latest {n} records of a kind were read, so these lists may be incomplete.", { n: esc(c.readLimit) }, "", 1) + "</p>" : "") +
+      (c.stays.length ? '<ul class="w-mini">' + c.stays.map(function (r) {
+        return '<li class="w-mini-row"><div><b>' + esc(r.mrn || r.patientId) + "</b>" + (r.payerName ? " &middot; " + esc(r.payerName) : "") + (r.ward ? " &middot; " + esc(r.ward) : "") +
+          " &middot; " + wTH("ward.cl-admitted", "admitted {at}", { at: when(r.admittedAt) }) + r.issues.map(issue).join("") + inputs(r) + "</div>" +
+          '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="deskopen:' + esc(r.patientId) + "|" + esc(r.encounterId || "") + '">' + ms("open_in_new") + wTH("ward.rcm-open", "Open") + "</button></div></li>";
+      }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.cl-none", "No current cashless stay read needs pre-authorisation action.") + "</p>") + "</div>";
   }
   function cashierOpen() {
     st.view = "cashier"; st.cashier = {}; paint();

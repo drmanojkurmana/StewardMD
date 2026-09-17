@@ -124,6 +124,40 @@ test("CLAIMS DESK PERIOD: the request carries from and to; clearing asks for all
   assert.match(desk({ from: "2026-08-01T00:00:00.000Z", to: "2026-08-31T12:00:00.000Z" }), /Denied from 2026-08-0\d to 2026-08-3\d/);
 });
 
+test("CASHLESS STAYS (R3-5): the desk asks /ward/cashless-stays; loading, failed, unreadable and none are four different things; each finding shows its inputs", async () => {
+  const { W, calls } = load((url) => (url.includes("/ward/cashless-stays") ? { ok: true, stays: [], unreadable: null } : url.includes("/ward/rcm-worklists") ? { ok: true } : null));
+  Object.assign(W._st, { orgId: "org-1" });
+  W._dispatch("claimsdesk");
+  await tick();
+  assert.ok(calls.some((c) => c.url.includes("/ward/cashless-stays?orgId=org-1")), "the desk loads the cashless list");
+  const DESK = { ok: true, denialReasonsConfigured: true, dnfb: [], unsubmitted: [], queries: [], ageing: null, unreadable: {}, period: {}, denials: { count: 0, byPayer: [], byScheme: [], byService: [], byReason: [], claims: [], disallowances: [] } };
+  const view = (cashless, desk) => text(render(W, { view: "claimsdesk", desk: desk === undefined ? DESK : desk, cashless }));
+  assert.match(view(null), /Cashless stays needing pre-authorisation action Loading/);
+  assert.match(view({ failed: true }), /The cashless stays could not be loaded\. Do not read this as none needing action\./);
+  assert.match(view({ failed: true }, { failed: true }), /cashless stays could not be loaded[\s\S]*claims desk could not be loaded/, "either list failing leaves the other said");
+  const unread = view({ ok: true, stays: null, unreadable: "PreAuthorisation: could not be read" });
+  assert.match(unread, /Could not be read, so this is not a list of none: PreAuthorisation: could not be read/);
+  assert.ok(!/No current cashless stay/.test(unread));
+  assert.match(view({ ok: true, stays: [] }), /No current cashless stay read needs pre-authorisation action\./);
+  const html = render(W, { view: "claimsdesk", desk: DESK, cashless: { ok: true, stays: [
+    { patientId: "opd-pat-a1", mrn: "A1", encounterId: "e1", payerName: "Star Health", ward: "Medical A", admittedAt: "2026-09-10T06:00:00Z",
+      preAuth: { id: "p1", state: "approved", recordedAt: "2026-09-10T08:00:00Z", validUntil: "2026-09-15", authorizedAmount: 20000 },
+      bill: { source: "invoice", amount: 30000, invoices: 1 }, expectedDischarge: "2026-09-22",
+      issues: [{ code: "expired", validUntil: "2026-09-15" }, { code: "below_bill", authorizedAmount: 20000, bill: 30000, source: "invoice" }] },
+    { patientId: "opd-pat-a2", mrn: "A2", encounterId: "e2", payerName: "MD India", admittedAt: "2026-09-10T06:00:00Z", preAuth: null,
+      bill: { unreadable: "Invoice: could not be read" }, expectedDischarge: false, issues: [{ code: "no_preauth" }, { code: "payer_kind_not_recorded" }] },
+  ] } });
+  const t = text(html);
+  assert.match(t, /A1 · Star Health · Medical A/);
+  assert.match(t, /The approval was valid until 2026-09-15\./);
+  assert.match(t, /Approved 20000 is below the running bill of 30000\./);
+  assert.match(t, /Pre-authorisation: approved, recorded .*, valid until 2026-09-15, approved 20000 · Running bill: 30000 on 1 bills raised · Expected discharge: 2026-09-22/);
+  assert.match(t, /No pre-authorisation is recorded for this stay\./);
+  assert.match(t, /Running bill: not read · Expected discharge: not read/);
+  assert.match(t, /The kind of payer is not recorded on its contract\./);
+  assert.match(html, /data-w-act="deskopen:opd-pat-a2\|e2"/);
+});
+
 test("THEATRE DELAY FORECAST: minutes per case with the cases behind each day, and the cases with no scheduled start said", () => {
   const { W } = load();
   const twin = (forecast) => text(render(W, { view: "twin", twin: { snapshot: { generatedAt: "2026-09-17T10:00:00Z", sections: {}, notBuilt: {} }, loaded: true, forecast } }));
