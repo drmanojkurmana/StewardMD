@@ -43,6 +43,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { patientIdForMrn } from "./opd-identity.js";
 import { recordConsent as writePatientConsent } from "./consent.js";
 import { resolveCoding } from "./code-sets.js";
+import { theatreSettings } from "./theatre.js";
 
 const CASE_TYPE = "SurgicalCase";
 const ANES_TYPE = "AnesthesiaRecord";
@@ -87,7 +88,7 @@ function writeFailure(e, extra) {
  *  CHECKLIST_INCOMPLETE, SIGNATURES_NOT_INDEPENDENT, SIGN_IN_INCOMPLETE, ...) - shown verbatim,
  *  never paraphrased into a generic failure. */
 function caseRefusal(base, e, extra) {
-  return { ...base, ok: false, status: e && e.code === "PAC_READ_FAILED" ? 502 : e && ["NO_PATIENT", "NO_ACTOR", "NO_PROCEDURE", "NO_LATERALITY"].includes(e.code) ? 422 : 409, error: "surgical_refused", code: (e && e.code) || null, detail: str(e && e.message), ...extra };
+  return { ...base, ok: false, status: e && e.code === "PAC_READ_FAILED" ? 502 : e && ["NO_PATIENT", "NO_ACTOR", "NO_PROCEDURE", "NO_LATERALITY", "BAD_TIME", "BAD_KIND", "BAD_VALUE", "REASON_REQUIRED"].includes(e.code) ? 422 : 409, error: "surgical_refused", code: (e && e.code) || null, detail: str(e && e.message), ...extra };
 }
 
 const engine = new SurgicalCase({});
@@ -104,6 +105,11 @@ async function bookSurgicalCase(request, env, ctx) {
   const mrn = str(b.mrn);
   const patientId = patientIdForMrn(mrn);
   if (!patientId) return { ...base, ok: false, status: 422, error: "no_patient_identity", written: 0 };
+  /* The scheduled start and planned minutes are optional, and recorded only as given: a case booked with no time has no
+   * scheduled start, and the theatre report says so rather than taking the moment of booking for one. */
+  if (str(b.scheduledAt) && !Number.isFinite(Date.parse(str(b.scheduledAt)))) return { ...base, ok: false, status: 422, error: "bad_scheduled_at", detail: "the scheduled start is not a date and time", written: 0 };
+  const plannedMinutes = b.minutes == null || b.minutes === "" ? null : Number(b.minutes);
+  if (plannedMinutes != null && (!Number.isInteger(plannedMinutes) || plannedMinutes < 1 || plannedMinutes > 1440)) return { ...base, ok: false, status: 422, error: "bad_minutes", detail: "planned minutes are 1 to 1440", written: 0 };
   const bookedAt = str(b.scheduledAt) || new Date().toISOString();
   const caseId = caseIdFor(patientId, b.procedure, bookedAt);
   if (!caseId) return { ...base, ok: false, status: 422, error: "procedure_required", written: 0 };
@@ -123,6 +129,10 @@ async function bookSurgicalCase(request, env, ctx) {
   catch (e) { return caseRefusal(base, e, { written: 0 }); }
   c.id = caseId;
   if (procedureCoding) c.procedureCoding = procedureCoding;
+  c.scheduledAt = str(b.scheduledAt) ? new Date(Date.parse(str(b.scheduledAt))).toISOString() : null;
+  c.firstScheduledAt = c.scheduledAt;
+  c.plannedMinutes = plannedMinutes;
+  c.theatreId = str(b.theatre) || null;
 
   const enc = Encounter({
     id: encounterIdForCase(caseId), patientId, class: SURGERY, status: OPEN,
@@ -228,6 +238,79 @@ const timeOutCase = (request, env, ctx) => mutateCase(request, env, ctx, (c) => 
 const inciseCase = (request, env, ctx) => mutateCase(request, env, ctx, (c, r) => engine.incise(c, r.actor.id));
 const signOutCase = (request, env, ctx) => mutateCase(request, env, ctx, (c) => engine.signOut(c, ctx.submission || {}));
 const abandonCase = (request, env, ctx) => mutateCase(request, env, ctx, (c, r) => engine.abandon(c, r.actor.id, str(ctx.reason)));
+
+/* ---- theatre times, rescheduling and unplanned return (P3 theatre-opd-access, 2026-09-17) ----------------------
+ * What theatre.js measures, recorded on the case by a person. Nothing here is inferred: a time not recorded stays
+ * absent and the report lists it as missing. Every change is also written to the case ledger, and the record service
+ * keeps every earlier version. */
+const LIVE_BEFORE_KNIFE = ["booked", "marked", "signed-in", "timed-out"];
+const refuseIf = (cond, message, code) => { if (cond) throw new SurgicalSafetyError(message, code); };
+/** A stated time, or now. A time more than five minutes ahead is refused: it has not happened yet. */
+function statedTime(v) {
+  if (!str(v)) return new Date().toISOString();
+  const t = Date.parse(str(v));
+  refuseIf(!Number.isFinite(t), "the time is not a date and time", "BAD_TIME");
+  refuseIf(t > Date.now() + 5 * 60000, "the time is in the future", "BAD_TIME");
+  return new Date(t).toISOString();
+}
+
+/** ctx: { migration, caseId, kind: "postponed"|"cancelled", toStart?, reasonCode?, reason, theatre (settings) } */
+const rescheduleCase = (request, env, ctx) => mutateCase(request, env, ctx, async (c, r) => {
+  const kind = str(ctx.kind), reason = str(ctx.reason).slice(0, 500), code = str(ctx.reasonCode);
+  const reasons = theatreSettings(ctx.theatre).rescheduleReasons;
+  refuseIf(kind !== "postponed" && kind !== "cancelled", "say whether the case is postponed or cancelled", "BAD_KIND");
+  refuseIf(reason.length < 3, "say why the case is rescheduled", "REASON_REQUIRED");
+  /* The hospital's reason codes, when it has set them, are the only codes accepted; with none set the reason is words only. */
+  refuseIf(reasons.length > 0 && !reasons.some((x) => x.code === code), `choose one of the hospital's reason codes: ${reasons.map((x) => x.code).join(", ")}`, "REASON_REQUIRED");
+  refuseIf(!LIVE_BEFORE_KNIFE.includes(c.stage), `a case at stage ${c.stage} is not rescheduled; a case already under way is abandoned instead`, "OUT_OF_SEQUENCE");
+  const at = new Date().toISOString();
+  const entry = { kind, at, by: r.actor.id, reasonCode: reasons.length ? code : null, reason, fromStart: c.scheduledAt || null, toStart: null };
+  if (kind === "postponed") {
+    const to = Date.parse(str(ctx.toStart));
+    refuseIf(!Number.isFinite(to), "a postponed case needs its new start", "BAD_TIME");
+    refuseIf(c.scheduledAt && Date.parse(c.scheduledAt) === to, "the new start is the same as the current one", "BAD_TIME");
+    entry.toStart = new Date(to).toISOString();
+    if (!c.firstScheduledAt) c.firstScheduledAt = c.scheduledAt || null;
+    c.scheduledAt = entry.toStart;
+    c.ledger.push({ at, event: "postponed", actorId: r.actor.id, detail: `${entry.fromStart || "no time"} to ${entry.toStart}: ${reason}` });
+  } else {
+    await engine.abandon(c, r.actor.id, reason);
+    c.ledger.push({ at, event: "cancelled-before-surgery", actorId: r.actor.id, detail: reason });
+  }
+  c.reschedules = [...(Array.isArray(c.reschedules) ? c.reschedules : []), entry];
+  return c;
+});
+
+/** ctx: { migration, caseId, event: "in-room"|"out-of-room", at?, correctionReason? } */
+const recordTheatreTime = (request, env, ctx) => mutateCase(request, env, ctx, (c, r) => {
+  const event = str(ctx.event);
+  refuseIf(event !== "in-room" && event !== "out-of-room", "say whether the patient entered or left the theatre", "BAD_KIND");
+  refuseIf(c.stage === "abandoned", "this case was abandoned", "ABANDONED");
+  const at = statedTime(ctx.at), key = event === "in-room" ? "inRoomAt" : "outRoomAt";
+  const t = { ...(c.theatreTimes || {}) };
+  const correction = str(ctx.correctionReason).slice(0, 500);
+  refuseIf(t[key] && correction.length < 3, `this time is already recorded (${t[key]}); a change needs a reason`, "ALREADY_RECORDED");
+  refuseIf(key === "outRoomAt" && !t.inRoomAt, "record when the patient entered the theatre first", "OUT_OF_SEQUENCE");
+  refuseIf(key === "outRoomAt" && Date.parse(at) < Date.parse(t.inRoomAt), "the patient cannot leave before entering", "BAD_TIME");
+  refuseIf(key === "inRoomAt" && t.outRoomAt && Date.parse(at) > Date.parse(t.outRoomAt), "the patient cannot enter after leaving", "BAD_TIME");
+  if (t[key]) t.corrections = [...(t.corrections || []), { field: key, was: t[key], now: at, reason: correction, by: r.actor.id, at: new Date().toISOString() }];
+  t[key] = at; t[key.replace("At", "By")] = r.actor.id;
+  c.theatreTimes = t;
+  c.ledger.push({ at: new Date().toISOString(), event, actorId: r.actor.id, detail: at });
+  return c;
+});
+
+/** ctx: { migration, caseId, value: boolean, indexCaseId?, reason? } - the surgeon's statement that this operation was, or
+ *  was not, an unplanned return to theatre for a complication of an earlier operation in the same admission (NABH #6). */
+const flagUnplannedReturn = (request, env, ctx) => mutateCase(request, env, ctx, (c, r) => {
+  refuseIf(typeof ctx.value !== "boolean", "say yes or no", "BAD_VALUE");
+  const reason = str(ctx.reason).slice(0, 500);
+  refuseIf(ctx.value && reason.length < 3, "name the complication that brought the patient back", "REASON_REQUIRED");
+  refuseIf(!c.incisionAt, "only an operation that took place can be a return to theatre", "OUT_OF_SEQUENCE");
+  c.unplannedReturn = { value: ctx.value, indexCaseId: str(ctx.indexCaseId) || null, reason: reason || null, by: r.actor.id, at: new Date().toISOString(), previous: c.unplannedReturn ? { value: c.unplannedReturn.value, by: c.unplannedReturn.by, at: c.unplannedReturn.at } : null };
+  c.ledger.push({ at: c.unplannedReturn.at, event: "unplanned-return", actorId: r.actor.id, detail: ctx.value ? `yes: ${reason}` : "no" });
+  return c;
+});
 
 /** ctx: { migration, caseId, note?, actorDeps, recordDeps } - the operative record, refused unless
  *  sign-in/time-out/sign-out are all complete (wardsynq-surgical.js's own MILESTONE_BYPASSED rule). */
@@ -605,7 +688,7 @@ async function listImplants(request, env, ctx) {
 export {
   CASE_TYPE, ANES_TYPE, IMPLANT_TYPE, SURGERY, PACU, caseIdFor, encounterIdForCase,
   bookSurgicalCase, recordCaseConsent, markCaseSite, signInCase, timeOutCase, inciseCase,
-  signOutCase, abandonCase, recordOperativeNote, dispositionCase, getSurgicalCase, listSurgicalCases,
+  signOutCase, abandonCase, rescheduleCase, recordTheatreTime, flagUnplannedReturn, recordOperativeNote, dispositionCase, getSurgicalCase, listSurgicalCases,
   listOpenCases,
   startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
   recordImplant, listImplants,

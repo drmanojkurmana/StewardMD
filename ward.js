@@ -997,6 +997,8 @@
         "<label class=\"w-f\"><span>" + wTH("ward.site", "Site") + "</span><input id=\"wSurgSite\" type=\"text\" autocomplete=\"off\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.laterality", "Laterality") + "</span><select id=\"wSurgLaterality\"><option value=\"not-applicable\">" + wTH("ward.not-applicable", "Not applicable") + "</option><option value=\"left\">Left</option><option value=\"right\">Right</option><option value=\"bilateral\">Bilateral</option></select></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.theatre", "Theatre") + "</span><input id=\"wSurgTheatre\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-ot-1", "e.g. OT-1") + "\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.surg-scheduled-start", "Scheduled start") + "</span><input id=\"wSurgWhen\" type=\"datetime-local\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.surg-planned-minutes", "Planned minutes") + "</span><input id=\"wSurgMinutes\" type=\"number\" min=\"1\" max=\"1440\" inputmode=\"numeric\"></label>" +
         "</div>" + codePickerHtml(state, "surg") +
         '<button class="w-btn tiny go" data-w-act="surgerybook">' + ms("check") + wTH("ward.book-case", "Book case") + "</button>" : "") +
       "</div>";
@@ -1004,6 +1006,7 @@
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
       "<div><b>" + wTH("ward.surgery-ot-pacu", "Surgery / OT / PACU") + "</b></div>" +
       '<button class="w-btn tiny go" data-w-act="surgerybookopen">' + ms("add_circle") + wTH("ward.book", "Book") + "</button>" +
+      '<button class="w-btn tiny ghost" data-w-act="theatreuse">' + ms("schedule") + wTH("ward.theatre-use", "Theatre sessions and use") + "</button>" +
       "<button class=\"w-ic\" data-w-act=\"surgeryboard\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       '<div class="w-card">' +
       (state.surgErr ? '<p class="w-hint warn">' + ms("error") + esc(state.surgErr) + wEnglishOf(state.surgErr) + "</p>"
@@ -1097,7 +1100,176 @@
       '<button class="w-btn ghost" data-w-act="surgerydisposition:direct-discharge">' + ms("home") + wTH("ward.direct-discharge", "Direct discharge") + "</button>" +
       "</div></div>";
 
-    return header + consentCard + pacCard(state) + siteCard + checklistCard + anesCard + implantCard + dispositionCard;
+    return header + consentCard + pacCard(state) + siteCard + checklistCard + anesCard + implantCard + theatreTimesCard(state) + dispositionCard;
+  }
+
+  /* THEATRE TIMES, RESCHEDULING AND RETURN TO THEATRE (P3 theatre-opd-access). Every time shown is one a person recorded;
+   * a time not recorded says so and is never filled from the booking. The postpone and cancel dialogs offer the hospital's
+   * own reason codes, which the server also enforces. */
+  var SURG_BEFORE_KNIFE = ["booked", "marked", "signed-in", "timed-out"];
+  function theatreTimesCard(state) {
+    var d = state.surgCase || {}, c = d.case; if (!c) return "";
+    var t = c.theatreTimes || {};
+    var notRec = wTH("ward.surg-not-recorded", "not recorded");
+    var moves = (c.reschedules || []).map(function (m) {
+      return "<li><b>" + esc(m.kind === "cancelled" ? wT("ward.surg-cancelled-before", "Cancelled before surgery") : wT("ward.surg-postponed", "Postponed")) + "</b> " +
+        (m.kind === "postponed" ? esc(when(m.fromStart)) + " &rarr; " + esc(when(m.toStart)) : "") +
+        "<br><small>" + (m.reasonCode ? esc(m.reasonCode) + ": " : "") + esc(m.reason) + " &middot; " + esc(when(m.at)) + "</small></li>";
+    }).join("");
+    var ur = c.unplannedReturn;
+    return '<div class="w-card"><div class="w-card-h">' + ms("schedule") + "<h3>" + wTH("ward.surg-theatre-times", "Theatre times") + "</h3></div>" +
+      '<ul class="w-mini">' +
+      "<li><b>" + wTH("ward.surg-scheduled-start", "Scheduled start") + "</b><span>" + (c.scheduledAt ? esc(when(c.scheduledAt)) : notRec) +
+        (c.firstScheduledAt && c.firstScheduledAt !== c.scheduledAt ? " &middot; " + wTH("ward.surg-first-booked", "first booked {at}", { at: esc(when(c.firstScheduledAt)) }, "at") : "") +
+        (c.plannedMinutes ? " &middot; " + wTH("ward.surg-minutes-planned", "{n} minutes planned", { n: esc(c.plannedMinutes) }, "n") : "") + "</span></li>" +
+      "<li><b>" + wTH("ward.surg-in-room", "Patient in theatre") + "</b><span>" + (t.inRoomAt ? esc(when(t.inRoomAt)) : notRec) + "</span></li>" +
+      "<li><b>" + wTH("ward.surg-out-room", "Patient out of theatre") + "</b><span>" + (t.outRoomAt ? esc(when(t.outRoomAt)) : notRec) + "</span></li>" +
+      "</ul>" +
+      (c.stage !== "abandoned" ? '<div class="w-actions">' +
+        '<button class="w-btn tiny" data-w-act="surgtime:in-room">' + ms("login") + wTH("ward.surg-record-in", "Record in theatre") + "</button>" +
+        '<button class="w-btn tiny" data-w-act="surgtime:out-of-room">' + ms("logout") + wTH("ward.surg-record-out", "Record out of theatre") + "</button></div>" : "") +
+      (moves ? "<h4>" + wTH("ward.surg-reschedules", "Rescheduling") + '</h4><ul class="w-mini">' + moves + "</ul>" : "") +
+      (SURG_BEFORE_KNIFE.indexOf(c.stage) >= 0 ? '<div class="w-actions">' +
+        '<button class="w-btn tiny ghost" data-w-act="surgresched:postponed">' + ms("update") + wTH("ward.surg-postpone", "Postpone") + "</button>" +
+        '<button class="w-btn tiny ghost" data-w-act="surgresched:cancelled">' + ms("event_busy") + wTH("ward.surg-cancel-before", "Cancel before surgery") + "</button></div>" : "") +
+      (c.incisionAt ? "<h4>" + wTH("ward.surg-unplanned-return", "Unplanned return to theatre") + "</h4>" +
+        "<p>" + (!ur ? wTH("ward.surg-return-unanswered", "Not answered by the surgeon yet.")
+          : ur.value ? wTH("ward.surg-return-yes", "Yes: {reason}", { reason: esc(ur.reason || "") }, "reason") + (ur.indexCaseId ? " &middot; " + esc(ur.indexCaseId) : "")
+          : wTH("ward.surg-return-no", "No")) + "</p>" +
+        '<div class="w-actions"><button class="w-btn tiny ghost" data-w-act="surgreturn:yes">' + wTH("ward.surg-return-mark-yes", "This was an unplanned return") + "</button>" +
+        '<button class="w-btn tiny ghost" data-w-act="surgreturn:no">' + wTH("ward.surg-return-mark-no", "Not a return") + "</button></div>" : "") +
+      "</div>";
+  }
+  function surgPost(path, body, okMsg) {
+    var c = st.surgCase && st.surgCase.case; if (!c) return null;
+    st.busy = true; paint();
+    return apiPost(path, Object.assign({ orgId: st.orgId, caseId: c.id }, body))
+      .then(function (r) { if (settle(r, okMsg)) loadSurgeryCase(c.id); else paint(); return r; })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+  }
+  var isoOfLocal = function (v) { var d = v ? new Date(v) : null; return d && !isNaN(d.getTime()) ? d.toISOString() : ""; };
+  function surgTime(event) {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    var key = event === "in-room" ? "inRoomAt" : "outRoomAt", already = !!(c.theatreTimes && c.theatreTimes[key]);
+    var fields = [{ key: "at", type: "datetime", label: wTH("ward.surg-time-blank-now", "Time (leave blank for now)") }];
+    if (already) fields.push({ key: "correction", type: "textarea", label: wTH("ward.surg-correction-reason", "Why the recorded time is being changed"), required: wT("ward.a-reason-is-required", "A reason is required.") });
+    askFor({ title: event === "in-room" ? wTH("ward.surg-record-in", "Record in theatre") : wTH("ward.surg-record-out", "Record out of theatre"), icon: "schedule", ok: wTH("ward.record2", "Record"), fields: fields }, function (v) {
+      return surgPost("/ward/surgery-times", { event: event, at: isoOfLocal(v.at) || undefined, correctionReason: v.correction || undefined }, wT("ward.surg-time-recorded", "Time recorded."));
+    });
+  }
+  function surgResched(kind) {
+    var d = st.surgCase || {}, codes = (d.rules && d.rules.rescheduleReasons) || [];
+    var fields = [];
+    if (kind === "postponed") fields.push({ key: "to", type: "datetime", label: wTH("ward.surg-new-start", "New start"), required: wT("ward.surg-new-start-required", "A postponed case needs its new start.") });
+    if (codes.length) fields.push({ key: "code", type: "select", label: wTH("ward.surg-reason-code", "Reason code"), options: codes.map(function (x) { return [x.code, esc(x.label)]; }), value: codes[0].code });
+    fields.push({ key: "reason", type: "textarea", label: wTH("ward.surg-why-rescheduled", "Why"), required: wT("ward.a-reason-is-required", "A reason is required.") });
+    askFor({ title: kind === "postponed" ? wTH("ward.surg-postpone", "Postpone") : wTH("ward.surg-cancel-before", "Cancel before surgery"), icon: "update", danger: kind === "cancelled", ok: wTH("ward.record2", "Record"), fields: fields }, function (v) {
+      return surgPost("/ward/surgery-reschedule", { kind: kind, toStart: isoOfLocal(v.to) || undefined, reasonCode: v.code || undefined, reason: v.reason }, wT("ward.surg-rescheduled", "Recorded."));
+    });
+  }
+  function surgReturn(yes) {
+    var fields = yes ? [{ key: "reason", type: "textarea", label: wTH("ward.surg-return-complication", "The complication that brought the patient back"), required: wT("ward.a-reason-is-required", "A reason is required.") },
+      { key: "index", type: "text", label: wTH("ward.surg-index-case", "Earlier case in this admission (case id, optional)") }] : [];
+    askFor({ title: yes ? wTH("ward.surg-return-mark-yes", "This was an unplanned return") : wTH("ward.surg-return-mark-no", "Not a return"), icon: "replay", ok: wTH("ward.record2", "Record"), fields: fields }, function (v) {
+      return surgPost("/ward/surgery-return", { value: !!yes, reason: v.reason || undefined, indexCaseId: v.index || undefined }, wT("ward.surg-rescheduled", "Recorded."));
+    });
+  }
+
+  /* THEATRE SESSIONS AND USE. The day's sessions per theatre, who holds them and whether they are released, booked and used
+   * minutes with the minutes they are divided from, the cases missing a time (listed, never counted as zero), the first case
+   * of the day against its scheduled start and the turnovers between cases. */
+  function theatreUseView(state) {
+    var u = state.theatreUse, day = state.theatreDay || "";
+    var head = "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
+      "<div><b>" + wTH("ward.theatre-use", "Theatre sessions and use") + "</b></div>" +
+      "<button class=\"w-ic\" data-w-act=\"theatreuse\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
+      '<div class="w-filter"><label class="w-f"><span>' + wTH("ward.tu-day", "Day") + '</span><input id="wTheatreDay" type="date" value="' + esc(day) + '"></label>' +
+      '<button class="w-btn ghost" data-w-act="theatreuseday">' + wTH("ward.show", "Show") + "</button></div>";
+    if (u === null || u === undefined) return head + '<div class="w-card"><p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    if (u === false || !u.ok) return head + '<div class="w-card"><p class="w-hint warn">' + ms("error") + wTH("ward.tu-failed", "Theatre use could not be loaded.", null, "", 1) + (state.theatreUseErr ? " " + esc(state.theatreUseErr) + wEnglishOf(state.theatreUseErr) : "") + "</p></div>";
+    var s = u.settings || {};
+    var pct = function (p, a, b) { return p == null ? wTH("ward.tu-no-session-minutes", "no session minutes") : wTH("ward.tu-pct-of", "{p}% ({a} of {b} minutes)", { p: esc(p), a: esc(a), b: esc(b) }, "p a b"); };
+    var rules = '<div class="w-card"><div class="w-card-h">' + ms("rule") + "<h3>" + wTH("ward.tu-rules", "Hospital rules") + "</h3></div>" +
+      '<ul class="w-mini"><li><b>' + wTH("ward.tu-release-hours", "Release unbooked session time") + "</b><span>" + (s.releaseHours == null ? wTH("ward.tu-not-configured-release", "not configured: only a person releases a session") : wTH("ward.tu-hours-before", "{n} hours before the session", { n: esc(s.releaseHours) }, "n")) + "</span></li>" +
+      "<li><b>" + wTH("ward.tu-grace", "First case on time within") + "</b><span>" + (s.firstCaseGraceMinutes == null ? wTH("ward.tu-not-configured-grace", "not configured: lateness is shown, not judged") : wTH("ward.tu-minutes-n", "{n} minutes", { n: esc(s.firstCaseGraceMinutes) }, "n")) + "</span></li>" +
+      "<li><b>" + wTH("ward.tu-reason-codes", "Reschedule reason codes") + "</b><span>" + ((s.rescheduleReasons || []).length ? esc(s.rescheduleReasons.map(function (x) { return x.label; }).join(", ")) : wTH("ward.tu-not-configured-codes", "not configured: a written reason only")) + "</span></li></ul>" +
+      '<button class="w-btn tiny ghost" data-w-act="theatrerules">' + ms("edit") + wTH("ward.tu-change-rules", "Change rules") + "</button></div>";
+    if (!u.theatresConfigured) return head + '<div class="w-card"><p class="w-empty">' + wTH("ward.tu-no-theatres", "No theatres are configured among this hospital's resources.") + "</p></div>" + rules;
+    var cards = (u.theatres || []).map(function (t) {
+      var sess = (t.sessions || []).map(function (x) {
+        var stt = x.status || {};
+        return "<li><b>" + esc(when(x.startAt)) + " &middot; " + esc(x.minutes) + "m &middot; " + esc((x.owner && x.owner.name) || "") + "</b>" +
+          '<span class="w-st ' + (stt.state === "held" ? "due" : "done") + '">' + (stt.state === "held" ? (stt.releasesAt ? wTH("ward.tu-held-until", "held until {at}", { at: esc(when(stt.releasesAt)) }, "at") : wTH("ward.tu-held", "held")) : stt.by === "rule" ? wTH("ward.tu-released-rule", "released by the rule at {at}", { at: esc(when(stt.releasedAt)) }, "at") : wTH("ward.tu-released-person", "released at {at}", { at: esc(when(stt.releasedAt)) }, "at")) + "</span>" +
+          "<br><small>" + wTH("ward.tu-session-mins", "booked {b} (owner {o}) &middot; released {r} &middot; used {u} minutes", { b: esc(x.bookedMinutes), o: esc(x.ownerBookedMinutes), r: esc(x.releasedMinutes), u: esc(x.usedMinutes) }, "b o r u") + (x.releaseReason ? " &middot; " + esc(x.releaseReason) : "") + "</small>" +
+          (stt.state === "held" ? '<button class="w-btn tiny ghost" data-w-act="theatrerelease:' + esc(x.sessionId) + '">' + wTH("ward.tu-release", "Release") + "</button>" : "") + "</li>";
+      }).join("");
+      var missing = (t.casesMissingTimes || []).map(function (m) { return "<li>" + esc(m.procedure || m.caseId) + " &middot; " + esc(when(m.scheduledAt)) + " &middot; " + wTH("ward.tu-missing", "missing: {what}", { what: esc(m.missing.join(", ")) }, "what") + "</li>"; }).join("");
+      var used = (t.cases || []).map(function (x) { return "<li>" + esc(x.procedure || x.caseId) + "<span>" + esc(when(x.inRoomAt)) + " &rarr; " + esc(when(x.outRoomAt)) + " &middot; " + esc(x.minutes) + "m</span></li>"; }).join("");
+      var first = (t.firstCases || []).map(function (f) {
+        return "<li>" + esc(f.day) + " &middot; " + esc(f.procedure || f.caseId) + "<span>" + wTH("ward.tu-first-case", "scheduled {s}, in theatre {i}", { s: esc(when(f.scheduledAt)), i: f.inRoomAt ? esc(when(f.inRoomAt)) : wT("ward.surg-not-recorded", "not recorded") }, "s i") +
+          (f.lateMinutes != null ? " &middot; " + wTH("ward.tu-late-min", "{n} minutes after", { n: esc(f.lateMinutes) }, "n") : "") +
+          " &middot; <b>" + (f.onTime === true ? wTH("ward.tu-on-time", "on time") : f.onTime === false ? wTH("ward.tu-late", "late") : wTH("ward.tu-not-judged", "not judged")) + "</b></span></li>";
+      }).join("");
+      var turns = (t.turnovers || []).map(function (x) { return "<li>" + esc(when(x.outRoomAt)) + " &rarr; " + esc(when(x.inRoomAt)) + "<span>" + esc(x.minutes) + "m</span></li>"; }).join("") +
+        (t.turnoverMissing || []).map(function (x) { return "<li>" + wTH("ward.tu-missing", "missing: {what}", { what: esc(x.missing.join(", ")) }, "what") + "</li>"; }).join("");
+      return '<div class="w-card"><div class="w-card-h">' + ms("meeting_room") + "<h3>" + esc(t.name) + "</h3></div>" +
+        "<p><b>" + wTH("ward.tu-booked", "Booked") + "</b> " + pct(t.bookedUtilisation, t.bookedMinutesInSessions, t.sessionMinutes) + "<br><b>" + wTH("ward.tu-used", "Used") + "</b> " + pct(t.usedUtilisation, t.usedMinutesInSessions, t.sessionMinutes) +
+        (t.bookedMinutesOutsideSessions ? "<br><small>" + wTH("ward.tu-outside", "{n} booked minutes outside any session", { n: esc(t.bookedMinutesOutsideSessions) }, "n") + "</small>" : "") + "</p>" +
+        "<h4>" + wTH("ward.tu-sessions", "Sessions") + "</h4>" + (sess ? '<ul class="w-mini">' + sess + "</ul>" : '<p class="w-empty">' + wTH("ward.tu-no-sessions", "No sessions on this day.") + "</p>") +
+        (used ? "<h4>" + wTH("ward.tu-cases-used", "Cases with both times") + '</h4><ul class="w-mini">' + used + "</ul>" : "") +
+        (missing ? "<h4>" + wTH("ward.tu-cases-missing", "Cases missing a time (not counted)") + '</h4><ul class="w-mini">' + missing + "</ul>" : "") +
+        (first ? "<h4>" + wTH("ward.tu-first-cases", "First case of the day") + '</h4><ul class="w-mini">' + first + "</ul>" : "") +
+        (turns ? "<h4>" + wTH("ward.tu-turnovers", "Turnover between cases") + '</h4><ul class="w-mini">' + turns + "</ul>" : "") + "</div>";
+    }).join("");
+    return head + (u.casesUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.tu-cases-unreadable", "Cases could not be read, so used minutes are not shown as zero but as not available.", null, "", 1) + "</p>" : "") +
+      '<div class="w-actions"><button class="w-btn go" data-w-act="theatresession">' + ms("add") + wTH("ward.tu-add-session", "Add a session") + "</button></div>" + cards + rules;
+  }
+  function theatreDayWindow(day) {
+    var d = day ? new Date(day + "T00:00:00") : new Date(); if (!day) d.setHours(0, 0, 0, 0);
+    return { from: d.toISOString(), to: new Date(d.getTime() + 86400000 - 1).toISOString() };
+  }
+  function loadTheatreUse() {
+    st.view = "theatreuse"; st.theatreUse = null; st.theatreUseErr = ""; paint();
+    var w = theatreDayWindow(st.theatreDay);
+    return apiGet("/ward/theatre-utilisation?orgId=" + encodeURIComponent(st.orgId) + "&from=" + encodeURIComponent(w.from) + "&to=" + encodeURIComponent(w.to))
+      .then(function (r) { if (r && r.ok) st.theatreUse = r; else { st.theatreUse = false; st.theatreUseErr = (r && (r.detail || r.error)) || ""; } paint(); })
+      .catch(function () { st.theatreUse = false; paint(); });
+  }
+  function theatrePost(path, body, okMsg) {
+    st.busy = true; paint();
+    return apiPost(path, Object.assign({ orgId: st.orgId }, body))
+      .then(function (r) { if (settle(r, okMsg)) loadTheatreUse(); else paint(); return r; })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+  }
+  function theatreSessionAdd() {
+    var ths = ((st.theatreUse && st.theatreUse.theatres) || []).map(function (t) { return [t.theatreId, esc(t.name)]; });
+    if (!ths.length) return;
+    askFor({ title: wTH("ward.tu-add-session", "Add a session"), icon: "add", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "theatre", type: "select", label: wTH("ward.theatre", "Theatre"), options: ths, value: ths[0][0] },
+      { key: "start", type: "datetime", label: wTH("ward.tu-session-start", "Session start"), required: wT("ward.tu-start-required", "A session needs a start.") },
+      { key: "minutes", type: "text", label: wTH("ward.minutes", "Minutes"), required: wT("ward.tu-minutes-required", "A session needs a length in minutes.") },
+      { key: "kind", type: "select", label: wTH("ward.tu-owner-kind", "Held for"), options: [["unit", wTH("ward.tu-owner-unit", "A unit")], ["surgeon", wTH("ward.surgeon", "Surgeon")]], value: "unit" },
+      { key: "owner", type: "text", label: wTH("ward.tu-owner-id", "Unit or surgeon (as bookings name it)"), required: wT("ward.tu-owner-required", "Name who holds the session.") },
+    ] }, function (v) {
+      return theatrePost("/ward/theatre-session", { theatreId: v.theatre, startAt: isoOfLocal(v.start), minutes: Number(v.minutes), ownerKind: v.kind, ownerId: v.owner, ownerName: v.owner }, wT("ward.tu-session-added", "Session added."));
+    });
+  }
+  function theatreRelease(sessionId) {
+    askReason(wTH("ward.tu-release-why", "Why is this session released?"), wT("ward.a-reason-is-required", "A reason is required."), null, function (reason) {
+      return theatrePost("/ward/theatre-session-release", { sessionId: sessionId, reason: reason }, wT("ward.tu-released", "Session released."));
+    });
+  }
+  function theatreRules() {
+    var s = (st.theatreUse && st.theatreUse.settings) || {};
+    askFor({ title: wTH("ward.tu-change-rules", "Change rules"), icon: "rule", ok: wTH("ward.save", "Save"), fields: [
+      { key: "release", type: "text", label: wTH("ward.tu-release-hours-field", "Release unbooked session time this many hours before (blank: never)"), value: s.releaseHours == null ? "" : s.releaseHours },
+      { key: "grace", type: "text", label: wTH("ward.tu-grace-field", "First case on time within this many minutes (blank: not judged)"), value: s.firstCaseGraceMinutes == null ? "" : s.firstCaseGraceMinutes },
+      { key: "codes", type: "textarea", label: wTH("ward.tu-codes-field", "Reschedule reasons, one per line (blank: a written reason only)"), value: (s.rescheduleReasons || []).map(function (x) { return x.label; }).join("\n") },
+    ] }, function (v) {
+      var theatre = { releaseHours: v.release === "" ? null : Number(v.release), firstCaseGraceMinutes: v.grace === "" ? null : Number(v.grace),
+        rescheduleReasons: String(v.codes || "").split("\n").map(function (x) { return x.trim(); }).filter(Boolean) };
+      return theatrePost("/org/update", { wardsynq: { theatre: theatre } }, wT("ward.tu-rules-saved", "Rules saved."));
+    });
   }
 
   function anesthesiaCard(state) {
@@ -6510,8 +6682,12 @@
         '<span class="w-st ' + esc(a.state) + '">' + esc(wTEn(APPT_STATE_WORDS[a.state]) || a.state) + "</span>" +
         (a.overbooked ? "<span class=\"w-tag warn\">" + wTH("ward.overbooked", "overbooked:") + " " + esc(a.overbookReason || "") + "</span>" : "") +
         (a.reason ? "<br><small>" + esc(a.reason) + "</small>" : "") +
-        (live ? '<div class="w-actions"><button class="w-btn tiny ghost" data-w-act="apptcancel:' + esc(a.appointmentId) + '">' + ms("close") + wTH("ward.cancel", "Cancel") + "</button>" +
-          '<button class="w-btn tiny ghost" data-w-act="apptdna:' + esc(a.appointmentId) + '">' + ms("event_busy") + "DNA</button></div>" : "") +
+        (a.arrivedAt ? "<br><small>" + wTH("ward.appt-arrived-at", "arrived {at}", { at: esc(when(a.arrivedAt)) }, "at") + "</small>" : "") +
+        (live ? '<div class="w-actions">' +
+          (a.state === "booked" ? '<button class="w-btn tiny" data-w-act="apptarrived:' + esc(a.appointmentId) + '">' + ms("how_to_reg") + wTH("ward.appt-mark-arrived", "Arrived") + "</button>" : "") +
+          '<button class="w-btn tiny" data-w-act="apptseen:' + esc(a.appointmentId) + '">' + ms("task_alt") + wTH("ward.appt-mark-seen", "Seen") + "</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="apptcancel:' + esc(a.appointmentId) + '">' + ms("close") + wTH("ward.cancel", "Cancel") + "</button>" +
+          (a.state === "booked" ? '<button class="w-btn tiny ghost" data-w-act="apptdna:' + esc(a.appointmentId) + '">' + ms("event_busy") + "DNA</button>" : "") + "</div>" : "") +
         "</li>";
     }).join("");
     var recallRows = (diary.recalls || []).map(function (r) {
@@ -6551,6 +6727,7 @@
       '<button class="w-btn" data-w-act="apptbook">' + ms("add") + wTH("ward.book", "Book") + "</button>" +
       '<button class="w-btn ghost" data-w-act="apptoverbook">' + ms("warning") + wTH("ward.book-anyway-overbook", "Book anyway (overbook)") + "</button>" +
       "</div></div>" +
+      accessTimesCard(sc) +
 
       '<div class="w-card"><div class="w-card-h">' + ms("meeting_room") + "<h3>" + wTH("ward.resources", "Resources") + "</h3></div>" +
       (resRows || "<p class=\"w-empty\">" + wTH("ward.no-bookable-resources-are-configured-for", "No bookable resources are configured for this hospital.") + "</p>") +
@@ -9421,6 +9598,7 @@
         : state.view === "inventory" ? inventoryView(state)
         : state.view === "surgery" ? surgeryBoardView(state)
         : state.view === "surgerycase" ? surgeryCaseView(state)
+        : state.view === "theatreuse" ? theatreUseView(state)
         : state.view === "oncology" ? oncologyView(state)
         : state.view === "cardiology" ? cardiologyView(state)
         : state.view === "radiology" ? radiologyView(state)
@@ -10077,10 +10255,11 @@
   // node instead of what was typed - the same bug the ICU admit checkbox had (Task 2.2's own report).
   function surgeryBook() {
     var lookup = st.surgMrnLookup; if (!lookup) return;
-    var procedure = val("wSurgProcedure"), site = val("wSurgSite"), theatre = val("wSurgTheatre");
+    var procedure = val("wSurgProcedure"), site = val("wSurgSite"), theatre = val("wSurgTheatre"), whenV = val("wSurgWhen"), minutes = val("wSurgMinutes");
     var laterality = (document.getElementById("wSurgLaterality") || {}).value || "not-applicable";
+    var scheduledAt = whenV && !isNaN(new Date(whenV).getTime()) ? new Date(whenV).toISOString() : undefined;
     st.busy = true; paint();
-    apiPost("/ward/surgery-book", { orgId: st.orgId, booking: { mrn: lookup.mrn, procedure: procedure, site: site, laterality: laterality, theatre: theatre, coding: codeChosen("surg") } })
+    apiPost("/ward/surgery-book", { orgId: st.orgId, booking: { mrn: lookup.mrn, procedure: procedure, site: site, laterality: laterality, theatre: theatre, scheduledAt: scheduledAt, minutes: minutes ? Number(minutes) : undefined, coding: codeChosen("surg") } })
       .then(function (r) {
         if (settle(r, wT("ward.case-booked", "Case booked."))) { st.surgBookOpen = false; st.surgMrnLookup = null; loadSurgeryBoard(); } else paint();
       })
@@ -10091,7 +10270,7 @@
     return apiGet("/ward/surgery-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId))
       .then(function (r) {
         if (!r || !r.ok || !r.case) { st.busy = false; st.err = wT("ward.that-case-could-not-be-loaded", "That case could not be loaded."); st.view = "surgery"; paint(); return; }
-        st.surgCase = { case: r.case, anesthesia: null, implants: [], pac: null };
+        st.surgCase = { case: r.case, anesthesia: null, implants: [], pac: null, rules: r.theatreRules || null };
         paint();
         return Promise.all([
           apiGet("/ward/pac-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId)).then(function (p) { st.surgCase.pac = p && p.ok ? { rec: p.pac || null } : false; }, function () { st.surgCase.pac = false; }),
@@ -10994,12 +11173,67 @@
       apiGet("/ward/diary?orgId=" + encodeURIComponent(st.orgId) + (clinicianId ? "&clinicianId=" + encodeURIComponent(clinicianId) : "")),
       apiGet("/ward/resource-schedule?orgId=" + encodeURIComponent(st.orgId)),
       apiGet("/ward/blackouts?orgId=" + encodeURIComponent(st.orgId)),
+      apiGet("/ward/access-times?orgId=" + encodeURIComponent(st.orgId)).catch(function () { return null; }),
     ]).then(function (r) {
       sc.diary = (r[0] && r[0].ok) ? r[0] : null;
       sc.resources = (r[1] && r[1].ok) ? r[1] : null;
       sc.blackouts = (r[2] && r[2].ok && r[2].blackouts) || [];
+      sc.access = (r[3] && r[3].ok) ? r[3] : false;
       paint();
-    }).catch(function () { paint(); });
+    }).catch(function () { sc.access = false; paint(); });
+  }
+
+  /* TODAY'S WAITING TIMES AND THE DIAGNOSTICS COUNTER (P3 theatre-opd-access, NABH 22 and 23). Each wait is shown with the
+   * times it was computed from; a visit with no start time says it is missing and is not averaged. access undefined is
+   * loading, false is failed: an unloaded list never reads as an empty one. */
+  var DX_SERVICE_WORDS = { laboratory: "Laboratory", imaging: "Imaging" };
+  function accessTimesCard(sc) {
+    var a = sc.access;
+    var h = '<div class="w-card"><div class="w-card-h">' + ms("timer") + "<h3>" + wTH("ward.at-title", "Waiting times today") + "</h3></div>";
+    if (a === undefined) return h + '<p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    if (a === false) return h + '<p class="w-hint warn">' + ms("error") + wTH("ward.at-failed", "Waiting times could not be loaded.", null, "", 1) + "</p></div>";
+    var nm = wTH("ward.surg-not-recorded", "not recorded");
+    var summary = function (s) { return !s ? "" : "<p><b>" + (s.value == null ? wTH("ward.at-no-average", "No visit has both times yet.") : wTH("ward.at-average", "Average {v} minutes ({sum} minutes over {n} visits)", { v: esc(s.value), sum: esc(s.numerator), n: esc(s.denominator) }, "v sum n")) + "</b>" +
+      (s.missing ? " &middot; " + wTH("ward.at-missing-n", "{n} missing a time, not averaged", { n: esc(s.missing) }, "n") : "") + "</p>"; };
+    var waitText = function (x) { return x.minutes == null ? '<span class="w-st due">' + wTH("ward.at-missing", "start not recorded") + "</span>" : "<b>" + wTH("ward.at-minutes", "{n} minutes", { n: esc(x.minutes) }, "n") + "</b>"; };
+    var opd = a.opd === null ? '<p class="w-hint warn">' + wTH("ward.at-opd-unreadable", "Outpatient visits could not be read.", null, "", 1) + "</p>"
+      : (a.opd || []).length ? summary(a.opdSummary) + '<ul class="w-mini">' + a.opd.map(function (x) {
+        return "<li>" + esc(x.patientId) + "<span>" + wTH("ward.at-opd-row", "arrived {a}{appt}, consultation {c}", { a: esc(when(x.arrivedAt)), appt: x.appointmentAt ? " &middot; " + esc(wT("ward.at-appt", "appointment {t}", { t: when(x.appointmentAt) })) : "", c: x.consultStartAt ? esc(when(x.consultStartAt)) : nm }, "a c") + " &middot; " + waitText(x) + "</span></li>";
+      }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.at-no-opd", "No outpatient visits recorded today.") + "</p>";
+    var dx = a.diagnostics === null ? '<p class="w-hint warn">' + wTH("ward.at-dx-unreadable", "Diagnostic visits could not be read.", null, "", 1) + "</p>"
+      : (a.diagnostics || []).length ? summary(a.diagnosticsSummary) + '<ul class="w-mini">' + a.diagnostics.map(function (x) {
+        return "<li>" + esc(x.patientId) + " &middot; " + esc(wTEn(DX_SERVICE_WORDS[x.service]) || x.service) + "<span>" + wTH("ward.at-dx-row", "arrived {a}{appt}, test started {s}", { a: esc(when(x.arrivedAt)), appt: x.appointmentAt ? " &middot; " + esc(wT("ward.at-appt", "appointment {t}", { t: when(x.appointmentAt) })) : "", s: x.startedAt ? esc(when(x.startedAt)) : nm }, "a s") + " &middot; " + waitText(x) + "</span>" +
+          (!x.startedAt ? '<button class="w-btn tiny" data-w-act="dxstart:' + esc(x.visitId) + '">' + wTH("ward.at-test-started", "Test started") + "</button>" : "") + "</li>";
+      }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.at-no-dx", "No outpatient diagnostic visits recorded today.") + "</p>";
+    var inpatientOpen = (a.openVisits || []).filter(function (v) { return v.setting !== "outpatient"; }).map(function (x) {
+      return "<li>" + esc(x.patientId) + " &middot; " + esc(wTEn(DX_SERVICE_WORDS[x.service]) || x.service) + "<span>" + esc(when(x.arrivedAt)) + "</span>" +
+        '<button class="w-btn tiny" data-w-act="dxstart:' + esc(x.visitId) + '">' + wTH("ward.at-test-started", "Test started") + "</button></li>";
+    }).join("");
+    return h + "<h4>" + wTH("ward.at-opd", "Outpatient consultation") + "</h4>" + opd +
+      "<h4>" + wTH("ward.at-dx", "Diagnostics") + "</h4>" + dx + (inpatientOpen ? '<ul class="w-mini">' + inpatientOpen + "</ul>" : "") +
+      '<button class="w-btn go" data-w-act="dxarrive">' + ms("how_to_reg") + wTH("ward.at-record-arrival", "Record arrival at the diagnostics counter") + "</button></div>";
+  }
+  function dxPost(path, body, okMsg) {
+    st.busy = true; paint();
+    return apiPost(path, Object.assign({ orgId: st.orgId }, body))
+      .then(function (r) { if (settle(r, okMsg)) loadScheduling(); else paint(); return r; })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+  }
+  function dxArrive() {
+    askFor({ title: wTH("ward.at-record-arrival", "Record arrival at the diagnostics counter"), icon: "how_to_reg", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "mrn", type: "text", label: "MRN", required: wT("ward.enter-an-mrn", "Enter an MRN.") },
+      { key: "service", type: "select", label: wTH("ward.at-service", "Service"), options: [["laboratory", wTH("ward.at-laboratory", "Laboratory")], ["imaging", wTH("ward.at-imaging", "Imaging")]], value: "laboratory" },
+      { key: "setting", type: "select", label: wTH("ward.at-setting", "Patient is"), options: [["outpatient", wTH("ward.at-outpatient", "An outpatient")], ["inpatient", wTH("ward.at-inpatient", "An inpatient")]], value: "outpatient" },
+      { key: "arrived", type: "datetime", label: wTH("ward.at-arrived-blank-now", "Requisition presented at (leave blank for now)") },
+      { key: "appt", type: "datetime", label: wTH("ward.at-appt-time", "Appointment time, if any") },
+    ] }, function (v) {
+      return dxPost("/ward/diagnostic-arrival", { mrn: v.mrn, service: v.service, setting: v.setting, arrivedAt: isoOfLocal(v.arrived) || undefined, appointmentAt: isoOfLocal(v.appt) || undefined }, wT("ward.at-arrival-recorded", "Arrival recorded."));
+    });
+  }
+  function dxStart(visitId) {
+    askFor({ title: wTH("ward.at-test-started", "Test started"), icon: "play_arrow", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "at", type: "datetime", label: wTH("ward.surg-time-blank-now", "Time (leave blank for now)") },
+    ] }, function (v) { return dxPost("/ward/diagnostic-start", { visitId: visitId, startedAt: isoOfLocal(v.at) || undefined }, wT("ward.surg-time-recorded", "Time recorded.")); });
   }
   function apptBookOrOverbook(overbook) {
     var clinicianId = val("wSchedClinician"), patientId = val("wSchedPatient"), startAt = val("wSchedStart"), minutes = val("wSchedMinutes"), reason = val("wSchedReason");
@@ -11015,10 +11249,14 @@
       .catch(function () { st.busy = false; st.scheduling.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
   }
   function apptSetState(appointmentId, state) {
-    var reason = ""; try { reason = G.prompt(wTD("ward.reason", "Reason ({state}):", { state: state })) || ""; } catch (e) {}
-    if (!reason.trim()) { st.scheduling.err = wT("ward.a-reason-is-required", "A reason is required."); paint(); return; }
+    // Only a cancellation and a no-show need a reason; marking an arrival or a completed visit does not.
+    var reason = "";
+    if (state === "cancelled" || state === "did-not-attend") {
+      try { reason = G.prompt(wTD("ward.reason", "Reason ({state}):", { state: state })) || ""; } catch (e) {}
+      if (!reason.trim()) { st.scheduling.err = wT("ward.a-reason-is-required", "A reason is required."); paint(); return; }
+    }
     st.busy = true; paint();
-    apiPost("/ward/appointment", { orgId: st.orgId, appointmentId: appointmentId, state: state, reason: reason.trim() })
+    apiPost("/ward/appointment", { orgId: st.orgId, appointmentId: appointmentId, state: state, reason: reason.trim() || undefined })
       .then(function (r) { st.busy = false; if (r && r.ok) loadScheduling(); else { st.scheduling.err = (r && r.detail) || wT("ward.could-not-update-that-appointment", "Could not update that appointment."); paint(); } })
       .catch(function () { st.busy = false; st.scheduling.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
   }
@@ -15045,6 +15283,7 @@
       // A case's own chart backs out to the theatre board, not the ward list - the same reason the
       // ED chart backs out to the ED board rather than to an unrelated ward roster.
       if (st.view === "surgerycase") { st.surgCase = null; loadSurgeryBoard(); return; }
+      if (st.view === "theatreuse") { st.theatreUse = null; loadSurgeryBoard(); return; }
       st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null;
       st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; st.edAdmitPending = false; st.transferPending = false;
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.resusBundles = null;
@@ -15204,6 +15443,10 @@
     if (cmd === "apptoverbook") { apptBookOrOverbook(true); return; }
     if (cmd === "apptcancel") { apptSetState(arg, "cancelled"); return; }
     if (cmd === "apptdna") { apptSetState(arg, "did-not-attend"); return; }
+    if (cmd === "apptarrived") { apptSetState(arg, "arrived"); return; }
+    if (cmd === "apptseen") { apptSetState(arg, "completed"); return; }
+    if (cmd === "dxarrive") { dxArrive(); return; }
+    if (cmd === "dxstart") { dxStart(arg); return; }
     if (cmd === "resbook") { resBook(); return; }
     if (cmd === "rescancel") { resCancel(arg); return; }
     if (cmd === "blackoutadd") { blackoutAdd(); return; }
@@ -15248,6 +15491,14 @@
     if (cmd === "surgerybookclose") { surgeryBookClose(); return; }
     if (cmd === "surgmrnlookup") { surgMrnLookup(); return; }
     if (cmd === "surgerybook") { surgeryBook(); return; }
+    if (cmd === "theatreuse") { loadTheatreUse(); return; }
+    if (cmd === "theatreuseday") { st.theatreDay = val("wTheatreDay"); loadTheatreUse(); return; }
+    if (cmd === "theatresession") { theatreSessionAdd(); return; }
+    if (cmd === "theatrerelease") { theatreRelease(arg); return; }
+    if (cmd === "theatrerules") { theatreRules(); return; }
+    if (cmd === "surgtime") { surgTime(arg); return; }
+    if (cmd === "surgresched") { surgResched(arg); return; }
+    if (cmd === "surgreturn") { surgReturn(arg === "yes"); return; }
     if (cmd === "opensurgery") { openSurgeryCase(arg); return; }
     if (cmd === "surgeryload") { surgeryLoad(); return; }
     if (cmd === "surgeryconsent") { surgeryConsent(); return; }

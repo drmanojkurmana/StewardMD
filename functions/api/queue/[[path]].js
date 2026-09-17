@@ -71,8 +71,10 @@ import {
   bookSurgicalCase, recordCaseConsent, markCaseSite, signInCase, timeOutCase, inciseCase,
   signOutCase, abandonCase, recordOperativeNote, dispositionCase, getSurgicalCase, listSurgicalCases,
   listOpenCases, startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
-  recordImplant, listImplants, recordPac, getPac,
+  recordImplant, listImplants, recordPac, getPac, rescheduleCase, recordTheatreTime, flagUnplannedReturn,
 } from "../../_wardsynq/migrate-surgery.js";
+import { createTheatreSession, releaseTheatreSession, theatreUtilisation, theatreSettings } from "../../_wardsynq/theatre.js";
+import { recordDiagnosticArrival, recordDiagnosticStart, accessTimes } from "../../_wardsynq/access-times.js";
 import {
   recordPregnancy, getPregnancy, maternityStatus, maternityMeows, recordLabourObservation,
   recordMaternalBloodLoss, listBloodLoss, recordDelivery, getDelivery, registerNewborn, listFamilyLinks,
@@ -1449,6 +1451,14 @@ export async function onRequest(context) {
         "surgery-signout": CAPS.EMR_TREAT, "surgery-abandon": CAPS.EMR_TREAT, "surgery-note": CAPS.EMR_TREAT,
         "surgery-disposition": CAPS.EMR_TREAT, "surgery-get": CAPS.EMR_VIEW, "surgery-list": CAPS.EMR_VIEW,
         "surgery-board": CAPS.EMR_VIEW,
+        /* Theatre times, rescheduling and the unplanned-return flag are written on the case, by the team that writes the
+         * case (P3, 2026-09-17). Theatre sessions are the theatre's diary, booked on the same authority as the theatre
+         * itself (book-resource, below); utilisation reads that diary. */
+        "surgery-reschedule": CAPS.EMR_TREAT, "surgery-times": CAPS.EMR_TREAT, "surgery-return": CAPS.EMR_TREAT,
+        "theatre-session": CAPS.QUEUE_ADD, "theatre-session-release": CAPS.QUEUE_ADD, "theatre-utilisation": CAPS.QUEUE_VIEW,
+        /* The diagnostics counter checks a patient in the way the OPD desk does; the waiting-time list reads the same
+         * diary and visit records the desk already reads. */
+        "diagnostic-arrival": CAPS.QUEUE_ADD, "diagnostic-start": CAPS.QUEUE_ADD, "access-times": CAPS.QUEUE_VIEW,
         "anesthesia-start": CAPS.EMR_TREAT, "anesthesia-event": CAPS.EMR_TREAT, "anesthesia-end": CAPS.EMR_TREAT,
         "anesthesia-get": CAPS.EMR_VIEW, implant: CAPS.EMR_TREAT, "implant-list": CAPS.EMR_VIEW,
         // The pre-anaesthetic checkup is the anaesthetist's fitness decision: emr.treat to record, emr.view to read.
@@ -2624,6 +2634,18 @@ export async function onRequest(context) {
         const r = await abandonCase(request, env, { ...deps, caseId: body.caseId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "surgery-reschedule" && method === "POST") {
+        const r = await rescheduleCase(request, env, { ...deps, caseId: body.caseId, kind: body.kind, toStart: body.toStart, reasonCode: body.reasonCode, reason: body.reason, theatre: (wsqCfg && wsqCfg.theatre) || null, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-times" && method === "POST") {
+        const r = await recordTheatreTime(request, env, { ...deps, caseId: body.caseId, event: body.event, at: body.at, correctionReason: body.correctionReason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-return" && method === "POST") {
+        const r = await flagUnplannedReturn(request, env, { ...deps, caseId: body.caseId, value: body.value, indexCaseId: body.indexCaseId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "surgery-note" && method === "POST") {
         const r = await recordOperativeNote(request, env, { ...deps, caseId: body.caseId, note: body.note, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -2634,6 +2656,8 @@ export async function onRequest(context) {
       }
       if (sub === "surgery-get" && method === "GET") {
         const r = await getSurgicalCase(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" });
+        // The hospital's reschedule reason codes, so the case screen offers exactly the codes the server accepts.
+        if (r.ok) r.theatreRules = theatreSettings((wsqCfg && wsqCfg.theatre) || null);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "surgery-list" && method === "GET") {
@@ -3328,7 +3352,32 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "book-resource" && method === "POST") {
-        const r = await bookResource(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, resourceId: body.resourceId, startAt: body.startAt, minutes: body.minutes, patientId: body.patientId, encounterId: body.encounterId, purpose: body.purpose, idempotencyKey: body.idempotencyKey || null });
+        const r = await bookResource(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, theatre: (wsqCfg && wsqCfg.theatre) || null, resourceId: body.resourceId, startAt: body.startAt, minutes: body.minutes, patientId: body.patientId, encounterId: body.encounterId, purpose: body.purpose, sessionOwnerId: body.sessionOwnerId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- Theatre sessions and utilisation (theatre.js); outpatient and diagnostic waits (access-times.js) ---- */
+      if (sub === "theatre-session" && method === "POST") {
+        const r = await createTheatreSession(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, theatreId: body.theatreId, startAt: body.startAt, minutes: body.minutes, ownerKind: body.ownerKind, ownerId: body.ownerId, ownerName: body.ownerName, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "theatre-session-release" && method === "POST") {
+        const r = await releaseTheatreSession(request, env, { ...deps, sessionId: body.sessionId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "theatre-utilisation" && method === "GET") {
+        const r = await theatreUtilisation(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, theatre: (wsqCfg && wsqCfg.theatre) || null, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "diagnostic-arrival" && method === "POST") {
+        const r = await recordDiagnosticArrival(request, env, { ...deps, patientId: body.patientId || (body.mrn ? patientIdForMrn(body.mrn) : ""), service: body.service, setting: body.setting, arrivedAt: body.arrivedAt, appointmentAt: body.appointmentAt, serviceRequestId: body.serviceRequestId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "diagnostic-start" && method === "POST") {
+        const r = await recordDiagnosticStart(request, env, { ...deps, visitId: body.visitId, startedAt: body.startedAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "access-times" && method === "GET") {
+        const r = await accessTimes(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "resource-state" && method === "POST") {

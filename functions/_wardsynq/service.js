@@ -433,6 +433,10 @@ const RESOURCE_TYPES = Object.freeze([
    * within 72 hours (quality-registers.js). Append-only: a ruled-out case, a withdrawn confirmation or a corrected audit
    * is a new version beside the old one. */
   "HaiCase", "SurgicalProphylaxis", "AdverseDrugReaction", "QualityAuditTemplate", "QualityAudit", "MockDrill", "EmergencyStockOut", "EdReturnReview",
+  /* Theatre and outpatient access, 2026-09-17 (theatre.js, access-times.js). A block of theatre time held for a unit or a
+   * surgeon, released by a person or by the hospital's rule; and a patient's arrival at the laboratory or imaging counter
+   * with the time the test began. A release or a test start is a new version beside the first. */
+  "TheatreSession", "DiagnosticVisit",
   /* TASK 6.14: a wristband/QR/NFC tag's own lifecycle - the persisted state of
    * wardsynq-identity-tag.js's assign/verify/replace/deactivate/lost engine. Its own type, not a
    * field mutation on Patient: wristbandBarcode has been comparable since early in this build, but a

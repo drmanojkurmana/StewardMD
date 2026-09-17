@@ -182,7 +182,11 @@ function grantForCaps(caps) {
     const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson",
       // PrivacyAcknowledgement joined 2026-09-16 (DPDP Act 2023 s5): handing a patient the privacy notice at
       // registration and recording that they received it is the same front-desk act as registering them.
-      "PrivacyAcknowledgement", "TransferRequest"];
+      "PrivacyAcknowledgement", "TransferRequest",
+      /* TheatreSession and DiagnosticVisit joined 2026-09-17 (theatre.js, access-times.js): giving a theatre's afternoon to a
+       * unit and releasing it is the same scheduling act as booking the theatre (ResourceBooking, above); writing down that a
+       * patient reached the diagnostics counter and when the test began is the same desk act as checking them in. */
+      "TheatreSession", "DiagnosticVisit"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,
