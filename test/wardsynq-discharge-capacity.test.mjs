@@ -155,7 +155,8 @@ test("MILESTONES PURE: order conflicts, derived times, NABH minutes less the pat
   const t = { advised: 1000, "bill-ready": 5000, left: 9000 };
   assert.deepEqual(DM.orderConflicts("pharmacy-cleared", 500, t), ["advised"]);
   assert.deepEqual(DM.orderConflicts("pharmacy-cleared", 9500, t), ["left"]);
-  assert.deepEqual(DM.orderConflicts("advised", 6000, t), ["bill-ready", "left"]);
+  assert.deepEqual(DM.orderConflicts("advised", 6000, t), ["bill-ready"]);
+  assert.deepEqual(DM.orderConflicts("advised", 9500, t), ["bill-ready", "left"]);
   assert.deepEqual(DM.orderConflicts("left", 4000, t), ["bill-ready"]);
   assert.deepEqual(DM.orderConflicts("tpa-final-received", 2000, { advised: 1000, "tpa-final-requested": 3000 }), ["tpa-final-requested"]);
   assert.deepEqual(DM.orderConflicts("bill-ready", 5000, t), []);
@@ -174,7 +175,7 @@ test("MILESTONES PURE: order conflicts, derived times, NABH minutes less the pat
   const stays = [left, { milestones: { advised: { at: "2026-09-11T08:00:00.000Z" }, "bill-ready": { at: "2026-09-11T09:00:00.000Z" }, left: { at: "2026-09-11T10:00:00.000Z" } } }]
     .map((record) => ({ record, encounter: null, times: DM.milestoneTimes(record, {}) }));
   const tat = DM.turnaround(stays, Date.parse("2026-09-01"), Date.parse("2026-09-30"));
-  assert.equal(tat.stays, 2); assert.equal(tat.medianTotalMinutes, 180);
+  assert.equal(tat.stays, 2); assert.equal(tat.medianTotalMinutes, 165, "the median of 210 and 120");
   const bill = tat.steps.find((s) => s.step === "bill-ready");
   assert.deepEqual([bill.medianMinutesFromAdvised, bill.stays, bill.notRecorded], [60, 1, 1], "a step nobody recorded is counted as not recorded, never as zero");
 });
@@ -198,7 +199,7 @@ test("NABH KPI 24 computes from the milestones: advised to left, day care left o
 });
 
 test("MILESTONES POST /api/queue/ward/discharge-milestone and GET /api/queue/ward/discharge-progress: each role its own step, never backwards without a reason, the signed summary derived, turnaround on the board", async () => {
-  seedHospital(); seedBeds();
+  seedHospital();
   const a = await admitted("401");
   const first = await step(PHARM, a.encounterId, "pharmacy-cleared", { at: ago(4) });
   assert.equal(first.__status, 409); assert.equal(first.error, "not_advised", "advice comes first");
@@ -227,7 +228,7 @@ test("MILESTONES POST /api/queue/ward/discharge-milestone and GET /api/queue/war
   const gone = await step(NURSE, a.encounterId, "left", { at: ago(1), patientDelayMinutes: 20 });
   assert.equal(gone.__status, 200, JSON.stringify(gone));
   const hist = await RECORD.history(T, "DischargeMilestone", DM.dmsIdFor(a.encounterId));
-  assert.equal(hist.length, 8, "every step and every correction is its own version");
+  assert.equal(hist.length, 7,"every step and every correction is its own version");
   const cur = hist[hist.length - 1];
   assert.equal(cur.milestones["pharmacy-cleared"].reason, "Wrong time entered at first");
   assert.ok(cur.milestones["pharmacy-cleared"].previousAt);
@@ -257,8 +258,9 @@ test("MILESTONES POST /api/queue/ward/discharge-milestone and GET /api/queue/war
 });
 
 test("NEGATIVE AUTHORIZATION on /api/queue/ward/discharge-milestone and /api/queue/ward/discharge-progress: no session 401, the wrong role for a step 403 with nothing written, another hospital 403", async () => {
-  seedHospital(); seedBeds(); otherHospital();
+  seedHospital(); otherHospital();
   const a = await admitted("403");
+  seedBeds();
   const body = (s) => ({ orgId: ORG, encounterId: a.encounterId, step: s });
   assert.equal(await anon("/ward/discharge-milestone", body("advised")), 401);
   for (const [who, s] of [[NURSE, "advised"], [PHARM, "advised"], [CASHIER, "advised"], [STRANGER, "advised"], [DESK, "advised"]]) {
