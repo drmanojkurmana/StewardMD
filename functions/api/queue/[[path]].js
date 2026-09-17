@@ -4644,7 +4644,7 @@ export async function onRequest(context) {
       /* ---- Returns and reports (compliance.js, report-builder.js) ---- */
       const csvOut = (text, name) => new Response(text, { status: 200, headers: Object.assign({ "Content-Type": "text/csv; charset=utf-8", "Cache-Control": "no-store", "Content-Disposition": `attachment; filename="${name}"`, "X-Content-Type-Options": "nosniff" }, corsHeaders(request)) });
       if (sub === "nabh-indicators" && method === "GET") {
-        const r = await nabhIndicators(request, env, { ...deps, months: url.searchParams.get("months") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes,
+        const r = await nabhIndicators(request, env, { ...deps, months: url.searchParams.get("months") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes, reportingYearStartMonth: readStaffingNorms(wsqCfg).reportingYearStartMonth,
           staffRows: (months) => readStaffingRows(deps.recordDeps.repository, mig.tenantId, months) });
         if (r.ok && !r.skipped && url.searchParams.get("format") === "csv") return csvOut(nabhCsv(r), "nabh-indicators.csv");
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -5555,9 +5555,28 @@ export async function onRequest(context) {
       if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
       const { value, errors } = validateStaffingNorms(cb.settings, o.wardsynq && o.wardsynq.riskTools, shifts.map((x) => x.id));
       if (errors.length) return json({ ok: false, error: "invalid_staffing_norms", errors, message: "Nothing was saved. " + errors.slice(0, 5).join(" ") }, 422, request);
-      await ORG.updateOrg(env, orgId, { wardsynq: { staffing: value } }, actor.id, { action: "org:staffing_norms", meta: JSON.stringify({ wards: Object.keys(value.wardTypes).length, norms: value.norms.length, tool: !!value.dependencyToolId }) });
+      // The reporting year is saved on its own route with a reason, and is kept as it is when the norms are saved.
+      await ORG.updateOrg(env, orgId, { wardsynq: { staffing: { ...value, reportingYearStartMonth: readStaffingNorms(o.wardsynq).reportingYearStartMonth } } }, actor.id, { action: "org:staffing_norms", meta: JSON.stringify({ wards: Object.keys(value.wardTypes).length, norms: value.norms.length, tool: !!value.dependencyToolId, icu: value.icuUnitTypes.length }) });
       const back = await ORG.getOrg(env, orgId);
       return json(view(back && back.wardsynq), 200, request);
+    }
+    /* R2-1 nabh-kpi-closure: the first month of the hospital's reporting year, for NABH #30 year to date (NABH does not say
+     * calendar or financial year). staff.admin, a reason every time it changes; no default. */
+    if (seg === "org" && sub === "reporting-year" && method === "POST") {
+      const cb = await readBody(request);
+      const orgId = cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The reporting year belongs to a WardSynQ hospital." }, 409, request);
+      const month = Number(cb.month), reason = String(cb.reason || "").trim();
+      if (!Number.isInteger(month) || month < 1 || month > 12) return json({ ok: false, error: "month_invalid", message: "Choose the month the reporting year starts, 1 to 12. Nothing was saved." }, 422, request);
+      const before = readStaffingNorms(o.wardsynq).reportingYearStartMonth;
+      if (before === month) return json({ ok: true, changed: false, reportingYearStartMonth: month }, 200, request);
+      if (reason.length < 5) return json({ ok: false, error: "reason_required", message: "Say why the reporting year is being changed (at least 5 characters). Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { staffing: { ...((o.wardsynq && o.wardsynq.staffing) || {}), reportingYearStartMonth: month } } }, actor.id, { action: "org:reporting_year", meta: JSON.stringify({ from: before, to: month, reason: reason.slice(0, 80) }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ok: true, changed: true, reportingYearStartMonth: readStaffingNorms(back && back.wardsynq).reportingYearStartMonth }, 200, request);
     }
     /* Blood donor selection criteria (donor-criteria.js, owner decision 2026-09-17 as corrected by the legal review): the
      * stricter of WHO 2012 and the law of the hospital's region is in force, and a hospital may only make a criterion

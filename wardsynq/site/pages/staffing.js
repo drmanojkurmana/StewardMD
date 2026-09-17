@@ -35,6 +35,14 @@
     return r || "";
   }
 
+  /* NABH #21 for an ICU shift: ventilated and non-ventilated patients apart, as recorded. */
+  function ventText(c, v) {
+    if (!v) return "";
+    if (!v.recorded) return T(c, "site.staff.ventNotRecorded", "Ventilated and non-ventilated patients were not counted apart: the ventilator lines or nursing assignments could not be read.");
+    return T(c, "site.staff.ventSplit", "Ventilated: {vn} nurses for {vb} patients ({vu} not assigned). Not ventilated: {nn} nurses for {nb} patients ({nu} not assigned).",
+      { vn: v.ventilated.nurses, vb: v.ventilated.beds, vu: v.ventilated.unassignedBeds, nn: v.nonVentilated.nurses, nb: v.nonVentilated.beds, nu: v.nonVentilated.unassignedBeds });
+  }
+
   /* One ward-shift row of GET /ward/nurse-staffing. */
   function rowHtml(c, ward, s, canRecord) {
     var esc = c.esc, q = s.requirement, cells;
@@ -44,7 +52,7 @@
       var rec = s.recorded;
       if (!rec) return "<tr>" + head + "<td>" + esc(T(c, "site.staff.ended", "Ended")) + '</td><td colspan="5">' + esc(T(c, "site.staff.notRecorded", "Not recorded while it ran.")) + "</td></tr>";
       return "<tr" + (rec.verdict === "short" ? ' class="warn"' : "") + ">" + head + "<td>" + esc(T(c, "site.staff.ended", "Ended")) + "</td><td>" + rec.occupiedBeds + "</td><td>" + rec.required + "</td><td>" + rec.rosteredNurses + "</td><td>" + rec.onDutyNurses + "</td><td>" +
-        esc(verdictText(c, rec.verdict)) + " " + esc(T(c, "site.staff.recordedAt", "(recorded {at})", { at: String(rec.recordedAt || "").slice(11, 16) })) + "</td></tr>";
+        esc(verdictText(c, rec.verdict)) + " " + esc(T(c, "site.staff.recordedAt", "(recorded {at})", { at: String(rec.recordedAt || "").slice(11, 16) })) + (rec.ventilation ? "<br><small>" + esc(ventText(c, rec.ventilation)) + "</small>" : "") + "</td></tr>";
     }
     var timing = s.timing === "running" ? T(c, "site.staff.running", "Running now") : T(c, "site.staff.coming", "Coming (projected from the census now)");
     if (!q.configured) {
@@ -80,15 +88,17 @@
     return {
       wardTypes: Object.keys(s.wardTypes || {}).map(function (w) { return w + " | " + s.wardTypes[w]; }).join("\n"),
       norms: (s.norms || []).map(function (n) { return n.unitType + " | " + n.shiftId + " | " + n.band + " | " + n.patientsPerNurse; }).join("\n"),
+      icu: (s.icuUnitTypes || []).join(", "),
     };
   }
-  function textToNorms(tool, wardText, normText) {
+  function textToNorms(tool, wardText, normText, icuText) {
     var parts = function (line) { return line.split("|").map(function (x) { return x.trim(); }); };
     var lines = function (t) { return String(t || "").split(/\r?\n/).map(function (x) { return x.trim(); }).filter(Boolean); };
     var wardTypes = {};
     lines(wardText).forEach(function (l) { var p = parts(l); wardTypes[p[0]] = p[1] || ""; });
     var norms = lines(normText).map(function (l) { var p = parts(l); return { unitType: p[0], shiftId: p[1] || "*", band: p[2] || "*", patientsPerNurse: p[3] === undefined || p[3] === "" ? null : Number(p[3]) }; });
-    return { dependencyToolId: tool || null, wardTypes: wardTypes, norms: norms };
+    var icu = String(icuText || "").split(",").map(function (x) { return x.trim(); }).filter(Boolean);
+    return { dependencyToolId: tool || null, wardTypes: wardTypes, norms: norms, icuUnitTypes: icu };
   }
   function normsHtml(c, r) {
     if (r == null) return loading(c);
@@ -99,8 +109,20 @@
       r.tools.map(function (t) { return '<option value="' + esc(t.id) + '"' + (t.id === r.settings.dependencyToolId ? " selected" : "") + ">" + EN(c, esc(t.name + " (" + t.bands.join(", ") + ")")) + "</option>"; }).join("") + "</select></label></div>" +
       '<label class="f"><span>' + esc(T(c, "site.staff.wardTypesLabel", "Wards, one per line: ward | unit type")) + '</span><textarea id="stfWards" rows="4">' + esc(txt.wardTypes) + "</textarea></label>" +
       '<label class="f"><span>' + esc(T(c, "site.staff.normsLabel", "Norms, one per line: unit type | shift ID or * | dependency level or * | patients per nurse")) + '</span><textarea id="stfNorms" rows="6">' + esc(txt.norms) + "</textarea></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.staff.icuLabel", "Unit types that are ICUs, separated by commas (ventilated and non-ventilated patients are counted apart there)")) + '</span><input id="stfIcu" value="' + esc(txt.icu) + '"></label>' +
       "<p><small>" + esc(T(c, "site.staff.shiftIds", "Shift IDs: {ids}", { ids: r.shifts.map(function (s) { return s.id + " (" + s.unit + ")"; }).join(", ") })) + "</small></p>" +
-      '<button class="btn" type="button" data-staff="norms">' + esc(T(c, "site.staff.saveNorms", "Save staffing norms")) + '</button><div id="stfNormsMsg"></div>';
+      '<button class="btn" type="button" data-staff="norms">' + esc(T(c, "site.staff.saveNorms", "Save staffing norms")) + '</button><div id="stfNormsMsg"></div>' + yearHtml(c, r.settings.reportingYearStartMonth);
+  }
+
+  /* The first month of the reporting year, for the needlestick rate year to date (NABH #30). Saved with a reason. */
+  function yearHtml(c, month) {
+    var esc = c.esc, opts = "";
+    for (var m = 1; m <= 12; m++) opts += '<option value="' + m + '"' + (m === month ? " selected" : "") + ">" + m + "</option>";
+    return "<h3>" + esc(T(c, "site.staff.yearTitle", "Reporting year")) + "</h3><p>" + esc(month ? T(c, "site.staff.yearSet", "The reporting year starts in month {m}. The needlestick injury rate is reported year to date from then.", { m: month })
+      : T(c, "site.staff.yearNotSet", "Not configured. NABH reports the needlestick injury rate year to date and does not say calendar or financial year; until you set it, each month's own rate is shown.")) + "</p>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.staff.yearMonth", "First month (1 is January, 4 is April)")) + '</span><select id="stfYear"><option value=""></option>' + opts + "</select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.staff.yearWhy", "Reason for the change")) + '</span><input id="stfYearWhy"></label>' +
+      '<button class="btn quiet" type="button" data-staff="year">' + esc(T(c, "site.staff.yearSave", "Save reporting year")) + '</button></div><div id="stfYearMsg"></div>';
   }
 
   function draftHtml(c, r) {
@@ -170,12 +192,16 @@
       if (act === "injuries") return loadInjuries();
       if (act === "record") return c.api("/ward/nurse-staffing-record", { orgId: org, shiftId: b.getAttribute("data-shift"), date: b.getAttribute("data-date") }).then(function (r) {
         if (!r || !r.ok) { set("stfMsg", errHtml(c, r)); return; }
-        c.toast(T(c, "site.staff.recorded", "Shift staffing recorded.")); loadTable();
+        c.toast(T(c, "site.staff.recorded", "Shift staffing recorded.")); set("stfMsg", r.record && r.record.ventilation ? '<div class="msg note">' + esc(ventText(c, r.record.ventilation)) + "</div>" : ""); loadTable();
       }, function () { set("stfMsg", errHtml(c, null)); });
-      if (act === "norms") return c.api("/org/staffing-norms", { orgId: org, settings: textToNorms(val("stfTool"), val("stfWards"), val("stfNorms")) }).then(function (r) {
+      if (act === "norms") return c.api("/org/staffing-norms", { orgId: org, settings: textToNorms(val("stfTool"), val("stfWards"), val("stfNorms"), val("stfIcu")) }).then(function (r) {
         if (!r || !r.ok) { set("stfNormsMsg", errHtml(c, r)); return; }
         c.toast(T(c, "site.staff.normsSaved", "Staffing norms saved.")); set("stfNormsBox", normsHtml(c, r)); if (canView) loadTable();
       }, function () { set("stfNormsMsg", errHtml(c, null)); });
+      if (act === "year") return c.api("/org/reporting-year", { orgId: org, month: Number(val("stfYear")) || null, reason: val("stfYearWhy") }).then(function (r) {
+        if (!r || !r.ok) { set("stfYearMsg", errHtml(c, r)); return; }
+        c.toast(T(c, "site.staff.yearSaved", "Reporting year saved.")); loadNorms();
+      }, function () { set("stfYearMsg", errHtml(c, null)); });
       if (act === "draft") { lastDraft = null; set("stfDraft", loading(c)); return c.api("/ward/staffing-draft" + q + "&ward=" + encodeURIComponent(val("stfDraftWard")) + "&from=" + encodeURIComponent(val("stfDraftFrom"))).then(function (r) { lastDraft = r && r.ok ? r : null; set("stfDraft", draftHtml(c, r || { ok: false })); }, function () { set("stfDraft", draftHtml(c, { ok: false })); }); }
       if (act === "publish" && lastDraft) return c.api("/roster/draft-publish", { orgId: org, entries: lastDraft.entries }).then(function (r) {
         if (!r || !r.ok) { set("stfDraft", errHtml(c, r) + draftHtml(c, lastDraft)); return; }
@@ -192,5 +218,5 @@
     };
   }
 
-  WSQ._staffing = { mount: mount, staffingHtml: staffingHtml, normsHtml: normsHtml, draftHtml: draftHtml, injuriesHtml: injuriesHtml, textToNorms: textToNorms, normsToText: normsToText, verdictText: verdictText };
+  WSQ._staffing = { mount: mount, staffingHtml: staffingHtml, normsHtml: normsHtml, draftHtml: draftHtml, injuriesHtml: injuriesHtml, textToNorms: textToNorms, normsToText: normsToText, verdictText: verdictText, ventText: ventText, yearHtml: yearHtml };
 })();

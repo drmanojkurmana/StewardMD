@@ -150,3 +150,22 @@ test("Retention and legal holds tab: every class with its layers, basis type, in
     }
   }
 });
+
+test("R2-1 NABH table: the inputs for indicators 3, 6, 21 and 30 are shown beside the month's value, translated around server values", async () => {
+  const { loadSite, leftovers } = await import("./wsq-site-i18n-harness.mjs");
+  for (const lang of ["en", "xx"]) {
+    const e = loadSite({ lang, pages: ["governance.js"] });
+    const W = e.win.WSQ, c = { esc: W.esc, t: W.t, tSafe: W.tSafe, en: W.en };
+    const html = W._govNabhCellNote(c, 3, { byDepartment: { laboratory: { audited: 2, compliant: 1 } }, auditorInsideDepartment: 1 }) +
+      W._govNabhCellNote(c, 6, { localAnaesthesiaExcluded: 1, techniqueNotRecorded: 2, unreviewed: 0 }) +
+      W._govNabhCellNote(c, 21, { byUnitType: { ICU: { ventilation: { ventilated: { value: 0.5, nurses: 1, beds: 2 }, nonVentilated: { value: 0.33, nurses: 1, beds: 3 }, shiftsSplit: 1, shiftsNotSplit: 0 } }, Ward: { value: 0.2 } } }) +
+      W._govNabhCellNote(c, 30, { reportingYearNotConfigured: true }) + W._govNabhCellNote(c, 30, { yearToDateFrom: "2026-04" });
+    if (lang === "en") {
+      assert.match(html, /Laboratory 1 of 2/); assert.match(html, /1 by an auditor from the same department/);
+      assert.match(html, /1 under local anaesthesia left out/); assert.match(html, /2 with no anaesthesia technique recorded, counted/);
+      assert.match(html, /ICU: ventilated 0\.5 \(1\/2\), not ventilated 0\.33 \(1\/3\); 1 shifts split, 0 not/);
+      assert.match(html, /Reporting year not configured: this month only/); assert.match(html, /Year to date from 2026-04/);
+      assert.equal(W._govNabhCellNote(c, 21, { byUnitType: { Ward: { value: 0.2 } } }), "", "a ward shows no split");
+    } else assert.deepEqual(leftovers(html, ["ICU"]), []);
+  }
+});

@@ -7685,3 +7685,26 @@ of compliance.js is untouched.
 - Unified in-basket is a screen (pages/inbasket.js) over the existing routes (patient-messages, referral-inbox,
   cosign-queue, safety-inbox), each shown loading, failed, not for this role, or its items with age and owner. No new
   aggregation route. No NABH KPI entry is owned by this package; compliance.js untouched.
+## 2026-09-17 NABH KPI closure: indicators 3, 6, 21 and 30 (branch nabh-kpi-closure, R2-1)
+- KPI 3: audit kind `diagnostic-safety` (quality-registers.js). One audit is one member of staff; it records the department
+  (laboratory or radiology, closed list) and the auditor's own statement that they work outside it. NABH wants an outside
+  auditor; members carry no department, so it is not enforced and the cell counts audits by an inside auditor beside.
+- KPI 6: DEVIATION from the audit, which said AnesthesiaRecord carries a technique. It does not (startAnesthesia writes
+  none; only an imported summary line reads one). The recorded technique is the PLANNED one on PreAnaestheticCheckup
+  (PAC_TECHNIQUE closed list). Only `local-with-monitoring` counts as local anaesthesia; spinal, epidural and regional
+  blocks do not. Cases with no checkup stay in the counts and are counted beside. A checkup type that cannot be read makes
+  the indicator not computable rather than guessing.
+- KPI 21: the hospital lists which unit types are ICUs (`wardsynq.staffing.icuUnitTypes`, validated against wardTypes).
+  Recording an ICU shift also stores the split: a patient is ventilated when a LineRecord with deviceClass ventilator is in
+  place at recording; nurses are the distinct on-duty nurses (in-charge already out) whose NurseAssignment names them; a
+  patient with no assignment, or assigned to someone not on duty, is counted as unassigned beside. A nurse on both groups
+  counts in both (shared count stored). A failed read stores "not recorded" and the overall ratio is unchanged. Verified:
+  the assignment is readable at recording time through the recorder's own RecordService (EMR_VIEW reads all types).
+- KPI 30: `wardsynq.staffing.reportingYearStartMonth` (1-12), saved on its own route POST /org/reporting-year, staff.admin,
+  reason required, audit row names from/to; no default. Saving the norms keeps it. Year to date = injuries from the
+  reporting year's first month to the month's end over the average occupied beds of that span. Unset: the month's own
+  rate, flagged `reportingYearNotConfigured`. Kept inside `staffing` so _opd_org.js's whitelist is untouched.
+- compliance.js: besides entries 3, 6, 21 and 30, computeNabhIndicators passes `settings` as a third compute argument and
+  nabhIndicators reads staff injuries from the earliest window's reporting-year start (both needed by KPI 30 only).
+- GET /ward/access-times now refuses (403) a role that can read neither Encounter nor DiagnosticVisit; it returned an empty
+  200 to a store keeper. A cashier still reads it: billing grants read Encounter.

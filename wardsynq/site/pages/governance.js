@@ -597,6 +597,35 @@
   }
 
   /* ---------------------------------------------------------------- NABH indicators */
+  /* The inputs beside a month's value that the definition needs read with it (R2-1: indicators 3, 6, 21 and 30). */
+  function nabhCellNote(c, no, m) {
+    var out = [];
+    if (no === 3 && m.byDepartment) {
+      var lab = m.byDepartment.laboratory, rad = m.byDepartment.radiology;
+      if (lab) out.push(T(c, "site.gov.nabh.k3lab", "Laboratory {a} of {b}", { a: lab.compliant, b: lab.audited }));
+      if (rad) out.push(T(c, "site.gov.nabh.k3rad", "Radiology {a} of {b}", { a: rad.compliant, b: rad.audited }));
+      if (m.auditorInsideDepartment) out.push(T(c, "site.gov.nabh.k3inside", "{n} by an auditor from the same department", { n: m.auditorInsideDepartment }));
+    }
+    if (no === 6 && m.localAnaesthesiaExcluded != null) {
+      if (m.localAnaesthesiaExcluded) out.push(T(c, "site.gov.nabh.k6local", "{n} under local anaesthesia left out", { n: m.localAnaesthesiaExcluded }));
+      if (m.techniqueNotRecorded) out.push(T(c, "site.gov.nabh.k6notech", "{n} with no anaesthesia technique recorded, counted", { n: m.techniqueNotRecorded }));
+      if (m.unreviewed) out.push(T(c, "site.gov.nabh.k6unreviewed", "{n} not answered by the surgeon", { n: m.unreviewed }));
+    }
+    if (no === 21 && m.byUnitType) {
+      Object.keys(m.byUnitType).forEach(function (k) {
+        var v = m.byUnitType[k].ventilation;
+        if (!v) return;
+        out.push(EN(c, c.esc(k)) + ": " + c.esc(T(c, "site.gov.nabh.k21vent", "ventilated {v} ({vn}/{vb}), not ventilated {n} ({nn}/{nb}); {s} shifts split, {x} not", {
+          v: v.ventilated.value == null ? "-" : v.ventilated.value, vn: v.ventilated.nurses, vb: v.ventilated.beds, n: v.nonVentilated.value == null ? "-" : v.nonVentilated.value, nn: v.nonVentilated.nurses, nb: v.nonVentilated.beds, s: v.shiftsSplit, x: v.shiftsNotSplit })));
+      });
+      return out.length ? '<br><span class="quiet">' + out.join("<br>") + "</span>" : "";
+    }
+    if (no === 30) {
+      if (m.reportingYearNotConfigured) out.push(T(c, "site.gov.nabh.k30notset", "Reporting year not configured: this month only"));
+      else if (m.yearToDateFrom) out.push(T(c, "site.gov.nabh.k30ytd", "Year to date from {from}", { from: m.yearToDateFrom }));
+    }
+    return out.length ? '<br><span class="quiet">' + out.map(function (x) { return c.esc(x); }).join("<br>") + "</span>" : "";
+  }
   function nabhTab(c, body, g) {
     var s = g.nabh || (g.nabh = { months: "6", data: null });
     var esc = c.esc;
@@ -618,7 +647,7 @@
               (i.computable ? '<br><span class="quiet">' + EN(c, esc([i.dataSource, i.note].filter(Boolean).join(" "))) + "</span>" : "") + "</td>";
             if (!i.computable) return "<tr><td>" + esc(i.no) + "</td>" + title + '<td colspan="' + d.months.length + '"><span class="pill">' + esc(T(c, "site.gov.nabh.notComputable", "Not computable from WardSynQ data")) + "</span> " + EN(c, esc(i.reason)) + "</td></tr>";
             return "<tr><td>" + esc(i.no) + "</td>" + title + i.months.map(function (m) {
-              return "<td>" + (m.value == null ? '<span class="quiet">' + esc(T(c, "site.gov.nabh.noCases", "no cases")) + "</span>" : "<b>" + esc(m.value) + "</b>") + '<br><span class="quiet">' + esc(m.numerator == null ? "" : m.numerator) + " / " + esc(m.denominator == null ? "" : m.denominator) + "</span></td>";
+              return "<td>" + (m.value == null ? '<span class="quiet">' + esc(T(c, "site.gov.nabh.noCases", "no cases")) + "</span>" : "<b>" + esc(m.value) + "</b>") + '<br><span class="quiet">' + esc(m.numerator == null ? "" : m.numerator) + " / " + esc(m.denominator == null ? "" : m.denominator) + "</span>" + nabhCellNote(c, i.no, m) + "</td>";
             }).join("") + "</tr>";
           }).join("") + "</tbody></table></div>";
       }
@@ -836,6 +865,7 @@
   }
 
   WSQ._govErasureHtml = erasureHtml;
+  WSQ._govNabhCellNote = nabhCellNote;
   WSQ._govRequestHtml = requestHtml;
   WSQ._govLawHtml = lawHtml;
   WSQ._govBreachHtml = breachHtml;

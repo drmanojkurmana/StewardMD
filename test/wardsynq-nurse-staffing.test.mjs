@@ -11,8 +11,8 @@
 import { as, seedHospital, patchOrgConfig, H, TENANT, U, ORG, ORG2, idFor } from "./wardsynq-ops-harness.mjs";
 import { test } from "node:test";
 import assert from "node:assert/strict";
-const { requiredNurses, verdict, rostered, dependencyFor, draftRoster, validateStaffingNorms, normaliseInjury, SHIFT_TYPE, INJURY_TYPE } = await import("../functions/_wardsynq/nurse-staffing.js");
-const { computeNabhIndicators } = await import("../functions/_wardsynq/compliance.js");
+const { requiredNurses, verdict, rostered, dependencyFor, draftRoster, validateStaffingNorms, normaliseInjury, ventilationSplit, SHIFT_TYPE, INJURY_TYPE } = await import("../functions/_wardsynq/nurse-staffing.js");
+const { computeNabhIndicators, reportingYearFrom } = await import("../functions/_wardsynq/compliance.js");
 
 const NORMS = { dependencyToolId: "dep", wardTypes: { "Ward A": "General ward" }, norms: [{ unitType: "General ward", shiftId: "*", band: "Level 1", patientsPerNurse: 4 }, { unitType: "General ward", shiftId: "*", band: "Level 2", patientsPerNurse: 2 }] };
 
@@ -97,6 +97,48 @@ test("NABH #21 computes from recorded shifts (ICU and wards apart) and #30 from 
   assert.equal(blocked.computable, false); assert.match(blocked.reason, /could not be read/);
 });
 
+test("R2-1 NABH #21 ICU split: ventilator lines in place at recording, on-duty nurses assigned to each group, unassigned counted beside; a shift not split says so", () => {
+  const now = Date.parse("2026-08-02T05:00:00Z");
+  const patients = ["e1", "e2", "e3", "e4", "e5"].map((e, k) => ({ encounterId: e, patientId: "p" + (k + 1) }));
+  const lines = [
+    { encounterId: "e1", patientId: "p1", deviceClass: "ventilator", insertedAt: "2026-08-01T05:00:00Z", removedAt: null },
+    { patientId: "p2", deviceClass: "ventilator", insertedAt: "2026-08-01T05:00:00Z" },
+    { encounterId: "e3", patientId: "p3", deviceClass: "ventilator", insertedAt: "2026-08-01T05:00:00Z", removedAt: "2026-08-02T04:00:00Z" },
+    { encounterId: "e4", patientId: "p4", deviceClass: "central-line", insertedAt: "2026-08-01T05:00:00Z" },
+  ];
+  const asg = new Map([["e1", { nurseId: "n2" }], ["e2", { nurseId: "n2" }], ["e3", { nurseId: "n2" }], ["e4", { nurseId: "n1" }], ["e5", null]]);
+  const v = ventilationSplit(patients, lines, asg, ["n2"], now);
+  assert.deepEqual(v, { recorded: true, ventilated: { beds: 2, nurses: 1, unassignedBeds: 0 }, nonVentilated: { beds: 3, nurses: 1, unassignedBeds: 2 }, sharedNurses: 1 },
+    "the removed line is not ventilated; n1 is not on duty, so bed e4 is unassigned");
+  const IST = 330 * 60000;
+  const w = { month: "2026-08", fromMs: Date.UTC(2026, 7, 1) - IST, toMs: Date.UTC(2026, 8, 1) - IST - 1, offsetMs: IST, nowMs: Date.UTC(2026, 8, 20) };
+  const StaffingShift = [
+    { recordedAt: "2026-08-02T05:00:00Z", unitType: "ICU", nursesCounted: 2, occupiedBeds: 5, ventilation: v },
+    { recordedAt: "2026-08-03T05:00:00Z", unitType: "ICU", nursesCounted: 2, occupiedBeds: 5, ventilation: { recorded: false, reason: "read failed" } },
+    { recordedAt: "2026-08-02T05:00:00Z", unitType: "General ward", nursesCounted: 2, occupiedBeds: 10, ventilation: null },
+  ];
+  const cell = computeNabhIndicators({ rows: { StaffingShift }, unreadable: {}, windows: [w] }).find((i) => i.no === 21).months[0];
+  const icu = cell.byUnitType.ICU.ventilation;
+  assert.deepEqual([icu.ventilated.value, icu.nonVentilated.value, icu.nonVentilated.unassignedBeds, icu.shiftsSplit, icu.shiftsNotSplit], [0.5, 0.33, 2, 1, 1]);
+  assert.equal(cell.byUnitType["General ward"].ventilation, undefined, "a ward shift shows no split");
+  assert.deepEqual([cell.numerator, cell.denominator], [6, 20], "the overall ratio is unchanged by the split");
+});
+
+test("R2-1 NABH #30 is year to date from the hospital's reporting year; with no setting the month's own rate says so", () => {
+  const IST = 330 * 60000;
+  const mar = { month: "2027-03", fromMs: Date.UTC(2027, 2, 1) - IST, toMs: Date.UTC(2027, 3, 1) - IST - 1, offsetMs: IST, nowMs: Date.UTC(2027, 5, 1) };
+  const rows = {
+    StaffInjury: [{ kind: "needlestick", occurredAt: "2026-03-20T05:00:00Z" }, { kind: "sharp", occurredAt: "2026-04-02T05:00:00Z" }, { kind: "needlestick", occurredAt: "2027-03-10T05:00:00Z" }, { kind: "needlestick", occurredAt: "2027-04-02T05:00:00Z" }],
+    Encounter: [{ class: "IPD", status: "in-progress", periodStart: "2025-01-01T00:00:00Z", periodEnd: null }],
+  };
+  const ytd = computeNabhIndicators({ rows, unreadable: {}, windows: [mar], settings: { reportingYearStartMonth: 4 } }).find((i) => i.no === 30).months[0];
+  assert.deepEqual([ytd.numerator, ytd.denominator, ytd.value, ytd.yearToDateFrom], [2, 1, 2000, "2026-04"], "April 2026 to March 2027 only");
+  const month = computeNabhIndicators({ rows, unreadable: {}, windows: [mar] }).find((i) => i.no === 30).months[0];
+  assert.deepEqual([month.numerator, month.value, month.reportingYearNotConfigured], [1, 1000, true]);
+  assert.equal(reportingYearFrom({ month: "2027-04", offsetMs: IST }, 4).month, "2027-04", "the start month opens a new year");
+  assert.equal(reportingYearFrom({ month: "2027-03", offsetMs: IST }, 1).month, "2027-01");
+});
+
 /* ---------------------------------------------------------------- through the router */
 
 const IST_MIN = 330;
@@ -133,7 +175,7 @@ test("GET and POST /api/queue/org/staffing-norms: 401, 403 for a nurse and anoth
   assert.equal((await as(U.ADMIN, "/org/staffing-norms", "POST", { ...body, orgId: ORG2 })).__status, 403);
   assert.equal((await as(U.NURSE, `/org/staffing-norms?orgId=${ORG}`)).__status, 403);
   const before = await as(U.ADMIN, `/org/staffing-norms?orgId=${ORG}`);
-  assert.equal(before.__status, 200); assert.deepEqual(before.settings, { dependencyToolId: null, wardTypes: {}, norms: [] }, "nothing refused was saved, and nothing is filled in by default");
+  assert.equal(before.__status, 200); assert.deepEqual(before.settings, { dependencyToolId: null, wardTypes: {}, norms: [], icuUnitTypes: [], reportingYearStartMonth: null }, "nothing refused was saved, and nothing is filled in by default");
   assert.deepEqual(before.tools[0].bands, ["Level 1", "Level 2"]);
   const bad = await as(U.ADMIN, "/org/staffing-norms", "POST", { orgId: ORG, settings: { ...NORMS, norms: [{ unitType: "General ward", band: "Level 3", patientsPerNurse: 2 }] } });
   assert.equal(bad.__status, 422); assert.match(bad.message, /Level 3/);
@@ -183,6 +225,52 @@ test("GET /api/queue/ward/nurse-staffing and POST /ward/nurse-staffing-record: 4
   const k21 = k.indicators.find((i) => i.no === 21);
   assert.equal(k21.computable, true, JSON.stringify(k21));
   assert.deepEqual([k21.months[0].numerator, k21.months[0].denominator, k21.months[0].value], [1, 3, 0.33]);
+});
+
+test("R2-1 POST /api/queue/ward/nurse-staffing-record on an ICU unit type: 2 ventilated and 3 other patients give both ratios through GET /ward/nabh-indicators; a ward shift records no split; a store keeper gets 403 on GET /ward/nurse-staffing", async () => {
+  const { date } = await setup();
+  assert.equal((await as(U.STORE, `/ward/nurse-staffing?orgId=${ORG}&date=${date}`)).__status, 403, "same hospital, a role with no business with the census");
+  const ICU = { dependencyToolId: null, wardTypes: { "Ward A": "ICU" }, norms: [{ unitType: "ICU", shiftId: "*", band: "*", patientsPerNurse: 1 }], icuUnitTypes: ["ICU"] };
+  const badIcu = await as(U.ADMIN, "/org/staffing-norms", "POST", { orgId: ORG, settings: { ...ICU, icuUnitTypes: ["HDU"] } });
+  assert.equal(badIcu.__status, 422); assert.match(badIcu.message, /HDU/);
+  assert.equal((await as(U.ADMIN, "/org/staffing-norms", "POST", { orgId: ORG, settings: ICU })).__status, 200);
+  const nurse2 = idFor(U.NURSE2), inserted = new Date(Date.now() - 5 * 3600000).toISOString();
+  await H.RECORD.append(TENANT, [
+    ...["4", "5"].map((b) => ({ resourceType: "Encounter", id: "enc-" + b, version: 1, patientId: "opd-pat-mrn-" + b, class: "ICU", status: "in-progress", periodStart: "2026-09-01T05:00:00Z", periodEnd: null, location: { ward: "Ward A", bed: b }, ...META() })),
+    ...["1", "2"].map((b) => ({ resourceType: "LineRecord", id: "line-" + b, version: 1, patientId: "opd-pat-mrn-" + b, encounterId: "enc-" + b, type: "ETT", deviceClass: "ventilator", insertedAt: inserted, removedAt: null, ...META() })),
+    ...["1", "2", "3"].map((b) => ({ resourceType: "NurseAssignment", id: "wsq-nassign-enc-" + b, version: 1, patientId: "opd-pat-mrn-" + b, encounterId: "enc-" + b, nurseId: nurse2, history: [], ...META() })),
+    { resourceType: "NurseAssignment", id: "wsq-nassign-enc-4", version: 1, patientId: "opd-pat-mrn-4", encounterId: "enc-4", nurseId: idFor(U.NURSE), history: [], ...META() },
+  ]);
+  const saved = await as(U.NURSE, "/ward/nurse-staffing-record", "POST", { orgId: ORG, date, shiftId: "wa-day" });
+  assert.equal(saved.__status, 200, JSON.stringify(saved));
+  assert.deepEqual(saved.record.ventilation, { recorded: true, ventilated: { beds: 2, nurses: 1, unassignedBeds: 0 }, nonVentilated: { beds: 3, nurses: 1, unassignedBeds: 2 }, sharedNurses: 1 },
+    "the in-charge's patient and the patient with no assignment are unassigned");
+  const k = await as(U.ADMIN, `/ward/nabh-indicators?orgId=${ORG}&months=1`);
+  const v = k.indicators.find((i) => i.no === 21).months[0].byUnitType.ICU.ventilation;
+  assert.deepEqual([v.ventilated.value, v.nonVentilated.value], [0.5, 0.33]);
+
+  assert.equal((await as(U.ADMIN, "/org/staffing-norms", "POST", { orgId: ORG, settings: NORMS })).__status, 200);
+  const ward = await as(U.NURSE, "/ward/nurse-staffing-record", "POST", { orgId: ORG, date, shiftId: "wa-day" });
+  assert.equal(ward.__status, 200, JSON.stringify(ward)); assert.equal(ward.record.ventilation, null, "a ward shift records no split");
+});
+
+test("R2-1 POST /api/queue/org/reporting-year: 401, 403 for a nurse and another hospital, a reason required, nothing saved when refused; the admin sets April and #30 is year to date; saving the norms keeps it", async () => {
+  await setup();
+  const body = { orgId: ORG, month: 4, reason: "Financial year reporting" };
+  assert.equal((await as(null, "/org/reporting-year", "POST", body)).__status, 401);
+  assert.equal((await as(U.NURSE, "/org/reporting-year", "POST", body)).__status, 403);
+  assert.equal((await as(U.ADMIN, "/org/reporting-year", "POST", { ...body, orgId: ORG2 })).__status, 403);
+  assert.equal((await as(U.ADMIN, "/org/reporting-year", "POST", { ...body, reason: "" })).error, "reason_required");
+  assert.equal((await as(U.ADMIN, "/org/reporting-year", "POST", { ...body, month: 13 })).error, "month_invalid");
+  assert.equal((await as(U.ADMIN, `/org/staffing-norms?orgId=${ORG}`)).settings.reportingYearStartMonth, null, "nothing saved by refused calls, and no default");
+  let k30 = (await as(U.ADMIN, `/ward/nabh-indicators?orgId=${ORG}&months=1`)).indicators.find((i) => i.no === 30);
+  assert.equal(k30.months[0].reportingYearNotConfigured, true);
+  const ok = await as(U.ADMIN, "/org/reporting-year", "POST", body);
+  assert.equal(ok.__status, 200, JSON.stringify(ok)); assert.equal(ok.reportingYearStartMonth, 4);
+  assert.equal((await as(U.ADMIN, "/org/staffing-norms", "POST", { orgId: ORG, settings: NORMS })).settings.reportingYearStartMonth, 4, "saving the norms keeps the reporting year");
+  k30 = (await as(U.ADMIN, `/ward/nabh-indicators?orgId=${ORG}&months=1`)).indicators.find((i) => i.no === 30);
+  const m = k30.months[0].month, y = Number(m.slice(0, 4)), mo = Number(m.slice(5));
+  assert.equal(k30.months[0].yearToDateFrom, `${mo >= 4 ? y : y - 1}-04`);
 });
 
 test("GET /api/queue/ward/staffing-draft and POST /roster/draft-publish: 401, 403 for a nurse and another hospital, nothing written; the draft skips a nurse on approved leave and publishing needs staff.admin", async () => {

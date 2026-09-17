@@ -30,7 +30,24 @@ test("a missing dependency level is listed, the requirement says at least, and s
 
 test("the norms text an admin types becomes the rows the server checks, and back", () => {
   const n = S.textToNorms("dep", "Ward A | General ward\nICU 1 | ICU", "General ward | * | Level 1 | 4\nICU | night | * | 0.5");
-  assert.deepEqual(JSON.parse(JSON.stringify(n)), { dependencyToolId: "dep", wardTypes: { "Ward A": "General ward", "ICU 1": "ICU" }, norms: [{ unitType: "General ward", shiftId: "*", band: "Level 1", patientsPerNurse: 4 }, { unitType: "ICU", shiftId: "night", band: "*", patientsPerNurse: 0.5 }] });
+  assert.deepEqual(JSON.parse(JSON.stringify(n)), { dependencyToolId: "dep", wardTypes: { "Ward A": "General ward", "ICU 1": "ICU" }, norms: [{ unitType: "General ward", shiftId: "*", band: "Level 1", patientsPerNurse: 4 }, { unitType: "ICU", shiftId: "night", band: "*", patientsPerNurse: 0.5 }], icuUnitTypes: [] });
   assert.equal(S.normsToText(n).norms, "General ward | * | Level 1 | 4\nICU | night | * | 0.5");
   assert.equal(S.textToNorms("", "", "ICU | *").norms[0].patientsPerNurse, null, "a blank figure is sent blank for the server to refuse, never guessed");
+});
+
+test("R2-1: ICU unit types round-trip; an ended ICU shift shows both ratios' inputs or says the split was not read; the reporting year says not configured", () => {
+  const n = S.textToNorms("", "ICU 1 | ICU", "ICU | * | * | 1", " ICU , HDU ");
+  assert.deepEqual(JSON.parse(JSON.stringify(n.icuUnitTypes)), ["ICU", "HDU"]);
+  assert.equal(S.normsToText(n).icu, "ICU, HDU");
+  const rec = { occupiedBeds: 5, required: 5, rosteredNurses: 2, onDutyNurses: 2, verdict: "short", recordedAt: "2026-09-17T09:00:00Z",
+    ventilation: { recorded: true, ventilated: { beds: 2, nurses: 1, unassignedBeds: 0 }, nonVentilated: { beds: 3, nurses: 1, unassignedBeds: 2 }, sharedNurses: 1 } };
+  const html = S.staffingHtml(C, { ok: true, rotaConfigured: true, toolFound: true, wards: [{ ward: "ICU 1", shifts: [row({ timing: "ended", recorded: rec })] }] }, true);
+  assert.match(html, /Ventilated: 1 nurses for 2 patients \(0 not assigned\)\. Not ventilated: 1 nurses for 3 patients \(2 not assigned\)\./);
+  assert.match(S.ventText(C, { recorded: false }), /were not counted apart/);
+  assert.equal(S.ventText(C, null), "", "a ward shift shows no split");
+  assert.match(S.yearHtml(C, null), /Not configured/);
+  assert.match(S.yearHtml(C, 4), /starts in month 4/);
+  const norms = S.normsHtml(C, { ok: true, settings: { dependencyToolId: null, wardTypes: {}, norms: [], icuUnitTypes: ["ICU"], reportingYearStartMonth: null }, tools: [], shifts: [] });
+  assert.ok(norms.includes('id="stfIcu" value="ICU"') && norms.includes('data-staff="year"'));
+  assert.ok(read("wardsynq/site/pages/staffing.js").includes('c.api("/org/reporting-year"'));
 });

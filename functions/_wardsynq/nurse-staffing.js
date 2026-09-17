@@ -9,6 +9,10 @@
  *   wardTypes  { "<ward>": "<unit type>" }                                          e.g. which wards are ICUs
  *   norms      [{ unitType, shiftId ("*" every shift), band ("*" any level), patientsPerNurse }]
  *   dependencyToolId  the riskTools id whose bands are the dependency levels, or null to count every patient alike
+ *   icuUnitTypes      the unit types that are ICUs: a shift recorded there also counts ventilated and non-ventilated
+ *                     patients apart (NABH #21 remarks), from the ventilator line log and the nursing assignment
+ *   reportingYearStartMonth  1-12, the month the hospital's reporting year starts (NABH #30 is year to date; NABH does
+ *                     not say calendar or financial year). Saved on its own with a reason; no default
  *
  * WHAT IS NOT KNOWN IS SAID. A ward with no unit type or a unit type with no norm is "not configured", never "fully
  * staffed". A patient with no dependency level for the shift is listed as missing, and the requirement is then a lower
@@ -60,7 +64,9 @@ function readStaffingNorms(cfg) {
   for (const [w, t] of Object.entries(s.wardTypes && typeof s.wardTypes === "object" ? s.wardTypes : {})) if (str(w) && str(t)) wardTypes[str(w)] = str(t);
   const norms = (Array.isArray(s.norms) ? s.norms : []).filter((n) => n && str(n.unitType) && Number(n.patientsPerNurse) > 0)
     .map((n) => ({ unitType: str(n.unitType), shiftId: str(n.shiftId) || "*", band: str(n.band) || "*", patientsPerNurse: Number(n.patientsPerNurse) }));
-  return { dependencyToolId: str(s.dependencyToolId) || null, wardTypes, norms };
+  const icuUnitTypes = (Array.isArray(s.icuUnitTypes) ? s.icuUnitTypes : []).map(str).filter(Boolean);
+  const m = Number(s.reportingYearStartMonth);
+  return { dependencyToolId: str(s.dependencyToolId) || null, wardTypes, norms, icuUnitTypes, reportingYearStartMonth: Number.isInteger(m) && m >= 1 && m <= 12 ? m : null };
 }
 
 /** PURE. Validates what the admin sent against the hospital's risk tools and shifts. -> { value, errors } */
@@ -96,10 +102,51 @@ function validateStaffingNorms(input, riskTools, shiftIds) {
     seen.add(key);
     norms.push({ unitType, shiftId, band, patientsPerNurse: ppn });
   }
-  return { value: { dependencyToolId: toolId, wardTypes, norms }, errors };
+  const icuUnitTypes = [...new Set((Array.isArray(i.icuUnitTypes) ? i.icuUnitTypes : []).map(str).filter(Boolean))].slice(0, 50);
+  for (const t of icuUnitTypes) if (!Object.values(wardTypes).some((x) => low(x) === low(t))) errors.push(`ICU unit type "${t.slice(0, 60)}": no ward has this unit type.`);
+  return { value: { dependencyToolId: toolId, wardTypes, norms, icuUnitTypes }, errors };
 }
 
 /* ------------------------------------------------------------------ pure calculation */
+
+/**
+ * PURE. NABH #21 for an ICU shift: ventilated and non-ventilated patients apart. A patient is ventilated when a line with
+ * deviceClass "ventilator" is in place at `nowMs`. Nurses are the distinct nurses on duty now (the in-charge already left
+ * out) assigned to a patient of the group; a nurse assigned to both groups counts in both and is counted as shared. A
+ * patient with no assignment, or assigned to someone not on duty, is counted beside as unassigned.
+ * patients: [{encounterId, patientId}]; lines: LineRecord rows; assignments: Map encounterId -> NurseAssignment|null.
+ */
+function ventilationSplit(patients, lines, assignments, onDutyIds, nowMs) {
+  const inPlace = (l) => { const a = ms(l.insertedAt), b = ms(l.removedAt); return a != null && a <= nowMs && (b == null || b > nowMs); };
+  const vented = (p) => (lines || []).some((l) => l && l.deviceClass === "ventilator" && inPlace(l) && (l.encounterId ? str(l.encounterId) === str(p.encounterId) : str(l.patientId) === str(p.patientId)));
+  const duty = new Set(onDutyIds || []);
+  const group = () => ({ beds: 0, nurses: 0, unassignedBeds: 0, ids: new Set() });
+  const g = { ventilated: group(), nonVentilated: group() };
+  for (const p of patients || []) {
+    const x = vented(p) ? g.ventilated : g.nonVentilated;
+    x.beds++;
+    const a = assignments.get(p.encounterId);
+    if (a && a.nurseId && duty.has(a.nurseId)) x.ids.add(a.nurseId); else x.unassignedBeds++;
+  }
+  const out = (x) => ({ beds: x.beds, nurses: x.ids.size, unassignedBeds: x.unassignedBeds });
+  return { recorded: true, ventilated: out(g.ventilated), nonVentilated: out(g.nonVentilated), sharedNurses: [...g.ventilated.ids].filter((id) => g.nonVentilated.ids.has(id)).length };
+}
+
+/** The ventilation split for the patients of one ward now, read through the record. A read that fails is "not recorded". */
+async function readVentilationSplit(request, env, ctx, patients, onDutyIds, nowMs) {
+  try {
+    const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, "record:read", ctx.actorDeps);
+    const svc = new RecordService({ repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym, tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source });
+    const lines = [], assignments = new Map();
+    for (const p of patients) {
+      if (p.patientId) lines.push(...((await svc.byPatient("LineRecord", p.patientId)) || []));
+      assignments.set(p.encounterId, p.encounterId ? await svc.get("NurseAssignment", `wsq-nassign-${low(p.encounterId).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`) : null);
+    }
+    return ventilationSplit(patients, lines, assignments, onDutyIds, nowMs);
+  } catch {
+    return { recorded: false, reason: "The ventilator lines or nursing assignments could not be read, so ventilated and non-ventilated patients were not counted apart." };
+  }
+}
 
 /** PURE. The instant span of one shift on one local date: [startMs, endMs). */
 function shiftWindow(date, shift, off) {
@@ -221,7 +268,7 @@ async function censusAndDependency(request, env, ctx) {
       return { error: { ok: false, status, error: "dependency_unavailable", message: "The dependency assessments could not be read, so the nurses required cannot be worked out." } };
     }
   }
-  const wards = (board.wards || []).map((w) => ({ ward: w.ward, patients: [...(w.occupied || []), ...(w.unplaced || [])].map((p) => ({ encounterId: p.encounterId, bed: p.bed || null })) }));
+  const wards = (board.wards || []).map((w) => ({ ward: w.ward, patients: [...(w.occupied || []), ...(w.unplaced || [])].map((p) => ({ encounterId: p.encounterId, patientId: p.patientId || null, bed: p.bed || null })) }));
   return { settings, tool, assessments, wards, assessmentsCapped: assessments.length >= ASSESS_READ };
 }
 
@@ -258,7 +305,7 @@ function shiftRow(ctx, cd, unit, shift, date, nowMs, off, recorded) {
 }
 
 const recordSummary = (rec) => ({ id: rec.id, version: rec.version, recordedAt: rec.recordedAt, recordedBy: rec.recordedBy, unitType: rec.unitType, occupiedBeds: rec.occupiedBeds, required: rec.required,
-  complete: rec.complete, nursesCounted: rec.nursesCounted, counted: rec.counted, rosteredNurses: rec.rosteredNurses, onDutyNurses: rec.onDutyNurses, inCharge: rec.inCharge, verdict: rec.verdict });
+  complete: rec.complete, nursesCounted: rec.nursesCounted, counted: rec.counted, rosteredNurses: rec.rosteredNurses, onDutyNurses: rec.onDutyNurses, inCharge: rec.inCharge, verdict: rec.verdict, ventilation: rec.ventilation || null });
 
 async function readPrefix(repo, tenantId, type, prefix) {
   const rows = [];
@@ -314,12 +361,16 @@ async function recordShiftStaffing(request, env, ctx) {
   try { current = await repo.latest(tenantId, SHIFT_TYPE, id); } catch { return refuse(502, "staffing_records_unreadable", "The recorded shift staffing could not be read, so nothing was saved."); }
   const at = new Date(nowMs).toISOString();
   const req = row.requirement;
+  /* An ICU unit type also counts ventilated and non-ventilated patients apart; a ward records no split. */
+  const icu = cd.settings.icuUnitTypes.some((t) => low(t) === low(req.unitType));
+  const w = cd.wards.find((x) => low(x.ward) === low(shift.unit));
+  const ventilation = icu ? await readVentilationSplit(request, env, ctx, w ? w.patients : [], (row.onDuty || []).map((a) => a.identity), nowMs) : null;
   const rec = {
     resourceType: SHIFT_TYPE, id, version: current ? current.version + 1 : 1, date, shiftId: shift.id, shift: shift.name, ward: shift.unit, unitType: req.unitType,
     occupiedBeds: req.census, required: req.required, complete: req.complete, lines: req.lines, missingDependency: req.missing.length, noNorm: req.noNorm,
     rosteredNurses: row.rosteredNurses, onDutyNurses: row.onDutyNurses, inCharge: row.inCharge,
     // The count NABH asks for is the nursing staff actually there: on duty now, the in-charge left out.
-    nursesCounted: row.onDutyNurses, counted: "on-duty", verdict: row.onDutyVerdict,
+    nursesCounted: row.onDutyNurses, counted: "on-duty", verdict: row.onDutyVerdict, ventilation,
     recordedAt: at, recordedBy: str(ctx.actorId), writtenBy: { id: str(ctx.actorId), kind: "human", at },
   };
   try { await repo.append(tenantId, [rec], { audit: auditEvent("staffing.shift_recorded", ctx.actorId, { id, version: rec.version, beds: rec.occupiedBeds, nurses: rec.nursesCounted, required: rec.required }) }); }
@@ -408,6 +459,6 @@ async function readStaffingRows(repo, tenantId, months) {
 }
 
 export {
-  SHIFT_TYPE, INJURY_TYPE, INJURY_KINDS, readStaffingNorms, validateStaffingNorms, shiftWindow, dependencyFor, requiredNurses, verdict, rostered, draftRoster,
+  SHIFT_TYPE, INJURY_TYPE, INJURY_KINDS, readStaffingNorms, validateStaffingNorms, ventilationSplit, shiftWindow, dependencyFor, requiredNurses, verdict, rostered, draftRoster,
   normaliseInjury, nurseStaffingView, recordShiftStaffing, staffingDraft, reportStaffInjury, staffInjuries, readStaffingRows, DAY,
 };
