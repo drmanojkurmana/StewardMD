@@ -305,14 +305,24 @@ function rescheduleCell(cases, w) {
   return { numerator: n, denominator: planned.length, value: planned.length ? Math.round((n / planned.length) * 10000) / 100 : null };
 }
 
-/** PURE. Month cell for #6: cases with an incision in the month flagged by the surgeon as an unplanned return. */
-function unplannedReturnCell(cases, w) {
-  const ops = (cases || []).filter((c) => { const t = caseMs(c, "incisionAt"); return t != null && t >= w.fromMs && t <= w.toMs; });
+/* NABH #6 remarks: "shall not include surgeries under LA". The anaesthesia technique recorded in WardSynQ is the planned
+ * technique on the pre-anaesthetic checkup (migrate-surgery.js PAC_TECHNIQUE); the anaesthesia record itself carries none.
+ * Of that closed list only local-with-monitoring is local anaesthesia; a regional block or spinal is not. */
+const LOCAL_TECHNIQUES = Object.freeze(["local-with-monitoring"]);
+
+/** PURE. Month cell for #6: cases with an incision in the month flagged by the surgeon as an unplanned return. With
+ *  `techniqueOf` (caseId -> technique or null), cases under local anaesthesia are left out of both counts and counted
+ *  beside, and cases with no technique recorded stay in and are counted beside. */
+function unplannedReturnCell(cases, w, techniqueOf) {
+  const inMonth = (cases || []).filter((c) => { const t = caseMs(c, "incisionAt"); return t != null && t >= w.fromMs && t <= w.toMs; });
+  const tech = (c) => (techniqueOf ? techniqueOf.get(c.id) || null : null);
+  const ops = techniqueOf ? inMonth.filter((c) => !LOCAL_TECHNIQUES.includes(tech(c))) : inMonth;
   const n = ops.filter((c) => c.unplannedReturn && c.unplannedReturn.value === true).length;
-  return { numerator: n, denominator: ops.length, value: ops.length ? Math.round((n / ops.length) * 10000) / 100 : null, unreviewed: ops.filter((c) => !c.unplannedReturn).length };
+  return { numerator: n, denominator: ops.length, value: ops.length ? Math.round((n / ops.length) * 10000) / 100 : null, unreviewed: ops.filter((c) => !c.unplannedReturn).length,
+    ...(techniqueOf ? { localAnaesthesiaExcluded: inMonth.length - ops.length, techniqueNotRecorded: ops.filter((c) => !tech(c)).length } : {}) };
 }
 
 export {
   TYPE, OWNER_KINDS, POSTPONE_COUNTS_AFTER_MS, theatreSettings, TheatreSession, sessionIdFor, sessionStatus, overlapMinutes, heldSessionFor,
-  createTheatreSession, releaseTheatreSession, computeTheatreUtilisation, theatreUtilisation, rescheduleOf, rescheduleCell, unplannedReturnCell,
+  createTheatreSession, releaseTheatreSession, computeTheatreUtilisation, theatreUtilisation, rescheduleOf, rescheduleCell, unplannedReturnCell, LOCAL_TECHNIQUES,
 };

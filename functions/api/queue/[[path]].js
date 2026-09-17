@@ -4710,7 +4710,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "quality-audit" && method === "POST") {
-        const r = await recordAudit(request, env, { ...deps, templateId: body.templateId, at: body.at, unit: body.unit, patientId: body.patientId || (body.mrn ? patientIdForMrn(body.mrn) : ""), answers: body.answers, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordAudit(request, env, { ...deps, templateId: body.templateId, at: body.at, unit: body.unit, patientId: body.patientId || (body.mrn ? patientIdForMrn(body.mrn) : ""), answers: body.answers, note: body.note, department: body.department, auditorOutside: body.auditorOutside, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "mock-drill" && method === "POST") {

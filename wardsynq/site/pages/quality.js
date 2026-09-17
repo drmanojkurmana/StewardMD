@@ -46,7 +46,8 @@
   }
   function kindWord(c, k) {
     var w = { "hand-hygiene": T(c, "site.qual.kind.handHygiene", "Hand hygiene (NABH 17)"), consent: T(c, "site.qual.kind.consent", "Consent in medical records (NABH 25)"),
-      handover: T(c, "site.qual.kind.handover", "Handover (NABH 31)"), prescription: T(c, "site.qual.kind.prescription", "Prescription (NABH 32)"), other: T(c, "site.qual.kind.other", "Other") };
+      handover: T(c, "site.qual.kind.handover", "Handover (NABH 31)"), prescription: T(c, "site.qual.kind.prescription", "Prescription (NABH 32)"),
+      "diagnostic-safety": T(c, "site.qual.kind.diagnosticSafety", "Safety precautions in diagnostics (NABH 3)"), other: T(c, "site.qual.kind.other", "Other") };
     return Object.prototype.hasOwnProperty.call(w, k) ? c.esc(w[k]) : EN(c, c.esc(k));
   }
   function deviceWord(c, d) {
@@ -151,6 +152,7 @@
   }
 
   /* ---------------------------------------------------------------- audits and drills */
+  function deptWord(c, k) { return k === "laboratory" ? T(c, "site.qual.dept.laboratory", "Laboratory") : k === "radiology" ? T(c, "site.qual.dept.radiology", "Radiology") : k; }
   function auditFormHtml(c, d, templateId) {
     var esc = c.esc, active = (d.templates || []).filter(function (t) { return t.active !== false; });
     if (!active.length) return "<p>" + esc(T(c, "site.qual.audit.noTemplates", "No checklist yet. Write one below first.")) + "</p>";
@@ -160,6 +162,9 @@
     return '<div class="row"><label class="f"><span>' + esc(T(c, "site.qual.audit.checklist", "Checklist")) + '</span><select id="qTpl">' + active.map(function (t) { return '<option value="' + esc(t.id) + '"' + (t.id === cur.id ? " selected" : "") + ">" + EN(c, esc(t.name)) + "</option>"; }).join("") + "</select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.qual.when", "When")) + '</span><input id="qAuAt" type="datetime-local"></label><label class="f"><span>' + esc(T(c, "site.qual.audit.unit", "Ward or unit")) + '</span><input id="qAuUnit"></label>' +
       '<label class="f"><span>' + esc(T(c, "site.qual.mrnOptional", "MRN, if a record was audited")) + '</span><input id="qAuMrn"></label></div>' +
+      (cur.kind === "diagnostic-safety" ? '<p class="quiet">' + esc(T(c, "site.qual.audit.diagHelp", "One audit is one member of staff in the laboratory or radiology. NABH asks that the auditor is from outside the department audited.")) + '</p><div class="row"><label class="f"><span>' + esc(T(c, "site.qual.audit.department", "Department audited")) + '</span><select id="qAuDept"><option value=""></option>' +
+        ["laboratory", "radiology"].map(function (k) { return '<option value="' + k + '">' + esc(deptWord(c, k)) + "</option>"; }).join("") + "</select></label>" +
+        '<label class="f"><span>' + esc(T(c, "site.qual.audit.outside", "I work outside the department audited")) + '</span><select id="qAuOutside"><option value=""></option><option value="yes">' + esc(T(c, "site.qual.yes", "Yes")) + '</option><option value="no">' + esc(T(c, "site.qual.no", "No")) + "</option></select></label></div>" : "") +
       '<div class="tbl"><table>' + cur.items.map(function (it) {
         var n = "qAns-" + esc(it.id);
         return "<tr><td>" + EN(c, esc(it.text)) + "</td><td>" + ["yes", "no", "na"].map(function (a) {
@@ -173,7 +178,7 @@
     var esc = c.esc;
     var sum = d.summary ? '<div class="tbl"><table><tr><th>' + esc(T(c, "site.qual.audit.kind", "Kind")) + "</th><th>" + esc(T(c, "site.qual.audit.audited", "Audited")) + "</th><th>" + esc(T(c, "site.qual.audit.compliant", "Compliant")) + "</th></tr>" +
       d.kinds.map(function (k) { var s = d.summary[k]; return "<tr><td>" + kindWord(c, k) + "</td><td>" + esc(s.audited) + "</td><td>" + esc(s.compliant) + "</td></tr>"; }).join("") + "</table></div>" : failed(c, { detail: d.auditsError });
-    var list = d.audits == null ? "" : d.audits.map(function (a) { return "<li>" + esc(when(a.at)) + " · " + EN(c, esc(a.templateName + (a.unit ? " · " + a.unit : ""))) + " · " + esc(a.compliant ? T(c, "site.qual.audit.isCompliant", "compliant") : T(c, "site.qual.audit.notCompliant", "not compliant")) + "</li>"; }).join("");
+    var list = d.audits == null ? "" : d.audits.map(function (a) { return "<li>" + esc(when(a.at)) + " · " + EN(c, esc(a.templateName + (a.unit ? " · " + a.unit : ""))) + (a.department ? " · " + esc(deptWord(c, a.department)) : "") + " · " + esc(a.compliant ? T(c, "site.qual.audit.isCompliant", "compliant") : T(c, "site.qual.audit.notCompliant", "not compliant")) + "</li>"; }).join("");
     var tpl = d.templates == null ? failed(c, { detail: d.templatesError }) : auditFormHtml(c, d, templateId);
     return '<div class="card"><h2>' + esc(T(c, "site.qual.audit.summaryTitle", "This month")) + "</h2>" + sum + (list ? "<ul>" + list + "</ul>" : "") + "</div>" +
       '<div class="card"><h2>' + esc(T(c, "site.qual.audit.recordTitle", "Record an audit")) + '</h2><p class="quiet">' + esc(T(c, "site.qual.audit.help", "One audit is one observation: one hand hygiene opportunity, one record, one handover or one prescription. It is compliant when no item is answered no.")) + "</p>" + tpl + "</div>" +
@@ -343,7 +348,8 @@
       if (act === "audit") {
         var tpl = find(data && data.templates, "id", id), answers = {};
         (tpl ? tpl.items : []).forEach(function (it) { ["yes", "no", "na"].forEach(function (a) { if (checked("qAns-" + it.id + "-" + a)) answers[it.id] = a; }); });
-        return post("/ward/quality-audit", { templateId: id, at: isoFromLocal(val("qAuAt")) || undefined, unit: val("qAuUnit"), mrn: val("qAuMrn"), answers: answers }, T(c, "site.qual.saved", "Saved."));
+        return post("/ward/quality-audit", { templateId: id, at: isoFromLocal(val("qAuAt")) || undefined, unit: val("qAuUnit"), mrn: val("qAuMrn"), answers: answers,
+          department: tpl && tpl.kind === "diagnostic-safety" ? val("qAuDept") : undefined, auditorOutside: tpl && tpl.kind === "diagnostic-safety" && val("qAuOutside") ? val("qAuOutside") === "yes" : undefined }, T(c, "site.qual.saved", "Saved."));
       }
       if (act === "drill") return post("/ward/mock-drill", { drillType: val("qDrType"), at: isoFromLocal(val("qDrAt")), location: val("qDrLoc"), participants: val("qDrPeople"), scenario: val("qDrScen"), variations: lines("qDrVar"), correctiveActions: val("qDrAct") }, T(c, "site.qual.saved", "Saved."));
       if (act === "adr") {

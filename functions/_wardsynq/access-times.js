@@ -167,6 +167,8 @@ async function accessTimes(request, env, ctx) {
   const w = { fromMs, toMs, offsetMs: off };
   const read = async (t) => { try { return { rows: ((await svc.list(t, 5000)) || []).filter(Boolean) }; } catch (e) { return { failed: e instanceof GovernanceError ? "not readable with this role" : "read failed" }; } };
   const [enc, appt, dx] = await Promise.all([read("Encounter"), read("Appointment"), read(TYPE)]);
+  /* A role that may read neither the visits nor the diagnostic counter has no waits to see: refused, not an empty 200. */
+  if (enc.failed === "not readable with this role" && dx.failed === "not readable with this role") return { ...base, ok: false, status: 403, error: "permission", detail: "Visits and diagnostic visits are not readable with this role.", opd: null, diagnostics: null };
   /* A list that could not be read is null with the reason, never an empty list. Appointments only move the clock start,
    * so without them the OPD waits are still shown, measured from arrival, and the screen says the appointments were not read. */
   const opd = enc.failed ? null : opdWaits(enc.rows, appt.rows || [], w);

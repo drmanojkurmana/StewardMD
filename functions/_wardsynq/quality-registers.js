@@ -4,7 +4,10 @@
  *   Audit checklists       the hospital writes the checklist (hand hygiene, consent, handover, prescription or its own),
  *                          and each audit answers every item yes, no or not applicable. One audit is one observed unit:
  *                          one hand hygiene opportunity, one medical record, one handover, one prescription. It is
- *                          compliant when no item is answered no. NABH PSQ 3b #17, 3c #25, 3d #31, #32.
+ *                          compliant when no item is answered no. NABH PSQ 3b #17, 3c #25, 3d #31, #32. A diagnostics
+ *                          safety audit (PSQ 3a #3) is one member of staff in the laboratory or radiology, and records
+ *                          which department and the auditor's own statement that they are not from it (NABH asks for an
+ *                          auditor from outside the department; members carry no department, so this is not enforced).
  *   Mock drills            what was drilled, when and where, and every variation observed (PSQ 3d #27).
  *   Emergency stock-outs   one event per emergency medicine not available, from the hospital's own list (PSQ 3c #26:
  *                          "each counted separately"), closed when it is back.
@@ -29,7 +32,8 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const TPL = "QualityAuditTemplate", AUDIT = "QualityAudit", DRILL = "MockDrill", STOCKOUT = "EmergencyStockOut", ADR = "AdverseDrugReaction", EDRET = "EdReturnReview";
-const AUDIT_KINDS = Object.freeze(["hand-hygiene", "consent", "handover", "prescription", "other"]);
+const AUDIT_KINDS = Object.freeze(["hand-hygiene", "consent", "handover", "prescription", "diagnostic-safety", "other"]);
+const DIAGNOSTIC_DEPARTMENTS = Object.freeze(["laboratory", "radiology"]);
 const ANSWERS = Object.freeze(["yes", "no", "na"]);
 const ADR_SERIOUS = Object.freeze(["death", "life-threatening", "hospitalisation", "disability", "congenital-anomaly", "other-medically-important"]);
 const ADR_OUTCOMES = Object.freeze(["recovered", "recovering", "not-recovered", "fatal", "recovered-with-sequelae", "unknown"]);
@@ -187,7 +191,7 @@ async function saveAuditTemplate(request, env, ctx) {
   } catch (e) { return { ...base, ...failure(e, { written: 0 }) }; }
 }
 
-/** ctx: { migration, templateId, at?, unit?, patientId?, answers, note?, idempotencyKey? } */
+/** ctx: { migration, templateId, at?, unit?, patientId?, answers, note?, department?, auditorOutside?, idempotencyKey? } */
 async function recordAudit(request, env, ctx) {
   const base = baseOf(ctx.migration);
   if (off(ctx.migration)) return { ...base, ok: true, skipped: "off", written: 0 };
@@ -201,9 +205,12 @@ async function recordAudit(request, env, ctx) {
   if (tpl.active === false) return { ...base, ok: false, status: 409, error: "template_inactive", written: 0 };
   const s = scoreAudit(tpl, ctx.answers);
   if (s.error) return { ...base, ok: false, status: 422, error: s.error, detail: s.detail, written: 0 };
+  const diag = tpl.kind === "diagnostic-safety";
+  if (diag && !DIAGNOSTIC_DEPARTMENTS.includes(str(ctx.department))) return { ...base, ok: false, status: 422, error: "department_required", detail: `the department audited is one of ${DIAGNOSTIC_DEPARTMENTS.join(", ")}`, written: 0 };
+  if (diag && typeof ctx.auditorOutside !== "boolean") return { ...base, ok: false, status: 422, error: "auditor_statement_required", detail: "say whether you, the auditor, work outside the department audited", written: 0 };
   const record = { resourceType: AUDIT, id: "wsq-audit-" + crypto.randomUUID(), templateId: tpl.id, templateVersion: tpl.version, templateName: tpl.name, kind: tpl.kind,
     at: new Date(ms(at)).toISOString(), unit: str(ctx.unit) || null, patientId: str(ctx.patientId) || null, items: s.items, compliant: s.compliant,
-    note: str(ctx.note) || null, auditedBy: resolved.actor.id };
+    note: str(ctx.note) || null, auditedBy: resolved.actor.id, ...(diag ? { department: str(ctx.department), auditorOutsideDepartment: ctx.auditorOutside } : {}) };
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, auditId: record.id, compliant: s.compliant, version: out.record.version };
@@ -384,7 +391,7 @@ async function reviewEdReturn(request, env, ctx) {
 }
 
 export {
-  TPL, AUDIT, DRILL, STOCKOUT, ADR, EDRET, AUDIT_KINDS, ANSWERS, ADR_SERIOUS, ADR_OUTCOMES, ADR_ACTIONS, ADR_REAPPEARED,
+  TPL, AUDIT, DRILL, STOCKOUT, ADR, EDRET, AUDIT_KINDS, DIAGNOSTIC_DEPARTMENTS, ANSWERS, ADR_SERIOUS, ADR_OUTCOMES, ADR_ACTIONS, ADR_REAPPEARED,
   normaliseTemplate, scoreAudit, auditSummary, edReturnPairs, normaliseAdr,
   saveAuditTemplate, recordAudit, recordMockDrill, qualityRegisters, reportAdr, emergencyStock, recordStockOut, restoreStockOut, edReturns, reviewEdReturn,
 };

@@ -92,6 +92,22 @@ test("NABH 19 counts cancellations and starts beyond 4 hours of the first booked
   assert.deepEqual(unplannedReturnCell(ops, AUG), { numerator: 1, denominator: 3, value: 33.33, unreviewed: 1 });
 });
 
+test("R2-1 NABH 6 leaves out a case under local anaesthesia from both counts; a case with no checkup stays in and is counted beside", () => {
+  const ops = [
+    { id: "la", incisionAt: "2026-08-10T04:00:00Z", unplannedReturn: { value: true } },
+    { id: "ga", incisionAt: "2026-08-11T04:00:00Z", unplannedReturn: { value: true } },
+    { id: "spinal", incisionAt: "2026-08-12T04:00:00Z", unplannedReturn: { value: false } },
+    { id: "nopac", incisionAt: "2026-08-13T04:00:00Z", unplannedReturn: { value: false } },
+  ];
+  const pacs = [{ caseId: "la", plan: { technique: "local-with-monitoring" } }, { caseId: "ga", plan: { technique: "general" } }, { caseId: "spinal", plan: { technique: "spinal" } }];
+  const cell = computeNabhIndicators({ rows: { SurgicalCase: ops, PreAnaestheticCheckup: pacs }, unreadable: {}, windows: [AUG] }).find((i) => i.no === 6).months[0];
+  assert.deepEqual([cell.numerator, cell.denominator, cell.value, cell.localAnaesthesiaExcluded, cell.techniqueNotRecorded], [1, 3, 33.33, 1, 1]);
+  const without = computeNabhIndicators({ rows: { SurgicalCase: ops.filter((c) => c.id !== "la"), PreAnaestheticCheckup: pacs }, unreadable: {}, windows: [AUG] }).find((i) => i.no === 6).months[0];
+  assert.deepEqual([without.numerator, without.denominator], [cell.numerator, cell.denominator], "the local anaesthesia case with a return changes neither count");
+  const blocked = computeNabhIndicators({ rows: { SurgicalCase: ops }, unreadable: { PreAnaestheticCheckup: "not readable with this role" }, windows: [AUG] }).find((i) => i.no === 6);
+  assert.equal(blocked.computable, false, "a technique that cannot be read is not guessed");
+});
+
 test("OPD and diagnostic waits: from arrival or a later appointment to the start, zero if seen early, missing starts counted and not averaged", () => {
   const t = (s) => Date.parse(s);
   assert.deepEqual(waitOf(t("2026-08-10T04:00:00Z"), null, t("2026-08-10T04:25:00Z")), { minutes: 25, from: "2026-08-10T04:00:00.000Z", missing: [] });
@@ -177,6 +193,10 @@ test("POST /api/queue/ward/theatre-session, POST /ward/theatre-session-release a
   const from = iso(47 * H1), to = iso(53 * H1);
   assert.equal((await as(null, `/ward/theatre-utilisation?orgId=${ORG}&from=${from}&to=${to}`)).__status, 401);
   assert.equal((await as(U.DOCTOR, `/ward/theatre-utilisation?orgId=${ORG2}&from=${from}&to=${to}`)).__status, 403);
+  for (const who of [U.CASHIER, U.HR]) { // R2-1: same hospital, a role with queue.view and no business with theatre records
+    const refused = await as(who, `/ward/theatre-utilisation?orgId=${ORG}&from=${from}&to=${to}`);
+    assert.equal(refused.__status, 403, who); assert.equal(refused.theatres, null, "nothing returned to " + who);
+  }
   const u = await as(U.NURSE, `/ward/theatre-utilisation?orgId=${ORG}&from=${from}&to=${to}`);
   assert.equal(u.__status, 200, JSON.stringify(u));
   const t = u.theatres[0];
@@ -271,6 +291,10 @@ test("POST /api/queue/ward/diagnostic-arrival, /ward/diagnostic-start and GET /w
   const win = `from=${encodeURIComponent(iso(-6 * H1))}&to=${encodeURIComponent(iso(H1))}`;
   assert.equal((await as(null, `/ward/access-times?orgId=${ORG}&${win}`)).__status, 401);
   assert.equal((await as(U.NURSE, `/ward/access-times?orgId=${ORG2}&${win}`)).__status, 403);
+  for (const who of [U.STORE, U.HR]) { // R2-1: same hospital, a role that reads neither visits nor the diagnostic counter (a cashier reads visits for billing)
+    const refused = await as(who, `/ward/access-times?orgId=${ORG}&${win}`);
+    assert.equal(refused.__status, 403, who); assert.equal(refused.opd, null, "no waits returned to " + who); assert.equal(refused.diagnostics, null); assert.equal(refused.opdSummary, undefined);
+  }
   const r = await as(U.NURSE, `/ward/access-times?orgId=${ORG}&${win}`);
   assert.equal(r.__status, 200, JSON.stringify(r));
   assert.deepEqual(r.opdSummary, { numerator: 45, denominator: 1, value: 45, missing: 1 });

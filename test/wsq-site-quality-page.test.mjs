@@ -58,3 +58,17 @@ test("a translated screen leaves no English behind, and the Map offers the tile 
   assert.ok(/go: "quality"[^\n]*need: \["infection.control", "quality.audit", "lab.result", "incident.report", "dept.request", "emr.view"\]/.test(shell));
   assert.ok(read("wardsynq/site/index.html").includes("/wardsynq/site/pages/quality.js?v="));
 });
+
+test("R2-1: a diagnostics safety checklist asks for the department and the auditor's statement, translated; other kinds do not", () => {
+  const d = { ok: true, kinds: ["hand-hygiene", "diagnostic-safety"], summary: { "hand-hygiene": { audited: 0, compliant: 0 }, "diagnostic-safety": { audited: 1, compliant: 0 } },
+    audits: [{ at: "2026-08-06T05:00:00Z", templateName: "Lab safety", department: "radiology", compliant: false }],
+    templates: [{ id: "t1", name: "Lab safety", kind: "diagnostic-safety", items: [{ id: "i1", text: "Gloves worn" }] }, { id: "t2", name: "Hands", kind: "hand-hygiene", items: [{ id: "i1", text: "Before touching" }] }] };
+  const en = loadSite({ lang: "en", pages: ["quality.js"] }), Q = en.win.WSQ._quality;
+  const html = Q.auditsHtml(ctxOf(en), d, "t1");
+  assert.ok(html.includes('id="qAuDept"') && html.includes('id="qAuOutside"'));
+  assert.match(html, /Safety precautions in diagnostics \(NABH 3\)/);
+  assert.match(html, /Lab safety · Radiology/);
+  assert.ok(!Q.auditsHtml(ctxOf(en), d, "t2").includes('id="qAuDept"'), "a hand hygiene audit has no department");
+  const xx = loadSite({ lang: "xx", pages: ["quality.js"] }), X = xx.win.WSQ._quality;
+  assert.deepEqual(leftovers(X.auditsHtml(ctxOf(xx), d, "t1"), ["Lab safety", "Gloves worn", "Hands"]), []);
+});

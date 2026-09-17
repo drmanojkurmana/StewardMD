@@ -318,6 +318,31 @@ test("GET /api/queue/ward/ed-returns and POST /ward/ed-return-review: 401, 403 f
   assert.deepEqual([cell.numerator, cell.denominator, cell.value, cell.unreviewed], [1, 2, 50, 0]);
 });
 
+test("R2-1 NABH #3: a diagnostics safety audit names the laboratory or radiology and the auditor's statement; one no is non-adherent and #3 computes through POST /api/queue/ward/quality-audit", async () => {
+  await setup();
+  const tpl = await as(U.SAFETY, "/ward/audit-template", "POST", { orgId: ORG, name: "Lab safety", kind: "diagnostic-safety", items: ["Gloves worn", "Lab coat worn", "No food at the bench"] });
+  assert.equal(tpl.__status, 200, JSON.stringify(tpl));
+  const body = { orgId: ORG, templateId: tpl.templateId, at: "2026-08-05T05:00:00Z", department: "laboratory", auditorOutside: true, answers: { i1: "yes", i2: "yes", i3: "yes" } };
+  assert.equal((await as(null, "/ward/quality-audit", "POST", body)).__status, 401);
+  assert.equal((await as(U.NURSE, "/ward/quality-audit", "POST", body)).__status, 403);
+  assert.equal((await as(U.SAFETY, "/ward/quality-audit", "POST", { ...body, orgId: ORG2 })).__status, 403);
+  assert.equal((await as(U.SAFETY, "/ward/quality-audit", "POST", { ...body, department: "" })).error, "department_required");
+  assert.equal((await as(U.SAFETY, "/ward/quality-audit", "POST", { ...body, auditorOutside: undefined })).error, "auditor_statement_required");
+  assert.equal((await recordsOf("QualityAudit")).length, 0, "nothing written by refused calls");
+  assert.equal((await as(U.SAFETY, "/ward/quality-audit", "POST", body)).compliant, true);
+  const no = await as(U.SAFETY, "/ward/quality-audit", "POST", { ...body, at: "2026-08-06T05:00:00Z", department: "radiology", auditorOutside: false, answers: { i1: "yes", i2: "no", i3: "na" } });
+  assert.equal(no.__status, 200, JSON.stringify(no)); assert.equal(no.compliant, false, "one no is non-adherence");
+  const saved = (await recordsOf("QualityAudit")).find((x) => x.id === no.auditId);
+  assert.deepEqual([saved.department, saved.auditorOutsideDepartment], ["radiology", false]);
+  const nabh = computeNabhIndicators({ rows: { QualityAudit: await recordsOf("QualityAudit") }, unreadable: {}, windows: monthWindows(Date.UTC(2026, 8, 20), 2, 330) });
+  const k3 = nabh.find((i) => i.no === 3);
+  assert.equal(k3.computable, true);
+  const aug = k3.months.find((m) => m.month === "2026-08"), sep = k3.months.find((m) => m.month === "2026-09");
+  assert.deepEqual([aug.numerator, aug.denominator, aug.value, aug.auditorInsideDepartment], [1, 2, 50, 1]);
+  assert.deepEqual(aug.byDepartment, { laboratory: { audited: 1, compliant: 1 }, radiology: { audited: 1, compliant: 0 } });
+  assert.equal(sep.value, null, "no audit in the month: no rate, never 0%");
+});
+
 test("NABH: an indicator this package fills says what it is computed from, and one whose register cannot be read says so instead of zero", () => {
   const windows = monthWindows(Date.UTC(2026, 8, 20), 1, 330);
   const all = computeNabhIndicators({ rows: {}, unreadable: { HaiCase: "not readable with this role" }, windows });

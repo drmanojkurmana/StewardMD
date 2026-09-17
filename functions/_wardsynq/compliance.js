@@ -89,7 +89,15 @@ const NABH_SOURCES = {
   2: { needs: ["DiagnosticReport"], source: "Diagnostic reports released in the month (final or corrected); a report corrected after release counts as a reporting error.",
     note: "Counted per report, not per test within a report as the standard counts.",
     compute: (r, w) => { const rep = r.DiagnosticReport.filter((x) => (x.status === "final" || x.status === "corrected") && inW(x.reportedAt, w)); return val(rep.filter((x) => x.status === "corrected").length, rep.length, 1000); } },
-  3: { missing: "An audit of staff adherence to safety precautions in diagnostics; WardSynQ holds no such audit." },
+  /* R2-1 nabh-kpi-closure (2026-09-17): 3 from the diagnostics safety audit (quality-registers.js). */
+  3: { needs: ["QualityAudit"], source: "Diagnostics safety audits in the month: each audit is one member of staff in the laboratory or radiology, adhering when no checklist item is answered no.",
+    note: "The checklist is the hospital's own, from its and the statutory safety requirements. NABH asks for an auditor from outside the department; this is the auditor's own statement, and the audits where the auditor said otherwise are counted beside.",
+    compute: (r, w) => {
+      const a = (r.QualityAudit || []).filter((x) => x && x.kind === "diagnostic-safety" && inW(x.at, w));
+      const byDepartment = {};
+      for (const x of a) { const d = str(x.department) || "not-recorded"; byDepartment[d] = byDepartment[d] || { audited: 0, compliant: 0 }; byDepartment[d].audited++; if (x.compliant) byDepartment[d].compliant++; }
+      return { ...auditCell("diagnostic-safety")(r, w), byDepartment, auditorInsideDepartment: a.filter((x) => x.auditorOutsideDepartment === false).length };
+    } },
   4: { missing: "The number of opportunities for a medication error. Confirmed medication-error incidents are recorded, but the denominator is not." },
   5: { needs: ["AdverseDrugReaction", "Encounter"], source: "Suspected adverse drug reaction reports (PvPI form) whose reaction started in the month while the patient was on an inpatient stay, over inpatient stays open in the month.",
     note: "Counts reports, as filed; causality assessment at the ADR monitoring centre is not recorded.",
@@ -103,9 +111,9 @@ const NABH_SOURCES = {
     } },
   /* P3 theatre-opd-access (2026-09-17): 6 and 19 from the theatre case (migrate-surgery.js, theatre.js), 22 and 23 from the
    * OPD visit and the diagnostic counter (access-times.js). */
-  6: { needs: ["SurgicalCase"], source: "Surgical cases with an incision in the month that the surgeon marked as an unplanned return to theatre, over surgical cases with an incision in the month.",
-    note: "A case the surgeon has not answered is not counted as a return; the number waiting is shown beside the value. Surgeries under local anaesthesia are not told apart. NABH asks for a 30 day delay before the month is final.",
-    compute: (r, w) => unplannedReturnCell(r.SurgicalCase, w) },
+  6: { needs: ["SurgicalCase", "PreAnaestheticCheckup"], source: "Surgical cases with an incision in the month that the surgeon marked as an unplanned return to theatre, over surgical cases with an incision in the month, leaving out cases whose pre-anaesthetic checkup planned local anaesthesia with monitoring.",
+    note: "A case the surgeon has not answered is not counted as a return; the number waiting is shown beside the value. The technique is the one planned at the pre-anaesthetic checkup, as the anaesthesia record holds none; a case with no checkup stays in and is counted beside. NABH asks for a 30 day delay before the month is final.",
+    compute: (r, w) => unplannedReturnCell(r.SurgicalCase, w, new Map((r.PreAnaestheticCheckup || []).filter((p) => p && p.caseId).map((p) => [p.caseId, str(p.plan && p.plan.technique) || null]))) },
   7: { needs: ["SurgicalCase"], source: "Surgical cases with an incision in the month; the checklist was followed when sign in, time out and sign out were all completed.",
     note: "Every case is counted, not an audited sample.",
     compute: (r, w) => { const cs = r.SurgicalCase.filter((c) => inW(c.incisionAt, w)); return val(cs.filter((c) => c.signIn && c.timeOut && c.signOut).length, cs.length, 100); } },
