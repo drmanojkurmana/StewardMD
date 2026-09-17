@@ -153,6 +153,8 @@ try {
   await refuse(SCRIBE);
   await sleep(400);
   const s = String(await sheetText() || "");
+  ok(/MaiK Voice Scribe consults/.test(s), "the sheet is titled with the full product name, MaiK Voice Scribe");
+  ok(!/MaiK Scribe/.test(s), "the old name MaiK Scribe appears nowhere on the sheet");
   ok(/Not just a note\. A second pair of eyes\./.test(s), "Scribe sheet leads with the second-pair-of-eyes headline");
   ok(/differentials worth considering/.test(s), "sells the differentials and investigations, not just dictation");
   ok(/You decide\./.test(s), "keeps the doctor-final frame");

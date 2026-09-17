@@ -202,6 +202,45 @@ test("no clinical outcome claims and no em-dash in any quota copy", () => {
   }
 });
 
+// ---------------- product name: "MaiK Voice Scribe" ----------------
+
+/* Owner, 2026-09-18: the product is "MaiK Voice Scribe". Every user-facing string says so; the
+   internal feature key "scribe" and the product ids in.stewardmd.scribe.* deliberately do NOT change
+   (renaming them would orphan existing purchases and every KV counter). */
+test('user-facing copy names the product "MaiK Voice Scribe"; internal keys stay "scribe"', () => {
+  const p = quotaPacks({});
+  assert.equal(p["scribe.50"].label, "50 MaiK Voice Scribe consults");
+  assert.equal(p["scribe.250"].label, "250 MaiK Voice Scribe consults");
+
+  // Internal identifiers untouched.
+  assert.equal(p["scribe.50"].feature, "scribe");
+  assert.equal(p["scribe.50"].product, "in.stewardmd.scribe.50");
+  assert.equal(p["scribe.250"].product, "in.stewardmd.scribe.250");
+  assert.equal(quotaPackFor("pack:scribe.50"), "scribe.50");
+  assert.equal(packKeyForProduct("in.stewardmd.scribe.250"), "pack:scribe.250");
+
+  /* Every user-facing string in the 402 body: wherever the word Scribe appears it must be the full
+     product name. Catches "MaiK Scribe", a bare "Scribe", and any future half-rename. */
+  const body = quotaRefusal({}, "scribe");
+  const facing = [body.copy.headline, body.copy.price, body.copy.expiry]
+    .concat(body.copy.lines).concat(body.packs.map((x) => x.label)).join(" | ");
+  for (const m of facing.matchAll(/Scribe/g)) {
+    assert.equal(facing.slice(Math.max(0, m.index - 11), m.index + 6), "MaiK Voice Scribe",
+      "a user-facing string says Scribe without the full product name: " + facing);
+  }
+  assert.ok(!/MaiK Scribe/.test(facing), "the old name must not survive anywhere user-facing");
+
+  // The approved copy itself is unchanged: only the name moved.
+  assert.equal(body.copy.headline, "Not just a note. A second pair of eyes.");
+  assert.equal(body.copy.expiry, "Consults never expire.");
+  assert.match(body.copy.price, /^₹20 a consult\./);
+
+  // The sheet title and the tier blurb in the app bundle carry the new name and not the old one.
+  const paywall = src("pro-paywall.js");
+  assert.match(paywall, /"MaiK Voice Scribe consults"/, "the top-up sheet title must use the full name");
+  assert.ok(!/"MaiK Scribe|· Scribe ·/.test(paywall), "the old name must not survive in the app bundle");
+});
+
 // ---------------- one credit = one bounded episode ----------------
 
 /* Owner-decided 2026-09-18: a credit buys an EPISODE (7-day check-in course, plus a day-3 and a day-7

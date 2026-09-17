@@ -8309,3 +8309,28 @@ ships no purchase URL; and a headless-Chrome test that re-renders the *same* she
 `219900`, `799900` and `stewardmd.in` appear nowhere in the sheet's **markup**, not merely its text.
 
 Tests: `test/quota-meters.test.mjs` 24/24 (+3), `test/run-quota-topup-ui.mjs` 36/36 browser checks (+9).
+
+## 2026-09-18 — Product name is "MaiK Voice Scribe" in every user-facing string
+
+Owner correction. Renamed in the three places a doctor can read it:
+- `functions/_quota.js` pack labels: `"50 Scribe consults"` -> `"50 MaiK Voice Scribe consults"`,
+  `"250 Scribe consults"` -> `"250 MaiK Voice Scribe consults"`. These are what `plans().packs` serves
+  (`plans()` just returns `quotaPacks(env)`), so the paywall, the /billing/plans response and the 402
+  refusal body all pick the new name up from one place.
+- `pro-paywall.js` top-up sheet title: `"MaiK Scribe consults"` -> `"MaiK Voice Scribe consults"`.
+- `pro-paywall.js` Physician tier blurb: `"... FollowCare · Scribe · unlimited billing"` ->
+  `"... FollowCare · MaiK Voice Scribe · unlimited billing"`.
+
+`quotaCopy("scribe")` needed NO change: its approved copy never names the product. The headline
+("Not just a note. A second pair of eyes."), the five lines, the price line and "Consults never expire."
+are unchanged, as instructed.
+
+NOT renamed, deliberately: the internal feature key `"scribe"`, the KV key prefix `quota:scribe:*`, and
+the product ids `in.stewardmd.scribe.50|250`. Renaming any of those orphans every existing purchase and
+every live counter. The App Store display names are the owner's to change in App Store Connect;
+`iap.js` product ids untouched (its only "Scribe" mention is a code comment).
+
+Guarded by a test that walks every user-facing string in the 402 body and asserts that wherever the
+word "Scribe" appears it is preceded by "MaiK Voice", which catches a bare "Scribe", the old
+"MaiK Scribe", and any future half-rename; plus a bundle check that neither old spelling survives in
+`pro-paywall.js`, and a browser check on the rendered sheet.

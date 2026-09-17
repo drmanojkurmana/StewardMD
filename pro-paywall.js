@@ -34,7 +34,7 @@
     student: "Full MaiK AI · voice dictation · learn atlases",
     coresident: "2 accounts · shared AI pool · 4 imaging/day each",
     pro: "Imaging AI · Patient Summary · Research · Lab Watch · Ultra voice",
-    physician: "Your clinic (own Drive) · FollowCare · Scribe · unlimited billing",
+    physician: "Your clinic (own Drive) · FollowCare · MaiK Voice Scribe · unlimited billing",
     physicianpro: "Cloud clinic (we host) · more AI · OncoTree + ONCQIS included",
   };
   var TIER_IAP = { student: "trainee", coresident: "coresident", pro: "pro", physician: "physician", physicianpro: "physicianpro" };
@@ -287,7 +287,7 @@
   function openTopUp(info) {
     info = info || {}; close();
     var c = info.copy || {}, packs = info.packs || [];
-    var title = info.feature === "scribe" ? "MaiK Scribe consults" : "Patient credits";
+    var title = info.feature === "scribe" ? "MaiK Voice Scribe consults" : "Patient credits";
     var lines = (c.lines || []).map(function (t) {
       return '<div style="font:500 13px/1.6 var(--sans);color:var(--slate,#2d4356);margin-top:4px">' + esc(t) + '</div>';
     }).join("");

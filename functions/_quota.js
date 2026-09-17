@@ -83,8 +83,12 @@ export function quotaPacks(env) {
   return {
     "care.25": pack({ feature: "care", units: 25, amount: P("PACK_CARE_25", 249900), webAmount: P("PACK_CARE_25_WEB", 219900), label: "25 patient credits", product: "in.stewardmd.care.25" }),
     "care.100": pack({ feature: "care", units: 100, amount: P("PACK_CARE_100", 899900), webAmount: P("PACK_CARE_100_WEB", 799900), label: "100 patient credits", product: "in.stewardmd.care.100", popular: true }),
-    "scribe.50": pack({ feature: "scribe", units: 50, amount: P("PACK_SCRIBE_50", 99900), label: "50 Scribe consults", product: "in.stewardmd.scribe.50" }),
-    "scribe.250": pack({ feature: "scribe", units: 250, amount: P("PACK_SCRIBE_250", 399900), label: "250 Scribe consults", product: "in.stewardmd.scribe.250", popular: true }),
+    /* The product is "MaiK Voice Scribe" in every user-facing string (owner, 2026-09-18). The INTERNAL
+     * key stays "scribe" and the product ids stay in.stewardmd.scribe.* - renaming those would orphan
+     * every existing purchase and every KV counter. The App Store display names are changed separately
+     * in App Store Connect, not here. */
+    "scribe.50": pack({ feature: "scribe", units: 50, amount: P("PACK_SCRIBE_50", 99900), label: "50 MaiK Voice Scribe consults", product: "in.stewardmd.scribe.50" }),
+    "scribe.250": pack({ feature: "scribe", units: 250, amount: P("PACK_SCRIBE_250", 399900), label: "250 MaiK Voice Scribe consults", product: "in.stewardmd.scribe.250", popular: true }),
   };
 }
 // Selection key "pack:care.25" -> "care.25". Mirrors tokenPackFor() in _credits.js.
