@@ -7286,6 +7286,22 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<div class="hv-d-sec"><h4>App appearance</h4><div class="hv-fonts" id="hvAppear">' +
         APPEARANCES.map(function (a) { return '<button class="hv-fn" data-a="' + a.id + '">' + a.name + '</button>'; }).join("") +
       '</div><div class="hv-info" style="margin-top:6px">Liquid-glass styling across the app. The ICU dashboard is never affected.</div></div>' +
+      '<div class="hv-d-sec" id="hvMaikAtmoSec"><div class="hv-d-row"><h4 style="margin:0">MaiK Aurora Atmosphere</h4><span class="hv-d-badge">ReactBits Fusion</span></div>' +
+      '<div class="hv-info" style="margin:0 0 10px">Live multi-color wave fusion for MaiK Assistant. Blend and fusion colors are customizable.</div>' +
+      '<div class="mk-atmo-prev-box" id="hvAtmoPrev"><div class="mk-atmo-prev-glow" id="hvAtmoGlow"></div><div class="mk-atmo-prev-card"><div class="mk-atmo-prev-chip">MaiK Assistant Aurora</div><div class="mk-atmo-prev-sub" id="hvAtmoPrevSub">Blend 0.51 · Speed 1.6×</div></div></div>' +
+      '<div class="hv-sub-h">Fusion Presets</div><div class="mk-atmo-presets" id="hvAtmoPresets"></div>' +
+      '<div class="hv-sub-h" style="margin-top:10px">Colors of Fusion</div>' +
+      '<div class="mk-atmo-colors-grid">' +
+        '<div class="mk-atmo-c-item"><label class="mk-atmo-c-lbl" for="hvAtmoC1">Color 1 (Amber)</label><div class="mk-atmo-c-row"><input type="color" id="hvAtmoC1" class="mk-atmo-cpick" aria-label="Color 1"><input type="text" id="hvAtmoC1Txt" class="mk-atmo-ctxt" maxlength="7" spellcheck="false" aria-label="Color 1 hex"></div></div>' +
+        '<div class="mk-atmo-c-item"><label class="mk-atmo-c-lbl" for="hvAtmoC2">Color 2 (Emerald)</label><div class="mk-atmo-c-row"><input type="color" id="hvAtmoC2" class="mk-atmo-cpick" aria-label="Color 2"><input type="text" id="hvAtmoC2Txt" class="mk-atmo-ctxt" maxlength="7" spellcheck="false" aria-label="Color 2 hex"></div></div>' +
+        '<div class="mk-atmo-c-item"><label class="mk-atmo-c-lbl" for="hvAtmoC3">Color 3 (Navy)</label><div class="mk-atmo-c-row"><input type="color" id="hvAtmoC3" class="mk-atmo-cpick" aria-label="Color 3"><input type="text" id="hvAtmoC3Txt" class="mk-atmo-ctxt" maxlength="7" spellcheck="false" aria-label="Color 3 hex"></div></div>' +
+      '</div>' +
+      '<div class="hv-d-row" style="margin-top:14px"><h4 style="margin:0;font-size:11px">Aurora Blend</h4><span class="hv-d-val" id="hvAtmoBlendVal">0.51</span></div>' +
+      '<input type="range" id="hvAtmoBlend" min="0.15" max="0.85" step="0.01" value="0.51" aria-label="Aurora blend">' +
+      '<div class="hv-info" style="margin-top:4px">Softness and depth of the multi-color wave fusion.</div>' +
+      '<div class="hv-d-row" style="margin-top:12px"><h4 style="margin:0;font-size:11px">Wave Speed</h4><span class="hv-d-val" id="hvAtmoSpeedVal">1.6×</span></div>' +
+      '<input type="range" id="hvAtmoSpeed" min="0.5" max="3.0" step="0.1" value="1.6" aria-label="Wave speed">' +
+      '<div class="hv-info" style="margin-top:4px">Animation tempo of the dynamic plasma currents.</div></div>' +
       '<div class="hv-d-sec"><h4>Font</h4><div class="hv-fonts" id="hvFont">' +
         FONTS.map(function (f) { return '<button class="hv-fn" data-f="' + f.id + '" data-font="' + f.id + '">' + f.name + '</button>'; }).join("") +
       '</div></div>' +
@@ -7300,9 +7316,134 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     s.querySelector("#hvAuto").addEventListener("click", function () { ds.autoFit = !ds.autoFit; if (ds.autoFit) autoFitD(); else { applyD(); refreshD(); } });
     var hp = s.querySelector("#hvHaptics");
     if (hp) hp.addEventListener("click", function () { var on = !(window.SMD_HAPTICS && SMD_HAPTICS.enabled()); if (window.SMD_HAPTICS) { SMD_HAPTICS.setEnabled(on); if (on) SMD_HAPTICS.medium(); } refreshD(); });
-    s.querySelector("#hvReset").addEventListener("click", function () { ds = Object.assign({}, DDEF); applyD(); refreshD(); });
+    s.querySelector("#hvReset").addEventListener("click", function () {
+      ds = Object.assign({}, DDEF);
+      if (window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.resetConfig) {
+        var r = SMD_MAIK_ATMOSPHERE.resetConfig();
+        if (r && r.light) syncAtmoUI(r.light);
+      }
+      applyD(); refreshD();
+    });
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
     s.querySelectorAll("#hvAppear button").forEach(function (b) { b.addEventListener("click", function () { ds.appearance = b.getAttribute("data-a"); applyD(); refreshD(); }); });
+
+    function getAtmoCfg() {
+      if (window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.getConfig) {
+        return SMD_MAIK_ATMOSPHERE.getConfig().light;
+      }
+      return { color1: '#b4510a', color2: '#035524', color3: '#060351', blend: 0.51, speed: 1.6 };
+    }
+
+    function syncAtmoUI(cfg) {
+      if (!cfg) return;
+      var c1In = s.querySelector("#hvAtmoC1"), c1Tx = s.querySelector("#hvAtmoC1Txt");
+      var c2In = s.querySelector("#hvAtmoC2"), c2Tx = s.querySelector("#hvAtmoC2Txt");
+      var c3In = s.querySelector("#hvAtmoC3"), c3Tx = s.querySelector("#hvAtmoC3Txt");
+      var blIn = s.querySelector("#hvAtmoBlend"), blVal = s.querySelector("#hvAtmoBlendVal");
+      var spIn = s.querySelector("#hvAtmoSpeed"), spVal = s.querySelector("#hvAtmoSpeedVal");
+      var glow = s.querySelector("#hvAtmoGlow"), sub = s.querySelector("#hvAtmoPrevSub");
+
+      if (c1In) c1In.value = cfg.color1;
+      if (c1Tx) c1Tx.value = cfg.color1.toUpperCase();
+      if (c2In) c2In.value = cfg.color2;
+      if (c2Tx) c2Tx.value = cfg.color2.toUpperCase();
+      if (c3In) c3In.value = cfg.color3;
+      if (c3Tx) c3Tx.value = cfg.color3.toUpperCase();
+      if (blIn) blIn.value = cfg.blend;
+      if (blVal) blVal.textContent = (+cfg.blend).toFixed(2);
+      if (spIn) spIn.value = cfg.speed;
+      if (spVal) spVal.textContent = (+cfg.speed).toFixed(1) + "×";
+
+      if (glow) {
+        glow.style.background = "linear-gradient(135deg, " + cfg.color1 + " 0%, " + cfg.color2 + " " + Math.round(cfg.blend * 100) + "%, " + cfg.color3 + " 100%)";
+        glow.style.opacity = (0.55 + cfg.blend * 0.40).toFixed(2);
+      }
+      if (sub) sub.textContent = "Blend " + (+cfg.blend).toFixed(2) + " · Speed " + (+cfg.speed).toFixed(1) + "×";
+
+      s.querySelectorAll(".mk-atmo-pre-btn").forEach(function (btn) {
+        var pid = btn.getAttribute("data-pre-id");
+        var presets = (window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.PRESETS) || [];
+        var p = presets.find ? presets.find(function (x) { return x.id === pid; }) : null;
+        if (!p) for (var i = 0; i < presets.length; i++) { if (presets[i].id === pid) { p = presets[i]; break; } }
+        var match = p && p.color1.toLowerCase() === cfg.color1.toLowerCase() &&
+                    p.color2.toLowerCase() === cfg.color2.toLowerCase() &&
+                    p.color3.toLowerCase() === cfg.color3.toLowerCase() &&
+                    Math.abs(p.blend - cfg.blend) < 0.02;
+        btn.classList.toggle("on", !!match);
+      });
+    }
+
+    var preWrap = s.querySelector("#hvAtmoPresets");
+    if (preWrap && window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.PRESETS) {
+      preWrap.innerHTML = SMD_MAIK_ATMOSPHERE.PRESETS.map(function (p) {
+        return '<button class="mk-atmo-pre-btn" data-pre-id="' + p.id + '">' +
+          '<span class="mk-atmo-pre-dots">' +
+            '<span class="mk-atmo-pre-dot" style="background:' + p.color1 + '"></span>' +
+            '<span class="mk-atmo-pre-dot" style="background:' + p.color2 + '"></span>' +
+            '<span class="mk-atmo-pre-dot" style="background:' + p.color3 + '"></span>' +
+          '</span>' +
+          '<span>' + p.name + '</span>' +
+        '</button>';
+      }).join("");
+
+      preWrap.querySelectorAll(".mk-atmo-pre-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var pid = btn.getAttribute("data-pre-id");
+          var presets = SMD_MAIK_ATMOSPHERE.PRESETS;
+          var p = null;
+          for (var i = 0; i < presets.length; i++) { if (presets[i].id === pid) { p = presets[i]; break; } }
+          if (p && SMD_MAIK_ATMOSPHERE.setConfig) {
+            var updated = SMD_MAIK_ATMOSPHERE.setConfig({
+              light: { color1: p.color1, color2: p.color2, color3: p.color3, blend: p.blend, speed: p.speed }
+            });
+            syncAtmoUI(updated.light);
+          }
+        });
+      });
+    }
+
+    function wireColorPair(inId, txtId, key) {
+      var inp = s.querySelector("#" + inId), txt = s.querySelector("#" + txtId);
+      if (inp && txt) {
+        inp.addEventListener("input", function () {
+          txt.value = this.value.toUpperCase();
+          var patch = { light: {} }; patch.light[key] = this.value;
+          var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig(patch);
+          if (up) syncAtmoUI(up.light);
+        });
+        txt.addEventListener("change", function () {
+          var v = this.value.trim();
+          if (!/^#?[0-9a-fA-F]{6}$/.test(v)) return;
+          if (v.charAt(0) !== "#") v = "#" + v;
+          inp.value = v;
+          var patch = { light: {} }; patch.light[key] = v;
+          var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig(patch);
+          if (up) syncAtmoUI(up.light);
+        });
+      }
+    }
+    wireColorPair("hvAtmoC1", "hvAtmoC1Txt", "color1");
+    wireColorPair("hvAtmoC2", "hvAtmoC2Txt", "color2");
+    wireColorPair("hvAtmoC3", "hvAtmoC3Txt", "color3");
+
+    var bldInp = s.querySelector("#hvAtmoBlend");
+    if (bldInp) {
+      bldInp.addEventListener("input", function () {
+        var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig({ light: { blend: +this.value } });
+        if (up) syncAtmoUI(up.light);
+      });
+    }
+
+    var spdInp = s.querySelector("#hvAtmoSpeed");
+    if (spdInp) {
+      spdInp.addEventListener("input", function () {
+        var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig({ light: { speed: +this.value } });
+        if (up) syncAtmoUI(up.light);
+      });
+    }
+
+    syncAtmoUI(getAtmoCfg());
+
     s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-f"); var f = FONTS.filter(function (x) { return x.id === id; })[0]; if (f && f.web) ensureFont(f.web); ds.font = id; applyD(); refreshD(); }); });
     s.querySelectorAll("#hvHead button").forEach(function (b) { b.addEventListener("click", function () { ds.headingStyle = b.getAttribute("data-h"); applyD(); refreshD(); }); });
     refreshD();

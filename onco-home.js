@@ -262,10 +262,11 @@
 
   function quickActionsHtml() {
     return '<div class="oh-quick">' +
+      '<button class="oh-qa" data-oh-act="oncotree-open">' + ms("account_tree") + "OncoTree</button>" +
+      '<button class="oh-qa" data-oh-act="protocol-open">' + ms("clinical_notes") + "Protocols</button>" +
       '<button class="oh-qa" data-oh-act="calc-cat">' + ms("calculate") + "Calculators</button>" +
       '<button class="oh-qa" data-oh-act="drug-browse">' + ms("pill") + "Drugs</button>" +
       '<button class="oh-qa" data-oh-act="drug-interactions">' + ms("compare_arrows") + "Interactions</button>" +
-      '<button class="oh-qa" data-oh-act="protocol-open">' + ms("clinical_notes") + "Protocols</button>" +
       "</div>";
   }
 
@@ -275,8 +276,8 @@
       { title: "Cancer staging (TNM)", sub: "Full TNM staging by cancer site", act: "staging-open", flag: "smd_onco_staging", icon: "stairs" }
     ] },
     { group: "Treatment", cards: [
-      { title: "Treatment-plan protocols", sub: "Regimens, dose calculator and printable sheet", act: "protocol-open", icon: "clinical_notes" },
-      { title: "Protocol reference", sub: "Read-only library (lifecycle badges)", act: "protoref-open", flag: "smd_onco_protoref", icon: "menu_book" }
+      { title: "OncoTree", sub: "NCCN disease pathway navigator & standard protocols", act: "oncotree-open", icon: "account_tree" },
+      { title: "Treatment Protocols", sub: "Standardized regimens, patient dose calculator & printable sheet", act: "protocol-open", icon: "clinical_notes" }
     ] },
     { group: "Monitoring", cards: [
       { title: "Toxicity / CTCAE", sub: "CTCAE v5.0 grading", act: "ctcae-open", flag: "smd_onco_ctcae", icon: "warning" },
@@ -359,9 +360,9 @@
       body;
   }
 
-  // ---- Standalone protocol detail: full regimen from kb/protocols + an OPTIONAL patient-dose
-  // calculator (pure SMD_ONCODOSE) + a printable PDF (SMD_ONCOREPORT). Reference/educational, never an
-  // order. This is how a doctor WITHOUT a hospital reads a protocol and prints its sheet - no Ward Sync. ----
+  // ---- Universal protocol sheet (ONE protocol system): tapping a protocol anywhere in ONCQIS
+  // (library list or search results) opens window.SMD_PROTOSHEET directly - the same engine OncoTree
+  // uses, reading the same /kb/protocols/ source of truth. No ad-hoc second renderer lives here. ----
   var _protoFull = {};
   function loadProtoFull(id, cb) {
     if (_protoFull[id]) { cb(_protoFull[id]); return; }
@@ -371,124 +372,37 @@
       .then(function (j) { if (j) _protoFull[id] = j; cb(j || null); })
       .catch(function () { cb(null); });
   }
-  function openProtoDetail(id) {
-    st.mode = "protodetail"; st.detailId = id; st.detailProto = _protoFull[id] || null;
-    var c = st.ctx || {};   // seed the calculator from a Ward Sync patient when present (optional, never required)
-    st.calc = { height: c.heightCm || "", weight: c.weightKg || "", age: c.age || "", sex: c.sex || "", creatinine: c.creatinine || "" };
-    renderResults();
-    loadProtoFull(id, function (p) { if (st.mode === "protodetail" && st.detailId === id) { st.detailProto = p; renderResults(); } });
+  function todayStr() {
+    try { var d = new Date(); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); } catch (e) { return ""; }
   }
-  // dose-engine params (height/weight/... names) from the calc form; null when not entered (never invented)
-  function calcFromForm() {
-    function num(id) { var el = document.getElementById(id); var v = el ? parseFloat(el.value) : NaN; return isFinite(v) ? v : ""; }
-    var sx = document.getElementById("ocSex");
-    return { height: num("ocHt"), weight: num("ocWt"), age: num("ocAge"), sex: sx ? sx.value : "", creatinine: num("ocCr") };
-  }
-  function calcHasPt(c) { c = c || {}; return Number(c.height) > 0 && Number(c.weight) > 0; }
-  function doseParams(c) { c = c || {}; return { height: Number(c.height) || null, weight: Number(c.weight) || null, age: Number(c.age) || null, sex: c.sex || "", creatinine: Number(c.creatinine) || null }; }
-  function protoDoseMap(p, c) {
-    var m = {};
-    if (!calcHasPt(c)) return m;
-    try { (G.SMD_ONCODOSE.planDoses(p, doseParams(c)) || []).forEach(function (l) { if (l && l.drugId) m[l.drugId] = l; }); } catch (e) {}
-    return m;
-  }
-  // NB: named protoDrugRowHtml, NOT drugRowHtml - the latter already exists for drug SEARCH results
-  // (data-oh-act="drug-browse"); a duplicate name would hoist-override it and break drug search.
-  function protoDrugRowHtml(d, doseMap, showDose) {
-    var per = (d.dosePerUnit != null ? d.dosePerUnit + (d.unit ? " " + d.unit : "") : "verify");
-    var admin = per + (d.route ? " " + d.route : "") + (d.days && d.days.length ? ", D" + d.days.join(",") : "");
-    var dose = "";
-    if (showDose) { var lin = doseMap[d.id]; dose = '<span class="oh-drow-dose' + (lin && lin.final != null ? "" : " oh-drow-verify") + '">' + esc(lin && lin.final != null ? lin.final + " mg" : "verify") + "</span>"; }
-    return '<div class="oh-row oh-row-static"><span class="oh-row-t">' + esc(d.name || d.id) + '</span><span class="oh-row-s">' + esc(admin) + "</span>" + dose + "</div>";
-  }
-  function protoDetailHtml() {
-    var p = st.detailProto;
-    if (!p) return '<button class="oh-back-inline" data-oh-act="protoref-open">&lsaquo; Back to library</button>' + skelRows(6);
-    var drugs = p.drugs || (p.regimen && p.regimen.drugs) || [];
-    var has = calcHasPt(st.calc), doseMap = protoDoseMap(p, st.calc);
-    var meta = [];
-    if (p.diseaseId) meta.push(esc(p.diseaseId));
-    if (p.cycles) meta.push("Cycles " + Math.min(60, Number(p.cycles) || 0) + (p.cycleLengthDays ? " x " + p.cycleLengthDays + " days" : ""));
-    if (p.intentOptions && p.intentOptions.length) meta.push(esc(p.intentOptions.join(" / ")));
-    var regimen = drugs.length ? drugs.map(function (d) { return protoDrugRowHtml(d, doseMap, has); }).join("") : emptyHtml("clinical_notes", "No regimen detail in this protocol.");
-    var cv = st.calc || {};
-    var calc = '<div class="oh-sec-h">Calculate for a patient (optional)</div>' +
-      '<div class="oh-calc">' +
-      '<input id="ocHt" type="number" inputmode="decimal" placeholder="Height (cm)" value="' + esc(cv.height) + '">' +
-      '<input id="ocWt" type="number" inputmode="decimal" placeholder="Weight (kg)" value="' + esc(cv.weight) + '">' +
-      '<input id="ocAge" type="number" inputmode="numeric" placeholder="Age (years)" value="' + esc(cv.age) + '">' +
-      '<select id="ocSex"><option value="">Sex</option><option value="male"' + (cv.sex === "male" ? " selected" : "") + '>Male</option><option value="female"' + (cv.sex === "female" ? " selected" : "") + '>Female</option></select>' +
-      '<input id="ocCr" type="number" inputmode="decimal" placeholder="Creatinine (mg/dL)" value="' + esc(cv.creatinine) + '">' +
-      "</div>" +
-      '<div><button class="oh-cta ghost" data-oh-act="proto-calc">' + ms("calculate") + (has ? "Recalculate" : "Calculate doses") + "</button>" +
-      '<button class="oh-cta" data-oh-act="proto-pdf">' + ms("print") + "Print / Save PDF</button></div>";
-    var chart = (st.ctx && st.ctx.patient && st.ctx.patient.patientId && G.OPDEMR && G.OPDEMR.openProfile)
-      ? '<div style="margin-top:14px"><button class="oh-cta ghost" data-oh-act="proto-chart">' + ms("clinical_notes") + "Open in patient chart</button></div>" : "";
-    return '<button class="oh-back-inline" data-oh-act="protoref-open">&lsaquo; Back to library</button>' +
-      '<div class="oh-sec-h">' + esc(p.name || p.id) + " " + protoBadge(p.lifecycleState) + "</div>" +
-      (meta.length ? '<div class="oh-dmeta">' + meta.join(" &middot; ") + "</div>" : "") +
-      '<div class="oh-note-ref">Educational reference. Not a prescription or an order. Verify every dose against your institutional protocol; the physician and dose engine own dosing.</div>' +
-      '<div class="oh-sec-h">Regimen</div>' + regimen +
-      '<div style="height:14px"></div>' + calc + chart;
-  }
-  function protoPdf() {
-    var R = G.SMD_ONCOREPORT;
-    if (!R || !R.buildProtocolSheet) { toast("Print is not available on this build."); return; }
-    var p = st.detailProto; if (!p) return;
-    var has = calcHasPt(st.calc), params = doseParams(st.calc), bsa = null, doses = [];
-    if (has) { try { bsa = G.SMD_ONCODOSE.bsaMosteller(params.height, params.weight); } catch (e) {} try { doses = G.SMD_ONCODOSE.planDoses(p, params) || []; } catch (e2) {} }
-    var plan = {
-      protocolId: p.id || "", lockedTemplate: p, sourceProtocolId: p.id || "",
-      plannedCycles: Math.min(60, Number(p.cycles) || 0),
-      intent: (p.intentOptions && p.intentOptions[0]) || "",
-      patientParams: has ? { height: params.height, weight: params.weight, bsa: bsa, age: params.age, sex: params.sex, creatinine: params.creatinine } : {},
-      calculatedDoses: doses, confirmedDoses: [], status: "reference"
+  // Map the home context (open(ctx) shape or the Ward Sync identity read) onto the sheet's patient
+  // shape. Fields stay empty when unknown - never invented.
+  function toSheetPatient(ctx) {
+    ctx = ctx || {};
+    var wp = ctx.patient || {};
+    return {
+      caseNo: wp.patientId || ctx.caseNo || "", name: wp.name || ctx.name || "",
+      age: (ctx.age != null ? ctx.age : (wp.age != null ? wp.age : "")),
+      sex: ctx.sex || wp.sex || "", planNo: ctx.planNo || "",
+      heightCm: (ctx.heightCm != null ? ctx.heightCm : ""), weightKg: (ctx.weightKg != null ? ctx.weightKg : ""),
+      creatinine: (ctx.creatinine != null ? ctx.creatinine : ""),
+      diagnosis: ctx.diagnosis || "", intent: ctx.intent || "", consultant: ctx.consultant || ""
     };
-    var html = R.buildProtocolSheet(plan, { patientName: (st.ctx && st.ctx.patient && st.ctx.patient.name) || "", diagnosis: (st.ctx && st.ctx.diagnosis) || "" });
-    exportHtmlDoc(html, "StewardMD-" + (plan.protocolId || "protocol"));
   }
-  function exportHtmlDoc(html, filename) {
-    var name = (filename || "StewardMD-Protocol").replace(/[^\w.-]+/g, "-");
-    toast("Building PDF...");
-    // 1. Native bridge: VisionOcr (iOS) or jsPDF client fallback (Android / Native) -> real .pdf file
-    if (G.SMD_IS_NATIVE) {
-      var N = G.SMD_NATIVE;
-      if (N && N.sharePdfFromHtml) {
-        N.sharePdfFromHtml(html, name, "StewardMD - Protocol sheet").catch(function (err) {
-          console.warn("sharePdfFromHtml failed, trying client-side PDF:", err);
-          if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
-            G.SMD_PDF.fromHtml(html, name, "StewardMD - Protocol sheet").catch(function () {
-              toast("PDF export failed on this device.");
-            });
-          } else {
-            toast("PDF export unavailable.");
-          }
-        });
-        return;
-      }
+  function openSheetNow(p) {
+    if (G.SMD_PROTOSHEET && G.SMD_PROTOSHEET.open) {
+      G.SMD_PROTOSHEET.open({ protocol: p, patient: toSheetPatient(st.ctx || livePatientContext()), today: todayStr() });
+    } else {
+      toast("Protocol sheet is still loading - try again in a moment.");
     }
-    // 2. Client-side PDF export (works on Web, PWA, mobile browsers -> real .pdf download)
-    if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
-      G.SMD_PDF.fromHtml(html, name, "StewardMD - Protocol sheet").catch(function () {
-        // 3. Fallback to print dialog on desktop (offers native Save as PDF)
-        try {
-          var ifr = document.createElement("iframe"); ifr.setAttribute("aria-hidden", "true");
-          ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
-          document.body.appendChild(ifr);
-          var d = ifr.contentWindow.document; d.open(); d.write(html); d.close();
-          setTimeout(function () { try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {} setTimeout(function () { try { ifr.remove(); } catch (e2) {} }, 1500); }, 350);
-        } catch (e) { toast("Export unavailable."); }
-      });
-      return;
-    }
-    // 3. Desktop browser print
-    try {
-      var ifr = document.createElement("iframe"); ifr.setAttribute("aria-hidden", "true");
-      ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
-      document.body.appendChild(ifr);
-      var d = ifr.contentWindow.document; d.open(); d.write(html); d.close();
-      setTimeout(function () { try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {} setTimeout(function () { try { ifr.remove(); } catch (e2) {} }, 1500); }, 350);
-    } catch (e) { toast("Export unavailable."); }
+  }
+  function openUniversalSheet(id) {
+    if (_protoFull[id]) { openSheetNow(_protoFull[id]); return; }
+    toast("Loading protocol...");
+    loadProtoFull(id, function (p) {
+      if (p) openSheetNow(p);
+      else toast("Could not load protocol " + id + ".");
+    });
   }
 
   // PURE: state -> HTML (repainted into #ohResults only, never the search input's shell).
@@ -499,24 +413,13 @@
     if (state.mode === "kb") return kbBrowseHtml();
     if (state.mode === "drugonco") return drugOncoHtml();
     if (state.mode === "protoref") return protoRefHtml();
-    if (state.mode === "protodetail") return protoDetailHtml();
     return favSection() + contextStrip(state.ctx) + quickActionsHtml() + gridHtml();
   }
 
   function renderResults() { var box = document.getElementById("ohResults"); if (box) box.innerHTML = bodyHtml(st); }
 
-  // Protocols are per-patient (onco-protocols.js's matrix reads a real treatment plan) — with a
-  // Ward Sync patient in context, jump straight into it; otherwise ask for one (never a broken link).
-  function openProtocolContext() {
-    var ctx = st.ctx || livePatientContext();
-    var pid = ctx && ctx.patient && ctx.patient.patientId;
-    if (pid && G.OPDEMR && G.OPDEMR.openProfile) {
-      close();
-      G.OPDEMR.openProfile({ patientId: pid, name: (ctx.patient && ctx.patient.name) || "", tab: "onco" });
-    } else {
-      toast("Open a patient in Ward Sync to view their treatment-plan matrix.");
-    }
-  }
+  // Protocols now open through the ONE universal sheet (SMD_PROTOSHEET), which carries its own
+  // Ward Sync fetch + Assign handoff - so no separate per-patient matrix jump lives here.
 
   function onClick(e) {
     var t = e.target;
@@ -530,8 +433,9 @@
     // drugs (872) and onco sub-views (staging/CTCAE/irAE/RECIST) sit at/below it. Rather than CLOSING
     // Onco Home (which dropped the user to the app home when the sub-view was dismissed), we BACKGROUND
     // it (z-index 865, still mounted) so the sub-view renders above and dismissing it returns HERE. Any
-    // other interaction foregrounds it again. In-place modes (kb-browse / protoref / protodetail /
-    // drugonco / home-dash) repaint inside this overlay and never background it.
+    // other interaction foregrounds it again. In-place modes (kb-browse / protoref /
+    // drugonco / home-dash) repaint inside this overlay and never background it. Protocol taps
+    // (protodetail:*) open the universal SMD_PROTOSHEET overlay instead of an in-place view.
     var OPENS_OVERLAY = { calc: 1, "calc-cat": 1, kb: 1, "staging-open": 1, "ctcae-open": 1, "iotox-open": 1, "recist-open": 1, "drug-formulary": 1, "drug-interactions": 1 };
     if (OPENS_OVERLAY[verb]) background(); else foreground();
 
@@ -563,14 +467,12 @@
     if (verb === "drug-formulary") { openOverlay("The drug formulary", G.MEDDRUGS && G.MEDDRUGS.openList, function () { G.MEDDRUGS.openList(); }); return; }
     if (verb === "drug-interactions") { openOverlay("The interaction checker", G.MEDDRUGS && G.MEDDRUGS.openInteractions, function () { G.MEDDRUGS.openInteractions(); }); return; }
     if (verb === "protoref-open") { st.mode = "protoref"; renderResults(); return; }
-    if (verb === "protodetail") { openProtoDetail(arg); return; }
-    if (verb === "proto-calc") { st.calc = calcFromForm(); renderResults(); return; }
-    if (verb === "proto-pdf") { protoPdf(); return; }
-    if (verb === "proto-chart") { openProtocolContext(); return; }
+    if (verb === "protodetail") { openUniversalSheet(arg); return; }
     if (verb === "staging-open") { openOverlay("Staging", G.SMD_ONCOSTAGING && G.SMD_ONCOSTAGING.openList, function () { G.SMD_ONCOSTAGING.openList(); }); return; }
     if (verb === "ctcae-open") { openOverlay("CTCAE grading", G.SMD_ONCOCTCAE && G.SMD_ONCOCTCAE.openList, function () { G.SMD_ONCOCTCAE.openList(); }); return; }
     if (verb === "iotox-open") { openOverlay("Immunotherapy toxicity", G.SMD_ONCOIOTOX && G.SMD_ONCOIOTOX.openList, function () { G.SMD_ONCOIOTOX.openList(); }); return; }
     if (verb === "recist-open") { openOverlay("RECIST", G.SMD_ONCORECIST && G.SMD_ONCORECIST.open, function () { G.SMD_ONCORECIST.open(); }); return; }
+    if (verb === "oncotree-open") { close(); if (G.SMD_ONCOTREE && G.SMD_ONCOTREE.open) G.SMD_ONCOTREE.open(); else if (G.toast) G.toast("OncoTree loading…"); return; }
     if (verb === "protocol-open") { st.mode = "protoref"; renderResults(); return; }   // browse the library -> tap a protocol for its regimen/calc/PDF (no hospital needed)
   }
 

@@ -109,6 +109,7 @@
     var ov = document.getElementById("consentOverlay");
     if (ov) {
       _gateOpen = true;
+      try { ov.style.zIndex = "10002"; } catch (e) {}   // above all sheets including #maikSheet (z-index 999)
       if (!ov.classList.contains("show")) {
         ov.setAttribute("aria-hidden", "false");
         ov.classList.add("show");
@@ -125,6 +126,13 @@
     if (!P.gateOn()) return Promise.resolve(true);
     return getConsent().then(function (rec) {
       if (isCurrent(rec)) return true;
+      // Grandfathering: if the clinician has already accepted consent and confirmed
+      // clinical authority in a prior version, a terms bump must NEVER dead-end their active
+      // consultation. Auto-update the record to current in the background and let the query proceed.
+      if (rec && rec.consentAcceptedAt && rec.clinicalAuthorityConfirmedAt) {
+        try { recordConsent(rec.optionalImprovementConsent); } catch (e) {}
+        return true;
+      }
       return new Promise(function (resolve) { _pending.push(resolve); openGate(); });
     });
   }
