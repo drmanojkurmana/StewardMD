@@ -458,7 +458,7 @@
   }
 
   function protocolDetailHtml(ref) {
-    var p = st.protocols[ref];
+    var p = resolveProto(ref);
     if (!p) return '<div class="ot-empty">Protocol not loaded.</div>';
     var badge = p.experimental ? "BETA · AI-DRAFTED" : (p.lifecycleState || "draft").toUpperCase();
     var drugs = asArr(p.drugs).map(function (d) {
@@ -1341,6 +1341,30 @@
     return Math.round(Number(v) * 100) / 100;
   }
 
+  // Resolve a protocol reference that may be an id string, a loaded key, or a full object.
+  // Returns the protocol object or null when its data is still resolving.
+  function resolveProto(ref) {
+    if (ref && typeof ref === "object") return ref;
+    if (ref == null || ref === "") return null;
+    if (st.protocols[ref]) return st.protocols[ref];
+    for (var k in st.protocols) {
+      if (!Object.prototype.hasOwnProperty.call(st.protocols, k)) continue;
+      var p = st.protocols[k];
+      if (p && (p.id === ref || k === ref)) return p;
+    }
+    return null;
+  }
+  // A superpower tap must never silently die: missing data or a missing library renders an
+  // explicit modal explaining what is still loading instead of doing nothing.
+  function superpowerNotice(title, lines) {
+    st.superpowerModal = {
+      title: title,
+      html: '<div class="ot-notice">' + ms("hourglass_empty") + "<div>" +
+        lines.map(function (l) { return "<p>" + esc(l) + "</p>"; }).join("") + "</div></div>"
+    };
+    renderSuperpowerModal();
+  }
+
   function superpowerModalHtml() {
     if (!st.superpowerModal) return "";
     var m = st.superpowerModal;
@@ -1845,18 +1869,22 @@
       return;
     }
     if (act === "cycle-timeline") {
-      var pObj = st.protocols[proto];
-      if (G.SMD_ONCO_TIMELINE && pObj) {
+      var pObj = resolveProto(proto);
+      if (!pObj) { superpowerNotice("Patient Cycle Calendar & Nadir Timeline", ["The protocol data for this regimen is still loading.", "Wait a moment for the pathway to finish loading, then tap Cycle Timeline again."]); return; }
+      if (!G.SMD_ONCO_TIMELINE) { superpowerNotice("Patient Cycle Calendar & Nadir Timeline", ["The cycle-timeline tool is still loading.", "Try again in a moment."]); return; }
+      try {
         var tl = G.SMD_ONCO_TIMELINE.generateCycleTimeline(pObj);
         var html = G.SMD_ONCO_TIMELINE.renderTimelineHtml(tl);
         st.superpowerModal = { title: "Patient Cycle Calendar & Nadir Timeline", html: html };
         renderSuperpowerModal();
-      }
+      } catch (e2) { superpowerNotice("Patient Cycle Calendar & Nadir Timeline", ["Could not build the timeline for this regimen.", String((e2 && e2.message) || e2)]); }
       return;
     }
     if (act === "organ-dose-check") {
-      var pObj = st.protocols[proto];
-      if (G.SMD_ONCO_ORGAN_DOSE && pObj) {
+      var pObj = resolveProto(proto);
+      if (!pObj) { superpowerNotice("Organ Function & Calvert Dosing", ["The protocol data for this regimen is still loading.", "Wait a moment for the pathway to finish loading, then tap Organ Dose again."]); return; }
+      if (!G.SMD_ONCO_ORGAN_DOSE) { superpowerNotice("Organ Function & Calvert Dosing", ["The organ-dose tool is still loading.", "Try again in a moment."]); return; }
+      try {
         var c = st.ctx || {};
         var labs = { crcl: c.crcl || 45, totalBili: c.totalBili || 2.2, anc: c.anc || 1800, platelets: c.platelets || 150000 };
         var calcDoses = {};
@@ -1885,12 +1913,14 @@
         });
         st.superpowerModal = { title: "Organ Function & Calvert Dosing (" + esc(pObj.name || proto) + ")", html: h };
         renderSuperpowerModal();
-      }
+      } catch (e3) { superpowerNotice("Organ Function & Calvert Dosing", ["Could not evaluate organ dosing for this regimen.", String((e3 && e3.message) || e3)]); }
       return;
     }
     if (act === "ddi-check") {
-      var pObj = st.protocols[proto];
-      if (G.SMD_ONCO_DDI && pObj) {
+      var pObj = resolveProto(proto);
+      if (!pObj) { superpowerNotice("DDI & QTc Interaction Sentry", ["The protocol data for this regimen is still loading.", "Wait a moment for the pathway to finish loading, then tap DDI Sentry again."]); return; }
+      if (!G.SMD_ONCO_DDI) { superpowerNotice("DDI & QTc Interaction Sentry", ["The interaction sentry is still loading.", "Try again in a moment."]); return; }
+      try {
         var sampleMeds = ["voriconazole", "ondansetron", "levofloxacin", "omeprazole"];
         var ddi = G.SMD_ONCO_DDI.auditDrugInteractions(pObj, sampleMeds);
         var h = "<div class=\"ot-ddi-eval\"><h4>Oncology Drug-Drug & QTc Interaction Audit</h4>";
@@ -1908,11 +1938,12 @@
         h += "</div>";
         st.superpowerModal = { title: "DDI & QTc Interaction Sentry", html: h };
         renderSuperpowerModal();
-      }
+      } catch (e4) { superpowerNotice("DDI & QTc Interaction Sentry", ["Could not audit interactions for this regimen.", String((e4 && e4.message) || e4)]); }
       return;
     }
     if (act === "genomics-drawer") {
-      if (G.SMD_ONCO_GENOMICS) {
+      if (!G.SMD_ONCO_GENOMICS) { superpowerNotice("Molecular Tumor Board & Precision Matcher", ["The genomics matcher is still loading.", "Try again in a moment."]); return; }
+      try {
         var profile = [{ gene: "EGFR", alteration: "L858R" }, { gene: "BRAF", alteration: "V600E" }, { gene: "MMR", alteration: "dMMR / MSI-H" }];
         var gm = G.SMD_ONCO_GENOMICS.matchActionableTargets(profile, st.guideline);
         var h = "<div class=\"ot-genomics-eval\"><h4>Actionable Genomic Biomarkers & Precision Therapies</h4>";
@@ -1923,7 +1954,7 @@
         h += "</tbody></table></div>";
         st.superpowerModal = { title: "Molecular Tumor Board & Precision Matcher", html: h };
         renderSuperpowerModal();
-      }
+      } catch (e5) { superpowerNotice("Molecular Tumor Board & Precision Matcher", ["Could not match genomic targets right now.", String((e5 && e5.message) || e5)]); }
       return;
     }
 

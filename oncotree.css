@@ -289,10 +289,17 @@ body.dark .ot-sheet-handle {
 }
 
 .ot-superpower-backdrop {
+  z-index: 16000 !important;
   background: rgba(0, 0, 0, 0.5) !important;
   backdrop-filter: blur(16px) saturate(160%) !important;
   -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
 }
+
+/* Loading/unavailable notice inside the superpower modal: explicit, never a silent no-op. */
+.ot-notice { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border: 1px solid var(--ot-line); border-radius: 14px; background: var(--ot-card); }
+.ot-notice .material-symbols-outlined { font-size: 24px; color: var(--ot-sub); flex: 0 0 auto; }
+.ot-notice p { margin: 0 0 6px; font-size: 13px; line-height: 1.5; color: var(--ot-ink, #14202b); }
+.ot-notice p:last-child { margin-bottom: 0; }
 
 .ot-superpower-modal {
   border-radius: 28px !important;

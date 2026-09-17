@@ -8,7 +8,7 @@
   "use strict";
   var G = root, D = root.document;
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
-  function ms(n) { return '<span class="material-symbols-outlined">' + n + "</span>"; }
+  function ms(n) { return '<span class="material-symbols-rounded" aria-hidden="true">' + n + "</span>"; }
   function asArr(v) { return v == null ? [] : (Array.isArray(v) ? v : [v]); }
   function DOSE() { return G.SMD_ONCODOSE; }
   function num(v) { var n = parseFloat(v); return isFinite(n) ? n : null; }
@@ -131,13 +131,31 @@
     return '<div class="ps-f"><span>Sex</span><b>' + esc(display) + '</b></div>';
   }
 
+  // Color-coded renal staging for the auto CrCl badge (same cutoffs as the bedside calculator).
+  function renalStage(c) {
+    if (c == null) return null;
+    if (c >= 90) return { label: "Normal", cls: "ps-renal-ok" };
+    if (c >= 60) return { label: "Mild impairment", cls: "ps-renal-mild" };
+    if (c >= 30) return { label: "Moderate impairment", cls: "ps-renal-mod" };
+    if (c >= 15) return { label: "Severe impairment", cls: "ps-renal-sev" };
+    return { label: "Kidney failure", cls: "ps-renal-fail" };
+  }
+
+  function consultantField(val, isExport) {
+    if (st.editing && !isExport) {
+      return '<label class="ps-f"><span>Consultant</span><input data-ps-field="consultant" type="text" placeholder="Treating oncologist" value="' + esc(val == null ? "" : val) + '"></label>';
+    }
+    return '<div class="ps-f"><span>Consultant</span><b>' + esc(val == null || val === "" ? "-" : val) + "</b></div>";
+  }
+
   function headerHtml(isExport) {
     var p = st.patient || {}, pr = st.protocol || {};
     var b = bsa();
     var c = crcl();
+    var rs = renalStage(c);
     var inst = (st.ctx && st.ctx.institution) || { name: "StewardMD Oncology Clinical Care", dept: "Department of Medical Oncology & Clinical Hematology", line: "Chemotherapy Treatment Protocol & Order Verification Sheet" };
     var bsaDisp = b ? ('<span class="ps-calc-val">' + round2(b) + ' m²</span><span class="ps-calc-tag">Mosteller</span>') : '<span class="ps-calc-missing">Auto (enter Ht &amp; Wt)</span>';
-    var crclDisp = c ? ('<span class="ps-calc-val">' + round2(c) + ' mL/min</span><span class="ps-calc-tag">Cockcroft-Gault</span>') : '<span class="ps-calc-missing">Auto (enter Age, Wt, SCr, Sex)</span>';
+    var crclDisp = c ? ('<span class="ps-calc-val">' + round2(c) + ' mL/min</span><span class="ps-calc-tag">Cockcroft-Gault</span>' + (rs ? ' <span class="ps-renalbadge ' + rs.cls + '">' + esc(rs.label) + "</span>" : "")) : '<span class="ps-calc-missing">Auto (enter Age, Wt, SCr, Sex)</span>';
 
     var emrBar = (st.editing && !isExport) ? (
       '<div class="ps-emr-bar">' +
@@ -145,6 +163,21 @@
         '<button type="button" class="ps-wardsync-btn" data-ps-act="wardsync-fetch" title="Fetch labs and vitals from WardSync EMR">' + ms("sync") + ' <span>Fetch from WardSync EMR</span></button>' +
       '</div>'
     ) : "";
+
+    // Full-width regimen banner: protocol identity at a glance (name + plan meta chips).
+    var intent = p.intent || (asArr(pr.intentOptions)[0] || "");
+    var stage = asArr(pr.stage).join(", ");
+    var chips = [];
+    if (pr.cycles) chips.push('<span class="ps-regimen-chip">' + esc(pr.cycles) + " planned cycles</span>");
+    if (pr.cycleLengthDays) chips.push('<span class="ps-regimen-chip">Every ' + esc(pr.cycleLengthDays) + " days</span>");
+    if (intent) chips.push('<span class="ps-regimen-chip">' + esc(intent) + "</span>");
+    if (stage) chips.push('<span class="ps-regimen-chip">Stage ' + esc(stage) + "</span>");
+    var banner =
+      '<div class="ps-regimenbanner">' +
+        '<div class="ps-regimen-kicker">Regimen</div>' +
+        '<div class="ps-regimen-name">' + esc(pr.name || "Treatment Protocol") + ((pr.custom || pr.lifecycleState === "custom") ? ' <span class="ps-custombadge">CUSTOM / DRAFT</span>' : "") + "</div>" +
+        (chips.length ? '<div class="ps-regimen-meta">' + chips.join("") + "</div>" : "") +
+      "</div>";
 
     return '<div class="ps-inst">' +
         '<div class="ps-inst-brand">' +
@@ -161,24 +194,29 @@
         '<div class="ps-doc-meta"><span class="ps-doc-date">Date: ' + esc((st.ctx && st.ctx.today) || "") + '</span></div>' +
       '</div>' +
       emrBar +
-      '<div class="ps-hgrid">' +
-        field("Case No / MRN", "caseNo", p.caseNo, "text", "MRN / Case #", isExport) +
-        field("Patient Name", "name", p.name, "text", "Full name", isExport) +
-        field("Age (yrs)", "age", p.age, "number", "e.g. 58", isExport) +
-        sexField(p.sex, isExport) +
-        field("Plan No", "planNo", p.planNo, "text", "Plan #", isExport) +
-        field("Height (cm)", "heightCm", p.heightCm, "number", "e.g. 165", isExport) +
-        field("Weight (kg)", "weightKg", p.weightKg, "number", "e.g. 68", isExport) +
-        field("Serum Creatinine (mg/dL)", "creatinine", p.creatinine, "number", "e.g. 0.90", isExport) +
-        '<div class="ps-f ps-autofield"><span>Auto BSA (m²)</span><b class="ps-auto-calc ps-auto-bsa">' + bsaDisp + '</b></div>' +
-        '<div class="ps-f ps-autofield"><span>Auto CrCl (mL/min)</span><b class="ps-auto-calc ps-auto-crcl">' + crclDisp + '</b></div>' +
-        '<div class="ps-f"><span>Protocol</span><b>' + esc(pr.name || "-") + '</b></div>' +
-        '<div class="ps-f"><span>Planned Cycles</span><b>' + esc(pr.cycles || "-") + '</b></div>' +
-        '<div class="ps-f"><span>Cycle Length</span><b>' + (pr.cycleLengthDays ? pr.cycleLengthDays + " days" : "-") + '</b></div>' +
-        field("Diagnosis", "diagnosis", p.diagnosis, "text", "Histology / stage", isExport) +
-        field("Intent", "intent", p.intent || (asArr(pr.intentOptions)[0] || ""), "text", "Adjuvant / Neoadjuvant / Palliative", isExport) +
-        '<div class="ps-f"><span>Consultant</span><b>' + esc(p.consultant || "-") + '</b></div>' +
-      '</div>';
+      banner +
+      '<div class="ps-cards">' +
+        '<section class="ps-card"><div class="ps-card-h">Patient demographics</div><div class="ps-card-grid ps-grid-2">' +
+          field("Case No / MRN", "caseNo", p.caseNo, "text", "MRN / Case #", isExport) +
+          field("Patient Name", "name", p.name, "text", "Full name", isExport) +
+          field("Age (yrs)", "age", p.age, "number", "e.g. 58", isExport) +
+          sexField(p.sex, isExport) +
+          field("Plan No", "planNo", p.planNo, "text", "Plan #", isExport) +
+          field("Diagnosis", "diagnosis", p.diagnosis, "text", "Histology / stage", isExport) +
+          field("Intent", "intent", intent, "text", "Adjuvant / Neoadjuvant / Palliative", isExport) +
+        "</div></section>" +
+        '<section class="ps-card ps-card-bio"><div class="ps-card-h">Biometrics &amp; renal function</div><div class="ps-card-grid ps-grid-2">' +
+          field("Height (cm)", "heightCm", p.heightCm, "number", "e.g. 165", isExport) +
+          field("Weight (kg)", "weightKg", p.weightKg, "number", "e.g. 68", isExport) +
+          '<div class="ps-f ps-autofield ps-span-2"><span>Auto BSA (m²)</span><b class="ps-auto-calc ps-auto-bsa">' + bsaDisp + "</b></div>" +
+          field("Serum Creatinine (mg/dL)", "creatinine", p.creatinine, "number", "e.g. 0.90", isExport) +
+          '<div class="ps-f ps-autofield"><span>Auto CrCl (mL/min)</span><b class="ps-auto-calc ps-auto-crcl">' + crclDisp + "</b></div>" +
+        "</div></section>" +
+        '<section class="ps-card"><div class="ps-card-h">Prescribing oncologist &amp; date</div><div class="ps-card-grid ps-grid-2">' +
+          consultantField(p.consultant, isExport) +
+          '<div class="ps-f"><span>Date</span><b>' + esc((st.ctx && st.ctx.today) || "-") + "</b></div>" +
+        "</div></section>" +
+      "</div>";
   }
 
   // ---- drug schedule table ----------------------------------------------------------------------
@@ -249,7 +287,7 @@
         '<div class="ps-sig-row">' +
           '<div class="ps-sig-pad">' + sigCanvasOrImg + "</div>" +
           '<div class="ps-sig-meta">' +
-            (st.editing && !isExport ? '<label class="ps-f"><span>Consultant</span><input data-ps-field="consultant" value="' + esc(p.consultant || "") + '"></label>' : '<div class="ps-f"><span>Consultant</span><b>' + esc(p.consultant || "-") + "</b></div>") +
+            '<div class="ps-f"><span>Consultant</span><b>' + esc(p.consultant || "-") + "</b></div>" +
             '<div class="ps-f"><span>Date</span><b>' + esc((st.ctx && st.ctx.today) || "") + "</b></div>" +
           "</div>" +
         "</div>" +
@@ -409,7 +447,22 @@
       '.ps-title-row{display:flex;justify-content:space-between;align-items:baseline;margin:8px 0 12px;border-bottom:1px solid #e2e8f0;padding-bottom:6px}' +
       '.ps-title{font:800 15px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:#0f172a}' +
       '.ps-doc-date{font:600 11px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#64748b}' +
-      '.ps-hgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;margin-bottom:14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px}' +
+      '.ps-regimenbanner{background:#0f766e;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
+      '.ps-regimen-kicker{font:800 9.5px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;text-transform:uppercase;letter-spacing:.1em;opacity:.8}' +
+      '.ps-regimen-name{font:800 17px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;letter-spacing:-.01em;margin-top:2px}' +
+      '.ps-regimen-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}' +
+      '.ps-regimen-chip{font:700 10px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px 10px}' +
+      '.ps-cards{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:14px}' +
+      '.ps-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px}' +
+      '.ps-card-h{font:800 10px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:#0f766e;margin-bottom:8px}' +
+      '.ps-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}' +
+      '.ps-span-2{grid-column:1/-1}' +
+      '.ps-renalbadge{font:700 8.5px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;border-radius:4px;padding:1px 5px;border:1px solid;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
+      '.ps-renal-ok{color:#166534;background:#dcfce7;border-color:#86efac}' +
+      '.ps-renal-mild{color:#075985;background:#e0f2fe;border-color:#7dd3fc}' +
+      '.ps-renal-mod{color:#92400e;background:#fef3c7;border-color:#fcd34d}' +
+      '.ps-renal-sev{color:#9a3412;background:#ffedd5;border-color:#fdba74}' +
+      '.ps-renal-fail{color:#fff;background:#dc2626;border-color:#991b1b}' +
       '.ps-f{display:flex;align-items:baseline;gap:6px;font-size:11.5px}' +
       '.ps-f>span{color:#64748b;font-weight:600;min-width:110px}' +
       '.ps-f>b{font-weight:700;color:#0f172a}' +
@@ -527,6 +580,18 @@
   }
   function open(protocolOrId, patient, opts) {
     if (!D) return;
+    // Object-envelope form: open({ protocol, patient, today, institution, onAssign, opts }).
+    if (protocolOrId && typeof protocolOrId === "object" && protocolOrId.protocol) {
+      var o = protocolOrId;
+      var oc = (o.opts && typeof o.opts === "object") ? o.opts : {};
+      if (o.today != null && oc.today == null) oc.today = o.today;
+      if (o.institution != null && oc.institution == null) oc.institution = o.institution;
+      if (o.onAssign != null && oc.onAssign == null) oc.onAssign = o.onAssign;
+      var merged = {}, k;
+      for (k in oc) merged[k] = oc[k];
+      if (opts && typeof opts === "object") { for (k in opts) merged[k] = opts[k]; }
+      return start(o.protocol, o.patient || patient || {}, merged);
+    }
     if (protocolOrId && typeof protocolOrId === "object") return start(protocolOrId, patient, opts);
     if (!G.fetch) return;
     G.fetch("/kb/protocols/" + encodeURIComponent(protocolOrId) + ".json").then(function (r) { return r.ok ? r.json() : null; })
@@ -538,7 +603,7 @@
   var API = {
     open: open, close: close, _st: st, _drugRow: drugRow,
     bsa: bsa, crcl: crcl, sheetHtml: sheetHtml, buildExportHtml: buildExportHtml,
-    fetchWardSync: fetchWardSync, _version: "1.1"
+    fetchWardSync: fetchWardSync, _version: "1.2"
   };
   if (root) root.SMD_PROTOSHEET = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
