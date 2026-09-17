@@ -534,18 +534,21 @@
    * GUIDE_ARM_EVERY_MS; it is idempotent (it removes any previous handler first) and one small evaluate
    * every couple of seconds costs nothing next to a doctor losing the step. */
   var GUIDE_ARM_EVERY_MS = 2000;
-  function armGuideOnce() {
+  function armGuideOnce(full) {
     if (!S || !S.guide || !S.engine || !S.engine.GUIDE_ARM) return;
     var c = S.pluginClient || getPlugin();
     if (!c || !c.evaluate) return;
+    /* Only the first arm of a question runs the observer: it sets the mark that decides which requests
+     * count as this step's answer, and re-running it would discard everything the doctor already did. */
+    var expression = full ? S.engine.GUIDE_ARM : (S.engine.GUIDE_ARM_TAP || S.engine.GUIDE_ARM);
     try {
-      var p = c.evaluate({ expression: S.engine.GUIDE_ARM });
+      var p = c.evaluate({ expression: expression });
       if (p && p.catch) p.catch(function () {});
     } catch (e) { /* between documents; the next beat covers it */ }
   }
   function startGuideHeartbeat() {
     stopGuideHeartbeat();
-    armGuideOnce();
+    armGuideOnce(true);
     S.guideBeat = setInterval(function () {
       if (!S || !S.guide) { stopGuideHeartbeat(); return; }
       armGuideOnce();
