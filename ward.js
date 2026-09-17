@@ -1277,13 +1277,23 @@
     var rows = ((a && a.events) || []).map(function (e) {
       return "<li><b>" + esc(e.drug) + "</b><span>" + esc(e.dose) + (e.route ? " " + esc(e.route) : "") + " &middot; " + when(e.at) + "</span></li>";
     }).join("");
+    /* The technique actually given (R2-2): stated at the start and, if the case was converted, changed at the end. Nothing
+     * is preselected at the start; at the end the one already recorded is. */
+    var techSelect = function (id, cur) {
+      return '<label class="w-f"><span>' + (a ? wTH("ward.anes-tech-given-end", "Technique given (change it if the case was converted)") : wTH("ward.anes-tech-given", "Technique given")) + '</span><select id="' + id + '">' +
+        pacOptions("technique", ["general", "spinal", "epidural", "combined-spinal-epidural", "regional-block", "sedation", "local-with-monitoring"], cur) + "</select></label>";
+    };
+    var techLine = a && a.technique ? '<p class="w-dt-times">' + wTH("ward.anes-tech-line", "Technique given: {tech}", { tech: esc(pacWord("technique", a.technique)) }) +
+      (a.techniqueChangedFrom ? " &middot; " + wTH("ward.anes-tech-converted", "converted from {from}", { from: esc(pacWord("technique", a.techniqueChangedFrom)) }) : "") + "</p>" : "";
     return '<div class="w-card"><div class="w-card-h">' + ms("vital_signs") + "<h3>" + wTH("ward.anaesthesia", "Anaesthesia") + "</h3></div>" +
       (!a
         ? "<label class=\"w-f\"><span>" + wTH("ward.asa-class", "ASA class") + "</span><input id=\"wSurgAsa\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-asa-ii", "e.g. ASA II") + "\"></label>" +
+          techSelect("wSurgAnesTech", "") +
           '<button class="w-btn go" data-w-act="anesstart">' + ms("play_arrow") + wTH("ward.start-anaesthesia-record", "Start anaesthesia record") + "</button>"
         : a.endedAt
-          ? '<p class="w-hint">' + ms("check_circle") + wTH("ward.ended2", "Ended {endedAt}", { endedAt: when(a.endedAt) }, "endedAt") + "</p>" + (rows ? '<ul class="w-mini">' + rows + "</ul>" : "")
-          : (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") +
+          ? '<p class="w-hint">' + ms("check_circle") + wTH("ward.ended2", "Ended {endedAt}", { endedAt: when(a.endedAt) }, "endedAt") + "</p>" + techLine + (rows ? '<ul class="w-mini">' + rows + "</ul>" : "")
+          : techLine + (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") +
+            techSelect("wSurgAnesTechEnd", a.technique || "") +
             '<div class="w-grid">' +
             "<label class=\"w-f\"><span>" + wTH("ward.drug", "Drug") + "</span><input id=\"wSurgAnesDrug\" type=\"text\" autocomplete=\"off\"></label>" +
             "<label class=\"w-f\"><span>" + wTH("ward.dose", "Dose") + "</span><input id=\"wSurgAnesDose\" type=\"text\" autocomplete=\"off\"></label>" +
@@ -2891,7 +2901,59 @@
       '<p class="w-hint">' + ms("info") + wTH("ward.dc-chart-hint", "When the consultant approves discharge, record it here. Pharmacy, billing and the ward desk record their own steps on Discharge progress.") + "</p>" +
       '<div class="w-actions"><button class="w-btn" data-w-act="dcadvise">' + ms("done") + wTH("ward.dc-advise", "Discharge advised") + "</button>" +
       '<button class="w-btn ghost" data-w-act="dcboard">' + ms("timer") + wTH("ward.dc-open-board", "Open Discharge progress") + "</button></div></div>";
-    return head + eddHtml + xferHtml + dcHtml + "</div>";
+    return head + admTimesHtml(p.adm) + eddHtml + xferHtml + dcHtml + "</div>";
+  }
+  /* NABH KPI 1 on the stay's chart (admission-times.js): the nurse records when the patient reached the bed, a doctor marks
+   * the signed note that is the initial assessment. adm: false = could not be read; signedNotes null = notes not read. */
+  function admTimesHtml(adm) {
+    if (adm === false) return '<div class="w-sub"><p class="w-hint warn">' + ms("error") + wTH("ward.adt-failed", "The admission times could not be loaded. Do not read this as not recorded.", null, "", 1) + "</p></div>";
+    if (!adm || !adm.eligible) return "";
+    var rec = adm.record || {}, ba = rec.bedArrival, ia = rec.initialAssessment;
+    var arrival = ba
+      ? "<p><b>" + when(ba.at) + "</b> &middot; " + wTH("ward.adt-recorded-by", "recorded by {who}", { who: staffWho(ba.by) }) + (ba.reason ? " &middot; " + esc(ba.reason) : "") + "</p>" +
+        '<button class="w-btn ghost sm" data-w-act="admarrive:change">' + ms("edit") + wTH("ward.adt-change-arrival", "Change the arrival time") + "</button>"
+      : '<p class="w-empty">' + wTH("ward.adt-arrival-none", "Not recorded.") + "</p>" +
+        '<button class="w-btn" data-w-act="admarrive">' + ms("bed") + wTH("ward.adt-record-arrival", "Record bed arrival") + "</button>";
+    var notes = adm.signedNotes;
+    var assessment = ia
+      ? "<p>" + wTH("ward.adt-marked", "Note signed {at} by {who}, marked by {marker}", { at: when(ia.signedAt), who: staffWho(ia.signedBy), marker: staffWho(ia.markedBy) }) + (ia.reason ? " &middot; " + esc(ia.reason) : "") + "</p>"
+      : notes == null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.adt-notes-failed", "The signed notes could not be read, so none can be marked. Do not read this as none.", null, "", 1) + "</p>"
+      : !notes.length ? '<p class="w-empty">' + wTH("ward.adt-no-signed-note", "No signed doctor's note on this stay yet. Sign the assessment note, then mark it here.") + "</p>"
+      : '<ul class="w-mini">' + notes.map(function (n) {
+        return '<li class="w-mini-row"><div>' + wTH("ward.adt-note-row", "Note signed {at} by {who}", { at: when(n.signedAt), who: staffWho(n.signedBy) }) + "</div>" +
+          '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="admmark:' + esc(n.noteId) + '">' + ms("task_alt") + wTH("ward.adt-mark", "Mark as initial assessment") + "</button></div></li>";
+      }).join("") + "</ul>";
+    var result = adm.minutes != null ? '<p class="w-dt-times">' + wTH("ward.adt-minutes", "{n} minutes from bed arrival to the initial assessment.", { n: esc(adm.minutes) }) + "</p>"
+      : ba && ia ? '<p class="w-dt-times">' + wTH("ward.adt-out-of-order", "The assessment was signed before the recorded bed arrival, so this stay is not averaged.") + "</p>" : "";
+    return '<div class="w-sub"><h4>' + ms("timer") + wTH("ward.adt-title", "Bed arrival and initial assessment") + "</h4>" +
+      '<p class="w-hint">' + ms("info") + wTH("ward.adt-hint", "NABH measures the time from the patient reaching the ward bed to the doctor's initial assessment being signed.") + "</p>" +
+      "<h5>" + wTH("ward.adt-arrival", "Reached the bed") + "</h5>" + arrival +
+      "<h5>" + wTH("ward.adt-assessment", "Initial assessment") + "</h5>" + assessment + result + "</div>";
+  }
+  function admArrive(change) {
+    var s = st.sel, adm = st.stayPlan && st.stayPlan.adm; if (!s || !adm) return;
+    askFor({ title: wTH("ward.adt-record-arrival", "Record bed arrival"), icon: "bed", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "at", type: "datetime", value: dtLocalNow(), label: wTH("ward.adt-when", "When the patient reached the bed") },
+      { key: "reason", type: "textarea", label: change ? wTH("ward.adt-reason-change", "Why the recorded time is changing") : wTH("ward.dc-reason-optional", "Reason, if the time is out of order (optional)"), required: change ? wT("ward.dc-reason-needed", "A change needs a reason.") : "" }] }, function (v) {
+      var at = v.at ? new Date(v.at) : null;
+      if (at && isNaN(at.getTime())) { st.err = wT("ward.that-date-could-not-be-read", "That date could not be read. Nothing was recorded."); return; }
+      var body = { orgId: st.orgId, encounterId: s.encounterId, at: at ? at.toISOString() : undefined, reason: v.reason || undefined };
+      if (change && adm.record) body.expectedVersion = adm.record.version;
+      st.busy = true; paint();
+      return apiPost("/ward/bed-arrival", body)
+        .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) return loadStayPlan(); paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    });
+  }
+  function admMark(noteId) {
+    var s = st.sel; if (!s || !noteId) return;
+    askFor({ title: wTH("ward.adt-mark", "Mark as initial assessment"), icon: "task_alt", ok: wTH("ward.adt-mark-ok", "Mark"), fields: [
+      { key: "reason", type: "textarea", label: wTH("ward.adt-mark-reason", "Reason, if the note was signed before the bed arrival (optional)") }] }, function (v) {
+      st.busy = true; paint();
+      return apiPost("/ward/initial-assessment", { orgId: st.orgId, encounterId: s.encounterId, noteId: noteId, reason: v.reason || undefined })
+        .then(function (r) { if (settle(r, wT("ward.adt-marked-note", "Marked as the initial assessment."))) return loadStayPlan(); paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    });
   }
   /* The ward list's own board: every open request this ward sends or receives, with the step each one is waiting for.
    * st.transfers: null = loading, false = could not be read, [] = none. The server decides who may take each step. */
@@ -10390,7 +10452,7 @@
     var c = st.surgCase && st.surgCase.case; if (!c) return;
     var asaClass = val("wSurgAsa");
     st.busy = true; paint();
-    apiPost("/ward/anesthesia-start", { orgId: st.orgId, caseId: c.id, asaClass: asaClass })
+    apiPost("/ward/anesthesia-start", { orgId: st.orgId, caseId: c.id, asaClass: asaClass, technique: val("wSurgAnesTech") || undefined })
       .then(function (r) { if (settle(r, wT("ward.anaesthesia-record-started", "Anaesthesia record started."))) loadSurgeryCase(c.id); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-start-the-anaesthesia-record", "Could not start the anaesthesia record."); paint(); });
   }
@@ -10406,7 +10468,7 @@
   function anesEnd() {
     var c = st.surgCase && st.surgCase.case; if (!c) return;
     st.busy = true; paint();
-    apiPost("/ward/anesthesia-end", { orgId: st.orgId, caseId: c.id })
+    apiPost("/ward/anesthesia-end", { orgId: st.orgId, caseId: c.id, technique: val("wSurgAnesTechEnd") || undefined })
       .then(function (r) { if (settle(r, wT("ward.anaesthesia-ended", "Anaesthesia ended."))) loadSurgeryCase(c.id); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-end-the-anaesthesia-record", "Could not end the anaesthesia record."); paint(); });
   }
@@ -11625,8 +11687,9 @@
   function loadStayPlan() {
     var s = st.sel; if (!s || !s.encounterId) return Promise.resolve();
     var q = "?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(s.encounterId);
-    var plan = { edd: null, xfer: null };
+    var plan = { edd: null, xfer: null, adm: null };
     return Promise.all([
+      apiGet("/ward/admission-times" + q).then(function (r) { plan.adm = r && r.ok ? r : false; }, function () { plan.adm = false; }),
       apiGet("/ward/expected-discharge-history" + q).then(function (r) { plan.edd = r && r.ok ? { current: r.current || null, history: r.history || [] } : false; }, function () { plan.edd = false; }),
       apiGet("/ward/transfer-requests" + q).then(function (r) { plan.xfer = r && r.ok ? (r.requests || []).slice().sort(function (a, b) { return String(b.requestedAt).localeCompare(String(a.requestedAt)); }) : false; }, function () { plan.xfer = false; }),
     ]).then(function () { if (st.sel !== s) return; st.stayPlan = plan; paint(); });
@@ -15813,6 +15876,8 @@
     if (cmd === "admreqclose") { admReqClose(arg); return; }
     if (cmd === "dcboard") { dcBoardOpen(); return; }
     if (cmd === "dcstep") { dcStep(arg); return; }
+    if (cmd === "admarrive") { admArrive(arg === "change"); return; }
+    if (cmd === "admmark") { admMark(arg); return; }
     if (cmd === "dcadvise") { if (st.sel && st.sel.encounterId) dcAsk(st.sel.encounterId, "advised", false, null, function () { paint(); }); return; }
     if (cmd === "tcentre") { tcOpen(); return; }
     if (cmd === "tcrecord") { tcRecord(); return; }
