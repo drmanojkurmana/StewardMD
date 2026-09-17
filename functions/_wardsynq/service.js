@@ -31,7 +31,7 @@
 
 import { ClinicalStore } from "../../wardsynq/wardsynq-store.js";
 import { GovernedStore, GovernanceError, canRead } from "../../wardsynq/wardsynq-actors.js";
-import { VersionConflictError, assertRepository } from "./repository.js";
+import { VersionConflictError, RepositoryError, assertRepository } from "./repository.js";
 import { patientIdentifierKeys } from "./identity-key.js";
 import { actorFromConnectRole, aiActorFor, isAiOrigin } from "./actor.js";
 import { stageWebhookEvents } from "./webhook-events.js";
@@ -589,6 +589,31 @@ class IdempotencyConflictError extends VersionConflictError {
   }
 }
 
+/**
+ * A paged read met more records than its stated ceiling (R4-1, 2026-09-17).
+ *
+ * Every roster read used to be capped at 1,000 records, OLDEST first, and said nothing: past that the
+ * newest admission was the one missing from the ward list and the bed check. A census now either reads
+ * every record it asked for or throws this; it never answers short. code "too_many_open" from
+ * listByStatus, "too_many_records" from listAll when the caller asked it to throw.
+ */
+class ListCeilingError extends Error {
+  constructor(code, resourceType, max) {
+    super(`more than ${max} ${resourceType} records matched; the read was refused rather than shortened`);
+    this.name = "ListCeilingError";
+    this.code = code;
+    this.resourceType = resourceType;
+    this.max = max;
+  }
+}
+/* The hard ceilings. OPEN_CENSUS_MAX: open records of one type (every stay, ED visit and OPD visit not yet
+ * closed) - far past any single hospital's beds, so reaching it means stale open visits, which must be seen.
+ * LIST_ALL_MAX: a whole-type read held in one Worker's memory; LIST_ALL_DEFAULT when the caller names none. */
+const OPEN_CENSUS_MAX = 5000;
+const LIST_ALL_MAX = 100000;
+const LIST_ALL_DEFAULT = 50000;
+const PAGE = 1000;
+
 /** Who a record is about. A Patient's own subject is its id. */
 const subjectOf = (r) => (r && (r.patientId || (r.resourceType === "Patient" ? r.id : null))) || null;
 
@@ -788,6 +813,56 @@ class RecordService {
     const rows = await this.repository.latestByType(this.tenantId, resourceType, limit, opts && opts.newest ? { newest: true } : undefined);
     await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, limit: Number(limit) || null }, resourceCounts: { [resourceType]: rows.length } }));
     return rows;
+  }
+
+  /* Pages the port's pageByType until the last page or until more than `max` distinct ids are held.
+   * A record amended between pages is met again later and the later copy wins (see pageByType). */
+  async _pageAll(resourceType, statuses, max) {
+    if (typeof this.repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+    const byId = new Map();
+    let after = 0, pages = 0;
+    for (;;) {
+      const page = await this.repository.pageByType(this.tenantId, resourceType, { afterSeq: after, limit: PAGE, ...(statuses ? { statuses } : {}) });
+      pages += 1;
+      for (const r of page.records || []) if (r && r.id != null) { byId.delete(r.id); byId.set(r.id, r); }
+      if (page.next == null || byId.size > max) return { rows: [...byId.values()], pages };
+      after = page.next;
+    }
+  }
+
+  /**
+   * THE OPEN CENSUS: the latest version of every record of one type whose status is one of `statuses`
+   * (an Encounter's "in-progress"), however much closed history the hospital holds. Oldest first.
+   * Governed and audited exactly as list(). More than `max` (default and ceiling OPEN_CENSUS_MAX) throws
+   * ListCeilingError code "too_many_open": a bed check or ward list must never run on a short census.
+   */
+  async listByStatus(resourceType, statuses, max) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const want = (Array.isArray(statuses) ? statuses : [statuses]).filter((x) => typeof x === "string" && x);
+    const cap = Math.max(1, Math.min(OPEN_CENSUS_MAX, Number(max) || OPEN_CENSUS_MAX));
+    const got = want.length ? await this._pageAll(resourceType, want, cap) : { rows: [], pages: 0 };
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, statuses: want, pages: got.pages }, resourceCounts: { [resourceType]: Math.min(got.rows.length, cap) } }));
+    if (got.rows.length > cap) throw new ListCeilingError("too_many_open", resourceType, cap);
+    return got.rows;
+  }
+
+  /**
+   * EVERY record of one type (latest version each), oldest first, paged. For a count, a sum or a ledger.
+   * opts.max: the caller's ceiling (default LIST_ALL_DEFAULT, never above LIST_ALL_MAX).
+   * -> { rows, truncated }: past max, rows holds the oldest max and truncated is true - or, with
+   * opts.throwOnTruncate, ListCeilingError code "too_many_records" is thrown instead. A caller that sums
+   * or counts must say so when truncated is true; it must never present the figure as complete.
+   */
+  async listAll(resourceType, opts) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const cap = Math.max(1, Math.min(LIST_ALL_MAX, Number(opts && opts.max) || LIST_ALL_DEFAULT));
+    const got = await this._pageAll(resourceType, null, cap);
+    const truncated = got.rows.length > cap;
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, all: true, pages: got.pages, truncated }, resourceCounts: { [resourceType]: Math.min(got.rows.length, cap) } }));
+    if (truncated && opts && opts.throwOnTruncate) throw new ListCeilingError("too_many_records", resourceType, cap);
+    return { rows: truncated ? got.rows.slice(0, cap) : got.rows, truncated };
   }
 
   /**
@@ -1072,6 +1147,6 @@ class RecordService {
 
 export {
   RESOURCE_TYPES, BLOOD_CENTRE_ONLY, bloodCentreOnlyReadable, MODE, NATIVE_SYSTEM, isExternalRecord,
-  AuthorityError, RecordRequestError, IdempotencyConflictError,
+  AuthorityError, RecordRequestError, IdempotencyConflictError, ListCeilingError, OPEN_CENSUS_MAX, LIST_ALL_MAX, LIST_ALL_DEFAULT,
   TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
 };

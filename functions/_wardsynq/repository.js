@@ -25,6 +25,12 @@
  *                                                                           events through it instead of the newest N of
  *                                                                           everything; an implementation without it gets
  *                                                                           the old newest-N scan (see outbox.js).
+ *   pageByType(tenantId, resourceType, {afterSeq, limit, statuses}) -> {records, next}   OPTIONAL, latest per id,
+ *                                                                           OLDEST first, one page after the afterSeq
+ *                                                                           cursor; statuses (optional) keeps only ids whose
+ *                                                                           latest body status is one of them; next is the
+ *                                                                           cursor for the following page, null on the last.
+ *                                                                           service.js listByStatus/listAll page through it.
  *   pageByIdPrefix(tenantId, resourceType, prefix, {limit, before}) -> {records, next}   OPTIONAL, latest per id
  *                                                                           whose id starts with prefix, newest first,
  *                                                                           one page; next is the cursor for the page after
@@ -265,6 +271,26 @@ class MemoryRepository {
     const rows = [...byId.values()];
     if (opts && opts.newest) rows.sort((a, b) => b.seq - a.seq);
     return rows.slice(0, max).map((r) => clone(r.body));
+  }
+
+  /**
+   * OPTIONAL (see the port contract above): one page, oldest first, of the latest version of each id
+   * written after `afterSeq`, optionally only those whose status is one of `statuses`.
+   *
+   * The cursor is the seq of each id's LATEST version, so a record amended between two pages moves
+   * forward and is met again on a later page (the reader keeps the last copy by id); it can never move
+   * back behind the cursor, so paging to the end misses nothing.
+   */
+  async pageByType(tenantId, resourceType, opts) {
+    const max = rosterLimit(opts && opts.limit), after = Number(opts && opts.afterSeq) || 0;
+    const want = opts && Array.isArray(opts.statuses) ? new Set(opts.statuses.filter((s) => typeof s === "string")) : null;
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
+      byId.set(r.id, r);
+    }
+    const rows = [...byId.values()].filter((r) => r.seq > after && (!want || want.has(r.body && r.body.status))).sort((a, b) => a.seq - b.seq);
+    return { records: rows.slice(0, max).map((r) => clone(r.body)), next: rows.length > max ? rows[max - 1].seq : null };
   }
 
   /**
