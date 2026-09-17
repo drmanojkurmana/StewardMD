@@ -310,3 +310,25 @@ test("LT-19/LT-31: icon ligatures are hidden from assistive tech, and no text ru
   assert.ok(!/\.d-stat span \{/.test(css) && !/\.d-signed span \{/.test(css), "a bare span rule would override the icon font");
   assert.match(css, /body:has\(#wsqBugFab\) #smdDischarge \.d-actions \{ padding-right: 170px; \}/, "the Report Bug corner stays clear of Sign and finalise");
 });
+
+test("patient education: loading, failed and none are distinct; only a given, not taken-back leaflet prints, after the summary", () => {
+  const W = load();
+  assert.match(W._render(S({ edu: null })), /Loading leaflets/);
+  const failed = W._render(S({ edu: false }));
+  assert.match(failed, /Do not read this as none given/);
+  assert.ok(!/No leaflet has been given/.test(failed), "a failed load never reads as none given");
+  assert.match(W._render(S({ edu: { items: [] }, eduLib: [] })), /No leaflet has been given on this stay/);
+  const item = { itemId: "i1", title: "Wound care", language: "hi", body: "Line one\nLine two", approvedBy: "Dr Two", approvedAt: "2026-09-10T05:00:00.000Z", attachedAt: "2026-09-10T06:00:00.000Z", detached: null };
+  const back = { ...item, itemId: "i2", title: "Old leaflet", detached: { reason: "wrong stay" } };
+  const lib = [{ leafletId: "wsq-edu-1", version: 2, title: "Diet after surgery", language: "en" }];
+  const html = W._render(S({ edu: { items: [item, back] }, eduLib: lib }));
+  assert.match(html, /Approved by Dr Two/);
+  assert.match(html, /Taken back: wrong stay/);
+  assert.match(html, /<option value="wsq-edu-1\|2">Diet after surgery \(en\)<\/option>/);
+  assert.equal((html.match(/data-d-act="eduback:/g) || []).length, 1, "only a leaflet still given can be taken back");
+  assert.ok(!/data-d-act="edugive"/.test(W._render(S({ canAuthor: false, edu: { items: [item] }, eduLib: lib }))), "a reader cannot give one");
+  const paper = W._printable(S({ edu: { items: [item, back] } }));
+  assert.ok(paper.indexOf("Wound care") > paper.indexOf("p-sig"), "the leaflet prints after the summary's signature block");
+  assert.match(paper, /Line one<br>Line two/);
+  assert.ok(!paper.includes("Old leaflet"), "a taken-back leaflet does not print");
+});
