@@ -8183,3 +8183,31 @@ of compliance.js is untouched.
 - Not done: no cron or scheduled runner (the job is admin-triggered on purpose; the person who starts it is
   the person it is audited to), and no total-remaining figure before a full scan pass - the count comes from
   the scan itself, batch by batch, because counting the archive is the same walk as scanning it.
+
+## 2026-09-18 A clash check reads the clash window, not the hospital's whole diary (R6-4, branch booking-and-registry-reads)
+- THE PROBLEM WAS NOT `state` VS `status`. R5-2 could not put the two clash reads (scheduling.js
+  bookAppointment, online-booking.js diary) on the open-status read because an Appointment keeps where it
+  stands in `state` and the store filters on `status`, and mirroring `state` into `status` would have left
+  the hospital's existing diary with no status and a clash check that skipped it. The conclusion drawn then
+  was "the port needs a `states` filter first". That is NOT what was built.
+- A CLASH IS TIME-BOUNDED BY DEFINITION, so the period read R5-3 already shipped (service.listSince,
+  pageByType newest/beforeSeq) bounds it with no port change, no schema change and no new filter on three
+  adapters: read newest first and stop once a whole page is behind the window. read-window.js
+  `readClashDiary` holds the window (the longest permitted appointment, 480 minutes, plus a week of margin).
+  A `states` filter stays the upgrade if a state query that is NOT time-bounded ever appears.
+- THE STOP TEST LOOKS AT TWO THINGS, and this is the part worth remembering: the read pages by WRITE order,
+  the window is on `startAt`. A booking made long ago for a date inside the window has an old seq, so a stop
+  on `startAt` alone would walk past it and book over it. A record is behind the window only when its slot is
+  older than the floor AND it was last written longer ago than the longest lead a booking is made with
+  (WRITE_LOOKBACK_MS, 400 days). An appointment booked further ahead than that and never touched since is the
+  stated residual, and it is outside any real outpatient diary.
+- THE AMENDMENT RACE IS NOT ACCEPTED HERE. pageByType's newest-first cursor can miss a record amended during
+  the read (repository.js:302-306); on a month report that is the documented price, on a clash check it is a
+  double booking. An amendment lands at the very top of the write order, so ONE page of the newest records is
+  re-read after the decision and before the append (read-window.js `readRecentWrites`) and tested with the
+  same overlap rule; in the portal that re-read runs after the slot hold is claimed and releases the hold if
+  the time turns out to be taken. Bound: 1,000 writes landing inside one clash read would push an amendment
+  off that page; a per-clinician id range seek is the upgrade.
+- Unchanged: the Blackout read (a standing period, not a slot), listSchedule's diary read (it is asked for
+  arbitrary past date ranges), and the 50,000 ceiling with throwOnTruncate - a diary that cannot be bounded
+  still refuses rather than booking on a short read.
