@@ -561,3 +561,15 @@ test('proveView: a reply carrying only the patient header and column labels is n
   await proveView({ client: fakePage({ entries, screen, answers: { 21: { status: 200, contentType: 'text/html', text: RESULTS } } }), view: real, parents: [wl] });
   assert.equal(real.proof.status, 'proven');
 });
+
+/* A SHELL IS NOT DATA: the reply must carry rows under the view's own columns. */
+test('dataRowCount: a print shell with the header row and a nested patient block has zero data rows; a result table has its rows', async () => {
+  const { dataRowCount } = await import('../../connect-agent/phone/prove.mjs');
+  const headers = ['TEST NAME (METHOD)', 'TEST NAME', 'RESULTS', 'BIOLOGICAL REFERENCE INTERVAL', 'UNITS'];
+  const shell = '<div><table><tr><th>TEST NAME (METHOD)</th><th>TEST NAME</th><th>RESULTS</th><th>BIOLOGICAL REFERENCE INTERVAL</th><th>UNITS</th></tr><tr><td><table><tr><td>Patient ID</td><td>:</td><td>MR1</td></tr><tr><td>Patient name</td><td>:</td><td>A</td></tr></table></td></tr></table></div>';
+  assert.equal(dataRowCount(shell, headers), 0);
+  const results = '<table><thead><tr><th>TEST NAME (METHOD)</th><th>TEST NAME</th><th>RESULTS</th><th>BIOLOGICAL REFERENCE INTERVAL</th><th>UNITS</th></tr></thead><tbody><tr><td></td><td>Haemoglobin</td><td>11.2</td><td>13 - 17</td><td>g/dL</td></tr><tr><td></td><td>Platelets</td><td>210</td><td>150 - 400</td><td>10^3/uL</td></tr></tbody></table>';
+  assert.equal(dataRowCount(results, headers), 2);
+  assert.equal(dataRowCount('<table><tr><th>Drug</th></tr></table>', headers), 0, 'a table of other columns is no data for this view');
+  assert.equal(dataRowCount(results, ['x']), -1, 'a view without two known columns is not judged here');
+});

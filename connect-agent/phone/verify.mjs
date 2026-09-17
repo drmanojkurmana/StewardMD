@@ -11,7 +11,7 @@
 // PHI never leaves the phone: the brain sees column names, row counts and the response kind only.
 
 import { readWorklist, readView, fillPath } from './runtime.mjs';
-import { searchPatientOnScreen, exploreDetailOf } from './deep-crawl.mjs';
+import { searchPatientOnScreen, exploreDetailOf, replayGuidedPath, captureView } from './deep-crawl.mjs';
 import { executeView, usableRows } from './adapter-runtime.mjs';
 import { scrubForBrain, redactEndpoints, mergeEndpointDetails } from './deep-crawl.mjs';
 
@@ -91,6 +91,13 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
       await learnPageLoadCalls({ plugin, origin, view, patient: sample[0], waitMs: Math.min(Math.max(waitMs, 6000), 12000), book });
     }
     if (skippedNow()) { markSkipped(); continue; }
+    /* NOT PROVEN, AND THE SCREEN MAY BE A SEARCH FORM: open the view's page, walk the doctor's taps, type
+     * this patient's id, take the suggestion, press search, and prove the call the search made against
+     * the list it shows. What the owner did by hand to build the hand-made adapter (GHIS Lab reports). */
+    if (book && !proven(view) && !view.detailOf && sample.length) {
+      say({ checking: view.resourceHint, searching: true });
+      await learnPageLoadCalls({ plugin, origin, view, patient: sample[0], waitMs: Math.min(Math.max(waitMs, 6000), 12000), book, searchPatient: true });
+    }
     if (book && !proven(view)) {
       const status = (view.proof && view.proof.status) || 'none';
       view.verified = { resource: view.resourceHint, ok: false, via: 'none', rows: 0, kind: 'none', reason: 'no endpoint was proven for this view (' + status + '); it will be read from its page' };
@@ -118,21 +125,23 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
     /* NO ROWS FOR A REAL PATIENT: the screen may be a search form. Open the view's page, search for
      * this patient there, prove the call the search made against the rows it shows, replay it, and
      * open one result row for the detail chain. What the owner did by hand, done by the agent. */
-    if (book && (!best || !usableRows(best.rows)) && sample.length && !view.detailOf) {
+    if (book && (!best || !usableRows(best.rows)) && sample.length && !view.detailOf && !view.searched) {
       say({ checking: view.resourceHint, searching: true });
       await learnPageLoadCalls({ plugin, origin, view, patient: sample[0], waitMs: Math.min(Math.max(waitMs, 6000), 12000), book, searchPatient: true });
       if (proven(view)) {
         let again = null;
         try { again = await executeView({ plugin, origin, view, patient: sample[0], parseHtml }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; again = null; }
-        if (again && usableRows(again.rows)) {
-          best = again; listRows[view.resourceHint] = { rows: again.rows, patient: sample[0] };
-          if (!list.some((d) => d && d.detailOf === view.resourceHint && proven(d))) {
-            let detail = null;
-            try { detail = await exploreDetailOf({ client: plugin, view, book, origins: [origin], waitMs: Math.min(3000, waitMs) }); } catch { detail = null; }
-            if (detail && proven(detail)) list.push(detail);
-          }
-        }
+        if (again && usableRows(again.rows)) { best = again; listRows[view.resourceHint] = { rows: again.rows, patient: sample[0] }; }
       }
+    }
+    /* THE CHAIN AFTER A SEARCH: the list the search showed is still on screen; open one of its rows and
+     * prove the detail call (GHIS: the result print behind an order). */
+    if (book && view.searched && best && usableRows(best.rows) && !list.some((d) => d && d.detailOf === view.resourceHint && proven(d))) {
+      let detail = null;
+      try { detail = await exploreDetailOf({ client: plugin, view, book, origins: [origin], waitMs: Math.min(3000, waitMs) }); } catch (e) { detail = null; view.chain = { error: String((e && e.message) || e).replace(/\d{3,}/g, '#').slice(0, 120) }; }
+      if (detail) view.chain = { status: (detail.proof && detail.proof.status) || 'none', rows: detail.rowsSelector || '', endpoints: (detail.endpoints || []).map((e) => e.method + ' ' + e.path) };
+      else if (!view.chain) view.chain = { status: 'no-detail-view' };
+      if (detail && proven(detail)) list.push(detail);
     }
     const rows = best ? best.rows : [];
     const verdict = await judge({ brain, resource: view.resourceHint, rows, kind: best ? best.kind : 'none', path: best ? best.url : null });
@@ -174,7 +183,12 @@ export async function learnPageLoadCalls({ plugin, origin, view, waitMs = 20000,
     if (typeof plugin.drainObserverEvents === 'function') await plugin.drainObserverEvents().catch(() => null);
     const page = patient ? fillPath(view.pathTemplate, patient) : view.pathTemplate;
     await plugin.navigate({ url: page.indexOf('http') === 0 ? page : String(origin).replace(/\/$/, '') + page });
-    try { await readView({ plugin, origin, view, settleMs: 1500, toggleAll: true, maxWaitMs: waitMs, navigate: false }); } catch { /* the rows are a bonus; the calls are the point */ }
+    /* The screen the doctor showed may only exist after their taps (a menu item swaps a form in): walk
+     * those taps again before reading, searching or proving. */
+    if (Array.isArray(view.guidedPath) && view.guidedPath.length) {
+      try { await replayGuidedPath({ client: plugin, path: view.guidedPath, waitMs: Math.min(2000, waitMs) }); } catch { /* best effort */ }
+    }
+    try { await readView({ plugin, origin, view, settleMs: 1500, toggleAll: true, maxWaitMs: Math.min(waitMs, searchPatient ? 3000 : waitMs), navigate: false }); } catch { /* the rows are a bonus; the calls are the point */ }
     /* A ward list that loads only when its tab is tapped (In patients, IP, Ward) never calls on load:
      * tap such a tab once, read-only by label, and let the call happen. */
     if (tapList) {
@@ -185,6 +199,15 @@ export async function learnPageLoadCalls({ plugin, origin, view, waitMs = 20000,
      * GetSearchPatientId), exactly what the owner did by hand to build the hand-made adapter. */
     if (searchPatient && patient && patient.patientId) {
       try { view.searched = await searchPatientOnScreen({ client: plugin, patientId: patient.patientId, waitMs: Math.min(3000, waitMs) }); } catch { view.searched = null; }
+      /* The screen now shows the resource's own list (the orders), not the form or its shell: read its
+       * table afresh so the proof is graded against those rows and the chain opens one of them. */
+      if (view.searched) {
+        let fresh = null;
+        try { fresh = await captureView({ client: plugin, resourceHint: view.resourceHint }); } catch { fresh = null; }
+        if (fresh && fresh.rowsSelector && !fresh.block) {
+          for (const k of ['rowsSelector', 'headers', 'cellSelectors', 'block', 'singleRecord', 'onclickTemplate']) { if (fresh[k] !== undefined) view[k] = fresh[k]; else delete view[k]; }
+        }
+      }
     }
     // With proof, the page's calls are candidates only: one is kept when its answer matches the rows shown.
     if (book) { await book.prove({ client: plugin, view, label: 'open the ' + view.resourceHint + ' page', since: 0 }); return; }

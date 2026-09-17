@@ -20,6 +20,7 @@ import { GUIDE_SOURCES } from "../connect-agent/phone/deep-crawl.mjs";
 import { executeView, rowsFromJson } from "../connect-agent/phone/adapter-runtime.mjs";
 import { mapRows } from "../connect-agent/phone/runtime.mjs";
 import { serveGhisProxy } from "../connect-agent/phone/ghis-shim.mjs";
+import { verifyViews } from "../connect-agent/phone/verify.mjs";
 
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const DBG = 9391;
@@ -47,13 +48,34 @@ const LABS = {
     { Analyte: "Potassium", Value: "K_CODE", ValueType: "5.6", UOM: "mmol/L", LowValue: "3.5", HighValue: "5.1", Section: "Biochemistry" },
   ],
 };
+/* GHIS "Lab reports": the doctor searches a patient (autocomplete fills a hidden id), the search posts
+ * GetSearchPatientId (orders), and opening an order posts GetPrintLabResultDetailsAuth (tests). A print
+ * shell (OTLabPrintsSecretary) loads with the form and carries only the patient header block. */
+const LAB_ORDERS = {
+  MR900001: [
+    { parameter_long_desc: "Complete blood count", OrderDate: "17-Sep-2026", Department_desc: "Haematology", pstatus: "Authorization", ServiceRenderId: "770001", episode_id: "IP5550001" },
+    { parameter_long_desc: "Renal function test", OrderDate: "16-Sep-2026", Department_desc: "Biochemistry", pstatus: "Authorization", ServiceRenderId: "770002", episode_id: "IP5550001" },
+  ],
+  MR900002: [
+    { parameter_long_desc: "Serum electrolytes", OrderDate: "15-Sep-2026", Department_desc: "Biochemistry", pstatus: "Pending", ServiceRenderId: "770003", episode_id: "IP5550002" },
+  ],
+};
+const LAB_TESTS = {
+  770001: [{ TestName: "Haemoglobin", Result: "11.2", Units: "g/dL", LowValue: "13", HighValue: "17" }, { TestName: "Platelet count", Result: "210", Units: "10^3/uL", LowValue: "150", HighValue: "400" }],
+  770002: [{ TestName: "Creatinine", Result: "1.4", Units: "mg/dL", LowValue: "0.6", HighValue: "1.2" }],
+  770003: [{ TestName: "Potassium", Result: "5.6", Units: "mmol/L", LowValue: "3.5", HighValue: "5.1" }],
+};
+const LAB_SHELL = (mr) => '<div id="labhdr"><table><tr><th>TEST NAME (METHOD)</th><th>TEST NAME</th><th>RESULTS</th><th>BIOLOGICAL REFERENCE INTERVAL</th><th>UNITS</th></tr><tr><td><table><tr><td>Patient ID</td><td>:</td><td>' + mr + '</td></tr><tr><td>Patient name</td><td>:</td><td>' + (WARD.find((w) => w.MRNo === mr) || {}).PatientName + '</td></tr><tr><td>Visit ID</td><td>:</td><td>' + (WARD.find((w) => w.MRNo === mr) || {}).VisitNo + '</td></tr></table></td></tr></table></div>';
 const PAGE = `<!doctype html><html><body>
 <input type="hidden" name="__RequestVerificationToken" value="tok-abc">
 <table id="wl"><thead><tr><th>MR No</th><th>Visit</th><th>Patient name</th><th>Bed</th></tr></thead><tbody></tbody></table>
 <a href="#" id="tc">Treatment chart</a>
 <a href="#" id="lb">Labs</a>
+<a href="#" id="lr">Lab reports</a>
 <div id="medsBox"></div>
 <div id="labsBox"></div>
+<div id="labForm" style="display:none"><select id="dselect"><option value="PatientID">PatientID</option></select> <input id="txtAuto" type="text"> <input type="hidden" id="hfAutoID"><input type="hidden" id="hfsearchpatientId"> <a href="#" id="btnLabSearch" onclick="SearchPatientId(); return false;"><i class="fa fa-search"></i></a>
+<div id="tblSearchBox"></div><div id="divLabSaveResult"></div></div>
 <script>
 var selected = null;
 function xhr(method, url, body, cb) { var x = new XMLHttpRequest(); x.open(method, url); x.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); if (body) x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'); x.onload = function () { cb(x.responseText); }; x.send(body || null); }
@@ -72,6 +94,39 @@ document.getElementById('lb').onclick = function (e) {
     document.getElementById('labsBox').innerHTML = h + '</tbody></table>'; document.title = 'labs';
   });
 };
+document.getElementById('lr').onclick = function (e) {
+  e.preventDefault();
+  document.querySelector('#wl').style.display = 'none';
+  document.getElementById('labForm').style.display = '';
+  xhr('GET', '/Doctor/Home/OTLabPrintsSecretary/?id=' + (selected ? selected.MRNo : ''), null, function (html) { document.getElementById('divLabSaveResult').innerHTML = html; document.title = 'labform'; });
+};
+document.getElementById('txtAuto').addEventListener('input', function () {
+  var tok = document.querySelector('input[name=__RequestVerificationToken]').value, box = this;
+  xhr('POST', '/Lab/Home/GetSearchAutocompletePatient', '__RequestVerificationToken=' + tok + '&SearchName=' + encodeURIComponent(box.value), function (t) {
+    var data = JSON.parse(JSON.parse(t)); var ul = document.getElementById('sug') || document.body.appendChild(Object.assign(document.createElement('ul'), { id: 'sug' }));
+    ul.innerHTML = data.map(function (d) { return '<li class="ui-menu-item">' + d.PatientID + ' => ' + d.Patientname + '</li>'; }).join('');
+    [].forEach.call(ul.children, function (li) { li.onclick = function () { document.getElementById('hfAutoID').value = li.textContent.split('=>')[0].trim(); ul.remove(); }; });
+  });
+});
+function SearchPatientId() {
+  var tok = document.querySelector('input[name=__RequestVerificationToken]').value, id = document.getElementById('hfAutoID').value;
+  if (!id) return;
+  xhr('POST', '/Lab/Home/GetSearchPatientId', '__RequestVerificationToken=' + tok + '&patient_id=' + id + '&DeptID=&FDate=&EDate=', function (t) {
+    var rows = JSON.parse(JSON.parse(t)), h = '<table id="tblSearch"><thead><tr><th>Test</th><th>Order date</th><th>Department</th><th>Status</th></tr></thead><tbody>';
+    rows.forEach(function (r) { h += '<tr data-rid="' + r.ServiceRenderId + '" data-epi="' + r.episode_id + '"><td>' + r.parameter_long_desc + '</td><td>' + r.OrderDate + '</td><td>' + r.Department_desc + '</td><td>' + r.pstatus + '</td></tr>'; });
+    document.getElementById('tblSearchBox').innerHTML = h + '</tbody></table>';
+    [].forEach.call(document.querySelectorAll('#tblSearch tbody tr'), function (tr) { tr.onclick = function () { PrintResult(tr.getAttribute('data-rid'), tr.getAttribute('data-epi')); }; });
+    document.title = 'laborders';
+  });
+}
+function PrintResult(rid, epi) {
+  var tok = document.querySelector('input[name=__RequestVerificationToken]').value;
+  xhr('POST', '/Lab/Home/GetPrintLabResultDetailsAuth', '__RequestVerificationToken=' + tok + '&Render_ID=' + rid + '&Episode_Id=' + epi + '&Result_Type=a', function (t) {
+    var rows = JSON.parse(t), h = '<table><thead><tr><th>TEST NAME (METHOD)</th><th>TEST NAME</th><th>RESULTS</th><th>BIOLOGICAL REFERENCE INTERVAL</th><th>UNITS</th></tr></thead><tbody>';
+    rows.forEach(function (r) { h += '<tr><td></td><td>' + r.TestName + '</td><td>' + r.Result + '</td><td>' + r.LowValue + ' - ' + r.HighValue + '</td><td>' + r.Units + '</td></tr>'; });
+    document.getElementById('divLabSaveResult').innerHTML = h + '</tbody></table>'; document.title = 'labresult';
+  });
+}
 document.getElementById('tc').onclick = function (e) {
   e.preventDefault();
   var tok = document.querySelector('input[name=__RequestVerificationToken]').value;
@@ -107,6 +162,20 @@ function startEmr() {
       }
       if (u.pathname === "/Doctor/Home/DashboardUnit") { res.writeHead(200, { "Content-Type": "text/html" }); return res.end("<table><tr><td>5</td></tr></table>"); }
       if (u.pathname === "/Doctor/Home/GetSignatureBYid") { res.writeHead(200, { "Content-Type": "application/json" }); return res.end('{"Signature":"sig"}'); }
+      if (u.pathname === "/Doctor/Home/OTLabPrintsSecretary/") { res.writeHead(200, { "Content-Type": "text/html" }); return res.end(LAB_SHELL(u.searchParams.get("id") || "")); }
+      if (u.pathname === "/Lab/Home/GetSearchAutocompletePatient") {
+        const q = new URLSearchParams(body).get("SearchName") || "";
+        res.writeHead(200, { "Content-Type": "application/json" }); return res.end(JSON.stringify(JSON.stringify(WARD.filter((w) => w.MRNo.indexOf(q) === 0).map((w) => ({ PatientID: w.MRNo, Patientname: w.PatientName })))));
+      }
+      if (u.pathname === "/Lab/Home/GetSearchPatientId") {
+        const p = new URLSearchParams(body);
+        if (p.get("__RequestVerificationToken") !== "tok-abc") { res.writeHead(400); return res.end(); }
+        res.writeHead(200, { "Content-Type": "application/json" }); return res.end(JSON.stringify(JSON.stringify(LAB_ORDERS[p.get("patient_id")] || [])));
+      }
+      if (u.pathname === "/Lab/Home/GetPrintLabResultDetailsAuth") {
+        const p = new URLSearchParams(body);
+        res.writeHead(200, { "Content-Type": "application/json" }); return res.end(JSON.stringify(LAB_TESTS[p.get("Render_ID")] || []));
+      }
       if (u.pathname === "/Lab/Home/GetResults") { res.writeHead(200, { "Content-Type": "application/json" }); return res.end(JSON.stringify(LABS[u.searchParams.get("id")] || [])); }
       if (u.pathname === "/Doctor/Home/GetMedicines/") {
         const rec = active[sid[1]] || "";
@@ -234,6 +303,38 @@ async function main() {
     const det = serveGhisProxy({ path: "/lab-detail?renderId=" + orders[0].renderId, sections: labsSection, patient: patients[0] }).body;
     const hb = det.tests.find((t) => /Haemoglobin/.test(t.test));
     ok(hb && hb.result === "11.2" && hb.units === "g/dL" && hb.range === "13 - 17", "shim reads the result the doctor saw, not the code: " + JSON.stringify(hb && { r: hb.result, u: hb.units, rng: hb.range }));
+
+    // LAB REPORTS AS A SEARCH FORM (the live GHIS shape, 2026-09-17). The doctor opens "Lab reports" and
+    // taps Done on the empty form: the print shell behind it must NOT be proven as labs; verification
+    // must then search for a real patient there, prove the search call, and open one order for the chain.
+    await client.navigate({ url: emr.origin + "/Doctor/Home" });
+    ok(await waitFor("document.title==='ready'"), "back on the ward list for the lab reports screen");
+    await client.evaluate({ expression: GUIDE_SOURCES.arm });
+    await client.evaluate({ expression: GUIDE_SOURCES.armGuide });
+    await client.evaluate({ expression: "document.querySelectorAll('#wl tbody tr')[0].click(); document.getElementById('lr').click(); 'ok'" });
+    ok(await waitFor("document.title==='labform'"), "the lab reports form and its print shell rendered");
+    const guidedPath = JSON.parse((await client.evaluate({ expression: GUIDE_SOURCES.guidePath })).result || "[]");
+    const labForm = { resourceHint: "labs", pathTemplate: emr.origin + "/Doctor/Home", rowsSelector: "#divLabSaveResult table tbody tr", headers: ["TEST NAME (METHOD)", "TEST NAME", "RESULTS", "BIOLOGICAL REFERENCE INTERVAL", "UNITS"], guidedPath: guidedPath.filter((g) => !/^(tr|td|th)/.test(g)) };
+    await book.prove({ client, view: labForm, label: "open Lab reports" });
+    ok(labForm.proof.status !== "proven", "the print shell (patient header block, no results) is NOT proven as labs: " + JSON.stringify(labForm.proof));
+    const views = [wl, labForm];
+    console.log("  guidedPath: " + JSON.stringify(labForm.guidedPath));
+    const vres = await verifyViews({ plugin: client, origin: emr.origin, views, book, parseHtml: tinyDom, waitMs: 1500, notify: (ph, x) => console.log("  verify " + ph + " " + JSON.stringify(x)) });
+    console.log("  after verify: " + JSON.stringify((await client.evaluate({ expression: "JSON.stringify({title:document.title,form:document.getElementById('labForm').style.display,inputs:[].slice.call(document.querySelectorAll('input[type=text]')).map(function(i){return i.id+':'+(i.getClientRects().length?'vis':'hid')}),orders:document.querySelectorAll('#tblSearch tbody tr').length,url:location.pathname})" })).result));
+    console.log("  labForm proof: " + JSON.stringify(labForm.proof) + " searched=" + JSON.stringify(labForm.searched) + " sel=" + labForm.rowsSelector + " chain=" + JSON.stringify(labForm.chain));
+    console.log("  book trace tail: " + JSON.stringify(book.trace.slice(-2)).slice(0, 1500));
+    const chk = Object.fromEntries(vres.checks.map((c) => [c.resource, c]));
+    ok(labForm.proof.status === "proven" && labForm.endpoints.some((e) => e.role === "data" && e.method === "POST" && e.path === "/Lab/Home/GetSearchPatientId"), "verification searched for the patient on the form and proved the order-list call: " + JSON.stringify(labForm.endpoints && labForm.endpoints.map((e) => e.method + " " + e.path)) + " searched=" + JSON.stringify(labForm.searched));
+    ok(labForm.endpoints && labForm.endpoints.some((e) => e.role === "data" && e.params && e.params.patient_id && e.params.patient_id.from === "worklist"), "patient_id traced to the ward list: " + JSON.stringify((labForm.endpoints || []).map((e) => e.params)));
+    ok(chk.labs && chk.labs.ok && chk.labs.rows === 2, "labs verified with the two orders of the first patient: " + JSON.stringify(chk.labs));
+    const labDetail = views.find((v) => v.resourceHint === "labs-detail");
+    ok(labDetail && labDetail.proof.status === "proven" && labDetail.endpoints.some((e) => e.role === "data" && e.path === "/Lab/Home/GetPrintLabResultDetailsAuth"), "one order was opened and the result print call proven as the chain: " + JSON.stringify(labDetail && labDetail.endpoints && labDetail.endpoints.map((e) => e.method + " " + e.path + " " + JSON.stringify(e.params))));
+    // Replayed for the OTHER patient: her order, then its tests.
+    const ord2 = await executeView({ plugin: client, origin: emr.origin, view: labForm, patient: patients[1], parseHtml: tinyDom });
+    ok(ord2 && ord2.rows.length === 1 && /Serum electrolytes/.test(JSON.stringify(ord2.rows)), "the order list replayed for patient two: " + JSON.stringify(ord2 && ord2.rows.map((r) => r.parameter_long_desc)));
+    const det2 = labDetail && await executeView({ plugin: client, origin: emr.origin, view: labDetail, patient: patients[1], parentRow: ord2.rows[0], parseHtml: tinyDom });
+    ok(det2 && det2.rows.length === 1 && /Potassium/.test(JSON.stringify(det2.rows)) && /5\.6/.test(JSON.stringify(det2.rows)), "her result print replayed through the chain: " + JSON.stringify(det2 && det2.rows));
+    ok(!/MR9000|TEST ALPHA|TEST BRAVO|Haemoglobin|Potassium|tok-abc/.test(JSON.stringify([labForm, labDetail])), "nothing identifying is in the saved lab views");
   } finally {
     try { chrome.kill(); } catch { /* gone */ }
     emr.server.close();

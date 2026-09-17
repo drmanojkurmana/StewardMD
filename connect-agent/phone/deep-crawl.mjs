@@ -1156,6 +1156,49 @@ function CRAWL_PRESS_SEARCH() {
     return 'none';
   } catch (e) { return 'e'; }
 }
+/* WALK THE DOCTOR'S TAPS AGAIN. A guided view remembers what the doctor tapped to reach it (CRAWL_ARM_GUIDE:
+ * 'a#lr "Lab reports"', 'li.nav-item "Investigations"'). A screen that only exists after those taps
+ * (GHIS Lab reports: a menu item swaps the form in) is reached the same way before it is searched or
+ * proven again. A tap inside a table (tr/td/th) was the doctor pointing at a list, not navigation, and
+ * is not replayed. Match: the id when it has one, else tag+class with the same label, else any control
+ * with the same label. */
+function CRAWL_REPLAY_STEP(entry) {
+  try {
+    var m = /^([a-z0-9]+)(#[\w-]+)?(\.[\w-]+)?(?:\s+"(.*)")?$/.exec(String(entry || '').trim());
+    if (!m) return 'bad';
+    var tag = m[1], id = m[2] || '', cls = m[3] || '', label = (m[4] || '').trim();
+    if (/^(tr|td|th|table|tbody|thead)$/.test(tag)) return 'skip';
+    var norm = function (t) { return String(t || '').replace(/\s+/g, ' ').trim().replace(/\d{3,}/g, '#').slice(0, 60); };
+    var vis = function (e) { try { return !!(e.getClientRects && e.getClientRects().length); } catch (x) { return false; } };
+    var el = null;
+    if (id) el = document.querySelector(tag + id) || document.querySelector(id);
+    if (!el && (cls || label)) {
+      var cands = [].slice.call(document.querySelectorAll(tag + cls));
+      el = cands.filter(function (e) { return !label || norm(e.textContent) === label; }).sort(function (a, b) { return (vis(b) ? 1 : 0) - (vis(a) ? 1 : 0); })[0] || null;
+    }
+    if (!el && label) {
+      var all = [].slice.call(document.querySelectorAll('a,button,li,[role=tab],[role=button],[onclick],h1,h2,h3,h4,h5,h6,span,div,label'));
+      el = all.filter(function (e) { return norm(e.textContent) === label; }).sort(function (a, b) { return (vis(b) ? 1 : 0) - (vis(a) ? 1 : 0); })[0] || null;
+    }
+    if (!el) return 'none';
+    el.click();
+    return 'clicked';
+  } catch (e) { return 'e'; }
+}
+export const REPLAY_STEP_SRC = String(CRAWL_REPLAY_STEP);
+
+/** replayGuidedPath({ client, path, waitMs }) -> number of steps clicked. */
+export async function replayGuidedPath({ client, path, waitMs = 1200 }) {
+  let clicked = 0;
+  for (const entry of Array.isArray(path) ? path.slice(0, 20) : []) {
+    let r = 'none';
+    try { r = String((await client.evaluate({ expression: `(${REPLAY_STEP_SRC})(${JSON.stringify(String(entry))})` }))?.result || 'none'); } catch { r = 'e'; }
+    if (r === 'clicked') { clicked += 1; await client.wait({ ms: Math.max(waitMs, 800) }); }
+  }
+  if (clicked) await awaitDetailRequest({ client, maxMs: Math.max(waitMs * 3, 4000) });
+  return clicked;
+}
+
 export const PATIENT_SEARCH_SRC = String(CRAWL_PATIENT_SEARCH);
 export const PICK_SUGGESTION_SRC = String(CRAWL_PICK_SUGGESTION);
 export const PRESS_SEARCH_SRC = String(CRAWL_PRESS_SEARCH);

@@ -243,7 +243,14 @@ export function overlapOf(cells, text, contentType) {
   return { hits, cells: cells.length, ratio: cells.length ? Math.round((hits / cells.length) * 100) / 100 : 0 };
 }
 
-export function accepted(o) { return o.cells > 0 && o.hits >= Math.min(ACCEPT.hits, o.cells) && o.ratio >= ACCEPT.ratio; }
+/* HALF THE SCREEN, AT LEAST TWO CELLS, AT MOST THREE REQUIRED. A one-result screen (a single lab report:
+ * three cells) needed every cell to hit; one cell printed differently by the page ("10^3/uL") and the
+ * result print behind the order was never proven (browser replica of GHIS Lab reports, 2026-09-17). */
+export function accepted(o) {
+  if (!(o.cells > 0)) return false;
+  const need = Math.min(ACCEPT.hits, Math.max(Math.min(2, o.cells), Math.ceil(o.cells * ACCEPT.ratio)));
+  return o.hits >= need && o.ratio >= ACCEPT.ratio;
+}
 
 /**
  * learnColumns(headers, screenRows, respRows) -> { header: { key } | { keys: [a, b], join } }
@@ -331,6 +338,41 @@ export function responseKind(resp) {
 
 /** Parent rows as the runtime will hold them: JSON rows by key (rowsFromJson), HTML rows by header label
  *  plus `_args.N` (the row's onclick arguments) and `_href.KEY` (its link's query values). */
+/**
+ * dataRowCount(html, headers) -> how many DATA rows the reply carries under the view's own columns: rows
+ * of the table whose header row shares the view's labels, with two or more cells and no nested table.
+ * A print shell has that header row and zero such rows; its patient-header block is a nested table.
+ * Nesting-aware string scan (no DOM here).
+ */
+export function dataRowCount(html, headers) {
+  const want = (Array.isArray(headers) ? headers : []).map((h) => norm(h)).filter(Boolean);
+  if (want.length < 2) return -1;
+  const src = String(html || '');
+  const re = /<(\/?)table\b[^>]*>/gi;
+  const stack = [];
+  const blocks = [];
+  let m;
+  while ((m = re.exec(src))) {
+    if (!m[1]) stack.push(m.index);
+    else if (stack.length) blocks.push([stack.pop(), m.index + m[0].length]);
+  }
+  let best = 0;
+  for (const [a, b] of blocks) {
+    let inner = src.slice(a, b);
+    // drop nested tables, innermost first
+    for (;;) { const n = inner.replace(/<table\b[^>]*>(?:(?!<table\b)[\s\S])*?<\/table>/i, (x, off) => (off === 0 ? x : ' ')); if (n === inner) break; inner = n; }
+    const labels = [...inner.matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/gi)].map((x) => norm(stripHtml(x[1])));
+    if (labels.filter((l) => l && want.includes(l)).length < Math.min(2, want.length)) continue;
+    let rows = 0;
+    for (const tr of inner.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)) {
+      const tds = [...tr[1].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)].map((x) => stripHtml(x[1]).replace(/&nbsp;/g, ' ').trim()).filter(Boolean);
+      if (tds.length >= 2) rows += 1;
+    }
+    if (rows > best) best = rows;
+  }
+  return best;
+}
+
 export function rowsForChain(text, contentType) {
   const t = String(text || '').trim();
   if (/json/i.test(contentType || '') || t[0] === '{' || t[0] === '[') {
@@ -653,6 +695,13 @@ export async function proveView({ client, view, brain = null, since = -1, label 
     const p = paramsOf(e, parents);
     if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr && !chained(p) && !patientKeyed(p))) continue;
     const rows = rowsForChain(resp.text, resp.contentType);
+    /* A SHELL IS NOT DATA. An HTML reply that carries the view's header row but no data row under it (a
+     * print page's empty result table over a patient-header block) proves nothing, whatever else on the
+     * screen it happens to contain (GHIS OTLabPrintsSecretary, approved as labs, 2026-09-17). */
+    if (kind === 'html' && String(view.resourceHint || '') !== 'worklist' && dataRowCount(resp.text, view.headers) === 0) {
+      trace.tried[trace.tried.length - 1].shell = true;
+      continue;
+    }
     /* GEMINI JUDGES THE REPLY, the ward list included: an out-patient queue carries patients too, and
      * was proven as the ward list on the live run (DashboardUnit, 2026-09-15). Only column names, a row
      * count and the redacted path go to the model. A confident "no" rejects it. */
