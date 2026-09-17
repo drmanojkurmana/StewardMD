@@ -411,7 +411,7 @@ body.dark .ot-sheet-handle {
 .ot-overlay {
   /* LIGHT is the default palette; the body.dark rule below overrides all of them together. */
   --ot-bg: var(--paper, #f6f7f5); --ot-ink: var(--ink, #14202b); --ot-card: var(--panel, #ffffff); --ot-line: var(--line, #d7dee3); --ot-sub: var(--slate, #2d4356); --ot-accent: var(--teal, #0e6e63);
-  position: fixed; inset: 0; z-index: 4000; display: none;
+  position: fixed; inset: 0; z-index: 14000; display: none;
   background: var(--ot-bg);
   -webkit-tap-highlight-color: transparent;
   font: 15px/1.45 var(--sans);
@@ -2103,7 +2103,7 @@ body.ot-open { overflow: hidden; }
 .ot-superpower-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 5000;
+  z-index: 14500;
   background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(4px);
   display: flex;
