@@ -49,6 +49,11 @@
     return '<section class="card" aria-labelledby="h-' + esc(id) + '" data-section="' + esc(id) + '"><h2 id="h-' + esc(id) + '">' + esc(title) + "</h2>" + body + "</section>";
   }
 
+  /* R6-2: a chart section the server could not read arrives as null, never as []. "failed" draws the
+   * section's own could-not-be-read line; an empty list still draws "nothing recorded". A patient
+   * reading "no allergies are recorded" off a read that failed is the whole reason for the split. */
+  function unread(v) { return v === null ? "failed" : "ok"; }
+
   /** PURE. Queue status. q: undefined/null = loading, false = failed, else the /api/portal/queue answer. */
   function statusSection(q) {
     var body;
@@ -336,7 +341,7 @@
     if (has("forms")) out.push(intakeSection(null));
 
     if (has("appointments")) {
-      out.push(section("appointments", tr("appt.title"), "ok", doc.appointments, function (a) {
+      out.push(section("appointments", tr("appt.title"), unread(doc.appointments), doc.appointments, function (a) {
         return "<b>" + esc(when(a.at) || tr("appt.tbc")) + "</b>" + (a.with ? " " + esc(tr("appt.with", { who: a.with })) : "") + (a.kind ? " (" + esc(a.kind) + ")" : "");
       }, tr("appt.empty")));
       out.push('<section class="card" data-section="appointment-request"><h2>' + esc(tr("appt.ask")) + '</h2><p class="quiet">' + esc(tr("appt.askNote")) + "</p>" +
@@ -345,18 +350,18 @@
         '<button class="btn primary" type="button" data-act="appt">' + esc(tr("appt.send")) + '</button><div id="pApptMsg" aria-live="polite"></div></section>');
       out.push(bookingSection(null));
     }
-    if (has("medicines")) out.push(section("medicines", tr("meds.title"), "ok", doc.medicines, function (m) {
+    if (has("medicines")) out.push(section("medicines", tr("meds.title"), unread(doc.medicines), doc.medicines, function (m) {
       return "<b>" + esc(m.drug) + "</b>" + [m.dose, m.route, m.frequency].filter(Boolean).map(function (x) { return " " + esc(typeof x === "object" ? (x.value + " " + x.unit) : x); }).join(",") + (m.note ? "<br>" + esc(m.note) : "");
     }, tr("meds.empty")));
     if (has("results")) {
-      out.push(section("results", tr("results.title"), "ok", doc.results, function (x) {
+      out.push(section("results", tr("results.title"), unread(doc.results), doc.results, function (x) {
         return "<b>" + esc(x.name) + "</b> " + esc(when(x.reportedAt)) + (x.conclusion ? "<br>" + esc(x.conclusion) : "");
       }, tr("results.empty")));
       if (doc.withheldResults && doc.withheldResults.length) out.push('<div class="msg note">' + doc.withheldResults.map(function (w) { return esc(w.say); }).join("<br>") + "</div>");
     }
     if (has("diagnoses")) {
-      out.push(section("diagnoses", tr("dx.title"), "ok", doc.diagnoses, function (d) { return "<b>" + esc(d.display) + "</b>" + (d.note ? "<br>" + esc(d.note) : ""); }, tr("dx.empty")));
-      out.push(section("allergies", tr("allergy.title"), "ok", doc.allergies, function (a) { return "<b>" + esc(a.substance) + "</b>" + (a.reaction ? ": " + esc(a.reaction) : ""); }, tr("allergy.empty")));
+      out.push(section("diagnoses", tr("dx.title"), unread(doc.diagnoses), doc.diagnoses, function (d) { return "<b>" + esc(d.display) + "</b>" + (d.note ? "<br>" + esc(d.note) : ""); }, tr("dx.empty")));
+      out.push(section("allergies", tr("allergy.title"), unread(doc.allergies), doc.allergies, function (a) { return "<b>" + esc(a.substance) + "</b>" + (a.reaction ? ": " + esc(a.reaction) : ""); }, tr("allergy.empty")));
     }
     if (has("discharge") || has("discharge-full")) out.push(dischargeSection(failed("discharge"), r.dischargeSummaries));
     if (has("documents")) out.push(section("documents", tr("docs.title"), failed("documents"), r.documents, documentItem, tr("docs.empty")));

@@ -461,7 +461,9 @@ async function pendingRequests(request, env, ctx) {
     } else {
       [requests, reports] = await Promise.all([
         svc.byPatient("ServiceRequest", patientId),
-        svc.byPatient("DiagnosticReport", patientId).catch(() => []),
+        /* R6-2: no .catch(() => []) here either. A failed report read used to read as "nothing has
+         * been resulted", which puts every already-answered order back on the bench as still owed. */
+        svc.byPatient("DiagnosticReport", patientId),
       ]);
     }
   } catch (e) {

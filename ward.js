@@ -3293,8 +3293,13 @@
     var d = r.document || {};
     var p = d.patient || {};
 
+    /* R6-2: null is a section the server could not read (patient-record.js assemble unreadableTypes),
+     * and it is NEVER drawn as the empty sentence. "No medicines are recorded" off a read that failed
+     * is a page a patient carries to the next hospital. Empty stays empty; unreadable says so. */
+    var unread = '<p class="w-hint warn">' + ms("error") + wTH("ward.this-part-of-the-record-could", "This part of the record could not be read. It is not empty - it is unknown.", null, "", 1) + "</p>";
     var list = function (arr, empty, fn) {
-      return arr && arr.length ? "<ul class=\"w-dt-meds\">" + arr.map(fn).join("") + "</ul>" : '<p class="w-empty">' + empty + "</p>";
+      if (arr === null || arr === undefined) return unread;
+      return arr.length ? "<ul class=\"w-dt-meds\">" + arr.map(fn).join("") + "</ul>" : '<p class="w-empty">' + empty + "</p>";
     };
 
     /* OWNER DECISION 2026-09-15: ENGLISH MAIN, A SECOND LANGUAGE OPTIONAL (wardsynq/site/print-lang.js). The
@@ -3303,26 +3308,39 @@
      * picked from the closed list. Drugs, doses, frequencies, diagnoses and results stay English only. */
     var WP = G.WSQPrint, clock = r.print || null;
     var lang = WP && WP.enabled(r.print) && WP.valid(state.pcopyLang) ? state.pcopyLang : "";
-    var tr = function (html) { return lang ? WP.aside(lang, html) : ""; };
+    var tr = function (html) { return lang && html ? WP.aside(lang, html) : ""; };
     var T = function (k) { return lang ? esc(WP.t(k, lang)) : ""; };   // "" without a language, so nothing below needs WP
     var trHead = function (k, emptyKey, arr) {
-      return "<h4>" + T(k) + "</h4><p>" + (arr && arr.length ? T("print.tr.englishOnly") : T(emptyKey)) + "</p>";
+      // R6-2: an unreadable section gets no aside at all. A translated heading with the catalog's
+      // "nothing recorded" under it would say, in the patient's own language, the one thing that is
+      // not known to be true; the English above it already says the section could not be read.
+      if (arr === null || arr === undefined) return "";
+      return "<h4>" + T(k) + "</h4><p>" + (arr.length ? T("print.tr.englishOnly") : T(emptyKey)) + "</p>";
     };
     var pdate = function (iso, withTime) { return WP ? esc(WP.date(iso, clock, withTime)) || "-" : when(iso); };
     var instrEn = function (codes) { return (codes || []).map(function (c) { return WP ? WP.instruction(c, "en") : c; }).join("; "); };
-    var meds = d.medicines || [];
-    var medsTr = !lang ? "" : meds.filter(function (m) { return m.patientInstructions && m.patientInstructions.length; }).map(function (m) {
+    var meds = d.medicines === null || d.medicines === undefined ? null : d.medicines;
+    var medsTr = !lang || !meds ? "" : meds.filter(function (m) { return m.patientInstructions && m.patientInstructions.length; }).map(function (m) {
       return '<li><b lang="en">' + esc(m.drug) + "</b>: " + m.patientInstructions.map(function (c) { return esc(WP.instruction(c, lang)); }).join("; ") + "</li>";
     }).join("");
 
     /* The allergies are never filtered by anything, and an empty list is stated in words. A blank
      * allergy block reads as "no known allergies" to every clinician alive, and this page is one a
      * patient carries to the next hospital. */
-    var allergies = d.allergies && d.allergies.length
+    /* Named at the top, in one line, because a clinician scanning the page decides whether to hand it
+     * over before they reach the section that is missing. The same list the server refuses to record
+     * a handover against (patient-record.js releaseToPatient). */
+    var unreadable = (r.unreadableTypes || []).length
+      ? '<p class="w-dt-warn w-noprint" data-w-unreadable="' + esc(r.unreadableTypes.join(",")) + '">' + ms("error") +
+        wTH("ward.parts-of-this-record-could-not", "Parts of this record could not be read: {types}. A section shown as empty below may not be empty.", { types: esc(r.unreadableTypes.join(", ")) }, "types", 1) + "</p>"
+      : "";
+    var allergies = d.allergies === null || d.allergies === undefined
+      ? '<span class="w-hint warn">' + ms("error") + wTH("ward.the-allergy-list-could-not-be", "The allergy list could not be read. Do not hand this page over as an allergy record.", null, "", 1) + "</span>"
+      : d.allergies.length
       ? d.allergies.map(function (a) { return "<b>" + esc(a.substance) + "</b>" + (a.reaction ? " (" + esc(a.reaction) + ")" : ""); }).join(", ")
       : wTH("ward.no-allergies-are-recorded-for-you", "No allergies are recorded for you. Tell your care team if you know of any.", null, "", 1);
 
-    var withheld = (d.withheldResults || []).length
+    var withheld = d.withheldResults && d.withheldResults.length
       ? "<section class=\"w-dt-p\"><h3>" + wTH("ward.not-included-here", "Not included here") + "</h3>" +
         "<ul class=\"w-dt-meds\">" + d.withheldResults.map(function (w) {
           return "<li>" + esc(w.say) + (w.reportedAt ? ' <span class="w-dt-times">' + pdate(w.reportedAt) + "</span>" : "") + "</li>";
@@ -3358,13 +3376,13 @@
        * prints. `clinicianWarnings` is w-noprint: a line reading "not for the patient" printed on
        * the patient's own copy would be the most careless thing on the page. */
       (r.statements || []).map(function (s) { return '<p class="w-dt-warn">' + esc(s) + "</p>"; }).join("") +
-      (r.clinicianWarnings || []).map(function (s) { return '<p class="w-dt-gap w-noprint">' + esc(s) + "</p>"; }).join("") +
+      (r.clinicianWarnings || []).map(function (s) { return '<p class="w-dt-gap w-noprint">' + esc(s) + "</p>"; }).join("") + unreadable +
       (r.release ? "<p class=\"w-ok w-noprint\">" + wTH("ward.handover-recorded-at", "Handover recorded at {at}.", { at: when(r.release.at) }, "at") +
         ((r.release.dischargeSummaries || []).length ? " " + wTH("ward.discharge-summary-released-to-the-portal", "Discharge summary released to the portal as the") + " " + (r.release.dischargeScope === "full" ? wTH("ward.full-summary", "full summary.") : wTH("ward.patient-copy2", "patient copy.")) : "") + "</p>" : "") +
       "</header>" + portalPreview +
       tr("<h3>" + T("portal.title.yours") + "</h3>" + (lang ? WP.authority("rx", lang) : "")) +
       "<section class=\"w-dt-p\"><h3>" + wTH("ward.allergies", "Allergies", null, "", 1) + "</h3><p class=\"w-dt-alg\">" + allergies + "</p></section>" +
-      tr(d.allergies && d.allergies.length ? "<h4>" + T("allergy.title") + "</h4><p>" + T("print.tr.englishOnly") + "</p>" : "<h4>" + T("allergy.title") + "</h4><p>" + T("pcopy.noAllergies") + "</p>") +
+      (!d.allergies ? "" : tr(d.allergies.length ? "<h4>" + T("allergy.title") + "</h4><p>" + T("print.tr.englishOnly") + "</p>" : "<h4>" + T("allergy.title") + "</h4><p>" + T("pcopy.noAllergies") + "</p>")) +
       "<section class=\"w-dt-p\"><h3>" + wTH("ward.your-diagnoses", "Your diagnoses") + "</h3>" +
       list(d.diagnoses, wTH("ward.no-diagnoses-are-recorded", "No diagnoses are recorded."), function (x) {
         return "<li><b>" + esc(x.display) + "</b>" + (x.note ? '<div class="w-dt-times">' + esc(x.note) + "</div>" : "") + "</li>";
@@ -3489,10 +3507,19 @@
         (i.responsibleRole ? '<div class="w-dt-times">' + esc(i.responsibleRole) + (i.escalation.hoursOpen ? " &middot; " + wTH("ward.open-h", "open {hoursOpen}h", { hoursOpen: i.escalation.hoursOpen }, "hoursOpen") : "") + "</div>" : "") +
         "</div></li>";
     }).join("");
+    /* R6-2: a section whose read failed is UNKNOWN, and a short list is never presented as a clean
+     * chart. Named here because this is the screen a records officer signs a chart off on. */
+    var unknown = (c.unknownSections || []).map(function (u) { return wTEn(COMPLETION_LABELS[u.type]) || u.type; });
+    var unknownLine = unknown.length
+      ? '<p class="w-hint warn" data-w-unknown="' + esc(unknown.length) + '">' + ms("error") +
+        wTH("ward.these-checks-could-not-be-run", "These checks could not be run, so this chart is not known to be complete: {types}.", { types: esc(unknown.join(", ")) }, "types", 1) + "</p>"
+      : "";
     return '<div class="w-card">' +
       "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
-      "<h3>" + wTH("ward.chart-check", "Chart check") + "</h3><button class=\"w-btn ghost\" data-w-act=\"completionopen\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" +
-      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.nothing-outstanding-against-what-this-hospital", "Nothing outstanding, against what this hospital has configured to check.") + "</p>") +
+      "<h3>" + wTH("ward.chart-check", "Chart check") + "</h3><button class=\"w-btn ghost\" data-w-act=\"completionopen\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" + unknownLine +
+      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>"
+        : unknown.length ? ""
+        : "<p class=\"w-empty\">" + wTH("ward.nothing-outstanding-against-what-this-hospital", "Nothing outstanding, against what this hospital has configured to check.") + "</p>") +
       "</div>";
   }
 
@@ -3900,7 +3927,10 @@
       "<input id=\"wTpaPolicy\" placeholder=\"" + wTA("ward.policy-number-optional", "Policy number (optional)") + "\">" +
       '<button class="w-btn" data-w-act="claimcode">' + ms("receipt_long") + wTH("ward.code-claim", "Code claim") + "</button></div>" +
       "<div class=\"w-sub\"><h4>" + wTH("ward.pre-authorisations", "Pre-authorisations") + "</h4>" +
-      (authRows ? "<ul class=\"w-mini\">" + authRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-pre-authorisation-has-been-recorded", "No pre-authorisation has been recorded for this patient.") + "</p>") +
+      /* R6-2: null is a list the server could not read, and it is never the "none recorded" sentence:
+       * a pre-authorisation shown as absent is what a counter turns into a bill the patient pays. */
+      (t.preAuthorisations === null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.the-pre-authorisations-could-not-be-read", "The pre-authorisations could not be read. This is not a patient with none recorded.", null, "", 1) + "</p>"
+        : authRows ? "<ul class=\"w-mini\">" + authRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-pre-authorisation-has-been-recorded", "No pre-authorisation has been recorded for this patient.") + "</p>") +
       "<input id=\"wTpaTreatment\" placeholder=\"" + wTA("ward.treatment", "Treatment") + "\">" +
       "<input id=\"wTpaScheme\" placeholder=\"" + wTA("ward.scheme-optional", "Scheme (optional)") + "\">" +
       '<select id="wTpaAuthState">' + PREAUTH_STATES.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(wTEn(x[1])) + "</option>"; }).join("") + "</select>" +

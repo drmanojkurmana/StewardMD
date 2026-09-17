@@ -496,11 +496,14 @@ async function claimsForPatient(request, env, ctx) {
   if (error) return { ...base, ...error, claims: [] };
 
   let rows, auths, estimates, eligibility, stayPayers;
-  let estimatesUnreadable = false, eligibilityUnreadable = false, stayPayersUnreadable = false;
+  let preAuthsUnreadable = false, estimatesUnreadable = false, eligibilityUnreadable = false, stayPayersUnreadable = false;
   try {
     [rows, auths, estimates, eligibility, stayPayers] = await Promise.all([
       svc.byPatient(CLAIM_TYPE, patientId),
-      svc.byPatient(PREAUTH_TYPE, patientId).catch(() => []),
+      /* R6-2: the last swallow on this read. An unreadable pre-authorisation list used to read as
+       * "none recorded", which is the answer a payer rule below turns into "no approved
+       * pre-authorisation" - a refusal written against a patient whose approval was simply not read. */
+      svc.byPatient(PREAUTH_TYPE, patientId).catch(() => { preAuthsUnreadable = true; return []; }),
       svc.byPatient(ESTIMATE_TYPE, patientId).catch(() => { estimatesUnreadable = true; return []; }),
       // NHCX eligibility checks (nhcx.js). Unreadable is said, never shown as none.
       svc.byPatient(ELIGIBILITY_TYPE, patientId).catch(() => { eligibilityUnreadable = true; return []; }),
@@ -514,19 +517,25 @@ async function claimsForPatient(request, env, ctx) {
 
   const partiesOf = (payerId) => partiesRecord(resolveParties({ payerRef: payerId, payers: ctx.payers, gst: ctx.gst || null }), null);
   const claims = (rows || []).filter(Boolean).map((c) => ({ ...c, parties: partiesOf(c.payerId) }));
-  const preAuthorisations = (auths || []).filter(Boolean).map((a) => ({ ...a, parties: partiesOf(a.payerId) }));
+  const preAuthorisations = preAuthsUnreadable ? null : (auths || []).filter(Boolean).map((a) => ({ ...a, parties: partiesOf(a.payerId) }));
   const now = str(ctx.now) || new Date().toISOString();
   return {
     ...base, ok: true, patientId,
     claims,
     preAuthorisations,
+    ...(preAuthsUnreadable ? { preAuthsUnreadable: true } : {}),
     estimates: (estimates || []).filter(Boolean),
     ...(estimatesUnreadable ? { estimatesUnreadable: true } : {}),
     eligibilityChecks: eligibilityUnreadable ? null : (eligibility || []).filter(Boolean).sort((a, b) => String(b.at).localeCompare(String(a.at))),
     stayPayers: stayPayersUnreadable ? null : (stayPayers || []).filter(Boolean).map((r) => stayPayerWithParties(r, ctx)),
     // P1.5: the payer list as a screen may see it, and each claim's payer rules as warnings only.
     payers: publicPayers(ctx.payers),
-    payerWarnings: Object.fromEntries(claims.map((c) => [c.id, payerRuleWarnings(c, payerById(ctx.payers, c.payerId), { preAuths: preAuthorisations, now })])),
+    /* With the pre-authorisations unreadable, every rule that turns on one is UNCHECKED and says so
+     * first: payerRuleWarnings would otherwise state, as a fact, that no approved pre-authorisation
+     * is recorded - off a list nobody read. */
+    payerWarnings: Object.fromEntries(claims.map((c) => [c.id, preAuthsUnreadable
+      ? ["The pre-authorisations could not be read, so any pre-authorisation rule for this payer is unchecked. This is not a statement that none is recorded."]
+      : payerRuleWarnings(c, payerById(ctx.payers, c.payerId), { preAuths: preAuthorisations, now })])),
     /* On the list, not only on a refusal. This is the screen where somebody looking at an unpaid
      * account is most tempted to decide it means something clinically. */
     clinical: mayProceedClinically(),
