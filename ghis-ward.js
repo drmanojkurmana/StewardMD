@@ -393,7 +393,27 @@
             return plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins, hidden: true });
           }).then(function (moded) {
             if (!moded || moded.hidden !== true) throw new Error(HIDDEN_REFUSED);
-            return rt.readPatientDetails({ plugin: plugin, origin: targetOrigin, replay: ctx.replay, patient: p || { patientId: patientId } });
+            /* READ FROM THE HOSPITAL, NOT FROM A BLANK TAB. plugin.open resolves when the hidden tab exists,
+             * before its page has loaded; reading right away fired every request from about:blank and the
+             * drawer said "Load failed" for labs, medicines and radiology with no page host at all (owner's
+             * iPhone, 2026-09-17). The ward-list path waits for the page; this one now does too: up to
+             * thirty seconds for the hospital host with the document complete. A login form there means
+             * the session is gone, which is said as such. */
+            var wantHost = targetOrigin.replace(/^https?:\/\//, '');
+            var tries = 0;
+            function landed() {
+              return plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':document.readyState)+' '+location.host})()" })
+                .then(function (r) { return String((r && r.result) || '').split(' '); }, function () { return ['error', '']; })
+                .then(function (v) {
+                  if (v[0] === 'login') throw new Error('not signed in: ' + wantHost + ' answered its login page. Open Ward Sync again to sign in.');
+                  if (v[0] === 'complete' && v[1] === wantHost) return true;
+                  if (++tries >= 60) throw new Error('Could not reach ' + wantHost + ' in the in-app browser (the page did not load). Check the connection and try again.');
+                  return new Promise(function (res) { setTimeout(res, 500); }).then(landed);
+                });
+            }
+            return landed().then(function () {
+              return rt.readPatientDetails({ plugin: plugin, origin: targetOrigin, replay: ctx.replay, patient: p || { patientId: patientId } });
+            });
           });
         }), window.__SMD_ADAPTER_DEADLINE_MS__ || ADAPTER_READ_DEADLINE_MS).then(function (sections) {
           ctx.browserOpen = false; try { plugin.close(); } catch (e) {}
