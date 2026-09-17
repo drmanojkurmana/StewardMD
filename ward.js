@@ -4725,6 +4725,10 @@
           return "<li><b>" + esc(a.substance) + "</b><span>" + esc(a.reaction || "") + (a.severity ? " &middot; " + esc(severityWord(a.severity)) : "") + "</span></li>";
         }).join("") + "</ul>"
       : "";
+    /* R6-1: null is a read that did not happen. "No contrast reaction is recorded" about a record
+     * nobody could read is the sentence this whole screen exists to prevent. */
+    var allergyUnread = !!(pc && pc.contrastAllergies === null);
+    var renalUnread = !!(pc && pc.renal === null);
 
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
       "<div><b>" + wTH("ward.radiology2", "Radiology") + "</b><small>" + selWho(state) + "</small></div>" +
@@ -4737,13 +4741,16 @@
       (picked ? (
         '<div class="w-card"><div class="w-card-h">' + ms("shield") + "<h3>" + wTH("ward.protocol-context", "Protocol context") + "</h3></div>" +
         (pc ? (
-          (allergyRows ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.a-contrast-reaction-is-recorded-for", "A contrast reaction is recorded for this patient.") + "</p>" + allergyRows
+          (allergyUnread ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-allergy-record-could-not-be-read", "The allergy record could not be read. That is not the same as no contrast reaction being recorded, and this is not a checked protocol.", null, "", 1) + "</p>"
+            : allergyRows ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.a-contrast-reaction-is-recorded-for", "A contrast reaction is recorded for this patient.") + "</p>" + allergyRows
                        : '<p class="w-hint">' + ms("info") + wTH("ward.no-contrast-reaction-is-recorded-that", "No contrast reaction is recorded. That is what the record holds, not a guarantee none happened elsewhere.") + "</p>") +
-          (pc.renal ? "<p><b>" + wTH("ward.latest-creatinine", "Latest creatinine") + "</b>: " + esc(pc.renal.value) + " " + esc(pc.renal.unit || "") + " (" + when(pc.renal.at) + ")</p>" : "<p class=\"w-empty\">" + wTH("ward.no-creatinine-on-record", "No creatinine on record.") + "</p>") +
+          (renalUnread ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-renal-results-could-not-be-read", "The renal results could not be read. Renal function is unknown here because the record did not load, not because there is no creatinine.", null, "", 1) + "</p>"
+            : pc.renal ? "<p><b>" + wTH("ward.latest-creatinine", "Latest creatinine") + "</b>: " + esc(pc.renal.value) + " " + esc(pc.renal.unit || "") + " (" + when(pc.renal.at) + ")</p>" : "<p class=\"w-empty\">" + wTH("ward.no-creatinine-on-record", "No creatinine on record.") + "</p>") +
           '<div class="w-grid">' +
           "<label class=\"w-f\"><span>" + wTH("ward.protocol", "Protocol") + "</span><input id=\"wRadProtocol\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-ct-abdomen-with-contrast", "e.g. CT abdomen with contrast") + "\"></label>" +
           "<label class=\"w-chk\"><input type=\"checkbox\" id=\"wRadContrast\"> " + wTH("ward.contrast-planned", "Contrast planned") + "</label>" +
           "</div>" +
+          ((allergyUnread || renalUnread) ? '<p class="w-hint warn">' + ms("block") + wTH("ward.contrast-cannot-be-protocolled-while-part", "Contrast cannot be protocolled while part of the record cannot be read. Refresh and try again.", null, "", 1) + "</p>" : "") +
           '<button class="w-btn go" data-w-act="radprotocolsave">' + ms("save") + wTH("ward.record-protocol", "Record protocol") + "</button>"
         ) : "<p class=\"w-empty\">" + wTH("ward.loading", "Loading&hellip;") + "</p>") +
         "</div>" +
@@ -4845,6 +4852,9 @@
         "</li>";
     }).join("");
 
+    /* R6-1: q.allergies === null means the allergy read FAILED. An empty list here would read as
+     * "this patient has no allergies" to the pharmacist whose job is that exact check. */
+    var allergiesUnread = !!(q && q.allergies === null);
     var allergyRows = (q && q.allergies || []).map(function (a) {
       return "<li><b>" + esc(a.substance) + "</b>" + (a.severity ? "<span>" + esc(severityWord(a.severity)) + "</span>" : "") + "</li>";
     }).join("");
@@ -4875,7 +4885,8 @@
       "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("warning") + "<h3>" + wTH("ward.allergies", "Allergies", null, "", 1) + "</h3></div>" +
-      (allergyRows ? '<ul class="w-mini">' + allergyRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-allergy-recorded", "No allergy recorded.", null, "", 1) + "</p>") +
+      (allergiesUnread ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-allergy-list-could-not-be-read", "The allergy list could not be read, so this order has not been checked against it. An unreadable allergy list is not an empty one.", null, "", 1) + "</p>"
+        : allergyRows ? '<ul class="w-mini">' + allergyRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-allergy-recorded", "No allergy recorded.", null, "", 1) + "</p>") +
       "</div>" +
 
       (pickedOrder ? (
@@ -4886,7 +4897,12 @@
             var notChecked = String(w.code || "").indexOf("NOT_CHECKED") === 0 || w.code === "NO_RULE_PACK" || w.code === "SAFETY_CHECK_UNAVAILABLE";
             return '<li class="w-st ' + (notChecked ? "due" : "overdue") + '">' + esc(w.code) + "<span>" + esc(w.message || "") + "</span></li>";
           }).join("") + "</ul>" : "") +
-          (!(safety.blocks && safety.blocks.length) && !(safety.warnings && safety.warnings.length) ? "<p class=\"w-empty\">" + wTH("ward.the-safety-engine-reports-nothing-against", "The safety engine reports nothing against this order.") + "</p>" : "")
+          (!(safety.blocks && safety.blocks.length) && !(safety.warnings && safety.warnings.length)
+            /* R6-1: "nothing against this order" is only sayable when the record was read. With the
+             * allergy list unreadable this is an unchecked order, and it says that instead. */
+            ? (allergiesUnread ? '<p class="w-hint warn">' + ms("block") + wTH("ward.not-checked-against-allergies-the-list", "NOT CHECKED against allergies: the list could not be read. Verify only once it loads, or check the allergies another way first.", null, "", 1) + "</p>"
+                               : "<p class=\"w-empty\">" + wTH("ward.the-safety-engine-reports-nothing-against", "The safety engine reports nothing against this order.") + "</p>")
+            : "")
         ) : "<p class=\"w-empty\">" + wTH("ward.loading", "Loading&hellip;") + "</p>") +
         '<p class="w-hint">' + ms("info") + wTH("ward.this-is-decision-support-not-a", "This is decision support, not a block: the pharmacist's own judgement decides the outcome.") + "</p>" +
         /* TASK 8.9: MaiK explains the verdict ABOVE, inside the card that already shows it. There is
