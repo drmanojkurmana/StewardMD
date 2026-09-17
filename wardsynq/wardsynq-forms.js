@@ -19,6 +19,9 @@
  * answered from the portal (pre-admission intake, form-response.js), and a patient form names no staff roles:
  * a patient holds none, so a role list would make it unanswerable by the only person it is for. WardSynQ ships
  * no questions of its own: every patient form is the hospital's.
+ *
+ * BEFORE AN APPOINTMENT (R4-5). A patient form with `forAppointments: true` is also offered to a patient with a booked
+ * future appointment, when the hospital has turned that on (wardsynq.intake.forAppointments). Absent means admissions only.
  */
 
 const AUDIENCES = Object.freeze(["staff", "patient"]);
@@ -83,6 +86,8 @@ function validateDefinition(def) {
   if (def.effectiveFrom && def.effectiveTo && def.effectiveFrom > def.effectiveTo) p.push("effective dates are the wrong way round");
   if (def.audience != null && !AUDIENCES.includes(def.audience)) p.push(`audience must be one of ${AUDIENCES.join(", ")}`);
   if (isPatientForm(def) && Array.isArray(def.roles) && def.roles.length) p.push("a form for patients cannot be limited to staff roles");
+  if (def.forAppointments != null && typeof def.forAppointments !== "boolean") p.push("forAppointments must be true or false");
+  if (def.forAppointments === true && !isPatientForm(def)) p.push("only a form for patients can be offered before an appointment");
   return p;
 }
 

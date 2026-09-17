@@ -7,7 +7,7 @@
  *
  * node --test --experimental-test-module-mocks test/wardsynq-preadmission-intake.test.mjs
  */
-import { as, seed, docs, H, ENV, T, ORG_ID, NURSE, CASHIER, DOCTOR, OTHER_ADMIN, writesNow } from "./wardsynq-connectors-harness.mjs";
+import { as, seed, docs, H, ENV, T, ORG_ID, ADMIN, NURSE, CASHIER, DOCTOR, OTHER_ADMIN, writesNow } from "./wardsynq-connectors-harness.mjs";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -159,6 +159,96 @@ test("the whole loop: submit, resubmit is a new version, staff read it, return n
   const closed = await portal("intake-submit", { ...me, requestId: "adr-1", formKey: "pre_admit", formVersion: 1, answers: ANSWERS });
   assert.deepEqual([closed.__status, closed.error], [409, "already_reviewed"]);
   assert.equal((await as(DOCTOR, "/ward/intake-review", "POST", { ...review, version: 5 })).error, "not_awaiting_review");
+});
+
+/* ---- R4-5: forms before a booked appointment, behind wardsynq.intake.forAppointments (off by default) ---------------- */
+const APPT_FORM = { key: "before_visit", title: "Before your visit", audience: "patient", forAppointments: true, sections: [{ title: "Visit", fields: [
+  { key: "concern", label: "What would you like to discuss", type: "text", required: true }] }] };
+const SOON = new Date(Date.now() + 3 * 86400000).toISOString();
+async function setupAppointments(intake) {
+  seed({ patientAccess: { enabled: true }, ...(intake === undefined ? {} : { intake }) });
+  publishDef(PATIENT_FORM); publishDef(STAFF_FORM); publishDef(APPT_FORM);
+  await put({ resourceType: "Patient", id: "pat-1", mrn: "MRN-1", name: "Test Patient", dob: "1980-01-01" });
+  await put({ resourceType: "Patient", id: "pat-2", mrn: "MRN-2", name: "Other Patient", dob: "1980-01-01" });
+  await put({ resourceType: "Appointment", id: "apt-1", patientId: "pat-1", clinicianId: "dr:1", startAt: SOON, minutes: 15, state: "booked" });
+  await put({ resourceType: "Appointment", id: "apt-past", patientId: "pat-1", clinicianId: "dr:1", startAt: new Date(Date.now() - 86400000).toISOString(), minutes: 15, state: "booked" });
+  await put({ resourceType: "Appointment", id: "apt-2", patientId: "pat-2", clinicianId: "dr:1", startAt: SOON, minutes: 15, state: "booked" });
+  return { me: await grant("g-1", "pat-1"), other: await grant("g-2", "pat-2") };
+}
+const VISIT = { concern: "reported concern" };
+
+test("pure: forAppointments is a patient form's true or false; only an explicit true turns the hospital setting on; only booked future appointments count", () => {
+  assert.deepEqual(F.validateDefinition(APPT_FORM), []);
+  assert.ok(F.validateDefinition({ ...APPT_FORM, forAppointments: "yes" }).some((p) => /forAppointments/.test(p)));
+  assert.ok(F.validateDefinition({ ...STAFF_FORM, forAppointments: true }).some((p) => /only a form for patients/.test(p)));
+  assert.deepEqual([R.intakeSettings(undefined), R.intakeSettings({ forAppointments: "true" }), R.intakeSettings({ forAppointments: true })].map((s) => s.forAppointments), [false, false, true]);
+  const now = Date.parse("2026-09-17T10:00:00Z");
+  assert.deepEqual(R.bookedAppointments([{ id: "a", state: "booked", startAt: "2026-09-18T10:00:00Z" }, { id: "b", state: "cancelled", startAt: "2026-09-18T10:00:00Z" },
+    { id: "c", state: "booked", startAt: "2026-09-16T10:00:00Z" }, { id: "d", state: "arrived", startAt: "2026-09-18T10:00:00Z" }], now).map((a) => a.appointmentId), ["a"]);
+});
+
+test("POST /api/portal/intake-forms and /intake-submit, setting absent: a patient with a booked appointment and no admission gets no forms, and an appointment submit is 403 with nothing written", async () => {
+  const { me } = await setupAppointments();
+  const list = await portal("intake-forms", me);
+  assert.equal(list.__status, 200);
+  assert.deepEqual([list.admissions, list.forms, list.appointments, list.appointmentForms], [[], [], [], []]);
+  const before = writesNow();
+  const r = await portal("intake-submit", { ...me, appointmentId: "apt-1", formKey: "before_visit", formVersion: 1, answers: VISIT });
+  assert.deepEqual([r.__status, r.error], [403, "no_booked_appointment"]);
+  assert.ok(writesNow() - before <= 2, "the session check is audited; no record is written");
+  assert.equal(await H.RECORD.latest(T, "FormResponse", R.intakeId("before_visit", "apt-1")), null);
+  const off = await setupAppointments({ forAppointments: false });
+  assert.deepEqual((await portal("intake-forms", off.me)).appointments, []);
+  // Turned on through POST /api/queue/org/update (the hospital settings route): now offered.
+  const on = await as(ADMIN, "/org/update", "POST", { orgId: ORG_ID, wardsynq: { intake: { forAppointments: true } } });
+  assert.equal(on.__status, 200, on.__text);
+  assert.deepEqual((await portal("intake-forms", off.me)).appointments.map((a) => a.appointmentId), ["apt-1"]);
+});
+
+test("setting on: forms before a booked appointment through the same review; staff forms, forms not marked for appointments, another patient's, past appointments and no session are refused", async () => {
+  const { me } = await setupAppointments({ forAppointments: true });
+  const list = await portal("intake-forms", me);
+  assert.equal(list.__status, 200);
+  assert.deepEqual(list.appointments.map((a) => a.appointmentId), ["apt-1"], "only this patient's booked appointment still to come");
+  assert.deepEqual(list.appointmentForms.map((f) => f.key), ["before_visit"], "only patient forms marked for appointments");
+  assert.deepEqual(list.forms, [], "no planned admission: the admission forms are not offered");
+
+  const refused = async (body, status, error) => {
+    const before = writesNow();
+    const r = await portal("intake-submit", { ...me, formVersion: 1, answers: VISIT, ...body });
+    assert.deepEqual([r.__status, r.error], [status, error], JSON.stringify(body));
+    assert.ok(writesNow() - before <= 2, "reads are audited; no record is written");
+  };
+  await refused({ appointmentId: "apt-1", formKey: "nurse_check", answers: { done: true } }, 403, "not_for_patients");
+  await refused({ appointmentId: "apt-1", formKey: "pre_admit", answers: ANSWERS }, 403, "not_for_appointments");
+  await refused({ appointmentId: "apt-2", formKey: "before_visit" }, 403, "no_booked_appointment");
+  await refused({ appointmentId: "apt-past", formKey: "before_visit" }, 403, "no_booked_appointment");
+  assert.equal((await portal("intake-submit", { grantId: "g-1", token: "wrong", appointmentId: "apt-1", formKey: "before_visit", formVersion: 1, answers: VISIT })).__status, 401);
+  for (const id of ["apt-1", "apt-2", "apt-past"]) assert.equal(await H.RECORD.latest(T, "FormResponse", R.intakeId("before_visit", id)), null);
+
+  const sent = await portal("intake-submit", { ...me, appointmentId: "apt-1", formKey: "before_visit", formVersion: 1, answers: VISIT });
+  assert.equal(sent.__status, 200, JSON.stringify(sent));
+  assert.deepEqual([sent.response.origin, sent.response.reviewState, sent.response.appointmentId, sent.response.admissionRequestId], ["patient", "submitted", "apt-1", null]);
+  assert.deepEqual((await portal("intake-forms", me)).responses.map((x) => x.appointmentId), ["apt-1"]);
+
+  const Q = `?orgId=${ORG_ID}&patientId=pat-1&appointmentId=apt-1`;
+  assert.equal((await as(null, `/ward/intake-responses${Q}`)).__status, 401);
+  assert.equal((await as(CASHIER, `/ward/intake-responses${Q}`)).__status, 403);
+  assert.equal((await as(OTHER_ADMIN, `/ward/intake-responses${Q}`)).__status, 403);
+  const seen = await as(NURSE, `/ward/intake-responses${Q}`);
+  assert.deepEqual(seen.responses.map((x) => [x.appointmentId, x.answers.concern]), [["apt-1", "reported concern"]]);
+  assert.deepEqual((await as(NURSE, `/ward/intake-responses?orgId=${ORG_ID}&patientId=pat-1&appointmentId=apt-other`)).responses, []);
+
+  const review = { orgId: ORG_ID, responseId: sent.response.responseId, version: 1, decision: "accept" };
+  assert.equal((await as(NURSE, "/ward/intake-review", "POST", review)).__status, 403);
+  const puts = [];
+  const orig = H.RECORD.append.bind(H.RECORD);
+  H.RECORD.append = async (tenant, rows, opts) => { puts.push(...rows.map((r) => r.resourceType)); return orig(tenant, rows, opts); };
+  let ok;
+  try { ok = await as(DOCTOR, "/ward/intake-review", "POST", review); } finally { H.RECORD.append = orig; }
+  assert.deepEqual([ok.__status, ok.response.reviewState], [200, "accepted"]);
+  assert.deepEqual([...new Set(puts)], ["FormResponse"], "accepting never writes the patient's answers into the chart");
+  for (const t of ["AllergyIntolerance", "MedicationStatement", "Condition"]) assert.equal((await H.RECORD.byPatient(T, t, "pat-1")).length, 0, t);
 });
 
 test("screens: the waiting list calls both staff routes, the portal calls both portal routes, a failed load is not none", () => {
