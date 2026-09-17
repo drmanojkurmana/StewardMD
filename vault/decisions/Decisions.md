@@ -5,7 +5,19 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
-## 2026-09-17 · ONCQIS and SURGX free; CliniX one system free, the rest Pro
+## 2026-09-18 · SUPERSEDES the entry below: ONCQIS is add-on only, SURGX is Pro and residents
+
+**Decision (owner):** ONCQIS and OncoTree are NOT free. Every account gets a **3 day trial**, after
+which they need the **Onco add-on (₹89/mo)**, which any tier may buy. SURGX is NOT free either: it is
+included with **Pro and above**, and with **resident** plans (trainee tier whose verified role is
+resident, plus Co-Resident). CliniX is unchanged: Respiratory free, the other systems Pro.
+
+**Still to build:** `onco` and `surgx` entries in the role x tier matrix (`functions/_features.js` on
+branch worktree-agent-aca63a9e6e54f1648), the 3-day onco trial clock, and the client gates. The copy
+in this branch (website + paywall) already states the new rule, so code and copy must land together
+or the site promises what the app refuses.
+
+## 2026-09-17 · ONCQIS and SURGX free; CliniX one system free, the rest Pro (SUPERSEDED 2026-09-18)
 
 **Decision (owner):** ONCQIS (oncology) and SURGX are included free on every account. CliniX gives
 Respiratory free and locks the other four systems (Cardiovascular, GIT and abdomen, Neurology, Short
