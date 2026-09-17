@@ -7859,3 +7859,26 @@ of compliance.js is untouched.
   load names its first entries and counts the rest.
 - ponytail ceilings: 3000 entries (the list lives in the org document, 1 MiB shared with every setting); a 2 MB CSV.
 - No formulary content ships.
+
+## 2026-09-17 Dialysis unit: stations, haemodialysis sessions, dialyzer reuse, URR (branch dialysis-unit, R3-4)
+
+- functions/_wardsynq/dialysis.js; screen wardsynq/site/pages/dialysis.js (home map, Clinical, "Dialysis unit").
+- Settings `wardsynq.dialysis` {stations[{id,name,serologyGroup}], serologyGroups[], maxReuses}, no default for any (owner
+  O13). GET/POST /org/dialysis-settings, staff.admin, reason required, audit names what changed; validated on save and on
+  every read. Unset serology groups = no segregation check, and the booking says "not-configured". Unset maximum = a reuse
+  cannot be recorded. When groups are set every station must name one; a patient with no recorded group is refused.
+- DEVIATION from the brief ("stations are hospital resources"): stations live in the dialysis settings, not in
+  `wardsynq.resources`, because that list has no screen. They are still booked through resource-booking.js bookResource
+  (same clash refusal), as resource ids `dialysis-<id>`; the generic /ward/book-resource does not know them, so the
+  serology check cannot be bypassed. resource-booking.js unchanged. Stations do not show on the Scheduling screen.
+- Records (emr.vitals write scope, VITALS_TYPES): DialysisSession (versioned; fields not sent keep their value),
+  DialyzerEvent (first-use / reuse / discard with reason), DialysisSerology (group from the unit's list, test date).
+  Routes: GET /ward/dialysis-unit and /ward/dialysis-patient (emr.view); POST /ward/dialysis-session, /ward/dialyzer-event,
+  /ward/dialysis-serology, /ward/dialysis-book (emr.vitals). Cashier 403.
+- Post weight above pre with achieved UF > 0 is refused until the nurse gives a reason. Anticoagulation stays in orders and
+  eMAR. Urea is a linked laboratory Observation of the same patient or a value with unit and source.
+- URR = (pre - post) / pre x 100, one decimal, computed on read with inputs shown; missing input, different units or a
+  non-positive pre urea is "not computable", never 0. Citation: Lowrie and Lew, Am J Kidney Dis 1990;15(5):458-82; NKF KDOQI
+  haemodialysis adequacy 2015 update, Am J Kidney Dis 2015;66(5):884-930 (both checked on PubMed). Kt/V not built (owner O12).
+- ponytail ceilings: reads cap at 1000 records per type with a truncation warning; serology group "tag" is exact string
+  match; a station needs a group whenever groups are set (no untagged general station).

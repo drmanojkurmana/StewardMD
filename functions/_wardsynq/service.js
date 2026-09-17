@@ -83,6 +83,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* The blood bank's registers (blood-bank.js). A unit's status (quarantine, available, reserved, issued, discarded,
    * expired) is derived from its tests, its events and the transfusion episodes that name it, never stored. */
   "BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent",
+  /* The dialysis unit (dialysis.js): a haemodialysis session, each first use, reuse and discard of a dialyzer, and the
+   * patient's serology group as the unit names it. URR is computed on read from the session's urea inputs, never stored. */
+  "DialysisSession", "DialyzerEvent", "DialysisSerology",
   /* Pilot and recipient samples with their discard log, and the confidential notification of a reactive donor
    * (legal opinion 2026-09-17, G.5.5 and G.5.8). */
   "BloodSample", "DonorNotification",

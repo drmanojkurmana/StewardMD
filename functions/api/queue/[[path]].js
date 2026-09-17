@@ -203,6 +203,7 @@ import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from ".
 import { registryReport } from "../../_wardsynq/registry.js";
 import { chartWound, listWounds } from "../../_wardsynq/wound.js";
 import { bookResource, setBookingState, resourceSchedule } from "../../_wardsynq/resource-booking.js";
+import { dialysisUnit, dialysisPatient, recordSerology, bookStation, saveSession as saveDialysisSession, dialyzerEvent, validateDialysisSettings, readDialysisSettings } from "../../_wardsynq/dialysis.js";
 import { blockPeriod, cancelBlackout, listBlackouts } from "../../_wardsynq/blackout.js";
 import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
@@ -1350,6 +1351,11 @@ export async function onRequest(context) {
         "store-consumption": CAPS.STORES_MANAGE,
         /* Biomedical assets (assets.js). Anyone on the floor may see the register and report a fault; the register,
          * schedules and job cards are the engineer's. */
+        /* The dialysis unit (dialysis.js). Reading the schedule and a patient's dialysis record is reading the chart; the
+         * session, the dialyzer log, the serology group and putting a patient on a station are the dialysis nurse's bedside
+         * charting, emr.vitals, which the doctor holds too. The unit's settings are staff.admin on /org/dialysis-settings. */
+        "dialysis-unit": CAPS.EMR_VIEW, "dialysis-patient": CAPS.EMR_VIEW,
+        "dialysis-session": CAPS.EMR_VITALS, "dialyzer-event": CAPS.EMR_VITALS, "dialysis-serology": CAPS.EMR_VITALS, "dialysis-book": CAPS.EMR_VITALS,
         assets: CAPS.DEPT_REQUEST, "equipment-complaint": CAPS.DEPT_REQUEST,
         asset: CAPS.ASSET_MANAGE, "asset-event": CAPS.ASSET_MANAGE, "maintenance-schedule": CAPS.ASSET_MANAGE,
         "job-card": CAPS.ASSET_MANAGE, "job-card-update": CAPS.ASSET_MANAGE,
@@ -2296,6 +2302,18 @@ export async function onRequest(context) {
         const r = await listImmunizations(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* ---- the dialysis unit (R3-4, dialysis.js) ---- */
+      if (sub === "dialysis-unit" && method === "GET") { const r = await dialysisUnit(request, env, { ...deps, date: url.searchParams.get("date") || "" }); return json(r, r.ok ? 200 : (r.status || 502), request); }
+      if (sub === "dialysis-patient" && method === "GET") { const r = await dialysisPatient(request, env, { ...deps, mrn: url.searchParams.get("mrn") || "", patientId: url.searchParams.get("patientId") || "" }); return json(r, r.ok ? 200 : (r.status || 502), request); }
+      if (sub === "dialysis-serology" && method === "POST") { const r = await recordSerology(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, group: body.group, testedOn: body.testedOn, note: body.note, idempotencyKey: body.idempotencyKey || null }); return json(r, r.ok ? 200 : (r.status || 502), request); }
+      if (sub === "dialysis-book" && method === "POST") { const r = await bookStation(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, encounterId: body.encounterId, stationId: body.stationId, startAt: body.startAt, minutes: body.minutes, idempotencyKey: body.idempotencyKey || null }); return json(r, r.ok ? 200 : (r.status || 502), request); }
+      if (sub === "dialysis-session" && method === "POST") {
+        const f = {};
+        for (const k of ["sessionId", "expectedVersion", "mrn", "patientId", "encounterId", "stationId", "accessType", "startAt", "endAt", "preWeightKg", "postWeightKg", "preBp", "postBp", "targetUfMl", "achievedUfMl", "weightReason", "dialyzerId", "complications", "nurse", "doctor", "preUrea", "postUrea"]) if (body[k] !== undefined) f[k] = body[k];
+        const r = await saveDialysisSession(request, env, { ...deps, ...f, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dialyzer-event" && method === "POST") { const r = await dialyzerEvent(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, dialyzerId: body.dialyzerId, kind: body.kind, reason: body.reason, idempotencyKey: body.idempotencyKey || null }); return json(r, r.ok ? 200 : (r.status || 502), request); }
       /* ---- general stores, biomedical assets, blood bank (2026-09-16) ---- */
       {
         const R = (r) => json(r, r.ok ? 200 : (r.status || 502), request);
@@ -5772,6 +5790,29 @@ export async function onRequest(context) {
      * audit row names what changed. */
     /* R2-4: the hospital's reorder suggestion numbers (purchasing.js readReorderPolicy): window, lead time, safety days and
      * minimum days of data, all four or none, no default. staff.admin reads and saves with a reason; the audit names the change. */
+    /* R3-4: the dialysis unit's stations, serology groups and dialyzer reuse maximum (dialysis.js), on the Dialysis unit
+     * screen. No default for any of them (owner item O13). staff.admin reads and saves with a reason; the audit names what changed. */
+    if (seg === "org" && sub === "dialysis-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Dialysis settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, settings: readDialysisSettings(o.wardsynq) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateDialysisSettings(cb.settings);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_dialysis_settings", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const before = (o.wardsynq && o.wardsynq.dialysis) || {};
+      const changed = ["stations", "serologyGroups", "maxReuses"].filter((k) => JSON.stringify(before[k] == null ? null : before[k]) !== JSON.stringify(value[k] == null ? null : value[k]));
+      if (!changed.length) return json({ ok: true, changed: [], settings: readDialysisSettings(o.wardsynq) }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the dialysis settings are being changed. Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { dialysis: value } }, actor.id, { action: "org:dialysis_settings", meta: JSON.stringify({ changed, reason: reason.slice(0, 80) }) });
+      const back = ((await ORG.getOrg(env, orgId)) || {}).wardsynq;
+      if (JSON.stringify((back && back.dialysis) || null) !== JSON.stringify(value)) return json({ ok: false, error: "not_saved", message: "The settings did not read back as sent, so do not rely on them. Try again." }, 502, request);
+      return json({ ok: true, changed, settings: readDialysisSettings(back) }, 200, request);
+    }
     if (seg === "org" && sub === "reorder-policy") {
       const cb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || cb.orgId || "";
