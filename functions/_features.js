@@ -36,6 +36,7 @@ export const FEATURE_REGISTRY = [
   { key: "fundx",            label: "FundX module",   defaultRoles: [], experimental: true },
   { key: "kardiox",          label: "KardioX module", defaultRoles: [], experimental: true },
   { key: "thorex",           label: "ThoreX module",  defaultRoles: [], experimental: true },
+  { key: "sknx",             label: "SknX module",    defaultRoles: [], experimental: true },
   // Ladder features (matrix-gated; live only under ROLE_GATES_ON)
   { key: "clinix_all",       label: "CliniX full library",              tiers: PAID_TIERS },
   { key: "local_ai",         label: "On-device MaiK",                   tiers: PAID_TIERS },
@@ -57,6 +58,24 @@ function envDefaultOn(env, key) { return String((env && env[envKey(key) + "_DEFA
 
 // ---- Matrix resolvers (pure) ----
 export function roleGatesOn(env) { return String((env && env.ROLE_GATES_ON) || "") === "1"; }
+
+/* Physician Pro (Rs 899/mo) includes EARLY ACCESS to the four experimental imaging modules — no
+ * access code needed (owner decision 2026-09-18). GRANT-ONLY: it never denies, so every other tier
+ * keeps exactly today's behaviour (the checkActive access-code path in requireFeature). Listed
+ * explicitly rather than derived from `experimental: true` because the paid sub-keys (thorex_llm,
+ * sknx_cloud, kardiox_ecg19 ...) are separate registry entries with their own legacy defaults.
+ * EARLY ACCESS IS NOT VALIDATION: these models are unvalidated (docs/fundx/VALIDATION-PROGRAM.md)
+ * and every surface reached this way must still render its beta/experimental labelling. */
+const EARLY_ACCESS_TIERS = ["physicianpro"];
+export const EARLY_ACCESS_KEYS = [
+  "thorex", "thorex_llm", "thorex_backend",
+  "kardiox", "kardiox_ecg19",
+  "sknx", "sknx_llm", "sknx_cloud",
+  "fundx", "fundx_llm"
+];
+export function earlyAccessAllows(key, tier) {
+  return EARLY_ACCESS_TIERS.indexOf(tier) >= 0 && EARLY_ACCESS_KEYS.indexOf(key) >= 0;
+}
 
 // true/false for a tier-gated feature; null when this feature isn't in the matrix (legacy rules
 // apply) or needs the record itself (the onco add-on/trial).
@@ -102,7 +121,10 @@ export function featureAllowed(env, record, key, role, now) {
   const entry = registryEntry(key);
   if (!entry) return false;
   if (envDefaultOn(env, key)) return true;   // ops escape hatch, above the matrix
-  if (roleGatesOn(env)) { const m = matrixVerdict(record, key, role, now); if (m !== null) return m; }
+  if (roleGatesOn(env)) {
+    if (earlyAccessAllows(key, effectiveTierFor(record, now))) return true;   // grant-only, never denies
+    const m = matrixVerdict(record, key, role, now); if (m !== null) return m;
+  }
   if (entry.defaultOn) return true;
   const roles = envRoles(env, key) || entry.defaultRoles || [];
   return roles.indexOf(role) >= 0;

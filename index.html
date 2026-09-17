@@ -55,7 +55,7 @@
      fallback, and the interstitials are the very first paint, so start the fetch here rather
      than waiting for the stylesheet to be parsed. Same-origin, so no crossorigin mismatch. -->
 <link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/redesign-system.css?v=spheretiles2-splashv2e">
+<link rel="stylesheet" href="/redesign-system.css?v=spheretiles2-splashv2e-betachip1">
 <link rel="stylesheet" href="/motion.css?v=gold1">
 <link rel="stylesheet" href="/maik-ask.css?v=mkfast2">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
@@ -2083,11 +2083,11 @@ window.openExternal = function (u) {
 <script src="/antibiogram-data.js?v=gold363" defer></script>
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>
-<script src="/account.js?v=gold364-thread-vclaim1-proevt1-boot1-wsqfu3" defer></script>
+<script src="/account.js?v=gold364-thread-vclaim1-proevt1-boot1-wsqfu3-tier1" defer></script>
 <!-- Guest session bar: the 300 s auto-sign-out clock, across the top instead of buried in
      the account chip. Additive, reads app.js's account record; never edits app.js. -->
 <script src="/guest-timer.js?v=gold1200-guestbar2" defer></script>
-<script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold990-resync1" defer></script>
+<script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold990-resync1-beta1" defer></script>
 <script src="/pro-badge.js?v=gold692" defer></script>
 <!-- "Why is this locked?" - the one place that turns a Pro refusal into a sentence and the
      RIGHT button (verify vs subscribe). A silent Pro gate reads as a broken app. -->
@@ -2202,7 +2202,7 @@ window.openExternal = function (u) {
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab36" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb"><script src="/maik-atmosphere.js?v=1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab36" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb"><script src="/maik-atmosphere.js?v=1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-betatiles1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2331,7 +2331,7 @@ window.openExternal = function (u) {
 <script src="/fundx-detect.js?v=gold1048-ondemand" defer></script>
 <script src="/fundx-store.js?v=gold456" defer></script>
 <script src="/fundx-telemetry.js?v=gold456" defer></script>
-<script src="/fundx.js?v=sar2" defer></script>
+<script src="/fundx.js?v=sar2-beta1" defer></script>
 <!-- KardioX AI · ECG interpretation + learning module (additive, flag-gated smd_kardiox, DEFAULT OFF;
      enable with ?kardiox=1 or Settings). Sibling of FundX: scoped #kardioxRoot + .kx-* + SMD_KARDIOX_*
      globals + SMD_KARDIOX_PROVIDERS seam. When the flag is off, kardiox.js is a complete no-op. -->
@@ -2357,7 +2357,7 @@ window.openExternal = function (u) {
 <script src="/kardiox-acs.js?v=kx1" defer></script>
 <script src="/kardiox-feedback.js?v=kx1" defer></script>
 <script src="/kardiox-pdf.js?v=kx1" defer></script>
-<script src="/kardiox-screens.js?v=kx24-bmfix-wipe-atlas1" defer></script>
+<script src="/kardiox-screens.js?v=kx24-bmfix-wipe-atlas1-beta1" defer></script>
 <script src="/kardiox.js?v=kx7" defer></script>
 <!-- ThoreX AI · chest X-ray interpretation (additive, flag-gated smd_thorex, DEFAULT OFF;
      enable with ?thorex=1 or Settings). Sibling of KardioX: scoped #thorexRoot + .tx-* +
@@ -2373,7 +2373,7 @@ window.openExternal = function (u) {
 <script src="/thorex-report.js?v=tx8" defer></script>
 <script src="/thorex-llm.js?v=hardlocal3" defer></script>
 <script src="/thorex-correlate.js?v=tx1" defer></script>
-<script src="/thorex-screens.js?v=tx15-wipe" defer></script>
+<script src="/thorex-screens.js?v=tx15-wipe-beta1" defer></script>
 <script src="/thorex.js?v=tx1" defer></script>
 <!-- SknX AI · on-device dermatology (lesion/rash) analysis (additive, flag-gated smd_sknx, DEFAULT ON
      in dev - gated before public release, see sknx-flags.js). Sibling of ThoreX/KardioX: scoped
@@ -2397,7 +2397,12 @@ window.openExternal = function (u) {
 <script src="/sknx-compare.js?v=sx13" defer></script>
 <script src="/sknx-rx.js?v=sx13" defer></script>
 <script src="/sknx.js?v=sx16-ux" defer></script>
-<script src="/sknx-screens.js?v=sx17-calm" defer></script>
+<script src="/sknx-screens.js?v=sx17-calm-beta1" defer></script>
+<!-- Mandatory beta notice for the four clinically unvalidated imaging AI modules (ThoreX, KardiQ X,
+     SknX, FundX). Wraps each module's own open(), so every entry path shows it: home tile, sidebar
+     row, deep link, access-code gate, and the Physician Pro early-access path. Must load AFTER all
+     four modules. Session-only, never permanently dismissible. -->
+<script src="/experimental-beta-notice.js?v=beta1" defer></script>
 <!-- CliniX · clinical learning for medical students (additive, flag-gated smd_clinix, DEFAULT ON
      for testers per the 2026-08-23 owner decision - see clinix-flags.js, which is the authority;
      force either way with ?clinix=1 / ?clinix=0 or Settings → Experimental). Scoped #clinixRoot + .cx-* + SMD_CLINIX_*
