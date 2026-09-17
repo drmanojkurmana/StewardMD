@@ -113,6 +113,15 @@ test("patient flow: a bed master that could not be read is said, not drawn as ze
   assert.ok(!/The bed list could not be read/.test(read));
 });
 
+test("bed board: a ward master that could not be read is said, not drawn as a hospital with no wards", () => {
+  const { W } = loadWard(() => ({ ok: true }));
+  const unread = W._render({ ...W._st, view: "board", board: { ok: true, wards: [], bedsConfigured: false, wardsUnread: true } });
+  assert.match(unread, /ward list could not be read/);
+  const read = W._render({ ...W._st, view: "board", board: { ok: true, wards: [], bedsConfigured: false } });
+  assert.ok(!/ward list could not be read/.test(read));
+  assert.match(read, /No admissions and no bed lists configured/);
+});
+
 test("waiting list: who is admitted could not be checked is said, with the census sentence when that is why", () => {
   const { W } = loadWard(() => ({ ok: true }));
   const html = W._render({ ...W._st, view: "admreqs", admReqs: { ok: true, requests: [], admittedCheckFailed: true, admittedCheckError: "too_many_open" } });

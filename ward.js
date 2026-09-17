@@ -901,6 +901,9 @@
       "<button class=\"w-ic\" data-w-act=\"board\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       mode + deptPick +
       '<div class="w-card">' +
+      // R5-1: the hospital's ward list could not be read at all. Without this the board falls back to
+      // the old configured names and reads as though no wards, departments or bed states were set up.
+      (state.board && state.board.wardsUnread ? '<p class="w-hint warn">' + ms("error") + wTH("ward.board-wards-unread", "This hospital's ward list could not be read, so ward states, departments and bed lists are missing here. Do not read this as no wards being set up.", null, "", 1) + "</p>" : "") +
       (state.boardErr ? '<p class="w-hint warn">' + ms("error") + esc(state.boardErr) + wEnglishOf(state.boardErr) + "</p>"
         : !state.board ? "<p class=\"w-empty\">" + wTH("ward.loading-the-bed-board", "Loading the bed board...") + "</p>"
         : wardsHtml || "<p class=\"w-empty\">" + wTH("ward.no-admissions-and-no-bed-lists", "No admissions and no bed lists configured.") + "</p>") +

@@ -976,10 +976,13 @@ async function bedBoard(request, env, ctx) {
   const deptOf = new Map();       // ward name -> its department's name, from the hospital's own master data
   const canonical = new Map();    // lowercased ward name or code -> the ward's own name (LT-03)
   const retired = new Set();      // lowercased names and codes of wards the hospital has turned off
-  let masterKnown = false, bedsUnread = false;
+  let masterKnown = false, bedsUnread = false, wardsUnread = false;
   if (ctx.orgId) {
     let allWards = [];
-    try { allWards = await listWards(env, ctx.orgId); } catch { allWards = []; }
+    /* R5-1: a ward master that could NOT be read used to become [], which is indistinguishable from a
+     * hospital that has configured no wards - the board then silently fell back to the old config list
+     * with no ward states, no departments and no retired wards. Said now, on the response. */
+    try { allWards = await listWards(env, ctx.orgId); } catch { allWards = []; wardsUnread = true; }
     const masterWards = allWards.filter((w) => w.active);
     for (const w of allWards.filter((x) => !x.active)) { retired.add(str(w.name).toLowerCase()); if (str(w.code)) retired.add(str(w.code).toLowerCase()); }
     /* BUG-MU06Z46U-DMDX / BUG-MU08T4RL-GU0N: admitting and transferring pick a department by picking one of
@@ -1075,6 +1078,8 @@ async function bedBoard(request, env, ctx) {
     ...base, ok: true, wards,
     // Stated, so "0 free" is never confused with "we do not know what beds exist".
     bedsConfigured: !!cfg,
+    // And "this hospital lists no wards" is never confused with "the ward list could not be read".
+    ...(wardsUnread ? { wardsUnread: true } : {}),
   };
 }
 
