@@ -44,9 +44,15 @@ function plans(env) {
     tiers: {
       student: { months: 1, amount: P("STUDENT_PRICE_MONTHLY", 19900), annual: P("STUDENT_PRICE_ANNUAL", 199900), regular: P("STUDENT_REGULAR", 39900), label: "Trainee", requiresVerify: true },
       coresident: { months: 1, amount: P("CORESIDENT_PRICE_MONTHLY", 29900), annual: P("CORESIDENT_PRICE_ANNUAL", 299900), regular: P("CORESIDENT_REGULAR", 99900), seats: 2, label: "Co-Resident" },
-      pro: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), annual: P("PRO_PRICE_ANNUAL", 499900), regular: P("PRO_REGULAR", 99900), label: "Pro", popular: true },
-      physician: { months: 1, amount: P("PHYSICIAN_PRICE_MONTHLY", 149900), annual: P("PHYSICIAN_PRICE_ANNUAL", 1499900), regular: P("PHYSICIAN_REGULAR", 249900), label: "Physician" },
-      physicianpro: { months: 1, amount: P("PHYSICIANPRO_PRICE_MONTHLY", 249900), annual: P("PHYSICIANPRO_PRICE_ANNUAL", 2499900), regular: P("PHYSICIANPRO_REGULAR", 399900), label: "Physician Pro", premium: true },
+      pro: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), annual: P("PRO_PRICE_ANNUAL", 599900), regular: P("PRO_REGULAR", 99900), label: "Pro", popular: true },
+      /* 2026-09-18 owner: the top two tiers come down to ₹749 / ₹899 (were ₹1,499 / ₹2,499). Two rules
+       * this ladder depends on, so don't "tidy" them:
+       *  - Every annual is 10x the monthly (two months free). 8x was tested and drops Physician below
+       *    the 50% margin floor once the included FollowCare/Scribe quotas are paid for.
+       *  - `regular` is the price actually charged until 2026-09-17, which is what makes the
+       *    strike-through on the paywall a true comparison rather than invented urgency. */
+      physician: { months: 1, amount: P("PHYSICIAN_PRICE_MONTHLY", 74900), annual: P("PHYSICIAN_PRICE_ANNUAL", 749900), regular: P("PHYSICIAN_REGULAR", 149900), label: "Physician" },
+      physicianpro: { months: 1, amount: P("PHYSICIANPRO_PRICE_MONTHLY", 89900), annual: P("PHYSICIANPRO_PRICE_ANNUAL", 899900), regular: P("PHYSICIANPRO_REGULAR", 249900), label: "Physician Pro", premium: true },
     },
     addons: {
       onco: { amount: P("ONCO_ADDON_MONTHLY", 8900), label: "Physician Onco" },
