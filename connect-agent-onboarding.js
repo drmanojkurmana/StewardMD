@@ -465,6 +465,7 @@
   }
 
   function close(fromAnim) {
+    if (!fromAnim) forgetRun();   // the doctor closed the sheet on purpose: nothing to resume
     var ov = overlay();
     if (!ov) { S = null; return; }
     if (!fromAnim && S && !reducedMotion() && sheet()) {
@@ -1161,7 +1162,30 @@
     };
   }
 
+  /* A RUN SURVIVES A RELOAD. The phone reloaded the StewardMD page under memory pressure while the
+   * doctor was on step 5 of 6; the hospital browser and its Done banner stayed, but the screen that
+   * listens for Done was gone, so Done did nothing and the whole run was lost (owner's iPhone,
+   * 2026-09-17). The open run is remembered here and picked up again on the next load. */
+  var RUN_KEY = "smd_connect_run";
+  function rememberRun() {
+    try { localStorage.setItem(RUN_KEY, JSON.stringify({ tenant: S.tenant, session: S.session, deployment: S.deployment, emrUrl: S.emrUrl, selected: S.selected, at: Date.now() })); } catch (e) {}
+  }
+  function forgetRun() { try { localStorage.removeItem(RUN_KEY); } catch (e) {} }
+  function resumeRun() {
+    var run = null;
+    try { run = JSON.parse(localStorage.getItem(RUN_KEY) || "null"); } catch (e) { run = null; }
+    if (!run || !run.session || !run.deployment || Date.now() - (run.at || 0) > 30 * 60 * 1000) { forgetRun(); return false; }
+    if (!hasPlugin()) return false;
+    open();
+    S.tenant = run.tenant || S.tenant; S.session = run.session; S.deployment = run.deployment; S.emrUrl = run.emrUrl || ""; S.selected = run.selected || null;
+    S.runner = "phone"; S.resumed = true;
+    show("progress");
+    setStatus("", "Resuming your connection where it stopped.");
+    beginAgentMode();
+    return true;
+  }
   function beginAgentMode() {
+    rememberRun();
     var plugin = getPlugin();
     if (plugin && plugin.setMode) {
       try { plugin.setMode({ mode: "agent", origins: S.deployment.origins, compact: wantsCompact() }); } catch (e) {}
@@ -1806,6 +1830,7 @@
 
   /* ---- Screen 7: result (capabilities + reviewer approval) ---- */
   function loadVersionAndShowResult() {
+    forgetRun();
     /* Every path to a result screen closes the hospital browser: left open, it sat on top of the result
      * with a dead "Done, I'm signed in" and no sign-in detection (owner, 2026-09-13). */
     try { stopDiscoveryPlugin(); } catch (e) {}
@@ -2002,8 +2027,10 @@
     pickTenantThenLoad();
   }
 
+  setTimeout(function () { try { resumeRun(); } catch (e) {} }, 1500);
   window.SMD_CONNECT_AGENT = {
     open: open,
+    __resumeRun: resumeRun,
     close: function () { close(); },
     refresh: refresh,
     __setApi: function (fn) { apiImpl = fn; },
