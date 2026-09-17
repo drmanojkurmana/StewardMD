@@ -133,6 +133,8 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
 
 ## UI polish (2026-09-12)
 
+2026-09-14 composer correction: MaiK occupies the full viewport. The composer reserves a 64px text row and a 44px tool row; longer drafts scroll within the field instead of resizing it. Extract findings now occupies an accessible brain-icon button in the reserved tool row. Typing focus uses a caret without a rectangular outline; button keyboard-focus indicators remain. Browser checks confirmed identical composer dimensions before/after multiline typing at 390x844, plus visible send controls at 320x500. Physical phone keyboard verification remains outstanding.
+
 - `maik-polish.css` is an additive layer scoped to `#maikSheet.maik-polished`: system typography, grouped quick actions, larger controls, visible keyboard focus, and a wrapping composer on narrow screens.
 - Original color/white MaiK wordmarks remain in the header and welcome view. The live doctor and its existing animation/interaction engine are preserved; horizontal stage clipping prevents off-screen travel from widening the sheet.
 - Existing engine selection, clinical disclaimer, local/cloud routing and conversation actions are unchanged. Cache tokens in `index.html` and `sw.js` include `mkpolish1`.
@@ -144,5 +146,13 @@ Copilot tool chips now persist their kind/argument as attributes and launch thro
 ## Top-right model navigation (2026-09-14)
 The original wordmark and engine selector share the first header row. Conversation actions have a compact second row, preserving all original handlers and the live doctor. Responsive grid slots constrain long model names. Touch feedback respects reduced motion.
 
-## Startup Signature Trace (2026-09-14)
-The existing 107px solid StewardMD mark is visible from the first frame. A mint contour draws over the mark, blooms once, and fades away. Dark mode uses the existing white mask with the same overlay motion. Reduced-motion users see only the solid mark.
+## Startup motion (2026-09-14)
+The existing 107px solid StewardMD mark remains present throughout startup. Light and dark appearance each use the owner's selected animation below. Reduced-motion users see only the static mark.
+
+Selected modes: light uses variant 5, Quiet Focus (a gentle focus reveal followed by a masked silver reflection); dark uses variant 1, Pearl Circuit (a pearl-white contour over a pale teal mask that deepens as drawing completes). No background halo. Drawing completes in 1.12 seconds so the luminous finish appears before the personalised-screen transition at 1.56 seconds. Logo dimensions remain 107px; reduced-motion suppresses overlays and immediately shows the static mark. All motion waits for the native splash handoff class.
+
+## September 2026 atmospheric backgrounds
+
+`maik-atmosphere.js` / `.css` mount decorative Aurora and Letter Glitch canvases on the MaiK sheet. Light uses a pure white base and green/white/orange stops; Graphite uses saffron/green/navy. The existing `maikSetSendMode` controls the generation effect, including stop/error/completion. No prompts or patient text enter the renderer. Motion pauses when hidden, is static under Reduce Motion, and releases WebGL/listeners when the sheet closes or is replaced. The existing Medibot artwork, size, and animation remain unchanged. React Bits attribution is in `licenses/react-bits.txt`.
+
+The atmosphere refinement softens Aurora and gives messages and composer translucent, blurred surfaces. The engine-aware verification notice now sits beneath the composer in the footer; its wording still follows the selected engine. Original bot unchanged.

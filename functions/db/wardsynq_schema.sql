@@ -118,3 +118,62 @@ CREATE TABLE IF NOT EXISTS wardsynq_idempotency (
   created_at    TEXT NOT NULL,
   PRIMARY KEY (tenant_id, key)
 );
+
+-- THE AUDIT TRAIL IS IMMUTABLE, AND TAMPER-EVIDENT (P2.17, 2026-09-14).
+--
+-- Applied the same way as everything above, and safe to re-apply: every statement is IF NOT EXISTS.
+-- The triggers on connect_audit_event itself live beside that table, in db/connect_schema.sql, so
+-- apply BOTH files (connect first), BEFORE deploying the code that writes wardsynq_audit_chain:
+--   wrangler d1 execute stewardmd-connect --remote --file db/connect_schema.sql
+--   wrangler d1 execute stewardmd-connect --remote --file functions/db/wardsynq_schema.sql
+-- The repository refuses to write an audit row it cannot chain, so without this table every clinical
+-- write fails, and the System health record-store check says the schema is not applied.
+
+-- THE CHAIN (functions/_wardsynq/audit-chain.js). One link per audit row the record repository writes,
+-- inserted in the same batch as the row: row_hash = SHA-256(prev_hash || canonical JSON of the stored
+-- audit row). A changed audit row stops matching its link, a removed row leaves a link to nothing, a
+-- removed link leaves a missing chain_seq.
+--
+--   chain_seq        1, 2, 3... per hospital, no gaps. THE PRIMARY KEY IS THE CONCURRENCY CONTROL: two
+--                    writes that both read head N both insert N+1, the second violates the key, its
+--                    whole batch rolls back and the repository re-reads and retries. A guarded UPDATE
+--                    of a head row cannot do this in a D1 batch, because an UPDATE matching no row
+--                    succeeds and the batch commits.
+--   legacy_boundary  only on chain_seq 1: the id of the newest audit row written before the chain
+--                    existed (the unchained genesis era, which cannot be verified), or NULL if there
+--                    was none. Link 1's prev_hash is derived from it, so it cannot be moved quietly.
+-- A side table rather than two columns on connect_audit_event: that table is shared and live, and
+-- ALTER TABLE ADD COLUMN is not re-runnable on an on-premise boot that applies this file every time.
+CREATE TABLE IF NOT EXISTS wardsynq_audit_chain (
+  tenant_id       TEXT    NOT NULL,
+  chain_seq       INTEGER NOT NULL,
+  audit_id        TEXT    NOT NULL,   -- connect_audit_event.id
+  prev_hash       TEXT    NOT NULL,
+  row_hash        TEXT    NOT NULL,
+  legacy_boundary TEXT,
+  PRIMARY KEY (tenant_id, chain_seq),
+  UNIQUE (audit_id)
+);
+CREATE TRIGGER IF NOT EXISTS wardsynq_audit_chain_no_update BEFORE UPDATE ON wardsynq_audit_chain
+BEGIN SELECT RAISE(ABORT, 'audit rows are immutable'); END;
+CREATE TRIGGER IF NOT EXISTS wardsynq_audit_chain_no_delete BEFORE DELETE ON wardsynq_audit_chain
+BEGIN SELECT RAISE(ABORT, 'audit rows are immutable'); END;
+
+-- THE OUTBOX STATUS INDEX (2026-09-14, closing the 200-row scan gap).
+--
+-- The outbox drain used to read the newest N events of the internal _wardsynq_outbox type and pick
+-- out the waiting ones. On a hospital past N settled events an old pending event sat beyond the
+-- window forever: never retried, never reported, while the health check counted only what the same
+-- window could see. Raising N only moves the wall; a newest-N scan is not a status seek.
+--
+-- So the drain now asks for waiting rows BY STATUS (pending, retry, running), oldest first, and
+-- this index is what keeps that seek cheap no matter how many settled events pile up. The status
+-- lives inside the body JSON next to everything else the event carries - a dedicated column would
+-- mean backfilling every existing row, and a backfill that rewrites history is exactly what an
+-- append-only store must not do. An expression index walks the same field with no row touched.
+--
+-- Re-runnable like everything else in this file (IF NOT EXISTS): applying the file again, or
+-- applying it to a database that already has the index, changes nothing. A database WITHOUT it
+-- still answers the status query correctly, only slower, so code can deploy before or after.
+CREATE INDEX IF NOT EXISTS idx_wardsynq_record_outbox_status
+  ON wardsynq_record (tenant_id, resource_type, json_extract(body, '$.status'));

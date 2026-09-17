@@ -13,7 +13,7 @@ const NAT_PREFIX = "push:native:";
 
 export function nativePushEnabled(env) { return !!(pushKv(env) && (apnsConfigured(env) || fcmConfigured(env))); }
 
-async function tokenId(token) {
+export async function tokenId(token) {
   const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(token));
   return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("").slice(0, 32);
 }
@@ -109,11 +109,34 @@ async function sendApnsResolvingEnv(env, store, t, msg, topic) {
  * opts.platform restricts to one platform ("ios"|"watch"|"android"). */
 export async function sendNativeToAll(env, msg, opts) {
   if (!nativePushEnabled(env)) return { sent: 0, total: 0, disabled: true };
-  msg = msg || {};
   let toks = await listNativeTokens(env);
   if (opts && opts.uid) toks = toks.filter((t) => t.uid === opts.uid);
   if (opts && opts.workspace) toks = toks.filter((t) => !t.workspaces || !t.workspaces.length || t.workspaces.indexOf(opts.workspace) >= 0);
   if (opts && opts.platform) toks = toks.filter((t) => t.platform === opts.platform);
+  return sendNativeToTokens(env, toks, msg);
+}
+
+/* The stored token records for these token ids, read one key each: no list, no scan. A token pruned
+ * since it was bound is simply absent. Used by the WardSynQ device directory (S3 P0). */
+export async function nativeTokensById(env, ids) {
+  const store = pushKv(env);
+  if (!store) return [];
+  const out = [];
+  for (const id of [...new Set(ids || [])]) {
+    let v = null;
+    try { v = await store.get(NAT_PREFIX + id, "json"); } catch (e) {}
+    if (v && v.token) out.push({ key: NAT_PREFIX + id, ...v });
+  }
+  return out;
+}
+
+/* Sends one message to exactly these token records and prunes the dead ones. The body of
+ * sendNativeToAll, split out unchanged so both the account fan-out and the hospital directory use
+ * the same sender. */
+export async function sendNativeToTokens(env, toks, msg) {
+  if (!nativePushEnabled(env)) return { sent: 0, total: (toks || []).length, disabled: true };
+  msg = msg || {};
+  toks = toks || [];
   const store = pushKv(env);
   let sent = 0;
   await Promise.all(toks.map(async (t) => {

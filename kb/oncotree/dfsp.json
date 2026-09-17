@@ -1,0 +1,1102 @@
+{
+  "guideline": "dfsp",
+  "title": "Dermatofibrosarcoma Protuberans",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "dfsp",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Dermatofibrosarcoma Protuberans (DFSP, Bednar tumor, and Fibrosarcomatous DFSP). Implements Workup First diagnostic checklists (deep subcutaneous biopsy, CD34/Factor XIIIa IHC, COL1A1::PDGFB t(17;22) translocation testing, primary site MRI), surgical triage (Mohs micrographic surgery MMS vs 2-4 cm wide local excision WLE to deep fascia), margin-adapted RT, and Imatinib mesylate 400-800 mg daily for unresectable, locally advanced, or metastatic disease. DRAFT - clinical decision support; physician decides.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Dermatofibrosarcoma Protuberans Version 2.2026 (October 24, 2025).",
+  "startNodeIds": [
+    "n_presentation"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "The COL1A1::PDGFB fusion arising from t(17;22)(q22;q13) or a supernumerary ring chromosome is present in more than 90% of classic DFSP cases; FISH or RT-PCR confirmation is essential in morphologically equivocal lesions and is a predictive biomarker for imatinib response.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Mohs micrographic surgery (MMS) or complete circumferential peripheral and deep margin assessment (CCPDMA) achieves local control rates exceeding 98% while maximizing tissue preservation, and is preferred over wide excision in cosmetically or functionally sensitive sites when expertise is available.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Wide local excision (WLE) for DFSP uses 2 to 4 cm peripheral margins carried down to investing deep fascia or periosteum; narrower margins carry higher local recurrence risk given the tumor's infiltrative honeycomb subcutaneous growth pattern.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Postoperative external beam radiation therapy (50-60 Gy in 1.8-2.0 Gy fractions) is indicated when positive margins cannot be re-excised without unacceptable cosmetic or functional morbidity; definitive RT alone is reserved for inoperable disease.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Fibrosarcomatous DFSP (FS-DFSP) shows herringbone fascicular growth, increased mitoses, loss of CD34 expression, and distant metastatic potential up to 15% (most often lung); staging chest CT and consideration of adjuvant RT are warranted.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Imatinib mesylate 400 to 800 mg PO daily targets the PDGFB receptor tyrosine kinase activated by the COL1A1::PDGFB fusion; reassess borderline-resectable tumors every 8-12 weeks for conversion to resectable R0 surgery, and continue therapy in metastatic disease until progression or intolerance.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_presentation",
+      "linkId": "dfsp_presentation",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Presentation",
+      "title": "DFSP: clinical presentation",
+      "section": "Diagnosis",
+      "description": "Step 1: Clinical Presentation. Select the confirmed or suspected DFSP presentation driving this encounter.",
+      "path": "DFSP / Presentation",
+      "pills": [
+        "presentation"
+      ],
+      "required": true,
+      "bullets": [
+        "Classic DFSP: Slow-growing cutaneous plaque or protuberant nodule of trunk, proximal extremity, or head and neck with storiform spindle cells.",
+        "Bednar tumor: Pigmented DFSP variant containing melanin-bearing dendritic cells; managed identically to classic DFSP.",
+        "Fibrosarcomatous DFSP (FS-DFSP): Rapid enlargement, pain, or high-grade histology (herringbone pattern, CD34 loss) with metastatic potential.",
+        "Unresectable, locally advanced, or metastatic DFSP: Disease not amenable to primary R0 resection or with distant spread.",
+        "Recurrent DFSP: Local recurrence after prior excision, often from inadequate margins or superficial shave resection."
+      ],
+      "options": [
+        {
+          "id": "classic",
+          "label": "Classic DFSP or Bednar tumor (resectable or borderline)",
+          "sets": {
+            "histology": "classic"
+          },
+          "pills": [
+            "classic"
+          ]
+        },
+        {
+          "id": "fs",
+          "label": "Fibrosarcomatous DFSP (FS-DFSP features)",
+          "sets": {
+            "histology": "fs"
+          },
+          "pills": [
+            "FS-DFSP"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Unresectable, locally advanced, or metastatic DFSP",
+          "sets": {
+            "histology": "advanced"
+          },
+          "pills": [
+            "advanced"
+          ]
+        },
+        {
+          "id": "recurrent",
+          "label": "Recurrent DFSP after prior resection",
+          "sets": {
+            "histology": "recurrent"
+          },
+          "pills": [
+            "recurrent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_dfsp_wk",
+      "linkId": "dfsp_dfsp_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Classic DFSP workup",
+      "title": "Classic DFSP: diagnostic workup",
+      "section": "Workup",
+      "description": "Complete the Workup First diagnostic checklist before resectability staging. Superficial shave biopsy is inadequate for DFSP.",
+      "path": "DFSP / Classic / Workup",
+      "pills": [
+        "classic",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "History and physical exam: document size, fixation to fascia, multiplicity, prior resections, and regional nodes.",
+        "Full-thickness punch or incisional biopsy extending into subcutaneous fat to capture the honeycomb infiltrative pattern; superficial shave biopsy is inadequate.",
+        "Immunohistochemistry: CD34 strong diffuse positive in classic DFSP spindle cells; Factor XIIIa negative (distinguishes from dermatofibroma); S100 negative; Desmin negative.",
+        "Cytogenetics / molecular testing: FISH or RT-PCR for t(17;22)(q22;q13) or supernumerary ring chromosome producing the COL1A1::PDGFB fusion, essential in equivocal cases and before any imatinib therapy.",
+        "Contrast-enhanced MRI of the primary site to define fascial, muscle, or periosteal involvement and plan surgical margins.",
+        "Chest CT if large (>5 cm) tumor, deep invasion, or any fibrosarcomatous features to evaluate for pulmonary metastases."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Resectability Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_fs_dfsp_wk",
+      "linkId": "dfsp_fs_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "FS-DFSP workup",
+      "title": "Fibrosarcomatous DFSP: diagnostic workup",
+      "section": "Workup",
+      "description": "FS-DFSP is an aggressive variant with metastatic potential. Staging imaging is mandatory alongside histologic confirmation.",
+      "path": "DFSP / FS-DFSP / Workup",
+      "pills": [
+        "FS-DFSP",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "History and physical exam: note rapid growth, pain, size >5 cm, deep fixation, and prior recurrence history.",
+        "Full-thickness punch or incisional biopsy extending into subcutaneous fat; superficial shave biopsy is inadequate and may miss the fibrosarcomatous component.",
+        "Immunohistochemistry: CD34 diminished or lost in fibrosarcomatous areas (contrasts with diffuse CD34 in classic DFSP); Factor XIIIa negative; S100 negative; Desmin negative; high mitotic rate with herringbone fascicular pattern.",
+        "Cytogenetics / molecular testing: FISH or RT-PCR for t(17;22)(q22;q13) / COL1A1::PDGFB fusion; absence does not exclude FS-DFSP but presence supports imatinib sensitivity.",
+        "Contrast-enhanced MRI of the primary site to define fascial, muscle, or periosteal involvement.",
+        "Contrast-enhanced chest CT is required for all FS-DFSP to evaluate for pulmonary metastases given up to 15% distant spread."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Resectability Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_adv_wk",
+      "linkId": "dfsp_adv_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Advanced DFSP workup",
+      "title": "Unresectable / metastatic DFSP: diagnostic workup",
+      "section": "Workup",
+      "description": "Confirm fusion status and full disease extent before starting imatinib for unresectable, locally advanced, or metastatic DFSP.",
+      "path": "DFSP / Advanced / Workup",
+      "pills": [
+        "advanced",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "History and physical exam: map all local disease, prior surgeries and RT fields, performance status, and cardiac history (baseline for TKI therapy).",
+        "Full-thickness punch or incisional biopsy of representative disease extending into subcutaneous fat; re-biopsy recurrent or progressive lesions to exclude fibrosarcomatous transformation.",
+        "Immunohistochemistry: CD34 (positive in classic areas, may be lost in FS transformation); Factor XIIIa negative; S100 negative; Desmin negative.",
+        "Mandatory molecular testing: FISH or RT-PCR for COL1A1::PDGFB fusion before imatinib, since fusion-negative tumors respond poorly to PDGFR inhibition.",
+        "Contrast-enhanced MRI of the primary / locally advanced site plus contrast-enhanced chest CT (and abdomen/pelvis CT as indicated) to define total disease burden.",
+        "Baseline labs, ECG/echocardiogram as indicated, and medication review for TKI drug interactions before starting imatinib 400-800 mg daily."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Resectability Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_recur_wk",
+      "linkId": "dfsp_recur_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Recurrent DFSP workup",
+      "title": "Recurrent DFSP: diagnostic workup",
+      "section": "Workup",
+      "description": "Local recurrence usually reflects inadequate prior margins. Re-stage fully and exclude fibrosarcomatous transformation.",
+      "path": "DFSP / Recurrent / Workup",
+      "pills": [
+        "recurrent",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "History and physical exam: review prior operative and pathology reports, margin status, and interval since last resection.",
+        "Full-thickness punch or incisional biopsy of the recurrence extending into subcutaneous fat; re-biopsy to exclude fibrosarcomatous transformation.",
+        "Immunohistochemistry: CD34; Factor XIIIa negative; S100 negative; Desmin negative; compare with prior specimens.",
+        "Cytogenetics / molecular testing: FISH or RT-PCR for COL1A1::PDGFB fusion, required before any imatinib consideration.",
+        "Contrast-enhanced MRI of the recurrent site to define scar versus active fascial, muscle, or periosteal involvement.",
+        "Chest CT for large recurrent tumors, deep invasion, repeated recurrences, or any FS features to evaluate for pulmonary metastases."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Resectability Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_dfsp_stage",
+      "linkId": "dfsp_dfsp_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Classic resectability",
+      "title": "Classic DFSP: resectability staging",
+      "section": "Staging",
+      "description": "With workup complete, determine whether primary R0 resection is feasible or the tumor needs downstaging.",
+      "path": "DFSP / Classic / Stage",
+      "pills": [
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Resectable: Primary R0 resection achievable with acceptable cosmetic and functional outcome (MMS/CCPDMA or WLE 2-4 cm to fascia).",
+        "Borderline or unresectable: R0 resection would cause unacceptable morbidity, or tumor is locally advanced; consider preoperative imatinib downstaging if COL1A1::PDGFB positive.",
+        "Metastatic at staging: Manage per unresectable / metastatic pathway with systemic therapy."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Resectable — proceed to definitive surgery",
+          "sets": {
+            "resectability": "resectable"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "borderline",
+          "label": "Borderline-resectable or unresectable — needs downstaging",
+          "sets": {
+            "resectability": "borderline"
+          },
+          "pills": [
+            "borderline"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_fs_stage",
+      "linkId": "dfsp_fs_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "FS-DFSP resectability",
+      "title": "FS-DFSP: resectability staging",
+      "section": "Staging",
+      "description": "Stage FS-DFSP for both local resectability and distant disease before choosing surgery versus systemic therapy.",
+      "path": "DFSP / FS-DFSP / Stage",
+      "pills": [
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Localized resectable FS-DFSP with negative chest CT: Wide excision to negative margins is the cornerstone; adjuvant RT strongly considered.",
+        "Borderline, unresectable, or metastatic FS-DFSP: Fusion testing guides preoperative or palliative imatinib; multidisciplinary sarcoma review required.",
+        "Large (>5 cm), deep, or close-margin tumors carry the highest local and distant failure risk."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Localized resectable — proceed to wide surgery",
+          "sets": {
+            "resectability": "resectable"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "unresectable",
+          "label": "Unresectable or metastatic — systemic therapy pathway",
+          "sets": {
+            "resectability": "unresectable"
+          },
+          "pills": [
+            "unresectable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_adv_stage",
+      "linkId": "dfsp_adv_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Advanced intent",
+      "title": "Advanced DFSP: treatment intent",
+      "section": "Staging",
+      "description": "Define whether systemic therapy aims to convert to surgery or to control incurable disease.",
+      "path": "DFSP / Advanced / Stage",
+      "pills": [
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Neoadjuvant intent: Borderline-resectable locally advanced disease where imatinib shrinkage could enable tissue-sparing R0 resection.",
+        "Palliative intent: Unresectable or metastatic disease where surgery cannot clear all sites; goal is disease control and symptom relief.",
+        "Fusion-negative advanced DFSP: Imatinib benefit unlikely; prioritize clinical trial or alternative TKI."
+      ],
+      "options": [
+        {
+          "id": "neoadjuvant",
+          "label": "Borderline-resectable — neoadjuvant downstaging intent",
+          "sets": {
+            "intent": "neoadjuvant"
+          },
+          "pills": [
+            "neoadjuvant"
+          ]
+        },
+        {
+          "id": "palliative",
+          "label": "Unresectable or metastatic — palliative disease-control intent",
+          "sets": {
+            "intent": "palliative"
+          },
+          "pills": [
+            "palliative"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_recur_stage",
+      "linkId": "dfsp_recur_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Recurrence resectability",
+      "title": "Recurrent DFSP: resectability staging",
+      "section": "Staging",
+      "description": "Determine whether the recurrence can be re-resected to R0 or requires systemic downstaging.",
+      "path": "DFSP / Recurrent / Stage",
+      "pills": [
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Re-resectable recurrence without distant disease: Definitive re-excision with margin control (MMS/CCPDMA preferred in previously operated fields).",
+        "Unresectable, multiply recurrent, or metastatic recurrence: Fusion-guided imatinib with reassessment for surgery.",
+        "Repeated recurrences raise suspicion for fibrosarcomatous transformation; confirm on re-biopsy."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Re-resectable — proceed to definitive surgery",
+          "sets": {
+            "resectability": "resectable"
+          },
+          "pills": [
+            "re-resectable"
+          ]
+        },
+        {
+          "id": "unresectable",
+          "label": "Unresectable or metastatic recurrence — systemic pathway",
+          "sets": {
+            "resectability": "unresectable"
+          },
+          "pills": [
+            "unresectable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_dfsp_surgery",
+      "linkId": "dfsp_dfsp_surgery",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Classic surgery",
+      "title": "Classic DFSP: surgical approach",
+      "section": "Treatment",
+      "description": "Choose the definitive surgical technique. Tissue-sparing margin-controlled surgery is preferred where expertise exists.",
+      "path": "DFSP / Classic / Surgery",
+      "pills": [
+        "surgery"
+      ],
+      "required": true,
+      "bullets": [
+        "MMS or CCPDMA: Preferred for cosmetic and tissue preservation (head/neck, hands/feet, cosmetically sensitive trunk) with >98% local control.",
+        "WLE with 2 to 4 cm peripheral margins down to investing deep fascia or periosteum: Standard where MMS/CCPDMA is unavailable or impractical.",
+        "Orient and ink the specimen; clip or map the tumor bed so positive margins can be accurately re-excised."
+      ],
+      "options": [
+        {
+          "id": "mms",
+          "label": "MMS or CCPDMA (margin-controlled, tissue-sparing)",
+          "sets": {
+            "surgery": "mms"
+          },
+          "pills": [
+            "MMS"
+          ]
+        },
+        {
+          "id": "wle",
+          "label": "Wide local excision, 2-4 cm to deep fascia",
+          "sets": {
+            "surgery": "wle"
+          },
+          "pills": [
+            "WLE"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_fs_surgery",
+      "linkId": "dfsp_fs_surgery",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "FS-DFSP surgery",
+      "title": "FS-DFSP: surgical approach",
+      "section": "Treatment",
+      "description": "FS-DFSP requires wide oncologic clearance; margin-controlled techniques are acceptable only with confirmed negative deep and peripheral margins.",
+      "path": "DFSP / FS-DFSP / Surgery",
+      "pills": [
+        "surgery"
+      ],
+      "required": true,
+      "bullets": [
+        "Wide excision with negative margins is the cornerstone; given aggressive biology, favor the wider (3-4 cm) end of the margin range to fascia or periosteum.",
+        "MMS/CCPDMA may be used in anatomically constrained sites only when complete peripheral and deep margin assessment is assured.",
+        "Plan for likely adjuvant RT in large, deep, or close-margin cases; involve radiation oncology preoperatively."
+      ],
+      "options": [
+        {
+          "id": "wle",
+          "label": "Wide excision, 3-4 cm to deep fascia or periosteum",
+          "sets": {
+            "surgery": "wle"
+          },
+          "pills": [
+            "WLE"
+          ]
+        },
+        {
+          "id": "mms",
+          "label": "MMS or CCPDMA (constrained sites, full margin control)",
+          "sets": {
+            "surgery": "mms"
+          },
+          "pills": [
+            "MMS"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_dfsp_margin",
+      "linkId": "dfsp_dfsp_margin",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Classic margins",
+      "title": "Classic DFSP: pathologic margin triage",
+      "section": "Treatment",
+      "description": "Final pathology determines surveillance versus re-excision versus postoperative RT.",
+      "path": "DFSP / Classic / Margins",
+      "pills": [
+        "margins"
+      ],
+      "required": true,
+      "bullets": [
+        "R0 (negative margins): Local control is excellent; proceed to routine surveillance.",
+        "R1/R2 (positive margins) re-excisable: Re-excision to negative margins is the standard next step.",
+        "R1/R2 where re-excision causes unacceptable morbidity: Postoperative external beam RT 50-60 Gy in 1.8-2.0 Gy fractions."
+      ],
+      "options": [
+        {
+          "id": "r0",
+          "label": "Negative margins (R0)",
+          "sets": {
+            "margins": "r0"
+          },
+          "pills": [
+            "R0"
+          ]
+        },
+        {
+          "id": "r1_reexcisable",
+          "label": "Positive margins (R1/R2), re-excision feasible",
+          "sets": {
+            "margins": "r1_reexcisable"
+          },
+          "pills": [
+            "R1"
+          ]
+        },
+        {
+          "id": "r1_morbid",
+          "label": "Positive margins (R1/R2), re-excision unacceptably morbid",
+          "sets": {
+            "margins": "r1_morbid"
+          },
+          "pills": [
+            "R1-morbid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_fs_margin",
+      "linkId": "dfsp_fs_margin",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "FS-DFSP margins",
+      "title": "FS-DFSP: pathologic margin triage",
+      "section": "Treatment",
+      "description": "FS-DFSP margins drive combined-modality decisions given higher local and distant failure risk.",
+      "path": "DFSP / FS-DFSP / Margins",
+      "pills": [
+        "margins"
+      ],
+      "required": true,
+      "bullets": [
+        "R0 (negative margins): Wide excision complete; adjuvant RT strongly considered for large, deep, or close (<=1 cm) margins, then intensive surveillance with chest imaging.",
+        "R1/R2 (positive margins): Re-excision to negative margins is mandatory when feasible, followed by adjuvant RT.",
+        "R1/R2 where re-excision is unacceptably morbid: Definitive postoperative RT 50-60 Gy plus close surveillance."
+      ],
+      "options": [
+        {
+          "id": "r0",
+          "label": "Negative margins (R0)",
+          "sets": {
+            "margins": "r0"
+          },
+          "pills": [
+            "R0"
+          ]
+        },
+        {
+          "id": "r1_reexcisable",
+          "label": "Positive margins (R1/R2), re-excision feasible",
+          "sets": {
+            "margins": "r1_reexcisable"
+          },
+          "pills": [
+            "R1"
+          ]
+        },
+        {
+          "id": "r1_morbid",
+          "label": "Positive margins (R1/R2), re-excision unacceptably morbid",
+          "sets": {
+            "margins": "r1_morbid"
+          },
+          "pills": [
+            "R1-morbid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_dfsp_r0",
+      "linkId": "tx_dfsp_r0",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "DFSP R0 surveillance",
+      "title": "Classic DFSP, R0 resection: surveillance",
+      "section": "Follow-up",
+      "description": "Curative resection complete. Routine clinical surveillance for local recurrence.",
+      "path": "DFSP / Classic / R0 Surveillance",
+      "pills": [
+        "R0",
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "Surgery complete: MMS/CCPDMA or WLE 2-4 cm to investing fascia or periosteum with histologically negative (R0) peripheral and deep margins.",
+        "No adjuvant RT and no systemic therapy indicated for classic DFSP with R0 margins.",
+        "Surveillance: History and physical exam including the primary site every 3-6 months for 3 years, then annually; counsel on self-exam for new nodules at or near the scar.",
+        "Imaging only as clinically indicated (MRI for suspected recurrence); routine chest imaging not required for classic R0 DFSP.",
+        "Recurrence pathway: Re-biopsy any suspicious lesion and re-enter the navigator at recurrent DFSP workup."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_dfsp_r1_reexcise",
+      "linkId": "tx_dfsp_r1_reexcise",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "DFSP R1 re-excision",
+      "title": "Classic DFSP, positive margins: re-excision",
+      "section": "Treatment",
+      "description": "Positive margins with feasible re-excision. Re-operate to negative margins.",
+      "path": "DFSP / Classic / R1 Re-excision",
+      "pills": [
+        "R1",
+        "re-excision"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "Re-excision to histologically negative (R0) margins is the standard for R1/R2 resections when cosmesis and function can be preserved.",
+        "Use margin-controlled surgery (MMS/CCPDMA) for the re-excision where available, guided by oriented specimen and tumor-bed mapping.",
+        "If re-excision achieves R0: Follow routine surveillance (exam every 3-6 months for 3 years, then annually).",
+        "If re-excision is again positive or proves morbid: Proceed to postoperative external beam RT 50-60 Gy in 1.8-2.0 Gy fractions.",
+        "Consider COL1A1::PDGFB testing if not already done, to preserve a future imatinib option."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_dfsp_r1_rt",
+      "linkId": "tx_dfsp_r1_rt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "DFSP R1 radiation",
+      "title": "Classic DFSP, positive margins: postoperative RT",
+      "section": "Treatment",
+      "description": "Positive margins where re-excision is unacceptably morbid. Postoperative RT for local control.",
+      "path": "DFSP / Classic / R1 Radiation",
+      "pills": [
+        "R1",
+        "radiation"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Indication: R1/R2 margins where further surgery would cause unacceptable cosmetic or functional morbidity (face, hands/feet, genitalia).",
+        "Postoperative external beam RT 50-60 Gy in 1.8-2.0 Gy fractions to the tumor bed with appropriate margins; involve a sarcoma-experienced radiation oncologist.",
+        "Definitive RT alone (without surgery) is reserved for medically inoperable disease, not for resectable DFSP.",
+        "Surveillance after RT: Exam every 3-6 months for 3 years, then annually; monitor for wound complications, fibrosis, and late secondary malignancy.",
+        "Recurrence after RT: Re-biopsy, confirm fusion status, and evaluate for salvage surgery versus imatinib."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_fs_r0",
+      "linkId": "tx_fs_r0",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "FS-DFSP R0 management",
+      "title": "FS-DFSP, R0 resection: adjuvant RT consideration + surveillance",
+      "section": "Treatment",
+      "description": "Wide R0 excision complete. Consider adjuvant RT and survey intensively for local and pulmonary relapse.",
+      "path": "DFSP / FS-DFSP / R0 Management",
+      "pills": [
+        "FS-DFSP",
+        "R0"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "d",
+        "e"
+      ],
+      "bullets": [
+        "Surgery complete: Wide excision (3-4 cm to fascia or periosteum) with negative peripheral and deep margins.",
+        "Adjuvant RT strongly considered for large (>5 cm), deep, or close (<=1 cm) margin tumors: 50-60 Gy in 1.8-2.0 Gy fractions to the tumor bed.",
+        "No routine adjuvant imatinib after R0 resection; reserve systemic therapy for unresectable or metastatic relapse.",
+        "Intensive surveillance: Exam every 3-6 months for 3 years, then annually, plus periodic chest CT for pulmonary metastases for at least 5 years.",
+        "Relapse pathway: Re-biopsy, restage with chest CT, confirm fusion status, and re-enter via unresectable / metastatic imatinib pathway."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_fs_r1",
+      "linkId": "tx_fs_r1",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "FS-DFSP R1 management",
+      "title": "FS-DFSP, positive margins: re-excision + adjuvant RT",
+      "section": "Treatment",
+      "description": "Positive margins in aggressive disease. Combined re-excision and RT.",
+      "path": "DFSP / FS-DFSP / R1 Management",
+      "pills": [
+        "FS-DFSP",
+        "R1"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d",
+        "e"
+      ],
+      "bullets": [
+        "Re-excision to negative (R0) margins is mandatory when anatomically feasible; do not accept positive margins in FS-DFSP without RT.",
+        "Postoperative external beam RT 50-60 Gy in 1.8-2.0 Gy fractions after re-excision, or definitively if re-excision is unacceptably morbid.",
+        "Confirm COL1A1::PDGFB fusion status now so imatinib is available if disease becomes unresectable or metastatic.",
+        "Intensive surveillance: Exam every 3-6 months for 3 years, then annually, plus periodic chest CT for at least 5 years.",
+        "Multidisciplinary sarcoma tumor board review is recommended for all margin-positive FS-DFSP."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_imatinib_neoadj",
+      "linkId": "tx_imatinib_neoadj",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Neoadjuvant imatinib",
+      "title": "Borderline-resectable DFSP: preoperative imatinib downstaging",
+      "section": "Treatment",
+      "description": "Downstage fusion-positive locally advanced DFSP to enable tissue-sparing R0 resection.",
+      "path": "DFSP / Advanced / Neoadjuvant Imatinib",
+      "pills": [
+        "imatinib",
+        "neoadjuvant"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "f"
+      ],
+      "bullets": [
+        "Eligibility: COL1A1::PDGFB fusion-positive borderline-resectable or locally advanced DFSP where shrinkage could permit R0 resection with acceptable morbidity.",
+        "Imatinib mesylate 400 mg PO daily, escalating to 800 mg PO daily (400 mg twice daily) if tolerated and response is inadequate; Category 1 preferred option.",
+        "Reassess with contrast MRI every 8-12 weeks; resect promptly at maximal response or when R0 resection becomes feasible rather than treating indefinitely.",
+        "Definitive surgery after downstaging: MMS/CCPDMA or WLE to negative margins, then margin-adapted surveillance or RT per the resected pathway.",
+        "If no response by 3-6 months or progression on therapy: Stop imatinib, re-biopsy (exclude FS transformation or fusion-negative disease), and consider alternative TKI, RT, or clinical trial."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_imatinib_adv",
+      "linkId": "tx_imatinib_adv",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Palliative imatinib",
+      "title": "Unresectable / metastatic DFSP: imatinib disease control",
+      "section": "Treatment",
+      "description": "Systemic disease control with imatinib for incurable fusion-positive DFSP.",
+      "path": "DFSP / Advanced / Palliative Imatinib",
+      "pills": [
+        "imatinib",
+        "metastatic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "f"
+      ],
+      "bullets": [
+        "Imatinib mesylate 400 mg PO daily, escalating to 800 mg PO daily (400 mg twice daily) as tolerated; Category 1 preferred for COL1A1::PDGFB-positive unresectable or metastatic DFSP.",
+        "Continue until disease progression or unacceptable toxicity; monitor CBC, LFTs, edema, cardiac function, and drug interactions throughout.",
+        "Surgical or RT consolidation of residual or oligoprogressive sites may be considered if systemic control renders them resectable.",
+        "Palliative RT to symptomatic or bulky sites for pain, bleeding, or fungation even while on systemic therapy.",
+        "At progression or intolerance: Re-biopsy, repeat fusion testing, and move to refractory-disease options (sunitinib, multi-kinase inhibitor, or clinical trial)."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_refractory",
+      "linkId": "tx_refractory",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Refractory disease",
+      "title": "Imatinib-refractory or fusion-negative DFSP: next options",
+      "section": "Treatment",
+      "description": "Salvage options when imatinib fails, is intolerable, or the tumor lacks the target fusion.",
+      "path": "DFSP / Advanced / Refractory",
+      "pills": [
+        "refractory",
+        "trial"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Confirm resistance mechanism: Re-biopsy with repeat COL1A1::PDGFB testing to distinguish fusion-negative disease from secondary resistance or FS transformation.",
+        "Sunitinib or another multi-kinase inhibitor per sarcoma expertise for imatinib-refractory fusion-positive disease.",
+        "Clinical trial enrollment is strongly preferred at every refractory step, including PDGFR-pathway and novel sarcoma trials.",
+        "Palliative surgery or RT for symptomatic, bleeding, or fungating lesions regardless of systemic plan.",
+        "Goals-of-care discussion with symptom-directed and psychosocial support for widely metastatic or multiply refractory disease."
+      ],
+      "protocolRefs": []
+    }
+  ],
+  "links": [
+    {
+      "id": "l_pres_classic",
+      "from": "n_presentation",
+      "to": "n_dfsp_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "classic"
+      ]
+    },
+    {
+      "id": "l_pres_fs",
+      "from": "n_presentation",
+      "to": "n_fs_dfsp_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "fs"
+      ]
+    },
+    {
+      "id": "l_pres_adv",
+      "from": "n_presentation",
+      "to": "n_adv_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "advanced"
+      ]
+    },
+    {
+      "id": "l_pres_recur",
+      "from": "n_presentation",
+      "to": "n_recur_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "recurrent"
+      ]
+    },
+    {
+      "id": "l_dfsp_wk",
+      "from": "n_dfsp_wk",
+      "to": "n_dfsp_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_fs_wk",
+      "from": "n_fs_dfsp_wk",
+      "to": "n_fs_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_adv_wk",
+      "from": "n_adv_wk",
+      "to": "n_adv_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_recur_wk",
+      "from": "n_recur_wk",
+      "to": "n_recur_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_dfsp_resect",
+      "from": "n_dfsp_stage",
+      "to": "n_dfsp_surgery",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "resectable"
+      ]
+    },
+    {
+      "id": "l_dfsp_borderline",
+      "from": "n_dfsp_stage",
+      "to": "n_tx_imatinib_neoadj",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "borderline"
+      ]
+    },
+    {
+      "id": "l_fs_resect",
+      "from": "n_fs_stage",
+      "to": "n_fs_surgery",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "resectable"
+      ]
+    },
+    {
+      "id": "l_fs_unresect",
+      "from": "n_fs_stage",
+      "to": "n_tx_imatinib_adv",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "unresectable"
+      ]
+    },
+    {
+      "id": "l_adv_neoadj",
+      "from": "n_adv_stage",
+      "to": "n_tx_imatinib_neoadj",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "neoadjuvant"
+      ]
+    },
+    {
+      "id": "l_adv_pall",
+      "from": "n_adv_stage",
+      "to": "n_tx_imatinib_adv",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "palliative"
+      ]
+    },
+    {
+      "id": "l_recur_resect",
+      "from": "n_recur_stage",
+      "to": "n_dfsp_surgery",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "resectable"
+      ]
+    },
+    {
+      "id": "l_recur_unresect",
+      "from": "n_recur_stage",
+      "to": "n_tx_imatinib_adv",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "unresectable"
+      ]
+    },
+    {
+      "id": "l_surg_mms",
+      "from": "n_dfsp_surgery",
+      "to": "n_dfsp_margin",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mms"
+      ]
+    },
+    {
+      "id": "l_surg_wle",
+      "from": "n_dfsp_surgery",
+      "to": "n_dfsp_margin",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "wle"
+      ]
+    },
+    {
+      "id": "l_fssurg_wle",
+      "from": "n_fs_surgery",
+      "to": "n_fs_margin",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "wle"
+      ]
+    },
+    {
+      "id": "l_fssurg_mms",
+      "from": "n_fs_surgery",
+      "to": "n_fs_margin",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mms"
+      ]
+    },
+    {
+      "id": "l_margin_r0",
+      "from": "n_dfsp_margin",
+      "to": "n_tx_dfsp_r0",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "r0"
+      ]
+    },
+    {
+      "id": "l_margin_r1re",
+      "from": "n_dfsp_margin",
+      "to": "n_tx_dfsp_r1_reexcise",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "r1_reexcisable"
+      ]
+    },
+    {
+      "id": "l_margin_r1rt",
+      "from": "n_dfsp_margin",
+      "to": "n_tx_dfsp_r1_rt",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "r1_morbid"
+      ]
+    },
+    {
+      "id": "l_fsmargin_r0",
+      "from": "n_fs_margin",
+      "to": "n_tx_fs_r0",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "r0"
+      ]
+    },
+    {
+      "id": "l_fsmargin_r1re",
+      "from": "n_fs_margin",
+      "to": "n_tx_fs_r1",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "r1_reexcisable"
+      ]
+    },
+    {
+      "id": "l_fsmargin_r1rt",
+      "from": "n_fs_margin",
+      "to": "n_tx_fs_r1",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "r1_morbid"
+      ]
+    },
+    {
+      "id": "l_adv_refrac",
+      "from": "n_tx_imatinib_adv",
+      "to": "n_tx_refractory",
+      "linkCategory": "supplemental"
+    },
+    {
+      "id": "l_neoadj2_refrac",
+      "from": "n_tx_imatinib_neoadj",
+      "to": "n_tx_refractory",
+      "linkCategory": "supplemental"
+    }
+  ]
+}

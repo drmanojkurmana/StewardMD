@@ -35,6 +35,7 @@ import { RecordService } from "./service.js";
 import { resolveClinicalActor } from "./actor.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
+import { FOETAL_SEX } from "./registers.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -251,6 +252,17 @@ async function replyToMessage(request, env, ctx) {
   try { current = await svc.get(MESSAGE_TYPE, messageId); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", written: 0 }; }
   if (!current) return { ...base, ok: false, status: 404, error: "message_not_found", written: 0 };
+  /* PC&PNDT Act s.5(2): no person communicates the sex of a foetus "by words, signs, or in any other manner"; rule 18(i)
+   * binds everyone in the hospital (legal review B.4.4). A reply that names it is refused the same way an obstetric report
+   * is (register-routes.js formFGate), and the refusal is audited with who and when, never the text. A patient's own
+   * message is not refused: receiving a question discloses nothing, and a patient's message must never be lost. */
+  if (FOETAL_SEX.test(reply)) {
+    try {
+      await ctx.recordDeps.repository.auditOnly(ctx.migration.tenantId, { ts: new Date().toISOString(), actor: resolved.actor.id, connectorId: "wardsynq-registers", action: "pcpndt.disclosure_refused", outcome: "refused",
+        scope: { register: "formf", on: "patient-message-reply", fields: ["reply"], messageId }, patientRefHash: null });
+    } catch { /* the refusal is the protection */ }
+    return { ...base, ok: false, status: 422, error: "foetal_sex_refused", detail: "PC&PNDT Act s.5(2) and s.6: a message to a patient must not state the sex of a foetus. Nothing was sent or saved.", written: 0 };
+  }
 
   const { meta, version, ...rest } = current;
   const now = new Date().toISOString();

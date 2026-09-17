@@ -1,0 +1,353 @@
+{
+  "guideline": "uveal_melanoma",
+  "id": "uveal_melanoma",
+  "title": "Melanoma: Uveal",
+  "category": "Melanoma",
+  "version": "2.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "uveal_melanoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Melanoma: Uveal. Covers complete clinical algorithm: Ophthalmologic Workup (dilated funduscopy, slit-lamp biomicroscopy, B-scan ultrasonography with tumor thickness and basal dimensions, OCT, widefield fundus photography, liver-directed metastatic screening with multiphase liver MRI, HLA-A*02:01 genotyping, prognostic GEP and Monosomy 3 / BAP1 profiling, baseline LFTs and LDH) -> Stage and HLA Stratification (primary localized non-metastatic vs high-risk surveillance GEP Class 2 / Monosomy 3 M0 vs metastatic HLA-A*02:01 positive vs metastatic HLA-A*02:01 negative or Tebentafusp progressor) -> Localized eye-preserving radiotherapy (plaque brachytherapy or proton beam, enucleation for large advanced or blind painful eye) -> High-risk intensive liver MRI surveillance with adjuvant trial enrollment -> Metastatic HLA-positive first-line Tebentafusp step-up weekly therapy (IMCgp100-202) -> Metastatic HLA-negative liver-directed therapy (PHP, HAI, TACE, Y-90 SIRT) or nivolumab plus ipilimumab. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Melanoma: Uveal Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Dedicated multiphase liver MRI with diffusion-weighted imaging is the preferred metastatic screening and surveillance modality because more than 90% of initial uveal melanoma metastases involve the liver; abdominal CT with contrast is an alternative when MRI is unavailable or contraindicated.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "HLA-A*02:01 allele genotyping is a mandatory companion diagnostic before first-line systemic therapy for metastatic disease because Tebentafusp eligibility requires HLA-A*02:01 positivity.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Prognostic profiling (GEP Class 1A/1B low risk vs Class 2 high risk; Monosomy 3 and BAP1 loss) on biopsied or enucleated tumor tissue stratifies metastatic risk and selects high-risk patients for intensive liver surveillance and adjuvant trial enrollment.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Eye-preserving radiotherapy (plaque brachytherapy I-125 or Ru-106 delivering 85 Gy to tumor apex, or proton beam radiotherapy) achieves greater than 95% local tumor control; primary enucleation is reserved for large advanced tumors, extensive extrascleral extension, or a blind and painful eye.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Tebentafusp-tebn (bispecific gp100 x CD3 ImmTAC, IMCgp100-202 trial) showed significant overall survival benefit versus investigator choice in HLA-A*02:01-positive metastatic uveal melanoma; step-up dosing with in-hospital monitoring for cytokine release syndrome (CRS) is required for the initial 3 doses, then 68 mcg IV weekly until progression or unacceptable toxicity.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "uveal_melanoma_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Melanoma: Uveal - Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before stage and HLA stratification. Confirm ocular diagnosis with funduscopy, biomicroscopy, ultrasound dimensions, OCT and photography; screen the liver for metastases; obtain mandatory HLA-A*02:01 genotype and prognostic profiling; and document baseline liver laboratories.",
+      "path": "Melanoma: Uveal / Workup",
+      "pills": [
+        "uveal",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Comprehensive ophthalmologic evaluation: dilated funduscopy, slit-lamp biomicroscopy, and high-resolution B-scan ocular ultrasonography (tumor thickness, basal dimensions)",
+        "Diagnostic optical coherence tomography (OCT) and widefield fundus photography",
+        "Liver-directed metastatic screening: dedicated multiphase liver MRI with diffusion-weighted imaging (preferred; >90% initial metastases occur in liver) or abdominal CT with contrast",
+        "Mandatory molecular testing: HLA-A*02:01 allele genotype testing (essential companion diagnostic for Tebentafusp eligibility)",
+        "Prognostic genetic profiling on tumor tissue (if biopsied or enucleated): Gene Expression Profiling (GEP Class 1A/1B low risk vs Class 2 high risk) and Monosomy 3 / BAP1 mutation analysis",
+        "Baseline systemic laboratory assessment: LFTs (alkaline phosphatase, AST, ALT, total bilirubin, LDH)"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Stage and HLA Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage_hla",
+      "linkId": "uveal_melanoma_stage_hla",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Stage and HLA Stratification",
+      "title": "Melanoma: Uveal - Stage and HLA Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign localized vs high-risk surveillance vs metastatic HLA-A*02:01 positive vs metastatic HLA-A*02:01 negative disease; the group selects the eye-preserving, surveillance, Tebentafusp, or liver-directed and immunotherapy pathway.",
+      "path": "Melanoma: Uveal / Stage and HLA Stratification",
+      "pills": [
+        "uveal",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Primary localized disease: small, medium, or large choroidal or ciliary body melanoma without distant metastases (M0).",
+        "High-risk surveillance group: GEP Class 2, Monosomy 3, or large apical thickness with no distant metastases (M0).",
+        "Metastatic HLA-A*02:01 positive disease: distant metastases with companion diagnostic confirming HLA-A*02:01 positivity.",
+        "Metastatic HLA-A*02:01 negative disease (or progressor on Tebentafusp): distant metastases without HLA-A*02:01, or progression after Tebentafusp."
+      ],
+      "options": [
+        {
+          "id": "localized",
+          "label": "Primary Localized Uveal Melanoma (Small / Medium / Large choroidal or ciliary body melanoma, non-metastatic)",
+          "sets": {
+            "stage": "localized"
+          },
+          "pills": [
+            "uveal",
+            "localized"
+          ]
+        },
+        {
+          "id": "highrisk",
+          "label": "High-Risk Surveillance (GEP Class 2, Monosomy 3, or large apical thickness, M0)",
+          "sets": {
+            "stage": "highrisk_surveillance"
+          },
+          "pills": [
+            "uveal",
+            "high-risk",
+            "surveillance"
+          ]
+        },
+        {
+          "id": "hla_pos",
+          "label": "Metastatic Uveal Melanoma: HLA-A*02:01 Positive",
+          "sets": {
+            "stage": "metastatic",
+            "hla": "positive"
+          },
+          "pills": [
+            "uveal",
+            "metastatic",
+            "HLA-A*02:01+"
+          ]
+        },
+        {
+          "id": "hla_neg",
+          "label": "Metastatic Uveal Melanoma: HLA-A*02:01 Negative (or progressor on Tebentafusp)",
+          "sets": {
+            "stage": "metastatic",
+            "hla": "negative"
+          },
+          "pills": [
+            "uveal",
+            "metastatic",
+            "HLA-A*02:01-"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_localized_tx",
+      "linkId": "uveal_melanoma_localized_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Localized Treatment",
+      "title": "Localized Uveal Melanoma: Plaque or Proton Radiotherapy vs Enucleation",
+      "section": "Treatment",
+      "description": "Eye-preserving radiotherapy is preferred for primary localized choroidal or ciliary body melanoma; primary enucleation is reserved for large advanced tumors, extensive extrascleral extension, or a blind and painful eye.",
+      "path": "Melanoma: Uveal / Localized / Treatment",
+      "pills": [
+        "uveal",
+        "localized",
+        "eye-preserving"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Eye-preserving radiotherapy preferred: Plaque Brachytherapy (I-125 or Ru-106 delivering 85 Gy to tumor apex) or Proton Beam Radiotherapy (PBRT) achieving >95% local tumor control.",
+        "Select plaque vs proton technique by tumor size, location (choroidal vs ciliary body), and proximity to optic disc and fovea in multidisciplinary ocular oncology consultation.",
+        "Primary enucleation reserved strictly for large advanced tumors, extensive extrascleral extension, or blind/painful eye.",
+        "Surveillance after definitive local therapy: dilated ophthalmologic examination plus dedicated liver imaging per high-risk features; offer clinical trial enrollment where eligible.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Plaque Brachytherapy (I-125 / Ru-106) or Proton Radiotherapy vs Enucleation",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_highrisk_surv_tx",
+      "linkId": "uveal_melanoma_highrisk_surv_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "High-Risk Surveillance",
+      "title": "High-Risk Uveal Melanoma: Intensive Liver Surveillance +/- Adjuvant Trials",
+      "section": "Treatment",
+      "description": "Intensive liver-directed imaging surveillance for high-risk GEP Class 2, Monosomy 3, or large apical thickness M0 disease, with enrollment in adjuvant targeted or immunotherapy trials.",
+      "path": "Melanoma: Uveal / High-Risk Surveillance / Treatment",
+      "pills": [
+        "uveal",
+        "high-risk",
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "c"
+      ],
+      "bullets": [
+        "Intensive liver-directed imaging surveillance: dedicated multiphase liver MRI (or liver ultrasound/CT where MRI is unavailable) every 3 to 6 months for 5 to 10 years.",
+        "Enrollment in clinical trials of adjuvant targeted/immunotherapy for high-risk GEP Class 2 / Monosomy 3 patients.",
+        "Continue dilated ophthalmologic follow-up after definitive eye therapy alongside systemic surveillance.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "High-Intensity Liver MRI Surveillance (q3-6 months) +/- Adjuvant Clinical Trials",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_hla_pos_tx",
+      "linkId": "uveal_melanoma_hla_pos_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Metastatic HLA-Positive Treatment",
+      "title": "Metastatic HLA-A*02:01 Positive: Tebentafusp Weekly",
+      "section": "Treatment",
+      "description": "First-line Tebentafusp-tebn step-up weekly therapy for HLA-A*02:01-positive metastatic uveal melanoma with CRS monitoring for initial doses.",
+      "path": "Melanoma: Uveal / Metastatic HLA-A*02:01 Positive / Treatment",
+      "pills": [
+        "uveal",
+        "metastatic",
+        "HLA-A*02:01+",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "e"
+      ],
+      "bullets": [
+        "First-line Systemic Therapy: Tebentafusp-tebn (bispecific gp100 x CD3 T-cell redirecting ImmTAC): Step-up dosing: 20 mcg IV day 1, 30 mcg IV day 8, 68 mcg IV day 15, followed by 68 mcg IV weekly until disease progression or unacceptable toxicity (IMCgp100-202 trial; significant overall survival benefit vs investigator choice).",
+        "In-hospital monitoring for cytokine release syndrome (CRS) required for initial 3 doses; monitor for rash, pruritus, hypotension, hypoxia, and liver enzyme elevation.",
+        "Confirm HLA-A*02:01 positivity with companion diagnostic before first dose; reassess with liver-directed imaging on therapy.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Tebentafusp 68 mcg IV Weekly (Step-up: 20mcg d1, 30mcg d8, 68mcg d15) for HLA-A*02:01+",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_hla_neg_tx",
+      "linkId": "uveal_melanoma_hla_neg_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Metastatic HLA-Negative Treatment",
+      "title": "Metastatic HLA-A*02:01 Negative: Liver-Directed Therapy or Nivolumab + Ipilimumab",
+      "section": "Treatment",
+      "description": "Liver-directed and systemic combination therapy for HLA-A*02:01-negative metastatic uveal melanoma or progressors on Tebentafusp.",
+      "path": "Melanoma: Uveal / Metastatic HLA-A*02:01 Negative / Treatment",
+      "pills": [
+        "uveal",
+        "metastatic",
+        "HLA-A*02:01-",
+        "liver-directed"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Liver-dominant disease: Percutaneous hepatic perfusion (PHP with Melphalan), Hepatic arterial infusion (HAI), Transarterial chemoembolization (TACE), or Y-90 Selective Internal Radiation Therapy (SIRT) selected by liver tumor burden, extrahepatic spread, and center expertise.",
+        "Systemic immunotherapy: Nivolumab 1 mg/kg + Ipilimumab 3 mg/kg IV q3w x 4 cycles -> Nivolumab maintenance (clinical benefit in select patients); monitor for immune-related adverse events.",
+        "Alternative: clinical trials (PKC/MEK inhibitors) offered at every line, especially for rapid progressors or extrahepatic disease.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Liver-Directed Therapy (PHP / TACE / Y-90 SIRT) or Nivolumab + Ipilimumab",
+      "protocolRefs": []
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_stage",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_stage_hla",
+      "toNodeId": "n_stage_hla",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_localized",
+      "from": "n_stage_hla",
+      "fromNodeId": "n_stage_hla",
+      "to": "n_localized_tx",
+      "toNodeId": "n_localized_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "localized",
+      "fromOptions": [
+        "localized"
+      ]
+    },
+    {
+      "id": "l_stage_highrisk",
+      "from": "n_stage_hla",
+      "fromNodeId": "n_stage_hla",
+      "to": "n_highrisk_surv_tx",
+      "toNodeId": "n_highrisk_surv_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "highrisk",
+      "fromOptions": [
+        "highrisk"
+      ]
+    },
+    {
+      "id": "l_stage_hla_pos",
+      "from": "n_stage_hla",
+      "fromNodeId": "n_stage_hla",
+      "to": "n_hla_pos_tx",
+      "toNodeId": "n_hla_pos_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "hla_pos",
+      "fromOptions": [
+        "hla_pos"
+      ]
+    },
+    {
+      "id": "l_stage_hla_neg",
+      "from": "n_stage_hla",
+      "fromNodeId": "n_stage_hla",
+      "to": "n_hla_neg_tx",
+      "toNodeId": "n_hla_neg_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "hla_neg",
+      "fromOptions": [
+        "hla_neg"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "uveal-tebentafusp"
+  ]
+}

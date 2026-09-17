@@ -66,6 +66,8 @@ export async function createOrder(env, orgId, o, actor) {
   if (!tariffId) return { ok: false, error: "tariff_item_required" };
   const t = await fsGet(env, "q_tariff/" + tariffId);
   if (!t || !t.fields || t.fields.orgId !== orgId || t.fields.active === false) return { ok: false, error: "tariff_item_not_found" };
+  // A per-day stay charge is billed from the stay itself, never ordered (and never ordered at a test's price).
+  if (["bed", "nursing", "visit"].indexOf(t.fields.kind) >= 0) return { ok: false, error: "not_orderable" };
   const v = validateOrder({ patientId: o.patientId, qty: o.qty, name: t.fields.name, code: t.fields.code, kind: t.fields.kind, unitPrice: t.fields.price, ticketId: o.ticketId, sessionId: o.sessionId });
   if (!v.ok) return v;
   const id = uid("ord_");
@@ -125,7 +127,9 @@ export async function upsertTariff(env, orgId, item, actor) {
   await qAudit(env, {
     hospitalId: orgId, ticketId: "", actor: actor || "admin",
     action: existing ? "tariff_update" : "tariff_create",
-    meta: `${fields.name} ${before == null ? "" : before + " -> "}${fields.price}${fields.active === false ? " (withdrawn)" : ""}`,
+    meta: `${fields.name} ${before == null ? "" : before + " -> "}${fields.price}${fields.active === false ? " (withdrawn)" : ""}` +
+      // The tax position is part of what is charged, so a change to it is recorded the same way.
+      ["hsnSac", "gstRate", "intensiveCare", "intensiveCareClass", "unitHours", "nonHealthcare"].filter((k) => k in fields).map((k) => ` ${k} ${existing && existing.fields && existing.fields[k] !== undefined ? existing.fields[k] + " -> " : ""}${fields[k]}`).join(""),
   });
   return { ok: true, id };
 }

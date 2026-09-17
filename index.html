@@ -69,16 +69,16 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
-<link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
-<link rel="stylesheet" href="/ward.css?v=ward24-keys">
-<link rel="stylesheet" href="/discharge.css?v=dis1">
+<link rel="stylesheet" href="/queue.css?v=q11-token">
+<link rel="stylesheet" href="/ward.css?v=ward36-rcm">
+<link rel="stylesheet" href="/discharge.css?v=dis4-clinforms">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
 <link rel="stylesheet" href="/atlas3d.css?v=a3d2">
-<link rel="stylesheet" href="/onco-home.css?v=op5-oncqis">
-<link rel="stylesheet" href="/oncotree.css?v=op3-map-fit1">
-<link rel="stylesheet" href="/protocol-sheet.css?v=ps1">
-<link rel="stylesheet" href="/protocol-maker.css?v=pm1">
+<link rel="stylesheet" href="/onco-home.css?v=op7-unified">
+<link rel="stylesheet" href="/oncotree.css?v=nccn-nav7">
+<link rel="stylesheet" href="/protocol-sheet.css?v=ps4">
+<link rel="stylesheet" href="/protocol-maker.css?v=pm2">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
@@ -253,7 +253,7 @@ body.smd-ddi-open #infFab,
 body.smd-ddi-open .ghis-ward-fab,
 body.smd-ddi-open #smdBackToTop{display:none!important}
 </style>
-<link rel="stylesheet" href="/maik-polish.css?v=mktopright1">
+<link rel="stylesheet" href="/maik-polish.css?v=mkcomposer1">
 <link rel="stylesheet" href="/prescription-mobile.css?v=rxfull1">
 </head>
 
@@ -270,6 +270,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
     <div class="sbs-logo-stage">
       <img class="sbs-logo" src="/logo.png" alt="StewardMD logo" width="107" height="107">
       <span class="sbs-mark" aria-hidden="true"></span>
+      <span class="sbs-reflection" aria-hidden="true"></span>
       <svg class="sbs-logo-trace" viewBox="0 0 368 368" aria-hidden="true" focusable="false">
         <path pathLength="1" style="--sbs-trace-duration:.468s;--sbs-trace-delay:0s" d="M143 53 Q143 53 145.4 53.45 L156.6 55.55 Q159 56 161.25 57.05 L171.75 61.95 Q174 63 179.4 68.25 L204.6 92.75 Q210 98 210 98.45 L210 100.55 Q210 101 208.05 102.5 L198.95 109.5 Q197 111 196.4 111 L193.6 111 Q193 111 188.95 106.8 L170.05 87.2 Q166 83 163.45 81.8 L151.55 76.2 Q149 75 145.85 75 L131.15 75 Q128 75 125.6 76.05 L114.4 80.95 Q112 82 110.2 83.8 L101.8 92.2 Q100 94 99.25 95.5 L95.75 102.5 Q95 104 94.7 104.9 L93.3 109.1 Q93 110 93 113.15 L93 127.85 Q93 131 94.5 133.85 L101.5 147.15 Q103 150 107.05 153.9 L125.95 172.1 Q130 176 127.75 177.95 L117.25 187.05 Q115 189 109.9 183.9 L86.1 160.1 Q81 155 79.65 151.1 L73.35 132.9 Q72 129 72.15 125.55 L72.85 109.45 Q73 106 74.2 103 L79.8 89 Q81 86 83.7 83 L96.3 69 Q99 66 102.45 64.35 L118.55 56.65 Q122 55 125.15 54.7 L139.85 53.3 Q143 53 143 53 Z"></path>
         <path pathLength="1" style="--sbs-trace-duration:.468s;--sbs-trace-delay:.468s" d="M186 171 Q186 171 176.85 178.95 L134.15 216.05 Q125 224 122.75 225.35 L112.25 231.65 Q110 233 108.05 233.45 L98.95 235.55 Q97 236 95.05 235.85 L85.95 235.15 Q84 235 82.5 234.55 L75.5 232.45 Q74 232 72.2 230.8 L63.8 225.2 Q62 224 62 223.7 L62 222.3 Q62 222 64.25 220.35 L74.75 212.65 Q77 211 78.35 211.6 L84.65 214.4 Q86 215 89 214.7 L103 213.3 Q106 213 122.05 199.65 L196.95 137.35 Q213 124 216.3 123.1 L231.7 118.9 Q235 118 238.15 118.3 L252.85 119.7 Q256 120 258.7 121.35 L271.3 127.65 Q274 129 275.5 130.35 L282.5 136.65 Q284 138 284 138.45 L284 140.55 Q284 141 282.05 142.5 L272.95 149.5 Q271 151 270.55 151 L268.45 151 Q268 151 266.65 149.8 L260.35 144.2 Q259 143 257.5 142.4 L250.5 139.6 Q249 139 246.15 139 L232.85 139 Q230 139 227.9 140.05 L218.1 144.95 Q216 146 211.5 149.75 L190.5 167.25 Q186 171 186 171 Z"></path>
@@ -380,17 +381,31 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
   @keyframes sbsLogoTrace{to{stroke-dashoffset:0}}
   /* Signature Trace: the existing solid 107px mark is present from the first frame. The
-     animated contour is a short mint highlight laid over it, never a replacement logo. */
-  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1!important}
-  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(45,212,191,.52);filter:drop-shadow(0 0 0 transparent);animation:sbsSignatureGlow 2.18s cubic-bezier(.4,0,.2,1) both;animation-play-state:paused;shape-rendering:geometricPrecision;pointer-events:none}
-  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(79,214,194,.68);filter:drop-shadow(0 0 0 transparent)}
+     pearl highlight traces over a lighter base that settles into the original colour. */
+  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
+  /* Selected variant 5 for light mode: focus settles, then a soft reflection crosses. */
+  #smdBootSplash:not(.sbs-dark) .sbs-logo{animation:sbsQuietFocus 2.4s cubic-bezier(.2,.8,.2,1) both;animation-play-state:paused}
+  #smdBootSplash .sbs-reflection{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:.65;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}
+  #smdBootSplash .sbs-reflection::after{content:"";position:absolute;inset:-40%;background:linear-gradient(110deg,transparent 30%,#dbeaff88 42%,#fff 49%,#fff 51%,#dbeaff88 58%,transparent 70%);animation:sbsQuietReflection 2.4s ease-in-out both;animation-play-state:paused}
+  #smdBootSplash.sbs-dark .sbs-reflection{display:none}
+  #smdBootSplash:not(.sbs-dark) .sbs-logo-trace{display:none}
+  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(188,215,255,.95);color:#fffdf4;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--sbs-halo));animation:sbsSignatureGlow 2.4s cubic-bezier(.4,0,.2,1) both;animation-play-state:paused;shape-rendering:geometricPrecision;pointer-events:none}
+  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(206,225,255,1);color:#fffdf4;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--sbs-halo))}
+  #smdBootSplash.sbs-dark .sbs-mark{background:#9bb5ae;animation:sbsSignatureFillDark 1.35s ease-in-out both;animation-play-state:paused}
+  #smdBootSplash.sbs-visible:not(.sbs-dark) .sbs-logo,#smdBootSplash.sbs-visible .sbs-mark,#smdBootSplash.sbs-visible .sbs-reflection::after{animation-play-state:running}
   #smdBootSplash.sbs-visible .sbs-logo-trace{animation-play-state:running}
-  #smdBootSplash .sbs-logo-trace path{stroke-width:4.4}
-  @keyframes sbsSignatureGlow{0%,58%{opacity:1;filter:drop-shadow(0 0 0 transparent)}72%{opacity:1;filter:drop-shadow(0 0 8px var(--sbs-halo))}100%{opacity:0;filter:drop-shadow(0 0 0 transparent)}}
+  #smdBootSplash .sbs-logo-trace path{stroke-width:6;animation-duration:calc(var(--sbs-trace-duration) * .72);animation-delay:calc(var(--sbs-trace-delay) * .72)}
+  /* Variant 1 for dark mode keeps the pearl light on the contour, without a background aura. */
+  @keyframes sbsSignatureGlow{0%,35%{opacity:1;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--sbs-halo))}48%,58%{opacity:1;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 8px var(--sbs-halo)) drop-shadow(0 0 14px var(--sbs-halo))}100%{opacity:0;filter:drop-shadow(0 0 0 transparent)}}
+  @keyframes sbsQuietFocus{0%{filter:blur(1.6px);transform:scale(.96);opacity:.45}30%,100%{filter:blur(0);transform:scale(1);opacity:1}}
+  @keyframes sbsQuietReflection{0%,22%{transform:translateX(-100%)}65%,100%{transform:translateX(100%)}}
+  @keyframes sbsSignatureFillDark{0%,12%{background:#9bb5ae}100%{background:#4b9e8d}}
   @media (prefers-reduced-motion:reduce){
     #smdBootSplash .sbs-bar>span{animation-duration:2.2s}
-    #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
+    #smdBootSplash:not(.sbs-dark) .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
+    #smdBootSplash.sbs-dark .sbs-mark{animation:none;background:#fff}
     #smdBootSplash .sbs-logo-trace{display:none;animation:none;filter:none}
+    #smdBootSplash .sbs-reflection{display:none}
   }
   /* ── v2 (html.smd-splash-v2) · Direction C: gradient depth, glass cards, bold type ──
      THE BOOT SPLASH IS A SEQUENCE OF TWO PASSIVE SCREENS (no button, no hold; the boot script
@@ -2052,7 +2067,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-splashat2" defer></script>
+<script src="/native-bridge.js?v=nb-pdf3" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -2068,7 +2083,7 @@ window.openExternal = function (u) {
 <script src="/antibiogram-data.js?v=gold363" defer></script>
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>
-<script src="/account.js?v=gold364-thread-vclaim1-proevt1-boot1" defer></script>
+<script src="/account.js?v=gold364-thread-vclaim1-proevt1-boot1-wsqfu3" defer></script>
 <!-- Guest session bar: the 300 s auto-sign-out clock, across the top instead of buried in
      the account chip. Additive, reads app.js's account record; never edits app.js. -->
 <script src="/guest-timer.js?v=gold1200-guestbar2" defer></script>
@@ -2077,16 +2092,15 @@ window.openExternal = function (u) {
 <!-- "Why is this locked?" - the one place that turns a Pro refusal into a sentence and the
      RIGHT button (verify vs subscribe). A silent Pro gate reads as a broken app. -->
 <script src="/pro-notice.js?v=gold1200-why" defer></script>
-<script src="/signout-fix.js?v=gold342-bkstatus" defer></script>
+<script src="/signout-fix.js?v=gold342-bkstatus-wsqfu3" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
-<script src="/verify.js?v=gold1026-roles-auth1-resync1" defer></script>
+<script src="/verify.js?v=gold1026-roles-auth1-resync1-wsqfu3" defer></script>
 <!-- Search the Indian Medical Register (window.SMD_NMC), opened from More. Backend: /api/nmc-search. -->
 <script src="/nmc-register.js?v=gold1" defer></script>
 <!-- Prescription PDF/JPEG export libraries (html2canvas → canvas, jsPDF → PDF). Loaded before
      prescription.js; export is user-triggered so defer order is safe. -->
-<script src="/lazy-load.js?v=1" defer></script>
-<!-- lazy loaded: html2canvas -->
-<!-- lazy loaded: jspdf -->
+<script src="/vendor-html2canvas.js?v=1" defer></script>
+<script src="/vendor-jspdf.js?v=1" defer></script>
 <script src="/rx-brand-match.js?v=rxb1" defer></script>
 <!-- RxChoice - cost-optimization layer over a FINISHED prescription. Load order matters: the flags
      registry and the deterministic core must exist before prescription.js renders its button, and
@@ -2124,6 +2138,11 @@ window.openExternal = function (u) {
 <script src="/drugs.js?v=gold978-sheet1-universal1" defer></script>
 <!-- lazy loaded: interaction-rules -->
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
+<!-- ONE image/PDF compressor for every vision path (Scan-Meds, ICU snapshot, ABG, SknX, PDF reports).
+     Vision tokens scale with pixel DIMENSIONS, not file bytes, so the long-edge cap is the token lever and
+     JPEG quality is only a bytes lever. pdfParts() reads a PDF's text layer instead of OCR-ing a rasterised
+     page, which is both far cheaper and more accurate on numbers. Loads BEFORE the modules that use it. -->
+<script defer src="/img-compress.js?v=imgc1"></script>
 <script defer src="/medlist.js?v=hardlocal3"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js"></script>
@@ -2143,6 +2162,7 @@ window.openExternal = function (u) {
 <script src="/id-token.js?v=idtok2" defer></script>
 <link rel="stylesheet" href="/reasoning-workspace.css?v=dxfit8">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall5">
+<script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/reasoning.js?v=hardlocal3" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
@@ -2181,7 +2201,8 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab36" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mktopright1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/abdm.js?v=abdm1" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab36" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb"><script src="/maik-atmosphere.js?v=1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2202,7 +2223,7 @@ window.openExternal = function (u) {
 <script src="/govschemes.js?v=gs4-catsearch" defer></script>
 <script src="/icd.js?v=hardlocal3" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
-<script src="/swipe-back.js?v=gold482-edgeback-gestnav1" defer></script>
+<script src="/swipe-back.js?v=gold482-edgeback-gestnav1-wsqp1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
@@ -2229,7 +2250,7 @@ window.openExternal = function (u) {
      returned untouched.
 
      It does NOT read or enable smd_wardsynq_cutover. That is a separate flag and remains off. -->
-<script src="/wardsynq-flags.js?v=wsq1" defer></script>
+<script src="/wardsynq-flags.js?v=wsqp1" defer></script>
 <script type="module" src="/wardsynq-shadow-boot.js?v=wsq1"></script>
 <!-- WardSynQ Clinical Record: the doctor's phone opening the SAME record the hospital PC charts
      into. Inert unless a tenant is named (?wardsynq_record=<tenantId>, remembered in localStorage;
@@ -2252,19 +2273,19 @@ window.openExternal = function (u) {
      in-process without a reload. -->
 <script type="module" src="/wardsynq-ghis-live-boot.js?v=wsq1"></script>
 
-<!-- The acknowledgement screen for a deterioration escalation (HAZ-DET-01).
-
-     Deliberately NOT behind a flag. It is inert until a push of type "wardsynq-alert" arrives, and
-     gating it off would mean an escalation that reaches a handset and cannot be answered on it,
-     which is a worse failure than the screen existing unused. -->
-<script src="/wardsynq-alert-ui.js?v=wsq1" defer></script>
+<!-- hospital-auth.js: which credential a hospital request carries (the workplace decides, S3 ID-01).
+     Before ward.js, the alert screen and native-push.js, which all read window.SMD_HOSPITAL_AUTH.
+     wardsynq-alert-ui.js: the screen a WardSynQ critical-result push opens (S3 P1). Inert unless
+     smd_wsq_push is on; it fetches the detail only after app lock, for the hospital worked in. -->
+<script src="/hospital-auth.js?v=wsqp1" defer></script>
+<script src="/wardsynq-alert-ui.js?v=wsqp1-fu1" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
 <script src="/icu-collab.js?v=gold455" defer></script><script src="/referrals.js?v=ref1" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
-<script src="/native-push.js?v=gold364-thread-ref1" defer></script>
+<script src="/native-push.js?v=gold364-thread-ref1-wsqp1-fu3" defer></script>
 <script src="/watch-lab.js?v=gold363-ref1" defer></script>
 <!-- Apple Watch bridge — publishes session + favorites/recents to the paired
      watch via the WatchBridge plugin (App Group + WatchConnectivity). No-op on
@@ -2462,7 +2483,7 @@ window.openExternal = function (u) {
 <script src="/followcare-flags.js?v=fc12" defer></script>
 <script src="/followcare-pathways.js?v=fc7" defer></script>
 <script src="/followcare-diagnosis.js?v=fc7" defer></script>
-<script src="/followcare-i18n.js?v=fc13" defer></script>
+<script src="/followcare-i18n.js?v=fc14" defer></script>
 <script src="/followcare-comms.js?v=fc8" defer></script>
 <script src="/followcare-ai.js?v=fc2" defer></script>
 <script src="/followcare-analytics.js?v=fc3" defer></script>
@@ -2477,20 +2498,27 @@ window.openExternal = function (u) {
      default could never take effect and only a localStorage override made the tile appear. -->
 <!-- Shared OPD patient check-in sheet (ABDM-ready). Used by queue.js AND the staff web console
      (opd.html), so the two registration forms can never drift apart. -->
-<link rel="stylesheet" href="/patient-register.css?v=preg1">
-<script src="/patient-register.js?v=preg1" defer></script>
-<script src="/queue.js?v=fdesk1-addpt4" defer></script>
+<link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
+<script src="/patient-register.js?v=preg5-abdm" defer></script>
+<script src="/queue.js?v=fdesk3-dept-wsqp1-fu2" defer></script>
 <!-- WardSynQ inpatient ward (window.WARD): admission (bed board), the doctor/nurse chart,
      medication ordering + eMAR, investigation ordering + results, the vitals flowsheet, and
      discharge - the whole golden path, through the same server-authoritative routes as before.
      Self-mounting overlay. Reached from the home screen's "Inpatient Ward" tile (flag
      smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
      given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
-<script src="/ward.js?v=ward24-keys" defer></script>
+<!-- The patient portal's words and discharge renderer (window.WSQPortal): ward.js previews the portal with them. -->
+<script src="/wardsynq/site/i18n.js?v=48" defer></script>
+<script src="/wardsynq/site/print-lang.js?v=26" defer></script>
+<script src="/wardsynq/site/portal.js?v=37" defer></script>
+<!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
+<script src="/ward-offline.js?v=3" defer></script>
+<script src="/ward-labels.js?v=1" defer></script>
+<script src="/ward.js?v=ward66-ward-times" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
-<script src="/discharge.js?v=dis1" defer></script>
+<script src="/discharge.js?v=dis8-education" defer></script>
 <!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
      computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
 <script src="/onco-dose.js?v=op1" defer></script>
@@ -2508,7 +2536,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -2553,7 +2581,13 @@ window.openExternal = function (u) {
      every proposed dose comes from SMD_ONCODOSE with the full lineage visible. Reuses SMD_ONCORECOMMEND
      (Phase B), SMD_ONCOEV (Phase C), SMD_ONCOUI matrix/drawer + SMD_ONCODOSE. Loaded before onco-home.js. -->
 <script src="/onco-plan-flow.js?v=op1" defer></script>
-<script src="/onco-home.js?v=hardlocal3" defer></script>
+<!-- Clinical Oncology Superpowers: Dynamic organ dose modification, Calvert Carboplatin, WardSync EMR labs, multi-regimen comparison, cycle nadir timeline, DDI sentry, genomic MRD precision -->
+<script src="/onco-organ-dose.js?v=op2" defer></script>
+<script src="/onco-compare.js?v=op1" defer></script>
+<script src="/onco-cycle-timeline.js?v=op1" defer></script>
+<script src="/onco-ddi-sentry.js?v=op1" defer></script>
+<script src="/onco-genomics.js?v=op1" defer></script>
+<script src="/onco-home.js?v=hardlocal6" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->
@@ -2561,9 +2595,9 @@ window.openExternal = function (u) {
 <script src="/assets/vendor/motion.min.js?v=motion10" defer></script>
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot5" defer></script>
-<script src="/oncotree.js?v=op3-map" defer></script>
-<script src="/protocol-sheet.js?v=ps1" defer></script>
-<script src="/protocol-maker.js?v=pm1" defer></script>
+<script src="/oncotree.js?v=nccn-nav7" defer></script>
+<script src="/protocol-sheet.js?v=ps5" defer></script>
+<script src="/protocol-maker.js?v=pm2" defer></script>
 <!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is
      UNIVERSAL: minted on sign-in for every user (kill switch smd_steward_id_mint,
      default ON), so a doctor has an ID to be added / referred / supported BY before

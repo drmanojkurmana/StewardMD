@@ -39,6 +39,8 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { medicationAdministrationIdFor } from "./opd-identity.js";
+import { witnessOrRefusal } from "./controlled-drugs.js";
+import { readPregnancyLactation } from "./migrate-maternity.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -71,40 +73,93 @@ async function latestWeightKg(svc, patientId) {
  * would surface as a server error rather than as the machine's own refusal, losing the reasons the
  * nurse needs to act on.
  */
+/* What the engine is asked about, read from the patient's record: their allergies, their OTHER active
+ * orders and their latest weight. One reader for the bedside hook and for order entry, so the check a
+ * prescriber sees and the check the nurse's scan runs can never read different facts. */
+async function safetyFacts(svc, order) {
+  const patientId = order && order.patientId;
+  // No catch: an unreadable allergy list or medication list is not an empty one. The callers turn the
+  // throw into "the check could not run" instead of a clean check against no allergies.
+  const [allergies, orders] = await Promise.all([
+    svc.byPatient("AllergyIntolerance", patientId),
+    svc.byPatient("MedicationOrder", patientId),
+  ]);
+  const activeMeds = (orders || [])
+    .filter((o) => o && o.status === "active" && o.id !== (order && order.id))
+    .map((o) => ({ drug: o.drug, drugCode: o.genericName || o.drugCode, dose: o.dose || null, frequency: o.frequency || null }));
+  /* The patient's OWN recorded weight, from the ward vitals, because a weight-based ceiling
+   * cannot be checked without one — the engine blocks with DOSE_WEIGHT_MISSING, which is the
+   * "a weight-based drug on an unweighed patient refuses rather than passes" invariant and is
+   * correct. It is read from the record rather than taken from the request body on purpose: a
+   * client-supplied weight is a number that can be typed to make a ceiling pass. If the ward has
+   * not weighed the patient there is nothing to send, and the block stands. */
+  const weightKg = await latestWeightKg(svc, patientId);
+  return { allergies: allergies || [], activeMeds, weightKg };
+}
+
 function bedsideSafetyCheck(svc, rulePack) {
   return async (hookCtx) => {
     if (!rulePack) return { allowed: true, blocks: [], warnings: [{ code: "NO_RULE_PACK", message: "no decision-support content is loaded; nothing was checked" }] };
     try {
       const order = hookCtx && hookCtx.order;
-      const patientId = order && order.patientId;
-      const [allergies, orders] = await Promise.all([
-        svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
-        svc.byPatient("MedicationOrder", patientId).catch(() => []),
-      ]);
-      const activeMeds = (orders || [])
-        .filter((o) => o && o.status === "active" && o.id !== (order && order.id))
-        .map((o) => ({ drug: o.drug, drugCode: o.genericName || o.drugCode }));
-
-      /* The patient's OWN recorded weight, from the ward vitals, because a weight-based ceiling
-       * cannot be checked without one — the engine blocks with DOSE_WEIGHT_MISSING, which is the
-       * "a weight-based drug on an unweighed patient refuses rather than passes" invariant and is
-       * correct. It is read from the record rather than taken from the request body on purpose: a
-       * client-supplied weight is a number that can be typed to make a ceiling pass. If the ward has
-       * not weighed the patient there is nothing to send, and the block stands. */
-      const weightKg = await latestWeightKg(svc, patientId);
+      const { allergies, activeMeds, weightKg } = await safetyFacts(svc, order);
       const engine = new SafetyEngine({ rulePack });
       // Carried ON the patient, not as a sibling field: hook() forwards order/patient/allergies/
       // activeMeds/overrides to evaluate() and nothing else, while evaluate() reads
       // `ctx.weightKg ?? patient.weightKg`. Attaching it here is what makes the ceiling checkable
       // without widening the engine's own hook signature.
       const patient = { ...(hookCtx.patient || {}), ...(typeof weightKg === "number" ? { weightKg } : {}) };
-      return engine.hook()({ order, patient, activeMeds, allergies: allergies || [] });
+      return engine.hook()({ order, patient, activeMeds, allergies });
     } catch (e) {
       // Could not check. Say so as a warning and let the machine's own gates decide; silently
       // returning "allowed" would be the clean-bill-of-health-for-a-check-that-never-ran failure.
       return { allowed: true, blocks: [], warnings: [{ code: "SAFETY_CHECK_UNAVAILABLE", message: str(e && e.message) || "decision support unavailable" }] };
     }
   };
+}
+
+/**
+ * LT-14: the SAME engine and the SAME record facts at ORDER ENTRY, as the full verdict (findings
+ * included, so override analytics can count what fired). `overrides` are the prescriber's, already
+ * attributed by the caller. Never throws: a check that could not run says so (checked: false) and is
+ * never reported as a clean one.
+ */
+/* THE FINDINGS ORDER ENTRY REFUSES (retest 2026-09-16). Every other finding is reported and proceeds with the
+ * prescriber's reason, because the content is unapproved seed data (see createWardMedicationOrder). A dose
+ * above an absolute ceiling is not a judgement the rule content makes: it is arithmetic on the order and the
+ * patient's other active orders of the same molecule, and 8 g of paracetamol a day has no reason. Each such
+ * finding carries hardStop: true, so a screen labels exactly what the server refuses and nothing else. */
+const ORDER_ENTRY_HARD_STOPS = Object.freeze(["DOSE_ABSOLUTE_CEILING", "DOSE_ABSOLUTE_CEILING_DAILY", "DOSE_ABSOLUTE_CEILING_CUMULATIVE"]);
+
+/* opts.lactationWindowDays: the hospital's postpartum lactation window (wardsynqConfig). The pregnancy and
+ * lactation check reads the maternity record only when the pack has rules for it; `pregnancyLactation.rulesLoaded`
+ * is on every verdict, so a screen can say "no pregnancy or lactation rules loaded" rather than imply a check. */
+async function orderEntrySafety(svc, rulePack, order, overrides, opts) {
+  if (!rulePack) return { checked: false, code: "NO_RULE_PACK", message: "no decision-support content is loaded; nothing was checked" };
+  try {
+    const rulesLoaded = rulePack.pregnancyLactation ? rulePack.pregnancyLactation.size : 0;
+    const [{ allergies, activeMeds, weightKg }, pregnancyStatus] = await Promise.all([
+      safetyFacts(svc, order),
+      rulesLoaded ? readPregnancyLactation(svc, order && order.patientId, { lactationWindowDays: opts && opts.lactationWindowDays }) : null,
+    ]);
+    // "same-drug" and "pregnancy" only here: order entry is where a second order of an active molecule, or a
+    // medicine in pregnancy or breastfeeding, is decided.
+    const v = new SafetyEngine({ rulePack, checks: ["allergy", "interaction", "dose", "renal", "same-drug", "pregnancy"] })
+      .evaluate({ order, allergies, activeMeds, weightKg, pregnancyStatus, overrides: overrides || [] });
+    const pick = (f) => ({ code: f.code, severity: f.severity || null, disposition: f.disposition, message: f.message || "",
+      ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}),
+      ...(f.disposition === "block" && ORDER_ENTRY_HARD_STOPS.includes(f.code) ? { hardStop: true } : {}) });
+    const blocks = v.blocks.map(pick);
+    return {
+      checked: true, rulePackVersion: v.rulePackVersion, allowed: v.allowed,
+      blocks, overridables: v.overridables.map(pick), warnings: v.warnings.map(pick), findings: v.findings.map(pick),
+      hardStops: blocks.filter((f) => f.hardStop),
+      unresolvedDrug: v.unresolvedDrug, unresolvedActiveMeds: v.unresolvedActiveMeds || [],
+      pregnancyLactation: { rulesLoaded, ...(pregnancyStatus || {}) },
+    };
+  } catch (e) {
+    return { checked: false, code: "SAFETY_CHECK_UNAVAILABLE", message: str(e && e.message) || "decision support unavailable" };
+  }
 }
 
 /** Builds the governed service, or a shaped refusal. Never throws. */
@@ -154,7 +209,7 @@ async function medicationRound(request, env, ctx) {
      * already given. */
     try { mar = marId ? await svc.get("MedicationAdministration", marId) : null; } catch { readFailed = true; unread += 1; }
     due.push({
-      orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
+      orderId: o.id, orderVersion: o.version == null ? null : o.version, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
       administrationId: marId,
       ...(readFailed ? { readFailed: true } : {}),
       status: readFailed ? "unknown" : mar ? mar.status : null,          // null = this dose has not been started
@@ -169,7 +224,7 @@ async function medicationRound(request, env, ctx) {
  * One governed transition of one dose.
  *
  * ctx: { migration, action, orderId, dueAt, patient, scan?, reason?, witnessId?, rulePack?,
- *        highAlertDrugs?, actorDeps, recordDeps }
+ *        highAlertDrugs?, expectedOrderVersion?, actorDeps, recordDeps }
  */
 async function administerStep(request, env, ctx) {
   const mig = ctx.migration;
@@ -221,6 +276,16 @@ async function administerStep(request, env, ctx) {
     }
   }
   if (order.status !== "active") return { ...base, ok: false, status: 409, error: "order_not_active", orderId, orderStatus: order.status };
+  /* G2: THE ORDER THE NURSE SAW IS THE ORDER THE DOSE IS RECORDED AGAINST. A dose charted on a device while
+   * offline reaches here minutes or hours later; if the prescriber changed the order meanwhile, recording it
+   * against the new dose, route or frequency would chart something nobody gave. So a caller that names the
+   * order version it acted on is refused when that is no longer the order, and shown the order as it is now.
+   * A stopped order is refused above, before this. A retry of a dose already recorded was answered above too. */
+  if (ctx.expectedOrderVersion !== undefined && ctx.expectedOrderVersion !== null && ctx.expectedOrderVersion !== "" && Number(ctx.expectedOrderVersion) !== Number(order.version)) {
+    return { ...base, ok: false, status: 409, error: "order_changed", detail: "this order changed after the dose was charted; nothing was recorded", orderId, administrationId: marId, written: 0,
+      expectedOrderVersion: Number(ctx.expectedOrderVersion), currentVersion: order.version,
+      current: { drug: order.drug || null, dose: order.dose || null, route: order.route || null, frequency: order.frequency || null, status: order.status, version: order.version } };
+  }
 
   // Wrong-patient prevention, before any state is touched: the patient the ward says it is holding
   // must be the patient the ORDER names. The five rights check this again at the bedside against the
@@ -254,6 +319,17 @@ async function administerStep(request, env, ctx) {
   }
 
   const before = record.status;
+  /* A CONTROLLED DRUG IS GIVEN IN FRONT OF A SECOND PERSON (controlled-drugs.js), whatever the high-alert list says.
+   * Stricter than the high-alert witness below: the witness must also be an active member of this hospital who may
+   * witness one, checked by the route, because this dose is a line in the NDPS register. Refused before the machine
+   * runs, so nothing is written. */
+  if (action === "administer" && typeof ctx.isControlled === "function" && ctx.isControlled(order.drug, order.drugCode) === true) {
+    const w = await witnessOrRefusal(ctx, resolved.actor.id);
+    if (w.error) {
+      return { ...base, ok: false, status: w.error.status === 502 ? 502 : 409, error: w.error.status === 502 ? w.error.error : "refused", action, from: before,
+        reasons: [{ code: String(w.error.error).toUpperCase(), message: w.error.detail }], detail: w.error.detail, orderId, administrationId: marId, actor: resolved.actor.id, written: 0 };
+    }
+  }
   try {
     if (action === "verify") await emar.transition(record, STATES.VERIFIED, { actorId: resolved.actor.id });
     else if (action === "dispense") await emar.transition(record, STATES.DISPENSED, { actorId: resolved.actor.id });
@@ -288,4 +364,4 @@ async function administerStep(request, env, ctx) {
   }
 }
 
-export { ACTIONS, bedsideSafetyCheck, medicationRound, administerStep };
+export { ACTIONS, ORDER_ENTRY_HARD_STOPS, bedsideSafetyCheck, orderEntrySafety, medicationRound, administerStep };

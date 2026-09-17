@@ -1,0 +1,110 @@
+{
+  "id": "owner-cc56af64",
+  "manufacturer": "philips-intellivue",
+  "layout": "right-column-limits-left",
+  "difficulty": [
+    "real-photo",
+    "glare",
+    "tilt"
+  ],
+  "image": "cc56af64.jpg",
+  "imageSize": {
+    "w": 900,
+    "h": 1600
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 62
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 96
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 150,
+      "source": "ART"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 54,
+      "source": "ART"
+    },
+    "map": {
+      "status": "visible",
+      "value": 77,
+      "source": "ART"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 20
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 61
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 0
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 150,
+        "dbp": 54,
+        "map": 77
+      }
+    },
+    "nibp": {
+      "status": "not_visible",
+      "why": "no NBP measurement row on this screen"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ],
+      "art": [
+        210,
+        90
+      ]
+    },
+    "clock": "19:59",
+    "banner": "!!PW:Action Requ'd",
+    "rhythm": "Sinus Rhythm",
+    "st": {
+      "I": 0.1,
+      "II": 0.3,
+      "aVL": 0.0
+    },
+    "artWaveScale": [
+      215,
+      140,
+      65
+    ],
+    "assetLabels": [
+      "MHB 080..",
+      "21001040"
+    ]
+  },
+  "notes": "Philips IntelliVue (same ward as the MP40 case, different bed/time). Glare streak across the header. No patient name visible."
+}

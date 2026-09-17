@@ -24,7 +24,8 @@ test("a temporary number offers Link; a clash is refused with the reason", async
   m.el("pMrn").value = "TMP-000002"; m.el("pFind").onclick(); await tick();
   assert.match(m.el("pOut").innerHTML, /Hospital MR number issued for this patient/);
   m.el("pLinkMrn").value = "MRN-9"; m.el("pLink").onclick(); await tick();
-  assert.deepEqual(JSON.parse(JSON.stringify(m.calls[1])), { path: "/patient/link-mrn", body: { orgId: "o1", provisionalMrn: "TMP-000002", mrn: "MRN-9" } });
+  // The page also loads the Scan and Share card and the privacy notices, so find the link call by path.
+  assert.deepEqual(JSON.parse(JSON.stringify(m.calls.find((x) => x.path === "/patient/link-mrn"))), { path: "/patient/link-mrn", body: { orgId: "o1", provisionalMrn: "TMP-000002", mrn: "MRN-9" } });
   assert.match(m.toasts.join(" "), /already belongs to another patient/);
 });
 

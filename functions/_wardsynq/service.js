@@ -73,6 +73,27 @@ const RESOURCE_TYPES = Object.freeze([
    * order - it is summed from the receipts booked against it, the same discipline stock.js keeps
    * for a stock level, so there is no counter to drift away from the events beneath it. */
   "PurchaseOrder", "Vendor",
+  /* General stores (stores.js): the non-drug item master, store locations, a department's indent and the in-charge's
+   * decision on it, the department's acknowledgement of what arrived, and the store closing a back-order. What was
+   * ISSUED is never stored on the indent: it is the StockMovement transfers booked against it, summed on read. */
+  "StoreItem", "StoreLocation", "Indent", "IndentDecision", "IndentReceipt", "IndentClosure",
+  /* Biomedical assets (assets.js): the register, where each asset went and what state it is in, its maintenance
+   * schedules, and job cards with every step taken on them. Status and location are derived from the events. */
+  "Asset", "AssetEvent", "MaintenanceSchedule", "JobCard", "JobCardEvent",
+  /* The blood bank's registers (blood-bank.js). A unit's status (quarantine, available, reserved, issued, discarded,
+   * expired) is derived from its tests, its events and the transfusion episodes that name it, never stored. */
+  "BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent",
+  /* Pilot and recipient samples with their discard log, and the confidential notification of a reactive donor
+   * (legal opinion 2026-09-17, G.5.5 and G.5.8). */
+  "BloodSample", "DonorNotification",
+  /* Hospital support services, 2026-09-16. A diet order is a clinical order and versioned like one; a
+   * meal round is the kitchen's prepared/delivered mark for one patient at one meal. CSSD keeps its set
+   * master, its steriliser loads with their indicator results, and one cycle per trip of a set through
+   * the department, so a failed load can be traced to every case its sets reached. A housekeeping task,
+   * an ambulance, a trip and a mortuary case are operational registers kept here for the same reason
+   * as the rest: append-only, so what was done, by whom and when cannot be edited afterwards. */
+  "DietOrder", "MealRound", "InstrumentSet", "SterilizerLoad", "CssdCycle", "HousekeepingTask",
+  "AmbulanceVehicle", "AmbulanceTrip", "MortuaryCase",
   /* Who to ring about this patient. Its own record rather than fields on Patient, because a contact
    * list changes on its own clock and an emergency contact quietly overwritten last month leaves
    * nobody to call at the moment somebody has to be called. Append-only like everything else:
@@ -166,6 +187,9 @@ const RESOURCE_TYPES = Object.freeze([
    * changes anything for the patient - so the actions and what was done about them live on the
    * record beside the number. */
   "RiskAssessment",
+  /* A vaccine given, or considered and deliberately not given. Append-only so an entry later found
+   * to be wrong is withdrawn as a new version and stays readable (immunization.js). */
+  "Immunization",
   /* Sending a prescription somewhere, and knowing whether it arrived. A DELIVERY fact, never a
    * clinical one: nothing here touches the MedicationOrder, because "we sent this" is a statement
    * about a message, not about the treatment. */
@@ -183,6 +207,15 @@ const RESOURCE_TYPES = Object.freeze([
   /* P1.5: a pre-admission cost estimate from the tariff. Financial, marked as an estimate on the record,
    * and never read to decide anything clinical. Granted with Claim. */
   "CostEstimate",
+  /* gap-claims-gst A (2026-09-16): an NHCX coverage eligibility check and the payer's answer to it
+   * (functions/_wardsynq/nhcx.js). Financial, append-only (the answer is a new version), granted with Claim. */
+  "CoverageEligibilityCheck",
+  /* gap-claims-gst-2 (2026-09-16): a package on an inpatient stay (functions/_wardsynq/packages.js), with a copy of the
+   * package version it was attached with and its pre-authorisation link. Financial, versioned, granted with Claim. */
+  "PackageAssignment",
+  /* gst-parties (2026-09-17): who settles an inpatient stay's bill (functions/_wardsynq/stay-payer.js), a reference to a
+   * payer contract or self-pay. Financial, versioned, granted with Claim. */
+  "StayPayer",
   /* TASK 4.6: the charge-to-reconciliation ledger. Every discount/deposit/payment/refund/
    * adjustment/write-off is an append to the SAME invoice record, never a mutation of its charge
    * lines - "what was billed" and "what happened to the bill since" are different facts. A
@@ -288,6 +321,32 @@ const RESOURCE_TYPES = Object.freeze([
    * against a hospital that can answer "which patients got lot X", so this is append-only and keyed
    * to the case it was placed in. */
   "ImplantRecord",
+  /* The pre-anaesthetic checkup for one surgical case (migrate-surgery.js recordPac): history, airway,
+   * ASA class, fasting, investigations reviewed, plan, consent for anaesthesia and the fitness decision.
+   * One record per case, a revision being a new version with a reason. The anaesthetist's clinical
+   * commitment, so EMR_TREAT's unrestricted write covers it; no grant change. */
+  "PreAnaestheticCheckup",
+  /* A stay's expected discharge date as the treating team states it (expected-discharge.js): one record per
+   * encounter, each change a new version with a reason. A plan, never a prediction. EMR_TREAT writes it. */
+  "ExpectedDischarge",
+  /* A request to move a patient to another ward or unit, and the receiving unit's answer (transfer-request.js):
+   * requested, accepted or declined, bed assigned, completed or cancelled, each step a new version. */
+  "TransferRequest",
+  /* One stay's discharge relay (discharge-milestones.js): advised, pharmacy cleared, bill ready, TPA final approval asked
+   * and received, left, each with who recorded it and when. Each step is written by the role whose act it is. */
+  "DischargeMilestone",
+  /* One stay's two NABH KPI 1 times (admission-times.js): when the patient reached the ward bed, recorded by the nurse
+   * (EMR_VITALS, VITALS_TYPES in actor.js), and which signed note a doctor marked as the initial assessment. */
+  "AdmissionTimes",
+  /* A patient another hospital asks us to take (transfer-centre.js): the call, the consultant's answer with the capacity
+   * of that moment, and the admission request it became. No patientId until the patient is registered and accepted. */
+  "TransferCentreRequest",
+  /* A hospital-loaded SNOMED CT / ICD-10 / LOINC release (code-sets.js): the import record (who, when, how many,
+   * the licence confirmation) and the codes in chunks. Hospital-wide, no patientId. Loaded from Admin. */
+  "CodeSetImport", "CodeSetChunk",
+  /* A hospital's own licensed growth reference tables (growth-tables.js): the import record (reference name, method,
+   * licence confirmation, withdrawn or not) and the LMS rows in chunks. Hospital-wide, no patientId. Loaded from Admin. */
+  "GrowthTableImport", "GrowthTableChunk",
   /* Antenatal history and gestation (Task 2.4): gravida, para, LMP/EDD, risk factors. One current
    * episode per patient, versioned like everything else - a delivery is the fact that changes para,
    * recorded through migrate-maternity.js's recordDelivery(), never edited by hand elsewhere. */
@@ -308,6 +367,9 @@ const RESOURCE_TYPES = Object.freeze([
    * ResusBundle and SurgicalCase's own comments already give), and EMR_VIEW's unrestricted read
    * covers seeing one. */
   "FamilyLink",
+  /* One minute's APGAR on a newborn's own chart (migrate-maternity.js recordApgar): five signs and the total
+   * worked out from them, one record per minute, a change being a new version with a reason. */
+  "ApgarScore",
   /* A line, catheter or drain: site, type, when placed, when removed (Task 2.5). A placement log,
    * not a protocol - it carries no judgement about when a line is indicated or how to care for it,
    * the same restraint migrate-surgery.js's ImplantRecord already keeps for a prosthesis. No grant
@@ -367,6 +429,17 @@ const RESOURCE_TYPES = Object.freeze([
    * conclusions cannot be edited away after the fact - the same property Claim's coding history
    * and TransfusionEpisode's traceability already depend on. */
   "IncidentReport",
+  /* Infection control and quality, 2026-09-17. A healthcare-associated infection case confirmed or ruled out by the
+   * infection control nurse against the CDC/NHSN definition (infection-control.js) and the review of one theatre case's
+   * prophylactic antibiotic; a suspected adverse drug reaction on the PvPI form, a hospital-authored audit checklist and
+   * each audit against it, a mock drill, an emergency medicine stock-out and a clinician's review of an emergency return
+   * within 72 hours (quality-registers.js). Append-only: a ruled-out case, a withdrawn confirmation or a corrected audit
+   * is a new version beside the old one. */
+  "HaiCase", "SurgicalProphylaxis", "AdverseDrugReaction", "QualityAuditTemplate", "QualityAudit", "MockDrill", "EmergencyStockOut", "EdReturnReview",
+  /* Theatre and outpatient access, 2026-09-17 (theatre.js, access-times.js). A block of theatre time held for a unit or a
+   * surgeon, released by a person or by the hospital's rule; and a patient's arrival at the laboratory or imaging counter
+   * with the time the test began. A release or a test start is a new version beside the first. */
+  "TheatreSession", "DiagnosticVisit",
   /* TASK 6.14: a wristband/QR/NFC tag's own lifecycle - the persisted state of
    * wardsynq-identity-tag.js's assign/verify/replace/deactivate/lost engine. Its own type, not a
    * field mutation on Patient: wristbandBarcode has been comparable since early in this build, but a
@@ -430,9 +503,39 @@ const RESOURCE_TYPES = Object.freeze([
   /* P2.12 (pathways.js): a patient enrolled on one published pathway version, and each step override with its
    * reason as its own record, never edited. Written through EMR_TREAT; no narrower grant writes either. */
   "PathwayEnrolment", "PathwayStepOverride",
+  /* DPDP Act 2023 (dpdp.js), 2026-09-16: the hospital's privacy notice (one record per language, a version per
+   * edit), a patient's acknowledgement that they were given it, a data principal's request and its answer, and
+   * a personal data breach with its notification times. Append-only like everything else: "we answered on the
+   * 3rd" and "the Board was told at 14:00" are exactly the facts that must not be editable afterwards. */
+  "PrivacyNotice", "PrivacyAcknowledgement", "DataPrincipalRequest", "DataBreach",
+  /* 2026-09-17 (retention.js): a legal hold on a patient's record, placed with its reason and reference and lifted only
+   * with the reference to the disposal of the matter. Both are versions of one record. */
+  "LegalHold",
+  /* Compliance reporting, 2026-09-16: the hospital's own self-assessment against the NABH Digital Health
+   * Standards (compliance.js) and a saved report definition (report-builder.js). No patient on either. */
+  "DhsAssessment", "SavedReport",
+  /* Staff messaging, 2026-09-17 (staff-messaging.js): one message between staff about a patient or a unit, an edit or a
+   * recall as a new version, and each reader's last read of a thread. Patient-bound messages carry patientId, so they
+   * sit in the patient compartment and are read only after the patient is. */
+  "StaffMessage", "StaffMessageRead",
+  /* Patient education, 2026-09-17 (patient-education.js): a hospital-authored leaflet (no patient; a draft until a second
+   * clinician approves a version) and, per stay, the approved copies given to that patient (patient compartment). Written
+   * through EMR_TREAT, whose write scope is unconstrained; no narrower grant writes either. */
+  "EducationLeaflet", "EducationAttachment",
 ]);
 
-const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
+/* BLOOD CENTRE ONLY (legal opinion 2026-09-17, G.5.8): donor deferral reasons (item 52 among them), infection results
+ * and the notification of a reactive donor are visible to blood centre staff only. A null read scope admits every type,
+ * so these are withheld from the change feed and the record door unless the reader's grant NAMES the type (the
+ * blood_bank role's does). The Blood bank routes, gated by transfusion.issue, still read them through list and get. */
+const BLOOD_CENTRE_ONLY = Object.freeze(["BloodDonor", "DonorScreening", "BloodTestResult", "DonorNotification", "BloodUnitEvent"]);
+function bloodCentreOnlyReadable(actor, resourceType) {
+  if (!BLOOD_CENTRE_ONLY.includes(resourceType)) return true;
+  const read = actor && actor.scope ? actor.scope.read : null;
+  return Array.isArray(read) && read.includes(resourceType);
+}
+
+const MODE =Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
 
 /** Provenance value the model stamps on records WardSynQ itself originated. */
 const NATIVE_SYSTEM = "wardsynq-native";
@@ -655,6 +758,23 @@ class RecordService {
   }
 
   /**
+   * The version histories of many records of one type, for a measure over a roster (trends reads where
+   * each stay was, day by day). One read grant check and ONE audited list row, like list(), rather than
+   * a row per record. A history that could not be read is null in the answer, never an empty history.
+   */
+  async histories(resourceType, ids) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const list = [...new Set((ids || []).map(String))], out = new Map();
+    for (let i = 0; i < list.length; i += 8) {
+      const got = await Promise.allSettled(list.slice(i, i + 8).map((id) => this.repository.history(this.tenantId, resourceType, id)));
+      got.forEach((g, k) => out.set(list[i + k], g.status === "fulfilled" ? g.value : null));
+    }
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, history: true, records: list.length }, resourceCounts: { [resourceType]: list.length } }));
+    return out;
+  }
+
+  /**
    * A roster: the latest version of every record of one type in this tenant. Capped, and audited
    * as a list rather than a read, because a ward list is the one legitimate cross-patient query.
    */
@@ -707,6 +827,17 @@ class RecordService {
     return hit || null;
   }
 
+  /**
+   * A write refused by a rule of the caller's own (separation of duties), audited exactly as a
+   * governance refusal inside put() is: record.denied, outcome denied, nothing written. Throws when the
+   * audit row cannot be written, so a refusal is never silently unrecorded.
+   */
+  async auditDenied(resourceType, id, reasons, patientId) {
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.denied", {
+      scope: { resourceType, id, reasons: (reasons || []).map(String) }, patientId: patientId || null, outcome: "denied",
+    }));
+  }
+
   /** The whole chart: latest version of every resource in the patient's compartment. */
   async chart(patientId) {
     const out = {};
@@ -723,14 +854,20 @@ class RecordService {
   }
 
   /** Everything written to this tenant after a cursor. How a second client learns what changed. */
-  async changes(since, limit) {
+  /** opts: { newest, before } for newest-first reading (repository changes()); omitted, the ascending sync feed. */
+  async changes(since, limit, opts) {
     if (!this.governed) throw new RecordRequestError("no store", "NO_STORE");
     // The governed store has no change feed of its own; this is a READ and is gated the same way.
     this.governed._assertRead(this.actor);
-    const raw = await this.repository.changes(this.tenantId, since, limit);
+    const newest = !!(opts && opts.newest);
+    const raw = await this.repository.changes(this.tenantId, since, limit, newest ? { newest: true, before: opts.before } : undefined);
     // The cursor advances over everything; the records handed back are only what may be read.
-    const page = { records: raw.records.filter((r) => canRead(this.actor, r.resourceType)), cursor: raw.cursor };
-    await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, cursor: page.cursor, withheld: raw.records.length - page.records.length }, resourceCounts: { records: page.records.length } }));
+    /* The statutory registers (registers.js) share this store as internal types and are NEVER handed out here: a null
+     * read scope admits every type, and a Form F, an MTP case or a medico-legal case must reach nobody except
+     * through its own register's route. */
+    /* The blood centre's confidential registers likewise reach only a grant that names them (bloodCentreOnlyReadable). */
+    const page = { records: raw.records.filter((r) => canRead(this.actor, r.resourceType) && !String(r.resourceType || "").startsWith("_wardsynq_register") && bloodCentreOnlyReadable(this.actor, r.resourceType)), cursor: raw.cursor };
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, ...(newest ? { newest: true, before: Number(opts.before) || null } : {}), cursor: page.cursor, withheld: raw.records.length - page.records.length }, resourceCounts: { records: page.records.length } }));
     return page;
   }
 
@@ -885,7 +1022,8 @@ class RecordService {
         const patientId = entity.resourceType === "Patient" ? entity.id : (entity.patientId || null);
         const current = await self.repository.latest(self.tenantId, entity.resourceType, entity.id);
         const auditEvent = await self._audit("record.ingest", {
-          scope: { resourceType: entity.resourceType, id: entity.id, version: (current ? current.version : 0) + 1, system: entity.meta && entity.meta.source && entity.meta.source.system },
+          // opts.auditScope(entity): what the caller must say on this entity's audit row (the policy that decided it).
+          scope: { resourceType: entity.resourceType, id: entity.id, version: (current ? current.version : 0) + 1, system: entity.meta && entity.meta.source && entity.meta.source.system, ...((opts.auditScope && opts.auditScope(entity)) || {}) },
           resourceCounts: { [entity.resourceType]: 1 }, patientId,
         });
         auditEvent.actor = adapterActor.id;
@@ -929,7 +1067,7 @@ class RecordService {
 }
 
 export {
-  RESOURCE_TYPES, MODE, NATIVE_SYSTEM, isExternalRecord,
+  RESOURCE_TYPES, BLOOD_CENTRE_ONLY, bloodCentreOnlyReadable, MODE, NATIVE_SYSTEM, isExternalRecord,
   AuthorityError, RecordRequestError, IdempotencyConflictError,
   TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
 };

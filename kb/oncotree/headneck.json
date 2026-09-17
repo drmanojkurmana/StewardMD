@@ -1,15 +1,15 @@
 {
   "guideline": "headneck",
   "title": "Head & Neck Cancer",
-  "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "3.0.0",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
   "diseaseId": "headneck_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "ONCOTREE navigator DRAFT for squamous-cell head and neck cancer. Full pathway by subsite (oral cavity, oropharynx with HPV/p16 status, larynx/hypopharynx, nasopharynx), then workup -> AJCC staging / risk stratification -> early single-modality vs locally advanced treatment, with every locally advanced arm refined THROUGH a response / restaging decision (post-chemoradiation restaging, induction response, larynx-preservation selection, EBV-DNA-guided adjuvant) before the next step, curative arms routing surgery -> risk-directed adjuvant -> surveillance and definitive chemoradiation -> restaging -> surveillance or salvage. Recurrent / metastatic disease carries a line-of-therapy sub-tree (first line by PD-L1 CPS -> on progression -> second line -> later line / best supportive care). Treatment leaves route to APPLICABLE existing StewardMD Standard Protocols by reference; surgery, radiation, and regimens without a dose protocol (induction TPF, gemcitabine-cisplatin) are shown as checklist guidance with NO dose. Invents no dose/regimen/criterion. Structural pathway consistent with standard oncology references; no proprietary guideline text reproduced. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
-  "sourceNote": "Structural pathway consistent with standard guidelines (NCCN Head and Neck Cancers, DeVita, Harrison). Regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
+  "provenanceNote": "NCCN Guidelines Version 2.2026 clinical navigator for squamous-cell head and neck cancer (Head and Neck Cancers, May 12, 2026). Full pathway: unified diagnostic workup (fiberoptic nasopharyngolaryngoscopy, biopsy or FNA, mandatory p16 IHC surrogate for oncogenic HPV in all oropharyngeal carcinomas, EBER in situ hybridization or plasma EBV DNA for nasopharynx, skull-base-to-clavicle CT/MRI, whole-body FDG-PET/CT, PD-L1 CPS plus NTRK/RET testing for recurrent/metastatic disease, dental/speech-swallow/audiogram clearance) -> subsite triage (oral cavity, oropharynx by p16, larynx/hypopharynx, nasopharynx, recurrent/metastatic) -> AJCC staging -> early single-modality vs locally advanced combined-modality therapy: oral cavity upfront surgery with selective/comprehensive neck dissection then Sedlis-type pathologic risk stratification (positive margin or extranodal extension ENE -> adjuvant concurrent cisplatin 100 mg/m2 every 3 weeks + RT 60-66 Gy per RTOG 9501 / EORTC 22931); oropharynx/larynx/hypopharynx definitive chemoradiation with high-dose concurrent cisplatin 100 mg/m2 on days 1, 22, 43 + IMRT 70 Gy in 35 fractions (Category 1 preferred), or transoral robotic surgery (TORS) for early p16-positive oropharynx; every locally advanced arm refined THROUGH a response/restaging decision (post-chemoradiation restaging, induction response, larynx-preservation selection, EBV-DNA-guided adjuvant) before the next step. Recurrent/metastatic disease carries a dedicated re-workup plus line-of-therapy sub-tree by PD-L1 CPS: pembrolizumab monotherapy for CPS >= 1 or pembrolizumab + platinum + 5-FU (Category 1 preferred, KEYNOTE-048), cetuximab + platinum + 5-FU EXTREME regimen for CPS < 1 (Category 1), nivolumab second-line after platinum (Category 1, CheckMate 141) or pembrolizumab (KEYNOTE-040). Treatment leaves route to APPLICABLE existing StewardMD Standard Protocols by reference; surgery, radiation, and regimens without a dose protocol are shown as checklist guidance with NO dose. No proprietary guideline text reproduced. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Head and Neck Cancers Version 2.2026 (May 12, 2026).",
   "startNodeIds": [
-    "n_hn_entry"
+    "n_workup"
   ],
   "footnotes": {
     "a": {
@@ -21,7 +21,19 @@
       "evidence": "2A"
     },
     "c": {
-      "text": "In first-line recurrent/metastatic disease, PD-L1 CPS guides checkpoint-inhibitor selection: pembrolizumab monotherapy for CPS >= 1 (favored in lower-burden disease), pembrolizumab + platinum + 5-FU for any CPS (favored for higher tumor burden or rapid progression), and platinum + 5-FU + cetuximab (EXTREME) when immunotherapy is not suitable.",
+      "text": "First-line recurrent/metastatic therapy is PD-L1 CPS-directed per KEYNOTE-048: pembrolizumab monotherapy for CPS >= 1 (Category 1 preferred, favored in lower-burden disease) or pembrolizumab + platinum + 5-FU (Category 1 preferred, favored for higher tumor burden or rapid progression); for CPS < 1, platinum + 5-FU + cetuximab (EXTREME) is the Category 1 preferred regimen.",
+      "evidence": "1"
+    },
+    "f": {
+      "text": "After progression on platinum-based therapy, nivolumab is the Category 1 preferred second-line option (CheckMate 141: overall survival benefit versus single-agent chemotherapy); pembrolizumab is a Category 1 alternative (KEYNOTE-040).",
+      "evidence": "1"
+    },
+    "g": {
+      "text": "High-risk postoperative pathology (positive surgical margin and/or extranodal extension) calls for concurrent chemoradiation with cisplatin 100 mg/m2 every 3 weeks + RT 60-66 Gy (RTOG 9501 / EORTC 22931, Category 1).",
+      "evidence": "1"
+    },
+    "h": {
+      "text": "Definitive concurrent chemoradiation uses high-dose cisplatin 100 mg/m2 IV on days 1, 22, and 43 with IMRT 70 Gy in 35 fractions (Category 1 preferred locoregional organ-preservation standard).",
       "evidence": "1"
     },
     "d": {
@@ -35,13 +47,36 @@
   },
   "nodes": [
     {
+      "id": "n_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Diagnostic workup",
+      "title": "Head and neck: diagnostic workup and staging evaluation",
+      "section": "Workup",
+      "description": "Complete baseline evaluation before subsite and staging triage: confirm squamous histology, map locoregional extent, screen for distant disease, establish mandatory biomarkers, and complete pre-treatment multidisciplinary clearance.",
+      "path": "Head & Neck / Workup",
+      "pills": ["workup"],
+      "required": true,
+      "bullets": [
+        "Complete head and neck examination with flexible fiberoptic nasopharyngolaryngoscopy to map the primary site and assess vocal-cord mobility and airway",
+        "Biopsy of the primary site or fine-needle aspiration (FNA) of a suspicious cervical lymph node confirming squamous-cell carcinoma",
+        "Mandatory biomarkers: p16 immunohistochemistry (IHC) as a surrogate for oncogenic HPV, mandatory for all oropharyngeal carcinomas; EBER in situ hybridization or plasma EBV DNA PCR for nasopharyngeal carcinoma",
+        "Diagnostic imaging: contrast-enhanced CT or MRI from skull base to clavicles for primary and nodal extent; whole-body FDG-PET/CT (Category 1 for locally advanced stage III-IV disease, unknown primary, or post-treatment assessment)",
+        "Mandatory recurrent/metastatic biomarkers when recurrence is suspected or confirmed: PD-L1 IHC with CPS score, NTRK fusion testing, RET fusion testing",
+        "Pre-treatment multidisciplinary care: Dental oncology clearance before radiation; baseline speech and swallowing assessment; audiogram before high-dose cisplatin; nutrition, smoking-cessation, and tumor-board review"
+      ],
+      "options": [
+        { "id": "continue", "label": "Diagnostic Workup Reviewed — Proceed to Subsite & Staging Triage", "setsValue": null }
+      ]
+    },
+    {
       "id": "n_hn_entry",
       "nodeCategory": "criteria",
       "nodeType": "question",
       "name": "Subsite",
       "title": "Primary subsite / presentation",
       "section": "Contents",
-      "description": "Squamous-cell head and neck cancer management branches first by primary subsite; nasopharynx is a distinct entity. Select the anatomic site, or enter directly at the recurrent/metastatic pathway.",
+      "description": "Workup complete - management now branches by primary subsite; nasopharynx is a distinct entity. Select the anatomic site, or enter the recurrent/metastatic re-workup pathway.",
       "path": "Head & Neck / Subsite",
       "pills": ["subsite"],
       "required": true,
@@ -67,19 +102,20 @@
       "name": "Oral cavity workup",
       "title": "Oral cavity: workup",
       "section": "Workup",
-      "description": "Confirm squamous histology, define local extent (bone, depth of invasion) and nodal/distant status.",
+      "description": "Subsite-specific evaluation after the unified diagnostic workup: confirm squamous histology, define local extent (bone, depth of invasion) and nodal/distant status.",
       "path": "Head & Neck / Oral cavity / Workup",
       "pills": ["oral cavity", "workup"],
       "required": true,
       "bullets": [
-        "History and physical incl. complete head-and-neck exam and dental evaluation; biopsy confirming squamous-cell carcinoma",
-        "Contrast CT and/or MRI of primary and neck; assess mandibular/maxillary bone invasion and depth of invasion",
-        "Chest imaging; PET-CT for stage III-IVB or clinically node-positive disease to exclude distant metastases / second primary",
-        "Examination under anesthesia / panendoscopy as indicated; nutrition, speech-and-swallow, and smoking-cessation assessment",
-        "Multidisciplinary tumor-board review before treatment"
+        "Complete head and neck examination with flexible fiberoptic nasopharyngolaryngoscopy; oral-cavity inspection and palpation with dental oncology evaluation",
+        "Biopsy of the primary site confirming squamous-cell carcinoma; fine-needle aspiration (FNA) of any suspicious cervical lymph node",
+        "Contrast-enhanced CT or MRI from skull base to clavicles; assess mandibular/maxillary bone invasion and depth of invasion",
+        "Whole-body FDG-PET/CT (Category 1 for locally advanced stage III-IV disease or clinically node-positive neck) plus chest imaging to exclude distant metastases and second primary",
+        "Record p16 status where relevant; for any recurrent/metastatic presentation obtain PD-L1 IHC (CPS score), NTRK and RET fusion testing",
+        "Pre-treatment clearance: dental oncology clearance before radiation; baseline speech and swallowing assessment; audiogram before high-dose cisplatin; nutrition, smoking-cessation, and tumor-board review"
       ],
       "options": [
-        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+        { "id": "continue", "label": "Diagnostic Workup Reviewed — Proceed to Staging", "setsValue": null }
       ]
     },
     {
@@ -89,20 +125,21 @@
       "name": "Oropharynx workup",
       "title": "Oropharynx: workup (incl. HPV/p16)",
       "section": "Workup",
-      "description": "Standard head-and-neck workup plus HPV/p16 testing, which is prognostic and determines staging.",
+      "description": "Subsite-specific evaluation after the unified diagnostic workup: standard head-and-neck workup plus mandatory HPV/p16 testing, which is prognostic and determines staging.",
       "path": "Head & Neck / Oropharynx / Workup",
       "pills": ["oropharynx", "workup"],
       "required": true,
       "footnotes": ["b"],
       "bullets": [
-        "Biopsy confirming squamous-cell carcinoma; p16 immunohistochemistry (surrogate for HPV) on tumor or nodal metastasis",
-        "Contrast CT/MRI of primary and neck; PET-CT for staging and to identify an occult primary in nodal presentations",
-        "Chest imaging; dental, nutrition, and speech-and-swallow evaluation",
-        "For cystic neck node with unknown primary - HPV/p16 testing of the node points to an oropharyngeal origin",
-        "Multidisciplinary tumor-board review"
+        "Complete head and neck examination with flexible fiberoptic nasopharyngolaryngoscopy",
+        "Biopsy of the primary site confirming squamous-cell carcinoma; fine-needle aspiration (FNA) of any suspicious cervical node",
+        "Mandatory p16 immunohistochemistry (IHC) as a surrogate for oncogenic HPV for all oropharyngeal carcinomas, on tumor or nodal metastasis; for a cystic neck node with unknown primary, HPV/p16 testing of the node points to an oropharyngeal origin",
+        "Contrast-enhanced CT or MRI from skull base to clavicles; whole-body FDG-PET/CT (Category 1 for locally advanced stage III-IV disease and for occult-primary nodal presentations) plus chest imaging",
+        "For any recurrent/metastatic presentation obtain PD-L1 IHC (CPS score), NTRK and RET fusion testing",
+        "Pre-treatment clearance: dental oncology clearance before radiation; baseline speech and swallowing assessment; audiogram before high-dose cisplatin; nutrition, smoking-cessation, and tumor-board review"
       ],
       "options": [
-        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+        { "id": "continue", "label": "Diagnostic Workup Reviewed — Proceed to p16 Stratification", "setsValue": null }
       ]
     },
     {
@@ -112,19 +149,20 @@
       "name": "Larynx/hypopharynx workup",
       "title": "Larynx / hypopharynx: workup",
       "section": "Workup",
-      "description": "Define primary extent and laryngeal function to inform organ-preservation vs surgical options.",
+      "description": "Subsite-specific evaluation after the unified diagnostic workup: define primary extent and laryngeal function to inform organ-preservation vs surgical options.",
       "path": "Head & Neck / Larynx / Workup",
       "pills": ["larynx/hypopharynx", "workup"],
       "required": true,
       "bullets": [
-        "Biopsy confirming squamous-cell carcinoma; laryngoscopy documenting vocal-cord mobility and airway",
-        "Contrast CT/MRI of primary and neck; assess cartilage invasion and pre-epiglottic/paraglottic spread",
-        "Chest imaging; PET-CT for stage III-IVB or node-positive disease",
-        "Baseline speech-and-swallow and pulmonary assessment (relevant to laryngectomy vs preservation)",
-        "Multidisciplinary tumor-board review"
+        "Complete head and neck examination with flexible fiberoptic nasopharyngolaryngoscopy documenting vocal-cord mobility and airway",
+        "Biopsy of the primary site confirming squamous-cell carcinoma; fine-needle aspiration (FNA) of any suspicious cervical node",
+        "Contrast-enhanced CT or MRI from skull base to clavicles; assess cartilage invasion and pre-epiglottic/paraglottic spread",
+        "Whole-body FDG-PET/CT (Category 1 for locally advanced stage III-IV disease or node-positive neck) plus chest imaging",
+        "Record p16 status where relevant; for any recurrent/metastatic presentation obtain PD-L1 IHC (CPS score), NTRK and RET fusion testing",
+        "Pre-treatment clearance: dental oncology clearance before radiation; baseline speech and swallowing assessment with pulmonary review (relevant to laryngectomy vs preservation); audiogram before high-dose cisplatin; nutrition, smoking-cessation, and tumor-board review"
       ],
       "options": [
-        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+        { "id": "continue", "label": "Diagnostic Workup Reviewed — Proceed to Staging", "setsValue": null }
       ]
     },
     {
@@ -134,20 +172,20 @@
       "name": "Nasopharynx workup",
       "title": "Nasopharynx: workup (incl. EBV)",
       "section": "Workup",
-      "description": "Distinct EBV-associated entity - nasopharyngeal-specific imaging and EBV testing.",
+      "description": "Subsite-specific evaluation after the unified diagnostic workup: distinct EBV-associated entity needing nasopharyngeal-specific imaging and EBV testing.",
       "path": "Head & Neck / Nasopharynx / Workup",
       "pills": ["nasopharynx", "workup"],
       "required": true,
       "footnotes": ["d"],
       "bullets": [
-        "Nasopharyngeal endoscopy and biopsy; WHO histologic type",
-        "MRI of nasopharynx and skull base (superior for perineural/intracranial extent) plus neck; PET-CT for regional/distant staging",
-        "Plasma EBV DNA (prognostic and used for response assessment and post-treatment monitoring)",
-        "Audiometry, dental, nutrition, and thyroid/pituitary baseline (radiation field considerations)",
-        "Multidisciplinary tumor-board review"
+        "Complete head and neck examination with flexible fiberoptic nasopharyngolaryngoscopy; nasopharyngeal endoscopy and biopsy with WHO histologic type, plus FNA of suspicious cervical nodes",
+        "Mandatory EBV assessment: EBER in situ hybridization on tumor tissue and/or plasma EBV DNA PCR (prognostic and used for response assessment and post-treatment monitoring)",
+        "MRI of nasopharynx and skull base (superior for perineural/intracranial extent) plus contrast-enhanced imaging of the neck from skull base to clavicles; whole-body FDG-PET/CT (Category 1) for regional/distant staging",
+        "For any recurrent/metastatic presentation also obtain PD-L1 IHC (CPS score), NTRK and RET fusion testing",
+        "Pre-treatment clearance: dental oncology clearance before radiation; baseline speech and swallowing assessment; audiometry/audiogram before cisplatin; thyroid/pituitary baseline (radiation field considerations); nutrition and tumor-board review"
       ],
       "options": [
-        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+        { "id": "continue", "label": "Diagnostic Workup Reviewed — Proceed to Staging", "setsValue": null }
       ]
     },
     {
@@ -301,15 +339,16 @@
       "name": "Oral cavity early",
       "title": "Oral cavity, early (I-II): surgery, then pathology review",
       "section": "Treatment",
-      "description": "Single-modality surgery, then final pathology decides whether risk-directed adjuvant therapy is needed.",
+      "description": "Upfront surgical resection with neck dissection (single modality), then final pathology decides whether risk-directed adjuvant therapy is needed.",
       "path": "Head & Neck / Oral cavity / Early",
       "pills": ["stage I-II", "treatment"],
       "evidenceCategory": ["2A"],
       "showsRecommendation": true,
+      "footnotes": ["g"],
       "bullets": [
-        "Wide surgical excision of the primary to negative margins, with neck dissection (elective for depth of invasion beyond a few mm or clinically node-positive)",
+        "Upfront wide surgical resection of the primary to negative margins with selective or comprehensive neck dissection (elective dissection for depth of invasion beyond a few mm or a clinically node-positive neck)",
         "Definitive radiation is an alternative when surgery would cause major functional loss or the patient is inoperable",
-        "Review final pathology for adverse features, then proceed to the postoperative risk-stratification step",
+        "Review final pathology for adverse features using Sedlis-type stratification (intermediate-risk features vs high-risk positive margin or extranodal extension ENE), then proceed to the postoperative risk-stratification step",
         "No routine systemic therapy for truly early, fully resected, low-risk disease"
       ]
     },
@@ -320,16 +359,16 @@
       "name": "Oropharynx early",
       "title": "Oropharynx, early (I-II): single modality",
       "section": "Treatment",
-      "description": "Early oropharyngeal cancer is treated with a single modality - definitive radiation or transoral surgery.",
+      "description": "Early oropharyngeal cancer is treated with a single modality - definitive radiation or transoral robotic surgery (TORS), particularly for p16-positive disease.",
       "path": "Head & Neck / Oropharynx / Early",
       "pills": ["stage I-II", "treatment"],
       "evidenceCategory": ["2A"],
       "showsRecommendation": true,
       "footnotes": ["b"],
       "bullets": [
-        "Definitive radiation to primary and neck, OR transoral (TORS) resection with neck dissection",
+        "Definitive radiation to primary and neck, OR transoral robotic surgery (TORS) resection with selective neck dissection - TORS is a preferred single-modality option for early p16-positive oropharynx (e.g. T1-2 N0-1)",
         "Choice balances functional outcome (swallow, xerostomia) and patient factors; treat p16-positive disease to standard intensity (de-escalation is investigational)",
-        "If surgery reveals adverse pathology, add risk-directed adjuvant therapy",
+        "If surgery reveals adverse pathology (positive margin or extranodal extension ENE), add concurrent cisplatin-based adjuvant therapy per RTOG 9501 / EORTC 22931",
         "Elective nodal coverage/dissection given the high rate of occult nodal disease"
       ]
     },
@@ -445,14 +484,14 @@
       "name": "Oral cavity LA definitive CRT",
       "title": "Oral cavity, unresectable: definitive concurrent chemoradiation",
       "section": "Treatment",
-      "description": "Definitive radiation with concurrent cisplatin for unresectable or inoperable locally advanced disease, then response-adapted restaging.",
+      "description": "Definitive IMRT 70 Gy in 35 fractions with concurrent high-dose cisplatin 100 mg/m2 on days 1, 22, 43 (Category 1 preferred) for unresectable or inoperable locally advanced disease, then response-adapted restaging.",
       "path": "Head & Neck / Oral cavity / LA / Definitive CRT",
       "pills": ["definitive CRT", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
-      "footnotes": ["e"],
+      "footnotes": ["e", "h"],
       "bullets": [
-        "Definitive radiation to the primary and neck with concurrent high-dose cisplatin",
+        "Definitive IMRT 70 Gy in 35 fractions to the primary and neck with concurrent high-dose cisplatin 100 mg/m2 IV on days 1, 22, and 43 (Category 1 preferred)",
         "Cetuximab-radiation is an alternative when cisplatin is contraindicated (less effective than cisplatin)",
         "Restage after treatment; residual nodal disease is addressed surgically (next step)",
         "Regimen referenced below"
@@ -466,14 +505,14 @@
       "name": "Oropharynx LA chemoRT",
       "title": "Oropharynx, LA: concurrent chemoradiation",
       "section": "Treatment",
-      "description": "Definitive radiation with concurrent high-dose cisplatin - the standard organ-preserving option - then response-adapted restaging.",
+      "description": "Definitive IMRT 70 Gy in 35 fractions with concurrent high-dose cisplatin 100 mg/m2 on days 1, 22, 43 (Category 1 preferred) - the standard organ-preserving option - then response-adapted restaging.",
       "path": "Head & Neck / Oropharynx / LA / ChemoRT",
       "pills": ["concurrent CRT", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
-      "footnotes": ["e"],
+      "footnotes": ["e", "h"],
       "bullets": [
-        "Definitive radiation to primary and neck with concurrent high-dose cisplatin",
+        "Definitive IMRT 70 Gy in 35 fractions to primary and neck with concurrent high-dose cisplatin 100 mg/m2 IV on days 1, 22, and 43 (Category 1 preferred)",
         "Cetuximab-radiation if cisplatin is contraindicated (inferior to cisplatin, particularly in p16-positive disease)",
         "Restage after treatment; neck dissection for residual nodal disease (next step)",
         "Regimen referenced below"
@@ -487,14 +526,14 @@
       "name": "Larynx LA chemoRT",
       "title": "Larynx / hypopharynx, LA: concurrent chemoradiation",
       "section": "Treatment",
-      "description": "Concurrent cisplatin-radiation preserves the larynx in appropriately selected locally advanced disease, then response-adapted restaging.",
+      "description": "Definitive IMRT 70 Gy in 35 fractions with concurrent high-dose cisplatin 100 mg/m2 on days 1, 22, 43 (Category 1 preferred) preserves the larynx in appropriately selected locally advanced disease, then response-adapted restaging.",
       "path": "Head & Neck / Larynx / LA / ChemoRT",
       "pills": ["concurrent CRT", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
-      "footnotes": ["e"],
+      "footnotes": ["e", "h"],
       "bullets": [
-        "Definitive radiation with concurrent high-dose cisplatin for larynx preservation",
+        "Definitive IMRT 70 Gy in 35 fractions with concurrent high-dose cisplatin 100 mg/m2 IV on days 1, 22, and 43 for larynx preservation (Category 1 preferred)",
         "Cetuximab-radiation if cisplatin is contraindicated",
         "Total laryngectomy reserved for salvage of persistent/recurrent disease or a non-functional larynx",
         "Regimen referenced below"
@@ -508,14 +547,14 @@
       "name": "Nasopharynx CRT",
       "title": "Nasopharynx, stage II-IVA: concurrent chemoradiation",
       "section": "Treatment",
-      "description": "Concurrent high-dose cisplatin with definitive radiation, then EBV-DNA-guided restaging.",
+      "description": "Concurrent high-dose cisplatin 100 mg/m2 with definitive IMRT, then EBV-DNA-guided restaging.",
       "path": "Head & Neck / Nasopharynx / LA / CRT",
       "pills": ["concurrent CRT", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
-      "footnotes": ["d"],
+      "footnotes": ["d", "h"],
       "bullets": [
-        "Concurrent high-dose cisplatin with definitive intensity-modulated radiation",
+        "Concurrent high-dose cisplatin 100 mg/m2 IV every 3 weeks with definitive intensity-modulated radiation (Category 1 preferred backbone)",
         "Elective irradiation of bilateral neck given the high nodal-involvement rate",
         "Post-treatment plasma EBV DNA guides whether adjuvant chemotherapy is added (next step)",
         "Concurrent cisplatin-radiation regimen referenced below"
@@ -537,7 +576,7 @@
       "footnotes": ["d"],
       "bullets": [
         "Induction gemcitabine + cisplatin (or docetaxel/cisplatin/5-FU) before chemoradiation for stage III-IVA / bulky nodal disease",
-        "Then concurrent high-dose cisplatin with definitive radiation",
+        "Then concurrent high-dose cisplatin 100 mg/m2 every 3 weeks with definitive intensity-modulated radiation",
         "Post-treatment plasma EBV DNA guides adjuvant chemotherapy (next step)",
         "Concurrent cisplatin-radiation and induction gemcitabine-cisplatin regimens referenced below"
       ],
@@ -588,14 +627,14 @@
       "name": "Post-induction chemoRT",
       "title": "After induction (responder): radiation-based local therapy",
       "section": "Treatment",
-      "description": "Responders proceed to definitive radiation with a concurrent systemic agent, then response-adapted restaging.",
+      "description": "Responders proceed to definitive IMRT 70 Gy in 35 fractions with concurrent high-dose cisplatin 100 mg/m2, then response-adapted restaging.",
       "path": "Head & Neck / Induction / Responder / ChemoRT",
       "pills": ["responder", "treatment"],
       "evidenceCategory": ["2A"],
       "showsRecommendation": true,
-      "footnotes": ["e"],
+      "footnotes": ["e", "h"],
       "bullets": [
-        "Definitive radiation with a concurrent systemic agent (cisplatin, or carboplatin/cetuximab if cisplatin unsuitable)",
+        "Definitive IMRT 70 Gy in 35 fractions with a concurrent systemic agent (high-dose cisplatin 100 mg/m2 IV on days 1, 22, and 43 preferred; carboplatin/cetuximab if cisplatin unsuitable)",
         "Then restage; residual nodal disease is addressed surgically (next step)",
         "De-intensification after induction remains investigational - treat to standard intensity",
         "Concurrent cisplatin-radiation regimen referenced below"
@@ -666,14 +705,14 @@
       "name": "Larynx preservation RT",
       "title": "Larynx (responder): definitive radiation for preservation",
       "section": "Treatment",
-      "description": "Good responders proceed to larynx-preserving radiation with a concurrent systemic agent, then response-adapted restaging.",
+      "description": "Good responders proceed to larynx-preserving IMRT 70 Gy in 35 fractions with concurrent high-dose cisplatin 100 mg/m2, then response-adapted restaging.",
       "path": "Head & Neck / Larynx / Induction / Preserve",
       "pills": ["responder", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
-      "footnotes": ["e"],
+      "footnotes": ["e", "h"],
       "bullets": [
-        "Definitive radiation with a concurrent systemic agent for larynx preservation",
+        "Definitive IMRT 70 Gy in 35 fractions with a concurrent systemic agent for larynx preservation (high-dose cisplatin 100 mg/m2 IV on days 1, 22, and 43 preferred, Category 1)",
         "Then restage; salvage laryngectomy for persistent/recurrent disease",
         "Neck dissection for residual nodal disease (next step)",
         "Concurrent cisplatin-radiation regimen referenced below"
@@ -778,18 +817,18 @@
       "name": "Adjuvant risk",
       "title": "Postoperative risk stratification",
       "section": "Treatment",
-      "description": "After resection, adverse pathology determines adjuvant therapy. Extranodal extension or a positive margin (high risk) calls for concurrent chemoradiation; other adverse features favor radiation alone; none favors observation.",
+      "description": "After resection, Sedlis-type pathologic risk stratification determines adjuvant therapy. Positive margin or extranodal extension ENE (high risk) calls for concurrent cisplatin chemoradiation per RTOG 9501 / EORTC 22931; other adverse features (intermediate risk) favor radiation alone; none favors observation.",
       "path": "Head & Neck / Adjuvant / Risk",
       "pills": ["adjuvant", "risk"],
       "required": true,
-      "footnotes": ["a"],
+      "footnotes": ["a", "g"],
       "tables": [
         {
-          "title": "Postoperative adverse features and adjuvant therapy",
+          "title": "Postoperative adverse features and adjuvant therapy (Sedlis-type)",
           "headers": ["Risk group", "Pathologic feature", "Adjuvant therapy"],
           "rows": [
-            ["High", "Extranodal (extracapsular) extension and/or positive margin", "Concurrent chemoradiation (cisplatin-RT)"],
-            ["Intermediate", "pT3-4, N2-3, perineural/lymphovascular invasion, close margin", "Radiation alone"],
+            ["High", "Positive surgical margin and/or extranodal (extracapsular) nodal extension ENE", "Concurrent chemoradiation: cisplatin 100 mg/m2 q3w + RT 60-66 Gy (RTOG 9501 / EORTC 22931, Category 1)"],
+            ["Intermediate", "pT3-4, N2-3, perineural/lymphovascular invasion, close margin", "Radiation alone (60-66 Gy)"],
             ["Low", "None of the above, negative margins", "Observation"]
           ]
         }
@@ -807,16 +846,16 @@
       "name": "Adjuvant chemoRT",
       "title": "Adjuvant: concurrent chemoradiation (high risk)",
       "section": "Treatment",
-      "description": "High-risk pathology - postoperative radiation with concurrent cisplatin, then surveillance.",
+      "description": "High-risk pathology (positive margin and/or extranodal extension ENE) - postoperative radiation with concurrent high-dose cisplatin 100 mg/m2 q3w per RTOG 9501 / EORTC 22931, then surveillance.",
       "path": "Head & Neck / Adjuvant / ChemoRT",
       "pills": ["ECE / +margin", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
-      "footnotes": ["a"],
+      "footnotes": ["a", "g"],
       "bullets": [
-        "Postoperative radiation with concurrent high-dose cisplatin",
+        "Postoperative IMRT 60-66 Gy to the tumor bed and at-risk neck with concurrent cisplatin 100 mg/m2 IV every 3 weeks (RTOG 9501 / EORTC 22931, Category 1)",
         "Start radiation promptly (ideally within ~6 weeks of surgery)",
-        "Cisplatin alternatives (e.g. weekly cisplatin, carboplatin) if high-dose cisplatin not tolerated",
+        "Weekly cisplatin or carboplatin-based alternatives only if high-dose q3w cisplatin is not tolerated",
         "Then structured surveillance (next step); regimen referenced below"
       ],
       "protocolRefs": ["hn-cisplatin-rt"]
@@ -933,8 +972,30 @@
         "TSH every 6-12 months if the neck was irradiated; dental, speech, swallow, and smoking-cessation support",
         "For nasopharynx - serial plasma EBV DNA; investigate new symptoms promptly"
       ],
-      "linkTo": "n_rm_setting",
-      "linkLabel": "If recurrence or metastasis is detected: go to the Recurrence / Metastatic pathway"
+      "linkTo": "n_rm_workup",
+      "linkLabel": "If recurrence or metastasis is detected: go to the Recurrence / Metastatic re-workup pathway"
+    },
+    {
+      "id": "n_rm_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Recurrence workup",
+      "title": "Recurrent / metastatic: diagnostic re-workup",
+      "section": "Recurrence",
+      "description": "Confirm recurrence histologically, restage fully, and establish the predictive biomarkers that direct salvage versus line-of-therapy systemic treatment.",
+      "path": "Head & Neck / Recurrent / Workup",
+      "pills": ["recurrence", "workup"],
+      "required": true,
+      "bullets": [
+        "Complete head and neck examination with flexible fiberoptic nasopharyngolaryngoscopy; Biopsy of the recurrent lesion or FNA of a new cervical node to confirm squamous recurrence",
+        "Restaging with contrast-enhanced CT or MRI from skull base to clavicles plus whole-body FDG-PET/CT (Category 1 for post-treatment assessment and unknown-primary presentations)",
+        "Mandatory recurrent/metastatic biomarkers: PD-L1 IHC with CPS score (directs KEYNOTE-048 first-line selection), NTRK fusion testing, RET fusion testing",
+        "Review prior treatment: cumulative cisplatin exposure, prior radiation fields and doses, prior checkpoint-inhibitor exposure, and platinum-free interval",
+        "Pre-treatment multidisciplinary care: dental oncology review if re-irradiation is considered; speech and swallowing reassessment; audiogram before further cisplatin; goals-of-care discussion and clinical-trial screening"
+      ],
+      "options": [
+        { "id": "continue", "label": "Diagnostic Workup Reviewed — Proceed to Recurrence & Line-of-Therapy Triage", "setsValue": null }
+      ]
     },
     {
       "id": "n_rm_setting",
@@ -943,13 +1004,13 @@
       "name": "Recurrent/metastatic setting",
       "title": "Recurrent / metastatic: setting",
       "section": "Recurrence",
-      "description": "Distinguish an isolated, potentially salvageable locoregional recurrence from unresectable-recurrent or distant metastatic disease that needs systemic therapy.",
+      "description": "Re-workup complete - distinguish an isolated, potentially salvageable locoregional recurrence from unresectable-recurrent or distant metastatic disease that needs systemic therapy.",
       "path": "Head & Neck / Recurrent / Setting",
       "pills": ["recurrence"],
       "required": true,
       "bullets": [
         "Biopsy to confirm recurrence; restage with PET-CT to define resectability and exclude distant disease",
-        "Obtain PD-L1 CPS (and review prior platinum exposure) before selecting systemic therapy"
+        "Obtain PD-L1 IHC (CPS score), NTRK and RET fusion testing, and review prior platinum exposure before selecting systemic therapy"
       ],
       "options": [
         { "id": "salvage", "label": "Isolated resectable locoregional recurrence", "sets": { "rmSetting": "locoregional_salvage" }, "pills": ["salvageable"] },
@@ -998,26 +1059,26 @@
       "name": "R/M first-line PD-L1",
       "title": "First-line R/M: PD-L1 CPS-directed selection",
       "section": "Recurrence",
-      "description": "First-line systemic therapy is selected by PD-L1 CPS and disease burden. Immunotherapy-based options for PD-L1-expressing tumors; EXTREME when immunotherapy is not suitable.",
+      "description": "First-line systemic therapy is selected by PD-L1 CPS and disease burden per KEYNOTE-048. Pembrolizumab-based options for CPS >= 1; the EXTREME regimen (cetuximab + platinum + 5-FU) is Category 1 preferred for CPS < 1.",
       "path": "Head & Neck / Recurrent / First-line / PD-L1",
       "pills": ["biomarker", "PD-L1"],
       "required": true,
       "footnotes": ["c"],
       "tables": [
         {
-          "title": "PD-L1 CPS-directed first-line options",
+          "title": "PD-L1 CPS-directed first-line options (KEYNOTE-048)",
           "headers": ["PD-L1 CPS", "Preferred option", "Alternative"],
           "rows": [
-            ["CPS >= 1, lower burden", "Pembrolizumab monotherapy", "Pembrolizumab + chemotherapy"],
-            ["Any CPS, higher burden / rapid progression", "Pembrolizumab + platinum + 5-FU", "EXTREME"],
-            ["IO not suitable / CPS negative", "Platinum + 5-FU + cetuximab (EXTREME)", "Platinum-based chemotherapy"]
+            ["CPS >= 1, lower burden", "Pembrolizumab monotherapy (Category 1 preferred)", "Pembrolizumab + chemotherapy"],
+            ["Any CPS, higher burden / rapid progression", "Pembrolizumab + platinum + 5-FU (Category 1 preferred)", "EXTREME"],
+            ["CPS < 1 or IO not suitable", "Platinum + 5-FU + cetuximab (EXTREME, Category 1)", "Platinum-based chemotherapy"]
           ]
         }
       ],
       "options": [
-        { "id": "pembro_mono", "label": "CPS >= 1, lower burden - pembrolizumab monotherapy", "sets": { "biomarkers.PD_L1": "positive", "rmRegimen": "pembro_mono" }, "pills": ["CPS >= 1"] },
-        { "id": "pembro_chemo", "label": "Any CPS, higher burden - pembrolizumab + chemotherapy", "sets": { "rmRegimen": "pembro_chemo" }, "pills": ["pembro + chemo"] },
-        { "id": "extreme", "label": "IO not suitable - EXTREME (platinum + 5-FU + cetuximab)", "sets": { "biomarkers.PD_L1": "negative", "rmRegimen": "extreme" }, "pills": ["EXTREME"] }
+        { "id": "pembro_mono", "label": "CPS >= 1, lower burden - pembrolizumab monotherapy (KEYNOTE-048, Category 1 preferred)", "sets": { "biomarkers.PD_L1": "positive", "rmRegimen": "pembro_mono" }, "pills": ["CPS >= 1"] },
+        { "id": "pembro_chemo", "label": "Any CPS, higher burden - pembrolizumab + platinum + 5-FU (KEYNOTE-048, Category 1 preferred)", "sets": { "rmRegimen": "pembro_chemo" }, "pills": ["pembro + chemo"] },
+        { "id": "extreme", "label": "CPS < 1 or IO not suitable - EXTREME (cetuximab + platinum + 5-FU, Category 1)", "sets": { "biomarkers.PD_L1": "negative", "rmRegimen": "extreme" }, "pills": ["EXTREME"] }
       ]
     },
     {
@@ -1027,15 +1088,15 @@
       "name": "R/M pembrolizumab mono",
       "title": "First-line R/M: pembrolizumab monotherapy",
       "section": "Recurrence",
-      "description": "PD-L1 CPS >= 1, lower-burden disease - single-agent checkpoint inhibition, then on-progression sequencing.",
+      "description": "PD-L1 CPS >= 1, lower-burden disease - single-agent pembrolizumab per KEYNOTE-048 (Category 1 preferred), then on-progression sequencing.",
       "path": "Head & Neck / Recurrent / First-line / Pembro mono",
       "pills": ["CPS >= 1", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
       "footnotes": ["c"],
       "bullets": [
-        "Pembrolizumab monotherapy for PD-L1 CPS >= 1 without high tumor burden or rapid progression",
-        "Add chemotherapy (see pembrolizumab + chemotherapy) if the disease becomes bulky or rapidly progressing",
+        "Pembrolizumab monotherapy for PD-L1 CPS >= 1 without high tumor burden or rapid progression (KEYNOTE-048, Category 1 preferred)",
+        "Add platinum + 5-FU chemotherapy (see pembrolizumab + chemotherapy) if the disease becomes bulky or rapidly progressing",
         "On progression, move to second-line therapy (next step)",
         "Regimen referenced below"
       ],
@@ -1048,14 +1109,14 @@
       "name": "R/M pembrolizumab + chemo",
       "title": "First-line R/M: pembrolizumab + platinum + 5-FU",
       "section": "Recurrence",
-      "description": "Checkpoint inhibition combined with chemotherapy - broadly active first-line option, favored for higher tumor burden, then on-progression sequencing.",
+      "description": "Pembrolizumab + platinum + 5-FU per KEYNOTE-048 (Category 1 preferred) - broadly active first-line option, favored for higher tumor burden, then on-progression sequencing.",
       "path": "Head & Neck / Recurrent / First-line / Pembro + chemo",
       "pills": ["pembro + chemo", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
       "footnotes": ["c"],
       "bullets": [
-        "Pembrolizumab + platinum (cisplatin or carboplatin) + 5-FU, then pembrolizumab maintenance",
+        "Pembrolizumab + platinum (cisplatin or carboplatin) + 5-FU, then pembrolizumab maintenance (KEYNOTE-048, Category 1 preferred)",
         "Preferred first-line for higher tumor burden or rapid progression, across CPS levels",
         "On progression, move to second-line therapy (next step)",
         "Pembrolizumab + platinum + 5-FU regimen referenced below"
@@ -1069,15 +1130,15 @@
       "name": "R/M EXTREME",
       "title": "First-line R/M: EXTREME (platinum + 5-FU + cetuximab)",
       "section": "Recurrence",
-      "description": "Chemotherapy plus cetuximab when immunotherapy is not suitable, then on-progression sequencing.",
+      "description": "Cetuximab + platinum + 5-FU EXTREME regimen (Category 1) for CPS < 1 disease or when immunotherapy is not suitable, then on-progression sequencing.",
       "path": "Head & Neck / Recurrent / First-line / EXTREME",
       "pills": ["EXTREME", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
       "footnotes": ["c"],
       "bullets": [
-        "Platinum (cisplatin or carboplatin) + 5-FU + cetuximab, then cetuximab maintenance",
-        "Option when checkpoint inhibition is contraindicated (e.g. active autoimmune disease) or unavailable",
+        "Cetuximab + platinum (cisplatin or carboplatin) + 5-FU, then cetuximab maintenance (EXTREME regimen, Category 1 preferred for PD-L1 CPS < 1)",
+        "Also the option when checkpoint inhibition is contraindicated (e.g. active autoimmune disease) or unavailable",
         "On progression, move to second-line therapy (next step)",
         "Regimen referenced below"
       ],
@@ -1090,13 +1151,14 @@
       "name": "R/M post-platinum",
       "title": "R/M after prior platinum: checkpoint inhibitor / cetuximab",
       "section": "Recurrence",
-      "description": "Progression after platinum-based therapy - checkpoint inhibition if not previously given, otherwise chemotherapy or cetuximab-based therapy, then later-line sequencing.",
+      "description": "Platinum-refractory progression - nivolumab (CheckMate 141, Category 1) or pembrolizumab (KEYNOTE-040, Category 1) if a checkpoint inhibitor was not previously given, otherwise chemotherapy or cetuximab-based therapy, then later-line sequencing.",
       "path": "Head & Neck / Recurrent / Post-platinum",
       "pills": ["post-platinum", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
+      "footnotes": ["f"],
       "bullets": [
-        "Nivolumab (or pembrolizumab) if a checkpoint inhibitor was not already used - improves survival vs single-agent chemotherapy",
+        "Nivolumab (CheckMate 141, Category 1 preferred) or pembrolizumab (KEYNOTE-040, Category 1) if a checkpoint inhibitor was not already used - improves survival vs single-agent chemotherapy",
         "If immunotherapy already given: single-agent chemotherapy (taxane, methotrexate) or cetuximab-based therapy",
         "On further progression, move to later-line therapy or best supportive care (next step)",
         "Regimens referenced below"
@@ -1126,13 +1188,14 @@
       "name": "R/M second-line IO",
       "title": "Second-line R/M (IO-naive): checkpoint inhibitor",
       "section": "Recurrence",
-      "description": "A checkpoint inhibitor for patients who progressed on first-line chemotherapy without prior immunotherapy, then later-line sequencing.",
+      "description": "Nivolumab (CheckMate 141, Category 1) or pembrolizumab (KEYNOTE-040, Category 1) for platinum-refractory patients without prior immunotherapy, then later-line sequencing.",
       "path": "Head & Neck / Recurrent / Second-line / IO",
       "pills": ["IO-naive", "treatment"],
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
+      "footnotes": ["f"],
       "bullets": [
-        "Nivolumab (or pembrolizumab) after platinum-based first-line chemotherapy without prior immunotherapy",
+        "Nivolumab after platinum-based first-line chemotherapy without prior immunotherapy (CheckMate 141, Category 1 preferred); pembrolizumab is a Category 1 alternative (KEYNOTE-040)",
         "Improves survival vs single-agent chemotherapy in the post-platinum setting",
         "On progression, move to later-line therapy or best supportive care (next step)",
         "Regimen referenced below"
@@ -1216,11 +1279,13 @@
     }
   ],
   "links": [
+    { "id": "l_wk_entry", "from": "n_workup", "to": "n_hn_entry", "fromOptions": ["continue"], "linkCategory": "conditional" },
     { "id": "l_entry_oral", "from": "n_hn_entry", "to": "n_wk_oral", "fromOptions": ["oral"], "linkCategory": "conditional" },
     { "id": "l_entry_op", "from": "n_hn_entry", "to": "n_wk_op", "fromOptions": ["oropharynx"], "linkCategory": "conditional" },
     { "id": "l_entry_lx", "from": "n_hn_entry", "to": "n_wk_lx", "fromOptions": ["larynx"], "linkCategory": "conditional" },
     { "id": "l_entry_npc", "from": "n_hn_entry", "to": "n_wk_npc", "fromOptions": ["npc"], "linkCategory": "conditional" },
-    { "id": "l_entry_rm", "from": "n_hn_entry", "to": "n_rm_setting", "fromOptions": ["rm"], "linkCategory": "conditional" },
+    { "id": "l_entry_rm", "from": "n_hn_entry", "to": "n_rm_workup", "fromOptions": ["rm"], "linkCategory": "conditional" },
+    { "id": "l_rm_wk_set", "from": "n_rm_workup", "to": "n_rm_setting", "fromOptions": ["continue"], "linkCategory": "conditional" },
 
     { "id": "l_wk_oral", "from": "n_wk_oral", "to": "n_oral_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
     { "id": "l_wk_op", "from": "n_wk_op", "to": "n_op_p16", "fromOptions": ["continue"], "linkCategory": "conditional" },
@@ -1282,7 +1347,7 @@
     { "id": "l_crt_persist", "from": "n_crt_restage", "to": "n_tx_crt_persist", "fromOptions": ["persist"], "linkCategory": "conditional" },
     { "id": "l_crt_cr_surv", "from": "n_tx_crt_cr", "to": "n_surveillance", "linkCategory": "conditional" },
     { "id": "l_crt_neck_surv", "from": "n_tx_crt_neck", "to": "n_surveillance", "linkCategory": "conditional" },
-    { "id": "l_crt_persist_rm", "from": "n_tx_crt_persist", "to": "n_rm_setting", "linkCategory": "conditional" },
+    { "id": "l_crt_persist_rm", "from": "n_tx_crt_persist", "to": "n_rm_workup", "linkCategory": "conditional" },
 
     { "id": "l_adj_high", "from": "n_adj_risk", "to": "n_tx_adj_chemort", "fromOptions": ["high"], "linkCategory": "conditional" },
     { "id": "l_adj_int", "from": "n_adj_risk", "to": "n_tx_adj_rt", "fromOptions": ["intermediate"], "linkCategory": "conditional" },

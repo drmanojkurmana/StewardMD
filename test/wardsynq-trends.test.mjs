@@ -30,7 +30,7 @@ mock.module("../functions/_fbfirestore.js", {
       for (const [path, d] of docs) {
         if (!path.startsWith(coll + "/")) continue;
         if (where && String(d.fields[where.field]) !== String(where.value)) continue;
-        out.push({ id: path.slice(coll.length + 1), name: path, fields: { ...d.fields }, updateTime: d.updateTime });
+        out.push({ id: path.slice(coll.length + 1), name: path, fields: { ...d.fields }, updateTime: d.updateTime, createTime: d.createTime });
         if (out.length >= limit) break;
       }
       return out;
@@ -131,7 +131,7 @@ test("bucketing: day edges follow the hospital's offset, a DST day is 23 hours, 
 
   // A stay crossing bucket edges is split into the bed-days each bucket holds, and an open one runs to now.
   const days = T.bucketsFor({ from: "2026-09-01", to: "2026-09-04", bucket: "day", utcOffsetMinutes: 0 });
-  const occ = T.computeTrend({ metric: "bed-occupancy", buckets: days.buckets, clock: days.clock, nowMs: Date.parse("2026-09-03T12:00:00Z"), bedsByWard: { A: 1 },
+  const occ = T.computeTrend({ metric: "bed-occupancy", buckets: days.buckets, clock: days.clock, nowMs: Date.parse("2026-09-03T12:00:00Z"), bedHistory: [{ ward: "A", since: Date.parse("2026-01-01T00:00:00Z"), active: true }],
     rows: { Encounter: [{ id: "s1", patientId: "p", class: "IPD", status: "finished", periodStart: "2026-08-31T12:00:00Z", periodEnd: "2026-09-02T06:00:00Z", location: { ward: "A" } },
       { id: "s2", patientId: "q", class: "IPD", status: "in-progress", periodStart: "2026-09-02T18:00:00Z", location: { ward: "A" } }] } });
   assert.deepEqual(occ.series[0].points.map((p) => [p.numerator, p.denominator, p.coverage]), [[1, 1, "full"], [0.5, 1, "full"], [0.5, 0.5, "partial"], [null, null, "none"]]);
@@ -284,4 +284,155 @@ test("Trends screen: reachable from the twin; loading, failed and empty are dist
   assert.match(view({ data, ward: { key: "k", label: "k", data: null } }), /Loading the wards/);
   assert.match(view({ data, ward: { key: "k", label: "k", data: { ok: true, series: [] } } }), /No ward had anything in this bucket/);
   assert.match(view({ data, events: { ward: "Medical A", data: false, status: 403 } }), /do not have access to this ward's records/);
+});
+
+/* ---------------------------------------------------------------- G7: ward-by-ward stays, occupancy from history */
+
+const H = (t) => Date.parse(t);
+const version = (v, over) => ({ resourceType: "Encounter", id: "s1", patientId: "p1", class: "IPD", version: v, periodStart: "2026-09-01T00:00:00Z", status: "in-progress", location: { ward: "A", bed: "1" }, ...over });
+
+test("G7 staySegments: a transfer splits the stay; a discharge version is not a move; a move with no time cannot be placed", () => {
+  const vs = [version(1), version(2, { location: { ward: "B", bed: "4" }, movedAt: "2026-09-03T12:00:00Z" }), version(3, { location: { ward: "B", bed: "4" }, status: "finished", periodEnd: "2026-09-04T12:00:00Z" })];
+  assert.deepEqual(T.staySegments(vs), [
+    { ward: "A", bed: "1", start: H("2026-09-01T00:00:00Z"), end: H("2026-09-03T12:00:00Z") },
+    { ward: "B", bed: "4", start: H("2026-09-03T12:00:00Z"), end: H("2026-09-04T12:00:00Z") },
+  ]);
+  assert.equal(T.staySegments([version(1), version(2, { location: { ward: "B" } })]), null);
+  assert.equal(T.staySegments([version(1), version(2, { status: "finished" })]), null, "finished with no end time");
+  const open = T.staySegments([version(1), version(2, { location: { ward: "C" }, movedAt: "2026-09-02T00:00:00Z" })]);
+  assert.equal(open[1].end, null, "the current ward is still running");
+});
+
+test("G7 bedDaysIn: counted from when the bed was added, through turn-offs; no history is unknown, never a guess", () => {
+  const a = H("2026-09-02T00:00:00Z"), b = H("2026-09-03T00:00:00Z");
+  assert.deepEqual(T.bedDaysIn({ since: H("2026-01-01T00:00:00Z"), active: true }, a, b), { days: 1 });
+  assert.deepEqual(T.bedDaysIn({ since: H("2026-09-02T12:00:00Z"), active: true }, a, b), { days: 0.5 }, "added at noon");
+  assert.deepEqual(T.bedDaysIn({ since: H("2026-09-05T00:00:00Z"), active: true }, a, b), { days: 0 }, "not added yet is a known zero");
+  assert.deepEqual(T.bedDaysIn({ since: H("2026-01-01T00:00:00Z"), active: true, changes: [{ active: false, at: H("2026-09-02T06:00:00Z") }, { active: true, at: H("2026-09-02T18:00:00Z") }] }, a, b), { days: 0.5 }, "off 06:00 to 18:00");
+  assert.deepEqual(T.bedDaysIn({ since: H("2026-01-01T00:00:00Z"), active: false, changes: [{ active: false, at: H("2026-09-02T12:00:00Z") }] }, a, b), { days: 0.5 }, "turned off today, and on before that");
+  assert.deepEqual(T.bedDaysIn({ since: null, active: true }, a, b), { unknown: true }, "a settings-only bed has no history");
+  assert.deepEqual(T.bedDaysIn({ since: H("2026-01-01T00:00:00Z"), active: false, legacy: true }, a, b), { unknown: true }, "a legacy bed turned off at an unrecorded time");
+});
+
+test("G7 bed occupancy per day: past days use the stay's wards and the beds of that day; unknown is null with a reason, not 0", () => {
+  const days = T.bucketsFor({ from: "2026-09-01", to: "2026-09-04", bucket: "day", utcOffsetMinutes: 0 });
+  const nowMs = H("2026-09-10T00:00:00Z");
+  const cur = version(3, { location: { ward: "B", bed: "4" }, status: "finished", periodEnd: "2026-09-04T00:00:00Z" });
+  const hist = [version(1), version(2, { location: { ward: "B", bed: "4" }, movedAt: "2026-09-03T00:00:00Z" }), cur];
+  const beds = [{ ward: "A", since: H("2026-01-01T00:00:00Z"), active: true }, { ward: "A", since: H("2026-09-02T00:00:00Z"), active: true },
+    { ward: "B", since: H("2026-01-01T00:00:00Z"), active: true }];
+  const run = (over) => T.computeTrend({ metric: "bed-occupancy", buckets: days.buckets, clock: days.clock, nowMs, rows: { Encounter: [cur] }, bedHistory: beds, histories: { s1: hist }, ...over });
+
+  const byWard = run({ groupBy: "ward" });
+  const pts = (g) => byWard.series.find((s) => s.group === g).points.map((p) => [p.numerator, p.denominator, p.value]);
+  assert.deepEqual(pts("A"), [[1, 1, 1], [1, 2, 0.5], [0, 2, 0], [0, 2, 0]], "ward A held the stay on days 1-2; its second bed was added on day 2");
+  assert.deepEqual(pts("B"), [[0, 1, 0], [0, 1, 0], [1, 1, 1], [0, 1, 0]], "ward B from the transfer, not the whole stay");
+  assert.deepEqual(run({}).series[0].points.map((p) => p.numerator), [1, 1, 1, 0], "hospital-wide bed-days");
+
+  const unread = run({ groupBy: "ward", histories: {} });
+  const a = unread.series.find((s) => s.group === "A").points;
+  assert.equal(a[0].value, null);
+  assert.match(a[0].reason, /which ward 1 stay was on in this bucket is not known/);
+  assert.equal(a[3].value, 0, "a day the unplaced stay did not touch still has its number");
+  assert.deepEqual(run({ histories: {} }).series[0].points.map((p) => p.numerator), [1, 1, 1, 0], "hospital-wide does not need the ward");
+
+  const noHistory = run({ bedHistory: [...beds, { ward: "B", since: null }] }).series[0].points;
+  assert.ok(noHistory.every((p) => p.value === null && /bed count in this bucket is not known: 1 bed has no history/.test(p.reason)), JSON.stringify(noHistory[0]));
+  assert.ok(noHistory.every((p) => p.value !== 0));
+});
+
+test("G7 length of stay by ward: each ward piece that ended counts on its ward; the records list the stay ward by ward", () => {
+  const days = T.bucketsFor({ from: "2026-09-01", to: "2026-09-04", bucket: "day", utcOffsetMinutes: 0 });
+  const cur = version(3, { location: { ward: "B", bed: "4" }, status: "finished", periodEnd: "2026-09-04T12:00:00Z" });
+  const hist = [version(1), version(2, { location: { ward: "B", bed: "4" }, movedAt: "2026-09-03T12:00:00Z" }), cur];
+  const stay2 = { resourceType: "Encounter", id: "s2", patientId: "p2", class: "IPD", version: 1, status: "finished", periodStart: "2026-09-02T00:00:00Z", periodEnd: "2026-09-03T00:00:00Z", location: { ward: "A", bed: "2" } };
+  const input = { metric: "ward-los", buckets: days.buckets, clock: days.clock, nowMs: H("2026-09-10T00:00:00Z"), rows: { Encounter: [cur, stay2] }, histories: { s1: hist } };
+  const byWard = T.computeTrend({ ...input, groupBy: "ward" });
+  const A = byWard.series.find((s) => s.group === "A").points, B = byWard.series.find((s) => s.group === "B").points;
+  assert.deepEqual([A[2].value, A[2].denominator], [1.8, 2], "day 3: stay2 left A (1 day) and s1 left A (2.5 days)");
+  assert.deepEqual([B[3].value, B[3].denominator], [1, 1]);
+  assert.equal(A[0].value, null, "no ward stay ended: no mean, never 0");
+
+  const ev = T.computeTrend({ ...input, groupBy: "ward", eventsFor: { key: "2026-09-03", group: "A" } }).events;
+  const s1 = ev.items.find((x) => x.id === "s1");
+  assert.equal(s1.transferred, true);
+  assert.deepEqual(s1.segments.map((g) => [g.ward, g.days]), [["A", 2.5], ["B", 1]]);
+  assert.equal(ev.items.find((x) => x.id === "s2").transferred, false);
+
+  const unknown = T.computeTrend({ ...input, histories: {} }).series[0].points;
+  assert.equal(unknown[3].value, null);
+  assert.match(unknown[3].reason, /ward history of 1 stay could not be read/);
+});
+
+test("G7 GET /api/queue/ward/trends and trend-events for ward-los and bed-occupancy: history through the router, audited once; 401, 403, out of scope", async () => {
+  await seed();
+  docs.set("q_wards/w-surg", { fields: { orgId: ORG, name: "Surgical B", departmentId: "dept-surg" }, updateTime: "t1" });
+  docs.set("q_beds/b1", { fields: { orgId: ORG, wardId: "w-med", name: "1", since: D0 - 30 * DAY }, updateTime: "t1" });
+  docs.set("q_beds/b2", { fields: { orgId: ORG, wardId: "w-med", name: "2", since: D0 - 30 * DAY }, updateTime: "t1" });
+  docs.set("q_beds/b3", { fields: { orgId: ORG, wardId: "w-surg", name: "3", since: D0 + DAY }, updateTime: "t1" });
+  const base = { resourceType: "Encounter", id: "enc-9", patientId: "pat-9", class: "IPD", periodStart: iso(D0), status: "in-progress" };
+  await RECORD.append(TENANT, [{ ...base, version: 1, location: { ward: "Medical A", bed: "2" } }], {});
+  await RECORD.append(TENANT, [{ ...base, version: 2, location: { ward: "Surgical B", bed: "3" }, movedAt: iso(D0 + 2 * DAY) }], {});
+  await RECORD.append(TENANT, [{ ...base, version: 3, location: { ward: "Surgical B", bed: "3" }, status: "finished", periodEnd: iso(D0 + 3 * DAY) }], {});
+
+  const auditBefore = RECORD.audit.length;
+  const occ = await as(DOCTOR, `/ward/trends?orgId=${ORG}&metric=bed-occupancy${range}&groupBy=ward`);
+  assert.equal(occ.__status, 200, JSON.stringify(occ));
+  const surg = occ.series.find((s) => s.group === "Surgical B").points;
+  assert.deepEqual(surg.map((p) => [p.numerator, p.denominator]), [[0, 0], [0, 1], [1, 1], [0, 1]], "Surgical B's bed exists from day 2 and holds enc-9 on day 3 only");
+  assert.equal(surg[0].value, null);
+  assert.match(surg[0].reason, /no bed was in service/);
+  assert.equal(RECORD.audit.slice(auditBefore).filter((a) => a.action === "record.list" && a.scope && a.scope.history).length, 1, "the histories are one audited read");
+  assert.match(occ.definition.wardAttribution, /counted on each ward for the time spent there/);
+
+  const los = await as(DOCTOR, `/ward/trends?orgId=${ORG}&metric=ward-los${range}&groupBy=ward`);
+  assert.equal(los.__status, 200, JSON.stringify(los));
+  assert.equal(los.series.find((s) => s.group === "Medical A").points[2].value, 2);
+
+  const path = `/ward/trend-events?orgId=${ORG}&metric=ward-los${range}&key=${dateOf(D0 + 2 * DAY)}&ward=Medical%20A`;
+  assert.equal((await as(null, path)).__status, 401);
+  assert.equal((await as(OTHER, path)).__status, 403);
+  const nurse = await as(NURSE, path);
+  assert.equal(nurse.__status, 403);
+  assert.ok(!JSON.stringify(nurse).includes("enc-9"));
+  const doc = await as(DOCTOR, path);
+  assert.equal(doc.__status, 200, JSON.stringify(doc));
+  const item = doc.events.items.find((x) => x.id === "enc-9");
+  assert.deepEqual(item.segments.map((g) => [g.ward, g.bed, g.days]), [["Medical A", "2", 2], ["Surgical B", "3", 1]]);
+  assert.ok(!JSON.stringify(doc).includes("pat-9"), "record ids and wards, not patients");
+  // The nurse limited to Surgery may see Surgical B's records.
+  assert.equal((await as(NURSE, `/ward/trend-events?orgId=${ORG}&metric=ward-los${range}&key=${dateOf(D0 + 3 * DAY)}&ward=Surgical%20B`)).__status, 200);
+});
+
+test("G7 bed registry keeps its own history: added time on create, each turn off or on appended, never set by a patch", async () => {
+  await seed();
+  const S = await import("../functions/_opd_org_store.js");
+  const bed = await S.createBed(ENV, ORG, { wardId: "w-med", name: "9", since: 1, activeHistory: [{ active: false, at: 5 }] }, "admin");
+  assert.ok(bed.since > Date.now() - 60000, "since is the server's time, not the caller's");
+  assert.deepEqual(bed.activeHistory, []);
+  const off = await S.updateBed(ENV, bed.id, { active: false, since: 2, activeHistory: [] }, "admin");
+  assert.equal(off.since, bed.since);
+  assert.equal(off.activeHistory.length, 1);
+  assert.equal(off.activeHistory[0].active, false);
+  const renamed = await S.updateBed(ENV, bed.id, { name: "9A" }, "admin");
+  assert.equal(renamed.activeHistory.length, 1, "a change that is not a turn off or on adds nothing");
+  const on = await S.updateBed(ENV, bed.id, { active: true }, "admin");
+  assert.deepEqual(on.activeHistory.map((c) => c.active), [false, true]);
+  // A bed registered before bed history was kept: its document's creation time, marked legacy.
+  docs.set("q_beds/old", { fields: { orgId: ORG, wardId: "w-med", name: "7", active: false }, updateTime: "t1", createTime: "2026-01-01T00:00:00Z" });
+  const old = (await S.listBeds(ENV, ORG)).find((b) => b.id === "old");
+  assert.equal(old.since, Date.parse("2026-01-01T00:00:00Z"));
+  assert.equal(old.legacy, true);
+  assert.equal((await S.listBeds(ENV, ORG)).find((b) => b.id === bed.id).legacy, undefined);
+});
+
+test("G7 screen: the records of a ward stay show the stay ward by ward, and a running piece says so", () => {
+  const W = loadWard();
+  const html = W._render({ ...W._st, view: "trends", trends: { metric: "ward-los", bucket: "day", from: "2026-09-01", to: "2026-09-04",
+    data: { ok: true, definition: { title: "Length of stay by ward", unit: "days" }, range: {}, series: [{ group: null, points: [{ key: "k", label: "k", value: null, numerator: null, denominator: null, coverage: "full", reason: "the ward history of 1 stay could not be read, so this is not known" }] }] },
+    events: { ward: "Medical A", data: { ok: true, events: { total: 1, truncated: false, items: [{ resourceType: "Encounter", id: "enc-9", transferred: true,
+      segments: [{ ward: "Medical A", bed: "2", days: 2 }, { ward: "Surgical B", bed: "3", days: 1.5, running: true }] }] } } } } });
+  assert.match(html, /Transferred: Medical A bed 2 2 days, then Surgical B bed 3 1\.5 days so far \(still there\)/);
+  assert.match(html, /no value: the ward history of 1 stay could not be read/);
+  assert.ok(!/[—–]/.test(html));
 });

@@ -242,10 +242,68 @@ test("only a group admin can invite, publish policy or read the overview; nothin
   assert.equal(linkState(g.id, "org-c"), null);
 });
 
-test("overview: member hospitals side by side with counts only; never a name, MRN, patient or record id; unreadable is not zero; the read is audited", async () => {
+test("D4 B overview: a member that never published reads 'not_published' with no counts, never zeros; the group reads no record", async () => {
+  seed();
+  await seedClinicalB();
+  const g = await groupWithMembers([["org-b", OWNER_B]]);
+  const ov = await call(GADMIN, `/group/overview?groupId=${g.id}`);
+  assert.equal(ov.__status, 200, JSON.stringify(ov));
+  assert.deepEqual(ov.hospitals.map((h) => [h.orgId, h.status, h.counts, h.publishedAt]), [["org-b", "not_published", null, null]]);
+  assert.equal(ov.group.staleAfterMinutes, 60);
+});
+
+test("D4 B POST /group/publish-counts: 401; a nurse, the group admin and another hospital's owner refused with nothing written; the hospital's owner publishes, audited with the snapshot", async () => {
+  seed();
+  await seedClinicalB();
+  await groupWithMembers([["org-b", OWNER_B]]);
+  const snap = () => docs.get("q_group_snapshots/org-b");
+  assert.equal((await call(null, "/group/publish-counts", "POST", { orgId: "org-b" })).__status, 401);
+  for (const who of [NURSE_B, GADMIN, OWNER_C]) {
+    const r = await call(who, "/group/publish-counts", "POST", { orgId: "org-b" });
+    assert.ok(r.__status === 403 || r.__status === 404, who + " " + JSON.stringify(r));
+  }
+  assert.equal(snap(), undefined);
+  assert.equal(events("org-b", "group:snapshot_published").length, 0);
+  const ok = await call(OWNER_B, "/group/publish-counts", "POST", { orgId: "org-b" });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.snapshot.counts.census, 2);
+  assert.equal(ok.snapshot.publishedBy, idFor(OWNER_B));
+  assert.equal(events("org-b", "group:snapshot_published").length, 1);
+  const side = await call(OWNER_B, "/group/memberships?orgId=org-b");
+  assert.equal(side.snapshot.publishedAt, ok.snapshot.publishedAt, "the hospital side sees what it last published");
+  failCommits = true;
+  const failed = await call(OWNER_B, "/group/publish-counts", "POST", { orgId: "org-b" });
+  failCommits = false;
+  assert.equal(failed.ok, false); assert.notEqual(failed.__status, 200);
+  assert.equal(snap().fields.publishedAt, ok.snapshot.publishedAt, "a failed publish leaves the previous snapshot, with its own time");
+});
+
+test("D4 B POST /group/stale-after: 401; only the group's admin; 5 to 10080 minutes; an old snapshot is marked stale", async () => {
+  seed();
+  await seedClinicalB();
+  const g = await groupWithMembers([["org-b", OWNER_B]]);
+  assert.equal((await call(OWNER_B, "/group/publish-counts", "POST", { orgId: "org-b" })).__status, 200);
+  assert.equal((await call(GADMIN, `/group/overview?groupId=${g.id}`)).hospitals[0].stale, false);
+  docs.get("q_group_snapshots/org-b").fields.publishedAt = Date.now() - 90 * 60000;
+  assert.equal((await call(GADMIN, `/group/overview?groupId=${g.id}`)).hospitals[0].stale, true, "older than the default 60 minutes");
+  assert.equal((await call(null, "/group/stale-after", "POST", { groupId: g.id, minutes: 120 })).__status, 401);
+  for (const who of [OWNER_B, OTHER_GADMIN, NURSE_B]) assert.equal((await call(who, "/group/stale-after", "POST", { groupId: g.id, minutes: 120 })).__status, 403, who);
+  assert.equal((await call(GADMIN, "/group/stale-after", "POST", { groupId: g.id, minutes: 2 })).__status, 422);
+  assert.equal(docs.get("q_groups/" + g.id).fields.staleAfterMinutes, 60);
+  const ok = await call(GADMIN, "/group/stale-after", "POST", { groupId: g.id, minutes: 120 });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(events("group:" + g.id, "group:stale_after").length, 1);
+  const ov = await call(GADMIN, `/group/overview?groupId=${g.id}`);
+  assert.equal(ov.hospitals[0].stale, false);
+  assert.equal(ov.hospitals[0].ageMinutes, 90);
+});
+
+test("overview: member hospitals side by side with published counts only; never a name, MRN, patient or record id; unreadable is not zero; the read is audited", async () => {
   seed();
   const seeded = await seedClinicalB();
   const g = await groupWithMembers([["org-b", OWNER_B], ["org-n", OWNER_N], ["org-c", null]]);
+  assert.equal((await call(OWNER_B, "/group/publish-counts", "POST", { orgId: "org-b" })).__status, 200);
+  assert.equal((await call(OWNER_N, "/group/publish-counts", "POST", { orgId: "org-n" })).__status, 200);
   const ov = await call(GADMIN, `/group/overview?groupId=${g.id}`);
   assert.equal(ov.__status, 200, JSON.stringify(ov));
   assert.deepEqual(ov.hospitals.map((h) => h.orgId).sort(), ["org-b", "org-n"]);   // org-c is only invited
@@ -337,6 +395,26 @@ test("policy: a group publishes a whitelisted subset; only a member hospital's a
   assert.deepEqual(cfg.noteTemplates, [{ id: "keep-me" }]);   // merged, not replaced
   assert.equal(cfg.payers, undefined);
   assert.equal(events("org-b", "group:policy_adopted").length, 1);
+});
+
+test("POST /group/policy with criticalEscalation.level2WardRule / level2NurseRule (owner 2026-09-15): 401, a member hospital's owner 403, an unbuilt rule 422, nothing written; a built rule is published", async () => {
+  seed();
+  const g = await groupWithMembers([["org-b", OWNER_B]]);
+  const pol = (rule, key) => ({ groupId: g.id, policy: { criticalEscalation: { [key || "level2WardRule"]: rule } } });
+  const before = JSON.stringify(docs.get("q_groups/" + g.id).fields);
+  assert.equal((await call(null, "/group/policy", "POST", pol("all-on-duty-ward-team"))).__status, 401);
+  assert.equal((await call(OWNER_B, "/group/policy", "POST", pol("all-on-duty-ward-team"))).__status, 403, "a member hospital's owner is not the group's admin");
+  for (const [rule, key] of [["nurse-in-charge", "level2WardRule"], ["nurse-in-charge", "level2NurseRule"]]) {
+    const bad = await call(GADMIN, "/group/policy", "POST", pol(rule, key));
+    assert.equal(bad.__status, 422, JSON.stringify(bad));
+    assert.equal(bad.error, "level2_ward_rule_not_built");
+    assert.match(bad.message, /The rules built are "all-on-duty-ward-team".*"all-on-duty-nurses-in-ward"/);
+  }
+  assert.equal(JSON.stringify(docs.get("q_groups/" + g.id).fields), before);
+  assert.equal(events("group:" + g.id, "group:policy").length, 0);
+  const ok = await call(GADMIN, "/group/policy", "POST", pol("all-on-duty-nurses-in-ward"));
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.group.policy.criticalEscalation.level2WardRule, "all-on-duty-nurses-in-ward");
 });
 
 test("a membership change whose commit fails reports failure and writes neither the change nor an audit row", async () => {
@@ -526,6 +604,19 @@ test("screens: loading, failed and empty read differently; unread counts are wor
   assert.match(table, /not set up/);
   assert.equal((table.match(/could not be read/g) || []).length, 2);
   assert.match(table, /November<\/td><td colspan="5"><span class="pill stop">Could not be read/);
+  // D4 B: never published is words, never zeros; a published row names when and by whom, and a Stale pill when old.
+  const pub = s(ov(c, { group: { name: "North", staleAfterMinutes: 30 }, hospitals: [
+    { orgId: "org-q", name: "Quebec", status: "not_published", counts: null },
+    { orgId: "org-b", name: "Bravo", status: "ok", counts: { census: 4, bedsFree: 1, edWaiting: 0, criticalOpen: 0, staffShort: 0 }, reasons: {}, publishedAt: Date.UTC(2026, 8, 14, 9, 0), publishedBy: "cfa:owner", stale: true },
+  ] }));
+  assert.match(pub, /older than 30 minutes is marked stale/);
+  assert.match(pub, /Quebec<\/td><td colspan="6"><span class="pill warn">Not published/);
+  assert.doesNotMatch(pub.slice(pub.indexOf("Quebec"), pub.indexOf("Bravo")), /class="num">0/, "no zeros for a hospital that never published");
+  assert.match(pub, /by cfa:owner<\/span> <span class="pill warn">Stale/);
+  const sideSnap = s(side(c, { groups: [{ groupId: "g1", name: "North", state: "member" }], snapshot: null }));
+  assert.match(sideSnap, /Not published yet/);
+  assert.match(sideSnap, /data-grp-publish/);
+  assert.match(s(side(c, { groups: [{ groupId: "g1", name: "North", state: "member" }], snapshot: false })), /could not be read/);
   assert.ok(!/[—–]/.test(all.join("")), "no em or en dash on screen");
 });
 

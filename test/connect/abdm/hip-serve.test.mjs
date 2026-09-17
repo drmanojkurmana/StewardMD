@@ -16,7 +16,7 @@ import assert from "node:assert/strict";
 import { serveTransfer, OverShareError, PushUrlError } from "../../../functions/_connect/abdm/hip.js";
 import { followcareSource } from "../../../functions/_connect/abdm/hip-sources/followcare.js";
 import { hmacPseudonym } from "../../../functions/_connect/audit.js";
-import { generateKeyPair, nonce, sharedSecret, openEntry } from "../../../functions/_connect/abdm/fidelius.js";
+import { generateKeyPair, nonce, sharedSecret, openEntry, readDhPublicKey } from "../../../functions/_connect/abdm/fidelius.js";
 import { makeAbdmDb } from "../../../functions/_connect/abdm/abdm-testkit.js";
 import { makeReader } from "./fixtures/hip-followcare-synthetic.mjs";
 
@@ -95,7 +95,7 @@ test("happy path: N care-contexts -> N pages, each pushed with a DISTINCT keyMat
   assert.equal(calls.length, 2, "one push per care-context");
 
   // pairwise-distinct keyMaterial (fresh HIP ephemeral per page) — the R1 nonce-safety surfaced at the wire.
-  const pubs = calls.map((c) => c.body.keyMaterial.dhPublicKey);
+  const pubs = calls.map((c) => readDhPublicKey(c.body.keyMaterial.dhPublicKey));
   assert.notEqual(pubs[0], pubs[1], "each pushed page must carry its OWN fresh keyMaterial");
   const nonces = calls.map((c) => c.body.keyMaterial.nonce);
   assert.notEqual(nonces[0], nonces[1]);
@@ -125,12 +125,12 @@ test("the pushed body is CIPHERTEXT + keyMaterial only (plaintext dx ABSENT), an
     assert.equal(raw.includes(DX1), false, "plaintext dx must be ABSENT from the pushed body");
     assert.equal(raw.includes(DX2), false);
     assert.equal(raw.includes("Azithromycin"), false, "plaintext med must be ABSENT from the pushed body");
-    assert.ok(c.body.keyMaterial && c.body.keyMaterial.dhPublicKey && c.body.keyMaterial.nonce, "carries the HIP public keyMaterial");
+    assert.ok(c.body.keyMaterial && readDhPublicKey(c.body.keyMaterial.dhPublicKey) && c.body.keyMaterial.nonce, "carries the HIP public keyMaterial");
     assert.ok(c.body.entries[0].content && c.body.entries[0].checksum, "carries ciphertext + checksum");
   }
   // The mock HIU decrypts page 0 with its OWN private key -> the real NDHM Bundle (round-trip proof).
   const p0 = calls[0].body;
-  const secret = await sharedSecret(hiu.privateKey, unb64(p0.keyMaterial.dhPublicKey));
+  const secret = await sharedSecret(hiu.privateKey, unb64(readDhPublicKey(p0.keyMaterial.dhPublicKey)));
   const pt = await openEntry(secret, hiu.nonce, unb64(p0.keyMaterial.nonce), p0.entries[0].content, p0.entries[0].checksum);
   const doc = JSON.parse(pt);
   assert.equal(doc.resourceType, "Bundle");

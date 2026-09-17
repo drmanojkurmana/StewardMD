@@ -1,0 +1,359 @@
+{
+  "guideline": "vulvar",
+  "id": "vulvar",
+  "title": "Vulvar Cancer",
+  "category": "Gynecologic Oncology",
+  "version": "2.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "vulvar_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Vulvar Cancer. Covers complete clinical algorithm: Diagnostic Workup (thorough vulvar, perineal, and perianal inspection with bilateral inguinofemoral nodal palpation and colposcopy, full-thickness punch or wedge biopsy to deep subcutaneous fat for depth of stromal invasion, histopathology of SCC HPV-associated vs HPV-independent dVIN TP53-mutant vs adenocarcinoma vs melanoma, pelvic and groin MRI or CT with contrast, whole-body FDG-PET/CT for locally advanced or node-suspicious cases, biomarker testing for p16/HPV, TP53, PD-L1 CPS, and MMR/MSI) -> FIGO Stage Stratification (Stage IA microinvasive vs Stage IB-II localized cN0 vs Stage III-IVa locoregionally advanced node-positive vs Stage IVb distant metastatic) -> Stage IA radical local excision with 1 cm or greater margins and no groin dissection -> Stage IB-II radical local excision with SLNB or inguinofemoral dissection plus adjuvant RT for positive margins, micrometastases, or ENE -> Locoregionally advanced definitive concurrent chemoradiotherapy (pelvic/groin EBRT with weekly cisplatin, organ-sparing) -> Metastatic first-line systemic chemoimmunotherapy (platinum plus paclitaxel plus pembrolizumab with or without bevacizumab per KEYNOTE-826 extrapolated data; second-line pembrolizumab monotherapy or palliative RT). References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Vulvar Cancer Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Diagnosis requires full-thickness punch or wedge biopsy extending to deep subcutaneous fat so depth of stromal invasion can be measured accurately; invasion depth of 1.0 mm or less with tumor size 2 cm or less defines microinvasive Stage IA disease with negligible nodal risk.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Histology is squamous cell carcinoma in over 90% of cases, split into HPV-associated (p16-positive) and HPV-independent (differentiated VIN or lichen sclerosus background, frequently TP53-mutant) pathways; adenocarcinoma (including Bartholin gland) and vulvar melanoma follow separate histology-specific management.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Sentinel lymph node biopsy (SLNB) with technetium-99m plus blue dye or ICG applies to unifocal tumors under 4 cm with clinically negative groins; lateral tumors over 2 cm from midline qualify for unilateral staging while central or midline tumors require bilateral inguinofemoral staging.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Postoperative adjuvant radiotherapy (PORT 50-60 Gy) is indicated for positive surgical margins, multiple inguinofemoral micrometastases, or extranodal extension (ENE) after inguinofemoral lymphadenectomy.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Definitive concurrent chemoradiotherapy: EBRT 45-50.4 Gy to elective primary, bilateral inguinofemoral, and pelvic nodal basins with boost of gross disease to 64-70 Gy, plus concurrent weekly cisplatin 40 mg/m2 IV during EBRT for 5-6 doses (or cisplatin plus 5-FU); this organ-sparing approach avoids upfront pelvic exenteration.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Metastatic first-line systemic therapy extrapolates KEYNOTE-826 cervical data: carboplatin AUC 5 (or cisplatin 50 mg/m2) plus paclitaxel 175 mg/m2 plus pembrolizumab 200 mg IV every 3 weeks (or 400 mg every 6 weeks) with or without bevacizumab 15 mg/kg IV every 3 weeks; second-line pembrolizumab monotherapy applies to PD-L1 CPS 1 or higher, MSI-H, or TMB-H disease, with palliative radiation for symptomatic groin or bone metastases.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "vulvar_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Vulvar Cancer: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before FIGO stage stratification. Inspect and palpate the vulva and groins, confirm stromal invasion depth on full-thickness biopsy, subtype histology and biomarkers, and stage local and distant extent with MRI and PET/CT.",
+      "path": "Vulvar Cancer / Workup",
+      "pills": [
+        "vulvar",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Thorough vulvar, perineal, and perianal inspection and palpation of bilateral inguinofemoral lymph nodes with colposcopic evaluation",
+        "Diagnostic full-thickness punch or wedge biopsy extending to deep subcutaneous fat to accurately measure depth of stromal invasion",
+        "Histopathology: squamous cell carcinoma (over 90%; HPV-associated vs HPV-independent dVIN / TP53-mutant), adenocarcinoma, or melanoma",
+        "Pelvic and groin MRI with contrast (or CT with IV contrast) to evaluate local tumor invasion and inguinofemoral/pelvic lymphadenopathy",
+        "Whole-body FDG-PET/CT for regional nodal metastases and distant screening in locally advanced (Stage II or higher) or suspicious node cases",
+        "Biomarker testing on tumor tissue: p16/HPV status, TP53 immunohistochemistry, PD-L1 (CPS), and MMR/MSI"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to FIGO Stage Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage",
+      "linkId": "vulvar_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "FIGO Stage Stratification",
+      "title": "Vulvar Cancer: FIGO Stage Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign FIGO stage from tumor size, depth of stromal invasion, adjacent structure involvement, clinical nodal status, and distant spread; the group selects the microinvasive excision, localized excision plus groin staging, definitive chemoradiotherapy, or metastatic systemic-therapy pathway.",
+      "path": "Vulvar Cancer / Stage Stratification",
+      "pills": [
+        "vulvar",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "FIGO Stage IA microinvasive: tumor size 2 cm or less with stromal invasion 1.0 mm or less and clinically negative nodes (cN0).",
+        "FIGO Stage IB-II localized: tumor over 2 cm or invasion over 1 mm, including disease involving adjacent perineal structures, with clinically negative nodes (cN0).",
+        "Locoregionally advanced / node-positive: Stage III-IVa with fixed or ulcerated inguinofemoral nodes, or involvement of upper urethra, vagina, bladder, or rectal mucosa.",
+        "Distant metastatic: FIGO Stage IVb with spread beyond regional nodes to distant organs or non-regional nodes."
+      ],
+      "options": [
+        {
+          "id": "stage_ia",
+          "label": "FIGO Stage IA Microinvasive Vulvar Cancer (Tumor size <=2cm and stromal invasion <=1.0mm, cN0)",
+          "sets": {
+            "stage": "stage_ia"
+          },
+          "pills": [
+            "vulvar",
+            "stage IA",
+            "microinvasive"
+          ]
+        },
+        {
+          "id": "stage_ib_ii",
+          "label": "FIGO Stage IB-II Localized Vulvar Cancer (Size >2cm or invasion >1mm, adjacent structures, cN0)",
+          "sets": {
+            "stage": "stage_ib_ii"
+          },
+          "pills": [
+            "vulvar",
+            "stage IB-II",
+            "localized"
+          ]
+        },
+        {
+          "id": "locally_advanced",
+          "label": "Locoregionally Advanced / Node-Positive Vulvar Cancer (Stage III-IVa: Fixed/ulcerated nodes, upper urethra/vagina/rectal mucosa)",
+          "sets": {
+            "stage": "locally_advanced"
+          },
+          "pills": [
+            "vulvar",
+            "locally advanced",
+            "stage III-IVa"
+          ]
+        },
+        {
+          "id": "metastatic",
+          "label": "Distant Metastatic Vulvar Cancer (FIGO Stage IVb)",
+          "sets": {
+            "stage": "metastatic"
+          },
+          "pills": [
+            "vulvar",
+            "metastatic",
+            "stage IVb"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_stage_ia_tx",
+      "linkId": "vulvar_stage_ia_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Stage IA Treatment",
+      "title": "Stage IA Microinvasive: Radical Local Excision Without Groin Dissection",
+      "section": "Treatment",
+      "description": "Radical local excision with wide macroscopic margins down to deep fascia for microinvasive Stage IA vulvar cancer; groin nodal staging is not required given the negligible risk of nodal metastasis.",
+      "path": "Vulvar Cancer / Stage IA / Treatment",
+      "pills": [
+        "vulvar",
+        "stage IA",
+        "microinvasive",
+        "local"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Radical local excision / wide local excision with 1 cm or greater macroscopic margins down to deep fascia for the primary tumor.",
+        "Inguinal lymphadenectomy or sentinel lymph node biopsy is NOT required due to negligible risk of nodal metastasis (under 1%) in Stage IA microinvasive disease.",
+        "Confirm negative surgical margins on pathology with stromal invasion 1.0 mm or less; re-excise for positive margins.",
+        "Postoperative observation with vulvar and inguinofemoral examination; routine adjuvant radiotherapy is not indicated.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Radical Local Excision with >=1cm Margins (No Groin Dissection Required)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_stage_ib_ii_tx",
+      "linkId": "vulvar_stage_ib_ii_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Stage IB-II Treatment",
+      "title": "Stage IB-II Localized: Radical Excision Plus SLNB or Inguinofemoral Dissection",
+      "section": "Treatment",
+      "description": "Radical local excision with inguinofemoral nodal staging for localized Stage IB-II vulvar cancer: sentinel lymph node biopsy for small unifocal cN0 tumors, or unilateral or bilateral inguinofemoral lymphadenectomy by laterality, with adjuvant radiotherapy for high-risk pathology.",
+      "path": "Vulvar Cancer / Stage IB-II / Treatment",
+      "pills": [
+        "vulvar",
+        "stage IB-II",
+        "localized",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "Radical local excision of the primary tumor with 1 cm or greater macroscopic margins down to deep fascia.",
+        "Inguinofemoral nodal staging: sentinel lymph node biopsy (SLNB using technetium-99m and blue dye/ICG) for unifocal tumors under 4 cm with clinically negative groins.",
+        "Unilateral inguinofemoral lymphadenectomy (ILND) for lateral tumors over 2 cm from midline, or bilateral ILND for central/midline tumors, when SLNB criteria are not met or SLNB is positive.",
+        "Postoperative adjuvant radiotherapy (PORT 50-60 Gy) for positive margins, multiple micrometastases, or extranodal extension (ENE).",
+        "Surveillance after definitive therapy: vulvar, groin, and pelvic examination with cross-sectional imaging for symptoms or high-risk pathology.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Radical Local Excision + Sentinel Lymph Node Biopsy (SLNB) or Inguinofemoral Dissection",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_locally_advanced_tx",
+      "linkId": "vulvar_locally_advanced_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Locoregionally Advanced Treatment",
+      "title": "Stage III-IVa: Definitive Concurrent Chemoradiotherapy (Organ-Sparing)",
+      "section": "Treatment",
+      "description": "Definitive concurrent chemoradiotherapy for locoregionally advanced or node-positive vulvar cancer: pelvic and groin EBRT with concurrent weekly cisplatin as an organ-sparing approach that avoids upfront pelvic exenteration.",
+      "path": "Vulvar Cancer / Locoregionally Advanced / Treatment",
+      "pills": [
+        "vulvar",
+        "locally advanced",
+        "stage III-IVa",
+        "chemoradiation"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Definitive concurrent chemoradiotherapy: primary tumor plus bilateral inguinofemoral and pelvic lymph node basins treated with external beam radiotherapy (EBRT: 45-50.4 Gy to elective nodal basins, boost gross disease to 64-70 Gy).",
+        "Concurrent weekly cisplatin (40 mg/m2 IV weekly during EBRT x 5-6 cycles) or cisplatin plus 5-FU selected by fitness, renal function, and hearing status.",
+        "Organ-sparing approach avoiding upfront pelvic exenteration; reassess for limited surgical resection of residual disease after chemoradiotherapy.",
+        "Monitor renal function, audiologic status, hematologic counts, and skin toxicity during concurrent chemoradiotherapy; coordinate across gynecologic oncology, medical oncology, and radiation oncology.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Definitive Concurrent ChemoRT (Pelvic/Groin EBRT + Weekly Cisplatin 40 mg/m2)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_metastatic_tx",
+      "linkId": "vulvar_metastatic_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Metastatic Treatment",
+      "title": "Stage IVb: First-Line Systemic Chemoimmunotherapy Then Pembrolizumab",
+      "section": "Treatment",
+      "description": "First-line platinum, paclitaxel, and pembrolizumab with or without bevacizumab for distant metastatic vulvar cancer, followed by pembrolizumab monotherapy for biomarker-selected disease or palliative radiation for symptomatic metastases.",
+      "path": "Vulvar Cancer / Metastatic / Systemic Therapy",
+      "pills": [
+        "vulvar",
+        "metastatic",
+        "stage IVb",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "First-line systemic chemoimmunotherapy: carboplatin (AUC 5) or cisplatin (50 mg/m2) plus paclitaxel (175 mg/m2) plus pembrolizumab (200 mg IV q3w or 400 mg q6w) with or without bevacizumab 15 mg/kg IV q3w (KEYNOTE-826 data extrapolated).",
+        "Second-line: pembrolizumab monotherapy (for PD-L1 CPS 1 or higher, MSI-H, or TMB-H) with immune-related adverse event monitoring.",
+        "Palliative radiation for symptomatic groin or bone metastases for pain control and local symptom relief.",
+        "Establish PD-L1 CPS, MMR/MSI, TMB, p16/HPV, and TP53 status at diagnosis of metastatic disease to set immunotherapy eligibility; offer clinical trial enrollment at every line.",
+        "Stage with cross-sectional imaging at baseline and every 8-12 weeks on systemic therapy.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Carboplatin/Cisplatin + Paclitaxel + Pembrolizumab +/- Bevacizumab",
+      "protocolRefs": []
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_stage",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_stage",
+      "toNodeId": "n_stage",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_ia",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_stage_ia_tx",
+      "toNodeId": "n_stage_ia_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "stage_ia",
+      "fromOptions": [
+        "stage_ia"
+      ]
+    },
+    {
+      "id": "l_stage_ib_ii",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_stage_ib_ii_tx",
+      "toNodeId": "n_stage_ib_ii_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "stage_ib_ii",
+      "fromOptions": [
+        "stage_ib_ii"
+      ]
+    },
+    {
+      "id": "l_stage_locally_advanced",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_locally_advanced_tx",
+      "toNodeId": "n_locally_advanced_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "locally_advanced",
+      "fromOptions": [
+        "locally_advanced"
+      ]
+    },
+    {
+      "id": "l_stage_metastatic",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_metastatic_tx",
+      "toNodeId": "n_metastatic_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "metastatic",
+      "fromOptions": [
+        "metastatic"
+      ]
+    }
+  ]
+}

@@ -121,7 +121,8 @@ test("the approvals screen renders a chain, including one that was taken back", 
   assert.match(html, /waiting/);
   assert.match(html, /something was taken back/);
   // The approval that happened is still shown, because it happened.
-  assert.match(html, /approved by micro\.b/);
+  // The approver is rendered through the staff identity element (owner 2026-09-16: name and employee id).
+  assert.match(html, /approved by <span class="w-who">micro\.b<\/span>/);
 });
 
 test("purchasing shows a part-delivered order and names an over-delivery", () => {
@@ -140,4 +141,14 @@ test("purchasing shows a part-delivered order and names an over-delivery", () =>
   assert.match(html, /part delivered/);
   assert.match(html, /30 more than ordered/);
   assert.ok(html.includes("130 of 100 box"));
+});
+
+test("the approvals screen shows a purchase order priced above its rate contract, and says when the check could not be made", () => {
+  const W = loadWard();
+  const po = (extra) => ({ verificationId: "v9", subjectType: "PurchaseOrder", subjectId: "po-9", state: "pending", approvals: 0, required: 1, reason: "Monthly stock", history: [], ...extra });
+  const html = W._render({ ...W._st, view: "approvals", approvals: [po({ priceCheck: "done", priceWarnings: [{ line: 0, item: "Paracetamol", unit: "strip", pricePaise: 1500, contractPricePaise: 1000 }], unpricedAgainstContract: [{ line: 1, item: "ORS", unit: "sachet", contractPricePaise: 250 }] })] });
+  assert.match(html, /Paracetamol \(strip\) is priced at Rs 15\.00, above the rate contract price of Rs 10\.00/);
+  assert.match(html, /ORS \(sachet\) has no price on the order\. The rate contract price is Rs 2\.50/);
+  const failed = W._render({ ...W._st, view: "approvals", approvals: [po({ priceCheck: "failed" })] });
+  assert.match(failed, /could not be checked against rate contracts/);
 });

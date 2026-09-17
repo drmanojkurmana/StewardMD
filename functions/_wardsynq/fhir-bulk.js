@@ -6,6 +6,8 @@
  *
  *   GET    [base]/$export                 system level: every exported type the caller may read
  *   GET    [base]/Patient/$export         the patient compartment: resources that belong to a patient
+ *   GET    [base]/Group/{id}/$export      one ward's census at kick-off (fhir-group.js), its patients' resources
+ *   POST   any of the three above         the same kick-off with a Parameters body (IG v2)
  *   GET    [base]/$export-status/{id}     202 + X-Progress while running, 200 + manifest when done
  *   DELETE [base]/$export-status/{id}     cancel; the files go too
  *   GET    [base]/$export-file/{id}/{f}   one NDJSON file, with auth, audited
@@ -42,6 +44,7 @@ import { canRead } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { outboxEvent, MAX_ATTEMPTS } from "./outbox.js";
 import { FHIR_TYPE, CANONICAL_TYPE, toFhir, operationOutcome } from "./fhir.js";
+import { groupMembers } from "./fhir-group.js";
 import { sha256Hex } from "./object-store.js";
 import { docKey, encryptBytes, decryptBytes } from "./documents.js";
 
@@ -92,6 +95,27 @@ function parseExportParams(p) {
   return { types: types.filter((t) => CANONICAL_TYPE[t]).sort(), since, problems };
 }
 
+/**
+ * PURE. A POST kick-off's Parameters body as the same parameter object a GET's query gives (Bulk Data
+ * IG v2: _type as valueString, repeatable; _since as valueInstant; _outputFormat as valueString). A
+ * parameter name this server does not honour is carried through so parseExportParams names it as a 400;
+ * a body that is not Parameters is a problem of its own.
+ */
+function parametersToExportParams(body) {
+  if (body === undefined || body === null || (typeof body === "object" && !Object.keys(body).length)) return { params: {} };
+  if (!body || body.resourceType !== "Parameters") return { error: "a POST $export body must be a FHIR Parameters resource" };
+  const out = {};
+  for (const p of Array.isArray(body.parameter) ? body.parameter : []) {
+    const name = str(p && p.name);
+    if (!name) return { error: "every Parameters.parameter needs a name" };
+    const v = p.valueString !== undefined ? p.valueString : p.valueInstant !== undefined ? p.valueInstant : p.valueDateTime !== undefined ? p.valueDateTime : p.valueCode !== undefined ? p.valueCode : null;
+    if (v === null) { out[name] = out[name] || "(no value)"; continue; }
+    if (name === "_type") { out._type = [...(out._type || []), ...str(v).split(",")]; continue; }
+    out[name] = str(v);
+  }
+  return { params: out };
+}
+
 /** PURE. What a job's status is NOW: a job past its expiry is expired, a stuck one has failed. */
 function effectiveStatus(job, nowMs) {
   if (!job) return null;
@@ -116,7 +140,7 @@ function manifestOf(job, link) {
 /** PURE. The admin screen's view of one job. No file keys, no PHI. */
 function summaryOf(job, nowMs) {
   return {
-    id: job.id, status: effectiveStatus(job, nowMs), level: job.level, types: job.types, since: job.since,
+    id: job.id, status: effectiveStatus(job, nowMs), level: job.level, groupName: job.groupName || null, types: job.types, since: job.since,
     requestedAt: job.transactionTime, requestedBy: job.requestedBy, completedAt: job.completedAt || null, expiresAt: job.expiresAt || null,
     exported: job.exported || 0, files: (job.output || []).map((f) => ({ type: f.type, name: f.name, count: f.count })),
     issues: job.issues || [], error: job.error || (effectiveStatus(job, nowMs) === "failed" && job.status === "in-progress" ? "the export stopped making progress" : null),
@@ -181,6 +205,15 @@ async function kickoffExport(request, env, ctx) {
   if (refused.length) return fail(403, "forbidden", `not permitted to export ${refused.join(", ")}`);
   if (!wanted.length) return fail(403, "forbidden", "this requester may not read any exported type");
 
+  /* G9. Group/{id}/$export: the ward census frozen at kick-off, read as the requester (fhir-group.js).
+   * The member list is on the job, so a patient admitted after the kick-off is not in this export. */
+  let group = null;
+  if (ctx.level === "group") {
+    const m = await groupMembers(request, env, ctx, ctx.groupId);
+    if (m.error) return { ok: false, status: m.error.status, outcome: m.error.outcome };
+    group = { id: str(ctx.groupId), name: m.ward, members: m.patientIds };
+  }
+
   const repo = ctx.recordDeps.repository, tenantId = mig.tenantId;
   const now = new Date(), nowIso = now.toISOString();
   let slot, holder = null;
@@ -195,14 +228,15 @@ async function kickoffExport(request, env, ctx) {
   const jobId = `wsq-fhirexp-${randomHex(12)}`;
   const by = { id: requester.id, kind: requester.kind === "smart" ? "service" : "human", at: nowIso };
   const job = {
-    resourceType: JOB_TYPE, id: jobId, version: 1, status: "in-progress", level: ctx.level === "patient" ? "patient" : "system",
+    resourceType: JOB_TYPE, id: jobId, version: 1, status: "in-progress", level: ctx.level === "patient" ? "patient" : group ? "group" : "system",
+    ...(group ? { groupId: group.id, groupName: group.name, members: group.members } : {}),
     types: wanted, since, transactionTime: nowIso, request: str(ctx.requestUrl), requestedBy: requester.id, requesterKind: requester.kind,
     cursor: 0, exported: 0, output: [], errorFiles: [], issues: [], unrendered: {}, progressAt: nowIso, writtenBy: by,
   };
   const nextSlot = { resourceType: SLOT_TYPE, id: SLOT_ID, version: slot ? slot.version + 1 : 1, jobId, writtenBy: by };
   const evt = outboxEvent(TOPIC_CHUNK, { jobId, cursor: 0 }, nowIso);
   try {
-    await repo.append(tenantId, [job, nextSlot, evt], { audit: auditEvent("fhir.export.kickoff", requester.id, { resourceCounts: null, scope: { jobId, level: job.level, types: wanted, since, via: requester.kind } }) });
+    await repo.append(tenantId, [job, nextSlot, evt], { audit: auditEvent("fhir.export.kickoff", requester.id, { resourceCounts: null, scope: { jobId, level: job.level, types: wanted, since, via: requester.kind, ...(group ? { groupId: group.id, members: group.members.length } : {}) } }) });
   } catch (e) {
     if (e instanceof VersionConflictError) return { ...fail(429, "throttled", "another export was started for this hospital at the same moment"), retryAfter: 120 };
     return fail(502, "exception", "the export could not be recorded, so it was not started");
@@ -281,6 +315,7 @@ async function runExportChunk(deps, payload, event) {
       for (const row of rows) {
         if (!canonical.has(row.resourceType)) continue;
         if (job.level === "patient" && row.resourceType !== "Patient" && !str(row.patientId)) continue;
+        if (job.level === "group" && !(job.members || []).includes(row.resourceType === "Patient" ? str(row.id) : str(row.patientId))) continue;
         const rec = await versionAsOf(repo, tenantId, row, txMs);
         if (!rec) continue;
         if (sinceMs !== null && !(Date.parse(recordedAt(rec)) > sinceMs)) continue;
@@ -483,6 +518,6 @@ async function listExports(request, env, ctx) {
 
 export {
   JOB_TYPE, SLOT_TYPE, TOPIC_CHUNK, TOPIC_EXPIRE, CHUNK_ROWS, MAX_RESOURCES, FILE_TTL_MS, STALL_MS, NDJSON,
-  parseExportParams, effectiveStatus, manifestOf, summaryOf, exportConsumers, runExportChunk, expireExport,
+  parseExportParams, parametersToExportParams, effectiveStatus, manifestOf, summaryOf, exportConsumers, runExportChunk, expireExport,
   kickoffExport, exportStatus, cancelExport, exportFile, listExports,
 };

@@ -1,0 +1,120 @@
+{
+  "id": "breast-ribociclib-adjuvant",
+  "diseaseId": "breast_cancer",
+  "name": "Adjuvant Ribociclib + Aromatase Inhibitor (NATALEE)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 39,
+  "cyclesNote": "3 years (39 cycles of 28 days) in combination with a nonsteroidal aromatase inhibitor (letrozole 2.5 mg or anastrozole 1 mg daily).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
+    "primaryStudy": "NATALEE: Slamon D, Lipatov O, Nowecki Z, et al. N Engl J Med 2024;390:1080-1091",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-K, BINV-M)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HR": "positive",
+    "HER2": "negative",
+    "note": "Requires HR-positive and HER2-negative stage II or III early breast cancer meeting NATALEE criteria: any positive lymph nodes (excluding micrometastases alone); or if node-negative, tumor size >5 cm, or tumor size 2-5 cm with either grade 2 (and high genomic risk or Ki-67 \u226520%) or grade 3. Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-K (3 of 4) and BINV-M (5 of 10) (Category 1, Preferred)."
+  },
+  "stage": [
+    "II",
+    "III"
+  ],
+  "treatmentSetting": [
+    "adjuvant"
+  ],
+  "histology": "invasive breast carcinoma (ductal/NST, lobular, mixed, micropapillary)",
+  "premedications": [],
+  "supportiveCare": [
+    "QTc interval vigilance: perform ECG prior to starting. Only initiate if QTcF < 450 ms. Avoid concomitant strong CYP3A inhibitors and QT-prolonging medications.",
+    "Neutropenia monitoring: assess CBC regularly. Myeloid growth factors are not routinely required.",
+    "Hepatotoxicity monitoring: monitor liver enzymes before starting and periodically.",
+    "Partner aromatase inhibitor: give with daily letrozole 2.5 mg or anastrozole 1 mg. Premenopausal patients must receive concurrent ovarian function suppression (GnRH agonist)."
+  ],
+  "monitoring": [
+    "ECG at baseline, Day 14 of Cycle 1, Day 1 of Cycle 2, and as clinically indicated (hold if QTcF > 480 ms)",
+    "CBC with differential prior to starting, every 2 weeks for the first 2 cycles, at Day 1 of each subsequent 4 cycles, then as clinically indicated",
+    "Liver function tests prior to starting, every 2 weeks for the first 2 cycles, at Day 1 of each subsequent 4 cycles, then as clinically indicated"
+  ],
+  "clearanceChecks": [
+    "ECG / QTcF (< 450 ms before start)",
+    "CBC / absolute neutrophil count (ANC \u2265 1000/mcL, platelets \u2265 50,000/mcL)",
+    "liver function tests (transaminases \u2264 3x ULN, bilirubin \u2264 ULN)",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "QTcF > 480 ms during treatment",
+      "drug": "ribociclib",
+      "action": "hold/reduce",
+      "text": "Hold ribociclib until QTcF < 480 ms. Resume at reduced dose level (400 mg -> 200 mg; permanently discontinue if QTcF > 500 ms or prolonged with Torsades de pointes)."
+    },
+    {
+      "condition": "grade 3 neutropenia (ANC 500-1000/mcL)",
+      "drug": "ribociclib",
+      "action": "hold",
+      "text": "Hold ribociclib until resolution to grade \u2264 2 (ANC \u2265 1000/mcL). Resume at the same 400 mg dose for first occurrence. For recurrent grade 3 or any grade 4, resume at reduced dose (200 mg daily)."
+    },
+    {
+      "condition": "grade 3 ALT/AST elevation (>5x to 20x ULN)",
+      "drug": "ribociclib",
+      "action": "hold/reduce",
+      "text": "Hold ribociclib until recovery to baseline or grade \u2264 1. Resume with dose reduction (200 mg daily). If grade 4 transaminitis (>20x ULN), permanently discontinue."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "ribociclib",
+      "name": "Ribociclib",
+      "basis": "flat",
+      "dosePerUnit": 400,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. Ribociclib 400 mg PO once daily on Days 1 to 21 of a 28-day cycle for 3 years (39 cycles), combined with a nonsteroidal aromatase inhibitor.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "locator": "BINV-K 3 of 4, BINV-M 5 of 10 (NATALEE trial)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "modificationRules": []
+    }
+  ]
+}

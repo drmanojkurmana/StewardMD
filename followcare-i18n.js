@@ -123,6 +123,13 @@
       hi: "आप {dept} की कतार में हैं। अपनी बारी लाइव देखें — समय पास आने पर हम आपको संदेश भेजेंगे: {link}",
       te: "మీరు {dept} క్యూలో ఉన్నారు. మీ వంతును లైవ్‌గా చూడండి — సమయం దగ్గర పడినప్పుడు మేము మెసేజ్ చేస్తాము: {link}"
     },
+    // Prefixed to "registered" and "next" when the ticket has an OPD token: the number the waiting hall
+    // calls out is how a patient recognises their turn. A token is not PHI (it names nobody).
+    "queue.msg.token": {
+      en: "Your token: {token}.",
+      hi: "आपका टोकन: {token}।",
+      te: "మీ టోకెన్: {token}."
+    },
     "queue.msg.ahead5": {
       en: "About {ahead} patients ahead of you at {dept}. Please start heading over. Live status: {link}",
       hi: "{dept} पर आपसे आगे लगभग {ahead} मरीज़ हैं। कृपया आना शुरू करें। लाइव स्थिति: {link}",

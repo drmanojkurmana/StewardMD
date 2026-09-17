@@ -56,6 +56,24 @@ calculators, guided clinical workflow, imaging import, alerts, Lab Watch.
   real Vision observations: `test/fixtures/mp40-vision-*.json`; test `test/icu-ocr-monitor-boxes.test.mjs`.
   Gotcha: the "Recognized: ..." status line shows `lines.slice(0, 8)`; it is not the OCR's full output.
   See [[Decisions]] (2026-09-14).
+- Monitor parser v2 (2026-09-14, `icu-monitor-parser.js`, `window.SMD_ICU_MONITOR`): scored candidates
+  over the 2-D observation graph with colour (sampled from the original on a canvas) and relational
+  layout; per-field `AUTO_ACCEPTED` / `NEEDS_REVIEW` (value null + suggestion + reason) / `NOT_FOUND`.
+  Only AUTO values fill the tabs; `readImageLocal` returns `r.monitor = {fields, review, layout, stats}`.
+  Policy default STRICT (unlabeled → review); `localStorage.smd_icu_unlabeled_auto = "1"` relaxes.
+  Debug: `localStorage.smd_icu_ocr_debug = "1"` → console evidence + overlay on the review sheet.
+  AI Vision is offered only when a core vital needs review (`image-engine.js`), counters in
+  `SMD_IMAGE_ENGINE.stats()`. Benchmark: `node bench/icu-monitor/run.mjs [--policy relaxed] [--ocr]`,
+  report in `bench/icu-monitor/out/report.md`; device check `test/run-icu-ocr-device.mjs`.
+  RR AUTO also requires the independent pixel digit check (`verifyDigits`, templates from
+  `bench/icu-monitor/digit-templates.py`); without pixels (`px`) RR is always NEEDS_REVIEW.
+  Bench `--verify none|hr,spo2,rr,pulse` changes the gated fields.
+  Pass-3 rules (`FEATURES` in the parser, ablate with bench `--disable a,b`): Cyrillic/Greek look-alike
+  label text, ECG = HR label, PAP never SBP/DBP/MAP, one source label per reading, left-adjacent alarm
+  limit, MAP consistency check (`derivedMAP`, source CALCULATED, never fills MAP). Plain "IBP" and
+  edge-clipped source labels never prove ART. Bench scorer counts a wrong pressure SOURCE as wrong.
+  Gotcha: label changes can move `monitorRegion`, invalidating crop caches; run without --cached-only
+  (and in foreground chunks on the 8 GB Mac: background runs get killed for low memory).
 - Imaging import + correlation — Phase 1 shipped (`smd_icu_imaging`); phases 2–4 pending
 - ICU v2 redesign + collab — `feat/icu-v2-redesign` BUILT, flags `smd_icu_v2`/`smd_icu_groups` OFF, NOT deployed (owner must deploy rules+indexes, emulator + 2-device test)
 - Alert-safety fix — `fix/icu-alert-safety` committed NOT pushed

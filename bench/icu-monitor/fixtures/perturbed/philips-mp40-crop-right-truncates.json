@@ -1,0 +1,109 @@
+{
+  "id": "philips-mp40-crop-right-truncates",
+  "manufacturer": "philips-intellivue",
+  "layout": "right-column-limits-left",
+  "difficulty": [
+    "perturbed",
+    "crop"
+  ],
+  "image": "philips-mp40-crop-right-truncates.jpg",
+  "imageSize": {
+    "w": 666,
+    "h": 1600
+  },
+  "synthetic": false,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 105
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 100
+    },
+    "sbp": {
+      "status": "ambiguous",
+      "value": 149,
+      "why": "reading truncated by the crop"
+    },
+    "dbp": {
+      "status": "ambiguous",
+      "value": 66,
+      "why": "reading truncated by the crop"
+    },
+    "map": {
+      "status": "ambiguous",
+      "value": 98,
+      "why": "reading truncated by the crop"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 22
+    },
+    "pulse": {
+      "status": "not_visible",
+      "why": "cropped away"
+    },
+    "pvc": {
+      "status": "ambiguous",
+      "value": 0,
+      "why": "truncated"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "ambiguous",
+      "value": {
+        "sbp": 149,
+        "dbp": 66,
+        "map": 98
+      },
+      "why": "truncated"
+    },
+    "nibp": {
+      "status": "not_visible",
+      "why": "NBP in Auto mode with limits 160/90 shown, no measurement on screen"
+    },
+    "st": {
+      "status": "visible",
+      "value": {
+        "I": 0.0,
+        "II": 0.5,
+        "III": 0.5
+      }
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ],
+      "nibp": [
+        160,
+        90
+      ]
+    },
+    "clock": "20:38",
+    "banner": "** RR HIGH",
+    "rhythm": "Sinus Tach"
+  },
+  "notes": "Derived from the owner's real MP40 photo by perturb.py; truth changed only for fields listed in the perturbation's overrides.",
+  "group": "perturbed-real",
+  "derivedFrom": "philips-mp40-owner-900px",
+  "perturbation": {
+    "crop": "right edge at x=0.740 truncates 149/66 and PVC, removes Pulse"
+  }
+}

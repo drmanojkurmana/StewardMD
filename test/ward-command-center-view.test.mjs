@@ -45,7 +45,9 @@ test("twin: counts with ids are buttons, counts without say detail not available
   assert.ok(html.includes('data-w-act="twindrill:icu.occupied"'));
   assert.ok(html.includes('data-w-act="twindrill:flow.occupied"'));
   assert.ok(html.includes('data-w-act="twindrill:staffing.onDuty"'));
-  assert.match(html, /open item\(s\) <small class="w-hint">\(detail not available\)/);
+  // LT-39: a count with no list behind it is plain text, with no "(detail not available)" after every number.
+  assert.match(html, /<span title="Detail not available for this count\."><b>[^<]*<\/b> open item\(s\)<\/span>/);
+  assert.ok(!html.includes("(detail not available)"));
   assert.match(html, /Computed /);
   assert.match(html, /short 1 \(have 1 of 2\)/, "staffing gaps are named");
   assert.match(html, /No reported requests with both times in the last 7 days\. No figure is shown\./);

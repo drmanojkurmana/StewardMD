@@ -34,6 +34,10 @@ const str = (v) => (v == null ? "" : String(v).trim());
 /** Below this, a rate is reported but flagged: three of three is not evidence of anything. */
 const MIN_DENOMINATOR = 20;
 
+/* SCREEN TEXT BY CODE. The English here is what a report shows, and it stays: the staff screen translates by the
+ * stable code beside it (reasonCode, noteCode, note2Code, with the numbers in reasonVars/noteVars) and shows the English
+ * as sent when it does not know the code or the sentence has changed. A measure's id is the code for its title. */
+
 /** PURE. One measure. `rate` is null when there is nothing to divide by - never 0, never 100. */
 function measure(id, title, numerator, denominator, extra) {
   const n = Number(numerator) || 0, d = Number(denominator) || 0;
@@ -42,15 +46,15 @@ function measure(id, title, numerator, denominator, extra) {
     /* Null, not zero. "0%" over no cases reads as a failing ward; "no cases in this period" reads as
      * what it is. The distinction is the difference between a dashboard and a rumour. */
     rate: d > 0 ? Math.round((n / d) * 1000) / 1000 : null,
-    ...(d > 0 && d < MIN_DENOMINATOR ? { underpowered: true, note: `${d} case${d === 1 ? "" : "s"} in this period. Too few to read as a rate.` } : {}),
+    ...(d > 0 && d < MIN_DENOMINATOR ? { underpowered: true, note: `${d} case${d === 1 ? "" : "s"} in this period. Too few to read as a rate.`, noteCode: d === 1 ? "too-few-cases-one" : "too-few-cases", noteVars: { cases: d } } : {}),
     computable: true,
     ...(extra || {}),
   };
 }
 
 /** PURE. A measure the record cannot support, named with the reason rather than left off. */
-function notComputable(id, title, reason) {
-  return { id, title, numerator: null, denominator: null, rate: null, computable: false, reason };
+function notComputable(id, title, reason, reasonCode, reasonVars) {
+  return { id, title, numerator: null, denominator: null, rate: null, computable: false, reason, ...(reasonCode ? { reasonCode, ...(reasonVars ? { reasonVars } : {}) } : {}) };
 }
 
 const inPeriod = (t, fromMs, toMs) => {
@@ -80,6 +84,7 @@ function computeMeasures(input) {
     out.push(notComputable(
       "critical-ack-within-window", "Critical results acknowledged within the escalation window",
       "This hospital has configured no escalation window, so there is no threshold to measure against. Set wardsynq.criticalEscalation on the organisation.",
+      "no-escalation-window",
     ));
   } else {
     let onTime = 0, never = 0;
@@ -114,6 +119,7 @@ function computeMeasures(input) {
     out.push(notComputable(
       "dose-on-time", "Scheduled doses given within the grace period",
       `None of the ${given.length} doses given in this period record when they were due, so lateness cannot be computed. Administration records written before 2026-09-07 do not carry dueAt.`,
+      "no-due-times", { given: given.length },
     ));
   } else {
     let onTime = 0;
@@ -153,6 +159,7 @@ function computeMeasures(input) {
   out.push(notComputable(
     "allergy-status-documented", "Admissions with an allergy status documented",
     "WardSynQ cannot record \"asked, and there are none\", so a patient with no allergy record is indistinguishable from one nobody asked. Any rate here would report good documentation for a ward that never asks. This needs a no-known-allergies record, not a calculation.",
+    "no-allergy-status-record",
   ));
 
   return out;
@@ -262,7 +269,7 @@ function perThousand(id, title, cases, bedDays, extra) {
   return {
     id, title, computable: true, numerator: cases.length, denominator: round(bedDays, 1), unit: "per 1000 bed-days",
     rate: bedDays > 0 ? round((cases.length / bedDays) * 1000, 2) : null,
-    ...(bedDays > 0 ? {} : { note: "No occupied bed-days in this period, so there is no rate." }),
+    ...(bedDays > 0 ? {} : { note: "No occupied bed-days in this period, so there is no rate.", noteCode: "no-bed-days" }),
     cases, ...(extra || {}),
   };
 }
@@ -273,6 +280,7 @@ function seedRow(result, cases, extra) {
     id: result.measureId, title: result.label, version: result.version, computable: true,
     numerator: result.numerator, denominator: result.denominator, rate: result.rate,
     underpowered: result.suppressed, note: result.suppressed ? result.suppressionReason : null,
+    ...(result.suppressed ? { noteCode: "below-minimum", noteVars: { denominator: result.denominator, minimum: (Object.values(SEED).find((m) => m.id === result.measureId) || {}).minDenominator } } : {}),
     excluded: result.excluded, exclusionsByReason: result.exclusionsByReason, reading: result.reading,
     cases, ...(extra || {}), source: "wardsynq/wardsynq-quality.js",
   };
@@ -296,7 +304,7 @@ function computeQualitySafety(input) {
   const encBlocked = blocked(["Encounter"]);
 
   // LENGTH OF STAY, over stays that ENDED in the period.
-  if (encBlocked) out.push(notComputable("length-of-stay", "Length of stay", `Encounter records could not be read: ${bad.Encounter}`));
+  if (encBlocked) out.push(notComputable("length-of-stay", "Length of stay", `Encounter records could not be read: ${bad.Encounter}`, "type-unreadable", { type: "Encounter", why: bad.Encounter }));
   else {
     const days = closed.map((e) => (ms(e.periodEnd) - ms(e.periodStart)) / DAY);
     out.push({
@@ -311,8 +319,9 @@ function computeQualitySafety(input) {
   // MORTALITY and READMISSION: the seed definitions, fed the facts the record has.
   if (encBlocked || blocked(["Patient"])) {
     const why = `Records could not be read: ${bad.Encounter || bad.Patient}`;
-    out.push(notComputable(SEED.INPATIENT_MORTALITY.id, SEED.INPATIENT_MORTALITY.label, why));
-    out.push(notComputable(SEED.READMISSION_30D.id, SEED.READMISSION_30D.label, why));
+    const whyVars = { why: bad.Encounter || bad.Patient };
+    out.push(notComputable(SEED.INPATIENT_MORTALITY.id, SEED.INPATIENT_MORTALITY.label, why, "records-unreadable", whyVars));
+    out.push(notComputable(SEED.READMISSION_30D.id, SEED.READMISSION_30D.label, why, "records-unreadable", whyVars));
   } else {
     const deceasedAt = new Map((i.patients || []).filter((p) => p && p.deceased && p.deceased.at).map((p) => [str(p.id), ms(p.deceased.at)]));
     const died = (e) => {
@@ -332,14 +341,14 @@ function computeQualitySafety(input) {
     });
     const ids = (pred) => cases.filter(pred).map((c) => ({ id: c.id, patientId: c.patientId }));
     out.push(seedRow(computeMeasure(SEED.INPATIENT_MORTALITY, cases), ids((c) => c.died === true),
-      { note2: "Deaths are read from a recorded death (Patient.deceased) or a discharge disposition. A stay with neither is excluded as data missing, and counted." }));
+      { note2: "Deaths are read from a recorded death (Patient.deceased) or a discharge disposition. A stay with neither is excluded as data missing, and counted.", note2Code: "deaths-source" }));
     out.push(seedRow(computeMeasure(SEED.READMISSION_30D, cases), ids((c) => c.readmittedWithin30Days === true),
-      { note2: "The record has no planned-readmission flag, so every readmission is counted as unplanned." }));
+      { note2: "The record has no planned-readmission flag, so every readmission is counted as unplanned.", note2Code: "readmissions-all-unplanned" }));
   }
 
   // SEPSIS BUNDLE COMPLIANCE: code-sepsis bundles started in the period. A running bundle is not yet
   // compliant or breached, so it is held out of the seed measure and counted.
-  if (blocked(["ResusBundle"])) out.push(notComputable(SEED.SEPSIS_BUNDLE.id, SEED.SEPSIS_BUNDLE.label, `ResusBundle records could not be read: ${bad.ResusBundle}`));
+  if (blocked(["ResusBundle"])) out.push(notComputable(SEED.SEPSIS_BUNDLE.id, SEED.SEPSIS_BUNDLE.label, `ResusBundle records could not be read: ${bad.ResusBundle}`, "type-unreadable", { type: "ResusBundle", why: bad.ResusBundle }));
   else {
     const now = new Date(toMs).toISOString();
     const hyd = (i.bundles || []).filter((b) => b && b.code === "code-sepsis" && inP(b.timeZero || b.openedAt))
@@ -360,7 +369,7 @@ function computeQualitySafety(input) {
   const byCat = (c) => confirmed.filter((x) => x.category === c).map((x) => ({ id: x.id, patientId: x.patientId || null, severity: x.severity }));
   const incBlocked = blocked(["IncidentReport"]);
   const rateRow = (id, title, cat, extra) => (incBlocked || encBlocked
-    ? notComputable(id, title, `Records could not be read: ${bad.IncidentReport || bad.Encounter}`)
+    ? notComputable(id, title, `Records could not be read: ${bad.IncidentReport || bad.Encounter}`, "records-unreadable", { why: bad.IncidentReport || bad.Encounter })
     : perThousand(id, title, byCat(cat), bedDays, { source: "confirmed incidents, category " + cat, ...(extra ? extra() : {}) }));
   out.push(rateRow("falls", "Falls per 1000 bed-days", CATEGORY.FALL));
   out.push(rateRow("pressure-injuries", "Pressure injuries per 1000 bed-days", CATEGORY.PRESSURE_INJURY, () => {
@@ -378,8 +387,8 @@ function computeQualitySafety(input) {
 
   // ANTIBIOTIC DAYS OF THERAPY.
   const abx = (Array.isArray(i.antibiotics) ? i.antibiotics : []).map((a) => str(a).toLowerCase()).filter(Boolean);
-  if (!abx.length) out.push(notComputable("antibiotic-dot", "Antibiotic days of therapy per 1000 bed-days", "antibiotic list not configured. Set wardsynq.antibiotics on the organisation to the drug names or codes this hospital counts."));
-  else if (blocked(["MedicationAdministration", "Encounter"])) out.push(notComputable("antibiotic-dot", "Antibiotic days of therapy per 1000 bed-days", "Administration or encounter records could not be read."));
+  if (!abx.length) out.push(notComputable("antibiotic-dot", "Antibiotic days of therapy per 1000 bed-days", "antibiotic list not configured. Set wardsynq.antibiotics on the organisation to the drug names or codes this hospital counts.", "no-antibiotic-list"));
+  else if (blocked(["MedicationAdministration", "Encounter"])) out.push(notComputable("antibiotic-dot", "Antibiotic days of therapy per 1000 bed-days", "Administration or encounter records could not be read.", "administrations-unreadable"));
   else {
     const days = new Map();
     for (const a of i.administrations || []) {
@@ -395,7 +404,7 @@ function computeQualitySafety(input) {
   // TURNAROUND TIMES.
   const reqAt = new Map((i.requests || []).filter(Boolean).map((r) => [str(r.id), r.authoredOn || r.requestedAt || r.orderedAt || (r.meta && r.meta.recordedAt) || null]));
   const tat = (id, title, pick) => {
-    if (blocked(["DiagnosticReport", "ServiceRequest"])) return notComputable(id, title, "Report or request records could not be read.");
+    if (blocked(["DiagnosticReport", "ServiceRequest"])) return notComputable(id, title, "Report or request records could not be read.", "reports-unreadable");
     const items = (i.reports || []).filter((r) => r && pick(r) && inP(r.reportedAt));
     const measured = [], excluded = [];
     for (const r of items) {
@@ -415,14 +424,14 @@ function computeQualitySafety(input) {
 
   // BED UTILISATION from the configured beds.
   const bedCount = i.beds && typeof i.beds === "object" ? Object.values(i.beds).reduce((n, v) => n + (Array.isArray(v) ? v.length : 0), 0) : 0;
-  if (!bedCount) out.push(notComputable("bed-utilisation", "Bed utilisation", "No beds are configured for this hospital (wardsynq.beds), so there is no available bed-days denominator."));
-  else if (encBlocked) out.push(notComputable("bed-utilisation", "Bed utilisation", `Encounter records could not be read: ${bad.Encounter}`));
+  if (!bedCount) out.push(notComputable("bed-utilisation", "Bed utilisation", "No beds are configured for this hospital (wardsynq.beds), so there is no available bed-days denominator.", "no-beds-configured"));
+  else if (encBlocked) out.push(notComputable("bed-utilisation", "Bed utilisation", `Encounter records could not be read: ${bad.Encounter}`, "type-unreadable", { type: "Encounter", why: bad.Encounter }));
   else {
     const available = bedCount * ((toMs - fromMs) / DAY);
     out.push({
       id: "bed-utilisation", title: "Bed utilisation (occupied / available bed-days)", computable: true,
       numerator: round(bedDays, 1), denominator: round(available, 1), rate: available > 0 ? round(bedDays / available, 3) : null,
-      configuredBeds: bedCount, note: "Available beds are the configured bed list; blocked or closed beds are not subtracted.",
+      configuredBeds: bedCount, note: "Available beds are the configured bed list; blocked or closed beds are not subtracted.", noteCode: "beds-not-subtracted",
       cases: stays.filter((e) => overlapDays(e, fromMs, toMs) > 0).map((e) => ({ id: e.id, patientId: e.patientId || null, bedDays: round(overlapDays(e, fromMs, toMs), 2) })),
     });
   }

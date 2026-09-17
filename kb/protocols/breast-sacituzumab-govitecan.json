@@ -1,0 +1,97 @@
+{
+  "id": "breast-sacituzumab-govitecan",
+  "diseaseId": "breast_cancer",
+  "name": "Sacituzumab Govitecan (Trodelvy)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "Cycled every 21 days continuously until disease progression or unacceptable toxicity.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
+    "primaryStudy": "ASCENT: Bardia A, et al. N Engl J Med 2021;384:1529-1541; TROPiCS-02: Rugo HS, et al. Lancet 2023;402:1423-1433",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-Q 2, 3, 9 of 15)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HER2": "negative",
+    "note": "Indicated for: (1) locally advanced or metastatic TNBC after at least one prior systemic therapy (or 1L if PD-L1 CPS <10); (2) HR-positive, HER2-negative (including HER2-null and HER2-low) metastatic breast cancer after endocrine therapy, CDK4/6 inhibitor, and chemotherapy. TROP-2 directed antibody-drug conjugate with SN-38 topoisomerase-1 payload. Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-Q (2, 3, and 9 of 15) (Category 1, Preferred)."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "invasive breast carcinoma (TNBC or HR-positive / HER2-negative)",
+  "premedications": [
+    {
+      "name": "Antiemetic & Antihistamine premedication",
+      "notes": "Administer two-drug or three-drug antiemetic combination (e.g. 5-HT3 antagonist + dexamethasone) prior to each infusion. Give antipyretic (acetaminophen) and antihistamines prior to infusion to prevent infusion reactions."
+    }
+  ],
+  "supportiveCare": [
+    "Neutropenia management: Severe or febrile neutropenia may occur. G-CSF support is recommended for secondary prophylaxis or if counts delay therapy.",
+    "Diarrhea management: If acute cholinergic diarrhea occurs during infusion, administer atropine 0.4 mg SC/IV. For delayed diarrhea, initiate loperamide (4 mg then 2 mg q2h) immediately at onset of loose stools.",
+    "UGT1A1*28 poor metabolizers: Patients homozygous for UGT1A1*28 allele are at higher risk of neutropenia and diarrhea; monitor closely."
+  ],
+  "monitoring": [
+    "CBC with differential prior to each dose (Day 1 and Day 8 of each 21-day cycle)",
+    "Monitor for severe diarrhea, nausea, vomiting, and hydration status each cycle",
+    "Monitor for infusion-related reactions during and for at least 30 minutes after infusion"
+  ],
+  "clearanceChecks": [
+    "Day 1: ANC \u2265 1500/mcL and platelets \u2265 100,000/mcL",
+    "Day 8: ANC \u2265 1000/mcL and platelets \u2265 75,000/mcL (hold Day 8 dose if counts lower)",
+    "resolution of diarrhea and stomatitis to grade \u2264 1",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "severe neutropenia (grade 4 neutropenia \u22657 days, or febrile neutropenia)",
+      "drug": "sacituzumab govitecan",
+      "action": "hold/reduce",
+      "text": "Withhold sacituzumab govitecan until ANC \u2265 1500/mcL. For first occurrence, reduce dose by 25% (10 mg/kg -> 7.5 mg/kg); for second occurrence, reduce by another 25% (7.5 mg/kg -> 5 mg/kg). Discontinue if grade 4 neutropenia recurs at 5 mg/kg. Add G-CSF."
+    },
+    {
+      "condition": "grade 3 or 4 diarrhea",
+      "drug": "sacituzumab govitecan",
+      "action": "hold/reduce",
+      "text": "Withhold until resolved to grade \u2264 1. Resume with 25% dose reduction (7.5 mg/kg)."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "sacituzumab-govitecan",
+      "name": "Sacituzumab Govitecan",
+      "basis": "mgkg",
+      "dosePerUnit": 10,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 9 of 15. Sacituzumab govitecan 10 mg/kg IV on Days 1 and 8 of each 21-day cycle.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "locator": "BINV-Q 2, 3, and 9 of 15 (ASCENT / TROPiCS-02)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8
+      ],
+      "modificationRules": []
+    }
+  ]
+}

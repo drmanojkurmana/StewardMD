@@ -24,7 +24,14 @@ import * as ORG from "../../_opd_org_store.js";
 import { recordDeps } from "../../_wardsynq/deps.js";
 import { redeemCode, portalRead, sessionPatient } from "../../_wardsynq/patient-access.js";
 import { sendMessage, requestAppointment } from "../../_wardsynq/portal-requests.js";
-import { withdrawOwnConsent } from "../../_wardsynq/portal-view.js";
+import { withdrawOwnConsent, portalDocumentFile, queueStatus } from "../../_wardsynq/portal-view.js";
+import { portalPrivacy, portalAcknowledge, portalDataRequest } from "../../_wardsynq/dpdp.js";
+import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
+import { bookingOptions, bookOnline, cancelOnline, rescheduleOnline } from "../../_wardsynq/online-booking.js";
+import { getPreference, setPreference } from "../../_wardsynq/patient-messaging.js";
+import { feedbackSettings, openSurvey, submitSurvey, pendingSurveys } from "../../_wardsynq/patient-feedback.js";
+import { queueEnabled } from "../../_queue.js";
+import { listSessions, listTickets, opdDate } from "../../_queue_engine.js";
 
 function corsHeaders(request) {
   const origin = (request && request.headers && request.headers.get("Origin")) || "";
@@ -84,6 +91,36 @@ export async function onRequest(context) {
     });
     return json(r, r.ok ? 200 : (r.status || 502), request);
   }
+  /* P2 gaps: the two further session reads. Each checks the session and the grant's section first,
+   * then takes the patient from the grant, exactly like the record read. */
+  if (sub === "queue" || sub === "document") {
+    const session = await sessionPatient({ ...deps, grantId: body.grantId, token: body.token });
+    if (!session.ok) return json({ ok: false, error: session.error, detail: session.detail || null }, session.status || 401, request);
+    if (sub === "queue") {
+      const r = await queueStatus({ ...deps, queue: {
+        enabled: queueEnabled(env), date: opdDate(),
+        listSessions: (date) => listSessions(env, org.id, date), listTickets: (sid) => listTickets(env, sid), listRooms: () => ORG.listRooms(env, org.id),
+      } }, session);
+      return json(r, r.ok ? 200 : (r.status || 502), request);
+    }
+    const r = await portalDocumentFile({ ...deps, env, store: documentStoreFromEnv(env), documentId: body.documentId, version: body.version }, session);
+    if (!r.ok) return json(r, r.status || 502, request);
+    /* The bytes themselves, through this response. No object-store key or address ever leaves the server. */
+    return new Response(r.bytes, { status: 200, headers: Object.assign({
+      "Content-Type": r.contentType || "application/octet-stream", "Cache-Control": "no-store",
+      "Content-Disposition": `attachment; filename="${r.filename}"`, "X-Content-Type-Options": "nosniff",
+    }, corsHeaders(request)) });
+  }
+  /* DPDP Act 2023: the hospital's privacy notice in the patient's language, their acknowledgement of it, and their own
+   * access / correction / erasure / grievance / nomination request. Session first, patient from the grant, as below;
+   * a proxy may read the notice and never acknowledges or requests on the patient's behalf (dpdp.js refuses it). */
+  if (sub === "privacy" || sub === "privacy-acknowledge" || sub === "data-request") {
+    const session = await sessionPatient({ ...deps, grantId: body.grantId, token: body.token });
+    if (!session.ok) return json({ ok: false, error: session.error, detail: session.detail || null }, session.status || 401, request);
+    const dctx = { ...deps, language: body.language, kind: body.kind, detail: body.detail, nominee: body.nominee, dpdp: (cfg && cfg.dpdp) || null };
+    const r = sub === "privacy" ? await portalPrivacy(dctx, session) : sub === "privacy-acknowledge" ? await portalAcknowledge(dctx, session) : await portalDataRequest(dctx, session);
+    return json(r, r.ok ? 200 : (r.status || 502), request);
+  }
   /* The two write routes. Both check the session FIRST and then take the patient id from the grant -
    * a caller cannot name whose record it writes onto, exactly as on the read side. */
   if (sub === "message" || sub === "appointment-request" || sub === "consent-withdraw") {
@@ -102,6 +139,50 @@ export async function onRequest(context) {
       return json(r, r.ok ? 200 : (r.status || 502), request);
     }
     const r = await requestAppointment(request, env, { ...deps, patientId: session.patientId, actorId: session.readerId, reason: body.reason, preference: body.preference });
+    return json(r, r.ok ? 200 : (r.status || 502), request);
+  }
+
+  /* SURVEY BY LINK (patient-feedback.js). No session: the random token in the link opens that one survey and
+   * nothing else, and a wrong token and a missing one answer alike. Off unless the hospital turned feedback on. */
+  if (sub === "feedback-open" || (sub === "feedback-submit" && str(body.surveyToken))) {
+    if (!feedbackSettings(cfg && cfg.feedback).enabled) return json({ ok: false, error: "not_found" }, 404, request);
+    const fctx = { repository: deps.recordDeps.repository, tenantId: migration.tenantId, token: body.surveyToken, feedbackCfg: cfg && cfg.feedback };
+    if (sub === "feedback-open") {
+      const r = await openSurvey(fctx);
+      // The invitation stays on the server: the page gets the state and the questions, never the patient.
+      return json(r.ok ? { ok: true, state: r.state, survey: r.survey || null, hospital: org.name || null } : r, r.ok ? 200 : (r.status || 502), request);
+    }
+    const r = await submitSurvey({ ...fctx, answers: body.answers });
+    return json(r, r.ok ? 200 : (r.status || 502), request);
+  }
+  /* BOOKING, MESSAGE PREFERENCES AND SURVEYS WITHIN A SESSION. The session is checked first and the patient comes
+   * from the grant. Booking needs the grant's appointments section. Consent to be messaged, and answering a survey,
+   * are the patient's own: a proxy may see them and may not change or answer them. */
+  const ENGAGE = new Set(["booking-options", "booking-book", "booking-cancel", "booking-reschedule", "comm-preferences", "comm-preference-set", "feedback-pending", "feedback-submit"]);
+  if (ENGAGE.has(sub)) {
+    const session = await sessionPatient({ ...deps, grantId: body.grantId, token: body.token });
+    if (!session.ok) return json({ ok: false, error: session.error, detail: session.detail || null }, session.status || 401, request);
+    const repo = { repository: deps.recordDeps.repository, tenantId: migration.tenantId };
+    let r;
+    if (sub.startsWith("booking-")) {
+      if (!session.sections.includes("appointments")) return json({ ok: false, error: "not_in_grant", detail: "This access does not include that." }, 403, request);
+      const bctx = { ...deps, wsqCfg: cfg, clinicianId: body.clinicianId, startAt: body.startAt, reason: body.reason, appointmentId: body.appointmentId };
+      r = sub === "booking-options" ? await bookingOptions(bctx, session) : sub === "booking-book" ? await bookOnline(bctx, session)
+        : sub === "booking-cancel" ? await cancelOnline(bctx, session) : await rescheduleOnline(bctx, session);
+    } else if (sub === "comm-preferences") {
+      r = await getPreference({ ...repo, patientId: session.patientId });
+      if (r.ok) r.canChange = !session.proxy;
+    } else if (sub === "comm-preference-set") {
+      if (session.proxy) return json({ ok: false, error: "patient_only", detail: "Only the patient can change how the hospital contacts them." }, 403, request);
+      r = await setPreference({ ...repo, dpdp: cfg && cfg.dpdp, patientId: session.patientId, channel: body.channel, optedIn: body.optedIn === true, mobile: body.mobile, source: "portal", by: session.readerId || `patient:${session.patientId}` });
+    } else if (sub === "feedback-pending") {
+      r = feedbackSettings(cfg && cfg.feedback).enabled ? await pendingSurveys({ ...repo, patientId: session.patientId }) : { ok: true, surveys: [] };
+      if (r.ok) r.canAnswer = !session.proxy;
+    } else {
+      if (session.proxy) return json({ ok: false, error: "patient_only", detail: "Only the patient can answer their survey." }, 403, request);
+      if (!feedbackSettings(cfg && cfg.feedback).enabled) return json({ ok: false, error: "not_found" }, 404, request);
+      r = await submitSurvey({ ...repo, feedbackCfg: cfg && cfg.feedback, inviteId: body.inviteId, sessionPatientId: session.patientId, answers: body.answers });
+    }
     return json(r, r.ok ? 200 : (r.status || 502), request);
   }
 

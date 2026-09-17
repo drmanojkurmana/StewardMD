@@ -71,9 +71,28 @@ test("delete-file is offered only after the retention date, and never for an alr
   assert.match(gone, /File deleted after its retention period/);
 });
 
+test("G5: each document lists its portal releases with id, when, by whom, scope and whether still current; a failed read says so", () => {
+  const W = loadWard();
+  const rel = (v, at, extra) => ({ releaseId: "wsq-release-p1-doc-d1-v" + v, version: v, at, releasedBy: "dr.rel", scope: "patient-portal", reason: "Patient asked", consentRef: null, current: false, ...(extra || {}) });
+  const html = view(W, { ok: true, storageConfigured: true, documents: [{ ...DOC, portalReleases: [rel(2, "2026-09-14T10:00:00.000Z", { current: true }), rel(1, "2026-09-13T10:00:00.000Z")] }] });
+  assert.match(html, /Released to the patient portal/);
+  assert.match(html, /Version 2 <span class="w-st done">Current version<\/span>/);
+  assert.match(html, /Version 1 <span class="w-st missed">Not current: version 2 is newer<\/span>/);
+  assert.match(html, /by dr\.rel &middot; Patient portal \(the patient, and any family member granted documents\)/);
+  assert.match(html, /Release wsq-release-p1-doc-d1-v2 &middot; Reason: Patient asked/);
+  const withdrawn = view(W, { ok: true, storageConfigured: true, documents: [{ ...DOC, status: "entered-in-error", portalReleases: [rel(2, "2026-09-14T10:00:00.000Z")] }] });
+  assert.match(withdrawn, /Not current: document withdrawn/);
+  const none = view(W, { ok: true, storageConfigured: true, documents: [{ ...DOC, portalReleases: [] }] });
+  assert.match(none, /Not released to the patient portal/);
+  const failed = view(W, { ok: true, storageConfigured: true, documents: [{ ...DOC, portalReleases: false }] });
+  assert.match(failed, /Could not load which versions were released to the patient portal\. Do not read this as never released/);
+  assert.ok(!failed.includes("Not released to the patient portal"), "a failed read never looks like none");
+  assert.ok(!view(W, { ok: true, storageConfigured: true, documents: [DOC] }).includes("patient portal."), "nothing claimed when the server sent nothing");
+});
+
 test("the chart has a Documents button, and opening a file asks the server for a link rather than building one", () => {
   const src = readFileSync(new URL("../ward.js", import.meta.url), "utf8");
-  assert.match(src, /data-w-act="documents"/);
+  assert.match(src, /act: "documents"[^\n]*label: "Documents"/); // a chart header tab (CHART_CATS)
   assert.match(src, /apiPost\("\/ward\/document-link"/);
   assert.ok(!/document-file\?t=/.test(src), "the screen never constructs a file address itself");
 });

@@ -180,7 +180,7 @@ test("JOURNEY: ED -> ICU -> WARD -> SURGERY -> WARD -> DISCHARGE stays ONE patie
   const consent = await as(DOCTOR, "/ward/surgery-consent", "POST", { orgId: ORG, caseId: booking.caseId, consent: { procedure: "Coronary artery bypass", laterality: "not-applicable", signedByPatientOrProxy: true } });
   assert.equal(consent.__status, 200, JSON.stringify(consent));
   await as(DOCTOR, "/ward/surgery-marksite", "POST", { orgId: ORG, caseId: booking.caseId, marking: { site: "chest", laterality: "not-applicable" } });
-  const signIn = await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId: booking.caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable" } });
+  const signIn = await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId: booking.caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable", pacAcknowledgement: "Checkup done on paper, entered later" } });
   assert.equal(signIn.__status, 200, JSON.stringify(signIn));
   const timeOut = await as(DOCTOR, "/ward/surgery-timeout", "POST", { orgId: ORG, caseId: booking.caseId, submission: { items: allOf(TIME_OUT_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable" } });
   assert.equal(timeOut.__status, 200, JSON.stringify(timeOut));
@@ -188,7 +188,7 @@ test("JOURNEY: ED -> ICU -> WARD -> SURGERY -> WARD -> DISCHARGE stays ONE patie
   assert.equal(incise.__status, 200, JSON.stringify(incise), "the checklist gate cleared - incision reachable, proving the journey's surgery leg is a REAL gated case, not a bypass");
 
   // ---- Discharge: closes the journey. Patient stays the same throughout. -----------------------------
-  const finalDischarge = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: icuEncounterId, disposition: "home" });
+  const finalDischarge = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: icuEncounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(finalDischarge.__status, 200, JSON.stringify(finalDischarge));
   const closedWard = await RECORD.latest(TENANT_ROW.id, "Encounter", icuEncounterId);
   assert.equal(closedWard.status, "finished");

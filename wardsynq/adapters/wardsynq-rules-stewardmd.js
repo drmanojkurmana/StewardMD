@@ -50,21 +50,29 @@ const SEVERITY_MAP = Object.freeze({
  * UNAPPROVED. Requires Head of Clinical Pharmacy sign-off before it can gate a real order.
  */
 const DOSE_LIMITS_SEED = Object.freeze({
+  /* LT-10: the mg/kg dose is the child's and small adult's (up to 50 kg). Above 50 kg the adult dose
+   * applies: 1 g per dose, 4 g a day (1 g q6h). Hepatic reduction is not modelled here. */
   paracetamol: {
     maxSingle: { value: 1000, unit: "mg" },
     absoluteCeilingSingle: { value: 1000, unit: "mg" },
+    absoluteCeilingDaily: { value: 4000, unit: "mg" },
     mgPerKgSingle: 15,
-    note: "15 mg/kg per dose, adult single dose capped at 1 g. Daily ceilings and hepatic reduction are not modelled here.",
+    mgPerKgUpToKg: 50,
+    note: "15 mg/kg per dose up to 50 kg; above 50 kg 1 g per dose, 4 g a day. Hepatic reduction is not modelled here.",
   },
   acetaminophen: {
     maxSingle: { value: 1000, unit: "mg" },
     absoluteCeilingSingle: { value: 1000, unit: "mg" },
+    absoluteCeilingDaily: { value: 4000, unit: "mg" },
     mgPerKgSingle: 15,
+    mgPerKgUpToKg: 50,
   },
+  // 10 mg/kg is the paediatric dose; from 40 kg the adult single dose applies.
   ibuprofen: {
     maxSingle: { value: 800, unit: "mg" },
     absoluteCeilingSingle: { value: 800, unit: "mg" },
     mgPerKgSingle: 10,
+    mgPerKgUpToKg: 40,
   },
   gentamicin: { mgPerKgSingle: 7, note: "Once-daily dosing. Not valid for synergy or endocarditis regimens." },
   digoxin: { maxSingle: { value: 500, unit: "mcg" }, absoluteCeilingSingle: { value: 1500, unit: "mcg" } },
@@ -75,6 +83,16 @@ const DOSE_LIMITS_SEED = Object.freeze({
     note: "ORAL WEEKLY dosing only. Daily administration of a weekly dose is a recognised fatal error; this ceiling does not detect frequency errors, which need the order's frequency, not its dose.",
   },
 });
+
+/**
+ * Pregnancy and lactation guidance, per generic: { pregnancy?: {level, text}, lactation?: {level, text} }, level
+ * one of the engine's SEVERITY values (wardsynq-safety.js checkPregnancyLactation). SHIPPED EMPTY ON PURPOSE:
+ * no guidance is written here without a pharmacy and obstetric source, and an empty table is an honest "no
+ * rules loaded" (the order screen says so) where a guessed one would not be.
+ *
+ * UNAPPROVED. Each entry added here is listed on Admin > Clinical seed data (seed-signoff.js) for sign-off.
+ */
+const PREGNANCY_LACTATION_SEED = Object.freeze({});
 
 /**
  * Builds a compiled WardSynQ rule pack from StewardMD's data files.
@@ -139,11 +157,12 @@ function buildRulePack(raw, allergySeed, opts) {
     aliases: { ...brandAliases, ...firstWord },
     combinations: buildCombinations(raw, brandMap, firstWord),
     drugClasses: raw.drugClasses || {},
-    interactions: (raw.rules || []).map(mapInteractionRule),
+    interactions: withoutGroupingDuplicates(raw.rules || [], raw.drugClasses || {}).map(mapInteractionRule),
     allergyClasses: withSpellingVariants(allergySeed.allergyClasses || {}, raw),
     crossReactivity: allergySeed.crossReactivity || [],
     doseLimits: opts.doseLimits || (includeSeeds ? DOSE_LIMITS_SEED : {}),
     renalAdjustments: opts.renalAdjustments || {},
+    pregnancyLactation: opts.pregnancyLactation || (includeSeeds ? PREGNANCY_LACTATION_SEED : {}),
   });
 }
 
@@ -355,17 +374,49 @@ function withSpellingVariants(allergyClasses, raw) {
 }
 
 /** Maps one StewardMD rule record into the engine's interaction shape. */
+/**
+ * Drops the generated duplicate-therapy rules that sit on a GROUPING class rather than a drug class.
+ *
+ * LT-10 (live test 2026-09-15): amoxicillin for a patient on warfarin and clarithromycin said "Possible
+ * therapeutic duplication: amoxicillin with Warfarin, Clarithromycin". The pipeline
+ * (scripts/interactions/build_rules.py _auto_duplicate_rules) writes one such rule for every RxClass EPC
+ * tag with two or more members, and the tags include the tree's own grouping nodes: "Established
+ * Pharmacologic Classes" holds 2339 of the 2620 generics, warfarin among them, and "Antibacterial" holds
+ * a penicillin and a macrolide, which is combination therapy and not duplication.
+ *
+ * A grouping class is one that strictly contains another class with two or more members. Duplication is
+ * then judged only at the most specific class, so two penicillins or two macrolides still fire. Only the
+ * generated rules (an "epc:" subject) are pruned: a curated rule such as two anticoagulants is kept
+ * whatever its class contains.
+ */
+function withoutGroupingDuplicates(rules, drugClasses) {
+  const members = new Map();
+  for (const [generic, tags] of Object.entries(drugClasses)) {
+    for (const t of tags || []) { if (!members.has(t)) members.set(t, new Set()); members.get(t).add(generic); }
+  }
+  const classes = [...members.entries()].filter(([t, m]) => t.startsWith("epc:") && m.size >= 2);
+  const grouping = (tag) => {
+    const m = members.get(tag);
+    return !!m && classes.some(([t, sub]) => t !== tag && sub.size < m.size && [...sub].every((g) => m.has(g)));
+  };
+  return rules.filter((r) => !(r && r.type === "duplicate_class" && (r.subjects || []).length === 1
+    && String(r.subjects[0].value || "").startsWith("epc:") && grouping(r.subjects[0].value)));
+}
+
+/** The rule's own words, less the em dash the generator writes into them (no em dash in app text). */
+const noDash = (s) => (typeof s === "string" ? s.replace(/\s*—\s*/g, ": ") : s);
+
 function mapInteractionRule(rule) {
   return {
     id: rule.id,
     type: rule.type,
     severity: SEVERITY_MAP[rule.severity] || "monitor",
     subjects: rule.subjects || [],
-    mechanism: rule.mechanism,
-    effect: rule.effect,
-    action: rule.action,
-    monitoring: rule.monitoring,
+    mechanism: noDash(rule.mechanism),
+    effect: noDash(rule.effect),
+    action: noDash(rule.action),
+    monitoring: noDash(rule.monitoring),
   };
 }
 
-export { loadStewardMDRulePack, buildRulePack, mapInteractionRule, buildFirstWordAliases, buildBrandAliases, DOSE_LIMITS_SEED, SEVERITY_MAP };
+export { loadStewardMDRulePack, buildRulePack, mapInteractionRule, buildFirstWordAliases, buildBrandAliases, DOSE_LIMITS_SEED, PREGNANCY_LACTATION_SEED, SEVERITY_MAP };

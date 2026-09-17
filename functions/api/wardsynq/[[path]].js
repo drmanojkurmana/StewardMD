@@ -40,7 +40,9 @@ import { IntegrationHub } from "../../../wardsynq/wardsynq-interop.js";
 import { sccmAdapter } from "../../../wardsynq/adapters/wardsynq-sccm-adapter.js";
 import { reconcileIdentity, identityCandidates, rebind, authorizedSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 
-const ROUTE_GOVERNED = new Set(["Verification", "MedicationVerification", "MedicationDispense", "MedicationAdministration", "EmergencyActivation", "BreakGlassGrant", "SourceSystemGrant", "PatientConsent", "CriticalResultLoop", "SafetyOverride"]);
+const ROUTE_GOVERNED = new Set(["Verification", "MedicationVerification", "MedicationDispense", "MedicationAdministration", "EmergencyActivation", "BreakGlassGrant", "SourceSystemGrant", "PatientConsent", "CriticalResultLoop", "SafetyOverride",
+  // Hospital support services (2026-09-16): each has a state machine its own routes enforce.
+  "DietOrder", "MealRound", "InstrumentSet", "SterilizerLoad", "CssdCycle", "HousekeepingTask", "AmbulanceVehicle", "AmbulanceTrip", "MortuaryCase"]);
 
 export function recordFlagOn(env) { return String(env && env.WARDSYNQ_RECORD) === "1"; }
 
@@ -134,7 +136,8 @@ export async function handle(request, env, deps) {
       if (rest.length === 0) return jsonResponse({ ok: true, ...svc.descriptor() });
 
       if (rest[0] === "changes" && rest.length === 1) {
-        const page = await svc.changes(url.searchParams.get("since"), url.searchParams.get("limit"));
+        const newest = url.searchParams.get("newest") === "1";
+        const page = await svc.changes(url.searchParams.get("since"), url.searchParams.get("limit"), newest ? { newest: true, before: url.searchParams.get("before") } : undefined);
         return jsonResponse({ ok: true, ...page });
       }
       if (rest[0] === "list" && rest.length === 2) {

@@ -40,7 +40,7 @@ const DOMAIN = join(ROOT, "functions/_wardsynq");
 
 const SKIP_DIRS = new Set([
   "node_modules", ".git", "functions", "test", "docs", "vault", "prompts",
-  "scripts", "www", "dist", "ios", "android", ".claude", "coverage",
+  "scripts", "www", "dist", "dist-wardsynq", "ios", "android", ".claude", "coverage",
 ]);
 
 /** Any .js/.html outside the backend that talks to the API is a screen. Discovered, not listed. */

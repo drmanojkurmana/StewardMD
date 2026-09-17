@@ -91,7 +91,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
   font: 600 14px var(--w-sans); padding: 11px 18px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
 #smdWard .w-btn:active { filter: brightness(.92); }
 #smdWard .w-btn.ghost { background: var(--sc); color: var(--on-surface); }
-#smdWard .w-btn.tiny { font-size: 13px; padding: 8px 14px; min-height: 40px; background: var(--sc-high); color: var(--on-surface); text-transform: capitalize; }
+#smdWard .w-btn.tiny { font-size: 13px; padding: 8px 14px; min-height: 40px; background: var(--sc-high); color: var(--on-surface); }
 #smdWard .w-btn.tiny.go { background: var(--primary); color: var(--on-primary); }
 #smdWard .w-btn.tiny.warn { background: var(--error-container); color: var(--on-error-container); }
 
@@ -135,6 +135,19 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-chart-h > div { flex: 1 1 220px; min-width: 180px; }
 #smdWard .w-chart-h b { display: block; font-size: 15px; overflow-wrap: anywhere; }
 #smdWard .w-chart-h small { color: var(--on-surface-variant); font-size: 12px; }
+/* BUG-MU2PM1D9: the chart's screens as categories, then the chosen category's buttons. The category
+ * bar scrolls inside itself on a phone; the page never scrolls sideways. */
+#smdWard .w-cnav { flex: 1 1 100%; min-width: 0; }
+#smdWard .w-cnav-bar { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin; border-bottom: 1px solid var(--outline-variant); margin-bottom: 10px; }
+#smdWard .w-cnav-t { appearance: none; background: none; border: 0; border-bottom: 3px solid transparent; color: var(--on-surface-variant);
+  font: 600 14px var(--w-sans); padding: 10px 12px; min-height: 44px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; flex: 0 0 auto; }
+#smdWard .w-cnav-t[aria-selected="true"] { color: var(--primary); border-bottom-color: var(--primary); }
+#smdWard .w-cnav-p[hidden] { display: none; }
+#smdWard .w-cnav-p [role="toolbar"] { display: flex; flex-wrap: wrap; gap: 8px; }
+#smdWard .w-cnav-b { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--sc-high); color: var(--on-surface);
+  font: 700 12px/20px var(--w-sans); text-align: center; }
+#smdWard .w-cnav-b.urgent { background: var(--error); color: var(--on-error); }
+@media (max-width: 600px) { #smdWard .w-cnav-t .material-symbols-outlined { display: none; } }
 
 /* problem list */
 #smdWard .w-problems { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
@@ -414,13 +427,27 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
    both must be legible in black and white. Only the section headings are new. */
 #smdWard .w-dt-p h3 { margin: 0 0 8px; font-size: 14px; letter-spacing: .01em; }
 #smdWard .w-dt-p h3 + .w-dt-alg { margin-top: 0; }
+/* The second language (wardsynq/site/print-lang.js): a dashed box after the English section it belongs to,
+   labelled, so on paper it can never be read as part of the English record. */
+#smdWard .p-tr { border: 1.5px dashed var(--outline-variant); border-radius: 12px; padding: 8px 12px; font-size: 14px; }
+#smdWard .p-tr h3, #smdWard .p-tr h4 { margin: 2px 0 4px; font-size: 14px; }
+#smdWard .p-tr p, #smdWard .p-tr ul { margin: 2px 0; }
+#smdWard .p-tr-l { display: block; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--on-surface-variant); }
+#smdWard .p-tr-auth { font-weight: 600; }
 
+/* rcm-claims-ops: the evidence pack's print copy, shown only on paper (the screen edits the textarea). */
+#smdWard .w-evidence-print { display: none; }
 @media print {
   /* The pack is the page. Everything else in the app is hidden, and the shell's fixed positioning is
      undone so more than the first screenful reaches the paper. */
+  /* The page behind the ward (the map, the sidebar, the Report Bug button) is hidden too, or a Patient copy
+     printed them after the copy (LT-33). Only while the ward is open and the discharge summary is not: that
+     layer prints itself (discharge.css). */
+  body:has(> #smdWard.on):not(:has(> #smdDischarge.on)) > *:not(#smdWard) { display: none !important; }
   #smdWard { position: static; background: #fff; color: #000; }
   #smdWard .w-shell, #smdWard .w-canvas { display: block; height: auto; overflow: visible; padding: 0; }
   #smdWard .w-top, #smdWard .w-noprint, #smdWard .w-refusal, #smdWard .w-err, #smdWard .w-ok { display: none !important; }
+  #smdWard .w-evidence-print { display: block !important; }
   #smdWard .w-dt-p { page-break-inside: avoid; break-inside: avoid; border: 0; border-bottom: 1.5pt solid #000; border-radius: 0; padding: 0 0 10pt; margin-bottom: 12pt; }
   #smdWard .w-dt-h { border: 0; border-bottom: 2pt solid #000; border-radius: 0; padding: 0 0 8pt; }
   #smdWard .w-dt-bed { background: #000; color: #fff; border-radius: 0; }
@@ -428,6 +455,8 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
      weight rather than relying on a tint that prints as pale grey. */
   #smdWard .w-dt-warn { background: none; color: #000 !important; border: 1.5pt solid #000; border-radius: 0; font-weight: 600; }
   #smdWard .w-dt-gap { background: none; color: #000; border: 1.5pt solid #000; border-radius: 0; }
+  #smdWard .p-tr { border: 1pt dashed #000; border-radius: 0; color: #000; page-break-inside: avoid; break-inside: avoid; margin-bottom: 12pt; }
+  #smdWard .p-tr-l { color: #000; }
   @page { size: A4; margin: 12mm; }
 }
 
@@ -475,7 +504,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-flowgrid td.late { color: var(--on-warn-container); }
 #smdWard .w-news2 { display: inline-flex; align-items: baseline; gap: 8px; padding: 8px 12px; border-radius: 12px; background: var(--sc-high); margin-bottom: 10px; }
 #smdWard .w-news2 b { font-size: 20px; font-weight: 800; }
-#smdWard .w-news2 span { font-size: 12px; color: var(--on-surface-variant); text-transform: capitalize; }
+#smdWard .w-news2 span { font-size: 12px; color: var(--on-surface-variant); }
 #smdWard .w-news2.risk-medium, #smdWard .w-news2.risk-high { background: var(--warn-container); }
 #smdWard .w-news2.risk-medium b, #smdWard .w-news2.risk-high b { color: var(--on-warn-container); }
 #smdWard .w-news2.na { background: none; border: 1px dashed var(--outline-variant); }
@@ -536,9 +565,17 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-maik-prov li.warn { color: var(--on-warn-container); }
 #smdWard .w-maik-prov .material-symbols-outlined { font-size: 16px; flex: none; }
 #smdWard .w-maik-prev { border: 1px dashed var(--outline-variant); border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; background: var(--sc-low); }
-#smdWard .w-maik-prev b { display: flex; align-items: center; gap: 6px; font: 700 12px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; }
+#smdWard .w-maik-prev > b { display: flex; align-items: center; gap: 6px; font: 700 12px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; }
 #smdWard .w-maik-prev span { display: block; margin-top: 4px; font: 500 12.5px/1.5 var(--w-sans); color: var(--on-surface-variant); }
-#smdWard .w-maik-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+/* BUG-MU2QNKU7: every MaiK button group is one wrapping row on the same 8 px rhythm, rows stacked 8 px
+ * apart, and the secondary task chips one size down (".sm" had no rule, so they rendered as full
+ * buttons). The "Records MaiK read" chips sit in a .w-hint, which is a non-wrapping flex row. */
+#smdWard .w-maik-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 0; }
+#smdWard .w-maik-acts + .w-maik-acts { margin-top: 8px; }
+#smdWard .w-maik-acts .w-btn.sm { font-size: 13px; padding: 8px 14px; min-height: 40px; }
+#smdWard .w-maik-facts .w-hint { flex-wrap: wrap; align-items: center; }
+#smdWard .w-maik-h { display: flex; align-items: center; gap: 6px; margin: 12px 0 6px; }
+@media (max-width: 1180px) { #smdWard .w-maik-acts .w-btn.sm { min-height: 44px; } }
 #smdWard .w-maik-acts .w-btn[disabled] { opacity: .55; pointer-events: none; }
 
 #smdWard .w-demo { font-size: 11px; font-weight: 700; letter-spacing: .08em; padding: 1px 7px; border-radius: 3px; margin-left: 8px;
@@ -564,6 +601,13 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 @media (min-width: 960px) {
   #smdWard .w-split-layout { grid-template-columns: 340px 1fr; align-items: start; }
 }
+/* BUG-MU073XKT-7KZW: in one column the patient list comes first, above the tools. */
+@media (max-width: 959.98px) {
+  #smdWard .w-split-layout > .w-col-roster { order: -1; }
+}
+#smdWard .w-dict { position: relative; }
+#smdWard .w-dict > textarea { width: 100%; box-sizing: border-box; padding-right: 72px; }
+#smdWard .w-dict > .w-dict-btns { position: absolute; top: 4px; right: 6px; }
 #smdWard .w-col-tools { display: flex; flex-direction: column; gap: 12px; }
 #smdWard .w-col-roster { display: flex; flex-direction: column; gap: 12px; }
 #smdWard .w-mic-btn { background: none; border: 0; cursor: pointer; color: var(--primary); display: inline-flex; align-items: center; justify-content: center; padding: 4px; border-radius: 50%; }
@@ -588,6 +632,15 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-keys dt { flex: 0 0 104px; color: var(--on-surface-variant); font-size: 12px; }
 #smdWard .w-keys dd { margin: 0; }
 #smdWard .w-keys kbd { font: 600 12px var(--mono, ui-monospace, Menlo, monospace); border: 1px solid var(--outline-variant); border-bottom-width: 2px; border-radius: 6px; padding: 1px 6px; background: var(--sc-low); color: var(--on-surface); }
+/* The safety check's findings are sentences: read in sentence case, with only the heading word ("Hard stop") strong.
+   A pill-shaped, capitalised block of engine text was hard to read (retest 2026-09-16). */
+#smdWard #wMoReview li.w-st { display: block; text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 400; border-radius: 10px; padding: 6px 10px; margin: 4px 0; }
+#smdWard #wMoReview li.w-st b { font-weight: 700; }
+/* A question before a write (ward.js askFor): over the ward, never a browser dialog. */
+#smdWard .w-ask { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 16px;
+  background: rgba(0, 0, 0, .45); }
+#smdWard .w-ask > .w-card { width: min(520px, 100%); max-height: calc(100vh - 32px); overflow-y: auto; box-shadow: 0 16px 40px rgba(0, 0, 0, .28); }
+#smdWard .w-ask .w-card-h h3 { margin: 0; }
 #smdWard .w-next { font-size: 12px; font-weight: 600; color: var(--on-surface-variant); }
 #smdWard .w-next.warn { color: var(--on-warn-container); }
 
@@ -618,3 +671,31 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
   #smdWard .w-mar-ctl .w-filter input { flex: 1 1 100%; }
   #smdWard .w-nw .w-mini { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 }
+/* G14: the single-patient nursing panel (tasks list, then assignment/observations) as two panes from
+ * 768 to 1366 px landscape; a phone, a portrait tablet, or a wider desktop stay one column. */
+@media (min-width: 768px) and (max-width: 1366px) and (orientation: landscape) {
+  #smdWard .w-np-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 320px); gap: 16px; align-items: start; }
+  #smdWard .w-np-list { order: -1; }
+}
+
+/* The staff language: a translated safety text keeps the English it was translated from right under it. */
+#smdWard .w-en { display: block; flex-basis: 100%; font-size: .82em; font-weight: 400; opacity: .85; margin-top: 2px; }
+
+/* Owner 2026-09-16: a staff member named on a chart (ward.js staffWho). Reads as text; the dotted line says it opens
+ * the full identity on a click or tap, and the tooltip carries it on hover. */
+#smdWard .w-who { display: inline; background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit; text-align: inherit; cursor: pointer; text-decoration: underline dotted; text-underline-offset: 2px; }
+#smdWard span.w-who { cursor: default; text-decoration: none; }
+#smdWard .w-who:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
+#smdWard .w-who-x { color: var(--muted, #666); }
+
+/* Printed labels and camera scanning (ward-labels.js). The offer sits under the banner on the screen where the act
+ * happened; "Scan with camera" sits beside the field it fills. The camera layer is on <body>, above the ward. */
+#smdWard .w-labeloffer { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; border-radius: 14px; padding: 10px 14px; margin-top: 8px; font-size: 13px;
+  background: var(--sc-lowest, #fff); border: 1px solid var(--outline-variant, #ccc); }
+#smdWard .w-labeloffer p { margin: 0; flex: 1 1 220px; }
+#smdWard .w-cam { justify-self: start; align-self: end; }
+.w-camscan { position: fixed; inset: 0; z-index: 13000; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(0, 0, 0, .8); }
+.w-camscan-in { width: min(480px, 100%); display: flex; flex-direction: column; gap: 10px; align-items: center; color: #fff; font: 14px/1.4 system-ui, sans-serif; text-align: center; }
+.w-camscan video { width: 100%; max-height: 60vh; border-radius: 12px; background: #000; object-fit: cover; }
+.w-camscan p { margin: 0; }
+.w-camscan button { min-height: 44px; padding: 0 20px; border-radius: 22px; border: 1px solid #fff; background: transparent; color: #fff; font: inherit; cursor: pointer; }

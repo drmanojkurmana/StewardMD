@@ -34,6 +34,9 @@ import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { LAB_CODE_SEED } from "../../wardsynq/adapters/wardsynq-ghis-adapter.js";
 import { deltaCheck, autoVerify } from "./lab-delta.js";
+import { effectiveCategory } from "./investigation-catalogue.js";
+import { TYPE as SPECIMEN_TYPE, NO_SPECIMEN_CATEGORIES, SpecimenCollection, collectionState } from "./specimen.js";
+import { qcBlockedTests, recordQcOverride } from "./lab-qc.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const CATEGORY = "laboratory";
@@ -158,6 +161,23 @@ async function releaseResult(request, env, ctx) {
     catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
     if (!sr) return { ...base, ok: false, status: 404, error: "request_not_found", serviceRequestId, written: 0 };
   }
+  /* LT-25: NO RESULT FOR A SAMPLE NOBODY TOOK. A result released against a blood or fluid order that was never
+   * collected (or whose every attempt failed) is a number with no tube behind it, and the order then sat on the
+   * board as "awaiting collection" for ever. Imaging, procedures and referrals have no sample and are not asked.
+   * A collected sample the laboratory never marked received is received by this release, by whoever released it:
+   * the person resulting it had it on the bench, and the specimen then leaves every "awaiting" list. */
+  let receiveOnRelease = null;
+  if (sr && !NO_SPECIMEN_CATEGORIES.includes(str(sr.category))) {
+    let specimens;
+    try { specimens = ((await svc.byPatient(SPECIMEN_TYPE, sr.patientId)) || []).filter((s) => s && s.serviceRequestId === serviceRequestId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    const where = collectionState(specimens);
+    if (where.state === "none" || where.state === "failed") {
+      return { ...base, ok: false, status: 409, error: "specimen_not_collected", serviceRequestId, collection: where.state,
+        detail: "No sample has been collected for this request. Record the collection (who took it, when) before releasing a result.", written: 0 };
+    }
+    if (where.state === "collected") receiveOnRelease = specimens.find((s) => s.id === where.specimenId) || null;
+  }
   const patientId = str(ctx.patientId) || (sr && sr.patientId) || "";
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", detail: "a result names its patient, or the request it answers", written: 0 };
 
@@ -193,6 +213,14 @@ async function releaseResult(request, env, ctx) {
    * laboratory that cannot release a number because software disagreed with it is a laboratory that
    * routes around the software by the end of the week. A failure to READ the history is likewise not
    * a reason to withhold anything - the check is simply reported as not done. */
+  if (receiveOnRelease) {
+    const at = new Date().toISOString();
+    const next = SpecimenCollection({ ...receiveOnRelease, state: "received", receivedAt: at, receivedBy: resolved.actor.id });
+    next.receivedOnRelease = true;
+    try { await svc.put(next, { expectedVersion: receiveOnRelease.version }); }
+    catch (e) { return { ...base, ...writeFailure(e, { serviceRequestId, written: 0, actor: resolved.actor.id }) }; }
+  }
+
   let history = [];
   try { history = (await svc.byPatient("Observation", patientId)) || []; }
   catch { history = null; }
@@ -250,6 +278,13 @@ async function releaseResult(request, env, ctx) {
   report.releasedBy = resolved.actor.id;
   if (!serviceRequestId) report.unsolicited = true;
   if (needsSecond) report.awaitingVerification = true;
+  /* Which analyser measured it (lab-analysers.js releases through here). Carried so verifying it later is
+   * held by the same QC block that held its release. */
+  if (ctx.analyser && str(ctx.analyser.id)) {
+    report.analyserId = str(ctx.analyser.id);
+    report.analyserName = str(ctx.analyser.name) || null;
+    report.analyserTests = (ctx.analyser.tests || []).map(str).filter(Boolean);
+  }
 
   try {
     const out = await svc.put(report, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
@@ -295,6 +330,20 @@ async function verifyResult(request, env, ctx) {
   if (str(report.releasedBy) === resolved.actor.id) {
     return { ...base, ok: false, status: 403, error: "cannot_verify_own", detail: "You entered this result, so somebody else must verify it.", written: 0 };
   }
+  /* A result an analyser measured is not made final while a rejected QC run on that analyser and test
+   * has no corrective action, unless the verifier overrides with a reason (recorded and audited). */
+  let overrideId = null;
+  if (decision === "verify" && report.analyserId) {
+    let blocked;
+    try { blocked = await qcBlockedTests(ctx.recordDeps.repository, mig.tenantId, report.analyserId, report.analyserTests || []); }
+    catch { return { ...base, ok: false, status: 502, error: "qc_unreadable", detail: "The QC state of this analyser could not be read, so the result was not verified.", written: 0 }; }
+    if (blocked.length) {
+      const why = str(ctx.qcOverrideReason).slice(0, 1000);
+      if (why.length < 10) return { ...base, ok: false, status: 409, error: "qc_blocked", blocked: blocked.map((b) => ({ test: b.test, rules: b.rules })), detail: "A rejected QC run blocks this analyser and test. Record the corrective action on the Quality control screen, or override with a reason.", written: 0 };
+      try { overrideId = (await recordQcOverride(ctx.recordDeps.repository, mig.tenantId, resolved.actor.id, { analyserId: report.analyserId, blocked, reason: why, subject: { kind: "DiagnosticReport", id: reportId } })).id; }
+      catch (e) { return { ...base, ...writeFailure(e, { reportId, written: 0 }) }; }
+    }
+  }
   const at = new Date().toISOString();
   const next = decision === "verify"
     ? { ...report, status: "final", awaitingVerification: false, verifiedBy: resolved.actor.id, verifiedAt: at }
@@ -302,7 +351,7 @@ async function verifyResult(request, env, ctx) {
   delete next.version; delete next.meta; delete next.writtenBy;
   try {
     const out = await svc.put(next, { expectedVersion: ctx.expectedVersion != null ? Number(ctx.expectedVersion) : report.version });
-    return { ...base, ok: true, written: 1, reportId, decision, status: next.status, version: out.record.version, actor: resolved.actor.id };
+    return { ...base, ok: true, written: 1, reportId, decision, status: next.status, version: out.record.version, actor: resolved.actor.id, ...(overrideId ? { overrideId } : {}) };
   } catch (e) {
     return { ...base, ...writeFailure(e, { reportId, written: 0 }) };
   }
@@ -330,7 +379,7 @@ async function resultsToVerify(request, env, ctx) {
         if (o) obs.push({ id: o.id, display: o.display || o.code, value: o.value, unit: o.unit || null, referenceRange: o.referenceRange || null, deltaBreach: o.deltaBreach || null, autoVerified: o.autoVerified === true, critical: o.sourceCritical === true });
       } catch { unread += 1; }
     }
-    results.push({ reportId: r.id, patientId: r.patientId, panel: r.code, reportedAt: r.reportedAt || null, releasedBy: r.releasedBy || null,
+    results.push({ reportId: r.id, patientId: r.patientId, panel: r.code, reportedAt: r.reportedAt || null, releasedBy: r.releasedBy || null, analyserName: r.analyserName || null,
       mine: str(r.releasedBy) === resolved.actor.id, version: r.version, observations: obs, ...(unread ? { unreadObservations: unread } : {}) });
   }
   results.sort((a, b) => str(a.reportedAt).localeCompare(str(b.reportedAt)));
@@ -371,7 +420,8 @@ async function pendingRequests(request, env, ctx) {
     .filter((s) => s && s.status !== "completed" && s.status !== "revoked" && s.status !== "cancelled" && !isExternalRecord(s))
     .filter((s) => !resulted.has(s.id))
     // patientId travels so a hospital-wide caller can say whose test this is.
-    .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, patientId: s.patientId || null, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
+    // LT-15: the category the boards file it under, a catalogued imaging test filed as laboratory read as imaging.
+    .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, category: effectiveCategory(s), patientId: s.patientId || null, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
   return { ...base, ok: true, patientId: patientId || null, scope: hospitalWide ? "hospital" : "patient", pending };
 }
 

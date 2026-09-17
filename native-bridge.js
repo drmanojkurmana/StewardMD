@@ -91,11 +91,35 @@
   // Client-side HTML->PDF (jsPDF + html2canvas) — the reliable path when the native VisionOcr plugin is
   // absent (Android has no VisionOcr; it is iOS-only). Mirrors the proven prescription.js exportRx pipeline:
   // render the doc offscreen at A4 width, rasterize, paginate into a PDF, then share (native) or download (web).
-  // Rejects if the vendored engines aren't loaded, so callers keep their existing HTML/text fallback = no regression.
+  // Client-side HTML->PDF (jsPDF + html2canvas) — the reliable path when the native VisionOcr plugin is
+  // absent (Android has no VisionOcr; it is iOS-only). Mirrors the proven prescription.js exportRx pipeline:
+  // render the doc offscreen at A4 width, rasterize, paginate into a PDF, then share (native) or download (web).
+  function ensurePdfEngine() {
+    var H = window.html2canvas, JS = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+    if (H && JS) return Promise.resolve({ H: H, JS: JS });
+    var lazy = window.smdLazy || function (src) {
+      return new Promise(function (resolve, reject) {
+        var s = document.createElement("script");
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    };
+    var p1 = window.html2canvas ? Promise.resolve() : lazy("/vendor-html2canvas.js?v=1");
+    return p1.then(function () {
+      var p2 = ((window.jspdf && window.jspdf.jsPDF) || window.jsPDF) ? Promise.resolve() : lazy("/vendor-jspdf.js?v=1");
+      return p2.then(function () {
+        var H2 = window.html2canvas, JS2 = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+        if (!H2 || !JS2) throw new Error("pdf-engine-unavailable");
+        return { H: H2, JS: JS2 };
+      });
+    });
+  }
+
   function pdfFromHtmlJs(html, name, title) {
-    return new Promise(function (resolve, reject) {
-      var H = window.html2canvas, JS = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
-      if (!H || !JS) { reject(new Error("pdf-engine-unavailable")); return; }
+    return ensurePdfEngine().then(function (engines) {
+      var H = engines.H, JS = engines.JS;
       var s = String(html == null ? "" : html);
       var style = (s.match(/<style[\s\S]*?<\/style>/i) || [""])[0];
       var bodyInner = (s.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [null, s])[1];
@@ -103,7 +127,7 @@
       host.style.cssText = "position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1;color:#14202b";
       host.innerHTML = style + '<div style="padding:24px;box-sizing:border-box;width:794px">' + bodyInner + "</div>";
       document.body.appendChild(host);
-      H(host, { scale: 2, backgroundColor: "#ffffff", useCORS: true }).then(function (canvas) {
+      return H(host, { scale: 2, backgroundColor: "#ffffff", useCORS: true }).then(function (canvas) {
         try { host.remove(); } catch (e) {}
         var pdf = new JS({ unit: "pt", format: "a4" }), pw = pdf.internal.pageSize.getWidth(), ph = pdf.internal.pageSize.getHeight();
         var imgW = pw, imgH = canvas.height * (pw / canvas.width), img = canvas.toDataURL("image/jpeg", 0.95);
@@ -113,18 +137,46 @@
         var P = plugins();
         if (window.SMD_IS_NATIVE && P && P.Filesystem && P.Filesystem.writeFile && P.Share && P.Share.share) {
           var b64 = (uri.split(",")[1] || "");
-          P.Filesystem.writeFile({ path: name + ".pdf", data: b64, directory: "CACHE" }).then(function (res) {
+          return P.Filesystem.writeFile({ path: name + ".pdf", data: b64, directory: "CACHE" }).then(function (res) {
             return P.Share.share({ title: title || "StewardMD", url: res.uri, files: [res.uri], dialogTitle: "Save PDF / Print / Share" });
-          }).then(resolve, reject);
+          });
         } else {
-          try { var a = document.createElement("a"); a.href = uri; a.download = name + ".pdf"; document.body.appendChild(a); a.click(); a.remove(); resolve(); } catch (e) { reject(e); }
+          try { var a = document.createElement("a"); a.href = uri; a.download = name + ".pdf"; document.body.appendChild(a); a.click(); a.remove(); } catch (e) { throw e; }
         }
-      }).catch(function (e) { try { host.remove(); } catch (x) {} reject(e); });
+      }).catch(function (e) { try { host.remove(); } catch (x) {} throw e; });
     });
   }
-  window.SMD_PDF = { fromHtml: pdfFromHtmlJs };   // reusable everywhere (MaiK, onco, reports)
+  window.SMD_PDF = { fromHtml: pdfFromHtmlJs, ensurePdfEngine: ensurePdfEngine };   // reusable everywhere (MaiK, onco, reports)
+
+  // Natural pixel size of a data URL, via a throwaway <img> (needed to normalize ML Kit's pixel boxes to [0,1]).
+  function ocrImageSize(dataUrl) {
+    return new Promise(function (res) {
+      var img = new Image();
+      img.onload = function () { res({ w: img.naturalWidth, h: img.naturalHeight }); };
+      img.onerror = function () { res(null); };
+      img.src = dataUrl;
+    });
+  }
+  // ML Kit's processImage wants a file path, not base64/data URL. Write to CACHE, return the file:// URI's path.
+  var ocrTmpN = 0;
+  function writeTempImage(dataUrl) {
+    var P = plugins();
+    var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
+    var name = "smd-ocr-" + Date.now() + "-" + (ocrTmpN++) + ".jpg";
+    return P.Filesystem.writeFile({ path: name, data: b64, directory: "CACHE" })
+      .then(function (r) { return r.uri; });
+  }
+  function removeTempImage(uri) {
+    var P = plugins();
+    try { P.Filesystem.deleteFile({ path: uri }); } catch (e) {}
+  }
 
   window.SMD_NATIVE = {
+    // Write a data: URL to a device-local temp file and return its path, for native calls (the
+    // on-device vision model, ML Kit OCR) that read the image file themselves rather than take
+    // base64/data-URL bytes over the JS bridge. Caller must removeTempImage() when done.
+    writeTempImage: writeTempImage,
+    removeTempImage: removeTempImage,
     // Route to the iOS share sheet (offers Save to Files / Print / Markup / Mail).
     share: function (opts) {
       var P = plugins();
@@ -219,24 +271,69 @@
     },
     // On-device OCR via ML Kit text recognition. The IMAGE NEVER LEAVES THE DEVICE —
     // only recognized text is returned to JS. Resolves { text, lines:[string] }.
+    // On-device vital-tile detector (Core ML, iOS). Resolves { available, detections:[{cls,conf,x,y,w,h}] }
+    // (normalized top-left). available=false on builds without the model or on Android: callers fall back.
+    detectVitals: function (dataUrl) {
+      var P = plugins(), TR = P && P.VisionOcr;
+      if (!(TR && TR.detectVitals)) return Promise.resolve({ available: false, detections: [] });
+      var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
+      return TR.detectVitals({ base64Image: b64 }).then(function (r) {
+        return { available: !!(r && r.available), detections: (r && Array.isArray(r.detections)) ? r.detections : [] };
+      }, function () { return { available: false, detections: [] }; });
+    },
+    // On-device digit reader (CRNN-CTC; Core ML on iOS, TFLite on Android - same model, converted from the
+    // same PyTorch checkpoint, verified for exact parity): reads the digits inside each box independently
+    // of the OCR engine that found the box. Resolves { available, reads:[{x,y,w,h,text,conf}] };
+    // available=false only on a build with neither native model.
+    readDigits: function (dataUrl, boxes) {
+      var P = plugins(), TR = P && P.VisionOcr;
+      if (!(TR && TR.readDigits) || !(boxes && boxes.length)) return Promise.resolve({ available: false, reads: [] });
+      var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
+      return TR.readDigits({ base64Image: b64, boxes: boxes }).then(function (r) {
+        return { available: !!(r && r.available), reads: (r && Array.isArray(r.reads)) ? r.reads : [] };
+      }, function () { return { available: false, reads: [] }; });
+    },
     ocr: function (dataUrl, opts) {
       var P = plugins();
-      var TR = P && P.VisionOcr;   // local Apple Vision plugin (@stewardmd/capacitor-vision-ocr)
-      if (!(TR && TR.detectText)) return Promise.reject(new Error("ocr-unavailable"));
-      var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
-      if (!b64) return Promise.reject(new Error("no-image"));
-      // opts.languageCorrection (default true): off for numeric screens, where Vision's word
-      // model rewrites digits. Older plugin builds ignore the extra keys.
-      var req = { base64Image: b64, languageCorrection: !(opts && opts.languageCorrection === false) };
-      if (opts && opts.minTextHeight > 0) req.minTextHeight = opts.minTextHeight;
-      return TR.detectText(req).then(function (res) {
-        var lines = [];
-        try { (res.blocks || []).forEach(function (bl) { (bl.lines || []).forEach(function (ln) { if (ln && ln.text) lines.push(String(ln.text)); }); }); } catch (e) {}
-        if (!lines.length && res && res.lines && res.lines.length) lines = res.lines.map(String);
-        if (!lines.length && res && res.text) lines = String(res.text).split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
-        // boxes: normalized [0,1] top-left {text,x,y,w,h} per text line (for on-device PHI redaction).
-        var boxes = (res && Array.isArray(res.boxes)) ? res.boxes : [];
-        return { text: (res && res.text) || lines.join("\n"), lines: lines, boxes: boxes };
+      var TR = P && P.VisionOcr;   // local Apple Vision plugin (@stewardmd/capacitor-vision-ocr), iOS only
+      if (TR && TR.detectText) {
+        var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
+        if (!b64) return Promise.reject(new Error("no-image"));
+        // opts.languageCorrection (default true): off for numeric screens, where Vision's word
+        // model rewrites digits. Older plugin builds ignore the extra keys.
+        var req = { base64Image: b64, languageCorrection: !(opts && opts.languageCorrection === false) };
+        if (opts && opts.minTextHeight > 0) req.minTextHeight = opts.minTextHeight;
+        return TR.detectText(req).then(function (res) {
+          var lines = [];
+          try { (res.blocks || []).forEach(function (bl) { (bl.lines || []).forEach(function (ln) { if (ln && ln.text) lines.push(String(ln.text)); }); }); } catch (e) {}
+          if (!lines.length && res && res.lines && res.lines.length) lines = res.lines.map(String);
+          if (!lines.length && res && res.text) lines = String(res.text).split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+          // boxes: normalized [0,1] top-left {text,x,y,w,h} per text line (for on-device PHI redaction).
+          var boxes = (res && Array.isArray(res.boxes)) ? res.boxes : [];
+          return { text: (res && res.text) || lines.join("\n"), lines: lines, boxes: boxes };
+        });
+      }
+      // Android: @capacitor-mlkit/text-recognition (Google ML Kit, off-the-shelf, on-device, free).
+      // No confidence per line (ML Kit v2 does not expose one) and no languageCorrection knob to disable —
+      // it does not rewrite digits the way Vision's word model can, so this is not a gap for numeric screens.
+      var MLK = P && P.TextRecognition;
+      if (!(MLK && MLK.processImage)) return Promise.reject(new Error("ocr-unavailable"));
+      return ocrImageSize(dataUrl).then(function (sz) {
+        return writeTempImage(dataUrl).then(function (path) {
+          return MLK.processImage({ path: path }).then(function (res) {
+            var lines = [], boxes = [];
+            var W = (sz && sz.w) || 0, H = (sz && sz.h) || 0;
+            (res.blocks || []).forEach(function (bl) {
+              (bl.lines || []).forEach(function (ln) {
+                if (!ln || !ln.text) return;
+                lines.push(String(ln.text));
+                var r = ln.boundingBox;
+                if (r && W > 0 && H > 0) boxes.push({ text: ln.text, x: r.left / W, y: r.top / H, w: (r.right - r.left) / W, h: (r.bottom - r.top) / H });
+              });
+            });
+            return { text: (res && res.text) || lines.join("\n"), lines: lines, boxes: boxes };
+          }).finally(function () { removeTempImage(path); });
+        });
       });
     },
     // MaiK Scribe — native device speech-to-text (@capacitor-community/speech-recognition:

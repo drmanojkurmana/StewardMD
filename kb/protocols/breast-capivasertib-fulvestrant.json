@@ -1,0 +1,137 @@
+{
+  "id": "breast-capivasertib-fulvestrant",
+  "diseaseId": "breast_cancer",
+  "name": "Capivasertib + Fulvestrant (CAPItello-291)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "Cycled every 28 days continuously until disease progression or unacceptable toxicity. Capivasertib given intermittently (4 days on, 3 days off weekly).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
+    "primaryStudy": "CAPItello-291: Turner NC, Oliveira M, Howell SJ, et al. N Engl J Med 2023;388:2058-2070",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-Q 6, 14 of 15)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HR": "positive",
+    "HER2": "negative",
+    "note": "Requires HR-positive, HER2-negative locally advanced or metastatic breast cancer with one or more PIK3CA, AKT1, or PTEN alterations detected by an FDA-approved or validated NGS/PCR test, following progression on or recurrence after at least one line of endocrine therapy (\u00b1 CDK4/6 inhibitor). Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-Q (6 of 15 and 14 of 15) (Category 1, Preferred)."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "invasive breast carcinoma (HR-positive, HER2-negative)",
+  "premedications": [],
+  "supportiveCare": [
+    "Hyperglycemia monitoring and management: Assess fasting plasma glucose (FPG) and HbA1c before starting. Educate patient on symptoms of hyperglycemia (polydipsia, polyuria). Initiate metformin or other antidiabetic agents if FPG > 160 mg/dL.",
+    "Diarrhea management: Start loperamide at first onset of loose stools. Ensure oral rehydration.",
+    "Cutaneous rash: Monitor for maculopapular rash or severe cutaneous reactions; topical corticosteroids and oral antihistamines may be used for mild-to-moderate rash."
+  ],
+  "monitoring": [
+    "Fasting plasma glucose (FPG) at baseline, every 2 weeks for the first month, then monthly thereafter",
+    "HbA1c at baseline and every 3 months during therapy",
+    "CBC and liver function tests before starting and periodically",
+    "Monitor for diarrhea and cutaneous rash each cycle"
+  ],
+  "clearanceChecks": [
+    "fasting plasma glucose (< 160 mg/dL and HbA1c < 8.0% prior to initiation)",
+    "liver function tests (ALT/AST \u2264 2.5x ULN or \u2264 5x ULN with liver metastases)",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "hyperglycemia: fasting glucose > 250 mg/dL to 500 mg/dL (grade 3)",
+      "drug": "capivasertib",
+      "action": "hold/reduce",
+      "text": "Withhold capivasertib. Initiate or intensify antidiabetic therapy. When FPG recovers to \u2264 160 mg/dL, resume at reduced dose level (400 mg BID -> 320 mg BID -> 240 mg BID). Permanently discontinue if unable to tolerate 240 mg BID or for ketoacidosis."
+    },
+    {
+      "condition": "grade 3 diarrhea",
+      "drug": "capivasertib",
+      "action": "hold/reduce",
+      "text": "Hold capivasertib until resolution to grade \u2264 1; resume at next lower dose level (320 mg BID)."
+    },
+    {
+      "condition": "grade 3 rash (maculopapular covering >30% BSA)",
+      "drug": "capivasertib",
+      "action": "hold/reduce",
+      "text": "Hold capivasertib until resolution to grade \u2264 1; resume at 320 mg BID. Discontinue permanently for suspected SJS/TEN or DRESS."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "capivasertib",
+      "name": "Capivasertib",
+      "basis": "flat",
+      "dosePerUnit": 400,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 14 of 15. Capivasertib 400 mg PO twice daily on Days 1 to 4, 8 to 11, 15 to 18, and 22 to 25 of each 28-day cycle (4 days on, 3 days off weekly).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "locator": "BINV-Q 6 and 14 of 15 (CAPItello-291)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        8,
+        9,
+        10,
+        11,
+        15,
+        16,
+        17,
+        18,
+        22,
+        23,
+        24,
+        25
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fulvestrant",
+      "name": "Fulvestrant",
+      "basis": "flat",
+      "dosePerUnit": 500,
+      "unit": "mg",
+      "route": "IM",
+      "notes": "Fulvestrant 500 mg IM (as two 250 mg injections, one in each buttock) on Days 1 and 15 of Cycle 1, then Day 1 of each subsequent 28-day cycle.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "locator": "BINV-Q 14 of 15",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        15
+      ],
+      "modificationRules": []
+    }
+  ]
+}

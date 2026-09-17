@@ -46,6 +46,21 @@ try {
   ok(await ev(`return !!document.querySelector('[data-w-act="maikask:summarise"]');`), "MaiK is on the patient's chart");
   ok(await ev(`return getComputedStyle(document.querySelector(".w-card")).borderRadius !== "0px";`), "the real ward.css styled it");
 
+  // BUG-MU2QNKU7: the MaiK card's buttons are aligned rows. Every button sits in a wrapping .w-maik-acts
+  // row (none loose in the card), rows are stacked with a real gap, nothing spills out of the card at a
+  // 430 px phone width, and the task chips are one size down from the two primary asks.
+  const geo = JSON.parse(await ev(`var card = document.querySelector('[data-w-act="maikask:summarise"]').closest(".w-card");
+    var cr = card.getBoundingClientRect(), rows = [].slice.call(card.querySelectorAll(".w-maik-acts"));
+    var loose = [].slice.call(card.querySelectorAll(".w-btn")).filter(function (b) { return !b.closest(".w-maik-acts"); }).length;
+    var spill = [].slice.call(card.querySelectorAll(".w-btn")).filter(function (b) { var r = b.getBoundingClientRect(); return r.right > cr.right + 0.5 || r.left < cr.left - 0.5; }).length;
+    var gaps = []; for (var i = 1; i < rows.length; i++) gaps.push(Math.round(rows[i].getBoundingClientRect().top - rows[i - 1].getBoundingClientRect().bottom));
+    var fs = function (sel) { return parseFloat(getComputedStyle(card.querySelector(sel)).fontSize); };
+    return JSON.stringify({ rows: rows.length, wrap: rows.every(function (r) { return getComputedStyle(r).flexWrap === "wrap"; }), loose: loose, spill: spill, gaps: gaps,
+      primary: fs('[data-w-act="maikask:summarise"]'), chip: fs('[data-w-act="maikask:prepare-rounds"]') });`));
+  ok(geo.rows === 3 && geo.wrap && geo.loose === 0, "every MaiK button sits in a wrapping action row (" + JSON.stringify(geo) + ")");
+  ok(geo.spill === 0 && geo.gaps.every((g) => g >= 8), "no button spills out of the card and rows are 8 px or more apart");
+  ok(geo.chip < geo.primary, "the task chips are one size down from the primary asks");
+
   // 1. Ask. The request names the patient the chart is open on.
   await ev(`document.querySelector('[data-w-act="maikask:draft-note"]').click(); return true;`);
   for (let i = 0; i < 30; i++) { await sleep(100); if (/If you accept/.test(await text())) break; }
@@ -58,6 +73,8 @@ try {
   ok(/contained something that reads like an instruction/.test(t1), "and that a document looked like an instruction");
   ok(/stated no measure of its own certainty/.test(t1), "and that MaiK stated no certainty of its own");
   ok(/A ClinicalNote will be created, authored by ai:maik and unsigned/.test(t1.replace(/\s+/g, " ")), "and what accepting would write");
+  ok(await ev(`return getComputedStyle(document.querySelector(".w-maik-prev span b")).display === "inline";`),
+    "the bold word inside the preview sentence stays inline instead of breaking onto its own line");
 
   // 2. Reject with no reason: nothing is posted, and the screen says why.
   await ev(`window.prompt = function(){ return ""; }; document.querySelector('[data-w-act="maikreview:rejected"]').click(); return true;`);

@@ -81,6 +81,22 @@ jobs:
       - name: MaiK decision eval
         run: node --max-old-space-size=4096 scripts/maik-eval.mjs
 
+  security-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # P2.17 automated security scan (zero-dependency, stdlib only): secret
+      # shapes in tracked files, dangerous server patterns + unguarded fetch
+      # under functions/, CORS/auth gaps in functions/api/**, and npm audit
+      # high/critical. Exits non-zero on findings. Kept in its OWN job so an
+      # unrelated failure in unit-tests cannot silence it again.
+      - name: Secrets, dangerous patterns, CORS/auth, dependency audit
+        run: node scripts/security-scan.mjs
+
   web-preflight:
     runs-on: ubuntu-latest
     # 5 was too tight, and it was failing this job on PRs whose code was fine. The work below is a

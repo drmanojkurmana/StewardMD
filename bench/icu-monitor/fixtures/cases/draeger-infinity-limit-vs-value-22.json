@@ -1,0 +1,88 @@
+{
+  "id": "draeger-infinity-limit-vs-value-22",
+  "manufacturer": "draeger-infinity",
+  "layout": "right-column-triangle-limits",
+  "difficulty": [
+    "clean"
+  ],
+  "image": "draeger-infinity-limit-vs-value-22.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 90
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 94
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 14
+    },
+    "temp": {
+      "status": "visible",
+      "value": 36.8
+    },
+    "nibp": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 108,
+        "dbp": 64,
+        "map": 79
+      }
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 108,
+      "source": "ART"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 64,
+      "source": "ART"
+    },
+    "map": {
+      "status": "visible",
+      "value": 79,
+      "source": "ART"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        150,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "20:38"
+  },
+  "notes": "alarm limits 150/50 (HR) and 100 (SpO2) are plausible-looking numbers but are LIMITS, not the current reading."
+}

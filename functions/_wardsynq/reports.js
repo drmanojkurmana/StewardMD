@@ -91,18 +91,38 @@ async function billingReport(request, env, ctx) {
     const raisedAt = ((inv.events || [])[0] || {}).at;
     return !Number.isFinite(fromMs) && !Number.isFinite(toMs) ? true : inPeriod(raisedAt, fromMs, toMs);
   });
-  const sums = raised.reduce((acc, inv) => {
-    const r = reconciliationOf(inv);
-    acc.charged += r.charged; acc.collected += r.paidIn; acc.refunded += r.refundedOut;
-    acc.discounted += r.discounted; acc.adjusted += r.adjusted; acc.writtenOff += r.writtenOff;
-    acc.outstanding += Math.max(0, r.balance);
-    return acc;
-  }, { charged: 0, collected: 0, refunded: 0, discounted: 0, adjusted: 0, writtenOff: 0, outstanding: 0 });
-
   return { ...base, ok: true, ...reportEnvelope({
     dataSource: ["Invoice"], from: ctx.from || null, to: ctx.to || null, filters: {},
-    resolved, body: { invoiceCount: raised.length, ...sums },
+    resolved, body: billingSums(raised),
   }) };
+}
+
+/**
+ * PURE. The billing footing over a set of invoices (LT-38). The retest read "charged 1455, collected 9660,
+ * outstanding 0": every figure was summed correctly, but money taken beyond what a bill charged (a 500 deposit and a
+ * 300 payment against a bill of about 120) was shown nowhere, because outstanding was clamped at zero and there was no
+ * credit figure, so the page could not add up. A void invoice's lines were also counted as charged. Now:
+ *   charged    = lines (with tax) of invoices that are not void; voided invoices are counted apart
+ *   collected  = deposits + payments; refunded is apart, and netCollected = collected - refunded
+ *   outstanding = what patients still owe; creditHeld = what was taken beyond the bill (to refund or apply)
+ * and it always balances: charged - discounted - adjusted - writtenOff - netCollected = outstanding - creditHeld.
+ */
+function billingSums(invoices) {
+  const r2 = (n) => Math.round(n * 100) / 100;
+  const acc = { invoiceCount: 0, voidCount: 0, charged: 0, collected: 0, refunded: 0, netCollected: 0, discounted: 0, adjusted: 0, writtenOff: 0, outstanding: 0, creditHeld: 0 };
+  for (const inv of invoices || []) {
+    if (!inv) continue;
+    acc.invoiceCount += 1;
+    const r = reconciliationOf(inv);
+    if (inv.void) { acc.voidCount += 1; continue; }
+    acc.charged += r.charged; acc.collected += r.paidIn; acc.refunded += r.refundedOut;
+    acc.discounted += r.discounted; acc.adjusted += r.adjusted; acc.writtenOff += r.writtenOff;
+    acc.outstanding += Math.max(0, r.balance); acc.creditHeld += r.creditBalance;
+  }
+  for (const k of Object.keys(acc)) if (!/Count$/.test(k)) acc[k] = r2(acc[k]);
+  acc.netCollected = r2(acc.collected - acc.refunded);
+  acc.balances = r2(acc.charged - acc.discounted - acc.adjusted - acc.writtenOff - acc.netCollected) === r2(acc.outstanding - acc.creditHeld);
+  return acc;
 }
 
 /** ctx: { migration, from?, to?, actorDeps, recordDeps } */
@@ -170,7 +190,13 @@ async function pharmacyReport(request, env, ctx) {
   const issued = (dispenses || []).filter(Boolean).filter((d) =>
     !Number.isFinite(fromMs) && !Number.isFinite(toMs) ? true : inPeriod(d.dispensedAt, fromMs, toMs));
   const dispenseVolume = {};
-  for (const d of issued) { const drug = d.drug || "unknown"; dispenseVolume[drug] = (dispenseVolume[drug] || 0) + (Number(d.quantity) || 0); }
+  /* A dispense's quantity is {value, unit} (pharmacy-dispense.js quantityOf), so Number(d.quantity) was NaN and every
+   * drug read 0 beside a real dispense count (LT-38). Summed per drug AND unit: 28 tablets and 100 mL are not 128. */
+  for (const d of issued) {
+    const q = d.quantity, obj = q && typeof q === "object";
+    const k = (d.drug || "unknown") + (obj && q.unit ? " (" + q.unit + ")" : "");
+    dispenseVolume[k] = (dispenseVolume[k] || 0) + (Number(obj ? q.value : q) || 0);
+  }
 
   const pendingVerification = (orders || []).filter(Boolean).filter((o) => o.status === "active")
     .filter((o) => verificationState(o, verifications).state === "unverified").length;
@@ -178,7 +204,8 @@ async function pharmacyReport(request, env, ctx) {
   return { ...base, ok: true, ...reportEnvelope({
     dataSource: ["Movement", "MedicationDispense", "MedicationOrder", "MedicationVerification"],
     from: ctx.from || null, to: ctx.to || null, filters: {}, resolved,
-    body: { stock: stock.levels, dispenseCount: issued.length, dispenseVolume, pendingVerification },
+    body: { stock: stock.levels, dispenseCount: issued.length, dispenseVolume, pendingVerification,
+      ...(stock.negativeWarning ? { stockWarning: stock.negativeWarning } : {}), ...(stock.truncatedWarning ? { stockTruncated: stock.truncatedWarning } : {}) },
   }) };
 }
 
@@ -250,4 +277,4 @@ async function clinicalOperationsReport(request, env, ctx) {
   return { ...metrics, ...reportEnvelope({ dataSource: ["Encounter", "CriticalResultLoop", "MedicationAdministration", "ShiftHandover", "MedicationReconciliation", "MedicationOrder", "MedicationVerification"], from: null, to: null, filters: { ward: ctx.ward || null }, resolved: error ? null : resolved, body: {} }) };
 }
 
-export { reportEnvelope, inPeriod, patientFlowReport, clinicalOperationsReport, billingReport, claimsReport, pharmacyReport, himReport };
+export { reportEnvelope, inPeriod, billingSums, patientFlowReport, clinicalOperationsReport, billingReport, claimsReport, pharmacyReport, himReport };

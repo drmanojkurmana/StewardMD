@@ -852,12 +852,17 @@
       var oncoOn = true; try { var qot = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; oncoOn = (qot != null) ? (qot === "1" || qot === "on" || qot === "true") : (localStorage.getItem("smd_onco_navigator") !== "0"); } catch (e) {}
       // OPD Queue is PUBLIC-RELEASE-GATE def:false; gate the hub tile too (fail-closed) so it is not a dead tile for reviewers.
       var queueOn = false; try { var qq = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (qq != null) queueOn = (qq === "1" || qq === "on" || qq === "true"); else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) queueOn = SMD_QUEUE_FLAGS.on(); else queueOn = (localStorage.getItem("smd_opd_queue") === "1"); } catch (e) {}
-      openSheet('<div class="hv-sh-t">Hospital</div><div class="hv-tiles">' +
-        (queueOn ? tile("list", "OPD Queue", "Smart out-patient queue", "opd") : "") +
-        tile("icu", "ICU &amp; Ward", "Critical care + inpatient", "icu", true) +
-        tile("ward", "Ward Sync", "Inpatient labs &amp; imaging (GHIS)", "ward") +
-        (oncoOn ? tile("ribbon", "OncoTree", "Cancer pathway navigator", "oncotree") : "") +
-        tile("pills", "Protocol", "Assign a treatment protocol", "protocol") +
+      openSheet('<div class="rds-hospital">' +
+        '<header class="rds-hospital-head"><div><div class="rds-hospital-brand">StewardMD</div>' +
+        '<h2 class="hv-sh-t" id="rdsHospitalTitle">Hospital</h2>' +
+        '<p class="rds-hospital-sub">Your clinical workspace</p></div>' +
+        '<button type="button" class="rds-hospital-close" aria-label="Close Hospital">' + svg("close") + '</button></header>' +
+        '<section aria-labelledby="rdsHospitalCare"><h3 id="rdsHospitalCare" class="rds-hospital-label">Patient care</h3><div class="hv-tiles">' +
+        tile("icu", "ICU &amp; Ward", "Critical care &amp; inpatients", "icu", true) +
+        (queueOn ? tile("list", "OPD Queue", "Outpatient visits", "opd") : "") +
+        tile("ward", "Ward Sync", "Labs &amp; imaging (GHIS)", "ward") +
+        tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
+        '</div></section><section aria-labelledby="rdsHospitalTreatment"><h3 id="rdsHospitalTreatment" class="rds-hospital-label">Treatment &amp; reference</h3>' +
         // The Rx pad was only reachable from inside a MaiK answer or a consult, so writing a
         // prescription for the patient in front of you meant going through something else first.
         // It belongs under the same roof as the other patient-facing tools.
@@ -865,10 +870,13 @@
           { label: "Create", act: "rx", pri: true },
           { label: "Verify", act: "rxverify" }
         ]) +
-        tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
+        '<div class="hv-tiles">' +
+        (oncoOn ? tile("ribbon", "OncoTree", "Cancer pathways", "oncotree") : "") +
+        tile("pills", "Protocol", "Treatment protocols", "protocol") +
         // Govt Schemes: same flag gate as the HOME_TOOLS tile (default OFF, ?gs=1 per device) - flag off = no tile.
         (govschemesOn() ? tile("hospital", "Scheme Search", "Package codes and rates", "govschemes") : "") +
         tile("search", "Search ICD", "ICD-10 / ICD-11 diagnosis codes", "icdsearch") +
+        '</div></section><div class="rds-hospital-connect">' +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         // Agent Connect: the doctor onboards their OWN hospital by signing in to its EMR themselves.
         // Same flag as the boot module (smd_connect_agent, default OFF) - the boot module owns that
@@ -876,7 +884,10 @@
         // without it and the flag logic is not duplicated here.
         ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
           ? tile("hospital", "Connect Hospital", "Onboard your hospital EMR", "agentconnect") : "") +
-        '</div>');
+        '</div></div>');
+      sheetEl().classList.add("rds-hospital-sheet");
+      sheetEl().setAttribute("aria-labelledby", "rdsHospitalTitle");
+      sheetEl().querySelector(".rds-hospital-close").addEventListener("click", closeSheet);
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
@@ -1185,6 +1196,16 @@
       ".hv-t2b.pri{background:var(--hp);border-color:var(--hp);color:#fff}",
       "@media (prefers-reduced-motion:no-preference){.hv-tile{animation:hvTileIn .3s cubic-bezier(.2,.7,.2,1) both}.hv-tile:nth-child(2){animation-delay:.05s}.hv-tile:nth-child(3){animation-delay:.1s}.hv-tile:nth-child(4){animation-delay:.15s}}",
       "@keyframes hvTileIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}",
+      // Hospital Soft Glass: one 12px grid, equal tile rows, full-width action bands.
+      // Scoped overrides preserve every other sheet and inherit the Graphite palette.
+      ".rds-hospital-sheet{background:var(--hpanel);background:linear-gradient(145deg,color-mix(in srgb,var(--hps) 46%,var(--hpanel)),var(--hpanel) 55%,color-mix(in srgb,var(--hbg) 85%,var(--hps)));border:1px solid var(--hbd);border-bottom:0;border-radius:28px 28px 0 0;overscroll-behavior:contain;scrollbar-width:thin}.rds-hospital-sheet .hv-sheet-wrap{max-width:520px;padding:8px 20px calc(24px + env(safe-area-inset-bottom))}",
+      ".rds-hospital-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 4px}.rds-hospital-brand{font:600 11px var(--hfont);letter-spacing:.12em;text-transform:uppercase;color:var(--hmut)}.rds-hospital .hv-sh-t{font:700 30px/1.15 var(--hfont);letter-spacing:-.035em;margin:6px 0}.rds-hospital-sub{font:400 13px/1.5 var(--hfont);color:var(--hmut);margin:0}.rds-hospital-close{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;padding:0;border:1px solid var(--hbd);border-radius:50%;background:var(--hpanel);color:var(--hmut);cursor:pointer}.rds-hospital-close svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round}",
+      ".rds-hospital-label{font:600 11px/1.4 var(--hfont);letter-spacing:.1em;text-transform:uppercase;color:var(--hmut);margin:24px 0 12px}.rds-hospital .hv-tiles{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:12px;margin:0}.rds-hospital .hv-tiles>.hv-tile:last-child:nth-child(odd){grid-column:1/-1}",
+      ".rds-hospital .hv-tile{box-sizing:border-box;min-width:0;min-height:136px;padding:16px;border:1px solid var(--hbd);border-radius:20px;background:var(--hpanel);background:color-mix(in srgb,var(--hpanel) 88%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--hink) 4%,transparent),0 4px 14px rgba(0,0,0,.025);color:var(--hink);animation:none;transition:transform .16s,box-shadow .16s,border-color .16s}.rds-hospital .hv-tile>svg{box-sizing:content-box;width:22px;height:22px;padding:9px;border-radius:12px;background:var(--hps);color:var(--hp);stroke-width:1.7;flex-shrink:0}.rds-hospital .hv-tile .tl{font:600 14px/1.35 var(--hfont);letter-spacing:-.01em;margin-top:12px}.rds-hospital .hv-tile .tc{font:400 12px/1.4 var(--hfont);color:var(--hmut);margin-top:4px}.rds-hospital .hv-tile.pri{background:var(--hps);background:color-mix(in srgb,var(--hps) 50%,var(--hpanel));border-color:var(--hbd)}.rds-hospital .hv-tile.pri>svg{background:var(--hpanel);color:var(--hp)}",
+      ".rds-hospital .hv-tile2{display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:12px;min-height:0;margin-bottom:12px}.rds-hospital .hv-tile2>svg{grid-column:1;grid-row:1/3}.rds-hospital .hv-tile2 .tl{grid-column:2;margin-top:0;align-self:end}.rds-hospital .hv-tile2 .tc{grid-column:2}.rds-hospital .hv-t2{grid-column:1/-1;gap:12px;margin-top:16px;padding:0}.rds-hospital .hv-t2b{min-height:44px;border-width:1px;border-radius:12px;font-weight:600}.rds-hospital .hv-t2b.pri{background:var(--hp);color:#fff}",
+      ".rds-hospital-connect{display:grid;gap:12px;margin-top:24px}.rds-hospital-connect .hv-tile{display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:12px;width:100%;min-height:0}.rds-hospital-connect .hv-tile>svg{grid-row:1/3}.rds-hospital-connect .hv-tile .tl{margin-top:0;align-self:end}.rds-hospital-connect .hv-tile .tc{grid-column:2}.rds-hospital button:focus-visible{outline:2px solid var(--hp);outline-offset:3px}.rds-hospital .hv-tile2:active{transform:none}",
+      "body.dark .rds-hospital .hv-t2b.pri,body.v3-dark .rds-hospital .hv-t2b.pri{color:var(--hbg)}",
+      "@media(hover:hover){.rds-hospital button.hv-tile:hover{border-color:var(--hp);box-shadow:0 6px 18px rgba(0,0,0,.07)}}@media(max-width:360px){.rds-hospital-sheet .hv-sheet-wrap{padding-left:16px;padding-right:16px}.rds-hospital .hv-tile{padding:14px}}@media(prefers-reduced-motion:reduce){.rds-hospital-sheet,.rds-hospital .hv-tile,.rds-hospital .hv-t2b{transition:none}.rds-hospital .hv-tile:active,.rds-hospital .hv-t2b:active{transform:none}}",
       // Customize-tools sheet (Add Tool): row toggles.
       ".hv-sub2{font:500 12.5px var(--hfont);color:var(--hmut);margin:-6px 0 14px}",
       ".hv-mi .rds-icon{font-size:22px;color:var(--hp);width:22px;text-align:center}",
@@ -2185,7 +2206,7 @@
     }
     return s;
   }
-  function openSheet(html) { var s = sheetEl(); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); document.body.classList.add("hv-sheet-open"); }
+  function openSheet(html) { var s = sheetEl(); s.classList.remove("rds-hospital-sheet"); s.removeAttribute("aria-labelledby"); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; s.scrollTop = 0; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); document.body.classList.add("hv-sheet-open"); }
   function closeSheet() { var s = sheetEl(); s.classList.remove("on"); document.getElementById("hvScrim").classList.remove("on"); document.body.classList.remove("hv-sheet-open"); }
 
   // ---- Knowledge Units: header chip + progress panel ----
@@ -3795,7 +3816,22 @@
       maikStoreConvos(list);
     } catch (e) {}
   }
-  function maikSaveThread(h) { try { localStorage.setItem(maikThreadKey(), h || ""); } catch (e) {} maikUpsertConv(h); }
+  var _maikSaveTimer = null;
+  function maikSaveThread(h) {
+    _maikBodyHTML = h || "";
+    if (_maikSaveTimer) clearTimeout(_maikSaveTimer);
+    _maikSaveTimer = setTimeout(function () {
+      _maikSaveTimer = null;
+      try { localStorage.setItem(maikThreadKey(), _maikBodyHTML); } catch (e) {}
+      try { maikUpsertConv(_maikBodyHTML); } catch (e) {}
+    }, 120);
+  }
+  function maikFlushThread(h) {
+    if (_maikSaveTimer) { clearTimeout(_maikSaveTimer); _maikSaveTimer = null; }
+    var target = (h != null) ? h : (_maikBodyHTML || "");
+    try { localStorage.setItem(maikThreadKey(), target); } catch (e) {}
+    try { maikUpsertConv(target); } catch (e) {}
+  }
   function maikAcctLabel() { try { var a = (window.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile()) || null; return (a && a.email) || (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || ""; } catch (e) { return ""; } }
   function maikAgo(ts) { var s = Math.max(0, (Date.now() - (ts || 0)) / 1000); if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + "m ago"; if (s < 86400) return Math.floor(s / 3600) + "h ago"; if (s < 604800) return Math.floor(s / 86400) + "d ago"; try { return new Date(ts).toLocaleDateString(); } catch (e) { return ""; } }
   // ── V4: Universal Semantic Router — cached, runs on EVERY query so retrieval always keys off ONE
@@ -4402,8 +4438,8 @@
   }
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  // ── MaiK "Aurora" wordmark + icon set (design_handoff_maik_assistant/IMPLEMENTATION.md §2) ──
-  var MK_LOGO = function () { return (document.body.classList.contains("dark") || document.body.classList.contains("v3-dark")) ? "/maik-wordmark-white.png" : "/maik-wordmark-color.png"; };
+  var isDark = function () { return (document.body.classList.contains("dark") || document.body.classList.contains("v3-dark") || (document.documentElement && document.documentElement.classList.contains("dark")) || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)); };
+  var MK_LOGO = function () { return isDark() ? "/maik-wordmark-white.png" : "/maik-wordmark-color.png"; };
   var MK = {
     new: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
     close: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>',
@@ -4444,12 +4480,6 @@
         '<button class="maik-hd-btn" id="maikNew" type="button" title="New conversation" aria-label="New conversation">' + MK.new + '</button>' +
         '<button class="maik-hd-btn" id="maikClose" type="button" title="Close" aria-label="Close assistant">' + MK.close + '</button>' +
       '</div></div></div>' +
-      // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
-      // own weights, with no StewardMD sources, is simply untrue.
-      '<div class="maik-disc">' + MK.shield + '<span>' +
-        ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.discLabel) ? SMD_MAIK_ENGINE.discLabel()
-                                                               : "Grounded &middot; AI-generated, verify independently") +
-      '</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
       // ── Conversation sidebar (slide-in). History is stored ON-DEVICE only (privacy). ──
       '<div class="maik-side-wrap" id="maikSideWrap" hidden>' +
@@ -4466,7 +4496,6 @@
         '</aside>' +
       '</div>' +
       '<div class="maik-cmp">' +
-        '<button class="maik-extract" id="maikExtract" type="button">' + svg("brain", "smd-ico") + ' Extract findings for Clinical Reasoning →</button>' +
         '<div class="maik-cmp-in">' +
           '<button class="maik-mic" id="maikMic" type="button" title="Dictate" aria-label="Dictate to MaiK">' + MK.mic + '</button>' +
           (researchModeAvail() ? '<button class="maik-research" id="maikResearch" type="button" title="Research mode: review journals" aria-label="Research mode: review journals" aria-pressed="false">' + MK.research + '</button>' : '') +
@@ -4476,8 +4505,15 @@
           '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image offline" aria-label="Read an image with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
           '<input type="file" id="maikImgFile" accept="image/*,application/pdf" hidden>' +
           '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask MaiK…"></textarea>' +
+          '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '</button>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
+      // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
+      // own weights, with no StewardMD sources, is simply untrue.
+      '<div class="maik-disc">' + MK.shield + '<span>' +
+        ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.discLabel) ? SMD_MAIK_ENGINE.discLabel()
+                                                               : "Grounded &middot; AI-generated, verify independently") +
+      '</span></div>' +
       '</div>';
   }
   // ── MaiK "Aurora" styles: IMPLEMENTATION.md §1 verbatim, then a support block (retokenized to
@@ -4641,7 +4677,8 @@ body.dark .maik-fu{background:var(--mk-field)}
    the clinician exactly what they are about to ask. */
 .maik-refine-in{display:flex;flex:1 1 100%;align-items:center;gap:6px;padding:5px 6px 5px 12px;border:1px solid var(--mk-teal);border-radius:999px;background:var(--mk-field);color:var(--mk-ink);margin:0;max-width:100%}
 .maik-refine-il{font:600 12px/1 'Inter';color:var(--mk-mut);white-space:nowrap}
-.maik-refine-inp{border:0;outline:0;background:transparent;font:500 13px/1.2 'Inter';color:var(--mk-ink);min-width:0;flex:1 1 auto;padding:2px 0}
+.maik-refine-inp{border:0 !important;outline:none !important;box-shadow:none !important;background:transparent;font:500 13px/1.2 'Inter';color:var(--mk-ink);min-width:0;flex:1 1 auto;padding:2px 0;-webkit-tap-highlight-color:transparent}
+.maik-refine-inp:focus,.maik-refine-inp:focus-visible{outline:none !important;border:0 !important;box-shadow:none !important}
 .maik-refine-inp::placeholder{color:var(--mk-faint)}
 .maik-refine-x{position:relative;flex:none;border:0;background:transparent;color:var(--mk-mut);width:24px;height:24px;border-radius:50%;font:700 15px/1 'Inter';cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;transition:background .12s,color .12s}
 .maik-refine-x:hover{background:var(--mk-bg);color:var(--mk-ink)}
@@ -4729,7 +4766,7 @@ body.dark .maik-exp{box-shadow:0 12px 34px rgba(0,0,0,.55)}
 .maik-exp .ic{color:var(--mk-teal);display:flex;flex:0 0 auto}
 .maik-ta{flex:1;border:none;background:transparent;outline:none;resize:none;font:500 14px 'Inter';color:var(--mk-ink);max-height:88px;padding:8px 0}
 .maik-ta::placeholder{color:var(--mk-faint)}
-.maik-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--mk-send);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:0 6px 16px rgba(15,118,110,.5)}#maikSheet button,#maikSheet .maik-chip,#maikSheet .maik-fu,#maikSheet .maik-more,#maikSheet [role=button],#maikSheet label{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent}#maikSheet button,#maikSheet .maik-hd,#maikSheet .maik-cmp,#maikSheet .maik-disc,#maikSheet .maik-chip,#maikSheet .maik-fu{-webkit-user-select:none;user-select:none}#maikSheet .maik-b,#maikSheet .maik-b *{-webkit-user-select:text;user-select:text}#maikSheet button,#maikSheet .maik-chip,#maikSheet .maik-fu{touch-action:manipulation}.maik-send{transition:transform .09s ease,box-shadow .12s ease,background .12s ease}.maik-send:active{transform:scale(.88);box-shadow:0 2px 6px rgba(15,118,110,.45)}.maik-mic:active,.maik-img:active,.maik-research:active{transform:scale(.9)}.maik-chip:active,.maik-fu:active{transform:scale(.97);opacity:.85}#maikSheet button:focus{outline:none}#maikSheet button:focus-visible{outline:2px solid var(--mk-teal,#0e6e63);outline-offset:2px}
+.maik-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--mk-send);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:0 6px 16px rgba(15,118,110,.5)}#maikSheet button,#maikSheet .maik-chip,#maikSheet .maik-fu,#maikSheet .maik-more,#maikSheet [role=button],#maikSheet label{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent}#maikSheet button,#maikSheet .maik-hd,#maikSheet .maik-cmp,#maikSheet .maik-disc,#maikSheet .maik-chip,#maikSheet .maik-fu{-webkit-user-select:none;user-select:none}#maikSheet .maik-b,#maikSheet .maik-b *{-webkit-user-select:text;user-select:text}#maikSheet button,#maikSheet .maik-chip,#maikSheet .maik-fu{touch-action:manipulation}.maik-send{transition:transform .09s ease,box-shadow .12s ease,background .12s ease}.maik-send:active{transform:scale(.88);box-shadow:0 2px 6px rgba(15,118,110,.45)}.maik-mic:active,.maik-img:active,.maik-research:active{transform:scale(.9)}.maik-chip:active,.maik-fu:active{transform:scale(.97);opacity:.85}#maikSheet button:focus{outline:none}#maikSheet button:focus-visible{outline:none}
 .maik-send:active{transform:scale(.94)}
 
 @keyframes maikGlow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.92;transform:scale(1.08)}}
@@ -5005,13 +5042,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function openAskAi(prefill, opts) {
     maikCSS(); maikSideCSS();
     var old = document.getElementById("maikSheet");
-    if (old) { var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
+    if (old) { if (old._maikAtmosphere) old._maikAtmosphere.destroy(); var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask Maik");
     sheet.classList.add("maik-polished");
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
+    try { if (window.SMD_MAIK_ATMOSPHERE) sheet._maikAtmosphere = SMD_MAIK_ATMOSPHERE.mount(sheet); } catch (e) {}
     document.body.classList.add("maik-open");
     // On-device model lifecycle: cancel any pending unload and warm the chosen local pack NOW, at the
     // moment a question is likely, instead of at app start (owner, 2026-09-04: no resident model when
@@ -5111,6 +5149,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var was = _maikBusy;
       _maikBusy = busy;
       maikBuddyBusy(!!busy);
+      if (sheet._maikAtmosphere) sheet._maikAtmosphere.setBusy(!!busy);
       if (was && !busy) { try { maikDocCue("done"); } catch (e) {} }   // wave the answer in
       if (!sendBtn) return;
       sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
@@ -5145,7 +5184,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // re-finds it via _live() and swaps in the answer + re-persists, so closing MaiK mid-request
           // no longer loses the answer (user: "close MaiK → never get the answer, it hangs"). If it's
           // truly stuck, the 90s watchdog replaces the same bubble with a Tap-to-retry link.
-          _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML);
+          _maikBodyHTML = body.innerHTML; maikFlushThread(_maikBodyHTML);
         }
       } catch (e) {}
       // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
@@ -5154,10 +5193,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Release the on-device model shortly after close (after any in-flight answer finishes; the
       // release never cuts a running generation), so it stops holding memory and heating the phone.
       try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.sheetClosed) SMD_MAIK_LOCAL.sheetClosed(); } catch (e) {}
+      if (sheet._maikAtmosphere) sheet._maikAtmosphere.destroy();
       maikBuddyUnmount();      // stop his timer — the sheet is about to be removed
       sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260);
     }
-    function scroll() { body.scrollTop = body.scrollHeight; }
+    function scroll(smooth) {
+      if (!body) return;
+      requestAnimationFrame(function () {
+        if (!body) return;
+        if (smooth) {
+          try { body.scrollTo({ top: body.scrollHeight, behavior: "smooth" }); return; } catch (e) {}
+        }
+        body.scrollTop = body.scrollHeight;
+      });
+    }
     // Prepend the faint centered wordmark watermark (§1 .maik-wm) behind the thread the first time a
     // bubble is added. emptyState() renders its own hero logo instead, so it deliberately omits this.
     function bubble(who, html) { if (!body.querySelector(".maik-wm")) { var wm = document.createElement("img"); wm.className = "maik-wm"; wm.src = MK_LOGO(); wm.alt = ""; wm.setAttribute("aria-hidden", "true"); body.insertBefore(wm, body.firstChild); } var d = document.createElement("div"); d.className = "maik-b " + (who === "you" ? "you" : "ai"); d.innerHTML = html; body.appendChild(d); scroll(); try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {} return d; }
@@ -5527,9 +5576,61 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return out.slice(0, 3);
       } catch (e) { return []; }
     }
+    // Validate whether an assumed topic actually has meaningful relevance to the user question
+    // or answer text. Suppresses false/accidental topic assumptions (e.g. stopword matches like 'than').
+    function maikIsAssumeRelevant(assume, question, answerText) {
+      if (!assume || !assume.name) return false;
+      var aName = String(assume.name).toLowerCase();
+      var q = String(question || "").toLowerCase();
+      if (q.indexOf(aName) >= 0 || aName.indexOf(q) >= 0) return true;
+
+      var STOP = {
+        than:1, then:1, other:1, others:1, more:1, most:1, less:1, least:1, much:1, many:1,
+        over:1, under:1, with:1, from:1, about:1, what:1, which:1, when:1, where:1, why:1, how:1,
+        does:1, need:1, needs:1, want:1, give:1, have:1, been:1, were:1, will:1, could:1, would:1,
+        should:1, that:1, this:1, these:1, those:1, drug:1, drugs:1, cure:1, line:1, test:1, dose:1,
+        treatment:1, treat:1, therapy:1, manage:1, management:1, patient:1, adult:1, child:1
+      };
+
+      var aToks = aName.replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) {
+        return t.length >= 4 && !STOP[t];
+      });
+      if (!aToks.length) return false;
+
+      var qToks = q.replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) {
+        return t.length >= 2 && !STOP[t];
+      });
+
+      var hasOverlap = aToks.some(function (at) {
+        return qToks.some(function (qt) {
+          return at === qt || (at.length >= 5 && qt.length >= 5 && (at.indexOf(qt) >= 0 || qt.indexOf(at) >= 0));
+        });
+      });
+      if (hasOverlap) return true;
+
+      var hasFuzzy = aToks.some(function (at) {
+        return qToks.some(function (qt) {
+          if (Math.abs(at.length - qt.length) <= 2 && at.length >= 5 && qt.length >= 5) {
+            if (at.slice(0, 5) === qt.slice(0, 5)) return true;
+          }
+          return false;
+        });
+      });
+      if (hasFuzzy) return true;
+
+      if (answerText) {
+        var ans = String(answerText).toLowerCase();
+        var inAns = aToks.some(function (t) { return ans.indexOf(t) >= 0; });
+        if (inAns) return true;
+      }
+
+      return false;
+    }
+
     // Chips are emitted as data-attribute buttons (not live listeners) so they survive the
     // innerHTML answer-cache and are handled by ONE delegated listener on the chat body.
     function maikFollowupsHTML(pkg, question, assume) {
+      if (assume && !maikIsAssumeRelevant(assume, question, "")) assume = null;
       var chips = maikFollowupChips(pkg, question), html = "";
       chips.forEach(function (c) { html += '<button class="maik-fu" data-maik-q="' + maikEscH(c.q) + '">' + maikEscH(c.label) + '</button>'; });
       if (assume) html += '<button class="maik-fu" data-maik-web="' + maikEscH(question) + '">' + svg("search", "smd-ico") + ' Different topic: search the web</button>';
@@ -5699,6 +5800,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + bookSvg + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + '</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
       // MaiK attribution row (sparkle + MAIK) atop every answer bubble.
       var attrHTML = '<div class="maik-attr">' + MK.spark + '<span>MaiK</span>' + ((r && r.kb) ? '<span class="maik-kbbadge" title="Answered instantly from the StewardMD Knowledge Base — no external AI call">&#9889; Instant &middot; StewardMD KB</span>' : '') + '</div>';
+      if (assume && !maikIsAssumeRelevant(assume, question, (r && r.text))) assume = null;
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> · not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference. Verify with local protocol.</div>');
       var full = attrHTML + eduHTML + rendered + srcHTML;
@@ -5956,6 +6058,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // under a STATED assumption; maikRenderAnswer prints the banner + refine chips. Same single
           // grounded call as the confident path — no extra tokens, we just stopped dead-ending.
           var assume = (tm && tm.mode === "assume") ? tm.assume : null;
+          if (assume && !maikIsAssumeRelevant(assume, question, "")) assume = null;
           // Phase 2 — stream tokens live (UpToDate-style), then maikRenderAnswer re-renders the final
           // answer with sources/chips/collapse. Fully additive: explainGroundedStream self-falls-back
           // to the non-stream call on any hiccup, so this can't regress the answer.
@@ -6311,6 +6414,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
+      try { autosizeQ(); } catch (e) {}
       try { scAbort(); } catch (e) {}   // sending stops any active dictation (red off) + keeps the box clear
       try { var _ex = sheet.querySelector("#maikExtract"); if (_ex) _ex.classList.remove("show"); } catch (e) {}
       /* Show the attached image INSIDE the question, the way any chat assistant does.
@@ -6498,14 +6602,38 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikHaptic(kind) {
       try {
         var H = window.SMD_HAPTICS;
-        if (!H) return;
-        if (kind === "stop") H.medium(); else H.tap();
+        if (H) { if (kind === "stop") H.medium(); else H.tap(); return; }
+      } catch (e) {}
+      try {
+        var C = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.Haptics;
+        if (C && C.impact) {
+          C.impact({ style: kind === "stop" ? "MEDIUM" : "LIGHT" }).catch(function () {});
+          return;
+        }
+      } catch (e) {}
+      try {
+        if (navigator.vibrate) {
+          navigator.vibrate(kind === "stop" ? [16, 20, 16] : 12);
+        }
       } catch (e) {}
     }
 
-    sendBtn.addEventListener("click", function () {
+    // Immediate native touch response:
+    // preventDefault on pointerdown keeps textarea focused so soft keyboard doesn't bounce/collapse and freeze JS layout on send.
+    sendBtn.addEventListener("pointerdown", function (ev) {
+      ev.preventDefault();
+      maikHaptic(_maikBusy ? "stop" : "send");
+      sendBtn.classList.add("btn-pressed");
+    });
+    ["pointerup", "pointercancel", "pointerleave"].forEach(function (evName) {
+      sendBtn.addEventListener(evName, function () {
+        sendBtn.classList.remove("btn-pressed");
+      });
+    });
+    sendBtn.addEventListener("click", function (ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      sendBtn.classList.remove("btn-pressed");
       if (_maikBusy) { maikHaptic("stop"); maikStopNow(); return; }
-      maikHaptic("send");
       send();
     });
     // The other composer controls get the same light tap, so the whole bar feels consistent.
@@ -6514,9 +6642,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (b) b.addEventListener("click", function () { maikHaptic("send"); });
     });
     // Buffering loader markup — a stage label + shimmering skeleton lines (the "thinking" state while
-    // MaiK waits ~15s for the first token). `cls` preserves the legacy .maik-thinking/.maik-webbusy hooks.
+    // MaiK waits ~15s for the first token). Uses Jakub Antalik's Thinking Orbs when available.
     function maikBufferHTML(stage, cls) {
-      return '<div class="maik-buffer ' + (cls || "") + '"><div class="maik-buffer-head">' + maikBotSVG(30) +
+      var orbArt = (window.ThinkingOrbs && window.ThinkingOrbs.getOrbClusterHTML)
+        ? window.ThinkingOrbs.getOrbClusterHTML(stage, cls)
+        : maikBotSVG(30);
+      return '<div class="maik-buffer ' + (cls || "") + '"><div class="maik-buffer-head">' + orbArt +
         '<span class="maik-buffer-txt">' + maikEscH(stage || "Searching StewardMD knowledge") + '</span></div>' +
         '<div class="maik-sk"><span></span><span></span><span></span></div></div>';
     }
@@ -6926,7 +7057,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // ---- MaiK Scribe: voice dictation into the chat box + inline findings extraction (spec C2) ----
     var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract");
     function reasoningReady() { return !!(window.SMD_AI && SMD_AI.extract && window.DX && DX.addFindings && DX.findingCatalog); }
-    function autosizeQ() { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; }
+    function autosizeQ() { qEl.style.removeProperty("height"); }
     function refreshExtract() { if (extractBtn) extractBtn.classList.toggle("show", !!((qEl.value || "").trim() && reasoningReady())); }
     // MaiK Scribe mic → the shared voice dialog (the same one that works in Clinical
     // Reasoning), in text mode: dictate into the chat box, then send to MaiK or tap
@@ -7033,9 +7164,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         d.appendChild(ob); scroll(); extractBtn.classList.remove("show");
       }).catch(function () { extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
     });
-    qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; refreshExtract(); });
+    qEl.addEventListener("input", function () { autosizeQ(); refreshExtract(); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
-    if (prefill && typeof prefill === "string") { try { qEl.value = prefill; qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; } catch (e) {} }
+    if (prefill && typeof prefill === "string") { try { qEl.value = prefill; autosizeQ(); } catch (e) {} }
     setTimeout(function () { try { qEl.focus({ preventScroll: true }); } catch (e) {} }, 300);
   }
   // Open the MaiK assistant with an optional pre-filled question (used by Specialty
@@ -7155,6 +7286,22 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<div class="hv-d-sec"><h4>App appearance</h4><div class="hv-fonts" id="hvAppear">' +
         APPEARANCES.map(function (a) { return '<button class="hv-fn" data-a="' + a.id + '">' + a.name + '</button>'; }).join("") +
       '</div><div class="hv-info" style="margin-top:6px">Liquid-glass styling across the app. The ICU dashboard is never affected.</div></div>' +
+      '<div class="hv-d-sec" id="hvMaikAtmoSec"><div class="hv-d-row"><h4 style="margin:0">MaiK Aurora Atmosphere</h4><span class="hv-d-badge">ReactBits Fusion</span></div>' +
+      '<div class="hv-info" style="margin:0 0 10px">Live multi-color wave fusion for MaiK Assistant. Blend and fusion colors are customizable.</div>' +
+      '<div class="mk-atmo-prev-box" id="hvAtmoPrev"><div class="mk-atmo-prev-glow" id="hvAtmoGlow"></div><div class="mk-atmo-prev-card"><div class="mk-atmo-prev-chip">MaiK Assistant Aurora</div><div class="mk-atmo-prev-sub" id="hvAtmoPrevSub">Blend 0.51 · Speed 1.6×</div></div></div>' +
+      '<div class="hv-sub-h">Fusion Presets</div><div class="mk-atmo-presets" id="hvAtmoPresets"></div>' +
+      '<div class="hv-sub-h" style="margin-top:10px">Colors of Fusion</div>' +
+      '<div class="mk-atmo-colors-grid">' +
+        '<div class="mk-atmo-c-item"><label class="mk-atmo-c-lbl" for="hvAtmoC1">Color 1 (Amber)</label><div class="mk-atmo-c-row"><input type="color" id="hvAtmoC1" class="mk-atmo-cpick" aria-label="Color 1"><input type="text" id="hvAtmoC1Txt" class="mk-atmo-ctxt" maxlength="7" spellcheck="false" aria-label="Color 1 hex"></div></div>' +
+        '<div class="mk-atmo-c-item"><label class="mk-atmo-c-lbl" for="hvAtmoC2">Color 2 (Emerald)</label><div class="mk-atmo-c-row"><input type="color" id="hvAtmoC2" class="mk-atmo-cpick" aria-label="Color 2"><input type="text" id="hvAtmoC2Txt" class="mk-atmo-ctxt" maxlength="7" spellcheck="false" aria-label="Color 2 hex"></div></div>' +
+        '<div class="mk-atmo-c-item"><label class="mk-atmo-c-lbl" for="hvAtmoC3">Color 3 (Navy)</label><div class="mk-atmo-c-row"><input type="color" id="hvAtmoC3" class="mk-atmo-cpick" aria-label="Color 3"><input type="text" id="hvAtmoC3Txt" class="mk-atmo-ctxt" maxlength="7" spellcheck="false" aria-label="Color 3 hex"></div></div>' +
+      '</div>' +
+      '<div class="hv-d-row" style="margin-top:14px"><h4 style="margin:0;font-size:11px">Aurora Blend</h4><span class="hv-d-val" id="hvAtmoBlendVal">0.51</span></div>' +
+      '<input type="range" id="hvAtmoBlend" min="0.15" max="0.85" step="0.01" value="0.51" aria-label="Aurora blend">' +
+      '<div class="hv-info" style="margin-top:4px">Softness and depth of the multi-color wave fusion.</div>' +
+      '<div class="hv-d-row" style="margin-top:12px"><h4 style="margin:0;font-size:11px">Wave Speed</h4><span class="hv-d-val" id="hvAtmoSpeedVal">1.6×</span></div>' +
+      '<input type="range" id="hvAtmoSpeed" min="0.5" max="3.0" step="0.1" value="1.6" aria-label="Wave speed">' +
+      '<div class="hv-info" style="margin-top:4px">Animation tempo of the dynamic plasma currents.</div></div>' +
       '<div class="hv-d-sec"><h4>Font</h4><div class="hv-fonts" id="hvFont">' +
         FONTS.map(function (f) { return '<button class="hv-fn" data-f="' + f.id + '" data-font="' + f.id + '">' + f.name + '</button>'; }).join("") +
       '</div></div>' +
@@ -7169,9 +7316,134 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     s.querySelector("#hvAuto").addEventListener("click", function () { ds.autoFit = !ds.autoFit; if (ds.autoFit) autoFitD(); else { applyD(); refreshD(); } });
     var hp = s.querySelector("#hvHaptics");
     if (hp) hp.addEventListener("click", function () { var on = !(window.SMD_HAPTICS && SMD_HAPTICS.enabled()); if (window.SMD_HAPTICS) { SMD_HAPTICS.setEnabled(on); if (on) SMD_HAPTICS.medium(); } refreshD(); });
-    s.querySelector("#hvReset").addEventListener("click", function () { ds = Object.assign({}, DDEF); applyD(); refreshD(); });
+    s.querySelector("#hvReset").addEventListener("click", function () {
+      ds = Object.assign({}, DDEF);
+      if (window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.resetConfig) {
+        var r = SMD_MAIK_ATMOSPHERE.resetConfig();
+        if (r && r.light) syncAtmoUI(r.light);
+      }
+      applyD(); refreshD();
+    });
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
     s.querySelectorAll("#hvAppear button").forEach(function (b) { b.addEventListener("click", function () { ds.appearance = b.getAttribute("data-a"); applyD(); refreshD(); }); });
+
+    function getAtmoCfg() {
+      if (window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.getConfig) {
+        return SMD_MAIK_ATMOSPHERE.getConfig().light;
+      }
+      return { color1: '#b4510a', color2: '#035524', color3: '#060351', blend: 0.51, speed: 1.6 };
+    }
+
+    function syncAtmoUI(cfg) {
+      if (!cfg) return;
+      var c1In = s.querySelector("#hvAtmoC1"), c1Tx = s.querySelector("#hvAtmoC1Txt");
+      var c2In = s.querySelector("#hvAtmoC2"), c2Tx = s.querySelector("#hvAtmoC2Txt");
+      var c3In = s.querySelector("#hvAtmoC3"), c3Tx = s.querySelector("#hvAtmoC3Txt");
+      var blIn = s.querySelector("#hvAtmoBlend"), blVal = s.querySelector("#hvAtmoBlendVal");
+      var spIn = s.querySelector("#hvAtmoSpeed"), spVal = s.querySelector("#hvAtmoSpeedVal");
+      var glow = s.querySelector("#hvAtmoGlow"), sub = s.querySelector("#hvAtmoPrevSub");
+
+      if (c1In) c1In.value = cfg.color1;
+      if (c1Tx) c1Tx.value = cfg.color1.toUpperCase();
+      if (c2In) c2In.value = cfg.color2;
+      if (c2Tx) c2Tx.value = cfg.color2.toUpperCase();
+      if (c3In) c3In.value = cfg.color3;
+      if (c3Tx) c3Tx.value = cfg.color3.toUpperCase();
+      if (blIn) blIn.value = cfg.blend;
+      if (blVal) blVal.textContent = (+cfg.blend).toFixed(2);
+      if (spIn) spIn.value = cfg.speed;
+      if (spVal) spVal.textContent = (+cfg.speed).toFixed(1) + "×";
+
+      if (glow) {
+        glow.style.background = "linear-gradient(135deg, " + cfg.color1 + " 0%, " + cfg.color2 + " " + Math.round(cfg.blend * 100) + "%, " + cfg.color3 + " 100%)";
+        glow.style.opacity = (0.55 + cfg.blend * 0.40).toFixed(2);
+      }
+      if (sub) sub.textContent = "Blend " + (+cfg.blend).toFixed(2) + " · Speed " + (+cfg.speed).toFixed(1) + "×";
+
+      s.querySelectorAll(".mk-atmo-pre-btn").forEach(function (btn) {
+        var pid = btn.getAttribute("data-pre-id");
+        var presets = (window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.PRESETS) || [];
+        var p = presets.find ? presets.find(function (x) { return x.id === pid; }) : null;
+        if (!p) for (var i = 0; i < presets.length; i++) { if (presets[i].id === pid) { p = presets[i]; break; } }
+        var match = p && p.color1.toLowerCase() === cfg.color1.toLowerCase() &&
+                    p.color2.toLowerCase() === cfg.color2.toLowerCase() &&
+                    p.color3.toLowerCase() === cfg.color3.toLowerCase() &&
+                    Math.abs(p.blend - cfg.blend) < 0.02;
+        btn.classList.toggle("on", !!match);
+      });
+    }
+
+    var preWrap = s.querySelector("#hvAtmoPresets");
+    if (preWrap && window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.PRESETS) {
+      preWrap.innerHTML = SMD_MAIK_ATMOSPHERE.PRESETS.map(function (p) {
+        return '<button class="mk-atmo-pre-btn" data-pre-id="' + p.id + '">' +
+          '<span class="mk-atmo-pre-dots">' +
+            '<span class="mk-atmo-pre-dot" style="background:' + p.color1 + '"></span>' +
+            '<span class="mk-atmo-pre-dot" style="background:' + p.color2 + '"></span>' +
+            '<span class="mk-atmo-pre-dot" style="background:' + p.color3 + '"></span>' +
+          '</span>' +
+          '<span>' + p.name + '</span>' +
+        '</button>';
+      }).join("");
+
+      preWrap.querySelectorAll(".mk-atmo-pre-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var pid = btn.getAttribute("data-pre-id");
+          var presets = SMD_MAIK_ATMOSPHERE.PRESETS;
+          var p = null;
+          for (var i = 0; i < presets.length; i++) { if (presets[i].id === pid) { p = presets[i]; break; } }
+          if (p && SMD_MAIK_ATMOSPHERE.setConfig) {
+            var updated = SMD_MAIK_ATMOSPHERE.setConfig({
+              light: { color1: p.color1, color2: p.color2, color3: p.color3, blend: p.blend, speed: p.speed }
+            });
+            syncAtmoUI(updated.light);
+          }
+        });
+      });
+    }
+
+    function wireColorPair(inId, txtId, key) {
+      var inp = s.querySelector("#" + inId), txt = s.querySelector("#" + txtId);
+      if (inp && txt) {
+        inp.addEventListener("input", function () {
+          txt.value = this.value.toUpperCase();
+          var patch = { light: {} }; patch.light[key] = this.value;
+          var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig(patch);
+          if (up) syncAtmoUI(up.light);
+        });
+        txt.addEventListener("change", function () {
+          var v = this.value.trim();
+          if (!/^#?[0-9a-fA-F]{6}$/.test(v)) return;
+          if (v.charAt(0) !== "#") v = "#" + v;
+          inp.value = v;
+          var patch = { light: {} }; patch.light[key] = v;
+          var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig(patch);
+          if (up) syncAtmoUI(up.light);
+        });
+      }
+    }
+    wireColorPair("hvAtmoC1", "hvAtmoC1Txt", "color1");
+    wireColorPair("hvAtmoC2", "hvAtmoC2Txt", "color2");
+    wireColorPair("hvAtmoC3", "hvAtmoC3Txt", "color3");
+
+    var bldInp = s.querySelector("#hvAtmoBlend");
+    if (bldInp) {
+      bldInp.addEventListener("input", function () {
+        var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig({ light: { blend: +this.value } });
+        if (up) syncAtmoUI(up.light);
+      });
+    }
+
+    var spdInp = s.querySelector("#hvAtmoSpeed");
+    if (spdInp) {
+      spdInp.addEventListener("input", function () {
+        var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig({ light: { speed: +this.value } });
+        if (up) syncAtmoUI(up.light);
+      });
+    }
+
+    syncAtmoUI(getAtmoCfg());
+
     s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-f"); var f = FONTS.filter(function (x) { return x.id === id; })[0]; if (f && f.web) ensureFont(f.web); ds.font = id; applyD(); refreshD(); }); });
     s.querySelectorAll("#hvHead button").forEach(function (b) { b.addEventListener("click", function () { ds.headingStyle = b.getAttribute("data-h"); applyD(); refreshD(); }); });
     refreshD();

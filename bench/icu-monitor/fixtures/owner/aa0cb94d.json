@@ -1,0 +1,108 @@
+{
+  "id": "owner-aa0cb94d",
+  "manufacturer": "ge-dash",
+  "layout": "ge-marquette-boxes",
+  "difficulty": [
+    "published-photo",
+    "low-resolution",
+    "dual-pressure",
+    "alarm-list"
+  ],
+  "image": "aa0cb94d.jpg",
+  "imageSize": {
+    "w": 438,
+    "h": 456
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 84
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 97
+    },
+    "sbp": {
+      "status": "ambiguous",
+      "why": "both NBP 113/60(81) and ART1 141/43(70) displayed with similar emphasis",
+      "value": 141
+    },
+    "dbp": {
+      "status": "ambiguous",
+      "why": "both NBP and ART1 displayed",
+      "value": 43
+    },
+    "map": {
+      "status": "ambiguous",
+      "why": "both NBP and ART1 displayed",
+      "value": 70
+    },
+    "rr": {
+      "status": "visible",
+      "value": 24
+    },
+    "pulse": {
+      "status": "ambiguous",
+      "why": "two rates: ART1 RATE 84 and SpO2 RATE 85",
+      "value": 85
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 0
+    },
+    "temp": {
+      "status": "visible",
+      "value": 36.5
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 141,
+        "dbp": 43,
+        "map": 70
+      }
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 113,
+        "dbp": 60,
+        "map": 81
+      }
+    }
+  },
+  "distractors": {
+    "alarmList": [
+      "ART1 LO 38 13:05",
+      "ART1 LO 37 13:06",
+      "ART1 LO 38 13:06",
+      "ART1 LO 37 13:05"
+    ],
+    "nbpTime": "12:00",
+    "nbpMode": "AUTO ADULT",
+    "ecgLimits": [
+      130,
+      50
+    ],
+    "art1Limits": "160 S / 90",
+    "spo2Limits": [
+      105,
+      90
+    ],
+    "rrLimits": [
+      35,
+      5
+    ],
+    "date": "27-MAR-2011 13:17",
+    "tp1Limits": [
+      40.0,
+      32.0
+    ]
+  },
+  "notes": "GE Marquette-style (Solar/Dash) boxed layout, model not visible. ART1 and NBP both current, so sbp/dbp/map are ambiguous; art and nibp scored separately."
+}

@@ -42,6 +42,7 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { witnessOrRefusal } from "./controlled-drugs.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const key = (v) => str(v).toUpperCase();
@@ -55,11 +56,16 @@ const MOVE_TYPE = "StockMovement";
  *   adjustment  a count correction, always with a reason
  *   wastage     destroyed, spilled, expired off the shelf
  *   transfer    moved between locations; written as two movements, out and in
+ *   consumption used up by the hospital itself, never by a patient: a spare part fitted on a job card
+ *               (assets.js). It names the job card and the department, so the store level and the
+ *               consumption report read the same one movement.
+ *   supplier-return  stock sent back to the supplier it came from. Written only by returnToSupplier(), which ties it
+ *               to the receipt that brought the stock in and never returns more than that receipt brought.
  */
-const KINDS = Object.freeze(["receipt", "adjustment", "wastage", "transfer-out", "transfer-in"]);
+const KINDS = Object.freeze(["receipt", "adjustment", "wastage", "transfer-out", "transfer-in", "consumption", "supplier-return"]);
 
 /** Which kinds add to a level and which take away. An issue is handled separately. */
-const SIGN = Object.freeze({ receipt: 1, "transfer-in": 1, adjustment: 1, wastage: -1, "transfer-out": -1 });
+const SIGN = Object.freeze({ receipt: 1, "transfer-in": 1, adjustment: 1, wastage: -1, "transfer-out": -1, consumption: -1, "supplier-return": -1 });
 
 /**
  * PURE. A quantity is a number and a unit, or it is nothing.
@@ -89,7 +95,7 @@ function levelsFrom(movements, dispenses) {
 
   const bump = (code, display, location, qty, delta) => {
     const k = `${key(code)}|${key(location)}|${key(qty.unit)}`;
-    const row = rows.get(k) || { code, display: display || code, location: location || null, unit: qty.unit, level: 0, received: 0, issued: 0, wasted: 0, adjusted: 0 };
+    const row = rows.get(k) || { code, display: display || code, location: location || null, unit: qty.unit, level: 0, received: 0, issued: 0, wasted: 0, adjusted: 0, returnedToSupplier: 0 };
     row.level += qty.value * delta;
     rows.set(k, row);
     return row;
@@ -111,10 +117,29 @@ function levelsFrom(movements, dispenses) {
     else if (kind === "wastage") row.wasted += qty.value;
     else if (kind === "adjustment") row.adjusted += qty.value;
     else if (kind === "transfer-out") row.issued += 0;
+    else if (kind === "consumption") row.issued += qty.value;
+    else if (kind === "supplier-return") row.returnedToSupplier += qty.value;
   }
 
+  /* AN ISSUE LEAVES THE STORE IT CAME FROM, NOT THE WARD IT WENT TO (LT-38). A dispense's `destination` is the
+   * ward the medicine was sent to, and this subtracted it THERE: the pharmacy's received stock never went down, and
+   * every ward that was sent a dose, having received nothing on record, read negative ("Amoxicillin, General
+   * Medicine A, -12 dose"). A dispense names no source location (pharmacy-dispense.js), so it comes out of the one
+   * place that item and unit were ever received into; received into several places, or nowhere, it comes out of the
+   * unnamed main store (location null), where a level with no receipt at all still shows negative, as it should. */
+  const receivedAt = new Map();
+  for (const m of movements || []) {
+    const qty = m && quantityOf(m.quantity);
+    if (!qty || (str(m.kind) !== "receipt" && str(m.kind) !== "transfer-in") || !str(m.code)) continue;
+    const k = `${key(m.code)}|${key(qty.unit)}`;
+    const set = receivedAt.get(k) || new Set();
+    set.add(str(m.location) || null);
+    receivedAt.set(k, set);
+  }
   for (const d of dispenses || []) {
-    if (!d) continue;
+    /* A RETURNED ISSUE CAME BACK (pharmacy-dispense.js returnDispense: "stock comes back"). It was subtracted anyway,
+     * so every return left the level short by what was returned, and a controlled-drug count then read as a loss. */
+    if (!d || d.state === "returned") continue;
     const qty = quantityOf(d.quantity);
     const code = str(d.drugCode) || str(d.drug);
     if (!qty || !code) {
@@ -124,7 +149,8 @@ function levelsFrom(movements, dispenses) {
       problems.push({ dispenseId: d.id || null, reason: "dispense_not_countable" });
       continue;
     }
-    const row = bump(code, d.drug, d.destination, qty, -1);
+    const from = receivedAt.get(`${key(code)}|${key(qty.unit)}`);
+    const row = bump(code, d.drug, from && from.size === 1 ? [...from][0] : null, qty, -1);
     row.issued += qty.value;
   }
 
@@ -149,7 +175,7 @@ function batchBalances(movements, dispenses, code, unit) {
     row(str(m.batch), str(m.expiry)).onHand += q.value * sign;
   }
   for (const d of dispenses || []) {
-    const q = d && quantityOf(d.quantity);
+    const q = d && d.state !== "returned" && quantityOf(d.quantity);
     if (!q || key(str(d.drugCode) || str(d.drug)) !== k || key(q.unit) !== u) continue;
     if (!str(d.batch)) { unbatched += q.value; continue; }
     row(str(d.batch), str(d.expiry)).onHand -= q.value;
@@ -333,6 +359,10 @@ async function recordMovement(request, env, ctx) {
   const kind = str(ctx.kind), code = str(ctx.code);
   if (!KINDS.includes(kind)) return { ...base, ok: false, status: 400, error: "unknown_kind", detail: `kind must be one of ${KINDS.join(", ")}. An issue is not a movement: it is recorded as a MedicationDispense against an order.`, written: 0 };
   if (!code) return { ...base, ok: false, status: 422, error: "code_required", written: 0 };
+  /* A return is bounded by the receipt it came from, which only returnToSupplier() checks. */
+  if (kind === "supplier-return" && !(ctx.supplierReturn && typeof ctx.supplierReturn === "object")) {
+    return { ...base, ok: false, status: 422, error: "use_supplier_return", detail: "A return to a supplier is recorded against the receipt it came from (Returns to suppliers), so it can never send back more than arrived.", written: 0 };
+  }
 
   const quantity = quantityOf(ctx.quantity);
   if (!quantity) return { ...base, ok: false, status: 422, error: "quantity_required", detail: "a movement is a number and a unit. \"Some\" is not a stock record.", written: 0 };
@@ -348,6 +378,51 @@ async function recordMovement(request, env, ctx) {
   const { svc, resolved, error } = await open_(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
+  /* A CONTROLLED DRUG IS NOT DESTROYED OR WRITTEN OFF BY ONE PERSON (controlled-drugs.js). The route decides whether
+   * the item is controlled (the hospital's drug master) and hands in the check that the witness is a real, different
+   * member of this hospital; a witness who is the person recording, or nobody at all, is refused and nothing lands. */
+  /* NDPS Rules r.52-O: a recognised medical institution whose Form 3G recognition has expired receives no controlled
+   * drug, unless it has applied for renewal (register-settings.js rmiStatus, computed by the route). */
+  if (ctx.controlled === true && (kind === "receipt" || kind === "transfer-in") && ctx.rmi && ctx.rmi.blocked && (typeof ctx.rmiApplies !== "function" || ctx.rmiApplies(ctx.display, code))) {
+    return { ...base, ok: false, status: 409, error: "rmi_recognition_expired", written: 0,
+      detail: "The hospital's NDPS recognition (Form 3G) has expired and no renewal application is recorded (NDPS Rules r.52-O). A controlled drug cannot be received. Record the renewal application reference in Registers, Settings." };
+  }
+  /* NDPS Rules r.52V(3): no transfer, loan or sale of an essential narcotic drug to another institution "without the prior
+   * approval of the Controller of Drugs" (legal review F.4.5). A controlled transfer out that names an institution names
+   * the approval too, or it is refused. A transfer between this hospital's own stores names no institution. */
+  /* A controlled drug sent back to its supplier leaves for another institution too, so the same approval is named. */
+  const toInstitution = kind === "supplier-return" ? str(ctx.supplierReturn && ctx.supplierReturn.supplier) : str(ctx.toInstitution);
+  if (ctx.controlled === true && (kind === "transfer-out" || kind === "supplier-return") && toInstitution && str(ctx.controllerApprovalRef).length < 3) {
+    return { ...base, ok: false, status: 422, error: "controller_approval_required", written: 0,
+      detail: "A controlled drug goes to another institution (transfer, loan or sale) only with the prior approval of the Controller of Drugs (NDPS Rules r.52V(3)). Record the approval reference." };
+  }
+  /* NDPS Rules r.52U: no more held than the Form 3J estimate (controlled-drugs.js estimateRefusal, handed in by the route for
+   * an essential narcotic drug). A check that could not be made is said on the response and on the movement. */
+  let estimate = null;
+  if (ctx.controlled === true && (kind === "receipt" || kind === "transfer-in") && typeof ctx.estimateCheck === "function") {
+    estimate = await ctx.estimateCheck({ code, display: str(ctx.display) || code, unit: quantity.unit, value: quantity.value, at: str(ctx.at), revisedEstimateRef: str(ctx.revisedEstimateRef) });
+    if (estimate && estimate.refuse) return { ...base, ...estimate.refuse, written: 0 };
+  }
+  let witnessedBy = null;
+  if (ctx.controlled === true && (kind === "wastage" || kind === "adjustment" || kind === "supplier-return")) {
+    const w = await witnessOrRefusal(ctx, resolved.actor.id);
+    if (w.error) return { ...base, ...w.error, written: 0 };
+    witnessedBy = w.witnessId;
+  }
+  /* NDPS Rules r.52V(1): "The expired stock of essential narcotic drugs shall be destroyed by the recognised medical
+   * institution in the presence of an officer nominated by the Controller of Drugs." A controlled wastage that is a
+   * destruction of expired stock names that officer and the nominating order, or it is refused and nothing lands. */
+  let destruction = null;
+  if (ctx.controlled === true && kind === "wastage" && (ctx.destruction || /expir/i.test(reason))) {
+    const d = ctx.destruction && typeof ctx.destruction === "object" ? ctx.destruction : {};
+    const missing = ["nomineeName", "nomineeDesignation", "nominatingOrderRef", "destroyedOn"].filter((k) => !str(d[k]));
+    if (missing.length || !/^\d{4}-\d{2}-\d{2}$/.test(str(d.destroyedOn))) {
+      return { ...base, ok: false, status: 422, error: "destruction_nominee_required", missing, written: 0,
+        detail: "Expired stock of a controlled drug is destroyed in the presence of an officer nominated by the Controller of Drugs (NDPS Rules r.52V(1)). Give the officer's name, designation, the nominating order reference and the date (YYYY-MM-DD)." };
+    }
+    destruction = { nomineeName: str(d.nomineeName).slice(0, 120), nomineeDesignation: str(d.nomineeDesignation).slice(0, 120), nominatingOrderRef: str(d.nominatingOrderRef).slice(0, 120), destroyedOn: str(d.destroyedOn) };
+  }
+
   const at = str(ctx.at) || new Date().toISOString();
   /* The random tail matters: two receipts of one drug in the same millisecond used to share an id, and
    * the second became a new version of the first, so the first delivery vanished from every level.
@@ -358,13 +433,39 @@ async function recordMovement(request, env, ctx) {
     quantity, location: str(ctx.location) || null,
     batch: str(ctx.batch) || null, expiry: str(ctx.expiry) || null,
     reason: reason || null, at, by: resolved.actor.id,
+    ...(ctx.controlled === true ? { controlled: true, witnessedBy } : {}),
+    ...(destruction ? { destruction } : {}),
+    /* Form 3H (NDPS Rules r.52R) records where a receipt came from and its consignment note, bill or invoice number.
+     * Optional for every drug, kept when given. */
+    ...(str(ctx.receivedFrom) ? { receivedFrom: str(ctx.receivedFrom).slice(0, 200) } : {}),
+    ...(str(ctx.documentNo) ? { documentNo: str(ctx.documentNo).slice(0, 80) } : {}),
+    /* Drugs and Cosmetics Rules r.65(21)(b)(ii), (v), (vi): a Schedule X receipt names the supplier's address and licence
+     * number and the manufacturer (controlled-drugs.js rule65Register). Kept when given, for any drug. */
+    ...(str(ctx.supplierAddress) ? { supplierAddress: str(ctx.supplierAddress).slice(0, 300) } : {}),
+    ...(str(ctx.supplierLicenceNo) ? { supplierLicenceNo: str(ctx.supplierLicenceNo).slice(0, 80) } : {}),
+    ...(str(ctx.manufacturer) ? { manufacturer: str(ctx.manufacturer).slice(0, 120) } : {}),
+    ...(toInstitution && kind === "transfer-out" ? { toInstitution: toInstitution.slice(0, 200), transferKind: ["transfer", "loan", "sale"].includes(str(ctx.transferKind)) ? str(ctx.transferKind) : "transfer",
+      ...(str(ctx.controllerApprovalRef) ? { controllerApprovalRef: str(ctx.controllerApprovalRef).slice(0, 120) } : {}) } : {}),
+    ...(estimate && estimate.over ? { revisedEstimateRef: str(ctx.revisedEstimateRef).slice(0, 120), aboveEstimate: estimate.over } : {}),
+    ...(estimate && estimate.warning ? { estimateUnchecked: true } : {}),
+    /* What a stores movement belongs to (stores.js, assets.js): the indent it was issued against, the job card a
+     * part was fitted on, the department that used it. Carried, never required: a pharmacy receipt names none. */
+    ...(str(ctx.indentId) ? { indentId: str(ctx.indentId) } : {}),
+    ...(str(ctx.jobCardId) ? { jobCardId: str(ctx.jobCardId) } : {}),
+    ...(str(ctx.departmentId) ? { departmentId: str(ctx.departmentId) } : {}),
+    ...(kind === "supplier-return" ? { supplier: toInstitution.slice(0, 200), returnOfReceipt: str(ctx.supplierReturn.receiptId),
+      ...(str(ctx.supplierReturn.purchaseOrderId) ? { purchaseOrderId: str(ctx.supplierReturn.purchaseOrderId) } : {}),
+      ...(str(ctx.supplierReturn.debitNoteNo) ? { debitNoteNo: str(ctx.supplierReturn.debitNoteNo).slice(0, 80) } : {}),
+      ...(ctx.controlled === true ? { controllerApprovalRef: str(ctx.controllerApprovalRef).slice(0, 120) } : {}) } : {}),
     source: { system: "wardsynq-native", sourceId: `stock:${id}` },
   };
 
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, movementId: id, kind, recordVersion: out.record.version, movement: record, actor: resolved.actor.id,
-      note: "A movement, not a gate. Nothing in stock control can refuse a dispense." };
+    /* A replayed key answers with the movement that key first wrote, not the id this retry minted. */
+    const saved = out.replayed && out.record ? out.record : record;
+    return { ...base, ok: true, written: 1, movementId: saved.id, kind, recordVersion: out.record.version, movement: saved, actor: resolved.actor.id,
+      note: "A movement, not a gate. Nothing in stock control can refuse a dispense.", ...(estimate && estimate.warning ? { estimateWarning: estimate.warning } : {}) };
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
@@ -372,6 +473,77 @@ async function recordMovement(request, env, ctx) {
 }
 
 const READ_CAP = 1000;
+
+/**
+ * PURE. How much of one receipt can still go back: what it brought in, less every earlier return naming it.
+ * Only the same unit is counted, for the reason the whole file keeps: nothing converts boxes to tablets.
+ */
+function returnableFrom(receipt, movements) {
+  const q = receipt && quantityOf(receipt.quantity);
+  if (!q || str(receipt.kind) !== "receipt") return null;
+  const returned = (movements || []).filter((m) => m && str(m.kind) === "supplier-return" && str(m.returnOfReceipt) === str(receipt.id))
+    .reduce((a, m) => { const x = quantityOf(m.quantity); return a + (x && key(x.unit) === key(q.unit) ? x.value : 0); }, 0);
+  return { received: q.value, returned, remaining: q.value - returned, unit: q.unit };
+}
+
+/**
+ * Sends stock back to the supplier it came from, against the receipt that brought it in.
+ * ctx: { migration, receiptId, quantity, reason, supplier?, debitNoteNo?, isControlled(display, code), witnessId?, witnessCheck?,
+ *        controllerApprovalRef?, at?, idempotencyKey? }
+ *
+ * NEVER MORE THAN ARRIVED. The receipt and every earlier return against it are read, and a quantity above what is
+ * left is refused with both numbers named. A return is a movement like any other, so the level, the batch balances
+ * and the controlled-drug register (controlled-drugs.js) all read it from the one ledger. The supplier's GST credit
+ * note or the hospital's debit note is the accountant's document; its number is kept when given, nothing is computed.
+ * ponytail: two returns against one receipt at the same instant are not serialised; the level shows any excess.
+ */
+async function returnToSupplier(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const receiptId = str(ctx.receiptId), reason = str(ctx.reason);
+  const qs = str(ctx.quantity);
+  const value = /^\d+(\.\d+)?$/.test(qs) ? Number(qs) : NaN;
+  if (!receiptId) return { ...base, ok: false, status: 422, error: "receipt_required", detail: "Choose the receipt the stock came in on.", written: 0 };
+  if (!(value > 0)) return { ...base, ok: false, status: 422, error: "quantity_required", detail: "Give a plain quantity above zero.", written: 0 };
+  if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "Say why the stock is going back.", written: 0 };
+
+  const { svc, error } = await open_(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+
+  let receipt, movements, po = null;
+  try {
+    [receipt, movements] = await Promise.all([svc.get(MOVE_TYPE, receiptId), svc.list(MOVE_TYPE, READ_CAP)]);
+    if (receipt && str(receipt.purchaseOrderId)) po = await svc.get("PurchaseOrder", str(receipt.purchaseOrderId));
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+  }
+  if (!receipt || str(receipt.kind) !== "receipt") return { ...base, ok: false, status: 404, error: "receipt_not_found", detail: "There is no receipt with that reference.", written: 0 };
+  if ((movements || []).length >= READ_CAP) {
+    return { ...base, ok: false, status: 409, error: "too_many_records", detail: `More than ${READ_CAP} stock records exist, so earlier returns against this receipt cannot all be read. Nothing was recorded.`, written: 0 };
+  }
+  const left = returnableFrom(receipt, movements);
+  if (!left) return { ...base, ok: false, status: 422, error: "receipt_not_countable", detail: "This receipt has no usable quantity, so nothing can be returned against it.", written: 0 };
+  if (value > left.remaining) {
+    return { ...base, ok: false, status: 409, error: "return_exceeds_receipt", received: left.received, returned: left.returned, remaining: left.remaining, unit: left.unit, written: 0,
+      detail: `This receipt brought in ${left.received} ${left.unit} and ${left.returned} ${left.unit} already went back, so at most ${left.remaining} ${left.unit} can be returned. Nothing was recorded.` };
+  }
+  const supplier = str(receipt.receivedFrom) || str(po && po.vendor) || str(ctx.supplier);
+  if (!supplier) return { ...base, ok: false, status: 422, error: "supplier_required", detail: "The receipt does not name its supplier. Say who the stock is going back to.", written: 0 };
+
+  /* Controlled or not is the hospital's drug master applied to the receipt's own item, never the caller's word. A route
+   * that cannot say is refused rather than treated as not controlled. */
+  if (typeof ctx.isControlled !== "function") return { ...base, ok: false, status: 502, error: "controlled_check_unavailable", detail: "Whether this is a controlled drug could not be checked, so nothing was recorded.", written: 0 };
+  const moved = await recordMovement(request, env, {
+    ...ctx, kind: "supplier-return", controlled: ctx.isControlled(receipt.display, receipt.code) === true, code: str(receipt.code), display: str(receipt.display) || str(receipt.code),
+    quantity: { value, unit: left.unit }, location: receipt.location || null, batch: receipt.batch || null, expiry: receipt.expiry || null, reason,
+    supplierReturn: { receiptId, supplier, purchaseOrderId: str(receipt.purchaseOrderId), debitNoteNo: ctx.debitNoteNo },
+  });
+  if (!moved.ok) return moved;
+  return { ...moved, supplier, receiptId, returned: left.returned + value, remaining: left.remaining - value, unit: left.unit };
+}
 
 /** ctx: { migration, code, unit, quantity, now? } - which batches to take from, earliest expiry first. Advice only. */
 async function stockFefo(request, env, ctx) {
@@ -398,7 +570,9 @@ async function stockFefo(request, env, ctx) {
   return { ...base, ok: true, code, unit, quantity, picks: sug.picks, shortfall: sug.shortfall, excluded: sug.excluded, note: "Advice only. Check the expiry printed on the box before issuing." };
 }
 
-/** ctx: { migration, reorderLevels?, location? } - the levels, computed now. */
+/** ctx: { migration, reorderLevels?, location?, noDispenses? } - the levels, computed now.
+ *  noDispenses: the laboratory's own store (reagents and consumables), which no medicine is ever dispensed from
+ *  and whose staff cannot read dispenses. */
 async function stockLevels(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -412,7 +586,7 @@ async function stockLevels(request, env, ctx) {
     [movements, dispenses] = await Promise.all([
       /* No catch: a dispense read that failed and came back as [] would make every level too high. */
       svc.list(MOVE_TYPE, READ_CAP),
-      svc.list("MedicationDispense", READ_CAP),
+      ctx.noDispenses === true ? [] : svc.list("MedicationDispense", READ_CAP),
     ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), levels: [] };
@@ -449,4 +623,4 @@ async function stockLevels(request, env, ctx) {
   };
 }
 
-export { batchBalances, fefoSuggestion, stockFefo, MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount };
+export { returnableFrom, returnToSupplier, batchBalances, fefoSuggestion, stockFefo, MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount };

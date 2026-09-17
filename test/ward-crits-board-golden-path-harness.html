@@ -16,7 +16,9 @@ window.prompt = function () { return "Repeated the potassium, called the ward.";
 
 var LOOP = { loopId: "loop-1", patientId: "opd-pat-smd-h1-other", code: "K", display: "Potassium",
   value: 6.8, unit: "mmol/L", basis: "limit", state: "open",
-  escalation: { level: "escalate", minutesOpen: 42 } };
+  escalation: { level: "escalate", minutesOpen: 42 }, minutesSinceReported: 42,
+  // LT-28: what /ward/criticals?names=1 joins: the patient, ward and bed.
+  patient: { name: "Harness Patient Other", mrn: "SMD-H1-OTHER", ward: "Ward B", bed: "7" } };
 
 window.fetch = function (url, opts) {
   var u = String(url), body = null;
@@ -28,7 +30,7 @@ window.fetch = function (url, opts) {
   if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, bedsConfigured: true, wards: [] });
 
   if (u.indexOf("/ward/acknowledge") >= 0 && (opts && opts.method) === "POST") {
-    LOOP.state = "acknowledged"; LOOP.acknowledgedBy = "cfa:doctor";
+    LOOP.state = "acknowledged"; LOOP.acknowledgedBy = "cfa:doctor"; LOOP.acknowledgedByName = "Dr Harness"; LOOP.escalation = { level: "none", minutesOpen: 0 };
     return reply({ ok: true, written: 1, loopId: body.loopId, state: "acknowledged" });
   }
   // No patientId in this query - the hospital-wide branch of listCriticalLoops().
@@ -40,6 +42,7 @@ window.fetch = function (url, opts) {
 };
 </script>
 <script src="../ward.js"></script>
+<script src="ward-ask-autoanswer.js"></script>
 <script>
 window.__ready = !!(window.WARD && window.WARD.open);
 </script>

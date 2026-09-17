@@ -1,0 +1,422 @@
+{
+  "guideline": "pediatric_lymphoma",
+  "id": "pediatric_lymphoma",
+  "title": "Pediatric Aggressive Mature B-Cell Lymphomas",
+  "category": "Pediatric Hematology",
+  "version": "1.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "pediatric_mature_bcell_lymphoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2026 clinical navigator for Pediatric Aggressive Mature B-Cell Lymphomas (Burkitt Lymphoma, Diffuse Large B-Cell Lymphoma, Primary Mediastinal Large B-Cell Lymphoma). Covers complete clinical algorithm: Diagnostic Workup (excisional or core biopsy with CD20/CD10/BCL6/BCL2/Ki-67 immunophenotyping plus MYC/BCL2/BCL6 FISH, St. Jude/Murphy staging with FDG-PET/CT, bilateral marrow aspirates and trephines, diagnostic lumbar puncture with CNS-1/CNS-2/CNS-3 staging plus first intrathecal therapy, TLS risk assessment with rasburicase and hyperhydration, baseline echocardiogram before anthracyclines) -> Risk Group Stratification (FAB/LMB Group A vs Group B vs Group C vs PMBCL vs relapsed/refractory) -> Group A short-course COP x 2 cycles -> Group B rituximab plus FAB/LMB96 Group B (COPADM plus CYVE with intrathecal therapy) -> Group C rituximab plus FAB/LMB96 Group C (HD-MTX 8 g/m2 plus CYVE plus triple intrathecal therapy, no cranial radiation) -> PMBCL dose-adjusted EPOCH-R x 6 cycles with PET-guided omission of mediastinal RT -> Relapsed/refractory R-ICE or R-DHAP salvage then high-dose chemotherapy with ASCR or CD19-directed CAR-T/ADC. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Pediatric Aggressive Mature B-Cell Lymphomas Version 1.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "FAB/LMB risk groups (FAB/LMB96): Group A is completely resected Stage I or completely excised abdominal Stage II with normal postoperative LDH; Group B is non-resected Stage I/II, Stage III, or CNS-negative Stage IV with marrow blasts below 25%; Group C is CNS-positive disease (CNS-2/CNS-3) and/or marrow blasts 25% or higher (Burkitt leukemia). LDH above 2x upper limit of normal marks high tumor burden within Group B/C.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "CNS status at diagnosis: CNS-1 (no blasts in CSF), CNS-2 (blasts present with fewer than 5 WBC/uL), CNS-3 (5 or more WBC/uL with blasts, cranial nerve palsy, or intracerebral mass). All patients receive CNS-directed intrathecal therapy; cranial radiation is avoided in frontline pediatric mature B-cell NHL.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Tumor lysis syndrome prophylaxis: aggressive IV hyperhydration, rasburicase 0.15-0.2 mg/kg IV daily for high-risk disease (Burkitt, LDH elevated, bulky abdominal disease) or allopurinol for lower risk, plus serial uric acid, LDH, potassium, phosphate, calcium, and creatinine monitoring. Start COP cytoreduction only after TLS control per FAB/LMB96 sequencing.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Rituximab 375 mg/m2 IV per cycle added to FAB/LMB chemotherapy improved event-free survival in high-risk pediatric mature B-cell NHL (Inter-B-NHL Ritux 2010, Minard-Colin et al): 3-year EFS above 95% for Group B and improved EFS for Group C. Screen for hepatitis B, monitor for infusion reactions and prolonged hypogammaglobulinemia.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "PMBCL: dose-adjusted EPOCH-R x 6 cycles (Dunleavy et al) achieves EFS above 90% in children and young adults without routine mediastinal radiation. Restage with FDG-PET/CT using Deauville scoring: Deauville 1-3 after therapy supports observation; Deauville 4-5 requires biopsy before any radiation decision.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Relapsed or refractory mature B-cell NHL: re-biopsy to confirm CD19/CD20 status and exclude second malignancy; R-ICE or R-DHAP response assessment by FDG-PET/CT then high-dose chemotherapy with autologous stem cell rescue for chemosensitive disease. Tisagenlecleucel requires a REMS-certified center with tocilizumab available for cytokine release syndrome; loncastuximab tesirine is an anti-CD19 antibody-drug conjugate option for multiply relapsed disease.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "pediatric_lymphoma_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Pediatric Mature B-Cell Lymphoma: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before risk group stratification. Confirm Burkitt vs DLBCL vs PMBCL histology with MYC/BCL2/BCL6 testing, assign St. Jude/Murphy stage, quantify marrow and CNS involvement, control TLS risk, and record baseline cardiac function before anthracyclines.",
+      "path": "Pediatric Aggressive Mature B-Cell Lymphomas / Workup",
+      "pills": [
+        "pediatric mature B-cell NHL",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Diagnostic tissue biopsy (excisional or core): morphology plus immunophenotyping (CD20, CD10, BCL6, BCL2, Ki-67 approximately 100% in Burkitt) plus cytogenetics/FISH for MYC [t(8;14)], BCL2, and BCL6 rearrangements",
+        "St. Jude / Murphy staging: staging by physical exam plus whole-body FDG-PET/CT or contrast-enhanced CT of neck, chest, abdomen, and pelvis",
+        "Bilateral bone marrow aspirates and trephine biopsies (or multiparameter flow cytometry) for bone marrow infiltration (below 25% vs 25% or higher Burkitt leukemia)",
+        "Diagnostic lumbar puncture with CSF cytology and flow cytometry for CNS status (CNS-1, CNS-2, CNS-3) with concurrent initial intrathecal therapy",
+        "Tumor lysis syndrome (TLS) risk assessment: baseline uric acid, LDH, potassium, phosphate, and creatinine; rasburicase and aggressive hyperhydration for high-risk disease",
+        "Baseline echocardiogram for left ventricular function prior to anthracycline-based therapy"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Risk Group Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_risk_strat",
+      "linkId": "pediatric_lymphoma_risk_strat",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Risk Group Stratification",
+      "title": "Pediatric Mature B-Cell Lymphoma: Risk Group Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign the FAB/LMB risk group from resection status, St. Jude/Murphy stage, LDH, marrow blast percentage, and CNS status; PMBCL and relapsed or refractory disease follow separate pathways.",
+      "path": "Pediatric Aggressive Mature B-Cell Lymphomas / Risk Group Stratification",
+      "pills": [
+        "pediatric mature B-cell NHL",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "FAB/LMB Group A: completely resected Stage I or completely excised abdominal Stage II with normal postoperative LDH.",
+        "FAB/LMB Group B: non-resected Stage I/II, Stage III, or CNS-negative Stage IV with marrow blasts below 25%.",
+        "FAB/LMB Group C: CNS-positive disease (CNS-2/CNS-3) and/or bone marrow 25% or higher blasts (Burkitt leukemia).",
+        "Primary mediastinal large B-cell lymphoma (PMBCL): anterior mediastinal mass with DLBCL biology managed on a radiation-sparing EPOCH-R pathway.",
+        "Relapsed or refractory mature B-cell NHL: primary refractory disease or any relapse after frontline FAB/LMB-based therapy."
+      ],
+      "options": [
+        {
+          "id": "group_a",
+          "label": "FAB/LMB Group A (Completely resected Stage I or completely excised abdominal Stage II with normal post-op LDH)",
+          "sets": {
+            "risk": "group_a"
+          },
+          "pills": [
+            "Group A",
+            "resected"
+          ]
+        },
+        {
+          "id": "group_b",
+          "label": "FAB/LMB Group B (Non-resected Stage I/II, Stage III, or CNS-negative Stage IV / marrow <25%)",
+          "sets": {
+            "risk": "group_b"
+          },
+          "pills": [
+            "Group B",
+            "intermediate-risk"
+          ]
+        },
+        {
+          "id": "group_c",
+          "label": "FAB/LMB Group C (CNS-positive [CNS-2/3] and/or Bone Marrow >=25% blasts / Burkitt Leukemia)",
+          "sets": {
+            "risk": "group_c"
+          },
+          "pills": [
+            "Group C",
+            "high-risk",
+            "CNS-positive"
+          ]
+        },
+        {
+          "id": "pmbcl",
+          "label": "Primary Mediastinal Large B-Cell Lymphoma (PMBCL)",
+          "sets": {
+            "subtype": "pmbcl"
+          },
+          "pills": [
+            "PMBCL",
+            "mediastinal"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed or Refractory Mature B-Cell NHL",
+          "sets": {
+            "setting": "relapsed_refractory"
+          },
+          "pills": [
+            "relapsed",
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_group_a_tx",
+      "linkId": "pediatric_lymphoma_group_a_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "FAB/LMB Group A Treatment",
+      "title": "Group A: Short-Course Low-Intensity COP x 2 Cycles",
+      "section": "Treatment",
+      "description": "Short-course low-intensity chemotherapy for completely resected FAB/LMB Group A disease with 5-year EFS above 98-100%; no intrathecal therapy required for completely resected disease.",
+      "path": "Pediatric Aggressive Mature B-Cell Lymphomas / Group A / Treatment",
+      "pills": [
+        "Group A",
+        "resected",
+        "COP"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "c"
+      ],
+      "bullets": [
+        "Short-course low-intensity chemotherapy: 2 cycles of COP (Cyclophosphamide 300 mg/m2 IV day 1, Vincristine 1.5 mg/m2 IV day 1, Prednisone 60 mg/m2/day PO days 1-5) or COMP without rituximab per FAB/LMB96 Group A (5-year EFS above 98-100%).",
+        "No intrathecal therapy required for completely resected disease with normal postoperative LDH and negative staging workup.",
+        "Confirm complete resection on operative and pathology reports plus normal postoperative LDH before assigning Group A; any residual disease, elevated LDH, or upstaging moves the patient to the Group B pathway.",
+        "Supportive care: TLS monitoring during cycle 1, vincristine neuropathy and constipation monitoring, corticosteroid-associated hypertension and hyperglycemia surveillance.",
+        "Surveillance after therapy: physical exam, LDH, and cross-sectional imaging or FDG-PET/CT per response criteria, then long-term follow-up for late effects.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Low-Intensity COP x 2 cycles (Surgical Complete Resection; EFS >98%)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_group_b_tx",
+      "linkId": "pediatric_lymphoma_group_b_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "FAB/LMB Group B Treatment",
+      "title": "Group B: Rituximab Plus LMB96 Group B (COPADM Plus CYVE)",
+      "section": "Treatment",
+      "description": "Standard chemoimmunotherapy for FAB/LMB Group B disease: rituximab plus modified FAB/LMB96 Group B therapy with COP cytoreduction, COPADM, and CYVE plus intrathecal therapy (3-year EFS above 95%).",
+      "path": "Pediatric Aggressive Mature B-Cell Lymphomas / Group B / Treatment",
+      "pills": [
+        "Group B",
+        "COPADM",
+        "CYVE",
+        "rituximab"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "Standard chemoimmunotherapy: Rituximab 375 mg/m2 IV per cycle plus modified FAB/LMB96 Group B therapy (Inter-B-NHL Ritux 2010 backbone; 3-year EFS above 95%).",
+        "Induction COP cytoreduction (low-dose cyclophosphamide, vincristine, prednisolone) after TLS control, then 2 cycles COPADM (Cyclophosphamide 500 mg/m2/day days 1-3, Vincristine, Doxorubicin 60 mg/m2, HD-Methotrexate 3 g/m2 IV with leucovorin rescue, Prednisolone).",
+        "Consolidation with 2 cycles CYVE (Cytarabine 2 g/m2 IV every 12 hours days 1-2 plus Etoposide 200 mg/m2/day days 1-3) plus intrathecal methotrexate and hydrocortisone per CNS status.",
+        "Supportive care: rasburicase and hyperhydration for TLS, HD-methotrexate monitoring (levels, creatinine, delayed clearance) with hydration and urine alkalinization, anthracycline cardiac surveillance with serial echocardiograms, hepatitis B screening before rituximab, G-CSF and infection prophylaxis per institutional policy.",
+        "Restage with FDG-PET/CT and marrow plus CSF reassessment per response criteria; escalate residual or progressive disease to the relapsed or refractory pathway.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Rituximab + LMB96 Group B (COPADM + CYVE) Chemoimmunotherapy",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_group_c_tx",
+      "linkId": "pediatric_lymphoma_group_c_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "FAB/LMB Group C Treatment",
+      "title": "Group C: Rituximab Plus LMB96 Group C (HD-MTX Plus CYVE Plus Triple IT)",
+      "section": "Treatment",
+      "description": "High-intensity chemoimmunotherapy for FAB/LMB Group C (CNS-positive and/or Burkitt leukemia) disease: rituximab plus modified FAB/LMB96 Group C with HD-MTX 8 g/m2, CYVE, consolidation and maintenance, and triple intrathecal therapy; cranial radiation avoided.",
+      "path": "Pediatric Aggressive Mature B-Cell Lymphomas / Group C / Treatment",
+      "pills": [
+        "Group C",
+        "CNS-positive",
+        "Burkitt leukemia",
+        "HD-MTX"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "High-intensity chemoimmunotherapy: Rituximab 375 mg/m2 IV per cycle plus modified FAB/LMB96 Group C protocol (Inter-B-NHL Ritux 2010 high-risk backbone).",
+        "Escalated COP cytoreduction then 2 cycles COPADM with High-Dose Methotrexate 8 g/m2 as a 4-hour continuous infusion with vigorous hydration, urine alkalinization, leucovorin rescue, and drug-level monitoring.",
+        "Consolidation with 2 cycles CYVE (high-dose cytarabine plus etoposide) plus 4 consolidation and maintenance cycles per FAB/LMB96 Group C sequencing.",
+        "Triple intrathecal chemotherapy (intrathecal methotrexate, cytarabine [Ara-C], and hydrocortisone) throughout therapy with serial CSF cytology and flow cytometry; cranial radiation avoided in frontline therapy.",
+        "Supportive care: intensive TLS prophylaxis with rasburicase, myelosuppression and mucositis management, neurotoxicity monitoring on HD-MTX and intrathecal therapy, anthracycline cardiac surveillance, and hepatitis B and hypogammaglobulinemia monitoring on rituximab.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Rituximab + LMB96 Group C (HD-MTX 8 g/m2 + CYVE + Triple IT Therapy)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_pmbcl_tx",
+      "linkId": "pediatric_lymphoma_pmbcl_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "PMBCL Treatment",
+      "title": "PMBCL: Dose-Adjusted EPOCH-R x 6 Cycles (Radiation-Sparing)",
+      "section": "Treatment",
+      "description": "Radiation-sparing immunochemotherapy for pediatric PMBCL: dose-adjusted EPOCH-R x 6 cycles with FDG-PET/CT restaging; Deauville 1-3 achieves cure without mediastinal radiation.",
+      "path": "Pediatric Aggressive Mature B-Cell Lymphomas / PMBCL / Treatment",
+      "pills": [
+        "PMBCL",
+        "EPOCH-R",
+        "radiation-sparing"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Radiation-sparing immunochemotherapy: Dose-Adjusted EPOCH-R x 6 cycles (Etoposide 50 mg/m2/day plus Doxorubicin 10 mg/m2/day plus Vincristine 0.4 mg/m2/day by continuous IV infusion over 96 hours days 1-4, Cyclophosphamide 750 mg/m2 IV day 5, Prednisone 60 mg/m2/day days 1-5, Rituximab 375 mg/m2 IV day 1) with dose adjustments by neutrophil nadir per Dunleavy et al (EFS above 90%).",
+        "Restage with FDG-PET/CT using Deauville scoring: Deauville 1-3 after therapy supports observation without mediastinal radiation; Deauville 4-5 requires biopsy before any radiation decision.",
+        "Omit routine mediastinal radiation in complete metabolic responders to avoid breast, cardiac, and thyroid late effects in children and adolescents; refer residual PET-positive disease with biopsy-proven active lymphoma for multidisciplinary salvage planning.",
+        "Supportive care: anthracycline cardiac surveillance with serial echocardiograms, neuropathy monitoring on vincristine, myelosuppression management with G-CSF, hepatitis B screening before rituximab, and fertility counseling before therapy.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Dose-Adjusted EPOCH-R x 6 cycles (Radiation-Sparing Protocol; EFS >90%)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_relapsed_tx",
+      "linkId": "pediatric_lymphoma_relapsed_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Relapsed or Refractory Treatment",
+      "title": "Relapsed or Refractory: R-ICE or R-DHAP Salvage Then ASCR or CAR-T",
+      "section": "Treatment",
+      "description": "Salvage second-line therapy for relapsed or refractory mature B-cell NHL: R-ICE or R-DHAP, consolidation with high-dose chemotherapy and autologous stem cell rescue for responders, or CD19-directed CAR-T/ADC for refractory disease.",
+      "path": "Pediatric Aggressive Mature B-Cell Lymphomas / Relapsed or Refractory / Treatment",
+      "pills": [
+        "relapsed",
+        "refractory",
+        "salvage",
+        "CAR-T"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "f"
+      ],
+      "bullets": [
+        "Salvage chemoimmunotherapy: R-ICE (Rituximab 375 mg/m2 plus Ifosfamide plus Carboplatin plus Etoposide) or R-DHAP (Rituximab plus Dexamethasone plus High-Dose Cytarabine plus Cisplatin) with G-CSF support and FDG-PET/CT response assessment.",
+        "Confirm relapse by re-biopsy with CD19/CD20 immunophenotyping, repeat MYC/BCL2/BCL6 FISH, and CNS restaging with lumbar puncture before salvage selection.",
+        "Responding disease: consolidation with High-Dose Chemotherapy and Autologous Stem Cell Rescue (ASCR) for chemosensitive first relapse.",
+        "Refractory or multiply relapsed CD19-positive disease: Tisagenlecleucel CAR T-cell therapy at a REMS-certified center or Loncastuximab tesirine (anti-CD19 antibody-drug conjugate); monitor for cytokine release syndrome and neurotoxicity with tocilizumab available.",
+        "Enroll in a clinical trial wherever available; coordinate allogeneic transplant evaluation for selected multiply relapsed patients per multidisciplinary review.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "R-ICE / R-DHAP Salvage -> High-Dose Chemotherapy + ASCR or CAR-T",
+      "protocolRefs": []
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_risk",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_risk_strat",
+      "toNodeId": "n_risk_strat",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_risk_group_a",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_group_a_tx",
+      "toNodeId": "n_group_a_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "group_a",
+      "fromOptions": [
+        "group_a"
+      ]
+    },
+    {
+      "id": "l_risk_group_b",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_group_b_tx",
+      "toNodeId": "n_group_b_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "group_b",
+      "fromOptions": [
+        "group_b"
+      ]
+    },
+    {
+      "id": "l_risk_group_c",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_group_c_tx",
+      "toNodeId": "n_group_c_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "group_c",
+      "fromOptions": [
+        "group_c"
+      ]
+    },
+    {
+      "id": "l_risk_pmbcl",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_pmbcl_tx",
+      "toNodeId": "n_pmbcl_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "pmbcl",
+      "fromOptions": [
+        "pmbcl"
+      ]
+    },
+    {
+      "id": "l_risk_relapsed",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_relapsed_tx",
+      "toNodeId": "n_relapsed_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "relapsed",
+      "fromOptions": [
+        "relapsed"
+      ]
+    }
+  ]
+}

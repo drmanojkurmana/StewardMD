@@ -12,7 +12,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { TYPE, requestROI, authorize, deny, cancel, fulfill, roiIdFor, RoiRefusalError } from "../../wardsynq/wardsynq-roi.js";
+import { TYPE, requestROI, authorize, deny, cancel, fulfill, roiIdFor, RoiRefusalError, imcClock } from "../../wardsynq/wardsynq-roi.js";
 import { permits } from "./consent.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -44,6 +44,8 @@ function summary(req) {
     decidedBy: req.decidedBy, decidedAt: req.decidedAt, decisionReason: req.decisionReason,
     fulfilledBy: req.fulfilledBy, fulfilledAt: req.fulfilledAt, disclosure: req.disclosure,
     history: req.history, version: req.version,
+    /* IMC Regulations 2002 reg 1.3.2: 72 hours for the patient, an authorised attendant or a legal authority. */
+    imcClock: imcClock(req, Date.now()),
   };
 }
 

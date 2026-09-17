@@ -1,0 +1,127 @@
+{
+  "id": "breast-abemaciclib-adjuvant",
+  "diseaseId": "breast_cancer",
+  "name": "Adjuvant Abemaciclib + Endocrine Therapy (monarchE)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 26,
+  "cyclesNote": "2 years (26 cycles of 28 days) in combination with daily adjuvant endocrine therapy (aromatase inhibitor or tamoxifen).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
+    "primaryStudy": "monarchE: Johnston SRD, et al. J Clin Oncol 2020;38:3987-3998; Harbeck N, et al. Ann Oncol 2021;32:1571-1581",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-K, BINV-M)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HR": "positive",
+    "HER2": "negative",
+    "note": "Requires HR-positive (ER and/or PR positive) and HER2-negative early breast cancer meeting monarchE high-risk criteria: \u22654 pathologically involved lymph nodes, or 1\u20133 positive lymph nodes with either histologic grade 3 disease or primary tumor size \u22655 cm. Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-K (3 of 4) and BINV-M (5 of 10) (Category 1, Preferred)."
+  },
+  "stage": [
+    "II",
+    "III"
+  ],
+  "treatmentSetting": [
+    "adjuvant"
+  ],
+  "histology": "invasive breast carcinoma (ductal/NST, lobular, mixed, micropapillary)",
+  "premedications": [],
+  "supportiveCare": [
+    "Diarrhea management: initiate loperamide at the first sign of loose stools (4 mg initially, then 2 mg every 2 hours until diarrhea-free for 12 hours). Increase oral fluids.",
+    "Venous thromboembolism (VTE) vigilance: monitor for symptoms of deep vein thrombosis and pulmonary embolism, particularly if combined with tamoxifen.",
+    "Interstitial lung disease (ILD) / pneumonitis: monitor for pulmonary symptoms (cough, dyspnea, hypoxia); hold and evaluate if suspected.",
+    "Partner endocrine therapy: give concurrently with an aromatase inhibitor (letrozole, anastrozole, exemestane) or tamoxifen for pre/postmenopausal patients (add GnRH agonist for premenopausal)."
+  ],
+  "monitoring": [
+    "CBC with differential prior to starting, every 2 weeks for the first 2 months, monthly for the next 2 months, then as clinically indicated",
+    "Liver function tests (ALT, AST, total bilirubin) prior to starting, every 2 weeks for the first 2 months, monthly for the next 2 months, then as clinically indicated",
+    "Monitor for symptoms of thrombosis, diarrhea, and pulmonary toxicity each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/absolute neutrophil count (ANC \u2265 1000/mcL, platelets \u2265 50,000/mcL)",
+    "liver function tests (transaminases \u2264 3x ULN)",
+    "diarrhea resolution to grade \u2264 1 before restarting",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 diarrhea that does not resolve within 24 hours to grade \u2264 1 despite loperamide",
+      "drug": "abemaciclib",
+      "action": "hold/reduce",
+      "text": "Hold abemaciclib until resolution to grade \u2264 1; resume at the same dose. For recurrent grade 2 diarrhea or grade 3/4 diarrhea, hold until resolution and reduce by one dose level (150 mg BID -> 100 mg BID -> 50 mg BID; discontinue if unable to tolerate 50 mg BID)."
+    },
+    {
+      "condition": "grade 3 hematologic toxicity (ANC 500-1000/mcL)",
+      "drug": "abemaciclib",
+      "action": "hold",
+      "text": "Hold abemaciclib until resolution to grade \u2264 2; resume at same dose. For recurrent grade 3 or any grade 4, resume with dose reduction."
+    },
+    {
+      "condition": "grade 2 or higher ALT/AST elevation (>3x ULN)",
+      "drug": "abemaciclib",
+      "action": "hold/reduce",
+      "text": "Hold abemaciclib until resolution to baseline or grade 1. Dose reduce for persistent or recurrent grade 2 or any grade 3/4 transaminitis."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "abemaciclib",
+      "name": "Abemaciclib",
+      "basis": "flat",
+      "dosePerUnit": 150,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. Abemaciclib 150 mg PO twice daily on Days 1 to 28 of 28-day cycle for 2 years (26 cycles), with concurrent endocrine therapy.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "locator": "BINV-K 3 of 4, BINV-M 5 of 10 (monarchE trial)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": []
+    }
+  ]
+}

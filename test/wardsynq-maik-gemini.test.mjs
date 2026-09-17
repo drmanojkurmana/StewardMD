@@ -16,7 +16,7 @@ import assert from "node:assert/strict";
 
 import { TASK, MODELS, PROVIDERS, route, invoke, maikStatus, scrubSecret, geminiKey } from "../functions/_wardsynq/maik-gateway.js";
 
-const KEY = "AIzaSy-TEST-KEY-not-a-real-credential-000000";
+const KEY = "AIzaSy-TEST-KEY-not-a-real-credential-000000"; // security-scan: allow test placeholder, not a real key
 const envWithKey = { GEMINI_API_KEY: KEY };
 const on = (over) => ({ enabled: true, phiApproved: ["gemini"], ...(over || {}) });
 
@@ -42,8 +42,8 @@ const answer = (text, over) => ({
 
 test("1. the key travels in a header and NEVER in the URL", async () => {
   const t = transport(answer("A summary."));
-  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: on(), env: envWithKey,
-    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  const r = await invoke({ task: TASK.SUMMARISE, phi: false, prompt: "p", config: on(), env: envWithKey,
+    context: "no patient data", fetchImpl: t.fetchImpl });
   assert.equal(r.ok, true, JSON.stringify(r));
   const call = t.seen[0];
   assert.ok(!call.url.includes(KEY), "a URL carrying a credential lands in proxy logs and history");
@@ -55,8 +55,8 @@ test("1. the key travels in a header and NEVER in the URL", async () => {
 test("2. the key cannot escape through an API error message", async () => {
   /* The nastiest realistic case: the provider echoes the request, key and all, back in its error. */
   const t = transport({ error: { status: "INVALID_ARGUMENT", message: `API key not valid: ${KEY} was rejected` } }, { status: 400 });
-  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: on(), env: envWithKey,
-    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  const r = await invoke({ task: TASK.SUMMARISE, phi: false, prompt: "p", config: on(), env: envWithKey,
+    context: "no patient data", fetchImpl: t.fetchImpl });
   assert.equal(r.ok, false);
   assert.ok(!JSON.stringify(r).includes(KEY), "the refusal must not carry the credential anywhere");
   assert.match(r.detail, /\[redacted\]/, "and it is visibly redacted rather than silently dropped");
@@ -108,9 +108,9 @@ test("7. a hospital's own hardware still outranks the cloud when both are approv
 
 test("8. gemini-pro is opt-in by name, so two models from one provider are never silently swapped", () => {
   const cfg = on();
-  const auto = route({ task: TASK.SUMMARISE, phi: true, config: cfg, env: envWithKey, context: { patientId: "p" } });
+  const auto = route({ task: TASK.SUMMARISE, phi: false, config: cfg, env: envWithKey, context: "no patient data" });
   assert.equal(auto.model.id, "gemini-flash");
-  const named = route({ task: TASK.SUMMARISE, phi: true, prefer: "gemini-pro", config: cfg, env: envWithKey, context: { patientId: "p" } });
+  const named = route({ task: TASK.SUMMARISE, phi: false, prefer: "gemini-pro", config: cfg, env: envWithKey, context: "no patient data" });
   assert.equal(named.model.id, "gemini-pro");
 });
 
@@ -134,8 +134,8 @@ test("10. a hospital may narrow the registry to exclude Gemini, and cannot widen
 
 test("11. a safety-blocked PROMPT is a refusal that says so, never an empty answer", async () => {
   const t = transport({ promptFeedback: { blockReason: "SAFETY" } });
-  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: on(), env: envWithKey,
-    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  const r = await invoke({ task: TASK.SUMMARISE, phi: false, prompt: "p", config: on(), env: envWithKey,
+    context: "no patient data", fetchImpl: t.fetchImpl });
   assert.equal(r.ok, false);
   assert.match(r.detail, /blocked the PROMPT/);
   assert.match(r.detail, /SAFETY/);
@@ -144,8 +144,8 @@ test("11. a safety-blocked PROMPT is a refusal that says so, never an empty answ
 
 test("12. a truncated or filtered answer says which, so silence is never read as 'nothing to report'", async () => {
   const t = transport({ candidates: [{ content: { parts: [] }, finishReason: "MAX_TOKENS" }] });
-  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: on(), env: envWithKey,
-    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  const r = await invoke({ task: TASK.SUMMARISE, phi: false, prompt: "p", config: on(), env: envWithKey,
+    context: "no patient data", fetchImpl: t.fetchImpl });
   assert.equal(r.ok, false);
   assert.match(r.detail, /MAX_TOKENS/);
   assert.match(r.detail, /cut off or filtered, not empty of findings/);
@@ -154,8 +154,8 @@ test("12. a truncated or filtered answer says which, so silence is never read as
 test("13. rate limiting and permission errors keep their API error class for diagnosis", async () => {
   for (const [status, cls] of [[429, "RESOURCE_EXHAUSTED"], [403, "PERMISSION_DENIED"]]) {
     const t = transport({ error: { status: cls, message: "quota" } }, { status });
-    const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: on(), env: envWithKey,
-      context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+    const r = await invoke({ task: TASK.SUMMARISE, phi: false, prompt: "p", config: on(), env: envWithKey,
+      context: "no patient data", fetchImpl: t.fetchImpl });
     assert.equal(r.ok, false);
     assert.match(r.detail, new RegExp(cls));
   }
@@ -165,8 +165,8 @@ test("13. rate limiting and permission errors keep their API error class for dia
 
 test("14. the SERVED model version and the token usage are what get reported back", async () => {
   const t = transport(answer("A grounded summary."));
-  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: on(), env: envWithKey,
-    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  const r = await invoke({ task: TASK.SUMMARISE, phi: false, prompt: "p", config: on(), env: envWithKey,
+    context: "no patient data", fetchImpl: t.fetchImpl });
   assert.equal(r.ok, true);
   assert.equal(r.model.provider, "gemini");
   assert.equal(r.model.model, "gemini-3.6-flash");
@@ -180,8 +180,8 @@ test("14. the SERVED model version and the token usage are what get reported bac
 
 test("15. the adapter receives the governed prompt and adds nothing of its own to it", async () => {
   const t = transport(answer("ok"));
-  await invoke({ task: TASK.SUMMARISE, phi: true, system: "SYS", prompt: "GOVERNED PROMPT",
-    config: on(), env: envWithKey, context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  await invoke({ task: TASK.SUMMARISE, phi: false, system: "SYS", prompt: "GOVERNED PROMPT",
+    config: on(), env: envWithKey, context: "no patient data", fetchImpl: t.fetchImpl });
   const body = t.seen[0].body;
   assert.equal(body.contents[0].parts[0].text, "GOVERNED PROMPT", "verbatim: the fence is built upstream");
   assert.equal(body.systemInstruction.parts[0].text, "SYS");
@@ -243,9 +243,9 @@ test("19. Vertex and AI Studio are different providers, and approving one does n
 
 test("20. the Vertex adapter uses the express publisher path: no project, no region, no OAuth", async () => {
   const t = transport(answer("A summary."));
-  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p",
+  const r = await invoke({ task: TASK.SUMMARISE, phi: false, prompt: "p",
     config: { enabled: true, phiApproved: ["vertex"], models: ["vertex-flash"] }, env: envWithKey,
-    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+    context: "no patient data", fetchImpl: t.fetchImpl });
   assert.equal(r.ok, true, JSON.stringify(r));
   const call = t.seen[0];
   assert.match(call.url, /^https:\/\/aiplatform\.googleapis\.com\/v1\/publishers\/google\/models\/gemini-3\.6-flash:generateContent$/);
@@ -261,9 +261,9 @@ test("21. Vertex's own usage fields survive, because reasoning tokens are billed
   const t = transport(answer("x", { usageMetadata: {
     promptTokenCount: 500, candidatesTokenCount: 20, totalTokenCount: 620,
     thoughtsTokenCount: 100, trafficType: "ON_DEMAND" } }));
-  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p",
+  const r = await invoke({ task: TASK.SUMMARISE, phi: false, prompt: "p",
     config: { enabled: true, phiApproved: ["vertex"], models: ["vertex-flash"] }, env: envWithKey,
-    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+    context: "no patient data", fetchImpl: t.fetchImpl });
   assert.deepEqual(r.usage, { in: 500, out: 20, total: 620, thoughts: 100, trafficType: "ON_DEMAND" });
   /* The point of keeping `thoughts`: 20 output tokens looks cheap and 100 reasoning tokens is the
    * actual bill, so a cost figure taken from output length alone would be wrong by 5x here. */
@@ -272,15 +272,15 @@ test("21. Vertex's own usage fields survive, because reasoning tokens are billed
 
 test("22. an error names WHICH Google surface refused, because two separate services can both refuse", async () => {
   const t = transport({ error: { status: "RESOURCE_EXHAUSTED", message: "credits depleted" } }, { status: 429 });
-  const vertex = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p",
+  const vertex = await invoke({ task: TASK.SUMMARISE, phi: false, prompt: "p",
     config: { enabled: true, phiApproved: ["vertex"], models: ["vertex-flash"] }, env: envWithKey,
-    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+    context: "no patient data", fetchImpl: t.fetchImpl });
   assert.match(vertex.detail, /Vertex AI express mode/);
   assert.match(vertex.detail, /aiplatform\.googleapis\.com/);
 
-  const studio = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p",
+  const studio = await invoke({ task: TASK.SUMMARISE, phi: false, prompt: "p",
     config: { enabled: true, phiApproved: ["gemini"], models: ["gemini-flash"] }, env: envWithKey,
-    context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+    context: "no patient data", fetchImpl: t.fetchImpl });
   assert.match(studio.detail, /AI Studio/);
   assert.match(studio.detail, /generativelanguage\.googleapis\.com/);
 });
@@ -294,7 +294,109 @@ test("23. maikStatus distinguishes the two surfaces and still exposes no secret"
   assert.match(v.surface, /aiplatform\.googleapis\.com/);
   assert.match(g.surface, /generativelanguage\.googleapis\.com/);
   assert.match(v.detail, /no service account, no ADC and no region/);
-  // Approval is per provider, and the report shows that the unapproved one is still unapproved.
-  assert.equal(st.models.find((m) => m.id === "vertex-flash").phiApproved, true);
+  // S7: approved, but with only an API key the server cannot carry patient data there, and says why.
+  assert.equal(st.models.find((m) => m.id === "vertex-flash").phiApproved, false);
+  assert.match(v.detail, /GCP_PROJECT, GCP_SA_EMAIL/);
   assert.equal(st.models.find((m) => m.id === "gemini-flash").phiApproved, false);
+});
+
+/* ---- 24: S7, Vertex is the provider with the PHI agreement ---------------------------------------- */
+
+const { privateKey: SA_KEY } = await crypto.subtle.generateKey({ name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: "SHA-256" }, true, ["sign", "verify"]);
+const SA_PEM = `-----BEGIN PRIVATE KEY-----\n${Buffer.from(await crypto.subtle.exportKey("pkcs8", SA_KEY)).toString("base64")}\n-----END PRIVATE KEY-----`; // security-scan: allow test key generated per run, not a real credential
+const envVertex = { GCP_PROJECT: "wsq-proj", GCP_SA_EMAIL: "maik@wsq-proj.iam.gserviceaccount.com", GCP_WIF_PRIVATE_KEY: SA_PEM, GCP_WIF_AUDIENCE: "//iam.googleapis.com/projects/1/locations/global/workloadIdentityPools/p/providers/cf" };
+const ACCESS = "ya29.test-access-token-not-real-000000";
+function vertexTransport(reply) {
+  const seen = [];
+  const fetchImpl = async (url, init) => {
+    const u = String(url);
+    seen.push({ url: u, headers: init.headers || {}, body: init.body });
+    if (u.startsWith("https://sts.googleapis.com/")) return { ok: true, status: 200, json: async () => ({ access_token: "federated" }) };
+    if (u.startsWith("https://iamcredentials.googleapis.com/")) return { ok: true, status: 200, json: async () => ({ accessToken: ACCESS, expireTime: new Date(Date.now() + 3600e3).toISOString() }) };
+    return { ok: true, status: 200, json: async () => reply };
+  };
+  return { seen, fetchImpl };
+}
+
+test("24. patient data reaches Vertex through the project's regional endpoint, under the service account, and nowhere else", async () => {
+  const t = vertexTransport(answer("A summary."));
+  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: { enabled: true, phiApproved: ["vertex"] },
+    env: { ...envVertex, ...envWithKey }, context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  assert.equal(r.ok, true, JSON.stringify(r));
+  assert.equal(r.routedTo, "vertex-flash");
+  const gen = t.seen.find((x) => x.url.includes(":generateContent"));
+  /* LT-40: gemini-3.6-flash is not served in asia-south1 (the default region) or in us-central1; asked there Vertex
+   * answered NOT_FOUND. With no multi-region containing asia-south1 it goes to the global endpoint. */
+  assert.equal(gen.url, "https://aiplatform.googleapis.com/v1/projects/wsq-proj/locations/global/publishers/google/models/gemini-3.6-flash:generateContent");
+  assert.equal(gen.headers.Authorization, `Bearer ${ACCESS}`);
+  assert.ok(!gen.headers["x-goog-api-key"], "the express-mode key is not how patient data travels, even when one exists");
+  assert.ok(t.seen.some((x) => x.url.includes(encodeURIComponent(envVertex.GCP_SA_EMAIL))), "the token is the project service account's");
+});
+
+test("25. approving AI Studio for patient data permits nothing, and the refusal says so", async () => {
+  const t = transport(answer("never"));
+  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: { enabled: true, phiApproved: ["gemini"] },
+    env: envWithKey, context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  assert.equal(r.ok, false);
+  assert.equal(r.code, "no_phi_approved_model");
+  assert.match(r.detail, /"gemini" has no patient-data agreement/);
+  assert.equal(t.seen.length, 0, "nothing was sent");
+});
+
+test("26. Vertex approved on a server without the project credentials: refused, naming the missing bindings", async () => {
+  const t = transport(answer("never"));
+  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: { enabled: true, phiApproved: ["vertex"] },
+    env: envWithKey, context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  assert.equal(r.ok, false);
+  assert.equal(r.code, "no_phi_approved_model");
+  assert.match(r.detail, /GCP_PROJECT, GCP_SA_EMAIL, GCP_WIF_PRIVATE_KEY and GCP_WIF_AUDIENCE/);
+  assert.equal(t.seen.length, 0);
+});
+
+test("27. the per-hospital switch still decides: Vertex configured but not approved gets nothing", async () => {
+  const t = vertexTransport(answer("never"));
+  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: { enabled: true, phiApproved: [] },
+    env: envVertex, context: { patientId: "pat-1" }, fetchImpl: t.fetchImpl });
+  assert.equal(r.ok, false);
+  assert.equal(r.code, "no_phi_approved_model");
+  assert.equal(t.seen.length, 0);
+  const st = maikStatus(envVertex, { enabled: true, phiApproved: ["vertex"] });
+  const v = st.providers.find((p) => p.provider === "vertex");
+  assert.equal(v.phiCapable, true);
+  assert.match(v.surface, /\(aiplatform\.googleapis\.com\), location global/);
+  assert.ok(!JSON.stringify(st).includes("PRIVATE KEY"), "no key material in the status");
+  assert.equal(st.models.find((m) => m.id === "vertex-flash").phiApproved, true);
+});
+
+/* ---- LT-40 (live retest 2026-09-16): the model is asked where Google serves it, and a clinician never sees the
+ * provider's error ------------------------------------------------------------------------------------------------- */
+
+test("LT-40: vertexEndpoint keeps a region that serves the model and otherwise uses the multi-region containing it", async () => {
+  const { vertexEndpoint, MODELS: M } = await import("../functions/_wardsynq/maik-gateway.js");
+  const flash = M.find((m) => m.id === "vertex-flash");
+  const at = (loc) => vertexEndpoint({ GCP_PROJECT: "p1", GCP_LOCATION: loc }, flash);
+  assert.equal(at("us-central1").base, "https://aiplatform.us.rep.googleapis.com/v1/projects/p1/locations/us/publishers/google/models/gemini-3.6-flash", "the live failure: us-central1 does not serve it");
+  assert.equal(at("europe-west4").host, "aiplatform.eu.rep.googleapis.com");
+  assert.equal(at("asia-south1").host, "aiplatform.googleapis.com");
+  assert.equal(at("global").location, "global");
+  assert.equal(at("us").location, "us");
+  // A model id handed in without its registry entry (the Connect agent brain) is looked up by id.
+  assert.equal(vertexEndpoint({ GCP_PROJECT: "p1", GCP_LOCATION: "us-central1" }, { model: "gemini-3.6-flash" }).location, "us");
+  // A model the registry does not place keeps the deployment's region, as before.
+  assert.equal(vertexEndpoint({ GCP_PROJECT: "p1", GCP_LOCATION: "us-central1" }, { model: "gemini-3.1-pro-preview" }).location, "us-central1");
+});
+
+test("LT-40: publicRefusal logs the provider's words under a reference and shows a plain sentence; setup refusals pass through", async () => {
+  const { publicRefusal } = await import("../functions/_wardsynq/maik-gateway.js");
+  const logged = [];
+  const raw = "vertex-flash could not answer: Vertex AI project endpoint (aiplatform.googleapis.com) refused the request [NOT_FOUND]: Publisher model projects/stewardmd-498ec/locations/us-central1/publishers/google/models/gemini-3.6-flash was not found. See https://cloud.google.com/vertex-ai. Nothing was written.";
+  const shown = publicRefusal({ ok: false, code: "model_unavailable", detail: raw }, (line) => logged.push(line));
+  assert.match(shown.ref, /^MK-[0-9A-F]{8}$/);
+  assert.equal(shown.detail, `The AI service did not answer. Nothing was written. Reference ${shown.ref}.`);
+  assert.ok(!/stewardmd-498ec|googleapis|https?:|projects\//.test(JSON.stringify(shown)), JSON.stringify(shown));
+  assert.equal(logged.length, 1);
+  assert.ok(logged[0].includes(shown.ref) && logged[0].includes("NOT_FOUND"), "the operator can find the cause by the reference");
+  const setup = publicRefusal({ ok: false, code: "no_phi_approved_model", detail: "approve a provider" }, (l) => logged.push(l));
+  assert.deepEqual(setup, { code: "no_phi_approved_model", detail: "approve a provider" });
+  assert.equal(logged.length, 1, "a setup refusal is not an error to log");
 });

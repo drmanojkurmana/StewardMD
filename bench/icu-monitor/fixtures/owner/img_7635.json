@@ -1,0 +1,66 @@
+{
+  "id": "owner-img_7635",
+  "manufacturer": "philips-g40e",
+  "layout": "g40e-large-spo2",
+  "difficulty": [
+    "real-photo",
+    "motion-blur",
+    "tilt",
+    "distance"
+  ],
+  "image": "img_7635.jpg",
+  "imageSize": {
+    "w": 3024,
+    "h": 4032
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "not_visible",
+      "why": "HR shows -"
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 88
+    },
+    "sbp": {
+      "status": "not_applicable"
+    },
+    "dbp": {
+      "status": "not_applicable"
+    },
+    "map": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "not_visible",
+      "why": "RR shows -"
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 131
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_visible",
+      "why": "NBP shows -/-"
+    }
+  },
+  "distractors": {
+    "nibpTrend": "blurred red table",
+    "banner": "blurred red/yellow/cyan alarm bars"
+  },
+  "notes": "Heavy motion blur; only SpO2 88 and PR 131 are legible. HR, RR and NBP tiles show dashes."
+}

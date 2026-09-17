@@ -35,16 +35,27 @@ window.fetch = function (url, opts) {
   if (u.indexOf("/ward/schedule") >= 0) return reply({ ok: true, due: DUE, prn: [], unscheduled: [] });
   if (u.indexOf("/ward/nurse-worklist") >= 0) return reply(WORKLIST);
   if (u.indexOf("/ward/criticals") >= 0) return reply({ ok: true, loops: [] });
-  if (u.indexOf("/ward/timeline") >= 0) return reply({ ok: true, events: [], activeMedications: [] });
+  // Owner 2026-09-16: a timeline line carries the actor's id; the ward names the person from /ward/staff-identities.
+  if (u.indexOf("/ward/timeline") >= 0) return reply({ ok: true, events: [{ at: at(8), resourceType: "MedicationAdministration", id: "mar-h1", category: "medication",
+    label: "Ondansetron - administered · by a clinician account", labelBase: "Ondansetron - administered", byId: "cfa:nurse" }], activeMedications: [] });
+  if (u.indexOf("/ward/staff-identities") >= 0) return reply({ ok: true, identities: { "cfa:nurse": { name: "Sister Anitha R", employeeId: "EMP-1042", role: "nurse" } } });
   if (u.indexOf("/ward/problems") >= 0) return reply({ ok: true, problems: [] });
   if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
   if (u.indexOf("/ward/collections") >= 0) return reply({ ok: true, requests: [] });
   if (u.indexOf("/ward/pending-tests") >= 0) return reply({ ok: true, pending: [] });
+  // G13: a fixed refusal, so the test can prove a warning/error takes focus instead of the control pressed.
+  if (u.indexOf("/ward/nurse-assign") >= 0) return reply({ ok: false, error: "refused", reasons: ["harness: nurse assignment refused for this test"] });
+  if (u.indexOf("/ward/nursing-patient") >= 0) return reply({ ok: true, problems: [],
+    assignment: { nurseId: "cfa:nurse", nurseLabel: "nurse@h.test", shift: "Day", assignedAt: at(6) },
+    vitals: { state: "due", text: "Observations every 4 h", dueAt: at(10), everyHours: 4 },
+    tasks: [{ id: "t1", title: "Reposition", status: "open", dueAt: at(12), createdBy: "cfa:nurse", overdue: false, version: 1 },
+      { id: "t2", title: "Wound check", status: "open", dueAt: at(6), createdBy: "cfa:nurse", overdue: true, version: 1 }] });
   if (u.indexOf("/ward/fhir") >= 0) return reply({ resourceType: "Bundle", entry: [] });
   return reply({ ok: true });
 };
 </script>
 <script src="../ward.js"></script>
+<script src="ward-ask-autoanswer.js"></script>
 <script>
 window.__ready = !!(window.WARD && window.WARD.open);
 </script>

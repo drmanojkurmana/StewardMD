@@ -21,8 +21,14 @@
  * "neonates" and share almost no reference range. Where gestational age is unknown, a neonatal
  * result is refused rather than banded by chronological age alone.
  *
- * NOT MODELLED: growth percentiles and centile crossing, gestational-age-corrected dosing, neonatal
- * bilirubin nomograms, body-surface-area dosing, and any drug-specific paediatric protocol.
+ * GROWTH CENTILES ARE MODELLED ELSEWHERE: wardsynq-growth.js computes LMS z-scores and centiles against the
+ * CDC 2000 growth reference (public domain), or a hospital's own licensed tables (WHO, IAP), with corrected
+ * age for preterm infants, charted on the paediatric and NICU chart. Only weight is recorded in this build, so
+ * only weight for age is plotted; length, height and head circumference have no record to plot.
+ *
+ * NOT MODELLED: centile-crossing alerts, preterm growth charts before term (Fenton, INTERGROWTH-21st),
+ * gestational-age-corrected dosing, neonatal bilirubin nomograms, body-surface-area dosing, and any
+ * drug-specific paediatric protocol.
  *
  * STATUS: IMPLEMENTED and TESTED. NOT clinically validated and NOT clinically approved.
  *

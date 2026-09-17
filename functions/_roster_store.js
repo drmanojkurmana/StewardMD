@@ -8,6 +8,9 @@
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { qAudit } from "./_queue_engine.js";
+import { appendOrgAudit } from "./_q_audit_chain.js";
+import { listWards } from "./_opd_org_store.js";
+import { onDutyNow, wardTeamGroupOf } from "./_wardsynq/alert-recipients.js";
 import * as R from "./_roster.js";
 
 const now = () => Date.now();
@@ -66,12 +69,45 @@ export async function assign(env, orgId, input, actorId) {
   for (const date of dates) {
     const a = { identity: String(input.identity || ""), date, shiftId: String(input.shiftId || "") };
     const p = R.assignmentProblem(a, shifts, existing.concat(pending), leaves);
-    if (p) refused.push({ date, error: p.code, message: p.message }); else pending.push({ ...a, id: newId(), status: "active" });
+    /* P4 nursing-staffing: the in-charge of a shift is left out of the nurse count (NABH PSQ 3c #21), so a shift has one. */
+    const lead = input.inCharge === true && existing.find((e) => e.inCharge === true && e.status !== "cancelled" && e.date === date && e.shiftId === a.shiftId && e.identity !== a.identity);
+    if (p) refused.push({ date, error: p.code, message: p.message });
+    else if (lead) refused.push({ date, error: "in_charge_already_named", message: `${lead.identity} is already in charge of this shift on ${date}` });
+    else pending.push({ ...a, id: newId(), status: "active", inCharge: input.inCharge === true });
   }
   if (refused.length) return { ok: false, error: "assignment_refused", message: "Nothing was assigned: " + refused.map((r) => r.message).join("; "), refused };
-  await fsCommit(env, pending.map((a) => wCreate(env, "q_roster_assign/" + a.id, { orgId: String(orgId), orgMonth: monthKey(orgId, a.date), identity: a.identity, date: a.date, shiftId: a.shiftId, status: "active", createdBy: actorId, createdAt: now() })));
-  await audit(env, orgId, actorId, "roster:assigned", `${input.identity} ${input.shiftId} ${dates[0]} x${dates.length}`);
+  await fsCommit(env, pending.map((a) => wCreate(env, "q_roster_assign/" + a.id, { orgId: String(orgId), orgMonth: monthKey(orgId, a.date), identity: a.identity, date: a.date, shiftId: a.shiftId, status: "active", inCharge: a.inCharge, createdBy: actorId, createdAt: now() })));
+  await audit(env, orgId, actorId, "roster:assigned", `${input.identity} ${input.shiftId} ${dates[0]} x${dates.length}${input.inCharge === true ? " in charge" : ""}`);
   return { ok: true, assigned: pending };
+}
+
+/* P4 nursing-staffing: publishing a draft roster (nurse-staffing.js draftRoster). The draft is only a suggestion; every entry
+ * is checked again here against today's rota and leave, and one refusal means nothing is written. Never an in-charge. */
+export async function publishDraft(env, orgId, entries, actorId) {
+  const list = (Array.isArray(entries) ? entries : []).slice(0, 200).map((e) => ({ identity: String((e && e.identity) || ""), date: String((e && e.date) || ""), shiftId: String((e && e.shiftId) || "") }));
+  if (!list.length) return { ok: false, error: "nothing_to_publish", message: "The draft has no entries." };
+  const shifts = await shiftsOf(env, orgId);
+  const dates = list.map((e) => e.date);
+  if (dates.some((d) => !/^\d{4}-\d{2}-\d{2}$/.test(d))) return { ok: false, error: "bad_date", message: "Every entry needs a date, YYYY-MM-DD." };
+  const [{ list: existing, partial }, { list: leaves, partial: lp }] = await Promise.all([rowsBy(env, "q_roster_assign", "orgMonth", monthsFor(orgId, dates, 1)), rowsBy(env, "q_roster_leave", "orgYear", yearsFor(orgId, dates))]);
+  if (partial || lp) return TOO_BIG;
+  const pending = [], refused = [];
+  for (const a of list) {
+    const p = R.assignmentProblem(a, shifts, existing.concat(pending), leaves);
+    const dup = existing.concat(pending).some((e) => e.status !== "cancelled" && e.identity === a.identity && e.date === a.date && e.shiftId === a.shiftId);
+    if (p || dup) refused.push({ ...a, error: p ? p.code : "already_on_shift", message: p ? p.message : `${a.identity} is already on this shift on ${a.date}` });
+    else pending.push({ ...a, id: newId(), status: "active" });
+  }
+  if (refused.length) return { ok: false, error: "draft_refused", message: "Nothing was published: " + refused.map((r) => r.message).join("; "), refused };
+  await fsCommit(env, pending.map((a) => wCreate(env, "q_roster_assign/" + a.id, { orgId: String(orgId), orgMonth: monthKey(orgId, a.date), identity: a.identity, date: a.date, shiftId: a.shiftId, status: "active", inCharge: false, source: "draft", createdBy: actorId, createdAt: now() })));
+  await audit(env, orgId, actorId, "roster:draft_published", `${pending.length} shifts ${dates.slice().sort()[0]}..${dates.slice().sort().pop()}`);
+  return { ok: true, published: pending };
+}
+
+/** P4 nursing-staffing: approved and requested leave touching [from, to], for the draft. */
+export async function leaveBetween(env, orgId, from, to) {
+  const { list, partial } = await rowsBy(env, "q_roster_leave", "orgYear", yearsFor(orgId, datesBetween(from, to)));
+  return { ok: true, leave: list.filter((l) => l.from <= to && l.to >= from), partial };
 }
 
 export async function unassign(env, orgId, assignmentId, reason, actorId) {
@@ -101,6 +137,74 @@ export async function onDuty(env, orgId, unit, utcOffsetMinutes) {
   const shifts = await shiftsOf(env, orgId);
   const { list, partial } = await rowsBy(env, "q_roster_assign", "orgMonth", monthsFor(orgId, [today()], 1));
   return { ok: true, onDuty: R.onDutyAt(now(), utcOffsetMinutes, shifts, list, unit).map((a) => ({ identity: a.identity, shiftId: a.shiftId, shift: shifts[a.shiftId].name, unit: shifts[a.shiftId].unit, date: a.date })), partial };
+}
+
+/* SELF-MARKED DUTY (owner 2026-09-15). A nurse, resident or consultant says "I am on duty" (for a ward) or "I am off
+ * duty", for their own membership only. One row per person per hospital, overwritten, each change a hash-chained
+ * event-log row IN THE SAME COMMIT (appendOrgAudit), so a status with no audit row cannot exist. It stops counting at
+ * the end of the shift they are rostered on now, or after 12 hours (R.dutyExpiry). Staff data, never the record. */
+const offsetOf = (org) => (org && org.wardsynq && org.wardsynq.utcOffsetMinutes != null ? org.wardsynq.utcOffsetMinutes : 330);
+const dutyPath = (orgId, identity) => "q_duty_status/" + sanitize(orgId) + "__" + sanitize(identity);
+const liveStatus = (s, at) => !!s && Number(s.expiresAt) > at;
+const statusOut = (s) => ({ status: s.status, unit: s.unit || "", setAt: s.setAt, expiresAt: new Date(Number(s.expiresAt)).toISOString(), basis: s.basis || "hours", shiftId: s.shiftId || "" });
+
+export async function dutyStatuses(env, orgId) {
+  const { list, partial } = await rows(env, "q_duty_status", orgId);
+  return { ok: true, statuses: list.map((s) => ({ identity: s.identity, status: s.status, unit: s.unit || "", expiresAt: Number(s.expiresAt) || 0, setAt: s.setAt })), partial };
+}
+
+/** The wards a person may say they are working on: the rota's units, the hospital's wards, and the configured bed lists. */
+export async function wardChoices(env, org) {
+  const [shifts, wards] = await Promise.all([shiftsOf(env, org.id), listWards(env, org.id).catch(() => [])]);
+  const beds = org.wardsynq && org.wardsynq.beds && typeof org.wardsynq.beds === "object" ? Object.keys(org.wardsynq.beds) : [];
+  return [...new Set([...Object.values(shifts).map((s) => s.unit), ...wards.filter((w) => w.active !== false).map((w) => w.name), ...beds].map((x) => String(x || "").trim()).filter(Boolean))].sort();
+}
+
+async function rotaNow(env, org, identity) {
+  const [shifts, { list }] = await Promise.all([shiftsOf(env, org.id), rowsBy(env, "q_roster_assign", "orgMonth", monthsFor(org.id, [today()], 1))]);
+  return R.dutyExpiry(now(), offsetOf(org), shifts, list, identity);
+}
+
+export async function myDutyStatus(env, org, identity) {
+  const [d, exp, wards] = await Promise.all([fsGet(env, dutyPath(org.id, identity)), rotaNow(env, org, identity), wardChoices(env, org)]);
+  const s = d && d.fields && d.fields.orgId === String(org.id) ? d.fields : null;
+  return { ok: true, identity, status: liveStatus(s, now()) ? statusOut(s) : null, rota: exp.shift, wards, hours: R.DUTY_STATUS_HOURS };
+}
+
+export async function setDutyStatus(env, org, identity, input) {
+  const status = String((input && input.status) || "");
+  if (status !== "on" && status !== "off") return { ok: false, error: "bad_status", message: "Say on or off duty." };
+  const [exp, wards] = await Promise.all([rotaNow(env, org, identity), wardChoices(env, org)]);
+  let unit = "";
+  if (status === "on") {
+    unit = String((input && input.unit) || "").trim() || (exp.shift ? exp.shift.unit : "");
+    if (!unit) return { ok: false, error: "ward_required", message: "You are not on the rota now. Choose the ward you are working on." };
+    if (!wards.includes(unit)) return { ok: false, error: "unknown_ward", message: `"${unit.slice(0, 60)}" is not a ward in this hospital. Choose one of: ${wards.join(", ") || "no wards are set up yet"}.` };
+  }
+  const at = now();
+  const fields = { orgId: String(org.id), identity, status, unit, setAt: at, expiresAt: exp.expiresAt, basis: exp.basis, shiftId: exp.shift ? exp.shift.id : "" };
+  try {
+    await appendOrgAudit(env, { hospitalId: org.id, ticketId: "", actor: identity, action: "roster:duty_" + status, meta: `${identity}${unit ? " " + unit : ""} until ${new Date(exp.expiresAt).toISOString()}` }, [wUpdate(env, dutyPath(org.id, identity), fields)]);
+  } catch (e) {
+    return { ok: false, error: "duty_status_not_saved", message: "Your duty status was not saved. Nothing changed; try again." };
+  }
+  return { ok: true, identity, status: statusOut(fields), rota: exp.shift };
+}
+
+/** For the rota screen: who is on duty now in each ward (rota or self-marked) and who marked themselves off. No patient data. */
+export async function dutyByWard(env, org, members) {
+  const [duty, st] = await Promise.all([onDuty(env, org.id, "", offsetOf(org)), dutyStatuses(env, org.id)]);
+  const at = now();
+  const roleOf = new Map((members || []).filter((m) => m && m.active !== false).map((m) => [m.identity, m.role]));
+  const liveBy = new Map(st.statuses.filter((s) => liveStatus(s, at)).map((s) => [s.identity, s]));
+  const wards = new Map();
+  for (const a of onDutyNow({ unit: "", duty: duty.onDuty, statuses: st.statuses, nowMs: at })) {
+    if (!wards.has(a.unit)) wards.set(a.unit, []);
+    const s = liveBy.get(a.identity);
+    wards.get(a.unit).push({ identity: a.identity, role: roleOf.get(a.identity) || null, group: wardTeamGroupOf(roleOf.get(a.identity)), via: a.via, until: s && s.status === "on" ? new Date(s.expiresAt).toISOString() : null });
+  }
+  const off = [...liveBy.values()].filter((s) => s.status === "off").map((s) => ({ identity: s.identity, role: roleOf.get(s.identity) || null, until: new Date(s.expiresAt).toISOString() }));
+  return { ok: true, wards: [...wards].sort((a, b) => a[0].localeCompare(b[0])).map(([ward, people]) => ({ ward, people })), off, partial: !!(duty.partial || st.partial) };
 }
 
 export async function mine(env, orgId, identity) {

@@ -34,7 +34,7 @@ html body #maikSheet.maik-polished .maik-cmp-in{border-radius:24px;background:va
 html body #maikSheet.maik-polished .maik-ta{font-size:16px;line-height:1.45;min-width:0;padding:9px 4px}
 html body #maikSheet.maik-polished :is(.maik-mic,.maik-img,.maik-research,.maik-send){width:44px;height:44px;flex:0 0 44px;border-radius:16px}
 html body #maikSheet.maik-polished :is(.maik-hd-btn,.maik-mic,.maik-img,.maik-research,.maik-send)::after{inset:0}
-html body #maikSheet.maik-polished :is(button,input,textarea):focus-visible{outline:2px solid var(--mk-teal);outline-offset:3px}
+html body #maikSheet :is(button,input,textarea,select,[contenteditable]),html body #maikSheet.maik-polished :is(button,input,textarea,select,[contenteditable]),html body #maikSheet :is(button,input,textarea,select,[contenteditable]):focus,html body #maikSheet :is(button,input,textarea,select,[contenteditable]):focus-visible,html body #maikSheet.maik-polished :is(button,input,textarea,select,[contenteditable]):focus,html body #maikSheet.maik-polished :is(button,input,textarea,select,[contenteditable]):focus-visible{outline:none!important;outline-style:none!important;box-shadow:none!important;-webkit-tap-highlight-color:transparent!important}
 html body #maikSheet.maik-polished .maik-side{background:var(--mk-bg)}
 html body #maikSheet.maik-polished .maik-side-row{min-height:48px;border-radius:14px}
 html body #maikSheet.maik-polished .maik-side-srch input{font-size:16px}
@@ -72,3 +72,21 @@ html body #maikSheet.maik-polished .maik-body{-webkit-overflow-scrolling:touch;s
 html body #maikSheet.maik-polished .maik-ta{resize:none;scrollbar-width:none;background:transparent;border:0;box-shadow:none}
 html body #maikSheet.maik-polished .maik-ta::-webkit-scrollbar{display:none}
 html body #maikSheet.maik-polished .maik-body::-webkit-scrollbar{width:3px}
+
+/* One stable app viewport and composer, including narrow phones and visible keyboards. */
+html body #maikSheet.maik-polished{inset:0;width:100%;height:100%;max-height:100%;border-radius:0;box-shadow:none}
+html body #maikSheet.maik-polished .maik-grab{display:none}
+html body #maikSheet.maik-polished .maik-hd{padding:8px 12px 0;padding-top:max(8px,env(safe-area-inset-top))}
+html body #maikSheet.maik-polished .maik-disc{padding:6px 16px}
+html body #maikSheet.maik-polished .maik-body{min-height:0;min-width:0;padding-bottom:40px}
+html body #maikSheet.maik-polished .maik-cmp{flex:0 0 auto;padding:8px 12px max(8px,env(safe-area-inset-bottom))}
+html body #maikSheet.maik-polished .maik-cmp-in{display:grid;grid-template-columns:44px 44px 44px minmax(44px,1fr) 44px;grid-template-rows:64px 44px;gap:4px 0;padding:8px;border:1px solid var(--mk-bd);border-radius:22px;box-shadow:none;transition:none}
+html body #maikSheet.maik-polished .maik-cmp-in:focus-within{border-color:var(--mk-bd);box-shadow:none;outline:none}
+html body #maikSheet.maik-polished #maikQ{grid-column:1/-1;grid-row:1;order:0;box-sizing:border-box;width:100%;height:64px!important;min-height:64px;max-height:64px;margin:0;padding:8px;font-size:16px;line-height:24px;text-align:left;border:0!important;border-radius:0;background:transparent!important;outline:none!important;box-shadow:none!important;overflow-y:auto;resize:none}
+html body #maikSheet.maik-polished #maikMic{grid-column:1;grid-row:2}
+html body #maikSheet.maik-polished #maikResearch{grid-column:2;grid-row:2}
+html body #maikSheet.maik-polished #maikImg{grid-column:3;grid-row:2}
+html body #maikSheet.maik-polished #maikExtract{grid-column:4;grid-row:2;justify-self:start;display:flex;align-items:center;justify-content:center;visibility:hidden;width:44px;height:44px;min-height:44px;margin:0;padding:10px;border:0;background:transparent;color:var(--mk-mut)}
+html body #maikSheet.maik-polished #maikExtract.show{visibility:visible}
+html body #maikSheet.maik-polished #maikSend{grid-column:5;grid-row:2;order:0;box-shadow:none}
+html body #maikSheet.maik-polished .maik-fb-b[aria-pressed="true"]{color:var(--mk-bg)}

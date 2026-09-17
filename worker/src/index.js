@@ -425,15 +425,24 @@ export default {
   //                     reminders, escalate missed check-ins, run the retention sweep — plus the AI
   //                     voice-fallback morning window (run-voice; no-op until a hospital enables voice).
   //   "30 11 * * *"   → FollowCare AI voice-fallback evening window (17:00 IST) (run-voice).
+  //   "*/5 * * * *"   → WardSynQ tick for every hospital (S3 P0): escalate unacknowledged critical results,
+  //                     push the next tier, SMS fallback, drain the outbox. POSTs /api/queue/ops/tick-all.
   //   "0 * * * *"     → Connect ABDM reconciliation GC sweep (hourly): erase expired/terminal ephemeral
   //                     keys + push-buffers. Flag-gated + no-op-safe + fail-safe on the Pages side, so it
   //                     is a cheap 404 while Connect is unprovisioned/flag-OFF.
+  //                     Also the WardSynQ scheduled backup (POSTs /api/queue/ops/backup-all): each hospital with a
+  //                     backup destination gets its daily backup on the first run of the UTC day, retried hourly.
   // All delegate to Pages Functions with the shared admin token. Best-effort.
   async scheduled(event, env, ctx) {
     if (!env.UPDATES_ADMIN_TOKEN) return;
     const post = (p) => fetch("https://stewardmd.in" + p, { method: "POST", headers: { "X-Admin-Token": env.UPDATES_ADMIN_TOKEN } }).catch(() => {});
+    if (event.cron === "*/5 * * * *") {
+      ctx.waitUntil(post("/api/queue/ops/tick-all"));     // WardSynQ: escalation that does not wait for ward traffic
+      return;
+    }
     if (event.cron === "0 * * * *") {
       ctx.waitUntil(post("/api/connect/admin/sweep"));     // Connect ABDM reconciliation GC (flag-gated, no-op-safe, fail-safe)
+      ctx.waitUntil(post("/api/queue/ops/backup-all"));    // WardSynQ: daily per-hospital backup, retried hourly until done (a no-op when not due)
       return;
     }
     if (event.cron === "*/15 * * * *") {

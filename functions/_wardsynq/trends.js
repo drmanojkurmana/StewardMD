@@ -10,8 +10,11 @@
  * release, a loop's acknowledgement. A stored snapshot would be a second source of truth that drifts
  * from the record the day somebody corrects a discharge time. The costs are stated, not hidden: reads
  * are capped (READ_CAP per type, the store's roster ceiling) and a capped read marks every bucket
- * partial; and a stay is attributed to the ward on its CURRENT version, not split across the wards it
- * moved through. See vault/decisions/Decisions.md, 2026-09-14 "Trends from the record".
+ * partial. Most measures attribute a stay to the ward on its CURRENT version; bed occupancy and length of
+ * stay by ward (G7) read each stay's version history, which IS its movement history (migrate-inpatient.js),
+ * and split it across the wards it passed through. Occupancy's available beds come from the bed registry's
+ * own history (when each bed was added, turned off or on), never from today's count. See
+ * vault/decisions/Decisions.md, 2026-09-14 "Trends from the record" and "G7 occupancy from history".
  *
  * A BUCKET THAT COULD NOT BE COMPUTED IS NULL WITH A REASON, NEVER 0. Zero is a real answer here only
  * when every source was read in full and nothing happened. Every point carries its numerator,
@@ -49,6 +52,7 @@ const NO_WARD = "(no ward)", NO_DEPT = "(no department)";
 const BUCKETS = ["day", "week", "month"];
 
 const WARD_NOTE = "Ward is the ward on the stay's current record: where the patient is now, or was at discharge. A patient moved mid-stay is counted on that ward, not split.";
+const SPLIT_NOTE = "Ward is where the patient was at each moment, read from the stay's movement history: a patient moved mid-stay is counted on each ward for the time spent there.";
 
 /* One place for every definition. `sources` are the record types read; a source this reader cannot
  * read makes every bucket null with the reason. `finance` series need billing.view on the route. */
@@ -72,11 +76,17 @@ const DEFINITIONS = Object.freeze({
     exclusion: "Open stays (not yet a length), cancelled encounters, and stays missing either time.",
   },
   "bed-occupancy": {
-    id: "bed-occupancy", title: "Bed occupancy", unit: "%", kind: "ratio", sources: ["Encounter"],
-    numerator: "Occupied bed-days: the part of every inpatient stay that falls in the bucket (an open stay runs to now).",
-    denominator: "Available bed-days: beds in the hospital's bed registry (or wardsynq.beds when the registry has none) times the days in the bucket, stopping at now.",
-    inclusion: "Inpatient encounters that overlap the bucket, whether or not they have a bed.",
-    exclusion: "Cancelled encounters. Blocked or closed beds are not subtracted from the available beds, and today's bed count is used for past buckets.",
+    id: "bed-occupancy", title: "Bed occupancy", unit: "%", kind: "ratio", sources: ["Encounter"], history: true, wardNote: SPLIT_NOTE,
+    numerator: "Occupied bed-days: the part of every inpatient stay that falls in the bucket (an open stay runs to now), on the ward the patient was on at the time.",
+    denominator: "Available bed-days: for each bed in the hospital's bed registry, the part of the bucket it was in service, from the registry's own history of when it was added and turned off or on, stopping at now.",
+    inclusion: "Inpatient encounters that overlap the bucket, whether or not they have a bed. A day bucket is that day's occupancy.",
+    exclusion: "Cancelled encounters. Blocked or closed beds are not subtracted. A bucket whose bed count is not known has no rate, never today's count: beds listed only in wardsynq.beds keep no history, and a bed registered before 2026-09-14 that is now turned off has no record of when. A bed registered before then is counted from its registration; a turn off and back on before that date was not recorded. By ward, a stay whose movement history could not be read makes the buckets it overlaps unknown.",
+  },
+  "ward-los": {
+    id: "ward-los", title: "Length of stay by ward", unit: "days", kind: "mean", sources: ["Encounter"], history: true, wardNote: SPLIT_NOTE,
+    numerator: "Total days on the ward, for the ward stays that ended in the bucket (a transfer out, or the discharge).", denominator: "Ward stays that ended in the bucket.",
+    inclusion: "Every ward an inpatient stay passed through is one ward stay, from arriving (admission or transfer in) to leaving (transfer out or discharge). The records behind a bucket list each stay ward by ward.",
+    exclusion: "Ward stays still running (not yet a length), cancelled encounters. A stay whose movement history could not be read, or has a move with no recorded time, makes its bucket unknown rather than being left out.",
   },
   "readmission-30d": {
     id: "readmission-30d", title: "30-day readmissions", unit: "%", kind: "ratio", sources: ["Encounter", "Patient"],
@@ -207,18 +217,83 @@ function wardAt(rec, idx, atMs) {
 }
 const ref = (resourceType, r) => ({ resourceType, id: r.id });
 
+/**
+ * PURE. One stay, ward by ward, from its version history (ascending). A transfer is a new version with a
+ * new location and its movedAt (migrate-inpatient.js); other versions (a discharge) keep the location.
+ * -> [{ward, bed, start, end}] with end null while running, or null when a move has no time to place it.
+ */
+function staySegments(versions) {
+  const vs = (versions || []).filter(Boolean).slice().sort((a, b) => (a.version || 0) - (b.version || 0));
+  if (!vs.length) return null;
+  const last = vs[vs.length - 1];
+  const where = (v) => `${str(v.location && v.location.ward).toLowerCase()}\u0000${str(v.location && v.location.bed).toLowerCase()}`;
+  const segs = [];
+  for (const v of vs) {
+    const prev = segs[segs.length - 1];
+    if (prev && prev.key === where(v)) continue;
+    const at = prev ? ms(v.movedAt) : ms(last.periodStart);
+    if (at == null) return null;
+    if (prev) prev.end = at;
+    segs.push({ key: where(v), ward: wardOfStay(v), bed: str(v.location && v.location.bed) || null, start: at, end: null });
+  }
+  const end = last.status === "finished" ? ms(last.periodEnd) : null;
+  if (last.status === "finished" && end == null) return null;
+  segs[segs.length - 1].end = end;
+  if (segs.some((g) => g.end != null && g.end < g.start)) return null;
+  return segs.map((g) => ({ ward: g.ward, bed: g.bed, start: g.start, end: g.end }));
+}
+
+/**
+ * PURE. The available bed-days of one registry bed in [a, b) (b already stopped at now).
+ * bed: { since, active, changes: [{active, at}], legacy } -> { days } | { unknown: true }
+ */
+function bedDaysIn(bed, a, b) {
+  if (!(b > a)) return { days: 0 };
+  const since = Number(bed && bed.since);
+  if (!(since > 0)) return { unknown: true };
+  const changes = ((bed && bed.changes) || []).filter((c) => c && Number(c.at) > 0).map((c) => ({ active: c.active === true, at: Number(c.at) })).sort((x, y) => x.at - y.at);
+  // A legacy bed turned off with no recorded change: when it went out of service is not known.
+  if (bed.legacy && !changes.length && bed.active === false) return since >= b ? { days: 0 } : { unknown: true };
+  let on = changes.length ? !changes[0].active : bed.active !== false, t = since, total = 0;
+  for (const c of changes.concat([{ at: Infinity, active: on }])) {
+    if (on) total += Math.max(0, Math.min(c.at, b) - Math.max(t, a));
+    on = c.active; t = c.at;
+  }
+  return { days: total / DAY };
+}
+
 /** PURE. The facts a metric aggregates. Stays carry {start, end}; everything else an instant `at`. */
 function factsFor(def, rows, ctx) {
   const idx = indexStays(rows.Encounter);
   const stays = (rows.Encounter || []).filter(isStay);
   const stayFact = (e) => ({ start: ms(e.periodStart), end: ms(e.periodEnd), ward: wardOfStay(e), ref: ref("Encounter", e), stay: e });
+  /* A stay's ward-by-ward pieces. A stay never changed (version 1) is one piece; a changed one needs its
+   * history, and one whose history is missing or cannot be placed is null. */
+  const hist = ctx.histories || {};
+  const segmentsOf = (e) => (!(Number(e.version) > 1) ? [{ ward: wardOfStay(e), bed: str(e.location && e.location.bed) || null, start: ms(e.periodStart), end: e.status === "finished" ? ms(e.periodEnd) : null }]
+    : Object.prototype.hasOwnProperty.call(hist, e.id) ? staySegments(hist[e.id]) : null);
+  const segView = (segs) => segs.map((g) => ({ ward: g.ward, bed: g.bed, from: new Date(g.start).toISOString(), to: g.end == null ? null : new Date(g.end).toISOString(),
+    days: round(((g.end == null ? ctx.nowMs : g.end) - g.start) / DAY, 1), ...(g.end == null ? { running: true } : {}) }));
   switch (def.id) {
     case "admissions": return stays.map((e) => ({ at: ms(e.periodStart), ward: wardOfStay(e), ref: ref("Encounter", e) }));
     case "discharges":
     case "average-los":
       return stays.filter((e) => e.status === "finished" && ms(e.periodEnd) != null)
         .map((e) => ({ at: ms(e.periodEnd), ward: wardOfStay(e), ref: ref("Encounter", e), days: (ms(e.periodEnd) - ms(e.periodStart)) / DAY }));
-    case "bed-occupancy": return stays.map(stayFact);
+    case "bed-occupancy":
+      return stays.flatMap((e) => {
+        const segs = segmentsOf(e);
+        if (!segs) return [{ ...stayFact(e), ward: null, wardUnknown: true }];
+        return segs.map((g) => ({ start: g.start, end: g.end, ward: g.ward, ref: ref("Encounter", e), stay: e }));
+      });
+    case "ward-los":
+      return stays.flatMap((e) => {
+        const segs = segmentsOf(e);
+        if (!segs) return e.status === "finished" && ms(e.periodEnd) != null ? [{ at: ms(e.periodEnd), ward: null, wardUnknown: true, ref: ref("Encounter", e) }] : [];
+        const view = segView(segs);
+        return segs.filter((g) => g.end != null).map((g) => ({ at: g.end, ward: g.ward, days: (g.end - g.start) / DAY,
+          ref: { resourceType: "Encounter", id: e.id, transferred: segs.length > 1, segments: view } }));
+      });
     case "readmission-30d": {
       const deceasedAt = new Map((rows.Patient || []).filter((p) => p && p.deceased && p.deceased.at).map((p) => [str(p.id), ms(p.deceased.at)]));
       return stays.filter((e) => e.status === "finished" && ms(e.periodEnd) != null).map((e) => {
@@ -294,6 +369,8 @@ function reduce(def, facts, b, ctx, group) {
       return out;
     }
     case "mean": {
+      const unknown = ctx.unknownIn(b);
+      if (unknown) return { value: null, numerator: null, denominator: null, unknownStays: unknown, reason: `the ward history of ${unknown} stay${unknown === 1 ? "" : "s"} could not be read, so this is not known` };
       const total = facts.reduce((s, f) => s + f.days, 0);
       return { value: n ? round(total / n, 1) : null, numerator: round(total, 1), denominator: n, ...(n ? {} : { reason: "no stays ended in this bucket" }) };
     }
@@ -315,11 +392,13 @@ function reduce(def, facts, b, ctx, group) {
       }
       // bed occupancy
       const occupied = facts.reduce((s, f) => s + overlap(f, b, ctx.nowMs), 0) / DAY;
-      const beds = ctx.bedsFor(group);
-      const days = Math.max(0, Math.min(b.endMs, ctx.nowMs) - b.startMs) / DAY;
-      if (!beds) return { value: null, numerator: round(occupied, 1), denominator: null, reason: group ? "no beds are registered for this " + ctx.groupBy : "no beds are registered for this hospital" };
-      const avail = beds * days;
-      return { value: avail > 0 ? round(occupied / avail, 3) : null, numerator: round(occupied, 1), denominator: round(avail, 1), beds, ...(avail > 0 ? {} : { reason: "this bucket has not started" }) };
+      const unknownStays = group === null ? 0 : ctx.unknownIn(b);
+      if (unknownStays) return { value: null, numerator: null, denominator: null, unknownStays, reason: `which ward ${unknownStays} stay${unknownStays === 1 ? " was" : "s were"} on in this bucket is not known: the movement history could not be read` };
+      const bd = ctx.bedDays(group, b.startMs, Math.min(b.endMs, ctx.nowMs));
+      if (!bd.beds) return { value: null, numerator: round(occupied, 1), denominator: null, reason: group ? "no beds are registered for this " + ctx.groupBy : "no beds are registered for this hospital" };
+      if (bd.unknown) return { value: null, numerator: round(occupied, 1), denominator: null, beds: bd.beds, unknownBeds: bd.unknown, reason: `the bed count in this bucket is not known: ${bd.unknown} bed${bd.unknown === 1 ? " has" : "s have"} no history for it` };
+      const avail = bd.days;
+      return { value: avail > 0 ? round(occupied / avail, 3) : null, numerator: round(occupied, 1), denominator: round(avail, 1), beds: bd.beds, ...(avail > 0 ? {} : { reason: "no bed was in service in this bucket" }) };
     }
     case "per1000": {
       const dot = new Set(facts.filter((f) => f.dotKey).map((f) => f.dotKey)).size;
@@ -339,7 +418,8 @@ function reduce(def, facts, b, ctx, group) {
  * PURE. The series, and optionally the record ids behind one bucket of one group.
  *
  * input: { metric, buckets, clock, rows: {Type: []}, unreadable: {Type: reason}, capped: [Type], nowMs,
- *          groupBy: ""|"ward"|"department", wardDepartments: {lowerWard: name}, bedsByWard: {lowerWard: n},
+ *          groupBy: ""|"ward"|"department", wardDepartments: {lowerWard: name},
+ *          bedHistory: [{ward, since, active, changes, legacy}], histories: {encounterId: versions},
  *          antibiotics: [], registryError, eventsFor: {key, group} }
  */
 function computeTrend(input) {
@@ -363,13 +443,27 @@ function computeTrend(input) {
    * them, else as the first record did. */
   const lower = (w) => str(w).toLowerCase();
   const beds = new Map(), depts = new Map(), names = new Map();
-  for (const [w, n] of Object.entries(i.bedsByWard || {})) { beds.set(lower(w), (beds.get(lower(w)) || 0) + (Number(n) || 0)); names.set(lower(w), w); }
+  for (const bed of Array.isArray(i.bedHistory) ? i.bedHistory : []) {
+    const w = str(bed && bed.ward); if (!w) continue;
+    if (!beds.has(lower(w))) beds.set(lower(w), []);
+    beds.get(lower(w)).push(bed); if (!names.has(lower(w))) names.set(lower(w), w);
+  }
   for (const [w, d] of Object.entries(i.wardDepartments || {})) { depts.set(lower(w), d); if (!names.has(lower(w))) names.set(lower(w), w); }
   const groupOf = (w) => (groupBy === "ward" ? (w ? names.get(lower(w)) || str(w) : NO_WARD)
     : groupBy === "department" ? (w && depts.get(lower(w))) || NO_DEPT : null);
+  const wardUnknown = [];
   const ctx = {
-    nowMs, clock: i.clock || { timeZone: null, offset: 330 }, antibiotics: abx, groupBy,
-    bedsFor: (group) => [...beds].filter(([w]) => group === null || groupOf(w) === group).reduce((s, [, n]) => s + n, 0),
+    nowMs, clock: i.clock || { timeZone: null, offset: 330 }, antibiotics: abx, groupBy, histories: i.histories || {},
+    bedDays: (group, a, b) => {
+      const out = { beds: 0, days: 0, unknown: 0 };
+      for (const [w, list] of beds) {
+        if (group !== null && groupOf(w) !== group) continue;
+        for (const bed of list) { const r = bedDaysIn(bed, a, b); out.beds++; if (r.unknown) out.unknown++; else out.days += r.days; }
+      }
+      return out;
+    },
+    // Stays that could not be placed on a ward, in this bucket (a stay by its overlap, a ward stay by its end).
+    unknownIn: (b) => wardUnknown.filter((f) => (f.start != null ? overlap(f, b, nowMs) > 0 : f.at >= b.startMs && f.at < b.endMs)).length,
   };
 
   const facts = blocked ? [] : factsFor(def, i.rows || {}, ctx);
@@ -385,6 +479,8 @@ function computeTrend(input) {
   const cells = new Map();
   const put = (g, k, f) => { if (!cells.has(g)) cells.set(g, bs.map(() => [])); cells.get(g)[k].push(f); };
   for (const f of facts) {
+    // Unplaced: counted as unknown per bucket. Hospital-wide occupancy still has the stay's own days.
+    if (f.wardUnknown && (groupBy || def.id === "ward-los")) { wardUnknown.push(f); continue; }
     const g = groupOf(f.ward);
     if (f.start == null) { const k = bucketAt(f.at); if (k >= 0) put(g, k, f); continue; }
     if (!bs.length) continue;
@@ -397,6 +493,8 @@ function computeTrend(input) {
   if (groupBy) {
     const seen = new Set(cells.keys());
     if (def.id === "bed-occupancy") for (const w of beds.keys()) seen.add(groupOf(w));
+    // Stays that could not be placed still have a row, whose buckets say not known.
+    if (wardUnknown.length && !seen.size) seen.add(groupOf(null));
     groups = [...seen].sort();
   }
   const series = groups.map((group) => ({
@@ -464,12 +562,23 @@ async function run(request, env, ctx, eventsFor) {
       : { ...base, ok: false, status: 502, error: "record_read_failed", unreadable: Object.keys(unreadable) };
   }
   const nowMs = Date.parse(str(ctx.now)) || Date.now();
+  /* G7: the movement history of every changed stay that overlaps the range, in one audited read. A read
+   * that fails leaves those stays unplaced (their buckets say unknown); it never drops them. */
+  const histories = {};
+  if (def.history && !unreadable.Encounter && bk.buckets.length) {
+    const lo = bk.buckets[0].startMs, hi = Math.min(bk.buckets[bk.buckets.length - 1].endMs, nowMs);
+    const ids = (rows.Encounter || []).filter((e) => isStay(e) && Number(e.version) > 1 && ms(e.periodStart) < hi && (ms(e.periodEnd) == null || ms(e.periodEnd) >= lo)).map((e) => str(e.id));
+    if (ids.length) {
+      try { const got = await svc.histories("Encounter", ids); for (const id of ids) if (got.get(id)) histories[id] = got.get(id); }
+      catch (e) { /* every changed stay stays unplaced */ }
+    }
+  }
   const r = computeTrend({ metric: def.id, buckets: bk.buckets, clock: bk.clock, rows, unreadable, capped, nowMs,
-    groupBy: ctx.groupBy, wardDepartments: ctx.wardDepartments, bedsByWard: ctx.bedsByWard, antibiotics: ctx.antibiotics,
+    groupBy: ctx.groupBy, wardDepartments: ctx.wardDepartments, bedHistory: ctx.bedHistory, histories, antibiotics: ctx.antibiotics,
     registryError: ctx.registryError, eventsFor });
   return {
     ...base, ok: true, generatedAt: new Date(nowMs).toISOString(),
-    metric: def.id, definition: { ...def, wardAttribution: WARD_NOTE }, bucket: str(ctx.bucket) || "day",
+    metric: def.id, definition: { ...def, wardAttribution: def.wardNote || WARD_NOTE }, bucket: str(ctx.bucket) || "day",
     range: { from: ctx.from, to: ctx.to, timeZone: bk.clock.timeZone, utcOffsetMinutes: bk.clock.offset },
     groupBy: str(ctx.groupBy) || null,
     truncated: capped.length > 0, capped, unreadable: Object.keys(unreadable), readCap: READ_CAP,
@@ -479,7 +588,7 @@ async function run(request, env, ctx, eventsFor) {
   };
 }
 
-/** ctx: { migration, metric, from, to, bucket, groupBy?, utcOffsetMinutes?, timeZone?, antibiotics?, bedsByWard?,
+/** ctx: { migration, metric, from, to, bucket, groupBy?, utcOffsetMinutes?, timeZone?, antibiotics?, bedHistory?,
  *  wardDepartments?, registryError?, now?, actorDeps, recordDeps } */
 async function trendSeries(request, env, ctx) {
   return run(request, env, ctx, null);
@@ -492,4 +601,4 @@ async function trendEvents(request, env, ctx) {
   return run(request, env, { ...ctx, groupBy: "ward" }, { key, group: ward });
 }
 
-export { DEFINITIONS, READ_CAP, EVENTS_CAP, NO_WARD, NO_DEPT, trendCatalogue, bucketsFor, localParts, computeTrend, trendSeries, trendEvents };
+export { DEFINITIONS, READ_CAP, EVENTS_CAP, NO_WARD, NO_DEPT, trendCatalogue, bucketsFor, localParts, staySegments, bedDaysIn, computeTrend, trendSeries, trendEvents };

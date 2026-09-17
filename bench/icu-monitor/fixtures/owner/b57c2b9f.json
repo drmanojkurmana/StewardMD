@@ -1,0 +1,82 @@
+{
+  "id": "owner-b57c2b9f",
+  "manufacturer": "ventilator-other",
+  "layout": "niv-vent-settings-dialog",
+  "difficulty": [
+    "real-photo",
+    "ventilator",
+    "set-vs-measured",
+    "dialog-overlay"
+  ],
+  "image": "b57c2b9f.jpg",
+  "imageSize": {
+    "w": 1280,
+    "h": 960
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "not_applicable"
+    },
+    "spo2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "not_applicable"
+    },
+    "dbp": {
+      "status": "not_applicable"
+    },
+    "map": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 8
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_applicable"
+    }
+  },
+  "distractors": {
+    "backupRR": 15,
+    "rrLimits": [
+      30,
+      5
+    ],
+    "ppeak": 13,
+    "mve": 1.0,
+    "o2conc": 36,
+    "leakage": 99,
+    "settings": {
+      "o2": 100,
+      "peep": 5.0,
+      "psAbovePeep": 10,
+      "endInsp": 30,
+      "timeRise": 0.4,
+      "apnea": 20,
+      "backupPcAbovePeep": 5,
+      "backupIE": "1:4",
+      "backupTi": 0.8
+    },
+    "clock": "18:15",
+    "banner": "Expiratory minute volume low"
+  },
+  "notes": "Settings dialog open over the waveforms; measured RR 8 b/min in the right column."
+}

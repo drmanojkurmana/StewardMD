@@ -24,12 +24,31 @@
  *
  * node --test --experimental-test-module-mocks --experimental-sqlite test/wardsynq-abdm-hiu-routes.test.mjs
  */
-import { test } from "node:test";
+import { test, mock } from "node:test";
 import assert from "node:assert/strict";
 import { createHash, webcrypto } from "node:crypto";
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
 
-import { onRequest } from "../functions/api/connect/[[path]].js";
+/* THE REQUESTER (ABDM V3 merge). The consent route names the doctor by registration number, resolved the way
+ * every chart write resolves who is signed in. The ONE seam replaced is the verified-claims reader (a Firebase
+ * token cannot be minted here) plus the Firestore org lookup this environment has none of; the actor
+ * resolution itself is the real one. */
+const realDeps = await import("../functions/_wardsynq/deps.js");
+const NO_REGNO = "no-regno@example.test";
+mock.module("../functions/_wardsynq/deps.js", {
+  namedExports: {
+    claimsOf: realDeps.claimsOf,
+    recordDeps: realDeps.recordDeps,
+    actorDeps: (env) => realDeps.actorDeps(env, {
+      orgForTenant: null,
+      claimsFn: async (request) => {
+        const who = String(request.headers.get("Cf-Access-Authenticated-User-Email") || "").toLowerCase();
+        return who === NO_REGNO ? {} : { regNo: "TSMC-2019-44821", name: "Dr Test" };
+      },
+    }),
+  },
+});
+const { onRequest } = await import("../functions/api/connect/[[path]].js");
 import { ENDPOINTS } from "../functions/_connect/abdm/gateway.js";
 import { makeAbdmDb, makeR2 } from "../functions/_connect/abdm/abdm-testkit.js";
 import { makeMockKv } from "../functions/_connect/testkit.js";
@@ -82,7 +101,8 @@ const ndhmDoc = () => ({
 async function setup(over) {
   const o = over || {};
   const db = makeAbdmDb({
-    connect_membership: [{ user_id: ACTOR, tenant_id: TENANT, role: "clinician" }],
+    connect_membership: [{ user_id: ACTOR, tenant_id: TENANT, role: "clinician" },
+      { user_id: "cfa:" + createHash("sha256").update(NO_REGNO).digest("hex").slice(0, 24), tenant_id: TENANT, role: "clinician" }],
     connect_tenant: [{ id: TENANT, mode: "live", granted_scopes: '["Condition","MedicationStatement","Observation","DocumentReference"]' }],
   });
   const r2 = makeR2(), kv = makeMockKv();
@@ -94,7 +114,9 @@ async function setup(over) {
     ABDM_JWKS_URL: "https://healthidsbx.abdm.gov.in/certs",
     CONNECT_ABDM_DATA_PUSH_URL: "https://stewardmd.in/api/connect/abdm/hiu/data",
     ABDM_CLIENT_ID: "hiu-client", ABDM_CLIENT_SECRET: "hiu-secret",
-    ...(o.noGateway ? {} : { ABDM_GATEWAY_URL: "https://dev.abdm.gov.in", ABDM_HIU_ID: "SMD-HIU-1" }),
+    // One env scheme: ABDM_ENV selects the host (sandbox by default); the HIU id is an override here.
+    ABDM_HIU_ID: "SMD-HIU-1",
+    ...(o.production ? { ABDM_ENV: "production" } : {}),
   };
 
   /* The webhooks go through the REAL route, so the artifact-fetch and consume-and-land wiring under
@@ -238,10 +260,14 @@ test("4. a gateway that does not accept is an UPSTREAM failure, and no consent r
   assert.equal((h.db._tables.connect_abdm_consent_req || []).length, 0, "fail-closed: nothing was persisted");
 });
 
-test("5. with no gateway configured the doors are not there at all", async () => {
-  const h = await setup({ noGateway: true });
-  assert.equal((await read(await post(h.env, "/abdm/hiu/consent-request", consentBody()))).__status, 404);
-  assert.equal((await read(await post(h.env, "/abdm/hiu/data-request", dataBody("consent-x")))).__status, 404);
+test("5. production ABDM traffic is refused (owner A2): every door says so and nothing is sent", async () => {
+  const h = await setup({ production: true });
+  for (const [path, body] of [["/abdm/hiu/consent-request", consentBody()], ["/abdm/hiu/data-request", dataBody("consent-x")], ["/abdm/hiu/data", { transactionId: "t", entries: [{}], keyMaterial: { dhPublicKey: {}, nonce: "n" } }]]) {
+    const r = await read(await post(h.env, path, body));
+    assert.equal(r.__status, 503, path + " " + JSON.stringify(r));
+    assert.equal(r.error, "abdm_production_held");
+  }
+  assert.equal(h.seen.length, 0, "not one call left for ABDM");
 });
 
 /* ---- 6: the data request is bound to the consent -------------------------------------------------- */
@@ -327,4 +353,56 @@ test("11. the raw ABHA goes to the gateway and nowhere else", async () => {
   const toGateway = h.seen.filter((r) => r.path === ENDPOINTS.consentInit);
   assert.equal(toGateway.length, 1);
   assert.ok(JSON.stringify(toGateway[0].body).includes(ABHA), "the one place it appears is the POST body to the gateway, which is the point of the call");
+});
+
+/* ---- 12-14: the V3 merge follow-ups ---------------------------------------------------------------- */
+
+test("12. POST /api/connect/abdm/hiu/consent-request sends the doctor's registration number as requester, and refuses without one", async () => {
+  const h = await setup();
+  const c = await read(await post(h.env, "/abdm/hiu/consent-request", consentBody()));
+  assert.equal(c.__status, 200, JSON.stringify(c));
+  const sent = called(h.mock, "consentInit")[0].body.consent.requester;
+  assert.deepEqual(sent.identifier, { type: "REGNO", value: "TSMC-2019-44821", system: "https://www.mciindia.org" });
+
+  const h2 = await setup();
+  const r = await read(await post(h2.env, "/abdm/hiu/consent-request", consentBody(), NO_REGNO));
+  assert.equal(r.__status, 422, JSON.stringify(r));
+  assert.equal(r.error, "requester_registration_required");
+  assert.match(r.detail, /registration number/);
+  assert.equal(h2.seen.length, 0, "an unattributable consent never reaches the gateway");
+  assert.equal((h2.db._tables.connect_abdm_consent_req || []).length, 0);
+  assert.equal((await read(await post(h2.env, "/abdm/hiu/consent-request", consentBody(), null))).__status, 401, "no session is refused");
+});
+
+test("13. POST /api/connect/abdm/hiu/data (the V3 dataPushUrl) decrypts and acknowledges through the same consume tail", async () => {
+  const h = await setup();
+  await post(h.env, "/abdm/hiu/consent-request", consentBody());
+  await h.mock.fireConsentNotify();
+  await h.mock.fireOnFetch(SCOPE);
+  const d = await read(await post(h.env, "/abdm/hiu/data-request", dataBody(h.mock.consentId)));
+  assert.equal(d.__status, 200, JSON.stringify(d));
+  await h.mock.fireOnRequest();
+  const body = await h.mock.v3PushBody({ docs: [ndhmDoc()] });
+  const r = await read(await post(h.env, "/abdm/hiu/data", body, null));
+  assert.equal(r.__status, 202, JSON.stringify(r));
+  assert.equal(h.mock.acks.length, 1, "decrypted with our sealed key and acknowledged exactly once");
+  const again = await read(await post(h.env, "/abdm/hiu/data", body, null));
+  assert.equal(again.__status, 202);
+  assert.equal(again.deduped, true, "a re-delivery after the ack buffers nothing");
+  assert.equal(h.mock.acks.length, 1);
+});
+
+test("14. a V3 push for a transaction this hospital never started buffers nothing", async () => {
+  const h = await setup();
+  await post(h.env, "/abdm/hiu/consent-request", consentBody());
+  await h.mock.fireConsentNotify();
+  await h.mock.fireOnFetch(SCOPE);
+  await post(h.env, "/abdm/hiu/data-request", dataBody(h.mock.consentId));
+  await h.mock.fireOnRequest();
+  const body = await h.mock.v3PushBody({ docs: [ndhmDoc()], transactionId: "txn-nobody-started" });
+  const r = await read(await post(h.env, "/abdm/hiu/data", body, null));
+  assert.equal(r.__status, 403, JSON.stringify(r));
+  assert.equal(r.error, "unknown_correlation");
+  assert.equal((await h.r2.list({ prefix: "" })).objects.length, 0, "R2 untouched");
+  assert.equal(h.mock.acks.length, 0);
 });

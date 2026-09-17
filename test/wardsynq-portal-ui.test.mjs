@@ -12,12 +12,14 @@ import { readFileSync } from "node:fs";
 import vm from "node:vm";
 
 const read = (p) => readFileSync(new URL("../" + p, import.meta.url), "utf8");
+const I18N = read("wardsynq/site/i18n.js");
 const PORTAL = read("wardsynq/site/portal.js");
 const STAFF = read("wardsynq/site/pages/portal-access.js");
 const ROUTER = read("functions/api/queue/[[path]].js");
 
 function loadPortal() {
   const window = {};
+  vm.runInNewContext(I18N, { window });
   vm.runInNewContext(PORTAL, { window });
   return window.WSQPortal;
 }
@@ -69,8 +71,14 @@ test("portal: messages show the not-an-emergency warning above the box, and esca
 });
 
 test("portal: no staff session, no PHI in the address, POST only", () => {
-  assert.doesNotMatch(PORTAL, /firebase|api\/queue|Authorization|localStorage/);
+  assert.doesNotMatch(PORTAL, /firebase|api\/queue|Authorization/);
   assert.match(PORTAL, /sessionStorage/);
+  // localStorage (D6) holds only the chosen language code, never the session: PHI still lives only
+  // in sessionStorage, and only under the session key.
+  assert.match(PORTAL, /localStorage/, "language preference");
+  const localStorageCalls = PORTAL.match(/localStorage\.\w+\(([^)]*)\)/g) || [];
+  assert.ok(localStorageCalls.length > 0);
+  for (const call of localStorageCalls) assert.doesNotMatch(call, /\bKEY\b/, "the session key never reaches localStorage: " + call);
   assert.doesNotMatch(PORTAL, /fetch\([^)]*\?/, "no query strings on portal calls");
   assert.match(PORTAL, /method: "POST"/);
   const html = read("wardsynq/site/portal.html");
@@ -91,6 +99,28 @@ test("staff page: worklist and grants have distinct loading, failed and empty st
   const g = api.grantsHtml(c, { ok: true, grants: [{ grantId: "g1", state: "in-use", proxy: { name: "Ravi", relationship: "spouse", sections: ["bills"], consentFrom: "patient", consentMethod: "in-person-verbal" } }] });
   assert.match(g, /data-pa="revoke" data-id="g1"/);
   assert.equal(api.patientIdForMrn("GH-000123"), "opd-pat-gh-000123", "the same id opd-identity.js files the record under");
+});
+
+test("education leaflets: the library keeps loading, failed and empty apart; a draft's writer is not offered Approve; the portal shows given copies", () => {
+  const { api } = loadStaff();
+  assert.match(api.libraryHtml(c, null, true), /spin/);
+  assert.match(api.libraryHtml(c, { ok: false }, true), /Do not read this as no leaflets/);
+  assert.match(api.libraryHtml(c, { ok: true, leaflets: [] }, true), /data-empty="leaflets"/);
+  const draft = { leafletId: "l1", version: 1, title: "Wound care", language: "hi", body: "text", state: "draft", draftedBy: ["cfa:a"] };
+  assert.ok(!/data-pa="eduapprove"/.test(api.libraryHtml(c, { ok: true, me: "cfa:a", leaflets: [draft] }, true)), "not offered to the person who wrote it");
+  assert.match(api.libraryHtml(c, { ok: true, me: "cfa:b", leaflets: [draft] }, true), /data-pa="eduapprove" data-id="l1" data-v="1"/);
+  assert.ok(!/data-pa="edu/.test(api.libraryHtml(c, { ok: true, me: "cfa:b", leaflets: [draft] }, false)), "a reader gets no author controls");
+  assert.ok(!/data-pa="edu/.test(api.libraryHtml(c, { ok: true, me: "cfa:b", leaflets: [{ ...draft, state: "retired", retired: { reason: "old" } }] }, true)), "a retired leaflet is only read");
+  for (const route of ["/ward/education-leaflets", "/ward/education-leaflet-save", "/ward/education-leaflet-approve", "/ward/education-leaflet-retire"]) assert.ok(STAFF.includes(route), route);
+
+  const P = loadPortal();
+  const given = P.renderRecord({ access: { kind: "patient", sections: ["education"] }, document: {}, education: [{ title: "Wound care", language: "hi", body: "line <b>", attachedAt: "2026-09-17T01:00:00Z" }], failedSections: [] });
+  assert.match(given, /data-section="education"/);
+  assert.match(given, /line &lt;b&gt;/);
+  assert.match(P.renderRecord({ access: { kind: "patient", sections: ["education"] }, document: {}, education: [], failedSections: [] }), /data-empty="education"/);
+  const bad = P.renderRecord({ access: { kind: "patient", sections: ["education"] }, document: {}, failedSections: ["education"] });
+  assert.ok(!/data-empty="education"/.test(bad), "a failed read is never drawn as none given");
+  assert.ok(!/data-section="education"/.test(P.renderRecord({ access: { kind: "proxy", sections: ["bills"] }, document: {}, bills: [], failedSections: [] })), "a proxy not granted it sees no such section");
 });
 
 test("staff page calls every staff portal route, and the router guards each with a capability", () => {

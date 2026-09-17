@@ -42,6 +42,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { numericValue } from "../../wardsynq/wardsynq-model.js";
+import { patientLabels, labelKey, actorName } from "./patient-label.js";
 import { Dispatcher, NotifyError } from "../../wardsynq/wardsynq-notify.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -154,6 +155,8 @@ function classify(obs, limits) {
 }
 
 /** PURE. One loop per (report, analyte): a re-ingested result reopens nothing and duplicates nothing. */
+const LIST_CAP = 500;
+
 function loopIdFor(reportId, code) {
   const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   const r = slug(reportId), c = slug(code);
@@ -197,6 +200,8 @@ function CriticalResultLoop(input) {
     reportedAt: i.reportedAt || null,     // when the RESULT was reported: the clock the loop runs on
     openedAt: i.openedAt || null,
     acknowledgedBy: i.acknowledgedBy || null,
+    // LT-28: the acknowledger's name as their sign-in gave it, so the board never prints a sign-in uid. The id stays the audit key.
+    acknowledgedByName: i.acknowledgedByName || null,
     acknowledgedAt: i.acknowledgedAt || null,
     action: i.action || null,             // what the clinician did about it, in their words
     closedBy: i.closedBy || null,
@@ -208,6 +213,9 @@ function CriticalResultLoop(input) {
     // Each time the unacknowledged loop crossed a level (overdue, escalate), what was attempted. ops-tick.js.
     escalations: Array.isArray(i.escalations) ? i.escalations : [],
     escalatedLevel: i.escalatedLevel || null,
+    // S3 P0: every push notice sent for this loop (nid, level, recipients, noDevice, sent, total,
+    // receipts), so who was told and what their phone said is part of the loop's own story.
+    notifications: Array.isArray(i.notifications) ? i.notifications : [],
     source: i.source || { system: "wardsynq-native", sourceId: `critical:${i.id}` },
   };
 }
@@ -295,12 +303,15 @@ async function openCriticalLoops(request, env, ctx) {
     // A site wires its own channels via ctx.notifyDeps.channels; wiring none is a real, common state
     // and gets NO_CHANNEL recorded, never a silent "sent".
     let notification;
+    // S3 P0: the push channel writes the notice it made here, so it lands on the loop below.
+    const notices = [];
     try {
       const dispatcher = new Dispatcher(ctx.notifyDeps || {});
       // Retried up to twice: a critical result failing to notify on a momentary network blip is
       // exactly the case retry exists for - see wardsynq-notify.js's own note.
-      const sent = await dispatcher.send({ loopId: id, patientId: report.patientId, code: hit.code, display: hit.display, value: hit.value, unit: hit.unit }, undefined, { retries: 2 });
+      const sent = await dispatcher.send({ loopId: id, patientId: report.patientId, reportId, encounterId: report.encounterId || null, code: hit.code, display: hit.display, value: hit.value, unit: hit.unit, level: "due", notices }, undefined, { retries: 2 });
       notification = { attempted: true, delivered: sent.delivered, channels: sent.attempts.map((a) => ({ channel: a.channel, delivered: a.delivered, detail: a.detail })), at: new Date().toISOString() };
+      if (notices.some((n) => n.reason === "NO_RECIPIENT")) notification.reason = "NO_RECIPIENT";
     } catch (e) {
       notification = { attempted: true, delivered: false, reason: e instanceof NotifyError ? e.code : "NOTIFY_ERROR", detail: str(e && e.message), at: new Date().toISOString() };
     }
@@ -310,7 +321,7 @@ async function openCriticalLoops(request, env, ctx) {
       reportId, observationId: obs.id || null,
       code: hit.code, display: hit.display, value: hit.value, unit: hit.unit,
       basis: hit.basis, bound: hit.bound, state: "open",
-      reportedAt, openedAt: new Date().toISOString(), notification,
+      reportedAt, openedAt: new Date().toISOString(), notification, notifications: notices,
     });
     try {
       const res = await svc.put(loop, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:${id}` : null });
@@ -327,6 +338,14 @@ async function openCriticalLoops(request, env, ctx) {
   };
 }
 
+/** PURE. Minutes since the RESULT was reported, whatever the loop's state (LT-26/LT-28): acknowledging a result does
+ * not move when it was reported. escalationOf's minutesOpen is 0 once acknowledged, which is right for escalation
+ * and was wrong on the boards. Null when the report time is unknown. */
+function minutesSinceReported(l, nowMs) {
+  const since = Date.parse((l && (l.reportedAt || l.openedAt)) || "");
+  return Number.isFinite(since) ? Math.max(0, Math.round(((nowMs || Date.now()) - since) / 60000)) : null;
+}
+
 function summary(l, nowMs, policy) {
   return {
     loopId: l.id, patientId: l.patientId, encounterId: l.encounterId || null,
@@ -334,12 +353,14 @@ function summary(l, nowMs, policy) {
     code: l.code, display: l.display, value: l.value, unit: l.unit,
     basis: l.basis, bound: l.bound || null, state: l.state,
     reportedAt: l.reportedAt, openedAt: l.openedAt,
-    acknowledgedBy: l.acknowledgedBy || null, acknowledgedAt: l.acknowledgedAt || null,
+    acknowledgedBy: l.acknowledgedBy || null, acknowledgedByName: l.acknowledgedByName || null, acknowledgedAt: l.acknowledgedAt || null,
     action: l.action || null, closedBy: l.closedBy || null, closedAt: l.closedAt || null,
     version: l.version,
     escalation: escalationOf(l, nowMs, policy),
+    minutesSinceReported: minutesSinceReported(l, nowMs),
     notification: l.notification || null,
     escalations: l.escalations || [],
+    notifications: l.notifications || [],
   };
 }
 
@@ -384,6 +405,7 @@ async function acknowledgeCritical(request, env, ctx) {
     // The FIRST acknowledgement is the one that counts, and it is never overwritten: it is the
     // record of who saw this and when, which is the whole point of the loop.
     acknowledgedBy: current.acknowledgedBy || resolved.actor.id,
+    acknowledgedByName: current.acknowledgedBy ? (current.acknowledgedByName || null) : actorName(resolved.actor),
     acknowledgedAt: current.acknowledgedAt || now,
     action: current.action ? `${current.action}\n${action}` : action,
     state: ctx.close ? "closed" : "acknowledged",
@@ -414,7 +436,7 @@ async function listCriticalLoops(request, env, ctx) {
   try {
     rows = str(ctx.patientId)
       ? await svc.byPatient("CriticalResultLoop", str(ctx.patientId))
-      : await svc.list("CriticalResultLoop", 200);
+      : await svc.list("CriticalResultLoop", LIST_CAP);
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), loops: [] }; }
 
   const nowMs = Date.parse(str(ctx.now)) || Date.now();
@@ -427,11 +449,20 @@ async function listCriticalLoops(request, env, ctx) {
     .map((l) => summary(l, nowMs, ctx.policy))
     .sort((a, b) => (RANK[a.escalation.level] - RANK[b.escalation.level])
       || String(a.reportedAt || "").localeCompare(String(b.reportedAt || "")));
-  return { ...base, ok: true, loops, open: loops.filter((l) => l.state === "open").length };
+  // LT-28: a hospital-wide board names the patient, bed and ward, the way the bed and ED boards do.
+  if (ctx.withPatients) {
+    const labels = await patientLabels(svc, loops);
+    for (const l of loops) l.patient = labels.get(labelKey(l)) || null;
+  }
+  /* LT-26: ONE definition of "open critical results": state open, not yet acknowledged. The Map tile and the ward
+   * home already counted that; the boards counted every loop not closed. `open` is that number, for every screen. */
+  const truncated = !str(ctx.patientId) && (rows || []).length >= LIST_CAP;
+  return { ...base, ok: true, loops, open: loops.filter((l) => l.state === "open").length,
+    ...(truncated ? { partial: true, partialWarning: `Only the first ${LIST_CAP} critical results were read; there may be more.` } : {}) };
 }
 
 export {
   STATES, DEFAULT_CRITICAL_LIMITS, DEFAULT_ESCALATION, CriticalResultLoop,
-  canonUnit, limitsFor, classify, loopIdFor, escalationOf,
+  canonUnit, limitsFor, classify, loopIdFor, escalationOf, minutesSinceReported,
   openCriticalLoops, acknowledgeCritical, listCriticalLoops,
 };

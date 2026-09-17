@@ -9,6 +9,7 @@
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { qAudit } from "./_queue_engine.js";
+import { appendOrgAudit } from "./_q_audit_chain.js";
 import * as M from "./_opd_org.js";
 import { genSalt, hashSecret, passwordProblem, pinProblem } from "./_opd_auth.js";
 import * as A from "./_opd_auth.js";
@@ -38,6 +39,10 @@ export async function createOrg(env, body, ownerUid) {
 }
 export async function getOrg(env, orgId) {
   let id = sanitize(orgId);
+  /* No hospital named is no hospital found. Reading "q_orgs/" answered with a document that has no id, and
+   * M.org threw "opd_org: id required": a request that forgot ?orgId= became a 500 instead of a refusal
+   * (LT-16, GET /ward/pathway-progress). */
+  if (!id) return null;
   let d = await fsGet(env, "q_orgs/" + id);
   /* Document ids are lower-case hex, and clients have upper-cased them: the pglog setup screen
    * applied .toUpperCase() to every handle a user typed, which is correct for an SMD-XXXXXX code
@@ -70,6 +75,13 @@ export async function userSmdId(env, uid, email) {
   try { await fsCommit(env, [wUpdate(env, "q_users/" + id, { smdId, email: String(email || "").toLowerCase(), createdAt: now() })]); } catch (e) {}
   return smdId;
 }
+// G11: the email recorded for a Google account (q_users, written by userSmdId), so the security review can
+// count one person's Google and email sign-ins as one reader. null when none is recorded.
+export async function accountEmail(env, actorId) {
+  const id = sanitize(actorId); if (!id) return null;
+  const d = await fsGet(env, "q_users/" + id);
+  return d && d.fields && d.fields.email ? String(d.fields.email).toLowerCase() : null;
+}
 // Every institution, for the PLATFORM owner's tenant console only (never an org-scoped caller).
 // Decoding goes through M.org/withId like every other read in this file, so the shape cannot drift.
 export async function listAllOrgs(env, limit) {
@@ -101,12 +113,19 @@ export async function listOrgsForMember(env, identities) {
   }
   return out;
 }
+/* SOFT DELETE ONLY. The hospital leaves every list; its clinical record, documents and audit trail are
+ * untouched (medical records must be retained). BUG-MU2PHANW: the flag and its hash-chained audit row
+ * are ONE commit, so a removed hospital without its audit row cannot exist (it was a best-effort row
+ * written after the fact). */
 export async function deleteOrg(env, orgId, actorId) {
-  await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { deleted: true, deletedAt: now() })]);   // soft-delete
-  await audit(env, orgId, actorId, "org:delete", "");
+  const ts = now();
+  await appendOrgAudit(env, { ts, hospitalId: String(orgId), ticketId: "", actor: String(actorId || ""), action: "org:delete", meta: "soft delete; records retained" },
+    [wUpdate(env, "q_orgs/" + sanitize(orgId), { deleted: true, deletedAt: ts, deletedBy: String(actorId || "") })]);
   return { ok: true };
 }
-export async function updateOrg(env, orgId, patch, actorId) {
+/* auditEvent: { action, meta } to write the audit row IN THE SAME COMMIT as the change, for a change that must
+ * not exist without its audit row (D11 clinical settings). Without it the audit is best-effort, as before. */
+export async function updateOrg(env, orgId, patch, actorId, auditEvent) {
   const cur = await getOrg(env, orgId); if (!cur) return null;
   /* THE WARDSYNQ CONFIG MERGES; IT DOES NOT GET REPLACED.
    *
@@ -129,6 +148,12 @@ export async function updateOrg(env, orgId, patch, actorId) {
     merged.regionProfile = Object.assign({}, (cur && cur.regionProfile) || {}, p.regionProfile);
   }
   const f = M.org(merged);
+  if (auditEvent) {
+    // G3: the change and its hash-chained audit row in one commit.
+    await appendOrgAudit(env, { ts: now(), hospitalId: String(orgId), ticketId: "", actor: String(actorId || ""), action: auditEvent.action, meta: String(auditEvent.meta || "").slice(0, 200) },
+      [wUpdate(env, "q_orgs/" + sanitize(orgId), f)]);
+    return f;
+  }
   await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), f)]);
   await audit(env, orgId, actorId, "org:update", "");
   return f;
@@ -153,23 +178,44 @@ export async function createOpd(env, orgId, body, actorId) {
 }
 
 // ---- rooms (room != doctor: configurable assignment) -------------------------------------------
+export async function getDepartment(env, deptId) {
+  const id = sanitize(deptId); if (!id) return null;
+  const d = await fsGet(env, "q_departments/" + id);
+  return d ? M.department(withId(id, d.fields)) : null;
+}
+/* A room's department NAME is read from q_departments by the room's departmentId on every read and never
+ * stored on the room, so a renamed department shows its new name everywhere at once. */
+const roomOut = (fields, id, depts) => {
+  const rm = M.room(withId(id, fields));
+  const d = rm.departmentId ? (depts || []).find((x) => x.id === rm.departmentId) : null;
+  rm.department = d ? d.name : "";
+  return rm;
+};
+const roomStored = (rm) => { const f = Object.assign({}, rm); delete f.department; return f; };
 export async function createRoom(env, orgId, body, actorId) {
   const b = body || {};
   const id = newId();
-  const f = M.room({ id, orgId, departmentId: b.departmentId, opdId: b.opdId, name: b.name, number: b.number, assignment: b.assignment, active: b.active });
+  const f = roomStored(M.room({ id, orgId, departmentId: b.departmentId, opdId: b.opdId, name: b.name, number: b.number, assignment: b.assignment, active: b.active }));
   await fsCommit(env, [wCreate(env, "q_rooms/" + id, f)]);
-  await audit(env, orgId, actorId, "room:create", f.name); return f;
+  await audit(env, orgId, actorId, "room:create", f.name);
+  return roomOut(f, id, f.departmentId ? [await getDepartment(env, f.departmentId)].filter((x) => x && x.orgId === f.orgId) : []);
 }
-export async function getRoom(env, roomId) { const d = await fsGet(env, "q_rooms/" + sanitize(roomId)); return d ? M.room(withId(sanitize(roomId), d.fields)) : null; }
+export async function getRoom(env, roomId) {
+  const d = await fsGet(env, "q_rooms/" + sanitize(roomId)); if (!d) return null;
+  const dep = d.fields && d.fields.departmentId ? await getDepartment(env, d.fields.departmentId) : null;
+  return roomOut(d.fields, sanitize(roomId), dep && dep.orgId === String(d.fields.orgId || "") ? [dep] : []);
+}
 export async function listRooms(env, orgId) {
   const r = await fsQuery(env, "q_rooms", { where: { field: "orgId", value: sanitize(orgId) }, limit: 200 });
-  return r.map((x) => M.room(withId(x.id, x.fields)));
+  const depts = r.some((x) => x.fields && x.fields.departmentId) ? await listDepartments(env, orgId) : [];
+  return r.map((x) => roomOut(x.fields, x.id, depts));
 }
 export async function updateRoom(env, roomId, patch, actorId) {
   const cur = await getRoom(env, roomId); if (!cur) return null;
-  const f = M.room(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId }));   // orgId immutable
+  const f = roomStored(M.room(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId })));   // orgId immutable
   await fsCommit(env, [wUpdate(env, "q_rooms/" + sanitize(roomId), f)]);
-  await audit(env, cur.orgId, actorId, "room:update", (patch && patch.assignment) ? "assignment" : ""); return f;
+  await audit(env, cur.orgId, actorId, "room:update", (patch && patch.assignment) ? "assignment" : (patch && patch.departmentId !== undefined) ? "department" : "");
+  return roomOut(f, cur.id, f.departmentId ? [await getDepartment(env, f.departmentId)].filter((x) => x && x.orgId === f.orgId) : []);
 }
 
 // ---- wards / beds (TASK 4.1: Enterprise -> ... -> Ward -> Bed) ----------------------------------
@@ -192,14 +238,20 @@ export async function updateWard(env, wardId, patch, actorId) {
 }
 export async function createBed(env, orgId, body, actorId) {
   const b = body || {};
-  const id = newId(); const f = M.bed({ id, orgId, wardId: b.wardId, name: b.name, state: b.state, genderRestriction: b.genderRestriction, isolation: b.isolation, active: b.active });
+  const id = newId(); const f = M.bed({ id, orgId, wardId: b.wardId, name: b.name, state: b.state, genderRestriction: b.genderRestriction, isolation: b.isolation, active: b.active, since: now() });
   await fsCommit(env, [wCreate(env, "q_beds/" + id, f)]);
   await audit(env, orgId, actorId, "bed:create", f.name); return f;
 }
 export async function getBed(env, bedId) { const d = await fsGet(env, "q_beds/" + sanitize(bedId)); return d ? M.bed(withId(sanitize(bedId), d.fields)) : null; }
 export async function listBeds(env, orgId, wardId) {
   const r = await fsQuery(env, "q_beds", { where: { field: "orgId", value: sanitize(orgId) }, limit: 500 });
-  const beds = r.map((x) => M.bed(withId(x.id, x.fields)));
+  /* A bed added before bed history was kept has no `since`: Firestore's own creation time of its document
+   * is when it was registered, and `legacy` says its turn-offs before then were not recorded. */
+  const beds = r.map((x) => {
+    const b = M.bed(withId(x.id, x.fields));
+    if (!b.since && x.createTime && Date.parse(x.createTime) > 0) { b.since = Date.parse(x.createTime); b.legacy = true; }
+    return b;
+  });
   return wardId ? beds.filter((b) => b.wardId === sanitize(wardId)) : beds;
 }
 // Name-based lookups: ADT (migrate-inpatient.js) works with the free-text ward/bed NAMES a caller
@@ -227,7 +279,9 @@ export async function updateBed(env, bedId, patch, actorId) {
   const id = sanitize(bedId);
   const raw = await fsGet(env, "q_beds/" + id); if (!raw) return null;
   const cur = M.bed(withId(id, raw.fields));
-  const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId }));   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
+  const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId, since: cur.since, activeHistory: cur.activeHistory, stateSince: cur.stateSince }));
+  if (f.state !== cur.state) f.stateSince = now();   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
+  if (f.active !== cur.active) f.activeHistory = cur.activeHistory.concat([{ active: f.active, at: now() }]);
   try {
     await fsCommit(env, [wUpdate(env, "q_beds/" + id, f, { updateTime: raw.updateTime })]);
   } catch (e) {
@@ -272,6 +326,9 @@ export async function setMembership(env, orgId, identity, body, actorId) {
      * assertion. */
     regNo: b.regNo !== undefined ? b.regNo : (prev && prev.regNo),
     regionProfile: b.regionProfile !== undefined ? b.regionProfile : (prev && prev.regionProfile),
+    alertMobile: b.alertMobile !== undefined ? b.alertMobile : (prev && prev.alertMobile),
+    displayName: b.displayName !== undefined ? b.displayName : (prev && prev.displayName),
+    employeeId: b.employeeId !== undefined ? b.employeeId : (prev && prev.employeeId),
     active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
     createdAt: (prev && prev.createdAt) || now(),
   });
@@ -285,11 +342,23 @@ export async function getMembership(env, orgId, identity) {
 // Public projection — NEVER leak secret hashes to the client. `email`/`hasPin` are safe hints.
 function publicMember(id, f) {
   const m = M.membership(withId(id, f));
-  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
+  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, regionProfile: m.regionProfile, alertMobile: m.alertMobile, displayName: m.displayName, employeeId: m.employeeId, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
 }
+/* EVERY member, in pages of 300 (includes disabled so admin can restore; active flag shown). One query of 300 used to be
+ * the whole answer, so a staff member beyond the first 300 was not named on a chart: an Access sign-in id ("cfa:" +
+ * email hash) cannot be read directly by id and is only matched against this list (staff-identity.js).
+ * ponytail: 20 pages (6000 members) is the ceiling; a hospital near it wants an identity index instead of a scan. */
+const MEMBER_PAGE = 300;
 export async function listMembers(env, orgId) {
-  const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });
-  return r.map((x) => publicMember(x.id, x.fields));   // includes disabled so admin can restore; active flag shown
+  const out = [];
+  let after = null;
+  for (let page = 0; page < 20; page++) {
+    const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: MEMBER_PAGE, orderByName: true, ...(after ? { startAfter: after } : {}) });
+    for (const x of r) out.push(publicMember(x.id, x.fields));
+    if (r.length < MEMBER_PAGE) break;
+    after = r[r.length - 1].name;
+  }
+  return out;
 }
 /* wUpdate UPSERTS. Without this check a mistyped identity on disable/restore/PIN/password/reset
  * created a brand-new member row, and a PIN or password on it was a working sign-in (getMemberAuth

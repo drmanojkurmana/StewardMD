@@ -2,7 +2,8 @@
  *
  * Routes: POST /api/queue/ward/webhook and /api/queue/ward/webhook-update with payload "fhir-id-only",
  * POST /api/queue/ward/admit as the event, the outbox delivery, then GET /api/queue/ward/fhir/Subscription
- * and GET /api/fhir/{org}/Subscription.
+ * and GET /api/fhir/{org}/Subscription. G10: POST /api/queue/ward/fhir/Subscription (create) and
+ * GET /api/queue/ward/fhir/Subscription/{id}/$status, GET /api/fhir/{org}/Subscription/{id}/$status.
  *
  * node --test --experimental-test-module-mocks test/wardsynq-fhir-subscription.test.mjs
  */
@@ -204,4 +205,98 @@ test("SUBSCRIPTION on /api/fhir/{org}/Subscription: no bearer 401, patient/ and 
   assert.equal((await sys.json()).entry[0].resource.criteria, "urn:stewardmd:fhir:SubscriptionTopic:order.placed");
   const post = await fhirDoor({ request: new Request(`https://x/api/fhir/${ORG_ID}/Subscription`, { method: "POST", body: "{}" }), env: ENV, params: { path: [ORG_ID, "Subscription"] } });
   assert.equal(post.status, 405);
+});
+
+/* ---- G10: create over FHIR, and $status --------------------------------------------------------- */
+
+const PAYLOAD_EXT = "http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content";
+const sub = (over, channel) => ({
+  resourceType: "Subscription", status: "requested", reason: "Bed management feed",
+  criteria: "urn:stewardmd:fhir:SubscriptionTopic:encounter.admitted",
+  channel: { type: "rest-hook", endpoint: PUBLIC_URL, payload: "application/fhir+json", _payload: { extension: [{ url: PAYLOAD_EXT, valueCode: "id-only" }] }, ...(channel || {}) },
+  ...(over || {}),
+});
+async function postSub(email, body) {
+  return onRequest({ request: new Request(`https://x/api/queue/ward/fhir/Subscription?orgId=${ORG_ID}`, { method: "POST", headers: { ...(email ? { "Cf-Access-Authenticated-User-Email": email } : {}), "Content-Type": "application/fhir+json" }, body: JSON.stringify(body) }), env: ENV });
+}
+const endpoints = async () => (await RECORD.latestByType(T, "_wardsynq_webhook", 100)) || [];
+
+test("CREATE on POST /api/queue/ward/fhir/Subscription: no session 401, nurse 403, hr 403, another hospital 403, nothing registered; an admin gets 201, a Location, the secret once, and the same webhook the screen lists", async () => {
+  assert.equal((await postSub("", sub())).status, 401);
+  assert.equal((await postSub(NURSE, sub())).status, 403);
+  assert.equal((await postSub(HR, sub())).status, 403, "staff.admin with no clinical actor registers nothing");
+  assert.equal((await postSub(OTHER_ADMIN, sub())).status, 403);
+  assert.equal((await endpoints()).length, 0, "no refusal wrote an endpoint");
+
+  const res = await postSub(ADMIN, sub());
+  assert.equal(res.status, 201, await res.clone().text());
+  const created = await res.json();
+  assert.equal(created.resourceType, "Subscription");
+  assert.equal(created.status, "active");
+  assert.equal(created.criteria, "urn:stewardmd:fhir:SubscriptionTopic:encounter.admitted");
+  assert.equal(res.headers.get("Location"), `https://x/api/queue/ward/fhir/Subscription/${created.id}`);
+  const secret = res.headers.get("X-WardSynQ-Webhook-Secret");
+  assert.match(secret, /^whsec_/);
+  assert.ok(!JSON.stringify(created).includes("whsec_"), "the secret is never in the resource");
+  const { validateResource } = await import("../functions/_wardsynq/fhir-validate.js");
+  assert.deepEqual(validateResource(created).issues.filter((i) => i.severity === "error"), [], "what is served is valid R4");
+  const read = await as(ADMIN, `/ward/fhir/Subscription/${created.id}?orgId=${ORG_ID}`);
+  assert.equal(read.__status, 200);
+  assert.ok(!JSON.stringify(read).includes("whsec_"), "and never readable again");
+  const list = await as(ADMIN, `/ward/webhooks?orgId=${ORG_ID}`);
+  assert.equal(list.webhooks.length, 1);
+  assert.equal(list.webhooks[0].payload, "fhir-id-only");
+  assert.equal(list.webhooks[0].description, "Bed management feed");
+  assert.ok(RECORD.audit.some((a) => a.action === "webhook.register" && a.actor === idFor(ADMIN)), "audited by the same registration");
+});
+
+test("CREATE REFUSES what it cannot honour, by name, and writes nothing: private or http endpoint, unknown topic, full-resource payload, header, end, missing reason", async () => {
+  const cases = [
+    [sub(null, { endpoint: "https://10.0.0.5/hook" }), /public address|private/i],
+    [sub(null, { endpoint: "http://93.184.216.34/hook" }), /https/i],
+    [sub(null, { endpoint: "https://169.254.169.254/latest" }), /public address|metadata|link-local|private/i],
+    [sub({ criteria: "Observation?code=1234" }), /exactly one topic/],
+    [sub(null, { _payload: { extension: [{ url: PAYLOAD_EXT, valueCode: "full-resource" }] } }), /id-only/],
+    [sub(null, { header: ["Authorization: Bearer x"] }), /headers are not sent/],
+    [sub({ end: "2026-12-31T00:00:00Z" }), /end date/],
+    [sub(null, { type: "websocket" }), /rest-hook/],
+    [(() => { const b = sub(); delete b.reason; return b; })(), /required/],
+  ];
+  for (const [body, why] of cases) {
+    const res = await postSub(ADMIN, body);
+    assert.equal(res.status, 422, JSON.stringify(body));
+    const oo = await res.json();
+    assert.equal(oo.resourceType, "OperationOutcome");
+    assert.match(oo.issue.map((i) => i.diagnostics).join(" | "), why, JSON.stringify(body));
+  }
+  assert.equal((await endpoints()).length, 0);
+});
+
+test("$STATUS on GET /api/queue/ward/fhir/Subscription/{id}/$status and the SMART door: a searchset with one SubscriptionStatus; 401, 403, 404 as for a read; the error when delivery turned it off", async () => {
+  const created = await (await postSub(ADMIN, sub())).json();
+  const path = `/ward/fhir/Subscription/${created.id}/$status?orgId=${ORG_ID}`;
+  assert.equal((await as("", path)).__status, 401);
+  assert.equal((await as(NURSE, path)).__status, 403);
+  assert.equal((await as(OTHER_ADMIN, path)).__status, 403);
+  assert.equal((await as(ADMIN, `/ward/fhir/Subscription/wh-none.encounter.admitted/$status?orgId=${ORG_ID}`)).__status, 404);
+  const b = await as(ADMIN, path);
+  assert.equal(b.__status, 200, JSON.stringify(b));
+  assert.equal(b.type, "searchset");
+  const p = (n) => b.entry[0].resource.parameter.find((x) => x.name === n);
+  assert.equal(b.entry[0].resource.resourceType, "Parameters");
+  assert.equal(p("type").valueCode, "query-status");
+  assert.equal(p("status").valueCode, "active");
+  assert.equal(p("topic").valueCanonical, created.criteria);
+  assert.match(p("subscription").valueReference.reference, new RegExp(`Subscription/${created.id.replace(/\./g, "\\.")}$`));
+  assert.equal(p("events-since-subscription-start"), undefined, "no count that is not one");
+
+  const ep = (await endpoints())[0];
+  await RECORD.append(T, [{ ...ep, version: ep.version + 1, active: false, status: "auto-disabled", disabledReason: "10 failed deliveries in 30 minutes" }]);
+  const off = await as(ADMIN, path);
+  assert.equal(off.entry[0].resource.parameter.find((x) => x.name === "status").valueCode, "error");
+  assert.equal(off.entry[0].resource.parameter.find((x) => x.name === "error").valueCodeableConcept.text, "10 failed deliveries in 30 minutes");
+
+  const sys = await smart(`Subscription/${created.id}/$status`, await mintBearer(["system/*.read"]));
+  assert.equal(sys.status, 200, await sys.clone().text());
+  assert.equal((await smart(`Subscription/${created.id}/$status`, await mintBearer(["user/*.read"]))).status, 403);
 });

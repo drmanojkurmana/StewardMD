@@ -279,6 +279,23 @@ test("POST /org/update: the hospital owner (no member row at all) also succeeds"
   assert.equal((await ORG.getOrg(ENV, "org-a")).name, "Owner Renamed");
 });
 
+/* OPD token numbering is an org setting saved through the same route: the same refusals hold for it. */
+test("POST /org/update tokens: no session 401, nurse 403, other hospital refused, all with nothing written; own admin saves", async () => {
+  seedTwoHospitals();
+  const body = { orgId: "org-a", tokens: { scope: "department", prefixes: { Cardiology: "C" } } };
+  const scopeNow = async () => (await ORG.getOrg(ENV, "org-a")).tokens.scope;
+  assert.equal((await api("/org/update", "POST", body, {})).__status, 401);
+  assert.equal(await scopeNow(), "hospital");
+  assert.equal((await api("/org/update", "POST", body, asFirebase(NURSE_A_EMAIL))).__status, 403);
+  assert.equal(await scopeNow(), "hospital");
+  const other = await api("/org/update", "POST", body, asFirebase(HR_B_EMAIL));
+  assert.ok(other.__status === 403 || other.__status === 404, JSON.stringify(other));
+  assert.equal(await scopeNow(), "hospital");
+  const ok = await api("/org/update", "POST", body, asFirebase(HR_A_EMAIL));
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.deepEqual((await ORG.getOrg(ENV, "org-a")).tokens, { scope: "department", prefixes: { cardiology: "C" }, deptAliases: {} });
+});
+
 /* ==================================================================================================
  * POST /mfa/disable
  *

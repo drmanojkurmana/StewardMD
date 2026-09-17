@@ -11,6 +11,7 @@ import { verifyStaffSession } from "../_opd_auth.js";
 import { hmacPseudonym } from "../_connect/audit.js";
 import { D1Repository } from "./repository-d1.js";
 import { orgForTenant, authorizeOrg } from "./org.js";
+import { registrationStatus } from "./hr-records.js";
 
 /** Best-effort prescriber claims (name, regNo) from the bearer token. Identity itself comes from identify(). */
 async function claimsOf(request, env) {
@@ -29,6 +30,8 @@ function actorDeps(env, overrides) {
     staffSession: overrides.staffSession || verifyStaffSession,
     orgForTenant: "orgForTenant" in overrides ? overrides.orgForTenant : orgForTenant,
     authorizeOrg: overrides.authorizeOrg || authorizeOrg,
+    // The hospital's expired-registration signing rule (hr-records.js); asked only when that rule is on.
+    registrationStatus: overrides.registrationStatus || ((tenantId, identities, wsqCfg) => registrationStatus(new D1Repository("db" in overrides ? overrides.db : env.CONNECT_DB), tenantId, identities, wsqCfg)),
   };
 }
 

@@ -225,7 +225,7 @@ test("NEWBORN: registered as a REAL Patient with its own deterministic MRN, link
 test("DISCHARGE: a MATERNITY stay is discharged through migrate-discharge.js UNCHANGED, the same door IPD and ICU use", async () => {
   seedHospital();
   const { adm } = await admittedMother("207");
-  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-10T08:00:00.000Z", disposition: "home" });
+  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-10T08:00:00.000Z", disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(out.__status, 200, JSON.stringify(out));
   const enc = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
   assert.equal(enc.status, "finished");

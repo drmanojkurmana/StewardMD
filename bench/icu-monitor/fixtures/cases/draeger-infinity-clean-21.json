@@ -1,0 +1,88 @@
+{
+  "id": "draeger-infinity-clean-21",
+  "manufacturer": "draeger-infinity",
+  "layout": "right-column-triangle-limits",
+  "difficulty": [
+    "clean"
+  ],
+  "image": "draeger-infinity-clean-21.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 72
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 98
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 16
+    },
+    "temp": {
+      "status": "visible",
+      "value": 37
+    },
+    "nibp": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 118,
+        "dbp": 76,
+        "map": 90
+      }
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 118,
+      "source": "ART"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 76,
+      "source": "ART"
+    },
+    "map": {
+      "status": "visible",
+      "value": 90,
+      "source": "ART"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "11:55"
+  },
+  "notes": "draeger-infinity clean synthetic fixture."
+}

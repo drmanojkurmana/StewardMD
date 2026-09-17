@@ -16,7 +16,7 @@
  *   GET  /api/queue/portal?t=<token>                       -> PHI-free live snapshot  (PATIENT, no auth)
  */
 import { queueEnabled, isQueueConfigured, mintDisplayToken, verifyDisplayToken } from "../../_queue.js";
-import { identify } from "../../_usage.js";
+import { identify, sha256hex } from "../../_usage.js";
 import { ownerEmails, ownerOK } from "../../_adminauth.js";
 import { lookupUidByEmail } from "../../_fbadmin.js";
 // NOTE: roleForActor is deliberately NOT imported. It prefers actor.role, which resolveActor
@@ -30,6 +30,7 @@ import * as ACCOUNTS from "../../_accounts_store.js";
 import * as FORMS from "../../_forms_store.js";
 import * as PATHWAYS from "../../_pathways_store.js";
 import { submitFormResponse, patientFormResponses } from "../../_wardsynq/form-response.js";
+import { vaccineCatalogue, buildImmunisation } from "../../_vaccines.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
@@ -37,7 +38,7 @@ import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import { unitsFor } from "../../_region.js";
 import { validateOrgProfile, validateMemberProfile } from "../../_region_in.js";
 import * as PAT from "../../_opd_patient_store.js";
-import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg } from "../../_opd_org.js";
+import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, alertMobileOf, notAName, tokenConfigProblems, tokenScope, resolveTokenDepartment } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
@@ -70,15 +71,18 @@ import {
   bookSurgicalCase, recordCaseConsent, markCaseSite, signInCase, timeOutCase, inciseCase,
   signOutCase, abandonCase, recordOperativeNote, dispositionCase, getSurgicalCase, listSurgicalCases,
   listOpenCases, startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
-  recordImplant, listImplants,
+  recordImplant, listImplants, recordPac, getPac, rescheduleCase, recordTheatreTime, flagUnplannedReturn,
 } from "../../_wardsynq/migrate-surgery.js";
+import { createTheatreSession, releaseTheatreSession, theatreUtilisation, theatreSettings } from "../../_wardsynq/theatre.js";
+import { recordDiagnosticArrival, recordDiagnosticStart, accessTimes } from "../../_wardsynq/access-times.js";
 import {
   recordPregnancy, getPregnancy, maternityStatus, maternityMeows, recordLabourObservation,
   recordMaternalBloodLoss, listBloodLoss, recordDelivery, getDelivery, registerNewborn, listFamilyLinks,
+  recordApgar, getApgar,
 } from "../../_wardsynq/migrate-maternity.js";
 import {
   checkWeightBasedRate, checkPaediatricDoseCeiling, checkAgeBand,
-  recordNeonatalObservation, recordLine, removeLine, listLines,
+  recordNeonatalObservation, recordLine, removeLine, listLines, growthChart,
 } from "../../_wardsynq/migrate-pediatrics.js";
 import {
   linkOncologyPlan, getOncologyLink, recordOncologyDiagnosis,
@@ -94,10 +98,12 @@ import {
   transfusionQueue, traceBloodUnit,
 } from "../../_wardsynq/migrate-transfusion.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
-import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
+import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary, readDischargeChecklist } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
 import { marSchedule } from "../../_wardsynq/mar-schedule.js";
 import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
+import { bufferReadAudits } from "../../_wardsynq/repository.js";
+import { membersForIds, staffIdentity, idsParam } from "../../_wardsynq/staff-identity.js";
 import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
 import { recordIcu, icuChart } from "../../_wardsynq/icu-care.js";
 import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
@@ -105,17 +111,41 @@ import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation } from "../../_wardsynq/emergency-mode.js";
+import { publishNotice, privacyNotices, acknowledgePrivacy, privacyAcknowledgements, fileDataRequest, actOnDataRequest, dpoQueue, dataHoldings, recordBreach, updateBreach } from "../../_wardsynq/dpdp.js";
+import { patientRetention, retentionClassList, placeLegalHold, liftLegalHold } from "../../_wardsynq/retention.js";
+import { nabhIndicators, nabhCsv, hmisMonthly, hmisCsv, dhsChecklist, saveDhsAssessment } from "../../_wardsynq/compliance.js";
+import { recordHaiCase, recordProphylaxisReview, infectionControlView, antibiogramReport } from "../../_wardsynq/infection-control.js";
+import { readStaffingNorms, validateStaffingNorms, nurseStaffingView, recordShiftStaffing, staffingDraft, reportStaffInjury, staffInjuries, readStaffingRows } from "../../_wardsynq/nurse-staffing.js";
+import { saveAuditTemplate, recordAudit, recordMockDrill, qualityRegisters, reportAdr, emergencyStock, recordStockOut, restoreStockOut, edReturns, reviewEdReturn } from "../../_wardsynq/quality-registers.js";
+import { runReport, saveReport, listSavedReports, reportCsv } from "../../_wardsynq/report-builder.js";
 import { reportIncident, signalIncident, confirmIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
 import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
+import { labelData, labelSizesOf } from "../../_wardsynq/labels.js";
 import { uploadDocument, listDocuments, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink } from "../../_wardsynq/documents.js";
 import { createReferral, actOnReferral, patientReferrals, referralInbox } from "../../_wardsynq/referral.js";
 import { assignNurse, setObservationFrequency, createNursingTask, actOnNursingTask, nursingPatient, nursingWard } from "../../_wardsynq/nursing.js";
 import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
-import { dispatchRead, dispatchOperation, dispatchBulk } from "../../_wardsynq/fhir-route.js";
+import { dispatchRead, dispatchOperation, dispatchBulk, negotiateVersion, isBulkPath, answerInVersion, contentTypeFor } from "../../_wardsynq/fhir-route.js";
 import { kickoffExport, cancelExport, listExports, exportConsumers } from "../../_wardsynq/fhir-bulk.js";
 import { registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listWebhooks, listWebhookDeliveries, webhookConsumers } from "../../_wardsynq/webhooks.js";
+import { createSubscription } from "../../_wardsynq/fhir-subscription.js";
 import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled } from "../../_wardsynq/smart-clients.js";
+import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
+import { submitBugReport, listBugReports, setBugReportStatus, removeBugReport } from "../../_wardsynq/bug-reports.js";
+import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
+import { abdmView, externalInvoiceHandlingRefusal } from "../../_wardsynq/abdm-hospital.js";
+import { abhaDeskStatus, abhaDesk, checkVerifiedAbha, linkVerifiedAbha } from "../../_wardsynq/abdm-desk.js";
+import { abdmShareView, abdmShareRegister } from "../../_wardsynq/abdm-share.js";
+import { abdmRecordsView, abdmLinkStay, abdmConsentRequest, abdmFetch } from "../../_wardsynq/abdm-chart.js";
+import { abdmRegistryCheck } from "../../_wardsynq/abdm-registry.js";
+import { linkStayCareContexts } from "../../_wardsynq/abdm-hip.js";
+import { projectHipRouting } from "../../_wardsynq/abdm-connect.js";
+import { CONNECTOR_TYPE } from "../../_wardsynq/connectors.js";
+import { level2WardRuleRefusal, wardAlertCover, wardTeamGroupOf, WARD_TEAM_ROLES } from "../../_wardsynq/alert-recipients.js";
+import { payersFromConnectors, mergePayers } from "../../_wardsynq/payer-connectors.js";
+import { checkEligibility, requestStatus, receiveNhcxCallback } from "../../_wardsynq/nhcx.js";
+import { createPaymentLink, listPaymentRequests, receivePaymentCallback } from "../../_wardsynq/payment-links.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
@@ -123,6 +153,15 @@ import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { patientFlow } from "../../_wardsynq/patient-flow.js";
+import { importCodeSet, listCodeSets, searchCodes } from "../../_wardsynq/code-sets.js";
+import { importGrowthTables, listGrowthTables } from "../../_wardsynq/growth-tables.js";
+import { setExpectedDischarge, expectedDischargeHistory, hospitalToday } from "../../_wardsynq/expected-discharge.js";
+import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
+import { recordDischargeMilestone, dischargeProgress } from "../../_wardsynq/discharge-milestones.js";
+import { recordBedArrival, markInitialAssessment, admissionTimes } from "../../_wardsynq/admission-times.js";
+import { createInboundTransfer, decideInboundTransfer, cancelInboundTransfer, listInboundTransfers } from "../../_wardsynq/transfer-centre.js";
+import { saveLeaflet, approveLeaflet, retireLeaflet, listLeaflets, attachLeaflet, detachLeaflet, listAttachments } from "../../_wardsynq/patient-education.js";
+import { sendStaffMessage, editStaffMessage, recallStaffMessage, markThreadRead, escalateStaffMessage, listStaffMessages, listMessagePeople } from "../../_wardsynq/staff-messaging.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
@@ -132,7 +171,8 @@ import { recordConsent, withdrawConsent, consentStatus } from "../../_wardsynq/c
 import { bookAppointment, setAppointmentState, requestFollowUp, listSchedule } from "../../_wardsynq/scheduling.js";
 import { setCarePlan, recordProgress, readCarePlan } from "../../_wardsynq/care-plan.js";
 import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-templates.js";
-import { encounterIdForTicket } from "../../_wardsynq/opd-identity.js";
+import { recordOfflineChoice } from "../../_wardsynq/offline-resolve.js";
+import { encounterIdForTicket, patientIdForMrn } from "../../_wardsynq/opd-identity.js";
 /* Aliased: `recordAssessment` is already the OPD assessment writer in this file, and a risk
  * assessment is a different thing entirely. Two names that read the same for two different
  * clinical acts is how the wrong one gets called. */
@@ -144,13 +184,19 @@ import { downtimePack } from "../../_wardsynq/downtime.js";
 import { buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport, rosterStaffing } from "../../_wardsynq/digital-twin.js";
 import * as GROUP from "../../_hospital_group_store.js";
 import { hospitalCounts } from "../../_wardsynq/hospital-group.js";
+import * as CLINICAL from "../../_wardsynq/clinical-settings.js";
+import { readGstSettings, validateGstSettings, changedGstKeys } from "../../_wardsynq/gst-settings.js";
+import * as SEED from "../../_wardsynq/seed-signoff.js";
+import * as SEEDSTORE from "../../_seed_signoff_store.js";
 import { predictMetric } from "../../_wardsynq/twin-predict.js";
 import { simulateScenario } from "../../_wardsynq/twin-simulate.js";
 import { askAboutHospital, reviewTwinInteraction } from "../../_wardsynq/twin-copilot.js";
 import { prepareOverdueWorkQueue } from "../../_wardsynq/twin-agent.js";
 import { qualityReport, qualitySafetyReport } from "../../_wardsynq/quality.js";
 import { DEFINITIONS as TREND_DEFINITIONS, trendCatalogue, trendSeries, trendEvents } from "../../_wardsynq/trends.js";
-import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
+import { collectSpecimen, specimenOutcome, collectionList, rejectionStats } from "../../_wardsynq/specimen.js";
+import { parseConnectorKey, authenticateConnector, connectorConfig, connectorResults, connectorOrders, listAnalysers, saveAnalyser, connectorKey, analyserInbox, releaseAnalyserResult, dismissAnalyserResult } from "../../_wardsynq/lab-analysers.js";
+import { qcOverview, saveQcMaterial, recordQcRun, recordCorrectiveAction } from "../../_wardsynq/lab-qc.js";
 import { adtForEncounter, oruForReport } from "../../_wardsynq/hl7v2.js";
 import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from "../../_wardsynq/admission-request.js";
 import { registryReport } from "../../_wardsynq/registry.js";
@@ -161,8 +207,14 @@ import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
-import { raisePurchaseOrder, receiveGoods, listPurchaseOrders } from "../../_wardsynq/purchasing.js";
+import { raisePurchaseOrder, receiveGoods, listPurchaseOrders, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview, validateReorderPolicy, readReorderPolicy, reorderSuggestions } from "../../_wardsynq/purchasing.js";
+import { saveDietOrder, stopDietOrder, dietOrderHistory, mealBoard, markMeal } from "../../_wardsynq/diet.js";
+import { saveInstrumentSet, startLoad, recordLoadResult, cssdStep, cssdBoard, caseSets } from "../../_wardsynq/cssd.js";
+import { housekeepingBoard, raiseHousekeepingTask, housekeepingStep, housekeepingReport } from "../../_wardsynq/housekeeping.js";
+import { saveVehicle, requestTrip, tripStep, transportBoard } from "../../_wardsynq/ambulance.js";
+import { receiveBody, updateMortuaryCase, releaseBody, mortuaryBoard } from "../../_wardsynq/mortuary.js";
 import { recordDeath, correctDeath, addRelatedPerson, removeRelatedPerson, listRelatedPeople } from "../../_wardsynq/patient-identity.js";
+import { recordImmunization, markImmunizationError, listImmunizations } from "../../_wardsynq/immunization.js";
 import { recordDetail } from "../../_wardsynq/record-detail.js";
 import { safetyInbox } from "../../_wardsynq/safety-inbox.js";
 
@@ -177,6 +229,11 @@ function idemFor(key, piece, index) {
 }
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
+import { REGISTER_SUBS, registerRoute, formFGate, formFFlag, mtpNameMask, mtpEpisodes } from "../../_wardsynq/register-routes.js";
+import { listEntries as listRegisterEntries, FREE_TREATMENT, typeOf as registerTypeOf, MAX_LIST as REGISTER_MAX } from "../../_wardsynq/registers.js";
+import { registerSettings, validateRegisterSettings, rmiStatus, NOTES as REGISTER_NOTES } from "../../_wardsynq/register-settings.js";
+import { legalView, validateStateConfig, stateConfigFor } from "../../_wardsynq/legal-requirements.js";
+import { controlledSet, isControlledDrug, regimeOf, quarantineRefusal, estimateRefusal } from "../../_wardsynq/controlled-drugs.js";
 import { imagingStudies } from "../../_wardsynq/imaging-viewer.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
 import { imagingWorklist } from "../../_wardsynq/dicom.js";
@@ -188,6 +245,10 @@ import { maikStatus } from "../../_wardsynq/maik-gateway.js";
 import { enrolOnPathway, pathwayProgress, overridePathwayStep, resolveSpecialty } from "../../_wardsynq/pathways.js";
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
+// S3 P0: critical results pushed to phones, behind org setting wardsynq.alerts.push.enabled (default off).
+import { notifyDepsFor, directoryFromEnv, smsSetup, staffReaders, commsPorts, alertAdmins, alertsEnabled, pushToIdentities } from "../../_wardsynq/alert-deps.js";
+import { backupHospital, failureAlert } from "../../_wardsynq/backup-schedule.js";
+import { alertDeliveryStatus } from "../../_wardsynq/push-alerts.js";
 import { KIND, logEvent } from "../../_wardsynq/observability.js";
 import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
 import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
@@ -195,17 +256,34 @@ import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
 import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList, raiseEstimate } from "../../_wardsynq/billing.js";
+import { rcmSettings, validateRcmSettings, claimChecks, preAuthEvent, claimEvidence, saveClaimEvidence, rcmWorklists } from "../../_wardsynq/claims-ops.js";
 import { requestRelease, authorizeRelease, denyRelease, cancelRelease, fulfillRelease, readRoi, roiRequestsForPatient } from "../../_wardsynq/roi.js";
-import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js";
+import { patientCopy, releaseToPatient, releaseDocumentToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
-import { securityReport, recordSecurityReview, recordRestoreTest } from "../../_wardsynq/security-review.js";
+import { securityReport, recordSecurityReview, recordRestoreTest, auditRowsForReview } from "../../_wardsynq/security-review.js";
 import { systemHealthReport } from "../../_wardsynq/system-health.js";
-import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
-import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
-import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
+import { acknowledgeAnchorBreak } from "../../_wardsynq/audit-chain.js";
+import { orgAuditChain, firestoreAnchorStore } from "../../_q_audit_chain.js";
+import { chargesForPatient, tariffTable } from "../../_wardsynq/charge-capture.js";
+import { catalogue as investigationCatalogue } from "../../_wardsynq/investigation-catalogue.js";
+import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient, postNoteRoute, setPartiesRoute } from "../../_wardsynq/invoice.js";
+import { setStayPayer } from "../../_wardsynq/stay-payer.js";
+import { generateIrnRoute, cancelIrnRoute, einvoiceStatus } from "../../_wardsynq/einvoice.js";
+import { listPackages, packageVersions, savePackage, setStayPackage, stayPackages, packagePack } from "../../_wardsynq/packages.js";
+import { recordMovement, stockLevels, reconcileCount, stockFefo, returnToSupplier } from "../../_wardsynq/stock.js";
+import { storesOverview, saveStoreItem, saveStoreLocation, storeMovement, raiseIndent, decideIndent, issueIndent, acknowledgeIndent, closeIndent, storeConsumption, purchaseFromIndent } from "../../_wardsynq/stores.js";
+import { assetsOverview, saveAsset, recordAssetEvent, saveSchedule, openJobCard, updateJobCard } from "../../_wardsynq/assets.js";
+import { bloodBankOverview, registerDonor, screenDonor, recordDonation, recordBloodTests, separateComponents, bloodUnitEvent, bloodUnitGate, poolUnits, registerSample, discardSample, recordDonorNotification } from "../../_wardsynq/blood-bank.js";
+import { bloodCentreView, validateBloodCentreSettings, retentionWithRecordYears } from "../../_wardsynq/blood-centre-rules.js";
+import { donorCriteriaFor, validateDonorCriteria } from "../../_wardsynq/donor-criteria.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess, listGrants } from "../../_wardsynq/patient-access.js";
 import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
+import { clockAttendance, correctAttendance, importDeviceAttendance, attendanceMonth } from "../../_wardsynq/hr-attendance.js";
+import { importLegacy } from "../../_wardsynq/legacy-import.js";
+import { saveCredential, runCredentialAlerts, acknowledgeAlert, listCredentials, saveCourse, saveSession, recordSessionAttendance, recordTraining, trainingOverview } from "../../_wardsynq/hr-records.js";
+import { staffPreference, runPatientMessaging, messageLog, retryMessage, settingsOf as commsSettingsOf } from "../../_wardsynq/patient-messaging.js";
+import { feedbackDashboard, updateRecovery } from "../../_wardsynq/patient-feedback.js";
 import { extract as analyticsExtract } from "../../_wardsynq/analytics-extract.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
@@ -310,6 +388,56 @@ function wsqSchedule(c) {
   return { marTimes: (c && c.marTimes) || null, offsetMinutes: Number.isFinite(c && c.utcOffsetMinutes) ? c.utcOffsetMinutes : undefined,
     timeZone: (c && c.timeZone) || undefined, graceMinutes: Number.isFinite(c && c.marGraceMinutes) ? c.marGraceMinutes : undefined };
 }
+/* Bilingual prints (owner decision 2026-09-15): whether this hospital offers a second language on the patient's
+ * prescription and discharge summary prints, and the clock their dates are written in. Display facts from org
+ * config only; English is always printed whole. India without a configured offset is IST, as elsewhere here. */
+/* ONE PRICE TABLE FOR THE WARD BILL (LT-30). Where the Price list exists (the clinic billing store is on), it is the
+ * ONLY price table: the retest of 2026-09-16 found "Specimen collection 60" billed while the Price list said "No
+ * prices set yet", because the demo seed had written fabricated prices into wardsynq.tariff, a configuration blob no
+ * screen shows. A price nobody can see on the Price list is not the hospital's price, so it prices nothing and the
+ * item is listed as "no price set". The configured tariff remains the price table only for a deployment with no
+ * Price list store at all. An unreadable price list is an error, never an empty one. */
+async function wsqTariff(env, orgId, wsqCfg) {
+  if (!BILL.billingEnabled(env)) return { table: tariffTable((wsqCfg && wsqCfg.tariff) || null, []), error: null };
+  try { return { table: tariffTable(null, await BILL.listTariff(env, orgId)), error: null }; }
+  catch { return { table: {}, error: "The price list could not be read, so prices cannot be checked." }; }
+}
+/* LT-15: what a ward can order, from the Price list, the hospital's order sets and the built-in common tests. A Price
+ * list that cannot be read leaves the rest of the list usable and says so; it never blocks an order. */
+async function wsqInvestigationCatalogue(env, orgId, wsqCfg) {
+  const sets = (wsqCfg && wsqCfg.orderSets) || [];
+  if (!BILL.billingEnabled(env)) return { entries: investigationCatalogue([], sets), error: null };
+  try { return { entries: investigationCatalogue(await BILL.listTariff(env, orgId), sets), error: null }; }
+  catch { return { entries: investigationCatalogue([], sets), error: "The price list could not be read, so its tests are not on this list right now." }; }
+}
+/* PURE. A report's period (LT-38): `from`/`to` as a date (YYYY-MM-DD, a whole day on the hospital's clock) or an ISO
+ * instant; both absent means the last 7 days up to now. Returns {from, to} as ISO instants, or {error}. */
+function reportRange(fromQ, toQ, wsqCfg, nowMs) {
+  const offsetMs = (Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330) * 60000;
+  const at = (v, endOfDay) => {
+    const s = String(v || "").trim();
+    if (!s) return null;
+    const t = /^\d{4}-\d{2}-\d{2}$/.test(s) ? Date.parse(s + "T00:00:00.000Z") - offsetMs + (endOfDay ? 86400000 - 1 : 0) : Date.parse(s);
+    return Number.isFinite(t) ? t : NaN;
+  };
+  const now = Number.isFinite(nowMs) ? nowMs : Date.now();
+  let from = at(fromQ, false), to = at(toQ, true);
+  if (Number.isNaN(from) || Number.isNaN(to)) return { error: "from and to must be dates (YYYY-MM-DD)." };
+  if (to === null) to = now;
+  if (from === null) from = to - 7 * 86400000;
+  if (from > to) return { error: "from is after to." };
+  return { from: new Date(from).toISOString(), to: new Date(to).toISOString() };
+}
+function wsqPrintSettings(org) {
+  const c = (org && org.wardsynq) || {};
+  return { languagesEnabled: !!(c.printLanguages && c.printLanguages.enabled === true), timeZone: (typeof c.timeZone === "string" && c.timeZone) || null,
+    utcOffsetMinutes: Number.isFinite(c.utcOffsetMinutes) ? c.utcOffsetMinutes : (org && org.region === "US" ? null : 330) };
+}
+/* The printed labels' settings: each label's size in mm, and the hospital's clock for the times printed on them. */
+function wsqLabelSettings(org) {
+  const p = wsqPrintSettings(org);
+  return { sizes: labelSizesOf(org && org.wardsynq && org.wardsynq.labelSizes), timeZone: p.timeZone, utcOffsetMinutes: p.utcOffsetMinutes };
+}
 function activeStandardProtocols() { return Object.keys(ONCO_PROTOCOLS).map(function (k) { return ONCO_PROTOCOLS[k]; }).filter(function (p) { return p && p.status === "ACTIVE"; }); }
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in", "https://wardsynq.com", "https://www.wardsynq.com"];
@@ -371,6 +499,8 @@ const CAP_SAY = {
   "lab.result": "release a result", "billing.view": "see billing", "billing.charge": "take payment",
   "staff.admin": "manage staff and roles", "analytics.view": "see reports",
   "him.roi": "release records to a third party", "incident.report": "file an incident report",
+  "incident.investigate": "investigate incidents", "dpdp.manage": "manage privacy notices, data requests and breaches",
+  "infection.control": "confirm infections and review surgical prophylaxis", "quality.audit": "keep quality audits, drills and registers",
 };
 function azRefusal(az) {
   const reason = (az && az.reason) || "forbidden";
@@ -386,6 +516,19 @@ function azRefusal(az) {
   }
   return out;
 }
+/* A registration the token rules refused (D7/D14): a department that is not this hospital's, no department
+ * where each department numbers separately, a department with no prefix, or contention. The desk gets the
+ * engine's own sentence, because each has a different fix, and no ticket and no number exist. `request` is
+ * bound where it is used. */
+const TOKEN_SAY = {
+  department_not_found: "That department is not an active department of this hospital.",
+  token_department_required: "Choose a department to give a token. Each department in this hospital numbers its own tokens.",
+  token_prefix_missing: "This department has no token prefix, so its numbers would collide with another department's. An administrator sets one under Admin Center, Hospital, OPD token numbers.",
+  token_contention: "Another desk registered at the same moment. Try again.",
+};
+function tokenRefusalFor(request) {
+  return (e) => json({ ok: false, error: e.message, message: TOKEN_SAY[e.message] || e.detail || "The patient could not be added to the queue.", ...(e.departmentName ? { department: e.departmentName } : {}) }, e.status, request);
+}
 function today() { try { return new Date().toISOString().slice(0, 10); } catch (e) { return ""; } }
 
 const staffEnabled = (env) => env && env.QUEUE_STAFF_ENABLED === "1";
@@ -398,6 +541,15 @@ function isOwnerEmail(env, email) { try { return !!(email && ownerEmails(env).in
 async function ghisUserId(env, token) {
   if (!token || !env.GHIS_KV) return "";
   try { const raw = await env.GHIS_KV.get("sess:" + token); if (!raw) return ""; return String(JSON.parse(raw).userId || ""); } catch (e) { return ""; }
+}
+/* Where a chart's actor id is looked up (functions/_wardsynq/staff-identity.js membersForIds): an account through its
+ * sign-in email, an Access sign-in by the hash identify() makes, and one member row read directly, all within orgId. */
+function staffDirectory(env, orgId) {
+  return {
+    accountEmail: (id) => ORG.accountEmail(env, id),
+    accessIdOf: async (email) => "cfa:" + (await sha256hex(String(email).toLowerCase())),
+    getMember: (identity) => ORG.getMembership(env, orgId, identity),
+  };
 }
 // The one identity entry point. AUTHORITY is never decided here — a session only proves WHO you are;
 // what you may do is org-membership (authorizeOrg) server-side. Global role is "admin" only for a
@@ -513,6 +665,142 @@ function opdOrgFor(env, hospitalId) {
  * a public endpoint cannot be used to run up storage calls. */
 let docProbeCache = null;
 const tickLogKey = (tenantId) => `wsq:tick:last:${tenantId}`;
+/* The scheduled backup's last outcome per hospital, for System health: outcome codes and this codebase's own
+ * sentences only, never a provider's response. The durable evidence is the BackupRun and RestoreTest records. */
+const backupLogKey = (tenantId) => `wsq:backup:last:${tenantId}`;
+/* One hospital's scheduled backup pass (backup-schedule.js), logged, and a failure pushed to its administrators
+ * at most once a day per failure code. A hospital with no destination is logged as not configured, not alerted:
+ * System health says so every time it is opened. */
+async function wsqBackup(env, org, mig) {
+  const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `backup:${mig.tenantId}`, limit: 1, windowMs: 1800000 });
+  if (!gate.allowed) return null;
+  const r = await backupHospital({ repository: wsqRecordDeps(env, mig.tenantId).repository, tenantId: mig.tenantId, env });
+  let prev = null;
+  if (env.MAIK_KV) { try { const v = await env.MAIK_KV.get(backupLogKey(mig.tenantId)); prev = v ? JSON.parse(v) : null; } catch { prev = null; } }
+  const failed = !r.ok && !r.notConfigured;
+  const entry = {
+    at: r.at, ok: !!r.ok, notConfigured: !!r.notConfigured, setup: r.setup || null, message: r.ok ? null : r.message || null,
+    backup: r.backup || null, pruned: r.pruned || 0, restoreTest: r.restoreTest ? r.restoreTest.outcome : null,
+    lastFailure: failed ? { at: r.at, step: r.step, error: r.error, message: r.message } : (prev && prev.lastFailure) || null,
+    alert: prev && prev.alert ? prev.alert : null,
+  };
+  if (failed && !(prev && prev.alert && prev.alert.error === r.error && String(prev.alert.at).slice(0, 10) === String(r.at).slice(0, 10))) {
+    try { entry.alert = { at: r.at, error: r.error, ...(await alertAdmins(env, org, failureAlert(org.name, r))) }; }
+    catch { entry.alert = { at: r.at, error: r.error, sent: 0, total: 0, reason: "ALERT_FAILED" }; }
+  }
+  if (env.MAIK_KV) await env.MAIK_KV.put(backupLogKey(mig.tenantId), JSON.stringify(entry), { expirationTtl: 90 * 86400 }).catch(() => {});
+  if (failed) console.error("wsq backup failed", mig.tenantId, r.step, r.error);
+  return r;
+}
+/* The one stock location the laboratory's own authority reaches (reagents and consumables). */
+const LAB_STOCK_LOCATION = "Laboratory";
+/* A RELEASED RESULT IS CHECKED AGAINST THE CRITICAL LIMITS, ALWAYS. openCriticalLoops was only
+ * reachable through /ward/flag-critical, which nothing called - so a potassium of 7 released
+ * through the laboratory screen opened no critical-result loop and alerted nobody. The loops are
+ * now opened straight after the write, against the report ON THE RECORD (not the request body) and
+ * with the site's own limits, so no client can release a result without it being checked. A failure
+ * to open them is reported on the release, never swallowed: a result that could not be checked must
+ * not read as a result that was checked and found normal. Shared by a typed release and an analyser's. */
+async function wsqReleaseCriticalCheck(request, env, deps, wOrg, mig, wsqCfg, reportId, idempotencyKey) {
+  try {
+    const crit = await openCriticalLoops(request, env, {
+      ...deps, reportId,
+      limits: (wsqCfg && wsqCfg.criticalLimits) || null,
+      notifyDeps: notifyDepsFor(env, wOrg, mig.tenantId, deps.recordDeps.repository),
+      idempotencyKey: idempotencyKey ? idempotencyKey + ":critical" : null,
+    });
+    return crit && crit.ok
+      ? { checked: true, opened: crit.opened != null ? crit.opened : (crit.loops || []).length, loops: crit.loops || [] }
+      : { checked: false, error: (crit && (crit.error || crit.detail)) || "critical_check_failed" };
+  } catch (e) {
+    return { checked: false, error: "critical_check_failed" };
+  }
+}
+/* ONE HOSPITAL'S BACKGROUND PASS, from either trigger: ordinary ward traffic, or the worker's cron through
+ * /ops/tick-all (S3 P0, so a quiet hospital at 03:00 still escalates). The same two-minute gate serves
+ * both, so the two triggers never double-run a hospital. Returns null when the gate said not yet. */
+/** Credential expiry alerts (hr-records.js) and patient reminders and survey invitations (patient-messaging.js). */
+async function engagementTick(env, org, mig, repository) {
+  const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `engage:${mig.tenantId}`, limit: 1, windowMs: 600000 });
+  if (!gate.allowed) return null;
+  const wsqCfg = (org && org.wardsynq) || {};
+  const alerts = await runCredentialAlerts({ repository, tenantId: mig.tenantId, wsqCfg });
+  let messages = { ok: true, skipped: "off" };
+  if (commsSettingsOf(wsqCfg.patientComms).enabled || (wsqCfg.feedback && wsqCfg.feedback.enabled === true)) {
+    messages = await runPatientMessaging({ repository, tenantId: mig.tenantId, orgId: org.id, orgName: org.name, commsCfg: wsqCfg.patientComms, feedbackCfg: wsqCfg.feedback,
+      off: wsqCfg.utcOffsetMinutes != null ? Number(wsqCfg.utcOffsetMinutes) || 0 : 330, ports: await commsPorts(env, org, repository, mig.tenantId) });
+  }
+  if (!alerts.ok || !messages.ok) console.error("wsq engagement tick", mig.tenantId, JSON.stringify({ alerts: alerts.error || null, messages: messages.error || null }));
+  return { alerts, messages };
+}
+async function wsqTick(env, org, mig) {
+  const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${mig.tenantId}`, limit: 1, windowMs: 120000 });
+  if (!gate.allowed) return null;
+  const wsqCfg = (org && org.wardsynq) || null;
+  const repository = wsqRecordDeps(env, mig.tenantId).repository;
+  /* P2.17: the chain head is anchored at most once an hour per hospital, beside the
+   * two-minute tick gate. Hourly, not per tick: anchors are compared one by one, so an
+   * anchor per tick would grow the log without adding evidence. The gate failing open only
+   * means an extra anchor attempt; anchorHead() itself skips a head it already holds. */
+  let anchorStores;
+  try {
+    const anchorGate = await rateHit({ kv: env && env.MAIK_KV }, { key: `audit-anchor:${mig.tenantId}`, limit: 1, windowMs: 3600000 });
+    anchorStores = anchorGate.allowed ? anchorStoresFor(env) : null;
+  } catch { anchorStores = null; }
+  const t = await runTick(repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: notifyDepsFor(env, org, mig.tenantId, repository), anchorStores: anchorStores || undefined, orgAuditChain: org && org.id ? orgAuditChain(env, org.id) : undefined, consumers: { ...exportConsumers({ repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }), ...webhookConsumers({ repository, tenantId: mig.tenantId, env, orgId: org.id }) } });
+  /* Gap wave 2026-09-16: credential expiry alerts and patient reminders ride the same tick, after the critical results, at most once per ten
+   * minutes per hospital. A failure here is logged by tenant id only and never stops the critical-result tick. */
+  try { await engagementTick(env, org, mig, repository); }
+  catch (e) { console.error("wsq engagement tick failed", mig.tenantId); }
+  /* P2.15: the last run is kept (outcome flags only, no error text) so System health can say
+   * whether escalation is actually running rather than assume it. P2.17: the anchor outcome
+   * rides along the same way. A run that did not attempt an anchor carries the previous
+   * run's anchor fields forward, so one failed hourly attempt stays visible until the next
+   * attempt replaces it instead of being cleared two minutes later by a run that skipped. */
+  if (env.MAIK_KV) {
+    let prevAnchor = null;
+    try { const prev = await env.MAIK_KV.get(tickLogKey(mig.tenantId)); prevAnchor = prev ? JSON.parse(prev) : null; } catch { prevAnchor = null; }
+    const entry = { at: t.at, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) };
+    if (t.anchor && t.anchor.status !== "skipped") {
+      entry.anchorFailed = !!t.anchor.error;
+      entry.anchorStatus = t.anchor.error ? (t.anchor.failedIn ? `failed in ${t.anchor.failedIn}` : "failed") : t.anchor.status;
+      entry.anchorAt = t.anchor.at || t.at;
+    } else if (prevAnchor && (prevAnchor.anchorFailed || prevAnchor.anchorStatus)) {
+      entry.anchorFailed = !!prevAnchor.anchorFailed;
+      entry.anchorStatus = prevAnchor.anchorStatus;
+      entry.anchorAt = prevAnchor.anchorAt;
+    }
+    await env.MAIK_KV.put(tickLogKey(mig.tenantId), JSON.stringify(entry), { expirationTtl: 30 * 86400 }).catch(() => {});
+  }
+  if ((t.criticals && t.criticals.error) || (t.outbox && t.outbox.error)) console.error("wsq tick", mig.tenantId, JSON.stringify({ criticals: t.criticals && t.criticals.error, outbox: t.outbox && t.outbox.error }));
+  if (t.anchor && t.anchor.error) console.error("wsq tick anchor failed", mig.tenantId);
+  return t;
+}
+/* S3 P0: a member's phones stop receiving alerts when their access is reset, their PIN or password
+ * changes, they are disabled or removed, or they sign out everywhere. Audited under the hospital. A
+ * failure is returned, never swallowed: an access change that left a phone still receiving alerts is
+ * not a success. */
+async function unbindMemberDevices(env, orgId, identity, actorId) {
+  const dir = directoryFromEnv(env);
+  if (!dir) return { ok: true, removed: 0, store: "none" };
+  try {
+    const r = await dir.unbind(orgId, identity);
+    if (r.removed) await ORG.auditLogin(env, orgId, actorId, "push:devices_unbound", String(identity) + " x" + r.removed);
+    return { ok: true, removed: r.removed };
+  } catch (e) {
+    return { ok: false, error: "push_unbind_failed" };
+  }
+}
+/* P2.17 ANCHOR STORE. The audit-chain head anchored someplace a database write cannot move: KV is a
+ * separate trust domain from D1 (different binding, different credentials). The domain logic only
+ * needs {get, put} on strings, so this adapter keeps Cloudflare out of audit-chain.js. Anchors are
+ * written with NO expiry: unlike the tick log, an anchor must still be there when it is compared.
+ * Null when KV is not bound: without a second trust domain there is nothing worth anchoring to. */
+const auditAnchorStore = (kv) => (!kv || typeof kv.get !== "function" || typeof kv.put !== "function") ? null
+  : { name: "KV", get: (key) => kv.get(key), put: (key, value) => kv.put(key, value) };
+/* G12: the second outside anchor, neither D1 nor KV (Firestore, behind the same {name, get, put} port).
+ * Both chains are anchored into, and compared against, every store here. */
+const anchorStoresFor = (env) => [auditAnchorStore(env && env.MAIK_KV), firestoreAnchorStore(env)].filter(Boolean);
 async function documentStorageProbe(env) {
   const store = documentStoreFromEnv(env);
   if (!store) return { state: "not_configured" };
@@ -616,6 +904,105 @@ export async function onRequest(context) {
         "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff",
       }, corsHeaders(request)) });
     }
+    /* A PAYMENT GATEWAY'S NOTICE (owner S2, payment-links.js). Before authentication on purpose: the
+     * gateway carries no staff session. Its signature over the raw body, checked with this hospital's
+     * sealed webhook secret, and the gateway's own API confirming the payment are the authorisation; an
+     * unsigned or mis-signed notice writes nothing. The path names the hospital, never a patient. */
+    if (method === "POST" && seg === "payment-callback" && parts[1]) {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 503, request);
+      const payOrg = await ORG.getOrg(env, parts[1]);
+      const payMig = await wsqForcedMigration(env, payOrg);
+      if (!payMig || payMig.error) return json({ ok: false, error: "not_found" }, 404, request);
+      const r = await receivePaymentCallback(request, env, { migration: payMig, recordDeps: wsqRecordDeps(env, payMig.tenantId), fetchImpl: typeof env.WSQ_PAY_FETCH === "function" ? env.WSQ_PAY_FETCH : undefined });
+      return json(r.body, r.status, request);
+    }
+    /* AN NHCX PAYER'S ANSWER (nhcx.js): /nhcx-callback/<orgId>/<resource>/<action>, the address a hospital registers
+     * as its endpoint URL in the participant registry. Before authentication on purpose, like the payment notice: the
+     * gateway's RS256 bearer token, decryption with this hospital's own key, the recipient code and a correlation id
+     * this hospital sent are the authorisation. The path names the hospital and the protocol action, never a patient. */
+    if (method === "POST" && seg === "nhcx-callback" && parts[1] && parts[2] && parts[3] && !parts[4]) {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 503, request);
+      const hcxMig = await wsqForcedMigration(env, await ORG.getOrg(env, parts[1]));
+      if (!hcxMig || hcxMig.error) return json({ ok: false, error: "not_found" }, 404, request);
+      const r = await receiveNhcxCallback(request, env, { migration: hcxMig, recordDeps: wsqRecordDeps(env, hcxMig.tenantId), action: `${parts[2]}/${parts[3]}` });
+      return json(r.body, r.status, request);
+    }
+    /* S3 P0: THE ESCALATION TIMER THAT DOES NOT NEED ANYBODY ON THE WARD. The stewardmd-api worker's
+     * cron POSTs here every five minutes with the admin token; every WardSynQ hospital gets the same
+     * tick ordinary ward traffic gives it, behind the same two-minute gate. WSQ_TICK_OFF stops both. */
+    if (method === "POST" && seg === "ops" && sub === "tick-all") {
+      if (!(await ownerOK(request, env))) {
+        const who = await resolveActor(request, env);
+        return json({ ok: false, error: who ? "forbidden" : "auth_required" }, who ? 403 : 401, request);
+      }
+      if (env.WSQ_TICK_OFF === "1") return json({ ok: true, skipped: "WSQ_TICK_OFF", tenants: 0 }, 200, request);
+      /* ponytail: one sequential pass over at most 300 hospitals in one request. Fan out per hospital
+       * (a queue, or one request each) when a deployment has enough hospitals to near the time limit. */
+      const orgs = (await ORG.listAllOrgs(env, 300)).filter((o) => o && o.mode === "wardsynq" && o.connectTenantId);
+      const results = [];
+      for (const o of orgs) {
+        try {
+          const mig = await wsqForcedMigration(env, o);
+          if (!mig || mig.error) { results.push({ orgId: o.id, skipped: (mig && mig.error) || "not_configured" }); continue; }
+          const t = await wsqTick(env, o, mig);
+          results.push(t ? { orgId: o.id, ran: true, escalated: (t.criticals && t.criticals.escalated) || 0, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) } : { orgId: o.id, ran: false, skipped: "gate" });
+        } catch (e) {
+          console.error("wsq tick-all failed", o.id, String((e && e.message) || e).slice(0, 200));
+          results.push({ orgId: o.id, ran: false, failed: true });
+        }
+      }
+      return json({ ok: results.every((x) => !x.failed && !x.criticalsFailed), tenants: orgs.length, results }, 200, request);
+    }
+    /* THE SCHEDULED BACKUP (backup-schedule.js). The stewardmd-api worker's hourly cron POSTs here with the admin
+     * token; each WardSynQ hospital with a backup destination gets a daily backup, retention pruning and a weekly
+     * restore dry run. Hourly so a failed or unfinished backup is retried the same day; the plan inside decides
+     * whether one is due. */
+    if (method === "POST" && seg === "ops" && sub === "backup-all") {
+      if (!(await ownerOK(request, env))) {
+        const who = await resolveActor(request, env);
+        return json({ ok: false, error: who ? "forbidden" : "auth_required" }, who ? 403 : 401, request);
+      }
+      /* ponytail: sequential over at most 300 hospitals in one request, like tick-all. Fan out per hospital when
+       * backups of large hospitals near the request time limit. */
+      const orgs = (await ORG.listAllOrgs(env, 300)).filter((o) => o && o.mode === "wardsynq" && o.connectTenantId);
+      const results = [];
+      for (const o of orgs) {
+        try {
+          const mig = await wsqForcedMigration(env, o);
+          if (!mig || mig.error) { results.push({ orgId: o.id, skipped: (mig && mig.error) || "not_configured" }); continue; }
+          const r = await wsqBackup(env, o, mig);
+          results.push(r ? { orgId: o.id, ok: !!r.ok, notConfigured: !!r.notConfigured, step: r.ok ? null : r.step || null, error: r.ok ? null : r.error || null, backup: r.backup || null, pruned: r.pruned || 0, restoreTest: r.restoreTest ? r.restoreTest.outcome : null } : { orgId: o.id, skipped: "gate" });
+        } catch (e) {
+          console.error("wsq backup-all failed", o.id, String((e && e.message) || e).slice(0, 200));
+          results.push({ orgId: o.id, ok: false, failed: true });
+        }
+      }
+      return json({ ok: results.every((x) => x.skipped || x.ok || x.notConfigured), tenants: orgs.length, results }, 200, request);
+    }
+    /* THE LABORATORY ANALYSER CONNECTOR (lab-analysers.js). Before staff authentication on purpose: it is a
+     * program on the hospital's own network, not a person, and carries no staff session. Its authority is the
+     * hospital's connector key (issued once on Admin, stored sealed, compared in constant time). A key that does
+     * not open the named hospital's record is a 401 with no detail. It can file a received result or a QC run and
+     * ask what was ordered on a specimen; it can never put anything on a chart. */
+    if (seg === "lab-connector") {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 503, request);
+      const lcKey = parseConnectorKey((request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, ""));
+      if (!lcKey) return json({ ok: false, error: "auth" }, 401, request);
+      const lcOrg = await ORG.getOrg(env, lcKey.orgId);
+      const lcMig = lcOrg ? await wsqForcedMigration(env, lcOrg) : null;
+      if (!lcMig || lcMig.error) return json({ ok: false, error: "auth" }, 401, request);
+      const lc = { repo: wsqRecordDeps(env, lcMig.tenantId).repository, tenantId: lcMig.tenantId };
+      const lcAuth = await authenticateConnector(env, lc.repo, lc.tenantId, lcKey);
+      if (!lcAuth.ok) return json({ ok: false, error: lcAuth.error }, lcAuth.status, request);
+      const lcRl = await rateHit({ binding: env && env.WSQ_RL, kv: env && env.MAIK_KV }, { key: `wsqlab:${lcOrg.id}`, limit: 1200, windowMs: 60000 });
+      if (!lcRl.allowed) return json({ ok: false, error: "rate_limited", retryAfterSeconds: lcRl.retryAfterSeconds }, 429, request, { "Retry-After": String(lcRl.retryAfterSeconds) });
+      let lcOut = null;
+      if (sub === "analyser-config" && method === "GET") lcOut = await connectorConfig(lc);
+      else if (sub === "analyser-results" && method === "POST") lcOut = await connectorResults(lc, await readBody(request));
+      else if (sub === "analyser-orders" && method === "POST") lcOut = await connectorOrders(lc, await readBody(request));
+      if (!lcOut) return json({ ok: false, error: "not_found" }, 404, request);
+      return json(lcOut.body, lcOut.status, request, { "Cache-Control": "no-store" });
+    }
     // ---- PATIENT: token only, no auth ----
     if (method === "GET" && seg === "portal") {   // PHI-free live position
       if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
@@ -650,6 +1037,10 @@ export async function onRequest(context) {
         return new Response(obj.body, { status: 200, headers: Object.assign({ "Content-Type": ctype, "Cache-Control": "public, max-age=300" }, corsHeaders(request)) });
       } catch (e) { return json({ ok: false, error: "no_logo" }, 404, request); }
     }
+
+    // The immunisation picker's options (NDHM IG value set, functions/_vaccines.js). Static, so cacheable; no PHI
+    // and no session. On the branch this sat inside the POST block, so the client's GET never reached it.
+    if (method === "GET" && seg === "vaccines") return json({ ok: true, catalogue: vaccineCatalogue() }, 200, request, { "Cache-Control": "public, max-age=86400" });
 
     // ---- authenticated: doctor (Firebase) OR staff (GHIS token, when QUEUE_STAFF_ENABLED) ----
     const actor = await resolveActor(request, env);
@@ -704,6 +1095,8 @@ export async function onRequest(context) {
         "my-groups": ACCOUNT, create: ACCOUNT, invite: GROUP_ADMIN, policy: GROUP_ADMIN, overview: GROUP_ADMIN,
         "admin-add": GROUP_ADMIN, "admin-remove": GROUP_ADMIN,
         remove: EITHER, accept: OWNER, decline: OWNER, memberships: CAPS.STAFF_ADMIN, adopt: CAPS.STAFF_ADMIN,
+        // D4 B: the hospital's own admin publishes its counts; the group admin sets when a snapshot reads as stale.
+        "publish-counts": CAPS.STAFF_ADMIN, "stale-after": GROUP_ADMIN,
       };
       const need = capFor[sub]; if (!need) return json({ ok: false, error: "not_found" }, 404, request);
       const GET_SUBS = new Set(["my-groups", "overview", "memberships"]);
@@ -745,7 +1138,7 @@ export async function onRequest(context) {
             const o = await ORG.getOrg(env, l.orgId);
             members.push({ orgId: l.orgId, name: o ? o.name : null });
           }
-          out.push({ id: gr.id, name: gr.name, policy: gr.policy, policyVersion: gr.policyVersion, members,
+          out.push({ id: gr.id, name: gr.name, policy: gr.policy, policyVersion: gr.policyVersion, staleAfterMinutes: gr.staleAfterMinutes, members,
             invited: links.filter((x) => x.state === "invited").map((x) => ({ orgId: x.orgId, invitedAt: x.invitedAt })),
             adminUids: gr.adminUids });
         }
@@ -787,27 +1180,44 @@ export async function onRequest(context) {
       if (sub === "policy") {
         const p = body && body.policy;
         if (p != null && !GROUP.policySubset(p)) return refuse(422, "no_recognised_settings", "None of those settings can be recommended by a group. Allowed: " + GROUP.POLICY_KEYS.join(", ") + ".");
+        // A group recommendation is copied into hospitals on adoption, so it may not carry an unbuilt level-2 ward rule either.
+        const groupWardRule = level2WardRuleRefusal(p && p.criticalEscalation);
+        if (groupWardRule) return refuse(422, "level2_ward_rule_not_built", groupWardRule);
         return json({ ok: true, group: await GROUP.setPolicy(env, g, p, actor.id) }, 200, request);
       }
       if (sub === "overview") {
+        /* D4 B: the group reads each member's PUBLISHED snapshot, never the member's record. A hospital that
+         * never published is "not_published" with no counts (never zeros); an old one is marked stale after
+         * the group's own age setting. The hospital's audit trail still records the group's read first. */
         const links = (await GROUP.linksForGroup(env, g.id)).filter((l) => l.state === "member");
+        const at = Date.now();
         const hospitals = await Promise.all(links.map(async (l) => {
           const o = await ORG.getOrg(env, l.orgId).catch(() => null);
           const row = { orgId: l.orgId, name: o ? o.name : null, code: o ? o.code : null };
           if (!o) return { ...row, status: "unreadable", why: "hospital_not_found", counts: null };
-          // The hospital's own audit trail records the read BEFORE anything is counted: no audit row, no read.
           try { await GROUP.auditSummaryRead(env, o.id, g.id, actor.id); }
           catch { return { ...row, status: "unreadable", why: "audit_failed", counts: null }; }
-          const mig = await wsqForcedMigration(env, o).catch(() => null);
-          const tenantId = mig && !mig.error ? mig.tenantId : null;
-          return { ...row, ...(await hospitalCounts({
-            tenantId, repository: tenantId ? wsqRecordDeps(env, tenantId).repository : null,
-            listBeds: () => ORG.listBeds(env, o.id),
-            staffing: () => rosterStaffing(env, o.id, o.wardsynq, ORG.listMembers, Date.now()),
-          })) };
+          let snap;
+          try { snap = await GROUP.getSnapshot(env, o.id); }
+          catch { return { ...row, status: "unreadable", why: "snapshot_unreadable", counts: null }; }
+          return { ...row, ...GROUP.snapshotView(snap, g.staleAfterMinutes, at) };
         }));
-        return json({ ok: true, group: { id: g.id, name: g.name }, generatedAt: new Date().toISOString(), hospitals }, 200, request);
+        return json({ ok: true, group: { id: g.id, name: g.name, staleAfterMinutes: g.staleAfterMinutes }, generatedAt: new Date(at).toISOString(), hospitals }, 200, request);
       }
+      if (sub === "publish-counts") {
+        // The hospital's own counts, read in its own tenant exactly as the overview used to, then published.
+        const o = await ORG.getOrg(env, arg("orgId"));
+        if (!o) return refuse(404, "org_not_found", "No hospital with that id.");
+        const mig = await wsqForcedMigration(env, o).catch(() => null);
+        const tenantId = mig && !mig.error ? mig.tenantId : null;
+        const counts = await hospitalCounts({
+          tenantId, repository: tenantId ? wsqRecordDeps(env, tenantId).repository : null,
+          listBeds: () => ORG.listBeds(env, o.id),
+          staffing: () => rosterStaffing(env, o.id, o.wardsynq, ORG.listMembers, Date.now()),
+        });
+        return done(await GROUP.publishSnapshot(env, o.id, counts, actor.id));
+      }
+      if (sub === "stale-after") return done(await GROUP.setStaleAfter(env, g, body.minutes, actor.id));
       if (sub === "memberships") {
         const links = (await GROUP.linksForOrg(env, arg("orgId"))).filter((l) => l.state === "invited" || l.state === "member");
         const rows = [];
@@ -816,7 +1226,10 @@ export async function onRequest(context) {
           rows.push({ groupId: l.groupId, name: gr ? gr.name : null, state: l.state, invitedAt: l.invitedAt,
             ...(l.state === "member" && gr ? { policy: gr.policy, policyVersion: gr.policyVersion } : {}) });
         }
-        return json({ ok: true, groups: rows }, 200, request);
+        // D4 B: what this hospital last published (null = never), so its admin sees what groups are reading.
+        let snapshot;
+        try { snapshot = await GROUP.getSnapshot(env, arg("orgId")); } catch { snapshot = false; }
+        return json({ ok: true, groups: rows, snapshot }, 200, request);
       }
       if (sub === "adopt") {
         const { link: l } = await GROUP.getLink(env, arg("groupId"), arg("orgId"));
@@ -857,11 +1270,14 @@ export async function onRequest(context) {
       // TASK 4.13: the subs each new narrow capability is an ALTERNATIVE authority for - see the
       // ROI_SUBS/TRANSFUSION_SUBS fallback checks below, right after wAz is first computed.
       const ROI_SUBS = new Set(["roi-request", "roi-authorize", "roi-deny", "roi-cancel", "roi-fulfill", "roi", "roi-requests"]);
+      /* Who records which discharge step (discharge-milestones.js). A step not listed takes the route's own entry. */
+      const DISCHARGE_STEP_CAPS = Object.freeze({ advised: CAPS.EMR_TREAT, "pharmacy-cleared": CAPS.ORDER_VERIFY, "bill-ready": CAPS.BILLING_CHARGE,
+        "tpa-final-requested": CAPS.BILLING_CHARGE, "tpa-final-received": CAPS.BILLING_CHARGE, left: CAPS.QUEUE_ADD });
       const TRANSFUSION_SUBS = new Set(["transfusion-request", "transfusion-crossmatch", "transfusion-issue", "transfusion-bedside-check", "transfusion-start", "transfusion-observe", "transfusion-reaction", "transfusion-complete"]);
       /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
        * deliberate, and because they are the one shape that turns an authenticated account into a
        * bulk exfiltration tool in a loop. */
-      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health", "security-report", "system-health", "fhir-export"]);
+      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health", "security-report", "system-health", "fhir-export", "nabh-indicators", "hmis-monthly", "report-run", "report-csv"]);
       /* Emergency access is bounded but never scarce: the limit is here to make scripted break-glass
        * abuse visible and finite, and it sits far above the handful of declarations a real shift
        * produces. Refusing a genuine emergency to enforce a quota would be the worse failure. */
@@ -909,8 +1325,46 @@ export async function onRequest(context) {
          * them is emr.view: a nurse looking for somebody to ring must not need prescribing rights. */
         "related-person": CAPS.QUEUE_ADD, "related-person-remove": CAPS.QUEUE_ADD,
         "related-people": CAPS.EMR_VIEW,
+        /* Giving a vaccine and charting it is ward nursing work, the same bar as a vital sign; withdrawing a
+         * wrong entry sits at the same bar and needs a reason. Reading the list is emr.view. */
+        immunization: CAPS.EMR_VITALS, "immunization-error": CAPS.EMR_VITALS, immunizations: CAPS.EMR_VIEW,
         "purchase-orders": CAPS.ORDER_DISPENSE, "purchase-order": CAPS.ORDER_DISPENSE,
         "goods-receive": CAPS.ORDER_DISPENSE,
+        /* Supply chain depth (R2-4): returning stock to a supplier, rate contracts and reorder drafts are the same
+         * purchasing authority as raising an order; the store keeper reaches them through the stores fallback below. */
+        "supply-chain": CAPS.ORDER_DISPENSE, "supplier-return": CAPS.ORDER_DISPENSE, "rate-contract": CAPS.ORDER_DISPENSE, "reorder-suggestions": CAPS.ORDER_DISPENSE,
+        /* General stores (stores.js). The overview is every stores role's own screen; each write sits on the
+         * authority of the person who does it: the ward raises and acknowledges, the in-charge decides (and the
+         * route narrows that to the departments in the membership's scope), the store keeper runs the store. */
+        stores: CAPS.DEPT_REQUEST, indent: CAPS.DEPT_REQUEST, "indent-acknowledge": CAPS.DEPT_REQUEST,
+        "indent-decide": CAPS.INDENT_APPROVE,
+        "store-item": CAPS.STORES_MANAGE, "store-location": CAPS.STORES_MANAGE, "store-move": CAPS.STORES_MANAGE,
+        "indent-issue": CAPS.STORES_MANAGE, "indent-close": CAPS.STORES_MANAGE, "store-purchase-order": CAPS.STORES_MANAGE,
+        "store-consumption": CAPS.STORES_MANAGE,
+        /* Biomedical assets (assets.js). Anyone on the floor may see the register and report a fault; the register,
+         * schedules and job cards are the engineer's. */
+        assets: CAPS.DEPT_REQUEST, "equipment-complaint": CAPS.DEPT_REQUEST,
+        asset: CAPS.ASSET_MANAGE, "asset-event": CAPS.ASSET_MANAGE, "maintenance-schedule": CAPS.ASSET_MANAGE,
+        "job-card": CAPS.ASSET_MANAGE, "job-card-update": CAPS.ASSET_MANAGE,
+        /* The blood bank's registers (blood-bank.js): the blood bank's own authority, which admin also holds. */
+        "blood-bank": CAPS.TRANSFUSION_ISSUE, "blood-donor": CAPS.TRANSFUSION_ISSUE, "donor-screening": CAPS.TRANSFUSION_ISSUE,
+        "blood-donation": CAPS.TRANSFUSION_ISSUE, "blood-test-result": CAPS.TRANSFUSION_ISSUE, "blood-components": CAPS.TRANSFUSION_ISSUE,
+        "blood-unit-event": CAPS.TRANSFUSION_ISSUE, "blood-pool": CAPS.TRANSFUSION_ISSUE, "blood-sample": CAPS.TRANSFUSION_ISSUE,
+        "blood-sample-discard": CAPS.TRANSFUSION_ISSUE, "donor-notification": CAPS.TRANSFUSION_ISSUE,
+        /* Hospital support services (2026-09-16). A diet order is a clinical order, emr.treat, with diet.order
+         * as the dietitian's alternative (SUPPORT_ALT below); reading one is reading the chart. The kitchen's
+         * board and marks are diet.kitchen. CSSD, housekeeping, transport and the mortuary each sit on their
+         * own capability; a theatre case's sets are read with the chart. Inspecting a clean is decided below. */
+        "diet-order": CAPS.EMR_TREAT, "diet-order-stop": CAPS.EMR_TREAT, "diet-order-history": CAPS.EMR_VIEW,
+        "meal-board": CAPS.DIET_KITCHEN, "meal-mark": CAPS.DIET_KITCHEN,
+        "cssd-set": CAPS.CSSD_PROCESS, "cssd-load": CAPS.CSSD_PROCESS, "cssd-load-result": CAPS.CSSD_PROCESS,
+        "cssd-step": CAPS.CSSD_PROCESS, "cssd-board": CAPS.CSSD_PROCESS, "cssd-case-sets": CAPS.EMR_VIEW,
+        "housekeeping-board": CAPS.HOUSEKEEPING_TASK, "housekeeping-task": CAPS.HOUSEKEEPING_TASK,
+        "housekeeping-step": CAPS.HOUSEKEEPING_TASK, "housekeeping-report": CAPS.HOUSEKEEPING_TASK,
+        "ambulance-vehicle": CAPS.TRANSPORT_DISPATCH, "ambulance-trip": CAPS.TRANSPORT_DISPATCH,
+        "ambulance-trip-step": CAPS.TRANSPORT_DISPATCH, "transport-board": CAPS.TRANSPORT_DISPATCH,
+        "mortuary-receive": CAPS.MORTUARY_MANAGE, "mortuary-update": CAPS.MORTUARY_MANAGE,
+        "mortuary-release": CAPS.MORTUARY_MANAGE, "mortuary-board": CAPS.MORTUARY_MANAGE,
         "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
         "approval-decide": CAPS.EMR_TREAT,
         "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, "nurse-worklist": CAPS.EMR_VIEW, mar: CAPS.MED_ADMINISTER,
@@ -926,8 +1380,46 @@ export async function onRequest(context) {
          * authority to act. ACKNOWLEDGING is emr.treat: it is a clinical decision recorded against a
          * named clinician, and the store enforces the write scope independently. */
         criticals: CAPS.EMR_VIEW, acknowledge: CAPS.EMR_TREAT, "flag-critical": CAPS.EMR_TREAT,
+        // S3 P0: whether critical results reach phones, the ladder in force, and which loops told nobody. Ids only.
+        "alert-status": CAPS.STAFF_ADMIN,
+        // Who the level-2 ward rule would tell NOW, per ward, as counts per role (no names): the ward list's own bar.
+        "alert-cover": CAPS.QUEUE_VIEW,
         // Moving a patient between beds is the same administrative act as admitting them to one.
         transfer: CAPS.QUEUE_ADD, beds: CAPS.QUEUE_VIEW,
+        /* The expected discharge date is the treating team's plan: emr.treat to set or revise, emr.view to read.
+         * Asking for a transfer is a clinical decision (emr.treat); answering it, assigning the bed, moving the
+         * patient and cancelling are the bed-management acts /ward/transfer is already gated on (queue.add). */
+        "expected-discharge": CAPS.EMR_TREAT, "expected-discharge-history": CAPS.EMR_VIEW,
+        /* NABH KPI 1 times (admission-times.js): the receiving nurse records when the patient reached the bed (emr.vitals);
+         * a doctor marks the signed note that is the initial assessment (emr.treat); anyone who reads the chart sees both. */
+        "bed-arrival": CAPS.EMR_VITALS, "initial-assessment": CAPS.EMR_TREAT, "admission-times": CAPS.EMR_VIEW,
+        /* Hospital-loaded code sets (code-sets.js): loading a licensed release is hospital administration
+         * (staff.admin); seeing what is loaded and searching it is anyone who reads the chart (emr.view). */
+        "code-set-import": CAPS.STAFF_ADMIN, "code-sets": CAPS.EMR_VIEW, "code-search": CAPS.EMR_VIEW,
+        /* A hospital's own licensed growth tables (growth-tables.js): loading or withdrawing them is hospital
+         * administration; which reference the chart uses is readable by anyone who can see the chart. */
+        "growth-table-import": CAPS.STAFF_ADMIN, "growth-tables": CAPS.EMR_VIEW,
+        "transfer-request": CAPS.EMR_TREAT, "transfer-respond": CAPS.QUEUE_ADD, "transfer-assign-bed": CAPS.QUEUE_ADD,
+        "transfer-execute": CAPS.QUEUE_ADD, "transfer-cancel": CAPS.QUEUE_ADD, "transfer-requests": CAPS.EMR_VIEW,
+        /* Discharge milestones (discharge-milestones.js): each step is its own holder's act, chosen from the body below by
+         * DISCHARGE_STEP_CAPS; this entry is the strictest, for a step that names none. The board is readable by every
+         * desk that records a step (queue.view), and the record grant still decides what each role sees. */
+        "discharge-milestone": CAPS.EMR_TREAT, "discharge-progress": CAPS.QUEUE_VIEW,
+        /* The transfer centre (transfer-centre.js): taking an outside hospital's call and recording its withdrawal is the
+         * admission desk's act (queue.add); accepting or declining a patient is a consultant's (emr.treat); reading the
+         * calls, which carry a clinical summary, is a chart read (emr.view). */
+        "transfer-centre-request": CAPS.QUEUE_ADD, "transfer-centre-cancel": CAPS.QUEUE_ADD, "transfer-centre-decide": CAPS.EMR_TREAT, "transfer-centre": CAPS.EMR_VIEW,
+        /* Staff messaging (staff-messaging.js): whoever may read the chart may talk to colleagues about it. Who may see a
+         * patient thread is decided again inside, by reading the patient as the caller; only the author edits or recalls. */
+        "staff-messages": CAPS.EMR_VIEW, "staff-message-send": CAPS.EMR_VIEW, "staff-message-edit": CAPS.EMR_VIEW,
+        "staff-message-recall": CAPS.EMR_VIEW, "staff-message-read": CAPS.EMR_VIEW, "staff-message-escalate": CAPS.EMR_VIEW,
+        "staff-message-people": CAPS.EMR_VIEW,
+        /* Patient education (patient-education.js): the library is read by whoever reads the chart; writing, approving and
+         * retiring a leaflet and giving one to a patient are a treating clinician's acts. The second-person rule on approval
+         * and the approved-only rule on giving are decided inside. */
+        "education-leaflets": CAPS.EMR_VIEW, "education-attachments": CAPS.EMR_VIEW,
+        "education-leaflet-save": CAPS.EMR_TREAT, "education-leaflet-approve": CAPS.EMR_TREAT, "education-leaflet-retire": CAPS.EMR_TREAT,
+        "education-attach": CAPS.EMR_TREAT, "education-detach": CAPS.EMR_TREAT,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
          * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
          * authority as vitals. Disposition closes the visit - the SAME capability discharge already
@@ -964,8 +1456,12 @@ export async function onRequest(context) {
         // Completed hospital forms: nurses document them too (FormResponse is in the nurse write scope).
         "form-responses": CAPS.EMR_VIEW, "form-submit": CAPS.EMR_VITALS,
         "document-upload": CAPS.EMR_TREAT, "document-withdraw": CAPS.EMR_TREAT, "document-purge": CAPS.STAFF_ADMIN,
+        // Releasing a document version to the patient portal is the same act as handing over the patient's copy.
+        "document-release": CAPS.EMR_TREAT,
         "tag-assign": CAPS.EMR_VITALS, "tag-verify": CAPS.EMR_VITALS, "tag-replace": CAPS.EMR_VITALS,
         "tag-deactivate": CAPS.EMR_VITALS, "tag-lost": CAPS.EMR_VITALS, "tag-log": CAPS.EMR_VITALS,
+        // What a printed wristband, tube label or ID slip says about the patient. A read; printing writes nothing.
+        "label-data": CAPS.EMR_VIEW,
         "device-ingest": CAPS.EMR_VITALS, "device-status": CAPS.EMR_VIEW, "device-list": CAPS.EMR_VIEW,
         /* The WHO checklist gate (Task 2.3). Every write here is "a clinical commitment" in the same
          * sense wardsynq-emergency.js's own resus bundle already is - emr.treat, unrestricted.
@@ -976,8 +1472,18 @@ export async function onRequest(context) {
         "surgery-signout": CAPS.EMR_TREAT, "surgery-abandon": CAPS.EMR_TREAT, "surgery-note": CAPS.EMR_TREAT,
         "surgery-disposition": CAPS.EMR_TREAT, "surgery-get": CAPS.EMR_VIEW, "surgery-list": CAPS.EMR_VIEW,
         "surgery-board": CAPS.EMR_VIEW,
+        /* Theatre times, rescheduling and the unplanned-return flag are written on the case, by the team that writes the
+         * case (P3, 2026-09-17). Theatre sessions are the theatre's diary, booked on the same authority as the theatre
+         * itself (book-resource, below); utilisation reads that diary. */
+        "surgery-reschedule": CAPS.EMR_TREAT, "surgery-times": CAPS.EMR_TREAT, "surgery-return": CAPS.EMR_TREAT,
+        "theatre-session": CAPS.QUEUE_ADD, "theatre-session-release": CAPS.QUEUE_ADD, "theatre-utilisation": CAPS.QUEUE_VIEW,
+        /* The diagnostics counter checks a patient in the way the OPD desk does; the waiting-time list reads the same
+         * diary and visit records the desk already reads. */
+        "diagnostic-arrival": CAPS.QUEUE_ADD, "diagnostic-start": CAPS.QUEUE_ADD, "access-times": CAPS.QUEUE_VIEW,
         "anesthesia-start": CAPS.EMR_TREAT, "anesthesia-event": CAPS.EMR_TREAT, "anesthesia-end": CAPS.EMR_TREAT,
         "anesthesia-get": CAPS.EMR_VIEW, implant: CAPS.EMR_TREAT, "implant-list": CAPS.EMR_VIEW,
+        // The pre-anaesthetic checkup is the anaesthetist's fitness decision: emr.treat to record, emr.view to read.
+        pac: CAPS.EMR_TREAT, "pac-get": CAPS.EMR_VIEW,
         /* Maternity (Task 2.4). Antenatal history, delivery and newborn linkage are clinical
          * commitments the same way a resus bundle or a surgical checklist step is - emr.treat. A
          * partogram observation is the midwife's own bedside charting - emr.vitals, the same
@@ -987,6 +1493,9 @@ export async function onRequest(context) {
         labour: CAPS.EMR_VITALS, "blood-loss": CAPS.EMR_VITALS, "blood-loss-list": CAPS.EMR_VIEW,
         delivery: CAPS.EMR_TREAT, "delivery-get": CAPS.EMR_VIEW,
         newborn: CAPS.EMR_TREAT, "family-links": CAPS.EMR_VIEW,
+        /* APGAR at 1, 5 and 10 minutes: the delivery staff's own bedside scoring - emr.vitals (nurse, midwife,
+         * resident, doctor), the same authority as blood loss. A correction is the same write with a reason. */
+        apgar: CAPS.EMR_VITALS, "apgar-get": CAPS.EMR_VIEW,
         /* Pediatrics/NICU (Task 2.5). weight-rate/dose-ceiling/age-band are read-only calculators -
          * emr.view, the same authority as reading the chart they help interpret; they persist
          * nothing. A neonatal respiratory/device-settings reading is the same bedside charting act
@@ -994,6 +1503,8 @@ export async function onRequest(context) {
          * migrate-surgery.js's ImplantRecord already uses - emr.treat. */
         "weight-rate": CAPS.EMR_VIEW, "dose-ceiling": CAPS.EMR_VIEW, "age-band": CAPS.EMR_VIEW,
         neonatal: CAPS.EMR_VITALS, line: CAPS.EMR_TREAT, "line-remove": CAPS.EMR_TREAT, "line-list": CAPS.EMR_VIEW,
+        /* WHO growth centiles: recorded weights read against a reference, persists nothing - emr.view. */
+        growth: CAPS.EMR_VIEW,
         /* The ONCqis bridge (Task 2.6). Linking a plan, recording the oncology diagnosis, an
          * adverse event or a chemo administration are all clinical commitments - emr.treat, the
          * same authority every other cross-module link in this file already needs. Reading any of
@@ -1046,6 +1557,42 @@ export async function onRequest(context) {
         "incident-triage": CAPS.INCIDENT_INVESTIGATE, "incident-rca": CAPS.INCIDENT_INVESTIGATE,
         "incident-capa": CAPS.INCIDENT_INVESTIGATE, "incident-capa-complete": CAPS.INCIDENT_INVESTIGATE,
         "incident-close": CAPS.INCIDENT_INVESTIGATE, "incident-log": CAPS.INCIDENT_INVESTIGATE,
+        /* DPDP Act 2023 (dpdp.js). Reading the published notice is for anyone at the desk; recording that a patient
+         * was given it is the registering act (queue.add). Publishing it, the data principal request queue, the
+         * access answer and the breach register are the Data Protection Officer's (dpdp.manage). */
+        "privacy-notices": CAPS.QUEUE_VIEW, "privacy-acknowledgements": CAPS.QUEUE_VIEW, "privacy-acknowledge": CAPS.QUEUE_ADD,
+        "privacy-notice": CAPS.DPDP_MANAGE, "data-requests": CAPS.DPDP_MANAGE, "data-request": CAPS.DPDP_MANAGE,
+        "data-request-act": CAPS.DPDP_MANAGE, "data-holdings": CAPS.DPDP_MANAGE, "data-breach": CAPS.DPDP_MANAGE, "data-breach-update": CAPS.DPDP_MANAGE,
+        /* Retention and legal holds (retention.js, legal opinion H.4). The DPO reads what erasure must keep and places a
+         * hold; the medical records officer (register.records) may do both, and only the records officer lifts a hold,
+         * with the reference to the disposal of the matter (H.4.4). */
+        retention: CAPS.DPDP_MANAGE, "legal-hold": CAPS.DPDP_MANAGE, "legal-hold-lift": CAPS.REGISTER_RECORDS,
+        /* The classes with their legal and policy layers (owner's guidance 17 Sep 2026): the same readers as retention. */
+        "retention-classes": CAPS.DPDP_MANAGE,
+        /* Returns (compliance.js). The indicator tables name no patient and no clinician: analytics.view, the same
+         * gate as quality-safety. The DHS self-assessment is the hospital's own statement about itself: staff.admin. */
+        "nabh-indicators": CAPS.ANALYTICS_VIEW, "hmis-monthly": CAPS.ANALYTICS_VIEW,
+        /* Infection control and quality (infection-control.js, quality-registers.js). Confirming an HAI, reviewing surgical
+         * prophylaxis and the antibiogram are infection.control (the laboratory may also read the antibiogram, below);
+         * checklists, audits, drills and the registers they feed are quality.audit. Filing an ADR is as broad as filing an
+         * incident. An emergency medicine stock-out is written by the ward or pharmacy that finds it. Whether an emergency
+         * return was for a similar complaint is a prescriber's call; the list is reading the chart. */
+        "infection-control": CAPS.INFECTION_CONTROL, "hai-case": CAPS.INFECTION_CONTROL, "surgical-prophylaxis": CAPS.INFECTION_CONTROL,
+        antibiogram: CAPS.INFECTION_CONTROL,
+        "quality-registers": CAPS.QUALITY_AUDIT, "audit-template": CAPS.QUALITY_AUDIT, "quality-audit": CAPS.QUALITY_AUDIT, "mock-drill": CAPS.QUALITY_AUDIT,
+        "adr-report": CAPS.INCIDENT_REPORT,
+        "emergency-stock": CAPS.DEPT_REQUEST, "stock-out": CAPS.DEPT_REQUEST, "stock-out-restore": CAPS.DEPT_REQUEST,
+        "ed-returns": CAPS.EMR_VIEW, "ed-return-review": CAPS.EMR_TREAT,
+        "dhs-checklist": CAPS.STAFF_ADMIN, "dhs-checklist-save": CAPS.STAFF_ADMIN,
+        /* Nurse staffing (nurse-staffing.js, P4). The staffing table reads the ward census, so it is emr.view; recording the
+         * running shift's staffing is the ward nurse's act (emr.vitals); a draft roster is the rota manager's (staff.admin),
+         * and publishing it is /roster/draft-publish, staff.admin again. A staff injury is reported as broadly as an incident
+         * and read by the quality team, the NABH #30 register. */
+        "nurse-staffing": CAPS.EMR_VIEW, "nurse-staffing-record": CAPS.EMR_VITALS, "staffing-draft": CAPS.STAFF_ADMIN,
+        "staff-injury": CAPS.INCIDENT_REPORT, "staff-injuries": CAPS.QUALITY_AUDIT,
+        /* The report builder (report-builder.js). staff.admin at the door, and each dataset re-checks its own read
+         * capability, plus emr.view for any column that identifies a patient, inside. */
+        "report-run": CAPS.STAFF_ADMIN, "report-save": CAPS.STAFF_ADMIN, "reports-saved": CAPS.STAFF_ADMIN, "report-csv": CAPS.STAFF_ADMIN,
         /* The FHIR export. emr.view because it renders the chart: exporting a record is reading it,
          * and an export door that was easier to open than the chart itself would be the way around
          * every other control on this file. The record service still applies the actor's own read
@@ -1060,6 +1607,22 @@ export async function onRequest(context) {
          * staff.admin here AND a clinical actor that may write the record, inside webhooks.js. */
         webhooks: CAPS.STAFF_ADMIN, webhook: CAPS.STAFF_ADMIN, "webhook-update": CAPS.STAFF_ADMIN,
         "webhook-rotate": CAPS.STAFF_ADMIN, "webhook-test": CAPS.STAFF_ADMIN, "webhook-deliveries": CAPS.STAFF_ADMIN,
+        /* Owner S2/S4/S5 connectors (connectors.js), Admin Center > Integrations: the webhooks' own double
+         * gate, staff.admin here AND a clinical actor that may write the record inside the handler. */
+        connectors: CAPS.STAFF_ADMIN, "connector-save": CAPS.STAFF_ADMIN, "connector-test": CAPS.STAFF_ADMIN,
+        // Owner S6 A1: the hospital's ABDM profile is the "abdm" connector; this is its checklist view.
+        "abdm-profile": CAPS.STAFF_ADMIN,
+        /* S6 A5, ABHA at the check-in sheet: the person who registers patients, with owner A5's role table
+         * (abhaDeskCan) applied per step inside abdm-desk.js. */
+        "abdm-desk": CAPS.QUEUE_ADD, abha: CAPS.QUEUE_ADD,
+        /* Scan and Share (abdm-share.js): the counter QRs and today's shared profiles are the desk's queue view;
+         * putting the MR number on a shared token is registering, the desk's add. */
+        "abdm-share": CAPS.QUEUE_VIEW, "abdm-share-register": CAPS.QUEUE_ADD,
+        /* ABDM on the chart (abdm-chart.js): reading what is linked and requested is reading the chart; asking another
+         * facility for records, fetching them, and linking a stay are the treating clinician's acts. */
+        "abdm-records": CAPS.EMR_VIEW, "abdm-link-stay": CAPS.EMR_TREAT, "abdm-consent-request": CAPS.EMR_TREAT, "abdm-fetch": CAPS.EMR_TREAT,
+        // HFR and HPR checks (abdm-registry.js): the ABDM profile's own gate.
+        "abdm-registry-check": CAPS.STAFF_ADMIN,
         /* Connected apps (SMART client registration, smart-clients.js), Admin Center > Integrations.
          * staff.admin here AND a clinical actor that may write the record, inside the handlers -
          * the webhooks' own double gate, so hr is refused on every one of these too. */
@@ -1117,6 +1680,14 @@ export async function onRequest(context) {
         "report-pharmacy": CAPS.ORDER_DISPENSE, "report-him": CAPS.STAFF_ADMIN,
         // The laboratory. Its own authority: releasing a result is not treating a patient.
         "release-result": CAPS.LAB_RESULT, "pending-tests": CAPS.LAB_RESULT, "verify-result": CAPS.LAB_RESULT, "results-to-verify": CAPS.LAB_RESULT,
+        /* Laboratory analysers (lab-analysers.js). The register and the connector key are the deployment owner's
+         * configuration: staff.admin, and a clinical actor inside, so hr is refused as it is for every connector.
+         * The analyser results waiting on the bench, quality control and the rejection counts are the laboratory's
+         * own work: lab.result, the authority that releases results. */
+        "lab-analysers": CAPS.STAFF_ADMIN, "lab-analyser-save": CAPS.STAFF_ADMIN, "lab-connector-key": CAPS.STAFF_ADMIN,
+        "analyser-inbox": CAPS.LAB_RESULT, "analyser-release": CAPS.LAB_RESULT, "analyser-dismiss": CAPS.LAB_RESULT,
+        "lab-qc": CAPS.LAB_RESULT, "lab-qc-material": CAPS.LAB_RESULT, "lab-qc-run": CAPS.LAB_RESULT, "lab-qc-action": CAPS.LAB_RESULT,
+        "specimen-rejections": CAPS.LAB_RESULT,
         /* Microbiology and histopathology (P1.9). Writing either, and the bench's in-progress list, is the
          * laboratory's release authority. The chart reading them is reading the chart. */
         "culture-report": CAPS.LAB_RESULT, "cultures-in-progress": CAPS.LAB_RESULT,
@@ -1172,6 +1743,8 @@ export async function onRequest(context) {
         collect: CAPS.EMR_VITALS, "specimen-outcome": CAPS.EMR_VITALS, collections: CAPS.EMR_VIEW,
         // Asking for an investigation is a clinical act, like prescribing.
         investigation: CAPS.EMR_TREAT,
+        // LT-15: the list a test is picked from. Reading it is reading the chart's order form, nothing more.
+        "investigation-catalogue": CAPS.EMR_VIEW,
         /* Reporting an imaging study is the radiologist's own act, granted by lab.result - the same
          * authority the laboratory reports under. A reporter is a reporter, and it writes only its
          * own report. */
@@ -1229,6 +1802,9 @@ export async function onRequest(context) {
          * through in actor.js. Reading the ICU cards, with the SOFA and the advisory sepsis screen
          * worked out from them, is reading the chart. */
         "icu-record": CAPS.EMR_VITALS, icu: CAPS.EMR_VIEW,
+        /* G2: a decision about a bedside write that waited on a device and came back as a conflict or a
+         * refusal. emr.view opens the door; the route then asks for the capability the write itself needs. */
+        "offline-resolve": CAPS.EMR_VIEW,
         /* Recording that a value was decisive is part of reading a chart, so it needs the authority
          * to read one - emr.vitals, the same bar as charting an observation about the patient.
          * Asking WHO to tell about a correction is emr.view: it is the safety question, and the
@@ -1243,9 +1819,15 @@ export async function onRequest(context) {
          * the module's own instruction is that it is checked "by somebody who is not paid on
          * collections" - and billing.view is precisely the person who is. */
         claim: CAPS.BILLING_CHARGE, "claim-state": CAPS.BILLING_CHARGE, preauth: CAPS.BILLING_CHARGE,
+        // NHCX (nhcx.js): asking a payer about coverage or a request's status is the same authority as sending the request.
+        "nhcx-eligibility": CAPS.BILLING_CHARGE, "hcx-status": CAPS.BILLING_CHARGE,
         claims: CAPS.BILLING_VIEW, upcoding: CAPS.STAFF_ADMIN,
         // P1.5: a pre-admission estimate is a financial record written by the same authority that codes a claim.
         "claim-estimate": CAPS.BILLING_CHARGE,
+        /* rcm-claims-ops (claims-ops.js): reading the checklist, the evidence pack and the desk's lists is reading bills;
+         * a payer query or enhancement on a pre-authorisation and saving an evidence pack change a claim record. */
+        "claim-checks": CAPS.BILLING_VIEW, "rcm-worklists": CAPS.BILLING_VIEW, "preauth-event": CAPS.BILLING_CHARGE,
+        "claim-evidence": method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW,
         // TASK 4.9: a third-party record request is a records-custody function, not clinical or
         // billing work - staff.admin, the same authority every other org-administration action in
         // this file already uses, pending a real site adding a dedicated HIM role.
@@ -1259,7 +1841,18 @@ export async function onRequest(context) {
         // billing.view - the actual reason that capability exists, per the note above.
         invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, "invoice-discount": CAPS.BILLING_CHARGE, "invoice-deposit": CAPS.BILLING_CHARGE,
         "invoice-payment": CAPS.BILLING_CHARGE, "invoice-refund": CAPS.BILLING_CHARGE, "invoice-adjustment": CAPS.BILLING_CHARGE,
+        // Owner S2: asking the gateway for a link is taking money (billing.charge); reading them is reading bills.
+        "invoice-payment-link": CAPS.BILLING_CHARGE, "payment-requests": CAPS.BILLING_VIEW,
         "invoice-writeoff": CAPS.BILLING_CHARGE, "invoice-void": CAPS.BILLING_CHARGE,
+        // gap-claims-gst B: notes, the parties on a bill (gst-parties) and e-invoice reporting all change a bill.
+        "invoice-credit-note": CAPS.BILLING_CHARGE, "invoice-debit-note": CAPS.BILLING_CHARGE, "invoice-parties": CAPS.BILLING_CHARGE,
+        "invoice-irn": CAPS.BILLING_CHARGE, "invoice-irn-cancel": CAPS.BILLING_CHARGE, "einvoice-status": CAPS.BILLING_VIEW,
+        /* gap-claims-gst-2 (packages.js): the package master is price list authority (staff.admin writes, as the Price
+         * list does); putting a stay on a package changes its bill (billing.charge); reading either is reading bills. */
+        packages: CAPS.BILLING_VIEW, "package-versions": CAPS.BILLING_VIEW, "package-save": CAPS.STAFF_ADMIN,
+        "stay-package": CAPS.BILLING_CHARGE, "stay-packages": CAPS.BILLING_VIEW, "package-pack": CAPS.BILLING_VIEW,
+        // gst-parties (stay-payer.js): who settles a stay changes its bill, the same authority as putting it on a package.
+        "stay-payer": CAPS.BILLING_CHARGE,
         invoices: CAPS.BILLING_VIEW,
         /* Stock control is the dispensing side of pharmacy. Nothing behind these routes can refuse a
          * dispense: a count is a belief and the box in the pharmacist's hand is the fact. */
@@ -1298,7 +1891,14 @@ export async function onRequest(context) {
         /* P2.17. Reading everyone's access pattern, and recording a review or a restore test, is the
          * deployment owner's act. No clinical capability reaches it: a doctor or nurse gets 403.
          * safety_officer is NOT added - it is clinical-incident safety, not account security. */
-        "security-report": CAPS.STAFF_ADMIN, "security-review": CAPS.STAFF_ADMIN, "restore-test": CAPS.STAFF_ADMIN,
+        "security-report": CAPS.STAFF_ADMIN, "audit-rows": CAPS.STAFF_ADMIN, "security-review": CAPS.STAFF_ADMIN, "restore-test": CAPS.STAFF_ADMIN,
+        "actor-names": CAPS.STAFF_ADMIN,
+        // Owner 2026-09-16: who did something on a chart is part of reading it (pharmacy, lab and blood bank: below).
+        "staff-identities": CAPS.EMR_VIEW,
+        /* P2.17 anchor acknowledgement. The capability gate only narrows this to staff.admin, which
+         * hr and admin members hold too: the hospital-owner check happens at the route itself, fail
+         * closed, so naming the capability here grants nobody the acknowledgement. */
+        "audit-anchor-acknowledge": CAPS.STAFF_ADMIN,
         /* P2.15. Which dependencies are down and what that means on a ward. The deployment owner's view:
          * it names storage and provider state, never patient data, and no clinical capability reaches it. */
         "system-health": CAPS.STAFF_ADMIN,
@@ -1321,8 +1921,49 @@ export async function onRequest(context) {
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
+        // What stands between this stay and its discharge: seen by whoever may close it.
+        "discharge-checklist": CAPS.QUEUE_ADD,
         // Asserting a diagnosis is a clinical act; reading the list is not.
         problem: CAPS.EMR_TREAT, problems: CAPS.EMR_VIEW,
+        /* The Report Bug button (bug-reports.js). queue.view is the door every operational role holds; a member
+         * holding none of it (the oncqis roles, academic_cell) is let in below by membership alone, because any
+         * member may report and see their own reports. Changing a report's status or removing it is the
+         * hospital admin's: staff.admin here, and the role itself checked in the handler, so hr is refused. */
+        "bug-report": CAPS.QUEUE_VIEW, "bug-reports": CAPS.QUEUE_VIEW,
+        "bug-report-status": CAPS.STAFF_ADMIN, "bug-report-remove": CAPS.STAFF_ADMIN,
+        /* Statutory registers (register-routes.js), 2026-09-16. Each register is its own authority and a register's
+         * custodian is named here: the pharmacist and ward in-charge keep the NDPS book, the radiologist and
+         * obstetrician Form F, the obstetrician and medical records the MTP register, medical records the births,
+         * deaths and medico-legal register, the public health nodal officer the notifiable disease register. The
+         * doctors who CREATE entries (an MLC, a cause-of-death certificate, a notification) are named per route;
+         * the alternatives are below the table. The form definitions carry no data, so any member may read them. */
+        "register-schema": CAPS.QUEUE_VIEW,
+        "register-ndps": CAPS.REGISTER_NDPS,
+        "register-formf": CAPS.REGISTER_PCPNDT,
+        "register-mtp": CAPS.REGISTER_MTP,
+        "register-vital": CAPS.REGISTER_RECORDS,
+        "register-mccd": CAPS.EMR_TREAT,
+        "register-mlc": method === "POST" ? CAPS.MLC_RECORD : CAPS.REGISTER_RECORDS, "mlc-patient": CAPS.MLC_RECORD,
+        // Yes or no and the MLC number on the chart, for everyone who may read the chart. The details stay in the register.
+        "mlc-flag": CAPS.EMR_VIEW,
+        "register-notification": method === "POST" ? CAPS.EMR_TREAT : CAPS.REGISTER_IHIP, "notifiable-prompts": CAPS.EMR_VIEW,
+        /* HR beyond the rota (hr-attendance.js, hr-records.js). Every member clocks and reads their own records
+         * (queue.view, the identity taken from their membership, never the body); everything about other staff is
+         * staff.admin, which the hr role holds without any clinical actor. */
+        "hr-my-records": CAPS.QUEUE_VIEW, "hr-clock": CAPS.QUEUE_VIEW, "hr-alert-ack": CAPS.QUEUE_VIEW,
+        "hr-attendance": CAPS.STAFF_ADMIN, "hr-attendance-correct": CAPS.STAFF_ADMIN, "hr-attendance-import": CAPS.STAFF_ADMIN,
+        /* Loading a replaced HIS's patients, prices and suppliers (legacy-import.js) is hospital administration. The route
+         * also asks for the capability the manual door for that kind needs, so an import never reaches further than typing. */
+        "legacy-import": CAPS.STAFF_ADMIN,
+        "hr-credentials": CAPS.STAFF_ADMIN, "hr-credential-save": CAPS.STAFF_ADMIN, "hr-credential-alerts": CAPS.STAFF_ADMIN,
+        "hr-training": CAPS.STAFF_ADMIN, "hr-course-save": CAPS.STAFF_ADMIN, "hr-session-save": CAPS.STAFF_ADMIN,
+        "hr-session-attendance": CAPS.STAFF_ADMIN, "hr-training-record": CAPS.STAFF_ADMIN,
+        /* Patient communication (patient-messaging.js) and feedback (patient-feedback.js). Recording a patient's
+         * opt-in is the front desk's registration work (queue.add); settings, the delivery log, sending and the
+         * feedback dashboard are staff.admin. */
+        "comm-preference": CAPS.QUEUE_ADD,
+        "comm-log": CAPS.STAFF_ADMIN, "comm-run": CAPS.STAFF_ADMIN, "comm-retry": CAPS.STAFF_ADMIN,
+        "feedback-dashboard": CAPS.STAFF_ADMIN, "feedback-recovery": CAPS.STAFF_ADMIN,
       };
       /* Every eMAR transition needs MED_ADMINISTER, including verify and dispense.
        *
@@ -1339,7 +1980,7 @@ export async function onRequest(context) {
        * open the summary and see what is still outstanding without being able to write it. */
       /* A bulk export under /ward/fhir is not a chart read: it is the whole hospital, so it takes the
        * fhir-export gate rather than the fhir sub's emr.view. */
-      const bulkFhirPath = sub === "fhir" && (/^\$export/.test(parts[2] || "") || (parts[2] === "Patient" && parts[3] === "$export"));
+      const bulkFhirPath = sub === "fhir" && (/^\$export/.test(parts[2] || "") || (parts[2] === "Patient" && parts[3] === "$export") || (parts[2] === "Group" && parts[4] === "$export"));
       const need = sub === "mar" ? CAPS.MED_ADMINISTER
         : bulkFhirPath ? capFor["fhir-export"]
         /* The audit trail as FHIR AuditEvent is not a chart read either: the security review's own gate. */
@@ -1347,6 +1988,9 @@ export async function onRequest(context) {
         // A Subscription is a webhook seen through FHIR: the webhooks' own gate.
         : (sub === "fhir" && parts[2] === "Subscription") ? capFor.webhooks
         : (sub === "discharge-summary" && method === "GET") ? CAPS.EMR_VIEW
+        : (sub === "discharge-milestone" && Object.prototype.hasOwnProperty.call(DISCHARGE_STEP_CAPS, String(body.step || ""))) ? DISCHARGE_STEP_CAPS[String(body.step)]
+        /* Inspecting or cancelling a housekeeping task is the inspector's authority, never the cleaner's. */
+        : (sub === "housekeeping-step" && (body.step === "inspect" || body.step === "cancel")) ? CAPS.HOUSEKEEPING_INSPECT
         : capFor[sub];
       if (!need) return json({ ok: false, error: "not_found" }, 404, request);
       let wAz = await ORG.authorizeOrg(env, actor, wOrgId, need);
@@ -1407,6 +2051,29 @@ export async function onRequest(context) {
        * and the same reason it is not a widening - lab.result grants only the narrow record scope in
        * actor.js, so this opens no other route and the store still checks the write itself. */
       if (!wAz.ok && sub === "specimen-outcome") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+      /* LT-25: the laboratory board's Collect. A phlebotomist on the laboratory's staff takes the sample the result
+       * now needs first; same narrow alternative authority as specimen-outcome, and the store still checks the write. */
+      if (!wAz.ok && sub === "collect") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+      /* The tube label printed at the laboratory board's Collect names the patient; the lab grant already reads Patient
+       * (actor.js) and nothing else this read touches beyond the allergies it also holds. */
+      if (!wAz.ok && sub === "label-data") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+      /* The laboratory's reagents and consumables are counted on the pharmacy's stock ledger at ONE location,
+       * "Laboratory". lab.result reaches the levels and movements for that location and no other, and the
+       * handler below pins the location, so it cannot read or move pharmacy stock through this door. */
+      let labStockOnly = false;
+      if (!wAz.ok && (sub === "stock" || sub === "stock-move") && (method === "GET" ? url.searchParams.get("location") : body.location) === LAB_STOCK_LOCATION) {
+        wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+        labStockOnly = wAz.ok;
+      }
+      // Rejection counts name no patient: whoever reads the hospital's operational analytics may read them too.
+      if (!wAz.ok && sub === "specimen-rejections") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ANALYTICS_VIEW);
+      /* The cumulative antibiogram is the microbiology laboratory's report as much as infection control's; lab.result reads
+       * the reports it is built from and nothing else this route touches (days of therapy then says it could not be read). */
+      if (!wAz.ok && sub === "antibiogram") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+      /* Owner 2026-09-16: the prescriber and verifier on the pharmacy queue, the collector on the laboratory board and
+       * whoever acted on a blood unit are named to the staff who work from those records without emr.view. Names,
+       * employee ids and roles of this hospital's staff only; it opens no chart and no other route. */
+      for (const alt of [CAPS.ORDER_READ, CAPS.LAB_RESULT, CAPS.TRANSFUSION_ISSUE]) if (!wAz.ok && sub === "staff-identities") wAz = await ORG.authorizeOrg(env, actor, wOrgId, alt);
       /* TASK 4.13: HIM_ROI is the new, narrow alternative to staff.admin for the ROI routes - the
        * `him` role holds HIM_ROI and not staff.admin, and this does not widen staff.admin's own
        * reach anywhere else. Same alternative-authority shape as criticals/specimen-outcome above. */
@@ -1415,10 +2082,44 @@ export async function onRequest(context) {
        * routes - the `blood_bank` role holds TRANSFUSION_ISSUE and none of the EMR capabilities, and
        * this does not narrow what emr.treat could already do. Same shape as the two checks above. */
       if (!wAz.ok && TRANSFUSION_SUBS.has(sub)) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.TRANSFUSION_ISSUE);
+      /* Statutory registers: the custodian may also do what the creating doctor does. Medical records corrects a
+       * medico-legal case and opens one patient's; the nodal officer records a notification. Nothing else widens. */
+      if (!wAz.ok && ((sub === "register-mlc" && method === "POST") || sub === "mlc-patient")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
+      if (!wAz.ok && sub === "register-notification" && method === "POST") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_IHIP);
+      if (!wAz.ok && (sub === "retention" || sub === "retention-classes" || sub === "legal-hold")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
+      /* Legal review 2026-09-17 read-only doors. The PCPNDT nodal officer reads Form F and records the monthly report's
+       * submission (B.4.5, B.4.9): GET, or POST of a return only. An NDPS inspector or auditor reads every NDPS view and
+       * writes nothing; the nurse reads one patient's controlled-drug rows (F.4.10). Nothing else widens. */
+      if (!wAz.ok && sub === "register-formf" && (method === "GET" || String(body.kind || "") === "statreturn")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_PCPNDT_READ);
+      if (!wAz.ok && sub === "register-ndps" && method === "GET") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_NDPS_READ);
+      if (!wAz.ok && sub === "register-ndps" && method === "GET" && url.searchParams.get("view") === "patient") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.MED_ADMINISTER);
       /* Asking for a purchase order's approval is the pharmacy's own next step after raising it. The
        * request cap (emr.vitals) is a ward one pharmacy does not hold, so "Ask for approval" on the
        * Purchasing screen was always refused. Only for supply subjects; deciding still needs emr.treat. */
       if (!wAz.ok && sub === "approval-request" && (body.subjectType === "PurchaseOrder" || body.subjectType === "StockRequisition")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_DISPENSE);
+      /* General stores: the store keeper orders and books in through the same purchasing routes the pharmacy uses,
+       * and the in-charge and the store open the stores overview without raising indents themselves. */
+      if (!wAz.ok && (sub === "purchase-orders" || sub === "goods-receive" || sub === "supply-chain" || sub === "supplier-return" || sub === "rate-contract" || sub === "reorder-suggestions" || (sub === "approval-request" && body.subjectType === "PurchaseOrder"))) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
+      if (!wAz.ok && sub === "stores") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
+      if (!wAz.ok && (sub === "stores" || sub === "store-consumption")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.INDENT_APPROVE);
+      if (!wAz.ok && sub === "assets") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ASSET_MANAGE);
+      /* Support services: the narrow alternative authorities. A dietitian orders and reads diets without emr.treat;
+       * a CSSD technician reads a case's sets; a housekeeping supervisor (inspect) opens the board, raises a task
+       * and reports turnaround. Each grants only its own record scope in actor.js, so none opens another route. */
+      const SUPPORT_ALT = { "diet-order": [CAPS.DIET_ORDER], "diet-order-stop": [CAPS.DIET_ORDER], "diet-order-history": [CAPS.DIET_ORDER, CAPS.DIET_KITCHEN],
+        "cssd-case-sets": [CAPS.CSSD_PROCESS], "housekeeping-board": [CAPS.HOUSEKEEPING_INSPECT], "housekeeping-task": [CAPS.HOUSEKEEPING_INSPECT],
+        "housekeeping-report": [CAPS.HOUSEKEEPING_INSPECT], "housekeeping-step": body.step === "inspect" || body.step === "cancel" ? [] : [CAPS.HOUSEKEEPING_INSPECT] };
+      for (const alt of (Object.prototype.hasOwnProperty.call(SUPPORT_ALT, sub) ? SUPPORT_ALT[sub] : [])) if (!wAz.ok && wAz.reason === "forbidden") wAz = await ORG.authorizeOrg(env, actor, wOrgId, alt);
+      /* P2.17 anchor acknowledgement. The capability gate cannot see hospital ownership, so a
+       * StewardMD platform owner who holds no membership in this hospital would be refused here
+       * before the route that is allowed to stand in for the owner ever runs. Let only that one
+       * route through to its own ownership check; every other route keeps the gate as it was. */
+      if (!wAz.ok && sub === "audit-anchor-acknowledge" && method === "POST" && actor.isOwner) wAz = { ok: true, role: "admin", platformOwner: true };
+      /* Bug reports: any member of this hospital may report and read their own (membership, no capability), and the
+       * StewardMD platform owner may manage them in a hospital they are not staff of. Nothing else is widened. */
+      const BUG_SUBS = new Set(["bug-report", "bug-reports", "bug-report-status", "bug-report-remove"]);
+      if (!wAz.ok && (sub === "bug-report" || sub === "bug-reports") && wAz.reason === "forbidden") wAz = await ORG.authorizeOrg(env, actor, wOrgId, null);
+      if (!wAz.ok && BUG_SUBS.has(sub) && actor.isOwner && wAz.reason !== "org_not_found") wAz = { ok: true, role: "admin", platformOwner: true };
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
 
       /* TASK 9.15/9.1: A THROTTLE ON THE CLINICAL DOOR, which had none.
@@ -1463,26 +2164,72 @@ export async function onRequest(context) {
       const mig = await wsqForcedMigration(env, wOrg);
       if (!mig) return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }, 409, request);
       if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
-      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg };
+      // clock: the hospital's wall clock for calendar facts (an expected discharge date that has passed).
+      // orgRegion: the hospital's country, which decides the law a rule is checked against (donor-criteria.js jurisdictionOf).
+      // stateUt: the hospital's State/UT (regionProfile, _region_in.js), which selects State-specific legal requirements (legal-requirements.js).
+      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg, orgRegion: (wOrg && wOrg.region) || null,
+        stateUt: (wOrg && wOrg.regionProfile && wOrg.regionProfile.stateUt) || null,
+        clock: { offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330, timeZone: (wsqCfg && wsqCfg.timeZone) || "" } };
+      /* NDPS Rules r.52-O (register-settings.js rmiStatus): an expired Form 3G recognition with no renewal applied for
+       * refuses controlled-drug receipts and dispensing (stock.js, pharmacy-dispense.js). */
+      deps.rmi = rmiStatus(registerSettings(wsqCfg), hospitalToday(Date.now(), deps.clock));
+      /* CONTROLLED DRUGS (controlled-drugs.js). Whether a drug is controlled is the hospital's drug master; who may witness
+       * one is an ACTIVE member of THIS hospital who dispenses, gives medicines or keeps the NDPS register. The lookup
+       * lives here because the membership store does; the domain files only ask. */
+      const controlled = controlledSet(wsqCfg);
+      const isControlled = (drug, code) => isControlledDrug(null, drug, code, controlled);
+      /* Legal review F.5: which law a drug's records follow (registers.ndps.drugRegimes). Recognition (r.52-O) and the
+       * Form 3J cap (r.52U) are Chapter VB's, so they bind essential narcotic drugs only; the default for the list. */
+      const registerCfg = registerSettings(wsqCfg);
+      deps.rmiApplies = (drug, code) => regimeOf(registerCfg, controlled, drug, code) === "end-chapter-vb";
+      const witnessCheck = async (witnessId) => {
+        const who = { kind: "witness", id: String(witnessId), email: String(witnessId).indexOf("@") > 0 ? String(witnessId).toLowerCase() : null };
+        for (const cap of [CAPS.ORDER_DISPENSE, CAPS.MED_ADMINISTER, CAPS.REGISTER_NDPS]) {
+          const az = await ORG.authorizeOrg(env, who, wOrgId, cap);
+          if (az && az.ok) return true;
+        }
+        return false;
+      };
+      /* The MLC flag a discharge summary and a death record carry: the numbers of this patient's open medico-legal
+       * cases, or null. Throws when the register cannot be read, so the caller refuses instead of dropping the flag. */
+      const medicoLegalFor = async (patientId) => {
+        const r = await listRegisterEntries({ ...deps, actor: { id: actor.id }, kind: "mlc", patientId });
+        if (!r.ok) throw new Error("mlc register unreadable");
+        const open = r.entries.filter((e) => e.fields && e.fields.status !== "withdrawn");
+        return open.length ? { mlc: true, numbers: open.map((e) => e.serial) } : null;
+      };
+      if (REGISTER_SUBS.has(sub)) {
+        const query = {};
+        for (const k of ["kind", "period", "from", "to", "id", "format", "patientId", "pending", "prefill", "week", "state", "view", "year", "authorityOfficer", "authorityLaw", "authorityReference", "requisitionFrom", "requisitionRef", "requisitionDate"]) { const v = url.searchParams.get(k); if (v != null && v !== "") query[k] = v; }
+        /* mlcKeeper: a keeper of the medico-legal register opens every case (legal review D.4.8); staffNames: the prescriber
+         * named on the Schedule H1 register (r.65(3)(1)(h)). */
+        const staffNames = async (ids) => {
+          const found = await membersForIds(await ORG.listMembers(env, wOrgId), ids, staffDirectory(env, wOrgId));
+          return new Map(ids.map((id) => { const s = staffIdentity(found.get(id)); return [id, (s && s.name) || null]; }));
+        };
+        const r = await registerRoute(request, env, { ...deps, orgName: (wOrg && wOrg.name) || "", actor: { id: actor.id, email: actor.email || null, role: wAz.role || null }, sub, method, body, query, witnessCheck, isControlled,
+          mlcKeeper: can(wAz.role, CAPS.REGISTER_RECORDS), staffNames });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       /* BACKGROUND WORK ON ORDINARY TRAFFIC: escalate unacknowledged critical results and drain the
        * outbox, at most once per two minutes per hospital, after the response is on its way. No
        * scheduler is required for a hospital that is in use; ops-tick.js is callable by one as well. */
       if (context.waitUntil && env.WSQ_TICK_OFF !== "1") {
         context.waitUntil((async () => {
-          try {
-            const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${mig.tenantId}`, limit: 1, windowMs: 120000 });
-            if (!gate.allowed) return;
-            const t = await runTick(deps.recordDeps.repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: {}, consumers: { ...exportConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }), ...webhookConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, env, orgId: wOrgId }) } });
-            /* P2.15: the last run is kept (outcome flags only, no error text) so System health can say
-             * whether escalation is actually running rather than assume it. */
-            if (env.MAIK_KV) await env.MAIK_KV.put(tickLogKey(mig.tenantId), JSON.stringify({ at: t.at, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) }), { expirationTtl: 30 * 86400 }).catch(() => {});
-            if ((t.criticals && t.criticals.error) || (t.outbox && t.outbox.error)) console.error("wsq tick", mig.tenantId, JSON.stringify({ criticals: t.criticals && t.criticals.error, outbox: t.outbox && t.outbox.error }));
-          } catch (e) { console.error("wsq tick failed", mig.tenantId, String((e && e.message) || e).slice(0, 200)); }
+          try { await wsqTick(env, wOrg, mig); }
+          catch (e) { console.error("wsq tick failed", mig.tenantId, String((e && e.message) || e).slice(0, 200)); }
         })());
       }
 
+      /* S6 A3: a stay's records are registered and linked to the patient's ABHA when they become final (abdm-hip.js).
+       * After the response, never in front of it: a failed link is audited and retried from the chart, and never
+       * blocks an admission, a discharge or a signature. Admission itself has nothing final and records only that. */
+      const abdmStayHook = (encounterId, trigger) => {
+        if (context.waitUntil && encounterId) context.waitUntil(linkStayCareContexts(env, { tenantId: mig.tenantId, encounterId: String(encounterId), recordDeps: deps.recordDeps, trigger }).catch(() => null));
+      };
       if (sub === "admit" && method === "POST") {
         const r = await admitPatient(request, env, { ...deps, admission: body.admission || body, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
+        if (r.ok && r.written) abdmStayHook(r.encounterId, "admission");
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* ONE CONSULTATION, ONE CALL. The writers are handed in rather than imported by
@@ -1511,7 +2258,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "deceased" && method === "POST") {
-        const r = await recordDeath(request, env, { ...deps, patientId: body.patientId, deceased: body.deceased || body, confirm: body.confirm === true, correct: body.correct === true, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordDeath(request, env, { ...deps, patientId: body.patientId, deceased: body.deceased || body, confirm: body.confirm === true, correct: body.correct === true, idempotencyKey: body.idempotencyKey || null, medicoLegalFor });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "deceased-correct" && method === "POST") {
@@ -1530,6 +2277,116 @@ export async function onRequest(context) {
         const r = await listRelatedPeople(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "immunization" && method === "POST") {
+        const r = await recordImmunization(request, env, { ...deps, patientId: body.patientId, immunization: body.immunization || {}, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "immunization-error" && method === "POST") {
+        const r = await markImmunizationError(request, env, { ...deps, immunizationId: body.immunizationId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "immunizations" && method === "GET") {
+        const r = await listImmunizations(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- general stores, biomedical assets, blood bank (2026-09-16) ---- */
+      {
+        const R = (r) => json(r, r.ok ? 200 : (r.status || 502), request);
+        const departments = async () => { try { return await ORG.listDepartments(env, wOrgId); } catch { return null; } };
+        const inDept = (cap) => (departmentId) => ORG.authorizeOrg(env, actor, wOrgId, cap, { departmentId });
+        const needDepts = departments;
+        const deptsFailed = () => json({ ok: false, error: "departments_unreadable", detail: "The hospital's departments could not be read. Nothing was recorded." }, 502, request);
+        const key = body.idempotencyKey || null;
+        if (sub === "stores" && method === "GET") return R(await storesOverview(request, env, { ...deps, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null }));
+        if (sub === "store-item" && method === "POST") return R(await saveStoreItem(request, env, { ...deps, code: body.code, name: body.name, unit: body.unit, category: body.category, reorderLevel: body.reorderLevel, active: body.active, idempotencyKey: key }));
+        if (sub === "store-location" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await saveStoreLocation(request, env, { ...deps, departments: d, code: body.code, name: body.name, kind: body.kind, departmentId: body.departmentId, active: body.active, idempotencyKey: key })); }
+        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
+        if (sub === "indent" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await raiseIndent(request, env, { ...deps, departments: d, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), departmentId: body.departmentId, fromLocation: body.fromLocation, toLocation: body.toLocation, lines: body.lines, note: body.note, idempotencyKey: key })); }
+        if (sub === "indent-decide" && method === "POST") return R(await decideIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.INDENT_APPROVE), indentId: body.indentId, decision: body.decision, lines: body.lines, reason: body.reason, idempotencyKey: key }));
+        if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines }));
+        if (sub === "indent-acknowledge" && method === "POST") return R(await acknowledgeIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), indentId: body.indentId, lines: body.lines, note: body.note, idempotencyKey: key }));
+        if (sub === "indent-close" && method === "POST") return R(await closeIndent(request, env, { ...deps, indentId: body.indentId, reason: body.reason, idempotencyKey: key }));
+        if (sub === "store-consumption" && method === "GET") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await storeConsumption(request, env, { ...deps, departments: d, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" })); }
+        if (sub === "store-purchase-order" && method === "POST") return R(await purchaseFromIndent(request, env, { ...deps, indentId: body.indentId, vendor: body.vendor, note: body.note, idempotencyKey: key }));
+        if (sub === "assets" && method === "GET") return R(await assetsOverview(request, env, { ...deps }));
+        if (sub === "asset" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await saveAsset(request, env, { ...deps, departments: d, tag: body.tag, name: body.name, category: body.category, make: body.make, model: body.model, serial: body.serial, departmentId: body.departmentId, location: body.location, purchaseDate: body.purchaseDate, costPaise: body.costPaise, vendor: body.vendor, warrantyUntil: body.warrantyUntil, contracts: body.contracts, critical: body.critical === true, expectedVersion: body.expectedVersion, idempotencyKey: key })); }
+        if (sub === "asset-event" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await recordAssetEvent(request, env, { ...deps, departments: d, assetId: body.assetId, kind: body.kind, status: body.status, departmentId: body.departmentId, location: body.location, reason: body.reason, idempotencyKey: key })); }
+        if (sub === "maintenance-schedule" && method === "POST") return R(await saveSchedule(request, env, { ...deps, assetId: body.assetId, scheduleId: body.scheduleId, kind: body.kind, intervalDays: body.intervalDays, checklist: body.checklist, startFrom: body.startFrom, active: body.active, idempotencyKey: key }));
+        if (sub === "equipment-complaint" && method === "POST") return R(await openJobCard(request, env, { ...deps, complaint: true, assetId: body.assetId, description: body.description, idempotencyKey: key }));
+        if (sub === "job-card" && method === "POST") return R(await openJobCard(request, env, { ...deps, assetId: body.assetId, kind: body.kind, scheduleId: body.scheduleId, description: body.description, idempotencyKey: key }));
+        if (sub === "job-card-update" && method === "POST") return R(await updateJobCard(request, env, { ...deps, jobCardId: body.jobCardId, action: body.action, engineer: body.engineer, code: body.code, quantity: body.quantity, location: body.location, resolution: body.resolution, checklist: body.checklist, calibrationResult: body.calibrationResult, downtimeMinutes: body.downtimeMinutes, statusAfter: body.statusAfter, idempotencyKey: key }));
+        if (sub === "blood-bank" && method === "GET") return R(await bloodBankOverview(request, env, { ...deps }));
+        if (sub === "blood-donor" && method === "POST") return R(await registerDonor(request, env, { ...deps, name: body.name, sex: body.sex, dateOfBirth: body.dateOfBirth, phone: body.phone, address: body.address, idempotencyKey: key }));
+        if (sub === "donor-screening" && method === "POST") return R(await screenDonor(request, env, { ...deps, donorId: body.donorId, answers: body.answers, weightKg: body.weightKg, hbGdl: body.hbGdl, bp: body.bp, pulse: body.pulse, pulseRegular: body.pulseRegular, temperature: body.temperature, hbMethod: body.hbMethod, donationType: body.donationType, plateletCount: body.plateletCount, totalProteinGL: body.totalProteinGL, physicianName: body.physicianName, physicianReason: body.physicianReason, deferralConditions: body.deferralConditions, outcome: body.outcome, deferralReason: body.deferralReason, deferralDays: body.deferralDays, permanent: body.permanent === true, idempotencyKey: key }));
+        if (sub === "blood-donation" && method === "POST") return R(await recordDonation(request, env, { ...deps, screeningId: body.screeningId, bagNumber: body.bagNumber, volumeMl: body.volumeMl, bagType: body.bagType, donorKind: body.donorKind, anticoagulant: body.anticoagulant, reinfusionComplete: body.reinfusionComplete, adverseReaction: body.adverseReaction, idempotencyKey: key }));
+        if (sub === "blood-test-result" && method === "POST") return R(await recordBloodTests(request, env, { ...deps, donationId: body.donationId, tti: body.tti, methods: body.methods, nat: body.nat, antibodyScreen: body.antibodyScreen, antibodyIdentified: body.antibodyIdentified, abo: body.abo, rhD: body.rhD, idempotencyKey: key }));
+        if (sub === "blood-components" && method === "POST") return R(await separateComponents(request, env, { ...deps, donationId: body.donationId, components: body.components }));
+        if (sub === "blood-unit-event" && method === "POST") return R(await bloodUnitEvent(request, env, { ...deps, unitId: body.unitId, kind: body.kind, reason: body.reason, idempotencyKey: key }));
+        if (sub === "blood-pool" && method === "POST") return R(await poolUnits(request, env, { ...deps, unitIds: body.unitIds, component: body.component, openSystem: body.openSystem, idempotencyKey: key }));
+        if (sub === "blood-sample" && method === "POST") return R(await registerSample(request, env, { ...deps, kind: body.kind, donationId: body.donationId, episodeId: body.episodeId, location: body.location, idempotencyKey: key }));
+        if (sub === "blood-sample-discard" && method === "POST") return R(await discardSample(request, env, { ...deps, sampleId: body.sampleId, idempotencyKey: key }));
+        if (sub === "donor-notification" && method === "POST") return R(await recordDonorNotification(request, env, { ...deps, donationId: body.donationId, step: body.step, method: body.method, referredTo: body.referredTo, note: body.note, idempotencyKey: key }));
+      }
+      /* ---- hospital support services (diet.js, cssd.js, housekeeping.js, ambulance.js, mortuary.js) ---- */
+      const support = (wsqCfg && wsqCfg.supportServices) || {};
+      const supportOut = (r) => json(r, r.ok ? 200 : (r.status || 502), request);
+      if (sub === "diet-order" && method === "POST") return supportOut(await saveDietOrder(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, order: body.order, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "diet-order-stop" && method === "POST") return supportOut(await stopDietOrder(request, env, { ...deps, encounterId: body.encounterId, reason: body.reason, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "diet-order-history" && method === "GET") return supportOut(await dietOrderHistory(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" }));
+      const mealClock = { mealTimes: support.mealTimes || null, utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes };
+      if (sub === "meal-board" && method === "GET") return supportOut(await mealBoard(request, env, { ...deps, ...mealClock, date: url.searchParams.get("date") || "", meal: url.searchParams.get("meal") || "", ward: url.searchParams.get("ward") || "" }));
+      if (sub === "meal-mark" && method === "POST") return supportOut(await markMeal(request, env, { ...deps, ...mealClock, date: body.date, meal: body.meal, encounterId: body.encounterId, mark: body.mark, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "cssd-set" && method === "POST") return supportOut(await saveInstrumentSet(request, env, { ...deps, set: body.set || {}, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "cssd-load" && method === "POST") return supportOut(await startLoad(request, env, { ...deps, load: body.load || {}, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "cssd-load-result" && method === "POST") return supportOut(await recordLoadResult(request, env, { ...deps, loadId: body.loadId, chemicalIndicator: body.chemicalIndicator, biologicalIndicator: body.biologicalIndicator, releaseWithoutBi: body.releaseWithoutBi === true, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "cssd-step" && method === "POST") return supportOut(await cssdStep(request, env, { ...deps, step: body.step, setId: body.setId, cycleId: body.cycleId, from: body.from, caseId: body.caseId, loadId: body.loadId, expiresAt: body.expiresAt, location: body.location, to: body.to, missing: body.missing, itemsChecked: body.itemsChecked === true, method: body.method, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "cssd-board" && method === "GET") return supportOut(await cssdBoard(request, env, { ...deps }));
+      if (sub === "cssd-case-sets" && method === "GET") return supportOut(await caseSets(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" }));
+      if (sub.indexOf("housekeeping-") === 0) {
+        const canInspect = (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.HOUSEKEEPING_INSPECT)).ok === true;
+        if (sub === "housekeeping-board" && method === "GET") {
+          const r = await housekeepingBoard(request, env, { ...deps, inspectionRequired: support.housekeepingInspection === true });
+          return supportOut({ ...r, canInspect });
+        }
+        if (sub === "housekeeping-task" && method === "POST") return supportOut(await raiseHousekeepingTask(request, env, { ...deps, kind: body.kind, location: body.location, wardId: body.wardId, isolationType: body.isolationType, note: body.note, idempotencyKey: body.idempotencyKey || null }));
+        if (sub === "housekeeping-step" && method === "POST") return supportOut(await housekeepingStep(request, env, { ...deps, taskId: body.taskId, step: body.step, assignee: body.assignee, kind: body.kind, isolationType: body.isolationType, result: body.result, note: body.note, reason: body.reason, canInspect, idempotencyKey: body.idempotencyKey || null }));
+        if (sub === "housekeeping-report" && method === "GET") return supportOut(await housekeepingReport(request, env, { ...deps, days: url.searchParams.get("days") || "" }));
+      }
+      if (sub === "ambulance-vehicle" && method === "POST") return supportOut(await saveVehicle(request, env, { ...deps, vehicle: body.vehicle || {}, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "ambulance-trip" && method === "POST") return supportOut(await requestTrip(request, env, { ...deps, trip: body.trip || {}, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "ambulance-trip-step" && method === "POST") {
+        /* The crew is read against the rota at dispatch; a rota that cannot be read is recorded as unknown, never as off duty. */
+        let onDuty = null;
+        if (body.step === "dispatch") {
+          try { const d = await ROSTER.onDuty(env, wOrgId, "", wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : 330); onDuty = d && d.ok && !d.partial ? (d.onDuty || []).map((x) => x.identity) : null; }
+          catch { onDuty = null; }
+        }
+        return supportOut(await tripStep(request, env, { ...deps, tripId: body.tripId, step: body.step, vehicleId: body.vehicleId, crew: body.crew, onDuty, reason: body.reason, distanceKm: body.distanceKm, idempotencyKey: body.idempotencyKey || null }));
+      }
+      if (sub === "transport-board" && method === "GET") return supportOut(await transportBoard(request, env, { ...deps }));
+      const chambers = Array.isArray(support.mortuaryChambers) ? support.mortuaryChambers : [];
+      if (sub === "mortuary-receive" && method === "POST") return supportOut(await receiveBody(request, env, { ...deps, chambers, patientId: body.patientId, encounterId: body.encounterId, broughtBy: body.broughtBy, identifiedBy: body.identifiedBy, chamber: body.chamber, belongings: body.belongings, idempotencyKey: body.idempotencyKey || null }));
+      if (sub === "mortuary-update" && method === "POST") return supportOut(await updateMortuaryCase(request, env, { ...deps, chambers, caseId: body.caseId, chamber: body.chamber, belongings: body.belongings, postMortem: body.postMortem, idempotencyKey: body.idempotencyKey || null }));
+      /* Legal review D.4.3: the medico-legal REGISTER's open cases bind the release too (a custody death waits for the
+       * Magistrate's inquest papers). Only category, status and the inquest papers leave the register here. */
+      const openMlcCases = async (patientId) => {
+        const r = await listRegisterEntries({ ...deps, actor: { id: actor.id }, kind: "mlc", patientId: patientId || undefined });
+        if (!r.ok) return null;
+        return r.entries.filter((e) => e.fields && e.fields.status !== "withdrawn").map((e) => ({ patientId: e.patientId, serial: e.serial, category: e.fields.category, inquestPapersReceived: e.fields.inquestPapersReceived || null, inquestPapersReference: e.fields.inquestPapersReference || null }));
+      };
+      if (sub === "mortuary-release" && method === "POST") {
+        let caseRec;
+        try { caseRec = await deps.recordDeps.repository.latest(mig.tenantId, "MortuaryCase", String(body.caseId || "")); }
+        catch { return json({ ok: false, error: "record_read_failed", message: "The mortuary case could not be read, so the body was not released.", written: 0 }, 502, request); }
+        const cases = caseRec ? await openMlcCases(caseRec.patientId) : [];
+        if (cases === null) return json({ ok: false, error: "mlc_register_unreadable", message: "The medico-legal register could not be checked, so the body was not released.", written: 0 }, 502, request);
+        return supportOut(await releaseBody(request, env, { ...deps, caseId: body.caseId, release: body.release || {}, registerMlc: cases, idempotencyKey: body.idempotencyKey || null }));
+      }
+      if (sub === "mortuary-board" && method === "GET") {
+        const cases = await openMlcCases(null);
+        const byPatient = cases ? cases.reduce((m, c) => m.set(c.patientId, [...(m.get(c.patientId) || []), c]), new Map()) : null;
+        return supportOut(await mortuaryBoard(request, env, { ...deps, chambers, registerMlc: byPatient }));
+      }
       if (sub === "purchase-order" && method === "POST") {
         const r = await raisePurchaseOrder(request, env, { ...deps, vendor: body.vendor, lines: body.lines, note: body.note, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -1542,6 +2399,27 @@ export async function onRequest(context) {
         const r = await listPurchaseOrders(request, env, { ...deps });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "supply-chain" && method === "GET") {
+        const r = await supplyChainOverview(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "supplier-return" && method === "POST") {
+        /* Whether the stock is a controlled drug is decided from the receipt's own item (isControlled, the drug master),
+         * never from anything the screen sends. */
+        const r = await returnToSupplier(request, env, { ...deps, receiptId: body.receiptId, quantity: body.quantity, reason: body.reason, supplier: body.supplier, debitNoteNo: body.debitNoteNo,
+          isControlled, witnessId: body.witnessId, witnessCheck, controllerApprovalRef: body.controllerApprovalRef, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "rate-contract" && method === "POST") {
+        const r = await saveRateContract(request, env, { ...deps, vendor: body.vendor, item: body.item, unit: body.unit, pricePaise: body.pricePaise, validFrom: body.validFrom, validTo: body.validTo, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "reorder-suggestions" && method === "GET") {
+        /* A store keeper reads no dispenses, so the drafts are limited to the general stores item master for them. */
+        const pharmacy = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_DISPENSE);
+        const r = await reorderSuggestions(request, env, { ...deps, policy: readReorderPolicy(wsqCfg), storesOnly: !(pharmacy && pharmacy.ok) });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "approval-request" && method === "POST") {
         const r = await requestVerification(request, env, { ...deps, subjectType: body.subjectType, subjectId: body.subjectId, reason: body.reason, context: body.context, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -1552,6 +2430,17 @@ export async function onRequest(context) {
       }
       if (sub === "approvals" && method === "GET") {
         const r = await listVerifications(request, env, { ...deps, subjectId: url.searchParams.get("subjectId") || "" });
+        /* A purchase order waiting for approval carries its rate contract check (purchasing.js contractWarnings), so the
+         * approver sees a price above contract. A check that could not be made says so; it never reads as "no warning". */
+        const poIds = r.ok ? r.verifications.filter((v) => v.subjectType === "PurchaseOrder" && v.state === "pending").map((v) => v.subjectId) : [];
+        if (poIds.length) {
+          const pc = await purchaseOrderPriceChecks(request, env, { ...deps, purchaseOrderIds: poIds });
+          for (const v of r.verifications) {
+            if (v.subjectType !== "PurchaseOrder" || v.state !== "pending") continue;
+            if (!pc.ok) v.priceCheck = "failed";
+            else if (pc.checks[v.subjectId]) Object.assign(v, { priceCheck: "done", priceWarnings: pc.checks[v.subjectId].warnings, unpricedAgainstContract: pc.checks[v.subjectId].unpriced });
+          }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "consultation" && method === "POST") {
@@ -1564,7 +2453,7 @@ export async function onRequest(context) {
           medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, safety: (c.item && c.item.safety) || null,
             formulary: (wsqCfg && wsqCfg.formulary) || null,
             advisories: (wsqCfg && wsqCfg.advisories) || null,
-            ageYears: body.ageYears,
+            ageYears: body.ageYears, lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,
             requireReasonOffFormulary: !!(wsqCfg && wsqCfg.requireReasonOffFormulary),
             idempotencyKey: idemFor(body.idempotencyKey, "med", c.index) }),
           investigations: (rq, ev, c) => orderInvestigation(rq, ev, { ...c,
@@ -1582,7 +2471,10 @@ export async function onRequest(context) {
         const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
         // P2.4: how long a device may show an offline copy of a chart. Hospital config, 1-72 hours, default 12.
         if (r.ok) { const h = Number(wsqCfg && wsqCfg.offlineCacheHours); r.offlineCacheHours = Number.isFinite(h) && h >= 1 && h <= 72 ? h : 12; }
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        // The hospital's label sizes (Admin > Hospital), for the labels printed from any ward screen.
+        if (r.ok) r.labels = wsqLabelSettings(wOrg);
+        const masked = await mtpNameMask(deps, can(wAz.role, CAPS.REGISTER_MTP), sub, r);
+        return json(masked, masked.ok ? 200 : (masked.status || 502), request);
       }
       if (sub === "ed-arrival" && method === "POST") {
         const r = await edArrival(request, env, { ...deps, arrival: body.arrival || body, idempotencyKey: body.idempotencyKey || null });
@@ -1606,7 +2498,8 @@ export async function onRequest(context) {
       }
       if (sub === "ed-list" && method === "GET") {
         const r = await listEd(request, env, { ...deps, reassessMinutes: (wsqCfg && wsqCfg.edReassessMinutes) || null });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        const masked = await mtpNameMask(deps, can(wAz.role, CAPS.REGISTER_MTP), sub, r);
+        return json(masked, masked.ok ? 200 : (masked.status || 502), request);
       }
       if (sub === "resus-start" && method === "POST") {
         const r = await startResusBundle(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, code: body.code, evidence: body.evidence, timeZero: body.timeZero, idempotencyKey: body.idempotencyKey || null });
@@ -1716,8 +2609,16 @@ export async function onRequest(context) {
         const r = await withdrawDocument(request, env, { ...deps, documentId: body.documentId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "document-release" && method === "POST") {
+        const r = await releaseDocumentToPatient(request, env, { ...deps, documentId: body.documentId, version: body.version, reason: body.reason, consentRef: body.consentRef, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "document-purge" && method === "POST") {
-        const r = await purgeDocument(request, env, { ...deps, store: documentStoreFromEnv(env), documentId: body.documentId });
+        /* Inside a period kept only by the hospital's retention policy, the deletion is confirmed by the Data Protection
+         * Officer or the medical records officer (owner's guidance 17 Sep 2026): their capability is checked here. */
+        const canConfirmPolicy = body.policyConfirm === true && ((await ORG.authorizeOrg(env, actor, wOrgId, CAPS.DPDP_MANAGE)).ok || (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS)).ok);
+        const r = await purgeDocument(request, env, { ...deps, store: documentStoreFromEnv(env), documentId: body.documentId, reason: body.reason, retention: wsqCfg && wsqCfg.retention,
+          policyConfirm: body.policyConfirm === true, policyReason: body.policyReason, canConfirmPolicy });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "tag-assign" && method === "POST") {
@@ -1740,6 +2641,11 @@ export async function onRequest(context) {
         const r = await reportPatientTagLost(request, env, { ...deps, tagId: body.tagId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "label-data" && method === "GET") {
+        const r = await labelData(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        if (r.ok) r.labels = wsqLabelSettings(wOrg);
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "tag-log" && method === "GET") {
         const r = await patientTagLog(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -1760,6 +2666,14 @@ export async function onRequest(context) {
         const r = await signInCase(request, env, { ...deps, caseId: body.caseId, submission: body.submission, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "pac" && method === "POST") {
+        const r = await recordPac(request, env, { ...deps, caseId: body.caseId, pac: body.pac, revisionReason: body.revisionReason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pac-get" && method === "GET") {
+        const r = await getPac(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "surgery-timeout" && method === "POST") {
         const r = await timeOutCase(request, env, { ...deps, caseId: body.caseId, submission: body.submission, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -1776,6 +2690,18 @@ export async function onRequest(context) {
         const r = await abandonCase(request, env, { ...deps, caseId: body.caseId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "surgery-reschedule" && method === "POST") {
+        const r = await rescheduleCase(request, env, { ...deps, caseId: body.caseId, kind: body.kind, toStart: body.toStart, reasonCode: body.reasonCode, reason: body.reason, theatre: (wsqCfg && wsqCfg.theatre) || null, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-times" && method === "POST") {
+        const r = await recordTheatreTime(request, env, { ...deps, caseId: body.caseId, event: body.event, at: body.at, correctionReason: body.correctionReason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-return" && method === "POST") {
+        const r = await flagUnplannedReturn(request, env, { ...deps, caseId: body.caseId, value: body.value, indexCaseId: body.indexCaseId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "surgery-note" && method === "POST") {
         const r = await recordOperativeNote(request, env, { ...deps, caseId: body.caseId, note: body.note, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -1786,6 +2712,8 @@ export async function onRequest(context) {
       }
       if (sub === "surgery-get" && method === "GET") {
         const r = await getSurgicalCase(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" });
+        // The hospital's reschedule reason codes, so the case screen offers exactly the codes the server accepts.
+        if (r.ok) r.theatreRules = theatreSettings((wsqCfg && wsqCfg.theatre) || null);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "surgery-list" && method === "GET") {
@@ -1797,7 +2725,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "anesthesia-start" && method === "POST") {
-        const r = await startAnesthesia(request, env, { ...deps, caseId: body.caseId, asaClass: body.asaClass, idempotencyKey: body.idempotencyKey || null });
+        const r = await startAnesthesia(request, env, { ...deps, caseId: body.caseId, asaClass: body.asaClass, technique: body.technique, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "anesthesia-event" && method === "POST") {
@@ -1805,7 +2733,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "anesthesia-end" && method === "POST") {
-        const r = await endAnesthesia(request, env, { ...deps, caseId: body.caseId, idempotencyKey: body.idempotencyKey || null });
+        const r = await endAnesthesia(request, env, { ...deps, caseId: body.caseId, technique: body.technique, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "anesthesia-get" && method === "GET") {
@@ -1860,6 +2788,14 @@ export async function onRequest(context) {
         const r = await registerNewborn(request, env, { ...deps, motherPatientId: body.motherPatientId, encounterId: body.encounterId, sex: body.sex, name: body.name, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "apgar" && method === "POST") {
+        const r = await recordApgar(request, env, { ...deps, patientId: body.patientId, minute: body.minute, components: body.components, correctionReason: body.correctionReason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "apgar-get" && method === "GET") {
+        const r = await getApgar(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "family-links" && method === "GET") {
         const r = await listFamilyLinks(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -1886,6 +2822,10 @@ export async function onRequest(context) {
       }
       if (sub === "line-remove" && method === "POST") {
         const r = await removeLine(request, env, { ...deps, lineId: body.lineId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "growth" && method === "GET") {
+        const r = await growthChart(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "line-list" && method === "GET") {
@@ -1948,13 +2888,21 @@ export async function onRequest(context) {
         const r = await requestTransfusion(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, encounterId: body.encounterId, component: body.component, units: body.units, indication: body.indication, aboGroup: body.aboGroup, rhD: body.rhD, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* A unit this blood bank registered is crossmatched only while it is on the shelf, and with the group, RhD,
+       * component and expiry its own records carry (blood-bank.js bloodUnitGate). A unit it never registered passes
+       * as before. The gate reads and never writes; a gate that cannot read refuses. */
       if (sub === "transfusion-crossmatch" && method === "POST") {
-        const r = await recordCrossmatch(request, env, { ...deps, episodeId: body.episodeId, unitId: body.unitId, aboGroup: body.aboGroup, rhD: body.rhD, component: body.component, expiresAt: body.expiresAt, idempotencyKey: body.idempotencyKey || null });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        const gate = await bloodUnitGate(request, env, { ...deps, unitId: body.unitId, episodeId: body.episodeId, aboGroup: body.aboGroup, rhD: body.rhD, component: body.component }, "crossmatch");
+        if (!gate.ok) return json({ ...gate, written: 0 }, gate.status || 502, request);
+        const u = gate.tracked ? gate.unit : { unitId: body.unitId, aboGroup: body.aboGroup, rhD: body.rhD, component: body.component, expiresAt: body.expiresAt };
+        const r = await recordCrossmatch(request, env, { ...deps, episodeId: body.episodeId, unitId: u.unitId, aboGroup: u.aboGroup, rhD: u.rhD, component: u.component, expiresAt: u.expiresAt, idempotencyKey: body.idempotencyKey || null });
+        return json({ ...r, inventory: gate.tracked ? "tracked" : "untracked" }, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfusion-issue" && method === "POST") {
+        const gate = await bloodUnitGate(request, env, { ...deps, episodeId: body.episodeId }, "issue");
+        if (!gate.ok) return json({ ...gate, written: 0 }, gate.status || 502, request);
         const r = await issueUnit(request, env, { ...deps, episodeId: body.episodeId, idempotencyKey: body.idempotencyKey || null });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        return json({ ...r, inventory: gate.tracked ? "tracked" : "untracked" }, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfusion-bedside-check" && method === "POST") {
         const r = await recordBedsideCheck(request, env, { ...deps, episodeId: body.episodeId, checkerId: body.checkerId, secondCheckerId: body.secondCheckerId, scannedPatientBarcode: body.scannedPatientBarcode, scannedUnitId: body.scannedUnitId, patient: body.patient, unitInHand: body.unitInHand, idempotencyKey: body.idempotencyKey || null });
@@ -1993,13 +2941,17 @@ export async function onRequest(context) {
       }
       if (sub === "medication-order" && method === "POST") {
         const r = await createWardMedicationOrder(request, env, {
-          ...deps, order: body.order || body, safety: body.safety || null,
+          /* LT-14: the safety check runs on the server against the record (never a verdict from the body);
+           * checkOnly shows it before anything is written. */
+          ...deps, order: body.order || body, rulePack: getRulePack(), checkOnly: body.checkOnly === true, overrideReason: body.overrideReason,
           /* The formulary is ORG content, exactly as the order sets and the critical limits are: a
            * caller who could pass one could lift any restriction the hospital had set. */
           formulary: (wsqCfg && wsqCfg.formulary) || null,
           // The hospital's own advisories, ORG content like everything else here. They can never
           // block: see the header of _wardsynq/advisories.js.
           advisories: (wsqCfg && wsqCfg.advisories) || null, ageYears: body.ageYears,
+          // ORG content too: the postpartum window the pregnancy and lactation check counts as breastfeeding.
+          lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,
           requireReasonOffFormulary: !!(wsqCfg && wsqCfg.requireReasonOffFormulary),
           specialty: body.specialty, approvalRef: body.approvalRef, formularyReason: body.formularyReason,
           idempotencyKey: body.idempotencyKey || null,
@@ -2019,8 +2971,9 @@ export async function onRequest(context) {
        * the FHIR door serves as $export, in the JSON the admin screen reads. staff.admin at the route
        * AND a clinical actor that may read each type, inside the handler. */
       if (sub === "fhir-export" && method === "POST") {
-        const level = body.level === "patient" ? "patient" : "system";
-        const r = await kickoffExport(request, env, { ...deps, store: documentStoreFromEnv(env), level, params: { _type: Array.isArray(body.types) ? body.types : [], ...(body.since ? { _since: String(body.since) } : {}) }, requestUrl: `${url.origin}/api/queue/ward/fhir/${level === "patient" ? "Patient/" : ""}$export` });
+        const groupId = String(body.groupId || "");
+        const level = body.level === "patient" ? "patient" : groupId ? "group" : "system";
+        const r = await kickoffExport(request, env, { ...deps, store: documentStoreFromEnv(env), level, groupId, params: { _type: Array.isArray(body.types) ? body.types : [], ...(body.since ? { _since: String(body.since) } : {}) }, requestUrl: `${url.origin}/api/queue/ward/fhir/${level === "patient" ? "Patient/" : level === "group" ? `Group/${encodeURIComponent(groupId)}/` : ""}$export` });
         if (!r.ok) return json({ ok: false, error: r.status === 429 ? "export_running" : r.status === 401 ? "auth" : r.status === 403 ? "permission" : "export_refused", message: r.outcome.issue.map((i) => i.diagnostics).join("; ") }, r.status, request);
         return json({ ok: true, jobId: r.jobId, status: "in-progress" }, 202, request);
       }
@@ -2043,7 +2996,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "webhook-update" && method === "POST") {
-        const r = await updateWebhook(request, env, { ...deps, id: body.id, eventTypes: body.eventTypes, payload: body.payload, active: typeof body.active === "boolean" ? body.active : undefined, reason: body.reason });
+        const r = await updateWebhook(request, env, { ...deps, id: body.id, url: body.url, eventTypes: body.eventTypes, payload: body.payload, active: typeof body.active === "boolean" ? body.active : undefined, reason: body.reason });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "webhook-rotate" && method === "POST") {
@@ -2055,7 +3008,178 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "webhook-deliveries" && method === "GET") {
-        const r = await listWebhookDeliveries(request, env, { ...deps, id: url.searchParams.get("id") || "" });
+        const r = await listWebhookDeliveries(request, env, { ...deps, id: url.searchParams.get("id") || "", limit: url.searchParams.get("limit") || "", before: url.searchParams.get("before") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* CONNECTORS (connectors.js), Admin Center > Integrations. Credentials go in and never come back out. */
+      /* HR BEYOND THE ROTA and PATIENT ENGAGEMENT (gap wave 2026-09-16). The route's capability was decided above. */
+      if (sub === "legacy-import" && method === "POST") {
+        const kindCap = { patients: CAPS.QUEUE_ADD, prices: CAPS.STAFF_ADMIN, vendors: CAPS.STORES_MANAGE }[String(body.kind || "")];
+        if (!kindCap) return json({ ok: false, error: "unknown_kind", message: "Choose what the file holds: patients, prices or suppliers." }, 422, request);
+        const kAz = await ORG.authorizeOrg(env, actor, wOrgId, kindCap);
+        if (!kAz.ok) return json(azRefusal(kAz), 403, request);
+        const r = await importLegacy(request, env, { ...deps, kind: body.kind, csv: body.csv, mapping: body.mapping, commit: body.commit === true, confirmCount: body.confirmCount, planId: body.planId,
+          region: (wOrg && wOrg.region) || undefined, externalMrn: !!(wsqCfg && wsqCfg.externalMrn),
+          patients: { byMrn: (mrn) => PAT.getPatient(env, wOrgId, mrn), mobileTaken: (mobile) => PAT.mobileDuplicateOf(env, wOrgId, mobile), register: (b) => PAT.registerPatient(env, wOrg, b, actor.id || "") },
+          // The Price list is the one table the invoice paths read (wsqTariff); without its store there is nowhere to import to.
+          prices: BILL.billingEnabled(env) ? { list: () => BILL.listTariff(env, wOrgId), save: (item) => BILL.upsertTariff(env, wOrgId, item, actor.id || "") } : null,
+          audit: async (action, meta) => Q.qAudit(env, { hospitalId: wOrgId, ticketId: "", actor: actor.id, action, meta }) });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub.startsWith("hr-")) {
+        const hrCtx = { ...deps, actorId: actor.id };
+        const members = async () => (await ORG.listMembers(env, wOrgId)).map((m) => ({ identity: m.identity, role: m.role, active: m.active !== false, displayName: m.displayName || "", employeeId: m.employeeId || "", scope: m.scope || {} }));
+        const rota = { assignmentsBetween: (from, to) => ROSTER.assignmentsBetween(env, wOrgId, from, to) };
+        // The caller's own membership in this hospital, from the credential. The hospital's owner has none.
+        const me = async () => {
+          const m = (await ORG.getMembership(env, wOrgId, actor.id)) || (actor.email ? await ORG.getMembership(env, wOrgId, actor.email) : null);
+          return m && m.identity && m.active !== false ? m.identity : "";
+        };
+        let r = null;
+        if (sub === "hr-clock" && method === "POST") r = await clockAttendance(request, env, { ...hrCtx, identity: await me(), action: body.action, rota });
+        else if (sub === "hr-my-records" && method === "GET") {
+          const identity = await me();
+          if (!identity) r = { ok: true, notStaff: true };
+          else {
+            const staff = (await members()).filter((m) => m.identity === identity);
+            const month = url.searchParams.get("month") || new Date(Date.now() + ((wsqCfg && wsqCfg.utcOffsetMinutes != null ? Number(wsqCfg.utcOffsetMinutes) : 330) * 60000)).toISOString().slice(0, 7);
+            const [attendance, credentials, training] = await Promise.all([
+              attendanceMonth(request, env, { ...hrCtx, month, identity, rota }).catch(() => ({ ok: false, error: "attendance_read_failed" })),
+              listCredentials(request, env, { ...hrCtx, identity }).catch(() => ({ ok: false, error: "hr_read_failed" })),
+              trainingOverview(request, env, { ...hrCtx, identity, members: staff, departments: await ORG.listDepartments(env, wOrgId).catch(() => []) }).catch(() => ({ ok: false, error: "hr_read_failed" }))]);
+            r = { ok: true, identity, month, attendance, credentials, training };
+          }
+        }
+        else if (sub === "hr-alert-ack" && method === "POST") r = await acknowledgeAlert(request, env, { ...hrCtx, id: body.id, identity: await me(), manager: (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STAFF_ADMIN)).ok === true });
+        else if (sub === "hr-attendance" && method === "GET") {
+          const staff = await members();
+          r = await attendanceMonth(request, env, { ...hrCtx, month: url.searchParams.get("month") || "", identity: url.searchParams.get("identity") || "", format: url.searchParams.get("format") || "", rota, members: staff });
+          if (r.ok) r.staff = staff;
+        }
+        else if (sub === "hr-attendance-correct" && method === "POST") r = await correctAttendance(request, env, { ...hrCtx, members: await members(), id: body.id, identity: body.identity, clockIn: body.clockIn, clockOut: body.clockOut, void: body.void === true, reason: body.reason });
+        else if (sub === "hr-attendance-import" && method === "POST") r = await importDeviceAttendance(request, env, { ...hrCtx, members: await members(), csv: body.csv, mapping: body.mapping, commit: body.commit === true, confirmCount: body.confirmCount });
+        else if (sub === "hr-credentials" && method === "GET") { r = await listCredentials(request, env, hrCtx); if (r.ok) r.staff = await members(); }
+        else if (sub === "hr-credential-save" && method === "POST") r = await saveCredential(request, env, { ...hrCtx, members: await members(), id: body.id, identity: body.identity, kind: body.kind, category: body.category, name: body.name, number: body.number, issuer: body.issuer, validFrom: body.validFrom, validTo: body.validTo, remove: body.remove === true, reason: body.reason });
+        else if (sub === "hr-credential-alerts" && method === "POST") r = await runCredentialAlerts({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, actorId: actor.id, wsqCfg });
+        else if (sub === "hr-training" && method === "GET") {
+          const staff = await members();
+          r = await trainingOverview(request, env, { ...hrCtx, members: staff, departments: await ORG.listDepartments(env, wOrgId) });
+          if (r.ok) r.staff = staff;
+        }
+        else if (sub === "hr-course-save" && method === "POST") r = await saveCourse(request, env, { ...hrCtx, standard: body.standard === true, id: body.id, name: body.name, mandatory: body.mandatory === true, validityMonths: body.validityMonths, roles: body.roles, active: body.active !== false });
+        else if (sub === "hr-session-save" && method === "POST") r = await saveSession(request, env, { ...hrCtx, members: await members(), id: body.id, courseId: body.courseId, date: body.date, trainer: body.trainer, venue: body.venue, invitees: body.invitees, cancel: body.cancel === true, reason: body.reason });
+        else if (sub === "hr-session-attendance" && method === "POST") r = await recordSessionAttendance(request, env, { ...hrCtx, id: body.id, attendance: body.attendance });
+        else if (sub === "hr-training-record" && method === "POST") r = await recordTraining(request, env, { ...hrCtx, members: await members(), identity: body.identity, courseId: body.courseId, completedOn: body.completedOn, note: body.note });
+        if (r) return json(r, r.ok ? 200 : (r.status || 502), request);
+        return json({ ok: false, error: "not_found" }, 404, request);
+      }
+      if (sub.startsWith("comm-") || sub.startsWith("feedback-")) {
+        const commCtx = { ...deps, actorId: actor.id };
+        let r = null;
+        if (sub === "comm-preference" && (method === "GET" || method === "POST")) {
+          r = await staffPreference(request, env, { ...commCtx, method, patientId: method === "GET" ? url.searchParams.get("patientId") || "" : body.patientId, channel: body.channel, optedIn: body.optedIn === true, mobile: body.mobile, note: body.note, dpdp: wsqCfg && wsqCfg.dpdp, parentVerification: body.parentVerification || null });
+        } else if (sub === "comm-log" && method === "GET") {
+          const ports = await commsPorts(env, wOrg, deps.recordDeps.repository, mig.tenantId).catch(() => null);
+          r = ports ? await messageLog(request, env, { ...commCtx, status: url.searchParams.get("status") || "", smsMissing: ports.sms.missing, whatsappConnected: !!ports.whatsapp })
+            : { ok: false, status: 502, error: "connector_read_failed", message: "The messaging setup could not be read." };
+        } else if (sub === "comm-run" && method === "POST") {
+          const cfg = wsqCfg || {};
+          r = await runPatientMessaging({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, orgId: wOrgId, orgName: wOrg.name, commsCfg: cfg.patientComms, feedbackCfg: cfg.feedback, actorId: actor.id,
+            off: cfg.utcOffsetMinutes != null ? Number(cfg.utcOffsetMinutes) || 0 : 330, ports: await commsPorts(env, wOrg, deps.recordDeps.repository, mig.tenantId) });
+        } else if (sub === "comm-retry" && method === "POST") r = await retryMessage(request, env, { ...commCtx, id: body.id });
+        else if (sub === "feedback-dashboard" && method === "GET") r = await feedbackDashboard(request, env, { ...commCtx, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        else if (sub === "feedback-recovery" && method === "POST") r = await updateRecovery(request, env, { ...commCtx, id: body.id, status: body.status, note: body.note });
+        if (r) return json(r, r.ok ? 200 : (r.status || 502), request);
+        return json({ ok: false, error: "not_found" }, 404, request);
+      }
+      if (BUG_SUBS.has(sub)) {
+        const bugCtx = { ...deps, reporter: { id: actor.id, name: actor.email || actor.name || null, role: wAz.role || null },
+          manager: wAz.role === "admin" || !!wAz.platformOwner };
+        let r = null;
+        if (sub === "bug-report" && method === "POST") {
+          r = await submitBugReport(request, env, { ...bugCtx, clientReportId: body.clientReportId, description: body.description, severity: body.severity, location: body.location,
+            context: body.context, target: body.target, errors: body.errors, userAgent: body.userAgent, screen: body.screen, clientReportedAt: body.clientReportedAt });
+        } else if (sub === "bug-reports" && method === "GET") {
+          r = await listBugReports(request, env, { ...bugCtx, status: url.searchParams.get("status") || "" });
+        } else if (sub === "bug-report-status" && method === "POST") {
+          r = await setBugReportStatus(request, env, { ...bugCtx, id: body.id, status: body.status, note: body.note, expectedVersion: body.expectedVersion });
+        } else if (sub === "bug-report-remove" && method === "POST") {
+          r = await removeBugReport(request, env, { ...bugCtx, id: body.id, expectedVersion: body.expectedVersion });
+        }
+        if (r) return json(r, r.ok ? 200 : (r.status || 502), request);
+        return json({ ok: false, error: "not_found" }, 404, request);
+      }
+      if (sub === "connectors" && method === "GET") {
+        const r = await listConnectors(request, env, { ...deps, kind: url.searchParams.get("kind") || "", gst: readGstSettings(wsqCfg) });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "connector-save" && method === "POST") {
+        const r = await saveConnector(request, env, { ...deps, kind: body.kind, provider: body.provider, name: body.name, settings: body.settings, secrets: body.secrets,
+          active: typeof body.active === "boolean" ? body.active : undefined, id: body.id, org: wOrg });
+        /* S6: ABDM's callbacks find the hospital by its HIP ID (hip-handlers.js resolveHipTenant). A saved ABDM profile is
+         * projected there; a profile that is not linked, or is switched off, is removed from it, so its callbacks fail closed. */
+        if (r.ok && !r.unchanged && body.kind === "abdm") {
+          r.hipRouting = await projectHipRouting(env, mig.tenantId, await deps.recordDeps.repository.latest(mig.tenantId, CONNECTOR_TYPE, "abdm").catch(() => null));
+        }
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ABDM PROFILE (abdm-hospital.js), Admin Center > Integrations > ABDM. The connector list's own gate
+       * decides who may see it; the members read only adds each doctor's registration and HPR readiness. */
+      if (sub === "abdm-profile" && method === "GET") {
+        const r = await listConnectors(request, env, { ...deps, kind: "abdm" });
+        if (!r.ok) return json(r, r.status || 502, request);
+        let members;
+        try { members = await ORG.listMembers(env, wOrgId); }
+        catch { return json({ ok: false, error: "members_read_failed", message: "The staff list could not be read, so the checklist is not shown." }, 502, request); }
+        // What ABDM's registries answered (abdm-registry.js) rides the raw record, not the connector summary.
+        let registry = null;
+        try { const raw = await deps.recordDeps.repository.latest(mig.tenantId, CONNECTOR_TYPE, "abdm"); registry = (raw && raw.registry) || null; }
+        catch { return json({ ok: false, error: "record_read_failed", message: "The ABDM profile could not be read." }, 502, request); }
+        return json({ ok: true, keyConfigured: r.keyConfigured, catalogue: r.catalogue, ...abdmView(r.connectors[0] || null, wOrg, members, registry) }, 200, request);
+      }
+      /* ABHA AT THE DESK (abdm-desk.js). The sheet asks whether this hospital is connected before it offers
+       * ABHA, then walks verify or create one step per call. Aadhaar, OTP and mobile stay in the POST body. */
+      if (sub === "abdm-desk" && method === "GET") {
+        const r = await abhaDeskStatus(request, env, { ...deps, role: wAz.role });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-records" && method === "GET") {
+        const r = await abdmRecordsView(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-link-stay" && method === "POST") {
+        const r = await abdmLinkStay(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-consent-request" && method === "POST") {
+        const r = await abdmConsentRequest(request, env, { ...deps, patientId: body.patientId, purpose: body.purpose, hiTypes: body.hiTypes, from: body.from, to: body.to, expiresOn: body.expiresOn });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-fetch" && method === "POST") {
+        const r = await abdmFetch(request, env, { ...deps, patientId: body.patientId, requestId: body.requestId });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-registry-check" && method === "POST") {
+        let members;
+        try { members = await ORG.listMembers(env, wOrgId); }
+        catch { return json({ ok: false, error: "members_read_failed", message: "The staff list could not be read, so nothing was checked." }, 502, request); }
+        const r = await abdmRegistryCheck(request, env, { ...deps, org: wOrg, members, target: body.target, identity: body.identity });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-share" && method === "GET") {
+        const r = await abdmShareView(request, env, { ...deps, org: wOrg });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abdm-share-register" && method === "POST") {
+        const r = await abdmShareRegister(request, env, { ...deps, org: wOrg, actorId: actor.id, ticketId: body.ticketId, mrn: body.mrn });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "abha" && method === "POST") {
+        const r = await abhaDesk(request, env, { ...deps, role: wAz.role, actorId: actor.id, actorName: actor.name || actor.email || "", step: body.step, body });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "connector-test" && method === "POST") {
+        const r = await testConnector(request, env, { ...deps, id: body.id, fetchImpl: typeof env.WSQ_EINV_FETCH === "function" ? env.WSQ_EINV_FETCH : undefined });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* CONNECTED APPS (smart-clients.js), Admin Center > Integrations. The hospital's SMART client
@@ -2160,14 +3284,31 @@ export async function onRequest(context) {
          *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
         const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null), region: (wOrg && wOrg.region) || "", wardsynq: wsqCfg || null, org: wOrg || null, hospitalName: (wOrg && wOrg.name) || "" };
+        /* D9. The version this request speaks (fhir-version.js): Accept's fhirVersion for what comes back,
+         * Content-Type's for a body. Negotiated after the capability gate above, so a version header never
+         * changes who may ask. R4 is the default and the only version bulk export and writes speak. */
+        const fv = negotiateVersion(request);
+        if (fv.obj) return fhirJson(fv.obj, fv.status, request);
+        const vHead = { "Content-Type": contentTypeFor(fv.version) };
+        const r4Only = (what) => fhirJson(operationOutcome("error", "not-supported", `${what} is served as FHIR R4 only; send it without fhirVersion (or with fhirVersion=4.0)`), fv.contentVersion !== "4.0" ? 415 : 406, request);
         /* $export, $export-status, $export-file: gated staff.admin above (bulkFhirPath), before any read grammar. */
-        const bulk = await dispatchBulk(request, env, parts.slice(2), url, { ...fctx, store: documentStoreFromEnv(env) }, { cors: corsHeaders(request), suffix: `?orgId=${encodeURIComponent(wOrgId)}` });
+        if (isBulkPath(parts.slice(2)) && (fv.version !== "4.0" || fv.contentVersion !== "4.0")) return r4Only("Bulk Data export");
+        const bulk = await dispatchBulk(request, env, parts.slice(2), url, { ...fctx, store: documentStoreFromEnv(env) }, { cors: corsHeaders(request), suffix: `?orgId=${encodeURIComponent(wOrgId)}`, body });
         if (bulk) return bulk;
         /* $validate is an operation, not a write: it files nothing, so it is open to anyone who may
          * read, whether or not the hospital has opened the inbound door. */
         if (method === "POST") {
-          const op = await dispatchOperation(request, env, parts.slice(2), body, fctx);
-          if (op) return fhirJson(op.obj, op.status, request);
+          // D9: a body is validated against the tables of the version it says it is.
+          const op = await dispatchOperation(request, env, parts.slice(2), body, { ...fctx, fhirVersion: fv.contentVersion });
+          if (op) { const a = answerInVersion(op.obj, op.status, fv.version, parts.slice(2)); return fhirJson(a.obj, a.status, request, vHead); }
+          /* G10. POST Subscription is not a clinical write and not the inbound door: it registers a
+           * FHIR-payload webhook through registerWebhook (fhir-subscription.js), under the webhooks'
+           * own gate already applied above (staff.admin), so it answers whether or not inbound is on. */
+          if (parts[2] === "Subscription" && !parts[3]) {
+            if (fv.version !== "4.0" || fv.contentVersion !== "4.0") return r4Only("Subscription create");
+            const r = await createSubscription(request, env, { ...fctx, body });
+            return fhirJson(r.obj, r.status, request, r.headers);
+          }
         }
         /* WRITES. Off unless the hospital enabled wardsynq.fhir.inbound, and only for an actor who
          * may already write the chart (emr.treat) - the FHIR sub is emr.view for reads, so the write
@@ -2181,6 +3322,8 @@ export async function onRequest(context) {
           if (!inboundEnabled((wsqCfg && wsqCfg.fhir) || null)) return fhirJson(operationOutcome("error", "not-supported", "not found"), 404, request);
           const wAzW = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT);
           if (!wAzW.ok) return fhirJson(operationOutcome("error", "forbidden", "writing to the record needs emr.treat"), 403, request);
+          /* D9: the inbound normaliser reads R4. An R4B or R5 body is refused (415), never read as R4. */
+          if (fv.version !== "4.0" || fv.contentVersion !== "4.0") return r4Only("Writing to the record");
           const common = { ...fctx, body, config: (wsqCfg && wsqCfg.fhir) || null, sourceSystem: request.headers.get("X-Source-System") || "", ifMatch: request.headers.get("If-Match") || "", ifNoneExist: request.headers.get("If-None-Exist") || "", prefer: /return=minimal/i.test(request.headers.get("Prefer") || "") ? "minimal" : "representation" };
           const subjectRef = body && ((body.subject && body.subject.reference) || (body.patient && body.patient.reference) || "");
           const patientRef = (/(?:^|\/)Patient\/([^/?#]+)$/.exec(String(subjectRef || "")) || [])[1] || "";
@@ -2206,8 +3349,10 @@ export async function onRequest(context) {
         /* The read grammar lives ONCE, in fhir-route.js, shared with the external SMART door, so both
          * doors answer the same path the same way. `orgId` is this API's transport parameter, not a
          * FHIR one; the dispatcher strips it before parsing and keeps it in the Bundle links. */
-        const { obj, status } = await dispatchRead(request, env, parts.slice(2), url, fctx, request.headers.get("Prefer") || "");
-        return fhirJson(obj, status, request);
+        const { obj, status } = await dispatchRead(request, env, parts.slice(2), url, { ...fctx, fhirVersion: fv.version }, request.headers.get("Prefer") || "");
+        // D9: rendered in the requested version, or a 406 naming what is not.
+        const a = answerInVersion(obj, status, fv.version, parts.slice(2));
+        return fhirJson(a.obj, a.status, request, vHead);
       }
       if (sub === "transmit" && method === "POST") {
         const r = await queueTransmission(request, env, { ...deps, orderId: body.orderId, channel: body.channel, destination: body.destination, idempotencyKey: body.idempotencyKey || null });
@@ -2276,7 +3421,32 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "book-resource" && method === "POST") {
-        const r = await bookResource(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, resourceId: body.resourceId, startAt: body.startAt, minutes: body.minutes, patientId: body.patientId, encounterId: body.encounterId, purpose: body.purpose, idempotencyKey: body.idempotencyKey || null });
+        const r = await bookResource(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, theatre: (wsqCfg && wsqCfg.theatre) || null, resourceId: body.resourceId, startAt: body.startAt, minutes: body.minutes, patientId: body.patientId, encounterId: body.encounterId, purpose: body.purpose, sessionOwnerId: body.sessionOwnerId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- Theatre sessions and utilisation (theatre.js); outpatient and diagnostic waits (access-times.js) ---- */
+      if (sub === "theatre-session" && method === "POST") {
+        const r = await createTheatreSession(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, theatreId: body.theatreId, startAt: body.startAt, minutes: body.minutes, ownerKind: body.ownerKind, ownerId: body.ownerId, ownerName: body.ownerName, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "theatre-session-release" && method === "POST") {
+        const r = await releaseTheatreSession(request, env, { ...deps, sessionId: body.sessionId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "theatre-utilisation" && method === "GET") {
+        const r = await theatreUtilisation(request, env, { ...deps, resources: (wsqCfg && wsqCfg.resources) || null, theatre: (wsqCfg && wsqCfg.theatre) || null, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "diagnostic-arrival" && method === "POST") {
+        const r = await recordDiagnosticArrival(request, env, { ...deps, patientId: body.patientId || (body.mrn ? patientIdForMrn(body.mrn) : ""), service: body.service, setting: body.setting, arrivedAt: body.arrivedAt, appointmentAt: body.appointmentAt, serviceRequestId: body.serviceRequestId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "diagnostic-start" && method === "POST") {
+        const r = await recordDiagnosticStart(request, env, { ...deps, visitId: body.visitId, startedAt: body.startedAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "access-times" && method === "GET") {
+        const r = await accessTimes(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "resource-state" && method === "POST") {
@@ -2334,23 +3504,56 @@ export async function onRequest(context) {
         const r = await codeClaimForEncounter(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, codes: body.codes, now: body.now, invoiceId: body.invoiceId, payerId: body.payerId, policyNumber: body.policyNumber, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* Owner S4: the payer registry is this hospital's payer connectors, then wardsynq.payers. A registry
+       * that could not be read refuses the claim action: falling back to "not configured" would record a
+       * payer as absent when it was only unread. */
+      const payersNow = async () => mergePayers(payersFromConnectors(await activeConnectors(deps.recordDeps.repository, mig.tenantId, "payer")), (wsqCfg && wsqCfg.payers) || null);
+      const payersUnread = { ok: false, error: "payer_registry_unread", message: "This hospital's payer list could not be read, so nothing was done. Try again." };
       if (sub === "claim-state" && method === "POST") {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await claimAction(request, env, { ...deps, claimId: body.claimId, action: body.action, reason: body.reason, codes: body.codes || null, now: body.now, submittedAmount: body.submittedAmount, approvedAmount: body.approvedAmount, deniedAmount: body.deniedAmount,
           payerId: body.payerId, payerReference: body.payerReference, paidAmount: body.paidAmount, disallowances: body.disallowances, shortPaymentReason: body.shortPaymentReason, amount: body.amount,
-          payers: (wsqCfg && wsqCfg.payers) || null, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+          overrideReason: body.overrideReason, text: body.text, receivedAt: body.receivedAt, documents: body.documents, denialCode: body.denialCode, rootCause: body.rootCause, rcm: rcmSettings(wsqCfg),
+          payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* rcm-claims-ops (functions/_wardsynq/claims-ops.js): the claim checklist and coding candidates, payer queries and
+       * enhancements on a pre-authorisation, the evidence pack, and the claims desk's lists. Payers are read as for claims. */
+      if ((sub === "claim-checks" || sub === "rcm-worklists" || sub === "claim-evidence" || sub === "preauth-event") && (method === "GET" || method === "POST")) {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
+        const q = (k) => url.searchParams.get(k) || "";
+        const r = sub === "claim-checks" && method === "GET" ? await claimChecks(request, env, { ...deps, patientId: q("patientId"), encounterId: q("encounterId"), payers, rcm: rcmSettings(wsqCfg) })
+          : sub === "rcm-worklists" && method === "GET" ? await rcmWorklists(request, env, { ...deps, payers, rcm: rcmSettings(wsqCfg), from: q("from"), to: q("to") })
+          : sub === "claim-evidence" && method === "GET" ? await claimEvidence(request, env, { ...deps, claimId: q("claimId"), payers })
+          : sub === "claim-evidence" ? await saveClaimEvidence(request, env, { ...deps, claimId: body.claimId, text: body.text, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null })
+          : sub === "preauth-event" && method === "POST" ? await preAuthEvent(request, env, { ...deps, preAuthId: body.preAuthId, action: body.action, text: body.text, receivedAt: body.receivedAt, answer: body.answer, queryId: body.queryId,
+            requestedAmount: body.requestedAmount, reason: body.reason, enhancementId: body.enhancementId, state: body.state, approvedAmount: body.approvedAmount, note: body.note, decidedAt: body.decidedAt, payers, idempotencyKey: body.idempotencyKey || null })
+          : { ok: false, status: 404, error: "not_found" };
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "preauth" && method === "POST") {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await recordPreAuth(request, env, { ...deps, patientId: body.patientId, treatment: body.treatment, state: body.state, scheme: body.scheme, reason: body.reason, decidedAt: body.decidedAt, invoiceId: body.invoiceId, authorizedAmount: body.authorizedAmount, idempotencyKey: body.idempotencyKey || null,
-          payerId: body.payerId, requestedAmount: body.requestedAmount, payers: (wsqCfg && wsqCfg.payers) || null, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+          payerId: body.payerId, requestedAmount: body.requestedAmount, policyNumber: body.policyNumber, codes: body.codes, validUntil: body.validUntil, payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if ((sub === "nhcx-eligibility" || sub === "hcx-status") && method === "POST") {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
+        const fetchImpl = env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null;
+        const r = sub === "nhcx-eligibility"
+          ? await checkEligibility(request, env, { ...deps, patientId: body.patientId, payerId: body.payerId, policyNumber: body.policyNumber, purpose: body.purpose, payers, fetchImpl })
+          : await requestStatus(request, env, { ...deps, recordKind: body.recordKind, recordId: body.recordId, payers, fetchImpl });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claim-estimate" && method === "POST") {
-        const r = await raiseEstimate(request, env, { ...deps, patientId: body.patientId, lines: body.lines, payerId: body.payerId, tariff: (wsqCfg && wsqCfg.tariff) || null, idempotencyKey: body.idempotencyKey || null });
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        if (tf.error) return json({ ok: false, error: "price_list_unreadable", detail: tf.error }, 502, request);
+        const r = await raiseEstimate(request, env, { ...deps, patientId: body.patientId, lines: body.lines, payerId: body.payerId, tariff: tf.table, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claims" && method === "GET") {
-        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", payers: (wsqCfg && wsqCfg.payers) || null });
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
+        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", payers, gst: readGstSettings(wsqCfg) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "upcoding" && method === "GET") {
@@ -2394,11 +3597,14 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock-move" && method === "POST") {
-        const r = await recordMovement(request, env, { ...deps, kind: body.kind, code: body.code, display: body.display, quantity: body.quantity, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordMovement(request, env, { ...deps, kind: body.kind, code: body.code, display: body.display, quantity: body.quantity, location: labStockOnly ? LAB_STOCK_LOCATION : body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null,
+          receivedFrom: body.receivedFrom, documentNo: body.documentNo, controlled: isControlled(body.display, body.code), witnessId: body.witnessId, witnessCheck, destruction: body.destruction,
+          supplierAddress: body.supplierAddress, supplierLicenceNo: body.supplierLicenceNo, manufacturer: body.manufacturer, toInstitution: body.toInstitution, transferKind: body.transferKind, controllerApprovalRef: body.controllerApprovalRef, revisedEstimateRef: body.revisedEstimateRef,
+          estimateCheck: deps.rmiApplies(body.display, body.code) ? (move) => estimateRefusal(request, env, { ...deps, cfg: wsqCfg }, move) : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock" && method === "GET") {
-        const r = await stockLevels(request, env, { ...deps, location: url.searchParams.get("location") || "", reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null });
+        const r = await stockLevels(request, env, { ...deps, location: labStockOnly ? LAB_STOCK_LOCATION : (url.searchParams.get("location") || ""), noDispenses: labStockOnly || url.searchParams.get("location") === LAB_STOCK_LOCATION, reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock-fefo" && method === "GET") {
@@ -2406,19 +3612,51 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock-reconcile" && method === "POST") {
-        const r = await reconcileCount(request, env, { ...deps, code: body.code, location: body.location, unit: body.unit, counted: body.counted, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await reconcileCount(request, env, { ...deps, code: body.code, location: body.location, unit: body.unit, counted: body.counted, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null,
+          controlled: isControlled(body.code, body.code), witnessId: body.witnessId, witnessCheck });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "charges" && method === "GET") {
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        if (tf.error) return json({ ok: false, error: "price_list_unreadable", detail: tf.error }, 502, request);
         const r = await chargesForPatient(request, env, {
           ...deps, patientId: url.searchParams.get("patientId") || "",
           encounterId: url.searchParams.get("encounterId") || "",
-          tariff: (wsqCfg && wsqCfg.tariff) || null,
+          tariff: tf.table,
         });
+        /* "Not billed yet" means NOT ON A BILL (retest 2026-09-16): after the invoice was raised and paid, Specimen
+         * collection 60 was still listed here, because this list never looked at the invoices. Items already on a
+         * live invoice are taken off; if the invoices cannot be read the list stays whole and says so. */
+        if (r.ok && Array.isArray(r.priced)) {
+          const invs = await invoicesForPatient(request, env, { ...deps, patientId: r.patientId });
+          if (invs.ok) {
+            const onBill = new Set();
+            for (const i of invs.invoices) if (i.status !== "void") for (const l of i.lines || []) if (l.sourceType && l.sourceId) onBill.add(`${l.sourceType}:${l.sourceId}`);
+            const before = r.priced.length;
+            r.priced = r.priced.filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)));
+            r.unpriced = (r.unpriced || []).filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)));
+            r.alreadyInvoiced = before - r.priced.length;
+            r.total = Math.round(r.priced.reduce((n, it) => n + (Number(it.line) || 0), 0) * 100) / 100;
+          } else {
+            r.unreadable = [...(r.unreadable || []), "Invoice"];
+            r.unreadableWarning = "Could not read this patient's invoices, so items listed here may already be on a bill.";
+          }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice" && method === "POST") {
-        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: (wsqCfg && wsqCfg.tariff) || null, region: (wOrg && wOrg.region) || "IN", gstin: (wOrg && wOrg.regionProfile && wOrg.regionProfile.gstin) || "", at: body.at, idempotencyKey: body.idempotencyKey || null });
+        /* BNSS 2023 s.397: first aid and medical treatment of a victim of BNS ss.64-68, 70, 71, 124(1) or POCSO ss.4, 6,
+         * 8, 10 is "free of cost" (legal review D.4.2), and BNS s.200 punishes the person in charge. While such a
+         * medico-legal case is open for the patient, no invoice is raised. A register that cannot be read refuses too. */
+        if (String(body.patientId || "").trim()) {
+          const mlcCases = await listRegisterEntries({ ...deps, actor: { id: actor.id }, kind: "mlc", patientId: String(body.patientId).trim() });
+          if (!mlcCases.ok) return json({ ok: false, error: "mlc_register_unreadable", message: "Whether treatment must be free of cost (BNSS s.397) could not be checked, so no invoice was raised.", written: 0 }, 502, request);
+          const free = mlcCases.entries.find((e) => e.fields && e.fields.status === "open" && FREE_TREATMENT.includes(e.fields.category));
+          if (free) return json({ ok: false, error: "free_treatment_bnss_397", serial: free.serial, message: "BNSS s.397: this patient's medico-legal case requires first aid and medical treatment free of cost, so no invoice is raised.", written: 0 }, 409, request);
+        }
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        if (tf.error) return json({ ok: false, error: "price_list_unreadable", detail: tf.error, written: 0 }, 502, request);
+        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: tf.table, region: (wOrg && wOrg.region) || "IN", gstin: (wOrg && wOrg.regionProfile && wOrg.regionProfile.gstin) || "", gst: readGstSettings(wsqCfg), payersNow, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice" && method === "GET") {
@@ -2441,6 +3679,14 @@ export async function onRequest(context) {
           method: body.method, paymentDetails: body.paymentDetails || body.details || null,
           paymentMethods: (wsqCfg && wsqCfg.payment) || null,
           idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-payment-link" && method === "POST") {
+        const r = await createPaymentLink(request, env, { ...deps, invoiceId: body.invoiceId, fetchImpl: typeof env.WSQ_PAY_FETCH === "function" ? env.WSQ_PAY_FETCH : undefined });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "payment-requests" && method === "GET") {
+        const r = await listPaymentRequests(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice-payment" && method === "POST") {
@@ -2469,6 +3715,62 @@ export async function onRequest(context) {
         const r = await voidInvoiceRoute(request, env, { ...deps, invoiceId: body.invoiceId, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* gap-claims-gst-2: package billing (functions/_wardsynq/packages.js). The split and the pack read the stay's
+       * charges through the same capture and price list the bill uses. */
+      if (sub === "packages" && method === "GET") {
+        const r = await listPackages(request, env, deps);
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "package-versions" && method === "GET") {
+        const r = await packageVersions(request, env, { ...deps, id: url.searchParams.get("id") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "package-save" && method === "POST") {
+        const r = await savePackage(request, env, { ...deps, id: body.id, expectedVersion: body.expectedVersion, active: body.active, reason: body.reason,
+          scheme: body.scheme, schemeName: body.schemeName, code: body.code, name: body.name, rate: body.rate, expectedLosDays: body.expectedLosDays,
+          preAuthRequired: body.preAuthRequired, inclusions: body.inclusions, exclusions: body.exclusions, preAuthDocuments: body.preAuthDocuments, claimDocuments: body.claimDocuments,
+          roomRatePerDay: body.roomRatePerDay, roomRateSource: body.roomRateSource, priceIncludesGst: body.priceIncludesGst });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "stay-package" && method === "POST") {
+        const r = await setStayPackage(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, packageId: body.packageId, preAuthId: body.preAuthId,
+          beneficiaryId: body.beneficiaryId, reason: body.reason, remove: body.remove === true, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if ((sub === "stay-packages" || sub === "package-pack") && method === "GET") {
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        const patientId = url.searchParams.get("patientId") || "";
+        // An unreadable price list leaves the split unknown (false), never shown as nothing billed on top.
+        const chargesFor = tf.error ? () => Promise.resolve(null) : (encounterId) => chargesForPatient(request, env, { ...deps, patientId, encounterId, tariff: tf.table });
+        const r = sub === "stay-packages"
+          ? await stayPackages(request, env, { ...deps, patientId, chargesFor, tariff: tf.table })
+          : await packagePack(request, env, { ...deps, patientId, encounterId: url.searchParams.get("encounterId") || "", chargesFor, tariff: tf.table });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* gap-claims-gst B: credit and debit notes, B2B buyer details, and the IRN (functions/_wardsynq/invoice.js, einvoice.js). */
+      if ((sub === "invoice-credit-note" || sub === "invoice-debit-note") && method === "POST") {
+        const r = await postNoteRoute(request, env, { ...deps, kind: sub === "invoice-credit-note" ? "credit_note" : "debit_note", invoiceId: body.invoiceId, reason: body.reason, lines: body.lines, at: body.at, idempotencyKey: body.idempotencyKey || null,
+          gstTreatment: body.gstTreatment, gstConfirmation: body.gstConfirmation });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* gst-parties: who settles a stay, and who settles a bill. The payer's contract decides the GST recipient. */
+      if ((sub === "invoice-parties" || sub === "stay-payer") && method === "POST") {
+        let payers; try { payers = await payersNow(); } catch { return json({ ...payersUnread, written: 0 }, 502, request); }
+        const r = sub === "invoice-parties"
+          ? await setPartiesRoute(request, env, { ...deps, invoiceId: body.invoiceId, payerRef: body.payerRef, payers, at: body.at, idempotencyKey: body.idempotencyKey || null, gst: readGstSettings(wsqCfg) })
+          : await setStayPayer(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, payerRef: body.payerRef, policyNumber: body.policyNumber, reason: body.reason,
+            expectedVersion: body.expectedVersion, payers, gst: readGstSettings(wsqCfg), idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "einvoice-status" && method === "GET") {
+        const r = await einvoiceStatus(request, env, { ...deps, gst: readGstSettings(wsqCfg) });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if ((sub === "invoice-irn" || sub === "invoice-irn-cancel") && method === "POST") {
+        const ectx = { ...deps, gst: readGstSettings(wsqCfg), invoiceId: body.invoiceId, noteNumber: body.noteNumber, idempotencyKey: body.idempotencyKey || null, fetchImpl: typeof env.WSQ_EINV_FETCH === "function" ? env.WSQ_EINV_FETCH : undefined };
+        const r = sub === "invoice-irn" ? await generateIrnRoute(request, env, ectx) : await cancelIrnRoute(request, env, { ...ectx, reasonCode: body.reasonCode, remark: body.remark });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "backup" && method === "GET") {
         const r = await exportPage(request, env, { ...deps, since: url.searchParams.get("since"), limit: url.searchParams.get("limit") });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -2486,21 +3788,82 @@ export async function onRequest(context) {
         /* P2.17: who was assigned where, for the out-of-assignment check. Each source that fails is
          * handed in as an error so the section says so rather than reading silence as clean. */
         const rDays = Math.max(1, Math.min(90, Number(url.searchParams.get("days")) || 7));
-        const rTo = new Date().toISOString().slice(0, 10), rFrom = new Date(Date.now() - rDays * 86400000).toISOString().slice(0, 10);
+        /* Rota rows are keyed by the HOSPITAL's local date, not UTC: between midnight and 05:30 IST the UTC date is
+         * still yesterday, so a UTC window missed tonight's shifts and flagged the rostered staff. One day of margin
+         * each side; the intervals are matched by time, so an extra day's rows cannot clear a read. */
+        const rTo = new Date(Date.now() + 86400000).toISOString().slice(0, 10), rFrom = new Date(Date.now() - (rDays + 1) * 86400000).toISOString().slice(0, 10);
         const [members, roster] = await Promise.all([
           ORG.listMembers(env, wOrgId).catch((e) => ({ error: String((e && e.message) || e).slice(0, 200) })),
           ROSTER.assignmentsBetween(env, wOrgId, rFrom, rTo).catch((e) => ({ error: String((e && e.message) || e).slice(0, 200) })),
         ]);
         const assignmentSources = { members, roster, utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : 330 };
-        const r = await securityReport(request, env, { ...deps, orgEvents, assignmentSources, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
+        const r = await securityReport(request, env, { ...deps, orgEvents, assignmentSources, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
+          auditRetentionYears: wsqCfg ? wsqCfg.auditRetentionYears : null, region: (wOrg && wOrg.region) || "IN", readLogRetentionDays: wsqCfg ? wsqCfg.readLogRetentionDays : null,
+          anchorStores: anchorStoresFor(env), orgAuditChain: orgAuditChain(env, wOrgId),
+          /* G11: one person across sign-in methods. Access ids are "cfa:" + the same hash identify() makes. */
+          readerDirectory: { accountEmail: (id) => ORG.accountEmail(env, id), accessIdOf: async (email) => "cfa:" + (await sha256hex(String(email).toLowerCase())) },
+          viewerIsOwner: isOwnerOfOrg(wOrg, actor.id) || !!actor.isOwner });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* LT-37: WHO an audit row's actor id is, for the audit screen. The record stores the id an audit follows
+       * ("fb:<uid>", "cfa:<hash>", a staff sign-in ID, "system:..."); a person reading the list needs the staff
+       * member. Resolved only against THIS hospital's members (an account through its sign-in email): an id
+       * that is nobody here comes back unnamed, never looked up anywhere else. A mobile-number sign-in ID is not
+       * a name and is never returned as one. staff.admin only, like the rest of the audit review. */
+      if (sub === "actor-names" && method === "GET") {
+        const ids = idsParam(url.searchParams.get("ids"), 100);
+        const found = await membersForIds(await ORG.listMembers(env, wOrgId), ids.filter((id) => id.indexOf("system:") !== 0), staffDirectory(env, wOrgId));
+        const notALabel = (s) => /^\+?[\d\s().-]{7,}$/.test(String(s || "")) || /^(fb|cfa|ghis):/.test(String(s || ""));
+        const names = {};
+        for (const id of ids) {
+          if (id.indexOf("system:") === 0) { names[id] = { system: true }; continue; }
+          const m = found.get(id);
+          // The name the hospital recorded first; the audit screen (staff.admin) may still read a sign-in email.
+          const label = m ? (staffIdentity(m).name || [m.email, m.identity].find((v) => v && !notALabel(v)) || null) : null;
+          // LT-35: with the employee id, as the chart names staff (staff-identity.js); never an account id or a mobile.
+          names[id] = m ? { name: label, employeeId: staffIdentity(m).employeeId, role: m.role || null } : { name: null, employeeId: null, role: null };
+        }
+        return json({ ok: true, names }, 200, request);
+      }
+      /* Owner 2026-09-16: WHO GAVE THE DRUG, WHO ASKED FOR IT, on every chart screen. The same lookup as actor-names
+       * (functions/_wardsynq/staff-identity.js), for anyone who may read the chart or the orders, samples and units a
+       * pharmacist, laboratory or blood bank works from, and only the three fields a clinical reader needs: name,
+       * employee id, role. Never an email, a mobile number or another hospital's staff. One request per screen and
+       * one audit row for it, written before the answer. */
+      if (sub === "staff-identities" && method === "GET") {
+        const ids = idsParam(url.searchParams.get("ids"), 200);
+        let found;
+        try { found = await membersForIds(await ORG.listMembers(env, wOrgId), ids.filter((id) => id.indexOf("system:") !== 0), staffDirectory(env, wOrgId)); }
+        catch { return json({ ok: false, error: "staff_read_failed", message: "Staff identities could not be read. Do not read this as nobody." }, 502, request); }
+        const identities = {};
+        let resolved = 0;
+        for (const id of ids) {
+          identities[id] = id.indexOf("system:") === 0 ? { system: true } : staffIdentity(found.get(id));
+          if (identities[id] && !identities[id].system) resolved++;
+        }
+        try {
+          await deps.recordDeps.repository.auditOnly(mig.tenantId, { ts: new Date().toISOString(), actor: actor.id, connectorId: "wardsynq", action: "staff.identity.read",
+            resourceCounts: null, scope: { purpose: "chart-actor-names", asked: ids.length, resolved }, patientRefHash: null, outcome: "ok" });
+        } catch {
+          return json({ ok: false, error: "audit_write_failed", message: "Staff identities were read but could not be recorded in the audit trail, so they are not shown. Try again." }, 502, request);
+        }
+        return json({ ok: true, identities }, 200, request);
+      }
+      if (sub === "audit-rows" && method === "GET") {
+        const r = await auditRowsForReview(request, env, { ...deps, ids: url.searchParams.get("ids") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "system-health" && method === "GET") {
         const r = await systemHealthReport({
           repository: deps.recordDeps.repository, tenantId: mig.tenantId, env, maik: (wsqCfg && wsqCfg.maik) || null, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
+          // LT-34: MaiK is probed over the same transport maik-ask uses.
+          fetchImpl: env && typeof env.WSQ_MAIK_FETCH === "function" ? env.WSQ_MAIK_FETCH : undefined,
+          anchorStores: anchorStoresFor(env), orgAuditChain: orgAuditChain(env, wOrgId),
           orgProbe: () => ORG.getOrg(env, wOrgId),
           documentProbe: async () => { const d = await documentStorageProbe(env); return { ...d, checkedAt: d.state !== "not_configured" && docProbeCache ? new Date(docProbeCache.at).toISOString() : null }; },
           lastTick: async () => { if (!env.MAIK_KV) return undefined; const v = await env.MAIK_KV.get(tickLogKey(mig.tenantId)); return v ? JSON.parse(v) : null; },
+          lastBackupRun: async () => { if (!env.MAIK_KV) return undefined; const v = await env.MAIK_KV.get(backupLogKey(mig.tenantId)); return v ? JSON.parse(v) : null; },
+          backupDestination: async () => (await activeConnectors(deps.recordDeps.repository, mig.tenantId, "backup"))[0] || null,
         });
         return json(r, 200, request);
       }
@@ -2513,6 +3876,32 @@ export async function onRequest(context) {
       }
       if (sub === "restore-test" && method === "POST") {
         const r = await recordRestoreTest(request, env, { ...deps, restoredWhat: body.restoredWhat, outcome: body.outcome, at: body.at, performedBy: body.performedBy, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "audit-anchor-acknowledge" && method === "POST") {
+        /* P2.17. Acknowledging a legitimate restore restarts the anchor log, so it is the hospital
+         * owner's act, not any administrator's. Ownership is decided the way memberChangeRefusal
+         * decides it: the authorizeOrg answer's owner short-circuit, which is exactly what
+         * isOwnerOfOrg names (both checked: the short-circuit is the live decision, the predicate
+         * is the readable one). A StewardMD platform owner (actor.isOwner, as elsewhere in this
+         * router) may stand in for the owner. Everyone else, including hr and admin members who
+         * passed the staff.admin gate above, is refused here, fail closed. */
+        const ownsHospital = isOwnerOfOrg(wOrg, actor.id) || !!(wAz && wAz.owner);
+        if (!ownsHospital && !actor.isOwner) {
+          return json({ ok: false, error: "not_hospital_owner",
+            message: "Only the owner of this hospital can acknowledge a legitimate restore of the audit trail. Tell the information governance lead." }, 403, request);
+        }
+        const reason = String((body && body.reason) || "").trim();
+        const incidentRef = String((body && body.incidentRef) || "").trim();
+        if (reason.length < 20 || !incidentRef) {
+          return json({ ok: false, error: "reason_required",
+            message: "Give a reason of at least 20 characters saying why the database was restored, and the incident reference it was recorded under." }, 422, request);
+        }
+        /* G12: the hospital event log's chain is acknowledged the same way, under its own chain id. */
+        const eventLog = body && body.chain === "event-log";
+        const ackChain = eventLog ? orgAuditChain(env, wOrgId) : null;
+        const r = await acknowledgeAnchorBreak(eventLog ? ackChain : deps.recordDeps.repository, eventLog ? ackChain.chainId : mig.tenantId, anchorStoresFor(env),
+          { by: actor.email || actor.id, reason, incidentRef, nowIso: new Date().toISOString() });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "advisory-check" && method === "POST") {
@@ -2540,7 +3929,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-enrol" && method === "POST") {
-        const r = await enrolPatient(request, env, { ...deps, patientId: body.patientId, issuedTo: body.issuedTo, identifiedBy: body.identifiedBy, proxy: body.proxy || null, config: (wsqCfg && wsqCfg.patientAccess) || null, idempotencyKey: body.idempotencyKey || null });
+        const r = await enrolPatient(request, env, { ...deps, patientId: body.patientId, issuedTo: body.issuedTo, identifiedBy: body.identifiedBy, proxy: body.proxy || null, config: (wsqCfg && wsqCfg.patientAccess) || null,
+          dpdp: wsqCfg && wsqCfg.dpdp, parentVerification: body.parentVerification || null, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-grants" && method === "GET") {
@@ -2553,10 +3943,11 @@ export async function onRequest(context) {
       }
       if (sub === "patient-copy" && method === "GET") {
         const r = await patientCopy(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", neverRelease: (wsqCfg && wsqCfg.neverRelease) || null });
+        if (r.ok) r.print = wsqPrintSettings(wOrg);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-release" && method === "POST") {
-        const r = await releaseToPatient(request, env, { ...deps, patientId: body.patientId, givenTo: body.givenTo, at: body.at, neverRelease: (wsqCfg && wsqCfg.neverRelease) || null, idempotencyKey: body.idempotencyKey || null });
+        const r = await releaseToPatient(request, env, { ...deps, patientId: body.patientId, givenTo: body.givenTo, dischargeScope: body.dischargeScope, at: body.at, neverRelease: (wsqCfg && wsqCfg.neverRelease) || null, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "news2" && method === "GET") {
@@ -2586,7 +3977,8 @@ export async function onRequest(context) {
       }
       if (sub === "timeline" && method === "GET") {
         const r = await patientTimeline(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        const masked = await mtpNameMask(deps, can(wAz.role, CAPS.REGISTER_MTP), sub, r);
+        return json(masked, masked.ok ? 200 : (masked.status || 502), request);
       }
       if (sub === "wound" && method === "POST") {
         const r = await chartWound(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, site: body.site, kind: body.kind, stage: body.stage, origin: body.origin, lengthCm: body.lengthCm, widthCm: body.widthCm, depthCm: body.depthCm, tissue: body.tissue, exudate: body.exudate, infectionSigns: body.infectionSigns, dressing: body.dressing, note: body.note, assessedAt: body.assessedAt, photo: body.photo, image: body.image, idempotencyKey: body.idempotencyKey || null });
@@ -2671,7 +4063,7 @@ export async function onRequest(context) {
          * gateway and the hospital's configuration. No caller can choose a provider. */
         const r = await askAboutPatient(request, env, { ...deps, config: (wsqCfg && wsqCfg.maik) || null,
           patientId: body.patientId, encounterId: body.encounterId, task: body.task, question: body.question,
-          sections: body.sections, idempotencyKey: body.idempotencyKey || null, facts,
+          sections: body.sections, idempotencyKey: body.idempotencyKey || null, facts, messageId: body.messageId, claimId: body.claimId,
           fetchImpl: env && typeof env.WSQ_MAIK_FETCH === "function" ? env.WSQ_MAIK_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -2700,24 +4092,32 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "imaging-worklist" && method === "GET") {
-        const r = await imagingWorklist(request, env, { ...deps, config: (wsqCfg && wsqCfg.dicom) || null, patientId: url.searchParams.get("patientId") || "" });
+        // LT-27: the hospital's own clock (as the MAR uses), so DICOM start times are its local wall clock with the offset beside them.
+        const clock = { offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330, timeZone: (wsqCfg && wsqCfg.timeZone) || "" };
+        /* PCPNDT (legal review B.4.1): an obstetric ultrasound on the worklist without a complete Form F is flagged beside it. */
+        const r = await imagingWorklist(request, env, { ...deps, config: (wsqCfg && wsqCfg.dicom) || null, patientId: url.searchParams.get("patientId") || "", clock, pcpndtFlag: (sr, modality) => formFFlag(deps, sr, modality) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "imaging-studies" && method === "GET") {
+        // The hospital's DICOMweb connector decides the viewer when one is saved; the older org field otherwise.
+        let dicomConn = null;
+        try { dicomConn = (await activeConnectors(deps.recordDeps.repository, mig.tenantId, "dicom"))[0] || null; }
+        catch { return json({ ok: false, error: "record_read_failed", message: "The imaging connector could not be read." }, 502, request); }
         const r = await imagingStudies(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", serviceRequestId: url.searchParams.get("serviceRequestId") || "",
-          viewerConfig: (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
+          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "report-imaging" && method === "POST") {
         const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, critical: !!body.critical, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null,
-          templateId: body.templateId, templateVersion: body.templateVersion, sections: body.sections, templates: (wsqCfg && wsqCfg.radiologyTemplates) || null });
+          templateId: body.templateId, templateVersion: body.templateVersion, sections: body.sections, templates: (wsqCfg && wsqCfg.radiologyTemplates) || null,
+          formFCheck: (sr, modality, texts) => formFGate(deps, sr, modality, texts) });
         /* A CRITICAL IMAGING FINDING OPENS ITS LOOP ON RELEASE - the same fix as release-result, and the
          * same bug: a report marked critical set report.critical, which openCriticalLoops reads, but nothing
          * called openCriticalLoops, so a reported pneumothorax alerted nobody. Only opened when the report is
          * critical; a check that fails is reported, never swallowed. */
         if (r && r.ok && r.reportId && body.critical === true) {
           try {
-            const crit = await openCriticalLoops(request, env, { ...deps, reportId: r.reportId, limits: (wsqCfg && wsqCfg.criticalLimits) || null, notifyDeps: {}, idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null });
+            const crit = await openCriticalLoops(request, env, { ...deps, reportId: r.reportId, limits: (wsqCfg && wsqCfg.criticalLimits) || null, notifyDeps: notifyDepsFor(env, wOrg, mig.tenantId, deps.recordDeps.repository), idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null });
             r.criticalCheck = crit && crit.ok ? { checked: true, opened: crit.opened || 0, loops: crit.loops || [] } : { checked: false, error: (crit && crit.error) || "critical_check_failed" };
           } catch (e) { r.criticalCheck = { checked: false, error: "critical_check_failed" }; }
         }
@@ -2732,15 +4132,20 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "investigation" && method === "POST") {
-        const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        const cat = await wsqInvestigationCatalogue(env, wOrgId, wsqCfg);
+        const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, other: body.other === true, coding: body.coding, catalogue: cat.entries, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "investigation-catalogue" && method === "GET") {
+        const cat = await wsqInvestigationCatalogue(env, wOrgId, wsqCfg);
+        return json({ ok: true, entries: cat.entries, ...(cat.error ? { priceListUnreadable: true, warning: cat.error } : {}) }, 200, request);
       }
       if (sub === "collect" && method === "POST") {
         const r = await collectSpecimen(request, env, { ...deps, serviceRequestId: body.serviceRequestId, specimenType: body.specimenType, container: body.container, at: body.at, scannedPatientBarcode: body.scannedPatientBarcode, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "specimen-outcome" && method === "POST") {
-        const r = await specimenOutcome(request, env, { ...deps, specimenId: body.specimenId, state: body.state, failureReason: body.failureReason, idempotencyKey: body.idempotencyKey || null });
+        const r = await specimenOutcome(request, env, { ...deps, specimenId: body.specimenId, state: body.state, failureReason: body.failureReason, scannedAccession: body.scannedAccession, rejectionCode: body.rejectionCode, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "collections" && method === "GET") {
@@ -2843,7 +4248,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "consent" && method === "POST") {
-        const r = await recordConsent(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, scope: body.scope, decision: body.decision, detail: body.detail, givenBy: body.givenBy, giverName: body.giverName, capacity: body.capacity, validFrom: body.validFrom, validUntil: body.validUntil, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordConsent(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, scope: body.scope, decision: body.decision, detail: body.detail, givenBy: body.givenBy, giverName: body.giverName, capacity: body.capacity, validFrom: body.validFrom, validUntil: body.validUntil,
+          dpdp: wsqCfg && wsqCfg.dpdp, parentVerification: body.parentVerification, guardianAppointment: body.guardianAppointment, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "withdraw-consent" && method === "POST") {
@@ -2893,28 +4299,59 @@ export async function onRequest(context) {
           deltaLimits: (wsqCfg && wsqCfg.deltaLimits) || null, autoVerify: (wsqCfg && wsqCfg.autoVerify) || null, labVerification: (wsqCfg && wsqCfg.labVerification) || null,
           idempotencyKey: body.idempotencyKey || null,
         });
-        /* A RELEASED RESULT IS CHECKED AGAINST THE CRITICAL LIMITS, ALWAYS. openCriticalLoops was only
-         * reachable through /ward/flag-critical, which nothing called - so a potassium of 7 released
-         * through the laboratory screen opened no critical-result loop and alerted nobody. The loops are
-         * now opened here, straight after the write, against the report ON THE RECORD (not the request
-         * body) and with the site's own limits, so no client can release a result without it being
-         * checked. A failure to open them is reported on the release, never swallowed: a result that
-         * could not be checked must not read as a result that was checked and found normal. */
-        if (r && r.ok && r.reportId) {
-          try {
-            const crit = await openCriticalLoops(request, env, {
-              ...deps, reportId: r.reportId,
-              limits: (wsqCfg && wsqCfg.criticalLimits) || null,
-              notifyDeps: {},
-              idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null,
-            });
-            r.criticalCheck = crit && crit.ok
-              ? { checked: true, opened: crit.opened != null ? crit.opened : (crit.loops || []).length, loops: crit.loops || [] }
-              : { checked: false, error: (crit && (crit.error || crit.detail)) || "critical_check_failed" };
-          } catch (e) {
-            r.criticalCheck = { checked: false, error: "critical_check_failed" };
-          }
-        }
+        // Checked against the critical limits straight after the write (wsqReleaseCriticalCheck).
+        if (r && r.ok && r.reportId) r.criticalCheck = await wsqReleaseCriticalCheck(request, env, deps, wOrg, mig, wsqCfg, r.reportId, body.idempotencyKey || null);
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* An analyser's result, released by the technologist who presses the button (lab-analysers.js). The release
+       * is lab-result.js releaseResult, so the same autoverification and second-person rules apply, and the same
+       * critical check follows it - also when the release landed but the bench row could not be marked. */
+      if (sub === "analyser-release" && method === "POST") {
+        const r = await releaseAnalyserResult(request, env, {
+          ...deps, inboxId: body.inboxId, expectedVersion: body.expectedVersion, qcOverrideReason: body.qcOverrideReason,
+          deltaLimits: (wsqCfg && wsqCfg.deltaLimits) || null, autoVerify: (wsqCfg && wsqCfg.autoVerify) || null, labVerification: (wsqCfg && wsqCfg.labVerification) || null,
+        });
+        if (r && r.released && r.reportId) r.criticalCheck = await wsqReleaseCriticalCheck(request, env, deps, wOrg, mig, wsqCfg, r.reportId, "analyser-release:" + String(body.inboxId || ""));
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "analyser-inbox" && method === "GET") {
+        const r = await analyserInbox(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "analyser-dismiss" && method === "POST") {
+        const r = await dismissAnalyserResult(request, env, { ...deps, inboxId: body.inboxId, reason: body.reason, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-analysers" && method === "GET") {
+        const r = await listAnalysers(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-analyser-save" && method === "POST") {
+        const r = await saveAnalyser(request, env, { ...deps, analyser: body.analyser, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-connector-key" && method === "POST") {
+        const r = await connectorKey(request, env, { ...deps, orgId: wOrgId, revoke: body.revoke === true });
+        return json(r, r.ok ? 200 : (r.status || 502), request, { "Cache-Control": "no-store" });
+      }
+      if (sub === "lab-qc" && method === "GET") {
+        const r = await qcOverview(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-qc-material" && method === "POST") {
+        const r = await saveQcMaterial(request, env, { ...deps, material: body.material });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-qc-run" && method === "POST") {
+        const r = await recordQcRun(request, env, { ...deps, materialId: body.materialId, analyserId: body.analyserId, test: body.test, value: body.value });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-qc-action" && method === "POST") {
+        const r = await recordCorrectiveAction(request, env, { ...deps, analyserId: body.analyserId, test: body.test, action: body.action });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "specimen-rejections" && method === "GET") {
+        const r = await rejectionStats(request, env, { ...deps, month: url.searchParams.get("month") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "culture-report" && method === "POST") {
@@ -2926,7 +4363,7 @@ export async function onRequest(context) {
          * later finds it instead of opening a second one. A failure to open it is reported, never swallowed. */
         if (r && r.ok && r.positiveBloodCulture) {
           try {
-            const crit = await openCriticalLoops(request, env, { ...deps, reportId: r.reportId, observations: [r.criticalRow], notifyDeps: {}, idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null });
+            const crit = await openCriticalLoops(request, env, { ...deps, reportId: r.reportId, observations: [r.criticalRow], notifyDeps: notifyDepsFor(env, wOrg, mig.tenantId, deps.recordDeps.repository), idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null });
             r.criticalCheck = crit && crit.ok ? { checked: true, opened: crit.opened || 0, loops: crit.loops || [] } : { checked: false, error: (crit && crit.error) || "critical_check_failed" };
           } catch (e) { r.criticalCheck = { checked: false, error: "critical_check_failed" }; }
         }
@@ -2951,7 +4388,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "verify-result" && method === "POST") {
-        const r = await verifyResult(request, env, { ...deps, reportId: body.reportId, decision: body.decision, reason: body.reason, expectedVersion: body.expectedVersion });
+        const r = await verifyResult(request, env, { ...deps, reportId: body.reportId, decision: body.decision, reason: body.reason, expectedVersion: body.expectedVersion, qcOverrideReason: body.qcOverrideReason });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "results-to-verify" && method === "GET") {
@@ -2967,7 +4404,11 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-flow" && method === "GET") {
-        const r = await patientFlow(request, env, { ...deps, escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        // LT-39: the discharge rows name their patients; those reads audit together, as the critical results board's do.
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const r = await patientFlow(request, env, { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository }, withPatients: true, escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
+        try { await audits.flush(); }
+        catch { return json({ ok: false, error: "audit_write_failed", message: "Patient flow was read but could not be recorded in the audit trail, so it is not shown. Try again." }, 502, request); }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "report-patient-flow" && method === "GET") {
@@ -3008,21 +4449,22 @@ export async function onRequest(context) {
         /* The ward registry gives beds per ward and each ward's department. It is the org store, not the
          * record, so its failure is carried as a reason rather than failing a series that does not need it. */
         let wards = [], registryError = null;
-        const bedsByWard = {}, wardDepartments = {};
+        const bedHistory = [], wardDepartments = {};
         try {
           const [ws, bs, ds] = await Promise.all([ORG.listWards(env, wOrgId), ORG.listBeds(env, wOrgId), ORG.listDepartments(env, wOrgId)]);
           wards = ws;
           const wardName = new Map(ws.map((w) => [w.id, w.name])), deptName = new Map(ds.map((d) => [d.id, d.name]));
-          for (const b of bs) if (b.active && wardName.has(b.wardId)) bedsByWard[wardName.get(b.wardId)] = (bedsByWard[wardName.get(b.wardId)] || 0) + 1;
+          // G7: every bed with its own history (added, turned off or on), so a past day counts the beds it had.
+          for (const b of bs) if (wardName.has(b.wardId)) bedHistory.push({ ward: wardName.get(b.wardId), since: b.since, active: b.active, changes: b.activeHistory, legacy: !!b.legacy });
           for (const w of ws) if (w.departmentId) wardDepartments[w.name] = deptName.get(w.departmentId) || w.departmentId;
         } catch (e) { registryError = "read failed"; }
-        // No registered beds: the same wardsynq.beds quality.js measures utilisation against.
-        if (!Object.keys(bedsByWard).length && wsqCfg && wsqCfg.beds && typeof wsqCfg.beds === "object") {
-          for (const [w, list] of Object.entries(wsqCfg.beds)) if (Array.isArray(list) && list.length) bedsByWard[w] = list.length;
+        // No registered beds: the wardsynq.beds list quality.js measures against. It keeps no history, so a bucket needing it is not known.
+        if (!bedHistory.length && wsqCfg && wsqCfg.beds && typeof wsqCfg.beds === "object") {
+          for (const [w, list] of Object.entries(wsqCfg.beds)) if (Array.isArray(list)) for (let k = 0; k < list.length; k++) bedHistory.push({ ward: w, since: null });
         }
         const tctx = { ...deps, metric: q("metric"), from: q("from"), to: q("to"), bucket: q("bucket"), groupBy: q("groupBy"),
           utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : undefined, timeZone: (wsqCfg && wsqCfg.timeZone) || undefined,
-          antibiotics: (wsqCfg && wsqCfg.antibiotics) || null, bedsByWard, wardDepartments, registryError };
+          antibiotics: (wsqCfg && wsqCfg.antibiotics) || null, bedHistory, wardDepartments, registryError };
         if (sub === "trend-events") {
           /* A member limited to some departments may list the records of a ward in one of them only. A ward
            * the registry places in no department is outside every such limit, so an unscoped member passes
@@ -3084,17 +4526,23 @@ export async function onRequest(context) {
         const r = await prepareOverdueWorkQueue(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
-      if (sub === "report-billing" && method === "GET") {
-        const r = await billingReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
-      }
-      if (sub === "report-claims" && method === "GET") {
-        const r = await claimsReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
-      }
-      if (sub === "report-pharmacy" && method === "GET") {
-        const r = await pharmacyReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+      if (sub === "report-billing" || sub === "report-claims" || sub === "report-pharmacy") {
+        /* LT-38: a date range on every period report, applied HERE, defaulting to the last 7 days. A date that does
+         * not parse is refused: read as "no filter" it would silently widen the report to everything. */
+        const range = reportRange(url.searchParams.get("from"), url.searchParams.get("to"), wsqCfg);
+        if (range.error) return json({ ok: false, error: "bad_date", detail: range.error }, 422, request);
+        if (method === "GET" && sub === "report-billing") {
+          const r = await billingReport(request, env, { ...deps, ...range });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (method === "GET" && sub === "report-claims") {
+          const r = await claimsReport(request, env, { ...deps, ...range });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (method === "GET" && sub === "report-pharmacy") {
+          const r = await pharmacyReport(request, env, { ...deps, ...range, reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
       }
       if (sub === "report-him" && method === "GET") {
         const r = await himReport(request, env, { ...deps, patientRules: (wsqCfg && wsqCfg.chartCompletion) || null, criticalPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null, riskTools: (wsqCfg && wsqCfg.riskTools) || [] });
@@ -3191,6 +4639,204 @@ export async function onRequest(context) {
         const r = await incidentLog(request, env, { ...deps, state: url.searchParams.get("state") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* ---- DPDP Act 2023 (dpdp.js) ---- */
+      const dpdpCfg = (wsqCfg && wsqCfg.dpdp) || null;
+      if (sub === "privacy-notices" && method === "GET") {
+        const r = await privacyNotices(request, env, { ...deps, dpdp: dpdpCfg });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "privacy-notice" && method === "POST") {
+        const r = await publishNotice(request, env, { ...deps, dpdp: dpdpCfg, language: body.language, title: body.title, text: body.text, dataItems: body.dataItems, purposes: body.purposes,
+          withdrawConsent: body.withdrawConsent, rights: body.rights, recipients: body.recipients, collectingAgency: body.collectingAgency, boardComplaint: body.boardComplaint,
+          dpoContact: body.dpoContact, grievanceContact: body.grievanceContact, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "privacy-acknowledge" && method === "POST") {
+        const r = await acknowledgePrivacy(request, env, { ...deps, patientId: body.patientId || patientIdForMrn(body.mrn), language: body.language, method: body.method, givenBy: body.givenBy, giverName: body.giverName,
+          healthDataConsent: body.healthDataConsent === true, consentForm: body.consentForm, consentDocumentId: body.consentDocumentId, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "privacy-acknowledgements" && method === "GET") {
+        const r = await privacyAcknowledgements(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-requests" && method === "GET") {
+        const r = await dpoQueue(request, env, { ...deps, dpdp: dpdpCfg });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-request" && method === "POST") {
+        const r = await fileDataRequest(request, env, { ...deps, dpdp: dpdpCfg, patientId: body.patientId || patientIdForMrn(body.mrn), kind: body.kind, detail: body.detail, receivedVia: body.receivedVia, nominee: body.nominee, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-request-act" && method === "POST") {
+        const r = await actOnDataRequest(request, env, { ...deps, requestId: body.requestId, action: body.action, response: body.response, retention: wsqCfg && wsqCfg.retention,
+          dpdp: dpdpCfg, retentionDecisions: body.retentionDecisions,
+          /* The registration desk's copy of the patient's optional details, cleared through its own store. */
+          clearRegistrationDetails: (mrn) => PAT.clearOptionalRegistration(env, wOrgId, mrn, actor.id || "") });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-holdings" && method === "GET") {
+        const r = await dataHoldings(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", retention: wsqCfg && wsqCfg.retention });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-breach" && method === "POST") {
+        const r = await recordBreach(request, env, { ...deps, dpdp: dpdpCfg, detectedAt: body.detectedAt, awareAt: body.awareAt, description: body.description, dataCategories: body.dataCategories, affectedCount: body.affectedCount, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "data-breach-update" && method === "POST") {
+        const r = await updateBreach(request, env, { ...deps, breachId: body.breachId, event: body.event, assessment: body.assessment, at: body.at, reference: body.reference, count: body.count, method: body.method, text: body.text, summary: body.summary,
+          report: body.report, intimation: body.intimation, extendedTo: body.extendedTo, reasons: body.reasons });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- Retention and legal holds (retention.js) ---- */
+      if (sub === "retention" && method === "GET") {
+        const r = await patientRetention(request, env, { ...deps, patientId: url.searchParams.get("patientId") || patientIdForMrn(url.searchParams.get("mrn") || ""), retention: wsqCfg && wsqCfg.retention });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "retention-classes" && method === "GET") {
+        const r = await retentionClassList(request, env, { ...deps, retention: wsqCfg && wsqCfg.retention, dpdp: dpdpCfg });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "legal-hold" && method === "POST") {
+        const r = await placeLegalHold(request, env, { ...deps, patientId: body.patientId || patientIdForMrn(body.mrn), reason: body.reason, reference: body.reference, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "legal-hold-lift" && method === "POST") {
+        const r = await liftLegalHold(request, env, { ...deps, holdId: body.holdId, patientId: body.patientId || patientIdForMrn(body.mrn), liftReference: body.liftReference });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- Returns and reports (compliance.js, report-builder.js) ---- */
+      const csvOut = (text, name) => new Response(text, { status: 200, headers: Object.assign({ "Content-Type": "text/csv; charset=utf-8", "Cache-Control": "no-store", "Content-Disposition": `attachment; filename="${name}"`, "X-Content-Type-Options": "nosniff" }, corsHeaders(request)) });
+      if (sub === "nabh-indicators" && method === "GET") {
+        const r = await nabhIndicators(request, env, { ...deps, months: url.searchParams.get("months") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes, reportingYearStartMonth: readStaffingNorms(wsqCfg).reportingYearStartMonth,
+          staffRows: (months) => readStaffingRows(deps.recordDeps.repository, mig.tenantId, months) });
+        if (r.ok && !r.skipped && url.searchParams.get("format") === "csv") return csvOut(nabhCsv(r), "nabh-indicators.csv");
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- Nurse staffing and staff injuries (nurse-staffing.js). The rota comes from the org store, the census and the
+       * dependency levels from the record; the module joins them. ---- */
+      if ((sub === "nurse-staffing" && method === "GET") || (sub === "nurse-staffing-record" && method === "POST") || (sub === "staffing-draft" && method === "GET")) {
+        const nowMs = Date.now(), off = wsqCfg && wsqCfg.utcOffsetMinutes != null ? Number(wsqCfg.utcOffsetMinutes) : 330;
+        const day = new Date(nowMs + off * 60000).toISOString().slice(0, 10);
+        const date = (sub === "nurse-staffing-record" ? body.date : url.searchParams.get(sub === "staffing-draft" ? "from" : "date")) || day;
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(String(date)) || !Number.isFinite(Date.parse(date + "T00:00:00Z"))) return json({ ok: false, error: "bad_date", message: "A date is YYYY-MM-DD." }, 422, request);
+        const to = sub === "staffing-draft" ? new Date(Date.parse(date + "T00:00:00Z") + 7 * 86400000).toISOString().slice(0, 10) : date;
+        let rota;
+        try {
+          rota = await Promise.all([ROSTER.assignmentsBetween(env, wOrgId, date, to), ORG.listMembers(env, wOrgId), ROSTER.onDuty(env, wOrgId, "", off), ROSTER.dutyStatuses(env, wOrgId),
+            sub === "staffing-draft" ? ROSTER.leaveBetween(env, wOrgId, date, to) : { ok: true, leave: [] }]);
+        } catch { return json({ ok: false, error: "rota_unavailable", message: "The rota could not be read, so staffing cannot be shown." }, 502, request); }
+        const [asg, members, duty, statuses, leave] = rota;
+        const sctx = { ...deps, actorId: actor.id, bedBoard, beds: (wsqCfg && wsqCfg.beds) || null, shifts: asg.shifts, assignments: asg.assignments, members: members.filter((m) => m.active !== false),
+          onDuty: duty.onDuty, statuses: statuses.statuses, leaves: leave.leave, rotaPartial: !!(asg.partial || duty.partial || statuses.partial || leave.partial), nowMs };
+        const r = sub === "nurse-staffing" ? await nurseStaffingView(request, env, { ...sctx, date, ward: url.searchParams.get("ward") || "" })
+          : sub === "staffing-draft" ? await staffingDraft(request, env, { ...sctx, from: date, ward: url.searchParams.get("ward") || "", days: url.searchParams.get("days") })
+          : await recordShiftStaffing(request, env, { ...sctx, date, shiftId: body.shiftId });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "staff-injury" && method === "POST") {
+        const r = await reportStaffInjury(request, env, { ...deps, actorId: actor.id, occurredAt: body.occurredAt, kind: body.kind, injuredStaff: body.injuredStaff, unit: body.unit, device: body.device,
+          description: body.description, sourceKnown: body.sourceKnown, firstAid: body.firstAid, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "staff-injuries" && method === "GET") {
+        const r = await staffInjuries(request, env, { ...deps, month: url.searchParams.get("month") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- Infection control and quality registers (infection-control.js, quality-registers.js) ---- */
+      const utcOffsetMinutes = wsqCfg && wsqCfg.utcOffsetMinutes;
+      const cfgList = (k) => (wsqCfg && Array.isArray(wsqCfg[k]) ? wsqCfg[k] : []);
+      if (sub === "infection-control" && method === "GET") {
+        const r = await infectionControlView(request, env, { ...deps, month: url.searchParams.get("month") || "", antibiotics: cfgList("antibiotics"), windowMinutes: wsqCfg && wsqCfg.prophylaxisWindowMinutes, utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "hai-case" && method === "POST") {
+        const r = await recordHaiCase(request, env, { ...deps, action: body.action, caseId: body.caseId, patientId: body.patientId, event: body.event, dateOfEvent: body.dateOfEvent, lineId: body.lineId, surgicalCaseId: body.surgicalCaseId,
+          ssiDepth: body.ssiDepth, surveillanceDays: body.surveillanceDays, criteriaMet: body.criteriaMet, organisms: body.organisms, eligibilityNote: body.eligibilityNote, reason: body.reason, note: body.note,
+          expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null, utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgical-prophylaxis" && method === "POST") {
+        const r = await recordProphylaxisReview(request, env, { ...deps, caseId: body.caseId, indicated: body.indicated, agentPerPolicy: body.agentPerPolicy, note: body.note, expectedVersion: body.expectedVersion,
+          antibiotics: cfgList("antibiotics"), windowMinutes: wsqCfg && wsqCfg.prophylaxisWindowMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "antibiogram" && method === "GET") {
+        const r = await antibiogramReport(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "", minIsolates: wsqCfg && wsqCfg.antibiogramMinIsolates, antibiotics: cfgList("antibiotics"), utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "quality-registers" && method === "GET") {
+        const r = await qualityRegisters(request, env, { ...deps, month: url.searchParams.get("month") || "", utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "audit-template" && method === "POST") {
+        const r = await saveAuditTemplate(request, env, { ...deps, templateId: body.templateId, name: body.name, kind: body.kind, items: body.items, active: body.active, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "quality-audit" && method === "POST") {
+        const r = await recordAudit(request, env, { ...deps, templateId: body.templateId, at: body.at, unit: body.unit, patientId: body.patientId || (body.mrn ? patientIdForMrn(body.mrn) : ""), answers: body.answers, note: body.note, department: body.department, auditorOutside: body.auditorOutside, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "mock-drill" && method === "POST") {
+        const r = await recordMockDrill(request, env, { ...deps, drillType: body.drillType, at: body.at, location: body.location, scenario: body.scenario, participants: body.participants, variations: body.variations, correctiveActions: body.correctiveActions, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "adr-report" && method === "POST") {
+        const r = await reportAdr(request, env, { ...deps, patientId: body.patientId || (body.mrn ? patientIdForMrn(body.mrn) : ""), reaction: body.reaction, medicines: body.medicines, concomitant: body.concomitant,
+          relevantTests: body.relevantTests, history: body.history, reporterOccupation: body.reporterOccupation, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "emergency-stock" && method === "GET") {
+        const r = await emergencyStock(request, env, { ...deps, month: url.searchParams.get("month") || "", emergencyMedicines: cfgList("emergencyMedicines"), utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "stock-out" && method === "POST") {
+        const r = await recordStockOut(request, env, { ...deps, emergencyMedicines: cfgList("emergencyMedicines"), medicine: body.medicine, location: body.location, occurredAt: body.occurredAt, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "stock-out-restore" && method === "POST") {
+        const r = await restoreStockOut(request, env, { ...deps, stockOutId: body.stockOutId, restoredAt: body.restoredAt, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-returns" && method === "GET") {
+        const r = await edReturns(request, env, { ...deps, month: url.searchParams.get("month") || "", utcOffsetMinutes });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-return-review" && method === "POST") {
+        const r = await reviewEdReturn(request, env, { ...deps, encounterId: body.encounterId, similar: body.similar, note: body.note, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "hmis-monthly" && method === "GET") {
+        const r = await hmisMonthly(request, env, { ...deps, month: url.searchParams.get("month") || "", utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes });
+        if (r.ok && !r.skipped && url.searchParams.get("format") === "csv") return csvOut(hmisCsv(r), `hmis-${r.month}.csv`);
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dhs-checklist" && method === "GET") {
+        const r = await dhsChecklist(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dhs-checklist-save" && method === "POST") {
+        const r = await saveDhsAssessment(request, env, { ...deps, entries: body.entries, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      const hasCap = async (cap) => !!(await ORG.authorizeOrg(env, actor, wOrgId, cap)).ok;
+      if (sub === "report-run" && method === "POST") {
+        const r = await runReport(request, env, { ...deps, spec: body.spec, hasCap });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-save" && method === "POST") {
+        const r = await saveReport(request, env, { ...deps, reportId: body.reportId, name: body.name, spec: body.spec, shared: body.shared === true, deleted: body.deleted === true, hasCap });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "reports-saved" && method === "GET") {
+        const r = await listSavedReports(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "report-csv" && method === "GET") {
+        const r = await reportCsv(request, env, { ...deps, reportId: url.searchParams.get("reportId") || "", hasCap });
+        if (r.ok) return csvOut(r.csv, r.filename);
+        return json(r, r.status || 502, request);
+      }
       if (sub === "verify-order" && method === "POST") {
         const r = await verifyOrder(request, env, { ...deps, orderId: body.orderId, outcome: body.outcome, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -3200,7 +4846,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense" && method === "POST") {
-        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, takeHome: body.takeHome === true, at: body.at, idempotencyKey: body.idempotencyKey || null,
+          isControlled, witnessId: body.witnessId, witnessCheck, quarantineCheck: (drug, code, batch) => quarantineRefusal(deps, drug, code, batch) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense-return" && method === "POST") {
@@ -3209,6 +4856,8 @@ export async function onRequest(context) {
       }
       if (sub === "dispenses" && method === "GET") {
         const r = await listDispenses(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        // The pharmacy label's size and clock: the pharmacy role does not read the ward list that carries them.
+        if (r.ok) r.labels = wsqLabelSettings(wOrg);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "handover" && method === "POST") {
@@ -3220,7 +4869,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "handovers" && method === "GET") {
-        const r = await listHandovers(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "" });
+        // LT-22: each handover names its patient, ward and bed (one read per patient, not per row).
+        const r = await listHandovers(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "", withPatients: true });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "fluid" && method === "POST") {
@@ -3235,17 +4885,186 @@ export async function onRequest(context) {
         const r = await transferPatient(request, env, { ...deps, encounterId: body.encounterId, ward: body.ward, bed: body.bed, reason: body.reason, movedAt: body.movedAt, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "code-set-import" && method === "POST") {
+        const r = await importCodeSet(request, env, { ...deps, system: body.system, csv: body.csv, fileName: body.fileName, licenceConfirmed: body.licenceConfirmed === true });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "code-sets" && method === "GET") {
+        const r = await listCodeSets(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "growth-table-import" && method === "POST") {
+        const r = await importGrowthTables(request, env, { ...deps, referenceName: body.referenceName, method: body.method, csv: body.csv, fileName: body.fileName, licenceConfirmed: body.licenceConfirmed === true, withdraw: body.withdraw === true });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "growth-tables" && method === "GET") {
+        const r = await listGrowthTables(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "code-search" && method === "GET") {
+        const r = await searchCodes(request, env, { ...deps, system: url.searchParams.get("system") || "", q: url.searchParams.get("q") || "", limit: url.searchParams.get("limit") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "expected-discharge" && method === "POST") {
+        const r = await setExpectedDischarge(request, env, { ...deps, encounterId: body.encounterId, expectedDate: body.expectedDate, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "bed-arrival" && method === "POST") {
+        const r = await recordBedArrival(request, env, { ...deps, encounterId: body.encounterId, at: body.at, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "initial-assessment" && method === "POST") {
+        const r = await markInitialAssessment(request, env, { ...deps, encounterId: body.encounterId, noteId: body.noteId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "admission-times" && method === "GET") {
+        const r = await admissionTimes(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "expected-discharge-history" && method === "GET") {
+        const r = await expectedDischargeHistory(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-request" && method === "POST") {
+        const r = await requestTransfer(request, env, { ...deps, encounterId: body.encounterId, toUnit: body.toUnit, toWard: body.toWard, toBed: body.toBed, reason: body.reason, urgency: body.urgency, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-respond" && method === "POST") {
+        const r = await respondTransfer(request, env, { ...deps, requestId: body.requestId, decision: body.decision, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-assign-bed" && method === "POST") {
+        const r = await assignTransferBed(request, env, { ...deps, requestId: body.requestId, bed: body.bed, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-execute" && method === "POST") {
+        const r = await executeTransfer(request, env, { ...deps, requestId: body.requestId, expectedVersion: body.expectedVersion, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-cancel" && method === "POST") {
+        const r = await cancelTransfer(request, env, { ...deps, requestId: body.requestId, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "discharge-milestone" && method === "POST") {
+        const r = await recordDischargeMilestone(request, env, { ...deps, encounterId: body.encounterId, step: body.step, at: body.at, reason: body.reason, patientDelayMinutes: body.patientDelayMinutes, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "discharge-progress" && method === "GET") {
+        // The rows name their patients; those reads audit together, as patient-flow's do.
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const r = await dischargeProgress(request, env, { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository }, withPatients: true, days: url.searchParams.get("days") || "" });
+        try { await audits.flush(); }
+        catch { return json({ ok: false, error: "audit_write_failed", message: "Discharge progress was read but could not be recorded in the audit trail, so it is not shown. Try again." }, 502, request); }
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-centre-request" && method === "POST") {
+        const r = await createInboundTransfer(request, env, { ...deps, facility: body.facility, contactName: body.contactName, contactPhone: body.contactPhone, facilityRef: body.facilityRef, ageYears: body.ageYears, sex: body.sex, clinicalSummary: body.clinicalSummary, requestedService: body.requestedService, requestedUnit: body.requestedUnit, urgency: body.urgency, receivedAt: body.receivedAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-centre-decide" && method === "POST") {
+        const r = await decideInboundTransfer(request, env, { ...deps, requestId: body.requestId, decision: body.decision, reason: body.reason, mrn: body.mrn, identityConfirmed: body.identityConfirmed === true, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-centre-cancel" && method === "POST") {
+        const r = await cancelInboundTransfer(request, env, { ...deps, requestId: body.requestId, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-centre" && method === "GET") {
+        // Accepted calls name their patients; those reads audit together.
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const r = await listInboundTransfers(request, env, { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository }, days: url.searchParams.get("days") || "" });
+        try { await audits.flush(); }
+        catch { return json({ ok: false, error: "audit_write_failed", message: "Transfer centre requests were read but could not be recorded in the audit trail, so they are not shown. Try again." }, 502, request); }
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub.indexOf("education-") === 0) {
+        if (sub === "education-leaflets" && method === "GET") {
+          const r = await listLeaflets(request, env, { ...deps, state: url.searchParams.get("state") || "" });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-attachments" && method === "GET") {
+          const r = await listAttachments(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-leaflet-save" && method === "POST") {
+          const r = await saveLeaflet(request, env, { ...deps, leafletId: body.leafletId, expectedVersion: body.expectedVersion, title: body.title, language: body.language, body: body.body, tags: body.tags, idempotencyKey: body.idempotencyKey || null });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-leaflet-approve" && method === "POST") {
+          const r = await approveLeaflet(request, env, { ...deps, leafletId: body.leafletId, expectedVersion: body.expectedVersion });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-leaflet-retire" && method === "POST") {
+          const r = await retireLeaflet(request, env, { ...deps, leafletId: body.leafletId, reason: body.reason });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-attach" && method === "POST") {
+          const r = await attachLeaflet(request, env, { ...deps, encounterId: body.encounterId, leafletId: body.leafletId, leafletVersion: body.leafletVersion, idempotencyKey: body.idempotencyKey || null });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-detach" && method === "POST") {
+          const r = await detachLeaflet(request, env, { ...deps, encounterId: body.encounterId, itemId: body.itemId, reason: body.reason });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+      }
+      if (sub.indexOf("staff-message") === 0) {
+        /* Escalation is a fixed push (no patient, ward or text) to members of the addressed roles, only when this hospital
+         * turned push alerts on. Never SMS, WhatsApp or email. */
+        const push = alertsEnabled(wOrg) ? (ids, msg) => pushToIdentities(env, wOrg, ids, msg) : null;
+        const members = () => ORG.listMembers(env, wOrgId);
+        if (sub === "staff-messages" && method === "GET") {
+          const r = await listStaffMessages(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", unit: url.searchParams.get("unit") || "", view: url.searchParams.get("view") || "" });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-send" && method === "POST") {
+          const r = await sendStaffMessage(request, env, { ...deps, threadId: body.threadId, patientId: body.patientId, encounterId: body.encounterId, unit: body.unit, subject: body.subject, body: body.body, toRoles: body.toRoles, toPeople: body.toPeople, urgent: body.urgent === true, push, members, idempotencyKey: body.idempotencyKey || null });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-people" && method === "GET") {
+          const r = await listMessagePeople(request, env, { ...deps, members });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-edit" && method === "POST") {
+          const r = await editStaffMessage(request, env, { ...deps, messageId: body.messageId, body: body.body, expectedVersion: body.expectedVersion });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-recall" && method === "POST") {
+          const r = await recallStaffMessage(request, env, { ...deps, messageId: body.messageId, reason: body.reason, expectedVersion: body.expectedVersion });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-read" && method === "POST") {
+          const r = await markThreadRead(request, env, { ...deps, threadId: body.threadId });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "staff-message-escalate" && method === "POST") {
+          const r = await escalateStaffMessage(request, env, { ...deps, messageId: body.messageId, push, members });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+      }
+      if (sub === "transfer-requests" && method === "GET") {
+        const r = await listTransferRequests(request, env, { ...deps, ward: url.searchParams.get("ward") || "", encounterId: url.searchParams.get("encounterId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "beds" && method === "GET") {
         // The ward's bed list is ORG configuration. With none configured the board reports what is
         // occupied and says it cannot know what is free, rather than reporting zero free beds.
         const r = await bedBoard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", beds: (wsqCfg && wsqCfg.beds) || null });
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        const masked = await mtpNameMask(deps, can(wAz.role, CAPS.REGISTER_MTP), sub, r);
+        return json(masked, masked.ok ? 200 : (masked.status || 502), request);
       }
       if (sub === "criticals" && method === "GET") {
+        // names=1 (the hospital-wide boards, LT-28): each row names its patient, ward and bed; those reads audit together.
+        const withPatients = url.searchParams.get("names") === "1";
+        const audits = withPatients ? bufferReadAudits(deps.recordDeps.repository) : null;
         const r = await listCriticalLoops(request, env, {
-          ...deps, patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "",
-          policy: (wsqCfg && wsqCfg.criticalEscalation) || null,
+          ...deps, ...(audits ? { recordDeps: { ...deps.recordDeps, repository: audits.repository } } : {}),
+          patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "",
+          policy: (wsqCfg && wsqCfg.criticalEscalation) || null, withPatients,
         });
+        if (audits) {
+          try { await audits.flush(); }
+          catch { return json({ ok: false, error: "audit_write_failed", message: "Critical results were read but could not be recorded in the audit trail, so they are not shown. Try again." }, 502, request); }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "flag-critical" && method === "POST") {
@@ -3257,15 +5076,34 @@ export async function onRequest(context) {
           // The site's limits, never a request parameter: a caller who could pass these could decide
           // a potassium of 7 was not critical by asking differently.
           limits: (wsqCfg && wsqCfg.criticalLimits) || null,
-          // No channel is wired in this build (a channel is a FUNCTION - wardsynq-notify.js's own
-          // Dispatcher deps - not JSON an org's Firestore config document could ever carry; wiring a
-          // real one means reusing StewardMD's existing APNs/FCM push infrastructure, per
-          // wardsynq-safety-case.js's HAZ-DET-01, and is future work, not fabricated here). Every
-          // opened loop therefore honestly records NO_CHANNEL rather than a silent "sent".
-          notifyDeps: {},
+          // S3 P0: the StewardMD app push channel when this hospital turned alerts on
+          // (wardsynq.alerts.push.enabled); otherwise none, and every opened loop honestly records
+          // NO_CHANNEL rather than a silent "sent".
+          notifyDeps: notifyDepsFor(env, wOrg, mig.tenantId, deps.recordDeps.repository),
           idempotencyKey: body.idempotencyKey || null,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "alert-status" && method === "GET") {
+        const r = await alertDeliveryStatus({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, wsqCfg, actorId: actor.id, smsMissing: smsSetup(env, wOrg).missing, orgId: wOrg.id, directory: directoryFromEnv(env), readers: staffReaders(env, wOrg) });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* Owner 2026-09-15: a ward with nobody on duty is visible BEFORE an alert happens. ?ward= one ward; blank = every
+       * ward the hospital knows (rota units, wards, bed lists). A failed read is 502, never zeros. */
+      if (sub === "alert-cover" && method === "GET") {
+        try {
+          const readers = staffReaders(env, wOrg);
+          const want = String(url.searchParams.get("ward") || "").trim();
+          /* LT-04: how many shifts the rota defines, so a ward nobody covers can tell an admin WHAT to set up
+           * (define shifts, or assign staff to them). null = could not be read; never read as none. */
+          const [members, duty, st, wards, shiftList] = await Promise.all([readers.members(), readers.onDuty(""), readers.dutyStatuses(), want ? [want] : ROSTER.wardChoices(env, wOrg), ROSTER.listShifts(env, wOrgId).catch(() => null)]);
+          const nowMs = Date.now();
+          const policy = (wsqCfg && wsqCfg.criticalEscalation) || null;
+          const shiftsDefined = shiftList && shiftList.ok ? shiftList.shifts.filter((s) => s.active !== false).length : null;
+          return json({ ok: true, wards: wards.map((w) => wardAlertCover({ policy, members, duty: duty.onDuty, statuses: st.statuses, unit: w, nowMs })), partial: !!(duty.partial || st.partial), shiftsDefined }, 200, request);
+        } catch (e) {
+          return json({ ok: false, error: "duty_read_failed", message: "Who is on duty could not be read. Do not read this as nobody on duty." }, 502, request);
+        }
       }
       if (sub === "acknowledge" && method === "POST") {
         const r = await acknowledgeCritical(request, env, {
@@ -3279,20 +5117,25 @@ export async function onRequest(context) {
        * same functions the chart uses, so it can never disagree with the chart. A patient whose schedule or
        * score could not be read is listed with that failure, never shown as "nothing due". */
       if (sub === "nurse-worklist" && method === "GET") {
-        const roster = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "" });
-        if (!roster || !roster.ok) return json(roster || { ok: false, error: "ward_unavailable" }, (roster && roster.status) || 502, request);
-        const nowMs = Date.now(), CAP = 60;
-        const patients = (roster.patients || []).slice(0, CAP);
+        /* LT-21: about a minute to load, and only the first 60 patients. Every patient's schedule, score and nursing
+         * columns are separate audited reads, and each audit row waited its turn on the hash chain; they are now
+         * written together before the answer (bufferReadAudits), and every admitted patient is listed. */
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const wdeps = { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository } };
+        const roster = await listWard(request, env, { ...wdeps, ward: url.searchParams.get("ward") || "" });
+        if (!roster || !roster.ok) { await audits.flush().catch(() => {}); return json(roster || { ok: false, error: "ward_unavailable" }, (roster && roster.status) || 502, request); }
+        const nowMs = Date.now();
+        const patients = roster.patients || [];
         const sched = { marTimes: (wsqCfg && wsqCfg.marTimes) || null, offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined, timeZone: (wsqCfg && wsqCfg.timeZone) || undefined, graceMinutes: Number.isFinite(wsqCfg && wsqCfg.marGraceMinutes) ? wsqCfg.marGraceMinutes : undefined };
         const rows = await Promise.all(patients.map(async (p) => {
           const row = { patientId: p.patientId, patient: p, overdue: null, dueSoon: null, news2: null, problems: [] };
           try {
-            const s = await marSchedule(request, env, { ...deps, ...sched, patientId: p.patientId, from: new Date(nowMs - 12 * 3600e3).toISOString(), to: new Date(nowMs + 4 * 3600e3).toISOString() });
+            const s = await marSchedule(request, env, { ...wdeps, ...sched, patientId: p.patientId, from: new Date(nowMs - 12 * 3600e3).toISOString(), to: new Date(nowMs + 4 * 3600e3).toISOString() });
             if (s && s.ok) { row.overdue = s.due.filter((d) => d.overdue).length; row.dueSoon = s.due.filter((d) => !d.status && Date.parse(d.dueAt) >= nowMs).length; if (s.unreadDoses) row.problems.push(s.warning); }
             else row.problems.push("medication schedule could not be read");
           } catch { row.problems.push("medication schedule could not be read"); }
           try {
-            const n = await news2ForPatient(request, env, { ...deps, patientId: p.patientId, scale: "" });
+            const n = await news2ForPatient(request, env, { ...wdeps, patientId: p.patientId, scale: "" });
             // An unscorable result carries no number: 0 would read as "well" for a patient simply not observed.
             if (n && n.ok && n.score) row.news2 = n.score.scorable === false ? { total: null, risk: null, scorable: false } : { total: n.score.total != null ? n.score.total : null, risk: n.score.risk || null, scorable: true };
             else row.problems.push("early-warning score could not be worked out");
@@ -3301,7 +5144,7 @@ export async function onRequest(context) {
         }));
         /* Nursing columns (nursing.js): assigned nurse, open/overdue tasks, obs due. A piece that could not be read
          * is null with a problem on the row, never 0 or "not due". */
-        const nursing = await nursingWard(request, env, { ...deps, patients: patients.map((p) => ({ patientId: p.patientId, encounterId: p.encounterId })) }).catch(() => new Map());
+        const nursing = await nursingWard(request, env, { ...wdeps, patients: patients.map((p) => ({ patientId: p.patientId, encounterId: p.encounterId })) }).catch(() => new Map());
         for (const row of rows) {
           const n = nursing.get(row.patientId);
           // The NEWS2 module's own "high" band. Shown, never paged: escalation is the nurse's call.
@@ -3316,7 +5159,11 @@ export async function onRequest(context) {
         rows.sort((a, b) => (b.problems.length > 0) - (a.problems.length > 0)
           || ((RISK[a.news2 && a.news2.risk] ?? 9) - (RISK[b.news2 && b.news2.risk] ?? 9))
           || ((b.overdue || 0) - (a.overdue || 0)));
-        return json({ ok: true, rows, me: actor.id, staff: staff ? staff.filter((m) => m.active !== false && can(m.role, CAPS.EMR_VITALS)).map((m) => ({ identity: m.identity, label: m.email || m.identity, role: m.role })) : null, partial: (roster.patients || []).length > CAP, ...((roster.patients || []).length > CAP ? { partialWarning: `Only the first ${CAP} patients on this ward are shown.` } : {}) }, 200, request);
+        // Nothing read above is handed out before its audit rows are written; a failed write is this request's failure.
+        try { await audits.flush(); }
+        catch { return json({ ok: false, error: "audit_write_failed", message: "The worklist was read but could not be recorded in the audit trail, so it is not shown. Try again." }, 502, request); }
+        const partial = !!roster.partial;
+        return json({ ok: true, rows, me: actor.id, staff: staff ? staff.filter((m) => m.active !== false && can(m.role, CAPS.EMR_VITALS)).map((m) => ({ identity: m.identity, label: m.email || m.identity, role: m.role })) : null, total: rows.length, partial, ...(partial ? { partialWarning: roster.partialWarning } : {}) }, 200, request);
       }
       if (sub === "schedule" && method === "GET") {
         const r = await marSchedule(request, env, {
@@ -3342,8 +5189,19 @@ export async function onRequest(context) {
         const r = await listProblems(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", includeInactive: url.searchParams.get("includeInactive") === "1" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
-      if (sub === "discharge" && method === "POST") {
-        const r = await dischargePatient(request, env, { ...deps, encounterId: body.encounterId, dischargedAt: body.dischargedAt, disposition: body.disposition, idempotencyKey: body.idempotencyKey || null });
+      /* LT-32: the checklist is decided here, not on the screen. Deferring the bill needs a reason; an
+       * override for open orders or pending results needs a reason AND a treating clinician (emr.treat),
+       * decided server-side and handed to the domain as a fact, never taken from the body. */
+      if ((sub === "discharge" && method === "POST") || (sub === "discharge-checklist" && method === "GET")) {
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        const canOverride = (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT)).ok === true;
+        const common = { ...deps, tariff: tf.table, tariffError: tf.error, canOverride };
+        const r = sub === "discharge-checklist"
+          ? await readDischargeChecklist(request, env, { ...common, encounterId: url.searchParams.get("encounterId") || "" })
+          : await dischargePatient(request, env, { ...common, encounterId: body.encounterId, dischargedAt: body.dischargedAt, disposition: body.disposition,
+            destination: body.destination, dispositionNote: body.dispositionNote, billDeferredReason: body.billDeferredReason, overrideReason: body.overrideReason,
+            idempotencyKey: body.idempotencyKey || null });
+        if (sub === "discharge" && r.ok && r.written) abdmStayHook(body.encounterId, "discharge");
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "discharge-summary" && method === "GET") {
@@ -3355,22 +5213,42 @@ export async function onRequest(context) {
          * It is a display fact, not a grant: drafting and signing re-check the capability and the
          * signing credential on their own routes regardless of what the screen chose to render. */
         if (r.ok) r.canAuthor = (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT)).ok === true;
-        return json(r, r.ok ? 200 : (r.status || 502), request);
+        if (r.ok) r.print = wsqPrintSettings(wOrg);
+        const masked = await mtpNameMask(deps, can(wAz.role, CAPS.REGISTER_MTP), sub, r);
+        return json(masked, masked.ok ? 200 : (masked.status || 502), request);
       }
       if (sub === "discharge-summary" && method === "POST") {
-        const r = await draftDischargeSummary(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, dischargedAt: body.dischargedAt, sections: body.sections, idempotencyKey: body.idempotencyKey || null });
+        const r = await draftDischargeSummary(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, dischargedAt: body.dischargedAt, sections: body.sections, idempotencyKey: body.idempotencyKey || null, medicoLegalFor });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "sign-discharge-summary" && method === "POST") {
         const r = await signDischargeSummary(request, env, { ...deps, encounterId: body.encounterId, idempotencyKey: body.idempotencyKey || null });
+        if (r.ok && r.signed) abdmStayHook(body.encounterId, "summary-signed");
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* G2 conflict review (ward.js offline view, ward-offline.js). Only somebody who could have made the write
+       * may record what happens to it: the kind names the capability, and a note also accepts the hospital's
+       * noteWriterRoles exactly as /ward/note does. Audited before the device drops or re-sends anything. */
+      if (sub === "offline-resolve" && method === "POST") {
+        const kind = String(body.kind || "");
+        const kindCap = { vitals: CAPS.EMR_VITALS, icu: CAPS.EMR_VITALS, fluid: CAPS.EMR_VITALS, "nursing-task-done": CAPS.EMR_VITALS, note: CAPS.EMR_TREAT, mar: CAPS.MED_ADMINISTER }[kind];
+        if (!kindCap) return json({ ok: false, error: "unknown_kind" }, 422, request);
+        let kAz = await ORG.authorizeOrg(env, actor, wOrgId, kindCap);
+        if (!kAz.ok && kind === "note") {
+          const roles = (wsqCfg && Array.isArray(wsqCfg.noteWriterRoles) ? wsqCfg.noteWriterRoles : []).map((x) => String(x || "").trim());
+          if (roles.indexOf(String(wAz.role || "")) >= 0) kAz = wAz;
+        }
+        if (!kAz.ok) return json(azRefusal(kAz), 403, request);
+        const r = await recordOfflineChoice(request, env, { ...deps, kind, choice: body.choice, idempotencyKey: body.idempotencyKey, patientId: body.patientId,
+          error: body.error, expectedVersion: body.expectedVersion, currentVersion: body.currentVersion, reason: body.reason, createdAt: body.createdAt });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "mar" && method === "POST") {
         const r = await administerStep(request, env, {
-          ...deps, action: body.action, orderId: body.orderId, dueAt: body.dueAt,
+          ...deps, action: body.action, orderId: body.orderId, dueAt: body.dueAt, expectedOrderVersion: body.expectedOrderVersion,
           patient: body.patient, scan: body.scan, reason: body.reason, witnessId: body.witnessId,
           rulePack: getRulePack(), highAlertDrugs: (wsqCfg && wsqCfg.highAlertDrugs) || [],
-          idempotencyKey: body.idempotencyKey || null,
+          idempotencyKey: body.idempotencyKey || null, isControlled, witnessCheck,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -3390,7 +5268,32 @@ export async function onRequest(context) {
         if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
         const org = await ORG.getOrg(env, pOrg);
         if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+        /* D14: a desk registering a patient FOR THE QUEUE in a hospital that numbers per department is told
+         * before an MR number is issued that the token cannot be given, rather than registering the patient
+         * and then failing to queue them. "pool" (the front desk) needs the picked department; "session" (a
+         * doctor's own queue) may take it from its room or session, so only a picked one is checked here.
+         * The queue add itself checks again: this is the early answer, not the authority. */
+        if (body.forQueue && org.tokens && org.tokens.scope === "department") {
+          const pre = resolveTokenDepartment(await ORG.listDepartments(env, pOrg), org.tokens, { departmentId: body.departmentId });
+          const why = pre.badId ? "department_not_found" : (!pre.department && body.forQueue === "pool") ? "token_department_required"
+            : pre.department ? tokenScope(org.tokens, pre.department).error : null;
+          if (why) return json({ ok: false, error: why, message: TOKEN_SAY[why], errors: { departmentId: TOKEN_SAY[why] } }, 422, request);
+        }
+        /* S6 A5: an ABHA verified or created at the desk comes with abdm-desk.js's proof. It is checked BEFORE the
+         * MR number is issued, so an ABHA that already belongs to another patient here stops the registration
+         * instead of making a second chart (TAGGING_UNIQUEPATIENTID_UNIQUEABHANUMBER). A typed ABHA has no proof
+         * and is registered as typed, exactly as before. */
+        let verifiedAbha = null, abhaTenant = null;
+        if (body.abhaProof) {
+          const abhaMig = await wsqForcedMigration(env, org);
+          abhaTenant = abhaMig && !abhaMig.error ? abhaMig.tenantId : null;
+          const chk = await checkVerifiedAbha(env, { orgId: pOrg, tenantId: abhaTenant, body });
+          if (!chk.ok) return json(chk, chk.status || 422, request);
+          verifiedAbha = chk.abha;
+        }
         const r = await PAT.registerPatient(env, org, body, actor.id || "");
+        /* The binding follows the MR number. Its outcome travels beside the registration's; a failure is said. */
+        if (r.ok && verifiedAbha) r.abhaLink = await linkVerifiedAbha(env, { tenantId: abhaTenant, actorId: actor.id, mrn: r.mrn, abha: verifiedAbha, patient: body });
         /* A PATIENT WHO IS ALREADY REGISTERED STILL NEEDS A CLINICAL RECORD MASTER.
          *
          * This used to return here on "duplicate" / "mrn_taken", which is right for the form (the
@@ -3444,6 +5347,20 @@ export async function onRequest(context) {
         const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_VIEW);
         if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
         const p = await PAT.getPatient(env, pOrg, url.searchParams.get("mrn") || "");
+        /* MTP Regulations 2003 reg 7 (register-routes.js mtpNameMask): in a current MTP episode the front desk sees the
+         * Admission Register serial number, not the woman's name, unless the reader keeps the MTP register. */
+        if (p && !can(az.role, CAPS.REGISTER_MTP)) {
+          const pOrgRec = await ORG.getOrg(env, pOrg);
+          const pMig = pOrgRec && pOrgRec.mode === "wardsynq" ? await wsqForcedMigration(env, pOrgRec) : null;
+          if (pMig && !pMig.error && pMig.tenantId) {
+            let rows;
+            try { rows = await wsqRecordDeps(env, pMig.tenantId).repository.latestByType(pMig.tenantId, registerTypeOf("mtp"), REGISTER_MAX, { newest: true }); }
+            catch { return json({ ok: false, error: "record_read_failed", message: "Whether a name must be withheld (MTP Regulations reg 7) could not be checked, so the patient was not shown." }, 502, request); }
+            const cfg = pOrgRec.wardsynq || {};
+            const ep = mtpEpisodes(rows, hospitalToday(Date.now(), { offsetMinutes: Number.isFinite(cfg.utcOffsetMinutes) ? cfg.utcOffsetMinutes : 330, timeZone: cfg.timeZone || "" })).get(patientIdForMrn(p.mrn));
+            if (ep) return json({ ok: true, patient: { ...p, name: ep[0].serial, nameWithheld: "MTP Regulations 2003 reg 7" } }, 200, request);
+          }
+        }
         return json(p ? { ok: true, patient: p } : { ok: false, error: "not_found" }, 200, request);
       }
       // The hospital EMR issued a real MR for someone queued on a provisional id.
@@ -3481,7 +5398,25 @@ export async function onRequest(context) {
       if (sub === "queue" && method === "GET") return json({ ok: true, orders: await BILL.billingQueue(env, bOrg) }, 200, request);
       if (sub === "tariff" && method === "GET") return json({ ok: true, items: await BILL.listTariff(env, bOrg) }, 200, request);
       if (sub === "tariff" && method === "POST") return json(await BILL.upsertTariff(env, bOrg, body, aid), 200, request);
-      if (sub === "invoice" && method === "POST") return json(await BILL.createInvoice(env, bOrg, body.patientId || "", aid), 200, request);
+      if (sub === "invoice" && method === "POST") {
+        /* BNSS 2023 s.397 (legal review D.4.2): the OPD clinic invoice is locked like the ward invoice while a rape, acid
+         * attack or POCSO medico-legal case is open for the patient. The clinic's patient is the hospital's OPD number, the
+         * same one the ward knows as patientIdForMrn. A register that cannot be read refuses the invoice too. */
+        const bOrgRec = await ORG.getOrg(env, bOrg);
+        if (bOrgRec && bOrgRec.mode === "wardsynq" && String(body.patientId || "").trim()) {
+          const bMig = await wsqForcedMigration(env, bOrgRec);
+          if (!bMig || bMig.error || !bMig.tenantId) return json({ ok: false, error: "mlc_register_unreadable", message: "Whether treatment must be free of cost (BNSS s.397) could not be checked, so no invoice was raised.", written: 0 }, 502, request);
+          const bDeps = { migration: bMig, recordDeps: wsqRecordDeps(env, bMig.tenantId), actor: { id: aid } };
+          let free = null;
+          for (const pid of [...new Set([String(body.patientId).trim(), patientIdForMrn(body.patientId)].filter(Boolean))]) {
+            const cases = await listRegisterEntries({ ...bDeps, kind: "mlc", patientId: pid });
+            if (!cases.ok) return json({ ok: false, error: "mlc_register_unreadable", message: "Whether treatment must be free of cost (BNSS s.397) could not be checked, so no invoice was raised.", written: 0 }, 502, request);
+            free = free || cases.entries.find((e) => e.fields && e.fields.status === "open" && FREE_TREATMENT.includes(e.fields.category)) || null;
+          }
+          if (free) return json({ ok: false, error: "free_treatment_bnss_397", serial: free.serial, message: "BNSS s.397: this patient's medico-legal case requires first aid and medical treatment free of cost, so no invoice is raised.", written: 0 }, 409, request);
+        }
+        return json(await BILL.createInvoice(env, bOrg, body.patientId || "", aid), 200, request);
+      }
       if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid), 200, request);
       if (sub === "pharmacy" && method === "GET") return json({ ok: true, orders: await BILL.pharmacyQueue(env, bOrg) }, 200, request);
@@ -3504,20 +5439,26 @@ export async function onRequest(context) {
       if (method === "POST" && sub === "disable") return reply(await ORG.disableMfa(env, actor.orgId, actor.id, mb.code));
       if (method === "GET" && sub === "signins") return reply(await ORG.recentSignIns(env, actor.orgId, actor.id));
       // Ends every session of this account, the one making the request included.
-      if (method === "POST" && sub === "signout-all") return reply(await ORG.signOutEverywhere(env, actor.orgId, actor.id));
+      if (method === "POST" && sub === "signout-all") {
+        const so = await ORG.signOutEverywhere(env, actor.orgId, actor.id);
+        if (so.ok) { const u = await unbindMemberDevices(env, actor.orgId, actor.id, actor.id); if (!u.ok) return json({ ok: false, error: u.error, applied: true, message: "Signed out everywhere, but this account's phones could not be removed from critical-result alerts. Try again." }, 502, request); }
+        return reply(so);
+      }
       return json({ ok: false, error: "not_found" }, 404, request);
     }
     if (method === "GET" && seg === "whoami") {
       // For non-owner/non-doctor identities, the real role is org-scoped (q_members), not the global viewer.
-      let role = actor.role, orgId = actor.orgId || url.searchParams.get("orgId") || actor.hospitalId || "";
+      let role = actor.role, orgId = actor.orgId || url.searchParams.get("orgId") || actor.hospitalId || "", orgOwner = false;
       // For EVERY identity kind, not only staff: an account that is an invited member (or the owner)
       // of the hospital holds that hospital's role, and a console that read the global "doctor" role
       // instead hid the Admin Center from the person who owns the hospital. The server still
       // re-checks every mutation; this only tells the UI what to offer.
-      if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; }
+      if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; orgOwner = !!(az.ok && az.owner); }
       const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
       let orgCode = ""; if (orgId) { const o = await ORG.getOrg(env, orgId); if (o) orgCode = o.code || ""; }
-      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env), ...(actor.mfaSetupOnly ? { twoStepRequired: true } : {}) }, 200, request);
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
+        // UI hints for Remove hospital only; POST /org/delete re-checks both.
+        ...(orgOwner ? { orgOwner: true } : {}), ...(actor.isOwner === true ? { platformOwner: true } : {}), ...(actor.mfaSetupOnly ? { twoStepRequired: true } : {}) }, 200, request);
     }
 
     // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----
@@ -3593,11 +5534,31 @@ export async function onRequest(context) {
     if (seg === "roster") {
       const rb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || rb.orgId || "";
-      const ADMIN_SUBS = new Set(["shift", "assign", "unassign", "leave-decide", "swap-approve", "leave-pending", "swap-pending"]);
+      const ADMIN_SUBS = new Set(["shift", "assign", "unassign", "leave-decide", "swap-approve", "leave-pending", "swap-pending", "duty", "draft-publish"]);
       const az = await ORG.authorizeOrg(env, actor, orgId, ADMIN_SUBS.has(sub) ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
       if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
       const me = actor.id;
       const out = (r) => json(r, r.ok ? 200 : r.error === "not_found" ? 404 : 422, request);
+      /* SELF-MARKED DUTY (owner 2026-09-15). The caller's OWN status only: the identity is the caller's membership in
+       * THIS hospital, read from the credential (a StewardMD account by uid or email), never from the body. Only the
+       * ward team (nurse, resident, consultant roles) may mark it: nobody else is on the level-2 ladder by duty. */
+      if (sub === "duty-status" && (method === "GET" || method === "POST")) {
+        const m = az.owner ? null : (await ORG.getMembership(env, orgId, actor.id)) || (actor.email ? await ORG.getMembership(env, orgId, actor.email) : null);
+        if (!m || !m.identity || !wardTeamGroupOf(m.role)) {
+          /* LT-04: READING is not refused. The ward home asks every signed-in member (an admin included) for
+           * their own duty status; a 403 there was a console error on every ward open. The answer says this
+           * role has no duty status to show. Marking duty (POST) stays the ward team's alone. */
+          if (method === "GET") return json({ ok: true, notWardTeam: true, role: (m && m.role) || az.role || null, status: null }, 200, request);
+          return json({ ok: false, error: "not_ward_team", message: `Only nurses, residents and consultants (${Object.values(WARD_TEAM_ROLES).flat().join(", ")}) mark themselves on or off duty. Your role here is "${(m && m.role) || az.role || "none"}".` }, 403, request);
+        }
+        // A body naming anybody is asking to set another person's status: refused, never quietly applied to the caller.
+        if (method === "POST" && rb.identity !== undefined && String(rb.identity) !== m.identity) return json({ ok: false, error: "not_your_status", message: "You can only mark your own duty status." }, 403, request);
+        const dOrg = await ORG.getOrg(env, orgId);
+        if (method === "GET") return out(await ROSTER.myDutyStatus(env, dOrg, m.identity));
+        const r = await ROSTER.setDutyStatus(env, dOrg, m.identity, { status: rb.status, unit: rb.unit });
+        return json(r, r.ok ? 200 : r.error === "duty_status_not_saved" ? 503 : 422, request);
+      }
+      if (method === "GET" && sub === "duty") return out(await ROSTER.dutyByWard(env, await ORG.getOrg(env, orgId), await ORG.listMembers(env, orgId)));
       if (method === "GET" && sub === "shifts") return out(await ROSTER.listShifts(env, orgId));
       if (method === "GET" && sub === "mine") return out(await ROSTER.mine(env, orgId, me));
       if (method === "GET" && sub === "coverage") {
@@ -3613,6 +5574,8 @@ export async function onRequest(context) {
       if (method === "GET" && sub === "swap-pending") return out(await ROSTER.pendingSwaps(env, orgId));
       if (method === "POST" && sub === "shift") return out(await ROSTER.saveShift(env, orgId, rb, me));
       if (method === "POST" && sub === "assign") return out(await ROSTER.assign(env, orgId, rb, me));
+      // P4: a draft roster (GET /ward/staffing-draft) becomes the rota only here, each entry checked again, all or nothing.
+      if (method === "POST" && sub === "draft-publish") return out(await ROSTER.publishDraft(env, orgId, rb.entries, me));
       if (method === "POST" && sub === "unassign") return out(await ROSTER.unassign(env, orgId, rb.assignmentId, rb.reason, me));
       if (method === "POST" && sub === "leave-request") return out(await ROSTER.requestLeave(env, orgId, me, rb));
       if (method === "POST" && sub === "leave-decide") return out(await ROSTER.decideLeave(env, orgId, rb.leaveId, rb.approve === true, me));
@@ -3620,6 +5583,287 @@ export async function onRequest(context) {
       if (method === "POST" && sub === "swap-respond") return out(await ROSTER.respondSwap(env, orgId, me, rb.swapId, rb.accept === true));
       if (method === "POST" && sub === "swap-approve") return out(await ROSTER.approveSwap(env, orgId, rb.swapId, rb.approve === true, me));
       return json({ ok: false, error: "not_found" }, 404, request);
+    }
+    /* D10: CLINICAL SEED DATA SIGN-OFF. GET /seed/status lists every seed item with its sign-off state: the
+     * platform owner, or a hospital's staff.admin (?orgId=) so an admin can see what is still unapproved. POST
+     * /seed/signoff records one item's sign-off and is the PLATFORM OWNER's act only (a StewardMD owner
+     * account, never a hospital role), in the name the owner's decision gives, for the exact content the
+     * signer was shown (its fingerprint), with an explicit attestation. The record and its audit row are one
+     * commit; a record is created once and never rewritten. Nothing here is PHI. */
+    if (seg === "seed" && (sub === "status" || sub === "signoff")) {
+      const records = () => SEEDSTORE.listSignoffs(env);
+      if (sub === "status" && method === "GET") {
+        if (!actor.isOwner) {
+          const az = await ORG.authorizeOrg(env, actor, url.searchParams.get("orgId") || "", CAPS.STAFF_ADMIN);
+          if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+        }
+        let held;
+        try { held = await records(); } catch (e) { return json({ ok: false, error: "signoffs_unreadable", message: "The sign-off records could not be read, so no item can be shown as signed." }, 503, request); }
+        return json({ ok: true, signatory: SEED.SIGNATORY, canSign: !!(actor.kind === "firebase" && actor.isOwner), lists: await SEED.seedStatus(held) }, 200, request);
+      }
+      if (sub === "signoff" && method === "POST") {
+        if (!(actor.kind === "firebase" && actor.isOwner)) return json({ ok: false, error: "platform_owner_only", message: "Clinical seed data is signed off by the StewardMD platform owner only." }, 403, request);
+        const sb = await readBody(request);
+        const list = SEED.seedLists().find((l) => l.id === sb.listId);
+        const item = list && list.items.find((i) => i.id === sb.itemId);
+        if (!item) return json({ ok: false, error: "not_found", message: "No such seed item." }, 404, request);
+        if (sb.attest !== true) return json({ ok: false, error: "attestation_required", message: "Confirm that you have reviewed this item's content." }, 422, request);
+        if (String(sb.signatory || "").trim() !== SEED.SIGNATORY) return json({ ok: false, error: "wrong_signatory", message: "Clinical seed data is signed off by " + SEED.SIGNATORY + "." }, 422, request);
+        const hash = await SEED.fingerprint(item.content);
+        if (sb.contentHash !== hash) return json({ ok: false, error: "content_changed", message: "This item's content is not what was shown for signing. Reload and review it again." }, 409, request);
+        const at = new Date().toISOString();
+        const version = list.seedVersion + "#" + hash.slice(0, 12);
+        const rec = { listId: list.id, itemId: item.id, contentHash: hash, version, signedBy: SEED.SIGNATORY, signedByAccount: actor.id, signedAt: at,
+          text: "Signed off by " + SEED.SIGNATORY + ", " + at.slice(0, 10) + ", version " + version };
+        const id = SEED.signoffId(list.id, item.id, hash);
+        try { await SEEDSTORE.createSignoff(env, id, rec, actor.id); }
+        catch (e) {
+          if (e && e.code === "precondition") return json({ ok: false, error: "already_signed", message: "This exact content is already signed off." }, 409, request);
+          return json({ ok: false, error: "signoff_not_saved", message: "The sign-off was not saved. Nothing was recorded; try again." }, 503, request);
+        }
+        return json({ ok: true, signoff: { id, ...rec } }, 200, request);
+      }
+      return json({ ok: false, error: "not_found" }, 404, request);
+    }
+    /* D11 A: the hospital's clinical settings template (Admin Center > Hospital). staff.admin reads and saves;
+     * only a WardSynQ hospital has these settings. The read is what the screen shows as "what is saved". */
+    if (seg === "org" && sub === "clinical-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Clinical settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, settings: CLINICAL.readClinicalSettings(o.wardsynq), templates: CLINICAL.TEMPLATES }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const tpl = cb.templateId ? CLINICAL.TEMPLATES[cb.templateId] : null;
+      if (cb.templateId && !tpl) return json({ ok: false, error: "unknown_template", message: "There is no such template." }, 422, request);
+      const { value, errors } = CLINICAL.validateClinicalSettings(cb.settings);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_clinical_settings", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const changed = CLINICAL.changedClinicalKeys(o.wardsynq, value);
+      if (!changed.length) return json({ ok: true, changed: [], settings: CLINICAL.readClinicalSettings(o.wardsynq) }, 200, request);
+      // The audit row names the settings changed and the template, never the values (a drug list is not needed to know who changed it).
+      await ORG.updateOrg(env, orgId, { wardsynq: CLINICAL.mergeInto(o.wardsynq, value) }, actor.id,
+        { action: "org:clinical_settings", meta: JSON.stringify({ changed, template: cb.templateId || null }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ok: true, changed, settings: CLINICAL.readClinicalSettings(back && back.wardsynq) }, 200, request);
+    }
+    /* P4 nursing-staffing: the hospital's staffing norms (nurse-staffing.js), on the Staff rota screen. staff.admin reads and
+     * saves. WardSynQ ships no ratio: every unit type, dependency level and patients-per-nurse figure is the hospital's own,
+     * checked against its risk tools and rota shifts. The audit row counts what changed, not the values. */
+    if (seg === "org" && sub === "staffing-norms") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Staffing norms belong to a WardSynQ hospital." }, 409, request);
+      const tools = (o.wardsynq && Array.isArray(o.wardsynq.riskTools) ? o.wardsynq.riskTools : []).map((t) => ({ id: t && t.id, name: t && t.name, bands: ((t && t.bands) || []).map((b) => b && b.band).filter(Boolean) }));
+      const shifts = (await ROSTER.listShifts(env, orgId)).shifts.map((x) => ({ id: x.id, name: x.name, unit: x.unit }));
+      const view = (cfg) => ({ ok: true, settings: readStaffingNorms(cfg), tools, shifts });
+      if (method === "GET") return json(view(o.wardsynq), 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateStaffingNorms(cb.settings, o.wardsynq && o.wardsynq.riskTools, shifts.map((x) => x.id));
+      if (errors.length) return json({ ok: false, error: "invalid_staffing_norms", errors, message: "Nothing was saved. " + errors.slice(0, 5).join(" ") }, 422, request);
+      // The reporting year is saved on its own route with a reason, and is kept as it is when the norms are saved.
+      await ORG.updateOrg(env, orgId, { wardsynq: { staffing: { ...value, reportingYearStartMonth: readStaffingNorms(o.wardsynq).reportingYearStartMonth } } }, actor.id, { action: "org:staffing_norms", meta: JSON.stringify({ wards: Object.keys(value.wardTypes).length, norms: value.norms.length, tool: !!value.dependencyToolId, icu: value.icuUnitTypes.length }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json(view(back && back.wardsynq), 200, request);
+    }
+    /* R2-1 nabh-kpi-closure: the first month of the hospital's reporting year, for NABH #30 year to date (NABH does not say
+     * calendar or financial year). staff.admin, a reason every time it changes; no default. */
+    if (seg === "org" && sub === "reporting-year" && method === "POST") {
+      const cb = await readBody(request);
+      const orgId = cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The reporting year belongs to a WardSynQ hospital." }, 409, request);
+      const month = Number(cb.month), reason = String(cb.reason || "").trim();
+      if (!Number.isInteger(month) || month < 1 || month > 12) return json({ ok: false, error: "month_invalid", message: "Choose the month the reporting year starts, 1 to 12. Nothing was saved." }, 422, request);
+      const before = readStaffingNorms(o.wardsynq).reportingYearStartMonth;
+      if (before === month) return json({ ok: true, changed: false, reportingYearStartMonth: month }, 200, request);
+      if (reason.length < 5) return json({ ok: false, error: "reason_required", message: "Say why the reporting year is being changed (at least 5 characters). Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { staffing: { ...((o.wardsynq && o.wardsynq.staffing) || {}), reportingYearStartMonth: month } } }, actor.id, { action: "org:reporting_year", meta: JSON.stringify({ from: before, to: month, reason: reason.slice(0, 80) }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ok: true, changed: true, reportingYearStartMonth: readStaffingNorms(back && back.wardsynq).reportingYearStartMonth }, 200, request);
+    }
+    /* Blood donor selection criteria (donor-criteria.js, owner decision 2026-09-17 as corrected by the legal review): the
+     * stricter of WHO 2012 and the law of the hospital's region is in force, and a hospital may only make a criterion
+     * stricter. staff.admin reads and saves; the read shows each value in force and where it comes from. The audit row
+     * names the criteria changed, not the values. */
+    if (seg === "org" && sub === "blood-donor-criteria") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Donor criteria belong to a WardSynQ hospital." }, 409, request);
+      const view = (cfg) => ({ ok: true, criteria: donorCriteriaFor(cfg, o.region), saved: (cfg && cfg.bloodDonorCriteria) || {} });
+      if (method === "GET") return json(view(o.wardsynq), 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateDonorCriteria(cb.criteria, o.region);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_donor_criteria", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const flatOf = (x) => ({ ...x.values, ...Object.fromEntries(Object.entries(x.deferrals).map(([c2, d]) => [`deferrals.${c2}`, d.days])) });
+      const before = flatOf(donorCriteriaFor(o.wardsynq, o.region)), after = flatOf(donorCriteriaFor({ bloodDonorCriteria: value }, o.region));
+      const changed = Object.keys(after).filter((k) => before[k] !== after[k]);
+      if (!changed.length && JSON.stringify((o.wardsynq && o.wardsynq.bloodDonorCriteria) || {}) === JSON.stringify(value)) return json({ ...view(o.wardsynq), changed: [] }, 200, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { bloodDonorCriteria: value } }, actor.id, { action: "org:blood_donor_criteria", meta: JSON.stringify({ changed }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ...view(back && back.wardsynq), changed }, 200, request);
+    }
+    /* Blood centre settings (blood-centre-rules.js, legal opinion 2026-09-17 section G): NAT required, shorter component
+     * shelf lives, longer sample and record retention; never looser than the Rules. staff.admin reads and saves, the
+     * same authority as the donor criteria; the audit row names the settings changed, not the values. */
+    if (seg === "org" && sub === "blood-centre-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Blood centre settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, centre: bloodCentreView(o.wardsynq) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateBloodCentreSettings(cb.settings);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_blood_centre_settings", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const before = bloodCentreView(o.wardsynq).saved, flat = (x) => ({ natRequired: !!x.natRequired, sampleRetentionDays: x.sampleRetentionDays || null, recordRetentionYears: x.recordRetentionYears || null, ...Object.fromEntries(Object.entries(x.shelfHours || {}).map(([k, v]) => [`shelfHours.${k}`, v])) });
+      const b1 = flat(before), a1 = flat(value);
+      const changed = [...new Set([...Object.keys(b1), ...Object.keys(a1)])].filter((k) => (b1[k] == null ? null : b1[k]) !== (a1[k] == null ? null : a1[k]));
+      if (!changed.length) return json({ ok: true, centre: bloodCentreView(o.wardsynq), changed: [] }, 200, request);
+      /* The record period is retention.js's blood-centre class (floor five years), so it is saved there, not in bloodCentre. */
+      const { recordRetentionYears, ...centre } = value, patch = { bloodCentre: centre };
+      if (changed.includes("recordRetentionYears")) patch.retention = retentionWithRecordYears(o.wardsynq && o.wardsynq.retention, recordRetentionYears);
+      await ORG.updateOrg(env, orgId, { wardsynq: patch }, actor.id, { action: "org:blood_centre_settings", meta: JSON.stringify({ changed }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ok: true, centre: bloodCentreView(back && back.wardsynq), changed }, 200, request);
+    }
+    /* gst-packages: the hospital's GST settings where the law is not settled (functions/_wardsynq/gst-settings.js), on
+     * Admin > Price list. staff.admin reads and saves; a choice other than the review's default needs the chartered
+     * accountant's opinion reference and date, every change needs a reason, and the audit row names the settings changed. */
+    if (seg === "org" && sub === "gst-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "GST settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, settings: readGstSettings(o.wardsynq) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateGstSettings(cb.settings, o.wardsynq);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_gst_settings", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const changed = changedGstKeys(o.wardsynq, value);
+      if (!changed.length) return json({ ok: true, changed: [], settings: readGstSettings(o.wardsynq) }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the GST settings are being changed. Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { gst: value } }, actor.id,
+        { action: "org:gst_settings", meta: JSON.stringify({ changed, reason: reason.slice(0, 80) }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ok: true, changed, settings: readGstSettings(back && back.wardsynq) }, 200, request);
+    }
+    /* rcm-claims-ops: the hospital's claims settings (functions/_wardsynq/claims-ops.js), on Admin > Price list: its own
+     * denial reasons and the receivables ageing bands. staff.admin reads and saves; every change needs a reason and the
+     * audit row names what changed. */
+    /* R2-4: the hospital's reorder suggestion numbers (purchasing.js readReorderPolicy): window, lead time, safety days and
+     * minimum days of data, all four or none, no default. staff.admin reads and saves with a reason; the audit names the change. */
+    if (seg === "org" && sub === "reorder-policy") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Reorder settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, policy: readReorderPolicy(o.wardsynq) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateReorderPolicy(cb.policy);
+      if (!value) return json({ ok: false, error: "invalid_reorder_policy", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const before = readReorderPolicy(o.wardsynq);
+      const changed = Object.keys(value).filter((k) => !before || before[k] !== value[k]);
+      if (!changed.length) return json({ ok: true, changed: [], policy: before }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the reorder settings are being changed. Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { reorderPolicy: value } }, actor.id, { action: "org:reorder_policy", meta: JSON.stringify({ changed, reason: reason.slice(0, 80) }) });
+      const back = readReorderPolicy((await ORG.getOrg(env, orgId) || {}).wardsynq);
+      if (JSON.stringify(back) !== JSON.stringify(value)) return json({ ok: false, error: "not_saved", message: "The settings did not read back as sent, so do not rely on them. Try again." }, 502, request);
+      return json({ ok: true, changed, policy: back }, 200, request);
+    }
+    if (seg === "org" && sub === "rcm-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Claims settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, settings: rcmSettings(o.wardsynq) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateRcmSettings(cb.settings);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_rcm_settings", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const before = rcmSettings(o.wardsynq);
+      const changed = ["denialReasons", "ageingBands"].filter((k) => JSON.stringify(before[k]) !== JSON.stringify(value[k]));
+      if (!changed.length) return json({ ok: true, changed: [], settings: before }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the claims settings are being changed. Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { rcm: value } }, actor.id, { action: "org:rcm_settings", meta: JSON.stringify({ changed, reason: reason.slice(0, 80) }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ok: true, changed, settings: rcmSettings(back && back.wardsynq) }, 200, request);
+    }
+    /* The statutory registers' hospital-editable settings (register-settings.js): where the law is unsettled, the safest
+     * default and a setting, with the note shown beside it. staff.admin reads and saves; the audit row names the change
+     * and never the values. */
+    if (seg === "org" && sub === "register-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Register settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, settings: registerSettings(o.wardsynq), notes: REGISTER_NOTES }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, problems } = validateRegisterSettings(cb.settings);
+      if (problems.length) return json({ ok: false, error: "invalid_register_settings", problems, message: "Nothing was saved. " + problems.join("; ") }, 422, request);
+      const before = registerSettings(o.wardsynq);
+      const changed = Object.keys(value).filter((k) => JSON.stringify(before[k]) !== JSON.stringify(value[k]));
+      if (!changed.length) return json({ ok: true, changed: [], settings: before, notes: REGISTER_NOTES }, 200, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { registers: value } }, actor.id, { action: "org:register_settings", meta: JSON.stringify({ changed }) });
+      const back = await ORG.getOrg(env, orgId);
+      const saved = registerSettings(back && back.wardsynq);
+      if (JSON.stringify(saved) !== JSON.stringify(value)) return json({ ok: false, error: "not_saved", message: "The settings did not read back as sent, so do not rely on them. Try again." }, 502, request);
+      return json({ ok: true, changed, settings: saved, notes: REGISTER_NOTES }, 200, request);
+    }
+    /* The legal requirement registry (legal-requirements.js, owner's legal guidance 2026-09-17): read-only for the admin
+     * and for every register keeper; staff.admin edits only the State/UT values the registry leaves to the hospital, with a
+     * reason, and the audit row names the kind, the State/UT, the keys and the reason, never the values. */
+    if (seg === "org" && sub === "legal-requirements") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const readCaps = [CAPS.REGISTER_PCPNDT, CAPS.REGISTER_PCPNDT_READ, CAPS.REGISTER_MTP, CAPS.REGISTER_RECORDS, CAPS.MLC_RECORD, CAPS.REGISTER_NDPS, CAPS.REGISTER_NDPS_READ, CAPS.REGISTER_IHIP];
+      let az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      const isAdmin = az.ok;
+      if (!az.ok && method === "GET" && az.reason !== "org_not_found") for (const cap of readCaps) { const x = await ORG.authorizeOrg(env, actor, orgId, cap); if (x.ok) { az = x; break; } }
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Legal requirements belong to a WardSynQ hospital." }, 409, request);
+      const cfg = o.wardsynq || {};
+      const today = hospitalToday(Date.now(), { offsetMinutes: Number.isFinite(cfg.utcOffsetMinutes) ? cfg.utcOffsetMinutes : 330, timeZone: cfg.timeZone || "" });
+      const stateUt = (o.regionProfile && o.regionProfile.stateUt) || null;
+      const view = (c) => ({ ok: true, ...legalView(stateUt, c && c.legal, today, o.region), canEdit: isAdmin });
+      if (method === "GET") return json(view(cfg), 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const kind = String(cb.kind || "");
+      const { value, problems } = validateStateConfig(kind, stateUt, cb.values, cfg.legal, today);
+      if (problems.length) return json({ ok: false, error: "invalid_state_config", problems, message: "Nothing was saved. " + problems.join("; ") }, 422, request);
+      const reason = String(cb.reason || "").trim();
+      if (reason.length < 5) return json({ ok: false, error: "reason_required", message: "Say why this State/UT configuration is being changed (at least 5 characters). Nothing was saved." }, 422, request);
+      const prevLegal = cfg.legal && typeof cfg.legal === "object" ? cfg.legal : {};
+      const prevStates = prevLegal.stateConfig && typeof prevLegal.stateConfig === "object" ? prevLegal.stateConfig : {};
+      const nextLegal = { ...prevLegal, stateConfig: { ...prevStates, [stateUt]: { ...(prevStates[stateUt] || {}), [kind]: value } } };
+      const changed = Object.keys(cb.values || {});
+      await ORG.updateOrg(env, orgId, { wardsynq: { legal: nextLegal } }, actor.id, { action: "org:legal_state_config", meta: JSON.stringify({ kind, stateUt, changed, reason: reason.slice(0, 80) }) });
+      const back = await ORG.getOrg(env, orgId);
+      const after = stateConfigFor(kind, stateUt, back && back.wardsynq && back.wardsynq.legal, today);
+      if (changed.some((k) => JSON.stringify(after.values[k]) !== JSON.stringify(value[k] === undefined ? null : value[k]))) {
+        return json({ ok: false, error: "not_saved", message: "The configuration did not read back as sent, so do not rely on it. Try again." }, 502, request);
+      }
+      return json({ ...view(back && back.wardsynq), changed }, 200, request);
     }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";
@@ -3736,6 +5980,26 @@ export async function onRequest(context) {
       return json({ ok: true, board: board }, 200, request);
     }
 
+    /* D13: the no-shows still recallable (4 hours or the session's end). ?sessionId= for one queue (the
+     * doctor's app), ?orgId=&date= for every queue in a hospital that day (the desk). Staff view: names
+     * are shown, as on /list. queue.view reads; recalling needs queue.reorder (below). */
+    if (method === "GET" && seg === "no-show" && sub === "list") {
+      const sid = url.searchParams.get("sessionId");
+      let sessions;
+      if (sid) {
+        const { s, err } = await loadSessionFor(env, sid, actor, request); if (err) return err;
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
+        sessions = [s];
+      } else {
+        const orgId = url.searchParams.get("orgId") || "";
+        const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+        if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+        sessions = await Q.listSessions(env, orgId, url.searchParams.get("date") || today());
+      }
+      const out = [];
+      for (const s of sessions) for (const t of await Q.recallableNoShows(env, s)) out.push(t);
+      return json({ ok: true, noShows: await ticketView(env, out) }, 200, request);
+    }
     if (method === "GET" && seg === "list") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
@@ -3879,6 +6143,7 @@ export async function onRequest(context) {
       // ---- org / rooms / members config + onboarding (Phase 3, isolation-gated) ----
       const azOrg = async (cap, target) => ORG.authorizeOrg(env, actor, body.orgId, cap, target);
       const deny = (az) => json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const tokenRefusal = tokenRefusalFor(request);
       const needAccount = () => actor.kind !== "firebase";   // creating an org needs a StewardMD account (= the owner)
       if (seg === "org" && !sub) {
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
@@ -3899,13 +6164,34 @@ export async function onRequest(context) {
           const errors = validateOrgProfile(body.regionProfile, body.region !== undefined ? body.region : (cur && cur.region));
           if (Object.keys(errors).length) return json({ ok: false, error: "invalid_region_profile", errors }, 422, request);
         }
+        /* D14: numbering per department is saved only when every active department has its own prefix and
+         * no two share one. Checked against the departments as they are now, after authorization. */
+        if (body.tokens !== undefined) {
+          const problems = tokenConfigProblems(body.tokens, await ORG.listDepartments(env, body.orgId));
+          if (problems.length) return json({ ok: false, error: "token_prefixes_required", problems, message: "Token numbering was not saved. Each department numbers separately only when every department has its own prefix: " + problems.join(" ") }, 422, request);
+        }
+        /* Owner decision 2026-09-14: an external ABDM invoice is a clinical document; no other handling is built. */
+        const invoiceRefusal = externalInvoiceHandlingRefusal(body.wardsynq);
+        if (invoiceRefusal) return json({ ok: false, error: "abdm_invoice_handling_not_built", message: invoiceRefusal }, 422, request);
+        /* Owner decision 2026-09-15: level 2 tells the on-duty ward team by a named rule; only the rules built may be saved. */
+        const wardRuleRefusal = level2WardRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
+        if (wardRuleRefusal) return json({ ok: false, error: "level2_ward_rule_not_built", message: wardRuleRefusal }, 422, request);
         const updated = await ORG.updateOrg(env, body.orgId, body, actor.id);
         // Best-effort, only when this update actually set/changed the tenant link - see
         // wsqLinkTenantOrg's own header for why this is a real fix, not a nice-to-have.
         if (body.connectTenantId) await wsqLinkTenantOrg(env, updated);
         return json({ ok: true, org: updated }, 200, request);
       }
-      if (seg === "org" && sub === "delete") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, deleted: await ORG.deleteOrg(env, body.orgId, actor.id) }, 200, request); }
+      /* REMOVING A HOSPITAL IS THE OWNER'S ACT (BUG-MU2PHANW). It was any staff admin's, with no typed
+       * confirmation. Now: the hospital's owner or the platform owner only, the body must carry
+       * confirm:"DELETE", and it stays a soft delete audited in the same commit (deleteOrg). */
+      if (seg === "org" && sub === "delete") {
+        const az = await azOrg(null);
+        const platformOwner = actor.isOwner === true && !!(await ORG.getOrg(env, body.orgId));
+        if (!(az.ok && az.owner === true) && !platformOwner) return az.ok ? json({ ok: false, error: "owner_only" }, 403, request) : deny(az);
+        if (String(body.confirm || "") !== "DELETE") return json({ ok: false, error: "confirm_required", detail: "type DELETE to remove this hospital" }, 422, request);
+        return json({ ok: true, deleted: await ORG.deleteOrg(env, body.orgId, actor.id) }, 200, request);
+      }
       // One-tap: turn a Connect EMR connection into an OPD hospital (so it appears in the app's Hospital list
       // and its FHIR worklist auto-imports). Called from the Connect wizard's "Use in OPD" button.
       if (seg === "org" && sub === "from-connect") {
@@ -3917,12 +6203,24 @@ export async function onRequest(context) {
       }
       if (seg === "dept") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, department: await ORG.createDepartment(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "opd") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, opd: await ORG.createOpd(env, body.orgId, body, actor.id) }, 200, request); }
-      if (seg === "room" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.createRoom(env, body.orgId, body, actor.id) }, 200, request); }
+      /* D7: a room's department is the id of one of THIS hospital's departments, or none. A department id
+       * from another hospital would put this room's tokens on that hospital's counter name. */
+      const roomDeptRefusal = async () => {
+        if (!body.departmentId) return null;
+        const d = await ORG.getDepartment(env, body.departmentId);
+        return d && d.orgId === String(body.orgId) ? null : json({ ok: false, error: "department_not_found", message: "That department is not one of this hospital's departments." }, 422, request);
+      };
+      if (seg === "room" && !sub) {
+        const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
+        const bad = await roomDeptRefusal(); if (bad) return bad;
+        return json({ ok: true, room: await ORG.createRoom(env, body.orgId, body, actor.id) }, 200, request);
+      }
       if (seg === "room" && sub === "update") {
         const az = await azOrg(CAPS.STAFF_ADMIN, { roomId: body.roomId }); if (!az.ok) return deny(az);
         // The room must be this hospital's: an admin elsewhere could otherwise rename or retire it by id.
         const roomNow = await ORG.getRoom(env, body.roomId || "");
         if (!roomNow || roomNow.orgId !== body.orgId) return json({ ok: false, error: "not_found" }, 404, request);
+        const bad = await roomDeptRefusal(); if (bad) return bad;
         return json({ ok: true, room: await ORG.updateRoom(env, body.roomId, body, actor.id) }, 200, request);
       }
       if (seg === "ward" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, ward: await ORG.createWard(env, body.orgId, body, actor.id) }, 200, request); }
@@ -3944,6 +6242,15 @@ export async function onRequest(context) {
         // The bed must be this hospital's: an admin elsewhere could otherwise block or release it by id.
         const bedNow = await ORG.getBed(env, body.bedId || "");
         if (!bedNow || bedNow.orgId !== body.orgId) return json({ ok: false, error: "not_found" }, 404, request);
+        // BUG-MU072XAL-4EHO: retiring is how a bed is removed. A bed with a patient in it is not retired out from under them.
+        if (body.active === false && bedNow.active && bedNow.state === "occupied") return json({ ok: false, error: "bed_occupied", message: "A patient is in this bed. Transfer or discharge them before retiring it." }, 409, request);
+        /* A hospital that inspects cleans (supportServices.housekeepingInspection) gets a bed back from cleaning only
+         * through a passed housekeeping inspection (housekeeping.js). Any other state change stays the bed board's. */
+        if (bedNow.state === "cleaning" && body.state === "available") {
+          const bedOrg = await ORG.getOrg(env, body.orgId);
+          const ss = bedOrg && bedOrg.wardsynq && bedOrg.wardsynq.supportServices;
+          if (ss && ss.housekeepingInspection === true) return json({ ok: false, error: "housekeeping_inspection_required", message: "This hospital releases a cleaned bed only after the clean is inspected. Finish and inspect it on the Housekeeping screen." }, 409, request);
+        }
         try { return json({ ok: true, bed: await ORG.updateBed(env, body.bedId, body, actor.id) }, 200, request); }
         catch (e) { if (e && e.code === "bed_changed") return json({ ok: false, error: "bed_changed", message: "This bed changed under you - reload it and try again." }, 409, request); throw e; }
       }
@@ -3955,13 +6262,28 @@ export async function onRequest(context) {
           body.identity, mTarget && mTarget.role, !sub && !body.remove ? body.role : null);
         if (refusal) return json({ ok: false, error: refusal, message: "Only the hospital owner, or someone holding every permission involved, can make this change." }, 403, request);
         // Each refuses an identity with no member row instead of creating one (memberMissing in the store).
-        const lifecycle = async (p) => { const r = await p; return json(r, r && r.ok === false ? (r.error === "member_not_found" ? 404 : 422) : 200, request); };
-        if (sub === "pin") return lifecycle(ORG.setMemberPin(env, body.orgId, body.identity, body.pin, actor.id));
-        if (sub === "password") return lifecycle(ORG.setMemberPassword(env, body.orgId, body.identity, body.email, body.password, actor.id));
-        if (sub === "disable") return lifecycle(ORG.setMemberActive(env, body.orgId, body.identity, false, actor.id));
+        const lifecycle = async (p, unbind) => {
+          const r = await p;
+          const status = r && r.ok === false ? (r.error === "member_not_found" ? 404 : 422) : 200;
+          // S3 P0: a credential change or removal also stops this member's phones receiving alerts.
+          if (status === 200 && unbind) {
+            const u = await unbindMemberDevices(env, body.orgId, body.identity, actor.id);
+            if (!u.ok) return json({ ok: false, error: u.error, applied: true, message: "The change was saved, but this person's phones could not be removed from critical-result alerts. Try again." }, 502, request);
+          }
+          return json(r, status, request);
+        };
+        if (sub === "pin") return lifecycle(ORG.setMemberPin(env, body.orgId, body.identity, body.pin, actor.id), true);
+        if (sub === "password") return lifecycle(ORG.setMemberPassword(env, body.orgId, body.identity, body.email, body.password, actor.id), true);
+        if (sub === "disable") return lifecycle(ORG.setMemberActive(env, body.orgId, body.identity, false, actor.id), true);
         if (sub === "restore") return lifecycle(ORG.setMemberActive(env, body.orgId, body.identity, true, actor.id));
-        if (sub === "reset") return lifecycle(ORG.resetMemberAccess(env, body.orgId, body.identity, actor.id));
-        if (body.remove) return lifecycle(ORG.removeMembership(env, body.orgId, body.identity, actor.id));
+        if (sub === "reset") return lifecycle(ORG.resetMemberAccess(env, body.orgId, body.identity, actor.id), true);
+        if (body.remove) return lifecycle(ORG.removeMembership(env, body.orgId, body.identity, actor.id), true);
+        if (body.alertMobile !== undefined && String(body.alertMobile).trim() && !alertMobileOf(body.alertMobile)) {
+          return json({ ok: false, error: "invalid_alert_mobile", message: "The alert mobile must be 10 to 15 digits, with the country code if outside India." }, 422, request);
+        }
+        if (body.displayName !== undefined && String(body.displayName).trim() && notAName(body.displayName)) {
+          return json({ ok: false, error: "invalid_display_name", message: "The name is the person's name as the ward should read it, not a mobile number, an email or an account id." }, 422, request);
+        }
         if (body.regionProfile !== undefined) {
           const mOrg = await ORG.getOrg(env, body.orgId);
           const errors = validateMemberProfile(body.regionProfile, mOrg && mOrg.region);
@@ -4010,7 +6332,9 @@ export async function onRequest(context) {
       if (seg === "pool") {   // register a department-level walk-in into the central unassigned pool
         const az = await azOrg(CAPS.QUEUE_ADD); if (!az.ok) return deny(az);
         const org = await ORG.getOrg(env, body.orgId);
-        let t = await Q.addToPool(env, org, body, actor.id);
+        let t;
+        try { t = await Q.addToPool(env, org, body, actor.id); }
+        catch (e) { if (e && e.status >= 400 && e.status < 500) return tokenRefusal(e); throw e; }
         // AUTO-ROUTE (2026-08-24): the pool exists so a big hospital's reception can triage into many
         // rooms. A clinic with exactly ONE staffed room has nothing to triage - but the ticket still sat
         // in the pool until someone tapped "Route to a room", and the doctor's app (which polls only its
@@ -4137,7 +6461,9 @@ export async function onRequest(context) {
       const { s, err } = await loadSessionFor(env, body.sessionId, actor, request); if (err) return err;
       if (seg === "ticket") {
         await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
-        const t = await Q.addTicket(env, s, body, actor.id);
+        let t;
+        try { t = await Q.addTicket(env, s, body, actor.id); }
+        catch (e) { if (e && e.status >= 400 && e.status < 500) return tokenRefusal(e); throw e; }
         await syncEncounter(request, env, s, t);   // open: today's visit begins at check-in
         return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request);
       }
@@ -4149,7 +6475,7 @@ export async function onRequest(context) {
         // Only the tickets THIS import actually created — not the whole roster on every poll (see
         // migrate-encounter.js's header on the reconciliation cancel this diff does not catch either).
         for (const t of tickets) { if (!before.has(t.id)) await syncEncounter(request, env, s, t); }
-        return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, tickets: await ticketView(env, tickets) }, 200, request);
+        return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, issues: r.issues || [], tickets: await ticketView(env, tickets) }, 200, request);
       }
       // OPD engine → resolveOpdSource(org) → connector → existing EMR. Server pulls the worklist via the
       // org's connector (GHIS or other) instead of the client hitting /api/ghis; degrades to native.
@@ -4164,7 +6490,7 @@ export async function onRequest(context) {
         const r = await importFromSource(env, s, org, { ghisToken: ghisToken, date: body.date || "", cb: body.cb || "", actor: actor.id });
         const tickets = await Q.listTickets(env, s.id);
         for (const t of tickets) { if (!before.has(t.id)) await syncEncounter(request, env, s, t); }
-        return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, tickets) }, 200, request);
+        return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, issues: r.issues || [], degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, tickets) }, 200, request);
       }
       if (seg === "advance") { await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.advance(env, s, actor.id)) }, 200, request); }
       if (seg === "status") {
@@ -4173,8 +6499,21 @@ export async function onRequest(context) {
         // Continuation and close both land here: recordEncounterSync reads the ticket's CURRENT
         // status (whatever it just became) and maps it itself — see migrate-encounter.js's header.
         const changed = tickets.find((x) => x.id === body.ticketId);
-        if (changed) await syncEncounter(request, env, s, changed);
+        /* D13: a no-show is not the end of the visit any more (it can be recalled), so its Encounter is not
+         * closed on it: a closed Encounter can never be reopened (migrate-encounter.js), and a recalled
+         * patient's visit would have nowhere to be recorded. */
+        if (changed && changed.status !== "no_show") await syncEncounter(request, env, s, changed);
         return json({ ok: true, tickets: await ticketView(env, tickets) }, 200, request);
+      }
+      if (seg === "no-show" && sub === "recall") {
+        // Recalling puts the patient at the head of their band: that is a reorder, so it needs queue.reorder.
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_REORDER);
+        try { return json({ ok: true, tickets: await ticketView(env, await Q.recallNoShow(env, s, body.ticketId, body, actor.id)) }, 200, request); }
+        catch (e) {
+          const say = { reason_required: "Say why the patient is recalled.", not_no_show: "This patient is not marked no-show.", recall_window_passed: "A no-show can be recalled for 4 hours. Register the patient again.", session_ended: "This OPD session has ended. Register the patient again.", ticket_changed: "This patient changed while you were recalling them. Reload and try again." };
+          if (e && say[e.message]) return json({ ok: false, error: e.message, message: say[e.message] }, e.status, request);
+          throw e;
+        }
       }
       if (seg === "priority") { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, actor.id)) }, 200, request); }
       if (seg === "move") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REORDER); return json({ ok: true, tickets: await ticketView(env, await Q.moveTicket(env, s, body.ticketId, body, actor.id)) }, 200, request); }
@@ -4206,9 +6545,25 @@ export async function onRequest(context) {
         // structured `rx` payload. A "medication" line with no `rx` (the local clinic store's
         // "Medication added to the record") is not a prescription and is untouched.
         const isPrescription = QT.tlKind(body.kind) === "medication" && !!body.rx && typeof body.rx === "object";
-        await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
+        // Immunisation has its OWN cap (owner-decided: doctor + authorised staff). Not emr.treat, because
+        // the nurse who administers the dose must be able to record it; not emr.vitals, because this can
+        // end up permanently in a national health record once the care context is linked. Reception,
+        // supervisor and cashier hold neither and are refused.
+        const isImmunization = QT.tlKind(body.kind) === "immunization";
+        await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : isImmunization ? CAPS.EMR_IMMUNISE : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        if (isImmunization) {
+          // The CODE is validated against the IG's value set server-side. A client-supplied code is a
+          // claim, and an unrecognised one would put an invented SNOMED concept into a patient's PHR - so
+          // it is refused rather than stored as free text. The display is taken from the IG, never the body.
+          // An OPD timeline entry, not a WardSynQ record type: the ward chart's Immunization record is
+          // functions/_wardsynq/immunization.js, and what ABDM lands is filed there (sccm adapter).
+          const built = buildImmunisation(body);
+          if (built.error) return json({ ok: false, error: built.error }, 400, request);
+          const imm = await QT.appendTimeline(env, s, t, "immunization", built.data.text, actor.id, built.data);
+          return json(Object.assign({ ok: true }, imm), 200, request);
+        }
         // NATIVE WARDSYNQ HOSPITAL (org.mode "wardsynq"): vitals, assessment and investigation orders
         // go DIRECTLY to the WardSynQ record for such an org - no GHIS to shadow, so this bypasses the
         // global WARDSYNQ_RECORD flag entirely (stays OFF/untouched - it governs the separate

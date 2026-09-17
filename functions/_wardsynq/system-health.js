@@ -20,12 +20,59 @@
 import { outboxHealth } from "./outbox.js";
 import { dataProtection, RESTORE_TYPE } from "./security-review.js";
 import { RUN_TYPE } from "./backup-run.js";
-import { maikConfig, geminiKey } from "./maik-gateway.js";
+import { probeClinicalPath } from "./maik-gateway.js";
+import { verifyAuditChain, checkAnchorStores, anchorStoresOf } from "./audit-chain.js";
+
+/* P2.17. What the ward is told when the outside copy of the audit trail no longer matches the
+ * database. Stronger than the generic integrity line on purpose: a changed trail below the
+ * application must not be "fixed" by restoring or re-importing over it before governance has
+ * looked, because that is exactly how the evidence disappears. */
+const ANCHOR_TAMPER_CONSEQUENCE = "The audit trail was changed below the application. Tell the information governance lead. Do not restore or re-import.";
+
+/* G12. One verdict for a verified chain and its outside copies, used by both chain lines. A rewritten
+ * or truncated trail, or two copies that disagree with each other, is down with the governance
+ * consequence; nothing anchored for an empty chain is up; anything else short of ok is degraded. */
+async function anchoredVerdict(repository, chainId, v, storesIn) {
+  if (v.status !== "ok" && v.status !== "empty") return down(v.message);
+  const stores = anchorStoresOf(storesIn);
+  if (!stores.length) return up(v.message);
+  const a = await checkAnchorStores(repository, chainId, stores.map((s) => s.store));
+  if (a.status === "ok") return up(`${v.message} ${a.message}`);
+  // A hospital with no chained rows has nothing to anchor. Degraded forever would teach people to ignore this line.
+  if (v.status === "empty" && a.status === "no-anchors") return up(`${v.message} Nothing to anchor yet.`);
+  if (a.status === "rewritten" || a.status === "truncated" || a.status === "disagree") return { ...down(a.message), consequence: ANCHOR_TAMPER_CONSEQUENCE };
+  return degraded(a.message);
+}
+
+/* The provider's own error codes that mean "no such bucket", as documentStorageProbe reports them. */
+const STORAGE_NOT_SET_UP = new Set(["InvalidBucketName", "NoSuchBucket"]);
+const STORAGE_SETUP_CONSEQUENCE = "Document storage is not set up yet: the platform owner has not yet chosen the storage bucket for documents. Until it is, uploads fail and existing documents cannot be opened; charting continues. There is nothing for this hospital to change.";
+/* LT-34: MaiK on with no model it may send patient data to is a hospital setting, not an outage. */
+const MAIK_SETUP_CONSEQUENCE = "MaiK is not set up for this hospital: AI summaries and drafts are unavailable. Charting, prescribing and safety checks continue without it. A hospital administrator approves a model provider in Admin Center, MaiK clinical AI.";
+/* LT-34: "no backup ever recorded" says what to do, not only what is missing. */
+const BACKUP_TODO = "What to do: a hospital administrator adds a backup destination under Admin Center, Integrations, Backup destination. Backups then run daily and a restore dry run is recorded weekly; a restore into a test system can also be recorded under Admin Center, Security review, Record a restore test.";
+/* The scheduled backup (backup-schedule.js). Said plainly and never softened into "no backup yet". */
+const BACKUP_NOT_RUNNING = "Backups are not running: no backup destination is configured.";
+const BACKUP_NOT_RUNNING_CONSEQUENCE = "Backups are not running: if the record store were lost, the record could not be recovered from a backup. Nothing changes on the ward today; charting continues.";
+const sizeOf = (bytes) => { const n = Number(bytes) || 0; return n >= 1048576 ? `${(n / 1048576).toFixed(1)} MB` : n >= 1024 ? `${Math.round(n / 1024)} KB` : `${n} bytes`; };
+
+/** PURE. The facts System health shows about scheduled backups: last success and size, last restore test, last failure. */
+function backupFacts(runs, tests, log) {
+  const ok = (runs || []).filter((r) => r && r.scheduled === true && r.status === "ok" && !r.more).sort((a, b) => String(b.at).localeCompare(String(a.at)))[0] || null;
+  const test = (tests || []).filter(Boolean).sort((a, b) => String(b.at).localeCompare(String(a.at)))[0] || null;
+  const fail = log && log.lastFailure && (!ok || String(log.lastFailure.at) > String(ok.at)) ? log.lastFailure : null;
+  const facts = [
+    ok ? `Last successful backup ${ok.at}, ${sizeOf(ok.bytes)} (${ok.kind}, ${ok.rows} rows, checksum verified).` : "No scheduled backup has succeeded yet.",
+    test ? `Last restore test ${test.at}: ${test.outcome}${test.automated ? " (automatic dry run)" : ""}.` : "No restore test has been recorded.",
+  ];
+  if (fail) facts.push(`The last scheduled backup failed at ${fail.at}: ${fail.message || fail.error}${log.alert && log.alert.error === fail.error ? ` Administrators alerted: ${log.alert.sent || 0} of ${log.alert.total || 0} phones${log.alert.reason ? ` (${log.alert.reason})` : ""}.` : ""}`);
+  return { ok, test, fail, facts };
+}
 
 const TIMEOUT_MS = 3000;
 const MIN = 60000;
 /* Thresholds, returned on the report so a reader can see what "degraded" meant. */
-const LIMITS = Object.freeze({ recordSlowMs: 1500, outboxDegradedMinutes: 15, outboxDownMinutes: 60, tickDegradedMinutes: 15, tickDownMinutes: 60 });
+const LIMITS = Object.freeze({ auditChainRows: 200, orgAuditChainRows: 200, recordSlowMs: 1500, outboxDegradedMinutes: 15, outboxDownMinutes: 60, tickDegradedMinutes: 15, tickDownMinutes: 60 });
 
 class ProbeTimeout extends Error {}
 
@@ -79,8 +126,14 @@ const DEPENDENCIES = [
       const at = r && r.checkedAt;
       if (!r) return down("The storage check returned nothing.");
       if (r.state === "ok") return { ...up(), checkedAt: at };
-      if (r.state === "not_configured") return { ...down("Document storage is not configured for this deployment."), checkedAt: at };
-      return { ...down(`Storage refused the ${r.step || "unknown"} step of a test save${r.providerStatus ? " (status " + Number(r.providerStatus) + ")" : ""}.`), checkedAt: at };
+      /* LT-34: storage that was never set up is not an outage, and a bare "Down" sent hospital admins looking for one.
+       * No store at all, or a bucket the provider does not recognise, is the platform owner's pending choice of bucket
+       * (owner decision S1). Still down, because uploads really fail; the line says why and that the hospital has
+       * nothing to change. */
+      if (r.state === "not_configured" || STORAGE_NOT_SET_UP.has(r.providerCode)) {
+        return { ...down(r.state === "not_configured" ? "No document store is connected to this deployment." : `The storage service does not recognise the bucket (${r.providerCode}).`), consequence: STORAGE_SETUP_CONSEQUENCE, setup: "platform", checkedAt: at };
+      }
+      return { ...down(`Storage refused the ${r.step || "unknown"} step of a test save${r.providerStatus ? " (status " + Number(r.providerStatus) + (r.providerCode ? ", " + r.providerCode : "") + ")" : ""}.`), checkedAt: at };
     },
   },
   {
@@ -89,20 +142,18 @@ const DEPENDENCIES = [
       down: "MaiK down: AI summaries and drafts fail. Charting, prescribing and safety checks continue without it.",
       degraded: "MaiK limited: AI summaries and drafts may fail or be unavailable. Charting, prescribing and safety checks continue without it.",
     },
+    /* LT-34: the probe goes where a clinical request goes (maik-gateway.js probeClinicalPath): the model routing picks
+     * for a summary with patient data, on that model's own endpoint. A different path answering (the AI Studio key)
+     * said Up while every Ask MaiK failed. Not set up for this hospital is its own line, never an outage. */
     async check(d) {
-      const cfg = maikConfig(d.maik);
-      if (!cfg.enabled) return degraded("MaiK is turned off for this hospital.");
-      const fetchImpl = d.fetchImpl || fetch;
-      const probes = [];
-      const key = geminiKey(d.env);
-      /* A model metadata read: it proves the key and the service answer, and generates nothing. */
-      if (key) probes.push(["Google model service", () => fetchImpl("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash", { headers: { "x-goog-api-key": key } })]);
-      if (cfg.localBaseUrl && cfg.localModel) probes.push(["hospital model server", () => fetchImpl(`${cfg.localBaseUrl.replace(/\/+$/, "")}/models`)]);
-      if (!probes.length) return down("MaiK is on but no model provider is configured.");
-      const results = await Promise.all(probes.map(([label, fn]) => fn().then((res) => [label, !!(res && res.ok)], () => [label, false])));
-      const failed = results.filter((x) => !x[1]).map((x) => x[0]);
-      if (!failed.length) return up();
-      return failed.length === results.length ? down(`No model provider answered (${failed.join(", ")}).`) : degraded(`Not answering: ${failed.join(", ")}.`);
+      const p = await probeClinicalPath({ config: d.maik, env: d.env, fetchImpl: d.fetchImpl });
+      if (p.state === "off") return degraded("MaiK is turned off for this hospital.");
+      if (p.state === "not_configured") {
+        return { ...down(p.code === "no_phi_approved_model" ? "No model provider is approved to receive patient data for this hospital, or the approved one cannot receive it on this server." : "No model this hospital allows can answer on this server."),
+          consequence: MAIK_SETUP_CONSEQUENCE, setup: "hospital" };
+      }
+      if (p.state === "up") return up(`Answering: ${p.label}.`);
+      return down(p.label ? `The model clinical requests use did not answer (${p.label}${p.status ? ", status " + p.status : ""}).` : "MaiK could not choose a model for a clinical request.");
     },
   },
   {
@@ -118,7 +169,7 @@ const DEPENDENCIES = [
       const notes = [];
       if (age >= LIMITS.outboxDegradedMinutes) notes.push(`the oldest waiting event has waited ${age} minutes`);
       if (h.dead.length) notes.push(`${h.dead.length} event${h.dead.length === 1 ? " has" : "s have"} failed for good`);
-      if (h.partial) notes.push("only the newest 500 events were checked");
+      if (h.partial) notes.push("the queue could not be read in full, so these counts are lower bounds");
       return notes.length ? degraded(notes.join("; ") + ".") : up(h.pending ? `${h.pending} waiting, oldest ${age} minutes.` : "Nothing waiting.");
     },
   },
@@ -137,6 +188,9 @@ const DEPENDENCIES = [
       const notes = [];
       if (t.criticalsFailed) notes.push("critical-result escalation failed on the last run");
       if (t.outboxFailed) notes.push("event processing failed on the last run");
+      /* P2.17: a failed anchor copy is housekeeping, not clinical work, so it degrades rather than
+       * downs: escalation and the queue are still running, but the outside copy may be going stale. */
+      if (t.anchorFailed) notes.push(`copying the audit trail head outside the database failed on the last attempt${t.anchorStatus ? ` (${t.anchorStatus})` : ""}`);
       if (age >= LIMITS.tickDegradedMinutes) notes.push(`the last run was ${age} minutes ago`);
       return notes.length ? degraded(notes.join("; ") + ".") : up(`Last run ${age} minutes ago.`);
     },
@@ -148,16 +202,61 @@ const DEPENDENCIES = [
       degraded: "Backup evidence incomplete: recovery of recent records is not confirmed. Nothing changes on the ward today; charting continues.",
     },
     async check(d, nowMs) {
-      const [runs, tests] = await Promise.all([d.repository.latestByType(d.tenantId, RUN_TYPE, 50), d.repository.latestByType(d.tenantId, RESTORE_TYPE, 200)]);
+      const [runs, tests] = await Promise.all([d.repository.latestByType(d.tenantId, RUN_TYPE, 50, { newest: true }), d.repository.latestByType(d.tenantId, RESTORE_TYPE, 200, { newest: true })]);
+      if (typeof d.backupDestination === "function") {
+        const [dest, log] = await Promise.all([d.backupDestination(), d.lastBackupRun ? d.lastBackupRun() : undefined]);
+        const f = backupFacts(runs, tests, log);
+        if (!dest || (log && log.notConfigured && String(log.at) > String((f.ok && f.ok.at) || ""))) {
+          const lead = !dest ? BACKUP_NOT_RUNNING : log.message || BACKUP_NOT_RUNNING;
+          return { ...down([lead, ...f.facts, !dest ? BACKUP_TODO : ""].filter(Boolean).join(" ")), consequence: BACKUP_NOT_RUNNING_CONSEQUENCE, setup: (!dest ? "hospital" : log.setup) || "hospital" };
+        }
+        if (f.fail) return down(f.facts.join(" "));
+        if (log === null && !f.ok) return degraded(`A backup destination is configured and no scheduled run has reported yet; the first runs within the hour. ${f.facts.join(" ")}`);
+      }
       const p = dataProtection(runs, tests, d.rpoMinutes, new Date(nowMs).toISOString());
-      const reason = p.reasons.join(" ") || null;
+      const reason = [p.reasons.join(" "), !p.lastBackup || !p.lastRestoreTest ? BACKUP_TODO : ""].filter(Boolean).join(" ") || null;
+      if (typeof d.backupDestination === "function") {
+        const facts = backupFacts(runs, tests, null).facts.join(" ");
+        return p.status === "green" ? up(facts) : p.status === "amber" ? degraded(`${reason} ${facts}`) : down(`${reason} ${facts}`);
+      }
       return p.status === "green" ? up(`Last backup ${p.lastBackup.at}; last restore test ${p.lastRestoreTest.at}.`) : p.status === "amber" ? degraded(reason) : down(reason);
+    },
+  },
+  {
+    /* P2.17. The newest rows of the tamper-evident audit chain, re-hashed, AND every outside anchor
+     * compared against the row it names. Not verified counts as down: an integrity nobody could
+     * check is not an integrity anybody can rely on. A deployment with no anchor store keeps the old
+     * behaviour (the chain alone); once a store is handed in, no anchors yet (or an unreadable one)
+     * is degraded, and a rewritten or truncated trail is down with the governance consequence. */
+    id: "audit-chain", name: "Audit trail integrity",
+    consequence: {
+      down: "Audit trail integrity not confirmed: audit rows may have been changed or removed in the database, or the check could not run. Charting continues and nothing is blocked. Tell the information governance lead, and do not restore or re-import the database until the audit trail has been examined.",
+      degraded: "Audit trail anchoring not confirmed: the outside-the-database copy has nothing to compare yet or could not be read. The chain itself checked out. Charting continues and nothing is blocked.",
+    },
+    async check(d) {
+      const v = await verifyAuditChain(d.repository, d.tenantId, { limit: LIMITS.auditChainRows });
+      return anchoredVerdict(d.repository, d.tenantId, v, d.anchorStores || d.anchorStore);
+    },
+  },
+  {
+    /* G3. The hospital event log (sign-ins, staff and hospital setting changes) has its own chain in
+     * the org store. Not handed in, or not verified, is down: nobody checked it. */
+    id: "org-audit-chain", name: "Staff and sign-in audit trail integrity",
+    consequence: {
+      down: "Staff and sign-in audit integrity not confirmed: sign-ins, staff changes and hospital setting changes in the hospital event log may have been changed or removed in the store, or the check could not run. Charting continues and nothing is blocked. Tell the information governance lead.",
+      degraded: "Staff and sign-in audit anchoring not confirmed: an outside copy has nothing to compare yet or could not be read. The chain itself checked out. Charting continues and nothing is blocked.",
+    },
+    async check(d) {
+      const chain = d.orgAuditChain;
+      if (!chain) return down("Not verified: the hospital event log chain was not handed in, so its integrity is unknown.");
+      const v = await verifyAuditChain(chain, chain.chainId, { limit: LIMITS.orgAuditChainRows });
+      return anchoredVerdict(chain, chain.chainId, v, d.anchorStores || d.anchorStore);
     },
   },
 ];
 
 /**
- * deps: { repository, tenantId, env, maik, rpoMinutes, orgProbe(), documentProbe(), lastTick(),
+ * deps: { repository, tenantId, env, maik, rpoMinutes, anchorStore? | anchorStores?, orgAuditChain?, orgProbe(), documentProbe(), lastTick(),
  *   fetchImpl?, timeoutMs?, now?() }
  */
 async function systemHealthReport(deps) {
@@ -168,10 +267,12 @@ async function systemHealthReport(deps) {
     try { r = await withTimeout(() => dep.check(deps, now()), ms); }
     catch (e) { r = down(e instanceof ProbeTimeout ? `No answer within ${ms} ms.` : "The check failed before it could answer."); }
     if (!r || !["up", "degraded", "down"].includes(r.status)) r = down("The check returned no result.");
-    return { id: dep.id, name: dep.name, status: r.status, checkedAt: r.checkedAt || new Date(now()).toISOString(), reason: r.reason || null, consequence: r.status === "up" ? null : dep.consequence[r.status] };
+    /* A probe may carry its own consequence for a specific finding (the anchor probe does for a
+     * rewritten or truncated trail); otherwise the dependency's consequence for the status applies. */
+    return { id: dep.id, name: dep.name, status: r.status, checkedAt: r.checkedAt || new Date(now()).toISOString(), reason: r.reason || null, consequence: r.status === "up" ? null : (r.consequence || dep.consequence[r.status]), ...(r.setup ? { setup: r.setup } : {}) };
   }));
   const worst = dependencies.some((x) => x.status === "down") ? "down" : dependencies.some((x) => x.status === "degraded") ? "degraded" : "up";
   return { ok: true, generatedAt: new Date(now()).toISOString(), overall: worst, dependencies, timeoutMs: ms, limits: LIMITS };
 }
 
-export { TIMEOUT_MS, LIMITS, DEPENDENCIES, withTimeout, systemHealthReport };
+export { TIMEOUT_MS, LIMITS, DEPENDENCIES, withTimeout, systemHealthReport, ANCHOR_TAMPER_CONSEQUENCE };

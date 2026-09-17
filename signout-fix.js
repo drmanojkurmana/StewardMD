@@ -42,7 +42,17 @@
     // resolves only after auth persistence is cleared — so awaiting it before reload is
     // what guarantees the account isn't re-hydrated on the next load.
     var a = auth();
-    if (a && a.signOut) return Promise.resolve(a.signOut()).catch(function () {});
+    return releaseHospitalAlerts().then(function () {
+      if (a && a.signOut) return Promise.resolve(a.signOut()).catch(function () {});
+    });
+  }
+
+  /* S3: take this phone off the WardSynQ hospital's critical-result alerts for this account FIRST, while
+   * the account's credential still works (native-push.js; bounded wait, a failure recorded there and told
+   * on the next launch). Resolves whatever happens: sign-out is never blocked by it. */
+  function releaseHospitalAlerts() {
+    var P = window.SMD_WSQ_PUSH;
+    try { if (P && P.accountSignOut) return Promise.resolve(P.accountSignOut()).catch(function () {}); } catch (e) {}
     return Promise.resolve();
   }
 

@@ -184,14 +184,14 @@ test("TASK 4.18: the full enterprise journey, same patient and encounter through
   const claimId = claim.claim.id;
   assert.equal(claim.claim.encounterId, encounterId, "the claim references the SAME encounter, not a re-derived one");
   assert.equal(claim.claim.invoiceId, invoiceId, "the claim carries a real reference to the SAME invoice, findable from either side");
-  const submitted = await as("/ward/claim-state", "POST", { orgId: ORG, claimId: claimId, action: "submit", submittedAmount: 5000 });
+  const submitted = await as("/ward/claim-state", "POST", { orgId: ORG, claimId: claimId, action: "submit", submittedAmount: 250 });
   assert.equal(submitted.__status, 200, JSON.stringify(submitted));
   // The adapter boundary this journey now runs through - no live payer connector exists anywhere in
   // this codebase, so submission is honestly queued, never claimed as reaching a real payer.
   assert.equal(submitted.claim.adapter.state, "not_configured", JSON.stringify(submitted.claim.adapter));
 
   // 9. Discharge, of the SAME encounter.
-  const discharge = await as("/ward/discharge", "POST", { orgId: ORG, encounterId: encounterId, disposition: "home" });
+  const discharge = await as("/ward/discharge", "POST", { orgId: ORG, encounterId: encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(discharge.__status, 200, JSON.stringify(discharge));
   assert.equal(discharge.patientId, patientId, "the discharge is confirmed for the SAME patient");
 
@@ -199,9 +199,9 @@ test("TASK 4.18: the full enterprise journey, same patient and encounter through
   const payment = await as("/ward/invoice-payment", "POST", { orgId: ORG, invoiceId: invoiceId, amount: 250, reference: "UPI-TESTCASE-1" });
   assert.equal(payment.__status, 200, JSON.stringify(payment));
   assert.equal(payment.balance, 0, "the SAME invoice's balance is now real zero - paid in full against the real charge");
-  const adjudicated = await as("/ward/claim-state", "POST", { orgId: ORG, claimId: claimId, action: "adjudicate", approvedAmount: 5000 });
+  const adjudicated = await as("/ward/claim-state", "POST", { orgId: ORG, claimId: claimId, action: "adjudicate", approvedAmount: 250 });
   assert.equal(adjudicated.__status, 200, JSON.stringify(adjudicated));
-  assert.equal(adjudicated.claim.approvedAmount, 5000);
+  assert.equal(adjudicated.claim.approvedAmount, 250);
 
   // 11. Chart completion, for the SAME patient.
   const completion = await as(`/ward/completion-queue?orgId=${ORG}&patientId=${patientId}`);

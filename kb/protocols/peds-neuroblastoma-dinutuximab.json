@@ -1,0 +1,91 @@
+{
+  "id": "peds-neuroblastoma-dinutuximab",
+  "diseaseId": "neuroblastoma",
+  "name": "Dinutuximab + GM-CSF + IL-2 + Isotretinoin (High-Risk Neuroblastoma Maintenance)",
+  "version": "1.0",
+  "lifecycleState": "active",
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 5,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pediatric Neuroblastoma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS Landmark Regimen: COG ANBL0032 Phase III Trial (Yu et al. NEJM 2010)",
+    "approval": null
+  },
+  "stage": [
+    "IV",
+    "high-risk"
+  ],
+  "treatmentSetting": [
+    "post-consolidation",
+    "maintenance"
+  ],
+  "histology": "neuroblastoma (high-risk)",
+  "premedications": [
+    {
+      "name": "Hydromorphone or Morphine continuous IV",
+      "dose": "Opioid continuous infusion",
+      "notes": "Mandatory: begin continuous opioid infusion 1-2 hours prior to dinutuximab and continue for 2 hours post-infusion to control severe neuropathic pain."
+    },
+    {
+      "name": "Diphenhydramine",
+      "dose": "0.5-1 mg/kg IV (max 50 mg)",
+      "notes": "Administer 30 minutes prior to infusion"
+    },
+    {
+      "name": "Acetaminophen",
+      "dose": "10-15 mg/kg PO/IV (max 650 mg)",
+      "notes": "Administer 30 minutes prior to infusion"
+    }
+  ],
+  "supportiveCare": [
+    "Mandatory intensive pain management: GD2 targeting causes intense allodynia and neuropathic pain.",
+    "Capillary leak syndrome monitoring: monitor daily weights, edema, albumin, and blood pressure."
+  ],
+  "monitoring": [
+    "Vitals q15m during first hour of dinutuximab infusion, then q30m-1h",
+    "Daily CBC, CMP, urinalysis during inpatient administration",
+    "Neurological assessment for transverse myelitis, peripheral neuropathy, and visual acuity"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "Severe neuropathic pain unresponsive to maximum opioid escalation",
+      "action": "reduce rate/pause",
+      "text": "Reduce infusion rate by 50% or pause dinutuximab infusion. Re-titrate opioid analgesia. Resume at slower rate once pain is controlled."
+    },
+    {
+      "condition": "Capillary Leak Syndrome Grade >= 3",
+      "action": "discontinue cycle",
+      "text": "Discontinue dinutuximab and IL-2 immediately. Provide respiratory support and careful fluid resuscitation with albumin."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "dinutuximab",
+      "name": "Dinutuximab",
+      "basis": "bsa",
+      "dosePerUnit": 17.5,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "notes": "Dinutuximab 17.5 mg/m2/day continuous IV infusion over 10-20 hours on Days 4-7 of each 28-day cycle (total 70 mg/m2/cycle) with GM-CSF (Cycles 1, 3, 5) or IL-2 (Cycles 2, 4) plus isotretinoin. Grounded in COG ANBL0032 trial."
+    }
+  ]
+}

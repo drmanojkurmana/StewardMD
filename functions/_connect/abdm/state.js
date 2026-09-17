@@ -5,6 +5,8 @@
 // TIME CONTRACT (pinned): every timestamp column here (`created_at`/`updated_at`/`expires_at`) and every
 // injected `now` is an ISO-8601 string — NEVER epoch-ms. `sweep` compares them ISO-aware (Date.parse),
 // never `Number()` (which turns an ISO string into NaN and silently no-ops the expiry branch).
+import { deleteCareContext } from "./consented-store.js";
+import { unindexPatient } from "./demographic-index.js";
 import { hmacPseudonym, makeAuditSink } from "../audit.js"; // reuse the CONNECT_HMAC_SALT keyed-HMAC + PHI-free audit sink
 export class ConnectStateError extends Error {}
 
@@ -324,7 +326,7 @@ function parseCareContextRefs(careContextsJson) {
 // OWN `data_erase_at` has NOT passed is KEPT; only refs with no remaining live consent are deleted. The consent
 // being erased is past its own dataEraseAt (or terminal), so it is correctly excluded from "live" and its
 // uniquely-backed refs ARE removed. Mock-safe (two-predicate SELECTs + single-id DELETEs). Returns rows removed.
-async function eraseCareContexts(db, tenantId, patientAbhaHash, now) {
+async function eraseCareContexts(db, r2, env, tenantId, patientAbhaHash, now) {
   const { results: ccs = [] } = await db.prepare(
     "SELECT * FROM connect_abdm_carecontext WHERE tenant_id=? AND patient_abha_hash=?").bind(tenantId, patientAbhaHash).all();
   if (ccs.length === 0) return 0;
@@ -351,10 +353,35 @@ async function eraseCareContexts(db, tenantId, patientAbhaHash, now) {
   let n = 0;
   for (const cc of ccs) {
     if (liveRefs.has(cc.ref)) continue;   // still referenced by another live consent → never collateral-erase it
+    // The consented-store copy goes with the registration it backs. Erasing the registration alone would
+    // leave a sealed blob for a care context nothing can reach any more - orphaned PHI, and a DPDP
+    // erasure-completeness violation. Scoped to THIS ref, so a record still referenced by another live
+    // consent (skipped above) is never collateral-erased. Best-effort: an unbound store must not abort a
+    // sweep that is otherwise erasing correctly, and the D1 delete below is what makes the row unreachable.
+    if (r2) { try { await deleteCareContext(env, { r2, db }, { tenantId, careContextRef: cc.ref }); } catch { /* index delete below still lands */ } }
     const del = await db.prepare("DELETE FROM connect_abdm_carecontext WHERE id=?").bind(cc.id).run();
     if (!del || del.success === false) throw new ConnectStateError("sweep care-context erase failed");
     n += (del.meta && del.meta.changes) || 0;
   }
+  return n;
+}
+
+/**
+ * Remove the patient from the demographic discovery index, resolving their local patient ref through the
+ * ABHA link. Best-effort per row: an index that cannot be reached must not abort an erasure that is
+ * otherwise completing, and the care-context delete above already makes the records unservable.
+ */
+async function eraseDemographicIndex(db, env, tenantId, patientAbhaHash) {
+  let n = 0;
+  try {
+    const { results = [] } = await db
+      .prepare("SELECT patient_ref FROM connect_abha_link WHERE tenant_id=? AND patient_abha_hash=?")
+      .bind(tenantId, patientAbhaHash).all();
+    for (const row of results) {
+      const r = await unindexPatient(env, { db }, { tenantId, patientRef: row.patient_ref });
+      if (r && r.removed) n++;
+    }
+  } catch { /* index unreachable: the records are already unservable, and the sweep must finish */ }
   return n;
 }
 
@@ -425,7 +452,7 @@ export async function sweep(db, r2, env, now) {
     // VERIFY: a real D1 GC would enumerate victims with an indexed `WHERE expires_at < ?`; the mock D1
     // only supports `col=?`/`col<>?` (throws on `<`), so enumerate all rows no-WHERE and filter in JS.
     const { results = [] } = await db.prepare("SELECT * FROM connect_abdm_txn").all();
-    let txnsSwept = 0, buffersDeleted = 0, keysErased = 0, anomalies = 0, careContextsErased = 0, consentsErased = 0;
+    let txnsSwept = 0, buffersDeleted = 0, keysErased = 0, anomalies = 0, careContextsErased = 0, consentsErased = 0, demographicsErased = 0;
     // FIX-4: the consent_ids whose txns PASS 1 pre-empts. Pass 1 emits no `data.erased` (it is pure txn-TTL GC),
     // so when it erases a REVOKED/dataEraseAt consent's already-terminal/expired txn, PASS 2 would otherwise find
     // nothing left and never audit that consent's erasure (a §8(6) accountability gap). This set lets PASS 2 still
@@ -456,7 +483,7 @@ export async function sweep(db, r2, env, now) {
       const eraseDeadlinePassed = isExpired(c.data_erase_at, now); // patient-level dataEraseAt (distinct from expiry)
       if (!revokedOrExpired && !eraseDeadlinePassed) continue;
 
-      let cTxns = 0, cBuffers = 0, cKeys = 0, cCare = 0;
+      let cTxns = 0, cBuffers = 0, cKeys = 0, cCare = 0, cIndex = 0;
       // (1) Derived state, scoped by the durable `consent_id` join — REVOKE overrides the FSM/TTL (erase NOW).
       //     GUARD `consent_id != null`: a NULL bind would (in the mock, via String() coercion) collateral-match
       //     EVERY NULL-consent_id txn — a mass over-erase. An unlinked consent was never granted → has no txns.
@@ -480,7 +507,12 @@ export async function sweep(db, r2, env, now) {
       //     erased ONLY on a patient-level `data_erase_at`/full-erase — NEVER on a single-consent REVOKE/EXPIRE.
       //     // VERIFY (owner): confirm the association (per-consent derived state vs per-patient registration).
       if (eraseDeadlinePassed && c.tenant_id != null && c.patient_abha_hash) {
-        cCare += await eraseCareContexts(db, c.tenant_id, c.patient_abha_hash, now);
+        cCare += await eraseCareContexts(db, r2, env, c.tenant_id, c.patient_abha_hash, now);
+        // …and stop the patient being DISCOVERABLE. The demographic index is keyed by the tenant's own
+        // patient ref, so resolve it through the ABHA link. Erasing the records while leaving the index
+        // would keep answering "yes, we have this patient" to a discovery probe about someone whose data
+        // we just destroyed - which is both a leak and a lie.
+        cIndex += await eraseDemographicIndex(db, env, c.tenant_id, c.patient_abha_hash);
       }
       // (3) FIX-3: scrub the raw SIGNED scope from the RETAINED consent row. The row is kept (marked terminal) for
       //     R6 anti-replay, but anti-replay needs ONLY {request_id, status, consent_id} + timestamps — it never
@@ -509,15 +541,15 @@ export async function sweep(db, r2, env, now) {
       //     (pass1ErasedConsents). Idempotent: a re-sweep finds no txns, no care-contexts, already-scrubbed scope,
       //     and an empty pass1 set → NO duplicate. Pass 1 never audits, so this is the sole, non-double, audit.
       const pass1Pre = c.consent_id != null && pass1ErasedConsents.has(String(c.consent_id));
-      if (cTxns > 0 || cBuffers > 0 || cCare > 0 || hadScope || pass1Pre) {
-        txnsSwept += cTxns; buffersDeleted += cBuffers; keysErased += cKeys; careContextsErased += cCare; consentsErased++;
+      if (cTxns > 0 || cBuffers > 0 || cCare > 0 || cIndex > 0 || hadScope || pass1Pre) {
+        txnsSwept += cTxns; buffersDeleted += cBuffers; keysErased += cKeys; careContextsErased += cCare; demographicsErased += cIndex; consentsErased++;
         await auditErasure({
           action: "data.erased", outcome: "ok", ts: now, tenantId: c.tenant_id ?? null,
-          consentId: c.consent_id ?? null, resourceCounts: { txns: cTxns, buffers: cBuffers, keys: cKeys, careContexts: cCare },
+          consentId: c.consent_id ?? null, resourceCounts: { txns: cTxns, buffers: cBuffers, keys: cKeys, careContexts: cCare, demographics: cIndex },
         });
       }
     }
-    return { txnsSwept, buffersDeleted, keysErased, anomalies, careContextsErased, consentsErased };
+    return { txnsSwept, buffersDeleted, keysErased, anomalies, careContextsErased, consentsErased, demographicsErased };
   } catch (e) {
     if (e instanceof ConnectStateError) throw e; // deleteBuffered already fail-closes R2 errors
     throw new ConnectStateError(`abdm sweep failed: ${e && e.message}`);

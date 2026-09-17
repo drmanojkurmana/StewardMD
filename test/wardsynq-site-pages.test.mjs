@@ -121,6 +121,32 @@ test("admin gates on staff.admin: a note without it, six tabs (wardsynq org) wit
   });
 });
 
+/* LT-30 (live test 2026-09-15): the owner sets a hospital up like a real one through the Price list. It has to
+ * offer bed, nursing and doctor-visit prices per day (optionally for one ward) beside tests and medicines, and the
+ * cashier's "no price set" link (#/admin/tariff) has to land on it. */
+test("LT-30: #/admin/tariff opens the Price list, which offers per-day bed, nursing and visit prices by ward", async () => {
+  const env = loadEnv();
+  const st = env.win.WSQ.state;
+  st.orgId = "org-1"; st.org = { id: "org-1", name: "Test Hospital", code: "SMD-TEST01", mode: "wardsynq" };
+  st.who = { caps: ["staff.admin"], role: "admin" }; st.page = "admin"; st.arg = "tariff"; st._adminTab = null;
+  const calls = [];
+  const c = ctxFor(env, makeEl());
+  c.api = function (path) {
+    calls.push(path);
+    if (path.indexOf("/bill/tariff") === 0) return Promise.resolve({ ok: true, items: [{ id: "t1", name: "ICU bed", code: "", kind: "bed", ward: "ICU", price: 600000 }] });
+    if (path.indexOf("/wards") === 0) return Promise.resolve({ ok: true, wards: [{ name: "ICU" }, { name: "General A" }] });
+    return Promise.resolve({ ok: true });
+  };
+  await env.registry.admin.render(c);
+  assert.equal(st._adminTab, "tariff");
+  const html = env.doc.getElementById("adminBody").innerHTML;
+  for (const k of ["bed", "nursing", "visit", "investigation", "medication", "service"]) assert.match(html, new RegExp('<option value="' + k + '">'), k);
+  assert.match(html, /Bed, per day/); assert.match(html, /Doctor visit, per day/);
+  assert.match(html, /<option value="General A">General A<\/option>/, "a bed price can be set for one ward");
+  assert.match(html, /ICU only/, "an existing ward-scoped price says which ward");
+  assert.ok(calls.some((p) => p.indexOf("/wards?orgId=org-1") === 0));
+});
+
 test("admin hides the MaiK tab for a non-wardsynq org", () => {
   const env = loadEnv();
   env.win.WSQ.state.orgId = "org-1";

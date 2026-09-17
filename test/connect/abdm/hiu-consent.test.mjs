@@ -10,11 +10,16 @@ import { getConsentReq } from "../../../functions/_connect/abdm/state.js";
 import { hmacPseudonym, ALLOW, buildAuditEvent } from "../../../functions/_connect/audit.js";
 import { PermissionError } from "../../../functions/_connect/permission.js";
 import { makeAbdmDb } from "../../../functions/_connect/abdm/abdm-testkit.js";
+import { GATEWAY_MANDATORY, ACCESS_MODES, STRICTER_THAN_GATEWAY } from "./fixtures/sandbox-probes.mjs";
 
 const ABHA = "ramesh1985@sbx";                       // RAW ABHA — must never be persisted/audited/logged
 const HITYPES = ["OPConsultation", "DiagnosticReport"];
 const NOW = "2026-07-31T10:00:00.000Z";
-const ENV = { CONNECT_HMAC_SALT: Buffer.from("connect-test-hmac-salt-key-1234").toString("base64") };
+const ENV = { CONNECT_HMAC_SALT: Buffer.from("connect-test-hmac-salt-key-1234").toString("base64"),
+              ABDM_HIU_ID: "IN2810006668" };
+// The doctor asking. Certification pins requester.identifier to the medical registration number, which the
+// NMC verification gate already collects.
+const REQUESTER = { name: "Dr A Rao", identifier: { type: "REGNO", value: "AP12345", system: "https://www.mciindia.org" } };
 
 // Call-recording gateway stub — records (endpointKey, body) and returns a canned { status, body }.
 function spyGateway(status = 202) {
@@ -38,7 +43,7 @@ const makeReq = (over = {}) => ({
   request: {}, tenantId: "t1", abhaAddress: ABHA,
   purpose: { text: "Care Management", code: "CAREMGT" },
   hiTypes: HITYPES, dateRange: { from: "2020-01-01", to: "2026-07-31" },
-  dataEraseAt: "2026-12-31T00:00:00.000Z", ...over,
+  dataEraseAt: "2026-12-31T00:00:00.000Z", requester: REQUESTER, ...over,
 });
 const makeDeps = (over = {}) => ({
   db: seedDb(), kv: null, secrets: null, gateway: spyGateway(), audit: spyAudit(),
@@ -57,6 +62,32 @@ test("1. builds the consentInit body through the FIELDS seam — RAW ABHA only i
   assert.equal(consent[CONSENT_FIELDS.patient][CONSENT_FIELDS.patientId], ABHA);   // raw ABHA lives here
   assert.equal(body[CONSENT_FIELDS.requestId], requestId);
   assert.deepEqual(consent[CONSENT_FIELDS.hiTypes], HITYPES);
+
+  // Everything the M3 collection marks on a consent init. These are not decoration: hiu.id is how the
+  // gateway routes the grant back, and requester is what the patient's consent screen shows.
+  assert.deepEqual(consent[CONSENT_FIELDS.hiu], { id: "IN2810006668" });
+  assert.deepEqual(consent[CONSENT_FIELDS.requester], REQUESTER);
+  assert.equal(consent[CONSENT_FIELDS.hip], null, "any HIP - an explicit null, not an omission");
+  assert.equal(consent[CONSENT_FIELDS.careContexts], null);
+  const perm = consent[CONSENT_FIELDS.permission];
+  assert.equal(perm[CONSENT_FIELDS.accessMode], "VIEW");
+  assert.deepEqual(perm[CONSENT_FIELDS.frequency], { unit: "HOUR", value: 0, repeats: 0 });
+});
+
+test("1b. a consent request with no medical registration number is REFUSED", async () => {
+  const deps = makeDeps();
+  await assert.rejects(() => requestConsent(ENV, deps, makeReq({ requester: null })), PermissionError,
+    "a consent the patient cannot attribute to a named doctor is not informed consent");
+  await assert.rejects(() => requestConsent(ENV, deps, makeReq({ requester: { name: "Dr A Rao" } })), PermissionError);
+  assert.equal(deps.gateway.calls.length, 0, "nothing may reach the gateway");
+});
+
+test("1c. an unconfigured HIU id fails closed rather than sending an unroutable request", async () => {
+  const deps = makeDeps();
+  // Since the V3 merge the sandbox has its own HIU id in code (config.js), so "unconfigured" is now only
+  // reachable where no identity exists in code: production.
+  await assert.rejects(() => requestConsent({ ...ENV, ABDM_ENV: "production", ABDM_HIU_ID: "" }, deps, makeReq()));
+  assert.equal(deps.gateway.calls.length, 0);
 });
 
 test("2. gateway 202 persists a connect_abdm_consent_req row keyed by patient_abha_hash (raw ABHA absent)", async () => {
@@ -109,4 +140,38 @@ test("6. no ephemeral keypair is minted at consent-request time (that is the dat
   const { status } = await requestConsent(ENV, deps, makeReq());
   assert.equal(status, "INITIATED");
   assert.equal((deps.db._tables.connect_abdm_txn || []).length, 0, "no txn/eph-key row at consent-request time");
+});
+
+// ── pinned against the LIVE sandbox, 2026-08-19 (see fixtures/sandbox-probes.mjs) ────────────────────
+// Each field below was removed from our body and posted to the real gateway. These are not inferred
+// from a collection: they are what dev.abdm.gov.in answered.
+test("9. every field the LIVE gateway calls mandatory is present in our body", async () => {
+  const deps = makeDeps();
+  await requestConsent(ENV, deps, makeReq());
+  const consent = deps.gateway.calls[0].body[CONSENT_FIELDS.consent];
+  const perm = consent[CONSENT_FIELDS.permission];
+  const present = {
+    hiu: consent[CONSENT_FIELDS.hiu],
+    accessMode: perm[CONSENT_FIELDS.accessMode],
+    frequency: perm[CONSENT_FIELDS.frequency],
+    hiTypes: consent[CONSENT_FIELDS.hiTypes],
+    purpose: consent[CONSENT_FIELDS.purpose],
+  };
+  for (const f of GATEWAY_MANDATORY) {
+    assert.ok(present[f] != null, "the sandbox refuses a consent init without " + f);
+  }
+  // The gateway enumerated the legal accessMode values in its own rejection message.
+  assert.ok(ACCESS_MODES.includes(perm[CONSENT_FIELDS.accessMode]),
+    "accessMode must be one of " + ACCESS_MODES.join(", "));
+});
+
+test("10. we are deliberately STRICTER than the gateway about the requester", async () => {
+  // The live sandbox accepts a consent init with no requester (it answered "User not found", i.e. the
+  // body passed). We refuse it anyway: certification pins requester.identifier to the doctor's medical
+  // registration number, and the patient's consent screen shows who is asking. A gateway that tolerates
+  // an anonymous request is not a reason to send one.
+  assert.deepEqual(STRICTER_THAN_GATEWAY, ["requester"]);
+  const deps = makeDeps();
+  await assert.rejects(() => requestConsent(ENV, deps, makeReq({ requester: null })), PermissionError);
+  assert.equal(deps.gateway.calls.length, 0);
 });

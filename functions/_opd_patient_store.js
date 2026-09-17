@@ -115,6 +115,15 @@ export async function registerPatient(env, org, body, actorId) {
   return { ok: true, patientId: id, mrn, mrSource, pending: !!r.pending, patient: Object.assign({}, p, { mrn, mrSource }) };
 }
 
+/* Who is already registered here under this mobile number, from the same index registerPatient checks; null for nobody. A
+ * failed read throws: an import must not read "could not check" as "no duplicate" (legacy-import.js). */
+export async function mobileDuplicateOf(env, orgId, mobile) {
+  const k = duplicateKey(orgId, mobile);
+  if (!k) return null;
+  const d = await fsGet(env, "q_patient_index/" + sanitize(k));
+  return d && d.fields && d.fields.mrn ? { mrn: d.fields.mrn } : null;
+}
+
 export async function getPatient(env, orgId, mrn) {
   const d = await fsGet(env, "q_patients/" + sanitize(String(orgId) + "__" + String(mrn))).catch(() => null);
   if (!d || !d.fields || String(d.fields.orgId) !== String(orgId)) return null;
@@ -156,6 +165,28 @@ export async function linkHospitalMrn(env, orgId, provisionalMrn, hospitalMrn, m
   }
   await qAudit(env, { hospitalId: orgId, ticketId: newId, actor: actorId || "", action: "patient:mrn_link", meta: provisionalMrn + "->" + hospitalMrn });
   return { ok: true, mrn: String(hospitalMrn) };
+}
+
+/* DPDP Act 2023 erasure (functions/_wardsynq/dpdp.js): the details a patient chose to give at registration and that
+ * identifying and treating them does not need - address, district, state, PIN code, who referred them and the ABHA
+ * link. Name, mobile, sex and date of birth stay: they are how the patient is identified at the desk. This document
+ * keeps no versions, so the values are gone from it; the audit row records that it happened, not what was removed. */
+const OPTIONAL_REGISTRATION = Object.freeze({ encAddress: "address", district: "district", state: "state", pincode: "pincode", referredBy: "referredBy", abhaNumber: "abhaNumber", abhaAddress: "abhaAddress", abhaConsent: "abhaConsent" });
+export async function clearOptionalRegistration(env, orgId, mrn, actorId) {
+  const id = sanitize(String(orgId) + "__" + String(mrn || ""));
+  const d = await fsGet(env, "q_patients/" + id).catch(() => null);
+  if (!d || !d.fields || String(d.fields.orgId) !== String(orgId)) return { ok: false, error: "not_found" };
+  const blank = {}, cleared = [];
+  for (const k of Object.keys(OPTIONAL_REGISTRATION)) {
+    const v = d.fields[k];
+    if (v === undefined || v === "" || v === false || v === 0 || v === null) continue;
+    blank[k] = k === "abhaConsent" ? false : ""; cleared.push(OPTIONAL_REGISTRATION[k]);
+  }
+  if (!cleared.length) return { ok: true, cleared: [] };
+  if (blank.abhaConsent === false) blank.abhaConsentAt = 0;
+  await fsCommit(env, [wUpdate(env, "q_patients/" + id, Object.assign(blank, { updatedAt: now() }), { exists: true })]);
+  await qAudit(env, { hospitalId: orgId, ticketId: id, actor: actorId || "", action: "patient:dpdp_erasure", meta: cleared.join(",") });
+  return { ok: true, cleared };
 }
 
 export { normalizeMobile };

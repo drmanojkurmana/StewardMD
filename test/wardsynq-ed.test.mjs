@@ -343,6 +343,19 @@ test("THE ED BOARD lists open presentations, untriaged first, then by acuity, th
   // board most needs to surface, ahead of a patient already assessed and known to be acuity 1.
   assert.equal(board.patients[0].encounterId, c.encounterId, "the untriaged arrival sorts before an already-triaged acuity 1");
   assert.equal(board.patients[1].encounterId, b.encounterId);
+  // BUG-MU06NW2S-8D53: GET /api/queue/ward/ed-list names each patient and their recorded sex.
+  assert.equal(board.patients[1].name, "Board B");
+  assert.equal(board.patients[1].sex, "female");
+});
+
+test("ED BOARD (BUG-MU06NW2S-8D53): an unidentified arrival of unknown sex is not given one", async () => {
+  seedHospital();
+  const u = await as(NURSE, "/ward/ed-arrival", "POST", { orgId: ORG, arrival: { unknown: { sex: "unknown", isTrauma: false }, chiefComplaint: "Collapsed", arrivedAt: "2026-09-09T03:00:00.000Z" } });
+  assert.equal(u.__status, 200, JSON.stringify(u));
+  const board = await as(NURSE, `/ward/ed-list?orgId=${ORG}`);
+  const row = board.patients.find((p) => p.encounterId === u.encounterId);
+  assert.equal(row.sex, null);
+  assert.match(u.mrn, /^EMERG-UNKNOWN-/, "an arrival not marked trauma is not filed as trauma");
 });
 
 /* ---- resuscitation: the real state machine's own rules still hold ---------------------------------- */

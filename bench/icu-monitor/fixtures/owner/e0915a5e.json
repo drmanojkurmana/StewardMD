@@ -1,0 +1,80 @@
+{
+  "id": "owner-e0915a5e",
+  "manufacturer": "oricare-ventilator",
+  "layout": "oricare-v8800",
+  "difficulty": [
+    "real-photo",
+    "ventilator",
+    "set-vs-measured"
+  ],
+  "image": "e0915a5e.jpg",
+  "imageSize": {
+    "w": 1320,
+    "h": 856
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "not_applicable"
+    },
+    "spo2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "not_applicable"
+    },
+    "dbp": {
+      "status": "not_applicable"
+    },
+    "map": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "ambiguous",
+      "why": "labelled ftotal, not RR",
+      "value": 40
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_applicable"
+    }
+  },
+  "distractors": {
+    "setF": 15,
+    "ppeak": 11,
+    "pplat": 11,
+    "peep": 0,
+    "o2": 100,
+    "mve": 0.4,
+    "vti": 1349,
+    "vte": 10,
+    "settings": {
+      "o2": 100,
+      "peep": 5,
+      "pinsp": 20,
+      "vsens": 2.0
+    },
+    "banner": [
+      "High Inspiratory Tidal Volume !!!",
+      "Circuit Disconnect !!!"
+    ],
+    "clock": "0:05",
+    "disconnect": "1678 s"
+  },
+  "notes": "Oricare V8800 PCV, circuit disconnect alarm."
+}

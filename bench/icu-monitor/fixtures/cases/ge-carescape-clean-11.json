@@ -1,0 +1,94 @@
+{
+  "id": "ge-carescape-clean-11",
+  "manufacturer": "ge-carescape",
+  "layout": "right-column-label-above",
+  "difficulty": [
+    "clean"
+  ],
+  "image": "ge-carescape-clean-11.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 72
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 98
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 72
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 0
+    },
+    "rr": {
+      "status": "visible",
+      "value": 16
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 118,
+        "dbp": 76,
+        "map": 90
+      }
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 118,
+        "dbp": 76,
+        "map": 90
+      }
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 118,
+      "source": "ART"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 76,
+      "source": "ART"
+    },
+    "map": {
+      "status": "visible",
+      "value": 90,
+      "source": "ART"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "20:38"
+  },
+  "notes": "ge-carescape clean synthetic fixture."
+}
