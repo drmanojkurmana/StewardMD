@@ -3379,6 +3379,8 @@
     "ward.that-test-is-no-longer-waiting": "That test is no longer waiting for a result. Refresh the board.",
     "ward.that-tool-is-not-configured": "That tool is not configured.",
     "ward.that-wristband-does-not-match-this": "That wristband does not match this patient.",
+    "ward.these-checks-could-not-be-run": "These checks could not be run, so this chart is not known to be complete: {types}.",
+    "ward.the-pre-authorisations-could-not-be-read": "The pre-authorisations could not be read. This is not a patient with none recorded.",
     "ward.the-adult-maximum-has-to-be": "The adult maximum has to be a plain number, or left blank.",
     "ward.the-allergy-list-could-not-be": "The allergy list could not be read. Do not hand this page over as an allergy record.",
     "ward.the-authorisation-list-could-not-be": "The authorisation list could not be read.",

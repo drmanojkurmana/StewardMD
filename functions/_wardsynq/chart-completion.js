@@ -65,7 +65,7 @@ function item(type, rule, fields) {
 }
 
 async function unsignedNotes(svc, patientId, rule, nowMs) {
-  const notes = await svc.byPatient("ClinicalNote", patientId).catch(() => []);
+  const notes = await svc.byPatient("ClinicalNote", patientId);
   return (notes || []).filter((n) => n && signingState(n) === "awaiting").map((n) =>
     item("unsigned-notes", rule, {
       detail: `${n.noteType || "Note"} awaiting signature`, since: n.submittedAt,
@@ -74,13 +74,13 @@ async function unsignedNotes(svc, patientId, rule, nowMs) {
 }
 
 async function dischargeSummaryDeficiencies(svc, patientId, rule, nowMs) {
-  const encounters = await svc.byPatient("Encounter", patientId).catch(() => []);
+  const encounters = await svc.byPatient("Encounter", patientId);
   const finished = (encounters || []).filter((e) => e && e.status === "finished" && e.periodEnd);
   const out = [];
   for (const enc of finished) {
     const noteId = dischargeSummaryIdFor(enc.id);
     if (!noteId) continue;
-    const note = await svc.get("ClinicalNote", noteId).catch(() => null);
+    const note = await svc.get("ClinicalNote", noteId);
     if (!note || signingState(note) === "draft" || signingState(note) === "awaiting") {
       out.push(item("discharge-summary", rule, {
         detail: note ? "Discharge summary not yet signed" : "No discharge summary recorded",
@@ -93,7 +93,7 @@ async function dischargeSummaryDeficiencies(svc, patientId, rule, nowMs) {
 }
 
 async function operativeDocumentation(svc, patientId, rule, nowMs) {
-  const cases = await svc.byPatient("SurgicalCase", patientId).catch(() => []);
+  const cases = await svc.byPatient("SurgicalCase", patientId);
   return (cases || []).filter((c) => c && c.stage === "signed-out" && !c.operativeRecord).map((c) =>
     item("operative-documentation", rule, {
       detail: "Signed out with no operative note", since: c.signedOutAt || null,
@@ -103,7 +103,7 @@ async function operativeDocumentation(svc, patientId, rule, nowMs) {
 }
 
 async function resultAcknowledgement(svc, patientId, rule, nowMs, criticalPolicy) {
-  const loops = await svc.byPatient("CriticalResultLoop", patientId).catch(() => []);
+  const loops = await svc.byPatient("CriticalResultLoop", patientId);
   return (loops || []).filter((l) => l && l.state === "open").map((l) => {
     // Reuses critical-results.js's OWN escalation policy (wsqCfg.criticalEscalation), not a second
     // one invented here - the loop is already escalated by that file; this queue only surfaces it.
@@ -117,7 +117,7 @@ async function resultAcknowledgement(svc, patientId, rule, nowMs, criticalPolicy
 }
 
 async function medicationReconciliation(svc, patientId, rule, nowMs) {
-  const recs = await svc.byPatient("MedicationReconciliation", patientId).catch(() => []);
+  const recs = await svc.byPatient("MedicationReconciliation", patientId);
   return (recs || []).filter((r) => r).map(reconciliationSummary).filter((s) => s.undecided > 0).map((s) =>
     item("medication-reconciliation", rule, {
       detail: `${s.undecided} medicine(s) undecided (${s.stage})`, since: s.startedAt,
@@ -129,7 +129,7 @@ async function medicationReconciliation(svc, patientId, rule, nowMs) {
 async function missingConsent(svc, patientId, rule, nowMs) {
   const scopes = (rule && Array.isArray(rule.requiredScopes)) ? rule.requiredScopes : [];
   if (!scopes.length) return [];
-  const consents = await svc.byPatient("PatientConsent", patientId).catch(() => []);
+  const consents = await svc.byPatient("PatientConsent", patientId);
   const out = [];
   for (const scope of scopes) {
     const p = permits(consents, scope, nowMs);
@@ -149,7 +149,7 @@ async function nursingDocumentation(svc, patientId, rule, nowMs, riskTools) {
   const out = [];
   const signals = (rule && Array.isArray(rule.signals)) ? rule.signals : [];
   if (signals.includes("handover")) {
-    const handovers = await svc.byPatient("ShiftHandover", patientId).catch(() => []);
+    const handovers = await svc.byPatient("ShiftHandover", patientId);
     for (const h of (handovers || [])) {
       if (h && !h.receivedBy) out.push(item("nursing-documentation", rule, {
         detail: "Handover not yet received", since: h.givenAt, escalation: ruleEscalation(h.givenAt, nowMs, rule),
@@ -158,7 +158,7 @@ async function nursingDocumentation(svc, patientId, rule, nowMs, riskTools) {
     }
   }
   if (signals.includes("risk-reassessment")) {
-    const assessments = await svc.byPatient("RiskAssessment", patientId).catch(() => []);
+    const assessments = await svc.byPatient("RiskAssessment", patientId);
     for (const a of (assessments || [])) {
       const tool = (riskTools || []).filter((t) => t && t.id === a.toolId)[0] || null;
       const status = reassessmentStatus(a, tool, nowMs);
@@ -202,20 +202,33 @@ async function chartCompletionQueue(request, env, ctx) {
   const nowMs = Date.parse(str(ctx.now)) || Date.now();
   const cfg = { criticalPolicy: ctx.criticalPolicy || null, riskTools: ctx.riskTools || [] };
 
-  let items;
+  /* R6-2: A SECTION THAT COULD NOT BE READ IS UNKNOWN, NOT COMPLETE. Every detector used to swallow
+   * its own read (`.catch(() => [])`), so a store hiccup on the ClinicalNote read dropped "unsigned
+   * notes" off this queue entirely - and a deficiency queue that is short reads exactly like a chart
+   * with nothing outstanding, which is the state a records officer signs off. The read is per type,
+   * so one failing type does not lose the other six: that type is named in `unknownSections` with
+   * its reason and the screen says so above the list. (The audit calls this a completion percentage;
+   * this file computes no percentage - it is a deficiency queue - so the count of unknown sections
+   * is what is reported.) */
+  let items, unknownSections;
   try {
     const lists = await Promise.all(
       Object.keys(rules).filter((type) => DETECTORS[type] && rules[type])
-        .map((type) => DETECTORS[type](svc, patientId, rules[type], nowMs, cfg))
+        .map(async (type) => {
+          try { return { type, found: await DETECTORS[type](svc, patientId, rules[type], nowMs, cfg) }; }
+          catch (e) { return { type, found: [], unknown: str(e && e.message) || "read failed" }; }
+        })
     );
-    items = lists.flat();
+    items = lists.flatMap((l) => l.found);
+    unknownSections = lists.filter((l) => l.unknown).map((l) => ({ type: l.type, reason: l.unknown }));
   } catch (e) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), items: [] };
   }
 
   const RANK = { escalate: 0, overdue: 1, due: 2 };
   items.sort((a, b) => (RANK[a.escalation.level] - RANK[b.escalation.level]) || String(a.type).localeCompare(String(b.type)));
-  return { ...base, ok: true, patientId, items, escalated: items.filter((i) => i.escalation.level === "escalate").length, overdue: items.filter((i) => i.escalation.level === "overdue").length };
+  return { ...base, ok: true, patientId, items, unknownSections,
+    escalated: items.filter((i) => i.escalation.level === "escalate").length, overdue: items.filter((i) => i.escalation.level === "overdue").length };
 }
 
 export { ruleEscalation, chartCompletionQueue, DETECTORS };

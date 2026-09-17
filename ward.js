@@ -3507,10 +3507,19 @@
         (i.responsibleRole ? '<div class="w-dt-times">' + esc(i.responsibleRole) + (i.escalation.hoursOpen ? " &middot; " + wTH("ward.open-h", "open {hoursOpen}h", { hoursOpen: i.escalation.hoursOpen }, "hoursOpen") : "") + "</div>" : "") +
         "</div></li>";
     }).join("");
+    /* R6-2: a section whose read failed is UNKNOWN, and a short list is never presented as a clean
+     * chart. Named here because this is the screen a records officer signs a chart off on. */
+    var unknown = (c.unknownSections || []).map(function (u) { return wTEn(COMPLETION_LABELS[u.type]) || u.type; });
+    var unknownLine = unknown.length
+      ? '<p class="w-hint warn" data-w-unknown="' + esc(unknown.length) + '">' + ms("error") +
+        wTH("ward.these-checks-could-not-be-run", "These checks could not be run, so this chart is not known to be complete: {types}.", { types: esc(unknown.join(", ")) }, "types", 1) + "</p>"
+      : "";
     return '<div class="w-card">' +
       "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
-      "<h3>" + wTH("ward.chart-check", "Chart check") + "</h3><button class=\"w-btn ghost\" data-w-act=\"completionopen\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" +
-      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.nothing-outstanding-against-what-this-hospital", "Nothing outstanding, against what this hospital has configured to check.") + "</p>") +
+      "<h3>" + wTH("ward.chart-check", "Chart check") + "</h3><button class=\"w-btn ghost\" data-w-act=\"completionopen\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" + unknownLine +
+      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>"
+        : unknown.length ? ""
+        : "<p class=\"w-empty\">" + wTH("ward.nothing-outstanding-against-what-this-hospital", "Nothing outstanding, against what this hospital has configured to check.") + "</p>") +
       "</div>";
   }
 
@@ -3918,7 +3927,10 @@
       "<input id=\"wTpaPolicy\" placeholder=\"" + wTA("ward.policy-number-optional", "Policy number (optional)") + "\">" +
       '<button class="w-btn" data-w-act="claimcode">' + ms("receipt_long") + wTH("ward.code-claim", "Code claim") + "</button></div>" +
       "<div class=\"w-sub\"><h4>" + wTH("ward.pre-authorisations", "Pre-authorisations") + "</h4>" +
-      (authRows ? "<ul class=\"w-mini\">" + authRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-pre-authorisation-has-been-recorded", "No pre-authorisation has been recorded for this patient.") + "</p>") +
+      /* R6-2: null is a list the server could not read, and it is never the "none recorded" sentence:
+       * a pre-authorisation shown as absent is what a counter turns into a bill the patient pays. */
+      (t.preAuthorisations === null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.the-pre-authorisations-could-not-be-read", "The pre-authorisations could not be read. This is not a patient with none recorded.", null, "", 1) + "</p>"
+        : authRows ? "<ul class=\"w-mini\">" + authRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-pre-authorisation-has-been-recorded", "No pre-authorisation has been recorded for this patient.") + "</p>") +
       "<input id=\"wTpaTreatment\" placeholder=\"" + wTA("ward.treatment", "Treatment") + "\">" +
       "<input id=\"wTpaScheme\" placeholder=\"" + wTA("ward.scheme-optional", "Scheme (optional)") + "\">" +
       '<select id="wTpaAuthState">' + PREAUTH_STATES.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(wTEn(x[1])) + "</option>"; }).join("") + "</select>" +
