@@ -442,7 +442,15 @@ export function provenValue(key, src, { patient = null, parentRow = null, tokens
   const row = src.from === 'worklist' ? (patient && patient._row) : parentRow;
   if (!row) return src.from === 'worklist' ? (idCandidates(key, patient)[0] || '') : '';
   if (Array.isArray(src.fields)) return src.fields.map((f) => fieldOf(row, f)).join(src.join || '');
-  return fieldOf(row, src.field);
+  const v = fieldOf(row, src.field);
+  /* THE TRACED COLUMN NAME BELONGS TO THE LIST IT WAS TRACED AGAINST. Two ward lists can both be proven
+   * (GHIS: the doctor's own HTML list with a "Patient ID" header, and the hospital-wide JSON list keyed
+   * patientId). The proof traced labs' id to "Patient ID" through the first; the runtime reads rows
+   * from the widest, where that name is no column at all, and the drawer said the agent never learned
+   * which field carries the patient (owner's iPhone, 2026-09-17). The row IS this patient's: a
+   * patient-keyed field falls back to the id the patient carries, exactly as an unmapped one does. */
+  if (!v && src.from === 'worklist') return idCandidates(key, patient)[0] || '';
+  return v;
 }
 
 /* A BROKEN CHAIN IS NOT AN EMPTY FIELD. A detail call is keyed on its list row (a lab's Render_ID, a

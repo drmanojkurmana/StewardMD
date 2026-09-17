@@ -186,3 +186,15 @@ test('a detail request whose chain key is missing is refused, not sent with an e
   await executeProven({ plugin: ok, origin: 'https://h', view, patient: { patientId: 'MR1' }, parentRow: { ServiceRenderId: 'R1', episode_id: 'IP1' } });
   assert.ok(sent > 0, 'a complete chain is still sent');
 });
+
+/* Two proven ward lists (GHIS): the proof traced labs' id to the HTML list's "Patient ID" header, but
+ * the runtime reads rows from the hospital-wide JSON list keyed patientId. The row is still this
+ * patient's, so a patient-keyed field falls back to the patient's own id instead of going out blank
+ * (owner's iPhone drawer: "never learned which field carries the patient", 2026-09-17). */
+test('provenValue: a worklist column name from another proven list falls back to the patient id', () => {
+  const patient = { patientId: 'MR900001' };
+  Object.defineProperty(patient, '_row', { value: { patientId: 'MR900001', patientFirstName: 'X' }, enumerable: false });
+  assert.equal(provenValue('id', { from: 'worklist', field: 'Patient ID' }, { patient }), 'MR900001');
+  assert.equal(provenValue('id', { from: 'worklist', field: 'patientId' }, { patient }), 'MR900001', 'a matching key is read from the row');
+  assert.equal(provenValue('Dept_ID', { from: 'worklist', field: 'Department' }, { patient }), '', 'a non-patient key with no such column stays blank');
+});
