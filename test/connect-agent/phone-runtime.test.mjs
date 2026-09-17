@@ -328,3 +328,41 @@ test('mapRow: a row carrying episodeId and bedName keeps them over mapped screen
   assert.equal(p.bedName, 'B-12');
   assert.equal(p.patientId, 'MR1');
 });
+
+
+/* THE CHAIN FANS OUT. Each list row's detail (one lab result, one radiology report) was read one after
+ * the other, up to 15 round trips per resource per patient; the hand-built adapter's single session
+ * carries concurrent calls (getOpdProfile). Rows are read a few at a time and keep their order. */
+test('readPatientDetails reads the detail chain a few rows at a time, in order', async () => {
+  const { PAGE_TOKENS } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  let inFlight = 0, peak = 0;
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ tok: 'T' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      if (/GetLabs/.test(req.url)) {
+        const rows = [1, 2, 3, 4, 5, 6].map((n) => ({ Render_ID: 'R' + n, Description: 'Test ' + n }));
+        return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: JSON.stringify(rows) }) };
+      }
+      const rid = (req.url.match(/rid=(R\d)/) || [])[1];
+      inFlight++; peak = Math.max(peak, inFlight);
+      await new Promise((r) => setTimeout(r, rid === 'R1' ? 60 : 10));   // the first row is the slowest
+      inFlight--;
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: JSON.stringify([{ Value: rid }]) }) };
+    },
+  };
+  const view = (resourceHint, endpoints, extra) => Object.assign({ resourceHint, pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' }, endpoints }, extra || {});
+  const replay = [
+    view('labs', [{ method: 'GET', path: '/GetLabs?id', role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } }]),
+    view('labs-detail', [{ method: 'GET', path: '/GetResult?rid', role: 'data', params: { rid: { from: 'labs', field: 'Render_ID' } } }], { detailOf: 'labs' }),
+  ];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  const detail = secs.find((s) => s.resource === 'labs-detail');
+  assert.ok(detail, 'labs-detail section read: ' + JSON.stringify(secs));
+  assert.ok(peak >= 2, 'detail reads overlap (peak ' + peak + ')');
+  assert.deepEqual(detail.rows.map((r) => r._rowIndex), [0, 1, 2, 3, 4, 5], 'rows keep the list order even when the first is slowest');
+  assert.deepEqual(detail.rows.map((r) => [r._key, r.Value, r._of]), [1, 2, 3, 4, 5, 6].map((n) => ['R' + n, 'R' + n, 'Test ' + n]));
+});
