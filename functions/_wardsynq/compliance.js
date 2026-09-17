@@ -22,6 +22,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { computeQualitySafety, INPATIENT } from "./quality.js";
 import { HAI_EVENTS, deviceDays, confirmedIn } from "./infection-control.js";
 import { auditSummary, edReturnPairs } from "./quality-registers.js";
+import { readWindowed } from "./read-window.js";
 import { NABH_KPIS } from "./nabh-kpi-defs.js";
 import { HMIS_FORMAT, HMIS_SECTIONS, HMIS_ITEMS } from "./hmis-items.js";
 import { DHS_CHAPTERS, DHS_ELEMENTS } from "./dhs-elements.js";
@@ -49,12 +50,17 @@ async function open(request, env, ctx, need) {
 }
 const baseOf = (ctx) => ({ mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null });
 
-/** Reads each type on its own: one unreadable type makes only the rows that need it not computable. */
-async function readTypes(svc, types) {
+/** Reads each type on its own: one unreadable type makes only the rows that need it not computable.
+ *
+ * R5-3: `sinceMs` is the start of the earliest month the report covers. A type whose records cannot
+ * belong to a month after they were written is read from there instead of from the hospital's first
+ * record (read-window.js decides which; a stay, a line, a booking and the masters are still read
+ * whole). Twelve months of a returns table then read twelve months. */
+async function readTypes(svc, types, sinceMs) {
   const rows = {}, unreadable = {};
   let truncated = false;
   await Promise.all(types.map(async (t) => {
-    try { const got = await svc.listAll(t, { max: READ_LIMIT }); rows[t] = got.rows.filter(Boolean); if (got.truncated) truncated = true; }
+    try { const got = await readWindowed(svc, t, { sinceMs, max: READ_LIMIT }); rows[t] = got.rows.filter(Boolean); if (got.truncated) truncated = true; }
     catch (e) { unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : str(e && e.message) || "read failed"; rows[t] = []; }
   }));
   return { rows, unreadable, truncated };
@@ -299,10 +305,14 @@ async function nabhIndicators(request, env, ctx) {
   if (error) return { ...base, ...error, indicators: null };
   const count = Math.min(12, Math.max(1, Number(ctx.months) || 6));
   const windows = monthWindows(Date.parse(str(ctx.now)) || Date.now(), count, ctx.utcOffsetMinutes);
-  const { rows, unreadable, truncated } = await readTypes(svc, NABH_TYPES.filter((t) => !STAFF_TYPES.includes(t)));
+  /* The window the whole table is computed over: the earliest month shown, or the start of that month's
+   * reporting year when the hospital has set one (#30 is year to date and reaches further back). */
+  const yearStart = reportingYearFrom(windows[0], ctx.reportingYearStartMonth);
+  const sinceMs = Math.min(windows[0].fromMs, yearStart ? yearStart.fromMs : windows[0].fromMs);
+  const { rows, unreadable, truncated } = await readTypes(svc, NABH_TYPES.filter((t) => !STAFF_TYPES.includes(t)), sinceMs);
   let staff = null;
   /* #30 is year to date: the staff injuries are read from the start of the earliest window's reporting year. */
-  const first = reportingYearFrom(windows[0], ctx.reportingYearStartMonth), staffMonths = [];
+  const first = yearStart, staffMonths = [];
   let [y, m] = (first ? first.month : windows[0].month).split("-").map(Number);
   while (`${y}-${String(m).padStart(2, "0")}` <= windows[windows.length - 1].month) { staffMonths.push(`${y}-${String(m).padStart(2, "0")}`); if (++m > 12) { m = 1; y++; } }
   try { staff = typeof ctx.staffRows === "function" ? await ctx.staffRows(staffMonths) : null; } catch { staff = null; }
@@ -314,7 +324,7 @@ async function nabhIndicators(request, env, ctx) {
   return {
     ...base, ok: true, months: windows.map((w) => w.month), indicators,
     computable: indicators.filter((i) => i.computable).length, notComputable: indicators.filter((i) => !i.computable).length,
-    truncated, ...(truncated ? { truncatedNote: `At least one record type has more than ${READ_LIMIT} records; the newest were not read, so recent months may be incomplete.` } : {}),
+    truncated, ...(truncated ? { truncatedNote: `At least one record type has more than ${READ_LIMIT} records in this period; the oldest months of it were not read, so the earliest months may be incomplete.` } : {}),
     formatNote: NABH_FORMAT_NOTE, source: "NABH Accreditation Standards for Hospitals, 6th edition (January 2025), PSQ 3a-3d",
   };
 }
@@ -426,12 +436,12 @@ async function hmisMonthly(request, env, ctx) {
   const windows = monthWindows(nowMs, 60, ctx.utcOffsetMinutes);
   const window = want ? windows.find((w) => w.month === want) : windows[windows.length - 1];
   if (!window) return { ...base, ok: false, status: 422, error: "month_out_of_range", detail: "a month in the last five years, not in the future", items: null };
-  const { rows, unreadable, truncated } = await readTypes(svc, HMIS_TYPES);
+  const { rows, unreadable, truncated } = await readTypes(svc, HMIS_TYPES, window.fromMs);
   const items = computeHmis({ rows, unreadable, window });
   return {
     ...base, ok: true, month: window.month, format: HMIS_FORMAT, sections: HMIS_SECTIONS, items,
     filled: items.filter((i) => i.available === true).length, notAvailable: items.filter((i) => i.available === false).length,
-    truncated, ...(truncated ? { truncatedNote: `At least one record type has more than ${READ_LIMIT} records; the newest were not read, so counts may be incomplete.` } : {}),
+    truncated, ...(truncated ? { truncatedNote: `At least one record type has more than ${READ_LIMIT} records in this period; not all of them were read, so counts may be incomplete.` } : {}),
     note: "Items WardSynQ's record supports are filled from it. Every other item is marked not available and must be filled from the hospital's own registers before the return is submitted.",
   };
 }

@@ -29,6 +29,7 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
+import { readWindowed } from "./read-window.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const TPL = "QualityAuditTemplate", AUDIT = "QualityAudit", DRILL = "MockDrill", STOCKOUT = "EmergencyStockOut", ADR = "AdverseDrugReaction", EDRET = "EdReturnReview";
@@ -166,8 +167,12 @@ const baseOf = (mig) => ({ mode: mig && mig.mode, tenantId: (mig && mig.tenantId
 const bare = (rec) => { const n = { ...rec }; delete n.version; delete n.meta; delete n.writtenBy; return n; };
 const off = (mig) => !mig || mig.mode === "off";
 const expected = (ctx, current) => (ctx.expectedVersion != null && ctx.expectedVersion !== "" ? Number(ctx.expectedVersion) : current.version);
-async function list(svc, type) {
-  try { const got = await svc.listAll(type, { max: READ_LIMIT }); return { rows: got.rows.filter(Boolean), truncated: got.truncated }; }
+/* R5-3: with `sinceMs` the type is read from that instant rather than from the hospital's first record
+ * (read-window.js). Only a register this view filters to its month is read that way: the audit
+ * templates are master data and a stock-out that has not been restored is shown whatever its age, so
+ * both are still read whole. */
+async function list(svc, type, sinceMs) {
+  try { const got = await readWindowed(svc, type, { sinceMs, max: READ_LIMIT }); return { rows: got.rows.filter(Boolean), truncated: got.truncated }; }
   catch (e) { return { rows: null, reason: e instanceof GovernanceError ? "not readable with this role" : str(e && e.message) || "read failed" }; }
 }
 
@@ -248,7 +253,7 @@ async function qualityRegisters(request, env, ctx) {
   if (!w) return { ...base, ok: false, status: 422, error: "bad_month", detail: "month as YYYY-MM" };
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
-  const [tpl, aud, dr, so, adr] = await Promise.all([list(svc, TPL), list(svc, AUDIT), list(svc, DRILL), list(svc, STOCKOUT), list(svc, ADR)]);
+  const [tpl, aud, dr, so, adr] = await Promise.all([list(svc, TPL), list(svc, AUDIT, w.fromMs), list(svc, DRILL, w.fromMs), list(svc, STOCKOUT), list(svc, ADR, w.fromMs)]);
   const byTime = (k) => (a, b) => str(b[k]).localeCompare(str(a[k]));
   return {
     ...base, ok: true, month: w.month, kinds: AUDIT_KINDS, truncated: [tpl, aud, dr, so, adr].some((x) => x.truncated),
@@ -354,7 +359,7 @@ async function edReturns(request, env, ctx) {
   if (!w) return { ...base, ok: false, status: 422, error: "bad_month", returns: null };
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, returns: null };
-  const [enc, rev] = await Promise.all([list(svc, "Encounter"), list(svc, EDRET)]);
+  const [enc, rev] = await Promise.all([list(svc, "Encounter"), list(svc, EDRET, w.fromMs)]);
   if (!enc.rows || !rev.rows) return { ...base, ok: false, status: 502, error: "record_read_failed", detail: `${!enc.rows ? "Encounters" : "Reviews"} could not be read (${enc.reason || rev.reason}).`, returns: null };
   const reviews = new Map(rev.rows.map((r) => [r.encounterId, r]));
   const returns = edReturnPairs(enc.rows, w).map((p) => ({ ...p, review: reviews.get(p.encounterId) || null }));
