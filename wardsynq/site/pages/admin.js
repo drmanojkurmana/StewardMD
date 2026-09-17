@@ -99,13 +99,15 @@
       ["legal", "nav.admin.legal"],
       // Gap wave 2026-09-16: HR beyond the rota (pages/hr.js) and patient engagement (pages/engage.js).
       ["hrAttendance", "nav.admin.hrAttendance"], ["hrCredentials", "nav.admin.hrCredentials"], ["hrTraining", "nav.admin.hrTraining"],
-      ["patientComms", "nav.admin.patientComms"], ["onlineBooking", "nav.admin.onlineBooking"], ["patientFeedback", "nav.admin.patientFeedback"]);
+      ["patientComms", "nav.admin.patientComms"], ["onlineBooking", "nav.admin.onlineBooking"], ["patientFeedback", "nav.admin.patientFeedback"],
+      // R2-5: patients, prices and suppliers from the system being replaced (legacy-import.js).
+      ["legacyImport", "nav.admin.legacyImport"]);
     // #/admin/tariff opens that tab: the cashier's "no price set" message links straight to the Price list (LT-30).
     // Applied once per arrival, so the tab buttons still work while the address says /tariff.
     if (st.page === "admin" && st.arg && st._adminArg !== st.arg && tabs.some(function (t) { return t[0] === st.arg; })) st._adminTab = st.arg;
     st._adminArg = st.page === "admin" ? st.arg : "";
     var tab = st._adminTab || "hospital";
-    if (["seed", "maik", "security", "health", "export", "fhir", "integrations", "bugs", "governance", "legal", "hrAttendance", "hrCredentials", "hrTraining", "patientComms", "onlineBooking", "patientFeedback"].indexOf(tab) >= 0 && !c.isWardsynq()) tab = "hospital";
+    if (["seed", "maik", "security", "health", "export", "fhir", "integrations", "bugs", "governance", "legal", "hrAttendance", "hrCredentials", "hrTraining", "patientComms", "onlineBooking", "patientFeedback", "legacyImport"].indexOf(tab) >= 0 && !c.isWardsynq()) tab = "hospital";
     var navTr = c.navTr || function (k) { return k; };
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.admin.title", "Admin Center")) + '</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist" lang="' + c.esc(c.navLang || "en") + '">' + tabs.map(function (t) {
@@ -115,7 +117,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs,
+    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, legacyImport: renderImport, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs,
       // Privacy and compliance is its own page (pages/governance.js); the tab is the Admin Center's door to it.
       governance: function () { st._adminTab = "hospital"; WSQ.go("governance"); },
       legal: function (x, y) { return WSQ._legal.render(x, y); },
@@ -240,6 +242,127 @@
       if (x && x.ok) { s.list = x.reports || []; s.manager = !!x.manager; } else { s.list = false; s.failMsg = refusal(c, x); }
       paint();
     });
+  }
+
+  // ---- Import from the previous system (R2-5, legacy-import.js) -------------------------------------------------
+  /* Patients, Price list rows and suppliers from the hospital's old HIS, as CSV. Read the file, map its columns, run the
+   * dry run, read every row, then import exactly what the dry run showed. Nothing is written until the last step, and a
+   * file that no longer matches its dry run is refused by the server. Open stays, balances and GST documents are not
+   * imported. s.preview: null = not run, false = the request failed, else the server's report. */
+  var IMPORT_KINDS = ["patients", "prices", "vendors"];
+  function importKindLabel(c, k) {
+    return { patients: T(c, "site.admin.import.kindPatients", "Patients"), prices: T(c, "site.admin.import.kindPrices", "Price list"), vendors: T(c, "site.admin.import.kindVendors", "Suppliers") }[k] || k;
+  }
+  function importFieldLabel(c, f) {
+    return {
+      legacyMrn: T(c, "site.admin.import.f.legacyMrn", "MR number in the old system"), name: T(c, "site.admin.import.f.name", "Name"), mobile: T(c, "site.admin.import.f.mobile", "Mobile"),
+      gender: T(c, "site.admin.import.f.gender", "Gender (M, F, O or the word)"), birthDate: T(c, "site.admin.import.f.birthDate", "Date of birth"), ageYears: T(c, "site.admin.import.f.ageYears", "Age in years (when there is no date of birth)"),
+      address: T(c, "site.admin.import.f.address", "Address"), district: T(c, "site.admin.import.f.district", "District"), state: T(c, "site.admin.import.f.state", "State"), pincode: T(c, "site.admin.import.f.pincode", "PIN code"),
+      kind: T(c, "site.admin.import.f.kind", "Kind (investigation, medication, service, bed, nursing, visit)"), price: T(c, "site.admin.import.f.price", "Price in rupees"), code: T(c, "site.admin.import.f.code", "Code"),
+      ward: T(c, "site.admin.import.f.ward", "Ward (per-day charges)"), hsnSac: T(c, "site.admin.import.f.hsnSac", "HSN/SAC"), gstRate: T(c, "site.admin.import.f.gstRate", "GST rate %"),
+      nonHealthcare: T(c, "site.admin.import.f.nonHealthcare", "Not health care (yes or no)"), intensiveCareClass: T(c, "site.admin.import.f.icu", "Intensive care class (beds)"), unitHours: T(c, "site.admin.import.f.unitHours", "Hours one bed price covers"),
+      gstin: T(c, "site.admin.import.f.gstin", "GSTIN"), phone: T(c, "site.admin.import.f.phone", "Phone"), email: T(c, "site.admin.import.f.email", "Email"), drugLicenceNo: T(c, "site.admin.import.f.drugLicence", "Drug licence number"),
+    }[f] || f;
+  }
+  function importStatusLabel(c, st) {
+    return { create: T(c, "site.admin.import.stCreate", "Will be added"), matched: T(c, "site.admin.import.stMatched", "Already here, left as it is"),
+      duplicate: T(c, "site.admin.import.stDuplicate", "May already be here, not added"), invalid: T(c, "site.admin.import.stInvalid", "Not added") }[st] || st;
+  }
+  function importHtml(c, s) {
+    var esc = c.esc, pv = s.preview, m = s.map;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.import.title", "Import from the previous system")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.import.intro", "Load patients, the price list or suppliers from the system this hospital is replacing, as a CSV file. A dry run shows what would happen to every row before anything is saved. Nothing already here is changed or merged.")) + "</p>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.import.notImported", "Open admissions, balances, deposits and GST invoices are not imported. Aadhaar numbers are never stored.")) + "</p>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.import.kind", "What the file holds")) + '</span><select id="admImpKind">' +
+      IMPORT_KINDS.map(function (k) { return '<option value="' + k + '"' + (k === s.kind ? " selected" : "") + ">" + esc(importKindLabel(c, k)) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.admin.import.file", "CSV file")) + '</span><input id="admImpFile" type="file" accept=".csv,text/csv"></label></div>' +
+      '<button type="button" class="btn ghost" data-imp="read">' + esc(T(c, "site.admin.import.read", "Read the file")) + '</button><div id="admImpMsg" aria-live="polite"></div></div>';
+    if (!m) return h;
+    var opts = function (field) {
+      var cur = s.mapping && s.mapping[field] != null ? String(s.mapping[field]) : "";
+      return '<option value="">' + esc(T(c, "site.admin.import.notInFile", "Not in the file")) + "</option>" + (m.headers || []).map(function (hd, i) {
+        return '<option value="' + i + '"' + (cur === String(i) ? " selected" : "") + ">" + EN(c, esc(hd || T(c, "site.admin.import.column", "Column {n}", { n: i + 1 }))) + "</option>";
+      }).join("");
+    };
+    h += '<div class="card"><h2>' + esc(T(c, "site.admin.import.mapTitle", "Match the columns")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.import.rows", "{n} rows in the file. One run takes at most {cap}; split a larger file.", { n: m.rowCount, cap: m.rowCap })) + "</p><div class=\"row\">" +
+      m.fields.required.concat(m.fields.optional).map(function (f) {
+        var req = m.fields.required.indexOf(f) >= 0;
+        return '<label class="f"><span>' + esc(importFieldLabel(c, f)) + (req ? " " + esc(T(c, "site.admin.import.required", "(required)")) : "") + '</span><select data-imp-field="' + f + '">' + opts(f) + "</select></label>";
+      }).join("") +
+      (s.kind === "patients" ? '<label class="f"><span>' + esc(T(c, "site.admin.import.dateOrder", "Dates in the file are written")) + '</span><select id="admImpOrder">' +
+        [["dmy", T(c, "site.admin.import.dmy", "day/month/year")], ["mdy", T(c, "site.admin.import.mdy", "month/day/year")], ["ymd", T(c, "site.admin.import.ymd", "year-month-day")]].map(function (o) {
+          return '<option value="' + o[0] + '"' + ((s.mapping && s.mapping.dateOrder) === o[0] ? " selected" : "") + ">" + esc(o[1]) + "</option>";
+        }).join("") + "</select></label>" : "") +
+      '</div><button type="button" class="btn" data-imp="dry">' + esc(T(c, "site.admin.import.dryRun", "Dry run")) + "</button></div>";
+    if (pv === null || pv === undefined) return h;
+    h += '<div class="card"><h2>' + esc(T(c, "site.admin.import.reportTitle", "Dry run result")) + "</h2>";
+    if (pv === false) return h + '<div class="msg err">' + esc(T(c, "site.admin.import.failed", "The dry run could not be completed. Nothing was imported.")) + "</div></div>";
+    if (!pv.ok && !pv.rows) return h + '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div></div>";
+    if (!pv.ok) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+    var n = pv.counts || {};
+    if (pv.step === "done" && pv.ok) h += '<div class="msg ok">' + esc(T(c, "site.admin.import.done", "Imported {n}. Every row below is as it was saved.", { n: pv.written })) + "</div>";
+    h += "<p>" + [["create", "ok"], ["matched", ""], ["duplicate", "warn"], ["invalid", "stop"]].map(function (x) {
+      return '<span class="pill' + (x[1] ? " " + x[1] : "") + '">' + esc(importStatusLabel(c, x[0])) + ": " + esc(String(n[x[0]] || 0)) + "</span>";
+    }).join(" ") + "</p>";
+    if (pv.namePoolPartial) h += '<p class="quiet">' + esc(T(c, "site.admin.import.namePartial", "Name and date of birth were compared with the newest 500 patients only. MR number and mobile were checked against everyone.")) + "</p>";
+    if (n.duplicate) h += '<p class="quiet">' + esc(T(c, "site.admin.import.dupHelp", "A row that may already be here is never merged. Check it on the Patients screen, and register the person at the front desk if they are someone else.")) + "</p>";
+    h += '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.import.colRow", "Row")) + "</th><th>" + esc(T(c, "site.admin.import.colItem", "In the file")) + "</th><th>" + esc(T(c, "site.admin.import.colResult", "Result")) + "</th><th>" + esc(T(c, "site.admin.import.colWhy", "Why")) + "</th></tr></thead><tbody>" +
+      (pv.rows || []).map(function (r) {
+        var ex = r.existing || {};
+        var why = (r.field ? esc(importFieldLabel(c, r.field)) + ": " : "") + (r.reason ? EN(c, esc(r.reason)) : "") +
+          (ex.mrn ? " " + esc(T(c, "site.admin.import.existingMrn", "MR number {mrn}", { mrn: ex.mrn })) : "") + (r.mrn ? esc(T(c, "site.admin.import.newMrn", "MR number {mrn}", { mrn: r.mrn })) : "") +
+          (ex.price != null ? esc(T(c, "site.admin.import.existingPrice", "Price on the list: Rs {price}", { price: (Number(ex.price) / 100).toFixed(2) })) : "");
+        return '<tr><td class="mono">' + esc(String(r.row)) + "</td><td>" + EN(c, esc(r.label || "")) + "</td><td>" + esc(importStatusLabel(c, r.status)) + "</td><td>" + why + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+    if (pv.step === "preview" && pv.ok) {
+      h += n.create ? '<button type="button" class="btn" data-imp="commit" data-count="' + esc(String(n.create)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.import.commit", "Import these {n} rows", { n: n.create })) + "</button>" +
+        (pv.partial ? '<div class="msg err">' + esc(T(c, "site.admin.import.partial", "What is already held could not be read in full, so this file cannot be imported.")) + "</div>" : "")
+        : '<p class="quiet">' + esc(T(c, "site.admin.import.nothing", "Nothing in this file would be added.")) + "</p>";
+    }
+    return h + '<div id="admImpDoneMsg" aria-live="polite"></div></div>';
+  }
+  WSQ._importHtml = importHtml;
+  function renderImport(c, body) {
+    var s = c.state._import = c.state._import || { kind: "patients", csv: "", map: null, mapping: null, preview: null };
+    var draw = function () { body.innerHTML = importHtml(c, s); };
+    var sel = function (id) { var e = document.getElementById(id); return e ? e.value : ""; };
+    var mapping = function () {
+      var out = {};
+      body.querySelectorAll("[data-imp-field]").forEach(function (e) { if (e.value !== "") out[e.getAttribute("data-imp-field")] = Number(e.value); });
+      if (s.kind === "patients") out.dateOrder = sel("admImpOrder");
+      return out;
+    };
+    var send = function (extra) { return c.api("/ward/legacy-import", Object.assign({ orgId: c.state.orgId, kind: s.kind, csv: s.csv }, extra || {})); };
+    body.onchange = function (ev) {
+      if (ev.target && ev.target.id === "admImpKind") { s.kind = ev.target.value; s.csv = ""; s.map = null; s.mapping = null; s.preview = null; draw(); }
+    };
+    body.onclick = function (ev) {
+      var b = ev.target.closest && ev.target.closest("[data-imp]"); if (!b) return;
+      var act = b.getAttribute("data-imp"), msg = document.getElementById("admImpMsg");
+      if (act === "read") {
+        var f = document.getElementById("admImpFile"), file = f && f.files && f.files[0];
+        if (!file) { msg.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.import.chooseFile", "Choose the CSV file first.")) + "</div>"; return; }
+        var reader = new FileReader();
+        reader.onload = function () {
+          s.csv = String(reader.result || ""); s.map = null; s.mapping = null; s.preview = null;
+          send().then(function (r) {
+            if (!r || !r.ok) { draw(); document.getElementById("admImpMsg").innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, r))) + "</div>"; return; }
+            s.map = r; draw();
+          });
+        };
+        reader.readAsText(file);
+        return;
+      }
+      if (act === "dry" || act === "commit") {
+        if (act === "dry") s.mapping = mapping();
+        b.disabled = true;
+        var extra = { mapping: s.mapping };
+        if (act === "commit") { extra.commit = true; extra.confirmCount = Number(b.getAttribute("data-count")); extra.planId = b.getAttribute("data-plan"); }
+        send(extra).then(function (r) { s.preview = r || false; draw(); }, function () { s.preview = false; draw(); });
+      }
+    };
+    draw();
   }
 
   // ---- Clinical seed data (D10) ------------------------------------------------------------------

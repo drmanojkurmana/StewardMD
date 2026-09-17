@@ -409,7 +409,8 @@ async function saveRateContract(request, env, ctx) {
       detail: `This supplier already has a contract for ${item} (${unit}) valid ${clash.validFrom} to ${clash.validTo}. Contracts for one item cannot overlap, or an order could not say which price it was held to.` };
   }
   const contract = { item, unit, pricePaise, validFrom: str(ctx.validFrom), validTo: str(ctx.validTo), by: resolved.actor.id, at: new Date().toISOString(), ...(reason ? { reason } : {}) };
-  const record = { resourceType: VENDOR_TYPE, id, name: current ? str(current.name) || name : name,
+  /* Copy the Vendor forward (an imported supplier's GSTIN, phone, email, address, licence number); only the contracts change. */
+  const record = { ...(current || {}), resourceType: VENDOR_TYPE, id, name: current ? str(current.name) || name : name,
     rateContracts: [...contracts.filter((c) => c !== replacing), contract].sort((a, b) => str(a.item).localeCompare(str(b.item)) || str(a.validFrom).localeCompare(str(b.validFrom))) };
   try {
     const out = await svc.put(record, { expectedVersion: current ? current.version : 0, idempotencyKey: ctx.idempotencyKey || null });

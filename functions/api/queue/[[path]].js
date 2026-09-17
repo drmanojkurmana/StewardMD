@@ -280,6 +280,7 @@ import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess, listGrants } from "../../_wardsynq/patient-access.js";
 import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
 import { clockAttendance, correctAttendance, importDeviceAttendance, attendanceMonth } from "../../_wardsynq/hr-attendance.js";
+import { importLegacy } from "../../_wardsynq/legacy-import.js";
 import { saveCredential, runCredentialAlerts, acknowledgeAlert, listCredentials, saveCourse, saveSession, recordSessionAttendance, recordTraining, trainingOverview } from "../../_wardsynq/hr-records.js";
 import { staffPreference, runPatientMessaging, messageLog, retryMessage, settingsOf as commsSettingsOf } from "../../_wardsynq/patient-messaging.js";
 import { feedbackDashboard, updateRecovery } from "../../_wardsynq/patient-feedback.js";
@@ -1951,6 +1952,9 @@ export async function onRequest(context) {
          * staff.admin, which the hr role holds without any clinical actor. */
         "hr-my-records": CAPS.QUEUE_VIEW, "hr-clock": CAPS.QUEUE_VIEW, "hr-alert-ack": CAPS.QUEUE_VIEW,
         "hr-attendance": CAPS.STAFF_ADMIN, "hr-attendance-correct": CAPS.STAFF_ADMIN, "hr-attendance-import": CAPS.STAFF_ADMIN,
+        /* Loading a replaced HIS's patients, prices and suppliers (legacy-import.js) is hospital administration. The route
+         * also asks for the capability the manual door for that kind needs, so an import never reaches further than typing. */
+        "legacy-import": CAPS.STAFF_ADMIN,
         "hr-credentials": CAPS.STAFF_ADMIN, "hr-credential-save": CAPS.STAFF_ADMIN, "hr-credential-alerts": CAPS.STAFF_ADMIN,
         "hr-training": CAPS.STAFF_ADMIN, "hr-course-save": CAPS.STAFF_ADMIN, "hr-session-save": CAPS.STAFF_ADMIN,
         "hr-session-attendance": CAPS.STAFF_ADMIN, "hr-training-record": CAPS.STAFF_ADMIN,
@@ -3009,6 +3013,19 @@ export async function onRequest(context) {
       }
       /* CONNECTORS (connectors.js), Admin Center > Integrations. Credentials go in and never come back out. */
       /* HR BEYOND THE ROTA and PATIENT ENGAGEMENT (gap wave 2026-09-16). The route's capability was decided above. */
+      if (sub === "legacy-import" && method === "POST") {
+        const kindCap = { patients: CAPS.QUEUE_ADD, prices: CAPS.STAFF_ADMIN, vendors: CAPS.STORES_MANAGE }[String(body.kind || "")];
+        if (!kindCap) return json({ ok: false, error: "unknown_kind", message: "Choose what the file holds: patients, prices or suppliers." }, 422, request);
+        const kAz = await ORG.authorizeOrg(env, actor, wOrgId, kindCap);
+        if (!kAz.ok) return json(azRefusal(kAz), 403, request);
+        const r = await importLegacy(request, env, { ...deps, kind: body.kind, csv: body.csv, mapping: body.mapping, commit: body.commit === true, confirmCount: body.confirmCount, planId: body.planId,
+          region: (wOrg && wOrg.region) || undefined, externalMrn: !!(wsqCfg && wsqCfg.externalMrn),
+          patients: { byMrn: (mrn) => PAT.getPatient(env, wOrgId, mrn), mobileTaken: (mobile) => PAT.mobileDuplicateOf(env, wOrgId, mobile), register: (b) => PAT.registerPatient(env, wOrg, b, actor.id || "") },
+          // The Price list is the one table the invoice paths read (wsqTariff); without its store there is nowhere to import to.
+          prices: BILL.billingEnabled(env) ? { list: () => BILL.listTariff(env, wOrgId), save: (item) => BILL.upsertTariff(env, wOrgId, item, actor.id || "") } : null,
+          audit: async (action, meta) => Q.qAudit(env, { hospitalId: wOrgId, ticketId: "", actor: actor.id, action, meta }) });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub.startsWith("hr-")) {
         const hrCtx = { ...deps, actorId: actor.id };
         const members = async () => (await ORG.listMembers(env, wOrgId)).map((m) => ({ identity: m.identity, role: m.role, active: m.active !== false, displayName: m.displayName || "", employeeId: m.employeeId || "", scope: m.scope || {} }));

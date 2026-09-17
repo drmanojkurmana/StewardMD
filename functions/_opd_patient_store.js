@@ -115,6 +115,15 @@ export async function registerPatient(env, org, body, actorId) {
   return { ok: true, patientId: id, mrn, mrSource, pending: !!r.pending, patient: Object.assign({}, p, { mrn, mrSource }) };
 }
 
+/* Who is already registered here under this mobile number, from the same index registerPatient checks; null for nobody. A
+ * failed read throws: an import must not read "could not check" as "no duplicate" (legacy-import.js). */
+export async function mobileDuplicateOf(env, orgId, mobile) {
+  const k = duplicateKey(orgId, mobile);
+  if (!k) return null;
+  const d = await fsGet(env, "q_patient_index/" + sanitize(k));
+  return d && d.fields && d.fields.mrn ? { mrn: d.fields.mrn } : null;
+}
+
 export async function getPatient(env, orgId, mrn) {
   const d = await fsGet(env, "q_patients/" + sanitize(String(orgId) + "__" + String(mrn))).catch(() => null);
   if (!d || !d.fields || String(d.fields.orgId) !== String(orgId)) return null;
