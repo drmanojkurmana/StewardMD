@@ -7708,3 +7708,33 @@ of compliance.js is untouched.
   nabhIndicators reads staff injuries from the earliest window's reporting-year start (both needed by KPI 30 only).
 - GET /ward/access-times now refuses (403) a role that can read neither Encounter nor DiagnosticVisit; it returned an empty
   200 to a store keeper. A cashier still reads it: billing grants read Encounter.
+## 2026-09-17 Legacy HIS import, first slice: patients, Price list, suppliers (branch legacy-import-first-slice, R2-5)
+- Which price list: VERIFIED in the router. Both invoice paths price from wsqTariff(): with the clinic billing store on
+  (CLINIC_BILLING_ENABLED) the Price list (BILL.listTariff, q_tariff) is the ONLY price table; the wardsynq.tariff config
+  blob is used only by a deployment with no billing store and no screen shows it. Prices import into the Price list through
+  validateTariff and BILL.upsertTariff (audited tariff_create per row). With the store off the import refuses
+  (409 price_list_off) rather than write a table no bill or screen reads.
+- One route, POST /ward/legacy-import, staff.admin, and ALSO the manual door's capability per kind (patients queue.add,
+  prices staff.admin, suppliers stores.manage), so hr (staff.admin only) cannot register patients through an import.
+- Dry run first, always (hr-attendance-import pattern). Commit re-runs the check and needs confirmCount AND planId (a hash
+  of the rows it would create) to match; otherwise 409 with nothing written. First failure stops the run and says how many
+  were saved; re-running the same file adds only what is missing (matched by legacy MRN identifier, Price list code or
+  name + kind + ward, supplier id).
+- Patients: DEVIATION from "patients through registration duplicate checks" only in that the import is stricter. Each row
+  goes through validateRegistration, the same-mobile index (reported duplicate, never confirmDuplicate), with
+  wardsynq.externalMrn an MR number already in use (duplicate, never overwritten), and the identity engine
+  (findCandidates) agreeing on name AND date of birth over the newest 500 patients (stated on screen). Duplicates are not
+  created and never merged; the merge stays a person's claim. Then PAT.registerPatient and registerPatientRecord. The
+  legacy MRN is a `legacy-mrn` identifier on the Patient record (hospitalRef in the desk store when the hospital mints its
+  own numbers); registerPatientRecord keeps an already-recorded legacy-mrn when the desk re-registers the patient.
+- Price rows: DEVIATION from the brief's "taxable item without rate refused" as manual entry: the Price list screen accepts
+  a row without a rate. The import refuses a medication or not-health-care row with no GST rate, because gstForLines lists
+  it unconfigured and the bill is refused. Other kinds are exempt healthcare lines and pass without a rate.
+- Suppliers: Vendor records via RecordService at `wsq-vendor-<slug>` (the id supply-chain-depth's rate contracts use), with
+  name, gstin (format checked), phone, email, address, drugLicenceNo. MERGE NOTE for supply-chain-depth: its
+  saveRateContract writes {resourceType, id, name, rateContracts} and would drop these fields on the next version; it
+  should spread the current record.
+- Not imported (owner and accountant, audit O4): open stays, balances, deposits, GST documents. No Aadhaar field exists;
+  a 12-digit Aadhaar-shaped value in name or address refuses the row and is masked in the mapping sample.
+- ponytail ceilings: 100 patients / 500 prices / 500 suppliers per run (Worker request budget); a Price list or supplier
+  list of 500 or more cannot rule out a match and refuses the commit.
