@@ -101,11 +101,11 @@ test("3. the shape never resembles a twin snapshot 'sections' object - a caller 
 
 /* ---- 4: honest inventory ----------------------------------------------------------------------------- */
 
-test("4. five of the seven named metrics are wired, from real data; the remaining two say why honestly", () => {
-  for (const key of ["discharge-volume", "critical-backlog", "bed-demand", "ed-load", "diagnostic-workload", "pharmacy-workload"]) {
+test("4. seven of the eight named metrics are wired, from real data; ot-delays says why honestly", () => {
+  for (const key of ["discharge-volume", "critical-backlog", "bed-demand", "ed-load", "diagnostic-workload", "pharmacy-workload", "blood-demand"]) {
     assert.equal(PREDICTORS[key].wired, true, key);
   }
-  for (const key of ["blood-demand", "ot-delays"]) {
+  for (const key of ["ot-delays"]) {
     assert.equal(PREDICTORS[key].wired, false, key);
     assert.ok(PREDICTORS[key].reason, key);
   }
@@ -115,8 +115,8 @@ test("4. five of the seven named metrics are wired, from real data; the remainin
 
 test("5. discharge-volume is predicted from REAL Encounter periodEnd dates, through the real route", async () => {
   seed();
-  const now = Date.parse("2026-09-10T08:00:00.000Z");
-  for (let d = 0; d < 10; d++) {
+  const now = Date.now();
+  for (let d = 1; d <= 10; d++) {
     const dischargedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-enc-${d}`, version: 1, patientId: `predict-pat-${d}`, class: "IPD", status: "discharged", identifiers: [], periodStart: dischargedAt, periodEnd: dischargedAt, meta: meta() }]);
   }
@@ -131,8 +131,8 @@ test("5. discharge-volume is predicted from REAL Encounter periodEnd dates, thro
 
 test("5b. bed-demand is predicted from REAL Encounter periodStart dates, through the real route", async () => {
   seed();
-  const now = Date.parse("2026-09-10T08:00:00.000Z");
-  for (let d = 0; d < 10; d++) {
+  const now = Date.now();
+  for (let d = 1; d <= 10; d++) {
     const admittedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-bed-${d}`, version: 1, patientId: `predict-bed-pat-${d}`, class: "IPD", status: "in-progress", identifiers: [], periodStart: admittedAt, periodEnd: null, meta: meta() }]);
   }
@@ -145,8 +145,8 @@ test("5b. bed-demand is predicted from REAL Encounter periodStart dates, through
 
 test("5c. ed-load is predicted from REAL ED-class Encounters, and a non-ED admission never counts", async () => {
   seed();
-  const now = Date.parse("2026-09-10T08:00:00.000Z");
-  for (let d = 0; d < 10; d++) {
+  const now = Date.now();
+  for (let d = 1; d <= 10; d++) {
     const arrivedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-ed-${d}`, version: 1, patientId: `predict-ed-pat-${d}`, class: "ED", status: "in-progress", identifiers: [], periodStart: arrivedAt, periodEnd: null, meta: meta() }]);
     // An IPD admission on the SAME day must not inflate the ED count.
@@ -160,8 +160,8 @@ test("5c. ed-load is predicted from REAL ED-class Encounters, and a non-ED admis
 
 test("5d. diagnostic-workload is predicted from REAL ServiceRequest lab/imaging orders, and other categories are excluded", async () => {
   seed();
-  const now = Date.parse("2026-09-10T08:00:00.000Z");
-  for (let d = 0; d < 10; d++) {
+  const now = Date.now();
+  for (let d = 1; d <= 10; d++) {
     const orderedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "ServiceRequest", id: `predict-lab-${d}`, version: 1, patientId: `predict-dx-pat-${d}`, code: "58410-2", category: "laboratory", priority: "routine", requesterId: "cfa:doc", status: "active", meta: { ...meta(), effectiveAt: orderedAt } }]);
     // A referral is a real ServiceRequest too, but is not diagnostic workload and must not count.
@@ -175,8 +175,8 @@ test("5d. diagnostic-workload is predicted from REAL ServiceRequest lab/imaging 
 
 test("5e. pharmacy-workload is predicted from REAL MedicationDispense.dispensedAt, not the order date", async () => {
   seed();
-  const now = Date.parse("2026-09-10T08:00:00.000Z");
-  for (let d = 0; d < 10; d++) {
+  const now = Date.now();
+  for (let d = 1; d <= 10; d++) {
     const dispensedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "MedicationDispense", id: `predict-disp-${d}`, version: 1, patientId: `predict-rx-pat-${d}`, orderId: `predict-ord-${d}`, drug: "Amoxicillin", quantity: { value: 30, unit: "tablet" }, state: "issued", dispensedBy: "cfa:pharm", dispensedAt, source: { system: "wardsynq-native", sourceId: `predict-disp-${d}` } }]);
   }
@@ -185,6 +185,28 @@ test("5e. pharmacy-workload is predicted from REAL MedicationDispense.dispensedA
   assert.equal(r.ok, true);
   assert.ok(r.prediction.pointEstimate >= 0);
   assert.equal(r.prediction.inputWindow.sampleSize > 0, true);
+});
+
+test("5f. blood-demand is predicted from REAL transfusion requests, weighted by units asked for, zero days counted, with its inputs shown", async () => {
+  seed();
+  const now = Date.now();
+  for (const d of [1, 3]) {
+    const requestedAt = new Date(now - d * 86400000).toISOString();
+    await RECORD.append(TENANT.id, [{ resourceType: "TransfusionEpisode", id: `predict-tx-${d}`, version: 1, patientId: `predict-tx-pat-${d}`, unitsRequested: 2, ledger: [{ at: requestedAt, event: "requested", actorId: "cfa:doc" }], meta: meta() }]);
+  }
+  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=blood-demand`);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.deepEqual(r.prediction.inputs.map((x) => x.value), [2, 0, 2], "2 units, a day with none, 2 units");
+  assert.equal(r.prediction.pointEstimate, 1.33);
+  assert.match(r.prediction.method, /blood units requested/);
+});
+
+test("5g. an empty critical-result history is a refusal, never a backlog of zero", async () => {
+  seed();
+  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=critical-backlog`);
+  assert.equal(r.__status, 200);
+  assert.equal(r.error, "insufficient_data");
+  assert.equal(r.prediction, null);
 });
 
 test("6. an unknown metric is refused, never silently answered by the nearest wired one", async () => {
@@ -196,10 +218,10 @@ test("6. an unknown metric is refused, never silently answered by the nearest wi
 
 test("7. a named-but-unwired metric returns 501, not a fabricated number", async () => {
   seed();
-  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=blood-demand`);
+  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=ot-delays`);
   assert.equal(r.__status, 501);
   assert.equal(r.error, "not_built");
-  assert.match(r.detail, /no blood-inventory data source/);
+  assert.match(r.detail, /scheduled start/);
 });
 
 test("8. ADVERSARIAL: cross-tenant data cannot leak into a prediction", async () => {

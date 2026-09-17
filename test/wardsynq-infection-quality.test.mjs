@@ -14,7 +14,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { deviceDays, deviceEligibility, ssiEligibility, computeAntibiogram, prophylaxisDoses, prophylaxisAppropriate, HAI_EVENTS } from "../functions/_wardsynq/infection-control.js";
 import { scoreAudit, normaliseTemplate, edReturnPairs, normaliseAdr, auditSummary } from "../functions/_wardsynq/quality-registers.js";
-import { computeNabhIndicators, monthWindows } from "../functions/_wardsynq/compliance.js";
+// Imported after the harness: compliance.js now reaches Firestore through discharge-milestones.js, so a static import would bind the real module before the mock.
+const { computeNabhIndicators, monthWindows } = await import("../functions/_wardsynq/compliance.js");
 
 const IST = 330 * 60000;
 const AUG = { month: "2026-08", fromMs: Date.UTC(2026, 7, 1) - IST, toMs: Date.UTC(2026, 8, 1) - IST - 1, offsetMs: IST, nowMs: Date.UTC(2026, 8, 20) };

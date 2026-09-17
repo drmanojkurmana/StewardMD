@@ -14,12 +14,14 @@
  * unavailable, say unavailable; nothing here pretends otherwise by substituting a guess for a
  * refusal - an empty input window returns NO PREDICTION, not a zero presented as one.
  *
- * ONLY TWO METRICS ARE WIRED AS REAL EXAMPLES: discharge volume and critical-result backlog. The
- * plan names seven (discharge volume, bed demand, ED load, diagnostic workload, pharmacy workload,
- * blood demand, OT delays). The primitive below (`governedPrediction`) is the real, tested, reusable
- * contract every one of the seven would use; wiring the other five is stated as NOT DONE rather than
- * faked with a second implementation of the same two examples under different names - see PREDICTORS
- * for the honest inventory.
+ * SEVEN OF EIGHT ARE WIRED (2026-09-17): discharge volume, critical-result backlog, bed demand, ED load, diagnostic
+ * workload, pharmacy workload and blood demand, each a per-day count from a field this codebase already writes. OT
+ * delays stays unwired and says why (PREDICTORS).
+ *
+ * THE INPUTS TRAVEL WITH THE NUMBER. Every envelope carries the daily counts it was averaged from and the method in
+ * words, so a screen can show exactly what the forecast rests on. A day is a whole UTC day from the first day with a
+ * recorded event to yesterday; a day with no event counts as zero (a mean over only the busy days overstated every
+ * rate), and today, not yet over, is left out. No event at all is a refusal, never a forecast of zero.
  */
 
 import { resolveClinicalActor } from "./actor.js";
@@ -35,7 +37,7 @@ const MODEL_ID = "wardsynq-moving-average-v1";
  * it can be tested without any storage at all. Returns the full governed envelope, or a REFUSAL
  * (never a fabricated number) when there is nothing to project from.
  */
-function governedPrediction({ metric, samples, horizonDays, generatedAt }) {
+function governedPrediction({ metric, samples, horizonDays, generatedAt, method }) {
   const at = generatedAt || new Date().toISOString();
   const clean = (samples || []).filter((s) => s && Number.isFinite(Number(s.value)) && Date.parse(s.atIso));
   if (clean.length < 2) {
@@ -59,6 +61,9 @@ function governedPrediction({ metric, samples, horizonDays, generatedAt }) {
       generatedAt: at,
       horizonDays: Number.isFinite(Number(horizonDays)) ? Number(horizonDays) : 1,
       inputWindow: { from: clean[0].atIso, to: clean[clean.length - 1].atIso, sampleSize: clean.length },
+      /* What the number rests on, shown beside it: the method in words and every daily value averaged. */
+      method: method || "mean of the samples given",
+      inputs: clean.map((x) => ({ atIso: x.atIso, value: Number(x.value) })),
       pointEstimate: Math.round(mean * 100) / 100,
       uncertainty: {
         method: "sample standard deviation over the input window - not a confidence interval from a fitted model",
@@ -73,164 +78,97 @@ function governedPrediction({ metric, samples, horizonDays, generatedAt }) {
   };
 }
 
+const DAY_MS = 86400000;
+const dayOf = (t) => new Date(t).toISOString().slice(0, 10);
+
 /**
- * TASK-10.12 real example #1: discharge volume. Samples = one point per day over the lookback
- * window, value = count of Encounter rows whose periodEnd falls on that day - a real, already-
- * computed fact (discharge IS an Encounter's periodEnd), never a second discharge-detection rule.
+ * PURE. One sample per whole UTC day from the first day with an event in the window to yesterday, zero-filled.
+ * events: [{ atMs, weight? }]. No event in the window gives no samples (a refusal downstream, never a zero forecast).
  */
-async function predictDischargeVolume(svc, { lookbackDays = 14, horizonDays = 1, now } = {}) {
-  const nowMs = Number.isFinite(now) ? now : Date.now();
-  const fromMs = nowMs - lookbackDays * 86400000;
-  let encounters;
-  try { encounters = await svc.list("Encounter", 2000); }
-  catch (e) { return { ok: false, metric: "discharge-volume", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
-
+function dailySamples(events, fromMs, nowMs) {
+  const endMs = Date.parse(dayOf(nowMs) + "T00:00:00.000Z");
   const byDay = new Map();
-  for (const e of (encounters || [])) {
-    if (!e || !e.periodEnd) continue;
-    const t = Date.parse(e.periodEnd);
-    if (!Number.isFinite(t) || t < fromMs || t > nowMs) continue;
-    const day = new Date(t).toISOString().slice(0, 10);
-    byDay.set(day, (byDay.get(day) || 0) + 1);
+  for (const e of events || []) {
+    if (!e || !Number.isFinite(e.atMs) || e.atMs < fromMs || e.atMs >= endMs) continue;
+    const w = Number.isFinite(Number(e.weight)) ? Number(e.weight) : 1;
+    byDay.set(dayOf(e.atMs), (byDay.get(dayOf(e.atMs)) || 0) + w);
   }
-  const samples = [...byDay.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([day, count]) => ({ atIso: `${day}T00:00:00.000Z`, value: count }));
-  return governedPrediction({ metric: "discharge-volume", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
+  if (!byDay.size) return [];
+  const out = [];
+  for (let d = Date.parse([...byDay.keys()].sort()[0] + "T00:00:00.000Z"); d < endMs; d += DAY_MS) {
+    const k = dayOf(d);
+    out.push({ atIso: `${k}T00:00:00.000Z`, value: byDay.get(k) || 0 });
+  }
+  return out;
 }
+const at = (iso) => { const t = Date.parse(iso || ""); return Number.isFinite(t) ? t : null; };
+
+/* Each wired metric: the record type it counts, what one event is, and the method in words. */
+const COUNTS = {
+  "discharge-volume": { type: "Encounter", lookbackDays: 14, method: "stays that ended each day (Encounter end time)",
+    events: (rows) => rows.map((e) => ({ atMs: at(e.periodEnd) })) },
+  "bed-demand": { type: "Encounter", lookbackDays: 14, method: "stays that started each day (Encounter start time)",
+    events: (rows) => rows.map((e) => ({ atMs: at(e.periodStart) })) },
+  /* The SAME start time, filtered to class ED: an ED arrival IS an Encounter of that class (migrate-ed.js). */
+  "ed-load": { type: "Encounter", lookbackDays: 14, method: "emergency department arrivals each day (ED Encounter start time)",
+    events: (rows) => rows.filter((e) => e.class === "ED").map((e) => ({ atMs: at(e.periodStart) })) },
+  /* The category field the LIS and radiology routes already read, never a second classification. */
+  "diagnostic-workload": { type: "ServiceRequest", lookbackDays: 14, method: "laboratory and imaging requests made each day",
+    events: (rows) => rows.filter((o) => o.category === "laboratory" || o.category === "imaging").map((o) => ({ atMs: at((o.meta && (o.meta.effectiveAt || o.meta.recordedAt)) || "") })) },
+  /* pharmacy-dispense.js's own issue timestamp, never an order date standing in for it. */
+  "pharmacy-workload": { type: "MedicationDispense", lookbackDays: 14, method: "medicines issued each day (dispense time)",
+    events: (rows) => rows.map((d) => ({ atMs: at(d.dispensedAt) })) },
+  /* Units asked for, from the transfusion episode's own "requested" ledger entry (wardsynq-transfusion.js), weighted by
+   * the units requested: demand, not what the blood bank happened to have on the shelf. */
+  "blood-demand": { type: "TransfusionEpisode", lookbackDays: 28, method: "blood units requested each day (transfusion request time, units requested)",
+    events: (rows) => rows.map((e) => { const r = (Array.isArray(e.ledger) ? e.ledger : []).find((x) => x && x.event === "requested"); return { atMs: at(r && r.at), weight: Number(e.unitsRequested) || 1 }; }) },
+};
+
+function countingPredictor(metric) {
+  const spec = COUNTS[metric];
+  return async function predict(svc, { lookbackDays, horizonDays = 1, now } = {}) {
+    const nowMs = Number.isFinite(now) ? now : Date.now();
+    const fromMs = nowMs - (lookbackDays || spec.lookbackDays) * DAY_MS;
+    let rows;
+    try { rows = (await svc.list(spec.type, 2000)).filter(Boolean); }
+    catch (e) { return { ok: false, metric, error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
+    return governedPrediction({ metric, samples: dailySamples(spec.events(rows), fromMs, nowMs), horizonDays, generatedAt: new Date(nowMs).toISOString(), method: `mean of ${spec.method}` });
+  };
+}
+const predictDischargeVolume = countingPredictor("discharge-volume");
+const predictBedDemand = countingPredictor("bed-demand");
+const predictEdLoad = countingPredictor("ed-load");
+const predictDiagnosticWorkload = countingPredictor("diagnostic-workload");
+const predictPharmacyWorkload = countingPredictor("pharmacy-workload");
+const predictBloodDemand = countingPredictor("blood-demand");
 
 /**
- * TASK-10.12 real example #2: critical-result backlog trend. Samples = one point per day, value =
- * count of CriticalResultLoop rows that were STILL OPEN at the end of that day - reusing the loop's
- * own `state`/`closedAt` fields, never re-deriving what "open" means for a loop.
+ * Critical-result backlog: one point per whole day, value = CriticalResultLoop rows STILL OPEN at the end of that day,
+ * reusing the loop's own reportedAt/closedAt, never re-deriving what "open" means. Starts at the first day a loop was
+ * reported, so a hospital with no loops gets a refusal, not a backlog of zero.
  */
 async function predictCriticalBacklog(svc, { lookbackDays = 7, horizonDays = 1, now } = {}) {
   const nowMs = Number.isFinite(now) ? now : Date.now();
-  const fromMs = nowMs - lookbackDays * 86400000;
+  const endMs = Date.parse(dayOf(nowMs) + "T00:00:00.000Z");
   let loops;
-  try { loops = await svc.list("CriticalResultLoop", 2000); }
+  try { loops = (await svc.list("CriticalResultLoop", 2000)).filter((l) => l && at(l.reportedAt) != null); }
   catch (e) { return { ok: false, metric: "critical-backlog", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
-
+  const firstMs = loops.reduce((m, l) => Math.min(m, at(l.reportedAt)), Infinity);
   const samples = [];
-  for (let d = fromMs; d <= nowMs; d += 86400000) {
-    const dayEnd = d + 86400000;
-    const openAtDayEnd = (loops || []).filter((l) => {
-      if (!l || !l.reportedAt) return false;
-      const opened = Date.parse(l.reportedAt);
-      if (!Number.isFinite(opened) || opened > dayEnd) return false;
-      const closed = l.closedAt ? Date.parse(l.closedAt) : null;
-      return closed == null || closed > dayEnd;
-    }).length;
-    samples.push({ atIso: new Date(d).toISOString(), value: openAtDayEnd });
+  if (Number.isFinite(firstMs)) {
+    for (let d = Date.parse(dayOf(Math.max(nowMs - lookbackDays * DAY_MS, firstMs)) + "T00:00:00.000Z"); d < endMs; d += DAY_MS) {
+      const dayEnd = d + DAY_MS;
+      const value = loops.filter((l) => at(l.reportedAt) < dayEnd && !(at(l.closedAt) != null && at(l.closedAt) < dayEnd)).length;
+      samples.push({ atIso: new Date(d).toISOString(), value });
+    }
   }
-  return governedPrediction({ metric: "critical-backlog", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
-}
-
-/**
- * TASK-10.12, wired 2026-09-10: bed demand. Samples = one point per day, value = count of Encounter
- * rows whose periodStart falls on that day - the admission's own real timestamp, the mirror of
- * predictDischargeVolume's periodEnd above.
- */
-async function predictBedDemand(svc, { lookbackDays = 14, horizonDays = 1, now } = {}) {
-  const nowMs = Number.isFinite(now) ? now : Date.now();
-  const fromMs = nowMs - lookbackDays * 86400000;
-  let encounters;
-  try { encounters = await svc.list("Encounter", 2000); }
-  catch (e) { return { ok: false, metric: "bed-demand", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
-
-  const byDay = new Map();
-  for (const e of (encounters || [])) {
-    if (!e || !e.periodStart) continue;
-    const t = Date.parse(e.periodStart);
-    if (!Number.isFinite(t) || t < fromMs || t > nowMs) continue;
-    const day = new Date(t).toISOString().slice(0, 10);
-    byDay.set(day, (byDay.get(day) || 0) + 1);
-  }
-  const samples = [...byDay.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([day, count]) => ({ atIso: `${day}T00:00:00.000Z`, value: count }));
-  return governedPrediction({ metric: "bed-demand", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
-}
-
-/**
- * TASK-10.12, wired 2026-09-10: ED load. The SAME periodStart the bed-demand predictor reads, once
- * more filtered to `class === "ED"` - an ED arrival IS an Encounter with that class, the same fact
- * migrate-ed.js's own admission already asserts; never a second detection rule for what counts.
- */
-async function predictEdLoad(svc, { lookbackDays = 14, horizonDays = 1, now } = {}) {
-  const nowMs = Number.isFinite(now) ? now : Date.now();
-  const fromMs = nowMs - lookbackDays * 86400000;
-  let encounters;
-  try { encounters = await svc.list("Encounter", 2000); }
-  catch (e) { return { ok: false, metric: "ed-load", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
-
-  const byDay = new Map();
-  for (const e of (encounters || [])) {
-    if (!e || e.class !== "ED" || !e.periodStart) continue;
-    const t = Date.parse(e.periodStart);
-    if (!Number.isFinite(t) || t < fromMs || t > nowMs) continue;
-    const day = new Date(t).toISOString().slice(0, 10);
-    byDay.set(day, (byDay.get(day) || 0) + 1);
-  }
-  const samples = [...byDay.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([day, count]) => ({ atIso: `${day}T00:00:00.000Z`, value: count }));
-  return governedPrediction({ metric: "ed-load", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
-}
-
-/**
- * TASK-10.12, wired 2026-09-10: diagnostic workload. Samples = one point per day, value = count of
- * ServiceRequest rows dated that day whose category is laboratory or imaging - the SAME category
- * field the LIS/radiology routes already read, never a second classification.
- */
-async function predictDiagnosticWorkload(svc, { lookbackDays = 14, horizonDays = 1, now } = {}) {
-  const nowMs = Number.isFinite(now) ? now : Date.now();
-  const fromMs = nowMs - lookbackDays * 86400000;
-  let orders;
-  try { orders = await svc.list("ServiceRequest", 2000); }
-  catch (e) { return { ok: false, metric: "diagnostic-workload", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
-
-  const byDay = new Map();
-  for (const o of (orders || [])) {
-    if (!o || (o.category !== "laboratory" && o.category !== "imaging")) continue;
-    const t = Date.parse((o.meta && o.meta.effectiveAt) || (o.meta && o.meta.recordedAt) || "");
-    if (!Number.isFinite(t) || t < fromMs || t > nowMs) continue;
-    const day = new Date(t).toISOString().slice(0, 10);
-    byDay.set(day, (byDay.get(day) || 0) + 1);
-  }
-  const samples = [...byDay.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([day, count]) => ({ atIso: `${day}T00:00:00.000Z`, value: count }));
-  return governedPrediction({ metric: "diagnostic-workload", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
-}
-
-/**
- * TASK-10.12, wired 2026-09-10: pharmacy workload. Samples = one point per day, value = count of
- * MedicationDispense rows whose OWN dispensedAt falls on that day - pharmacy-dispense.js's real
- * bedside-verified issue timestamp, never an order date standing in for it.
- */
-async function predictPharmacyWorkload(svc, { lookbackDays = 14, horizonDays = 1, now } = {}) {
-  const nowMs = Number.isFinite(now) ? now : Date.now();
-  const fromMs = nowMs - lookbackDays * 86400000;
-  let dispenses;
-  try { dispenses = await svc.list("MedicationDispense", 2000); }
-  catch (e) { return { ok: false, metric: "pharmacy-workload", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
-
-  const byDay = new Map();
-  for (const d of (dispenses || [])) {
-    if (!d || !d.dispensedAt) continue;
-    const t = Date.parse(d.dispensedAt);
-    if (!Number.isFinite(t) || t < fromMs || t > nowMs) continue;
-    const day = new Date(t).toISOString().slice(0, 10);
-    byDay.set(day, (byDay.get(day) || 0) + 1);
-  }
-  const samples = [...byDay.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([day, count]) => ({ atIso: `${day}T00:00:00.000Z`, value: count }));
-  return governedPrediction({ metric: "pharmacy-workload", samples, horizonDays, generatedAt: new Date(nowMs).toISOString() });
+  return governedPrediction({ metric: "critical-backlog", samples, horizonDays, generatedAt: new Date(nowMs).toISOString(), method: "mean of critical results still open at the end of each day" });
 }
 
 /** The honest inventory. Every key the plan names; only the ones with a real function are wired.
- *
- * FIVE OF SEVEN WIRED as of 2026-09-10, using the SAME primitive and the SAME technique as the
- * original two - a real per-day count from a field this codebase already writes, never a second
- * detection rule and never a fabricated number. blood-demand and ot-delays remain honestly unwired:
- * blood-demand because no blood-inventory data exists anywhere to predict FROM (digital-twin.js's
- * own NOT_BUILT.bloodBank names the same gap). ot-delays is NOT the same metric digital-twin.js's
- * new otUtilisation section computes - a DELAY is actual start minus SCHEDULED start, and nothing in
- * this codebase records a surgical case's actual incision time in a form this file can read
- * alongside its own booking; wiring it against booking volume instead would be answering a
- * question nobody asked under the name of the one that was. */
+ * ot-delays is NOT the booking volume digital-twin.js's otUtilisation computes: a DELAY is the actual start against the
+ * SCHEDULED start, and a surgical case stores its booking time as its start when no time was given, so a delay cannot
+ * be told from a case booked without a time. Wiring it against booking volume would answer a different question. */
 const PREDICTORS = Object.freeze({
   "discharge-volume": { wired: true, fn: predictDischargeVolume },
   "critical-backlog": { wired: true, fn: predictCriticalBacklog },
@@ -238,8 +176,8 @@ const PREDICTORS = Object.freeze({
   "ed-load": { wired: true, fn: predictEdLoad },
   "diagnostic-workload": { wired: true, fn: predictDiagnosticWorkload },
   "pharmacy-workload": { wired: true, fn: predictPharmacyWorkload },
-  "blood-demand": { wired: false, reason: "not built - no blood-inventory data source exists to predict from (see digital-twin.js NOT_BUILT.bloodBank)" },
-  "ot-delays": { wired: false, reason: "not built - this is SCHEDULED-vs-ACTUAL start, not booking volume (digital-twin.js's otUtilisation, added 2026-09-10, answers volume/utilisation, a different question); no field records a case's actual incision time for this file to compare against its booking" },
+  "blood-demand": { wired: true, fn: predictBloodDemand },
+  "ot-delays": { wired: false, reason: "not built - a theatre delay is the actual start against the scheduled start, and a surgical case does not record a scheduled start apart from its booking time" },
 });
 
 /**
@@ -276,4 +214,4 @@ async function predictMetric(request, env, ctx) {
   return { ...base, ...r };
 }
 
-export { MODEL_ID, governedPrediction, predictDischargeVolume, predictCriticalBacklog, predictBedDemand, predictEdLoad, predictDiagnosticWorkload, predictPharmacyWorkload, PREDICTORS, predictMetric };
+export { MODEL_ID, governedPrediction, dailySamples, predictDischargeVolume, predictCriticalBacklog, predictBedDemand, predictEdLoad, predictDiagnosticWorkload, predictPharmacyWorkload, predictBloodDemand, PREDICTORS, predictMetric };

@@ -597,6 +597,27 @@ function grantForCaps(caps) {
     };
   }
 
+  /* Discharge and the transfer centre, 2026-09-17. Each discharge step is written by the role whose act it is
+   * (discharge-milestones.js): the ward desk records the patient leaving and takes an outside hospital's call, pharmacy
+   * records its clearance, the billing desk the bill and the TPA's final approval. Each reads only the milestones it
+   * writes to; billing.view reads them and writes nothing. The tier is raised only by a real write. */
+  const DISCHARGE = [
+    [CAPS.QUEUE_ADD, ["DischargeMilestone", "TransferCentreRequest"], ["DischargeMilestone", "TransferCentreRequest"]],
+    [CAPS.ORDER_VERIFY, ["DischargeMilestone"], ["DischargeMilestone"]],
+    [CAPS.BILLING_CHARGE, ["DischargeMilestone"], ["DischargeMilestone"]],
+    [CAPS.BILLING_VIEW, ["DischargeMilestone"], []],
+  ];
+  for (const [cap, canRead, canWrite] of DISCHARGE) {
+    if (!has(cap) || !grant) continue;
+    grant = {
+      tier: canWrite.length ? TIER.EXECUTE : grant.tier,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...canWrite])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis,
+    };
+  }
+
   /* An unconstrained write scope cannot be partly constrained. A role that ends up with `write: null`
    * may write every type, and leaving a category allow-list attached to that would refuse the one
    * type it names while permitting every other - a rule that reads as tighter and behaves as

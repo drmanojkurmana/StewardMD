@@ -7558,3 +7558,27 @@ of compliance.js is untouched.
 - Screen: wardsynq/site/pages/quality.js "Infection control and quality", tabs by capability. The brief named
   pages/governance.js; a separate page was used because governance.js is the DPO's and the analytics page and the ward's
   own staff (ADR, stock-outs, returns) needed a door that does not open privacy administration.
+## 2026-09-17 Discharge milestones, inbound transfer centre, governed forecasts (branch discharge-capacity, audit P2 gaps 3, 6, 7)
+- Discharge relay: new record `DischargeMilestone`, one per stay (functions/_wardsynq/discharge-milestones.js). Steps and who
+  records each, chosen per step at the router (DISCHARGE_STEP_CAPS, the route entry is emr.treat for an unknown step):
+  advised emr.treat, pharmacy-cleared order.verify, bill-ready and TPA final requested/received billing.charge, left
+  queue.add. summary-signed is derived from the first signed version of the discharge summary; left falls back to the
+  stay's closing time and says so. A step out of order (before advised, after left, TPA answer before request) is refused
+  without a reason; changing a recorded time is a new version with a reason and the version read. Grants: a separate
+  DISCHARGE union in actor.js (queue.add, order.verify, billing.charge write; billing.view reads) rather than editing the
+  billing branch, to keep the P1 merge to one test line.
+- NABH KPI 24 computes from them: advised to left, less minutes the patient asked to stay, day care excluded, only stays
+  with recorded advice. GET /ward/discharge-progress (queue.view; record grant decides) shows in-progress stays and median
+  turnaround per step with "not recorded" counts. Screens: ward.js Discharge progress (dcboard), chart button Discharge
+  advised, command center links, shell tile.
+- Transfer centre: new record `TransferCentreRequest` (transfer-centre.js). A phone call makes NO patient record; accepting
+  needs the MRN of a patient registered through ordinary registration (duplicate checks live there) and a sex/age mismatch
+  with the call needs explicit confirmation. Accepting calls admission-request.js requestAdmission() with requestedAt = the
+  call time (retry-safe) and never touches a bed. Beds by state per ward and the waiting count are copied onto the request at
+  decision; time to decision is computed. Caps: record and withdraw queue.add, decide emr.treat, list emr.view.
+- Forecasts (twin-predict.js): the audit said 5 of 7 unwired; the code already had 6 of 8 wired. Wired blood-demand (units
+  requested per day from the transfusion ledger). ot-delays stays unwired: a case stores its booking time as its start when
+  none was given, so a delay cannot be told apart. Fixed the counting predictors: days with no event now count as zero (the
+  mean over busy days only overstated every rate), today (incomplete) is left out, and critical-backlog with no loops is a
+  refusal instead of a forecast of zero. Every envelope now carries `method` and `inputs` (the daily counts), shown on the
+  twin's Forecast card. Still a plain mean, no model, no clinical score.

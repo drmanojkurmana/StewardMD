@@ -154,6 +154,8 @@ import { importCodeSet, listCodeSets, searchCodes } from "../../_wardsynq/code-s
 import { importGrowthTables, listGrowthTables } from "../../_wardsynq/growth-tables.js";
 import { setExpectedDischarge, expectedDischargeHistory, hospitalToday } from "../../_wardsynq/expected-discharge.js";
 import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
+import { recordDischargeMilestone, dischargeProgress } from "../../_wardsynq/discharge-milestones.js";
+import { createInboundTransfer, decideInboundTransfer, cancelInboundTransfer, listInboundTransfers } from "../../_wardsynq/transfer-centre.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
@@ -1260,6 +1262,9 @@ export async function onRequest(context) {
       // TASK 4.13: the subs each new narrow capability is an ALTERNATIVE authority for - see the
       // ROI_SUBS/TRANSFUSION_SUBS fallback checks below, right after wAz is first computed.
       const ROI_SUBS = new Set(["roi-request", "roi-authorize", "roi-deny", "roi-cancel", "roi-fulfill", "roi", "roi-requests"]);
+      /* Who records which discharge step (discharge-milestones.js). A step not listed takes the route's own entry. */
+      const DISCHARGE_STEP_CAPS = Object.freeze({ advised: CAPS.EMR_TREAT, "pharmacy-cleared": CAPS.ORDER_VERIFY, "bill-ready": CAPS.BILLING_CHARGE,
+        "tpa-final-requested": CAPS.BILLING_CHARGE, "tpa-final-received": CAPS.BILLING_CHARGE, left: CAPS.QUEUE_ADD });
       const TRANSFUSION_SUBS = new Set(["transfusion-request", "transfusion-crossmatch", "transfusion-issue", "transfusion-bedside-check", "transfusion-start", "transfusion-observe", "transfusion-reaction", "transfusion-complete"]);
       /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
        * deliberate, and because they are the one shape that turns an authenticated account into a
@@ -1382,6 +1387,14 @@ export async function onRequest(context) {
         "growth-table-import": CAPS.STAFF_ADMIN, "growth-tables": CAPS.EMR_VIEW,
         "transfer-request": CAPS.EMR_TREAT, "transfer-respond": CAPS.QUEUE_ADD, "transfer-assign-bed": CAPS.QUEUE_ADD,
         "transfer-execute": CAPS.QUEUE_ADD, "transfer-cancel": CAPS.QUEUE_ADD, "transfer-requests": CAPS.EMR_VIEW,
+        /* Discharge milestones (discharge-milestones.js): each step is its own holder's act, chosen from the body below by
+         * DISCHARGE_STEP_CAPS; this entry is the strictest, for a step that names none. The board is readable by every
+         * desk that records a step (queue.view), and the record grant still decides what each role sees. */
+        "discharge-milestone": CAPS.EMR_TREAT, "discharge-progress": CAPS.QUEUE_VIEW,
+        /* The transfer centre (transfer-centre.js): taking an outside hospital's call and recording its withdrawal is the
+         * admission desk's act (queue.add); accepting or declining a patient is a consultant's (emr.treat); reading the
+         * calls, which carry a clinical summary, is a chart read (emr.view). */
+        "transfer-centre-request": CAPS.QUEUE_ADD, "transfer-centre-cancel": CAPS.QUEUE_ADD, "transfer-centre-decide": CAPS.EMR_TREAT, "transfer-centre": CAPS.EMR_VIEW,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
          * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
          * authority as vitals. Disposition closes the visit - the SAME capability discharge already
@@ -1929,6 +1942,7 @@ export async function onRequest(context) {
         // A Subscription is a webhook seen through FHIR: the webhooks' own gate.
         : (sub === "fhir" && parts[2] === "Subscription") ? capFor.webhooks
         : (sub === "discharge-summary" && method === "GET") ? CAPS.EMR_VIEW
+        : (sub === "discharge-milestone" && Object.prototype.hasOwnProperty.call(DISCHARGE_STEP_CAPS, String(body.step || ""))) ? DISCHARGE_STEP_CAPS[String(body.step)]
         /* Inspecting or cancelling a housekeeping task is the inspector's authority, never the cleaner's. */
         : (sub === "housekeeping-step" && (body.step === "inspect" || body.step === "cancel")) ? CAPS.HOUSEKEEPING_INSPECT
         : capFor[sub];
@@ -4741,6 +4755,38 @@ export async function onRequest(context) {
       }
       if (sub === "transfer-cancel" && method === "POST") {
         const r = await cancelTransfer(request, env, { ...deps, requestId: body.requestId, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "discharge-milestone" && method === "POST") {
+        const r = await recordDischargeMilestone(request, env, { ...deps, encounterId: body.encounterId, step: body.step, at: body.at, reason: body.reason, patientDelayMinutes: body.patientDelayMinutes, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "discharge-progress" && method === "GET") {
+        // The rows name their patients; those reads audit together, as patient-flow's do.
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const r = await dischargeProgress(request, env, { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository }, withPatients: true, days: url.searchParams.get("days") || "" });
+        try { await audits.flush(); }
+        catch { return json({ ok: false, error: "audit_write_failed", message: "Discharge progress was read but could not be recorded in the audit trail, so it is not shown. Try again." }, 502, request); }
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-centre-request" && method === "POST") {
+        const r = await createInboundTransfer(request, env, { ...deps, facility: body.facility, contactName: body.contactName, contactPhone: body.contactPhone, facilityRef: body.facilityRef, ageYears: body.ageYears, sex: body.sex, clinicalSummary: body.clinicalSummary, requestedService: body.requestedService, requestedUnit: body.requestedUnit, urgency: body.urgency, receivedAt: body.receivedAt, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-centre-decide" && method === "POST") {
+        const r = await decideInboundTransfer(request, env, { ...deps, requestId: body.requestId, decision: body.decision, reason: body.reason, mrn: body.mrn, identityConfirmed: body.identityConfirmed === true, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-centre-cancel" && method === "POST") {
+        const r = await cancelInboundTransfer(request, env, { ...deps, requestId: body.requestId, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "transfer-centre" && method === "GET") {
+        // Accepted calls name their patients; those reads audit together.
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const r = await listInboundTransfers(request, env, { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository }, days: url.searchParams.get("days") || "" });
+        try { await audits.flush(); }
+        catch { return json({ ok: false, error: "audit_write_failed", message: "Transfer centre requests were read but could not be recorded in the audit trail, so they are not shown. Try again." }, 502, request); }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfer-requests" && method === "GET") {
