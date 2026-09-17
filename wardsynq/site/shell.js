@@ -701,7 +701,8 @@
       tile({ go: "patients", icon: "person_search", title: T(null, "site.shell.home.tile.patients.title", "Patients"), sub: T(null, "site.shell.home.tile.patients.sub", "Find by MRN, register a new patient, open the chart"), need: "queue.view" }),
     ];
     if (native) peopleTiles.push(tile({ go: "portal-access", icon: "forum", title: T(null, "site.shell.home.tile.portalAccess.title", "Patient portal"), sub: T(null, "site.shell.home.tile.portalAccess.sub", "Patient messages, and record access for patients and family"), need: "emr.view" }));
-    if (native) peopleTiles.push(tile({ go: "maik", icon: "psychology", title: T(null, "site.shell.home.tile.maik.title", "MaiK clinical AI"), sub: T(null, "site.shell.home.tile.maik.sub", "Governed summaries and draft notes, always reviewed by you"), need: "emr.view" }));
+    if (native) peopleTiles.push(tile({ go: "inbasket", icon: "inbox", title: T(null, "site.shell.home.tile.inbasket.title", "In-basket"), sub: T(null, "site.shell.home.tile.inbasket.sub", "Staff messages about patients, and what is waiting on you"), need: "emr.view" }));
+    if (native) peopleTiles.push(tile({ go: "maik",icon: "psychology", title: T(null, "site.shell.home.tile.maik.title", "MaiK clinical AI"), sub: T(null, "site.shell.home.tile.maik.sub", "Governed summaries and draft notes, always reviewed by you"), need: "emr.view" }));
     var adminTiles = [
       tile({ go: "admin", icon: "admin_panel_settings", title: T(null, "site.shell.home.tile.admin.title", "Admin Center"), sub: T(null, "site.shell.home.tile.admin.sub", "Wards, beds, departments, rooms, staff and roles"), need: "staff.admin" }),
       tile({ go: "audit", icon: "policy", title: T(null, "site.shell.home.tile.audit.title", "Audit and security"), sub: T(null, "site.shell.home.tile.audit.sub", "Record changes, emergency access, source grants, service health"), need: "emr.view" }),

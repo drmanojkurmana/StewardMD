@@ -48,7 +48,10 @@
     return (r.warning ? '<div class="msg err">' + EN(c, c.esc(r.warning)) + "</div>" : "") + "<ul>" + r.messages.map(function (m) {
       return "<li><b>" + EN(c, c.esc(m.patientId)) + "</b>, " + c.esc(T(c, "site.portal.waiting", "waiting {hours} h", { hours: m.waitingHours == null ? "?" : m.waitingHours })) + (m.subject ? ": " + EN(c, c.esc(m.subject)) : "") +
         '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.portal.replyLabel", "Reply")) + '</span><textarea rows="2" id="pr-' + c.esc(m.messageId) + '"></textarea></label>' +
-        '<button class="btn" type="button" data-pa="reply" data-id="' + c.esc(m.messageId) + '">' + c.esc(T(c, "site.portal.sendReply", "Send reply")) + "</button></div></li>";
+        '<button class="btn" type="button" data-pa="reply" data-id="' + c.esc(m.messageId) + '">' + c.esc(T(c, "site.portal.sendReply", "Send reply")) + "</button>" +
+        /* P6: a MaiK draft of the reply, through the governed route. It fills the box; a person still presses Send. */
+        (c.can && c.can("emr.treat") ? '<button class="btn quiet" type="button" data-pa="draft" data-id="' + c.esc(m.messageId) + '" data-patient="' + c.esc(m.patientId) + '">' + c.esc(T(c, "site.portal.draftWithMaik", "Draft with MaiK")) + "</button>" : "") +
+        '</div><div id="pd-' + c.esc(m.messageId) + '" aria-live="polite"></div></li>';
     }).join("") + "</ul>";
   }
 
@@ -72,7 +75,7 @@
     var el = c.el, org = c.state.orgId, q = "?orgId=" + encodeURIComponent(org), treat = c.can("emr.treat");
     if (!c.can("emr.view")) { el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.portal.title", "Patient portal")) + '</h1></div><div class="msg note">' + TS(c, "site.portal.noAccess", "Your role cannot see patient messages.") + "</div>"; return; }
     var set = function (id, h) { var e = document.getElementById(id); if (e) e.innerHTML = h; };
-    var cur = { patientId: "" };
+    var cur = { patientId: "" }, drafts = {};
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.portal.title", "Patient portal")) + '</h1></div>' +
       '<div class="card"><h2>' + c.esc(T(c, "site.portal.messagesCard", "Patient messages")) + '</h2><div id="paWork">' + worklistHtml(c, null) + "</div></div>" +
       (treat ? '<div class="card"><h2>' + c.esc(T(c, "site.portal.giveAccessCard", "Give a patient or family member access")) + '</h2>' +
@@ -111,9 +114,45 @@
     el.onclick = function (ev) {
       var b = ev.target.closest && ev.target.closest("[data-pa]"); if (!b) return;
       var a = b.getAttribute("data-pa");
+      if (a === "draft") {
+        var dId = b.getAttribute("data-id");
+        b.disabled = true;
+        set("pd-" + dId, '<span class="spin"></span> ' + c.esc(T(c, "site.portal.drafting", "MaiK is drafting...")));
+        return c.api("/ward/maik-ask", { orgId: org, patientId: b.getAttribute("data-patient"), task: "draft-portal-reply", messageId: dId }).then(function (r) {
+          b.disabled = false;
+          if (!r || !r.ok) { set("pd-" + dId, '<div class="msg err">' + (WSQ._maikAskFailure ? WSQ._maikAskFailure(c, r) : c.esc(T(c, "site.portal.noAnswer", "no answer"))) + "</div>"); return; }
+          if (!r.interaction.output) { set("pd-" + dId, '<div class="msg err">' + TS(c, "site.portal.draftWithheld", "MaiK's draft was withheld by the safety screen. Write the reply yourself.") + "</div>"); return; }
+          drafts[dId] = { interactionId: r.interaction.id, text: r.interaction.output };
+          var box = document.getElementById("pr-" + dId); if (box) { box.value = r.interaction.output; box.rows = 6; }
+          set("pd-" + dId, '<div class="msg note">' + TS(c, "site.portal.draftLabel", "DRAFT by MaiK, not sent. Read and change it; nothing reaches the patient until you press Send reply.") +
+            ' <button class="btn quiet" type="button" data-pa="discard" data-id="' + c.esc(dId) + '">' + c.esc(T(c, "site.portal.discardDraft", "Discard draft")) + "</button></div>");
+        });
+      }
+      if (a === "discard") {
+        var xId = b.getAttribute("data-id"), dr = drafts[xId]; if (!dr) return;
+        var xWhy = ""; try { xWhy = prompt(T(c, "site.portal.discardReason", "Why is this draft not usable?")) || ""; } catch (e) {}
+        if (xWhy.trim().length < 5) return c.toast(T(c, "site.portal.discardReasonShort", "Say in a few words why the draft is not usable."));
+        return c.api("/ward/maik-review", { orgId: org, interactionId: dr.interactionId, decision: "rejected", reason: xWhy.trim() }).then(function (r) {
+          if (!r || !r.ok) return c.toast(T(c, "site.portal.reviewNotRecorded", "The decision on the draft could not be recorded."));
+          delete drafts[xId];
+          var xb = document.getElementById("pr-" + xId); if (xb) xb.value = "";
+          set("pd-" + xId, "");
+        });
+      }
       if (a === "reply") {
         var text = val("pr-" + b.getAttribute("data-id")); if (!text) return c.toast(T(c, "site.portal.writeReplyFirst", "Write a reply first."));
+        var used = drafts[b.getAttribute("data-id")];
         b.disabled = true;
+        /* A reply built on a MaiK draft records the clinician's decision first (accepted as drafted, or edited); if that
+         * cannot be recorded, the reply is not sent. */
+        if (used) {
+          var mId = b.getAttribute("data-id");
+          return c.api("/ward/maik-review", used.text === text ? { orgId: org, interactionId: used.interactionId, decision: "accepted" } : { orgId: org, interactionId: used.interactionId, decision: "edited", editedOutput: text }).then(function (rv) {
+            if (!rv || !rv.ok) { b.disabled = false; return c.toast(T(c, "site.portal.draftReviewFailed", "The decision on MaiK's draft could not be recorded, so the reply was not sent.")); }
+            delete drafts[mId];
+            return c.api("/ward/patient-reply", { orgId: org, messageId: mId, reply: text }).then(function (r) { b.disabled = false; c.toast(r && r.ok ? T(c, "site.portal.replySaved", "Reply saved to the patient's record.") : T(c, "site.portal.notSent", "Not sent: {why}", { why: (r && (r.detail || r.error)) || T(c, "site.portal.noAnswer", "no answer") })); if (r && r.ok) loadWork(); });
+          });
+        }
         return c.api("/ward/patient-reply", { orgId: org, messageId: b.getAttribute("data-id"), reply: text }).then(function (r) { b.disabled = false; c.toast(r && r.ok ? T(c, "site.portal.replySaved", "Reply saved to the patient's record.") : T(c, "site.portal.notSent", "Not sent: {why}", { why: (r && (r.detail || r.error)) || T(c, "site.portal.noAnswer", "no answer") })); if (r && r.ok) loadWork(); });
       }
       if (a === "find") {

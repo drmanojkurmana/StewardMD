@@ -14,8 +14,13 @@
   function TS(c, key, en, vars) { return c && c.tSafe ? c.tSafe(key, vars, en) : String(T(c, key, en, vars)).replace(/[&<>"']/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]; }); }
   function EN(c, html) { return c && c.en ? c.en(html) : html; }
 
-  var TASKS = ["summarise", "draft-note", "explain", "extract"];
+  /* P6 drafts: accepting one writes nothing. A discharge summary draft is copied into the discharge summary screen and
+   * signed there; an appeal letter draft is pasted into the claim's evidence pack by the billing desk. A patient portal
+   * reply is drafted from the message itself, on the Patient portal page. */
+  var TASKS = ["summarise", "draft-note", "explain", "extract", "draft-discharge-summary", "draft-appeal-letter"];
   function taskLabel(c, value) {
+    if (value === "draft-discharge-summary") return T(c, "site.maik.taskDraftDischarge", "Draft a discharge summary");
+    if (value === "draft-appeal-letter") return T(c, "site.maik.taskDraftAppeal", "Draft a letter for the latest denied or queried claim");
     if (value === "summarise") return T(c, "site.maik.taskSummarise", "Summarise this admission");
     if (value === "draft-note") return T(c, "site.maik.taskDraftNote", "Draft a progress note");
     if (value === "explain") return T(c, "site.maik.taskExplain", "Explain the current picture");
@@ -86,7 +91,8 @@
       var o = document.getElementById("mkOut"), i = S.i; if (!i) { o.hidden = true; return; }
       o.hidden = false;
       var rv = i.review && i.review.state ? i.review.state : "pending";
-      o.innerHTML = "<h2>" + esc(T(c, "site.maik.answerLabel", "Answer")) + " <span class=\"pill " + (i.output ? "ok" : "stop") + "\">" + esc(i.output ? T(c, "site.maik.released", "released") : T(c, "site.maik.withheld", "withheld")) + "</span> <span class=\"pill " + (rv === "accepted" ? "ok" : rv === "rejected" ? "stop" : "warn") + "\">" + esc(T(c, "site.maik.reviewPrefix", "review:")) + " " + esc(reviewWord(c, rv)) + "</span></h2>" +
+      o.innerHTML = (i.draftFor ? '<div class="msg note">' + TS(c, "site.maik.draftOnly", "DRAFT. Nothing has been sent, saved or signed, and accepting it writes nothing. Copy what you keep into the discharge summary or the claim's evidence pack, and check it there.") + "</div>" : "") +
+        "<h2>" + esc(T(c, "site.maik.answerLabel", "Answer")) + " <span class=\"pill " + (i.output ? "ok" : "stop") + "\">" + esc(i.output ? T(c, "site.maik.released", "released") : T(c, "site.maik.withheld", "withheld")) + "</span> <span class=\"pill " + (rv === "accepted" ? "ok" : rv === "rejected" ? "stop" : "warn") + "\">" + esc(T(c, "site.maik.reviewPrefix", "review:")) + " " + esc(reviewWord(c, rv)) + "</span></h2>" +
         (i.output ? '<div class="mono" style="font-family:inherit;font-size:14.5px">' + EN(c, esc(i.output)) + "</div>" :
           '<div class="msg err">' + TS(c, "site.maik.withheldLead", "MaiK withheld this answer") + (i.withheld && i.withheld.violations ? ": " + EN(c, esc(i.withheld.violations.join(", "))) : "") + TS(c, "site.maik.withheldTrail", ". Nothing was shown to you that the safety screen refused.") + "</div>") +
         '<dl class="kv" style="margin-top:12px"><dt>' + esc(T(c, "site.maik.interactionLabel", "Interaction")) + '</dt><dd class="mono">' + EN(c, esc(i.id)) + "</dd>" +
