@@ -290,3 +290,32 @@ test('readPatientDetails issues the detail reads in parallel after the activatio
   assert.deepEqual(secs.map((s) => s.resource), ['medications', 'labs', 'radiology'], 'sections keep their fixed order');
   assert.ok(secs.every((s) => s.rows.length === 1));
 });
+
+/* A REDIRECT FROM ONE CALL IS THAT CALL'S ANSWER. GHIS answers GetInitialAssessmentnew with a 302 to
+ * SSO for every session (the hand-built adapter notes it and reads labs, medicines and radiology
+ * regardless). The runtime took one redirect as the session's end and threw all three reads away:
+ * "answered its login page to /Doctor/Home/GetInitialAssessmentnew/" three times (owner's iPhone,
+ * 2026-09-17 16:55). One resource's redirect is now that resource's error; only when every read is
+ * refused is the session gone. */
+test('readPatientDetails: one resource answering the login page does not end the other reads', async () => {
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate({ expression }) {
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      if (/GetAssess/.test(req.url)) return { result: JSON.stringify({ status: 302, redirected: true, url: req.url, text: '' }) };
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[{"a":"1"}]' }) };
+    },
+  };
+  const data = (path) => ({ method: 'GET', path, role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } });
+  const view = (resourceHint, endpoints, extra) => Object.assign({ resourceHint, pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['a'], proof: { status: 'proven' }, endpoints }, extra || {});
+  const replay = [view('patient', [data('/GetAssess?id')], { singleRecord: true }), view('labs', [data('/GetLabs?id')]), view('medications', [data('/GetMeds?id')])];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  assert.equal(secs.find((s) => s.resource === 'labs').rows.length, 1);
+  assert.equal(secs.find((s) => s.resource === 'medications').rows.length, 1);
+  assert.match(secs.find((s) => s.resource === 'patient').error, /not signed in/);
+  // Every read refused: that is the session gone, and the caller must sign in again.
+  const gone = { ...plugin, async evaluate({ expression }) { const req = parseFetchExpression(expression); if (!req) return { result: '{}' }; return { result: JSON.stringify({ status: 302, redirected: true, url: req.url, text: '' }) }; } };
+  await assert.rejects(readPatientDetails({ plugin: gone, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 }), (e) => e.name === 'NotSignedIn');
+});

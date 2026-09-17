@@ -446,9 +446,9 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     try {
       await ar.executeProven({ plugin, origin: viewOrigin(activation.view, origin), view: { pathTemplate: activation.view.pathTemplate, resourceHint: 'patient', proof: { status: 'proven' }, endpoints: activation.endpoints }, patient });
     } catch (e) {
-      if (e && e.name === 'NotSignedIn') throw e;
-      /* An activation this patient's row cannot fill (UnscopedRequest) or the hospital refused: the reads
-       * still go out, and answer as they did before, rather than nothing at all. */
+      /* An activation this patient's row cannot fill (UnscopedRequest), or one the hospital refused or
+       * redirected: the reads still go out and answer for themselves. A session that is really gone
+       * refuses every read below, which is where it is said. */
     }
   }
   /* THE THREE READS RUN TOGETHER. The hand-built adapter's getOpdProfile issues labs, radiology and
@@ -465,7 +465,11 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     let replayed = null;
     const vo = viewOrigin(v, origin);
     try { replayed = await replayFirst({ plugin, origin: vo, view: afterActivation(v), patient, onRead }); } catch (e) {
-      if (e && e.name === 'NotSignedIn') throw e;
+      /* A REDIRECT FROM ONE CALL IS THAT CALL'S ANSWER. GHIS answers GetInitialAssessmentnew with a 302
+       * to SSO in every session (the hand-built adapter notes it and reads the rest regardless). One
+       * resource's login answer is recorded on that resource; the session is gone only when every
+       * read says so (checked after all of them). */
+      if (e && e.name === 'NotSignedIn') { out.push({ resource: r, error: String(e.message || e), login: true }); return out; }
       if (e && e.name === 'UnscopedRequest') { out.push({ resource: r, unreadable: 'not-scoped' }); return out; }
       out.push({ resource: r, error: String((e && e.message) || e) });
       return out;
@@ -487,7 +491,7 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
           /* A row whose chain key is missing is skipped, not guessed at and not fatal: the other rows
            * of this list are still read (adapter-runtime brokenChainField). */
           try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) {
-            if (e && e.name === 'NotSignedIn') throw e;
+            if (e && e.name === 'NotSignedIn') break;   // the detail chain stops; the list itself was read
             if (e && e.name === 'UnscopedRequest') { rowIndex++; continue; }
             got = null;
           }
@@ -521,6 +525,11 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
   }
   const results = await Promise.all(DETAIL_RESOURCES.map(readOne));
   for (const part of results) sections.push(...part);
+  const attempted = sections.filter((x) => x.rows || x.error);
+  if (attempted.length && attempted.every((x) => x.login)) {
+    const ar = await import('./adapter-runtime.mjs');
+    throw new ar.NotSignedIn(attempted[0].error);
+  }
   return sections;
 }
 
