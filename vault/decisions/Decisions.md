@@ -8211,3 +8211,12 @@ of compliance.js is untouched.
 - Unchanged: the Blackout read (a standing period, not a slot), listSchedule's diary read (it is asked for
   arbitrary past date ranges), and the 50,000 ceiling with throwOnTruncate - a diary that cannot be bounded
   still refuses rather than booking on a short read.
+
+## 2026-09-18 The recall registry reads the newest first (R6-5, same branch)
+- registry.js read the whole history of Condition, Observation and Patient oldest-first, so past READ_MAX the
+  records dropped were the NEWEST - the patients most likely to need recall, and the ones whose latest
+  qualifying result decides whether they are overdue. It now reads newest-first (service.listSince with no
+  stop test, which keeps the newest past the ceiling) and the truncation sentence says the oldest were not
+  read.
+- NOT period-scoped, deliberately: a registry asks for each patient's LAST qualifying record, so a period
+  read would turn "reviewed three years ago" into "never reviewed" - the most overdue state there is.
