@@ -865,6 +865,60 @@ class RecordService {
     return { rows: truncated ? got.rows.slice(0, cap) : got.rows, truncated };
   }
 
+  /* Pages the port's pageByType NEWEST first until `stopWhen` has answered true for every record of a
+   * whole page (the caller's window is behind us), the type runs out, or more than `max` ids are held.
+   * Rows come back OLDEST first, exactly as listAll hands them over, so a caller only changes which
+   * records it is given, never how it reads them. */
+  async _pageBack(resourceType, stopWhen, max) {
+    if (typeof this.repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+    const byId = new Map();
+    let before = null, pages = 0;
+    for (;;) {
+      const page = await this.repository.pageByType(this.tenantId, resourceType, { newest: true, limit: PAGE, ...(before == null ? {} : { beforeSeq: before }) });
+      pages += 1;
+      const records = page.records || [];
+      let anyInside = false;
+      for (const r of records) {
+        if (!r || r.id == null) continue;
+        if (!stopWhen(r)) anyInside = true;
+        if (!byId.has(r.id)) byId.set(r.id, r);   // newest first: the first copy seen is the latest one
+      }
+      if (page.next == null || byId.size > max || (records.length && !anyInside)) {
+        return { rows: [...byId.values()].reverse(), pages };
+      }
+      before = page.next;
+    }
+  }
+
+  /**
+   * THE PERIOD READ (R5-3): every record of one type that can still fall inside the caller's window,
+   * oldest first. `stopWhen(record)` answers true when a record is entirely behind the window; the read
+   * walks back from the newest record and stops at the first whole page of those. A month report then
+   * reads a month, not the hospital's whole history of the type.
+   *
+   * opts.max, opts.throwOnTruncate and the { rows, truncated } answer are listAll's, unchanged, and so
+   * are the grant check and the single audited list row.
+   *
+   * TWO HONEST LIMITS, both stated where a caller can see them:
+   *  - the stop is per PAGE, and a page is 1,000 records, so the window is only ever over-read;
+   *  - `stopWhen` must decide from the record itself. A record that can still belong to the window after
+   *    its last write - an open stay, a line still in place, a future booking, a master record other
+   *    records point at - would be walked past. read-window.js names those types and reads them whole.
+   */
+  async listSince(resourceType, opts) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const stopWhen = opts && typeof opts.stopWhen === "function" ? opts.stopWhen : () => false;
+    const cap = Math.max(1, Math.min(LIST_ALL_MAX, Number(opts && opts.max) || LIST_ALL_DEFAULT));
+    const got = await this._pageBack(resourceType, stopWhen, cap);
+    const truncated = got.rows.length > cap;
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, since: true, pages: got.pages, truncated }, resourceCounts: { [resourceType]: Math.min(got.rows.length, cap) } }));
+    if (truncated && opts && opts.throwOnTruncate) throw new ListCeilingError("too_many_records", resourceType, cap);
+    /* Past the ceiling the NEWEST are kept: a period read that must shorten must keep the end of the
+     * window it was asked for, the opposite of listAll's oldest-first truncation. */
+    return { rows: truncated ? got.rows.slice(got.rows.length - cap) : got.rows, truncated };
+  }
+
   /**
    * Every local Patient that already carries one of this patient's identifiers.
    *

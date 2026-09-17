@@ -25,12 +25,16 @@
  *                                                                           events through it instead of the newest N of
  *                                                                           everything; an implementation without it gets
  *                                                                           the old newest-N scan (see outbox.js).
- *   pageByType(tenantId, resourceType, {afterSeq, limit, statuses}) -> {records, next}   OPTIONAL, latest per id,
+ *   pageByType(tenantId, resourceType, {afterSeq, limit, statuses, newest, beforeSeq}) -> {records, next}
+ *                                                                           OPTIONAL, latest per id,
  *                                                                           OLDEST first, one page after the afterSeq
  *                                                                           cursor; statuses (optional) keeps only ids whose
  *                                                                           latest body status is one of them; next is the
  *                                                                           cursor for the following page, null on the last.
- *                                                                           service.js listByStatus/listAll page through it.
+ *                                                                           newest: true reverses it (newest first, beforeSeq
+ *                                                                           the cursor) so a period read can stop early.
+ *                                                                           service.js listByStatus/listAll/listSince page
+ *                                                                           through it.
  *   pageByIdPrefix(tenantId, resourceType, prefix, {limit, before}) -> {records, next}   OPTIONAL, latest per id
  *                                                                           whose id starts with prefix, newest first,
  *                                                                           one page; next is the cursor for the page after
@@ -280,16 +284,27 @@ class MemoryRepository {
    * The cursor is the seq of each id's LATEST version, so a record amended between two pages moves
    * forward and is met again on a later page (the reader keeps the last copy by id); it can never move
    * back behind the cursor, so paging to the end misses nothing.
+   *
+   * R5-3: `newest: true` reverses it - newest first, `beforeSeq` the cursor - so a period-scoped read
+   * can start at the newest record and stop when it has walked past its window (service.listSince).
+   * The amendment rule reverses with it: a record amended DURING a newest-first read moves forward,
+   * past a cursor already handed out, so that read can miss it. A month report is read in one pass of
+   * a few pages and that race is the price of not reading the whole type; a read that must not miss a
+   * concurrent amendment (a ledger, a count that must balance) stays on the oldest-first cursor.
    */
   async pageByType(tenantId, resourceType, opts) {
-    const max = rosterLimit(opts && opts.limit), after = Number(opts && opts.afterSeq) || 0;
+    const max = rosterLimit(opts && opts.limit), desc = !!(opts && opts.newest);
+    const after = Number(opts && opts.afterSeq) || 0;
+    const before = Number(opts && opts.beforeSeq) || Infinity;
     const want = opts && Array.isArray(opts.statuses) ? new Set(opts.statuses.filter((s) => typeof s === "string")) : null;
     const byId = new Map();
     for (const r of this._rows) {
       if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
       byId.set(r.id, r);
     }
-    const rows = [...byId.values()].filter((r) => r.seq > after && (!want || want.has(r.body && r.body.status))).sort((a, b) => a.seq - b.seq);
+    const rows = [...byId.values()]
+      .filter((r) => (desc ? r.seq < before : r.seq > after) && (!want || want.has(r.body && r.body.status)))
+      .sort((a, b) => (desc ? b.seq - a.seq : a.seq - b.seq));
     return { records: rows.slice(0, max).map((r) => clone(r.body)), next: rows.length > max ? rows[max - 1].seq : null };
   }
 
