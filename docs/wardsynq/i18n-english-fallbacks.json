@@ -3,9 +3,10 @@
  "generated": "2026-09-17",
  "languages": {
   "es": {
-   "count": 119,
+   "count": 122,
    "keys": [
     "fb.no",
+    "intake.no",
     "ward.rcm-ageing-none",
     "ward.rcm-desk-note",
     "ward.surg-return-no",
@@ -107,14 +108,11 @@
     "site.hr.cred.noExpiry",
     "site.hr.trn.noDept",
     "site.hr.no",
-    "site.hr.self.noShifts",
     "site.blood.additive.none",
     "site.blood.lookback.noReactions",
     "site.blood.lookback.noRecall",
     "site.blood.retentionNote",
-    "site.gov.ret.basis.none",
     "site.gov.rn.none",
-    "site.admin.tariff.nonHealthConfirm",
     "site.admin.gst.roomValuationWhy",
     "site.qual.no",
     "site.qual.noResponse",
@@ -123,15 +121,21 @@
     "site.staff.missingDependency",
     "site.staff.noNormFor",
     "site.staff.noTool",
-    "site.staff.no"
+    "site.staff.no",
+    "site.admin.fml.r.yesNo",
+    "site.admin.fml.yesNoNote",
+    "site.dialysis.urea.none",
+    "site.dialysis.noDialyzer",
+    "site.dialysis.noResponse"
    ]
   },
   "te": {
-   "count": 98,
+   "count": 105,
    "keys": [
     "comm.whatsapp",
     "comm.off",
     "privacy.kind.erasure",
+    "intake.notVerified",
     "ward.rcm-desk-note",
     "ward.2d-echocardiography",
     "ward.addressed-to-shown-on-the-chart",
@@ -148,7 +152,6 @@
     "ward.note-type-progress",
     "ward.note-type-operative",
     "ward.note-type-admission",
-    "ward.certainty-provisional",
     "ward.transfer-to-no-bed",
     "ward.reg-mr-issued-by-emr",
     "ward.reg-leave-blank-if-not-issued",
@@ -160,7 +163,6 @@
     "ward.lab-qc-lj",
     "ward.ack-value",
     "ward.invoice-number",
-    "ward.pkg-pack-fields-note",
     "ward.gst-room-why",
     "ward.line-class-central",
     "ward.line-class-urinary",
@@ -186,7 +188,6 @@
     "site.gov.nabh.format",
     "site.gov.nabh.counts",
     "site.gov.nabh.k6notech",
-    "site.gov.nabh.k6unreviewed",
     "site.gov.nabh.k1noArrival",
     "site.gov.nabh.k1noAssessment",
     "site.gov.dhs.na",
@@ -194,7 +195,6 @@
     "site.stores.state.closed",
     "site.stores.closeReason",
     "site.stores.pickDates",
-    "site.stores.sc.method",
     "site.support.miss.policeNoc",
     "site.support.docNoc",
     "site.engage.ready.wa",
@@ -226,11 +226,21 @@
     "site.portal.discardReasonShort",
     "site.admin.import.f.ageYears",
     "site.admin.import.intro",
-    "site.admin.import.nothing"
+    "site.admin.import.nothing",
+    "site.stores.sc.methodStores",
+    "site.stores.sc.onOrderNoStore",
+    "site.admin.fml.nothing",
+    "site.admin.fml.savedProblems",
+    "site.admin.fml.requireReason",
+    "site.admin.fml.replace",
+    "site.dialysis.access.avFistula",
+    "site.dialysis.access.avGraft",
+    "site.dialysis.urrNot",
+    "site.dialysis.anticoagNote"
    ]
   },
   "hi": {
-   "count": 46,
+   "count": 58,
    "keys": [
     "comm.whatsapp",
     "privacy.kind.nomination",
@@ -277,11 +287,23 @@
     "site.staff.vIncomplete",
     "site.staff.kNeedlestick",
     "site.staff.wardLabel",
-    "site.shell.home.tile.inbasket.title"
+    "site.shell.home.tile.inbasket.title",
+    "site.admin.fml.restrictedShort",
+    "site.admin.fml.controlledShort",
+    "site.admin.fml.retiredShort",
+    "site.dialysis.preWeight",
+    "site.dialysis.postWeight",
+    "site.dialysis.preSys",
+    "site.dialysis.preDia",
+    "site.dialysis.postSys",
+    "site.dialysis.postDia",
+    "site.dialysis.targetUf",
+    "site.dialysis.achievedUf",
+    "site.dialysis.dialyzer"
    ]
   },
   "bn": {
-   "count": 200,
+   "count": 212,
    "keys": [
     "comm.whatsapp",
     "privacy.none",
@@ -410,6 +432,7 @@
     "ward.line-class-central",
     "ward.line-class-urinary",
     "ward.line-class-ventilator",
+    "ward.intake-none",
     "site.shell.home.tile.claimsdesk.title",
     "site.shell.download.unreachable",
     "site.shell.loadOrg.notMember",
@@ -482,11 +505,22 @@
     "site.blood.plateletCount",
     "site.admin.payerContract.stateCode",
     "site.qual.dept.laboratory",
-    "site.inbasket.patientsFailed"
+    "site.inbasket.patientsFailed",
+    "site.admin.fml.f.restricted",
+    "site.admin.fml.r.tooMany",
+    "site.admin.fml.r.badValue",
+    "site.admin.fml.restrictedShort",
+    "site.admin.fml.controlledShort",
+    "site.admin.fml.retiredShort",
+    "site.shell.home.tile.dialysis.title",
+    "site.dialysis.access.avFistula",
+    "site.dialysis.access.avGraft",
+    "site.dialysis.patientFailed",
+    "site.dialysis.noResponse"
    ]
   },
   "kn": {
-   "count": 35,
+   "count": 39,
    "keys": [
     "comm.whatsapp",
     "privacy.kind.nomination",
@@ -509,8 +543,6 @@
     "site.legal.intro",
     "site.registers.part.houseNo",
     "site.gov.nabh.format",
-    "site.gov.nabh.k6notech",
-    "site.gov.nabh.k6unreviewed",
     "site.gov.nabh.k1noAssessment",
     "site.patients.priv.name",
     "site.stores.state.closed",
@@ -522,11 +554,17 @@
     "site.blood.crit.wholeBloodAfterIncomplete",
     "site.gov.law.dayNote",
     "site.qual.hai.eligibilityNote",
-    "site.admin.import.dryRun"
+    "site.admin.fml.title",
+    "site.admin.fml.restrictedShort",
+    "site.admin.fml.controlledShort",
+    "site.dialysis.access.avFistula",
+    "site.dialysis.access.avGraft",
+    "site.dialysis.access.tunnelled",
+    "site.dialysis.doctor"
    ]
   },
   "ta": {
-   "count": 95,
+   "count": 100,
    "keys": [
     "comm.whatsapp",
     "privacy.kind.erasure",
@@ -609,9 +647,6 @@
     "site.blood.standardNote",
     "site.blood.crit.apheresisAfterIncomplete",
     "site.blood.crit.wholeBloodAfterIncomplete",
-    "site.admin.tariff.icuIcu",
-    "site.admin.tariff.icuCcu",
-    "site.admin.tariff.icuIccu",
     "site.qual.tab.abg",
     "site.qual.kind.handover",
     "site.qual.kind.prescription",
@@ -621,22 +656,23 @@
     "site.qual.device.urinary",
     "site.qual.device.ventilator",
     "site.qual.hai.line",
-    "site.qual.sap.help",
-    "site.admin.import.f.ageYears"
+    "site.admin.import.f.ageYears",
+    "site.stores.sc.onOrderNoStore",
+    "site.admin.fml.title",
+    "site.admin.fml.requireReason",
+    "site.admin.fml.controlledShort",
+    "site.admin.fml.replace",
+    "site.dialysis.access.avFistula",
+    "site.dialysis.access.avGraft",
+    "site.dialysis.access.tunnelled",
+    "site.dialysis.access.nonTunnelled"
    ]
   },
   "ml": {
-   "count": 72,
+   "count": 81,
    "keys": [
     "comm.whatsapp",
-    "ward.rcm-open",
-    "ward.rcm-payer",
-    "ward.rcm-self-pay",
-    "ward.rcm-denials",
     "ward.rcm-blocked-title",
-    "ward.rcm-approved",
-    "ward.rcm-refused",
-    "ward.tu-booked",
     "ward.2d-echocardiography",
     "ward.code-blue",
     "ward.code-eclampsia",
@@ -681,7 +717,6 @@
     "site.registers.part.houseNo",
     "site.gov.nabh.format",
     "site.gov.dhs.na",
-    "site.support.docNoc",
     "site.engage.ready.wa",
     "site.engage.ready.waLabel",
     "site.blood.comp.granulocytes",
@@ -699,11 +734,28 @@
     "site.staff.colShift",
     "site.staff.kNeedlestick",
     "site.shell.home.tile.inbasket.title",
-    "site.inbasket.title"
+    "site.inbasket.title",
+    "site.shell.home.tile.dialysis.title",
+    "site.dialysis.access.avFistula",
+    "site.dialysis.access.avGraft",
+    "site.dialysis.access.tunnelled",
+    "site.dialysis.access.nonTunnelled",
+    "site.dialysis.urrPre",
+    "site.dialysis.urrPost",
+    "site.dialysis.urrWhy.zero",
+    "site.dialysis.access",
+    "site.dialysis.preWeight",
+    "site.dialysis.postWeight",
+    "site.dialysis.preSys",
+    "site.dialysis.preDia",
+    "site.dialysis.postSys",
+    "site.dialysis.postDia",
+    "site.dialysis.dialyzer",
+    "site.dialysis.preUrea"
    ]
   },
   "mr": {
-   "count": 92,
+   "count": 95,
    "keys": [
     "comm.whatsapp",
     "privacy.kind.nomination",
@@ -715,8 +767,6 @@
     "ward.admin",
     "ward.amount-approved-leave-blank-if-none",
     "ward.amount-denied-leave-blank-if-none",
-    "ward.base-excess",
-    "ward.breakpoints",
     "ward.choose-the-department-then-a-free",
     "ward.claims",
     "ward.code-blue",
@@ -796,7 +846,12 @@
     "site.admin.tariff.icuIccu",
     "site.qual.drill.variationsLabel",
     "site.inbasket.unitField",
-    "site.admin.import.f.ageYears"
+    "site.admin.import.f.ageYears",
+    "site.stores.sc.onOrderNoStore",
+    "site.admin.fml.requireReason",
+    "site.admin.fml.replace",
+    "site.dialysis.access.avFistula",
+    "site.dialysis.access.avGraft"
    ]
   }
  }
