@@ -458,7 +458,7 @@
          * this app) and once by the approved adapter. Returns counts and names, never a value. Needs an
          * adapter session open (the Connect Agent hospital's ward list loaded) and a GHIS sign-in. */
         GHIS.goldAudit = function (opts) {
-          if (!_adapterCtx) return Promise.reject(new Error('open the Connect Agent hospital ward list first'));
+          if (!_adapterCtx || !_adapterCtx.replay) return Promise.reject(new Error(_adapterCtx ? 'the Connect Agent ward list is still loading; wait for it, then run the audit' : 'open the Connect Agent hospital ward list first'));
           var viaGold = function (path) {
             var t = getToken();
             if (!t) return Promise.reject(new Error('sign in to GHIS in Ward Sync first'));
@@ -590,12 +590,21 @@
                  * detection has nothing to see. Two quiet polls without a password field, after the
                  * page has had time to load, count as signed in; the doctor never taps Done again
                  * inside the thirty-minute window. */
-                var quiet = 0, polls = 0;
+                var quiet = 0, polls = 0, lastState = '';
                 function look() {
                   if (!ctx.listeners.length) return;   // already resolved or rejected
                   plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':(document.body&&document.body.innerText.length>200?'ok':'blank'))+' '+location.host})()" })
-                    .then(function (r) { var v = String((r && r.result) || '').split(' '); if (v[0] === 'ok') quiet += (v[1] && v[1] !== host) ? 2 : 1; else quiet = 0; }, function () { quiet = 0; })
-                    .then(function () { polls++; if (quiet >= 2 && ctx.listeners.length) { off(); resolve(); return; } if (polls < 12 && ctx.listeners.length) setTimeout(look, 700); });
+                    .then(function (r) { var v = String((r && r.result) || '').split(' '); lastState = v[0] || ''; if (v[0] === 'ok') quiet += (v[1] && v[1] !== host) ? 2 : 1; else quiet = 0; }, function () { lastState = 'error'; quiet = 0; })
+                    .then(function () {
+                      polls++;
+                      if (quiet >= 2 && ctx.listeners.length) { off(); resolve(); return; }
+                      if (polls < 12 && ctx.listeners.length) { setTimeout(look, 700); return; }
+                      /* OUT OF POLLS IS AN ANSWER, NOT A WAIT. A login form on screen is the doctor's turn
+                       * (the loggedIn listener stays armed). Anything else after twelve polls means the
+                       * hospital page never loaded, and Ward Sync used to sit on "Signing in to ..." for
+                       * ever with nothing to tap (owner, 2026-09-17). Say so, so the doctor can retry. */
+                      if (lastState !== 'login' && ctx.listeners.length) { off(); reject(new Error('Could not reach ' + host + ' in the in-app browser (the page did not load). Check the connection and try again.')); }
+                    });
                 }
                 setTimeout(look, 1200);
               })
