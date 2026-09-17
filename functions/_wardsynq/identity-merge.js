@@ -34,8 +34,10 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "PatientLink";
-// ponytail: identityOf scans every link; index links on mergedId too if a tenant approaches this.
-const LINK_SCAN_CAP = 500;
+/* R4-2: every link is read (listAll, paged; the old 500 were the OLDEST, so a newer merge was not seen). Past
+ * LINK_SCAN_CAP the read throws and the merge or identity answer is refused, never a guess.
+ * ponytail: identityOf scans every link; index links on mergedId too if a tenant approaches this. */
+const LINK_SCAN_CAP = 50000;
 
 /** What a link asserts. `merged` means "these are one person"; `unmerged` retracts that. */
 const STATES = Object.freeze(["merged", "unmerged"]);
@@ -162,7 +164,7 @@ async function mergePatients(request, env, ctx) {
   let allLinks;
   /* A failed read is NOT "no chain". This used to swallow the error into an empty list, so the one
    * check that stops a record being merged twice passed whenever it could not look. */
-  try { allLinks = await svc.list(TYPE, LINK_SCAN_CAP); }
+  try { allLinks = (await svc.listAll(TYPE, { max: LINK_SCAN_CAP, throwOnTruncate: true })).rows; }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   const alreadyGone = (allLinks || []).find((l) => l && l.state === "merged" && l.mergedId === mergedId && l.survivorId !== survivorId);
   if (alreadyGone) {
@@ -253,16 +255,12 @@ async function identityOf(request, env, ctx) {
   try {
     // Links are indexed on the SURVIVOR, so a merged record's own byPatient finds nothing; the
     // full list is what answers "was this one absorbed".
-    links = await svc.list(TYPE, LINK_SCAN_CAP);
+    links = (await svc.listAll(TYPE, { max: LINK_SCAN_CAP, throwOnTruncate: true })).rows;
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), identity: null }; }
 
   const identity = resolveIdentity(patientId, links);
-  /* The list is capped. A full page means links past the cap were never looked at, so "not merged"
-   * would be a guess dressed as a finding - the one answer a records officer must not act on. */
-  const partial = (links || []).length >= LINK_SCAN_CAP;
   return {
     ...base, ok: true,
-    ...(partial ? { partial: true, partialWarning: `Only the first ${LINK_SCAN_CAP} merge records were checked. This history may be incomplete.` } : {}),
     identity: {
       ...identity,
       links: (links || []).filter((l) => l && (l.survivorId === patientId || l.mergedId === patientId)).map(summary),

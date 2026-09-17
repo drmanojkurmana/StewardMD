@@ -357,7 +357,8 @@ async function dispatchOutbound(request, env, ctx) {
   if (error) return { ...base, ...error, attempted: 0 };
 
   let rows;
-  try { rows = await svc.list(DELIVERY_TYPE, 500); }
+  // R4-2: every delivery (listAll, paged; the old 500 were the OLDEST, so newer deliveries were never sent). Refused past 50,000.
+  try { rows = (await svc.listAll(DELIVERY_TYPE, { max: 50000, throwOnTruncate: true })).rows; }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), attempted: 0 }; }
 
   const nowIso = str(ctx.now) || new Date().toISOString();
@@ -445,7 +446,7 @@ async function listDeliveries(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, deliveries: [] };
   let rows;
-  try { rows = await svc.list(DELIVERY_TYPE, 500); }
+  try { rows = (await svc.listAll(DELIVERY_TYPE, { max: 50000, throwOnTruncate: true })).rows; } // R4-2: every delivery (was the oldest 500)
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), deliveries: [] }; }
   const wanted = str(ctx.state);
   const all = (rows || []).filter(Boolean).filter((d) => (wanted ? d.state === wanted : true))

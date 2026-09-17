@@ -1018,7 +1018,7 @@ async function bedBoard(request, env, ctx) {
    * back exactly as before - a missing name must never turn a readable board into an error. */
   let nameById = new Map();
   try {
-    const roster = await svc.list("Patient", 400);
+    const roster = await svc.list("Patient", 1000, { newest: true }); // R4-2: the newest (was the oldest 400)
     nameById = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
   } catch (e) { /* the beds are still worth showing; the tiles simply carry no name */ }
 

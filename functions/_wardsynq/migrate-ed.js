@@ -116,7 +116,9 @@ async function edArrival(request, env, ctx) {
  *  then open the encounter under the same mrn. */
 async function arriveUnknown(svc, resolved, base, arrival, arrivedAt, ctx) {
   let candidates;
-  try { candidates = await svc.list("Patient", 1000); }
+  // R4-2: the NEWEST 1,000 registrations hold today's provisional MRNs (the old read was the oldest 1,000). The count only
+  // picks where to start; a taken sequence is still refused by the write and the next is tried.
+  try { candidates = await svc.list("Patient", 1000, { newest: true }); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
   let start = 1;
