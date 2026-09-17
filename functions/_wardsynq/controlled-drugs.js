@@ -394,7 +394,8 @@ function registerBook(input) {
       const s = receivedAt.get(k) || new Set(); s.add(str(m.location) || null); receivedAt.set(k, s);
     }
   }
-  const SIGN = { receipt: 1, "transfer-in": 1, adjustment: 1, wastage: -1, "transfer-out": -1 };
+  /* A return to the supplier (stock.js returnToSupplier) leaves the book like a transfer out, witnessed like a wastage. */
+  const SIGN = { receipt: 1, "transfer-in": 1, adjustment: 1, wastage: -1, "transfer-out": -1, "supplier-return": -1 };
   for (const m of movements) {
     const q = quantityOf(m.quantity);
     if (!q || SIGN[m.kind] === undefined) continue;
@@ -402,7 +403,8 @@ function registerBook(input) {
       delta: q.value * SIGN[m.kind], quantity: q.value, ref: { movementId: m.id }, by: m.by || null, witnessedBy: m.witnessedBy || null,
       reason: m.reason || null, batch: m.batch || null, receivedFrom: m.receivedFrom || null, documentNo: m.documentNo || null,
       ...(m.destruction ? { destruction: m.destruction } : {}),
-      needsWitness: policyWitness && (m.kind === "wastage" || m.kind === "adjustment") });
+      ...(m.kind === "supplier-return" ? { supplier: m.supplier || null, controllerApprovalRef: m.controllerApprovalRef || null } : {}),
+      needsWitness: policyWitness && (m.kind === "wastage" || m.kind === "adjustment" || m.kind === "supplier-return") });
   }
   for (const d of dispenses) {
     const q = quantityOf(d.quantity);
@@ -451,11 +453,13 @@ function registerBook(input) {
     if (e.kind === "issue" && e.form3eSerial === null && (typeof i.regimeFor !== "function" || FORM3E_REGIMES.includes(i.regimeFor(e.display, e.code)))) it.problems.push({ kind: "no_form3e", at: e.at, ref: e.ref, patientId: e.patientId });
     if (it.balance < 0) it.problems.push({ kind: "negative_balance", at: e.at, balance: it.balance, ref: e.ref });
     const day = dayOf(e.at);
-    const row = it.days.get(day) || { date: day, opening: it.balance - e.delta, received: 0, receivedFrom: [], documents: [], dispensed: 0, toPatients: [], wasted: 0, adjusted: 0, returned: 0, closing: 0 };
+    const row = it.days.get(day) || { date: day, opening: it.balance - e.delta, received: 0, receivedFrom: [], documents: [], dispensed: 0, toPatients: [], wasted: 0, adjusted: 0, returned: 0, returnedToSupplier: 0, closing: 0 };
     if (e.kind === "receipt" || e.kind === "transfer-in") { row.received += e.quantity; if (e.receivedFrom) row.receivedFrom.push(e.receivedFrom); if (e.documentNo) row.documents.push(e.documentNo); }
     else if (e.kind === "issue") { row.dispensed += e.quantity; row.toPatients.push({ patientId: e.patientId, quantity: e.quantity, form3e: e.form3eSerial || null }); }
     else if (e.kind === "return") row.returned += e.quantity;
-    else if (e.kind === "wastage" || e.kind === "transfer-out") row.wasted += e.quantity;
+    /* Every disbursement other than to a patient is in `wasted`, as the transfer out always was, so opening + received -
+     * dispensed + returned - wasted still closes; the part that went back to a supplier is also named on its own. */
+    else if (e.kind === "wastage" || e.kind === "transfer-out" || e.kind === "supplier-return") { row.wasted += e.quantity; if (e.kind === "supplier-return") row.returnedToSupplier += e.quantity; }
     else if (e.kind === "adjustment") row.adjusted += e.delta;
     row.closing = it.balance;
     it.days.set(day, row);
