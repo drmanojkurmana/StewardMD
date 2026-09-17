@@ -9,7 +9,7 @@ import { existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
-import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, mergeEndpointDetails, hintFromHeaders, awaitDetailRequest, exploreDetailOf, LIST_CONTROL, FIND_CONTROLS_SRC, CLINICAL_KEYWORDS_SRC, SKIP_SRC, CONTROL_QUERY, withDocs } from '../../connect-agent/phone/deep-crawl.mjs';
+import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, mergeEndpointDetails, hintFromHeaders, awaitDetailRequest, exploreDetailOf, LIST_CONTROL, FIND_CONTROLS_SRC, CLINICAL_KEYWORDS_SRC, SKIP_SRC, CONTROL_QUERY, withDocs, searchPatientOnScreen } from '../../connect-agent/phone/deep-crawl.mjs';
 import { inferHtmlOperations } from '../../connect-agent/manifest/infer-html.mjs';
 import { extractRecords, isValidSelector } from '../../connect-agent/manifest/html.mjs';
 
@@ -991,3 +991,47 @@ test('deepCrawlClinical: pressing Search never fills or clears a filter input (b
       await close();
     }
   });
+
+/* SEARCH FOR THE PATIENT THE WAY THE DOCTOR DOES (real DOM). GHIS "Lab reports" is a search form: a
+ * patient box with an autocomplete, a hidden id the suggestion fills, and a search link with an icon
+ * for a label. The owner typed a patient id there to build the hand-made adapter; the agent only ever
+ * saw the empty form and proved the print shell behind it as labs (2026-09-17). */
+const LAB_SEARCH_HTML = `<!doctype html><html><body>
+<select id="dselect"><option value="PatientID">PatientID</option></select>
+<input id="txtAuto" type="text" placeholder="">
+<input type="hidden" id="hfAutoID"><input type="hidden" id="hfsearchpatientId"><input type="hidden" name="__RequestVerificationToken" value="tok">
+<a href="#" id="btnGo" onclick="SearchPatientId(); return false;"><i class="fa fa-search"></i></a>
+<div id="res"></div>
+<script>
+  document.getElementById('txtAuto').addEventListener('input', function () {
+    var ul = document.getElementById('sug') || document.body.appendChild(Object.assign(document.createElement('ul'), { id: 'sug' }));
+    ul.innerHTML = '<li class="ui-menu-item">' + this.value + ' => TEST ALPHA</li>';
+    ul.firstChild.onclick = function () { document.getElementById('hfAutoID').value = this.textContent.split('=>')[0].trim(); ul.remove(); };
+  });
+  function SearchPatientId() {
+    var id = document.getElementById('hfAutoID').value; if (!id) return;
+    window.__searched = id;
+    document.getElementById('res').innerHTML = '<table id="tblSearch"><thead><tr><th>Test</th><th>Date</th></tr></thead><tbody><tr onclick="openRow(1)"><td>Complete blood count</td><td>17-Sep-2026</td></tr></tbody></table>';
+  }
+</script></body></html>`;
+
+test('searchPatientOnScreen: types the id, takes the suggestion, presses the icon-labelled search, and the list appears (real DOM)', { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+  await withChrome(async (evaluate) => {
+    const client = { evaluate, wait: ({ ms }) => sleep(ms), currentUrl: async () => ({ url: 'https://h/Doctor/Home' }) };
+    const out = await searchPatientOnScreen({ client, patientId: 'MR900001', waitMs: 300 });
+    assert.ok(out, 'the screen has a patient box');
+    assert.equal(out.typed, 'txtAuto');
+    assert.equal(out.picked, 'picked');
+    assert.match(out.pressed, /^pressed/);
+    assert.equal((await evaluate({ expression: 'window.__searched' })).result, 'MR900001', 'the form searched for this patient');
+    assert.equal((await evaluate({ expression: "document.querySelectorAll('#tblSearch tbody tr').length" })).result, 1, 'the result list is on screen');
+    assert.equal((await evaluate({ expression: "document.getElementById('txtAuto').value" })).result, 'MR900001', 'nothing else was typed or cleared');
+  }, LAB_SEARCH_HTML);
+});
+
+test('searchPatientOnScreen: a screen without a patient box is left alone', { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+  await withChrome(async (evaluate) => {
+    const client = { evaluate, wait: ({ ms }) => sleep(ms) };
+    assert.equal(await searchPatientOnScreen({ client, patientId: 'MR900001', waitMs: 100 }), null);
+  }, '<!doctype html><html><body><table id="t"><tr><th>Drug</th></tr><tr><td>X</td></tr></table></body></html>');
+});

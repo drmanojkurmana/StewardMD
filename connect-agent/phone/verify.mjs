@@ -11,6 +11,7 @@
 // PHI never leaves the phone: the brain sees column names, row counts and the response kind only.
 
 import { readWorklist, readView, fillPath } from './runtime.mjs';
+import { searchPatientOnScreen, exploreDetailOf } from './deep-crawl.mjs';
 import { executeView, usableRows } from './adapter-runtime.mjs';
 import { scrubForBrain, redactEndpoints, mergeEndpointDetails } from './deep-crawl.mjs';
 
@@ -114,6 +115,25 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
       try { again = await executeView({ plugin, origin, view, patient: sample[0], parseHtml }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; again = null; }
       if (again && usableRows(again.rows)) best = again;
     }
+    /* NO ROWS FOR A REAL PATIENT: the screen may be a search form. Open the view's page, search for
+     * this patient there, prove the call the search made against the rows it shows, replay it, and
+     * open one result row for the detail chain. What the owner did by hand, done by the agent. */
+    if (book && (!best || !usableRows(best.rows)) && sample.length && !view.detailOf) {
+      say({ checking: view.resourceHint, searching: true });
+      await learnPageLoadCalls({ plugin, origin, view, patient: sample[0], waitMs: Math.min(Math.max(waitMs, 6000), 12000), book, searchPatient: true });
+      if (proven(view)) {
+        let again = null;
+        try { again = await executeView({ plugin, origin, view, patient: sample[0], parseHtml }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; again = null; }
+        if (again && usableRows(again.rows)) {
+          best = again; listRows[view.resourceHint] = { rows: again.rows, patient: sample[0] };
+          if (!list.some((d) => d && d.detailOf === view.resourceHint && proven(d))) {
+            let detail = null;
+            try { detail = await exploreDetailOf({ client: plugin, view, book, origins: [origin], waitMs: Math.min(3000, waitMs) }); } catch { detail = null; }
+            if (detail && proven(detail)) list.push(detail);
+          }
+        }
+      }
+    }
     const rows = best ? best.rows : [];
     const verdict = await judge({ brain, resource: view.resourceHint, rows, kind: best ? best.kind : 'none', path: best ? best.url : null });
     const c = { resource: view.resourceHint, ok: verdict.ok, via: best ? 'endpoint' : 'none', rows: rows.length, kind: best ? best.kind : 'none', reason: (!best && lastError) ? 'replay failed: ' + lastError : verdict.reason, resourceSeen: verdict.resource, url: best ? best.url : null };
@@ -147,7 +167,7 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
 /* THE CALL A LIST MAKES ON ITS OWN. A ward list fills itself by AJAX as the page loads (GHIS: GetIPWL),
  * before the crawl ever clicks, so it is easy to miss. Load the list page once, wait for its rows,
  * and keep every same-origin data call it made (field names and mode constants only) on the view. */
-export async function learnPageLoadCalls({ plugin, origin, view, waitMs = 20000, patient = null, tapList = false, book = null }) {
+export async function learnPageLoadCalls({ plugin, origin, view, waitMs = 20000, patient = null, tapList = false, book = null, searchPatient = false }) {
   if (!view || !view.pathTemplate) return;
   try {
     if (typeof plugin.drainRequests === 'function') await plugin.drainRequests().catch(() => null);
@@ -159,6 +179,12 @@ export async function learnPageLoadCalls({ plugin, origin, view, waitMs = 20000,
      * tap such a tab once, read-only by label, and let the call happen. */
     if (tapList) {
       try { await plugin.evaluate({ expression: TAP_LIST_TAB }); await new Promise((r) => setTimeout(r, Math.min(4000, waitMs))); } catch { /* no tab */ }
+    }
+    /* A SEARCH FORM IS NOT AN EMPTY SCREEN. Type this patient's id into the form's patient box, take the
+     * suggestion, press its search: the calls that follow are the resource's own (GHIS Lab reports:
+     * GetSearchPatientId), exactly what the owner did by hand to build the hand-made adapter. */
+    if (searchPatient && patient && patient.patientId) {
+      try { view.searched = await searchPatientOnScreen({ client: plugin, patientId: patient.patientId, waitMs: Math.min(3000, waitMs) }); } catch { view.searched = null; }
     }
     // With proof, the page's calls are candidates only: one is kept when its answer matches the rows shown.
     if (book) { await book.prove({ client: plugin, view, label: 'open the ' + view.resourceHint + ' page', since: 0 }); return; }

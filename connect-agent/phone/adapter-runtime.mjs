@@ -324,7 +324,7 @@ export function applyColumns(view, rows) {
      * is the screen's header row (GHIS GetMedicines) needs no remap at all; applying the learned one
      * (traced by value, "Date & Time" -> Prod. Code) to its blank cells put product codes in the date
      * column and graded dateTime 47 of 158 equal (gold audit, 2026-09-17). */
-    if (labels.filter((h) => h in r).length >= Math.min(2, labels.length)) return r;
+    if (labels.length && labels.every((h) => h in r)) return r;
     const out = {};
     for (const h of labels) {
       const c = cols[h] || {};

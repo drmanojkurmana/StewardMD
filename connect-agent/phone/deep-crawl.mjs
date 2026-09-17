@@ -1107,6 +1107,78 @@ export async function exploreDetailOf({ client, view, book, origins = [], waitMs
   }
   return detail;
 }
+/* SEARCH FOR THE PATIENT THE WAY THE DOCTOR DOES. A resource screen can be a search form rather than a
+ * list (GHIS "Lab reports": a patient box with an autocomplete, a hidden id the suggestion fills, and
+ * a search link that posts GetSearchPatientId). The owner built the hand-made adapter by typing a
+ * patient id there and watching the calls; the crawl and the guided ask only ever saw the empty form,
+ * so the print shell behind it was proven as "labs" (2026-09-17). These three page-realm steps do
+ * what the owner did: type the id into the patient box, take the suggestion that carries it (or fill
+ * the hidden companions), and press the form's own search control. Nothing else is typed or cleared. */
+function CRAWL_PATIENT_SEARCH(pid) {
+  try {
+    var vis = function (e) { try { return !!(e.getClientRects && e.getClientRects().length); } catch (x) { return false; } };
+    var inputs = [].slice.call(document.querySelectorAll('input[type="text"],input[type="search"],input:not([type])')).filter(vis);
+    var score = function (e) { var s = ((e.id || '') + ' ' + (e.name || '') + ' ' + (e.placeholder || '') + ' ' + (e.className || '') + ' ' + (e.getAttribute('aria-label') || '')).toLowerCase(); return /patient|mrn|uhid|umr|search|auto|record|reg/.test(s) ? 2 : 0; };
+    inputs.sort(function (a, b) { return score(b) - score(a); });
+    var inp = inputs[0];
+    if (!inp || (score(inp) === 0 && inputs.length !== 1)) return JSON.stringify({ did: 'no-input', inputs: inputs.length });
+    inp.focus();
+    inp.value = pid;
+    inp.dispatchEvent(new Event('input', { bubbles: true }));
+    inp.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, key: 'Enter' }));
+    inp.dispatchEvent(new Event('change', { bubbles: true }));
+    var hid = [].slice.call(document.querySelectorAll('input[type="hidden"]')).filter(function (h) { var n = ((h.id || '') + ' ' + (h.name || '')).toLowerCase(); return /auto|search|patient|pat\b|mrn?|uhid|umr|record/.test(n) && !/token|verification|csrf|episode|visit|render|order|test|barcode|text/.test(n); });
+    for (var i = 0; i < hid.length; i++) hid[i].value = pid;
+    return JSON.stringify({ did: 'typed', input: (inp.id || inp.name || '').slice(0, 40), hidden: hid.map(function (h) { return (h.id || h.name || '').slice(0, 40); }) });
+  } catch (e) { return JSON.stringify({ did: 'e', error: String(e && e.message || e).slice(0, 80) }); }
+}
+function CRAWL_PICK_SUGGESTION(pid) {
+  try {
+    var vis = function (e) { try { return !!(e.getClientRects && e.getClientRects().length); } catch (x) { return false; } };
+    var items = [].slice.call(document.querySelectorAll('li,[role="option"],.ui-menu-item,.ui-menu-item-wrapper,.autocomplete-suggestion,.tt-suggestion,.dropdown-item,.suggestion')).filter(vis);
+    for (var i = 0; i < items.length; i++) {
+      var t = (items[i].textContent || '').replace(/\s+/g, ' ').trim();
+      if (t.length <= 160 && t.indexOf(pid) >= 0) { items[i].click(); return 'picked'; }
+    }
+    return 'none';
+  } catch (e) { return 'e'; }
+}
+function CRAWL_PRESS_SEARCH() {
+  try {
+    var vis = function (e) { try { return !!(e.getClientRects && e.getClientRects().length); } catch (x) { return false; } };
+    var els = [].slice.call(document.querySelectorAll('a,button,input[type="button"],input[type="submit"],[onclick],[role="button"]')).filter(vis);
+    var label = function (e) { return ((e.textContent || '') + ' ' + (e.value || '') + ' ' + (e.title || '') + ' ' + (e.getAttribute('aria-label') || '') + ' ' + (e.id || '') + ' ' + (e.className || '') + ' ' + (e.getAttribute('onclick') || '')).replace(/\s+/g, ' ').trim(); };
+    var bad = /log ?out|sign ?out|delete|remove|save|submit|update|edit|add|new|create|order|prescri|upload|send|print|export|download|cancel|close|discharge|pay|bill|clear|reset|verify|sign\b|finali|complete/i;
+    for (var i = 0; i < els.length; i++) {
+      var l = label(els[i]);
+      if (/search|find|\bgo\b|show|fetch|get ?(list|patient|report)/i.test(l) && !bad.test((els[i].textContent || '') + ' ' + (els[i].value || ''))) { els[i].click(); return 'pressed ' + l.slice(0, 40); }
+    }
+    return 'none';
+  } catch (e) { return 'e'; }
+}
+export const PATIENT_SEARCH_SRC = String(CRAWL_PATIENT_SEARCH);
+export const PICK_SUGGESTION_SRC = String(CRAWL_PICK_SUGGESTION);
+export const PRESS_SEARCH_SRC = String(CRAWL_PRESS_SEARCH);
+
+/** searchPatientOnScreen({ client, patientId, waitMs }) -> { typed, picked, pressed } or null when the
+ * screen has no patient box. Types, takes the suggestion, presses search, waits for the answer. */
+export async function searchPatientOnScreen({ client, patientId, waitMs = 1200 }) {
+  const pid = String(patientId || '').trim();
+  if (!pid || !client) return null;
+  await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` }).catch(() => {});
+  let typed = null;
+  try { typed = JSON.parse((await client.evaluate({ expression: `(${PATIENT_SEARCH_SRC})(${JSON.stringify(pid)})` }))?.result || 'null'); } catch { typed = null; }
+  if (!typed || typed.did !== 'typed') return null;
+  await client.wait({ ms: Math.max(waitMs, 1500) });
+  let picked = 'none';
+  try { picked = String((await client.evaluate({ expression: `(${PICK_SUGGESTION_SRC})(${JSON.stringify(pid)})` }))?.result || 'none'); } catch { picked = 'e'; }
+  if (picked === 'picked') await client.wait({ ms: Math.max(waitMs, 800) });
+  let pressed = 'none';
+  try { pressed = String((await client.evaluate({ expression: `(${PRESS_SEARCH_SRC})()` }))?.result || 'none'); } catch { pressed = 'e'; }
+  await awaitDetailRequest({ client, maxMs: Math.max(waitMs * 5, 8000) });
+  return { typed: typed.input || '', hidden: (typed.hidden || []).length, picked, pressed };
+}
+
 export const FIND_CONTROLS_SRC = String(CRAWL_FIND_CONTROLS);
 const CLICK_CONTROL_SRC = String(CRAWL_CLICK_CONTROL);
 const ARM_GUIDE_SRC = String(CRAWL_ARM_GUIDE);
