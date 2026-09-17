@@ -29,6 +29,7 @@ mock.module(new URL("../functions/_wardsynq/service.js", import.meta.url).href, 
     RESOURCE_TYPES: [],
     MODE: { NATIVE: "native" },
     NATIVE_SYSTEM: "wardsynq-native",
+    ListCeilingError: class ListCeilingError extends Error {}, LIST_ALL_MAX: 100000,
   },
 });
 

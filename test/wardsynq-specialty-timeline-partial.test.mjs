@@ -12,7 +12,7 @@ mock.module(new URL("../functions/_wardsynq/service.js", import.meta.url).href, 
       async byPatient(type) { if (failTypes.has(type)) throw new Error("read failed"); return []; }
       async get() { return null; }
     },
-    isExternalRecord: () => false, externallyOwned: () => false, RESOURCE_TYPES: [], MODE: {}, NATIVE_SYSTEM: "wardsynq-native",
+    isExternalRecord: () => false, externallyOwned: () => false, RESOURCE_TYPES: [], MODE: {}, NATIVE_SYSTEM: "wardsynq-native", ListCeilingError: class ListCeilingError extends Error {},
   },
 });
 
