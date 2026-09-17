@@ -319,3 +319,12 @@ test('readPatientDetails: one resource answering the login page does not end the
   const gone = { ...plugin, async evaluate({ expression }) { const req = parseFetchExpression(expression); if (!req) return { result: '{}' }; return { result: JSON.stringify({ status: 302, redirected: true, url: req.url, text: '' }) }; } };
   await assert.rejects(readPatientDetails({ plugin: gone, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 }), (e) => e.name === 'NotSignedIn');
 });
+
+/* THE ROW'S OWN FIELD WINS over a screen column mapped onto it by value (gold audit 2026-09-17:
+ * episodeId 0 of 769 equal because "Visit ID" had been learned as generatedDate). */
+test('mapRow: a row carrying episodeId and bedName keeps them over mapped screen columns', () => {
+  const p = mapRow({ 'Patient ID': 'MR1', 'Visit ID': '12 - Sep - 2026', Bed: 'AC SINGLE', patientId: 'MR1', episodeId: 'IPMR7', bedName: 'B-12', generatedDate: '12 - Sep - 2026', rateTypeDesc: 'AC SINGLE' });
+  assert.equal(p.episodeId, 'IPMR7');
+  assert.equal(p.bedName, 'B-12');
+  assert.equal(p.patientId, 'MR1');
+});

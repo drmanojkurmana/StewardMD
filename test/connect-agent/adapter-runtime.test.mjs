@@ -260,3 +260,43 @@ test('executeProven: a call that needs a token and finds none moves to its prove
   assert.deepEqual(navigated, []);
   assert.deepEqual(posted, ['__RequestVerificationToken=T9&recordNo=K1']);
 });
+
+/* EVERY TABLE WITH THE VIEW'S COLUMNS. GHIS GetMedicines answers one table per prescription date,
+ * all with the same header row; reading only the best-scoring table gave the drawer a fraction of the
+ * chart (gold audit, 2026-09-17: medications partial). The hand-built adapter reads every row of the
+ * page. Every table whose header row carries the view's columns is read, in page order. */
+test('rowsFromHtml reads every table that carries the view columns, not just the first', () => {
+  const tbl = (rows) => '<table><thead><tr><th>Prod. Code</th><th>Drug Name</th><th>Route</th></tr></thead><tbody>' + rows.map((r) => '<tr><td>' + r.join('</td><td>') + '</td></tr>').join('') + '</tbody></table>';
+  const html = '<div>' + tbl([['P1', 'AMOX', 'PO']]) + '<table><tr><td>Patient ID</td><td>:</td><td>X</td></tr></table>' + tbl([['P2', 'CEFTRIAXONE', 'IV'], ['P3', 'SALINE', 'IV']]) + '</div>';
+  const view = { resourceHint: 'medications', headers: ['Prod. Code', 'Drug Name', 'Route'], rowsSelector: '#accordionEx table tbody tr' };
+  const rows = rowsFromHtml(html, view, tableParse);
+  assert.deepEqual(rows.map((r) => r['Drug Name']), ['AMOX', 'CEFTRIAXONE', 'SALINE']);
+});
+
+/* A table-aware stub parser: one object per <table>, with its th labels and its tr rows. */
+function tableParse(html) {
+  const cell = (frag) => { const out = []; const re = /<(td|th)[^>]*>([\s\S]*?)<\/\1>/gi; let c; while ((c = re.exec(frag))) out.push({ tag: c[1].toLowerCase(), textContent: c[2].replace(/<[^>]+>/g, '') }); return out; };
+  const tables = [];
+  const tRe = /<table[^>]*>([\s\S]*?)<\/table>/gi;
+  let t;
+  while ((t = tRe.exec(html))) {
+    const rows = [];
+    const trRe = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+    let m;
+    while ((m = trRe.exec(t[1]))) { const cells = cell(m[1]); rows.push({ querySelectorAll: (sel) => (sel === 'td' ? cells.filter((x) => x.tag === 'td') : []), querySelector: () => null, getAttribute: () => '', textContent: cells.map((x) => x.textContent).join(' ') }); }
+    const ths = cell(t[1]).filter((x) => x.tag === 'th');
+    tables.push({ querySelectorAll: (sel) => (sel === 'th' ? ths : /tr/.test(sel) ? rows : []), querySelector: () => null, rows });
+  }
+  return { querySelectorAll: (sel) => (sel === 'table' ? tables : /tr/.test(sel) ? tables.flatMap((x) => x.rows) : []), querySelector: () => null };
+}
+
+/* A row already keyed by the screen's own label keeps it; a learned remap traced by value can be wrong
+ * (GHIS GetMedicines "Drug Name" -> Route graded drugText 37 of 158 equal, 2026-09-17). */
+test('applyColumns keeps a row field that already carries the screen label', async () => {
+  const { applyColumns } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  const view = { columns: { 'Drug Name': { key: 'Route' }, Freq: { key: 'Duration' } } };
+  const rows = applyColumns(view, [{ 'Drug Name': 'AMOX', Route: 'PO', Freq: 'TDS', Duration: '5' }, { drug: 'X', Route: 'IV' }]);
+  assert.equal(rows[0]['Drug Name'], 'AMOX');
+  assert.equal(rows[0].Freq, 'TDS');
+  assert.equal(rows[1]['Drug Name'], 'IV', 'a row without the label still uses the learned key');
+});

@@ -285,8 +285,15 @@ export function rowsFromHtml(text, view, parse) {
       const score = labels.filter((l) => l && want.includes(l)).length;
       if (score > bestScore) { best = t; bestScore = score; }
     }
+    /* EVERY TABLE THAT CARRIES THE VIEW'S COLUMNS. GHIS GetMedicines answers one table per prescription
+     * date, all under the same header row; the best-scoring one alone gave 11 of 158 rows (gold audit,
+     * 2026-09-17). The hand-built adapter reads every row of the page: so does this, in page order. */
     if (best && bestScore >= Math.min(2, want.length)) {
-      const out = tableRows(best);
+      const out = [];
+      for (const t of Array.from(doc.querySelectorAll('table'))) {
+        const labels = Array.from(t.querySelectorAll ? t.querySelectorAll('th') : []).map((th) => normLabel(th.textContent));
+        if (labels.filter((l) => l && want.includes(l)).length >= bestScore) out.push(...tableRows(t));
+      }
       if (out.length) return out;
     }
   }
@@ -314,6 +321,10 @@ export function applyColumns(view, rows) {
     const out = {};
     for (const h of Object.keys(cols)) {
       const c = cols[h] || {};
+      /* A ROW ALREADY KEYED BY THE SCREEN'S OWN LABEL keeps it. An HTML answer whose header row IS the
+       * screen's header row (GHIS GetMedicines) needs no learned remap; the learned one, traced by
+       * value, can be wrong ("Drug Name" -> Route) and graded drugText 37 of 158 equal (2026-09-17). */
+      if (h in r && txt(r[h])) { out[h] = r[h]; continue; }
       let v = '';
       if (c.key) v = txt(r[c.key]);
       else if (Array.isArray(c.keys) && c.keys.length === 2) { const a = txt(r[c.keys[0]]), b = txt(r[c.keys[1]]); v = a || b ? a + (typeof c.join === 'string' ? c.join : ' ') + b : ''; }
@@ -340,6 +351,8 @@ function tableRows(table) {
   for (const tr of Array.from(table.querySelectorAll('tr'))) {
     const cells = Array.from(tr.querySelectorAll('td'));
     if (cells.length < 2 || /no (data|records|matching records)/i.test(txt(tr))) continue;
+    // A row that wraps another table (a print page's patient header block) is layout, not data.
+    if (tr.querySelector && tr.querySelector('table')) continue;
     const rec = {};
     let filled = 0;
     cells.forEach((c, i) => { const t = txt(c); if (t) { rec[labels[i] || ('col' + i)] = t; filled += 1; } });

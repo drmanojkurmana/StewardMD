@@ -89,11 +89,14 @@ export function mapRow(row) {
     if (f === 'gender' && out.gender) continue;
     if (!out[dest[f]]) out[dest[f]] = v;
   }
+  /* THE ROW'S OWN FIELD WINS. A hospital's JSON row that already carries patientId, episodeId or bedName
+   * is the truth for that field; a screen column mapped onto it by value can be wrong (GHIS GetIPWL:
+   * "Visit ID" learned as generatedDate, "Bed" as rateTypeDesc, and the gold audit graded episodeId
+   * 0 of 769 and bedName 0 of 768 equal, 2026-09-17). The hand-built adapter returns the row's own
+   * fields; so does this. */
   const DIRECT = ['patientId', 'episodeId', 'patientFirstName', 'dob', 'gender', 'bedName', 'deptDescription', 'employeeFirstName', 'queueStatus'];
   for (const k of DIRECT) {
-    if (!out[k] && row[k] != null && String(row[k]).trim()) {
-      out[k] = String(row[k]).trim();
-    }
+    if (row[k] != null && String(row[k]).trim()) out[k] = String(row[k]).trim();
   }
   if (!out.episodeId) out.episodeId = out.patientId;
   return out;
