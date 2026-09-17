@@ -389,7 +389,9 @@ async function collectionList(request, env, ctx) {
     } else {
       [orders, specimens] = await Promise.all([
         svc.byPatient("ServiceRequest", patientId),
-        svc.byPatient(TYPE, patientId).catch(() => []),
+        /* R6-2: a failed specimen read is the 502 below, never an empty set. Swallowed, it read as
+         * "nothing has been collected" and sent a phlebotomist back to a patient already bled. */
+        svc.byPatient(TYPE, patientId),
       ]);
     }
   } catch (e) {
