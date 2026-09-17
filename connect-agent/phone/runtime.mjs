@@ -222,12 +222,30 @@ export function isGimsrOrigin(origin) {
 
 // Pick the replay views by resource. The worklist is the one the ward list is read from.
 // A view whose data call was proven wins over an unproven one for the same resource.
+/* THE VIEW THAT ACTUALLY READ ROWS WINS. A run can end with two views claiming the same resource: the
+ * owner's live run produced two worklists (762 rows and 3), two patient-details and two lab views, one
+ * of which had read nothing (2026-09-18). Keeping whichever came first would show the doctor three
+ * patients instead of the whole ward, or an empty lab list, from an adapter that looks approved.
+ * Verification already recorded what each view read for real patients (view.verified), so that decides;
+ * proof only breaks the tie when nothing was verified. */
+export function viewRank(view) {
+  if (!view) return -1;
+  const v = view.verified;
+  const rows = v ? Math.max(0, Number(v.rows) || 0) : 0;
+  let tier = 0;
+  if (v && v.ok && rows > 0) tier = 3;              // read real rows for a real patient
+  else if (view.proof && view.proof.status === 'proven') tier = 2;
+  else if (rows > 0) tier = 1;
+  // Within a tier the view that read MORE real rows wins: the ward list that answered 762 patients is
+  // the adapter, not the one that answered 3.
+  return tier * 1e9 + Math.min(rows, 1e9 - 1);
+}
+
 export function viewsByResource(replay) {
   const by = {};
-  const proven = (v) => !!(v && v.proof && v.proof.status === 'proven');
   for (const v of Array.isArray(replay) ? replay : []) {
     const r = String(v.resourceHint || v.resource || 'unknown');
-    if (!by[r] || (proven(v) && !proven(by[r]))) by[r] = v;
+    if (!by[r] || viewRank(v) > viewRank(by[r])) by[r] = v;
   }
   return by;
 }
@@ -367,7 +385,7 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
    * both). Rows that are not patients (a doctor list, a dashboard count) are not a ward: next call,
    * then the page. */
   const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length)
-    .sort((a, b) => Number(!!(b.proof && b.proof.status === 'proven')) - Number(!!(a.proof && a.proof.status === 'proven')));
+    .sort((a, b) => viewRank(b) - viewRank(a));
   for (const cand of candidates.length ? candidates : [view]) {
     let got = null;
     try { got = await replayFirst({ plugin, origin, view: cand, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }

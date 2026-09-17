@@ -161,6 +161,7 @@ window.__engineCalls = [];
 // marker the onboarding UI should re-evaluate on a native "navigated" event while a guided ask is active.
 window.__SMD_PHONE_ENGINE_TEST__ = {
   GUIDE_ARM: "SMD_TEST_GUIDE_ARM_MARKER",
+  GUIDE_ARM_TAP: "SMD_TEST_GUIDE_TAP_MARKER",
   runPhoneDiscovery: function (opts) {
     window.__engineCalls.push(opts);
     window.__lastOnProgress = opts.onProgress;
@@ -456,7 +457,7 @@ try {
     var p = window.Capacitor.Plugins.ConnectBrowser;
     p.evaluate = function (args) {
       window.__pluginCalls.push({ m: "evaluate", a: args });
-      if (args && args.expression === "SMD_TEST_GUIDE_ARM_MARKER") {
+      if (args && (args.expression === "SMD_TEST_GUIDE_ARM_MARKER" || args.expression === "SMD_TEST_GUIDE_TAP_MARKER")) {
         window.__armAttempts++;
         if (window.__armAttempts === 1) return Promise.reject(new Error("WebKit: page is navigating"));
       }
@@ -467,8 +468,36 @@ try {
   await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/Radio/Home"}); return 1;`);
   ok(await waitFor(`return window.__armAttempts >= 2;`, 6000), "the guide is re-armed again after the first attempt fails on a still-loading page");
 
+  /* THE CAPTURE MUST COME BACK ON ITS OWN. Relying on the native "navigated" event was not enough: on
+   * the live GHIS radiology page the guide was still unarmed ten seconds after a full page load, so the
+   * doctor's tap turned nothing green and Done captured nothing (owner's iPhone, v90, 2026-09-18).
+   * While a question is on screen the arm is simply re-applied on a heartbeat, which survives a missed
+   * event, a document replaced mid-flight, and an ask that was re-issued. */
+  await ev(`
+    window.__pluginCalls = window.__pluginCalls.filter(function(c){return !(c.m==="evaluate" && c.a && c.a.expression==="SMD_TEST_GUIDE_ARM_MARKER");});
+    window.__armAttempts = 0; window.__fullArms = 0;
+    var p = window.Capacitor.Plugins.ConnectBrowser;
+    p.evaluate = function (args) {
+      window.__pluginCalls.push({ m: "evaluate", a: args });
+      if (args && args.expression === "SMD_TEST_GUIDE_ARM_MARKER") window.__fullArms++;
+      if (args && args.expression === "SMD_TEST_GUIDE_TAP_MARKER") window.__armAttempts++;
+      return Promise.resolve({ result: "" });
+    };
+    return 1;
+  `);
+  // let any retry scheduled by the earlier navigated event drain first, so this proves the heartbeat only
+  await sleep(3000);
+  await ev(`window.__armAttempts = 0; return 1;`);
+  // no navigated event at all: the heartbeat alone must re-apply the arm
+  ok(await waitFor(`return window.__armAttempts >= 1;`, 8000), "the guide keeps the capture alive while the question is on screen, with no navigation event");
+  ok(await ev(`return window.__fullArms === 0;`) === true, "the heartbeat never re-runs the observer, which would discard the requests the doctor already made");
+
   await ev(`document.getElementById("smd-connect-guideskip").click(); return 1;`);
   ok(await waitFor(`return window.__ask1 && window.__ask1.done === false && !document.getElementById("smd-connect-guideskip");`, 3000), "Skip resolves the ask with done:false and removes the instruction");
+  // and it stops once the question is answered: no further arming after the skip
+  await ev(`window.__armAttempts = 0; return 1;`);
+  await sleep(3500);
+  ok(await ev(`return window.__armAttempts === 0;`) === true, "the heartbeat stops once the question is answered");
   await ev(`window.__pluginCalls = window.__pluginCalls.filter(function(c){return !(c.m==="evaluate" && c.a && c.a.expression==="SMD_TEST_GUIDE_ARM_MARKER");}); return 1;`);
   await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/Radio/Home"}); return 1;`);
   await sleep(300);
