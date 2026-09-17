@@ -3429,7 +3429,7 @@
       (a.enhancements || []).map(function (e) {
         return '<div class="w-dt-times">' + (e.state === "requested"
           ? wTH("ward.rcm-enh-open", "Enhancement to {amount} asked {at} ({age} ago): {reason}", { amount: esc(e.requestedAmount), at: when(e.requestedAt), age: esc(rcmAge(e.requestedAt)), reason: esc(e.reason) }, "reason")
-          : wTH("ward.rcm-enh-decided", "Enhancement to {amount}: {state} {at}{approved}", { amount: esc(e.requestedAmount), state: esc(e.state), at: when(e.decidedAt), approved: e.approvedAmount != null ? " (" + esc(e.approvedAmount) + ")" : "" }, "state")) + "</div>";
+          : wTH("ward.rcm-enh-decided", "Enhancement to {amount}: {state} {at}{approved}", { amount: esc(e.requestedAmount), state: e.state === "approved" ? wTH("ward.rcm-approved", "Approved") : wTH("ward.rcm-refused", "Refused"), at: when(e.decidedAt), approved: e.approvedAmount != null ? " (" + esc(e.approvedAmount) + ")" : "" }, "state")) + "</div>";
       }).join("") +
       '<div class="w-mini-row-act">' + (a.state === "requested" || a.state === "approved" ? b("paquery", "help", wTH("ward.rcm-payer-query", "Payer query")) : "") +
       (openQ ? b("paanswer", "reply", wTH("ward.rcm-answer-query", "Answer query")) : "") +
