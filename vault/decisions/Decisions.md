@@ -8183,3 +8183,24 @@ of compliance.js is untouched.
 - Not done: no cron or scheduled runner (the job is admin-triggered on purpose; the person who starts it is
   the person it is audited to), and no total-remaining figure before a full scan pass - the count comes from
   the scan itself, batch by batch, because counting the archive is the same walk as scanning it.
+
+## 2026-09-18 — Per-patient quota meters (FollowCare/MAiTRI + MaiK Scribe), flag `QUOTA_METERS_ON`
+- FollowCare (7 SMS over 7 days) and a MAiTRI recovery call each cost us ₹10, so they share ONE wallet:
+  1 patient credit = one MAiTRI call OR one 7-day FollowCare course. A Scribe consult costs ₹3-5.
+- `functions/_quota.js` is the meter. KV, keyed `quota:<feature>:<uid>:<YYYY-MM>` for the monthly included
+  allowance (Physician / Physician Pro only: 5 care + 50 scribe, calendar-month reset, NO roll-over) and
+  `quota:<feature>:<uid>:bal` for purchased packs, written with no TTL so purchased credits never expire.
+  Spend order is included first. Concurrency is best-effort read-modify-write, same as `_usage.js`; the
+  documented ceiling is at most one over-granted unit per concurrent burst (₹10), not worth a Durable Object.
+- Enforced only at real spend points: `followcare/enroll`, the doctor-initiated `followcare/voice/call`, and
+  the Scribe `extract` path. Refusal is a 402 `{error:"quota-exhausted", feature, remaining:0, packs, copy}`
+  that the client renders as a top-up sheet. Never a hard lock: one Scribe "consult" is a dictation SESSION
+  (rolling 45-min marker), so the ~120s refine loop is charged once and an open session is never refused.
+- Packs `in.stewardmd.care.25|100` and `in.stewardmd.scribe.50|250` live in `plans().packs` (cfgPrice
+  overridable) and are fulfilled by `fulfilPurchase()` on both the Razorpay and StoreKit paths.
+- Copy is owner-approved value framing and is asserted in tests: no clinical outcome claims, no promise that
+  Scribe cannot miss anything (false, contradicts the App Store "not a diagnostic device" listing, invites
+  CDSCO/FDA medical-device scope, and a doctor who believes it checks less carefully), no invented statistics,
+  no em-dash. The "N patients have not heard from you" line renders only with a real server number.
+- Not wired: the ROLE_GATES_ON access matrix (separate branch), an `unheardCount` source for that line, and
+  the scheduler's own MAiTRI calls (they continue an already-paid episode).
