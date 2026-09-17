@@ -159,6 +159,7 @@ import { setExpectedDischarge, expectedDischargeHistory, hospitalToday } from ".
 import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
 import { recordDischargeMilestone, dischargeProgress } from "../../_wardsynq/discharge-milestones.js";
 import { createInboundTransfer, decideInboundTransfer, cancelInboundTransfer, listInboundTransfers } from "../../_wardsynq/transfer-centre.js";
+import { saveLeaflet, approveLeaflet, retireLeaflet, listLeaflets, attachLeaflet, detachLeaflet, listAttachments } from "../../_wardsynq/patient-education.js";
 import { sendStaffMessage, editStaffMessage, recallStaffMessage, markThreadRead, escalateStaffMessage, listStaffMessages, listMessagePeople } from "../../_wardsynq/staff-messaging.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
@@ -1405,6 +1406,12 @@ export async function onRequest(context) {
         "staff-messages": CAPS.EMR_VIEW, "staff-message-send": CAPS.EMR_VIEW, "staff-message-edit": CAPS.EMR_VIEW,
         "staff-message-recall": CAPS.EMR_VIEW, "staff-message-read": CAPS.EMR_VIEW, "staff-message-escalate": CAPS.EMR_VIEW,
         "staff-message-people": CAPS.EMR_VIEW,
+        /* Patient education (patient-education.js): the library is read by whoever reads the chart; writing, approving and
+         * retiring a leaflet and giving one to a patient are a treating clinician's acts. The second-person rule on approval
+         * and the approved-only rule on giving are decided inside. */
+        "education-leaflets": CAPS.EMR_VIEW, "education-attachments": CAPS.EMR_VIEW,
+        "education-leaflet-save": CAPS.EMR_TREAT, "education-leaflet-approve": CAPS.EMR_TREAT, "education-leaflet-retire": CAPS.EMR_TREAT,
+        "education-attach": CAPS.EMR_TREAT, "education-detach": CAPS.EMR_TREAT,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
          * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
          * authority as vitals. Disposition closes the visit - the SAME capability discharge already
@@ -4901,6 +4908,36 @@ export async function onRequest(context) {
         try { await audits.flush(); }
         catch { return json({ ok: false, error: "audit_write_failed", message: "Transfer centre requests were read but could not be recorded in the audit trail, so they are not shown. Try again." }, 502, request); }
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub.indexOf("education-") === 0) {
+        if (sub === "education-leaflets" && method === "GET") {
+          const r = await listLeaflets(request, env, { ...deps, state: url.searchParams.get("state") || "" });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-attachments" && method === "GET") {
+          const r = await listAttachments(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "" });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-leaflet-save" && method === "POST") {
+          const r = await saveLeaflet(request, env, { ...deps, leafletId: body.leafletId, expectedVersion: body.expectedVersion, title: body.title, language: body.language, body: body.body, tags: body.tags, idempotencyKey: body.idempotencyKey || null });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-leaflet-approve" && method === "POST") {
+          const r = await approveLeaflet(request, env, { ...deps, leafletId: body.leafletId, expectedVersion: body.expectedVersion });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-leaflet-retire" && method === "POST") {
+          const r = await retireLeaflet(request, env, { ...deps, leafletId: body.leafletId, reason: body.reason });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-attach" && method === "POST") {
+          const r = await attachLeaflet(request, env, { ...deps, encounterId: body.encounterId, leafletId: body.leafletId, leafletVersion: body.leafletVersion, idempotencyKey: body.idempotencyKey || null });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-detach" && method === "POST") {
+          const r = await detachLeaflet(request, env, { ...deps, encounterId: body.encounterId, itemId: body.itemId, reason: body.reason });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
       }
       if (sub.indexOf("staff-message") === 0) {
         /* Escalation is a fixed push (no patient, ward or text) to members of the addressed roles, only when this hospital
