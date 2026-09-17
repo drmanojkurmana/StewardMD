@@ -2767,7 +2767,7 @@
     el.className = "dx-mgmt dx-reader";
     var backLabel = "‹ Back to differential";
     if (opts && opts.from === "onco-home") backLabel = "‹ ONCQIS";
-    else if (opts && opts.standalone) backLabel = "‹ Library";
+    else if (opts && (opts.standalone || opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) backLabel = "‹ Library";
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
@@ -2804,20 +2804,46 @@
         try { if (window.SMD_ONCOHOME && SMD_ONCOHOME.foreground) SMD_ONCOHOME.foreground(); } catch (e) {}
         return;
       }
-      // Opened standalone from the Knowledge Library / global search? The reasoning
-      // workspace was turned on ONLY to host this reference panel — so Back must exit
-      // it and return the user to the library they were browsing, NOT drop them into
-      // the (empty) clinical-reasoning view underneath.
-      if (opts && opts.standalone) {
-        try { close(); } catch (e) {}
-        if (opts.from === "syndromes" || (!opts.from && _libReturnScroll !== null)) {
-          try { if (window.SB && SB.openRef) SB.openRef("syndromes"); } catch (e) {}
+      // Opened standalone from the Knowledge Library? Return cleanly to the library underneath
+      // without ever exposing the Clinical Reasoning workspace (#dxOverlay) or routing to home.
+      if (opts && (opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) {
+        if (root) {
+          root.classList.remove("on", "dx-reference-mode");
+          document.body.classList.remove("dx-lock");
         }
+        var library = document.getElementById("sbrefOverlay");
+        if (library && library.classList.contains("open")) {
+          try {
+            // The just-viewed disease landed in recent/favourites AFTER the parked
+            // library DOM rendered: repaint ONLY the personal section so its counts
+            // stay correct, without a full re-render (which would lose focus).
+            // Repaint BEFORE restoring scroll: the fresh section changes the content
+            // height above the viewport, so scroll must be set last to land exact.
+            var personal = library.querySelector(".kblib-personal");
+            if (personal) {
+              var freshEntries = kbBuildIndex();
+              if (freshEntries && freshEntries.length) personal.outerHTML = kbPersonalHTML(freshEntries);
+            }
+          } catch (e) {}
+          if (_libReturnScroll !== null) {
+            var libraryBody = document.getElementById("sbrefBody");
+            if (libraryBody) libraryBody.scrollTop = _libReturnScroll;
+            _libReturnScroll = null;
+          }
+          document.body.style.overflow = "hidden";
+          return;
+        }
+        try { if (window.SB && SB.openRef) SB.openRef("syndromes"); } catch (e) {}
         if (_libReturnScroll !== null) {
-          var libraryBody = document.getElementById("sbrefBody");
-          if (libraryBody) libraryBody.scrollTop = _libReturnScroll;
+          var lb = document.getElementById("sbrefBody");
+          if (lb) lb.scrollTop = _libReturnScroll;
           _libReturnScroll = null;
         }
+        return;
+      }
+      if (opts && opts.standalone) {
+        try { close(); } catch (e) {}
+        return;
       }
     });
     var sel = el.querySelector(".dx-select[data-sel]");
@@ -3227,14 +3253,27 @@
   }
   function kbOpen(id) {
     var library = document.getElementById("sbrefOverlay"), libraryBody = document.getElementById("sbrefBody");
-    _libReturnScroll = library && library.classList.contains("open") && libraryBody ? libraryBody.scrollTop : null;
+    var fromLibrary = !!(library && library.classList.contains("open"));
+    _libReturnScroll = fromLibrary && libraryBody ? libraryBody.scrollTop : null;
     try { var bd = document.getElementById("spBackdrop"); if (bd) bd.classList.add("hidden"); } catch (e) {}
     try { var p = document.getElementById("smdSearchPanel"); if (p) p.classList.remove("open"); } catch (e) {}
     try { document.body.style.overflow = ""; } catch (e) {}
     // ALWAYS open the Harrison evidence viewer (works for all 444, incl. the 51
     // infective syndromes). For infective diseases the viewer itself offers a button
     // to open the full antibiotic-stewardship console, so nothing is lost.
-    if (window.DX && DX.openRef) { DX.openRef(id); try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {} }
+    if (window.DX && DX.openRef) {
+      DX.openRef(id, {
+        from: fromLibrary ? "syndromes" : "search",
+        standalone: true
+      });
+      // Do NOT close #sbrefOverlay when opened from the Knowledge Library!
+      // #dxOverlay.dx-reference-mode is elevated to z-index: 900 !important,
+      // so #sbrefOverlay stays parked cleanly underneath. Tapping Back returns directly
+      // to the existing DOM and scroll position without re-rendering or touching Clinical Reasoning.
+      if (!fromLibrary) {
+        try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {}
+      }
+    }
   }
   function kbReadList(kind) { try { var list = JSON.parse(localStorage.getItem("smd_library_" + kind) || "[]"); return Array.isArray(list) ? list.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
   function kbSaveList(kind, list) { try { localStorage.setItem("smd_library_" + kind, JSON.stringify(list)); return true; } catch (e) { return false; } }
@@ -3659,12 +3698,13 @@
     // (global search, knowledge library): open the panel, then show the ref.
     openRef: function (id, opts) {
       opts = opts || {};
-      var wasOpen = !!(root && root.classList.contains("on"));
+      var isStandalone = opts.standalone !== undefined ? !!opts.standalone : (opts.from ? true : !(root && root.classList.contains("on")));
       ensureRoot();
-      openDiseaseRef(id, Object.assign({ standalone: !wasOpen }, opts));
+      openDiseaseRef(id, Object.assign({ standalone: isStandalone }, opts));
       root.classList.add("dx-reference-mode", "on");
       document.body.classList.add("dx-lock");
     },
+    _kbOpen: kbOpen, // test seam: Knowledge Library / global-search entry point (not user-facing API)
     _assess: function () {
       var d = differential(), g = gate(d), info = GATEINFO[g.cls];
       return { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name,

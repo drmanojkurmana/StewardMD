@@ -393,8 +393,118 @@ test("oncotree close steps back through protocol/modal/pathway before exiting", 
 test("reasoning.js keeps the ONCQIS return contract in source", () => {
   const src = readFileSync(join(ROOT, "reasoning.js"), "utf8");
   assert.ok(src.indexOf("openRef: function (id, opts)") >= 0, "openRef accepts opts");
-  assert.ok(src.indexOf("Object.assign({ standalone: !wasOpen }, opts)") >= 0, "standalone default merges with caller opts");
+  assert.ok(src.indexOf("Object.assign({ standalone: isStandalone }, opts)") >= 0, "standalone default merges with caller opts");
   assert.ok(src.indexOf('opts.from === "onco-home"') >= 0, "ONCQIS origin is recognised");
   assert.ok(src.indexOf("typeof opts.onBack") >= 0, "onBack return is honoured");
   assert.ok(src.indexOf('opts.from === "syndromes"') >= 0, "syndrome-library return is conditional, not forced");
+});
+
+/* ---------------- 4. Knowledge Library -> disease -> Back (never Clinical Reasoning) ---------------- */
+
+function mountLibrary(scroll) {
+  let lib = docEls.sbrefOverlay;
+  if (!lib) { lib = new FakeElement("div"); lib.id = "sbrefOverlay"; docEls.sbrefOverlay = lib; }
+  lib.classList.add("open");
+  let body = docEls.sbrefBody;
+  if (!body) { body = new FakeElement("div"); body.id = "sbrefBody"; docEls.sbrefBody = body; }
+  body.scrollTop = scroll;
+  return { lib, body };
+}
+function unmountLibrary() {
+  delete docEls.sbrefOverlay;
+  delete docEls.sbrefBody;
+}
+
+test("kbOpen from the Knowledge Library tags from:'syndromes' + standalone and keeps the overlay open", () => {
+  resetDx();
+  mountLibrary(222);
+  const realDx = global.DX;
+  assert.equal(typeof realDx._kbOpen, "function", "DX must expose the _kbOpen entry point");
+  let gotId = null, gotOpts = null, closeRefCalls = 0;
+  global.DX = { openRef: (id, opts) => { gotId = id; gotOpts = opts || null; } };
+  const realSB = global.SB;
+  global.SB = { openRef: (t) => sbCalls.push(t), closeRef: () => { closeRefCalls++; } };
+  try {
+    realDx._kbOpen("acinic_cell_carcinoma");
+  } finally {
+    global.DX = realDx;
+    global.SB = realSB;
+  }
+  assert.equal(gotId, "acinic_cell_carcinoma", "disease id forwarded");
+  assert.ok(gotOpts && gotOpts.from === "syndromes", "library origin tagged, got: " + JSON.stringify(gotOpts));
+  assert.equal(gotOpts && gotOpts.standalone, true, "library opens are standalone");
+  assert.equal(closeRefCalls, 0, "library overlay must stay parked underneath, never closed");
+  assert.ok(docEls.sbrefOverlay.classList.contains("open"), "#sbrefOverlay still open under the reference panel");
+  unmountLibrary();
+});
+
+test("kbOpen from global search tags from:'search' and still closes the library chrome", () => {
+  resetDx();
+  unmountLibrary(); // no library open: a search journey
+  const realDx = global.DX;
+  let gotOpts = null, closeRefCalls = 0;
+  global.DX = { openRef: (id, opts) => { gotOpts = opts || null; } };
+  const realSB = global.SB;
+  global.SB = { openRef: (t) => sbCalls.push(t), closeRef: () => { closeRefCalls++; } };
+  try {
+    realDx._kbOpen("acinic_cell_carcinoma");
+  } finally {
+    global.DX = realDx;
+    global.SB = realSB;
+  }
+  assert.ok(gotOpts && gotOpts.from === "search", "search origin tagged, got: " + JSON.stringify(gotOpts));
+  assert.equal(gotOpts && gotOpts.standalone, true, "search opens are standalone");
+  assert.equal(closeRefCalls, 1, "non-library opens still dismiss the library chrome");
+});
+
+test("Back from a library-opened topic returns to the library at the same scroll, never exposing Clinical Reasoning", () => {
+  resetDx();
+  mountLibrary(222);
+  ohEl.classList.remove("on"); // isolate from the ONCQIS auto-detect return
+  try {
+    global.DX._kbOpen("acinic_cell_carcinoma"); // real DX.openRef: from syndromes, standalone
+    const root = dxRoot();
+    assert.ok(root.classList.contains("on"), "reference panel opens above the library");
+    assert.ok(root.classList.contains("dx-reference-mode"), "reference mode stacks above the library");
+    assert.ok(docEls.sbrefOverlay.classList.contains("open"), "library stays parked underneath");
+    const { bk } = lastBackBtn();
+    assert.ok(bk.textContent.indexOf("Library") >= 0, "library label, got: " + JSON.stringify(bk.textContent));
+    clickBack(bk);
+    assert.ok(!root.classList.contains("on"), "Clinical Reasoning workspace (#dxOverlay) must never be exposed");
+    assert.ok(!root.classList.contains("dx-reference-mode"), "reference mode torn down");
+    assert.ok(!docBody.classList.contains("dx-lock"), "body lock released");
+    assert.ok(docEls.sbrefOverlay.classList.contains("open"), "library DOM still there underneath");
+    assert.equal(docEls.sbrefBody.scrollTop, 222, "previous scroll position restored");
+    assert.deepEqual(sbCalls, [], "existing library DOM reused, no re-render via SB.openRef");
+  } finally {
+    ohEl.classList.add("on");
+    unmountLibrary();
+  }
+});
+
+test("kbOpen stays standalone even when the reasoning root was already open", () => {
+  resetDx();
+  mountLibrary(333);
+  ohEl.classList.remove("on");
+  const root = dxRoot();
+  root.classList.add("on"); // stale workspace state from prior navigation
+  try {
+    global.DX._kbOpen("acinic_cell_carcinoma");
+    const { bk } = lastBackBtn();
+    assert.ok(bk.textContent.indexOf("Library") >= 0, "still a library journey, got: " + JSON.stringify(bk.textContent));
+    clickBack(bk);
+    assert.ok(!root.classList.contains("on"), "Back exits cleanly instead of dropping into the workspace");
+    assert.ok(!root.classList.contains("dx-reference-mode"), "reference mode torn down");
+    assert.ok(docEls.sbrefOverlay.classList.contains("open"), "library still parked underneath");
+    assert.equal(docEls.sbrefBody.scrollTop, 333, "scroll restored");
+  } finally {
+    ohEl.classList.add("on");
+    unmountLibrary();
+  }
+});
+
+test("abx-wizard opens references standalone with an abx-wizard origin", () => {
+  const src = readFileSync(join(ROOT, "abx-wizard.js"), "utf8");
+  assert.ok(src.indexOf('{ from: "abx-wizard", standalone: true }') >= 0,
+    "wizard reference taps must carry their origin and stay standalone");
 });
