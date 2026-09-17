@@ -5,6 +5,30 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-18 · On-device MaiK: conversation continuity by default (three live failures)
+
+**Owner:** "I can't treat every question as a new question." Live: "FUO" then "tell me the exact
+definition" got "what definition?"; "treatment of hypertension" then "tell me doses" gave doses for
+drugs the model had not named; a correction ("wrong, it's nitrofurantoin") started a new conversation.
+
+**Root causes, in order of weight:** (1) home.js attaches history as `{q, a}` pairs (`_maikTurns`,
+the cloud's shape) but `maik-local.js buildPrompt()` read `{role, text}`, so every turn rendered as an
+empty "Doctor:" line: the model never saw a previous turn, whatever the follow-up detector said.
+(2) `isFollowUp()` only knew a short aspect word list, so "exact definition" and any correction that
+named a drug were treated as new subjects. (3) The previous answer was clipped to 180 characters, which
+lost the drug list a "tell me doses" refers to. (4) Retrieval used only the current question, so a
+follow-up had no topic anchor, grounded nothing, and the answer came from the model's weights.
+
+**Fixes (maik-local.js, tests in test/maik-continuity.test.mjs):** `histTurns()` reads both shapes.
+`continues(q, hist)` makes continuity the default: a question starts fresh only when it names a NEW
+subject (a content word that is not filler, aspect, or a reference to the previous turn, and appears
+nowhere in the previous exchange); a correction always continues. The fever -> "Polycystic Kidney
+Disease" topic-bleed regression that made history opt-in stays fixed and pinned. `carry()` keeps the
+previous answer's opening line and its bullet/figure lines (the drug list) up to 700 chars, dropping
+citations and footer lines. `ragQuestion()` retrieves on the previous question plus the follow-up, so
+"tell me doses" is grounded on the hypertension passages and checked claim by claim. Prefill cost of
+the carried answer is accepted: continuity was the ask.
+
 ## 2026-09-18 · On-device RAG for every text pack; the whole-answer gate replaced by claim-level grounding
 
 **Decision (owner):** RAG eligibility is a CAPABILITY (`maik-models.js CAPS[id].kb`, read by

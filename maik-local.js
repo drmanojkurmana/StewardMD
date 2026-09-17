@@ -328,15 +328,71 @@
     return true;
   }
 
+  /* CONTINUITY BY DEFAULT (owner, 2026-09-18). Live: "FUO" then "tell me the exact definition" came back
+   * "what definition?", and "treatment of hypertension" then "tell me doses" gave doses for drugs the
+   * model had not named. isFollowUp() only knew a short aspect list, and the previous answer was cut
+   * to 180 characters, which lost the drug list the follow-up referred to.
+   *
+   * A question now CONTINUES the conversation unless it clearly names a NEW subject: a content word
+   * that is not filler, not an aspect, not a reference to the previous turn, and not present anywhere
+   * in the previous exchange. "Polycystic Kidney Disease" after a fever answer still starts fresh
+   * (the topic-bleed bug that made history opt-in stays fixed); "Side effects of linagliptin" after a
+   * linagliptin answer, "tell me the exact definition", and a correction that names a different drug
+   * ("wrong, it's nitrofurantoin") all carry the previous turns. */
+  var REFER = /^(it|its|it's|that|this|those|these|them|they|same|above|earlier|previous|previously|said|told|mentioned|answer|wrong|incorrect|correct|right|actually|instead|rather|no|not|isnt|isn't|wasnt|wasn't|exact|exactly|definition|define|defined|explain|elaborate|detail|details|detailed|meaning|mean|means|clarify|example|examples|summary|summarise|summarize|brief|briefly|again|repeat|simpler|simple|short|shorter|longer|list|name|names|criteria|classification|classify|types|type|stages|stage|staging|grading|grade|causes|cause|etiology|aetiology|workup|investigations|investigation|tests|test|diagnosis|diagnose|differential|management|treatment|treat|therapy|regimen|drugs|drug|medication|medications|medicine|medicines|first|second|line|options|option|next|step|steps|approach|guideline|guidelines|evidence|source|sources|reference|patient|patients|should|would|could|can|be|do|does|did|was|were|yes|which|one|ones|each|every|all|only|just|now|still|too|much|many|long|when|where|who)$/;
+  var CORRECTION = /\b(?:wrong|incorrect|not right|actually|instead|should be|isn'?t it|you said|i think it'?s|drug of choice|first[- ]line is)\b|^\s*no\b/i;
+  function subjectTokens(q) {
+    var toks = String(q == null ? "" : q).toLowerCase().replace(/[^a-z0-9'\s-]/g, " ").split(/\s+/).filter(Boolean), out = [];
+    for (var i = 0; i < toks.length; i++) if (toks[i].length >= 3 && !FILLER.test(toks[i]) && !ASPECT.test(toks[i]) && !REFER.test(toks[i])) out.push(toks[i]);
+    return out;
+  }
+  /* home.js sends turns as {q, a} pairs (_maikTurns, the same shape the cloud gets); older callers and
+   * the tests send {role, text}. Both are read; before this, a {q, a} turn rendered as an empty
+   * "Doctor:" line and the model saw no history at all, whatever the follow-up detector decided. */
+  function histTurns(hist) {
+    var out = [];
+    (hist || []).forEach(function (h) {
+      if (!h) return;
+      if (h.role) { out.push({ role: h.role, text: String(h.text || h.content || "") }); return; }
+      if (h.q != null || h.a != null) { if (h.q) out.push({ role: "user", text: String(h.q) }); if (h.a) out.push({ role: "assistant", text: String(h.a) }); }
+    });
+    return out;
+  }
+  /** Does `q` continue the conversation in `hist`? See the note above. */
+  function continues(q, hist) {
+    hist = histTurns(hist);
+    if (!hist.length) return false;
+    if (isFollowUp(q)) return true;
+    var subj = subjectTokens(q);
+    if (!subj.length) return true;
+    if (CORRECTION.test(String(q || ""))) return true;
+    var prev = hist.slice(-HISTORY_TURNS * 2).map(function (h) { return String(h.text || h.content || ""); }).join(" ").toLowerCase();
+    for (var i = 0; i < subj.length; i++) if (prev.indexOf(subj[i].slice(0, Math.min(subj[i].length, 6))) === -1) return false;
+    return true;
+  }
+  /* What a follow-up refers to is the previous answer's opening line and its bullets (the drug list),
+   * not its footer. Keep those, drop citations, the source line and the verify line, then cap. */
+  var CARRY_CAP = 700;
+  function carry(text, cap) {
+    var lines = String(text == null ? "" : text).replace(/\[\s*\d+(?:\s*[,;&]\s*\d+)*\s*\]/g, "").split(/\n+/).map(function (s) { return s.trim(); })
+      .filter(function (s) { return s && !/^source:/i.test(s) && !/^verify against local protocol/i.test(s) && !/^left out:/i.test(s) && !/^not in the stewardmd knowledge base/i.test(s); });
+    if (!lines.length) return "";
+    var keep = [lines[0]];
+    for (var i = 1; i < lines.length; i++) if (/^([-*•]|\d+[.)])\s/.test(lines[i]) || /\d/.test(lines[i])) keep.push(lines[i].replace(/^([-*•]|\d+[.)])\s+/, ""));
+    return clip(keep.join(" | "), cap || CARRY_CAP);
+  }
+
   function buildPrompt(pkg, packId) {
     if (!pkg) return "";
     var question = pkg.question || (pkg.topicMatch && pkg.topicMatch.topic) || "";
     var L = [];
-    var hist = pkg.history || [];
-    if (hist.length && isFollowUp(question)) {
+    var hist = histTurns(pkg.history);
+    if (continues(question, hist)) {
       L.push("Recent conversation:");
-      hist.slice(-HISTORY_TURNS * 2).forEach(function (h) {
-        L.push((h.role === "assistant" ? "MaiK: " : "Doctor: ") + clip(h.text || h.content, HISTORY_CLIP));
+      var turns = hist.slice(-HISTORY_TURNS * 2);
+      turns.forEach(function (h, i) {
+        var isA = h.role === "assistant", lastA = isA && i === turns.length - 1 - (turns[turns.length - 1].role === "assistant" ? 0 : 1);
+        L.push((isA ? "MaiK: " : "Doctor: ") + (lastA ? carry(h.text || h.content) : clip(h.text || h.content, HISTORY_CLIP)));
       });
       L.push("");
     }
@@ -501,6 +557,17 @@
   var GENERAL_HEAD = "Not in the StewardMD Knowledge Base (general model knowledge, unverified):";
   var REGEN_NUDGE = "\nState only the drugs, doses and figures that appear in the reference material above. Where the material does not cover part of the question, say so in one line.";
 
+  /* A follow-up retrieves on the previous subject too: "tell me doses" alone has no anchor and grounds
+   * nothing, so the doses came from the model's weights. With the previous question in the query,
+   * "treatment of hypertension" + "tell me doses" retrieves the hypertension dosing passages and the
+   * answer is checked against them. */
+  function ragQuestion(pkg) {
+    var q = pkg && pkg.question || "", hist = histTurns(pkg && pkg.history);
+    if (!continues(q, hist)) return q;
+    var prevQ = "";
+    for (var i = hist.length - 1; i >= 0; i--) if (hist[i].role !== "assistant") { prevQ = String(hist[i].text || hist[i].content || ""); break; }
+    return prevQ ? (clip(prevQ, 160) + " " + q) : q;
+  }
   /** Resolves {evidenceText, passages, RAG} from the on-device book index, or null if ungrounded
    * (no KB yet, no hit, or anything failed) - grounding is a strict improvement when available,
    * never a hard requirement that can break an answer that would otherwise have worked. */
@@ -619,7 +686,7 @@
     // A greeting is not a question: no retrieval, so no "Source:" line on a hello (owner
     // screenshot, 2026-09-04).
     var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded)) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
-      : retrieveGrounding(packId, pkg && pkg.question);
+      : retrieveGrounding(packId, ragQuestion(pkg));
 
     return groundingP.then(function (grounding) {
     // Queued like every other local generation, and NOT background: the clinician is watching this
@@ -1963,7 +2030,7 @@
     translate: tracked(translate),
     sanitizeAssessment: sanitizeAssessment, sanitizeScribe: sanitizeScribe, scribeMerge: scribeMerge, sanitizeSurgxNote: sanitizeSurgxNote, NEVER_AI_FILLABLE: NEVER_AI_FILLABLE,
     sanitizeIcd: sanitizeIcd, sanitizeReasoning: sanitizeReasoning, sanitizeMaikNext: sanitizeMaikNext, sanitizeMaikExtract: sanitizeMaikExtract, sanitizeAdvisory: sanitizeAdvisory,
-    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: tracked(answer), available: available, currentPack: currentPack,
+    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, continues: continues, carry: carry, ragQuestion: ragQuestion, answer: tracked(answer), available: available, currentPack: currentPack,
     isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
