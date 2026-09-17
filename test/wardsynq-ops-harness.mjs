@@ -116,3 +116,8 @@ export function patchOrgConfig(orgId, patch) {
   const d = docs.get(`q_orgs/${orgId}`);
   d.fields.wardsynq = { ...(d.fields.wardsynq || {}), ...patch };
 }
+
+/** Every stored document whose fields match `pred` (org documents, event-log rows), as { path, fields }. */
+export function docsWhere(pred) {
+  return [...docs].filter(([path, d]) => pred(d.fields, path)).map(([path, d]) => ({ path, fields: d.fields }));
+}
