@@ -63,6 +63,9 @@ async function connect() {
 // The EXACT bodies the server sends (functions/_quota.js), serialized into the page.
 const CARE = JSON.stringify(quotaRefusal({}, "care"));
 const SCRIBE = JSON.stringify(quotaRefusal({}, "scribe"));
+// The same care refusal once a server actually has a count, and once it has none to give.
+const CARE7 = JSON.stringify(quotaRefusal({}, "care", { unheardCount: 7 }));
+const CARE0 = JSON.stringify(quotaRefusal({}, "care", { unheardCount: 0 }));
 
 const sheetText = () => ev(`var p=document.getElementById("proPay"); return p ? p.innerText : null;`);
 const close = () => ev(`var p=document.getElementById("proPay"); if(p){ var c=p.querySelector('[data-pp="close"]'); if(c) c.click(); } return 1;`);
@@ -104,6 +107,24 @@ try {
   ok(P.map(p => p.k).sort().join(",") === "care.100,care.25", "buttons carry the server pack keys care.25 / care.100");
   ok(/25 patients ₹1,099/.test(P.map(p => p.t).join(" | ")), `the ₹1,099 / 25-patient pack is priced on the card (got ${JSON.stringify(P.map(p => p.t))})`);
   ok(/100 patients ₹3,499/.test(P.map(p => p.t).join(" | ")), "the ₹3,499 / 100-patient pack is priced on the card");
+
+  // ── the nudge: it renders with a real count and vanishes at 0 ──
+  await close();
+  await refuse(CARE7);
+  await sleep(400);
+  const n7 = String(await sheetText() || "");
+  ok(/7 patients discharged this month have not heard from you\./.test(n7), "a real count renders the unheard-patients nudge verbatim");
+  ok((n7.match(/have not heard from you/g) || []).length === 1, "the nudge renders exactly once");
+  ok(n7.indexOf("7 patients discharged") < n7.indexOf("Your patient hears from you on day 3"), "the nudge leads the deck, above the evergreen lines");
+  ok(!/\u2014/.test(n7), "no em-dash on the sheet with the nudge");
+  ok(!/\b\d{10}\b|MRN|mrn/.test(n7), "the nudge carries a number only, never a patient identifier");
+
+  await close();
+  await refuse(CARE0);
+  await sleep(400);
+  const n0 = String(await sheetText() || "");
+  ok(/The clinic that calls is the clinic they come back to\./.test(n0), "the sheet still opens at a zero count");
+  ok(!/have not heard from you/.test(n0), "the nudge vanishes at 0 rather than saying \"0 patients\"");
 
   // ── the Scribe refusal renders the Scribe deck, doctor-final and non-diagnostic ──
   await close();

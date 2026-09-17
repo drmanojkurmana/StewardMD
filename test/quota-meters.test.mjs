@@ -161,6 +161,33 @@ test('the "have not heard from you" line is absent unless a real count is suppli
   assert.equal(five[0], "5 patients discharged this month have not heard from you.");
 });
 
+/* This sentence tells a clinician they neglected patients. A wrong number is worse than no sentence,
+   so anything that is not a real positive integer must produce NO sentence rather than a guess.
+   NOTHING computes unheardCount today (2026-09-18 decision note) so it never renders in production. */
+test("only a real positive integer renders the unheard-patients line", () => {
+  const line = (v) => quotaCopy("care", { unheardCount: v }).lines.join(" | ");
+  for (const v of [undefined, null, 0, -1, -3, "", " ", "abc", "12 or so", "5", NaN, Infinity, -Infinity, 2.7, 0.4, {}, [], true, "7 patients"]) {
+    assert.ok(!/have not heard from you/.test(line(v)), "must not render for: " + String(v));
+  }
+  for (const v of [1, 7, 250]) {
+    assert.match(line(v), /have not heard from you/, "must render for: " + v);
+  }
+  const l = quotaCopy("care", { unheardCount: 1 }).lines;
+  assert.equal(l[0], "1 patients discharged this month have not heard from you.");
+  assert.equal(l.filter((x) => /have not heard from you/.test(x)).length, 1, "rendered exactly once");
+});
+
+test("the refusal body carries the count as a bare number and no patient identifier", () => {
+  const body = quotaRefusal({}, "care", { unheardCount: 4, doctorUid: "fbuid-123" });
+  assert.equal(body.copy.lines[0], "4 patients discharged this month have not heard from you.");
+  const json = JSON.stringify(body);
+  // Nothing that could identify a patient (or leak the doctor's uid) may ride the payload.
+  for (const leak of [/fbuid-123/, /\bmrn\b/i, /episodeId/, /patientKeyHash/, /phone/i, /mobile/i, /\b\d{10}\b/]) {
+    assert.ok(!leak.test(json), "refusal payload leaks: " + leak);
+  }
+  assert.deepEqual(Object.keys(body).sort(), ["copy", "error", "feature", "packs", "remaining"]);
+});
+
 test("no clinical outcome claims and no em-dash in any quota copy", () => {
   const all = ["care", "scribe"].map((f) => {
     const c = quotaCopy(f, { unheardCount: 5 });

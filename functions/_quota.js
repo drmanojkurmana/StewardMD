@@ -152,8 +152,11 @@ export function quotaCopy(feature, opts) {
     "Every recovery call comes back to you as a summary you can act on.",
     "Cheaper than an hour of staff time. It never forgets a patient.",
   ];
-  const n = Math.floor(+o.unheardCount || 0);
-  if (n > 0) lines.unshift(n + " patients discharged this month have not heard from you.");
+  /* A real positive integer or nothing. Infinity, NaN and "12 or so" are not counts, and this line
+   * tells a clinician they neglected patients: a wrong number here is worse than no line at all.
+   * NOTHING computes unheardCount today (see the 2026-09-18 decision note) so it never renders. */
+  const n = o.unheardCount;   // no coercion: Number.isInteger rejects "5", true, null, NaN and Infinity outright
+  if (Number.isInteger(n) && n > 0) lines.unshift(n + " patients discharged this month have not heard from you.");
   return {
     headline: "The clinic that calls is the clinic they come back to.",
     lines,

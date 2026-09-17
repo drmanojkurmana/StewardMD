@@ -8204,3 +8204,59 @@ of compliance.js is untouched.
   no em-dash. The "N patients have not heard from you" line renders only with a real server number.
 - Not wired: the ROLE_GATES_ON access matrix (separate branch), an `unheardCount` source for that line, and
   the scheduler's own MAiTRI calls (they continue an already-paid episode).
+
+## 2026-09-18 — The "N patients have not heard from you" nudge stays unwired: there is no honest source
+
+Investigated whether the `unheardCount` line in `quotaCopy()` (`functions/_quota.js`) can be made real.
+It cannot, today. Not wiring it is the decision, not an omission. The sentence tells a clinician they
+neglected patients; a wrong number there is worse than no sentence, so it renders only from a real count.
+
+The sentence needs three facts joined: (1) a patient this doctor discharged, (2) in this calendar month,
+(3) with no FollowCare episode. Four stores were checked and none carries all three.
+
+- **`q_tickets` / `q_sessions` (Firestore, OPD queue).** Has the doctor (`q_sessions.doctorUid`,
+  `_queue_engine.js:23,33`), a completion time (`consultEndAt`, `:209`) and a joinable patient key
+  (`decPHI(encMobile)` reproduces FollowCare's `patientKeyHash`). **Killed by retention:** every ticket
+  and session carries `expiresAt` = end of visit day (`_queue_engine.js:36,171`) under a Firestore TTL
+  policy (`docs/queue/smart-opd-queue-design.md:120`, `QUEUE_RETENTION_DAYS` default 2). A month of
+  tickets does not exist to be counted. Also: an OPD visit is not a discharge.
+- **WardSynQ `Encounter` (D1 `wardsynq_record`).** The only durable discharge record: `attendingId` =
+  the syncing session's `doctorUid` (`_wardsynq/migrate-encounter.js:153,191`), `periodEnd` = the real
+  discharge time (`migrate-discharge.js:576-584`), not TTL'd. **Fails on both remaining counts.**
+  (a) Neither `attendingId` nor `periodEnd` is indexed - they live inside the JSON body, and the only
+  read paths are by patient, by id prefix, or a whole-type tenant scan (`db/wardsynq_schema.sql:32-33`,
+  `repository-d1.js:163-168`). One doctor's month = a tenant-wide Encounter scan. (b) **There is no join
+  key to FollowCare.** The Encounter's `patientId` is a pseudonym derived from the MRN
+  (`_wardsynq/opd-identity.js:18-20`); the identity index knows mrn / abha / ticket / ghis-episode and
+  no phone at all (`_wardsynq/identity-key.js:39-51`), and the `Patient` model has no phone field.
+  FollowCare keys patients by `patientKeyHash(hospitalId, last-10-of-phone)` (`_followcare.js:118-126`).
+  Nothing can decide whether a discharged patient already has an episode. Also gated: nothing is written
+  unless the tenant has WardSynQ migration on (`migrate-encounter.js:180`).
+- **`q_patients` / `q_patient_index`.** A registry, not a visit log: org-scoped, no doctor uid, no visit
+  or discharge timestamp.
+- **`fc_episodes`.** Has all four properties (`doctorUid`, `dischargeMs`, an equality-indexed per-doctor
+  query at `_followcare.js:470`, `patientKeyHash`) and is therefore circular: it only knows the patients
+  who already have an episode, which is the set the sentence subtracts.
+
+Second tenant problem even if a join existed: FollowCare's `hospitalId` comes from the doctor's
+self-declared `fc_doctors` binding (`_followcare.js:482`), the OPD org id comes from the org store. The
+two namespaces are not the same string, so the hash would not match even with the phone in hand.
+
+**What would have to be recorded first** (any one of these unblocks it):
+1. The discharge/visit-completion event carries the patient's phone-derived `patientKeyHash` under the
+   same tenant id FollowCare uses - i.e. `patientKeyHash` written onto the WardSynQ `Encounter` (or its
+   identity index gains a phone system) at admission/registration. It is a non-reversible hash, so this
+   adds no new PHI at rest.
+2. **Or** a small per-doctor monthly counter maintained at the discharge write itself: increment
+   `nudge:<uid>:<YYYY-MM>` on discharge, decrement on FollowCare enrol when the episode's
+   `patientKeyHash` matches. O(1) per event, no scan, no month-long retention needed, and the paywall
+   reads one KV key. This is the cheaper option and the one to build.
+
+Either way the count is then folded into the `quota` block of `/api/billing/status` and passed to
+`quotaCopy()`. Until then `unheardCount` is never supplied and the line never renders.
+
+Hardened meanwhile (`functions/_quota.js`): the guard is now `Number.isInteger(n) && n > 0` with **no**
+coercion, so `true`, `"5"`, `Infinity`, `NaN`, `2.7` and `-3` all produce no sentence rather than
+"1 patients discharged this month have not heard from you." Pinned by `test/quota-meters.test.mjs`
+(21 tests, +2) and `test/run-quota-topup-ui.mjs` (27 browser checks, +7: the nudge renders verbatim from
+a real count, exactly once, leading the deck, with no identifier, and vanishes at 0).
