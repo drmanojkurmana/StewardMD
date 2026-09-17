@@ -409,3 +409,35 @@ test('askOne: the native request log is drained for replay injection BEFORE capt
   assert.ok(captureAt >= 0, 'captureView never read the screen');
   assert.ok(injectAt < captureAt, `the replay injection (index ${injectAt}) must run before captureView drains the log (index ${captureAt})`);
 });
+
+/* FIX C. A patient with no radiology reports yet shows an EMPTY list: buildTableView marks it
+ * singleRecord (no data rows), the proof ends no-screen-values, and the doctor was told "None of the
+ * requests from that screen returned the radiology reports", which reads as a wrong screen when the
+ * screen was right and the patient simply has none. The ask now says so and asks for a patient who has
+ * some, without spending a proof attempt. */
+const EMPTY_TABLE = { id: 'radioGrid', class: 'table', headers: ['Service ID', 'Date', 'Description'], rows: [{ isHeader: true, onclick: null }] };
+test('askOne: an empty list gets a "this patient has no ... yet" re-ask, not a failed proof', async () => {
+  const state = { requests: [] };
+  const plugin = pageLoadFakePlugin(state);
+  const orig = plugin.evaluate.bind(plugin);
+  plugin.evaluate = async (args) => {
+    const e = String(args.expression);
+    if (e.includes('function CRAWL_RAW_TABLE')) { plugin.evals.push(e); return { result: JSON.stringify(EMPTY_TABLE) }; }
+    return orig(args);
+  };
+  const prompts = [];
+  let proves = 0;
+  const book = { async prove() { proves += 1; }, trace: [] };
+  await runPhoneDiscovery({
+    plugin, api: fakeApiDetail({}), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] }, book,
+    mode: 'manual', caps: { maxMs: 30000, waitMs: 1, verifyWaitMs: 5, verifyBudgetMs: 50 },
+    askDoctor: async ({ gap, text }) => {
+      if (gap !== 'radiology') return { done: false };
+      prompts.push(text);
+      return prompts.length < 2 ? { done: true } : { done: false };
+    },
+  }).catch(() => {});   // the run ends with nothing discovered once the second ask is declined: expected here
+  assert.ok(prompts.length >= 2, 'the doctor was not asked again: ' + JSON.stringify(prompts));
+  assert.match(prompts[1], /^This patient has no radiology reports yet\. Open the radiology reports of a patient who has some/, prompts[1]);
+  assert.equal(proves, 0, 'an empty list must not be sent to the proof');
+});
