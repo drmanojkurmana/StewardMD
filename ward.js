@@ -6697,15 +6697,18 @@
     else if (f && f.error === "not_built") body = '<p class="w-hint">' + ms("info") + wTH("ward.this-forecast-is-not-built", "This forecast is not built:") + " " + esc(f.detail || "") + "</p>";
     else if (f && !f.ok) body = '<p class="w-hint warn">' + ms("error") + wTH("ward.the-forecast-could-not-be-worked", "The forecast could not be worked out{v}.", { v: (f.detail ? ": " + esc(f.detail) : "") }, "", 1) + "</p>";
     else if (f && f.prediction) {
-      var p = f.prediction, u = p.uncertainty || {};
+      var p = f.prediction, u = p.uncertainty || {}, mins = p.unit === "minutes";
       body = '<p class="w-hint warn"><b>' + esc(p.label) + "</b></p>" +
-        "<p><b>" + esc(p.pointEstimate) + "</b> " + (p.horizonDays === 1 ? wTH("ward.per-day-expected-over-the-next-one", "per day expected over the next {horizonDays} day (likely range {lowerBound} to {upperBound})", { horizonDays: esc(p.horizonDays), lowerBound: esc(u.lowerBound), upperBound: esc(u.upperBound) }, "horizonDays lowerBound upperBound") : wTH("ward.per-day-expected-over-the-next-many", "per day expected over the next {horizonDays} days (likely range {lowerBound} to {upperBound})", { horizonDays: esc(p.horizonDays), lowerBound: esc(u.lowerBound), upperBound: esc(u.upperBound) }, "horizonDays lowerBound upperBound")) + "</p>" +
+        "<p><b>" + esc(p.pointEstimate) + "</b> " + (mins ? wTH("ward.forecast-minutes-late", "minutes from the scheduled start to entering the theatre, per case, expected (likely range {lowerBound} to {upperBound}; below zero is an early start)", { lowerBound: esc(u.lowerBound), upperBound: esc(u.upperBound) })
+          : p.horizonDays === 1 ? wTH("ward.per-day-expected-over-the-next-one", "per day expected over the next {horizonDays} day (likely range {lowerBound} to {upperBound})", { horizonDays: esc(p.horizonDays), lowerBound: esc(u.lowerBound), upperBound: esc(u.upperBound) }, "horizonDays lowerBound upperBound") : wTH("ward.per-day-expected-over-the-next-many", "per day expected over the next {horizonDays} days (likely range {lowerBound} to {upperBound})", { horizonDays: esc(p.horizonDays), lowerBound: esc(u.lowerBound), upperBound: esc(u.upperBound) }, "horizonDays lowerBound upperBound")) + "</p>" +
         "<p class=\"w-dt-times\">" + wTH("ward.from-days-of-records-to-a", "From {inputWindow} days of records, {slice} to {slice2}. A plain average, not a fitted model.", { inputWindow: esc(p.inputWindow && p.inputWindow.sampleSize), slice: esc(String(p.inputWindow && p.inputWindow.from || "").slice(0, 10)), slice2: esc(String(p.inputWindow && p.inputWindow.to || "").slice(0, 10)) }, "inputWindow slice slice2") + "</p>" +
         (p.method ? '<p class="w-dt-times">' + wTH("ward.forecast-method", "Worked out as: {method}", { method: esc(p.method) }, "method") + "</p>" : "") +
-        (p.inputs && p.inputs.length ? "<details><summary>" + wTH("ward.forecast-inputs", "The daily counts behind this number") + '</summary><ul class="w-mini">' + p.inputs.map(function (x) {
-          return "<li><b>" + esc(x.value) + "</b><span>" + esc(String(x.atIso || "").slice(0, 10)) + "</span></li>";
+        (p.inputs && p.inputs.length ? "<details><summary>" + (mins ? wTH("ward.forecast-inputs-minutes", "Each day's mean minutes behind this number") : wTH("ward.forecast-inputs", "The daily counts behind this number")) + '</summary><ul class="w-mini">' + p.inputs.map(function (x) {
+          return "<li><b>" + esc(x.value) + "</b><span>" + esc(String(x.atIso || "").slice(0, 10)) + (x.cases != null ? " &middot; " + wTH("ward.forecast-cases", "{n} cases", { n: esc(x.cases) }) : "") + "</span></li>";
         }).join("") + "</ul></details>" : "");
     }
+    /* Theatre delays: the cases left out for having no scheduled start are said, on a forecast and on a refusal alike. */
+    if (f && f.casesWithoutScheduledStart) body += '<p class="w-dt-times">' + wTH("ward.forecast-no-scheduled-start", "{n} cases had no scheduled start, so no delay could be measured; they are not counted.", { n: esc(f.casesWithoutScheduledStart) }) + "</p>";
     return '<div class="w-card"><div class="w-card-h">' + ms("trending_up") + "<h3>" + wTH("ward.forecast", "Forecast") + "</h3></div>" +
       '<div class="w-actions">' + TWIN_METRICS.map(function (m) { return '<button class="w-btn ghost tiny" data-w-act="twinpredict:' + m[0] + '">' + esc(wTEn(m[1])) + "</button>"; }).join("") + "</div>" +
       body + "</div>";
@@ -11026,7 +11029,10 @@
    * server could not read it, and says why. A row names the patient by MRN and opens the TPA screen for that patient. */
   function claimsDeskOpen() {
     st.view = "claimsdesk"; st.desk = null; paint();
-    apiGet("/ward/rcm-worklists?orgId=" + encodeURIComponent(st.orgId))
+    /* R2-2: the period the denial analytics cover, sent as the server's own from/to (claims-ops.js). A day picked here is
+     * the whole local day. Neither set is all time, and the panel says which the server applied. */
+    var from = st.deskFrom ? new Date(st.deskFrom + "T00:00:00") : null, to = st.deskTo ? new Date(st.deskTo + "T23:59:59.999") : null;
+    apiGet("/ward/rcm-worklists?orgId=" + encodeURIComponent(st.orgId) + (from && !isNaN(from.getTime()) ? "&from=" + encodeURIComponent(from.toISOString()) : "") + (to && !isNaN(to.getTime()) ? "&to=" + encodeURIComponent(to.toISOString()) : ""))
       .then(function (r) { if (st.view !== "claimsdesk") return; st.desk = r && r.ok ? r : { failed: true, status: r && r.__status }; paint(); })
       .catch(function () { if (st.view === "claimsdesk") { st.desk = { failed: true }; paint(); } });
   }
@@ -11039,7 +11045,11 @@
   function claimsDeskView(state) {
     var d = state.desk;
     var head = "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
-      "<h3>" + wTH("ward.rcm-desk", "Claims desk") + "</h3><button class=\"w-btn ghost\" data-w-act=\"claimsdesk\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>";
+      "<h3>" + wTH("ward.rcm-desk", "Claims desk") + "</h3><button class=\"w-btn ghost\" data-w-act=\"claimsdesk\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" +
+      '<div class="w-filter w-noprint"><label class="w-f"><span>' + wTH("ward.rcm-period-from", "Denials from") + '</span><input id="wDeskFrom" type="date" value="' + esc(state.deskFrom || "") + '"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.rcm-period-to", "to") + '</span><input id="wDeskTo" type="date" value="' + esc(state.deskTo || "") + '"></label>' +
+      '<button class="w-btn ghost" data-w-act="deskperiod">' + ms("filter_alt") + wTH("ward.rcm-period-apply", "Show this period") + "</button>" +
+      (state.deskFrom || state.deskTo ? '<button class="w-btn ghost" data-w-act="deskperiod:clear">' + ms("close") + wTH("ward.rcm-period-clear", "All time") + "</button>" : "") + "</div>";
     if (!d) return '<div class="w-card">' + head + "<p class=\"w-empty\">" + wTH("ward.loading4", "Loading...") + "</p></div>";
     if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("warning") + (d.status === 403
       ? wTH("ward.rcm-desk-forbidden", "Your role cannot open the claims desk.", null, "", 1)
@@ -11093,7 +11103,13 @@
             (g.amountNotRecorded ? " (" + wTH("ward.rcm-amount-missing", "{n} without an amount", { n: esc(g.amountNotRecorded) }) + ")" : "") + "</div></li>";
         }).join("") + "</ul>" : '<p class="w-empty">-</p>');
       };
+      /* The period the SERVER applied, never the inputs' own values: a date it could not read is all time, and says so. */
+      var per = d.period || {}, day = function (iso) { var t = Date.parse(iso || ""); return isNaN(t) ? "" : new Date(t - new Date(t).getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
       denials = '<div class="w-sub"><h4>' + wTH("ward.rcm-denials", "Denials") + "</h4>" +
+        '<p class="w-dt-times">' + (per.from && per.to ? wTH("ward.rcm-period-both", "Denied from {from} to {to}", { from: esc(day(per.from)), to: esc(day(per.to)) })
+          : per.from ? wTH("ward.rcm-period-since", "Denied since {from}", { from: esc(day(per.from)) })
+          : per.to ? wTH("ward.rcm-period-until", "Denied up to {to}", { to: esc(day(per.to)) })
+          : wTH("ward.rcm-period-all", "All time: no period is applied.")) + "</p>" +
         (!d.denialReasonsConfigured ? '<p class="w-hint">' + wTH("ward.rcm-no-reasons-desk", "No denial reasons are set, so denials are not classified by reason. An administrator adds them on Admin, Price list, Claims settings.") + "</p>" : "") +
         (!dn.count ? '<p class="w-empty">' + wTH("ward.rcm-denials-none", "No denial is recorded on the claims read.") + "</p>"
           : tbl(wTH("ward.rcm-by-payer", "By payer"), dn.byPayer) + tbl(wTH("ward.rcm-by-scheme", "By scheme or payer kind"), dn.byScheme) + tbl(wTH("ward.rcm-by-service", "By type of stay"), dn.byService) + tbl(wTH("ward.rcm-by-reason", "By reason"), dn.byReason) +
@@ -15991,6 +16007,14 @@
     if (cmd === "paenh") { paEnhAction(arg); return; }
     if (cmd === "paenhdec") { paEnhDecisionAction(arg); return; }
     if (cmd === "claimsdesk") { claimsDeskOpen(); return; }
+    if (cmd === "deskperiod") {
+      if (arg === "clear") { st.deskFrom = ""; st.deskTo = ""; }
+      else {
+        st.deskFrom = val("wDeskFrom"); st.deskTo = val("wDeskTo");
+        if (st.deskFrom && st.deskTo && st.deskFrom > st.deskTo) { st.err = wT("ward.rcm-period-backwards", "The start of the period is after its end."); paint(); return; }
+      }
+      claimsDeskOpen(); return;
+    }
     if (cmd === "deskopen") { claimsDeskPatient(arg); return; }
     if (cmd === "estimate") { estimateAction(); return; }
     if (cmd === "preauth") { preAuthAction(); return; }
