@@ -25,7 +25,14 @@ const REF = { key: "ref", label: "Payer reference (used on claims)", type: "text
 const RULES = [
   { key: "preauthRequiredAbove", label: "Pre-authorisation required above (amount)", type: "text" },
   { key: "timelyFilingDays", label: "Timely filing (days from discharge)", type: "text" },
+  /* rcm-claims-ops: the claim checklist (claims-ops.js scrubClaim). No default: a payer with none of these set has no
+   * checklist beyond its pre-authorisation amount. */
+  { key: "queryResponseDays", label: "Days this payer gives to answer a query", type: "text" },
+  { key: "claimDocuments", label: "Documents required with a claim, separated by semicolons", type: "text", list: true },
+  { key: "requireSignedDischargeSummary", label: "A signed discharge summary is required", type: "select", options: [["", "Not required"], ["yes", "Required"]] },
+  { key: "requireIcd10Codes", label: "Diagnoses must be ICD-10 codes from the loaded code set", type: "select", options: [["", "Not required"], ["yes", "Required"]] },
 ];
+const NUMBER_RULES = ["preauthRequiredAbove", "timelyFilingDays", "queryResponseDays"];
 
 /* Sealed like every connector credential. The certificates are public, but they are long and they decide
  * who can read what is sent, so they travel the same shown-once, never-returned path. */
@@ -37,13 +44,13 @@ const NHCX_SECRETS = Object.freeze([
 ]);
 
 function numbersValid(settings) {
-  for (const f of RULES) if (settings[f.key] != null && settings[f.key] !== "" && !(Number(settings[f.key]) >= 0)) return `${f.label} must be a number.`;
+  for (const f of RULES) if (NUMBER_RULES.includes(f.key) && settings[f.key] != null && settings[f.key] !== "" && !(Number(settings[f.key]) >= 0)) return `${f.label} must be a number.`;
   return contractProblem(settings, settings.ref);
 }
 
 const PAYER_KIND = Object.freeze({
   label: "Payers: insurers, TPAs, government schemes and corporates", singleton: false,
-  help: "Each payer your hospital claims from, with its contract. A claim names the payer by its reference. Payer rules are warnings only; they never block care or change a claim. The GST recipient is decided on each contract: choosing the contracting party needs your chartered accountant's basis.",
+  help: "Each payer your hospital claims from, with its contract. A claim names the payer by its reference. Payer rules never block care. The claim checklist (documents, pre-authorisation, signed discharge summary, ICD-10 codes) stops a claim being sent until it is complete or a person records why it is sent anyway. The GST recipient is decided on each contract: choosing the contracting party needs your chartered accountant's basis.",
   providers: {
     "fhir-claim": {
       label: "FHIR R4 Claim endpoint",
@@ -105,7 +112,7 @@ function payersFromConnectors(records) {
     const s = r.settings || {};
     const authType = r.provider === "fhir-claim" ? str(s.authType) || "bearer" : r.provider === "nhcx" ? "nhcx" : "none";
     const rules = {};
-    for (const f of RULES) if (str(s[f.key])) rules[f.key] = Number(s[f.key]);
+    for (const f of RULES) if (str(s[f.key])) rules[f.key] = NUMBER_RULES.includes(f.key) ? Number(s[f.key]) : f.list ? str(s[f.key]).split(";").map(str).filter(Boolean) : str(s[f.key]);
     return {
       id: str(s.ref), name: str(r.name) || str(s.ref), adapter: r.provider,
       endpoint: str(s.endpoint || s.gatewayUrl) || null, currency: str(s.currency) || undefined, providerName: str(s.providerName) || undefined,

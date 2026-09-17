@@ -7582,3 +7582,25 @@ of compliance.js is untouched.
   mean over busy days only overstated every rate), today (incomplete) is left out, and critical-backlog with no loops is a
   refusal instead of a forecast of zero. Every envelope now carries `method` and `inputs` (the daily counts), shown on the
   twin's Forecast card. Still a plain mean, no model, no clinical score.
+## 2026-09-17 Claims checklist blocks submission, override with a reason; claims desk worklists (branch rcm-claims-ops)
+- Audit gaps 1, 2, 13, 14 (functions/_wardsynq/claims-ops.js). `scrubClaim()` is pure and ships no rule content: the
+  checklist is settings on each payer contract (claimDocuments, queryResponseDays, requireSignedDischargeSummary,
+  requireIcd10Codes, plus the existing preauthRequiredAbove) and the claim documents of the stay's package. A BLOCKING
+  finding refuses POST /ward/claim-state submit/resubmit (422 claim_checklist_blocked); `overrideReason` sends it anyway and
+  the claim keeps checklistOverrides {who, when, reason, findings}. CHANGE: preauthRequiredAbove used to be a warning only;
+  it now blocks (still never blocks care). Timely filing stays a warning.
+- A fact the actor's grant cannot read (a cashier cannot read ClinicalNote or, on billing.view, Condition/Encounter) is
+  UNCHECKED, and blocks where a payer rule needs it. No grant was widened; no new resource type. Documents "obtained" are a
+  person's attestation on the claim, not a document-store lookup (billing cannot read DocumentReference).
+- Payer queries and enhancements live INSIDE the Claim / PreAuthorisation record (payerQueries, enhancements), one atomic
+  versioned write, so a query can never exist without its claim state. A query moves a submitted claim to queried; the
+  resubmission answers the open queries. Pre-authorisations gain validUntil (approved only); a claim whose only approval
+  ran out before the admission date blocks.
+- Denial reasons and ageing bands are org config `wardsynq.rcm` (POST /org/rcm-settings, staff.admin, reason required),
+  no defaults. The classification copies the label onto the claim so editing the list never rewrites history.
+- Desk lists (GET /ward/rcm-worklists, billing.view): tenant-wide svc.list capped at 2000 per type and said when capped;
+  each list null with its reason when unreadable. Patients are named by the MRN carried in `opd-pat-<mrn>` (billing cannot
+  read Patient). AR ageing is over live invoices' balances by the payer copied onto the bill; it reconciles to the sum of
+  balances (credit held apart).
+- Evidence pack (GET/POST /ward/claim-evidence): deterministic, from records only, no AI; saved versions on the claim with
+  expectedVersion. No NABH KPI entry is owned by this package, so compliance.js is untouched.

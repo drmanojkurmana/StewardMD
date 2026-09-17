@@ -250,6 +250,7 @@ import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
 import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList, raiseEstimate } from "../../_wardsynq/billing.js";
+import { rcmSettings, validateRcmSettings, claimChecks, preAuthEvent, claimEvidence, saveClaimEvidence, rcmWorklists } from "../../_wardsynq/claims-ops.js";
 import { requestRelease, authorizeRelease, denyRelease, cancelRelease, fulfillRelease, readRoi, roiRequestsForPatient } from "../../_wardsynq/roi.js";
 import { patientCopy, releaseToPatient, releaseDocumentToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
@@ -1785,6 +1786,10 @@ export async function onRequest(context) {
         claims: CAPS.BILLING_VIEW, upcoding: CAPS.STAFF_ADMIN,
         // P1.5: a pre-admission estimate is a financial record written by the same authority that codes a claim.
         "claim-estimate": CAPS.BILLING_CHARGE,
+        /* rcm-claims-ops (claims-ops.js): reading the checklist, the evidence pack and the desk's lists is reading bills;
+         * a payer query or enhancement on a pre-authorisation and saving an evidence pack change a claim record. */
+        "claim-checks": CAPS.BILLING_VIEW, "rcm-worklists": CAPS.BILLING_VIEW, "preauth-event": CAPS.BILLING_CHARGE,
+        "claim-evidence": method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW,
         // TASK 4.9: a third-party record request is a records-custody function, not clinical or
         // billing work - staff.admin, the same authority every other org-administration action in
         // this file already uses, pending a real site adding a dedicated HIM role.
@@ -3383,13 +3388,28 @@ export async function onRequest(context) {
         let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await claimAction(request, env, { ...deps, claimId: body.claimId, action: body.action, reason: body.reason, codes: body.codes || null, now: body.now, submittedAmount: body.submittedAmount, approvedAmount: body.approvedAmount, deniedAmount: body.deniedAmount,
           payerId: body.payerId, payerReference: body.payerReference, paidAmount: body.paidAmount, disallowances: body.disallowances, shortPaymentReason: body.shortPaymentReason, amount: body.amount,
+          overrideReason: body.overrideReason, text: body.text, receivedAt: body.receivedAt, documents: body.documents, denialCode: body.denialCode, rootCause: body.rootCause, rcm: rcmSettings(wsqCfg),
           payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* rcm-claims-ops (functions/_wardsynq/claims-ops.js): the claim checklist and coding candidates, payer queries and
+       * enhancements on a pre-authorisation, the evidence pack, and the claims desk's lists. Payers are read as for claims. */
+      if ((sub === "claim-checks" || sub === "rcm-worklists" || sub === "claim-evidence" || sub === "preauth-event") && (method === "GET" || method === "POST")) {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
+        const q = (k) => url.searchParams.get(k) || "";
+        const r = sub === "claim-checks" && method === "GET" ? await claimChecks(request, env, { ...deps, patientId: q("patientId"), encounterId: q("encounterId"), payers, rcm: rcmSettings(wsqCfg) })
+          : sub === "rcm-worklists" && method === "GET" ? await rcmWorklists(request, env, { ...deps, payers, rcm: rcmSettings(wsqCfg), from: q("from"), to: q("to") })
+          : sub === "claim-evidence" && method === "GET" ? await claimEvidence(request, env, { ...deps, claimId: q("claimId"), payers })
+          : sub === "claim-evidence" ? await saveClaimEvidence(request, env, { ...deps, claimId: body.claimId, text: body.text, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null })
+          : sub === "preauth-event" && method === "POST" ? await preAuthEvent(request, env, { ...deps, preAuthId: body.preAuthId, action: body.action, text: body.text, receivedAt: body.receivedAt, answer: body.answer, queryId: body.queryId,
+            requestedAmount: body.requestedAmount, reason: body.reason, enhancementId: body.enhancementId, state: body.state, approvedAmount: body.approvedAmount, note: body.note, decidedAt: body.decidedAt, payers, idempotencyKey: body.idempotencyKey || null })
+          : { ok: false, status: 404, error: "not_found" };
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "preauth" && method === "POST") {
         let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await recordPreAuth(request, env, { ...deps, patientId: body.patientId, treatment: body.treatment, state: body.state, scheme: body.scheme, reason: body.reason, decidedAt: body.decidedAt, invoiceId: body.invoiceId, authorizedAmount: body.authorizedAmount, idempotencyKey: body.idempotencyKey || null,
-          payerId: body.payerId, requestedAmount: body.requestedAmount, policyNumber: body.policyNumber, codes: body.codes, payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+          payerId: body.payerId, requestedAmount: body.requestedAmount, policyNumber: body.policyNumber, codes: body.codes, validUntil: body.validUntil, payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if ((sub === "nhcx-eligibility" || sub === "hcx-status") && method === "POST") {
@@ -5465,6 +5485,29 @@ export async function onRequest(context) {
         { action: "org:gst_settings", meta: JSON.stringify({ changed, reason: reason.slice(0, 80) }) });
       const back = await ORG.getOrg(env, orgId);
       return json({ ok: true, changed, settings: readGstSettings(back && back.wardsynq) }, 200, request);
+    }
+    /* rcm-claims-ops: the hospital's claims settings (functions/_wardsynq/claims-ops.js), on Admin > Price list: its own
+     * denial reasons and the receivables ageing bands. staff.admin reads and saves; every change needs a reason and the
+     * audit row names what changed. */
+    if (seg === "org" && sub === "rcm-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Claims settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, settings: rcmSettings(o.wardsynq) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateRcmSettings(cb.settings);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_rcm_settings", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const before = rcmSettings(o.wardsynq);
+      const changed = ["denialReasons", "ageingBands"].filter((k) => JSON.stringify(before[k]) !== JSON.stringify(value[k]));
+      if (!changed.length) return json({ ok: true, changed: [], settings: before }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the claims settings are being changed. Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { rcm: value } }, actor.id, { action: "org:rcm_settings", meta: JSON.stringify({ changed, reason: reason.slice(0, 80) }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ok: true, changed, settings: rcmSettings(back && back.wardsynq) }, 200, request);
     }
     /* The statutory registers' hospital-editable settings (register-settings.js): where the law is unsettled, the safest
      * default and a setting, with the note shown beside it. staff.admin reads and saves; the audit row names the change

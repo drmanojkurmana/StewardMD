@@ -3497,6 +3497,86 @@
       .catch(function () { write("<p>" + wTH("ward.pkg-pack-failed", "The document pack could not be prepared. Nothing was sent anywhere.") + "</p>"); });
   }
 
+  /* rcm-claims-ops (functions/_wardsynq/claims-ops.js): the claim checklist, payer queries and enhancements with their
+   * clocks, coding candidates from the chart and the evidence pack. state.tpaChecks: null = loading, false = failed,
+   * never read as a complete claim. Finding sentences are the server's own words. */
+  function rcmAge(iso) {
+    var t = Date.parse(iso); if (!isFinite(t)) return "-";
+    var h = Math.max(0, Math.floor((Date.now() - t) / 3600000));
+    return h < 48 ? wT("ward.rcm-hours", "{n} h", { n: h }) : wT("ward.rcm-days", "{n} d", { n: Math.floor(h / 24) });
+  }
+  function rcmQueryHtml(q) {
+    if (q.answeredAt) return '<div class="w-dt-times">' + wTH("ward.rcm-query-answered", "Payer query of {received}, answered {answered}: {text}", { received: when(q.receivedAt), answered: when(q.answeredAt), text: esc(q.text) }, "text") + "</div>";
+    var overdue = q.dueBy && Date.parse(q.dueBy) < Date.now();
+    return '<div class="' + (overdue ? "w-warn" : "w-dt-times") + '">' + wTH("ward.rcm-query-open", "Open payer query, received {received} ({age} ago): {text}", { received: when(q.receivedAt), age: esc(rcmAge(q.receivedAt)), text: esc(q.text) }, "text") +
+      (q.dueBy ? " &middot; " + (overdue ? wTH("ward.rcm-query-overdue", "answer was due {due}", { due: when(q.dueBy) }) : wTH("ward.rcm-query-due", "answer due {due}", { due: when(q.dueBy) })) : "") + "</div>";
+  }
+  function rcmChecklistHtml(checks, c) {
+    if (["coded", "submitted", "queried", "denied"].indexOf(c.state) < 0) return "";
+    if (checks == null) return '<div class="w-dt-times">' + wTH("ward.rcm-checking", "Checking this claim...") + "</div>";
+    if (checks === false) return '<div class="w-warn">' + wTH("ward.rcm-check-failed", "The claim checklist could not be loaded. Do not read this as complete.", null, "", 1) + "</div>";
+    var k = checks.checks && checks.checks[c.id];
+    if (!k) return "";
+    return (k.blocking.length ? '<div class="w-warn"><b>' + wTH("ward.rcm-blocking", "Fix before sending, or send with a recorded reason:") + "</b> " + k.blocking.map(function (f) { return esc(f.text); }).join(" ") + "</div>"
+        : '<div class="w-dt-times">' + wTH("ward.rcm-checklist-complete", "Checklist complete.") + "</div>") +
+      (k.warnings.length ? '<div class="w-dt-times">' + k.warnings.map(function (f) { return esc(f.text); }).join(" ") + "</div>" : "");
+  }
+  function rcmClaimExtrasHtml(c) {
+    return ((c.documents || []).length ? '<div class="w-dt-times">' + wTH("ward.rcm-docs-obtained", "Documents obtained:") + " " + c.documents.map(function (d) { return esc(d.name); }).join("; ") + "</div>" : "") +
+      (c.payerQueries || []).map(rcmQueryHtml).join("") +
+      (c.denialClassification ? '<div class="w-dt-times">' + wTH("ward.rcm-denial-class", "Denial reason {code} {label}; root cause: {cause}", { code: esc(c.denialClassification.code), label: esc(c.denialClassification.label), cause: esc(c.denialClassification.rootCause) }, "code label cause") + "</div>" : "") +
+      (c.checklistOverrides || []).map(function (o) { return '<div class="w-warn">' + wTH("ward.rcm-override", "Sent over checklist findings on {at}: {reason}", { at: when(o.at), reason: esc(o.reason) }, "reason") + "</div>"; }).join("") +
+      ((c.evidencePacks || []).length ? '<div class="w-dt-times">' + wTH("ward.rcm-packs-saved", "Evidence pack versions saved: {n}", { n: c.evidencePacks.length }) + "</div>" : "");
+  }
+  function rcmClaimButtons(c) {
+    var b = function (act, icon, label) { return '<button class="w-btn ghost sm" data-w-act="' + act + ":" + esc(c.id) + '">' + ms(icon) + label + "</button>"; };
+    var denied = c.state === "denied" || (c.history || []).some(function (h) { return h && h.event === "denied"; });
+    return (["coded", "submitted", "queried", "denied"].indexOf(c.state) >= 0 ? b("claimdocs", "attach_file", wTH("ward.rcm-docs", "Documents obtained")) : "") +
+      (c.state === "submitted" || c.state === "queried" ? b("claimquery", "help", wTH("ward.rcm-payer-query", "Payer query")) : "") +
+      (c.state === "queried" ? b("claimresubmit", "reply", wTH("ward.rcm-answer-resubmit", "Answer and resubmit")) : "") +
+      (denied ? b("claimclassify", "category", wTH("ward.rcm-classify", "Classify denial")) : "") +
+      b("claimevidence", "description", wTH("ward.rcm-evidence", "Evidence pack"));
+  }
+  function rcmCandidatesHtml(checks) {
+    if (checks == null) return "";
+    if (checks === false) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-candidates-failed", "The coding candidates could not be loaded.", null, "", 1) + "</p>";
+    if (checks.candidates == null) return '<p class="w-hint">' + wTH("ward.rcm-candidates-unreadable", "Coding candidates need the problem list, which this role cannot read.") + "</p>";
+    if (!checks.candidates.length) return '<p class="w-hint">' + wTH("ward.rcm-no-candidates", "No coded diagnosis is on the problem list. A clinician codes a diagnosis on the chart; billing cannot add one.") + "</p>";
+    return '<div><span class="w-dt-times">' + wTH("ward.rcm-candidates", "Coded on the chart, tap to add:") + "</span> " + checks.candidates.map(function (x) {
+      return '<button class="w-btn ghost sm" data-w-act="claimcodepick:' + esc(x.code) + '">' + esc(x.code) + " " + esc(x.display) + (x.thisStay ? "" : " (" + wTH("ward.rcm-other-stay", "not this stay") + ")") + "</button>";
+    }).join("") + "</div>";
+  }
+  function rcmPreAuthHtml(a) {
+    var b = function (act, icon, label) { return '<button class="w-btn ghost sm" data-w-act="' + act + ":" + esc(a.id) + '">' + ms(icon) + label + "</button>"; };
+    var openQ = (a.payerQueries || []).some(function (q) { return !q.answeredAt; });
+    var openE = (a.enhancements || []).filter(function (e) { return e.state === "requested"; })[0];
+    return (a.validUntil ? '<div class="w-dt-times">' + wTH("ward.rcm-valid-until", "valid until {date}", { date: esc(a.validUntil) }) + "</div>" : "") +
+      (a.payerQueries || []).map(rcmQueryHtml).join("") +
+      (a.enhancements || []).map(function (e) {
+        return '<div class="w-dt-times">' + (e.state === "requested"
+          ? wTH("ward.rcm-enh-open", "Enhancement to {amount} asked {at} ({age} ago): {reason}", { amount: esc(e.requestedAmount), at: when(e.requestedAt), age: esc(rcmAge(e.requestedAt)), reason: esc(e.reason) }, "reason")
+          : wTH("ward.rcm-enh-decided", "Enhancement to {amount}: {state} {at}{approved}", { amount: esc(e.requestedAmount), state: e.state === "approved" ? wTH("ward.rcm-approved", "Approved") : wTH("ward.rcm-refused", "Refused"), at: when(e.decidedAt), approved: e.approvedAmount != null ? " (" + esc(e.approvedAmount) + ")" : "" }, "state")) + "</div>";
+      }).join("") +
+      '<div class="w-mini-row-act">' + (a.state === "requested" || a.state === "approved" ? b("paquery", "help", wTH("ward.rcm-payer-query", "Payer query")) : "") +
+      (openQ ? b("paanswer", "reply", wTH("ward.rcm-answer-query", "Answer query")) : "") +
+      (a.state === "approved" && !openE ? b("paenh", "trending_up", wTH("ward.rcm-enhancement", "Ask for enhancement")) : "") +
+      (openE ? '<button class="w-btn ghost sm" data-w-act="paenhdec:' + esc(a.id) + "|" + esc(openE.id) + '">' + ms("gavel") + wTH("ward.rcm-enh-decision", "Enhancement decision") + "</button>" : "") + "</div>";
+  }
+  function tpaEvidenceView(state) {
+    var e = state.tpaEvidence || {};
+    var head = "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button><h3>" + wTH("ward.rcm-evidence", "Evidence pack") + "</h3></div>";
+    if (e.loading) return '<div class="w-card">' + head + "<p class=\"w-empty\">" + wTH("ward.loading4", "Loading...") + "</p></div>";
+    if (e.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-evidence-failed", "The evidence pack could not be assembled. Nothing is missing from the claim; try again.", null, "", 1) + "</p></div>";
+    return '<div class="w-card">' + head +
+      '<p class="w-hint w-noprint">' + ms("info") + wTH("ward.rcm-evidence-note", "Assembled from the records as they stand, not written by AI. Edit it, save it as a version on the claim, then print it.") + "</p>" +
+      '<textarea id="wTpaEvText" rows="18" class="w-noprint" style="width:100%">' + esc(e.text || "") + "</textarea>" +
+      '<pre class="w-evidence-print" style="white-space:pre-wrap">' + esc(e.text || "") + "</pre>" +
+      '<div class="w-actions w-noprint"><button class="w-btn go" data-w-act="claimevsave">' + ms("save") + wTH("ward.rcm-evidence-save", "Save as a version") + "</button>" +
+      '<button class="w-btn ghost" data-w-act="claimevprint">' + ms("print") + wTH("ward.print", "Print") + "</button></div>" +
+      ((e.versions || []).length ? '<ul class="w-mini w-noprint">' + e.versions.map(function (v) {
+        return '<li class="w-mini-row"><div>' + wTH("ward.rcm-evidence-version", "Version {n}, saved {at}", { n: esc(v.n), at: when(v.at) }) + '</div><div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="claimevuse:' + esc(v.n) + '">' + wTH("ward.rcm-evidence-use", "Open this version") + "</button></div></li>";
+      }).join("") + "</ul>" : "") + "</div>";
+  }
   function tpaView(state) {
     if (!state.tpa) return "<div class=\"w-card\"><h3>" + wTH("ward.tpa-claims", "TPA / Claims") + "</h3><p class=\"w-empty\">" + wTH("ward.loading-claims", "Loading claims&hellip;") + "</p></div>";
     var t = state.tpa;
@@ -3537,7 +3617,8 @@
         (resubs.length ? "<div class=\"w-dt-times\">" + (resubs.length > 1 ? wTH("ward.resubmitted-times", "resubmitted {length} times:", { length: resubs.length }, "length") : wTH("ward.resubmitted-time-once", "resubmitted {length} time:", { length: resubs.length }, "length")) + " " + resubs.map(function (x) { return x.reason ? esc(x.reason) : wTH("ward.no-reason-recorded", "no reason recorded"); }).join("; ") + "</div>" : "") +
         (stl ? "<div class=\"w-dt-times\">" + wTH("ward.settled-paid-balance-with", "settled: paid {paidAmount}{v}{v2}{v3}{v4} &middot; balance with {balanceWith}", { paidAmount: esc(stl.paidAmount), v: (stl.approvedAmount != null ? " " + wTH("ward.of-approved2", "of {approvedAmount} approved", { approvedAmount: esc(stl.approvedAmount) }, "approvedAmount") : " (" + wTH("ward.approved-amount-not-recorded", "approved amount not recorded)")), v2: (stl.shortPaidAmount ? " &middot; " + wTH("ward.short", "short {shortPaidAmount}: {shortPaymentReason}", { shortPaidAmount: esc(stl.shortPaidAmount), shortPaymentReason: esc(stl.shortPaymentReason) }, "shortPaidAmount shortPaymentReason") : ""), v3: (stl.disallowances && stl.disallowances.length ? " &middot; " + wTH("ward.disallowed", "disallowed:") + " " + stl.disallowances.map(function (d) { return esc(d.reason) + (d.amount != null ? " (" + esc(d.amount) + ")" : ""); }).join("; ") : ""), v4: (stl.outstandingAmount != null ? " &middot; " + wTH("ward.outstanding3", "outstanding {outstandingAmount}", { outstandingAmount: esc(stl.outstandingAmount) }, "outstandingAmount") : " &middot; " + wTH("ward.outstanding-unknown", "outstanding unknown")), balanceWith: esc(stl.balanceWith) }, "paidAmount balanceWith") + (stl.patientBalance ? " (" + esc(stl.patientBalance.amount) + ": " + esc(stl.patientBalance.reason) + ")" : "") + "</div>" : "") +
         (warns.length ? warns.map(function (w) { return '<div class="w-warn">' + esc(w) + "</div>"; }).join("") : "") +
-        "</div>" + (actions ? '<div class="w-mini-row-act">' + actions + "</div>" : "") + "</li>";
+        rcmClaimExtrasHtml(c) + rcmChecklistHtml(state.tpaChecks, c) +
+        "</div>" + '<div class="w-mini-row-act">' + actions + rcmClaimButtons(c) + "</div>" + "</li>";
     }).join("");
     var authRows = (t.preAuthorisations || []).map(function (a) {
       return '<li class="w-mini-row"><div><span class="w-st ' + esc(a.state) + '">' + esc(preauthStateWord(a.state)) + "</span> " +
@@ -3546,7 +3627,7 @@
         (a.reason ? " &middot; " + esc(a.reason) : "") +
         partiesHtml(a.parties) + (a.adapter ? "<div class=\"w-dt-times\">" + esc(wTEn(TPA_CHANNEL_WORDS[a.adapter.state]) || a.adapter.state) + (a.adapter.note ? " - " + esc(a.adapter.note) : "") + "</div>" : "") +
         nhcxExchangeLine("preauth", a, t.payers) +
-        '<div class="w-dt-times">' + esc(a.note || "") + "</div></div></li>";
+        '<div class="w-dt-times">' + esc(a.note || "") + "</div>" + rcmPreAuthHtml(a) + "</div></li>";
     }).join("");
     var estRows = (t.estimates || []).map(function (e) {
       return "<li class=\"w-mini-row\"><div><span class=\"w-st\">" + wTH("ward.estimate", "estimate") + "</span> <b>" + esc(e.estimatedAmount) + " " + esc(e.currency || "") + "</b>" +
@@ -3561,7 +3642,8 @@
       nhcxEligibilitySection(t) +
       "<div class=\"w-sub\"><h4>" + wTH("ward.claims", "Claims") + "</h4>" +
       (claimRows ? "<ul class=\"w-mini\">" + claimRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-claim-has-been-coded-for", "No claim has been coded for this patient.") + "</p>") +
-      "<input id=\"wTpaCodes\" placeholder=\"" + wTA("ward.codes-to-claim-comma-separated", "Codes to claim, comma-separated") + "\">" +
+      rcmCandidatesHtml(state.tpaChecks) +
+      "<input id=\"wTpaCodes\" value=\"" + esc(state.tpaCodes || "") + "\" placeholder=\"" + wTA("ward.codes-to-claim-comma-separated", "Codes to claim, comma-separated") + "\">" +
       tpaPayerSelect("wTpaPayer", t.payers) +
       "<input id=\"wTpaPolicy\" placeholder=\"" + wTA("ward.policy-number-optional", "Policy number (optional)") + "\">" +
       '<button class="w-btn" data-w-act="claimcode">' + ms("receipt_long") + wTH("ward.code-claim", "Code claim") + "</button></div>" +
@@ -3572,6 +3654,7 @@
       '<select id="wTpaAuthState">' + PREAUTH_STATES.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(wTEn(x[1])) + "</option>"; }).join("") + "</select>" +
       "<input id=\"wTpaAuthReason\" placeholder=\"" + wTA("ward.reason-required-if-refused", "Reason (required if refused)") + "\">" +
       "<input id=\"wTpaAuthAmount\" placeholder=\"" + wTA("ward.authorized-amount-if-approved", "Authorized amount (if approved)") + "\">" +
+      "<label class=\"w-f\"><span>" + wTH("ward.rcm-valid-until-label", "Approval valid until (from the payer's letter)") + "</span><input id=\"wTpaAuthValid\" type=\"date\"></label>" +
       tpaPayerSelect("wTpaAuthPayer", t.payers) +
       "<input id=\"wTpaAuthRequested\" placeholder=\"" + wTA("ward.requested-amount-sent-with-a-requested", "Requested amount (sent with a requested pre-auth)") + "\">" +
       "<input id=\"wTpaAuthCodes\" placeholder=\"" + wTA("ward.nhcx-preauth-codes", "Diagnosis codes on the problem list, comma-separated (NHCX needs them)") + "\">" +
@@ -9330,6 +9413,8 @@
         : state.view === "completion" ? completionView(state)
         : state.view === "roi" ? roiView(state)
         : state.view === "tpa" ? tpaView(state)
+        : state.view === "tpaevidence" ? tpaEvidenceView(state)
+        : state.view === "claimsdesk" ? claimsDeskView(state)
         : state.view === "billing" ? billingView(state)
         : state.view === "board" ? boardView(state)
         : state.view === "ed" ? edBoardView(state)
@@ -10693,6 +10778,96 @@
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-acknowledgement", "Could not record the acknowledgement."); paint(); });
     });
+  }
+  /* THE CLAIMS DESK (rcm-claims-ops, functions/_wardsynq/claims-ops.js rcmWorklists): stays discharged but not billed,
+   * claims not sent, open payer queries and enhancements with their clocks, receivables ageing by payer and denials by
+   * payer, scheme, service and reason. st.desk: null = loading, { failed } = not loaded; each list is null when the
+   * server could not read it, and says why. A row names the patient by MRN and opens the TPA screen for that patient. */
+  function claimsDeskOpen() {
+    st.view = "claimsdesk"; st.desk = null; paint();
+    apiGet("/ward/rcm-worklists?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (st.view !== "claimsdesk") return; st.desk = r && r.ok ? r : { failed: true, status: r && r.__status }; paint(); })
+      .catch(function () { if (st.view === "claimsdesk") { st.desk = { failed: true }; paint(); } });
+  }
+  function claimsDeskPatient(arg) {
+    var i = String(arg).indexOf("|"), pid = i < 0 ? arg : arg.slice(0, i), enc = i < 0 ? "" : arg.slice(i + 1);
+    if (!pid) return;
+    st.sel = { patientId: pid, encounterId: enc || null, mrn: pid.indexOf("opd-pat-") === 0 ? pid.slice(8).toUpperCase() : pid };
+    st.tpaFromDesk = true; tpaOpen();
+  }
+  function claimsDeskView(state) {
+    var d = state.desk;
+    var head = "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
+      "<h3>" + wTH("ward.rcm-desk", "Claims desk") + "</h3><button class=\"w-btn ghost\" data-w-act=\"claimsdesk\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>";
+    if (!d) return '<div class="w-card">' + head + "<p class=\"w-empty\">" + wTH("ward.loading4", "Loading...") + "</p></div>";
+    if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("warning") + (d.status === 403
+      ? wTH("ward.rcm-desk-forbidden", "Your role cannot open the claims desk.", null, "", 1)
+      : wTH("ward.rcm-desk-failed", "The claims desk could not be loaded. Do not read this as nothing outstanding.", null, "", 1)) + "</p></div>";
+    var who = function (r) { return "<b>" + esc(r.mrn || r.patientId) + "</b>"; };
+    var open = function (r) { return '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="deskopen:' + esc(r.patientId) + "|" + esc(r.encounterId || "") + '">' + ms("open_in_new") + wTH("ward.rcm-open", "Open") + "</button></div>"; };
+    var section = function (title, list, unreadable, emptyWords, row) {
+      return '<div class="w-sub"><h4>' + title + "</h4>" + (list == null
+        ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-list-unreadable", "Could not be read, so this is not a list of none: {why}", { why: esc(unreadable || "") }, "why", 1) + "</p>"
+        : list.length ? '<ul class="w-mini">' + list.map(row).join("") + "</ul>" : '<p class="w-empty">' + emptyWords + "</p>") + "</div>";
+    };
+    var un = d.unreadable || {};
+    var dnfb = section(wTH("ward.rcm-dnfb", "Discharged, not billed"), d.dnfb, un.dnfb, wTH("ward.rcm-dnfb-none", "Every discharged stay read has a bill."), function (r) {
+      return '<li class="w-mini-row"><div>' + who(r) + " &middot; " + wTH("ward.rcm-discharged-days", "discharged {at}, {days} days ago", { at: when(r.dischargedAt), days: esc(r.days) }) +
+        (r.payerName ? " &middot; " + esc(r.payerName) : "") + (r.ward ? " &middot; " + esc(r.ward) : "") + "</div>" + open(r) + "</li>";
+    });
+    var unsub = section(wTH("ward.rcm-unsubmitted", "Claims not sent"), d.unsubmitted, un.unsubmitted, wTH("ward.rcm-unsubmitted-none", "No coded claim is waiting to be sent, and every discharged stay with a payer has a claim."), function (r) {
+      return '<li class="w-mini-row"><div>' + who(r) + " &middot; " + (r.kind === "no_claim" ? wTH("ward.rcm-no-claim", "no claim coded yet") : wTH("ward.rcm-coded-not-sent", "coded, not sent")) +
+        (r.payerName ? " &middot; " + esc(r.payerName) : "") + " &middot; " + wTH("ward.rcm-days-since", "{days} days", { days: esc(r.days == null ? "-" : r.days) }) +
+        (r.filingDaysLeft != null ? (r.filingDaysLeft < 0 ? '<div class="w-warn">' + wTH("ward.rcm-filing-passed", "Timely filing passed {n} days ago.", { n: esc(-r.filingDaysLeft) }) + "</div>" : " &middot; " + wTH("ward.rcm-filing-left", "{n} days left to file", { n: esc(r.filingDaysLeft) })) : "") + "</div>" + open(r) + "</li>";
+    });
+    var queries = section(wTH("ward.rcm-queries", "Open payer queries and enhancements"), d.queries, un.queries, wTH("ward.rcm-queries-none", "No payer query or enhancement is waiting."), function (r) {
+      return '<li class="w-mini-row"><div>' + who(r) + " &middot; " + (r.kind === "enhancement" ? wTH("ward.rcm-enh-row", "enhancement to {amount}", { amount: esc(r.requestedAmount) }) : esc(r.text)) +
+        (r.payerName ? " &middot; " + esc(r.payerName) : "") + " &middot; " + wTH("ward.rcm-waiting", "waiting {age}", { age: esc(r.ageHours < 48 ? wT("ward.rcm-hours", "{n} h", { n: r.ageHours }) : wT("ward.rcm-days", "{n} d", { n: Math.floor(r.ageHours / 24) })) }) +
+        (r.dueBy ? (r.overdue ? '<div class="w-warn">' + wTH("ward.rcm-query-overdue", "answer was due {due}", { due: when(r.dueBy) }) + "</div>" : " &middot; " + wTH("ward.rcm-query-due", "answer due {due}", { due: when(r.dueBy) })) : "") + "</div>" + open(r) + "</li>";
+    });
+    var ag = d.ageing, ageing;
+    if (ag == null) ageing = section(wTH("ward.rcm-ageing", "Receivables by payer"), null, un.ageing, "", null);
+    else {
+      var cols = ag.bandsConfigured ? ag.labels : [];
+      var money = function (n) { return esc(Math.round(n * 100) / 100); };
+      ageing = '<div class="w-sub"><h4>' + wTH("ward.rcm-ageing", "Receivables by payer") + "</h4>" +
+        (ag.bandsConfigured ? "" : '<p class="w-hint">' + wTH("ward.rcm-no-bands", "No ageing bands are set, so totals are shown without ageing. An administrator sets them on Admin, Price list, Claims settings.") + "</p>") +
+        (!ag.payers.length ? '<p class="w-empty">' + wTH("ward.rcm-ageing-none", "No bill read has a balance outstanding.") + "</p>"
+          : '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.rcm-payer", "Payer") + "</th>" + cols.map(function (l) { return "<th>" + wTH("ward.rcm-band-days", "{band} days", { band: esc(l) }) + "</th>"; }).join("") +
+            "<th>" + wTH("ward.rcm-total", "Total") + "</th><th>" + wTH("ward.rcm-bills", "Bills") + "</th></tr></thead><tbody>" +
+            ag.payers.map(function (p) {
+              var name = p.kind === "self_pay" ? wTH("ward.rcm-self-pay", "Self-pay") : p.kind === "not_recorded" ? wTH("ward.rcm-payer-not-recorded", "Payer not recorded on the bill") : esc(p.payerName);
+              return "<tr><td>" + name + "</td>" + p.buckets.map(function (b) { return "<td>" + money(b) + "</td>"; }).join("") + "<td><b>" + money(p.total) + "</b></td><td>" + esc(p.invoices) + "</td></tr>";
+            }).join("") +
+            "<tr><td><b>" + wTH("ward.rcm-total", "Total") + "</b></td>" + ag.totals.buckets.map(function (b) { return "<td><b>" + money(b) + "</b></td>"; }).join("") + "<td><b>" + money(ag.totals.outstanding) + "</b></td><td>" + esc(ag.totals.invoices) + "</td></tr></tbody></table></div>") +
+        (ag.totals.credit ? '<p class="w-dt-times">' + wTH("ward.rcm-credit", "Credit balances held: {credit}. Net outstanding: {net}.", { credit: money(ag.totals.credit), net: money(ag.netOutstanding) }) + "</p>" : "") +
+        (ag.reconciles ? "" : '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-not-reconciled", "These totals do not reconcile to the bills' balances. Do not rely on them; report it.", null, "", 1) + "</p>") + "</div>";
+    }
+    var dn = d.denials, denials;
+    if (dn == null) denials = section(wTH("ward.rcm-denials", "Denials"), null, un.denials, "", null);
+    else {
+      var tbl = function (title, rows) {
+        return "<h5>" + title + "</h5>" + (rows.length ? '<ul class="w-mini">' + rows.map(function (g) {
+          return '<li class="w-mini-row"><div><b>' + esc(g.label) + "</b> &middot; " + wTH("ward.rcm-denial-count", "{count} denied, {amount}", { count: esc(g.count), amount: esc(g.amount) }) +
+            (g.amountNotRecorded ? " (" + wTH("ward.rcm-amount-missing", "{n} without an amount", { n: esc(g.amountNotRecorded) }) + ")" : "") + "</div></li>";
+        }).join("") + "</ul>" : '<p class="w-empty">-</p>');
+      };
+      denials = '<div class="w-sub"><h4>' + wTH("ward.rcm-denials", "Denials") + "</h4>" +
+        (!d.denialReasonsConfigured ? '<p class="w-hint">' + wTH("ward.rcm-no-reasons-desk", "No denial reasons are set, so denials are not classified by reason. An administrator adds them on Admin, Price list, Claims settings.") + "</p>" : "") +
+        (!dn.count ? '<p class="w-empty">' + wTH("ward.rcm-denials-none", "No denial is recorded on the claims read.") + "</p>"
+          : tbl(wTH("ward.rcm-by-payer", "By payer"), dn.byPayer) + tbl(wTH("ward.rcm-by-scheme", "By scheme or payer kind"), dn.byScheme) + tbl(wTH("ward.rcm-by-service", "By type of stay"), dn.byService) + tbl(wTH("ward.rcm-by-reason", "By reason"), dn.byReason) +
+            '<h5>' + wTH("ward.rcm-denied-claims", "Denied claims") + '</h5><ul class="w-mini">' + dn.claims.map(function (r) {
+              return '<li class="w-mini-row"><div>' + who(r) + " &middot; " + when(r.deniedAt) + (r.payerName ? " &middot; " + esc(r.payerName) : "") + " &middot; " + esc(r.payerReason || "") +
+                (r.code ? '<div class="w-dt-times">' + esc(r.code + " " + r.label) + ": " + esc(r.rootCause) + "</div>" : '<div class="w-dt-times">' + wTH("ward.rcm-not-classified", "Not classified yet.") + "</div>") + "</div>" + open(r) + "</li>";
+            }).join("") + "</ul>") +
+        (dn.disallowances.length ? "<h5>" + wTH("ward.rcm-disallowances", "Deductions at settlement") + '</h5><ul class="w-mini">' + dn.disallowances.map(function (g) {
+          return '<li class="w-mini-row"><div><b>' + esc(g.payerName) + "</b> &middot; " + esc(g.reason) + " &middot; " + wTH("ward.rcm-denial-count", "{count} denied, {amount}", { count: esc(g.count), amount: esc(g.amount) }) + "</div></li>";
+        }).join("") + "</ul>" : "") + "</div>";
+    }
+    return '<div class="w-card">' + head +
+      (d.truncated ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-truncated", "Only the latest {n} records of a kind were read, so these lists may be incomplete.", { n: esc(d.readLimit) }, "", 1) + "</p>" : "") +
+      '<p class="w-hint">' + ms("info") + wTH("ward.rcm-desk-note", "Nothing here is sent to a payer. Queries, enhancements and denials are recorded as they arrive.") + "</p>" +
+      dnfb + unsub + queries + ageing + denials + "</div>";
   }
   function cashierOpen() {
     st.view = "cashier"; st.cashier = {}; paint();
@@ -14210,14 +14385,22 @@
       .catch(function () { st.busy = false; st.billing = { invoices: null, claims: null }; st.err = wT("ward.could-not-load-billing", "Could not load billing."); paint(); });
   }
   function tpaOpen() {
-    st.view = "tpa"; st.tpa = null; st.tpaPkg = null; paint(); loadTpa();
+    st.view = "tpa"; st.tpa = null; st.tpaPkg = null; st.tpaChecks = null; st.tpaCodes = ""; paint(); loadTpa();
   }
   function loadTpa() {
     if (!st.sel || !st.sel.patientId) return;
     st.busy = true; paint();
     return apiGet("/ward/claims?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
-      .then(function (r) { st.busy = false; st.tpa = (r && r.ok) ? r : { failed: true }; paint(); if (r && r.ok) loadTpaPackages(); })
+      .then(function (r) { st.busy = false; st.tpa = (r && r.ok) ? r : { failed: true }; paint(); if (r && r.ok) { loadTpaPackages(); loadTpaChecks(); } })
       .catch(function () { st.busy = false; st.tpa = { failed: true }; paint(); });
+  }
+  // rcm-claims-ops: the checklist and coding candidates. null = loading, false = failed.
+  function loadTpaChecks() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.tpaChecks = null;
+    apiGet("/ward/claim-checks?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId) + (st.sel.encounterId ? "&encounterId=" + encodeURIComponent(st.sel.encounterId) : ""))
+      .then(function (r) { st.tpaChecks = r && r.ok ? r : false; paint(); })
+      .catch(function () { st.tpaChecks = false; paint(); });
   }
   function claimCodeAction() {
     if (!st.sel || !st.sel.patientId || !st.sel.encounterId) return;
@@ -14231,8 +14414,96 @@
   function claimActionCall(claimId, action, extra) {
     st.busy = true; paint();
     apiPost("/ward/claim-state", Object.assign({ orgId: st.orgId, claimId: claimId, action: action }, extra || {}))
-      .then(function (r) { if (settle(r, wT("ward.done", "Done."))) loadTpa(); else paint(); })
+      .then(function (r) {
+        /* rcm-claims-ops: the checklist refused it. The findings are shown, and sending anyway needs a reason the claim keeps. */
+        if (r && r.error === "claim_checklist_blocked" && !(extra && extra.overrideReason)) {
+          st.busy = false; paint();
+          askFor({ title: wTH("ward.rcm-blocked-title", "This claim is not complete"), icon: "rule", danger: true, ok: wTH("ward.rcm-send-anyway", "Send anyway"),
+            text: (r.findings || []).map(function (f) { return esc(f.text); }).join("\n"),
+            fields: [{ key: "why", type: "textarea", label: wTH("ward.rcm-override-why", "Why is it being sent anyway? This is kept on the claim."), required: wT("ward.rcm-override-needed", "Sending an incomplete claim needs a reason.") }] },
+            function (v) { claimActionCall(claimId, action, Object.assign({}, extra || {}, { overrideReason: v.why })); });
+          return;
+        }
+        if (settle(r, wT("ward.done", "Done."))) loadTpa(); else paint();
+      })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-update-that-claim", "Could not update that claim."); paint(); });
+  }
+  function rcmClaim(id) { return ((st.tpa && st.tpa.claims) || []).filter(function (c) { return c.id === id; })[0] || null; }
+  function claimDocsAction(claimId) {
+    var k = st.tpaChecks && st.tpaChecks.checks && st.tpaChecks.checks[claimId];
+    var missing = k ? k.blocking.filter(function (f) { return f.code === "document_missing"; }).map(function (f) { return f.document; }) : [];
+    askFor({ title: wTH("ward.rcm-docs", "Documents obtained"), icon: "attach_file", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "docs", type: "textarea", value: missing.join("\n"), label: wTH("ward.rcm-docs-label", "Documents in hand for this claim, one per line"), required: wT("ward.rcm-docs-needed", "Name at least one document.") }] },
+      function (v) { return apiPost("/ward/claim-state", { orgId: st.orgId, claimId: claimId, action: "documents", documents: v.docs.split("\n").map(function (x) { return x.trim(); }).filter(Boolean) }).then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadTpa(); }); });
+  }
+  function claimQueryAction(claimId) {
+    askFor({ title: wTH("ward.rcm-payer-query", "Payer query"), icon: "help", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "text", type: "textarea", label: wTH("ward.rcm-query-text", "What the payer asked"), required: wT("ward.rcm-query-needed", "Record what the payer asked.") },
+        { key: "received", type: "date", label: wTH("ward.rcm-query-received", "Date received (blank for today)") }] },
+      function (v) { return apiPost("/ward/claim-state", { orgId: st.orgId, claimId: claimId, action: "query", text: v.text, receivedAt: v.received || undefined }).then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadTpa(); }); });
+  }
+  function claimClassifyAction(claimId) {
+    var reasons = (st.tpaChecks && st.tpaChecks.denialReasons) || [];
+    if (!reasons.length) { st.err = wT("ward.rcm-no-reasons", "No denial reasons are set for this hospital. An administrator adds them on Admin, Price list, Claims settings."); paint(); return; }
+    var c = rcmClaim(claimId), cur = c && c.denialClassification;
+    askFor({ title: wTH("ward.rcm-classify", "Classify denial"), icon: "category", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "code", type: "select", value: cur ? cur.code : reasons[0].code, label: wTH("ward.rcm-denial-reason", "Denial reason"), options: reasons.map(function (x) { return [x.code, esc(x.code + " " + x.label)]; }) },
+        { key: "cause", type: "textarea", value: cur ? cur.rootCause : "", label: wTH("ward.rcm-root-cause", "Root cause"), required: wT("ward.rcm-root-cause-needed", "Say what caused the denial.") }] },
+      function (v) { return apiPost("/ward/claim-state", { orgId: st.orgId, claimId: claimId, action: "classify-denial", denialCode: v.code, rootCause: v.cause }).then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadTpa(); }); });
+  }
+  function claimCodePick(code) {
+    var cur = val("wTpaCodes").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    if (cur.indexOf(code) < 0) cur.push(code);
+    st.tpaCodes = cur.join(", "); paint();
+  }
+  function preAuthEventCall(body, okMsg) {
+    return apiPost("/ward/preauth-event", Object.assign({ orgId: st.orgId }, body)).then(function (r) { if (settle(r, okMsg || wT("ward.recorded", "Recorded."))) loadTpa(); });
+  }
+  function paQueryAction(id) {
+    askFor({ title: wTH("ward.rcm-payer-query", "Payer query"), icon: "help", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "text", type: "textarea", label: wTH("ward.rcm-query-text", "What the payer asked"), required: wT("ward.rcm-query-needed", "Record what the payer asked.") },
+        { key: "received", type: "date", label: wTH("ward.rcm-query-received", "Date received (blank for today)") }] },
+      function (v) { return preAuthEventCall({ preAuthId: id, action: "query", text: v.text, receivedAt: v.received || undefined }); });
+  }
+  function paAnswerAction(id) {
+    askFor({ title: wTH("ward.rcm-answer-query", "Answer query"), icon: "reply", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "answer", type: "textarea", label: wTH("ward.rcm-answer-text", "What was sent back to the payer"), required: wT("ward.rcm-answer-needed", "Record what was sent back.") }] },
+      function (v) { return preAuthEventCall({ preAuthId: id, action: "answer-query", answer: v.answer }); });
+  }
+  function paEnhAction(id) {
+    askFor({ title: wTH("ward.rcm-enhancement", "Ask for enhancement"), icon: "trending_up", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "amount", label: wTH("ward.rcm-enh-amount", "New total amount asked for"), required: wT("ward.rcm-enh-amount-needed", "Enter the amount asked for.") },
+        { key: "reason", type: "textarea", label: wTH("ward.rcm-enh-reason", "Why more is needed"), required: wT("ward.rcm-enh-reason-needed", "Say why more is needed.") }] },
+      function (v) { return preAuthEventCall({ preAuthId: id, action: "enhancement", requestedAmount: Number(v.amount), reason: v.reason }); });
+  }
+  function paEnhDecisionAction(arg) {
+    var i = String(arg).indexOf("|"); if (i < 1) return;
+    var id = arg.slice(0, i), enhId = arg.slice(i + 1);
+    askFor({ title: wTH("ward.rcm-enh-decision", "Enhancement decision"), icon: "gavel", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "state", type: "select", value: "approved", label: wTH("ward.rcm-enh-state", "The payer's decision"), options: [["approved", wTH("ward.rcm-approved", "Approved")], ["refused", wTH("ward.rcm-refused", "Refused")]] },
+        { key: "amount", label: wTH("ward.rcm-enh-approved", "New authorised amount (if approved)") },
+        { key: "note", type: "textarea", label: wTH("ward.rcm-enh-note", "The payer's reason (needed if refused)") }] },
+      function (v) { return preAuthEventCall({ preAuthId: id, action: "enhancement-decision", enhancementId: enhId, state: v.state, approvedAmount: v.amount ? Number(v.amount) : undefined, note: v.note || undefined }); });
+  }
+  function claimEvidenceOpen(claimId) {
+    st.view = "tpaevidence"; st.tpaEvidence = { claimId: claimId, loading: true }; paint();
+    apiGet("/ward/claim-evidence?orgId=" + encodeURIComponent(st.orgId) + "&claimId=" + encodeURIComponent(claimId))
+      .then(function (r) {
+        if (!st.tpaEvidence || st.tpaEvidence.claimId !== claimId) return;
+        if (!r || !r.ok) { st.tpaEvidence = { claimId: claimId, failed: true }; paint(); return; }
+        var last = (r.versions || [])[r.versions.length - 1];
+        st.tpaEvidence = { claimId: claimId, pack: r.pack, versions: r.versions || [], recordVersion: r.recordVersion, text: last ? last.text : r.pack.text };
+        paint();
+      })
+      .catch(function () { st.tpaEvidence = { claimId: claimId, failed: true }; paint(); });
+  }
+  function claimEvidenceSave() {
+    var e = st.tpaEvidence; if (!e || e.loading || e.failed) return;
+    e.text = val("wTpaEvText");
+    st.busy = true; paint();
+    apiPost("/ward/claim-evidence", { orgId: st.orgId, claimId: e.claimId, text: e.text, expectedVersion: e.recordVersion })
+      .then(function (r) { if (settle(r, wT("ward.rcm-evidence-saved", "Saved as a version on the claim."))) { var t = e.text; claimEvidenceOpen(e.claimId); st.tpaEvidence.text = t; } else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.rcm-evidence-not-saved", "The pack could not be saved."); paint(); });
   }
   function claimSubmitAction(claimId) {
     var amount = window.prompt(wTD("ward.amount-submitted-to-the-payer", "Amount submitted to the payer:"));
@@ -14308,7 +14579,7 @@
       payerId: val("wTpaAuthPayer") || undefined,
       requestedAmount: val("wTpaAuthRequested") ? Number(val("wTpaAuthRequested")) : undefined,
       codes: val("wTpaAuthCodes") ? val("wTpaAuthCodes").split(",").map(function (s) { return s.trim(); }).filter(Boolean) : undefined,
-      policyNumber: val("wTpaAuthPolicy") || undefined,
+      policyNumber: val("wTpaAuthPolicy") || undefined, validUntil: val("wTpaAuthValid") || undefined,
     })
       .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadTpa(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-pre-authorisation", "Could not record that pre-authorisation."); paint(); });
@@ -14707,7 +14978,11 @@
       if (st.view === "ips") { st.view = "chart"; st.ips = null; paint(); return; }
       if (st.view === "completion") { st.view = "chart"; st.completion = null; paint(); return; }
       if (st.view === "roi") { st.view = "chart"; st.roi = null; paint(); return; }
-      if (st.view === "tpa") { st.view = "chart"; st.tpa = null; paint(); return; }
+      if (st.view === "tpaevidence") { st.tpaEvidence = null; st.view = "tpa"; loadTpa(); return; }
+      // Opened from the claims desk: back to the desk, and the desk's selection is dropped (there is no chart behind it).
+      if (st.view === "tpa" && st.tpaFromDesk) { st.tpa = null; st.tpaChecks = null; st.tpaCodes = ""; st.sel = null; st.tpaFromDesk = false; claimsDeskOpen(); return; }
+      if (st.view === "tpa") { st.view = "chart"; st.tpa = null; st.tpaChecks = null; st.tpaCodes = ""; paint(); return; }
+      if (st.view === "claimsdesk") { st.desk = null; st.view = "list"; paint(); return; }
       if (st.view === "billing") { st.view = "chart"; st.billing = null; paint(); return; }
       if (st.view === "oncology") { st.view = "chart"; st.oncology = null; paint(); return; }
       if (st.view === "cardiology") { st.view = "chart"; st.cardiology = null; paint(); return; }
@@ -15387,6 +15662,20 @@
     if (cmd === "claimack") { claimAckAction(arg); return; }
     if (cmd === "claimsettle") { claimSettleAction(arg); return; }
     if (cmd === "claimbalance") { claimBalanceAction(arg); return; }
+    if (cmd === "claimdocs") { claimDocsAction(arg); return; }
+    if (cmd === "claimquery") { claimQueryAction(arg); return; }
+    if (cmd === "claimclassify") { claimClassifyAction(arg); return; }
+    if (cmd === "claimcodepick") { claimCodePick(arg); return; }
+    if (cmd === "claimevidence") { claimEvidenceOpen(arg); return; }
+    if (cmd === "claimevsave") { claimEvidenceSave(); return; }
+    if (cmd === "claimevprint") { if (st.tpaEvidence) st.tpaEvidence.text = val("wTpaEvText"); paint(); try { G.print(); } catch (e) {} return; }
+    if (cmd === "claimevuse") { var ev = st.tpaEvidence; var hit = ev && (ev.versions || []).filter(function (x) { return String(x.n) === arg; })[0]; if (hit) { ev.text = hit.text; paint(); } return; }
+    if (cmd === "paquery") { paQueryAction(arg); return; }
+    if (cmd === "paanswer") { paAnswerAction(arg); return; }
+    if (cmd === "paenh") { paEnhAction(arg); return; }
+    if (cmd === "paenhdec") { paEnhDecisionAction(arg); return; }
+    if (cmd === "claimsdesk") { claimsDeskOpen(); return; }
+    if (cmd === "deskopen") { claimsDeskPatient(arg); return; }
     if (cmd === "estimate") { estimateAction(); return; }
     if (cmd === "preauth") { preAuthAction(); return; }
     if (cmd === "nhcxelig") { nhcxEligibilityAction(); return; }
@@ -15497,7 +15786,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "trends", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "dcboard", "tcentre", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "trends", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "dcboard", "tcentre", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview", "claimsdesk"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -15524,6 +15813,7 @@
     st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
     st.incidentLog = null; st.incidentHealth = null; st.qs = null; st.qsOpen = null; st.registerFlags = null;
     st.consultationResult = null;
+    st.desk = null; st.tpaFromDesk = false; st.tpaChecks = null; st.tpaEvidence = null; st.tpaCodes = "";
     st.approvals = null;
     st.purchaseOrders = null;
     /* The half-typed consultation is cleared with everything else: a draft that outlives its
