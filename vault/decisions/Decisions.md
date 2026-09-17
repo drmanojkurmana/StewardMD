@@ -7558,3 +7558,30 @@ of compliance.js is untouched.
 - Screen: wardsynq/site/pages/quality.js "Infection control and quality", tabs by capability. The brief named
   pages/governance.js; a separate page was used because governance.js is the DPO's and the analytics page and the ward's
   own staff (ADR, stock-outs, returns) needed a door that does not open privacy administration.
+
+## 2026-09-17 Nurse staffing against census and dependency, draft roster, staff injury report (branch nursing-staffing, P4)
+
+- Nurses required per ward per shift (functions/_wardsynq/nurse-staffing.js) are arithmetic on the hospital's own numbers,
+  shown line by line: patients at each dependency level divided by the hospital's patients-per-nurse for that level, unit
+  type and shift, summed and rounded up once. WardSynQ ships no ratio. No Indian Nursing Council or NABH figure is cited or
+  shipped: the norms are `wardsynq.staffing` (`dependencyToolId`, `wardTypes`, `norms`), entered by staff.admin on the Staff
+  rota screen through `/org/staffing-norms`, checked against the hospital's own risk tools and rota shifts.
+- Dependency levels are the bands of a hospital-supplied risk tool (risk-assessment.js, existing RiskAssessment records).
+  A level counts for a shift when assessed during it, or within the tool's reassessment interval before it. A patient with
+  none is listed as missing and the requirement becomes a lower bound: "short" or "not complete", never "met". A ward with
+  no unit type or norm is "not configured", never staffed. A hospital with no tool can count every patient alike (band *).
+- The in-charge (NABH PSQ 3c #21 remark) is marked on the rota assignment (`inCharge`, one per shift and date) and left out
+  of rostered and on-duty counts. There is no nurse-in-charge role; a per-assignment flag is what the rota already can hold.
+- The census is the bed board (migrate-inpatient.js bedBoard), so the two screens cannot disagree. Running shifts use it
+  live; coming shifts are a projection from it with latest dependency levels, said as such; ended shifts show only what was
+  recorded while they ran.
+- Draft roster: GET /ward/staffing-draft suggests nurses for the coming 7 days' shortfalls, never on approved leave, never
+  double-booked, never in charge; nothing is written. POST /roster/draft-publish (staff.admin) checks every entry again,
+  all or nothing.
+- Staff data is not the chart: the recorded shift staffing (NABH #21) and the staff injury report (NABH #30) are
+  `_wardsynq_staffing_shift` and `_wardsynq_staff_injury` in the append-only store, the hr-attendance.js pattern, not
+  RecordService types (which every emr.view role can read through the raw record door). compliance.js reads them through a
+  reader the router passes in. The brief named clinical-settings.js and pages/admin.js for the settings; they went to their
+  own route and the rota page, the gst-settings pattern, because the norms are nested and belong beside the shifts.
+- #30 is the month's own rate over average occupied beds (inpatient bed-days / days elapsed); NABH asks for year to date,
+  said in the indicator note.
