@@ -14,9 +14,9 @@
  * unavailable, say unavailable; nothing here pretends otherwise by substituting a guess for a
  * refusal - an empty input window returns NO PREDICTION, not a zero presented as one.
  *
- * SEVEN OF EIGHT ARE WIRED (2026-09-17): discharge volume, critical-result backlog, bed demand, ED load, diagnostic
- * workload, pharmacy workload and blood demand, each a per-day count from a field this codebase already writes. OT
- * delays stays unwired and says why (PREDICTORS).
+ * ALL EIGHT ARE WIRED (2026-09-17): discharge volume, critical-result backlog, bed demand, ED load, diagnostic workload,
+ * pharmacy workload and blood demand, each a per-day count from a field this codebase already writes; and theatre delays
+ * (R2-2), a per-day mean of minutes from a case's scheduled start to the patient entering the theatre.
  *
  * THE INPUTS TRAVEL WITH THE NUMBER. Every envelope carries the daily counts it was averaged from and the method in
  * words, so a screen can show exactly what the forecast rests on. A day is a whole UTC day from the first day with a
@@ -165,10 +165,43 @@ async function predictCriticalBacklog(svc, { lookbackDays = 7, horizonDays = 1, 
   return governedPrediction({ metric: "critical-backlog", samples, horizonDays, generatedAt: new Date(nowMs).toISOString(), method: "mean of critical results still open at the end of each day" });
 }
 
-/** The honest inventory. Every key the plan names; only the ones with a real function are wired.
- * ot-delays is NOT the booking volume digital-twin.js's otUtilisation computes: a DELAY is the actual start against the
- * SCHEDULED start, and a surgical case stores its booking time as its start when no time was given, so a delay cannot
- * be told from a case booked without a time. Wiring it against booking volume would answer a different question. */
+/**
+ * Theatre delays (R2-2): for each case whose patient entered the theatre in the window, minutes from its scheduled start
+ * (`scheduledAt`, the current plan after any reschedule) to `theatreTimes.inRoomAt`, both recorded by people
+ * (migrate-surgery.js). A case booked without a scheduled start has no delay to measure: it is left out and counted,
+ * never read as on time. One sample per UTC day that had a measured case, the mean of that day's cases; a day with no
+ * case is not a day with no delay, so it is not zero-filled. Fewer than 2 such days is a refusal. A negative value is an
+ * early start, kept as recorded. This is not the booking volume digital-twin.js's otUtilisation computes.
+ */
+async function predictOtDelays(svc, { lookbackDays = 28, horizonDays = 1, now } = {}) {
+  const nowMs = Number.isFinite(now) ? now : Date.now();
+  const fromMs = nowMs - lookbackDays * DAY_MS, endMs = Date.parse(dayOf(nowMs) + "T00:00:00.000Z");
+  let cases;
+  try { cases = (await svc.list("SurgicalCase", 2000)).filter(Boolean); }
+  catch (e) { return { ok: false, metric: "ot-delays", error: "record_read_failed", detail: str(e && e.message), prediction: null }; }
+  const byDay = new Map();
+  let excluded = 0, measured = 0;
+  for (const c of cases) {
+    const inAt = at(c.theatreTimes && c.theatreTimes.inRoomAt);
+    if (inAt == null || inAt < fromMs || inAt >= endMs) continue;
+    const sched = at(c.scheduledAt);
+    if (sched == null) { excluded++; continue; }
+    measured++;
+    const d = byDay.get(dayOf(inAt)) || { sum: 0, cases: 0 };
+    d.sum += (inAt - sched) / 60000; d.cases++;
+    byDay.set(dayOf(inAt), d);
+  }
+  const samples = [...byDay.keys()].sort().map((k) => ({ atIso: `${k}T00:00:00.000Z`, value: Math.round((byDay.get(k).sum / byDay.get(k).cases) * 10) / 10 }));
+  const r = governedPrediction({ metric: "ot-delays", samples, horizonDays, generatedAt: new Date(nowMs).toISOString(),
+    method: "mean, over the days with a measured case, of each day's mean minutes from a case's scheduled start to the patient entering the theatre" });
+  const counts = { casesMeasured: measured, casesWithoutScheduledStart: excluded };
+  if (!r.ok) return { ...r, ...counts };
+  r.prediction.unit = "minutes";
+  r.prediction.inputs = r.prediction.inputs.map((x) => ({ ...x, cases: byDay.get(x.atIso.slice(0, 10)).cases }));
+  return { ...r, ...counts };
+}
+
+/** The honest inventory. Every key the plan names; only the ones with a real function are wired. */
 const PREDICTORS = Object.freeze({
   "discharge-volume": { wired: true, fn: predictDischargeVolume },
   "critical-backlog": { wired: true, fn: predictCriticalBacklog },
@@ -177,7 +210,7 @@ const PREDICTORS = Object.freeze({
   "diagnostic-workload": { wired: true, fn: predictDiagnosticWorkload },
   "pharmacy-workload": { wired: true, fn: predictPharmacyWorkload },
   "blood-demand": { wired: true, fn: predictBloodDemand },
-  "ot-delays": { wired: false, reason: "not built - a theatre delay is the actual start against the scheduled start, and a surgical case does not record a scheduled start apart from its booking time" },
+  "ot-delays": { wired: true, fn: predictOtDelays },
 });
 
 /**
@@ -214,4 +247,4 @@ async function predictMetric(request, env, ctx) {
   return { ...base, ...r };
 }
 
-export { MODEL_ID, governedPrediction, dailySamples, predictDischargeVolume, predictCriticalBacklog, predictBedDemand, predictEdLoad, predictDiagnosticWorkload, predictPharmacyWorkload, predictBloodDemand, PREDICTORS, predictMetric };
+export { MODEL_ID, governedPrediction, dailySamples, predictDischargeVolume, predictCriticalBacklog, predictBedDemand, predictEdLoad, predictDiagnosticWorkload, predictPharmacyWorkload, predictBloodDemand, predictOtDelays, PREDICTORS, predictMetric };
