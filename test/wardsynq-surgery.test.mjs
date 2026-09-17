@@ -188,7 +188,9 @@ test("THE GOLDEN PATH: consent -> mark site -> Sign In -> Time Out -> incision -
   assert.equal(signedIn.signIn.pac.status, "fit", "sign in keeps what the checkup said at that moment");
   assert.equal(signedIn.signIn.pac.acknowledgement, null);
 
-  await as(DOCTOR, "/ward/anesthesia-start", "POST", { orgId: ORG, caseId, asaClass: "ASA II" });
+  const badTech = await as(DOCTOR, "/ward/anesthesia-start", "POST", { orgId: ORG, caseId, asaClass: "ASA II", technique: "hypnosis" });
+  assert.equal(badTech.__status, 422); assert.equal(badTech.error, "bad_technique");
+  await as(DOCTOR, "/ward/anesthesia-start", "POST", { orgId: ORG, caseId, asaClass: "ASA II", technique: "local-with-monitoring" });
   const drug = await as(DOCTOR, "/ward/anesthesia-event", "POST", { orgId: ORG, caseId, event: { drug: "Propofol", dose: "150 mg", route: "IV" } });
   assert.equal(drug.__status, 200, JSON.stringify(drug)); assert.equal(drug.events.length, 1);
 
@@ -206,9 +208,11 @@ test("THE GOLDEN PATH: consent -> mark site -> Sign In -> Time Out -> incision -
   const signOut = await as(DOCTOR, "/ward/surgery-signout", "POST", { orgId: ORG, caseId, submission: { items: allOf(SIGN_OUT_ITEMS), signatures: THREE } });
   assert.equal(signOut.__status, 200, JSON.stringify(signOut)); assert.equal(signOut.stage, "signed-out");
 
-  await as(DOCTOR, "/ward/anesthesia-end", "POST", { orgId: ORG, caseId });
+  const ended = await as(DOCTOR, "/ward/anesthesia-end", "POST", { orgId: ORG, caseId, technique: "general" });
+  assert.equal(ended.__status, 200, JSON.stringify(ended));
   const anes = await as(DOCTOR, `/ward/anesthesia-get?orgId=${ORG}&caseId=${caseId}`);
   assert.ok(anes.record.endedAt, "anaesthesia end is real, not just the case's own state");
+  assert.deepEqual([anes.record.technique, anes.record.techniqueChangedFrom], ["general", "local-with-monitoring"], "a conversion keeps the technique it started under");
 
   const note = await as(DOCTOR, "/ward/surgery-note", "POST", { orgId: ORG, caseId, note: "Uncomplicated appendicectomy." });
   assert.equal(note.__status, 200, JSON.stringify(note));

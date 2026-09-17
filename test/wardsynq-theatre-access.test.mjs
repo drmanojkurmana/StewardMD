@@ -106,6 +106,10 @@ test("R2-1 NABH 6 leaves out a case under local anaesthesia from both counts; a 
   assert.deepEqual([without.numerator, without.denominator], [cell.numerator, cell.denominator], "the local anaesthesia case with a return changes neither count");
   const blocked = computeNabhIndicators({ rows: { SurgicalCase: ops }, unreadable: { PreAnaestheticCheckup: "not readable with this role" }, windows: [AUG] }).find((i) => i.no === 6);
   assert.equal(blocked.computable, false, "a technique that cannot be read is not guessed");
+  /* R2-2: the technique the anaesthesia record says was given wins over the plan: planned local, converted to general, stays in. */
+  const given = [{ caseId: "la", technique: "general", techniqueChangedFrom: "local-with-monitoring" }, { caseId: "spinal", technique: "local-with-monitoring" }, { caseId: "ga", technique: null }];
+  const conv = computeNabhIndicators({ rows: { SurgicalCase: ops, PreAnaestheticCheckup: pacs, AnesthesiaRecord: given }, unreadable: {}, windows: [AUG] }).find((i) => i.no === 6).months[0];
+  assert.deepEqual([conv.numerator, conv.denominator, conv.localAnaesthesiaExcluded, conv.techniqueNotRecorded], [2, 3, 1, 1], "the converted case counts, the spinal given as local does not, a record with no technique falls back to the plan");
 });
 
 test("OPD and diagnostic waits: from arrival or a later appointment to the start, zero if seen early, missing starts counted and not averaged", () => {

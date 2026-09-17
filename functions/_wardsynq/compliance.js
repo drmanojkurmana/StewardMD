@@ -122,9 +122,14 @@ const NABH_SOURCES = {
     } },
   /* P3 theatre-opd-access (2026-09-17): 6 and 19 from the theatre case (migrate-surgery.js, theatre.js), 22 and 23 from the
    * OPD visit and the diagnostic counter (access-times.js). */
-  6: { needs: ["SurgicalCase", "PreAnaestheticCheckup"], source: "Surgical cases with an incision in the month that the surgeon marked as an unplanned return to theatre, over surgical cases with an incision in the month, leaving out cases whose pre-anaesthetic checkup planned local anaesthesia with monitoring.",
-    note: "A case the surgeon has not answered is not counted as a return; the number waiting is shown beside the value. The technique is the one planned at the pre-anaesthetic checkup, as the anaesthesia record holds none; a case with no checkup stays in and is counted beside. NABH asks for a 30 day delay before the month is final.",
-    compute: (r, w) => unplannedReturnCell(r.SurgicalCase, w, new Map((r.PreAnaestheticCheckup || []).filter((p) => p && p.caseId).map((p) => [p.caseId, str(p.plan && p.plan.technique) || null]))) },
+  6: { needs: ["SurgicalCase", "PreAnaestheticCheckup", "AnesthesiaRecord"], source: "Surgical cases with an incision in the month that the surgeon marked as an unplanned return to theatre, over surgical cases with an incision in the month, leaving out cases done under local anaesthesia with monitoring.",
+    note: "A case the surgeon has not answered is not counted as a return; the number waiting is shown beside the value. The technique is the one the anaesthesia record says was given (a case converted from local to another technique stays in); where the record states none, the one planned at the pre-anaesthetic checkup; a case with neither stays in and is counted beside. NABH asks for a 30 day delay before the month is final.",
+    /* R2-2: the technique given wins over the planned one. */
+    compute: (r, w) => {
+      const tech = new Map((r.PreAnaestheticCheckup || []).filter((p) => p && p.caseId).map((p) => [p.caseId, str(p.plan && p.plan.technique) || null]));
+      for (const a of r.AnesthesiaRecord || []) if (a && a.caseId && str(a.technique)) tech.set(a.caseId, str(a.technique));
+      return unplannedReturnCell(r.SurgicalCase, w, tech);
+    } },
   7: { needs: ["SurgicalCase"], source: "Surgical cases with an incision in the month; the checklist was followed when sign in, time out and sign out were all completed.",
     note: "Every case is counted, not an audited sample.",
     compute: (r, w) => { const cs = r.SurgicalCase.filter((c) => inW(c.incisionAt, w)); return val(cs.filter((c) => c.signIn && c.timeOut && c.signOut).length, cs.length, 100); } },
