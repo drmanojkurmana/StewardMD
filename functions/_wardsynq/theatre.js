@@ -122,7 +122,8 @@ async function createTheatreSession(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let existing;
-  try { existing = (await svc.list(TYPE, 1000)) || []; }
+  // R4-2: every session (listAll, paged; the old read was the OLDEST 1,000, so a clash with a newer session was not seen).
+  try { existing = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; }
   catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", written: 0 }; }
   const id = sessionIdFor(theatreId, startAt);
   const current = existing.find((s) => s && s.id === id);
