@@ -31,7 +31,8 @@ mock.module("../functions/_fbfirestore.js", {
       const where = opts && opts.where, limit = (opts && opts.limit) || 100, out = [];
       for (const [path, d] of docs) {
         if (!path.startsWith(coll + "/")) continue;
-        if (where && String(d.fields[where.field]) !== String(where.value)) continue;
+        // One { field, value } or an array of them ANDed, as _fbfirestore.js fsQuery.
+        if (where && [].concat(where).some((w) => String(d.fields[w.field]) !== String(w.value))) continue;
         out.push({ id: path.slice(coll.length + 1), name: path, fields: { ...d.fields }, updateTime: d.updateTime });
         if (out.length >= limit) break;
       }
