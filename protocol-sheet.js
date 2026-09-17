@@ -246,6 +246,7 @@
 
   function headerHtml(isExport) {
     var p = st.patient || {}, pr = st.protocol || {};
+    var bigProto = isBigProtocol(pr);
     var b = bsa();
     var c = crcl();
     var rs = renalStage(c);
@@ -299,7 +300,7 @@
       "</div>" +
       "<div class=\"ps-title-row\">" +
         "<div class=\"ps-title\">Chemotherapy Treatment Protocol" + ((pr.custom || pr.lifecycleState === "custom") ? " <span class=\"ps-custombadge\">CUSTOM / DRAFT</span>" : "") + "</div>" +
-        "<div class=\"ps-doc-meta\"><span class=\"ps-doc-date\">Date: " + esc((st.ctx && st.ctx.today) || "") + "</span></div>" +
+        "<div class=\"ps-doc-meta\"><span class=\"ps-doc-date\">Date: " + esc((st.ctx && st.ctx.today) || "") + "</span>" + (isExport ? ("<span class=\"ps-page-num-badge\">" + (bigProto ? "Page 1 of 2" : "Page 1 of 1") + "</span>") : "") + "</div>" +
       "</div>" +
       emrBar +
       banner +
@@ -823,6 +824,7 @@
 
   // ---- PRINT FOOTER & MEDICOLEGAL DISCLAIMER ----------------------------------------------------
   function printFooterHtml() {
+    var bigProto = isBigProtocol(st.protocol || {});
     return "<div class=\"ps-foot ps-foot-print ps-page-break-auto\">" +
       "<div class=\"ps-foot-brand\">" +
         "<div class=\"ps-foot-logo\">" +
@@ -837,6 +839,7 @@
         "<b>MEDICOLEGAL DISCLAIMER:</b> This chemotherapy treatment protocol calculation sheet is generated strictly for clinical decision support and verification by authorized healthcare professionals. It does NOT constitute an independent medical prescription, automated dispensing order, or substitute for professional clinical judgment. The prescribing medical oncologist, reviewing oncology clinical pharmacist, and administering oncology nurse remain solely and non-delegably responsible for independently verifying all patient vitals, body surface area (BSA), renal function (CrCl), organ clearance, drug identities, calculated doses, cumulative toxicities, dilution volumes, compatibility, premedications, and infusion schedules prior to compounding or patient administration. StewardMD and its contributors accept no liability for clinical outcomes, dosage adjustments, or administration errors." +
       "</div>" +
       "<div class=\"ps-foot-meta\">Generated via StewardMD OncoTree &bull; Adheres to ASCO / ONS Chemotherapy Administration Safety Standards &bull; Confidential Medical Record</div>" +
+      "<div class=\"ps-foot-pagenum\">- End of Page " + (bigProto ? "1 of 2" : "1 of 1") + " -</div>" +
     "</div>";
   }
 
@@ -863,16 +866,15 @@
       "</div>"
     ) : "";
 
-    var page1Content =
-      headerHtml(isExport) +
-      "<div class=\"ps-warns-container\">" + warningsHtml() + "</div>" +
-      "<div class=\"ps-tablewrap-container\">" + tableHtml(isExport) + "</div>";
+    var continuationNotice = (isExport && big) ?
+      "<div class=\"ps-page-continuation\">&#8594; Continued on Page 2: Acute Toxicities &amp; Antidotes, Patient Instructions, Prescriber &amp; Pharmacist Verification Signatures</div>" : "";
 
-    var page2Content =
-      (page2RunningHeader || "") +
+    var sharedContent_premeds =
       listBlock("Premedications & Hydration", asArr(pr.premedications)) +
       listBlock("Supportive Care & Emesis Prophylaxis", asArr(pr.supportiveCare)) +
-      listBlock("Monitoring & Lab Safety Parameters", asArr(pr.monitoring)) +
+      listBlock("Monitoring & Lab Safety Parameters", asArr(pr.monitoring));
+
+    var sharedContent_safety =
       toxicitiesHtml(isExport) +
       oralInstructionsHtml(isExport) +
       doctorNotesHtml(isExport) +
@@ -881,6 +883,17 @@
       printFooterHtml();
 
     if (big) {
+      var page1Content =
+        headerHtml(isExport) +
+        "<div class=\"ps-warns-container\">" + warningsHtml() + "</div>" +
+        "<div class=\"ps-tablewrap-container\">" + tableHtml(isExport) + "</div>" +
+        sharedContent_premeds +
+        continuationNotice;
+
+      var page2Content =
+        (page2RunningHeader || "") +
+        sharedContent_safety;
+
       return "<div class=\"ps-sheet" + (isExport ? " ps-sheet-export" : "") + "\" id=\"psSheet\">" +
         "<div class=\"ps-page ps-page-1 ps-page-break-auto\">" + page1Content + "</div>" +
         "<div class=\"ps-page-break-deliberate\"></div>" +
@@ -889,8 +902,11 @@
     } else {
       return "<div class=\"ps-sheet" + (isExport ? " ps-sheet-export" : "") + "\" id=\"psSheet\">" +
         "<div class=\"ps-page ps-page-1\">" +
-          page1Content +
-          page2Content +
+          headerHtml(isExport) +
+          "<div class=\"ps-warns-container\">" + warningsHtml() + "</div>" +
+          "<div class=\"ps-tablewrap-container\">" + tableHtml(isExport) + "</div>" +
+          sharedContent_premeds +
+          sharedContent_safety +
         "</div>" +
       "</div>";
     }
@@ -1482,7 +1498,7 @@
       ".ps-regimen-chip{font:700 9.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:2px 8px}" +
       ".ps-cards{display:grid;grid-template-columns:1.15fr 1fr;gap:8px;margin-bottom:8px}" +
       ".ps-cards-col2{display:flex;flex-direction:column;gap:8px}" +
-      ".ps-page{box-sizing:border-box;width:100%;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-page{box-sizing:border-box;width:100%;page-break-inside:avoid;break-inside:avoid;border:1.5px solid #0f766e;border-radius:6px;padding:16px 20px;margin-bottom:16px;background:#fff}" +
       ".ps-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;page-break-inside:avoid;break-inside:avoid}" +
       ".ps-card-h{font:800 9px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:#0f766e;margin-bottom:5px}" +
       ".ps-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}" +
@@ -1567,7 +1583,7 @@
       ".ps-foot-meta{font-size:7pt;color:#94a3b8;text-align:center;letter-spacing:.02em}" +
       ".ps-vh,.ps-verify,.ps-sig-actions,.ps-emr-bar,.ps-table-actions,.ps-dose-edit-btn,.ps-inst-editbtn,.ps-lang-picker,.ps-tox-actions,.ps-note-chips,.ps-drug-del-btn,.ps-tox-del-btn{display:none!important}" +
       ".ps-page-break-deliberate{display:none}" +
-      ".ps-page2-header{display:none}" +
+      ".ps-page2-header{display:none}" + ".ps-sheet-export .ps-page2-header{display:flex!important;justify-content:space-between;align-items:center;border-bottom:1.5px solid #0f766e;padding-bottom:5px;margin-bottom:12px;font-size:8.5pt;color:#64748b;font-weight:600}" +
       "@page{size:A4 portrait;margin:8mm 10mm}" +
       "@media print{" +
         "body{padding:0!important}" +
@@ -1578,6 +1594,9 @@
         ".ps-page2-header{display:flex!important;justify-content:space-between;align-items:center;border-bottom:1.5px solid #0f766e;padding-bottom:5px;margin-bottom:12px;font-size:8.5pt;color:#64748b;font-weight:600}" +
         ".ps-table td,.ps-table th,.ps-table tr{page-break-inside:avoid!important;break-inside:avoid!important}" +
       "}" +
+      ".ps-page-num-badge{display:inline-block;font:700 8px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;background:#0f766e;color:#fff;border-radius:999px;padding:2px 8px;margin-left:8px;letter-spacing:.03em}" +
+      ".ps-foot-pagenum{font:600 8px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#94a3b8;text-align:center;margin-top:4px;letter-spacing:.04em}" +
+      ".ps-page-continuation{font:600 8.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#0f766e;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;padding:4px 10px;margin-top:10px;text-align:center}" +
       "</style></head><body>" + sheetHtml(true) + "</body></html>";
   }
 
