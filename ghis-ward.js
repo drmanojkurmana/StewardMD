@@ -593,7 +593,7 @@
                 var quiet = 0, polls = 0, lastState = '';
                 function look() {
                   if (!ctx.listeners.length) return;   // already resolved or rejected
-                  plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':(document.body&&document.body.innerText.length>200?'ok':'blank'))+' '+location.host})()" })
+                  plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':(document.readyState==='complete'?'ok':'blank'))+' '+location.host})()" })
                     .then(function (r) { var v = String((r && r.result) || '').split(' '); lastState = v[0] || ''; if (v[0] === 'ok') quiet += (v[1] && v[1] !== host) ? 2 : 1; else quiet = 0; }, function () { lastState = 'error'; quiet = 0; })
                     .then(function () {
                       polls++;
