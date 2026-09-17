@@ -1,0 +1,114 @@
+{
+  "site": "bclc_hcc",
+  "name": "Liver (HCC) - BCLC 2022 Staging",
+  "system": "Oncology / Liver (Clinical)",
+  "versions": [
+    {
+      "version": "BCLC 2022 update",
+      "seeded": true,
+      "provenance": "Barcelona Clinic Liver Cancer (BCLC) 2022 strategy update for prognosis prediction and treatment recommendation in hepatocellular carcinoma; licensed clinical reference.",
+      "introduction": "The BCLC staging system is the internationally recognized standard of care for hepatocellular carcinoma (HCC) endorsed by EASL, AASLD, ESMO, and NCCN. Unlike pure anatomical TNM staging, BCLC integrates tumor burden, liver functional reserve (Child-Pugh score), and patient performance status (ECOG PS) to directly allocate evidence-based first-line therapies.",
+      "t": [
+        {
+          "code": "Very Early",
+          "label": "Single lesion <= 2 cm (preserved portal pressure and normal bilirubin)"
+        },
+        {
+          "code": "Early (Milan)",
+          "label": "Single lesion > 2 cm OR up to 3 nodules <= 3 cm each (within Milan criteria)"
+        },
+        {
+          "code": "Multinodular",
+          "label": "Multinodular (>3 nodules or >3 cm) without vascular invasion or extrahepatic spread"
+        },
+        {
+          "code": "Advanced / Invasive",
+          "label": "Macrovascular invasion (portal vein) or extrahepatic spread (lymph nodes, lung, bone)"
+        },
+        {
+          "code": "Terminal",
+          "label": "Any tumor stage with terminal liver failure or severe disability"
+        }
+      ],
+      "n": [
+        {
+          "code": "CP-A",
+          "label": "Child-Pugh Class A (preserved liver functional reserve)"
+        },
+        {
+          "code": "CP-B",
+          "label": "Child-Pugh Class B (moderate liver functional impairment)"
+        },
+        {
+          "code": "CP-C",
+          "label": "Child-Pugh Class C (decompensated cirrhosis, jaundice, ascites, encephalopathy)"
+        }
+      ],
+      "m": [
+        {
+          "code": "PS 0",
+          "label": "ECOG Performance Status 0 (fully active, no cancer symptoms)"
+        },
+        {
+          "code": "PS 1-2",
+          "label": "ECOG Performance Status 1 to 2 (ambulatory, capable of all selfcare, symptom-restricted)"
+        },
+        {
+          "code": "PS 3-4",
+          "label": "ECOG Performance Status 3 to 4 (confined to bed/chair >50% of waking hours)"
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0 (Very Early)",
+          "t": "Single <=2 cm",
+          "n": "Child-Pugh A",
+          "m": "PS 0",
+          "basis": "Resection (if no portal hypertension / normal bilirubin) or Thermal Ablation (RFA/MWA). 5-year survival >70%."
+        },
+        {
+          "stage": "A (Early)",
+          "t": "Single >2 cm or <=3 nodules <=3 cm",
+          "n": "Child-Pugh A-B",
+          "m": "PS 0",
+          "basis": "Liver Transplantation (Milan criteria), Surgical Resection, or Ablation. Median OS >5 years."
+        },
+        {
+          "stage": "B (Intermediate)",
+          "t": "Multinodular, preserved portal flow",
+          "n": "Child-Pugh A-B",
+          "m": "PS 0",
+          "basis": "Transarterial Chemoembolization (TACE) if well-demarcated; Systemic therapy (Atezo+Bev / Durva+Treme) if high tumor burden or TACE-refractory. Median OS >2.5 years."
+        },
+        {
+          "stage": "C (Advanced)",
+          "t": "Macrovascular invasion or extrahepatic spread",
+          "n": "Child-Pugh A-B",
+          "m": "PS 1-2",
+          "basis": "First-Line Systemic Therapy: Atezolizumab + Bevacizumab OR Durvalumab + Tremelimumab. Alternative/2nd-Line: Sorafenib, Lenvatinib, Cabozantinib. Median OS >19-22 months."
+        },
+        {
+          "stage": "D (Terminal)",
+          "t": "Any tumor stage",
+          "n": "Child-Pugh C",
+          "m": "PS 3-4",
+          "basis": "Best Supportive Care (BSC), palliative symptom management. Liver transplant evaluation only if highly selected. Median OS <3 months."
+        }
+      ],
+      "regionalNodes": "Regional nodes are hilar, hepatoduodenal, and caval nodes. Involvement denotes advanced stage (BCLC C).",
+      "histologicGrade": "Edmondson-Steiner grading (I-IV) and underlying fibrosis score (Ishak 0-6).",
+      "histopathologicTypes": "Hepatocellular carcinoma, fibrolamellar variant, steatohepatitic HCC.",
+      "prognosticFactors": [
+        "Liver function: Child-Pugh score (5-15) and ALBI grade",
+        "Portal hypertension (hepatic venous pressure gradient >=10 mmHg, esophageal varices, splenomegaly)",
+        "Serum alpha-fetoprotein (AFP) level (>=400 ng/mL indicates aggressive biology)",
+        "Macrovascular invasion (portal vein thrombosis Vp1-Vp4)",
+        "Performance status (ECOG PS)"
+      ]
+    },
+    {
+      "version": "BCLC 2018 (earlier)",
+      "seeded": false
+    }
+  ]
+}

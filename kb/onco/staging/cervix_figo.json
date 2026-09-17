@@ -1,0 +1,209 @@
+{
+  "site": "cervix_figo",
+  "name": "Cervix - FIGO 2018 Staging System",
+  "system": "Oncology / Gynecologic (Clinical)",
+  "versions": [
+    {
+      "version": "FIGO 2018",
+      "seeded": true,
+      "provenance": "International Federation of Gynecology and Obstetrics (FIGO) 2018 cervical cancer staging classification; licensed clinical reference.",
+      "introduction": "FIGO 2018 is the primary clinical and surgical staging system for carcinoma of the cervix uteri. Key 2018 updates allow imaging (MRI, PET-CT) and pathological findings to assign stage, divide Stage IB into three size categories (IB1 <=2 cm, IB2 >2-4 cm, IB3 >4 cm), and allocate pelvic node metastasis to Stage IIIC1 and para-aortic node metastasis to Stage IIIC2.",
+      "t": [
+        {
+          "code": "FIGO I",
+          "label": "Carcinoma strictly confined to the cervix uteri (extension to corpus should be disregarded)"
+        },
+        {
+          "code": "FIGO IA",
+          "label": "Microinvasive carcinoma diagnosed only by microscopy with maximum depth of invasion < 5 mm"
+        },
+        {
+          "code": "FIGO IA1",
+          "label": "Stromal invasion < 3 mm in depth"
+        },
+        {
+          "code": "FIGO IA2",
+          "label": "Stromal invasion >= 3 mm and < 5 mm in depth"
+        },
+        {
+          "code": "FIGO IB",
+          "label": "Clinically visible lesion confined to cervix or microscopic lesion >= 5 mm depth"
+        },
+        {
+          "code": "FIGO IB1",
+          "label": "Invasive carcinoma >= 5 mm depth and <= 2 cm in greatest dimension"
+        },
+        {
+          "code": "FIGO IB2",
+          "label": "Invasive carcinoma > 2 cm and <= 4 cm in greatest dimension"
+        },
+        {
+          "code": "FIGO IB3",
+          "label": "Invasive carcinoma > 4 cm in greatest dimension"
+        },
+        {
+          "code": "FIGO II",
+          "label": "Carcinoma invades beyond uterus, but not to lower third of vagina or pelvic wall"
+        },
+        {
+          "code": "FIGO IIA",
+          "label": "Involvement of upper two thirds of vagina without parametrial invasion (IIA1 <=4 cm, IIA2 >4 cm)"
+        },
+        {
+          "code": "FIGO IIB",
+          "label": "Parametrial invasion, but not out to the pelvic wall"
+        },
+        {
+          "code": "FIGO III",
+          "label": "Carcinoma involves lower third of vagina, extends to pelvic wall, causes hydronephrosis/non-functioning kidney, or involves regional lymph nodes"
+        },
+        {
+          "code": "FIGO IIIA",
+          "label": "Involvement of lower third of vagina, no extension to pelvic wall"
+        },
+        {
+          "code": "FIGO IIIB",
+          "label": "Extension to pelvic wall, or hydronephrosis / non-functioning kidney"
+        },
+        {
+          "code": "FIGO IV",
+          "label": "Carcinoma extends beyond the true pelvis or has clinically involved mucosa of bladder or rectum"
+        }
+      ],
+      "n": [
+        {
+          "code": "FIGO IIIC1",
+          "label": "Pelvic lymph node metastasis only (r=imaging, p=pathology)"
+        },
+        {
+          "code": "FIGO IIIC2",
+          "label": "Para-aortic lymph node metastasis (r=imaging, p=pathology)"
+        }
+      ],
+      "m": [
+        {
+          "code": "FIGO IVA",
+          "label": "Spread to adjacent pelvic organs (biopsy-proven mucosa of bladder or rectum)"
+        },
+        {
+          "code": "FIGO IVB",
+          "label": "Spread to distant organs (lung, liver, bone, non-regional distant nodes)"
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "IA1",
+          "t": "Invasion <3 mm depth",
+          "n": "Negative nodes",
+          "m": "M0",
+          "basis": "Cone biopsy with negative margins or simple hysterectomy (if fertility not desired)."
+        },
+        {
+          "stage": "IA2",
+          "t": "Invasion 3 to <5 mm depth",
+          "n": "Negative nodes",
+          "m": "M0",
+          "basis": "Modified radical hysterectomy + pelvic lymph node dissection or conization."
+        },
+        {
+          "stage": "IB1",
+          "t": "Invasive lesion <=2 cm",
+          "n": "Negative nodes",
+          "m": "M0",
+          "basis": "Radical hysterectomy + bilateral pelvic lymphadenectomy or fertility-sparing radical trachelectomy."
+        },
+        {
+          "stage": "IB2",
+          "t": "Invasive lesion >2 to <=4 cm",
+          "n": "Negative nodes",
+          "m": "M0",
+          "basis": "Radical hysterectomy or definitive chemoradiation (EBRT + concurrent cisplatin + brachytherapy)."
+        },
+        {
+          "stage": "IB3",
+          "t": "Invasive lesion >4 cm",
+          "n": "Negative nodes",
+          "m": "M0",
+          "basis": "Definitive concurrent chemoradiation with image-guided adaptive brachytherapy (IGABT)."
+        },
+        {
+          "stage": "IIA1",
+          "t": "Upper vagina <=4 cm",
+          "n": "Negative nodes",
+          "m": "M0",
+          "basis": "Radical hysterectomy or definitive chemoradiotherapy."
+        },
+        {
+          "stage": "IIA2",
+          "t": "Upper vagina >4 cm",
+          "n": "Negative nodes",
+          "m": "M0",
+          "basis": "Definitive concurrent chemoradiotherapy + brachytherapy."
+        },
+        {
+          "stage": "IIB",
+          "t": "Parametrial invasion",
+          "n": "Negative nodes",
+          "m": "M0",
+          "basis": "Definitive concurrent chemoradiotherapy (cisplatin) + brachytherapy; surgery contraindicated."
+        },
+        {
+          "stage": "IIIA",
+          "t": "Lower third of vagina",
+          "n": "Negative nodes",
+          "m": "M0",
+          "basis": "Definitive concurrent chemoradiotherapy + brachytherapy."
+        },
+        {
+          "stage": "IIIB",
+          "t": "Pelvic wall or hydronephrosis",
+          "n": "Negative nodes",
+          "m": "M0",
+          "basis": "Definitive concurrent chemoradiotherapy + brachytherapy."
+        },
+        {
+          "stage": "IIIC1",
+          "t": "Any T (I-IIIB)",
+          "n": "Pelvic node metastasis",
+          "m": "M0",
+          "basis": "Definitive concurrent chemoradiotherapy with pelvic nodal boost + brachytherapy."
+        },
+        {
+          "stage": "IIIC2",
+          "t": "Any T (I-IIIB)",
+          "n": "Para-aortic node metastasis",
+          "m": "M0",
+          "basis": "Extended-field chemoradiotherapy (covering para-aortic nodes) + brachytherapy."
+        },
+        {
+          "stage": "IVA",
+          "t": "Bladder/rectal mucosa invasion",
+          "n": "Any N",
+          "m": "Pelvic invasion",
+          "basis": "Definitive chemoradiotherapy or pelvic exenteration in selected cases."
+        },
+        {
+          "stage": "IVB",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "Distant metastasis",
+          "basis": "Systemic therapy: Pembrolizumab + Chemotherapy (Paclitaxel + Cisplatin/Carboplatin) +/- Bevacizumab (if PD-L1 CPS >=1)."
+        }
+      ],
+      "regionalNodes": "Pelvic nodes (paracervical, obturator, internal iliac, external iliac, common iliac, presacral, lateral sacral) and Para-aortic nodes.",
+      "histologicGrade": "Grade 1 (well differentiated), Grade 2 (moderately differentiated), Grade 3 (poorly differentiated).",
+      "histopathologicTypes": "Squamous cell carcinoma (70-80%), Adenocarcinoma (20-25%), Adenosquamous carcinoma, Neuroendocrine carcinoma.",
+      "prognosticFactors": [
+        "Pelvic and para-aortic lymph node status (strongest prognostic factor)",
+        "Tumor volume / size (>4 cm)",
+        "Depth of stromal invasion and lymphovascular space invasion (LVSI - Sedlis criteria for adjuvant RT)",
+        "HPV genotype (HPV 16, 18, 45)",
+        "PD-L1 expression (CPS score)"
+      ]
+    },
+    {
+      "version": "FIGO 2009 (historical)",
+      "seeded": false
+    }
+  ]
+}

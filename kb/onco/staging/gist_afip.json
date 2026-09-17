@@ -1,0 +1,119 @@
+{
+  "site": "gist_afip",
+  "name": "GIST - Modified NIH / AFIP Risk Criteria",
+  "system": "Oncology / Gastrointestinal (Clinical)",
+  "versions": [
+    {
+      "version": "Modified NIH / Miettinen (AFIP)",
+      "seeded": true,
+      "provenance": "Modified NIH Consensus Criteria (Joensuu) and Armed Forces Institute of Pathology (AFIP / Miettinen-Lasota) risk stratification for gastrointestinal stromal tumors; licensed clinical reference.",
+      "introduction": "Gastrointestinal stromal tumors (GIST) do not behave like standard gastrointestinal carcinomas and standard TNM staging does not predict clinical behavior. The Modified NIH (Joensuu) and AFIP criteria are the clinical standards determining recurrence risk and the duration of adjuvant Imatinib therapy (e.g. 3 years for high-risk resected GIST). Criteria integrate tumor size, mitotic count per 5 mm2 (50 HPF), tumor rupture, and primary anatomic site.",
+      "t": [
+        {
+          "code": "Size <=2 cm",
+          "label": "Tumor diameter <= 2.0 cm"
+        },
+        {
+          "code": "Size 2.1-5 cm",
+          "label": "Tumor diameter 2.1 to 5.0 cm"
+        },
+        {
+          "code": "Size 5.1-10 cm",
+          "label": "Tumor diameter 5.1 to 10.0 cm"
+        },
+        {
+          "code": "Size >10 cm",
+          "label": "Tumor diameter > 10.0 cm"
+        },
+        {
+          "code": "Tumor Rupture",
+          "label": "Spontaneous or intraoperative tumor rupture / spillage (automatically confers high risk)"
+        }
+      ],
+      "n": [
+        {
+          "code": "Mitotic <=5 / 50 HPF",
+          "label": "Mitotic count <= 5 mitoses per 5 mm2 (or 50 high-power fields)"
+        },
+        {
+          "code": "Mitotic >5 / 50 HPF",
+          "label": "Mitotic count > 5 mitoses per 5 mm2 (high proliferation index)"
+        }
+      ],
+      "m": [
+        {
+          "code": "Gastric Primary",
+          "label": "Primary site is stomach (more favorable prognosis at equivalent size/mitoses)"
+        },
+        {
+          "code": "Non-Gastric Primary",
+          "label": "Primary site is small intestine, duodenum, colon, rectum, or mesentery (higher malignant potential)"
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "Very Low Risk",
+          "t": "Size <=2 cm",
+          "n": "Mitotic <=5 / 50 HPF",
+          "m": "Gastric or Non-Gastric",
+          "basis": "Complete surgical resection (R0). Adjuvant imatinib NOT indicated. Minimal recurrence risk (<1%)."
+        },
+        {
+          "stage": "Low Risk",
+          "t": "Size 2.1-5 cm",
+          "n": "Mitotic <=5 / 50 HPF",
+          "m": "Gastric",
+          "basis": "Complete surgical resection. Adjuvant imatinib NOT indicated. Recurrence risk ~2-3%."
+        },
+        {
+          "stage": "Intermediate Risk (Gastric)",
+          "t": "Size 5.1-10 cm",
+          "n": "Mitotic <=5 / 50 HPF",
+          "m": "Gastric",
+          "basis": "Surgical resection. Low-to-moderate recurrence risk (~10%). Individualized adjuvant imatinib decision."
+        },
+        {
+          "stage": "Intermediate Risk (Non-Gastric)",
+          "t": "Size 2.1-5 cm",
+          "n": "Mitotic <=5 / 50 HPF",
+          "m": "Non-Gastric",
+          "basis": "Intestinal GIST with higher relapse risk (~8-15%). Consider adjuvant imatinib discussion."
+        },
+        {
+          "stage": "High Risk (Mitotic >5)",
+          "t": "Size >5 cm (or any non-gastric >5 cm)",
+          "n": "Mitotic >5 / 50 HPF",
+          "m": "Gastric or Non-Gastric",
+          "basis": "High recurrence risk (>50%). Standard of care: Adjuvant Imatinib 400 mg daily for at least 3 full years (36 months)."
+        },
+        {
+          "stage": "High Risk (Size >10 cm)",
+          "t": "Size >10 cm",
+          "n": "Any mitotic rate",
+          "m": "Gastric or Non-Gastric",
+          "basis": "High recurrence risk (>50%). Standard of care: Adjuvant Imatinib 400 mg daily for 3 years."
+        },
+        {
+          "stage": "High Risk (Tumor Rupture)",
+          "t": "Tumor rupture",
+          "n": "Any mitotic rate",
+          "m": "Any site",
+          "basis": "Peritoneal spillage confers virtual 100% recurrence risk: Indefinite / long-term Imatinib therapy recommended."
+        }
+      ],
+      "regionalNodes": "Lymph node metastases are extremely rare in adult GIST (<1%). Routine lymphadenectomy is not recommended unless clinically enlarged nodes are identified.",
+      "histologicGrade": "Assessed by mitotic rate per 5 mm2 (<=5 vs >5 mitoses).",
+      "histopathologicTypes": "Spindle cell GIST (70%), Epithelioid GIST (20%), Mixed spindle and epithelioid GIST (10%).",
+      "prognosticFactors": [
+        "KIT mutation status: Exon 11 mutation (most common, highly imatinib-sensitive); Exon 9 mutation (requires higher dose imatinib 800 mg daily); Exon 13/17 (secondary resistance)",
+        "PDGFRA mutation status: D842V mutation (primary imatinib resistance; sensitive to Avapritinib)",
+        "SDH-deficient GIST (pediatric / young adult syndromic GIST)",
+        "Tumor rupture prior to or during surgery"
+      ]
+    },
+    {
+      "version": "NIH Consensus 2001 (historical)",
+      "seeded": false
+    }
+  ]
+}

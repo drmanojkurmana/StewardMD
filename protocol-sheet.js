@@ -304,7 +304,7 @@
       emrBar +
       banner +
       "<div class=\"ps-cards\">" +
-        "<section class=\"ps-card\"><div class=\"ps-card-h\">Patient demographics</div><div class=\"ps-card-grid ps-grid-2\">" +
+        "<section class=\"ps-card ps-card-demog\"><div class=\"ps-card-h\">Patient demographics</div><div class=\"ps-card-grid ps-grid-2\">" +
           field("Case No / MRN", "caseNo", p.caseNo, "text", "MRN / Case #", isExport) +
           field("Patient Name", "name", p.name, "text", "Full name", isExport) +
           field("Age (yrs)", "age", p.age, "number", "e.g. 58", isExport) +
@@ -313,17 +313,19 @@
           field("Diagnosis", "diagnosis", p.diagnosis, "text", "Histology / stage", isExport) +
           field("Intent", "intent", intent, "text", "Adjuvant / Neoadjuvant / Palliative", isExport) +
         "</div></section>" +
-        "<section class=\"ps-card ps-card-bio\"><div class=\"ps-card-h\">Biometrics &amp; renal function</div><div class=\"ps-card-grid ps-grid-2\">" +
-          field("Height (cm)", "heightCm", p.heightCm, "number", "e.g. 165", isExport) +
-          field("Weight (kg)", "weightKg", p.weightKg, "number", "e.g. 68", isExport) +
-          "<div class=\"ps-f ps-autofield ps-span-2\"><span>Auto BSA (m²)</span><b class=\"ps-auto-calc ps-auto-bsa\">" + bsaDisp + "</b></div>" +
-          field("Serum Creatinine (mg/dL)", "creatinine", p.creatinine, "number", "e.g. 0.90", isExport) +
-          "<div class=\"ps-f ps-autofield\"><span>Auto CrCl (mL/min)</span><b class=\"ps-auto-calc ps-auto-crcl\">" + crclDisp + "</b></div>" +
-        "</div></section>" +
-        "<section class=\"ps-card\"><div class=\"ps-card-h\">Prescribing oncologist &amp; date</div><div class=\"ps-card-grid ps-grid-2\">" +
-          consultantField(p.consultant, isExport) +
-          "<div class=\"ps-f\"><span>Date</span><b>" + esc((st.ctx && st.ctx.today) || "-") + "</b></div>" +
-        "</div></section>" +
+        "<div class=\"ps-cards-col2\">" +
+          "<section class=\"ps-card ps-card-bio\"><div class=\"ps-card-h\">Biometrics &amp; renal function</div><div class=\"ps-card-grid ps-grid-2\">" +
+            field("Height (cm)", "heightCm", p.heightCm, "number", "e.g. 165", isExport) +
+            field("Weight (kg)", "weightKg", p.weightKg, "number", "e.g. 68", isExport) +
+            "<div class=\"ps-f ps-autofield ps-span-2\"><span>Auto BSA (m²)</span><b class=\"ps-auto-calc ps-auto-bsa\">" + bsaDisp + "</b></div>" +
+            field("Serum Creatinine (mg/dL)", "creatinine", p.creatinine, "number", "e.g. 0.90", isExport) +
+            "<div class=\"ps-f ps-autofield\"><span>Auto CrCl (mL/min)</span><b class=\"ps-auto-calc ps-auto-crcl\">" + crclDisp + "</b></div>" +
+          "</div></section>" +
+          "<section class=\"ps-card ps-card-onco\"><div class=\"ps-card-h\">Prescribing oncologist &amp; date</div><div class=\"ps-card-grid ps-grid-2\">" +
+            consultantField(p.consultant, isExport) +
+            "<div class=\"ps-f\"><span>Date</span><b>" + esc((st.ctx && st.ctx.today) || "-") + "</b></div>" +
+          "</div></section>" +
+        "</div>" +
       "</div>";
   }
 
@@ -861,12 +863,14 @@
       "</div>"
     ) : "";
 
-    return "<div class=\"ps-sheet" + (isExport ? " ps-sheet-export" : "") + "\" id=\"psSheet\">" +
+    var page1Content =
       headerHtml(isExport) +
       "<div class=\"ps-warns-container\">" + warningsHtml() + "</div>" +
-      "<div class=\"ps-tablewrap-container\">" + tableHtml(isExport) + "</div>" +
+      "<div class=\"ps-tablewrap-container\">" + tableHtml(isExport) + "</div>";
+
+    var page2Content =
+      (page2RunningHeader || "") +
       listBlock("Premedications & Hydration", asArr(pr.premedications)) +
-      (big ? "<div class=\"ps-page-break-deliberate\"></div>" + page2RunningHeader : "") +
       listBlock("Supportive Care & Emesis Prophylaxis", asArr(pr.supportiveCare)) +
       listBlock("Monitoring & Lab Safety Parameters", asArr(pr.monitoring)) +
       toxicitiesHtml(isExport) +
@@ -874,8 +878,22 @@
       doctorNotesHtml(isExport) +
       (pr.specialInstructions ? "<div class=\"ps-block ps-page-break-auto\"><div class=\"ps-block-h\">Special Instructions / Administration Pearls</div><p>" + esc(pr.specialInstructions) + "</p></div>" : "") +
       sigHtml(isExport) +
-      printFooterHtml() +
-    "</div>";
+      printFooterHtml();
+
+    if (big) {
+      return "<div class=\"ps-sheet" + (isExport ? " ps-sheet-export" : "") + "\" id=\"psSheet\">" +
+        "<div class=\"ps-page ps-page-1 ps-page-break-auto\">" + page1Content + "</div>" +
+        "<div class=\"ps-page-break-deliberate\"></div>" +
+        "<div class=\"ps-page ps-page-2 ps-page-break-auto\">" + page2Content + "</div>" +
+      "</div>";
+    } else {
+      return "<div class=\"ps-sheet" + (isExport ? " ps-sheet-export" : "") + "\" id=\"psSheet\">" +
+        "<div class=\"ps-page ps-page-1\">" +
+          page1Content +
+          page2Content +
+        "</div>" +
+      "</div>";
+    }
   }
 
   // ---- MODAL SHELLS (DOSE EDIT, ADD DRUG, BRANDING, ADD TOXICITY) --------------------------------
@@ -1462,10 +1480,12 @@
       ".ps-regimen-name{font:800 16px/1.2 -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;letter-spacing:-.01em;margin-top:2px}" +
       ".ps-regimen-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}" +
       ".ps-regimen-chip{font:700 9.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:2px 8px}" +
-      ".ps-cards{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:10px}" +
-      ".ps-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;page-break-inside:avoid;break-inside:avoid}" +
-      ".ps-card-h{font:800 9.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:#0f766e;margin-bottom:6px}" +
-      ".ps-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 16px}" +
+      ".ps-cards{display:grid;grid-template-columns:1.15fr 1fr;gap:8px;margin-bottom:8px}" +
+      ".ps-cards-col2{display:flex;flex-direction:column;gap:8px}" +
+      ".ps-page{box-sizing:border-box;width:100%;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-card-h{font:800 9px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:#0f766e;margin-bottom:5px}" +
+      ".ps-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}" +
       ".ps-span-2{grid-column:1/-1}" +
       ".ps-renalbadge{font:700 8.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;border-radius:4px;padding:1px 5px;border:1px solid;-webkit-print-color-adjust:exact;print-color-adjust:exact}" +
       ".ps-renal-ok{color:#166534;background:#dcfce7;border-color:#86efac}" +
@@ -1473,77 +1493,78 @@
       ".ps-renal-mod{color:#92400e;background:#fef3c7;border-color:#fcd34d}" +
       ".ps-renal-sev{color:#9a3412;background:#ffedd5;border-color:#fdba74}" +
       ".ps-renal-fail{color:#fff;background:#dc2626;border-color:#991b1b}" +
-      ".ps-f{display:flex;align-items:baseline;gap:6px;font-size:11px}" +
-      ".ps-f>span{color:#64748b;font-weight:600;min-width:110px}" +
+      ".ps-f{display:flex;align-items:baseline;gap:6px;font-size:10.5px}" +
+      ".ps-f>span{color:#64748b;font-weight:600;min-width:100px}" +
       ".ps-f>b{font-weight:700;color:#0f172a}" +
       ".ps-autofield b{display:inline-flex;align-items:center;gap:6px}" +
       ".ps-calc-val{color:#0f766e;font-weight:800}" +
       ".ps-calc-tag{font:700 8px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;color:#0f766e;background:#ccfbf1;border:1px solid #99f6e4;border-radius:4px;padding:1px 4px}" +
       ".ps-calc-missing{color:#94a3b8;font-style:italic;font-weight:500}" +
       ".ps-tablewrap{border:1px solid #94a3b8;border-radius:8px;overflow:hidden;margin-top:8px;page-break-inside:avoid;break-inside:avoid}" +
-      ".ps-table{width:100%;border-collapse:collapse;font-size:10.5px}" +
-      ".ps-table th{background:#f1f5f9;color:#334155;font:700 9.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;padding:6px 8px;border-bottom:1.5px solid #94a3b8;text-align:left}" +
-      ".ps-table td{padding:6px 8px;border-bottom:1px solid #cbd5e1;vertical-align:top;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-table{width:100%;border-collapse:collapse;font-size:10px}" +
+      ".ps-table th{background:#f1f5f9;color:#334155;font:700 9px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;padding:5px 7px;border-bottom:1.5px solid #94a3b8;text-align:left}" +
+      ".ps-table td{padding:5px 7px;border-bottom:1px solid #cbd5e1;vertical-align:top;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-table tr{page-break-inside:avoid!important;break-inside:avoid!important}" +
       ".ps-table tr:last-child td{border-bottom:none}" +
       ".ps-dname{font-weight:700;color:#0f172a}" +
       ".ps-dname-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap}" +
       ".ps-cap{font:700 8px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;color:#fff;background:#dc2626;border-radius:3px;padding:1px 3px}" +
-      ".ps-ddesc b{font-weight:800;color:#0f766e;font-size:11.5px}" +
+      ".ps-ddesc b{font-weight:800;color:#0f766e;font-size:11px}" +
       ".ps-dose-val-row{display:flex;align-items:center;gap:6px}" +
-      ".ps-daily{font:800 10.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#0f172a}" +
-      ".ps-permetre{display:block;color:#64748b;font-size:9.5px;margin-top:1px}" +
-      ".ps-orig-footnote{font-size:9px;color:#b45309;font-weight:600;margin-top:2px;background:#fffbeb;padding:1px 4px;border-radius:3px;display:inline-block}" +
-      ".ps-dnote{display:block;color:#64748b;font-size:9px;margin-top:2px;font-style:italic}" +
+      ".ps-daily{font:800 10px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#0f172a}" +
+      ".ps-permetre{display:block;color:#64748b;font-size:9px;margin-top:1px}" +
+      ".ps-orig-footnote{font-size:8.5px;color:#b45309;font-weight:600;margin-top:2px;background:#fffbeb;padding:1px 4px;border-radius:3px;display:inline-block}" +
+      ".ps-dnote{display:block;color:#64748b;font-size:8.5px;margin-top:2px;font-style:italic}" +
       ".ps-custombadge{font:800 8.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;letter-spacing:.04em;color:#fff;background:#b45309;border-radius:4px;padding:1.5px 5px;vertical-align:middle;-webkit-print-color-adjust:exact;print-color-adjust:exact}" +
       ".ps-adjusted-badge{background:#0369a1}" +
       ".ps-docadded-badge{background:#4338ca}" +
-      ".ps-cyc{text-align:center;font:600 10px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif}" +
+      ".ps-cyc{text-align:center;font:600 9.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif}" +
       ".ps-cyc.x{color:#94a3b8;font-weight:700}" +
-      ".ps-legend{font-size:9px;color:#64748b;margin:5px 0}" +
-      ".ps-warns{display:flex;gap:8px;font-size:10.5px;color:#92400e;background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:6px 9px;margin:6px 0;page-break-inside:avoid;break-inside:avoid}" +
-      ".ps-block{margin-top:8px;page-break-inside:avoid;break-inside:avoid}" +
-      ".ps-block-h{font:800 10px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;color:#475569;margin-bottom:3px;letter-spacing:.03em;border-bottom:1px dashed #e2e8f0;padding-bottom:2px}" +
+      ".ps-legend{font-size:8.5px;color:#64748b;margin:4px 0}" +
+      ".ps-warns{display:flex;gap:8px;font-size:10px;color:#92400e;background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:5px 8px;margin:6px 0;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-block{margin-top:7px;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-block-h{font:800 9.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;color:#475569;margin-bottom:3px;letter-spacing:.03em;border-bottom:1px dashed #e2e8f0;padding-bottom:2px}" +
       ".ps-block ul{margin:0;padding-left:16px}" +
-      ".ps-block li,.ps-block p{font-size:10px;line-height:1.4;margin:2px 0;color:#334155}" +
-      ".ps-tox-section{border:1px solid #fed7aa;background:#fffaf5;border-radius:8px;padding:8px 10px;margin-top:10px}" +
+      ".ps-block li,.ps-block p{font-size:9.5px;line-height:1.35;margin:2px 0;color:#334155}" +
+      ".ps-tox-section{border:1px solid #fed7aa;background:#fffaf5;border-radius:8px;padding:7px 9px;margin-top:8px}" +
       ".ps-tox-header{color:#c2410c!important;border-bottom-color:#fed7aa!important}" +
-      ".ps-tox-card{background:#fff;border:1px solid #ffedd5;border-radius:6px;padding:6px 8px;margin-bottom:6px;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-tox-card{background:#fff;border:1px solid #ffedd5;border-radius:6px;padding:5px 7px;margin-bottom:5px;page-break-inside:avoid;break-inside:avoid}" +
       ".ps-tox-card:last-child{margin-bottom:0}" +
-      ".ps-tox-card-h{display:flex;align-items:center;gap:8px;margin-bottom:3px}" +
-      ".ps-tox-drug{font:800 10px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#c2410c;background:#ffedd5;padding:1px 5px;border-radius:4px}" +
-      ".ps-tox-title{font:700 10.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#0f172a}" +
-      ".ps-tox-symptoms{font-size:9.5px;color:#475569;margin-bottom:2px;line-height:1.35}" +
-      ".ps-tox-treatment{font-size:9.5px;color:#0f766e;line-height:1.35;font-weight:600}" +
-      ".ps-oral-card{border:1px solid #bfdbfe;background:#f8fafc;border-radius:8px;padding:8px 10px;margin-top:10px;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-tox-card-h{display:flex;align-items:center;gap:8px;margin-bottom:2px}" +
+      ".ps-tox-drug{font:800 9.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#c2410c;background:#ffedd5;padding:1px 5px;border-radius:4px}" +
+      ".ps-tox-title{font:700 10px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#0f172a}" +
+      ".ps-tox-symptoms{font-size:9px;color:#475569;margin-bottom:2px;line-height:1.3}" +
+      ".ps-tox-treatment{font-size:9px;color:#0f766e;line-height:1.3;font-weight:600}" +
+      ".ps-oral-card{border:1px solid #bfdbfe;background:#f8fafc;border-radius:8px;padding:7px 9px;margin-top:8px;page-break-inside:avoid;break-inside:avoid}" +
       ".ps-oral-header{color:#1e40af!important;border-bottom-color:#bfdbfe!important}" +
-      ".ps-oral-grid{display:grid;grid-template-columns:1fr;gap:8px}" +
+      ".ps-oral-grid{display:grid;grid-template-columns:1fr;gap:6px}" +
       ".ps-oral-bilingual{grid-template-columns:1fr 1fr}" +
-      ".ps-oral-col{background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:6px 8px}" +
-      ".ps-oral-lang-title{font:800 9.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#1e40af;margin-bottom:4px}" +
+      ".ps-oral-col{background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:5px 7px}" +
+      ".ps-oral-lang-title{font:800 9px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#1e40af;margin-bottom:3px}" +
       ".ps-oral-list{margin:0;padding-left:14px}" +
-      ".ps-oral-list li{font-size:9.5px;line-height:1.35;margin:2px 0;color:#334155}" +
+      ".ps-oral-list li{font-size:9px;line-height:1.3;margin:1.5px 0;color:#334155}" +
       ".ps-oral-alert{color:#b91c1c!important;font-weight:700}" +
-      ".ps-doctor-notes-card{border:1px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:8px 10px;margin-top:10px;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-doctor-notes-card{border:1px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:7px 9px;margin-top:8px;page-break-inside:avoid;break-inside:avoid}" +
       ".ps-doc-notes-h{color:#0f766e!important}" +
-      ".ps-note-display{font-size:10px;line-height:1.45;color:#0f172a;white-space:pre-line;background:#fff;padding:6px 8px;border-radius:6px;border:1px solid #e2e8f0}" +
-      ".ps-signatures{margin-top:12px;page-break-inside:avoid;break-inside:avoid;border-top:1.5px solid #cbd5e1;padding-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:12px}" +
-      ".ps-sig-block{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px}" +
-      ".ps-sig-block-h{font:800 9.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;color:#475569;margin-bottom:6px}" +
-      ".ps-sig-row{display:flex;flex-direction:column;gap:6px}" +
+      ".ps-note-display{font-size:9.5px;line-height:1.4;color:#0f172a;white-space:pre-line;background:#fff;padding:5px 7px;border-radius:6px;border:1px solid #e2e8f0}" +
+      ".ps-signatures{margin-top:10px;page-break-inside:avoid;break-inside:avoid;border-top:1.5px solid #cbd5e1;padding-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:10px}" +
+      ".ps-sig-block{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:7px 9px}" +
+      ".ps-sig-block-h{font:800 9px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;text-transform:uppercase;color:#475569;margin-bottom:5px}" +
+      ".ps-sig-row{display:flex;flex-direction:column;gap:5px}" +
       ".ps-sig-export-wrap{margin-bottom:4px}" +
-      ".ps-sig-verified-tag{display:inline-flex;align-items:center;gap:4px;font:700 9px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#0f766e;margin-top:2px}" +
-      ".ps-sig-line-placeholder{margin-top:24px}" +
+      ".ps-sig-verified-tag{display:inline-flex;align-items:center;gap:4px;font:700 8.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#0f766e;margin-top:2px}" +
+      ".ps-sig-line-placeholder{margin-top:20px}" +
       ".ps-sig-line{border-bottom:1px solid #0f172a;margin-bottom:3px;height:1px}" +
-      ".ps-sig-line-lbl{font:600 9px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#64748b}" +
-      ".ps-checker-items{display:grid;grid-template-columns:1fr;gap:2.5px;font-size:9px;color:#475569;margin-bottom:8px}" +
-      ".ps-foot-print{margin-top:12px;padding-top:8px;border-top:1.5px solid #0f766e;page-break-inside:avoid;break-inside:avoid}" +
-      ".ps-foot-brand{display:flex;align-items:center;gap:8px;margin-bottom:5px}" +
+      ".ps-sig-line-lbl{font:600 8.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#64748b}" +
+      ".ps-checker-items{display:grid;grid-template-columns:1fr;gap:2px;font-size:8.5px;color:#475569;margin-bottom:6px}" +
+      ".ps-foot-print{margin-top:10px;padding-top:6px;border-top:1.5px solid #0f766e;page-break-inside:avoid;break-inside:avoid}" +
+      ".ps-foot-brand{display:flex;align-items:center;gap:8px;margin-bottom:4px}" +
       ".ps-foot-logo{color:#0f766e;display:flex;align-items:center}" +
       ".ps-foot-brandtext{display:flex;flex-direction:column;line-height:1.2}" +
-      ".ps-foot-brandtext b{font:800 11px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#0f766e}" +
-      ".ps-foot-brandtext span{font:500 8.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#64748b}" +
-      ".ps-foot-disclaimer{font-size:8pt;color:#64748b;line-height:1.35;margin-bottom:4px;background:#f8fafc;padding:5px 8px;border-radius:4px;border:1px solid #e2e8f0}" +
-      ".ps-foot-meta{font-size:7.5pt;color:#94a3b8;text-align:center;letter-spacing:.02em}" +
+      ".ps-foot-brandtext b{font:800 10.5px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#0f766e}" +
+      ".ps-foot-brandtext span{font:500 8px -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;color:#64748b}" +
+      ".ps-foot-disclaimer{font-size:7.5pt;color:#64748b;line-height:1.3;margin-bottom:3px;background:#f8fafc;padding:4px 7px;border-radius:4px;border:1px solid #e2e8f0}" +
+      ".ps-foot-meta{font-size:7pt;color:#94a3b8;text-align:center;letter-spacing:.02em}" +
       ".ps-vh,.ps-verify,.ps-sig-actions,.ps-emr-bar,.ps-table-actions,.ps-dose-edit-btn,.ps-inst-editbtn,.ps-lang-picker,.ps-tox-actions,.ps-note-chips,.ps-drug-del-btn,.ps-tox-del-btn{display:none!important}" +
       ".ps-page-break-deliberate{display:none}" +
       ".ps-page2-header{display:none}" +
@@ -1552,9 +1573,10 @@
         "body{padding:0!important}" +
         ".ps-vh,.ps-verify,.ps-sig-actions,.ps-emr-bar,.ps-table-actions,.ps-dose-edit-btn,.ps-inst-editbtn,.ps-lang-picker,.ps-tox-actions,.ps-note-chips,.ps-drug-del-btn,.ps-tox-del-btn{display:none!important}" +
         ".ps-sheet{max-width:100%!important;border:none!important;box-shadow:none!important}" +
-        ".ps-page-break-auto{page-break-inside:avoid;break-inside:avoid}" +
+        ".ps-page-break-auto,.ps-page{page-break-inside:avoid;break-inside:avoid}" +
         ".ps-page-break-deliberate{display:block!important;page-break-before:always!important;break-before:page!important;height:0!important;margin:0!important;padding:0!important}" +
         ".ps-page2-header{display:flex!important;justify-content:space-between;align-items:center;border-bottom:1.5px solid #0f766e;padding-bottom:5px;margin-bottom:12px;font-size:8.5pt;color:#64748b;font-weight:600}" +
+        ".ps-table td,.ps-table th,.ps-table tr{page-break-inside:avoid!important;break-inside:avoid!important}" +
       "}" +
       "</style></head><body>" + sheetHtml(true) + "</body></html>";
   }

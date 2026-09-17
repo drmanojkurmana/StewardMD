@@ -386,6 +386,9 @@ test("DOCTOR CLINICAL NOTES & PRINT PAGINATION: preserves notes, quick-insert ch
   assert.ok(html.includes("ps-page-break-auto"), "Export HTML must include intelligent page-break classes");
   assert.ok(html.includes("ps-page-break-deliberate"), "Export HTML for big protocol must include deliberate page-break");
   assert.ok(html.includes("ps-page2-header"), "Export HTML for big protocol must render running header for page 2");
+  assert.ok(html.includes("ps-page ps-page-1"), "Export HTML must wrap Page 1 in .ps-page container");
+  assert.ok(html.includes("ps-page ps-page-2"), "Export HTML must wrap Page 2 in .ps-page container");
+  assert.ok(html.includes("ps-cards-col2"), "Export HTML must format header cards in 2-column layout");
 });
 
 test("MODAL EVENT DELEGATION & NO STOPPROPAGATION: modal cards allow click event bubbling for save and reduction shortcuts", () => {

@@ -77,14 +77,32 @@
 
   /* ===================== BROWSER: fetch + overlay ===================== */
 
-  var stg = { index: [], gapMessage: GAP_MESSAGE, files: {}, site: null, version: null, loaded: false };
+  var CLINICAL_PAIRS = {
+    liver: { target: "bclc_hcc", label: "Open BCLC 2022 Staging", note: "Standard of Care: For HCC, BCLC 2022 is the primary clinical staging system directing treatment allocation." },
+    bclc_hcc: { target: "liver", label: "View AJCC / UICC TNM", note: "Disease-Specific System: BCLC 2022 Algorithm for HCC." },
+    myeloma: { target: "myeloma_riss", label: "Open R-ISS Staging", note: "Standard of Care: Multiple Myeloma is staged clinically using R-ISS / R2-ISS rather than TNM." },
+    myeloma_riss: { target: "myeloma", label: "View Historical TNM", note: "Disease-Specific System: IMWG R-ISS & R2-ISS for Multiple Myeloma." },
+    nhl: { target: "lymphoma_lugano", label: "Open Lugano Staging", note: "Standard of Care: Lymphomas use the Lugano / Ann Arbor classification." },
+    lymphoma_lugano: { target: "nhl", label: "View TNM Schema", note: "Disease-Specific System: Lugano Staging for Lymphoma." },
+    cll_rai_binet: { target: "nhl", label: "View Hematologic TNM", note: "Disease-Specific System: Rai & Binet Staging for CLL." },
+    cervix: { target: "cervix_figo", label: "Open FIGO 2018 Staging", note: "Standard of Care: Cervical cancer uses FIGO 2018 clinical/surgical staging." },
+    cervix_figo: { target: "cervix", label: "View AJCC TNM", note: "Disease-Specific System: FIGO 2018 Staging for Cervix." },
+    endometrium: { target: "endometrium_figo", label: "Open FIGO 2023 Molecular", note: "Standard of Care: Endometrial cancer uses FIGO 2023 molecular risk staging." },
+    endometrium_figo: { target: "endometrium", label: "View AJCC TNM", note: "Disease-Specific System: FIGO 2023 Molecular Staging for Endometrium." },
+    prostate: { target: "prostate_nccn", label: "Open NCCN Risk Groups", note: "Standard of Care: Localized prostate cancer uses NCCN Risk Stratification to guide therapy." },
+    prostate_nccn: { target: "prostate", label: "View AJCC TNM", note: "Disease-Specific System: NCCN Risk Stratification for Prostate Cancer." },
+    gist: { target: "gist_afip", label: "Open Modified NIH / AFIP", note: "Standard of Care: GIST uses NIH/AFIP criteria to determine recurrence risk and adjuvant imatinib." },
+    gist_afip: { target: "gist", label: "View AJCC TNM", note: "Disease-Specific System: Modified NIH / AFIP Risk Criteria for GIST." }
+  };
+
+  var stg = { index: [], gapMessage: GAP_MESSAGE, files: {}, site: null, version: null, query: "", tab: "all", loaded: false };
 
   function flagOn() { try { if (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool) return true; return G.SMD_QUEUE_FLAGS.bool("smd_onco_staging") !== false; } catch (e) { return true; } }
   function toast(m) { try { var f = G.toast || G.SMD_toast; if (f) f(m); } catch (e) {} }
 
   function loadIndex() {
     if (stg.loaded || !G.fetch) return Promise.resolve(stg.index);
-    return G.fetch("/kb/onco/staging/index.json?v=op6").then(function (r) { return (r && r.ok) ? r.json() : null; })
+    return G.fetch("/kb/onco/staging/index.json?v=op7").then(function (r) { return (r && r.ok) ? r.json() : null; })
       .then(function (j) {
         if (j) { stg.index = (j.sites || []); stg.gapMessage = j.gapMessage || GAP_MESSAGE; stg.loaded = true; }
         return stg.index;
@@ -93,7 +111,7 @@
   function loadSiteFile(entry) {
     if (!entry || entry.status !== "scaffold" || !entry.file || !G.fetch) return Promise.resolve(null);
     if (stg.files[entry.id]) return Promise.resolve(stg.files[entry.id]);
-    return G.fetch("/kb/onco/staging/" + entry.file + "?v=op6").then(function (r) { return (r && r.ok) ? r.json() : null; })
+    return G.fetch("/kb/onco/staging/" + entry.file + "?v=op7").then(function (r) { return (r && r.ok) ? r.json() : null; })
       .then(function (j) { if (j) stg.files[entry.id] = j; return j; }).catch(function () { return null; });
   }
   function indexEntry(id) { for (var i = 0; i < stg.index.length; i++) if (stg.index[i].id === id) return stg.index[i]; return null; }
@@ -111,15 +129,51 @@
   function ev(entries) { try { return (G.SMD_ONCOEV && G.SMD_ONCOEV.build) ? G.SMD_ONCOEV.build(entries) : ""; } catch (e) { return ""; } }
 
   function siteListHtml() {
-    var scaffold = stg.index.filter(function (s) { return s.status === "scaffold"; });
-    var gaps = stg.index.filter(function (s) { return s.status !== "scaffold"; });
+    var q = (stg.query || "").trim().toLowerCase();
+    var filtered = stg.index.filter(function (s) {
+      if (stg.tab === "clinical" && s.type !== "clinical") return false;
+      if (stg.tab === "tnm" && s.type === "clinical") return false;
+      if (!q) return true;
+      return (s.name && s.name.toLowerCase().indexOf(q) >= 0) ||
+             (s.system && s.system.toLowerCase().indexOf(q) >= 0) ||
+             (s.id && s.id.toLowerCase().indexOf(q) >= 0);
+    });
+
+    var clinicalSites = filtered.filter(function (s) { return s.type === "clinical"; });
+    var tnmScaffold = filtered.filter(function (s) { return s.type !== "clinical" && s.status === "scaffold"; });
+    var gaps = filtered.filter(function (s) { return s.type !== "clinical" && s.status !== "scaffold"; });
+
     function row(s) {
-      var badge = s.status === "scaffold" ? '<span class="stg-badge stg-badge-sc">TNM</span>' : '<span class="stg-badge stg-badge-gap">Gap</span>';
+      var badge = s.type === "clinical"
+        ? '<span class="stg-badge stg-badge-sc" style="background:linear-gradient(135deg, #2563eb, #7c3aed);color:#fff;border:none;">CLINICAL</span>'
+        : (s.status === "scaffold" ? '<span class="stg-badge stg-badge-sc">TNM</span>' : '<span class="stg-badge stg-badge-gap">Gap</span>');
       return '<button class="oh-row" data-stg-act="site:' + esc(s.id) + '"><span class="oh-row-t">' + esc(s.name) + " " + badge + '</span><span class="oh-row-s">' + esc(s.system || "") + "</span></button>";
     }
-    return '<div class="stg-intro">International TNM-based cancer staging (licensed content). Each site carries full site-specific T, N and M criteria and stage grouping; sites still being added show a content gap.</div>' +
-      '<div class="oh-sec-h">Staging sites (full TNM)</div>' + scaffold.map(row).join("") +
-      '<div class="oh-sec-h" style="margin-top:16px">Sites being added</div>' + gaps.map(row).join("");
+
+    var searchBox = '<div style="margin:12px 0 12px 0;"><input type="search" id="stgSearchInput" style="width:100%;box-sizing:border-box;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(0,0,0,0.25);color:inherit;font-size:14px;" placeholder="Search cancer staging (e.g. liver, BCLC, breast, FIGO, myeloma)..." value="' + esc(stg.query || "") + '" /></div>';
+
+    var tabs = '<div class="stg-vtoggle" style="margin-bottom:14px;">' +
+      '<button class="stg-vbtn' + (stg.tab === "all" ? " on" : "") + '" data-stg-act="tab:all">All (' + stg.index.length + ')</button>' +
+      '<button class="stg-vbtn' + (stg.tab === "clinical" ? " on" : "") + '" data-stg-act="tab:clinical">Clinical Systems (BCLC, FIGO, R-ISS...)</button>' +
+      '<button class="stg-vbtn' + (stg.tab === "tnm" ? " on" : "") + '" data-stg-act="tab:tnm">AJCC / UICC TNM</button>' +
+      '</div>';
+
+    var out = '<div class="stg-intro">International cancer staging engine supporting both disease-specific clinical systems (BCLC, FIGO, R-ISS, Lugano, NCCN) and standard TNM classifications.</div>' +
+      searchBox + tabs;
+
+    if (clinicalSites.length) {
+      out += '<div class="oh-sec-h" style="color:#60a5fa;">Disease-Specific & Clinical Systems (Standard of Care)</div>' + clinicalSites.map(row).join("");
+    }
+    if (tnmScaffold.length) {
+      out += '<div class="oh-sec-h" style="margin-top:16px;">TNM Cancer Staging Sites</div>' + tnmScaffold.map(row).join("");
+    }
+    if (gaps.length) {
+      out += '<div class="oh-sec-h" style="margin-top:16px;">Sites being added</div>' + gaps.map(row).join("");
+    }
+    if (!filtered.length) {
+      out += '<div class="oh-empty" style="padding:28px 16px;text-align:center;opacity:0.7;">No staging sites matching "' + esc(stg.query) + '"</div>';
+    }
+    return out;
   }
 
   function versionToggleHtml(siteFile) {
@@ -142,7 +196,7 @@
       return '<div class="stg-grow"><span class="stg-stage">Stage ' + esc(g.stage) + "</span><span class=\"stg-map\">" +
         esc(g.t) + " " + esc(g.n) + " " + esc(g.m) + (g.s ? " " + esc(g.s) : "") + '</span><span class="stg-basis">' + esc(g.basis || "") + "</span></div>";
     }).join("");
-    return '<div class="stg-cat"><div class="stg-cat-h">Stage grouping</div>' + rows +
+    return '<div class="stg-cat"><div class="stg-cat-h">Stage grouping & Treatment Allocation</div>' + rows +
       (v.gapNote ? '<div class="stg-gapnote">' + esc(v.gapNote) + "</div>" : "") + "</div>";
   }
   // Post-neoadjuvant (yp) staging block: shown only for cancers where the 8th edition defines distinct yp
@@ -174,14 +228,27 @@
     return '<div class="stg-cat"><div class="stg-cat-h">' + esc(title) + "</div>" + body + "</div>";
   }
 
+  function pairedBannerHtml(siteId) {
+    var pair = CLINICAL_PAIRS[siteId];
+    if (!pair) return "";
+    return '<div style="background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.3);border-radius:10px;padding:10px 14px;margin:8px 0 14px 0;font-size:13px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">' +
+      '<span style="line-height:1.4;">' + esc(pair.note) + '</span>' +
+      '<button class="stg-vbtn on" data-stg-act="site:' + esc(pair.target) + '" style="margin:0;white-space:nowrap;">' + esc(pair.label) + ' &rarr;</button>' +
+      '</div>';
+  }
+
   function seededHtml(siteFile, v) {
     var audit = auditFabricationSafe(siteFile);
     if (!audit.ok) return '<div class="stg-gap">Content failed the structural safety check and was withheld: ' + esc(audit.problems.join("; ")) + "</div>";
+    var tLabel = siteFile.site === "bclc_hcc" ? "Tumour burden / BCLC stage criteria" : "T - primary tumour";
+    var nLabel = siteFile.site === "bclc_hcc" ? "Liver functional reserve (Child-Pugh)" : "N - regional nodes";
+    var mLabel = siteFile.site === "bclc_hcc" ? "Performance status (ECOG PS)" : "M - distant metastasis";
+
     return '<div class="stg-prov">' + r1Flag() + '<div class="stg-prov-t">' + esc(noR1(v.provenance)) + "</div></div>" +
       sectionHtml("Introduction", v.introduction) +
-      catTableHtml("T - primary tumour", v.t) +
-      catTableHtml("N - regional nodes", v.n) +
-      catTableHtml("M - distant metastasis", v.m) +
+      catTableHtml(tLabel, v.t) +
+      catTableHtml(nLabel, v.n) +
+      catTableHtml(mLabel, v.m) +
       catTableHtml("S - serum tumour markers", v.s) +
       stageGroupsHtml(v) +
       postNeoHtml(v.postNeoadjuvant) +
@@ -189,11 +256,11 @@
       sectionHtml("Histologic grade (G)", v.histologicGrade) +
       sectionHtml("Histopathologic types", v.histopathologicTypes) +
       sectionHtml("Prognostic factors", v.prognosticFactors) +
-      ev([{ kind: "guideline", why: "International TNM-based cancer staging summary (licensed content).", source: { name: "Standard TNM-based cancer staging (licensed)", version: verLabel(v.version), section: "licensed content" } }]);
+      ev([{ kind: "guideline", why: "Cancer staging reference (licensed content).", source: { name: "Standard cancer staging (licensed)", version: verLabel(v.version), section: "licensed content" } }]);
   }
   function gapHtml() {
     return '<div class="stg-gap"><div class="stg-gap-h">Content gap</div><div class="stg-gap-t">' + esc(stg.gapMessage) + "</div>" +
-      '<div class="stg-gap-s">This is a deliberate, visible gap. This cancer site is still being added and will show its full TNM staging once verified.</div></div>';
+      '<div class="stg-gap-s">This is a deliberate, visible gap. This cancer site is still being added and will show its full staging once verified.</div></div>';
   }
 
   function siteDetailHtml() {
@@ -201,7 +268,8 @@
     if (!entry) return siteListHtml();
     var siteFile = stg.files[stg.site] || null;
     var header = '<button class="oh-back-inline" data-stg-act="list">&lsaquo; All sites</button>' +
-      '<div class="oh-sec-h">' + esc(entry.name) + " - TNM staging</div>";
+      pairedBannerHtml(stg.site) +
+      '<div class="oh-sec-h">' + esc(entry.name) + "</div>";
     // Gap-only site (no file): the whole site is an honest gap; still offer version chips for parity.
     if (entry.status !== "scaffold" || !siteFile) return header + gapHtml();
     var res = resolve(siteFile, stg.version);
@@ -217,7 +285,7 @@
     var body = stg.site ? siteDetailHtml() : listBody;
     el.innerHTML =
       '<div class="oh-top"><button class="oh-back" data-stg-act="close" aria-label="Close">&lsaquo; Close</button>' +
-      '<div class="oh-title">TNM staging</div><span style="width:64px"></span></div>' +
+      '<div class="oh-title">Cancer Staging Engine</div><span style="width:64px"></span></div>' +
       '<div class="oh-body"><div id="stgResults">' + body + "</div>" +
       '<div class="stg-license">' + esc(STAGING_ATTRIB) + "</div></div>";
   }
@@ -233,6 +301,16 @@
     render();
   }
 
+  function onInput(e) {
+    if (e.target && e.target.id === "stgSearchInput") {
+      stg.query = e.target.value;
+      var r = document.getElementById("stgResults");
+      if (r) r.innerHTML = siteListHtml();
+      var input = document.getElementById("stgSearchInput");
+      if (input) { input.focus(); var len = input.value.length; input.setSelectionRange(len, len); }
+    }
+  }
+
   function onClick(e) {
     var t = e.target, b = (t && t.closest) ? t.closest("[data-stg-act]") : null;
     if (!b) return;
@@ -242,6 +320,7 @@
     if (verb === "list") { stg.site = null; stg.version = null; render(); return; }
     if (verb === "site") { openSite(arg); return; }
     if (verb === "ver") { stg.version = arg; render(); return; }
+    if (verb === "tab") { stg.tab = arg; render(); return; }
   }
 
   function openList() {
@@ -249,6 +328,7 @@
     stg.site = null; stg.version = null;
     var el = rootEl();
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
+    el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     loadIndex().then(render);
     render();
     el.classList.add("on"); document.body.classList.add("oh-lock");
