@@ -7604,3 +7604,27 @@ of compliance.js is untouched.
   balances (credit held apart).
 - Evidence pack (GET/POST /ward/claim-evidence): deterministic, from records only, no AI; saved versions on the claim with
   expectedVersion. No NABH KPI entry is owned by this package, so compliance.js is untouched.
+## 2026-09-17 Staff messaging inside WardSynQ, one in-basket, MaiK drafting tasks (branch inbasket-messaging)
+- Audit gaps 12 and 15. Staff messages are records (functions/_wardsynq/staff-messaging.js): `StaffMessage` (one message,
+  bound to a patient and optionally the stay, or to a unit; a reply inherits the thread's binding and addressees) and
+  `StaffMessageRead` (one per thread and reader, a version per read). Edit and recall are new versions; the earlier text is
+  in the history, a recalled text is hidden on the list. Addressed by role, not person: no staff directory is exposed.
+- Who may see a patient thread: every read and write first reads the Patient as the caller (audited). DEVIATION from the
+  audit's "grant to that patient": this codebase grants patient access per record type per role; there is no per-patient
+  care-team rule, so the Patient read is the gate. Grant: every EMR_VIEW holder reads and writes the two types (a READ-tier
+  role is raised to DRAFT for them only). `StaffMessage` is HUMAN_ORIGINATED: no AI, service or device actor may send one.
+- Nothing leaves WardSynQ: no SMS, WhatsApp or email path. Escalation is `pushToIdentities` (alert-deps.js, shared with
+  alertAdmins) with a fixed payload (no name, MRN, ward, bed, thread id or text), only when alerts.push.enabled, to members
+  of the addressed roles who have not read the thread; the attempt is recorded on the message; never "delivered".
+  Ceiling: the inbox reads the newest 500 messages and read marks and says when it is partial.
+- MaiK drafts (maik-interaction.js DRAFTS): draft-discharge-summary, draft-portal-reply, draft-appeal-letter, each the
+  gateway's existing DRAFT_NOTE task, so the PHI approval and refusals are unchanged; DEVIATION: no new gateway TASK values
+  (the COPILOT pattern). The subject (patient message, latest denied or queried claim's evidence pack) is read as the
+  clinician and fenced as a record document. Accepting any of them writes nothing; a person sends the reply (Patient
+  portal page records accepted or edited first, and does not send if that fails), signs the summary, or saves the letter
+  into the evidence pack. Hard Local: no fallback exists in the gateway; a spy test pins that a Local-routed draft whose
+  model is down never reaches Vertex/Gemini. The appeal letter is drafted by a clinician (maik-ask is emr.view and reads
+  the chart); a billing-only role cannot run it.
+- Unified in-basket is a screen (pages/inbasket.js) over the existing routes (patient-messages, referral-inbox,
+  cosign-queue, safety-inbox), each shown loading, failed, not for this role, or its items with age and owner. No new
+  aggregation route. No NABH KPI entry is owned by this package; compliance.js untouched.
