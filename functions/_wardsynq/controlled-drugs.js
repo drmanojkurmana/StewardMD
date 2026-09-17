@@ -62,7 +62,10 @@ import { registerSettings, rmiStatus, ndpsAnnualClocks, form3hClosureLate } from
 import { hospitalToday } from "./expected-discharge.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
-const READ_CAP = 1000;
+/* The NDPS ledger reads every movement, dispense, administration and order (service.listAll, paged). Past READ_CAP the
+ * NEWEST of that kind are the ones not read: truncated is set and every figure built on it refuses (409) or says so.
+ * ponytail: each page re-groups every version; a per-drug ledger index (or audit O20) is the upgrade. */
+const READ_CAP = 50000;
 const POLICY_NOTE = "The second-person witness and the shift count are this hospital's policy, not a rule: no NDPS rule requires them. The NDPS Rules require the daily register (Form 3H), the per-patient record (Form 3E), the annual estimate (Form 3J) and the annual return (Form 3-I); expired stock is destroyed in the presence of an officer nominated by the Controller of Drugs (rule 52V).";
 const NDPS_RETENTION = "Kept at least two years from the last entry (NDPS Rules r.52R, r.52X), and with the clinical record, since Form 3E entries are part of the patient's chart. WardSynQ never deletes an entry.";
 
@@ -281,6 +284,8 @@ async function quarantineRefusal(ctx, drug, code, batch) {
   let rows;
   try { rows = await ctx.recordDeps.repository.latestByType(ctx.migration.tenantId, typeOf("quarantine"), 1000, { newest: true }); }
   catch { return { ok: false, status: 502, error: "quarantine_unreadable", detail: "Whether this drug is in quarantine could not be checked, so nothing was dispensed." }; }
+  /* The newest 1,000 quarantine entries. A full read could leave an older open quarantine unseen: refused, not assumed clear. */
+  if ((rows || []).length >= 1000) return { ok: false, status: 409, error: "quarantine_unreadable", detail: "More quarantine entries exist than can be checked at once, so nothing was dispensed. Close resolved quarantines in the register." };
   const open = (rows || []).filter((q) => q.fields && q.fields.status === "open" && (norm(q.fields.drug) === norm(code) || norm(q.fields.drug) === norm(drug)));
   if (!open.length) return null;
   if (!str(batch)) return { ok: false, status: 422, error: "quarantine_batch_required", detail: "Some stock of this drug is in quarantine. Name the batch you are supplying from." };
@@ -533,7 +538,7 @@ async function ndpsRegister(request, env, ctx) {
     unwitnessed: book.items.reduce((n, it) => n + it.problems.filter((p) => p.kind === "unwitnessed").length, 0) + book.doses.filter((d) => d.unwitnessed).length,
     withoutForm3e: book.items.reduce((n, it) => n + it.problems.filter((p) => p.kind === "no_form3e").length, 0),
     requireWitness: settings.ndps.requireWitness, daysUnclosed,
-    ...(truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} records of one kind exist; only the newest were read, so this register may be incomplete and must not be filed as it stands.` } : {}),
+    ...(truncated ? { truncated: true, truncatedWarning: `More records of one kind exist than can be read at once (over ${READ_CAP}), so not all were read; this register may be incomplete and must not be filed as it stands.` } : {}),
     policy: POLICY_NOTE,
     retention: NDPS_RETENTION,
   };
@@ -544,11 +549,9 @@ async function readLedger(request, env, ctx) {
   const { svc, error } = await openRead(request, env, ctx);
   if (error) return { error };
   try {
-    const [movements, dispenses, administrations, orders] = await Promise.all([
-      svc.list("StockMovement", READ_CAP), svc.list("MedicationDispense", READ_CAP),
-      svc.list("MedicationAdministration", READ_CAP), svc.list("MedicationOrder", READ_CAP),
-    ]);
-    return { movements, dispenses, administrations, orders, truncated: [movements, dispenses, administrations, orders].some((x) => (x || []).length >= READ_CAP) };
+    const got = await Promise.all(["StockMovement", "MedicationDispense", "MedicationAdministration", "MedicationOrder"].map((t) => svc.listAll(t, { max: READ_CAP })));
+    const [movements, dispenses, administrations, orders] = got.map((g) => g.rows);
+    return { movements, dispenses, administrations, orders, truncated: got.some((g) => g.truncated) };
   } catch (e) {
     if (e instanceof GovernanceError) return { error: { ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) } };
     return { error: { ok: false, status: 502, error: "record_read_failed", message: "The stock ledger could not be read. Do not read this as an empty register." } };
@@ -677,7 +680,7 @@ async function rule65Register(request, env, ctx, which) {
   let names = new Map();
   if (which === "h1" && typeof ctx.staffNames === "function") { try { names = await ctx.staffNames([...new Set(supplies.map((d) => (orders.get(d.orderId) || {}).prescriberId).filter(Boolean))]); } catch { names = new Map(); } }
   const qty = (q) => { const x = quantityOf(q); return x ? `${x.value} ${x.unit}` : ""; };
-  const truncated = ledger.truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} records of one kind exist; only the newest were read, so this register may be incomplete and must not be relied on as it stands.` } : {};
+  const truncated = ledger.truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} records of one kind exist; the newest were not read, so this register may be incomplete and must not be relied on as it stands.` } : {};
   if (which === "h1") {
     return { ...base, ...truncated, configured: true, rows: supplies.sort((a, b) => str(a.dispensedAt).localeCompare(str(b.dispensedAt))).map((d) => {
       const o = orders.get(d.orderId) || {};
@@ -752,10 +755,12 @@ async function recordNdpsCount(request, env, ctx) {
   if (w.error) return { ...base, ...w.error, written: 0 };
   const { svc, error } = await openRead(request, env, ctx);
   if (error) return { ...base, ...error, written: 0 };
-  let movements, dispenses;
-  try { [movements, dispenses] = await Promise.all([svc.list("StockMovement", READ_CAP), svc.list("MedicationDispense", READ_CAP)]); }
+  let movements, dispenses, truncated;
+  try { [movements, dispenses] = await Promise.all([svc.listAll("StockMovement", { max: READ_CAP }), svc.listAll("MedicationDispense", { max: READ_CAP })]); }
   catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", written: 0 }; }
-  if (movements.length >= READ_CAP || dispenses.length >= READ_CAP) return { ...base, ok: false, status: 409, error: "too_many_records", message: `More than ${READ_CAP} stock records exist, so the register quantity cannot be worked out safely. Nothing was recorded.`, written: 0 };
+  truncated = movements.truncated || dispenses.truncated;
+  movements = movements.rows; dispenses = dispenses.rows;
+  if (truncated) return { ...base, ok: false, status: 409, error: "too_many_records", message: `More than ${READ_CAP} stock records exist, so the register quantity cannot be worked out safely. Nothing was recorded.`, written: 0 };
   const level = levelsFrom(movements, dispenses).levels.find((r) => k3(r.code, r.location, r.unit) === k3(code, ctx.location, unit));
   const expected = level ? level.level : 0;
   const r = await saveEntry({
