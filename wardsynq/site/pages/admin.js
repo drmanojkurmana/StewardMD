@@ -119,7 +119,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, legacyImport: renderImport, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs, orderBackfill: renderOrderBackfill,
+    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, legacyImport: renderImport, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs, orderBackfill: renderOrderClosures,
       // Privacy and compliance is its own page (pages/governance.js); the tab is the Admin Center's door to it.
       governance: function () { st._adminTab = "hospital"; WSQ.go("governance"); },
       legal: function (x, y) { return WSQ._legal.render(x, y); },
@@ -3361,6 +3361,121 @@
     }
     paint();
     return check();
+  }
+
+  // ---- R6-3: close the orders the SENDING system has finished (source-order-close.js) ---------
+  /* The other half of the same problem, and a different job. An order another system sent lands as a
+   * draft here (an adapter may not assert a clinical status) and never leaves the open census, even
+   * once that system has finished with it - so this hospital walks towards the ceiling at which its
+   * boards refuse. The sender's own word for the order is kept beside it at ingest; this closes the
+   * ones it calls finished, and nothing it calls active.
+   *
+   * Two steps, for the same reason as above: `ids` null = nothing checked yet, a failure sets
+   * `failed`, and a count is never shown as if it were the whole picture when a read stopped.
+   */
+  function sourceOrdersHtml(c, s) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.sourceOrders.title", "Close orders another system has finished")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.sourceOrders.intro", "Orders sent by a laboratory system or another hospital are recorded here as drafts, because a connected system may not set a clinical status in WardSynQ. When the result is filed at that end, nothing here ever marks the order finished and it counts as open work for ever. Checking reads the orders and writes nothing. Closing marks only the orders the sending system itself calls finished; an order it still calls active, one it says nothing about, and this hospital's own orders are all left alone.")) + "</p>";
+    if (s.failed) {
+      h += '<div class="msg err">' + esc(T(c, "site.admin.sourceOrders.failed", "The job stopped because something could not be read or written. This is not the same as there being nothing left to do; what is reported below is only what was reached before it stopped.")) + " " + EN(c, esc(s.failMsg || "")) + "</div>";
+    }
+    if (s.busy) h += '<p><span class="spin"></span> ' + esc(s.busy) + "</p>";
+    if (s.ids === null && !s.busy && !s.failed) h += "<p>" + esc(T(c, "site.admin.sourceOrders.notCheckedYet", "Nothing has been checked yet.")) + "</p>";
+    if (s.scanned) {
+      h += "<p>" + esc(T(c, "site.admin.sourceOrders.scanned", "Open orders looked at: {n}", { n: s.scanned })) + "<br>" +
+        "<b>" + esc(T(c, "site.admin.sourceOrders.remaining", "Still to close: {n}", { n: (s.ids || []).length })) + "</b>" +
+        (s.closed ? "<br>" + esc(T(c, "site.admin.sourceOrders.closedSoFar", "Closed so far: {n}", { n: s.closed })) : "") + "</p>";
+      var reasons = [
+        ["source_active", T(c, "site.admin.sourceOrders.reason.sourceActive", "the sending system still calls them open, or has not said")],
+        ["native_order", T(c, "site.admin.sourceOrders.reason.native", "this hospital's own orders, which are closed when their result is filed")],
+        ["already_closed", T(c, "site.admin.sourceOrders.reason.alreadyClosed", "already finished, and left exactly as they are")]
+      ].filter(function (r) { return (s.stayOpen || {})[r[0]]; });
+      if (reasons.length) {
+        h += "<p>" + esc(T(c, "site.admin.sourceOrders.stayOpenLead", "Staying open:")) + '</p><ul class="quiet">' + reasons.map(function (r) {
+          return "<li>" + esc(String(s.stayOpen[r[0]])) + " " + esc(r[1]) + "</li>";
+        }).join("") + "</ul>";
+      }
+      /* WHOSE word this hospital would be acting on, by system: an administrator can check that the
+       * feed named here is one whose finished really means finished. */
+      var bySystem = {};
+      (s.orders || []).forEach(function (o) { bySystem[o.system || "?"] = (bySystem[o.system || "?"] || 0) + 1; });
+      var systems = Object.keys(bySystem);
+      if (systems.length) {
+        h += "<p>" + esc(T(c, "site.admin.sourceOrders.sendersLead", "Marked finished by:")) + '</p><ul class="quiet">' + systems.map(function (k) {
+          return "<li>" + EN(c, esc(k)) + ": " + esc(String(bySystem[k])) + "</li>";
+        }).join("") + "</ul>";
+      }
+    }
+    if (s.doneClosing && !s.failed) {
+      h += '<div class="msg ok">' + esc(s.closed
+        ? T(c, "site.admin.sourceOrders.finished", "{n} orders are now marked finished. Each one still says which system sent it and what that system called it.", { n: s.closed })
+        : T(c, "site.admin.sourceOrders.nothingToClose", "There was nothing to close. No order from a connected system is waiting to be marked finished.")) + "</div>";
+    }
+    h += '<div class="row"><button class="btn" type="button" id="socCheck"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.sourceOrders.check", "Check what would close")) + "</button>" +
+      ((s.ids && s.ids.length) ? '<button class="btn" type="button" id="socClose"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.sourceOrders.close", "Close {n} finished orders", { n: s.ids.length })) + "</button>" : "") +
+      "</div></div>";
+    return h;
+  }
+
+  function renderSourceOrders(c, body) {
+    var s = { ids: null, orders: [], scanned: 0, closed: 0, stayOpen: {}, busy: "", failed: false, failMsg: "", doneClosing: false };
+    var orgQ = { orgId: c.state.orgId };
+    function paint() {
+      body.innerHTML = sourceOrdersHtml(c, s);
+      var chk = document.getElementById("socCheck"); if (chk) chk.onclick = check;
+      var cls = document.getElementById("socClose"); if (cls) cls.onclick = closeAll;
+    }
+    function stop(r) { s.busy = ""; s.failed = true; s.failMsg = refusal(c, r); paint(); }
+    function check() {
+      s.ids = []; s.orders = []; s.scanned = 0; s.closed = 0; s.stayOpen = {}; s.failed = false; s.doneClosing = false;
+      var step = function (cursor) {
+        s.busy = T(c, "site.admin.sourceOrders.checking", "Checking orders ({n} looked at so far)...", { n: s.scanned });
+        paint();
+        return c.api("/ward/source-order-scan", { orgId: orgQ.orgId, cursor: cursor }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.scanned += r.scanned;
+          s.ids = s.ids.concat(r.orderIds || []);
+          s.orders = s.orders.concat(r.orders || []);
+          Object.keys(r.stayOpen || {}).forEach(function (k) { s.stayOpen[k] = (s.stayOpen[k] || 0) + r.stayOpen[k]; });
+          if (!r.done) return step(r.nextCursor);
+          s.busy = ""; paint();
+        }, function () { stop(null); });
+      };
+      return step(0);
+    }
+    /* Only the ids the check handed back. An order the server no longer agrees about is skipped
+     * there, not here: this screen is not the authority, and neither is the sending system. */
+    function closeAll() {
+      var todo = s.ids.slice(), BATCH = 100;
+      s.failed = false;
+      var step = function () {
+        if (!todo.length) { s.busy = ""; s.ids = []; s.orders = []; s.doneClosing = true; paint(); return; }
+        s.busy = T(c, "site.admin.sourceOrders.closing", "Closing orders ({n} of {total} done)...", { n: s.closed, total: s.closed + todo.length });
+        paint();
+        var batch = todo.splice(0, BATCH);
+        return c.api("/ward/source-order-close", { orgId: orgQ.orgId, orderIds: batch }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.closed += r.closed;
+          s.ids = todo.slice();
+          if (r.incomplete) { s.busy = ""; s.failed = true; s.failMsg = T(c, "site.admin.sourceOrders.someRefused", "{n} orders could not be closed and are listed on the server response. Check again to see where they stand.", { n: r.failures.length }); paint(); return; }
+          return step();
+        }, function () { stop(null); });
+      };
+      return step();
+    }
+    paint();
+    return check();
+  }
+
+  /* Both closure jobs on one screen: they answer the same question - which orders are still open and
+   * should not be - from the two ends an order can arrive from. Each panel owns its own state. */
+  function renderOrderClosures(c, body) {
+    body.innerHTML = '<div id="obPanel"></div><div id="socPanel"></div>';
+    return Promise.all([
+      renderOrderBackfill(c, document.getElementById("obPanel")),
+      renderSourceOrders(c, document.getElementById("socPanel"))
+    ]);
   }
 
   // ---- Integrations > Webhooks (P2.13) --------------------------------------------------------

@@ -209,6 +209,7 @@ import { blockPeriod, cancelBlackout, listBlackouts } from "../../_wardsynq/blac
 import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { scanOrderClosures, closeOrderBacklog } from "../../_wardsynq/order-backfill.js";
+import { scanSourceClosures, closeSourceTerminal } from "../../_wardsynq/source-order-close.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
 import { raisePurchaseOrder, receiveGoods, listPurchaseOrders, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview, validateReorderPolicy, readReorderPolicy, reorderSuggestions } from "../../_wardsynq/purchasing.js";
@@ -1422,6 +1423,11 @@ export async function onRequest(context) {
          * write it performs is the ordinary order closure, through the closure actor, on this admin's
          * authority and with their id on every version. */
         "order-backfill-scan": CAPS.STAFF_ADMIN, "order-backfill-close": CAPS.STAFF_ADMIN,
+        /* R6-3: closing INGESTED orders the sending system has finished with (source-order-close.js).
+         * Same capability and for the same reasons: a maintenance pass over the whole archive whose
+         * dry run reads every open order in the hospital. The adapter that sent them may not close
+         * an order; this admin, through the local closure actor, may. */
+        "source-order-scan": CAPS.STAFF_ADMIN, "source-order-close": CAPS.STAFF_ADMIN,
         /* A hospital's own licensed growth tables (growth-tables.js): loading or withdrawing them is hospital
          * administration; which reference the chart uses is readable by anyone who can see the chart. */
         "growth-table-import": CAPS.STAFF_ADMIN, "growth-tables": CAPS.EMR_VIEW,
@@ -4206,6 +4212,16 @@ export async function onRequest(context) {
       }
       if (sub === "order-backfill-close" && method === "POST") {
         const r = await closeOrderBacklog(request, env, { ...deps, orderIds: body.orderIds });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* R6-3: the same two steps for orders another system sent and has since finished. The scan
+       * writes nothing and names the sender's word per order; the close takes the ids it handed back. */
+      if (sub === "source-order-scan" && method === "POST") {
+        const r = await scanSourceClosures(request, env, { ...deps, cursor: body.cursor, limit: body.limit });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "source-order-close" && method === "POST") {
+        const r = await closeSourceTerminal(request, env, { ...deps, orderIds: body.orderIds });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "investigation-catalogue" && method === "GET") {

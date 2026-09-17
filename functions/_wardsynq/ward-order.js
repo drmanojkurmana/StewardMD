@@ -86,7 +86,9 @@ function isOpenOrder(o) {
  * tidiness it did not achieve.
  *
  * WHAT CLOSED IT travels with the record. `deps.on` is "result" (a result was filed, the live path)
- * or "backfill" (order-backfill.js, closing orders that were resulted before this existed). Same
+ * or "backfill" (order-backfill.js, closing orders that were resulted before this existed), or
+ * "source-terminal" (R6-3 source-order-close.js: an INGESTED order whose sending system says it is
+ * finished, closed by this local pass and never by the adapter's own assertion). Same
  * writer, same status, same append-only version - the word only lets an auditor tell a retrospective
  * tidy-up from a result being released, which is exactly the question they will ask of a run that
  * closed ten thousand orders in an afternoon.
@@ -98,19 +100,26 @@ function isOpenOrder(o) {
 async function closeOrderOnResult(deps, order) {
   if (!order || !order.id) return { closed: false, reason: "no_order" };
   if (CLOSED_ORDER_STATUSES.includes(str(order.status))) return { closed: true };
-  const on = str(deps && deps.on) === "backfill" ? "backfill" : "result";
+  const ON = ["backfill", "source-terminal"];
+  const on = ON.includes(str(deps && deps.on)) ? str(deps.on) : "result";
   let svc;
   try {
     svc = new RecordService({
       repository: deps.repository, pseudonym: deps.pseudonym,
-      tenant: deps.tenant, role: "wardsynq-order-closure", roleSource: on === "backfill" ? "wardsynq-order-backfill" : "wardsynq-result-filed",
+      tenant: deps.tenant, role: "wardsynq-order-closure",
+      roleSource: on === "backfill" ? "wardsynq-order-backfill" : on === "source-terminal" ? "wardsynq-source-terminal" : "wardsynq-result-filed",
       actor: makeActor({ id: str(deps.actorId) || "wardsynq", kind: KIND.HUMAN, tier: TIER.EXECUTE,
         display: "order closure on result", scope: { read: ["ServiceRequest"], write: ["ServiceRequest"] } }),
     });
   } catch (e) { return { closed: false, reason: str(e && e.message) }; }
   const next = { ...order, status: "completed", completedAt: new Date().toISOString(), completedBy: str(deps.actorId) || null, completedOn: on };
   delete next.version; delete next.meta; delete next.writtenBy;
-  try { await svc.put(next, { expectedVersion: order.version }); return { closed: true }; }
+  /* R6-3: an INGESTED order keeps its provenance envelope across the closing version. Dropping it,
+   * as the two native paths do, would leave the new version with no meta.source at all - which is
+   * read everywhere as "this hospital owns it" (service.js externallyOwned), so the very act of
+   * tidying the order would quietly transfer another system's record to us. */
+  if (on === "source-terminal" && order.meta) next.meta = order.meta;
+  try { await svc.put(next, { expectedVersion: order.version, ...(on === "source-terminal" ? { sourceTerminalClosure: true } : {}) }); return { closed: true }; }
   catch (e) { return { closed: false, reason: str(e && e.message) }; }
 }
 
