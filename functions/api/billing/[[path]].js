@@ -34,6 +34,15 @@ const json = (obj, status = 200, cache = "no-store") => new Response(JSON.string
 });
 const rawUid = (id) => (typeof id === "string" && id.indexOf("fb:") === 0 ? id.slice(3) : id);
 
+// One JSON secret {keyId,keySecret,webhookSecret} keeps Cloudflare Pages under its 128-text-binding cap;
+// the three separate RAZORPAY_* vars still work as fallback.
+function razorpayCfg(env) {
+  try {
+    if (env.RAZORPAY_JSON) { const j = JSON.parse(env.RAZORPAY_JSON); return { keyId: j.keyId, keySecret: j.keySecret, webhookSecret: j.webhookSecret }; }
+  } catch (e) {}
+  return { keyId: env.RAZORPAY_KEY_ID, keySecret: env.RAZORPAY_KEY_SECRET, webhookSecret: env.RAZORPAY_WEBHOOK_SECRET };
+}
+
 // Plans — amounts in PAISE (₹1 = 100), env-overridable. See docs/PRICING_PACKAGING.md. `monthly`/`annual`
 // stay as the Pro back-compat keys the current paywall renders; `tiers`/`addons`/`founding` carry the full set.
 function plans(env) {
@@ -211,7 +220,7 @@ export async function onRequest(context) {
       return json({
         providers: {
           phonepe: !!(env.PHONEPE_CLIENT_ID && env.PHONEPE_CLIENT_SECRET),
-          razorpay: !!(env.RAZORPAY_KEY_ID && env.RAZORPAY_KEY_SECRET),
+          razorpay: !!(razorpayCfg(env).keyId && razorpayCfg(env).keySecret),
           apple: iapConfigured(env, "apple"),
           google: iapConfigured(env, "google"),
         },
@@ -288,24 +297,25 @@ export async function onRequest(context) {
 
     // ---- Razorpay (web / off-Play Android) ----
     if (method === "POST" && seg === "razorpay" && sub === "order") {
-      if (!env.RAZORPAY_KEY_ID || !env.RAZORPAY_KEY_SECRET) return json({ error: "razorpay-not-configured" }, 501);
+      const rz = razorpayCfg(env);
+      if (!rz.keyId || !rz.keySecret) return json({ error: "razorpay-not-configured" }, 501);
       const uid = rawUid(await identify(request, env));
       if (!uid) return json({ error: "signin-required" }, 401);
       let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
       const sel = selectAmount(env, body);
       const r = await fetch("https://api.razorpay.com/v1/orders", {
         method: "POST",
-        headers: { "Authorization": "Basic " + btoa(env.RAZORPAY_KEY_ID + ":" + env.RAZORPAY_KEY_SECRET), "Content-Type": "application/json" },
+        headers: { "Authorization": "Basic " + btoa(rz.keyId + ":" + rz.keySecret), "Content-Type": "application/json" },
         body: JSON.stringify({ amount: sel.amount, currency: "INR", notes: { uid, plan: sel.key, months: sel.months }, receipt: "smd-" + uid.slice(0, 18) + "-" + Date.now().toString(36) }),
       });
       const o = await r.json();
       if (!r.ok || !o.id) return json({ error: "order-failed", detail: (o && o.error) || null }, 502);
-      return json({ orderId: o.id, amount: o.amount, currency: o.currency, keyId: env.RAZORPAY_KEY_ID, plan: sel.key, label: sel.label });
+      return json({ orderId: o.id, amount: o.amount, currency: o.currency, keyId: rz.keyId, plan: sel.key, label: sel.label });
     }
     if (method === "POST" && seg === "razorpay" && sub === "webhook") {
       const raw = await request.text();
       const sig = request.headers.get("X-Razorpay-Signature") || "";
-      const secret = env.RAZORPAY_WEBHOOK_SECRET;
+      const secret = razorpayCfg(env).webhookSecret;
       if (!secret) return json({ error: "webhook-not-configured" }, 501);
       const expected = await hmacSha256Hex(secret, raw);
       if (!timingEqual(expected, sig)) return json({ error: "bad-signature" }, 401);
