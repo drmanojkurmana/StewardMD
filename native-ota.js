@@ -143,8 +143,9 @@
    * loud, so the app shows a plain decimal ladder instead: one tenth per release, rolling over at
    * .9 — 1.2, 1.3 … 1.9, 2.0, 2.1. LADDER_BASE is the server version labelled LADDER_BASE_TENTHS;
    * moving the base re-labels every release at once, so don't, unless renumbering is the intent.
-   * The built-in bundle that ships inside the native build is the rung below the first OTA. */
-  var LADDER_BASE = 94, LADDER_BASE_TENTHS = 12, BUILTIN_TENTHS = LADDER_BASE_TENTHS - 1;
+   * The built-in bundle that ships inside the native build is the rung below the first OTA: the
+   * 2026-09-18 native release is 1.2, and the first OTA that lands on top of it is 1.3. */
+  var LADDER_BASE = 95, LADDER_BASE_TENTHS = 13, BUILTIN_TENTHS = LADDER_BASE_TENTHS - 1;
   function tenthsToLabel(t) { if (t < 0) t = 0; return Math.floor(t / 10) + "." + (t % 10); }
   function versionLabel(v) {
     v = Number(v) || 0;

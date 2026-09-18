@@ -255,9 +255,9 @@ try {
   ok(!/stewardmd\.in|https?:\/\//.test(slowStr), `...still without leaking the endpoint (got: ${slowStr})`);
 
   /* ── the version the doctor reads out loud ── one tenth per release, rolling over at .9. */
-  const ladder = await J(`return JSON.stringify([94,95,101,102,104].map(function(v){return SMD_OTA.versionLabel(v)}).concat([SMD_OTA.versionLabel(0)]));`);
-  ok(JSON.stringify(ladder) === JSON.stringify(["1.2", "1.3", "1.9", "2.0", "2.2", "1.1"]),
-     `the version ladder reads 1.2, 1.3 … 1.9, then 2.0, 2.2, and the built-in bundle is 1.1 (got ${JSON.stringify(ladder)})`);
+  const ladder = await J(`return JSON.stringify([95,96,101,102,105].map(function(v){return SMD_OTA.versionLabel(v)}).concat([SMD_OTA.versionLabel(0)]));`);
+  ok(JSON.stringify(ladder) === JSON.stringify(["1.3", "1.4", "1.9", "2.0", "2.3", "1.2"]),
+     `the version ladder reads 1.3, 1.4 … then rolls 1.9 over to 2.0, 2.1, 2.3 — and the built-in bundle this ships in is 1.2 (got ${JSON.stringify(ladder)})`);
 
   /* ── stale bundles ── a failed 48MB download unpacks to ~123MB that nothing will ever load.
    * The purge must go by STATUS, not by "isn't the current one": current() reports {bundle,native}
