@@ -25,6 +25,10 @@ for f in *.js; do
     *) cp "$f" "$WWW/" ;;
   esac
 done
+# Multi-hospital core (window.SMD_HOSPITALS, loaded by index.html before
+# connect-agent-boot.js). The *.js loop above already copies it; this explicit
+# guard keeps the native bundle complete even if that loop ever gains excludes.
+[ -f hospital-registry.js ] && cp hospital-registry.js "$WWW/"
 
 # ── 2a. Root ES modules. prescription.js dynamic-imports /rx-build.mjs at runtime, so the native
 # bundle needs it too; the *.js loop above never matched .mjs, which left that import unresolvable
