@@ -1053,3 +1053,17 @@ test('CRAWL_ARM_GUIDE: re-arming keeps the taps already recorded for this questi
   run(win, doc);                                 // heartbeat re-arms
   assert.deepEqual(win.__smdGuidePath, ['a "Lab reports"'], 'the recorded tap survives the re-arm');
 });
+
+
+/* THE CHART MENU CAN BE BEHIND A DISCLOSURE. On the live GHIS the patient record shows only a handful
+ * of controls until "More.." is tapped; the whole clinical menu (Lab reports, Medications, Patient
+ * profile, Initial assessment) is hidden until then. The crawl opened a patient and then enumerated
+ * what it could see, so medications and labs were invisible to it and every run had to ask the doctor
+ * for them (owner's iPhone, runs 1-4, 2026-09-18). A disclosure is opened before the walk. */
+test('EXPAND_DISCLOSURES opens the disclosure that hides the chart menu, and nothing destructive', async () => {
+  const { DISCLOSURE_LABEL } = await import('../../connect-agent/phone/deep-crawl.mjs');
+  for (const label of ['More..', 'More', 'more...', 'Show more', 'See more', 'View all', 'Show all'])
+    assert.ok(DISCLOSURE_LABEL.test(label), 'opens: ' + label);
+  for (const label of ['Delete', 'Save', 'Discharge the patient', 'Sign out', 'Print', 'Submit', 'More Medicines'])
+    assert.ok(!DISCLOSURE_LABEL.test(label), 'never touches: ' + label);
+});
