@@ -880,7 +880,20 @@
         if (d.error === 'session_expired') return '<div class="ghis-lab-empty">Session expired — reconnect in the Ward panel.</div>';
         var tests = d.tests || [];
         if (tests.length === 0) return '<div class="ghis-lab-detail-empty">No values recorded for this order.</div>';
-        var html = '';
+        /* WHEN WAS THIS DRAWN. Both adapters already answer with the sample's own timestamps
+         * (collected / reported) and the drawer threw them away, so an opened panel showed values with
+         * no time against them. On a renal panel repeated through the day that is the difference
+         * between a rising creatinine and a duplicate row. */
+        /* The agent's adapter answers collected and reported with the SAME value when the hospital's
+         * list carries one date column (ghis-shim detailFor), so print it once rather than as
+         * "Collected X · Reported X". */
+        var when = [];
+        if (d.collected && d.reported && String(d.collected) === String(d.reported)) when.push(esc(d.collected));
+        else {
+          if (d.collected) when.push('Collected ' + esc(d.collected));
+          if (d.reported) when.push('Reported ' + esc(d.reported));
+        }
+        var html = when.length ? '<div class="ghis-rad-meta">' + when.join(' · ') + '</div>' : '';
         tests.forEach(function(t) {
           var cls = abnormalClass(t);
           var antibiogram = t.antibiogram && String(t.antibiogram).trim();
@@ -1365,7 +1378,12 @@
                   html += '<div class="ghis-lab-order" onclick="GHIS.toggleOrder(this,\'' + jsq(o.renderId) + '\',\'' + jsq(o.episodeId) + '\')">' +
                     '<div class="ghis-lab-order-head">' +
                       '<div class="ghis-lab-order-name">' + esc(o.serviceName || '—') + '</div>' +
-                      '<div class="ghis-lab-order-dept">' + esc(o.department || '') + '</div>' +
+                      /* THE DATE BELONGS ON THE ORDER, not only on the group heading above it. A renal
+                       * panel repeated four times down the drawer is four different draws, and the
+                       * doctor was reading Urea 161 and Urea 158 with nothing to say which came first
+                       * (owner, live ward, 2026-09-19). The heading only carries a date when the
+                       * adapter filled orderDate AND the grouping held; the card always can. */
+                      '<div class="ghis-lab-order-dept">' + esc([o.orderDate, o.department].filter(Boolean).join(' · ')) + '</div>' +
                     '</div>' +
                     '<div class="ghis-lab-detail" style="display:none"></div>' +
                   '</div>';
