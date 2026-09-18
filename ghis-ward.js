@@ -714,6 +714,13 @@
           _patients = patients;
           populateFilterOptions();
           ghisApplyFilters();
+          /* THE BROWSER NEVER LINGERS. The ward list is on screen and the session stays open for
+           * reads, so re-assert hidden agent mode now that the list has landed: on Pixel 9 the
+           * full-screen dialog stayed over the live dashboard after sign-in (2026-09-18). The
+           * browser is hidden, never closed - closing it would sign the hospital out. */
+          if (_adapterCtx === ctx && ctx.browserOpen) {
+            try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + host + ' for your ward list', origins: ctx.origins, hidden: true }); } catch (e) {}
+          }
         }).catch(function (e) {
           if (_adapterCtx !== ctx) return;
           adapterFail(e && e.message ? e.message : 'Could not read the ward list from ' + host + '.');

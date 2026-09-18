@@ -249,6 +249,25 @@ test('absent is not negative: a section the adapter could not read says so, an e
   assert.equal(/—/.test(body.unreadable), false, 'no em-dash');
 });
 
+/* ORDER DATES, NOT ORDER NOISE. GHIS order rows name the date OrderDate, order_date, date,
+ * reported or reg_date; a status word must never file as the order's date on the drawer card. */
+test('labOrders keeps orderDate from every GHIS date key and rejects non-date strings', () => {
+  const variants = [
+    [{ OrderDate: '02/09/2026' }, '02/09/2026'],
+    [{ order_date: '2026-09-02' }, '2026-09-02'],
+    [{ date: '02-09-2026 10:30' }, '02-09-2026 10:30'],
+    [{ reported: '17-Sep-2026' }, '17-Sep-2026'],
+    [{ reg_date: '02/09/2026' }, '02/09/2026'],
+    [{ Reported: 'Final', ResultDate: '02/09/2026' }, '02/09/2026'],
+    [{ Reported: 'Final' }, ''],
+  ];
+  variants.forEach(([extra, want], i) => {
+    const row = Object.assign({ 'Test Name': 'Panel ' + i, Result: '', Department: 'Lab' }, extra);
+    const { orders } = labOrders([{ resource: 'labs', rows: [row] }], patient);
+    assert.equal(orders[0].orderDate, want, JSON.stringify(extra));
+  });
+});
+
 /* THE REPORT IS TEXT. GHIS's radiology result is an HTML fragment; the hand-built adapter runs it
  * through htmlToText, the shim served the tags raw (owner's iPhone, 2026-09-17). */
 test('reportText: an HTML report fragment becomes readable text with its headings on their own lines', async () => {
