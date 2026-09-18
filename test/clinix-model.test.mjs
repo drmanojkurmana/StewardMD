@@ -463,6 +463,31 @@ test("buildPathway: the review gate applies per skill, and an empty chapter is m
   assert.deepEqual(M.pathwaySkillIds(p), ["ok"]);
 });
 
+/* Pro lock: one system is free, the rest need Pro --------------------------- */
+
+const CAT = {
+  skillPacks: [{ id: "core", shared: true }, { id: "respiratory" }, { id: "cardiovascular" }, { id: "abdomen" }],
+  systems: [
+    { id: "respiratory", free: true, skillPacks: ["core", "respiratory"] },
+    { id: "cardiovascular", skillPacks: ["core", "cardiovascular"] },
+    { id: "abdomen", skillPacks: ["core", "abdomen"] }
+  ]
+};
+
+test("systemLocked: a free system is open to everyone, the rest only to Pro", () => {
+  assert.equal(M.systemLocked(CAT.systems[0], false), false, "the free system is never locked");
+  assert.equal(M.systemLocked(CAT.systems[1], false), true, "a non-free system is locked without Pro");
+  assert.equal(M.systemLocked(CAT.systems[1], true), false, "Pro opens every system");
+  assert.equal(M.systemLocked(null, false), true, "an unresolved system fails closed for a non-Pro reader");
+  assert.equal(M.systemLocked(null, true), false);
+});
+
+test("openPackIds: without Pro only shared packs and the free system's packs load", () => {
+  assert.deepEqual(M.openPackIds(CAT, false), ["core", "respiratory"]);
+  assert.deepEqual(M.openPackIds(CAT, true), ["core", "respiratory", "cardiovascular", "abdomen"]);
+  assert.deepEqual(M.openPackIds({}, false), []);
+});
+
 test("buildPathway: with the draft flag on, an author sees everything", () => {
   const skills = { "draft": skill({ id: "draft", review: { status: "ai_drafted" } }) };
   const disease = { id: "copd", name: "COPD", system: "respiratory", chapters: [{ id: "history", title: "History", skills: ["draft"] }] };

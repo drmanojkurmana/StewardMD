@@ -187,6 +187,41 @@ llama.cpp is also unverified on device.
 **Trade-off accepted:** concept-overlap support (COV_MIN 0.5 of a claim's stemmed content tokens in one
 passage) is a heuristic; it errs toward leaving a correct prose sentence out, never toward keeping an
 unsupported dose in. Tune COV_MIN from the live battery, not from intuition.
+## 2026-09-18 · SUPERSEDES the entry below: ONCQIS is add-on only, SURGX is Pro and residents
+
+**Decision (owner):** ONCQIS and OncoTree are NOT free. Every account gets a **3 day trial**, after
+which they need the **Onco add-on (₹89/mo)**, which any tier may buy. SURGX is NOT free either: it is
+included with **Pro and above**, and with **resident** plans (trainee tier whose verified role is
+resident, plus Co-Resident). CliniX is unchanged: Respiratory free, the other systems Pro.
+
+**Still to build:** `onco` and `surgx` entries in the role x tier matrix (`functions/_features.js` on
+branch worktree-agent-aca63a9e6e54f1648), the 3-day onco trial clock, and the client gates. The copy
+in this branch (website + paywall) already states the new rule, so code and copy must land together
+or the site promises what the app refuses.
+
+## 2026-09-17 · ONCQIS and SURGX free; CliniX one system free, the rest Pro (SUPERSEDED 2026-09-18)
+
+**Decision (owner):** ONCQIS (oncology) and SURGX are included free on every account. CliniX gives
+Respiratory free and locks the other four systems (Cardiovascular, GIT and abdomen, Neurology, Short
+cases) behind Pro.
+
+**How:** ONCQIS and SURGX already had no Pro check in code; only copy changed (website pricing, in-app
+paywall blurbs, and the +₹89 OncoTree + ONCQIS add-on row removed). CliniX: `free: true` on the
+system in `clinix/manifest.json` (data, not code); pure `systemLocked()` / `openPackIds()` in
+`clinix-model.js`; enforced at every door in `clinix-screens.js` (system card, disease/module open,
+resume) and in `loadAllSkills(pro)` so a locked system's skills are not reachable through the skills
+library. Refusals route through `SMD_PRO_NOTICE` ("clinix"). `pro-notice.js` gained a `signin` reason
+so a signed-out reader is asked to sign in instead of being told their connection failed.
+
+**Trade-off:** client-side only. CliniX content ships inside the native bundle, so a determined user
+can read the JSON; same ceiling as every other client gate. Pro here is `SMD_PRO.isProSync()`, which
+with `VERIFY_REQUIRED_FOR_PRO` on (default) means verified (7-day free Pro) or paid; unverified
+signed-up users see the lock immediately, the launch promo does not open it.
+
+**Open for owner:** the App Store product `in.stewardmd.onco.monthly` (Onco add-on, READY_TO_SUBMIT)
+is now unsold; leave it out of the review submission or delete it. Website plan ladder
+(Student/Intern/Resident/Physician Pro/Onco+ at ₹129-799) still differs from the in-app/App Store
+ladder (Trainee/Co-Resident/Pro/Physician/Physician Pro at ₹199-2,499).
 
 ## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
 

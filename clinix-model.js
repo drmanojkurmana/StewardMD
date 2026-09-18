@@ -811,6 +811,30 @@
     return ids;
   }
 
+  /* ── Pro lock ─────────────────────────────────────────────────────────────── */
+
+  /* One system is free (manifest `free: true`); the rest need Pro. An unresolved system fails
+   * closed for a non-Pro reader. Client-side only: the content ships inside the native bundle. */
+  function systemLocked(system, pro) {
+    if (pro) return false;
+    return !(system && system.free === true);
+  }
+
+  /* Skill packs a reader may load into the standalone skills library: shared packs plus the packs
+   * of every system they can open, in catalog order. */
+  function openPackIds(cat, pro) {
+    var packs = (cat && cat.skillPacks) || [], systems = (cat && cat.systems) || [], allowed = {}, i, j;
+    for (i = 0; i < packs.length; i++) if (pro || packs[i].shared) allowed[packs[i].id] = true;
+    for (i = 0; i < systems.length; i++) {
+      if (systemLocked(systems[i], pro)) continue;
+      var sp = systems[i].skillPacks || [];
+      for (j = 0; j < sp.length; j++) allowed[sp[j]] = true;
+    }
+    var out = [];
+    for (i = 0; i < packs.length; i++) if (allowed[packs[i].id]) out.push(packs[i].id);
+    return out;
+  }
+
   /* ── Exports ──────────────────────────────────────────────────────────────── */
 
   var API = {
@@ -856,7 +880,10 @@
     normalizeAnswer: normalizeAnswer,
 
     buildPathway: buildPathway,
-    pathwaySkillIds: pathwaySkillIds
+    pathwaySkillIds: pathwaySkillIds,
+
+    systemLocked: systemLocked,
+    openPackIds: openPackIds
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = API;
