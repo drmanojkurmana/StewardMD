@@ -1034,17 +1034,23 @@ const EXPAND_DISCLOSURES_SRC = String(CRAWL_EXPAND_DISCLOSURES);
 const FIND_PATIENT_ROW_SRC = String(CRAWL_FIND_PATIENT_ROW);
 const CLICK_ROW_SRC = String(CRAWL_CLICK_ROW);
 
-/* Click the first data row of a captured list (its first link when it has one, else the row itself)
- * so the call that opens a single report or result is observed. Page realm; returns what it did. */
+/* Click the first data row of a captured list (its report/print action when it has one, else its
+ * first link, else the row itself) so the call that opens a single report or result is observed.
+ * A GHIS lab order opens its report only through a print/report icon: clicking an arbitrary link in
+ * the row misses it, so action elements win over a generic link. Page realm; returns what it did. */
 function CRAWL_CLICK_FIRST_ROW(selector) {
   try {
     var rows = document.querySelectorAll(selector);
+    var PRIORITY = ['[onclick*="print" i]', '[onclick*="report" i]', '[onclick*="result" i]', '[class*="print" i]', '[title*="print" i]', '[title*="report" i]', '[value*="print" i]', 'a[href]:not([href^="#"])', 'a[onclick]', 'button', '[onclick]'];
     for (var i = 0; i < rows.length; i++) {
       var row = rows[i];
       var tds = row.querySelectorAll ? row.querySelectorAll('td') : [];
       if (tds.length < 2) continue;
-      var a = row.querySelector('a[href]:not([href^="#"]), a[onclick], button, [onclick]');
-      if (a) { a.click(); return 'link'; }
+      for (var p = 0; p < PRIORITY.length; p++) {
+        var a = null;
+        try { a = row.querySelector(PRIORITY[p]); } catch (x) { a = null; }
+        if (a) { a.click(); return 'link'; }
+      }
       row.click();
       return 'row';
     }

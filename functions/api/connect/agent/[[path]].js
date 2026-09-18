@@ -74,6 +74,7 @@ import {
 } from "../../../../connect-agent/manifest/schema.mjs";
 import { inferHtmlOperations } from "../../../../connect-agent/manifest/infer-html.mjs";
 import { askBrain, brainModel, ROLES as BRAIN_ROLES } from "../../../_connect/agent/brain.js";
+import { loginRun, logoutRun, statusRun, dataRun, RESOURCES } from "../../../_connect/agent/dispatcher.js";
 
 export { agentFlagOn, browserSessionFlagOn } from "../../../_connect/agent/flags.js";
 
@@ -1549,6 +1550,65 @@ export async function onRequest(context) {
       if (!foundDep) throw new OnboardError("not-found", "hospital not found");
       const activeVer = foundDep.active_version_id ? await getVersion(deps.db, foundTenantId, foundDep.active_version_id) : null;
       return jsonResponse(Object.assign({ ok: true }, deploymentView(foundDep, activeVer)));
+    }
+
+    // --- edge dispatcher: the agent-built adapter served from Cloudflare (GHIS parity) -----------
+    // Tier 1 (adapter) + Tier 2 (recipe) are hospital-level and shared; Tier 3 (doctor session) is
+    // a per-token KV cookie jar. Only the ACTIVE version ever serves: AWAITING_APPROVAL drafts
+    // never reach dataRun (dispatcher.resolveActiveAdapter), and rollbackVersion restores v1.
+    // A 302 drops the KV session (401); a 404/schema drift marks NEEDS_REPAIR via markDrift and
+    // never falls back to WebView scraping.
+    const bearerOf = (req) => {
+      const h = req.headers.get("authorization") || req.headers.get("Authorization") || "";
+      const m = /^Bearer\s+(.+)$/i.exec(String(h).trim());
+      if (m) return m[1].trim();
+      return url.searchParams.get("token") || (body && body.token) || null;
+    };
+    // POST /run/:deploymentId/login { userId, password, recipe? } -> { ok, token, doctorName }
+    if (method === "POST" && parts.length === 3 && parts[0] === "run" && parts[2] === "login") {
+      const deploymentId = parts[1];
+      await requireAgent(deps, request, env, tid, "session");
+      await getDeployment(deps.db, tid, deploymentId);
+      const out = await loginRun(env, {
+        deploymentId,
+        userId: body.userId || body.username,
+        password: body.password,
+        recipe: body.recipe || null,
+      }, { fetchImpl: deps.fetch });
+      return jsonResponse(out);
+    }
+    // POST /run/:deploymentId/logout (Bearer) -> { ok }
+    if (method === "POST" && parts.length === 3 && parts[0] === "run" && parts[2] === "logout") {
+      const token = bearerOf(request);
+      await requireAgent(deps, request, env, tid, "session");
+      return jsonResponse(await logoutRun(env, token));
+    }
+    // GET /run/:deploymentId/status (Bearer) -> { connected } or 401
+    if (method === "GET" && parts.length === 3 && parts[0] === "run" && parts[2] === "status") {
+      const token = bearerOf(request);
+      await requireAgent(deps, request, env, tid, "read");
+      const r = await statusRun(env, token);
+      return jsonResponse(r.body, { status: r.status });
+    }
+    // GET /run/:deploymentId/:resource (Bearer + query) for patients, medications, lab,
+    // lab-detail, radiology, radiology-report, demographics. The active adapter version (or an
+    // explicit adapter/recipe from D1/store via body.adapter) supplies the endpoint definition.
+    if (method === "GET" && parts.length === 3 && parts[0] === "run" && RESOURCES.indexOf(parts[2]) >= 0) {
+      const deploymentId = parts[1];
+      const resource = parts[2];
+      await requireAgent(deps, request, env, tid, "read");
+      await getDeployment(deps.db, tid, deploymentId);
+      const token = bearerOf(request);
+      const params = {};
+      url.searchParams.forEach((v, k) => { params[k] = v; });
+      const dep = await getDeployment(deps.db, tid, deploymentId);
+      const r = await dataRun(env, { deploymentId, resource, token, params }, {
+        fetchImpl: deps.fetch,
+        adapter: body && body.adapter ? body.adapter : null,
+        db: deps.db, tenantId: tid,
+        versionId: dep.active_version_id || null,
+      });
+      return jsonResponse(r.body, { status: r.status });
     }
 
     return jsonResponse({ error: "not_found" }, { status: 404 });
