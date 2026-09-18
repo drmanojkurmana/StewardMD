@@ -29,6 +29,7 @@ import { getEntitlement, clinicLimit, deviceLimit, recordTierPurchase, effective
 import { oncoTrialState } from "../../_features.js";
 import { deviceLockOn } from "../../_devices.js";
 import { cfgPrice, warmBillingCfg, getBillingCfg, setBillingCfg } from "../../_billingcfg.js";
+import { quotaOn, quotaKv, quotaPacks, quotaPackFor, packKeyForProduct, credit as quotaCredit, state as quotaState } from "../../_quota.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
@@ -73,6 +74,8 @@ function plans(env) {
       plus: { mt: 250000, amount: P("TOKENS_PLUS", 19900), regular: P("TOKENS_PLUS_REGULAR", 24500), label: "Plus", popular: true },
       power: { mt: 750000, amount: P("TOKENS_POWER", 49900), regular: P("TOKENS_POWER_REGULAR", 73500), label: "Power" },
     },
+    // Per-patient / per-consult top-up packs (functions/_quota.js owns the units + product ids).
+    packs: quotaPacks(env),
     founding: { amount: P("FOUNDING_PRICE_YEAR", 39900), months: 12, seats: P("FOUNDING_SEATS", 500), label: "Founding Doctor (year)" },
   };
 }
@@ -86,6 +89,7 @@ export function selectAmount(env, body) {
     const t = P.tiers[b.tier], annual = b.cycle === "annual" && t.annual;
     return { amount: annual ? t.annual : t.amount, months: annual ? 12 : 1, key: b.tier + ":" + (annual ? "annual" : "monthly"), label: t.label };
   }
+  if (b.quotaPack && P.packs[b.quotaPack]) { const q = P.packs[b.quotaPack]; return { amount: q.amount, months: 0, units: q.units, key: "pack:" + b.quotaPack, label: q.label }; }
   if (b.pack && P.tokens[b.pack]) { const k = P.tokens[b.pack]; return { amount: k.amount, months: 0, mt: k.mt, key: "tokens:" + b.pack, label: k.label + " tokens" }; }
   if (b.addon && P.addons[b.addon]) { const a = P.addons[b.addon]; return { amount: a.amount, months: 1, key: "addon:" + b.addon, label: a.label }; }
   const plan = P[b.plan] ? b.plan : "monthly";
@@ -107,6 +111,17 @@ export async function fulfilPurchase(env, uid, planKey, months, source, deps) {
   const lookupUser = (deps && deps.lookupUser) || lookupUserByUid;
   const kv = (deps && deps.kv) || usageKv(env);
   const grant = (deps && deps.grantPro) || grantPro;
+  // Quota packs (patient credits / Scribe consults) — units re-read from the server price table, never
+  // from the payment note. Keyed by uid, which is what functions/_quota.js meters.
+  const qpack = quotaPackFor(planKey);
+  if (qpack) {
+    const q = quotaPacks(env)[qpack];
+    if (!q) return { ok: false, reason: "unknown-pack" };
+    const qkv = (deps && deps.kv) || quotaKv(env);
+    const r = await ((deps && deps.creditQuota) || quotaCredit)(env, qkv, uid, q.feature, q.units);
+    if (!r || !r.ok) return { ok: false, reason: (r && r.reason) || "credit-failed" };
+    return { ok: true, feature: q.feature, units: q.units, purchasedBalance: r.purchasedBalance };
+  }
   const pack = tokenPackFor(planKey);
   if (pack) {
     const p = plans(env).tokens[pack];
@@ -228,8 +243,17 @@ export async function onRequest(context) {
       let ent = null;
       try { ent = uid ? await getEntitlement(env, uid) : null; role = ent && ent.role; } catch (e) {}
       try { const who = await usageIdentify(request, env); if (who && who.email) costCap = await dailyCostCap(env, usageKv(env), who.email, role); } catch (e) {}
+      // Per-patient quota meters (flagged). Additive: absent entirely when QUOTA_METERS_ON !== "1".
+      let quota = null;
+      if (quotaOn(env) && uid) {
+        try {
+          const qkv = quotaKv(env);
+          quota = { care: await quotaState(env, qkv, uid, "care", { role }), scribe: await quotaState(env, qkv, uid, "scribe", { role }) };
+        } catch (e) { quota = null; }
+      }
       return json(Object.assign({
         signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env),
+        quota: quota, quotaOn: quotaOn(env),
         tokens: inrToMt(credits), costCapMt: inrToMt(costCap), mtPerInr: MT_PER_INR,   // MaiK Tokens = what the UI shows
         role: role || null, clinicLimit: clinicLimit(env, role), deviceLimit: deviceLimit(env, role), deviceLockOn: deviceLockOn(env),
         // Purchase-derived ladder, so the client can render what was actually bought. The onco trial
@@ -281,6 +305,13 @@ export async function onRequest(context) {
       if (!v.valid) return json({ ok: false, valid: false, reason: v.reason || "invalid" }, 402);
       // Consumable MaiK Token packs (in.stewardmd.tokens.<pack>) are NOT subscriptions: they have no
       // expiry, so the days-from-expiry grant below would have handed out Pro instead of tokens.
+      // Consumable quota packs (in.stewardmd.care.N / in.stewardmd.scribe.N) — same non-subscription path.
+      const iapQuota = packKeyForProduct(body.productId);
+      if (iapQuota) {
+        const f = await fulfilPurchase(env, uid, iapQuota, 0, "iap-" + platform);
+        if (!f.ok) return json({ ok: false, valid: true, reason: f.reason }, 502);
+        return json({ ok: true, valid: true, platform: platform, feature: f.feature, units: f.units, purchasedBalance: f.purchasedBalance });
+      }
       const iapPack = /^in\.stewardmd\.tokens\.([a-z]+)$/.exec(String(body.productId || ""));
       if (iapPack) {
         const f = await fulfilPurchase(env, uid, "tokens:" + iapPack[1], 0, "iap-" + platform);

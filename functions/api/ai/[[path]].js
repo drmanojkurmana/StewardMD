@@ -135,6 +135,8 @@ import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 import { icdSuggestPrompt, sanitizeIcdSuggest } from "./_icd-suggest.js";
 import * as icdRepo from "../../_icd_repo.js";
 import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
+import { quotaOn, quotaKv, consumeScribeSession, quotaRefusal } from "../../_quota.js";
+import { getEntitlement } from "../../_entitlements.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
@@ -2051,6 +2053,19 @@ export async function onRequest(context) {
           const tb = await checkScribeTime(_scribeStore, uid, Date.now(), scribeCaps(env));
           if (!tb.ok) return json({ error: "quota", reason: tb.reason, used: tb.used, cap: tb.cap,
             message: tb.reason === "scribe-weekly" ? "You've reached this week's MaiK Scribe limit (1 hour/week)." : "You've reached today's MaiK Scribe limit (30 minutes/day)." }, 429);
+        }
+      }
+      // ---- Per-consult Scribe quota (flag QUOTA_METERS_ON). Independent of SCRIBE_CAPS above: that one
+      // caps dictation TIME, this one meters CONSULTS against the monthly allowance + purchased packs.
+      if (_isScribe && quotaOn(env)) {
+        let _qUid = _scribeUid, _qRole = null, _qSkip = false;
+        if (!_qUid) { try { const pr = await proFromRequest(env, request); _qUid = pr.uid || null; } catch (e) { _qSkip = true; } }
+        if (!_qSkip && _qUid) {
+          try { const ent = await getEntitlement(env, _qUid); _qRole = ent && ent.role; } catch (e) { _qSkip = true; }   // fail-open
+          if (!_qSkip) {
+            const qr = await consumeScribeSession(env, quotaKv(env), _qUid, { role: _qRole, session: body.sessionId || body.session || null });
+            if (!qr.ok) return json(quotaRefusal(env, "scribe"), 402);
+          }
         }
       }
       // charge this call's dictation seconds (body.sec if the client sends real elapsed, else the per-kind estimate)

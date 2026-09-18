@@ -105,6 +105,7 @@
     if (body.tier) return "in.stewardmd." + (TIER_IAP[body.tier] || body.tier) + "." + (body.cycle === "annual" ? "annual" : "monthly");
     if (body.addon === "onco") return "in.stewardmd.onco.monthly";
     if (body.pack) return "in.stewardmd.tokens." + body.pack;
+    if (body.quotaPack) return "in.stewardmd." + body.quotaPack;   // care.25 / scribe.50 …
     return null;
   }
 
@@ -310,6 +311,7 @@
         if (k === "buy") return doBuy({ tier: _tier, cycle: _cycle }, b);
         if (k === "buy-addon") return doBuy({ addon: b.getAttribute("data-addon") }, b);
         if (k === "token") return doBuy({ pack: b.getAttribute("data-pack") }, b);
+        if (k === "qpack") return doBuy({ quotaPack: b.getAttribute("data-qpack") }, b);
         if (k === "redeem") return redeem();
         if (k === "ailimit-upgrade") { close(); return openPaywall(); }
       };
@@ -418,6 +420,33 @@
 
   // "AI limit hit" sheet — shown when an AI call returns 429 { reason:"ai-cost-cap" }. Offers the
   // daily-reset time, current credit balance, and a route to upgrade / add credits.
+  /* Top-up sheet for the per-patient quota meters. Opened straight off a server 402
+   * { error:"quota-exhausted", feature, packs, copy } — it needs no /plans fetch, so it works the
+   * moment a refusal lands. ADDITIVE: nothing else in this file reads it. */
+  function openTopUp(info) {
+    info = info || {}; close();
+    var c = info.copy || {}, packs = info.packs || [];
+    var title = info.feature === "scribe" ? "MaiK Scribe consults" : "Patient credits";
+    var lines = (c.lines || []).map(function (t) {
+      return '<div style="font:500 13px/1.6 var(--sans);color:var(--slate,#2d4356);margin-top:4px">' + esc(t) + '</div>';
+    }).join("");
+    var cards = packs.map(function (p) {
+      return '<button data-pp="qpack" data-qpack="' + esc(p.key) + '" style="flex:1;text-align:left;border:2px solid ' + (p.popular ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';border-radius:12px;padding:11px;background:var(--panel,#fff);cursor:pointer">' +
+        '<div style="font:800 17px var(--sans);color:var(--ink)">' + esc(p.units) + '</div>' +
+        '<div style="font:500 9.5px var(--sans);color:var(--slate-soft)">' + (info.feature === "scribe" ? "consults" : "patients") + '</div>' +
+        '<div style="margin-top:6px;font:800 13px var(--sans);color:var(--teal,#0e6e63)">' + inr(p.amount) + '</div></button>';
+    }).join("");
+    var inner = header(title) +
+      '<div style="padding:6px 18px 2px"><div style="font:800 17px/1.4 var(--serif,Georgia,serif);color:var(--ink)">' + esc(c.headline || "") + '</div>' + lines + '</div>' +
+      (c.price ? '<div style="padding:10px 18px 2px"><div style="padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 13px/1.5 var(--sans);color:var(--teal,#0e6e63)">' + esc(c.price) + '</div></div>' : '') +
+      (cards ? '<div style="padding:12px 18px 2px;display:flex;gap:8px">' + cards + '</div>' : '') +
+      '<div style="padding:10px 18px 22px;font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center">' + esc(c.expiry || "") + '</div>';
+    var div = document.createElement("div");
+    div.innerHTML = shell(inner);
+    _root = div.firstChild; document.body.appendChild(_root); document.body.style.overflow = "hidden";
+    wire();
+  }
+
   function openAiLimit(info) {
     info = info || {}; close();
     var reset = info.resetAt ? new Date(+info.resetAt) : null;
@@ -439,7 +468,7 @@
   // Force a token refresh so isPro() picks up a just-granted `pro` claim, then re-check status.
   function refresh() { return token(true).then(function () { return api("/api/billing/status").then(function (x) { _status = x.d || {}; if (_root) paint(); return _status; }); }); }
 
-  function attach() { if (!window.SMD_PRO) return setTimeout(attach, 300); window.SMD_PRO.openPaywall = openPaywall; window.SMD_PRO.openAiLimit = openAiLimit; window.SMD_PRO.refresh = refresh; }
+  function attach() { if (!window.SMD_PRO) return setTimeout(attach, 300); window.SMD_PRO.openPaywall = openPaywall; window.SMD_PRO.openAiLimit = openAiLimit; window.SMD_PRO.openTopUp = openTopUp; window.SMD_PRO.refresh = refresh; }
   attach();
 
   // One central interceptor for the "AI limit hit" sheet: watch AI responses and, on a 429
@@ -452,9 +481,11 @@
         var p = _origFetch.apply(this, arguments);
         try {
           var url = (typeof input === "string" ? input : (input && input.url)) || "";
-          if (url.indexOf("/api/ai/") > -1) {
+          if (url.indexOf("/api/ai/") > -1 || url.indexOf("/api/followcare/") > -1) {
             return p.then(function (r) {
               if (r && r.status === 429) { try { r.clone().json().then(function (d) { if (d && d.reason === "ai-cost-cap") openAiLimit(d); }, function () {}); } catch (e) {} }
+              // Per-patient quota meters: a 402 quota-exhausted opens the top-up sheet.
+              if (r && r.status === 402) { try { r.clone().json().then(function (d) { if (d && d.error === "quota-exhausted") openTopUp(d); }, function () {}); } catch (e) {} }
               return r;
             });
           }

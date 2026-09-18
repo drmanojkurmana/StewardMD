@@ -26,6 +26,8 @@ import * as FC from "../../_followcare.js";
 import Pathways from "../../../followcare-pathways.js";
 import { verifyFirebaseToken } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
+import { quotaOn, quotaKv, consume as quotaConsume, quotaRefusal } from "../../_quota.js";
+import { getEntitlement } from "../../_entitlements.js";
 import { fcKv } from "../../_followcare.js";
 import { sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 import { fsQuery } from "../../_fbfirestore.js";
@@ -114,6 +116,19 @@ async function notifyClinician(env, ep, escalation) {
     const body = "A recovery check-in needs your review. Tap to open.";
     await sendNativeToAll(env, { title, body, data: { type: "followcare", episodeId: ep.episodeId } }, { uid: "fb:" + ep.doctorUid });
   } catch (e) { /* push is best-effort — an escalation is still visible on the dashboard */ }
+}
+
+/* Patient-credit meter (flag QUOTA_METERS_ON). 1 credit = one MAiTRI call OR one 7-day FollowCare SMS
+ * course — they cost us the same ₹10, so they share one wallet. Returns null when allowed (flag off,
+ * no KV, or credit spent), else the 402 Response the caller should return. Never blocks work already
+ * started: it runs BEFORE the episode is enrolled / the call is queued, never mid-course. */
+async function careCredit(env, request, uid) {
+  if (!quotaOn(env) || !uid) return null;
+  let role = null;
+  try { const ent = await getEntitlement(env, uid); role = ent && ent.role; } catch (e) { return null; }   // fail-open
+  const r = await quotaConsume(env, quotaKv(env), uid, "care", { role });
+  if (r.ok) return null;
+  return json(quotaRefusal(env, "care"), 402, request);
 }
 
 export async function onRequest(context) {
@@ -397,6 +412,7 @@ export async function onRequest(context) {
       if (!ep) return json({ error: "not_found" }, 404, request);
       if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403, request);
       const settings = await FCV.getHospitalSettings(env, ep.hospitalId);
+      const _q = await careCredit(env, request, uid); if (_q) return _q;
       const r = await FCV.queueVoiceCall(env, ep, settings, Date.now(), { manual: true, actor: "doctor:" + uid });
       return json(r, r.ok ? 200 : 400, request);
     }
@@ -411,6 +427,7 @@ export async function onRequest(context) {
       if (isOwner && b.hospitalId) hospitalId = b.hospitalId;
       if (!hospitalId) return json({ error: "hospital_not_set" }, 400, request);
       if (b.hospitalId && !isOwner && b.hospitalId !== hospitalId) return json({ error: "hospital_mismatch" }, 403, request);
+      const _q = await careCredit(env, request, uid); if (_q) return _q;
       const r = await FC.enrollEpisode(env, {
         hospitalId: hospitalId, doctorUid: uid, pathwayId: b.pathwayId, phone: b.phone, name: b.name,
         dischargeMs: b.dischargeMs, lang: b.lang, sendHour: b.sendHour, tz: b.tz,
