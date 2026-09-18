@@ -51,6 +51,8 @@
     if (!isNative()) return;
     var p = plugin();
     if (p && p.notifyAppReady) { try { p.notifyAppReady().catch(function () {}); } catch (e) {} }
+    // Reclaim space from bundles nothing will load again — well after launch, never blocking it.
+    setTimeout(function () { try { purgeOld(); } catch (e) {} }, 8000);
   })();
 
   function check() {
@@ -126,17 +128,58 @@
     var raw = String((e && (e.message || e.code)) || "");
     try { if (raw) console.warn("[ota] " + fallback + ":", raw); } catch (x) {}
     if (/checksum|hash|integrity/i.test(raw)) return "checksum";
-    if (/network|timeout|offline|connection|unreachable|dns/i.test(raw)) return "network";
+    /* "timed out" (two words) is how the plugin phrases its OWN download cap — matching only the
+     * one-word "timeout" sent every cancelled bundle down to the generic fallback, so the screen
+     * read "download-failed" for what was plainly a slow connection (owner's iPhone, 2026-09-18). */
+    if (/network|timed?[ -]?out|offline|connection|unreachable|dns/i.test(raw)) return "network";
     if (/space|storage|disk|quota/i.test(raw)) return "storage";
     if (/403|401|unauthor|forbidden/i.test(raw)) return "unauthorized";
     if (/404|not ?found/i.test(raw)) return "missing";
     return fallback;
   }
 
+  /* THE VERSION THE DOCTOR READS. The server counts releases as a monotonic integer (…93, 94, 95)
+   * because rollback has to republish an old bundle under a NEW number. Nobody says "I'm on 94" out
+   * loud, so the app shows a plain decimal ladder instead: one tenth per release, rolling over at
+   * .9 — 1.2, 1.3 … 1.9, 2.0, 2.1. LADDER_BASE is the server version labelled LADDER_BASE_TENTHS;
+   * moving the base re-labels every release at once, so don't, unless renumbering is the intent.
+   * The built-in bundle that ships inside the native build is the rung below the first OTA. */
+  var LADDER_BASE = 94, LADDER_BASE_TENTHS = 12, BUILTIN_TENTHS = LADDER_BASE_TENTHS - 1;
+  function tenthsToLabel(t) { if (t < 0) t = 0; return Math.floor(t / 10) + "." + (t % 10); }
+  function versionLabel(v) {
+    v = Number(v) || 0;
+    return v > 0 ? tenthsToLabel(LADDER_BASE_TENTHS + (v - LADDER_BASE)) : tenthsToLabel(BUILTIN_TENTHS);
+  }
+
+  /* Purge every bundle that is neither running nor queued. A failed 48MB download unpacks to ~123MB
+   * of loose files, and the plugin only auto-deletes the one bundle it just replaced — so repeated
+   * failures pile up copies that nothing will ever load. Fire-and-forget: reclaiming space must
+   * never be able to fail a launch. */
+  function purgeOld() {
+    var p = plugin();
+    if (!p || !p.list || !p.delete) return Promise.resolve({ removed: 0 });
+    return Promise.all([p.list(), p.current().then(null, function () { return null; })]).then(function (r) {
+      var bundles = (r[0] && r[0].bundles) || [], cur = r[1] || {};
+      var keep = {};
+      if (cur.bundle && cur.bundle.id) keep[cur.bundle.id] = 1;
+      if (cur.next && cur.next.id) keep[cur.next.id] = 1;
+      var doomed = bundles.filter(function (b) { return b && b.id && b.id !== "builtin" && !keep[b.id]; });
+      return Promise.all(doomed.map(function (b) {
+        return p.delete({ id: b.id }).then(function () { return 1; }, function () { return 0; });
+      })).then(function (oks) {
+        var n = oks.reduce(function (a, b) { return a + b; }, 0);
+        try { if (n) console.info("[ota] purged " + n + " stale bundle(s)"); } catch (e) {}
+        return { removed: n };
+      });
+    }, function () { return { removed: 0 }; });
+  }
+
   window.SMD_OTA = {
     available: function () { return isNative() && !!plugin(); },
     isAuto: isAuto, setAuto: setAuto,
     currentVersion: function () { var v = myVersion(); return v > 0 ? v : null; },
+    versionLabel: function (v) { return versionLabel(arguments.length ? v : myVersion()); },
+    purgeOld: purgeOld,
     check: check, install: install,
   };
 

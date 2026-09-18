@@ -145,6 +145,9 @@
       "#sbMenu[data-sbr]{padding:12px 10px 8px}",
       "#sbMenu[data-sbr] .sbr-sec{padding:14px 14px 5px;font:700 11px/1.2 var(--sans,system-ui);letter-spacing:.075em;text-transform:uppercase;color:var(--slate-soft,#5a7184)}",
       "#sbMenu[data-sbr] .sbr-sec:first-child{padding-top:4px}",
+      "#sbMenu[data-sbr] .sbr-ver{display:flex;align-items:baseline;gap:7px;padding:2px 14px 10px;margin-bottom:2px;border-bottom:1px solid var(--line,#d7dee3);font:600 12px/1.3 var(--sans,system-ui);color:var(--slate-soft,#5a7184)}",
+      "#sbMenu[data-sbr] .sbr-ver b{font:800 15px/1.2 var(--sans,system-ui);color:var(--teal,#0e6e63);letter-spacing:.01em}",
+      "#sbMenu[data-sbr] .sbr-ver span{margin-left:auto;font:500 10.5px/1.3 var(--sans,system-ui);opacity:.8}",
       "#sbMenu[data-sbr] .sbr-row{position:relative;display:flex;align-items:center;gap:12px;width:100%;padding:8px 14px;margin-top:1px;border:none;border-radius:9px;background:none;cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 14px/1.3 var(--sans,system-ui)}",
       "#sbMenu[data-sbr] .sbr-row:hover{background:var(--paper,#eef2f0)}",
       "#sbMenu[data-sbr] .sbr-ic{width:19px;height:19px;flex:0 0 auto;color:var(--slate-soft,#5a7184)}",
@@ -365,7 +368,12 @@
   function otaSectionHTML() {
     try { if (!(window.SMD_OTA && SMD_OTA.available())) return ""; } catch (e) { return ""; }
     var on = false; try { on = !!SMD_OTA.isAuto(); } catch (e) {}
-    var ver = "current"; try { ver = SMD_OTA.currentVersion() || "current"; } catch (e) {}
+    // Same decimal ladder the sidebar header shows (native-ota.js owns it), with the exact bundle
+    // number alongside — the ladder is what the doctor says out loud, the bundle is what we debug.
+    var ver = "", cur = null;
+    try { cur = SMD_OTA.currentVersion(); } catch (e) {}
+    try { ver = SMD_OTA.versionLabel ? SMD_OTA.versionLabel() : ""; } catch (e) {}
+    ver = ver ? (ver + (cur ? " (bundle " + cur + ")" : " (built-in)")) : (cur ? String(cur) : "current");
     return '<div class="sbr-sec">Software Update</div>' +
       '<div class="sbr-card"><div class="sbr-tg"><div class="sbr-tg-l"><span class="sbr-tg-t">Automatic updates</span>' +
         '<span class="sbr-tg-s">Fetch new versions in the background</span></div>' +
@@ -392,8 +400,9 @@
       checkBtn.disabled = true; if (statusEl) statusEl.textContent = "Checking…";
       SMD_OTA.check().then(function (r) {
         checkBtn.disabled = false; r = r || {};
-        if (r.status === "available") { pending = r; if (statusEl) statusEl.textContent = "Update available: v" + r.version; if (installBtn) installBtn.style.display = ""; }
-        else if (r.status === "uptodate") { pending = null; if (statusEl) statusEl.textContent = "You're up to date" + (r.current ? " (v" + r.current + ")" : ""); if (installBtn) installBtn.style.display = "none"; }
+        var lbl = function (v) { try { return SMD_OTA.versionLabel ? SMD_OTA.versionLabel(v) : String(v); } catch (e) { return String(v); } };
+        if (r.status === "available") { pending = r; if (statusEl) statusEl.textContent = "Update available: " + lbl(r.version); if (installBtn) installBtn.style.display = ""; }
+        else if (r.status === "uptodate") { pending = null; if (statusEl) statusEl.textContent = "You're up to date (" + lbl(r.current) + ")"; if (installBtn) installBtn.style.display = "none"; }
         else { if (statusEl) statusEl.textContent = "Couldn't check — " + (r.error || "try again"); }
       });
     });
@@ -402,7 +411,19 @@
       installBtn.disabled = true;
       SMD_OTA.install(pending, function (pct) { if (statusEl) statusEl.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
         if (res && res.ok) { if (statusEl) statusEl.textContent = "Update ready — reopening…"; }
-        else { installBtn.disabled = false; if (statusEl) statusEl.textContent = "Install failed — " + ((res && res.error) || "try again"); }
+        else {
+          installBtn.disabled = false;
+          // Phrase it from the failure CODE, same vocabulary as the update banner. The raw code was
+          // reaching the screen verbatim ("Install failed — download-failed"), which tells a doctor
+          // nothing about what to do next.
+          var code = res && res.error;
+          if (statusEl) statusEl.textContent =
+            code === "network" ? "Download failed — check connection and try again" :
+            code === "storage" ? "Not enough space to download the update" :
+            code === "checksum" ? "Update didn't verify — try again later" :
+            code === "missing" ? "That update is no longer available" :
+            "Couldn't apply the update — try again later";
+        }
       });
     });
   }
@@ -422,9 +443,24 @@
       '<button class="sbr-row" data-sbr-act="workspace">' + svg("steth") +
         '<span class="sbr-lbl">' + (name || "Choose specialty") + '</span><span class="sbr-chev">▾</span></button>';
   }
+  /* WHICH VERSION AM I ON? — the first question on every support call, and after an OTA the answer
+   * differs from phone to phone. Pinned at the top of the sidebar so it is never hunted for: the
+   * readable ladder number big, and the exact bundle the device is actually running beside it. */
+  function verHTML() {
+    var label = "", exact = "";
+    try {
+      if (!(window.SMD_OTA && SMD_OTA.versionLabel)) return "";
+      label = SMD_OTA.versionLabel();
+      var v = SMD_OTA.currentVersion();
+      exact = v ? "bundle " + v : "built-in";
+    } catch (e) { return ""; }
+    if (!label) return "";
+    return '<div class="sbr-ver">StewardMD <b>' + label + '</b><span>' + exact + '</span></div>';
+  }
   function build(menu) {
     menu.setAttribute("data-sbr", "1");
     menu.innerHTML =
+      verHTML() +
       wsRow() +
       '<div class="sbr-sec">Tools</div>' +
       row("drugs", "pills", "Drugs Database") +

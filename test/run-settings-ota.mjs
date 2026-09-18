@@ -56,8 +56,10 @@ try {
       available: function(){ return true; },
       isAuto: function(){ return false; },
       setAuto: function(v){ window.__autoSet = v; },
-      currentVersion: function(){ return "12"; },
-      check: function(){ return Promise.resolve({ status: "available", version: 13 }); },
+      currentVersion: function(){ return 94; },
+      // the real ladder native-ota.js exports: one tenth per release, 94 is 1.2
+      versionLabel: function(v){ var t = 12 + ((arguments.length ? v : 94) - 94); return Math.floor(t/10) + "." + (t%10); },
+      check: function(){ return Promise.resolve({ status: "available", version: 95 }); },
       install: function(pending, onProgress){ onProgress(50); return Promise.resolve({ ok: true }); }
     };
     return 1;
@@ -69,7 +71,8 @@ try {
     return JSON.stringify({ sections: sec, statusText: ov.querySelector("#otaStatus").textContent, hasCheck: !!ov.querySelector("#otaCheck"), hasInstall: !!ov.querySelector("#otaInstall"), installHidden: ov.querySelector("#otaInstall").style.display === "none" });
   `);
   ok(withPlugin.sections.includes("Software Update"), `a "Software Update" section appears in the real Settings page (${JSON.stringify(withPlugin.sections)})`);
-  ok(withPlugin.statusText === "Version 12", `shows the current version (got "${withPlugin.statusText}")`);
+  // The readable ladder number is what the doctor says out loud; the bundle number is what we debug.
+  ok(withPlugin.statusText === "Version 1.2 (bundle 94)", `shows the exact running version (got "${withPlugin.statusText}")`);
   ok(withPlugin.hasCheck && withPlugin.hasInstall, "Check for updates and Download & install controls are both present");
   ok(withPlugin.installHidden === true, "Download & install starts hidden until a check finds something");
 
@@ -86,7 +89,7 @@ try {
   const afterCheck = await J(`
     return JSON.stringify({ status: document.getElementById("otaStatus").textContent, installShown: document.getElementById("otaInstall").style.display !== "none" });
   `);
-  ok(/available.*13/i.test(afterCheck.status), `Check for updates surfaces the found version (got "${afterCheck.status}")`);
+  ok(/available.*1\.3/i.test(afterCheck.status), `Check for updates surfaces the found version on the ladder (got "${afterCheck.status}")`);
   ok(afterCheck.installShown === true, "...and reveals Download & install");
 
   // ---- Download & install → progress text → success ----
