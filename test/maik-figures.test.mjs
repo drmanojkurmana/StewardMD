@@ -4,6 +4,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { pickFigure, findFigures } from "../functions/_figures.js";
+import { TRUSTED_MEDICAL_DOMAINS } from "../functions/_search.js";
 
 const PAGE = "https://www.med.unc.edu/medclerk/education/grading/hematuria/";
 const HTML = `
@@ -41,4 +42,10 @@ test("findFigures: untrusted pages and PDFs are skipped before any fetch; no key
   // TINYFISH_API_KEY absent: tinyfishSearch returns [] and so must we, without throwing.
   assert.deepEqual(await findFigures({}, "hematuria workup"), []);
   assert.deepEqual(await findFigures({ TINYFISH_API_KEY: "x" }, ""), []);
+});
+
+test("trusted sources span the specialties (owner: a melena question must reach AASLD / ACG / AGA / ASGE)", () => {
+  for (const d of ["aasld.org", "gi.org", "gastro.org", "asge.org", "bsg.org.uk", "acc.org", "escardio.org", "thoracic.org", "sccm.org", "kdigo.org", "nccn.org", "acog.org", "aap.org", "auanet.org", "rsna.org", "msdmanuals.com", "radiopaedia.org", "litfl.com"])
+    assert.ok(TRUSTED_MEDICAL_DOMAINS.includes(d), "missing " + d);
+  assert.ok(TRUSTED_MEDICAL_DOMAINS.length >= 80);
 });
