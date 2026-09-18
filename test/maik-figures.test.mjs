@@ -44,6 +44,30 @@ test("findFigures: untrusted pages and PDFs are skipped before any fetch; no key
   assert.deepEqual(await findFigures({ TINYFISH_API_KEY: "x" }, ""), []);
 });
 
+test("findFigures skips homepages, paywalled/blocking hosts and PDFs WITHOUT fetching them (production trace 2026-09-18)", async () => {
+  const fetched = [];
+  const realFetch = global.fetch;
+  global.fetch = async (url) => {
+    const u = String(url);
+    if (u.startsWith("https://api.search.tinyfish.ai")) return { ok: true, json: async () => ({ results: [
+      { title: "AASLD", url: "https://www.aasld.org/", snippet: "s" },                              // homepage
+      { title: "AGA", url: "https://gastro.org", snippet: "s" },                                    // homepage, no slash
+      { title: "UpToDate", url: "https://www.uptodate.com/contents/variceal-bleeding", snippet: "s" }, // paywalled
+      { title: "Medscape", url: "https://emedicine.medscape.com/article/1/overview", snippet: "s" }, // 403 to the Worker
+      { title: "Guideline PDF", url: "https://www.aasld.org/sites/default/files/varices.pdf", snippet: "s" },
+      { title: "PMC", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1/", snippet: "s" }
+    ] }) };
+    fetched.push(u);
+    return { ok: true, status: 200, headers: { get: () => "text/html" }, text: async () => '<figure><img src="/blobs/varices-g0001.jpg" alt="Figure 1" width="800"></figure>' };
+  };
+  try {
+    const r = await findFigures({ TINYFISH_API_KEY: "k" }, "variceal bleeding management", 3, { debug: true });
+    assert.deepEqual(fetched, ["https://pmc.ncbi.nlm.nih.gov/articles/PMC1/"], "only the article page is read");
+    assert.equal(r.length, 1); assert.equal(r[0].img, "https://pmc.ncbi.nlm.nih.gov/blobs/varices-g0001.jpg");
+    assert.deepEqual(r._debug.map((d) => d.skip || "read"), ["homepage", "homepage", "no-figures-host", "no-figures-host", "pdf", "read"]);
+  } finally { global.fetch = realFetch; }
+});
+
 test("trusted sources span the specialties (owner: a melena question must reach AASLD / ACG / AGA / ASGE)", () => {
   for (const d of ["aasld.org", "gi.org", "gastro.org", "asge.org", "bsg.org.uk", "acc.org", "escardio.org", "thoracic.org", "sccm.org", "kdigo.org", "nccn.org", "acog.org", "aap.org", "auanet.org", "rsna.org", "msdmanuals.com", "radiopaedia.org", "litfl.com"])
     assert.ok(TRUSTED_MEDICAL_DOMAINS.includes(d), "missing " + d);
