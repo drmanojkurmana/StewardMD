@@ -222,6 +222,40 @@ signed-up users see the lock immediately, the launch promo does not open it.
 is now unsold; leave it out of the review submission or delete it. Website plan ladder
 (Student/Intern/Resident/Physician Pro/Onco+ at ₹129-799) still differs from the in-app/App Store
 ladder (Trainee/Co-Resident/Pro/Physician/Physician Pro at ₹199-2,499).
+## 2026-09-18 · The paywall sells three plans, and every number on it comes from the server
+
+**Decision:** `pro-paywall.js` opens on THREE cards (Pro / Physician / Physician Pro) with **Physician
+preselected** and the **Annual** cycle preselected. Trainee and Co-Resident sit behind a quiet
+"I’m a student or resident" link: self-selection keeps the default view premium without making a
+cheaper tier unbuyable (the link reveals them, a revealed tier never re-hides, and the CTA follows
+whatever is selected). Each card leads with a per-day figure ("₹21 a day. Less than a samosa, and it
+runs your clinic.") over one benefit line; a sticky bottom bar always names the tier, the amount and
+the period. The Onco add-on is back and is offered on EVERY tier, priced from `plans.addons.onco`.
+
+**Why the honesty rules shaped it more than the conversion playbook.** Three tactics were asked for
+and three were changed:
+1. **Strike-throughs and SAVE% come only from the server’s `regular`** (x12 on an annual card). No
+   `regular`, or one that is not higher, renders nothing. Inventing a "was" price is misleading-MRP
+   territory under Indian consumer law and fails App Store review.
+2. **The CTA does NOT say "Start 7 days free, then ₹7,499/year".** No purchase path here begins with
+   a free period: Razorpay charges on the spot and no StoreKit introductory offer is configured. The
+   bar reads "Subscribe to Physician · ₹7,490/year" with "Cancel anytime" under it. The free access
+   some accounts already hold is still stated by the banner, from `/api/billing/status`.
+3. **The add-on’s "3-day trial everyone gets" renders only if the server sends `addons.onco.trialDays`.**
+   Nothing server-side grants an onco trial today, so the sentence stays off until it does.
+No countdown, no scarcity, no clinical outcome claim, no statistic, and only assistive framing for
+MaiK Voice Scribe ("offers the differentials worth considering"), because a doctor who trusts the AI not to miss
+checks less carefully.
+
+**Trade-off:** the default view hides two real tiers behind a tap, and the strike-through disappears
+entirely if a KV price edit drops `regular`. Both are deliberate: reachable beats prominent, and a
+missing anchor beats a fabricated one.
+
+**Status:** `test/paywall-render.test.mjs` 17/17 (three-card default, preselection, reveal link,
+SAVE% from `regular`, no-`regular` → no strike, CTA text per selection, per-day maths both cycles,
+benefit lines, and every rupee on a card traced back to the payload), `paywall-interceptor` 4/4,
+`paywall-resync` 6/6, `pro-notice` 11/11, `no-ui-emoji` pass, and `test/run-paywall-ui.mjs` 28/28 in
+headless Chrome against `test/fixtures/paywall-sheet.html`.
 
 ## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
 
