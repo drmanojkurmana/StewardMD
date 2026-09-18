@@ -13,7 +13,9 @@ import { fetchWithTimeout } from "./_fetch.js";
 import { tinyfishSearch, isTrustedUrl } from "./_search.js";
 
 const PAGE_BYTES = 400 * 1024;
-const JUNK = /logo|icon|sprite|avatar|badge|banner|button|pixel|tracking|spacer|arrow|social|share|\.svg(\?|$)|\.gif(\?|$)|1x1|blank\./i;
+// Live check 2026-09-18: NCBI's <noscript> stat beacon (/stat?jsdisabled=...) and Drupal "styles"
+// stock photos (diabetes.org "co-worker giving a high five", IDSA branding photo) were being picked.
+const JUNK = /logo|icon|sprite|avatar|badge|banner|button|pixel|tracking|spacer|arrow|social|share|\.svg(\?|$)|\.gif(\?|$)|1x1|blank\.|\/stat\?|jsdisabled|\/styles\/|stock|hero|branding|program_card|placeholder/i;
 const FIGURE_HINT = /algorithm|flowchart|flow-chart|figure|fig[-_]?\d|chart|diagram|pathway|criteria|table|schema|ecg|ekg|xray|x-ray|ct-|mri|scan/i;
 const STOP = /^(?:the|of|and|for|in|on|with|to|a|an|is|are|vs|or|workup|work-up|management|treatment|approach|evaluation)$/i;
 
@@ -46,11 +48,12 @@ export function pickFigure(html, pageUrl, topic) {
     if ((w && w < 200) || (hh && hh < 120)) continue;
     // Context: the 600 characters before the tag (a <figure>, a heading, a caption class).
     const before = h.slice(Math.max(0, m.index - 600), m.index);
-    let score = 0;
-    score += 3 * hit(alt + " " + title);
-    score += 2 * hit(src);
+    // The image ITSELF must name the topic or look like a figure. Surrounding page text only adds
+    // score: a stock photo sitting under a paragraph about DKA is not a DKA figure.
+    const own = 3 * hit(alt + " " + title) + 2 * hit(src) + ((FIGURE_HINT.test(src) || FIGURE_HINT.test(alt)) ? 2 : 0);
+    if (own <= 0) continue;
+    let score = own;
     score += hit(before);
-    if (FIGURE_HINT.test(src) || FIGURE_HINT.test(alt)) score += 2;
     if (/<figure\b/i.test(before) && !/<\/figure>/i.test(before)) score += 2;
     if (w >= 400 || hh >= 300) score += 1;
     if (score <= 0) continue;

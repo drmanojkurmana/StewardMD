@@ -49,3 +49,13 @@ test("trusted sources span the specialties (owner: a melena question must reach 
     assert.ok(TRUSTED_MEDICAL_DOMAINS.includes(d), "missing " + d);
   assert.ok(TRUSTED_MEDICAL_DOMAINS.length >= 80);
 });
+
+test("LIVE FINDINGS 2026-09-18: beacons and stock photos are never figures, even under on-topic text", () => {
+  const dka = "https://www.ncbi.nlm.nih.gov/books/NBK560723/";
+  // NCBI <noscript> stat beacon: an <img> with no alt sitting under a page full of the topic word.
+  assert.equal(pickFigure('<p>Adult diabetic ketoacidosis management</p><noscript><img alt="" src="https://www.ncbi.nlm.nih.gov/stat?jsdisabled=true&amp;ncbi_db=books&amp;ncbi_pagename=Adult%20Diabetic%20Ketoacidosis"></noscript>', dka, "diabetic ketoacidosis management"), null);
+  // Drupal stock photo next to on-topic prose, no alt naming the topic.
+  assert.equal(pickFigure('<h2>DKA treatment</h2><p>diabetic ketoacidosis ...</p><img src="https://diabetes.org/sites/default/files/styles/program_card_392x560_/public/2023-09/co-worker-high-five.png.webp" alt="" width="392" height="560">', "https://diabetes.org/living-with-diabetes/dka", "diabetic ketoacidosis management"), null);
+  // A real figure whose alt is only "Figure 1" still qualifies through the figure hint.
+  assert.equal(pickFigure('<figure><img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/x/fped-09-780356-g0001.jpg" alt="Figure 1" width="800"></figure>', "https://pmc.ncbi.nlm.nih.gov/articles/PMC8692886/", "melena workup").img, "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/x/fped-09-780356-g0001.jpg");
+});
