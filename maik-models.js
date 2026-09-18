@@ -383,6 +383,18 @@
         sha256: "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54"   // lfs.oid from the HF API
       }]
     },
+    /* TERNARY BONSAI 2 27B (PrismML, 2026-09-17, Qwen3.8-27B base, 98.2% of full precision, same
+     * 5.9 GB class) is NOT shippable on our runtime yet, checked 2026-09-19 on the owner's request:
+     *   - every official GGUF is a fork-only type: PTQ1_0 (5,946,648,928 B), PQ2_0 (7,206,168,928 B),
+     *     and the -dev repo's "Q2_0-prism-fork-required" (7,626,008,928 B). The model card: "Stock
+     *     llama.cpp will not run these files. It rejects PQ2_0 and PTQ1_0 as unknown types ... it has
+     *     no Hadamard activation runtime." Our plugin links MAINLINE llama.cpp b10502.
+     *   - no mainline g64 variant was published this time (the 8B ternary above has one).
+     *   - 5.95 GB is 2.1 GB more than this pack; the 12 GB floor would rise further.
+     * Upgrading means moving local-plugins/capacitor-llama to PrismML's fork
+     * (github.com/PrismML-Eng/llama.cpp: new iOS xcframework + Android submodule) or waiting for
+     * mainline to carry the types. Until then this pack stays on Bonsai 27B (v1). A 5.9 GB download
+     * that fails to load would be the one outcome the picker must never produce. */
     "bonsai-27b": {
       label: "MAiK Bonsai Max",
       actual: "Bonsai 27B (PrismML, GGUF Q1_0 g128, 1-bit, Qwen3.6 backbone)",

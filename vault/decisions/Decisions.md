@@ -29,6 +29,24 @@ figure pages like the UNC AUA algorithm do), and the rule is the OCR rule: show 
 a wrong image. No KV cache of results by the owner's instruction, so each answer costs one TinyFish
 query plus up to five page reads. Shipped behind the flag. Tests: `test/maik-figures.test.mjs`.
 
+## 2026-09-19 · Ternary Bonsai 2 27B: not shippable on our llama.cpp; pack stays on Bonsai 27B v1
+
+**Owner:** update the Bonsai packs to PrismML's 17 Sep 2026 release (Ternary Bonsai 2 27B, Qwen3.8-27B
+base, 98.2% of full precision, 5.9 GB class, Apache 2.0).
+
+**Finding.** Every official GGUF (`prism-ml/Ternary-Bonsai-2-27B-gguf`: PTQ1_0 5.95 GB, PQ2_0 7.21 GB;
+`-gguf-dev`: Q2_0 "prism-fork-required" 7.63 GB) is a fork-only type. The model card states stock
+llama.cpp rejects PTQ1_0/PQ2_0 as unknown types and lacks the Hadamard activation runtime. Our
+`capacitor-llama` plugin links mainline b10502. No mainline g64 file was published (the 8B ternary
+has one, which is why `bonsai-ternary-8b` works). There is no Bonsai 2 at 8B or 4B.
+
+**Decision.** No pack change. Shipping a 5.9 GB download that cannot load is the one failure the
+picker must never produce. Documented in `maik-models.js` above the `bonsai-27b` pack.
+
+**Path to adopt.** Move the plugin to PrismML's fork (`github.com/PrismML-Eng/llama.cpp`): new iOS
+xcframework and Android submodule, then re-verify every existing pack on both phones. Or wait for
+mainline llama.cpp to carry the types. Either is a separate engineering task; logged in Roadmap.
+
 ## 2026-09-18 · A dose question is a database lookup, not a model question
 
 **Owner:** "tell me dose of ondansetron … we already have the drug database it can redirect … dose of
