@@ -867,7 +867,10 @@
           } else {
             text = g.text;
             if (g.general) text += "\n\n" + GENERAL_HEAD + "\n" + g.general;
-            if (g.removed.length) text += "\n\nLeft out: " + g.removed.length + " statement" + (g.removed.length === 1 ? "" : "s") + " the Knowledge Base did not support.";
+            // The count of removed statements is a verdict on the pipeline, not clinical content; it
+            // used to be printed inside the answer ("Left out: 3 statements ..."). It now travels in
+            // result.grounding.removed and the UI shows it in the small perf/meta line (owner audit,
+            // 2026-09-19: offline answers should read like MaiK's, not like a log).
             text += "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
           }
           groundingOut = { verdict: g.verdict, stats: g.stats, claims: g.claims, removed: g.removed, citations: g.citations };

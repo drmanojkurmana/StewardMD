@@ -84,5 +84,6 @@ test("end to end: the follow-up is grounded on the previous topic and its doses 
   const plain = r.text.replace(/\*\*/g, "");   // emphasize() bolds drugs and doses for the renderer
   assert.match(plain, /Amlodipine 5 to 10 mg/); assert.match(plain, /Losartan 50 to 100 mg/);
   assert.doesNotMatch(plain, /Atenolol/, "a dose for a drug the passage does not have is left out");
-  assert.match(plain, /Left out: 1 statement/);
+  assert.doesNotMatch(plain, /Left out:/, "the verdict no longer sits inside the clinical text (owner audit 2026-09-19)");
+  assert.equal(r.grounding.removed.length, 1, "it travels in result.grounding for the UI's meta line");
 });
