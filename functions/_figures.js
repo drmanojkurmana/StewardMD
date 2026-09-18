@@ -74,23 +74,42 @@ export function pickFigure(html, pageUrl, topic) {
   return best;
 }
 
-/* -> [{ img, page, site, title }] up to `max`, one per trusted page. Never throws. */
-export async function findFigures(env, topic, max = 3) {
+// The page read is what a browser would send. Live check 2026-09-18: aafp.org and medscape.com
+// were in TinyFish's top five for hematuria and pick fine from a laptop, yet produced nothing
+// from the Worker; a bare "figure lookup" UA from a datacenter address is the usual reason.
+const PAGE_HEADERS = {
+  "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+  "Accept-Language": "en-US,en;q=0.9",
+  "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+};
+
+/* -> [{ img, page, site, title }] up to `max`, one per trusted page. Never throws.
+ * opts.debug: also return `_debug` (per-page status, content type, image count, pick) so the
+ * production behaviour can be read without guessing; public pages only, never PHI. */
+export async function findFigures(env, topic, max = 3, opts = {}) {
   const q = String(topic || "").trim().slice(0, 200);
   if (!q) return [];
   let pages = [];
   try { pages = await tinyfishSearch(env, q); } catch (e) { pages = []; }
   pages = (pages || []).filter((p) => p && /^https:\/\//i.test(p.url) && !/\.pdf(\?|$)/i.test(p.url)).slice(0, 5);
+  const debug = [];
   const found = await Promise.all(pages.map(async (p) => {
-    if (!isTrustedUrl(p.url)) return null;
+    const d = { url: p.url };
+    debug.push(d);
+    if (!isTrustedUrl(p.url)) { d.skip = "untrusted"; return null; }
     const host = new URL(p.url).hostname;
     try {
-      const r = await fetchWithTimeout(p.url, { headers: { "Accept": "text/html", "User-Agent": "Mozilla/5.0 (StewardMD figure lookup)" }, redirect: "follow" }, 6000);
-      if (!r.ok || !/text\/html/i.test(r.headers.get("content-type") || "")) return null;
+      const r = await fetchWithTimeout(p.url, { headers: PAGE_HEADERS, redirect: "follow" }, 6000);
+      d.status = r.status; d.type = (r.headers.get("content-type") || "").slice(0, 40);
+      if (!r.ok || !/text\/html/i.test(d.type)) return null;
       const html = (await r.text()).slice(0, PAGE_BYTES);
+      d.bytes = html.length; d.imgs = (html.match(/<img\b/gi) || []).length;
       const f = pickFigure(html, p.url, q);
+      d.pick = f ? f.img : null;
       return f ? { img: f.img, page: p.url, site: host.replace(/^www\./, ""), title: String(p.title || f.alt || host).slice(0, 160), score: f.score } : null;
-    } catch (e) { return null; }
+    } catch (e) { d.error = String((e && e.message) || e).slice(0, 80); return null; }
   }));
-  return found.filter(Boolean).sort((a, b) => b.score - a.score).slice(0, max).map(({ score, ...rest }) => rest);
+  const out = found.filter(Boolean).sort((a, b) => b.score - a.score).slice(0, max).map(({ score, ...rest }) => rest);
+  if (opts.debug) out._debug = debug;
+  return out;
 }
