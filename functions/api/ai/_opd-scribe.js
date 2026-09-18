@@ -32,9 +32,11 @@ const YES_NO_KEYS = new Set([
   "tenderness", "abdoMass"
 ]);
 
-export function scribeExtractPrompt(transcript) {
+export function scribeExtractPrompt(transcript, opts) {
+  const specialtyPrompt = opts && typeof opts.specialtyPrompt === "string" ? opts.specialtyPrompt.trim() : "";
   return "You are an expert OPD scribe turning a doctor-patient consultation transcript into a structured clinical note.\n" +
-    "Return ONLY JSON: {\"en\":\"\", \"emrFields\":{...}, \"suggestions\":{\"provisionalDx\":\"\",\"ddx\":[],\"investigations\":[]}}.\n" +
+    "Return ONLY JSON: {\"en\":\"\", \"emrFields\":{...}, \"sources\":{\"<emrFieldKey>\":\"<verbatim transcript sentence>\"}, " +
+    "\"suggestions\":{\"provisionalDx\":\"\",\"ddx\":[],\"investigations\":[]}}.\n" +
     "\"en\" = a FAITHFUL English translation of the ENTIRE transcript, verbatim meaning, keeping ALL " +
     "spoken vitals/numbers/units exactly (e.g. 'BP 120/80, pulse 88, temp 101, SpO2 96') — this is used " +
     "for on-device structured extraction, so preserve numbers and clinical terms; do not summarise it.\n" +
@@ -69,6 +71,16 @@ export function scribeExtractPrompt(transcript) {
     "  Add top-level \"alcoholDetail\" with exact amount + type stated (e.g. '60 ml whisky daily').\n" +
     "- provisionalDx: ONLY if the clinician explicitly stated their own diagnosis assessment.\n" +
     "- managementPlan: doctor's stated treatment advice or prescription plan.\n" +
+    (specialtyPrompt ? specialtyPrompt + "\n" : "") +
+    "NEGATION AND TIME — CRITICAL: a symptom or condition the patient or doctor explicitly DENIES (e.g. 'no fever', " +
+    "'denies vomiting', 'not diabetic') must NEVER be written as present anywhere in emrFields; record it as a pertinent " +
+    "negative in presentHx/pastHx instead (e.g. 'denies fever'). Preserve every stated duration and onset (e.g. " +
+    "'fever for 3 days', 'since Monday', 'stopped metformin last month') in the field text — never drop it. A medicine " +
+    "the patient has STOPPED is NOT a current medicine — record it as discontinued (e.g. in pastHx/treatmentReceived), " +
+    "never as an ongoing home medication.\n" +
+    "SOURCES — CRITICAL: for every emrFields key you populate, add the SAME key to \"sources\" with one sentence copied " +
+    "VERBATIM from the transcript that supports that field's content. Never paraphrase, translate or invent a source " +
+    "sentence; if you cannot point to a supporting sentence, do not populate the field.\n" +
     "RULES: use ONLY what is explicitly said; NEVER invent a diagnosis, symptom, finding, drug, dose or investigation. " +
     "PATIENT-REPORTED complaints/history go to presentHx/pastHx (never to vitals/exam or as confirmed findings). " +
     "ddx = a short reasonable differential FOR THE DOCTOR TO CONSIDER (label as consideration, not fact). " +
@@ -102,9 +114,106 @@ export function sanitizeScribeOutput(parsed) {
       out.emrFields[k] = s;
     }
   });
+  // sources: same whitelist, same string cleaning + length cap as emrFields. Additive/optional --
+  // only present when the model actually supplied at least one verbatim supporting sentence.
+  const src = parsed.sources || {};
+  const sources = {};
+  EMR_FIELD_KEYS.forEach(k => {
+    const v = src[k];
+    if (typeof v === "string" || typeof v === "number") {
+      const s = stripIndic(String(v).replace(/\s+/g, " ").trim()).slice(0, 2000);
+      if (s) sources[k] = s;
+    }
+  });
+  if (Object.keys(sources).length) out.sources = sources;
   const sg = parsed.suggestions || {};
   if (typeof sg.provisionalDx === "string" && stripIndic(sg.provisionalDx)) out.suggestions.provisionalDx = stripIndic(sg.provisionalDx).slice(0, 300);
   const clean = a => (Array.isArray(a) ? a : []).map(x => stripIndic(String(x || "").replace(/\s+/g, " ").trim())).filter(Boolean).slice(0, 12);
   out.suggestions.ddx = clean(sg.ddx); out.suggestions.investigations = clean(sg.investigations);
+  return out;
+}
+
+/* ── Task 6: source grounding ──────────────────────────────────────────────
+ * A populated emrFields key is only trustworthy if the "sources" sentence claimed for it really
+ * appears in the transcript. This never DROPS an ungrounded field (a hallucinated citation is not
+ * proof the fact itself is wrong, and the doctor is the one reading the transcript) -- it only
+ * reports which fields the app should badge as unverified. */
+function normalizeForMatch(s) {
+  return String(s || "").toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim();
+}
+function fuzzySentenceMatch(transcript, sourceSentence) {
+  const hay = normalizeForMatch(transcript);
+  const needle = normalizeForMatch(sourceSentence);
+  if (!needle) return false;
+  if (hay.includes(needle)) return true;
+  // fuzzy: a translated/lightly-cleaned quote may reorder or drop small words -- accept a
+  // high-overlap match on the meaningful (3+ char) words instead of an exact substring.
+  const words = needle.split(" ").filter(w => w.length > 2);
+  if (!words.length) return false;
+  const hayWords = new Set(hay.split(" "));
+  const hits = words.filter(w => hayWords.has(w)).length;
+  return (hits / words.length) >= 0.7;
+}
+export function verifySources(transcript, sanitized) {
+  const grounded = [], ungrounded = [];
+  const ef = (sanitized && sanitized.emrFields) || {};
+  const sources = (sanitized && sanitized.sources) || {};
+  EMR_FIELD_KEYS.forEach(k => {
+    const v = ef[k];
+    if (typeof v !== "string" || !v) return;   // only populated fields need a citation
+    const s = sources[k];
+    if (typeof s === "string" && s && fuzzySentenceMatch(transcript, s)) grounded.push(k);
+    else ungrounded.push(k);
+  });
+  return { grounded, ungrounded };
+}
+
+/* ── Task 10: negation / stopped-medicine contradiction check ────────────────────────────────
+ * Conservative by design: only flags a field that asserts a term the transcript explicitly negates
+ * (or says was stopped) in the SAME clause the field itself does not also negate. Misses are fine
+ * (fewer negation phrasings caught); false alarms are not -- so a short, generic word list is
+ * excluded from ever being treated as "the term". */
+const CONTRADICTION_STOPWORDS = new Set([
+  "history", "issue", "issues", "problem", "problems", "complaint", "complaints", "mention",
+  "mentioned", "reports", "reported", "stated", "said", "information", "details", "detail",
+  "note", "notes", "comment", "comments", "thing", "things", "other", "others", "idea", "reason", "reasons"
+]);
+function lastWord(phrase) {
+  const parts = String(phrase || "").trim().split(/\s+/);
+  return (parts[parts.length - 1] || "").toLowerCase();
+}
+function assertsPositive(fieldText, term) {
+  const lower = String(fieldText || "").toLowerCase();
+  const idx = lower.indexOf(term);
+  if (idx === -1) return false;
+  // if the field's OWN text negates/stops the term in the same clause, it's a correctly recorded
+  // pertinent negative / discontinued medicine, not a contradiction.
+  const before = lower.slice(Math.max(0, idx - 30), idx);
+  if (/\b(?:no|denies|denied|without|stopped|discontinued|off|negative for|absence of)\b[^.;]*$/.test(before)) return false;
+  return true;
+}
+export function flagContradictions(transcript, sanitized) {
+  const out = [];
+  const t = String(transcript || "");
+  const ef = (sanitized && sanitized.emrFields) || {};
+  const cues = [];
+  const NEG_RE = /\b(?:no|denies|denied|without|negative for|absence of)\s+([a-z]{3,})/gi;
+  const STOP_RE = /\b(?:stopped|discontinued)\s+([a-z]{3,})/gi;
+  let m;
+  while ((m = NEG_RE.exec(t))) cues.push({ term: lastWord(m[1]), reason: "the transcript explicitly denies this" });
+  while ((m = STOP_RE.exec(t))) cues.push({ term: lastWord(m[1]), reason: "the transcript says this was stopped/discontinued" });
+  const seen = new Set();
+  EMR_FIELD_KEYS.forEach(key => {
+    const val = ef[key];
+    if (typeof val !== "string" || !val) return;
+    cues.forEach(({ term, reason }) => {
+      if (!term || term.length < 3 || CONTRADICTION_STOPWORDS.has(term)) return;
+      if (!assertsPositive(val, term)) return;
+      const dedupe = key + "|" + term;
+      if (seen.has(dedupe)) return;
+      seen.add(dedupe);
+      out.push({ field: key, term, reason });
+    });
+  });
   return out;
 }

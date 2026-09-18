@@ -2093,7 +2093,11 @@ export async function onRequest(context) {
         // Vitals + exam are handled deterministically on-device (never the LLM). Output is
         // whitelisted to narrative fields + three suggestion arrays, so no invented diagnosis,
         // symptom, finding, dose, vital or investigation can reach the app.
-        const prompt = scribeExtractPrompt(transcript);
+        // specialtyPrompt: an already-resolved block of extra instruction lines for a specialty
+        // template (the template registry mapping body.specialty -> this text lives elsewhere);
+        // capped defensively since it comes from the request body.
+        const specialtyPrompt = typeof body.specialtyPrompt === "string" ? body.specialtyPrompt.slice(0, 4000) : "";
+        const prompt = scribeExtractPrompt(transcript, specialtyPrompt ? { specialtyPrompt } : undefined);
         let text;
         try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }

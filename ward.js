@@ -62,7 +62,10 @@
      * LABELLED with, and the unit that box then SENDS - so the screen and the record can never
      * disagree about whether 98.6 is Fahrenheit. "IN" until the server answers. */
     region: "IN",
-    busy: false, err: "", note: "", refusal: null, loaded: false
+    busy: false, err: "", note: "", refusal: null, loaded: false,
+    // MaiK Scribe for the ward round / progress note (item 16). See wardScribeOn() below -- OFF by
+    // default, and inert (no capture object, no draft) until a device turns the flag on.
+    wardScribeCapture: null, wardScribeOn: false, wardScribeStatus: "", wardScribeDraft: "", wardScribeTranscript: ""
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
@@ -2342,6 +2345,110 @@
         } else paint();
       }, wT("ward.could-not-save-that-note", "Could not save that note."));
   }
+  /* MaiK Scribe for the ward round / progress note (item 16, WardSynQ). OFF by default --
+   * localStorage.setItem("smd_ward_scribe","on") turns it on for one device pending a real ward
+   * verification (there is no automated way to drive a real consultation + ward record here).
+   *
+   * Reuses SMD_AMBIENT.start (voice-ambient.js) exactly as opd-emr.js's startVoice does, and the
+   * SAME server extract opd-emr.js's doRefine calls (kind:"opd-scribe") to turn the transcript into
+   * a clean English narrative. There is no OPD-style structured EMR schema for a ward note -- it is
+   * one free-text field -- so the LLM's "en" translation (a faithful, de-noised English rendering of
+   * the whole transcript) IS the draft; emrFields/suggestions are not used.
+   *
+   * SAFETY GATES (same as OPD, adapted to a single free-text field):
+   *  - Nothing reaches the record without an explicit Accept: the draft only ever lands in the
+   *    textarea via wardScribeInsert(), which runs on a doctor's tap on "Add to note", and the note
+   *    itself is not saved until the existing "Save note / instruction" button (timelineNoteSave)
+   *    is pressed. Two gates, unchanged from before this feature existed.
+   *  - A field the doctor edited is never silently overwritten: wardScribeAppend() only ever
+   *    APPENDS to whatever is already in the box, never replaces it, and never runs except on that
+   *    explicit tap -- there is no live auto-fill here at all, which is a stricter gate than OPD's
+   *    touched-guard (OPD's is needed because it fills fields live while dictating; a single note
+   *    field does not).
+   *  - Garbled audio and cloud upload are guarded upstream, in voice.js (isGarbled) and
+   *    voice-ambient.js (noCloud:true) -- this file only calls SMD_AMBIENT.start(), never a
+   *    lower-level API, so both guards apply unchanged.
+   *
+   * ponytail: no _voiceMerge-style per-field touched-guard here -- one field has nothing to
+   * conflict with itself. Upgrade path if a ward note ever grows structured fields: lift the merge
+   * shape from opd-emr.js's _voiceMerge (exposed as window.OPDEMR._voiceMerge) into a real shared
+   * file at that point, rather than copying it now for a feature that does not need it yet.
+   */
+  function wardScribeOn() { try { return localStorage.getItem("smd_ward_scribe") === "on"; } catch (e) { return false; } }
+  // PURE: append an accepted scribe draft to whatever is already in the note box. Never replaces --
+  // an edited note is never silently overwritten -- and a repeated Accept of the same draft text is
+  // a no-op rather than a duplicate line. Exposed as WARD._wardScribeAppend for testing.
+  function wardScribeAppend(existing, draft) {
+    existing = String(existing == null ? "" : existing);
+    draft = String(draft == null ? "" : draft).trim();
+    if (!draft) return existing;
+    var trimmed = existing.replace(/\s+$/, "");
+    if (!trimmed) return draft;
+    if (trimmed.indexOf(draft) !== -1) return existing;
+    return trimmed + "\n" + draft;
+  }
+  function wardScribeRefine(transcript) {
+    if (!transcript) return;
+    var extract = G.SMD_AI && G.SMD_AI.extract;
+    if (!extract) { st.wardScribeDraft = transcript.trim(); paint(); return; }
+    extract(transcript, "opd-scribe").then(function (r) {
+      st.wardScribeDraft = ((r && !r.error && r.en) ? r.en : transcript).trim();
+      paint();
+    }).catch(function () { st.wardScribeDraft = transcript.trim(); paint(); });
+  }
+  function startWardScribe() {
+    if (!G.SMD_AMBIENT) { dictSay(wT("ward.scribe-unavailable", "MaiK Scribe is not available on this build.")); return; }
+    st.wardScribeOn = true; st.wardScribeDraft = ""; st.wardScribeTranscript = "";
+    st.wardScribeStatus = wT("ward.scribe-starting", "Starting…"); paint();
+    st.wardScribeCapture = G.SMD_AMBIENT.start({
+      speaker: "doctor", language: "auto", chunkMs: 15000, refineEveryChunks: 8,
+      getState: function () { return {}; },
+      onTranscript: function (t) { st.wardScribeTranscript = t || ""; },
+      onState: function (s) {
+        st.wardScribeStatus = s === "listening" ? wT("ward.scribe-listening", "MaiK Scribe is listening")
+          : s === "fallback" ? wT("ward.scribe-fallback", "Whisper model not installed - using device dictation")
+          : s === "preparing" ? wT("ward.scribe-preparing", "Preparing model…")
+          : s === "downloading" ? wT("ward.scribe-downloading", "Downloading model…") : "";
+        paint();
+      },
+      onRefine: wardScribeRefine,
+      onError: function () {
+        st.wardScribeStatus = wT("ward.scribe-error", "Voice error - tap to retry.");
+        st.wardScribeOn = false; st.wardScribeCapture = null; paint();
+      }
+    });
+  }
+  function stopWardScribe() {
+    if (st.wardScribeCapture) { try { st.wardScribeCapture.stop(); } catch (e) {} }
+    st.wardScribeCapture = null; st.wardScribeOn = false; st.wardScribeStatus = ""; paint();
+  }
+  // Accept: the draft joins the note textarea exactly as if typed. Save note / instruction still has
+  // to be tapped separately -- this never submits anything on its own.
+  function wardScribeInsert() {
+    var joined = wardScribeAppend(val("wTlNote") || st.noteDraft || "", st.wardScribeDraft);
+    st.noteDraft = joined; st.wardScribeDraft = "";
+    var el = document.getElementById("wTlNote"); if (el) el.value = joined;
+    paint();
+  }
+  function wardScribeMicBtn(state) {
+    if (!wardScribeOn() || !G.SMD_AMBIENT) return "";
+    var on = !!state.wardScribeOn;
+    return '<button type="button" class="w-mic-btn' + (on ? " recording" : "") + '" data-w-act="' +
+      (on ? "wardscribestop" : "wardscribestart") + '" title="' + wTA("ward.scribe-title", "MaiK Scribe: listen and draft this note") + '">' +
+      ms(on ? "stop_circle" : "graphic_eq") + "</button>";
+  }
+  function wardScribePanel(state) {
+    if (!wardScribeOn() || !G.SMD_AMBIENT) return "";
+    if (!state.wardScribeOn && !state.wardScribeDraft) return "";
+    var status = state.wardScribeOn ? '<p class="w-hint">' + ms("mic") + esc(state.wardScribeStatus || wT("ward.scribe-listening", "MaiK Scribe is listening")) + "</p>" : "";
+    var draft = state.wardScribeDraft
+      ? '<div class="w-scribe-draft"><p class="w-hint">' + ms("auto_awesome") + wTH("ward.scribe-draft-label", "MaiK Scribe draft - review before adding") + "</p>" +
+        "<p>" + esc(state.wardScribeDraft) + "</p>" +
+        '<button class="w-btn ghost sm" data-w-act="wardscribeaccept">' + ms("check") + wTH("ward.scribe-insert", "Add to note") + "</button>" +
+        '<button class="w-btn ghost sm" data-w-act="wardscribediscard">' + ms("close") + wTH("ward.scribe-discard", "Discard") + "</button></div>"
+      : "";
+    return status + draft;
+  }
   function filterLabel(v) {
     for (var i = 0; i < TIMELINE_FILTERS.length; i++) if (TIMELINE_FILTERS[i][0] === v) return wTEn(TIMELINE_FILTERS[i][1]);
     return v;
@@ -2378,7 +2485,8 @@
        * told "your role cannot do that" also lost the note they had just written - the one moment
        * the text is most worth keeping, because the fix is to fetch someone who CAN sign it, not to
        * type it again. st.noteDraft is held across paints and only cleared on a successful save. */
-      '<div style="position:relative;"><textarea id="wTlNote" class="w-input" rows="5" placeholder="Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen.">' + esc(state.noteDraft || "") + '</textarea><div style="position:absolute; right:8px; top:8px;">' + micBtn("wTlNote") + '</div></div>' +
+      '<div style="position:relative;"><textarea id="wTlNote" class="w-input" rows="5" placeholder="Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen.">' + esc(state.noteDraft || "") + '</textarea><div style="position:absolute; right:8px; top:8px;">' + micBtn("wTlNote") + wardScribeMicBtn(state) + '</div></div>' +
+      wardScribePanel(state) +
       (state.noteErr ? '<p class="w-hint warn">' + ms("warning") + esc(state.noteErr) + wEnglishOf(state.noteErr) + "</p>" : "") +
       '<button class="w-btn" data-w-act="timelinenote">' + ms("save") + wTH("ward.save-note-instruction", "Save note / instruction") + "</button></div>" +
       detailPanel(state) +
@@ -15671,6 +15779,10 @@
     if (cmd === "timeline") { timelineOpen(); return; }
     if (cmd === "timelineload") { loadChart(); return; }
     if (cmd === "timelinenote") { timelineNoteSave(); return; }
+    if (cmd === "wardscribestart") { startWardScribe(); return; }
+    if (cmd === "wardscribestop") { stopWardScribe(); return; }
+    if (cmd === "wardscribeaccept") { wardScribeInsert(); return; }
+    if (cmd === "wardscribediscard") { st.wardScribeDraft = ""; paint(); return; }
     if (cmd === "labboard") { labBoardOpen(); return; }
     if (cmd === "labboardload") { loadLabBoard(); return; }
     if (cmd === "analyserrelease") { analyserReleaseAct(arg, ""); return; }
@@ -16417,5 +16529,8 @@
 
   G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _growthCard: growthCard, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _balanceWindow: balanceWindow, _scoreWhyNot: scoreWhyNot, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut,
     // The one staff identity rendering, for discharge.js (owner 2026-09-16: name and employee id wherever staff are named).
-    _who: staffWho, _whoText: whoText, _whoFetch: whoFetch, _whoInfo: whoInfo };
+    _who: staffWho, _whoText: whoText, _whoFetch: whoFetch, _whoInfo: whoInfo,
+    // MaiK Scribe for the ward round note (item 16), exposed for testing.
+    _wardScribeOn: wardScribeOn, _wardScribeAppend: wardScribeAppend, _wardScribeRefine: wardScribeRefine,
+    _startWardScribe: startWardScribe, _stopWardScribe: stopWardScribe, _wardScribeInsert: wardScribeInsert };
 })();

@@ -1580,6 +1580,14 @@
     "(dm/htn/cardiac/asthma/tb/thyroid/epilepsy/ckd/cld/cancer/cva/dyslipidemia/familyHistory/familyDiabetes/familyHtn/familyHeart/familyCancer/familyTb/familyAsthma/tenderness/abdoMass as 'Yes'/'No' if stated).\n" +
     "Habits: alcohol, smoking, recDrug, tobacco as 'Yes'/'No', habitsDetails for details; set habits='Yes' if any is; add top-level \"alcoholDetail\" with the exact amount and type stated.\n" +
     "If ALREADY CAPTURED fields are given, output ONLY additions or corrections from the NEW text; do not repeat captured content.\n" +
+    // Item 13d: ported from the server's _opd-scribe.js negation/time rules (2026-09-19) so an
+    // on-device draft is held to the same standard as the cloud one. The server's per-field
+    // "sources" (verbatim quote + verifySources/flagContradictions) is NOT ported: it doubles the
+    // JSON the small on-device model must hold together across a rolling window of many refines,
+    // and this file has no equivalent of scribeMerge accumulating a sources map across windows.
+    "NEGATION AND TIME - CRITICAL: a symptom or condition explicitly DENIED ('no fever', 'denies vomiting', 'not diabetic') must NEVER be written as present anywhere in emrFields; " +
+    "record it as a pertinent negative in presentHx/pastHx instead (e.g. 'denies fever'). Preserve every stated duration and onset ('fever for 3 days', 'since Monday', 'stopped metformin last month') - never drop it. " +
+    "A medicine the patient has STOPPED is NOT a current medicine - record it as discontinued (pastHx/treatmentReceived), never as an ongoing home medication.\n" +
     "RULES: use ONLY what is explicitly said; NEVER invent a diagnosis, symptom, finding, drug, dose or investigation. provisionalDx ONLY if the clinician stated it. " +
     "ddx = a short reasonable differential FOR THE DOCTOR TO CONSIDER. investigations = tests a clinician would reasonably consider. No prose outside JSON.";
   function sanitizeScribe(parsed) {
@@ -2037,7 +2045,7 @@
     warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,
     sheetOpened: sheetOpened, sheetClosed: sheetClosed, setIdleMs: setIdleMs,
     vivaJudge: tracked(vivaJudge), opdSuggest: tracked(opdSuggest), parseJsonLoose: parseJsonLoose,
-    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS, webAnswer: tracked(webAnswer), WEB_SYS: WEB_SYS
+    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS, webAnswer: tracked(webAnswer), WEB_SYS: WEB_SYS, SCRIBE_SYS: SCRIBE_SYS
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;

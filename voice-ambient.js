@@ -12,8 +12,15 @@
  * `chunkMs` windows — each window's onFinal is folded into a running transcript via accumulate(),
  * then the next window starts immediately. `onRefine(fullTranscript)` fires per needsRefine(state)
  * (every `refineEveryChunks` windows + on stop) so a caller can run an LLM+grounding pass on the
- * growing transcript. See the native continuous-capture upgrade path documented in
- * local-plugins/capacitor-whisper/README.md + README-ANDROID.md.
+ * growing transcript.
+ *
+ * CONTINUOUS CAPTURE (flag `smd_voice_continuous`, DEFAULT OFF): when the native plugin exposes
+ * flushTranscribe, a window boundary flushes the captured audio instead of stopping the mic, so the
+ * few hundred ms lost at every re-arm seam are not lost at all. Falls back to the chunking above on
+ * any build without it. See local-plugins/capacitor-whisper/README.md + README-ANDROID.md.
+ *
+ * AUTO LANGUAGE PROBE (flag `smd_voice_lang_probe`, DEFAULT ON): in Auto the first window is a SHORT
+ * detection-only pass on the multilingual weights, and the session routes by what it read.
  *
  *   SMD_AMBIENT.start({ speaker, getState, onUpdate, onTranscript, onState, onError,
  *                       language, model, llmExtract, chunkMs, refineEveryChunks, onRefine })
@@ -24,6 +31,8 @@
  *   needsLLM(transcript, sentChars) → new narrative tail to send, or ""  (escalation gate)
  *   accumulate(prev, chunkText) → fullTranscript                    (seam-overlap-safe join)
  *   needsRefine(state) → bool                                       (refine cadence gate)
+ *   useFlush(session, flagIsOn) → bool                              (continuous-capture gate)
+ *   probeRoute(probeText) → "en" | ""                               (Auto first-chunk routing)
  *
  * window.SMD_AMBIENT + module.exports.
  */
@@ -108,6 +117,28 @@
   // Detect the chunk's language from its script so Auto mode can route the NEXT chunk to the right
   // model (Telugu → specialist, Devanagari → Hindi, else English). Telugu block U+0C00–0C7F, Devanagari U+0900–097F.
   function detectScript(t) { t = String(t || ""); if (/[ఀ-౿]/.test(t)) return "te"; if (/[ऀ-ॿ]/.test(t)) return "hi"; if (/[a-z]/i.test(t)) return "en"; return ""; }
+
+  // localStorage flags, read through `root` so the module stays inert in Node (tests) and on any host
+  // without storage. The OFF-by-default and ON-by-default readers are separate on purpose: a value
+  // nobody wrote (or a typo) can never flip a default in either direction.
+  function flagOn(key) { try { var v = root && root.localStorage && root.localStorage.getItem(key); return v === "1" || v === "on" || v === "true"; } catch (e) { return false; } }
+  function flagOff(key) { try { var v = root && root.localStorage && root.localStorage.getItem(key); return v === "0" || v === "off" || v === "false"; } catch (e) { return false; } }
+
+  // CONTINUOUS CAPTURE gate (smd_voice_continuous, DEFAULT OFF). True only when the flag is on AND
+  // this build's capture session actually exposes a native flush — i.e. a plugin binary that ships
+  // flushTranscribe. Anything else keeps today's stop-to-transcribe chunking, unchanged.
+  function useFlush(session, flagIsOn) { return !!(flagIsOn && session && typeof session.flush === "function"); }
+
+  // AUTO first-chunk language probe (smd_voice_lang_probe, DEFAULT ON). The probe window decodes on
+  // the MULTILINGUAL weights with language "auto" (the only model where "auto" is safe), and this
+  // reads its text to decide the session's language.
+  // Latin script => English: that is the bug being fixed — Auto opens on the Telugu specialist, so an
+  // English consult comes out as English TRANSLITERATED into Telugu script and detectScript() then
+  // pins the specialist for the rest of the session.
+  // Anything else => "" (no decision, keep today's behaviour). MEASURED: the multilingual weights
+  // render real Telugu as garbage DEVANAGARI, so a non-Latin probe cannot tell Telugu from Hindi and
+  // must not try — the specialist is already the right opening for both.
+  function probeRoute(text) { return detectScript(text) === "en" ? "en" : ""; }
   // A benign "the speaker just paused" endpoint, not a real failure — iOS SFSpeech reports these on
   // every silence gap ("No speech detected"/"No match"/"Retry"). Kept separate from hard errors
   // (recording-failure, transcription-failed, mic-denied) which SHOULD count toward the breaker.
@@ -137,6 +168,13 @@
     // Auto-mode adaptive routing: the language observed in the last chunk picks the model for the next
     // one (Telugu → specialist, en/hi → the multilingual/turbo). null until the first chunk lands.
     var detectedLang = null;
+    // Continuous capture (flag OFF by default): flush the mic buffer instead of stopping it at each
+    // window boundary. Read once per session so a mid-consult flag change can't half-switch the loop.
+    var continuous = flagOn("smd_voice_continuous");
+    // Auto first-chunk language probe (flag ON by default) — see probeRoute() above.
+    var probeEnabled = !flagOff("smd_voice_lang_probe");
+    var probeMs = opts.probeMs || 4000;         // SHORT: a detection pass, not a consultation chunk
+    var probing = false, probeDone = false;
 
     function apply(transcript) {
       lastTranscript = transcript;
@@ -193,10 +231,17 @@
       // specialist; leaving "auto" here is still correct for the multilingual weights.
       var routedModel = opts.model || (root.SMD_VOICE.pickModel ? root.SMD_VOICE.pickModel(effLang) : undefined);
       var decodeLang = (reqLang === "auto") ? "auto" : reqLang;
+      // FIRST window in Auto = a short DETECTION-ONLY pass on the multilingual weights (probeRoute()).
+      // Decoding "auto" is safe there and only there; the specialist stays pinned to "te" as measured.
+      // Skipped when the caller pinned a model, off Clinical (the fast fallback has no model routing),
+      // and after it has run once per session.
+      probing = !!(probeEnabled && !probeDone && !opts.model && engine === "clinical" &&
+                   reqLang === "auto" && detectedLang === null && root.SMD_VOICE.probeModel);
+      if (probing) { routedModel = root.SMD_VOICE.probeModel(); decodeLang = "auto"; }
       // Tell the caller which on-device model this chunk will use (for the "which model" chip).
       try {
         if (opts.onModel && engine === "clinical" && root.SMD_VOICE.pickModel) {
-          var mk = root.SMD_VOICE.pickModel(effLang);
+          var mk = probing ? routedModel : root.SMD_VOICE.pickModel(effLang);
           opts.onModel(root.SMD_VOICE.modelCode ? root.SMD_VOICE.modelCode(mk) : mk, effLang);
         } else if (opts.onModel && engine === "fast") { opts.onModel("Device STT", effLang); }
       } catch (e) {}
@@ -208,6 +253,7 @@
         noCloud: true,                                    // consultation audio never leaves the device: the fallback STT is native/Web only, never the cloud recorder
         onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // clinical: no-op (record-mode); the fast fallback streams live partials here
         onFinal: onChunkFinal,
+        onFlush: onChunkSegment,                          // continuous capture: a segment transcribed with the mic still open
         onError: onChunkError,
         onState: function (s) {
           dbg("state", s); if (opts.onState) opts.onState(s);
@@ -236,9 +282,16 @@
       chunkStarted = true;
       if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
       if (chunkTimer) clearTimeout(chunkTimer);
-      chunkTimer = setTimeout(closeChunk, chunkMs);
+      chunkTimer = setTimeout(closeChunk, probing ? probeMs : chunkMs);
     }
-    function closeChunk() { chunkTimer = null; if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; } if (curSession && curSession.stop) try { curSession.stop(); } catch (e) {} }
+    function closeChunk() {
+      chunkTimer = null; if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
+      // CONTINUOUS CAPTURE: hand the captured audio to the transcriber WITHOUT stopping the mic, so
+      // nothing is lost at the seam. The session stays live and the segment lands on onChunkSegment.
+      // Never for the probe window — that is a one-shot detection pass and has to end.
+      if (!probing && useFlush(curSession, continuous)) { try { curSession.flush(); return; } catch (e) {} }
+      if (curSession && curSession.stop) try { curSession.stop(); } catch (e) {}
+    }
     // A transient native error (recording-failure/transcription-failure) on one window must not
     // permanently kill the rolling loop: re-arm the next window (mirrors what onFinal does) instead
     // of leaving curSession/chunkTimer dangling with nothing left to call armChunk() again.
@@ -276,20 +329,41 @@
     }
     // ponytail: stop→transcribe→restart (re-arm) drops the audio spanning the mic/model spin-up at
     // each chunk boundary — a real word can land right on a 15s seam and get clipped on one side.
-    // Ceiling: a few hundred ms per boundary, worst case a short word lost. Ships because it makes
-    // the FULL pipeline (capture→accumulate→refine) work end-to-end today; the fix is a native
-    // ring-buffer / continuous-record-with-flush plugin that never stops the mic (documented in
-    // local-plugins/capacitor-whisper/README.md + README-ANDROID.md, "continuous capture upgrade").
-    function onChunkFinal(chunkText) {
-      dbg("chunkFinal", "len=" + String(chunkText || "").length, JSON.stringify(String(chunkText || "").slice(0, 100)));
-      curSession = null;
-      if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
-      if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
+    // Ceiling: a few hundred ms per boundary, worst case a short word lost. This is still the DEFAULT
+    // path. The fix now exists natively (flushTranscribe: transcribe the captured buffer while the mic
+    // keeps recording — see closeChunk/onChunkSegment and the plugin READMEs) but is gated behind
+    // smd_voice_continuous, DEFAULT OFF, because it cannot be verified without a physical device.
+    // Known trade-off of the continuous path: one listen() session means one model for the whole
+    // consult, so Auto's per-chunk model re-routing does not apply there (the first-chunk language
+    // probe below picks the language up front instead).
+    // Shared by the stop-to-transcribe path (onChunkFinal) and the continuous-capture flush
+    // (onChunkSegment): adopt this chunk's language for Auto routing, count it, fold it in.
+    function foldChunk(chunkText) {
       errStreak = 0; clinicalErrs = 0; silenceStreak = 0;   // a good window means the current engine works
       // Auto mode: adapt the model for the next chunk to THIS chunk's detected language.
       if ((opts.language || "auto") === "auto") { var d = detectScript(chunkText); if (d) detectedLang = d; }
       chunkN++;
       fullTranscript = accumulate(fullTranscript, chunkText);
+    }
+    function onChunkFinal(chunkText) {
+      dbg("chunkFinal", "len=" + String(chunkText || "").length, JSON.stringify(String(chunkText || "").slice(0, 100)));
+      curSession = null;
+      if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+      if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
+      // AUTO LANGUAGE PROBE: this window was a detection-only pass on the multilingual weights.
+      var wasProbe = probing;
+      if (wasProbe) {
+        probing = false; probeDone = true;
+        var routed = probeRoute(chunkText);
+        dbg("probe", "routed=" + (routed || "(none, keeping today's route)"));
+        if (routed) detectedLang = routed;
+        // DISCARD the probe text unless it read as English. On Telugu the multilingual weights emit
+        // garbage (measured: repeated-syllable Devanagari) that is perfectly valid UTF-8, so
+        // isGarbled() cannot catch it — folding it in would poison the transcript AND the LLM extract.
+        else chunkText = "";
+      }
+      if (!wasProbe || chunkText) foldChunk(chunkText);
+      else { errStreak = 0; clinicalErrs = 0; silenceStreak = 0; }   // the probe window still proves the engine works
       // A pause-flush is a FINAL window for delivery purposes: let it reach the screen and the note
       // draft first, and only then let the pause take effect. Ordering is the whole fix.
       var pauseFlush = pausing; if (pauseFlush) pausing = false;
@@ -300,6 +374,21 @@
       if (pauseFlush) paused = true;                     // now the mic stays down until resume()
       if (stopping) { running = false; return; }
       if (running && !paused) armChunk();
+    }
+    // CONTINUOUS CAPTURE: a window transcribed while the mic never stopped (smd_voice_continuous).
+    // Delivered exactly like a window final — minus the re-arm, because the session is still live and
+    // still recording. That missing re-arm IS the feature: no seam, so nothing is clipped.
+    // Stop and pause still go through curSession.stop() → onChunkFinal, which delivers the tail.
+    function onChunkSegment(chunkText) {
+      dbg("chunkFlush", "len=" + String(chunkText || "").length, JSON.stringify(String(chunkText || "").slice(0, 100)));
+      if (!running || paused || stopping) return;        // a flush that lands after teardown is dead weight
+      if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+      foldChunk(chunkText);
+      tick(fullTranscript, false);
+      if (onRefine && needsRefine({ chunkN: chunkN, refineEveryChunks: refineEveryChunks, final: false })) {
+        try { onRefine(fullTranscript); } catch (e) {}
+      }
+      chunkStarted = false; startChunkTimer();           // next window on the SAME open mic
     }
     armChunk();                                          // no-op (guarded) outside a browser/SMD_VOICE host
 
@@ -341,7 +430,7 @@
     };
   }
 
-  var API = { start: start, reduce: reduce, needsLLM: needsLLM, accumulate: accumulate, needsRefine: needsRefine, detectScript: detectScript, isSilence: isSilence, _version: "1.0" };
+  var API = { start: start, reduce: reduce, needsLLM: needsLLM, accumulate: accumulate, needsRefine: needsRefine, detectScript: detectScript, isSilence: isSilence, useFlush: useFlush, probeRoute: probeRoute, _version: "1.0" };
   if (root) root.SMD_AMBIENT = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })(typeof window !== "undefined" ? window : null);

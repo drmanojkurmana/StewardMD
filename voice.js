@@ -61,7 +61,20 @@
   //   ULTIMATE : Large-v3-Turbo Q5 (en/hi/auto) + verified Telugu Small INT8 (te)
   function tiersFlagOn() { try { return localStorage.getItem("smd_voice_tiers") !== "0"; } catch (e) { return true; } }
   function voiceTier() { try { var t = localStorage.getItem("smd_voice_tier"); return (t === "pro" || t === "ultimate") ? t : "base"; } catch (e) { return "base"; } }
+  // Hindi specialist route — smd_voice_hi_model, DEFAULT OFF. The Hindi fine-tuned weights are NOT
+  // published yet (native-bridge WHISPER_MODELS carries the key with an empty sha256, which fails
+  // closed), so nothing may route to them until the file is hosted and the SHA pinned. Flipping this
+  // on before that just makes Hindi fall back to the multilingual model the native layer already
+  // prefers when a requested model is missing.
+  var HI_MODEL = "hindi-small-q8_0";
+  function hiModelOn() { try { return localStorage.getItem("smd_voice_hi_model") === "1"; } catch (e) { return false; } }
+  // The multilingual weights — the only model safe to decode with language "auto" (the single-language
+  // specialists misdetect and emit invalid UTF-8). Used by the Auto first-chunk language probe.
+  var PROBE_MODEL = "small-q8_0";
   function whisperModel(lang) {
+    // Hindi specialist (flag-gated, every tier): mirrors the Telugu route. Placed FIRST so it wins
+    // over both the tiers-off and tiers-on en/hi branches below.
+    if (lang === "hi" && hiModelOn()) return HI_MODEL;
     if (!tiersFlagOn()) {
       // Telugu / Auto → the Telugu SPECIALIST even without the tiers flag. MEASURED: the multilingual
       // small hallucinates repeated-syllable garbage on Telugu, while the specialist transcribes Telugu
@@ -90,30 +103,51 @@
     if (tier === "ultimate" && !isAndroidNative()) return "large-v3-turbo-q5_0";
     return "small-q8_0";     // base + pro (+ Android ultimate): multilingual Whisper Small INT8
   }
-  // Which model keys each tier needs (for the Settings download dashboard).
+  // Which model keys each tier needs (for the Settings download dashboard). The Hindi specialist is
+  // listed on every tier alongside the Telugu one, but tierModels() drops it while smd_voice_hi_model
+  // is off — otherwise the dashboard would offer a download for a file that is not hosted yet.
   var TIER_MODELS = {
-    base: ["small-q8_0", "telugu-small-q8_0"],   // BASE now carries the Telugu specialist too, so Telugu routes to it (dual-model)
-    pro: ["small-q8_0", "telugu-small-q8_0"],
-    ultimate: ["large-v3-turbo-q5_0", "telugu-small-q8_0"]
+    base: ["small-q8_0", "telugu-small-q8_0", HI_MODEL],   // BASE now carries the Telugu specialist too, so Telugu routes to it (dual-model)
+    pro: ["small-q8_0", "telugu-small-q8_0", HI_MODEL],
+    ultimate: ["large-v3-turbo-q5_0", "telugu-small-q8_0", HI_MODEL]
   };
+  function tierModels(tier) {
+    return (TIER_MODELS[tier] || []).filter(function (k) { return k !== HI_MODEL || hiModelOn(); });
+  }
   // User-facing branding ONLY — never expose the underlying engine/quant names.
   var MODEL_META = {
     "small-q8_0":          { label: "StewardVoice · Multilingual", tag: "EN · HI · TE", mb: 252 },
     "telugu-small-q8_0":   { label: "StewardVoice · Telugu", tag: "తెలుగు specialist", mb: 252 },
-    "large-v3-turbo-q5_0": { label: "StewardVoice · Ultra", tag: "EN · HI, highest accuracy", mb: 547 }
+    "large-v3-turbo-q5_0": { label: "StewardVoice · Ultra", tag: "EN · HI, highest accuracy", mb: 547 },
+    // Size is the same q8_0 small geometry as the Telugu specialist; confirm against the published
+    // file when it lands (see the TODO in native-bridge.js WHISPER_MODELS).
+    "hindi-small-q8_0":    { label: "StewardVoice · Hindi", tag: "हिंदी specialist", mb: 252 }
   };
   // Short branded code for the diagnostic line (still hides the real engine).
-  var MODEL_CODE = { "small-q8_0": "SV-Multi", "telugu-small-q8_0": "SV-Telugu", "large-v3-turbo-q5_0": "SV-Ultra", "small.en-q5_1": "SV-EN", "tiny-q5_1": "SV-Tiny" };
+  var MODEL_CODE = { "small-q8_0": "SV-Multi", "telugu-small-q8_0": "SV-Telugu", "large-v3-turbo-q5_0": "SV-Ultra", "small.en-q5_1": "SV-EN", "tiny-q5_1": "SV-Tiny", "hindi-small-q8_0": "SV-Hindi" };
 
   // Whisper `initial_prompt` — primes the decoder for Indian-English CLINICAL dictation so accented
   // English + drug/organism/lab terms are recognised. Built by REUSE: a high-yield medical seed
   // (antibiotics/vasopressors/organisms/labs/units that are frequently misheard) plus the app's own
   // drug names from window.MEDDRUGS._list. Capped well under Whisper's ~224-token prompt budget so it
   // biases without truncation. Pure hint — the doctor still edits the transcript before import.
-  // LANGUAGE-AWARE: only for English. An English primer forced onto Telugu/Hindi/auto decoding
-  // suppresses the target language (Telugu came out empty/garbled) — so return "" for non-English.
+  // LANGUAGE-AWARE: this English primer is only ever used for English. MEASURED: forced onto
+  // Telugu/Hindi/auto decoding it suppresses the target language (Telugu came out empty/garbled).
+  //
+  // NON-ENGLISH priming (smd_voice_prompt_multi, DEFAULT OFF — unmeasured). Drug names only, in Latin
+  // script, with NO English sentence: the measured failure was an English SENTENCE primer steering the
+  // decoder back to English and suppressing Telugu output. A bare comma-separated term list biases the
+  // vocabulary without asserting a language. Deliberately SHORT (far under Whisper's ~224-token prompt
+  // budget) — a long list is itself a language signal. Unverified on device, hence off by default.
+  var MULTI_PRIMER = [
+    "paracetamol", "amoxicillin", "azithromycin", "ceftriaxone", "cefixime", "metronidazole",
+    "amlodipine", "telmisartan", "atenolol", "atorvastatin", "metformin", "glimepiride", "insulin",
+    "pantoprazole", "ondansetron", "ibuprofen", "diclofenac", "prednisolone", "salbutamol",
+    "levothyroxine", "furosemide", "clopidogrel", "ivermectin", "albendazole", "iron folic acid"
+  ].join(", ");
+  function multiPromptOn() { try { return localStorage.getItem("smd_voice_prompt_multi") === "1"; } catch (e) { return false; } }
   function buildInitialPrompt(lang) {
-    if (lang && lang !== "en") return "";
+    if (lang && lang !== "en") return multiPromptOn() ? MULTI_PRIMER : "";
     var seed = [
       "piperacillin-tazobactam", "meropenem", "cefoperazone-sulbactam", "ceftriaxone", "cefepime",
       "amikacin", "gentamicin", "vancomycin", "teicoplanin", "colistin", "polymyxin B", "linezolid",
@@ -186,10 +220,16 @@
             language: decodeLang, model: wModel, initialPrompt: opts.initialPrompt || buildInitialPrompt(reqLang),
             silenceEndpointMs: Number(opts.silenceEndpointMs) || 0,   // >0 = auto-stop on end-of-speech (MaiK Ask)
             onPartial: dropGarbled(opts.onPartial), onFinal: dropGarbled(opts.onFinal),
+            // CONTINUOUS CAPTURE: a segment transcribed while the mic stays open (see flush below).
+            // Same corrupt-decoder guard as onFinal — a flushed chunk reaches the EMR the same way.
+            onFlush: dropGarbled(opts.onFlush),
             onError: opts.onError, onDownloadProgress: opts.onDownloadProgress,
             onStateChange: function (s) { if (opts.onState) opts.onState(s, "Clinical (on-device)"); }
           });
           _active = { engine: "Clinical (on-device)", mode: "record", stop: (typeof wstop === "function") ? wstop : function () { try { window.SMD_NATIVE.stopWhisper && window.SMD_NATIVE.stopWhisper(); } catch (e) {} } };
+          // Only exposed when THIS build's plugin actually has flushTranscribe, so callers can just
+          // test `session.flush` — on every older binary there is nothing to call and they chunk as before.
+          try { if (window.SMD_NATIVE.whisperCanFlush && window.SMD_NATIVE.whisperCanFlush()) _active.flush = function () { window.SMD_NATIVE.flushWhisper(); }; } catch (e) {}
           if (opts.onState) opts.onState("preparing", _active.engine);
           return _active;
         } catch (e) { /* plugin threw (unavailable) — do NOT auto-cloud */ }
@@ -737,7 +777,7 @@
         modelsEl.innerHTML = '<div class="smdv-ms-note">Pick a tier above to turn on multilingual voice.</div>';
         footEl.innerHTML = ""; return;
       }
-      var keys = TIER_MODELS[voiceTier()] || [];
+      var keys = tierModels(voiceTier());
       modelsEl.innerHTML = keys.map(card).join("");
       footEl.innerHTML = '<span class="smdv-ms-hint">Downloads once over Wi-Fi.</span><button class="smdv-ms-off" data-smdv-ms-off>Turn off</button>';
       keys.forEach(refreshStatus);
@@ -784,6 +824,9 @@
   window.SMD_VOICE = { listen: listen, stop: stop, openDialog: openDialog, modelSettingsHTML: modelSettingsHTML, wireModelSettings: wireModelSettings,
     pickModel: function (lang) { return whisperModel(lang); },                      // which on-device model a language routes to (tier-aware)
     modelCode: function (k) { return MODEL_CODE[k] || k; },                          // branded short code (SV-Telugu / SV-Ultra / …)
+    probeModel: function () { return PROBE_MODEL; },                                 // multilingual weights: the only ones safe to decode with "auto"
+    tierModels: function (t) { return tierModels(t || voiceTier()); },               // model keys a tier needs, minus anything not published yet
+    initialPrompt: function (lang) { return buildInitialPrompt(lang); },             // decoder priming per language (exposed for tests)
     isGarbled: isGarbled,                                                            // corrupt-decoder guard (exposed for tests)
     available: function () { return { native: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribe), webspeech: !!(window.SpeechRecognition || window.webkitSpeechRecognition) && !isIOS(), aistt: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder), whisper: whisperAvailable() }; } };
 })();

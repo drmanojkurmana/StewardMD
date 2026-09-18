@@ -8,11 +8,47 @@ Whisper only; consultation audio never leaves the phone.
   On by default; off via `localStorage.setItem("smd_opd_maik","off")`.
 - `smd_opd_emr` / `smd_opd_emr_write` — gate the EMR overlay and its save buttons.
 - `smd_whisper_clinical_dictation`, `smd_voice_tiers`, `smd_voice_tier` — on-device engine + tier.
+- `smd_scribe_live` — DEFAULT ON, localStorage only. Live-draft cadence (refineEveryChunks 2 instead
+  of 8, plus an idle-speech-triggered refine); OFF restores the original ~2 min cadence byte-identically.
+  Cost-guarded independently via `smd_scribe_live_mingap_ms` (default 45000) — see `gatedRefine`.
+- `smd_scribe_feedback` — DEFAULT ON, localStorage only. Correction-feedback ring buffer (see below).
+- `smd_scribe_consent` — DEFAULT ON, localStorage only. Per-visit recording consent gate.
+- `smd_scribe_clinical` — DEFAULT ON, localStorage only. Wires the clinical modules into the OPD
+  scribe: drug-name corrections, structured medicines to the prescription pad, ICD candidates on an
+  accepted diagnosis, the medicine safety check, speaker labelling and the specialty picker. OFF
+  restores the pre-2026-09-19 behaviour.
+- `smd_scribe_offline_draft` — DEFAULT ON, localStorage only. No network means the note is drafted by
+  the on-device engine and badged "Drafted on this phone" instead of failing.
+- `smd_voice_lang_probe` — DEFAULT ON. Auto mode probes the first window on the multilingual weights
+  and routes by what it read, instead of opening on the Telugu specialist and staying there.
+- `smd_voice_continuous` — DEFAULT OFF, needs a device. Native `flushTranscribe` transcribes without
+  stopping the mic, so no audio is lost at a chunk seam. Inert on any binary built before it.
+- `smd_voice_hi_model` — DEFAULT OFF. Hindi specialist route. FAILS CLOSED: the weights are not
+  published, so `native-bridge.js` carries an empty sha256 placeholder. Publish the file, record the
+  real sha256 and byte size, rebuild natively, and only then turn this on.
+- `smd_voice_prompt_multi` — DEFAULT OFF, unmeasured. A Latin-script drug-name primer for non-English
+  decoding. An English primer was measured to suppress Telugu, which is why this is off.
+- `smd_ward_scribe` / `smd_discharge_scribe` — DEFAULT OFF, both need a device and a real record.
+  The same engine inside the ward round note (`ward.js`) and a discharge summary section
+  (`discharge.js`). Accept-per-note, append-only, never overwrites.
 - Server: `SCRIBE_MODEL`, `SCRIBE_CAPS` (Pro-only + time caps), `SCRIBE_SEC_DAY` / `SCRIBE_SEC_WEEK`.
 
 ## Key files
 - `opd-emr.js` — Scribe UI (`oe-vc-*`), `startVoice`/`stopVoice`, `doRefine` (LLM pass), `_applyRefine`
   (folds into EMR), `scribeAccept*` (doctor-confirm gate).
+  - Live draft cadence + cost guard: `scribeLiveOn`, `_liveRefineGate` (pure), `gatedRefine`,
+    `maybeIdleRefine` (the "doctor paused speaking" trigger, driven off `onTranscript` growth stalling
+    — there is no VAD/silence callback from voice-ambient.js, so this is a client-side heuristic).
+  - Post-consult review panel (item 14): `_buildReviewRows` (pure — reads the optional `sources` /
+    `ungrounded(Fields)` grounding signal off the opd-scribe extract, see Task 6 in
+    `functions/api/ai/_opd-scribe.js`), `reviewPanel`/`reviewRow`, `scribeReview*` actions.
+  - Correction feedback log (item 15): `_feedbackPush` (pure ring buffer), `logScribeFeedback`,
+    localStorage key `smd_scribe_feedback_log` (cap 200) — field key + accepted/edited/rejected +
+    language + timestamp ONLY, never transcript/audio/PHI. Accessor: `window.SMD_SCRIBE_FEEDBACK`.
+  - Recording consent + persistent indicator (item 18): `_consentReducer`/`_consentStatus` (pure state
+    machine, keyed per visit — `episodeId`/`visitId`/`ticketId`/mrn fallback chain), `askScribeConsent`,
+    localStorage key `smd_scribe_consent_visits`; `recordingBanner` (sticky, every tab, not just
+    Assessment's orb) with its own elapsed timer (`#oeRecTimer`, ticked by the existing `tickElapsed`).
 - `voice-ambient.js` — `SMD_AMBIENT.start`, 15s rolling chunks, `detectScript` Auto re-routing.
 - `voice.js` — `SMD_VOICE.listen`, `whisperModel()` tier/language model routing, `isGarbled` guard.
 - `functions/api/ai/_opd-scribe.js` — prompt + `sanitizeScribeOutput` (whitelist; strips Indic script
@@ -78,3 +114,31 @@ invented history in the chart is not.
 `test/voice-telugu-decode.test.mjs` (this gotcha), `voice-lang-route`, `voice-tier-routing`,
 `voice-ambient-scribe`, `opd-scribe-extract`, `opd-scribe-fixtures`, `scribe-english`,
 `opd-scribe-ground-wire`, `voice-scribe-ground`, `ai-scribe-caps`, `run-scribe-ui.mjs` (CDP).
+`test/opd-emr-scribe-ux.test.mjs` — items 12/14/15/18 (live-draft cadence gate, review-panel row
+building, feedback ring buffer, consent state machine) + a few `_render` smoke checks for the new
+recording banner / review panel markup.
+
+
+## 2026-09-19 build (branch `worktree-scribe-18`)
+
+Eighteen improvements landed together. New pure modules, each Node-tested and injected-dependency
+style like `voice-scribe-ground.js`: `scribe-drugfix.js` (unambiguous drug-name correction only),
+`scribe-rx.js` (dictated treatment to structured rows plus `toRegimen` for `SMD_RX.open`),
+`scribe-icdsug.js`, `scribe-safety.js` (reuses `_analyzeRegimenSafety` + `INTERACTIONS`),
+`scribe-speaker.js` (acoustic path dormant until capture supplies per-segment energy/pitch),
+`scribe-templates.js` (`SMD_SCRIBETPL`: general, paediatrics, obgyn, surgery follow-up).
+
+Server (`_opd-scribe.js`): a `sources` map quoting the transcript sentence behind every field, plus
+`verifySources` and `flagContradictions`, and prompt rules for negation and time. The review panel
+never auto-accepts a field the recording does not support. The negation and time rules are ported
+into `maik-local.js` `SCRIBE_SYS`; the `sources` map is NOT ported (the rolling-window merge there
+has no equivalent) — that is the open follow-up for on-device drafts.
+
+STILL UNMEASURED: there is still no word-error-rate or clinical-entity benchmark. `voice-benchmark/`
+holds a harness and a 500-line synthetic corpus that has never been run on real consult audio. Until
+it is, none of the above can be shown to have improved accuracy — only that the pipeline lost less
+and guarded more. Run it before enabling the device-gated flags.
+
+i18n: the 24 new ward and discharge scribe strings are registered in the EN catalog and listed in
+`docs/wardsynq/i18n-english-fallbacks.json` for all 8 languages. They show English until the
+translation pipeline runs over them.

@@ -72,7 +72,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/queue.css?v=q11-token">
 <link rel="stylesheet" href="/ward.css?v=ward36-rcm">
 <link rel="stylesheet" href="/discharge.css?v=dis4-clinforms">
-<link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
+<link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1-scribe18">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
 <link rel="stylesheet" href="/atlas3d.css?v=a3d2">
 <link rel="stylesheet" href="/onco-home.css?v=op7-unified">
@@ -2067,7 +2067,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-pdf4" defer></script>
+<script src="/native-bridge.js?v=nb-pdf4-scribe18" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -2193,7 +2193,7 @@ window.openExternal = function (u) {
      retrieved passages on facts (doses, drugs, figures), not wording. Loaded before maik-local.js. -->
 <script src="/kb/ai/maik-grounding.js?v=ground1" defer></script>
 <script src="/kb/ai/maik-lite-kb-store.js?v=rag1" defer></script>
-<script src="/maik-local.js?v=hardlocal3-opdcols1-cont1" defer></script>
+<script src="/maik-local.js?v=hardlocal3-opdcols1-cont1-scribe18" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
@@ -2301,7 +2301,7 @@ window.openExternal = function (u) {
 <script src="/infusion-actions.js?v=gold363" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=hardlocal3" defer></script>
+<script src="/voice.js?v=hardlocal3-scribe18" defer></script>
 <!-- Ambient voice extraction engine (window.SMD_VVITALS / SMD_EMRMAP / SMD_AMBIENT). Deterministic,
      zero-token, offline: spoken vitals/exam -> structured assessment fields, with a patient-speech +
      manual-override safety gate. A building block for autofilling the OPD assessment (opd-emr.js);
@@ -2309,12 +2309,30 @@ window.openExternal = function (u) {
 <script src="/assessment-schema.js?v=gold1" defer></script>
 <script src="/voice-vitals.js?v=gold2" defer></script>
 <script src="/voice-emr-map.js?v=gold1" defer></script>
-<script src="/voice-ambient.js?v=gold1723-mix-pauseflush1" defer></script>
+<script src="/voice-ambient.js?v=gold1723-mix-pauseflush1-scribe18" defer></script>
 <script src="/voice-diarize.js?v=gold1" defer></script>
+<!-- Doctor/Patient speaker labelling (window.SMD_SCRIBESPEAKER) for MaiK Scribe: wording heuristic,
+     upgraded to acoustic energy/pitch clustering when the capture layer supplies per-segment
+     features (it does not yet). Pure/inert until a consumer calls label(). -->
+<script src="/scribe-speaker.js?v=gold1" defer></script>
 <script src="/maik-reasoning.js?v=hardlocal3" defer></script>
 <script src="/maik-pathways.js?v=maik1" defer></script>
 <script src="/maik-ask.js?v=mkfast2" defer></script>
 <script src="/voice-scribe-ground.js?v=gold1" defer></script>
+<!-- MaiK Scribe pure client modules (SMD_SCRIBEDRUGFIX / SMD_SCRIBERX / SMD_SCRIBEICD /
+     SMD_SCRIBESAFETY). All dependencies are INJECTED by the caller (MEDDRUGS._list,
+     SMD_RX._parseVoiceRx + _analyzeRegimenSafety, SMD_ICD.localSearch,
+     INTERACTIONS.checkInteractions), so these load in any order and are inert until driven.
+     scribe-drugfix reuses window.DrugFuzzy, already loaded above with the Scan-Meds flow. -->
+<script src="/scribe-drugfix.js?v=gold1" defer></script>
+<script src="/scribe-rx.js?v=gold1" defer></script>
+<script src="/scribe-icdsug.js?v=gold1" defer></script>
+<script src="/scribe-safety.js?v=gold1" defer></script>
+<!-- MaiK Scribe specialty templates (window.SMD_SCRIBETPL) — extra prompt lines + required-field
+     hints per specialty (paediatrics, obstetrics & gynaecology, surgery follow-up), general OPD by
+     default. Pure registry, no dependencies; inert until a consumer (opd-emr.js's specialty picker,
+     ward.js, discharge.js) asks for a template. -->
+<script src="/scribe-templates.js?v=gold1" defer></script>
 <script src="/recent.js?v=gold983" defer></script>
 <!-- Experimental Access framework (window.SMD_DEVICE + window.SMD_XACCESS) — the one-code /
      one-device beta unlock gate. Loaded before FundX so its tile/Settings entry can gate on it.
@@ -2524,11 +2542,11 @@ window.openExternal = function (u) {
 <!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
 <script src="/ward-offline.js?v=3" defer></script>
 <script src="/ward-labels.js?v=1" defer></script>
-<script src="/ward.js?v=ward74-merge-r6" defer></script>
+<script src="/ward.js?v=ward74-merge-r6-scribe18" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
-<script src="/discharge.js?v=dis8-education" defer></script>
+<script src="/discharge.js?v=dis8-education-scribe18" defer></script>
 <!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
      computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
 <script src="/onco-dose.js?v=op1" defer></script>
@@ -2546,7 +2564,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag

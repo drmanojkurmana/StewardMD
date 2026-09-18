@@ -21,8 +21,8 @@ import java.util.concurrent.Executors;
  * pinned SHA-256. Raw audio never touches disk and is released after each session.
  *
  * Methods (Promise): isModelInstalled, downloadModel, deleteModel, startTranscribe,
- *   stopTranscribe, cancel.
- * Events: whisperState {state}, whisperPartial {text}, whisperFinal {text},
+ *   stopTranscribe, cancel, flushTranscribe (continuous capture: transcribe without stopping the mic).
+ * Events: whisperState {state}, whisperPartial {text}, whisperFinal {text}, whisperFlush {text},
  *   whisperError {code, message}, whisperDownloadProgress {progress}.
  */
 @CapacitorPlugin(
@@ -42,6 +42,7 @@ public class WhisperPlugin extends Plugin {
         engine.onState = (s) -> notifyListeners("whisperState", new JSObject().put("state", s));
         engine.onPartial = (t) -> notifyListeners("whisperPartial", new JSObject().put("text", t));
         engine.onFinal = (t) -> notifyListeners("whisperFinal", new JSObject().put("text", t));
+        engine.onFlush = (t) -> notifyListeners("whisperFlush", new JSObject().put("text", t));
         engine.onError = (code, msg) ->
             notifyListeners("whisperError", new JSObject().put("code", code.code).put("message", msg));
     }
@@ -179,5 +180,19 @@ public class WhisperPlugin extends Plugin {
     @Override
     protected void handleOnDestroy() {
         engine.dispose();
+    }
+
+    // APPEND-ONLY: @PluginMethod registration is POSITIONAL - new methods go at the END of the class,
+    // never inserted among the existing ones.
+    /**
+     * Continuous capture: transcribe the audio captured so far and keep the mic OPEN. The segment
+     * arrives as {@code whisperFlush {text}}; {@code whisperFinal} still fires once, on
+     * stopTranscribe(). Uses the running session's language/prompt, so a flushed segment decodes
+     * exactly like a stopped one.
+     */
+    @PluginMethod
+    public void flushTranscribe(PluginCall call) {
+        engine.flushAndTranscribe(lastLanguage, lastPrompt);
+        call.resolve(new JSObject().put("ok", true));
     }
 }
