@@ -14,6 +14,8 @@ import { nativeTokensById, sendNativeToTokens } from "../_nativepush.js";
 import { deviceDirectory } from "./device-directory.js";
 import { serverPushChannel, smsFallbackSender } from "./push-alerts.js";
 import { sendTwoFactor } from "../_followcare_sms.js";
+import { activeConnectors, openConnectorSecrets, KINDS } from "./connectors.js";
+import { CAPS, can } from "../_queue_roles.js";
 
 const alertsEnabled = (org) => !!(org && org.wardsynq && org.wardsynq.alerts && org.wardsynq.alerts.push && org.wardsynq.alerts.push.enabled === true);
 
@@ -69,4 +71,49 @@ function notifyDepsFor(env, org, tenantId, repository) {
   };
 }
 
-export { alertsEnabled, directoryFromEnv, smsSetup, staffReaders, notifyDepsFor };
+/* PATIENT MESSAGING PORTS (patient-messaging.js). SMS is the same 2Factor DLT path and the hospital's same DLT
+ * sender ID as the critical-result SMS; each message type names its own DLT template. WhatsApp is this hospital's
+ * active WhatsApp connector with its token opened now. env.WSQ_COMMS_FETCH is a test seam only (a function, never a
+ * text binding), like WSQ_PAY_FETCH. Throws when the connector record cannot be read. */
+async function commsPorts(env, org, repository, tenantId) {
+  const c = (org && org.wardsynq && org.wardsynq.alerts && org.wardsynq.alerts.sms) || {};
+  const sms = {
+    missing: [
+      ...(env && env.TWOFACTOR_API_KEY ? [] : ["The 2Factor API key (TWOFACTOR_API_KEY) is not available to the server."]),
+      ...(c.senderId ? [] : ["This hospital's DLT sender ID is not set (Admin > Hospital, critical-result alerts)."]),
+    ],
+    send: (to, templateName, vars) => sendTwoFactor(env, String(to).replace(/\D/g, ""), { sender: c.senderId, templateName, vars: { var1: vars[0] == null ? "-" : String(vars[0]), var2: vars[1] == null ? "-" : String(vars[1]) } }),
+  };
+  let whatsapp = null;
+  const rec = (await activeConnectors(repository, String(tenantId), "whatsapp"))[0];
+  const spec = rec && KINDS.whatsapp.providers[rec.provider];
+  if (spec) {
+    const secrets = await openConnectorSecrets(env, rec);
+    if (secrets.accessToken) whatsapp = { spec, settings: rec.settings || {}, secrets };
+  }
+  return { sms, whatsapp, fetchImpl: env && typeof env.WSQ_COMMS_FETCH === "function" ? env.WSQ_COMMS_FETCH : undefined };
+}
+
+/* A hospital-administration alert (a failed backup) to the phones of active members holding staff.admin. Not a
+ * clinical alert, so it does not wait for alerts.push.enabled. Reports what happened: nobody, no phone, push not
+ * configured, or sent to n of m devices. Never "delivered". msg: { title, body, tag } with no patient data. */
+async function alertAdmins(env, org, msg) {
+  const members = await ORG.listMembers(env, org.id);
+  const admins = (members || []).filter((m) => m && m.active !== false && can(m.role, CAPS.STAFF_ADMIN)).map((m) => String(m.identity));
+  if (!admins.length) return { admins: 0, sent: 0, total: 0, reason: "NO_ADMIN" };
+  return { admins: admins.length, ...(await pushToIdentities(env, org, admins, { ...msg, data: { type: "wardsynq-admin", kind: "backup" } })) };
+}
+
+/* A push to named members' registered phones: { sent, total, reason }. The caller owns the payload and keeps patient data
+ * out of it (alertAdmins above; staff-messaging.js messagePushPayload). */
+async function pushToIdentities(env, org, identities, msg) {
+  const directory = directoryFromEnv(env);
+  if (!directory) return { sent: 0, total: 0, reason: "PUSH_NOT_CONFIGURED" };
+  const tokenIds = new Set();
+  for (const identity of identities) (await directory.devicesFor(org.id, identity)).forEach((t) => tokenIds.add(t));
+  if (!tokenIds.size) return { sent: 0, total: 0, reason: "NO_DEVICE" };
+  const out = await sendNativeToTokens(env, await nativeTokensById(env, [...tokenIds]), msg);
+  return { sent: out.sent || 0, total: out.total || 0, reason: out.disabled ? "PUSH_NOT_CONFIGURED" : null };
+}
+
+export { alertsEnabled, directoryFromEnv, smsSetup, staffReaders, notifyDepsFor, commsPorts, alertAdmins, pushToIdentities };

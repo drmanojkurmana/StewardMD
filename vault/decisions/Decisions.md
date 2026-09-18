@@ -6945,3 +6945,1521 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   Native dialogs remain only in MaiK, integration, billing/claims, purchasing and scheduling screens (other lanes).
 - A paint that arrives while a pointer is down inside the ward is held until the pointer comes up (3 s cap), as a
   paint is held for an open select: a repaint between press and release lost the click (the ED "first triage" miss).
+## 2026-09-16 Printed labels and camera scanning are generated in the browser, printed one label per page
+- `ward-labels.js` (ES5, no dependency) encodes Code 128 (set B, with set C for runs of numerals) and QR (byte mode,
+  level M, versions 1-10) itself and draws SVG; no generator library and no network call, so an MRN or accession never
+  leaves the page. Vectors pinned from the published tables (test/ward-labels.test.mjs); whole symbols decoded by
+  Chrome's BarcodeDetector in test/run-ward-labels-ui.mjs.
+- A label prints through a hidden iframe whose document is exactly the label (`@page` size from Admin > Hospital
+  `wardsynq.labelSizes`, bounded in `functions/_wardsynq/labels.js`), so the ward behind it never prints and the ward's
+  A4 print stylesheet is untouched. The screen says the print dialog opened, never that a label printed.
+- Wristband, tube label and ID slip read `GET /ward/label-data` (emr.view, or lab.result for the laboratory board);
+  a wristband is not printed when allergies could not be read, and an estimated DOB is printed as an age. The QR is the
+  active band's code, else the bedside value (wristbandBarcode or MRN), and the screen warns when they differ. The
+  pharmacy label uses the pharmacy screen's own reads (the pharmacy role does not read Patient); its size comes with
+  `GET /ward/dispenses`. Printed labels are English whole, like the printed discharge summary.
+- "Scan with camera" (BarcodeDetector + getUserMedia) only fills the field a wedge scanner types into; the same button
+  sends it through the same server check. Specimen receipt by scan sends `scannedAccession`, and the server refuses a
+  label that is not the specimen's own accession (409 `wrong_specimen_scan`).
+## 2026-09-16 Laboratory analysers connect through an on-premises connector; results are released by a person
+- Pages Functions has no TCP, so analysers (HL7 v2 over MLLP, ASTM E1381/E1394 over TCP or serial-over-TCP) talk to
+  `connect-agent/analyser/`, a stdlib-only Node program on the laboratory network. It frames and acknowledges per
+  spec, keeps a durable file queue, and calls three routes before staff authentication:
+  `GET /api/queue/lab-connector/analyser-config`, `POST .../analyser-results`, `POST .../analyser-orders` (host query).
+  The existing Camofox Connect runner in `connect-agent/` is a different job (EMR discovery for Connect) with its own
+  HMAC runner protocol; the analyser connector sits beside it in the same folder rather than inside it.
+- Authority is one connector key per hospital (`wsqlab.<base64url org id>.<secret>`), issued on Admin > Integrations >
+  Laboratory analysers, shown once, stored AES-GCM sealed (webhooks.js sealSecret), compared in constant time. The
+  protocol per analyser (astm or hl7) is the per-hospital adapter choice; the instrument-code mapping stays on the server.
+- Analyser results do NOT go through `/ward/hl7`: that door files ANOTHER system's records (landBundle, external source).
+  An analyser measures this hospital's own specimens, so its results wait in `_wardsynq_analyser_result` (the bench
+  inbox) and reach the chart only when a technologist presses Release, through lab-result.js `releaseResult` as that
+  person: autoverification, second-person verification and the critical check apply unchanged. Nothing is
+  auto-released; a device actor never writes an Observation or DiagnosticReport.
+- QC (lab-qc.js): control lots with target mean/SD per test and level; runs typed or received (an active lot's sample
+  id marks a QC run); Westgard 1-2s warning and 1-3s, 2-2s, R-4s (different level within two hours), 4-1s, 10x
+  rejections evaluated server-side on every run, window restarting at the last corrective action. A rejected run
+  blocks analyser release and verification of that analyser's results for that test until a corrective action; an
+  override needs a reason, is its own record and audit row, and is listed on the QC screen. The block is derived.
+- Reagents use the pharmacy stock ledger at location "Laboratory"; lab.result reaches `stock`/`stock-move` for that
+  location only (the grant adds StockMovement). Specimen rejection is `specimen-outcome` failed with a `rejectionCode`
+  (haemolysed, clotted, insufficient, mislabelled, wrong-container); monthly counts by reason and ward read the
+  encounter's ward through the repository (the lab grant cannot read Encounter; only ward names and counts leave).
+
+## 2026-09-16 ABDM end to end at a WardSynQ hospital (S6 phases A3, A5 and the registry checks; branch gap-abdm)
+Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owner A1-A5 stand.
+- **Credentials: the shared bridge, not per-hospital secrets.** The gap brief asked for client id/secret entered per
+  hospital; owner A1 (binding, pinned by `test/wardsynq-abdm-hospital-routes.test.mjs`) says one shared StewardMD
+  bridge, no own-bridge credentials built or shown. Kept A1: the bridge secret stays the existing Pages secret
+  `ABDM_CLIENT_SECRET`; what is the hospital's own (environment from its status, HIP/HIU IDs) comes from its profile
+  through `abdmConfigFor` (config.js). No new env var. Offering own-bridge credentials is an owner change of A1.
+- **Connection** (`abdm-connect.js`): connected only when the profile is active, `sandbox-linked`, has a HIP ID and
+  the bridge secret exists; production is never connected (A2). Every ABDM screen says which of not set up,
+  switched off, not linked, suspended, production held or no bridge credential applies.
+- **Callback routing**: a saved ABDM profile is projected into `connect_connector_config` (connector `abdm`,
+  config.hipId), which `resolveHipTenant` already reads; unlinked or suspended removes the row so callbacks fail
+  closed. The v3 receiver replies with the X-HIP-ID/X-HIU-ID ABDM addressed (after the bearer check).
+- **ABHA desk** (`abdm-desk.js`, routes `/ward/abdm-desk`, `/ward/abha`): queue.add plus owner A5's
+  `abhaDeskCan`; Connect membership is not used. A verified or created ABHA returns a 30-minute HMAC proof
+  (QUEUE_TOKEN_SECRET); `/patient/register` binds the ABHA to the MR number only with a valid proof and refuses an
+  ABHA already bound to another MR before issuing a number. A typed ABHA is recorded as typed.
+- **Scan and Share** (`abdm-share.js`): QR per counter (general desk unless tokens are per department, and each
+  active department; hyphenated `hip-id`/`counter-id`, D13). A share is queued in the counter's department through
+  the queue engine with the ABDM profile sealed on the ticket (`encShare`, `abdmShareOrg`); nothing is registered
+  automatically (MPI dedupe is the desk's decision). A token that cannot be issued answers ABDM FAILURE.
+- **HIP for the inpatient record** (`abdm-hip.js`): one care context per record, `IPD:<enc>:DS|RX|IMM|DR-<h>|INV-<h>`
+  and `OPD:<enc>:OPC` for an ED visit; DiagnosticReportRecord and InvoiceRecord hold one report/invoice each per
+  the IG, so those are per record. Only final records: signed summary, released reports, coded completed
+  immunizations, untaxed single-currency invoices. Served through a READ-only service actor; the subject is
+  re-derived from the Patient record's consented ABHA address at serve time. Serializer: `ctx.facility` makes the
+  HFR Organization author, custodian and attester; patient identifiers HIN/ABHA; section codes only where the slice's
+  entry types match (ndhm.in 6.5.0).
+- **Linking**: on admission (records nothing final, audited), discharge and summary signature, after the response
+  (`waitUntil`): register rows, then link with a cached token or request one with the ABHA address only (no number,
+  FAQ Q32) and link the pending contexts when on-generate-token arrives (correlated by X-HIP-ID + abhaAddress, M2
+  document v2.7 4.3). Pending refs are kept in KV as hashes only. The chart's Link now retries.
+- **HIU from the chart** (`abdm-chart.js`, ward.js ABDM tab): request (purpose CAREMGT/BTG/HPAYMT, HI types, period,
+  access end), status from the consent row, fetch under a GRANTED verified artefact, records filed by abdm-land.js
+  listed by `meta.source.system === "abdm"`. `hiu.js` accepts a server-resolved `{ actorId, tenantId }` and the
+  hospital's HIU ID; its consent checks are unchanged.
+- **HFR/HPR** (`abdm-registry.js`): facility search pinned to the NHA HPR V2 guide section 8 body/response on the
+  V4 host (host UNCONFIRMED); professional lookup path from the M4 Postman export, body/response UNCONFIRMED, so
+  "verified" only when the answer carries the same HPR ID. Results stored on the profile record as a version, audited.
+- NOT built: own-bridge credentials (A1), production (A2), DPDP confirmation record, WellnessRecord and
+  HealthDocumentRecord from the ward record, taxed invoices, the V3 HIU data-push route's per-hospital HIU identity
+  on acknowledgement (still the deployment's), and any live sandbox run.
+## 2026-09-16 Statutory registers are internal record types, one capability per register
+- NDPS, PCPNDT Form F, medico-legal cases, MTP, births/deaths/still births with MCCD, and IDSP/IHIP notifications live
+  in the append-only repository as internal types (`_wardsynq_register_<kind>`, registers.js), like bug reports and
+  connectors, not as RecordService resource types: a resource type is readable through the raw record door, the chart
+  and the change feed by every role with a null read scope, and Form F, MTP and MLC must not be.
+  `RecordService.changes()` now withholds `_wardsynq_register*` rows. Each save is a version in the same append as its
+  audit row; a correction names the version and a reason; every register read is audited; audit rows carry no names.
+- New capabilities (functions/_queue_roles.js): register.ndps (pharmacy, supervisor), register.pcpndt (radiologist,
+  obstetrician), register.mtp (obstetrician, him), register.records (him), mlc.record (doctor, obstetrician),
+  register.ihip (public_health). New roles: `obstetrician` (doctor + Form F + MTP + MLC) and `public_health`.
+  admin holds all by construction. No actor.js grant changed.
+- The NDPS register is not a second ledger: it is read from StockMovement, MedicationDispense and
+  MedicationAdministration (controlled-drugs.js). Drugs are flagged in Admin clinical settings (`controlledDrugs`) or by
+  `controlled: true` on a formulary entry. Wastage/adjustment, dispense and eMAR administration of a flagged drug need
+  a named witness who is an active member of the hospital holding order.dispense, med.administer or register.ndps and
+  is not the recorder. The witness is named, not signed in (a PIN co-sign is the upgrade). The witness and the shift
+  count are hospital policy; the NDPS Rules require Forms 3E/3H/3-I (cited in the file).
+- A returned dispense no longer counts as an issue in stock levels (stock.js levelsFrom, batchBalances).
+- A final obstetric ultrasound report is refused without a complete Form F linked to its request; a preliminary one is not.
+- Nothing is submitted to any authority (CRS, IHIP, District Appropriate Authority, CMO): no public API exists; exports
+  are CSV and printable tables, and every response says submission is manual.
+## 2026-09-16 DPDP Act 2023, NABH and HMIS returns, DHS self-assessment, report builder
+- New capability `dpdp.manage` and role `dpo` (queue.view, emr.view, dpdp.manage). Its grant writes PrivacyNotice,
+  PrivacyAcknowledgement, DataPrincipalRequest, DataBreach, PatientConsent and Patient, nothing clinical. The front-desk
+  (queue.add) grant gains PrivacyAcknowledgement. functions/_wardsynq/dpdp.js; screen wardsynq/site/pages/governance.js.
+- DPDP Rules 2025 text was not confirmed: every answer and breach-notification time is hospital-set
+  (`wardsynq.dpdp.responseDays`, `breachBoardHours`, `breachPrincipalHours`), returned with `confirmed: false`, and
+  with no setting there is no due date. No time from the Rules is hard-coded.
+- Erasure withdraws consents other than treatment, blood products and procedures (s7 makes care independent of
+  consent), removes ABHA identifiers from the current Patient version and clears optional OPD registration details
+  (address, district, state, PIN, referral, ABHA link) through `_opd_patient_store.clearOptionalRegistration`. The
+  clinical record is kept (s8(7), s12(3)); a value removed from the current record stays in version history and is
+  never called erased. An erasure that cannot finish leaves the request in progress with what was and was not done.
+- `PatientConsent` gains the `marketing` scope (s7(a)), withdrawable in the portal.
+- NABH: no monthly submission format is published, so the 32 PSQ 3a-3d indicators are a monthly table
+  (functions/_wardsynq/compliance.js). 8 are computed from the record; 24 are marked not computable with the missing data.
+- HMIS monthly (Other Secondary Care Facility, Pvt): items WardSynQ supports are filled; every other item says not available.
+- DHS 2nd ed.: one `DhsAssessment` record per hospital, a self-assessment, never a certification. FPM.1 prints "d" twice;
+  the second is keyed FPM.1.d-2.
+- Report builder: named datasets only, no query language; staff.admin at the door, each dataset re-checks its own read
+  capability and any patient-identifying column needs emr.view; `SavedReport` shared within the hospital; CSV built
+  server-side, formula-looking cells defused.
+## 2026-09-16 General stores, biomedical assets and the blood bank inventory reuse the one stock ledger
+- Stores issues are stock.js transfers (out of the central store, into the department's sub-store) naming the indent;
+  a spare part fitted on a job card is a new stock.js kind, `consumption`, naming the job card and department. There
+  is no second ledger: the store level, the pharmacy level and the consumption report read the same movements.
+  Indent state (approved, part issued, back-ordered, acknowledged, closed) is derived from Indent, IndentDecision,
+  IndentReceipt, IndentClosure and the transfers, never stored. Back-orders are ordered through purchasing.js
+  (`indentId` on the purchase order); approval stays on the existing approval chain.
+- Four capabilities in _queue_roles.js: `dept.request` (raise and acknowledge an indent, report broken equipment;
+  hospital-floor roles only: doctor, supervisor, nurse, intern, resident, pharmacy, lab, radiographer, radiologist and
+  the two new roles), `stores.indent.approve` (supervisor; the membership's department scope decides which
+  departments, and nobody approves their own indent), `stores.manage` (new role `store_keeper`), `asset.manage`
+  (new role `biomedical_engineer`). Desk roles (reception, cashier, billing, hr, him) were left out because their
+  record grants are pinned as having no, or read-only, clinical actor.
+- Asset status and location are AssetEvent records; job card state and downtime are JobCardEvents; overdue PM is
+  computed from the last closed job against the schedule.
+- Blood units are a per-unit register (BloodUnit), not stock movements: each bag is traced individually. A unit's
+  status is derived from its donation's tests (quarantine until all five mandatory tests are non-reactive and the
+  group is recorded), its own events (discard, release) and the TransfusionEpisode that names it: a crossmatch
+  reserves it and the episode's issue takes it off the shelf, so issue writes nothing new. The crossmatch and issue
+  routes refuse a registered unit that is not available/reserved for that episode and take group, RhD, component and
+  expiry from the inventory. Units from other blood centres (not registered) pass as before, marked untracked.
+  Component shelf lives are defaults only (not confirmed against the Drugs and Cosmetics Rules text); the expiry on
+  the label is what is recorded.
+## 2026-09-16 Hospital support services: diet, CSSD, housekeeping, ambulance, mortuary (branch gap-support)
+- Seven narrow capabilities (diet.order, diet.kitchen, cssd.process, housekeeping.task, housekeeping.inspect,
+  transport.dispatch, mortuary.manage) and six roles (dietitian, kitchen, cssd, housekeeping, transport, mortuary);
+  supervisor also holds housekeeping.inspect. Each grant in actor.js reads only what the job needs.
+- Nine record types in RecordService (DietOrder, MealRound, InstrumentSet, SterilizerLoad, CssdCycle,
+  HousekeepingTask, AmbulanceVehicle, AmbulanceTrip, MortuaryCase), all route-governed (the raw door refuses them).
+- A housekeeping bed task is derived from the bed master (state cleaning + new bed.stateSince) and written by the
+  first person who acts on it: no system actor and no second write at discharge. With
+  wardsynq.supportServices.housekeepingInspection on, a freed bed goes to cleaning and POST /bed/update refuses
+  cleaning to available; only a passed inspection by someone other than the cleaner releases it. Off by default,
+  so the bed board behaves as before.
+- A diet order carries an NBM window beside the diet; what may be served is decided per instant (diet.js dietAt).
+- A completed AmbulanceTrip is captured by charge-capture.js (code AMBULANCE-BLS/ALS); billing reads it, writes nothing.
+- The MLC flag is read (Encounter/Patient `mlc` or `medicoLegal`), never set here; unrecorded asks who confirmed.
+- Screens: wardsynq/site/pages/support.js (five pages, Map tiles in Command and operations), Diet tab on the chart.
+
+### Gap wave 2026-09-16: HR beyond the rota, and patient engagement
+- HR records (hr-attendance.js, hr-records.js) are internal append-only types in the hospital's record store
+  (`_wardsynq_hr_*`), not RecordService types: `hr` holds staff.admin and no clinical actor, and a RESOURCE_TYPES
+  entry would be readable by every emr.view role through the raw record door. Same reasoning as bug-reports.js.
+  Routes under /ward/hr-*: own records and clocking are queue.view with the identity taken from the caller's
+  membership; everything about other staff is staff.admin. Payroll is not built (owner).
+- Attendance links a clock-in to the caller's rota assignment whose window (two hours before start to end) holds
+  now. The monthly summary is computed, never stored; absent only once a shift has ended. Device CSV import is
+  three steps on one route (map, preview, commit with the previewed count), deterministic ids plus a two-minute
+  duplicate window make a re-import write nothing.
+- Credential alerts (60/30/7 days) are in-app records for the member and HR, raised by the tick or "Check expiries
+  now"; no SMS or push to staff. `wardsynq.hr.expiredRegistrationBlocksSigning` (off by default) clears the
+  signing credential in resolveClinicalActor when every recorded registration has expired, so all signing paths
+  refuse NO_CREDENTIAL; unreadable records while the rule is on block signing. No registration on file is not blocked.
+- Patient messaging (patient-messaging.js): five types, each off until enabled with its template. SMS reuses the
+  existing 2Factor DLT path and the hospital's DLT sender ID (alerts.sms.senderId) with a DLT template name per
+  type; the 2Factor API key is still the existing TWOFACTOR_API_KEY secret, no new env. WhatsApp Business Cloud API
+  is a new connector kind (`whatsapp`, provider `meta_cloud`), token sealed per hospital via connectors.js; request
+  shape from Meta's messages reference (URL in the file header), contract-tested with mocked fetch. A message is
+  `sent` only when the provider accepted it (WhatsApp message_status accepted); held/paused/refused/unreachable is
+  failed or retrying (max 3), with the reason on Admin > Patient communication. Delivery receipts (WhatsApp status
+  webhooks, SMS DLRs) are not consumed: the screen says delivery is not confirmed. Consent per channel with the
+  consented number is `_wardsynq_comm_pref`, recorded by the patient in the portal or by the desk (queue.add) with a
+  note; opt-out is re-checked at send. Quiet hours hold; an expired moment is never sent late.
+- Portal self-booking (online-booking.js) narrows portal-requests.js's "a patient cannot book": only sessions the
+  hospital publishes in wardsynq.onlineBooking are bookable, only free non-blacked-out slots, written as an ordinary
+  Appointment by the patient's own DRAFT actor. A `_wardsynq_slot_hold` record appended at the next version decides
+  a race between two patients; a staff booking at the same instant does not take the hold (scheduling.js's existing
+  residual). Patients change only bookings made online, within the hospital's notice hours.
+- Feedback (patient-feedback.js): one invitation per finished IPD/OPD encounter, questions copied onto it; the link
+  token is in the URL fragment and indexed by its SHA-256. The feedback message stores the link it sent (so a retry
+  can resend it). NPS plus hospital questions; low scores go to a service-recovery queue resolved with a note.
+- Not built: payroll, staff SMS/push for credential alerts, delivery receipts, a patient-visible reminder history,
+  booking a slot through the staff diary's holds, per-department NPS trend charts.
+
+## 2026-09-16 Scheduled backups go to a backup-destination connector, never to an existing bucket by default
+
+- **Where a backup can be written today without a new binding: nowhere safe by default.** The Pages bindings that
+  exist are CONNECT_DB (the store being backed up, same failure domain), MAIK_KV (25 MB values, not a backup store),
+  FOLLOWCARE_R2 (FollowCare photos under a 7-day lifecycle) and OTA_R2 (`stewardmd-offline`, the paid drug DB and OTA
+  files). Putting hospital records in either bucket would be a silent answer to owner decision S1 and to "where the
+  record backups live, and who holds them", and a new Cloudflare coupling in domain logic. Not done.
+- **So the destination is a per-hospital connector** (`functions/_wardsynq/backup-destinations.js`, kind `backup`,
+  Admin Center > Integrations > Backup destination): `s3` is the hospital's own S3-compatible bucket with sealed
+  credentials (works now, needs nothing from the owner); `platform` is the deployment's object store (`DOC_S3_*`,
+  object-store.js) and reports "not configured" until S1 chooses the bucket. SFTP is not offered: a Worker has no
+  SSH client without a new dependency; an S3 gateway (MinIO) in front of SFTP covers it.
+- **Schedule** (`backup-schedule.js`): the worker's existing hourly cron POSTs `/api/queue/ops/backup-all` (no new
+  cron). Per hospital: one full a month, one incremental a day from the last run's record-store sequence, a run too
+  large for one request continues next hour (`more`). Encrypted AES-256-GCM under an HKDF key per tenant from the
+  existing document key; no key, no backup. Each file read back and SHA-256 checked. Retention from the connector
+  (default 30 daily, 12 monthly); a kept restore point keeps every file of its chain before it.
+- **Verification**: weekly restore dry run into a MemoryRepository scratch tenant (never the live store): files,
+  checksums, verifyPlan over the chain, row counts per type against the runs' manifests, and the audit-chain link
+  recorded at backup time against the live chain. Recorded as an automated RestoreTest. Above 20,000 rows the
+  scratch replay is skipped and the test is recorded as partial (ponytail ceiling).
+- **Reporting**: System health's Backup line says "Backups are not running: no backup destination is configured"
+  with what to set up, or the S1 wait, or the last failure; otherwise last successful backup, size, last restore test.
+  A failure pushes to the phones of active staff.admin members once a day per failure code, and the outcome (sent n
+  of m, no device, push not configured) is shown, never "delivered".
+## 2026-09-16 NHCX payer adapter sends for real; only a verified callback moves a record (gap-claims-gst A)
+- **Decision:** `wardsynq/wardsynq-nhcx-adapter.js` builds NRCeS ClaimBundle / CoverageEligibilityRequestBundle / Task,
+  encrypts to the payer's X.509 certificate as a compact JWE (RSA-OAEP with SHA-1 per RFC 7518, A256GCM, aad = the
+  protected header) with WebCrypto only, takes a token from `<gateway>/participant/auth/token/generate`, and POSTs
+  `{"payload": jwe}`. A 202 is `sent` (never acknowledged). `functions/_wardsynq/nhcx.js` writes a tenant system record
+  `_wardsynq_nhcx_exchange` (ids only) BEFORE the request leaves, and the public
+  `POST /api/queue/nhcx-callback/<orgId>/<resource>/<action>` believes an answer only after: RS256 bearer JWT verified with
+  the gateway signing certificate on the payer connector whose code is the sender (exp/iat), JWE decrypted with the
+  hospital's own sealed PKCS8 key, recipient code equal to the hospital's participant code, correlation id sent by this
+  hospital through that connector for that kind of request. Unverified callers write nothing (not even audit); later
+  refusals are audited. New record type `CoverageEligibilityCheck` (billing.charge writes, billing.view reads).
+- **x-hcx-timestamp is ISO 8601**, not the "Unix timestamp" the OpenAPI schema text says: the spec's own example JWE,
+  every integrator SDK and the gateway's validator (joda `new DateTime(String)`) use ISO 8601.
+- **Pre-authorisation diagnoses** sent to a payer must be DOCUMENTED on the problem list (same rule as a claim); a
+  pre-authorisation is approved only on outcome complete/partial with an approved amount above zero and refused only on
+  complete with exactly zero; a claim answer records the payer's figures and never moves the claim lifecycle.
+- **Trade-off / not built:** certificates are entered per payer connector (sealed), not fetched from
+  `/participant/search`; a token is fetched per call (no cache); communication/request, paymentnotice and
+  predetermination are not built; a Patient travels as a logical id only (payers needing ABHA or demographics will ask
+  for more). A callback that races the claim's own "sent" write can make that write answer 409. Not verified against a
+  live NHCX sandbox (mocked transport only).
+- **Status:** built, tested (test/wardsynq-nhcx.test.mjs, test/ward-rad-tpa-view.test.mjs).
+
+## 2026-09-16 GST rules by law, credit/debit notes on the invoice ledger, and e-invoicing (IRN) as a connector (gap-claims-gst B)
+- **Decision:** `functions/_region_in.js gstForLines` applies the rules the law fixes for a clinical establishment, read
+  from the primary PDFs on cbic-gst.gov.in: a non-ICU/CCU/ICCU/NICU room over Rs 5000 a day is 5 percent on the whole
+  day's charge without ITC (Notification 03/2022-CT(Rate) entry 31A in 11/2017; 04/2022-CT(Rate) proviso to serial 74
+  of 12/2017; in force 18 July 2022); other health care (Heading 9993) is exempt; a medicine on an inpatient bill is
+  exempt as part of the composite supply; a medicine sold to an outpatient takes the Price list rate. The Price list row
+  carries `hsnSac`, `gstRate` and, for beds only, `intensiveCare` (never inferred from a ward name); each is stored only
+  when sent, so an older screen cannot wipe it. Invoice lines carry hsnSac, taxable value, basis and tax; CGST/SGST
+  versus IGST is computed in the summary from the buyer's place of supply against the GSTIN's state (never stored).
+- **Research correction:** the research note had 03/2022 and 04/2022 the other way round (03 inserts the taxable
+  entry, 04 the exemption proviso). Circular 32/06/2018-GST's own text names FOOD to in-patients as part of the exempt
+  composite supply; it does not mention medicines. Medicines to in-patients are exempt here by the same composite-supply
+  reasoning (Sections 2(30), 8(a) CGST Act; Gujarat AAR 106/2020 cited in the research), which a hospital's
+  accountant should confirm.
+- **Decision:** credit and debit notes are ledger events on the same append-only invoice (`postNote` in
+  `wardsynq/wardsynq-invoice.js`): own number (CRN/DBN series), date, required reason, lines naming the charge line with
+  a taxable value and GST at that line's own rate. Credit is capped per line at what is still creditable; void is refused
+  once a note or an active IRN exists. A credit note reversing GST after 30 November following the supply's financial
+  year is recorded with `gstReversalLate` and a warning (Section 34(2)); the annual-return date is not known here.
+- **Decision:** tax invoices in India get a consecutive number per financial year (`INV/2627/000001`, 16 characters max,
+  Rule 46(b)), issued from a `_wardsynq_doc_series` record with optimistic concurrency. A number issued before a failed
+  invoice write is a gap, not reused. Invoices raised before this change have no number and cannot be e-invoiced.
+- **Decision:** e-invoicing is a singleton connector kind `einvoice` with an adapter map; the first adapter is the NIC
+  IRP direct API (auth `/eivital/v1.04/auth`, `/eicore/v1.03/Invoice`, `/eicore/v1.03/Invoice/Cancel`, headers
+  client_id/client_secret/Gstin/user_name/AuthToken, RSA PKCS#1 v1.5 over base64(JSON) with the IRP public key, SEK and
+  payloads AES-256-ECB). WebCrypto lacks both ciphers, so RSA is BigInt modexp on the SPKI-imported key and ECB is built
+  from single AES-CBC blocks; both are checked against node:crypto. Only B2B bills with a buyer GSTIN and only taxed lines
+  are reported; B2C, exempt-only, unnumbered, missing-HSN, not connected and not enabled are refused with a plain reason
+  before anything is sent. The hospital's own "applies to us" setting decides applicability; turnover is not computed.
+  (SUPERSEDED 2026-09-17: applicability is the aggregate turnover including exempt supplies on the GST settings; place of
+  supply is where performed by default; a mixed B2B bill is a Tax Invoice plus a Bill of Supply. See the entry below.)
+  Signs in per call (no token cache). Cancel only within 24 hours of AckDt (India time). Printed invoice draws the signed
+  QR with the existing vendor/qrcode-generator.js.
+- **Not built:** B2C place of supply from a patient address (B2C is intra-state), the 30-day reporting limit for AATO over
+  Rs 10 crore (the IRP refuses), e-way bills, GSTR returns, GST on the OPD clinic billing station (q_invoices, which still
+  has no tax), unit codes other than NOS for medicines. Not verified against the live NIC sandbox (mocked IRP only).
+- **Status:** built, tested (test/wardsynq-gst-einvoice.test.mjs).
+
+## 2026-09-16 Package billing: a versioned package master, a package copied onto a stay, and a manual pack for schemes with no API (gap-claims-gst-2)
+- **Decision:** `functions/_wardsynq/packages.js`. The master is a tenant system record `_wardsynq_package` (one per
+  scheme and code; scheme pmjay / state / cghs / echs / insurer / hospital; rate in rupees; inclusions and exclusions as
+  Price list kinds plus named items; expected length of stay; pre-authorisation required; the scheme's pre-auth and
+  claim document lists). Append-only: every change is a version with a reason and the version read, audited
+  `package.create / update / withdraw / restore` with the fields changed (and old/new rate). staff.admin writes on
+  Admin > Price list > Packages; billing.view reads.
+- **Decision:** a package on a stay is a new record type `PackageAssignment` (billing.charge writes, billing.view reads,
+  granted with Claim), id per stay, carrying a COPY of the package version, the pre-authorisation it is linked to (must
+  be this patient's) and the scheme beneficiary ID. Change or removal needs a reason; refused once the package line is
+  on a bill (raise a note instead) and refused on a stay that already has an itemised bill (no care billed twice).
+- **Decision:** `raiseInvoice` on a package stay bills the package line (sourceType PackageAssignment, never twice), every
+  charge the package covers at zero with `packageIncluded` (an unpriced covered charge needs no price), exclusions on top
+  (`packageExcluded`), and charges named neither way billed and flagged `packageOutside` for a person to check. An
+  exclusion wins over an inclusion. Charges of any OTHER active package stay are kept off a patient's other bills. With
+  no stay named and none open, the latest package stay with something billable not yet billed is the bill's stay, so a
+  discharged package stay is still billed by its package. The invoice carries `package` with length of stay exceeded
+  and pre-authorisation state flags; the bill still raises (the desk decides), it says so.
+- **GST:** the package line is treated as a health care service (exempt) and covered lines carry no tax.
+  Not split: a package bundling a room above Rs 5,000 a day; a hospital's accountant decides, the package then needs GST fields.
+  SUPERSEDED 2026-09-17 by "GST on package billing per the GST treatment review" below: the room is carved out.
+- **No scheme API:** PM-JAY TMS has no public API and no CGHS/ECHS API is verified, so `GET /ward/package-pack` returns
+  a checklist, the package's own document lists and a field export labelled manual submission, and never marks anything
+  submitted. TMS pre-auth sections per the PM-JAY 2.0 TMS Provider User Manual (sha.kerala.gov.in); mandatory documents
+  are per package, so the hospital enters them from the scheme's package master rather than WardSynQ inventing them.
+- **Not built:** automatic LOS enhancement requests, per-day package rates or multi-package stays, importing a scheme's
+  HBP master file, GST split for bundled rooms, `/ward/charges` preview still lists a package stay item by item (the TPA
+  screen's package split and the bill are package-aware).
+- **Status:** built, tested (test/wardsynq-packages.test.mjs, test/ward-package-view.test.mjs, test/wsq-admin-packages.test.mjs,
+  test/run-ward-package-ui.mjs headless).
+
+## 2026-09-16 WHO growth tables: shipped with citation; LICENCE NEEDS A LEGAL CHECK before commercial release (branch gap-clinical)
+
+- **SUPERSEDED 2026-09-17** by "Growth charts use the CDC 2000 reference (public domain)" below: the WHO tables were removed.
+
+- **Licence (open question, owner/legal).** The task brief called the WHO growth LMS tables public domain. What was
+  actually found: WHO publications are CC BY-NC-SA 3.0 IGO (non-commercial; commercial use and derivatives need
+  WHO's permission, https://www.who.int/about/policies/publishing/copyright), and the tables were taken from WHO's
+  R packages anthro (GPL-3) and anthroplus (GPL >= 3), which name WHO as copyright holder of the data. WardSynQ is
+  sold to hospitals, so whether shipping these tables inside it needs WHO permission is a legal question, not
+  decided here. Shipped for now with full citation, source URLs and the licence text found, in the JSON files and
+  wardsynq/data/WHO-GROWTH-NOTICE.txt. Before commercial release: legal check, and a WHO permission request if needed.
+- **Method.** wardsynq/wardsynq-growth.js follows WHO's own R code (anthro R/z-score-helper.R, z-score-*.R;
+  anthroplus R/zscores.R): restricted |z| > 3 adjustment for weight-for-age, weight-for-length/height and BMI only;
+  day tables with round-half-up, 0.1 cm and month interpolation; 2006 standards below 60 months (days / 30.4375),
+  2007 reference from 60 months; +/-0.7 cm length/height conversion by position. Corrected age for < 37 weeks until
+  24 months chronological; never corrected when gestation is unknown; a corrected age before term is refused.
+- **Computed on the server.** GET /api/queue/ward/growth (emr.view) returns z-scores, centiles and sampled centile
+  lines, so the 0.5 MB of tables sits in the Pages Functions bundle (JSON, compresses to roughly a fifth) and
+  ward.js carries only the drawing code. One engine, tested once, rather than a second copy in the browser.
+- **Gestational age** is taken only from the mother's recorded due date via the FamilyLink of a newborn registered
+  at this hospital (280 days minus due date minus birth date, accepted between 22 and 44 weeks). The antenatal
+  gestationWeeks is not used: it is whatever was typed weeks before delivery.
+- **Only weight is plotted.** WardSynQ records no length, height or head circumference; the screen says so. Adding
+  those measurements (with lying/standing position) is a separate change.
+
+## 2026-09-16 Pre-anaesthetic checkup gates the WHO Sign In by a stated reason, not a hard block (branch gap-clinical-2)
+
+- **One PreAnaestheticCheckup per theatre case** (id from the case), recorded with EMR_TREAT, revised only as a new
+  version with a reason and the version it replaces. Closed vocabularies (Mallampati, neck movement, ASA I-VI + E,
+  fasting status, technique, decision); nothing computes an ASA class, an airway grade or a fasting adequacy.
+- **Sign In reads it on the server.** The checklist engine runs first (its refusals come first), then a missing
+  checkup or an "unfit" decision refuses Sign In (409 PAC_MISSING / PAC_UNFIT) unless the submission states why it
+  proceeds (pacAcknowledgement, 5+ characters). Not a hard block: emergencies proceed without a checkup, and the
+  team decides. A read failure refuses (502) rather than passing. What the checkup said, or that there was none,
+  and the reason given are kept on the sign-in, so a later revision cannot rewrite what the team saw.
+
+## 2026-09-16 Expected discharge date and transfer requests are their own records (branch gap-clinical-2)
+
+- **ExpectedDischarge**, one per stay, set by emr.treat; a change is a new version with a reason and the version it
+  replaces. It is the team's stated plan, not a prediction (patient-flow.js still invents none). Overdue = the stay is
+  open and the date is before today on the hospital clock (timeZone, else utcOffsetMinutes, else IST). A date before
+  today is refused. Shown on the ward list row, the chart, and the command center (overdueDischarges; null = unread).
+- **TransferRequest**: requested -> accepted | declined -> bed-assigned -> completed, or cancelled; each step a new
+  version with who/when (and a reason on decline/cancel), one open request per stay. Asking is emr.treat; the other
+  steps are queue.add like /ward/transfer, and TransferRequest joined the queue.add write grant. The move itself is
+  transferPatient unchanged (bed collision and bed-state checks), after checking the patient is still where the
+  request found them. A move whose request could not then be closed returns 502 request_not_closed, transferred:true.
+- **Not checked:** that the person accepting belongs to the receiving ward (the server has no ward membership). An
+  ICU transfer request moves the location through the same route and does not change the stay's class.
+
+## 2026-09-16 Hospital-loaded code sets, no licensed content shipped (branch gap-clinical-2)
+
+- **SNOMED CT, ICD-10, LOINC are loaded by the hospital** (Admin > FHIR > Code sets, CSV or tab-separated release file with
+  a code and a display column), with a licence confirmation recorded on the import (who, when, the statement). No release
+  ships: SNOMED CT needs the hospital's NRCeS affiliate licence, ICD-10 is WHO-licensed, and the LOINC licence text could not
+  be retrieved on 2026-09-16 (loinc.org refused automated fetches), so no LOINC table ships either.
+- **Stored as records** (code-sets.js): CodeSetImport per system + CodeSetChunk records of 2000 codes, chunk ids carry the
+  import id so a re-import never overwrites. Search reads the whole set into memory (per-isolate cache); ceiling 100k codes
+  per system. Past that, an indexed store (D1 table with FTS) behind the repository adapter.
+- **A code is attached only from the loaded set** (resolveCoding): problems/diagnoses with codeSystem snomed|icd-10|loinc,
+  an operation booking (SurgicalCase.procedureCoding), a test order (ServiceRequest.standardCoding). The stored display is
+  the set's. FHIR Condition/Procedure/ServiceRequest and the ABDM consultation record carry the coding when present.
+
+## 2026-09-17 Blood donor criteria: the stricter of WHO 2012 and the law of the hospital's country, per hospital stricter only (branch fix-donor-growth)
+
+- **Owner decision, corrected the same day by the legal review (section G).** The owner asked for international criteria
+  (WHO) instead of the unconfirmed secondary-source values. The legal review found that in India the donor criteria of the
+  Drugs and Cosmetics Rules 1945, Schedule F Part XII-B, "H. Criteria for Blood Donation" (substituted by G.S.R. 166(E),
+  11 March 2020) are licence conditions of a blood centre (r.122-P, r.122-O), so a WHO value looser than the Rule would breach
+  the licence. Rule: **each criterion in force is the stricter of WHO and the law**; a hospital may only make it stricter.
+- **Sources read, not assumed (2026-09-17).** WHO, Blood donor selection (2012), ISBN 978 92 4 154851 9, on NCBI Bookshelf
+  (ch. 4 NBK138219, ch. 6 NBK138208, ch. 7 NBK138223); no later WHO edition found. The gazette text of G.S.R. 166(E), items
+  1-104, from https://drugscontrol.py.gov.in/sites/default/files/GSR-166-E.pdf. Council of Europe (EDQM) Guide, 22nd ed.
+  (2025), standard 2.4.1.4, for the yearly whole blood maximum WHO does not set. Every value in
+  functions/_wardsynq/donor-criteria.js carries its WHO section or its item number.
+- **Resulting values in India:** age 18-65, first-time donors up to 60, apheresis 18-60, no physician's discretion past an
+  age limit (item 2); 45 kg for 350 mL, **more than** 55 kg for 450 mL (item 3, the old `>= 55` was a bug), 50 kg for apheresis;
+  Hb 12.5 women (item 9) and 13.0 men (WHO 4.6.1); 90/120 days (item 4); apheresis 28 days between platelet collections and
+  14 for plasma (WHO 4.6.2, stricter than the Rule's 48 h), at most 2 in 7 days and 24 in a year, 28 days after whole blood,
+  whole blood 28 days after apheresis or 90 if the red cells were not all returned (item 4); platelet count above 150 and
+  total protein above 60 g/L (WHO 4.10); BP 100-140/60-90, pulse 60-100 and regular, temperature measured (items 5-7).
+  Outside India: WHO values, CoE 6/4 donations a year, BP and pulse not checked unless the hospital sets a limit, and the
+  WHO physician's discretion for older donors (named on the record).
+- **Deferral table as data.** Each yes on the questionnaire is deferred against a condition (35 conditions, WHO and Rule
+  periods, the longer or permanent wins); the period is worked out from the date given, a longer typed period is allowed,
+  a shorter one never. Conditions with no fixed period (breastfeeding, minor illness in the Rule) need days typed.
+  Item 52 is kept as the Rule states (sub judice); changing it is a code release citing the amending notification.
+- **Temperature.** Item 7 says "Afebrile; 37 C/98.4 F". Read as normal body temperature, not a ceiling: febrile is WHO
+  4.5.2's more than 37.6 C, and a centre that reads 37.0 as the ceiling sets it on Admin. Flagged for the legal reviewer.
+- **Jurisdiction** = the hospital's region: India when the region is IN or not set (as the rest of WardSynQ reads it), none
+  for another country until its law is reviewed (`legalMinimums` is keyed by jurisdiction).
+- **Settings** live in `wardsynq.bloodDonorCriteria` (org whitelist), edited at Admin > Hospital > Blood donor selection
+  criteria through GET/POST /api/queue/org/blood-donor-criteria (staff.admin, audited by criterion name). Validated on save
+  and again on every read; a stored value that is looser is ignored.
+- **Not built:** double red cell apheresis, the Rule's pre-donation checks as separate hard gates (they are one question and
+  a condition with typed days), component shelf-life changes from the legal review (Schedule P was not read here), NAT,
+  pilot sample retention, the donor record 5-year retention rule.
+
+## 2026-09-17 Growth charts use the CDC 2000 reference (public domain); a hospital may load its own licensed WHO or IAP tables (branch fix-donor-growth)
+
+- **Owner decision: growth tables must permit commercial use.** The WHO Child Growth Standards tables shipped on
+  2026-09-16 (CC BY-NC-SA 3.0 IGO) were removed from the repository (wardsynq/data/who-growth-2006.json, who-growth-2007.json,
+  WHO-GROWTH-NOTICE.txt). They remain in git history before this commit; rewriting history was not done.
+- **Shipped instead: CDC 2000 growth charts, LMS data files** (wardsynq/data/cdc-growth-2000.json, 81 KB): wtageinf,
+  lenageinf, wtleninf, hcageinf (birth to 36 months), wtage, statage, bmiagerev (2 to 20 years), wtstat (weight-for-stature).
+  Only Sex, age/length/height, L, M and S are kept, values unchanged; the smoothed percentile columns are derivable.
+- **Licence verified from the publisher's own page.** CDC, Use of Agency Materials (cdc.gov/other/agencymaterials.html):
+  "Most of the information on the CDC and ATSDR websites is not subject to copyright, is in the public domain, and may be
+  freely used or reproduced without obtaining copyright permission", with four conditions: attribute CDC, state that use
+  does not imply endorsement by CDC/ATSDR/HHS/US Government, do not change substantive content, state the material is
+  available on the CDC website for no charge. The data page carries no copyright statement. The attribution and
+  non-endorsement statement are in the data file and on the chart's source line.
+- **CDC's WHO-based 0-24 month files (cdc.gov/growthcharts/who-data-files.htm) are NOT shipped.** The page states no licence
+  and the data are WHO's (CC BY-NC-SA 3.0 IGO); CDC's public-domain statement excludes material licensed from third parties.
+- **Retrieval.** cdc.gov refused automated downloads from this machine on 2026-09-17 (Akamai 403), so the eight CSVs were
+  taken from the Internet Archive captures of the same cdc.gov URLs (22 Nov 2025) and checked byte-identical to the 2021
+  captures (lenageinf.csv: 2021 capture has extra comparison columns; L, M, S identical). The Dec 2024 captures were truncated
+  and were not used. SHA-256 of each file is in the JSON.
+- **Method (wardsynq/wardsynq-growth.js), CDC's own:** LMS z and inverse as on the CDC data page; linear interpolation
+  between rows ("interpolation could be used"); no WHO |z| > 3 adjustment; age months = days / 30.4375; infant tables under
+  24 months and 2-20 year tables from 24 months; +/-0.8 cm length/height conversion and the modified z-score extreme-value
+  flags from CDC's SAS program page; BMI above P95 marked extendedBmiNotApplied (CDC 2022 extended BMI not implemented).
+  Corrected age for preterm infants unchanged. Chart centiles 3, 10, 25, 50, 75, 90, 97. Verified against CDC's worked
+  example (9-month boy: P5 7.90 kg, 9.7 kg = z 0.207, 58th centile) and several published percentiles.
+- **Hospital-licensed tables** (functions/_wardsynq/growth-tables.js), like code sets: Admin > FHIR > Growth charts, CSV
+  columns indicator, sex, x, l, m, s; method lms or who-restricted (WHO's adjustment on weight indicators); licence
+  confirmation recorded; GrowthTableImport + GrowthTableChunk records; withdraw writes a withdrawn version and the chart goes
+  back to CDC 2000. POST /api/queue/ward/growth-table-import (staff.admin), GET /api/queue/ward/growth-tables (emr.view).
+  GET /ward/growth returns `reference` (id, name, citation, licence, attribution) and the ward card names it.
+- **Not built:** CDC 2022 extended BMI-for-age; preterm charts (Fenton, INTERGROWTH-21st); recording length, height or head
+  circumference (still only weight is plotted).
+
+## 2026-09-17 Blood centre after collection follows Schedule F Part XII-B and Schedule P (legal opinion section G) (branch blood-legal)
+
+- **Source:** legal opinion 2026-09-17, section G (G.1 tables, G.5 requirements 3 to 8). Rules and citations are one pure
+  module, `functions/_wardsynq/blood-centre-rules.js`; `blood-bank.js` enforces them. This closes the "Not built" list of
+  the donor-criteria entry above, except what is listed below.
+- **Shelf life is computed, not typed.** Expiry = collection time + the Rules' shelf life for the component, the bag's
+  anticoagulant (whole blood ACD 21 days, CPDA 35, Schedule P item 7) and the additive (SAGM/ADSOL/NUTRICEL 42 days); FFP
+  and cryo one year, platelets 5 days, granulocytes 24 hours, an open-system pool 6 hours. An entered expiry may only be
+  earlier; a later one is refused. Red cells without an additive are capped at the whole blood limit (the opinion reads no
+  separate value). FFP frozen, and platelets separated from whole blood, within 6 hours of collection or refused. Storage
+  is recorded as the Rules' range, not free text. The donation records its anticoagulant and voluntary/replacement kind.
+- **Tests (heading K, L):** every result names its method; the irregular antibody screen is recorded (shown and printed,
+  not a release gate: the opinion names the field, not a hold); NAT is a hospital setting (not required by the Rules), and a
+  reactive NAT discards whether or not required. **Any reactive result in a donation's history keeps it reactive**: before
+  this, the latest result counted, so a retest could clear a reactive donation, contrary to the module header.
+- **Label:** printed from the unit's server record only when it may be issued, with every result, method, antibody screen
+  and the group colour (O blue, A yellow, B pink, AB white).
+- **Pooling:** one BloodUnit record naming its source units and donations; sources derive status "pooled". One group only.
+- **Samples:** `BloodSample` register; retain-until = 7 days (or the hospital's longer setting) after the last of the
+  covered units left (issued, discarded, expired); a discard before then is refused. Discard is a new version.
+- **Confidential (G.5.8):** `DonorNotification` (notified, counselled, referred) only for a reactive donation, blood
+  centre role only. `service.js BLOOD_CENTRE_ONLY` (BloodDonor, DonorScreening, BloodTestResult, DonorNotification,
+  BloodUnitEvent) is withheld from the change feed and from `/ward/record-detail` unless the reader's grant names the type:
+  a null read scope admitted every type, so any doctor or nurse could sync item 52 deferral reasons and HIV results. The
+  crossmatch gate says "not available", never "reactive". The Blood bank routes still read through list/get (gated by
+  transfusion.issue), so admin's null scope keeps the screen.
+- **Look-back (G.5.6):** derived on read: reactions on episodes traced unit -> donation -> donor; each reactive donation's
+  earlier donations from the same donor with their units' status and recipient MRN.
+- **Charges (G.5.7):** `_clinic_billing.js validateTariff` refuses a tariff line named as a price/cost/sale of blood or a
+  component. Only names are checked; NBTC rates are not encoded.
+- **Settings:** `wardsynq.bloodCentre` { natRequired, shelfHours (shorter only), sampleRetentionDays (>= 7),
+  recordRetentionYears (>= 5) }, Admin > Hospital, GET/POST /api/queue/org/blood-centre-settings (staff.admin, audited by
+  name). **Merged with legal-privacy (2026-09-17):** the record period is `retention.js`'s "blood-centre" class (floor five
+  years). The Admin card still edits recordRetentionYears, saved as `wardsynq.retention.years["blood-centre"]`, never in
+  `bloodCentre`; classesOf never reads below the floor. Nothing in WardSynQ purges blood centre records today.
+- **Not built:** frozen red cells (storage -80 to -196 C, no shelf life in the opinion); donor consent form fields (not
+  listed in section G); bag batch and kit/reagent registers (heading L lists them, G.5 does not); a Medical Officer name on
+  screening (the signed-in actor is recorded); NBTC processing-charge rates; storage temperature logs.
+
+## 2026-09-17 Privacy law by date, confirmed clocks, retention classes and legal holds (branch legal-privacy)
+
+Source: the legal opinion of 17 Sep 2026 (sections A and H; research awaiting a practising lawyer's sign-off).
+- **The law is computed per day** (functions/_wardsynq/privacy-law.js). DPDP hospital duties start 13 May 2027
+  (G.S.R. 843(E); Rules r.1, G.S.R. 846(E)), Consent Managers 13 Nov 2026. Before that: IT Act s.43A + SPDI Rules 2011 and
+  the CERT-In Directions 2022. `wardsynq.dpdp.dpdpStartDate` may only bring commencement EARLIER (stricter). No separate
+  `privacyRegime` setting: the regime is the date. The stricter of both regimes is kept after commencement.
+- **Clocks replace "hospital-set, not confirmed"**: SPDI one month (min of 30 days and a calendar month) for every request
+  received before commencement; DPDP 30 days per kind (cap 90) from it; CERT-In 6 hours from awareness always; Board
+  detailed report 72 hours only for a breach the hospital became aware of from commencement, moved only by a recorded
+  Board extension; patients 72 hours as hospital POLICY (past 72 only with a written reason). A value past a cap is not
+  used. The old `breachBoardHours` setting is ignored.
+- **No silent breach close**: close needs CERT-In, the patients and (where it applies) the Board recorded; the only other
+  exit is "not a personal data breach" with reasons, confirmed by a different person. r.7(1) five and r.7(2)(b) headings
+  are required fields; the sixth Board heading is filled from the patients' log.
+- **Every answer carries the DPO/Grievance contact** from the published notice (r.9, SPDI r.5(9)); no notice, no answer.
+- **Children (r.10) and guardians (r.11) gate non-care purposes only, from commencement**: research/marketing/other
+  consents, a portal account, a message opt-in. Care (treatment, procedure, blood, referral sharing, clinical photography)
+  is exempt (Fourth Schedule Part A item 1). An unrecorded date of birth fails closed for a non-care purpose.
+- **Retention classes** (functions/_wardsynq/retention.js): clinical records 10 years after the last encounter (DGHS OM
+  28 Oct 2014), a child's until 3 years after 18 (unconfirmed limitation basis, hospital may lengthen), MLC 10 years or
+  proceedings end, PCPNDT 2, MTP 5; `wardsynq.retention.years` lengthens, never below the floor. Nothing auto-purges;
+  a document purge needs a reason and is refused inside the patient's clinical period or under a hold. Document default
+  went 3 -> 10 years.
+- **LegalHold is a record type**; every non-withdrawn MLC register entry is an automatic hold. Holds block erasure and
+  destruction; only register.records (the medical records officer) lifts one, with a disposal reference.
+- **Copies of records within 72 hours** (IMC reg 1.3.2) are a clock on the release-of-information request (ROI), with
+  new requester kinds authorised-attendant (authority recorded) and legal-authority; not a sixth DPDP request kind.
+- **Log retention is reported, never claimed**: audit and read-log rows are never deleted by WardSynQ (met); storage in
+  India, the platform's own logs and NTP source are not confirmed / not met (security review card).
+
+## 2026-09-17 GST on package billing per the GST treatment review (branch gst-packages)
+- **Source:** GST treatment review of WardSynQ package billing (17 September 2026, reviewer agent; citations inline in it).
+  Its answers are "probable" or "unconfirmed" where no primary text settles the point; each such point is a hospital
+  setting defaulting to the review's safest reading, labelled for the chartered accountant.
+- **Decision:** a non-ICU room above Rs 5,000 a day inside a package is carved out of the exempt package line as its own
+  line (`<code>-ROOM`, sourceId `<assignment>:room`, SAC 999311) and taxed at 5 percent; the package line keeps the rest.
+  Valuation (`gst.pkgRoomValuation`): published per-day tariff capped at the package price (default), the payer's own
+  per-day room rate entered on the package with its source, or a proportional split (falls back to the tariff, said, when
+  a covered item has no price). `priceIncludesGst` on a package back-calculates 5/105 and records the GST the hospital
+  bears. A covered room day with no bed row refuses the bill (`room_tariff_missing`). Valued when the package line is
+  billed; later room days on an open stay need a debit note (the response warns).
+- **Decision:** in-patient is a property of the stay: every item on an admitted patient's bill is exempt composite health
+  care (SAC 999311 printed, never the goods' HSN) except a room over Rs 5,000 a day, a Price list row marked
+  `nonHealthcare`, and a take-home medicine at discharge (`MedicationDispense.takeHome`, taxed unless
+  `gst.dischargeMedsAsComposite`). Outpatient: services exempt with default SAC (999312/999314/999315/999316), a medicine
+  given in the visit exempt, a dispensed one taxed at its row rate. A taxable line with no rate now REFUSES the bill
+  (`gst_rate_missing`) instead of raising it untaxed.
+- **Decision:** the room test is per day: bed rows carry `unitHours` (charge capture bills begun units per day), the
+  per-day charge is max(price converted to 24 hours, the day's bed lines); `intensiveCareClass` (ICU, CCU, ICCU, NICU,
+  ICU_SPECIALTY, HDU) with `gst.intensiveCareUnits` deciding the last two; `gst.roomChargeBasis` may add daily nursing.
+- **Decision:** documents are computed per invoice (`documents`): Bill of Supply (exempt only, numbered in a `BOS`
+  series), Tax Invoice, Invoice-cum-Bill of Supply (Rule 46A, to a patient), and for a registered buyer a Tax Invoice
+  (the invoice number, the only document reported for an IRN) plus a Bill of Supply issued its own BOS number when the
+  buyer is saved. The IRN request refuses a mixed B2B bill until that number exists.
+- **Decision:** place of supply for health services is where performed (IGST Act s.12(4), probable): CGST + SGST even for
+  an out-of-state payer; the invoice stores `placeOfSupply` from `gst.placeOfSupply` at raise, and only
+  "recipient_state" restores IGST. `gst.recipientOfCashlessClaims` defaults to the patient: a buyer of kind "payer", or any
+  buyer on a scheme or insurer package, is refused (`payer_not_recipient`). A TAN-based GSTIN (TDS deductor) is valid.
+- **Decision:** Section 34(2) from 01.10.2025: a credit note on taxed lines needs `gstTreatment` (patient:
+  `gst_refunded`; registered buyer: `itc_reversed` with a confirmation reference; or `without_gst`), asked before a number
+  is issued; after the 30 November limit it is issued without GST. A note carrying no GST is `financial` and never
+  reported to the IRP.
+- **Decision:** e-invoice applicability is `gst.aggregateTurnoverRs` (exempt supplies included) above Rs 5 crore; the
+  connector's own "applies" checkbox is removed. Settings live in org config `wardsynq.gst`, edited on Admin > Price list
+  > GST settings through `GET/POST /api/queue/org/gst-settings` (staff.admin; a non-default needs the CA's opinion reference
+  and date; every change needs a reason; audited `org:gst_settings` naming the settings changed).
+- **Not built:** WHOLE_PACKAGE_EXEMPT valuation and per-payer valuation overrides; the 30-day IRP reporting limit for AATO
+  of Rs 10 crore or more (the IRP refuses); an e-invoice override with a CA reference; GST TDS computation (only a note);
+  a later confirmation step for a credit note issued while ITC reversal is pending; debit notes against a carved room on
+  later days; OPD clinic billing station (q_invoices) GST.
+- **Status:** built, tested (test/wardsynq-gst-packages.test.mjs, test/wardsynq-gst-einvoice.test.mjs,
+  test/wsq-admin-gst-settings.test.mjs).
+
+## 2026-09-17 Statutory registers brought to the legal review (branch legal-registers)
+- Source: a legal-research opinion (not legal advice) on sections B to F; its lawyer sign-off list is still open. Where it
+  says unconfirmed, the safest default ships with a hospital-editable setting and the note on screen:
+  `wardsynq.registers` (register-settings.js, whitelisted in _opd_org.js), edited at POST /org/register-settings
+  (staff.admin, Registers > Register settings). Clocks (Form F by the 5th, Form II by the hospital's day, RBD 21 days,
+  NDPS 3J 30 Nov / 3-I 31 Mar, recognition renewal) are pure functions there.
+- Companion records share their register's door and capability, chosen by `kind` from a fixed family
+  (register-routes.js FAMILY): formfprint and statreturn with Form F; mtpboard (Form D), mtpforme (Form E) with MTP;
+  dyingdecl with MLC; form3e, form3esign, form3j, form3i with NDPS. No new capability or router route except the settings.
+- Refusals, not warnings: a Form F declaration at or after the procedure start (r.10(1A)); any obstetric USG report,
+  preliminary included, without the woman's declaration on Form F; foetal sex text (audited without the text); MTP above
+  20 weeks without Rule 3B category and a Form E, above 24 without an allowed Form D, a rule 4A-ineligible practitioner,
+  a woman's own consent under 18 or mentally ill; MLC examination fields without consent, a male doctor for a POCSO girl;
+  Form 4A with a manner of death; controlled expired-stock wastage without the Controller's nominee; controlled receipt or
+  dispense once Form 3G has expired with no renewal reference. Flags, not refusals: Form I certified over 3 hours late,
+  Board opinion over 3 days, a Part I mode of dying.
+- MTP reg 7: for readers without register.mtp, the ward list, ED list, bed board, timeline, discharge summary and
+  /patient/get show the Admission Register serial instead of her name from admission until 42 days after discharge,
+  on the MTP stay's rows only. Identity bands, FHIR/HL7/ABDM, claims and the portal are NOT masked (patient safety;
+  claims are a lawyer item). An unreadable MTP register withholds the response.
+- BNSS s.397: POST /ward/invoice is refused while an open sexual-assault-adult, acid-attack or POCSO case exists for the
+  patient. Aadhaar is never stored in RBD registers (unknown key refused; 12-digit text refused). The pharmacy names a
+  Form 3E patient by id and the route confirms the Patient exists by repository read (its grant cannot read Patient).
+
+## 2026-09-17 Statutory registers, second pass of the legal review (branch legal-registers-2)
+- Two read-only capabilities and roles: `register.pcpndt.read` (role `pcpndt_nodal`: GET /ward/register-formf, POST only
+  kind statreturn) and `register.ndps.read` (role `ndps_inspector`: every GET of /ward/register-ndps, no POST; actor.js
+  grants READ of the four ledger types). A nurse (med.administer) reaches GET /ward/register-ndps only with view=patient.
+  All three are router alternatives after the fail-closed table; nothing else widens.
+- Form F on the worklist: GET /ward/imaging-worklist returns `pcpndt: [{orderId, state, missing}]` BESIDE the DICOM items
+  (never inside a DICOM item). Foetal sex: a staff reply to a patient (POST /ward/patient-reply) is refused and audited
+  without the text; a patient's own message is never refused. Imports (SCCM adapter): a report conclusion or imaging study
+  description that states foetal sex IN AN OBSTETRIC CONTEXT (registers.js OBSTETRIC on the text and code) is not filed and
+  raises PCPNDT_FOETAL_SEX_REFUSED; without the context it is filed, so a paediatric "female child" report is not lost.
+  There is no DICOM SR import in the product; the study description is the DICOM text that lands.
+- MTP: the POCSO intimation is a register of its own on the MLC door (`pocsotask`), opened by `def.alsoWrite` in the SAME
+  append as a minor's MTP entry; its id and fields name no other register. The MTP fields pocsoIntimation/pocsoBasis/
+  pocsoReference are gone. Retention end shown per entry: the later of 5 years after the calendar year and 5 years after
+  the entry's last version (unsettled, so the later); nothing is deleted and no destruction workflow is built.
+- MLC restricted categories (sexual-assault-adult, pocso): open to register.records keepers, the recordedBy/last writer,
+  Encounter.attendingId, and `registers.mlc.restrictedReaders`; others get a withheld row (number and date) with an audit
+  row, a correction is 403, and a refusal response never carries the entry. "Treating team" is those people, not a care
+  team model (none exists). Every MLC-door CSV and the Kerala export require requisitionFrom/Ref/Date, audited.
+  `registers.mlc.stateFormat` = hospital | kerala (Kerala DHS formats read in the review; others not built).
+- Mortuary release reads the MLC REGISTER (router hands in open cases): any open case needs the police NOC; a
+  death-in-custody or death-woman-married-under-7-years case needs inquestPapersReceived yes with a reference.
+- BNSS s.397 also locks POST /bill/invoice (OPD clinic) for a WardSynQ hospital, matching the clinic MRN and
+  patientIdForMrn(MRN); an unreadable register refuses.
+- NDPS: registers.ndps.drugRegimes (end-chapter-vb default for the controlled list, state-ndps, psychotropic, schedule-x,
+  schedule-h1). Recognition block and the Form 3J cap bind end-chapter-vb only; Form 3E problems end-chapter-vb and
+  state-ndps. The book now groups by the hospital's local day (offsetMinutes), because Form 3H closes before local
+  midnight. New records: form3hclose (numbers from the ledger, page serial 3H/yyyy, closedLate fixed at first closure,
+  signed by the over-all in-charge named in settings), quarantine (an open quarantine makes a controlled dispense name its
+  batch and refuses the quarantined one; stock stays in the book), homecare (the unused return is a stock receipt written
+  once, before the entry; a failed entry save reports partial with the movement id), schedxsupply (the r.65(21)(b) fields
+  the ledger lacks, serial X/yyyy). r.52U: a controlled receipt above the year's Form 3J (revised if any) is refused unless
+  revisedEstimateRef is given; no estimate recorded, or a ledger past READ_CAP, WARNS instead (refusing a morphine delivery
+  on a count that cannot be made is a patient harm). r.52V(3): a controlled transfer-out naming toInstitution needs
+  controllerApprovalRef. H1 and X registers are views over the ledger (view=h1, view=schedx).
+
+## 2026-09-17 Legal requirement registry and State/UT configuration (owner's legal guidance) (branch legal-registry)
+- Binding owner guidance: no binary legal yes/no. `functions/_wardsynq/legal-requirements.js` holds every requirement as a
+  record (id, title, sourceType, instrument, provision, jurisdiction IN or an ISO 3166-2:IN State/UT code, effectiveFrom,
+  expiresOn, status, appliesTo, mandatory, evidence URLs with verified flag, notes, cite). `enforcement(req, {region,
+  stateUt, facilityType, caseType, on})`: IN_FORCE, AMENDED, UNDER_CHALLENGE, STATE_SPECIFIC enforced; STAYED, STRUCK_DOWN,
+  not yet effective, expired not. An appliesTo list with the hospital's value unknown does not exempt (safest).
+- The engine reads citations and dates from it: privacy-law.js CITE and the DPDP dates, donor-criteria.js STANDARDS.IN,
+  blood-centre-rules.js RULES and record/sample refs, the Form F monthly rule and the Form II note. Text byte-identical.
+- The hospital's State/UT is `regionProfile.stateUt` (India adapter, validated against the 36 codes; edited on Admin >
+  Legal requirements). Absent means "not recorded", never a default State.
+- State/UT configuration kinds: formF {mode ONLINE|OFFLINE|PORTAL_AND_RECORD, deadlineDays, portalUrl,
+  acknowledgementRequired} and medleapr {required, effectiveFrom, caseTypes}. A shipped State entry's non-null values change
+  only by a code release citing the source; its null keys, and every key of an unseeded State/UT, are hospital-set in
+  `wardsynq.legal.stateConfig[STATE][kind]` via POST /org/legal-requirements (staff.admin, reason, audited without values).
+  Seeded: MH online 5 days (portal verified), DL online (portal verified, no deadline found), RJ portal + record (portal
+  verified), RJ MedLEaPR from 2026-02-01 (Rajasthan HC, Mukesh Kumar @ Mangej v State of Rajasthan, SB Crl Misc Bail
+  173/2025, 17 Nov 2025, read on Indian Kanoon). Bihar and all others unconfigured.
+- Replaced settings: registers.pcpndt.onlinePortal, registers.mtp.formIIRecipient, registers.mlc.medleapr (stored values are
+  now ignored). Form F: ONLINE or PORTAL_AND_RECORD requires portalSubmittedOn, plus portalReference unless
+  acknowledgementRequired is false (unset = required); each list entry carries portalClock (procedureDate + deadlineDays).
+  The monthly report stays central r.9(8) (5th) and shows the State/UT submission route. MLC: medleaprReference and
+  medleaprFrozenOn required only when MedLEaPR is required for MLR on the arrival's local day.
+- MTP Form II: to the Chief Medical Officer of the State, from the head of the hospital / owner of the approved place (reg
+  4(5)); the District default and the reg 2(c) note are gone. Due day stays hospital policy.
+- Item 52: registry status UNDER_CHALLENGE (Thangjam Santa Singh v Union of India); a law deferral naming a requirement is
+  used only while enforced; the criteria table says "under challenge in the Supreme Court; not stayed; enforced".
+- GET /org/legal-requirements: staff.admin or any register capability (read-only, canEdit false).
+
+## 2026-09-17 Retention basis: LEGAL_OBLIGATION or RETENTION_POLICY per layer (owner's legal guidance item 4) (branch retention-basis)
+- **Rule.** A retention period is "required by law" only with an identified statutory provision (Act, Rule, Regulation made
+  under an Act, statutory direction or notification). An office memorandum or guideline without one, WardSynQ's default
+  and the hospital's longer setting are RETENTION_POLICY. Each class in `functions/_wardsynq/retention.js` carries `BASES`
+  layers (id, type, sourceType, instrument, provision, jurisdiction, years/days, from, effectiveFrom, status, evidence,
+  note), shaped like the owner's requirement record so they can move into the legal requirement registry (branch
+  legal-registry) without change. No second registry was created.
+- **Classification.** LEGAL: IMC Regulations 2002 reg 1.3.1 (IPD, 3 years from commencement of treatment), PCPNDT r.9(6),
+  MTP Regs reg 5, NDPS r.52X, D&C r.65(3)(1)(h), r.65(7)/r.65(9)(a), Sch F XII-B L/r.122-P, ART s.23, Surrogacy s.46(1),
+  CERT-In Directions (iv) 180 days, DPDP Rules r.6(1)(e)/r.8(3) from 13 May 2027. POLICY: DGHS OM 28 Oct 2014 (IPD 10y,
+  OPD 3y, MLC 10y), WardSynQ's OPD 10-year default, the minor rule (limitation basis unconfirmed), consent artefacts.
+  Policy-only classes: clinical-opd, mlc, consent-artefacts. CERT-In counted as statutory (a direction under IT Act s.70B,
+  per its title); flagged for the lawyer.
+- **Setting minimums unchanged** (floorYears, e.g. IPD 10): never below a legal floor, and policy defaults are not
+  shortened through settings either. Lowering them to the legal floor is an owner decision, not taken here.
+- **Erasure (dpdp.js).** Legal holds refuse first. Before DPDP commencement: as before, each class labelled. From
+  commencement: a class inside a LEGAL layer is kept and the answer names the law; every other class needs the DPO's
+  `retentionDecisions` entry (retain + purpose/necessity, or erase). WardSynQ never erases a chart itself: an erase
+  decision leaves the request in progress (erasure_partial, step erase-class) until the destruction record reference is
+  given.
+- **Document purge (documents.js).** Inside a LEGAL period: refused (retention_not_expired, basisType, law). Inside only a
+  policy period (the document's own retainUntil or a class policy layer): 409 retention_policy_confirmation_required,
+  then `policyConfirm` + `policyReason` from a user holding dpdp.manage or register.records (checked in the router),
+  written on the purge version as `policyOverride`. The route stays staff.admin; no two-person rule.
+- **Screen.** Privacy and compliance > Retention and legal holds lists every class and layer (GET
+  /ward/retention-classes, dpdp.manage or register.records) and flags policy-only classes; the erasure request shows the
+  DPO decision form; ward.js documents ask for the confirmation.
+
+## 2026-09-17 Retention layers live in the legal requirement registry (seam: retention-basis + legal-registry)
+- `retention.js` no longer holds a BASES table. Every layer is a record in `legal-requirements.js` with `basis`
+  (LEGAL_OBLIGATION or RETENTION_POLICY) and `retention: {class, layer, years|days, from, replacedBySetting}`, plus
+  `instrument`/`provision` only where the retention answer words the source differently from the record. Existing records
+  gained the attribute (IN-MTP-REG5-FORMIII, IN-DCR-XIIB-L, IN-CERTIN-2022-IV, IN-DPDP-R6-LOGS); new ones: IN-IMC-1-3-1,
+  IN-DGHS-OM-2014-IPD/OPD/MLC, IN-WSQ-OPD-DEFAULT, IN-PCPNDT-R9-6, IN-NDPS-R52X, IN-DCR-R65-3-1-H, IN-DCR-R65-7, IN-ART-S23,
+  IN-SURROGACY-S46-1, IN-RET-CONSENT-ARTEFACTS, IN-RET-MINOR-AFTER-18. The hospital's own setting layer stays in retention.js
+  (hospital configuration, not a requirement).
+- Whether a layer keeps anything today is `enforcement()` on the IST day: STAYED, STRUCK_DOWN, not yet effective or expired
+  keep nothing. legalFloorYears and policyOnly count only LEGAL layers whose registry status is enforced. The setting
+  floors (floorYears/defaultYears) are unchanged, so a class whose only law is stayed keeps its period as policy.
+- Answers are byte-identical except: CERT-In logs' layer source type now reads "Notification" (the registry's type) instead
+  of "Direction under an Act"; registry records gained notes/evidence carried over from the layers (evidence not re-read is
+  marked not verified).
+
+## 2026-09-17 Patient, payer, insurer, TPA and GST recipient kept apart; the recipient decided per payer contract (branch gst-parties)
+Owner's binding legal guidance item 6 (s.2(93) CGST Act; TTK Healthcare TPA; Karnataka HC, Healthcare Global Enterprises
+Ltd, April 2026). Supersedes the `gst.recipientOfCashlessClaims` part of the gst-packages entry above.
+- The payer master is the existing payer connector (Admin, Integrations, Payers; payer-connectors.js), not a new record:
+  every payer, whatever its adapter, carries its CONTRACT in its versioned, audited settings (payer-contracts.js): payerKind
+  (insurer, tpa, government_scheme, corporate, other), legalName, GSTIN and address, insurerRef (a TPA's principal), and
+  gstRecipient (patient | contracting_party) with gstBasisType (ca_opinion | contract_clause), gstBasisRef, gstBasisDate.
+  Choosing the contracting party is refused without the basis (an opinion needs its date) and, for a non-TPA, without
+  valid recipient details. payerKind is not required on save, so legacy connectors keep working; they resolve as "kind not
+  recorded" with a warning.
+- Resolution (pure, resolveParties): no payer = self-pay, the patient. Insurer or TPA with no determination: the patient,
+  source default_cashless. Scheme, corporate, other or kind not recorded with no determination: NOT DETERMINED, treated as
+  the patient, warning on every screen. A TPA's contracting party is the insurer it acts for (never the TPA); an unknown
+  insurer is a warning, never a guess. The retired global value is read only when saved as "payer" (it needed a CA opinion)
+  and only for contracts with no determination (source legacy_global, basis the global opinion); a saved "patient" is the
+  old default and is not a determination. The setting can no longer be set; a save keeps the saved value.
+- Stays: new record `StayPayer` (one per inpatient stay, versioned, billing.charge writes, billing.view reads, like Claim),
+  POST /ward/stay-payer, read inside GET /ward/claims (stayPayers, null when unreadable). Claims and pre-authorisations
+  keep their payerId and are shown with parties resolved from the contract NOW (they are not GST documents). An invoice
+  COPIES the parties when raised (and via POST /ward/invoice-parties, which replaced /ward/invoice-buyer): the buyer on its
+  GST documents is the resolved recipient, so Tax Invoice vs Bill of Supply, the BOS number and the IRN follow the
+  recipient, never the payer. A contracting-party recipient with incomplete GST details refuses the bill. The manual
+  buyer entry (typing a GSTIN on a bill) is gone: a buyer that is not a payer contract is not offered.
+
+## 2026-09-17 Infection control, antimicrobial stewardship data and quality registers (branch infection-ams-quality, P5)
+Gaps 4, 5 and 11 of the 2026-09-17 commercial gap audit. NABH KPIs 5, 11, 13-18, 25-27, 31 and 32 now compute; the rest
+of compliance.js is untouched.
+- HAI definitions are CDC/NHSN (Patient Safety Component Manual, January 2026, ch.4, 6, 7, 9), because NABH PSQ 3a-3b
+  says "as per the latest CDC/NHSN definition" and the ICMR HAI surveillance network uses the same. New record `HaiCase`,
+  written only by a new capability `infection.control` (new role `infection_control`; admin holds it). A case is opened
+  under review, then confirmed naming the NHSN criterion met, ruled out or withdrawn, each a version. Nothing computes a
+  diagnosis. The server computes and stores only the NHSN timing arithmetic (device day > 2 and in place on the date of
+  event or the day before; SSI within 30 or 90 days); a case the arithmetic calls ineligible can still be confirmed with
+  a written reason, because the line log may be late. The criterion names are unapproved seed content ("hai-criteria" in
+  seed-signoff.js). The existing incident-based "hai" measure in quality.js is left as it was.
+- Device-days: the existing LineRecord gained an optional closed `deviceClass` (central-line, urinary-catheter,
+  ventilator); counted as NHSN counts the denominator (one per patient per calendar day present, insertion and removal
+  days included). The Lines card now shows on every non-ED chart, not only NICU. Ventilator days are read from lines, not
+  from IcuRecord ventilator settings, because settings are snapshots with no start and stop. The brief's "DeviceLine"
+  record was not added: LineRecord already is one (followed the code).
+- Surgical prophylaxis (#18): `SurgicalProphylaxis` review per theatre case by infection control. Doses are listed
+  antibiotics (the existing `antibiotics` setting) from the eMAR and the anaesthesia record; on time within the new
+  hospital setting `prophylaxisWindowMinutes`; the reviewer says whether prophylaxis was indicated and the agent matches
+  policy, and "appropriate" is derived per the NABH remark. An unreviewed case is not counted as appropriate.
+- Microbiology was already structured (pathology-report.js), and days of therapy already existed (quality.js); both are
+  reused, not rebuilt. The cumulative antibiogram follows CLSI M39: final results, first isolate per species per patient per
+  period, %S without I, and a hospital minimum (`antibiogramMinIsolates`, no default; M39 recommends 30) below which no
+  percentage is shown. No MIC interpretation (breakpoint licensing is an owner question).
+- Quality registers (quality-registers.js): hospital-authored audit checklists (`QualityAuditTemplate`, `QualityAudit`, one
+  audit per observed unit, compliant when no item is "no", a copy of the item text kept), `MockDrill` with its variations,
+  `EmergencyStockOut` against the hospital's `emergencyMedicines` list, `AdverseDrugReaction` on the PvPI form v1.3
+  (filed with incident.report, causality not recorded here), `EdReturnReview` where a prescriber says whether a return
+  within 72 hours of leaving was a similar complaint. New capability `quality.audit` (safety_officer, infection_control).
+- Screen: wardsynq/site/pages/quality.js "Infection control and quality", tabs by capability. The brief named
+  pages/governance.js; a separate page was used because governance.js is the DPO's and the analytics page and the ward's
+  own staff (ADR, stock-outs, returns) needed a door that does not open privacy administration.
+## 2026-09-17 Discharge milestones, inbound transfer centre, governed forecasts (branch discharge-capacity, audit P2 gaps 3, 6, 7)
+- Discharge relay: new record `DischargeMilestone`, one per stay (functions/_wardsynq/discharge-milestones.js). Steps and who
+  records each, chosen per step at the router (DISCHARGE_STEP_CAPS, the route entry is emr.treat for an unknown step):
+  advised emr.treat, pharmacy-cleared order.verify, bill-ready and TPA final requested/received billing.charge, left
+  queue.add. summary-signed is derived from the first signed version of the discharge summary; left falls back to the
+  stay's closing time and says so. A step out of order (before advised, after left, TPA answer before request) is refused
+  without a reason; changing a recorded time is a new version with a reason and the version read. Grants: a separate
+  DISCHARGE union in actor.js (queue.add, order.verify, billing.charge write; billing.view reads) rather than editing the
+  billing branch, to keep the P1 merge to one test line.
+- NABH KPI 24 computes from them: advised to left, less minutes the patient asked to stay, day care excluded, only stays
+  with recorded advice. GET /ward/discharge-progress (queue.view; record grant decides) shows in-progress stays and median
+  turnaround per step with "not recorded" counts. Screens: ward.js Discharge progress (dcboard), chart button Discharge
+  advised, command center links, shell tile.
+- Transfer centre: new record `TransferCentreRequest` (transfer-centre.js). A phone call makes NO patient record; accepting
+  needs the MRN of a patient registered through ordinary registration (duplicate checks live there) and a sex/age mismatch
+  with the call needs explicit confirmation. Accepting calls admission-request.js requestAdmission() with requestedAt = the
+  call time (retry-safe) and never touches a bed. Beds by state per ward and the waiting count are copied onto the request at
+  decision; time to decision is computed. Caps: record and withdraw queue.add, decide emr.treat, list emr.view.
+- Forecasts (twin-predict.js): the audit said 5 of 7 unwired; the code already had 6 of 8 wired. Wired blood-demand (units
+  requested per day from the transfusion ledger). ot-delays stays unwired: a case stores its booking time as its start when
+  none was given, so a delay cannot be told apart. Fixed the counting predictors: days with no event now count as zero (the
+  mean over busy days only overstated every rate), today (incomplete) is left out, and critical-backlog with no loops is a
+  refusal instead of a forecast of zero. Every envelope now carries `method` and `inputs` (the daily counts), shown on the
+  twin's Forecast card. Still a plain mean, no model, no clinical score.
+## 2026-09-17 Claims checklist blocks submission, override with a reason; claims desk worklists (branch rcm-claims-ops)
+- Audit gaps 1, 2, 13, 14 (functions/_wardsynq/claims-ops.js). `scrubClaim()` is pure and ships no rule content: the
+  checklist is settings on each payer contract (claimDocuments, queryResponseDays, requireSignedDischargeSummary,
+  requireIcd10Codes, plus the existing preauthRequiredAbove) and the claim documents of the stay's package. A BLOCKING
+  finding refuses POST /ward/claim-state submit/resubmit (422 claim_checklist_blocked); `overrideReason` sends it anyway and
+  the claim keeps checklistOverrides {who, when, reason, findings}. CHANGE: preauthRequiredAbove used to be a warning only;
+  it now blocks (still never blocks care). Timely filing stays a warning.
+- A fact the actor's grant cannot read (a cashier cannot read ClinicalNote or, on billing.view, Condition/Encounter) is
+  UNCHECKED, and blocks where a payer rule needs it. No grant was widened; no new resource type. Documents "obtained" are a
+  person's attestation on the claim, not a document-store lookup (billing cannot read DocumentReference).
+- Payer queries and enhancements live INSIDE the Claim / PreAuthorisation record (payerQueries, enhancements), one atomic
+  versioned write, so a query can never exist without its claim state. A query moves a submitted claim to queried; the
+  resubmission answers the open queries. Pre-authorisations gain validUntil (approved only); a claim whose only approval
+  ran out before the admission date blocks.
+- Denial reasons and ageing bands are org config `wardsynq.rcm` (POST /org/rcm-settings, staff.admin, reason required),
+  no defaults. The classification copies the label onto the claim so editing the list never rewrites history.
+- Desk lists (GET /ward/rcm-worklists, billing.view): tenant-wide svc.list capped at 2000 per type and said when capped;
+  each list null with its reason when unreadable. Patients are named by the MRN carried in `opd-pat-<mrn>` (billing cannot
+  read Patient). AR ageing is over live invoices' balances by the payer copied onto the bill; it reconciles to the sum of
+  balances (credit held apart).
+- Evidence pack (GET/POST /ward/claim-evidence): deterministic, from records only, no AI; saved versions on the claim with
+  expectedVersion. No NABH KPI entry is owned by this package, so compliance.js is untouched.
+
+## 2026-09-17 Nurse staffing against census and dependency, draft roster, staff injury report (branch nursing-staffing, P4)
+
+- Nurses required per ward per shift (functions/_wardsynq/nurse-staffing.js) are arithmetic on the hospital's own numbers,
+  shown line by line: patients at each dependency level divided by the hospital's patients-per-nurse for that level, unit
+  type and shift, summed and rounded up once. WardSynQ ships no ratio. No Indian Nursing Council or NABH figure is cited or
+  shipped: the norms are `wardsynq.staffing` (`dependencyToolId`, `wardTypes`, `norms`), entered by staff.admin on the Staff
+  rota screen through `/org/staffing-norms`, checked against the hospital's own risk tools and rota shifts.
+- Dependency levels are the bands of a hospital-supplied risk tool (risk-assessment.js, existing RiskAssessment records).
+  A level counts for a shift when assessed during it, or within the tool's reassessment interval before it. A patient with
+  none is listed as missing and the requirement becomes a lower bound: "short" or "not complete", never "met". A ward with
+  no unit type or norm is "not configured", never staffed. A hospital with no tool can count every patient alike (band *).
+- The in-charge (NABH PSQ 3c #21 remark) is marked on the rota assignment (`inCharge`, one per shift and date) and left out
+  of rostered and on-duty counts. There is no nurse-in-charge role; a per-assignment flag is what the rota already can hold.
+- The census is the bed board (migrate-inpatient.js bedBoard), so the two screens cannot disagree. Running shifts use it
+  live; coming shifts are a projection from it with latest dependency levels, said as such; ended shifts show only what was
+  recorded while they ran.
+- Draft roster: GET /ward/staffing-draft suggests nurses for the coming 7 days' shortfalls, never on approved leave, never
+  double-booked, never in charge; nothing is written. POST /roster/draft-publish (staff.admin) checks every entry again,
+  all or nothing.
+- Staff data is not the chart: the recorded shift staffing (NABH #21) and the staff injury report (NABH #30) are
+  `_wardsynq_staffing_shift` and `_wardsynq_staff_injury` in the append-only store, the hr-attendance.js pattern, not
+  RecordService types (which every emr.view role can read through the raw record door). compliance.js reads them through a
+  reader the router passes in. The brief named clinical-settings.js and pages/admin.js for the settings; they went to their
+  own route and the rota page, the gst-settings pattern, because the norms are nested and belong beside the shifts.
+- #30 is the month's own rate over average occupied beds (inpatient bed-days / days elapsed); NABH asks for year to date,
+  said in the indicator note.
+
+## 2026-09-17 Theatre sessions, theatre times and outpatient access times (branch theatre-opd-access, P3)
+
+- Theatre sessions (`TheatreSession`, theatre.js): a block of a configured theatre's time held for a unit or a surgeon.
+  While held, a theatre booking by another owner is refused (`session_held`, resource-booking.js asks `heldSessionFor`).
+  Release is computed, never stored as a state: a person releases with a reason, or the hospital's
+  `wardsynq.theatre.releaseHours` releases it that many hours before the start. No rule configured means no automatic
+  release. Written under queue.add, the same authority as booking the theatre.
+- Case timing lives on the existing `SurgicalCase`, not a new record (followed the code): scheduled start and planned
+  minutes at booking (optional; a case booked with no time has none, the booking moment is not used), in-room and
+  out-of-room times recorded by a person (a change needs a reason and keeps the old value), reschedules (postponed or
+  cancelled before incision, reason code from `theatre.rescheduleReasons` when the hospital set any), and the surgeon's
+  unplanned-return answer after an incision. All under emr.treat, like every other case write.
+- Utilisation (GET /ward/theatre-utilisation): booked minutes (ResourceBooking inside sessions) and used minutes
+  (in-room to out-of-room) over session minutes, with the minutes returned beside each percentage. A case missing a time
+  is listed and adds nothing. First case on time needs `theatre.firstCaseGraceMinutes`; without it lateness is shown and
+  not judged. Turnover is out-of-room to next in-room, same theatre, same local day.
+- NABH #19 counts cases first planned in the month that were cancelled before surgery, or postponed to (or entered the
+  theatre) more than 4 hours after the first booked time (the NABH definition, not a hospital setting). #6 counts
+  surgeon-flagged returns over cases incised in the month, unanswered cases shown beside.
+- Appointments already had arrived, completed and did-not-attend (the audit said only booked/cancelled; the code differs).
+  Added: a no-show is refused before the slot starts and after an arrival; `arrivedAt` and `completedAt` are kept.
+- OPD waits (#22): the OPD Encounter written from the queue ticket now also carries `consultStartAt`, so the wait survives
+  the ticket's expiry. Clock starts at arrival, or at the appointment time when later (the one same-patient same-day
+  appointment marked arrived or completed; with two or more none is used). Seen before the appointment is zero. Fixed on the
+  way: a ticket's 0 (time not reached) was read as the year 2000 by migrate-encounter.js toIso.
+- Diagnostic waits (#23): new `DiagnosticVisit` written at the counter (queue.add): requisition presented, optional
+  appointment, test start. Only outpatient visits count. The laboratory role alone (no queue.add) cannot write it; a
+  counter needs a desk role. Screens: surgery board "Theatre sessions and use", the case's Theatre times card, and
+  Scheduling's Waiting times card with the diagnostics counter.
+## 2026-09-17 Staff messaging inside WardSynQ, one in-basket, MaiK drafting tasks (branch inbasket-messaging)
+- Audit gaps 12 and 15. Staff messages are records (functions/_wardsynq/staff-messaging.js): `StaffMessage` (one message,
+  bound to a patient and optionally the stay, or to a unit; a reply inherits the thread's binding and addressees) and
+  `StaffMessageRead` (one per thread and reader, a version per read). Edit and recall are new versions; the earlier text is
+  in the history, a recalled text is hidden on the list. Addressed by role, not person: no staff directory is exposed.
+- Who may see a patient thread: every read and write first reads the Patient as the caller (audited). DEVIATION from the
+  audit's "grant to that patient": this codebase grants patient access per record type per role; there is no per-patient
+  care-team rule, so the Patient read is the gate. Grant: every EMR_VIEW holder reads and writes the two types (a READ-tier
+  role is raised to DRAFT for them only). `StaffMessage` is HUMAN_ORIGINATED: no AI, service or device actor may send one.
+- Nothing leaves WardSynQ: no SMS, WhatsApp or email path. Escalation is `pushToIdentities` (alert-deps.js, shared with
+  alertAdmins) with a fixed payload (no name, MRN, ward, bed, thread id or text), only when alerts.push.enabled, to members
+  of the addressed roles who have not read the thread; the attempt is recorded on the message; never "delivered".
+  Ceiling: the inbox reads the newest 500 messages and read marks and says when it is partial.
+- MaiK drafts (maik-interaction.js DRAFTS): draft-discharge-summary, draft-portal-reply, draft-appeal-letter, each the
+  gateway's existing DRAFT_NOTE task, so the PHI approval and refusals are unchanged; DEVIATION: no new gateway TASK values
+  (the COPILOT pattern). The subject (patient message, latest denied or queried claim's evidence pack) is read as the
+  clinician and fenced as a record document. Accepting any of them writes nothing; a person sends the reply (Patient
+  portal page records accepted or edited first, and does not send if that fails), signs the summary, or saves the letter
+  into the evidence pack. Hard Local: no fallback exists in the gateway; a spy test pins that a Local-routed draft whose
+  model is down never reaches Vertex/Gemini. The appeal letter is drafted by a clinician (maik-ask is emr.view and reads
+  the chart); a billing-only role cannot run it.
+- Unified in-basket is a screen (pages/inbasket.js) over the existing routes (patient-messages, referral-inbox,
+  cosign-queue, safety-inbox), each shown loading, failed, not for this role, or its items with age and owner. No new
+  aggregation route. No NABH KPI entry is owned by this package; compliance.js untouched.
+## 2026-09-17 NABH KPI closure: indicators 3, 6, 21 and 30 (branch nabh-kpi-closure, R2-1)
+- KPI 3: audit kind `diagnostic-safety` (quality-registers.js). One audit is one member of staff; it records the department
+  (laboratory or radiology, closed list) and the auditor's own statement that they work outside it. NABH wants an outside
+  auditor; members carry no department, so it is not enforced and the cell counts audits by an inside auditor beside.
+- KPI 6: DEVIATION from the audit, which said AnesthesiaRecord carries a technique. It does not (startAnesthesia writes
+  none; only an imported summary line reads one). The recorded technique is the PLANNED one on PreAnaestheticCheckup
+  (PAC_TECHNIQUE closed list). Only `local-with-monitoring` counts as local anaesthesia; spinal, epidural and regional
+  blocks do not. Cases with no checkup stay in the counts and are counted beside. A checkup type that cannot be read makes
+  the indicator not computable rather than guessing.
+- KPI 21: the hospital lists which unit types are ICUs (`wardsynq.staffing.icuUnitTypes`, validated against wardTypes).
+  Recording an ICU shift also stores the split: a patient is ventilated when a LineRecord with deviceClass ventilator is in
+  place at recording; nurses are the distinct on-duty nurses (in-charge already out) whose NurseAssignment names them; a
+  patient with no assignment, or assigned to someone not on duty, is counted as unassigned beside. A nurse on both groups
+  counts in both (shared count stored). A failed read stores "not recorded" and the overall ratio is unchanged. Verified:
+  the assignment is readable at recording time through the recorder's own RecordService (EMR_VIEW reads all types).
+- KPI 30: `wardsynq.staffing.reportingYearStartMonth` (1-12), saved on its own route POST /org/reporting-year, staff.admin,
+  reason required, audit row names from/to; no default. Saving the norms keeps it. Year to date = injuries from the
+  reporting year's first month to the month's end over the average occupied beds of that span. Unset: the month's own
+  rate, flagged `reportingYearNotConfigured`. Kept inside `staffing` so _opd_org.js's whitelist is untouched.
+- compliance.js: besides entries 3, 6, 21 and 30, computeNabhIndicators passes `settings` as a third compute argument and
+  nabhIndicators reads staff injuries from the earliest window's reporting-year start (both needed by KPI 30 only).
+- GET /ward/access-times now refuses (403) a role that can read neither Encounter nor DiagnosticVisit; it returned an empty
+  200 to a store keeper. A cashier still reads it: billing grants read Encounter.
+
+## 2026-09-17 Supplier returns, vendor rate contracts, reorder drafts from recorded use (branch supply-chain-depth, R2-4)
+
+- Supplier return is a StockMovement kind `supplier-return` (stock.js returnToSupplier), written only against the receipt
+  it came in on: the receipt and every earlier return naming it are read, and more than the receipt brought is refused
+  with the numbers. recordMovement refuses the kind from any other door (stock-move). Supplier is the receipt's
+  receivedFrom, else its purchase order's vendor, else typed. A GST debit or credit note number is kept when given;
+  nothing is computed (purchasing.js has no purchase-side GST model). Ceiling: two concurrent returns against one receipt
+  are not serialised; the level would show any excess.
+- Controlled drugs: controlled or not is the drug master applied to the receipt's own item (route passes isControlled).
+  A controlled return needs the witness (hospital policy, registers.ndps.requireWitness) and the Controller of Drugs
+  approval reference, the same rule as a controlled transfer out to another institution (NDPS r.52V(3)). The register
+  book (controlled-drugs.js registerBook) counts it as a disbursement in `wasted`, as transfer-out already was, so the
+  Form 3H day still closes, and names it separately as `returnedToSupplier`. Quarantine rows are closed by hand in
+  Registers as before.
+- Rate contracts live on the existing Vendor record (rateContracts[]), one version per change, no new resource type or
+  grant. DEVIATION from "versioned per contract": the version is the vendor's. Overlapping contracts for one item and unit
+  are refused; changing a recorded contract needs a reason. Prices are paise before GST, compared only in the same unit.
+  GET ward/approvals attaches the check to pending PurchaseOrder approvals (in date on the order's raisedAt); a check
+  that failed is shown as failed. ward.js approvalRow shows it (the one ward.js change).
+- Reorder drafts (purchasing.js reorderSuggestionsFrom): use is dispenses (not returned), transfer-out and consumption out
+  of that store in the window; wastage, adjustments and supplier returns are not use. Suggested = ceil(avg daily use x
+  (lead + safety days) - level - outstanding on open, part-received or awaiting-approval orders). Orders carry no store,
+  so the outstanding quantity counts against each store holding the item (said on screen). Refused per row: fewer days of
+  data than the minimum, no use in the window, negative level. The whole read is refused past 1000 movements/dispenses.
+  A store keeper (no order.dispense) reads no dispenses and sees general stores items only.
+- Settings `wardsynq.reorderPolicy` {windowDays, leadTimeDays, safetyDays, minDataDays}, all or none, no default, on
+  /org/reorder-policy (staff.admin, reason required, audited). Screens: General stores page cards (order.dispense or
+  stores.manage; settings card for staff.admin). Routes: GET ward/supply-chain, POST ward/supplier-return, POST
+  ward/rate-contract, GET ward/reorder-suggestions (order.dispense, stores.manage fallback).
+
+## 2026-09-17 Staff messages to named people; patient education leaflets (branch messaging-people-and-education, R2-3)
+- B9. `toPeople` on staff-message-send alongside `toRoles`. Each named identity must be an active member of THIS hospital
+  (ORG.listMembers of the route's org, so another hospital's member is "not_member") whose role holds emr.view and whose
+  grant reads StaffMessage, and Patient for a patient thread; otherwise 422 people_refused naming each refused person,
+  nothing written. Stored as {identity, label}; replies inherit. Picker: GET /ward/staff-message-people, label and role only.
+  A thread addressed ONLY to named people is listed, opened, replied to, marked read and escalated only by its sender and
+  the named people (403 not_addressed otherwise); the record itself is unchanged in the store. With a role address too,
+  role visibility applies as before. Push goes to named people and role members who have not read; payload unchanged.
+- B12. patient-education.js. `EducationLeaflet` (no patient): title, language code, body, tags, state draft/approved/
+  retired, versions. Approval needs expectedVersion (the version read) and an approver who wrote none of the current
+  draft (`draftedBy`); editing an approved leaflet makes it a draft again. `EducationAttachment` (one per stay, patient
+  compartment): giving accepts only an approved leaflet at the version shown and COPIES that version's words, approver
+  and time, so a later edit or retirement never changes what the patient was given; taking back is a new version with a
+  reason. Both types HUMAN_ORIGINATED. Author, approve, retire, give, take back: emr.treat; read: emr.view.
+- DEVIATIONS from the audit brief: the library screen is a card on the Patient portal page (portal-access.js), not a new
+  page; giving and printing are on the discharge summary screen (discharge.js, which owns that print), through its own
+  GET education-attachments, so migrate-discharge.js and ward.js are untouched. The portal shows given leaflets in a new
+  grant section "education" without a PatientRecordRelease: the clinician's act of giving an approved hospital leaflet is
+  the handover (a discharge summary is the clinician's clinical document and keeps its release rule). No retention class
+  added. No leaflet content shipped (owner item O6).
+
+## 2026-09-17 Ward times and claims desk: NABH KPI 1, theatre delays, desk period, technique given (branch ward-times-and-desk, R2-2)
+- Audit's open point checked: bed placement stores no bed-arrival time. The admission Encounter's periodStart is when the
+  admission was entered (or a time the desk stated) and a transfer's movedAt is when the bed changed on the record; both are
+  clerical, and admitPatient/transferPatient rebuild the Encounter so a field bolted onto it would be lost on the next
+  transfer. So the times live on a new per-stay record type `AdmissionTimes` (admission-times.js, service.js), the
+  DischargeMilestone pattern: bedArrival recorded by the nurse (emr.vitals; type added to VITALS_TYPES, so the pinned write
+  lists of nurse, intern, resident and pg_resident grew by one), initialAssessment marked by a doctor (emr.treat route).
+- The assessment time is the marked note's signedAt, never typed. Only a signed, non-nursing note of the same stay can be
+  marked; the first mark wins and a second is refused naming the note. DEVIATION from the brief's "negative intervals
+  refused at write": following discharge-milestones.js, an out-of-order time is refused unless a reason is given; with a
+  reason it is stored flagged and KPI 1 counts it beside, never averaged. A bed-arrival change needs expectedVersion and a
+  reason. Routes: POST /ward/bed-arrival, POST /ward/initial-assessment, GET /ward/admission-times (emr.view).
+- KPI 1 (compliance.js entry 1 only): admissions of the inpatient classes that started in the month (day care excluded),
+  mean minutes over admissions with both times in order; missing each time and out of order counted beside.
+- ot-delays wired (twin-predict.js): per case, minutes from `scheduledAt` (current plan) to `theatreTimes.inRoomAt`; one
+  sample per UTC day that had a measured case (mean of that day), NOT zero-filled, unlike the counting predictors, since a
+  day without cases has no delay. Cases without a scheduled start are excluded and counted. Envelope carries unit minutes
+  and cases per day. Fewer than 2 days refuses insufficient_data.
+- Anaesthesia technique given: `technique` on AnesthesiaRecord (the field migrate-inpatient.js's timeline label already read),
+  optional at /ward/anesthesia-start and /ward/anesthesia-end from PAC_TECHNIQUE; a different one at the end keeps
+  `techniqueChangedFrom` (conversion). KPI 6 (entry 6) now prefers it over the PAC plan and reads AnesthesiaRecord.
+- Claims desk: from/to date inputs send the whole local days as ISO to the existing /ward/rcm-worklists parameters; the
+  denial panel shows the period the server returned, or says all time.
+
+## 2026-09-17 Legacy HIS import, first slice: patients, Price list, suppliers (branch legacy-import-first-slice, R2-5)
+- Which price list: VERIFIED in the router. Both invoice paths price from wsqTariff(): with the clinic billing store on
+  (CLINIC_BILLING_ENABLED) the Price list (BILL.listTariff, q_tariff) is the ONLY price table; the wardsynq.tariff config
+  blob is used only by a deployment with no billing store and no screen shows it. Prices import into the Price list through
+  validateTariff and BILL.upsertTariff (audited tariff_create per row). With the store off the import refuses
+  (409 price_list_off) rather than write a table no bill or screen reads.
+- One route, POST /ward/legacy-import, staff.admin, and ALSO the manual door's capability per kind (patients queue.add,
+  prices staff.admin, suppliers stores.manage), so hr (staff.admin only) cannot register patients through an import.
+- Dry run first, always (hr-attendance-import pattern). Commit re-runs the check and needs confirmCount AND planId (a hash
+  of the rows it would create) to match; otherwise 409 with nothing written. First failure stops the run and says how many
+  were saved; re-running the same file adds only what is missing (matched by legacy MRN identifier, Price list code or
+  name + kind + ward, supplier id).
+- Patients: DEVIATION from "patients through registration duplicate checks" only in that the import is stricter. Each row
+  goes through validateRegistration, the same-mobile index (reported duplicate, never confirmDuplicate), with
+  wardsynq.externalMrn an MR number already in use (duplicate, never overwritten), and the identity engine
+  (findCandidates) agreeing on name AND date of birth over the newest 500 patients (stated on screen). Duplicates are not
+  created and never merged; the merge stays a person's claim. Then PAT.registerPatient and registerPatientRecord. The
+  legacy MRN is a `legacy-mrn` identifier on the Patient record (hospitalRef in the desk store when the hospital mints its
+  own numbers); registerPatientRecord keeps an already-recorded legacy-mrn when the desk re-registers the patient.
+- Price rows: DEVIATION from the brief's "taxable item without rate refused" as manual entry: the Price list screen accepts
+  a row without a rate. The import refuses a medication or not-health-care row with no GST rate, because gstForLines lists
+  it unconfigured and the bill is refused. Other kinds are exempt healthcare lines and pass without a rate.
+- Suppliers: Vendor records via RecordService at `wsq-vendor-<slug>` (the id supply-chain-depth's rate contracts use), with
+  name, gstin (format checked), phone, email, address, drugLicenceNo. MERGE NOTE for supply-chain-depth: its
+  saveRateContract writes {resourceType, id, name, rateContracts} and would drop these fields on the next version; it
+  should spread the current record.
+- Not imported (owner and accountant, audit O4): open stays, balances, deposits, GST documents. No Aadhaar field exists;
+  a 12-digit Aadhaar-shaped value in name or address refuses the row and is masked in the mapping sample.
+- ponytail ceilings: 100 patients / 500 prices / 500 suppliers per run (Worker request budget); a Price list or supplier
+  list of 500 or more cannot rule out a match and refuses the commit.
+
+## 2026-09-17 Scale ceilings: whole Price list, station queues by status, imports in runs, orders name a store (branch scale-ceilings, R3-1)
+
+- Firestore filters: several EQUALITY filters in one runQuery (compositeFilter AND) are served by merging the automatic
+  single-field indexes; no composite index is added (Firestore "Index overview": compound equality queries run on
+  single-field indexes). Ordering stays on __name__ only, which needs no index. `fsQuery` opts.where now takes one
+  `{field, value}` or an array. firestore.indexes.json has no exemption for q_orders or q_tariff fields.
+- Paging lives in `_clinic_billing_store.js` (`readAll`, pages of 500 by document name) rather than a new
+  `_fbfirestore.js` export, because 119 test files mock that module's named exports.
+- Price list (`listTariff`): every page; past 20,000 rows it THROWS, so wsqTariff and the catalogue say "could not be
+  read" instead of billing the rest as "no price set". A partial Price list is never returned.
+- Station queues (`billingQueue` by orgId+status ordered; `pharmacyQueue` by orgId+status paid+kind medication): every
+  page up to 5,000, then `truncated: true` and the cap, shown on /clinic-billing ("Showing the first N only"). The JS
+  state filter stays. `ordersForPatient` also pages (it stopped at 200) and throws past 5,000.
+  DEVIATION: /clinic-billing is the untranslated StewardMD station page (no i18n catalog), so its note is English like
+  the rest of that page.
+- Legacy import: the Price list is read whole and suppliers are looked up by id (`RecordService.histories`), so the
+  "500 or more refuses the commit" ceiling and `store_too_large_to_check` are gone. Per-run row caps stay (Worker
+  budget); a larger file is sent whole with `run {from,to}` and the Import screen runs it part by part (dry runs, one
+  merged report, commits run by run with each run's planId; a stop names what was imported and a new dry run adds only
+  what is missing). Repeats are checked across the whole file. The name + date of birth pool stays 500 (no name/DOB
+  index exists; identifiers only), and is now actually the NEWEST 500 as the screen said (`RecordService.list` opts.newest;
+  it was oldest first).
+- Purchase orders: optional `location` (free text, as a receipt's location is; not validated against StoreLocation
+  because pharmacy locations are free text). An indent back-order is raised for the indent's central store. Reorder
+  drafts count outstanding only against the order's store; an order naming no store keeps counting against every store
+  holding the item and is marked (`onOrderNoStore`).
+- Not changed: `revenueToday` still reads the newest 1,000 invoices of the org (dashboard tile, not a bill).
+
+## 2026-09-17 Formulary screen: editor and CSV load through one checked door (branch formulary-screen, R3-2)
+- Routes: GET/POST /org/formulary (editor, whole list) and POST /org/formulary-import (CSV: map, then dry run with an
+  explicit mode merge or replace). Both dry run first with a row-by-row report; a commit needs a reason, confirmCount equal
+  to the dry run's change count and its planId (which covers the list as it stood), and any problem refuses the whole save.
+- /org/update refuses wardsynq.formulary and requireReasonOffFormulary (422 use_formulary_route). A group recommendation
+  carrying a formulary is checked when set and again on adoption.
+- Capability: no pharmacy or formulary capability exists (verified in _queue_roles.js). Chosen: staff.admin AND
+  order.verify, which is the admin role and the owner; hr (staff.admin only) and pharmacy (order.verify only) get 403.
+  A pharmacist who should edit the formulary needs the admin role until a formulary.manage capability is decided.
+- Retire: an entry with retired:true stays stored and matches no order (formulary.js resolveFormulary skips it);
+  controlled-drugs.js still reads its controlled flag.
+- Audit: one org chain row (org:formulary) in the same commit as the change, naming added (+), changed (~) and removed (-)
+  entries by drug or code with counts, reason and plan id. ponytail: the chain keeps 200 characters of meta, so a large
+  load names its first entries and counts the rest.
+- ponytail ceilings: 3000 entries (the list lives in the org document, 1 MiB shared with every setting); a 2 MB CSV.
+- No formulary content ships.
+
+## 2026-09-17 Dialysis unit: stations, haemodialysis sessions, dialyzer reuse, URR (branch dialysis-unit, R3-4)
+
+- functions/_wardsynq/dialysis.js; screen wardsynq/site/pages/dialysis.js (home map, Clinical, "Dialysis unit").
+- Settings `wardsynq.dialysis` {stations[{id,name,serologyGroup}], serologyGroups[], maxReuses}, no default for any (owner
+  O13). GET/POST /org/dialysis-settings, staff.admin, reason required, audit names what changed; validated on save and on
+  every read. Unset serology groups = no segregation check, and the booking says "not-configured". Unset maximum = a reuse
+  cannot be recorded. When groups are set every station must name one; a patient with no recorded group is refused.
+- DEVIATION from the brief ("stations are hospital resources"): stations live in the dialysis settings, not in
+  `wardsynq.resources`, because that list has no screen. They are still booked through resource-booking.js bookResource
+  (same clash refusal), as resource ids `dialysis-<id>`; the generic /ward/book-resource does not know them, so the
+  serology check cannot be bypassed. resource-booking.js unchanged. Stations do not show on the Scheduling screen.
+- Records (emr.vitals write scope, VITALS_TYPES): DialysisSession (versioned; fields not sent keep their value),
+  DialyzerEvent (first-use / reuse / discard with reason), DialysisSerology (group from the unit's list, test date).
+  Routes: GET /ward/dialysis-unit and /ward/dialysis-patient (emr.view); POST /ward/dialysis-session, /ward/dialyzer-event,
+  /ward/dialysis-serology, /ward/dialysis-book (emr.vitals). Cashier 403.
+- Post weight above pre with achieved UF > 0 is refused until the nurse gives a reason. Anticoagulation stays in orders and
+  eMAR. Urea is a linked laboratory Observation of the same patient or a value with unit and source.
+- URR = (pre - post) / pre x 100, one decimal, computed on read with inputs shown; missing input, different units or a
+  non-positive pre urea is "not computable", never 0. Citation: Lowrie and Lew, Am J Kidney Dis 1990;15(5):458-82; NKF KDOQI
+  haemodialysis adequacy 2015 update, Am J Kidney Dis 2015;66(5):884-930 (both checked on PubMed). Kt/V not built (owner O12).
+- ponytail ceilings: reads cap at 1000 records per type with a truncation warning; serology group "tag" is exact string
+  match; a station needs a group whenever groups are set (no untagged general station).
+
+## 2026-09-17 Cashless desk: stays whose pre-authorisation needs action (branch cashless-desk, R3-5)
+- Separate route GET /ward/cashless-stays (billing.view), not a seventh list inside /ward/rcm-worklists: it runs charge
+  capture per stay, and the claims desk must stay readable when that fails. ward.js loads both into the Claims desk.
+- A stay is listed when it is open (in-progress, an admission class), its StayPayer names a payer whose contract kind is
+  insurer, TPA or government scheme (a payer not in the list or with no kind recorded stays on and says so; corporate and
+  other are off), and one of: no pre-authorisation, requested (hours since recorded), refused, expired (state, or
+  validUntil before today on the hospital's clock), validUntil before the ExpectedDischarge date, approved amount not
+  recorded, approved amount below the running bill, the bill or discharge date unreadable, or an open payer query.
+- DEVIATION from the brief ("expected discharge date (DischargeMilestone if recorded)"): DischargeMilestone has no expected
+  date; the treating team's date is the ExpectedDischarge record. billing.view and billing.charge now READ ExpectedDischarge
+  (actor.js DISCHARGE block; test/wardsynq-record-service pinned). No write widened.
+- Which pre-authorisation: PreAuthorisation carries no encounterId. The one the stay's active package links wins; else the
+  newest by decidedAt of the patient's for this payer (or the insurer a TPA acts for, or none named) recorded after the
+  patient's previous stay ended. ponytail: two separately authorised treatments on one stay show the newer only.
+- Running bill: charged total of live bills raised for the stay; with none, the charge-capture total now (stated as not yet
+  billed, with the count of unpriced items). Unreadable anything is said, never zero. Capture runs for 50 stays per load.
+- Nothing is sent to a payer.
+
+## 2026-09-17 Pre-admission intake on the portal (branch pre-admission-intake, R3-3)
+
+- A form definition may say `audience: "patient"` (wardsynq-forms.js). Absent means staff. A patient form cannot name
+  staff roles. WardSynQ ships no questions: the hospital writes the form in Admin > Forms (JSON) and publishes it.
+- Portal routes POST /api/portal/intake-forms and /api/portal/intake-submit: session first, patient from the grant, new
+  grant section `forms` (a proxy needs it granted). Forms are listed and accepted only while the patient holds a waiting
+  AdmissionRequest with `plannedFor`; the submit names the request, checked to be the session patient's. A staff form
+  is refused 403 `not_for_patients`.
+- Stored as FormResponse `wsq-intake-<formKey>-<requestId>` with `origin: "patient"` and `reviewState`
+  submitted/accepted/returned. DEVIATION from the brief's `source: "patient"`: `source` on a record is its provenance
+  system; AppointmentRequest already marks a patient's own request with `origin: "patient"`. No terminology codes are
+  attached to patient answers. A resubmit is a new version until accepted; returned reopens it.
+- Staff: GET /ward/intake-responses (emr.view), POST /ward/intake-review (emr.treat, accept or return with a reason,
+  must name the version read). Accepting writes that FormResponse only; nothing goes into allergies, medicines or
+  problems. pathways.js never counts a patient-origin FormResponse as an assessment step, even once accepted.
+- Screen: ward.js bed waiting list (planned date input on "Ask for a bed"; "Pre-admission forms" on a planned row).
+- Privacy: portal access for a child is already gated at enrolment (DPDP r.10 via privacy-law.js childGate); intake is
+  for the patient's own care, so no second gate. The section points to the hospital's privacy notice on the same page.
+  Nothing leaves WardSynQ.
+- Not built: offering forms for a booked appointment (the brief's optional hospital setting); no setting exists, so it
+  behaves as off. Staff form-submit still accepts a patient-audience form as a staff-completed response.
+
+## 2026-09-17 Shared Firestore stores read every page with a ceiling (branch shared-store-caps, R4-3)
+
+- `readAll` moved from `_clinic_billing_store.js` to `functions/_fs_read_all.js` (re-exported by billing), plus
+  `readAllOrThrow` (507 past the ceiling). A new module rather than an import of billing: billing imports the queue
+  engine, and the org, queue and accounts stores need the helper too.
+- Read whole, throwing past the ceiling (never a partial list): beds (10,000), wards, rooms, departments (5,000 each,
+  also the queue engine's token department read), queue tickets per session, ABDM share tickets, staff mappings,
+  sessions (5,000), a patient's tickets for the ABDM link OTP mobile, chart of accounts (5,000).
+- `listSessions` asks by hospitalId AND date (it read the hospital's first 200 sessions ever and filtered by day).
+- Events timeline: verified that `q_events` rows carry no session field (`_q_audit_chain.js eventFields`: ts,
+  hospitalId, ticketId, actor, action, meta). Asked per ticket by hospitalId AND ticketId, 10 queries at a time. Not
+  adding a session field: the chain row's field list is hashed and fixed.
+- `revenueToday`: DEVIATION from the brief's "query paid invoices by orgId+status". Paid invoices grow forever, so that
+  query would reach any ceiling and fail for good. `payInvoice` now stores `paidUtcDay`; the hospital's local day
+  touches at most two UTC dates, each asked by orgId AND paidUtcDay, bounded by paidAt. Clock: `wardsynq.timeZone`
+  (offset at now), else `utcOffsetMinutes`, else IST. Invoices paid before this deploy have no `paidUtcDay`, so only
+  the deploy day's total can be short. A failed read shows "Could not be read" on the doctor app's Revenue today tile
+  (queue.js is the untranslated StewardMD OPD app, not a WardSynQ screen) instead of the tile vanishing.
+- Not changed: accounts `entriesFor` (SCAN 2,000 per period, already flags `partial`), StewardMD followcare and PG log.
+
+## 2026-09-17 Clinical content editors: critical limits, delta limits, autoverify, MAR times, note templates (branch clinical-settings-editors, R4-4)
+- Routes: GET/POST /org/clinical-settings/<setting> for criticalLimits, deltaLimits, autoVerify, marTimes, noteTemplates
+  (functions/_wardsynq/clinical-content-settings.js). The formulary pattern: dry run item by item, any problem refuses the
+  whole save, commit needs confirmCount, planId, a reason and signedOffBy, audited (org:clinical_content) and read back.
+- DEVIATION from the brief: functions/_wardsynq/clinical-settings.js already exists (D11 A, /org/clinical-settings with no
+  suffix), so the new module is clinical-content-settings.js; the suffixed route sits in front of the existing one.
+- Sign-off: wardsynq.clinicalContentSignOff[setting] = { signedOffBy, reason, by, at, planId }, whitelisted in _opd_org.js,
+  written only by this route and shown on the card.
+- /org/update refuses the five keys and clinicalContentSignOff (422 use_clinical_settings_route). A group recommendation
+  carrying any of them is checked when set and again on adoption.
+- Capability: staff.admin AND lab.result (critical, delta, autoverify), order.verify (MAR times), emr.treat (note templates).
+  No settings capability exists; today that is the admin role and the owner only.
+- Checks are the consumers' own readings made strict: codes must be LAB_CODE_SEED codes (a local-name test cannot be
+  configured here); critical limits need a unit and low below high; MAR times HH:MM, in order, and exactly the frequency's
+  default count (the 1-0-1 notation takes TDS times by position); resolveTemplate problems refused.
+- DEVIATION from the brief: "a delta limit without unit" is not checked because lab-delta.js limitFor has no unit field
+  (the change is in the result's own unit and mismatched units are never compared); adding one would store a value nothing reads.
+- Empty is "not configured" exactly as today; the draft starts from what is saved, never from a default. No clinical values ship.
+
+## 2026-09-17 Open census by status and a paged whole-type read (branch census-by-status, R4-1)
+
+- Problem: every roster read (`service.list`) was clamped to 1,000 records, oldest first, and silent. The ward list,
+  nurse worklist, bed board, admission bed clash (200), transfer (200), patient flow, ICU occupancy, ED board, theatre
+  list, downtime pack, waiting list and emergency reconciliation all read encounters that way, discharged stays and OPD
+  visits included (OPD visits ARE Encounters, class OPD, via migrate-encounter.js).
+- Port: new OPTIONAL `pageByType(tenantId, type, {afterSeq, limit, statuses})` -> `{records, next}`, oldest first by
+  each id's latest seq, one page of at most 1,000. Memory and D1; the on-premise sqlite adapter is a binding into
+  D1Repository, so it has it too. An id amended between pages is met again later; the reader keeps the later copy.
+- Service: `listByStatus(type, statuses, max)` pages the open records only, ceiling `OPEN_CENSUS_MAX` 5,000, past it
+  throws `ListCeilingError` code `too_many_open` (never a short census). `listAll(type, {max, throwOnTruncate})` pages
+  every record, default 50,000, hard ceiling 100,000; past max returns `{rows (oldest max), truncated: true}` or throws
+  `too_many_records`. Both govern and audit exactly as `list` (one record.list row). A store without pageByType refuses.
+- Callers moved: the Encounter reads named above now use listByStatus("in-progress"); emergency reconciliation uses
+  listAll (an override outlives the stay) and refuses past the ceiling. A census refusal answers 503 `too_many_open`,
+  written 0: an admission or transfer is refused, not made on a short read. Ward and ED boards name patients from the
+  newest 1,000 Patients plus a read by id for any missing (the oldest-first roster left new patients nameless).
+- Checked, audit uncertainty: `checkMasterBed` reads the bed's administrative state only, not occupancy; occupancy is the
+  census scan plus the bed claim. A stay without a claim (imported, migrated, moved by transfer) is seen by the scan only.
+- ponytail: D1 re-groups every version of the type per page (same GROUP BY as latestByType). The open census is one
+  page; a whole-type read is N/1,000 pages. A latest-version flag or table (audit O20) is the upgrade if that is slow.
+- Left for R4-2: counting and summing callers (quality, security-review, analytics-extract, discharge-milestones,
+  reports, fhir-group, hospital-group and the ledgers) still use list(); they move to listAll. Open OPD visits that never
+  close count against the 5,000 open ceiling; reaching it is visible (503), not silent.
+
+## 2026-09-17 Whole-type reads for reports, registers, ledgers and worklists (branch whole-type-reads, R4-2)
+
+- Problem: after R4-1 about 150 callers still used `service.list(type, N)`, which serves the OLDEST min(N, 1,000) records.
+  Callers asking for 2,000 or 5,000 compared against their own number, so `truncated` never fired; ledgers refused at
+  1,000; worklists capped at 200 to 500 never showed a new item; warnings said "only the latest were read".
+- Rule applied (per caller): a count, sum, ledger, clash check or worklist reads every record through `service.listAll`
+  (ceiling 50,000 per module unless stated; Patient reads 100,000). Past the ceiling a ledger, clash check, worklist or
+  refusal-bearing report throws `ListCeilingError` and answers 409 or 503 with nothing written; a read-only return or
+  register reports `truncated` with "the newest were not read". Open things with a real `status` field read by status
+  (`listByStatus`): results awaiting verification and cultures in progress (preliminary), ward dashboard open stays,
+  doses in flight and active orders, HIM open stays, FHIR Group census, group counts. Snapshots of "now" (digital twin live
+  sections, backup and restore evidence, MaiK interaction list, patient name pools) read the NEWEST N via
+  `list(..., {newest: true})` and keep their capped flags. A patient's dialyzer events read by index (`byPatient`).
+- Actor-less service reads (escalation timer, hospital group counts) page through `repository.js pagedLatest`. The
+  escalation timer read the oldest 500 loops: past that no new critical result was escalated. `StagedRepository` now
+  passes `pageByType` through with its staged records on the last page.
+- Screens: the quality and governance page notes are new translated keys (`site.qual.truncated`,
+  `site.gov.truncatedNewest`), replacing keys whose English said the oldest were missing. Server warning strings shown
+  through EN() (stores, blood bank, dialysis, registers, mortuary) follow the existing pattern and were reworded. ward.js
+  was not touched (R4-5): `ward.dc-truncated` and `ward.rcm-truncated` still say "latest"; they fire only past 50,000.
+  Access times past the ceiling show "could not be read" on the ward screen (the read is refused, not shown short).
+- Kept as bounded by nature: fleet vehicles, saved reports, privacy notice versions, feed source grants, outbound
+  destinations, leaflet library, advisory sample, lab QC and analyser reads (newest first; Westgard needs recent points),
+  FHIR search pool (stated in the bundle), legacy import name pool (newest).
+- ponytail: every whole-type read re-groups all versions per page and holds up to 50,000 rows in a Worker. High-volume
+  types (MedicationAdministration, DiagnosticReport, ServiceRequest, Appointment) reach the ceiling within weeks to months
+  at a busy hospital and then refuse or flag visibly. The upgrade is audit O20 (a latest-version table) plus period or
+  owner indexes (by clinician, by resource, by order); not built here.
+- Not done: patient-flow.js order, MAR, request, problem and report reads (still the oldest 1,000, `.catch(() => [])`),
+  digital-twin as-of reconstruction reads (500), Form 3E not exercised by a route test.
+
+## 2026-09-17 Small closures: census refusal on screen, PO store, forms before an appointment (branch small-closures, R4-5)
+
+- Census 503: ward.js turns any answer with error `too_many_open` into one translated sentence in the transport
+  (apiGet/apiPost set message and detail), so every screen that already shows the server's message says the same
+  thing. A failed ward list or downtime pack now says not loaded instead of "no patients" / "Preparing the pack".
+  Twin sections keep a thrown error's code (digital-twin.js section); the waiting list reports `admittedCheckError`.
+  The ICU card's `encounterReadCapped` check was dead after R4-1 and is removed; `recordsCapped` still warns.
+- PO store: the audit said "StoreLocation names". The reorder drafts match an order's `location` against stock ledger
+  locations (StockMovement.location), not StoreLocation records (stores.manage), so the form offers the stores the
+  hospital's stock is held in (GET /ward/stock, same capability as the PO route); free text stays allowed.
+- Appointment intake: setting `wardsynq.intake.forAppointments` (absent or anything but true = off) and a form flag
+  `forAppointments: true` (patient forms only). A FormResponse carries `appointmentId` instead of `admissionRequestId`;
+  review, origin and "never the chart" are unchanged. The portal UI is wardsynq/site/portal.js (the brief named
+  portal.html). No settings screen: the flag is set through /org/update (admin settings screens belong to R4-4).
+
+## 2026-09-17 Merge of whole-type-reads and small-closures, with two follow-ups (wardsynq-product)
+
+- `ward.dc-truncated` and `ward.rcm-truncated` English now say the newest records were not read (R4-2 reads oldest-first
+  pages up to a ceiling). Language files keep their older wording until retranslated.
+- Appointment intake switch: GET/POST `/org/intake-settings` (staff.admin, reason required on a change, audited as
+  `org:intake_settings`, read back), a card on Admin > Hospital under the clinical settings. `/org/update` now refuses
+  `wardsynq.intake` (422 `use_intake_settings_route`). A dedicated route rather than a key on `/org/clinical-settings`:
+  that route takes no reason and its read shape is asserted whole by existing tests.
+- Site pages: shell.js's transport gives a 503 `too_many_open` the ward.js sentence (key `ward.too-many-open-stays`, shared
+  catalog); the home ward and ED tiles, MaiK patient list, In-basket patient picker and the support diet and transport
+  pickers show it before their own "could not be loaded" text (`WSQ.tooManyOpen(r)`).
+
+## 2026-09-17 No silent empty clinical reads (branch no-silent-empty-clinical, R5-1)
+
+- break-glass.js `openEmergencyChart`: a per-type read failure sets `chart[type] = null` and pushes the type onto
+  `unreadableTypes` (the abdm-chart.js pattern), returned on GET /ward/emergency-chart. The break-glass screen names
+  those parts above the chart. It used to be `chart[type] = []`, so an allergy list the store refused rendered exactly
+  like "no known allergies" mid-emergency. The chart is NOT refused wholesale: the readable parts still arrive.
+- migrate-inpatient.js prescribing advisories: the Observation and Condition reads lost their `.catch(() => [])` and
+  the outer `catch { advisories = [] }` now sets `advisories = null` plus `advisoriesUnavailable {reason, detail}` on
+  both the checkOnly and the written response. The prescribe screen shows that and no longer treats such an order as
+  clean, so the review card is always seen. The order is still written: a hospital advisory is not the safety engine
+  (that one already refuses on `safety.checked === false`), and losing a hospital's own reminder must not cost a
+  patient their medicine. Advisories that DID fire are now rendered too; they were computed and never shown.
+- patient-flow.js companion reads: MedicationOrder / MedicationAdministration / ServiceRequest move to `listByStatus`
+  on the statuses `pendingItems()` selects (ORDER_OPEN / ADMIN_OPEN / SR_OPEN in that file). Condition cannot be
+  status-scoped - it carries `clinicalStatus`, not `status`, and `pageByType` filters `body.status` - and
+  DiagnosticReport cannot either, because a RELEASED report is what decides a request is done; both are `listAll`
+  with `max: 50000`. Truncation of either makes `openItems: false` per stay, `dischargeCandidates: null` and
+  `openItemsUnknown: [types]`, which the screen states. Doses are matched to a stay by patientId rather than by a
+  join onto the (now active-only) orders.
+- Two swallows found in the same files by the sweep: patient-flow's bed master read is `null` rather than `[]` on
+  failure (`beds.states: null`, said on screen; a histogram of zeros reads as "no bed blocked, none in cleaning"),
+  and bedBoard's ward master read sets `wardsUnread: true` rather than falling back silently to the configured list.
+- Not done here: R5-3 owns the port, so a `clinicalStatus` predicate for Condition and a period-scoped read for
+  DiagnosticReport are the real narrowings and are left to it. The ABDM chart screen already renders its
+  `unreadableTypes` (ward.js abdmRecordsView) - it names no types, but it is not silent, so it was left alone.
+
+## 2026-09-17 A month's report reads a month (branch period-scoped-reports, R5-3)
+
+- Port: `pageByType` gains `newest: true` with a `beforeSeq` cursor (memory and D1; repository-sqlite.js is a binding
+  over D1Repository, so it needed no change). The oldest-first cursor is untouched, so every existing caller is
+  unaffected. Newest-first reverses the amendment rule: a record amended DURING the read moves ahead of a cursor
+  already handed out and can be missed, so ledgers and counts that must balance stay on the oldest-first cursor.
+- Service: `listSince(type, {stopWhen, max, throwOnTruncate})` walks back and stops at the first whole page whose
+  records are all behind the window. Same grant check, same single audited list row and the same `{rows, truncated}`
+  answer as `listAll`, oldest first - except that a truncated period read keeps the NEWEST records, because the end
+  of the window is what the caller asked for.
+- `read-window.js` holds the one clinical decision: which types may be read as a period. A record is judged behind the
+  window by the LATEST instant anywhere in its body (its own times, and meta.recordedAt, which every canonical record
+  carries); a record naming no instant is never judged behind. Types whose records can belong to a month they hold no
+  timestamp in are read whole - an open stay, a line still in place, a booking or request for a later date, and the
+  masters other records point at (SPANNING_TYPES). A 90-day lookback covers a child record dated just before its
+  parent (a pre-anaesthetic check, the request behind a report).
+- Moved: compliance.js (NABH and HMIS), infection-control.js (the measured types, not the case register),
+  quality-registers.js (audits, drills, ADRs, ED reviews; not the templates and not an unrestored stock-out),
+  access-times.js (the diagnostic counter), trends.js, quality.js. NOT registry.js: a chronic-disease registry needs
+  each patient's LAST qualifying observation at any age, so a period read would turn "current" into "never". The audit
+  named it; the code says otherwise.
+- Honest limit, stated in repository-d1.js and in each module: the status and seq predicates sit OUTSIDE the derived
+  `MAX(version) GROUP BY id`, so a page still costs a whole-type group-by. What this removes is pages, rows returned,
+  parsed bodies and isolate memory - the memory and time cliff at roughly 25-50k records - not the per-page scan.
+  O20 (a latest-version flag or table in the schema) remains the owner's decision and the only fix for the scan.
+- Measured on the seeded tenant in test/wardsynq-repository-window.test.mjs: a one-month NABH table over 3,004
+  DiagnosticReports asks the port for 2 pages of that type instead of 4, and stays at 2 however much older history
+  the hospital holds.
+
+## 2026-09-18 The last capped reads, and an unreadable token family (R5-4, branch remaining-caps)
+
+- A read that fails must not answer with a plausible empty value. Two swallows removed rather than widened:
+  digital-twin's notification-reliability read (a failed BreakGlassGrant/CriticalResultLoop read now makes that
+  section `unavailable` with its reason instead of a delivery rate over an empty sample), and smart-server's
+  refresh-reuse revocation.
+- SMART refresh reuse: an unreadable token family, or any revocation write that fails, now REFUSES the revocation.
+  The token in hand and the family root are still revoked by id (both addressable without the list), the audit row
+  carries `revoked: "incomplete"` with `outcome: "error"`, and the endpoint answers 503 `temporarily_unavailable`
+  rather than the flat 400 `invalid_grant` that reads as handled. Accepted cost: a reuse against a broken store is
+  distinguishable from a random bad token, which needs possession of a real rotated token to observe.
+- The digital twin's point-in-time rebuild reads the NEWEST 500 per type, not the oldest. The bound stays 500
+  because each record read costs one further history read; the screen already said "only the latest 500 checked",
+  which is now true. Raising it is an O20 question, not a constant to bump.
+- Ceilings that were reached are stated in the same sentence as what they cost: lab-qc's QC screen names both the
+  runs and the corrective actions read (a truncated action read changes what a block IS, not just what a chart
+  shows), and security-review counts a ward history not read past HISTORY_READ_MAX separately from one that could
+  not be read.
+
+## 2026-09-18 Status-scoped worklists, and the order closure they needed first (branch status-scoped-worklists, R5-2)
+
+- The audit's premise did not hold: `service.listByStatus` bounds a worklist only if something closes an order,
+  and NOTHING in the tree ever did. Every native ServiceRequest was written `active` and stayed `active` after its
+  result was filed, so "open orders" and "every order this hospital has ever placed" were the same set. Converting
+  the reads alone would have refused (503 at OPEN_CENSUS_MAX 5,000) where the old read still worked. So the closure
+  came first: `ward-order.js closeOrderOnResult()`, called by `lab-result.js releaseResult` (any report) and
+  `radiology-report.js reportImaging` (final or corrected only, matching the rule dicom.js's worklist already
+  applied). It never throws - a result on the chart is on the chart - and the response carries `orderClosed`.
+- It writes through its OWN actor, scoped to ServiceRequest and stamped with the releasing person's id (the pattern
+  online-booking.js uses for the portal), because the laboratory grant deliberately cannot write a ServiceRequest:
+  widening actor.js would open order CREATION to a role, which is the billing hazard that grant's comments cite.
+- Converted: `lab-result.js pendingRequests` (hospital scope), `specimen.js collectionList` (hospital scope),
+  `dicom.js imagingWorklist`. Each reads open orders by status, then the reports or specimens of only THOSE orders'
+  patients (governed `byPatient`, eight at a time) instead of the whole type. `specimen.js rejectionStats` keeps
+  `listAll`: a monthly count IS a history and flags its own truncation.
+- `ward-order.js` owns the vocabulary: OPEN_ORDER_STATUSES / CLOSED_ORDER_STATUSES / isOpenOrder. That list is a
+  safety boundary - a status in neither would silently drop an order off every board - and
+  test/wardsynq-ward-order.test.mjs pins it against every writer (native, hl7-normalize ORC maps, SCCM draft).
+- NOT converted, and the reason: Appointment, AppointmentRequest and SpecimenCollection keep where they stand in
+  `state`, not `status`, and `pageByType` filters `$.status` only. Mirroring `state` into `status` on new writes
+  would leave every appointment already in the diary invisible to the filter - a double booking. So scheduling.js
+  and online-booking.js still read `listAll`; the port change (a named field, or `states` beside `statuses`) is
+  R5-3's, and the blocker is written out in both files.
+- Also not done: an order the SENDER closed still lands as `draft`. Filing it closed was tried and reverted - an
+  adapter actor holds the draft tier and the governed store refuses it any other status, rejecting the whole
+  transaction, so a cancellation would never land. An integration-mode hospital's external orders therefore still
+  accumulate against the open census. Closing them needs an actor that may, which is a governance change.
+- Existing tenants: orders resulted BEFORE this branch stay `active` and count against the 5,000 open census. A
+  hospital past that sees a visible 503 on these three boards until a backfill closes them. No backfill is built
+  (it is a resumable job, not a request-scoped read).
+
+## 2026-09-18 The backfill that closes orders resulted before anything closed one (branch order-close-backfill, R5-3)
+
+- The gap R5-2 wrote down: an existing hospital's orders were resulted while NOTHING in the tree closed an
+  order, so they are all still `active`. They count against OPEN_CENSUS_MAX (5,000) and the lab, specimen and
+  imaging boards - now status-scoped reads - answer 503 `too_many_open` on a hospital that has simply been
+  open for a while. `functions/_wardsynq/order-backfill.js` closes them.
+- SAME CLOSURE, NOT A SECOND ONE. Every order goes through `ward-order.js closeOrderOnResult()`: same writer,
+  same `completed` status, same append-only new version, same governed audited put, the releasing person's id
+  stamped on it. The one added field is `completedOn: "backfill"` (a new optional `deps.on`, default
+  `"result"`), so an auditor can tell a retrospective tidy-up from a result being filed. A second closure path
+  with its own vocabulary is how a board ends up showing an order nobody can explain.
+- THE RELEASE RULE IS THE LIVE PATH'S, read off the order's effective category: any DiagnosticReport for a
+  laboratory order (lab-result.js closes on any release), final or corrected only for imaging
+  (radiology-report.js, and dicom.js's worklist). Never closed: an order with no report (the test is genuinely
+  owed - closing it is a missed result), an imaging order read only preliminarily, an order another system
+  owns (the adapter draft tier R5-2 documented; that still needs a governance change, not a job).
+- TWO STEPS, AND THEY DO NOT COLLAPSE. `POST /ward/order-backfill-scan` writes nothing and answers with the
+  order ids it would close plus a grouped tally of why the rest stay open; `POST /ward/order-backfill-close`
+  takes those ids and re-checks every one from the store before writing, so a stale list cannot close an order
+  whose situation has changed. Both staff.admin. Re-running writes nothing: a closed order is not in the
+  store's open page any more and is refused by name if it is sent again.
+- RESUMABLE, via `service.pageByStatus()` - one page of the open-status read at the store's own cursor
+  (repository pageByType), governed and audited exactly as listByStatus. It is deliberately NOT capped by
+  OPEN_CENSUS_MAX: a read that refused past the ceiling could never be the read that fixes being past it. The
+  bound is the page (default 100 orders) instead, so no amount of history changes what one request costs.
+- Screen: Admin Center > Close finished orders (wardsynq/site/pages/admin.js, `orderBackfill` tab). It drives
+  batch after batch and shows the remaining count as it goes. A batch that fails STOPS the run and says so -
+  "could not be read" and "nothing left to do" are different sentences on a screen whose whole job is to say
+  how much work is left.
+- Not done: no cron or scheduled runner (the job is admin-triggered on purpose; the person who starts it is
+  the person it is audited to), and no total-remaining figure before a full scan pass - the count comes from
+  the scan itself, batch by batch, because counting the archive is the same walk as scanning it.
+
+## 2026-09-18 - A safety check that could not read the record says so (R6-1, no-unchecked-safety)
+- THE BUG, stated once: `svc.byPatient("AllergyIntolerance", id).catch(() => [])` inside a safety path. The
+  store faults, the check receives an empty list, and a patient with a documented penicillin allergy is
+  presented to the prescriber, the pharmacist or the radiologist as a patient with no allergy. Worse, the
+  per-read catch swallowed the failure before the file's own outer catch could see it, so the degraded branch
+  in rx-safety.js and the fail-closed contrast refusal in radiology-protocol.js were unreachable code.
+- THE SHAPE is R5-1's, not a new one (break-glass.js `unreadableTypes`, migrate-inpatient.js
+  `advisoriesUnavailable`): null is a read that did not happen, [] is a read that happened and found nothing.
+  `functions/_wardsynq/unreadable.js` holds the two helpers - `readOrNull(promise, type, failures)` and
+  `unavailable(failures) -> { notChecked: [type], reason }` - so the verdict shape is one contract the tests
+  and the screens can both pin.
+- REPORT OR REFUSE, per path, decided by whether the function is allowed to stop the clinician:
+  - rx-safety.js NEVER gates (unapproved content, its own header): it reports `notChecked` on the verdict and
+    the prescribe confirm names the record it could not read, first, before any finding.
+  - radiology-protocol.js protocol CONTEXT reports (`contrastAllergies: null`, `renal: null`, `notChecked`);
+    recording a CONTRAST protocol refuses 502 `clinical_read_failed` (renamed from `allergy_read_failed`,
+    which now also covers the renal Observation). A non-contrast protocol is still recordable and carries
+    `notCheckedAtProtocol` on the record itself.
+  - pharmacy-verify.js: the allergy read reports (the orders stay on screen), the MedicationVerification read
+    refuses - an unreadable verification list made every order read as `unverified`, which hides exactly the
+    stale-verification state the file exists to show.
+  - pharmacy-dispense.js and icu-care.js refuse: issuing stock against a verification nobody could read, or
+    dropping a running pressor because its drug name did not load, are not states worth reporting around.
+- NOT DONE HERE, by the conflict map: patient-record.js, chart-completion.js, billing.js, hl7v2.js,
+  lab-result.js, specimen.js (R6-2), the ingest files (R6-3), scheduling/online-booking (R6-4), registry.js
+  (R6-5). migrate-emar.js's bedsideSafetyCheck already reports NOT_CHECKED_* itself and was left alone.
+
+## 2026-09-18 R6-3: an order the SENDING system has finished is closed here, by a local actor
+
+Round 6 audit §2(b): an ingested ServiceRequest lands as `draft` (service.js `governedForIngest` writes as the
+adapter actor, and the adapter ceiling caps it there), so if its result is filed upstream nothing in WardSynQ
+ever closes it. `draft` is an OPEN status, so every order a real LIS feed ever sent counts against
+OPEN_CENSUS_MAX (5,000) for ever, and the day that is reached the laboratory, specimen and imaging boards
+refuse. Branch `external-order-closure`.
+
+- THE ADAPTER CEILING IS NOT MOVED. An adapter still writes `draft` and still may not assert a clinical
+  status; the governance test is unchanged and still passing.
+- THE SENDER'S ASSERTION WAS ALREADY PRESERVED, so no ingest change was needed. The audit proposed a new
+  `meta.sourceStatus`; the code already carries the sender's own word as `externalStatus`
+  (wardsynq-sccm-adapter.js, from FHIR `ServiceRequest.status` or the HL7 ORC, on both the FHIR and HL7
+  doors), audited with the rest of the record and never read as the record's own status. Adding a second
+  field for the same fact would have been a second source of truth. Followed the code; fhir-inbound.js and
+  hl7-normalize.js are untouched, and a test pins the adapter's behaviour so it stays that way.
+- THE CLOSING WRITE IS LOCAL AND GOVERNED, never the adapter's. `functions/_wardsynq/source-order-close.js`
+  is shaped exactly like `order-backfill.js` - dry run first, one page per request at the store's own cursor,
+  resumable, safe to run twice, nothing partial reported as success - and closes through
+  `closeOrderOnResult()` with a new `deps.on: "source-terminal"` (`roleSource: "wardsynq-source-terminal"`),
+  on the authority of the administrator who pressed the button, whose id lands on the new version. The
+  record keeps `externalStatus` and `meta.source` and gains `completedOn: "source-terminal"`, so the audit
+  trail says the assertion came from outside and the closure was made here.
+- ONE NARROW EXCEPTION TO EXTERNAL AUTHORITY, in `service.js sourceTerminalClosure()`: that role AND that
+  roleSource, ServiceRequest only, the sender's terminal word as the STORE holds it (never as the incoming
+  entity asserts it), the status being written is `completed`, and every other field on the record must be
+  byte-identical. Anything else is still refused with EXTERNAL_AUTHORITY, so this cannot widen into a general
+  door onto another system's records. The terminal vocabulary is `CLOSED_ORDER_STATUSES` and is spelled twice
+  (ward-order.js imports service.js, so the import cannot go the other way); the test pins the two equal.
+- An order whose sender says `active`, says `unknown`, or says nothing is never closed. Neither is this
+  hospital's own order: those are order-backfill.js's, closed on a filed result.
+- The closing version KEEPS `meta`. The two native paths delete it, which for an externally owned record
+  would leave the new version with no `meta.source` at all - read everywhere as "this hospital owns it", so
+  tidying the order would quietly transfer another system's record to us.
+- CORRECTION TO THE AUDIT: it says an ingested order "appears on the board". It does not. specimen.js and
+  lab-result.js both drop `isExternalRecord`, so another system's order was never on this ward's collection
+  or pending-tests boards. What it does is sit in the OPEN CENSUS, which is what refuses. The test asserts
+  the census, and asserts the boards do not change.
+- Screen: Admin Center > Close finished orders now carries both panels - the existing result backfill and
+  "Close orders another system has finished" - each with its own state. Routes
+  `POST /api/queue/ward/source-order-scan` and `POST /api/queue/ward/source-order-close`, both staff.admin.
+  The scan names the sending system per order, so an administrator can see whose "finished" they are acting on.
+- Not done: no cron (admin-triggered on purpose, as the backfill is), and no per-adapter policy for which
+  senders may be trusted - every connected system's terminal word counts the same today. If one hospital
+  finds a feed whose `completed` is unreliable, that is a per-adapter setting and a new decision.
+
+## 2026-09-18 A clash check reads the clash window, not the hospital's whole diary (R6-4, branch booking-and-registry-reads)
+- THE PROBLEM WAS NOT `state` VS `status`. R5-2 could not put the two clash reads (scheduling.js
+  bookAppointment, online-booking.js diary) on the open-status read because an Appointment keeps where it
+  stands in `state` and the store filters on `status`, and mirroring `state` into `status` would have left
+  the hospital's existing diary with no status and a clash check that skipped it. The conclusion drawn then
+  was "the port needs a `states` filter first". That is NOT what was built.
+- A CLASH IS TIME-BOUNDED BY DEFINITION, so the period read R5-3 already shipped (service.listSince,
+  pageByType newest/beforeSeq) bounds it with no port change, no schema change and no new filter on three
+  adapters: read newest first and stop once a whole page is behind the window. read-window.js
+  `readClashDiary` holds the window (the longest permitted appointment, 480 minutes, plus a week of margin).
+  A `states` filter stays the upgrade if a state query that is NOT time-bounded ever appears.
+- THE STOP TEST LOOKS AT TWO THINGS, and this is the part worth remembering: the read pages by WRITE order,
+  the window is on `startAt`. A booking made long ago for a date inside the window has an old seq, so a stop
+  on `startAt` alone would walk past it and book over it. A record is behind the window only when its slot is
+  older than the floor AND it was last written longer ago than the longest lead a booking is made with
+  (WRITE_LOOKBACK_MS, 400 days). An appointment booked further ahead than that and never touched since is the
+  stated residual, and it is outside any real outpatient diary.
+- THE AMENDMENT RACE IS NOT ACCEPTED HERE. pageByType's newest-first cursor can miss a record amended during
+  the read (repository.js:302-306); on a month report that is the documented price, on a clash check it is a
+  double booking. An amendment lands at the very top of the write order, so ONE page of the newest records is
+  re-read after the decision and before the append (read-window.js `readRecentWrites`) and tested with the
+  same overlap rule; in the portal that re-read runs after the slot hold is claimed and releases the hold if
+  the time turns out to be taken. Bound: 1,000 writes landing inside one clash read would push an amendment
+  off that page; a per-clinician id range seek is the upgrade.
+- Unchanged: the Blackout read (a standing period, not a slot), listSchedule's diary read (it is asked for
+  arbitrary past date ranges), and the 50,000 ceiling with throwOnTruncate - a diary that cannot be bounded
+  still refuses rather than booking on a short read.
+
+## 2026-09-18 The recall registry reads the newest first (R6-5, same branch)
+- registry.js read the whole history of Condition, Observation and Patient oldest-first, so past READ_MAX the
+  records dropped were the NEWEST - the patients most likely to need recall, and the ones whose latest
+  qualifying result decides whether they are overdue. It now reads newest-first (service.listSince with no
+  stop test, which keeps the newest past the ceiling) and the truncation sentence says the oldest were not
+  read.
+- NOT period-scoped, deliberately: a registry asks for each patient's LAST qualifying record, so a period
+  read would turn "reviewed three years ago" into "never reviewed" - the most overdue state there is.
+
+## 2026-09-18 - R6-2: a chart that could not be read is never drawn as a chart with nothing in it (branch no-silent-empty-chart)
+
+R5-1 fixed this swallow in three files; the audit found it in about fifteen. This branch takes the six
+it owns (patient-record.js, chart-completion.js, billing.js pre-auth, hl7v2.js, lab-result.js,
+specimen.js). The rule, unchanged from R5-1: a read that FAILED and a read that came back EMPTY are
+different facts and are never rendered the same way.
+
+- SHAPE, per site, chosen by what the caller can honestly do with a partial answer:
+  - `patient-record.js assemble()` - per-type `null` plus `unreadableTypes`, the break-glass.js pattern
+    verbatim. Six of seven types failing independently is the common case and blanking the whole chart
+    for one of them would be its own lie.
+  - `chart-completion.js` - per-detector, so one unreadable section is `unknownSections: [{type, reason}]`
+    and the other six checks still run. The audit asks for a completion percentage; this file computes
+    none (it is a deficiency queue), so the count of unknown sections is what is reported instead.
+  - `billing.js claimsForPatient` - `preAuthorisations: null` beside the three lists R5-4 already did,
+    and every payer rule that turns on a pre-authorisation is reported UNCHECKED rather than as "none
+    recorded", which is what the rule engine would otherwise state as a fact.
+  - `hl7v2.js`, `lab-result.js`, `specimen.js` - REFUSED (the 502 the surrounding code already returns).
+    An outbound ORU with no OBX is filed by the receiver as a report with no results, and an empty
+    laboratory or phlebotomy board is read as work already done. There is no partial answer worth giving.
+- A HANDOVER IS NOT RECORDED OFF A CHART THAT COULD NOT BE READ. `releaseToPatient` refuses with 502 and
+  writes nothing: its receipt counts allergies, medicines and diagnoses, and a zero taken from a failed
+  read is an answerable written statement that the patient was handed a page with none.
+- WITH THE CRITICAL-RESULT LOOPS UNREADABLE, NO RESULT IS RELEASED. Releasability is "no OPEN loop covers
+  this report"; unreadable loops used to mean no loops, which is the potassium-of-7.2 failure the file's
+  own header is about.
+- Screens: ward Patient copy names the unreadable parts above the chart and draws each missing section as
+  unknown rather than empty (the second-language aside is DROPPED for such a section rather than printing
+  the catalog's "nothing recorded" in the patient's own language - a new print-lang.js catalog word was
+  not invented for it); Chart check will not print "Nothing outstanding" while a section is unknown; the
+  TPA screen says the pre-authorisations could not be read; the patient portal reuses its own existing
+  `section(..., "failed", ...)` state.
+- Not done here: `patient-access.js:441` (the portal's own PatientMessage read) and the sites owned by
+  R6-1/R6-3/R6-4/R6-5.

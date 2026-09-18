@@ -453,7 +453,7 @@ test("wrong-patient / bed-safety, THE ATOMIC PATH ITSELF: forced to race inside 
   const regA = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Barrier Claimant A", mobile: "9876500073", gender: "female", ageYears: 42 });
   const regB = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Barrier Claimant B", mobile: "9876500074", gender: "male", ageYears: 43 });
 
-  const realLatestByType = RECORD.latestByType.bind(RECORD);
+  const realPageByType = RECORD.pageByType.bind(RECORD);   // the open census (R4-1)
   const realAppend = RECORD.append.bind(RECORD);
   const realLatest = RECORD.latest.bind(RECORD);
   let arrived = 0, releaseGate, claimConflicts = 0, claimReads = 0, releaseClaim;
@@ -466,13 +466,13 @@ test("wrong-patient / bed-safety, THE ATOMIC PATH ITSELF: forced to race inside 
     if (resourceType === "_wardsynq_bed_claim") { claimReads += 1; if (claimReads === 2) releaseClaim(); await claimGate; }
     return realLatest(tenantId, resourceType, id);
   };
-  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+  RECORD.pageByType = async (tenantId, resourceType, opts) => {
     if (resourceType === "Encounter") {
       arrived += 1;
       if (arrived === 2) releaseGate();          // both callers have now asked "who is here" -
       await gate;                                // neither has seen the other's answer yet.
     }
-    return realLatestByType(tenantId, resourceType, limit);
+    return realPageByType(tenantId, resourceType, opts);
   };
   // Instrumented, not assumed: this is the SAME evidence a prior review demanded before trusting
   // this test's own claim - proof the bed-claim row itself, not the ordinary list-scan, is what
@@ -488,7 +488,7 @@ test("wrong-patient / bed-safety, THE ATOMIC PATH ITSELF: forced to race inside 
       as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regA.mrn, ward: "ICU", bed: "6", admittedAt: "2026-09-07T08:00:00.000Z" }),
       as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regB.mrn, ward: "ICU", bed: "6", admittedAt: "2026-09-07T08:00:01.000Z" }),
     ]);
-  } finally { RECORD.latestByType = realLatestByType; RECORD.append = realAppend; RECORD.latest = realLatest; }
+  } finally { RECORD.pageByType = realPageByType; RECORD.append = realAppend; RECORD.latest = realLatest; }
 
   assert.equal(arrived, 2, "both requests genuinely reached the list-scan before either was released - the race was real, not assumed");
   assert.equal(claimConflicts, 1, "claimBed()'s own append() genuinely threw VersionConflictError for the loser - the atomic path, not the list-scan, decided this");
@@ -2267,17 +2267,18 @@ test("a merge whose chain check cannot read the existing links is refused, not w
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
   const b = await secondPatient("Medical A", "34");
-  const real = RECORD.latestByType.bind(RECORD);
-  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+  // R4-2: the chain check pages every link (pageByType), so the fault is injected there.
+  const real = RECORD.pageByType.bind(RECORD);
+  RECORD.pageByType = async (tenantId, resourceType, opts) => {
     if (resourceType === "PatientLink") throw new Error("store unavailable");
-    return real(tenantId, resourceType, limit);
+    return real(tenantId, resourceType, opts);
   };
   try {
     const r = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason: "Same date of birth and mobile; confirmed at the desk." });
     assert.equal(r.__status, 502, JSON.stringify(r));
     assert.equal(r.error, "record_read_failed");
     assert.equal(r.written, 0);
-  } finally { RECORD.latestByType = real; }
+  } finally { RECORD.pageByType = real; }
   assert.equal((await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length, 0, "nothing was joined");
 });
 
@@ -2805,6 +2806,37 @@ test("BREAK-GLASS IS READ ONLY, one patient, and never implicit", async () => {
   assert.equal((await as(NURSE, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Sepsis" } })).__status, 403);
   assert.equal((await as(NURSE, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "X", dose: { value: 1, unit: "mg" } } })).__status, 403);
   assert.equal((await as(NURSE, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`)).__status, 200, "her ordinary access is unchanged either way");
+});
+
+/* R5-1 (2026-09-17): a per-type read failure used to become `chart[type] = []` with nothing
+ * recorded, so an allergy list the store refused rendered exactly like "no known allergies" -
+ * mid-emergency, to a clinician who has no other chart to check. */
+test("BREAK-GLASS: a part of the chart that could NOT be read is named, never handed back as an empty list", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/break-glass", "POST", {
+    orgId: ORG, patientId: adm.patientId, reason: "Found unresponsive on the ward, treating team unreachable.",
+  });
+
+  const real = RECORD.byPatient.bind(RECORD);
+  RECORD.byPatient = async (tenantId, type, patientId) => {
+    if (type === "AllergyIntolerance") throw new Error("record store unavailable");
+    return real(tenantId, type, patientId);
+  };
+  try {
+    const chart = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+    assert.equal(chart.__status, 200, JSON.stringify(chart));
+    assert.deepEqual(chart.unreadableTypes, ["AllergyIntolerance"], "the failed type is named on the response");
+    assert.equal(chart.chart.AllergyIntolerance, null, "never [] - an empty allergy list reads as 'no known allergies'");
+    // The rest of the chart is still delivered: the emergency read is not refused wholesale.
+    assert.ok(Array.isArray(chart.chart.MedicationOrder), JSON.stringify(chart.chart.MedicationOrder));
+    assert.ok(chart.chart.MedicationOrder.length >= 1);
+  } finally { delete RECORD.byPatient; }
+
+  // With nothing faulted the array is empty and unreadableTypes is empty: the two states are distinct.
+  const whole = await as(NURSE, `/ward/emergency-chart?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.deepEqual(whole.unreadableTypes, []);
+  assert.ok(Array.isArray(whole.chart.AllergyIntolerance));
 });
 
 test("THE ACCOUNTABILITY SURFACE: every declaration is on the record, with its reason and its use", async () => {
@@ -4347,6 +4379,36 @@ test("A HOSPITAL'S OWN ADVISORY APPEARS AND CANNOT BLOCK", async () => {
 
   // A different drug on the same patient does not fire it: every condition must hold.
   assert.equal((await order("Paracetamol")).advisories, undefined);
+
+  /* R5-1 (2026-09-17): the Observation and Condition reads used to be `.catch(() => [])` inside a
+   * `catch { advisories = [] }`, so a failed read produced a response with no advisories on it -
+   * on screen indistinguishable from "this hospital's reminders found nothing about this drug". */
+  const real = RECORD.byPatient.bind(RECORD);
+  RECORD.byPatient = async (tenantId, type, patientId) => {
+    if (type === "Observation") throw new Error("record store unavailable");
+    return real(tenantId, type, patientId);
+  };
+  try {
+    const blind = await order("Gentamicin");
+    assert.equal(blind.__status, 200, "the medicine is never withheld over a hospital reminder");
+    assert.equal(blind.written, 1);
+    assert.equal(blind.advisories, undefined, "nothing was evaluated, so nothing is claimed");
+    assert.equal(blind.advisoriesUnavailable.reason, "record_read_failed", JSON.stringify(blind.advisoriesUnavailable));
+
+    // The same on the pre-prescribing check, which is what the screen shows before anything is written.
+    const check = await as(DOCTOR, "/ward/medication-order", "POST", {
+      orgId: ORG, checkOnly: true,
+      order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Gentamicin", dose: { value: 240, unit: "mg" }, route: "iv", frequency: "OD" },
+    });
+    assert.equal(check.__status, 200);
+    assert.equal(check.written, 0);
+    assert.equal(check.advisoriesUnavailable.reason, "record_read_failed");
+  } finally { delete RECORD.byPatient; }
+
+  // Read whole again: the flag is gone and the advisory is back. The two states are distinct.
+  const back = await order("Gentamicin");
+  assert.equal(back.advisoriesUnavailable, undefined);
+  assert.equal(back.advisories.length, 1);
 });
 
 /* ---- what this hospital stocks, and what it guards ---------------------------------------------- */
@@ -6753,15 +6815,29 @@ test("DOCUMENTS: an administrator deletes the stored files only after retention;
     await as(DOCTOR, "/ward/document-upload", "POST", { ...body, documentId: up.document.id, expectedVersion: 1, title: "Aadhaar copy, clearer" });
     assert.equal(objects.size, 2);
 
-    const early = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id });
+    const PURGE = { orgId: ORG, documentId: up.document.id, reason: "Retention period over, destruction approved by the records committee" };
+    const noReason = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id });
+    assert.equal(noReason.__status, 422, "the purge is the destruction record: it needs a reason");
+    const early = await as(ADMIN, "/ward/document-purge", "POST", PURGE);
     assert.equal(early.__status, 409, JSON.stringify(early));
     assert.equal(early.error, "retention_not_expired");
     assert.equal(objects.size, 2, "nothing is deleted before the retention date");
 
+    /* Legal opinion H.4.2: ten years for a document (DGHS OM 28 Oct 2014), and the patient's in-patient stay keeps the
+     * whole record ten years after it ended. Four years on is still inside both. */
     const realNow = Date.now;
     Date.now = () => realNow() + 4 * 365 * 24 * 3600 * 1000;
+    try { assert.equal((await as(ADMIN, "/ward/document-purge", "POST", PURGE)).error, "retention_not_expired"); }
+    finally { Date.now = realNow; }
+    // A stay that is still open keeps the record however far on: the patient is discharged first.
+    Date.now = () => realNow() + 11 * 366 * 24 * 3600 * 1000;
+    try { assert.equal((await as(ADMIN, "/ward/document-purge", "POST", PURGE)).retentionClass, "clinical-ipd"); }
+    finally { Date.now = realNow; }
+    const enc = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
+    await RECORD.append(TENANT_ROW.id, [{ ...enc, version: enc.version + 1, status: "finished", periodEnd: "2026-09-10T08:00:00.000Z" }], { idempotencyKey: "discharge-for-retention" });
+    Date.now = () => realNow() + 11 * 366 * 24 * 3600 * 1000;
     let purged;
-    try { purged = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id }); }
+    try { purged = await as(ADMIN, "/ward/document-purge", "POST", PURGE); }
     finally { Date.now = realNow; }
     assert.equal(purged.__status, 200, JSON.stringify(purged));
     assert.equal(purged.objectsDeleted, 2, "every version's file goes");
@@ -6770,6 +6846,52 @@ test("DOCUMENTS: an administrator deletes the stored files only after retention;
     assert.equal(list.documents.length, 1, "the record that a document existed stays");
     assert.equal(list.documents[0].status, "purged");
     assert.equal((await as(NURSE, "/ward/document-link", "POST", { orgId: ORG, documentId: up.document.id })).__status, 410);
+  });
+});
+
+/* Owner's legal guidance of 17 Sep 2026, item 4: inside a LEGAL_OBLIGATION period deletion is refused and names the law;
+ * inside a period only the hospital's retention policy sets, it needs a reason and the DPO's or records officer's
+ * confirmation, written on the purge. */
+test("DOCUMENTS: deletion inside the law's period is refused naming the law; inside only the policy period it needs the DPO's or records officer's confirmation and reason", async () => {
+  seedHospital();
+  const ADMIN = "admin@example.test", HRS = "hr@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN))}`, { fields: { orgId: ORG, identity: idFor(ADMIN), role: "admin", active: true }, updateTime: "t1" });
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(HRS))}`, { fields: { orgId: ORG, identity: idFor(HRS), role: "hr", active: true }, updateTime: "t1" });
+  const { adm } = await admittedPatientOnDrug();
+  const enc = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
+  await RECORD.append(TENANT_ROW.id, [{ ...enc, version: enc.version + 1, status: "finished", periodEnd: "2026-09-10T08:00:00.000Z" }], { idempotencyKey: "discharge-for-basis" });
+  await withDocStore(async ({ objects }) => {
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, patientId: adm.patientId, docType: "outside-report", title: "Old echo", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    const PURGE = { orgId: ORG, documentId: up.document.id, reason: "Records committee approved destruction" };
+    const realNow = Date.now, at = (years) => { Date.now = () => Date.parse("2026-09-17T00:00:00Z") + years * 365.25 * 24 * 3600 * 1000; };
+    try {
+      at(2);
+      const legal = await as(ADMIN, "/ward/document-purge", "POST", { ...PURGE, policyConfirm: true, policyReason: "Confirmed by the DPO in writing" });
+      assert.equal(legal.__status, 409, JSON.stringify(legal));
+      assert.equal(legal.error, "retention_not_expired");
+      assert.equal(legal.basisType, "LEGAL_OBLIGATION", "a confirmation cannot override the law's period");
+      assert.equal(legal.law[0].provision, "reg 1.3.1");
+      assert.match(legal.message, /The law requires .*until 2029-09-07 \(Indian Medical Council/);
+
+      at(4);
+      const ask = await as(ADMIN, "/ward/document-purge", "POST", PURGE);
+      assert.equal(ask.__status, 409, JSON.stringify(ask));
+      assert.equal(ask.error, "retention_policy_confirmation_required");
+      assert.equal(ask.basisType, "RETENTION_POLICY");
+      assert.match(ask.message, /hospital's retention policy \(.*DGHS Office Memorandum.*\)\. That is not a legal requirement/);
+      const hr = await as(HRS, "/ward/document-purge", "POST", { ...PURGE, policyConfirm: true, policyReason: "Approved by the committee" });
+      assert.equal(hr.__status, 403, "staff administration without the DPO or records officer capability cannot confirm");
+      const short = await as(ADMIN, "/ward/document-purge", "POST", { ...PURGE, policyConfirm: true, policyReason: "ok" });
+      assert.equal(short.error, "policy_reason_required");
+      assert.equal(objects.size, 1, "nothing deleted before a confirmed reason");
+      const done = await as(ADMIN, "/ward/document-purge", "POST", { ...PURGE, policyConfirm: true, policyReason: "Patient asked; no continuing care need; DPO decision 14/2030" });
+      assert.equal(done.__status, 200, JSON.stringify(done));
+      assert.equal(objects.size, 0);
+      assert.equal(done.document.policyOverride.basisType, "RETENTION_POLICY");
+      assert.match(done.document.policyOverride.reason, /DPO decision 14\/2030/);
+      assert.ok(done.document.policyOverride.confirmedBy);
+    } finally { Date.now = realNow; }
   });
 });
 

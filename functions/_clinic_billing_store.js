@@ -1,7 +1,8 @@
 // Clinic BILLING - Firestore/PHI I/O (the impure half; pure logic is in _clinic_billing.js).
 // Collections: q_patients (registry, PHI-encrypted), q_orders, q_tariff, q_invoices, q_patient_seq.
 // Not node-testable (needs Firestore) - verify on-device. Additive + gated by CLINIC_BILLING_ENABLED.
-import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsGet, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { PAGE_SIZE, readAll } from "./_fs_read_all.js";
 import { encPHI, decPHI } from "./_queue.js";
 import { qAudit, getSession, getTicket } from "./_queue_engine.js";
 import { appendTimeline } from "./_queue_timeline.js";
@@ -76,24 +77,35 @@ export async function createOrder(env, orgId, o, actor) {
   await qAudit(env, { hospitalId: orgId, ticketId: v.order.patientId, actor: actor || "doctor", action: "order_create", meta: v.order.kind });
   return { ok: true, id };
 }
+/* EVERY matching row (readAll, functions/_fs_read_all.js). Past maxRows the answer carries truncated:true and the caller
+ * decides whether a partial answer can be shown (a station queue, flagged on screen) or must fail (the Price list). */
+export { PAGE_SIZE, readAll };
+export const QUEUE_CAP = 5000;
+export const TARIFF_CAP = 20000;
+const asOrders = (rows) => rows.map((r) => Object.assign({ id: r.id }, r.fields));
+
 export async function ordersForPatient(env, orgId, patientId, status) {
-  const rows = await fsQuery(env, "q_orders", { where: { field: "patientId", value: patientId }, limit: 200 });
-  let list = (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter((o) => o.orgId === orgId);
+  // A patient's whole history, not the first 200 orders: a regular patient's newest unbilled order was missed.
+  const where = [{ field: "patientId", value: patientId }, ...(status ? [{ field: "status", value: status }] : [])];
+  const { rows, truncated } = await readAll(env, "q_orders", where, QUEUE_CAP);
+  if (truncated) throw Object.assign(new Error("orders_too_many"), { status: 507 });
+  let list = asOrders(rows).filter((o) => o.orgId === orgId);
   if (status) list = list.filter((o) => o.status === status);
   return list;
 }
-// billing station inbox: every 'ordered' order in the org (fsQuery is single-field, so filter status in JS).
+/* Billing station inbox: every 'ordered' order in the org, asked for by status (orgId AND status, both equality, so no
+ * composite index) instead of the first 500 orders the org ever raised filtered afterwards. { orders, truncated }. */
 export async function billingQueue(env, orgId) {
-  const rows = await fsQuery(env, "q_orders", { where: { field: "orgId", value: orgId }, limit: 500 });
-  return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter((o) => o.status === "ordered");
+  const { rows, truncated } = await readAll(env, "q_orders", [{ field: "orgId", value: orgId }, { field: "status", value: "ordered" }], QUEUE_CAP);
+  return { orders: asOrders(rows).filter((o) => o.orgId === orgId && o.status === "ordered"), truncated };
 }
 
 // ---- pharmacy station ----------------------------------------------------------------------
 // What the pharmacy still owes patients: medication orders that are PAID but not yet handed over.
-// Investigations and services never appear here - they have no dispensing step.
+// Investigations and services never appear here - they have no dispensing step. { orders, truncated }.
 export async function pharmacyQueue(env, orgId) {
-  const rows = await fsQuery(env, "q_orders", { where: { field: "orgId", value: orgId }, limit: 500 });
-  return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter(isDispensable);
+  const { rows, truncated } = await readAll(env, "q_orders", [{ field: "orgId", value: orgId }, { field: "status", value: "paid" }, { field: "kind", value: "medication" }], QUEUE_CAP);
+  return { orders: asOrders(rows).filter((o) => o.orgId === orgId && isDispensable(o)), truncated };
 }
 // Hand the medicines over. Guarded by the state machine rather than by the pharmacist remembering:
 // only paid + medication can reach "dispensed", so an unpaid order cannot be released.
@@ -109,9 +121,12 @@ export async function dispenseOrder(env, orgId, orderId, actor) {
 }
 
 // ---- tariff (price catalog, integer paise) ----
+/* The WHOLE Price list. Every bill prices from it, so a partial list is never returned: past TARIFF_CAP rows this throws,
+ * and the screens say the Price list could not be read rather than billing the missing rows as "no price set". */
 export async function listTariff(env, orgId) {
-  const rows = await fsQuery(env, "q_tariff", { where: { field: "orgId", value: orgId }, limit: 500 });
-  return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter((t) => t.active !== false);
+  const { rows, truncated } = await readAll(env, "q_tariff", { field: "orgId", value: orgId }, TARIFF_CAP);
+  if (truncated) throw Object.assign(new Error("tariff_too_large"), { status: 507, detail: `More than ${TARIFF_CAP} Price list rows.` });
+  return asOrders(rows).filter((t) => t.orgId === orgId && t.active !== false);
 }
 export async function upsertTariff(env, orgId, item, actor) {
   const v = validateTariff(item); if (!v.ok) return v;
@@ -127,7 +142,9 @@ export async function upsertTariff(env, orgId, item, actor) {
   await qAudit(env, {
     hospitalId: orgId, ticketId: "", actor: actor || "admin",
     action: existing ? "tariff_update" : "tariff_create",
-    meta: `${fields.name} ${before == null ? "" : before + " -> "}${fields.price}${fields.active === false ? " (withdrawn)" : ""}`,
+    meta: `${fields.name} ${before == null ? "" : before + " -> "}${fields.price}${fields.active === false ? " (withdrawn)" : ""}` +
+      // The tax position is part of what is charged, so a change to it is recorded the same way.
+      ["hsnSac", "gstRate", "intensiveCare", "intensiveCareClass", "unitHours", "nonHealthcare"].filter((k) => k in fields).map((k) => ` ${k} ${existing && existing.fields && existing.fields[k] !== undefined ? existing.fields[k] + " -> " : ""}${fields[k]}`).join(""),
   });
   return { ok: true, id };
 }
@@ -150,7 +167,8 @@ export async function payInvoice(env, orgId, invoiceId, method, actor) {
   if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
   if (d.fields.status === "paid") return { ok: true, already: true };
   const lines = JSON.parse(d.fields.lines || "[]");
-  const writes = [wUpdate(env, "q_invoices/" + invoiceId, { status: "paid", paidMethod: method || "cash", paidAt: Date.now() })];
+  const paidAt = Date.now();
+  const writes = [wUpdate(env, "q_invoices/" + invoiceId, { status: "paid", paidMethod: method || "cash", paidAt, paidUtcDay: utcDay(paidAt) })];
   lines.forEach((l) => { if (l.orderId) writes.push(wUpdate(env, "q_orders/" + l.orderId, { status: "paid", updatedAt: Date.now() })); });
   await fsCommit(env, writes);
   await qAudit(env, { hospitalId: orgId, ticketId: d.fields.patientId, actor: actor || "cashier", action: "invoice_pay", meta: method || "cash" });
@@ -178,14 +196,26 @@ export async function getInvoice(env, orgId, invoiceId) {
   if (!d || !d.fields || d.fields.orgId !== orgId) return null;
   return Object.assign({ id: invoiceId }, d.fields, { lines: JSON.parse(d.fields.lines || "[]") });
 }
-// Paid revenue for TODAY (IST) across the org, in rupees + the count of invoices paid today. Returns null
-// when billing is off, so the analytics dashboard simply hides the tile. fsQuery is single-field (orgId),
-// so status/date are filtered in JS. IST day boundary (UTC+5:30) matches the clinic's calendar day.
-export async function revenueToday(env, orgId) {
+/* Paid revenue for the hospital's TODAY across the org, in rupees + the count of invoices paid today. Returns null when
+ * billing is off, so the analytics dashboard simply hides the tile. offsetMinutes is the hospital's clock (the caller
+ * resolves wardsynq.timeZone / utcOffsetMinutes); IST (330) only when the hospital set none.
+ * It used to read the org's first 1,000 invoices ever and filter in JS, so from invoice 1,001 on today's takings read
+ * as zero. Paid invoices carry paidUtcDay (the UTC date of paidAt): the local day touches at most two UTC dates, each
+ * asked for by orgId AND paidUtcDay (equality only, no composite index), every page read, paidAt then bounds the day.
+ * Past REVENUE_CAP invoices paid in one UTC day it throws rather than show a short total. Invoices paid before
+ * paidUtcDay existed have none and are not counted: only the deploy day itself can be short. */
+export const REVENUE_CAP = 20000;
+const utcDay = (ms) => new Date(ms).toISOString().slice(0, 10);
+export async function revenueToday(env, orgId, offsetMinutes) {
   if (!billingEnabled(env) || !orgId) return null;
-  const rows = await fsQuery(env, "q_invoices", { where: { field: "orgId", value: orgId }, limit: 1000 });
-  const now = Date.now(), dayStart = now - ((now + 19800000) % 86400000);
+  const off = (Number.isFinite(offsetMinutes) ? offsetMinutes : 330) * 60000;
+  const now = Date.now(), dayStart = now - ((((now + off) % 86400000) + 86400000) % 86400000), dayEnd = dayStart + 86400000;
+  const days = [...new Set([utcDay(dayStart), utcDay(dayEnd - 1)])];
   let paise = 0, count = 0;
-  (rows || []).forEach((r) => { const f = r.fields || {}; if (f.status === "paid" && (f.paidAt || 0) >= dayStart) { paise += (f.total || 0); count++; } });
+  for (const day of days) {
+    const { rows, truncated } = await readAll(env, "q_invoices", [{ field: "orgId", value: orgId }, { field: "paidUtcDay", value: day }], REVENUE_CAP);
+    if (truncated) throw Object.assign(new Error("revenue_too_many_invoices"), { status: 507, detail: `More than ${REVENUE_CAP} invoices paid on ${day}.` });
+    rows.forEach((r) => { const f = r.fields || {}; if (f.orgId === orgId && f.status === "paid" && (f.paidAt || 0) >= dayStart && f.paidAt < dayEnd) { paise += (f.total || 0); count++; } });
+  }
   return { revenueToday: Math.round(paise / 100), invoicesPaidToday: count };
 }

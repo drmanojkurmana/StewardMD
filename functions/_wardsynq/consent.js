@@ -37,6 +37,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { lawOn, childGate, guardianGate, CARE_PURPOSES } from "./privacy-law.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "PatientConsent";
@@ -55,6 +56,9 @@ const SCOPES = Object.freeze({
   "photography": "Clinical photography",
   "blood-products": "Transfusion of blood products",
   "procedure": "A specific procedure",
+  /* DPDP Act 2023 s7(a): sending a patient offers and news is a purpose they must agree to, unlike treatment,
+   * which s7 lets a hospital process without consent. Withdrawable by the patient in the portal. */
+  "marketing": "Offers and news from the hospital",
   "other": "Other",
 });
 
@@ -86,6 +90,9 @@ function PatientConsent(input) {
     withdrawnBy: i.withdrawnBy || null,
     withdrawnAt: i.withdrawnAt || null,
     withdrawalReason: i.withdrawalReason || null,
+    /* DPDP Rules 2025 r.10 (verifiable parental consent) and r.11 (a guardian's appointment), recorded when they applied. */
+    parentVerification: i.parentVerification || null,
+    guardianAppointment: i.guardianAppointment || null,
     source: { system: "wardsynq-native", sourceId: `consent:${i.id}` },
   };
 }
@@ -192,6 +199,31 @@ async function recordConsent(request, env, ctx) {
   const id = consentIdFor(patientId, scope, detail);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
+  /* DPDP Rules 2025 r.10 and r.11, from commencement only (privacy-law.js). A GRANT for a purpose that is not the
+   * patient's care, for a child or where the date of birth is not recorded, needs a parent or guardian whose identity
+   * was checked against an ID the hospital holds or a DigiLocker token; a guardian for an adult names who appointed
+   * them. Treatment, procedures and blood are health services (Fourth Schedule Part A item 1) and are never gated,
+   * and a refusal is never gated: the one direction this file does not block is towards "no". */
+  let verification = null, guardianAppointment = null;
+  const law = lawOn(ctx.dpdp, Date.now());
+  if (decision === "granted" && law.dpdpInForce && !CARE_PURPOSES.includes(scope)) {
+    let patient;
+    try { patient = await svc.get("Patient", patientId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "the patient's date of birth could not be read, so a consent that may need a parent's could not be checked", written: 0 }; }
+    const gate = childGate({ dob: patient && patient.dob, purpose: scope, atMs: Date.now(), law, givenBy: str(ctx.givenBy), verification: ctx.parentVerification });
+    if (gate.required && !gate.satisfied) {
+      return { ...base, ok: false, status: 422, error: "parental_consent_required", reason: gate.reason, citation: gate.citation,
+        detail: "a parent or legal guardian gives this consent, with their identity checked against an ID the hospital holds or a DigiLocker token", written: 0 };
+    }
+    if (gate.required) verification = { method: ctx.parentVerification.method, reference: str(ctx.parentVerification.reference).slice(0, 200), parentName: str(ctx.parentVerification.parentName).slice(0, 200), verifiedBy: resolved.actor.id, citation: gate.citation };
+    const g = guardianGate({ givenBy: str(ctx.givenBy), appointment: ctx.guardianAppointment, law, minor: gate.minor });
+    if (g.required && !g.satisfied) {
+      return { ...base, ok: false, status: 422, error: "guardian_appointment_required", citation: g.citation,
+        detail: "a guardian consenting for an adult names who appointed them (a court, a designated authority or a local level committee) and the order reference", written: 0 };
+    }
+    if (g.required) guardianAppointment = { source: ctx.guardianAppointment.source, orderRef: str(ctx.guardianAppointment.orderRef).slice(0, 200), citation: g.citation };
+  }
+
   let current;
   try { current = await svc.get(TYPE, id); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
@@ -204,6 +236,7 @@ async function recordConsent(request, env, ctx) {
     capacity: ctx.capacity,
     recordedBy: resolved.actor.id, recordedAt: now,
     validFrom: str(ctx.validFrom) || now, validUntil: str(ctx.validUntil) || null,
+    parentVerification: verification, guardianAppointment,
   });
   try {
     const out = await svc.put(rec, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });

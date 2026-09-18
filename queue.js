@@ -290,7 +290,7 @@
       '<div class="q-out"><span>No-show</span><b>' + a.noShow + " (" + noShowRate + "%)</b></div>" +
       '<div class="q-out"><span>Cancelled</span><b>' + a.cancelled + "</b></div>" +
       '<div class="q-out"><span>In queue</span><b>' + a.waiting + "</b></div>" +
-      (a.revenueToday != null ? '<div class="q-out"><span>Revenue today</span><b>&#8377;' + a.revenueToday + "</b></div>" : "") +
+      (a.revenueToday != null ? '<div class="q-out"><span>Revenue today</span><b>&#8377;' + a.revenueToday + "</b></div>" : a.revenueUnread ? '<div class="q-out"><span>Revenue today</span><b>Could not be read</b></div>' : "") +
       (a.followupCompliancePct != null ? '<div class="q-out"><span>Follow-up compliance</span><b>' + a.followupCompliancePct + "%</b></div>" : "") +
       "</div>";
     return '<h2 class="q-h2">' + ms("analytics") + "Performance analytics</h2>" + kpis + '<section class="q-grid2">' + eta + peak + out + "</section>";

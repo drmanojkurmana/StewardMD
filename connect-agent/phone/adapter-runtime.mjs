@@ -15,6 +15,10 @@
 import { READ_ROWS, isGimsrOrigin } from './runtime.mjs';
 
 export const TOKEN_KEY = /token|verification|csrf|xsrf|antiforgery|nonce/i;
+/* How long a page is given to settle after a move (the token inputs are server-rendered). */
+export let PAGE_SETTLE_MS = 2500;
+const TOKEN_SOUGHT = new WeakSet();
+export function setPageSettleMs(ms) { PAGE_SETTLE_MS = ms; }
 export const PATIENT_KEY = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$/i;
 export const VISIT_KEY = /visit|episode|encounter|admission|ip(no|number)/i;
 export const PAGE_SIZE_KEY = /^(length|limit|pagesize|page_size|size|rows|per_page|count|top)$/i;
@@ -22,6 +26,9 @@ export const PAGE_START_KEY = /^(start|offset|skip)$/i;
 export const PAGE_NUMBER_KEY = /^(page|pageno|page_no|pagenumber|p)$/i;
 const NOISE_PATH = /checksession|keepalive|heartbeat|ping|payment|logout|login|signalr|analytics|\.(js|css|png|jpe?g|gif|svg|woff2?|ico)$/i;
 const MAX_TEXT = 2 * 1024 * 1024;
+/* EVERY REQUEST ENDS. A hospital page that never answers held a patient read for 30 minutes
+ * (owner's iPhone, 2026-09-15): each in-page request is aborted at this deadline. */
+export const FETCH_TIMEOUT_MS = 12000;
 
 /* ---- the primitive ------------------------------------------------------------------------------ */
 
@@ -33,12 +40,19 @@ export function fetchExpression(req) {
     headers: Object.assign({ 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json, text/html, */*' }, req.headers || {}),
     body: req.body == null ? null : String(req.body),
     max: MAX_TEXT,
+    timeoutMs: Number(req.timeoutMs) > 0 ? Number(req.timeoutMs) : FETCH_TIMEOUT_MS,
   };
   return '(function(){var req=' + JSON.stringify(safe) + ';' +
-    'var init={method:req.method,credentials:"include",headers:req.headers,redirect:"follow"};' +
+    /* A REDIRECT IS AN ANSWER. GHIS answers an expired EMR-host session with a 302 to its login host;
+     * following it cross-origin is refused by the browser and every read came back as the bare
+     * "Load failed" (owner's iPhone drawer, 2026-09-17), indistinguishable from a dead network. With
+     * redirect:"manual" the redirect arrives as an opaqueredirect, reported as status 302 and
+     * classified as the login page, which the runtime already turns into "not signed in". */
+    'var init={method:req.method,credentials:"include",headers:req.headers,redirect:"manual"};' +
     'if(req.body!=null){init.body=req.body;if(!init.headers["Content-Type"])init.headers["Content-Type"]="application/x-www-form-urlencoded; charset=UTF-8";}' +
-    'return fetch(req.url,init).then(function(r){return r.text().then(function(t){return JSON.stringify({status:r.status,contentType:r.headers.get("content-type")||"",url:r.url,text:t.length>req.max?t.slice(0,req.max):t,truncated:t.length>req.max});});})' +
-    '.catch(function(e){return JSON.stringify({status:0,contentType:"",url:req.url,text:"",error:String(e&&e.message||e)});});})()';
+    'if(typeof AbortController==="function"){var ac=new AbortController();init.signal=ac.signal;setTimeout(function(){ac.abort();},req.timeoutMs);}' +
+    'return fetch(req.url,init).then(function(r){if(r.type==="opaqueredirect")return JSON.stringify({status:302,contentType:"",url:req.url,text:"",redirected:true});return r.text().then(function(t){return JSON.stringify({status:r.status,contentType:r.headers.get("content-type")||"",url:r.url,text:t.length>req.max?t.slice(0,req.max):t,truncated:t.length>req.max});});})' +
+    '.catch(function(e){return JSON.stringify({status:0,contentType:"",url:req.url,text:"",error:String(e&&e.message||e),host:(typeof location!=="undefined"?location.host:"")});});})()';
 }
 
 /** Test seam: the request a fetchExpression() carries, or null. */
@@ -55,7 +69,7 @@ export async function fetchInPage(plugin, req) {
   let out = null;
   try { out = JSON.parse(typeof raw === 'string' ? raw : JSON.stringify(raw)); } catch { out = null; }
   if (!out || typeof out !== 'object') throw new Error('the page returned no response for ' + (req.method || 'GET') + ' ' + req.url);
-  if (out.error) throw new Error('request failed in the page: ' + out.error);
+  if (out.error) throw new Error('request failed in the page: ' + out.error + ' (' + (req.method || 'GET') + ' ' + String(req.url || '').replace(/^https?:\/\/[^/]+/, '').replace(/\?.*$/, '') + (out.host ? ' from ' + out.host : '') + ')');
   return out;
 }
 
@@ -184,7 +198,7 @@ export function replayPlan(view, patient, tokens = null) {
 /** 'login' | 'json' | 'html' | 'empty' */
 export function classifyResponse(resp) {
   if (!resp) return 'empty';
-  if (resp.status === 401 || resp.status === 403) return 'login';
+  if (resp.status === 401 || resp.status === 403 || resp.redirected === true) return 'login';
   const text = String(resp.text || '');
   if (!text.trim()) return 'empty';
   if (/<input[^>]+type=["']?password/i.test(text) || /\/(login|signin|account\/login)\b/i.test(String(resp.url || '')) && /<form/i.test(text)) return 'login';
@@ -203,14 +217,30 @@ export function classifyResponse(resp) {
   return 'html';
 }
 
+/* Flatten one record to leaf fields. Objects AND arrays are walked (arrays indexed: `referenceRange.0.low.value`)
+ * so a value buried in a nested array - the FHIR shape, where a lab result's range is
+ * referenceRange[0].low.value - becomes a reachable field for value-based column learning, not an opaque
+ * JSON blob. Bounded: depth <= 4 and the first 8 elements of any array, so a large collection cannot explode
+ * the row. The whole array is also kept stringified under its own key, so a consumer that wants the raw list
+ * still has it. Deeper or overflow branches keep the old stringified form. */
 function flatten(obj, prefix, out, depth) {
-  if (depth > 2 || obj == null) return out;
-  if (typeof obj !== 'object' || Array.isArray(obj)) { out[prefix || 'value'] = Array.isArray(obj) ? JSON.stringify(obj) : String(obj); return out; }
+  if (depth > 4 || obj == null) return out;
+  if (typeof obj !== 'object') { out[prefix || 'value'] = String(obj); return out; }
+  if (Array.isArray(obj)) {
+    out[prefix || 'value'] = JSON.stringify(obj);
+    for (let i = 0; i < obj.length && i < 8; i += 1) {
+      const v = obj[i];
+      const name = (prefix ? prefix + '.' : '') + i;
+      if (v && typeof v === 'object') flatten(v, name, out, depth + 1);
+      else out[name] = v == null ? '' : String(v);
+    }
+    return out;
+  }
   for (const k of Object.keys(obj)) {
     const v = obj[k];
     const name = prefix ? prefix + '.' + k : k;
-    if (v && typeof v === 'object' && !Array.isArray(v)) flatten(v, name, out, depth + 1);
-    else out[name] = v == null ? '' : (Array.isArray(v) ? JSON.stringify(v) : String(v));
+    if (v && typeof v === 'object') flatten(v, name, out, depth + 1);
+    else out[name] = v == null ? '' : String(v);
   }
   return out;
 }
@@ -256,8 +286,15 @@ export function rowsFromHtml(text, view, parse) {
       const score = labels.filter((l) => l && want.includes(l)).length;
       if (score > bestScore) { best = t; bestScore = score; }
     }
+    /* EVERY TABLE THAT CARRIES THE VIEW'S COLUMNS. GHIS GetMedicines answers one table per prescription
+     * date, all under the same header row; the best-scoring one alone gave 11 of 158 rows (gold audit,
+     * 2026-09-17). The hand-built adapter reads every row of the page: so does this, in page order. */
     if (best && bestScore >= Math.min(2, want.length)) {
-      const out = tableRows(best);
+      const out = [];
+      for (const t of Array.from(doc.querySelectorAll('table'))) {
+        const labels = Array.from(t.querySelectorAll ? t.querySelectorAll('th') : []).map((th) => normLabel(th.textContent));
+        if (labels.filter((l) => l && want.includes(l)).length >= bestScore) out.push(...tableRows(t));
+      }
       if (out.length) return out;
     }
   }
@@ -280,11 +317,21 @@ export function applyColumns(view, rows) {
   const cols = view && view.columns && typeof view.columns === 'object' ? view.columns : null;
   if (!cols || !Array.isArray(rows)) return rows;
   const txt = (v) => (v == null ? '' : String(v).trim());
+  const labels = Object.keys(cols);
   return rows.map((r) => {
     if (!r || typeof r !== 'object') return r;
+    /* A ROW ALREADY LABELLED BY THE SCREEN'S OWN HEADERS IS LEFT ALONE. An HTML answer whose header row
+     * is the screen's header row (GHIS GetMedicines) needs no remap at all; applying the learned one
+     * (traced by value, "Date & Time" -> Prod. Code) to its blank cells put product codes in the date
+     * column and graded dateTime 47 of 158 equal (gold audit, 2026-09-17). */
+    if (labels.length && labels.every((h) => h in r)) return r;
     const out = {};
-    for (const h of Object.keys(cols)) {
+    for (const h of labels) {
       const c = cols[h] || {};
+      /* A ROW ALREADY KEYED BY THE SCREEN'S OWN LABEL keeps it. An HTML answer whose header row IS the
+       * screen's header row (GHIS GetMedicines) needs no learned remap; the learned one, traced by
+       * value, can be wrong ("Drug Name" -> Route) and graded drugText 37 of 158 equal (2026-09-17). */
+      if (h in r && txt(r[h])) { out[h] = r[h]; continue; }
       let v = '';
       if (c.key) v = txt(r[c.key]);
       else if (Array.isArray(c.keys) && c.keys.length === 2) { const a = txt(r[c.keys[0]]), b = txt(r[c.keys[1]]); v = a || b ? a + (typeof c.join === 'string' ? c.join : ' ') + b : ''; }
@@ -311,6 +358,8 @@ function tableRows(table) {
   for (const tr of Array.from(table.querySelectorAll('tr'))) {
     const cells = Array.from(tr.querySelectorAll('td'));
     if (cells.length < 2 || /no (data|records|matching records)/i.test(txt(tr))) continue;
+    // A row that wraps another table (a print page's patient header block) is layout, not data.
+    if (tr.querySelector && tr.querySelector('table')) continue;
     const rec = {};
     let filled = 0;
     cells.forEach((c, i) => { const t = txt(c); if (t) { rec[labels[i] || ('col' + i)] = t; filled += 1; } });
@@ -359,6 +408,25 @@ export function headerFit(rows, headers) {
 
 export class NotSignedIn extends Error { constructor(m) { super(m); this.name = 'NotSignedIn'; } }
 
+export class UnscopedRequest extends Error { constructor(m) { super(m); this.name = 'UnscopedRequest'; } }
+
+/** The patient-keyed or visit-keyed field that would go out EMPTY while this patient has an id, or null. */
+export function unscopedField(req, patient) {
+  if (!patient || !(patient.patientId || patient.episodeId)) return null;   // the ward list is not patient-scoped
+  const bad = (k, v) => (PATIENT_KEY.test(k) || VISIT_KEY.test(k)) && !String(v || '');
+  try {
+    const u = new URL(String(req.url || ''), 'https://x.invalid');
+    for (const [k, v] of u.searchParams) if (bad(k, v)) return k;
+  } catch { /* relative or malformed: fall through to the body */ }
+  if (typeof req.body === 'string' && req.body.indexOf('=') >= 0) {
+    for (const part of req.body.split('&')) {
+      const i = part.indexOf('=');
+      if (bad(i >= 0 ? part.slice(0, i) : part, i >= 0 ? part.slice(i + 1) : '')) return i >= 0 ? part.slice(0, i) : part;
+    }
+  }
+  return null;
+}
+
 /* ---- proven endpoints (prove.mjs) ---------------------------------------------------------------- */
 
 /** A proven view: its endpoints carry the role and field sources discovery proved. */
@@ -388,15 +456,55 @@ export function formatToday(fmt, now = new Date()) {
  * (patient._row); without that row it falls back to the id the patient carries for a key of that name.
  */
 export function provenValue(key, src, { patient = null, parentRow = null, tokens = null, now } = {}) {
-  if (!src || src.empty || src.unmapped) return '';
+  /* AN UNTRACEABLE PATIENT KEY IS NOT AN EMPTY ONE. `unmapped` means tracing failed, and tracing fails
+   * for every resource whenever the ward-list proof failed. Sending a patient-keyed field empty turns
+   * this patient's request into an unscoped one, and whatever the hospital answers lands in this
+   * patient's chart. Fall back to the id this patient carries, exactly as the worklist branch does. */
+  if (!src) return '';
+  if (src.unmapped) return (PATIENT_KEY.test(key) || VISIT_KEY.test(key)) ? (idCandidates(key, patient)[0] || '') : '';
+  if (src.empty) return '';
   if (src.token) return tokenFor(key, tokens);
   if (src.constant != null) return String(src.constant);
   if (src.page) return ({ size: '1000', start: '0', number: '1' })[src.page] || '';
   if (src.today) return formatToday(src.today, now);
   const row = src.from === 'worklist' ? (patient && patient._row) : parentRow;
+  if (!row && src.from === 'worklist' && Array.isArray(src.fields)) return src.fields.map((f) => idCandidates(f, patient)[0] || '').join(src.join || '');
   if (!row) return src.from === 'worklist' ? (idCandidates(key, patient)[0] || '') : '';
-  if (Array.isArray(src.fields)) return src.fields.map((f) => fieldOf(row, f)).join(src.join || '');
-  return fieldOf(row, src.field);
+  /* A joined key (GHIS recordNo = "Patient ID"-"Visit ID") was traced against one list; each part that
+   * this row does not carry falls back to the patient's own id for that name, as a single field does. */
+  if (Array.isArray(src.fields)) return src.fields.map((f) => fieldOf(row, f) || (src.from === 'worklist' ? (idCandidates(f, patient)[0] || '') : '')).join(src.join || '');
+  const v = fieldOf(row, src.field);
+  /* THE TRACED COLUMN NAME BELONGS TO THE LIST IT WAS TRACED AGAINST. Two ward lists can both be proven
+   * (GHIS: the doctor's own HTML list with a "Patient ID" header, and the hospital-wide JSON list keyed
+   * patientId). The proof traced labs' id to "Patient ID" through the first; the runtime reads rows
+   * from the widest, where that name is no column at all, and the drawer said the agent never learned
+   * which field carries the patient (owner's iPhone, 2026-09-17). The row IS this patient's: a
+   * patient-keyed field falls back to the id the patient carries, exactly as an unmapped one does. */
+  if (!v && src.from === 'worklist') return idCandidates(key, patient)[0] || '';
+  return v;
+}
+
+/* A BROKEN CHAIN IS NOT AN EMPTY FIELD. A detail call is keyed on its list row (a lab's Render_ID, a
+ * report's resultid). When that row does not carry the field, provenValue answers '' and the request
+ * goes out asking for "the report with no id", which is another patient's report or the whole
+ * department's. Those key names match neither PATIENT_KEY nor VISIT_KEY, so the 3b guard cannot see
+ * them. Only a DETAIL view, and only a source traced to its own parent list, is checked here: a plain
+ * filter that is legitimately blank for this row must still be allowed through.
+ * brokenChainField(ep, view, ctx) -> the key whose parent-derived value came back empty, or null. */
+export function brokenChainField(ep, view, ctx = {}) {
+  const parent = view && view.detailOf;
+  if (!parent) return null;
+  const params = (ep && ep.params) || {};
+  for (const key of Object.keys(params)) {
+    const src = params[key];
+    if (!src || src.from !== parent) continue;
+    if (Array.isArray(src.fields)) {
+      if (src.fields.some((f) => !fieldOf(ctx.parentRow, f))) return key;
+      continue;
+    }
+    if (!provenValue(key, src, ctx)) return key;
+  }
+  return null;
 }
 
 /** provenRequest(endpoint, ctx) -> { method, path, url, body, headers }: one proven call, filled. */
@@ -442,11 +550,30 @@ export async function executeProven({ plugin, origin, view, patient = null, pare
   await onDataHost(plugin, view, patient, base);
   const eps = view.endpoints.filter((e) => e && (e.role === 'prerequisite' || e.role === 'data'));
   const wantsToken = eps.some((e) => Object.values(e.params || {}).some((s) => s && s.token) || (e.bodyKeys || []).some((k) => TOKEN_KEY.test(k)));
-  const toks = tokens || (wantsToken ? await pageTokens(plugin) : {});
+  let toks = tokens || (wantsToken ? await pageTokens(plugin) : {});
+  /* THE TOKEN LIVES ON THE PAGE IT WAS PROVEN ON. The hidden browser opens the hospital root; the
+   * anti-forgery token a POST (GHIS Searchnew) needs was proven on /Doctor/Home. Sent empty, the
+   * hospital refuses the activation silently and every read that follows answers nothing. With no
+   * token on the current page, move to the call's own page once and read it there. */
+  if (wantsToken && !tokens && !Object.keys(toks).length && typeof plugin.navigate === 'function' && /^https:/i.test(String(view.pathTemplate || '')) && !TOKEN_SOUGHT.has(plugin)) {
+    TOKEN_SOUGHT.add(plugin);   // once per browser: a page that carries no token will not grow one on a second visit
+    const page = String(view.pathTemplate).replace(/\{[^}]*\}/g, encodeURIComponent((patient && patient.patientId) || ''));
+    let here = '';
+    try { const cur = typeof plugin.currentUrl === 'function' ? await plugin.currentUrl() : null; here = typeof cur === 'string' ? cur : (cur && cur.url) || ''; } catch { here = ''; }
+    if (here.replace(/\/$/, '') !== page.replace(/\/$/, '')) {
+      await plugin.navigate({ url: page });
+      await new Promise((r) => setTimeout(r, PAGE_SETTLE_MS));
+      toks = await pageTokens(plugin);
+    }
+  }
   let out = null;
   for (const ep of eps) {
     const req = provenRequest(ep, { patient, parentRow, tokens: toks, now });
     const call = { method: req.method, url: base + req.url, body: req.body, headers: req.headers };
+    const lost = unscopedField({ url: req.url, body: req.body }, patient);
+    if (lost) throw new UnscopedRequest('refusing ' + req.path + ': "' + lost + '" has no learned source, so the request would not be limited to this patient');
+    const broken = brokenChainField(ep, view, { patient, parentRow, tokens: toks, now });
+    if (broken) throw new UnscopedRequest('refusing ' + req.path + ': this row carries no "' + broken + '", so the request would not be limited to this ' + view.detailOf + ' row');
     if (typeof onCall === 'function') onCall(call);
     const resp = await fetchInPage(plugin, call);
     const kind = classifyResponse(resp);

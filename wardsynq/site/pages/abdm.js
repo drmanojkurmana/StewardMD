@@ -19,13 +19,19 @@
   function TS(c, key, en, vars) { return c && c.tSafe ? c.tSafe(key, vars, en) : String(T(c, key, en, vars)).replace(/[&<>"']/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]; }); }
   function EN(c, html) { return c && c.en ? c.en(html) : html; }
 
-  var STATUS_CLASS = { entered: "note", missing: "err", mismatch: "err", "not-built": "note", blocked: "note" };
+  var STATUS_CLASS = { entered: "note", missing: "err", mismatch: "err", "not-built": "note", blocked: "note", verified: "ok", "not-found": "err", unverified: "err", "not-checked": "note", available: "note" };
   function statusWord(c, status) {
     if (status === "entered") return T(c, "site.abdm.status.entered", "Entered, not verified");
     if (status === "missing") return T(c, "site.abdm.status.missing", "Missing");
     if (status === "mismatch") return T(c, "site.abdm.status.mismatch", "Does not match");
     if (status === "not-built") return T(c, "site.abdm.status.notBuilt", "Not built yet");
     if (status === "blocked") return T(c, "site.abdm.status.blocked", "Blocked");
+    /* What ABDM's registries answered (abdm-registry.js). */
+    if (status === "verified") return T(c, "site.abdm.status.verified", "Verified with ABDM");
+    if (status === "not-found") return T(c, "site.abdm.status.notFound", "Not in the ABDM registry");
+    if (status === "unverified") return T(c, "site.abdm.status.unverified", "Could not be verified");
+    if (status === "not-checked") return T(c, "site.abdm.status.notChecked", "Not checked yet");
+    if (status === "available") return T(c, "site.abdm.status.available", "Available");
     return status;
   }
 
@@ -64,7 +70,8 @@
 
     h += '<h3>' + esc(T(c, "site.abdm.checklistTitle", "Certification checklist for this hospital")) + '</h3><div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.abdm.colStep", "Step")) + '</th><th>' + esc(T(c, "site.abdm.colStatus", "Status")) + '</th><th>' + esc(T(c, "site.abdm.colWhatKnown", "What is known")) + '</th></tr></thead><tbody>' +
       r.checklist.map(function (it) {
-        return "<tr><td>" + EN(c, esc(it.label)) + '</td><td><span class="msg ' + (STATUS_CLASS[it.status] || "note") + '">' + esc(statusWord(c, it.status)) + "</span></td><td>" + EN(c, esc(it.detail)) + "</td></tr>";
+        return "<tr><td>" + EN(c, esc(it.label)) + '</td><td><span class="msg ' + (STATUS_CLASS[it.status] || "note") + '">' + esc(statusWord(c, it.status)) + "</span></td><td>" + EN(c, esc(it.detail)) +
+          (it.key === "hfr" && it.status !== "missing" && it.status !== "mismatch" ? ' <button type="button" class="btn ghost" data-abdm-check="facility">' + esc(T(c, "site.abdm.checkFacility", "Check with the Health Facility Registry")) + "</button>" : "") + "</td></tr>";
       }).join("") + "</tbody></table></div>";
 
     /* Owner decision 2026-09-14, read-only: what an invoice received from another facility becomes here. */
@@ -76,11 +83,13 @@
 
     h += "<h3>" + esc(T(c, "site.abdm.doctorsTitle", "Doctors")) + "</h3>";
     if (!r.doctors.length) h += '<p class="quiet">' + esc(T(c, "site.abdm.noDoctors", "No active prescriber at this hospital.")) + '</p>';
-    else h += '<p class="quiet">' + esc(T(c, "site.abdm.doctorsHelp", "A registration number is needed to request records (set it on Staff and roles). The HPR ID is optional.")) + '</p><div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.abdm.colStaff", "Staff")) + '</th><th>' + esc(T(c, "site.abdm.colRole", "Role")) + '</th><th>' + esc(T(c, "site.abdm.colRegNo", "Registration number")) + '</th><th>' + esc(T(c, "site.abdm.colHpr", "HPR ID")) + '</th><th></th></tr></thead><tbody>' +
+    else h += '<p class="quiet">' + esc(T(c, "site.abdm.doctorsHelp", "A registration number is needed to request records (set it on Staff and roles). The HPR ID is optional.")) + '</p><div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.abdm.colStaff", "Staff")) + '</th><th>' + esc(T(c, "site.abdm.colRole", "Role")) + '</th><th>' + esc(T(c, "site.abdm.colRegNo", "Registration number")) + '</th><th>' + esc(T(c, "site.abdm.colHpr", "HPR ID")) + '</th><th></th><th>' + esc(T(c, "site.abdm.colRegistry", "Health Professional Registry")) + '</th></tr></thead><tbody>' +
       r.doctors.map(function (d) {
         return "<tr><td>" + EN(c, esc(d.email || d.identity)) + "</td><td>" + EN(c, esc(d.role)) + "</td><td>" + (d.regNoSet ? esc(T(c, "site.abdm.regSet", "Set")) : '<b>' + esc(T(c, "site.abdm.regMissing", "Missing")) + '</b>') + "</td>" +
           '<td><input class="abdmHpr mono" data-identity="' + esc(d.identity) + '" maxlength="20" inputmode="numeric" value="' + esc(d.hprId || "") + '">' + (d.hprValid === false ? ' <span class="msg err">' + esc(T(c, "site.abdm.hprInvalid", "not 14 digits")) + '</span>' : "") + "</td>" +
-          '<td><button type="button" class="btn ghost" data-abdm-hpr="' + esc(d.identity) + '">' + esc(T(c, "site.abdm.saveHpr", "Save HPR ID")) + '</button></td></tr>';
+          '<td><button type="button" class="btn ghost" data-abdm-hpr="' + esc(d.identity) + '">' + esc(T(c, "site.abdm.saveHpr", "Save HPR ID")) + '</button></td>' +
+          "<td>" + (d.hprRegistry ? '<span class="msg ' + (STATUS_CLASS[d.hprRegistry.status] || "note") + '">' + esc(statusWord(c, d.hprRegistry.status)) + "</span>" : '<span class="quiet">' + esc(statusWord(c, "not-checked")) + "</span>") +
+          (d.hprValid ? ' <button type="button" class="btn ghost" data-abdm-check-hpr="' + esc(d.identity) + '">' + esc(T(c, "site.abdm.checkHpr", "Check")) + "</button>" : "") + "</td></tr>";
       }).join("") + "</tbody></table></div>";
     return h + "</div>";
   }
@@ -113,6 +122,17 @@
         loadAbdm(c);
       }, function () { save.disabled = false; say(T(c, "site.abdm.saveNoResponse", "No response from the server. The profile may not have been saved; reload to check.")); });
     };
+    /* HFR and HPR checks with ABDM's registries. What came back is stored on the profile and drawn on reload. */
+    function registryCheck(b, body) {
+      b.disabled = true;
+      c.api("/ward/abdm-registry-check", Object.assign({ orgId: c.state.orgId }, body)).then(function (x) {
+        if (!x || !x.ok) { b.disabled = false; say(refusal(c, x)); return; }
+        c.toast(T(c, "site.abdm.checkDone", "The registry answered: {status}.", { status: statusWord(c, x.result && x.result.status) }));
+        loadAbdm(c);
+      }, function () { b.disabled = false; say(T(c, "site.abdm.checkNoResponse", "No response from the server. Nothing was checked; try again.")); });
+    }
+    card.querySelectorAll("[data-abdm-check]").forEach(function (b) { b.onclick = function () { registryCheck(b, { target: "facility" }); }; });
+    card.querySelectorAll("[data-abdm-check-hpr]").forEach(function (b) { b.onclick = function () { registryCheck(b, { target: "professional", identity: b.getAttribute("data-abdm-check-hpr") }); }; });
     card.querySelectorAll("[data-abdm-hpr]").forEach(function (b) {
       b.onclick = function () {
         var identity = b.getAttribute("data-abdm-hpr"), input = null;

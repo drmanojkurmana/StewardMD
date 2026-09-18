@@ -232,6 +232,10 @@ function readerAliases(links, preferred) {
   return out;
 }
 
+/* R5-4: the ward history of a transferred admission is one extra read per admission, so it is
+ * bounded. The bound is NOT a failure: past it the remaining transfers are counted and named
+ * separately from the ones whose history genuinely could not be read, because "we did not look" and
+ * "we looked and could not read it" are different facts to whoever acts on this report. */
 const HISTORY_READ_MAX = 200;
 const ACCOUNT_LOOKUP_MAX = 200;
 
@@ -506,6 +510,40 @@ function auditRetention(oldestAuditAt, oldestRecordAt, setting) {
   return out;
 }
 
+/**
+ * PURE. Whether WardSynQ's logs meet the log duties in force, from what the code actually keeps (legal opinion A.4.8).
+ *   CERT-In Directions No. 20(3)/2022-CERT-In, 28 Apr 2022: (iv) logs of all ICT systems kept securely for a rolling
+ *   180 days within the Indian jurisdiction; (i) clocks synchronised to NIC or NPL NTP, or a source traceable to them.
+ *   DPDP Rules 2025 r.6(1)(e) and r.8(3), from commencement: logs kept at least one year.
+ * WHAT THE CODE KEEPS: audit rows are appended and never deleted by any WardSynQ code (NEVER_DELETED above); clinical
+ * read-log rows are never deleted either, only the correction lookup is bounded to readLogRetentionDays (read-log.js,
+ * 90 by default). What it cannot see: where the database is hosted, the hosting platform's own request and network
+ * logs, and the server clock's source. Those are never reported as met. input: { oldestAuditAt, auditReadable,
+ * readLogRetentionDays, nowMs }
+ */
+function logRetentionCheck(input) {
+  const i = input || {};
+  const now = Number.isFinite(i.nowMs) ? i.nowMs : Date.now();
+  const oldest = msOf(i.oldestAuditAt);
+  const ageDays = Number.isFinite(oldest) ? Math.floor((now - oldest) / DAY) : null;
+  const readDays = Number(i.readLogRetentionDays) > 0 ? Number(i.readLogRetentionDays) : 90;
+  const checks = [
+    i.auditReadable
+      ? { id: "audit-rows", status: "met", text: `Audit rows are never deleted by WardSynQ, so they are kept longer than 180 days and one year.${ageDays == null ? " No audit row has been written yet." : ` The oldest row is from ${new Date(oldest).toISOString().slice(0, 10)} (${ageDays} days).`}` }
+      : { id: "audit-rows", status: "not-confirmed", text: "The audit trail could not be read, so how long its rows are kept could not be checked." },
+    { id: "read-log", status: "met", text: `Clinical read-log rows are never deleted. Only the lookup of who read a corrected value answers for the last ${readDays} days.` },
+    { id: "location", status: "not-confirmed", text: "WardSynQ does not record the region its database is hosted in, so storage within India is not confirmed. The platform owner confirms it." },
+    { id: "platform-logs", status: "not-met", text: "WardSynQ does not keep the hosting platform's web request, network or firewall logs. CERT-In covers the logs of all ICT systems: the platform owner keeps those for 180 days in India." },
+    { id: "clock-sync", status: "not-confirmed", text: "Server time comes from the hosting platform. Synchronisation to NIC or NPL NTP is not confirmed by WardSynQ." },
+  ];
+  return {
+    meetsCertIn: false, meetsDpdpOneYear: i.auditReadable ? "audit-rows-only" : false,
+    summary: "WardSynQ's own audit and read-log rows are kept indefinitely. Full CERT-In log compliance is not confirmed: storage within India, the platform's own logs and clock synchronisation are outside what WardSynQ can check.",
+    checks,
+    citations: ["CERT-In Directions No. 20(3)/2022-CERT-In, 28 Apr 2022, (i) and (iv)", "DPDP Rules 2025 r.6(1)(e), r.8(3) (from 13 May 2027)"],
+  };
+}
+
 /** PURE. Hospital event-log rows that carry no chain link (G3), split at when linking began.
  * startMs: the first linked row's time, or null when nothing has been linked yet. Unlinked rows are
  * never verified: before linking began they are the old era; after it they are a lost linking race or
@@ -626,13 +664,17 @@ async function securityReport(request, env, ctx) {
     ? { status: "unavailable", error: "signin_log_unreadable", detail: str(orgEvents.error) }
     : { ...section(loginFindings(orgEvents.events, period)), partial: !!orgEvents.partial };
 
+  /* Grants, reviews, assignments and admissions are read whole (service.listAll, paged, oldest first); past READ_MAX the
+   * newest are the ones not read and the section says so (t: truncated). Backup runs and restore tests are the NEWEST
+   * (the old oldest-first read of 50 showed a hospital's first backups as its latest). */
+  const whole = (type) => svc.listAll(type, { max: READ_MAX }).then((g) => ({ v: g.rows, t: g.truncated }), (e) => ({ e }));
   const [grants, reviews, runs, tests, nurseAssignments, encounters] = await Promise.all([
-    svc.list("BreakGlassGrant", 1000).then((v) => ({ v }), (e) => ({ e })),
-    svc.list(REVIEW_TYPE, 1000).then((v) => ({ v }), (e) => ({ e })),
-    svc.list(RUN_TYPE, 50).then((v) => ({ v }), (e) => ({ e })),
-    svc.list(RESTORE_TYPE, 200).then((v) => ({ v }), (e) => ({ e })),
-    svc.list("NurseAssignment", 1000).then((v) => ({ v }), (e) => ({ e })),
-    svc.list("Encounter", 1000).then((v) => ({ v }), (e) => ({ e })),
+    whole("BreakGlassGrant"),
+    whole(REVIEW_TYPE),
+    svc.list(RUN_TYPE, 50, { newest: true }).then((v) => ({ v }), (e) => ({ e })),
+    svc.list(RESTORE_TYPE, 200, { newest: true }).then((v) => ({ v }), (e) => ({ e })),
+    whole("NurseAssignment"),
+    whole("Encounter"),
   ]);
 
   /* OUT-OF-ASSIGNMENT. Needs the audit rows, the admissions (ward, attending), and at least one
@@ -649,7 +691,7 @@ async function securityReport(request, env, ctx) {
       const intervals = [];
       if (nurseAssignments.e) incomplete.push("nurse assignments could not be read");
       else {
-        if (nurseAssignments.v.length >= 1000) incomplete.push("only the first 1000 nurse assignments were read");
+        if (nurseAssignments.t) incomplete.push(`more than ${READ_MAX} nurse assignments exist and the newest were not read`);
         for (const a of nurseAssignments.v) if (a) intervals.push(...nurseAssignmentIntervals(a, await refOf(a.patientId)));
       }
       if (!src.roster || src.roster.error) incomplete.push("the rota could not be read");
@@ -657,26 +699,30 @@ async function securityReport(request, env, ctx) {
         if (src.roster.partial) incomplete.push("only part of the rota could be read");
         intervals.push(...rosterIntervals(src.roster, src.utcOffsetMinutes));
       }
-      if (encounters.v.length >= 1000) incomplete.push("only the first 1000 admissions were read");
+      if (encounters.t) incomplete.push(`more than ${READ_MAX} admissions exist and the newest were not read`);
       /* G11: a transferred admission's wards over time come from its version history, read only for
        * admissions that have moved (movedAt), bounded. A history that cannot be read is named. */
       const stays = [];
-      let historyReads = 0, historyFailed = 0;
+      let historyReads = 0, historyFailed = 0, historyNotRead = 0;
       for (const enc of encounters.v) {
         if (!enc) continue;
         const ref = await refOf(enc.patientId);
-        if (enc.movedAt && typeof repository.history === "function" && historyReads < HISTORY_READ_MAX) {
+        const canRead = typeof repository.history === "function";
+        if (enc.movedAt && canRead && historyReads < HISTORY_READ_MAX) {
           historyReads += 1;
           try { const vs = await repository.history(tenantId, "Encounter", enc.id); if (Array.isArray(vs) && vs.length) { stays.push(...wardHistoryStays(vs, ref)); continue; } }
           catch { /* counted below */ }
           historyFailed += 1;
-        } else if (enc.movedAt) historyFailed += 1;
+        } else if (enc.movedAt && canRead) historyNotRead += 1;
+        else if (enc.movedAt) historyFailed += 1;
         stays.push({ patientRef: ref, ward: enc.location && enc.location.ward, attendingId: enc.attendingId || null, from: enc.periodStart || null, to: enc.periodEnd || null });
       }
       if (historyFailed) incomplete.push(`the ward history of ${historyFailed} transferred admission${historyFailed === 1 ? "" : "s"} could not be read, so only the current ward is known for ${historyFailed === 1 ? "it" : "them"}`);
+      if (historyNotRead) incomplete.push(`more than ${HISTORY_READ_MAX} admissions were transferred in this period, so the ward history of ${historyNotRead} of them was not read and only the current ward is known for ${historyNotRead === 1 ? "it" : "them"}`);
       const breakGlass = [];
       for (const g of grants.v || []) if (g) breakGlass.push({ actorId: g.actorId, patientRef: await refOf(g.patientId), from: g.grantedAt, to: g.expiresAt });
       if (grants.e) incomplete.push("break-glass grants could not be read");
+      else if (grants.t) incomplete.push(`more than ${READ_MAX} break-glass grants exist and the newest were not read`);
       const roles = Array.isArray(src.members) ? Object.fromEntries(src.members.filter((m) => m && m.identity).map((m) => [str(m.identity), str(m.role)])) : null;
       const matching = [];
       const aliases = await readerAliasesFor(ctx.readerDirectory, Array.isArray(src.members) ? src.members : [], auditRead.events, matching);
@@ -691,8 +737,9 @@ async function securityReport(request, env, ctx) {
   else {
     const items = reviewItems(grants.v || [], orgEvents.events || [], period);
     queue = {
-      status: grants.e || orgEvents.error ? "partial" : "ok",
-      missing: [grants.e ? "break-glass grants could not be read" : null, orgEvents.error ? "admin actions could not be read" : null].filter(Boolean),
+      status: grants.e || grants.t || reviews.t || orgEvents.error ? "partial" : "ok",
+      missing: [grants.e ? "break-glass grants could not be read" : grants.t ? `more than ${READ_MAX} break-glass grants exist and the newest were not read` : null,
+        reviews.t ? `more than ${READ_MAX} review decisions exist and the newest were not read` : null, orgEvents.error ? "admin actions could not be read" : null].filter(Boolean),
       items: reviewQueue(items, reviews.v, [resolved.actor.id, ctx.viewerId]),
     };
     queue.awaiting = queue.items.filter((i) => i.status === "awaiting").length;
@@ -712,11 +759,14 @@ async function securityReport(request, env, ctx) {
     ...base, ok: true, generatedAt: now, period, days, advisory: true,
     note: "Findings are advisory. Nothing here locks an account or blocks access.",
     counts, chartAccess, assignmentAccess, exports, logins, reviewQueue: queue, dataProtection: protection, auditRetention: retention,
+    logRetention: logRetentionCheck({ oldestAuditAt: auditRead && auditRead.oldestAt, auditReadable: !!auditRead, readLogRetentionDays: ctx.readLogRetentionDays, nowMs: msOf(now) }),
     rules: RULES, methods: METHOD, notDetected: NOT_DETECTED,
   };
 }
 
 const AUDIT_ROWS_MAX = 200;
+/* ponytail: each listAll page re-groups every version of the type; audit O20 (a latest-version table) is the upgrade. */
+const READ_MAX = 50000;
 const AUDIT_ID_RE = /^[A-Za-z0-9_.:-]{1,120}$/;
 
 /**
@@ -823,5 +873,5 @@ async function recordRestoreTest(request, env, ctx) {
 export {
   RULES, METHOD, NOT_DETECTED, REVIEW_TYPE, RESTORE_TYPE, PRIVILEGED, EXEMPT_ROLES, EXEMPTIONS,
   chartAccessFindings, nurseAssignmentIntervals, rosterIntervals, wardHistoryStays, readerAliases, readerAliasesFor, outOfAssignmentFindings, exportChannel, exportFindings, deviceOf, loginFindings, reviewItems, reviewQueue, reviewProblem,
-  dataProtection, auditRetention, unlinkedRows, ORG_VERIFY_LIMIT, securityReport, auditRowsForReview, recordSecurityReview, recordRestoreTest,
+  dataProtection, auditRetention, logRetentionCheck, unlinkedRows, ORG_VERIFY_LIMIT, securityReport, auditRowsForReview, recordSecurityReview, recordRestoreTest,
 };

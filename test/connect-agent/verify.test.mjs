@@ -83,3 +83,101 @@ test('the brain verify op passes the gate with counts and columns only, and its 
   assert.equal(shapeAnswer(g.clean, { ok: 'yes', suggestion: 'delete' }).ok, false);
   assert.equal(shapeAnswer(g.clean, { ok: false, suggestion: 'delete' }).suggestion, 'ask-doctor');
 });
+
+/* VERIFIED ON A REAL PATIENT, OR NOT PROVEN. A proven call that answers no rows for every real patient
+ * checked loses its proof, so the approval gate refuses it and the doctor is asked again (GHIS's lab
+ * print shell was approved as labs and read empty for every patient, 2026-09-17). */
+test('verifyViews withdraws the proof of a call that answers no rows for every real patient', async () => {
+  const plugin = fakePlugin();
+  const views = VIEWS();
+  const shell = { resourceHint: 'labs', pathTemplate: ORIGIN + '/Doctor/Home', rowsSelector: '#divLabSaveResult table tbody tr', headers: ['TEST NAME', 'RESULTS'], proof: { status: 'proven', kind: 'html', hits: 3, cells: 3, overlap: 1 }, endpoints: [{ method: 'GET', path: '/Doctor/Home/OTLabPrintsSecretary/?id', role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } }] };
+  views[3] = shell;
+  const out = await verifyViews({ plugin, origin: ORIGIN, views, parseHtml: miniParse });
+  assert.ok(out.failed.includes('labs'));
+  assert.equal(shell.proof.status, 'no-rows');
+  assert.equal(shell.proof.wasProven, true);
+  assert.equal(views[1].proof, undefined, 'a view that verified with rows is untouched');
+});
+
+
+/* AN EMPTY LIST IS NOT A BROKEN CALL. Most inpatients have no scans: on the owner's live ward only one
+ * of seven had a radiology study. Verification sampled the first two patients, both answered an honest
+ * empty list, and the agent withdrew the proof of a perfectly good endpoint - "radiology: not proven
+ * (no rows came back)", which then left radiology-detail with no row to open and blocked approval
+ * (live GHIS run 3, 2026-09-18). It must keep looking down the ward before condemning the call. */
+test('verifyViews keeps looking for a patient who has one when the first patients have an empty list', async () => {
+  const WARD = [1, 2, 3, 4, 5, 6, 7].map((n) => ({ patientId: 'MR' + n, patientFirstName: 'P' + n, episodeId: 'V' + n, bedName: 'B' + n }));
+  const tried = [];
+  const plugin = {
+    async navigate() {}, async wait() {},
+    async currentUrl() { return { url: ORIGIN + '/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ __RequestVerificationToken: 't' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '[]' };
+      const reply = (o) => ({ result: JSON.stringify(Object.assign({ status: 200, contentType: 'application/json', url: req.url }, o)) });
+      if (req.url.indexOf('/GetIPWL') >= 0) return reply({ text: JSON.stringify(WARD) });
+      const who = (req.url.match(/recordNo=(MR\d+)/) || [])[1];
+      if (who) {
+        tried.push(who);
+        // only the sixth patient on the ward has had a scan; everyone else gets a well-formed empty list
+        const rows = who === 'MR6' ? '<tr><td>21710420</td><td>17-Dec-2024</td><td>MRI BRAIN PLAIN</td></tr>' : '';
+        return reply({ contentType: 'text/html', text: '<table><tr><th>Service ID</th><th>Date</th><th>Description</th></tr>' + rows + '</table>' });
+      }
+      return reply({ text: '' });
+    },
+  };
+  const views = [
+    { resourceHint: 'worklist', pathTemplate: ORIGIN + '/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['Patient ID', 'Patient name'], endpoints: [{ method: 'GET', path: '/Doctor/Home/GetIPWL?Type&start&length' }] },
+    { resourceHint: 'radiology', pathTemplate: ORIGIN + '/Radio/Home', rowsSelector: '#r tr', headers: ['Service ID', 'Date', 'Description'], proof: { status: 'proven' },
+      endpoints: [{ method: 'GET', path: '/Radio/Home?recordNo', params: { recordNo: { from: 'worklist', field: 'patientId' } } }] },
+  ];
+  const brain = { verify: async (p) => ({ ok: true, resource: p.resource, confidence: 0.9, reason: 'looks right', suggestion: 'ok' }) };
+  const out = await verifyViews({ plugin, origin: ORIGIN, views, brain, parseHtml: miniParse });
+  const by = Object.fromEntries(out.checks.map((c) => [c.resource, c]));
+  assert.ok(tried.length > 2, 'more than the first two patients were tried: ' + tried.join(','));
+  assert.equal(by.radiology.ok, true, 'the endpoint is verified once a patient with a scan is found: ' + by.radiology.reason);
+  assert.equal(by.radiology.rows, 1);
+  assert.ok(!out.failed.includes('radiology'), 'a correct call is not condemned by patients who have no scans');
+  assert.equal(views[1].proof.status, 'proven', 'its proof stands');
+});
+
+
+/* A LIST THE DOCTOR SHOWED STILL NEEDS ITS DETAIL. The chain was explored only for a list the agent had
+ * found by searching for the patient itself (view.searched). On the live ward the doctor showed the lab
+ * list during the guided ask, so searched was never set, no chain was ever attempted and the run
+ * finished with no labs-detail at all - which the approval gate requires (live GHIS run 3, 2026-09-18).
+ * Being shown a screen is not a reason to skip learning what opening a row does. */
+test('verifyViews explores the detail chain for a list the doctor showed, not only one it searched for', async () => {
+  const plugin = {
+    async navigate() {}, async wait() {},
+    async currentUrl() { return { url: ORIGIN + '/Lab/Home' }; },
+    async drainRequests() { return { requests: [] }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ __RequestVerificationToken: 't' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '[]' };
+      const reply = (o) => ({ result: JSON.stringify(Object.assign({ status: 200, contentType: 'application/json', url: req.url }, o)) });
+      if (req.url.indexOf('/GetIPWL') >= 0) return reply({ text: JSON.stringify([{ patientId: 'MR1', patientFirstName: 'A', episodeId: 'V1' }]) });
+      if (req.url.indexOf('/GetSearchPatientId') >= 0) {
+        return reply({ contentType: 'text/html', text: '<table><tr><th>Order ID</th><th>Test</th></tr><tr><td>OR1</td><td>CBC</td></tr></table>' });
+      }
+      return reply({ text: '' });
+    },
+  };
+  const labs = {
+    resourceHint: 'labs', pathTemplate: ORIGIN + '/Lab/Home', rowsSelector: '#example15 tbody tr',
+    headers: ['Order ID', 'Test'], proof: { status: 'proven' },
+    // the doctor walked here during the guided ask; the agent never had to search
+    guidedPath: ['a "Lab reports"', 'td "CBC"'],
+    endpoints: [{ method: 'POST', path: '/Lab/Home/GetSearchPatientId', role: 'data', bodyKeys: ['patient_id'], params: { patient_id: { from: 'worklist', field: 'patientId' } } }],
+  };
+  const views = [
+    { resourceHint: 'worklist', pathTemplate: ORIGIN + '/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['Patient ID'], endpoints: [{ method: 'GET', path: '/Doctor/Home/GetIPWL?Type&start&length' }] },
+    labs,
+  ];
+  const book = { prove: async () => null, note: () => {} };
+  const brain = { verify: async (p) => ({ ok: true, resource: p.resource, confidence: 0.9, reason: 'looks right', suggestion: 'ok' }) };
+  await verifyViews({ plugin, origin: ORIGIN, views, brain, book, parseHtml: miniParse });
+  assert.ok(labs.chain, 'the chain was attempted for the list the doctor showed');
+});

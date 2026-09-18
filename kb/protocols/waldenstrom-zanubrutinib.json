@@ -1,0 +1,75 @@
+{
+  "id": "waldenstrom-zanubrutinib",
+  "diseaseId": "waldenstrom",
+  "name": "Zanubrutinib Monotherapy (Waldenstr\u00f6m Macroglobulinemia)",
+  "version": "1.0",
+  "lifecycleState": "active",
+  "intentOptions": [
+    "palliative",
+    "disease control"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 12,
+  "caps": "none",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Waldenstr\u00f6m Macroglobulinemia / Lymphoplasmacytic Lymphoma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS Landmark Regimen: Phase III ASPEN Trial (Tam et al. Blood 2020)",
+    "approval": null
+  },
+  "stage": [
+    "symptomatic",
+    "relapsed/refractory",
+    "treatment-naive"
+  ],
+  "treatmentSetting": [
+    "first-line",
+    "subsequent-line"
+  ],
+  "histology": "lymphoplasmacytic lymphoma / Waldenstr\u00f6m macroglobulinemia",
+  "premedications": [],
+  "supportiveCare": [
+    "Hemorrhage precautions: hold zanubrutinib 3-7 days before and after minor/major surgical procedures.",
+    "Infection prophylaxis: consider PCP/anti-infective prophylaxis in patients at high risk of recurrent infections.",
+    "Monitor for cardiac arrhythmias (atrial fibrillation/flutter, though lower incidence than ibrutinib per ASPEN trial)."
+  ],
+  "monitoring": [
+    "CBC with differential monthly",
+    "Serum IgM and serum protein electrophoresis (SPEP) every 1-3 months",
+    "ECG/cardiac evaluation if palpitations or dyspnea occur"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 500/mcL or Platelets < 50,000/mcL",
+      "action": "hold",
+      "text": "Hold zanubrutinib until ANC >= 1,000/mcL and platelets >= 50,000/mcL. Resume at same dose for 1st occurrence, reduce to 80 mg PO BID for 2nd recurrence."
+    },
+    {
+      "condition": "Severe non-hematologic toxicity (Grade >= 3)",
+      "action": "hold/reduce",
+      "text": "Hold until toxicity resolves to Grade <= 1. Resume at 80 mg PO BID."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "zanubrutinib",
+      "name": "Zanubrutinib",
+      "basis": "flat",
+      "dosePerUnit": 160,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1
+      ],
+      "notes": "Zanubrutinib 160 mg PO twice daily (or 320 mg PO once daily) continuously. Second-generation BTK inhibitor with superior VGPR rates and improved safety/tolerability (significantly lower afib and bleeding) vs ibrutinib in the Phase III ASPEN trial."
+    }
+  ]
+}

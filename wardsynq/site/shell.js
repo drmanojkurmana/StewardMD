@@ -103,8 +103,14 @@
     return headers().then(function (h) {
       return fetchRetry(url, body === undefined ? { headers: h, credentials: "include" } : { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) });
     }).then(function (r) { return r.json().catch(function () { return { ok: false, error: "bad_response", status: r.status }; }); })
+      .then(censusAnswer)
       .catch(function (e) { return { ok: false, error: "network", detail: String(e && e.message || e) }; });
   }
+  /* R4-5: a census read (ward list, ED list) answers 503 error "too_many_open" when more stays are open than it can read
+   * whole. The transport gives it the same translated sentence ward.js shows (same key), so a page showing the server's
+   * message says it; pages with their own "could not be loaded" text use WSQ.tooManyOpen(r) first. */
+  function tooManyOpenText() { return T(null, "ward.too-many-open-stays", "Too many open stays to show safely. Close visits that are finished (discharge or end them), or contact support."); }
+  function censusAnswer(j) { if (j && j.error === "too_many_open") j.message = j.detail = tooManyOpenText(); return j; }
   /** download("/ward/fhir/$export-file/j/Patient-1.ndjson?orgId=o", "Patient-1.ndjson") -> {ok} or {ok:false, message}.
    *  The bytes are fetched with this session's credentials and saved from a local object URL, so the page
    *  never holds a link that works without them. A refusal comes back as the server's own words. */
@@ -341,7 +347,7 @@
     if (native) h += item("workstation", "nav.workstation") + item("ward:", "nav.ward") + item("ward:board", "nav.beds") + item("ward:edboard", "nav.emergency") + item("ward:critsboard", "nav.criticals") + item("ward:labboard", "nav.lab") + item("ward:radboard", "nav.radiology");
     h += item("opd", "nav.opd") + item("patients", "nav.patients");
     if (native) h += heading("nav.command") + item("ward:flowcommand", "nav.commandCenter") + item("ward:twin", "nav.twin") + item("ward:reports", "nav.reports") + item("ward:cashier", "nav.billing") + item("ward:integration", "nav.integration") + item("maik", "nav.maik");
-    h += heading("nav.administration") + item("admin", "nav.adminCenter") + item("audit", "nav.audit") + item("security", "nav.security") + item("rota", "nav.rota") + item("accounts", "nav.accounts") + item("group", "nav.group") + "</div>";
+    h += heading("nav.administration") + item("admin", "nav.adminCenter") + item("audit", "nav.audit") + item("security", "nav.security") + item("governance", "nav.governance") + item("rota", "nav.rota") + (native ? item("registers", "nav.registers") : "") + item("accounts", "nav.accounts") + item("group", "nav.group") + "</div>";
     return h;
   }
   function render(page, extra) {
@@ -610,6 +616,9 @@
        * invented. */
       tile({ go: "ward:labboard", icon: "science", title: T(null, "site.shell.home.tile.labboard.title", "Laboratory"), sub: T(null, "site.shell.home.tile.labboard.sub", "Specimens, bench worklist, results and release"), need: ["emr.view", "lab.result"], liveId: "lvLab" }),
       tile({ go: "ward:radboard", icon: "radiology", title: T(null, "site.shell.home.tile.radboard.title", "Radiology"), sub: T(null, "site.shell.home.tile.radboard.sub", "Imaging worklist, acquisition, reporting"), need: ["emr.view", "lab.result"], liveId: "lvRad" }),
+      /* The dialysis unit (R3-4): schedule by station, sessions, dialyzer reuse and URR. Reading it is emr.view; recording is
+       * emr.vitals on the server. */
+      tile({ go: "dialysis", icon: "water_drop", title: T(null, "site.shell.home.tile.dialysis.title", "Dialysis unit"), sub: T(null, "site.shell.home.tile.dialysis.sub", "Stations, haemodialysis sessions, dialyzer reuse and URR"), need: "emr.view" }),
       tile({ go: "ward:surgeryboard", icon: "surgical", title: T(null, "site.shell.home.tile.surgeryboard.title", "Theatre"), sub: T(null, "site.shell.home.tile.surgeryboard.sub", "Cases, WHO checklist, anaesthesia, implants"), need: "emr.view" }),
       /* order.dispense, NOT emr.view, and this one locked the pharmacist out of pharmacy.
        * The stock reads and writes behind this tile are gated ORDER_DISPENSE server-side
@@ -620,6 +629,9 @@
        * greyed out, with a tooltip explaining she lacked a capability the screen never needed.
        * Found 2026-09-12 by signing in as the pharmacist. */
       tile({ go: "ward:inventoryboard", icon: "inventory_2", title: T(null, "site.shell.home.tile.inventoryboard.title", "Pharmacy stock"), sub: T(null, "site.shell.home.tile.inventoryboard.sub", "Receive, move, waste, reconcile"), need: "order.dispense" }),
+      /* The blood bank's own registers: donors, testing, components and the unit inventory the transfusion
+       * crossmatch now checks. transfusion.issue is the blood bank's authority (admin holds it too). */
+      tile({ go: "bloodbank", icon: "bloodtype", title: T(null, "site.shell.home.tile.bloodbank.title", "Blood bank"), sub: T(null, "site.shell.home.tile.bloodbank.sub", "Donors, testing, components and unit inventory"), need: "transfusion.issue" }),
       tile({ go: "ward:scheduling", icon: "event", title: T(null, "site.shell.home.tile.scheduling.title", "Scheduling"), sub: T(null, "site.shell.home.tile.scheduling.sub", "Appointments, resources, blackout periods"), need: "queue.view" }),
       tile({ go: "opd", icon: "medical_services", title: T(null, "site.shell.home.tile.opd.title", "OPD desk"), sub: T(null, "site.shell.home.tile.opd.sub", "Queue, check-in, consult, prescriptions, results"), need: "queue.view" }),
       tile({ go: "workstation", icon: "verified", title: T(null, "site.shell.home.tile.workstation.title", "Order safety workstation"), sub: T(null, "site.shell.home.tile.workstation.sub", "Medication order with allergy and interaction checks"), need: "emr.treat" }),
@@ -636,6 +648,8 @@
       tile({ go: "ward:twin", icon: "hub", title: T(null, "site.shell.home.tile.twin.title", "Digital Twin"), sub: T(null, "site.shell.home.tile.twin.sub", "Fused hospital state, freshness, predictions, simulation"), need: "emr.view" }),
       tile({ go: "ward:reports", icon: "summarize", title: T(null, "site.shell.home.tile.reports.title", "Reports"), sub: T(null, "site.shell.home.tile.reports.sub", "Patient flow, clinical operations, pharmacy, imaging, billing, claims"), need: "emr.view" }),
       tile({ go: "ward:cashier", icon: "payments", title: T(null, "site.shell.home.tile.cashier.title", "Billing and cashier"), sub: T(null, "site.shell.home.tile.cashier.sub", "Invoices, collections, claims and TPA pre-authorisation"), need: "billing.view" }),
+      /* rcm-claims-ops: the hospital's claims worklists (ward.js claimsDeskView). billing.view reads it, as the route does. */
+      tile({ go: "ward:claimsdesk", icon: "request_quote", title: T(null, "site.shell.home.tile.claimsdesk.title", "Claims desk"), sub: T(null, "site.shell.home.tile.claimsdesk.sub", "Not billed, not sent, payer queries, receivables by payer, denials"), need: "billing.view" }),
       tile({ go: "ward:integration", icon: "sync_alt", title: T(null, "site.shell.home.tile.integration.title", "Integration console"), sub: T(null, "site.shell.home.tile.integration.sub", "FHIR, HL7, SCCM: exceptions, outbound, replay"), need: "emr.view" }),
       tile({ go: "ward:emergencyadmin", icon: "gpp_maybe", title: T(null, "site.shell.home.tile.emergencyadmin.title", "Emergency access"), sub: T(null, "site.shell.home.tile.emergencyadmin.sub", "Declarations, break-glass log, reconciliation"), need: "emr.view" }),
       /* incident.report OR incident.investigate: filing is broad (nearly every clinical role),
@@ -664,6 +678,10 @@
       /* The bed waiting list sits at the capability that registers a patient - asking for a bed and
        * closing a request are front-desk and bed-management acts, and the module gates them itself. */
       tile({ go: "ward:admreqs", icon: "bed", title: T(null, "site.shell.home.tile.admreqs.title", "Waiting for a bed"), sub: T(null, "site.shell.home.tile.admreqs.sub", "Ask for a bed, see who is waiting and for how long"), need: "queue.add" }),
+      /* Discharge progress: every desk that records a discharge step opens it; the server decides which step each may
+       * record. The transfer centre carries clinical summaries, so it sits at the chart's own capability. */
+      tile({ go: "ward:dcboard", icon: "timer", title: T(null, "site.shell.home.tile.dcboard.title", "Discharge progress"), sub: T(null, "site.shell.home.tile.dcboard.sub", "Each discharge step by step, and how long each step takes"), need: ["emr.view", "order.verify", "billing.charge", "queue.add"] }),
+      tile({ go: "ward:tcentre", icon: "call", title: T(null, "site.shell.home.tile.tcentre.title", "Transfer centre"), sub: T(null, "site.shell.home.tile.tcentre.sub", "Patients other hospitals ask us to take, answered against the beds we have"), need: "emr.view" }),
       tile({ go: "ward:nurseworklist", icon: "checklist", title: T(null, "site.shell.home.tile.nurseworklist.title", "Nurse worklist"), sub: T(null, "site.shell.home.tile.nurseworklist.sub", "Every patient: overdue doses, what is due next, early-warning score"), need: "emr.view" }),
       tile({ go: "ward:surveillance", icon: "monitor_heart", title: T(null, "site.shell.home.tile.surveillance.title", "Surveillance"), sub: T(null, "site.shell.home.tile.surveillance.sub", "Rising NEWS2, sepsis screens, worsening labs, overdue care, with the evidence"), need: "emr.view" }),
       tile({ go: "ward:referralinbox", icon: "send", title: T(null, "site.shell.home.tile.referralinbox.title", "Referral inbox"), sub: T(null, "site.shell.home.tile.referralinbox.sub", "Referrals waiting for your specialty, and the ones you sent"), need: "emr.view" }),
@@ -673,18 +691,42 @@
       tile({ go: "ward:approvals", icon: "verified", title: T(null, "site.shell.home.tile.approvals.title", "Approvals"), sub: T(null, "site.shell.home.tile.approvals.sub", "Ask for an approval for a restricted medicine, and grant the ones waiting"), need: ["emr.vitals", "emr.treat"] }),
       /* Purchasing sits behind the pharmacy's own capability, not a clinical one: ordering stock is
        * the storekeeper's job and has never been the ward's. */
-      tile({ go: "ward:purchasing", icon: "inventory", title: T(null, "site.shell.home.tile.purchasing.title", "Purchasing"), sub: T(null, "site.shell.home.tile.purchasing.sub", "Raise a supplier order, get it approved, and book the stock in when it arrives"), need: "order.dispense" }),
+      tile({ go: "ward:purchasing", icon: "inventory", title: T(null, "site.shell.home.tile.purchasing.title", "Purchasing"), sub: T(null, "site.shell.home.tile.purchasing.sub", "Raise a supplier order, get it approved, and book the stock in when it arrives"), need: ["order.dispense", "stores.manage"] }),
+      /* General stores and biomedical equipment. Every stores role opens Stores (the ward raises and acknowledges, the
+       * in-charge approves, the store keeper issues); anyone on the floor can report broken equipment. */
+      tile({ go: "stores", icon: "shelves", title: T(null, "site.shell.home.tile.stores.title", "General stores"), sub: T(null, "site.shell.home.tile.stores.sub", "Indents, approval, issue, stock and consumption by department"), need: ["dept.request", "stores.indent.approve", "stores.manage"] }),
+      tile({ go: "assets", icon: "build", title: T(null, "site.shell.home.tile.assets.title", "Assets and maintenance"), sub: T(null, "site.shell.home.tile.assets.sub", "Report broken equipment; asset register, PM, calibration and job cards"), need: ["dept.request", "asset.manage"] }),
+      /* Hospital support services (pages/support.js), each on its own narrow capability. The diet tile also opens
+       * for a prescriber, who orders a diet from the chart; the kitchen, CSSD, housekeeping, transport and the
+       * mortuary see only their own. */
+      tile({ go: "diet", icon: "restaurant", title: T(null, "site.shell.home.tile.diet.title", "Diet and kitchen"), sub: T(null, "site.shell.home.tile.diet.sub", "Diet orders, meal rounds by ward and bed, nil by mouth"), need: ["diet.order", "diet.kitchen", "emr.treat"] }),
+      tile({ go: "cssd", icon: "sanitizer", title: T(null, "site.shell.home.tile.cssd.title", "CSSD"), sub: T(null, "site.shell.home.tile.cssd.sub", "Instrument sets through wash, pack, sterilise, store and issue, with load recall"), need: "cssd.process" }),
+      tile({ go: "housekeeping", icon: "cleaning_services", title: T(null, "site.shell.home.tile.housekeeping.title", "Housekeeping"), sub: T(null, "site.shell.home.tile.housekeeping.sub", "Bed cleans, spills and terminal cleans, inspection and turnaround"), need: ["housekeeping.task", "housekeeping.inspect"] }),
+      tile({ go: "transport", icon: "ambulance", title: T(null, "site.shell.home.tile.transport.title", "Ambulance"), sub: T(null, "site.shell.home.tile.transport.sub", "Fleet, trip requests, dispatch and trip times"), need: "transport.dispatch" }),
+      tile({ go: "mortuary", icon: "deceased", title: T(null, "site.shell.home.tile.mortuary.title", "Mortuary"), sub: T(null, "site.shell.home.tile.mortuary.sub", "Bodies received, cold chambers, belongings and release"), need: "mortuary.manage" }),
       tile({ go: "ward:downtime", icon: "cloud_off", title: T(null, "site.shell.home.tile.downtime.title", "Downtime pack"), sub: T(null, "site.shell.home.tile.downtime.sub", "Printable ward state for a network outage"), need: "emr.view" }),
     ] : [];
     var peopleTiles = [
       tile({ go: "patients", icon: "person_search", title: T(null, "site.shell.home.tile.patients.title", "Patients"), sub: T(null, "site.shell.home.tile.patients.sub", "Find by MRN, register a new patient, open the chart"), need: "queue.view" }),
     ];
     if (native) peopleTiles.push(tile({ go: "portal-access", icon: "forum", title: T(null, "site.shell.home.tile.portalAccess.title", "Patient portal"), sub: T(null, "site.shell.home.tile.portalAccess.sub", "Patient messages, and record access for patients and family"), need: "emr.view" }));
-    if (native) peopleTiles.push(tile({ go: "maik", icon: "psychology", title: T(null, "site.shell.home.tile.maik.title", "MaiK clinical AI"), sub: T(null, "site.shell.home.tile.maik.sub", "Governed summaries and draft notes, always reviewed by you"), need: "emr.view" }));
+    if (native) peopleTiles.push(tile({ go: "inbasket", icon: "inbox", title: T(null, "site.shell.home.tile.inbasket.title", "In-basket"), sub: T(null, "site.shell.home.tile.inbasket.sub", "Staff messages about patients, and what is waiting on you"), need: "emr.view" }));
+    if (native) peopleTiles.push(tile({ go: "maik",icon: "psychology", title: T(null, "site.shell.home.tile.maik.title", "MaiK clinical AI"), sub: T(null, "site.shell.home.tile.maik.sub", "Governed summaries and draft notes, always reviewed by you"), need: "emr.view" }));
     var adminTiles = [
       tile({ go: "admin", icon: "admin_panel_settings", title: T(null, "site.shell.home.tile.admin.title", "Admin Center"), sub: T(null, "site.shell.home.tile.admin.sub", "Wards, beds, departments, rooms, staff and roles"), need: "staff.admin" }),
       tile({ go: "audit", icon: "policy", title: T(null, "site.shell.home.tile.audit.title", "Audit and security"), sub: T(null, "site.shell.home.tile.audit.sub", "Record changes, emergency access, source grants, service health"), need: "emr.view" }),
     ];
+    /* Statutory registers (pages/registers.js): NDPS, PCPNDT Form F, medico-legal cases, MTP, births and deaths, notifiable
+     * diseases. Open to each register's custodian and to the doctors who create entries; the page shows each person only
+     * the registers their role keeps, and the server refuses the rest. */
+    if (native) adminTiles.push(tile({ go: "registers", icon: "menu_book", title: T(null, "site.shell.home.tile.registers.title", "Registers"), sub: T(null, "site.shell.home.tile.registers.sub", "NDPS, PCPNDT Form F, medico-legal, MTP, births and deaths, notifiable diseases"), need: ["register.ndps", "register.ndps.read", "register.pcpndt", "register.pcpndt.read", "register.mtp", "register.records", "mlc.record", "register.ihip", "emr.treat", "med.administer"] }));
+    /* DPDP Act 2023, NABH and HMIS returns, the digital health self-assessment and the report builder: the Data
+     * Protection Officer's own way in, and the administrator's (pages/governance.js offers each tab to its capability). */
+    if (native) adminTiles.push(tile({ go: "governance", icon: "shield_person", title: T(null, "site.shell.home.tile.governance.title", "Privacy and compliance"), sub: T(null, "site.shell.home.tile.governance.sub", "DPDP requests and breaches, NABH and HMIS returns, reports"), need: ["dpdp.manage", "analytics.view", "staff.admin", "register.records"] }));
+    /* Infection control and quality (pages/quality.js): the infection control nurse's cases, prophylaxis review and
+     * antibiogram, the quality team's audits and drills, and the ward's ADR reports, emergency medicine stock-outs and
+     * emergency returns. Each tab is offered to its own capability. */
+    if (native) adminTiles.push(tile({ go: "quality", icon: "coronavirus", title: T(null, "site.shell.home.tile.quality.title", "Infection control and quality"), sub: T(null, "site.shell.home.tile.quality.sub", "HAI cases, prophylaxis, antibiogram, audits, drills, ADR reports, stock-outs"), need: ["infection.control", "quality.audit", "lab.result", "incident.report", "dept.request", "emr.view"] }));
     if (native) adminTiles.push(tile({ go: "ward:bedmgmt", icon: "dashboard_customize", title: T(null, "site.shell.home.tile.bedmgmt.title", "Bed management"), sub: T(null, "site.shell.home.tile.bedmgmt.sub", "Bed master: block, release, housekeeping"), need: "staff.admin" }));
     el.innerHTML = head + sec(esc(T(null, "site.shell.home.sec.clinical", "Clinical")), wardTiles) + (cmdTiles.length ? sec(esc(T(null, "site.shell.home.sec.command", "Command and operations")), cmdTiles) : "") + sec(esc(T(null, "site.shell.home.sec.patientsAI", "Patients and AI")), peopleTiles) + sec(esc(T(null, "site.shell.home.sec.admin", "Administration")), adminTiles);
     if (!native) return;
@@ -710,7 +752,7 @@
       s.innerHTML = '<span class="spin"></span>';
       api(p).then(function (r) {
         if (refused(r)) { s.textContent = ""; s.className = "live"; return; }
-        var v = f(r); s.textContent = v.text; s.className = "live" + (v.stop ? " stop" : "");
+        var v = r && r.error === "too_many_open" ? { text: tooManyOpenText(), stop: true } : f(r); s.textContent = v.text; s.className = "live" + (v.stop ? " stop" : "");
       });
     };
     var unavailable = function () { return T(null, "site.shell.home.live.unavailable", "unavailable"); };
@@ -722,7 +764,7 @@
   } };
 
   // ---- registry + boot ------------------------------------------------------------------------------------
-  G.WSQ = { page: function (name, def) { PAGES[name] = def; }, t: function (key, vars, en) { return T(null, key, en, vars); }, tSafe: function (key, vars, en) { return TS(null, key, en, vars); }, en: function (html) { return EN(null, html); }, api: api, download: download, esc: esc, ms: ms, go: go, can: can, state: st, toast: toast, render: render, _signInError: signInError };
+  G.WSQ = { page: function (name, def) { PAGES[name] = def; }, tooManyOpen: function (r) { return r && r.error === "too_many_open" ? tooManyOpenText() : ""; }, t: function (key, vars, en) { return T(null, key, en, vars); }, tSafe: function (key, vars, en) { return TS(null, key, en, vars); }, en: function (html) { return EN(null, html); }, api: api, download: download, esc: esc, ms: ms, go: go, can: can, state: st, toast: toast, render: render, _signInError: signInError };
 
   function boot() {
     st.tokType = lsGet(LS.tt); st.tok = lsGet(LS.tok); st.orgId = lsGet(LS.hosp);

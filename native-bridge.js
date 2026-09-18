@@ -91,38 +91,160 @@
   // Client-side HTML->PDF (jsPDF + html2canvas) — the reliable path when the native VisionOcr plugin is
   // absent (Android has no VisionOcr; it is iOS-only). Mirrors the proven prescription.js exportRx pipeline:
   // render the doc offscreen at A4 width, rasterize, paginate into a PDF, then share (native) or download (web).
-  // Rejects if the vendored engines aren't loaded, so callers keep their existing HTML/text fallback = no regression.
+  // Client-side HTML->PDF (jsPDF + html2canvas) — the reliable path when the native VisionOcr plugin is
+  // absent (Android has no VisionOcr; it is iOS-only). Mirrors the proven prescription.js exportRx pipeline:
+  // render the doc offscreen at A4 width, rasterize, paginate into a PDF, then share (native) or download (web).
+  function ensurePdfEngine() {
+    var H = window.html2canvas, JS = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+    if (H && JS) return Promise.resolve({ H: H, JS: JS });
+    var lazy = window.smdLazy || function (src) {
+      return new Promise(function (resolve, reject) {
+        var s = document.createElement("script");
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    };
+    var p1 = window.html2canvas ? Promise.resolve() : lazy("/vendor-html2canvas.js?v=1");
+    return p1.then(function () {
+      var p2 = ((window.jspdf && window.jspdf.jsPDF) || window.jsPDF) ? Promise.resolve() : lazy("/vendor-jspdf.js?v=1");
+      return p2.then(function () {
+        var H2 = window.html2canvas, JS2 = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+        if (!H2 || !JS2) throw new Error("pdf-engine-unavailable");
+        return { H: H2, JS: JS2 };
+      });
+    });
+  }
+
   function pdfFromHtmlJs(html, name, title) {
-    return new Promise(function (resolve, reject) {
-      var H = window.html2canvas, JS = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
-      if (!H || !JS) { reject(new Error("pdf-engine-unavailable")); return; }
+    return ensurePdfEngine().then(function (engines) {
+      var H = engines.H, JS = engines.JS;
       var s = String(html == null ? "" : html);
-      var style = (s.match(/<style[\s\S]*?<\/style>/i) || [""])[0];
+      var style = (s.match(/<style[\s\S]*?<\/style>/gi) || [""]).join("\n");
       var bodyInner = (s.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [null, s])[1];
       var host = document.createElement("div");
       host.style.cssText = "position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1;color:#14202b";
-      host.innerHTML = style + '<div style="padding:24px;box-sizing:border-box;width:794px">' + bodyInner + "</div>";
+      host.innerHTML = style + '<div class="smd-pdf-container" style="padding:16px 20px;box-sizing:border-box;width:794px;background:#fff">' + bodyInner + "</div>";
       document.body.appendChild(host);
-      H(host, { scale: 2, backgroundColor: "#ffffff", useCORS: true }).then(function (canvas) {
+
+      var pdf = new JS({ unit: "pt", format: "a4" });
+      var pw = pdf.internal.pageSize.getWidth();
+      var ph = pdf.internal.pageSize.getHeight();
+      var pageCount = 0;
+
+      function addCanvasSlice(canvas, hostElem) {
+        var imgW = pw;
+        var imgH = canvas.height * (pw / canvas.width);
+        if (imgH <= ph) {
+          if (pageCount > 0) pdf.addPage();
+          pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, imgW, imgH);
+          pageCount++;
+          return;
+        }
+        var hostRect = hostElem.getBoundingClientRect();
+        var scale = canvas.width / Math.max(1, hostElem.offsetWidth);
+        var pagePx = ph / (pw / Math.max(1, hostElem.offsetWidth));
+        var totalHeightPx = hostElem.offsetHeight;
+
+        var breakElems = hostElem.querySelectorAll("tr, .ps-card, .ps-block, .ps-signatures, .ps-foot, section, p, h1, h2, h3, h4, .ps-tox-card, .ps-oral-card, li, .ps-regimenbanner");
+        var safeTops = [];
+        for (var b = 0; b < breakElems.length; b++) {
+          var r = breakElems[b].getBoundingClientRect();
+          var top = r.top - hostRect.top;
+          if (top > 10 && top < totalHeightPx - 10) safeTops.push(top);
+        }
+        safeTops.sort(function (a, b) { return a - b; });
+
+        var currentY = 0;
+        while (currentY < totalHeightPx - 1) {
+          var targetY = currentY + pagePx;
+          var splitY = totalHeightPx;
+          if (targetY < totalHeightPx) {
+            var bestSafe = -1;
+            for (var si = 0; si < safeTops.length; si++) {
+              var sTop = safeTops[si];
+              if (sTop <= targetY && sTop > currentY + (pagePx * 0.4)) {
+                bestSafe = sTop;
+              }
+            }
+            splitY = (bestSafe > 0) ? bestSafe : targetY;
+          }
+
+          var sliceHeightCss = splitY - currentY;
+          var sliceHeightCanvas = Math.round(sliceHeightCss * scale);
+          if (sliceHeightCanvas <= 0) break;
+
+          var sliceCanvas = document.createElement("canvas");
+          sliceCanvas.width = canvas.width;
+          sliceCanvas.height = sliceHeightCanvas;
+          var sCtx = sliceCanvas.getContext("2d");
+          sCtx.fillStyle = "#ffffff";
+          sCtx.fillRect(0, 0, sliceCanvas.width, sliceHeightCanvas);
+          sCtx.drawImage(
+            canvas,
+            0, Math.round(currentY * scale), canvas.width, sliceHeightCanvas,
+            0, 0, canvas.width, sliceHeightCanvas
+          );
+
+          if (pageCount > 0) pdf.addPage();
+          var slicePtH = sliceHeightCanvas * (pw / canvas.width);
+          pdf.addImage(sliceCanvas.toDataURL("image/png"), "PNG", 0, 0, pw, slicePtH);
+          pageCount++;
+          currentY = splitY;
+        }
+      }
+
+      var pageNodes = host.querySelectorAll(".ps-page, .page");
+      var renderPromise;
+
+      if (pageNodes && pageNodes.length > 0) {
+        var pChain = Promise.resolve();
+        for (var pi = 0; pi < pageNodes.length; pi++) {
+          (function (pageElem) {
+            pChain = pChain.then(function () {
+              return H(pageElem, { scale: 3, backgroundColor: "#ffffff", useCORS: true }).then(function (pageCanvas) {
+                addCanvasSlice(pageCanvas, pageElem);
+              });
+            });
+          })(pageNodes[pi]);
+        }
+        renderPromise = pChain;
+      } else {
+        var container = host.querySelector(".smd-pdf-container") || host;
+        renderPromise = H(container, { scale: 3, backgroundColor: "#ffffff", useCORS: true }).then(function (canvas) {
+          addCanvasSlice(canvas, container);
+        });
+      }
+
+      return renderPromise.then(function () {
         try { host.remove(); } catch (e) {}
-        var pdf = new JS({ unit: "pt", format: "a4" }), pw = pdf.internal.pageSize.getWidth(), ph = pdf.internal.pageSize.getHeight();
-        var imgW = pw, imgH = canvas.height * (pw / canvas.width), img = canvas.toDataURL("image/jpeg", 0.95);
-        if (imgH <= ph) pdf.addImage(img, "JPEG", 0, 0, imgW, imgH);
-        else { var y = 0; while (y < imgH - 1) { pdf.addImage(img, "JPEG", 0, -y, imgW, imgH); y += ph; if (y < imgH - 1) pdf.addPage(); } }
         var uri = pdf.output("datauristring");
         var P = plugins();
         if (window.SMD_IS_NATIVE && P && P.Filesystem && P.Filesystem.writeFile && P.Share && P.Share.share) {
           var b64 = (uri.split(",")[1] || "");
-          P.Filesystem.writeFile({ path: name + ".pdf", data: b64, directory: "CACHE" }).then(function (res) {
+          return P.Filesystem.writeFile({ path: name + ".pdf", data: b64, directory: "CACHE" }).then(function (res) {
             return P.Share.share({ title: title || "StewardMD", url: res.uri, files: [res.uri], dialogTitle: "Save PDF / Print / Share" });
-          }).then(resolve, reject);
+          });
         } else {
-          try { var a = document.createElement("a"); a.href = uri; a.download = name + ".pdf"; document.body.appendChild(a); a.click(); a.remove(); resolve(); } catch (e) { reject(e); }
+          try {
+            var a = document.createElement("a");
+            a.href = uri;
+            a.download = name + ".pdf";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          } catch (e) {
+            throw e;
+          }
         }
-      }).catch(function (e) { try { host.remove(); } catch (x) {} reject(e); });
+      }).catch(function (e) {
+        try { host.remove(); } catch (x) {}
+        throw e;
+      });
     });
   }
-  window.SMD_PDF = { fromHtml: pdfFromHtmlJs };   // reusable everywhere (MaiK, onco, reports)
+  window.SMD_PDF = { fromHtml: pdfFromHtmlJs, ensurePdfEngine: ensurePdfEngine };   // reusable everywhere (MaiK, onco, reports)
 
   // Natural pixel size of a data URL, via a throwaway <img> (needed to normalize ML Kit's pixel boxes to [0,1]).
   function ocrImageSize(dataUrl) {

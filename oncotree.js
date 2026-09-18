@@ -37,19 +37,59 @@
     { id: "headneck", title: "Head & Neck Cancer", sub: "Locoregional / recurrent-metastatic; PD-L1", icon: "face", ready: true },
     { id: "ovarian", title: "Ovarian Cancer", sub: "Primary chemo; PARP maintenance by HRD", icon: "female", ready: true },
     { id: "myeloma", title: "Multiple Myeloma", sub: "Newly diagnosed / maintenance / relapsed", icon: "bloodtype", ready: true },
+    { id: "amyloidosis", title: "Systemic AL Amyloidosis", sub: "Mayo cardiac staging; Dara-CyBorD + autologous HCT", icon: "bloodtype", ready: true },
+    { id: "castleman", title: "Castleman Disease", sub: "UCD vs iMCD (Siltuximab) & HHV-8+ MCD (Rituximab)", icon: "bloodtype", ready: true },
     { id: "thyroid", title: "Thyroid Cancer", sub: "Anaplastic (BRAF) / medullary (RET)", icon: "biotech", ready: true },
     { id: "cervical", title: "Cervical Cancer", sub: "FIGO stage; chemoRT vs surgery; recurrent by PD-L1", icon: "female", ready: true },
     { id: "uterine", title: "Uterine / Endometrial", sub: "Molecular class; risk-adapted adjuvant; MMR / HER2", icon: "female", ready: true },
+    { id: "gtn", title: "Gestational Trophoblastic Neoplasia", sub: "FIGO/WHO risk score; Methotrexate vs EMA-CO; PSTT/ETT surgery", icon: "female", ready: true },
     { id: "pancreatic", title: "Pancreatic Cancer", sub: "Resectable vs metastatic; FOLFIRINOX vs gem-nab", icon: "gastroenterology", ready: true },
+    { id: "ampullary", title: "Ampullary Adenocarcinoma", sub: "Pancreatobiliary vs intestinal; Whipple + adjuvant", icon: "gastroenterology", ready: true },
+    { id: "biliary", title: "Biliary Tract Cancers", sub: "GBC & Cholangiocarcinoma; BILCAP adjuvant; TOPAZ-1 & NGS targets", icon: "gastroenterology", ready: true },
+    { id: "appendiceal", title: "Appendiceal Neoplasms", sub: "LAMN/PMP vs adenocarcinoma; CRS + HIPEC", icon: "gastroenterology", ready: true },
     { id: "hcc", title: "Hepatocellular Carcinoma", sub: "BCLC + Child-Pugh; local vs systemic by line", icon: "gastroenterology", ready: true },
     { id: "anal", title: "Anal Cancer", sub: "Definitive chemoRT; metastatic immunotherapy", icon: "gastroenterology", ready: true },
     { id: "gist", title: "GI Stromal Tumor (GIST)", sub: "Risk-adapted imatinib; TKI by line + mutation", icon: "gastroenterology", ready: true },
     { id: "sarcoma", title: "Soft Tissue Sarcoma", sub: "Grade / size; surgery +/- RT; histology-directed", icon: "healing", ready: true },
+    { id: "dfsp", title: "Dermatofibrosarcoma Protuberans", sub: "COL1A1::PDGFB fusion; Mohs vs WLE; Imatinib for advanced", icon: "healing", ready: true },
+    { id: "bone", title: "Bone Cancer", sub: "Osteosarcoma (MAP), Ewing (VDC/IE), Chondrosarcoma, GCTB", icon: "orthopedics", ready: true },
     { id: "cns", title: "CNS / Glioma", sub: "IDH / 1p19q class; Stupp protocol; recurrence", icon: "neurology", ready: true },
     { id: "aml", title: "Acute Myeloid Leukemia", sub: "ELN risk; fit vs unfit; targeted + transplant", icon: "bloodtype", ready: true },
+    { id: "all", title: "Acute Lymphoblastic Leukemia", sub: "Ph+ / Ph- B-ALL & T-ALL; MRD-directed", icon: "bloodtype", ready: true },
+    { id: "cml", title: "Chronic Myeloid Leukemia", sub: "ELTS risk; 1L TKIs & Asciminib; molecular milestones", icon: "bloodtype", ready: true },
     { id: "cll", title: "Chronic Lymphocytic Leukemia", sub: "Watch vs treat; TP53 / IGHV; BTKi vs venetoclax", icon: "bloodtype", ready: true },
+    { id: "hcl", title: "Hairy Cell Leukemia", sub: "BRAF V600E; Cladribine / Pentostatin; targeted relapse", icon: "bloodtype", ready: true },
+    { id: "bcell", title: "B-Cell Lymphomas", sub: "Follicular, Mantle Cell (TP53), MZL, Burkitt", icon: "bloodtype", ready: true },
     { id: "dlbcl", title: "Diffuse Large B-Cell Lymphoma", sub: "IPI; R-CHOP vs pola-R-CHP; relapsed CAR-T", icon: "bloodtype", ready: true },
-    { id: "hodgkin", title: "Hodgkin Lymphoma", sub: "Early vs advanced; PET-adapted ABVD / BV", icon: "bloodtype", ready: true }
+    { id: "hodgkin", title: "Hodgkin Lymphoma", sub: "Early vs advanced; PET-adapted ABVD / BV", icon: "bloodtype", ready: true },
+    { id: "cutaneous_lymphoma", title: "Cutaneous Lymphomas", sub: "MF/SS TNMB; CD30+ LyP/pcALCL; CBCL indolent vs leg-type", icon: "dermatology", ready: true },
+    { id: "histiocytic", title: "Histiocytic Neoplasms", sub: "LCH (adult/pediatric), ECD, RDD; BRAF V600E & MEK inhibitors", icon: "bloodtype", ready: true },
+    { id: "kaposi", title: "Kaposi Sarcoma", sub: "HIV-associated, classic, endemic, iatrogenic; Liposomal doxorubicin & ART", icon: "healing", ready: true },
+    { id: "mastocytosis", title: "Systemic Mastocytosis", sub: "ISM vs AdvSM; KIT D816V; Avapritinib & Midostaurin", icon: "bloodtype", ready: true },
+    { id: "merkel", title: "Merkel Cell Carcinoma", sub: "CK20 dot-like; mandatory SLNB; Avelumab / Pembrolizumab / Retifanlimab", icon: "dermatology", ready: true },
+    { id: "mds", title: "Myelodysplastic Syndromes", sub: "IPSS-M / IPSS-R; del(5q) Lenalidomide, Luspatercept & Azacitidine", icon: "bloodtype", ready: true },
+    { id: "mesothelioma", title: "Mesothelioma", sub: "Pleural & Peritoneal; Epithelioid vs Non-Epithelioid; Nivo+Ipi & Cis+Pem", icon: "pulmonology", ready: true },
+    { id: "mpn", title: "Myeloproliferative Neoplasms", sub: "MF (DIPSS/MIPSS70), PV (CYTO-PV), ET; Ruxolitinib / Fedratinib / Momelotinib / HU", icon: "bloodtype", ready: true },
+    { id: "neuroendocrine", title: "Neuroendocrine & Adrenal Tumors", sub: "GI/pNET (SSTR-PET); SSA, Lu-177 Dotatate (NETTER-1), Everolimus & CAPTEM", icon: "biotech", ready: true },
+    { id: "basal_cell", title: "Basal Cell Skin Cancer", sub: "Risk stratification; Mohs surgery, Vismodegib (SMO inhibitor) & Cemiplimab", icon: "dermatology", ready: true },
+    { id: "occult_primary", title: "Occult Primary (CUP)", sub: "Favorable subsets vs true CUP; IHC, NGS profiling & empiric doublets", icon: "biotech", ready: true },
+    { id: "neuroblastoma", title: "Neuroblastoma (Pediatric)", sub: "INRG risk; MYCN amplification; Dinutuximab (anti-GD2) + GM-CSF + Isotretinoin", icon: "child_care", ready: true },
+    { id: "penile", title: "Penile Cancer", sub: "Organ-sparing surgery; DSNB / ILND; Neoadjuvant TIP & Pembrolizumab", icon: "man", ready: true },
+    { id: "pediatric_all", title: "Pediatric ALL", sub: "B-ALL & T-ALL; NCI risk; MRD-directed, Blinatumomab & Tisagenlecleucel CAR-T", icon: "child_care", ready: true },
+    { id: "pediatric_aml", title: "Pediatric AML", sub: "CBF vs High-risk; Gemtuzumab ozogamicin (ADE+GO), APL (ATRA+ATO) & HCT", icon: "child_care", ready: true },
+    { id: "pediatric_lymphoma", title: "Pediatric B-Cell Lymphoma", sub: "Burkitt & DLBCL; LMB96 Group A-C, Rituximab + COPADM/CYVE & DA-EPOCH-R", icon: "child_care", ready: true },
+    { id: "pediatric_cns", title: "Pediatric CNS Tumors", sub: "Medulloblastoma (CSI), pLGG (BRAF/MEK inhibitors), DMG (ONC201) & Ependymoma", icon: "neurology", ready: true },
+    { id: "sclc", title: "Small Cell Lung Cancer", sub: "LS-SCLC (ChemoRT + ADRIATIC); ES-SCLC (Atezo/Durva); Lurbinectedin & Tarlatamab (DLL3)", icon: "pulmonology", ready: true },
+    { id: "squamous_cell_skin", title: "Squamous Cell Skin Cancer", sub: "Risk features (Area H, PNI); Mohs surgery, CCPDMA, PORT & Cemiplimab (anti-PD-1)", icon: "dermatology", ready: true },
+    { id: "tcell_lymphoma", title: "T-Cell Lymphomas", sub: "ALCL, PTCL-NOS, AITL; CD30-directed BV-CHP (ECHELON-2), CHOEP & ASCR", icon: "bloodtype", ready: true },
+    { id: "rectal", title: "Rectal Cancer", sub: "Total Neoadjuvant Therapy (TNT: mFOLFOX6 + LCRT), Dostarlimab (dMMR) & Watch-and-Wait", icon: "gastroenterology", ready: true },
+    { id: "small_bowel", title: "Small Bowel Adenocarcinoma", sub: "Duodenal / jejunal / ileal; MSI/Lynch; Whipple, mFOLFOX6, CAPOX & Pembrolizumab", icon: "gastroenterology", ready: true },
+    { id: "thymic", title: "Thymoma & Thymic Carcinoma", sub: "Masaoka-Koga stage; Surgical thymectomy, CAP chemotherapy (rare-thymic-cap), PORT & Pembrolizumab", icon: "pulmonology", ready: true },
+    { id: "uveal_melanoma", title: "Uveal Melanoma", sub: "Ocular brachytherapy; Liver MRI surveillance; Tebentafusp (HLA-A*02:01) & Liver-directed therapy", icon: "visibility", ready: true },
+    { id: "vaginal", title: "Vaginal Cancer", sub: "FIGO stage; Pelvic ChemoRT (Cisplatin) + Interstitial IGBT; KEYNOTE-826 IO-chemo", icon: "female", ready: true },
+    { id: "vulvar", title: "Vulvar Cancer", sub: "FIGO stage; Radical local excision, SLNB / Groin dissection, Pelvic ChemoRT & Pembrolizumab", icon: "female", ready: true },
+    { id: "waldenstrom", title: "Waldenström Macroglobulinemia", sub: "IgM & hyperviscosity; MYD88 L265P / CXCR4; Zanubrutinib (ASPEN), BR & DRC", icon: "bloodtype", ready: true },
+    { id: "wilms", title: "Wilms Tumor (Pediatric)", sub: "FH vs Anaplasia; 1p/16q LOH; Radical nephrectomy, Regimen EE-4A/DD-4A & Flank RT", icon: "child_care", ready: true }
   ];
 
   var st = {
@@ -58,12 +98,21 @@
     loaded: false, loading: false, error: null, ctx: null,
     trail: [], tocQuery: "", summaryOpen: false, _pendingRebase: null,
     showNonActive: true, navEndModalOpen: false, sidebarOpen: true, navZoom: 1,
-    navMode: "auto", lastEndStepNode: null, lastEndStepOpt: null, lastEndStepPressCount: 0
+    navMode: "auto", lastEndStepNode: null, lastEndStepOpt: null, lastEndStepPressCount: 0,
+    pickerSearch: "", pickerCategory: "all"
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function ms(name) { return '<span class="material-symbols-outlined">' + name + "</span>"; }
-  function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_navigator")); } catch (e) { return false; } }
+  function flagOn() {
+    try {
+      if (G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool) return G.SMD_QUEUE_FLAGS.bool("smd_onco_navigator");
+      var q = (G.location && G.location.search && (G.location.search.match(/[?&]qoncotree=([^&]+)/) || []))[1];
+      if (q != null) return (q === "1" || q === "on" || q === "true");
+      if (G.localStorage) return G.localStorage.getItem("smd_onco_navigator") !== "0";
+      return true;
+    } catch (e) { return true; }
+  }
   function ENG() { return G.SMD_ONCOTREE_ENGINE; }
   function REC() { return G.SMD_ONCOTREE_RECOMMEND; }
 
@@ -154,7 +203,8 @@
       (p.version ? '<div class="ot-card-ver">Protocol v' + esc(p.version) + " · " + esc(ref) + "</div>" : "") +
       unconf +
       '<div class="ot-card-actions">' +
-        '<button class="ot-btn ghost" data-ot-act="view-proto" data-ot-proto="' + esc(ref) + '">' + ms("visibility") + "View protocol</button>" +
+        '<button class="ot-btn ghost" data-ot-act="view-proto" data-ot-proto="' + esc(ref) + '">' + ms("visibility") + "View</button>" +
+        (G.SMD_PROTOSHEET ? '<button class="ot-btn ghost" data-ot-act="proto-sheet" data-ot-proto="' + esc(ref) + '">' + ms("description") + "Sheet</button>" : "") +
         '<button class="ot-btn primary" data-ot-act="select-proto" data-ot-proto="' + esc(ref) + '">' + ms("check_circle") + "Select</button>" +
       "</div></div>";
   }
@@ -408,7 +458,7 @@
   }
 
   function protocolDetailHtml(ref) {
-    var p = st.protocols[ref];
+    var p = resolveProto(ref);
     if (!p) return '<div class="ot-empty">Protocol not loaded.</div>';
     var badge = p.experimental ? "BETA · AI-DRAFTED" : (p.lifecycleState || "draft").toUpperCase();
     var drugs = asArr(p.drugs).map(function (d) {
@@ -434,6 +484,12 @@
       '<div class="ot-detail-actions">' +
         (G.SMD_PROTOSHEET ? '<button class="ot-btn ghost lg" data-ot-act="proto-sheet" data-ot-proto="' + esc(ref) + '">' + ms("description") + "Protocol sheet</button>" : "") +
         '<button class="ot-btn primary lg" data-ot-act="select-proto" data-ot-proto="' + esc(ref) + '">' + ms("check_circle") + "Select this protocol</button></div>" +
+      '<div class="ot-superpowers-bar">' +
+        '<button class="ot-btn ghost sm" data-ot-act="cycle-timeline" data-ot-proto="' + esc(ref) + '">' + ms("calendar_month") + " Cycle Timeline</button>" +
+        '<button class="ot-btn ghost sm" data-ot-act="organ-dose-check" data-ot-proto="' + esc(ref) + '">' + ms("water_drop") + " Organ Dose</button>" +
+        '<button class="ot-btn ghost sm" data-ot-act="ddi-check" data-ot-proto="' + esc(ref) + '">' + ms("medication") + " DDI Sentry</button>" +
+        '<button class="ot-btn ghost sm" data-ot-act="genomics-drawer" data-ot-proto="' + esc(ref) + '">' + ms("biotech") + " Genomics</button>" +
+      '</div>' +
       "</div>";
   }
 
@@ -463,21 +519,119 @@
     return parts.join(", ") || "not specified";
   }
 
+  var COMMON_DISEASE_IDS = ["breast", "lung", "colorectal", "uppergi", "prostate", "bladder", "rcc", "testicular", "melanoma", "cervical", "ovarian", "myeloma", "headneck"];
+
+  function getDiseaseCategory(d) {
+    var id = (d && d.id) || "";
+    var ic = (d && d.icon) || "";
+    if (id.indexOf("pediatric") === 0 || id === "neuroblastoma" || id === "wilms") return "peds";
+    if (ic === "bloodtype" || ["dlbcl", "hodgkin", "bcell", "tcell_lymphoma", "cutaneous_lymphoma", "histiocytic", "mastocytosis", "waldenstrom", "amyloidosis", "castleman", "mds", "mpn"].indexOf(id) >= 0) return "heme";
+    return "solid";
+  }
+
+  function getDiseaseIconTheme(d) {
+    var ic = (d && d.icon) || "";
+    if (ic === "female") return "rose";
+    if (ic === "pulmonology") return "sky";
+    if (ic === "gastroenterology") return "emerald";
+    if (ic === "man" || ic === "water_drop" || ic === "nephrology") return "indigo";
+    if (ic === "bloodtype") return "crimson";
+    if (ic === "child_care") return "amber";
+    if (ic === "dermatology") return "violet";
+    if (ic === "neurology") return "purple";
+    return "teal";
+  }
+
+  function diseaseCardsHtml() {
+    var q = (st.pickerSearch || "").trim().toLowerCase();
+    var cat = st.pickerCategory || "all";
+    var filtered = DISEASES.filter(function (d) {
+      if (cat === "common" && COMMON_DISEASE_IDS.indexOf(d.id) < 0) return false;
+      if (cat !== "all" && cat !== "common" && getDiseaseCategory(d) !== cat) return false;
+      if (!q) return true;
+      var title = (d.title || "").toLowerCase();
+      var sub = (d.sub || "").toLowerCase();
+      var id = (d.id || "").toLowerCase();
+      return title.indexOf(q) >= 0 || sub.indexOf(q) >= 0 || id.indexOf(q) >= 0;
+    });
+
+    if (!filtered.length) {
+      return '<div class="ot-empty-search">' +
+        ms("search_off") +
+        '<div class="ot-empty-t">No matching cancer guidelines</div>' +
+        '<div class="ot-empty-sub">Try searching with a different term or select another category above.</div>' +
+        (q ? '<button class="ot-btn ghost sm" data-ot-act="picker-clear-search">' + ms("backspace") + 'Clear search</button>' : '') +
+        '</div>';
+    }
+
+    var cards = filtered.map(function (d) {
+      var theme = getDiseaseIconTheme(d);
+      return '<button class="ot-disease ot-theme-' + theme + '" data-ot-act="pick" data-ot-guideline="' + esc(d.id) + '"' + (d.ready ? "" : " disabled") + '>' +
+        '<div class="ot-disease-ic">' + ms(d.icon) + '</div>' +
+        '<div class="ot-disease-t">' +
+          '<div class="ot-disease-title-row">' +
+            '<b>' + esc(d.title) + '</b>' +
+            (d.ready ? '<span class="ot-card-pill">NCCN</span>' : '<span class="ot-soon">soon</span>') +
+          '</div>' +
+          '<span>' + esc(d.sub) + '</span>' +
+        '</div>' +
+        '<span class="material-symbols-outlined ot-chevron">chevron_right</span>' +
+      '</button>';
+    }).join("");
+
+    var maker = (cat === "all" || cat === "common") && !q && G.SMD_PROTOMAKER ? (
+      '<button class="ot-disease ot-disease-maker" data-ot-act="proto-maker">' +
+        '<div class="ot-disease-ic">' + ms("note_add") + '</div>' +
+        '<div class="ot-disease-t">' +
+          '<div class="ot-disease-title-row"><b>Custom Clinical Protocol</b><span class="ot-card-pill ot-pill-maker">BUILDER</span></div>' +
+          '<span>Author or paste an off-guideline regimen for this patient</span>' +
+        '</div>' +
+        '<span class="material-symbols-outlined ot-chevron">add</span>' +
+      '</button>'
+    ) : "";
+
+    return cards + maker;
+  }
+
   // Disease-picker landing (multi-disease entry). Only diseases with a reviewed graph are selectable.
   function pickerHtml() {
-    var cards = DISEASES.map(function (d) {
-      return '<button class="ot-disease" data-ot-act="pick" data-ot-guideline="' + esc(d.id) + '"' + (d.ready ? "" : " disabled") + '>' +
-        '<span class="ot-disease-ic">' + ms(d.icon) + "</span>" +
-        '<span class="ot-disease-t"><b>' + esc(d.title) + "</b><span>" + esc(d.sub) + "</span></span>" +
-        (d.ready ? ms("chevron_right") : '<span class="ot-soon">soon</span>') + "</button>";
-    }).join("");
-    var maker = G.SMD_PROTOMAKER ? '<button class="ot-disease ot-disease-maker" data-ot-act="proto-maker">' +
-        '<span class="ot-disease-ic">' + ms("note_add") + "</span>" +
-        '<span class="ot-disease-t"><b>Custom protocol</b><span>Build or open your own regimen (new guideline, off-list)</span></span>' +
-        ms("chevron_right") + "</button>" : "";
-    return '<div class="ot-picker"><div class="ot-picker-h">Choose a cancer</div>' +
-      '<div class="ot-picker-sub">Navigate the disease pathway to applicable StewardMD Standard Protocols. Decision support only; the physician decides and the existing dose engine computes doses.</div>' +
-      cards + maker + "</div>";
+    var q = esc(st.pickerSearch || "");
+    var curCat = st.pickerCategory || "all";
+    var counts = {
+      all: DISEASES.length,
+      common: DISEASES.filter(function (d) { return COMMON_DISEASE_IDS.indexOf(d.id) >= 0; }).length,
+      solid: DISEASES.filter(function (d) { return getDiseaseCategory(d) === "solid"; }).length,
+      heme: DISEASES.filter(function (d) { return getDiseaseCategory(d) === "heme"; }).length,
+      peds: DISEASES.filter(function (d) { return getDiseaseCategory(d) === "peds"; }).length
+    };
+
+    return '<div class="ot-picker">' +
+      '<div class="ot-picker-hd">' +
+        '<div class="ot-picker-topline">' +
+          '<div class="ot-picker-badge">' + ms("verified") + '<span>NCCN GUIDELINES HARMONIZED · V2026</span></div>' +
+          '<button type="button" class="ot-calc-pill" data-ot-act="open-calvert-calc">' + ms("calculate") + '<span>Creatinine &amp; Calvert</span></button>' +
+        '</div>' +
+        '<h1 class="ot-picker-h">Oncology Navigator</h1>' +
+        '<p class="ot-picker-sub">Evidence-based clinical decision algorithms, biomarker stratifications, and standardized treatment protocols.</p>' +
+      '</div>' +
+      '<div class="ot-picker-controls">' +
+        '<div class="ot-search-box">' +
+          ms("search") +
+          '<input type="search" class="ot-search-input" data-ot-input="picker-search" placeholder="Search 40+ cancer guidelines..." value="' + q + '" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">' +
+          '<button class="ot-search-clear" data-ot-act="picker-clear-search" aria-label="Clear search" style="display:' + (q ? "grid" : "none") + '">' + ms("cancel") + '</button>' +
+        '</div>' +
+        '<div class="ot-picker-tabs">' +
+          '<button class="ot-tab-chip' + (curCat === "all" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="all">All <span class="ot-chip-num">' + counts.all + '</span></button>' +
+          '<button class="ot-tab-chip' + (curCat === "common" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="common">Common <span class="ot-chip-num">' + counts.common + '</span></button>' +
+          '<button class="ot-tab-chip' + (curCat === "solid" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="solid">Solid <span class="ot-chip-num">' + counts.solid + '</span></button>' +
+          '<button class="ot-tab-chip' + (curCat === "heme" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="heme">Hematologic <span class="ot-chip-num">' + counts.heme + '</span></button>' +
+          '<button class="ot-tab-chip' + (curCat === "peds" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="peds">Pediatric <span class="ot-chip-num">' + counts.peds + '</span></button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ot-disease-list" id="otDiseaseList">' +
+        diseaseCardsHtml() +
+      '</div>' +
+    '</div>';
   }
 
   // Breadcrumb trail across cross-page link jumps (guideline switches + in-graph rebases).
@@ -902,7 +1056,8 @@
         var refs = asArr(outNode.protocolRefs);
         var protoCardsHtml = "";
         if (refs.length) {
-          protoCardsHtml = '<div class="ot-flow-protos-grid">' +
+          var compareBtn = refs.length > 1 ? '<div class="ot-flow-proto-actions"><button class="ot-btn sm ghost" data-ot-act="compare-protos" data-ot-node="' + esc(outNode.id) + '">' + ms("compare_arrows") + ' Compare Regimens (' + refs.length + ' options)</button></div>' : "";
+          protoCardsHtml = compareBtn + '<div class="ot-flow-protos-grid">' +
             refs.map(function (refId) {
               var proto = st.protocols[refId];
               var name = proto ? proto.name : refId;
@@ -1181,21 +1336,236 @@
     return railHtml(state) + missingHtml(state) + '<div class="ot-body-main">' + mid + "</div>" + disabledPanelHtml(state) + footnoteSheetHtml() + summarySheetHtml();
   }
 
+  function round2(v) {
+    if (v == null || isNaN(v)) return "-";
+    return Math.round(Number(v) * 100) / 100;
+  }
+
+  // Resolve a protocol reference that may be an id string, a loaded key, or a full object.
+  // Returns the protocol object or null when its data is still resolving.
+  function resolveProto(ref) {
+    if (ref && typeof ref === "object") return ref;
+    if (ref == null || ref === "") return null;
+    if (st.protocols[ref]) return st.protocols[ref];
+    for (var k in st.protocols) {
+      if (!Object.prototype.hasOwnProperty.call(st.protocols, k)) continue;
+      var p = st.protocols[k];
+      if (p && (p.id === ref || k === ref)) return p;
+    }
+    return null;
+  }
+  // A superpower tap must never silently die: missing data or a missing library renders an
+  // explicit modal explaining what is still loading instead of doing nothing.
+  function superpowerNotice(title, lines) {
+    st.superpowerModal = {
+      title: title,
+      html: '<div class="ot-notice">' + ms("hourglass_empty") + "<div>" +
+        lines.map(function (l) { return "<p>" + esc(l) + "</p>"; }).join("") + "</div></div>"
+    };
+    renderSuperpowerModal();
+  }
+
+  function superpowerModalHtml() {
+    if (!st.superpowerModal) return "";
+    var m = st.superpowerModal;
+    return '<div class="ot-superpower-backdrop" data-ot-act="superpower-modal-close">' +
+      '<div class="ot-superpower-modal" data-ot-act="footnote-stop">' +
+      '<div class="ot-superpower-hd">' +
+      '<span class="ot-superpower-title">' + esc(m.title || "Clinical Evaluation") + '</span>' +
+      '<button class="ot-superpower-x" data-ot-act="superpower-modal-close" aria-label="Close">' + ms("close") + '</button>' +
+      '</div>' +
+      '<div class="ot-superpower-body">' + (m.html || "") + '</div>' +
+      '<div class="ot-superpower-ft">' +
+      '<button class="ot-btn primary sm" data-ot-act="superpower-modal-close">Close</button>' +
+      '</div>' +
+      '</div></div>';
+  }
+
+  function renderSuperpowerModal() {
+    if (!D || !D.querySelectorAll) return;
+    var existing = D.querySelectorAll(".ot-superpower-backdrop");
+    if (existing) {
+      for (var i = 0; i < existing.length; i++) {
+        if (existing[i].parentNode) existing[i].parentNode.removeChild(existing[i]);
+      }
+    }
+    if (!st.superpowerModal) return;
+    var shell = D.querySelector ? D.querySelector(".ot-shell") : null;
+    if (shell && D.createElement) {
+      var wrap = D.createElement("div");
+      wrap.innerHTML = superpowerModalHtml();
+      if (wrap.firstElementChild) shell.appendChild(wrap.firstElementChild);
+    }
+  }
+
+  function calvertCalcHtml(params) {
+    params = params || {};
+    var p = params.patient || {};
+    var age = params.age != null ? params.age : (p.age != null ? p.age : 65);
+    var sex = params.sex || p.sex || "male";
+    var weight = params.weight != null ? params.weight : (p.weightKg != null ? p.weightKg : 70);
+    var scr = params.scr != null ? params.scr : (p.creatinine != null ? p.creatinine : 1.0);
+    var auc = params.auc != null ? params.auc : 5.0;
+
+    var cg = G.SMD_ONCO_ORGAN_DOSE ? G.SMD_ONCO_ORGAN_DOSE.calculateCockcroftGault({ age: age, weightKg: weight, serumCreatinine: scr, sex: sex }) : { crcl: 60 };
+    var calvert = G.SMD_ONCO_ORGAN_DOSE ? G.SMD_ONCO_ORGAN_DOSE.calculateCalvertCarboplatin({ targetAuc: auc, gfr: cg.crcl }) : { totalDoseMg: 425, gfrUsed: 60 };
+
+    var crcl = cg.crcl || 0;
+    var renalStage = "Normal (≥ 90 mL/min)";
+    var stageBadge = "badge-success";
+    if (crcl < 15) { renalStage = "Kidney Failure (< 15 mL/min)"; stageBadge = "badge-danger"; }
+    else if (crcl < 30) { renalStage = "Severe Impairment (15–29 mL/min)"; stageBadge = "badge-danger"; }
+    else if (crcl < 60) { renalStage = "Moderate Impairment (30–59 mL/min)"; stageBadge = "badge-warning"; }
+    else if (crcl < 90) { renalStage = "Mild Impairment (60–89 mL/min)"; stageBadge = "badge-info"; }
+
+    var isFemale = String(sex).toLowerCase().indexOf("f") === 0;
+
+    return '<div class="ot-calc-shell">' +
+      '<div class="ot-calc-desc">Bedside Cockcroft-Gault CrCl &amp; Calvert Carboplatin dosing engine with ASCO/FDA/NCCN safety caps.</div>' +
+      (G.SMD_ONCO_ORGAN_DOSE && G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs ? (
+        '<div class="ot-calc-sync-row">' +
+          '<button type="button" class="ot-btn ghost sm ot-sync-btn" data-ot-act="calc-wardsync-fetch">' + ms("sync") + ' Fetch Patient Labs from WardSync EMR</button>' +
+        '</div>'
+      ) : '') +
+      '<div class="ot-calc-grid">' +
+        '<div class="ot-calc-f">' +
+          '<label>Patient Age (years)</label>' +
+          '<input type="number" data-ot-calc="age" min="1" max="120" value="' + esc(age) + '">' +
+        '</div>' +
+        '<div class="ot-calc-f">' +
+          '<label>Biological Sex</label>' +
+          '<select data-ot-calc="sex">' +
+            '<option value="male"' + (!isFemale ? ' selected' : '') + '>Male (x 1.0)</option>' +
+            '<option value="female"' + (isFemale ? ' selected' : '') + '>Female (x 0.85)</option>' +
+          '</select>' +
+        '</div>' +
+        '<div class="ot-calc-f">' +
+          '<label>Weight (kg)</label>' +
+          '<input type="number" data-ot-calc="weight" min="20" max="300" step="0.5" value="' + esc(weight) + '">' +
+        '</div>' +
+        '<div class="ot-calc-f">' +
+          '<label>Serum Creatinine (mg/dL)</label>' +
+          '<input type="number" data-ot-calc="scr" min="0.1" max="25" step="0.05" value="' + esc(scr) + '">' +
+        '</div>' +
+        '<div class="ot-calc-f ot-calc-f-wide">' +
+          '<label>Target Carboplatin AUC</label>' +
+          '<div class="ot-calc-auc-row">' +
+            '<input type="number" data-ot-calc="auc" min="1" max="10" step="0.5" value="' + esc(auc) + '">' +
+            '<div class="ot-auc-presets">' +
+              '<button type="button" class="ot-auc-tag' + (auc == 4 ? ' on' : '') + '" data-ot-act="set-auc" data-ot-val="4">AUC 4</button>' +
+              '<button type="button" class="ot-auc-tag' + (auc == 5 ? ' on' : '') + '" data-ot-act="set-auc" data-ot-val="5">AUC 5</button>' +
+              '<button type="button" class="ot-auc-tag' + (auc == 6 ? ' on' : '') + '" data-ot-act="set-auc" data-ot-val="6">AUC 6</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="ot-calc-cards">' +
+        '<div class="ot-res-card">' +
+          '<div class="ot-res-hd">' +
+            '<span class="ot-res-title">' + ms("water_drop") + ' Creatinine Clearance (CrCl)</span>' +
+            '<span class="badge ' + stageBadge + '" id="otCalcStageBadge">' + renalStage + '</span>' +
+          '</div>' +
+          '<div class="ot-res-val" id="otCalcCrclVal">' + round2(crcl) + ' <span class="ot-res-unit">mL/min</span></div>' +
+          '<div class="ot-res-sub">Cockcroft-Gault: ((140 - Age) × Weight) / (72 × SCr)' + (isFemale ? ' × 0.85' : '') + '</div>' +
+        '</div>' +
+
+        '<div class="ot-res-card highlight">' +
+          '<div class="ot-res-hd">' +
+            '<span class="ot-res-title">' + ms("medication") + ' Calvert Carboplatin Total Dose</span>' +
+            (calvert.isGfrCapped ? '<span class="badge badge-warning" id="otCalcCapBadge">GFR Capped at 125</span>' : '<span class="badge badge-info" id="otCalcCapBadge">Target AUC ' + auc + '</span>') +
+          '</div>' +
+          '<div class="ot-res-val ot-res-glow" id="otCalcDoseVal">' + round2(calvert.totalDoseMg) + ' <span class="ot-res-unit">mg</span></div>' +
+          '<div class="ot-res-sub" id="otCalcDoseSub">Calvert: Dose = AUC ' + auc + ' × (' + round2(calvert.gfrUsed) + ' + 25)' + (calvert.isGfrCapped ? ' · GFR capped at 125 mL/min per ASCO/FDA/NCCN safety guidance' : '') + '</div>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="ot-calc-alerts" id="otCalcAlerts">' +
+        (crcl < 45 ? '<div class="ot-alert danger">' + ms("warning") + ' <b>Cisplatin Contraindicated:</b> CrCl ' + round2(crcl) + ' mL/min is below 45 mL/min. Switch to Carboplatin dosed by Calvert formula.</div>' : (crcl < 60 ? '<div class="ot-alert warning">' + ms("info") + ' <b>Renal Caution:</b> CrCl ' + round2(crcl) + ' mL/min. For Cisplatin, reduce dose by 25% or switch to Carboplatin. For Capecitabine, reduce dose by 25%.</div>' : '<div class="ot-alert success">' + ms("verified") + ' <b>Normal Renal Function:</b> Standard cytotoxic dosing permitted without renal reduction.</div>')) +
+      '</div>' +
+      '</div>';
+  }
+
+  function updateCalvertCalc() {
+    var shell = D && D.querySelector(".ot-calc-shell");
+    if (!shell || !G.SMD_ONCO_ORGAN_DOSE) return;
+    var ageInp = shell.querySelector("[data-ot-calc='age']");
+    var sexInp = shell.querySelector("[data-ot-calc='sex']");
+    var wtInp = shell.querySelector("[data-ot-calc='weight']");
+    var scrInp = shell.querySelector("[data-ot-calc='scr']");
+    var aucInp = shell.querySelector("[data-ot-calc='auc']");
+
+    var age = Number(ageInp ? ageInp.value : 65) || 65;
+    var sex = (sexInp ? sexInp.value : "male") || "male";
+    var weight = Number(wtInp ? wtInp.value : 70) || 70;
+    var scr = Number(scrInp ? scrInp.value : 1.0) || 1.0;
+    var auc = Number(aucInp ? aucInp.value : 5.0) || 5.0;
+
+    var cg = G.SMD_ONCO_ORGAN_DOSE.calculateCockcroftGault({ age: age, weightKg: weight, serumCreatinine: scr, sex: sex });
+    var calvert = G.SMD_ONCO_ORGAN_DOSE.calculateCalvertCarboplatin({ targetAuc: auc, gfr: cg.crcl });
+
+    var crcl = cg.crcl || 0;
+    var renalStage = "Normal (≥ 90 mL/min)";
+    var stageBadge = "badge-success";
+    if (crcl < 15) { renalStage = "Kidney Failure (< 15 mL/min)"; stageBadge = "badge-danger"; }
+    else if (crcl < 30) { renalStage = "Severe Impairment (15–29 mL/min)"; stageBadge = "badge-danger"; }
+    else if (crcl < 60) { renalStage = "Moderate Impairment (30–59 mL/min)"; stageBadge = "badge-warning"; }
+    else if (crcl < 90) { renalStage = "Mild Impairment (60–89 mL/min)"; stageBadge = "badge-info"; }
+
+    var crclValEl = D.getElementById("otCalcCrclVal");
+    if (crclValEl) crclValEl.innerHTML = round2(crcl) + ' <span class="ot-res-unit">mL/min</span>';
+    var stageBadgeEl = D.getElementById("otCalcStageBadge");
+    if (stageBadgeEl) {
+      stageBadgeEl.className = "badge " + stageBadge;
+      stageBadgeEl.textContent = renalStage;
+    }
+
+    var doseValEl = D.getElementById("otCalcDoseVal");
+    if (doseValEl) doseValEl.innerHTML = round2(calvert.totalDoseMg) + ' <span class="ot-res-unit">mg</span>';
+    var capBadgeEl = D.getElementById("otCalcCapBadge");
+    if (capBadgeEl) {
+      if (calvert.isGfrCapped) {
+        capBadgeEl.className = "badge badge-warning";
+        capBadgeEl.textContent = "GFR Capped at 125";
+      } else {
+        capBadgeEl.className = "badge badge-info";
+        capBadgeEl.textContent = "Target AUC " + auc;
+      }
+    }
+    var doseSubEl = D.getElementById("otCalcDoseSub");
+    if (doseSubEl) {
+      doseSubEl.textContent = "Calvert: Dose = AUC " + auc + " × (" + round2(calvert.gfrUsed) + " + 25)" + (calvert.isGfrCapped ? " · GFR capped at 125 mL/min per ASCO/FDA/NCCN safety guidance" : "");
+    }
+
+    var alertsEl = D.getElementById("otCalcAlerts");
+    if (alertsEl) {
+      alertsEl.innerHTML = (crcl < 45
+        ? '<div class="ot-alert danger">' + ms("warning") + ' <b>Cisplatin Contraindicated:</b> CrCl ' + round2(crcl) + ' mL/min is below 45 mL/min. Switch to Carboplatin dosed by Calvert formula.</div>'
+        : (crcl < 60
+          ? '<div class="ot-alert warning">' + ms("info") + ' <b>Renal Caution:</b> CrCl ' + round2(crcl) + ' mL/min. For Cisplatin, reduce dose by 25% or switch to Carboplatin. For Capecitabine, reduce dose by 25%.</div>'
+          : '<div class="ot-alert success">' + ms("verified") + ' <b>Normal Renal Function:</b> Standard cytotoxic dosing permitted without renal reduction.</div>'));
+    }
+  }
+
   // ---- shell + paint -----------------------------------------------------------------------------
   function shellHtml() {
     var hasGraph = !!st.graph;
-    var title = hasGraph ? (st.graph.title || "ONCOTREE") : "Oncology navigator";
+    var title = hasGraph ? (st.graph.title || "ONCOTREE") : "Oncology Navigator";
     var viewToggle = hasGraph ? ('<div class="ot-viewtoggle">' +
       '<button class="ot-vt' + (st.view === "navigator" ? " on" : "") + '" data-ot-act="view-navigator">' + ms("account_tree") + "Navigator</button>" +
       '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" data-ot-act="view-pathway">' + ms("format_list_bulleted") + "Step Flow</button>" +
       '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" data-ot-act="view-map">' + ms("map") + "Overview</button>" +
+      '<button class="ot-vt ot-vt-stg" data-ot-act="open-staging" title="TNM Staging for this cancer">' + ms("stairs") + "Staging</button>" +
       '<button class="ot-vt ot-vt-act" data-ot-act="summary">' + ms("summarize") + "Summary</button></div>") : "";
     var kicker = hasGraph
       ? '<button class="ot-hkicker ot-hkicker-btn" data-ot-act="change-disease">' + ms("swap_horiz") + "Change cancer</button>"
-      : '<span class="ot-hkicker">ONCOTREE navigator</span>';
-    var rightBtn = hasGraph
-      ? '<button class="ot-hbtn" data-ot-act="reset" aria-label="Restart">' + ms("restart_alt") + "</button>"
-      : '<span class="ot-hbtn" aria-hidden="true"></span>';
+      : '<span class="ot-hkicker">STEWARDMD ONCOLOGY</span>';
+    var rightBtn = '<div class="ot-h-actions">' +
+      '<button type="button" class="ot-hbtn ot-hbtn-stg" data-ot-act="open-staging" aria-label="TNM Cancer Staging" title="TNM Cancer Staging">' + ms("stairs") + '</button>' +
+      '<button type="button" class="ot-hbtn ot-hbtn-calc" data-ot-act="open-calvert-calc" aria-label="Creatinine & Calvert Calculator" title="Creatinine & Calvert Calculator">' + ms("calculate") + '</button>' +
+      (hasGraph ? '<button class="ot-hbtn" data-ot-act="reset" aria-label="Restart">' + ms("restart_alt") + '</button>' : '<span class="ot-hbtn" aria-hidden="true" style="opacity:0;pointer-events:none;"></span>') +
+      '</div>';
+    var isNavScrollLocked = !!st.graph && !st.openedProtocol && !st.selection && (st.view === "navigator");
     return '<div class="ot-shell">' +
       '<header class="ot-header">' +
         '<button class="ot-hbtn" data-ot-act="close" aria-label="Close">' + ms("close") + "</button>" +
@@ -1204,8 +1574,9 @@
       "</header>" +
       viewToggle +
       crumbsHtml() +
-      '<div class="ot-scroll' + (st.view === "navigator" ? " ot-scroll-nav" : "") + '" id="otBody">' + bodyHtml() + "</div>" +
+      '<div class="ot-scroll' + (isNavScrollLocked ? " ot-scroll-nav" : "") + '" id="otBody">' + bodyHtml() + "</div>" +
       '<div class="ot-disclaimer">Decision support. DRAFT navigator + protocols. Not an approved clinical order; the physician decides and the existing dose engine computes doses.</div>' +
+      superpowerModalHtml() +
       "</div>";
   }
 
@@ -1314,21 +1685,145 @@
   // Search input: update only the results list so the field keeps focus (no full repaint per keystroke).
   function onInput(e) {
     var t = e.target;
-    if (!t || t.getAttribute("data-ot-input") !== "toc-search") return;
-    st.tocQuery = t.value || "";
-    var list = D && D.getElementById("otTocList"), state = evalState();
-    if (list && state) list.innerHTML = tocListHtml(state);
+    if (!t) return;
+    if (t.hasAttribute("data-ot-calc")) {
+      updateCalvertCalc();
+      return;
+    }
+    var inp = t.getAttribute("data-ot-input");
+    if (inp === "toc-search") {
+      st.tocQuery = t.value || "";
+      var list = D && D.getElementById("otTocList"), state = evalState();
+      if (list && state) list.innerHTML = tocListHtml(state);
+      return;
+    }
+    if (inp === "picker-search") {
+      st.pickerSearch = t.value || "";
+      var dList = D && D.getElementById("otDiseaseList");
+      if (dList) dList.innerHTML = diseaseCardsHtml();
+      var clearBtn = D && D.querySelector(".ot-search-clear");
+      if (clearBtn) clearBtn.style.display = st.pickerSearch ? "grid" : "none";
+      return;
+    }
   }
   function onClick(e) {
     var t = e.target && e.target.closest ? e.target.closest("[data-ot-act]") : null;
     if (!t) return;
     var act = t.getAttribute("data-ot-act");
     var node = t.getAttribute("data-ot-node"), opt = t.getAttribute("data-ot-opt"), proto = t.getAttribute("data-ot-proto");
-    if (act === "close") return close();
+    if (act === "close") {
+      if (st.openedProtocol) { st.openedProtocol = null; paint(); return; }
+      if (st.superpowerModal) { st.superpowerModal = null; try { renderSuperpowerModal(); } catch (e) {} paint(); return; }
+      if (st.graph) { st.graph = null; st.guideline = null; st.byId = {}; st.answers = {}; st.protocols = {}; st.openedProtocol = null; st.selection = null; st.view = "navigator"; paint(); return; }
+      close(); return;
+    }
     if (act === "pick") { loadGuideline(t.getAttribute("data-ot-guideline")); return; }
-    if (act === "change-disease") { st.graph = null; st.guideline = null; st.byId = {}; st.answers = {}; st.protocols = {}; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.view = "navigator"; paint(); return; }
+    if (act === "change-disease") {
+      st.graph = null; st.guideline = null; st.byId = {}; st.answers = {}; st.protocols = {};
+      st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.view = "navigator";
+      st.pickerSearch = ""; st.pickerCategory = "all";
+      st.superpowerModal = null;
+      renderSuperpowerModal();
+      paint(); return;
+    }
+    if (act === "picker-filter") {
+      var cat = t.getAttribute("data-ot-cat") || "all";
+      st.pickerCategory = cat;
+      var tabs = D && D.querySelectorAll(".ot-tab-chip");
+      if (tabs) {
+        for (var i = 0; i < tabs.length; i++) {
+          if (tabs[i].getAttribute("data-ot-cat") === cat) tabs[i].classList.add("on");
+          else tabs[i].classList.remove("on");
+        }
+      }
+      var dList = D && D.getElementById("otDiseaseList");
+      if (dList) dList.innerHTML = diseaseCardsHtml();
+      return;
+    }
+    if (act === "picker-clear-search") {
+      st.pickerSearch = "";
+      var pInp = D && D.querySelector("[data-ot-input='picker-search']");
+      if (pInp) { pInp.value = ""; pInp.focus(); }
+      var pClearBtn = D && D.querySelector(".ot-search-clear");
+      if (pClearBtn) pClearBtn.style.display = "none";
+      var dList2 = D && D.getElementById("otDiseaseList");
+      if (dList2) dList2.innerHTML = diseaseCardsHtml();
+      return;
+    }
+    if (act === "open-staging") {
+      var gid = (st.guideline || (st.graph && st.graph.id) || "").toLowerCase();
+      var map = {
+        cervical: "cervix",
+        anal: "anus",
+        rcc: "kidney",
+        headneck: "oral_cavity",
+        cutaneous_melanoma: "melanoma",
+        rectal: "colorectal"
+      };
+      var siteId = map[gid] || gid;
+      if (window.SMD_ONCOSTAGING) {
+        if (siteId && SMD_ONCOSTAGING.open) {
+          SMD_ONCOSTAGING.open(siteId);
+        } else if (SMD_ONCOSTAGING.openList) {
+          SMD_ONCOSTAGING.openList();
+        }
+      } else if (G.toast) {
+        G.toast("Cancer Staging loading…");
+      }
+      return;
+    }
+    if (act === "open-calvert-calc") {
+      var initialParams = { patient: (st.ctx && st.ctx.patient) || {} };
+      st.superpowerModal = {
+        title: "Creatinine Clearance & Calvert Carboplatin Calculator",
+        html: calvertCalcHtml(initialParams)
+      };
+      renderSuperpowerModal();
+      return;
+    }
+    if (act === "set-auc") {
+      var val = t.getAttribute("data-ot-val");
+      var aucInp = D && D.querySelector("[data-ot-calc='auc']");
+      if (aucInp) { aucInp.value = val; updateCalvertCalc(); }
+      var tags = D && D.querySelectorAll(".ot-auc-tag");
+      if (tags) {
+        for (var k = 0; k < tags.length; k++) {
+          if (tags[k].getAttribute("data-ot-val") === val) tags[k].classList.add("on");
+          else tags[k].classList.remove("on");
+        }
+      }
+      return;
+    }
+    if (act === "calc-wardsync-fetch") {
+      if (G.SMD_ONCO_ORGAN_DOSE && G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs) {
+        var wsq = G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs(G);
+        if (wsq && (wsq.patient || wsq.vitals || wsq.labs)) {
+          if (wsq.vitals) {
+            if (wsq.vitals.age) { var aInp = D.querySelector("[data-ot-calc='age']"); if (aInp) aInp.value = wsq.vitals.age; }
+            if (wsq.vitals.sex) { var sInp = D.querySelector("[data-ot-calc='sex']"); if (sInp) sInp.value = wsq.vitals.sex; }
+            if (wsq.vitals.weightKg) { var wInp = D.querySelector("[data-ot-calc='weight']"); if (wInp) wInp.value = wsq.vitals.weightKg; }
+          }
+          if (wsq.labs && wsq.labs.serumCreatinine != null) {
+            var scInp = D.querySelector("[data-ot-calc='scr']"); if (scInp) scInp.value = wsq.labs.serumCreatinine;
+          }
+          updateCalvertCalc();
+          if (G.toast) G.toast("Imported patient labs & vitals from WardSync EMR.");
+        } else {
+          if (G.toast) G.toast("No active WardSync patient in EMR session.");
+        }
+      }
+      return;
+    }
     if (act === "retry") { st.error = null; if (st.guideline) loadGuideline(st.guideline); else paint(); return; }
-    if (act === "reset") { st.answers = {}; st.rebaseId = null; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.navEndModalOpen = false; st.lastEndStepNode = null; st.lastEndStepOpt = null; st.lastEndStepPressCount = 0; repaintBody(); if (st.view === "navigator") navAutoScroll(); return; }
+    if (act === "reset") {
+      st.answers = {}; st.rebaseId = null; st.openedProtocol = null; st.selection = null; st.whyOpen = {};
+      st.navEndModalOpen = false; st.lastEndStepNode = null; st.lastEndStepOpt = null; st.lastEndStepPressCount = 0;
+      st.superpowerModal = null;
+      renderSuperpowerModal();
+      repaintBody();
+      if (st.view === "navigator") navAutoScroll();
+      return;
+    }
     if (act === "view-navigator") { st.view = "navigator"; paint(); return; }
     if (act === "view-pathway") { st.view = "pathway"; paint(); return; }
     if (act === "view-map") { st.view = "map"; paint(); return; }
@@ -1384,6 +1879,114 @@
     if (act === "view-proto") { st.openedProtocol = proto; paint(); return; }
     if (act === "close-proto") { st.openedProtocol = null; paint(); return; }
     if (act === "proto-maker") { if (G.SMD_PROTOMAKER) { var c0 = st.ctx || {}; G.SMD_PROTOMAKER.open({ patient: { name: c0.name || "", age: c0.age || null, sex: c0.sex || "", heightCm: c0.heightCm || null, weightKg: c0.weightKg || null, diagnosis: c0.diagnosis || "" } }); } return; }
+
+    if (act === "superpower-modal-close") {
+      st.superpowerModal = null;
+      renderSuperpowerModal();
+      return;
+    }
+    if (act === "compare-protos") {
+      var nId = (t.getAttribute("data-ot-node") || "").trim();
+      var nodeObj = st.byId[nId];
+      var refs = asArr(nodeObj && nodeObj.protocolRefs);
+      var protos = refs.map(function(r) { return st.protocols[r]; }).filter(Boolean);
+      if (G.SMD_ONCO_COMPARE && protos.length) {
+        var html = G.SMD_ONCO_COMPARE.renderComparisonTable(protos);
+        st.superpowerModal = { title: "Head-to-Head Regimen Comparison (" + protos.length + " Regimens)", html: html };
+        renderSuperpowerModal();
+      }
+      return;
+    }
+    if (act === "cycle-timeline") {
+      var pObj = resolveProto(proto);
+      if (!pObj) { superpowerNotice("Patient Cycle Calendar & Nadir Timeline", ["The protocol data for this regimen is still loading.", "Wait a moment for the pathway to finish loading, then tap Cycle Timeline again."]); return; }
+      if (!G.SMD_ONCO_TIMELINE) { superpowerNotice("Patient Cycle Calendar & Nadir Timeline", ["The cycle-timeline tool is still loading.", "Try again in a moment."]); return; }
+      try {
+        var tl = G.SMD_ONCO_TIMELINE.generateCycleTimeline(pObj);
+        var html = G.SMD_ONCO_TIMELINE.renderTimelineHtml(tl);
+        st.superpowerModal = { title: "Patient Cycle Calendar & Nadir Timeline", html: html };
+        renderSuperpowerModal();
+      } catch (e2) { superpowerNotice("Patient Cycle Calendar & Nadir Timeline", ["Could not build the timeline for this regimen.", String((e2 && e2.message) || e2)]); }
+      return;
+    }
+    if (act === "organ-dose-check") {
+      var pObj = resolveProto(proto);
+      if (!pObj) { superpowerNotice("Organ Function & Calvert Dosing", ["The protocol data for this regimen is still loading.", "Wait a moment for the pathway to finish loading, then tap Organ Dose again."]); return; }
+      if (!G.SMD_ONCO_ORGAN_DOSE) { superpowerNotice("Organ Function & Calvert Dosing", ["The organ-dose tool is still loading.", "Try again in a moment."]); return; }
+      try {
+        var c = st.ctx || {};
+        var labs = { crcl: c.crcl || 45, totalBili: c.totalBili || 2.2, anc: c.anc || 1800, platelets: c.platelets || 150000 };
+        var calcDoses = {};
+        asArr(pObj.drugs).forEach(function(d) { calcDoses[d.id] = d.dosePerUnit || 100; });
+        var ev = G.SMD_ONCO_ORGAN_DOSE.evaluateOrganDoseModifications(pObj, labs, calcDoses);
+        var h = "<div class=\"ot-organ-eval\"><h4>Renal & Hepatic Dose Modifications</h4>";
+        h += "<p class=\"text-muted small\">Evaluated for <b>" + esc(pObj.name || proto) + "</b> against labs: CrCl " + labs.crcl + " mL/min, Total Bili " + labs.totalBili + " mg/dL</p>";
+        if (ev.hasModifications) {
+          h += "<table class=\"ot-compare-table\"><thead><tr><th>Drug</th><th>Condition</th><th>Recommended Adjustment</th><th>Citation</th></tr></thead><tbody>";
+          ev.adjustments.forEach(function(a) {
+            h += "<tr><td><b>" + esc(a.drugName) + "</b></td><td>" + esc(a.organ) + " impairment (" + esc(a.metric) + ")</td><td><span class=\"badge badge-warning\">" + a.recommendedPercent + "% dose</span><br>" + esc(a.text) + "</td><td class=\"small text-muted\">" + esc(a.citation) + "</td></tr>";
+          });
+          h += "</tbody></table>";
+        } else {
+          h += "<div class=\"legend\">No mandatory organ dose reductions triggered for standard lab values.</div>";
+        }
+        h += "</div>";
+        h += '<div class="ot-organ-calc-divider"></div>';
+        h += '<h4 style="margin:14px 0 6px;font-size:15px;font-weight:700;">Interactive Bedside Calculator</h4>';
+        h += calvertCalcHtml({
+          age: c.age || 65,
+          sex: c.sex || "male",
+          weight: c.weightKg || 70,
+          scr: c.serumCreatinine || 1.1,
+          auc: (asArr(pObj.drugs).find(function(d) { return d.basis === "auc"; }) || {}).dosePerUnit || 5
+        });
+        st.superpowerModal = { title: "Organ Function & Calvert Dosing (" + esc(pObj.name || proto) + ")", html: h };
+        renderSuperpowerModal();
+      } catch (e3) { superpowerNotice("Organ Function & Calvert Dosing", ["Could not evaluate organ dosing for this regimen.", String((e3 && e3.message) || e3)]); }
+      return;
+    }
+    if (act === "ddi-check") {
+      var pObj = resolveProto(proto);
+      if (!pObj) { superpowerNotice("DDI & QTc Interaction Sentry", ["The protocol data for this regimen is still loading.", "Wait a moment for the pathway to finish loading, then tap DDI Sentry again."]); return; }
+      if (!G.SMD_ONCO_DDI) { superpowerNotice("DDI & QTc Interaction Sentry", ["The interaction sentry is still loading.", "Try again in a moment."]); return; }
+      try {
+        var sampleMeds = ["voriconazole", "ondansetron", "levofloxacin", "omeprazole"];
+        var ddi = G.SMD_ONCO_DDI.auditDrugInteractions(pObj, sampleMeds);
+        var h = "<div class=\"ot-ddi-eval\"><h4>Oncology Drug-Drug & QTc Interaction Audit</h4>";
+        h += "<p class=\"text-muted small\">Co-medications checked: " + sampleMeds.join(", ") + "</p>";
+        if (ddi.alertCount > 0) {
+          h += "<table class=\"ot-compare-table\"><thead><tr><th>Severity</th><th>Regimen Drug</th><th>Co-medication</th><th>Clinical Effect & Management</th></tr></thead><tbody>";
+          ddi.alerts.forEach(function(a) {
+            var bCls = a.severity === "major" ? "badge-danger" : "badge-warning";
+            h += "<tr><td><span class=\"badge " + bCls + "\">" + esc(a.severity) + "</span></td><td><b>" + esc(a.oncoDrug) + "</b></td><td>" + esc(a.interactingMeds.join(", ")) + "</td><td><b>" + esc(a.category) + "</b><br>" + esc(a.clinicalEffect) + "<br><em>" + esc(a.management) + "</em></td></tr>";
+          });
+          h += "</tbody></table>";
+        } else {
+          h += "<div class=\"legend\">No major or contraindicated interactions detected with current medication profile.</div>";
+        }
+        h += "</div>";
+        st.superpowerModal = { title: "DDI & QTc Interaction Sentry", html: h };
+        renderSuperpowerModal();
+      } catch (e4) { superpowerNotice("DDI & QTc Interaction Sentry", ["Could not audit interactions for this regimen.", String((e4 && e4.message) || e4)]); }
+      return;
+    }
+    if (act === "genomics-drawer") {
+      if (!G.SMD_ONCO_GENOMICS) { superpowerNotice("Molecular Tumor Board & Precision Matcher", ["The genomics matcher is still loading.", "Try again in a moment."]); return; }
+      try {
+        var profile = [{ gene: "EGFR", alteration: "L858R" }, { gene: "BRAF", alteration: "V600E" }, { gene: "MMR", alteration: "dMMR / MSI-H" }];
+        var gm = G.SMD_ONCO_GENOMICS.matchActionableTargets(profile, st.guideline);
+        var h = "<div class=\"ot-genomics-eval\"><h4>Actionable Genomic Biomarkers & Precision Therapies</h4>";
+        h += "<table class=\"ot-compare-table\"><thead><tr><th>Biomarker</th><th>Alteration</th><th>Category 1 Targeted Therapy</th><th>Evidence Level</th></tr></thead><tbody>";
+        gm.matches.forEach(function(m) {
+          h += "<tr><td><b>" + esc(m.gene) + "</b></td><td>" + esc(m.alteration) + "</td><td>" + esc(m.recommendedTherapies.join(", ")) + "</td><td><span class=\"badge badge-info\">" + esc(m.evidenceLevel) + "</span></td></tr>";
+        });
+        h += "</tbody></table></div>";
+        st.superpowerModal = { title: "Molecular Tumor Board & Precision Matcher", html: h };
+        renderSuperpowerModal();
+      } catch (e5) { superpowerNotice("Molecular Tumor Board & Precision Matcher", ["Could not match genomic targets right now.", String((e5 && e5.message) || e5)]); }
+      return;
+    }
+
     if (act === "proto-sheet") { openProtocolSheet(proto); return; }
     if (act === "select-proto") { selectProtocol(proto); return; }
     if (act === "back-pathway") { st.selection = null; st.openedProtocol = null; paint(); return; }
@@ -1491,21 +2094,26 @@
   // chart so the dose engine can compute per-drug totals. Assign routes back through the same handoff event.
   function openProtocolSheet(ref) {
     if (!G.SMD_PROTOSHEET) { try { G.toast && G.toast("Protocol sheet unavailable."); } catch (e) {} return; }
-    var p = st.protocols[ref]; if (!p) return;
+    var p = st.protocols[ref] || ref;
     var c = st.ctx || {};
     var today = "";
     try { var d = new (G.Date)(); today = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); } catch (e2) {}
     var patient = {
       caseNo: c.caseNo || c.patientId || "", name: c.name || "", age: c.age || null, sex: c.sex || "",
       heightCm: c.heightCm || null, weightKg: c.weightKg || null,
-      diagnosis: c.diagnosis || st.guideline || "", intent: (asArr(p.intentOptions)[0] || ""), consultant: c.consultant || ""
+      creatinine: c.creatinine || c.serumCreatinine || null,
+      diagnosis: c.diagnosis || st.guideline || "", intent: (asArr(p && p.intentOptions)[0] || ""), consultant: c.consultant || ""
     };
-    G.SMD_PROTOSHEET.open(p, patient, {
-      today: today,
-      onAssign: function (payload) {
-        try { if (D && D.dispatchEvent) D.dispatchEvent(new CustomEvent("smd-oncotree-select", { detail: { protocolId: ref, template: p, patient: payload.patient, protocolSheet: payload } })); } catch (e3) {}
-      }
-    });
+    try {
+      G.SMD_PROTOSHEET.open(p, patient, {
+        today: today,
+        onAssign: function (payload) {
+          try { if (D && D.dispatchEvent) D.dispatchEvent(new CustomEvent("smd-oncotree-select", { detail: { protocolId: ref, template: (typeof p === "object" ? p : null), patient: payload.patient, protocolSheet: payload } })); } catch (e3) {}
+        }
+      });
+    } catch (err) {
+      try { G.toast && G.toast("Error opening protocol sheet: " + (err && err.message ? err.message : err)); } catch (e4) {}
+    }
   }
 
   // Hand off to the EXISTING oncology workflow. Emits a CustomEvent the host (opd-emr / onco home) can
@@ -1556,7 +2164,7 @@
     if (!G.fetch) { st.error = "Navigator unavailable in this environment."; paint(); return; }
     // fresh disease: clear all per-disease state so nothing from a prior disease leaks
     st.guideline = id; st.graph = null; st.byId = {}; st.answers = {}; st.protocols = {};
-    st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.showExcluded = false; st.view = "pathway"; st.rebaseId = null;
+    st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.showExcluded = false; st.view = "pathway"; st.rebaseId = null; st.superpowerModal = null;
     st.loading = true; st.error = null; paint();
     G.fetch("/kb/oncotree/" + encodeURIComponent(id) + ".json").then(function (r) { return r.ok ? r.json() : null; })
       .then(function (graph) {
@@ -1591,7 +2199,7 @@
     if (!flagOn()) { try { G.toast && G.toast("ONCOTREE is off"); } catch (e) {} return; }
     if (!D) return;
     st.ctx = ctx || null;
-    st.view = "navigator";
+    st.view = (ctx && ctx.view) || "navigator";
     var el = D.getElementById("smdOncoTree");
     if (!el) {
       el = D.createElement("div"); el.id = "smdOncoTree"; el.className = "ot-overlay";
@@ -1605,10 +2213,26 @@
     else paint();                                             // show the disease picker (or the loaded disease on re-open)
   }
   function close() {
+    st.superpowerModal = null;
+    renderSuperpowerModal();
     var el = D && D.getElementById("smdOncoTree");
     if (el) el.style.display = "none";
     if (D && D.body) D.body.classList.remove("ot-open");
+    try { if (D && D.getElementById("smdOncoHome") && D.getElementById("smdOncoHome").classList.contains("on") && G.SMD_ONCOHOME && G.SMD_ONCOHOME.foreground) G.SMD_ONCOHOME.foreground(); } catch (e) {}
   }
+
+  // React Bits Spotlight tracking: calculates cursor/pointer offset for luminous gradients
+  try {
+    if (typeof document !== "undefined") {
+      document.addEventListener("pointermove", function (e) {
+        var card = e.target && e.target.closest ? e.target.closest(".ot-spotlight-card, .ot-opt, .ot-node-card, .ot-proto-card, .ot-hero-card, .ot-super-card, .ot-disease, .ot-flow-card, .ot-flow-opt-card, .ot-step, .ot-flow-proto-card, .ot-btn") : null;
+        if (!card) return;
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", (e.clientX - r.left) + "px");
+        card.style.setProperty("--mouse-y", (e.clientY - r.top) + "px");
+      }, { passive: true });
+    }
+  } catch (e) {}
 
   var API = {
     open: open, close: close, _evalState: evalState, _bodyHtml: bodyHtml, _st: st,

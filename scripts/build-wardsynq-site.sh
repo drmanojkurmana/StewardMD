@@ -32,9 +32,11 @@ cp -R "$ROOT/wardsynq/site/i18n" "$OUT/wardsynq/site/i18n"
 # opened), every Material Symbols ligature printed as its own name — "medicationMedications",
 # "fact_checkProvenance" — and the print stylesheet was absent, which is why the printed PDF came out
 # as unstyled running text. One file, four symptoms.
-for f in hospital-auth.js ward.js ward-offline.js ward.css discharge.js discharge.css patient-register.js patient-register.css opd.html opd-display.html; do
+for f in hospital-auth.js ward.js ward-offline.js ward-labels.js ward.css discharge.js discharge.css patient-register.js patient-register.css opd.html opd-display.html; do
   cp "$ROOT/$f" "$OUT/$f"
 done
+# The QR encoder (MIT, vendored) the Patients page draws ABDM Scan and Share counter QR codes with.
+mkdir -p "$OUT/vendor" && cp "$ROOT/vendor/qrcode-generator.js" "$OUT/vendor/qrcode-generator.js"
 # The order-safety workstation and the WardSynQ client libraries it imports.
 cp "$ROOT/wardsynq/ui/"* "$OUT/wardsynq/ui/" 2>/dev/null || true
 cp -R "$ROOT/wardsynq/ui/brand" "$OUT/wardsynq/ui/brand"

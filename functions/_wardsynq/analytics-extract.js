@@ -36,7 +36,7 @@
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -143,16 +143,16 @@ async function extract(request, env, ctx) {
   const { svc, error } = await open_(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, groups: [] };
 
+  /* Every record of each type (service.listAll, paged). Past READ_MAX an extract is refused (409), never exported short.
+   * ponytail: each page re-groups every version; audit O20 is the upgrade. */
+  const READ_MAX = 50000;
+  const every = (t) => svc.listAll(t, { max: READ_MAX, throwOnTruncate: true }).then((g) => g.rows, (e) => { if (e instanceof ListCeilingError) throw e; return []; });
   let encounters, administrations, reports, loops, overrides;
   try {
-    [encounters, administrations, reports, loops, overrides] = await Promise.all([
-      svc.list("Encounter", 1000).catch(() => []),
-      svc.list("MedicationAdministration", 1000).catch(() => []),
-      svc.list("DiagnosticReport", 1000).catch(() => []),
-      svc.list("CriticalResultLoop", 1000).catch(() => []),
-      svc.list("SafetyOverride", 1000).catch(() => []),
-    ]);
+    [encounters, administrations, reports, loops, overrides] = await Promise.all(
+      ["Encounter", "MedicationAdministration", "DiagnosticReport", "CriticalResultLoop", "SafetyOverride"].map(every));
   } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 409, error: "too_many_records", detail: str(e.message), groups: [] };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), groups: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), groups: [] };
   }

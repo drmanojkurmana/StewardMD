@@ -36,7 +36,11 @@ test('redaction: the phone never stores an id in a page url and the server never
   assert.equal(redactPathValues('https://ghis.example/Radio/Home?recordNo=MR25168764'), 'https://ghis.example/Radio/Home?recordNo={id}');
 });
 
-test('readPatientDetails skips the shared Doctor Home for medications, reads the medicines call with a fallback selector, and reads labs by recordNo', async () => {
+/* WAS: "skips the shared Doctor Home for medications, reads the medicines call with a fallback
+ * selector, and reads labs by recordNo" - the page fallback it asserted is gone (owner, 2026-09-16: a
+ * patient read never opens a hospital page). These views carry no proof, so the read now reports them
+ * unreadable and loads nothing; a proven view's endpoint replay is covered in phone-runtime.test.mjs. */
+test('readPatientDetails opens no page for an unproven view: it reports it unreadable', async () => {
   const visited = [];
   const pages = {
     [ORIGIN + '/Doctor/Home/GetMedicines/?id=MR25168764']: { table: [{ 'Prod. Code': 'P1', 'Drug Name': 'Amoxicillin', Route: 'PO', Dosage: '500 mg', Qty: '1', Freq: 'TDS' }] },
@@ -56,11 +60,7 @@ test('readPatientDetails skips the shared Doctor Home for medications, reads the
     },
   };
   const sections = await readPatientDetails({ plugin, origin: ORIGIN, replay: REPLAY, patient, settleMs: 0, maxWaitMs: 5 });
-  const meds = sections.find((s) => s.resource === 'medications');
-  assert.equal(meds.rows[0]['Drug Name'], 'Amoxicillin');
-  assert.ok(!visited.includes(ORIGIN + '/Doctor/Home'), 'the shared worklist page was not re-read for medications');
-  assert.ok(visited.includes(ORIGIN + '/Doctor/Home/GetMedicines/?id=MR25168764'));
-  const labs = sections.find((s) => s.resource === 'labs');
-  assert.equal(labs.rows[0].Test, 'Hb');
-  assert.ok(visited.includes(ORIGIN + '/LabResults/Home?recordNo=MR25168764'));
+  assert.deepEqual(sections.find((s) => s.resource === 'medications'), { resource: 'medications', unreadable: 'not-proven' });
+  assert.deepEqual(sections.find((s) => s.resource === 'labs'), { resource: 'labs', unreadable: 'not-proven' });
+  assert.deepEqual(visited, [], 'no hospital page was loaded for an unproven view');
 });

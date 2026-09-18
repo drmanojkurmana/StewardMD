@@ -30,26 +30,41 @@
 // crawl reports these as stopReason 'login-required' / 'session-expired-or-shell' instead of silently
 // producing zero views. Ids that embed a date or a visit number (`#hospital_accordion_<date>_<visit>`)
 // are UNSTABLE and never used as selector anchors, and never leave the page.
+//
+// (prove.mjs imports redactEndpoints/scrubForBrain from here; this import back is a cycle ESM resolves,
+// because neither side touches the other's bindings at module top level.)
+import { navToReplayEntries, INJECT_REPLAY_SRC } from './prove.mjs';
+
 const CAPS_DEFAULT = { maxViews: 40, maxClicks: 60, maxMs: 240000, waitMs: 1500 };
 // A page with no <th>+row data table and less text than this is a dead shell, not a worklist.
 const SHELL_TEXT_MAX = 600;
+const SHELL_RECHECKS = 3;
 
 // ponytail: flat keyword list, no NLP/fuzzy matching — good enough for the GHIS-style nav labels this
 // targets; widen the list (or move to a config) if a hospital's labels don't match.
-const CLINICAL_KEYWORDS_SRC =
+export const CLINICAL_KEYWORDS_SRC =
   'medic|drug|\\blabs?\\b|laborator|investigat|result|radiolog|imaging|x.?ray|scan|history|discharge|summary|' +
   'demographic|patient.?details|patient.?profile|profile|encounter|visit|\\bnote|report|diagnos|record';
 
 // Never click anything that could write, print, send, sign out or leave the module. Matched against the
 // control's visible label (case-insensitive). Read-only is the whole contract of this crawler.
-const SKIP_SRC =
+export const SKIP_SRC =
   'log.?out|sign.?out|log.?off|delete|remove|\\bsave|submit|update|\\bedit|\\badd\\b|\\bnew\\b|create|' +
   'order|prescri|upload|attach|send|\\bsms|whatsapp|mail|print|export|download|cancel|\\bclose|\\bback\\b|' +
   '\\bhome\\b|refresh|reload|\\bapps?\\b|switch|password|settings|transfer|admit|approve|reject|confirm|' +
   '×|✕|\\bpay|bill|discharge\\s+(the\\s+)?patient|clear|reset|select\\s+all|verify|sign\\b|finali[sz]e|complete';
 
-// Controls that switch which patient list is shown (tabs and menu items on a worklist page).
-const LIST_CONTROL = /^(in|ip|inpatients?)\s*-?\s*(patients?|work\s*list|worklist)?$|^(ip|in\s*patient|ward|my\s*patients?)\s*(work\s*list|worklist|list)?$|^all\s*patients$|^admitted/i;
+// Controls that switch which patient list is shown (tabs and menu items on a worklist page): the doctor's
+// own in-patient list, the hospital-wide IP worklist, and the other queues that are patient lists too
+// (GHIS: "In patients" | "Out patients" | "Emergency" | "IP worklist" under Administration).
+export const LIST_CONTROL = /^(in|ip|inpatients?)\s*-?\s*(patients?|work\s*list|worklist)?$|^(ip|in\s*patient|ward|my\s*patients?)\s*(work\s*list|worklist|list)?$|^all\s*patients$|^admitted|^out\s*-?\s*patients?$|^opd$|^emergency$|^casualty$/i;
+
+// A list-control tab can land on a FILTER FORM (Patient ID, Floor, Nursing station, Department, Doctor)
+// over an EMPTY table instead of the list itself (GHIS "IP worklist"); this is the tight, exact, read-only
+// label of the control that reveals the list when every field is left blank. Never widen past an exact
+// match - the SKIP_SRC denylist already keeps a patient form's "Submit" (which SAVES a record) off any
+// control list, but the exact match is a second guard against ever pressing it.
+const LIST_SEARCH_CONTROL = /^(search|show|go|find|filter|display|list|view\s*list|get\s*list)$/i;
 
 const HINT_RULES = [
   /* Indian hospital EMRs rarely say "medications": GHIS and its peers label the same chart
@@ -176,6 +191,8 @@ export function buildTableView(raw, resourceHint, pathTemplate) {
   const view = { resourceHint, pathTemplate, method: 'GET', rowsSelector, headers, singleRecord: dataRows.length < 1 };
   if (onclickTemplate) view.onclickTemplate = onclickTemplate;
   if (confidence === 'low') view.confidence = 'low';
+  // Which frame the table was in. Absent or empty means the top document, which is the usual case.
+  if (Array.isArray(raw.framePath) && raw.framePath.length) view.framePath = raw.framePath.slice(0, 3);
   return view;
 }
 
@@ -335,7 +352,22 @@ function CRAWL_RAW_TABLE() {
   var obs = window.__smdCrawlObs || null;
   if (obs && obs.mo) { obs.mo.disconnect(); obs.mo = null; }
   var pointed = window.__smdPointed; // the table the doctor tapped inside during an ask wins outright
-  var tables = (pointed && pointed.isConnected && pointed.tagName === 'TABLE') ? [pointed] : document.querySelectorAll('table');
+  /* EVERY FRAME, NOT JUST THIS DOCUMENT: in a frameset EMR the ward list is never in the top one.
+   * framePath records which frame the winner came from so it can be found again on a later read. */
+  var tables = [];
+  var docs = CRAWL_DOCS();
+  var frameOf = function (el) {
+    for (var q = 0; q < docs.length; q++) { if (docs[q].doc.contains(el)) return docs[q].path; }
+    return [];
+  };
+  if (pointed && pointed.isConnected && pointed.tagName === 'TABLE') {
+    tables = [pointed];
+  } else {
+    for (var dd = 0; dd < docs.length; dd++) {
+      var found = docs[dd].doc.querySelectorAll('table');
+      for (var ff = 0; ff < found.length; ff++) tables.push(found[ff]);
+    }
+  }
   var DAY = /^(su|mo|tu|we|th|fr|sa|sun|mon|tue|wed|thu|fri|sat)$/i;
   var FORM_HINT = /\b(entry|requisition)\b/i;
   var LABEL_WORD = /name|date|code|route|dos|qty|quant|freq|dur|test|result|unit|type|status|remark|desc|no\b|s\.?no|sl\b|#|time|value|range|method|dept|ward|bed|age|sex|gender|doctor|drug|medic|diagnos|advice|report|title|subject|category|notes?\b|comment/i;
@@ -395,7 +427,11 @@ function CRAWL_RAW_TABLE() {
   // 1 = inside (or is) a subtree the last click added/re-styled, or newly added / newly visible.
   function changedBy(t) {
     if (!obs) return 0;
-    for (var c = 0; c < obs.changed.length; c++) { if (obs.changed[c] === t || obs.changed[c].contains(t)) return 1; }
+    /* A LIST THAT REFILLS ITSELF CHANGED. Checking only the table and its ancestors misses the common
+     * case: a blank Search that swaps the rows INSIDE the same <table> (live GHIS IP worklist went 0 ->
+     * 10 rows with the node identity unchanged, owner's session 2026-09-17), which read as "unchanged"
+     * and threw the freshly filled list away. A change anywhere inside the table is the table changing. */
+    for (var c = 0; c < obs.changed.length; c++) { if (obs.changed[c] === t || obs.changed[c].contains(t) || t.contains(obs.changed[c])) return 1; }
     for (var s = 0; s < obs.tables.length; s++) {
       if (obs.tables[s].el === t) return (!obs.tables[s].visible && isVisible(t)) ? 1 : 0;
     }
@@ -498,7 +534,8 @@ function CRAWL_RAW_TABLE() {
   // and the table's position among its parent's <table> children when a sibling table (header table)
   // shares the parent. Unstable ids are skipped over, not returned.
   var container = { id: '', class: '' };
-  for (var anc = best.parentElement; anc && anc !== document.body; anc = anc.parentElement) {
+  var bestBody = best.ownerDocument ? best.ownerDocument.body : document.body;
+  for (var anc = best.parentElement; anc && anc !== bestBody; anc = anc.parentElement) {
     if (anc.id && !UNSTABLE.test(anc.id)) { container = { id: anc.id, class: anc.getAttribute('class') || '' }; break; }
     if (!container.class && anc.getAttribute('class')) container.class = anc.getAttribute('class');
   }
@@ -511,7 +548,7 @@ function CRAWL_RAW_TABLE() {
   }
 
   var ownId = best.getAttribute('id') || '';
-  return JSON.stringify({ id: UNSTABLE.test(ownId) ? '' : ownId, class: best.getAttribute('class') || '', headers: headers, rows: rowInfos, container: container, tableNth: tableNth });
+  return JSON.stringify({ id: UNSTABLE.test(ownId) ? '' : ownId, class: best.getAttribute('class') || '', headers: headers, rows: rowInfos, container: container, tableNth: tableNth, framePath: frameOf(best) });
 }
 
 // Label/value REPORT BLOCK capture for a view with no data table (radiology report, discharge summary,
@@ -660,20 +697,101 @@ function CRAWL_RAW_BLOCK() {
 
 // PHI-free page state, read before the walk: only booleans and counts leave the page.
 // dataTableCount = tables with a <th> and at least one <td> row, calendars excluded.
+/* EVERY DOCUMENT THIS PAGE REALLY IS. A great many hospital systems are framesets: the top document
+ * holds nothing but <frameset>, and every clinical screen lives in a child frame. Looking only at
+ * `document` there finds no table, no text and no control, so the whole hospital read as a dead page.
+ * Returns the top document first, then each same-origin frame, depth first. A cross-origin frame
+ * throws on access and is skipped: it is not this hospital's, and never the agent's business.
+ * `path` is how a frame is found again later: a list of indexes from the top window. */
+function CRAWL_DOCS() {
+  var out = [];
+  var walk = function (win, path, depth) {
+    var doc = null;
+    try { doc = win.document; } catch (e) { return; } // cross-origin: not ours
+    if (!doc) return;
+    out.push({ doc: doc, win: win, path: path });
+    if (depth >= 3 || out.length > 24) return;
+    var kids = 0;
+    try { kids = win.frames.length; } catch (e) { return; }
+    for (var i = 0; i < kids; i++) {
+      try { walk(win.frames[i], path.concat([i]), depth + 1); } catch (e) { /* skip that frame */ }
+    }
+  };
+  walk(window, [], 0);
+  return out;
+}
+
 function CRAWL_PAGE_STATE() {
-  var tables = document.querySelectorAll('table');
+  var docs = CRAWL_DOCS();
   var dataTableCount = 0, anyVisible = false;
-  for (var i = 0; i < tables.length; i++) {
-    var t = tables[i];
-    if (t.getClientRects && t.getClientRects().length) anyVisible = true;
-    if (/datepicker|calendar/i.test((t.getAttribute('class') || '') + ' ' + (t.getAttribute('id') || ''))) continue;
-    if (t.querySelector('th') && t.querySelector('tr td')) dataTableCount++;
+  for (var d = 0; d < docs.length; d++) {
+    var tables = docs[d].doc.querySelectorAll('table');
+    for (var i = 0; i < tables.length; i++) {
+      var t = tables[i];
+      if (t.getClientRects && t.getClientRects().length) anyVisible = true;
+      if (/datepicker|calendar/i.test((t.getAttribute('class') || '') + ' ' + (t.getAttribute('id') || ''))) continue;
+      if (t.querySelector('th') && t.querySelector('tr td')) dataTableCount++;
+    }
+  }
+  /* AN EMR WITHOUT A <table> IS STILL AN EMR. Counting only tables and characters made every
+   * table-less screen look like a dead post-expiry shell, so a modern SPA worklist - divs rendered
+   * from JSON, a handful of links - was abandoned as "the browser was not on the EMR after sign-in".
+   * A way FURTHER IN is the signal that the page is alive, so count the controls that are not the
+   * way back OUT: a sign-in or log-out link is exactly what a dead shell has. */
+  var controls = 0;
+  var els = [];
+  for (var dc = 0; dc < docs.length; dc++) {
+    var found = docs[dc].doc.querySelectorAll('a[href], button, [role="button"], [role="tab"], [role="menuitem"]');
+    for (var f = 0; f < found.length; f++) els.push(found[f]);
+  }
+  for (var j = 0; j < els.length && controls < 6; j++) {
+    var el = els[j];
+    if (el.getClientRects && !el.getClientRects().length) continue;
+    var label = ((el.textContent || '') + ' ' + (el.getAttribute('aria-label') || '') + ' ' + (el.getAttribute('title') || '')).replace(/\s+/g, ' ').trim();
+    if (/\b(sign ?in|log ?in|log ?on|sign ?out|log ?out|log ?off)\b/i.test(label)) continue;
+    /* A LINK THAT GOES NOWHERE IS NOT A WAY IN. The expired GHIS shell keeps its whole nav bar, every
+     * item an <a href="#" onclick="return false"> that renders nothing; counting those would make a
+     * dead page look alive. Only a real destination counts. */
+    if (el.tagName === 'A') {
+      var href = el.getAttribute('href') || '';
+      if (!href || href.charAt(0) === '#' || /^javascript:/i.test(href)) continue;
+    }
+    controls++;
+  }
+  // Repeated siblings are how a SPA draws a list when it draws no table at all.
+  var lists = 0;
+  for (var dl = 0; dl < docs.length && lists < 3; dl++) {
+    var conts = docs[dl].doc.querySelectorAll('ul, ol, [role="list"], [role="grid"], [role="table"]');
+    for (var k = 0; k < conts.length && lists < 3; k++) if (conts[k].children && conts[k].children.length >= 3) lists++;
+  }
+  /* THE STRONGEST SIGNAL THAT A SCREEN IS ALIVE IS ITS OWN DATA CALL. Some worklists are a single
+   * empty div and a fetch; they have no table, no list and not one link, and no amount of looking at
+   * the DOM will say they are anything but dead. The replay buffer knows: a JSON answer carrying rows
+   * came back for this page. An expired shell's calls come back 401 or empty. */
+  var dataRows = 0;
+  try {
+    var R = window.__SMD_REPLAY__;
+    var list = (R && R.list) || [];
+    for (var n = list.length - 1; n >= 0 && n >= list.length - 40; n--) {
+      var sh = list[n] && list[n].shape;
+      if (sh && sh.kind === 'json' && sh.rows > 0) { dataRows += sh.rows; if (dataRows > 0) break; }
+    }
+  } catch (e) { /* no buffer on this page: fall back to the DOM signals */ }
+  var textLen = 0, hasPw = false;
+  for (var dt = 0; dt < docs.length; dt++) {
+    var b = docs[dt].doc.body;
+    textLen += ((b && b.innerText) || '').length;
+    if (docs[dt].doc.querySelector('input[type=password]')) hasPw = true;
   }
   return JSON.stringify({
-    textLen: ((document.body && document.body.innerText) || '').length,
-    hasPasswordInput: !!document.querySelector('input[type=password]'),
+    textLen: textLen,
+    hasPasswordInput: hasPw,
     dataTableCount: dataTableCount,
+    frames: docs.length - 1,
     anyVisible: anyVisible,
+    controls: controls,
+    lists: lists,
+    dataRows: dataRows,
   });
 }
 
@@ -684,7 +802,15 @@ function CRAWL_PAGE_STATE() {
 // Returns its index within `document.querySelectorAll('tr')`, or null.
 function CRAWL_FIND_PATIENT_ROW(genericClassSrc) {
   var GENERIC = new RegExp(genericClassSrc, 'i');
-  var trs = document.querySelectorAll('tr');
+  /* Rows across every frame, in one flat order. The clicker below builds the same list the same way,
+   * so an index means the same row to both - in a frameset EMR the ward list is never in the top
+   * document, and a row found there could not be clicked from here before. */
+  var trs = [];
+  var docs = CRAWL_DOCS();
+  for (var d = 0; d < docs.length; d++) {
+    var found = docs[d].doc.querySelectorAll('tr');
+    for (var f = 0; f < found.length; f++) trs.push(found[f]);
+  }
   var fallback = null;
   for (var i = 0; i < trs.length; i++) {
     var tr = trs[i];
@@ -707,7 +833,13 @@ function CRAWL_FIND_PATIENT_ROW(genericClassSrc) {
 }
 
 function CRAWL_CLICK_ROW(idx) {
-  var trs = document.querySelectorAll('tr');
+  // The same flat order the row finder used, frames included, so the index still means that row.
+  var trs = [];
+  var docs = CRAWL_DOCS();
+  for (var d = 0; d < docs.length; d++) {
+    var found = docs[d].doc.querySelectorAll('tr');
+    for (var f = 0; f < found.length; f++) trs.push(found[f]);
+  }
   var el = trs[idx];
   if (!el) return 'no-el';
   el.click();
@@ -726,7 +858,14 @@ function CRAWL_CLICK_ROW(idx) {
 function CRAWL_FIND_CONTROLS(keywordSrc, skipSrc, query) {
   var KW = new RegExp(keywordSrc, 'i');
   var SKIP = new RegExp(skipSrc, 'i');
-  var els = document.querySelectorAll(query);
+  // Every frame's controls in one flat order; the clicker below rebuilds it identically. A frameset
+  // EMR keeps its nav in one frame and the screen it opens in another.
+  var els = [];
+  var docsC = CRAWL_DOCS();
+  for (var dq = 0; dq < docsC.length; dq++) {
+    var hits = docsC[dq].doc.querySelectorAll(query);
+    for (var hq = 0; hq < hits.length; hq++) els.push(hits[hq]);
+  }
   var anyVisible = false;
   for (var v = 0; v < els.length && !anyVisible; v++) anyVisible = !!(els[v].getClientRects && els[v].getClientRects().length);
   var out = [];
@@ -736,18 +875,39 @@ function CRAWL_FIND_CONTROLS(keywordSrc, skipSrc, query) {
     if (/^(TR|TD|TH|TABLE|TBODY|THEAD|INPUT|SELECT|TEXTAREA|OPTION|FORM|BODY|HTML)$/.test(tag)) continue;
     if (tag === 'BUTTON' && (el.getAttribute('type') || '').toLowerCase() === 'submit') continue;
     /* A COLLAPSED MENU IS STILL THE MENU. On a phone the EMR's navbar folds away (GHIS: Medications,
-     * Investigations, Patient profile sit in a hidden .navbar-nav / .dropdown-menu), so a visible-only
-     * walk never reached labs or medications (Pixel, 2026-09-13). A hidden item with its own click
-     * handler inside a nav or dropdown menu is kept; el.click() runs its handler without opening it. */
+     * Investigations, Patient profile, and the hospital-wide "IP worklist" under Administration sit in
+     * a hidden .navbar-nav / .dropdown-menu), so a visible-only walk never reached labs, medications or
+     * the ward-wide list (Pixel, 2026-09-13; GHIS "IP worklist" is a plain <a href>, no onclick, owner
+     * 2026-09-16). A hidden item is kept when it has its own click handler (el.click() runs it without
+     * opening the menu) OR a real href (a plain link, not "#"/empty/javascript:void), inside a nav or
+     * dropdown menu; the SKIP denylist below still keeps Logout and the rest off the list. */
     if (anyVisible && !(el.getClientRects && el.getClientRects().length)) {
-      if (!el.hasAttribute('onclick') || !(el.closest && el.closest('nav,.navbar,.navbar-nav,.dropdown-menu,[class*=sidebar],[class*=side-menu],[class*=mega-me]'))) continue;
+      var hiddenHref = tag === 'A' ? (el.getAttribute('href') || '').trim() : '';
+      var hiddenHrefOk = !!hiddenHref && hiddenHref !== '#' && !/^javascript:\s*void\(/i.test(hiddenHref);
+      if (!(el.hasAttribute('onclick') || hiddenHrefOk) || !(el.closest && el.closest('nav,.navbar,.navbar-nav,.dropdown-menu,[class*=sidebar],[class*=side-menu],[class*=mega-me]'))) continue;
     }
     var text = (el.textContent || '').replace(/\s+/g, ' ').trim();
     if (!text || text.length > 80) continue;
     if (SKIP.test(text)) continue;
     if (tag === 'A') {
       var href = el.getAttribute('href') || '';
-      if (href && !/^(#|javascript:)/i.test(href) && !el.hasAttribute('onclick')) continue;
+      /* A LINK IS A WAY IN. Only in-page anchors (#, javascript:) and handler-bound ones were walked,
+       * which is fine for an EMR that opens its screens with onclick (GHIS does) and useless for one
+       * that opens them with a plain link - a frameset EMR navigates its content frame with
+       * <a href="..." target="main"> and nothing else, so labs and medications were unreachable.
+       * A link to this hospital is now followed; one that leaves it, opens a new window, downloads a
+       * file or starts a mail or phone client is not. The walk still undoes a navigation with
+       * history.back(), and the SKIP denylist above still keeps it off log out, print and the rest. */
+      if (href && !/^(#|javascript:)/i.test(href) && !el.hasAttribute('onclick')) {
+        if (/^(mailto:|tel:|sms:|blob:|data:)/i.test(href)) continue;
+        if (el.hasAttribute('download')) continue;
+        var sameSite = false;
+        try {
+          var dest = new URL(href, el.ownerDocument.location.href);
+          sameSite = dest.origin === el.ownerDocument.location.origin && /^https?:$/.test(dest.protocol);
+        } catch (e) { sameSite = false; }
+        if (!sameSite) continue;
+      }
       if (el.getAttribute('target') === '_blank') continue;
     }
     var onAttrs = '';
@@ -776,7 +936,13 @@ function CRAWL_FIND_CONTROLS(keywordSrc, skipSrc, query) {
 }
 
 function CRAWL_CLICK_CONTROL(idx, query) {
-  var els = document.querySelectorAll(query);
+  // The same flat order the control finder used, frames included.
+  var els = [];
+  var docs = CRAWL_DOCS();
+  for (var d = 0; d < docs.length; d++) {
+    var hits = docs[d].doc.querySelectorAll(query);
+    for (var h = 0; h < hits.length; h++) els.push(hits[h]);
+  }
   var el = els[idx];
   if (!el) return 'no-el';
   el.click();
@@ -787,7 +953,11 @@ function CRAWL_CLICK_CONTROL(idx, query) {
 // class, redacted label) into window.__smdGuidePath so the pattern can be replayed later. Values never
 // recorded: only the control's own short label with digit runs replaced.
 function CRAWL_ARM_GUIDE() {
-  window.__smdGuidePath = [];
+  /* KEEP THE TAPS ALREADY RECORDED. This is re-applied every couple of seconds while a question is on
+   * screen, so the capture survives a page load; clearing the path on every call wiped the doctor's
+   * walk continuously and left view.guidedPath empty at Done, which defeats the detail chain for a list
+   * they showed. CRAWL_GUIDE_PATH nulls it when the answer is read, so the next question starts fresh. */
+  if (!Array.isArray(window.__smdGuidePath)) window.__smdGuidePath = [];
   if (window.__smdGuideOff) { try { window.__smdGuideOff(); } catch (e) { /* ignore */ } }
   var handler = function (ev) {
     var el = ev.target && ev.target.nodeType === 1 ? ev.target : null;
@@ -828,11 +998,39 @@ function CRAWL_GUIDE_PATH() {
   return JSON.stringify(p.slice(0, 20));
 }
 
-const CONTROL_QUERY = 'a,button,li,div,span,p,label,h1,h2,h3,h4,h5,h6,[role=tab],[role=button],[data-toggle],[data-bs-toggle],[onclick]';
+export const CONTROL_QUERY = 'a,button,li,div,span,p,label,h1,h2,h3,h4,h5,h6,[role=tab],[role=button],[data-toggle],[data-bs-toggle],[onclick]';
 const ARM_OBSERVER_SRC = String(CRAWL_ARM_OBSERVER);
 const RAW_TABLE_SRC = String(CRAWL_RAW_TABLE);
 const RAW_BLOCK_SRC = String(CRAWL_RAW_BLOCK);
+const DOCS_SRC = String(CRAWL_DOCS);
+/* The page-realm functions are sent as source and cannot close over anything here, so a function that
+ * walks frames is handed its walker in the same expression. */
+export const withDocs = (fnSrc, args = '') => `(function(){ var CRAWL_DOCS = ${DOCS_SRC}; return (${fnSrc})(${args}); })()`;
 const PAGE_STATE_SRC = String(CRAWL_PAGE_STATE);
+/* A DISCLOSURE HIDES THE CHART MENU. On the live GHIS a patient record shows a handful of controls
+ * until "More.." is tapped; the whole clinical menu (Lab reports, Medications, Patient profile,
+ * Initial assessment) is behind it, so the crawl enumerated only what it could see and medications and
+ * labs stayed invisible - every run had to ask the doctor for them (owner's iPhone, runs 1-4,
+ * 2026-09-18). Only a pure show-more control matches: it must be the WHOLE label, so "More Medicines"
+ * and anything on the destructive list never do. */
+export const DISCLOSURE_LABEL = /^\s*(more|show\s+more|see\s+more|view\s+all|show\s+all)\s*\.{0,3}\s*$/i;
+
+function CRAWL_EXPAND_DISCLOSURES(reSrc, max) {
+  var body = String(reSrc);
+  var re = new RegExp(body.slice(body.indexOf('/') + 1, body.lastIndexOf('/')), 'i');
+  var all = [].slice.call(document.querySelectorAll('a,button,span,div,li,[onclick]'));
+  var opened = 0;
+  for (var i = 0; i < all.length && opened < max; i++) {
+    var el = all[i];
+    if (!el.getClientRects || !el.getClientRects().length) continue;
+    var txt = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!txt || txt.length > 20 || !re.test(txt)) continue;
+    try { el.click(); opened++; } catch (e) { /* ignore */ }
+  }
+  return String(opened);
+}
+const EXPAND_DISCLOSURES_SRC = String(CRAWL_EXPAND_DISCLOSURES);
+
 const FIND_PATIENT_ROW_SRC = String(CRAWL_FIND_PATIENT_ROW);
 const CLICK_ROW_SRC = String(CRAWL_CLICK_ROW);
 
@@ -856,7 +1054,209 @@ function CRAWL_CLICK_FIRST_ROW(selector) {
 const CLICK_FIRST_ROW_SRC = String(CRAWL_CLICK_FIRST_ROW);
 /** Lists whose single record is worth a look: the call behind one lab result or one radiology report. */
 export const DETAIL_PARENTS = Object.freeze(['labs', 'radiology', 'history', 'discharge', 'notes']);
-const FIND_CONTROLS_SRC = String(CRAWL_FIND_CONTROLS);
+
+/* THE ROW'S REQUEST, NOT THE DOM. client.wait() (plugin-client.mjs) resolves once the DOM has been
+ * quiet for a moment - about 270ms after a click - which is well before a GHIS XHR answers, so
+ * captureView read the list again with nothing changed and proof saw no completed request
+ * ("no-requests"). window.__SMD_REPLAY__ only gains an entry once a request actually FINISHES
+ * (discovery.mjs keep() runs from the fetch/XHR response handler, never on send), so a replay entry
+ * newer than the arm mark (window.__smdProveMark, set by CRAWL_ARM_OBSERVER just before the click) is
+ * proof the answer is in. A full-page navigation resets the buffer instead of growing it (seq falls
+ * below the mark), which also means "stop waiting". */
+function CRAWL_DETAIL_SETTLED() {
+  var mark = window.__smdProveMark || 0;
+  var R = window.__SMD_REPLAY__;
+  var gone = !R || R.seq < mark;
+  var newest = !gone && R.list.some(function (e) { return e.seq > mark; });
+  return JSON.stringify({ gone: gone, newest: newest });
+}
+const DETAIL_SETTLED_SRC = String(CRAWL_DETAIL_SETTLED);
+
+/** Polls every 300ms (capped at `maxMs`) until the click's request finishes, `samePlace()` says the
+ * page has moved, or the replay buffer itself is gone (a full navigation reset it), then gives the
+ * render 1500ms more before capture. `samePlace` is the caller's own "are we still on that screen"
+ * check (exploreDetailOf's plain path, the crawl's frame-aware whereAmI) - not duplicated here. */
+export async function awaitDetailRequest({ client, samePlace, maxMs = 8000 }) {
+  const stillHere = typeof samePlace === 'function' ? samePlace : async () => true;
+  const start = Date.now();
+  while (Date.now() - start < maxMs) {
+    let state = null;
+    try { state = JSON.parse((await client.evaluate({ expression: `(${DETAIL_SETTLED_SRC})()` }))?.result ?? 'null'); } catch { state = null; }
+    let here = true;
+    try { here = await stillHere(); } catch { here = false; }
+    if (!state || state.gone || state.newest || !here) break;
+    await client.wait({ ms: 300 });
+  }
+  await client.wait({ ms: 1500 });
+}
+
+/* OPEN ONE ROW OF A LIST AND LEARN THE CALL BEHIND IT.
+ * The crawl does this inline while it walks (see exploreDetails below), but a screen the DOCTOR had
+ * to demonstrate never went through the crawl, so its detail chain was never proven. On GHIS that is
+ * not an edge case: radiology lives in its own module (/Radio/Home) that the patient chart does not
+ * link to, so the crawl cannot reach it at all - radiology can only ever arrive as a guided ask, and
+ * radiology-detail (GetRadiologyResultPrint) was therefore unreachable by ANY path (owner's iPhone,
+ * 2026-09-16: three live runs ended with radiology-detail "absent"). Shared so askOne can call it too. */
+export async function exploreDetailOf({ client, view, book, origins = [], waitMs = 1200 }) {
+  if (!view || !view.rowsSelector || view.block) return null;
+  if (!DETAIL_PARENTS.includes(String(view.resourceHint || ''))) return null;
+  const urlNow = async () => {
+    try { const u = await client.currentUrl(); return typeof u === 'string' ? u : (u && u.url) || ''; } catch { return ''; }
+  };
+  const pathNow = async () => { try { return new URL(await urlNow()).pathname; } catch { return ''; } };
+  const before = await pathNow();
+  if (typeof client.drainRequests === 'function') { try { await client.drainRequests(); } catch { /* best effort */ } }
+  await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` }).catch(() => {});
+  let how = null;
+  try { how = await client.evaluate({ expression: `(${CLICK_FIRST_ROW_SRC})(${JSON.stringify(view.rowsSelector)})` }); } catch { how = null; }
+  if (!how || (how.result !== 'link' && how.result !== 'row')) return null;
+  await awaitDetailRequest({ client, samePlace: async () => (await pathNow()) === before, maxMs: Math.max(waitMs * 5, 8000) });
+  // A report that opens as a page load is only replayable if the navigation is turned into a request.
+  if (typeof client.drainRequests === 'function') {
+    try {
+      const drained = await client.drainRequests();
+      let pageOrigin = null;
+      try { pageOrigin = new URL(await urlNow()).origin; } catch { pageOrigin = null; }
+      const nav = navToReplayEntries(drained, { pageOrigin, allowedOrigins: origins });
+      if (nav.length) await client.evaluate({ expression: '(' + INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+    } catch { /* nav capture is best effort */ }
+  }
+  let detail = null;
+  try { detail = await captureView({ client, resourceHint: view.resourceHint + '-detail' }); } catch { detail = null; }
+  if (detail && detail.rowsSelector) {
+    detail.detailOf = view.resourceHint;
+    if (book) await book.prove({ client, view: detail, label: 'open one ' + view.resourceHint + ' row', parent: view.resourceHint });
+  } else if (book) {
+    /* NOTHING NEW ON SCREEN (the detail went to a print frame or a download): the row's own call can
+     * still be proven by its trace to the row (prove.mjs). */
+    detail = { resourceHint: view.resourceHint + '-detail', detailOf: view.resourceHint, pathTemplate: view.pathTemplate, rowsSelector: view.rowsSelector, headers: [], block: false, singleRecord: false };
+    await book.prove({ client, view: detail, label: 'open one ' + view.resourceHint + ' row', parent: view.resourceHint });
+    if (!(detail.proof && detail.proof.status === 'proven')) detail = null;
+  } else {
+    detail = null;
+  }
+  if (await pathNow() !== before) {
+    await client.evaluate({ expression: 'history.back()' }).catch(() => {});
+    await client.wait({ ms: waitMs });
+  }
+  return detail;
+}
+/* SEARCH FOR THE PATIENT THE WAY THE DOCTOR DOES. A resource screen can be a search form rather than a
+ * list (GHIS "Lab reports": a patient box with an autocomplete, a hidden id the suggestion fills, and
+ * a search link that posts GetSearchPatientId). The owner built the hand-made adapter by typing a
+ * patient id there and watching the calls; the crawl and the guided ask only ever saw the empty form,
+ * so the print shell behind it was proven as "labs" (2026-09-17). These three page-realm steps do
+ * what the owner did: type the id into the patient box, take the suggestion that carries it (or fill
+ * the hidden companions), and press the form's own search control. Nothing else is typed or cleared. */
+function CRAWL_PATIENT_SEARCH(pid) {
+  try {
+    var vis = function (e) { try { return !!(e.getClientRects && e.getClientRects().length); } catch (x) { return false; } };
+    var inputs = [].slice.call(document.querySelectorAll('input[type="text"],input[type="search"],input:not([type])')).filter(vis);
+    var score = function (e) { var s = ((e.id || '') + ' ' + (e.name || '') + ' ' + (e.placeholder || '') + ' ' + (e.className || '') + ' ' + (e.getAttribute('aria-label') || '')).toLowerCase(); return /patient|mrn|uhid|umr|search|auto|record|reg/.test(s) ? 2 : 0; };
+    inputs.sort(function (a, b) { return score(b) - score(a); });
+    var inp = inputs[0];
+    if (!inp || (score(inp) === 0 && inputs.length !== 1)) return JSON.stringify({ did: 'no-input', inputs: inputs.length });
+    inp.focus();
+    inp.value = pid;
+    inp.dispatchEvent(new Event('input', { bubbles: true }));
+    inp.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, key: 'Enter' }));
+    inp.dispatchEvent(new Event('change', { bubbles: true }));
+    var hid = [].slice.call(document.querySelectorAll('input[type="hidden"]')).filter(function (h) { var n = ((h.id || '') + ' ' + (h.name || '')).toLowerCase(); return /auto|search|patient|pat\b|mrn?|uhid|umr|record/.test(n) && !/token|verification|csrf|episode|visit|render|order|test|barcode|text/.test(n); });
+    for (var i = 0; i < hid.length; i++) hid[i].value = pid;
+    return JSON.stringify({ did: 'typed', input: (inp.id || inp.name || '').slice(0, 40), hidden: hid.map(function (h) { return (h.id || h.name || '').slice(0, 40); }) });
+  } catch (e) { return JSON.stringify({ did: 'e', error: String(e && e.message || e).slice(0, 80) }); }
+}
+function CRAWL_PICK_SUGGESTION(pid) {
+  try {
+    var vis = function (e) { try { return !!(e.getClientRects && e.getClientRects().length); } catch (x) { return false; } };
+    var items = [].slice.call(document.querySelectorAll('li,[role="option"],.ui-menu-item,.ui-menu-item-wrapper,.autocomplete-suggestion,.tt-suggestion,.dropdown-item,.suggestion')).filter(vis);
+    for (var i = 0; i < items.length; i++) {
+      var t = (items[i].textContent || '').replace(/\s+/g, ' ').trim();
+      if (t.length <= 160 && t.indexOf(pid) >= 0) { items[i].click(); return 'picked'; }
+    }
+    return 'none';
+  } catch (e) { return 'e'; }
+}
+function CRAWL_PRESS_SEARCH() {
+  try {
+    var vis = function (e) { try { return !!(e.getClientRects && e.getClientRects().length); } catch (x) { return false; } };
+    var els = [].slice.call(document.querySelectorAll('a,button,input[type="button"],input[type="submit"],[onclick],[role="button"]')).filter(vis);
+    var label = function (e) { return ((e.textContent || '') + ' ' + (e.value || '') + ' ' + (e.title || '') + ' ' + (e.getAttribute('aria-label') || '') + ' ' + (e.id || '') + ' ' + (e.className || '') + ' ' + (e.getAttribute('onclick') || '')).replace(/\s+/g, ' ').trim(); };
+    var bad = /log ?out|sign ?out|delete|remove|save|submit|update|edit|add|new|create|order|prescri|upload|send|print|export|download|cancel|close|discharge|pay|bill|clear|reset|verify|sign\b|finali|complete/i;
+    for (var i = 0; i < els.length; i++) {
+      var l = label(els[i]);
+      if (/search|find|\bgo\b|show|fetch|get ?(list|patient|report)/i.test(l) && !bad.test((els[i].textContent || '') + ' ' + (els[i].value || ''))) { els[i].click(); return 'pressed ' + l.slice(0, 40); }
+    }
+    return 'none';
+  } catch (e) { return 'e'; }
+}
+/* WALK THE DOCTOR'S TAPS AGAIN. A guided view remembers what the doctor tapped to reach it (CRAWL_ARM_GUIDE:
+ * 'a#lr "Lab reports"', 'li.nav-item "Investigations"'). A screen that only exists after those taps
+ * (GHIS Lab reports: a menu item swaps the form in) is reached the same way before it is searched or
+ * proven again. A tap inside a table (tr/td/th) was the doctor pointing at a list, not navigation, and
+ * is not replayed. Match: the id when it has one, else tag+class with the same label, else any control
+ * with the same label. */
+function CRAWL_REPLAY_STEP(entry) {
+  try {
+    var m = /^([a-z0-9]+)(#[\w-]+)?(\.[\w-]+)?(?:\s+"(.*)")?$/.exec(String(entry || '').trim());
+    if (!m) return 'bad';
+    var tag = m[1], id = m[2] || '', cls = m[3] || '', label = (m[4] || '').trim();
+    if (/^(tr|td|th|table|tbody|thead)$/.test(tag)) return 'skip';
+    var norm = function (t) { return String(t || '').replace(/\s+/g, ' ').trim().replace(/\d{3,}/g, '#').slice(0, 60); };
+    var vis = function (e) { try { return !!(e.getClientRects && e.getClientRects().length); } catch (x) { return false; } };
+    var el = null;
+    if (id) el = document.querySelector(tag + id) || document.querySelector(id);
+    if (!el && (cls || label)) {
+      var cands = [].slice.call(document.querySelectorAll(tag + cls));
+      el = cands.filter(function (e) { return !label || norm(e.textContent) === label; }).sort(function (a, b) { return (vis(b) ? 1 : 0) - (vis(a) ? 1 : 0); })[0] || null;
+    }
+    if (!el && label) {
+      var all = [].slice.call(document.querySelectorAll('a,button,li,[role=tab],[role=button],[onclick],h1,h2,h3,h4,h5,h6,span,div,label'));
+      el = all.filter(function (e) { return norm(e.textContent) === label; }).sort(function (a, b) { return (vis(b) ? 1 : 0) - (vis(a) ? 1 : 0); })[0] || null;
+    }
+    if (!el) return 'none';
+    el.click();
+    return 'clicked';
+  } catch (e) { return 'e'; }
+}
+export const REPLAY_STEP_SRC = String(CRAWL_REPLAY_STEP);
+
+/** replayGuidedPath({ client, path, waitMs }) -> number of steps clicked. */
+export async function replayGuidedPath({ client, path, waitMs = 1200 }) {
+  let clicked = 0;
+  for (const entry of Array.isArray(path) ? path.slice(0, 20) : []) {
+    let r = 'none';
+    try { r = String((await client.evaluate({ expression: `(${REPLAY_STEP_SRC})(${JSON.stringify(String(entry))})` }))?.result || 'none'); } catch { r = 'e'; }
+    if (r === 'clicked') { clicked += 1; await client.wait({ ms: Math.max(waitMs, 800) }); }
+  }
+  if (clicked) await awaitDetailRequest({ client, maxMs: Math.max(waitMs * 3, 4000) });
+  return clicked;
+}
+
+export const PATIENT_SEARCH_SRC = String(CRAWL_PATIENT_SEARCH);
+export const PICK_SUGGESTION_SRC = String(CRAWL_PICK_SUGGESTION);
+export const PRESS_SEARCH_SRC = String(CRAWL_PRESS_SEARCH);
+
+/** searchPatientOnScreen({ client, patientId, waitMs }) -> { typed, picked, pressed } or null when the
+ * screen has no patient box. Types, takes the suggestion, presses search, waits for the answer. */
+export async function searchPatientOnScreen({ client, patientId, waitMs = 1200 }) {
+  const pid = String(patientId || '').trim();
+  if (!pid || !client) return null;
+  await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` }).catch(() => {});
+  let typed = null;
+  try { typed = JSON.parse((await client.evaluate({ expression: `(${PATIENT_SEARCH_SRC})(${JSON.stringify(pid)})` }))?.result || 'null'); } catch { typed = null; }
+  if (!typed || typed.did !== 'typed') return null;
+  await client.wait({ ms: Math.max(waitMs, 1500) });
+  let picked = 'none';
+  try { picked = String((await client.evaluate({ expression: `(${PICK_SUGGESTION_SRC})(${JSON.stringify(pid)})` }))?.result || 'none'); } catch { picked = 'e'; }
+  if (picked === 'picked') await client.wait({ ms: Math.max(waitMs, 800) });
+  let pressed = 'none';
+  try { pressed = String((await client.evaluate({ expression: `(${PRESS_SEARCH_SRC})()` }))?.result || 'none'); } catch { pressed = 'e'; }
+  await awaitDetailRequest({ client, maxMs: Math.max(waitMs * 5, 8000) });
+  return { typed: typed.input || '', hidden: (typed.hidden || []).length, picked, pressed };
+}
+
+export const FIND_CONTROLS_SRC = String(CRAWL_FIND_CONTROLS);
 const CLICK_CONTROL_SRC = String(CRAWL_CLICK_CONTROL);
 const ARM_GUIDE_SRC = String(CRAWL_ARM_GUIDE);
 const GUIDE_PATH_SRC = String(CRAWL_GUIDE_PATH);
@@ -893,7 +1293,7 @@ export function redactPageUrl(u) {
 
 export async function captureView({ client, resourceHint, blockOnly = false }) {
   const url = redactPageUrl((await client.currentUrl().catch(() => ({})))?.url || null);
-  const raw = blockOnly ? null : await evalJson(client, `(${RAW_TABLE_SRC})()`, null);
+  const raw = blockOnly ? null : await evalJson(client, withDocs(RAW_TABLE_SRC), null);
   let view = raw ? buildTableView(raw, resourceHint, url) : null;
   const block = await evalJson(client, `(${RAW_BLOCK_SRC})()`, null);
   if (!view) view = buildBlockView(block, resourceHint, url);
@@ -922,6 +1322,45 @@ export function scrubForBrain(value) {
   if (Array.isArray(value)) return value.map(scrubForBrain).filter((v) => v !== '').slice(0, 60);
   if (value && typeof value === 'object') { const o = {}; for (const k of Object.keys(value)) o[k] = scrubForBrain(value[k]); return o; }
   return value;
+}
+
+/* A LINE THAT IDENTIFIES A PERSON, not a line that describes a finding. Labels first (the header block
+ * of every Indian hospital report), then the words a demographic block is made of. */
+const IDENTITY_LINE = /\b(?:patient|pt)\.?\s*name|^\s*name\b|\bs\/o\b|\bd\/o\b|\bw\/o\b|\bc\/o\b|address|residen|\bmobile\b|\bphone\b|\bcontact\b|\bfather\b|\bmother\b|\bguardian\b|\bhusband\b|\bwife\b|\bspouse\b|\bd\.?o\.?b\b|date\s*of\s*birth|\buhid\b|\bmrn\b|\bmr\.?\s*no\b|\bip\s*n[o0]\b|\bop\s*n[o0]\b|\breg(?:istration)?\s*n[o0]\b|\baadhaar\b|\bpassport\b|\be-?mail\b|\battendant\b|\bconsultant\b|\breferr?(?:ed|ing)\s*(?:by|dr)|\bbill(?:ing)?\s*n[o0]\b|\bage\s*[\/:]|\bsex\s*[\/:]|\bgender\s*[\/:]/i;
+
+/**
+ * scrubExcerpt(text, identity) -> a PHI-free excerpt of a clinical narrative, or ''.
+ *
+ * THE OWNER AUTHORIZED THE MODEL TO READ A REPORT'S WORDS (2026-09-15) so it can say whether a proven
+ * "radiology" call returned a radiology report, a lab sheet, or only the patient's name and address.
+ * That answer needs the prose to survive and the person not to: an identifying line is REPLACED by the
+ * marker `[identifier]`, never dropped, so a page made only of identifiers still reads as what it is.
+ * Every run of 3+ digits becomes '#', every e-mail '[email]', and any value from the patient's own row
+ * (their name, their numbers) is masked wherever it appears inline. The server refuses anything that
+ * gets through (functions/_connect/agent/brain.js phiGate).
+ */
+export function scrubExcerpt(text, identity = [], max = 1200) {
+  let s = String(text == null ? '' : text);
+  if (!s.trim()) return '';
+  s = s.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>');
+  // The patient's own values, longest first so "John Smith" masks before "John".
+  const marks = [...new Set((Array.isArray(identity) ? identity : []).map((v) => String(v == null ? '' : v).trim()).filter((v) => v.length >= 3 && v.length <= 60))]
+    .sort((a, b) => b.length - a.length);
+  for (const m of marks) {
+    try { s = s.replace(new RegExp(m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), '[identifier]'); } catch { /* not a usable mark */ }
+  }
+  const out = [];
+  for (let line of s.split(/\r?\n/)) {
+    line = line.replace(/[\t ]+/g, ' ').replace(/ {2,}/g, ' ').trim();
+    if (!line) continue;
+    if (IDENTITY_LINE.test(line)) { if (out[out.length - 1] !== '[identifier]') out.push('[identifier]'); continue; }
+    line = line.replace(/[^\s@]+@[^\s@]+/g, '[email]').replace(/\d{3,}/g, '#');
+    // Control characters would trip the server gate before the model ever sees the line.
+    line = line.replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, ' ').replace(/ {2,}/g, ' ').trim();
+    if (line) out.push(line);
+    if (out.join('\n').length >= max) break;
+  }
+  return out.join('\n').slice(0, max).trim();
 }
 
 function pathOnly(u) { try { return new URL(u).pathname; } catch { return String(u || '').split('?')[0]; } }
@@ -968,7 +1407,7 @@ export const GUIDE_SOURCES = Object.freeze({ arm: `(${ARM_OBSERVER_SRC})()`, arm
  * again (index.mjs / UI surface it). onProgress({ opening, found, looking, clicks }) fires before each
  * click; stopSignal() true ends the walk (wired to the plugin's native Stop).
  */
-export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSignal, brain = null, book = null } = {}) {
+export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSignal, skipSignal, brain = null, book = null } = {}) {
   if (!client) throw new Error('deepCrawlClinical requires a client');
 
   const maxViews = Math.min(Math.max(caps.maxViews ?? CAPS_DEFAULT.maxViews, 1), CAPS_DEFAULT.maxViews);
@@ -981,11 +1420,26 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   const trail = [];
   const found = new Set();
   const stopped = () => typeof stopSignal === 'function' && !!stopSignal();
+  /* "Skip this step" while the walk is on a control: the count is read before the click and after
+   * the capture; a bump in between throws THAT screen away and moves to the next control. */
+  const skipAt = () => (typeof skipSignal === 'function' ? Number(skipSignal()) || 0 : 0);
   const looking = () => TARGET_HINTS.filter((h) => !found.has(h));
   const progress = (opening, clicks) => { try { onProgress?.({ opening, found: [...found], looking: looking(), clicks }); } catch { /* UI must never break the walk */ } };
 
   const currentUrl = async () => (await client.currentUrl().catch(() => ({})))?.url || null;
   const pathOf = (u) => { try { return new URL(u).pathname; } catch { return u; } };
+  /* WHERE THE BROWSER ACTUALLY IS. In a frameset EMR the address never changes: every screen is a
+   * navigation of the content frame, so comparing the top URL said "still here" after every click and
+   * the walk never came back to the patient record - it wandered off into the first screen it opened
+   * and lost the rest. The frames' own paths are part of the answer. */
+  const FRAME_PATHS = `(function(){var o=[location.pathname];for(var i=0;i<window.frames.length&&i<8;i++){try{o.push(window.frames[i].location.pathname)}catch(e){o.push('x')}}return o.join('|')})()`;
+  const whereAmI = async () => {
+    const top = pathOf(await currentUrl());
+    const r = await client.evaluate({ expression: FRAME_PATHS }).catch(() => null);
+    const frames = r && typeof r.result === 'string' ? r.result : '';
+    // Both halves: the address for an ordinary EMR, the frames for one that never changes its address.
+    return String(top) + '::' + frames;
+  };
 
   const record = (view) => {
     if (!view) return false;
@@ -998,20 +1452,29 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // instead of "no patient row". A slow worklist can look shell-like for a moment (rows arrive by AJAX
   // after the frame), so a shell verdict is confirmed once after one wait. A null state (evaluate
   // failed) is treated as unknown and the walk proceeds.
-  const pageState = () => evalJson(client, `(${PAGE_STATE_SRC})()`, null);
-  const isShell = (s) => !!s && s.dataTableCount === 0 && s.textLen < SHELL_TEXT_MAX;
+  const pageState = () => evalJson(client, withDocs(PAGE_STATE_SRC), null);
+  /* A shell is a page with nothing on it and nowhere to go: no data table, almost no text, and no
+   * control that leads further in. A table-less SPA screen has controls, so it is walked, not
+   * abandoned (older builds answered "the browser was not on the EMR after sign-in" for those).
+   * `controls`/`lists` are absent from an older page build's answer; treat that as the old rule. */
+  const isShell = (s) => !!s && s.dataTableCount === 0 && s.textLen < SHELL_TEXT_MAX
+    && !(s.controls > 0) && !(s.lists > 0) && !(s.dataRows > 0);
   let state = await pageState();
   if (state && state.hasPasswordInput) return { observedViews, trail, stopReason: 'login-required', found: [] };
-  if (isShell(state)) {
+  /* GIVE A SLOW SCREEN TIME TO BECOME ITSELF. One recheck was not enough: a worklist that fetches a
+   * token and only then its data needs two round trips before anything exists to see, and calling it
+   * a dead shell in the meantime abandoned the whole hospital. Rechecked up to three times, leaving
+   * early the moment it stops looking empty; a page still empty after all of them really is empty. */
+  for (let look = 0; look < SHELL_RECHECKS && isShell(state); look += 1) {
     await client.wait({ ms: waitMs });
     state = await pageState();
     if (state && state.hasPasswordInput) return { observedViews, trail, stopReason: 'login-required', found: [] };
-    if (isShell(state)) return { observedViews, trail, stopReason: 'session-expired-or-shell', found: [] };
   }
+  if (isShell(state)) return { observedViews, trail, stopReason: 'session-expired-or-shell', found: [] };
 
   // 1. worklist (the client is already attached to it). No observer armed: global best table.
   progress('worklist', 0);
-  const worklistRaw = await evalJson(client, `(${RAW_TABLE_SRC})()`, null);
+  const worklistRaw = await evalJson(client, withDocs(RAW_TABLE_SRC), null);
   {
     /* THE WORKLIST'S OWN DATA CALL. A DataTables ward list fills itself on page load (GHIS: GetIPWL),
      * before the crawl clicks anything, so the native log since open and the observer's events so
@@ -1038,7 +1501,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // call AFTER the page and its headers render, so poll a few times before concluding there is no row.
   let row = null;
   for (let attempt = 0; attempt < 8; attempt += 1) {
-    row = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})(${JSON.stringify(GENERIC_CLASS.source)})`, null);
+    row = await evalJson(client, withDocs(FIND_PATIENT_ROW_SRC, JSON.stringify(GENERIC_CLASS.source)), null);
     if (row) break;
     if (Date.now() >= deadline || stopped()) break;
     await client.wait({ ms: waitMs });
@@ -1055,30 +1518,53 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   if (book && typeof client.navigate === 'function') {
     const landing = await currentUrl();
     const listViews = [];
-    const tabs = (await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []) || [])
+    const tabs = (await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []) || [])
       .filter((c) => c && LIST_CONTROL.test(c.label)).map((c) => c.label);
-    for (const label of [...new Set(tabs)].slice(0, 4)) {
+    for (const label of [...new Set(tabs)].slice(0, 6)) {
       if (stopped() || Date.now() >= deadline) break;
-      const now = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+      const now = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
       const ctl = (Array.isArray(now) ? now : []).find((c) => c.label === label);
       if (!ctl) continue;
       progress(label, 0);
       await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
-      await client.evaluate({ expression: `(${CLICK_CONTROL_SRC})(${ctl.index},${JSON.stringify(CONTROL_QUERY)})` });
+      await client.evaluate({ expression: withDocs(CLICK_CONTROL_SRC, ctl.index + "," + JSON.stringify(CONTROL_QUERY)) });
       /* Wait for the list itself, not a fixed time: GHIS's IP worklist fetches its dropdowns first and
        * fills the table about 9 s after the tap (Pixel, 2026-09-13). Up to 15 s for a data table. */
       // The old list still shows rows for a moment: wait until the visible tables CHANGE and carry rows.
       const TABLES_SIG = "(function(){var s=[],n=0,ts=document.querySelectorAll('table');for(var i=0;i<ts.length;i++){if(!ts[i].getClientRects().length)continue;var r=0,trs=ts[i].querySelectorAll('tbody tr');for(var j=0;j<trs.length;j++){if(trs[j].querySelectorAll('td').length>=2)r++}n+=r;s.push((ts[i].id||ts[i].className)+':'+r)}return JSON.stringify({sig:s.join('|'),rows:n})})()";
+      const waitForRows = async (baselineSig) => {
+        for (let t = 0; t < 15; t += 1) {
+          await client.wait({ ms: 1000 });
+          const now = await evalJson(client, TABLES_SIG, { sig: '', rows: 0 });
+          if (now && now.rows > 0 && now.sig !== baselineSig) { await client.wait({ ms: 1500 }); return now; }
+        }
+        return evalJson(client, TABLES_SIG, { sig: '', rows: 0 });
+      };
       const before = await evalJson(client, TABLES_SIG, { sig: '' });
-      for (let t = 0; t < 15; t += 1) {
-        await client.wait({ ms: 1000 });
-        const now = await evalJson(client, TABLES_SIG, { sig: '', rows: 0 });
-        if (now && now.rows > 0 && now.sig !== (before && before.sig)) { await client.wait({ ms: 1500 }); break; }
+      let afterTap = await waitForRows(before && before.sig);
+      /* GHIS's "IP worklist" renders a FILTER FORM (Patient ID, Floor, Nursing station, Department,
+       * Doctor) over an EMPTY DataTable ("No data available in table") instead of the list itself -
+       * pressing its own "Search" with every field left blank is what returns the whole hospital
+       * (GET GetIPWL?...&Type=IPWorkList, ~730kB, every in-patient; Chrome DevTools, 2026-09-17). Only
+       * the tight LIST_SEARCH_CONTROL label is pressed - SKIP_SRC already keeps a patient form's own
+       * "Submit" (which SAVES a clinical assessment) out of the candidate list - and no input is touched. */
+      let proveLabel = 'tap ' + label;
+      if (afterTap && afterTap.rows === 0) {
+        const onScreen = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
+        const press = (Array.isArray(onScreen) ? onScreen : []).find((c) => c && LIST_SEARCH_CONTROL.test(String(c.label || '').trim()));
+        if (press) {
+          const before2 = await evalJson(client, TABLES_SIG, { sig: '' });
+          await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
+          await client.evaluate({ expression: withDocs(CLICK_CONTROL_SRC, press.index + "," + JSON.stringify(CONTROL_QUERY)) });
+          await awaitDetailRequest({ client, maxMs: Math.max(waitMs * 5, 8000) });
+          afterTap = await waitForRows(before2 && before2.sig);
+          proveLabel = 'tap ' + label + ' > ' + press.label;
+        }
       }
       trail.push(label);
       const v = await captureView({ client, resourceHint: 'worklist' });
       if (v && v.rowsSelector && !v.block) {
-        await book.prove({ client, view: v, label: 'tap ' + label });
+        await book.prove({ client, view: v, label: proveLabel });
         if (v.proof && v.proof.status === 'proven') listViews.push(v);
       }
       /* Always reload the landing page: a single-page EMR swaps the list in place with the same URL
@@ -1095,7 +1581,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     // The landing page was reloaded: find the patient row again (rows may arrive after the page).
     if (tabs.length) {
       for (let attempt = 0; attempt < 8; attempt += 1) {
-        const again = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})(${JSON.stringify(GENERIC_CLASS.source)})`, null);
+        const again = await evalJson(client, withDocs(FIND_PATIENT_ROW_SRC, JSON.stringify(GENERIC_CLASS.source)), null);
         if (again) { row = again; break; }
         if (stopped()) break;
         await client.wait({ ms: waitMs });
@@ -1106,10 +1592,16 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
    * stays in the DOM after a patient opens; walking it reads everyone's reports, not this patient's.
    * GHIS adds Medications, Investigations and Patient profile only once a patient is open (Pixel,
    * 2026-09-13), so the controls present before the row tap are skipped when opening added new ones. */
-  const landingLabels = new Set(((await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, [])) || []).map((c) => c && c.label).filter(Boolean));
+  const landingControls = (await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), [])) || [];
+  const landingLabels = new Set(landingControls.map((c) => c && c.label).filter(Boolean));
+  /* The ward list's own navigation is not worth re-walking once a patient is open - but a CLINICAL
+   * label there is the thing we came for. In a frameset EMR the nav frame never goes away, so every
+   * one of its labels looks like the landing page's, and marking them all seen left labs unreachable
+   * while medications (which only the patient page carried) was found. */
+  const landingClinical = new Set(landingControls.filter((c) => c && c.clinical).map((c) => c.label));
   if (typeof client.drainRequests === 'function') await client.drainRequests().catch(() => null); // fresh per-click log
   await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
-  await client.evaluate({ expression: `(${CLICK_ROW_SRC})(${row.index})` });
+  await client.evaluate({ expression: withDocs(CLICK_ROW_SRC, String(row.index)) });
   await client.wait({ ms: waitMs });
   trail.push('patient-record');
   // The patient hub itself often shows demographics as a label/value block: capture it as 'patient'.
@@ -1118,19 +1610,26 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   if (book && hub) await book.prove({ client, view: hub, label: 'open one patient from the list' });
   record(hub);
 
+  /* Open any "More.." style disclosure on the record before enumerating: on GHIS the clinical menu
+   * lives behind one, and without this the walk never sees labs or medications at all. */
+  try {
+    await client.evaluate({ expression: withDocs(EXPAND_DISCLOSURES_SRC, JSON.stringify(String(DISCLOSURE_LABEL)) + ',3') });
+    await client.wait({ ms: Math.min(waitMs, 1500) });
+  } catch { /* best effort: the walk still runs on what is visible */ }
+
   // 2/3. Walk EVERY control under the record, clinical keywords first, dedup by redacted label, until a
   // cap is hit. The observer is armed before each click so the capture can attribute the table or block
   // to the panel the click populated. A click that navigates to another page is undone with history.back().
   const visited = new Set();
   {
-    const afterOpen = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+    const afterOpen = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
     const added = (Array.isArray(afterOpen) ? afterOpen : []).filter((c) => c && c.label && !landingLabels.has(c.label));
-    if (added.length) for (const l of landingLabels) visited.add(l);
+    if (added.length) for (const l of landingLabels) if (!landingClinical.has(l)) visited.add(l);
   }
   const detailSeen = new Set();
   let stopReason = 'no-candidate';
   let clicks = 0;
-  const homePath = pathOf(await currentUrl());
+  const homePath = await whereAmI();
 
   /* READ EVERY BUTTON ONCE, LET GEMINI ASSIGN THEM (owner, 2026-09-13). Instead of clicking blindly
    * and guessing after, hand Gemini the whole control inventory of the open record (collapsed menus
@@ -1140,7 +1639,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   const planned = [];              // control labels to open first, best resource match first
   const avoidLabels = new Set();
   if (brain && typeof brain.planControls === 'function') {
-    const all = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+    const all = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
     const pool = (Array.isArray(all) ? all : []).filter((c) => c && c.label && !visited.has(c.label)).slice(0, 200);
     if (pool.length) {
       let a = null;
@@ -1160,7 +1659,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     if (stopped()) { stopReason = 'stop-signal'; break; }
     if (clicks >= maxClicks) { stopReason = 'max-clicks'; break; }
 
-    const candidates = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+    const candidates = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
     const fresh = Array.isArray(candidates) ? candidates.filter((c) => c && c.label && !visited.has(c.label) && !avoidLabels.has(c.label)) : [];
     /* Gemini's plan first: the controls it assigned to a missing resource, in resource order. Then the
      * keyword rule, then the first fresh control. Every choice is proven against the screen below. */
@@ -1177,12 +1676,15 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     visited.add(next.label);
     clicks += 1;
     progress(next.label, clicks);
+    const skipMark = skipAt();
     await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
-    await client.evaluate({ expression: `(${CLICK_CONTROL_SRC})(${next.index},${JSON.stringify(CONTROL_QUERY)})` });
+    await client.evaluate({ expression: withDocs(CLICK_CONTROL_SRC, next.index + "," + JSON.stringify(CONTROL_QUERY)) });
     await client.wait({ ms: waitMs });
     trail.push(next.label);
+    if (skipAt() > skipMark) continue;          // the doctor skipped this screen: on to the next control
     const hint = resourceHintFor(next.label);
     const view = await captureView({ client, resourceHint: hint });
+    if (skipAt() > skipMark) continue;
     if (view && (hint === 'unknown' || hint === 'patient')) {
       const byHeaders = hintFromHeaders(view.headers);
       if (byHeaders !== 'unknown') view.resourceHint = byHeaders;
@@ -1195,14 +1697,24 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
      * opens one on tap and that tap is the call the runtime needs (GHIS: a render id, a result id).
      * Open the first row once per list kind, capture what it shows as "<kind>-detail" with the
      * call it made, and come back. */
-    if (caps.exploreDetails === true && view && view.rowsSelector && !view.block && DETAIL_PARENTS.includes(view.resourceHint) && !detailSeen.has(view.resourceHint) && clicks < maxClicks) {
+    if (caps.exploreDetails === true && view && view.rowsSelector && !view.block && DETAIL_PARENTS.includes(view.resourceHint) && !detailSeen.has(view.resourceHint) && clicks < maxClicks && observedViews.length < maxViews) {
       detailSeen.add(view.resourceHint);
-      const beforePath = pathOf(await currentUrl());
+      const beforePath = await whereAmI();
+      if (typeof client.drainRequests === 'function') { try { await client.drainRequests(); } catch {} }
       await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` }).catch(() => {});
       const how = await client.evaluate({ expression: `(${CLICK_FIRST_ROW_SRC})(${JSON.stringify(view.rowsSelector)})` }).catch(() => ({ result: 'e' }));
       if (how && (how.result === 'link' || how.result === 'row')) {
         clicks += 1;
-        await client.wait({ ms: waitMs });
+        await awaitDetailRequest({ client, samePlace: async () => (await whereAmI()) === beforePath, maxMs: Math.max(waitMs * 5, 8000) });
+        if (typeof client.drainRequests === 'function') {
+          try {
+            const drained = await client.drainRequests();
+            let pageOrigin = null;
+            try { pageOrigin = new URL(await currentUrl()).origin; } catch { pageOrigin = null; }
+            const nav = navToReplayEntries(drained, { pageOrigin, allowedOrigins: (caps && caps.origins) || [] });
+            if (nav.length) await client.evaluate({ expression: '(' + INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+          } catch { /* nav capture is best effort */ }
+        }
         trail.push(view.resourceHint + ' row');
         let detail = null;
         try { detail = await captureView({ client, resourceHint: view.resourceHint + '-detail' }); } catch { detail = null; }
@@ -1212,7 +1724,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
           if (book) await book.prove({ client, view: detail, label: 'open one ' + view.resourceHint + ' row', parent: view.resourceHint });
           observedViews.push(detail);
         }
-        if (pathOf(await currentUrl()) !== beforePath) {
+        if (await whereAmI() !== beforePath) {
           await client.evaluate({ expression: 'history.back()' }).catch(() => {});
           await client.wait({ ms: waitMs });
           trail.push('back');
@@ -1221,7 +1733,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     }
 
     // Drifted to another page (a link with a handler that navigated): come back to the record.
-    if (pathOf(await currentUrl()) !== homePath) {
+    if (await whereAmI() !== homePath) {
       await client.evaluate({ expression: 'history.back()' }).catch(() => {});
       await client.wait({ ms: waitMs });
       trail.push('back');

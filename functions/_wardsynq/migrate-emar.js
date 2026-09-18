@@ -39,6 +39,8 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { medicationAdministrationIdFor } from "./opd-identity.js";
+import { witnessOrRefusal } from "./controlled-drugs.js";
+import { readPregnancyLactation } from "./migrate-maternity.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -129,13 +131,21 @@ function bedsideSafetyCheck(svc, rulePack) {
  * finding carries hardStop: true, so a screen labels exactly what the server refuses and nothing else. */
 const ORDER_ENTRY_HARD_STOPS = Object.freeze(["DOSE_ABSOLUTE_CEILING", "DOSE_ABSOLUTE_CEILING_DAILY", "DOSE_ABSOLUTE_CEILING_CUMULATIVE"]);
 
-async function orderEntrySafety(svc, rulePack, order, overrides) {
+/* opts.lactationWindowDays: the hospital's postpartum lactation window (wardsynqConfig). The pregnancy and
+ * lactation check reads the maternity record only when the pack has rules for it; `pregnancyLactation.rulesLoaded`
+ * is on every verdict, so a screen can say "no pregnancy or lactation rules loaded" rather than imply a check. */
+async function orderEntrySafety(svc, rulePack, order, overrides, opts) {
   if (!rulePack) return { checked: false, code: "NO_RULE_PACK", message: "no decision-support content is loaded; nothing was checked" };
   try {
-    const { allergies, activeMeds, weightKg } = await safetyFacts(svc, order);
-    // "same-drug" only here: order entry is where a second order of an active molecule is decided.
-    const v = new SafetyEngine({ rulePack, checks: ["allergy", "interaction", "dose", "renal", "same-drug"] })
-      .evaluate({ order, allergies, activeMeds, weightKg, overrides: overrides || [] });
+    const rulesLoaded = rulePack.pregnancyLactation ? rulePack.pregnancyLactation.size : 0;
+    const [{ allergies, activeMeds, weightKg }, pregnancyStatus] = await Promise.all([
+      safetyFacts(svc, order),
+      rulesLoaded ? readPregnancyLactation(svc, order && order.patientId, { lactationWindowDays: opts && opts.lactationWindowDays }) : null,
+    ]);
+    // "same-drug" and "pregnancy" only here: order entry is where a second order of an active molecule, or a
+    // medicine in pregnancy or breastfeeding, is decided.
+    const v = new SafetyEngine({ rulePack, checks: ["allergy", "interaction", "dose", "renal", "same-drug", "pregnancy"] })
+      .evaluate({ order, allergies, activeMeds, weightKg, pregnancyStatus, overrides: overrides || [] });
     const pick = (f) => ({ code: f.code, severity: f.severity || null, disposition: f.disposition, message: f.message || "",
       ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}),
       ...(f.disposition === "block" && ORDER_ENTRY_HARD_STOPS.includes(f.code) ? { hardStop: true } : {}) });
@@ -145,6 +155,7 @@ async function orderEntrySafety(svc, rulePack, order, overrides) {
       blocks, overridables: v.overridables.map(pick), warnings: v.warnings.map(pick), findings: v.findings.map(pick),
       hardStops: blocks.filter((f) => f.hardStop),
       unresolvedDrug: v.unresolvedDrug, unresolvedActiveMeds: v.unresolvedActiveMeds || [],
+      pregnancyLactation: { rulesLoaded, ...(pregnancyStatus || {}) },
     };
   } catch (e) {
     return { checked: false, code: "SAFETY_CHECK_UNAVAILABLE", message: str(e && e.message) || "decision support unavailable" };
@@ -308,6 +319,17 @@ async function administerStep(request, env, ctx) {
   }
 
   const before = record.status;
+  /* A CONTROLLED DRUG IS GIVEN IN FRONT OF A SECOND PERSON (controlled-drugs.js), whatever the high-alert list says.
+   * Stricter than the high-alert witness below: the witness must also be an active member of this hospital who may
+   * witness one, checked by the route, because this dose is a line in the NDPS register. Refused before the machine
+   * runs, so nothing is written. */
+  if (action === "administer" && typeof ctx.isControlled === "function" && ctx.isControlled(order.drug, order.drugCode) === true) {
+    const w = await witnessOrRefusal(ctx, resolved.actor.id);
+    if (w.error) {
+      return { ...base, ok: false, status: w.error.status === 502 ? 502 : 409, error: w.error.status === 502 ? w.error.error : "refused", action, from: before,
+        reasons: [{ code: String(w.error.error).toUpperCase(), message: w.error.detail }], detail: w.error.detail, orderId, administrationId: marId, actor: resolved.actor.id, written: 0 };
+    }
+  }
   try {
     if (action === "verify") await emar.transition(record, STATES.VERIFIED, { actorId: resolved.actor.id });
     else if (action === "dispense") await emar.transition(record, STATES.DISPENSED, { actorId: resolved.actor.id });

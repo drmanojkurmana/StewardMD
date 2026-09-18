@@ -32,6 +32,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { blackedOutBy } from "./blackout.js";
+import { readClashDiary, readRecentWrites } from "./read-window.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "Appointment";
@@ -67,6 +68,8 @@ function Appointment(input) {
     /* The recall this appointment answers, when it answers one. That link is what lets a promised
      * follow-up be seen through to an actual booking. */
     requestId: i.requestId || null,
+    arrivedAt: i.arrivedAt || null,
+    completedAt: i.completedAt || null,
     source: { system: "wardsynq-native", sourceId: `appointment:${i.id}` },
   };
 }
@@ -151,7 +154,7 @@ function apptSummary(a) {
     overbooked: !!a.overbooked, overbookReason: a.overbookReason || null,
     bookedBy: a.bookedBy, bookedAt: a.bookedAt,
     changedBy: a.changedBy || null, changedAt: a.changedAt || null, changeReason: a.changeReason || null,
-    requestId: a.requestId || null, version: a.version,
+    requestId: a.requestId || null, arrivedAt: a.arrivedAt || null, completedAt: a.completedAt || null, version: a.version,
   };
 }
 
@@ -181,8 +184,20 @@ async function bookAppointment(request, env, ctx) {
   const id = appointmentIdFor(clinicianId, startAt, patientId);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
+  /* R4-2 read every appointment the hospital had ever made (service.listAll, paged, 50,000 ceiling)
+   * because an Appointment has no `status` - where it stands lives in `state` (booked / arrived /
+   * completed / cancelled / did-not-attend) and the store's roster filter is on `status`, so R5-2's
+   * open-state read could not be used, and mirroring `state` into `status` would have left the
+   * hospital's existing diary with no status at all and a clash check that skipped it.
+   *
+   * R6-4 DID NOT ADD A `states` FILTER. A clash is time-bounded by definition, so the period read
+   * (service.listSince, R5-3) bounds it with no port change: read newest first and stop once a whole
+   * page is behind the clash window. readClashDiary holds that window and the reason for its two-part
+   * stop test. The Blackout read is unchanged - a blackout is a standing period, not a slot.
+   * A read that cannot be bounded still refuses rather than booking on a short diary. */
+  const fromMs = Math.min(Date.now(), Date.parse(startAt));
   let all, blackouts;
-  try { [all, blackouts] = await Promise.all([svc.list(TYPE, 500), svc.list("Blackout", 500).catch(() => [])]); }
+  try { [all, blackouts] = await Promise.all([readClashDiary(svc, TYPE, { fromMs, max: 50000, throwOnTruncate: true }).then((g) => g.rows), svc.listAll("Blackout", { max: 50000, throwOnTruncate: true }).then((g) => g.rows, (e) => { if (e && e.name === "ListCeilingError") throw e; return []; })]); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
   const candidate = { startAt, minutes };
@@ -194,8 +209,9 @@ async function bookAppointment(request, env, ctx) {
   }
   /* TWO PATIENTS CANNOT HOLD ONE SLOT. Checked against every appointment this clinician still holds,
    * and refused with the clash named so the desk can offer another time rather than being told "no". */
-  const clash = (all || []).find((a) => a && a.id !== id && a.clinicianId === clinicianId
+  const clashIn = (rows) => (rows || []).find((a) => a && a.id !== id && a.clinicianId === clinicianId
     && HOLDS_SLOT.includes(a.state) && overlaps(a, candidate));
+  const clash = clashIn(all);
   if (clash && !ctx.overbook) {
     return {
       ...base, ok: false, status: 409, error: "slot_taken",
@@ -218,10 +234,31 @@ async function bookAppointment(request, env, ctx) {
     return { ...base, ok: true, written: 0, skipped: "already_booked", ...apptSummary(current) };
   }
 
+  /* THE LAST LOOK BEFORE THE APPEND. The windowed read walks back from the newest record, and a record
+   * amended while it was walking moves past the cursor it already handed out, so that read alone can
+   * miss it (repository.js:302-306). On a report that is the accepted price; here it would be a double
+   * booking, so one page of the newest writes is re-read and tested again. A slot that appeared during
+   * the read is refused exactly as one found in the first pass. */
+  let late;
+  try { late = clashIn(await readRecentWrites(svc, TYPE)); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  if (late && !clash && !ctx.overbook) {
+    return {
+      ...base, ok: false, status: 409, error: "slot_taken",
+      detail: `${clinicianId} already has an appointment overlapping ${startAt}`,
+      clashesWith: { appointmentId: late.id, patientId: late.patientId, startAt: late.startAt, minutes: late.minutes },
+      written: 0,
+    };
+  }
+  if (late && !clash && ctx.overbook && !overbookReason) {
+    return { ...base, ok: false, status: 422, error: "overbook_reason_required", detail: "say why this slot is being double-booked", written: 0 };
+  }
+
+  const held = clash || late;
   const appt = Appointment({
     id, patientId, clinicianId, startAt, minutes,
     reason: str(ctx.reason) || null, state: "booked",
-    overbooked: !!clash, overbookReason: clash ? overbookReason : null,
+    overbooked: !!held, overbookReason: held ? overbookReason : null,
     bookedBy: resolved.actor.id, bookedAt: new Date().toISOString(),
     requestId: str(ctx.requestId) || null,
   });
@@ -278,10 +315,19 @@ async function setAppointmentState(request, env, ctx) {
   if (["completed", "cancelled", "did-not-attend"].includes(current.state)) {
     return { ...base, ok: false, status: 409, error: "already_closed", detail: `this appointment is ${current.state}; book a new one`, appointmentId, written: 0 };
   }
+  /* A NO-SHOW IS A FACT ABOUT A SLOT THAT HAS BEGUN. Before the start the patient can still come, and a patient who
+   * arrived did attend (P3 theatre-opd-access, 2026-09-17). */
+  if (state === "did-not-attend") {
+    if (current.state === "arrived") return { ...base, ok: false, status: 409, error: "patient_arrived", detail: "this patient arrived; they did attend", appointmentId, written: 0 };
+    if (!(Date.parse(current.startAt) <= Date.now())) return { ...base, ok: false, status: 409, error: "before_slot_start", detail: `the slot starts at ${current.startAt}; a no-show is recorded only after it starts`, appointmentId, written: 0 };
+  }
 
+  const now = new Date().toISOString();
   const next = Appointment({
     ...current, state,
-    changedBy: resolved.actor.id, changedAt: new Date().toISOString(), changeReason: reason || null,
+    changedBy: resolved.actor.id, changedAt: now, changeReason: reason || null,
+    // When the desk marked the patient arrived, and when the visit was marked done: the times access reports read.
+    arrivedAt: state === "arrived" ? now : current.arrivedAt, completedAt: state === "completed" ? now : current.completedAt,
   });
   try {
     const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
@@ -350,8 +396,9 @@ async function listSchedule(request, env, ctx) {
   let appts, recalls;
   try {
     [appts, recalls] = await Promise.all([
-      patientId ? svc.byPatient(TYPE, patientId) : svc.list(TYPE, 500),
-      (patientId ? svc.byPatient(RECALL_TYPE, patientId) : svc.list(RECALL_TYPE, 500)).catch(() => []),
+      // Hospital-wide: every appointment and recall (listAll; the old read was the oldest 500).
+      patientId ? svc.byPatient(TYPE, patientId) : svc.listAll(TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows),
+      (patientId ? svc.byPatient(RECALL_TYPE, patientId) : svc.listAll(RECALL_TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows)).catch((e) => { if (e && e.name === "ListCeilingError") throw e; return []; }),
     ]);
   } catch (e) {
     /* A SCOPE REFUSAL IS A 403, NOT A SERVER ERROR. A role can hold queue.view (which opens this

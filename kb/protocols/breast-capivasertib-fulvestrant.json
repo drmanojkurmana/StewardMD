@@ -14,7 +14,8 @@
   "caps": "protocol",
   "source": {
     "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
-    "primaryStudy": "CAPItello-291: Turner NC, Oliveira M, Howell SJ, et al. N Engl J Med 2023;388:2058-2070"
+    "primaryStudy": "CAPItello-291: Turner NC, Oliveira M, Howell SJ, et al. N Engl J Med 2023;388:2058-2070",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
   },
   "institution": {
     "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-Q 6, 14 of 15)",
@@ -23,7 +24,7 @@
   "biomarkers": {
     "HR": "positive",
     "HER2": "negative",
-    "note": "Requires HR-positive, HER2-negative locally advanced or metastatic breast cancer with one or more PIK3CA, AKT1, or PTEN alterations detected by an FDA-approved or validated NGS/PCR test, following progression on or recurrence after at least one line of endocrine therapy (± CDK4/6 inhibitor). Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-Q (6 of 15 and 14 of 15) (Category 1, Preferred)."
+    "note": "Requires HR-positive, HER2-negative locally advanced or metastatic breast cancer with one or more PIK3CA, AKT1, or PTEN alterations detected by an FDA-approved or validated NGS/PCR test, following progression on or recurrence after at least one line of endocrine therapy (\u00b1 CDK4/6 inhibitor). Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-Q (6 of 15 and 14 of 15) (Category 1, Preferred)."
   },
   "stage": [
     "IV"
@@ -46,7 +47,7 @@
   ],
   "clearanceChecks": [
     "fasting plasma glucose (< 160 mg/dL and HbA1c < 8.0% prior to initiation)",
-    "liver function tests (ALT/AST ≤ 2.5x ULN or ≤ 5x ULN with liver metastases)",
+    "liver function tests (ALT/AST \u2264 2.5x ULN or \u2264 5x ULN with liver metastases)",
     "prior-cycle status"
   ],
   "doseModificationRules": [
@@ -54,19 +55,19 @@
       "condition": "hyperglycemia: fasting glucose > 250 mg/dL to 500 mg/dL (grade 3)",
       "drug": "capivasertib",
       "action": "hold/reduce",
-      "text": "Withhold capivasertib. Initiate or intensify antidiabetic therapy. When FPG recovers to ≤ 160 mg/dL, resume at reduced dose level (400 mg BID -> 320 mg BID -> 240 mg BID). Permanently discontinue if unable to tolerate 240 mg BID or for ketoacidosis."
+      "text": "Withhold capivasertib. Initiate or intensify antidiabetic therapy. When FPG recovers to \u2264 160 mg/dL, resume at reduced dose level (400 mg BID -> 320 mg BID -> 240 mg BID). Permanently discontinue if unable to tolerate 240 mg BID or for ketoacidosis."
     },
     {
       "condition": "grade 3 diarrhea",
       "drug": "capivasertib",
       "action": "hold/reduce",
-      "text": "Hold capivasertib until resolution to grade ≤ 1; resume at next lower dose level (320 mg BID)."
+      "text": "Hold capivasertib until resolution to grade \u2264 1; resume at next lower dose level (320 mg BID)."
     },
     {
       "condition": "grade 3 rash (maculopapular covering >30% BSA)",
       "drug": "capivasertib",
       "action": "hold/reduce",
-      "text": "Hold capivasertib until resolution to grade ≤ 1; resume at 320 mg BID. Discontinue permanently for suspected SJS/TEN or DRESS."
+      "text": "Hold capivasertib until resolution to grade \u2264 1; resume at 320 mg BID. Discontinue permanently for suspected SJS/TEN or DRESS."
     }
   ],
   "drugs": [
@@ -89,7 +90,22 @@
         "perDose": null
       },
       "days": [
-        1, 2, 3, 4, 8, 9, 10, 11, 15, 16, 17, 18, 22, 23, 24, 25
+        1,
+        2,
+        3,
+        4,
+        8,
+        9,
+        10,
+        11,
+        15,
+        16,
+        17,
+        18,
+        22,
+        23,
+        24,
+        25
       ],
       "modificationRules": []
     },

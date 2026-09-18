@@ -169,6 +169,10 @@ export function startSyntheticHospital({ port = 0, apiPort = 0, version = 1, exp
     res.setHeader('access-control-allow-origin', req.headers.origin || '*');
     res.setHeader('access-control-allow-headers', 'authorization, content-type');
     res.setHeader('access-control-allow-methods', 'GET, POST, OPTIONS');
+    // An EMR that serves its own SPA from another host allows that host to send the session with a
+    // request; without this a credentialed cross-origin GET is rejected by the browser before it is
+    // sent, which is not how a real hospital API behaves and made a live probe look like a dead one.
+    res.setHeader('access-control-allow-credentials', 'true');
   };
   const api = http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://localhost');

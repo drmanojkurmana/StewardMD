@@ -10,7 +10,9 @@ test("him: writes and reads ROIRequest only - no clinical write, no staff.admin 
   const g = grantForRole("him");
   assert.ok(g, "him resolves to a real grant");
   assert.equal(g.write.includes("ROIRequest"), true);
-  assert.equal(g.write.length, 1, "the ONLY thing him.roi grants write to: " + JSON.stringify(g.write));
+  // LegalHold joined 2026-09-17 through REGISTER_RECORDS, which `him` also holds (retention.js: the records officer
+  // places and lifts holds). Still nothing clinical.
+  assert.deepEqual(g.write, ["ROIRequest", "LegalHold", "StaffMessage", "StaffMessageRead"], "the ONLY things him writes (records custody, and messages to colleagues): " + JSON.stringify(g.write));
   // Read is unrestricted (null) because the `him` role ALSO holds EMR_VIEW - a separate authority
   // the role composes explicitly, not something the HIM_ROI branch itself grants.
   assert.equal(g.read, null);
@@ -19,7 +21,8 @@ test("him: writes and reads ROIRequest only - no clinical write, no staff.admin 
 test("blood_bank: reads/writes TransfusionEpisode, plus enough read to identify the patient, nothing more", () => {
   const g = grantForRole("blood_bank");
   assert.ok(g, "blood_bank resolves to a real grant");
-  assert.deepEqual(g.write.slice().sort(), ["TransfusionEpisode"]);
+  // The blood bank's own registers joined 2026-09-16 (blood-bank.js); none of them names a patient.
+  assert.deepEqual(g.write.slice().sort(), ["BloodDonation", "BloodDonor", "BloodSample", "BloodTestResult", "BloodUnit", "BloodUnitEvent", "DonorNotification", "DonorScreening", "TransfusionEpisode"]);
   assert.equal(g.read.includes("TransfusionEpisode"), true);
   assert.equal(g.read.includes("Patient"), true);
   assert.equal(g.read.includes("Encounter"), true);

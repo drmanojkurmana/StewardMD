@@ -47,6 +47,7 @@ const ALLOW = {
       "<div style=\"position:relative;\"><textarea id=\"wTlNote\" class=\"w-input\" rows=\"5\" placeholder=\"Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen.\">",
       ", Vt ", ", PEEP ", ", FiO2 ", ", EDD ",
       "4 mg in 50 mL",
+      "</span><textarea id=\"wQcmTargets\" rows=\"4\" placeholder=\"Potassium | 4.0 | 0.1 | mmol/L\"></textarea></label>",
       "AC (Doxorubicin + Cyclophosphamide)", "Doxorubicin", "AC-T (Doxorubicin + Cyclophosphamide -> Paclitaxel)", "Paclitaxel",
       "mFOLFOX6 (Oxaliplatin + Leucovorin + 5-FU)", "Oxaliplatin", "FOLFIRI (Irinotecan + Leucovorin + 5-FU)", "Irinotecan",
       "R-CHOP (Rituximab + CHOP)", "Rituximab", "ABVD (Hodgkin Lymphoma)", "Carboplatin + Paclitaxel", "Carboplatin",
@@ -60,7 +61,7 @@ const ALLOW = {
     ],
     "an internal name compared or looked up, shown only through its translation (labPartName, the ward list's no-ward group)": [
       "tests awaiting a result", "results awaiting verification", "cultures in progress", "critical results", "ward roster",
-      "imaging worklist", "critical findings", "held messages", "No ward assigned",
+      "imaging worklist", "critical findings", "held messages", "No ward assigned", "analyser results",
     ],
     "a code, an action separator, an element id suffix or a keyboard key name": ["Invoice", "Incident", "~done~", "~cancel~", "Tpl", "Escape", "Esc"],
   },
@@ -69,6 +70,7 @@ const ALLOW = {
       ", bed ", " <em>clinician edited</em>", "<div class=\"p-sig\"><div class=\"ln\"></div><span>Signed by ", " &middot; version ",
       "<div class=\"p-sig\"><div class=\"ln\"></div><span>Signature</span><p class=\"p-draft\">UNSIGNED DRAFT - not a final discharge summary.</p></div>",
       "<h1>Discharge summary</h1><div class=\"p-head\">", "<section class=\"p-prov\"><h2>Provenance</h2><p>",
+      "<p class=\"p-prov\">Patient information leaflet approved by ", ", given ",
     ],
     "a class name; the assembler's absence marker compared against; the English original under a translated refusal": [
       " fill", "Not recorded.", "<span class=\"en-orig\" lang=\"en\">Refused</span>",
@@ -84,13 +86,31 @@ const ALLOW = {
     ],
     "a reason stored with the report, shown through reasonText()": ["no hospital is open on this device", "the server did not accept it", "no connection to the server"],
   },
+  "wardsynq/site/pages/hr.js": {
+    "a suggested council or certificate name, typed into the staff record and kept as entered (a recorded value, never translated)": ["State medical council", "State nursing council", "State pharmacy council"],
+  },
+  "wardsynq/site/pages/engage.js": {
+    "a channel order code saved to the hospital's settings, compared and sent, never shown": ["whatsapp,sms", "sms,whatsapp"],
+  },
   "wardsynq/site/pages/admin.js": {
     "a record type or a lookup suffix, not words": ["Invoice", "Incident", "Org", "Bundle"],
+  },
+  "wardsynq/site/pages/lab-analysers.js": {
+    "the mapping format shown as an example: an instrument code, a laboratory test, its unit and a panel, entered as recorded": ["<textarea id=\"labAnMap\" rows=\"8\" class=\"mono\" style=\"width:100%\" placeholder=\"K | Potassium | mmol/L | Renal profile\">"],
+  },
+  "wardsynq/site/pages/patients.js": {
+    "the print stylesheet that prints only the Scan and Share QR sheet (CSS, not words)": [
+      "@media print { body > *:not(#pSharePrint) { display: none !important; } #pSharePrint { display: block !important; } } #pSharePrint { display: none; }",
+    ],
+  },
+  "wardsynq/site/pages/registers.js": {
+    "the print window's stylesheet, not words": ["</title><style>body{font:12px sans-serif}table{border-collapse:collapse;width:100%}td,th{border:1px solid #444;padding:3px;vertical-align:top}</style><h2>"],
+    "the reason sent to the stock ledger with a destruction of expired controlled drugs, recorded as written": ["Expired stock destroyed (NDPS Rules r.52V(1))"],
   },
 };
 const WARD_FILES = ["ward.js", "discharge.js", "patient-register.js"];
 const SITE_FILES = ["wardsynq/site/shell.js", "wardsynq/site/bug-reporter.js", "wardsynq/ui/wardsynq-app.js",
-  ...["abdm", "accounts", "admin", "audit", "group", "maik", "patients", "portal-access", "rota", "security"].map((p) => "wardsynq/site/pages/" + p + ".js")];
+  ...["abdm", "accounts", "admin", "audit", "engage", "governance", "group", "hr", "lab-analysers", "maik", "patients", "portal-access", "registers", "rota", "security", "stores", "assets", "dialysis", "bloodbank", "support", "quality"].map((p) => "wardsynq/site/pages/" + p + ".js")];
 
 for (const file of [...WARD_FILES, ...SITE_FILES]) {
   test("no unwrapped visible English in " + file + " beyond its allowlist", () => {
@@ -243,11 +263,14 @@ const RAW_STATUS_ALLOW = {
   "x.mode": "ICU ventilator mode (VENT_MODES in functions/_wardsynq/icu-care.js): fixed clinical abbreviations (VC-AC, PSV, HFNC, ...), not English prose words",
   "l.type": "line type: free text the clinician types (placeholder \"e.g. UVC, PICC\" at wLineType), not a server enum",
   "r.level": "a stock quantity number (inventory/pharmacy stock level), not a status code",
+  "m.level": "a QC control material's level as the laboratory named it (1, 2, Low, High), recorded content, not a server enum",
   "hit.result": "antibiotic susceptibility result (SUSCEPTIBILITY_RESULTS in functions/_wardsynq/pathology-report.js): the standard S/I/R/SDD microbiology codes, not English words",
   "b.kind": "BOTTLENECK_WORDS[b.kind] already covers the mapped word; this is its own explicit lang=\"en\" fallback for a kind the map does not know",
   "s.level": "a stock quantity inside a report row already wrapped '<span lang=\"en\">...", // the report intentionally marks its own values English
   "c.stage": "a wound stage (mostly the digits 1-4) interpolated through wTH's own wrap list, which already marks it lang=\"en\" by the file's own convention for values not treated as translatable words",
   "c.bill.state": "BILL_WORDS[c.bill.state] already covers every known code; this is its own explicit fallback for one it does not know",
+  "r.disposition": "the payer's own sentence from an NHCX CoverageEligibilityResponse.disposition (functions/_wardsynq/nhcx.js), recorded as the payer wrote it, not a code",
+  "b.type": "the payer's own benefit name from an NHCX CoverageEligibilityResponse benefit.type text or display, recorded as the payer wrote it, not a code",
 };
 test("ward.js: a raw server state/status/kind code is never rendered as visible text (only as a CSS class, or explicitly allowlisted with why)", () => {
   const w = read("ward.js"), lines = w.split("\n");

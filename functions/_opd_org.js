@@ -248,7 +248,55 @@ function wardsynqConfig(w) {
    * facility over ABDM becomes. Only "clinical-document" exists (abdm-hospital.js); absent means that default. */
   /* printLanguages joined 2026-09-15 (owner decision): { enabled } offers a second language on the patient's
    * prescription and discharge summary prints. Absent or anything but enabled:true means English only. */
-  for (const k of ["alerts", "abdm", "orderVerifyWithinHours", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears", "printLanguages"]) {
+  /* labelSizes joined 2026-09-16: the width and height in mm of each printed label (wristband, specimen, pharmacy,
+   * slip) for this hospital's own label printers. Bounded per kind by functions/_wardsynq/labels.js labelSizesOf. */
+  /* controlledDrugs joined 2026-09-16 (statutory registers): the drug master's controlled-drug flag, set on the
+   * Admin clinical settings screen (clinical-settings.js). Absent means no drug is flagged. */
+  /* dpdp joined 2026-09-16 (dpdp.js): the hospital's answer times for a data principal request and its policy target
+   * for telling patients of a breach. Since 2026-09-17 these have confirmed defaults and legal caps (privacy-law.js,
+   * legal opinion section A); a value past a cap is not used. dpdp.dpdpStartDate may only bring commencement earlier. */
+  /* retention joined 2026-09-17 (retention.js, legal opinion section H): years per retention class, never below the
+   * statutory minimum, and minorYearsAfter18. Absent means the safest defaults. */
+  /* supportServices joined 2026-09-16: the hospital's meal times, its mortuary cold chambers, and whether a
+   * vacated bed waits for a housekeeping clean and an inspection before it is available again. Absent means
+   * no meal times set, no chambers, and beds freed at discharge exactly as before. */
+  /* hr, patientComms, onlineBooking and feedback joined 2026-09-16 (gap wave): hr.lateGraceMinutes and the off-by-default
+   * hr.expiredRegistrationBlocksSigning (hr-records.js); reminder types, templates and quiet hours (patient-messaging.js);
+   * the sessions published for portal booking and their rules (online-booking.js); survey questions (patient-feedback.js).
+   * Each module reads its own settings defensively; absent means off. */
+  /* lactationWindowDays joined 2026-09-16: how many days after a delivery here order entry treats the patient as
+   * breastfeeding for the pregnancy and lactation check. Validated on save (clinical-settings.js) and again by
+   * migrate-maternity.js lactationWindowDaysOf; absent means lactation status is not recorded, never "no". */
+  /* bloodDonorCriteria joined 2026-09-17 (owner decision): the hospital's stricter-than-WHO donor selection criteria,
+   * validated on save (blood-bank.js validateDonorCriteria) and again on every read (donorCriteriaFor), which falls back
+   * to the WHO default for anything absent or not allowed. */
+  /* bloodCentre joined 2026-09-17 (legal opinion section G): NAT required, shorter component shelf lives, longer sample
+   * retention. Validated on save and on every read (blood-centre-rules.js bloodCentreSettings), which keeps the Rules'
+   * value for anything absent or looser. The blood centre record period is retention.years["blood-centre"], not here. */
+  /* gst joined 2026-09-17 (gst-packages): the hospital's GST settings where the law is not settled, each defaulting to
+   * the GST treatment review's safest reading (functions/_wardsynq/gst-settings.js readGstSettings). */
+  /* registers joined 2026-09-17 (legal review of the statutory registers): the hospital-editable settings where the law
+   * is unsettled (online Form F, MTP Form II recipient and due day, MedLEaPR, RBD form version, NDPS recognition and the
+   * witness policy). Validated by register-settings.js; absent means every safest default. */
+  /* legal joined 2026-09-17 (legal-requirements.js, owner's legal guidance): legal.stateConfig[STATE/UT][kind], the State/UT
+   * configuration values (online Form F, MedLEaPR) the registry leaves to the hospital. Validated on save and on every read. */
+  /* emergencyMedicines, prophylaxisWindowMinutes and antibiogramMinIsolates joined 2026-09-17 (clinical-settings.js): the
+   * emergency medicine list, the prophylaxis timing window and the antibiogram minimum isolate count. Absent means not
+   * configured, and each screen says so. */
+  /* rcm joined 2026-09-17 (rcm-claims-ops): the hospital's denial reasons and receivables ageing bands (claims-ops.js
+   * rcmSettings). Validated on save and on every read; absent means none set, and the claims desk says so. */
+  /* theatre joined 2026-09-17 (theatre.js): releaseHours, firstCaseGraceMinutes and rescheduleReasons. Validated on every
+   * read (theatreSettings); absent means no automatic release, no on-time judgement and free-text reschedule reasons. */
+  /* reorderPolicy joined 2026-09-17 (R2-4, purchasing.js): the reorder suggestion window, lead time, safety days and
+   * minimum days of data. Validated on save and on every read (readReorderPolicy); absent means not configured. */
+  /* dialysis joined 2026-09-17 (R3-4, dialysis.js): stations, serology groups and the dialyzer reuse maximum. Validated on save
+   * and on every read (readDialysisSettings); absent means not configured, with no segregation check and no reuse allowed. */
+  /* clinicalContentSignOff joined 2026-09-17 (R4-4, clinical-content-settings.js): per setting, who signed off the saved critical
+   * limits, delta limits, autoverification rules, MAR times or note templates, with the reason, the saver and when. Written only
+   * by POST /org/clinical-settings/<setting>. */
+  /* intake joined 2026-09-17 (R4-5, form-response.js intakeSettings): forAppointments, whether patient forms marked for
+   * appointments are offered before a booked appointment. Read defensively; absent or anything but true means off. */
+  for (const k of ["rcm", "theatre", "legal", "gst", "registers", "alerts", "abdm", "orderVerifyWithinHours", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears", "printLanguages", "labelSizes", "controlledDrugs", "dpdp", "retention", "supportServices", "hr", "patientComms", "onlineBooking", "feedback", "lactationWindowDays", "bloodDonorCriteria", "bloodCentre", "staffing", "emergencyMedicines", "prophylaxisWindowMinutes", "antibiogramMinIsolates", "reorderPolicy", "dialysis", "clinicalContentSignOff", "intake"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
@@ -313,6 +361,10 @@ export function bed(o = {}) {
     genderRestriction: o.genderRestriction === "male" || o.genderRestriction === "female" ? o.genderRestriction : null,
     isolation: !!o.isolation,
     active: o.active !== false,
+    /* When the bed entered its current state (ms), set by the store on a state change. A housekeeping clean
+     * is timed from here, and one bed-clean episode is told from the next by it. Null for a bed whose state
+     * has not changed since this was added. */
+    stateSince: Number(o.stateSince) > 0 ? Number(o.stateSince) : null,
     /* G7 BED HISTORY, so a past day's bed count is read from what the registry held that day, not from
      * today. `since` is when the bed was added (ms); every turn off or on appends {active, at}. Only the
      * store writes these; a patch never sets them. */

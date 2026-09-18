@@ -30,6 +30,10 @@
  *    a discharge - a ward has real reasons to send a patient home with a result pending - but
  *    nobody should discover them by reading the summary later.
  *
+ * 6. EDUCATION LEAFLETS ARE THE HOSPITAL'S OWN, APPROVED, AND GIVEN BY A PERSON. The rail lists the leaflets given on
+ *    this stay (functions/_wardsynq/patient-education.js) and, for a treating clinician, the approved leaflets that may
+ *    be given. Only a given leaflet prints, after the summary, as the approved copy made when it was given.
+ *
  * 5. IT ASKS FOR NOTHING IT CANNOT DO. The server says whether this viewer may author, and the
  *    screen offers only that. Authority is still enforced server-side on every write.
  */
@@ -48,7 +52,8 @@
     editing: "", compare: {},           // which section is open for editing; which show the record's version
     busy: false, loaded: false, err: "", note: "", refusal: null,
     ask: null,                          // the question open before an irreversible step: { kind: "sign" | "revert", arg }
-    print: null, printLang: ""          // the hospital's print settings; the second language picked for this print
+    print: null, printLang: "",         // the hospital's print settings; the second language picked for this print
+    edu: null, eduLib: null             // leaflets given on this stay and approved leaflets: null loading, false failed
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
@@ -84,6 +89,13 @@
     { k: "assessment", n: "Assessment", icon: "assignment" },
     { k: "plan", n: "Plan and follow-up", icon: "event_upcoming" }
   ];
+  /* The one section the assembler produces only on a birth stay (a maternity stay, or a newborn's own): the delivery,
+   * each newborn and its APGAR. Shown when the record has it; a signed summary shows it only if it was signed with it. */
+  var BIRTH = { k: "birth", n: "Delivery, newborn and APGAR", icon: "child_care" };
+  function sectionsOf(s) {
+    var has = function (o) { return !!o && HAS(o, "birth"); };
+    return has(s && s.sections) || (!(s && s.signed) && has(s && s.assembled)) ? SECTIONS.concat([BIRTH]) : SECTIONS;
+  }
   var NOT_RECORDED = "Not recorded.";
   function sectionName(sec) {
     switch (sec.k) {
@@ -95,6 +107,7 @@
       case "medications": return wT("ward.dc-sec-medications", "Medications");
       case "assessment": return wT("ward.dc-sec-assessment", "Assessment");
       case "plan": return wT("ward.dc-sec-plan", "Plan and follow-up");
+      case "birth": return wT("ward.dc-sec-birth", "Delivery, newborn and APGAR");
       default: return sec.n;
     }
   }
@@ -294,7 +307,7 @@
       '<div class="d-body">' + esc(text) + "</div>" +
       (s.edited && s.edited.length
         ? '<p class="d-provedit">' + ms("edit_note") + wTH("ward.dc-corrected-by-clinician", "Corrected by a clinician: {sections}. The rest is assembled from the record.", {
-            sections: esc(s.edited.map(function (k) { var f = SECTIONS.filter(function (x) { return x.k === k; })[0]; return f ? (wLang() === "en" ? f.n.toLowerCase() : sectionName(f)) : k; }).join(", ")) }) + "</p>"
+            sections: esc(s.edited.map(function (k) { var f = sectionsOf(s).filter(function (x) { return x.k === k; })[0]; return f ? (wLang() === "en" ? f.n.toLowerCase() : sectionName(f)) : k; }).join(", ")) }) + "</p>"
         : '<p class="d-provedit">' + ms("database") + wTH("ward.dc-nothing-edited", "Every section above is assembled from the record. Nothing has been edited.") + "</p>") +
     "</section>";
   }
@@ -321,12 +334,37 @@
       '<ul class="d-pending">' + rows + "</ul></div>";
   }
   function indexCard(s) {
-    var rows = SECTIONS.map(function (sec, i) {
+    var rows = sectionsOf(s).map(function (sec, i) {
       return '<a class="d-idx' + (isEdited(s, sec.k) ? " is-edited" : "") + '" href="#dsec-' + esc(sec.k) + '">' +
         '<span class="d-num sm">' + (i + 1) + "</span>" + esc(sectionName(sec)) +
         (isEdited(s, sec.k) ? ms("edit_note") : "") + "</a>";
     }).join("");
     return '<div class="d-card"><h4>' + ms("list") + wTH("ward.dc-sections", "Sections") + "</h4><nav class=\"d-index\">" + rows + "</nav></div>";
+  }
+  /* PATIENT EDUCATION. Loading, failed and none are three different cards: "could not load" never reads as "none given". */
+  function eduCard(s) {
+    var head = '<div class="d-card"><h4>' + ms("menu_book") + wTH("ward.dc-edu-title", "Patient education") + "</h4>";
+    if (s.edu == null) return head + "<p>" + wTH("ward.dc-edu-loading", "Loading leaflets...") + "</p></div>";
+    if (s.edu === false) return head + '<p class="d-cardnote" role="alert">' + wTH("ward.dc-edu-failed", "The leaflets given on this stay could not be loaded. Do not read this as none given.") + "</p></div>";
+    var items = s.edu.items || [];
+    var rows = items.map(function (x) {
+      return "<li><b>" + esc(x.title) + "</b> (" + esc(x.language) + ")" +
+        (x.detached ? '<span class="d-pstat">' + wTH("ward.dc-edu-taken-back", "Taken back: {why}", { why: esc(x.detached.reason) }) + "</span>"
+          : '<span class="d-pstat">' + wTH("ward.dc-edu-approved-by", "Approved by {who}", { who: esc(x.approvedBy || x.approvedById) }) + "</span>" +
+            (s.canAuthor ? ' <button class="d-btn ghost" data-d-act="eduback:' + esc(x.itemId) + '">' + wTH("ward.dc-edu-take-back", "Take back") + "</button>" : "")) + "</li>";
+    }).join("");
+    var list = rows ? '<ul class="d-pending">' + rows + "</ul>" : "<p>" + wTH("ward.dc-edu-none", "No leaflet has been given on this stay.") + "</p>";
+    var give = "";
+    if (s.canAuthor) {
+      if (s.eduLib == null) give = "<p>" + wTH("ward.dc-edu-loading", "Loading leaflets...") + "</p>";
+      else if (s.eduLib === false) give = '<p class="d-cardnote" role="alert">' + wTH("ward.dc-edu-lib-failed", "The approved leaflets could not be loaded, so none can be given now.") + "</p>";
+      else if (!s.eduLib.length) give = "<p>" + wTH("ward.dc-edu-lib-none", "This hospital has no approved leaflet yet. Leaflets are written and approved on the Patient portal page.") + "</p>";
+      else give = '<label class="d-lang"><span>' + wTH("ward.dc-edu-pick", "Approved leaflet") + '</span><select id="dEduPick">' + s.eduLib.map(function (l) {
+          return '<option value="' + esc(l.leafletId + "|" + l.version) + '">' + esc(l.title) + " (" + esc(l.language) + ")</option>";
+        }).join("") + "</select></label>" + '<button class="d-btn" data-d-act="edugive">' + ms("add") + wTH("ward.dc-edu-give", "Give with this summary") + "</button>";
+      give += '<label class="d-lang"><span>' + wTH("ward.dc-edu-why", "Reason, when taking a leaflet back") + '</span><input id="dEduWhy" maxlength="300"></label>';
+    }
+    return head + '<p class="d-cardnote">' + wTH("ward.dc-edu-note", "A given leaflet prints after the summary and shows on the patient's portal. Only an approved leaflet can be given.") + "</p>" + list + give + "</div>";
   }
   function statusCard(s) {
     if (s.signed) return '<div class="d-card">' + signatureBlock(s) + "</div>";
@@ -404,10 +442,10 @@
     return '<div class="d-shell">' + topbar(s) +
       '<div class="d-canvas"><div class="d-wrap">' +
         '<div class="d-main">' + banner(s) + identity(s) + signatureBlock(s) +
-          SECTIONS.map(function (sec, i) { return section(sec, i, s); }).join("") +
+          sectionsOf(s).map(function (sec, i) { return section(sec, i, s); }).join("") +
           provenance(s) +
         "</div>" +
-        '<aside class="d-rail">' + statusCard(s) + pendingCard(s) + indexCard(s) + "</aside>" +
+        '<aside class="d-rail">' + statusCard(s) + pendingCard(s) + eduCard(s) + indexCard(s) + "</aside>" +
       "</div></div>" + askPanel(s) + actionbar(s) + "</div>";
   }
   function topbar(s) {
@@ -450,8 +488,23 @@
   function load(msg) {
     st.busy = true; paint();
     return apiGet("/ward/discharge-summary?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(st.encounterId))
-      .then(function (r) { if (settle(r, msg)) applyRead(r); st.loaded = true; paint(); })
+      .then(function (r) { if (settle(r, msg)) { applyRead(r); loadEdu(); } st.loaded = true; paint(); })
       .catch(function () { st.busy = false; st.loaded = true; st.err = wT("ward.dc-could-not-reach-record", "Could not reach the record."); paint(); });
+  }
+
+  function loadEdu() {
+    var q = "?orgId=" + encodeURIComponent(st.orgId);
+    apiGet("/ward/education-attachments" + q + "&encounterId=" + encodeURIComponent(st.encounterId))
+      .then(function (r) { st.edu = r && r.ok ? r : false; repaintIfOpen(); }, function () { st.edu = false; repaintIfOpen(); });
+    if (!st.canAuthor) return;
+    apiGet("/ward/education-leaflets" + q + "&state=approved")
+      .then(function (r) { st.eduLib = r && r.ok ? r.leaflets : false; repaintIfOpen(); }, function () { st.eduLib = false; repaintIfOpen(); });
+  }
+  function eduWrite(path, body, okMsg) {
+    st.busy = true; paint();
+    apiPost(path, body)
+      .then(function (r) { if (settle(r, okMsg)) { st.edu = null; loadEdu(); } paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.dc-edu-not-saved", "Could not reach the record. Nothing was changed."); paint(); });
   }
 
   /** Saves the whole current section set, with `patch` applied. The server re-assembles the rest. */
@@ -493,7 +546,7 @@
     ].filter(function (r) { return r[1]; });
     var head = rows.map(function (r) { return '<div class="p-f"><span>' + esc(r[0]) + "</span><b>" + esc(r[1]) + "</b></div>"; }).join("");
     var headTr = rows.filter(function (r) { return r[2]; }).map(function (r) { return esc(r[0]) + ": " + T("print.dc.field." + r[2]); }).join(" &middot; ");
-    var body = SECTIONS.map(function (sec, i) {
+    var body = sectionsOf(s).map(function (sec, i) {
       return '<section><h2>' + (i + 1) + ". " + esc(sec.n) + (isEdited(s, sec.k) ? ' <em>clinician edited</em>' : "") + "</h2><p>" + esc(localTimes(textOf(s, sec.k) || NOT_RECORDED, s.print)) + "</p></section>" +
         tr("<h2>" + (i + 1) + ". " + T("print.dc.section." + sec.k) + "</h2><p>" + T("print.tr.englishOnly") + "</p>");
     }).join("");
@@ -503,9 +556,15 @@
         tr("<p>" + T("print.dc.signedBy") + "</p>")
       : '<div class="p-sig"><div class="ln"></div><span>Signature</span><p class="p-draft">UNSIGNED DRAFT - not a final discharge summary.</p></div>' +
         tr('<p class="p-draft">' + T("print.dc.unsigned") + "</p>");
+    /* The approved copies given on this stay, after the summary, each on its own page, in the leaflet's own language. */
+    var given = (s.edu && s.edu.items || []).filter(function (x) { return !x.detached; });
+    var leaflets = given.map(function (x) {
+      return '<section class="p-edu" style="page-break-before:always"><h2 lang="' + esc(x.language) + '">' + esc(x.title) + '</h2><p lang="' + esc(x.language) + '">' + esc(x.body).replace(/\n/g, "<br>") + "</p>" +
+        '<p class="p-prov">Patient information leaflet approved by ' + esc(x.approvedBy || x.approvedById) + " on " + esc(pd(x.approvedAt)) + ", given " + esc(pd(x.attachedAt)) + ".</p></section>";
+    }).join("");
     return "<h1>Discharge summary</h1><div class=\"p-head\">" + head + "</div>" +
       tr("<h2>" + T("print.dc.title") + "</h2>" + (lang ? WP.authority("dc", lang) : "") + "<p>" + headTr + "</p>") + body +
-      (prov ? '<section class="p-prov"><h2>Provenance</h2><p>' + esc(prov) + "</p></section>" + tr("<h2>" + T("print.dc.provenance") + "</h2><p>" + T("print.tr.englishOnly") + "</p>") : "") + sig;
+      (prov ? '<section class="p-prov"><h2>Provenance</h2><p>' + esc(prov) + "</p></section>" + tr("<h2>" + T("print.dc.provenance") + "</h2><p>" + T("print.tr.englishOnly") + "</p>") : "") + sig + leaflets;
   }
   function doPrint() {
     var w = root().querySelector(".d-print");
@@ -532,6 +591,17 @@
     if (cmd === "edit") { st.editing = arg; paint(); return; }
     if (cmd === "cancel") { st.editing = ""; paint(); return; }
     if (cmd === "print") { doPrint(); return; }
+    if (cmd === "edugive") {
+      var pick = val("dEduPick"), bar = pick.lastIndexOf("|"); if (bar < 1 || st.busy) return;
+      eduWrite("/ward/education-attach", { orgId: st.orgId, encounterId: st.encounterId, leafletId: pick.slice(0, bar), leafletVersion: Number(pick.slice(bar + 1)) }, wT("ward.dc-edu-given", "Leaflet given with this summary."));
+      return;
+    }
+    if (cmd === "eduback") {
+      var why = val("dEduWhy").trim();
+      if (why.length < 5) { st.err = wT("ward.dc-edu-why-needed", "Write why the leaflet is taken back, then press Take back."); paint(); return; }
+      eduWrite("/ward/education-detach", { orgId: st.orgId, encounterId: st.encounterId, itemId: arg, reason: why }, wT("ward.dc-edu-taken", "Leaflet taken back. It stays in the record."));
+      return;
+    }
     if (cmd === "draft") { draft(null, wT("ward.dc-draft-saved-from-record", "Draft saved from the record.")); return; }
     if (cmd === "sign") { st.ask = { kind: "sign" }; paint(); return; }
     if (cmd === "askno") { st.ask = null; paint(); return; }
@@ -564,7 +634,7 @@
     st.encounterId = opts.encounterId || "";
     st.patientId = opts.patientId || "";
     if (!st.orgId || !st.encounterId) { try { G.toast && G.toast(wT("ward.dc-needs-an-admission", "A discharge summary needs an admission.")); } catch (e) {} return; }
-    st.loaded = false; st.err = ""; st.note = ""; st.refusal = null; st.editing = ""; st.compare = {}; st.printLang = ""; st.ask = null;
+    st.loaded = false; st.err = ""; st.note = ""; st.refusal = null; st.editing = ""; st.compare = {}; st.printLang = ""; st.ask = null; st.edu = null; st.eduLib = null;
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     el.removeEventListener("change", onChange); el.addEventListener("change", onChange);

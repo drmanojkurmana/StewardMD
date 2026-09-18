@@ -32,6 +32,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { overlaps } from "./scheduling.js";
 import { blackedOutBy } from "./blackout.js";
+import { heldSessionFor, theatreSettings } from "./theatre.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "ResourceBooking";
@@ -62,6 +63,8 @@ function ResourceBooking(input) {
     patientId: i.patientId || null,          // a room may be booked for maintenance, with no patient
     encounterId: i.encounterId || null,
     purpose: i.purpose || null,
+    // The unit or surgeon whose theatre session this booking uses (theatre.js). Null outside a session.
+    sessionOwnerId: i.sessionOwnerId || null,
     startAt: i.startAt || null,
     minutes: Number.isFinite(i.minutes) ? i.minutes : null,
     state: STATES.includes(i.state) ? i.state : "booked",
@@ -112,7 +115,7 @@ function summary(b) {
   return {
     bookingId: b.id, resourceId: b.resourceId, resourceName: b.resourceName || null,
     patientId: b.patientId || null, encounterId: b.encounterId || null, purpose: b.purpose || null,
-    startAt: b.startAt, minutes: b.minutes, state: b.state,
+    sessionOwnerId: b.sessionOwnerId || null, startAt: b.startAt, minutes: b.minutes, state: b.state,
     bookedBy: b.bookedBy, bookedAt: b.bookedAt,
     changedBy: b.changedBy || null, changedAt: b.changedAt || null, changeReason: b.changeReason || null,
     version: b.version,
@@ -151,8 +154,11 @@ async function bookResource(request, env, ctx) {
   const id = bookingIdFor(resourceId, startAt);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
+  /* R4-2: every appointment/booking and blackout (service.listAll, paged). The old reads were the OLDEST 500, so a clash
+   * with a newer booking or leave was not seen. Past 50,000 the read throws and nothing is booked (502 with the reason).
+   * ponytail: a by-clinician or by-resource index is the upgrade; audit O20 for the paging cost. */
   let existing, blackouts;
-  try { [existing, blackouts] = await Promise.all([svc.list(TYPE, 500), svc.list("Blackout", 500).catch(() => [])]); existing = existing || []; }
+  try { [existing, blackouts] = await Promise.all([svc.listAll(TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows), svc.listAll("Blackout", { max: 50000, throwOnTruncate: true }).then((g) => g.rows, (e) => { if (e && e.name === "ListCeilingError") throw e; return []; })]); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
   // A BLACKOUT IS A REFUSAL, NEVER AN OVERRIDE - the same rule scheduling.js applies to a
@@ -166,9 +172,22 @@ async function bookResource(request, env, ctx) {
   const candidate = ResourceBooking({
     id, resourceId, resourceName: resource.name,
     patientId: str(ctx.patientId) || null, encounterId: str(ctx.encounterId) || null,
-    purpose: str(ctx.purpose) || null, startAt, minutes, state: "booked",
+    purpose: str(ctx.purpose) || null, sessionOwnerId: str(ctx.sessionOwnerId) || null, startAt, minutes, state: "booked",
     bookedBy: resolved.actor.id, bookedAt: new Date().toISOString(),
   });
+
+  /* A THEATRE SESSION HELD FOR SOMEBODY ELSE IS NOT FREE (theatre.js). Its minutes are the owner's until a person
+   * releases them or the hospital's release hour passes. Sessions that cannot be read refuse the booking: guessing
+   * they are free is how a surgeon's list is taken from under them. */
+  if (resource.kind === "theatre") {
+    let sessions;
+    try { sessions = (await svc.listAll("TheatreSession", { max: 50000, throwOnTruncate: true })).rows; }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The theatre sessions could not be read, so the theatre was not booked.", written: 0 }; }
+    const held = heldSessionFor(sessions, candidate, candidate.sessionOwnerId, theatreSettings(ctx.theatre), Date.now());
+    if (held) {
+      return { ...base, ok: false, status: 409, error: "session_held", detail: `${resource.name} is held for ${(held.owner && held.owner.name) || (held.owner && held.owner.id)} from ${held.startAt} for ${held.minutes} minutes.`, sessionId: held.id, written: 0 };
+    }
+  }
 
   const current = existing.find((b) => b && b.id === id) || null;
   if (current && current.state === "booked") return { ...base, ok: true, written: 0, skipped: "already_booked", ...summary(current) };
@@ -235,7 +254,7 @@ async function resourceSchedule(request, env, ctx) {
   if (error) return { ...base, ...error, resources: [] };
 
   let rows;
-  try { rows = (await svc.list(TYPE, 1000)) || []; }
+  try { rows = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; } // every booking (the old read was the oldest 1,000)
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), resources: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), resources: [] };

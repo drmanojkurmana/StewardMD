@@ -430,6 +430,8 @@ export default {
   //   "0 * * * *"     → Connect ABDM reconciliation GC sweep (hourly): erase expired/terminal ephemeral
   //                     keys + push-buffers. Flag-gated + no-op-safe + fail-safe on the Pages side, so it
   //                     is a cheap 404 while Connect is unprovisioned/flag-OFF.
+  //                     Also the WardSynQ scheduled backup (POSTs /api/queue/ops/backup-all): each hospital with a
+  //                     backup destination gets its daily backup on the first run of the UTC day, retried hourly.
   // All delegate to Pages Functions with the shared admin token. Best-effort.
   async scheduled(event, env, ctx) {
     if (!env.UPDATES_ADMIN_TOKEN) return;
@@ -440,6 +442,7 @@ export default {
     }
     if (event.cron === "0 * * * *") {
       ctx.waitUntil(post("/api/connect/admin/sweep"));     // Connect ABDM reconciliation GC (flag-gated, no-op-safe, fail-safe)
+      ctx.waitUntil(post("/api/queue/ops/backup-all"));    // WardSynQ: daily per-hospital backup, retried hourly until done (a no-op when not due)
       return;
     }
     if (event.cron === "*/15 * * * *") {

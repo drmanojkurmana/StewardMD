@@ -1,0 +1,121 @@
+{
+  "site": "myeloma",
+  "name": "Multiple myeloma",
+  "system": "Oncology / Haematologic",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Multiple myeloma is staged with the Revised International Staging System (R-ISS, 2015), which combines tumour burden (ISS: beta-2 microglobulin and albumin) with biology (high-risk cytogenetics and LDH). There is no TNM; this file maps R-ISS tiers onto the engine's T/N/M slots. High-risk cytogenetics are del(17p), t(4;14) and t(14;16) by FISH; LDH above the upper limit of normal upstages. Smouldering myeloma, solitary plasmacytoma and AL amyloidosis are classified separately.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Disease burden cannot be assessed (missing beta-2 microglobulin or albumin)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of active myeloma (MGUS/smouldering, not staged by R-ISS)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "R-ISS I pattern: beta-2 microglobulin below 3.5 mg/L with albumin 3.5 g/dL or higher",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "R-ISS II pattern: neither stage I nor stage III",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "R-ISS III pattern: beta-2 microglobulin 5.5 mg/L or higher",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Biology cannot be assessed (missing FISH or LDH)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "Standard-risk cytogenetics with normal LDH",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "High-risk cytogenetics [del(17p) and/or t(4;14) and/or t(14;16)] and/or LDH above normal",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No end-organ (CRAB/SLiM-CRAB) attributable damage requiring therapy distinction; anatomic M does not apply",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Extramedullary or plasma-cell leukaemia dissemination recorded as advanced biology (does not change R-ISS tier)",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "ISS I plus standard-risk cytogenetics plus normal LDH",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "any N",
+          "m": "M0",
+          "basis": "Neither stage I nor stage III",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "any T",
+          "n": "N1",
+          "m": "M0",
+          "basis": "High-risk biology without full stage III burden",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "ISS III plus high-risk cytogenetics and/or high LDH",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Myeloma has no regional nodal basins; N slots encode cytogenetic/LDH biology and M slots encode dissemination for engine compatibility. Lytic bone lesions, marrow plasmacytosis and free-light-chain ratio define active disease (SLiM-CRAB), not stage.",
+      "histologicGrade": "Plasma-cell morphology is not graded G1-G3; proliferation (plasma-cell labelling index), circulating plasma cells and cytogenetic risk stratify biology instead.",
+      "histopathologicTypes": "Symptomatic multiple myeloma (IgG, IgA, light-chain, non-secretory); smouldering multiple myeloma (not R-ISS staged); solitary plasmacytoma of bone or extramedullary; plasma-cell leukaemia.",
+      "prognosticFactors": [
+        "Beta-2 microglobulin (below 3.5 vs 5.5 mg/L or higher)",
+        "Serum albumin (3.5 g/dL cutoff)",
+        "High-risk FISH [del(17p), t(4;14), t(14;16)]",
+        "LDH above upper limit of normal",
+        "R-ISS tier (I median survival not reached; III about 43 months in the original cohort)",
+        "Renal failure, anaemia, hypercalcaemia, lytic lesions (CRAB)",
+        "1q gain, del(1p) and TP53 mutation (extended risk)"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

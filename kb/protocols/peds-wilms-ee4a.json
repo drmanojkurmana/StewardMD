@@ -1,0 +1,93 @@
+{
+  "id": "peds-wilms-ee4a",
+  "diseaseId": "wilms",
+  "name": "Regimen EE-4A: Vincristine + Dactinomycin (Stage I-II Favorable Histology Wilms Tumor)",
+  "version": "1.0",
+  "lifecycleState": "active",
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "drug",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pediatric Wilms Tumor",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS Reference Regimen: COG NWTS-5 / AREN0532 Protocol",
+    "approval": null
+  },
+  "stage": [
+    "I",
+    "II"
+  ],
+  "treatmentSetting": [
+    "adjuvant",
+    "curative"
+  ],
+  "histology": "nephroblastoma / Wilms tumor (favorable histology)",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "0.15 mg/kg IV",
+      "notes": "Prior to dactinomycin infusion"
+    }
+  ],
+  "supportiveCare": [
+    "Bowel management: stool softener (polyethylene glycol or lactulose) to prevent vincristine-induced constipation / paralytic ileus.",
+    "Hepatotoxicity monitoring: monitor for sinusoidal obstruction syndrome / veno-occlusive disease (SOS/VOD) associated with dactinomycin."
+  ],
+  "monitoring": [
+    "CBC with differential and CMP before each cycle",
+    "Liver enzymes and total bilirubin (check for dactinomycin-induced hepatotoxicity)",
+    "Weekly neurological exam for peripheral motor/sensory neuropathy, loss of deep tendon reflexes, or abdominal distension"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "Severe peripheral neuropathy (severe weakness, foot drop, or severe ileus)",
+      "action": "withhold/reduce",
+      "text": "Withhold vincristine until symptom resolution. Resume at 50% dose or discontinue if Grade >= 3 per physician discretion."
+    },
+    {
+      "condition": "Veno-occlusive disease / Hepatopathy (Bilirubin > 3x ULN or ALT > 5x ULN)",
+      "action": "hold dactinomycin",
+      "text": "Hold dactinomycin until complete clinical and biochemical recovery. Resume with 50% dose reduction."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "vincristine",
+      "name": "Vincristine",
+      "basis": "bsa",
+      "dosePerUnit": 1.5,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": 2.0
+      },
+      "notes": "Vincristine 1.5 mg/m2 IV push Day 1 (capped at absolute maximum 2.0 mg). In patients <= 12 kg or age < 1 year, dose is 0.05 mg/kg. Grounded in NWTS-5 / COG EE-4A protocol."
+    },
+    {
+      "id": "dactinomycin",
+      "name": "Dactinomycin (Actinomycin D)",
+      "basis": "mgkg",
+      "dosePerUnit": 45,
+      "unit": "mcg/kg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Dactinomycin 45 mcg/kg IV push Day 1 every 21 days (maximum single dose 2.3 mg). Alternatively 1.35 mg/m2 in older children (> 12 kg). NWTS-5 / COG EE-4A protocol standard."
+    }
+  ]
+}

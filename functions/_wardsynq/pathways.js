@@ -124,6 +124,8 @@ function summary(def, nowMs, retired) {
 /* ---------------------------------------------------------------- progress, PURE */
 
 function matches(step, r) {
+  // A form the patient filled in on the portal is what they said, not a clinician's assessment: it never completes a step.
+  if (r.resourceType === "FormResponse" && r.origin === "patient") return false;
   if (step.kind === "orders") return r.resourceType === "OrderSetApplication" && str(r.setId) === str(step.orderSetId);
   if (step.kind === "assessment") return r.resourceType === "FormResponse" && str(r.formKey) === str(step.formKey);
   const e = step.evidence || {};

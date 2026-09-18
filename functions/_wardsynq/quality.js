@@ -27,6 +27,7 @@
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
+import { readWindowed } from "./read-window.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -53,6 +54,13 @@ function measure(id, title, numerator, denominator, extra) {
 }
 
 /** PURE. A measure the record cannot support, named with the reason rather than left off. */
+/* R5-3: each source type is read from the start of the period asked for (read-window.js), except the types whose
+ * records outlive the write that made them - a stay, a request, the patient master - which are still read whole. Past
+ * READ_MAX every measure built on that type is not computable, with the reason, never a short rate.
+ * ponytail: each page still re-groups every version of the type; only the number of pages falls (audit O20). */
+const READ_MAX = 50000;
+const TRUNCATED_WHY = "more records exist than can be read at once; not all of this period was read";
+
 function notComputable(id, title, reason, reasonCode, reasonVars) {
   return { id, title, numerator: null, denominator: null, rate: null, computable: false, reason, ...(reasonCode ? { reasonCode, ...(reasonVars ? { reasonVars } : {}) } : {}) };
 }
@@ -192,23 +200,25 @@ async function qualityReport(request, env, ctx) {
   const days = Math.min(365, Math.max(1, Number(ctx.days) || 30));
   const fromMs = nowMs - days * 86400000;
 
-  let loops, administrations, encounters, summaries;
+  const SOURCES = ["CriticalResultLoop", "MedicationAdministration", "Encounter", "ClinicalNote"];
+  let loops, administrations, encounters, summaries, truncated;
   try {
-    [loops, administrations, encounters, summaries] = await Promise.all([
-      svc.list("CriticalResultLoop", 1000),
-      svc.list("MedicationAdministration", 1000),
-      svc.list("Encounter", 1000),
-      svc.list("ClinicalNote", 1000),
-    ]);
+    const got = await Promise.all(SOURCES.map((t) => readWindowed(svc, t, { sinceMs: fromMs, max: READ_MAX })));
+    [loops, administrations, encounters, summaries] = got.map((g) => g.rows);
+    truncated = new Set(SOURCES.filter((t, k) => got[k].truncated));
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), measures: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), measures: [] };
   }
 
+  const NEEDS = { "critical-ack-within-window": ["CriticalResultLoop"], "dose-on-time": ["MedicationAdministration"], "discharge-summary-signed": ["Encounter", "ClinicalNote"] };
   const measures = computeMeasures({
     loops, administrations, encounters, summaries,
     fromMs, toMs: nowMs,
     ackWindowMinutes: ctx.ackWindowMinutes, graceMinutes: ctx.graceMinutes,
+  }).map((m) => {
+    const t = (NEEDS[m.id] || []).find((x) => truncated.has(x));
+    return t ? notComputable(m.id, m.title, `${t} records could not be read: ${TRUNCATED_WHY}`, "type-unreadable", { type: t, why: TRUNCATED_WHY }) : m;
   });
 
   return {
@@ -471,7 +481,7 @@ async function qualitySafetyReport(request, env, ctx) {
    * null with the reason, not the whole report a failure and not a row of zeros. */
   const unreadable = {}, rows = {};
   await Promise.all(QS_TYPES.map(async (t) => {
-    try { rows[t] = await svc.list(t, 1000); }
+    try { const got = await readWindowed(svc, t, { sinceMs: fromMs, max: READ_MAX }); rows[t] = got.rows; if (got.truncated) unreadable[t] = TRUNCATED_WHY; }
     catch (e) { unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : str(e && e.message) || "read failed"; rows[t] = []; }
   }));
   const r = computeQualitySafety({

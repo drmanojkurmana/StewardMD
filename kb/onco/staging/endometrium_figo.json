@@ -1,0 +1,136 @@
+{
+  "site": "endometrium_figo",
+  "name": "Endometrium - FIGO 2023 Molecular Staging",
+  "system": "Oncology / Gynecologic (Clinical)",
+  "versions": [
+    {
+      "version": "FIGO 2023 (Molecular)",
+      "seeded": true,
+      "provenance": "FIGO staging of endometrial cancer 2023 update incorporating TCGA molecular classification; licensed clinical reference.",
+      "introduction": "The FIGO 2023 endometrial cancer staging system fundamentally revolutionizes gynecologic oncology by integrating molecular profiling directly into anatomical stages. Patients are categorized into 4 Proactive Molecular Risk Groups: POLE ultramutated (POLEmut - favorable; downstages I-II), Mismatch repair deficient (MMRd - intermediate; pembrolizumab eligible), No specific molecular profile (NSMP - intermediate), and p53 abnormal (p53abn - aggressive; upstages to IIC/IV).",
+      "t": [
+        {
+          "code": "FIGO I",
+          "label": "Tumor confined to the corpus uteri and ovary (Stage IA: limited to endometrium or <50% myometrial invasion; Stage IB: >=50% myometrial invasion; Stage IC: limited to ovary with concurrent low-grade endometrium)"
+        },
+        {
+          "code": "FIGO II",
+          "label": "Tumor invades cervical stroma or demonstrates extensive lymphovascular space invasion (LVSI)"
+        },
+        {
+          "code": "FIGO III",
+          "label": "Local or regional spread (IIIA: uterine serosa/adnexa; IIIB: vagina/parametrium; IIIC: lymph node metastases)"
+        },
+        {
+          "code": "FIGO IV",
+          "label": "Tumor invades bladder/bowel mucosa or distant metastases"
+        }
+      ],
+      "n": [
+        {
+          "code": "FIGO IIIC1",
+          "label": "Pelvic lymph node metastasis (IIIC1i micrometastasis <=2 mm, IIIC1ii macrometastasis >2 mm)"
+        },
+        {
+          "code": "FIGO IIIC2",
+          "label": "Para-aortic lymph node metastasis with or without pelvic nodes"
+        }
+      ],
+      "m": [
+        {
+          "code": "POLEmut",
+          "label": "Pathogenic POLE exonuclease domain mutation (exceptional prognosis; downstages Stage I-II to Stage IAm(POLEmut))"
+        },
+        {
+          "code": "p53abn",
+          "label": "p53 abnormal / TP53 mutant (high-risk biology; Stage I-II with myometrial invasion upstaged to Stage IICm(p53abn))"
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "IA1",
+          "t": "Non-aggressive histology confined to endometrium or polyp",
+          "n": "Negative nodes",
+          "m": "Standard",
+          "basis": "Total hysterectomy + bilateral salpingo-oophorectomy (BSO). Adjuvant therapy omitted."
+        },
+        {
+          "stage": "IA2",
+          "t": "<50% myometrial invasion, no or focal LVSI",
+          "n": "Negative nodes",
+          "m": "Standard",
+          "basis": "Surgical staging. Observation or vaginal brachytherapy if high-intermediate risk."
+        },
+        {
+          "stage": "IAm(POLE)",
+          "t": "Stages I-II with pathogenic POLE mutation",
+          "n": "Negative nodes",
+          "m": "POLEmut",
+          "basis": "POLE ultramutated favorable biology: adjuvant therapy can be safely de-escalated/omitted even if high grade."
+        },
+        {
+          "stage": "IB",
+          "t": ">=50% myometrial invasion, non-aggressive",
+          "n": "Negative nodes",
+          "m": "Standard",
+          "basis": "External beam radiation therapy (EBRT) +/- vaginal brachytherapy or systemic chemotherapy."
+        },
+        {
+          "stage": "IICm(p53)",
+          "t": "p53 abnormal with ANY myometrial invasion",
+          "n": "Negative nodes",
+          "m": "p53abn",
+          "basis": "Upstaged to IIC due to high-risk molecular biology: Systemic chemotherapy (Carboplatin + Paclitaxel) + EBRT."
+        },
+        {
+          "stage": "IIA",
+          "t": "Invasion of cervical stroma",
+          "n": "Negative nodes",
+          "m": "Standard",
+          "basis": "EBRT + vaginal brachytherapy +/- chemotherapy."
+        },
+        {
+          "stage": "IIB",
+          "t": "Substantial lymphovascular space invasion (LVSI)",
+          "n": "Negative nodes",
+          "m": "Standard",
+          "basis": "High risk of recurrence: Pelvic EBRT and systemic chemotherapy."
+        },
+        {
+          "stage": "IIIC1",
+          "t": "Any T",
+          "n": "Pelvic lymph node metastasis",
+          "m": "Standard",
+          "basis": "Systemic chemotherapy + directed nodal radiation."
+        },
+        {
+          "stage": "IIIC2",
+          "t": "Any T",
+          "n": "Para-aortic lymph node metastasis",
+          "m": "Standard",
+          "basis": "Extended-field radiotherapy + systemic chemotherapy."
+        },
+        {
+          "stage": "IVB",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "Distant metastasis / peritoneal carcinomatosis",
+          "basis": "Chemoimmunotherapy: Pembrolizumab + Lenvatinib OR Carboplatin + Paclitaxel + Dostarlimab/Pembrolizumab (standard for MMRd/dMMR)."
+        }
+      ],
+      "regionalNodes": "Pelvic lymph nodes and para-aortic lymph nodes. Sentinel lymph node (SLN) mapping with indocyanine green (ICG) is standard.",
+      "histologicGrade": "FIGO Grade 1 (<=5% solid non-squamous growth), Grade 2 (6-50% solid growth), Grade 3 (>50% solid growth).",
+      "histopathologicTypes": "Endometrioid adenocarcinoma, Serous carcinoma, Clear cell carcinoma, Carcinosarcoma, Undifferentiated/dedifferentiated carcinoma.",
+      "prognosticFactors": [
+        "TCGA Molecular subtype: POLEmut (favorable), MMRd/MSI-H, NSMP, p53abn (unfavorable)",
+        "Substantial lymphovascular space invasion (LVSI)",
+        "Histologic subtype (serous and carcinosarcoma carry high recurrence risk)",
+        "Depth of myometrial invasion (>=50% vs <50%)"
+      ]
+    },
+    {
+      "version": "FIGO 2009 (historical)",
+      "seeded": false
+    }
+  ]
+}

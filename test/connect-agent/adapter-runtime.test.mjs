@@ -6,7 +6,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   fetchExpression, parseFetchExpression, fillFields, idCandidates, replayPlan, classifyResponse, rowsFromJson, rowsFromHtml,
-  executeView, tokenFor, PAGE_TOKENS, NotSignedIn,
+  executeView, tokenFor, PAGE_TOKENS, NotSignedIn, FETCH_TIMEOUT_MS,
+  provenValue, unscopedField, executeProven, UnscopedRequest,
 } from '../../connect-agent/phone/adapter-runtime.mjs';
 
 const ORIGIN = 'https://ghis.example';
@@ -129,4 +130,173 @@ test('executeView tries the joined record-visit form when the first activation y
   const expired = fakePlugin(() => ({ status: 200, url: ORIGIN + '/Login', text: '<form><input type="password"></form>' }));
   await assert.rejects(executeView({ plugin: expired, origin: ORIGIN, view: { endpoints: [{ method: 'GET', path: '/x/labs?recordNo' }] }, patient, parseHtml: miniParse }), (e) => e instanceof NotSignedIn && /login page/.test(e.message));
   assert.equal(await executeView({ plugin, origin: ORIGIN, view: { endpoints: [] }, patient }), null, 'no replayable call: the caller falls back to the page');
+});
+
+test('every in-page request has its own deadline: a hospital that never answers is aborted', async () => {
+  assert.equal(parseFetchExpression(fetchExpression({ method: 'GET', url: 'https://h/x' })).timeoutMs, FETCH_TIMEOUT_MS);
+  const expr = fetchExpression({ method: 'GET', url: 'https://h/x', timeoutMs: 30 });
+  assert.equal(parseFetchExpression(expr).timeoutMs, 30);
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = (url, init) => new Promise((resolve, reject) => { init.signal.addEventListener('abort', () => reject(new Error('aborted'))); });
+  try {
+    const t0 = Date.now();
+    const out = JSON.parse(await new Function('return ' + expr)());
+    assert.equal(out.status, 0);
+    assert.match(out.error, /aborted/);
+    assert.ok(Date.now() - t0 < 2000, 'aborted at its deadline');
+  } finally { globalThis.fetch = realFetch; }
+});
+
+test('an untraceable patient key is filled from the patient, never sent empty', () => {
+  const patient = { patientId: 'MR900001', episodeId: 'IP5550001' };
+  assert.equal(provenValue('patient_id', { unmapped: true }, { patient }), 'MR900001', 'a patient key falls back to this patient');
+  assert.equal(provenValue('Episode_Id', { unmapped: true }, { patient }), 'IP5550001', 'a visit key falls back to this visit');
+  assert.equal(provenValue('DeptID', { unmapped: true }, { patient }), '', 'an ordinary filter is still sent empty');
+  assert.equal(provenValue('DeptID', { empty: true }, { patient }), '', 'a proven-empty filter stays empty');
+});
+
+test('a request that would go out without the patient is refused, not sent', async () => {
+  const patient = { patientId: 'MR900001' };
+  assert.equal(unscopedField({ url: '/Lab/Home/Get?patient_id=&DeptID=', body: null }, patient), 'patient_id');
+  assert.equal(unscopedField({ url: '/Lab/Home/Get?patient_id=MR900001&DeptID=', body: null }, patient), null);
+  assert.equal(unscopedField({ url: '/Lab/Home/Get', body: 'Render_ID=&patient_id=' }, patient), 'patient_id');
+  assert.equal(unscopedField({ url: '/Doctor/Home/GetIPWL?PatientId=', body: null }, {}), null, 'the ward list has no patient and is not scoped');
+
+  // executeProven refuses rather than reading whatever the hospital returns for everyone.
+  let sent = 0;
+  const plugin = { async currentUrl() { return { url: 'https://h/Lab' }; }, async evaluate() { sent += 1; return { result: '{}' }; } };
+  const view = { resourceHint: 'labs', pathTemplate: 'https://h/Lab', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Lab/Home/Get?patient_id', role: 'data', params: { patient_id: { empty: true } } }] };
+  await assert.rejects(executeProven({ plugin, origin: 'https://h', view, patient }), (e) => e.name === 'UnscopedRequest');
+  assert.equal(sent, 0, 'the unscoped request was never issued to the hospital');
+});
+
+test('a detail request whose chain key is missing is refused, not sent with an empty id', async () => {
+  let sent = 0;
+  const plugin = { async currentUrl() { return { url: 'https://h/Lab' }; }, async evaluate() { sent += 1; return { result: '{}' }; } };
+  const view = { resourceHint: 'labs-detail', detailOf: 'labs', pathTemplate: 'https://h/Lab', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' },
+    endpoints: [{ method: 'POST', path: '/Lab/Home/GetPrintLabResultDetailsAuth', bodyKeys: ['Render_ID', 'Episode_Id'], requestKind: 'form', role: 'data',
+      params: { Render_ID: { from: 'labs', field: 'ServiceRenderId' }, Episode_Id: { from: 'labs', field: 'episode_id' } } }] };
+  // the parent row is missing ServiceRenderId: the chain is broken
+  await assert.rejects(executeProven({ plugin, origin: 'https://h', view, patient: { patientId: 'MR1' }, parentRow: { episode_id: 'IP1' } }), (e) => e.name === 'UnscopedRequest');
+  assert.equal(sent, 0, 'a detail request with no render id never reaches the hospital');
+  // with the row intact it goes through
+  sent = 0;
+  const ok = { async currentUrl() { return { url: 'https://h/Lab' }; }, async evaluate() { sent += 1; return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: 'x', text: '[]' }) }; } };
+  await executeProven({ plugin: ok, origin: 'https://h', view, patient: { patientId: 'MR1' }, parentRow: { ServiceRenderId: 'R1', episode_id: 'IP1' } });
+  assert.ok(sent > 0, 'a complete chain is still sent');
+});
+
+/* Two proven ward lists (GHIS): the proof traced labs' id to the HTML list's "Patient ID" header, but
+ * the runtime reads rows from the hospital-wide JSON list keyed patientId. The row is still this
+ * patient's, so a patient-keyed field falls back to the patient's own id instead of going out blank
+ * (owner's iPhone drawer: "never learned which field carries the patient", 2026-09-17). */
+test('provenValue: a worklist column name from another proven list falls back to the patient id', () => {
+  const patient = { patientId: 'MR900001' };
+  Object.defineProperty(patient, '_row', { value: { patientId: 'MR900001', patientFirstName: 'X' }, enumerable: false });
+  assert.equal(provenValue('id', { from: 'worklist', field: 'Patient ID' }, { patient }), 'MR900001');
+  assert.equal(provenValue('id', { from: 'worklist', field: 'patientId' }, { patient }), 'MR900001', 'a matching key is read from the row');
+  assert.equal(provenValue('Dept_ID', { from: 'worklist', field: 'Department' }, { patient }), '', 'a non-patient key with no such column stays blank');
+});
+
+/* An expired GHIS session answers a 302 to the login host; following it cross-origin gave the bare
+ * "Load failed" for every read (owner's iPhone, 2026-09-17). The page-side fetch no longer follows,
+ * reports the redirect as status 302, and the runtime reads that as the login page. */
+test('fetchExpression: a redirect is reported as the login page, never followed cross-origin', () => {
+  const expr = fetchExpression({ method: 'GET', url: 'https://ghis.example/Doctor/Home/GetMedicines/?id=MR1' });
+  assert.ok(expr.includes('redirect:"manual"'), 'redirects must not be followed');
+  assert.ok(expr.includes('opaqueredirect'), 'an opaque redirect must be turned into a status');
+  assert.ok(parseFetchExpression(expr), 'the test seam still parses the request out');
+  assert.equal(classifyResponse({ status: 302, redirected: true, text: '' }), 'login');
+  assert.equal(classifyResponse({ status: 200, contentType: 'application/json', text: '[]' }), 'json');
+});
+
+/* A joined worklist field (GHIS recordNo = "Patient ID"-"Visit ID") was traced against the doctor's own
+ * HTML list; the hospital-wide JSON list has no such columns and the patient read carries no list row
+ * at all. Each part falls back to the id the patient carries, as a single field already does. */
+test('provenValue: a joined worklist field falls back to the patient ids when the row lacks the columns', () => {
+  const src = { from: 'worklist', fields: ['Patient ID', 'Visit ID'], join: '-' };
+  assert.equal(provenValue('recordNo', src, { patient: { patientId: 'K1', episodeId: 'E1' } }), 'K1-E1');
+  const p2 = { patientId: 'K1', episodeId: 'E1' };
+  Object.defineProperty(p2, '_row', { value: { patientId: 'K1', episodeId: 'E1' }, enumerable: false });
+  assert.equal(provenValue('recordNo', src, { patient: p2 }), 'K1-E1');
+  const p3 = { patientId: 'K1', episodeId: 'E1' };
+  Object.defineProperty(p3, '_row', { value: { 'Patient ID': 'P9', 'Visit ID': 'V9' }, enumerable: false });
+  assert.equal(provenValue('recordNo', src, { patient: p3 }), 'P9-V9', 'a row that carries the columns wins');
+});
+
+/* THE TOKEN LIVES ON THE PAGE IT WAS PROVEN ON. The hidden browser opens the hospital root; the
+ * anti-forgery token a POST (GHIS Searchnew) needs was proven on /Doctor/Home. A page without the
+ * token would send the POST with an empty one and the hospital would refuse it silently. When the
+ * current page has no token, the call moves to its own page first and reads it there. */
+test('executeProven: a call that needs a token and finds none moves to its proven page to read it', async () => {
+  const { setPageSettleMs } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  setPageSettleMs(0);
+  const navigated = [];
+  let here = 'https://h/';
+  const posted = [];
+  const plugin = {
+    async navigate({ url }) { navigated.push(url); here = url; },
+    async currentUrl() { return { url: here }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify(here === 'https://h/home' ? { __RequestVerificationToken: 'T9' } : {}) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      if (req.method === 'POST') posted.push(req.body);
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[{"a":1}]' }) };
+    },
+  };
+  const view = { resourceHint: 'patient', pathTemplate: 'https://h/home', proof: { status: 'proven' }, endpoints: [
+    { method: 'POST', path: '/Searchnew', role: 'prerequisite', bodyKeys: ['__RequestVerificationToken', 'recordNo'], params: { __RequestVerificationToken: { token: true }, recordNo: { from: 'worklist', field: 'patientId' } } },
+    { method: 'GET', path: '/Get?id', role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } },
+  ] };
+  const out = await executeProven({ plugin, origin: 'https://h', view, patient: { patientId: 'K1' } });
+  assert.deepEqual(navigated, ['https://h/home'], 'moved once, to the proven page');
+  assert.deepEqual(posted, ['__RequestVerificationToken=T9&recordNo=K1']);
+  assert.equal(out.rows.length, 1);
+  // Already on the page with the token: no move at all.
+  navigated.length = 0; posted.length = 0;
+  await executeProven({ plugin, origin: 'https://h', view, patient: { patientId: 'K1' } });
+  assert.deepEqual(navigated, []);
+  assert.deepEqual(posted, ['__RequestVerificationToken=T9&recordNo=K1']);
+});
+
+/* EVERY TABLE WITH THE VIEW'S COLUMNS. GHIS GetMedicines answers one table per prescription date,
+ * all with the same header row; reading only the best-scoring table gave the drawer a fraction of the
+ * chart (gold audit, 2026-09-17: medications partial). The hand-built adapter reads every row of the
+ * page. Every table whose header row carries the view's columns is read, in page order. */
+test('rowsFromHtml reads every table that carries the view columns, not just the first', () => {
+  const tbl = (rows) => '<table><thead><tr><th>Prod. Code</th><th>Drug Name</th><th>Route</th></tr></thead><tbody>' + rows.map((r) => '<tr><td>' + r.join('</td><td>') + '</td></tr>').join('') + '</tbody></table>';
+  const html = '<div>' + tbl([['P1', 'AMOX', 'PO']]) + '<table><tr><td>Patient ID</td><td>:</td><td>X</td></tr></table>' + tbl([['P2', 'CEFTRIAXONE', 'IV'], ['P3', 'SALINE', 'IV']]) + '</div>';
+  const view = { resourceHint: 'medications', headers: ['Prod. Code', 'Drug Name', 'Route'], rowsSelector: '#accordionEx table tbody tr' };
+  const rows = rowsFromHtml(html, view, tableParse);
+  assert.deepEqual(rows.map((r) => r['Drug Name']), ['AMOX', 'CEFTRIAXONE', 'SALINE']);
+});
+
+/* A table-aware stub parser: one object per <table>, with its th labels and its tr rows. */
+function tableParse(html) {
+  const cell = (frag) => { const out = []; const re = /<(td|th)[^>]*>([\s\S]*?)<\/\1>/gi; let c; while ((c = re.exec(frag))) out.push({ tag: c[1].toLowerCase(), textContent: c[2].replace(/<[^>]+>/g, '') }); return out; };
+  const tables = [];
+  const tRe = /<table[^>]*>([\s\S]*?)<\/table>/gi;
+  let t;
+  while ((t = tRe.exec(html))) {
+    const rows = [];
+    const trRe = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+    let m;
+    while ((m = trRe.exec(t[1]))) { const cells = cell(m[1]); rows.push({ querySelectorAll: (sel) => (sel === 'td' ? cells.filter((x) => x.tag === 'td') : []), querySelector: () => null, getAttribute: () => '', textContent: cells.map((x) => x.textContent).join(' ') }); }
+    const ths = cell(t[1]).filter((x) => x.tag === 'th');
+    tables.push({ querySelectorAll: (sel) => (sel === 'th' ? ths : /tr/.test(sel) ? rows : []), querySelector: () => null, rows });
+  }
+  return { querySelectorAll: (sel) => (sel === 'table' ? tables : /tr/.test(sel) ? tables.flatMap((x) => x.rows) : []), querySelector: () => null };
+}
+
+/* A row already keyed by the screen's own label keeps it; a learned remap traced by value can be wrong
+ * (GHIS GetMedicines "Drug Name" -> Route graded drugText 37 of 158 equal, 2026-09-17). */
+test('applyColumns keeps a row field that already carries the screen label', async () => {
+  const { applyColumns } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  const view = { columns: { 'Drug Name': { key: 'Route' }, Freq: { key: 'Duration' } } };
+  const rows = applyColumns(view, [{ 'Drug Name': 'AMOX', Route: 'PO', Freq: 'TDS', Duration: '5' }, { drug: 'X', Route: 'IV' }]);
+  assert.equal(rows[0]['Drug Name'], 'AMOX');
+  assert.equal(rows[0].Freq, 'TDS');
+  assert.equal(rows[1]['Drug Name'], 'IV', 'a row without the label still uses the learned key');
 });

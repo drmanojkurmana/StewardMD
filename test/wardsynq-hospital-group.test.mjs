@@ -370,11 +370,13 @@ test("either side can remove; a removed hospital disappears from the overview; a
 test("policy: a group publishes a whitelisted subset; only a member hospital's admin adopts it, as an audited copy", async () => {
   seed();
   const g = await groupWithMembers([["org-b", OWNER_B], ["org-c", null]]);
-  const pub = await call(GADMIN, "/group/policy", "POST", { groupId: g.id, policy: { criticalLimits: { K: { high: 6.5 } }, payers: [{ id: "leak" }], maik: { phiApproved: ["x"] } } });
+  const pub = await call(GADMIN, "/group/policy", "POST", { groupId: g.id, policy: { criticalLimits: { "2823-3": { unit: "mmol/L", high: 6.5 } }, payers: [{ id: "leak" }], maik: { phiApproved: ["x"] } } });
   assert.equal(pub.__status, 200, JSON.stringify(pub));
-  assert.deepEqual(pub.group.policy, { criticalLimits: { K: { high: 6.5 } } });
+  assert.deepEqual(pub.group.policy, { criticalLimits: { "2823-3": { unit: "mmol/L", high: 6.5 } } });
   assert.equal(events("group:" + g.id, "group:policy").length, 1);
   assert.equal((await call(GADMIN, "/group/policy", "POST", { groupId: g.id, policy: { payers: [] } })).__status, 422);
+  // R4-4: a recommended limit a hospital could not use (unknown code, no unit) is refused like the hospital's own save.
+  assert.equal((await call(GADMIN, "/group/policy", "POST", { groupId: g.id, policy: { criticalLimits: { K: { high: 6.5 } } } })).error, "invalid_clinical_content");
 
   // Nothing inherited silently.
   assert.equal(docs.get("q_orgs/org-b").fields.wardsynq.criticalLimits, undefined);
@@ -387,11 +389,11 @@ test("policy: a group publishes a whitelisted subset; only a member hospital's a
   assert.equal(events("org-b", "group:policy_adopted").length, 0);
 
   const side = await call(OWNER_B, "/group/memberships?orgId=org-b");
-  assert.deepEqual(side.groups[0].policy, { criticalLimits: { K: { high: 6.5 } } });
+  assert.deepEqual(side.groups[0].policy, { criticalLimits: { "2823-3": { unit: "mmol/L", high: 6.5 } } });
   const ad = await call(OWNER_B, "/group/adopt", "POST", { groupId: g.id, orgId: "org-b" });
   assert.equal(ad.__status, 200, JSON.stringify(ad));
   const cfg = docs.get("q_orgs/org-b").fields.wardsynq;
-  assert.deepEqual(cfg.criticalLimits, { K: { high: 6.5 } });
+  assert.deepEqual(cfg.criticalLimits, { "2823-3": { unit: "mmol/L", high: 6.5 } });
   assert.deepEqual(cfg.noteTemplates, [{ id: "keep-me" }]);   // merged, not replaced
   assert.equal(cfg.payers, undefined);
   assert.equal(events("org-b", "group:policy_adopted").length, 1);

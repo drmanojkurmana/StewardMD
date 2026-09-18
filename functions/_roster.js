@@ -96,7 +96,7 @@ function coverage(from, to, shifts, assignments, roleOf) {
       const counts = {};
       for (const x of on) { const r = roleOf(x.identity) || "unknown"; counts[r] = (counts[r] || 0) + 1; }
       const gaps = Object.entries(shift.minimum).filter(([r, n]) => (counts[r] || 0) < n).map(([role, need]) => ({ role, need, have: counts[role] || 0, short: need - (counts[role] || 0) }));
-      out.push({ date: d, shiftId: shift.id, shift: shift.name, unit: shift.unit, staff: on.map((x) => x.identity), assignments: on.map((x) => ({ id: x.id, identity: x.identity })), counts, gaps });
+      out.push({ date: d, shiftId: shift.id, shift: shift.name, unit: shift.unit, staff: on.map((x) => x.identity), assignments: on.map((x) => ({ id: x.id, identity: x.identity, inCharge: x.inCharge === true })), counts, gaps });
     }
   }
   return out;

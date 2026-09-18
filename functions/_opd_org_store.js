@@ -8,6 +8,7 @@
  * idempotent, non-destructive migration that materialises a q_orgs doc for a legacy hospitalId.
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { readAllOrThrow } from "./_fs_read_all.js";
 import { qAudit } from "./_queue_engine.js";
 import { appendOrgAudit } from "./_q_audit_chain.js";
 import * as M from "./_opd_org.js";
@@ -160,6 +161,11 @@ export async function updateOrg(env, orgId, patch, actorId, auditEvent) {
 }
 
 // ---- departments / OPDs (optional layers) ------------------------------------------------------
+/* Master lists are read WHOLE (every page, R4-3). One query used to be the answer: 200 departments, rooms or wards and
+ * 500 beds, so a larger hospital lost beds from the board and wards from every picker without a word. Past the ceiling
+ * the read throws (507) and the screens say the list could not be read; a partial bed board is never returned. */
+export const MASTER_CAP = 5000;
+export const BED_CAP = 10000;
 export async function createDepartment(env, orgId, body, actorId) {
   const b = body || {};
   const id = newId(); const f = M.department({ id, orgId, name: b.name, code: b.code, type: b.type, active: b.active });
@@ -167,7 +173,7 @@ export async function createDepartment(env, orgId, body, actorId) {
   await audit(env, orgId, actorId, "dept:create", f.name); return f;
 }
 export async function listDepartments(env, orgId) {
-  const r = await fsQuery(env, "q_departments", { where: { field: "orgId", value: sanitize(orgId) }, limit: 200 });
+  const r = await readAllOrThrow(env, "q_departments", { field: "orgId", value: sanitize(orgId) }, MASTER_CAP, "departments_too_many");
   return r.map((x) => M.department(withId(x.id, x.fields)));
 }
 export async function createOpd(env, orgId, body, actorId) {
@@ -206,7 +212,7 @@ export async function getRoom(env, roomId) {
   return roomOut(d.fields, sanitize(roomId), dep && dep.orgId === String(d.fields.orgId || "") ? [dep] : []);
 }
 export async function listRooms(env, orgId) {
-  const r = await fsQuery(env, "q_rooms", { where: { field: "orgId", value: sanitize(orgId) }, limit: 200 });
+  const r = await readAllOrThrow(env, "q_rooms", { field: "orgId", value: sanitize(orgId) }, MASTER_CAP, "rooms_too_many");
   const depts = r.some((x) => x.fields && x.fields.departmentId) ? await listDepartments(env, orgId) : [];
   return r.map((x) => roomOut(x.fields, x.id, depts));
 }
@@ -227,7 +233,7 @@ export async function createWard(env, orgId, body, actorId) {
 }
 export async function getWard(env, wardId) { const d = await fsGet(env, "q_wards/" + sanitize(wardId)); return d ? M.ward(withId(sanitize(wardId), d.fields)) : null; }
 export async function listWards(env, orgId) {
-  const r = await fsQuery(env, "q_wards", { where: { field: "orgId", value: sanitize(orgId) }, limit: 200 });
+  const r = await readAllOrThrow(env, "q_wards", { field: "orgId", value: sanitize(orgId) }, MASTER_CAP, "wards_too_many");
   return r.map((x) => M.ward(withId(x.id, x.fields)));
 }
 export async function updateWard(env, wardId, patch, actorId) {
@@ -244,7 +250,7 @@ export async function createBed(env, orgId, body, actorId) {
 }
 export async function getBed(env, bedId) { const d = await fsGet(env, "q_beds/" + sanitize(bedId)); return d ? M.bed(withId(sanitize(bedId), d.fields)) : null; }
 export async function listBeds(env, orgId, wardId) {
-  const r = await fsQuery(env, "q_beds", { where: { field: "orgId", value: sanitize(orgId) }, limit: 500 });
+  const r = await readAllOrThrow(env, "q_beds", { field: "orgId", value: sanitize(orgId) }, BED_CAP, "beds_too_many");
   /* A bed added before bed history was kept has no `since`: Firestore's own creation time of its document
    * is when it was registered, and `legacy` says its turn-offs before then were not recorded. */
   const beds = r.map((x) => {
@@ -279,7 +285,8 @@ export async function updateBed(env, bedId, patch, actorId) {
   const id = sanitize(bedId);
   const raw = await fsGet(env, "q_beds/" + id); if (!raw) return null;
   const cur = M.bed(withId(id, raw.fields));
-  const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId, since: cur.since, activeHistory: cur.activeHistory }));   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
+  const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId, since: cur.since, activeHistory: cur.activeHistory, stateSince: cur.stateSince }));
+  if (f.state !== cur.state) f.stateSince = now();   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
   if (f.active !== cur.active) f.activeHistory = cur.activeHistory.concat([{ active: f.active, at: now() }]);
   try {
     await fsCommit(env, [wUpdate(env, "q_beds/" + id, f, { updateTime: raw.updateTime })]);

@@ -27,7 +27,7 @@
  */
 
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
@@ -175,10 +175,16 @@ async function open(request, env, ctx, need) {
   }
 }
 
+/* Every Verification is read (service.listAll, paged): the old 500-row roster was the OLDEST 500, so a chain opened
+ * after it was never found. Past VERIFY_READ_MAX the read throws ListCeilingError rather than miss a chain.
+ * ponytail: a by-request index (decision ids carrying the request id) is the upgrade; audit O20 for paging cost. */
+const VERIFY_READ_MAX = 50000;
+const allVerifications = async (svc) => (await svc.listAll("Verification", { max: VERIFY_READ_MAX, throwOnTruncate: true })).rows;
+
 /** Every record belonging to one chain: the request, plus every decision pointing back at it. */
 async function chainRows(svc, requestId) {
-  const all = await svc.list("Verification", 500);
-  return (all || []).filter((r) => r && (str(r.id) === requestId || str(r.parentVerificationId) === requestId));
+  const all = await allVerifications(svc);
+  return all.filter((r) => r && (str(r.id) === requestId || str(r.parentVerificationId) === requestId));
 }
 
 /** How many distinct approvers this hospital wants. Org config, the same way note writers are.
@@ -332,8 +338,11 @@ async function listVerifications(request, env, ctx) {
   if (error) return { ...base, ...error, verifications: [] };
 
   let all;
-  try { all = await svc.list("Verification", 500); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), verifications: [] }; }
+  try { all = await allVerifications(svc); }
+  catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 409, error: "too_many_records", detail: str(e.message), verifications: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), verifications: [] };
+  }
 
   const byRequest = new Map();
   for (const r of all || []) {
@@ -365,5 +374,5 @@ function writeFailure(e) {
 export {
   DECISIONS, SUBJECT_TYPES, verificationIdFor, chainState, mayDecide,
   requestRecord, decisionRecord, approvalCovers, levelsFor, amountOf,
-  requestVerification, recordVerification, listVerifications,
+  requestVerification, recordVerification, listVerifications, allVerifications,
 };

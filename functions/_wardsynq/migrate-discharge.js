@@ -42,6 +42,7 @@ import { ADMISSION_CLASSES, freeMasterBed } from "./migrate-inpatient.js";
 import { chargesForPatient } from "./charge-capture.js";
 import { reconciliationOf } from "../../wardsynq/wardsynq-invoice.js";
 import { invoicesForStay } from "./invoice.js";
+import { birthForSummary, birthSectionText } from "./migrate-maternity.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOT_RECORDED = "Not recorded.";
@@ -199,6 +200,10 @@ function assembleDischargeSummary(r) {
     homeMedicines: reconciliationForSummary(r.reconciliation) || NOT_RECORDED,
     assessment,
     plan,
+    /* Only on a birth stay (a MATERNITY stay, or a newborn's own): the delivery, each newborn and its APGAR at 1, 5
+     * and 10 minutes, or the newborn's own APGAR. Every other summary has no such section rather than a "Not recorded." */
+    ...(r.birth === false ? { birth: "The delivery and newborn record could not be read. Do not read this as not recorded." }
+      : r.birth ? { birth: birthSectionText(r.birth) } : {}),
     // Stated on the document itself, because a reader has to know what they are holding.
     provenance:
       "Assembled automatically from this admission's clinical record: the admission encounter, "
@@ -263,6 +268,8 @@ async function readStay(svc, encounterId, patientIdHint) {
     svc.get("MedicationReconciliation", reconciliationIdFor(encounterId, "admission")).catch(() => null),
     svc.get("ClinicalNote", dischargeSummaryIdFor(encounterId)).catch(() => null),
   ]);
+  // A delivery, its newborns and their APGAR, or a newborn's own APGAR. false = could not be read, never "none".
+  const birth = await birthForSummary(svc, encounter).catch(() => { failed.push("ApgarScore"); return false; });
   const native = (rows) => (rows || []).filter((r) => r && !isExternalRecord(r));
   const mine = (rows) => (rows || []).filter((x) => x && (x.encounterId === encounterId || x.id === encounterId));
   const myOrders = mine(native(orders));
@@ -279,6 +286,7 @@ async function readStay(svc, encounterId, patientIdHint) {
       notes: mine(notes),
       problems: problems || [],
       reconciliation,
+      birth,
     },
   };
 }
@@ -330,6 +338,13 @@ async function draftDischargeSummary(request, env, ctx) {
   // nothing is.
   candidate.editedSections = editedSections;
   candidate.structured = structuredSections(inputs, assembled);
+  /* A MEDICO-LEGAL STAY SAYS SO ON ITS DISCHARGE SUMMARY (registers.js "mlc"): the MLC number and nothing else from the
+   * register. Asked of the register by the route; an unreadable register refuses the draft rather than dropping the flag. */
+  if (typeof ctx.medicoLegalFor === "function") {
+    let mlc;
+    try { mlc = await ctx.medicoLegalFor(encounter.patientId); } catch { return { ...base, ok: false, status: 502, error: "mlc_check_failed", detail: "The medico-legal register could not be checked, so the summary was not saved.", written: 0 }; }
+    candidate.medicoLegal = mlc || null;
+  }
 
   try {
     const out = await svc.put(candidate, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });

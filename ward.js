@@ -157,7 +157,13 @@
       return new Promise(function (res) { setTimeout(res, 700); }).then(function () { return fetchRetry(url, opts, tries - 1); });
     });
   }
-  function apiGet(path) { return authHeaders().then(function (h) { return fetchRetry(API + path, { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }); }
+  /* R4-1: a census route (ward list, nurse worklist, bed board, patient flow, ED board, theatre board, downtime pack,
+   * admission, transfer) answers 503 error "too_many_open" when more stays are open than it can read whole, rather than
+   * a short list. Every screen shows the server's message field; here that message becomes one translated sentence
+   * saying what to do, so no screen shows a bare code or reads as an empty ward. */
+  function tooManyOpenText() { return wT("ward.too-many-open-stays", "Too many open stays to show safely. Close visits that are finished (discharge or end them), or contact support."); }
+  function censusAnswer(j) { if (j && j.error === "too_many_open") j.message = j.detail = tooManyOpenText(); return j; }
+  function apiGet(path) { return authHeaders().then(function (h) { return fetchRetry(API + path, { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }).then(censusAnswer); }
   /* The ICD reference API is public, read-only, non-PHI and lives on its own path. It is fetched
    * separately rather than through apiGet so no patient identifier can ever be sent to it: a
    * terminology lookup that carried the patient it was for would leak a diagnosis to a service that
@@ -172,6 +178,7 @@
   function apiPost(path, body) {
     return authHeaders().then(function (h) { return fetchRetry(API + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) }); })
       .then(function (r) { return r.json(); })
+      .then(censusAnswer)
       // A write the server accepted empties the form it came from on the next repaint (see paint()); a check or a
       // write that recorded nothing keeps what was typed.
       .then(function (j) { if (j && j.ok && !j.checkOnly && j.written !== 0) _typedDrop = _typedAct; return j; });
@@ -631,12 +638,14 @@
            * the patient in front of them. */
           '<span class="w-bed-b"><b>' + esc(p.name || p.mrn || p.patientId) + "</b><small>" +
             esc(p.mrn && p.name ? p.mrn + " · " : "") + esc(wTEn(CLASS_LABEL[p.class]) || p.class || "") +
-            (day ? " · " + esc(day) : "") + " · " + wTH("ward.admitted", "admitted {admittedAt}", { admittedAt: when(p.admittedAt) }, "admittedAt") + "</small></span>" +
+            (day ? " · " + esc(day) : "") + " · " + wTH("ward.admitted", "admitted {admittedAt}", { admittedAt: when(p.admittedAt) }, "admittedAt") +
+            (p.expectedDischarge || p.expectedDischarge === false ? " · " + eddLine(p.expectedDischarge) : "") + "</small></span>" +
           ms("chevron_right") + "</button>";
       }).join("");
       return '<div class="w-wardrow"><h4>' + (w === "No ward assigned" ? wTH("ward.no-ward-assigned", "No ward assigned") : esc(w)) + "<small>" + byWard[w].length + (byWard[w].length === 1 ? " " + wTH("ward.patient", "patient") : " " + wTH("ward.patients", "patients")) + "</small></h4>" + rows + "</div>";
     }).join("");
     var empty = !state.loaded ? "<p class=\"w-empty\">" + wTH("ward.loading-the-ward2", "Loading the ward…") + "</p>"
+      : state.listFailed && !all.length ? '<p class="w-hint warn">' + ms("error") + wTH("ward.list-not-loaded", "The ward list was not loaded. Do not read this as an empty ward.", null, "", 1) + "</p>"
       : !all.length ? "<p class=\"w-empty\">" + wTH("ward.no-patients-are-currently-admitted", "No patients are currently admitted{v}.", { v: (state.ward ? " " + wTH("ward.to", "to {ward}", { ward: esc(state.ward) }, "ward") : "") }) + "</p>"
       : !shown.length ? "<p class=\"w-empty\">" + wTH("ward.no-patients-match-clear-the-search", "No patients match. Clear the search or the filter.") + "</p>" : "";
     return '<p class="w-count">' + wTH("ward.of2", "{length} of {length2}", { length: shown.length, length2: all.length }, "length length2") + (all.length === 1 ? " " + wTH("ward.patient", "patient") : " " + wTH("ward.patients", "patients")) + (wards.length ? " · " + wards.length + (wards.length === 1 ? " " + wTH("ward.ward", "ward") : " " + wTH("ward.wards", "wards")) : "") + "</p>" + filterRow + chips + (groups || empty);
@@ -734,6 +743,8 @@
       "<button class=\"w-btn ghost\" data-w-act=\"radboard\" title=\"" + wTA("ward.imaging-worklist-reporting-and-open-critical", "Imaging worklist, reporting and open critical findings, hospital-wide") + "\">" + ms("medical_information") + wTH("ward.radiology-board", "Radiology board") + "</button>" +
       "<button class=\"w-btn ghost\" data-w-act=\"bedmgmt\" title=\"" + wTA("ward.reserve-block-for-maintenance-clean-before", "Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked") + "\">" + ms("bed") + wTH("ward.bed-management", "Bed management") + "</button>" +
       "<button class=\"w-btn ghost\" data-w-act=\"flowcommand\" title=\"" + wTA("ward.ed-beds-admissions-pending-discharge-transfers", "ED, beds, admissions pending, discharge, transfers - hospital-wide, live") + "\">" + ms("hub") + wTH("ward.patient-flow", "Patient flow") + "</button>" +
+      "<button class=\"w-btn ghost\" data-w-act=\"dcboard\" title=\"" + wTA("ward.dc-tool-title", "Every discharge in progress, step by step, and how long each step takes") + "\">" + ms("timer") + wTH("ward.dc-chart-title", "Discharge progress") + "</button>" +
+      "<button class=\"w-btn ghost\" data-w-act=\"tcentre\" title=\"" + wTA("ward.tc-tool-title", "Patients other hospitals ask us to take") + "\">" + ms("call") + wTH("ward.tc-title", "Transfer centre") + "</button>" +
       // TASK 10: the Hospital Digital Twin - a fused view over patient flow, ward metrics, criticals,
       // emergency/blackout state, pharmacy and HIM, none of it recomputed here. Not called "command
       // center": that name already means the button above (Task 4.4), a FollowCare analytics feature
@@ -772,7 +783,7 @@
       "<input id=\"wWard\" type=\"text\" placeholder=\"" + wTA("ward.ward-blank-all", "Ward (blank = all)") + "\" value=\"" + esc(state.ward) + '">' +
       "<button class=\"w-btn ghost\" data-w-act=\"setward\" type=\"button\">" + wTH("ward.apply", "Apply") + "</button></div>" +
       alertCoverHtml(state) +
-      '<div id="wRoster">' + rosterHtml(state) + "</div></div>";
+      '<div id="wRoster">' + rosterHtml(state) + "</div></div>" + transfersBoardHtml(state);
 
     return '<div class="w-split-layout">' +
       '<aside class="w-col-tools">' + leftTools + '</aside>' +
@@ -890,6 +901,9 @@
       "<button class=\"w-ic\" data-w-act=\"board\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       mode + deptPick +
       '<div class="w-card">' +
+      // R5-1: the hospital's ward list could not be read at all. Without this the board falls back to
+      // the old configured names and reads as though no wards, departments or bed states were set up.
+      (state.board && state.board.wardsUnread ? '<p class="w-hint warn">' + ms("error") + wTH("ward.board-wards-unread", "This hospital's ward list could not be read, so ward states, departments and bed lists are missing here. Do not read this as no wards being set up.", null, "", 1) + "</p>" : "") +
       (state.boardErr ? '<p class="w-hint warn">' + ms("error") + esc(state.boardErr) + wEnglishOf(state.boardErr) + "</p>"
         : !state.board ? "<p class=\"w-empty\">" + wTH("ward.loading-the-bed-board", "Loading the bed board...") + "</p>"
         : wardsHtml || "<p class=\"w-empty\">" + wTH("ward.no-admissions-and-no-bed-lists", "No admissions and no bed lists configured.") + "</p>") +
@@ -994,13 +1008,16 @@
         "<label class=\"w-f\"><span>" + wTH("ward.site", "Site") + "</span><input id=\"wSurgSite\" type=\"text\" autocomplete=\"off\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.laterality", "Laterality") + "</span><select id=\"wSurgLaterality\"><option value=\"not-applicable\">" + wTH("ward.not-applicable", "Not applicable") + "</option><option value=\"left\">Left</option><option value=\"right\">Right</option><option value=\"bilateral\">Bilateral</option></select></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.theatre", "Theatre") + "</span><input id=\"wSurgTheatre\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-ot-1", "e.g. OT-1") + "\"></label>" +
-        "</div>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.surg-scheduled-start", "Scheduled start") + "</span><input id=\"wSurgWhen\" type=\"datetime-local\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.surg-planned-minutes", "Planned minutes") + "</span><input id=\"wSurgMinutes\" type=\"number\" min=\"1\" max=\"1440\" inputmode=\"numeric\"></label>" +
+        "</div>" + codePickerHtml(state, "surg") +
         '<button class="w-btn tiny go" data-w-act="surgerybook">' + ms("check") + wTH("ward.book-case", "Book case") + "</button>" : "") +
       "</div>";
 
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
       "<div><b>" + wTH("ward.surgery-ot-pacu", "Surgery / OT / PACU") + "</b></div>" +
       '<button class="w-btn tiny go" data-w-act="surgerybookopen">' + ms("add_circle") + wTH("ward.book", "Book") + "</button>" +
+      '<button class="w-btn tiny ghost" data-w-act="theatreuse">' + ms("schedule") + wTH("ward.theatre-use", "Theatre sessions and use") + "</button>" +
       "<button class=\"w-ic\" data-w-act=\"surgeryboard\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       '<div class="w-card">' +
       (state.surgErr ? '<p class="w-hint warn">' + ms("error") + esc(state.surgErr) + wEnglishOf(state.surgErr) + "</p>"
@@ -1046,7 +1063,7 @@
     if (!c) return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button><div><b>" + wTH("ward.case", "Case") + "</b></div></div><div class=\"w-card\"><p class=\"w-empty\">" + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
 
     var header = "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
-      "<div><b>" + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + " &middot; " + esc(c.laterality) + " &middot; " + esc(wTEn(STAGE_WORDS[c.stage]) || c.stage) + "</small></div>" +
+      "<div><b>" + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + (c.procedureCoding ? ' <span class="w-code">' + esc(c.procedureCoding.code) + "</span>" : "") + " &middot; " + esc(c.laterality) + " &middot; " + esc(wTEn(STAGE_WORDS[c.stage]) || c.stage) + "</small></div>" +
       "<button class=\"w-ic\" data-w-act=\"surgeryload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       /* ABANDONING A CASE. A case that is not going ahead - the patient deteriorated, the list overran,
        * the consent was withdrawn - has to be ended on the record, with a reason, or it sits on the
@@ -1075,7 +1092,7 @@
       "<label class=\"w-f\"><span>" + wTH("ward.laterality-marked", "Laterality marked") + "</span><select id=\"wSurgMarkLat\"><option value=\"not-applicable\"" + (c.laterality === "not-applicable" ? " selected" : "") + ">" + wTH("ward.not-applicable", "Not applicable") + "</option><option value=\"left\"" + (c.laterality === "left" ? " selected" : "") + '>Left</option><option value="right"' + (c.laterality === "right" ? " selected" : "") + '>Right</option><option value="bilateral"' + (c.laterality === "bilateral" ? " selected" : "") + '>Bilateral</option></select></label>' +
       '<button class="w-btn go" data-w-act="surgerymarksite">' + ms("save") + wTH("ward.record-marking", "Record marking") + "</button></div>";
 
-    var checklistCard = c.stage === "marked" ? checklistForm("signIn", SIGN_IN_ITEMS, "surgeryphase")
+    var checklistCard = c.stage === "marked" ? pacSignInNote(state) + checklistForm("signIn", SIGN_IN_ITEMS, "surgeryphase")
       : c.stage === "signed-in" ? checklistForm("timeOut", TIME_OUT_ITEMS, "surgeryphase")
       : c.stage === "timed-out" ? '<div class="w-card"><div class="w-card-h">' + ms("cut") + "<h3>" + wTH("ward.incision", "Incision") + "</h3></div>" +
           '<p class="w-hint">' + ms("check_circle") + wTH("ward.sign-in-and-time-out-are", "Sign In and Time Out are both complete. Incision is unlocked.") + "</p>" +
@@ -1094,7 +1111,176 @@
       '<button class="w-btn ghost" data-w-act="surgerydisposition:direct-discharge">' + ms("home") + wTH("ward.direct-discharge", "Direct discharge") + "</button>" +
       "</div></div>";
 
-    return header + consentCard + siteCard + checklistCard + anesCard + implantCard + dispositionCard;
+    return header + consentCard + pacCard(state) + siteCard + checklistCard + anesCard + implantCard + theatreTimesCard(state) + dispositionCard;
+  }
+
+  /* THEATRE TIMES, RESCHEDULING AND RETURN TO THEATRE (P3 theatre-opd-access). Every time shown is one a person recorded;
+   * a time not recorded says so and is never filled from the booking. The postpone and cancel dialogs offer the hospital's
+   * own reason codes, which the server also enforces. */
+  var SURG_BEFORE_KNIFE = ["booked", "marked", "signed-in", "timed-out"];
+  function theatreTimesCard(state) {
+    var d = state.surgCase || {}, c = d.case; if (!c) return "";
+    var t = c.theatreTimes || {};
+    var notRec = wTH("ward.surg-not-recorded", "not recorded");
+    var moves = (c.reschedules || []).map(function (m) {
+      return "<li><b>" + esc(m.kind === "cancelled" ? wT("ward.surg-cancelled-before", "Cancelled before surgery") : wT("ward.surg-postponed", "Postponed")) + "</b> " +
+        (m.kind === "postponed" ? esc(when(m.fromStart)) + " &rarr; " + esc(when(m.toStart)) : "") +
+        "<br><small>" + (m.reasonCode ? esc(m.reasonCode) + ": " : "") + esc(m.reason) + " &middot; " + esc(when(m.at)) + "</small></li>";
+    }).join("");
+    var ur = c.unplannedReturn;
+    return '<div class="w-card"><div class="w-card-h">' + ms("schedule") + "<h3>" + wTH("ward.surg-theatre-times", "Theatre times") + "</h3></div>" +
+      '<ul class="w-mini">' +
+      "<li><b>" + wTH("ward.surg-scheduled-start", "Scheduled start") + "</b><span>" + (c.scheduledAt ? esc(when(c.scheduledAt)) : notRec) +
+        (c.firstScheduledAt && c.firstScheduledAt !== c.scheduledAt ? " &middot; " + wTH("ward.surg-first-booked", "first booked {at}", { at: esc(when(c.firstScheduledAt)) }, "at") : "") +
+        (c.plannedMinutes ? " &middot; " + wTH("ward.surg-minutes-planned", "{n} minutes planned", { n: esc(c.plannedMinutes) }, "n") : "") + "</span></li>" +
+      "<li><b>" + wTH("ward.surg-in-room", "Patient in theatre") + "</b><span>" + (t.inRoomAt ? esc(when(t.inRoomAt)) : notRec) + "</span></li>" +
+      "<li><b>" + wTH("ward.surg-out-room", "Patient out of theatre") + "</b><span>" + (t.outRoomAt ? esc(when(t.outRoomAt)) : notRec) + "</span></li>" +
+      "</ul>" +
+      (c.stage !== "abandoned" ? '<div class="w-actions">' +
+        '<button class="w-btn tiny" data-w-act="surgtime:in-room">' + ms("login") + wTH("ward.surg-record-in", "Record in theatre") + "</button>" +
+        '<button class="w-btn tiny" data-w-act="surgtime:out-of-room">' + ms("logout") + wTH("ward.surg-record-out", "Record out of theatre") + "</button></div>" : "") +
+      (moves ? "<h4>" + wTH("ward.surg-reschedules", "Rescheduling") + '</h4><ul class="w-mini">' + moves + "</ul>" : "") +
+      (SURG_BEFORE_KNIFE.indexOf(c.stage) >= 0 ? '<div class="w-actions">' +
+        '<button class="w-btn tiny ghost" data-w-act="surgresched:postponed">' + ms("update") + wTH("ward.surg-postpone", "Postpone") + "</button>" +
+        '<button class="w-btn tiny ghost" data-w-act="surgresched:cancelled">' + ms("event_busy") + wTH("ward.surg-cancel-before", "Cancel before surgery") + "</button></div>" : "") +
+      (c.incisionAt ? "<h4>" + wTH("ward.surg-unplanned-return", "Unplanned return to theatre") + "</h4>" +
+        "<p>" + (!ur ? wTH("ward.surg-return-unanswered", "Not answered by the surgeon yet.")
+          : ur.value ? wTH("ward.surg-return-yes", "Yes: {reason}", { reason: esc(ur.reason || "") }, "reason") + (ur.indexCaseId ? " &middot; " + esc(ur.indexCaseId) : "")
+          : wTH("ward.surg-return-no", "No")) + "</p>" +
+        '<div class="w-actions"><button class="w-btn tiny ghost" data-w-act="surgreturn:yes">' + wTH("ward.surg-return-mark-yes", "This was an unplanned return") + "</button>" +
+        '<button class="w-btn tiny ghost" data-w-act="surgreturn:no">' + wTH("ward.surg-return-mark-no", "Not a return") + "</button></div>" : "") +
+      "</div>";
+  }
+  function surgPost(path, body, okMsg) {
+    var c = st.surgCase && st.surgCase.case; if (!c) return null;
+    st.busy = true; paint();
+    return apiPost(path, Object.assign({ orgId: st.orgId, caseId: c.id }, body))
+      .then(function (r) { if (settle(r, okMsg)) loadSurgeryCase(c.id); else paint(); return r; })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+  }
+  var isoOfLocal = function (v) { var d = v ? new Date(v) : null; return d && !isNaN(d.getTime()) ? d.toISOString() : ""; };
+  function surgTime(event) {
+    var c = st.surgCase && st.surgCase.case; if (!c) return;
+    var key = event === "in-room" ? "inRoomAt" : "outRoomAt", already = !!(c.theatreTimes && c.theatreTimes[key]);
+    var fields = [{ key: "at", type: "datetime", label: wTH("ward.surg-time-blank-now", "Time (leave blank for now)") }];
+    if (already) fields.push({ key: "correction", type: "textarea", label: wTH("ward.surg-correction-reason", "Why the recorded time is being changed"), required: wT("ward.a-reason-is-required", "A reason is required.") });
+    askFor({ title: event === "in-room" ? wTH("ward.surg-record-in", "Record in theatre") : wTH("ward.surg-record-out", "Record out of theatre"), icon: "schedule", ok: wTH("ward.record2", "Record"), fields: fields }, function (v) {
+      return surgPost("/ward/surgery-times", { event: event, at: isoOfLocal(v.at) || undefined, correctionReason: v.correction || undefined }, wT("ward.surg-time-recorded", "Time recorded."));
+    });
+  }
+  function surgResched(kind) {
+    var d = st.surgCase || {}, codes = (d.rules && d.rules.rescheduleReasons) || [];
+    var fields = [];
+    if (kind === "postponed") fields.push({ key: "to", type: "datetime", label: wTH("ward.surg-new-start", "New start"), required: wT("ward.surg-new-start-required", "A postponed case needs its new start.") });
+    if (codes.length) fields.push({ key: "code", type: "select", label: wTH("ward.surg-reason-code", "Reason code"), options: codes.map(function (x) { return [x.code, esc(x.label)]; }), value: codes[0].code });
+    fields.push({ key: "reason", type: "textarea", label: wTH("ward.surg-why-rescheduled", "Why"), required: wT("ward.a-reason-is-required", "A reason is required.") });
+    askFor({ title: kind === "postponed" ? wTH("ward.surg-postpone", "Postpone") : wTH("ward.surg-cancel-before", "Cancel before surgery"), icon: "update", danger: kind === "cancelled", ok: wTH("ward.record2", "Record"), fields: fields }, function (v) {
+      return surgPost("/ward/surgery-reschedule", { kind: kind, toStart: isoOfLocal(v.to) || undefined, reasonCode: v.code || undefined, reason: v.reason }, wT("ward.surg-rescheduled", "Recorded."));
+    });
+  }
+  function surgReturn(yes) {
+    var fields = yes ? [{ key: "reason", type: "textarea", label: wTH("ward.surg-return-complication", "The complication that brought the patient back"), required: wT("ward.a-reason-is-required", "A reason is required.") },
+      { key: "index", type: "text", label: wTH("ward.surg-index-case", "Earlier case in this admission (case id, optional)") }] : [];
+    askFor({ title: yes ? wTH("ward.surg-return-mark-yes", "This was an unplanned return") : wTH("ward.surg-return-mark-no", "Not a return"), icon: "replay", ok: wTH("ward.record2", "Record"), fields: fields }, function (v) {
+      return surgPost("/ward/surgery-return", { value: !!yes, reason: v.reason || undefined, indexCaseId: v.index || undefined }, wT("ward.surg-rescheduled", "Recorded."));
+    });
+  }
+
+  /* THEATRE SESSIONS AND USE. The day's sessions per theatre, who holds them and whether they are released, booked and used
+   * minutes with the minutes they are divided from, the cases missing a time (listed, never counted as zero), the first case
+   * of the day against its scheduled start and the turnovers between cases. */
+  function theatreUseView(state) {
+    var u = state.theatreUse, day = state.theatreDay || "";
+    var head = "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
+      "<div><b>" + wTH("ward.theatre-use", "Theatre sessions and use") + "</b></div>" +
+      "<button class=\"w-ic\" data-w-act=\"theatreuse\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
+      '<div class="w-filter"><label class="w-f"><span>' + wTH("ward.tu-day", "Day") + '</span><input id="wTheatreDay" type="date" value="' + esc(day) + '"></label>' +
+      '<button class="w-btn ghost" data-w-act="theatreuseday">' + wTH("ward.show", "Show") + "</button></div>";
+    if (u === null || u === undefined) return head + '<div class="w-card"><p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    if (u === false || !u.ok) return head + '<div class="w-card"><p class="w-hint warn">' + ms("error") + wTH("ward.tu-failed", "Theatre use could not be loaded.", null, "", 1) + (state.theatreUseErr ? " " + esc(state.theatreUseErr) + wEnglishOf(state.theatreUseErr) : "") + "</p></div>";
+    var s = u.settings || {};
+    var pct = function (p, a, b) { return p == null ? wTH("ward.tu-no-session-minutes", "no session minutes") : wTH("ward.tu-pct-of", "{p}% ({a} of {b} minutes)", { p: esc(p), a: esc(a), b: esc(b) }, "p a b"); };
+    var rules = '<div class="w-card"><div class="w-card-h">' + ms("rule") + "<h3>" + wTH("ward.tu-rules", "Hospital rules") + "</h3></div>" +
+      '<ul class="w-mini"><li><b>' + wTH("ward.tu-release-hours", "Release unbooked session time") + "</b><span>" + (s.releaseHours == null ? wTH("ward.tu-not-configured-release", "not configured: only a person releases a session") : wTH("ward.tu-hours-before", "{n} hours before the session", { n: esc(s.releaseHours) }, "n")) + "</span></li>" +
+      "<li><b>" + wTH("ward.tu-grace", "First case on time within") + "</b><span>" + (s.firstCaseGraceMinutes == null ? wTH("ward.tu-not-configured-grace", "not configured: lateness is shown, not judged") : wTH("ward.tu-minutes-n", "{n} minutes", { n: esc(s.firstCaseGraceMinutes) }, "n")) + "</span></li>" +
+      "<li><b>" + wTH("ward.tu-reason-codes", "Reschedule reason codes") + "</b><span>" + ((s.rescheduleReasons || []).length ? esc(s.rescheduleReasons.map(function (x) { return x.label; }).join(", ")) : wTH("ward.tu-not-configured-codes", "not configured: a written reason only")) + "</span></li></ul>" +
+      '<button class="w-btn tiny ghost" data-w-act="theatrerules">' + ms("edit") + wTH("ward.tu-change-rules", "Change rules") + "</button></div>";
+    if (!u.theatresConfigured) return head + '<div class="w-card"><p class="w-empty">' + wTH("ward.tu-no-theatres", "No theatres are configured among this hospital's resources.") + "</p></div>" + rules;
+    var cards = (u.theatres || []).map(function (t) {
+      var sess = (t.sessions || []).map(function (x) {
+        var stt = x.status || {};
+        return "<li><b>" + esc(when(x.startAt)) + " &middot; " + esc(x.minutes) + "m &middot; " + esc((x.owner && x.owner.name) || "") + "</b>" +
+          '<span class="w-st ' + (stt.state === "held" ? "due" : "done") + '">' + (stt.state === "held" ? (stt.releasesAt ? wTH("ward.tu-held-until", "held until {at}", { at: esc(when(stt.releasesAt)) }, "at") : wTH("ward.tu-held", "held")) : stt.by === "rule" ? wTH("ward.tu-released-rule", "released by the rule at {at}", { at: esc(when(stt.releasedAt)) }, "at") : wTH("ward.tu-released-person", "released at {at}", { at: esc(when(stt.releasedAt)) }, "at")) + "</span>" +
+          "<br><small>" + wTH("ward.tu-session-mins", "booked {b} (owner {o}) &middot; released {r} &middot; used {u} minutes", { b: esc(x.bookedMinutes), o: esc(x.ownerBookedMinutes), r: esc(x.releasedMinutes), u: esc(x.usedMinutes) }, "b o r u") + (x.releaseReason ? " &middot; " + esc(x.releaseReason) : "") + "</small>" +
+          (stt.state === "held" ? '<button class="w-btn tiny ghost" data-w-act="theatrerelease:' + esc(x.sessionId) + '">' + wTH("ward.tu-release", "Release") + "</button>" : "") + "</li>";
+      }).join("");
+      var missing = (t.casesMissingTimes || []).map(function (m) { return "<li>" + esc(m.procedure || m.caseId) + " &middot; " + esc(when(m.scheduledAt)) + " &middot; " + wTH("ward.tu-missing", "missing: {what}", { what: esc(m.missing.join(", ")) }, "what") + "</li>"; }).join("");
+      var used = (t.cases || []).map(function (x) { return "<li>" + esc(x.procedure || x.caseId) + "<span>" + esc(when(x.inRoomAt)) + " &rarr; " + esc(when(x.outRoomAt)) + " &middot; " + esc(x.minutes) + "m</span></li>"; }).join("");
+      var first = (t.firstCases || []).map(function (f) {
+        return "<li>" + esc(f.day) + " &middot; " + esc(f.procedure || f.caseId) + "<span>" + wTH("ward.tu-first-case", "scheduled {s}, in theatre {i}", { s: esc(when(f.scheduledAt)), i: f.inRoomAt ? esc(when(f.inRoomAt)) : wT("ward.surg-not-recorded", "not recorded") }, "s i") +
+          (f.lateMinutes != null ? " &middot; " + wTH("ward.tu-late-min", "{n} minutes after", { n: esc(f.lateMinutes) }, "n") : "") +
+          " &middot; <b>" + (f.onTime === true ? wTH("ward.tu-on-time", "on time") : f.onTime === false ? wTH("ward.tu-late", "late") : wTH("ward.tu-not-judged", "not judged")) + "</b></span></li>";
+      }).join("");
+      var turns = (t.turnovers || []).map(function (x) { return "<li>" + esc(when(x.outRoomAt)) + " &rarr; " + esc(when(x.inRoomAt)) + "<span>" + esc(x.minutes) + "m</span></li>"; }).join("") +
+        (t.turnoverMissing || []).map(function (x) { return "<li>" + wTH("ward.tu-missing", "missing: {what}", { what: esc(x.missing.join(", ")) }, "what") + "</li>"; }).join("");
+      return '<div class="w-card"><div class="w-card-h">' + ms("meeting_room") + "<h3>" + esc(t.name) + "</h3></div>" +
+        "<p><b>" + wTH("ward.tu-booked", "Booked") + "</b> " + pct(t.bookedUtilisation, t.bookedMinutesInSessions, t.sessionMinutes) + "<br><b>" + wTH("ward.tu-used", "Used") + "</b> " + pct(t.usedUtilisation, t.usedMinutesInSessions, t.sessionMinutes) +
+        (t.bookedMinutesOutsideSessions ? "<br><small>" + wTH("ward.tu-outside", "{n} booked minutes outside any session", { n: esc(t.bookedMinutesOutsideSessions) }, "n") + "</small>" : "") + "</p>" +
+        "<h4>" + wTH("ward.tu-sessions", "Sessions") + "</h4>" + (sess ? '<ul class="w-mini">' + sess + "</ul>" : '<p class="w-empty">' + wTH("ward.tu-no-sessions", "No sessions on this day.") + "</p>") +
+        (used ? "<h4>" + wTH("ward.tu-cases-used", "Cases with both times") + '</h4><ul class="w-mini">' + used + "</ul>" : "") +
+        (missing ? "<h4>" + wTH("ward.tu-cases-missing", "Cases missing a time (not counted)") + '</h4><ul class="w-mini">' + missing + "</ul>" : "") +
+        (first ? "<h4>" + wTH("ward.tu-first-cases", "First case of the day") + '</h4><ul class="w-mini">' + first + "</ul>" : "") +
+        (turns ? "<h4>" + wTH("ward.tu-turnovers", "Turnover between cases") + '</h4><ul class="w-mini">' + turns + "</ul>" : "") + "</div>";
+    }).join("");
+    return head + (u.casesUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.tu-cases-unreadable", "Cases could not be read, so used minutes are not shown as zero but as not available.", null, "", 1) + "</p>" : "") +
+      '<div class="w-actions"><button class="w-btn go" data-w-act="theatresession">' + ms("add") + wTH("ward.tu-add-session", "Add a session") + "</button></div>" + cards + rules;
+  }
+  function theatreDayWindow(day) {
+    var d = day ? new Date(day + "T00:00:00") : new Date(); if (!day) d.setHours(0, 0, 0, 0);
+    return { from: d.toISOString(), to: new Date(d.getTime() + 86400000 - 1).toISOString() };
+  }
+  function loadTheatreUse() {
+    st.view = "theatreuse"; st.theatreUse = null; st.theatreUseErr = ""; paint();
+    var w = theatreDayWindow(st.theatreDay);
+    return apiGet("/ward/theatre-utilisation?orgId=" + encodeURIComponent(st.orgId) + "&from=" + encodeURIComponent(w.from) + "&to=" + encodeURIComponent(w.to))
+      .then(function (r) { if (r && r.ok) st.theatreUse = r; else { st.theatreUse = false; st.theatreUseErr = (r && (r.detail || r.error)) || ""; } paint(); })
+      .catch(function () { st.theatreUse = false; paint(); });
+  }
+  function theatrePost(path, body, okMsg) {
+    st.busy = true; paint();
+    return apiPost(path, Object.assign({ orgId: st.orgId }, body))
+      .then(function (r) { if (settle(r, okMsg)) loadTheatreUse(); else paint(); return r; })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+  }
+  function theatreSessionAdd() {
+    var ths = ((st.theatreUse && st.theatreUse.theatres) || []).map(function (t) { return [t.theatreId, esc(t.name)]; });
+    if (!ths.length) return;
+    askFor({ title: wTH("ward.tu-add-session", "Add a session"), icon: "add", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "theatre", type: "select", label: wTH("ward.theatre", "Theatre"), options: ths, value: ths[0][0] },
+      { key: "start", type: "datetime", label: wTH("ward.tu-session-start", "Session start"), required: wT("ward.tu-start-required", "A session needs a start.") },
+      { key: "minutes", type: "text", label: wTH("ward.minutes", "Minutes"), required: wT("ward.tu-minutes-required", "A session needs a length in minutes.") },
+      { key: "kind", type: "select", label: wTH("ward.tu-owner-kind", "Held for"), options: [["unit", wTH("ward.tu-owner-unit", "A unit")], ["surgeon", wTH("ward.surgeon", "Surgeon")]], value: "unit" },
+      { key: "owner", type: "text", label: wTH("ward.tu-owner-id", "Unit or surgeon (as bookings name it)"), required: wT("ward.tu-owner-required", "Name who holds the session.") },
+    ] }, function (v) {
+      return theatrePost("/ward/theatre-session", { theatreId: v.theatre, startAt: isoOfLocal(v.start), minutes: Number(v.minutes), ownerKind: v.kind, ownerId: v.owner, ownerName: v.owner }, wT("ward.tu-session-added", "Session added."));
+    });
+  }
+  function theatreRelease(sessionId) {
+    askReason(wTH("ward.tu-release-why", "Why is this session released?"), wT("ward.a-reason-is-required", "A reason is required."), null, function (reason) {
+      return theatrePost("/ward/theatre-session-release", { sessionId: sessionId, reason: reason }, wT("ward.tu-released", "Session released."));
+    });
+  }
+  function theatreRules() {
+    var s = (st.theatreUse && st.theatreUse.settings) || {};
+    askFor({ title: wTH("ward.tu-change-rules", "Change rules"), icon: "rule", ok: wTH("ward.save", "Save"), fields: [
+      { key: "release", type: "text", label: wTH("ward.tu-release-hours-field", "Release unbooked session time this many hours before (blank: never)"), value: s.releaseHours == null ? "" : s.releaseHours },
+      { key: "grace", type: "text", label: wTH("ward.tu-grace-field", "First case on time within this many minutes (blank: not judged)"), value: s.firstCaseGraceMinutes == null ? "" : s.firstCaseGraceMinutes },
+      { key: "codes", type: "textarea", label: wTH("ward.tu-codes-field", "Reschedule reasons, one per line (blank: a written reason only)"), value: (s.rescheduleReasons || []).map(function (x) { return x.label; }).join("\n") },
+    ] }, function (v) {
+      var theatre = { releaseHours: v.release === "" ? null : Number(v.release), firstCaseGraceMinutes: v.grace === "" ? null : Number(v.grace),
+        rescheduleReasons: String(v.codes || "").split("\n").map(function (x) { return x.trim(); }).filter(Boolean) };
+      return theatrePost("/org/update", { wardsynq: { theatre: theatre } }, wT("ward.tu-rules-saved", "Rules saved."));
+    });
   }
 
   function anesthesiaCard(state) {
@@ -1102,13 +1288,23 @@
     var rows = ((a && a.events) || []).map(function (e) {
       return "<li><b>" + esc(e.drug) + "</b><span>" + esc(e.dose) + (e.route ? " " + esc(e.route) : "") + " &middot; " + when(e.at) + "</span></li>";
     }).join("");
+    /* The technique actually given (R2-2): stated at the start and, if the case was converted, changed at the end. Nothing
+     * is preselected at the start; at the end the one already recorded is. */
+    var techSelect = function (id, cur) {
+      return '<label class="w-f"><span>' + (a ? wTH("ward.anes-tech-given-end", "Technique given (change it if the case was converted)") : wTH("ward.anes-tech-given", "Technique given")) + '</span><select id="' + id + '">' +
+        pacOptions("technique", ["general", "spinal", "epidural", "combined-spinal-epidural", "regional-block", "sedation", "local-with-monitoring"], cur) + "</select></label>";
+    };
+    var techLine = a && a.technique ? '<p class="w-dt-times">' + wTH("ward.anes-tech-line", "Technique given: {tech}", { tech: esc(pacWord("technique", a.technique)) }) +
+      (a.techniqueChangedFrom ? " &middot; " + wTH("ward.anes-tech-converted", "converted from {from}", { from: esc(pacWord("technique", a.techniqueChangedFrom)) }) : "") + "</p>" : "";
     return '<div class="w-card"><div class="w-card-h">' + ms("vital_signs") + "<h3>" + wTH("ward.anaesthesia", "Anaesthesia") + "</h3></div>" +
       (!a
         ? "<label class=\"w-f\"><span>" + wTH("ward.asa-class", "ASA class") + "</span><input id=\"wSurgAsa\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-asa-ii", "e.g. ASA II") + "\"></label>" +
+          techSelect("wSurgAnesTech", "") +
           '<button class="w-btn go" data-w-act="anesstart">' + ms("play_arrow") + wTH("ward.start-anaesthesia-record", "Start anaesthesia record") + "</button>"
         : a.endedAt
-          ? '<p class="w-hint">' + ms("check_circle") + wTH("ward.ended2", "Ended {endedAt}", { endedAt: when(a.endedAt) }, "endedAt") + "</p>" + (rows ? '<ul class="w-mini">' + rows + "</ul>" : "")
-          : (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") +
+          ? '<p class="w-hint">' + ms("check_circle") + wTH("ward.ended2", "Ended {endedAt}", { endedAt: when(a.endedAt) }, "endedAt") + "</p>" + techLine + (rows ? '<ul class="w-mini">' + rows + "</ul>" : "")
+          : techLine + (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") +
+            techSelect("wSurgAnesTechEnd", a.technique || "") +
             '<div class="w-grid">' +
             "<label class=\"w-f\"><span>" + wTH("ward.drug", "Drug") + "</span><input id=\"wSurgAnesDrug\" type=\"text\" autocomplete=\"off\"></label>" +
             "<label class=\"w-f\"><span>" + wTH("ward.dose", "Dose") + "</span><input id=\"wSurgAnesDose\" type=\"text\" autocomplete=\"off\"></label>" +
@@ -1131,6 +1327,128 @@
       "<label class=\"w-f\"><span>" + wTH("ward.serial2", "Serial") + "</span><input id=\"wSurgImplantSerial\" type=\"text\" autocomplete=\"off\"></label>" +
       "</div>" +
       '<button class="w-btn ghost" data-w-act="surgeryimplant">' + ms("add") + wTH("ward.log-implant", "Log implant") + "</button></div>";
+  }
+
+  /* PRE-ANAESTHETIC CHECKUP (migrate-surgery.js recordPac), one per case. The screen sends what was chosen;
+   * the server keeps the closed vocabularies, adds who and when, and refuses a second checkup unless it is a
+   * revision with a reason. Nothing is preselected: a yes/no the anaesthetist never touched is not an answer.
+   * st.surgCase.pac: null = loading, false = could not be read, { rec: record or null } = read. */
+  function pacWord(kind, v) {
+    var W = {
+      neck: { normal: wT("ward.pac-neck-normal", "Normal"), restricted: wT("ward.pac-neck-restricted", "Restricted"), fixed: wT("ward.pac-neck-fixed", "Fixed") },
+      fasting: { adequate: wT("ward.pac-fasting-adequate", "Adequately fasted"), inadequate: wT("ward.pac-fasting-inadequate", "Not adequately fasted"), "not-fasted-emergency": wT("ward.pac-fasting-emergency", "Not fasted (emergency)") },
+      technique: { general: wT("ward.pac-tech-general", "General anaesthesia"), spinal: wT("ward.pac-tech-spinal", "Spinal"), epidural: wT("ward.pac-tech-epidural", "Epidural"), "combined-spinal-epidural": wT("ward.pac-tech-cse", "Combined spinal-epidural"), "regional-block": wT("ward.pac-tech-block", "Regional block"), sedation: wT("ward.pac-tech-sedation", "Sedation"), "local-with-monitoring": wT("ward.pac-tech-local", "Local with monitoring") },
+      decision: { fit: wT("ward.pac-decision-fit", "Fit for anaesthesia"), "fit-with-conditions": wT("ward.pac-decision-conditions", "Fit with conditions"), unfit: wT("ward.pac-decision-unfit", "Unfit"), missing: wT("ward.pac-decision-missing", "No checkup recorded") },
+      givenBy: { patient: wT("ward.pac-given-patient", "Patient"), guardian: wT("ward.pac-given-guardian", "Guardian"), proxy: wT("ward.pac-given-proxy", "Lawful proxy") },
+      mallampati: { "not-assessable": wT("ward.pac-mallampati-na", "Not assessable") }
+    };
+    return (W[kind] && HAS(W[kind], v)) ? W[kind][v] : String(v == null ? "" : v);
+  }
+  function pacOptions(kind, values, current) {
+    return '<option value="">' + wTH("ward.choose", "Choose&hellip;") + "</option>" + values.map(function (v) {
+      return '<option value="' + esc(v) + '"' + (current === v ? " selected" : "") + ">" + esc(pacWord(kind, v)) + "</option>";
+    }).join("");
+  }
+  function pacYesNo(id, current) {
+    return '<select id="' + id + '"><option value="">' + wTH("ward.choose", "Choose&hellip;") + "</option>" +
+      '<option value="yes"' + (current === true ? " selected" : "") + ">" + wTH("ward.pac-yes", "Yes") + "</option>" +
+      '<option value="no"' + (current === false ? " selected" : "") + ">" + wTH("ward.pac-no", "No") + "</option></select>";
+  }
+  function pacLocalInput(iso) {
+    if (!iso) return "";
+    var d = new Date(iso); if (isNaN(d.getTime())) return "";
+    var p = function (n) { return (n < 10 ? "0" : "") + n; };
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes());
+  }
+  function pacForm(rec) {
+    var r = rec || {}, a = r.airway || {}, f = r.fasting || {}, inv = r.investigations || {}, pl = r.plan || {}, co = r.consent || {};
+    var fld = function (label, input) { return '<label class="w-f"><span>' + label + "</span>" + input + "</label>"; };
+    return '<div class="w-sub">' +
+      fld(wTH("ward.pac-history", "History: conditions, previous anaesthetics, medicines, allergies"), '<textarea id="wPacHistory" rows="3">' + esc(r.history || "") + "</textarea>") +
+      "<h4>" + wTH("ward.pac-airway", "Airway") + "</h4>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-mallampati", "Mallampati class"), '<select id="wPacMallampati">' + pacOptions("mallampati", ["I", "II", "III", "IV", "not-assessable"], a.mallampati) + "</select>") +
+      fld(wTH("ward.pac-mouth", "Mouth opening (cm)"), '<input id="wPacMouth" type="number" min="0" max="10" step="0.1" inputmode="decimal" value="' + esc(a.mouthOpeningCm == null ? "" : a.mouthOpeningCm) + '">') +
+      fld(wTH("ward.pac-tmd", "Thyromental distance (cm)"), '<input id="wPacTmd" type="number" min="0" max="15" step="0.1" inputmode="decimal" value="' + esc(a.thyromentalDistanceCm == null ? "" : a.thyromentalDistanceCm) + '">') +
+      fld(wTH("ward.pac-neck", "Neck movement"), '<select id="wPacNeck">' + pacOptions("neck", ["normal", "restricted", "fixed"], a.neckMovement) + "</select>") +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.asa-class", "ASA class"), '<select id="wPacAsa">' + pacOptions("asa", ["I", "II", "III", "IV", "V", "VI"], r.asaClass) + "</select>") +
+      '<label class="w-chk"><input type="checkbox" id="wPacAsaE"' + (r.asaEmergency ? " checked" : "") + "> " + wTH("ward.pac-asa-emergency", "Emergency (E)") + "</label>" +
+      "</div>" +
+      "<h4>" + wTH("ward.pac-fasting", "Fasting") + "</h4>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-fasting-status", "Fasting status"), '<select id="wPacFasting">' + pacOptions("fasting", ["adequate", "inadequate", "not-fasted-emergency"], f.status) + "</select>") +
+      fld(wTH("ward.pac-solids", "Last solid food"), '<input id="wPacSolids" type="datetime-local" value="' + esc(pacLocalInput(f.solidsLastAt)) + '">') +
+      fld(wTH("ward.pac-clears", "Last clear fluids"), '<input id="wPacClears" type="datetime-local" value="' + esc(pacLocalInput(f.clearFluidsLastAt)) + '">') +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-inv-reviewed", "Investigations reviewed"), pacYesNo("wPacInvReviewed", inv.reviewed)) +
+      fld(wTH("ward.pac-inv-summary", "Investigations: relevant findings"), '<input id="wPacInvSummary" type="text" autocomplete="off" value="' + esc(inv.summary || "") + '">') +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-plan", "Anaesthesia plan"), '<select id="wPacTechnique">' + pacOptions("technique", ["general", "spinal", "epidural", "combined-spinal-epidural", "regional-block", "sedation", "local-with-monitoring"], pl.technique) + "</select>") +
+      fld(wTH("ward.pac-plan-notes", "Plan notes"), '<input id="wPacPlanNotes" type="text" autocomplete="off" value="' + esc(pl.notes || "") + '">') +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-consent", "Consent for anaesthesia obtained"), pacYesNo("wPacConsent", co.obtained)) +
+      fld(wTH("ward.pac-consent-by", "Consent given by"), '<select id="wPacConsentBy">' + pacOptions("givenBy", ["patient", "guardian", "proxy"], co.givenBy) + "</select>") +
+      "</div>" +
+      '<div class="w-grid">' +
+      fld(wTH("ward.pac-decision", "Fitness decision"), '<select id="wPacDecision">' + pacOptions("decision", ["fit", "fit-with-conditions", "unfit"], r.decision) + "</select>") +
+      fld(wTH("ward.pac-decision-reason", "Conditions, or why unfit"), '<input id="wPacDecisionReason" type="text" autocomplete="off" value="' + esc(r.decisionReason || "") + '">') +
+      "</div>" +
+      (rec ? fld(wTH("ward.pac-revision-reason", "Reason for revising this checkup"), '<input id="wPacRevisionReason" type="text" autocomplete="off">') : "") +
+      '<button class="w-btn go" data-w-act="pacsave">' + ms("save") + (rec ? wTH("ward.pac-save-revision", "Save revision") : wTH("ward.pac-save", "Record checkup")) + "</button>" +
+      (rec ? ' <button class="w-btn ghost" data-w-act="paccancel">' + wTH("ward.cancel", "Cancel") + "</button>" : "") +
+      "</div>";
+  }
+  function pacSummary(rec) {
+    var a = rec.airway || {}, f = rec.fasting || {}, inv = rec.investigations || {}, pl = rec.plan || {}, co = rec.consent || {};
+    var line = function (label, value) { return "<li><b>" + label + "</b><span>" + value + "</span></li>"; };
+    var warn = rec.decision !== "fit";
+    return '<p class="w-hint' + (warn ? " warn" : "") + '">' + ms(warn ? "warning" : "check_circle") + "<b>" + esc(pacWord("decision", rec.decision)) + "</b>" +
+      (rec.decisionReason ? ": " + esc(rec.decisionReason) : "") + "</p>" +
+      '<ul class="w-mini">' +
+      line(wTH("ward.asa-class", "ASA class"), esc(rec.asaClass) + (rec.asaEmergency ? " E" : "")) +
+      line(wTH("ward.pac-airway", "Airway"), wTH("ward.pac-airway-line", "Mallampati {m}, mouth opening {mo} cm, thyromental distance {tmd} cm, neck {neck}", { m: esc(pacWord("mallampati", a.mallampati)), mo: esc(a.mouthOpeningCm), tmd: esc(a.thyromentalDistanceCm), neck: esc(pacWord("neck", a.neckMovement)) })) +
+      line(wTH("ward.pac-fasting", "Fasting"), esc(pacWord("fasting", f.status)) +
+        (f.solidsLastAt ? " &middot; " + wTH("ward.pac-solids-at", "solids {at}", { at: when(f.solidsLastAt) }) : "") +
+        (f.clearFluidsLastAt ? " &middot; " + wTH("ward.pac-clears-at", "clear fluids {at}", { at: when(f.clearFluidsLastAt) }) : "")) +
+      line(wTH("ward.pac-inv-reviewed", "Investigations reviewed"), (inv.reviewed ? wTH("ward.pac-yes", "Yes") : wTH("ward.pac-no", "No")) + (inv.summary ? " &middot; " + esc(inv.summary) : "")) +
+      line(wTH("ward.pac-plan", "Anaesthesia plan"), esc(pacWord("technique", pl.technique)) + (pl.notes ? " &middot; " + esc(pl.notes) : "")) +
+      line(wTH("ward.pac-consent", "Consent for anaesthesia obtained"), (co.obtained ? wTH("ward.pac-yes", "Yes") : wTH("ward.pac-no", "No")) + (co.givenBy ? " &middot; " + esc(pacWord("givenBy", co.givenBy)) : "")) +
+      line(wTH("ward.pac-history-short", "History"), esc(rec.history)) +
+      "</ul>" +
+      '<p class="w-dt-times">' + wTH("ward.pac-assessed", "Assessed {at} by {who}, version {v}", { at: when(rec.assessedAt), who: staffWho(rec.assessedBy), v: esc(rec.version) }) +
+      (rec.revision ? " &middot; " + wTH("ward.pac-revised", "revised from {prev}: {reason}", { prev: esc(pacWord("decision", rec.revision.previousDecision)), reason: esc(rec.revision.reason) }) : "") + "</p>";
+  }
+  function pacCard(state) {
+    var d = state.surgCase, c = d.case, p = d.pac;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("assignment_ind") + "<h3>" + wTH("ward.pac-title", "Pre-anaesthetic checkup") + "</h3></div>";
+    var atSignIn = c.signIn && c.signIn.pac
+      ? '<p class="w-hint' + (c.signIn.pac.acknowledgement ? " warn" : "") + '">' + ms("checklist") + wTH("ward.pac-at-sign-in", "At Sign In: {status}", { status: esc(pacWord("decision", c.signIn.pac.status)) }) +
+        (c.signIn.pac.acknowledgement ? " &middot; " + wTH("ward.pac-proceeded-because", "proceeded because: {reason}", { reason: esc(c.signIn.pac.acknowledgement) }) : "") + "</p>"
+      : "";
+    if (p == null) return head + '<p class="w-empty">' + wTH("ward.pac-loading", "Loading the pre-anaesthetic checkup...") + "</p></div>";
+    if (p === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.pac-failed", "The pre-anaesthetic checkup could not be loaded. Do not read this as not done.", null, "", 1) + "</p>" +
+      '<button class="w-btn tiny ghost" data-w-act="surgeryload">' + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button>" + atSignIn + "</div>";
+    if (!p.rec) return head + '<p class="w-hint warn">' + ms("warning") + wTH("ward.pac-none", "No pre-anaesthetic checkup is recorded for this case.") + "</p>" + atSignIn + pacForm(null) + "</div>";
+    return head + pacSummary(p.rec) + atSignIn +
+      (state.surgPacEdit ? pacForm(p.rec) : '<button class="w-btn ghost sm" data-w-act="pacedit">' + ms("edit") + wTH("ward.pac-revise", "Revise checkup") + "</button>") + "</div>";
+  }
+  /* Shown above the Sign In checklist: whether a checkup exists and what it decided. The server checks again
+   * at sign in and refuses a missing or unfit checkup unless the reason for proceeding is given here. */
+  function pacSignInNote(state) {
+    var p = state.surgCase && state.surgCase.pac;
+    var ack = '<label class="w-f"><span>' + wTH("ward.pac-ack", "Why Sign In proceeds without a fit checkup") + '</span><input id="wSurgPacAck" type="text" autocomplete="off"></label>';
+    if (p == null) return '<p class="w-empty">' + wTH("ward.pac-loading", "Loading the pre-anaesthetic checkup...") + "</p>";
+    if (p === false) return '<p class="w-hint warn">' + ms("error") + wTH("ward.pac-signin-failed", "The pre-anaesthetic checkup could not be loaded. Sign In checks it again; give a reason if none is recorded.", null, "", 1) + "</p>" + ack;
+    if (!p.rec) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.pac-signin-missing", "No pre-anaesthetic checkup is recorded. Record one, or state why Sign In proceeds without it.", null, "", 1) + "</p>" + ack;
+    if (p.rec.decision === "unfit") return '<p class="w-hint warn">' + ms("warning") + wTH("ward.pac-signin-unfit", "The pre-anaesthetic checkup found the patient unfit: {reason}. State why Sign In proceeds.", { reason: esc(p.rec.decisionReason || "") }) + "</p>" + ack;
+    return '<p class="w-hint' + (p.rec.decision === "fit" ? "" : " warn") + '">' + ms(p.rec.decision === "fit" ? "check_circle" : "warning") +
+      wTH("ward.pac-signin-status", "Pre-anaesthetic checkup: {decision}, ASA {asa}", { decision: esc(pacWord("decision", p.rec.decision)), asa: esc(p.rec.asaClass) }) +
+      (p.rec.decisionReason ? " &middot; " + esc(p.rec.decisionReason) : "") + "</p>";
   }
 
   /* HELD FROM OTHER SYSTEMS. Everything here is something another system sent that WardSynQ would
@@ -1401,6 +1719,57 @@
     ["confirmed", "Confirmed"],
     ["refuted", "Refuted - considered and ruled out"]
   ];
+  /* THE CODE PICKER over the hospital's own loaded SNOMED CT, ICD-10 and LOINC codes (code-sets.js). A person searches
+   * and picks; nothing is preselected, and the server checks the code is in the set before it is stored.
+   * st.codeSets: null = loading, false = failed, [systems]. st.cp[key]: { system, results: null (searching) |
+   * false (failed) | [codes], err, chosen }. key is where the code goes: "prob", "surg" or "inv". */
+  function codePickerHtml(state, key) {
+    var cs = state.codeSets, p = (state.cp && state.cp[key]) || {};
+    var head = '<div class="w-sub w-codepick"><h4>' + ms("tag") + wTH("ward.cp-title", "Standard code (optional)") + "</h4>";
+    if (cs == null) return head + '<p class="w-hint">' + wTH("ward.cp-loading", "Loading this hospital's code sets...") + "</p></div>";
+    if (cs === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.cp-failed", "This hospital's code sets could not be loaded, so no code can be picked now. Do not read this as none loaded.", null, "", 1) + "</p></div>";
+    var loaded = cs.filter(function (s) { return s.loaded; });
+    if (!loaded.length) return head + '<p class="w-hint">' + ms("info") + wTH("ward.cp-none-loaded", "No SNOMED CT, ICD-10 or LOINC codes are loaded for this hospital. An administrator loads them in Admin, FHIR.") + "</p></div>";
+    if (p.chosen) return head + '<p class="w-hint">' + ms("check_circle") + "<b>" + esc(p.chosen.code) + "</b> " + esc(p.chosen.display) + ' <small lang="en">' + esc(p.chosen.name) + "</small> " +
+      '<button class="w-btn ghost tiny" data-w-act="cpclear:' + key + '">' + ms("close") + wTH("ward.cp-remove", "Remove code") + "</button></p></div>";
+    var res = p.results;
+    return head + '<div class="w-grid">' +
+      '<label class="w-f"><span>' + wTH("ward.cp-system", "Code system") + '</span><select id="wCp-' + key + '-sys">' + loaded.map(function (s) {
+        return '<option value="' + esc(s.system) + '"' + (p.system === s.system ? " selected" : "") + ">" + esc(s.name) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>' + wTH("ward.cp-search", "Search by code or words") + '</span><input id="wCp-' + key + '-q" type="search" autocomplete="off"></label></div>' +
+      '<button class="w-btn ghost" data-w-act="cpfind:' + key + '">' + ms("search") + wTH("ward.find-code", "Find code") + "</button>" +
+      (res === null ? '<p class="w-hint">' + wTH("ward.searching", "Searching…") + "</p>"
+        : res === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.cp-search-failed", "The code search failed. Do not read this as no match.", null, "", 1) + (p.err ? " " + esc(p.err) : "") + "</p>"
+        : Array.isArray(res) ? (res.length ? '<ul class="w-icd">' + res.map(function (c, i) {
+            return '<li><button class="w-icd-p" data-w-act="cppick:' + key + "|" + i + '"><b>' + esc(c.code) + "</b><span>" + esc(c.display) + "</span></button></li>"; }).join("") + "</ul>"
+          : '<p class="w-hint">' + wTH("ward.cp-no-match", "No code in this hospital's set matches.") + "</p>") : "") + "</div>";
+  }
+  function loadCodeSets() {
+    if (Array.isArray(st.codeSets)) return Promise.resolve();
+    st.codeSets = null;
+    return apiGet("/ward/code-sets?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.codeSets = r && r.ok ? (r.systems || []) : false; paint(); }, function () { st.codeSets = false; paint(); });
+  }
+  function codePickFind(key) {
+    var system = val("wCp-" + key + "-sys"), q = val("wCp-" + key + "-q");
+    st.cp = st.cp || {};
+    if (q.length < 2) { st.err = wT("ward.cp-type-two", "Type at least two characters of the code or its words."); paint(); return; }
+    var p = st.cp[key] = { system: system, results: null, err: "", chosen: null };
+    paint();
+    apiGet("/ward/code-search?orgId=" + encodeURIComponent(st.orgId) + "&system=" + encodeURIComponent(system) + "&q=" + encodeURIComponent(q))
+      .then(function (r) { if (st.cp[key] !== p) return; p.results = r && r.ok ? (r.codes || []) : false; p.err = r && !r.ok ? (r.detail || r.error || "") : ""; p.name = r && r.name; paint(); },
+        function () { if (st.cp[key] !== p) return; p.results = false; paint(); });
+  }
+  function codePickPick(arg) {
+    var parts = String(arg).split("|"), p = st.cp && st.cp[parts[0]], c = p && Array.isArray(p.results) && p.results[Number(parts[1])];
+    if (!c) return;
+    var sys = (st.codeSets || []).filter(function (s) { return s.system === p.system; })[0];
+    p.chosen = { system: p.system, code: c.code, display: c.display, name: (sys && sys.name) || p.system };
+    p.results = undefined;
+    paint();
+  }
+  function codeChosen(key) { var p = st.cp && st.cp[key]; return p && p.chosen ? { system: p.chosen.system, code: p.chosen.code } : undefined; }
+
   function problemsCard(state) {
     var rows = (state.problems || []).map(function (p) {
       return '<li><b>' + esc(p.display) + "</b>" + (p.codeSystem && p.codeSystem !== "text" ? ' <span class="w-code">' + esc(p.code) + "</span>" : "") +
@@ -1439,6 +1808,7 @@
       "</div>" +
       // Said plainly, because a code box beside a text box invites typing one in and hoping.
       '<p class="w-hint">' + ms("info") + wTH("ward.left-blank-the-code-is-not", "Left blank, the code is not guessed at: the diagnosis is recorded as text, and says so. Nothing here decides what the words mean.") + "</p>" +
+      codePickerHtml(state, "prob") +
       "</div></div>";
   }
 
@@ -2184,8 +2554,8 @@
       "<div class=\"w-filter\"><input id=\"wFrom\" type=\"datetime-local\" aria-label=\"" + wTA("ward.round-window-from", "Round window from") + "\" value=\"" + esc(state.from) + '">' +
       "<input id=\"wTo\" type=\"datetime-local\" aria-label=\"" + wTA("ward.round-window-to", "Round window to") + "\" value=\"" + esc(state.to) + '">' +
       "<button class=\"w-btn ghost\" data-w-act=\"round\">" + wTH("ward.load", "Load") + "</button></div>" +
-      "<div class=\"w-scan\"><label class=\"w-f\"><span>" + wTH("ward.wristband-scan", "Wristband scan") + "</span><input id=\"wScanP\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.patient-barcode", "Patient barcode") + "\"></label>" +
-      "<label class=\"w-f\"><span>" + wTH("ward.drug-scan", "Drug scan") + "</span><input id=\"wScanD\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.drug-barcode", "Drug barcode") + "\"></label>" +
+      "<div class=\"w-scan\"><label class=\"w-f\"><span>" + wTH("ward.wristband-scan", "Wristband scan") + "</span><input id=\"wScanP\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.patient-barcode", "Patient barcode") + "\"></label>" + camBtn("wScanP") +
+      "<label class=\"w-f\"><span>" + wTH("ward.drug-scan", "Drug scan") + "</span><input id=\"wScanD\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.drug-barcode", "Drug barcode") + "\"></label>" + camBtn("wScanD") +
       /* The second nurse. The hospital's own high-alert list decides which drugs need one, and the
        * SERVER refuses without it - insulin, heparin, opioids. Before this field existed the refusal
        * was correct and unanswerable: a nurse at the bedside had no way to name the witness, so a
@@ -2254,7 +2624,16 @@
       (sf.checked === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.the-safety-check-could-not-run", "The safety check could not run, so nothing about this order was checked.", null, "", 1) + "</p>" : "") +
       (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") +
       (sf.unresolvedDrug ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.this-drug-is-not-recognised-by", "This drug is not recognised by the decision-support content, so no allergy, interaction or dose check ran for it.", null, "", 1) + "</p>" : "") +
+      /* An empty pregnancy and lactation table is said where its findings would be, never left to read as checked. */
+      (sf.pregnancyLactation && sf.pregnancyLactation.rulesLoaded === 0 ? '<p class="w-hint">' + ms("info") + wTH("ward.no-pregnancy-lactation-rules-loaded", "No pregnancy or lactation rules are loaded, so this order was not checked for use in pregnancy or breastfeeding.", null, "", 1) + "</p>" : "") +
       ((sf.unresolvedActiveMeds || []).length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.not-checked-against", "Not checked against: {drugs}", { drugs: esc(sf.unresolvedActiveMeds.join(", ")) }, "drugs", 1) + "</p>" : "") +
+      /* THIS HOSPITAL'S OWN REMINDERS, and whether they could be evaluated at all. An unreadable
+       * Observation or Condition list used to leave this card silent, which reads as "nothing to say"
+       * (R5-1). The advisory text is the hospital's own words, never translated. */
+      (rv.advisoriesUnavailable ? '<p class="w-hint warn">' + ms("error") + wTH("ward.mo-advisories-unavailable", "This hospital's own prescribing reminders could not be checked for this patient, because the results and diagnoses could not be read. Do not read this as no warnings.", null, "", 1) + "</p>" : "") +
+      ((rv.advisories || []).length ? '<ul class="w-mini">' + rv.advisories.map(function (a) {
+        return '<li class="w-st due"><b>' + wTH("ward.mo-hospital-advisory", "Hospital advisory") + "</b> <span lang=\"en\">" + esc(a.message || a.id || "") + (a.action ? " " + esc(a.action) : "") + "</span></li>";
+      }).join("") + "</ul>" : "") +
       (rv.replaces ? '<p class="w-hint warn">' + ms("swap_horiz") + wTH("ward.this-replaces-the-active-order", "This replaces the active order for this drug ({dose} {frequency}).", { dose: dose(rv.replaces.dose), frequency: esc(rv.replaces.frequency || "") }, "dose frequency", 1) + "</p>" : "") +
       (needReason ? "<label class=\"w-f\"><span>" + wTH("ward.reason-for-prescribing-anyway", "Reason for prescribing anyway (required)") + "</span><input id=\"wMoOverride\" type=\"text\" autocomplete=\"off\"></label>" : "") +
       (stops.length ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-server-refuses-this-order-whatever", "The server refuses this order whatever the reason. Change the dose, the frequency or the drug.", null, "", 1) + "</p>" : "") +
@@ -2297,6 +2676,7 @@
       return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(priorityWord(c.priority)).toUpperCase() : "") + "</span>" +
         " " + '<span class="w-st ' + esc(kind === "specimen" ? st_ : "ordered") + '">' + esc(stLabel) + "</span>" +
         (canCollect ? '<button class="w-btn tiny go" data-w-act="collectspecimen:' + esc(c.serviceRequestId) + '">' + ms("colorize") + wTH("ward.collect", "Collect") + "</button>" : "") +
+        (kind === "specimen" && st_ === "collected" ? '<button class="w-btn tiny ghost" data-w-act="speclabel:' + esc(c.serviceRequestId) + '">' + ms("label") + wTH("ward.print-tube-label", "Print tube label") + "</button>" : "") +
         (kind === "imaging" ? '<button class="w-btn tiny go" data-w-act="radiologyopen:' + esc(c.serviceRequestId) + '">' + ms("radiology") + wTH("ward.open-in-radiology", "Open in Radiology") + "</button>" : "") +
       "</li>";
     }).join("");
@@ -2330,6 +2710,7 @@
       "<label class=\"w-f\"><span>" + wTH("ward.inv-other-category", "Category, for a test not on the list") + "</span><select id=\"wInvCat\">" + INV_CATEGORY.map(function (c) { return '<option value="' + esc(c[0]) + '"' + (o.category === c[0] ? " selected" : "") + ">" + esc(wTEn(c[1])) + "</option>"; }).join("") + "</select></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.inv-reason", "Reason (needed for a test not on the list)") + "</span><input id=\"wInvReason\" type=\"text\" autocomplete=\"off\"></label>" +
       "</div>" +
+      codePickerHtml(state, "inv") +
       '<button class="w-btn" data-w-act="investigation">' + ms("send") + wTH("ward.order2", "Order") + "</button>" +
       (rows ? '<div class="w-sub"><h4>' + ms("checklist") + wTH("ward.on-order", "On order") + "</h4><ul class=\"w-mini\">" + rows + "</ul></div>" : "") +
       (results ? '<div class="w-sub"><h4>' + ms("fact_check") + wTH("ward.results-imaging-reports", "Results &amp; Imaging Reports") + "</h4><ul class=\"w-mini w-results\">" + results + "</ul></div>" : "") +
@@ -2354,7 +2735,9 @@
       { act: "ordersets", icon: "checklist", label: "Order sets", title: "A hospital-approved group of orders, each checked on its own" },
       { act: "medrec", icon: "medication", label: "Medicines on arrival", title: "What this patient was already taking, and what happens to each medicine" },
       { act: "referrals", icon: "send", label: "Referrals", title: "Refer this patient to another specialty or facility, and follow the reply" },
-      { act: "followup", icon: "schedule", label: "Follow-up", title: "Ask for this patient to be seen again" }] },
+      { act: "followup", icon: "schedule", label: "Follow-up", title: "Ask for this patient to be seen again" },
+      // 2026-09-16: the diet order is a clinical order written from the chart; the Diet and kitchen page (pages/support.js) keeps it.
+      { act: "dietopen", icon: "restaurant", label: "Diet", title: "Order or change this patient's diet, and see what the kitchen sees" }] },
     { id: "nursing", label: "Nursing", icon: "vital_signs", tabs: [
       // LT-23: a shift handover and a nursing task are given FROM the chart of the patient they are about.
       { act: "handoverchart", icon: "swap_horiz", label: "Hand over", title: "Hand this patient to the next shift, in SBAR" },
@@ -2377,6 +2760,7 @@
       { act: "documents", icon: "description", label: "Documents", title: "Consent forms, referral letters, outside reports" },
       { act: "consentopen", icon: "fact_check", label: "Consent", title: "What this patient has agreed to and refused" },
       { act: "ipsopen", icon: "summarize", label: "IPS summary", title: "The International Patient Summary another hospital would receive for this patient" },
+      { act: "abdmrecords", icon: "cloud_sync", label: "ABDM", title: "Records linked to the patient's ABHA, and records asked for from other facilities" },
       { act: "move", icon: "swap_horiz", label: "Transfer", title: "Transfer to another ward or bed" },
       { act: "summary", icon: "description", label: "Summary", title: "Discharge summary" },
       { act: "wardcloseopen", icon: "home", label: "Discharge", title: "End this stay and record where the patient went" },
@@ -2449,6 +2833,287 @@
     return true;
   }
 
+  /* The medico-legal flag (yes or no and the MLC number; the case itself stays in the register) and notifiable disease
+   * prompts, which are suggestions a person decides on in Registers. Nothing while loading; a read failure says so. */
+  function registerFlagsCard(state) {
+    var f = state.registerFlags;
+    if (f === null || f === undefined) return "";
+    if (f === false) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.registers-unreadable", "The medico-legal and notifiable disease registers could not be checked for this patient.") + "</p>";
+    var out = "";
+    if (f.mlc && f.mlc.mlc) out += '<p class="w-hint warn">' + ms("gavel") + wTH("ward.mlc-flag", "Medico-legal case {numbers}", { numbers: esc((f.mlc.cases || []).map(function (x) { return x.serial; }).join(", ")) }) + "</p>";
+    (f.prompts || []).forEach(function (p) {
+      out += '<p class="w-hint">' + ms("coronavirus") + wTH("ward.notifiable-prompt", "Possibly notifiable: {name}. Check the case definition and record a notification in Registers.", { name: esc(p.name) }) +
+        ' <a class="w-btn ghost" href="#/registers">' + ms("menu_book") + wTH("ward.open-registers", "Open Registers") + "</a></p>";
+    });
+    return out;
+  }
+  /* EXPECTED DISCHARGE AND TRANSFER REQUEST, on the stay's own chart (expected-discharge.js, transfer-request.js).
+   * The date is what the treating team states, never a prediction; a change needs a reason and every earlier date
+   * stays in the history. A transfer is asked for here and answered on the wards' own boards (the ward list).
+   * st.stayPlan: null = loading; { edd: {current, history} | false, xfer: [requests] | false }. */
+  function xferStatusWord(s) {
+    switch (s) {
+      case "requested": return wT("ward.xfer-st-requested", "Waiting for the receiving unit");
+      case "accepted": return wT("ward.xfer-st-accepted", "Accepted, waiting for a bed");
+      case "bed-assigned": return wT("ward.xfer-st-bed", "Bed assigned, ready to move");
+      case "completed": return wT("ward.xfer-st-completed", "Moved");
+      case "declined": return wT("ward.xfer-st-declined", "Declined");
+      case "cancelled": return wT("ward.xfer-st-cancelled", "Cancelled");
+      default: return String(s || "");
+    }
+  }
+  function xferUrgencyWord(u) {
+    return u === "emergency" ? wT("ward.xfer-urg-emergency", "Emergency") : u === "urgent" ? wT("ward.xfer-urg-urgent", "Urgent") : u === "routine" ? wT("ward.xfer-urg-routine", "Routine") : String(u || "");
+  }
+  function xferRoute(q) {
+    var to = (q.to && q.to.ward) || "?";
+    return esc((q.from && q.from.ward) || "?") + (q.from && q.from.bed ? " " + wTH("ward.bed2", "bed {bed}", { bed: esc(q.from.bed) }, "bed") : "") + " &rarr; " + esc(to) +
+      (q.to && q.to.unit === "icu" ? " " + wTH("ward.xfer-icu-tag", "(ICU)") : "") + (q.bed && q.bed.bed ? " " + wTH("ward.bed2", "bed {bed}", { bed: esc(q.bed.bed) }, "bed") : q.to && q.to.requestedBed ? " " + wTH("ward.xfer-asked-bed", "(asked for bed {bed})", { bed: esc(q.to.requestedBed) }) : "");
+  }
+  function eddLine(e) {
+    if (e === false) return '<span class="w-st overdue">' + wTH("ward.edd-unread", "expected discharge not readable") + "</span>";
+    if (!e) return "";
+    return (e.overdue ? '<span class="w-st overdue">' + wTH("ward.edd-overdue", "Discharge overdue: expected {date}", { date: esc(e.date) }) + "</span>"
+      : e.dueToday ? '<span class="w-st due">' + wTH("ward.edd-today", "Expected discharge today") + "</span>"
+      : wTH("ward.edd-on", "expected discharge {date}", { date: esc(e.date) }));
+  }
+  function stayPlanCard(state) {
+    var p = state.stayPlan;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("event") + "<h3>" + wTH("ward.stay-plan-title", "Expected discharge and transfer") + "</h3>" +
+      '<button class="w-ic" data-w-act="stayplanload" title="' + wTA("ward.refresh", "Refresh") + '">' + ms("refresh") + "</button></div>";
+    if (p == null) return head + '<p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    var edd = p.edd, cur = edd && edd.current;
+    var eddHtml = edd === false
+      ? '<p class="w-hint warn">' + ms("error") + wTH("ward.edd-failed", "The expected discharge date could not be loaded. Do not read this as not set.", null, "", 1) + "</p>"
+      : '<div class="w-sub"><h4>' + ms("event_available") + wTH("ward.edd-title", "Expected discharge date") + "</h4>" +
+        (cur ? "<p" + (cur.overdue ? ' class="w-hint warn"' : "") + "><b>" + esc(cur.date) + "</b> " + eddLine(cur) + "</p>" +
+          '<p class="w-dt-times">' + wTH("ward.edd-set-by", "Set {at} by {who}", { at: when(cur.setAt), who: staffWho(cur.setBy) }) + (cur.reason ? " &middot; " + esc(cur.reason) : "") + "</p>"
+          : '<p class="w-empty">' + wTH("ward.edd-none", "No expected discharge date is set.") + "</p>") +
+        '<div class="w-grid"><label class="w-f"><span>' + (cur ? wTH("ward.edd-new-date", "New expected date") : wTH("ward.edd-date", "Expected date")) + '</span><input id="wEddDate" type="date"></label>' +
+        '<label class="w-f"><span>' + (cur ? wTH("ward.edd-reason-required", "Reason for the change") : wTH("ward.edd-reason-optional", "Note (optional)")) + '</span><input id="wEddReason" type="text" autocomplete="off"></label></div>' +
+        '<button class="w-btn go" data-w-act="eddsave">' + ms("save") + (cur ? wTH("ward.edd-revise", "Change the date") : wTH("ward.edd-set", "Set the date")) + "</button>" +
+        (edd.history && edd.history.length > 1 ? '<ul class="w-mini">' + edd.history.slice(1).map(function (h) {
+          return "<li><b>" + esc(h.expectedDate) + "</b><span>" + when(h.setAt) + " &middot; " + staffWho(h.setBy) + (h.reason ? " &middot; " + esc(h.reason) : "") + "</span></li>";
+        }).join("") + "</ul>" : "") + "</div>";
+    var xfer = p.xfer;
+    var open = xfer && xfer.filter(function (q) { return q.status === "requested" || q.status === "accepted" || q.status === "bed-assigned"; })[0];
+    var xferHtml = '<div class="w-sub"><h4>' + ms("swap_horiz") + wTH("ward.xfer-title", "Transfer request") + "</h4>" +
+      (xfer === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.xfer-failed", "Transfer requests could not be loaded. Do not read this as none.", null, "", 1) + "</p>"
+        : open ? '<p class="w-hint' + (open.urgency === "routine" ? "" : " warn") + '">' + ms("hourglass_empty") + "<b>" + esc(xferStatusWord(open.status)) + "</b> &middot; " + xferRoute(open) + " &middot; " + esc(xferUrgencyWord(open.urgency)) + "</p>" +
+            '<p class="w-dt-times">' + wTH("ward.xfer-asked", "Asked {at} by {who}: {reason}", { at: when(open.requestedAt), who: staffWho(open.requestedBy), reason: esc(open.reason) }) + "</p>" +
+            '<p class="w-hint">' + ms("info") + wTH("ward.xfer-answered-on-board", "The receiving unit answers on its ward list, under Transfer requests.") + "</p>" +
+            '<button class="w-btn ghost sm" data-w-act="xfercancel:' + esc(open.id) + '">' + ms("close") + wTH("ward.xfer-cancel", "Cancel the request") + "</button>"
+        : '<div class="w-grid">' +
+          '<label class="w-f"><span>' + wTH("ward.xfer-to-unit", "Move to") + '</span><select id="wXferUnit"><option value="ward">' + wTH("ward.xfer-unit-ward", "Another ward") + '</option><option value="icu">' + wTH("ward.xfer-unit-icu", "ICU") + "</option></select></label>" +
+          '<label class="w-f"><span>' + wTH("ward.xfer-to-ward", "Ward or unit") + '</span><input id="wXferWard" type="text" autocomplete="off"></label>' +
+          '<label class="w-f"><span>' + wTH("ward.xfer-to-bed", "Bed asked for (optional)") + '</span><input id="wXferBed" type="text" autocomplete="off"></label>' +
+          '<label class="w-f"><span>' + wTH("ward.xfer-urgency", "Urgency") + '</span><select id="wXferUrgency"><option value="">' + wTH("ward.choose", "Choose&hellip;") + '</option><option value="routine">' + esc(xferUrgencyWord("routine")) + '</option><option value="urgent">' + esc(xferUrgencyWord("urgent")) + '</option><option value="emergency">' + esc(xferUrgencyWord("emergency")) + "</option></select></label>" +
+          "</div>" +
+          '<label class="w-f"><span>' + wTH("ward.xfer-reason", "Reason for the transfer") + '</span><input id="wXferReason" type="text" autocomplete="off"></label>' +
+          '<button class="w-btn" data-w-act="xferrequest">' + ms("send") + wTH("ward.xfer-request", "Request transfer") + "</button>") +
+      (xfer && xfer.length ? '<ul class="w-mini">' + xfer.filter(function (q) { return q !== open; }).map(function (q) {
+        return "<li><b>" + esc(xferStatusWord(q.status)) + "</b><span>" + xferRoute(q) + " &middot; " + when(q.requestedAt) +
+          (q.declineReason ? " &middot; " + esc(q.declineReason) : q.cancelReason ? " &middot; " + esc(q.cancelReason) : "") + "</span></li>";
+      }).join("") + "</ul>" : "") + "</div>";
+    var dcHtml = '<div class="w-sub"><h4>' + ms("logout") + wTH("ward.dc-chart-title", "Discharge progress") + "</h4>" +
+      '<p class="w-hint">' + ms("info") + wTH("ward.dc-chart-hint", "When the consultant approves discharge, record it here. Pharmacy, billing and the ward desk record their own steps on Discharge progress.") + "</p>" +
+      '<div class="w-actions"><button class="w-btn" data-w-act="dcadvise">' + ms("done") + wTH("ward.dc-advise", "Discharge advised") + "</button>" +
+      '<button class="w-btn ghost" data-w-act="dcboard">' + ms("timer") + wTH("ward.dc-open-board", "Open Discharge progress") + "</button></div></div>";
+    return head + admTimesHtml(p.adm) + eddHtml + xferHtml + dcHtml + "</div>";
+  }
+  /* NABH KPI 1 on the stay's chart (admission-times.js): the nurse records when the patient reached the bed, a doctor marks
+   * the signed note that is the initial assessment. adm: false = could not be read; signedNotes null = notes not read. */
+  function admTimesHtml(adm) {
+    if (adm === false) return '<div class="w-sub"><p class="w-hint warn">' + ms("error") + wTH("ward.adt-failed", "The admission times could not be loaded. Do not read this as not recorded.", null, "", 1) + "</p></div>";
+    if (!adm || !adm.eligible) return "";
+    var rec = adm.record || {}, ba = rec.bedArrival, ia = rec.initialAssessment;
+    var arrival = ba
+      ? "<p><b>" + when(ba.at) + "</b> &middot; " + wTH("ward.adt-recorded-by", "recorded by {who}", { who: staffWho(ba.by) }) + (ba.reason ? " &middot; " + esc(ba.reason) : "") + "</p>" +
+        '<button class="w-btn ghost sm" data-w-act="admarrive:change">' + ms("edit") + wTH("ward.adt-change-arrival", "Change the arrival time") + "</button>"
+      : '<p class="w-empty">' + wTH("ward.adt-arrival-none", "Not recorded.") + "</p>" +
+        '<button class="w-btn" data-w-act="admarrive">' + ms("bed") + wTH("ward.adt-record-arrival", "Record bed arrival") + "</button>";
+    var notes = adm.signedNotes;
+    var assessment = ia
+      ? "<p>" + wTH("ward.adt-marked", "Note signed {at} by {who}, marked by {marker}", { at: when(ia.signedAt), who: staffWho(ia.signedBy), marker: staffWho(ia.markedBy) }) + (ia.reason ? " &middot; " + esc(ia.reason) : "") + "</p>"
+      : notes == null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.adt-notes-failed", "The signed notes could not be read, so none can be marked. Do not read this as none.", null, "", 1) + "</p>"
+      : !notes.length ? '<p class="w-empty">' + wTH("ward.adt-no-signed-note", "No signed doctor's note on this stay yet. Sign the assessment note, then mark it here.") + "</p>"
+      : '<ul class="w-mini">' + notes.map(function (n) {
+        return '<li class="w-mini-row"><div>' + wTH("ward.adt-note-row", "Note signed {at} by {who}", { at: when(n.signedAt), who: staffWho(n.signedBy) }) + "</div>" +
+          '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="admmark:' + esc(n.noteId) + '">' + ms("task_alt") + wTH("ward.adt-mark", "Mark as initial assessment") + "</button></div></li>";
+      }).join("") + "</ul>";
+    var result = adm.minutes != null ? '<p class="w-dt-times">' + wTH("ward.adt-minutes", "{n} minutes from bed arrival to the initial assessment.", { n: esc(adm.minutes) }) + "</p>"
+      : ba && ia ? '<p class="w-dt-times">' + wTH("ward.adt-out-of-order", "The assessment was signed before the recorded bed arrival, so this stay is not averaged.") + "</p>" : "";
+    return '<div class="w-sub"><h4>' + ms("timer") + wTH("ward.adt-title", "Bed arrival and initial assessment") + "</h4>" +
+      '<p class="w-hint">' + ms("info") + wTH("ward.adt-hint", "NABH measures the time from the patient reaching the ward bed to the doctor's initial assessment being signed.") + "</p>" +
+      "<h5>" + wTH("ward.adt-arrival", "Reached the bed") + "</h5>" + arrival +
+      "<h5>" + wTH("ward.adt-assessment", "Initial assessment") + "</h5>" + assessment + result + "</div>";
+  }
+  function admArrive(change) {
+    var s = st.sel, adm = st.stayPlan && st.stayPlan.adm; if (!s || !adm) return;
+    askFor({ title: wTH("ward.adt-record-arrival", "Record bed arrival"), icon: "bed", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "at", type: "datetime", value: dtLocalNow(), label: wTH("ward.adt-when", "When the patient reached the bed") },
+      { key: "reason", type: "textarea", label: change ? wTH("ward.adt-reason-change", "Why the recorded time is changing") : wTH("ward.dc-reason-optional", "Reason, if the time is out of order (optional)"), required: change ? wT("ward.dc-reason-needed", "A change needs a reason.") : "" }] }, function (v) {
+      var at = v.at ? new Date(v.at) : null;
+      if (at && isNaN(at.getTime())) { st.err = wT("ward.that-date-could-not-be-read", "That date could not be read. Nothing was recorded."); return; }
+      var body = { orgId: st.orgId, encounterId: s.encounterId, at: at ? at.toISOString() : undefined, reason: v.reason || undefined };
+      if (change && adm.record) body.expectedVersion = adm.record.version;
+      st.busy = true; paint();
+      return apiPost("/ward/bed-arrival", body)
+        .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) return loadStayPlan(); paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    });
+  }
+  function admMark(noteId) {
+    var s = st.sel; if (!s || !noteId) return;
+    askFor({ title: wTH("ward.adt-mark", "Mark as initial assessment"), icon: "task_alt", ok: wTH("ward.adt-mark-ok", "Mark"), fields: [
+      { key: "reason", type: "textarea", label: wTH("ward.adt-mark-reason", "Reason, if the note was signed before the bed arrival (optional)") }] }, function (v) {
+      st.busy = true; paint();
+      return apiPost("/ward/initial-assessment", { orgId: st.orgId, encounterId: s.encounterId, noteId: noteId, reason: v.reason || undefined })
+        .then(function (r) { if (settle(r, wT("ward.adt-marked-note", "Marked as the initial assessment."))) return loadStayPlan(); paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    });
+  }
+  /* The ward list's own board: every open request this ward sends or receives, with the step each one is waiting for.
+   * st.transfers: null = loading, false = could not be read, [] = none. The server decides who may take each step. */
+  function transfersBoardHtml(state) {
+    var t = state.transfers;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>" + wTH("ward.xfer-board-title", "Transfer requests") + "</h3></div>";
+    if (t == null) return head + '<p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    if (t === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.xfer-failed", "Transfer requests could not be loaded. Do not read this as none.", null, "", 1) + "</p></div>";
+    if (!t.length) return head + '<p class="w-empty">' + wTH("ward.xfer-board-none", "No open transfer requests.") + "</p></div>";
+    return head + '<ul class="w-mini">' + t.map(function (q) {
+      var act = function (verb, icon, label) { return '<button class="w-btn ghost tiny" data-w-act="' + verb + ":" + esc(q.id) + '">' + ms(icon) + label + "</button>"; };
+      var next = q.status === "requested" ? act("xferaccept", "check", wTH("ward.xfer-accept", "Accept")) + act("xferdecline", "block", wTH("ward.xfer-decline", "Decline"))
+        : q.status === "accepted" ? act("xferbed", "bed", wTH("ward.xfer-assign-bed", "Assign bed"))
+        : act("xferexec", "move_up", wTH("ward.xfer-execute", "Move the patient")) + act("xferbed", "bed", wTH("ward.xfer-change-bed", "Change bed"));
+      return '<li class="w-mini-row"><div><b>' + esc(q.name || q.mrn || wT("ward.patient-not-readable", "patient not readable")) + "</b>" + (q.name && q.mrn ? " &middot; " + esc(q.mrn) : "") +
+        ' <span class="w-st' + (q.urgency === "routine" ? "" : " overdue") + '">' + esc(xferUrgencyWord(q.urgency)) + "</span>" +
+        '<div class="w-dt-times">' + xferRoute(q) + " &middot; " + esc(xferStatusWord(q.status)) + " &middot; " + when(q.requestedAt) + " &middot; " + esc(q.reason) + "</div>" +
+        '<div class="w-actions">' + next + act("xfercancel", "close", wTH("ward.cancel", "Cancel")) +
+        (q.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(q.encounterId) + '">' + wTH("ward.open-chart", "Open chart") + "</button>" : "") + "</div></div></li>";
+    }).join("") + "</ul></div>";
+  }
+
+  /* DISCHARGE PROGRESS (discharge-milestones.js): the relay from "can go" to "has gone", each step recorded by the
+   * person whose act it is, and the turnaround of the ones that finished. The server decides who may record which step.
+   * st.dcBoard: null = loading, false = could not be read. */
+  var DC_STEPS = [["advised", "Discharge advised"], ["pharmacy-cleared", "Pharmacy cleared"], ["bill-ready", "Bill ready"], ["tpa-final-requested", "TPA final approval asked for"], ["tpa-final-received", "TPA final approval received"], ["summary-signed", "Summary signed"], ["left", "Left the unit"]];
+  function dcStepWord(step) { for (var i = 0; i < DC_STEPS.length; i++) if (DC_STEPS[i][0] === step) return wTEn(DC_STEPS[i][1]); return String(step || ""); }
+  function dcMins(m) {
+    if (m == null) return "-";
+    return m < 60 ? wT("ward.dc-min", "{m} min", { m: m }) : wT("ward.dc-hmin", "{h} h {m} min", { h: Math.floor(m / 60), m: m % 60 });
+  }
+  function dtLocalNow() { return new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16); }
+  function dcStepCell(s, step) {
+    var x = (s.steps || []).filter(function (y) { return y.step === step; })[0] || {};
+    var label = "<b>" + esc(dcStepWord(step)) + "</b> ";
+    var act = function (change) { return ' <button class="w-btn ghost tiny" data-w-act="dcstep:' + esc(s.encounterId) + "~" + esc(step) + (change ? '~change">' : '">') + ms(change ? "edit" : "done") + (change ? wTH("ward.dc-change", "Change") : wTH("ward.dc-record", "Record")) + "</button>"; };
+    if (x.source === "unreadable") return "<li>" + label + '<span class="w-st">' + wTH("ward.dc-unreadable", "could not be read with this role") + "</span></li>";
+    if (x.at) {
+      return "<li>" + label + "<span>" + when(x.at) +
+        (x.source === "derived" ? " &middot; " + wTH("ward.dc-from-summary", "from the signed summary") : x.source === "stay-closed" ? " &middot; " + wTH("ward.dc-stay-closed", "when the stay was closed") : "") +
+        (x.outOfOrder ? ' <span class="w-st overdue">' + wTH("ward.dc-out-of-order", "out of order") + "</span>" : "") + (x.reason ? " &middot; " + esc(x.reason) : "") + "</span>" +
+        (x.source === "recorded" ? act(true) : "") + "</li>";
+    }
+    if (step === "summary-signed") return "<li>" + label + "<span>" + wTH("ward.dc-not-signed", "not signed yet") + "</span></li>";
+    return "<li>" + label + "<span>" + wTH("ward.dc-step-not-recorded", "not recorded") + "</span>" + act(false) + "</li>";
+  }
+  function dischargeBoardView(state) {
+    var d = state.dcBoard;
+    var head = '<div class="w-card"><div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="' + wTA("ward.back2", "Back") + '">' + ms("arrow_back") + "</button>" +
+      "<h3>" + wTH("ward.dc-chart-title", "Discharge progress") + "</h3>" +
+      '<button class="w-ic" data-w-act="dcboard" title="' + wTA("ward.refresh", "Refresh") + '">' + ms("refresh") + "</button></div>" +
+      '<p class="w-hint">' + ms("info") + wTH("ward.dc-hint", "Each step is recorded by the person who did it. Turnaround is counted from the recorded times; nothing here is a prediction.") + "</p>";
+    if (d == null) return head + '<p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    if (d === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.dc-failed", "Discharge progress could not be loaded. Do not read this as no discharges.", null, "", 1) + "</p></div>";
+    var warn = (d.unreadable && d.unreadable.stays ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.dc-stays-unreadable", "Stays cannot be read with this role, so a stay closed without a recorded departure may still be listed.", null, "", 1) + "</p>" : "") +
+      (d.truncated ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.dc-truncated", "More discharges exist than can be read at once; the newest were not read, so this may be incomplete.", null, "", 1) + "</p>" : "");
+    var rows = (d.inProgress || []).map(function (s) {
+      return '<li class="w-mini-row"><div><b>' + esc(s.name || s.mrn || wT("ward.patient-not-readable", "patient not readable")) + "</b>" + (s.name && s.mrn ? " &middot; " + esc(s.mrn) : "") +
+        '<div class="w-dt-times">' + esc(s.ward || "") + (s.bed ? " &middot; " + wTH("ward.bed2", "bed {bed}", { bed: esc(s.bed) }, "bed") : "") + " &middot; " + wTH("ward.dc-since-advised", "{t} since discharge was advised", { t: esc(dcMins(s.minutesSinceAdvised)) }) + "</div>" +
+        '<ul class="w-mini">' + DC_STEPS.map(function (x) { return dcStepCell(s, x[0]); }).join("") + "</ul>" +
+        (s.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(s.encounterId) + '">' + wTH("ward.open-chart", "Open chart") + "</button>" : "") + "</div></li>";
+    }).join("");
+    var t = d.turnaround || { steps: [] };
+    var tat = '<div class="w-sub"><h4>' + ms("timer") + wTH("ward.dc-tat-title", "Turnaround, last {days} days", { days: esc(d.days) }) + "</h4>" +
+      (t.stays ? "<p>" + wTH("ward.dc-tat-total", "{n} discharges &middot; median {t} from advised to leaving", { n: esc(t.stays), t: esc(dcMins(t.medianTotalMinutes)) }) + "</p>" +
+        '<ul class="w-mini">' + t.steps.map(function (x) {
+          return "<li><b>" + esc(dcStepWord(x.step)) + "</b><span>" + (x.stays ? wTH("ward.dc-tat-step", "median {t} after advice, from {n} discharges", { t: esc(dcMins(x.medianMinutesFromAdvised)), n: esc(x.stays) }) : wTH("ward.dc-tat-none", "no recorded times")) +
+            (x.notRecorded ? " &middot; " + wTH("ward.dc-tat-missing", "{n} not recorded", { n: esc(x.notRecorded) }) : "") + "</span></li>";
+        }).join("") + "</ul>"
+        : '<p class="w-empty">' + wTH("ward.dc-tat-empty", "No discharge in this period has both the advice and the departure recorded.") + "</p>") + "</div>";
+    return head + warn +
+      '<div class="w-sub"><h4>' + ms("logout") + wTH("ward.dc-open-title", "Waiting to leave") + "</h4>" +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">' + wTH("ward.dc-open-none", "No discharge is in progress. A stay appears here once a doctor records on its chart that discharge was advised.") + "</p>") + "</div>" +
+      tat + "</div>";
+  }
+
+  /* TRANSFER CENTRE (transfer-centre.js): a patient another hospital asks us to take. The desk records the call, a
+   * consultant accepts (the patient joins the bed waiting list, no bed is held) or declines with a reason, and the beds
+   * of that moment are kept with the answer. st.tc: null = loading, false = could not be read. */
+  var TC_URGENCY = ["emergency", "urgent", "routine"];
+  function tcStatusWord(v) {
+    return v === "accepted" ? wT("ward.tc-st-accepted", "Accepted") : v === "declined" ? wT("ward.tc-st-declined", "Declined") : v === "cancelled" ? wT("ward.tc-st-withdrawn", "Withdrawn") : wT("ward.tc-st-requested", "Waiting for a decision");
+  }
+  function tcSexWord(v) { return v === "male" ? wT("ward.tc-sex-male", "male") : v === "female" ? wT("ward.tc-sex-female", "female") : v === "other" ? wT("ward.tc-sex-other", "other") : ""; }
+  function tcCapacityHtml(c) {
+    if (!c) return "";
+    return '<div class="w-sub"><h4>' + ms("bed") + wTH("ward.tc-capacity-title", "Beds right now") + "</h4>" +
+      (c.wards == null ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.tc-beds-unreadable", "The bed list could not be read. Do not read this as no beds.", null, "", 1) + "</p>"
+        : c.wards.length ? '<ul class="w-mini">' + c.wards.map(function (w) {
+          return "<li><b>" + esc(w.ward) + "</b><span>" + wTH("ward.tc-ward-beds", "{a} free &middot; {r} reserved &middot; {o} occupied &middot; {x} other, of {t}", { a: esc(w.available), r: esc(w.reserved), o: esc(w.occupied), x: esc(w.other), t: esc(w.total) }) + "</span></li>";
+        }).join("") + "</ul>"
+        : '<p class="w-empty">' + wTH("ward.tc-no-beds", "No beds are set up in this hospital's bed list.") + "</p>") +
+      "<p>" + (c.waitingForBed == null ? wTH("ward.tc-waiting-unreadable", "The bed waiting list could not be read.") : wTH("ward.tc-waiting", "{n} already waiting for a bed", { n: esc(c.waitingForBed) })) + "</p></div>";
+  }
+  function transferCentreView(state) {
+    var d = state.tc;
+    var opt = function (v, label) { return '<option value="' + esc(v) + '">' + label + "</option>"; };
+    var head = '<div class="w-card"><div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="' + wTA("ward.back2", "Back") + '">' + ms("arrow_back") + "</button>" +
+      "<h3>" + wTH("ward.tc-title", "Transfer centre") + "</h3>" +
+      '<button class="w-ic" data-w-act="tcentre" title="' + wTA("ward.refresh", "Refresh") + '">' + ms("refresh") + "</button></div>" +
+      '<p class="w-hint">' + ms("info") + wTH("ward.tc-hint", "Patients other hospitals ask us to take. Accepting puts the patient on the bed waiting list; it never reserves a bed.") + "</p>";
+    var form = '<div class="w-sub"><h4>' + ms("call") + wTH("ward.tc-new-title", "Record a call") + "</h4>" + '<div class="w-grid">' +
+      '<label class="w-f"><span>' + wTH("ward.tc-facility", "Referring hospital") + '</span><input id="wTcFacility" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.tc-contact", "Referring doctor") + '</span><input id="wTcContact" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.tc-phone", "Their phone") + '</span><input id="wTcPhone" type="tel" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.tc-ref", "Their patient reference (optional)") + '</span><input id="wTcRef" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.tc-age", "Age in years") + '</span><input id="wTcAge" type="number" min="0" max="130"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.tc-sex", "Sex") + '</span><select id="wTcSex">' + opt("", wTH("ward.choose", "Choose&hellip;")) + opt("male", esc(tcSexWord("male"))) + opt("female", esc(tcSexWord("female"))) + opt("other", esc(tcSexWord("other"))) + "</select></label>" +
+      '<label class="w-f"><span>' + wTH("ward.tc-service", "Specialty or service asked for") + '</span><input id="wTcService" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.tc-unit", "Bed needed") + '</span><select id="wTcUnit">' + opt("ward", wTH("ward.tc-unit-ward", "Ward")) + opt("icu", wTH("ward.xfer-unit-icu", "ICU")) + "</select></label>" +
+      '<label class="w-f"><span>' + wTH("ward.xfer-urgency", "Urgency") + '</span><select id="wTcUrgency">' + TC_URGENCY.map(function (u) { return opt(u, esc(xferUrgencyWord(u))); }).join("") + "</select></label>" +
+      '<label class="w-f"><span>' + wTH("ward.tc-received", "When the call came") + '</span><input id="wTcAt" type="datetime-local" value="' + esc(dtLocalNow()) + '"></label>' +
+      "</div>" +
+      '<textarea id="wTcSummary" rows="3" placeholder="' + wTA("ward.tc-summary-ph", "Clinical summary as the referring doctor gave it. Do not write the patient's name here; it is recorded at registration.") + '"></textarea>' +
+      '<button class="w-btn" data-w-act="tcrecord">' + ms("save") + wTH("ward.tc-record", "Record the call") + "</button></div>";
+    if (d == null) return head + form + '<p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    if (d === false) return head + form + '<p class="w-hint warn">' + ms("error") + wTH("ward.tc-failed", "Transfer centre requests could not be loaded. Do not read this as none.", null, "", 1) + "</p></div>";
+    var who = function (q) { return [q.ageYears != null ? wT("ward.tc-age-years", "{n} years", { n: q.ageYears }) : "", tcSexWord(q.sex)].filter(Boolean).join(", "); };
+    var openRows = (d.open || []).map(function (q) {
+      var act = function (verb, icon, label) { return '<button class="w-btn ghost tiny" data-w-act="' + verb + ":" + esc(q.id) + '">' + ms(icon) + label + "</button>"; };
+      return '<li class="w-mini-row"><div><b>' + esc(q.facility) + "</b> " + '<span class="w-st' + (q.urgency === "routine" ? "" : " overdue") + '">' + esc(xferUrgencyWord(q.urgency)) + "</span>" +
+        '<div class="w-dt-times">' + esc(q.requestedService) + " &middot; " + (q.requestedUnit === "icu" ? wTH("ward.xfer-unit-icu", "ICU") : wTH("ward.tc-unit-ward", "Ward")) + (who(q) ? " &middot; " + esc(who(q)) : "") +
+        " &middot; " + wTH("ward.tc-waiting-for", "waiting {t} for an answer", { t: esc(dcMins(q.minutesWaiting)) }) + "</div>" +
+        "<div>" + esc(q.clinicalSummary) + "</div>" +
+        '<div class="w-dt-times">' + [q.contactName, q.contactPhone, q.facilityRef].filter(Boolean).map(esc).join(" &middot; ") + "</div>" +
+        '<div class="w-actions">' + act("tcaccept", "check", wTH("ward.xfer-accept", "Accept")) + act("tcdecline", "block", wTH("ward.xfer-decline", "Decline")) + act("tcwithdraw", "close", wTH("ward.tc-withdrawn-btn", "Withdrawn")) + "</div></div></li>";
+    }).join("");
+    var decidedRows = (d.decided || []).map(function (q) {
+      return "<li><b>" + esc(tcStatusWord(q.status)) + "</b> " + esc(q.facility) + (q.name ? " &middot; " + esc(q.name) : "") + "<span>" +
+        (q.minutesToDecision != null ? wTH("ward.tc-answered-in", "answered in {t}", { t: esc(dcMins(q.minutesToDecision)) }) + " &middot; " : "") + when(q.decidedAt || q.cancelledAt) +
+        (q.declineReason ? " &middot; " + esc(q.declineReason) : q.cancelReason ? " &middot; " + esc(q.cancelReason) : "") + "</span></li>";
+    }).join("");
+    var sm = d.summary || {};
+    return head + tcCapacityHtml(d.capacityNow) +
+      '<div class="w-sub"><h4>' + ms("hourglass_empty") + wTH("ward.tc-open-title", "Waiting for a decision") + "</h4>" +
+      (openRows ? '<ul class="w-mini">' + openRows + "</ul>" : '<p class="w-empty">' + wTH("ward.tc-open-none", "No call is waiting for a decision.") + "</p>") + "</div>" +
+      form +
+      '<div class="w-sub"><h4>' + ms("history") + wTH("ward.tc-decided-title", "Answered, last {days} days", { days: esc(d.days) }) + "</h4>" +
+      "<p>" + wTH("ward.tc-summary-line", "{a} accepted &middot; {d} declined &middot; {c} withdrawn &middot; median time to an answer {t}", { a: esc(sm.accepted || 0), d: esc(sm.declined || 0), c: esc(sm.cancelled || 0), t: esc(dcMins(sm.medianMinutesToDecision)) }) + "</p>" +
+      (decidedRows ? '<ul class="w-mini">' + decidedRows + "</ul>" : '<p class="w-empty">' + wTH("ward.tc-decided-none", "No call was answered in this period.") + "</p>") + "</div></div>";
+  }
+
   function chartView(state) {
     var s = state.sel || {};
     var isEd = s.class === "ED";
@@ -2471,14 +3136,14 @@
     var edTopCards = isEd ? (vitalsCard() + noteCard(state)) : "";
     var standardVitalsAndNote = isEd ? "" : (noteCard(state) + vitalsCard());
 
-    return header +
+    return header + registerFlagsCard(state) +
       criticalsCard(state) + (isEd ? (triageCard(state) + edTopCards) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
-      (isPediatric ? ageBandCard(state) : "") +
-      problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
+      (isPediatric ? ageBandCard(state) + growthCard(state) : "") + (apgarChart(s) ? apgarCard(state) : "") +
+      problemsCard(state) + (isEd ? "" : stayPlanCard(state)) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
       (isIcu ? icuTrendsCard(state) + icuScoresCard(state) + icuAbgCard(state) + icuVentCard(state) + icuSedationCard(state) + icuPressorCard(state) + icuRoundCard(state) : "") +
       fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
-      (isNicu ? neonatalCard() + linesCard(state) : "") +
+      (isNicu ? neonatalCard() : "") + (isEd ? "" : linesCard(state)) +
       ((isEd || isMaternity || isIcu) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
       medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) + pathologyCard(state) +
       (isMaternity ? deliveryCard(state) : "") +
@@ -2628,8 +3293,13 @@
     var d = r.document || {};
     var p = d.patient || {};
 
+    /* R6-2: null is a section the server could not read (patient-record.js assemble unreadableTypes),
+     * and it is NEVER drawn as the empty sentence. "No medicines are recorded" off a read that failed
+     * is a page a patient carries to the next hospital. Empty stays empty; unreadable says so. */
+    var unread = '<p class="w-hint warn">' + ms("error") + wTH("ward.this-part-of-the-record-could", "This part of the record could not be read. It is not empty - it is unknown.", null, "", 1) + "</p>";
     var list = function (arr, empty, fn) {
-      return arr && arr.length ? "<ul class=\"w-dt-meds\">" + arr.map(fn).join("") + "</ul>" : '<p class="w-empty">' + empty + "</p>";
+      if (arr === null || arr === undefined) return unread;
+      return arr.length ? "<ul class=\"w-dt-meds\">" + arr.map(fn).join("") + "</ul>" : '<p class="w-empty">' + empty + "</p>";
     };
 
     /* OWNER DECISION 2026-09-15: ENGLISH MAIN, A SECOND LANGUAGE OPTIONAL (wardsynq/site/print-lang.js). The
@@ -2638,26 +3308,39 @@
      * picked from the closed list. Drugs, doses, frequencies, diagnoses and results stay English only. */
     var WP = G.WSQPrint, clock = r.print || null;
     var lang = WP && WP.enabled(r.print) && WP.valid(state.pcopyLang) ? state.pcopyLang : "";
-    var tr = function (html) { return lang ? WP.aside(lang, html) : ""; };
+    var tr = function (html) { return lang && html ? WP.aside(lang, html) : ""; };
     var T = function (k) { return lang ? esc(WP.t(k, lang)) : ""; };   // "" without a language, so nothing below needs WP
     var trHead = function (k, emptyKey, arr) {
-      return "<h4>" + T(k) + "</h4><p>" + (arr && arr.length ? T("print.tr.englishOnly") : T(emptyKey)) + "</p>";
+      // R6-2: an unreadable section gets no aside at all. A translated heading with the catalog's
+      // "nothing recorded" under it would say, in the patient's own language, the one thing that is
+      // not known to be true; the English above it already says the section could not be read.
+      if (arr === null || arr === undefined) return "";
+      return "<h4>" + T(k) + "</h4><p>" + (arr.length ? T("print.tr.englishOnly") : T(emptyKey)) + "</p>";
     };
     var pdate = function (iso, withTime) { return WP ? esc(WP.date(iso, clock, withTime)) || "-" : when(iso); };
     var instrEn = function (codes) { return (codes || []).map(function (c) { return WP ? WP.instruction(c, "en") : c; }).join("; "); };
-    var meds = d.medicines || [];
-    var medsTr = !lang ? "" : meds.filter(function (m) { return m.patientInstructions && m.patientInstructions.length; }).map(function (m) {
+    var meds = d.medicines === null || d.medicines === undefined ? null : d.medicines;
+    var medsTr = !lang || !meds ? "" : meds.filter(function (m) { return m.patientInstructions && m.patientInstructions.length; }).map(function (m) {
       return '<li><b lang="en">' + esc(m.drug) + "</b>: " + m.patientInstructions.map(function (c) { return esc(WP.instruction(c, lang)); }).join("; ") + "</li>";
     }).join("");
 
     /* The allergies are never filtered by anything, and an empty list is stated in words. A blank
      * allergy block reads as "no known allergies" to every clinician alive, and this page is one a
      * patient carries to the next hospital. */
-    var allergies = d.allergies && d.allergies.length
+    /* Named at the top, in one line, because a clinician scanning the page decides whether to hand it
+     * over before they reach the section that is missing. The same list the server refuses to record
+     * a handover against (patient-record.js releaseToPatient). */
+    var unreadable = (r.unreadableTypes || []).length
+      ? '<p class="w-dt-warn w-noprint" data-w-unreadable="' + esc(r.unreadableTypes.join(",")) + '">' + ms("error") +
+        wTH("ward.parts-of-this-record-could-not", "Parts of this record could not be read: {types}. A section shown as empty below may not be empty.", { types: esc(r.unreadableTypes.join(", ")) }, "types", 1) + "</p>"
+      : "";
+    var allergies = d.allergies === null || d.allergies === undefined
+      ? '<span class="w-hint warn">' + ms("error") + wTH("ward.the-allergy-list-could-not-be", "The allergy list could not be read. Do not hand this page over as an allergy record.", null, "", 1) + "</span>"
+      : d.allergies.length
       ? d.allergies.map(function (a) { return "<b>" + esc(a.substance) + "</b>" + (a.reaction ? " (" + esc(a.reaction) + ")" : ""); }).join(", ")
       : wTH("ward.no-allergies-are-recorded-for-you", "No allergies are recorded for you. Tell your care team if you know of any.", null, "", 1);
 
-    var withheld = (d.withheldResults || []).length
+    var withheld = d.withheldResults && d.withheldResults.length
       ? "<section class=\"w-dt-p\"><h3>" + wTH("ward.not-included-here", "Not included here") + "</h3>" +
         "<ul class=\"w-dt-meds\">" + d.withheldResults.map(function (w) {
           return "<li>" + esc(w.say) + (w.reportedAt ? ' <span class="w-dt-times">' + pdate(w.reportedAt) + "</span>" : "") + "</li>";
@@ -2693,13 +3376,13 @@
        * prints. `clinicianWarnings` is w-noprint: a line reading "not for the patient" printed on
        * the patient's own copy would be the most careless thing on the page. */
       (r.statements || []).map(function (s) { return '<p class="w-dt-warn">' + esc(s) + "</p>"; }).join("") +
-      (r.clinicianWarnings || []).map(function (s) { return '<p class="w-dt-gap w-noprint">' + esc(s) + "</p>"; }).join("") +
+      (r.clinicianWarnings || []).map(function (s) { return '<p class="w-dt-gap w-noprint">' + esc(s) + "</p>"; }).join("") + unreadable +
       (r.release ? "<p class=\"w-ok w-noprint\">" + wTH("ward.handover-recorded-at", "Handover recorded at {at}.", { at: when(r.release.at) }, "at") +
         ((r.release.dischargeSummaries || []).length ? " " + wTH("ward.discharge-summary-released-to-the-portal", "Discharge summary released to the portal as the") + " " + (r.release.dischargeScope === "full" ? wTH("ward.full-summary", "full summary.") : wTH("ward.patient-copy2", "patient copy.")) : "") + "</p>" : "") +
       "</header>" + portalPreview +
       tr("<h3>" + T("portal.title.yours") + "</h3>" + (lang ? WP.authority("rx", lang) : "")) +
       "<section class=\"w-dt-p\"><h3>" + wTH("ward.allergies", "Allergies", null, "", 1) + "</h3><p class=\"w-dt-alg\">" + allergies + "</p></section>" +
-      tr(d.allergies && d.allergies.length ? "<h4>" + T("allergy.title") + "</h4><p>" + T("print.tr.englishOnly") + "</p>" : "<h4>" + T("allergy.title") + "</h4><p>" + T("pcopy.noAllergies") + "</p>") +
+      (!d.allergies ? "" : tr(d.allergies.length ? "<h4>" + T("allergy.title") + "</h4><p>" + T("print.tr.englishOnly") + "</p>" : "<h4>" + T("allergy.title") + "</h4><p>" + T("pcopy.noAllergies") + "</p>")) +
       "<section class=\"w-dt-p\"><h3>" + wTH("ward.your-diagnoses", "Your diagnoses") + "</h3>" +
       list(d.diagnoses, wTH("ward.no-diagnoses-are-recorded", "No diagnoses are recorded."), function (x) {
         return "<li><b>" + esc(x.display) + "</b>" + (x.note ? '<div class="w-dt-times">' + esc(x.note) + "</div>" : "") + "</li>";
@@ -2735,7 +3418,7 @@
     ["treatment", "General treatment"], ["share-external", "Sharing the record outside this hospital"],
     ["share-registry", "Sharing with a registry or exchange"], ["research", "Use of the record for research"],
     ["photography", "Clinical photography"], ["blood-products", "Transfusion of blood products"],
-    ["procedure", "A specific procedure"], ["other", "Other"],
+    ["procedure", "A specific procedure"], ["marketing", "Offers and news from the hospital"], ["other", "Other"],
   ];
   var CONSENT_GIVERS = [
     ["patient", "Patient"], ["parent", "Parent"], ["legal-guardian", "Legal guardian"],
@@ -2800,6 +3483,13 @@
       "<input id=\"wConsentGiverName\" placeholder=\"" + wTA("ward.giver-name-if-not-the-patient", "Giver name (if not the patient)") + "\">" +
       "<label><input type=\"checkbox\" id=\"wConsentCapacity\" checked> " + wTH("ward.patient-had-capacity", "Patient had capacity") + "</label>" +
       "<input id=\"wConsentValidUntil\" type=\"date\" placeholder=\"" + wTA("ward.valid-until-optional", "Valid until (optional)") + "\">" +
+      /* DPDP Rules 2025 r.10 and r.11, from 13 May 2027: a non-care consent for a child needs the parent verified; a guardian for an adult names who appointed them. The server decides when these apply. */
+      "<details><summary>" + wTH("ward.consent-parent-verify", "Child or guardian consent (DPDP Rules r.10, r.11)") + "</summary>" +
+      '<select id="wConsentPvMethod"><option value="">' + wTH("ward.consent-pv-none", "Parent identity not checked") + '</option><option value="id-held">' + wTH("ward.consent-pv-id", "Checked against an ID the hospital holds") + '</option><option value="digilocker-token">' + wTH("ward.consent-pv-digilocker", "Checked with a DigiLocker token") + "</option></select>" +
+      "<input id=\"wConsentPvRef\" placeholder=\"" + wTA("ward.consent-pv-ref", "ID or token reference") + "\">" +
+      "<input id=\"wConsentPvName\" placeholder=\"" + wTA("ward.consent-pv-name", "Parent or guardian name") + "\">" +
+      '<select id="wConsentGaSource"><option value="">' + wTH("ward.consent-ga-none", "Guardian appointment not recorded") + '</option><option value="court">' + wTH("ward.consent-ga-court", "Appointed by a court") + '</option><option value="designated-authority">' + wTH("ward.consent-ga-authority", "Appointed by a designated authority") + '</option><option value="local-level-committee">' + wTH("ward.consent-ga-committee", "Appointed by a local level committee") + "</option></select>" +
+      "<input id=\"wConsentGaRef\" placeholder=\"" + wTA("ward.consent-ga-ref", "Appointment order reference") + "\"></details>" +
       '<button class="w-btn" data-w-act="consentrecord">' + ms("fact_check") + wTH("ward.record2", "Record") + "</button></div>" +
       "</div>";
   }
@@ -2817,14 +3507,23 @@
         (i.responsibleRole ? '<div class="w-dt-times">' + esc(i.responsibleRole) + (i.escalation.hoursOpen ? " &middot; " + wTH("ward.open-h", "open {hoursOpen}h", { hoursOpen: i.escalation.hoursOpen }, "hoursOpen") : "") + "</div>" : "") +
         "</div></li>";
     }).join("");
+    /* R6-2: a section whose read failed is UNKNOWN, and a short list is never presented as a clean
+     * chart. Named here because this is the screen a records officer signs a chart off on. */
+    var unknown = (c.unknownSections || []).map(function (u) { return wTEn(COMPLETION_LABELS[u.type]) || u.type; });
+    var unknownLine = unknown.length
+      ? '<p class="w-hint warn" data-w-unknown="' + esc(unknown.length) + '">' + ms("error") +
+        wTH("ward.these-checks-could-not-be-run", "These checks could not be run, so this chart is not known to be complete: {types}.", { types: esc(unknown.join(", ")) }, "types", 1) + "</p>"
+      : "";
     return '<div class="w-card">' +
       "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
-      "<h3>" + wTH("ward.chart-check", "Chart check") + "</h3><button class=\"w-btn ghost\" data-w-act=\"completionopen\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" +
-      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.nothing-outstanding-against-what-this-hospital", "Nothing outstanding, against what this hospital has configured to check.") + "</p>") +
+      "<h3>" + wTH("ward.chart-check", "Chart check") + "</h3><button class=\"w-btn ghost\" data-w-act=\"completionopen\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" + unknownLine +
+      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>"
+        : unknown.length ? ""
+        : "<p class=\"w-empty\">" + wTH("ward.nothing-outstanding-against-what-this-hospital", "Nothing outstanding, against what this hospital has configured to check.") + "</p>") +
       "</div>";
   }
 
-  var ROI_RELATIONSHIPS = [["patient", "Patient"], ["attorney", "Attorney"], ["other-provider", "Other provider"], ["insurer", "Insurer"], ["government-agency", "Government agency"], ["employer", "Employer"], ["family-member", "Family member"], ["other", "Other"]];
+  var ROI_RELATIONSHIPS = [["patient", "Patient"], ["authorised-attendant", "Authorised attendant"], ["legal-authority", "Legal authority"], ["attorney", "Attorney"], ["other-provider", "Other provider"], ["insurer", "Insurer"], ["government-agency", "Government agency"], ["employer", "Employer"], ["family-member", "Family member"], ["other", "Other"]];
   function roiView(state) {
     var r = state.roi || {};
     var rows = (r.requests || []).map(function (req) {
@@ -2839,6 +3538,10 @@
       return '<li class="w-mini-row"><div><span class="w-st ' + esc(req.state) + '">' + esc(roiStateWord(req.state)) + "</span> " +
         "<b>" + esc(req.requester && req.requester.name) + "</b>" + (req.requester && req.requester.relationship ? " (" + esc(req.requester.relationship) + ")" : "") +
         " &middot; " + esc(req.purpose) +
+        /* IMC Regulations 2002 reg 1.3.2: documents issued within 72 hours to the patient, an authorised attendant or a legal authority. */
+        (req.imcClock ? "<div class=\"w-dt-times\">" + (req.imcClock.late ? '<span class="w-st stop">' + wTH("ward.roi-imc-late", "Past 72 hours") + "</span> " : "") +
+          wTH("ward.roi-imc-due", "Copies due within 72 hours (IMC Regulations 2002 reg 1.3.2), by {when}", { when: when(req.imcClock.dueBy) }) +
+          (req.requester && req.requester.authority ? " &middot; " + wTH("ward.roi-authority", "authority: {authority}", { authority: esc(req.requester.authority) }, "authority") : "") + "</div>" : "") +
         "<div class=\"w-dt-times\">" + wTH("ward.scope-requested", "scope: {join}{v}{v2}{v3} &middot; requested {requestedAt}", { join: esc((req.scope && req.scope.recordTypes || []).join(", ")), v: (req.authorizationBasis ? " &middot; " + wTH("ward.basis", "basis: {authorizationBasis}", { authorizationBasis: esc(req.authorizationBasis) }, "authorizationBasis") : ""), v2: (req.decisionReason ? " &middot; " + esc(req.decisionReason) : ""), v3: (req.disclosure ? " &middot; " + wTH("ward.sent", "sent {deliveredStatus} ({stringify})", { deliveredStatus: esc(req.disclosure.deliveredStatus), stringify: esc(JSON.stringify(req.disclosure.resourceCounts || {})) }, "deliveredStatus stringify") : ""), requestedAt: when(req.requestedAt) }, "join requestedAt") + "</div></div>" +
         (actions ? '<div class="w-mini-row-act">' + actions + "</div>" : "") +
         "</li>";
@@ -2852,6 +3555,7 @@
       "<input id=\"wRoiRequesterName\" placeholder=\"" + wTA("ward.requester-name", "Requester name") + "\">" +
       "<input id=\"wRoiOrg\" placeholder=\"" + wTA("ward.organization-optional", "Organization (optional)") + "\">" +
       '<select id="wRoiRelationship">' + ROI_RELATIONSHIPS.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(wTEn(x[1])) + "</option>"; }).join("") + "</select>" +
+      "<input id=\"wRoiAuthority\" placeholder=\"" + wTA("ward.roi-authority-input", "Authority (authorised attendant: the patient's signed authorisation)") + "\">" +
       "<input id=\"wRoiPurpose\" placeholder=\"" + wTA("ward.purpose", "Purpose") + "\">" +
       "<input id=\"wRoiRecipient\" placeholder=\"" + wTA("ward.recipient-where-it-goes", "Recipient (where it goes)") + "\">" +
       "<input id=\"wRoiRecordTypes\" placeholder=\"" + wTA("ward.record-types-comma-separated-e-g", "Record types, comma-separated (e.g. DiagnosticReport)") + "\">" +
@@ -2868,8 +3572,289 @@
   function tpaPayerSelect(id, payers) {
     return '<select id="' + id + "\"><option value=\"\">" + wTH("ward.no-payer", "No payer") + "</option>" + (payers || []).map(function (p) {
       return '<option value="' + esc(p.id) + '">' + esc(p.name) + " &middot; " + esc(p.adapter) +
-        (p.adapter === "fhir-claim" && !p.endpointConfigured ? " (" + wTH("ward.no-endpoint", "no endpoint)") : "") + "</option>";
+        (p.adapter === "fhir-claim" && !p.endpointConfigured ? " (" + wTH("ward.no-endpoint", "no endpoint)") : "") +
+        (p.adapter === "nhcx" && !p.nhcxConnected ? " (" + wTH("ward.nhcx-not-connected-option", "not connected)") : "") + "</option>";
     }).join("") + "</select>";
+  }
+  /* NHCX (functions/_wardsynq/nhcx.js), gap-claims-gst A. A request the gateway accepted is "sent"; only the payer's
+   * verified answer is "answered". With no connected NHCX payer the screen says so and offers nothing to send. */
+  var NHCX_OUTCOME_WORDS = { queued: "queued by the payer", complete: "complete", partial: "partly processed", error: "error" };
+  var NHCX_ELIG_WORDS = { sent: "sent, no answer yet", answered: "answered", failed: "failed" };
+  function nhcxPayers(payers) { return (payers || []).filter(function (p) { return p.adapter === "nhcx" && p.nhcxConnected; }); }
+  function nhcxExchangeLine(kind, rec, payers) {
+    var a = rec.adapter, p = null;
+    for (var i = 0; i < (payers || []).length; i++) if (payers[i].id === rec.payerId) p = payers[i];
+    if (!p || p.adapter !== "nhcx") return "";
+    var word;
+    if (!a || !a.exchange) word = p.nhcxConnected ? wTH("ward.nhcx-not-sent", "not sent through NHCX") : wTH("ward.nhcx-not-connected-short", "not connected, nothing sent");
+    else if (a.state === "acknowledged") word = wTH("ward.nhcx-answered", "answered by the payer") + (a.outcome ? " (" + esc(wTEn(NHCX_OUTCOME_WORDS[a.outcome]) || a.outcome) + ")" : "");
+    else if (a.state === "failed") word = wTH("ward.nhcx-failed", "failed");
+    else word = wTH("ward.nhcx-sent", "sent to the gateway, no answer yet");
+    var checks = rec.statusChecks || [], last = checks[checks.length - 1];
+    return '<div class="w-dt-times">' + wTH("ward.nhcx-exchange", "NHCX:") + " " + word +
+      (last ? " &middot; " + wTH("ward.nhcx-status-asked", "status asked {at}", { at: when(last.at) }) : "") +
+      (a && a.exchange && p.nhcxConnected ? ' <button class="w-btn ghost sm" data-w-act="hcxstatus:' + kind + ":" + esc(rec.id) + '">' + ms("sync") + wTH("ward.nhcx-check-status", "Check status") + "</button>" : "") + "</div>";
+  }
+  function nhcxEligibilitySection(t) {
+    var h = "<div class=\"w-sub\"><h4>" + wTH("ward.nhcx-eligibility", "NHCX eligibility") + "</h4>";
+    var conn = nhcxPayers(t.payers);
+    if (!conn.length) return h + '<p class="w-hint">' + ms("link_off") + wTH("ward.nhcx-not-connected", "Not connected to NHCX. Nothing is sent through NHCX until an administrator sets up an NHCX payer under Admin, Integrations.") + "</p></div>";
+    var rows = (t.eligibilityChecks || []).map(function (e) {
+      var r = e.response;
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(e.state) + '">' + esc(wTEn(NHCX_ELIG_WORDS[e.state]) || e.state) + "</span> <b>" + esc(tpaPayerName(t.payers, e.payerId)) + "</b> &middot; " + when(e.at) +
+        (r ? "<div class=\"w-dt-times\">" + (r.inforce === true ? wTH("ward.nhcx-inforce-yes", "Policy in force") : r.inforce === false ? wTH("ward.nhcx-inforce-no", "Policy not in force") : wTH("ward.nhcx-inforce-unknown", "The payer did not say whether the policy is in force")) +
+          (r.outcome ? " &middot; " + esc(wTEn(NHCX_OUTCOME_WORDS[r.outcome]) || r.outcome) : "") + (r.disposition ? " &middot; " + esc(r.disposition) : "") + "</div>" +
+          ((r.benefits || []).length ? '<div class="w-dt-times">' + r.benefits.map(function (b) { return esc(b.type) + (b.allowed != null ? " " + esc(b.allowed) : "") + (b.used != null ? " (" + wTH("ward.nhcx-used", "used {used}", { used: esc(b.used) }) + ")" : ""); }).join("; ") + "</div>" : "") +
+          ((r.errors || []).length ? '<div class="w-warn">' + r.errors.map(function (x) { return esc(x); }).join("; ") + "</div>" : "") : "") +
+        (e.adapter && e.adapter.note && e.state !== "answered" ? '<div class="w-dt-times">' + esc(e.adapter.note) + "</div>" : "") +
+        nhcxExchangeLine("eligibility", e, t.payers) + "</div></li>";
+    }).join("");
+    return h + (t.eligibilityChecks === null ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.nhcx-eligibility-unreadable", "Eligibility checks could not be read. This is not the same as there being none.", null, "", 1) + "</p>"
+        : rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.nhcx-no-eligibility", "No eligibility check has been sent for this patient.") + "</p>") +
+      '<select id="wNhcxPayer">' + conn.map(function (p) { return '<option value="' + esc(p.id) + '">' + esc(p.name) + "</option>"; }).join("") + "</select>" +
+      "<input id=\"wNhcxPolicy\" placeholder=\"" + wTA("ward.nhcx-policy-number", "Policy number") + "\">" +
+      '<button class="w-btn" data-w-act="nhcxelig">' + ms("verified_user") + wTH("ward.nhcx-check-eligibility", "Check eligibility") + "</button></div>";
+  }
+  /* PACKAGE BILLING ON A STAY (gap-claims-gst-2, functions/_wardsynq/packages.js). st.tpaPkg: null = loading, false =
+   * could not be read (never shown as no package), else { assignments, stays, packages }. A scheme portal is never
+   * reached: the document pack is for a person to upload, and says so. */
+  function pkgPreauthWord(s) {
+    if (s === "missing") return wT("ward.pkg-preauth-missing", "none linked");
+    if (s === "not_required") return wT("ward.pkg-preauth-not-required", "not required");
+    if (s === "unreadable") return wT("ward.pkg-preauth-unreadable", "could not be read");
+    if (s === "not_found") return wT("ward.pkg-preauth-not-found", "linked record not found");
+    return preauthStateWord(s);
+  }
+  function pkgSchemeWord(s) {
+    var words = { pmjay: wT("ward.pkg-scheme-pmjay", "PM-JAY (Ayushman Bharat)"), state: wT("ward.pkg-scheme-state", "State scheme"), cghs: wT("ward.pkg-scheme-cghs", "CGHS"),
+      echs: wT("ward.pkg-scheme-echs", "ECHS"), insurer: wT("ward.pkg-scheme-insurer", "Private insurer"), hospital: wT("ward.pkg-scheme-hospital", "Hospital package") };
+    return HAS(words, s) ? words[s] : s;
+  }
+  /* PURE. The flags a cashier or TPA desk must see on a package stay, as warnings. */
+  function pkgFlagsHtml(f) {
+    if (!f) return "";
+    return (f.losExceeded ? '<div class="w-warn">' + ms("schedule") + wTH("ward.pkg-los-exceeded", "Length of stay exceeded: day {days}, the package expects {expected}.", { days: esc(f.stayDays), expected: esc(f.expectedLosDays) }, "days expected") + "</div>" : "") +
+      (f.preAuthProblem ? '<div class="w-warn">' + ms("fact_check") + wTH("ward.pkg-preauth-problem", "This package needs an approved pre-authorisation: {state}.", { state: esc(pkgPreauthWord(f.preAuthState)) }, "") + "</div>" : "");
+  }
+  /* WHO SETTLES EACH STAY (gst-parties, functions/_wardsynq/stay-payer.js). A bill raised for the stay copies these
+   * parties. Unreadable (null) is said, never shown as self-pay. */
+  function stayPayerSection(state) {
+    var t = state.tpa || {}, p = state.tpaPkg;
+    var h = "<div class=\"w-sub\"><h4>" + wTH("ward.stay-payer-title", "Who settles each stay") + "</h4>";
+    if (t.stayPayers === null) return h + '<p class="w-hint warn">' + ms("warning") + wTH("ward.stay-payer-unreadable", "Who settles each stay could not be read. This is not the same as self-pay.", null, "", 1) + "</p></div>";
+    var stayWord = function (id) {
+      var s = ((p && p.stays) || []).filter(function (x) { return x.id === id; })[0];
+      return s ? esc(when(s.periodStart)) + (s.ward ? " &middot; " + esc(s.ward) : "") : esc(id);
+    };
+    var rows = (t.stayPayers || []).map(function (sp) {
+      return '<li class="w-mini-row"><div><b>' + stayWord(sp.encounterId) + "</b>" + (sp.policyNumber ? " &middot; " + wTH("ward.stay-payer-policy", "Policy {policy}", { policy: esc(sp.policyNumber) }, "policy") : "") + partiesHtml(sp.parties) + "</div>" +
+        '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="staypayer:' + esc(sp.encounterId) + '">' + ms("edit") + wTH("ward.pkg-change", "Change") + "</button></div></li>";
+    }).join("");
+    return h + (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">' + wTH("ward.stay-payer-none", "No payer is recorded for any stay of this patient. A stay with none is billed as self-pay.") + "</p>") +
+      (p && (p.stays || []).length ? '<button class="w-btn" data-w-act="staypayer">' + ms("handshake") + wTH("ward.stay-payer-set", "Record who settles a stay") + "</button>" : "") + "</div>";
+  }
+  function stayPayerAction(encounterId) {
+    var p = st.tpaPkg, t = st.tpa; if (!p || !t || !st.sel) return;
+    var cur = encounterId ? (t.stayPayers || []).filter(function (x) { return x.encounterId === encounterId; })[0] : null;
+    var stays = (p.stays || []).map(function (s) { return [s.id, esc(when(s.periodStart)) + (s.ward ? " &middot; " + esc(s.ward) : "") + (s.status === "in-progress" ? " (" + wTH("ward.pkg-stay-open", "in hospital") + ")" : "")]; });
+    var payers = [["", wTH("ward.parties-self-pay-option", "Self-pay (the patient)")]].concat((t.payers || []).map(function (x) { return [x.id, esc(x.name)]; }));
+    askFor({ icon: "handshake", ok: wTH("ward.save", "Save"), title: wTH("ward.stay-payer-set", "Record who settles a stay"),
+      text: wTH("ward.stay-payer-text", "The payer's contract decides the insurer, the TPA and the GST recipient. A bill raised for the stay copies them."),
+      fields: [
+        { key: "encounterId", type: "select", label: wTH("ward.pkg-stay", "Stay"), options: stays, value: encounterId || (stays[0] && stays[0][0]) || "" },
+        { key: "payerRef", type: "select", label: wTH("ward.parties-payer-field", "Payer"), options: payers, value: cur ? cur.payerRef || "" : "" },
+        { key: "policyNumber", label: wTH("ward.policy-number-optional", "Policy number (optional)"), value: cur ? cur.policyNumber || "" : "" },
+      ].concat(cur ? [{ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.stay-payer-reason-required", "Say why the payer on this stay is changing.") }] : []) }, function (v) {
+      var existing = (t.stayPayers || []).filter(function (x) { return x.encounterId === v.encounterId; })[0];
+      st.busy = true; paint();
+      return apiPost("/ward/stay-payer", { orgId: st.orgId, patientId: st.sel.patientId, encounterId: v.encounterId, payerRef: v.payerRef || "", policyNumber: v.policyNumber || undefined,
+        reason: v.reason || undefined, expectedVersion: existing ? existing.version : undefined })
+        .then(function (r) { if (settle(r, wT("ward.pkg-saved", "Recorded."))) { loadTpa(); return; } paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.stay-payer-not-saved", "Could not reach the server. The payer may not have changed; reload to check."); paint(); });
+    });
+  }
+  function packageSection(state) {
+    var p = state.tpaPkg, t = state.tpa || {};
+    var h = "<div class=\"w-sub\"><h4>" + wTH("ward.pkg-title", "Package billing") + "</h4>";
+    if (p === null || p === undefined) return h + '<p class="w-empty">' + wTH("ward.pkg-loading", "Loading packages&hellip;") + "</p></div>";
+    if (p === false) return h + '<p class="w-hint warn">' + ms("warning") + wTH("ward.pkg-unreadable", "Packages could not be read. This is not the same as this stay having none.", null, "", 1) + "</p></div>";
+    var rows = (p.assignments || []).map(function (a) {
+      var k = a.package || {}, f = a.flags || {}, sp = a.split;
+      var list = function (items) { return items.map(function (x) { return esc(x.display) + (x.line != null ? " " + esc(x.line) : ""); }).join(", "); };
+      return '<li class="w-mini-row"><div><b>' + esc(k.code) + "</b> " + esc(k.name) + " &middot; " + esc(pkgSchemeWord(k.scheme)) + (k.schemeName ? " (" + esc(k.schemeName) + ")" : "") +
+        '<div class="w-dt-times">' + wTH("ward.pkg-rate-line", "Rate {rate} &middot; version {version} &middot; stay {encounter}", { rate: esc(k.rate), version: esc(k.version), encounter: esc(a.encounterId) }, "rate version encounter") +
+        (a.beneficiaryId ? " &middot; " + wTH("ward.pkg-beneficiary", "beneficiary ID {id}", { id: esc(a.beneficiaryId) }, "id") : "") + "</div>" +
+        '<div class="w-dt-times">' + (f.stayDays == null ? wTH("ward.pkg-days-unknown", "Days in hospital not known here") : wTH("ward.pkg-days", "Day {days} of {expected} expected", { days: esc(f.stayDays), expected: esc(f.expectedLosDays == null ? "-" : f.expectedLosDays) }, "days expected")) +
+        " &middot; " + wTH("ward.pkg-preauth", "pre-authorisation: {state}", { state: esc(pkgPreauthWord(f.preAuthState)) }, "") + "</div>" +
+        pkgFlagsHtml(f) +
+        (sp === false ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.pkg-split-unreadable", "The stay's charges could not be read, so what is billed on top is not known.", null, "", 1) + "</p>"
+          : sp ? '<div class="w-dt-times">' + wTH("ward.pkg-counts", "Charges so far: {included} covered, {excluded} excluded, {outside} not listed", { included: esc(sp.counts.included), excluded: esc(sp.counts.excluded), outside: esc(sp.counts.outside) }, "included excluded outside") + "</div>" +
+            (sp.excluded.length ? '<div class="w-dt-times">' + wTH("ward.pkg-excluded-billed", "Excluded, billed on top:") + " " + list(sp.excluded) + "</div>" : "") +
+            (sp.outside.length ? '<div class="w-warn">' + wTH("ward.pkg-outside-billed", "Not listed by the package, billed; check against the scheme:") + " " + list(sp.outside) + "</div>" : "") +
+            (sp.unpriced.length ? '<div class="w-warn">' + wTH("ward.pkg-unpriced", "Not covered and not priced:") + " " + list(sp.unpriced) + "</div>" : "") : "") +
+        (f.manualPortal ? '<p class="w-hint">' + ms("info") + wTH("ward.pkg-manual-portal", "Not connected to the scheme's portal. Nothing is sent from here; use the document pack to submit by hand.") + "</p>" : "") +
+        '</div><div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="pkgpack:' + esc(a.encounterId) + '">' + ms("folder_open") + wTH("ward.pkg-pack", "Document pack (manual submission)") + "</button>" +
+        '<button class="w-btn ghost sm" data-w-act="pkgset:' + esc(a.encounterId) + '">' + ms("edit") + wTH("ward.pkg-change", "Change") + "</button>" +
+        '<button class="w-btn ghost sm" data-w-act="pkgremove:' + esc(a.encounterId) + '">' + ms("remove") + wTH("ward.pkg-remove", "Remove") + "</button></div></li>";
+    }).join("");
+    var canAttach = (p.stays || []).length && (p.packages || []).some(function (x) { return x.active; });
+    return h + (p.staysUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.pkg-stays-unreadable", "The stays could not be read here, so days in hospital are not shown.", null, "", 1) + "</p>" : "") +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">' + wTH("ward.pkg-none", "No stay of this patient is on a package.") + "</p>") +
+      (canAttach ? '<button class="w-btn" data-w-act="pkgset">' + ms("inventory_2") + wTH("ward.pkg-attach", "Put a stay on a package") + "</button>"
+        : '<p class="w-hint">' + ms("info") + wTH("ward.pkg-cannot-attach", "A package needs an inpatient stay and a package set up by an administrator under Admin, Price list.") + "</p>") +
+      '<p class="w-hint">' + ms("info") + wTH("ward.pkg-how-billed", "The bill carries the package rate and what the package excludes. Charges it covers show at zero.") + "</p></div>";
+  }
+  function loadTpaPackages() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.tpaPkg = null;
+    Promise.all([apiGet("/ward/stay-packages?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId)), apiGet("/ward/packages?orgId=" + encodeURIComponent(st.orgId))])
+      .then(function (both) { st.tpaPkg = both[0] && both[0].ok && both[1] && both[1].ok ? { assignments: both[0].assignments || [], stays: both[0].stays || [], staysUnreadable: !!both[0].staysUnreadable, packages: both[1].packages || [] } : false; paint(); })
+      .catch(function () { st.tpaPkg = false; paint(); });
+  }
+  function pkgWrite(body) {
+    st.busy = true; paint();
+    return apiPost("/ward/stay-package", body)
+      .then(function (r) { if (settle(r, wT("ward.pkg-saved", "Recorded."))) { loadTpaPackages(); return; } paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.pkg-not-saved", "Could not reach the server. The package may not have changed; reload to check."); paint(); });
+  }
+  function pkgSetAction(encounterId) {
+    var p = st.tpaPkg; if (!p || !st.sel) return;
+    var cur = encounterId ? (p.assignments || []).filter(function (a) { return a.encounterId === encounterId; })[0] : null;
+    var stays = (p.stays || []).map(function (s) { return [s.id, esc(when(s.periodStart)) + (s.ward ? " &middot; " + esc(s.ward) : "") + (s.status === "in-progress" ? " (" + wTH("ward.pkg-stay-open", "in hospital") + ")" : "")]; });
+    var pkgs = (p.packages || []).filter(function (x) { return x.active; }).map(function (x) { return [x.id, esc(x.code) + " &middot; " + esc(x.name) + " &middot; " + esc(pkgSchemeWord(x.scheme)) + " &middot; " + esc(x.rate)]; });
+    var auths = [["", wTH("ward.pkg-no-preauth", "No pre-authorisation")]].concat(((st.tpa && st.tpa.preAuthorisations) || []).map(function (a) { return [a.id, esc(a.treatment) + " &middot; " + esc(preauthStateWord(a.state))]; }));
+    askFor({ icon: "inventory_2", ok: wTH("ward.pkg-save", "Save"), title: cur ? wTH("ward.pkg-change-title", "Change the package on this stay") : wTH("ward.pkg-attach-title", "Put a stay on a package"),
+      text: wTH("ward.pkg-attach-text", "The stay keeps the package version chosen now, even if the price list changes later. A stay that already has an itemised bill cannot be put on a package."),
+      fields: [
+        { key: "encounterId", type: "select", label: wTH("ward.pkg-stay", "Stay"), options: stays, value: encounterId || (stays[0] && stays[0][0]) || "" },
+        { key: "packageId", type: "select", label: wTH("ward.pkg-package", "Package"), options: pkgs, value: cur ? cur.package.id : (pkgs[0] && pkgs[0][0]) || "" },
+        { key: "preAuthId", type: "select", label: wTH("ward.pkg-preauth-link", "Pre-authorisation"), options: auths, value: cur ? cur.preAuthId || "" : "" },
+        { key: "beneficiaryId", label: wTH("ward.pkg-beneficiary-id", "Scheme beneficiary ID (card or ID number)"), value: cur ? cur.beneficiaryId || "" : "" },
+      ].concat(cur ? [{ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.pkg-reason-required", "Say why the package is changing.") }] : []) }, function (v) {
+      var existing = (p.assignments || []).filter(function (a) { return a.encounterId === v.encounterId; })[0];
+      return pkgWrite({ orgId: st.orgId, patientId: st.sel.patientId, encounterId: v.encounterId, packageId: v.packageId, preAuthId: v.preAuthId || undefined,
+        beneficiaryId: v.beneficiaryId || undefined, reason: v.reason || undefined, expectedVersion: existing ? existing.version : undefined });
+    });
+  }
+  function pkgRemoveAction(encounterId) {
+    var p = st.tpaPkg; if (!p || !st.sel) return;
+    var cur = (p.assignments || []).filter(function (a) { return a.encounterId === encounterId; })[0]; if (!cur) return;
+    askFor({ icon: "remove", danger: true, ok: wTH("ward.pkg-remove", "Remove"), title: wTH("ward.pkg-remove-title", "Remove {code} from this stay?", { code: esc(cur.package.code) }, "code"),
+      text: wTH("ward.pkg-remove-text", "The stay is then billed item by item. A package already on a bill cannot be removed; raise a note on that bill instead."),
+      fields: [{ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.pkg-remove-reason-required", "Say why the package is being removed.") }] }, function (v) {
+      return pkgWrite({ orgId: st.orgId, patientId: st.sel.patientId, encounterId: encounterId, remove: true, reason: v.reason, expectedVersion: cur.version });
+    });
+  }
+  /* THE MANUAL SUBMISSION PACK, printed. Opened at once (a window opened after a wait is blocked as a popup) and filled
+   * when the server answers; a failure is said in that window and on the ward, never a blank pack. */
+  function pkgPackAction(encounterId) {
+    if (!st.sel) return;
+    var win = null; try { win = G.open("", "_blank"); } catch (e) {}
+    if (!win) { st.err = wT("ward.could-not-open-a-print-window", "Could not open a print window. Allow pop-ups for this site."); paint(); return; }
+    var write = function (html) { try { win.document.open(); win.document.write(html); win.document.close(); } catch (e) {} };
+    write("<p>" + wTH("ward.pkg-pack-loading", "Preparing the document pack&hellip;") + "</p>");
+    apiGet("/ward/package-pack?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId) + "&encounterId=" + encodeURIComponent(encounterId))
+      .then(function (r) {
+        if (!r || !r.ok || !r.pack) {
+          write("<p>" + wTH("ward.pkg-pack-failed", "The document pack could not be prepared. Nothing was sent anywhere.") + "</p>");
+          st.err = wT("ward.pkg-pack-failed", "The document pack could not be prepared. Nothing was sent anywhere."); paint(); return;
+        }
+        var k = r.pack;
+        var checkWord = function (s) { return s === "done" ? wTH("ward.pkg-check-done", "done") : s === "not_done" ? wTH("ward.pkg-check-not-done", "not done") : wTH("ward.pkg-check-by-hand", "check by hand"); };
+        var docs = function (list) { return list.length ? "<ul>" + list.map(function (d) { return "<li>&#9744; " + esc(d) + "</li>"; }).join("") + "</ul>" : "<p>" + wTH("ward.pkg-pack-no-docs", "No documents are listed on this package. Add the scheme's mandatory documents for it under Admin, Price list, Packages.") + "</p>"; };
+        write("<title>" + esc(k.package.code) + "</title><body style=\"font-family:sans-serif\">" +
+          "<h2>" + wTH("ward.pkg-pack-title", "Manual submission pack: {code}", { code: esc(k.package.code) }, "code") + "</h2>" +
+          "<p><b>" + wTH("ward.pkg-pack-notice", "Not connected to the scheme's portal. Nothing in this pack has been sent or submitted. A person uploads it on the portal and records the portal's reference on the pre-authorisation.") + "</b></p>" +
+          "<p>" + esc(k.package.name) + " &middot; " + esc(pkgSchemeWord(k.scheme)) + (k.schemeName ? " (" + esc(k.schemeName) + ")" : "") + " &middot; " + wTH("ward.pkg-rate-version", "Rate {rate}, version {version}", { rate: esc(k.package.rate), version: esc(k.package.version) }, "rate version") + "</p>" +
+          "<h3>" + wTH("ward.pkg-pack-checklist", "Checklist") + "</h3><ul>" + k.checklist.map(function (c) { return "<li>" + esc(c.text) + ": <b>" + checkWord(c.state) + "</b></li>"; }).join("") + "</ul>" +
+          "<h3>" + wTH("ward.pkg-pack-preauth-docs", "Documents for pre-authorisation") + "</h3>" + docs(k.preAuthDocuments) +
+          "<h3>" + wTH("ward.pkg-pack-claim-docs", "Documents for the claim") + "</h3>" + docs(k.claimDocuments) +
+          "<h3>" + wTH("ward.pkg-pack-fields", "Fields to copy into the portal") + "</h3><p>" + wTH("ward.pkg-pack-fields-note", "Field names on the portal may differ. An empty value is not known here.") + "</p>" +
+          '<table border="1" cellspacing="0" cellpadding="4">' + k.fields.map(function (f) { return "<tr><td>" + esc(f.section) + "</td><td>" + esc(f.label) + "</td><td>" + esc(f.value == null ? "" : f.value) + "</td></tr>"; }).join("") + "</table></body>");
+        try { win.focus(); } catch (e) {}
+      })
+      .catch(function () { write("<p>" + wTH("ward.pkg-pack-failed", "The document pack could not be prepared. Nothing was sent anywhere.") + "</p>"); });
+  }
+
+  /* rcm-claims-ops (functions/_wardsynq/claims-ops.js): the claim checklist, payer queries and enhancements with their
+   * clocks, coding candidates from the chart and the evidence pack. state.tpaChecks: null = loading, false = failed,
+   * never read as a complete claim. Finding sentences are the server's own words. */
+  function rcmAge(iso) {
+    var t = Date.parse(iso); if (!isFinite(t)) return "-";
+    var h = Math.max(0, Math.floor((Date.now() - t) / 3600000));
+    return h < 48 ? wT("ward.rcm-hours", "{n} h", { n: h }) : wT("ward.rcm-days", "{n} d", { n: Math.floor(h / 24) });
+  }
+  function rcmQueryHtml(q) {
+    if (q.answeredAt) return '<div class="w-dt-times">' + wTH("ward.rcm-query-answered", "Payer query of {received}, answered {answered}: {text}", { received: when(q.receivedAt), answered: when(q.answeredAt), text: esc(q.text) }, "text") + "</div>";
+    var overdue = q.dueBy && Date.parse(q.dueBy) < Date.now();
+    return '<div class="' + (overdue ? "w-warn" : "w-dt-times") + '">' + wTH("ward.rcm-query-open", "Open payer query, received {received} ({age} ago): {text}", { received: when(q.receivedAt), age: esc(rcmAge(q.receivedAt)), text: esc(q.text) }, "text") +
+      (q.dueBy ? " &middot; " + (overdue ? wTH("ward.rcm-query-overdue", "answer was due {due}", { due: when(q.dueBy) }) : wTH("ward.rcm-query-due", "answer due {due}", { due: when(q.dueBy) })) : "") + "</div>";
+  }
+  function rcmChecklistHtml(checks, c) {
+    if (["coded", "submitted", "queried", "denied"].indexOf(c.state) < 0) return "";
+    if (checks == null) return '<div class="w-dt-times">' + wTH("ward.rcm-checking", "Checking this claim...") + "</div>";
+    if (checks === false) return '<div class="w-warn">' + wTH("ward.rcm-check-failed", "The claim checklist could not be loaded. Do not read this as complete.", null, "", 1) + "</div>";
+    var k = checks.checks && checks.checks[c.id];
+    if (!k) return "";
+    return (k.blocking.length ? '<div class="w-warn"><b>' + wTH("ward.rcm-blocking", "Fix before sending, or send with a recorded reason:") + "</b> " + k.blocking.map(function (f) { return esc(f.text); }).join(" ") + "</div>"
+        : '<div class="w-dt-times">' + wTH("ward.rcm-checklist-complete", "Checklist complete.") + "</div>") +
+      (k.warnings.length ? '<div class="w-dt-times">' + k.warnings.map(function (f) { return esc(f.text); }).join(" ") + "</div>" : "");
+  }
+  function rcmClaimExtrasHtml(c) {
+    return ((c.documents || []).length ? '<div class="w-dt-times">' + wTH("ward.rcm-docs-obtained", "Documents obtained:") + " " + c.documents.map(function (d) { return esc(d.name); }).join("; ") + "</div>" : "") +
+      (c.payerQueries || []).map(rcmQueryHtml).join("") +
+      (c.denialClassification ? '<div class="w-dt-times">' + wTH("ward.rcm-denial-class", "Denial reason {code} {label}; root cause: {cause}", { code: esc(c.denialClassification.code), label: esc(c.denialClassification.label), cause: esc(c.denialClassification.rootCause) }, "code label cause") + "</div>" : "") +
+      (c.checklistOverrides || []).map(function (o) { return '<div class="w-warn">' + wTH("ward.rcm-override", "Sent over checklist findings on {at}: {reason}", { at: when(o.at), reason: esc(o.reason) }, "reason") + "</div>"; }).join("") +
+      ((c.evidencePacks || []).length ? '<div class="w-dt-times">' + wTH("ward.rcm-packs-saved", "Evidence pack versions saved: {n}", { n: c.evidencePacks.length }) + "</div>" : "");
+  }
+  function rcmClaimButtons(c) {
+    var b = function (act, icon, label) { return '<button class="w-btn ghost sm" data-w-act="' + act + ":" + esc(c.id) + '">' + ms(icon) + label + "</button>"; };
+    var denied = c.state === "denied" || (c.history || []).some(function (h) { return h && h.event === "denied"; });
+    return (["coded", "submitted", "queried", "denied"].indexOf(c.state) >= 0 ? b("claimdocs", "attach_file", wTH("ward.rcm-docs", "Documents obtained")) : "") +
+      (c.state === "submitted" || c.state === "queried" ? b("claimquery", "help", wTH("ward.rcm-payer-query", "Payer query")) : "") +
+      (c.state === "queried" ? b("claimresubmit", "reply", wTH("ward.rcm-answer-resubmit", "Answer and resubmit")) : "") +
+      (denied ? b("claimclassify", "category", wTH("ward.rcm-classify", "Classify denial")) : "") +
+      b("claimevidence", "description", wTH("ward.rcm-evidence", "Evidence pack"));
+  }
+  function rcmCandidatesHtml(checks) {
+    if (checks == null) return "";
+    if (checks === false) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-candidates-failed", "The coding candidates could not be loaded.", null, "", 1) + "</p>";
+    if (checks.candidates == null) return '<p class="w-hint">' + wTH("ward.rcm-candidates-unreadable", "Coding candidates need the problem list, which this role cannot read.") + "</p>";
+    if (!checks.candidates.length) return '<p class="w-hint">' + wTH("ward.rcm-no-candidates", "No coded diagnosis is on the problem list. A clinician codes a diagnosis on the chart; billing cannot add one.") + "</p>";
+    return '<div><span class="w-dt-times">' + wTH("ward.rcm-candidates", "Coded on the chart, tap to add:") + "</span> " + checks.candidates.map(function (x) {
+      return '<button class="w-btn ghost sm" data-w-act="claimcodepick:' + esc(x.code) + '">' + esc(x.code) + " " + esc(x.display) + (x.thisStay ? "" : " (" + wTH("ward.rcm-other-stay", "not this stay") + ")") + "</button>";
+    }).join("") + "</div>";
+  }
+  function rcmPreAuthHtml(a) {
+    var b = function (act, icon, label) { return '<button class="w-btn ghost sm" data-w-act="' + act + ":" + esc(a.id) + '">' + ms(icon) + label + "</button>"; };
+    var openQ = (a.payerQueries || []).some(function (q) { return !q.answeredAt; });
+    var openE = (a.enhancements || []).filter(function (e) { return e.state === "requested"; })[0];
+    return (a.validUntil ? '<div class="w-dt-times">' + wTH("ward.rcm-valid-until", "valid until {date}", { date: esc(a.validUntil) }) + "</div>" : "") +
+      (a.payerQueries || []).map(rcmQueryHtml).join("") +
+      (a.enhancements || []).map(function (e) {
+        return '<div class="w-dt-times">' + (e.state === "requested"
+          ? wTH("ward.rcm-enh-open", "Enhancement to {amount} asked {at} ({age} ago): {reason}", { amount: esc(e.requestedAmount), at: when(e.requestedAt), age: esc(rcmAge(e.requestedAt)), reason: esc(e.reason) }, "reason")
+          : wTH("ward.rcm-enh-decided", "Enhancement to {amount}: {state} {at}{approved}", { amount: esc(e.requestedAmount), state: e.state === "approved" ? wTH("ward.rcm-approved", "Approved") : wTH("ward.rcm-refused", "Refused"), at: when(e.decidedAt), approved: e.approvedAmount != null ? " (" + esc(e.approvedAmount) + ")" : "" }, "state")) + "</div>";
+      }).join("") +
+      '<div class="w-mini-row-act">' + (a.state === "requested" || a.state === "approved" ? b("paquery", "help", wTH("ward.rcm-payer-query", "Payer query")) : "") +
+      (openQ ? b("paanswer", "reply", wTH("ward.rcm-answer-query", "Answer query")) : "") +
+      (a.state === "approved" && !openE ? b("paenh", "trending_up", wTH("ward.rcm-enhancement", "Ask for enhancement")) : "") +
+      (openE ? '<button class="w-btn ghost sm" data-w-act="paenhdec:' + esc(a.id) + "|" + esc(openE.id) + '">' + ms("gavel") + wTH("ward.rcm-enh-decision", "Enhancement decision") + "</button>" : "") + "</div>";
+  }
+  function tpaEvidenceView(state) {
+    var e = state.tpaEvidence || {};
+    var head = "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button><h3>" + wTH("ward.rcm-evidence", "Evidence pack") + "</h3></div>";
+    if (e.loading) return '<div class="w-card">' + head + "<p class=\"w-empty\">" + wTH("ward.loading4", "Loading...") + "</p></div>";
+    if (e.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-evidence-failed", "The evidence pack could not be assembled. Nothing is missing from the claim; try again.", null, "", 1) + "</p></div>";
+    return '<div class="w-card">' + head +
+      '<p class="w-hint w-noprint">' + ms("info") + wTH("ward.rcm-evidence-note", "Assembled from the records as they stand, not written by AI. Edit it, save it as a version on the claim, then print it.") + "</p>" +
+      '<textarea id="wTpaEvText" rows="18" class="w-noprint" style="width:100%">' + esc(e.text || "") + "</textarea>" +
+      '<pre class="w-evidence-print" style="white-space:pre-wrap">' + esc(e.text || "") + "</pre>" +
+      '<div class="w-actions w-noprint"><button class="w-btn go" data-w-act="claimevsave">' + ms("save") + wTH("ward.rcm-evidence-save", "Save as a version") + "</button>" +
+      '<button class="w-btn ghost" data-w-act="claimevprint">' + ms("print") + wTH("ward.print", "Print") + "</button></div>" +
+      ((e.versions || []).length ? '<ul class="w-mini w-noprint">' + e.versions.map(function (v) {
+        return '<li class="w-mini-row"><div>' + wTH("ward.rcm-evidence-version", "Version {n}, saved {at}", { n: esc(v.n), at: when(v.at) }) + '</div><div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="claimevuse:' + esc(v.n) + '">' + wTH("ward.rcm-evidence-use", "Open this version") + "</button></div></li>";
+      }).join("") + "</ul>" : "") + "</div>";
   }
   function tpaView(state) {
     if (!state.tpa) return "<div class=\"w-card\"><h3>" + wTH("ward.tpa-claims", "TPA / Claims") + "</h3><p class=\"w-empty\">" + wTH("ward.loading-claims", "Loading claims&hellip;") + "</p></div>";
@@ -2905,20 +3890,23 @@
         ((c.queries || []).length ? '<div class="w-dt-times">' + c.queries.map(function (q) { return esc(q.question); }).join(" ") + "</div>" : "") +
         // The adapter boundary, stated honestly: no live payer connector exists in this build, so a
         // submission is queued for the hospital's own process, never shown as sent to anyone.
-        "<div class=\"w-dt-times\">" + wTH("ward.payer", "payer: {tpaPayerName}", { tpaPayerName: esc(tpaPayerName(t.payers, c.payerId)) }, "tpaPayerName") + (c.payerReference ? " &middot; " + wTH("ward.payer-ref", "payer ref {payerReference}", { payerReference: esc(c.payerReference) }, "payerReference") : "") + "</div>" +
+        partiesHtml(c.parties) + (c.payerReference ? "<div class=\"w-dt-times\">" + wTH("ward.payer-ref", "payer ref {payerReference}", { payerReference: esc(c.payerReference) }, "payerReference") + "</div>" : "") +
         (c.adapter ? "<div class=\"w-dt-times\">" + wTH("ward.payer-channel", "payer channel: {TPA_CHANNEL_WORDS}", { TPA_CHANNEL_WORDS: esc(wTEn(TPA_CHANNEL_WORDS[c.adapter.state]) || c.adapter.state) }, "") + (c.adapter.note ? " - " + esc(c.adapter.note) : "") + "</div>" : "") +
+        nhcxExchangeLine("claim", c, t.payers) +
         (resubs.length ? "<div class=\"w-dt-times\">" + (resubs.length > 1 ? wTH("ward.resubmitted-times", "resubmitted {length} times:", { length: resubs.length }, "length") : wTH("ward.resubmitted-time-once", "resubmitted {length} time:", { length: resubs.length }, "length")) + " " + resubs.map(function (x) { return x.reason ? esc(x.reason) : wTH("ward.no-reason-recorded", "no reason recorded"); }).join("; ") + "</div>" : "") +
         (stl ? "<div class=\"w-dt-times\">" + wTH("ward.settled-paid-balance-with", "settled: paid {paidAmount}{v}{v2}{v3}{v4} &middot; balance with {balanceWith}", { paidAmount: esc(stl.paidAmount), v: (stl.approvedAmount != null ? " " + wTH("ward.of-approved2", "of {approvedAmount} approved", { approvedAmount: esc(stl.approvedAmount) }, "approvedAmount") : " (" + wTH("ward.approved-amount-not-recorded", "approved amount not recorded)")), v2: (stl.shortPaidAmount ? " &middot; " + wTH("ward.short", "short {shortPaidAmount}: {shortPaymentReason}", { shortPaidAmount: esc(stl.shortPaidAmount), shortPaymentReason: esc(stl.shortPaymentReason) }, "shortPaidAmount shortPaymentReason") : ""), v3: (stl.disallowances && stl.disallowances.length ? " &middot; " + wTH("ward.disallowed", "disallowed:") + " " + stl.disallowances.map(function (d) { return esc(d.reason) + (d.amount != null ? " (" + esc(d.amount) + ")" : ""); }).join("; ") : ""), v4: (stl.outstandingAmount != null ? " &middot; " + wTH("ward.outstanding3", "outstanding {outstandingAmount}", { outstandingAmount: esc(stl.outstandingAmount) }, "outstandingAmount") : " &middot; " + wTH("ward.outstanding-unknown", "outstanding unknown")), balanceWith: esc(stl.balanceWith) }, "paidAmount balanceWith") + (stl.patientBalance ? " (" + esc(stl.patientBalance.amount) + ": " + esc(stl.patientBalance.reason) + ")" : "") + "</div>" : "") +
         (warns.length ? warns.map(function (w) { return '<div class="w-warn">' + esc(w) + "</div>"; }).join("") : "") +
-        "</div>" + (actions ? '<div class="w-mini-row-act">' + actions + "</div>" : "") + "</li>";
+        rcmClaimExtrasHtml(c) + rcmChecklistHtml(state.tpaChecks, c) +
+        "</div>" + '<div class="w-mini-row-act">' + actions + rcmClaimButtons(c) + "</div>" + "</li>";
     }).join("");
     var authRows = (t.preAuthorisations || []).map(function (a) {
       return '<li class="w-mini-row"><div><span class="w-st ' + esc(a.state) + '">' + esc(preauthStateWord(a.state)) + "</span> " +
         "<b>" + esc(a.treatment) + "</b>" + (a.scheme ? " &middot; " + esc(a.scheme) : "") +
         (a.authorizedAmount != null ? " &middot; " + esc(a.authorizedAmount) : "") +
         (a.reason ? " &middot; " + esc(a.reason) : "") +
-        (a.payerId ? "<div class=\"w-dt-times\">" + wTH("ward.payer", "payer: {tpaPayerName}", { tpaPayerName: esc(tpaPayerName(t.payers, a.payerId)) }, "tpaPayerName") + (a.adapter ? " &middot; " + esc(wTEn(TPA_CHANNEL_WORDS[a.adapter.state]) || a.adapter.state) + (a.adapter.note ? " - " + esc(a.adapter.note) : "") : "") + "</div>" : "") +
-        '<div class="w-dt-times">' + esc(a.note || "") + "</div></div></li>";
+        partiesHtml(a.parties) + (a.adapter ? "<div class=\"w-dt-times\">" + esc(wTEn(TPA_CHANNEL_WORDS[a.adapter.state]) || a.adapter.state) + (a.adapter.note ? " - " + esc(a.adapter.note) : "") + "</div>" : "") +
+        nhcxExchangeLine("preauth", a, t.payers) +
+        '<div class="w-dt-times">' + esc(a.note || "") + "</div>" + rcmPreAuthHtml(a) + "</div></li>";
     }).join("");
     var estRows = (t.estimates || []).map(function (e) {
       return "<li class=\"w-mini-row\"><div><span class=\"w-st\">" + wTH("ward.estimate", "estimate") + "</span> <b>" + esc(e.estimatedAmount) + " " + esc(e.currency || "") + "</b>" +
@@ -2930,22 +3918,32 @@
     return '<div class="w-card">' +
       "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
       "<h3>" + wTH("ward.tpa-claims", "TPA / Claims") + "</h3><button class=\"w-btn ghost\" data-w-act=\"tpaopen\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" +
+      nhcxEligibilitySection(t) +
       "<div class=\"w-sub\"><h4>" + wTH("ward.claims", "Claims") + "</h4>" +
       (claimRows ? "<ul class=\"w-mini\">" + claimRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-claim-has-been-coded-for", "No claim has been coded for this patient.") + "</p>") +
-      "<input id=\"wTpaCodes\" placeholder=\"" + wTA("ward.codes-to-claim-comma-separated", "Codes to claim, comma-separated") + "\">" +
+      rcmCandidatesHtml(state.tpaChecks) +
+      "<input id=\"wTpaCodes\" value=\"" + esc(state.tpaCodes || "") + "\" placeholder=\"" + wTA("ward.codes-to-claim-comma-separated", "Codes to claim, comma-separated") + "\">" +
       tpaPayerSelect("wTpaPayer", t.payers) +
       "<input id=\"wTpaPolicy\" placeholder=\"" + wTA("ward.policy-number-optional", "Policy number (optional)") + "\">" +
       '<button class="w-btn" data-w-act="claimcode">' + ms("receipt_long") + wTH("ward.code-claim", "Code claim") + "</button></div>" +
       "<div class=\"w-sub\"><h4>" + wTH("ward.pre-authorisations", "Pre-authorisations") + "</h4>" +
-      (authRows ? "<ul class=\"w-mini\">" + authRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-pre-authorisation-has-been-recorded", "No pre-authorisation has been recorded for this patient.") + "</p>") +
+      /* R6-2: null is a list the server could not read, and it is never the "none recorded" sentence:
+       * a pre-authorisation shown as absent is what a counter turns into a bill the patient pays. */
+      (t.preAuthorisations === null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.the-pre-authorisations-could-not-be-read", "The pre-authorisations could not be read. This is not a patient with none recorded.", null, "", 1) + "</p>"
+        : authRows ? "<ul class=\"w-mini\">" + authRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-pre-authorisation-has-been-recorded", "No pre-authorisation has been recorded for this patient.") + "</p>") +
       "<input id=\"wTpaTreatment\" placeholder=\"" + wTA("ward.treatment", "Treatment") + "\">" +
       "<input id=\"wTpaScheme\" placeholder=\"" + wTA("ward.scheme-optional", "Scheme (optional)") + "\">" +
       '<select id="wTpaAuthState">' + PREAUTH_STATES.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(wTEn(x[1])) + "</option>"; }).join("") + "</select>" +
       "<input id=\"wTpaAuthReason\" placeholder=\"" + wTA("ward.reason-required-if-refused", "Reason (required if refused)") + "\">" +
       "<input id=\"wTpaAuthAmount\" placeholder=\"" + wTA("ward.authorized-amount-if-approved", "Authorized amount (if approved)") + "\">" +
+      "<label class=\"w-f\"><span>" + wTH("ward.rcm-valid-until-label", "Approval valid until (from the payer's letter)") + "</span><input id=\"wTpaAuthValid\" type=\"date\"></label>" +
       tpaPayerSelect("wTpaAuthPayer", t.payers) +
       "<input id=\"wTpaAuthRequested\" placeholder=\"" + wTA("ward.requested-amount-sent-with-a-requested", "Requested amount (sent with a requested pre-auth)") + "\">" +
+      "<input id=\"wTpaAuthCodes\" placeholder=\"" + wTA("ward.nhcx-preauth-codes", "Diagnosis codes on the problem list, comma-separated (NHCX needs them)") + "\">" +
+      "<input id=\"wTpaAuthPolicy\" placeholder=\"" + wTA("ward.nhcx-preauth-policy", "Policy number (NHCX needs it)") + "\">" +
       '<button class="w-btn" data-w-act="preauth">' + ms("fact_check") + wTH("ward.record2", "Record") + "</button></div>" +
+      stayPayerSection(state) +
+      packageSection(state) +
       "<div class=\"w-sub\"><h4>" + wTH("ward.estimates", "Estimates") + "</h4>" +
       (t.estimatesUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.estimates-could-not-be-read", "Estimates could not be read.", null, "", 1) + "</p>"
         : estRows ? "<ul class=\"w-mini\">" + estRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-estimate-has-been-prepared-for", "No estimate has been prepared for this patient.") + "</p>") +
@@ -3298,11 +4296,62 @@
     return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>" + wTH("ward.delivery-newborn", "Delivery &amp; newborn") + "</h3></div>" +
       '<p class="w-hint">' + ms("check_circle") + wTH("ward.delivery2", "{mode} delivery, {deliveredAt}", { mode: esc(deliveryModeWord(d.mode)), deliveredAt: when(d.deliveredAt) }, "deliveredAt") + (d.complications ? " - " + esc(d.complications) : "") + "</p>" +
       (linksFailed ? '<p class="w-hint warn">' + ms("error") + wTH("ward.linked-newborns-could-not-be-loaded", "Linked newborns could not be loaded. Do not read this as none.", null, "", 1) + "</p>" : newbornRows ? '<ul class="w-mini">' + newbornRows + "</ul>" : "") +
+      (linksFailed ? "" : links.map(function (l) { return apgarBlock(l.relatedPatientId, state, true); }).join("")) +
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.sex", "Sex") + "</span><select id=\"wNewbornSex\"><option value=\"female\">" + wTH("ward.female", "Female") + "</option><option value=\"male\">" + wTH("ward.male", "Male") + "</option><option value=\"unknown\">" + wTH("ward.unknown", "Unknown") + "</option></select></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.name", "Name") + "</span><input id=\"wNewbornName\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.optional", "optional") + "\"></label>" +
       "</div>" +
       '<button class="w-btn go" data-w-act="newbornsave">' + ms("child_care") + wTH("ward.register-newborn", "Register newborn") + "</button></div>";
+  }
+
+  /* APGAR (migrate-maternity.js recordApgar), on the NEWBORN's own record: five signs, each 0, 1 or 2, at 1, 5 and 10
+   * minutes, each minute saved on its own. The help text is the standard sign descriptors (Apgar 1953; the AAP and ACOG
+   * table). The screen sends the five picks only: the total, who and when come back from the server. A minute not
+   * recorded says so and never shows 0. A recorded minute changes only as a correction with a reason. */
+  function apgarSigns() {
+    return [
+      { k: "appearance", s: wT("ward.apgar-appearance-short", "Appearance"), n: wT("ward.apgar-appearance", "Appearance (colour)"), d: [wT("ward.apgar-appearance-0", "Blue or pale"), wT("ward.apgar-appearance-1", "Acrocyanotic: body pink, extremities blue"), wT("ward.apgar-appearance-2", "Completely pink")] },
+      { k: "pulse", s: wT("ward.apgar-pulse-short", "Pulse"), n: wT("ward.apgar-pulse", "Pulse (heart rate)"), d: [wT("ward.apgar-pulse-0", "Absent"), wT("ward.apgar-pulse-1", "Below 100 per minute"), wT("ward.apgar-pulse-2", "100 per minute or more")] },
+      { k: "grimace", s: wT("ward.apgar-grimace-short", "Grimace"), n: wT("ward.apgar-grimace", "Grimace (reflex irritability)"), d: [wT("ward.apgar-grimace-0", "No response"), wT("ward.apgar-grimace-1", "Grimace"), wT("ward.apgar-grimace-2", "Cry or active withdrawal")] },
+      { k: "activity", s: wT("ward.apgar-activity-short", "Activity"), n: wT("ward.apgar-activity", "Activity (muscle tone)"), d: [wT("ward.apgar-activity-0", "Limp"), wT("ward.apgar-activity-1", "Some flexion"), wT("ward.apgar-activity-2", "Active motion")] },
+      { k: "respiration", s: wT("ward.apgar-respiration-short", "Respiration"), n: wT("ward.apgar-respiration", "Respiration (breathing effort)"), d: [wT("ward.apgar-respiration-0", "Absent"), wT("ward.apgar-respiration-1", "Weak cry, hypoventilation"), wT("ward.apgar-respiration-2", "Good, crying")] }
+    ];
+  }
+  function apgarDomId(pid) { return String(pid || "").replace(/[^A-Za-z0-9_-]/g, "-"); }
+  function apgarBlock(pid, state, named) {
+    var a = state.apgar && state.apgar[pid], id = apgarDomId(pid), signs = apgarSigns();
+    var head = '<div class="w-sub"><h4>' + ms("child_care") + (named ? wTH("ward.apgar-title-for", "APGAR score, newborn {id}", { id: esc(pid) }, "id") : wTH("ward.apgar-title", "APGAR score")) + "</h4>";
+    var refresh = '<button class="w-btn tiny ghost" data-w-act="apgarload:' + esc(pid) + '">' + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button>";
+    if (a == null) return head + "<p class=\"w-empty\">" + wTH("ward.apgar-loading", "Loading the APGAR score...") + "</p></div>";
+    if (a === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.apgar-failed", "The APGAR score could not be loaded. Do not read this as not recorded. Refresh before recording, so a minute is not recorded twice.", null, "", 1) + "</p>" + refresh + "</div>";
+    if (a.off) return head + "<p class=\"w-empty\">" + wTH("ward.apgar-off", "The clinical record is not switched on for this hospital, so no APGAR score can be recorded here.") + "</p></div>";
+    var rows = a.minutes.map(function (m) {
+      var r = m.record, when_ = wTH("ward.apgar-minute-n", "{n} min", { n: esc(m.minute) });
+      if (!r) return "<tr><td>" + when_ + '</td><td colspan="7"><i>' + wTH("ward.apgar-not-recorded", "not recorded") + "</i></td></tr>";
+      return "<tr><td>" + when_ + "</td><td><b>" + esc(r.total) + "/10</b></td>" +
+        signs.map(function (s) { return "<td>" + esc(r.components ? r.components[s.k] : "") + "</td>"; }).join("") +
+        "<td>" + when(r.recordedAt) + " &middot; " + wTH("ward.apgar-by", "by {who}", { who: staffWho(r.recordedBy) }) +
+        (r.correction ? '<div class="w-dt-times">' + wTH("ward.apgar-corrected", "Corrected (version {v}) from {prev}/10: {reason}", { v: esc(r.version), prev: esc(r.correction.previousTotal), reason: esc(r.correction.reason) }, "reason") + "</div>" : "") + "</td></tr>";
+    }).join("");
+    var table = '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.apgar-minute", "Minute") + "</th><th>" + wTH("ward.apgar-total", "Total") + "</th>" +
+      signs.map(function (s) { return "<th>" + esc(s.s) + "</th>"; }).join("") + "<th>" + wTH("ward.apgar-recorded", "Recorded") + "</th></tr></thead><tbody>" + rows + "</tbody></table></div>";
+    var form = '<div class="w-grid">' +
+      "<label class=\"w-f\"><span>" + wTH("ward.apgar-minute", "Minute") + '</span><select id="wApgarMin-' + id + '">' +
+        [1, 5, 10].map(function (n) { return '<option value="' + n + '">' + wTH("ward.apgar-minute-n", "{n} min", { n: n }) + "</option>"; }).join("") + "</select></label>" +
+      signs.map(function (s) {
+        return '<label class="w-f"><span>' + esc(s.n) + '</span><select id="wApgar-' + s.k + "-" + id + '"><option value="">' + wTH("ward.choose", "Choose&hellip;") + "</option>" +
+          [0, 1, 2].map(function (v) { return '<option value="' + v + '">' + v + ": " + esc(s.d[v]) + "</option>"; }).join("") + "</select></label>";
+      }).join("") + "</div>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.apgar-reason", "Correction reason (only to change a minute already recorded)") + '</span><input id="wApgarReason-' + id + '" type="text" autocomplete="off"></label>' +
+      '<p class="w-hint">' + ms("info") + wTH("ward.apgar-help", "Score each sign against the standard descriptors (Apgar 1953; AAP and ACOG). Save each minute when it is scored. The total is added up by the server from the five signs.") + "</p>" +
+      '<button class="w-btn go" data-w-act="apgarsave:' + esc(pid) + '">' + ms("save") + wTH("ward.apgar-save", "Record APGAR") + "</button> " + refresh;
+    return head + table + form + "</div>";
+  }
+  /* On the newborn's own chart (NICU, or a paediatric stay of a baby registered here at birth). */
+  function apgarChart(s) { return !!s && (s.class === "NICU" || (s.class === "PEDIATRICS" && /^opd-pat-newborn-/.test(String(s.patientId || "")))); }
+  function apgarCard(state) {
+    var s = state.sel || {};
+    return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>" + wTH("ward.apgar-title", "APGAR score") + "</h3></div>" + apgarBlock(s.patientId, state, false) + "</div>";
   }
 
   /* PARTOGRAM entry. Writes ordinary Observations, category "labour" - the flowsheet card already on
@@ -3372,10 +4421,104 @@
       "</div></div>";
   }
 
-  /* LINES. A placement log, mirroring surgery's implant card exactly - site, type, when, by. */
+  /* GROWTH. Every z-score, centile and corrected age is the server's (wardsynq/wardsynq-growth.js, the LMS method, against
+   * the CDC 2000 reference or the hospital's own licensed tables); this card only draws them and names the reference.
+   * Weight is the one growth measurement WardSynQ records, so length, height
+   * and head circumference are named as not recorded rather than drawn as empty charts. A refused measurement
+   * shows why, never a number. The table below the chart is the accessible reading of it. */
+  function growthAge(days) {
+    if (days == null) return "";
+    if (days < 61) return wT("ward.growth-age-days", "{n} days", { n: days });
+    if (days < 731) return wT("ward.growth-age-months", "{n} months", { n: Math.round(days / 30.4375 * 10) / 10 });
+    return wT("ward.growth-age-years", "{n} years", { n: Math.round(days / 365.25 * 10) / 10 });
+  }
+  function growthRefusal(r) {
+    var why = {
+      SEX_UNKNOWN: wT("ward.growth-why-sex", "Sex is not recorded as male or female"),
+      DOB_APPROXIMATE: wT("ward.growth-why-dob", "The date of birth is approximate"),
+      AGE_UNKNOWN: wT("ward.growth-why-age", "The age at this measurement is not known"),
+      UNIT_UNKNOWN: wT("ward.growth-why-unit", "The weight's unit is not kg or lb"),
+      BEFORE_TERM: wT("ward.growth-why-before-term2", "Corrected age is before term; the growth reference starts at a term birth"),
+      OUT_OF_RANGE: wT("ward.growth-why-range2", "Outside the growth reference"),
+      VALUE_INVALID: wT("ward.growth-why-value", "Not a usable measurement")
+    }[r && r.code];
+    return esc(why || (r && r.reason));
+  }
+  /* The reference's name: CDC 2000 in the staff language, a hospital's own tables by the name the hospital gave them. */
+  function growthReferenceName(g) {
+    var ref = g.reference || {};
+    return ref.id === "cdc2000" ? wT("ward.growth-ref-cdc2000", "CDC 2000 growth reference") : String(ref.name || "");
+  }
+  function growthChartSvg(g) {
+    var pts = g.measurements.filter(function (m) { return m.result && m.result.ok; });
+    if (!pts.length || !g.lines.length) return "";
+    var W = 600, H = 260, L = 44, B = 28, xs = [], ys = [];
+    g.lines.forEach(function (l) { l.points.forEach(function (p) { xs.push(p[0]); ys.push(p[1]); }); });
+    pts.forEach(function (m) { xs.push(m.plotDays); ys.push(m.valueKg); });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.floor(Math.min.apply(null, ys)), y1 = Math.ceil(Math.max.apply(null, ys));
+    if (x1 === x0) x1 = x0 + 1; if (y1 === y0) y1 = y0 + 1;
+    var X = function (d) { return (L + (d - x0) / (x1 - x0) * (W - L - 30)).toFixed(1); };
+    var Y = function (v) { return (H - B - (v - y0) / (y1 - y0) * (H - B - 10)).toFixed(1); };
+    var lines = g.lines.map(function (l) {
+      if (!l.points.length) return "";
+      var last = l.points[l.points.length - 1];
+      return '<polyline fill="none" stroke="currentColor" stroke-opacity="' + (l.centile === 50 ? "0.7" : "0.3") + '" stroke-width="' + (l.centile === 50 ? 2 : 1) + '" points="' + l.points.map(function (p) { return X(p[0]) + "," + Y(p[1]); }).join(" ") + '"/>' +
+        '<text font-size="11" fill="currentColor" x="' + (Number(X(last[0])) + 4) + '" y="' + (Number(Y(last[1])) + 4) + '">' + esc(l.centile) + "</text>";
+    }).join("");
+    var dots = pts.map(function (m) {
+      return '<circle r="4" fill="currentColor" cx="' + X(m.plotDays) + '" cy="' + Y(m.valueKg) + '"><title>' + esc(when(m.at)) + ": " + esc(m.valueKg) + " " + wTH("ward.growth-kg", "kg") + "</title></circle>";
+    }).join("");
+    var axes = '<line x1="' + L + '" y1="' + (H - B) + '" x2="' + (W - 30) + '" y2="' + (H - B) + '" stroke="currentColor" stroke-opacity="0.3"/>' +
+      '<line x1="' + L + '" y1="10" x2="' + L + '" y2="' + (H - B) + '" stroke="currentColor" stroke-opacity="0.3"/>' +
+      '<text font-size="11" fill="currentColor" x="' + L + '" y="' + (H - 8) + '">' + esc(growthAge(Math.round(x0))) + "</text>" +
+      '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (W - 30) + '" y="' + (H - 8) + '">' + esc(growthAge(Math.round(x1))) + "</text>" +
+      '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (L - 4) + '" y="' + (H - B) + '">' + esc(y0) + "</text>" +
+      '<text font-size="11" fill="currentColor" text-anchor="end" x="' + (L - 4) + '" y="18">' + esc(y1) + " " + wTH("ward.growth-kg", "kg") + "</text>";
+    return '<div style="overflow-x:auto"><svg width="100%" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' +
+      wTA("ward.growth-chart-label2", "Weight for age against the centiles {centiles} of the {reference}. The table below lists every value.", { centiles: g.lines.map(function (l) { return l.centile; }).join(", "), reference: esc(growthReferenceName(g)) }) + '">' + axes + lines + dots + "</svg></div>";
+  }
+  function growthCard(state) {
+    var g = state.growth;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("monitoring") + "<h3>" + (g && g.reference ? wTH("ward.growth-title2", "Growth ({reference})", { reference: esc(growthReferenceName(g)) }, g.reference.id === "cdc2000" ? "" : "reference") : wTH("ward.growth-title3", "Growth")) + "</h3>" +
+      "<button class=\"w-ic\" data-w-act=\"growthload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>";
+    if (g === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.growth-failed", "Growth could not be loaded. Do not read this as no measurements recorded.", null, "", 1) + "</p></div>";
+    if (g == null) return head + "<p class=\"w-empty\">" + wTH("ward.growth-loading", "Loading growth...") + "</p></div>";
+    if (g.off) return head + "<p class=\"w-empty\">" + wTH("ward.growth-off", "The clinical record is not switched on for this hospital, so there are no measurements to chart.") + "</p></div>";
+    var warn = function (html) { return '<p class="w-hint warn">' + ms("warning") + html + "</p>"; };
+    var gd = g.gestationDays;
+    var rows = g.measurements.map(function (m) {
+      var r = m.result || {};
+      var c = r.ok ? (r.centile >= 99.9 ? "&gt;99.9" : r.centile <= 0.1 ? "&lt;0.1" : esc(r.centile)) : "";
+      return "<tr><td>" + esc(when(m.at)) + "</td><td>" + (m.valueKg == null ? "" : esc(m.valueKg)) + "</td><td>" + esc(growthAge(m.chronologicalDays)) + "</td><td>" +
+        (m.corrected ? esc(growthAge(m.plotDays)) : "") + "</td>" +
+        (r.ok ? "<td>" + esc(r.z) + "</td><td>" + c + (r.implausible ? " " + wTH("ward.growth-implausible", "(check the measurement)") : "") + "</td>"
+          : '<td colspan="2">' + growthRefusal(r) + "</td>") + "</tr>";
+    }).join("");
+    return head +
+      (!g.sex ? warn(wTH("ward.growth-no-sex2", "Sex is not recorded as male or female, so no growth centile can be chosen.")) : "") +
+      (g.approxDob ? warn(wTH("ward.growth-approx-dob", "The date of birth was estimated from a stated age, so no centile is worked out.")) : "") +
+      '<p class="w-hint">' + ms("info") + (gd == null
+        ? wTH("ward.growth-ga-unknown", "Gestational age at birth is not recorded, so no age is corrected for prematurity.")
+        : wTH("ward.growth-ga", "Gestational age at birth {w}+{d} weeks, from the mother's recorded due date.", { w: Math.floor(gd / 7), d: gd % 7 }) +
+          (gd < 259 ? " " + wTH("ward.growth-corrected-rule", "Born before 37 weeks: plotted at corrected age (age minus the weeks born early) until 24 months of age.") : "")) + "</p>" +
+      (g.measurements.length ? growthChartSvg(g) +
+        '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.growth-when", "When") + "</th><th>" + wTH("ward.growth-weight-kg", "Weight (kg)") + "</th><th>" +
+        wTH("ward.growth-age", "Age") + "</th><th>" + wTH("ward.growth-corrected-age", "Corrected age") + "</th><th>" + wTH("ward.growth-z", "z-score") + "</th><th>" + wTH("ward.growth-centile", "Centile") + "</th></tr></thead><tbody>" + rows + "</tbody></table></div>"
+        : "<p class=\"w-empty\">" + wTH("ward.growth-no-weights", "No weights recorded. Weights charted with the vitals appear here.") + "</p>") +
+      '<p class="w-hint">' + ms("info") + wTH("ward.growth-not-recorded", "Length, height and head circumference are not recorded in WardSynQ, so only weight for age is charted.") + "</p>" +
+      '<p class="w-dt-times">' + (g.reference && g.reference.id === "cdc2000"
+        ? wTH("ward.growth-source-cdc", "Source: CDC. The 2000 CDC growth charts (National Center for Health Statistics) are in the public domain and available on the CDC website for no charge. Their use here does not imply endorsement by CDC, HHS or the United States Government. Not clinically validated in this build.")
+        : wTH("ward.growth-source-hospital", "This hospital's own growth tables, loaded under its licence on Admin. Not clinically validated in this build.")) + "</p></div>";
+  }
+
+  /* LINES. A placement log, mirroring surgery's implant card exactly - site, type, when, by. The device class (P5) says
+   * which NHSN device-days the line counts towards; a line of any other kind is logged and counted as none. */
+  function lineClassWord(k) {
+    return k === "central-line" ? wTH("ward.line-class-central", "Central line") : k === "urinary-catheter" ? wTH("ward.line-class-urinary", "Urinary catheter") : k === "ventilator" ? wTH("ward.line-class-ventilator", "Ventilator (invasive)") : esc(k);
+  }
   function linesCard(state) {
     var rows = (state.lines || []).map(function (l) {
-      return "<li><b>" + esc(l.type) + "</b><span>" + (l.site ? esc(l.site) + " &middot; " : "") + wTH("ward.placed", "placed {insertedAt}", { insertedAt: when(l.insertedAt) }, "insertedAt") + (l.removedAt ? " &middot; " + wTH("ward.removed", "removed {removedAt}", { removedAt: when(l.removedAt) }, "removedAt") : "") + "</span>" +
+      return "<li><b>" + esc(l.type) + "</b><span>" + (l.deviceClass ? lineClassWord(l.deviceClass) + " &middot; " : "") + (l.site ? esc(l.site) + " &middot; " : "") + wTH("ward.placed", "placed {insertedAt}", { insertedAt: when(l.insertedAt) }, "insertedAt") + (l.removedAt ? " &middot; " + wTH("ward.removed", "removed {removedAt}", { removedAt: when(l.removedAt) }, "removedAt") : "") + "</span>" +
         (!l.removedAt ? '<button class="w-btn tiny warn" data-w-act="lineremove:' + esc(l.id) + '">' + ms("close") + wTH("ward.remove", "Remove") + "</button>" : "") + "</li>";
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("device_hub") + "<h3>" + wTH("ward.lines", "Lines") + "</h3>" +
@@ -3386,6 +4529,8 @@
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.type", "Type") + "</span><input id=\"wLineType\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-uvc-picc", "e.g. UVC, PICC") + "\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.site", "Site") + "</span><input id=\"wLineSite\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.line-counts-as", "Counts for infection rates as") + "</span><select id=\"wLineClass\"><option value=\"\">" + wTH("ward.line-class-none", "None of these") + "</option>" +
+      ["central-line", "urinary-catheter", "ventilator"].map(function (k) { return "<option value=\"" + k + "\">" + lineClassWord(k) + "</option>"; }).join("") + "</select></label>" +
       "</div>" +
       '<button class="w-btn go" data-w-act="linesave">' + ms("add") + wTH("ward.record-line", "Record line") + "</button></div>";
   }
@@ -3610,6 +4755,10 @@
           return "<li><b>" + esc(a.substance) + "</b><span>" + esc(a.reaction || "") + (a.severity ? " &middot; " + esc(severityWord(a.severity)) : "") + "</span></li>";
         }).join("") + "</ul>"
       : "";
+    /* R6-1: null is a read that did not happen. "No contrast reaction is recorded" about a record
+     * nobody could read is the sentence this whole screen exists to prevent. */
+    var allergyUnread = !!(pc && pc.contrastAllergies === null);
+    var renalUnread = !!(pc && pc.renal === null);
 
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
       "<div><b>" + wTH("ward.radiology2", "Radiology") + "</b><small>" + selWho(state) + "</small></div>" +
@@ -3622,13 +4771,16 @@
       (picked ? (
         '<div class="w-card"><div class="w-card-h">' + ms("shield") + "<h3>" + wTH("ward.protocol-context", "Protocol context") + "</h3></div>" +
         (pc ? (
-          (allergyRows ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.a-contrast-reaction-is-recorded-for", "A contrast reaction is recorded for this patient.") + "</p>" + allergyRows
+          (allergyUnread ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-allergy-record-could-not-be-read", "The allergy record could not be read. That is not the same as no contrast reaction being recorded, and this is not a checked protocol.", null, "", 1) + "</p>"
+            : allergyRows ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.a-contrast-reaction-is-recorded-for", "A contrast reaction is recorded for this patient.") + "</p>" + allergyRows
                        : '<p class="w-hint">' + ms("info") + wTH("ward.no-contrast-reaction-is-recorded-that", "No contrast reaction is recorded. That is what the record holds, not a guarantee none happened elsewhere.") + "</p>") +
-          (pc.renal ? "<p><b>" + wTH("ward.latest-creatinine", "Latest creatinine") + "</b>: " + esc(pc.renal.value) + " " + esc(pc.renal.unit || "") + " (" + when(pc.renal.at) + ")</p>" : "<p class=\"w-empty\">" + wTH("ward.no-creatinine-on-record", "No creatinine on record.") + "</p>") +
+          (renalUnread ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-renal-results-could-not-be-read", "The renal results could not be read. Renal function is unknown here because the record did not load, not because there is no creatinine.", null, "", 1) + "</p>"
+            : pc.renal ? "<p><b>" + wTH("ward.latest-creatinine", "Latest creatinine") + "</b>: " + esc(pc.renal.value) + " " + esc(pc.renal.unit || "") + " (" + when(pc.renal.at) + ")</p>" : "<p class=\"w-empty\">" + wTH("ward.no-creatinine-on-record", "No creatinine on record.") + "</p>") +
           '<div class="w-grid">' +
           "<label class=\"w-f\"><span>" + wTH("ward.protocol", "Protocol") + "</span><input id=\"wRadProtocol\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-ct-abdomen-with-contrast", "e.g. CT abdomen with contrast") + "\"></label>" +
           "<label class=\"w-chk\"><input type=\"checkbox\" id=\"wRadContrast\"> " + wTH("ward.contrast-planned", "Contrast planned") + "</label>" +
           "</div>" +
+          ((allergyUnread || renalUnread) ? '<p class="w-hint warn">' + ms("block") + wTH("ward.contrast-cannot-be-protocolled-while-part", "Contrast cannot be protocolled while part of the record cannot be read. Refresh and try again.", null, "", 1) + "</p>" : "") +
           '<button class="w-btn go" data-w-act="radprotocolsave">' + ms("save") + wTH("ward.record-protocol", "Record protocol") + "</button>"
         ) : "<p class=\"w-empty\">" + wTH("ward.loading", "Loading&hellip;") + "</p>") +
         "</div>" +
@@ -3730,6 +4882,9 @@
         "</li>";
     }).join("");
 
+    /* R6-1: q.allergies === null means the allergy read FAILED. An empty list here would read as
+     * "this patient has no allergies" to the pharmacist whose job is that exact check. */
+    var allergiesUnread = !!(q && q.allergies === null);
     var allergyRows = (q && q.allergies || []).map(function (a) {
       return "<li><b>" + esc(a.substance) + "</b>" + (a.severity ? "<span>" + esc(severityWord(a.severity)) + "</span>" : "") + "</li>";
     }).join("");
@@ -3746,7 +4901,8 @@
          * the ward. Returned ones say so and are never returned twice. */
         (d.returnedAt
           ? " <span class=\"w-st\">" + wTH("ward.returned", "returned {returnedAt}", { returnedAt: when(d.returnedAt) }, "returnedAt") + (d.returnReason ? ": " + esc(d.returnReason) : "") + "</span>"
-          : ' <button class="w-btn ghost tiny" data-w-act="dispensereturn:' + esc(d.dispenseId) + '">' + ms("undo") + wTH("ward.returned2", "Returned") + "</button>") +
+          : ' <button class="w-btn ghost tiny" data-w-act="dispensereturn:' + esc(d.dispenseId) + '">' + ms("undo") + wTH("ward.returned2", "Returned") + "</button>" +
+            ' <button class="w-btn ghost tiny" data-w-act="pharmlabel:' + esc(d.dispenseId) + '">' + ms("label") + wTH("ward.print-pharmacy-label", "Print pharmacy label") + "</button>") +
         "</li>";
     }).join("");
 
@@ -3759,7 +4915,8 @@
       "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("warning") + "<h3>" + wTH("ward.allergies", "Allergies", null, "", 1) + "</h3></div>" +
-      (allergyRows ? '<ul class="w-mini">' + allergyRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-allergy-recorded", "No allergy recorded.", null, "", 1) + "</p>") +
+      (allergiesUnread ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-allergy-list-could-not-be-read", "The allergy list could not be read, so this order has not been checked against it. An unreadable allergy list is not an empty one.", null, "", 1) + "</p>"
+        : allergyRows ? '<ul class="w-mini">' + allergyRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-allergy-recorded", "No allergy recorded.", null, "", 1) + "</p>") +
       "</div>" +
 
       (pickedOrder ? (
@@ -3770,7 +4927,12 @@
             var notChecked = String(w.code || "").indexOf("NOT_CHECKED") === 0 || w.code === "NO_RULE_PACK" || w.code === "SAFETY_CHECK_UNAVAILABLE";
             return '<li class="w-st ' + (notChecked ? "due" : "overdue") + '">' + esc(w.code) + "<span>" + esc(w.message || "") + "</span></li>";
           }).join("") + "</ul>" : "") +
-          (!(safety.blocks && safety.blocks.length) && !(safety.warnings && safety.warnings.length) ? "<p class=\"w-empty\">" + wTH("ward.the-safety-engine-reports-nothing-against", "The safety engine reports nothing against this order.") + "</p>" : "")
+          (!(safety.blocks && safety.blocks.length) && !(safety.warnings && safety.warnings.length)
+            /* R6-1: "nothing against this order" is only sayable when the record was read. With the
+             * allergy list unreadable this is an unchecked order, and it says that instead. */
+            ? (allergiesUnread ? '<p class="w-hint warn">' + ms("block") + wTH("ward.not-checked-against-allergies-the-list", "NOT CHECKED against allergies: the list could not be read. Verify only once it loads, or check the allergies another way first.", null, "", 1) + "</p>"
+                               : "<p class=\"w-empty\">" + wTH("ward.the-safety-engine-reports-nothing-against", "The safety engine reports nothing against this order.") + "</p>")
+            : "")
         ) : "<p class=\"w-empty\">" + wTH("ward.loading", "Loading&hellip;") + "</p>") +
         '<p class="w-hint">' + ms("info") + wTH("ward.this-is-decision-support-not-a", "This is decision support, not a block: the pharmacist's own judgement decides the outcome.") + "</p>" +
         /* TASK 8.9: MaiK explains the verdict ABOVE, inside the card that already shows it. There is
@@ -3792,9 +4954,11 @@
         '<div class="w-grid">' +
         "<label class=\"w-f\"><span>" + wTH("ward.quantity", "Quantity") + "</span><input id=\"wPhQty\" type=\"text\" inputmode=\"decimal\" autocomplete=\"off\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wPhUnit\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-tablet-ml", "e.g. tablet, mL") + "\"></label>" +
-        "<label class=\"w-f\"><span>" + wTH("ward.batch4", "Batch") + "</span><input id=\"wPhBatch\" type=\"text\" autocomplete=\"off\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.batch4", "Batch") + "</span><input id=\"wPhBatch\" type=\"text\" autocomplete=\"off\"></label>" + camBtn("wPhBatch") +
         "<label class=\"w-f\"><span>" + wTH("ward.expiry", "Expiry") + "</span><input id=\"wPhExpiry\" type=\"date\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.destination", "Destination") + "</span><input id=\"wPhDest\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-ward-a-cabinet", "e.g. Ward A cabinet") + "\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.controlled-witness", "Witness staff ID (controlled drugs only)") + "</span><input id=\"wPhWitness\" type=\"text\" autocomplete=\"off\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.take-home-at-discharge", "Take-home medicine at discharge") + "</span><input id=\"wPhTakeHome\" type=\"checkbox\"></label>" +
         "</div>" +
         '<button class="w-btn go" data-w-act="phdispense">' + ms("send") + wTH("ward.dispense", "Dispense") + "</button>" +
         (dispenseRows ? '<div class="w-sub"><h4>' + ms("history") + wTH("ward.dispense-history", "Dispense history") + "</h4><ul class=\"w-mini\">" + dispenseRows + "</ul></div>" : "") +
@@ -3824,6 +4988,10 @@
   function inventoryView(state) {
     var inv = state.inventory || {};
     var s = inv.stock;
+    /* The laboratory's reagents and consumables: the same ledger at the one Laboratory location, with an item instead of a
+     * drug, no batch advice (it reads dispenses, which the laboratory cannot) and no reconciliation. */
+    var lab = inv.lab === true;
+    var itemWord = lab ? wTH("ward.lab-stock-item", "Item") : wTH("ward.drug", "Drug");
     var levels = (s && s.levels) || [];
     var expiring = (s && s.expiring) || [];
 
@@ -3840,7 +5008,7 @@
     }).join("");
 
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
-      "<div><b>" + wTH("ward.inventory", "Inventory") + "</b></div>" +
+      "<div><b>" + (lab ? wTH("ward.lab-stock-title", "Reagents and consumables") : wTH("ward.inventory", "Inventory")) + "</b>" + (lab ? "<small>" + wTH("ward.laboratory", "Laboratory") + "</small>" : "") + "</div>" +
       "<button class=\"w-ic\" data-w-act=\"inventoryload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
 
       (s && s.negative && s.negative.length ? '<p class="w-hint warn">' + ms("error") + esc(s.negativeWarning) + "</p>" : "") +
@@ -3860,40 +5028,43 @@
         : expiringRows ? '<ul class="w-mini">' + expiringRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.nothing-expiring-soon", "Nothing expiring soon.") + "</p>") +
       "</div>" +
 
-      '<div class="w-card"><div class="w-card-h">' + ms("low_priority") + "<h3>" + wTH("ward.which-batch-to-use", "Which batch to use") + "</h3></div>" +
+      (lab ? "" : '<div class="w-card"><div class="w-card-h">' + ms("low_priority") + "<h3>" + wTH("ward.which-batch-to-use", "Which batch to use") + "</h3></div>" +
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.drug", "Drug") + "</span><input id=\"wFefoCode\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.quantity", "Quantity") + "</span><input id=\"wFefoQty\" type=\"text\" inputmode=\"decimal\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wFefoUnit\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-tablet", "e.g. tablet") + "\"></label>" +
       "</div>" +
       '<button class="w-btn go" data-w-act="stockfefo">' + ms("search") + wTH("ward.suggest-batches", "Suggest batches") + "</button>" +
-      fefoResultHtml(inv.fefo) + "</div>" +
+      fefoResultHtml(inv.fefo) + "</div>") +
 
       '<div class="w-card"><div class="w-card-h">' + ms("call_received") + "<h3>" + wTH("ward.receipt", "Receipt") + "</h3></div>" +
       '<div class="w-grid">' +
-      "<label class=\"w-f\"><span>" + wTH("ward.drug", "Drug") + "</span><input id=\"wStkCode\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + itemWord + "</span><input id=\"wStkCode\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.quantity", "Quantity") + "</span><input id=\"wStkQty\" type=\"text\" inputmode=\"decimal\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wStkUnit\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-tablet-vial", "e.g. tablet, vial") + "\"></label>" +
-      "<label class=\"w-f\"><span>" + wTH("ward.location", "Location") + "</span><input id=\"wStkLoc\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-main", "e.g. Main") + "\"></label>" +
+      (lab ? "" : "<label class=\"w-f\"><span>" + wTH("ward.location", "Location") + "</span><input id=\"wStkLoc\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-main", "e.g. Main") + "\"></label>") +
       "<label class=\"w-f\"><span>" + wTH("ward.batch4", "Batch") + "</span><input id=\"wStkBatch\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.expiry", "Expiry") + "</span><input id=\"wStkExpiry\" type=\"date\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.received-from", "Received from (supplier)") + "</span><input id=\"wStkFrom\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.invoice-no", "Invoice or consignment note number") + "</span><input id=\"wStkDoc\" type=\"text\" autocomplete=\"off\"></label>" +
       "</div>" +
       '<button class="w-btn go" data-w-act="stockreceive">' + ms("add") + wTH("ward.record-receipt", "Record receipt") + "</button></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("edit") + "<h3>" + wTH("ward.adjustment-wastage", "Adjustment / wastage") + "</h3></div>" +
       '<div class="w-grid">' +
-      "<label class=\"w-f\"><span>" + wTH("ward.drug", "Drug") + "</span><input id=\"wAdjCode\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + itemWord + "</span><input id=\"wAdjCode\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.quantity2", "Quantity (+/-)") + "</span><input id=\"wAdjQty\" type=\"text\" inputmode=\"decimal\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wAdjUnit\" type=\"text\" autocomplete=\"off\"></label>" +
-      "<label class=\"w-f\"><span>" + wTH("ward.location", "Location") + "</span><input id=\"wAdjLoc\" type=\"text\" autocomplete=\"off\"></label>" +
+      (lab ? "" : "<label class=\"w-f\"><span>" + wTH("ward.location", "Location") + "</span><input id=\"wAdjLoc\" type=\"text\" autocomplete=\"off\"></label>") +
       "</div>" +
       "<label class=\"w-f\"><span>" + wTH("ward.reason-required", "Reason (required)") + "</span><input id=\"wAdjReason\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.controlled-witness", "Witness staff ID (controlled drugs only)") + "</span><input id=\"wAdjWitness\" type=\"text\" autocomplete=\"off\"></label>" +
       '<div class="w-actions">' +
       '<button class="w-btn go" data-w-act="stockadjust">' + ms("edit") + wTH("ward.adjust", "Adjust") + "</button>" +
       '<button class="w-btn go" data-w-act="stockwaste">' + ms("delete") + wTH("ward.wastage", "Wastage") + "</button>" +
       "</div></div>" +
 
-      '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>" + wTH("ward.reconciliation2", "Reconciliation") + "</h3></div>" +
+      (lab ? "" : '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>" + wTH("ward.reconciliation2", "Reconciliation") + "</h3></div>" +
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.drug", "Drug") + "</span><input id=\"wRecCode\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wRecUnit\" type=\"text\" autocomplete=\"off\"></label>" +
@@ -3901,8 +5072,9 @@
       "<label class=\"w-f\"><span>" + wTH("ward.counted-quantity", "Counted quantity") + "</span><input id=\"wRecCounted\" type=\"text\" inputmode=\"decimal\" autocomplete=\"off\"></label>" +
       "</div>" +
       "<label class=\"w-f\"><span>" + wTH("ward.note-optional", "Note (optional)") + "</span><input id=\"wRecReason\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.controlled-witness", "Witness staff ID (controlled drugs only)") + "</span><input id=\"wRecWitness\" type=\"text\" autocomplete=\"off\"></label>" +
       '<button class="w-btn go" data-w-act="stockreconcile">' + ms("check") + wTH("ward.reconcile", "Reconcile") + "</button>" +
-      '<p class="w-hint">' + ms("info") + wTH("ward.posts-the-counted-quantity-against-the", "Posts the counted quantity against the derived level as an auditable adjustment naming the expected value and the variance. A matching count writes nothing.") + "</p></div>";
+      '<p class="w-hint">' + ms("info") + wTH("ward.posts-the-counted-quantity-against-the", "Posts the counted quantity against the derived level as an auditable adjustment naming the expected value and the variance. A matching count writes nothing.") + "</p></div>");
   }
 
   /* TASK 3.6: the hospital-wide critical-result queue. Not patient-scoped, unlike criticalsCard on
@@ -4258,7 +5430,8 @@
         (why.length ? ' <span class="w-st due">' + esc(why.join("; ")) + "</span>" : "") + "</div>";
     }).join("");
     return '<li><div class="w-crit-h"><b>' + esc(x.panel || wT("ward.result", "Result")) + "</b></div>" +
-      '<div class="w-crit-m">' + ms("person") + labWho(x.patientId) + " &middot; " + wTH("ward.entered-by", "entered by") + " " + escOr(x.releasedBy) + (x.reportedAt ? " " + when(x.reportedAt) : "") + "</div>" + obs +
+      '<div class="w-crit-m">' + ms("person") + labWho(x.patientId) + " &middot; " + wTH("ward.entered-by", "entered by") + " " + escOr(x.releasedBy) + (x.reportedAt ? " " + when(x.reportedAt) : "") +
+        (x.analyserName ? " &middot; " + wTH("ward.lab-an-measured-on", "measured on {name}", { name: esc(x.analyserName) }, "name") : "") + "</div>" + obs +
       (x.unreadObservations ? '<p class="w-hint warn">' + ms("error") + wTH("ward.value-s-could-not-be-read", "{unreadObservations} value(s) could not be read. Do not verify until they load.", { unreadObservations: esc(x.unreadObservations) }, "unreadObservations", 1) + "</p>" : "") +
       (x.mine ? '<p class="w-hint">' + ms("info") + wTH("ward.you-entered-this-so-somebody-else", "You entered this, so somebody else must verify it.") + "</p>"
         : (x.unreadObservations ? "" : '<button class="w-btn go sm" data-w-act="labverify:' + esc(x.reportId) + '">' + ms("verified") + wTH("ward.verify", "Verify") + "</button>") +
@@ -4273,6 +5446,7 @@
       : n === "results awaiting verification" ? wT("ward.lab-part-to-verify", "results awaiting verification")
       : n === "cultures in progress" ? wT("ward.lab-part-cultures", "cultures in progress")
       : n === "critical results" ? wT("ward.lab-part-criticals", "critical results")
+      : n === "analyser results" ? wT("ward.lab-part-analyser", "analyser results")
       : n === "ward roster" ? wT("ward.lab-part-roster", "ward roster")
       : n === "imaging worklist" ? wT("ward.lab-part-worklist", "imaging worklist")
       : n === "critical findings" ? wT("ward.lab-part-critical-findings", "critical findings")
@@ -4297,6 +5471,9 @@
     var spec = (b.specimens || []).filter(function (s) { return !labIsImaging(s); });
     var uncollected = spec.filter(function (s) { return stateOf(s) === "none" || stateOf(s) === "failed"; });
     var inTransit = spec.filter(function (s) { return stateOf(s) === "collected"; });
+    // A received sample found haemolysed or clotted on the bench can still be rejected before any result.
+    var receivedSpecimen = {};
+    spec.forEach(function (s) { if (stateOf(s) === "received" && s.collection.specimenId) receivedSpecimen[s.serviceRequestId] = s.collection.specimenId; });
     var pri = function (s) { return s.priority === "stat" ? "overdue" : s.priority === "urgent" ? "failed" : ""; };
     var specRow = function (s) {
       return '<li class="' + pri(s) + '"><div class="w-crit-h"><b>' + esc(s.display || s.code) + "</b>" +
@@ -4322,6 +5499,7 @@
       return '<li><div class="w-crit-h"><b>' + esc(p.display || p.code) + "</b></div>" +
         '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div>" +
         (showHemaBio ? '<button class="w-btn ghost sm" data-w-act="labresultopen:' + esc(p.serviceRequestId) + '">' + ms("edit_note") + wTH("ward.enter-result", "Enter result") + "</button>" : "") +
+        (showHemaBio && receivedSpecimen[p.serviceRequestId] ? '<button class="w-btn ghost sm" data-w-act="specreject:' + esc(receivedSpecimen[p.serviceRequestId]) + '">' + ms("block") + wTH("ward.lab-rej-button", "Reject sample") + "</button>" : "") +
         (showMicro ? '<button class="w-btn ghost sm" data-w-act="cultureopen:' + esc(p.serviceRequestId) + '">' + ms("coronavirus") + wTH("ward.culture", "Culture") + "</button>" : "") +
         (showPath ? '<button class="w-btn ghost sm" data-w-act="histoopen:' + esc(p.serviceRequestId) + '">' + ms("description") + wTH("ward.histopathology", "Histopathology") + "</button>" : "") + "</li>";
     };
@@ -4370,6 +5548,9 @@
 
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
       "<div><b>" + wTH("ward.laboratory", "Laboratory") + "</b><small>" + wTH("ward.hospital-wide", "hospital-wide") + "</small></div>" +
+      "<button class=\"w-ic\" data-w-act=\"labqc\" title=\"" + wTA("ward.lab-qc-title", "Quality control") + "\" aria-label=\"" + wTA("ward.lab-qc-title", "Quality control") + "\">" + ms("rule") + "</button>" +
+      "<button class=\"w-ic\" data-w-act=\"labstock\" title=\"" + wTA("ward.lab-stock-title", "Reagents and consumables") + "\" aria-label=\"" + wTA("ward.lab-stock-title", "Reagents and consumables") + "\">" + ms("inventory_2") + "</button>" +
+      "<button class=\"w-ic\" data-w-act=\"labrejections\" title=\"" + wTA("ward.lab-rej-stats", "Rejected samples") + "\" aria-label=\"" + wTA("ward.lab-rej-stats", "Rejected samples") + "\">" + ms("block") + "</button>" +
       "<button class=\"w-ic\" data-w-act=\"labboardload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       deptTabs +
       (b.errors && b.errors.length
@@ -4383,10 +5564,17 @@
           '<div class="w-crit-m">' + ms("colorize") + wTH("ward.collected-by", "collected {at} by {who}", { at: when(sp.collection.at), who: staffWho(sp.collection.by, null) }, "at who") + "</div>" +
           (id
             ? '<button class="w-btn ghost sm" data-w-act="specreceived:' + esc(id) + '">' + ms("check") + wTH("ward.received2", "Received") + "</button>" +
-              '<button class="w-btn ghost sm" data-w-act="specfailed:' + esc(id) + '">' + ms("close") + wTH("ward.failed", "Failed") + "</button>"
+              '<button class="w-btn ghost sm" data-w-act="speclabel:' + esc(sp.serviceRequestId) + '">' + ms("label") + wTH("ward.print-tube-label", "Print tube label") + "</button>" +
+              '<button class="w-btn ghost sm" data-w-act="specfailed:' + esc(id) + '">' + ms("close") + wTH("ward.failed", "Failed") + "</button>" +
+              '<button class="w-btn ghost sm" data-w-act="specreject:' + esc(id) + '">' + ms("block") + wTH("ward.lab-rej-button", "Reject sample") + "</button>"
             : "") + "</li>";
       }).join(""), wT("ward.nothing-in-transit", "Nothing in transit."), "specimens") : "") +
+      /* The tube in the laboratory's hand, scanned or typed: found by its label, and refused on the server if the label is not its own. */
+      (showHemaBio && inTransit.length ? '<div class="w-card w-scanrecv"><div class="w-card-h">' + ms("qr_code_scanner") + "<h3>" + wTH("ward.receive-by-scanning-the-tube", "Receive by scanning the tube") + "</h3></div>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.tube-label", "Label on the tube") + "</span><input id=\"wSpecScan\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.accession-number", "Accession number") + "\"></label>" +
+        camBtn("wSpecScan") + '<button class="w-btn go" data-w-act="specscanreceive">' + ms("check") + wTH("ward.receive-this-tube", "Receive this tube") + "</button></div>" : "") +
       (showHemaBio ? labResultForm(state) : "") +
+      (showHemaBio ? analyserCardsHtml(b) : "") +
       (showHemaBio && ((b.toVerify || []).length || failed["results awaiting verification"]) ? card("verified", wT("ward.awaiting-verification", "Awaiting verification"), (b.toVerify || []).length, (b.toVerify || []).map(labVerifyRow).join(""), "", "results awaiting verification") : "") +
       card("biotech", wT("ward.awaiting-a-result", "Awaiting a result"), pendingLab.length, pendingLab.map(pendRow).join(""), wT("ward.no-tests-awaiting-a-result", "No tests awaiting a result."), "tests awaiting a result") +
       (pendingImg.length ? '<div class="w-card"><div class="w-card-h">' + ms("radiology") + "<h3>" + wTH("ward.imaging-orders", "Imaging orders &middot; {length}", { length: pendingImg.length }, "length") + "</h3></div>" +
@@ -4409,6 +5597,298 @@
           '<div class="w-crit-m">' + ms("person") + labWho(h.patientId) + (h.diagnosis ? " &middot; " + esc(h.diagnosis) : "") + "</div>" +
           (signed ? '<button class="w-btn ghost sm" data-w-act="histoaddendum:' + esc(h.reportId) + '">' + ms("post_add") + wTH("ward.add-addendum", "Add addendum") + "</button>" : "") + "</li>";
       }).join(""), wT("ward.no-histopathology-reports", "No histopathology reports."), "cultures in progress")) : "");
+  }
+
+  /* ANALYSER RESULTS ON THE BENCH (lab-analysers.js). What an analyser sent through the on-premises connector,
+   * matched to the tube it measured, waiting for a technologist to release it as themselves. None of it is on
+   * the chart yet. A code the hospital has not mapped is shown as not mapped and is never released, and a QC
+   * state that could not be read hides Release rather than looking like no block. */
+  function labAnStatusWord(s) {
+    return s === "preliminary" ? wT("ward.lab-an-preliminary", "preliminary") : s === "corrected" ? wT("ward.lab-an-corrected", "corrected") : "";
+  }
+  function analyserRowHtml(r) {
+    var mapped = 0;
+    var lines = (r.results || []).map(function (x) {
+      if (x.testName) mapped++;
+      return "<div>" + (x.testName ? esc(x.testName) : '<span class="w-st due">' + wTH("ward.lab-an-not-mapped", "not mapped: {code}", { code: esc(x.instrumentCode) }, "code") + "</span>") +
+        ": <b>" + esc(x.value) + (x.unit ? " " + esc(x.unit) : "") + "</b>" +
+        (x.referenceRange ? " (" + wTH("ward.range", "range {text})", { text: esc(x.referenceRange) }) : "") +
+        (x.flags ? ' <span class="w-st due">' + esc(x.flags) + "</span>" : "") +
+        (labAnStatusWord(x.status) ? ' <span class="w-st">' + esc(labAnStatusWord(x.status)) + "</span>" : "") + "</div>";
+    }).join("");
+    var blocked = r.qcBlocked || [];
+    var qc = r.qcBlocked === null
+      ? '<p class="w-hint warn">' + ms("error") + wTH("ward.lab-an-qc-unread", "The QC state of this analyser could not be read. Do not release until it loads.", null, "", 1) + "</p>"
+      : blocked.length ? '<p class="w-hint warn">' + ms("rule") + wTH("ward.lab-an-qc-blocked", "QC rejected for {tests}. Record the corrective action on Quality control, or override with a reason.", { tests: esc(blocked.map(function (b) { return b.test; }).join(", ")) }, "tests", 1) + "</p>" : "";
+    return '<li><div class="w-crit-h"><b>' + esc(r.analyserName || r.analyserId) + "</b>" + '<span class="w-crit-v">' + esc(r.specimenId) + "</span></div>" +
+      '<div class="w-crit-m">' + ms("person") + (r.patientId ? labWho(r.patientId) : wTH("ward.lab-an-no-sample", "No sample on record matches this tube.")) + " &middot; " + when(r.observedAt || r.receivedAt) + "</div>" +
+      lines + qc +
+      (r.state === "pending" && r.qcBlocked !== null && mapped ? '<button class="w-btn go sm" data-w-act="analyserrelease:' + esc(r.id) + '">' + ms("send") + wTH("ward.lab-an-release", "Release") + "</button>" : "") +
+      (r.state === "pending" && !mapped ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.lab-an-none-mapped", "None of these codes is mapped to a hospital test, so nothing can be released. An administrator maps them under Integrations.") + "</p>" : "") +
+      '<button class="w-btn ghost sm" data-w-act="analyserdismiss:' + esc(r.id) + '">' + ms("close") + wTH("ward.lab-an-dismiss", "Do not release") + "</button></li>";
+  }
+  function analyserCardsHtml(b) {
+    if (b.failed && b.failed["analyser results"]) {
+      return '<div class="w-card"><div class="w-card-h">' + ms("precision_manufacturing") + "<h3>" + wTH("ward.lab-an-title", "From analysers") + "</h3></div>" +
+        '<p class="w-hint warn">' + ms("error") + wTH("ward.could-not-be-read-do-not", "Could not be read. Do not read this as none.", null, "", 1) + "</p></div>";
+    }
+    var rows = b.analyser || [];
+    var pending = rows.filter(function (r) { return r.state === "pending"; }), unmatched = rows.filter(function (r) { return r.state === "unmatched"; });
+    return '<div class="w-card"><div class="w-card-h">' + ms("precision_manufacturing") + "<h3>" + wTH("ward.lab-an-pending", "From analysers, waiting to be released &middot; {n}", { n: pending.length }, "n") + "</h3></div>" +
+      (pending.length ? '<ul class="w-crits">' + pending.map(analyserRowHtml).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.lab-an-none", "No analyser results waiting.") + "</p>") + "</div>" +
+      (unmatched.length ? '<div class="w-card"><div class="w-card-h">' + ms("help") + "<h3>" + wTH("ward.lab-an-unmatched", "From analysers, not matched to a sample &middot; {n}", { n: unmatched.length }, "n") + "</h3></div>" +
+        '<ul class="w-crits">' + unmatched.map(analyserRowHtml).join("") + "</ul></div>" : "");
+  }
+  function analyserReleaseAct(id, reason) {
+    var row = ((st.labBoard && st.labBoard.analyser) || []).filter(function (x) { return x.id === id; })[0];
+    st.busy = true; paint();
+    return apiPost("/ward/analyser-release", { orgId: st.orgId, inboxId: id, expectedVersion: row ? row.version : undefined, qcOverrideReason: reason || undefined })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.error === "qc_blocked" && !reason) {
+          paint();
+          askReason(wTH("ward.lab-qc-override-q", "A rejected QC run blocks this analyser and test. Why is it safe to release anyway?", null, "", 1),
+            wT("ward.lab-qc-override-need", "An override needs a reason."), wTH("ward.lab-qc-override-ok", "Override and release"),
+            function (why) {
+              if (why.length < 10) { st.err = wT("ward.lab-qc-override-short", "Say more: an override reason is at least 10 characters."); return; }
+              return analyserReleaseAct(id, why);
+            }, { danger: true, icon: "warning" });
+          return;
+        }
+        settle(r, null);
+        /* Whether the result was checked against the critical limits is said on every release, also when the release
+         * landed but the bench row could not be marked. */
+        var crit = r && r.criticalCheck;
+        var critMsg = crit && !crit.checked ? wT("ward.result-saved-but-it-could-not", "Result saved, but it could NOT be checked against the critical limits. Review it for critical values now.")
+          : crit && crit.opened ? (crit.opened === 1 ? wT("ward.critical-value-in-this-result-the-one", "{opened} critical value in this result. The critical-result alert has been opened.", { opened: crit.opened }) : wT("ward.critical-value-in-this-result-the-many", "{opened} critical values in this result. The critical-result alert has been opened.", { opened: crit.opened })) : "";
+        if (r && r.ok) {
+          st.err = critMsg;
+          st.note = r.awaitingVerification ? wT("ward.on-the-chart-as-preliminary-another", "On the chart as preliminary. Another member of the laboratory must verify it.") : wT("ward.result-released", "Result released.");
+          loadLabBoard(); return;
+        }
+        // Released to the chart, but the bench row was not marked: said plainly so nobody releases it twice.
+        if (r && r.released) { st.err = wT("ward.lab-an-released-unmarked", "The result was released to the chart, but this analyser row could not be marked as done and may still be listed. Do not release it again.") + (critMsg ? " " + critMsg : ""); loadLabBoard(); return; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.lab-an-release-unknown", "No response from the server. The result may or may not have been released; refresh the board before trying again."); paint(); });
+  }
+  function analyserDismissAct(id) {
+    var row = ((st.labBoard && st.labBoard.analyser) || []).filter(function (x) { return x.id === id; })[0];
+    askReason(wTH("ward.lab-an-dismiss-q", "Why is this result not being released (rerun, sample rejected, not our specimen)?", null, "", 1),
+      wT("ward.lab-an-dismiss-need", "Say why this result is not being released."), wTH("ward.lab-an-dismiss", "Do not release"),
+      function (why) {
+        st.busy = true; paint();
+        return apiPost("/ward/analyser-dismiss", { orgId: st.orgId, inboxId: id, reason: why, expectedVersion: row ? row.version : undefined })
+          .then(function (r) { if (settle(r, wT("ward.lab-an-dismissed", "Taken off the bench. Nothing was released."))) loadLabBoard(); else paint(); })
+          .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+      });
+  }
+
+  /* SAMPLE REJECTION with a coded reason (specimen.js). The order goes back to needing a sample, which is the
+   * prompt to recollect, and the reason is counted by month and ward. */
+  function labRejectionWord(code) {
+    return code === "haemolysed" ? wT("ward.lab-rej-haemolysed", "Haemolysed")
+      : code === "clotted" ? wT("ward.lab-rej-clotted", "Clotted")
+      : code === "insufficient" ? wT("ward.lab-rej-insufficient", "Insufficient sample")
+      : code === "mislabelled" ? wT("ward.lab-rej-mislabelled", "Mislabelled")
+      : code === "wrong-container" ? wT("ward.lab-rej-wrong-container", "Wrong container") : code;
+  }
+  var LAB_REJECTION_CODES = ["haemolysed", "clotted", "insufficient", "mislabelled", "wrong-container"];
+  function specimenRejectAct(specimenId) {
+    if (!specimenId) return;
+    askFor({ title: wTH("ward.lab-rej-title", "Reject this sample"), icon: "block", ok: wTH("ward.lab-rej-ok", "Reject and ask for a new sample"), danger: true,
+      fields: [{ key: "code", type: "select", label: wTH("ward.lab-rej-reason", "Reason"), required: wT("ward.lab-rej-pick", "Pick the reason the sample was rejected."),
+        options: [["", wTH("ward.choose", "Choose&hellip;")]].concat(LAB_REJECTION_CODES.map(function (c) { return [c, esc(labRejectionWord(c))]; })) }] },
+      function (v) {
+        st.busy = true; paint();
+        return apiPost("/ward/specimen-outcome", { orgId: st.orgId, specimenId: specimenId, state: "failed", rejectionCode: v.code })
+          .then(function (r) { if (settle(r, wT("ward.lab-rej-done", "Rejected. The ward sees this order as needing a new sample."))) loadLabBoard(); else paint(); })
+          .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+      });
+  }
+  function labRejectionsOpen() {
+    st.view = "labrejections"; st.labRej = { month: (st.labRej && st.labRej.month) || new Date().toISOString().slice(0, 7), data: null }; paint(); loadLabRejections();
+  }
+  function loadLabRejections() {
+    var m = val("wRejMonth") || st.labRej.month;
+    st.labRej = { month: m, data: null }; paint();
+    return apiGet("/ward/specimen-rejections?orgId=" + encodeURIComponent(st.orgId) + "&month=" + encodeURIComponent(m))
+      .then(function (r) { st.labRej.data = r && r.ok ? r : { failed: true, detail: r && (r.detail || r.message) }; paint(); })
+      .catch(function () { st.labRej.data = { failed: true }; paint(); });
+  }
+  function labRejectionsView(state) {
+    var R = state.labRej || {}, d = R.data;
+    var head = "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
+      "<div><b>" + wTH("ward.lab-rej-stats", "Rejected samples") + "</b><small>" + wTH("ward.lab-rej-by", "by reason and ward") + "</small></div></div>" +
+      '<div class="w-card"><div class="w-grid"><label class="w-f"><span>' + wTH("ward.lab-rej-month", "Month") + '</span><input id="wRejMonth" type="month" value="' + esc(R.month || "") + '"></label></div>' +
+      '<button class="w-btn go" data-w-act="labrejload">' + ms("search") + wTH("ward.lab-rej-show", "Show") + "</button></div>";
+    if (!d) return head + '<p class="w-empty">' + wTH("ward.loading4", "Loading...") + "</p>";
+    if (d.failed) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.lab-rej-failed", "The rejection counts could not be read. Do not read this as none.", null, "", 1) + "</p>";
+    var codes = LAB_REJECTION_CODES;
+    var rows = (d.byWard || []).map(function (w) {
+      return "<tr><td>" + (w.ward ? esc(w.ward) : wTH("ward.lab-rej-no-ward", "Ward not known")) + "</td>" + codes.map(function (c) { return "<td>" + esc((w.byReason && w.byReason[c]) || 0) + "</td>"; }).join("") + "<td><b>" + esc(w.total) + "</b></td></tr>";
+    }).join("");
+    return head + (d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
+      (d.wardUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.lab-rej-ward-unread", "The ward of {n} rejected sample(s) could not be read; they are counted under Ward not known.", { n: esc(d.wardUnreadable) }, "n") + "</p>" : "") +
+      '<div class="w-card"><div class="w-card-h">' + ms("block") + "<h3>" + wTH("ward.lab-rej-summary", "{rejected} rejected of {collected} collected in {month}", { rejected: esc(d.rejected), collected: esc(d.collected), month: esc(d.month) }, "month") + "</h3></div>" +
+      (d.rejected ? '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.lab-rej-ward", "Ward") + "</th>" + codes.map(function (c) { return "<th>" + esc(labRejectionWord(c)) + "</th>"; }).join("") + "<th>" + wTH("ward.lab-rej-total", "Total") + "</th></tr></thead><tbody>" + rows +
+        "<tr><td><b>" + wTH("ward.lab-rej-total", "Total") + "</b></td>" + codes.map(function (c) { return "<td><b>" + esc((d.byReason && d.byReason[c]) || 0) + "</b></td>"; }).join("") + "<td><b>" + esc(d.rejected) + "</b></td></tr></tbody></table></div>"
+        : '<p class="w-empty">' + wTH("ward.lab-rej-none", "No samples were rejected this month.") + "</p>") + "</div>";
+  }
+
+  /* QUALITY CONTROL (lab-qc.js). The Westgard rules are the server's: every value here is what the server
+   * stored when the run was written. The Levey-Jennings chart is drawn in SD units against each lot's own
+   * target, one chart per control level, so lots and levels of one test read on one scale. */
+  function ljChartSvg(runs, label) {
+    var W = 600, Hh = 190, padL = 34, padR = 8, padT = 8, padB = 18;
+    var y = function (z) { var c = Math.max(-4, Math.min(4, z)); return padT + (4 - c) / 8 * (Hh - padT - padB); };
+    var n = runs.length, x = function (i) { return padL + (n <= 1 ? (W - padL - padR) / 2 : i * (W - padL - padR) / (n - 1)); };
+    var COLOR = { accepted: "currentColor", warning: "#b45309", rejected: "#b91c1c" };
+    var line = function (z) {
+      var a = Math.abs(z), stroke = a === 3 ? "#b91c1c" : a === 2 ? "#b45309" : "currentColor";
+      return '<line x1="' + padL + '" x2="' + (W - padR) + '" y1="' + y(z) + '" y2="' + y(z) + '" stroke="' + stroke + '" stroke-opacity="' + (a >= 2 ? 0.85 : z === 0 ? 0.6 : 0.25) + '"' + (a === 2 ? ' stroke-dasharray="4 3"' : "") + "></line>" +
+        '<text x="2" y="' + (y(z) + 4) + '" font-size="10" fill="currentColor" fill-opacity="0.75">' + (z === 0 ? wTH("ward.lab-qc-mean", "mean") : (z > 0 ? "+" : "") + z + "SD") + "</text>";
+    };
+    var path = runs.map(function (r, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(r.z).toFixed(1); }).join(" ");
+    return '<svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + wTA("ward.lab-qc-chart-label", "Levey-Jennings chart, {label}", { label: esc(label) }) + '" style="width:100%;max-width:640px;height:auto">' +
+      [3, 2, 1, 0, -1, -2, -3].map(line).join("") +
+      (n ? '<path d="' + path + '" fill="none" stroke="currentColor" stroke-opacity="0.5"></path>' : "") +
+      runs.map(function (r, i) {
+        var s = (r.evaluation && r.evaluation.status) || "accepted";
+        return '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(r.z).toFixed(1) + '" r="' + (s === "rejected" ? 5 : 3.5) + '" fill="' + (COLOR[s] || COLOR.accepted) + '"></circle>';
+      }).join("") + "</svg>";
+  }
+  function labQcStatusWord(s) {
+    return s === "rejected" ? wT("ward.lab-qc-rejected", "rejected") : s === "warning" ? wT("ward.lab-qc-warning", "warning") : wT("ward.lab-qc-accepted", "accepted");
+  }
+  function labQcOpen() {
+    st.view = "labqc"; st.labQc = null; st.labQcSel = st.labQcSel || {}; paint(); loadLabQc();
+  }
+  function loadLabQc() {
+    return apiGet("/ward/lab-qc?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.labQc = r && r.ok ? r : { failed: true }; paint(); })
+      .catch(function () { st.labQc = { failed: true }; paint(); });
+  }
+  function labQcView(state) {
+    var head = "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
+      "<div><b>" + wTH("ward.lab-qc-title", "Quality control") + "</b><small>" + wTH("ward.lab-qc-sub", "Westgard rules, evaluated by the server") + "</small></div>" +
+      "<button class=\"w-ic\" data-w-act=\"labqcload\" title=\"" + wTA("ward.refresh", "Refresh") + "\" aria-label=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>";
+    var q = state.labQc;
+    if (!q) return head + '<p class="w-empty">' + wTH("ward.lab-qc-loading", "Loading quality control...") + "</p>";
+    if (q.failed) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.lab-qc-failed", "Quality control could not be read. Do not read this as no QC problems.", null, "", 1) + "</p>";
+    var sel = state.labQcSel || {}, analysers = q.analysers || [], materials = q.materials || [];
+    var anName = function (id) { var a = analysers.filter(function (x) { return x.id === id; })[0]; return a ? a.name : id; };
+    var an = sel.analyserId || (analysers[0] && analysers[0].id) || "";
+    var tests = [];
+    (analysers.filter(function (a) { return a.id === an; })[0] || { tests: [] }).tests.forEach(function (t) { if (tests.indexOf(t) < 0) tests.push(t); });
+    materials.forEach(function (m) { if (!m.analyserId || m.analyserId === an) (m.targets || []).forEach(function (t) { if (tests.indexOf(t.test) < 0) tests.push(t.test); }); });
+    var test = sel.test && tests.indexOf(sel.test) >= 0 ? sel.test : (tests[0] || "");
+    var lc = function (s) { return String(s || "").toLowerCase(); };
+    var runs = (q.runs || []).filter(function (r) { return r.analyserId === an && lc(r.test) === lc(test); }).slice().reverse();
+    var levels = [];
+    runs.forEach(function (r) { if (levels.indexOf(r.level) < 0) levels.push(r.level); });
+    var opt = function (v, label, cur) { return '<option value="' + esc(v) + '"' + (v === cur ? " selected" : "") + ">" + esc(label) + "</option>"; };
+
+    var blocks = (q.blocks || []).map(function (b) {
+      return '<li class="lvl-overdue"><div class="w-crit-h"><b>' + esc(anName(b.analyserId)) + " &middot; " + esc(b.test) + '</b><span class="w-st overdue">' + esc((b.rules || []).join(", ")) + "</span></div>" +
+        '<div class="w-crit-m">' + wTH("ward.lab-qc-blocked-since", "Patient results held since {at}", { at: when(b.recordedAt) }, "at") + "</div>" +
+        '<button class="w-btn go sm" data-w-act="labqcaction:' + esc(b.analyserId + "|" + b.test) + '">' + ms("build") + wTH("ward.lab-qc-action", "Record corrective action") + "</button></li>";
+    }).join("");
+    var charts = levels.map(function (lv) {
+      var pts = runs.filter(function (r) { return r.level === lv; }).slice(-40);
+      return "<h4>" + wTH("ward.lab-qc-level", "Level {level}", { level: esc(lv) }, "level") + "</h4>" + ljChartSvg(pts, anName(an) + ", " + test + ", " + lv);
+    }).join("");
+    var table = runs.slice(-30).reverse().map(function (r) {
+      var ev = r.evaluation || {};
+      return "<tr><td>" + when(r.at) + "</td><td>" + esc(r.level) + "</td><td>" + esc(r.lot) + "</td><td><b>" + esc(r.value) + "</b>" + (r.unit ? " " + esc(r.unit) : "") + "</td><td>" + esc(r.z) + "</td>" +
+        '<td><span class="w-st ' + (ev.status === "rejected" ? "overdue" : ev.status === "warning" ? "due" : "") + '">' + esc(labQcStatusWord(ev.status)) + "</span> " + esc((ev.rules || []).join(", ")) + "</td>" +
+        "<td>" + (r.source === "connector" ? wTH("ward.lab-qc-from-analyser", "analyser") : wTH("ward.lab-qc-typed", "typed")) + "</td></tr>";
+    }).join("");
+    var form = state.labQcForm || {};
+    var active = materials.filter(function (m) { return m.active !== false; });
+    var mat = active.filter(function (m) { return m.id === form.materialId; })[0] || active[0] || null;
+
+    return head + (q.truncatedWarning ? '<p class="w-hint warn">' + ms("warning") + esc(q.truncatedWarning) + "</p>" : "") +
+      '<div class="w-card"><div class="w-card-h">' + ms("rule") + "<h3>" + wTH("ward.lab-qc-blocks", "Held by a rejected QC run &middot; {n}", { n: (q.blocks || []).length }, "n") + "</h3></div>" +
+      (blocks ? '<ul class="w-crits">' + blocks + "</ul>" : '<p class="w-empty">' + wTH("ward.lab-qc-no-blocks", "No analyser and test is held.") + "</p>") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("show_chart") + "<h3>" + wTH("ward.lab-qc-lj", "Levey-Jennings") + "</h3></div>" +
+      (analysers.length ? '<div class="w-grid"><label class="w-f"><span>' + wTH("ward.lab-qc-analyser", "Analyser") + '</span><select id="wQcAn" data-w-act="labqcsel">' + analysers.map(function (a) { return opt(a.id, a.name, an); }).join("") + "</select></label>" +
+        '<label class="w-f"><span>' + wTH("ward.lab-qc-test", "Test") + '</span><select id="wQcTest" data-w-act="labqcsel">' + tests.map(function (t) { return opt(t, t, test); }).join("") + "</select></label></div>" +
+        (runs.length ? charts + '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.lab-qc-when", "When") + "</th><th>" + wTH("ward.lab-qc-level-col", "Level") + "</th><th>" + wTH("ward.lab-qc-lot", "Lot") + "</th><th>" + wTH("ward.lab-qc-value", "Value") + "</th><th>" + wTH("ward.lab-qc-sd", "SD from mean") + "</th><th>" + wTH("ward.lab-qc-result", "Result") + "</th><th>" + wTH("ward.lab-qc-source", "Source") + "</th></tr></thead><tbody>" + table + "</tbody></table></div>"
+          : '<p class="w-empty">' + wTH("ward.lab-qc-no-runs", "No QC results for this analyser and test yet.") + "</p>")
+        : '<p class="w-empty">' + wTH("ward.lab-qc-no-analysers", "No analyser is registered. An administrator adds them under Integrations.") + "</p>") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("science") + "<h3>" + wTH("ward.lab-qc-record", "Record a QC result") + "</h3></div>" +
+      (active.length && analysers.length ? '<div class="w-grid">' +
+        '<label class="w-f"><span>' + wTH("ward.lab-qc-lot-level", "Control lot") + '</span><select id="wQcRunMat" data-w-act="labqcformmat">' + active.map(function (m) { return opt(m.id, m.name + " " + m.lot + " / " + m.level, mat ? mat.id : ""); }).join("") + "</select></label>" +
+        '<label class="w-f"><span>' + wTH("ward.lab-qc-analyser", "Analyser") + '</span><select id="wQcRunAn">' + analysers.map(function (a) { return opt(a.id, a.name, (mat && mat.analyserId) || an); }).join("") + "</select></label>" +
+        '<label class="w-f"><span>' + wTH("ward.lab-qc-test", "Test") + '</span><select id="wQcRunTest">' + ((mat && mat.targets) || []).map(function (t) { return opt(t.test, t.test, test); }).join("") + "</select></label>" +
+        '<label class="w-f"><span>' + wTH("ward.lab-qc-value", "Value") + '</span><input id="wQcRunValue" type="text" inputmode="decimal" autocomplete="off"></label></div>' +
+        '<button class="w-btn go" data-w-act="labqcrun">' + ms("add") + wTH("ward.lab-qc-record-btn", "Record and evaluate") + "</button>"
+        : '<p class="w-empty">' + wTH("ward.lab-qc-need-lot", "Add a control lot below before recording QC results.") + "</p>") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("inventory") + "<h3>" + wTH("ward.lab-qc-lots", "Control lots &middot; {n}", { n: materials.length }, "n") + "</h3></div>" +
+      (materials.length ? '<ul class="w-mini">' + materials.map(function (m) {
+        return "<li><b>" + esc(m.name) + " " + esc(m.lot) + " / " + esc(m.level) + "</b><span>" + wTH("ward.lab-qc-lot-line", "expires {expiry} &middot; {n} test(s)", { expiry: esc(m.expiry), n: esc((m.targets || []).length) }, "expiry") +
+          (m.sampleId ? " &middot; " + wTH("ward.lab-qc-sample-id", "sample id {id}", { id: esc(m.sampleId) }, "id") : "") + (m.active === false ? ' <span class="w-st">' + wTH("ward.lab-qc-inactive", "not in use") + "</span>" : "") + "</span></li>";
+      }).join("") + "</ul>" : "") +
+      "<h4>" + wTH("ward.lab-qc-add-lot", "Add or update a control lot") + "</h4>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-material-name", "Control material") + '</span><input id="wQcmName" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-lot", "Lot") + '</span><input id="wQcmLot" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-level-col", "Level") + '</span><input id="wQcmLevel" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.expiry", "Expiry") + '</span><input id="wQcmExpiry" type="date"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-sample-id-label", "Sample id the analyser reports (optional)") + '</span><input id="wQcmSample" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-analyser", "Analyser") + '</span><select id="wQcmAn">' + opt("", wT("ward.lab-qc-any-analyser", "Any analyser"), "") + analysers.map(function (a) { return opt(a.id, a.name, ""); }).join("") + "</select></label></div>" +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-targets", "Targets, one per line: test | mean | SD | unit") + '</span><textarea id="wQcmTargets" rows="4" placeholder="Potassium | 4.0 | 0.1 | mmol/L"></textarea></label>' +
+      '<button class="w-btn go" data-w-act="labqcmaterial">' + ms("save") + wTH("ward.lab-qc-save-lot", "Save control lot") + "</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("gpp_maybe") + "<h3>" + wTH("ward.lab-qc-overrides", "Overrides &middot; {n}", { n: (q.overrides || []).length }, "n") + "</h3></div>" +
+      ((q.overrides || []).length ? '<ul class="w-mini">' + q.overrides.map(function (o) {
+        return "<li><b>" + esc(anName(o.analyserId)) + " &middot; " + esc((o.tests || []).join(", ")) + "</b><span>" + when(o.at) + " &middot; " + staffWho(o.by, null) + " &middot; " + esc(o.reason) + "</span></li>";
+      }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.lab-qc-no-overrides", "No QC block has been overridden.") + "</p>") +
+      ((q.actions || []).length ? "<h4>" + wTH("ward.lab-qc-actions", "Corrective actions") + '</h4><ul class="w-mini">' + q.actions.slice(0, 20).map(function (a) {
+        return "<li><b>" + esc(anName(a.analyserId)) + " &middot; " + esc(a.test) + "</b><span>" + when(a.recordedAt) + " &middot; " + staffWho(a.by, null) + " &middot; " + esc(a.action) + "</span></li>";
+      }).join("") + "</ul>" : "") + "</div>";
+  }
+  function labQcRunSave() {
+    var materialId = val("wQcRunMat"), analyserId = val("wQcRunAn"), test = val("wQcRunTest"), value = val("wQcRunValue");
+    if (!materialId || !analyserId || !test || value === "") { st.err = wT("ward.lab-qc-run-need", "Choose the lot, analyser and test, and enter the value."); paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/lab-qc-run", { orgId: st.orgId, materialId: materialId, analyserId: analyserId, test: test, value: value })
+      .then(function (r) {
+        var ev = r && r.ok && r.run && r.run.evaluation;
+        var msg = !ev ? null : ev.status === "rejected" ? wT("ward.lab-qc-run-rejected", "Recorded. QC REJECTED ({rules}): patient results for this analyser and test are held until a corrective action is recorded.", { rules: (ev.rules || []).join(", ") })
+          : ev.status === "warning" ? wT("ward.lab-qc-run-warning", "Recorded with a 1-2s warning. Check the other rules and the trend before releasing.") : wT("ward.lab-qc-run-accepted", "Recorded. Within the rules.");
+        if (settle(r, ev && ev.status !== "rejected" ? msg : null)) { if (ev && ev.status === "rejected") st.err = msg; st.labQcSel = { analyserId: analyserId, test: test }; loadLabQc(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+  }
+  function labQcMaterialSave() {
+    var targets = val("wQcmTargets").split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean).map(function (l) {
+      var p = l.split("|").map(function (x) { return x.trim(); });
+      return { test: p[0] || "", mean: p[1] || "", sd: p[2] || "", unit: p[3] || "" };
+    });
+    st.busy = true; paint();
+    apiPost("/ward/lab-qc-material", { orgId: st.orgId, material: { name: val("wQcmName"), lot: val("wQcmLot"), level: val("wQcmLevel"), expiry: val("wQcmExpiry"), sampleId: val("wQcmSample"), analyserId: val("wQcmAn"), targets: targets } })
+      .then(function (r) { if (settle(r, wT("ward.lab-qc-lot-saved", "Control lot saved."))) loadLabQc(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+  }
+  function labQcActionAct(arg) {
+    var i = arg.indexOf("|"), analyserId = arg.slice(0, i), test = arg.slice(i + 1);
+    askReason(wTH("ward.lab-qc-action-q", "What was done (recalibration, new reagent lot, maintenance) and what did the repeat QC show?", null, "", 1),
+      wT("ward.lab-qc-action-need", "Describe the corrective action."), wTH("ward.lab-qc-action", "Record corrective action"),
+      function (action) {
+        st.busy = true; paint();
+        return apiPost("/ward/lab-qc-action", { orgId: st.orgId, analyserId: analyserId, test: test, action: action })
+          .then(function (r) { if (settle(r, wT("ward.lab-qc-action-done", "Corrective action recorded. Patient results for this analyser and test can be released again."))) loadLabQc(); else paint(); })
+          .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+      });
+  }
+  function labStockOpen() {
+    st.view = "inventory"; st.inventory = { lab: true }; paint(); loadInventory();
   }
 
   /* MICROBIOLOGY ENTRY (P1.9). One form per stage update; every save is a new version of the same
@@ -4815,7 +6295,7 @@
   function loadLabBoard() {
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId);
-    var out = { specimens: [], pending: [], criticals: [], toVerify: [], cultures: [], histopathology: [], errors: [], failed: {} };
+    var out = { specimens: [], pending: [], criticals: [], toVerify: [], cultures: [], histopathology: [], analyser: [], errors: [], failed: {} };
     var fail = function (name) { out.errors.push(name); out.failed[name] = true; };
     var read = function (name, path, fn) {
       return apiGet(path).then(function (r) {
@@ -4826,6 +6306,7 @@
       read("specimens", "/ward/collections?" + q + "&scope=hospital", function (r) { out.specimens = r.requests || []; }),
       read("tests awaiting a result", "/ward/pending-tests?" + q + "&scope=hospital", function (r) { out.pending = r.pending || []; }),
       read("results awaiting verification", "/ward/results-to-verify?" + q, function (r) { out.toVerify = r.results || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
+      read("analyser results", "/ward/analyser-inbox?" + q, function (r) { out.analyser = r.rows || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
       read("cultures in progress", "/ward/cultures-in-progress?" + q, function (r) { out.cultures = r.cultures || []; out.histopathology = r.histopathology || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
       read("critical results", "/ward/criticals?" + q + "&names=1", function (r) {
         // The laboratory's own loops. A radiology report id starts wsq-rad-; a lab one does not.
@@ -4851,6 +6332,9 @@
         .then(function (r) {
           if (r && r.ok) {
             out.requested = (r.worklist || []).map(radWorklistRow).filter(function (s) { return !reportedIds[s.orderId]; });
+            /* PCPNDT (legal review B.4.1): the server flags an obstetric ultrasound whose Form F is missing or incomplete. */
+            var flags = {}; (r.pcpndt || []).forEach(function (f) { flags[f.orderId] = f; });
+            out.requested.forEach(function (s) { s.formF = flags[s.orderId] || null; });
             (r.warnings || []).forEach(function (w) { out.errors.push(w); });
           } else out.errors.push("imaging worklist");
         })
@@ -4926,6 +6410,10 @@
         '<div class="w-crit-m">' + esc(s.procedure || wT("ward.imaging-study", "Imaging study")) +
         (s.modality ? " &middot; " + esc(s.modality) : " &middot; " + wTH("ward.modality-not-mapped", "modality not mapped")) +
         (s.orderedAt ? " &middot; " + wTH("ward.waiting", "waiting") + " " + radWaitLabel(s.orderedAt) : "") + "</div>" +
+        (s.formF ? '<p class="w-hint warn">' + ms("gavel") + (s.formF.state === "no-form-f" ? wTH("ward.pcpndt-no-form-f", "Obstetric ultrasound: no PCPNDT Form F for this request. Record the woman's declaration before the scan (rule 10(1A)).")
+          : s.formF.state === "no-declaration" ? wTH("ward.pcpndt-no-declaration", "Obstetric ultrasound: Form F has no declaration by the woman yet. It is taken before the scan (rule 10(1A)).")
+          : s.formF.state === "unreadable" ? wTH("ward.pcpndt-formf-unreadable", "Obstetric ultrasound: Form F could not be checked. Do not read this as complete.")
+          : wTH("ward.pcpndt-formf-incomplete", "Obstetric ultrasound: Form F is incomplete ({list}). An incomplete Form F is a presumed contravention (Act s.4(3)).", { list: esc((s.formF.missing || []).join(", ")) }, "list")) + "</p>" : "") +
         '<button class="w-btn tiny go" data-w-act="radboardpick:' + esc(s.orderId) + '">' + ms("edit_note") + wTH("ward.file-report", "File report") + "</button>" +
       "</li>";
     }).join("");
@@ -5047,15 +6535,39 @@
 
       '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>" + wTH("ward.beds", "Beds") + "</h3></div>" +
       '<div class="w-actions">' + fc("occupied", f.beds.occupied, "occupied") + fc("unplaced", f.beds.unplacedPatients, wT("ward.admitted-with-no-bed-yet", "admitted with no bed yet")) + "</div>" +
-      "<p class=\"w-hint\">" + wTH("ward.available-reserved-blocked-cleaning-maintenance", "Available {available} &middot; Reserved {reserved} &middot; Blocked {blocked} &middot; Cleaning {cleaning} &middot; Maintenance {maintenance}", { available: esc(f.beds.states.available), reserved: esc(f.beds.states.reserved), blocked: esc(f.beds.states.blocked), cleaning: esc(f.beds.states.cleaning), maintenance: esc(f.beds.states.maintenance) }, "available reserved blocked cleaning maintenance") + "</p></div>" +
+      // R5-1: a bed master that could not be read is said, never drawn as a histogram of zeros.
+      (f.beds.states
+        ? "<p class=\"w-hint\">" + wTH("ward.available-reserved-blocked-cleaning-maintenance", "Available {available} &middot; Reserved {reserved} &middot; Blocked {blocked} &middot; Cleaning {cleaning} &middot; Maintenance {maintenance}", { available: esc(f.beds.states.available), reserved: esc(f.beds.states.reserved), blocked: esc(f.beds.states.blocked), cleaning: esc(f.beds.states.cleaning), maintenance: esc(f.beds.states.maintenance) }, "available reserved blocked cleaning maintenance") + "</p>"
+        : '<p class="w-hint warn">' + ms("warning") + wTH("ward.flow-bed-states-unread", "The bed list could not be read, so how many beds are blocked or in cleaning is not known. Do not read this as none.", null, "", 1) + "</p>") + "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("schedule") + "<h3>" + wTH("ward.admissions-pending", "Admissions pending") + "</h3></div>" +
       "<p>" + wTH("ward.waiting-longest-wait-h", "{waiting} waiting &middot; longest wait {longestWaitHours} h", { waiting: esc(f.admissionsPending.waiting), longestWaitHours: esc(f.admissionsPending.longestWaitHours) }, "waiting longestWaitHours") + "</p></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("task_alt") + "<h3>" + wTH("ward.discharge", "Discharge") + "</h3></div>" +
       '<div class="w-actions">' + fc("dischargeCandidates", f.dischargeCandidates, f.dischargeCandidates === 1 ? wT("ward.stay-with-nothing-outstanding-right-now", "stay with nothing outstanding right now") : wT("ward.stays-with-nothing-outstanding-right-now", "stays with nothing outstanding right now")) + "</div>" +
-      "<p class=\"w-hint\">" + wTH("ward.this-is-a-live-fact-not", "This is a live fact, not a predicted discharge date - no expected-discharge field exists in this record.") + "</p>" +
+      // R5-1: past the read ceiling nothing is counted, and the screen says which read ran short.
+      ((f.openItemsUnknown || []).length
+        ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.flow-open-items-unknown", "Open items could not be counted for any stay: there are more records than one read can hold ({types}). Nothing here means a patient is ready to leave.", { types: esc(f.openItemsUnknown.join(", ")) }, "types", 1) + "</p>"
+        : "<p class=\"w-hint\">" + wTH("ward.flow-candidates-fact", "Nothing outstanding right now is a live fact, not a prediction.") + "</p>") +
+      '<div class="w-actions"><button class="w-btn ghost tiny" data-w-act="dcboard">' + ms("timer") + wTH("ward.dc-open-board", "Open Discharge progress") + "</button>" +
+      '<button class="w-btn ghost tiny" data-w-act="tcentre">' + ms("call") + wTH("ward.tc-title", "Transfer centre") + "</button></div>" +
       (openRows ? '<ul class="w-mini">' + openRows + "</ul>" : "") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("event_busy") + "<h3>" + wTH("ward.flow-overdue-title", "Past the expected discharge date") + "</h3></div>" +
+      (f.overdueDischarges == null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.flow-overdue-failed", "Expected discharge dates could not be read. Do not read this as none overdue.", null, "", 1) + "</p>"
+        : f.overdueDischarges.length ? '<ul class="w-mini">' + f.overdueDischarges.map(function (s) {
+          return "<li><b>" + esc(s.name || s.mrn || wT("ward.patient-not-readable", "patient not readable")) + "</b><span>" + esc(s.ward || "") + (s.bed ? " &middot; " + wTH("ward.bed2", "bed {bed}", { bed: esc(s.bed) }, "bed") : "") + " &middot; " + eddLine(s.expectedDischarge) + "</span>" +
+            (s.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(s.encounterId) + "\">" + wTH("ward.open-chart", "Open chart") + "</button>" : "") + "</li>";
+        }).join("") + "</ul>"
+        : '<p class="w-empty">' + wTH("ward.flow-overdue-none", "No open stay is past the expected discharge date its team set.") + "</p>") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>" + wTH("ward.xfer-board-title", "Transfer requests") + "</h3></div>" +
+      (f.pendingTransfers == null ? '<p class="w-hint warn">' + ms("error") + wTH("ward.xfer-failed", "Transfer requests could not be loaded. Do not read this as none.", null, "", 1) + "</p>"
+        : f.pendingTransfers.length ? '<ul class="w-mini">' + f.pendingTransfers.map(function (q) {
+          return "<li><b>" + esc(q.name || q.mrn || wT("ward.patient-not-readable", "patient not readable")) + "</b><span>" + xferRoute(q) + " &middot; " + esc(xferUrgencyWord(q.urgency)) + " &middot; " + esc(xferStatusWord(q.status)) + "</span>" +
+            (q.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(q.encounterId) + "\">" + wTH("ward.open-chart", "Open chart") + "</button>" : "") + "</li>";
+        }).join("") + "</ul>"
+        : '<p class="w-empty">' + wTH("ward.xfer-board-none", "No open transfer requests.") + "</p>") + "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("swap_horiz") + "<h3>" + wTH("ward.recent-transfers", "Recent transfers") + "</h3></div>" +
       (transferRows ? '<ul class="w-mini">' + transferRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.none-in-the-last-24-hours", "None in the last 24 hours.") + "</p>") + "</div>" +
@@ -5078,7 +6590,8 @@
       : '<span class="w-st overdue">' + ms("block") + wTH("ward.unavailable", "Unavailable") + "</span>";
     return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + esc(title) + "</h3>" + badge + "</div>" +
       (section.status === "ok" ? body(section.data) + "<p class=\"w-dt-times\">" + wTH("ward.computed", "Computed {generatedAt}", { generatedAt: when(section.generatedAt) }, "generatedAt") + "</p>"
-        : '<p class="w-hint warn">' + ms("warning") + esc(section.error || "unavailable") + (section.detail ? ": " + esc(section.detail) : "") + "<br><small>" + wTH("ward.this-section-is-unavailable-not-zero", "This section is UNAVAILABLE, not zero - the rest of this screen is unaffected.") + "</small></p>") +
+        : '<p class="w-hint warn">' + ms("warning") + (section.error === "too_many_open" ? wTH("ward.too-many-open-stays", "Too many open stays to show safely. Close visits that are finished (discharge or end them), or contact support.", null, "", 1)
+          : esc(section.error || "unavailable") + (section.detail ? ": " + esc(section.detail) : "")) + "<br><small>" + wTH("ward.this-section-is-unavailable-not-zero", "This section is UNAVAILABLE, not zero - the rest of this screen is unaffected.") + "</small></p>") +
       "</div>";
   }
   /* P1.13 DRILL-DOWN. A count with ids behind it is a button that lists them; a count with none
@@ -5171,7 +6684,7 @@
           twinCount(s.icu, "icu", "ventilated", d.ventilatedRecorded, wT("ward.ventilator-charted-in-12-h", "ventilator charted in 12 h")) +
           twinCount(s.icu, "icu", "vasopressors", d.vasopressorsRecorded, wT("ward.on-a-vasoactive-order", "on a vasoactive order")) + "</div>" +
           "<p class=\"w-hint\">" + wTH("ward.ventilation-and-vasopressors-count-what-is", "Ventilation and vasopressors count what is charted. A patient with nothing charted is not known, not \"off\".") + "</p>" +
-          (d.encounterReadCapped || d.recordsCapped ? "<p class=\"w-hint warn\">" + wTH("ward.read-limit-reached-these-counts-may", "Read limit reached: these counts may be low.") + "</p>" : "");
+          (d.recordsCapped ? "<p class=\"w-hint warn\">" + wTH("ward.read-limit-reached-these-counts-may", "Read limit reached: these counts may be low.") + "</p>" : "");
       }) +
       twinSectionCard("groups", wT("ward.opd-queue-today", "OPD queue today"), s.opdQueue, function (d) {
         return "<p>" + drillCount(d.waiting, "waiting") + " &middot; " + drillCount(d.inConsultation, wT("ward.in-consultation", "in consultation")) + " &middot; " + wTH("ward.session-s", "{sessions} session(s)", { sessions: esc(d.sessions) }, "sessions") + "</p>" +
@@ -5255,11 +6768,18 @@
     else if (f && f.error === "not_built") body = '<p class="w-hint">' + ms("info") + wTH("ward.this-forecast-is-not-built", "This forecast is not built:") + " " + esc(f.detail || "") + "</p>";
     else if (f && !f.ok) body = '<p class="w-hint warn">' + ms("error") + wTH("ward.the-forecast-could-not-be-worked", "The forecast could not be worked out{v}.", { v: (f.detail ? ": " + esc(f.detail) : "") }, "", 1) + "</p>";
     else if (f && f.prediction) {
-      var p = f.prediction, u = p.uncertainty || {};
+      var p = f.prediction, u = p.uncertainty || {}, mins = p.unit === "minutes";
       body = '<p class="w-hint warn"><b>' + esc(p.label) + "</b></p>" +
-        "<p><b>" + esc(p.pointEstimate) + "</b> " + (p.horizonDays === 1 ? wTH("ward.per-day-expected-over-the-next-one", "per day expected over the next {horizonDays} day (likely range {lowerBound} to {upperBound})", { horizonDays: esc(p.horizonDays), lowerBound: esc(u.lowerBound), upperBound: esc(u.upperBound) }, "horizonDays lowerBound upperBound") : wTH("ward.per-day-expected-over-the-next-many", "per day expected over the next {horizonDays} days (likely range {lowerBound} to {upperBound})", { horizonDays: esc(p.horizonDays), lowerBound: esc(u.lowerBound), upperBound: esc(u.upperBound) }, "horizonDays lowerBound upperBound")) + "</p>" +
-        "<p class=\"w-dt-times\">" + wTH("ward.from-days-of-records-to-a", "From {inputWindow} days of records, {slice} to {slice2}. A plain average, not a fitted model.", { inputWindow: esc(p.inputWindow && p.inputWindow.sampleSize), slice: esc(String(p.inputWindow && p.inputWindow.from || "").slice(0, 10)), slice2: esc(String(p.inputWindow && p.inputWindow.to || "").slice(0, 10)) }, "inputWindow slice slice2") + "</p>";
+        "<p><b>" + esc(p.pointEstimate) + "</b> " + (mins ? wTH("ward.forecast-minutes-late", "minutes from the scheduled start to entering the theatre, per case, expected (likely range {lowerBound} to {upperBound}; below zero is an early start)", { lowerBound: esc(u.lowerBound), upperBound: esc(u.upperBound) })
+          : p.horizonDays === 1 ? wTH("ward.per-day-expected-over-the-next-one", "per day expected over the next {horizonDays} day (likely range {lowerBound} to {upperBound})", { horizonDays: esc(p.horizonDays), lowerBound: esc(u.lowerBound), upperBound: esc(u.upperBound) }, "horizonDays lowerBound upperBound") : wTH("ward.per-day-expected-over-the-next-many", "per day expected over the next {horizonDays} days (likely range {lowerBound} to {upperBound})", { horizonDays: esc(p.horizonDays), lowerBound: esc(u.lowerBound), upperBound: esc(u.upperBound) }, "horizonDays lowerBound upperBound")) + "</p>" +
+        "<p class=\"w-dt-times\">" + wTH("ward.from-days-of-records-to-a", "From {inputWindow} days of records, {slice} to {slice2}. A plain average, not a fitted model.", { inputWindow: esc(p.inputWindow && p.inputWindow.sampleSize), slice: esc(String(p.inputWindow && p.inputWindow.from || "").slice(0, 10)), slice2: esc(String(p.inputWindow && p.inputWindow.to || "").slice(0, 10)) }, "inputWindow slice slice2") + "</p>" +
+        (p.method ? '<p class="w-dt-times">' + wTH("ward.forecast-method", "Worked out as: {method}", { method: esc(p.method) }, "method") + "</p>" : "") +
+        (p.inputs && p.inputs.length ? "<details><summary>" + (mins ? wTH("ward.forecast-inputs-minutes", "Each day's mean minutes behind this number") : wTH("ward.forecast-inputs", "The daily counts behind this number")) + '</summary><ul class="w-mini">' + p.inputs.map(function (x) {
+          return "<li><b>" + esc(x.value) + "</b><span>" + esc(String(x.atIso || "").slice(0, 10)) + (x.cases != null ? " &middot; " + wTH("ward.forecast-cases", "{n} cases", { n: esc(x.cases) }) : "") + "</span></li>";
+        }).join("") + "</ul></details>" : "");
     }
+    /* Theatre delays: the cases left out for having no scheduled start are said, on a forecast and on a refusal alike. */
+    if (f && f.casesWithoutScheduledStart) body += '<p class="w-dt-times">' + wTH("ward.forecast-no-scheduled-start", "{n} cases had no scheduled start, so no delay could be measured; they are not counted.", { n: esc(f.casesWithoutScheduledStart) }) + "</p>";
     return '<div class="w-card"><div class="w-card-h">' + ms("trending_up") + "<h3>" + wTH("ward.forecast", "Forecast") + "</h3></div>" +
       '<div class="w-actions">' + TWIN_METRICS.map(function (m) { return '<button class="w-btn ghost tiny" data-w-act="twinpredict:' + m[0] + '">' + esc(wTEn(m[1])) + "</button>"; }).join("") + "</div>" +
       body + "</div>";
@@ -5298,8 +6818,14 @@
         '<span class="w-st ' + esc(a.state) + '">' + esc(wTEn(APPT_STATE_WORDS[a.state]) || a.state) + "</span>" +
         (a.overbooked ? "<span class=\"w-tag warn\">" + wTH("ward.overbooked", "overbooked:") + " " + esc(a.overbookReason || "") + "</span>" : "") +
         (a.reason ? "<br><small>" + esc(a.reason) + "</small>" : "") +
-        (live ? '<div class="w-actions"><button class="w-btn tiny ghost" data-w-act="apptcancel:' + esc(a.appointmentId) + '">' + ms("close") + wTH("ward.cancel", "Cancel") + "</button>" +
-          '<button class="w-btn tiny ghost" data-w-act="apptdna:' + esc(a.appointmentId) + '">' + ms("event_busy") + "DNA</button></div>" : "") +
+        (a.arrivedAt ? "<br><small>" + wTH("ward.appt-arrived-at", "arrived {at}", { at: esc(when(a.arrivedAt)) }, "at") + "</small>" : "") +
+        (live ? '<div class="w-actions">' +
+          (a.state === "booked" ? '<button class="w-btn tiny" data-w-act="apptarrived:' + esc(a.appointmentId) + '">' + ms("how_to_reg") + wTH("ward.appt-mark-arrived", "Arrived") + "</button>" : "") +
+          '<button class="w-btn tiny" data-w-act="apptseen:' + esc(a.appointmentId) + '">' + ms("task_alt") + wTH("ward.appt-mark-seen", "Seen") + "</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="apptcancel:' + esc(a.appointmentId) + '">' + ms("close") + wTH("ward.cancel", "Cancel") + "</button>" +
+          (a.state === "booked" ? '<button class="w-btn tiny ghost" data-w-act="apptdna:' + esc(a.appointmentId) + '">' + ms("event_busy") + "DNA</button>" : "") +
+          // R4-5: what the patient sent before this appointment on the portal (only when the hospital offers forms for appointments).
+          (a.patientId ? '<button class="w-btn tiny ghost" data-w-act="intakeopen:' + esc(a.appointmentId) + "~" + esc(a.patientId) + '~appt">' + ms("assignment") + wTH("ward.intake-appt-open", "Patient's forms") + "</button>" : "") + "</div>" : "") +
         "</li>";
     }).join("");
     var recallRows = (diary.recalls || []).map(function (r) {
@@ -5326,6 +6852,7 @@
 
       '<div class="w-card"><div class="w-card-h">' + ms("event") + "<h3>" + wTH("ward.appointments", "Appointments") + "</h3></div>" +
       (apptRows ? '<ul class="w-mini">' + apptRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-appointments-loaded-set-a-clinician", "No appointments loaded. Set a clinician and load.") + "</p>") +
+      intakePanel(state.intake && state.intake.appointmentId ? state.intake : null) +
       (recallRows ? "<h4>" + wTH("ward.unbooked-follow-ups", "Unbooked follow-ups") + "</h4><ul class=\"w-mini\">" + recallRows + "</ul>" : "") +
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.clinician", "Clinician") + "</span><input id=\"wSchedClinician\" type=\"text\" autocomplete=\"off\" value=\"" + esc(sc.clinicianId || "") + '"></label>' +
@@ -5339,6 +6866,7 @@
       '<button class="w-btn" data-w-act="apptbook">' + ms("add") + wTH("ward.book", "Book") + "</button>" +
       '<button class="w-btn ghost" data-w-act="apptoverbook">' + ms("warning") + wTH("ward.book-anyway-overbook", "Book anyway (overbook)") + "</button>" +
       "</div></div>" +
+      accessTimesCard(sc) +
 
       '<div class="w-card"><div class="w-card-h">' + ms("meeting_room") + "<h3>" + wTH("ward.resources", "Resources") + "</h3></div>" +
       (resRows || "<p class=\"w-empty\">" + wTH("ward.no-bookable-resources-are-configured-for", "No bookable resources are configured for this hospital.") + "</p>") +
@@ -5373,7 +6901,93 @@
    * is invented; if a hospital wants a threshold-based sign-off, that is a real policy decision for
    * a later, explicitly-scoped task, not assumed here. */
   var INVOICE_STATUS_WORDS = { open: "Open", paid: "Paid", void: "Void" };
-  var EVENT_KIND_WORDS = { raised: "Invoice raised", discount: "Discount", deposit: "Deposit", payment: "Payment", refund: "Refund", adjustment: "Adjustment", write_off: "Write-off", void: "Voided" };
+  var EVENT_KIND_WORDS = { raised: "Invoice raised", discount: "Discount", deposit: "Deposit", payment: "Payment", refund: "Refund", adjustment: "Adjustment", write_off: "Write-off", void: "Voided",
+    credit_note: "Credit note", debit_note: "Debit note", buyer_details: "Buyer details", irn_generated: "IRN generated", irn_cancelled: "IRN cancelled" };
+  /* GST ON THE BILL (gap-claims-gst B). Each line says its HSN/SAC, taxable value and GST, split into CGST and SGST
+   * within the state or IGST across states as the server computed it; an exempt line says exempt, and a line the law
+   * does not settle with no rate says so rather than showing nothing. Notes show their own number, reason and GST. */
+  function cashGstText(l) {
+    if (!l || l.taxKind !== "GST") return "";
+    if (l.taxExempt) return wTH("ward.gst-exempt", "GST exempt");
+    if (l.igst) return wTH("ward.gst-igst", "GST {rate}% &middot; IGST {igst}", { rate: esc(l.taxRate), igst: esc(l.igst) }, "rate igst");
+    return wTH("ward.gst-cgst-sgst", "GST {rate}% &middot; CGST {cgst} &middot; SGST {sgst}", { rate: esc(l.taxRate), cgst: esc(l.cgst), sgst: esc(l.sgst) }, "rate cgst sgst");
+  }
+  /* Package billing: what each line is to the stay's package (functions/_wardsynq/packages.js). */
+  function cashPackageWord(l) {
+    if (!l || !l.packageCode) return "";
+    var w = l.packageRoom ? wTH("ward.pkg-line-room", "room charges within the package, taxed")
+      : l.packageLine ? wTH("ward.pkg-line-rate", "package rate")
+      : l.packageIncluded ? wTH("ward.pkg-line-included", "included in the package")
+      : l.packageExcluded ? wTH("ward.pkg-line-excluded", "excluded from the package, billed")
+      : l.packageOutside ? wTH("ward.pkg-line-outside", "not listed by the package, billed; check") : "";
+    return w ? " &middot; <b>" + w + "</b>" : "";
+  }
+  function cashLineHtml(l, taxable) {
+    return "<li>" + esc(l.display || l.code) + cashPackageWord(l) + " &middot; " + (l.hsnSac ? wTH("ward.hsn-sac", "HSN/SAC {code}", { code: esc(l.hsnSac) }, "code") : wTH("ward.no-hsn-sac", "no HSN/SAC")) +
+      " &middot; " + wTH("ward.taxable-value", "taxable {value}", { value: esc(taxable) }, "value") +
+      (l.taxKind === "GST" ? " &middot; " + cashGstText(l) : " &middot; " + wTH("ward.no-gst-rate-set", "no GST rate set")) + "</li>";
+  }
+  /* THE GST DOCUMENTS THIS BILL IS (gst-packages; the server's documentsOf): a Bill of Supply, a Tax Invoice, an
+   * Invoice-cum-Bill of Supply, or for a registered buyer a Tax Invoice and a separate Bill of Supply, each with its own
+   * number and total. A bill raised before numbering has none, and shows its invoice number as before. */
+  var DOC_TYPE_WORDS = { bill_of_supply: "Bill of Supply", tax_invoice: "Tax Invoice", invoice_cum_bill_of_supply: "Invoice-cum-Bill of Supply" };
+  function cashDocsHtml(inv) {
+    var docs = inv.documents || [];
+    if (!docs.length) return inv.documentNumber ? "<p>" + wTH("ward.invoice-number", "Invoice number {no}", { no: esc(inv.documentNumber) }, "no") + "</p>" : "";
+    return docs.map(function (d) {
+      return "<p><b>" + esc(wTEn(DOC_TYPE_WORDS[d.type]) || d.type) + " " + esc(d.number || wT("ward.gst-doc-no-number", "(no number yet)")) + "</b> &middot; " +
+        wTH("ward.gst-doc-totals", "taxable {taxable} &middot; GST {tax} &middot; total {total}", { taxable: esc(d.taxable), tax: esc(d.tax), total: esc(d.total) }, "taxable tax total") + "</p>";
+    }).join("");
+  }
+  /* What the cashier is told about GST on this bill (review 2.5): the package room carved out and how it was valued, a
+   * value capped at the package price, a fallback to the published tariff, GST the hospital bears, a scheme that may
+   * deduct GST TDS, and the exempt supply footnote. */
+  var ROOM_METHOD_WORDS = { published_tariff: "the published room tariff", scheme_rate: "the payer's own per-day room rate", proportional_split: "a proportional split of the package price" };
+  function cashGstNotesHtml(inv) {
+    var out = "", rg = inv.package && inv.package.roomGst, lines = inv.lines || [];
+    if (rg) {
+      out += '<p class="w-hint">' + ms("info") + wTH("ward.gst-pkg-room-carved", "This package includes {days} room day(s) above Rs 5,000 per day. Rs {taxable} of the package is shown as room charges and taxed at 5%. The rest of the package is exempt. Valuation method: {methodName}.",
+        { days: esc(rg.days), taxable: esc(rg.taxable), methodName: esc(wTEn(ROOM_METHOD_WORDS[rg.method]) || rg.method) }, "days taxable") + "</p>";
+      if (rg.capped) out += '<p class="w-hint warn">' + ms("warning") + wTH("ward.gst-pkg-room-capped", "The room tariff for this stay is more than the package price. The whole package price has been treated as room charges for GST. Check the package and room category before issuing.", null, "", 1) + "</p>";
+      if (rg.fallback) out += '<p class="w-hint warn">' + ms("warning") + wTH("ward.gst-pkg-room-fallback", "The valuation chosen in the GST settings could not be used for this package, so the published room tariff was used.", null, "", 1) + "</p>";
+      if (rg.unrecoverableGst) out += '<p class="w-hint warn">' + ms("warning") + wTH("ward.gst-pkg-unrecoverable", "GST of Rs {tax} on room charges in this package is payable by the hospital because the payer's package rate does not allow GST on top.", { tax: esc(rg.unrecoverableGst) }, "tax", 1) + "</p>";
+      if (rg.gstTdsPossible) out += '<p class="w-hint">' + ms("info") + wTH("ward.gst-pkg-tds", "This scheme is marked as a notified GST TDS deductor: it may deduct GST TDS on the taxed room charges (Section 51). Its 10 percent claim deduction is income tax TDS, not GST.") + "</p>";
+    }
+    if (lines.some(function (l) { return l.taxBasis === "package_room_over_5000_per_day" || l.taxBasis === "room_over_5000_per_day"; })) {
+      out += '<p class="w-hint">' + wTH("ward.gst-room-why", "GST 5% applies because this room is not an ICU, CCU, ICCU or NICU and its charge exceeds Rs 5,000 per day (Notification 11/2017-Central Tax (Rate), entry 31A).") + "</p>";
+    }
+    if (lines.some(function (l) { return l.taxKind === "GST" && l.taxExempt; })) {
+      out += '<p class="w-hint">' + wTH("ward.gst-exempt-footnote", "Health care services by a clinical establishment are exempt from GST (Notification 12/2017-Central Tax (Rate), entry 74). Medicines, implants, consumables and food supplied to an admitted patient form part of that service.") + "</p>";
+    }
+    return out;
+  }
+  /* E-INVOICING, SAID PLAINLY. null = still asking, false = could not be read; never read as "not reported". A bill
+   * to a patient (no buyer GSTIN) is never sent; a Bill of Supply is never sent; only a Tax Invoice and a note carrying
+   * GST are offered for an IRN. */
+  function cashEinvHtml(e, inv) {
+    if (e === undefined) return "";
+    if (e === null) return '<p class="w-hint">' + wTH("ward.checking-e-invoicing", "Checking e-invoicing...") + "</p>";
+    if (e === false) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.e-invoicing-status-could-not-be-read", "E-invoicing status could not be read. Do not read this bill as reported or not reported.", null, "", 1) + "</p>";
+    if (e.state === "not_connected") return '<p class="w-hint">' + ms("info") + wTH("ward.e-invoicing-is-not-connected", "E-invoicing is not connected. Nothing on this bill is reported.") + "</p>";
+    if (e.state === "not_enabled" && e.reason === "turnover_not_entered") return '<p class="w-hint">' + ms("info") + wTH("ward.e-invoicing-no-turnover", "E-invoicing is not enabled: the hospital's aggregate turnover, exempt supplies included, is not entered on Admin, Price list, GST settings. Nothing on this bill is reported.") + "</p>";
+    if (e.state === "not_enabled") return '<p class="w-hint">' + ms("info") + wTH("ward.e-invoicing-not-enabled", "E-invoicing is not enabled for this hospital. Nothing on this bill is reported.") + "</p>";
+    var docs = inv.documents || [];
+    var exemptOnly = docs.length === 1 && docs[0].type === "bill_of_supply", mixedB2b = docs.length === 2;
+    var b2b = inv.buyer && inv.buyer.gstin;
+    var regs = (inv.einvoices || []).map(function (x) {
+      return '<li><b>' + esc(x.docNumber) + "</b> " + wTH("ward.irn-value", "IRN {irn}", { irn: esc(x.irn) }, "irn") + " &middot; " + wTH("ward.ack-value", "Ack {ackNo} {ackDt}", { ackNo: esc(x.ackNo || ""), ackDt: esc(x.ackDt || "") }, "ackNo ackDt") +
+        " &middot; " + (x.status === "ACT" ? wTH("ward.irn-active", "active") + ' <button class="w-btn tiny ghost" data-w-act="invirncancel:' + esc(inv.invoiceId) + "~" + esc(x.docNumber) + '">' + ms("cancel") + wTH("ward.cancel-irn", "Cancel IRN") + "</button>" : wTH("ward.irn-cancelled", "cancelled")) + "</li>";
+    }).join("");
+    if (!b2b) return '<p class="w-hint">' + ms("info") + wTH("ward.b2c-not-reported", "B2C, not reported: this bill has no buyer GSTIN.") + "</p>" + (regs ? '<ul class="w-mini">' + regs + "</ul>" : "");
+    var active = function (no) { return (inv.einvoices || []).some(function (x) { return x.docNumber === no && x.status === "ACT"; }); };
+    var head = exemptOnly ? '<p class="w-hint">' + ms("info") + wTH("ward.e-invoice-exempt-only", "Exempt supplies are not reported for e-invoicing. This Bill of Supply has no IRN.") + "</p>"
+      : mixedB2b ? '<p class="w-hint">' + ms("info") + wTH("ward.e-invoice-mixed-b2b", "This bill has taxed and exempt charges for a registered payer. It will be issued as a Tax Invoice (reported for e-invoicing) and a separate Bill of Supply.") + "</p>" : "";
+    var reportable = (exemptOnly ? [] : [inv.documentNumber]).concat((inv.events || []).filter(function (ev) { return (ev.kind === "credit_note" || ev.kind === "debit_note") && !ev.financial && ev.tax > 0; }).map(function (ev) { return ev.noteNumber; }));
+    var docs = reportable.filter(function (no) { return no && !active(no); });
+    return head + (regs ? '<ul class="w-mini">' + regs + "</ul>" : "") + (inv.status === "void" ? "" : docs.map(function (no) {
+      return '<button class="w-btn tiny ghost" data-w-act="invirn:' + esc(inv.invoiceId) + (no === inv.documentNumber ? "" : "~" + esc(no)) + '">' + ms("qr_code_2") + wTH("ward.report-for-e-invoice", "Get IRN for {doc}", { doc: esc(no) }, "doc") + "</button>";
+    }).join(""));
+  }
   /* WHAT HAS NOT BEEN BILLED YET, AND CLAIMS WORTH A SECOND LOOK.
    * Unbilled charges are the priced items no invoice has picked up; unpriced ones are shown too, because
    * an item with no price is not free, it is a gap in the price list. The coding watchlist lists claims
@@ -5415,13 +7029,41 @@
     }
     return "";
   }
+  /* PURE. The stay the cashier's bill is for: her choice, else the stay in hospital now, else the latest stay.
+   * "" = no stay (an outpatient bill), offered only when no stay is open: the server bills an open stay otherwise. */
+  function cashStayChoice(c) {
+    var stays = (c && c.stays) || [];
+    if (!stays.length) return "";
+    var open = stays.filter(function (s) { return s.status === "in-progress"; });
+    if (c.stayId != null && (c.stayId === "" ? !open.length : stays.some(function (s) { return s.id === c.stayId; }))) return c.stayId;
+    var latest = function (list) { return list.slice().sort(function (a, b) { return String(b.periodStart || "").localeCompare(String(a.periodStart || "")); })[0].id; };
+    return open.length ? latest(open) : latest(stays);
+  }
+  function cashStayHtml(c) {
+    if (c.stays === false) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.cash-stays-unreadable", "The stays could not be read, so this bill goes to the stay in hospital now, if any.", null, "", 1) + "</p>";
+    var stays = c.stays || [];
+    if (!stays.length) return "";
+    var pick = cashStayChoice(c), anyOpen = stays.some(function (s) { return s.status === "in-progress"; });
+    var opts = stays.map(function (s) {
+      var label = esc(when(s.periodStart)) + (s.ward ? " &middot; " + esc(s.ward) : "") + " (" + (s.status === "in-progress" ? wTH("ward.pkg-stay-open", "in hospital") : wTH("ward.cash-stay-discharged", "discharged {date}", { date: esc(when(s.periodEnd)) }, "date")) + ")";
+      return '<option value="' + esc(s.id) + '"' + (s.id === pick ? " selected" : "") + ">" + label + "</option>";
+    }).join("") + (anyOpen ? "" : '<option value=""' + (pick === "" ? " selected" : "") + ">" + wTH("ward.cash-stay-none", "No stay: an outpatient bill") + "</option>");
+    return '<label class="w-f"><span>' + wTH("ward.cash-stay", "Stay this bill is for") + '</span><select id="wCashStay">' + opts + "</select></label>";
+  }
   function cashierView(state) {
     var c = state.cashier || {};
     var invoices = c.invoices || [];
     var invRows = invoices.map(function (inv) {
       var eventRows = (inv.events || []).map(function (ev) {
-        return "<li><b>" + esc(wTEn(EVENT_KIND_WORDS[ev.kind]) || ev.kind) + "</b> " + esc(ev.amount) + " " + esc(inv.currency || "") +
-          '<span>' + esc(when(ev.at)) + (ev.reason ? " &middot; " + esc(ev.reason) : "") + (ev.reference ? " &middot; " + wTH("ward.ref", "ref {reference}", { reference: esc(ev.reference) }, "reference") : "") + "</span></li>";
+        var isNote = ev.kind === "credit_note" || ev.kind === "debit_note";
+        return "<li><b>" + esc(wTEn(EVENT_KIND_WORDS[ev.kind]) || ev.kind) + (isNote ? " " + esc(ev.noteNumber) : "") + "</b> " + esc(ev.amount) + " " + esc(inv.currency || "") +
+          '<span>' + esc(when(ev.at)) + (ev.reason ? " &middot; " + esc(ev.reason) : "") + (ev.reference ? " &middot; " + wTH("ward.ref", "ref {reference}", { reference: esc(ev.reference) }, "reference") : "") + "</span>" +
+          (isNote ? '<ul class="w-mini">' + (ev.lines || []).map(function (l) { return cashLineHtml(l, l.taxable); }).join("") + "</ul>" +
+            (ev.gstReversalLate ? '<p class="w-hint warn">' + ms("warning") + (ev.tax > 0 ? wTH("ward.gst-reversal-late", "Past the Section 34 time limit: the bill is reduced, but the GST cannot be reduced in the return.", null, "", 1)
+              : wTH("ward.gst-note-late", "Past the Section 34 time limit: this note is issued without GST.", null, "", 1)) + "</p>" : "") +
+            (ev.gstTreatment === "gst_refunded" ? '<p class="w-hint">' + wTH("ward.gst-note-refunded", "GST refunded to the patient with this note{ref}.", { ref: ev.gstConfirmation && ev.gstConfirmation.reference ? ": " + esc(ev.gstConfirmation.reference) : "" }, "ref") + "</p>"
+              : ev.gstTreatment === "itc_reversed" ? '<p class="w-hint">' + wTH("ward.gst-note-itc", "Input tax credit reversal confirmed by the buyer: {ref}.", { ref: esc(ev.gstConfirmation && ev.gstConfirmation.reference || "") }, "ref") + "</p>"
+              : ev.financial ? '<p class="w-hint">' + wTH("ward.gst-note-financial", "No GST on this note: a financial note, not reported for e-invoicing.") + "</p>" : "") : "") + "</li>";
       }).join("");
       var receiptRows = (inv.receipts || []).map(function (r) {
         // The payment-gateway adapter boundary, stated on the receipt itself: no live gateway exists
@@ -5438,7 +7080,14 @@
             (l.url ? ' &middot; <a href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer">' + esc(l.url) + "</a>" : "") +
             (l.flag ? " &middot; " + esc(wTEn(PAY_FLAG_WORDS[l.flag.reason]) || l.flag.reason) : "") + "</p>";
         }).join("");
+      var lineRows = (inv.lines || []).map(function (l) { return cashLineHtml(l, l.taxable == null ? l.line : l.taxable); }).join("");
       return '<div class="w-sub"><h4>' + esc(inv.invoiceId) + '<span class="w-st ' + esc(inv.status) + '">' + esc(wTEn(INVOICE_STATUS_WORDS[inv.status]) || inv.status) + "</span></h4>" +
+        cashDocsHtml(inv) +
+        (inv.package ? "<p>" + wTH("ward.pkg-invoice", "Package {code}: {name}, rate {rate}", { code: esc(inv.package.code), name: esc(inv.package.name), rate: esc(inv.package.rate) }, "code name rate") + "</p>" + pkgFlagsHtml(inv.package) : "") +
+        (lineRows ? '<ul class="w-mini">' + lineRows + "</ul>" : "") + cashGstNotesHtml(inv) +
+        "<p>" + (inv.buyer && inv.buyer.gstin ? wTH("ward.buyer-b2b", "Billed to {name}, GSTIN {gstin}", { name: esc(inv.buyer.legalName), gstin: esc(inv.buyer.gstin) }, "name gstin") : wTH("ward.buyer-b2c", "Billed to the patient (no buyer GSTIN)")) + "</p>" +
+        partiesHtml(inv.parties) +
+        cashEinvHtml(c.einvoice, inv) +
         "<p>" + wTH("ward.charged-paid-in-balance", "Charged {charged} &middot; Paid in {paidIn} &middot; Balance {balance}", { charged: esc(inv.charged), paidIn: esc(inv.paidIn), balance: esc(inv.balance) }, "charged paidIn balance") + (inv.creditBalance ? " &middot; " + wTH("ward.credit", "Credit {creditBalance}", { creditBalance: esc(inv.creditBalance) }, "creditBalance") : "") + "</p>" +
         (eventRows ? '<ul class="w-mini">' + eventRows + "</ul>" : "") +
         (receiptRows ? "<h4>" + wTH("ward.receipts", "Receipts") + "</h4><ul class=\"w-mini\">" + receiptRows + "</ul>" : "") + links +
@@ -5451,7 +7100,11 @@
           '<button class="w-btn tiny ghost" data-w-act="invadjust:' + esc(inv.invoiceId) + '">' + ms("tune") + wTH("ward.adjustment", "Adjustment") + "</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invwriteoff:' + esc(inv.invoiceId) + '">' + ms("remove_circle") + wTH("ward.write-off", "Write off") + "</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invvoid:' + esc(inv.invoiceId) + '">' + ms("block") + wTH("ward.cancel-this-bill", "Cancel this bill") + "</button>" +
-          "</div>" : "") + "</div>";
+          '<button class="w-btn tiny ghost" data-w-act="invcredit:' + esc(inv.invoiceId) + '">' + ms("remove") + wTH("ward.credit-note", "Credit note") + "</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invdebit:' + esc(inv.invoiceId) + '">' + ms("add") + wTH("ward.debit-note", "Debit note") + "</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invparties:' + esc(inv.invoiceId) + '">' + ms("handshake") + wTH("ward.parties-button", "Payer and GST recipient") + "</button>" +
+          "</div>" : "") +
+        '<div class="w-actions"><button class="w-btn tiny ghost" data-w-act="invprint:' + esc(inv.invoiceId) + '">' + ms("print") + wTH("ward.print-invoice", "Print invoice") + "</button></div>" + "</div>";
     }).join("");
 
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
@@ -5472,6 +7125,7 @@
 
       (c.patientId ? '<div class="w-card"><div class="w-card-h">' + ms("account_balance") + "<h3>" + wTH("ward.outstanding-balance", "Outstanding balance") + "</h3></div>" +
         "<p><b>" + esc(c.outstandingBalance == null ? "-" : c.outstandingBalance) + "</b></p>" +
+        cashStayHtml(c) +
         '<button class="w-btn" data-w-act="cashraise">' + ms("receipt_long") + wTH("ward.raise-invoice-from-today-s-charges", "Raise invoice from today's charges") + "</button>" +
         cashRaisedHtml(c.raised) +
         (c.invoicesFailed
@@ -5920,6 +7574,15 @@
       "<b>" + esc(v.subjectId) + "</b> &middot; " + wTH("ward.of-approved", "{subjectType} &middot; {approvals} of {required} approved", { subjectType: esc(v.subjectType), approvals: esc(v.approvals), required: esc(v.required) }, "subjectType approvals required") +
       (v.withdrawn ? " &middot; " + wTH("ward.something-was-taken-back", "something was taken back") : "") +
       '<div class="w-dt-times">' + esc(v.reason || "") + "</div>" +
+      /* A purchase order's rate contract check (purchasing.js contractWarnings): a price above contract is a warning to
+       * the approver and never changes the order; a check that could not be made is said, never shown as no warning. */
+      (v.priceCheck === "failed" ? '<p class="w-hint warn">' + ms("error") + wTH("ward.po-price-check-failed", "The prices could not be checked against rate contracts. Do not read this as within contract.", null, "", 1) + "</p>" : "") +
+      (v.priceWarnings || []).map(function (w) {
+        return '<p class="w-hint warn">' + ms("warning") + wTH("ward.po-above-contract", "{item} ({unit}) is priced at Rs {price}, above the rate contract price of Rs {contract}.", { item: esc(w.item), unit: esc(w.unit), price: rupeesOf(w.pricePaise).slice(3), contract: rupeesOf(w.contractPricePaise).slice(3) }, "item unit") + "</p>";
+      }).join("") +
+      (v.unpricedAgainstContract || []).map(function (w) {
+        return '<p class="w-hint">' + ms("info") + wTH("ward.po-unpriced-contract", "{item} ({unit}) has no price on the order. The rate contract price is Rs {contract}.", { item: esc(w.item), unit: esc(w.unit), contract: rupeesOf(w.contractPricePaise).slice(3) }, "item unit") + "</p>";
+      }).join("") +
       (hist ? '<ul class="w-mini">' + hist + "</ul>" : "") +
       "<div class=\"w-dt-times\">" + wTH("ward.reference", "Reference: {verificationId}", { verificationId: esc(v.verificationId) }, "verificationId") + "</div>" +
       "</div><div class=\"w-mini-row-act\">" +
@@ -5977,7 +7640,8 @@
       "<div class=\"w-dt-times\">" + wTH("ward.raised-by-approvals-of", "raised by {raisedBy} &middot; {raisedAt} &middot; approvals {approval} of {approval2}", { raisedBy: esc(o.raisedBy), raisedAt: when(o.raisedAt), approval: esc(o.approval && o.approval.approvals || 0), approval2: esc(o.approval && o.approval.required || 1) }, "raisedBy raisedAt approval approval2") +
       " &middot; " + (o.totalPaise == null ? wTH("ward.total-not-known-a-line-has", "total not known (a line has no price)") : wTH("ward.total", "total") + " " + rupeesOf(o.totalPaise)) + "</div>" +
       '<ul class="w-mini">' + (o.lines || []).map(poLineRow).join("") + "</ul>" +
-      "<div class=\"w-dt-times\">" + wTH("ward.reference2", "Reference: {purchaseOrderId}", { purchaseOrderId: esc(o.purchaseOrderId) }, "purchaseOrderId") + "</div></div>" +
+      "<div class=\"w-dt-times\">" + wTH("ward.reference2", "Reference: {purchaseOrderId}", { purchaseOrderId: esc(o.purchaseOrderId) }, "purchaseOrderId") +
+      (o.location ? " &middot; " + wTH("ward.po-for-store", "for {store}", { store: esc(o.location) }, "store") : "") + "</div></div>" +
       '<div class="w-mini-row-act">' +
       (o.state === "awaiting-approval"
         ? '<button class="w-btn ghost sm" data-w-act="poask:' + esc(o.purchaseOrderId) + '">' + ms("send") + wTH("ward.ask-for-approval", "Ask for approval") + "</button>"
@@ -5999,7 +7663,13 @@
       "<label class=\"w-f\"><span>" + wTH("ward.how-many2", "How many") + "</span><input id=\"wPoQty\" inputmode=\"decimal\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.counted-in", "Counted in") + "</span><input id=\"wPoUnit\" placeholder=\"" + wTA("ward.box-strip-vial", "box, strip, vial") + "\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.price-per-unit-rs", "Price per unit (Rs)") + "</span><input id=\"wPoPrice\" inputmode=\"decimal\" placeholder=\"" + wTA("ward.optional", "optional") + "\"></label>" +
+      /* R4-5: the store the order is bought for. The names offered are the stores this hospital's stock is held in
+       * (/ward/stock, the ledger the reorder drafts read); any other name may be typed, as a receipt's location is. */
+      "<label class=\"w-f\"><span>" + wTH("ward.po-store", "For which store") + "</span><input id=\"wPoStore\" list=\"wPoStores\" placeholder=\"" + wTA("ward.optional", "optional") + "\"></label>" +
+      '<datalist id="wPoStores">' + (state.poStores || []).map(function (n) { return '<option value="' + esc(n) + '"></option>'; }).join("") + "</datalist>" +
       "</div>" +
+      (state.poStores === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.po-stores-failed", "The store names could not be loaded. Type the store, or leave it empty.", null, "", 1) + "</p>" : "") +
+      '<p class="w-hint">' + ms("info") + wTH("ward.po-store-hint", "With a store named, the reorder suggestions count this order as on its way to that store only. Without one, it counts for every store that holds the item.") + "</p>" +
       '<p class="w-hint">' + ms("info") + wTH("ward.one-item-per-order-for-now", "One item per order for now. The unit is recorded as you type it and is never converted, so a delivery in a different unit will not count against this line. Without a price the order total is unknown, and the hospital's strictest approval level applies.") +
       "</p><button class=\"w-btn\" data-w-act=\"poraise\">" + ms("save") + wTH("ward.raise", "Raise") + "</button></div>" +
       (state.purchaseOrdersFailed ? '<p class="w-hint warn">' + ms("error") + wTH("ward.purchase-orders-could-not-be-loaded", "Purchase orders could not be loaded. Do not read this as none.", null, "", 1) + (state.purchaseOrders ? " " + wTH("ward.the-list-below-may-be-out", "The list below may be out of date.") : "") + "</p>" : "") +
@@ -6574,6 +8244,10 @@
         : '<p class="w-hint">' + ms("info") + wTH("ward.open-a-patient-from-the-ward2", "Open a patient from the ward list to request emergency access to their chart.") + "</p>") +
       (state.emergencyChart
         ? '<div class="w-sub w-dead"><h4>' + ms("warning") + wTH("ward.emergency-read-only-chart", "Emergency read-only chart") + "</h4>" +
+          /* A part of the chart the store refused is NAMED here, above the chart itself. Without this an
+           * unreadable allergy list rendered exactly like "no known allergies", mid-emergency. */
+          (state.emergencyChart.ok && (state.emergencyChart.unreadableTypes || []).length
+            ? '<p class="w-hint warn">' + ms("error") + wTH("ward.bg-chart-unreadable", "These parts of the chart could not be read: {types}. Do not read them as nothing recorded.", { types: esc(state.emergencyChart.unreadableTypes.join(", ")) }, "types", 1) + "</p>" : "") +
           (state.emergencyChart.ok ? reportValue(state.emergencyChart.chart) : '<p class="w-hint warn">' + esc(state.emergencyChart.detail || state.emergencyChart.error || wT("ward.could-not-open-the-chart", "Could not open the chart.")) + "</p>") +
           "</div>"
         : "") +
@@ -6741,13 +8415,15 @@
       '<span class="w-st ' + (hot ? "escalate" : "due") + '">' + esc(pairWord(ADM_URGENCY, r.urgency)) + "</span> " +
       "<b>" + esc(r.mrn || r.patientId) + "</b>" + (r.specialty ? " &middot; " + esc(r.specialty) : "") + (r.ward ? " &middot; " + wTH("ward.for", "for {ward}", { ward: esc(r.ward) }, "ward") : "") +
       "<div>" + esc(r.reason || "") + "</div>" +
+      (r.plannedFor ? "<div class=\"w-dt-times\">" + wTH("ward.intake-planned-for", "planned for {date}", { date: esc(r.plannedFor) }, "date") + "</div>" : "") +
       "<div class=\"w-dt-times\">" + wTH("ward.asked-by", "asked by {requestedBy} &middot; {requestedAt}", { requestedBy: esc(r.requestedBy), requestedAt: when(r.requestedAt) }, "requestedBy requestedAt") +
       (r.state === "waiting" ? " &middot; " + wTH("ward.waiting-h", "waiting {waitingHours}h", { waitingHours: esc(r.waitingHours) }, "waitingHours") : " &middot; " + esc(admissionRequestStateWord(r.state)) + (r.closeReason ? ": " + esc(r.closeReason) : "")) +
       "</div></div>" +
       '<div class="w-mini-row-act">' +
       (r.state === "waiting"
         ? '<button class="w-btn ghost sm" data-w-act="admreqclose:' + esc(r.requestId) + '~admitted">' + ms("bed") + wTH("ward.admitted2", "Admitted") + "</button>" +
-          '<button class="w-btn ghost sm" data-w-act="admreqclose:' + esc(r.requestId) + '~cancelled">' + ms("close") + wTH("ward.cancel", "Cancel") + "</button>"
+          '<button class="w-btn ghost sm" data-w-act="admreqclose:' + esc(r.requestId) + '~cancelled">' + ms("close") + wTH("ward.cancel", "Cancel") + "</button>" +
+          (r.plannedFor ? '<button class="w-btn ghost sm" data-w-act="intakeopen:' + esc(r.requestId) + "~" + esc(r.patientId) + '">' + ms("assignment") + wTH("ward.intake-open", "Pre-admission forms") + "</button>" : "")
         : "") +
       "</div></li>";
   }
@@ -6764,13 +8440,72 @@
       "<label class=\"w-f\"><span>" + wTH("ward.how-soon", "How soon") + "</span><select id=\"wArUrg\">" + ADM_URGENCY.map(function (u) { return '<option value="' + esc(u[0]) + '">' + esc(wTEn(u[1])) + "</option>"; }).join("") + "</select></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.specialty", "Specialty") + "</span><input id=\"wArSpec\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.ward-optional", "Ward (optional)") + "</span><input id=\"wArWard\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.intake-planned-date", "Planned admission date (optional)") + "</span><input id=\"wArPlanned\" type=\"date\"></label>" +
       "</div>" +
       "<textarea id=\"wArReason\" rows=\"2\" placeholder=\"" + wTA("ward.why-this-patient-needs-to-come", "Why this patient needs to come in") + "\"></textarea>" +
       '<button class="w-btn" data-w-act="admreqask">' + ms("send") + wTH("ward.ask-for-a-bed", "Ask for a bed") + "</button></div>" +
+      (d && d.admittedCheckFailed ? '<p class="w-hint warn">' + ms("error") + (d.admittedCheckError === "too_many_open"
+          ? wTH("ward.too-many-open-stays", "Too many open stays to show safely. Close visits that are finished (discharge or end them), or contact support.", null, "", 1) + " " : "") +
+        wTH("ward.admreq-admitted-unknown", "Who is already admitted could not be checked: a patient on this list may already be in a bed.", null, "", 1) + "</p>" : "") +
       (d == null ? "<p class=\"w-empty\">" + wTH("ward.loading3", "Loading.") + "</p>"
         : rows ? '<ul class="w-mini">' + rows + "</ul>"
         : "<p class=\"w-empty\">" + wTH("ward.nobody-is-waiting-for-a-bed", "Nobody is waiting for a bed.") + "</p>") +
+      intakePanel(state.intake && state.intake.requestId ? state.intake : null) +
       "</div>";
+  }
+  /* PRE-ADMISSION FORMS (form-response.js). What a patient filled in on the portal for a planned admission. It is shown as
+   * the patient's own words, never as checked chart data. Accepting records that this clinician read that version;
+   * nothing is copied into allergies, medicines or problems, which stay the clinician's own entries. null = loading,
+   * false = could not load (never drawn as "none sent"). */
+  function intakeStateWord(r) {
+    if (r.reviewState === "accepted") return wTH("ward.intake-accepted", "Reviewed by {who} &middot; {at}", { who: esc(r.reviewedBy), at: when(r.reviewedAt) }, "who at");
+    if (r.reviewState === "returned") return wTH("ward.intake-returned", "Returned to the patient by {who}: {reason}", { who: esc(r.reviewedBy), reason: esc(r.reviewReason) }, "who reason");
+    return wTH("ward.intake-waiting-review", "Waiting for review");
+  }
+  /* ik: { requestId (a planned admission) or appointmentId (R4-5, a booked appointment), patientId, rows }. */
+  function intakePanel(ik) {
+    if (!ik) return "";
+    var rows = ik.rows, appt = !!ik.appointmentId;
+    return '<div class="w-sub" data-w-intake="' + esc(ik.requestId || ik.appointmentId) + '"><h4>' + (appt ? wTH("ward.intake-appt-title", "Forms from the patient before this appointment") : wTH("ward.intake-title", "Pre-admission forms from the patient")) + "</h4>" +
+      '<p class="w-hint warn">' + ms("info") + wTH("ward.intake-not-verified", "Reported by the patient or their family on the portal, not checked. Accepting records that you read this version. It adds nothing to allergies, medicines or problems: enter those yourself if they belong in the chart.") + "</p>" +
+      (rows == null ? '<p class="w-hint">' + ms("hourglass_empty") + wTH("ward.loading3", "Loading.") + "</p>"
+        : rows === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.intake-load-failed", "Could not load the pre-admission forms. Do not read this as none sent.", null, "", 1) + "</p>"
+        : !rows.length ? '<p class="w-empty">' + (appt ? wTH("ward.intake-appt-none", "The patient has not sent a form for this appointment.") : wTH("ward.intake-none", "The patient has not sent a pre-admission form for this admission.")) + "</p>"
+        : '<ul class="w-mini">' + rows.map(function (x) {
+          return '<li class="w-mini-row"><div><b>' + esc(x.formTitle) + "</b> v" + esc(x.formVersion) + ' <span class="w-dt-times">' + wTH("ward.intake-sent-by", "sent by {who} &middot; {at}", { who: esc(x.submittedBy), at: when(x.submittedAt) }, "who at") + "</span>" +
+            '<div class="w-dt-times">' + esc(Object.keys(x.answers || {}).map(function (k) { return k + ": " + JSON.stringify(x.answers[k]); }).join("; ")) + "</div>" +
+            '<div class="w-dt-times">' + intakeStateWord(x) + "</div></div>" +
+            (x.reviewState === "submitted" ? '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="intakereview:' + esc(x.responseId) + "~" + esc(x.version) + '~accept">' + ms("done") + wTH("ward.intake-accept", "Accept as reviewed") + "</button>" +
+              '<button class="w-btn ghost sm" data-w-act="intakereview:' + esc(x.responseId) + "~" + esc(x.version) + '~return">' + ms("undo") + wTH("ward.intake-return", "Return to patient") + "</button></div>" : "") +
+            "</li>";
+        }).join("") + "</ul>") + "</div>";
+  }
+  function intakeOpen(arg) {
+    var parts = String(arg || "").split("~");
+    if (!parts[0] || !parts[1]) return;
+    st.intake = parts[2] === "appt" ? { appointmentId: parts[0], patientId: parts[1], rows: null } : { requestId: parts[0], patientId: parts[1], rows: null };
+    paint(); loadIntake();
+  }
+  function loadIntake() {
+    var ik = st.intake; if (!ik) return;
+    return apiGet("/ward/intake-responses?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(ik.patientId) + (ik.appointmentId ? "&appointmentId=" + encodeURIComponent(ik.appointmentId) : "&requestId=" + encodeURIComponent(ik.requestId)))
+      .then(function (r) { if (st.intake !== ik) return; ik.rows = r && r.ok ? r.responses : false; if (!(r && r.ok)) settle(r); paint(); },
+        function () { if (st.intake !== ik) return; ik.rows = false; paint(); });
+  }
+  function intakeReview(arg) {
+    var parts = String(arg || "").split("~"), id = parts[0], version = Number(parts[1]), decision = parts[2];
+    if (!id || !version || !decision) return;
+    function send(reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/intake-review", { orgId: st.orgId, responseId: id, version: version, decision: decision, reason: reason || undefined })
+        .then(function (r) { if (settle(r, r && r.ok ? (decision === "accept" ? wT("ward.intake-accepted-note", "Marked as reviewed. Nothing was added to the chart.") : wT("ward.intake-returned-note", "Returned. The patient sees your reason.")) : null)) loadIntake(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.intake-review-failed", "Could not record the review."); paint(); });
+    }
+    if (decision === "return") {
+      askReason(wTH("ward.intake-return-why", "What does the patient need to change? They will read this.", null, "", 1), wT("ward.intake-return-needs-reason", "Returning a form needs a reason."), wTH("ward.intake-return", "Return to patient"), send);
+      return;
+    }
+    send("");
   }
 
   /* INFUSIONS AND THE CARE PLAN. Both modules were complete and unreachable.
@@ -7308,14 +9043,18 @@
       "<button class=\"w-ic\" data-w-act=\"tags\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       verdict +
       "<div class=\"w-sub\"><h4>" + wTH("ward.check-the-band-on-the-patient", "Check the band on the patient") + "</h4>" +
-      "<input id=\"wTgScan\" placeholder=\"" + wTA("ward.scan-or-type-the-code-on2", "Scan or type the code on the band") + "\">" +
+      "<input id=\"wTgScan\" placeholder=\"" + wTA("ward.scan-or-type-the-code-on2", "Scan or type the code on the band") + "\">" + camBtn("wTgScan") +
       '<button class="w-btn" data-w-act="tagverify">' + ms("fact_check") + wTH("ward.check", "Check") + "</button></div>" +
       (d && d.active && !d.active.length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.this-patient-has-no-active-band", "This patient has no active band.") + "</p>" : "") +
       "<div class=\"w-sub\"><h4>" + wTH("ward.issue-a-band", "Issue a band") + "</h4>" +
       "<div class=\"w-grid\"><label class=\"w-f\"><span>" + wTH("ward.kind", "Kind") + "</span><select id=\"wTgType\">" +
       TAG_TYPE_WORDS.map(function (k) { return '<option value="' + esc(k[0]) + '">' + esc(wTEn(k[1])) + "</option>"; }).join("") + "</select></label>" +
-      "<label class=\"w-f\"><span>" + wTH("ward.code-on-the-band", "Code on the band") + "</span><input id=\"wTgCode\"></label></div>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.code-on-the-band", "Code on the band") + "</span><input id=\"wTgCode\"></label>" + camBtn("wTgCode") + "</div>" +
       '<button class="w-btn ghost" data-w-act="tagassign">' + ms("save") + wTH("ward.issue", "Issue") + "</button></div>" +
+      /* Printed from the record: the band's QR is the active band's code, else what the bedside scans compare with. */
+      "<div class=\"w-sub w-noprint\"><h4>" + wTH("ward.print-labels", "Print") + "</h4>" +
+      '<button class="w-btn ghost" data-w-act="tagprint:wristband">' + ms("badge") + wTH("ward.print-wristband", "Print wristband") + "</button>" +
+      '<button class="w-btn ghost" data-w-act="tagprint:slip">' + ms("receipt") + wTH("ward.print-id-slip", "Print ID slip") + "</button></div>" +
       (d == null ? "<p class=\"w-empty\">" + wTH("ward.loading3", "Loading.") + "</p>"
         : rows ? "<div class=\"w-sub\"><h4>" + wTH("ward.bands-newest-first", "Bands, newest first") + "</h4><ul class=\"w-mini\">" + rows + "</ul></div>"
         : "<p class=\"w-empty\">" + wTH("ward.no-band-has-ever-been-issued", "No band has ever been issued.") + "</p>") +
@@ -7916,7 +9655,8 @@
 
   function downtimeView(state) {
     var d = state.downtime;
-    if (!d) return "<div class=\"w-card\"><p class=\"w-empty\">" + wTH("ward.preparing-the-pack", "Preparing the pack…") + "</p></div>";
+    if (!d) return "<div class=\"w-card\">" + (state.busy ? "<p class=\"w-empty\">" + wTH("ward.preparing-the-pack", "Preparing the pack…") + "</p>"
+      : '<p class="w-hint warn">' + ms("error") + wTH("ward.could-not-build-the-downtime-pack", "Could not build the downtime pack. Do not print an older one.", null, "", 1) + "</p>") + "</div>";
 
     var pages = (d.patients || []).map(function (p) {
       var allergies = p.allergies === null
@@ -8025,7 +9765,7 @@
       (state.demo ? "<span class=\"w-demo\" title=\"" + wTA("ward.fabricated-patients-for-demonstration-nothing-he", "Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.") + "\">DEMO</span>" : "") +
       (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") +
       "<button class=\"w-ic\" data-w-act=\"keys\" aria-label=\"" + wTA("ward.keyboard-shortcuts", "Keyboard shortcuts") + "\" aria-keyshortcuts=\"?\">" + ms("keyboard") + "</button></header>" +
-      '<div class="w-canvas" id="wCanvas">' + banner(state) + offlineBar(state) +
+      '<div class="w-canvas" id="wCanvas">' + banner(state) + labelOfferBar(state) + offlineBar(state) +
       (state.view === "offline" ? offlineView(state)
         : state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
@@ -8046,6 +9786,8 @@
         : state.view === "pathways" ? pathwaysView(state)
         : state.view === "specialty" ? specialtyView(state)
         : state.view === "admreqs" ? admReqView(state)
+        : state.view === "dcboard" ? dischargeBoardView(state)
+        : state.view === "tcentre" ? transferCentreView(state)
         : state.view === "ordersets" ? orderSetsView(state)
         : state.view === "breakglass" ? breakGlassView(state)
         : state.view === "wounds" ? woundView(state)
@@ -8056,6 +9798,7 @@
         : state.view === "workspace" ? workspaceView(state)
         : state.view === "people" ? peopleView(state)
         : state.view === "immunizations" ? immunizationsView(state)
+        : state.view === "abdmrecords" ? abdmRecordsView(state)
         : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
         : state.view === "qualitysafety" ? qualitySafetyView(state)
@@ -8068,12 +9811,15 @@
         : state.view === "completion" ? completionView(state)
         : state.view === "roi" ? roiView(state)
         : state.view === "tpa" ? tpaView(state)
+        : state.view === "tpaevidence" ? tpaEvidenceView(state)
+        : state.view === "claimsdesk" ? claimsDeskView(state)
         : state.view === "billing" ? billingView(state)
         : state.view === "board" ? boardView(state)
         : state.view === "ed" ? edBoardView(state)
         : state.view === "inventory" ? inventoryView(state)
         : state.view === "surgery" ? surgeryBoardView(state)
         : state.view === "surgerycase" ? surgeryCaseView(state)
+        : state.view === "theatreuse" ? theatreUseView(state)
         : state.view === "oncology" ? oncologyView(state)
         : state.view === "cardiology" ? cardiologyView(state)
         : state.view === "radiology" ? radiologyView(state)
@@ -8082,6 +9828,8 @@
         : state.view === "critsboard" ? critsBoardView(state)
         : state.view === "timeline" ? timelineView(state)
         : state.view === "labboard" ? labBoardView(state)
+        : state.view === "labqc" ? labQcView(state)
+        : state.view === "labrejections" ? labRejectionsView(state)
         : state.view === "radboard" ? radBoardView(state)
         : state.view === "integration" ? integrationView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
@@ -8144,7 +9892,7 @@
       var input = f.type === "textarea" ? '<textarea rows="3"' + at + ">" + esc(v) + "</textarea>"
         : f.type === "select" ? "<select" + at + ">" + (f.options || []).map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === v ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select>"
         : '<input type="' + (f.type === "date" ? "date" : f.type === "datetime" ? "datetime-local" : "text") + '" autocomplete="off"' + at + ' value="' + esc(v) + '"' + (f.placeholder ? ' placeholder="' + esc(f.placeholder) + '"' : "") + ">";
-      return '<label class="w-f"><span>' + f.label + "</span>" + input + "</label>";
+      return '<label class="w-f"><span>' + f.label + "</span>" + input + "</label>" + (f.scan ? camBtn(id) : "");
     }).join("");
     return '<div class="w-ask"><div class="w-card" role="dialog" aria-modal="true" aria-labelledby="wAskTitle">' +
       '<div class="w-card-h">' + ms(s.icon || "help") + '<h3 id="wAskTitle">' + String(s.title).replace(/\n+/g, "<br>") + "</h3></div>" +
@@ -8296,8 +10044,8 @@
   function loadWard(afterList) {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover()]); })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-ward", "Could not reach the ward."); st.loaded = true; paint(); });
+      .then(function (r) { st.listFailed = !settle(r); if (!st.listFailed) { st.patients = r.patients || []; if (r.region) st.region = r.region; if (r.labels) st.labels = r.labels; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover(), loadTransfers()]); })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-ward", "Could not reach the ward."); st.loaded = true; st.listFailed = true; paint(); });
   }
   function loadDuty() {
     st.duty = null;
@@ -8328,6 +10076,14 @@
     var s = st.sel; if (!s) return Promise.resolve();
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId);
+    /* Statutory registers on the chart (register-routes.js): the medico-legal flag and its number, and notifiable disease
+     * prompts. Loaded beside the chart, never blocking it; null while loading, false when it could not be read. */
+    st.registerFlags = null;
+    Promise.all([apiGet("/ward/mlc-flag?" + q), apiGet("/ward/notifiable-prompts?" + q)]).then(function (rs) {
+      if (st.sel !== s) return;
+      st.registerFlags = rs[0] && rs[0].ok && rs[1] && rs[1].ok ? { mlc: rs[0], prompts: rs[1].prompts || [] } : false;
+      paint();
+    }, function () { if (st.sel === s) { st.registerFlags = false; paint(); } });
     return Promise.all([apiGet("/ward/problems?" + q), apiGet("/ward/criticals?" + q), apiGet("/ward/timeline?" + q)])
       .then(function (rs) {
         if (settle(rs[0])) st.problems = rs[0].problems || [];
@@ -8388,6 +10144,7 @@
    * here). */
   function doAdmit(mrn) {
     var t = st.admitTarget; if (!t || !mrn) return;
+    var who = (st.mrnLookup && st.mrnLookup.name) || mrn;
     st.busy = true; paint();
     apiPost("/ward/admit", { orgId: st.orgId, mrn: mrn, ward: t.ward, bed: t.bed, admittedAt: new Date().toISOString(), class: st.admitClass || undefined, emergencyOverride: st.emergencyOverride === true })
       .then(function (r) {
@@ -8398,6 +10155,8 @@
            * the shell's address still said #/ward/board. Now the note survives, the list scrolls to the
            * new row, and the address says #/ward. */
           var admittedNote = st.note;
+          // The wristband and ID slip are printed at admission; offered on the ward list the admission lands on.
+          if (r.written && r.patientId) st.labelOffer = { kind: "admission", view: "list", patientId: r.patientId, who: who };
           st.admitTarget = null; st.mrnLookup = null; st.view = "list";
           if (G.WSQ && typeof location !== "undefined" && /^#\/ward\//.test(location.hash)) { try { history.replaceState(null, "", "#/ward"); } catch (e) {} }
           loadWard(function () { if (!st.err && !st.refusal) st.note = admittedNote; st.landOn = { ward: t.ward, bed: String(t.bed) }; });
@@ -8456,6 +10215,11 @@
       // bed board the act is an admission, and the button now says which bed it is admitting to.
       submitLabel: st.admitTarget && st.admitTarget.bed ? wT("ward.register-admit-to", "Register & admit to {bed}", { bed: st.admitTarget.bed }) : wT("ward.register-and-admit", "Register & admit"),
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
+      // S6 A5: the same ABHA verify and create as the Patients page, through abdm-desk.js.
+      abdm: {
+        status: function () { return apiGet("/ward/abdm-desk?orgId=" + encodeURIComponent(st.orgId)).catch(function () { return null; }); },
+        step: function (b) { return apiPost("/ward/abha", Object.assign({ orgId: st.orgId }, b)).catch(function () { return null; }); },
+      },
       onAdded: function (r) { if (r && r.mrn) doAdmit(r.mrn); },
     });
   }
@@ -8692,7 +10456,7 @@
       .then(function (r) { st.busy = false; if (r && r.ok) st.surgBoard = r; else st.surgErr = (r && r.detail) || wT("ward.could-not-load-the-theatre-board", "Could not load the theatre board."); paint(); })
       .catch(function () { st.busy = false; st.surgErr = wT("ward.could-not-load-the-theatre-board", "Could not load the theatre board."); paint(); });
   }
-  function surgeryBookOpen() { st.surgBookOpen = true; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; paint(); }
+  function surgeryBookOpen() { st.surgBookOpen = true; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.cp = {}; paint(); loadCodeSets(); }
   function surgeryBookClose() { st.surgBookOpen = false; st.surgMrnLookup = null; paint(); }
   function surgMrnLookup() {
     var mrn = val("wSurgMrn");
@@ -8712,10 +10476,11 @@
   // node instead of what was typed - the same bug the ICU admit checkbox had (Task 2.2's own report).
   function surgeryBook() {
     var lookup = st.surgMrnLookup; if (!lookup) return;
-    var procedure = val("wSurgProcedure"), site = val("wSurgSite"), theatre = val("wSurgTheatre");
+    var procedure = val("wSurgProcedure"), site = val("wSurgSite"), theatre = val("wSurgTheatre"), whenV = val("wSurgWhen"), minutes = val("wSurgMinutes");
     var laterality = (document.getElementById("wSurgLaterality") || {}).value || "not-applicable";
+    var scheduledAt = whenV && !isNaN(new Date(whenV).getTime()) ? new Date(whenV).toISOString() : undefined;
     st.busy = true; paint();
-    apiPost("/ward/surgery-book", { orgId: st.orgId, booking: { mrn: lookup.mrn, procedure: procedure, site: site, laterality: laterality, theatre: theatre } })
+    apiPost("/ward/surgery-book", { orgId: st.orgId, booking: { mrn: lookup.mrn, procedure: procedure, site: site, laterality: laterality, theatre: theatre, scheduledAt: scheduledAt, minutes: minutes ? Number(minutes) : undefined, coding: codeChosen("surg") } })
       .then(function (r) {
         if (settle(r, wT("ward.case-booked", "Case booked."))) { st.surgBookOpen = false; st.surgMrnLookup = null; loadSurgeryBoard(); } else paint();
       })
@@ -8726,16 +10491,17 @@
     return apiGet("/ward/surgery-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId))
       .then(function (r) {
         if (!r || !r.ok || !r.case) { st.busy = false; st.err = wT("ward.that-case-could-not-be-loaded", "That case could not be loaded."); st.view = "surgery"; paint(); return; }
-        st.surgCase = { case: r.case, anesthesia: null, implants: [] };
+        st.surgCase = { case: r.case, anesthesia: null, implants: [], pac: null, rules: r.theatreRules || null };
         paint();
         return Promise.all([
+          apiGet("/ward/pac-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId)).then(function (p) { st.surgCase.pac = p && p.ok ? { rec: p.pac || null } : false; }, function () { st.surgCase.pac = false; }),
           apiGet("/ward/anesthesia-get?orgId=" + encodeURIComponent(st.orgId) + "&caseId=" + encodeURIComponent(caseId)).then(function (a) { if (a && a.ok) st.surgCase.anesthesia = a.record; }),
           apiGet("/ward/implant-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(r.case.patientId) + "&caseId=" + encodeURIComponent(caseId)).then(function (i) { if (i && i.ok) st.surgCase.implants = i.implants; }),
         ]).then(function () { st.busy = false; paint(); });
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-load-the-case", "Could not load the case."); paint(); });
   }
-  function openSurgeryCase(caseId) { st.view = "surgerycase"; st.surgCase = null; loadSurgeryCase(caseId); }
+  function openSurgeryCase(caseId) { st.view = "surgerycase"; st.surgCase = null; st.surgPacEdit = false; loadSurgeryCase(caseId); }
   function surgeryLoad() { var c = st.surgCase && st.surgCase.case; if (c) loadSurgeryCase(c.id); }
   function surgeryConsent() {
     var c = st.surgCase && st.surgCase.case; if (!c) return;
@@ -8769,6 +10535,7 @@
     ["surgeon", "anaesthetist", "nurse"].forEach(function (r) { var a = role(r); if (a) signatures.push({ role: r, actorId: a }); });
     var submission = { items: itemMap, signatures: signatures };
     if (phase !== "signOut") submission.lateralityAsserted = (document.getElementById("wSurgLatAssert-" + phase) || {}).value || "not-applicable";
+    if (phase === "signIn" && val("wSurgPacAck")) submission.pacAcknowledgement = val("wSurgPacAck");
     var route = phase === "signIn" ? "/ward/surgery-signin" : phase === "timeOut" ? "/ward/surgery-timeout" : "/ward/surgery-signout";
     st.busy = true; paint();
     apiPost(route, { orgId: st.orgId, caseId: c.id, submission: submission })
@@ -8815,11 +10582,36 @@
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-disposition", "Could not record the disposition."); paint(); });
   }
+  function pacSave() {
+    var d = st.surgCase, c = d && d.case; if (!c || !d.pac) return;
+    var rec = d.pac.rec, yn = function (id) { var v = val(id); return v === "yes" ? true : v === "no" ? false : null; };
+    var iso = function (id) { var v = val(id); if (!v) return null; var t = new Date(v); return isNaN(t.getTime()) ? v : t.toISOString(); };
+    var num = function (id) { var v = val(id); return v === "" ? null : Number(v); };
+    var pac = {
+      history: val("wPacHistory"),
+      airway: { mallampati: val("wPacMallampati"), mouthOpeningCm: num("wPacMouth"), thyromentalDistanceCm: num("wPacTmd"), neckMovement: val("wPacNeck") },
+      asaClass: val("wPacAsa"), asaEmergency: !!(document.getElementById("wPacAsaE") || {}).checked,
+      fasting: { status: val("wPacFasting"), solidsLastAt: iso("wPacSolids"), clearFluidsLastAt: iso("wPacClears") },
+      investigations: { reviewed: yn("wPacInvReviewed"), summary: val("wPacInvSummary") },
+      plan: { technique: val("wPacTechnique"), notes: val("wPacPlanNotes") },
+      consent: { obtained: yn("wPacConsent"), givenBy: val("wPacConsentBy") },
+      decision: val("wPacDecision"), decisionReason: val("wPacDecisionReason")
+    };
+    var body = { orgId: st.orgId, caseId: c.id, pac: pac };
+    if (rec) { body.revisionReason = val("wPacRevisionReason"); body.expectedVersion = rec.version; }
+    st.busy = true; paint();
+    apiPost("/ward/pac", body)
+      .then(function (r) {
+        if (r && !r.ok && r.error === "pac_invalid") { st.busy = false; st.err = wT("ward.pac-invalid", "The checkup is incomplete: {detail}", { detail: r.detail || r.field || "" }); paint(); return; }
+        if (settle(r, rec ? wT("ward.pac-revised-note", "Checkup revised.") : wT("ward.pac-recorded-note", "Checkup recorded."))) { st.surgPacEdit = false; loadSurgeryCase(c.id); } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.pac-could-not-record", "Could not record the pre-anaesthetic checkup."); paint(); });
+  }
   function anesStart() {
     var c = st.surgCase && st.surgCase.case; if (!c) return;
     var asaClass = val("wSurgAsa");
     st.busy = true; paint();
-    apiPost("/ward/anesthesia-start", { orgId: st.orgId, caseId: c.id, asaClass: asaClass })
+    apiPost("/ward/anesthesia-start", { orgId: st.orgId, caseId: c.id, asaClass: asaClass, technique: val("wSurgAnesTech") || undefined })
       .then(function (r) { if (settle(r, wT("ward.anaesthesia-record-started", "Anaesthesia record started."))) loadSurgeryCase(c.id); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-start-the-anaesthesia-record", "Could not start the anaesthesia record."); paint(); });
   }
@@ -8835,7 +10627,7 @@
   function anesEnd() {
     var c = st.surgCase && st.surgCase.case; if (!c) return;
     st.busy = true; paint();
-    apiPost("/ward/anesthesia-end", { orgId: st.orgId, caseId: c.id })
+    apiPost("/ward/anesthesia-end", { orgId: st.orgId, caseId: c.id, technique: val("wSurgAnesTechEnd") || undefined })
       .then(function (r) { if (settle(r, wT("ward.anaesthesia-ended", "Anaesthesia ended."))) loadSurgeryCase(c.id); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-end-the-anaesthesia-record", "Could not end the anaesthesia record."); paint(); });
   }
@@ -8851,8 +10643,33 @@
       apiGet("/ward/meows?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.meows = r && r.ok ? r.meows : false; }, function () { st.maternity.meows = false; }),
       apiGet("/ward/blood-loss-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.losses = r && r.ok ? (r.losses || []) : false; }, function () { st.maternity.losses = false; }),
       apiGet("/ward/delivery-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.delivery = r && r.ok ? r.delivery : false; }, function () { st.maternity.delivery = false; }),
-      apiGet("/ward/family-links?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.links = r && r.ok ? (r.links || []) : false; }, function () { st.maternity.links = false; }),
+      apiGet("/ward/family-links?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) {
+        st.maternity.links = r && r.ok ? (r.links || []) : false;
+        (st.maternity.links || []).forEach(function (l) { loadApgar(l.relatedPatientId); });
+      }, function () { st.maternity.links = false; }),
     ]).then(function () { paint(); });
+  }
+  function loadApgar(pid) {
+    var s = st.sel; if (!s || !pid) return Promise.resolve();
+    st.apgar = st.apgar || {};
+    return apiGet("/ward/apgar-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(pid))
+      .then(function (r) { if (st.sel !== s) return; st.apgar[pid] = r && r.ok ? (r.apgar || (r.skipped ? { off: true } : false)) : false; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.apgar[pid] = false; paint(); });
+  }
+  function apgarSave(pid) {
+    var s = st.sel, a = st.apgar && st.apgar[pid]; if (!s || !a || !a.minutes) return;
+    var id = apgarDomId(pid), minute = Number(val("wApgarMin-" + id)), components = {}, missing = false;
+    apgarSigns().forEach(function (g) { var v = val("wApgar-" + g.k + "-" + id); if (v === "") missing = true; else components[g.k] = Number(v); });
+    if (missing) { st.err = wT("ward.apgar-score-every-sign", "Score all five signs before recording."); paint(); return; }
+    var reason = val("wApgarReason-" + id).trim();
+    var recorded = a.minutes.filter(function (m) { return m.minute === minute && m.record; })[0];
+    if (recorded && !reason) { st.err = wT("ward.apgar-already-recorded", "This minute is already recorded. To change it, give a correction reason."); paint(); return; }
+    var body = { orgId: st.orgId, patientId: pid, minute: minute, components: components };
+    if (recorded) { body.correctionReason = reason; body.expectedVersion = recorded.record.version; }
+    st.busy = true; paint();
+    apiPost("/ward/apgar", body)
+      .then(function (r) { if (settle(r, recorded ? wT("ward.apgar-corrected-note", "APGAR corrected.") : wT("ward.apgar-recorded-note", "APGAR recorded."))) loadApgar(pid); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.apgar-could-not-record", "Could not record the APGAR score."); paint(); });
   }
   function pregnancySave() {
     var s = st.sel; if (!s) return;
@@ -8963,12 +10780,18 @@
       .then(function (r) { if (st.sel !== s) return; st.lines = (r && r.ok) ? (r.lines || []) : false; paint(); })
       .catch(function () { if (st.sel !== s) return; st.lines = false; paint(); });
   }
+  function loadGrowth() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/growth?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (st.sel !== s) return; st.growth = r && r.ok ? (r.growth || (r.skipped ? { off: true } : false)) : false; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.growth = false; paint(); });
+  }
   function lineSave() {
     var s = st.sel; if (!s) return;
-    var type = val("wLineType"), site = val("wLineSite");
+    var type = val("wLineType"), site = val("wLineSite"), deviceClass = val("wLineClass");
     if (!type) { st.err = wT("ward.enter-the-line-type", "Enter the line type."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/line", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, line: { type: type, site: site || undefined } })
+    apiPost("/ward/line", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, line: { type: type, site: site || undefined, deviceClass: deviceClass || undefined } })
       .then(function (r) { if (settle(r, wT("ward.line-recorded", "Line recorded."))) loadLines(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-line", "Could not record the line."); paint(); });
   }
@@ -9142,6 +10965,8 @@
     ]).then(function (rs) {
       st.pharmacy.queue = (rs[0] && rs[0].ok) ? rs[0] : null;
       st.pharmacy.dispenses = (rs[1] && rs[1].ok) ? rs[1].dispenses : [];
+      // The pharmacy role does not read the ward roster, so the label settings come with its own dispense list.
+      if (rs[1] && rs[1].labels) st.labels = rs[1].labels;
       paint();
     }).catch(function () { paint(); });
   }
@@ -9181,13 +11006,17 @@
     var qty = val("wPhQty"), unit = val("wPhUnit"), batch = val("wPhBatch"), expiry = val("wPhExpiry"), dest = val("wPhDest");
     if (!qty || !unit) { st.err = wT("ward.a-dispense-needs-a-positive-quantity", "A dispense needs a positive quantity and a unit."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/dispense", { orgId: st.orgId, orderId: picked, quantity: { value: Number(qty), unit: unit }, batch: batch || undefined, expiry: expiry || undefined, destination: dest || undefined })
+    apiPost("/ward/dispense", { orgId: st.orgId, orderId: picked, quantity: { value: Number(qty), unit: unit }, batch: batch || undefined, expiry: expiry || undefined, destination: dest || undefined, witnessId: val("wPhWitness") || undefined, takeHome: checked("wPhTakeHome") || undefined })
       .then(function (r) {
         if (r && r.error === "quantity_required") { st.busy = false; st.err = wT("ward.a-dispense-needs-a-positive-quantity", "A dispense needs a positive quantity and a unit."); paint(); return; }
         var msg = wT("ward.dispensed", "Dispensed.");
         if (r && r.expiryWarning) msg = wT("ward.dispensed", "Dispensed.") + " " + r.expiryWarning;
         if (r && r.warning) msg = wT("ward.dispensed", "Dispensed.") + " " + r.warning;
-        if (settle(r, msg)) loadPharmacy(); else paint();
+        if (settle(r, msg)) {
+          // Labelled where it was issued. The dispense row this names arrives with the reload below.
+          if (r && r.dispenseId && r.written) st.labelOffer = { kind: "pharmacy", view: st.view, dispenseId: r.dispenseId, drug: r.drug || "" };
+          loadPharmacy();
+        } else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-dispense", "Could not record the dispense."); paint(); });
   }
@@ -9350,6 +11179,160 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-acknowledgement", "Could not record the acknowledgement."); paint(); });
     });
   }
+  /* THE CLAIMS DESK (rcm-claims-ops, functions/_wardsynq/claims-ops.js rcmWorklists): stays discharged but not billed,
+   * claims not sent, open payer queries and enhancements with their clocks, receivables ageing by payer and denials by
+   * payer, scheme, service and reason. st.desk: null = loading, { failed } = not loaded; each list is null when the
+   * server could not read it, and says why. A row names the patient by MRN and opens the TPA screen for that patient. */
+  function claimsDeskOpen() {
+    st.view = "claimsdesk"; st.desk = null; st.cashless = null; paint();
+    /* R3-5: current cashless stays whose pre-authorisation needs action (claims-ops.js cashlessStays), loaded on its own so
+     * either list failing leaves the other readable. st.cashless: null = loading, { failed } = not loaded. */
+    apiGet("/ward/cashless-stays?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (st.view !== "claimsdesk") return; st.cashless = r && r.ok ? r : { failed: true, status: r && r.__status }; paint(); })
+      .catch(function () { if (st.view === "claimsdesk") { st.cashless = { failed: true }; paint(); } });
+    /* R2-2: the period the denial analytics cover, sent as the server's own from/to (claims-ops.js). A day picked here is
+     * the whole local day. Neither set is all time, and the panel says which the server applied. */
+    var from = st.deskFrom ? new Date(st.deskFrom + "T00:00:00") : null, to = st.deskTo ? new Date(st.deskTo + "T23:59:59.999") : null;
+    apiGet("/ward/rcm-worklists?orgId=" + encodeURIComponent(st.orgId) + (from && !isNaN(from.getTime()) ? "&from=" + encodeURIComponent(from.toISOString()) : "") + (to && !isNaN(to.getTime()) ? "&to=" + encodeURIComponent(to.toISOString()) : ""))
+      .then(function (r) { if (st.view !== "claimsdesk") return; st.desk = r && r.ok ? r : { failed: true, status: r && r.__status }; paint(); })
+      .catch(function () { if (st.view === "claimsdesk") { st.desk = { failed: true }; paint(); } });
+  }
+  function claimsDeskPatient(arg) {
+    var i = String(arg).indexOf("|"), pid = i < 0 ? arg : arg.slice(0, i), enc = i < 0 ? "" : arg.slice(i + 1);
+    if (!pid) return;
+    st.sel = { patientId: pid, encounterId: enc || null, mrn: pid.indexOf("opd-pat-") === 0 ? pid.slice(8).toUpperCase() : pid };
+    st.tpaFromDesk = true; tpaOpen();
+  }
+  function claimsDeskView(state) {
+    var d = state.desk;
+    var head = "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
+      "<h3>" + wTH("ward.rcm-desk", "Claims desk") + "</h3><button class=\"w-btn ghost\" data-w-act=\"claimsdesk\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" +
+      '<div class="w-filter w-noprint"><label class="w-f"><span>' + wTH("ward.rcm-period-from", "Denials from") + '</span><input id="wDeskFrom" type="date" value="' + esc(state.deskFrom || "") + '"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.rcm-period-to", "to") + '</span><input id="wDeskTo" type="date" value="' + esc(state.deskTo || "") + '"></label>' +
+      '<button class="w-btn ghost" data-w-act="deskperiod">' + ms("filter_alt") + wTH("ward.rcm-period-apply", "Show this period") + "</button>" +
+      (state.deskFrom || state.deskTo ? '<button class="w-btn ghost" data-w-act="deskperiod:clear">' + ms("close") + wTH("ward.rcm-period-clear", "All time") + "</button>" : "") + "</div>";
+    if (!d) return '<div class="w-card">' + head + cashlessDeskSection(state) + "<p class=\"w-empty\">" + wTH("ward.loading4", "Loading...") + "</p></div>";
+    if (d.failed) return '<div class="w-card">' + head + cashlessDeskSection(state) + '<p class="w-hint warn">' + ms("warning") + (d.status === 403
+      ? wTH("ward.rcm-desk-forbidden", "Your role cannot open the claims desk.", null, "", 1)
+      : wTH("ward.rcm-desk-failed", "The claims desk could not be loaded. Do not read this as nothing outstanding.", null, "", 1)) + "</p></div>";
+    var who = function (r) { return "<b>" + esc(r.mrn || r.patientId) + "</b>"; };
+    var open = function (r) { return '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="deskopen:' + esc(r.patientId) + "|" + esc(r.encounterId || "") + '">' + ms("open_in_new") + wTH("ward.rcm-open", "Open") + "</button></div>"; };
+    var section = function (title, list, unreadable, emptyWords, row) {
+      return '<div class="w-sub"><h4>' + title + "</h4>" + (list == null
+        ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-list-unreadable", "Could not be read, so this is not a list of none: {why}", { why: esc(unreadable || "") }, "why", 1) + "</p>"
+        : list.length ? '<ul class="w-mini">' + list.map(row).join("") + "</ul>" : '<p class="w-empty">' + emptyWords + "</p>") + "</div>";
+    };
+    var un = d.unreadable || {};
+    var dnfb = section(wTH("ward.rcm-dnfb", "Discharged, not billed"), d.dnfb, un.dnfb, wTH("ward.rcm-dnfb-none", "Every discharged stay read has a bill."), function (r) {
+      return '<li class="w-mini-row"><div>' + who(r) + " &middot; " + wTH("ward.rcm-discharged-days", "discharged {at}, {days} days ago", { at: when(r.dischargedAt), days: esc(r.days) }) +
+        (r.payerName ? " &middot; " + esc(r.payerName) : "") + (r.ward ? " &middot; " + esc(r.ward) : "") + "</div>" + open(r) + "</li>";
+    });
+    var unsub = section(wTH("ward.rcm-unsubmitted", "Claims not sent"), d.unsubmitted, un.unsubmitted, wTH("ward.rcm-unsubmitted-none", "No coded claim is waiting to be sent, and every discharged stay with a payer has a claim."), function (r) {
+      return '<li class="w-mini-row"><div>' + who(r) + " &middot; " + (r.kind === "no_claim" ? wTH("ward.rcm-no-claim", "no claim coded yet") : wTH("ward.rcm-coded-not-sent", "coded, not sent")) +
+        (r.payerName ? " &middot; " + esc(r.payerName) : "") + " &middot; " + wTH("ward.rcm-days-since", "{days} days", { days: esc(r.days == null ? "-" : r.days) }) +
+        (r.filingDaysLeft != null ? (r.filingDaysLeft < 0 ? '<div class="w-warn">' + wTH("ward.rcm-filing-passed", "Timely filing passed {n} days ago.", { n: esc(-r.filingDaysLeft) }) + "</div>" : " &middot; " + wTH("ward.rcm-filing-left", "{n} days left to file", { n: esc(r.filingDaysLeft) })) : "") + "</div>" + open(r) + "</li>";
+    });
+    var queries = section(wTH("ward.rcm-queries", "Open payer queries and enhancements"), d.queries, un.queries, wTH("ward.rcm-queries-none", "No payer query or enhancement is waiting."), function (r) {
+      return '<li class="w-mini-row"><div>' + who(r) + " &middot; " + (r.kind === "enhancement" ? wTH("ward.rcm-enh-row", "enhancement to {amount}", { amount: esc(r.requestedAmount) }) : esc(r.text)) +
+        (r.payerName ? " &middot; " + esc(r.payerName) : "") + " &middot; " + wTH("ward.rcm-waiting", "waiting {age}", { age: esc(r.ageHours < 48 ? wT("ward.rcm-hours", "{n} h", { n: r.ageHours }) : wT("ward.rcm-days", "{n} d", { n: Math.floor(r.ageHours / 24) })) }) +
+        (r.dueBy ? (r.overdue ? '<div class="w-warn">' + wTH("ward.rcm-query-overdue", "answer was due {due}", { due: when(r.dueBy) }) + "</div>" : " &middot; " + wTH("ward.rcm-query-due", "answer due {due}", { due: when(r.dueBy) })) : "") + "</div>" + open(r) + "</li>";
+    });
+    var ag = d.ageing, ageing;
+    if (ag == null) ageing = section(wTH("ward.rcm-ageing", "Receivables by payer"), null, un.ageing, "", null);
+    else {
+      var cols = ag.bandsConfigured ? ag.labels : [];
+      var money = function (n) { return esc(Math.round(n * 100) / 100); };
+      ageing = '<div class="w-sub"><h4>' + wTH("ward.rcm-ageing", "Receivables by payer") + "</h4>" +
+        (ag.bandsConfigured ? "" : '<p class="w-hint">' + wTH("ward.rcm-no-bands", "No ageing bands are set, so totals are shown without ageing. An administrator sets them on Admin, Price list, Claims settings.") + "</p>") +
+        (!ag.payers.length ? '<p class="w-empty">' + wTH("ward.rcm-ageing-none", "No bill read has a balance outstanding.") + "</p>"
+          : '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.rcm-payer", "Payer") + "</th>" + cols.map(function (l) { return "<th>" + wTH("ward.rcm-band-days", "{band} days", { band: esc(l) }) + "</th>"; }).join("") +
+            "<th>" + wTH("ward.rcm-total", "Total") + "</th><th>" + wTH("ward.rcm-bills", "Bills") + "</th></tr></thead><tbody>" +
+            ag.payers.map(function (p) {
+              var name = p.kind === "self_pay" ? wTH("ward.rcm-self-pay", "Self-pay") : p.kind === "not_recorded" ? wTH("ward.rcm-payer-not-recorded", "Payer not recorded on the bill") : esc(p.payerName);
+              return "<tr><td>" + name + "</td>" + p.buckets.map(function (b) { return "<td>" + money(b) + "</td>"; }).join("") + "<td><b>" + money(p.total) + "</b></td><td>" + esc(p.invoices) + "</td></tr>";
+            }).join("") +
+            "<tr><td><b>" + wTH("ward.rcm-total", "Total") + "</b></td>" + ag.totals.buckets.map(function (b) { return "<td><b>" + money(b) + "</b></td>"; }).join("") + "<td><b>" + money(ag.totals.outstanding) + "</b></td><td>" + esc(ag.totals.invoices) + "</td></tr></tbody></table></div>") +
+        (ag.totals.credit ? '<p class="w-dt-times">' + wTH("ward.rcm-credit", "Credit balances held: {credit}. Net outstanding: {net}.", { credit: money(ag.totals.credit), net: money(ag.netOutstanding) }) + "</p>" : "") +
+        (ag.reconciles ? "" : '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-not-reconciled", "These totals do not reconcile to the bills' balances. Do not rely on them; report it.", null, "", 1) + "</p>") + "</div>";
+    }
+    var dn = d.denials, denials;
+    if (dn == null) denials = section(wTH("ward.rcm-denials", "Denials"), null, un.denials, "", null);
+    else {
+      var tbl = function (title, rows) {
+        return "<h5>" + title + "</h5>" + (rows.length ? '<ul class="w-mini">' + rows.map(function (g) {
+          return '<li class="w-mini-row"><div><b>' + esc(g.label) + "</b> &middot; " + wTH("ward.rcm-denial-count", "{count} denied, {amount}", { count: esc(g.count), amount: esc(g.amount) }) +
+            (g.amountNotRecorded ? " (" + wTH("ward.rcm-amount-missing", "{n} without an amount", { n: esc(g.amountNotRecorded) }) + ")" : "") + "</div></li>";
+        }).join("") + "</ul>" : '<p class="w-empty">-</p>');
+      };
+      /* The period the SERVER applied, never the inputs' own values: a date it could not read is all time, and says so. */
+      var per = d.period || {}, day = function (iso) { var t = Date.parse(iso || ""); return isNaN(t) ? "" : new Date(t - new Date(t).getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
+      denials = '<div class="w-sub"><h4>' + wTH("ward.rcm-denials", "Denials") + "</h4>" +
+        '<p class="w-dt-times">' + (per.from && per.to ? wTH("ward.rcm-period-both", "Denied from {from} to {to}", { from: esc(day(per.from)), to: esc(day(per.to)) })
+          : per.from ? wTH("ward.rcm-period-since", "Denied since {from}", { from: esc(day(per.from)) })
+          : per.to ? wTH("ward.rcm-period-until", "Denied up to {to}", { to: esc(day(per.to)) })
+          : wTH("ward.rcm-period-all", "All time: no period is applied.")) + "</p>" +
+        (!d.denialReasonsConfigured ? '<p class="w-hint">' + wTH("ward.rcm-no-reasons-desk", "No denial reasons are set, so denials are not classified by reason. An administrator adds them on Admin, Price list, Claims settings.") + "</p>" : "") +
+        (!dn.count ? '<p class="w-empty">' + wTH("ward.rcm-denials-none", "No denial is recorded on the claims read.") + "</p>"
+          : tbl(wTH("ward.rcm-by-payer", "By payer"), dn.byPayer) + tbl(wTH("ward.rcm-by-scheme", "By scheme or payer kind"), dn.byScheme) + tbl(wTH("ward.rcm-by-service", "By type of stay"), dn.byService) + tbl(wTH("ward.rcm-by-reason", "By reason"), dn.byReason) +
+            '<h5>' + wTH("ward.rcm-denied-claims", "Denied claims") + '</h5><ul class="w-mini">' + dn.claims.map(function (r) {
+              return '<li class="w-mini-row"><div>' + who(r) + " &middot; " + when(r.deniedAt) + (r.payerName ? " &middot; " + esc(r.payerName) : "") + " &middot; " + esc(r.payerReason || "") +
+                (r.code ? '<div class="w-dt-times">' + esc(r.code + " " + r.label) + ": " + esc(r.rootCause) + "</div>" : '<div class="w-dt-times">' + wTH("ward.rcm-not-classified", "Not classified yet.") + "</div>") + "</div>" + open(r) + "</li>";
+            }).join("") + "</ul>") +
+        (dn.disallowances.length ? "<h5>" + wTH("ward.rcm-disallowances", "Deductions at settlement") + '</h5><ul class="w-mini">' + dn.disallowances.map(function (g) {
+          return '<li class="w-mini-row"><div><b>' + esc(g.payerName) + "</b> &middot; " + esc(g.reason) + " &middot; " + wTH("ward.rcm-denial-count", "{count} denied, {amount}", { count: esc(g.count), amount: esc(g.amount) }) + "</div></li>";
+        }).join("") + "</ul>" : "") + "</div>";
+    }
+    return '<div class="w-card">' + head +
+      (d.truncated ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-truncated", "Only {n} records of a kind were read; the newest were not read, so these lists may be incomplete.", { n: esc(d.readLimit) }, "", 1) + "</p>" : "") +
+      '<p class="w-hint">' + ms("info") + wTH("ward.rcm-desk-note", "Nothing here is sent to a payer. Queries, enhancements and denials are recorded as they arrive.") + "</p>" +
+      cashlessDeskSection(state) + dnfb + unsub + queries + ageing + denials + "</div>";
+  }
+  /* R3-5 THE CASHLESS DESK: each current stay on an insurer, TPA or scheme payer whose pre-authorisation needs action, with
+   * the inputs every finding was computed from. An input that could not be read is said, never shown as covered. */
+  function cashlessDeskSection(state) {
+    var c = state.cashless;
+    var title = "<h4>" + wTH("ward.cl-title", "Cashless stays needing pre-authorisation action") + "</h4>";
+    if (!c) return '<div class="w-sub">' + title + '<p class="w-empty">' + wTH("ward.loading4", "Loading...") + "</p></div>";
+    if (c.failed) return '<div class="w-sub">' + title + '<p class="w-hint warn">' + ms("warning") + (c.status === 403
+      ? wTH("ward.cl-forbidden", "Your role cannot open the cashless stays list.", null, "", 1)
+      : wTH("ward.cl-failed", "The cashless stays could not be loaded. Do not read this as none needing action.", null, "", 1)) + "</p></div>";
+    if (c.stays == null) return '<div class="w-sub">' + title + '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-list-unreadable", "Could not be read, so this is not a list of none: {why}", { why: esc(c.unreadable || "") }, "why", 1) + "</p></div>";
+    var age = function (h) { return h == null ? "-" : h < 48 ? wT("ward.rcm-hours", "{n} h", { n: h }) : wT("ward.rcm-days", "{n} d", { n: Math.floor(h / 24) }); };
+    var issue = function (x) {
+      var warn = function (html) { return '<div class="w-warn">' + html + "</div>"; };
+      if (x.code === "no_preauth") return warn(wTH("ward.cl-no-preauth", "No pre-authorisation is recorded for this stay."));
+      if (x.code === "awaiting_decision") return warn(wTH("ward.cl-awaiting", "Requested {age} ago, no decision recorded.", { age: esc(age(x.ageHours)) }));
+      if (x.code === "refused") return warn(wTH("ward.cl-refused", "The payer refused the pre-authorisation on {at}.", { at: when(x.decidedAt) }) + (x.reason ? " " + esc(x.reason) : ""));
+      if (x.code === "expired") return warn(x.validUntil ? wTH("ward.cl-expired", "The approval was valid until {date}.", { date: esc(x.validUntil) }) : wTH("ward.cl-expired-state", "The pre-authorisation is recorded as expired."));
+      if (x.code === "expires_before_discharge") return warn(wTH("ward.cl-before-edd", "The approval is valid until {until}, before the expected discharge on {edd}.", { until: esc(x.validUntil), edd: esc(x.expectedDischarge) }));
+      if (x.code === "discharge_date_unreadable") return warn(wTH("ward.cl-edd-unreadable", "The expected discharge date could not be read, so the approval's validity was not checked against it: {why}", { why: esc(x.why) }, "why", 1));
+      if (x.code === "amount_not_recorded") return warn(wTH("ward.cl-no-amount", "The approved amount is not recorded, so it was not compared with the running bill."));
+      if (x.code === "bill_unreadable") return warn(wTH("ward.cl-bill-unreadable", "The running bill could not be read, so the approved {amount} was not compared with it: {why}", { amount: esc(x.authorizedAmount), why: esc(x.why) }, "why", 1));
+      if (x.code === "below_bill") return warn(wTH("ward.cl-below-bill", "Approved {amount} is below the running bill of {bill}.", { amount: esc(x.authorizedAmount), bill: esc(x.bill) }));
+      if (x.code === "payer_query_open") return warn(wTH("ward.cl-queries", "Open payer queries: {n}.", { n: esc(x.count) }));
+      if (x.code === "payer_not_in_list") return '<div class="w-dt-times">' + wTH("ward.cl-payer-missing", "This payer is not in the hospital's payer list, so its kind is not known.") + "</div>";
+      if (x.code === "payer_kind_not_recorded") return '<div class="w-dt-times">' + wTH("ward.cl-kind-missing", "The kind of payer is not recorded on its contract.") + "</div>";
+      return "";
+    };
+    var inputs = function (r) {
+      var p = r.preAuth, b = r.bill || {};
+      return '<div class="w-dt-times">' + (p
+        ? wTH("ward.cl-preauth-input", "Pre-authorisation: {state}, recorded {at}, valid until {until}, approved {amount}", { state: p.state === "approved" ? wTH("ward.cl-state-approved", "approved") : p.state === "requested" ? wTH("ward.cl-state-requested", "requested")
+          : p.state === "refused" ? wTH("ward.cl-state-refused", "refused") : p.state === "expired" ? wTH("ward.cl-state-expired", "expired") : "-", at: when(p.recordedAt), until: esc(p.validUntil || "-"), amount: esc(p.authorizedAmount == null ? "-" : p.authorizedAmount) })
+        : wTH("ward.cl-preauth-none-input", "Pre-authorisation: none")) +
+        " &middot; " + (b.unreadable ? wTH("ward.cl-bill-input-unread", "Running bill: not read")
+          : b.source === "invoice" ? wTH("ward.cl-bill-input-invoice", "Running bill: {amount} on {n} bills raised", { amount: esc(b.amount), n: esc(b.invoices) })
+          : wTH("ward.cl-bill-input-capture", "Running bill: {amount} captured so far, not yet billed", { amount: esc(b.amount) }) + (b.unpricedItems ? " (" + wTH("ward.cl-unpriced", "{n} items have no price, so the bill may be higher", { n: esc(b.unpricedItems) }) + ")" : "")) +
+        " &middot; " + (r.expectedDischarge === false ? wTH("ward.cl-edd-input-unread", "Expected discharge: not read") : wTH("ward.cl-edd-input", "Expected discharge: {date}", { date: esc(r.expectedDischarge || "-") })) + "</div>";
+    };
+    return '<div class="w-sub">' + title +
+      (c.truncated ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.rcm-truncated", "Only {n} records of a kind were read; the newest were not read, so these lists may be incomplete.", { n: esc(c.readLimit) }, "", 1) + "</p>" : "") +
+      (c.stays.length ? '<ul class="w-mini">' + c.stays.map(function (r) {
+        return '<li class="w-mini-row"><div><b>' + esc(r.mrn || r.patientId) + "</b>" + (r.payerName ? " &middot; " + esc(r.payerName) : "") + (r.ward ? " &middot; " + esc(r.ward) : "") +
+          " &middot; " + wTH("ward.cl-admitted", "admitted {at}", { at: when(r.admittedAt) }) + r.issues.map(issue).join("") + inputs(r) + "</div>" +
+          '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="deskopen:' + esc(r.patientId) + "|" + esc(r.encounterId || "") + '">' + ms("open_in_new") + wTH("ward.rcm-open", "Open") + "</button></div></li>";
+      }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.cl-none", "No current cashless stay read needs pre-authorisation action.") + "</p>") + "</div>";
+  }
   function cashierOpen() {
     st.view = "cashier"; st.cashier = {}; paint();
   }
@@ -9382,6 +11365,17 @@
     apiGet("/ward/upcoding?" + q)
       .then(function (r) { st.cashier.watch = r && r.ok ? r : { failed: true }; paint(); })
       .catch(function () { st.cashier.watch = { failed: true }; paint(); });
+    /* THE STAY THIS BILL IS FOR (2026-09-17). With no stay named the server bills the open stay, so a DISCHARGED
+     * cashless stay's final bill came out self-pay. The cashier now names the stay; null = loading, false = unreadable. */
+    st.cashier.stays = null;
+    apiGet("/ward/stay-packages?" + q)
+      .then(function (r) { st.cashier.stays = r && r.ok && !r.staysUnreadable ? (r.stays || []) : false; paint(); })
+      .catch(function () { st.cashier.stays = false; paint(); });
+    // E-invoicing at this hospital (gap-claims-gst B). null = asking, false = could not be read.
+    st.cashier.einvoice = null;
+    apiGet("/ward/einvoice-status?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.cashier.einvoice = r && r.ok ? { state: r.state, reason: r.reason || null } : false; paint(); })
+      .catch(function () { st.cashier.einvoice = false; paint(); });
     // Online payment links (owner S2). null = loading, false = could not be read: never "no links".
     st.cashier.payLinks = null;
     apiGet("/ward/payment-requests?" + q)
@@ -9398,14 +11392,18 @@
   function cashRaise() {
     if (!st.cashier || !st.cashier.patientId) return;
     st.cashier.err = ""; st.cashier.raised = null; st.busy = true; paint();
-    apiPost("/ward/invoice", { orgId: st.orgId, patientId: st.cashier.patientId })
+    var stay = cashStayChoice(st.cashier);
+    apiPost("/ward/invoice", { orgId: st.orgId, patientId: st.cashier.patientId, encounterId: stay || undefined })
       .then(function (r) {
         st.busy = false;
         /* EVERY OUTCOME IS SAID (LT-30). "Nothing priced" came back ok with nothing written and the
          * screen showed nothing at all, so the cashier could not tell a click that did nothing from one
          * that was never sent. */
-        if (r && r.ok) { st.cashier.raised = r; loadCashier(); return; }
-        st.cashier.err = (r && (r.detail || r.error)) || wT("ward.could-not-raise-an-invoice", "Could not raise an invoice.");
+        if (r && r.ok) { st.cashier.raised = r; if (r.warning) st.note = r.warning; loadCashier(); return; }
+        /* GST refusals (gst-packages): nothing is raised until the Price list says what the law needs. */
+        if (r && r.error === "room_tariff_missing") st.cashier.err = wT("ward.gst-room-tariff-missing", "This package covers room days in {roomCategoryName}, which has no per-day room tariff on the Price list. GST cannot be worked out. Add the tariff before issuing this bill.", { roomCategoryName: r.category || "" });
+        else if (r && r.error === "gst_rate_missing") st.cashier.err = wT("ward.gst-rate-missing", "These items are taxable and have no GST rate on the Price list, so no bill was raised: {codes}. An administrator sets each rate; none is assumed.", { codes: (r.codes || []).join(", ") });
+        else st.cashier.err = (r && (r.detail || r.error)) || wT("ward.could-not-raise-an-invoice", "Could not raise an invoice.");
         paint();
       })
       .catch(function () { st.busy = false; st.cashier.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
@@ -9449,7 +11447,7 @@
       .catch(function () { st.busy = false; st.cashier.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
   }
   function schedulingOpen() {
-    st.view = "scheduling"; st.scheduling = {}; paint(); loadScheduling();
+    st.view = "scheduling"; st.scheduling = {}; st.intake = null; paint(); loadScheduling();
   }
   function loadScheduling() {
     if (!st.scheduling) st.scheduling = {};
@@ -9460,12 +11458,67 @@
       apiGet("/ward/diary?orgId=" + encodeURIComponent(st.orgId) + (clinicianId ? "&clinicianId=" + encodeURIComponent(clinicianId) : "")),
       apiGet("/ward/resource-schedule?orgId=" + encodeURIComponent(st.orgId)),
       apiGet("/ward/blackouts?orgId=" + encodeURIComponent(st.orgId)),
+      apiGet("/ward/access-times?orgId=" + encodeURIComponent(st.orgId)).catch(function () { return null; }),
     ]).then(function (r) {
       sc.diary = (r[0] && r[0].ok) ? r[0] : null;
       sc.resources = (r[1] && r[1].ok) ? r[1] : null;
       sc.blackouts = (r[2] && r[2].ok && r[2].blackouts) || [];
+      sc.access = (r[3] && r[3].ok) ? r[3] : false;
       paint();
-    }).catch(function () { paint(); });
+    }).catch(function () { sc.access = false; paint(); });
+  }
+
+  /* TODAY'S WAITING TIMES AND THE DIAGNOSTICS COUNTER (P3 theatre-opd-access, NABH 22 and 23). Each wait is shown with the
+   * times it was computed from; a visit with no start time says it is missing and is not averaged. access undefined is
+   * loading, false is failed: an unloaded list never reads as an empty one. */
+  var DX_SERVICE_WORDS = { laboratory: "Laboratory", imaging: "Imaging" };
+  function accessTimesCard(sc) {
+    var a = sc.access;
+    var h = '<div class="w-card"><div class="w-card-h">' + ms("timer") + "<h3>" + wTH("ward.at-title", "Waiting times today") + "</h3></div>";
+    if (a === undefined) return h + '<p class="w-empty">' + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
+    if (a === false) return h + '<p class="w-hint warn">' + ms("error") + wTH("ward.at-failed", "Waiting times could not be loaded.", null, "", 1) + "</p></div>";
+    var nm = wTH("ward.surg-not-recorded", "not recorded");
+    var summary = function (s) { return !s ? "" : "<p><b>" + (s.value == null ? wTH("ward.at-no-average", "No visit has both times yet.") : wTH("ward.at-average", "Average {v} minutes ({sum} minutes over {n} visits)", { v: esc(s.value), sum: esc(s.numerator), n: esc(s.denominator) }, "v sum n")) + "</b>" +
+      (s.missing ? " &middot; " + wTH("ward.at-missing-n", "{n} missing a time, not averaged", { n: esc(s.missing) }, "n") : "") + "</p>"; };
+    var waitText = function (x) { return x.minutes == null ? '<span class="w-st due">' + wTH("ward.at-missing", "start not recorded") + "</span>" : "<b>" + wTH("ward.at-minutes", "{n} minutes", { n: esc(x.minutes) }, "n") + "</b>"; };
+    var opd = a.opd === null ? '<p class="w-hint warn">' + wTH("ward.at-opd-unreadable", "Outpatient visits could not be read.", null, "", 1) + "</p>"
+      : (a.opd || []).length ? summary(a.opdSummary) + '<ul class="w-mini">' + a.opd.map(function (x) {
+        return "<li>" + esc(x.patientId) + "<span>" + wTH("ward.at-opd-row", "arrived {a}{appt}, consultation {c}", { a: esc(when(x.arrivedAt)), appt: x.appointmentAt ? " &middot; " + esc(wT("ward.at-appt", "appointment {t}", { t: when(x.appointmentAt) })) : "", c: x.consultStartAt ? esc(when(x.consultStartAt)) : nm }, "a c") + " &middot; " + waitText(x) + "</span></li>";
+      }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.at-no-opd", "No outpatient visits recorded today.") + "</p>";
+    var dx = a.diagnostics === null ? '<p class="w-hint warn">' + wTH("ward.at-dx-unreadable", "Diagnostic visits could not be read.", null, "", 1) + "</p>"
+      : (a.diagnostics || []).length ? summary(a.diagnosticsSummary) + '<ul class="w-mini">' + a.diagnostics.map(function (x) {
+        return "<li>" + esc(x.patientId) + " &middot; " + esc(wTEn(DX_SERVICE_WORDS[x.service]) || x.service) + "<span>" + wTH("ward.at-dx-row", "arrived {a}{appt}, test started {s}", { a: esc(when(x.arrivedAt)), appt: x.appointmentAt ? " &middot; " + esc(wT("ward.at-appt", "appointment {t}", { t: when(x.appointmentAt) })) : "", s: x.startedAt ? esc(when(x.startedAt)) : nm }, "a s") + " &middot; " + waitText(x) + "</span>" +
+          (!x.startedAt ? '<button class="w-btn tiny" data-w-act="dxstart:' + esc(x.visitId) + '">' + wTH("ward.at-test-started", "Test started") + "</button>" : "") + "</li>";
+      }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.at-no-dx", "No outpatient diagnostic visits recorded today.") + "</p>";
+    var inpatientOpen = (a.openVisits || []).filter(function (v) { return v.setting !== "outpatient"; }).map(function (x) {
+      return "<li>" + esc(x.patientId) + " &middot; " + esc(wTEn(DX_SERVICE_WORDS[x.service]) || x.service) + "<span>" + esc(when(x.arrivedAt)) + "</span>" +
+        '<button class="w-btn tiny" data-w-act="dxstart:' + esc(x.visitId) + '">' + wTH("ward.at-test-started", "Test started") + "</button></li>";
+    }).join("");
+    return h + "<h4>" + wTH("ward.at-opd", "Outpatient consultation") + "</h4>" + opd +
+      "<h4>" + wTH("ward.at-dx", "Diagnostics") + "</h4>" + dx + (inpatientOpen ? '<ul class="w-mini">' + inpatientOpen + "</ul>" : "") +
+      '<button class="w-btn go" data-w-act="dxarrive">' + ms("how_to_reg") + wTH("ward.at-record-arrival", "Record arrival at the diagnostics counter") + "</button></div>";
+  }
+  function dxPost(path, body, okMsg) {
+    st.busy = true; paint();
+    return apiPost(path, Object.assign({ orgId: st.orgId }, body))
+      .then(function (r) { if (settle(r, okMsg)) loadScheduling(); else paint(); return r; })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+  }
+  function dxArrive() {
+    askFor({ title: wTH("ward.at-record-arrival", "Record arrival at the diagnostics counter"), icon: "how_to_reg", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "mrn", type: "text", label: "MRN", required: wT("ward.enter-an-mrn", "Enter an MRN.") },
+      { key: "service", type: "select", label: wTH("ward.at-service", "Service"), options: [["laboratory", wTH("ward.at-laboratory", "Laboratory")], ["imaging", wTH("ward.at-imaging", "Imaging")]], value: "laboratory" },
+      { key: "setting", type: "select", label: wTH("ward.at-setting", "Patient is"), options: [["outpatient", wTH("ward.at-outpatient", "An outpatient")], ["inpatient", wTH("ward.at-inpatient", "An inpatient")]], value: "outpatient" },
+      { key: "arrived", type: "datetime", label: wTH("ward.at-arrived-blank-now", "Requisition presented at (leave blank for now)") },
+      { key: "appt", type: "datetime", label: wTH("ward.at-appt-time", "Appointment time, if any") },
+    ] }, function (v) {
+      return dxPost("/ward/diagnostic-arrival", { mrn: v.mrn, service: v.service, setting: v.setting, arrivedAt: isoOfLocal(v.arrived) || undefined, appointmentAt: isoOfLocal(v.appt) || undefined }, wT("ward.at-arrival-recorded", "Arrival recorded."));
+    });
+  }
+  function dxStart(visitId) {
+    askFor({ title: wTH("ward.at-test-started", "Test started"), icon: "play_arrow", ok: wTH("ward.record2", "Record"), fields: [
+      { key: "at", type: "datetime", label: wTH("ward.surg-time-blank-now", "Time (leave blank for now)") },
+    ] }, function (v) { return dxPost("/ward/diagnostic-start", { visitId: visitId, startedAt: isoOfLocal(v.at) || undefined }, wT("ward.surg-time-recorded", "Time recorded.")); });
   }
   function apptBookOrOverbook(overbook) {
     var clinicianId = val("wSchedClinician"), patientId = val("wSchedPatient"), startAt = val("wSchedStart"), minutes = val("wSchedMinutes"), reason = val("wSchedReason");
@@ -9481,10 +11534,14 @@
       .catch(function () { st.busy = false; st.scheduling.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
   }
   function apptSetState(appointmentId, state) {
-    var reason = ""; try { reason = G.prompt(wTD("ward.reason", "Reason ({state}):", { state: state })) || ""; } catch (e) {}
-    if (!reason.trim()) { st.scheduling.err = wT("ward.a-reason-is-required", "A reason is required."); paint(); return; }
+    // Only a cancellation and a no-show need a reason; marking an arrival or a completed visit does not.
+    var reason = "";
+    if (state === "cancelled" || state === "did-not-attend") {
+      try { reason = G.prompt(wTD("ward.reason", "Reason ({state}):", { state: state })) || ""; } catch (e) {}
+      if (!reason.trim()) { st.scheduling.err = wT("ward.a-reason-is-required", "A reason is required."); paint(); return; }
+    }
     st.busy = true; paint();
-    apiPost("/ward/appointment", { orgId: st.orgId, appointmentId: appointmentId, state: state, reason: reason.trim() })
+    apiPost("/ward/appointment", { orgId: st.orgId, appointmentId: appointmentId, state: state, reason: reason.trim() || undefined })
       .then(function (r) { st.busy = false; if (r && r.ok) loadScheduling(); else { st.scheduling.err = (r && r.detail) || wT("ward.could-not-update-that-appointment", "Could not update that appointment."); paint(); } })
       .catch(function () { st.busy = false; st.scheduling.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
   }
@@ -9618,7 +11675,8 @@
     if (onList()) { dispatch("open:" + encounterId); return; }
     apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) {
-        if (r && r.ok && r.patients) { st.ward = ""; st.patients = r.patients; }
+        if (!(r && r.ok)) { settle(r); paint(); return; }
+        if (r.patients) { st.ward = ""; st.patients = r.patients; }
         if (onList()) { dispatch("open:" + encounterId); return; }
         st.err = wT("ward.that-patient-is-not-on-an", "That patient is not on an inpatient ward list. Open the board for them instead."); paint();
       })
@@ -9670,7 +11728,7 @@
   function loadInventory() {
     if (!st.inventory) st.inventory = {};
     st.inventory.failed = false;
-    return apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId))
+    return apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId) + (st.inventory.lab ? "&location=Laboratory" : ""))
       .then(function (r) { st.inventory.stock = (r && r.ok) ? r : null; st.inventory.failed = !(r && r.ok); paint(); })
       .catch(function () { st.inventory.stock = null; st.inventory.failed = true; paint(); });
   }
@@ -9684,22 +11742,22 @@
       .catch(function () { st.inventory.fefo = { ok: false }; paint(); });
   }
   function stockReceive() {
-    var code = val("wStkCode"), qty = val("wStkQty"), unit = val("wStkUnit"), loc = val("wStkLoc"), batch = val("wStkBatch"), expiry = val("wStkExpiry");
+    var code = val("wStkCode"), qty = val("wStkQty"), unit = val("wStkUnit"), loc = st.inventory && st.inventory.lab ? "Laboratory" : val("wStkLoc"), batch = val("wStkBatch"), expiry = val("wStkExpiry");
     if (!code || !qty || !unit) { st.err = wT("ward.a-receipt-needs-a-drug-a", "A receipt needs a drug, a quantity and a unit."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/stock-move", { orgId: st.orgId, kind: "receipt", code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, batch: batch || undefined, expiry: expiry || undefined })
+    apiPost("/ward/stock-move", { orgId: st.orgId, kind: "receipt", code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, batch: batch || undefined, expiry: expiry || undefined, receivedFrom: val("wStkFrom") || undefined, documentNo: val("wStkDoc") || undefined })
       .then(function (r) {
-        if (settle(r, wT("ward.receipt-recorded", "Receipt recorded."))) { ["wStkCode", "wStkQty", "wStkUnit", "wStkLoc", "wStkBatch", "wStkExpiry"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; }); loadInventory(); }
+        if (settle(r, wT("ward.receipt-recorded", "Receipt recorded."))) { ["wStkCode", "wStkQty", "wStkUnit", "wStkLoc", "wStkBatch", "wStkExpiry", "wStkFrom", "wStkDoc"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; }); loadInventory(); }
         else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-receipt", "Could not record the receipt."); paint(); });
   }
   function stockAdjustOrWaste(kind) {
-    var code = val("wAdjCode"), qty = val("wAdjQty"), unit = val("wAdjUnit"), loc = val("wAdjLoc"), reason = val("wAdjReason");
+    var code = val("wAdjCode"), qty = val("wAdjQty"), unit = val("wAdjUnit"), loc = st.inventory && st.inventory.lab ? "Laboratory" : val("wAdjLoc"), reason = val("wAdjReason");
     if (!code || !qty || !unit) { st.err = wT("ward.fill-in-the-drug-quantity-and", "Fill in the drug, quantity and unit."); paint(); return; }
     if (!reason) { st.err = wT("ward.an-adjustment-or-wastage-needs-a", "An adjustment or wastage needs a reason."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/stock-move", { orgId: st.orgId, kind: kind, code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, reason: reason })
+    apiPost("/ward/stock-move", { orgId: st.orgId, kind: kind, code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, reason: reason, witnessId: val("wAdjWitness") || undefined })
       .then(function (r) {
         if (r && r.error === "reason_required") { st.busy = false; st.err = wT("ward.an-adjustment-or-wastage-needs-a", "An adjustment or wastage needs a reason."); paint(); return; }
         if (settle(r, kind === "wastage" ? wT("ward.wastage-recorded", "Wastage recorded.") : wT("ward.adjustment-recorded", "Adjustment recorded."))) { ["wAdjCode", "wAdjQty", "wAdjUnit", "wAdjLoc", "wAdjReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; }); loadInventory(); }
@@ -9711,7 +11769,7 @@
     var code = val("wRecCode"), unit = val("wRecUnit"), loc = val("wRecLoc"), counted = val("wRecCounted"), reason = val("wRecReason");
     if (!code || !unit || counted === "") { st.err = wT("ward.a-reconciliation-needs-a-drug-a", "A reconciliation needs a drug, a unit and the counted quantity."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/stock-reconcile", { orgId: st.orgId, code: code, unit: unit, location: loc || undefined, counted: Number(counted), reason: reason || undefined })
+    apiPost("/ward/stock-reconcile", { orgId: st.orgId, code: code, unit: unit, location: loc || undefined, counted: Number(counted), reason: reason || undefined, witnessId: val("wRecWitness") || undefined })
       .then(function (r) {
         if (r && r.error === "counted_required") { st.busy = false; st.err = wT("ward.enter-the-number-actually-counted", "Enter the number actually counted."); paint(); return; }
         var msg = r && r.skipped === "no_variance" ? wT("ward.the-count-matches-the-record-nothing", "The count matches the record. Nothing was posted.") : (r && r.reason) || wT("ward.reconciled", "Reconciled.");
@@ -9850,6 +11908,75 @@
    * BUG-MU08T4RL-GU0N: the destination used to be typed into a prompt beside a fixed list of department
    * names, so a transfer "to Cardiology" wrote a ward nobody had. It is picked on the bed board now: the
    * hospital's real wards, each named with its department, free beds only. */
+  function loadStayPlan() {
+    var s = st.sel; if (!s || !s.encounterId) return Promise.resolve();
+    var q = "?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(s.encounterId);
+    var plan = { edd: null, xfer: null, adm: null };
+    return Promise.all([
+      apiGet("/ward/admission-times" + q).then(function (r) { plan.adm = r && r.ok ? r : false; }, function () { plan.adm = false; }),
+      apiGet("/ward/expected-discharge-history" + q).then(function (r) { plan.edd = r && r.ok ? { current: r.current || null, history: r.history || [] } : false; }, function () { plan.edd = false; }),
+      apiGet("/ward/transfer-requests" + q).then(function (r) { plan.xfer = r && r.ok ? (r.requests || []).slice().sort(function (a, b) { return String(b.requestedAt).localeCompare(String(a.requestedAt)); }) : false; }, function () { plan.xfer = false; }),
+    ]).then(function () { if (st.sel !== s) return; st.stayPlan = plan; paint(); });
+  }
+  function loadTransfers() {
+    st.transfers = st.transfers || null;
+    return apiGet("/ward/transfer-requests?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
+      .then(function (r) { st.transfers = r && r.ok ? (r.requests || []) : false; paint(); })
+      .catch(function () { st.transfers = false; paint(); });
+  }
+  function eddSave() {
+    var s = st.sel, p = st.stayPlan; if (!s || !p || !p.edd) return;
+    var date = val("wEddDate"), reason = val("wEddReason"), cur = p.edd.current;
+    if (!date) { st.err = wT("ward.edd-pick-date", "Pick the expected discharge date."); paint(); return; }
+    var body = { orgId: st.orgId, encounterId: s.encounterId, expectedDate: date, reason: reason };
+    if (cur) body.expectedVersion = cur.version;
+    st.busy = true; paint();
+    apiPost("/ward/expected-discharge", body)
+      .then(function (r) { if (settle(r, cur ? wT("ward.edd-revised-note", "Expected discharge date changed.") : wT("ward.edd-set-note", "Expected discharge date set."))) loadStayPlan(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.edd-could-not-save", "Could not save the expected discharge date."); paint(); });
+  }
+  function xferRequest() {
+    var s = st.sel; if (!s) return;
+    var body = { orgId: st.orgId, encounterId: s.encounterId, toUnit: val("wXferUnit") || "ward", toWard: val("wXferWard"), toBed: val("wXferBed"), urgency: val("wXferUrgency"), reason: val("wXferReason") };
+    st.busy = true; paint();
+    apiPost("/ward/transfer-request", body)
+      .then(function (r) { if (settle(r, wT("ward.xfer-requested-note", "Transfer requested. The receiving unit answers on its ward list."))) loadStayPlan(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.xfer-could-not-request", "Could not request the transfer."); paint(); });
+  }
+  function xferFind(id) {
+    var all = [].concat(st.transfers || [], (st.stayPlan && st.stayPlan.xfer) || []);
+    return all.filter(function (q) { return q.id === id; })[0] || null;
+  }
+  // After a step: refresh whichever screen it was taken from, and the ward list when a patient moved.
+  function xferAfter(moved) { if (st.view === "chart" && st.sel) loadStayPlan(); loadTransfers(); if (moved) loadWard(); }
+  function xferStep(route, id, extra, okMsg, moved) {
+    var q = xferFind(id); if (!q) return Promise.resolve();
+    var body = Object.assign({ orgId: st.orgId, requestId: id, expectedVersion: q.version }, extra || {});
+    st.busy = true; paint();
+    return apiPost(route, body)
+      .then(function (r) {
+        if (r && r.error === "request_not_closed") { st.busy = false; st.err = wT("ward.xfer-not-closed", "The patient was moved, but the request could not be marked complete. Refresh; do not move the patient again."); xferAfter(true); return; }
+        if (settle(r, okMsg)) xferAfter(moved); else { xferAfter(false); }
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.xfer-step-failed", "Could not record that step of the transfer."); paint(); });
+  }
+  function xferAct(cmd, id) {
+    var q = xferFind(id); if (!q) return;
+    var who = esc(q.name || q.mrn || "");
+    if (cmd === "xferaccept") askFor({ icon: "check", ok: wTH("ward.xfer-accept", "Accept"), title: wTH("ward.xfer-accept-q", "Accept {who} into {ward}?", { who: who, ward: esc(q.to && q.to.ward) }), fields: [] },
+      function () { return xferStep("/ward/transfer-respond", id, { decision: "accept" }, wT("ward.xfer-accepted-note", "Transfer accepted. Assign a bed next.")); });
+    else if (cmd === "xferdecline") askFor({ icon: "block", ok: wTH("ward.xfer-decline", "Decline"), title: wTH("ward.xfer-decline-q", "Decline the transfer of {who}?", { who: who }),
+      fields: [{ key: "reason", type: "text", label: wTH("ward.xfer-decline-why", "Why it is declined"), required: wT("ward.xfer-decline-why-needed", "Say why the transfer is declined.") }] },
+      function (v) { return xferStep("/ward/transfer-respond", id, { decision: "decline", reason: v.reason }, wT("ward.xfer-declined-note", "Transfer declined.")); });
+    else if (cmd === "xferbed") askFor({ icon: "bed", ok: wTH("ward.xfer-assign-bed", "Assign bed"), title: wTH("ward.xfer-bed-q", "Which bed on {ward}?", { ward: esc(q.to && q.to.ward) }),
+      fields: [{ key: "bed", type: "text", value: (q.bed && q.bed.bed) || (q.to && q.to.requestedBed) || "", label: wTH("ward.xfer-bed-label", "Bed"), required: wT("ward.xfer-bed-needed", "Name the bed.") }] },
+      function (v) { return xferStep("/ward/transfer-assign-bed", id, { bed: v.bed }, wT("ward.xfer-bed-note", "Bed assigned.")); });
+    else if (cmd === "xferexec") askFor({ icon: "move_up", ok: wTH("ward.xfer-execute", "Move the patient"), title: wTH("ward.xfer-exec-q", "Move {who} to {ward}, bed {bed} now?", { who: who, ward: esc(q.to && q.to.ward), bed: esc(q.bed && q.bed.bed) }), fields: [] },
+      function () { return xferStep("/ward/transfer-execute", id, {}, wT("ward.xfer-moved-note", "Patient moved."), true); });
+    else if (cmd === "xfercancel") askFor({ icon: "close", ok: wTH("ward.xfer-cancel", "Cancel the request"), title: wTH("ward.xfer-cancel-q", "Cancel the transfer request for {who}?", { who: who }),
+      fields: [{ key: "reason", type: "text", label: wTH("ward.xfer-cancel-why", "Why it is cancelled"), required: wT("ward.xfer-cancel-why-needed", "Say why the request is cancelled.") }] },
+      function (v) { return xferStep("/ward/transfer-cancel", id, { reason: v.reason }, wT("ward.xfer-cancelled-note", "Transfer request cancelled.")); });
+  }
   function transfer() {
     var s = st.sel; if (!s) return;
     st.edAdmitPending = false; st.admitTarget = null; st.boardDept = "";
@@ -9993,9 +12120,13 @@
     apiPost("/ward/medication-order", { orgId: st.orgId, order: f.order, checkOnly: true }).then(function (r) {
       if (!settle(r)) { paint(); return; }
       var sf = r.safety || {};
-      var clean = sf.checked === true && !(sf.blocks || []).length && !(sf.overridables || []).length && !(sf.warnings || []).length && !sf.unresolvedDrug && !(sf.unresolvedActiveMeds || []).length && !r.replaces;
+      /* R5-1: advisories that could NOT be evaluated are not a clean order. An order placed straight
+       * through here would have shown the prescriber nothing, which reads as "nothing to say" - and
+       * an advisory that fired must be seen for the same reason. */
+      var clean = sf.checked === true && !(sf.blocks || []).length && !(sf.overridables || []).length && !(sf.warnings || []).length && !sf.unresolvedDrug && !(sf.unresolvedActiveMeds || []).length && !r.replaces
+        && !r.advisoriesUnavailable && !(r.advisories || []).length;
       if (clean) { placeMedOrder(f.order, ""); return; }
-      st.moReview = { order: f.order, safety: sf, replaces: r.replaces || null };
+      st.moReview = { order: f.order, safety: sf, replaces: r.replaces || null, advisories: r.advisories || [], advisoriesUnavailable: r.advisoriesUnavailable || null };
       paint();
     }).catch(function () { st.busy = false; st.err = wT("ward.could-not-place-the-order", "Could not place the order."); paint(); });
   }
@@ -10071,12 +12202,13 @@
     var display = entry ? entry.name : typed;
     st.busy = true; paint();
     apiPost("/ward/investigation", entry
-      ? { orgId: st.orgId, encounterId: s.encounterId, display: entry.name, code: entry.code, category: entry.category, priority: priority, reason: reason || undefined }
-      : { orgId: st.orgId, encounterId: s.encounterId, display: typed, code: typed, category: category, priority: priority, reason: reason, other: true }
+      ? { orgId: st.orgId, encounterId: s.encounterId, display: entry.name, code: entry.code, category: entry.category, priority: priority, reason: reason || undefined, coding: codeChosen("inv") }
+      : { orgId: st.orgId, encounterId: s.encounterId, display: typed, code: typed, category: category, priority: priority, reason: reason, other: true, coding: codeChosen("inv") }
     ).then(function (r) {
       if (settle(r, r && r.written ? wT("ward.ordered", "Ordered {display}.", { display: display }) : null)) {
         ["wInvCode", "wInvReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
         var oth = document.getElementById("wInvOther"); if (oth) oth.checked = false;
+        if (st.cp) st.cp.inv = null;
         loadInvestigations();
       } else paint();
     }).catch(function () { st.busy = false; st.err = wT("ward.could-not-order-that", "Could not order that."); paint(); });
@@ -10088,7 +12220,7 @@
   function collectSpecimen(serviceRequestId) {
     askFor({ title: wTH("ward.collect", "Collect"), icon: "colorize", ok: wTH("ward.collect", "Collect"), fields: [
       { key: "specimenType", label: wTH("ward.specimen-type-e-g-whole-blood", "Specimen type (e.g. Whole blood, Serum, Urine):"), required: wT("ward.say-which-specimen-was-taken", "Say which specimen was taken.") },
-      { key: "scanned", label: wTH("ward.scan-or-enter-the-patient-s", "Scan or enter the patient's wristband barcode/MRN, to confirm this is the right patient:") }
+      { key: "scanned", scan: true, label: wTH("ward.scan-or-enter-the-patient-s", "Scan or enter the patient's wristband barcode/MRN, to confirm this is the right patient:") }
     ] }, function (v) { return collectSpecimenSend(serviceRequestId, v.specimenType, v.scanned); });
   }
   function collectSpecimenSend(serviceRequestId, specimenType, scanned) {
@@ -10097,7 +12229,16 @@
       .then(function (r) {
         if (r && r.error === "wrong_patient_scan") { st.busy = false; st.err = wT("ward.the-scanned-wristband-does-not-match", "The scanned wristband does not match this patient's order. Nothing was collected."); paint(); return; }
         // LT-25: collected from the laboratory board, the board is what re-reads.
-        if (settle(r, r && r.accessionNumber ? wT("ward.collected-accession", "Collected. Accession {accessionNumber}.", { accessionNumber: r.accessionNumber }) : wT("ward.collected", "Collected."))) { if (st.view === "labboard") loadLabBoard(); else loadInvestigations(); }
+        if (settle(r, r && r.accessionNumber ? wT("ward.collected-accession", "Collected. Accession {accessionNumber}.", { accessionNumber: r.accessionNumber }) : wT("ward.collected", "Collected."))) {
+          // The tube is labelled where it was taken: the label is offered on this screen at once.
+          if (r && r.accessionNumber) {
+            var srRow = null, look = function (list) { (list || []).forEach(function (x) { if (x && x.serviceRequestId === serviceRequestId) srRow = x; }); };
+            look(st.labBoard && st.labBoard.specimens); look(st.investigations && st.investigations.requests);
+            st.labelOffer = { kind: "specimen", view: st.view, spec: { patientId: r.patientId, serviceRequestId: serviceRequestId, display: (srRow && (srRow.display || srRow.code)) || "",
+              accessionNumber: r.accessionNumber, specimenType: r.specimenType, collectedAt: r.collectedAt, collectedBy: r.collectedBy } };
+          }
+          if (st.view === "labboard") loadLabBoard(); else loadInvestigations();
+        }
         else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-collection", "Could not record the collection."); paint(); });
@@ -10124,7 +12265,14 @@
    * patient identifier is sent, because a lookup that carried the patient it was for would leak a
    * diagnosis to a reference service that has no business knowing one. */
   function purchasingOpen() {
-    st.view = "purchasing"; st.purchaseOrders = null; paint(); loadPurchaseOrders();
+    st.view = "purchasing"; st.purchaseOrders = null; st.poStores = null; paint(); loadPurchaseOrders();
+    apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        var seen = {};
+        st.poStores = r && r.ok ? (r.levels || []).map(function (l) { return l && l.location ? String(l.location) : ""; })
+          .filter(function (n) { return n && !seen[n.toLowerCase()] && (seen[n.toLowerCase()] = 1); }).sort() : false;
+        paint();
+      }, function () { st.poStores = false; paint(); });
   }
   function loadPurchaseOrders() {
     st.busy = true; paint();
@@ -10133,17 +12281,17 @@
       .catch(function () { st.busy = false; st.purchaseOrdersFailed = true; paint(); });
   }
   function poRaise() {
-    var vendor = val("wPoVendor"), item = val("wPoItem"), qty = val("wPoQty"), unit = val("wPoUnit"), price = val("wPoPrice");
+    var vendor = val("wPoVendor"), item = val("wPoItem"), qty = val("wPoQty"), unit = val("wPoUnit"), price = val("wPoPrice"), store = val("wPoStore");
     if (!vendor) { st.err = wT("ward.say-who-this-is-being-ordered", "Say who this is being ordered from."); paint(); return; }
     if (!item || !qty || !unit) { st.err = wT("ward.an-order-line-needs-the-item", "An order line needs the item, how many, and what they are counted in."); paint(); return; }
     if (price && !/^\d+(\.\d{1,2})?$/.test(price)) { st.err = wT("ward.write-the-price-in-rupees-for", "Write the price in rupees, for example 125.50."); paint(); return; }
     var line = { item: item, quantity: qty, unit: unit };
     if (price) line.unitPricePaise = Math.round(Number(price) * 100);
     st.busy = true; paint();
-    apiPost("/ward/purchase-order", { orgId: st.orgId, vendor: vendor, lines: [line] })
+    apiPost("/ward/purchase-order", { orgId: st.orgId, vendor: vendor, lines: [line], location: store || undefined })
       .then(function (r) {
         if (settle(r, r && r.ok ? r.detail : null)) {
-          ["wPoVendor", "wPoItem", "wPoQty", "wPoUnit", "wPoPrice"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          ["wPoVendor", "wPoItem", "wPoQty", "wPoUnit", "wPoPrice", "wPoStore"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
           loadPurchaseOrders();
         } else paint();
       })
@@ -10394,6 +12542,175 @@
       '<button class="w-btn ghost" data-w-act="back">' + wTH("ward.cancel", "Cancel") + "</button></div></div>";
   }
 
+  /* CREDIT AND DEBIT NOTES, BUYER DETAILS, E-INVOICE (gap-claims-gst B). Each asks on the ward (askFor), sends only
+   * what the cashier typed, and reloads the bills from the server; the server computes every amount of GST. */
+  function cashInvoice(invoiceId) { return ((st.cashier && st.cashier.invoices) || []).filter(function (i) { return i.invoiceId === invoiceId; })[0] || null; }
+  function cashWrite(path, body, refusals) {
+    st.busy = true; paint();
+    return apiPost(path, body)
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { if (r.warning) st.note = r.warning; loadCashier(); return; }
+        // A refusal this screen knows is said in the hospital's language (English under it); any other in the server's words.
+        st.err = (r && refusals && HAS(refusals, r.error) && refusals[r.error]) || (r && (r.message || r.detail || r.error)) || wT("ward.could-not-record-that", "Could not record that.");
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
+  }
+  function invoiceNote(invoiceId, which) {
+    var inv = cashInvoice(invoiceId); if (!inv) return;
+    var credit = which === "credit";
+    askFor({ icon: credit ? "remove" : "add", ok: credit ? wTH("ward.record-credit-note", "Record credit note") : wTH("ward.record-debit-note", "Record debit note"),
+      title: credit ? wTH("ward.credit-note-title", "Credit note: take back part of this bill") : wTH("ward.debit-note-title", "Debit note: add to this bill"),
+      text: wTH("ward.note-text", "Enter the taxable amount for each line it applies to. GST follows each line's own rate. The note gets its own number and the bill's lines are never changed."),
+      fields: [{ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.a-note-needs-a-reason", "A note needs a reason.") }].concat((inv.lines || []).map(function (l, i) {
+        return { key: "l" + i, label: wTH("ward.note-line-amount", "{item}: taxable amount", { item: esc(l.display || l.code) }, "item") };
+      })) }, function (v) {
+      var lines = (inv.lines || []).map(function (l, i) { return { lineIndex: i, taxable: Number(v["l" + i]) }; }).filter(function (x) { return x.taxable > 0; });
+      if (!lines.length) { st.err = wT("ward.enter-an-amount-on-at-least-one-line", "Enter an amount on at least one line."); return null; }
+      var body = { orgId: st.orgId, invoiceId: invoiceId, reason: v.reason, lines: lines };
+      if (!credit) return cashWrite("/ward/invoice-debit-note", body);
+      /* SECTION 34(2): a credit note reduces GST only if the patient is refunded the GST, or a registered buyer has
+       * reversed its input tax credit. The server asks, writing nothing and using no number; the question is asked
+       * here and the note sent again with the answer. */
+      st.busy = true; paint();
+      return apiPost("/ward/invoice-credit-note", body).then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { if (r.warning) st.note = r.warning; loadCashier(); return; }
+        if (r && r.error === "gst_confirmation_required") { invoiceNoteGst(body, r); return; }
+        st.err = (r && (r.message || r.detail || r.error)) || wT("ward.could-not-record-that", "Could not record that.");
+        paint();
+      }, function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
+    });
+  }
+  function invoiceNoteGst(body, r) {
+    var registered = r.recipient === "registered";
+    askFor({ icon: "receipt_long", ok: wTH("ward.record-credit-note", "Record credit note"), title: wTH("ward.gst-note-ask-title", "GST on this credit note"),
+      text: registered
+        ? wTH("ward.gst-note-ask-registered", "GST on this credit note reduces the hospital's tax only after {payerName} reverses the matching input tax credit. Record their confirmation.", { payerName: esc(r.payerName || "") }, "payerName")
+        : wTH("ward.gst-note-ask-patient", "GST on this credit note reduces the hospital's tax only if the GST is refunded to the patient. Refund Rs {gst} of GST with this note, or issue it without GST.", { gst: esc(r.gst) }, "gst"),
+      fields: [
+        { key: "gstTreatment", type: "select", label: wTH("ward.gst-note-ask-choice", "How is this note issued?"), value: registered ? "itc_reversed" : "gst_refunded",
+          options: [[registered ? "itc_reversed" : "gst_refunded", registered ? wTH("ward.gst-note-opt-itc", "With GST: the buyer has reversed the input tax credit") : wTH("ward.gst-note-opt-refund", "With GST: the GST is refunded to the patient with this note")],
+            ["without_gst", wTH("ward.gst-note-opt-without", "Without GST")]] },
+        { key: "gstConfirmation", label: registered ? wTH("ward.gst-note-ask-ref", "The buyer's confirmation (letter or reference)") : wTH("ward.gst-note-ask-refund-ref", "Refund reference (optional)") },
+      ] }, function (v) {
+      if (registered && v.gstTreatment === "itc_reversed" && !v.gstConfirmation) { st.err = wT("ward.gst-note-need-ref", "Enter the buyer's confirmation, or issue the note without GST."); return null; }
+      return cashWrite("/ward/invoice-credit-note", Object.assign({}, body, { gstTreatment: v.gstTreatment, gstConfirmation: v.gstConfirmation || undefined }));
+    });
+  }
+  /* THE PARTIES (gst-parties, functions/_wardsynq/payer-contracts.js): patient, payer, insurer and TPA as named parties,
+   * and the GST recipient on its own line with its basis, exactly as the server resolved them from the payer's contract.
+   * A recipient not determined on the contract is said as a warning, never shown as settled. */
+  var PARTY_BASIS_WORDS = { ca_opinion: "chartered accountant's opinion", contract_clause: "contract clause" };
+  function partiesHtml(p) {
+    if (!p) return "";
+    var b = function (s) { return " <b>" + s + "</b>"; };
+    var segs = [p.selfPay ? wTH("ward.parties-payer", "Payer:") + b(wTH("ward.parties-self-pay", "the patient (self-pay)"))
+      : wTH("ward.parties-payer", "Payer:") + b(esc((p.payer && (p.payer.name || p.payer.ref)) || "")) + (p.payer && p.payer.found === false ? " " + wTH("ward.parties-payer-missing", "(not in the payer list)") : "")];
+    if (p.insurer) segs.push(wTH("ward.parties-insurer", "Insurer:") + b(esc(p.insurer.name || p.insurer.ref)));
+    if (p.tpa) segs.push(wTH("ward.parties-tpa", "TPA:") + b(esc(p.tpa.name || p.tpa.ref)) + " (" + wTH("ward.parties-tpa-settles", "settles for the insurer") + ")");
+    if (p.partiesWarning === "tpa_insurer_not_found") segs.push('<span class="w-warn">' + wTH("ward.parties-tpa-no-insurer", "The insurer this TPA acts for is not in the payer list.") + "</span>");
+    var g = p.gstRecipient || {};
+    var who = g.party === "patient" ? b(wTH("ward.parties-the-patient", "the patient"))
+      : b(esc(g.legalName || g.name || "")) + (g.gstin ? ", " + wTH("ward.parties-gstin", "GSTIN {gstin}", { gstin: esc(g.gstin) }, "gstin") : " " + wTH("ward.parties-unregistered", "(not GST registered)"));
+    var basis = g.source === "default_cashless" ? wTH("ward.parties-default-cashless", "Default for an insurer or TPA: ordinary cashless treatment is a supply to the patient; the insurer or TPA settles as payer.")
+      : g.source === "legacy_global" ? wTH("ward.parties-legacy", "From the old hospital-wide GST setting, used only because this payer's contract has no determination.") + (g.basis && g.basis.ref ? " " + wTH("ward.parties-basis-opinion", "Chartered accountant's opinion: {ref}, {date}", { ref: esc(g.basis.ref), date: esc(g.basis.date || "") }, "ref date") : "")
+      : g.source === "contract" && g.basis && g.basis.ref ? wTH("ward.parties-basis", "Basis: {type}, {ref}", { type: esc(wTEn(PARTY_BASIS_WORDS[g.basis.type]) || ""), ref: esc(g.basis.ref) }, "ref") + (g.basis.date ? " (" + esc(g.basis.date) + ")" : "")
+      : g.source === "contract" ? wTH("ward.parties-basis-contract", "Determined on the payer's contract.") : "";
+    var warn = g.warning ? '<span class="w-warn">' + wTH("ward.parties-not-determined", "Not determined on this payer's contract. The patient is treated as the GST recipient until an administrator records the determination on Admin, Integrations, Payers.") + "</span>" : "";
+    return '<div class="w-dt-times">' + segs.join(" &middot; ") + "</div>" +
+      '<div class="w-dt-times">' + wTH("ward.parties-recipient", "GST recipient:") + who + (warn ? " &middot; " + warn : "") + (basis ? " &middot; " + basis : "") + "</div>";
+  }
+  /* Who settles a bill: chosen from the hospital's payer contracts (or self-pay); the server resolves the GST recipient. */
+  function invoiceParties(invoiceId) {
+    var inv = cashInvoice(invoiceId); if (!inv) return;
+    var patientId = inv.patientId || (st.cashier && st.cashier.patientId);
+    st.busy = true; paint();
+    apiGet("/ward/claims?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(patientId)).then(function (r) {
+      st.busy = false;
+      if (!r || !r.ok || !r.payers) { st.err = wT("ward.parties-payers-unread", "The payer list could not be read, so the payer cannot be changed now."); paint(); return; }
+      var cur = inv.parties ? (inv.parties.selfPay ? "" : inv.parties.payer && inv.parties.payer.ref) : "";
+      askFor({ icon: "handshake", ok: wTH("ward.save", "Save"), title: wTH("ward.parties-title", "Who settles this bill?"),
+        text: wTH("ward.parties-text", "The payer's contract decides who the GST recipient is. The bill's GST documents follow that recipient, not the payer. Not possible once an IRN is registered."),
+        fields: [{ key: "payerRef", type: "select", label: wTH("ward.parties-payer-field", "Payer"), value: cur || "",
+          options: [["", wTH("ward.parties-self-pay-option", "Self-pay (the patient)")]].concat(r.payers.map(function (x) { return [x.id, esc(x.name)]; })) }] }, function (v) {
+        return cashWrite("/ward/invoice-parties", { orgId: st.orgId, invoiceId: invoiceId, payerRef: v.payerRef || "" }, {
+          recipient_details_incomplete: wT("ward.parties-recipient-incomplete", "The payer contract makes the contracting party the GST recipient, but its GST details are incomplete. Complete the contract on Admin, Integrations, Payers. Nothing was changed.") });
+      });
+    }, function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
+  }
+  function invoiceIrn(arg) {
+    var p = String(arg || "").split("~");
+    askFor({ icon: "qr_code_2", ok: wTH("ward.get-irn", "Get IRN"), title: wTH("ward.get-irn-title", "Report this document to the e-invoice portal?"),
+      text: wTH("ward.get-irn-text2", "Only the Tax Invoice of taxed lines is reported; a Bill of Supply never is. The IRN can be cancelled within 24 hours; after that, raise a credit note.") }, function () {
+      return cashWrite("/ward/invoice-irn", { orgId: st.orgId, invoiceId: p[0], noteNumber: p[1] || undefined });
+    });
+  }
+  function invoiceIrnCancel(arg) {
+    var p = String(arg || "").split("~");
+    var inv = cashInvoice(p[0]);
+    askFor({ icon: "cancel", danger: true, ok: wTH("ward.cancel-irn", "Cancel IRN"), title: wTH("ward.cancel-irn-title", "Cancel the IRN for {doc}?", { doc: esc(p[1] || "") }, "doc"),
+      fields: [
+        { key: "reasonCode", type: "select", label: wTH("ward.cancel-irn-reason", "Reason"), value: "2", options: [["1", wTH("ward.irn-reason-duplicate", "Duplicate")], ["2", wTH("ward.irn-reason-data-entry", "Data entry mistake")], ["3", wTH("ward.irn-reason-order-cancelled", "Order cancelled")], ["4", wTH("ward.irn-reason-others", "Others")]] },
+        { key: "remark", label: wTH("ward.cancel-irn-remark", "Remark (up to 100 characters)") },
+      ] }, function (v) {
+      return cashWrite("/ward/invoice-irn-cancel", { orgId: st.orgId, invoiceId: p[0], noteNumber: inv && p[1] !== inv.documentNumber ? p[1] : undefined, reasonCode: v.reasonCode, remark: v.remark });
+    });
+  }
+  /* THE PRINTED TAX INVOICE. Opened at once (a window opened after a wait is blocked as a popup), filled from the bill
+   * the cashier is looking at, with each IRN's signed QR code drawn by vendor/qrcode-generator.js (already served for
+   * the site), loaded only when a bill has one. A QR that cannot be drawn is said, never replaced by a blank box. */
+  function invoicePrint(invoiceId) {
+    var inv = cashInvoice(invoiceId); if (!inv) return;
+    var win = null; try { win = G.open("", "_blank"); } catch (e) {}
+    if (!win) { st.err = wT("ward.could-not-open-a-print-window", "Could not open a print window. Allow pop-ups for this site."); paint(); return; }
+    var fill = function () {
+      var qr = function (text) {
+        if (!text) return "";
+        try { var q = G.qrcode(0, "L"); q.addData(text); q.make(); return q.createSvgTag(2, 4); }
+        catch (e) { return "<p>" + wTH("ward.qr-could-not-be-drawn", "The QR code could not be drawn. Use the IRN above.") + "</p>"; }
+      };
+      var notes = (inv.events || []).filter(function (ev) { return ev.kind === "credit_note" || ev.kind === "debit_note"; });
+      var regFor = function (no) { return (inv.einvoices || []).filter(function (x) { return x.docNumber === no && x.status === "ACT"; })[0]; };
+      var irnBlock = function (no) {
+        var x = regFor(no); if (!x) return "";
+        return "<p>" + wTH("ward.irn-value", "IRN {irn}", { irn: esc(x.irn) }, "irn") + "<br>" + wTH("ward.ack-value", "Ack {ackNo} {ackDt}", { ackNo: esc(x.ackNo || ""), ackDt: esc(x.ackDt || "") }, "ackNo ackDt") + "</p>" + qr(x.signedQrCode);
+      };
+      var table = function (lines, taxableOf) {
+        return '<table border="1" cellspacing="0" cellpadding="4"><tr><th>' + wTH("ward.print-item", "Item") + "</th><th>" + wTH("ward.print-hsn-sac", "HSN/SAC") + "</th><th>" + wTH("ward.print-taxable", "Taxable value") + "</th><th>" + wTH("ward.print-gst", "GST") + "</th></tr>" +
+          (lines || []).map(function (l) { return "<tr><td>" + esc(l.display || l.code) + "</td><td>" + esc(l.hsnSac || "") + "</td><td>" + esc(taxableOf(l)) + "</td><td>" + (l.taxKind === "GST" ? cashGstText(l) : wTH("ward.no-gst-rate-set", "no GST rate set")) + "</td></tr>"; }).join("") + "</table>";
+      };
+      var taxableOf = function (l) { return l.taxable == null ? l.line : l.taxable; };
+      /* Each GST document under its own heading and number (gst-packages): a Bill of Supply has no IRN block. */
+      var docs = inv.documents || [];
+      var docHtml = docs.length ? docs.map(function (d) {
+        return "<h2>" + esc(wTEn(DOC_TYPE_WORDS[d.type]) || d.type) + " " + esc(d.number || "") + "</h2>" + table(d.lineIndexes.map(function (i) { return inv.lines[i]; }), taxableOf) +
+          "<p>" + wTH("ward.gst-doc-totals", "taxable {taxable} &middot; GST {tax} &middot; total {total}", { taxable: esc(d.taxable), tax: esc(d.tax), total: esc(d.total) }, "taxable tax total") + "</p>" + (d.type === "bill_of_supply" ? "" : irnBlock(d.number));
+      }).join("") : "<h2>" + wTH("ward.tax-invoice", "Tax invoice") + " " + esc(inv.documentNumber || inv.invoiceId) + "</h2>" + table(inv.lines, taxableOf) + irnBlock(inv.documentNumber);
+      var lines = inv.lines || [];
+      var printNotes = (lines.some(function (l) { return l.taxBasis === "package_room_over_5000_per_day" || l.taxBasis === "room_over_5000_per_day"; }) ? "<p><small>" + wTH("ward.gst-room-why", "GST 5% applies because this room is not an ICU, CCU, ICCU or NICU and its charge exceeds Rs 5,000 per day (Notification 11/2017-Central Tax (Rate), entry 31A).") + "</small></p>" : "") +
+        (lines.some(function (l) { return l.taxKind === "GST" && l.taxExempt; }) ? "<p><small>" + wTH("ward.gst-exempt-footnote", "Health care services by a clinical establishment are exempt from GST (Notification 12/2017-Central Tax (Rate), entry 74). Medicines, implants, consumables and food supplied to an admitted patient form part of that service.") + "</small></p>" : "");
+      var html = "<title>" + esc(inv.documentNumber || inv.invoiceId) + "</title><body style=\"font-family:sans-serif\">" +
+        (inv.taxRegistration ? "<p>" + wTH("ward.print-seller-gstin", "GSTIN {gstin}", { gstin: esc(inv.taxRegistration.id) }, "gstin") + "</p>" : "") +
+        "<p>" + (inv.buyer && inv.buyer.gstin ? wTH("ward.buyer-b2b", "Billed to {name}, GSTIN {gstin}", { name: esc(inv.buyer.legalName), gstin: esc(inv.buyer.gstin) }, "name gstin") + "<br>" + esc([inv.buyer.address1, inv.buyer.location, inv.buyer.pincode].join(", ")) : wTH("ward.buyer-b2c", "Billed to the patient (no buyer GSTIN)")) + "</p>" +
+        partiesHtml(inv.parties) +
+        docHtml + printNotes +
+        "<p>" + wTH("ward.charged-paid-in-balance", "Charged {charged} &middot; Paid in {paidIn} &middot; Balance {balance}", { charged: esc(inv.charged), paidIn: esc(inv.paidIn), balance: esc(inv.balance) }, "charged paidIn balance") + "</p>" +
+        notes.map(function (ev) {
+          return "<h3>" + esc(wTEn(EVENT_KIND_WORDS[ev.kind]) || ev.kind) + " " + esc(ev.noteNumber) + "</h3><p>" + esc(when(ev.at)) + " &middot; " + esc(ev.reason || "") + "</p>" +
+            table(ev.lines, function (l) { return l.taxable; }) + "<p>" + wTH("ward.note-total", "Taxable {taxable} &middot; GST {tax} &middot; Total {amount}", { taxable: esc(ev.taxable), tax: esc(ev.tax), amount: esc(ev.amount) }, "taxable tax amount") + "</p>" + irnBlock(ev.noteNumber);
+        }).join("") + "</body>";
+      try { win.document.open(); win.document.write(html); win.document.close(); win.focus(); win.print(); } catch (e) {}
+    };
+    var needsQr = (inv.einvoices || []).some(function (x) { return x.status === "ACT" && x.signedQrCode; });
+    if (!needsQr || typeof G.qrcode === "function") { fill(); return; }
+    var s = document.createElement("script");
+    s.src = "/vendor/qrcode-generator.js?v=qrgen1";
+    s.onload = fill; s.onerror = fill;
+    document.body.appendChild(s);
+  }
+
   function invoiceVoid(invoiceId) {
     if (!invoiceId) return;
     var reason = "";
@@ -10434,10 +12751,12 @@
     }
     specimenOutcomeSend(specimenId, state, "");
   }
-  function specimenOutcomeSend(specimenId, state, reason) {
+  function specimenOutcomeSend(specimenId, state, reason, scannedAccession) {
     st.busy = true; paint();
-    return apiPost("/ward/specimen-outcome", { orgId: st.orgId, specimenId: specimenId, state: state, failureReason: reason || undefined })
-      .then(function (r) { if (settle(r, r && r.ok ? (state === "failed" ? wT("ward.recorded-as-failed-the-order-needs", "Recorded as failed. The order needs a new sample.") : wT("ward.received", "Received.")) : null)) loadLabBoard(); else paint(); })
+    return apiPost("/ward/specimen-outcome", { orgId: st.orgId, specimenId: specimenId, state: state, failureReason: reason || undefined, scannedAccession: scannedAccession || undefined })
+      .then(function (r) {
+        if (r && r.error === "wrong_specimen_scan") { st.busy = false; st.err = wT("ward.the-scanned-label-is-not-this", "The scanned label is not this sample's accession number. Nothing was received."); paint(); return; }
+        if (settle(r, r && r.ok ? (state === "failed" ? wT("ward.recorded-as-failed-the-order-needs", "Recorded as failed. The order needs a new sample.") : wT("ward.received", "Received.")) : null)) loadLabBoard(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
   }
 
@@ -10581,6 +12900,165 @@
         paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-release-that-result", "Could not release that result."); paint(); });
+  }
+
+  /* PRINTED LABELS AND CAMERA SCANNING (ward-labels.js draws and prints; this decides what goes on a label).
+   *
+   * A label prints what the RECORD says: the wristband, tube label and ID slip read GET /ward/label-data first, and
+   * a wristband whose allergies could not be read is not printed at all. Printing opens the browser's print dialog
+   * for that one label; the screen says the dialog was opened, never that a label came out of a printer it cannot see.
+   *
+   * THE CAMERA ONLY FILLS A FIELD. "Scan with camera" puts what it read into the same input a keyboard-wedge scanner
+   * types into; the nurse still presses the same button, which sends it through the same server check. */
+  function camBtn(inputId) {
+    return '<button type="button" class="w-btn ghost sm w-cam w-noprint" data-w-act="camscan:' + esc(inputId) + '">' + ms("photo_camera") + wTH("ward.cam-scan", "Scan with camera") + "</button>";
+  }
+  function camScan(inputId) {
+    var WL = G.WARD_LABELS;
+    if (!WL || !WL.cameraSupported()) { st.err = wT("ward.cam-unsupported", "This browser cannot scan with the camera. Use the barcode scanner or type the code."); paint(); return; }
+    return WL.scan(wT).then(function (r) {
+      var el = document.getElementById(inputId);
+      if (r && r.cancelled) return;
+      if (r && r.code && el) {
+        el.value = r.code;
+        keepFormField(el);
+        try { el.focus(); } catch (e) {}
+        st.err = ""; st.refusal = null;
+        st.note = wT("ward.cam-scanned", "Scanned into the field. Check it, then press the same button you would after a barcode scanner.");
+        paint();
+        return;
+      }
+      st.err = r && r.code ? wT("ward.cam-field-gone", "The screen changed while scanning, so nothing was filled in. Scan again.")
+        : r && r.error === "denied" ? wT("ward.cam-denied", "The camera was not allowed. Allow it in the browser, or use the barcode scanner or type the code.")
+        : r && r.error === "unsupported" ? wT("ward.cam-unsupported", "This browser cannot scan with the camera. Use the barcode scanner or type the code.")
+        : wT("ward.cam-failed", "The camera could not be started. Use the barcode scanner or type the code.");
+      paint();
+    });
+  }
+  function labelTime(iso, lb) {
+    var P = G.WSQPrint;
+    return P && P.date ? P.date(iso, lb ? { timeZone: lb.timeZone, utcOffsetMinutes: lb.utcOffsetMinutes } : null, true) : String(iso || "");
+  }
+  /* A person's name for a printed label, looked up the way the screen names staff (staff-identities), as plain text. */
+  function whoPlain(id) {
+    var s = String(id || "");
+    if (!s || WHO.ids[s] !== undefined) return Promise.resolve(s ? whoText(s) : "");
+    return apiGet("/ward/staff-identities?orgId=" + encodeURIComponent(st.orgId) + "&ids=" + encodeURIComponent(s))
+      .then(function (r) { var f = r && r.ok && r.identities ? r.identities[s] : null; if (f && !f.system) WHO.ids[s] = f; return whoText(s); }, function () { return whoText(s); });
+  }
+  function labelSent(kind, ok, extra) {
+    st.busy = false;
+    if (!ok) { st.err = wT("ward.label-print-failed", "This browser could not open printing. Nothing was printed."); paint(); return; }
+    st.err = ""; st.refusal = null;
+    st.note = (kind === "wristband" ? wT("ward.label-dialog-wristband", "The print dialog is open for the wristband.")
+      : kind === "slip" ? wT("ward.label-dialog-slip", "The print dialog is open for the ID slip.")
+      : kind === "specimen" ? wT("ward.label-dialog-specimen", "The print dialog is open for the tube label.")
+      : wT("ward.label-dialog-pharmacy", "The print dialog is open for the pharmacy label.")) + (extra && extra.trim() ? " " + extra.trim() : "");
+    paint();
+  }
+  function labelRead(patientId) {
+    return apiGet("/ward/label-data?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(patientId))
+      .then(function (r) { return r && r.ok && r.patient ? r : { failed: r || null }; }, function () { return { failed: null }; });
+  }
+  function labelReadFailed(f) {
+    st.busy = false;
+    if (f && f.status === 403) settle(f, null);
+    else st.err = wT("ward.label-patient-unread", "The patient's details could not be read. Nothing was printed.");
+    paint();
+  }
+  /* The wristband or the ID slip, for one patient. */
+  function printPatientLabel(kind, patientId) {
+    var WL = G.WARD_LABELS;
+    if (!WL) { st.err = wT("ward.label-unavailable", "Label printing is unavailable on this build."); paint(); return; }
+    if (!patientId) return;
+    st.busy = true; paint();
+    return labelRead(patientId).then(function (r) {
+      if (r.failed !== undefined) { labelReadFailed(r.failed); return; }
+      var p = r.patient, sizes = r.labels && r.labels.sizes;
+      if (kind === "wristband") {
+        if (r.allergies === null) { st.busy = false; st.err = wT("ward.label-allergies-unread", "The allergies could not be read, so the wristband was not printed. A band must never say none recorded because a read failed. Try again."); paint(); return; }
+        if (!r.band || !r.band.value) { st.busy = false; st.err = wT("ward.label-no-band-value", "This patient has no MRN or band code to print. Nothing was printed."); paint(); return; }
+        var ok = WL.print("wristband", { name: p.name, mrn: p.mrn, dob: p.dob, ageYears: p.ageYears, sex: p.sex, allergies: r.allergies, bandValue: r.band.value }, sizes);
+        labelSent("wristband", ok, (r.band.matchesBedside ? "" : wT("ward.label-band-not-bedside", "Its code is this patient's band on record, which is not the MRN the medication and specimen scans compare with: those scans will refuse it.")) +
+          (r.band.tagsUnread ? " " + wT("ward.label-band-tags-unread", "The bands already issued could not be read, so this band carries the MRN. Check it against any band the patient wears.") : ""));
+        return;
+      }
+      var row = null;
+      (st.patients || []).forEach(function (x) { if (x && x.patientId === patientId) row = x; });
+      labelSent("slip", WL.print("slip", { name: p.name, mrn: p.mrn, ageYears: p.ageYears, sex: p.sex, ward: row && row.ward, bed: row && row.bed, issuedAt: labelTime(new Date().toISOString(), r.labels) }, sizes));
+    });
+  }
+  /* spec: { patientId, serviceRequestId, display, accessionNumber, specimenType, collectedAt, collectedBy } */
+  function printSpecimenLabel(spec) {
+    var WL = G.WARD_LABELS;
+    if (!WL) { st.err = wT("ward.label-unavailable", "Label printing is unavailable on this build."); paint(); return; }
+    if (!spec || !spec.accessionNumber) { st.err = wT("ward.label-no-accession", "This sample has no accession number on record, so no tube label was printed."); paint(); return; }
+    st.busy = true; paint();
+    return labelRead(spec.patientId).then(function (r) {
+      if (r.failed !== undefined) { labelReadFailed(r.failed); return; }
+      return whoPlain(spec.collectedBy).then(function (by) {
+        labelSent("specimen", WL.print("specimen", { name: r.patient.name, mrn: r.patient.mrn, accessionNumber: spec.accessionNumber, test: spec.display,
+          specimenType: spec.specimenType, collectedAt: labelTime(spec.collectedAt, r.labels), collectedBy: by }, r.labels && r.labels.sizes));
+      });
+    });
+  }
+  function specimenLabelFor(serviceRequestId) {
+    var found = null, look = function (list) { (list || []).forEach(function (x) { if (x && x.serviceRequestId === serviceRequestId) found = x; }); };
+    look(st.labBoard && st.labBoard.specimens); look(st.investigations && st.investigations.requests);
+    var c = found && found.collection;
+    if (!c || c.state !== "collected") { st.err = wT("ward.label-not-collected", "That sample is not recorded as collected, so there is no tube label to print."); paint(); return; }
+    return printSpecimenLabel({ patientId: found.patientId || (st.sel && st.sel.patientId), serviceRequestId: serviceRequestId, display: found.display || found.code,
+      accessionNumber: c.accessionNumber, specimenType: c.specimenType, collectedAt: c.at, collectedBy: c.by });
+  }
+  /* The pharmacy label for one recorded dispense. The pharmacy role reads the order, not the chart, so the patient is the
+   * one this pharmacy screen is open for and the dose, route and frequency are the order's own. */
+  function printPharmacyLabel(dispenseId) {
+    var WL = G.WARD_LABELS, ph = st.pharmacy || {}, s = st.sel, d = null, o = null;
+    if (!WL) { st.err = wT("ward.label-unavailable", "Label printing is unavailable on this build."); paint(); return; }
+    (ph.dispenses || []).forEach(function (x) { if (x && x.dispenseId === dispenseId) d = x; });
+    if (d) ((ph.queue && ph.queue.orders) || []).forEach(function (x) { if (x && x.orderId === d.orderId) o = x; });
+    if (!d || !s || !s.name) { st.err = wT("ward.label-dispense-unknown", "That dispense is not on this screen any more. Reload the pharmacy screen. Nothing was printed."); paint(); return; }
+    if (!o) { st.err = wT("ward.label-order-unknown", "The order for this dispense is not on the queue, so its dose, route and frequency are not known here. Nothing was printed."); paint(); return; }
+    if (!st.labels) { st.err = wT("ward.label-settings-unread", "The hospital's label settings have not loaded. Reload the ward and try again. Nothing was printed."); paint(); return; }
+    st.busy = true; paint();
+    return whoPlain(d.dispensedBy).then(function (by) {
+      labelSent("pharmacy", WL.print("pharmacy", { name: s.name, mrn: s.mrn, drug: d.drug || o.drug, dose: o.dose && o.dose.value != null ? o.dose.value + " " + (o.dose.unit || "") : "",
+        route: o.route, frequency: o.frequency, quantity: d.quantity ? d.quantity.value + " " + d.quantity.unit : "", batch: d.batch, expiry: d.expiry,
+        dispensedAt: labelTime(d.dispensedAt, st.labels), dispensedBy: by }, st.labels.sizes));
+    });
+  }
+  /* Offered where the act happened (admission, collection, dispense), on that screen only, until dismissed. */
+  function labelOfferBar(state) {
+    var o = state.labelOffer;
+    if (!o || o.view !== state.view) return "";
+    var b = function (act, icon, words) { return '<button class="w-btn ghost sm" data-w-act="labelprint:' + act + '">' + ms(icon) + words + "</button>"; };
+    var text = o.kind === "admission" ? wTH("ward.label-offer-admission", "Admitted {who}. Print the wristband and ID slip now.", { who: esc(o.who || "") }, "who")
+      : o.kind === "specimen" ? wTH("ward.label-offer-specimen", "Collected {test}. Label the tube before it leaves the bedside.", { test: esc((o.spec && o.spec.display) || "") }, "test")
+      : wTH("ward.label-offer-pharmacy", "Dispensed {drug}. Print the label for the supply.", { drug: esc(o.drug || "") }, "drug");
+    var btns = o.kind === "admission" ? b("wristband", "badge", wTH("ward.print-wristband", "Print wristband")) + b("slip", "receipt", wTH("ward.print-id-slip", "Print ID slip"))
+      : o.kind === "specimen" ? b("specimen", "label", wTH("ward.print-tube-label", "Print tube label"))
+      : b("pharmacy", "label", wTH("ward.print-pharmacy-label", "Print pharmacy label"));
+    return '<div class="w-labeloffer w-noprint">' + ms("print") + "<p>" + text + "</p>" + btns +
+      "<button class=\"w-x\" data-w-act=\"labeloffer-x\" aria-label=\"" + wTA("ward.dismiss", "Dismiss") + "\">" + ms("close") + "</button></div>";
+  }
+  function labelOfferPrint(kind) {
+    var o = st.labelOffer; if (!o) return;
+    if (kind === "wristband" || kind === "slip") return printPatientLabel(kind, o.patientId);
+    if (kind === "specimen") return printSpecimenLabel(o.spec);
+    if (kind === "pharmacy") return printPharmacyLabel(o.dispenseId);
+  }
+  /* The laboratory receives the tube in its hand: the scanned (or typed) label finds the specimen on this board, and the
+   * server refuses the receipt if that label is not the specimen's own accession number. */
+  function specimenScanReceive() {
+    var code = val("wSpecScan");
+    if (!code) { st.err = wT("ward.scan-or-type-the-tube-label", "Scan or type the label on the tube."); paint(); return; }
+    var norm = function (v) { return String(v || "").trim().toUpperCase(); }, hit = null;
+    ((st.labBoard && st.labBoard.specimens) || []).forEach(function (sp) {
+      var c = sp && sp.collection;
+      if (c && c.state === "collected" && c.accessionNumber && norm(c.accessionNumber) === norm(code)) hit = c;
+    });
+    if (!hit) { st.err = wT("ward.no-tube-in-transit-carries-that", "No sample in transit on this board carries that label. Nothing was received."); paint(); return; }
+    return specimenOutcomeSend(hit.specimenId, "received", "", code);
   }
 
   function tagsOpen() {
@@ -10835,7 +13313,7 @@
   }
 
   function admReqOpen() {
-    st.view = "admreqs"; st.admReqs = null; paint(); loadAdmReqs();
+    st.view = "admreqs"; st.admReqs = null; st.intake = null; paint(); loadAdmReqs();
   }
   function loadAdmReqs() {
     st.busy = true; paint();
@@ -10855,11 +13333,11 @@
     st.busy = true; paint();
     apiPost("/ward/request-admission", {
       orgId: st.orgId, mrn: mrn, urgency: val("wArUrg"), specialty: val("wArSpec") || undefined,
-      ward: val("wArWard") || undefined, reason: reason,
+      ward: val("wArWard") || undefined, reason: reason, plannedFor: val("wArPlanned") || undefined,
     })
       .then(function (r) {
         if (settle(r, r && r.ok ? wT("ward.on-the-waiting-list", "On the waiting list.") : null)) {
-          ["wArMrn", "wArSpec", "wArWard", "wArReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          ["wArMrn", "wArSpec", "wArWard", "wArReason", "wArPlanned"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
           loadAdmReqs();
         } else paint();
       })
@@ -10882,6 +13360,97 @@
     return apiPost("/ward/close-admission-request", { orgId: st.orgId, requestId: id, state: state, reason: reason || undefined })
       .then(function (r) { if (settle(r, r && r.ok ? wT("ward.closed", "Closed.") : null)) loadAdmReqs(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-close-that-request", "Could not close that request."); paint(); });
+  }
+
+  function dcBoardOpen() { st.view = "dcboard"; st.dcBoard = null; paint(); loadDcBoard(); }
+  function loadDcBoard() {
+    return apiGet("/ward/discharge-progress?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (st.view !== "dcboard") return; st.dcBoard = r && r.ok ? r : false; paint(); },
+        function () { if (st.view !== "dcboard") return; st.dcBoard = false; paint(); });
+  }
+  function dcStep(arg) {
+    var parts = String(arg || "").split("~"), encounterId = parts[0], step = parts[1];
+    if (!encounterId || !step) return;
+    var row = st.dcBoard && (st.dcBoard.inProgress || []).filter(function (x) { return x.encounterId === encounterId; })[0];
+    dcAsk(encounterId, step, parts[2] === "change", row ? row.version : null, loadDcBoard);
+  }
+  /* One step's time, asked on the ward. A change of a recorded time needs a reason; so does a time out of order,
+   * which the server names when it refuses. */
+  function dcAsk(encounterId, step, change, version, after) {
+    var fields = [{ key: "at", type: "datetime", value: dtLocalNow(), label: wTH("ward.dc-when", "When it happened") },
+      { key: "reason", type: "textarea", label: change ? wTH("ward.dc-reason-change", "Why the recorded time is changing") : wTH("ward.dc-reason-optional", "Reason, if the time is out of order (optional)"), required: change ? wT("ward.dc-reason-needed", "A change needs a reason.") : "" }];
+    if (step === "left") fields.push({ key: "delay", label: wTH("ward.dc-delay", "Minutes the patient asked to stay (optional)") });
+    askFor({ title: wTH("ward.dc-ask-title", "{step}: record the time", { step: esc(dcStepWord(step)) }), icon: "schedule", ok: wTH("ward.record2", "Record"), fields: fields }, function (v) {
+      var at = v.at ? new Date(v.at) : null;
+      if (at && isNaN(at.getTime())) { st.err = wT("ward.that-date-could-not-be-read", "That date could not be read. Nothing was recorded."); return; }
+      var body = { orgId: st.orgId, encounterId: encounterId, step: step, at: at ? at.toISOString() : undefined, reason: v.reason || undefined };
+      if (change && version != null) body.expectedVersion = version;
+      if (step === "left" && v.delay) body.patientDelayMinutes = Number(v.delay);
+      st.busy = true; paint();
+      return apiPost("/ward/discharge-milestone", body)
+        .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) return after(); paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    });
+  }
+  function tcOpen() { st.view = "tcentre"; st.tc = null; paint(); loadTc(); }
+  function loadTc() {
+    return apiGet("/ward/transfer-centre?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { if (st.view !== "tcentre") return; st.tc = r && r.ok ? r : false; paint(); },
+        function () { if (st.view !== "tcentre") return; st.tc = false; paint(); });
+  }
+  function tcRecord() {
+    var at = val("wTcAt"), d = at ? new Date(at) : null, age = val("wTcAge");
+    var body = { orgId: st.orgId, facility: val("wTcFacility"), contactName: val("wTcContact") || undefined, contactPhone: val("wTcPhone") || undefined, facilityRef: val("wTcRef") || undefined,
+      ageYears: age === "" ? undefined : Number(age), sex: val("wTcSex") || undefined, requestedService: val("wTcService"), requestedUnit: val("wTcUnit") || "ward",
+      urgency: val("wTcUrgency"), clinicalSummary: val("wTcSummary"), receivedAt: d && !isNaN(d.getTime()) ? d.toISOString() : undefined };
+    if (!body.facility || !body.clinicalSummary || !body.requestedService) { st.err = wT("ward.tc-need-fields", "Name the referring hospital and the service asked for, and give the clinical summary."); paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/transfer-centre-request", body)
+      .then(function (r) {
+        if (settle(r, wT("ward.tc-recorded", "Call recorded. A consultant accepts or declines it here."))) {
+          ["wTcFacility", "wTcContact", "wTcPhone", "wTcRef", "wTcAge", "wTcService", "wTcSummary"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadTc();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.tc-could-not-record", "Could not record the call."); paint(); });
+  }
+  function tcFind(id) { return (st.tc && (st.tc.open || []).filter(function (q) { return q.id === id; })[0]) || null; }
+  function tcAccept(id) {
+    var q = tcFind(id); if (!q) return;
+    askFor({ title: wTH("ward.tc-accept-title", "Accept the transfer from {facility}?", { facility: esc(q.facility) }), icon: "check", ok: wTH("ward.xfer-accept", "Accept"),
+      text: wTH("ward.tc-accept-text", "Register the patient first on Patients, which checks for duplicate records, then give the MRN. The patient joins the bed waiting list; no bed is reserved."),
+      fields: [{ key: "mrn", label: wTH("ward.patient-mrn", "Patient MRN"), required: wT("ward.say-which-patient-by-mrn", "Say which patient, by MRN.") }] },
+      function (v) { return tcDecide(q, { decision: "accept", mrn: v.mrn }); });
+  }
+  function tcDecline(id) {
+    var q = tcFind(id); if (!q) return;
+    askReason(wTH("ward.tc-decline-q", "Why is this transfer declined?", null, "", 1), wT("ward.tc-decline-needed", "A decline needs a reason."), wTH("ward.xfer-decline", "Decline"),
+      function (reason) { return tcDecide(q, { decision: "decline", reason: reason }); }, { danger: true });
+  }
+  function tcDecide(q, extra) {
+    st.busy = true; paint();
+    return apiPost("/ward/transfer-centre-decide", Object.assign({ orgId: st.orgId, requestId: q.id, expectedVersion: q.version }, extra))
+      .then(function (r) {
+        if (r && r.error === "identity_mismatch" && !extra.identityConfirmed) {
+          st.busy = false;
+          var what = (r.mismatch || []).map(function (m) { return m === "sex" ? wT("ward.tc-sex-word", "sex") : m === "age" ? wT("ward.tc-age-word", "age") : ""; }).filter(Boolean).join(", ");
+          askFor({ title: wTH("ward.tc-mismatch-title", "The registered patient does not match the call"), icon: "warning", danger: true, ok: wTH("ward.tc-same-person", "Same person, accept"),
+            text: wTH("ward.tc-mismatch-text", "The {what} the referring hospital gave differs from the registration. Accept only if you are sure this is the same person.", { what: esc(what) }), fields: [] },
+            function () { return tcDecide(q, Object.assign({}, extra, { identityConfirmed: true })); });
+          return;
+        }
+        if (settle(r, extra.decision === "accept" ? wT("ward.tc-accepted", "Accepted. The patient is on the bed waiting list; no bed is reserved.") : wT("ward.tc-declined", "Declined."))) loadTc(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.tc-could-not-answer", "Could not record the answer."); paint(); });
+  }
+  function tcWithdraw(id) {
+    var q = tcFind(id); if (!q) return;
+    askReason(wTH("ward.tc-withdraw-q", "Why was the request withdrawn?", null, "", 1), wT("ward.tc-withdraw-needed", "Say why the request was withdrawn."), null, function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/transfer-centre-cancel", { orgId: st.orgId, requestId: q.id, reason: reason, expectedVersion: q.version })
+        .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadTc(); else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+    });
   }
 
   function orderSetsOpen() {
@@ -11265,7 +13834,7 @@
         if (r && r.ok) st.inbox = r;
         /* A failed LOAD is not an empty inbox. Said in the same words the list itself uses, because
          * the reader has to end up with the same belief either way: this is not a quiet ward. */
-        else { st.inbox = null; st.err = wT("ward.could-not-load-the-safety-inbox", "Could not load the safety inbox. Do not read this as a quiet ward."); }
+        else { st.inbox = null; st.err = r && r.error === "too_many_open" ? r.message : wT("ward.could-not-load-the-safety-inbox", "Could not load the safety inbox. Do not read this as a quiet ward."); }
         paint();
       })
       .catch(function () { st.busy = false; st.inbox = null; st.err = wT("ward.could-not-load-the-safety-inbox", "Could not load the safety inbox. Do not read this as a quiet ward."); paint(); });
@@ -11308,6 +13877,7 @@
       var r0 = document.getElementById("wRoster"); if (r0) { var m0 = focusMark(); r0.innerHTML = rosterHtml(st); focusRestore(m0); } else paint();
       return;
     }
+    if (st.view === "cashier" && t && t.id === "wCashStay") { st.cashier.stayId = t.value; return; }
     if (st.view === "pcopy" && t && t.id === "wPcopyScope") { st.pcopyScope = t.value === "full" ? "full" : "patient-copy"; paint(); return; }
     // The print's second language: its catalog file is loaded before the page is drawn with it.
     if (st.view === "pcopy" && t && t.id === "wPcopyLang") { st.pcopyLang = t.value; if (G.WSQPrint) G.WSQPrint.ensureLoaded(t.value, paint); else paint(); return; }
@@ -11463,13 +14033,31 @@
       .catch(function () { st.docVersions = { id: id, failed: true }; paint(); });
   }
   function documentPurge(id) {
-    askFor({ icon: "delete_forever", danger: true, ok: wTH("ward.remove", "Remove"),
-      title: wTH("ward.delete-the-stored-file-for-every", "Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone.", null, "", 1) }, function () {
+    /* The purge is the destruction record (legal opinion H.4.2): a named person gives the reason. The server refuses
+     * inside the retention period and under a legal hold, and says until when. */
+    askReason(wTH("ward.delete-the-stored-file-for-every", "Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone.", null, "", 1),
+      wT("ward.doc-purge-reason-needed", "Destroying a document needs a reason."), wTH("ward.remove", "Remove"), function (reason) {
       st.busy = true; paint();
-      return apiPost("/ward/document-purge", { orgId: st.orgId, documentId: id })
-        .then(function (r) { if (settle(r, r && r.ok ? wT("ward.file-deleted-the-record-of-the", "File deleted. The record of the document is kept.") : null)) loadDocuments(); else paint(); })
-        .catch(function () { st.busy = false; st.err = wT("ward.could-not-delete-the-file", "Could not delete the file."); paint(); });
-    });
+      return documentPurgePost(id, { reason: reason });
+    }, { danger: true, icon: "delete_forever", label: wTH("ward.doc-purge-reason", "Why is it being destroyed? This is kept as the destruction record.") });
+  }
+  function documentPurgePost(id, body) {
+    return apiPost("/ward/document-purge", Object.assign({ orgId: st.orgId, documentId: id }, body))
+      .then(function (r) {
+        /* Kept only under the hospital's retention policy, not by law (owner's guidance 17 Sep 2026): the DPO or the
+         * medical records officer confirms with a reason. A period the law sets is refused and named by the server. */
+        if (r && r.error === "retention_policy_confirmation_required") { st.busy = false; paint(); documentPurgeConfirm(id, body.reason, r); return; }
+        if (settle(r, r && r.ok ? wT("ward.file-deleted-the-record-of-the", "File deleted. The record of the document is kept.") : null)) loadDocuments(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-delete-the-file", "Could not delete the file."); paint(); });
+  }
+  function documentPurgeConfirm(id, reason, r) {
+    askReason(wTH("ward.doc-purge-policy-title", "Kept under the hospital's retention policy, not by law", null, "", 1),
+      wT("ward.doc-purge-policy-reason-needed", "Confirming needs a reason of at least 10 characters."), wTH("ward.doc-purge-policy-confirm", "Confirm deletion"), function (why) {
+        st.busy = true; paint();
+        return documentPurgePost(id, { reason: reason, policyConfirm: true, policyReason: why });
+      }, { danger: true, icon: "policy", text: '<span lang="en">' + esc(r.message || "") + "</span>",
+        label: wTH("ward.doc-purge-policy-label", "As the Data Protection Officer or medical records officer: why is deleting it before {date} justified?", { date: esc(String(r.retainUntil || "").slice(0, 10)) }, "date") });
   }
   function documentWithdraw(id) {
     askReason(wTH("ward.why-is-this-document-being-withdrawn", "Why is this document being withdrawn? (For example: scanned under the wrong patient.) The file is kept.", null, "", 1), wT("ward.a-withdrawal-needs-a-reason", "A withdrawal needs a reason."), wTH("ward.withdraw", "Withdraw"), function (reason) {
@@ -11490,6 +14078,147 @@
           .catch(function () { st.busy = false; st.err = wT("ward.could-not-release-the-document-nothing", "Could not release the document. Nothing was released."); paint(); });
       }, { icon: "share" });
   }
+  /* ---- ABDM ON THE CHART (functions/_wardsynq/abdm-chart.js) --------------------------------------------------
+   * This hospital's records linked to the patient's ABHA, requests to other facilities with their consent status, and
+   * what was filed from them. st.abdm: null = loading, false = could not be read (never shown as nothing linked). */
+  function abdmReasonText(code) {
+    switch (code) {
+      case "not_set_up": return wT("ward.reg-abdm-not-set-up", "ABDM is not set up for this hospital. An administrator sets it up on Admin Center, Integrations, ABDM.");
+      case "inactive": return wT("ward.reg-abdm-inactive", "This hospital's ABDM profile is switched off.");
+      case "not_linked": return wT("ward.reg-abdm-not-linked", "This hospital is not linked to ABDM yet. ABDM has to link the facility to the StewardMD bridge and issue a HIP ID first.");
+      case "suspended": return wT("ward.reg-abdm-suspended", "This hospital's ABDM connection is suspended.");
+      case "production_held": return wT("ward.reg-abdm-production-held", "Production ABDM traffic is held until India-region hosting exists.");
+      case "bridge_not_configured": return wT("ward.reg-abdm-bridge-missing", "The StewardMD ABDM bridge credential is not configured on this server.");
+      default: return wT("ward.reg-abdm-not-connected-other", "This hospital is not connected to ABDM.");
+    }
+  }
+  function abdmHiTypeWord(t) {
+    switch (t) {
+      case "Prescription": return wT("ward.abdm-hi-prescription", "Prescription");
+      case "DiagnosticReport": return wT("ward.abdm-hi-diagnostic-report", "Diagnostic report");
+      case "OPConsultation": return wT("ward.abdm-hi-consultation", "Consultation");
+      case "DischargeSummary": return wT("ward.abdm-hi-discharge-summary", "Discharge summary");
+      case "ImmunizationRecord": return wT("ward.abdm-hi-immunization", "Immunization");
+      case "HealthDocumentRecord": return wT("ward.abdm-hi-health-document", "Health document");
+      case "WellnessRecord": return wT("ward.abdm-hi-wellness", "Wellness record");
+      case "Invoice": return wT("ward.abdm-hi-invoice", "Invoice record");
+      default: return String(t || "");
+    }
+  }
+  function abdmConsentWord(s) {
+    switch (s) {
+      case "INITIATED": return wT("ward.abdm-consent-waiting", "Waiting for the patient");
+      case "GRANTED": return wT("ward.abdm-consent-granted", "Granted");
+      case "DENIED": return wT("ward.abdm-consent-denied", "Denied");
+      case "REVOKED": return wT("ward.abdm-consent-revoked", "Withdrawn by the patient");
+      case "EXPIRED": return wT("ward.abdm-consent-expired", "Expired");
+      default: return String(s || "");
+    }
+  }
+  function abdmEventWord(e) {
+    switch (e.action) {
+      case "abdm.hip.registered": return wT("ward.abdm-ev-registered", "Registered with ABDM discovery");
+      case "abdm.hip.link.requested": return wT("ward.abdm-ev-link-sent", "Sent to ABDM to link");
+      case "abdm.hip.linktoken.requested": return wT("ward.abdm-ev-token-requested", "Link token asked for; linked when it arrives");
+      case "abdm.hip.link.skipped": return wT("ward.abdm-ev-skipped", "Nothing final to link");
+      case "abdm.hip.link.failed": return wT("ward.abdm-ev-failed", "Linking failed");
+      case "abdm.link.result": return e.outcome === "ok" ? wT("ward.abdm-ev-linked", "ABDM confirmed the link") : wT("ward.abdm-ev-refused", "ABDM refused the link");
+      default: return String(e.action || "");
+    }
+  }
+  function abdmRecordsView(state) {
+    var s = state.sel;
+    if (!s) return "<div class=\"w-card\"><p class=\"w-empty\">" + wTH("ward.open-a-patient-first", "Open a patient first.") + "</p></div>";
+    var d = state.abdm, h = '<div class="w-card"><div class="w-card-h">' + ms("cloud_sync") + "<h3>" + wTH("ward.abdm-title", "ABDM") + "</h3>" +
+      '<button class="w-ic" data-w-act="abdmrecords" title="' + wTA("ward.refresh", "Refresh") + '">' + ms("refresh") + "</button></div>";
+    if (d == null) return h + '<p class="w-empty">' + wTH("ward.abdm-loading", "Loading what is linked and requested through ABDM...") + "</p></div>";
+    if (d === false) return h + '<p class="w-hint warn">' + ms("error") + wTH("ward.abdm-load-failed", "What this patient has linked or requested through ABDM could not be read. This is not the same as there being nothing.", null, "", 1) + "</p></div>";
+    var conn = d.connection || {};
+    if (!conn.connected) h += '<p class="w-hint warn">' + ms("link_off") + "<b>" + wTH("ward.reg-abdm-not-connected", "Not connected to ABDM.") + "</b> " + esc(abdmReasonText(conn.code)) + "</p>";
+    if (!d.abha.onRecord) return h + '<p class="w-hint">' + ms("info") + wTH("ward.abdm-no-abha", "This patient has no ABHA address on the record with their consent. Verify or create it at registration, then records can be linked and requested.") + "</p></div>";
+
+    h += '<div class="w-sub"><h4>' + ms("share") + wTH("ward.abdm-linked-heading", "This hospital's records linked to the patient's ABHA") + "</h4>";
+    if ((d.unreadableTypes || []).length) h += '<p class="w-hint warn">' + ms("warning") + wTH("ward.abdm-partial", "Your role cannot read every kind of record, so a stay may offer more than is listed here.") + "</p>";
+    h += (d.stays || []).length ? '<ul class="w-mini">' + d.stays.map(function (st2) {
+      var recs = st2.records || [];
+      return '<li class="w-mini-row"><div><b>' + wTH("ward.abdm-stay", "Stay from {from}", { from: when(st2.admittedAt) }, "from") + "</b>" + (st2.dischargedAt ? " &middot; " + wTH("ward.abdm-stay-to", "discharged {to}", { to: when(st2.dischargedAt) }, "to") : "") +
+        (recs.length ? '<ul class="w-mini">' + recs.map(function (r) {
+          return "<li>" + esc(abdmHiTypeWord(r.hiType)) + ' <span class="' + (r.registered ? "w-st ok" : "w-st due") + '">' + (r.registered ? wTH("ward.abdm-registered", "registered") : wTH("ward.abdm-not-registered", "not linked yet")) + "</span></li>";
+        }).join("") + "</ul>" : '<div class="w-dt-times">' + wTH("ward.abdm-nothing-final", "Nothing final to share yet.") + "</div>") +
+        (st2.unsignedSummary ? '<div class="w-dt-times">' + wTH("ward.abdm-unsigned-summary", "The discharge summary is not signed, so it is not shared.") + "</div>" : "") +
+        "</div><div class=\"w-mini-row-act\">" + (conn.connected && recs.length ? '<button class="w-btn ghost sm" data-w-act="abdmlink:' + esc(st2.encounterId) + '">' + ms("link") + wTH("ward.abdm-link-now", "Link now") + "</button>" : "") + "</div></li>";
+    }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.abdm-no-stays", "No admission or emergency visit here.") + "</p>";
+    if ((d.linkEvents || []).length) h += '<ul class="w-mini">' + d.linkEvents.map(function (e) {
+      return "<li>" + esc(abdmEventWord(e)) + ' <span class="w-dt-times">' + when(e.at) + (e.detail && e.detail.code ? ' &middot; <span lang="en">' + esc(e.detail.code) + "</span>" : "") + "</span></li>";
+    }).join("") + "</ul>";
+    h += "</div>";
+
+    if (conn.connected) {
+      h += '<div class="w-sub"><h4>' + ms("download") + wTH("ward.abdm-ask-heading", "Ask other facilities for this patient's records") + "</h4>" +
+        '<p class="w-hint">' + ms("info") + wTH("ward.abdm-ask-hint", "The patient approves or refuses in their ABHA app. Records that arrive are filed as drafts, marked as received under that consent, and stay on the chart even if the consent is later withdrawn.") + "</p><div class=\"w-grid\">" +
+        '<label class="w-f"><span>' + wTH("ward.abdm-purpose", "Why the records are needed") + '</span><select id="wAbdmPurpose">' + (d.purposes || []).map(function (p) { return '<option value="' + esc(p.code) + '">' + esc(p.code === "CAREMGT" ? wT("ward.abdm-purpose-care", "Care management") : p.code === "BTG" ? wT("ward.abdm-purpose-btg", "Emergency (break the glass)") : p.code === "HPAYMT" ? wT("ward.abdm-purpose-payment", "Healthcare payment") : p.text) + "</option>"; }).join("") + "</select></label>" +
+        '<label class="w-f"><span>' + wTH("ward.abdm-from", "Records from") + '</span><input id="wAbdmFrom" type="date"></label>' +
+        '<label class="w-f"><span>' + wTH("ward.abdm-to", "Records to") + '</span><input id="wAbdmTo" type="date"></label>' +
+        '<label class="w-f"><span>' + wTH("ward.abdm-until", "Keep access until") + '</span><input id="wAbdmUntil" type="date"></label></div>' +
+        '<div class="w-grid">' + (d.hiTypes || []).map(function (t) { return '<label class="w-chk"><input type="checkbox" class="wAbdmHi" value="' + esc(t) + '"> ' + esc(abdmHiTypeWord(t)) + "</label>"; }).join("") + "</div>" +
+        '<button class="w-btn" data-w-act="abdmrequest">' + ms("send") + wTH("ward.abdm-request", "Ask for the records") + "</button></div>";
+    }
+
+    h += '<div class="w-sub"><h4>' + ms("fact_check") + wTH("ward.abdm-requests-heading", "Requests from this hospital") + "</h4>";
+    h += (d.requests || []).length ? '<ul class="w-mini">' + d.requests.map(function (r) {
+      return '<li class="w-mini-row"><div><b>' + esc(abdmConsentWord(r.status)) + "</b> &middot; " + esc((r.hiTypes || []).map(abdmHiTypeWord).join(", ")) +
+        '<div class="w-dt-times">' + wTH("ward.abdm-requested-at", "asked {at}", { at: when(r.requestedAt) }, "at") + (r.lastFetchedAt ? " &middot; " + wTH("ward.abdm-fetched-at", "fetched {at}", { at: when(r.lastFetchedAt) }, "at") : "") + "</div></div>" +
+        '<div class="w-mini-row-act">' + (conn.connected && r.status === "GRANTED" && r.consentGranted ? '<button class="w-btn ghost sm" data-w-act="abdmfetch:' + esc(r.requestId) + '">' + ms("download") + wTH("ward.abdm-fetch", "Fetch the records") + "</button>" : "") + "</div></li>";
+    }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.abdm-no-requests", "No request has been made for this patient.") + "</p>";
+    h += "</div>";
+
+    h += '<div class="w-sub"><h4>' + ms("inbox") + wTH("ward.abdm-received-heading", "Received from other facilities through ABDM") + "</h4>";
+    h += (d.received || []).length ? '<ul class="w-mini">' + d.received.map(function (r) {
+      return '<li><span lang="en">' + esc(r.what) + "</span> " + (r.status ? '<span class="w-st">' + esc(r.status) + "</span> " : "") + '<span class="w-dt-times">' + when(r.recordedAt) + "</span></li>";
+    }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.abdm-none-received", "Nothing has been received through ABDM for this patient.") + "</p>";
+    return h + "</div></div>";
+  }
+  function abdmRecordsOpen() {
+    if (!st.sel) { st.err = wT("ward.open-a-patient-first", "Open a patient first."); paint(); return; }
+    st.view = "abdmrecords"; st.abdm = null; paint(); loadAbdmRecords();
+  }
+  function loadAbdmRecords() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/abdm-records?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.abdm = r && r.ok && r.connection ? r : false; if (!st.abdm) settle(r); paint(); })
+      .catch(function () { st.abdm = false; paint(); });
+  }
+  function abdmLinkStay(encounterId) {
+    var s = st.sel; if (!s) return;
+    st.busy = true; paint();
+    apiPost("/ward/abdm-link-stay", { orgId: st.orgId, patientId: s.patientId, encounterId: encounterId })
+      .then(function (r) {
+        var say = r && r.state === "linked-requested" ? wT("ward.abdm-link-sent", "Sent to ABDM to link. ABDM's answer shows here when it arrives.")
+          : r && r.state === "token-requested" ? wT("ward.abdm-token-requested", "ABDM was asked for a link token. The records are linked when it arrives.")
+          : r && r.state === "nothing-to-link" ? wT("ward.abdm-nothing-to-link", "Nothing final to link yet.")
+          : r && r.state === "no-abha" ? wT("ward.abdm-no-abha-short", "This patient has no ABHA address on the record with consent.")
+          : r && r.state === "not-connected" ? abdmReasonText(r.reason) : null;
+        settle(r, say); loadAbdmRecords();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.abdm-link-unreachable", "Could not reach the server. Nothing was linked."); paint(); });
+  }
+  function abdmRequest() {
+    var s = st.sel; if (!s) return;
+    var hi = Array.prototype.map.call(document.querySelectorAll(".wAbdmHi:checked"), function (n) { return n.value; });
+    if (!hi.length) { st.err = wT("ward.abdm-choose-type", "Choose at least one kind of record."); paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/abdm-consent-request", { orgId: st.orgId, patientId: s.patientId, purpose: val("wAbdmPurpose"), hiTypes: hi, from: val("wAbdmFrom"), to: val("wAbdmTo"), expiresOn: val("wAbdmUntil") })
+      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.abdm-requested", "Asked. The patient approves or refuses in their ABHA app.") : null)) loadAbdmRecords(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.abdm-request-unreachable", "Could not reach the server. Nothing was asked for."); paint(); });
+  }
+  function abdmFetch(requestId) {
+    var s = st.sel; if (!s) return;
+    st.busy = true; paint();
+    apiPost("/ward/abdm-fetch", { orgId: st.orgId, patientId: s.patientId, requestId: requestId })
+      .then(function (r) { if (settle(r, r && r.ok ? wT("ward.abdm-fetching", "Asked ABDM for the records. They are filed on the chart as they arrive.") : null)) loadAbdmRecords(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.abdm-fetch-unreachable", "Could not reach the server. Nothing was fetched."); paint(); });
+  }
+
   function immunizationsOpen() {
     if (!st.sel) { st.err = wT("ward.open-a-patient-first", "Open a patient first."); paint(); return; }
     st.view = "immunizations"; st.immunizations = null; paint(); loadImmunizations();
@@ -11783,20 +14512,22 @@
 
   function addProblem() {
     var s = st.sel; if (!s) return;
-    var text = val("wProbText"), code = val("wProbCode");
+    var text = val("wProbText"), code = val("wProbCode"), picked = st.cp && st.cp.prob && st.cp.prob.chosen;
+    // A code picked from the hospital's set is sent with its system, and the server checks it is in that set.
+    if (picked) { code = picked.code; if (!text) text = picked.display; }
     if (!text && !code) { st.err = wT("ward.a-diagnosis-needs-words-a-code", "A diagnosis needs words, a code, or both."); paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/problem", {
       orgId: st.orgId,
       problem: {
         patientId: s.patientId, encounterId: s.encounterId,
-        display: text, code: code,
+        display: text, code: code, codeSystem: picked ? picked.system : undefined,
         verificationStatus: val("wProbVs") || undefined,
       },
     })
       .then(function (r) {
         if (settle(r, r && r.written ? wT("ward.recorded-as", "Recorded as {verificationStatus}.", { verificationStatus: r.verificationStatus }) : (r && r.skipped === "unchanged" ? wT("ward.already-on-the-list-unchanged", "Already on the list, unchanged.") : null))) {
-          st.probText = ""; st.probCode = ""; st.icd = undefined;
+          st.probText = ""; st.probCode = ""; st.icd = undefined; if (st.cp) st.cp.prob = null;
           ["wProbText", "wProbCode"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
           loadChart();
         } else paint();
@@ -12019,7 +14750,7 @@
   function loadDowntime() {
     st.busy = true; st.view = "downtime"; paint();
     return apiGet("/ward/downtime?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.downtime = r; paint(); })
+      .then(function (r) { st.downtime = settle(r) ? r : null; paint(); })
       /* A pack that failed to load must never leave the previous one on screen: the whole hazard of
        * this feature is a clinician reading a sheet that is older than they think. */
       .catch(function () { st.busy = false; st.downtime = null; st.err = wT("ward.could-not-build-the-downtime-pack", "Could not build the downtime pack. Do not print an older one."); paint(); });
@@ -12080,6 +14811,8 @@
       orgId: st.orgId, patientId: st.sel.patientId, encounterId: st.sel.encounterId, scope: scope, decision: decision,
       detail: detail || undefined, givenBy: st.consent.givenBy, giverName: val("wConsentGiverName") || undefined,
       capacity: capEl ? capEl.checked : true, validUntil: val("wConsentValidUntil") || undefined,
+      parentVerification: val("wConsentPvMethod") ? { method: val("wConsentPvMethod"), reference: val("wConsentPvRef"), parentName: val("wConsentPvName") } : undefined,
+      guardianAppointment: val("wConsentGaSource") ? { source: val("wConsentGaSource"), orderRef: val("wConsentGaRef") } : undefined,
     })
       .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadConsent(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
@@ -12122,7 +14855,7 @@
     st.busy = true; paint();
     apiPost("/ward/roi-request", {
       orgId: st.orgId, patientId: st.sel.patientId,
-      requester: { name: name, organization: val("wRoiOrg") || undefined, relationship: val("wRoiRelationship") },
+      requester: { name: name, organization: val("wRoiOrg") || undefined, relationship: val("wRoiRelationship"), authority: val("wRoiAuthority") || undefined },
       purpose: purpose, recipient: recipient, scope: { recordTypes: types },
     })
       .then(function (r) { if (settle(r, wT("ward.requested", "Requested."))) loadRoi(); else paint(); })
@@ -12188,14 +14921,22 @@
       .catch(function () { st.busy = false; st.billing = { invoices: null, claims: null }; st.err = wT("ward.could-not-load-billing", "Could not load billing."); paint(); });
   }
   function tpaOpen() {
-    st.view = "tpa"; st.tpa = null; paint(); loadTpa();
+    st.view = "tpa"; st.tpa = null; st.tpaPkg = null; st.tpaChecks = null; st.tpaCodes = ""; paint(); loadTpa();
   }
   function loadTpa() {
     if (!st.sel || !st.sel.patientId) return;
     st.busy = true; paint();
     return apiGet("/ward/claims?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
-      .then(function (r) { st.busy = false; st.tpa = (r && r.ok) ? r : { failed: true }; paint(); })
+      .then(function (r) { st.busy = false; st.tpa = (r && r.ok) ? r : { failed: true }; paint(); if (r && r.ok) { loadTpaPackages(); loadTpaChecks(); } })
       .catch(function () { st.busy = false; st.tpa = { failed: true }; paint(); });
+  }
+  // rcm-claims-ops: the checklist and coding candidates. null = loading, false = failed.
+  function loadTpaChecks() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.tpaChecks = null;
+    apiGet("/ward/claim-checks?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId) + (st.sel.encounterId ? "&encounterId=" + encodeURIComponent(st.sel.encounterId) : ""))
+      .then(function (r) { st.tpaChecks = r && r.ok ? r : false; paint(); })
+      .catch(function () { st.tpaChecks = false; paint(); });
   }
   function claimCodeAction() {
     if (!st.sel || !st.sel.patientId || !st.sel.encounterId) return;
@@ -12209,8 +14950,96 @@
   function claimActionCall(claimId, action, extra) {
     st.busy = true; paint();
     apiPost("/ward/claim-state", Object.assign({ orgId: st.orgId, claimId: claimId, action: action }, extra || {}))
-      .then(function (r) { if (settle(r, wT("ward.done", "Done."))) loadTpa(); else paint(); })
+      .then(function (r) {
+        /* rcm-claims-ops: the checklist refused it. The findings are shown, and sending anyway needs a reason the claim keeps. */
+        if (r && r.error === "claim_checklist_blocked" && !(extra && extra.overrideReason)) {
+          st.busy = false; paint();
+          askFor({ title: wTH("ward.rcm-blocked-title", "This claim is not complete"), icon: "rule", danger: true, ok: wTH("ward.rcm-send-anyway", "Send anyway"),
+            text: (r.findings || []).map(function (f) { return esc(f.text); }).join("\n"),
+            fields: [{ key: "why", type: "textarea", label: wTH("ward.rcm-override-why", "Why is it being sent anyway? This is kept on the claim."), required: wT("ward.rcm-override-needed", "Sending an incomplete claim needs a reason.") }] },
+            function (v) { claimActionCall(claimId, action, Object.assign({}, extra || {}, { overrideReason: v.why })); });
+          return;
+        }
+        if (settle(r, wT("ward.done", "Done."))) loadTpa(); else paint();
+      })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-update-that-claim", "Could not update that claim."); paint(); });
+  }
+  function rcmClaim(id) { return ((st.tpa && st.tpa.claims) || []).filter(function (c) { return c.id === id; })[0] || null; }
+  function claimDocsAction(claimId) {
+    var k = st.tpaChecks && st.tpaChecks.checks && st.tpaChecks.checks[claimId];
+    var missing = k ? k.blocking.filter(function (f) { return f.code === "document_missing"; }).map(function (f) { return f.document; }) : [];
+    askFor({ title: wTH("ward.rcm-docs", "Documents obtained"), icon: "attach_file", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "docs", type: "textarea", value: missing.join("\n"), label: wTH("ward.rcm-docs-label", "Documents in hand for this claim, one per line"), required: wT("ward.rcm-docs-needed", "Name at least one document.") }] },
+      function (v) { return apiPost("/ward/claim-state", { orgId: st.orgId, claimId: claimId, action: "documents", documents: v.docs.split("\n").map(function (x) { return x.trim(); }).filter(Boolean) }).then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadTpa(); }); });
+  }
+  function claimQueryAction(claimId) {
+    askFor({ title: wTH("ward.rcm-payer-query", "Payer query"), icon: "help", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "text", type: "textarea", label: wTH("ward.rcm-query-text", "What the payer asked"), required: wT("ward.rcm-query-needed", "Record what the payer asked.") },
+        { key: "received", type: "date", label: wTH("ward.rcm-query-received", "Date received (blank for today)") }] },
+      function (v) { return apiPost("/ward/claim-state", { orgId: st.orgId, claimId: claimId, action: "query", text: v.text, receivedAt: v.received || undefined }).then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadTpa(); }); });
+  }
+  function claimClassifyAction(claimId) {
+    var reasons = (st.tpaChecks && st.tpaChecks.denialReasons) || [];
+    if (!reasons.length) { st.err = wT("ward.rcm-no-reasons", "No denial reasons are set for this hospital. An administrator adds them on Admin, Price list, Claims settings."); paint(); return; }
+    var c = rcmClaim(claimId), cur = c && c.denialClassification;
+    askFor({ title: wTH("ward.rcm-classify", "Classify denial"), icon: "category", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "code", type: "select", value: cur ? cur.code : reasons[0].code, label: wTH("ward.rcm-denial-reason", "Denial reason"), options: reasons.map(function (x) { return [x.code, esc(x.code + " " + x.label)]; }) },
+        { key: "cause", type: "textarea", value: cur ? cur.rootCause : "", label: wTH("ward.rcm-root-cause", "Root cause"), required: wT("ward.rcm-root-cause-needed", "Say what caused the denial.") }] },
+      function (v) { return apiPost("/ward/claim-state", { orgId: st.orgId, claimId: claimId, action: "classify-denial", denialCode: v.code, rootCause: v.cause }).then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadTpa(); }); });
+  }
+  function claimCodePick(code) {
+    var cur = val("wTpaCodes").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    if (cur.indexOf(code) < 0) cur.push(code);
+    st.tpaCodes = cur.join(", "); paint();
+  }
+  function preAuthEventCall(body, okMsg) {
+    return apiPost("/ward/preauth-event", Object.assign({ orgId: st.orgId }, body)).then(function (r) { if (settle(r, okMsg || wT("ward.recorded", "Recorded."))) loadTpa(); });
+  }
+  function paQueryAction(id) {
+    askFor({ title: wTH("ward.rcm-payer-query", "Payer query"), icon: "help", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "text", type: "textarea", label: wTH("ward.rcm-query-text", "What the payer asked"), required: wT("ward.rcm-query-needed", "Record what the payer asked.") },
+        { key: "received", type: "date", label: wTH("ward.rcm-query-received", "Date received (blank for today)") }] },
+      function (v) { return preAuthEventCall({ preAuthId: id, action: "query", text: v.text, receivedAt: v.received || undefined }); });
+  }
+  function paAnswerAction(id) {
+    askFor({ title: wTH("ward.rcm-answer-query", "Answer query"), icon: "reply", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "answer", type: "textarea", label: wTH("ward.rcm-answer-text", "What was sent back to the payer"), required: wT("ward.rcm-answer-needed", "Record what was sent back.") }] },
+      function (v) { return preAuthEventCall({ preAuthId: id, action: "answer-query", answer: v.answer }); });
+  }
+  function paEnhAction(id) {
+    askFor({ title: wTH("ward.rcm-enhancement", "Ask for enhancement"), icon: "trending_up", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "amount", label: wTH("ward.rcm-enh-amount", "New total amount asked for"), required: wT("ward.rcm-enh-amount-needed", "Enter the amount asked for.") },
+        { key: "reason", type: "textarea", label: wTH("ward.rcm-enh-reason", "Why more is needed"), required: wT("ward.rcm-enh-reason-needed", "Say why more is needed.") }] },
+      function (v) { return preAuthEventCall({ preAuthId: id, action: "enhancement", requestedAmount: Number(v.amount), reason: v.reason }); });
+  }
+  function paEnhDecisionAction(arg) {
+    var i = String(arg).indexOf("|"); if (i < 1) return;
+    var id = arg.slice(0, i), enhId = arg.slice(i + 1);
+    askFor({ title: wTH("ward.rcm-enh-decision", "Enhancement decision"), icon: "gavel", ok: wTH("ward.record2", "Record"),
+      fields: [{ key: "state", type: "select", value: "approved", label: wTH("ward.rcm-enh-state", "The payer's decision"), options: [["approved", wTH("ward.rcm-approved", "Approved")], ["refused", wTH("ward.rcm-refused", "Refused")]] },
+        { key: "amount", label: wTH("ward.rcm-enh-approved", "New authorised amount (if approved)") },
+        { key: "note", type: "textarea", label: wTH("ward.rcm-enh-note", "The payer's reason (needed if refused)") }] },
+      function (v) { return preAuthEventCall({ preAuthId: id, action: "enhancement-decision", enhancementId: enhId, state: v.state, approvedAmount: v.amount ? Number(v.amount) : undefined, note: v.note || undefined }); });
+  }
+  function claimEvidenceOpen(claimId) {
+    st.view = "tpaevidence"; st.tpaEvidence = { claimId: claimId, loading: true }; paint();
+    apiGet("/ward/claim-evidence?orgId=" + encodeURIComponent(st.orgId) + "&claimId=" + encodeURIComponent(claimId))
+      .then(function (r) {
+        if (!st.tpaEvidence || st.tpaEvidence.claimId !== claimId) return;
+        if (!r || !r.ok) { st.tpaEvidence = { claimId: claimId, failed: true }; paint(); return; }
+        var last = (r.versions || [])[r.versions.length - 1];
+        st.tpaEvidence = { claimId: claimId, pack: r.pack, versions: r.versions || [], recordVersion: r.recordVersion, text: last ? last.text : r.pack.text };
+        paint();
+      })
+      .catch(function () { st.tpaEvidence = { claimId: claimId, failed: true }; paint(); });
+  }
+  function claimEvidenceSave() {
+    var e = st.tpaEvidence; if (!e || e.loading || e.failed) return;
+    e.text = val("wTpaEvText");
+    st.busy = true; paint();
+    apiPost("/ward/claim-evidence", { orgId: st.orgId, claimId: e.claimId, text: e.text, expectedVersion: e.recordVersion })
+      .then(function (r) { if (settle(r, wT("ward.rcm-evidence-saved", "Saved as a version on the claim."))) { var t = e.text; claimEvidenceOpen(e.claimId); st.tpaEvidence.text = t; } else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.rcm-evidence-not-saved", "The pack could not be saved."); paint(); });
   }
   function claimSubmitAction(claimId) {
     var amount = window.prompt(wTD("ward.amount-submitted-to-the-payer", "Amount submitted to the payer:"));
@@ -12285,9 +15114,28 @@
       authorizedAmount: amountStr ? Number(amountStr) : undefined,
       payerId: val("wTpaAuthPayer") || undefined,
       requestedAmount: val("wTpaAuthRequested") ? Number(val("wTpaAuthRequested")) : undefined,
+      codes: val("wTpaAuthCodes") ? val("wTpaAuthCodes").split(",").map(function (s) { return s.trim(); }).filter(Boolean) : undefined,
+      policyNumber: val("wTpaAuthPolicy") || undefined, validUntil: val("wTpaAuthValid") || undefined,
     })
       .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadTpa(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-pre-authorisation", "Could not record that pre-authorisation."); paint(); });
+  }
+  function nhcxEligibilityAction() {
+    if (!st.sel || !st.sel.patientId) return;
+    var payerId = val("wNhcxPayer"), policy = val("wNhcxPolicy");
+    if (!payerId || !policy) { st.err = wT("ward.nhcx-choose-payer-and-policy", "Choose the NHCX payer and enter the policy number."); paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/nhcx-eligibility", { orgId: st.orgId, patientId: st.sel.patientId, payerId: payerId, policyNumber: policy })
+      .then(function (r) { if (settle(r, wT("ward.nhcx-eligibility-sent", "Sent to NHCX. The payer's answer appears here when it arrives."))) loadTpa(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.nhcx-eligibility-not-sent", "Could not send the eligibility check."); paint(); });
+  }
+  function hcxStatusAction(arg) {
+    var i = String(arg || "").indexOf(":");
+    if (i < 1) return;
+    st.busy = true; paint();
+    apiPost("/ward/hcx-status", { orgId: st.orgId, recordKind: arg.slice(0, i), recordId: arg.slice(i + 1) })
+      .then(function (r) { if (settle(r, wT("ward.nhcx-status-sent", "Status asked. The payer's answer appears here when it arrives."))) loadTpa(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.nhcx-status-not-sent", "Could not ask for the status."); paint(); });
   }
   function loadCosigns() {
     return apiGet("/ward/cosign-queue?orgId=" + encodeURIComponent(st.orgId))
@@ -12635,6 +15483,8 @@
     if (cmd === "whoinfo") { whoInfo(arg); return; }
     if (cmd === "askok") { askSubmit(); return; }
     if (cmd === "askcancel") { askCancel(); return; }
+    // Fills one field and changes nothing else, so it never closes a layer it was pressed inside (the Collect question).
+    if (cmd === "camscan") { camScan(arg); return; }
     if (cmd !== "summary") closeSummaryLayer();
     if (cmd === "close") { close(); return; }
     if (cmd === "chartcat") { chartNavShow(arg); return; }
@@ -12664,14 +15514,19 @@
       if (st.view === "ips") { st.view = "chart"; st.ips = null; paint(); return; }
       if (st.view === "completion") { st.view = "chart"; st.completion = null; paint(); return; }
       if (st.view === "roi") { st.view = "chart"; st.roi = null; paint(); return; }
-      if (st.view === "tpa") { st.view = "chart"; st.tpa = null; paint(); return; }
+      if (st.view === "tpaevidence") { st.tpaEvidence = null; st.view = "tpa"; loadTpa(); return; }
+      // Opened from the claims desk: back to the desk, and the desk's selection is dropped (there is no chart behind it).
+      if (st.view === "tpa" && st.tpaFromDesk) { st.tpa = null; st.tpaChecks = null; st.tpaCodes = ""; st.sel = null; st.tpaFromDesk = false; claimsDeskOpen(); return; }
+      if (st.view === "tpa") { st.view = "chart"; st.tpa = null; st.tpaChecks = null; st.tpaCodes = ""; paint(); return; }
+      if (st.view === "claimsdesk") { st.desk = null; st.view = "list"; paint(); return; }
       if (st.view === "billing") { st.view = "chart"; st.billing = null; paint(); return; }
       if (st.view === "oncology") { st.view = "chart"; st.oncology = null; paint(); return; }
       if (st.view === "cardiology") { st.view = "chart"; st.cardiology = null; paint(); return; }
       if (st.view === "radiology") { st.view = "chart"; st.radiology = null; paint(); return; }
       if (st.view === "pharmacy") { st.view = "chart"; st.pharmacy = null; paint(); return; }
       if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
-      if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
+      if (st.view === "inventory") { var labStock = st.inventory && st.inventory.lab; st.inventory = null; if (labStock) { labBoardOpen(); return; } st.view = "list"; paint(); return; }
+      if (st.view === "labqc" || st.view === "labrejections") { st.labQc = null; labBoardOpen(); return; }
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
       if (st.view === "timeline") { st.view = "chart"; paint(); return; }
       if (st.view === "labboard") { st.labBoard = null; st.view = "list"; paint(); return; }
@@ -12700,7 +15555,9 @@
       if (st.view === "careplan") { st.carePlan = null; st.view = "chart"; paint(); return; }
       if (st.view === "pathways") { st.pathwaysData = null; st.view = "chart"; paint(); return; }
       if (st.view === "specialty") { st.specialtyData = null; st.view = "chart"; paint(); return; }
-      if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
+      if (st.view === "admreqs") { st.admReqs = null; st.intake = null; st.view = "list"; paint(); return; }
+      if (st.view === "dcboard") { st.dcBoard = null; st.view = "list"; paint(); return; }
+      if (st.view === "tcentre") { st.tc = null; st.view = "list"; paint(); return; }
       if (st.view === "ordersets") { st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; st.view = "chart"; paint(); return; }
       if (st.view === "breakglass") { st.breakGlass = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "wounds") { st.wounds = null; st.view = "chart"; paint(); return; }
@@ -12711,6 +15568,7 @@
       if (st.view === "workspace") { st.view = "chart"; paint(); return; }
       if (st.view === "people") { st.people = null; st.view = "chart"; paint(); return; }
       if (st.view === "immunizations") { st.immunizations = null; st.view = "chart"; paint(); return; }
+      if (st.view === "abdmrecords") { st.abdm = null; st.view = "chart"; paint(); return; }
       if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "qualitysafety") { st.qs = null; st.qsOpen = null; st.view = "list"; paint(); return; }
@@ -12723,12 +15581,13 @@
       // A case's own chart backs out to the theatre board, not the ward list - the same reason the
       // ED chart backs out to the ED board rather than to an unrelated ward roster.
       if (st.view === "surgerycase") { st.surgCase = null; loadSurgeryBoard(); return; }
+      if (st.view === "theatreuse") { st.theatreUse = null; loadSurgeryBoard(); return; }
       st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null;
       st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; st.edAdmitPending = false; st.transferPending = false;
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.emergencyOverride = false; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.billing = null;
+      st.maternity = null; st.admitClass = ""; st.emergencyOverride = false; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.tpaPkg = null; st.billing = null;
       paint(); return;
     }
     // From anywhere but the board itself this is a plain admission: no transfer or ED admit left pending.
@@ -12754,8 +15613,8 @@
       st.sel = p; st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = []; st.vitalsSaid = null;
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.timeline = null; st.activeMeds = null;
       st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
-      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
-      st.icu = null; st.flowsheetFailed = false; st.resusBundles = null;
+      st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.apgar = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
+      st.icu = null; st.flowsheetFailed = false; st.resusBundles = null; st.stayPlan = null; st.cp = {};
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra
        * steps, and it is the one this panel could most easily cause. */
@@ -12765,8 +15624,12 @@
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadPathology();
       if (p.class === "ICU") { loadDevices(); loadIcu(); loadResus(); }
       if (p.class === "MATERNITY") loadMaternity();
-      if (p.class === "PEDIATRICS" || p.class === "NICU") loadAgeBand();
-      if (p.class === "NICU") loadLines();
+      if (p.class === "PEDIATRICS" || p.class === "NICU") { st.growth = null; loadAgeBand(); loadGrowth(); }
+      if (apgarChart(p)) loadApgar(p.patientId);
+      if (p.class !== "ED") loadStayPlan();
+      loadCodeSets();
+      // Lines on every inpatient chart (P5): a central line, urinary catheter or ventilator logged here gives the device-days infection rates use.
+      if (p.class !== "ED") loadLines();
       return;
     }
     if (cmd === "openEd") {
@@ -12810,6 +15673,19 @@
     if (cmd === "timelinenote") { timelineNoteSave(); return; }
     if (cmd === "labboard") { labBoardOpen(); return; }
     if (cmd === "labboardload") { loadLabBoard(); return; }
+    if (cmd === "analyserrelease") { analyserReleaseAct(arg, ""); return; }
+    if (cmd === "analyserdismiss") { analyserDismissAct(arg); return; }
+    if (cmd === "specreject") { specimenRejectAct(arg); return; }
+    if (cmd === "labqc") { labQcOpen(); return; }
+    if (cmd === "labqcload") { st.labQc = null; paint(); loadLabQc(); return; }
+    if (cmd === "labqcsel") { st.labQcSel = { analyserId: val("wQcAn"), test: val("wQcTest") }; paint(); return; }
+    if (cmd === "labqcformmat") { st.labQcForm = { materialId: val("wQcRunMat") }; paint(); return; }
+    if (cmd === "labqcrun") { labQcRunSave(); return; }
+    if (cmd === "labqcmaterial") { labQcMaterialSave(); return; }
+    if (cmd === "labqcaction") { labQcActionAct(arg); return; }
+    if (cmd === "labstock") { labStockOpen(); return; }
+    if (cmd === "labrejections") { labRejectionsOpen(); return; }
+    if (cmd === "labrejload") { loadLabRejections(); return; }
     if (cmd === "radboard") { radBoardOpen(); return; }
     if (cmd === "radboardload") { loadRadBoard(); return; }
     if (cmd === "radboardpick") { radBoardPick(arg); return; }
@@ -12819,6 +15695,13 @@
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
     if (cmd === "flowload") { loadFlowCommand(); return; }
+    if (cmd === "cpfind") { codePickFind(arg); return; }
+    if (cmd === "cppick") { codePickPick(arg); return; }
+    if (cmd === "cpclear") { if (st.cp) st.cp[arg] = null; paint(); return; }
+    if (cmd === "stayplanload") { st.stayPlan = null; paint(); loadStayPlan(); return; }
+    if (cmd === "eddsave") { eddSave(); return; }
+    if (cmd === "xferrequest") { xferRequest(); return; }
+    if (cmd === "xferaccept" || cmd === "xferdecline" || cmd === "xferbed" || cmd === "xferexec" || cmd === "xfercancel") { xferAct(cmd, arg); return; }
     if (cmd === "twin") { twinOpen(); return; }
     if (cmd === "twinload") { loadTwin(); return; }
     if (cmd === "twindrill") { var dp = arg.split("."); st.twin = st.twin || {}; st.twin.drill = { section: dp[0], key: dp[1] || "" }; paint(); return; }
@@ -12858,6 +15741,10 @@
     if (cmd === "apptoverbook") { apptBookOrOverbook(true); return; }
     if (cmd === "apptcancel") { apptSetState(arg, "cancelled"); return; }
     if (cmd === "apptdna") { apptSetState(arg, "did-not-attend"); return; }
+    if (cmd === "apptarrived") { apptSetState(arg, "arrived"); return; }
+    if (cmd === "apptseen") { apptSetState(arg, "completed"); return; }
+    if (cmd === "dxarrive") { dxArrive(); return; }
+    if (cmd === "dxstart") { dxStart(arg); return; }
     if (cmd === "resbook") { resBook(); return; }
     if (cmd === "rescancel") { resCancel(arg); return; }
     if (cmd === "blackoutadd") { blackoutAdd(); return; }
@@ -12873,6 +15760,12 @@
     if (cmd === "invrefund") { cashPost(arg, "refund"); return; }
     if (cmd === "invadjust") { cashPost(arg, "adjust"); return; }
     if (cmd === "invwriteoff") { cashPost(arg, "writeoff"); return; }
+    if (cmd === "invcredit") { invoiceNote(arg, "credit"); return; }
+    if (cmd === "invdebit") { invoiceNote(arg, "debit"); return; }
+    if (cmd === "invparties") { invoiceParties(arg); return; }
+    if (cmd === "invirn") { invoiceIrn(arg); return; }
+    if (cmd === "invirncancel") { invoiceIrnCancel(arg); return; }
+    if (cmd === "invprint") { invoicePrint(arg); return; }
     if (cmd === "bedmgmtload") { loadBedMgmt(); return; }
     if (cmd === "bedstate") { bedStateApply(arg); return; }
     if (cmd === "stockreceive") { stockReceive(); return; }
@@ -12896,6 +15789,14 @@
     if (cmd === "surgerybookclose") { surgeryBookClose(); return; }
     if (cmd === "surgmrnlookup") { surgMrnLookup(); return; }
     if (cmd === "surgerybook") { surgeryBook(); return; }
+    if (cmd === "theatreuse") { loadTheatreUse(); return; }
+    if (cmd === "theatreuseday") { st.theatreDay = val("wTheatreDay"); loadTheatreUse(); return; }
+    if (cmd === "theatresession") { theatreSessionAdd(); return; }
+    if (cmd === "theatrerelease") { theatreRelease(arg); return; }
+    if (cmd === "theatrerules") { theatreRules(); return; }
+    if (cmd === "surgtime") { surgTime(arg); return; }
+    if (cmd === "surgresched") { surgResched(arg); return; }
+    if (cmd === "surgreturn") { surgReturn(arg === "yes"); return; }
     if (cmd === "opensurgery") { openSurgeryCase(arg); return; }
     if (cmd === "surgeryload") { surgeryLoad(); return; }
     if (cmd === "surgeryconsent") { surgeryConsent(); return; }
@@ -12903,6 +15804,9 @@
     if (cmd === "surgeryphase") { surgeryPhase(arg); return; }
     if (cmd === "surgeryincise") { surgeryIncise(); return; }
     if (cmd === "surgeryimplant") { surgeryImplant(); return; }
+    if (cmd === "pacsave") { pacSave(); return; }
+    if (cmd === "pacedit") { st.surgPacEdit = true; paint(); return; }
+    if (cmd === "paccancel") { st.surgPacEdit = false; paint(); return; }
     if (cmd === "surgerynote") { surgeryNote(); return; }
     if (cmd === "surgerydisposition") { surgeryDisposition(arg); return; }
     if (cmd === "anesstart") { anesStart(); return; }
@@ -12914,10 +15818,13 @@
     if (cmd === "bloodlosssave") { bloodLossSave(); return; }
     if (cmd === "deliverysave") { deliverySave(); return; }
     if (cmd === "newbornsave") { newbornSave(); return; }
+    if (cmd === "apgarload") { if (st.apgar) st.apgar[arg] = null; paint(); loadApgar(arg); return; }
+    if (cmd === "apgarsave") { apgarSave(arg); return; }
     if (cmd === "agebandcheck") { loadAgeBand(); return; }
     if (cmd === "ratecalc") { rateCalc(); return; }
     if (cmd === "neonatalchart") { neonatalChart(); return; }
     if (cmd === "linesload") { loadLines(); return; }
+    if (cmd === "growthload") { st.growth = null; paint(); loadGrowth(); return; }
     if (cmd === "linesave") { lineSave(); return; }
     if (cmd === "lineremove") { lineRemove(arg); return; }
     if (cmd === "oncologyopen") { oncologyOpen(); return; }
@@ -12973,6 +15880,12 @@
     }
     if (cmd === "ack") { acknowledge(arg); return; }
     if (cmd === "collectspecimen") { collectSpecimen(arg); return; }
+    if (cmd === "labelprint") { labelOfferPrint(arg); return; }
+    if (cmd === "labeloffer-x") { st.labelOffer = null; paint(); return; }
+    if (cmd === "speclabel") { specimenLabelFor(arg); return; }
+    if (cmd === "specscanreceive") { specimenScanReceive(); return; }
+    if (cmd === "tagprint") { if (st.sel) printPatientLabel(arg === "slip" ? "slip" : "wristband", st.sel.patientId); return; }
+    if (cmd === "pharmlabel") { printPharmacyLabel(arg); return; }
     if (cmd === "move") { transfer(); return; }
     if (cmd === "fluid") { chartFluid(); return; }
     // The picked direction and kind live in state, so a repaint before Chart redraws what was picked.
@@ -13024,6 +15937,7 @@
     if (cmd === "surgeryabandon") { surgeryAbandon(arg); return; }
     if (cmd === "wardcloseopen") { wardDischarge(); return; }
     if (cmd === "followup") { followUpRequest(); return; }
+    if (cmd === "dietopen") { if (st.sel && G.WSQ && G.WSQ.go) { G.WSQ.state.dietFor = { encounterId: st.sel.encounterId, patientId: st.sel.patientId, name: st.sel.name || null, mrn: st.sel.mrn || null, ward: st.sel.ward || null, bed: st.sel.bed || null }; G.WSQ.go("diet"); } return; }
     if (cmd === "followupsubmit") { followUpSubmit(); return; }
     if (cmd === "dischargecheck") { loadDischargeChecklist(); return; }
     if (cmd === "dischargesubmit") { dischargeSubmit(); return; }
@@ -13080,10 +15994,23 @@
     if (cmd === "labtmpl") { labTemplateApply(arg); return; }
     if (cmd === "labdept") { st.labDept = arg; paint(); return; }
     if (cmd === "labverify" || cmd === "labreturn") {
-      var verifySend = function (reason) {
+      var verifySend = function (reason, qcOverrideReason) {
         st.busy = true; paint();
-        return apiPost("/ward/verify-result", { orgId: st.orgId, reportId: arg, decision: cmd === "labverify" ? "verify" : "return", reason: reason || undefined })
-          .then(function (r) { if (settle(r, cmd === "labverify" ? wT("ward.verified-the-result-is-final", "Verified. The result is final.") : wT("ward.returned-for-re-entry", "Returned for re-entry."))) loadLabBoard(); else paint(); })
+        return apiPost("/ward/verify-result", { orgId: st.orgId, reportId: arg, decision: cmd === "labverify" ? "verify" : "return", reason: reason || undefined, qcOverrideReason: qcOverrideReason || undefined })
+          .then(function (r) {
+            // A rejected QC run on the analyser that measured it holds verification until a corrective action, or an override with a reason.
+            if (r && r.error === "qc_blocked" && !qcOverrideReason) {
+              st.busy = false; paint();
+              askReason(wTH("ward.lab-qc-override-q", "A rejected QC run blocks this analyser and test. Why is it safe to release anyway?", null, "", 1),
+                wT("ward.lab-qc-override-need", "An override needs a reason."), wTH("ward.lab-qc-override-ok", "Override and release"),
+                function (why) {
+                  if (why.length < 10) { st.err = wT("ward.lab-qc-override-short", "Say more: an override reason is at least 10 characters."); return; }
+                  return verifySend(reason, why);
+                }, { danger: true, icon: "warning" });
+              return;
+            }
+            if (settle(r, cmd === "labverify" ? wT("ward.verified-the-result-is-final", "Verified. The result is final.") : wT("ward.returned-for-re-entry", "Returned for re-entry."))) loadLabBoard(); else paint();
+          })
           .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
       };
       if (cmd === "labreturn") askReason(wTH("ward.what-needs-checking-or-re-entering", "What needs checking or re-entering?"), wT("ward.say-what-needs-checking", "Say what needs checking."), null, verifySend, { icon: "undo" });
@@ -13182,6 +16109,18 @@
     if (cmd === "admreqs") { admReqOpen(); return; }
     if (cmd === "admreqask") { admReqAsk(); return; }
     if (cmd === "admreqclose") { admReqClose(arg); return; }
+    if (cmd === "intakeopen") { intakeOpen(arg); return; }
+    if (cmd === "intakereview") { intakeReview(arg); return; }
+    if (cmd === "dcboard") { dcBoardOpen(); return; }
+    if (cmd === "dcstep") { dcStep(arg); return; }
+    if (cmd === "admarrive") { admArrive(arg === "change"); return; }
+    if (cmd === "admmark") { admMark(arg); return; }
+    if (cmd === "dcadvise") { if (st.sel && st.sel.encounterId) dcAsk(st.sel.encounterId, "advised", false, null, function () { paint(); }); return; }
+    if (cmd === "tcentre") { tcOpen(); return; }
+    if (cmd === "tcrecord") { tcRecord(); return; }
+    if (cmd === "tcaccept") { tcAccept(arg); return; }
+    if (cmd === "tcdecline") { tcDecline(arg); return; }
+    if (cmd === "tcwithdraw") { tcWithdraw(arg); return; }
     if (cmd === "ordersets") { orderSetsOpen(); return; }
     if (cmd === "ordersetpick") { orderSetPick(); return; }
     if (cmd === "ordersetapply") { orderSetApply(); return; }
@@ -13208,6 +16147,10 @@
     if (cmd === "workspace") { workspaceOpen(); return; }
     if (cmd === "people") { peopleOpen(); return; }
     if (cmd === "immunizations") { immunizationsOpen(); return; }
+    if (cmd === "abdmrecords") { abdmRecordsOpen(); return; }
+    if (cmd === "abdmlink") { abdmLinkStay(arg); return; }
+    if (cmd === "abdmrequest") { abdmRequest(); return; }
+    if (cmd === "abdmfetch") { abdmFetch(arg); return; }
     if (cmd === "immadd") { immunizationAdd(); return; }
     if (cmd === "immerror") { immunizationError(arg); return; }
     if (cmd === "documents") { documentsOpen(); return; }
@@ -13272,8 +16215,36 @@
     if (cmd === "claimack") { claimAckAction(arg); return; }
     if (cmd === "claimsettle") { claimSettleAction(arg); return; }
     if (cmd === "claimbalance") { claimBalanceAction(arg); return; }
+    if (cmd === "claimdocs") { claimDocsAction(arg); return; }
+    if (cmd === "claimquery") { claimQueryAction(arg); return; }
+    if (cmd === "claimclassify") { claimClassifyAction(arg); return; }
+    if (cmd === "claimcodepick") { claimCodePick(arg); return; }
+    if (cmd === "claimevidence") { claimEvidenceOpen(arg); return; }
+    if (cmd === "claimevsave") { claimEvidenceSave(); return; }
+    if (cmd === "claimevprint") { if (st.tpaEvidence) st.tpaEvidence.text = val("wTpaEvText"); paint(); try { G.print(); } catch (e) {} return; }
+    if (cmd === "claimevuse") { var ev = st.tpaEvidence; var hit = ev && (ev.versions || []).filter(function (x) { return String(x.n) === arg; })[0]; if (hit) { ev.text = hit.text; paint(); } return; }
+    if (cmd === "paquery") { paQueryAction(arg); return; }
+    if (cmd === "paanswer") { paAnswerAction(arg); return; }
+    if (cmd === "paenh") { paEnhAction(arg); return; }
+    if (cmd === "paenhdec") { paEnhDecisionAction(arg); return; }
+    if (cmd === "claimsdesk") { claimsDeskOpen(); return; }
+    if (cmd === "deskperiod") {
+      if (arg === "clear") { st.deskFrom = ""; st.deskTo = ""; }
+      else {
+        st.deskFrom = val("wDeskFrom"); st.deskTo = val("wDeskTo");
+        if (st.deskFrom && st.deskTo && st.deskFrom > st.deskTo) { st.err = wT("ward.rcm-period-backwards", "The start of the period is after its end."); paint(); return; }
+      }
+      claimsDeskOpen(); return;
+    }
+    if (cmd === "deskopen") { claimsDeskPatient(arg); return; }
     if (cmd === "estimate") { estimateAction(); return; }
     if (cmd === "preauth") { preAuthAction(); return; }
+    if (cmd === "nhcxelig") { nhcxEligibilityAction(); return; }
+    if (cmd === "hcxstatus") { hcxStatusAction(arg); return; }
+    if (cmd === "pkgset") { pkgSetAction(arg); return; }
+    if (cmd === "staypayer") { stayPayerAction(arg); return; }
+    if (cmd === "pkgremove") { pkgRemoveAction(arg); return; }
+    if (cmd === "pkgpack") { pkgPackAction(arg); return; }
     if (cmd === "cosign") { cosign(arg); return; }
     if (cmd === "submitnote") { submitNote(arg); return; }
     if (cmd === "tx") { transmit(arg); return; }
@@ -13376,7 +16347,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "trends", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "trends", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "dcboard", "tcentre", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview", "claimsdesk"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -13401,8 +16372,9 @@
     st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
     st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null;
     st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
-    st.incidentLog = null; st.incidentHealth = null; st.qs = null; st.qsOpen = null;
+    st.incidentLog = null; st.incidentHealth = null; st.qs = null; st.qsOpen = null; st.registerFlags = null;
     st.consultationResult = null;
+    st.desk = null; st.tpaFromDesk = false; st.tpaChecks = null; st.tpaEvidence = null; st.tpaCodes = "";
     st.approvals = null;
     st.purchaseOrders = null;
     /* The half-typed consultation is cleared with everything else: a draft that outlives its
@@ -13443,7 +16415,7 @@
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _balanceWindow: balanceWindow, _scoreWhyNot: scoreWhyNot, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut,
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _growthCard: growthCard, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _balanceWindow: balanceWindow, _scoreWhyNot: scoreWhyNot, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut,
     // The one staff identity rendering, for discharge.js (owner 2026-09-16: name and employee id wherever staff are named).
     _who: staffWho, _whoText: whoText, _whoFetch: whoFetch, _whoInfo: whoInfo };
 })();

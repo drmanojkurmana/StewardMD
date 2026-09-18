@@ -32,7 +32,9 @@ const OLD_TABS = ["medrec", "ordersets", "pathways", "specialty", "infusions", "
   "immunizations", "people", "documents", "forms", "referrals", "move", "timeline", "summary", "wardcloseopen", "followup", "oncologyopen",
   "cardiologyopen", "radiologyopen", "pharmacyopen", "txopen", "consentopen", "ipsopen", "completionopen", "roiopen", "tpaopen", "billingopen", "pcopy",
   // LT-23: the chart's own shift handover and nursing tasks.
-  "handoverchart", "nursetasks"];
+  "handoverchart", "nursetasks",
+  // 2026-09-16: the diet order screen (support services) and the ABHA-linked records screen (ABDM).
+  "dietopen", "abdmrecords"];
 const ED_TABS = ["careplan", "pcopy"];
 
 const SEL = { patientId: "p1", encounterId: "e1", ward: "W1", bed: "3", admittedAt: "2026-09-15T08:00:00Z" };

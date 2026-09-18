@@ -200,6 +200,12 @@ test("5. ADVERSARIAL: a broken subsystem is UNAVAILABLE by name, and everything 
     if (type === "CriticalResultLoop") throw new Error("simulated storage fault");
     return realLatestByType(tenantId, type, limit);
   };
+  // R4-2: the hospital-wide criticals list pages every loop (pageByType), so the fault is injected there too.
+  const realPageByType = RECORD.pageByType.bind(RECORD);
+  RECORD.pageByType = async (tenantId, type, opts) => {
+    if (type === "CriticalResultLoop") throw new Error("simulated storage fault");
+    return realPageByType(tenantId, type, opts);
+  };
   const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
   assert.equal(r.__status, 200, "the whole request must not fail because one section did");
   assert.equal(r.twin.sections.criticals.status, "unavailable");
@@ -279,6 +285,45 @@ test("11. reconstruction refuses a missing or invalid timestamp rather than gues
   assert.equal(missing.__status, 422);
   const bad = await call(ADMIN, `/ward/twin-reconstruct?orgId=${ORG}&at=not-a-date`);
   assert.equal(bad.__status, 422);
+});
+
+test("11b. R5-4: past the per-type bound the reconstruction reads the NEWEST records, and says the oldest were not read", async () => {
+  seed();
+  /* 505 critical-result loops: five more than the rebuild's per-type bound. The bound is real (each
+   * record read costs one further history read), so what matters is WHICH end of the type it reads.
+   * It used to read the oldest 500, which is exactly the half an as-of question is never about. */
+  const rows = [];
+  for (let i = 0; i < 505; i++) {
+    rows.push({ resourceType: "CriticalResultLoop", id: `crl-${String(i).padStart(3, "0")}`, version: 1, patientId: "twin-pat-11b",
+      reportedAt: new Date(Date.parse("2026-01-01T00:00:00.000Z") + i * 60000).toISOString(), status: "open", meta: meta() });
+  }
+  await RECORD.append(TENANT.id, rows);
+
+  const r = await call(ADMIN, `/ward/twin-reconstruct?orgId=${ORG}&at=${encodeURIComponent(new Date().toISOString())}`);
+  assert.equal(r.__status, 200, JSON.stringify(r).slice(0, 400));
+  const s = r.reconstruction.state.CriticalResultLoop;
+  assert.equal(s.status, "partial");
+  assert.equal(s.capped, true, "the ceiling is stated, never silently applied");
+  assert.equal(s.count, 500);
+  const ids = new Set(s.records.map((x) => x.id));
+  assert.ok(ids.has("crl-504"), "the newest record must be in a reconstruction of a recent moment");
+  assert.ok(ids.has("crl-005"), "the newest 500 are crl-005 .. crl-504");
+  assert.ok(!ids.has("crl-000"), "and the OLDEST are the ones dropped, which is what the screen says");
+});
+
+test("20b. R5-4: a notification read that FAILED reports unavailable, never a delivery rate over an empty sample", async () => {
+  seed();
+  const realLatestByType = RECORD.latestByType.bind(RECORD);
+  RECORD.latestByType = async (tenantId, type, limit, opts) => {
+    if (type === "BreakGlassGrant") throw new Error("simulated storage fault");
+    return realLatestByType(tenantId, type, limit, opts);
+  };
+  const r = await call(ADMIN, `/ward/operational-health?orgId=${ORG}`);
+  RECORD.latestByType = realLatestByType;
+  assert.equal(r.__status, 200, "one dead read does not blank the report");
+  assert.equal(r.health.notifications.status, "unavailable", "a failed read is not a hospital that sent nothing");
+  assert.ok(r.health.notifications.error, "and it says why");
+  assert.equal(r.health.notifications.rate, undefined, "no rate is computed over records that were never read");
 });
 
 /* ---- 12: freshnessOf, pure --------------------------------------------------------------------------- */
@@ -484,6 +529,19 @@ test("P1.13 ICU occupancy, ventilation and vasopressors carry the encounter ids 
   // The flow section now names the patients behind "occupied".
   const occ = r.twin.sections.flow.data.flow.drill.occupied;
   assert.equal(occ.total, r.twin.sections.flow.data.flow.beds.occupied);
+});
+
+test("R4-5: an open census past its ceiling makes the ICU and flow sections say too_many_open, not a bare 'threw'", async () => {
+  seed();
+  const { RecordService, ListCeilingError } = await import("../functions/_wardsynq/service.js");
+  const real = RecordService.prototype.listByStatus;
+  RecordService.prototype.listByStatus = async function (type) { throw new ListCeilingError("too_many_open", type, 5000); };
+  try {
+    const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+    assert.equal(r.twin.sections.icu.status, "unavailable");
+    assert.equal(r.twin.sections.icu.error, "too_many_open");
+    assert.equal(r.twin.sections.flow.error, "too_many_open");
+  } finally { RecordService.prototype.listByStatus = real; }
 });
 
 test("P1.13 lab TAT and radiology backlog are computed from real timestamps, with exclusions counted", async () => {

@@ -365,7 +365,12 @@
   function otaSectionHTML() {
     try { if (!(window.SMD_OTA && SMD_OTA.available())) return ""; } catch (e) { return ""; }
     var on = false; try { on = !!SMD_OTA.isAuto(); } catch (e) {}
-    var ver = "current"; try { ver = SMD_OTA.currentVersion() || "current"; } catch (e) {}
+    // Same decimal ladder the sidebar header shows (native-ota.js owns it), with the exact bundle
+    // number alongside — the ladder is what the doctor says out loud, the bundle is what we debug.
+    var ver = "", cur = null;
+    try { cur = SMD_OTA.currentVersion(); } catch (e) {}
+    try { ver = SMD_OTA.versionLabel ? SMD_OTA.versionLabel() : ""; } catch (e) {}
+    ver = ver ? (ver + (cur ? " (bundle " + cur + ")" : " (built-in)")) : (cur ? String(cur) : "current");
     return '<div class="sbr-sec">Software Update</div>' +
       '<div class="sbr-card"><div class="sbr-tg"><div class="sbr-tg-l"><span class="sbr-tg-t">Automatic updates</span>' +
         '<span class="sbr-tg-s">Fetch new versions in the background</span></div>' +
@@ -392,8 +397,9 @@
       checkBtn.disabled = true; if (statusEl) statusEl.textContent = "Checking…";
       SMD_OTA.check().then(function (r) {
         checkBtn.disabled = false; r = r || {};
-        if (r.status === "available") { pending = r; if (statusEl) statusEl.textContent = "Update available: v" + r.version; if (installBtn) installBtn.style.display = ""; }
-        else if (r.status === "uptodate") { pending = null; if (statusEl) statusEl.textContent = "You're up to date" + (r.current ? " (v" + r.current + ")" : ""); if (installBtn) installBtn.style.display = "none"; }
+        var lbl = function (v) { try { return SMD_OTA.versionLabel ? SMD_OTA.versionLabel(v) : String(v); } catch (e) { return String(v); } };
+        if (r.status === "available") { pending = r; if (statusEl) statusEl.textContent = "Update available: " + lbl(r.version); if (installBtn) installBtn.style.display = ""; }
+        else if (r.status === "uptodate") { pending = null; if (statusEl) statusEl.textContent = "You're up to date (" + lbl(r.current) + ")"; if (installBtn) installBtn.style.display = "none"; }
         else { if (statusEl) statusEl.textContent = "Couldn't check — " + (r.error || "try again"); }
       });
     });
@@ -402,7 +408,19 @@
       installBtn.disabled = true;
       SMD_OTA.install(pending, function (pct) { if (statusEl) statusEl.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
         if (res && res.ok) { if (statusEl) statusEl.textContent = "Update ready — reopening…"; }
-        else { installBtn.disabled = false; if (statusEl) statusEl.textContent = "Install failed — " + ((res && res.error) || "try again"); }
+        else {
+          installBtn.disabled = false;
+          // Phrase it from the failure CODE, same vocabulary as the update banner. The raw code was
+          // reaching the screen verbatim ("Install failed — download-failed"), which tells a doctor
+          // nothing about what to do next.
+          var code = res && res.error;
+          if (statusEl) statusEl.textContent =
+            code === "network" ? "Download failed — check connection and try again" :
+            code === "storage" ? "Not enough space to download the update" :
+            code === "checksum" ? "Update didn't verify — try again later" :
+            code === "missing" ? "That update is no longer available" :
+            "Couldn't apply the update — try again later";
+        }
       });
     });
   }
@@ -422,7 +440,23 @@
       '<button class="sbr-row" data-sbr-act="workspace">' + svg("steth") +
         '<span class="sbr-lbl">' + (name || "Choose specialty") + '</span><span class="sbr-chev">▾</span></button>';
   }
+  /* WHICH VERSION AM I ON? — the first question on every support call, and after an OTA the answer
+   * differs from phone to phone. The drawer header carried a hard-coded "v10.0" (index.html) that
+   * had nothing to do with the bundle the phone was actually running; a stale version is worse than
+   * none, because it is believed. It sits at the very top of the drawer, above #sbMenu, so it is
+   * also the one spot no menu rebuild can push down — write the live number there.
+   * The exact bundle goes in the tooltip; Settings prints it in full. */
+  function paintHeaderVersion() {
+    try {
+      var el = document.querySelector("#sbDrawer .sb-head .sb-ver");
+      if (!el || !(window.SMD_OTA && SMD_OTA.versionLabel)) return;
+      var cur = null; try { cur = SMD_OTA.currentVersion(); } catch (e) {}
+      el.textContent = "v" + SMD_OTA.versionLabel();
+      el.title = cur ? "Bundle " + cur : "Built-in bundle";
+    } catch (e) {}
+  }
   function build(menu) {
+    paintHeaderVersion();
     menu.setAttribute("data-sbr", "1");
     menu.innerHTML =
       wsRow() +

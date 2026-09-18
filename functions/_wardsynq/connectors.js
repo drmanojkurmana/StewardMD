@@ -28,16 +28,19 @@ import { VersionConflictError } from "./repository.js";
 import { docKey } from "./documents.js";
 import { sealSecret, openSecret, checkDestination } from "./webhooks.js";
 import { DICOM_KIND } from "./dicomweb.js";
-import { PAYER_KIND } from "./payer-connectors.js";
+import { PAYER_KIND, connectorParties } from "./payer-connectors.js";
 import { PAYMENT_KIND } from "./payment-gateways.js";
 import { ABDM_KIND } from "./abdm-hospital.js";
+import { WHATSAPP_KIND } from "./patient-messaging.js";
+import { BACKUP_KIND } from "./backup-destinations.js";
+import { EINVOICE_KIND } from "./einvoice-irp.js";
 
 const CONNECTOR_TYPE = "_wardsynq_connector";
 const MAX_CONNECTORS = 100;
 
 /* kind -> { label, singleton, providers: { id -> { label, settings[], secrets[], validate?, test? } } }
  * validate(settings, secretsPresent, { org, previous }): previous is the saved settings of the same provider, or null. */
-const KINDS = Object.freeze({ payment: PAYMENT_KIND, payer: PAYER_KIND, dicom: DICOM_KIND, abdm: ABDM_KIND });
+const KINDS = Object.freeze({ payment: PAYMENT_KIND, payer: PAYER_KIND, dicom: DICOM_KIND, abdm: ABDM_KIND, whatsapp: WHATSAPP_KIND, backup: BACKUP_KIND, einvoice: EINVOICE_KIND });
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
@@ -148,6 +151,8 @@ async function saveConnector(request, env, ctx) {
     name: str(ctx.name).slice(0, 120) || null, settings: s.settings, secretsEnc: sealed,
     secretsSetAt: Object.keys(supplied).length ? at : (cur && cur.secretsSetAt) || null, active,
     createdAt: (cur && cur.createdAt) || at, createdBy: (cur && cur.createdBy) || who.actorId, writtenBy: { id: who.actorId, kind: "human", at },
+    // What ABDM's registries answered (abdm-registry.js) is kept across a settings change; it names the ID it checked.
+    ...(cur && cur.registry ? { registry: cur.registry } : {}),
   };
   const settingsChanged = [...new Set([...Object.keys(next.settings), ...Object.keys((cur && cur.settings) || {})])]
     .filter((k) => JSON.stringify(next.settings[k]) !== JSON.stringify(cur && cur.settings && cur.settings[k])).sort();
@@ -166,7 +171,8 @@ async function saveConnector(request, env, ctx) {
   return { ok: true, connector: summaryOf(next), ...(secretsReplaced.length ? { secretsNote: "Credentials stored encrypted. They are not shown again; enter new ones to rotate." } : {}) };
 }
 
-/** ctx: { kind? }. This hospital's connectors, the catalogue, and whether credentials can be stored. */
+/** ctx: { kind?, gst? }. This hospital's connectors, the catalogue, and whether credentials can be stored. A payer also
+ *  carries the parties its contract resolves to (payer-contracts.js), so the screen shows the GST recipient the bills use. */
 async function listConnectors(request, env, ctx) {
   const who = await open(request, env, ctx);
   if (who.error) return who.error;
@@ -176,7 +182,8 @@ async function listConnectors(request, env, ctx) {
   const kind = str(ctx.kind);
   return {
     ok: true, keyConfigured: !!(await docKey(env)), catalogue: catalogue().filter((c) => !kind || c.kind === kind),
-    connectors: rows.filter((r) => r && KINDS[r.kind] && (!kind || r.kind === kind)).map(summaryOf).sort((a, b) => a.id.localeCompare(b.id)),
+    connectors: rows.filter((r) => r && KINDS[r.kind] && (!kind || r.kind === kind))
+      .map((r) => (r.kind === "payer" ? { ...summaryOf(r), parties: connectorParties(r, rows, ctx.gst || null) } : summaryOf(r))).sort((a, b) => a.id.localeCompare(b.id)),
   };
 }
 

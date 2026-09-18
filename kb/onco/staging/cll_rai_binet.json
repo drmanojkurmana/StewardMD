@@ -1,0 +1,126 @@
+{
+  "site": "cll_rai_binet",
+  "name": "CLL - Rai & Binet Staging Systems",
+  "system": "Oncology / Haematologic (Clinical)",
+  "versions": [
+    {
+      "version": "Rai & Binet (iwCLL)",
+      "seeded": true,
+      "provenance": "International Workshop on Chronic Lymphocytic Leukemia (iwCLL) guidelines for Rai and Binet staging; licensed clinical reference.",
+      "introduction": "Chronic lymphocytic leukemia (CLL) is staged clinically without surgery or TNM staging using the Rai System (predominantly in the US) and the Binet System (predominantly in Europe). Both systems rely on simple physical examination and standard complete blood counts (CBC) to determine risk category, symptom-free survival, and indication for therapy.",
+      "t": [
+        {
+          "code": "Lymphocytosis Alone",
+          "label": "Absolute peripheral blood B-cell count >= 5 x 10^9/L (5000/mcL) with >=30% lymphocytes in bone marrow; no adenopathy, hepatosplenomegaly, anemia, or thrombocytopenia"
+        },
+        {
+          "code": "Adenopathy",
+          "label": "Lymphadenopathy in any site (cervical, axillary, inguinal)"
+        },
+        {
+          "code": "Organomegaly",
+          "label": "Hepatomegaly and/or splenomegaly with or without lymphadenopathy"
+        },
+        {
+          "code": "Anemia",
+          "label": "Hemoglobin < 11.0 g/dL (Rai) or < 10.0 g/dL (Binet) due to bone marrow marrow infiltration"
+        },
+        {
+          "code": "Thrombocytopenia",
+          "label": "Platelet count < 100 x 10^9/L (100,000/mcL) due to bone marrow infiltration"
+        }
+      ],
+      "n": [
+        {
+          "code": "Binet Areas <3",
+          "label": "Fewer than 3 lymphoid areas involved (cervical, axillary, inguinal, spleen, liver)"
+        },
+        {
+          "code": "Binet Areas >=3",
+          "label": "3 or more lymphoid areas involved"
+        }
+      ],
+      "m": [
+        {
+          "code": "No Cytopenias",
+          "label": "Hemoglobin >= 10-11 g/dL and Platelets >= 100 x 10^9/L"
+        },
+        {
+          "code": "Bone Marrow Failure Cytopenias",
+          "label": "Anemia (Hb <10-11 g/dL) and/or Thrombocytopenia (Platelets <100 x 10^9/L)"
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "Rai 0 (Low Risk)",
+          "t": "Lymphocytosis alone",
+          "n": "Binet Areas <3",
+          "m": "No Cytopenias",
+          "basis": "Low risk. Median survival >10-12 years. Active surveillance (watch-and-wait) standard of care."
+        },
+        {
+          "stage": "Rai I (Intermediate)",
+          "t": "Lymphadenopathy",
+          "n": "Binet Areas <3 or >=3",
+          "m": "No Cytopenias",
+          "basis": "Intermediate risk. Median survival 7-9 years. Treatment indicated only if active/symptomatic disease (iwCLL criteria)."
+        },
+        {
+          "stage": "Rai II (Intermediate)",
+          "t": "Hepato- or splenomegaly +/- adenopathy",
+          "n": "Binet Areas >=3",
+          "m": "No Cytopenias",
+          "basis": "Intermediate risk. Median survival 7-9 years. Treat if symptomatic splenomegaly or progressive organomegaly."
+        },
+        {
+          "stage": "Rai III (High Risk)",
+          "t": "Anemia (Hb <11.0 g/dL)",
+          "n": "Any lymphoid involvement",
+          "m": "Bone Marrow Failure Cytopenias",
+          "basis": "High risk. Median survival 1.5-3 years without therapy. Standard indication for targeted therapy (BTKi: Ibrutinib/Acalabrutinib/Zanubrutinib, or Venetoclax + Obinutuzumab)."
+        },
+        {
+          "stage": "Rai IV (High Risk)",
+          "t": "Thrombocytopenia (<100 x10^9/L)",
+          "n": "Any lymphoid involvement",
+          "m": "Bone Marrow Failure Cytopenias",
+          "basis": "High risk. Median survival 1.5-3 years without therapy. Requires immediate evaluation for systemic targeted therapy."
+        },
+        {
+          "stage": "Binet A (Low Risk)",
+          "t": "Lymphocytosis",
+          "n": "Binet Areas <3",
+          "m": "No Cytopenias",
+          "basis": "Survival comparable to age-matched controls. Watch and wait."
+        },
+        {
+          "stage": "Binet B (Intermediate)",
+          "t": "Lymphocytosis",
+          "n": "Binet Areas >=3",
+          "m": "No Cytopenias",
+          "basis": "Intermediate risk. Watch and wait unless disease progression."
+        },
+        {
+          "stage": "Binet C (High Risk)",
+          "t": "Lymphocytosis",
+          "n": "Any areas",
+          "m": "Bone Marrow Failure Cytopenias",
+          "basis": "High risk. Anemia (Hb <10 g/dL) and/or Thrombocytopenia (<100 x 10^9/L). Treatment mandatory."
+        }
+      ],
+      "regionalNodes": "5 clinical lymphoid areas for Binet: cervical (unilateral or bilateral = 1 area), axillary (unilateral or bilateral = 1 area), inguinal (unilateral or bilateral = 1 area), liver (1 area), spleen (1 area).",
+      "histologicGrade": "Not applicable. Clonality assessed by flow cytometry (CD5+, CD19+, CD23+, CD20 dim, surface Ig dim, CD43+).",
+      "histopathologicTypes": "Chronic lymphocytic leukemia / Small lymphocytic lymphoma (SLL).",
+      "prognosticFactors": [
+        "IGHV mutation status (unmutated IGHV predicts aggressive course and shorter time to treatment)",
+        "TP53 mutation or del(17p) deletion: confers chemoimmunotherapy resistance; mandates BTK inhibitor or Venetoclax regimens",
+        "CLL-IPI (International Prognostic Index): TP53 status (4 pts), IGHV unmutated (2 pts), Serum B2M >3.5 mg/L (2 pts), Rai I-IV or Binet B-C (1 pt), Age >65 (1 pt)",
+        "Complex karyotype (>=3 or >=5 chromosomal abnormalities)"
+      ]
+    },
+    {
+      "version": "Historical Rai 1975",
+      "seeded": false
+    }
+  ]
+}

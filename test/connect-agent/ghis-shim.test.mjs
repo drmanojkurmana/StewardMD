@@ -2,7 +2,7 @@
 //   node --test test/connect-agent/ghis-shim.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { serveGhisProxy, labOrders, detailFor, getLabDetail, needsPatientSections, patientIdOf, normalizeAnalyte, normalizeResult, canonicalLabName, numResult, parseReportSections, sectionBody } from '../../connect-agent/phone/ghis-shim.mjs';
+import { serveGhisProxy, labOrders, detailFor, getLabDetail, needsPatientSections, patientIdOf, normalizeAnalyte, normalizeResult, canonicalLabName, numResult, parseReportSections, sectionBody, notRead } from '../../connect-agent/phone/ghis-shim.mjs';
 
 const patient = { patientId: 'K001', episodeId: 'V9' };
 const sections = [
@@ -130,6 +130,17 @@ test('numResult strips units and prefixes; narratives and ranges become null', (
   assert.equal(numResult(null), null);
 });
 
+test('without roles, an exact key name beats a fuzzy match that comes first, and LowValue/HighValue make a range', () => {
+  // The live approved GHIS adapter (discovered before column learning) returns rows shaped like this:
+  // ResultDate and Result_Type precede Result, LowValue/HighValue carry the range. A fuzzy /result/
+  // match on key order read 0 of 14 values right; exact-first reads them all.
+  const d = detailFor({ dept: 'Haematology', date: '02/09/2026', rows: [
+    { ResultDate: '02/09/2026', Result_Type: 'a', TestName: 'Haemoglobin', LowValue: '13', HighValue: '17', Units: 'g/dL', Result: '11.2' },
+    { ResultDate: '02/09/2026', Result_Type: 'a', TestName: 'WBC', LowValue: '4', HighValue: '11', Units: '10^3/uL', Result: '9.1' },
+  ] });
+  assert.deepEqual(d.tests.map((t) => [t.test, t.result, t.units, t.range]), [['Haemoglobin', '11.2', 'g/dL', '13 - 17'], ['WBC', '9.1', '10^3/uL', '4 - 11']]);
+});
+
 test('learned column roles win over key-name guesses (a misleading ValueType/Value payload)', () => {
   // The response labels its columns unhelpfully: Value is a code, ValueType is the number the doctor
   // saw. Discovery learned the roles (role -> screen header) by value; the shim must read those, not
@@ -220,4 +231,38 @@ test('radiology reports parse into IMPRESSION and FINDINGS sections', () => {
   assert.equal(rep.impression, 'Right lower zone consolidation.');
   assert.equal(rep.findings, 'Right lower zone opacity.');
   assert.equal(rep.sections.length, 3);
+});
+
+test('absent is not negative: a section the adapter could not read says so, an empty one does not', () => {
+  const sections = [
+    { resource: 'labs', unreadable: 'not-proven' },
+    { resource: 'radiology', error: 'request failed in the page: aborted' },
+    { resource: 'medications', rows: [], via: 'endpoint' },
+  ];
+  assert.match(notRead(sections, 'labs', 'Lab results').unreadable, /^Lab results were not read: the agent never learned this screen for this hospital\./);
+  assert.match(notRead(sections, 'radiology', 'Radiology reports').unreadable, /^Radiology reports were not read: the hospital did not answer \(request failed in the page: aborted\)\./);
+  assert.deepEqual(notRead(sections, 'medications', 'Medications'), {}, 'proven and empty is "none"');
+  assert.match(notRead([], 'medications', 'Medications').unreadable, /never learned/, 'no screen at all is not read either');
+  const body = serveGhisProxy({ path: '/lab?patientId=K1', sections, patient: { patientId: 'K1' } }).body;
+  assert.deepEqual(body.orders, []);
+  assert.match(body.unreadable, /^Lab results were not read/);
+  assert.equal(/—/.test(body.unreadable), false, 'no em-dash');
+});
+
+/* THE REPORT IS TEXT. GHIS's radiology result is an HTML fragment; the hand-built adapter runs it
+ * through htmlToText, the shim served the tags raw (owner's iPhone, 2026-09-17). */
+test('reportText: an HTML report fragment becomes readable text with its headings on their own lines', async () => {
+  const { reportText, serveGhisProxy } = await import('../../connect-agent/phone/ghis-shim.mjs');
+  const html = '<p align="center" style="margin:0"><span style="font-size:12pt"><b><u>COLOR DOPPLER</u></b></span></p><p>FINDINGS:</p><p>Normal flow&nbsp;seen.</p><p>IMPRESSION:</p><p>No DVT &amp; no thrombus.</p>';
+  const t = reportText(html);
+  assert.equal(t, 'COLOR DOPPLER\nFINDINGS:\nNormal flow seen.\nIMPRESSION:\nNo DVT & no thrombus.');
+  assert.equal(reportText('plain text'), 'plain text');
+  const sections = [
+    { resource: 'radiology', rows: [{ 'Service ID': '77', 'Visit ID ID': 'V1', Date: '17-Sep-2026', Description: 'U/S DOPPLER', Report: '' }] },
+    { resource: 'radiology-detail', rows: [{ _of: 'U/S DOPPLER', _key: '77', _rowIndex: 0, result: html, testdesc: 'U/S DOPPLER', result_enteredtime: '17-Sep-2026 3:10 PM', doctor_name: 'Dr X' }] },
+  ];
+  const r = serveGhisProxy({ method: 'GET', path: '/radiology-report?patientId=K1&resultid=a0', sections, patient: { patientId: 'K1' } });
+  assert.equal(r.status, 200);
+  assert.ok(!/<[a-z]/i.test(r.body.report), 'no tags in the report: ' + r.body.report.slice(0, 80));
+  assert.equal(r.body.impression, 'No DVT & no thrombus.');
 });

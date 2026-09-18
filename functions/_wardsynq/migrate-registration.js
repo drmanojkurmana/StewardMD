@@ -74,6 +74,8 @@ function patientFromRegistration(reg) {
   if (!patientId) return null;
   const p = (reg && reg.patient) || {};
   const identifiers = [{ system: "opd-mrn", value: String(reg.mrn) }];
+  // A patient loaded from the hospital's previous system (legacy-import.js) keeps that system's number, and is found by it again.
+  if (p.legacyMrn) identifiers.push({ system: "legacy-mrn", value: String(p.legacyMrn) });
   if (abhaLinkable(p)) {
     if (p.abhaNumber) identifiers.push({ system: "abha-number", value: p.abhaNumber });
     if (p.abhaAddress) identifiers.push({ system: "abha-address", value: p.abhaAddress });
@@ -134,6 +136,10 @@ async function registerPatientRecord(request, env, ctx) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), patientId, actor: resolved.actor.id };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: String((e && e.message) || e), written: 0, patientId };
   }
+  /* The desk's registration does not know a patient's legacy number, so a later registration keeps the one already
+   * recorded rather than writing a version without it. It follows opd-mrn, in the same position as when first written. */
+  const legacy = current && (current.identifiers || []).find((i) => i && i.system === "legacy-mrn");
+  if (legacy && !candidate.identifiers.some((i) => i.system === "legacy-mrn")) candidate.identifiers.splice(1, 0, { system: "legacy-mrn", value: legacy.value });
   // Same MRN, same identity by construction. Unchanged demographics: nothing to write, and this is
   // what makes a duplicate/retried registration idempotent without needing a caller-supplied key.
   if (current && sameDemographics(current, candidate)) {

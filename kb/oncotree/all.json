@@ -1,0 +1,1303 @@
+{
+  "guideline": "all",
+  "title": "Acute Lymphoblastic Leukemia (ALL)",
+  "subtitle": "B-ALL (Ph+ / Ph-) and T-ALL Lineages with Risk, MRD, and Targeted Immunotherapy",
+  "navigatorVersion": "3.0.0",
+  "diseaseId": "all_cancer",
+  "matchDisease": false,
+  "status": "draft",
+  "provenanceNote": "Clinical algorithms extracted from NCCN Guidelines Version 2.2026 for Acute Lymphoblastic Leukemia.",
+  "sourceNote": "NCCN Guidelines Version 2.2026 - Acute Lymphoblastic Leukemia (ALL-1 to ALL-8, ALL-D)",
+  "startNodeIds": [
+    "n_all_diagnosis"
+  ],
+  "footnotes": {
+    "fn_mrd": "Preferred MRD method is FDA-approved NGS or multiparametric flow cytometry (<0.01% threshold).",
+    "fn_blina": "Blinatumomab should be incorporated into consolidation for Ph- B-ALL based on ECOG 1910 data."
+  },
+  "nodes": [
+    {
+      "id": "n_all_diagnosis",
+      "linkId": "all_diagnosis",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnosis of ALL",
+      "title": "Acute Lymphoblastic Leukemia: Diagnosis & Initial Classification",
+      "section": "Diagnosis",
+      "description": "Demonstration of >=20% bone marrow lymphoblasts on hematopathology review (aspirate smears, core biopsy, clot sections).",
+      "path": "ALL / Diagnosis",
+      "pills": [
+        "ALL",
+        "diagnosis",
+        "pathology"
+      ],
+      "required": true,
+      "bullets": [
+        "Morphologic assessment of Wright-Giemsa-stained bone marrow aspirate smears and H&E-stained core biopsy/clot sections.",
+        "Comprehensive flow cytometric immunophenotyping to establish B-cell vs T-cell lineage and baseline leukemic clone profile.",
+        "Conventional G-banded metaphase karyotype (minimum 20 metaphases).",
+        "Interphase FISH testing: detect recurrent genomic abnormalities including BCR::ABL1, KMT2A, ETV6::RUNX1, TCF3::PBX1, and iAMP21.",
+        "RT-PCR for BCR::ABL1 (determine p190 vs p210 transcript size) and multigene NGS panel for fusions and pathogenic variants."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnosis confirmed - Proceed to mandatory pre-treatment workup",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_all_workup",
+      "linkId": "all_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic Workup",
+      "title": "ALL Mandatory Clinical & Laboratory Workup Checklist",
+      "section": "Workup",
+      "description": "Baseline organ function, coagulopathy screening, CNS staging, and infection/cardiac risk assessment prior to induction.",
+      "path": "ALL / Workup",
+      "pills": [
+        "workup",
+        "DIC",
+        "TLS",
+        "CNS-staging",
+        "cardiac"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete blood count (CBC) with differential, comprehensive metabolic panel (LFTs, renal function, electrolytes).",
+        "Disseminated intravascular coagulation (DIC) panel: PT/INR, PTT, fibrinogen, D-dimer (essential before invasive procedures).",
+        "Tumor lysis syndrome (TLS) panel: LDH, uric acid, potassium, calcium, phosphorus; initiate hydration +/- rasburicase or allopurinol.",
+        "Infectious disease screening: Hepatitis B (HBsAg, anti-HBc, anti-HBs), Hepatitis C Ab, HIV-1/2 Ag/Ab; screen for active opportunistic infections.",
+        "Lumbar puncture (LP) with CSF cell count, differential, and cytology + initial prophylactic intrathecal (IT) chemotherapy (methotrexate, cytarabine, or triple therapy).",
+        "Echocardiogram or cardiac MUGA scan: baseline LVEF assessment mandatory prior to high-dose anthracycline chemotherapy.",
+        "Imaging: CT neck/chest/abdomen/pelvis with IV contrast or whole-body FDG-PET/CT if lymphomatous involvement suspected. Brain MRI if neurologic symptoms.",
+        "Testicular examination: bilateral scrotal palpation; obtain scrotal ultrasound if mass or asymmetry noted.",
+        "Reproductive counseling: pregnancy test in females of childbearing potential; offer sperm/oocyte cryopreservation before cytotoxic therapy.",
+        "Central venous access: place durable tunneled catheter or PICC line; initiate HLA typing for patient and full siblings for early allogeneic HCT planning."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup completed - Classify immunophenotype and lineage",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_all_lineage",
+      "linkId": "all_lineage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Lineage Classification",
+      "title": "Leukemic Lineage & Immunophenotype",
+      "section": "Subtype & Risk",
+      "description": "Flow cytometry immunophenotyping distinguishes B-lineage from T-lineage acute lymphoblastic leukemia.",
+      "path": "ALL / Lineage",
+      "pills": [
+        "lineage",
+        "B-ALL",
+        "T-ALL"
+      ],
+      "required": true,
+      "bullets": [
+        "B-ALL: Positive for CD19, CD22, CD79a, PAX5; CD10 (common ALL antigen); CD20 variable (positive in ~30-50%).",
+        "T-ALL: Positive for cytoplasmic and/or surface CD3, CD7, CD2, CD5; early T-cell precursor (ETP) subtype typically lacks CD1a and CD8."
+      ],
+      "options": [
+        {
+          "id": "b_cell",
+          "label": "B-Cell Acute Lymphoblastic Leukemia (B-ALL)",
+          "sets": {
+            "lineage": "b_cell"
+          },
+          "pills": [
+            "B-ALL"
+          ]
+        },
+        {
+          "id": "t_cell",
+          "label": "T-Cell Acute Lymphoblastic Leukemia (T-ALL)",
+          "sets": {
+            "lineage": "t_cell"
+          },
+          "pills": [
+            "T-ALL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_all_b_genetics",
+      "linkId": "all_b_genetics",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Philadelphia Chromosome Status",
+      "title": "B-ALL: Cytogenetic and Molecular Risk Stratification",
+      "section": "Subtype & Risk",
+      "description": "Detection of t(9;22)(q34;q11.2) BCR::ABL1 fusion defines Ph-positive vs Ph-negative B-ALL.",
+      "path": "ALL / B-ALL / Genetics",
+      "pills": [
+        "BCR-ABL1",
+        "Ph+",
+        "Ph-"
+      ],
+      "required": true,
+      "bullets": [
+        "Ph-positive (BCR::ABL1 positive): detected by karyotype t(9;22), interphase FISH, or RT-PCR (p190 or p210 transcript). Mandates TKI incorporation into induction.",
+        "Ph-negative (BCR::ABL1 negative): risk stratify by cytogenetics (standard risk: hyperdiploidy 51-65, ETV6::RUNX1, DUX4-r; poor risk: hypodiploidy <44, KMT2A-r, TP53, Ph-like fusions)."
+      ],
+      "options": [
+        {
+          "id": "ph_pos",
+          "label": "Philadelphia Chromosome Positive (Ph+ B-ALL / BCR::ABL1+)",
+          "sets": {
+            "ph_status": "positive"
+          },
+          "pills": [
+            "Ph+"
+          ]
+        },
+        {
+          "id": "ph_neg",
+          "label": "Philadelphia Chromosome Negative (Ph- B-ALL / BCR::ABL1-)",
+          "sets": {
+            "ph_status": "negative"
+          },
+          "pills": [
+            "Ph-"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_all_phpos_induction",
+      "linkId": "all_phpos_induction",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Ph+ ALL Patient Fitness",
+      "title": "Ph+ B-ALL: Age & Comorbidity Stratification",
+      "section": "Primary Treatment",
+      "description": "Select induction intensity based on patient age, ECOG performance status, and cardiac/vascular comorbidity profile.",
+      "path": "ALL / Ph+ B-ALL / Fitness",
+      "pills": [
+        "Ph+",
+        "fitness",
+        "TKI"
+      ],
+      "required": true,
+      "bullets": [
+        "AYA & Adults <65 years without substantial comorbidities: intensive chemotherapy + potent TKI (dasatinib or ponatinib) OR chemotherapy-free TKI + blinatumomab.",
+        "Adults >=65 years or adults with substantial comorbidities: low-intensity backbone (TKI + blinatumomab OR TKI + corticosteroids/vincristine OR mini-hyper-CVD + TKI)."
+      ],
+      "options": [
+        {
+          "id": "phpos_fit",
+          "label": "AYA & Adults <65 years without substantial comorbidities (Fit)",
+          "sets": {
+            "fitness": "fit"
+          },
+          "pills": [
+            "Ph+",
+            "Fit",
+            "AYA/<65"
+          ]
+        },
+        {
+          "id": "phpos_frail",
+          "label": "Adults >=65 years or adults with substantial comorbidities (Frail/Unfit)",
+          "sets": {
+            "fitness": "frail"
+          },
+          "pills": [
+            "Ph+",
+            "Frail",
+            ">=65"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_all_phpos_fit_regimens",
+      "linkId": "all_phpos_fit_regimens",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Ph+ Fit Induction",
+      "title": "Ph+ B-ALL (Fit): Frontline Induction Selection",
+      "section": "Primary Treatment",
+      "description": "Frontline TKI-based induction regimens for fit Ph+ B-ALL patients.",
+      "path": "ALL / Ph+ B-ALL / Fit Induction",
+      "pills": [
+        "Ph+",
+        "ponatinib",
+        "dasatinib",
+        "blinatumomab",
+        "hyper-CVAD"
+      ],
+      "required": true,
+      "bullets": [
+        "Chemo-free BiTE approach (Preferred): Ponatinib (30 mg daily, reduced to 15 mg in CMR) or Dasatinib (140 mg daily) + Blinatumomab (continuous IV infusion) + IT chemotherapy (methotrexate/cytarabine).",
+        "Intensive Chemo-TKI: Hyper-CVAD (hyperfractionated cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with high-dose methotrexate and cytarabine) + Ponatinib or Dasatinib + IT chemotherapy.",
+        "Rituximab addition: If blasts express CD20 >=20%, add rituximab to chemotherapy cycles to improve event-free survival.",
+        "Supportive care: Prophylactic anticoagulation / vascular monitoring if ponatinib used; antimicrobial prophylaxis (levofloxacin, posaconazole/voriconazole, acyclovir, Bactrim)."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Induction administered - Proceed to post-induction response & MRD evaluation",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_all_phpos_frail_regimens",
+      "linkId": "all_phpos_frail_regimens",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Ph+ Frail Induction",
+      "title": "Ph+ B-ALL (Frail / Elderly): Low-Intensity Induction Selection",
+      "section": "Primary Treatment",
+      "description": "Low-to-moderate intensity TKI-based frontline regimens designed to minimize treatment-related mortality.",
+      "path": "ALL / Ph+ B-ALL / Frail Induction",
+      "pills": [
+        "Ph+",
+        "elderly",
+        "low-intensity",
+        "TKI"
+      ],
+      "required": true,
+      "bullets": [
+        "TKI + Blinatumomab (Preferred low-intensity): Dasatinib or Ponatinib combined with blinatumomab; high CR rate with minimal myelosuppression.",
+        "TKI + Corticosteroid: Dasatinib (140 mg daily) or Ponatinib (30 mg daily) + Dexamethasone/Prednisone taper (GIMEMA or EWALL backbone).",
+        "TKI + Vincristine/Dexamethasone: Low-dose weekly vincristine with short pulse dexamethasone + TKI.",
+        "Moderate intensity: Mini-hyper-CVD (attenuated dose cyclophosphamide, vincristine, dexamethasone without anthracycline) + TKI."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Induction administered - Proceed to post-induction response & MRD evaluation",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_all_phpos_response",
+      "linkId": "all_phpos_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Ph+ Post-Induction Response",
+      "title": "Ph+ B-ALL: Morphologic & MRD Response Assessment",
+      "section": "Response & MRD",
+      "description": "Bone marrow biopsy at day 28-35 to assess morphologic CR (<5% blasts, count recovery) and quantifiable MRD by NGS or RT-PCR.",
+      "path": "ALL / Ph+ B-ALL / Response",
+      "pills": [
+        "Ph+",
+        "CR",
+        "MRD",
+        "qPCR"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete Remission (CR): <5% bone marrow blasts, absence of peripheral blasts, absence of extramedullary disease, ANC >=1000/mcL, platelets >=100,000/mcL.",
+        "MRD quantification: high-sensitivity RT-PCR for BCR::ABL1 (target major molecular response MMR / complete molecular response CMR) or NGS-based clonality assay (sensitivity 10^-6).",
+        "Persistent positivity at induction end requires ABL1 kinase domain sequencing for resistance mutations (e.g., T315I, Y253H, E255K/V)."
+      ],
+      "options": [
+        {
+          "id": "phpos_mrd_neg",
+          "label": "Complete Remission (CR) with MRD Negative (Complete Molecular Remission)",
+          "sets": {
+            "response": "cr_mrd_neg"
+          },
+          "pills": [
+            "CR",
+            "MRD-"
+          ]
+        },
+        {
+          "id": "phpos_mrd_pos",
+          "label": "Complete Remission (CR) with Persistent MRD Positive",
+          "sets": {
+            "response": "cr_mrd_pos"
+          },
+          "pills": [
+            "CR",
+            "MRD+"
+          ]
+        },
+        {
+          "id": "phpos_refractory",
+          "label": "Primary Refractory Disease / Less than CR (>5% blasts)",
+          "sets": {
+            "response": "refractory"
+          },
+          "pills": [
+            "Refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_all_phpos_tx_mrd_neg",
+      "linkId": "all_phpos_tx_mrd_neg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Ph+ MRD- Consolidation",
+      "title": "Ph+ B-ALL: MRD-Negative Consolidation & Maintenance",
+      "section": "Primary Treatment",
+      "description": "Consolidation strategy for patients achieving deep molecular remission.",
+      "path": "ALL / Ph+ B-ALL / MRD- Consolidation",
+      "pills": [
+        "Ph+",
+        "MRD-",
+        "HCT",
+        "maintenance"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Allogeneic HCT decision: Consider allogeneic HCT in eligible candidates with IKZF1plus alterations, high-risk features, or slower molecular kinetics, followed by post-HCT TKI maintenance.",
+        "Non-transplant consolidation (TKI maintenance pathway): In patients achieving early complete molecular response (CMR) with potent TKIs (ponatinib/dasatinib) or ineligible for HCT, continued TKI + POMP maintenance (or blinatumomab consolidation cycles) produces durable leukemia-free survival.",
+        "Maintenance therapy: TKI daily (ponatinib 15 mg daily or dasatinib 100-140 mg daily) for a minimum of 5 years (or indefinitely), with or without POMP maintenance (mercaptopurine daily, methotrexate weekly, vincristine + prednisone monthly pulses) for 2-3 years.",
+        "Intrathecal CNS prophylaxis: Continue IT chemotherapy as scheduled per protocol (minimum 8-12 total doses across induction, consolidation, and early maintenance).",
+        "Molecular monitoring: Serial quantitative RT-PCR for BCR::ABL1 every 3 months for at least 3-5 years."
+      ]
+    },
+    {
+      "id": "n_all_phpos_tx_mrd_pos",
+      "linkId": "all_phpos_tx_mrd_pos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Ph+ MRD+ Intensification",
+      "title": "Ph+ B-ALL: Persistent MRD Intensification & Bridge to HCT",
+      "section": "Primary Treatment",
+      "description": "Targeted intensification for persistent minimal residual disease.",
+      "path": "ALL / Ph+ B-ALL / MRD+ Intensification",
+      "pills": [
+        "Ph+",
+        "MRD+",
+        "blinatumomab",
+        "HCT"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "ABL1 Kinase Domain Mutation Testing: Immediately sequence the BCR::ABL1 kinase domain to detect emergent gatekeeper (T315I) or P-loop mutations.",
+        "TKI switch: If T315I mutation identified, switch to ponatinib (45 mg daily) or asciminib; switch dasatinib to ponatinib if other resistant clones emerge.",
+        "Blinatumomab + TKI (Preferred): Initiate blinatumomab (continuous IV infusion x 28-day cycle) in combination with active TKI to eradicate residual clone.",
+        "Allogeneic HCT: Strongly recommended for all eligible patients once MRD clearance or lowest possible disease burden is attained.",
+        "Alternative intensification: Multiagent chemotherapy consolidation (high-dose methotrexate/cytarabine) + TKI if blinatumomab unavailable."
+      ]
+    },
+    {
+      "id": "n_all_phneg_age_fitness",
+      "linkId": "all_phneg_age_fitness",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Ph- B-ALL Age & Fitness",
+      "title": "Ph- B-ALL: Age & Protocol Cohort Stratification",
+      "section": "Subtype & Risk",
+      "description": "Patient age and physiological fitness dictate whether pediatric-inspired, standard adult, or dose-reduced regimens are used.",
+      "path": "ALL / Ph- B-ALL / Cohort",
+      "pills": [
+        "Ph-",
+        "AYA",
+        "adult",
+        "elderly"
+      ],
+      "required": true,
+      "bullets": [
+        "AYA (Adolescent & Young Adult, 15-39 years) without substantial comorbidities: pediatric-inspired regimens (high-dose asparaginase, vincristine, corticosteroids, methotrexate) significantly improve event-free survival.",
+        "Adults 40-64 years without substantial comorbidities: intensive adult multiagent chemotherapy (ECOG 1910 backbone, Hyper-CVAD) +/- rituximab.",
+        "Adults >=65 years or with substantial comorbidities: dose-attenuated chemotherapy (mini-hyper-CVD, POMP, low-dose vincristine/prednisone) or inotuzumab-based therapy."
+      ],
+      "options": [
+        {
+          "id": "phneg_aya",
+          "label": "AYA (Age 15\u201339 years) without substantial comorbidities",
+          "sets": {
+            "age_group": "aya"
+          },
+          "pills": [
+            "Ph-",
+            "AYA",
+            "15-39y"
+          ]
+        },
+        {
+          "id": "phneg_adult",
+          "label": "Adults (Age 40\u201364 years) without substantial comorbidities",
+          "sets": {
+            "age_group": "adult"
+          },
+          "pills": [
+            "Ph-",
+            "Adult",
+            "40-64y"
+          ]
+        },
+        {
+          "id": "phneg_older",
+          "label": "Adults >=65 years or adults with substantial comorbidities",
+          "sets": {
+            "age_group": "older"
+          },
+          "pills": [
+            "Ph-",
+            "Older/Frail",
+            ">=65y"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_all_phneg_aya_regimens",
+      "linkId": "all_phneg_aya_regimens",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Ph- AYA Induction",
+      "title": "Ph- B-ALL: AYA Pediatric-Inspired Frontline Regimens",
+      "section": "Primary Treatment",
+      "description": "Pediatric-inspired intensive multiagent chemotherapy protocols.",
+      "path": "ALL / Ph- B-ALL / AYA Induction",
+      "pills": [
+        "CALGB10403",
+        "DFCI",
+        "pegaspargase",
+        "AYA"
+      ],
+      "required": true,
+      "bullets": [
+        "CALGB 10403 (Preferred): 5-drug induction consisting of daunorubicin, vincristine, prednisone, pegaspargase (or calaspargase pegol if <=21y), and cyclophosphamide + IT methotrexate.",
+        "DFCI ALL Protocol 00-01: Doxorubicin, vincristine, prednisone, pegaspargase, high-dose methotrexate, and 6-mercaptopurine.",
+        "COG AALL0232 / CCG-1882 inspired regimens.",
+        "Asparaginase toxicity management: Monitor antithrombin III, fibrinogen, amylase/lipase, and LFTs. If clinical allergy or neutralizing antibodies occur, substitute Erwinia asparaginase (crisantaspase / ERW-rywn).",
+        "CNS prophylaxis: Intrathecal methotrexate or triple IT (methotrexate, cytarabine, hydrocortisone) delivered at scheduled timepoints."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Induction completed - Proceed to response and MRD assessment",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_all_phneg_adult_regimens",
+      "linkId": "all_phneg_adult_regimens",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Ph- Adult Induction",
+      "title": "Ph- B-ALL: Adult Multiagent Frontline Regimens (Age 40\u201364)",
+      "section": "Primary Treatment",
+      "description": "Multiagent induction backbones with incorporation of immunotherapy.",
+      "path": "ALL / Ph- B-ALL / Adult Induction",
+      "pills": [
+        "ECOG1910",
+        "Hyper-CVAD",
+        "rituximab",
+        "adult"
+      ],
+      "required": true,
+      "bullets": [
+        "ECOG-ACRIN E1910 backbone (Preferred): Multiagent induction (daunorubicin, vincristine, prednisone, pegaspargase, cyclophosphamide) with sequential blinatumomab consolidation.",
+        "Hyper-CVAD: Hyperfractionated cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with high-dose methotrexate and cytarabine.",
+        "CD20-Directed Monoclonal Antibody: For CD20-positive B-ALL (>=20% blast expression), add rituximab to chemotherapy cycles (GRAALL-2005 / GMALL data).",
+        "CNS prophylaxis: Regular IT chemotherapy (methotrexate 12 mg or cytarabine 100 mg or triple IT) with each chemotherapy course."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Induction completed - Proceed to response and MRD assessment",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_all_phneg_older_regimens",
+      "linkId": "all_phneg_older_regimens",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Ph- Frail Induction",
+      "title": "Ph- B-ALL: Low/Moderate-Intensity Regimens (Age >=65 / Unfit)",
+      "section": "Primary Treatment",
+      "description": "Attenuated regimens to reduce induction mortality while securing remission.",
+      "path": "ALL / Ph- B-ALL / Older Induction",
+      "pills": [
+        "low-intensity",
+        "elderly",
+        "inotuzumab",
+        "mini-hyper-CVD"
+      ],
+      "required": true,
+      "bullets": [
+        "Inotuzumab ozogamicin + Dexamethasone (ALL-INITIAL-1): CD22 antibody-drug conjugate with short pulse dexamethasone; high CR rate with low toxicity.",
+        "Mini-hyper-CVD +/- Inotuzumab/Blinatumomab: Dose-reduced cyclophosphamide, vincristine, dexamethasone without anthracycline, alternating with low-dose methotrexate/cytarabine.",
+        "Low-intensity cytotoxic: Vincristine + Prednisone or POMP (mercaptopurine, vincristine, methotrexate, prednisone).",
+        "Comprehensive supportive care: TLS prophylaxis, prophylactic G-CSF, antifungal and antibacterial prophylaxis."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Induction completed - Proceed to response and MRD assessment",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_all_phneg_response",
+      "linkId": "all_phneg_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Ph- Post-Induction Response",
+      "title": "Ph- B-ALL: Morphologic & MRD Response Assessment",
+      "section": "Response & MRD",
+      "description": "Day 28-35 bone marrow evaluation for morphologic remission and measurable residual disease (MRD).",
+      "path": "ALL / Ph- B-ALL / Response",
+      "pills": [
+        "Ph-",
+        "CR",
+        "MRD",
+        "flow",
+        "NGS"
+      ],
+      "required": true,
+      "bullets": [
+        "Morphologic CR: <5% bone marrow blasts, no circulating blasts, absence of extramedullary leukemia, ANC >=1000/mcL, platelets >=100,000/mcL.",
+        "MRD quantification: Highly sensitive 6-8 color multiparametric flow cytometry or NGS-based clonality assay (clonoSEQ, threshold <0.01% / 10^-4 blasts).",
+        "ECOG 1910 evidence: Demonstrates dramatic survival advantage when blinatumomab consolidation is added to chemotherapy in MRD-negative patients, and blinatumomab remains the standard of care for converting MRD-positive patients."
+      ],
+      "options": [
+        {
+          "id": "phneg_mrd_neg",
+          "label": "Complete Remission (CR) with MRD Negative (<0.01% blasts)",
+          "sets": {
+            "response": "cr_mrd_neg"
+          },
+          "pills": [
+            "CR",
+            "MRD-"
+          ]
+        },
+        {
+          "id": "phneg_mrd_pos",
+          "label": "Complete Remission (CR) with Persistent MRD Positive (>=0.01% blasts)",
+          "sets": {
+            "response": "cr_mrd_pos"
+          },
+          "pills": [
+            "CR",
+            "MRD+"
+          ]
+        },
+        {
+          "id": "phneg_refractory",
+          "label": "Primary Refractory Disease / Incomplete Remission (<CR)",
+          "sets": {
+            "response": "refractory"
+          },
+          "pills": [
+            "Refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_all_phneg_tx_mrd_neg",
+      "linkId": "all_phneg_tx_mrd_neg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Ph- MRD- Consolidation",
+      "title": "Ph- B-ALL: MRD-Negative Consolidation & Maintenance",
+      "section": "Primary Treatment",
+      "description": "Post-remission consolidation therapy with blinatumomab and maintenance.",
+      "path": "ALL / Ph- B-ALL / MRD- Consolidation",
+      "pills": [
+        "Ph-",
+        "MRD-",
+        "blinatumomab",
+        "POMP"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "ECOG 1910 Consolidation (Preferred): Multiagent consolidation chemotherapy alternating with Blinatumomab (4 cycles total: 2 cycles post-consolidation 1, 2 cycles post-consolidation 2). Proven overall survival benefit in MRD-negative adults <65y.",
+        "Allogeneic HCT Consideration: Strongly favored in first CR (CR1) for patients with poor-risk genetics: hypodiploidy (<44 chromosomes), KMT2A rearrangement (t(4;11)), TP53 mutation, Ph-like signature, or complex karyotype (>=5 abnormalities).",
+        "Standard Maintenance: POMP regimen (daily oral 6-mercaptopurine 50-75 mg/m2, weekly oral methotrexate 20 mg/m2, monthly pulses of IV vincristine and oral prednisone) for 2 to 3 years total duration.",
+        "CNS Surveillance & Prophylaxis: Complete full course of planned intrathecal chemotherapy injections during consolidation and early maintenance."
+      ]
+    },
+    {
+      "id": "n_all_phneg_tx_mrd_pos",
+      "linkId": "all_phneg_tx_mrd_pos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Ph- MRD+ Intensification",
+      "title": "Ph- B-ALL: Persistent MRD Intensification & Allogeneic HCT",
+      "section": "Primary Treatment",
+      "description": "Targeted immunotherapy to eliminate persistent minimal residual disease prior to allogeneic transplant.",
+      "path": "ALL / Ph- B-ALL / MRD+ Intensification",
+      "pills": [
+        "Ph-",
+        "MRD+",
+        "blinatumomab",
+        "HCT"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Blinatumomab (Preferred Standard of Care): Continuous IV infusion x 28 days (cycle 1: 9 mcg/d x 7 days then 28 mcg/d; subsequent cycles: 28 mcg/d). Achieves MRD conversion in ~80% of patients (BLAST study).",
+        "Monitor & Manage Cytokine Release Syndrome (CRS) and ICANS: Premedicate with dexamethasone; hold infusion and administer tocilizumab +/- dexamethasone if grade >=2 CRS occurs.",
+        "Allogeneic HCT (Strongly Recommended): Consolidate with myeloablative or reduced-intensity allogeneic HCT upon achieving MRD-negative status.",
+        "Alternative if blinatumomab contraindicated or unavailable: Multiagent chemotherapy intensification (e.g., high-dose cytarabine + fludarabine) or Inotuzumab ozogamicin."
+      ]
+    },
+    {
+      "id": "n_all_t_setting",
+      "linkId": "all_t_setting",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "T-ALL Age & Fitness",
+      "title": "T-Cell ALL: Age & Clinical Cohort Stratification",
+      "section": "Subtype & Risk",
+      "description": "Patient age and physiological fitness dictate frontline multiagent chemotherapy protocol selection.",
+      "path": "ALL / T-ALL / Cohort",
+      "pills": [
+        "T-ALL",
+        "AYA",
+        "adult",
+        "fitness"
+      ],
+      "required": true,
+      "bullets": [
+        "AYA (15\u201339 years) without substantial comorbidities: pediatric-inspired regimens with augmented asparaginase and nelarabine for intermediate/high risk.",
+        "Adults 40\u201364 years: intensive adult protocols (Hyper-CVAD +/- nelarabine or dose-adjusted GRAALL-2014).",
+        "Adults >=65 years or with substantial comorbidities: dose-attenuated multiagent regimens or clinical trials."
+      ],
+      "options": [
+        {
+          "id": "t_aya",
+          "label": "AYA (Age 15\u201339 years) without substantial comorbidities",
+          "sets": {
+            "cohort": "t_aya"
+          },
+          "pills": [
+            "T-ALL",
+            "AYA"
+          ]
+        },
+        {
+          "id": "t_adult",
+          "label": "Adults (Age 40\u201364 years) without substantial comorbidities",
+          "sets": {
+            "cohort": "t_adult"
+          },
+          "pills": [
+            "T-ALL",
+            "Adult"
+          ]
+        },
+        {
+          "id": "t_older",
+          "label": "Adults >=65 years or adults with substantial comorbidities",
+          "sets": {
+            "cohort": "t_older"
+          },
+          "pills": [
+            "T-ALL",
+            "Older/Frail"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_all_t_induction",
+      "linkId": "all_t_induction",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "T-ALL Induction Regimens",
+      "title": "T-ALL: Frontline Multiagent Induction Therapy",
+      "section": "Primary Treatment",
+      "description": "Multiagent chemotherapy induction protocols for T-lineage acute lymphoblastic leukemia.",
+      "path": "ALL / T-ALL / Induction",
+      "pills": [
+        "T-ALL",
+        "CALGB10403",
+        "COG-AALL0434",
+        "nelarabine",
+        "hyper-CVAD"
+      ],
+      "required": true,
+      "bullets": [
+        "AYA Preferred: COG AALL0434 backbone (daunorubicin, vincristine, prednisone, pegaspargase) with incorporation of Nelarabine (650 mg/m2 IV daily x 5) for patients with intermediate/high risk disease (dramatically lowers CNS relapse).",
+        "CALGB 10403 (Pediatric-inspired): Intensive 5-drug induction with pegaspargase, daunorubicin, vincristine, prednisone, and cyclophosphamide.",
+        "Adult Preferred: Hyper-CVAD (fractionated cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with high-dose methotrexate and cytarabine) +/- Nelarabine.",
+        "GRAALL-2014: Multiagent regimen with dose adjustments based on age and tolerance.",
+        "CNS Prophylaxis: Robust intrathecal therapy (triple IT: methotrexate, cytarabine, hydrocortisone) mandatory due to higher baseline CNS predilection in T-ALL."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Induction completed - Proceed to response and MRD assessment",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_all_t_response",
+      "linkId": "all_t_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "T-ALL Post-Induction Response",
+      "title": "T-ALL: Morphologic & MRD Response Assessment",
+      "section": "Response & MRD",
+      "description": "Day 28-35 bone marrow evaluation for morphologic remission and flow cytometric/NGS MRD.",
+      "path": "ALL / T-ALL / Response",
+      "pills": [
+        "T-ALL",
+        "CR",
+        "MRD",
+        "flow"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete Remission (CR): <5% marrow blasts, no circulating blasts, resolution of mediastinal/extramedullary masses, peripheral count recovery.",
+        "MRD quantification: Flow cytometry (T-cell aberrant immunophenotype) or NGS TCR clonal rearrangement (sensitivity 10^-6).",
+        "High-risk classifiers: Early T-cell precursor (ETP-ALL), PTEN mutations, and NOTCH1/FBXW7 wild-type status carry increased relapse risk."
+      ],
+      "options": [
+        {
+          "id": "t_mrd_neg",
+          "label": "Complete Remission (CR) with MRD Negative",
+          "sets": {
+            "response": "cr_mrd_neg"
+          },
+          "pills": [
+            "CR",
+            "MRD-"
+          ]
+        },
+        {
+          "id": "t_mrd_pos",
+          "label": "Complete Remission (CR) with Persistent MRD Positive",
+          "sets": {
+            "response": "cr_mrd_pos"
+          },
+          "pills": [
+            "CR",
+            "MRD+"
+          ]
+        },
+        {
+          "id": "t_refractory",
+          "label": "Primary Refractory Disease / Incomplete Remission (<CR)",
+          "sets": {
+            "response": "refractory"
+          },
+          "pills": [
+            "Refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_all_t_tx_mrd_neg",
+      "linkId": "all_t_tx_mrd_neg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "T-ALL MRD- Consolidation",
+      "title": "T-ALL: MRD-Negative Consolidation & Maintenance",
+      "section": "Primary Treatment",
+      "description": "Consolidation chemotherapy and transplant decision for standard and high-risk T-ALL.",
+      "path": "ALL / T-ALL / MRD- Consolidation",
+      "pills": [
+        "T-ALL",
+        "MRD-",
+        "HCT",
+        "maintenance"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Standard-Risk Chemotherapy Consolidation: Continue multiagent consolidation (e.g. COG AALL0434 or Hyper-CVAD blocks) followed by POMP maintenance for 2 to 3 years.",
+        "Allogeneic HCT in CR1: Strongly favored for patients with Early T-cell Precursor (ETP-ALL), poor cytogenetics (e.g. complex, MLL-r), or unfavorable molecular profile (NOTCH1/FBXW7 wild-type or PTEN mutations).",
+        "Nelarabine incorporation: If not administered during induction, consider adding nelarabine blocks during consolidation for young adults with CNS risk.",
+        "Surveillance: Serial marrow/MRD monitoring at months 3, 6, 12, 18, and 24."
+      ]
+    },
+    {
+      "id": "n_all_t_tx_mrd_pos",
+      "linkId": "all_t_tx_mrd_pos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "T-ALL MRD+ Intensification",
+      "title": "T-ALL: Persistent MRD Intensification & Allogeneic HCT",
+      "section": "Primary Treatment",
+      "description": "Intensification therapy to achieve deep remission before allogeneic transplantation.",
+      "path": "ALL / T-ALL / MRD+ Intensification",
+      "pills": [
+        "T-ALL",
+        "MRD+",
+        "nelarabine",
+        "HCT"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Nelarabine-based Intensification: Administer Nelarabine (650 mg/m2 IV daily x 5 or 1500 mg/m2 days 1, 3, 5) alone or in combination with cyclophosphamide and etoposide.",
+        "Allogeneic HCT (Mandatory): Consolidate with allogeneic hematopoietic cell transplant immediately once MRD negative status or minimum residual burden is reached.",
+        "Alternative regimens: High-dose cytarabine + fludarabine (FLAG-IDA) or venetoclax + decitabine/azacitidine under clinical trial or compassionate use.",
+        "Clinical Trial: Strongly consider enrolling on investigational cellular or targeted therapy protocols."
+      ]
+    },
+    {
+      "id": "n_all_rr_entry",
+      "linkId": "all_rr_entry",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Relapsed/Refractory ALL",
+      "title": "Relapsed or Primary Refractory ALL: Lineage & Subtype Classification",
+      "section": "Relapsed / Refractory",
+      "description": "Identify disease lineage and actionable molecular targets in relapsed or refractory disease.",
+      "path": "ALL / Relapsed-Refractory / Entry",
+      "pills": [
+        "relapsed",
+        "refractory",
+        "salvage"
+      ],
+      "required": true,
+      "bullets": [
+        "Repeat bone marrow aspirate and biopsy with comprehensive flow cytometry and cytogenetics/NGS.",
+        "Re-assess CD19, CD22, and CD38 expression prior to selecting targeted antibody or cellular immunotherapy.",
+        "For Ph+ B-ALL: immediate ABL1 kinase domain mutation analysis to guide TKI selection (specifically checking for T315I mutation).",
+        "Screen for extramedullary relapse: lumbar puncture for CSF involvement; imaging for testicular or nodal recurrence."
+      ],
+      "options": [
+        {
+          "id": "rr_phpos",
+          "label": "Relapsed / Refractory Ph+ B-ALL",
+          "sets": {
+            "rr_type": "phpos"
+          },
+          "pills": [
+            "R/R Ph+"
+          ]
+        },
+        {
+          "id": "rr_phneg",
+          "label": "Relapsed / Refractory Ph- B-ALL",
+          "sets": {
+            "rr_type": "phneg"
+          },
+          "pills": [
+            "R/R Ph-"
+          ]
+        },
+        {
+          "id": "rr_tcell",
+          "label": "Relapsed / Refractory T-ALL",
+          "sets": {
+            "rr_type": "tcell"
+          },
+          "pills": [
+            "R/R T-ALL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_all_rr_phpos_tx",
+      "linkId": "all_rr_phpos_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "R/R Ph+ B-ALL Salvage",
+      "title": "Relapsed/Refractory Ph+ B-ALL: Targeted Immunotherapy & TKIs",
+      "section": "Relapsed / Refractory",
+      "description": "Evidence-based salvage strategies integrating next-generation TKIs, immunotherapy, and cellular therapy.",
+      "path": "ALL / R/R / Ph+ Treatment",
+      "pills": [
+        "R/R Ph+",
+        "ponatinib",
+        "asciminib",
+        "blinatumomab",
+        "CAR-T"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Mutation-Directed TKI Selection: If T315I mutation present, use Ponatinib (45 mg daily) or Asciminib (with or without another TKI). For other resistance mutations, tailor to dasatinib, bosutinib, or nilotinib sensitivity profile.",
+        "Blinatumomab + TKI (Preferred): Ponatinib or dasatinib combined with blinatumomab demonstrates high complete remission and molecular clearance rates in relapsed/refractory Ph+ ALL.",
+        "Inotuzumab ozogamicin (CD22 ADC): Highly effective in CD22+ relapsed disease; monitor hepatic function and limit to 2-3 cycles if preceding allogeneic HCT.",
+        "CAR T-Cell Therapy (Brexucabtagene autoleucel): FDA-approved for adult relapsed/refractory B-ALL; tisagenlecleucel for patients aged <=25 years.",
+        "Allogeneic HCT / DLI: Second allogeneic HCT or donor lymphocyte infusion (DLI) for eligible patients achieving subsequent remission."
+      ]
+    },
+    {
+      "id": "n_all_rr_phneg_tx",
+      "linkId": "all_rr_phneg_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "R/R Ph- B-ALL Salvage",
+      "title": "Relapsed/Refractory Ph- B-ALL: Immunotherapy & CAR-T Regimens",
+      "section": "Relapsed / Refractory",
+      "description": "Targeted biologic and cellular therapies prioritized over conventional cytotoxic salvage.",
+      "path": "ALL / R/R / Ph- Treatment",
+      "pills": [
+        "R/R Ph-",
+        "blinatumomab",
+        "inotuzumab",
+        "CAR-T",
+        "brexucabtagene"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Targeted Immunotherapy (Preferred over cytotoxic chemotherapy):",
+        "\u2022 Blinatumomab (CD19 BiTE): Continuous IV infusion x 28-day cycles; superior OS and response compared to standard salvage chemo (TOWER trial).",
+        "\u2022 Inotuzumab ozogamicin (CD22 ADC): 0.8 mg/m2 day 1, 0.5 mg/m2 days 8 & 15; superior CR rate over chemo (INO-VATE trial). Administer ursodiol and avoid dual-alkylator conditioning if bridging to HCT to prevent sinusoidal obstruction syndrome (SOS/VOD).",
+        "Chimeric Antigen Receptor (CAR) T-Cell Therapy:",
+        "\u2022 Brexucabtagene autoleucel (Tecartus): Indicated for adult relapsed/refractory B-ALL.",
+        "\u2022 Tisagenlecleucel (Kymriah): Indicated for pediatric and young adult patients <=25 years.",
+        "\u2022 Obecabtagene autoleucel (Apceth): Low-affinity CD19 CAR T-cell with reduced CRS profile.",
+        "Cytotoxic Salvage Regimens (if immunotherapy unavailable or as bridge): FLAG-IDA (fludarabine, cytarabine, idarubicin, G-CSF), mini-hyper-CVD + inotuzumab, or CLAG-M.",
+        "Allogeneic HCT: Essential consolidative therapy following attainment of second remission (CR2)."
+      ]
+    },
+    {
+      "id": "n_all_rr_tcell_tx",
+      "linkId": "all_rr_tcell_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "R/R T-ALL Salvage",
+      "title": "Relapsed/Refractory T-ALL: Nelarabine & Targeted Regimens",
+      "section": "Relapsed / Refractory",
+      "description": "Salvage therapy for relapsed or refractory T-cell acute lymphoblastic leukemia.",
+      "path": "ALL / R/R / T-ALL Treatment",
+      "pills": [
+        "R/R T-ALL",
+        "nelarabine",
+        "daratumumab",
+        "venetoclax"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Nelarabine-based Therapy (Preferred): Nelarabine single agent (1500 mg/m2 days 1, 3, 5 every 21 days) or combination Nelarabine + Etoposide + Cyclophosphamide.",
+        "Targeted / Novel Approaches:",
+        "\u2022 Daratumumab (anti-CD38 monoclonal antibody): Promising activity in CD38-expressing relapsed/refractory T-ALL and ETP-ALL.",
+        "\u2022 Venetoclax + Decitabine or Azacitidine: BCL-2 inhibition active in early T-cell precursor (ETP) and immature T-ALL phenotypes.",
+        "\u2022 Menin inhibitors (e.g. revumenib): For KMT2A-rearranged cases.",
+        "Intensive Cytotoxic Chemotherapy: Augmented hyper-CVAD, FLAG-IDA, or clofarabine-based combinations.",
+        "Allogeneic HCT: Immediate HLA-matched donor mobilization to proceed to transplant upon attaining remission."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_all_diag_to_workup",
+      "from": "n_all_diagnosis",
+      "to": "n_all_workup",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_all_workup_to_lineage",
+      "from": "n_all_workup",
+      "to": "n_all_lineage",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_all_lineage_to_b",
+      "from": "n_all_lineage",
+      "to": "n_all_b_genetics",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "b_cell"
+      ]
+    },
+    {
+      "id": "l_all_lineage_to_t",
+      "from": "n_all_lineage",
+      "to": "n_all_t_setting",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "t_cell"
+      ]
+    },
+    {
+      "id": "l_all_b_to_phpos",
+      "from": "n_all_b_genetics",
+      "to": "n_all_phpos_induction",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "ph_pos"
+      ]
+    },
+    {
+      "id": "l_all_b_to_phneg",
+      "from": "n_all_b_genetics",
+      "to": "n_all_phneg_age_fitness",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "ph_neg"
+      ]
+    },
+    {
+      "id": "l_all_phpos_to_fit",
+      "from": "n_all_phpos_induction",
+      "to": "n_all_phpos_fit_regimens",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phpos_fit"
+      ]
+    },
+    {
+      "id": "l_all_phpos_to_frail",
+      "from": "n_all_phpos_induction",
+      "to": "n_all_phpos_frail_regimens",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phpos_frail"
+      ]
+    },
+    {
+      "id": "l_all_phpos_fit_to_resp",
+      "from": "n_all_phpos_fit_regimens",
+      "to": "n_all_phpos_response",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_all_phpos_frail_to_resp",
+      "from": "n_all_phpos_frail_regimens",
+      "to": "n_all_phpos_response",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_all_phpos_to_mrd_neg",
+      "from": "n_all_phpos_response",
+      "to": "n_all_phpos_tx_mrd_neg",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phpos_mrd_neg"
+      ]
+    },
+    {
+      "id": "l_all_phpos_to_mrd_pos",
+      "from": "n_all_phpos_response",
+      "to": "n_all_phpos_tx_mrd_pos",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phpos_mrd_pos"
+      ]
+    },
+    {
+      "id": "l_all_phpos_to_rr",
+      "from": "n_all_phpos_response",
+      "to": "n_all_rr_entry",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phpos_refractory"
+      ]
+    },
+    {
+      "id": "l_all_phneg_to_aya",
+      "from": "n_all_phneg_age_fitness",
+      "to": "n_all_phneg_aya_regimens",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phneg_aya"
+      ]
+    },
+    {
+      "id": "l_all_phneg_to_adult",
+      "from": "n_all_phneg_age_fitness",
+      "to": "n_all_phneg_adult_regimens",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phneg_adult"
+      ]
+    },
+    {
+      "id": "l_all_phneg_to_older",
+      "from": "n_all_phneg_age_fitness",
+      "to": "n_all_phneg_older_regimens",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phneg_older"
+      ]
+    },
+    {
+      "id": "l_all_phneg_aya_to_resp",
+      "from": "n_all_phneg_aya_regimens",
+      "to": "n_all_phneg_response",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_all_phneg_adult_to_resp",
+      "from": "n_all_phneg_adult_regimens",
+      "to": "n_all_phneg_response",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_all_phneg_older_to_resp",
+      "from": "n_all_phneg_older_regimens",
+      "to": "n_all_phneg_response",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_all_phneg_to_mrd_neg",
+      "from": "n_all_phneg_response",
+      "to": "n_all_phneg_tx_mrd_neg",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phneg_mrd_neg"
+      ]
+    },
+    {
+      "id": "l_all_phneg_to_mrd_pos",
+      "from": "n_all_phneg_response",
+      "to": "n_all_phneg_tx_mrd_pos",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phneg_mrd_pos"
+      ]
+    },
+    {
+      "id": "l_all_phneg_to_rr",
+      "from": "n_all_phneg_response",
+      "to": "n_all_rr_entry",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phneg_refractory"
+      ]
+    },
+    {
+      "id": "l_all_t_setting_to_ind_aya",
+      "from": "n_all_t_setting",
+      "to": "n_all_t_induction",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "t_aya"
+      ]
+    },
+    {
+      "id": "l_all_t_setting_to_ind_adult",
+      "from": "n_all_t_setting",
+      "to": "n_all_t_induction",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "t_adult"
+      ]
+    },
+    {
+      "id": "l_all_t_setting_to_ind_older",
+      "from": "n_all_t_setting",
+      "to": "n_all_t_induction",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "t_older"
+      ]
+    },
+    {
+      "id": "l_all_t_ind_to_resp",
+      "from": "n_all_t_induction",
+      "to": "n_all_t_response",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_all_t_to_mrd_neg",
+      "from": "n_all_t_response",
+      "to": "n_all_t_tx_mrd_neg",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "t_mrd_neg"
+      ]
+    },
+    {
+      "id": "l_all_t_to_mrd_pos",
+      "from": "n_all_t_response",
+      "to": "n_all_t_tx_mrd_pos",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "t_mrd_pos"
+      ]
+    },
+    {
+      "id": "l_all_t_to_rr",
+      "from": "n_all_t_response",
+      "to": "n_all_rr_entry",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "t_refractory"
+      ]
+    },
+    {
+      "id": "l_all_rr_to_phpos",
+      "from": "n_all_rr_entry",
+      "to": "n_all_rr_phpos_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "rr_phpos"
+      ]
+    },
+    {
+      "id": "l_all_rr_to_phneg",
+      "from": "n_all_rr_entry",
+      "to": "n_all_rr_phneg_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "rr_phneg"
+      ]
+    },
+    {
+      "id": "l_all_rr_to_tcell",
+      "from": "n_all_rr_entry",
+      "to": "n_all_rr_tcell_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "rr_tcell"
+      ]
+    }
+  ]
+}

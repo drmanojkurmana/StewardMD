@@ -105,3 +105,37 @@ test("index lists gap-only sites with status 'gap' (a real, visible content gap,
   const scaffoldSites = index.sites.filter((s) => s.status === "scaffold");
   assert.ok(scaffoldSites.length >= 2, "expected the seeded staging sites");
 });
+
+test("BCLC 2022 HCC staging scaffold resolves with Stages 0, A, B, C, D and passes fabrication audit", () => {
+  const bclc = readJson("bclc_hcc.json");
+  const res = ENG.resolve(bclc, "BCLC 2022 update");
+  assert.equal(res.status, "seeded");
+  const v = res.version;
+  assert.ok(v.stageGroups.length >= 5);
+  const stages = v.stageGroups.map((g) => g.stage);
+  assert.ok(stages.some((s) => /0/.test(s)), "must include BCLC Stage 0");
+  assert.ok(stages.some((s) => /A/.test(s)), "must include BCLC Stage A");
+  assert.ok(stages.some((s) => /B/.test(s)), "must include BCLC Stage B");
+  assert.ok(stages.some((s) => /C/.test(s)), "must include BCLC Stage C");
+  assert.ok(stages.some((s) => /D/.test(s)), "must include BCLC Stage D");
+  // verify treatment allocation in basis
+  const c = v.stageGroups.find((g) => /C/.test(g.stage));
+  assert.match(c.basis, /Atezolizumab|Bevacizumab|Durvalumab|Tremelimumab/i);
+  assert.ok(ENG.auditFabricationSafe(bclc).ok);
+});
+
+test("superior disease-specific clinical staging scaffolds pass fabrication auditor", () => {
+  const files = [
+    "bclc_hcc.json", "myeloma_riss.json", "lymphoma_lugano.json",
+    "cll_rai_binet.json", "cervix_figo.json", "endometrium_figo.json",
+    "prostate_nccn.json", "gist_afip.json", "mds_ipssr.json"
+  ];
+  files.forEach((f) => {
+    const data = readJson(f);
+    assert.ok(data.versions.length >= 2, f + " must have >=2 versions");
+    assert.ok(data.versions.some((v) => v.seeded), f + " must have a seeded version");
+    const audit = ENG.auditFabricationSafe(data);
+    assert.ok(audit.ok, f + " failed audit: " + JSON.stringify(audit.problems));
+  });
+});
+

@@ -72,7 +72,7 @@ test("tpa: channel, warnings, settlement, resubmissions, estimates and the expli
   const html = tpa(W, {
     payers: [{ id: "nhcx", name: "NHCX Test", adapter: "fhir-claim", endpointConfigured: true }],
     claims: [
-      { id: "c1", state: "submitted", payerId: "nokey", codes: [{ code: "E11.9" }], adapter: { state: "not_configured", note: "not_configured: credentials missing." }, submissions: [{}, { resubmission: true, reason: "missing discharge summary" }] },
+      { id: "c1", state: "submitted", payerId: "nokey", parties: { selfPay: false, payer: { ref: "nokey", name: null, found: false }, insurer: null, tpa: null, gstRecipient: { party: "patient", determined: false, source: "not_determined", warning: "payer_not_found" } }, codes: [{ code: "E11.9" }], adapter: { state: "not_configured", note: "not_configured: credentials missing." }, submissions: [{}, { resubmission: true, reason: "missing discharge summary" }] },
       { id: "c2", state: "paid", payerId: "nhcx", payerReference: "CR-1", codes: [{ code: "I10" }], settlement: { paidAmount: 11000, approvedAmount: 12000, shortPaidAmount: 1000, shortPaymentReason: "co-pay", disallowances: [{ reason: "consumables", amount: 3000 }], outstandingAmount: 4000, balanceWith: "unassigned" } },
     ],
     preAuthorisations: [{ state: "requested", treatment: "PTCA", payerId: "nhcx", adapter: { state: "acknowledged" } }],
@@ -80,7 +80,7 @@ test("tpa: channel, warnings, settlement, resubmissions, estimates and the expli
     payerWarnings: { c1: ["Payer \"nokey\" is not configured; its rules cannot be checked."] },
   });
   assert.match(html, /not configured, nothing sent - not_configured: credentials missing/);
-  assert.match(html, /nokey \(not configured\)/);
+  assert.match(html, /Payer: <b>nokey<\/b> \(not in the payer list\)/, "gst-parties: the claim names its parties");
   assert.match(html, /resubmitted 1 time: missing discharge summary/);
   assert.match(html, /Payer &quot;nokey&quot; is not configured/);
   assert.match(html, /paid 11000 of 12000 approved &middot; short 1000: co-pay &middot; disallowed: consumables \(3000\) &middot; outstanding 4000 &middot; balance with unassigned/);
@@ -91,4 +91,41 @@ test("tpa: channel, warnings, settlement, resubmissions, estimates and the expli
   assert.match(html, /Not priced, not in the total: XRAY/);
   assert.match(html, /data-w-act="estimate"/);
   assert.ok(!/claimbalance:c1/.test(html), "no balance action before settlement");
+});
+
+test("tpa NHCX (gap-claims-gst A): not connected offers nothing to send; connected shows eligibility answers, exchange status and Check status; unread is not none", () => {
+  const W = loadWard();
+  const off = tpa(W, { claims: [], preAuthorisations: [], estimates: [], eligibilityChecks: [], payers: [{ id: "icici", name: "ICICI", adapter: "nhcx", nhcxConnected: false }] });
+  assert.match(off, /Not connected to NHCX. Nothing is sent through NHCX/);
+  assert.ok(!/data-w-act="nhcxelig"/.test(off), "no send button when not connected");
+  assert.match(off, /ICICI &middot; nhcx \(not connected\)/);
+
+  const payers = [{ id: "icici", name: "ICICI", adapter: "nhcx", nhcxConnected: true }];
+  const on = tpa(W, {
+    payers, estimates: [],
+    eligibilityChecks: [
+      { id: "e1", state: "answered", payerId: "icici", at: "2026-09-16T10:00:00Z", adapter: { state: "acknowledged", exchange: { correlationId: "k1" } }, response: { outcome: "complete", inforce: true, disposition: "Policy in force", benefits: [{ type: "Sum insured", allowed: 500000 }], errors: [] } },
+      { id: "e2", state: "sent", payerId: "icici", at: "2026-09-16T11:00:00Z", adapter: { state: "sent", exchange: { correlationId: "k2" }, note: "Accepted by the NHCX gateway" }, response: null },
+    ],
+    claims: [
+      { id: "c1", state: "submitted", payerId: "icici", codes: [{ code: "I10" }], adapter: { state: "sent", exchange: { correlationId: "k3" } }, statusChecks: [{ at: "2026-09-16T12:00:00Z", state: "sent" }] },
+      { id: "c2", state: "coded", payerId: "icici", codes: [{ code: "I10" }] },
+    ],
+    preAuthorisations: [{ id: "pa1", state: "approved", treatment: "PTCA", payerId: "icici", authorizedAmount: 45000, adapter: { state: "acknowledged", outcome: "complete", exchange: { correlationId: "k4" } } }],
+  });
+  assert.match(on, /data-w-act="nhcxelig"/);
+  assert.match(on, /Policy in force &middot; complete &middot; Policy in force/);
+  assert.match(on, /Sum insured 500000/);
+  assert.match(on, /sent, no answer yet/);
+  assert.match(on, /NHCX: sent to the gateway, no answer yet &middot; status asked/);
+  assert.match(on, /data-w-act="hcxstatus:claim:c1"/);
+  assert.match(on, /NHCX: not sent through NHCX/);
+  assert.ok(!/hcxstatus:claim:c2/.test(on), "nothing to ask about a claim never sent");
+  assert.match(on, /NHCX: answered by the payer \(complete\)/);
+  assert.match(on, /data-w-act="hcxstatus:preauth:pa1"/);
+  assert.match(on, /data-w-act="hcxstatus:eligibility:e2"/);
+  assert.match(on, /id="wTpaAuthCodes"/);
+
+  const unread = tpa(W, { payers, claims: [], preAuthorisations: [], estimates: [], eligibilityChecks: null });
+  assert.match(unread, /Eligibility checks could not be read. This is not the same as there being none/);
 });

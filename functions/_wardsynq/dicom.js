@@ -48,11 +48,12 @@
  */
 
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { zoneOffsetAt } from "./mar-schedule.js";
 import { reportIdFor as radiologyReportIdFor } from "./radiology-report.js";
 import { effectiveCategory } from "./investigation-catalogue.js";
+import { OPEN_ORDER_STATUSES } from "./ward-order.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -178,8 +179,18 @@ async function imagingWorklist(request, env, ctx) {
   try {
     orders = str(ctx.patientId)
       ? await svc.byPatient("ServiceRequest", str(ctx.patientId))
-      : await svc.list("ServiceRequest", 500);
-  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), worklist: [] }; }
+      /* R5-2: THE OPEN ORDERS, not every order this hospital has ever placed (service.listByStatus,
+       * filtered in SQL). Reading the whole type grew with history - tens of thousands of parsed
+       * records in one Worker within weeks on a busy hospital, and a 500 rather than a message. A
+       * radiology report now closes the order it answers (radiology-report.js), so what comes back
+       * here is bounded by the studies still to be done. Past OPEN_CENSUS_MAX it refuses out loud
+       * (503) - on this read that means unreported studies piling up, which has to be seen.
+       * ponytail: the per-page group-by inside the store is unchanged (audit O20). */
+      : await svc.listByStatus("ServiceRequest", OPEN_ORDER_STATUSES);
+  } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: e.code, detail: str(e.message), worklist: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), worklist: [] };
+  }
 
   /* LT-27: A REPORTED STUDY IS NOT STILL TO BE DONE. reportImaging() never changes the order's status, so a study
    * with a final report stayed on the worklist with File Report beside it and could be reported twice. A final or
@@ -196,6 +207,7 @@ async function imagingWorklist(request, env, ctx) {
   const patients = new Map();
   const worklist = [];
   const unmapped = [];
+  const pcpndt = [];
   for (const o of pending) {
     let p = patients.get(o.patientId);
     if (p === undefined) {
@@ -208,9 +220,12 @@ async function imagingWorklist(request, env, ctx) {
     const modality = map[str(o.code).toLowerCase()] || map[str(o.display).toLowerCase()] || null;
     if (!modality) unmapped.push({ order: o.id, reason: `no modality is mapped for "${str(o.code)}"; the item is on the worklist without one` });
     worklist.push(worklistItem(o, p, modality, ctx.clock || null));
+    /* PCPNDT (legal review B.4.1, B.4.3): an obstetric ultrasound still to be done whose Form F is missing or incomplete is
+     * flagged beside the worklist, never inside the DICOM item a modality parses. The route hands in the check. */
+    if (typeof ctx.pcpndtFlag === "function") { const flag = await ctx.pcpndtFlag(o, modality); if (flag) pcpndt.push({ orderId: o.id, ...flag }); }
   }
 
-  return { ...base, ok: true, worklist, count: worklist.length, unmapped, reportedExcluded: reported.size,
+  return { ...base, ok: true, worklist, count: worklist.length, unmapped, reportedExcluded: reported.size, ...(typeof ctx.pcpndtFlag === "function" ? { pcpndt } : {}),
     ...(warnings.length ? { warnings } : {}),
     ...(rejected.length ? { configWarnings: [`these modalityMap entries name a modality DICOM does not define and were ignored: ${rejected.join(", ")}`] } : {}) };
 }

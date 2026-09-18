@@ -38,6 +38,9 @@
  * without usable entries) stays withheld whole, and while any entry is only a possibility such a
  * diagnosis section does.
  *
+ * EDUCATION LEAFLETS ("education"). The approved leaflet copies a clinician gave on a stay (patient-education.js). Only
+ * the copy made at the time, from an approved version, is shown; a leaflet taken back is not.
+ *
  * A PATIENT MAY WITHDRAW ONLY DATA-USE CONSENTS HERE. Sharing, registry, research and photography are
  * choices about the record, and withdrawing one online harms nobody. Consent to treatment, to a
  * procedure or to blood products is withdrawn by talking to the team who will act on it; a portal
@@ -53,12 +56,14 @@ import { TYPE as DOC_TYPE, docKey, decryptBytes } from "./documents.js";
 import { sha256Hex } from "./object-store.js";
 import { patientIdForTicket } from "./opd-identity.js";
 import { orderQueue, isQueued } from "../_queue_eta.js";
+import { GIVEN as EDUCATION_TYPE, portalLeaflets } from "./patient-education.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const RELEASE_TYPE = "PatientRecordRelease";
 
 /** Everything the portal can show. A patient's own grant sees all of it; a proxy sees what it names. */
-const SECTIONS = Object.freeze(["status", "appointments", "medicines", "results", "diagnoses", "discharge", "discharge-full", "documents", "bills", "consents", "messages"]);
+/* "forms": the hospital's pre-admission forms for a planned admission (form-response.js portalIntake). */
+const SECTIONS = Object.freeze(["status", "appointments", "medicines", "results", "diagnoses", "discharge", "discharge-full", "documents", "bills", "consents", "messages", "education", "forms"]);
 /** How a discharge summary was released. Absent means patient copy: every release before P2 was one. */
 const DISCHARGE_SCOPES = Object.freeze(["patient-copy", "full"]);
 /** The signed summary's sections, in reading order. `provenance` is a note to the signing clinician. */
@@ -71,7 +76,7 @@ const WITHHELD_SAY = "Withheld until your care team discusses it with you.";
 const STRUCTURED = Object.freeze(["diagnoses", "investigations"]);
 const ITEM_WITHHELD_SAY = "One entry is withheld here until your care team discusses it with you. Please ask your care team.";
 /** Consents a patient may withdraw from the portal. Data use only - see the header. */
-const PATIENT_WITHDRAWABLE = Object.freeze(["share-external", "share-registry", "research", "photography"]);
+const PATIENT_WITHDRAWABLE = Object.freeze(["share-external", "share-registry", "research", "photography", "marketing"]);
 /** Who may agree to a proxy. The patient, or the person legally deciding for them. Never the proxy. */
 const PROXY_CONSENT_FROM = Object.freeze(["patient", "legal-guardian", "power-of-attorney"]);
 const PROXY_CONSENT_METHOD = Object.freeze(["in-person-verbal", "in-person-written"]);
@@ -109,7 +114,7 @@ function portalReader(grant) { return readerActor(readerId(grant)); }
 function readerActor(id) {
   return makeActor({
     id, kind: KIND.HUMAN, tier: TIER.READ,
-    scope: { read: ["Patient", "ClinicalNote", RELEASE_TYPE, "Invoice", CONSENT_TYPE, DOC_TYPE], write: [] },
+    scope: { read: ["Patient", "ClinicalNote", RELEASE_TYPE, "Invoice", CONSENT_TYPE, DOC_TYPE, EDUCATION_TYPE], write: [] },
   });
 }
 
@@ -287,6 +292,10 @@ async function portalExtras(ctx, grant, facts) {
   if (sections.includes("bills")) {
     const rows = await read("Invoice");
     if (rows === null) out.failed.push("bills"); else out.bills = billView(rows);
+  }
+  if (sections.includes("education")) {
+    const rows = await read(EDUCATION_TYPE);
+    if (rows === null) out.failed.push("education"); else out.education = portalLeaflets(rows);
   }
   if (sections.includes("consents")) {
     const rows = await read(CONSENT_TYPE);

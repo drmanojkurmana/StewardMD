@@ -14,7 +14,8 @@
   "caps": "protocol",
   "source": {
     "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
-    "primaryStudy": "NATALEE: Slamon D, Lipatov O, Nowecki Z, et al. N Engl J Med 2024;390:1080-1091"
+    "primaryStudy": "NATALEE: Slamon D, Lipatov O, Nowecki Z, et al. N Engl J Med 2024;390:1080-1091",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
   },
   "institution": {
     "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-K, BINV-M)",
@@ -23,7 +24,7 @@
   "biomarkers": {
     "HR": "positive",
     "HER2": "negative",
-    "note": "Requires HR-positive and HER2-negative stage II or III early breast cancer meeting NATALEE criteria: any positive lymph nodes (excluding micrometastases alone); or if node-negative, tumor size >5 cm, or tumor size 2-5 cm with either grade 2 (and high genomic risk or Ki-67 ≥20%) or grade 3. Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-K (3 of 4) and BINV-M (5 of 10) (Category 1, Preferred)."
+    "note": "Requires HR-positive and HER2-negative stage II or III early breast cancer meeting NATALEE criteria: any positive lymph nodes (excluding micrometastases alone); or if node-negative, tumor size >5 cm, or tumor size 2-5 cm with either grade 2 (and high genomic risk or Ki-67 \u226520%) or grade 3. Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-K (3 of 4) and BINV-M (5 of 10) (Category 1, Preferred)."
   },
   "stage": [
     "II",
@@ -47,8 +48,8 @@
   ],
   "clearanceChecks": [
     "ECG / QTcF (< 450 ms before start)",
-    "CBC / absolute neutrophil count (ANC ≥ 1000/mcL, platelets ≥ 50,000/mcL)",
-    "liver function tests (transaminases ≤ 3x ULN, bilirubin ≤ ULN)",
+    "CBC / absolute neutrophil count (ANC \u2265 1000/mcL, platelets \u2265 50,000/mcL)",
+    "liver function tests (transaminases \u2264 3x ULN, bilirubin \u2264 ULN)",
     "prior-cycle status"
   ],
   "doseModificationRules": [
@@ -62,13 +63,13 @@
       "condition": "grade 3 neutropenia (ANC 500-1000/mcL)",
       "drug": "ribociclib",
       "action": "hold",
-      "text": "Hold ribociclib until resolution to grade ≤ 2 (ANC ≥ 1000/mcL). Resume at the same 400 mg dose for first occurrence. For recurrent grade 3 or any grade 4, resume at reduced dose (200 mg daily)."
+      "text": "Hold ribociclib until resolution to grade \u2264 2 (ANC \u2265 1000/mcL). Resume at the same 400 mg dose for first occurrence. For recurrent grade 3 or any grade 4, resume at reduced dose (200 mg daily)."
     },
     {
       "condition": "grade 3 ALT/AST elevation (>5x to 20x ULN)",
       "drug": "ribociclib",
       "action": "hold/reduce",
-      "text": "Hold ribociclib until recovery to baseline or grade ≤ 1. Resume with dose reduction (200 mg daily). If grade 4 transaminitis (>20x ULN), permanently discontinue."
+      "text": "Hold ribociclib until recovery to baseline or grade \u2264 1. Resume with dose reduction (200 mg daily). If grade 4 transaminitis (>20x ULN), permanently discontinue."
     }
   ],
   "drugs": [
@@ -91,7 +92,27 @@
         "perDose": null
       },
       "days": [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
       ],
       "modificationRules": []
     }

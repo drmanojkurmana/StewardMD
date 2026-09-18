@@ -31,7 +31,11 @@
 (function () {
   "use strict";
 
-  var AGENT_BASE = "/api/connect/agent";
+  /* Absolute on native, like every other API caller (home.js, native-ota.js): the iOS WebView is served
+   * from capacitor://localhost, where a relative /api path resolves to nothing and every call came
+   * back "Could not load your connections" (iPhone 15 Pro, 2026-09-14). Android's https://localhost
+   * happened to tolerate the relative form; the web app has SMD_API_BASE empty and is unchanged. */
+  var AGENT_BASE = (window.SMD_API_BASE || "") + "/api/connect/agent";
   var POLL_MS = 1500;
 
   function esc(s) {
@@ -173,7 +177,32 @@
       "@media (prefers-reduced-transparency: reduce){.smd-connect-bar{background:var(--panel,#fff);backdrop-filter:none;-webkit-backdrop-filter:none}.smd-connect-ov{background:rgba(7,17,25,.72)}}",
       "body.dark .smd-connect-ov{background:rgba(0,0,0,.65)}",
       "body.dark .smd-connect-bar{background:rgba(19,32,48,.72)}",
-      "body.dark .smd-connect-hosp{background:var(--panel)}"
+      "body.dark .smd-connect-hosp{background:var(--panel)}",
+      /* THE AGENT CONSOLE. While the agent reads, the hospital takes the top of the screen and this
+       * takes the bottom: what it is doing now, what it has found, and controls that actually reach
+       * the engine. Every control is a real signal, never decoration. */
+      ".smd-agent{display:flex;flex-direction:column;gap:0.625rem}",
+      ".smd-agent-now{display:flex;align-items:flex-start;gap:0.5rem}",
+      ".smd-agent-dot{flex:none;width:0.5rem;height:0.5rem;margin-top:0.375rem;border-radius:999px;background:#0E7C66;animation:smd-agent-pulse 1.6s ease-in-out infinite}",
+      ".smd-agent-dot.stalled{background:var(--amber,#b26a00);animation:none}",
+      "@keyframes smd-agent-pulse{0%,100%{opacity:1}50%{opacity:.35}}",
+      "@media (prefers-reduced-motion: reduce){.smd-agent-dot{animation:none}}",
+      ".smd-agent-act{flex:1;min-width:0;font-weight:600;color:var(--ink,#14202b);line-height:1.45}",
+      ".smd-agent-sub{font-size:0.75rem;color:var(--muted-ink,#5b6b7a);margin-top:0.125rem;font-weight:400}",
+      ".smd-agent-chips{display:flex;flex-wrap:wrap;gap:0.375rem}",
+      ".smd-agent-chip{display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;border:1px solid var(--line,#d7dee3);color:var(--muted-ink,#5b6b7a);background:var(--panel,#fff)}",
+      ".smd-agent-chip.done{color:#0b5f52;border-color:rgba(14,124,102,.35);background:rgba(14,124,102,.08)}",
+      ".smd-agent-chip svg{flex:none;width:0.75rem;height:0.75rem}",
+      /* The control bar pins to the bottom of the sheet: the agent can be stopped at any moment without
+       * scrolling, and the status and the game scroll underneath it. */
+      ".smd-agent-bar{position:sticky;bottom:0;z-index:3;background:var(--panel,#fff);border-top:1px solid var(--line,#d7dee3);padding:0.625rem 0 calc(0.625rem + env(safe-area-inset-bottom,0px));margin-top:0.5rem;display:flex;flex-direction:column;gap:0.5rem}",
+      "body.dark .smd-agent-bar{background:var(--panel,#131f2f)}",
+      ".smd-agent-acts{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}",
+      ".smd-agent-acts .smd-connect-btn{width:100%}",
+      ".smd-agent-stop{grid-column:1/-1}",
+      ".smd-agent-confirm{border:1px solid var(--red-line,#efa9b1);background:rgba(171,28,44,.06);border-radius:0.625rem;padding:0.625rem;display:flex;flex-direction:column;gap:0.5rem}",
+      ".smd-agent-confirm p{margin:0;font-size:0.8125rem;color:var(--ink,#14202b)}",
+      "body.dark .smd-agent-chip{background:transparent}"
     ].join("");
     (document.head || document.documentElement).appendChild(st);
   }
@@ -436,6 +465,7 @@
   }
 
   function close(fromAnim) {
+    if (!fromAnim) forgetRun();   // the doctor closed the sheet on purpose: nothing to resume
     var ov = overlay();
     if (!ov) { S = null; return; }
     if (!fromAnim && S && !reducedMotion() && sheet()) {
@@ -490,6 +520,45 @@
     if (S) show(S.screen);
   }
 
+  /* THE FIRST RE-ARM LANDS TOO EARLY. The native plugin announces "navigated" from didCommit, while the
+   * new document is still being built, so WebKit rejects that evaluate; the error was swallowed and
+   * nothing tried again, leaving the guide unarmed for the rest of the ask. The doctor's tap then never
+   * turned green and Done captured nothing (owner's iPhone, live GHIS radiology page, 2026-09-18).
+   * GUIDE_ARM is idempotent (it removes any previous handler first), so it is simply fired again a
+   * couple of times as the page settles; each attempt stops if the ask it belongs to is already over. */
+  /* A HEARTBEAT, NOT AN EVENT. Re-arming only when the native browser announced a navigation was not
+   * enough: on the live GHIS radiology page the guide was still unarmed ten seconds after a full page
+   * load, so the doctor's tap turned nothing green and Done captured nothing (owner's iPhone, v90,
+   * 2026-09-18). A missed event, a document replaced after the arm, or an ask re-issued under a new
+   * identity all had the same effect. While a question is on screen the arm is simply re-applied every
+   * GUIDE_ARM_EVERY_MS; it is idempotent (it removes any previous handler first) and one small evaluate
+   * every couple of seconds costs nothing next to a doctor losing the step. */
+  var GUIDE_ARM_EVERY_MS = 2000;
+  function armGuideOnce(full) {
+    if (!S || !S.guide || !S.engine || !S.engine.GUIDE_ARM) return;
+    var c = S.pluginClient || getPlugin();
+    if (!c || !c.evaluate) return;
+    /* Only the first arm of a question runs the observer: it sets the mark that decides which requests
+     * count as this step's answer, and re-running it would discard everything the doctor already did. */
+    var expression = full ? S.engine.GUIDE_ARM : (S.engine.GUIDE_ARM_TAP || S.engine.GUIDE_ARM);
+    try {
+      var p = c.evaluate({ expression: expression });
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) { /* between documents; the next beat covers it */ }
+  }
+  function startGuideHeartbeat() {
+    stopGuideHeartbeat();
+    armGuideOnce(true);
+    S.guideBeat = setInterval(function () {
+      if (!S || !S.guide) { stopGuideHeartbeat(); return; }
+      armGuideOnce();
+    }, GUIDE_ARM_EVERY_MS);
+  }
+  function stopGuideHeartbeat() {
+    if (S && S.guideBeat) { try { clearInterval(S.guideBeat); } catch (e) {} S.guideBeat = null; }
+  }
+  function armGuideWithRetries() { startGuideHeartbeat(); }
+
   /* ---- Plugin event wiring (phone runner) ---- */
   function bindPluginListeners(plugin) {
     removePluginListeners();
@@ -501,22 +570,28 @@
     on("navigated", function (e) {
       var o = e && e.url ? originOf(e.url) : null;
       if (o && S && S.visitedOrigins.indexOf(o) < 0) S.visitedOrigins.push(o);
+      /* RE-ARM THE GUIDE AFTER NAVIGATION. index.mjs's GUIDE_ARM (CRAWL_ARM_OBSERVER + CRAWL_ARM_GUIDE)
+       * is evaluated once per ask and dies with the document, so the doctor's own navigation during a
+       * guided ask (S.guide: an ask is on screen) silently drops tap-to-point and the green outline.
+       * Best-effort: errors are swallowed, never surfaced to the doctor. */
+      if (S && S.guide && S.engine && S.engine.GUIDE_ARM) armGuideWithRetries();
     });
     on("loggedIn", function () {
       if (!S) return;
       /* Guided step: the agent asked the doctor to show it a screen; Done resolves that ask. */
-      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; r({ done: true }); paintProgress(); return; }
+      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r({ done: true }); paintProgress(); return; }
       if (S.loginHandled) return;
       S.loginHandled = true;
+      stopPhoneSignInPoll();
       doHandoff();
     });
     on("guideSkip", function () {
       /* "Not in my EMR" in the browser header: the ask is answered, the resource is recorded missing. */
-      if (S && S.guideResolve) { var r3 = S.guideResolve; S.guideResolve = null; S.guide = null; r3({ done: false, missing: true }); paintProgress(); }
+      if (S && S.guideResolve) { var r3 = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r3({ done: false, missing: true }); paintProgress(); }
     });
     on("stopped", function () {
       if (S) S.stopRequested = true;
-      if (S && S.guideResolve) { var r2 = S.guideResolve; S.guideResolve = null; S.guide = null; r2({ done: false }); }
+      if (S && S.guideResolve) { var r2 = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r2({ done: false }); }
       if (S && S.screen === "progress") stopDiscovery();
     });
   }
@@ -578,10 +653,23 @@
   function storeTenant(id) { try { if (id) localStorage.setItem(TENANT_KEY, id); else localStorage.removeItem(TENANT_KEY); } catch (e) {} }
   /* Which hospital? An account that belongs to several tenants (an owner, a super-admin) must say
    * which one it is connecting; the server refuses to guess. One tenant: nothing to ask. */
-  function pickTenantThenLoad() {
+  function pickTenantThenLoad(attempt) {
     api("/tenants", {}).then(function (r) {
       if (!overlay() || !S) return;
-      var list = (r.s === 200 && r.d && r.d.tenants) || [];
+      /* A FAILED ASK IS NOT AN ANSWER. On a cold start the sign-in token is often not ready for the
+       * first call, and treating "could not ask" as "one hospital" meant the next call went out with
+       * no hospital named. The server refuses that (400, tenantId required), the doctor was told to
+       * check their connection, and nothing ever retried: the console sat on that error with no way
+       * forward. Seen on an iPhone after a reinstall cleared the stored choice, 2026-09-15. */
+      if (r.s !== 200 || !r.d || !r.d.tenants) {
+        var n = (attempt || 0) + 1;
+        if (n <= 3) { setTimeout(function () { pickTenantThenLoad(n); }, n * 1200); return; }
+        S.connLoading = false;
+        S.connError = true;
+        if (S.screen === "connections") renderConnections();
+        return;
+      }
+      var list = r.d.tenants || [];
       if (list.length > 1) {
         S.tenants = list;
         var known = list.some(function (t) { return t.tenantId === S.tenant; });
@@ -619,6 +707,20 @@
         S.connections = Array.isArray(r.d) ? r.d : (r.d.connections || []);
       } else {
         S.connections = [];
+        /* "WHICH HOSPITAL?" IS A QUESTION, NOT A FAILURE. An account on more than one tenant gets a
+         * 400 here, and showing "check your connection" for it sent the doctor to look at their
+         * wifi over a question the app could simply ask. Fetch the list and show the picker. */
+        var detail = (r.d && (r.d.detail || r.d.error)) || "";
+        if (r.s === 400 && /tenant/i.test(String(detail)) && !S.tenants) {
+          api("/tenants", {}).then(function (t) {
+            if (!overlay() || !S) return;
+            var list = (t.s === 200 && t.d && t.d.tenants) || [];
+            if (list.length) { S.tenants = list; S.tenant = ""; storeTenant(""); S.connError = false; }
+            else S.connError = true;
+            if (S.screen === "connections") renderConnections();
+          });
+          return;
+        }
         S.connError = true;
       }
       if (S.screen === "connections") renderConnections();
@@ -824,10 +926,17 @@
       '<p class="smd-connect-lead">Sign in yourself inside the hospital website that just opened. StewardMD never asks for or stores your password.</p>' +
       stepsPrimer() +
       '<div class="smd-connect-note">Keep your phone unlocked and StewardMD open until the connection finishes. The screen stays awake while the hospital website is open.</div>' +
+      // The agent notices sign-in on its own (below). This is the sure way if the doctor wants to move
+      // on the instant they are in: it is handled inside the app, so it never depends on the hospital
+      // browser handing anything back.
+      '<button id="smd-connect-signedin" class="smd-connect-btn primary" type="button" style="width:100%">I have signed in, continue</button>' +
       '<div class="smd-connect-row"><button id="smd-connect-retryopen" class="smd-connect-btn" type="button">Try again</button>' +
       '<button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
-    setStatus("", S.statusText || "Opening the hospital website.");
+    setStatus("", S.statusText || "Opening the hospital website. Sign in, and the agent will notice on its own.");
     b.querySelector("#smd-connect-cancel").onclick = cancelSession;
+    b.querySelector("#smd-connect-signedin").onclick = function () {
+      if (S && !S.loginHandled) { S.loginHandled = true; stopPhoneSignInPoll(); doHandoff(); }
+    };
     /* SELF-REPAIR: reopening the hospital website is safe to repeat (openLoginPlugin
      * guards double-open), so a failed first open is one tap to retry, not a restart. */
     b.querySelector("#smd-connect-retryopen").onclick = function () {
@@ -861,6 +970,59 @@
     }).catch(function () {
       if (overlay() && S) setStatus("bad", "Could not open the hospital website. Try again.");
     });
+    startPhoneSignInPoll();
+  }
+
+  /* SIGN-IN DETECTION THE APP DRIVES ITSELF.
+   *
+   * The native browser CAN tell the app it is signed in, but that message has to reach a WebView iOS
+   * has throttled to near-nothing while it sits behind the full-screen hospital page, and on the
+   * owner's iPhone it did not arrive: the doctor signed in and the app never moved (2026-09-15). So
+   * the app stops waiting to be told. It ASKS: every couple of seconds it runs one tiny check inside
+   * the hospital page (is there still a visible password box?), which the app itself initiates, so it
+   * works whenever the app gets a slice, however small. A page that once showed a password box and now
+   * shows none, for two checks running, is a completed sign-in. The password value is never read; only
+   * whether a password field is on screen. */
+  var signInPollHandle = null;
+  function startPhoneSignInPoll() {
+    stopPhoneSignInPoll();
+    if (!S) return;
+    S.signInSawPw = false;
+    S.signInGoneTicks = 0;
+    var PW = "(function(){try{if(document.readyState!=='complete')return 'loading';var a=document.querySelectorAll('input[type=\"password\"]');for(var i=0;i<a.length;i++){var e=a[i],r=e.getBoundingClientRect();if(r.width>0&&r.height>0&&e.offsetParent)return 'pw'}return 'none'}catch(e){return 'err'}})()";
+    /* THE HANDLE, NOT THE SLOT. This used to live on S, and stopPhoneSignInPoll cleared whatever S
+     * happened to hold when it ran: a session replaced without cancelSession left the old interval
+     * running forever and the stop call killed the NEW session's poll instead. */
+    var handle = setInterval(function () {
+      if (!S || S.screen !== "login" || S.loginHandled) { clearInterval(handle); if (signInPollHandle === handle) signInPollHandle = null; return; }
+      var plugin = getPlugin();
+      if (!plugin || !plugin.evaluate) return;
+      Promise.resolve(plugin.evaluate({ expression: PW })).then(function (res) {
+        if (!S || S.screen !== "login" || S.loginHandled) return;
+        var flag = res && (res.result != null ? res.result : res);
+        flag = String(flag == null ? "" : flag);
+        if (flag === "pw") { S.signInSawPw = true; S.signInGoneTicks = 0; return; }
+        if (flag !== "none") { S.signInGoneTicks = 0; return; }   // loading / error: no verdict
+        /* MOVING IS NOT SIGNING IN. A password box that was SEEN and is now gone is a completed sign
+         * in; a page that merely moved is not. On a single-sign-on hospital the doctor signs in at one
+         * host and lands on a module chooser at another, with no password box and no EMR yet, so
+         * "moved" fired the handoff while the doctor was still choosing (GIMSR is exactly that shape:
+         * gimsrlogin.gitam.edu, a chooser, then ghis.gitam.edu). connect-agent/phone/index.mjs records
+         * the same false positive ("NOT ON THE EMR YET"). A doctor whose stored session skips the form
+         * entirely taps "I have signed in, continue" instead. */
+        if (!S.signInSawPw) { S.signInGoneTicks = 0; return; }
+        S.signInGoneTicks += 1;
+        if (S.signInGoneTicks >= 2 && !S.loginHandled) {
+          S.loginHandled = true;
+          stopPhoneSignInPoll();
+          doHandoff();
+        }
+      }).catch(function () { /* a throttled tick that could not read: try again next time */ });
+    }, 2000);
+    signInPollHandle = handle;
+  }
+  function stopPhoneSignInPoll() {
+    if (signInPollHandle) { clearInterval(signInPollHandle); signInPollHandle = null; }
   }
 
   function renderLoginFallback(b) {
@@ -955,11 +1117,21 @@
       } else {
         setStatus("bad", "Sign in was not detected yet. Finish signing in, then try again.");
         S.loginHandled = false;
+        /* The native sign-in watcher fires once per arming. Re-enter login mode after a moment so it
+         * is armed again and the next real sign-in is caught without the doctor hunting for Done. */
+        var p = getPlugin();
+        if (p && p.setMode) {
+          setTimeout(function () {
+            if (!S || S.screen !== "login" || S.loginHandled) return;
+            try { p.setMode({ mode: "login", origins: (S.deployment && S.deployment.origins) || [] }); } catch (e) {}
+          }, 4000);
+        }
       }
     });
   }
 
   function cancelSession() {
+    stopPhoneSignInPoll();
     removePluginListeners();
     var plugin = getPlugin();
     if (plugin && plugin.close) { try { plugin.close(); } catch (e) {} }
@@ -1026,7 +1198,30 @@
     };
   }
 
+  /* A RUN SURVIVES A RELOAD. The phone reloaded the StewardMD page under memory pressure while the
+   * doctor was on step 5 of 6; the hospital browser and its Done banner stayed, but the screen that
+   * listens for Done was gone, so Done did nothing and the whole run was lost (owner's iPhone,
+   * 2026-09-17). The open run is remembered here and picked up again on the next load. */
+  var RUN_KEY = "smd_connect_run";
+  function rememberRun() {
+    try { localStorage.setItem(RUN_KEY, JSON.stringify({ tenant: S.tenant, session: S.session, deployment: S.deployment, emrUrl: S.emrUrl, selected: S.selected, at: Date.now() })); } catch (e) {}
+  }
+  function forgetRun() { try { localStorage.removeItem(RUN_KEY); } catch (e) {} }
+  function resumeRun() {
+    var run = null;
+    try { run = JSON.parse(localStorage.getItem(RUN_KEY) || "null"); } catch (e) { run = null; }
+    if (!run || !run.session || !run.deployment || Date.now() - (run.at || 0) > 30 * 60 * 1000) { forgetRun(); return false; }
+    if (!hasPlugin()) return false;
+    open();
+    S.tenant = run.tenant || S.tenant; S.session = run.session; S.deployment = run.deployment; S.emrUrl = run.emrUrl || ""; S.selected = run.selected || null;
+    S.runner = "phone"; S.resumed = true;
+    show("progress");
+    setStatus("", "Resuming your connection where it stopped.");
+    beginAgentMode();
+    return true;
+  }
   function beginAgentMode() {
+    rememberRun();
     var plugin = getPlugin();
     if (plugin && plugin.setMode) {
       try { plugin.setMode({ mode: "agent", origins: S.deployment.origins, compact: wantsCompact() }); } catch (e) {}
@@ -1086,6 +1281,11 @@
     S.progressCounts = { pages: 0, requests: 0, phase: "DISCOVERING", opening: "", found: [], looking: [] };
     S.progressFailed = false;
     S.stopRequested = false;
+    S.finishRequested = false;
+    S.skipRequested = 0;
+    S.redoRequested = 0;
+    S.saveOffered = false;
+    S.lastProgressAt = Date.now();         // the clock the stall watchdog divides by
     S.guide = null;
     S.guideResolve = null;
     show("progress");
@@ -1107,12 +1307,20 @@
         brain: brainApi(),
         compact: wantsCompact(),
         stopSignal: function () { return !!(S && S.stopRequested); },
+        /* "Save what you have": the doctor's escape from a run that has gone quiet. Unlike Stop it
+         * keeps the session and everything learned; the engine breaks out and saves. */
+        finishSignal: function () { return !!(S && S.finishRequested); },
+        /* Counters, not booleans: the engine remembers the count it started a step with and abandons
+         * that step when the doctor bumps it, so one tap skips exactly one step. */
+        skipSignal: function () { return (S && S.skipRequested) || 0; },
+        redoSignal: function () { return (S && S.redoRequested) || 0; },
         /* The agent could not find something: hand the screen to the doctor (plugin guide mode) and
          * resolve when they tap Done in the browser header, or Skip here. */
         askDoctor: function (q) {
           return new Promise(function (resolve) {
             if (!S || S.screen !== "progress" || S.stopRequested) { resolve({ done: false }); return; }
             S.guide = { gap: q.gap, text: q.text, step: q.step || 0, total: q.total || 0 };
+            startGuideHeartbeat();
             S.guideResolve = resolve;
             S.bannerLine = null;
             paintProgress();
@@ -1124,6 +1332,7 @@
           // agent opened, events are requests it observed, opening is the control it is clicking now,
           // found / looking are the canonical views captured so far / still missing.
           var c = S.progressCounts;
+          S.lastProgressAt = Date.now();
           S.progressCounts = {
             pages: (p && p.steps != null) ? p.steps : (p && p.pages != null) ? p.pages : c.pages,
             requests: (p && p.events != null) ? p.events : (p && p.requests != null) ? p.requests : c.requests,
@@ -1232,6 +1441,21 @@
    * captured, the sentence from the view being opened, the time from this run's own elapsed clock. */
   var TARGET_VIEWS = 8;                     // worklist, patient, notes, labs, radiology, medications, discharge, history
   function isManual() { return !!(S && S.mode === "manual"); }
+  /* THE RUN HAS GONE QUIET.
+   *
+   * The engine pushes progress at every step, so silence means a call that is not coming back. The
+   * screen used to keep counting down through it - a frozen 86% still promising "about a minute
+   * left" - and the only control was Stop, which DELETES the session and throws away a crawl that
+   * had already learned the whole EMR (owner, iPhone, 2026-09-15). Past STALL_MS the estimate is
+   * replaced by the truth, and if anything was found there is a way to keep it that is not Stop. */
+  var STALL_MS = 45000;
+  function stalledFor() {
+    if (!S || S.guide || S.progressFailed || S.finishRequested) return 0;
+    var idle = Date.now() - (S.lastProgressAt || 0);
+    return (S.lastProgressAt && idle > STALL_MS) ? idle : 0;
+  }
+  function foundCount() { return (((S && S.progressCounts) || {}).found || []).length; }
+  function canFinishNow() { return stalledFor() > 0 && foundCount() > 0; }
   function progressFraction() {
     var c = S.progressCounts || {};
     var found = (c.found || []).length;
@@ -1267,6 +1491,10 @@
   /* A coarse estimate from THIS run's own pace. Silent until there is enough of a run to divide by,
    * and never a false precision: a doctor needs "about two minutes", not a countdown. */
   function etaLine() {
+    if (S.finishRequested) return "Saving.";
+    // A stalled run must never keep promising a time. Say how long it has been quiet instead.
+    var idle = stalledFor();
+    if (idle) return "No change for " + Math.round(idle / 1000) + "s.";
     if (S.guide || (isManual() && progressFraction() < 0.9)) return "";
     var started = S.progressStartedAt || 0;
     var f = progressFraction();
@@ -1306,8 +1534,24 @@
     var pct = Math.round(progressFraction() * 100);
     return '<div class="smd-connect-prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '">' +
       '<i style="width:' + pct + '%"></i></div>' +
-      '<div class="smd-connect-row smd-connect-counts"><span id="smd-connect-activity">' + activityLine() + '</span>' +
+      '<div class="smd-agent-now"><span id="smd-connect-dot" class="smd-agent-dot' + (stalledFor() ? " stalled" : "") + '" aria-hidden="true"></span>' +
+      '<span class="smd-agent-act" id="smd-connect-activity">' + activityLine() + '</span>' +
       '<strong id="smd-connect-eta">' + etaLine() + '</strong></div>';
+  }
+  /* WHAT IT HAS AND WHAT IS LEFT, at a glance. SVG tick, never an emoji. */
+  var TICK_SVG = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function agentChips(c) {
+    var out = "", i, n;
+    var found = c.found || [], looking = c.looking || [];
+    for (i = 0; i < found.length; i++) {
+      n = VIEW_NAMES[found[i]] || found[i];
+      out += '<span class="smd-agent-chip done">' + TICK_SVG + esc(n) + "</span>";
+    }
+    for (i = 0; i < looking.length; i++) {
+      n = VIEW_NAMES[looking[i]];
+      if (n) out += '<span class="smd-agent-chip">' + esc(n) + "</span>";
+    }
+    return out ? '<div class="smd-agent-chips" aria-label="What the agent has found so far">' + out + "</div>" : "";
   }
 
   function progressDetail() {
@@ -1318,10 +1562,9 @@
         '<div class="smd-connect-row"><button id="smd-connect-guidemissing" class="smd-connect-btn" type="button">Not in my EMR</button>' +
         '<button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip for now</button></div></div>';
     }
-    return '<div class="smd-connect-card">' +
+    return '<div class="smd-connect-card smd-agent">' +
       progressBar() +
-      '<div class="smd-connect-row smd-connect-counts"><span>Found</span><strong>' + viewNames(c.found) + '</strong></div>' +
-      '<div class="smd-connect-row smd-connect-counts"><span>Still looking for</span><strong>' + viewNames(c.looking) + '</strong></div>' +
+      agentChips(c) +
       '<div class="smd-connect-row smd-connect-counts"><span>Pages visited</span><strong id="smd-connect-pages">' + c.pages + '</strong></div>' +
       '<div class="smd-connect-row smd-connect-counts"><span>Requests observed</span><strong id="smd-connect-reqs">' + c.requests + '</strong></div>' +
       '</div>';
@@ -1336,12 +1579,72 @@
       '<h2 class="smd-connect-display">Reading ' + esc(hostOf(S.selected.emrUrl)) + '</h2>' +
       '<p id="smd-connect-phase" class="smd-connect-lead">' + phaseLabel(S.guide ? "ASKING" : c.phase) + '</p>' +
       '<div id="smd-connect-detail">' + progressDetail() + '</div>' +
-      (isManual() ? "" : '<div id="smd-connect-snake" class="smd-connect-snake" aria-label="A small game while you wait"></div>') +
       '<div class="smd-connect-note">' + (isManual() ? "Keep your phone unlocked and StewardMD open until every step is answered." : "Keep your phone unlocked and StewardMD open. Locking the screen stops the agent. This takes a few minutes.") + '</div>' +
-      '<div class="smd-connect-row"><button id="smd-connect-stop" class="smd-connect-btn danger" type="button">Stop</button>' +
-      '<button id="smd-connect-progretry" class="smd-connect-btn primary" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>';
+      (isManual() ? "" : '<div id="smd-connect-snake" class="smd-connect-snake" aria-label="A small game while you wait"></div>') +
+      /* CONTROLS THAT REACH THE ENGINE. Each one is a real signal the run checks, never decoration:
+       * a control the doctor can press that does nothing is worse than no control at all.
+       *
+       * THEY STICK TO THE BOTTOM. Laid out in the normal flow they sat under the waiting game, which on
+       * a phone pushed all four below the fold: the doctor could watch the agent work and could not
+       * reach Stop without scrolling past a game (owner, iPhone, 2026-09-15). A control that stops a
+       * running agent has to be reachable at every moment, so the bar pins to the bottom of the sheet
+       * and the rest scrolls under it - and the bottom is where the thumb already is. */
+      '<div class="smd-agent-bar">' +
+      '<div id="smd-connect-stallnote" class="smd-connect-note" style="display:none"></div>' +
+      '<div class="smd-agent-acts">' +
+      '<button id="smd-connect-skipstep" class="smd-connect-btn" type="button">Skip this step</button>' +
+      '<button id="smd-connect-redo" class="smd-connect-btn" type="button">Look again</button>' +
+      '<button id="smd-connect-finishnow" class="smd-connect-btn primary smd-agent-stop" type="button" style="display:none">Save what you have</button>' +
+      '<button id="smd-connect-stop" class="smd-connect-btn danger smd-agent-stop" type="button">Stop</button>' +
+      '<button id="smd-connect-progretry" class="smd-connect-btn primary smd-agent-stop" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>' +
+      // Stop throws away everything the agent learned, so it asks first (and offers the kinder option).
+      '<div id="smd-connect-stopconfirm" class="smd-agent-confirm" style="display:none" role="group" aria-label="Confirm stopping">' +
+      '<p id="smd-connect-stoptext">Stop and throw away what the agent has found?</p>' +
+      '<div class="smd-agent-acts"><button id="smd-connect-stopkeep" class="smd-connect-btn" type="button">Keep going</button>' +
+      '<button id="smd-connect-stopyes" class="smd-connect-btn danger" type="button">Stop and discard</button></div></div>' +
+      '</div>';
     setStatus(S.progressFailed ? "bad" : "", S.statusText || "");
-    b.querySelector("#smd-connect-stop").onclick = function () { S.stopRequested = true; stopDiscovery(); };
+    b.querySelector("#smd-connect-stop").onclick = function () {
+      var n = foundCount();
+      var t = b.querySelector("#smd-connect-stoptext");
+      if (t) t.textContent = n ? "Stop and throw away the " + n + (n === 1 ? " screen" : " screens") + " the agent has already found? Save what you have keeps them instead." : "Stop reading this hospital?";
+      var cf = b.querySelector("#smd-connect-stopconfirm");
+      if (cf) cf.style.display = "";
+      var fin = b.querySelector("#smd-connect-finishnow");
+      if (fin && n) { fin.style.display = ""; S.saveOffered = true; }   // the kinder way out, kept on screen
+    };
+    b.querySelector("#smd-connect-stopkeep").onclick = function () {
+      var cf = b.querySelector("#smd-connect-stopconfirm");
+      if (cf) cf.style.display = "none";
+    };
+    b.querySelector("#smd-connect-stopyes").onclick = function () { S.stopRequested = true; stopDiscovery(); };
+    /* Skip: abandon the step on screen now (it is marked not proven) and move to the next one. */
+    b.querySelector("#smd-connect-skipstep").onclick = function () {
+      if (!S) return;
+      S.skipRequested = (S.skipRequested || 0) + 1;
+      S.lastProgressAt = Date.now();            // the doctor acted: the stall clock starts over
+      // If the agent is waiting on a question right now, this answers it too, so one Skip is enough.
+      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r({ done: false }); paintProgress(); }
+      flashAction(b, "#smd-connect-skipstep", "Skipping");
+    };
+    /* Look again: re-walk this hospital for whatever is still missing. */
+    b.querySelector("#smd-connect-redo").onclick = function () {
+      if (!S) return;
+      S.redoRequested = (S.redoRequested || 0) + 1;
+      S.lastProgressAt = Date.now();
+      flashAction(b, "#smd-connect-redo", "Looking again");
+    };
+    /* NOT Stop. The session stays open and the engine keeps everything it learned: it breaks out of
+     * whatever it is waiting on and goes straight to writing the connection. */
+    b.querySelector("#smd-connect-finishnow").onclick = function () {
+      if (!S || S.finishRequested) return;
+      S.finishRequested = true;
+      S.bannerLine = null;
+      var btn = b.querySelector("#smd-connect-finishnow");
+      if (btn) { btn.disabled = true; btn.textContent = "Saving"; }
+      paintProgress();
+      publishBannerProgress();
+    };
     b.querySelector("#smd-connect-progretry").onclick = function () { beginAgentMode(); };
     wireGuideSkip(b);
     startProgressTicker();
@@ -1375,12 +1678,23 @@
     if (S && S.snake) { try { S.snake.stop(); } catch (e) {} S.snake = null; }
   }
 
+  /* A tap has to be acknowledged at once. The engine only acts on a signal when it reaches its next
+   * checkpoint, which can be a moment away, and a button that looks inert invites a second tap. */
+  function flashAction(b, sel, label) {
+    var el = b && b.querySelector ? b.querySelector(sel) : null;
+    if (!el) return;
+    var was = el.textContent;
+    el.disabled = true;
+    el.textContent = label;
+    setTimeout(function () { if (el && el.isConnected) { el.disabled = false; el.textContent = was; } }, 2500);
+  }
+
   function wireGuideSkip(b) {
     function answer(id, value) {
       var el = b.querySelector(id);
       if (el) el.onclick = function () {
         if (!S || !S.guideResolve) return;
-        var r = S.guideResolve; S.guideResolve = null; S.guide = null;
+        var r = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat();
         r(value);
         paintProgress();
       };
@@ -1411,6 +1725,28 @@
       // One crawl step can take half a minute; the banner is all the doctor can see, so the time
       // left has to keep moving there too, not only on the hidden sheet.
       publishBannerProgress();
+      // A quiet run grows a way out. Only the ticker can do this: nothing else runs while the
+      // engine is stuck, which is exactly why the screen had no escape before.
+      var fin = document.getElementById("smd-connect-finishnow");
+      var note = document.getElementById("smd-connect-stallnote");
+      var dot = document.getElementById("smd-connect-dot");
+      if (dot) dot.className = "smd-agent-dot" + (stalledFor() ? " stalled" : "");
+      if (fin && !S.finishRequested) fin.style.display = (canFinishNow() || S.saveOffered) ? "" : "none";
+      if (!note) return;
+      if (S.finishRequested) {
+        note.style.display = "";
+        note.textContent = "Keeping what the agent already found. This takes a few seconds.";
+      } else if (canFinishNow()) {
+        var n = foundCount();
+        note.style.display = "";
+        note.textContent = "This step is taking longer than usual. Nothing is lost: " + n + (n === 1 ? " screen has" : " screens have") +
+          " already been learned. Save what you have keeps them and finishes now. Stop throws them away.";
+      } else if (stalledFor()) {
+        note.style.display = "";
+        note.textContent = "This step is taking longer than usual. Still trying.";
+      } else {
+        note.style.display = "none";
+      }
     }, 1000);
   }
   function stopProgressTicker() {
@@ -1531,6 +1867,7 @@
 
   /* ---- Screen 7: result (capabilities + reviewer approval) ---- */
   function loadVersionAndShowResult() {
+    forgetRun();
     /* Every path to a result screen closes the hospital browser: left open, it sat on top of the result
      * with a dead "Done, I'm signed in" and no sign-in detection (owner, 2026-09-13). */
     try { stopDiscoveryPlugin(); } catch (e) {}
@@ -1727,8 +2064,10 @@
     pickTenantThenLoad();
   }
 
+  setTimeout(function () { try { resumeRun(); } catch (e) {} }, 1500);
   window.SMD_CONNECT_AGENT = {
     open: open,
+    __resumeRun: resumeRun,
     close: function () { close(); },
     refresh: refresh,
     __setApi: function (fn) { apiImpl = fn; },
@@ -1754,6 +2093,12 @@
         controlOwner: S.controlOwner,
         connectionCount: S.connections.length,
         canApprove: S.canApprove,
+        loginHandled: !!S.loginHandled,
+        stopRequested: !!S.stopRequested,
+        finishRequested: !!S.finishRequested,
+        skipRequested: S.skipRequested || 0,
+        redoRequested: S.redoRequested || 0,
+        lastProgressAt: S.lastProgressAt || 0,
         run: S.result ? { crawlStop: S.result.crawlStop || null, stopReason: S.result.stopReason || null, views: (S.result.observedViews || []).length, found: S.result.found || [], asked: S.result.asked || [], missing: S.result.missing || [], warnings: S.result.warnings || [], checks: ((S.result.verification || {}).checks || []).length, patients: (S.result.verification || {}).patients || 0, candidate: S.result.candidateVersionId || null } : null
       };
     }

@@ -1,0 +1,1685 @@
+{
+  "guideline": "biliary",
+  "title": "Biliary Tract Cancers",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "cholangiocarcinoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2026 clinical navigator for Biliary Tract Cancers (Gallbladder Cancer, Intrahepatic Cholangiocarcinoma, Extrahepatic Cholangiocarcinoma). Implements Workup First diagnostic checklists, resectability triage, BILCAP adjuvant capecitabine, TOPAZ-1 / KEYNOTE-966 frontline chemoimmunotherapy, and subsequent line NGS biomarker-directed therapies (FGFR2, IDH1, HER2, BRAF, MSI-H). References StewardMD ONCQIS Standard Protocols. DRAFT - clinical decision support; physician decides.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Biliary Tract Cancers Version 1.2026 (March 10, 2026).",
+  "startNodeIds": [
+    "n_histology"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "CA 19-9 is falsely elevated by biliary obstruction and cholangitis; draw baseline after biliary decompression. Approximately 5-10% of patients are Lewis-antigen negative (Le a-b-) and cannot synthesize CA 19-9, so a normal value never excludes malignancy.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Staging laparoscopy with laparoscopic ultrasound detects occult peritoneal or superficial liver metastases in 20-30% of gallbladder cancers and intrahepatic cholangiocarcinomas judged resectable on imaging, sparing nontherapeutic laparotomy (BIL-1, BIL-2).",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "BILCAP phase III: adjuvant capecitabine 1250 mg/m2 twice daily days 1-14 every 21 days for 8 cycles after macroscopically complete resection improved median overall survival (51.1 vs 36.4 months per-protocol; ITT 49.6 vs 36.1 months). NCCN Category 1 preferred adjuvant therapy.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "TOPAZ-1 (gemcitabine + cisplatin + durvalumab) and KEYNOTE-966 (gemcitabine + cisplatin + pembrolizumab) each improved overall survival versus gemcitabine + cisplatin alone in advanced biliary tract cancer. Both chemoimmunotherapy combinations are NCCN Category 1 preferred first-line options for eligible patients.",
+      "evidence": "1"
+    },
+    "e": {
+      "text": "ABC-06 phase III: mFOLFOX6 plus active symptom control improved median overall survival versus symptom control alone (6.2 vs 5.3 months) after progression on gemcitabine + cisplatin, establishing mFOLFOX6 as the standard biomarker-negative second-line regimen.",
+      "evidence": "1"
+    },
+    "f": {
+      "text": "FGFR2 fusions/rearrangements (pemigatinib, FIGHT-202; futibatinib, FOENIX-CCA2) and IDH1 R132 mutations (ivosidenib, ClarIDHy) occur predominantly in intrahepatic cholangiocarcinoma. Test at diagnosis of unresectable or metastatic disease so targeted therapy is ready at progression; repeat biopsy or ctDNA at acquired resistance.",
+      "evidence": "2A"
+    },
+    "g": {
+      "text": "Future liver remnant (FLR) thresholds: portal vein embolization is indicated when anticipated FLR is below 30% in normal liver or below 30-40% in cholestatic, steatotic, or cirrhotic liver. Re-image in 3-4 weeks to confirm hypertrophy before extended hepatectomy.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_histology",
+      "linkId": "bil_histology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Histology",
+      "title": "Biliary Tract Cancer: Anatomic Site and Presentation",
+      "section": "Diagnosis",
+      "description": "Step 1: Clinical Presentation. Select the confirmed primary site and presentation of biliary tract cancer.",
+      "path": "Biliary / Presentation",
+      "pills": [
+        "presentation"
+      ],
+      "required": true,
+      "bullets": [
+        "Gallbladder Cancer (GBC): gallbladder mass or wall thickening on imaging, gallbladder polyp meeting resection criteria, or incidental carcinoma found on routine cholecystectomy pathology (BIL-1).",
+        "Intrahepatic Cholangiocarcinoma (iCCA): intrahepatic liver mass with peripheral rim enhancement, capsular retraction, and biliary dilation; second most common primary liver cancer (BIL-2).",
+        "Extrahepatic Cholangiocarcinoma (eCCA): perihilar (Klatskin) stricture at or above the cystic duct insertion, or distal stricture below the insertion with painless obstructive jaundice (BIL-3, BIL-4).",
+        "Advanced disease: biopsy-proven unresectable, locally advanced, or metastatic biliary tract adenocarcinoma of any primary site."
+      ],
+      "options": [
+        {
+          "id": "gbc",
+          "label": "Gallbladder cancer (mass, polyp, or incidental cholecystectomy finding)",
+          "sets": {
+            "histology": "gbc"
+          },
+          "pills": [
+            "GBC"
+          ]
+        },
+        {
+          "id": "icca",
+          "label": "Intrahepatic cholangiocarcinoma (iCCA, liver mass)",
+          "sets": {
+            "histology": "icca"
+          },
+          "pills": [
+            "iCCA"
+          ]
+        },
+        {
+          "id": "ecca",
+          "label": "Extrahepatic cholangiocarcinoma (eCCA, perihilar or distal stricture)",
+          "sets": {
+            "histology": "ecca"
+          },
+          "pills": [
+            "eCCA"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Known unresectable, locally advanced, or metastatic BTC (any site)",
+          "sets": {
+            "histology": "advanced"
+          },
+          "pills": [
+            "advanced"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_gbc_wk",
+      "linkId": "bil_gbc_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "GBC workup",
+      "title": "Gallbladder Cancer: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Complete staging workup before any resectability decision. Confirm adenocarcinoma, exclude occult peritoneal seeding, and relieve obstruction.",
+      "path": "Biliary / GBC / Workup",
+      "pills": [
+        "GBC",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Multiphase contrast-enhanced abdominal and pelvic CT or liver MRI with MRCP: defines depth of gallbladder wall invasion, liver infiltration (segments IVB/V), vascular involvement, and nodal disease.",
+        "Serum CA 19-9 and CEA at baseline; repeat CA 19-9 after biliary decompression because obstruction falsely elevates it.",
+        "EUS with FNA or ERCP with brush cytology, FISH polysomy testing, or forceps biopsy for tissue confirmation when imaging is equivocal; endoscopic or percutaneous biliary drainage for obstructive jaundice or cholangitis before any systemic therapy.",
+        "Staging laparoscopy with laparoscopic ultrasound for all potentially resectable gallbladder cancers to rule out occult peritoneal seeding and superficial liver metastases.",
+        "Chest CT to complete metastatic survey; medical operability assessment and multidisciplinary hepatobiliary tumor board review.",
+        "For unresectable or metastatic disease: mandatory comprehensive molecular testing (NGS panel with FISH/IHC) covering FGFR2 fusions/rearrangements, IDH1 R132 mutations, HER2/ERBB2 amplification, BRAF V600E, MSI-H/dMMR, NTRK fusions, RET fusions, and TMB-H."
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "f"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Resectability Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_icca_wk",
+      "linkId": "bil_icca_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "iCCA workup",
+      "title": "Intrahepatic Cholangiocarcinoma: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Complete staging workup before any resectability decision. Distinguish iCCA from HCC, establish margin-negative resectability, and secure tissue for molecular testing.",
+      "path": "Biliary / iCCA / Workup",
+      "pills": [
+        "iCCA",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Multiphase contrast-enhanced abdominal and pelvic CT or liver MRI with MRCP: characterizes mass-forming, periductal-infiltrating, or intraductal growth; maps multifocality, satellite nodules, and vascular invasion.",
+        "Serum CA 19-9 and CEA; add AFP when HCC is in the differential (cirrhotic liver, arterial hyperenhancement with washout favors HCC).",
+        "Core-needle liver biopsy with immunohistochemistry when imaging is atypical or systemic therapy is planned; EUS/ERCP with brush cytology, FISH polysomy, or biopsy for periductal components; biliary drainage for obstructive jaundice or cholangitis.",
+        "Staging laparoscopy with laparoscopic ultrasound for potentially resectable iCCA to rule out occult peritoneal seeding and surface metastases.",
+        "Chest CT, assessment of chronic liver disease and future liver remnant, and multidisciplinary hepatobiliary tumor board review.",
+        "For unresectable or metastatic disease: mandatory comprehensive molecular testing (NGS panel with FISH/IHC) covering FGFR2 fusions/rearrangements, IDH1 R132 mutations, HER2/ERBB2 amplification, BRAF V600E, MSI-H/dMMR, NTRK fusions, RET fusions, and TMB-H."
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "f"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Resectability Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_ecca_wk",
+      "linkId": "bil_ecca_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "eCCA workup",
+      "title": "Extrahepatic Cholangiocarcinoma: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Complete staging workup before any resectability decision. Classify the stricture level, secure a tissue diagnosis, and decompress the obstructed system.",
+      "path": "Biliary / eCCA / Workup",
+      "pills": [
+        "eCCA",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Multiphase contrast-enhanced abdominal and pelvic CT or liver MRI with MRCP: defines stricture level (perihilar versus distal), longitudinal ductal extent, vascular encasement, lobar atrophy, and nodal disease.",
+        "Serum CA 19-9 and CEA; repeat CA 19-9 after biliary decompression because obstruction falsely elevates it.",
+        "EUS with FNA plus ERCP with brush cytology, FISH polysomy testing, or intraductal forceps biopsy; EUS is preferred for distal strictures and nodal sampling. Biliary drainage (endoscopic stent first line) for obstructive jaundice, cholangitis, or planned major hepatectomy.",
+        "Bismuth-Corlette mapping for perihilar tumors (types I-IV) with dedicated cholangiographic imaging; volumetric future liver remnant assessment when hepatectomy is contemplated.",
+        "Chest CT, IgG4 level when benign sclerosing disease is possible, and multidisciplinary hepatobiliary tumor board review.",
+        "For unresectable or metastatic disease: mandatory comprehensive molecular testing (NGS panel with FISH/IHC) covering FGFR2 fusions/rearrangements, IDH1 R132 mutations, HER2/ERBB2 amplification, BRAF V600E, MSI-H/dMMR, NTRK fusions, RET fusions, and TMB-H."
+      ],
+      "footnotes": [
+        "a",
+        "f",
+        "g"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Resectability Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_adv_wk",
+      "linkId": "bil_adv_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Advanced BTC workup",
+      "title": "Unresectable or Metastatic BTC: Workup and Molecular Checklist",
+      "section": "Workup",
+      "description": "Confirm fitness for first-line chemoimmunotherapy and complete mandatory molecular profiling that drives subsequent-line targeted therapy.",
+      "path": "Biliary / Advanced / Workup",
+      "pills": [
+        "advanced",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Multiphase contrast-enhanced abdominal and pelvic CT or liver MRI with MRCP plus chest CT: documents measurable disease (RECIST 1.1 baselines) and rules out actionable obstruction.",
+        "Serum CA 19-9 and CEA; repeat CA 19-9 after biliary decompression because obstruction falsely elevates it.",
+        "EUS/ERCP with brush cytology, FISH polysomy, or biopsy when primary tissue is still needed; urgent biliary drainage for obstructive jaundice or cholangitis before systemic therapy starts.",
+        "Performance status, comorbidity review (autoimmune history, interstitial lung disease, organ function, hearing and renal baselines for platinum), and goals-of-care discussion.",
+        "Mandatory comprehensive molecular testing (NGS panel with FISH/IHC) before or concurrent with first-line therapy: FGFR2 fusions/rearrangements, IDH1 R132 mutations, HER2/ERBB2 amplification, BRAF V600E, MSI-H/dMMR, NTRK fusions, RET fusions, and TMB-H."
+      ],
+      "footnotes": [
+        "a",
+        "d",
+        "f"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Resectability Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_gbc_stage",
+      "linkId": "bil_gbc_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "GBC staging",
+      "title": "Gallbladder Cancer: Presentation and Resectability",
+      "section": "Staging",
+      "description": "Stratify by how the cancer presented and whether an R0 resection is technically feasible at a high-volume hepatobiliary center.",
+      "path": "Biliary / GBC / Staging",
+      "pills": [
+        "GBC",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Incidental GBC: carcinoma discovered on routine cholecystectomy pathology; depth of invasion (pT1a versus pT1b or greater) decides between surveillance and radical re-resection.",
+        "Upfront resectable: gallbladder mass or polyp without distant metastases, without major vascular encasement, and with adequate future liver remnant for segments IVB/V resection.",
+        "Locally advanced unresectable: extensive liver infiltration, bilateral vascular involvement, bulky N2 nodes, or inadequate remnant that precludes R0 resection.",
+        "Metastatic: distant liver metastases beyond contiguous infiltration, peritoneal seeding, or extra-abdominal spread."
+      ],
+      "options": [
+        {
+          "id": "incidental",
+          "label": "Incidental GBC on cholecystectomy pathology",
+          "sets": {
+            "stage": "incidental"
+          },
+          "pills": [
+            "incidental"
+          ]
+        },
+        {
+          "id": "resectable",
+          "label": "Upfront resectable gallbladder mass or polyp",
+          "sets": {
+            "stage": "resectable"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "locally_advanced",
+          "label": "Locally advanced unresectable disease",
+          "sets": {
+            "stage": "locally_advanced"
+          },
+          "pills": [
+            "unresectable"
+          ]
+        },
+        {
+          "id": "metastatic",
+          "label": "Metastatic disease",
+          "sets": {
+            "stage": "metastatic"
+          },
+          "pills": [
+            "metastatic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_gbc_incidental",
+      "linkId": "bil_gbc_incidental",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Incidental GBC depth",
+      "title": "Incidental GBC: Depth of Invasion on Pathology",
+      "section": "Staging",
+      "description": "Pathologic T stage of the cholecystectomy specimen determines whether simple cholecystectomy suffices or radical re-resection is required.",
+      "path": "Biliary / GBC / Incidental",
+      "pills": [
+        "GBC",
+        "incidental"
+      ],
+      "required": true,
+      "bullets": [
+        "pT1a (invasion into lamina propria only): simple cholecystectomy with negative cystic duct margin is adequate definitive therapy.",
+        "pT1b or greater (invasion into or through muscularis propria): requires radical re-resection with liver wedge and portal lymphadenectomy once staging is complete.",
+        "Review cystic duct margin, perineural and lymphovascular invasion, grade, and nodal harvest from the index operation; re-image before re-resection to exclude interval dissemination."
+      ],
+      "options": [
+        {
+          "id": "t1a",
+          "label": "pT1a (lamina propria only), cystic duct margin negative",
+          "sets": {
+            "pth": "t1a"
+          },
+          "pills": [
+            "pT1a"
+          ]
+        },
+        {
+          "id": "t1bplus",
+          "label": "pT1b or greater (muscularis propria invasion or deeper)",
+          "sets": {
+            "pth": "t1bplus"
+          },
+          "pills": [
+            "pT1b+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_gbc_t1a",
+      "linkId": "tx_gbc_t1a",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "T1a GBC complete",
+      "title": "Incidental pT1a GBC: Simple Cholecystectomy and Surveillance",
+      "section": "Treatment",
+      "description": "Definitive local therapy is already complete; no further resection or adjuvant therapy is indicated.",
+      "path": "Biliary / GBC / T1a Treatment",
+      "pills": [
+        "GBC",
+        "pT1a",
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "No radical re-resection: simple cholecystectomy with a negative cystic duct margin is curative for pT1a disease with 5-year survival above 95%.",
+        "No adjuvant systemic therapy or radiation is indicated for completely resected pT1a N0 gallbladder cancer.",
+        "Surveillance: history, physical, liver function tests, and CA 19-9 every 6 months for 2 years then annually; contrast-enhanced imaging every 6-12 months for 2 years."
+      ]
+    },
+    {
+      "id": "n_tx_gbc_t1b",
+      "linkId": "tx_gbc_t1b",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "T1b+ radical re-resection",
+      "title": "Incidental pT1b+ GBC: Radical Re-resection",
+      "section": "Treatment",
+      "description": "En bloc liver wedge resection of segments IVB/V with portal lymphadenectomy, then margin-directed adjuvant therapy.",
+      "path": "Biliary / GBC / T1b Treatment",
+      "pills": [
+        "GBC",
+        "pT1b+",
+        "surgery"
+      ],
+      "required": true,
+      "showsRecommendation": true,
+      "bullets": [
+        "Radical re-resection at a high-volume center: en bloc wedge resection of gallbladder fossa (segments IVB/V with at least 2 cm margin) plus standard portal lymphadenectomy of the hepatoduodenal ligament (examine at least 6 nodes).",
+        "Resect residual port sites only if there was intraoperative bile spillage or documented port-site disease; routine port-site excision is not required.",
+        "Record margin status (R0 versus R1), nodal yield, and perineural invasion on synoptic pathology; proceed to margin-directed adjuvant therapy."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Re-resection completed - proceed to margin-directed adjuvant therapy",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_tx_gbc_resect",
+      "linkId": "tx_gbc_resect",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "GBC radical resection",
+      "title": "Resectable GBC: Radical Cholecystectomy",
+      "section": "Treatment",
+      "description": "Upfront radical resection for gallbladder mass or polyp judged resectable on workup and staging laparoscopy.",
+      "path": "Biliary / GBC / Resectable Treatment",
+      "pills": [
+        "GBC",
+        "resectable",
+        "surgery"
+      ],
+      "required": true,
+      "showsRecommendation": true,
+      "bullets": [
+        "Radical (extended) cholecystectomy: en bloc gallbladder removal with wedge resection of segments IVB/V (at least 2 cm liver margin; formal right hepatectomy only for extensive infiltration) plus portal lymphadenectomy with at least 6 nodes examined.",
+        "Intraoperative frozen section of the cystic duct stump; extend to bile duct resection with Roux-en-Y reconstruction when the stump is positive.",
+        "Avoid intraoperative bile spillage; convert promptly when anatomy is unfavorable. Record R0 versus R1 status for adjuvant planning."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Resection completed - proceed to margin-directed adjuvant therapy",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_icca_stage",
+      "linkId": "bil_icca_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "iCCA staging",
+      "title": "Intrahepatic Cholangiocarcinoma: Resectability Assessment",
+      "section": "Staging",
+      "description": "Resectability requires a solitary tumor (or confined disease) amenable to margin-negative anatomic resection with adequate future liver remnant and no extrahepatic spread.",
+      "path": "Biliary / iCCA / Staging",
+      "pills": [
+        "iCCA",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Resectable: solitary mass without major vascular invasion, no multifocal or bilobar satellites, no suspicious extrahepatic nodes or distant metastases, and adequate future liver remnant.",
+        "Unresectable: multifocal or bilobar disease, major vascular invasion not amenable to reconstruction, inadequate remnant despite PVE, cirrhosis with prohibitive operative risk, or distant metastases.",
+        "Staging laparoscopy findings of peritoneal seeding or surface metastases convert resectable imaging into unresectable disease."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Resectable: solitary tumor, R0 feasible, adequate remnant",
+          "sets": {
+            "stage": "resectable"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "unresectable",
+          "label": "Unresectable, multifocal, vascular invasion, or metastatic",
+          "sets": {
+            "stage": "unresectable"
+          },
+          "pills": [
+            "unresectable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_icca_resect",
+      "linkId": "tx_icca_resect",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "iCCA resection",
+      "title": "Resectable iCCA: Anatomic Liver Resection with Lymphadenectomy",
+      "section": "Treatment",
+      "description": "Anatomic hepatectomy with negative margins and regional lymphadenectomy, then margin-directed adjuvant therapy.",
+      "path": "Biliary / iCCA / Resectable Treatment",
+      "pills": [
+        "iCCA",
+        "resectable",
+        "surgery"
+      ],
+      "required": true,
+      "showsRecommendation": true,
+      "bullets": [
+        "Anatomic liver resection (segmentectomy, sectionectomy, or hemihepatectomy) with a goal of microscopically negative (R0) margins of at least 1 cm; non-anatomic wedge resection is discouraged for mass-forming iCCA.",
+        "Regional portal lymphadenectomy with at least 6 nodes examined for accurate staging, because nodal status drives prognosis and adjuvant decisions.",
+        "Portal vein embolization first when the anticipated remnant is insufficient; re-image in 3-4 weeks to confirm hypertrophy. Minimally invasive approaches are acceptable at experienced centers for favorably located tumors."
+      ],
+      "footnotes": [
+        "g"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Resection completed - proceed to margin-directed adjuvant therapy",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_ecca_stage",
+      "linkId": "bil_ecca_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "eCCA staging",
+      "title": "Extrahepatic Cholangiocarcinoma: Resectability Assessment",
+      "section": "Staging",
+      "description": "Resectability hinges on vascular involvement, longitudinal ductal extent, remnant adequacy, and absence of distant spread.",
+      "path": "Biliary / eCCA / Staging",
+      "pills": [
+        "eCCA",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Resectable: no distant metastases, no bilateral secondary biliary radical involvement precluding reconstruction, no encasement of bilateral hepatic arteries or main portal bifurcation beyond reconstruction, and adequate future liver remnant.",
+        "Unresectable or metastatic: distant metastases, extensive bilateral ductal spread, unreconstructible vascular encasement, inadequate remnant, or prohibitive operative risk.",
+        "Selected patients with unresectable perihilar disease (tumor 3 cm or smaller, no metastases) may be evaluated for neoadjuvant chemoradiation followed by liver transplantation under a strict protocol at a transplant center."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Resectable perihilar or distal disease",
+          "sets": {
+            "stage": "resectable"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "unresectable",
+          "label": "Unresectable locally advanced or metastatic disease",
+          "sets": {
+            "stage": "unresectable"
+          },
+          "pills": [
+            "unresectable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_ecca_site",
+      "linkId": "bil_ecca_site",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "eCCA site",
+      "title": "Resectable eCCA: Perihilar versus Distal Site",
+      "section": "Staging",
+      "description": "Operative strategy is dictated by stricture level relative to the cystic duct insertion.",
+      "path": "Biliary / eCCA / Site",
+      "pills": [
+        "eCCA",
+        "site"
+      ],
+      "required": true,
+      "bullets": [
+        "Perihilar (Klatskin, at or above the cystic duct insertion): classified by Bismuth-Corlette types I-IV to plan the extent of bile duct resection and hepatectomy.",
+        "Distal (below the cystic duct insertion, intrapancreatic bile duct): treated by pancreaticoduodenectomy when resectable.",
+        "Confirm the level on high-quality MRCP plus EUS before committing to a perihilar versus Whipple operative plan."
+      ],
+      "options": [
+        {
+          "id": "perihilar",
+          "label": "Perihilar cholangiocarcinoma (Klatskin tumor)",
+          "sets": {
+            "site": "perihilar"
+          },
+          "pills": [
+            "perihilar"
+          ]
+        },
+        {
+          "id": "distal",
+          "label": "Distal cholangiocarcinoma (intrapancreatic bile duct)",
+          "sets": {
+            "site": "distal"
+          },
+          "pills": [
+            "distal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_ecca_perihilar",
+      "linkId": "tx_ecca_perihilar",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Perihilar resection",
+      "title": "Perihilar Cholangiocarcinoma: Bile Duct Resection plus Hepatectomy",
+      "section": "Treatment",
+      "description": "Extrahepatic bile duct resection combined with (extended) hepatectomy and Roux-en-Y reconstruction, then margin-directed adjuvant therapy.",
+      "path": "Biliary / eCCA / Perihilar Treatment",
+      "pills": [
+        "eCCA",
+        "perihilar",
+        "surgery"
+      ],
+      "required": true,
+      "showsRecommendation": true,
+      "bullets": [
+        "Map Bismuth-Corlette type: type I-II requires bile duct resection with Roux-en-Y hepaticojejunostomy; type IIIa/IIIb requires extended right or left hepatectomy en bloc; type IV requires extended hepatectomy and is resectable only with a reconstructible single-sided remnant.",
+        "Portal vein embolization when the anticipated future liver remnant is below 30% (normal liver) or below 30-40% (cholestatic or diseased liver); re-image in 3-4 weeks to confirm hypertrophy.",
+        "Routine portal lymphadenectomy with at least 6 nodes; frozen section of proximal and distal bile duct margins with further resection when positive if technically feasible. Preoperative biliary drainage of the future remnant lobe reduces cholangitis and post-hepatectomy liver failure."
+      ],
+      "footnotes": [
+        "g"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Resection completed - proceed to margin-directed adjuvant therapy",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_tx_ecca_distal",
+      "linkId": "tx_ecca_distal",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Distal resection",
+      "title": "Distal Cholangiocarcinoma: Pancreaticoduodenectomy (Whipple)",
+      "section": "Treatment",
+      "description": "Standard pancreaticoduodenectomy with regional lymphadenectomy, then margin-directed adjuvant therapy.",
+      "path": "Biliary / eCCA / Distal Treatment",
+      "pills": [
+        "eCCA",
+        "distal",
+        "surgery"
+      ],
+      "required": true,
+      "showsRecommendation": true,
+      "bullets": [
+        "Pancreaticoduodenectomy (Whipple procedure, pylorus-preserving or classic) with en bloc distal bile duct, duodenum, and pancreatic head resection plus standard regional lymphadenectomy (at least 6 nodes examined).",
+        "Preoperative biliary drainage only for cholangitis, severe pruritus, or planned neoadjuvant delay; routine stenting before upfront Whipple increases wound infection risk.",
+        "Standard postoperative care: monitor for pancreatic fistula, delayed gastric emptying, and biliary leak; initiate adjuvant capecitabine within 8-12 weeks when recovered.",
+        "Record pancreatic fistula risk, bile duct and pancreatic margins (R0 versus R1), and nodal status on synoptic pathology for adjuvant planning."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Distal resection completed - proceed to margin-directed adjuvant therapy",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_adj_margin",
+      "linkId": "bil_adj_margin",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Adjuvant margin",
+      "title": "Resected BTC: Surgical Margin Status",
+      "section": "Adjuvant",
+      "description": "Adjuvant therapy after macroscopically complete resection is driven by microscopic margin status (R0 versus R1) and nodal disease.",
+      "path": "Biliary / Adjuvant / Margin",
+      "pills": [
+        "adjuvant",
+        "margin"
+      ],
+      "required": true,
+      "bullets": [
+        "R0 resection (microscopically negative margins): adjuvant capecitabine per BILCAP is the Category 1 preferred standard regardless of nodal status.",
+        "R1 resection (microscopically positive margins): adjuvant capecitabine with or without concurrent chemoradiation to the tumor bed and regional nodes.",
+        "Start adjuvant therapy within 8-12 weeks of surgery once recovered; restage to exclude early recurrence before starting."
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "r0",
+          "label": "R0 resection (microscopically negative margins)",
+          "sets": {
+            "margin": "r0"
+          },
+          "pills": [
+            "R0"
+          ]
+        },
+        {
+          "id": "r1",
+          "label": "R1 resection (microscopically positive margins)",
+          "sets": {
+            "margin": "r1"
+          },
+          "pills": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_adj_r0",
+      "linkId": "tx_adj_r0",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adjuvant capecitabine",
+      "title": "R0 Resected BTC: Adjuvant Capecitabine (BILCAP)",
+      "section": "Adjuvant",
+      "description": "Category 1 preferred adjuvant therapy after R0 resection of gallbladder cancer or cholangiocarcinoma.",
+      "path": "Biliary / Adjuvant / R0 Treatment",
+      "pills": [
+        "adjuvant",
+        "R0",
+        "capecitabine"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Capecitabine 1250 mg/m2 orally twice daily on days 1-14 every 21 days for 8 cycles (BILCAP regimen, Category 1 preferred); dose engine calculates patient-specific doses with renal and DPD adjustments.",
+        "BILCAP phase III median overall survival 51.1 months per-protocol (49.6 months ITT) versus 36.4 months with observation; benefit held across gallbladder, intrahepatic, perihilar, and distal primaries.",
+        "Monitor hand-foot syndrome, diarrhea, cytopenias, and cardiac symptoms; dose-reduce or interrupt per tolerance rather than abandoning therapy early.",
+        "Surveillance after completion: history, physical, liver function, CA 19-9, and contrast-enhanced imaging every 3-6 months for 2 years, then every 6-12 months to 5 years."
+      ],
+      "footnotes": [
+        "c"
+      ]
+    },
+    {
+      "id": "n_tx_adj_r1",
+      "linkId": "tx_adj_r1",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "R1 chemoradiation",
+      "title": "R1 Resected BTC: Adjuvant Capecitabine with or without Chemoradiation",
+      "section": "Adjuvant",
+      "description": "Combined-modality adjuvant therapy for microscopically positive margins, targeting the at-risk tumor bed.",
+      "path": "Biliary / Adjuvant / R1 Treatment",
+      "pills": [
+        "adjuvant",
+        "R1",
+        "chemoradiation"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Capecitabine 1250 mg/m2 orally twice daily days 1-14 every 21 days for 8 cycles as the systemic backbone (BILCAP); dose engine calculates patient-specific doses.",
+        "Add concurrent chemoradiation for R1 disease: external beam radiotherapy 45-50.4 Gy in 25-28 fractions to the tumor bed and regional nodes with concurrent infusional 5-fluorouracil or capecitabine as radiosensitizer.",
+        "Sequence chemoradiation before or after systemic capecitabine per multidisciplinary plan; prioritize local control of the positive-margin bed in perihilar and distal primaries.",
+        "Consider referral for adjuvant clinical trials, especially for node-positive or perineural invasion positive disease.",
+        "Surveillance: history, physical, liver function, CA 19-9, and contrast-enhanced imaging every 3-6 months for 2 years, then every 6-12 months to 5 years."
+      ],
+      "footnotes": [
+        "c"
+      ]
+    },
+    {
+      "id": "n_adv_1l",
+      "linkId": "bil_adv_1l",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "First-line fitness",
+      "title": "Advanced BTC: First-Line Fitness and Immunotherapy Eligibility",
+      "section": "First-Line",
+      "description": "Fit patients receive gemcitabine plus cisplatin with PD-1/PD-L1 blockade; immunotherapy-ineligible patients receive cytotoxic GemCis alone; frail patients receive single-agent therapy.",
+      "path": "Biliary / Advanced / First-Line",
+      "pills": [
+        "advanced",
+        "first-line"
+      ],
+      "required": true,
+      "bullets": [
+        "Chemoimmunotherapy candidates: ECOG 0-1, adequate organ function, no active autoimmune disease requiring immunosuppression, no uncontrolled interstitial lung disease, and controlled biliary drainage.",
+        "Cytotoxic-only path: immunotherapy contraindicated (autoimmune history, solid-organ transplant, chronic high-dose steroids) but still platinum-eligible with adequate renal function and hearing.",
+        "Frail path: ECOG 2 or greater, significant comorbidity, or cisplatin-ineligible with limited reserve; prioritize tolerability and biliary symptom control."
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "chemoio",
+          "label": "Fit for chemoimmunotherapy (GemCis plus durvalumab or pembrolizumab)",
+          "sets": {
+            "fitness": "chemoio"
+          },
+          "pills": [
+            "fit",
+            "chemoimmunotherapy"
+          ]
+        },
+        {
+          "id": "gemcis",
+          "label": "Immunotherapy contraindicated: GemCis cytotoxic doublet alone",
+          "sets": {
+            "fitness": "gemcis"
+          },
+          "pills": [
+            "cytotoxic doublet"
+          ]
+        },
+        {
+          "id": "frail",
+          "label": "Poor performance status or frail: single-agent therapy",
+          "sets": {
+            "fitness": "frail"
+          },
+          "pills": [
+            "frail"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_adv_chemoio",
+      "linkId": "tx_adv_chemoio",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "First-line chemoIO",
+      "title": "Advanced BTC First-Line: GemCis plus Durvalumab or Pembrolizumab (Category 1 Preferred)",
+      "section": "First-Line",
+      "description": "TOPAZ-1 and KEYNOTE-966 chemoimmunotherapy doublets; gemcitabine plus cisplatin backbone with PD-L1 or PD-1 blockade followed by immunotherapy maintenance.",
+      "path": "Biliary / Advanced / Chemoimmunotherapy",
+      "pills": [
+        "first-line",
+        "chemoimmunotherapy",
+        "treatment"
+      ],
+      "required": true,
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Preferred option A (TOPAZ-1, Category 1): gemcitabine 1000 mg/m2 plus cisplatin 25 mg/m2 IV days 1 and 8 every 21 days with durvalumab 1500 mg IV day 1 for up to 8 cycles, then durvalumab 1500 mg every 4 weeks maintenance until progression.",
+        "Preferred option B (KEYNOTE-966, Category 1): gemcitabine 1000 mg/m2 plus cisplatin 25 mg/m2 IV days 1 and 8 every 21 days with pembrolizumab 200 mg IV day 1, then pembrolizumab maintenance until progression or 2 years.",
+        "Cytotoxic backbone, hydration, antiemetics, and dose holds follow the StewardMD ONCQIS Standard Protocol gi-btc-gem-cis; dose engine calculates patient-specific doses.",
+        "Reassess with contrast-enhanced imaging every 8-12 weeks; maintain biliary stent patency throughout therapy because cholangitis mimics progression."
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "protocolRefs": [
+        "gi-btc-gem-cis"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "First-line therapy started - assess response at restaging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_tx_adv_gemcis",
+      "linkId": "tx_adv_gemcis",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "First-line GemCis",
+      "title": "Advanced BTC First-Line: Gemcitabine plus Cisplatin Alone (Category 1)",
+      "section": "First-Line",
+      "description": "Cytotoxic doublet for patients with immunotherapy contraindications; remains a Category 1 standard per ABC-02.",
+      "path": "Biliary / Advanced / GemCis Alone",
+      "pills": [
+        "first-line",
+        "cytotoxic doublet",
+        "treatment"
+      ],
+      "required": true,
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Gemcitabine 1000 mg/m2 plus cisplatin 25 mg/m2 IV days 1 and 8 every 21 days for up to 8 cycles (maximum 6 months, ABC-02); substitute carboplatin AUC 5 day 1 when cisplatin-ineligible by renal function or hearing.",
+        "Dosing, hydration, antiemetics, and day 1/day 8 clearance checks follow the StewardMD ONCQIS Standard Protocol gi-btc-gem-cis; dose engine calculates patient-specific doses.",
+        "Reassess with contrast-enhanced imaging every 8-12 weeks; switch to second-line biomarker-directed or mFOLFOX6 therapy at progression."
+      ],
+      "protocolRefs": [
+        "gi-btc-gem-cis"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "First-line therapy started - assess response at restaging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_tx_adv_frail",
+      "linkId": "tx_adv_frail",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Frail single agent",
+      "title": "Advanced BTC, Poor Performance Status: Gemcitabine or Capecitabine Monotherapy",
+      "section": "First-Line",
+      "description": "Tolerability-first single-agent therapy with early best-supportive-care integration for frail patients.",
+      "path": "Biliary / Advanced / Frail Treatment",
+      "pills": [
+        "first-line",
+        "frail",
+        "treatment"
+      ],
+      "required": true,
+      "showsRecommendation": true,
+      "bullets": [
+        "Gemcitabine 1000 mg/m2 IV days 1, 8, and 15 every 28 days, with dose holds for cytopenias; preferred when biliary function is marginal but marrow reserve is adequate.",
+        "Alternative: capecitabine 1000-1250 mg/m2 orally twice daily days 1-14 every 21 days when venous access or infusion visits are limiting; reduce for renal impairment and DPD deficiency.",
+        "Integrate best supportive care early: biliary stent surveillance, pain control, nutrition, and goals-of-care review at each cycle. Escalate to doublet only if performance status improves substantially."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Single-agent therapy started - assess response at restaging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_adv_response",
+      "linkId": "bil_adv_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "First-line response",
+      "title": "Advanced BTC: First-Line Restaging Response",
+      "section": "First-Line",
+      "description": "RECIST 1.1 restaging after first-line therapy separates ongoing benefit (continue or maintain) from progression (biomarker-directed subsequent line).",
+      "path": "Biliary / Advanced / Response",
+      "pills": [
+        "response",
+        "restaging"
+      ],
+      "required": true,
+      "bullets": [
+        "Disease control (response or stable disease): continue the effective regimen or its immunotherapy maintenance until progression or limiting toxicity.",
+        "Progression: confirm true progression versus stent dysfunction or cholangitis, verify molecular profiling results are in hand, and move to biomarker-directed subsequent-line therapy.",
+        "Restage with the same contrast-enhanced modality every 8-12 weeks with CA 19-9 trends interpreted only after biliary decompression."
+      ],
+      "options": [
+        {
+          "id": "controlled",
+          "label": "Disease controlled: response or stable disease",
+          "sets": {
+            "response": "controlled"
+          },
+          "pills": [
+            "controlled"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Disease progression on first-line therapy",
+          "sets": {
+            "response": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_adv_ongoing",
+      "linkId": "tx_adv_ongoing",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Continue first-line",
+      "title": "Advanced BTC Controlled: Continue Effective First-Line Therapy",
+      "section": "First-Line",
+      "description": "Maintain disease control with the responding regimen; reserve subsequent-line options for true progression.",
+      "path": "Biliary / Advanced / Ongoing Treatment",
+      "pills": [
+        "controlled",
+        "maintenance",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Chemoimmunotherapy responders: complete planned GemCis cycles then continue durvalumab every 4 weeks or pembrolizumab maintenance until progression, limiting toxicity, or 2 years of pembrolizumab.",
+        "GemCis-alone responders: complete up to 8 cycles (6 months maximum) then observe with surveillance imaging; re-challenge is not standard after a treatment-free interval with progression.",
+        "Frail single-agent responders: continue at the tolerated dose with supportive care; restage every 8-12 weeks and keep molecular results current for later lines."
+      ],
+      "footnotes": [
+        "d"
+      ]
+    },
+    {
+      "id": "n_subseq_bio",
+      "linkId": "bil_subseq_bio",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Subsequent-line biomarker",
+      "title": "Progressed BTC: NGS Biomarker-Directed Subsequent Line",
+      "section": "Subsequent-Line",
+      "description": "Match the progressing tumor to its actionable alteration from the mandatory molecular profile; biomarker-negative disease receives cytotoxic chemotherapy.",
+      "path": "Biliary / Subsequent-Line / Biomarker",
+      "pills": [
+        "subsequent-line",
+        "biomarker"
+      ],
+      "required": true,
+      "bullets": [
+        "Use the comprehensive NGS plus FISH/IHC profile ordered at advanced-disease workup; re-biopsy or add ctDNA when tissue is exhausted or acquired resistance is suspected.",
+        "Actionable hierarchy: FGFR2 fusion/rearrangement, IDH1 mutation, HER2 amplification/overexpression, BRAF V600E, MSI-H/dMMR, then NTRK/RET fusions and TMB-H.",
+        "Biomarker-negative or unknown: proceed directly to mFOLFOX6 (ABC-06 standard) or FOLFIRI; do not delay chemotherapy awaiting repeat profiling."
+      ],
+      "footnotes": [
+        "e",
+        "f"
+      ],
+      "options": [
+        {
+          "id": "fgfr2",
+          "label": "FGFR2 fusion or rearrangement detected",
+          "sets": {
+            "biomarkers.FGFR2": "fusion"
+          },
+          "pills": [
+            "FGFR2 fusion"
+          ]
+        },
+        {
+          "id": "idh1",
+          "label": "IDH1 R132 mutation detected",
+          "sets": {
+            "biomarkers.IDH1": "mutant"
+          },
+          "pills": [
+            "IDH1 mutant"
+          ]
+        },
+        {
+          "id": "her2",
+          "label": "HER2 overexpression or ERBB2 amplification",
+          "sets": {
+            "biomarkers.HER2": "positive"
+          },
+          "pills": [
+            "HER2 positive"
+          ]
+        },
+        {
+          "id": "braf",
+          "label": "BRAF V600E mutation detected",
+          "sets": {
+            "biomarkers.BRAF": "V600E"
+          },
+          "pills": [
+            "BRAF V600E"
+          ]
+        },
+        {
+          "id": "msi",
+          "label": "MSI-H or dMMR detected",
+          "sets": {
+            "biomarkers.MSI": "high"
+          },
+          "pills": [
+            "MSI-H"
+          ]
+        },
+        {
+          "id": "other",
+          "label": "Other actionable alteration (NTRK fusion, RET fusion, TMB-H)",
+          "sets": {
+            "biomarkers.OTHER": "actionable"
+          },
+          "pills": [
+            "other actionable"
+          ]
+        },
+        {
+          "id": "negative",
+          "label": "No actionable alteration (biomarker-negative or unknown)",
+          "sets": {
+            "biomarkers.PANEL": "negative"
+          },
+          "pills": [
+            "biomarker-negative"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_bio_fgfr2",
+      "linkId": "tx_bio_fgfr2",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "FGFR2 inhibitor",
+      "title": "FGFR2 Fusion or Rearrangement: Pemigatinib or Futibatinib (Category 1)",
+      "section": "Subsequent-Line",
+      "description": "Selective FGFR inhibition for FGFR2 fusion or rearrangement positive disease, predominantly intrahepatic cholangiocarcinoma.",
+      "path": "Biliary / Subsequent-Line / FGFR2 Treatment",
+      "pills": [
+        "FGFR2 fusion",
+        "targeted therapy",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Pemigatinib 13.5 mg orally once daily 14 days on / 7 days off in 21-day cycles (FIGHT-202, Category 1); confirm FGFR2 fusion or rearrangement by NGS or FISH before starting.",
+        "Alternative: futibatinib 20 mg orally once daily continuously (FOENIX-CCA2, Category 1), including activity after progression on a reversible FGFR inhibitor in selected patients.",
+        "Monitor hyperphosphatemia (phosphate binders, dose holds), ocular toxicity (baseline and periodic eye exams for serous retinal detachment), and nail and skin changes.",
+        "At acquired resistance, re-profile by tissue or ctDNA for FGFR2 kinase-domain gatekeeper mutations and consider clinical trials."
+      ],
+      "footnotes": [
+        "f"
+      ]
+    },
+    {
+      "id": "n_tx_bio_idh1",
+      "linkId": "tx_bio_idh1",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "IDH1 inhibitor",
+      "title": "IDH1 R132 Mutation: Ivosidenib (Category 1)",
+      "section": "Subsequent-Line",
+      "description": "Mutant IDH1 inhibition for previously treated IDH1 R132 mutant cholangiocarcinoma per ClarIDHy.",
+      "path": "Biliary / Subsequent-Line / IDH1 Treatment",
+      "pills": [
+        "IDH1 mutant",
+        "targeted therapy",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Ivosidenib 500 mg orally once daily continuously (ClarIDHy, Category 1) for IDH1 R132 mutant disease progressing after at least one prior systemic line.",
+        "ClarIDHy showed progression-free survival benefit with preserved quality of life and a crossover-adjusted overall survival signal; continue until progression or limiting toxicity.",
+        "Monitor QTc prolongation (baseline and periodic ECGs with electrolytes), differentiation-syndrome-like symptoms, nausea, and fatigue; hold for QTc above 480 ms."
+      ],
+      "footnotes": [
+        "f"
+      ]
+    },
+    {
+      "id": "n_tx_bio_her2",
+      "linkId": "tx_bio_her2",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HER2-directed therapy",
+      "title": "HER2 Overexpression or Amplification: Trastuzumab plus Pertuzumab or Zanidatamab",
+      "section": "Subsequent-Line",
+      "description": "HER2-directed therapy for IHC 3+ or IHC 2+/ISH positive or ERBB2-amplified biliary tract cancer.",
+      "path": "Biliary / Subsequent-Line / HER2 Treatment",
+      "pills": [
+        "HER2 positive",
+        "targeted therapy",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Confirm HER2 status by IHC with reflex ISH, or ERBB2 amplification by NGS; HER2 positivity is enriched in gallbladder cancer and extrahepatic cholangiocarcinoma.",
+        "Option A: trastuzumab plus pertuzumab dual blockade (MyPathway HER2-positive BTC cohort) for IHC 3+ or amplified disease.",
+        "Option B: zanidatamab bispecific HER2 antibody (HERIZON-BTC-01) for previously treated HER2-positive (IHC 3+, or IHC 2+/ISH positive) disease.",
+        "Baseline and periodic LVEF assessment for HER2 antibody therapy; monitor diarrhea and infusion reactions."
+      ]
+    },
+    {
+      "id": "n_tx_bio_braf",
+      "linkId": "tx_bio_braf",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "BRAF/MEK inhibition",
+      "title": "BRAF V600E Mutation: Dabrafenib plus Trametinib",
+      "section": "Subsequent-Line",
+      "description": "Combined BRAF plus MEK inhibition for BRAF V600E mutant biliary tract cancer per the ROAR basket trial.",
+      "path": "Biliary / Subsequent-Line / BRAF Treatment",
+      "pills": [
+        "BRAF V600E",
+        "targeted therapy",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Dabrafenib 150 mg orally twice daily plus trametinib 2 mg orally once daily continuously (ROAR BTC cohort) for confirmed BRAF V600E disease; BRAF inhibitor monotherapy is inadequate because of paradoxical MAPK reactivation.",
+        "Monitor pyrexia syndrome (hold both drugs, antipyretics, steroids if severe), LVEF and ocular exams for trametinib, skin toxicity, and QTc.",
+        "Re-image every 8-12 weeks; at progression consider re-profiling for MAPK-pathway resistance and clinical trials."
+      ]
+    },
+    {
+      "id": "n_tx_bio_msi",
+      "linkId": "tx_bio_msi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MSI-H immunotherapy",
+      "title": "MSI-H or dMMR: Pembrolizumab",
+      "section": "Subsequent-Line",
+      "description": "Single-agent PD-1 blockade for MSI-H or mismatch-repair-deficient biliary tract cancer.",
+      "path": "Biliary / Subsequent-Line / MSI Treatment",
+      "pills": [
+        "MSI-H",
+        "immunotherapy",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Pembrolizumab 200 mg IV every 3 weeks or 400 mg every 6 weeks until progression, limiting toxicity, or 2 years (KEYNOTE-158 MSI-H BTC data); confirm MSI-H by PCR/NGS or dMMR by IHC.",
+        "Responses can be durable even after prior chemoimmunotherapy; distinguish pseudoprogression from true progression before abandoning therapy.",
+        "Monitor immune-related adverse events (colitis, hepatitis, pneumonitis, endocrinopathies) with early steroid intervention per toxicity guidelines."
+      ]
+    },
+    {
+      "id": "n_tx_bio_other",
+      "linkId": "tx_bio_other",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Other actionable target",
+      "title": "NTRK Fusion, RET Fusion, or TMB-H: Matched Targeted or Immunotherapy",
+      "section": "Subsequent-Line",
+      "description": "Tumor-agnostic matched therapy for rare actionable alterations in biliary tract cancer.",
+      "path": "Biliary / Subsequent-Line / Other Target Treatment",
+      "pills": [
+        "other actionable",
+        "targeted therapy",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "NTRK gene fusion: larotrectinib or entrectinib (tumor-agnostic approvals); confirm fusion at RNA level when DNA NGS is equivocal and monitor dizziness, weight gain, and withdrawal pain.",
+        "RET fusion: selpercatinib or pralsetinib (tumor-agnostic RET approvals); monitor hypertension, transaminases, and QTc.",
+        "TMB-H (at least 10 mutations per megabase): pembrolizumab is a tumor-agnostic option; weigh prior immunotherapy exposure and confirm TMB on a validated assay.",
+        "Refer all such rare-alteration cases for molecular tumor board review and clinical trial matching."
+      ]
+    },
+    {
+      "id": "n_tx_bio_neg",
+      "linkId": "tx_bio_neg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Biomarker-negative chemo",
+      "title": "Biomarker-Negative Disease: mFOLFOX6 (ABC-06) or FOLFIRI",
+      "section": "Subsequent-Line",
+      "description": "Cytotoxic second-line standard for biomarker-negative or unknown disease after GemCis-based first-line therapy.",
+      "path": "Biliary / Subsequent-Line / Negative Treatment",
+      "pills": [
+        "biomarker-negative",
+        "chemotherapy",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "mFOLFOX6 every 14 days (oxaliplatin 85 mg/m2, leucovorin 400 mg/m2, 5-fluorouracil 400 mg/m2 bolus then 2400 mg/m2 over 46 hours) plus active symptom control per ABC-06; dose engine calculates patient-specific doses.",
+        "Alternative FOLFIRI every 14 days (irinotecan 180 mg/m2 replacing oxaliplatin) for oxaliplatin-pretreated neuropathy, platinum hypersensitivity, or residual cytopenias; check UGT1A1 when severe neutropenia or diarrhea occurs.",
+        "Maintain biliary drainage, reassess every 8-12 weeks, and integrate early palliative care; offer clinical trials at each progression."
+      ],
+      "footnotes": [
+        "e"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_hist_gbc",
+      "from": "n_histology",
+      "to": "n_gbc_wk",
+      "fromOptions": [
+        "gbc"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hist_icca",
+      "from": "n_histology",
+      "to": "n_icca_wk",
+      "fromOptions": [
+        "icca"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hist_ecca",
+      "from": "n_histology",
+      "to": "n_ecca_wk",
+      "fromOptions": [
+        "ecca"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hist_adv",
+      "from": "n_histology",
+      "to": "n_adv_wk",
+      "fromOptions": [
+        "advanced"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbcwk_stage",
+      "from": "n_gbc_wk",
+      "to": "n_gbc_stage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_iccawk_stage",
+      "from": "n_icca_wk",
+      "to": "n_icca_stage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_eccawk_stage",
+      "from": "n_ecca_wk",
+      "to": "n_ecca_stage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_advwk_1l",
+      "from": "n_adv_wk",
+      "to": "n_adv_1l",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbc_incidental",
+      "from": "n_gbc_stage",
+      "to": "n_gbc_incidental",
+      "fromOptions": [
+        "incidental"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbc_resect",
+      "from": "n_gbc_stage",
+      "to": "n_tx_gbc_resect",
+      "fromOptions": [
+        "resectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbc_la",
+      "from": "n_gbc_stage",
+      "to": "n_adv_wk",
+      "fromOptions": [
+        "locally_advanced"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbc_met",
+      "from": "n_gbc_stage",
+      "to": "n_adv_wk",
+      "fromOptions": [
+        "metastatic"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_inc_t1a",
+      "from": "n_gbc_incidental",
+      "to": "n_tx_gbc_t1a",
+      "fromOptions": [
+        "t1a"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_inc_t1b",
+      "from": "n_gbc_incidental",
+      "to": "n_tx_gbc_t1b",
+      "fromOptions": [
+        "t1bplus"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_t1b_adj",
+      "from": "n_tx_gbc_t1b",
+      "to": "n_adj_margin",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbcres_adj",
+      "from": "n_tx_gbc_resect",
+      "to": "n_adj_margin",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_icca_res",
+      "from": "n_icca_stage",
+      "to": "n_tx_icca_resect",
+      "fromOptions": [
+        "resectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_icca_unres",
+      "from": "n_icca_stage",
+      "to": "n_adv_wk",
+      "fromOptions": [
+        "unresectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_icca_adj",
+      "from": "n_tx_icca_resect",
+      "to": "n_adj_margin",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ecca_res",
+      "from": "n_ecca_stage",
+      "to": "n_ecca_site",
+      "fromOptions": [
+        "resectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ecca_unres",
+      "from": "n_ecca_stage",
+      "to": "n_adv_wk",
+      "fromOptions": [
+        "unresectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_site_peri",
+      "from": "n_ecca_site",
+      "to": "n_tx_ecca_perihilar",
+      "fromOptions": [
+        "perihilar"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_site_distal",
+      "from": "n_ecca_site",
+      "to": "n_tx_ecca_distal",
+      "fromOptions": [
+        "distal"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_peri_adj",
+      "from": "n_tx_ecca_perihilar",
+      "to": "n_adj_margin",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_dist_adj",
+      "from": "n_tx_ecca_distal",
+      "to": "n_adj_margin",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_r0",
+      "from": "n_adj_margin",
+      "to": "n_tx_adj_r0",
+      "fromOptions": [
+        "r0"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_r1",
+      "from": "n_adj_margin",
+      "to": "n_tx_adj_r1",
+      "fromOptions": [
+        "r1"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_1l_chemoio",
+      "from": "n_adv_1l",
+      "to": "n_tx_adv_chemoio",
+      "fromOptions": [
+        "chemoio"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_1l_gemcis",
+      "from": "n_adv_1l",
+      "to": "n_tx_adv_gemcis",
+      "fromOptions": [
+        "gemcis"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_1l_frail",
+      "from": "n_adv_1l",
+      "to": "n_tx_adv_frail",
+      "fromOptions": [
+        "frail"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_chemoio_resp",
+      "from": "n_tx_adv_chemoio",
+      "to": "n_adv_response",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gemcis_resp",
+      "from": "n_tx_adv_gemcis",
+      "to": "n_adv_response",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_frail_resp",
+      "from": "n_tx_adv_frail",
+      "to": "n_adv_response",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_resp_controlled",
+      "from": "n_adv_response",
+      "to": "n_tx_adv_ongoing",
+      "fromOptions": [
+        "controlled"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_resp_progression",
+      "from": "n_adv_response",
+      "to": "n_subseq_bio",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bio_fgfr2",
+      "from": "n_subseq_bio",
+      "to": "n_tx_bio_fgfr2",
+      "fromOptions": [
+        "fgfr2"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bio_idh1",
+      "from": "n_subseq_bio",
+      "to": "n_tx_bio_idh1",
+      "fromOptions": [
+        "idh1"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bio_her2",
+      "from": "n_subseq_bio",
+      "to": "n_tx_bio_her2",
+      "fromOptions": [
+        "her2"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bio_braf",
+      "from": "n_subseq_bio",
+      "to": "n_tx_bio_braf",
+      "fromOptions": [
+        "braf"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bio_msi",
+      "from": "n_subseq_bio",
+      "to": "n_tx_bio_msi",
+      "fromOptions": [
+        "msi"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bio_other",
+      "from": "n_subseq_bio",
+      "to": "n_tx_bio_other",
+      "fromOptions": [
+        "other"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bio_neg",
+      "from": "n_subseq_bio",
+      "to": "n_tx_bio_neg",
+      "fromOptions": [
+        "negative"
+      ],
+      "linkCategory": "conditional"
+    }
+  ]
+}

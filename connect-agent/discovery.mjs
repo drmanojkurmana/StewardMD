@@ -126,9 +126,15 @@ function SMD_CONNECT_OBSERVER(config) {
   var keep = function (method, url, body, reqCt, xhr, status, respCt, text) {
     try {
       if (!url || !/^https?:$/.test(url.protocol)) return;
-      /* The page's own origin only: live GHIS filled the buffer with Google Analytics beacons and pushed
-       * the ward list's page-load call out before the proof ran (Pixel, 2026-09-13). */
-      if (url.origin !== location.origin) return;
+      /* THE HOSPITAL'S OWN ORIGINS, NOT JUST THIS PAGE'S. Keeping only location.origin kept live GHIS
+       * from filling the buffer with Google Analytics beacons (Pixel, 2026-09-13) - but it also threw
+       * away every call an EMR makes to its own API host, which is how a great many of them are built
+       * (app.hospital.example serving pages, api.hospital.example serving the JSON). Those reads were
+       * invisible to the proof loop, so such a hospital could not be integrated at all. The allowlist
+       * the doctor's deployment already carries is the right boundary; the noise filter below still
+       * drops beacons and static files. */
+      var allowed = (state.config && state.config.origins) || [];
+      if (url.origin !== location.origin && allowed.indexOf(url.origin) < 0) return;
       if (/checksession|keepalive|heartbeat|signalr|analytics|\/collect$|\.(js|css|png|jpe?g|gif|svg|woff2?|ico|map)$/i.test(url.pathname)) return;
       var b = bodyText(body);
       if (b === undefined) return;

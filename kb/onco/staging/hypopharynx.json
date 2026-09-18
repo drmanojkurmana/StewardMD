@@ -1,0 +1,209 @@
+{
+  "site": "hypopharynx",
+  "name": "Hypopharynx",
+  "system": "Oncology / Head and neck",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Hypopharyngeal SCC (pyriform sinus most common, then postcricoid and posterior pharyngeal wall) presents late with submucosal spread and a rich lymphatic network, so nodal disease is frequent and often bilateral. T1 tumours are limited to one subsite and 2 cm or smaller; fixation of the hemilarynx or extension to oesophageal mucosa upstages to T3; thyroid/cricoid cartilage destruction and central-compartment soft-tissue invasion define T4a. Nodal staging follows the head-and-neck ENE scheme.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Carcinoma in situ",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour limited to one subsite of the hypopharynx and 2 cm or smaller",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour invades more than one subsite or an adjacent site, or measures larger than 2 cm up to 4 cm, without hemilarynx fixation",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour larger than 4 cm, or with fixation of the hemilarynx, or extension to oesophageal mucosa",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4a",
+          "label": "Moderately advanced: invasion of thyroid or cricoid cartilage, hyoid bone, thyroid gland, oesophageal musculature, or central-compartment soft tissue",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4b",
+          "label": "Very advanced: invasion of prevertebral fascia, encasement of carotid artery, or mediastinal structures",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Single ipsilateral node 3 cm or smaller, extranodal extension negative (ENE-)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2a",
+          "label": "Single ipsilateral node larger than 3 cm up to 6 cm, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2b",
+          "label": "Multiple ipsilateral nodes 6 cm or smaller, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2c",
+          "label": "Bilateral or contralateral nodes 6 cm or smaller, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3a",
+          "label": "Any node larger than 6 cm, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3b",
+          "label": "Any node with clinically overt extranodal extension (ENE+)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "In situ",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T1, T2 or T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Single small node, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4a",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T1-T4a",
+          "n": "N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "N3",
+          "m": "M0",
+          "basis": "ENE+ or node over 6 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "T4b",
+          "n": "any N",
+          "m": "M0",
+          "basis": "Unresectable local disease",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVC",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Levels II, III and IV jugular nodes plus retropharyngeal and paratracheal (level VI) nodes; bilateral drainage is common, and postcricoid lesions drain to paratracheal nodes. Contralateral or bilateral nodes upstage to N2c.",
+      "histologicGrade": "Well differentiated (G1), moderately differentiated (G2), poorly differentiated (G3); submucosal spread beyond visible margins is characteristic and reported with margin status.",
+      "histopathologicTypes": "Conventional squamous cell carcinoma (vast majority); basaloid and spindle-cell variants; postcricoid tumours associated with Plummer-Vinson (iron-deficiency) background.",
+      "prognosticFactors": [
+        "Subsite (pyriform sinus vs postcricoid vs posterior wall)",
+        "Hemilarynx fixation",
+        "Cartilage destruction",
+        "Extranodal extension (ENE)",
+        "Synchronous oesophageal primary (field cancerisation)",
+        "Tobacco, alcohol and iron-deficiency background",
+        "Nutritional and airway status at presentation"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

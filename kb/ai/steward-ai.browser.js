@@ -202,6 +202,32 @@
     return out;
   }
 
+  // Stopwords / framing words / connectors that must NOT count as clinical topic identity
+  var GENERIC_TOPIC = { treatment:1,treat:1,treating:1,management:1,manage:1,managing:1,therapy:1,approach:1,protocol:1,regimen:1,empiric:1,initial:1,signs:1,sign:1,symptoms:1,symptom:1,diagnosis:1,diagnose:1,poisoning:1,poison:1,toxicity:1,toxic:1,overdose:1,syndrome:1,disease:1,disorder:1,infection:1,fever:1,dose:1,dosing:1,drug:1,drugs:1,acute:1,chronic:1,severe:1,about:1,information:1,info:1,what:1,which:1,when:1,how:1,why:1,does:1,with:1,from:1,the:1,and:1,for:1,of:1,
+    // conversational fillers/lead-ins (4+ chars) — must NOT count as the topic, else
+    // "tell"/"hello"/"please" break the exact-match gate ("no entry for tell diabetic ketoacidosis").
+    tell:1,tells:1,told:1,telling:1,hello:1,hey:1,hi:1,please:1,kindly:1,could:1,would:1,should:1,shall:1,can:1,you:1,your:1,give:1,gives:1,giving:1,want:1,wants:1,need:1,needs:1,know:1,knows:1,explain:1,explaining:1,describe:1,help:1,helps:1,share:1,provide:1,list:1,discuss:1,okay:1,sure:1,here:1,there:1,also:1,some:1,more:1,this:1,that:1,these:1,those:1,understand:1,regarding:1,concerning:1,briefly:1,quickly:1,detail:1,details:1,
+    // more conversational lead-ins (verbs/nouns that carry NO clinical topic) — must be
+    // dropped so "speak about X", "talk me through X", "read out X" ground on X, not on "speak X".
+    speak:1,speaks:1,speaking:1,spoke:1,talk:1,talks:1,talking:1,talked:1,read:1,reads:1,reading:1,discusses:1,discussed:1,discussing:1,teach:1,teaches:1,teaching:1,taught:1,learn:1,learns:1,learning:1,study:1,studying:1,cover:1,covers:1,covering:1,define:1,defines:1,defining:1,mention:1,mentions:1,note:1,notes:1,overview:1,summary:1,summarise:1,summarize:1,summarised:1,summarized:1,lecture:1,walk:1,through:1,everything:1,anything:1,something:1,thing:1,things:1,stuff:1,aspect:1,aspects:1,topic:1,topics:1,brief:1,briefing:1,elaborate:1,
+    // demographic / qualifier / route / dose framing words (gold-next): they describe HOW a
+    // topic is framed, not the topic itself. Leaving them "distinctive" made the relevance
+    // gate refuse valid in-KB questions ("… in an ADULT", "CONFIRM … ORAL … FIRST-LINE …").
+    adult:1,adults:1,child:1,children:1,childhood:1,elderly:1,geriatric:1,male:1,female:1,
+    man:1,woman:1,men:1,women:1,patient:1,patients:1,person:1,people:1,someone:1,
+    year:1,years:1,month:1,months:1,week:1,weeks:1,aged:1,age:1,ages:1,old:1,young:1,
+    adolescent:1,adolescents:1,baby:1,babies:1,
+    confirm:1,confirms:1,confirmed:1,confirming:1,verify:1,verifies:1,verified:1,verifying:1,
+    correct:1,incorrect:1,wrong:1,right:1,true:1,false:1,really:1,actually:1,indeed:1,
+    first:1,second:1,third:1,line:1,firstline:1,oral:1,orally:1,intravenous:1,parenteral:1,
+    dosage:1,duration:1,frequency:1,route:1,routes:1,
+    // comparison, quantifier, relational, and prepositional connectors:
+    // must NOT count as disease identity words (e.g. "than" in "other than covid-19" or "more than 400")
+    than:1,then:1,other:1,others:1,more:1,most:1,less:1,least:1,much:1,many:1,
+    over:1,under:1,between:1,among:1,within:1,without:1,into:1,onto:1,
+    after:1,before:1,during:1,since:1,until:1,against:1,versus:1,each:1,every:1,both:1,
+    neither:1,either:1,such:1,same:1,different:1,difference:1 };
+
   // ── Instant nearest-KB resolver (deterministic; 0 tokens; offline/native-safe) ──────────
   // On a routing MISS, match the query's distinctive tokens against every KB entry's name +
   // alias tokens — exact first, then bounded edit-distance for typos/variants — and ground on
@@ -214,7 +240,7 @@
       if (!c || !c.diseaseId) return;
       var id = c.diseaseId; if (!byId[id]) byId[id] = {};
       (String(c.diseaseName || "") + " " + String(c.aliases || "")).toLowerCase()
-        .replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).forEach(function (t) { if (t.length >= 4) byId[id][t] = 1; });
+        .replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).forEach(function (t) { if (t.length >= 4 && !GENERIC_TOPIC[t]) byId[id][t] = 1; });
     });
     Object.keys(byId).forEach(function (id) {
       Object.keys(byId[id]).forEach(function (t) { (tokIdx[t] = tokIdx[t] || []).push(id); if (t.length >= 5) uniq[t] = 1; });
@@ -365,27 +391,15 @@
       // describing the wrong condition.
       var topicMatch = null;
       if (!top.length && (opts.question || "").trim()) {
-        var GENERIC_TOPIC = { treatment:1,treat:1,treating:1,management:1,manage:1,managing:1,therapy:1,approach:1,protocol:1,regimen:1,empiric:1,initial:1,signs:1,sign:1,symptoms:1,symptom:1,diagnosis:1,diagnose:1,poisoning:1,poison:1,toxicity:1,toxic:1,overdose:1,syndrome:1,disease:1,disorder:1,infection:1,fever:1,dose:1,dosing:1,drug:1,drugs:1,acute:1,chronic:1,severe:1,about:1,information:1,info:1,what:1,which:1,when:1,how:1,why:1,does:1,with:1,from:1,the:1,and:1,for:1,of:1,
-          // conversational fillers/lead-ins (4+ chars) — must NOT count as the topic, else
-          // "tell"/"hello"/"please" break the exact-match gate ("no entry for tell diabetic ketoacidosis").
-          tell:1,tells:1,told:1,telling:1,hello:1,hey:1,hi:1,please:1,kindly:1,could:1,would:1,should:1,shall:1,can:1,you:1,your:1,give:1,gives:1,giving:1,want:1,wants:1,need:1,needs:1,know:1,knows:1,explain:1,explaining:1,describe:1,help:1,helps:1,share:1,provide:1,list:1,discuss:1,okay:1,sure:1,here:1,there:1,also:1,some:1,more:1,this:1,that:1,these:1,those:1,understand:1,regarding:1,concerning:1,briefly:1,quickly:1,detail:1,details:1,
-          // more conversational lead-ins (verbs/nouns that carry NO clinical topic) — must be
-          // dropped so "speak about X", "talk me through X", "read out X" ground on X, not on "speak X".
-          speak:1,speaks:1,speaking:1,spoke:1,talk:1,talks:1,talking:1,talked:1,read:1,reads:1,reading:1,discusses:1,discussed:1,discussing:1,teach:1,teaches:1,teaching:1,taught:1,learn:1,learns:1,learning:1,study:1,studying:1,cover:1,covers:1,covering:1,define:1,defines:1,defining:1,mention:1,mentions:1,note:1,notes:1,overview:1,summary:1,summarise:1,summarize:1,summarised:1,summarized:1,lecture:1,walk:1,through:1,everything:1,anything:1,something:1,thing:1,things:1,stuff:1,aspect:1,aspects:1,topic:1,topics:1,brief:1,briefing:1,elaborate:1,
-          // demographic / qualifier / route / dose framing words (gold-next): they describe HOW a
-          // topic is framed, not the topic itself. Leaving them "distinctive" made the relevance
-          // gate refuse valid in-KB questions ("… in an ADULT", "CONFIRM … ORAL … FIRST-LINE …").
-          // NOTE: clinically-discriminating qualifiers (renal, hepatic, pregnant, resistant, mrsa,
-          // paediatric-specific dosing intent, etc.) are deliberately NOT listed here.
-          adult:1,adults:1,child:1,children:1,childhood:1,elderly:1,geriatric:1,male:1,female:1,
-          man:1,woman:1,men:1,women:1,patient:1,patients:1,person:1,people:1,someone:1,
-          year:1,years:1,month:1,months:1,week:1,weeks:1,aged:1,age:1,ages:1,old:1,young:1,
-          adolescent:1,adolescents:1,baby:1,babies:1,
-          confirm:1,confirms:1,confirmed:1,confirming:1,verify:1,verifies:1,verified:1,verifying:1,
-          correct:1,incorrect:1,wrong:1,right:1,true:1,false:1,really:1,actually:1,indeed:1,
-          first:1,second:1,third:1,line:1,firstline:1,oral:1,orally:1,intravenous:1,parenteral:1,
-          dosage:1,duration:1,frequency:1,route:1,routes:1 };
-        var distinctive = String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
+        var acroSet = {};
+        String(opts.question).replace(/[^a-zA-Z0-9 ]+/g, " ").split(/\s+/).forEach(function (w) {
+          if (w.length >= 2 && w.length <= 5 && (w === w.toUpperCase() || /^[A-Z0-9]+$/.test(w) || (w.length >= 3 && /^[A-Z][a-zA-Z0-9]+[A-Z]/.test(w)))) {
+            acroSet[w.toLowerCase()] = 1;
+          }
+        });
+        var distinctive = String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) {
+          return !GENERIC_TOPIC[t] && (t.length >= 4 || (t.length >= 2 && acroSet[t]));
+        });
         // Coverage-based relevance (gold-next) — replaces the brittle all-or-nothing every() gate.
         // Three tiers: CONFIDENT (answer directly) / ASSUME (nearest topic, stated assumption +
         // refine chips) / NONE (topic absent → opt-in web research, never describe a wrong disease).
@@ -426,7 +440,7 @@
           // the query ("stemi"/"heart attack" → ACS, "loose motions" → diarrhoea). Aliases are
           // hand-picked to be specific, so an alias hit is a real name-level match even when the
           // display name is empty (e.g. ACS) or generic.
-          var aliasToks = aliasStr.split(" ").filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
+          var aliasToks = aliasStr.split(" ").filter(function (t) { return t.length >= 2 && !GENERIC_TOPIC[t]; });
           var aliasHit = aliasToks.some(function (t) { return qHay.indexOf(" " + t + " ") >= 0; });
           // Confident when: nothing distinctive to check; the whole name is named; a NAME token or a
           // curated ALIAS is named; or ≥2 distinct query terms are covered. A LONE BODY-ONLY hit no

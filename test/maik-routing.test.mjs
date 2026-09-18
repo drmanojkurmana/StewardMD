@@ -85,6 +85,11 @@ await expect("malaria treatment", /malaria/i, "NOREG malaria");
 await expect("community acquired pneumonia treatment", /community acquired pneumonia/i, "NOREG CAP");
 await expect("meningitis treatment", /mening/i, "NOREG meningitis (qualifier-led name)");
 
+// --- REGRESSION: off-KB query must NOT spuriously assume Common Viral Respiratory Infections ---
+const hccRes = await routeOf("Which drug in HCC Need AfP more than 400?");
+ok(!/Common Viral Respiratory Infections/i.test(hccRes.name), "SAFE 'Which drug in HCC Need AfP more than 400?' NOT assumed to be Common Viral Respiratory Infections  →  " + (hccRes.name || "(none)"));
+ok(hccRes.mode === "none", "SAFE 'Which drug in HCC Need AfP more than 400?' resolves as off-KB mode 'none' (not spurious assume)  →  [" + hccRes.mode + "]");
+
 // --- source guards for the three fix mechanisms ---
 const iface = fs.readFileSync(join(ROOT, "kb/ai/interface.mjs"), "utf8");
 ok(/KEEP_SHORT/.test(iface) && /"mi"/.test(iface) && /"af"/.test(iface) && /KEEP_SHORT\.has\(w\)/.test(iface), "tokenize keeps {mi,af}");

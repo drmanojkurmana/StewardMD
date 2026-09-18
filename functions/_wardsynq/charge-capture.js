@@ -61,6 +61,8 @@ const HAPPENED = Object.freeze({
    * charges for supply and a hospital that charges for the dose given are both real, and a site
    * choosing one puts only that code in its tariff. Nothing here decides which. */
   MedicationDispense: Object.freeze(["dispensed", "issued"]),
+  /* An ambulance trip that reached handover (ambulance.js). A cancelled or unfinished trip is not a charge. */
+  AmbulanceTrip: Object.freeze(["completed"]),
 });
 
 /* TASK 4.18's own end-to-end journey test found this: two of the four resource models here name
@@ -70,7 +72,7 @@ const HAPPENED = Object.freeze({
  * charge: `row.status` was always undefined for those two types, so every one of them fell through
  * to "did_not_happen" regardless of its real state. Named here, once, rather than guessed per call
  * site - a second place this could drift silently if left implicit. */
-const STATUS_FIELD = Object.freeze({ MedicationDispense: "state", SpecimenCollection: "state" });
+const STATUS_FIELD = Object.freeze({ MedicationDispense: "state", SpecimenCollection: "state", AmbulanceTrip: "state" });
 
 /** PURE. The code an item is priced by, and what it is called on a bill. */
 function itemFrom(resourceType, row) {
@@ -85,7 +87,11 @@ function itemFrom(resourceType, row) {
     return { code: str(r.code) || "specimen-collection", display: str(r.display) || "Specimen collection", at: r.collectedAt || r.at || null };
   }
   if (resourceType === "MedicationDispense") {
-    return { code: str(r.drugCode) || str(r.drug), display: str(r.drug) || str(r.drugCode), at: r.dispensedAt || r.at || null };
+    // A take-home supply at discharge says so: GST treats it apart from medicines used in the stay (region adapter).
+    return { code: str(r.drugCode) || str(r.drug), display: str(r.drug) || str(r.drugCode), at: r.dispensedAt || r.at || null, ...(r.takeHome === true ? { takeHome: true } : {}) };
+  }
+  if (resourceType === "AmbulanceTrip") {
+    return { code: str(r.chargeCode), display: `Ambulance (${str(r.vehicleClass) || "type not recorded"})`, at: (r.times && r.times.handover) || null };
   }
   return null;
 }
@@ -195,7 +201,10 @@ function tariffTable(configTariff, priceListRows) {
     if (!key || !Number.isFinite(paise) || paise < 0) continue;
     for (const k of Object.keys(out)) if (k.toUpperCase() === key.toUpperCase()) delete out[k];
     out[key] = { amount: paise / 100, description: str(r.name) || key, kind: str(r.kind) || null, ward: str(r.ward) || null,
-      ...(r.gstRate !== undefined && r.gstRate !== null && r.gstRate !== "" ? { gstRate: r.gstRate } : {}) };
+      ...(r.gstRate !== undefined && r.gstRate !== null && r.gstRate !== "" ? { gstRate: r.gstRate } : {}),
+      ...(str(r.hsnSac) ? { hsnSac: str(r.hsnSac) } : {}), ...(r.intensiveCare === true ? { intensiveCare: true } : {}),
+      ...(str(r.intensiveCareClass) ? { intensiveCareClass: str(r.intensiveCareClass) } : {}),
+      ...(Number(r.unitHours) >= 1 && Number(r.unitHours) < 24 ? { unitHours: Number(r.unitHours) } : {}), ...(r.nonHealthcare === true ? { nonHealthcare: true } : {}) };
     // A test is also found by its name, so a coded row still prices a report recorded under the name.
     if (str(r.code) && str(r.name) && !Object.keys(out).some((k) => k.toUpperCase() === str(r.name).toUpperCase())) out[str(r.name)] = out[key];
   }
@@ -226,7 +235,8 @@ function stayDays(encounter, versions, nowMs) {
       ward = str(moves[0].location && moves[0].location.ward) || ward;
       for (const v of moves) { const m = Date.parse(str(v.movedAt)); if (Number.isFinite(m) && m <= t) ward = str(v.location && v.location.ward) || ward; }
     }
-    days.push({ n, at: new Date(t).toISOString(), ward });
+    // hours: how much of this day the stay covered, 24 except a last day cut short by discharge (or now).
+    days.push({ n, at: new Date(t).toISOString(), ward, hours: Math.max(0, Math.min(24, (end - t) / 3600000)) });
   }
   return days;
 }
@@ -243,8 +253,12 @@ function stayDayItems(encounter, days, table) {
   const seen = new Set(), items = [];
   for (const d of days || []) {
     const bed = entries.find((x) => x.e.kind === "bed" && x.e.ward && sameWard(x.e, d.ward)) || entries.find((x) => x.e.kind === "bed" && !x.e.ward);
+    /* A bed priced per shift or per hour (unitHours under 24) is charged the units the day was occupied, a begun unit
+     * counted whole, so the day's line is that day's room charge (gst-packages). A per-day bed stays one unit a day. */
+    const unit = bed && Number(bed.e.unitHours) >= 1 && Number(bed.e.unitHours) < 24 ? Number(bed.e.unitHours) : 24;
+    const quantity = unit === 24 ? 1 : Math.max(1, Math.ceil((Number.isFinite(d.hours) ? d.hours : 24) / unit - 1e-9));
     items.push({ code: bed ? bed.key : "BED-DAY", display: bed ? (bed.e.description || bed.key) : `Bed per day${d.ward ? ", " + d.ward : ""}`,
-      at: d.at, ward: d.ward || null, day: d.n, sourceType: "Encounter", sourceId: `${encounter.id}:bed:${d.n}`, patientId: encounter.patientId || null, quantity: 1 });
+      at: d.at, ward: d.ward || null, day: d.n, sourceType: "Encounter", sourceId: `${encounter.id}:bed:${d.n}`, patientId: encounter.patientId || null, quantity });
     for (const x of entries) {
       if (x.e.kind === "bed" || (x.e.ward && !sameWard(x.e, d.ward)) || seen.has(`${x.e.description}:${d.n}`)) continue;
       seen.add(`${x.e.description}:${d.n}`);

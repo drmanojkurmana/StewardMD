@@ -163,7 +163,6 @@ async function patientReferrals(request, env, ctx) {
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed" }; }
 }
 
-const INBOX_CAP = 500;
 /**
  * The hospital's open referrals: "to my specialty" for the receiving side, "sent by me" for the
  * referrer. Emergency first, then oldest first. A full scan page is reported as partial.
@@ -174,7 +173,7 @@ async function referralInbox(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
   try {
-    const rows = await svc.list(TYPE, INBOX_CAP);
+    const rows = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; // R4-2: every record (listAll, paged; was the oldest N), past 50,000 refused rather than short
     const specialty = str(ctx.specialty).toLowerCase();
     const mine = ctx.view === "sent";
     const rank = (u) => URGENCY.indexOf(u);
@@ -182,7 +181,7 @@ async function referralInbox(request, env, ctx) {
       .filter((r) => OPEN.includes(r.status) || (mine && r.status === "declined"))
       .filter((r) => (mine ? r.referringProvider === resolved.actor.id : (!specialty || r.specialty.toLowerCase() === specialty)))
       .sort((a, b) => rank(a.urgency) - rank(b.urgency) || String(a.requestedAt).localeCompare(String(b.requestedAt)));
-    return { ...base, ok: true, referrals: out, partial: (rows || []).length >= INBOX_CAP, ...(rows && rows.length >= INBOX_CAP ? { partialWarning: `Only the latest ${INBOX_CAP} referrals were checked; older open ones may be missing.` } : {}) };
+    return { ...base, ok: true, referrals: out, partial: false };
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed" }; }
 }
 

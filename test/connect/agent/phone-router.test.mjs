@@ -532,3 +532,167 @@ test("plan validates input sizes and never persists lines", async () => {
   }, env, doc1.headers));
   assert.equal(res3.status, 400);
 });
+
+test("discovery keeps the phone's proof trace (method, redacted path, counts) and refuses one that carries an identifier", async () => {
+  const { env, doc1 } = await setupTestEnv();
+  const sRes = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", emrUrl: DEP_ORIGIN, runner: "phone", consent: { agreed: true } }, env, doc1.headers));
+  const sessionId = (await sRes.json()).sessionId;
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/handoff`, { tenantId: "t1" }, env, doc1.headers));
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/progress`, { tenantId: "t1", stage: "DISCOVERING" }, env, doc1.headers));
+  const proofs = [
+    { resource: "labs", status: "proven", tried: 2, brain: true, overlap: 1, attempts: [
+      { method: "POST", path: "/Doctor/Home/Searchnew", role: "data", kind: "html", hits: 8, ratio: 1 },
+      { method: "POST", path: "/Lab/Home/GetSearchPatientId", role: "data", kind: "json", hits: 8, ratio: 1, gemini: "ok" },
+    ] },
+    { resource: "labs-detail", status: "no-requests", tried: 0, attempts: [] },
+    { resource: "radiology", status: "proven", tried: 1, attempts: [{ method: "GET", path: "/Lab/Result/2012130687", role: "data", kind: "html", hits: 3, ratio: 1 }] },
+  ];
+  const res = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, { tenantId: "t1", spec: minimalSpec(), steps: [], observedViews: observedViews(), proofs }, env, doc1.headers));
+  assert.equal(res.status, 200, await res.clone().text());
+  const phoneState = JSON.parse((await findJobForSession(env.CONNECT_DB, "t1", sessionId)).phone_state);
+  assert.deepEqual(phoneState.proofTrace, [
+    { resource: "labs", status: "proven", tried: 2, attempts: [
+      { method: "POST", path: "/Doctor/Home/Searchnew", role: "data", kind: "html", hits: 8, ratio: 1 },
+      { method: "POST", path: "/Lab/Home/GetSearchPatientId", role: "data", kind: "json", hits: 8, ratio: 1 },
+    ] },
+    { resource: "labs-detail", status: "no-requests", tried: 0, attempts: [] },
+    // An attempt whose path still carries an identifier is dropped, never stored.
+    { resource: "radiology", status: "proven", tried: 1, attempts: [] },
+  ]);
+});
+
+function provenViewOf(resourceHint, path, extra) {
+  return Object.assign({
+    resourceHint, pathTemplate: "/Doctor/Home", rowsSelector: "#t tbody tr", headers: ["A", "B"],
+    proof: { status: "proven", tried: 1, brain: true, overlap: 1, hits: 4, cells: 4, kind: "json" },
+    endpoints: [{ method: "GET", path, xhr: true, role: "data", params: { id: { from: "worklist", field: "MRNo" } }, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }],
+  }, extra || {});
+}
+function completeSet() {
+  return [
+    provenViewOf("worklist", "/Doctor/Home/GetIPWL?Type=IPWorkList&__RequestVerificationToken", { endpoints: [{ method: "GET", path: "/Doctor/Home/GetIPWL?Type=IPWorkList&__RequestVerificationToken", xhr: true, role: "data", params: { Type: { constant: "IPWorkList" }, __RequestVerificationToken: { token: true } }, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }] }),
+    provenViewOf("medications", "/Doctor/Home/GetMedicines/?id"),
+    provenViewOf("labs", "/Lab/Home/GetSearchPatientId?patient_id"),
+    Object.assign(provenViewOf("labs-detail", "/Lab/Home/GetPrintLabResultDetailsAuth?Render_ID"), { detailOf: "labs" }),
+    provenViewOf("radiology", "/Radio/Home?recordNo"),
+    Object.assign(provenViewOf("radiology-detail", "/Radiology/Home/GetRadiologyResultPrint?resultid"), { detailOf: "radiology" }),
+  ];
+}
+
+async function phoneCandidate(views) {
+  const t = await setupTestEnv();
+  const sRes = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", emrUrl: DEP_ORIGIN, runner: "phone", consent: { agreed: true } }, t.env, t.doc1.headers));
+  const sessionId = (await sRes.json()).sessionId;
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/handoff`, { tenantId: "t1" }, t.env, t.doc1.headers));
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/progress`, { tenantId: "t1", stage: "DISCOVERING" }, t.env, t.doc1.headers));
+  const dis = await (await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, { tenantId: "t1", spec: minimalSpec(), steps: [], observedViews: views }, t.env, t.doc1.headers))).json();
+  const evRes = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/evidence`, {
+    tenantId: "t1", probes: (dis.probes || []).map((p) => ({ opId: p.opId, status: 200, contentType: "text/html", responseShape: null, itemCount: null })),
+  }, t.env, t.doc1.headers));
+  assert.equal(evRes.status, 200, await evRes.clone().text());
+  return Object.assign(t, { sessionId, versionId: (await evRes.json()).candidateVersionId });
+}
+
+test("approval needs every required resource endpoint-backed; GET /versions/:id reports completeness", async () => {
+  // A resource missing its proven endpoint: refused, and the missing one is named.
+  const partial = await phoneCandidate(completeSet().filter((v) => v.resourceHint !== "radiology-detail"));
+  const refused = await onRequest(post(`/api/connect/agent/versions/${partial.versionId}/approve`, { tenantId: "t1" }, partial.env, partial.owner1.headers));
+  assert.equal(refused.status, 409, await refused.clone().text());
+  assert.match(JSON.stringify(await refused.json()), /radiology-detail/);
+  const verGet = await (await onRequest(get(`/api/connect/agent/versions/${partial.versionId}?tenant=t1`, partial.env, partial.doc1.headers))).json();
+  assert.equal(verGet.completeness.endpointComplete, false);
+  assert.equal(verGet.completeness.how["medications"], "endpoint");
+  assert.deepEqual(verGet.completeness.missing, ["radiology-detail"]);
+
+  // The ward list unproven: also refused, naming the ward list.
+  const noWard = completeSet();
+  delete noWard[0].proof; delete noWard[0].endpoints;
+  // Its own env: every phoneCandidate() builds a fresh database, so it must be approved in that one.
+  const noWardCand = await phoneCandidate(noWard);
+  const wardRefused = await onRequest(post(`/api/connect/agent/versions/${noWardCand.versionId}/approve`, { tenantId: "t1" }, noWardCand.env, noWardCand.owner1.headers));
+  assert.equal(wardRefused.status, 409, await wardRefused.clone().text());
+  assert.match(JSON.stringify(await wardRefused.json()), /worklist/);
+
+  // Every required resource proven: approved.
+  const full = await phoneCandidate(completeSet());
+  const ok = await onRequest(post(`/api/connect/agent/versions/${full.versionId}/approve`, { tenantId: "t1" }, full.env, full.owner1.headers));
+  assert.equal(ok.status, 200, await ok.clone().text());
+  assert.equal((await ok.json()).state, "ACTIVE");
+});
+
+test("a phone run that found no screens at all is refused too: the worst adapter must not slip through the gate", async () => {
+  // The crawl found nothing, so there are no views to check. Without evidence of its own that is not an
+  // exemption from the gate, it is the emptiest adapter there is.
+  const none = await phoneCandidate([]);
+  const refused = await onRequest(post(`/api/connect/agent/versions/${none.versionId}/approve`, { tenantId: "t1" }, none.env, none.owner1.headers));
+  assert.equal(refused.status, 409, await refused.clone().text());
+  assert.match(JSON.stringify(await refused.json()), /proved nothing/);
+});
+
+function radiologyView(params) {
+  return provenViewOf("radiology", "/Radio/Home?recordNo", {
+    endpoints: [{ method: "GET", path: "/Radio/Home?recordNo", xhr: true, role: "data", params, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }],
+  });
+}
+
+test("an unmapped patient key is not unscoped -- the runtime backfills it; only a sent-empty one is", async () => {
+  // adapter-runtime.mjs provenValue() falls back to idCandidates(key, patient)[0] for {unmapped:true} on a
+  // patient/visit key (ver_05ce2f04: recordNo -> patientId, exactly /Radio/Home?recordNo=${patientId}), so
+  // this view is genuinely endpoint-backed.
+  const unmappedSet = completeSet().filter((v) => v.resourceHint !== "radiology").concat(radiologyView({ recordNo: { unmapped: true } }));
+  const unmappedCand = await phoneCandidate(unmappedSet);
+  const unmappedVer = await (await onRequest(get(`/api/connect/agent/versions/${unmappedCand.versionId}?tenant=t1`, unmappedCand.env, unmappedCand.doc1.headers))).json();
+  assert.equal(unmappedVer.completeness.how["radiology"], "endpoint");
+
+  // {empty:true}: adapter-runtime.mjs unscopedField() refuses to send this at all, so it genuinely stays unscoped.
+  const emptySet = completeSet().filter((v) => v.resourceHint !== "radiology").concat(radiologyView({ recordNo: { empty: true } }));
+  const emptyCand = await phoneCandidate(emptySet);
+  const emptyVer = await (await onRequest(get(`/api/connect/agent/versions/${emptyCand.versionId}?tenant=t1`, emptyCand.env, emptyCand.doc1.headers))).json();
+  assert.equal(emptyVer.completeness.how["radiology"], "unscoped");
+});
+
+function labsView(params) {
+  return provenViewOf("labs", "/Doctor/Home/OTLabPrintsSecretary/?id", {
+    endpoints: [{ method: "GET", path: "/Doctor/Home/OTLabPrintsSecretary/?id", xhr: true, role: "data", params, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }],
+  });
+}
+
+test("a constant patient key is not scoped either -- GHIS ver_b27ed367: ?id=undefined proven once replays the same wrong chart for every patient", async () => {
+  // paramsOf (connect-agent/phone/prove.mjs) never records a {constant} for a PATIENT_ISH key from live
+  // capture any more (a recorded 'undefined' is {empty:true} now), but a version saved before that fix,
+  // or a hand-authored one, can still carry one -- the server gate must refuse it exactly like {empty:true}.
+  const constSet = completeSet().filter((v) => v.resourceHint !== "labs").concat(labsView({ id: { constant: "undefined" } }));
+  const constCand = await phoneCandidate(constSet);
+  const constVer = await (await onRequest(get(`/api/connect/agent/versions/${constCand.versionId}?tenant=t1`, constCand.env, constCand.doc1.headers))).json();
+  assert.equal(constVer.completeness.how["labs"], "unscoped");
+
+  // A key traced to a worklist row is genuinely patient-scoped: still "endpoint".
+  const tracedSet = completeSet().filter((v) => v.resourceHint !== "labs").concat(labsView({ id: { from: "worklist", field: "Patient ID" } }));
+  const tracedCand = await phoneCandidate(tracedSet);
+  const tracedVer = await (await onRequest(get(`/api/connect/agent/versions/${tracedCand.versionId}?tenant=t1`, tracedCand.env, tracedCand.doc1.headers))).json();
+  assert.equal(tracedVer.completeness.how["labs"], "endpoint");
+});
+
+test("a list whose own proven columns are already the results needs no separate detail call (GHIS OTLabPrints)", async () => {
+  // labs proven with the real GHIS OTLabPrints headers (result-shaped), labs-detail never proven at all:
+  // labs-detail reads "inline", is not in `missing`, and the whole candidate still approves.
+  const resultShapedLabs = provenViewOf("labs", "/Doctor/Home/OTLabPrintsSecretary/", {
+    headers: ["TEST NAME (METHOD)", "TEST NAME", "RESULTS", "BIOLOGICAL REFERENCE INTERVAL", "UNITS"],
+  });
+  const inlineSet = completeSet().filter((v) => v.resourceHint !== "labs" && v.resourceHint !== "labs-detail").concat(resultShapedLabs);
+  const inlineCand = await phoneCandidate(inlineSet);
+  const inlineVer = await (await onRequest(get(`/api/connect/agent/versions/${inlineCand.versionId}?tenant=t1`, inlineCand.env, inlineCand.doc1.headers))).json();
+  assert.equal(inlineVer.completeness.how["labs-detail"], "inline");
+  assert.equal(inlineVer.completeness.missing.includes("labs-detail"), false);
+  assert.equal(inlineVer.completeness.endpointComplete, true);
+  const inlineApprove = await onRequest(post(`/api/connect/agent/versions/${inlineCand.versionId}/approve`, { tenantId: "t1" }, inlineCand.env, inlineCand.owner1.headers));
+  assert.equal(inlineApprove.status, 200, await inlineApprove.clone().text());
+
+  // labs proven with order-shaped headers (no result/value/unit/range/low/high column): still genuinely absent.
+  const orderShapedLabs = provenViewOf("labs", "/Doctor/Home/OTLabPrintsSecretary/", { headers: ["SERVICE", "ORDER DATE", "STATUS"] });
+  const orderSet = completeSet().filter((v) => v.resourceHint !== "labs" && v.resourceHint !== "labs-detail").concat(orderShapedLabs);
+  const orderCand = await phoneCandidate(orderSet);
+  const orderVer = await (await onRequest(get(`/api/connect/agent/versions/${orderCand.versionId}?tenant=t1`, orderCand.env, orderCand.doc1.headers))).json();
+  assert.equal(orderVer.completeness.how["labs-detail"], "absent");
+  assert.deepEqual(orderVer.completeness.missing, ["labs-detail"]);
+});

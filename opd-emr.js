@@ -2194,14 +2194,34 @@
 
   function oncoExportHtmlDoc(html, filename, title) {
     var name = (filename || "StewardMD-Protocol-sheet").replace(/[^\w.-]+/g, "-");
+    toast("Building PDF...");
     if (G.SMD_IS_NATIVE) {
       var N = G.SMD_NATIVE;
       if (N && N.sharePdfFromHtml) {
-        toast("Building PDF...");
-        N.sharePdfFromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () { oncoShareHtml(html, name); });
+        N.sharePdfFromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () {
+          if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+            G.SMD_PDF.fromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () { toast("PDF export failed."); });
+          } else {
+            toast("PDF export unavailable.");
+          }
+        });
         return;
       }
-      oncoShareHtml(html, name);
+    }
+    if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+      G.SMD_PDF.fromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () {
+        try {
+          var ifr = document.createElement("iframe");
+          ifr.setAttribute("aria-hidden", "true");
+          ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
+          document.body.appendChild(ifr);
+          var d = ifr.contentWindow.document; d.open(); d.write(html); d.close();
+          setTimeout(function () {
+            try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {}
+            setTimeout(function () { try { ifr.remove(); } catch (e) {} }, 1500);
+          }, 350);
+        } catch (e) { toast("Export unavailable."); }
+      });
       return;
     }
     try {
@@ -2482,7 +2502,17 @@
   // content's own governance status (vault/modules/WardSynQ.md) - never phrased as a cleared check.
   function wardsynqSafetyNote(safety) {
     if (!safety) return "";
-    if (safety.degraded) return "\n\n(Decision support unavailable right now - proceeding without it.)";
+    if (safety.degraded) return "\n\nNOT CHECKED: decision support could not read this patient's record, so NO allergy or interaction check ran. An unreadable allergy list is not an empty one - check allergies yourself before prescribing.";
+    /* R6-1, 2026-09-18: one of the two reads failed. Until the server stopped swallowing it, this
+     * arrived as findings: [] and the doctor was told "no interaction or allergy match found" about
+     * a patient whose allergy record had never been read. Named, and said FIRST. */
+    var nc = (safety.notChecked || []);
+    if (nc.length) {
+      return "\n\nNOT CHECKED against: " + nc.map(function (t) {
+        return t === "AllergyIntolerance" ? "this patient's allergies" : t === "MedicationOrder" ? "this patient's other medicines" : t;
+      }).join(" and ") + " - that part of the record could not be read. It is not a clear check. Check it yourself before prescribing." +
+        ((safety.findings && safety.findings.length) ? "\n\nFrom what could be read:\n" + safety.findings.slice(0, 5).map(function (f) { return "- " + f.message; }).join("\n") : "");
+    }
     // A drug the rule pack could not resolve was never checked against ANYTHING. Reporting "no
     // interaction found" for it would be a clean bill of health for a check that never ran, which is
     // exactly the distinction rx-safety.js reports `unresolvedDrug` for and which this function used

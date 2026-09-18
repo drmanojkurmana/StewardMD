@@ -33,9 +33,10 @@
    * assigning a role to a staff member - never learned they existed. Keep this in sync by hand;
    * there is no test that catches a role missing here, only a role an admin cannot find. */
   var ROLES = ["admin", "doctor", "supervisor", "nurse", "intern", "resident", "reception", "cashier",
-    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist",
+    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist", "obstetrician", "public_health", "pcpndt_nodal", "ndps_inspector", "store_keeper", "biomedical_engineer",
     "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver",
-    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "viewer"];
+    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "infection_control", "dpo",
+    "dietitian", "kitchen", "cssd", "housekeeping", "transport", "mortuary", "viewer"];
 
   // One line per common role, from the capability lists in functions/_queue_roles.js ROLE_CAPS.
   // Built at render time (not a module constant) because each note is a T() call in the staff language.
@@ -52,6 +53,19 @@
       ["blood_bank", T(c, "site.admin.staff.roleNote.bloodBank", "Crossmatches, issues and administers transfusions only.")],
       ["radiographer", T(c, "site.admin.staff.roleNote.radiographer", "Acquires the imaging study. Reads the chart, cannot file a report or protocol a study.")],
       ["radiologist", T(c, "site.admin.staff.roleNote.radiologist", "Protocols and reports imaging studies (the same authority a lab result release uses). No other chart write.")],
+      ["obstetrician", T(c, "site.admin.staff.roleNote.obstetrician", "A doctor who also keeps the PCPNDT Form F and the MTP register.")],
+      ["public_health", T(c, "site.admin.staff.roleNote.publicHealth", "Public health nodal officer: reads the chart and keeps the notifiable disease register and the weekly IHIP export.")],
+      ["pcpndt_nodal", T(c, "site.admin.staff.roleNote.pcpndtNodal", "PCPNDT nodal officer: reads the Form F register and records the monthly report's submission. Writes no Form F.")],
+      ["ndps_inspector", T(c, "site.admin.staff.roleNote.ndpsInspector", "NDPS inspector or auditor: reads the controlled-drug registers and their exports. Writes nothing.")],
+      ["supervisor", T(c, "site.admin.staff.roleNote.supervisor", "Runs the OPD queue and reads the chart. Approves stores indents for the departments in their scope.")],
+      ["store_keeper", T(c, "site.admin.staff.roleNote.storeKeeper", "Runs general stores: items, store locations, issuing approved indents, receiving and ordering. No chart access.")],
+      ["biomedical_engineer", T(c, "site.admin.staff.roleNote.biomedicalEngineer", "Keeps the asset register, preventive maintenance, calibration and job cards. No chart access.")],
+      ["dietitian", T(c, "site.admin.staff.roleNote.dietitian", "Reads the chart, orders and changes diets, sees the meal rounds.")],
+      ["kitchen", T(c, "site.admin.staff.roleNote.kitchen", "Meal rounds only: name, bed, diet, nil by mouth and allergies. Marks trays prepared and delivered.")],
+      ["cssd", T(c, "site.admin.staff.roleNote.cssd", "Instrument sets, steriliser loads and their indicators, issue to theatre. No chart access.")],
+      ["housekeeping", T(c, "site.admin.staff.roleNote.housekeeping", "Takes and finishes cleaning tasks. A supervisor inspects them. No chart access.")],
+      ["transport", T(c, "site.admin.staff.roleNote.transport", "Ambulance fleet, trip requests, dispatch and trip times.")],
+      ["mortuary", T(c, "site.admin.staff.roleNote.mortuary", "Receives, stores and releases bodies against the death record.")],
     ];
   }
 
@@ -80,13 +94,22 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["seed", "nav.admin.seed"], ["maik", "nav.admin.maik"], ["security", "nav.admin.security"], ["health", "nav.admin.health"], ["export", "nav.admin.export"], ["fhir", "nav.admin.fhir"], ["integrations", "nav.admin.integrations"], ["bugs", "nav.admin.bugs"]);
+    if (c.isWardsynq()) tabs.push(["seed", "nav.admin.seed"], ["maik", "nav.admin.maik"], ["security", "nav.admin.security"], ["health", "nav.admin.health"], ["export", "nav.admin.export"], ["fhir", "nav.admin.fhir"], ["integrations", "nav.admin.integrations"], ["bugs", "nav.admin.bugs"], ["governance", "nav.admin.governance"],
+      // Owner's legal guidance 2026-09-17: the legal requirement registry and this hospital's State/UT (pages/registers.js WSQ._legal).
+      ["legal", "nav.admin.legal"],
+      // Gap wave 2026-09-16: HR beyond the rota (pages/hr.js) and patient engagement (pages/engage.js).
+      ["hrAttendance", "nav.admin.hrAttendance"], ["hrCredentials", "nav.admin.hrCredentials"], ["hrTraining", "nav.admin.hrTraining"],
+      ["patientComms", "nav.admin.patientComms"], ["onlineBooking", "nav.admin.onlineBooking"], ["patientFeedback", "nav.admin.patientFeedback"],
+      // R2-5: patients, prices and suppliers from the system being replaced (legacy-import.js).
+      ["legacyImport", "nav.admin.legacyImport"],
+      // R5-3: closing orders this hospital resulted before anything closed one (order-backfill.js).
+      ["orderBackfill", "nav.admin.orderBackfill"]);
     // #/admin/tariff opens that tab: the cashier's "no price set" message links straight to the Price list (LT-30).
     // Applied once per arrival, so the tab buttons still work while the address says /tariff.
     if (st.page === "admin" && st.arg && st._adminArg !== st.arg && tabs.some(function (t) { return t[0] === st.arg; })) st._adminTab = st.arg;
     st._adminArg = st.page === "admin" ? st.arg : "";
     var tab = st._adminTab || "hospital";
-    if ((tab === "seed" || tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations" || tab === "bugs") && !c.isWardsynq()) tab = "hospital";
+    if (["seed", "maik", "security", "health", "export", "fhir", "integrations", "bugs", "governance", "legal", "hrAttendance", "hrCredentials", "hrTraining", "patientComms", "onlineBooking", "patientFeedback", "legacyImport", "orderBackfill"].indexOf(tab) >= 0 && !c.isWardsynq()) tab = "hospital";
     var navTr = c.navTr || function (k) { return k; };
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.admin.title", "Admin Center")) + '</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist" lang="' + c.esc(c.navLang || "en") + '">' + tabs.map(function (t) {
@@ -96,7 +119,13 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs };
+    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, legacyImport: renderImport, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs, orderBackfill: renderOrderClosures,
+      // Privacy and compliance is its own page (pages/governance.js); the tab is the Admin Center's door to it.
+      governance: function () { st._adminTab = "hospital"; WSQ.go("governance"); },
+      legal: function (x, y) { return WSQ._legal.render(x, y); },
+      // Looked up when the tab opens: pages/hr.js and pages/engage.js load after this file.
+      hrAttendance: function (x, y) { return WSQ._hr.attendance(x, y); }, hrCredentials: function (x, y) { return WSQ._hr.credentials(x, y); }, hrTraining: function (x, y) { return WSQ._hr.training(x, y); },
+      patientComms: function (x, y) { return WSQ._engage.comms(x, y); }, onlineBooking: function (x, y) { return WSQ._engage.booking(x, y); }, patientFeedback: function (x, y) { return WSQ._engage.feedback(x, y); } };
     return renderers[tab](c, body);
   } });
 
@@ -174,6 +203,9 @@
     return h + '<div id="bugMsg"></div></div>';
   }
   WSQ._bugsHtml = bugsHtml;
+  WSQ._renderPackages = function (c, host) { return renderPackages(c, host); };
+  WSQ._renderGstSettings = function (c, host) { return renderGstSettings(c, host); };
+  WSQ._renderRcmSettings = function (c, host) { return renderRcmSettings(c, host); };
   /** The one request each button sends. kind: in_progress | solved | open | remove. */
   function bugAction(c, kind, r, note) {
     if (kind === "remove") return c.api("/ward/bug-report-remove", { orgId: c.state.orgId, id: r.id, expectedVersion: r.version });
@@ -214,6 +246,532 @@
     });
   }
 
+  // ---- Import from the previous system (R2-5, legacy-import.js) -------------------------------------------------
+  /* Patients, Price list rows and suppliers from the hospital's old HIS, as CSV. Read the file, map its columns, run the
+   * dry run, read every row, then import exactly what the dry run showed. Nothing is written until the last step, and a
+   * file that no longer matches its dry run is refused by the server. Open stays, balances and GST documents are not
+   * imported. s.preview: null = not run, false = the request failed, else the server's report. */
+  var IMPORT_KINDS = ["patients", "prices", "vendors"];
+  function importKindLabel(c, k) {
+    return { patients: T(c, "site.admin.import.kindPatients", "Patients"), prices: T(c, "site.admin.import.kindPrices", "Price list"), vendors: T(c, "site.admin.import.kindVendors", "Suppliers") }[k] || k;
+  }
+  function importFieldLabel(c, f) {
+    return {
+      legacyMrn: T(c, "site.admin.import.f.legacyMrn", "MR number in the old system"), name: T(c, "site.admin.import.f.name", "Name"), mobile: T(c, "site.admin.import.f.mobile", "Mobile"),
+      gender: T(c, "site.admin.import.f.gender", "Gender (M, F, O or the word)"), birthDate: T(c, "site.admin.import.f.birthDate", "Date of birth"), ageYears: T(c, "site.admin.import.f.ageYears", "Age in years (when there is no date of birth)"),
+      address: T(c, "site.admin.import.f.address", "Address"), district: T(c, "site.admin.import.f.district", "District"), state: T(c, "site.admin.import.f.state", "State"), pincode: T(c, "site.admin.import.f.pincode", "PIN code"),
+      kind: T(c, "site.admin.import.f.kind", "Kind (investigation, medication, service, bed, nursing, visit)"), price: T(c, "site.admin.import.f.price", "Price in rupees"), code: T(c, "site.admin.import.f.code", "Code"),
+      ward: T(c, "site.admin.import.f.ward", "Ward (per-day charges)"), hsnSac: T(c, "site.admin.import.f.hsnSac", "HSN/SAC"), gstRate: T(c, "site.admin.import.f.gstRate", "GST rate %"),
+      nonHealthcare: T(c, "site.admin.import.f.nonHealthcare", "Not health care (yes or no)"), intensiveCareClass: T(c, "site.admin.import.f.icu", "Intensive care class (beds)"), unitHours: T(c, "site.admin.import.f.unitHours", "Hours one bed price covers"),
+      gstin: T(c, "site.admin.import.f.gstin", "GSTIN"), phone: T(c, "site.admin.import.f.phone", "Phone"), email: T(c, "site.admin.import.f.email", "Email"), drugLicenceNo: T(c, "site.admin.import.f.drugLicence", "Drug licence number"),
+    }[f] || f;
+  }
+  function importStatusLabel(c, st) {
+    return { create: T(c, "site.admin.import.stCreate", "Will be added"), matched: T(c, "site.admin.import.stMatched", "Already here, left as it is"),
+      duplicate: T(c, "site.admin.import.stDuplicate", "May already be here, not added"), invalid: T(c, "site.admin.import.stInvalid", "Not added") }[st] || st;
+  }
+  function importHtml(c, s) {
+    var esc = c.esc, pv = s.preview, m = s.map;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.import.title", "Import from the previous system")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.import.intro", "Load patients, the price list or suppliers from the system this hospital is replacing, as a CSV file. A dry run shows what would happen to every row before anything is saved. Nothing already here is changed or merged.")) + "</p>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.import.notImported", "Open admissions, balances, deposits and GST invoices are not imported. Aadhaar numbers are never stored.")) + "</p>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.import.kind", "What the file holds")) + '</span><select id="admImpKind">' +
+      IMPORT_KINDS.map(function (k) { return '<option value="' + k + '"' + (k === s.kind ? " selected" : "") + ">" + esc(importKindLabel(c, k)) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.admin.import.file", "CSV file")) + '</span><input id="admImpFile" type="file" accept=".csv,text/csv"></label></div>' +
+      '<button type="button" class="btn ghost" data-imp="read">' + esc(T(c, "site.admin.import.read", "Read the file")) + '</button><div id="admImpMsg" aria-live="polite"></div></div>';
+    if (!m) return h;
+    var opts = function (field) {
+      var cur = s.mapping && s.mapping[field] != null ? String(s.mapping[field]) : "";
+      return '<option value="">' + esc(T(c, "site.admin.import.notInFile", "Not in the file")) + "</option>" + (m.headers || []).map(function (hd, i) {
+        return '<option value="' + i + '"' + (cur === String(i) ? " selected" : "") + ">" + EN(c, esc(hd || T(c, "site.admin.import.column", "Column {n}", { n: i + 1 }))) + "</option>";
+      }).join("");
+    };
+    h += '<div class="card"><h2>' + esc(T(c, "site.admin.import.mapTitle", "Match the columns")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.import.rowsRuns", "{n} rows in the file. They are checked and imported in {runs} parts of at most {cap} rows each, one after another.", { n: m.rowCount, cap: m.rowCap, runs: importRuns(m.rowCount, m.rowCap).length })) + "</p><div class=\"row\">" +
+      m.fields.required.concat(m.fields.optional).map(function (f) {
+        var req = m.fields.required.indexOf(f) >= 0;
+        return '<label class="f"><span>' + esc(importFieldLabel(c, f)) + (req ? " " + esc(T(c, "site.admin.import.required", "(required)")) : "") + '</span><select data-imp-field="' + f + '">' + opts(f) + "</select></label>";
+      }).join("") +
+      (s.kind === "patients" ? '<label class="f"><span>' + esc(T(c, "site.admin.import.dateOrder", "Dates in the file are written")) + '</span><select id="admImpOrder">' +
+        [["dmy", T(c, "site.admin.import.dmy", "day/month/year")], ["mdy", T(c, "site.admin.import.mdy", "month/day/year")], ["ymd", T(c, "site.admin.import.ymd", "year-month-day")]].map(function (o) {
+          return '<option value="' + o[0] + '"' + ((s.mapping && s.mapping.dateOrder) === o[0] ? " selected" : "") + ">" + esc(o[1]) + "</option>";
+        }).join("") + "</select></label>" : "") +
+      '</div><button type="button" class="btn" data-imp="dry">' + esc(T(c, "site.admin.import.dryRun", "Dry run")) + "</button></div>";
+    if (pv === null || pv === undefined) return h;
+    h += '<div class="card"><h2>' + esc(T(c, "site.admin.import.reportTitle", "Dry run result")) + "</h2>";
+    if (pv === false) return h + '<div class="msg err">' + esc(T(c, "site.admin.import.failed", "The dry run could not be completed. Nothing was imported.")) + "</div></div>";
+    if (!pv.ok && !pv.rows) return h + '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div></div>";
+    if (!pv.ok) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+    if (pv.stopped) h += '<div class="msg err">' + esc(T(c, "site.admin.import.stopped", "{n} rows were imported before part {part} of {parts} stopped. Run the dry run again: what was imported shows as already here, and importing adds only what is missing.", pv.stopped)) + "</div>";
+    var n = pv.counts || {};
+    if (pv.step === "done" && pv.ok) h += '<div class="msg ok">' + esc(T(c, "site.admin.import.done", "Imported {n}. Every row below is as it was saved.", { n: pv.written })) + "</div>";
+    h += "<p>" + [["create", "ok"], ["matched", ""], ["duplicate", "warn"], ["invalid", "stop"]].map(function (x) {
+      return '<span class="pill' + (x[1] ? " " + x[1] : "") + '">' + esc(importStatusLabel(c, x[0])) + ": " + esc(String(n[x[0]] || 0)) + "</span>";
+    }).join(" ") + "</p>";
+    if (pv.namePoolPartial) h += '<p class="quiet">' + esc(T(c, "site.admin.import.namePartial", "Name and date of birth were compared with the newest 500 patients only. MR number and mobile were checked against everyone.")) + "</p>";
+    if (n.duplicate) h += '<p class="quiet">' + esc(T(c, "site.admin.import.dupHelp", "A row that may already be here is never merged. Check it on the Patients screen, and register the person at the front desk if they are someone else.")) + "</p>";
+    h += '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.import.colRow", "Row")) + "</th><th>" + esc(T(c, "site.admin.import.colItem", "In the file")) + "</th><th>" + esc(T(c, "site.admin.import.colResult", "Result")) + "</th><th>" + esc(T(c, "site.admin.import.colWhy", "Why")) + "</th></tr></thead><tbody>" +
+      (pv.rows || []).map(function (r) {
+        var ex = r.existing || {};
+        var why = (r.field ? esc(importFieldLabel(c, r.field)) + ": " : "") + (r.reason ? EN(c, esc(r.reason)) : "") +
+          (ex.mrn ? " " + esc(T(c, "site.admin.import.existingMrn", "MR number {mrn}", { mrn: ex.mrn })) : "") + (r.mrn ? esc(T(c, "site.admin.import.newMrn", "MR number {mrn}", { mrn: r.mrn })) : "") +
+          (ex.price != null ? esc(T(c, "site.admin.import.existingPrice", "Price on the list: Rs {price}", { price: (Number(ex.price) / 100).toFixed(2) })) : "");
+        return '<tr><td class="mono">' + esc(String(r.row)) + "</td><td>" + EN(c, esc(r.label || "")) + "</td><td>" + esc(importStatusLabel(c, r.status)) + "</td><td>" + why + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+    if (pv.step === "preview" && pv.ok) {
+      h += n.create ? '<button type="button" class="btn" data-imp="commit" data-count="' + esc(String(n.create)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.import.commit", "Import these {n} rows", { n: n.create })) + "</button>"
+        : '<p class="quiet">' + esc(T(c, "site.admin.import.nothing", "Nothing in this file would be added.")) + "</p>";
+    }
+    return h + '<div id="admImpDoneMsg" aria-live="polite"></div></div>';
+  }
+  WSQ._importHtml = importHtml;
+  /* R3-1: a file larger than one run is checked and imported in successive runs of at most rowCap rows (the server's
+   * `run`), each with its own dry-run plan. The parts' reports are shown as one; row numbers are the file's own. */
+  function importRuns(rowCount, cap) {
+    var out = [], n = Number(rowCount) || 0, k = Number(cap) || 1;
+    for (var f = 0; f < n; f += k) out.push({ from: f, to: Math.min(n, f + k) });
+    return out;
+  }
+  function importMerge(parts) {
+    var first = parts[0] || {}, counts = { create: 0, matched: 0, duplicate: 0, invalid: 0 }, rows = [];
+    parts.forEach(function (p) { Object.keys(counts).forEach(function (k) { counts[k] += (p.counts && p.counts[k]) || 0; }); rows = rows.concat(p.rows || []); });
+    return { ok: true, step: "preview", kind: first.kind, rowCount: first.rowCount, rowCap: first.rowCap, counts: counts, rows: rows,
+      planId: parts.map(function (p) { return p.planId; }).join(","), namePoolPartial: parts.some(function (p) { return p.namePoolPartial; }),
+      runs: parts.map(function (p) { return { run: p.run, planId: p.planId, create: (p.counts && p.counts.create) || 0 }; }) };
+  }
+  WSQ._importRuns = importRuns; WSQ._importMerge = importMerge;
+  function renderImport(c, body) {
+    var s = c.state._import = c.state._import || { kind: "patients", csv: "", map: null, mapping: null, preview: null };
+    var draw = function () { body.innerHTML = importHtml(c, s); };
+    var sel = function (id) { var e = document.getElementById(id); return e ? e.value : ""; };
+    var mapping = function () {
+      var out = {};
+      body.querySelectorAll("[data-imp-field]").forEach(function (e) { if (e.value !== "") out[e.getAttribute("data-imp-field")] = Number(e.value); });
+      if (s.kind === "patients") out.dateOrder = sel("admImpOrder");
+      return out;
+    };
+    var send = function (extra) { return c.api("/ward/legacy-import", Object.assign({ orgId: c.state.orgId, kind: s.kind, csv: s.csv }, extra || {})); };
+    body.onchange = function (ev) {
+      if (ev.target && ev.target.id === "admImpKind") { s.kind = ev.target.value; s.csv = ""; s.map = null; s.mapping = null; s.preview = null; draw(); }
+    };
+    body.onclick = function (ev) {
+      var b = ev.target.closest && ev.target.closest("[data-imp]"); if (!b) return;
+      var act = b.getAttribute("data-imp"), msg = document.getElementById("admImpMsg");
+      if (act === "read") {
+        var f = document.getElementById("admImpFile"), file = f && f.files && f.files[0];
+        if (!file) { msg.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.import.chooseFile", "Choose the CSV file first.")) + "</div>"; return; }
+        var reader = new FileReader();
+        reader.onload = function () {
+          s.csv = String(reader.result || ""); s.map = null; s.mapping = null; s.preview = null;
+          send().then(function (r) {
+            if (!r || !r.ok) { draw(); document.getElementById("admImpMsg").innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, r))) + "</div>"; return; }
+            s.map = r; draw();
+          });
+        };
+        reader.readAsText(file);
+        return;
+      }
+      if (act === "dry") {
+        s.mapping = mapping(); b.disabled = true;
+        var runs = importRuns(s.map.rowCount, s.map.rowCap), parts = [];
+        var dryNext = function (i) {
+          if (i >= runs.length) { s.preview = importMerge(parts); draw(); return; }
+          progress(i, runs.length);
+          send({ mapping: s.mapping, run: runs[i] }).then(function (r) {
+            if (!r || !r.ok) { s.preview = r || false; draw(); return; }
+            parts.push(r); dryNext(i + 1);
+          }, function () { s.preview = false; draw(); });
+        };
+        dryNext(0);
+        return;
+      }
+      if (act === "commit") {
+        b.disabled = true;
+        var pv = s.preview, todo = (pv.runs || []).filter(function (x) { return x.create > 0; }), written = 0;
+        var byRow = {}; pv.rows.forEach(function (r, i) { byRow[r.row] = i; });
+        var keep = function (r) { ((r && r.rows) || []).forEach(function (x) { if (byRow[x.row] != null) pv.rows[byRow[x.row]] = x; }); };
+        var commitNext = function (i) {
+          if (i >= todo.length) { pv.step = "done"; pv.written = written; s.preview = pv; draw(); return; }
+          progress(i, todo.length);
+          var stop = function (r) {
+            s.preview = { ok: false, message: r ? r.message : "", error: r ? r.error : "", counts: pv.counts, rows: pv.rows, stopped: { n: written, part: i + 1, parts: todo.length } };
+            draw();
+          };
+          send({ mapping: s.mapping, run: todo[i].run, commit: true, confirmCount: todo[i].create, planId: todo[i].planId }).then(function (r) {
+            written += (r && Number(r.written)) || 0; keep(r);
+            if (!r || !r.ok) return stop(r);
+            commitNext(i + 1);
+          }, function () { stop(null); });
+        };
+        commitNext(0);
+      }
+    };
+    var progress = function (i, n) {
+      var m = document.getElementById("admImpMsg");
+      if (m) m.innerHTML = '<p class="quiet">' + c.esc(T(c, "site.admin.import.part", "Working on part {i} of {n}. Keep this page open.", { i: i + 1, n: n })) + "</p>";
+    };
+    draw();
+  }
+
+  // ---- Formulary (R3-2, functions/_wardsynq/formulary-settings.js) ------------------------------------------------
+  /* What this hospital stocks and restricts, edited here or loaded from a CSV. Every change is a dry run first: the server
+   * lists each entry (or file row) as added, changed, removed or refused with its reason, and Save sends exactly that plan
+   * back (count and plan id) with a reason. Any refused entry stops the whole save. Drug names, codes, specialties and
+   * approvers are the hospital's own values and are never translated.
+   * s.r: undefined = loading, null = could not be loaded, else the saved list. s.pv / s.csvPv: null = not run, false = the
+   * request failed, else the server's report. s.draft is the list being edited, saved only through its dry run. */
+  var FML_FIELDS = ["drug", "code", "aliases", "restricted", "requiresApproval", "restrictedTo", "approvedBy", "note", "controlled"];
+  var FML_BOOL = { restricted: 1, requiresApproval: 1, controlled: 1 };
+  var FML_LIST = { aliases: 1, restrictedTo: 1 };
+  function fmlFieldLabel(c, f) {
+    return { drug: T(c, "site.admin.fml.f.drug", "Drug name"), code: T(c, "site.admin.fml.f.code", "Code"), aliases: T(c, "site.admin.fml.f.aliases", "Other names, separated by ;"),
+      restricted: T(c, "site.admin.fml.f.restricted", "Restricted"), requiresApproval: T(c, "site.admin.fml.f.requiresApproval", "Needs an approval"),
+      restrictedTo: T(c, "site.admin.fml.f.restrictedTo", "Specialties that may prescribe it, separated by ;"), approvedBy: T(c, "site.admin.fml.f.approvedBy", "Who approves"),
+      note: T(c, "site.admin.fml.f.note", "Note shown with a refusal"), controlled: T(c, "site.admin.fml.f.controlled", "Controlled drug") }[f] || f;
+  }
+  function fmlStatusLabel(c, st) {
+    return { add: T(c, "site.admin.fml.stAdd", "Will be added"), change: T(c, "site.admin.fml.stChange", "Will be changed"), unchanged: T(c, "site.admin.fml.stUnchanged", "Left as it is"),
+      invalid: T(c, "site.admin.fml.stInvalid", "Refused"), remove: T(c, "site.admin.fml.stRemove", "Will be removed"), setting: T(c, "site.admin.fml.stSetting", "Reason switch changed") }[st] || st;
+  }
+  // Returns HTML: translated reason, or the server's English when the code is not known here.
+  function fmlReason(c, p) {
+    var t = { no_drug_or_code: T(c, "site.admin.fml.r.noDrug", "An entry needs a drug name or a code."),
+      restriction_has_no_route: T(c, "site.admin.fml.r.noRoute", "A restricted drug needs an approval or at least one specialty that may prescribe it, or nobody could ever order it."),
+      duplicate: T(c, "site.admin.fml.r.duplicate", "Another entry already uses this name, alias or code."), too_long: T(c, "site.admin.fml.r.tooLong", "A value is longer than allowed."),
+      too_many: T(c, "site.admin.fml.r.tooMany", "More than 20 other names or specialties on one entry."), bad_yes_no: T(c, "site.admin.fml.r.yesNo", "Use yes or no."),
+      bad_value: T(c, "site.admin.fml.r.badValue", "This value could not be read."), too_many_entries: T(c, "site.admin.fml.r.tooManyEntries", "The formulary has more entries than this hospital's settings can hold.") }[p.reason];
+    return (p.field ? c.esc(fmlFieldLabel(c, p.field)) + ": " : "") + (t ? c.esc(t) : EN(c, c.esc(p.message || p.reason))) + (p.clash ? " " + EN(c, c.esc(p.clash)) : "");
+  }
+  function fmlReportHtml(c, pv, act) {
+    var esc = c.esc;
+    var h = "<h3>" + esc(T(c, "site.admin.fml.reportTitle", "Dry run result")) + "</h3>";
+    if (pv === false) return h + '<div class="msg err">' + esc(T(c, "site.admin.fml.dryFailed", "The dry run could not be completed. Nothing was saved.")) + "</div>";
+    if (!pv.rows) return h + '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+    if (!pv.ok) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+    if (pv.ok && pv.step === "done") h += '<div class="msg ok">' + esc(T(c, "site.admin.fml.saved", "Saved {n} changes. The formulary above is what the server now holds.", { n: pv.written })) + "</div>";
+    var n = pv.counts || {};
+    h += "<p>" + ["add", "change", "remove", "invalid", "setting"].map(function (k) { return '<span class="pill' + (k === "invalid" ? " stop" : "") + '">' + esc(fmlStatusLabel(c, k)) + ": " + esc(String(n[k] || 0)) + "</span>"; }).join(" ") + "</p>";
+    (pv.listProblems || []).forEach(function (p) { h += '<div class="msg err">' + fmlReason(c, p) + "</div>"; });
+    if (pv.rows.length) h += '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.fml.colRow", "Row")) + "</th><th>" + esc(T(c, "site.admin.fml.colDrug", "Drug")) + "</th><th>" + esc(T(c, "site.admin.fml.colResult", "Result")) + "</th><th>" + esc(T(c, "site.admin.fml.colWhy", "Why")) + "</th></tr></thead><tbody>" +
+      pv.rows.map(function (r) {
+        // The file row number, the entry's place in the editor's list, or an entry already on the list (CSV merge).
+        var where = r.row != null ? String(r.row) : r.row === undefined ? String(r.index + 1) : T(c, "site.admin.fml.onList", "On the list");
+        return '<tr><td class="mono">' + esc(where) + "</td><td>" + EN(c, esc(r.label || "")) + "</td><td>" + esc(fmlStatusLabel(c, r.status)) + "</td><td>" +
+          (r.problems || []).map(function (p) { return fmlReason(c, p); }).join("<br>") + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+    if ((pv.removed || []).length) h += "<p>" + esc(fmlStatusLabel(c, "remove")) + ": " + EN(c, esc(pv.removed.join(", "))) + "</p>";
+    if (pv.ok && pv.step === "preview") {
+      h += pv.changeCount ? '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.fml.reason", "Why the formulary is changing (required)")) + '</span><input data-fml-reason="' + act + '" maxlength="200"></label>' +
+        '<button type="button" class="btn" data-fml="' + act + '-commit" data-count="' + esc(String(pv.changeCount)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.fml.commit", "Save these {n} changes", { n: pv.changeCount })) + "</button></div>"
+        : '<p class="quiet">' + esc(T(c, "site.admin.fml.nothing", "Nothing would change.")) + "</p>";
+    }
+    return h;
+  }
+  function fmlText(e, f) { var v = e && e[f]; return FML_LIST[f] ? (v || []).join("; ") : v == null ? "" : String(v); }
+  function formularyHtml(c, s) {
+    var esc = c.esc, r = s.r;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.fml.title", "Formulary")) + "</h2>";
+    if (!c.can("order.verify")) return h + '<div class="msg note">' + esc(T(c, "site.admin.fml.noAccess", "Changing the formulary needs both staff administration and pharmacy verification. Your role does not include both.")) + "</div></div>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.fml.loading", "Loading the formulary...")) + "</p></div>";
+    if (r === null) return h + '<div class="msg err">' + esc(T(c, "site.admin.fml.loadFailed", "The formulary could not be loaded. Do not read this as no formulary configured.")) + "</div></div>";
+    h += '<p class="quiet">' + esc(T(c, "site.admin.fml.intro", "What this hospital stocks and what it restricts. A drug not on the list is flagged on the order, never blocked; a restricted one is blocked until its approval or specialty is given. Retired entries stay listed and match no order. Nothing ships with WardSynQ: the list is this hospital's own.")) + "</p>";
+    if ((r.problems || []).length) h += '<div class="msg err">' + esc(T(c, "site.admin.fml.savedProblems", "The saved formulary has {n} problems ordering cannot use. Correct them before saving any change.", { n: r.problems.length })) + "</div>";
+    h += '<label class="f"><span><input type="checkbox" id="fmlReason"' + (s.draft.requireReasonOffFormulary ? " checked" : "") + "> " + esc(T(c, "site.admin.fml.requireReason", "Require a reason when a drug not on the formulary is ordered")) + "</span></label>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.fml.search", "Search")) + '</span><input id="fmlSearch" value="' + esc(s.q || "") + '"></label>' +
+      '<button type="button" class="btn ghost" data-fml="new">' + esc(T(c, "site.admin.fml.add", "Add an entry")) + "</button></div>";
+    if (s.edit != null) {
+      var e = s.edit >= 0 ? s.draft.entries[s.edit] : {};
+      h += '<div class="card"><div class="row">' + FML_FIELDS.map(function (f) {
+        return FML_BOOL[f] ? '<label class="f"><span><input type="checkbox" data-fml-f="' + f + '"' + (e[f] === true ? " checked" : "") + "> " + esc(fmlFieldLabel(c, f)) + "</span></label>"
+          : '<label class="f"><span>' + esc(fmlFieldLabel(c, f)) + '</span><input data-fml-f="' + f + '" value="' + esc(fmlText(e, f)) + '"></label>';
+      }).join("") + '</div><button type="button" class="btn" data-fml="apply">' + esc(T(c, "site.admin.fml.apply", "Put in the draft")) + '</button> <button type="button" class="btn ghost" data-fml="cancel">' + esc(T(c, "site.admin.fml.cancel", "Cancel")) + "</button>" +
+        '<p class="quiet">' + esc(T(c, "site.admin.fml.draftNote", "The draft is checked and saved only by the dry run below.")) + "</p></div>";
+    }
+    var q = String(s.q || "").toLowerCase();
+    var shown = s.draft.entries.map(function (x, i) { return [x, i]; }).filter(function (p) { return !q || [p[0].drug, p[0].code].concat(p[0].aliases || []).join(" ").toLowerCase().indexOf(q) >= 0; });
+    h += s.draft.entries.length ? '<div class="tbl"><table><thead><tr><th>' + esc(fmlFieldLabel(c, "drug")) + "</th><th>" + esc(fmlFieldLabel(c, "code")) + "</th><th>" + esc(T(c, "site.admin.fml.colRule", "Rule")) + "</th><th></th></tr></thead><tbody>" +
+      shown.map(function (p) {
+        var x = p[0], rule = [];
+        if (x.restricted) rule.push(esc(T(c, "site.admin.fml.restrictedShort", "Restricted")) + (x.requiresApproval ? " " + esc(T(c, "site.admin.fml.approvalShort", "(approval)")) : "") + ((x.restrictedTo || []).length ? " " + EN(c, esc(x.restrictedTo.join(", "))) : ""));
+        if (x.controlled) rule.push(esc(T(c, "site.admin.fml.controlledShort", "Controlled")));
+        if (x.retired) rule.push(esc(T(c, "site.admin.fml.retiredShort", "Retired")));
+        return "<tr><td>" + EN(c, esc(x.drug || "")) + ((x.aliases || []).length ? ' <span class="quiet">' + EN(c, esc(x.aliases.join(", "))) + "</span>" : "") + '</td><td class="mono">' + EN(c, esc(x.code || "")) + "</td><td>" + rule.join(", ") + "</td><td>" +
+          '<button type="button" class="btn ghost" data-fml="edit" data-i="' + p[1] + '">' + esc(T(c, "site.admin.fml.edit", "Edit")) + '</button> <button type="button" class="btn ghost" data-fml="retire" data-i="' + p[1] + '">' + esc(x.retired ? T(c, "site.admin.fml.restore", "Put back on the formulary") : T(c, "site.admin.fml.retire", "Retire")) + "</button></td></tr>";
+      }).join("") + "</tbody></table></div>" : '<p class="quiet">' + esc(T(c, "site.admin.fml.empty", "No formulary is configured. Orders are not checked against one until entries are saved.")) + "</p>";
+    h += '<button type="button" class="btn" data-fml="dry">' + esc(T(c, "site.admin.fml.dryRun", "Dry run the changes")) + "</button>";
+    if (s.pv != null) h += fmlReportHtml(c, s.pv, "ed");
+    h += "<h3>" + esc(T(c, "site.admin.fml.csvTitle", "Load from a CSV file")) + '</h3><div class="row"><label class="f"><span>' + esc(T(c, "site.admin.fml.file", "CSV file")) + '</span><input id="fmlFile" type="file" accept=".csv,text/csv"></label>' +
+      '<button type="button" class="btn ghost" data-fml="read">' + esc(T(c, "site.admin.fml.read", "Read the file")) + "</button></div>";
+    if (s.map) {
+      h += '<p class="quiet">' + esc(T(c, "site.admin.fml.rows", "{n} rows in the file.", { n: s.map.rowCount })) + '</p><div class="row">' + s.map.fields.map(function (f) {
+        var cur = s.mapping && s.mapping[f] != null ? String(s.mapping[f]) : "";
+        return '<label class="f"><span>' + esc(fmlFieldLabel(c, f)) + '</span><select data-fml-col="' + f + '"><option value="">' + esc(T(c, "site.admin.fml.notInFile", "Not in the file")) + "</option>" +
+          (s.map.headers || []).map(function (hd, i) { return '<option value="' + i + '"' + (cur === String(i) ? " selected" : "") + ">" + EN(c, esc(hd || T(c, "site.admin.fml.column", "Column {n}", { n: i + 1 }))) + "</option>"; }).join("") + "</select></label>";
+      }).join("") + "</div>" +
+        '<p class="quiet">' + esc(T(c, "site.admin.fml.yesNoNote", "Restricted, needs an approval and controlled read yes or no. Lists are separated by ;.")) + "</p>" +
+        '<div class="row"><label class="f"><span><input type="radio" name="fmlMode" value="merge"' + (s.mode === "merge" ? " checked" : "") + "> " + esc(T(c, "site.admin.fml.merge", "Add to the formulary: a row replaces the entry with the same code or name, every other entry stays")) + "</span></label>" +
+        '<label class="f"><span><input type="radio" name="fmlMode" value="replace"' + (s.mode === "replace" ? " checked" : "") + "> " + esc(T(c, "site.admin.fml.replace", "Replace the formulary: the file becomes the whole list, and entries not in it are removed")) + "</span></label></div>" +
+        '<button type="button" class="btn" data-fml="csv-dry">' + esc(T(c, "site.admin.fml.dryRun", "Dry run the changes")) + "</button>";
+      if (s.csvPv != null) h += fmlReportHtml(c, s.csvPv, "csv");
+    }
+    return h + '<div id="fmlMsg" aria-live="polite"></div></div>';
+  }
+  WSQ._formularyHtml = formularyHtml;
+  function wireFormulary(c) {
+    var box = document.getElementById("fmlCard");
+    if (!box) return;
+    var s = { r: undefined, draft: { entries: [], requireReasonOffFormulary: false }, edit: null, q: "", pv: null, csv: "", map: null, mapping: null, mode: "", csvPv: null };
+    var draw = function () { box.innerHTML = formularyHtml(c, s); };
+    var load = function () {
+      return c.api("/org/formulary?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+        s.r = r && r.ok ? r : null;
+        if (s.r) s.draft = { entries: JSON.parse(JSON.stringify(s.r.entries || [])), requireReasonOffFormulary: s.r.requireReasonOffFormulary === true };
+        draw();
+      }, function () { s.r = null; draw(); });
+    };
+    var say = function (text) { var m = document.getElementById("fmlMsg"); if (m) m.innerHTML = '<div class="msg err">' + EN(c, c.esc(text)) + "</div>"; };
+    var reasonOf = function (act) { var e = box.querySelector('[data-fml-reason="' + act + '"]'); return e ? String(e.value || "").trim() : ""; };
+    var edSend = function (extra) { return c.api("/org/formulary", Object.assign({ orgId: c.state.orgId, entries: s.draft.entries, requireReasonOffFormulary: s.draft.requireReasonOffFormulary }, extra || {})); };
+    var csvSend = function (extra) { return c.api("/org/formulary-import", Object.assign({ orgId: c.state.orgId, csv: s.csv }, extra || {})); };
+    box.onchange = function (ev) {
+      var t = ev.target || {};
+      if (t.id === "fmlSearch") { s.q = t.value; draw(); }
+      if (t.id === "fmlReason") { s.draft.requireReasonOffFormulary = !!t.checked; s.pv = null; }
+      if (t.name === "fmlMode") { s.mode = t.value; s.csvPv = null; }
+    };
+    box.onclick = function (ev) {
+      var b = ev.target.closest && ev.target.closest("[data-fml]"); if (!b) return;
+      var act = b.getAttribute("data-fml"), i = Number(b.getAttribute("data-i"));
+      if (act === "new") { s.edit = -1; draw(); return; }
+      if (act === "edit") { s.edit = i; draw(); return; }
+      if (act === "cancel") { s.edit = null; draw(); return; }
+      if (act === "retire") { var x = s.draft.entries[i]; if (x.retired) delete x.retired; else x.retired = true; s.pv = null; draw(); return; }
+      if (act === "apply") {
+        var old = s.edit >= 0 ? s.draft.entries[s.edit] : {}, e = old.retired ? { retired: true } : {};
+        box.querySelectorAll("[data-fml-f]").forEach(function (el) {
+          var f = el.getAttribute("data-fml-f");
+          if (FML_BOOL[f]) { if (el.checked) e[f] = true; }
+          else if (FML_LIST[f]) { var l = String(el.value || "").split(/[;|]/).map(function (v) { return v.trim(); }).filter(Boolean); if (l.length) e[f] = l; }
+          else if (String(el.value || "").trim()) e[f] = String(el.value).trim();
+        });
+        if (s.edit >= 0) s.draft.entries[s.edit] = e; else s.draft.entries.push(e);
+        s.edit = null; s.pv = null; draw(); return;
+      }
+      if (act === "dry") { b.disabled = true; edSend().then(function (r) { s.pv = r || false; draw(); }, function () { s.pv = false; draw(); }); return; }
+      if (act === "ed-commit" || act === "csv-commit") {
+        var csvAct = act === "csv-commit", reason = reasonOf(csvAct ? "csv" : "ed");
+        if (!reason) { say(T(c, "site.admin.fml.reasonFirst", "Say why the formulary is changing first.")); return; }
+        b.disabled = true;
+        var extra = { commit: true, reason: reason, confirmCount: Number(b.getAttribute("data-count")), planId: b.getAttribute("data-plan") };
+        var p = csvAct ? csvSend(Object.assign(extra, { mapping: s.mapping, mode: s.mode })) : edSend(extra);
+        p.then(function (r) {
+          if (csvAct) s.csvPv = r || false; else s.pv = r || false;
+          // After a save the list is read again, so what is shown is what the server holds, never the draft.
+          if (r && r.ok && r.step === "done") return load();
+          draw();
+        }, function () { if (csvAct) s.csvPv = false; else s.pv = false; draw(); });
+        return;
+      }
+      if (act === "read") {
+        var f = document.getElementById("fmlFile"), file = f && f.files && f.files[0];
+        if (!file) { say(T(c, "site.admin.fml.chooseFile", "Choose the CSV file first.")); return; }
+        var reader = new FileReader();
+        reader.onload = function () {
+          s.csv = String(reader.result || ""); s.map = null; s.mapping = null; s.csvPv = null;
+          csvSend().then(function (r) {
+            if (!r || !r.ok) { draw(); say(refusal(c, r)); return; }
+            s.map = r; draw();
+          }, function () { draw(); say(T(c, "site.admin.fml.readFailed", "The file could not be read by the server. Nothing was saved.")); });
+        };
+        reader.readAsText(file);
+        return;
+      }
+      if (act === "csv-dry") {
+        var mp = {};
+        box.querySelectorAll("[data-fml-col]").forEach(function (el) { if (el.value !== "") mp[el.getAttribute("data-fml-col")] = Number(el.value); });
+        s.mapping = mp;
+        if (!s.mode) { say(T(c, "site.admin.fml.chooseMode", "Choose whether the file is added to the formulary or replaces it.")); return; }
+        b.disabled = true;
+        csvSend({ mapping: mp, mode: s.mode }).then(function (r) { s.csvPv = r || false; draw(); }, function () { s.csvPv = false; draw(); });
+      }
+    };
+    draw();
+    if (c.can("order.verify")) load();
+  }
+
+  // ---- Critical limits, delta limits, autoverification, MAR times, note templates (R4-4) --------------------------------------
+  /* One card per setting, each through GET/POST /org/clinical-settings/<setting> (functions/_wardsynq/clinical-content-settings.js).
+   * The formulary card's pattern: the draft is a table of rows, Dry run sends it whole, the server lists each item as added,
+   * changed, removed or refused with its reason, and Save sends exactly that plan back (count and plan id) with a reason and who
+   * signed the values off. The draft starts from what is SAVED, never from a built-in default: empty is "not configured".
+   * Codes, units, times, template text and names are the hospital's own values and are never translated.
+   * s.r: undefined = loading, null = could not be loaded, else the server's read. s.pv: null = not run, false = failed, else the report. */
+  var CCS_KEYS = ["criticalLimits", "deltaLimits", "autoVerify", "marTimes", "noteTemplates"];
+  var CCS_CAP = { criticalLimits: "lab.result", deltaLimits: "lab.result", autoVerify: "lab.result", marTimes: "order.verify", noteTemplates: "emr.treat" };
+  var CCS_COLS = { criticalLimits: ["code", "display", "unit", "low", "high"], deltaLimits: ["code", "maxAbsolute", "maxPercent", "withinHours"], autoVerify: ["code"], marTimes: ["frequency", "times"], noteTemplates: ["id", "name", "noteType", "sections"] };
+  function ccsText(c, key) {
+    return {
+      criticalLimits: [T(c, "site.admin.ccs.critical.title", "Critical limits"), T(c, "site.admin.ccs.critical.intro", "The low and high values at or beyond which a laboratory result opens a critical result loop. The laboratory's own critical flag always counts as well. An analyte not listed here uses the built-in adult default shown below."), T(c, "site.admin.ccs.critical.empty", "No critical limits are saved for this hospital. The built-in adult defaults below apply until limits are saved.")],
+      deltaLimits: [T(c, "site.admin.ccs.delta.title", "Delta check limits"), T(c, "site.admin.ccs.delta.intro", "The largest change from the patient's previous result, as a value in the result's own unit or as a percentage, before a result is flagged for a sample identity check. A result is never withheld. Results in different units are not compared. The previous result counts for 72 hours unless another window is given."), T(c, "site.admin.ccs.delta.empty", "No delta limits are saved. Results are not delta checked, and each result says so.")],
+      autoVerify: [T(c, "site.admin.ccs.auto.title", "Autoverification"), T(c, "site.admin.ccs.auto.intro", "Tests that may be released without a human look when the result is numeric, inside its reference range, not flagged critical by the laboratory and has no delta breach. Anything else is looked at."), T(c, "site.admin.ccs.auto.empty", "Autoverification is not configured. Every result is looked at.")],
+      marTimes: [T(c, "site.admin.ccs.mar.title", "Medication round times"), T(c, "site.admin.ccs.mar.intro", "The clock times a named frequency is due, on the 24 hour clock, in order through the day. TDS and QID times also place the 1-0-1 and 1-0-0-1 notations. A frequency not listed here uses the built-in round shown below."), T(c, "site.admin.ccs.mar.empty", "No round times are saved. The built-in round below applies until times are saved.")],
+      noteTemplates: [T(c, "site.admin.ccs.notes.title", "Note templates"), T(c, "site.admin.ccs.notes.intro", "The headings of this hospital's clinical notes. A section asks a question and never carries default text. One section per line: key | title | question | required. A template with the id of a built-in note replaces it."), T(c, "site.admin.ccs.notes.empty", "No note templates are saved. The built-in notes are offered until templates are saved.")],
+    }[key];
+  }
+  function ccsColLabel(c, col) {
+    return { code: T(c, "site.admin.ccs.col.code", "Test code"), display: T(c, "site.admin.ccs.col.display", "Name shown"), unit: T(c, "site.admin.ccs.col.unit", "Unit"), low: T(c, "site.admin.ccs.col.low", "Low limit"), high: T(c, "site.admin.ccs.col.high", "High limit"),
+      maxAbsolute: T(c, "site.admin.ccs.col.maxAbsolute", "Largest change (value)"), maxPercent: T(c, "site.admin.ccs.col.maxPercent", "Largest change (%)"), withinHours: T(c, "site.admin.ccs.col.withinHours", "Previous result within (hours)"),
+      frequency: T(c, "site.admin.ccs.col.frequency", "Frequency"), times: T(c, "site.admin.ccs.col.times", "Times, separated by commas"),
+      id: T(c, "site.admin.ccs.col.id", "Template id"), name: T(c, "site.admin.ccs.col.name", "Template name"), noteType: T(c, "site.admin.ccs.col.noteType", "Note type"), sections: T(c, "site.admin.ccs.col.sections", "Sections, one per line") }[col] || col;
+  }
+  function ccsReason(c, p) {
+    var t = { not_an_object: T(c, "site.admin.ccs.r.shape", "This could not be read."), unknown_code: T(c, "site.admin.ccs.r.unknownCode", "No laboratory result carries this code, so the rule would never be applied."),
+      unit_required: T(c, "site.admin.ccs.r.unit", "Give the unit the limit is written in."), no_bound: T(c, "site.admin.ccs.r.noBound", "Give a low limit, a high limit or both."),
+      bad_number: T(c, "site.admin.ccs.r.number", "A value is not a number above zero."), low_not_below_high: T(c, "site.admin.ccs.r.lowHigh", "The low limit must be below the high limit."),
+      no_threshold: T(c, "site.admin.ccs.r.noThreshold", "Give a largest change as a value, as a percentage, or both."), enabled_not_yes_no: T(c, "site.admin.ccs.r.onOff", "Say whether autoverification is on or off."),
+      enabled_without_codes: T(c, "site.admin.ccs.r.noCodes", "Autoverification is on but no test is listed. Turn it off or list the tests."), duplicate: T(c, "site.admin.ccs.r.duplicate", "This is listed twice."),
+      unknown_frequency: T(c, "site.admin.ccs.r.frequency", "This is not a frequency the medication round schedules (OD, BD, TDS, QID, OM, HS)."), bad_time: T(c, "site.admin.ccs.r.time", "A time must be written as HH:MM on the 24 hour clock."),
+      wrong_count: T(c, "site.admin.ccs.r.count", "The number of times must match the frequency ({n} here).", { n: p.expected }), times_out_of_order: T(c, "site.admin.ccs.r.order", "Give the times in order through the day."),
+      template_incomplete: T(c, "site.admin.ccs.r.templateIncomplete", "A template needs an id and a name."), template_empty: T(c, "site.admin.ccs.r.templateEmpty", "A template needs at least one section."),
+      no_key: T(c, "site.admin.ccs.r.noKey", "A section needs a key or a title."), default_text_not_allowed: T(c, "site.admin.ccs.r.defaultText", "A section may carry a question, never default text."),
+      too_long: T(c, "site.admin.ccs.r.tooLong", "A value is longer than 200 characters."), too_many: T(c, "site.admin.ccs.r.tooMany", "More templates or sections than this setting can hold.") }[p.reason];
+    return (t ? c.esc(t) : EN(c, c.esc(p.message || p.reason))) + (p.section ? " " + EN(c, c.esc(p.section)) : "");
+  }
+  // The saved value as editable rows of strings; and back. Numbers stay strings until the server checks them.
+  function ccsRows(key, v) {
+    var s = function (x) { return x == null ? "" : String(x); };
+    if (key === "noteTemplates") return (v || []).map(function (t) { return { id: s(t.id), name: s(t.name), noteType: s(t.noteType), sections: (t.sections || []).map(function (x) { return [s(x.key), s(x.title), s(x.prompt), x.required ? "required" : ""].join(" | ").replace(/( \| )+$/, ""); }).join("\n") }; });
+    if (key === "autoVerify") return ((v && v.codes) || []).map(function (code) { return { code: code }; });
+    return Object.keys(v || {}).map(function (k) {
+      var x = v[k];
+      if (key === "marTimes") return { frequency: k, times: (x || []).join(", ") };
+      var row = { code: k };
+      CCS_COLS[key].slice(1).forEach(function (col) { row[col] = s(x && x[col]); });
+      return row;
+    });
+  }
+  function ccsValue(key, rows, enabled) {
+    var tr = function (x) { return String(x == null ? "" : x).trim(); };
+    if (key === "autoVerify") return { enabled: !!enabled, codes: rows.map(function (r) { return tr(r.code); }).filter(Boolean) };
+    if (key === "noteTemplates") return rows.map(function (r) {
+      var t = { id: tr(r.id), name: tr(r.name) };
+      if (tr(r.noteType)) t.noteType = tr(r.noteType);
+      t.sections = String(r.sections || "").split("\n").map(tr).filter(Boolean).map(function (line) {
+        var p = line.split("|").map(tr), sec = { key: p[0], title: p[1] || p[0] };
+        if (p[2]) sec.prompt = p[2];
+        if (/^(required|yes)$/i.test(p[3] || "")) sec.required = true;
+        return sec;
+      });
+      return t;
+    });
+    var out = {};
+    rows.forEach(function (r) {
+      var k = tr(key === "marTimes" ? r.frequency : r.code);
+      if (!k) return;
+      if (key === "marTimes") { out[k] = tr(r.times).split(",").map(tr).filter(Boolean); return; }
+      var x = {};
+      CCS_COLS[key].slice(1).forEach(function (col) { if (tr(r[col])) x[col] = tr(r[col]); });
+      out[k] = x;
+    });
+    return out;
+  }
+  function ccsStatusLabel(c, st) {
+    return { add: T(c, "site.admin.fml.stAdd", "Will be added"), change: T(c, "site.admin.fml.stChange", "Will be changed"), unchanged: T(c, "site.admin.fml.stUnchanged", "Left as it is"), invalid: T(c, "site.admin.fml.stInvalid", "Refused"), remove: T(c, "site.admin.fml.stRemove", "Will be removed") }[st] || st;
+  }
+  function ccsHtml(c, key, s) {
+    var esc = c.esc, r = s.r, text = ccsText(c, key);
+    var h = '<div class="card"><h2>' + esc(text[0]) + "</h2>";
+    if (!c.can(CCS_CAP[key])) return h + '<div class="msg note">' + esc(T(c, "site.admin.ccs.noAccess", "Changing this setting needs staff administration and the clinical capability that uses it ({cap}). Your role does not include both.", { cap: CCS_CAP[key] })) + "</div></div>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.ccs.loading", "Loading...")) + "</p></div>";
+    if (r === null) return h + '<div class="msg err">' + esc(T(c, "site.admin.ccs.loadFailed", "This setting could not be loaded. Do not read this as not configured.")) + "</div></div>";
+    h += '<p class="quiet">' + esc(text[1]) + "</p>";
+    if (!r.configured) h += '<div class="msg note">' + esc(text[2]) + "</div>";
+    if ((r.problems || []).length) h += '<div class="msg err">' + esc(T(c, "site.admin.ccs.savedProblems", "The saved setting has {n} problems. Correct them before saving any change.", { n: r.problems.length })) + "</div>";
+    if (r.signOff) h += '<p class="quiet">' + esc(T(c, "site.admin.ccs.lastSaved", "Last saved {at}.", { at: String(r.signOff.at || "").slice(0, 16).replace("T", " ") })) + " " + esc(T(c, "site.admin.ccs.signedOffBy", "Signed off by:")) + " " + EN(c, esc(r.signOff.signedOffBy)) + ". " + esc(T(c, "site.admin.ccs.why", "Reason:")) + " " + EN(c, esc(r.signOff.reason)) + "</p>";
+    var ref = r.reference || {};
+    if (key === "autoVerify") h += '<label class="f"><span><input type="checkbox" data-ccs-on' + (s.enabled ? " checked" : "") + "> " + esc(T(c, "site.admin.ccs.auto.on", "Autoverification on for the tests listed")) + "</span></label>";
+    var cols = CCS_COLS[key];
+    h += '<div class="tbl"><table><thead><tr>' + cols.map(function (col) { return "<th>" + esc(ccsColLabel(c, col)) + "</th>"; }).join("") + "<th></th></tr></thead><tbody>" +
+      s.rows.map(function (row, i) {
+        return "<tr>" + cols.map(function (col) {
+          var v = row[col] == null ? "" : String(row[col]);
+          if (col === "code" && ref.knownCodes) return '<td><select data-ccs-f="' + col + '" data-i="' + i + '"><option value=""></option>' + Object.keys(ref.knownCodes).map(function (k) { return '<option value="' + esc(k) + '"' + (k === v ? " selected" : "") + ">" + EN(c, esc(k + " " + ref.knownCodes[k])) + "</option>"; }).join("") + "</select></td>";
+          if (col === "frequency") return '<td><select data-ccs-f="' + col + '" data-i="' + i + '"><option value=""></option>' + Object.keys(ref.frequencies || {}).map(function (k) { return '<option value="' + esc(k) + '"' + (k === v ? " selected" : "") + ">" + EN(c, esc(k)) + "</option>"; }).join("") + "</select></td>";
+          if (col === "sections") return '<td><textarea rows="3" data-ccs-f="' + col + '" data-i="' + i + '">' + esc(v) + "</textarea></td>";
+          return '<td><input data-ccs-f="' + col + '" data-i="' + i + '" value="' + esc(v) + '"></td>';
+        }).join("") + '<td><button type="button" class="btn ghost" data-ccs="del" data-i="' + i + '">' + esc(T(c, "site.admin.ccs.remove", "Remove")) + "</button></td></tr>";
+      }).join("") + "</tbody></table></div>" +
+      '<div class="row"><button type="button" class="btn ghost" data-ccs="add">' + esc(T(c, "site.admin.ccs.addRow", "Add a row")) + '</button> <button type="button" class="btn" data-ccs="dry">' + esc(T(c, "site.admin.fml.dryRun", "Dry run the changes")) + "</button></div>";
+    if (ref.defaults) {
+      h += "<details><summary>" + esc(T(c, "site.admin.ccs.defaults", "Built-in values that apply where nothing is saved")) + '</summary><pre class="mono" style="white-space:pre-wrap">' +
+        EN(c, esc(Object.keys(ref.defaults).map(function (k) { var d = ref.defaults[k]; return Array.isArray(d) ? k + ": " + d.join(", ") : k + " " + d.display + ": " + (d.low == null ? "" : "<= " + d.low + " ") + (d.high == null ? "" : ">= " + d.high + " ") + d.unit; }).join("\n"))) + "</pre></details>";
+    }
+    if (ref.builtIn) h += '<p class="quiet">' + esc(T(c, "site.admin.ccs.builtIn", "Built-in notes:")) + " " + EN(c, esc(ref.builtIn.map(function (b) { return b.id; }).join(", "))) + "</p>";
+    var pv = s.pv;
+    if (pv != null) {
+      h += "<h3>" + esc(T(c, "site.admin.fml.reportTitle", "Dry run result")) + "</h3>";
+      if (pv === false) h += '<div class="msg err">' + esc(T(c, "site.admin.fml.dryFailed", "The dry run could not be completed. Nothing was saved.")) + "</div>";
+      else if (!pv.rows) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+      else {
+        if (!pv.ok) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+        if (pv.ok && pv.step === "done") h += '<div class="msg ok">' + esc(T(c, "site.admin.ccs.saved", "Saved {n} changes. The table above is what the server now holds.", { n: pv.written })) + "</div>";
+        var n = pv.counts || {};
+        h += "<p>" + ["add", "change", "remove", "invalid"].map(function (k) { return '<span class="pill' + (k === "invalid" ? " stop" : "") + '">' + esc(ccsStatusLabel(c, k)) + ": " + esc(String(n[k] || 0)) + "</span>"; }).join(" ") + "</p>";
+        var shown = pv.rows.filter(function (x) { return x.status !== "unchanged"; });
+        if (shown.length) h += '<div class="tbl"><table><tbody>' + shown.map(function (x) { return '<tr><td class="mono">' + EN(c, esc(x.item)) + "</td><td>" + esc(ccsStatusLabel(c, x.status)) + "</td><td>" + (x.problems || []).map(function (p) { return ccsReason(c, p); }).join("<br>") + "</td></tr>"; }).join("") + "</tbody></table></div>";
+        if (pv.ok && pv.step === "preview") {
+          h += pv.changeCount ? '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.ccs.reason", "Why this is changing (required)")) + '</span><input data-ccs-reason maxlength="200"></label>' +
+            '<label class="f"><span>' + esc(T(c, "site.admin.ccs.signOff", "Signed off clinically by (name and role, or committee; required)")) + '</span><input data-ccs-signoff maxlength="120"></label>' +
+            '<button type="button" class="btn" data-ccs="commit" data-count="' + esc(String(pv.changeCount)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.fml.commit", "Save these {n} changes", { n: pv.changeCount })) + "</button></div>"
+            : '<p class="quiet">' + esc(T(c, "site.admin.fml.nothing", "Nothing would change.")) + "</p>";
+        }
+      }
+    }
+    return h + '<div data-ccs-msg aria-live="polite"></div></div>';
+  }
+  WSQ._ccs = { html: ccsHtml, rows: ccsRows, value: ccsValue, keys: CCS_KEYS };
+  function wireContentSetting(c, key) {
+    var box = document.getElementById("ccsCard-" + key);
+    if (!box) return;
+    var s = { r: undefined, rows: [], enabled: false, pv: null };
+    var draw = function () { box.innerHTML = ccsHtml(c, key, s); };
+    var load = function () {
+      return c.api("/org/clinical-settings/" + key + "?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+        s.r = r && r.ok ? r : null;
+        if (s.r) { s.rows = ccsRows(key, s.r.saved); s.enabled = !!(s.r.saved && s.r.saved.enabled === true); }
+        draw();
+      }, function () { s.r = null; draw(); });
+    };
+    var send = function (extra) { return c.api("/org/clinical-settings/" + key, Object.assign({ orgId: c.state.orgId, value: ccsValue(key, s.rows, s.enabled) }, extra || {})); };
+    box.onchange = box.oninput = function (ev) {
+      var t = ev.target || {};
+      if (t.hasAttribute && t.hasAttribute("data-ccs-on")) { s.enabled = !!t.checked; s.pv = null; return; }
+      var f = t.getAttribute && t.getAttribute("data-ccs-f");
+      if (f) { s.rows[Number(t.getAttribute("data-i"))][f] = t.value; if (s.pv && ev.type === "change") { s.pv = null; draw(); } }
+    };
+    box.onclick = function (ev) {
+      var b = ev.target.closest && ev.target.closest("[data-ccs]"); if (!b) return;
+      var act = b.getAttribute("data-ccs");
+      if (act === "add") { s.rows.push({}); s.pv = null; draw(); return; }
+      if (act === "del") { s.rows.splice(Number(b.getAttribute("data-i")), 1); s.pv = null; draw(); return; }
+      if (act === "dry") { b.disabled = true; send().then(function (r) { s.pv = r || false; draw(); }, function () { s.pv = false; draw(); }); return; }
+      if (act === "commit") {
+        var reason = String((box.querySelector("[data-ccs-reason]") || {}).value || "").trim(), by = String((box.querySelector("[data-ccs-signoff]") || {}).value || "").trim();
+        var m = box.querySelector("[data-ccs-msg]");
+        if (!reason || !by) { if (m) m.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.ccs.reasonFirst", "Say why this is changing and who signed it off first.")) + "</div>"; return; }
+        b.disabled = true;
+        send({ commit: true, reason: reason, signedOffBy: by, confirmCount: Number(b.getAttribute("data-count")), planId: b.getAttribute("data-plan") }).then(function (r) {
+          s.pv = r || false;
+          // After a save the setting is read again, so the table shows what the server holds, never the draft.
+          if (r && r.ok && r.step === "done") return load();
+          draw();
+        }, function () { s.pv = false; draw(); });
+      }
+    };
+    draw();
+    if (c.can(CCS_CAP[key])) load();
+  }
+
   // ---- Clinical seed data (D10) ------------------------------------------------------------------
   /* Clinical content that ships with WardSynQ (allergy classes, dose ceilings, default critical limits and
    * the other seed lists), item by item. An item is UNAPPROVED until signed off by the named signatory for its
@@ -238,7 +796,8 @@
               '<td class="mono">' + esc(it.version) + "</td>" +
               "<td>" + (signed ? '<span class="pill ok">' + esc(it.signoff.text) + "</span>" : '<span class="pill stop">' + esc(T(c, "site.admin.seed.unapproved", "UNAPPROVED")) + "</span>") + "</td>" +
               (r.canSign ? "<td>" + (signed ? "" : '<button type="button" class="btn ghost" data-seed-sign="' + esc(l.id) + '" data-seed-item="' + esc(it.id) + '" data-seed-hash="' + esc(it.contentHash) + '">' + esc(T(c, "site.admin.seed.signOff", "Sign off")) + "</button>") + "</td>" : "") + "</tr>";
-          }).join("") + "</tbody></table></div>";
+          }).join("") + "</tbody></table></div>" +
+          (l.items.length ? "" : '<p class="quiet">' + esc(T(c, "site.admin.seed.emptyList", "No items: this list is empty, so nothing from it is loaded or checked.")) + "</p>");
       }).join("") + '<div id="seedMsg"></div></div>';
   }
   WSQ._seedHtml = seedHtml;
@@ -329,6 +888,63 @@
         if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, r))) + "</div>"; return; }
         c.state.org = r.org;
         c.toast(enabled ? T(c, "site.admin.hospital.printLang.savedOn", "Saved. Prints offer a second language.") : T(c, "site.admin.hospital.printLang.savedOff", "Saved. Prints are in English only."));
+      });
+    };
+  }
+  /* LABEL SIZES (printed labels, ward-labels.js). The size of each label this hospital's printers take, in mm. The
+   * print makes the page exactly this size, so a wrong size is a clipped or shrunken label, never a guessed one.
+   * Blank means the default shown. The server bounds each (functions/_wardsynq/labels.js labelSizesOf). */
+  var LABEL_KIND_IDS = [["wristband", 75, 25], ["specimen", 50, 25], ["pharmacy", 75, 50], ["slip", 80, 60]];
+  function labelKindName(c, id) {
+    return {
+      wristband: T(c, "site.admin.hospital.labels.wristband", "Patient wristband"),
+      specimen: T(c, "site.admin.hospital.labels.specimen", "Specimen tube label"),
+      pharmacy: T(c, "site.admin.hospital.labels.pharmacy", "Pharmacy dispensing label"),
+      slip: T(c, "site.admin.hospital.labels.slip", "ID slip"),
+    }[id] || id;
+  }
+  function labelSizesCard(c, o) {
+    var cur = (o && o.wardsynq && o.wardsynq.labelSizes) || {};
+    var num = function (id, v, dflt) {
+      return '<input type="number" min="15" max="300" step="1" inputmode="numeric" id="' + id + '" value="' + c.esc(v == null ? "" : String(v)) + '" placeholder="' + c.esc(String(dflt)) + '" style="width:6em">';
+    };
+    return '<div class="card"><h2>' + c.ms("label") + " " + c.esc(T(c, "site.admin.hospital.labels.title", "Label sizes")) + "</h2>" +
+      '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.labels.intro", "Width and height in millimetres of each label your printers take, from 15 to 300. The print is made exactly this size. Leave both blank to use the size shown.")) + "</p>" +
+      LABEL_KIND_IDS.map(function (k) {
+        var s = cur[k[0]] || {};
+        return '<div class="f"><span>' + c.esc(labelKindName(c, k[0])) + "</span> " +
+          num("admLbl_" + k[0] + "_w", s.widthMm, k[1]) + " &times; " + num("admLbl_" + k[0] + "_h", s.heightMm, k[2]) + " " + c.esc(T(c, "site.admin.hospital.labels.mm", "mm")) + "</div>";
+      }).join("") +
+      '<button class="btn" id="admLblSave" type="button">' + c.esc(T(c, "site.admin.save", "Save")) + '</button><div id="admLblMsg"></div></div>';
+  }
+  /* PURE. typed: { wristband: [width, height], ... } as typed. Both blank = the default; anything else must be two sizes in range. */
+  function readLabelSizes(c, typed) {
+    var sizes = {}, bad = "";
+    LABEL_KIND_IDS.forEach(function (k) {
+      var t = typed[k[0]] || [], w = String(t[0] == null ? "" : t[0]).trim(), h = String(t[1] == null ? "" : t[1]).trim();
+      if (!w && !h) return;
+      var wn = Number(w), hn = Number(h);
+      if (!(wn >= 15 && wn <= 300 && hn >= 15 && hn <= 300)) { bad = bad || labelKindName(c, k[0]); return; }
+      sizes[k[0]] = { widthMm: wn, heightMm: hn };
+    });
+    return bad ? { error: T(c, "site.admin.hospital.labels.bad", "{kind}: give both a width and a height from 15 to 300 mm. Nothing was saved.", { kind: bad }) } : { labelSizes: sizes };
+  }
+  WSQ._labelSizes = { html: labelSizesCard, read: readLabelSizes };
+  function wireLabelSizes(c) {
+    var btn = document.getElementById("admLblSave");
+    if (!btn) return;
+    btn.onclick = function () {
+      var m = document.getElementById("admLblMsg"), typed = {};
+      LABEL_KIND_IDS.forEach(function (k) { typed[k[0]] = [document.getElementById("admLbl_" + k[0] + "_w").value, document.getElementById("admLbl_" + k[0] + "_h").value]; });
+      var out = readLabelSizes(c, typed), sizes = out.labelSizes;
+      if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, wardsynq: { labelSizes: sizes } }).then(function (r) {
+        btn.disabled = false;
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, r))) + "</div>"; return; }
+        m.innerHTML = "";
+        c.state.org = r.org;
+        c.toast(T(c, "site.admin.hospital.labels.saved", "Saved. Labels print at these sizes."));
       });
     };
   }
@@ -537,8 +1153,13 @@
         '<button class="btn ghost" id="clinApply" type="button">' + esc(T(c, "site.admin.hospital.clinical.applyTemplate", "Fill the form from the template")) + '</button></div><div id="clinTplNote" class="quiet"></div>' +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.highAlert", "High-alert drugs, one per line")) + '</span><textarea id="clinHigh" rows="4">' + lines(s.highAlertDrugs) + "</textarea></label>" +
         '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.abx", "Antibiotics counted for days of therapy, one per line")) + '</span><textarea id="clinAbx" rows="4">' + lines(s.antibiotics) + "</textarea></label></div>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.controlled", "Controlled drugs (NDPS register; a second person witnesses every dispense, dose and wastage), one per line")) + '</span><textarea id="clinControlled" rows="4">' + lines(s.controlledDrugs) + "</textarea></label>" +
+        '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.emergencyMeds", "Emergency medicines (a stock-out of any is counted for NABH), one per line")) + '</span><textarea id="clinEmergency" rows="4">' + lines(s.emergencyMedicines) + "</textarea></label></div>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.sapWindow", "A prophylactic antibiotic counts as on time when given within this many minutes before incision")) + '</span><input id="clinSap" type="number" min="1" max="1440" value="' + val(s.prophylaxisWindowMinutes) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.abgMin", "Antibiogram: fewest isolates for a percentage (CLSI M39 recommends 30)")) + '</span><input id="clinAbgMin" type="number" min="1" max="1000" value="' + val(s.antibiogramMinIsolates) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label></div>' +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.verify", "Pharmacy verifies an order within (hours)")) + '</span><input id="clinVerify" type="number" min="1" max="168" value="' + val(s.orderVerifyWithinHours) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label>' +
-        '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.rpo", "Backup recovery point objective (minutes)")) + '</span><input id="clinRpo" type="number" min="5" max="10080" value="' + val(s.rpoMinutes) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label></div>' +
+        '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.rpo", "Backup recovery point objective (minutes)")) + '</span><input id="clinRpo" type="number" min="5" max="10080" value="' + val(s.rpoMinutes) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.admin.hospital.clinical.lactation", "Days after a delivery here counted as breastfeeding (pregnancy and lactation check)")) + '</span><input id="clinLactation" type="number" min="1" max="730" value="' + val(s.lactationWindowDays) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.notConfigured", "not configured")) + '"></label></div>' +
       '<p>' + esc(T(c, "site.admin.hospital.clinical.edInterval", "ED reassessment interval by acuity (minutes)")) + '</p><div class="row">' + ACUITY.map(function (a) {
         return '<label class="f" style="flex:0 1 110px"><span>' + esc(T(c, "site.admin.hospital.clinical.acuity", "Acuity {a}", { a: a })) + '</span><input class="clinEd" data-acuity="' + a + '" type="number" min="1" max="1440" value="' + val((s.edReassessMinutes || {})[a]) + '" placeholder="' + esc(T(c, "site.admin.hospital.clinical.none", "none")) + '"></label>';
       }).join("") + "</div>" +
@@ -554,10 +1175,15 @@
     var list = function (a) { return a && a.length ? esc(a.join(", ")) : nc; };
     var ed = ACUITY.filter(function (a) { return s.edReassessMinutes && s.edReassessMinutes[a] != null; }).map(function (a) { return T(c, "site.admin.hospital.clinical.edReadback", "acuity {a}: {min} min", { a: a, min: s.edReassessMinutes[a] }); });
     return '<div class="kv"><dt>' + esc(T(c, "site.admin.hospital.clinical.highAlert2", "High-alert drugs")) + "</dt><dd>" + list(s.highAlertDrugs) + "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.abx2", "Antibiotics")) + "</dt><dd>" + list(s.antibiotics) +
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.controlled2", "Controlled drugs")) + "</dt><dd>" + list(s.controlledDrugs) +
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.verify2", "Verify within")) + "</dt><dd>" + (s.orderVerifyWithinHours != null ? esc(T(c, "site.admin.hospital.clinical.hours", "{n} hours", { n: s.orderVerifyWithinHours })) : nc) +
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.edReassess", "ED reassessment")) + "</dt><dd>" + (ed.length ? esc(ed.join(", ")) : nc) +
       "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.patientAccess2", "Patient access")) + "</dt><dd>" + (s.patientAccess && s.patientAccess.enabled ? esc(T(c, "site.admin.on", "on")) : esc(T(c, "site.admin.off", "off"))) +
-      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.rpo2", "Recovery point objective")) + "</dt><dd>" + (s.rpoMinutes != null ? esc(T(c, "site.admin.hospital.clinical.minutes", "{n} minutes", { n: s.rpoMinutes })) : nc) + "</dd></div>";
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.rpo2", "Recovery point objective")) + "</dt><dd>" + (s.rpoMinutes != null ? esc(T(c, "site.admin.hospital.clinical.minutes", "{n} minutes", { n: s.rpoMinutes })) : nc) +
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.lactation2", "Lactation window")) + "</dt><dd>" + (s.lactationWindowDays != null ? esc(T(c, "site.admin.hospital.clinical.days", "{n} days", { n: s.lactationWindowDays })) : nc) +
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.emergencyMeds2", "Emergency medicines")) + "</dt><dd>" + list(s.emergencyMedicines) +
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.sapWindow2", "Prophylaxis window")) + "</dt><dd>" + (s.prophylaxisWindowMinutes != null ? esc(T(c, "site.admin.hospital.clinical.minutes", "{n} minutes", { n: s.prophylaxisWindowMinutes })) : nc) +
+      "</dd><dt>" + esc(T(c, "site.admin.hospital.clinical.abgMin2", "Antibiogram minimum isolates")) + "</dt><dd>" + (s.antibiogramMinIsolates != null ? esc(s.antibiogramMinIsolates) : nc) + "</dd></div>";
   }
   /* Reads the form. Blank numbers are "not configured" (null); the server validates the rest. */
   function readClinicalSettings(get) {
@@ -565,7 +1191,7 @@
     var num = function (v) { v = String(v == null ? "" : v).trim(); return v === "" ? null : Number(v); };
     var ed = {};
     ACUITY.forEach(function (a) { var v = num(get("ed" + a)); if (v != null) ed[a] = v; });
-    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
+    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), controlledDrugs: names("clinControlled"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), lactationWindowDays: num(get("clinLactation")), emergencyMedicines: names("clinEmergency"), prophylaxisWindowMinutes: num(get("clinSap")), antibiogramMinIsolates: num(get("clinAbgMin")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
   }
   WSQ._clinicalSettings = { html: clinicalSettingsHtml, readBack: clinicalReadBackHtml, read: readClinicalSettings };
   function wireClinicalSettings(c) {
@@ -600,6 +1226,116 @@
     };
     draw(undefined);
     c.api("/org/clinical-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
+  }
+  /* PATIENT FORMS BEFORE AN APPOINTMENT (R4-5, functions/_wardsynq/form-response.js intakeSettings): one switch through
+   * GET/POST /org/intake-settings, with a reason. Off unless saved on; a failed load is said, never read as off. */
+  function renderIntakeSettings(c, host) {
+    if (!host) return;
+    var title = "<h2>" + c.esc(T(c, "site.admin.intake.title", "Patient forms before an appointment")) + "</h2>";
+    var failed = function () { host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.intake.loadFailed", "The setting could not be loaded. Do not read this as off.")) + "</div></div>"; };
+    host.innerHTML = '<div class="card">' + title + '<span class="spin"></span></div>';
+    return c.api("/org/intake-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok || !r.settings) { failed(); return; }
+      host.innerHTML = '<div class="card">' + title +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.intake.intro", "When on, a patient with a booked appointment still to come is offered the patient forms marked for appointments on the portal. Staff review the answers; nothing is written into the chart. Every change is recorded with its reason.")) + "</p>" +
+        '<label class="f"><span><input type="checkbox" id="admIntakeAppt"' + (r.settings.forAppointments ? " checked" : "") + "> " + c.esc(T(c, "site.admin.intake.forAppointments", "Offer patient forms before a booked appointment")) + "</span></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.intake.reason", "Why is this setting changing?")) + '</span><input id="admIntakeReason"></label>' +
+        '<button type="button" class="btn" id="admIntakeSave">' + c.esc(T(c, "site.admin.intake.save", "Save")) + '</button><div id="admIntakeMsg"></div></div>';
+      document.getElementById("admIntakeSave").onclick = function () {
+        var out = document.getElementById("admIntakeMsg");
+        out.innerHTML = '<span class="spin"></span>';
+        c.api("/org/intake-settings", { orgId: c.state.orgId, settings: { forAppointments: document.getElementById("admIntakeAppt").checked }, reason: document.getElementById("admIntakeReason").value.trim() }).then(function (x) {
+          if (!x || !x.ok) { out.innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, x))) + "</div>"; return; }
+          c.toast(x.changed && x.changed.length ? T(c, "site.admin.saved", "Saved.") : T(c, "site.admin.intake.nothingChanged", "Nothing changed.")); renderIntakeSettings(c, host);
+        }, function () { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.intake.noResponse", "No response from the server. The setting may not have been saved; reload to check.")) + "</div>"; });
+      };
+    }, failed);
+  }
+  WSQ._intakeSettings = renderIntakeSettings;
+  /* BLOOD DONOR CRITERIA (functions/_wardsynq/blood-bank.js, owner decision 2026-09-17). WHO 2012 by default; this
+   * hospital may only make a criterion stricter. The table is the blood bank page's own (WSQ._bloodbank), so both
+   * screens name each criterion and its source the same way. r: undefined = loading, null = could not be loaded (said,
+   * never drawn as the standard's values), else the server's { criteria, saved }; after a save, its read-back. */
+  function donorCriteriaHtml(c, r, msg) {
+    var esc = c.esc, B = WSQ._bloodbank;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.hospital.donor.title", "Blood donor selection criteria")) + "</h2>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.hospital.donor.loading", "Loading donor criteria...")) + "</p></div>";
+    if (!r || !B) return h + '<div class="msg err">' + esc(T(c, "site.admin.hospital.donor.loadFailed", "The donor criteria could not be loaded. Do not read this as the standard's values being in force.")) + "</div></div>";
+    return h + '<p class="quiet">' + esc(T(c, "site.admin.hospital.donor.intro", "The blood bank screens donors against the stricter of the WHO blood donor selection guidelines (2012) and the law of this hospital's country (in India, the Drugs and Cosmetics Rules 1945, Schedule F Part XII-B). A blood centre may apply a stricter rule here: each value can only be made stricter. Blank uses the standard.")) + "</p>" +
+      B.criteriaTableHtml(c, r.criteria, true, r.saved) +
+      '<button class="btn" id="donorCritSave" type="button">' + esc(T(c, "site.admin.hospital.donor.save", "Save donor criteria")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "") + "</div>";
+  }
+  WSQ._donorCriteriaHtml = donorCriteriaHtml;
+  /* BLOOD CENTRE SETTINGS (functions/_wardsynq/blood-centre-rules.js, legal opinion 2026-09-17 section G). Each may only
+   * be stricter than the Drugs and Cosmetics Rules: NAT required, shorter shelf lives, longer retention. r: undefined =
+   * loading, null = could not be loaded (said, never drawn as the Rules' values), else the server's { centre }. */
+  function bloodCentreHtml(c, r, msg) {
+    var esc = c.esc, B = WSQ._bloodbank;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.hospital.bloodCentre.title", "Blood centre: tests, shelf lives and retention")) + "</h2>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.hospital.bloodCentre.loading", "Loading blood centre settings...")) + "</p></div>";
+    if (!r || !r.centre || !B) return h + '<div class="msg err">' + esc(T(c, "site.admin.hospital.bloodCentre.loadFailed", "The blood centre settings could not be loaded. Do not read this as the Rules' values being in force.")) + "</div></div>";
+    var ce = r.centre, saved = ce.saved || {}, sh = saved.shelfHours || {};
+    var num = function (id, value, placeholder, label) { return '<label class="f"><span>' + esc(label) + '</span><input type="number" min="1" step="1" id="' + id + '" value="' + (value == null ? "" : esc(value)) + '" placeholder="' + esc(placeholder) + '"></label>'; };
+    return h + '<p class="quiet">' + esc(T(c, "site.admin.hospital.bloodCentre.intro", "The Drugs and Cosmetics Rules 1945 set these for a licensed blood centre. This hospital may only make them stricter: require NAT, shorten a shelf life, keep samples or records longer. Blank uses the Rules.")) + "</p>" +
+      '<label class="f"><span><input type="checkbox" id="bcNat"' + (ce.natRequired ? " checked" : "") + "> " + esc(T(c, "site.admin.hospital.bloodCentre.nat", "Require NAT on every donation before release")) + "</span></label>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.hospital.bloodCentre.natNote", "Not required by the Rules. Reports say the government declined to make NAT mandatory in March 2026; that is not confirmed from a primary text.")) + "</p>" +
+      '<div class="row">' + num("bcSample", saved.sampleRetentionDays, ce.sampleRetention.days, T(c, "site.admin.hospital.bloodCentre.sampleDays", "Days to keep pilot and recipient samples after issue")) +
+      num("bcRecords", saved.recordRetentionYears, ce.recordRetention.years, T(c, "site.admin.hospital.bloodCentre.recordYears", "Years to keep blood centre records")) + "</div>" +
+      "<h3>" + esc(T(c, "site.admin.hospital.bloodCentre.shelfHeading", "Shorter shelf lives (hours)")) + '</h3><div class="row">' +
+      ce.components.map(function (k) {
+        return '<label class="f"><span>' + B.componentWord(c, k.component) + ": " + esc(T(c, "site.admin.hospital.bloodCentre.shelfFor", "the Rules allow up to {limit}", { limit: B.shelfWords(c, k.longestHours) })) +
+          '</span><input type="number" min="1" step="1" data-shelf="' + esc(k.component) + '" value="' + (sh[k.component] == null ? "" : esc(sh[k.component])) + '" placeholder="' + esc(k.longestHours) + '"></label>';
+      }).join("") + "</div>" +
+      '<p class="quiet">' + esc(T(c, "site.blood.shelfUnconfirmed", "Not confirmed in the Rules as read, so not allowed here: a longer shelf life for fresh frozen plasma kept at -40 C or colder (one year is kept), and a separate shelf life for red cells without an additive solution (they keep no longer than whole blood in the same anticoagulant).")) + "</p>" +
+      '<button class="btn" id="bcSave" type="button">' + esc(T(c, "site.admin.hospital.bloodCentre.save", "Save blood centre settings")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "") + "</div>";
+  }
+  WSQ._bloodCentreHtml = bloodCentreHtml;
+  function wireBloodCentre(c) {
+    var box = document.getElementById("bloodCentreCard");
+    if (!box) return;
+    var draw = function (r, msg) {
+      box.innerHTML = bloodCentreHtml(c, r, msg);
+      var btn = document.getElementById("bcSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var v = function (id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; };
+        var shelf = {};
+        Array.prototype.forEach.call(box.querySelectorAll("[data-shelf]"), function (el) { var x = String(el.value || "").trim(); shelf[el.getAttribute("data-shelf")] = x === "" ? null : Number(x); });
+        var nat = document.getElementById("bcNat");
+        btn.disabled = true;
+        c.api("/org/blood-centre-settings", { orgId: c.state.orgId, settings: { natRequired: !!(nat && nat.checked), sampleRetentionDays: v("bcSample") === "" ? null : Number(v("bcSample")), recordRetentionYears: v("bcRecords") === "" ? null : Number(v("bcRecords")), shelfHours: shelf } }).then(function (x) {
+          if (!x || !x.ok) { btn.disabled = false; box.querySelector(".msg") && box.querySelector(".msg").remove(); box.insertAdjacentHTML("beforeend", '<div class="msg err">' + c.esc(T(c, "site.admin.hospital.donor.notSaved", "Nothing was saved.")) + " " + EN(c, c.esc(refusal(c, x))) + "</div>"); return; }
+          draw(x, { ok: true, html: c.esc(x.changed && x.changed.length ? T(c, "site.admin.hospital.bloodCentre.saved", "Saved. The server now holds the settings shown above.") : T(c, "site.admin.hospital.donor.savedNoChange", "Saved: nothing had changed.")) });
+          c.toast(T(c, "site.admin.hospital.bloodCentre.toast", "Blood centre settings saved."));
+        });
+      };
+    };
+    draw(undefined);
+    c.api("/org/blood-centre-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
+  }
+  function wireDonorCriteria(c) {
+    var box = document.getElementById("donorCritCard");
+    if (!box) return;
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    var draw = function (r, msg) {
+      box.innerHTML = donorCriteriaHtml(c, r, msg);
+      var btn = document.getElementById("donorCritSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var criteria = {};
+        Array.prototype.forEach.call(box.querySelectorAll("[data-crit]"), function (el) { var v = String(el.value || "").trim(); criteria[el.getAttribute("data-crit")] = v === "" ? null : Number(v); });
+        btn.disabled = true;
+        c.api("/org/blood-donor-criteria", { orgId: c.state.orgId, criteria: criteria }).then(function (x) {
+          if (!x || !x.ok) { btn.disabled = false; box.querySelector(".msg") && box.querySelector(".msg").remove(); box.insertAdjacentHTML("beforeend", '<div class="msg err">' + c.esc(T(c, "site.admin.hospital.donor.notSaved", "Nothing was saved.")) + " " + EN(c, c.esc(refusal(c, x))) + "</div>"); return; }
+          draw(x, { ok: true, html: x.changed && x.changed.length ? c.esc(T(c, "site.admin.hospital.donor.saved", "Saved. The server now holds the criteria shown above.")) : c.esc(T(c, "site.admin.hospital.donor.savedNoChange", "Saved: nothing had changed.")) });
+          c.toast(T(c, "site.admin.hospital.donor.toast", "Donor criteria saved."));
+        });
+      };
+    };
+    draw(undefined);
+    c.api("/org/blood-donor-criteria" + q).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
   }
   /* CRITICAL RESULT ALERTS TO PHONES (S3 P0). Whether a critical result is pushed through the StewardMD
    * app, who each level tells, the SMS fallback when no phone confirms, and - loudest - every open result
@@ -752,7 +1488,7 @@
       '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.countryNote", "The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.")) + '</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.hospital.needsWardsynq", "Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.")) + '</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="intakeCard"></div><div id="fmlCard"></div>' + CCS_KEYS.map(function (k) { return '<div id="ccsCard-' + k + '"></div>'; }).join("") + '<div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
       /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
       (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
         ? '<div class="card"><h2>' + c.esc(T(c, "site.admin.hospital.removeTitle", "Remove this hospital")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.hospital.removeIntro", "Removes it from every hospital list. Patient records, documents and the audit trail are kept.")) + '</p>' +
@@ -775,8 +1511,13 @@
       });
     };
     wireClinicalSettings(c);
+    renderIntakeSettings(c, document.getElementById("intakeCard"));
+    wireFormulary(c);
+    CCS_KEYS.forEach(function (k) { wireContentSetting(c, k); });
+    wireDonorCriteria(c); wireBloodCentre(c);
     wireNoteWriters(c);
     wirePrintLang(c);
+    wireLabelSizes(c);
     wireApprovalRules(c);
     wireLabCheck(c);
     wireTokenCard(c);
@@ -919,6 +1660,30 @@
       medication: T(c, "site.admin.tariff.kindMedicine", "Medicine"), service: T(c, "site.admin.tariff.kindService", "Service"),
     }[k] || k;
   }
+  /* The server refuses the same things; saying them here gives the reason in the hospital's language. */
+  function tariffTaxError(c, hsn, rate) {
+    var h = String(hsn || "").replace(/\s+/g, ""), r = String(rate || "").trim();
+    if (h && !/^(\d{4}|\d{6}|\d{8})$/.test(h)) return T(c, "site.admin.tariff.errHsn", "HSN/SAC is 4, 6 or 8 digits.");
+    if (r && !(/^\d+(\.\d{1,2})?$/.test(r) && Number(r) <= 100)) return T(c, "site.admin.tariff.errGst", "The GST rate is a percentage from 0 to 100, like 5 or 12.");
+    return "";
+  }
+  function tariffGstLabel(c, t) {
+    var hours = t.kind === "bed" && t.unitHours ? " " + T(c, "site.admin.tariff.unitHoursShown", "(price for {hours} hour(s))", { hours: t.unitHours }) : "";
+    if (t.kind === "bed" && (t.intensiveCareClass === "ICU_SPECIALTY" || t.intensiveCareClass === "HDU")) return icuClassLabel(c, t.intensiveCareClass) + hours;
+    if (t.kind === "bed") return (t.intensiveCare ? T(c, "site.admin.tariff.gstIcu", "Intensive care room: exempt") : T(c, "site.admin.tariff.gstRoom", "Room: 5% above Rs 5,000 a day")) + hours;
+    var rate = t.gstRate === "" || t.gstRate == null ? "" : T(c, "site.admin.tariff.gstRateShown", "{rate}%", { rate: t.gstRate });
+    return t.nonHealthcare ? T(c, "site.admin.tariff.nonHealthShown", "Not health care, taxed at its own rate") + (rate ? " " + rate : "") : rate;
+  }
+  /* gst-packages: which intensive care unit a bed row is (functions/_region_in.js isIntensiveCare). The four named units
+   * are exempt at any price; a specialty ICU and an HDU follow the hospital's GST setting. */
+  var ICU_CLASSES = ["", "ICU", "CCU", "ICCU", "NICU", "ICU_SPECIALTY", "HDU"];
+  function icuClassLabel(c, k) {
+    return {
+      "": T(c, "site.admin.tariff.icuNone", "Ordinary room"), ICU: T(c, "site.admin.tariff.icuIcu", "ICU (Intensive Care Unit)"), CCU: T(c, "site.admin.tariff.icuCcu", "CCU (Critical Care Unit)"),
+      ICCU: T(c, "site.admin.tariff.icuIccu", "ICCU (Intensive Cardiac Care Unit)"), NICU: T(c, "site.admin.tariff.icuNicu", "NICU (Neonatal Intensive Care Unit)"),
+      ICU_SPECIALTY: T(c, "site.admin.tariff.icuSpecialty", "Specialty ICU (PICU, MICU, SICU): follows the GST setting"), HDU: T(c, "site.admin.tariff.icuHdu", "HDU or step-down: follows the GST setting"),
+    }[k] || k;
+  }
   function renderTariff(c, body) {
     body.innerHTML = '<span class="spin"></span>';
     return Promise.all([c.api("/bill/tariff?orgId=" + encodeURIComponent(c.state.orgId)), c.api("/wards?orgId=" + encodeURIComponent(c.state.orgId)).catch(function () { return null; })]).then(function (both) {
@@ -928,12 +1693,13 @@
       // null = the wards could not be read: a per-ward bed price then cannot be offered, and the screen says so.
       var wards = wr && wr.ok ? (wr.wards || []).map(function (w) { return w.name; }).filter(Boolean) : null;
       body.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.tariff.title", "Price list")) + "</h2>" +
-        (items.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.tariff.colItem", "Item")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colCode", "Code")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colKind", "Kind")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + "</th><th></th></tr></thead><tbody>" +
+        (items.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.tariff.colItem", "Item")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colCode", "Code")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colKind", "Kind")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colHsn", "HSN/SAC")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colGst", "GST")) + "</th><th></th></tr></thead><tbody>" +
           items.map(function (t) {
             var daily = t.kind === "bed" || t.kind === "nursing" || t.kind === "visit";
             return "<tr><td>" + c.esc(t.name) + "</td><td>" + c.esc(t.code || "") + "</td><td>" + c.esc(tariffKindLabel(c, t.kind)) +
-              (daily ? "<br><small>" + c.esc(t.ward ? T(c, "site.admin.tariff.wardOnly", "{ward} only", { ward: t.ward }) : T(c, "site.admin.tariff.everyWard", "Every ward")) + "</small>" : "") + "</td><td>" + c.esc(rupees(t.price)) + "</td>" +
+              (daily ? "<br><small>" + c.esc(t.ward ? T(c, "site.admin.tariff.wardOnly", "{ward} only", { ward: t.ward }) : T(c, "site.admin.tariff.everyWard", "Every ward")) + "</small>" : "") + "</td><td>" + c.esc(rupees(t.price)) + "</td><td>" + c.esc(t.hsnSac || "") + "</td><td>" + c.esc(tariffGstLabel(c, t)) + "</td>" +
               '<td><button type="button" class="btn ghost" data-trf-edit="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.changePrice", "Change price")) + '</button> ' +
+              '<button type="button" class="btn ghost" data-trf-tax="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.changeTax", "Change GST details")) + '</button> ' +
               '<button type="button" class="btn ghost" data-trf-off="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.withdraw", "Withdraw")) + "</button></td></tr>";
           }).join("") + "</tbody></table></div>" : '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.none", "No prices set yet.")) + "</p>") +
         '<h3>' + c.esc(T(c, "site.admin.tariff.addItem", "Add an item")) + '</h3><div class="row">' +
@@ -943,10 +1709,21 @@
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.ward", "Ward (per-day charges)")) + '</span><select id="admTrfWard"><option value="">' + c.esc(T(c, "site.admin.tariff.everyWard", "Every ward")) + "</option>" +
           (wards || []).map(function (w) { return '<option value="' + c.esc(w) + '">' + c.esc(w) + "</option>"; }).join("") + "</select></label>" +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + '</span><input id="admTrfPrice" inputmode="decimal"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.hsn", "HSN/SAC (4, 6 or 8 digits)")) + '</span><input id="admTrfHsn" inputmode="numeric"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.gstRate", "GST rate % (medicines and other taxable items)")) + '</span><input id="admTrfGst" inputmode="decimal"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.icu", "Intensive care room (ICU/CCU/ICCU/NICU), beds only")) + '</span><select id="admTrfIcu">' + ICU_CLASSES.map(function (k) { return '<option value="' + k + '">' + c.esc(icuClassLabel(c, k)) + "</option>"; }).join("") + "</select></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.unitHours", "Hours one bed price covers (24 a day, 8 a shift, 1 an hour), beds only")) + '</span><input id="admTrfHours" inputmode="numeric" placeholder="24"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.nonHealth", "Not health care (attendant food or bed, cosmetic procedure, retail item): taxed at its own rate even for an admitted patient")) + '</span><input id="admTrfNonHealth" type="checkbox"></label>' +
         '</div>' + (wards === null ? '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.wardsFailed", "The wards could not be loaded, so a bed price can only be set for every ward right now.")) + "</div>" : "") +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.icuQuestion", "Is this room category an Intensive Care Unit, Critical Care Unit, Intensive Cardiac Care Unit or Neonatal Intensive Care Unit? Only these are exempt at any price. High dependency, step-down, isolation and labour rooms are not on the list and follow the Rs 5,000 per day rule.")) + "</p>" +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.gstRules", "GST is applied by law: a room other than an intensive care room charged above Rs 5,000 a day is taxed at 5 percent; intensive care rooms and other health care services are exempt; medicines on an inpatient bill are exempt, and medicines sold to outpatients are taxed at the rate set here. An intensive care room is marked here, never guessed from the ward name.")) + "</p>" +
         '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.howBilled", "Bed, nursing and doctor visit prices are charged for each day of an inpatient stay. Name a test or medicine exactly as it is ordered, so the bill can find its price.")) + "</p>" +
         '<button type="button" class="btn" id="admTrfAdd">' + c.esc(T(c, "site.admin.add", "Add")) + '</button><div id="admTrfMsg"></div>' +
-        '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.everyChange", "Every change is recorded with the old and new price.")) + "</p></div>";
+        '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.everyChange", "Every change is recorded with the old and new price.")) + "</p></div>" +
+        '<div id="admGstHost"></div><div id="admRcmHost"></div><div id="admPkgHost"></div>';
+      renderGstSettings(c, document.getElementById("admGstHost"));
+      renderRcmSettings(c, document.getElementById("admRcmHost"));
+      renderPackages(c, document.getElementById("admPkgHost"));
 
       function save(item) {
         return c.api("/bill/tariff", Object.assign({ orgId: c.state.orgId }, item)).then(function (x) {
@@ -962,7 +1739,15 @@
         var price = toPaise(document.getElementById("admTrfPrice").value);
         if (!name) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errName", "Give the item a name.")) + "</div>"; return; }
         if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errPrice", "The price has to be a plain amount in rupees, like 450 or 450.50.")) + "</div>"; return; }
-        save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: document.getElementById("admTrfKind").value, ward: document.getElementById("admTrfWard").value, price: price });
+        var kind = document.getElementById("admTrfKind").value;
+        var taxErr = tariffTaxError(c, document.getElementById("admTrfHsn").value, document.getElementById("admTrfGst").value);
+        var hours = document.getElementById("admTrfHours").value.trim();
+        if (!taxErr && kind === "bed" && hours && !(/^\d{1,2}$/.test(hours) && Number(hours) >= 1 && Number(hours) <= 24)) taxErr = T(c, "site.admin.tariff.errHours", "The hours one bed price covers are a whole number from 1 to 24.");
+        if (taxErr) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(taxErr) + "</div>"; return; }
+        save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: kind, ward: document.getElementById("admTrfWard").value, price: price,
+          hsnSac: document.getElementById("admTrfHsn").value.trim(), gstRate: document.getElementById("admTrfGst").value.trim(),
+          intensiveCareClass: kind === "bed" ? document.getElementById("admTrfIcu").value : undefined, unitHours: kind === "bed" ? hours : undefined,
+          nonHealthcare: document.getElementById("admTrfNonHealth").checked });
       };
       body.querySelectorAll("[data-trf-edit]").forEach(function (b) {
         b.onclick = function () {
@@ -973,6 +1758,31 @@
           save({ id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: price });
         };
       });
+      /* GST details only: the server keeps the price and everything not sent. */
+      body.querySelectorAll("[data-trf-tax]").forEach(function (b) {
+        b.onclick = function () {
+          var t = items.filter(function (x) { return x.id === b.getAttribute("data-trf-tax"); })[0]; if (!t) return;
+          var hsn = prompt(T(c, "site.admin.tariff.hsnPrompt", "HSN/SAC for {name} (4, 6 or 8 digits; empty to clear)", { name: t.name }), t.hsnSac || ""); if (hsn == null) return;
+          var rate = prompt(T(c, "site.admin.tariff.gstPrompt", "GST rate % for {name} (empty for none)", { name: t.name }), t.gstRate == null ? "" : String(t.gstRate)); if (rate == null) return;
+          var taxErr = tariffTaxError(c, hsn, rate);
+          if (taxErr) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(taxErr) + "</div>"; return; }
+          var item = { id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: t.price, hsnSac: hsn.trim(), gstRate: rate.trim() };
+          if (t.kind === "bed") {
+            if (confirm(T(c, "site.admin.tariff.icuConfirm", "Is {name} an intensive care room (ICU, CCU, ICCU or NICU)? OK for yes, Cancel for no.", { name: t.name }))) item.intensiveCareClass = "ICU";
+            else {
+              var other = prompt(T(c, "site.admin.tariff.icuOtherPrompt", "Is {name} a specialty ICU (PICU, MICU, SICU) or a high dependency or step-down unit? Type SPECIALTY or HDU, or leave empty for an ordinary room.", { name: t.name }), t.intensiveCareClass === "ICU_SPECIALTY" ? "SPECIALTY" : t.intensiveCareClass === "HDU" ? "HDU" : "");
+              if (other == null) return;
+              var o = other.trim().toUpperCase();
+              if (o && o !== "SPECIALTY" && o !== "HDU") { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errIcuOther", "Type SPECIALTY, HDU, or leave it empty.")) + "</div>"; return; }
+              item.intensiveCareClass = o === "SPECIALTY" ? "ICU_SPECIALTY" : o;
+            }
+            var hrs = prompt(T(c, "site.admin.tariff.unitHoursPrompt", "Hours one price of {name} covers (24 a day, 8 a shift, 1 an hour)", { name: t.name }), t.unitHours ? String(t.unitHours) : "24"); if (hrs == null) return;
+            if (!(/^\d{1,2}$/.test(hrs.trim()) && Number(hrs) >= 1 && Number(hrs) <= 24)) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errHours", "The hours one bed price covers are a whole number from 1 to 24.")) + "</div>"; return; }
+            item.unitHours = Number(hrs) === 24 ? "" : hrs.trim();
+          } else item.nonHealthcare = confirm(T(c, "site.admin.tariff.nonHealthConfirm", "Is {name} something other than health care (attendant food or bed, cosmetic procedure, retail item)? OK for yes, Cancel for no.", { name: t.name }));
+          save(item);
+        };
+      });
       body.querySelectorAll("[data-trf-off]").forEach(function (b) {
         b.onclick = function () {
           var t = items.filter(function (x) { return x.id === b.getAttribute("data-trf-off"); })[0]; if (!t) return;
@@ -980,6 +1790,234 @@
           save({ id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: t.price, active: false });
         };
       });
+    });
+  }
+
+  /* GST SETTINGS (gst-packages, functions/_wardsynq/gst-settings.js). Where the law is not settled the hospital's
+   * chartered accountant decides. Each setting shows the GST treatment review's safest default, that it is the CA's
+   * decision, and the review's reason in one line. A choice other than the default needs the CA's opinion reference and
+   * date; every change needs a reason. null = loading, false = failed: never read as the defaults.
+   * gst-parties (2026-09-17): the GST recipient is no longer a hospital-wide setting. It is determined on each payer
+   * contract (Integrations, Payers); a saved old value is said here, and used only for contracts with no determination. */
+  var GST_CHOICE_KEYS = ["pkgRoomValuation", "placeOfSupply", "intensiveCareUnits", "roomChargeBasis", "dischargeMedsAsComposite"];
+  function gstChoiceText(c, key) {
+    return {
+      pkgRoomValuation: { label: T(c, "site.admin.gst.roomValuation", "Room above Rs 5,000 a day inside a package: how its value is worked out"),
+        why: T(c, "site.admin.gst.roomValuationWhy", "No rule, circular or ruling says how to value a room inside a package; the published tariff, capped at the package price, avoids paying too little tax."),
+        options: { published_tariff: T(c, "site.admin.gst.valPublished", "The hospital's published per-day room tariff, capped at the package price (default)"), scheme_rate: T(c, "site.admin.gst.valScheme", "The per-day room rate in the payer's own rate card, entered on the package"), proportional_split: T(c, "site.admin.gst.valSplit", "A proportional split of the package price by standalone prices") } },
+      placeOfSupply: { label: T(c, "site.admin.gst.pos", "Place of supply for health services"),
+        why: T(c, "site.admin.gst.posWhy", "A health service is supplied where it is performed (IGST Act Section 12(4), a probable reading), so CGST and SGST apply even for a payer in another state."),
+        options: { where_performed: T(c, "site.admin.gst.posPerformed", "Where the service is performed: CGST and SGST (default)"), recipient_state: T(c, "site.admin.gst.posRecipient", "The registered recipient's state: IGST across states") } },
+      intensiveCareUnits: { label: T(c, "site.admin.gst.icu", "Which units count as intensive care (exempt at any price)"),
+        why: T(c, "site.admin.gst.icuWhy", "Only ICU, CCU, ICCU and NICU are named; specialty ICUs are intensive care in substance (probable); HDU, step-down, isolation and labour rooms are not named."),
+        options: { named_and_specialty: T(c, "site.admin.gst.icuNamedSpecialty", "ICU, CCU, ICCU, NICU and specialty ICUs; HDU and step-down are rooms (default)"), named_only: T(c, "site.admin.gst.icuNamedOnly", "Only ICU, CCU, ICCU and NICU"), include_hdu: T(c, "site.admin.gst.icuHdu", "Also HDU and step-down units") } },
+      roomChargeBasis: { label: T(c, "site.admin.gst.roomBasis", "What the Rs 5,000 a day room charge includes"),
+        why: T(c, "site.admin.gst.roomBasisWhy", "The notification is silent on nursing, RMO or diet charges; by default the bed tariff as billed is the room charge, including anything bundled into it."),
+        options: { bed_tariff: T(c, "site.admin.gst.basisBed", "The bed tariff as billed (default)"), bed_and_daily_nursing: T(c, "site.admin.gst.basisNursing", "The bed tariff plus daily nursing charges billed separately") } },
+      dischargeMedsAsComposite: { label: T(c, "site.admin.gst.dischargeMeds", "Take-home medicines at discharge billed outside a package"),
+        why: T(c, "site.admin.gst.dischargeMedsWhy", "Medicines bought after discharge are taxable (Kerala AAAR); no ruling covers medicines issued at discharge, so they are taxed at the item's rate by default."),
+        options: { taxed: T(c, "site.admin.gst.medsTaxed", "Taxed at the item's own rate (default)"), composite: T(c, "site.admin.gst.medsComposite", "Part of the exempt in-patient supply") } },
+    }[key];
+  }
+  function renderGstSettings(c, host) {
+    if (!host) return;
+    var title = "<h2>" + c.esc(T(c, "site.admin.gst.title", "GST settings")) + "</h2>";
+    host.innerHTML = '<div class="card">' + title + '<span class="spin"></span></div>';
+    return c.api("/org/gst-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok || !r.settings) { host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.gst.loadFailed", "The GST settings could not be loaded. Do not read this as the defaults.")) + "</div></div>"; return; }
+      var s = r.settings, ca = T(c, "site.admin.gst.confirmCa", "Confirm with your chartered accountant.");
+      var note = function (why) { return '<p class="quiet"><b>' + c.esc(ca) + "</b> " + c.esc(why) + "</p>"; };
+      host.innerHTML = '<div class="card">' + title +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.gst.intro", "Where the law is not settled, each setting starts at the safest reading. A choice other than the default needs your chartered accountant's written opinion. Every change is recorded with its reason.")) + "</p>" +
+        '<div class="msg note">' + c.esc(T(c, "site.admin.gst.recipientPerContract", "The GST recipient (Section 2(93) CGST Act) is determined on each payer contract under Integrations, Payers, from who is liable to pay under that contract, not from who transfers the money. Insurers and TPAs default to the patient; government schemes and corporates stay not determined, and are billed to the patient with a warning, until you choose.")) +
+          (s.recipientOfCashlessClaims === "payer" ? "<br>" + c.esc(T(c, "site.admin.gst.recipientLegacy", "Your earlier hospital-wide setting made the insurer, TPA or scheme the GST recipient. It is used only for payer contracts with no determination of their own, on the chartered accountant's opinion below, until each contract records one.")) : "") + "</div>" +
+        GST_CHOICE_KEYS.map(function (k) {
+          var t = gstChoiceText(c, k);
+          return '<label class="f"><span>' + c.esc(t.label) + '</span><select id="admGst_' + k + '">' + Object.keys(t.options).map(function (v) {
+            return '<option value="' + v + '"' + (s[k] === v ? " selected" : "") + ">" + c.esc(t.options[v]) + "</option>";
+          }).join("") + "</select></label>" + note(t.why) + (k === "pkgRoomValuation" ? '<div id="admGstValNote"></div>' : "");
+        }).join("") +
+        "<h4>" + c.esc(T(c, "site.admin.gst.tds", "Schemes confirmed as notified GST TDS deductors")) + '</h4><div class="row">' + ["pmjay", "state", "cghs", "echs"].map(function (k) {
+          return '<label class="f"><input type="checkbox" id="admGstTds_' + k + '"' + (s.gstTdsDeductorSchemes.indexOf(k) >= 0 ? " checked" : "") + "> " + c.esc(pkgSchemeLabel(c, k)) + "</label>";
+        }).join("") + "</div>" +
+        note(T(c, "site.admin.gst.tdsWhy", "GST TDS (Section 51) applies only to taxed supplies over Rs 2.5 lakh under a contract, and whether a scheme agency is a notified deductor is unconfirmed; the scheme's 10 percent claim deduction is income tax TDS, not GST.")) +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.gst.turnover", "Highest aggregate turnover in any financial year from 2017-18, in rupees, exempt supplies included")) + '</span><input id="admGstTurnover" inputmode="numeric" value="' + c.esc(s.aggregateTurnoverRs == null ? "" : String(s.aggregateTurnoverRs)) + '"></label>' +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.gst.turnoverWhy", "Aggregate turnover includes exempt supplies (Section 2(6)). E-invoicing applies above Rs 5 crore; until a figure is entered, nothing is reported. A Bill of Supply is never reported.")) + "</p>" +
+        '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.admin.gst.caRef", "Chartered accountant's written opinion (reference)")) + '</span><input id="admGstCaRef" value="' + c.esc(s.caOpinionRef || "") + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.gst.caDate", "Date of the opinion")) + '</span><input id="admGstCaDate" type="date" value="' + c.esc(s.caOpinionDate || "") + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.gst.reason", "Why are the settings changing?")) + '</span><input id="admGstReason"></label></div>' +
+        '<button type="button" class="btn" id="admGstSave">' + c.esc(T(c, "site.admin.gst.save", "Save GST settings")) + '</button><div id="admGstMsg"></div></div>';
+      var valNote = function (v) {
+        document.getElementById("admGstValNote").innerHTML = !gstChoiceText(c, "pkgRoomValuation").options[v] || v === "published_tariff" ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.gst.valWarning", "Room charges inside packages will be valued using {methodName} instead of your published room tariff. There is no official rule on this. Record your chartered accountant's approval.", { methodName: v === "scheme_rate" ? T(c, "site.admin.gst.methodScheme", "the payer's own per-day room rate") : T(c, "site.admin.gst.methodSplit", "a proportional split of the package price") })) + "</div>";
+      };
+      document.getElementById("admGst_pkgRoomValuation").onchange = function () { valNote(document.getElementById("admGst_pkgRoomValuation").value); };
+      valNote(s.pkgRoomValuation);
+      document.getElementById("admGstSave").onclick = function () {
+        var out = document.getElementById("admGstMsg"), settings = {};
+        GST_CHOICE_KEYS.forEach(function (k) { settings[k] = document.getElementById("admGst_" + k).value; });
+        settings.gstTdsDeductorSchemes = ["pmjay", "state", "cghs", "echs"].filter(function (k) { return document.getElementById("admGstTds_" + k).checked; });
+        settings.aggregateTurnoverRs = document.getElementById("admGstTurnover").value.trim();
+        settings.caOpinionRef = document.getElementById("admGstCaRef").value.trim();
+        settings.caOpinionDate = document.getElementById("admGstCaDate").value;
+        if (settings.aggregateTurnoverRs && !/^\d{1,14}$/.test(settings.aggregateTurnoverRs)) { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.gst.errTurnover", "Aggregate turnover is a whole number of rupees, like 62000000.")) + "</div>"; return; }
+        out.innerHTML = '<span class="spin"></span>';
+        c.api("/org/gst-settings", { orgId: c.state.orgId, settings: settings, reason: document.getElementById("admGstReason").value.trim() }).then(function (x) {
+          if (!x || !x.ok) { out.innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, x))) + "</div>"; return; }
+          c.toast(x.changed && x.changed.length ? T(c, "site.admin.saved", "Saved.") : T(c, "site.admin.gst.nothingChanged", "Nothing changed.")); renderGstSettings(c, host);
+        }, function () { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.gst.noResponse", "No response from the server. The settings may not have been saved; reload to check.")) + "</div>"; });
+      };
+    }, function () {
+      host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.gst.loadFailed", "The GST settings could not be loaded. Do not read this as the defaults.")) + "</div></div>";
+    });
+  }
+
+  /* CLAIMS SETTINGS (rcm-claims-ops, functions/_wardsynq/claims-ops.js): the hospital's own denial reasons, one per line
+   * as CODE: label, and the receivables ageing bands in days. Nothing is preset; with no bands the desk shows totals by
+   * payer without ageing. null = loading, failed = said, never read as none. */
+  function renderRcmSettings(c, host) {
+    if (!host) return;
+    var title = "<h2>" + c.esc(T(c, "site.admin.rcm.title", "Claims settings")) + "</h2>";
+    host.innerHTML = '<div class="card">' + title + '<span class="spin"></span></div>';
+    var failed = function () { host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.rcm.loadFailed", "The claims settings could not be loaded. Do not read this as none set.")) + "</div></div>"; };
+    return c.api("/org/rcm-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok || !r.settings) { failed(); return; }
+      var s = r.settings;
+      host.innerHTML = '<div class="card">' + title +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.rcm.intro", "Denial reasons are this hospital's own list; the billing desk classifies each denial against it with a root cause. Ageing bands group unpaid bills by days since they were raised.")) + "</p>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.rcm.reasons", "Denial reasons, one per line, as CODE: label")) + '</span><textarea id="admRcmReasons" rows="6">' +
+          c.esc((s.denialReasons || []).map(function (x) { return x.code + ": " + x.label; }).join("\n")) + "</textarea></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.rcm.bands", "Ageing bands in days, rising, separated by commas (for example 30, 60, 90)")) + '</span><input id="admRcmBands" value="' + c.esc((s.ageingBands || []).join(", ")) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.rcm.reason", "Why are the settings changing?")) + '</span><input id="admRcmReason"></label>' +
+        '<button type="button" class="btn" id="admRcmSave">' + c.esc(T(c, "site.admin.rcm.save", "Save claims settings")) + '</button><div id="admRcmMsg"></div></div>';
+      document.getElementById("admRcmSave").onclick = function () {
+        var out = document.getElementById("admRcmMsg");
+        var lines = document.getElementById("admRcmReasons").value.split("\n").map(function (x) { return x.trim(); }).filter(Boolean);
+        var bad = lines.filter(function (x) { return x.indexOf(":") < 1; })[0];
+        if (bad) { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.rcm.errLine", "Each denial reason is CODE: label.")) + "</div>"; return; }
+        var reasons = lines.map(function (x) { var i = x.indexOf(":"); return { code: x.slice(0, i).trim(), label: x.slice(i + 1).trim() }; });
+        var bands = document.getElementById("admRcmBands").value.split(",").map(function (x) { return x.trim(); }).filter(Boolean).map(Number);
+        out.innerHTML = '<span class="spin"></span>';
+        c.api("/org/rcm-settings", { orgId: c.state.orgId, settings: { denialReasons: reasons, ageingBands: bands }, reason: document.getElementById("admRcmReason").value.trim() }).then(function (x) {
+          if (!x || !x.ok) { out.innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, x))) + "</div>"; return; }
+          c.toast(x.changed && x.changed.length ? T(c, "site.admin.saved", "Saved.") : T(c, "site.admin.rcm.nothingChanged", "Nothing changed.")); renderRcmSettings(c, host);
+        }, function () { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.rcm.noResponse", "No response from the server. The settings may not have been saved; reload to check.")) + "</div>"; });
+      };
+    }, failed);
+  }
+
+  /* PACKAGES (gap-claims-gst-2, functions/_wardsynq/packages.js). A package price for a whole episode under a scheme:
+   * its rate, what it covers and excludes, the expected length of stay and whether a pre-authorisation is needed.
+   * Every change is a new version with a reason; the old ones stay readable. A stay is put on a package on the ward's
+   * TPA / Claims screen. Nothing here sends anything to a scheme. */
+  var PKG_SCHEMES = ["pmjay", "state", "cghs", "echs", "insurer", "hospital"];
+  function pkgSchemeLabel(c, s) {
+    return {
+      pmjay: T(c, "site.admin.pkg.schemePmjay", "PM-JAY (Ayushman Bharat)"), state: T(c, "site.admin.pkg.schemeState", "State scheme"),
+      cghs: T(c, "site.admin.pkg.schemeCghs", "CGHS"), echs: T(c, "site.admin.pkg.schemeEchs", "ECHS"),
+      insurer: T(c, "site.admin.pkg.schemeInsurer", "Private insurer"), hospital: T(c, "site.admin.pkg.schemeHospital", "Hospital package"),
+    }[s] || s;
+  }
+  var PKG_STATE = { editing: null };
+  function renderPackages(c, host) {
+    if (!host) return;
+    host.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.pkg.title", "Packages")) + '</h2><span class="spin"></span></div>';
+    return c.api("/ward/packages?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { host.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.pkg.title", "Packages")) + '</h2><div class="msg err">' + c.esc(T(c, "site.admin.pkg.loadFailed", "The packages could not be loaded. Do not read this as no packages.")) + "</div></div>"; return; }
+      var pkgs = r.packages || [];
+      var ed = PKG_STATE.editing ? pkgs.filter(function (p) { return p.id === PKG_STATE.editing; })[0] || null : null;
+      var kindBoxes = function (prefix, chosen) {
+        return TARIFF_KINDS.map(function (k) {
+          return '<label class="f"><input type="checkbox" data-pkg-' + prefix + '="' + c.esc(k) + '"' + (chosen.indexOf(k) >= 0 ? " checked" : "") + "> " + c.esc(tariffKindLabel(c, k)) + "</label>";
+        }).join("");
+      };
+      var val = function (k, d) { return ed && ed[k] != null ? ed[k] : d; };
+      var cover = function (k) { return (ed && ed[k]) || { kinds: [], items: [] }; };
+      host.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.pkg.title", "Packages")) + "</h2>" +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.pkg.intro", "A package bills one rate for a whole stay. Charges it covers appear on the bill at zero; charges it excludes are billed on top; charges it names neither way are billed and flagged for checking. Nothing here is sent to any scheme.")) + "</p>" +
+        (pkgs.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.pkg.colScheme", "Scheme")) + "</th><th>" + c.esc(T(c, "site.admin.pkg.colCode", "Code")) + "</th><th>" + c.esc(T(c, "site.admin.pkg.colName", "Package")) + "</th><th>" + c.esc(T(c, "site.admin.pkg.colRate", "Rate (Rs)")) + "</th><th>" + c.esc(T(c, "site.admin.pkg.colLos", "Expected days")) + "</th><th>" + c.esc(T(c, "site.admin.pkg.colPreauth", "Pre-authorisation")) + "</th><th></th></tr></thead><tbody>" +
+          pkgs.map(function (p) {
+            return '<tr class="' + (p.active ? "" : "warn") + '"><td>' + c.esc(pkgSchemeLabel(c, p.scheme)) + (p.schemeName ? "<br><small>" + c.esc(p.schemeName) + "</small>" : "") + "</td><td>" + c.esc(p.code) + "</td><td>" + c.esc(p.name) +
+              "<br><small>" + c.esc(T(c, "site.admin.pkg.versionOf", "version {version}", { version: p.version })) + (p.active ? "" : " &middot; " + c.esc(T(c, "site.admin.pkg.withdrawn", "withdrawn"))) + "</small></td><td>" + c.esc(Number(p.rate).toFixed(2)) + "</td><td>" + c.esc(p.expectedLosDays == null ? "" : p.expectedLosDays) + "</td><td>" +
+              c.esc(p.preAuthRequired ? T(c, "site.admin.pkg.required", "required") : T(c, "site.admin.pkg.notRequired", "not required")) + "</td><td>" +
+              '<button type="button" class="btn ghost" data-pkg-edit="' + c.esc(p.id) + '">' + c.esc(T(c, "site.admin.pkg.change", "Change")) + "</button> " +
+              '<button type="button" class="btn ghost" data-pkg-hist="' + c.esc(p.id) + '">' + c.esc(T(c, "site.admin.pkg.history", "Versions")) + "</button> " +
+              '<button type="button" class="btn ghost" data-pkg-toggle="' + c.esc(p.id) + '">' + c.esc(p.active ? T(c, "site.admin.pkg.withdraw", "Withdraw") : T(c, "site.admin.pkg.restore", "Restore")) + "</button>" +
+              '<div id="admPkgHist-' + c.esc(p.id) + '"></div></td></tr>';
+          }).join("") + "</tbody></table></div>" : '<p class="quiet">' + c.esc(T(c, "site.admin.pkg.none", "No packages set up yet.")) + "</p>") +
+        "<h3>" + c.esc(ed ? T(c, "site.admin.pkg.editTitle", "Change {code}", { code: ed.code }) : T(c, "site.admin.pkg.addTitle", "Add a package")) + '</h3><div class="row">' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.colScheme", "Scheme")) + '</span><select id="admPkgScheme"' + (ed ? " disabled" : "") + ">" + PKG_SCHEMES.map(function (s) { return '<option value="' + s + '"' + (val("scheme", "pmjay") === s ? " selected" : "") + ">" + c.esc(pkgSchemeLabel(c, s)) + "</option>"; }).join("") + "</select></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.schemeName", "State scheme or insurer name")) + '</span><input id="admPkgSchemeName" value="' + c.esc(val("schemeName", "")) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.colCode", "Code")) + '</span><input id="admPkgCode" value="' + c.esc(val("code", "")) + '"' + (ed ? " disabled" : "") + "></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.colName", "Package")) + '</span><input id="admPkgName" value="' + c.esc(val("name", "")) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.colRate", "Rate (Rs)")) + '</span><input id="admPkgRate" inputmode="decimal" value="' + c.esc(ed ? Number(ed.rate).toFixed(2) : "") + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.los", "Expected length of stay (days)")) + '</span><input id="admPkgLos" inputmode="numeric" value="' + c.esc(val("expectedLosDays", "")) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.preauth", "Pre-authorisation required")) + '</span><input id="admPkgPreauth" type="checkbox"' + (val("preAuthRequired", false) ? " checked" : "") + "></label></div>" +
+        '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.admin.pkg.roomRate", "Payer's per-day room rate in its rate card (Rs, optional)")) + '</span><input id="admPkgRoomRate" inputmode="decimal" value="' + c.esc(val("roomRatePerDay", null) == null ? "" : String(val("roomRatePerDay", ""))) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.roomRateSource", "Where the rate card states it (document and page)")) + '</span><input id="admPkgRoomSrc" value="' + c.esc(val("roomRateSource", "") || "") + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.includesGst", "The payer's rate includes GST (no GST on top)")) + '</span><input id="admPkgInclGst" type="checkbox"' + (val("priceIncludesGst", false) ? " checked" : "") + "></label></div>" +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.pkg.gstNote", "A room above Rs 5,000 a day inside the package is taxed at 5 percent and valued by the GST settings above. When the payer's rate includes GST, the GST is worked back out of it and paid by the hospital.")) + "</p>" +
+        "<h4>" + c.esc(T(c, "site.admin.pkg.inclusions", "Covered by the package")) + '</h4><div class="row">' + kindBoxes("inc", cover("inclusions").kinds) + "</div>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.incItems", "Also covered: items by price list code or name, one per line")) + '</span><textarea id="admPkgIncItems" rows="2">' + c.esc(cover("inclusions").items.join("\n")) + "</textarea></label>" +
+        "<h4>" + c.esc(T(c, "site.admin.pkg.exclusions", "Excluded, billed on top")) + '</h4><div class="row">' + kindBoxes("exc", cover("exclusions").kinds) + "</div>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.excItems", "Excluded items by price list code or name, one per line (an implant, blood, a named drug)")) + '</span><textarea id="admPkgExcItems" rows="2">' + c.esc(cover("exclusions").items.join("\n")) + "</textarea></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.preauthDocs", "Documents the scheme requires for pre-authorisation, one per line")) + '</span><textarea id="admPkgPreDocs" rows="3">' + c.esc(val("preAuthDocuments", []).join("\n")) + "</textarea></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.claimDocs", "Documents the scheme requires for the claim, one per line")) + '</span><textarea id="admPkgClaimDocs" rows="3">' + c.esc(val("claimDocuments", []).join("\n")) + "</textarea></label>" +
+        (ed ? '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.reason", "Why is it changing?")) + '</span><input id="admPkgReason"></label>' : "") +
+        '<button type="button" class="btn" id="admPkgSave">' + c.esc(ed ? T(c, "site.admin.pkg.saveChange", "Save as a new version") : T(c, "site.admin.add", "Add")) + "</button> " +
+        (ed ? '<button type="button" class="btn ghost" id="admPkgCancel">' + c.esc(T(c, "site.admin.pkg.cancel", "Cancel")) + "</button>" : "") +
+        '<div id="admPkgMsg"></div><p class="quiet">' + c.esc(T(c, "site.admin.pkg.docsNote", "List documents from the scheme's own package master. A stay already running on a package keeps the version it was attached with.")) + "</p></div>";
+
+      var msg = function (t) { document.getElementById("admPkgMsg").innerHTML = '<div class="msg err">' + t + "</div>"; };
+      var kindsOf = function (prefix) { return Array.prototype.slice.call(host.querySelectorAll("[data-pkg-" + prefix + "]")).filter(function (x) { return x.checked; }).map(function (x) { return x.getAttribute("data-pkg-" + prefix); }); };
+      var lines = function (id) { return document.getElementById(id).value.split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean); };
+      var send = function (body, p) {
+        return c.api("/ward/package-save", Object.assign({ orgId: c.state.orgId }, body)).then(function (x) {
+          if (!x || !x.ok) { msg(EN(c, c.esc(refusal(c, x)))); return; }
+          PKG_STATE.editing = null; c.toast(T(c, "site.admin.saved", "Saved.")); renderPackages(c, host);
+        }, function () { msg(c.esc(T(c, "site.admin.pkg.noResponse", "No response from the server. The package may not have been saved; reload to check."))); });
+      };
+      document.getElementById("admPkgSave").onclick = function () {
+        var rate = document.getElementById("admPkgRate").value.trim(), los = document.getElementById("admPkgLos").value.trim();
+        if (!document.getElementById("admPkgCode").value.trim() || !document.getElementById("admPkgName").value.trim()) { msg(c.esc(T(c, "site.admin.pkg.errCodeName", "Give the package a code and a name."))); return; }
+        if (!/^\d+(\.\d{1,2})?$/.test(rate)) { msg(c.esc(T(c, "site.admin.pkg.errRate", "The rate has to be a plain amount in rupees, like 45000 or 45000.50."))); return; }
+        if (los && !/^\d+$/.test(los)) { msg(c.esc(T(c, "site.admin.pkg.errLos", "The expected length of stay is a whole number of days."))); return; }
+        var reason = ed ? document.getElementById("admPkgReason").value.trim() : "";
+        if (ed && !reason) { msg(c.esc(T(c, "site.admin.pkg.errReason", "Say why the package is changing."))); return; }
+        send({ id: ed ? ed.id : undefined, expectedVersion: ed ? ed.version : undefined, reason: reason || undefined,
+          scheme: ed ? ed.scheme : document.getElementById("admPkgScheme").value, schemeName: document.getElementById("admPkgSchemeName").value.trim(),
+          code: ed ? ed.code : document.getElementById("admPkgCode").value.trim(), name: document.getElementById("admPkgName").value.trim(), rate: rate, expectedLosDays: los,
+          preAuthRequired: document.getElementById("admPkgPreauth").checked,
+          inclusions: { kinds: kindsOf("inc"), items: lines("admPkgIncItems") }, exclusions: { kinds: kindsOf("exc"), items: lines("admPkgExcItems") },
+          preAuthDocuments: lines("admPkgPreDocs"), claimDocuments: lines("admPkgClaimDocs"),
+          roomRatePerDay: document.getElementById("admPkgRoomRate").value.trim(), roomRateSource: document.getElementById("admPkgRoomSrc").value.trim(), priceIncludesGst: document.getElementById("admPkgInclGst").checked });
+      };
+      if (ed) document.getElementById("admPkgCancel").onclick = function () { PKG_STATE.editing = null; renderPackages(c, host); };
+      host.querySelectorAll("[data-pkg-edit]").forEach(function (b) { b.onclick = function () { PKG_STATE.editing = b.getAttribute("data-pkg-edit"); renderPackages(c, host); }; });
+      host.querySelectorAll("[data-pkg-toggle]").forEach(function (b) {
+        b.onclick = function () {
+          var p = pkgs.filter(function (x) { return x.id === b.getAttribute("data-pkg-toggle"); })[0]; if (!p) return;
+          var reason = prompt(p.active ? T(c, "site.admin.pkg.withdrawPrompt", "Why is {code} being withdrawn? Stays already on it keep it.", { code: p.code }) : T(c, "site.admin.pkg.restorePrompt", "Why is {code} being restored?", { code: p.code }));
+          if (!reason || !reason.trim()) return;
+          send({ id: p.id, expectedVersion: p.version, reason: reason.trim(), active: !p.active, scheme: p.scheme, schemeName: p.schemeName || "", code: p.code, name: p.name, rate: Number(p.rate).toFixed(2),
+            expectedLosDays: p.expectedLosDays == null ? "" : p.expectedLosDays, preAuthRequired: p.preAuthRequired, inclusions: p.inclusions, exclusions: p.exclusions, preAuthDocuments: p.preAuthDocuments, claimDocuments: p.claimDocuments,
+            roomRatePerDay: p.roomRatePerDay == null ? "" : String(p.roomRatePerDay), roomRateSource: p.roomRateSource || "", priceIncludesGst: p.priceIncludesGst === true });
+        };
+      });
+      host.querySelectorAll("[data-pkg-hist]").forEach(function (b) {
+        b.onclick = function () {
+          var id = b.getAttribute("data-pkg-hist"), box = document.getElementById("admPkgHist-" + id);
+          box.innerHTML = '<span class="spin"></span>';
+          c.api("/ward/package-versions?orgId=" + encodeURIComponent(c.state.orgId) + "&id=" + encodeURIComponent(id)).then(function (h) {
+            if (!h || !h.ok) { box.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.pkg.historyFailed", "The versions could not be loaded.")) + "</div>"; return; }
+            box.innerHTML = '<ul class="quiet">' + h.versions.slice().reverse().map(function (v) {
+              return "<li>" + c.esc(T(c, "site.admin.pkg.versionLine", "Version {version}: Rs {rate}, {at}", { version: v.version, rate: Number(v.rate).toFixed(2), at: v.writtenAt || "" })) +
+                (v.active ? "" : " &middot; " + c.esc(T(c, "site.admin.pkg.withdrawn", "withdrawn"))) + (v.changeReason ? " &middot; " + c.esc(v.changeReason) : "") + "</li>";
+            }).join("") + "</ul>";
+          }, function () { box.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.pkg.historyFailed", "The versions could not be loaded.")) + "</div>"; });
+        };
+      });
+    }, function () {
+      host.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.pkg.title", "Packages")) + '</h2><div class="msg err">' + c.esc(T(c, "site.admin.pkg.loadFailed", "The packages could not be loaded. Do not read this as no packages.")) + "</div></div>";
     });
   }
 
@@ -1678,9 +2716,25 @@
     /* G3: the hospital event log is chained on its own and reported on its own. */
     h += "<h3>" + esc(T(c, "site.admin.security.tamperEvidenceEventLog", "Tamper evidence: hospital event log")) + "</h3><p class=\"quiet\">" + esc(T(c, "site.admin.security.eventLogNote", "Sign-ins, staff changes, hospital setting changes, and queue and billing actions.")) + "</p>" +
       auditIntegrityHtml(c, a.orgIntegrity, a.orgAnchors, "event-log") + orgUnlinkedHtml(c, a.orgUnlinked);
-    return h + "</div>";
+    h += "</div>" + logRetentionHtml(c, r.logRetention);
+    return h;
   }
   WSQ._securityReviewHtml = securityReviewHtml;
+
+  /* CERT-In Directions 2022 (iv) and DPDP Rules 2025 r.6(1)(e), r.8(3): whether WardSynQ's logs are kept long enough and
+   * where. Worked out from what the code keeps (security-review.js logRetentionCheck); what it cannot see is never met. */
+  function logRetentionHtml(c, lr) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.security.logRetention", "Log retention: CERT-In 180 days in India")) + "</h2>";
+    if (!lr || !lr.checks) return h + '<div class="msg err">' + esc(T(c, "site.admin.security.logRetentionMissing", "Log retention was not checked. This is not the same as the logs being kept.")) + "</div></div>";
+    var word = function (s) { return s === "met" ? T(c, "site.admin.security.lrMet", "Met") : s === "not-met" ? T(c, "site.admin.security.lrNotMet", "Not met") : T(c, "site.admin.security.lrNotConfirmed", "Not confirmed"); };
+    h += '<div class="msg ' + (lr.meetsCertIn ? "ok" : "warn") + '">' + esc(lr.meetsCertIn ? T(c, "site.admin.security.lrMeets", "The logs meet the CERT-In directions.") : T(c, "site.admin.security.lrNotShown", "Not shown to meet the CERT-In directions.")) + " " + EN(c, esc(lr.summary)) + "</div>";
+    h += '<div class="tbl"><table><tbody>' + lr.checks.map(function (x) {
+      return '<tr><td><span class="pill' + (x.status === "met" ? " ok" : x.status === "not-met" ? " stop" : " warn") + '">' + esc(word(x.status)) + "</span></td><td>" + EN(c, esc(x.text)) + "</td></tr>";
+    }).join("") + "</tbody></table></div>";
+    return h + '<p class="quiet">' + EN(c, esc((lr.citations || []).join("; "))) + "</p></div>";
+  }
+  WSQ._logRetentionHtml = logRetentionHtml;
 
   /* G3. Event-log rows with no link are never verified. Rows added after linking began are listed;
    * a count that could not be made says so, never "every row linked". */
@@ -1957,11 +3011,126 @@
   }
   WSQ._expansionHtml = expansionHtml;
 
+  /* CODE SETS (functions/_wardsynq/code-sets.js). The SNOMED CT, ICD-10 and LOINC codes the ward's code picker
+   * searches. WardSynQ ships none of them: the hospital loads the release it is licensed for, as a CSV (or a
+   * tab-separated release file) with a code column and a display column, and confirms that licence. null = loading;
+   * a failed list says so and is never shown as "nothing loaded". */
+  function codeSetLicence(c, system) {
+    return system === "snomed" ? T(c, "site.admin.codes.licence.snomed", "This hospital holds a SNOMED CT affiliate licence (in India, through NRCeS) covering this release.")
+      : system === "icd-10" ? T(c, "site.admin.codes.licence.icd10", "This hospital is licensed by WHO, or its national release centre, to use this ICD-10 release.")
+      : T(c, "site.admin.codes.licence.loinc", "This hospital accepts the LOINC licence and keeps its copyright notice with the content.");
+  }
+  function codeSetsHtml(c, r, msg) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + c.ms("tag") + " " + esc(T(c, "site.admin.codes.title", "Code sets")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.codes.intro", "The SNOMED CT, ICD-10 and LOINC codes staff can pick on diagnoses, problems, operations and tests. WardSynQ ships none of these: load the release this hospital is licensed for. Loading a system again replaces its codes; the earlier load stays on record.")) + "</p>";
+    if (r === null) return h + '<span class="spin"></span></div>';
+    if (!r || !r.ok) return h + '<div class="msg err">' + esc(T(c, "site.admin.codes.listFailed", "The loaded code sets could not be read. This is not the same as none loaded.")) + " " + EN(c, esc(refusal(c, r))) + "</div></div>";
+    h += '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.codes.colSystem", "System")) + "</th><th>" + esc(T(c, "site.admin.codes.colCodes", "Codes")) + "</th><th>" + esc(T(c, "site.admin.codes.colLoaded", "Loaded")) + "</th></tr></thead><tbody>" +
+      r.systems.map(function (s) {
+        return "<tr><td>" + esc(s.name) + '</td><td>' + (s.loaded ? esc(s.count) : esc(T(c, "site.admin.codes.notLoaded", "not loaded"))) + "</td><td>" +
+          (s.loaded ? esc(s.importedAt) + (s.fileName ? " &middot; " + esc(s.fileName) : "") : "") + "</td></tr>";
+      }).join("") + "</tbody></table></div>" +
+      '<h3>' + esc(T(c, "site.admin.codes.loadTitle", "Load a code set")) + "</h3>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.codes.system", "Code system")) + '</span><select id="admCodeSystem">' +
+      r.systems.map(function (s) { return '<option value="' + esc(s.system) + '">' + esc(s.name) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.admin.codes.file", "CSV or tab-separated file")) + '</span><input id="admCodeFile" type="file" accept=".csv,.txt,.tsv,text/csv,text/plain"></label></div>' +
+      '<p class="quiet">' + esc(T(c, "site.admin.codes.columns", "The first row names the columns: a code column (code, LOINC_NUM or conceptId) and a display column (display, LONG_COMMON_NAME, term or description). Rows marked inactive are left out.")) + "</p>" +
+      '<label class="f"><span><input id="admCodeLicence" type="checkbox"> <span id="admCodeLicenceText">' + esc(codeSetLicence(c, r.systems[0] && r.systems[0].system)) + "</span></span></label>" +
+      '<button type="button" class="btn" id="admCodeLoad">' + esc(T(c, "site.admin.codes.load", "Load codes")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "");
+    return h + "</div>";
+  }
+  WSQ._codeSetsHtml = codeSetsHtml;
+  function renderCodeSets(c, holder, msg) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    holder.innerHTML = codeSetsHtml(c, null);
+    return c.api("/ward/code-sets" + q).then(function (r) {
+      holder.innerHTML = codeSetsHtml(c, r || null, msg);
+      var sys = document.getElementById("admCodeSystem"), btn = document.getElementById("admCodeLoad");
+      if (!sys || !btn) return;
+      sys.onchange = function () { document.getElementById("admCodeLicenceText").textContent = codeSetLicence(c, sys.value); document.getElementById("admCodeLicence").checked = false; };
+      btn.onclick = function () {
+        var file = document.getElementById("admCodeFile").files[0], licence = document.getElementById("admCodeLicence").checked, esc = c.esc;
+        var fail = function (text) { renderCodeSets(c, holder, { ok: false, html: text }); };
+        if (!file) return fail(esc(T(c, "site.admin.codes.pickFile", "Choose the file to load.")));
+        if (!licence) return fail(esc(T(c, "site.admin.codes.confirmLicence", "Confirm this hospital's licence for these codes before loading them.")));
+        btn.disabled = true;
+        var reader = new FileReader();
+        reader.onerror = function () { fail(esc(T(c, "site.admin.codes.readFailed", "The file could not be read. Nothing was loaded."))); };
+        reader.onload = function () {
+          c.api("/ward/code-set-import", { orgId: c.state.orgId, system: sys.value, csv: String(reader.result || ""), fileName: file.name, licenceConfirmed: true }).then(function (x) {
+            if (x && x.ok) renderCodeSets(c, holder, { ok: true, html: esc(T(c, "site.admin.codes.loaded", "Loaded {n} codes. {skipped} rows were left out.", { n: x.count, skipped: x.skippedRows })) });
+            else fail(esc(T(c, "site.admin.codes.notLoadedLead", "Nothing was loaded:")) + " " + EN(c, esc((x && x.detail) || refusal(c, x))));
+          });
+        };
+        reader.readAsText(file);
+      };
+    });
+  }
+
+  /* GROWTH CHARTS (functions/_wardsynq/growth-tables.js). The chart uses the CDC 2000 reference, which is public domain;
+   * a hospital licensed for WHO or IAP tables loads their LMS rows here with a licence confirmation, and may withdraw them.
+   * r: null = loading; a failed read says so and is never shown as "CDC 2000 in use". */
+  function growthTablesHtml(c, r, msg) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + c.ms("monitoring") + " " + esc(T(c, "site.admin.growth.title", "Growth charts")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.growth.intro", "Children's growth charts use the CDC 2000 growth reference, which is in the public domain. A hospital licensed to use other growth tables, such as WHO or IAP, can load their L, M and S values here, and the charts then use them.")) + "</p>";
+    if (r === null) return h + '<span class="spin"></span></div>';
+    if (!r || !r.ok) return h + '<div class="msg err">' + esc(T(c, "site.admin.growth.listFailed", "The growth tables could not be read. Do not read this as the CDC reference in use.")) + " " + EN(c, esc(refusal(c, r))) + "</div></div>";
+    var l = r.loaded;
+    h += "<p>" + (r.inUse === "hospital"
+      ? esc(T(c, "site.admin.growth.inUseHospital", "In use: this hospital's tables, {n} rows, loaded {at}.", { n: l.count, at: l.importedAt })) + " " + EN(c, esc(l.referenceName + (l.fileName ? " (" + l.fileName + ")" : ""))) +
+        ' <button type="button" class="btn ghost" id="admGrowthWithdraw">' + esc(T(c, "site.admin.growth.withdraw", "Stop using these tables")) + "</button>"
+      : esc(T(c, "site.admin.growth.inUseCdc", "In use: CDC 2000 growth reference."))) + "</p>" +
+      '<h3>' + esc(T(c, "site.admin.growth.loadTitle", "Load licensed growth tables")) + "</h3>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.growth.name", "Name of the reference")) + '</span><input id="admGrowthName" maxlength="120"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.admin.growth.method", "How z-scores are worked out")) + '</span><select id="admGrowthMethod"><option value="lms">' + esc(T(c, "site.admin.growth.methodLms", "LMS formula (CDC, IAP)")) + '</option><option value="who-restricted">' + esc(T(c, "site.admin.growth.methodWho", "LMS with WHO's adjustment beyond 3 SD (WHO tables)")) + "</option></select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.admin.growth.file", "CSV or tab-separated file")) + '</span><input id="admGrowthFile" type="file" accept=".csv,.txt,.tsv,text/csv,text/plain"></label></div>' +
+      '<p class="quiet">' + esc(T(c, "site.admin.growth.columns", "The first row names the columns indicator, sex, x, l, m and s. indicator is wfa (weight for age), lhfa (length or height for age), wfl (weight for length, under 2 years), wfh (weight for height, from 2 years), bmi or hcfa (head circumference); sex is 1 or 2; x is the age in months, or the length or height in cm for wfl and wfh. One bad row loads nothing.")) + "</p>" +
+      '<label class="f"><span><input id="admGrowthLicence" type="checkbox"> ' + esc(T(c, "site.admin.growth.licence", "This hospital holds a licence from the publisher of these growth tables (for example WHO or the Indian Academy of Paediatrics) that permits their use in this software for patient care.")) + "</span></label>" +
+      '<button type="button" class="btn" id="admGrowthLoad">' + esc(T(c, "site.admin.growth.load", "Load tables")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "");
+    return h + "</div>";
+  }
+  WSQ._growthTablesHtml = growthTablesHtml;
+  function renderGrowthTables(c, holder, msg) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId), esc = c.esc;
+    holder.innerHTML = growthTablesHtml(c, null);
+    var fail = function (text) { renderGrowthTables(c, holder, { ok: false, html: text }); };
+    var answer = function (okText) { return function (x) { if (x && x.ok) renderGrowthTables(c, holder, { ok: true, html: okText(x) }); else fail(esc(T(c, "site.admin.growth.notLoaded", "Nothing was changed:")) + " " + EN(c, esc((x && x.detail) || refusal(c, x)))); }; };
+    return c.api("/ward/growth-tables" + q).then(function (r) {
+      holder.innerHTML = growthTablesHtml(c, r || false, msg);
+      var wd = document.getElementById("admGrowthWithdraw"), btn = document.getElementById("admGrowthLoad");
+      if (wd) wd.onclick = function () {
+        wd.disabled = true;
+        c.api("/ward/growth-table-import", { orgId: c.state.orgId, withdraw: true }).then(answer(function () { return esc(T(c, "site.admin.growth.withdrawn", "The charts now use the CDC 2000 growth reference.")); }));
+      };
+      if (!btn) return;
+      btn.onclick = function () {
+        var file = document.getElementById("admGrowthFile").files[0], name = String(document.getElementById("admGrowthName").value || "").trim();
+        if (!name) return fail(esc(T(c, "site.admin.growth.needName", "Name the reference first.")));
+        if (!file) return fail(esc(T(c, "site.admin.growth.pickFile", "Choose the file to load.")));
+        if (!document.getElementById("admGrowthLicence").checked) return fail(esc(T(c, "site.admin.growth.confirmLicence", "Confirm this hospital's licence for these tables before loading them.")));
+        btn.disabled = true;
+        var reader = new FileReader();
+        reader.onerror = function () { fail(esc(T(c, "site.admin.growth.readFailed", "The file could not be read. Nothing was loaded."))); };
+        reader.onload = function () {
+          c.api("/ward/growth-table-import", { orgId: c.state.orgId, referenceName: name, method: document.getElementById("admGrowthMethod").value, csv: String(reader.result || ""), fileName: file.name, licenceConfirmed: true })
+            .then(answer(function (x) { return esc(T(c, "site.admin.growth.loaded", "Loaded {n} rows. The charts now use these tables.", { n: x.count })); }));
+        };
+        reader.readAsText(file);
+      };
+    }, function () { holder.innerHTML = growthTablesHtml(c, false); });
+  }
+
   function renderFhir(c, body) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
     body.innerHTML = fhirHtml(c, null, null);
     return Promise.all([c.api("/ward/fhir/metadata" + q), c.api("/ward/fhir/ValueSet" + q)]).then(function (res) {
-      body.innerHTML = fhirHtml(c, res[0] || {}, res[1] || {});
+      body.innerHTML = '<div id="admCodeSets"></div><div id="admGrowthTables"></div>' + fhirHtml(c, res[0] || {}, res[1] || {});
+      renderCodeSets(c, document.getElementById("admCodeSets"));
+      renderGrowthTables(c, document.getElementById("admGrowthTables"));
       body.querySelectorAll("[data-vs-expand]").forEach(function (b) {
         b.onclick = function () {
           var id = b.getAttribute("data-vs-expand"), out = document.getElementById("admVs-" + id);
@@ -2087,6 +3256,226 @@
       var again = document.getElementById("healthRecheck");
       if (again) again.onclick = function () { WSQ.render("admin"); };
     }, function () { body.innerHTML = systemHealthHtml(c, { failed: true, message: T(c, "site.admin.err.noResponse", "No response from the server.") }); });
+  }
+
+  // ---- Close finished orders (order-backfill.js) ----------------------------------------------
+  /* Orders this hospital resulted before a released result closed anything are still open, count
+   * against the 5,000 open-order ceiling, and make the laboratory, specimen and imaging boards refuse
+   * with "too many open" until something closes them. This screen runs that job.
+   *
+   * TWO STEPS THAT CANNOT BE COLLAPSED. Check writes nothing and says what would close and why the
+   * rest would not; Close then sends back exactly the order ids that check handed over, and the
+   * server re-checks every one of them before writing. The state below is the honest middle: `ids`
+   * null = not checked yet, and a failure sets `failed` rather than leaving a count that would read
+   * as "nothing left to do".
+   */
+  function backfillHtml(c, s) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.orderBackfill.title", "Close finished orders")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.orderBackfill.intro", "Investigation orders resulted before this hospital was updated were never marked finished, so they still count as work in front of the laboratory and radiology. Checking reads the orders and writes nothing. Closing marks only the orders whose result is already on the chart; an order with no result, an imaging study with only a preliminary report, and an order another system owns are all left alone.")) + "</p>";
+    if (s.failed) {
+      h += '<div class="msg err">' + esc(T(c, "site.admin.orderBackfill.failed", "The job stopped because something could not be read or written. This is not the same as there being nothing left to do; what is reported below is only what was reached before it stopped.")) + " " + EN(c, esc(s.failMsg || "")) + "</div>";
+    }
+    if (s.busy) h += '<p><span class="spin"></span> ' + esc(s.busy) + "</p>";
+    if (s.ids === null && !s.busy && !s.failed) h += "<p>" + esc(T(c, "site.admin.orderBackfill.notCheckedYet", "Nothing has been checked yet.")) + "</p>";
+    if (s.scanned) {
+      h += "<p>" + esc(T(c, "site.admin.orderBackfill.scanned", "Open orders looked at: {n}", { n: s.scanned })) + "<br>" +
+        "<b>" + esc(T(c, "site.admin.orderBackfill.remaining", "Still to close: {n}", { n: (s.ids || []).length })) + "</b>" +
+        (s.closed ? "<br>" + esc(T(c, "site.admin.orderBackfill.closedSoFar", "Closed so far: {n}", { n: s.closed })) : "") + "</p>";
+      var reasons = [
+        ["no_report", T(c, "site.admin.orderBackfill.reason.noReport", "no result on the chart, so the test is still owed")],
+        ["report_preliminary", T(c, "site.admin.orderBackfill.reason.preliminary", "imaging read only preliminarily, so the final report is still owed")],
+        ["external_order", T(c, "site.admin.orderBackfill.reason.external", "placed by another system, which owns them")],
+        ["report_read_failed", T(c, "site.admin.orderBackfill.reason.readFailed", "their results could not be read, so nothing was decided about them")],
+        ["already_closed", T(c, "site.admin.orderBackfill.reason.alreadyClosed", "already finished, and left exactly as they are")],
+      ].filter(function (r) { return (s.stayOpen || {})[r[0]]; });
+      if (reasons.length) {
+        h += "<p>" + esc(T(c, "site.admin.orderBackfill.stayOpenLead", "Staying open:")) + '</p><ul class="quiet">' + reasons.map(function (r) {
+          return "<li>" + esc(String(s.stayOpen[r[0]])) + " " + esc(r[1]) + "</li>";
+        }).join("") + "</ul>";
+      }
+      if (s.partial) h += '<div class="msg warn">' + esc(T(c, "site.admin.orderBackfill.partial", "Some results could not be read, so this count is not the whole picture. Check again once the record store is answering.")) + "</div>";
+    }
+    if (s.doneClosing && !s.failed) {
+      h += '<div class="msg ok">' + esc(s.closed
+        ? T(c, "site.admin.orderBackfill.finished", "{n} orders are now marked finished. The laboratory, specimen and imaging boards show only current work.", { n: s.closed })
+        : T(c, "site.admin.orderBackfill.nothingToClose", "There was nothing to close. Every finished order is already marked finished.")) + "</div>";
+    }
+    h += '<div class="row"><button class="btn" type="button" id="obCheck"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.orderBackfill.check", "Check what would close")) + "</button>" +
+      ((s.ids && s.ids.length) ? '<button class="btn" type="button" id="obClose"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.orderBackfill.close", "Close {n} finished orders", { n: s.ids.length })) + "</button>" : "") +
+      "</div></div>";
+    return h;
+  }
+
+  function renderOrderBackfill(c, body) {
+    var s = { ids: null, scanned: 0, closed: 0, stayOpen: {}, busy: "", failed: false, failMsg: "", partial: false, doneClosing: false };
+    var orgQ = { orgId: c.state.orgId };
+    function paint() {
+      body.innerHTML = backfillHtml(c, s);
+      var chk = document.getElementById("obCheck"); if (chk) chk.onclick = check;
+      var cls = document.getElementById("obClose"); if (cls) cls.onclick = closeAll;
+    }
+    function stop(r) {
+      s.busy = ""; s.failed = true; s.failMsg = refusal(c, r); paint();
+    }
+    /* One batch at a time, each starting where the last one stopped: a hospital's archive is far more
+     * than one request can hold, and the server hands back the cursor for the next page. */
+    function check() {
+      s.ids = []; s.scanned = 0; s.closed = 0; s.stayOpen = {}; s.failed = false; s.partial = false; s.doneClosing = false;
+      var step = function (cursor) {
+        s.busy = T(c, "site.admin.orderBackfill.checking", "Checking orders ({n} looked at so far)...", { n: s.scanned });
+        paint();
+        return c.api("/ward/order-backfill-scan", { orgId: orgQ.orgId, cursor: cursor }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.scanned += r.scanned;
+          s.ids = s.ids.concat(r.orderIds || []);
+          Object.keys(r.stayOpen || {}).forEach(function (k) { s.stayOpen[k] = (s.stayOpen[k] || 0) + r.stayOpen[k]; });
+          if (r.partial) s.partial = true;
+          if (!r.done) return step(r.nextCursor);
+          s.busy = ""; paint();
+        }, function () { stop(null); });
+      };
+      return step(0);
+    }
+    /* Only the ids the check handed back, in the batches it handed them back in. An order the server
+     * no longer agrees about is skipped there, not here: this screen is not the authority. */
+    function closeAll() {
+      var todo = s.ids.slice(), BATCH = 100;
+      s.failed = false;
+      var step = function () {
+        if (!todo.length) { s.busy = ""; s.ids = []; s.doneClosing = true; paint(); return; }
+        s.busy = T(c, "site.admin.orderBackfill.closing", "Closing orders ({n} of {total} done)...", { n: s.closed, total: s.closed + todo.length });
+        paint();
+        var batch = todo.splice(0, BATCH);
+        return c.api("/ward/order-backfill-close", { orgId: orgQ.orgId, orderIds: batch }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.closed += r.closed;
+          // What is left to do is what is left to do: the button never offers a count already spent.
+          s.ids = todo.slice();
+          // Anything the server would not close stops the run and is said out loud, never dropped.
+          if (r.incomplete) { s.busy = ""; s.failed = true; s.failMsg = T(c, "site.admin.orderBackfill.someRefused", "{n} orders could not be closed and are listed on the server response. Check again to see where they stand.", { n: r.failures.length }); paint(); return; }
+          return step();
+        }, function () { stop(null); });
+      };
+      return step();
+    }
+    paint();
+    return check();
+  }
+
+  // ---- R6-3: close the orders the SENDING system has finished (source-order-close.js) ---------
+  /* The other half of the same problem, and a different job. An order another system sent lands as a
+   * draft here (an adapter may not assert a clinical status) and never leaves the open census, even
+   * once that system has finished with it - so this hospital walks towards the ceiling at which its
+   * boards refuse. The sender's own word for the order is kept beside it at ingest; this closes the
+   * ones it calls finished, and nothing it calls active.
+   *
+   * Two steps, for the same reason as above: `ids` null = nothing checked yet, a failure sets
+   * `failed`, and a count is never shown as if it were the whole picture when a read stopped.
+   */
+  function sourceOrdersHtml(c, s) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.sourceOrders.title", "Close orders another system has finished")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.sourceOrders.intro", "Orders sent by a laboratory system or another hospital are recorded here as drafts, because a connected system may not set a clinical status in WardSynQ. When the result is filed at that end, nothing here ever marks the order finished and it counts as open work for ever. Checking reads the orders and writes nothing. Closing marks only the orders the sending system itself calls finished; an order it still calls active, one it says nothing about, and this hospital's own orders are all left alone.")) + "</p>";
+    if (s.failed) {
+      h += '<div class="msg err">' + esc(T(c, "site.admin.sourceOrders.failed", "The job stopped because something could not be read or written. This is not the same as there being nothing left to do; what is reported below is only what was reached before it stopped.")) + " " + EN(c, esc(s.failMsg || "")) + "</div>";
+    }
+    if (s.busy) h += '<p><span class="spin"></span> ' + esc(s.busy) + "</p>";
+    if (s.ids === null && !s.busy && !s.failed) h += "<p>" + esc(T(c, "site.admin.sourceOrders.notCheckedYet", "Nothing has been checked yet.")) + "</p>";
+    if (s.scanned) {
+      h += "<p>" + esc(T(c, "site.admin.sourceOrders.scanned", "Open orders looked at: {n}", { n: s.scanned })) + "<br>" +
+        "<b>" + esc(T(c, "site.admin.sourceOrders.remaining", "Still to close: {n}", { n: (s.ids || []).length })) + "</b>" +
+        (s.closed ? "<br>" + esc(T(c, "site.admin.sourceOrders.closedSoFar", "Closed so far: {n}", { n: s.closed })) : "") + "</p>";
+      var reasons = [
+        ["source_active", T(c, "site.admin.sourceOrders.reason.sourceActive", "the sending system still calls them open, or has not said")],
+        ["native_order", T(c, "site.admin.sourceOrders.reason.native", "this hospital's own orders, which are closed when their result is filed")],
+        ["already_closed", T(c, "site.admin.sourceOrders.reason.alreadyClosed", "already finished, and left exactly as they are")]
+      ].filter(function (r) { return (s.stayOpen || {})[r[0]]; });
+      if (reasons.length) {
+        h += "<p>" + esc(T(c, "site.admin.sourceOrders.stayOpenLead", "Staying open:")) + '</p><ul class="quiet">' + reasons.map(function (r) {
+          return "<li>" + esc(String(s.stayOpen[r[0]])) + " " + esc(r[1]) + "</li>";
+        }).join("") + "</ul>";
+      }
+      /* WHOSE word this hospital would be acting on, by system: an administrator can check that the
+       * feed named here is one whose finished really means finished. */
+      var bySystem = {};
+      (s.orders || []).forEach(function (o) { bySystem[o.system || "?"] = (bySystem[o.system || "?"] || 0) + 1; });
+      var systems = Object.keys(bySystem);
+      if (systems.length) {
+        h += "<p>" + esc(T(c, "site.admin.sourceOrders.sendersLead", "Marked finished by:")) + '</p><ul class="quiet">' + systems.map(function (k) {
+          return "<li>" + EN(c, esc(k)) + ": " + esc(String(bySystem[k])) + "</li>";
+        }).join("") + "</ul>";
+      }
+    }
+    if (s.doneClosing && !s.failed) {
+      h += '<div class="msg ok">' + esc(s.closed
+        ? T(c, "site.admin.sourceOrders.finished", "{n} orders are now marked finished. Each one still says which system sent it and what that system called it.", { n: s.closed })
+        : T(c, "site.admin.sourceOrders.nothingToClose", "There was nothing to close. No order from a connected system is waiting to be marked finished.")) + "</div>";
+    }
+    h += '<div class="row"><button class="btn" type="button" id="socCheck"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.sourceOrders.check", "Check what would close")) + "</button>" +
+      ((s.ids && s.ids.length) ? '<button class="btn" type="button" id="socClose"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.sourceOrders.close", "Close {n} finished orders", { n: s.ids.length })) + "</button>" : "") +
+      "</div></div>";
+    return h;
+  }
+
+  function renderSourceOrders(c, body) {
+    var s = { ids: null, orders: [], scanned: 0, closed: 0, stayOpen: {}, busy: "", failed: false, failMsg: "", doneClosing: false };
+    var orgQ = { orgId: c.state.orgId };
+    function paint() {
+      body.innerHTML = sourceOrdersHtml(c, s);
+      var chk = document.getElementById("socCheck"); if (chk) chk.onclick = check;
+      var cls = document.getElementById("socClose"); if (cls) cls.onclick = closeAll;
+    }
+    function stop(r) { s.busy = ""; s.failed = true; s.failMsg = refusal(c, r); paint(); }
+    function check() {
+      s.ids = []; s.orders = []; s.scanned = 0; s.closed = 0; s.stayOpen = {}; s.failed = false; s.doneClosing = false;
+      var step = function (cursor) {
+        s.busy = T(c, "site.admin.sourceOrders.checking", "Checking orders ({n} looked at so far)...", { n: s.scanned });
+        paint();
+        return c.api("/ward/source-order-scan", { orgId: orgQ.orgId, cursor: cursor }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.scanned += r.scanned;
+          s.ids = s.ids.concat(r.orderIds || []);
+          s.orders = s.orders.concat(r.orders || []);
+          Object.keys(r.stayOpen || {}).forEach(function (k) { s.stayOpen[k] = (s.stayOpen[k] || 0) + r.stayOpen[k]; });
+          if (!r.done) return step(r.nextCursor);
+          s.busy = ""; paint();
+        }, function () { stop(null); });
+      };
+      return step(0);
+    }
+    /* Only the ids the check handed back. An order the server no longer agrees about is skipped
+     * there, not here: this screen is not the authority, and neither is the sending system. */
+    function closeAll() {
+      var todo = s.ids.slice(), BATCH = 100;
+      s.failed = false;
+      var step = function () {
+        if (!todo.length) { s.busy = ""; s.ids = []; s.orders = []; s.doneClosing = true; paint(); return; }
+        s.busy = T(c, "site.admin.sourceOrders.closing", "Closing orders ({n} of {total} done)...", { n: s.closed, total: s.closed + todo.length });
+        paint();
+        var batch = todo.splice(0, BATCH);
+        return c.api("/ward/source-order-close", { orgId: orgQ.orgId, orderIds: batch }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.closed += r.closed;
+          s.ids = todo.slice();
+          if (r.incomplete) { s.busy = ""; s.failed = true; s.failMsg = T(c, "site.admin.sourceOrders.someRefused", "{n} orders could not be closed and are listed on the server response. Check again to see where they stand.", { n: r.failures.length }); paint(); return; }
+          return step();
+        }, function () { stop(null); });
+      };
+      return step();
+    }
+    paint();
+    return check();
+  }
+
+  /* Both closure jobs on one screen: they answer the same question - which orders are still open and
+   * should not be - from the two ends an order can arrive from. Each panel owns its own state. */
+  function renderOrderClosures(c, body) {
+    body.innerHTML = '<div id="obPanel"></div><div id="socPanel"></div>';
+    return Promise.all([
+      renderOrderBackfill(c, document.getElementById("obPanel")),
+      renderSourceOrders(c, document.getElementById("socPanel"))
+    ]);
   }
 
   // ---- Integrations > Webhooks (P2.13) --------------------------------------------------------
@@ -2337,12 +3726,13 @@
     }).join("") + "</select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.admin.connectors.label", "Label (optional)")) + '</span><input class="cnName" maxlength="120" value="' + esc((cur && cur.name) || "") + '"></label></div>';
     if (p.help) h += '<p class="quiet">' + esc(p.help) + "</p>";
+    var contract = kind.kind === "payer" ? payerContractText(c) : {};
     h += '<div class="row">' + p.settings.map(function (f) {
-      var v = settings[f.key];
-      if (f.type === "checkbox") return '<label class="f"><span><input type="checkbox" class="cnSet" data-key="' + esc(f.key) + '" data-type="checkbox"' + (v ? " checked" : "") + "> " + esc(f.label) + "</span></label>";
-      if (f.type === "select") return '<label class="f"><span>' + esc(f.label) + '</span><select class="cnSet" data-key="' + esc(f.key) + '">' + f.options.map(function (o) {
-        return '<option value="' + esc(o[0]) + '"' + (v === o[0] ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select></label>";
-      return '<label class="f"><span>' + esc(f.label) + (f.required ? " *" : "") + '</span><input class="cnSet" data-key="' + esc(f.key) + '"' + (f.type === "url" ? ' type="url" placeholder="https://"' : "") +
+      var v = settings[f.key], ct = contract[f.key], label = ct ? ct.label : f.label;
+      if (f.type === "checkbox") return '<label class="f"><span><input type="checkbox" class="cnSet" data-key="' + esc(f.key) + '" data-type="checkbox"' + (v ? " checked" : "") + "> " + esc(label) + "</span></label>";
+      if (f.type === "select") return '<label class="f"><span>' + esc(label) + '</span><select class="cnSet" data-key="' + esc(f.key) + '">' + f.options.map(function (o) {
+        return '<option value="' + esc(o[0]) + '"' + ((v || "") === o[0] ? " selected" : "") + ">" + esc(ct && ct.options && ct.options[o[0]] || o[1]) + "</option>"; }).join("") + "</select></label>";
+      return '<label class="f"><span>' + esc(label) + (f.required ? " *" : "") + '</span><input class="cnSet" data-key="' + esc(f.key) + '"' + (f.type === "url" ? ' type="url" placeholder="https://"' : "") +
         ' value="' + esc(v == null ? "" : v) + '"' + (cur && f.key === "ref" ? " readonly" : "") + "></label>";
     }).join("") + "</div>";
     if (p.secrets.length) h += '<div class="row">' + p.secrets.map(function (f) {
@@ -2351,6 +3741,48 @@
     }).join("") + "</div>";
     return h + '<button type="button" class="btn" data-cn-save="' + esc(kind.kind) + '"' + (cur ? ' data-cn-id="' + esc(cur.id) + '"' : "") + ">" + esc(T(c, "site.admin.save", "Save")) + "</button>" +
       (cur ? ' <button type="button" class="btn ghost" data-cn-cancel="1">' + esc(T(c, "site.admin.connectors.cancel", "Cancel")) + '</button>' : "") + "</div>";
+  }
+  /* A payer's CONTRACT (gst-parties, functions/_wardsynq/payer-contracts.js): its fields in the hospital's language, and
+   * the GST recipient the server resolved from it, with its basis or the warning that it is not determined. */
+  function payerContractText(c) {
+    return {
+      payerKind: { label: T(c, "site.admin.payerContract.kind", "Kind of payer"), options: { "": T(c, "site.admin.payerContract.kindNone", "Not recorded"), insurer: T(c, "site.admin.payerContract.kindInsurer", "Insurer"),
+        tpa: T(c, "site.admin.payerContract.kindTpa", "TPA (acts for an insurer)"), government_scheme: T(c, "site.admin.payerContract.kindScheme", "Government scheme (PM-JAY, State scheme, CGHS, ECHS)"),
+        corporate: T(c, "site.admin.payerContract.kindCorporate", "Corporate"), other: T(c, "site.admin.payerContract.kindOther", "Other") } },
+      legalName: { label: T(c, "site.admin.payerContract.legalName", "Legal name") },
+      gstin: { label: T(c, "site.admin.payerContract.gstin", "GSTIN (if registered)") },
+      address1: { label: T(c, "site.admin.payerContract.address", "Registered address") },
+      location: { label: T(c, "site.admin.payerContract.place", "Place") },
+      pincode: { label: T(c, "site.admin.payerContract.pincode", "PIN code") },
+      stateCode: { label: T(c, "site.admin.payerContract.stateCode", "State code (2 digits)") },
+      insurerRef: { label: T(c, "site.admin.payerContract.insurerRef", "Insurer this TPA acts for (its payer reference)") },
+      gstRecipient: { label: T(c, "site.admin.payerContract.recipient", "GST recipient under this contract (s.2(93) CGST Act)"), options: { "": T(c, "site.admin.payerContract.recipientNone", "Not determined"),
+        patient: T(c, "site.admin.payerContract.recipientPatient", "The patient"), contracting_party: T(c, "site.admin.payerContract.recipientParty", "The contracting party (for a TPA, the insurer it acts for)") } },
+      gstBasisType: { label: T(c, "site.admin.payerContract.basisType", "Basis for the GST recipient"), options: { "": T(c, "site.admin.payerContract.basisNone", "None recorded"),
+        ca_opinion: T(c, "site.admin.payerContract.basisCa", "Chartered accountant's opinion"), contract_clause: T(c, "site.admin.payerContract.basisClause", "Contract clause") } },
+      gstBasisRef: { label: T(c, "site.admin.payerContract.basisRef", "Opinion reference, or contract and clause") },
+      gstBasisDate: { label: T(c, "site.admin.payerContract.basisDate", "Date of the opinion or contract (YYYY-MM-DD)") },
+      // rcm-claims-ops: the payer's claim checklist (functions/_wardsynq/claims-ops.js).
+      queryResponseDays: { label: T(c, "site.admin.payerRules.queryDays", "Days this payer gives to answer a query") },
+      claimDocuments: { label: T(c, "site.admin.payerRules.claimDocs", "Documents required with a claim, separated by semicolons") },
+      requireSignedDischargeSummary: { label: T(c, "site.admin.payerRules.signedSummary", "A signed discharge summary is required"), options: { "": T(c, "site.admin.payerRules.notRequired", "Not required"), yes: T(c, "site.admin.payerRules.required", "Required") } },
+      requireIcd10Codes: { label: T(c, "site.admin.payerRules.icd10", "Diagnoses must be ICD-10 codes from the loaded code set"), options: { "": T(c, "site.admin.payerRules.notRequired", "Not required"), yes: T(c, "site.admin.payerRules.required", "Required") } },
+    };
+  }
+  function payerPartiesHtml(c, x) {
+    var p = x.parties, esc = c.esc;
+    if (!p || !p.gstRecipient) return "";
+    var g = p.gstRecipient, words = payerContractText(c);
+    var kind = (x.settings && x.settings.payerKind) || "";
+    var who = g.party === "patient" ? T(c, "site.admin.payerContract.isPatient", "the patient") : (g.legalName || g.name || "") + (g.gstin ? " (" + g.gstin + ")" : "");
+    var line = T(c, "site.admin.payerContract.summary", "{kind}. GST recipient: {who}", { kind: words.payerKind.options[kind] || words.payerKind.options[""], who: who });
+    var extra = g.source === "default_cashless" ? T(c, "site.admin.payerContract.defaultCashless", "Default: ordinary cashless treatment is a supply to the patient.")
+      : g.source === "legacy_global" ? T(c, "site.admin.payerContract.legacy", "From the old hospital-wide GST setting, because this contract has no determination.")
+      : g.basis && g.basis.ref ? T(c, "site.admin.payerContract.basis", "Basis: {ref}", { ref: g.basis.ref + (g.basis.date ? ", " + g.basis.date : "") }) : "";
+    var warn = g.warning === "recipient_details_incomplete" ? T(c, "site.admin.payerContract.incomplete", "The GST recipient's details are incomplete, so bills for this payer cannot be raised. Complete them.")
+      : g.warning ? T(c, "site.admin.payerContract.notDetermined", "Not determined: bills treat the patient as the GST recipient until you choose.") : "";
+    var tpa = p.partiesWarning === "tpa_insurer_not_found" ? T(c, "site.admin.payerContract.tpaNoInsurer", "The insurer this TPA acts for is not in the payer list.") : "";
+    return '<br><span class="quiet">' + esc(line) + (extra ? " " + esc(extra) : "") + "</span>" + (warn || tpa ? '<br><span class="msg err">' + esc([warn, tpa].filter(Boolean).join(" ")) + "</span>" : "");
   }
   function connectorsHtml(c, r) {
     var esc = c.esc;
@@ -2365,8 +3797,11 @@
         var res = CN_STATE.result[x.id];
         /* The gateway's webhook goes to this address. It names the hospital only; the gateway's signature is what is trusted. */
         var callback = x.kind === "payment" && x.provider !== "manual"
-          ? '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.gatewayWebhook", "Gateway webhook address:")) + ' <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/payment-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>" : "";
-        return '<tr class="' + (x.active ? "" : "warn") + '"><td>' + esc(x.name || x.id) + callback + (res ? '<br><span class="msg ' + (res.passed ? "ok" : "err") + '">' + esc(res.detail) + "</span>" : "") + "</td><td>" + esc(prov.label || x.provider) + "</td><td><b>" + esc(x.active ? T(c, "site.admin.connectors.on", "On") : T(c, "site.admin.connectors.off", "Off")) + "</b></td><td>" +
+          ? '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.gatewayWebhook", "Gateway webhook address:")) + ' <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/payment-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>"
+          /* NHCX appends /claim/on_submit and the rest to the endpoint URL; the bearer token and this hospital's key are what is trusted. */
+          : x.kind === "payer" && x.provider === "nhcx"
+          ? '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.nhcxCallback", "NHCX endpoint URL to register for this hospital:")) + ' <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/nhcx-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>" : "";
+        return '<tr class="' + (x.active ? "" : "warn") + '"><td>' + esc(x.name || x.id) + callback + (x.kind === "payer" ? payerPartiesHtml(c, x) : "") + (res ? '<br><span class="msg ' + (res.passed ? "ok" : "err") + '">' + esc(res.detail) + "</span>" : "") + "</td><td>" + esc(prov.label || x.provider) + "</td><td><b>" + esc(x.active ? T(c, "site.admin.connectors.on", "On") : T(c, "site.admin.connectors.off", "Off")) + "</b></td><td>" +
           (x.secretsSet.length ? esc(x.secretsSet.join(", ")) + '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.setAt", "set {at}", { at: x.secretsSetAt || "" })) + "</span>" : '<span class="quiet">' + esc(T(c, "site.admin.connectors.noneSet", "none")) + "</span>") + "</td><td>" +
           '<button type="button" class="btn ghost" data-cn-edit="' + esc(x.id) + '">' + esc(T(c, "site.admin.connectors.change2", "Change")) + '</button> ' +
           (prov.testable ? '<button type="button" class="btn ghost" data-cn-test="' + esc(x.id) + '">' + esc(T(c, "site.admin.connectors.testConnection", "Test connection")) + '</button> ' : "") +
@@ -2453,9 +3888,10 @@
 
   function renderIntegrations(c, body, shown) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
-    body.innerHTML = '<div id="cnCard">' + connectorsHtml(c, null) + '</div><div id="abdmCard"></div><div id="whCard">' + webhooksHtml(c, null) + '</div><div id="scCard">' + smartClientsHtml(c, null) + "</div>";
+    body.innerHTML = '<div id="cnCard">' + connectorsHtml(c, null) + '</div><div id="abdmCard"></div><div id="labAnCard"></div><div id="whCard">' + webhooksHtml(c, null) + '</div><div id="scCard">' + smartClientsHtml(c, null) + "</div>";
     loadConnectors(c, body);
     if (WSQ._abdmLoad) WSQ._abdmLoad(c);   // pages/abdm.js: the ABDM connector has its own card
+    if (WSQ._labAnalysersLoad) WSQ._labAnalysersLoad(c);   // pages/lab-analysers.js: laboratory analysers and the connector key
     var fail = function (r) { return { failed: true, message: r ? refusal(c, r) : T(c, "site.admin.err.noResponse", "No response from the server.") }; };
     /* The connected-apps card loads beside the webhooks, into its own wrapper, so whichever answer
      * arrives first is never wiped by the other. */

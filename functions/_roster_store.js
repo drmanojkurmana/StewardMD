@@ -69,12 +69,45 @@ export async function assign(env, orgId, input, actorId) {
   for (const date of dates) {
     const a = { identity: String(input.identity || ""), date, shiftId: String(input.shiftId || "") };
     const p = R.assignmentProblem(a, shifts, existing.concat(pending), leaves);
-    if (p) refused.push({ date, error: p.code, message: p.message }); else pending.push({ ...a, id: newId(), status: "active" });
+    /* P4 nursing-staffing: the in-charge of a shift is left out of the nurse count (NABH PSQ 3c #21), so a shift has one. */
+    const lead = input.inCharge === true && existing.find((e) => e.inCharge === true && e.status !== "cancelled" && e.date === date && e.shiftId === a.shiftId && e.identity !== a.identity);
+    if (p) refused.push({ date, error: p.code, message: p.message });
+    else if (lead) refused.push({ date, error: "in_charge_already_named", message: `${lead.identity} is already in charge of this shift on ${date}` });
+    else pending.push({ ...a, id: newId(), status: "active", inCharge: input.inCharge === true });
   }
   if (refused.length) return { ok: false, error: "assignment_refused", message: "Nothing was assigned: " + refused.map((r) => r.message).join("; "), refused };
-  await fsCommit(env, pending.map((a) => wCreate(env, "q_roster_assign/" + a.id, { orgId: String(orgId), orgMonth: monthKey(orgId, a.date), identity: a.identity, date: a.date, shiftId: a.shiftId, status: "active", createdBy: actorId, createdAt: now() })));
-  await audit(env, orgId, actorId, "roster:assigned", `${input.identity} ${input.shiftId} ${dates[0]} x${dates.length}`);
+  await fsCommit(env, pending.map((a) => wCreate(env, "q_roster_assign/" + a.id, { orgId: String(orgId), orgMonth: monthKey(orgId, a.date), identity: a.identity, date: a.date, shiftId: a.shiftId, status: "active", inCharge: a.inCharge, createdBy: actorId, createdAt: now() })));
+  await audit(env, orgId, actorId, "roster:assigned", `${input.identity} ${input.shiftId} ${dates[0]} x${dates.length}${input.inCharge === true ? " in charge" : ""}`);
   return { ok: true, assigned: pending };
+}
+
+/* P4 nursing-staffing: publishing a draft roster (nurse-staffing.js draftRoster). The draft is only a suggestion; every entry
+ * is checked again here against today's rota and leave, and one refusal means nothing is written. Never an in-charge. */
+export async function publishDraft(env, orgId, entries, actorId) {
+  const list = (Array.isArray(entries) ? entries : []).slice(0, 200).map((e) => ({ identity: String((e && e.identity) || ""), date: String((e && e.date) || ""), shiftId: String((e && e.shiftId) || "") }));
+  if (!list.length) return { ok: false, error: "nothing_to_publish", message: "The draft has no entries." };
+  const shifts = await shiftsOf(env, orgId);
+  const dates = list.map((e) => e.date);
+  if (dates.some((d) => !/^\d{4}-\d{2}-\d{2}$/.test(d))) return { ok: false, error: "bad_date", message: "Every entry needs a date, YYYY-MM-DD." };
+  const [{ list: existing, partial }, { list: leaves, partial: lp }] = await Promise.all([rowsBy(env, "q_roster_assign", "orgMonth", monthsFor(orgId, dates, 1)), rowsBy(env, "q_roster_leave", "orgYear", yearsFor(orgId, dates))]);
+  if (partial || lp) return TOO_BIG;
+  const pending = [], refused = [];
+  for (const a of list) {
+    const p = R.assignmentProblem(a, shifts, existing.concat(pending), leaves);
+    const dup = existing.concat(pending).some((e) => e.status !== "cancelled" && e.identity === a.identity && e.date === a.date && e.shiftId === a.shiftId);
+    if (p || dup) refused.push({ ...a, error: p ? p.code : "already_on_shift", message: p ? p.message : `${a.identity} is already on this shift on ${a.date}` });
+    else pending.push({ ...a, id: newId(), status: "active" });
+  }
+  if (refused.length) return { ok: false, error: "draft_refused", message: "Nothing was published: " + refused.map((r) => r.message).join("; "), refused };
+  await fsCommit(env, pending.map((a) => wCreate(env, "q_roster_assign/" + a.id, { orgId: String(orgId), orgMonth: monthKey(orgId, a.date), identity: a.identity, date: a.date, shiftId: a.shiftId, status: "active", inCharge: false, source: "draft", createdBy: actorId, createdAt: now() })));
+  await audit(env, orgId, actorId, "roster:draft_published", `${pending.length} shifts ${dates.slice().sort()[0]}..${dates.slice().sort().pop()}`);
+  return { ok: true, published: pending };
+}
+
+/** P4 nursing-staffing: approved and requested leave touching [from, to], for the draft. */
+export async function leaveBetween(env, orgId, from, to) {
+  const { list, partial } = await rowsBy(env, "q_roster_leave", "orgYear", yearsFor(orgId, datesBetween(from, to)));
+  return { ok: true, leave: list.filter((l) => l.from <= to && l.to >= from), partial };
 }
 
 export async function unassign(env, orgId, assignmentId, reason, actorId) {

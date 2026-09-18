@@ -25,15 +25,17 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { sha256Hex } from "./object-store.js";
 import { signToken, verifyToken, queueSecret } from "../_queue.js";
+import { retentionFacts, retentionView, LEGAL, POLICY } from "./retention.js";
 
 const TYPE = "DocumentReference";
 const str = (v) => (v == null ? "" : String(v).trim());
 const DOC_TYPES = Object.freeze(["consent", "referral-letter", "outside-report", "outside-imaging", "id-proof", "insurance", "prescription-outside", "other"]);
 const CONTENT_TYPES = Object.freeze(["application/pdf", "image/jpeg", "image/png", "image/webp"]);
 const MAX_BYTES = 10 * 1024 * 1024;
-// Indian Medical Council regulation 1.3.1: in-patient records kept at least three years. A hospital
-// sets its own, longer, period in wardsynq.documentRetentionYears.
-const DEFAULT_RETENTION_YEARS = 3;
+// A patient document is part of the clinical record: DGHS Office Memorandum F. No. A.12034/3/2014-MH-II/MH-I,
+// 28 Oct 2014 keeps digitised in-patient records at least ten years (retention.js clinical-ipd; legal opinion H.4.2).
+// A hospital sets a LONGER period in wardsynq.documentRetentionYears; a shorter one is not used.
+const DEFAULT_RETENTION_YEARS = 10;
 const LINK_MS = 5 * 60 * 1000;
 
 async function open(request, env, ctx, need) {
@@ -79,14 +81,14 @@ function slug(v) { return str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").repla
 function randomHex(n) { return Array.from(crypto.getRandomValues(new Uint8Array(n)), (b) => b.toString(16).padStart(2, "0")).join(""); }
 function objectKeyFor(tenantId, docId, version) { return `t/${slug(tenantId)}/docs/${slug(docId)}/v${version}-${randomHex(12)}`; }
 function retainUntilFrom(uploadedAt, years) {
-  const d = new Date(uploadedAt); d.setUTCFullYear(d.getUTCFullYear() + (Number(years) > 0 ? Number(years) : DEFAULT_RETENTION_YEARS));
+  const d = new Date(uploadedAt); d.setUTCFullYear(d.getUTCFullYear() + Math.max(Number(years) > 0 ? Number(years) : 0, DEFAULT_RETENTION_YEARS));
   return d.toISOString();
 }
 function decodeBase64(b64) { try { return unb64u(str(b64).replace(/^data:[^,]*,/, "")); } catch { return null; } }
 function summary(d) {
   return { id: d.id, version: d.version, patientId: d.patientId, encounterId: d.encounterId || null, docType: d.docType, title: d.title,
     contentType: d.contentType, sizeBytes: d.sizeBytes, sha256: d.sha256, status: d.status, uploadedBy: d.uploadedBy, uploadedAt: d.uploadedAt,
-    retainUntil: d.retainUntil, withdrawnReason: d.withdrawnReason || null, withdrawnBy: d.withdrawnBy || null, purgedAt: d.purgedAt || null };
+    retainUntil: d.retainUntil, withdrawnReason: d.withdrawnReason || null, withdrawnBy: d.withdrawnBy || null, purgedAt: d.purgedAt || null, purgedBy: d.purgedBy || null, purgeReason: d.purgeReason || null, policyOverride: d.policyOverride || null };
 }
 
 /**
@@ -224,12 +226,18 @@ async function withdrawDocument(request, env, ctx) {
 
 /**
  * Delete the stored bytes of every version, once the retention period has passed. The metadata stays.
- * Refused before retainUntil, whoever asks.
+ * Refused under a legal hold and inside a LEGAL_OBLIGATION period (retention.js), whoever asks. Inside
+ * a period only the hospital's retention policy sets (retainUntil, a class's policy layer), allowed only
+ * with the DPO's or medical records officer's confirmation and reason. Never automatic: a named person
+ * gives the reason, and the purge is the destruction record (legal opinion H.4.2).
+ * ctx: { migration, store, documentId, reason, retention, policyConfirm?, policyReason?, canConfirmPolicy?, actorDeps, recordDeps }
  */
 async function purgeDocument(request, env, ctx) {
   const mig = ctx.migration, base = baseOf(mig);
   if (off(mig)) return { ...base, ok: true, skipped: "off", written: 0 };
   if (!ctx.store) return { ...base, ...NO_STORE, written: 0 };
+  const reason = str(ctx.reason).slice(0, 2000);
+  if (reason.length < 5) return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why this document is being destroyed", written: 0 };
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let versions;
@@ -237,12 +245,41 @@ async function purgeDocument(request, env, ctx) {
   const cur = versions && versions[versions.length - 1];
   if (!cur) return { ...base, ok: false, status: 404, error: "document_not_found", written: 0 };
   if (cur.status === "purged") return { ...base, ok: true, written: 0, skipped: "already_purged" };
-  if (new Date(cur.retainUntil).getTime() > Date.now()) {
-    return { ...base, ok: false, status: 409, error: "retention_not_expired", retainUntil: cur.retainUntil, message: `This document must be kept until ${cur.retainUntil.slice(0, 10)}.`, written: 0 };
+  let view;
+  try { view = retentionView(await retentionFacts(svc, ctx.recordDeps.repository, mig.tenantId, cur.patientId), ctx.retention, Date.now()); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "retention_unreadable", message: "How long this patient's record must be kept could not be worked out, so nothing was deleted.", written: 0 }; }
+  if (view.holds.length) return { ...base, ok: false, status: 409, error: "legal_hold", holds: view.holds, message: "This patient's record is under a legal hold. Nothing was deleted.", written: 0 };
+  /* Owner's guidance of 17 Sep 2026 (item 4). Inside a LEGAL_OBLIGATION period the deletion is refused, naming the law.
+   * Inside a period only the hospital's retention policy sets (this document's own date, from documentRetentionYears,
+   * or a class's policy layer) it needs a reason and the DPO's or medical records officer's confirmation, written on
+   * the document's purge version. */
+  const nowMs = Date.now(), CLINICAL = new Set(["clinical-ipd", "clinical-opd", "mlc", "pcpndt", "mtp"]);
+  const kept = view.retained.filter((x) => CLINICAL.has(x.class));
+  const legal = kept.filter((x) => x.legalUntil && Date.parse(x.legalUntil) > nowMs).sort((a, b) => String(b.legalUntil).localeCompare(String(a.legalUntil)))[0];
+  if (legal) {
+    const law = legal.bases.filter((b) => b.type === LEGAL && b.inForce && b.until === legal.legalUntil).map((b) => ({ id: b.id, instrument: b.instrument, provision: b.provision, jurisdiction: b.jurisdiction, until: b.until }));
+    return { ...base, ok: false, status: 409, error: "retention_not_expired", basisType: LEGAL, retainUntil: legal.legalUntil, retentionClass: legal.class, rule: legal.rule, law,
+      message: `The law requires this patient's record to be kept until ${legal.legalUntil.slice(0, 10)} (${law.map((b) => `${b.instrument}, ${b.provision}`).join("; ")}). Nothing was deleted.`, written: 0 };
+  }
+  const policy = [
+    ...(Date.parse(cur.retainUntil) > nowMs ? [{ retentionClass: "document", keepUntil: cur.retainUntil, bases: [{ type: POLICY, instrument: "This hospital's document retention period (wardsynq.documentRetentionYears; DGHS Office Memorandum, 28 Oct 2014)", provision: "retainUntil" }] }] : []),
+    ...kept.filter((x) => x.keepUntil && Date.parse(x.keepUntil) > nowMs).map((x) => ({ retentionClass: x.class, keepUntil: x.keepUntil, bases: x.bases.filter((b) => b.type === POLICY).map((b) => ({ id: b.id, type: b.type, instrument: b.instrument, provision: b.provision })) })),
+  ].sort((a, b) => String(b.keepUntil).localeCompare(String(a.keepUntil)));
+  let policyOverride = null;
+  if (policy.length) {
+    const top = policy[0], words = policy.map((p) => p.bases.map((b) => `${b.instrument}, ${b.provision}`).join("; ")).join("; ");
+    const refusal = { basisType: POLICY, retainUntil: top.keepUntil, retentionClass: top.retentionClass, policy, written: 0 };
+    if (!ctx.policyConfirm) return { ...base, ok: false, status: 409, error: "retention_policy_confirmation_required", ...refusal,
+      message: `This record is kept until ${top.keepUntil.slice(0, 10)} under the hospital's retention policy (${words}). That is not a legal requirement: the Data Protection Officer or the medical records officer may confirm the deletion with a reason. Nothing was deleted.` };
+    if (!ctx.canConfirmPolicy) return { ...base, ok: false, status: 403, error: "policy_confirmation_role", ...refusal,
+      message: "Only the Data Protection Officer or the medical records officer confirms deleting a record inside the hospital's retention policy period. Nothing was deleted." };
+    const policyReason = str(ctx.policyReason).slice(0, 2000);
+    if (policyReason.length < 10) return { ...base, ok: false, status: 422, error: "policy_reason_required", ...refusal, message: "Say why deleting inside the retention policy period is justified (at least 10 characters). Nothing was deleted." };
+    policyOverride = { reason: policyReason, confirmedBy: resolved.actor.id, confirmedAt: new Date(nowMs).toISOString(), basisType: POLICY, retainUntil: top.keepUntil, policy };
   }
   try { for (const v of versions) if (v.objectKey) await ctx.store.delete(v.objectKey); }
   catch (e) { return { ...base, ok: false, status: 502, error: "document_store_failed", detail: str(e && e.message), written: 0 }; }
-  const next = { ...cur, status: "purged", purgedAt: new Date().toISOString(), purgedBy: resolved.actor.id };
+  const next = { ...cur, status: "purged", purgedAt: new Date().toISOString(), purgedBy: resolved.actor.id, purgeReason: reason, ...(policyOverride ? { policyOverride } : {}) };
   delete next.version;
   try {
     const out = await svc.put(next, { expectedVersion: cur.version });

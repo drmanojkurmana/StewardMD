@@ -37,12 +37,17 @@ const round2 = (n) => Math.round((Number(n) || 0) * 100) / 100;
 const STATES = Object.freeze(["open", "paid", "void"]);
 /** The kinds of thing that can happen to an invoice after it is raised. */
 const EVENT_KINDS = Object.freeze(["discount", "deposit", "payment", "refund", "adjustment", "write_off"]);
+/* CREDIT AND DEBIT NOTES (gap-claims-gst B). A note is its own document against this invoice - its own number,
+ * date, reason and lines - appended to the ledger like any other event. It never edits a charge line or the tax
+ * on one: a credit note carries the taxable value it takes back and the GST reversed with it, a debit note the
+ * value and GST it adds. Section 34 CGST Act (https://taxguru.in/goods-and-service-tax/section-34-understanding-credit-notes-gst.html). */
+const NOTE_KINDS = Object.freeze(["credit_note", "debit_note"]);
 /** Reduce the balance owed (money in, or the hospital reducing the charge). */
-const REDUCES_BALANCE = Object.freeze(["discount", "deposit", "payment", "adjustment", "write_off"]);
-/** Increase the balance owed (money handed back). */
-const INCREASES_BALANCE = Object.freeze(["refund"]);
+const REDUCES_BALANCE = Object.freeze(["discount", "deposit", "payment", "adjustment", "write_off", "credit_note"]);
+/** Increase the balance owed (money handed back, or a debit note adding to the bill). */
+const INCREASES_BALANCE = Object.freeze(["refund", "debit_note"]);
 /** These must say why - a plain payment or deposit does not need to. */
-const REASON_REQUIRED = Object.freeze(["discount", "adjustment", "write_off", "refund"]);
+const REASON_REQUIRED = Object.freeze(["discount", "adjustment", "write_off", "refund", "credit_note", "debit_note"]);
 
 class InvoiceRefusalError extends Error {
   constructor(code, message) { super(message || code); this.code = code; }
@@ -57,6 +62,14 @@ function invoiceLine(input) {
      * GST, functions/_region_in.js). This file names no tax, sets no rate and computes no tax; it only
      * carries the adapter's figure and adds it to what is owed. A line with no taxKind has no tax. */
     ...(str(i.taxKind) ? { taxKind: str(i.taxKind), taxRate: i.taxRate == null ? null : Number(i.taxRate), taxExempt: i.taxExempt === true, tax: round2(i.tax) } : {}),
+    /* What the tax invoice has to show beside the tax (India: HSN/SAC, the taxable value and why the line is
+     * taxed or exempt), carried as the region adapter gave it. Absent keys stay absent. */
+    ...(str(i.hsnSac) ? { hsnSac: str(i.hsnSac) } : {}),
+    ...(str(i.taxBasis) ? { taxBasis: str(i.taxBasis), taxable: round2(i.taxable == null ? i.line : i.taxable) } : {}),
+    ...(str(i.kind) ? { kind: str(i.kind) } : {}),
+    /* Package billing (functions/_wardsynq/packages.js): the package line itself, or a charge the package covers (at
+     * zero), excludes (billed on top) or names neither way (billed, flagged). Carried as the caller gave it. */
+    ...(str(i.packageCode) ? { packageCode: str(i.packageCode), ...Object.fromEntries(["packageLine", "packageIncluded", "packageExcluded", "packageOutside", "packageRoom"].filter((k) => i[k] === true).map((k) => [k, true])) } : {}),
   };
 }
 
@@ -143,8 +156,86 @@ function postEvent(invoice, kind, opts) {
   });
   return invoice;
 }
+/** PURE. Taxable value on one charge line still open to a credit note: the line, plus what debit notes added,
+ *  less what credit notes already took back. */
+function creditableOn(invoice, lineIndex) {
+  const l = (invoice.lines || [])[lineIndex];
+  if (!l) return 0;
+  let n = Number(l.line) || 0;
+  for (const e of invoice.events || []) {
+    if (!e || !NOTE_KINDS.includes(e.kind)) continue;
+    for (const nl of e.lines || []) if (nl.lineIndex === lineIndex) n += (e.kind === "debit_note" ? 1 : -1) * (Number(nl.taxable) || 0);
+  }
+  return round2(n);
+}
+
+/**
+ * PURE. Appends a credit or debit note. o: { noteNumber, actorId, at, reason, lines: [{ lineIndex, taxable }],
+ * withoutGst?, gstTreatment?, gstConfirmation? }.
+ * Each note line names the charge line it answers; its GST follows that line's own rate (none on an exempt or
+ * untaxed line), never a rate typed here. A credit cannot take back more taxable value than is still on the
+ * line. withoutGst: the caller decided GST may not be reduced (Section 34(2)), so every line carries none. A note
+ * carrying no GST is `financial`: not a Section 34 note, never reported for e-invoicing. Mutates and returns the
+ * invoice; the new event is its last one.
+ */
+function postNote(invoice, kind, opts) {
+  const o = opts || {};
+  if (invoice.void) throw new InvoiceRefusalError("INVOICE_VOID", "this invoice is void; nothing can be posted against it");
+  if (!NOTE_KINDS.includes(kind)) throw new InvoiceRefusalError("UNKNOWN_KIND", `unknown note kind: ${kind}`);
+  const actorId = str(o.actorId), at = str(o.at), reason = str(o.reason), noteNumber = str(o.noteNumber);
+  if (!actorId || !at || !noteNumber) throw new InvoiceRefusalError("MISSING_FIELDS", "a note needs a number, an actor and a time");
+  if (!reason) throw new InvoiceRefusalError("REASON_REQUIRED", `a ${kind.replace("_", " ")} must say why`);
+  const asked = Array.isArray(o.lines) ? o.lines : [];
+  if (!asked.length) throw new InvoiceRefusalError("NO_LINES", "a note needs at least one line");
+  const seen = new Set();
+  const lines = asked.map((a) => {
+    const idx = Number(a && a.lineIndex), taxable = Number(a && a.taxable);
+    const l = Number.isInteger(idx) ? (invoice.lines || [])[idx] : null;
+    if (!l) throw new InvoiceRefusalError("UNKNOWN_LINE", "a note line must name a charge line on this invoice");
+    if (seen.has(idx)) throw new InvoiceRefusalError("DUPLICATE_LINE", "a charge line appears twice on this note");
+    seen.add(idx);
+    if (!Number.isFinite(taxable) || taxable <= 0) throw new InvoiceRefusalError("AMOUNT_REQUIRED", "each note line needs a positive taxable value");
+    if (kind === "credit_note") {
+      const open = creditableOn(invoice, idx);
+      if (taxable > open + 0.001) throw new InvoiceRefusalError("CREDIT_EXCEEDS_LINE", `at most ${open} can be credited on ${l.display || l.code}`);
+    }
+    const taxed = !!l.taxKind && l.taxExempt !== true && l.taxRate != null && o.withoutGst !== true;
+    return { lineIndex: idx, code: l.code, display: l.display, ...(l.hsnSac ? { hsnSac: l.hsnSac } : {}), ...(l.kind ? { kind: l.kind } : {}),
+      taxable: round2(taxable), ...(l.taxKind ? { taxKind: l.taxKind, taxRate: l.taxRate, taxExempt: l.taxExempt === true, taxBasis: l.taxBasis || null, tax: taxed ? round2(taxable * Number(l.taxRate) / 100) : 0 } : {}) };
+  });
+  const taxable = round2(lines.reduce((n, l) => n + l.taxable, 0)), tax = round2(lines.reduce((n, l) => n + (Number(l.tax) || 0), 0));
+  invoice.events.push({ kind, noteNumber, amount: round2(taxable + tax), taxable, tax, lines, actorId, at, reason, reference: null,
+    ...(tax === 0 ? { financial: true } : {}), ...(str(o.gstTreatment) ? { gstTreatment: str(o.gstTreatment) } : {}), ...(o.gstConfirmation ? { gstConfirmation: o.gstConfirmation } : {}) });
+  return invoice;
+}
+
+/** PURE. The buyer on a B2B tax invoice, or null for a bill to a person (B2C). Not changed under an active IRN. */
+function setBuyer(invoice, buyer, { actorId, at }) {
+  if (invoice.void) throw new InvoiceRefusalError("INVOICE_VOID", "this invoice is void; nothing can be posted against it");
+  if ((invoice.einvoices || []).some((x) => x && x.status === "ACT")) throw new InvoiceRefusalError("IRN_ACTIVE", "this bill is registered for e-invoicing; cancel that first or raise a note");
+  if (!str(actorId) || !str(at)) throw new InvoiceRefusalError("MISSING_FIELDS", "buyer details need an actor and a time");
+  invoice.buyer = buyer || null;
+  invoice.events.push({ kind: "buyer_details", amount: 0, actorId: str(actorId), at: str(at), reason: null, reference: buyer ? buyer.gstin : null });
+  return invoice;
+}
+
+/** PURE. An IRN the e-invoice registration portal issued for this invoice (docNumber = its own) or one of its notes. */
+function recordIrn(invoice, { docType, docNumber, irn, ackNo, ackDt, signedQrCode, actorId, at }) {
+  invoice.einvoices = [...(invoice.einvoices || []), { docType, docNumber, irn, ackNo: ackNo == null ? null : String(ackNo), ackDt: str(ackDt), signedQrCode: str(signedQrCode) || null, status: "ACT", generatedAt: at, generatedBy: actorId }];
+  invoice.events.push({ kind: "irn_generated", amount: 0, actorId, at, reason: null, reference: `${docNumber} ${irn}` });
+  return invoice;
+}
+/** PURE. The portal confirmed a cancellation. */
+function recordIrnCancel(invoice, { irn, cancelDate, reasonCode, remark, actorId, at }) {
+  invoice.einvoices = (invoice.einvoices || []).map((x) => (x && x.irn === irn ? { ...x, status: "CNL", cancelledAt: str(cancelDate) || at, cancelReasonCode: reasonCode, cancelRemark: str(remark) || null, cancelledBy: actorId } : x));
+  invoice.events.push({ kind: "irn_cancelled", amount: 0, actorId, at, reason: str(remark) || null, reference: irn });
+  return invoice;
+}
+
 function voidInvoice(invoice, { actorId, at, reason }) {
   if (paidIn(invoice) > 0) throw new InvoiceRefusalError("MONEY_ALREADY_MOVED", "an invoice with a real payment against it is not voided - write it off instead, so the money movement stays on the record");
+  if ((invoice.events || []).some((e) => e && NOTE_KINDS.includes(e.kind))) throw new InvoiceRefusalError("NOTES_EXIST", "an invoice with a credit or debit note against it is not voided - raise a credit note instead");
+  if ((invoice.einvoices || []).some((x) => x && x.status === "ACT")) throw new InvoiceRefusalError("IRN_ACTIVE", "this bill is registered for e-invoicing; cancel the IRN first");
   const a = str(actorId), t = str(at), r = str(reason);
   if (!a || !t || !r) throw new InvoiceRefusalError("MISSING_FIELDS", "voiding an invoice needs an actor, a time and a reason");
   invoice.void = true; invoice.voidReason = r;
@@ -162,6 +253,8 @@ function reconciliationOf(invoice) {
     refundedOut: refundedOut(invoice),
     adjusted: eventSum(invoice.events, ["adjustment"]),
     writtenOff: eventSum(invoice.events, ["write_off"]),
+    credited: eventSum(invoice.events, ["credit_note"]),
+    debited: eventSum(invoice.events, ["debit_note"]),
     balance: balanceOf(invoice),
     creditBalance: creditBalanceOf(invoice),
     status: statusOf(invoice),
@@ -196,8 +289,8 @@ function receiptsFor(invoice) {
 }
 
 export {
-  STATES, EVENT_KINDS, REDUCES_BALANCE, INCREASES_BALANCE, REASON_REQUIRED, RECEIPTABLE_KINDS,
+  STATES, EVENT_KINDS, NOTE_KINDS, REDUCES_BALANCE, INCREASES_BALANCE, REASON_REQUIRED, RECEIPTABLE_KINDS,
   InvoiceRefusalError, invoiceLine, openInvoice,
   chargeTotal, balanceOf, creditBalanceOf, statusOf, paidIn, refundedOut, receiptFor, receiptsFor,
-  postEvent, voidInvoice, reconciliationOf,
+  postEvent, voidInvoice, reconciliationOf, creditableOn, postNote, setBuyer, recordIrn, recordIrnCancel,
 };

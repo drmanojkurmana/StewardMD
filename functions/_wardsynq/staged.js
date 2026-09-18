@@ -64,6 +64,25 @@ class StagedRepository {
     const staged = this._latestStagedById((r) => r.resourceType === resourceType);
     return [...real.filter((r) => !staged.has(r.id)), ...[...staged.values()].map(clone)];
   }
+  /* R4-2: whole-type reads (service listAll/listByStatus) page through here. The staged records ride on the LAST real page,
+   * after it, so the reader (which keeps an id's later copy) sees the staged version. ponytail: with a status filter, a
+   * staged change out of the filter hides the id only when its real copy is on that last page; a staged unit of work is
+   * one consultation, so an earlier page holding it is not expected. */
+  /* R5-3: a newest-first read (service listSince) can stop before the last page, so on that one the staged
+   * records ride on the FIRST page, ahead of it - they are the newest, and that reader keeps an id's first
+   * copy. A later real page may then repeat an id whose staged copy was already handed over; the reader
+   * ignores it for the same reason. */
+  async pageByType(tenantId, resourceType, opts) {
+    const page = await this.real.pageByType(tenantId, resourceType, opts);
+    const desc = !!(opts && opts.newest);
+    const mine = desc ? opts.beforeSeq == null : page.next == null;
+    if (!mine) return page;
+    const want = opts && Array.isArray(opts.statuses) ? new Set(opts.statuses) : null;
+    const staged = this._latestStagedById((r) => r.resourceType === resourceType);
+    const records = (page.records || []).filter((r) => !staged.has(r.id));
+    const add = [...staged.values()].filter((r) => !want || want.has(r.status)).map(clone);
+    return { records: desc ? [...add, ...records] : [...records, ...add], next: page.next };
+  }
   async recall(tenantId, key) {
     const k = this.keys.find((x) => x.key === key);
     return k ? { resourceType: k.resourceType, id: k.id, version: k.version } : this.real.recall(tenantId, key);

@@ -51,7 +51,8 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { screenOutput, unsupportedSafetyClaim } from "../../wardsynq/wardsynq-secops.js";
 import { makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { TASK, invoke, maikConfig, publicRefusal, SETUP_REFUSALS } from "./maik-gateway.js";
-import { buildPatientContext, promptFor, SECTION, DEFAULT_SECTIONS } from "./maik-chart-context.js";
+import { buildPatientContext, promptFor, makeDoc, SECTION, DEFAULT_SECTIONS } from "./maik-chart-context.js";
+import { claimFacts, evidencePack } from "./claims-ops.js";
 import { ClinicalNote } from "../../wardsynq/wardsynq-model.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -113,6 +114,22 @@ const COPILOT = Object.freeze({
   "referral-summary": { task: TASK.SUMMARISE, label: "Prepare referral summary", instruction: "Prepare a referral summary for a receiving team: clinical background, active problems, medicines, allergies, relevant results and the computed findings. Only what the record supports." },
 });
 
+/* P6 DRAFTING TASKS (inbasket-messaging, 2026-09-17). Each is the gateway's own DRAFT_NOTE task, so routing, the PHI
+ * approval and the refusal when nothing is approved are exactly the other tasks'. What differs is what a draft is FOR,
+ * and one rule holds for all three: ACCEPTING ONE WRITES NOTHING. A discharge summary is written and signed on the
+ * discharge summary screen, a reply is sent by a person pressing Send, and an appeal letter is saved into the claim's
+ * evidence pack by the billing desk. The subject a draft answers (the patient's message, the claim) is read as the
+ * clinician and handed to the model as a fenced record document, never as instruction text. */
+const DRAFT_RULE = "This is a DRAFT for a person to read, change and decide whether to use. Nothing you write is sent, saved or signed by writing it. Do not claim that anything has been done, arranged or sent.";
+const DRAFTS = Object.freeze({
+  "draft-discharge-summary": { task: TASK.DRAFT_NOTE, needs: null, label: "Draft a discharge summary",
+    instruction: "Draft a discharge summary for the treating clinician to check and sign: reason for admission, diagnoses, what was done, condition at discharge, medicines on discharge, follow-up. Use ONLY the record. Leave a heading as 'Not recorded' rather than inventing it." },
+  "draft-portal-reply": { task: TASK.DRAFT_NOTE, needs: "PatientMessage", label: "Draft a reply to the patient's message",
+    instruction: "Draft a short reply, in plain language, to the patient's portal message given below as a record document. Use ONLY the record. Do not diagnose, change treatment or reassure about symptoms; where the question needs a clinician to see the patient, say that the care team will contact them or that they should contact the hospital. If the message describes something urgent, tell them to seek urgent care now." },
+  "draft-appeal-letter": { task: TASK.DRAFT_NOTE, needs: "Claim", label: "Draft an appeal or query letter for the claim",
+    instruction: "Draft a letter to the payer answering its query on, or appealing the denial of, the claim given below as a record document (the evidence pack assembled from the records). State only facts the record and the pack contain, name the documents to attach, and do not add a diagnosis, a procedure or an amount that is not there." },
+});
+
 /** PURE. The findings as the model sees them: rule, summary and record ids. */
 function factsText(facts) {
   if (!facts) return "COMPUTED FINDINGS: none were supplied.";
@@ -134,6 +151,8 @@ function MaiKInteraction(input) {
     /* P2.2: the deterministic findings handed to the model, with their record ids. Shown to the clinician
      * apart from the model's words, so "what the record says" and "what MaiK made of it" never blur. */
     facts: i.facts || null,
+    /* P6: what a draft answers ({resourceType, id, version}) and that accepting it writes nothing. Null for other tasks. */
+    draftFor: i.draftFor || null,
     /* Who asked, and which AI actor would write anything that comes of it. Two different identities
      * on purpose: the clinician is responsible for asking, the AI is the author of the answer. */
     requestedBy: i.requestedBy, requestedAt: i.requestedAt,
@@ -245,7 +264,8 @@ async function askAboutPatient(request, env, ctx) {
 
   const task = str(ctx.task) || TASK.SUMMARISE;
   const copilot = COPILOT[task] || null;
-  if (!INSTRUCTIONS[task] && !copilot) return { ...base, ok: false, status: 422, error: "unknown_task", detail: `"${task}" is not a MaiK task this ward performs` };
+  const draft = DRAFTS[task] || null;
+  if (!INSTRUCTIONS[task] && !copilot && !draft) return { ...base, ok: false, status: 422, error: "unknown_task", detail: `"${task}" is not a MaiK task this ward performs` };
   const patientId = str(ctx.patientId);
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", detail: "a MaiK request is always about one identified patient" };
 
@@ -274,21 +294,49 @@ async function askAboutPatient(request, env, ctx) {
   const context = await buildPatientContext(svc, patientId, {
     // A caller who named an encounter is shown that encounter's own section, not merely stamped
     // with its id - see the ENCOUNTER section's own note in maik-chart-context.js.
-    sections: encounterId && requestedSections ? [...new Set([...requestedSections, SECTION.ENCOUNTER])] : (encounterId ? [...DEFAULT_SECTIONS, SECTION.ENCOUNTER] : requestedSections),
+    sections: encounterId && requestedSections ? [...new Set([...requestedSections, SECTION.ENCOUNTER])]
+      : encounterId ? [...DEFAULT_SECTIONS, SECTION.ENCOUNTER, ...(draft ? [SECTION.NOTES] : [])]
+      : draft ? [...DEFAULT_SECTIONS, SECTION.NOTES] : requestedSections,
     encounter: enc || undefined,
     signingKey,
   });
   if (!context.ok) return { ...base, ok: false, status: context.error === "patient_unreadable" ? 403 : 422, error: context.error, detail: context.detail };
 
+  /* A draft's subject, read as this clinician and bound to this patient before any model is asked. */
+  let draftFor = null;
+  if (draft && draft.needs) {
+    let row = null, text = "";
+    try {
+      if (draft.needs === "PatientMessage") {
+        row = str(ctx.messageId) ? await svc.get("PatientMessage", str(ctx.messageId)) : null;
+        if (row) text = "Subject: " + (str(row.subject) || "none") + "\n" + str(row.body);
+      } else {
+        const claims = str(ctx.claimId) ? [await svc.get("Claim", str(ctx.claimId))] : await svc.byPatient("Claim", patientId);
+        row = (claims || []).filter((c) => c && (str(ctx.claimId) || ["denied", "queried"].includes(str(c.state))))
+          .sort((a, b) => str(b.meta && b.meta.recordedAt).localeCompare(str(a.meta && a.meta.recordedAt)))[0] || null;
+        if (row) { const { meta, writtenBy, ...rec } = row; text = evidencePack({ claim: rec, payer: null, reports: undefined, ...(await claimFacts(svc, rec)) }).text; }
+      }
+    } catch (e) {
+      return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : UNAVAILABLE, error: e instanceof GovernanceError ? "permission" : "record_read_failed" };
+    }
+    if (!row) return { ...base, ok: false, status: 404, error: draft.needs === "PatientMessage" ? "message_not_found" : "claim_not_found",
+      detail: draft.needs === "PatientMessage" ? "name the patient message this reply answers" : "this patient has no denied or queried claim to answer" };
+    if (str(row.patientId) !== patientId) return { ...base, ok: false, status: 409, error: "subject_mismatch", detail: "that record belongs to another patient" };
+    context.documents = [...(context.documents || []), await makeDoc(`${draft.needs}/${row.id}`, text, signingKey, row)];
+    context.provenance = [...(context.provenance || []), { resourceType: draft.needs, id: row.id, version: row.version == null ? null : row.version }];
+    draftFor = { resourceType: draft.needs, id: row.id, version: row.version == null ? null : row.version };
+  }
+
   /* The role boundary leads, because the instruction a model reads first is the one it is most likely
    * to still be holding when it reaches the clinician's question at the end. */
   const instruction = copilot
     ? `${ROLE_BOUNDARY}\n\n${copilot.instruction}\n\n${FACTS_RULE}\n\n${factsText(ctx.facts)}`
+    : draft ? `${ROLE_BOUNDARY}\n\n${draft.instruction}\n\n${DRAFT_RULE}`
     : `${ROLE_BOUNDARY}\n\n${INSTRUCTIONS[task]}`;
   const built = await promptFor(context, `${instruction}${str(ctx.question) ? `\n\nThe clinician asks: ${str(ctx.question)}` : ""}`, { signingKey });
 
   const answer = await invoke({
-    task: copilot ? copilot.task : task, phi: true, context: { ...context, content: built.prompt },
+    task: copilot ? copilot.task : draft ? draft.task : task, phi: true, context: { ...context, content: built.prompt },
     system: null, prompt: built.prompt,
     config: ctx.config, env, providers: ctx.providers, fetchImpl: ctx.fetchImpl,
   });
@@ -322,6 +370,7 @@ async function askAboutPatient(request, env, ctx) {
   const record = MaiKInteraction({
     id, patientId, encounterId: encounterId || null, task,
     facts: copilot ? (ctx.facts || { unavailable: "no findings were supplied" }) : null,
+    draftFor: draft ? { ...(draftFor || {}), draft: true, writesOnAccept: false } : null,
     requestedBy: resolved.actor.id, requestedAt: at,
     sessionRef: (resolved.identity && resolved.identity.sessionRef) || null,
     correlationId: str(ctx.correlationId) || id,
@@ -447,7 +496,7 @@ async function listInteractions(request, env, ctx) {
   if (error) return { ...base, ...error, interactions: [] };
   const patientId = str(ctx.patientId);
   let rows;
-  try { rows = patientId ? await recorder.byPatient(TYPE, patientId) : await recorder.list(TYPE, 200); }
+  try { rows = patientId ? await recorder.byPatient(TYPE, patientId) : await recorder.list(TYPE, 200, { newest: true }); } // the newest 200 (was the oldest)
   catch (e) { return { ...base, ok: false, status: UNAVAILABLE, error: "record_read_failed", detail: str(e && e.message), interactions: [] }; }
   const interactions = (rows || []).filter(Boolean)
     .sort((a, b) => str(b.requestedAt).localeCompare(str(a.requestedAt)));
@@ -456,4 +505,4 @@ async function listInteractions(request, env, ctx) {
   return { ...base, ok: true, interactions, counts };
 }
 
-export { COPILOT, factsText, TYPE, REVIEW, INSTRUCTIONS, ROLE_BOUNDARY, MaiKInteraction, idFor, askAboutPatient, reviewInteraction, listInteractions };
+export { COPILOT, DRAFTS, DRAFT_RULE, factsText, TYPE, REVIEW, INSTRUCTIONS, ROLE_BOUNDARY, MaiKInteraction, idFor, askAboutPatient, reviewInteraction, listInteractions };

@@ -122,7 +122,7 @@ async function possibleDuplicates(request, env, ctx) {
   let pool, indexed = [];
   try {
     [pool, indexed] = await Promise.all([
-      svc.list("Patient", POOL),
+      svc.list("Patient", POOL, { newest: true }), // R4-2: the newest registrations (was the oldest POOL)
       candidate.identifiers.length || candidate.mrn
         ? svc.findPatientsByIdentifier({ mrn: candidate.mrn, identifiers: candidate.identifiers })
         : Promise.resolve([]),

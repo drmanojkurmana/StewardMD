@@ -1,0 +1,93 @@
+{
+  "generic": "Linvoseltamab",
+  "cls": "BCMA x CD3 bispecific T-cell engager antibody",
+  "pharm": "Bispecific B-cell maturation antigen (BCMA)-directed CD3 T-cell engager antibody for relapsed or refractory multiple myeloma",
+  "tags": ["Relapsed/refractory multiple myeloma", "BCMA x CD3 bispecific T-cell engager", "Boxed warning: cytokine release syndrome (CRS)", "Boxed warning: neurologic toxicity including ICANS", "REMS restricted program"],
+  "quick": [
+    ["Adult dose", "Step-up 5 mg IV, then 25 mg IV, then 200 mg IV weekly x14 weeks, then 200 mg IV every 2 weeks"],
+    ["Meal", "Not applicable (IV); maintain hydration"],
+    ["Pregnancy", "May cause fetal harm; verify status and use effective contraception"],
+    ["Lactation", "Do not breastfeed during treatment"],
+    ["Renal", "No established adjustment; monitor during CRS with hypotension"],
+    ["Hepatic", "No established adjustment; monitor LFTs for hepatotoxicity"],
+    ["Alcohol", "No specific restriction; avoid excess during CRS-risk periods"],
+    ["Monitoring", "CRS and ICANS/neurotoxicity, CBC, LFTs, infection, HBV status"]
+  ],
+  "summary": "Linvoseltamab (Lynozyfic) is a BCMA x CD3 bispecific T-cell engager antibody granted accelerated approval in 2025 for adults with relapsed or refractory multiple myeloma after at least 3 prior lines of therapy. It redirects T cells to BCMA-expressing myeloma cells to drive T-cell-mediated tumor killing. Dosing uses step-up infusions of 5 mg then 25 mg followed by 200 mg IV weekly for 14 weeks and then every 2 weeks. It carries a boxed warning for life-threatening cytokine release syndrome (CRS, 46% at the recommended dose) and neurologic toxicity including ICANS (54%, grade 3-4 in 8%), and is available only through a restricted REMS program with mandatory 24-hour hospitalization after each step-up dose. Additional risks include serious infections, neutropenia and other cytopenias, hepatotoxicity, and embryo-fetal toxicity.",
+  "indications": [
+    "Treatment of adults with relapsed or refractory multiple myeloma who have received at least 3 prior lines of therapy"
+  ],
+  "dosage": [
+    {"c": "Step-up dose 1", "r": "Adult IV", "d": "5 mg IV", "t": "Single infusion week 1", "n": "Hospitalize for 24 hours after dosing for CRS and neurologic toxicity monitoring"},
+    {"c": "Step-up dose 2", "r": "Adult IV", "d": "25 mg IV", "t": "Single infusion week 2", "n": "Given 1 week after step-up dose 1; hospitalize for 24 hours after dosing"},
+    {"c": "Full treatment doses", "r": "Adult IV", "d": "200 mg IV once weekly", "t": "Once weekly", "n": "Start 1 week after step-up dose 2; give weekly through week 14"},
+    {"c": "Maintenance dosing", "r": "Adult IV", "d": "200 mg IV every 2 weeks", "t": "Every 2 weeks", "n": "After 14 weeks of therapy, switch to every-2-week dosing; continue until disease progression or unacceptable toxicity"},
+    {"c": "Toxicity-related withholding", "r": "Adult IV", "d": "Withhold until CRS, ICANS, or neurologic toxicity resolves per labeling", "t": "As needed", "n": "Modify the next dose or permanently discontinue based on severity per labeling tables"}
+  ],
+  "admin": [
+    "Give only by intravenous infusion in a setting equipped to recognize and manage CRS and neurologic toxicity, including ICANS",
+    "Use the step-up dosing schedule for the first two doses to reduce the incidence and severity of CRS",
+    "Hospitalize patients for 24 hours after step-up dose 1 and after step-up dose 2 for monitoring",
+    "Withhold the next dose for CRS, ICANS, or other neurologic toxicity per labeling tables; permanently discontinue for severe or recurrent events",
+    "Dispense and administer only through the Lynozyfic REMS restricted program"
+  ],
+  "moa": "Linvoseltamab is a bispecific antibody that binds B-cell maturation antigen (BCMA) on multiple myeloma cells and CD3 on T cells. By bringing T cells into contact with BCMA-expressing myeloma cells, it triggers T-cell activation, release of cytotoxic mediators, and T-cell-mediated killing of the myeloma cells. Step-up dosing is used to reduce the incidence and severity of cytokine release syndrome during initial T-cell activation.",
+  "contra": {
+    "absolute": ["Known serious hypersensitivity to linvoseltamab or any excipient"],
+    "relative": ["Active serious infection (initiate only after infection is controlled)", "History of HBV infection (risk of reactivation)", "Pregnancy and breastfeeding (embryo-fetal risk; avoid)"],
+    "monitor": ["Concomitant myelosuppressive or hepatotoxic therapy", "HBV serology and liver function during treatment", "Live vaccines during treatment (immunosuppression and cytopenias)"]
+  },
+  "preg": "There are no available data on use in pregnant women. Based on its mechanism of T-cell activation, linvoseltamab may cause fetal harm. Verify pregnancy status before starting in females of reproductive potential and advise effective contraception during treatment.",
+  "lact": "There are no data on the presence of linvoseltamab in human milk or its effects on the breastfed infant or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment.",
+  "renal": "No dose adjustment is established for renal impairment. Monitor closely during CRS episodes with hypotension, which can reduce renal perfusion, and adjust supportive care as needed.",
+  "hepatic": "No established dose adjustment; hepatotoxicity is reported, so monitor liver function tests and withhold or discontinue for significant transaminase or bilirubin elevation per labeling.",
+  "interactions": {
+    "major": ["Myelosuppressive chemotherapy and other marrow-toxic agents (additive neutropenia and infection risk; monitor CBC closely)", "Live vaccines (risk of vaccine-related infection during immunosuppression; avoid)"],
+    "moderate": ["Hepatotoxic drugs (additive liver injury risk; monitor liver function tests)", "Nephrotoxic drugs (additive renal risk during CRS with hypotension or volume depletion)"],
+    "minor": ["No clinically significant CYP-mediated interactions are expected for this antibody therapy"],
+    "food": "Not applicable (IV administration); maintain adequate hydration.",
+    "alcohol": "No specific interaction is described; avoid excess alcohol during CRS-risk periods and cytopenias.",
+    "diagnostics": "Monitor CBC with differential, liver function tests, and HBV serology; monitor for CRS biomarkers and neurologic status as clinically indicated."
+  },
+  "se": {
+    "common": ["Cytokine release syndrome (fever, hypotension, hypoxia)", "Fatigue", "Musculoskeletal pain", "Neutropenia and other cytopenias", "Infections including upper respiratory infection", "Nausea and diarrhea", "Elevated liver transaminases"],
+    "serious": ["Cytokine release syndrome, including life-threatening reactions (BOXED WARNING)", "Neurologic toxicity including immune effector cell-associated neurotoxicity syndrome (ICANS) (BOXED WARNING)", "Serious infections", "Neutropenia and other cytopenias", "Hepatotoxicity"],
+    "rare": ["HBV reactivation", "Severe hepatotoxicity"],
+    "emergency": ["Fever with low blood pressure or trouble breathing during or after infusion (possible CRS) - seek emergency care", "Confusion, trouble speaking, severe sleepiness, seizure, or loss of consciousness (possible ICANS) - seek emergency care", "Fever with chills during neutropenia (possible serious infection) - seek urgent care"]
+  },
+  "monitoring": [
+    "CRS signs and symptoms (fever, hypotension, hypoxia) especially during and after step-up doses",
+    "Neurologic status for ICANS and other neurotoxicity (confusion, aphasia, altered consciousness, seizures, motor weakness)",
+    "Complete blood counts with differential for neutropenia and other cytopenias",
+    "Liver function tests for hepatotoxicity",
+    "Signs of infection; HBV serology in at-risk patients"
+  ],
+  "counsel": [
+    "CRS and neurologic toxicity including ICANS can be life-threatening; seek emergency care for fever, trouble breathing, confusion, trouble speaking, severe sleepiness, seizures, or loss of consciousness",
+    "You will be hospitalized for 24 hours after each of the first two step-up doses for monitoring",
+    "This drug is available only through a restricted safety program (REMS) because of CRS and neurologic risks",
+    "Report signs of infection at once (fever, chills, cough); low blood counts are common and you will have frequent blood tests",
+    "Tell your team about liver symptoms (yellowing of skin or eyes, dark urine, right-sided abdominal pain) and all other medicines and vaccines",
+    "Use effective contraception during treatment and tell your doctor if you are pregnant, plan pregnancy, or are breastfeeding"
+  ],
+  "pk": [
+    ["Onset", "T-cell activation and cytokine release can begin within hours of the first step-up infusion"],
+    ["Peak", "At the end of the IV infusion"],
+    ["Half-life", "Prolonged, consistent with an IgG-based bispecific antibody; supports weekly then every-2-week dosing"],
+    ["Duration", "Pharmacodynamic effect persists between doses; maintenance dosing every 2 weeks after week 14"],
+    ["Storage", "Refrigerate per labeling; do not freeze; protect from light; use reconstituted and diluted solutions within labeled time limits"]
+  ],
+  "pearls": [
+    "Boxed warning: life-threatening CRS and neurologic toxicity including ICANS; available only through the Lynozyfic REMS restricted program",
+    "Step-up dosing (5 mg, then 25 mg) with 24-hour hospitalization after each step-up dose is mandatory to mitigate CRS risk",
+    "At the recommended dose, CRS occurred in 46% (grade 3 under 1%) and neurologic toxicity including ICANS in 54% (grade 3-4 in 8%)",
+    "After weekly 200 mg dosing through week 14, treatment steps down to every-2-week maintenance",
+    "Screen for HBV and monitor blood counts, liver function, and infection throughout therapy"
+  ],
+  "missed": "Linvoseltamab is given on a supervised infusion schedule, so there is no patient-managed missed dose. If an infusion visit is missed, contact the oncology team to reschedule; do not attempt to make up doses independently, as step-up and timing rules affect CRS risk.",
+  "overdose": "There is no specific antidote for linvoseltamab overdose. Exaggerated CRS, neurologic toxicity, cytopenias, or infection may occur. Withhold treatment and provide intensive supportive care with monitoring for CRS, neurologic status, blood counts, liver function, and infection. Contact Poison Help (1-800-222-1222).",
+  "refs": [
+    ["FDA Prescribing Information: Linvoseltamab / LYNOZYFIC (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22linvoseltamab%22"],
+    ["DailyMed - Linvoseltamab (LYNOZYFIC)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=linvoseltamab"]
+  ]
+}

@@ -14,7 +14,8 @@
   "caps": "protocol",
   "source": {
     "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
-    "primaryStudy": "OlympiA: Tutt ANJ, Garber JE, Kaufman B, et al. N Engl J Med 2021;384:2394-2405; Geyer CE, et al. Ann Oncol 2022;33:1250-1268"
+    "primaryStudy": "OlympiA: Tutt ANJ, Garber JE, Kaufman B, et al. N Engl J Med 2021;384:2394-2405; Geyer CE, et al. Ann Oncol 2022;33:1250-1268",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
   },
   "institution": {
     "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-M 2, 3, 5 of 10)",
@@ -23,7 +24,7 @@
   "biomarkers": {
     "BRCA": "positive",
     "HER2": "negative",
-    "note": "Requires documented deleterious or suspected deleterious germline BRCA1 or BRCA2 pathogenic variant AND high-risk HER2-negative early breast cancer: for TNBC, primary tumor ≥2 cm or positive lymph nodes after surgery, OR residual invasive disease after neoadjuvant chemotherapy; for HR+/HER2-, ≥4 pathologically involved lymph nodes after surgery, OR residual disease after neoadjuvant chemotherapy with clinical-pathologic stage + estrogen-receptor + grade (CPS+EG) score ≥3. Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-M 2, 3, and 5 of 10 (Category 1)."
+    "note": "Requires documented deleterious or suspected deleterious germline BRCA1 or BRCA2 pathogenic variant AND high-risk HER2-negative early breast cancer: for TNBC, primary tumor \u22652 cm or positive lymph nodes after surgery, OR residual invasive disease after neoadjuvant chemotherapy; for HR+/HER2-, \u22654 pathologically involved lymph nodes after surgery, OR residual disease after neoadjuvant chemotherapy with clinical-pathologic stage + estrogen-receptor + grade (CPS+EG) score \u22653. Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-M 2, 3, and 5 of 10 (Category 1)."
   },
   "stage": [
     "II",
@@ -46,8 +47,8 @@
     "Monitor for symptoms of severe fatigue, nausea, vomiting, or recurrent infections"
   ],
   "clearanceChecks": [
-    "CBC / hemoglobin (Hb ≥ 9.0 g/dL, ANC ≥ 1500/mcL, platelets ≥ 100,000/mcL)",
-    "renal function (estimated CrCl ≥ 30 mL/min; reduce dose if moderate renal impairment)",
+    "CBC / hemoglobin (Hb \u2265 9.0 g/dL, ANC \u2265 1500/mcL, platelets \u2265 100,000/mcL)",
+    "renal function (estimated CrCl \u2265 30 mL/min; reduce dose if moderate renal impairment)",
     "completion of adjuvant radiation therapy",
     "prior-cycle status"
   ],
@@ -65,10 +66,10 @@
       "text": "Reduce olaparib dose to 200 mg PO twice daily."
     },
     {
-      "condition": "severe non-hematologic toxicity (nausea/vomiting/fatigue grade ≥ 3)",
+      "condition": "severe non-hematologic toxicity (nausea/vomiting/fatigue grade \u2265 3)",
       "drug": "olaparib",
       "action": "hold/reduce",
-      "text": "Hold until resolution to grade ≤ 1; resume at 250 mg PO BID."
+      "text": "Hold until resolution to grade \u2264 1; resume at 250 mg PO BID."
     }
   ],
   "drugs": [
@@ -91,7 +92,34 @@
         "perDose": null
       },
       "days": [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
       ],
       "modificationRules": []
     }

@@ -119,6 +119,12 @@ async function recordDeath(request, env, ctx) {
   const now = str(ctx.now) || new Date().toISOString();
   const block = deceasedBlock(ctx.deceased || ctx, resolved.actor.id, now);
   if (block.error) return { ...base, ok: false, status: 422, error: block.error, detail: block.detail, written: 0 };
+  /* A medico-legal case carries onto the death record (registers.js "mlc"): the MLC number, so the death is not handled
+   * as an ordinary one. An unreadable register refuses rather than recording the death without the flag. */
+  if (typeof ctx.medicoLegalFor === "function") {
+    try { block.medicoLegal = (await ctx.medicoLegalFor(patientId)) || null; }
+    catch { return { ...base, ok: false, status: 502, error: "mlc_check_failed", detail: "The medico-legal register could not be checked, so the death was not recorded.", written: 0 }; }
+  }
 
   try {
     const next = { ...patient, deceased: block };

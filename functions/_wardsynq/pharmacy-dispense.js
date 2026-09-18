@@ -46,6 +46,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { witnessOrRefusal } from "./controlled-drugs.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "MedicationDispense";
@@ -76,11 +77,16 @@ function MedicationDispense(input) {
     expiry: i.expiry || null,
     state: STATES.includes(i.state) ? i.state : "issued",
     destination: i.destination || null,          // the ward it went to
+    /* A take-home supply given at discharge, said by the pharmacist. GST treats it apart from medicines used in the
+     * stay (functions/_region_in.js gstForLines). Absent on everything else. */
+    ...(i.takeHome === true ? { takeHome: true } : {}),
     // Whether a pharmacist had checked this exact version when it was issued. Stated, never assumed.
     verifiedVersion: Number.isFinite(i.verifiedVersion) ? i.verifiedVersion : null,
     unverified: !!i.unverified,
     dispensedBy: i.dispensedBy || null, dispensedAt: i.dispensedAt || null,
     returnedBy: i.returnedBy || null, returnedAt: i.returnedAt || null, returnReason: i.returnReason || null,
+    // A controlled drug's issue names its witness (controlled-drugs.js). Absent on everything else.
+    ...(i.controlled ? { controlled: true, witnessedBy: i.witnessedBy || null } : {}),
     source: { system: "wardsynq-native", sourceId: `dispense:${i.id}` },
   };
 }
@@ -179,9 +185,10 @@ function summary(d) {
   return {
     dispenseId: d.id, orderId: d.orderId, orderVersion: d.orderVersion,
     drug: d.drug || null, quantity: d.quantity || null, batch: d.batch || null, expiry: d.expiry || null, state: d.state,
-    destination: d.destination || null, unverified: !!d.unverified, verifiedVersion: d.verifiedVersion,
+    destination: d.destination || null, ...(d.takeHome ? { takeHome: true } : {}), unverified: !!d.unverified, verifiedVersion: d.verifiedVersion,
     dispensedBy: d.dispensedBy, dispensedAt: d.dispensedAt,
     returnedBy: d.returnedBy || null, returnedAt: d.returnedAt || null, returnReason: d.returnReason || null,
+    ...(d.controlled ? { controlled: true, witnessedBy: d.witnessedBy || null } : {}),
     version: d.version,
   };
 }
@@ -204,7 +211,12 @@ async function dispenseOrder(request, env, ctx) {
   let order, verifications;
   try {
     order = await svc.get("MedicationOrder", orderId);
-    verifications = order ? await svc.byPatient("MedicationVerification", order.patientId).catch(() => []) : [];
+    /* R6-1, 2026-09-18: this read used to carry `.catch(() => [])`. An unreadable verification list
+     * then reached verificationFor() as "none", which both recorded `unverified: true` on a supply
+     * that may well have been verified AND skipped the `superseded` refusal - the one check that
+     * stops stock going out against a prescription the pharmacist never saw at its current version.
+     * A read that failed is a refusal (the catch below), never a verification state. */
+    verifications = order ? await svc.byPatient("MedicationVerification", order.patientId) : [];
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!order) return { ...base, ok: false, status: 404, error: "order_not_found", orderId, written: 0 };
   // A stopped or draft prescription is not supplied. Only a live order gets stock issued against it.
@@ -224,6 +236,27 @@ async function dispenseOrder(request, env, ctx) {
     };
   }
 
+  /* A CONTROLLED DRUG LEAVES THE PHARMACY IN FRONT OF A SECOND PERSON (controlled-drugs.js). Whether it is controlled
+   * is the hospital's drug master (ctx.isControlled, from the route); who counts as a witness is the same check stock
+   * wastage uses, so the two cannot disagree. Asked only after the order is known to be live. */
+  let witnessedBy = null;
+  const controlled = typeof ctx.isControlled === "function" && ctx.isControlled(order.drug, order.drugCode) === true;
+  /* NDPS Rules r.52-O: with the Form 3G recognition expired and no renewal applied for, no controlled drug is dispensed. */
+  if (controlled && ctx.rmi && ctx.rmi.blocked && (typeof ctx.rmiApplies !== "function" || ctx.rmiApplies(order.drug, order.drugCode))) {
+    return { ...base, ok: false, status: 409, error: "rmi_recognition_expired", orderId, written: 0,
+      detail: "The hospital's NDPS recognition (Form 3G) has expired and no renewal application is recorded (NDPS Rules r.52-O). A controlled drug cannot be dispensed. Record the renewal application reference in Registers, Settings." };
+  }
+  /* Quarantined stock is not dispensed (legal review F.4.5; controlled-drugs.js quarantineRefusal, handed in by the route). */
+  if (controlled && typeof ctx.quarantineCheck === "function") {
+    const q = await ctx.quarantineCheck(order.drug, order.drugCode, ctx.batch);
+    if (q) return { ...base, ...q, orderId, written: 0 };
+  }
+  if (controlled) {
+    const w = await witnessOrRefusal(ctx, resolved.actor.id);
+    if (w.error) return { ...base, ...w.error, orderId, written: 0 };
+    witnessedBy = w.witnessId;
+  }
+
   const mine = (verifications || []).filter((v) => v && str(v.orderId) === orderId);
   const check = verificationFor(mine, order.version);
   if (check.state === "superseded") {
@@ -241,19 +274,23 @@ async function dispenseOrder(request, env, ctx) {
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
   let current;
+  /* This read is the only thing that stops the same supply being issued twice. Swallowing its
+   * failure to null said "no dispense exists" about a dispense nobody could look for (R6-1). */
   try { current = await svc.get(TYPE, id); }
-  catch { current = null; }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), orderId, written: 0,
+    message: "Whether this supply was already issued could not be read, so nothing was issued. Try again." }; }
   if (current) return { ...base, ok: true, written: 0, skipped: "already_dispensed", ...summary(current) };
 
   const record = MedicationDispense({
     id, patientId: order.patientId, encounterId: order.encounterId || null,
     orderId, orderVersion: order.version, drug: order.drug, drugCode: order.drugCode || null,
     quantity, batch: str(ctx.batch) || null, expiry: str(ctx.expiry) || null,
-    state: "issued", destination: str(ctx.destination) || null,
+    state: "issued", destination: str(ctx.destination) || null, takeHome: ctx.takeHome === true,
     verifiedVersion: check.state === "current" ? check.verifiedVersion : null,
     // Stated on the record rather than left to be inferred from an absent verification.
     unverified: check.state === "none",
     dispensedBy: resolved.actor.id, dispensedAt: at,
+    controlled, witnessedBy,
   });
 
   try {

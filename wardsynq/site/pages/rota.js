@@ -106,7 +106,11 @@
     var q = "?orgId=" + encodeURIComponent(org);
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.rota.heading", "Staff rota")) + '</h1></div>' +
       '<div class="card"><h2>' + c.esc(T(c, "site.rota.myShiftsCard", "My shifts")) + '</h2><div id="rotaMine"></div><div id="rotaMsg"></div></div>' +
+      /* Gap wave 2026-09-16: clock in and out, and the member's own attendance, credentials and training (pages/hr.js). */
+      (c.isWardsynq() && WSQ._hr ? '<div class="card"><h2>' + c.esc(T(c, "site.rota.myHrCard", "My attendance, credentials and training")) + '</h2><div id="rotaHr"></div></div>' : "") +
       '<div class="card"><h2>' + c.esc(T(c, "site.rota.onDutyNowCard", "On duty now")) + '</h2><div id="rotaDuty"></div></div>' +
+      /* P4 nursing-staffing: required against rostered and on duty, norms, draft roster, staff injuries (pages/staffing.js). */
+      (WSQ._staffing ? '<div id="rotaStaffing"></div>' : "") +
       (admin ? '<div class="card"><h2>' + c.esc(T(c, "site.rota.dutyByWardCard", "On and off duty by ward")) + '</h2><div id="rotaDutyWards"></div></div>' +
         '<div class="card"><h2>' + c.esc(T(c, "site.rota.shiftsCard", "Shifts")) + '</h2><div id="rotaShifts"></div>' +
         '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.rota.nameLabel", "Name")) + '</span><input id="rotaShName" placeholder="' + c.esc(T(c, "site.rota.dayPlaceholder", "Day")) + '"></label><label class="f"><span>' + c.esc(T(c, "site.rota.unitLabel", "Unit")) + '</span><input id="rotaShUnit" placeholder="' + c.esc(T(c, "site.rota.wardAPlaceholder", "Ward A")) + '"></label>' +
@@ -115,6 +119,7 @@
         '<button class="btn" type="button" data-rota="shift">' + c.esc(T(c, "site.rota.saveShift", "Save shift")) + "</button></div></div>" +
         '<div class="card"><h2>' + c.esc(T(c, "site.rota.assignCard", "Assign")) + '</h2><div class="row"><label class="f"><span>' + c.esc(T(c, "site.rota.staffIdLabel", "Staff ID")) + '</span><input id="rotaAsId"></label><label class="f"><span>' + c.esc(T(c, "site.rota.shiftLabel", "Shift")) + '</span><select id="rotaAsShift"></select></label>' +
         '<label class="f"><span>' + c.esc(T(c, "site.rota.firstDateLabel", "First date")) + '</span><input id="rotaAsDate" type="date"></label><label class="f"><span>' + c.esc(T(c, "site.rota.repeatWeeklyLabel", "Repeat weekly for (weeks)")) + '</span><input id="rotaAsWeeks" type="number" min="1" max="26" value="1"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.rota.inChargeLabel", "In charge of the shift (not counted in the nurse ratio)")) + '</span><input id="rotaAsLead" type="checkbox"></label>' +
         '<button class="btn" type="button" data-rota="assign">' + c.esc(T(c, "site.rota.assignButton", "Assign")) + "</button></div></div>" +
         '<div class="card"><h2>' + c.esc(T(c, "site.rota.coverageCard", "Coverage and gaps")) + '</h2><div class="row"><label class="f"><span>' + c.esc(T(c, "site.rota.fromLabel", "From")) + '</span><input id="rotaCvFrom" type="date"></label><label class="f"><span>' + c.esc(T(c, "site.rota.toLabel", "To")) + '</span><input id="rotaCvTo" type="date"></label>' +
         '<button class="btn quiet" type="button" data-rota="coverage">' + c.esc(T(c, "site.rota.showButton", "Show")) + '</button></div><div id="rotaCoverage">' + coverageHtml(c, null) + "</div></div>" +
@@ -126,6 +131,10 @@
 
     set("rotaMine", mineHtml(c, null));
     c.api("/roster/mine" + q).then(function (r) { set("rotaMine", mineHtml(c, r && r.ok ? r : { ok: false })); });
+    var hrEl = document.getElementById("rotaHr");
+    if (hrEl && WSQ._hr) WSQ._hr.selfCard(c, hrEl);
+    var staffEl = document.getElementById("rotaStaffing");
+    if (staffEl && WSQ._staffing) WSQ._staffing.mount(c, staffEl);
     set("rotaDuty", loading(c, T(c, "site.rota.whoOnDuty", "who is on duty")));
     c.api("/roster/on-duty" + q).then(function (r) { set("rotaDuty", dutyHtml(c, r || { ok: false })); });
     if (admin) {
@@ -142,13 +151,13 @@
     }
 
     el.onclick = function (ev) {
-      var b = ev.target.closest && ev.target.closest("[data-rota]"); if (!b) return;
+      var b = ev.target.closest && ev.target.closest("[data-rota]"); if (!b || (b.closest && b.closest("#rotaStaffing"))) return;
       var act = b.getAttribute("data-rota"), id = b.getAttribute("data-id");
       if (act === "leave") return c.api("/roster/leave-request", { orgId: org, from: val("rotaLvFrom"), to: val("rotaLvTo"), reason: val("rotaLvReason") }).then(after(T(c, "site.rota.leaveRequested", "Leave requested.")));
       if (act === "swap") { var to = ""; try { to = prompt(T(c, "site.rota.swapPrompt", "Staff ID of the colleague to offer this shift to:")) || ""; } catch (e) {} if (!to.trim()) return; return c.api("/roster/swap-propose", { orgId: org, assignmentId: id, to: to.trim() }).then(after(T(c, "site.rota.swapOffered", "Swap offered. Your colleague and the admin both need to agree."))); }
       if (act === "swapyes" || act === "swapno") return c.api("/roster/swap-respond", { orgId: org, swapId: id, accept: act === "swapyes" }).then(after(T(c, "site.rota.answered", "Answered.")));
       if (act === "shift") return c.api("/roster/shift", { orgId: org, name: val("rotaShName"), unit: val("rotaShUnit"), start: val("rotaShStart"), end: val("rotaShEnd"), minimum: { nurse: Number(val("rotaShNurse")) || 0, doctor: Number(val("rotaShDoctor")) || 0 } }).then(after(T(c, "site.rota.shiftSaved", "Shift saved.")));
-      if (act === "assign") return c.api("/roster/assign", { orgId: org, identity: val("rotaAsId"), shiftId: val("rotaAsShift"), date: val("rotaAsDate"), weeks: Number(val("rotaAsWeeks")) || 1 }).then(after(T(c, "site.rota.assigned", "Assigned.")));
+      if (act === "assign") return c.api("/roster/assign", { orgId: org, identity: val("rotaAsId"), shiftId: val("rotaAsShift"), date: val("rotaAsDate"), weeks: Number(val("rotaAsWeeks")) || 1, inCharge: !!(document.getElementById("rotaAsLead") || {}).checked }).then(after(T(c, "site.rota.assigned", "Assigned.")));
       if (act === "coverage") { set("rotaCoverage", loading(c, T(c, "site.rota.coveragePhrase", "coverage"))); return c.api("/roster/coverage" + q + "&from=" + encodeURIComponent(val("rotaCvFrom")) + "&to=" + encodeURIComponent(val("rotaCvTo"))).then(function (r) { set("rotaCoverage", coverageHtml(c, r || { ok: false })); }); }
       if (act === "unassign") { var why = ""; try { why = prompt(T(c, "site.rota.unassignPrompt", "Why is this person being removed from the shift?")) || ""; } catch (e) {} if (!why.trim()) return; return c.api("/roster/unassign", { orgId: org, assignmentId: id, reason: why.trim() }).then(after(T(c, "site.rota.removedFromShift", "Removed from the shift."))); }
       if (act === "lvyes" || act === "lvno") return c.api("/roster/leave-decide", { orgId: org, leaveId: id, approve: act === "lvyes" }).then(after(T(c, "site.rota.leaveDecided", "Leave decided.")));

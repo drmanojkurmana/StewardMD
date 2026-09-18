@@ -11,6 +11,7 @@
  * date asked for, so a hospital's growing history never truncates this year's books.
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { readAllOrThrow } from "./_fs_read_all.js";
 import { qAudit } from "./_queue_engine.js";
 import * as A from "../wardsynq/wardsynq-accounting.js";
 
@@ -20,8 +21,11 @@ const audit = (env, orgId, actor, action, meta) => qAudit(env, { hospitalId: org
 const fail = (e) => ({ ok: false, error: e.code || "accounting_error", message: e.message });
 const SCAN = 2000;
 
+/* The whole chart, every page (R4-3): the first 500 accounts used to be the chart, so an account past them read as
+ * unknown and postings to it were refused. Past CHART_CAP it throws rather than post against part of the chart. */
+export const CHART_CAP = 5000;
 async function chartOf(env, orgId) {
-  const r = await fsQuery(env, "q_acct_chart", { where: { field: "orgId", value: String(orgId) }, limit: 500 });
+  const r = await readAllOrThrow(env, "q_acct_chart", { field: "orgId", value: String(orgId) }, CHART_CAP, "chart_too_large");
   if (!r.length) return { chart: A.DEFAULT_CHART.map(A.account), defaulted: true };
   return { chart: r.map((x) => A.account(x.fields)), defaulted: false };
 }

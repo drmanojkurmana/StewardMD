@@ -1,0 +1,159 @@
+{
+  "site": "bone",
+  "name": "Primary bone sarcoma (osteosarcoma / Ewing)",
+  "system": "Oncology / Sarcoma",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Staging covers osteosarcoma and Ewing sarcoma of the appendicular skeleton, trunk, skull and facial bones (spine and pelvis use a separate 8th-edition scheme with compartment-based T). T is size-based with an 8 cm cutoff, and discontinuous skip metastases within the same bone are T3; multifocal (multicentric) disease is recorded separately. M splits pulmonary-only (M1a, better prognosis) from other distant sites (M1b). Histologic response to neoadjuvant chemotherapy (necrosis 90 percent or higher) is the dominant post-treatment prognostic factor.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour 8 cm or smaller in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour larger than 8 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Discontinuous tumours (skip metastases) in the primary bone site",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis (the usual case)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Regional lymph node metastasis (rare; worse prognosis)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1a",
+          "label": "Metastasis to lung only",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1b",
+          "label": "Metastasis to other distant sites (bone, liver, brain), with or without lung disease",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "IA",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Low grade (G1), small tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T2 or T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Low grade (G1), large or skip tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "High grade (G2/G3), small tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "High grade (G2/G3), large tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "High grade with skip metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "any T",
+          "n": "N0",
+          "m": "M1a",
+          "basis": "Lung-only metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "N1",
+          "m": "any M",
+          "basis": "Nodal disease, any metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1b",
+          "basis": "Non-pulmonary distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Bone sarcomas spread haematogenously; nodal basins follow the primary site but N1 is rare. Skip lesions within the same bone are T3 (not M1); a second lesion in a different bone is M1b.",
+      "histologicGrade": "Low grade (G1: parosteal osteosarcoma, clear-cell chondrosarcoma) vs high grade (G2/G3: conventional osteosarcoma, Ewing sarcoma, dedifferentiated/mesenchymal chondrosarcoma). Necrosis after neoadjuvant chemotherapy (Huvos grade; 90 percent or higher is good response) is reported separately.",
+      "histopathologicTypes": "Conventional (osteoblastic, chondroblastic, fibroblastic) osteosarcoma; telangiectatic, small-cell, parosteal, periosteal and high-grade surface osteosarcoma; Ewing sarcoma (EWSR1-rearranged); chondrosarcoma variants arising in bone.",
+      "prognosticFactors": [
+        "Histologic grade",
+        "Tumour size (8 cm cutoff)",
+        "Skip metastases (T3)",
+        "Pulmonary-only vs other metastasis (M1a vs M1b)",
+        "Chemotherapy necrosis response (90 percent cutoff)",
+        "Surgical margin status",
+        "LDH and alkaline phosphatase",
+        "EWSR1 fusion status (Ewing)"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

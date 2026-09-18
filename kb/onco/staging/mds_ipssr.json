@@ -1,0 +1,137 @@
+{
+  "site": "mds_ipssr",
+  "name": "MDS - IPSS-R Prognostic Staging",
+  "system": "Oncology / Haematologic (Clinical)",
+  "versions": [
+    {
+      "version": "IPSS-R (2012 / 2018)",
+      "seeded": true,
+      "provenance": "Revised International Prognostic Scoring System (IPSS-R) for Myelodysplastic Syndromes; licensed clinical reference.",
+      "introduction": "Myelodysplastic syndromes (MDS) do not use TNM staging. The Revised International Prognostic Scoring System (IPSS-R) is the universal clinical staging framework. It calculates an integer score based on 5 prognostic variables: cytogenetic risk category (Very Good, Good, Intermediate, Poor, Very Poor), bone marrow blast percentage, hemoglobin level, platelet count, and absolute neutrophil count (ANC).",
+      "t": [
+        {
+          "code": "Blasts <2%",
+          "label": "Bone marrow blasts <= 2%"
+        },
+        {
+          "code": "Blasts 2% to <5%",
+          "label": "Bone marrow blasts > 2% to < 5%"
+        },
+        {
+          "code": "Blasts 5% to 10%",
+          "label": "Bone marrow blasts 5% to 10%"
+        },
+        {
+          "code": "Blasts >10%",
+          "label": "Bone marrow blasts > 10% to 19% (>=20% defines AML)"
+        }
+      ],
+      "n": [
+        {
+          "code": "Cytogenetics Very Good",
+          "label": "-Y, del(11q)"
+        },
+        {
+          "code": "Cytogenetics Good",
+          "label": "Normal karyotype, del(5q), del(12p), del(20q), double abnormalities including del(5q)"
+        },
+        {
+          "code": "Cytogenetics Intermediate",
+          "label": "del(7q), +8, +19, i(17q), any other single or double independent abnormalities"
+        },
+        {
+          "code": "Cytogenetics Poor",
+          "label": "-7, inv(3)/t(3q)/del(3q), double abnormalities including -7/del(7q), complex (3 abnormalities)"
+        },
+        {
+          "code": "Cytogenetics Very Poor",
+          "label": "Complex (> 3 abnormalities)"
+        }
+      ],
+      "m": [
+        {
+          "code": "Hemoglobin >=10 g/dL",
+          "label": "Hemoglobin >= 10.0 g/dL"
+        },
+        {
+          "code": "Hemoglobin 8 to <10 g/dL",
+          "label": "Hemoglobin 8.0 to < 10.0 g/dL"
+        },
+        {
+          "code": "Hemoglobin <8 g/dL",
+          "label": "Hemoglobin < 8.0 g/dL"
+        },
+        {
+          "code": "Platelets >=100 x10^9/L",
+          "label": "Platelets >= 100 x 10^9/L"
+        },
+        {
+          "code": "Platelets 50 to <100",
+          "label": "Platelets 50 to < 100 x 10^9/L"
+        },
+        {
+          "code": "Platelets <50 x10^9/L",
+          "label": "Platelets < 50 x 10^9/L"
+        },
+        {
+          "code": "ANC >=0.8 x10^9/L",
+          "label": "Absolute neutrophil count >= 0.8 x 10^9/L"
+        },
+        {
+          "code": "ANC <0.8 x10^9/L",
+          "label": "Absolute neutrophil count < 0.8 x 10^9/L"
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "Very Low Risk (<=1.5)",
+          "t": "Blasts <=2%",
+          "n": "Cytogenetics Good/Very Good",
+          "m": "No severe cytopenias",
+          "basis": "Median survival 8.8 years; 25% AML transformation at >14 years. Supportive care, ESAs, Luspatercept for ring sideroblasts."
+        },
+        {
+          "stage": "Low Risk (>1.5 to 3.0)",
+          "t": "Blasts <5%",
+          "n": "Cytogenetics Good",
+          "m": "Single cytopenia",
+          "basis": "Median survival 5.3 years; 25% AML evolution at 10.8 years. Lenalidomide standard for del(5q); ESAs for low EPO."
+        },
+        {
+          "stage": "Intermediate Risk (>3.0 to 4.5)",
+          "t": "Blasts 2-5%",
+          "n": "Cytogenetics Intermediate",
+          "m": "Cytopenias",
+          "basis": "Median survival 3.0 years; 25% AML transformation at 3.2 years. High-risk treatment path if high-risk molecular mutations (TP53, ASXL1, RUNX1)."
+        },
+        {
+          "stage": "High Risk (>4.5 to 6.0)",
+          "t": "Blasts 5-10%",
+          "n": "Cytogenetics Poor",
+          "m": "Bicytopenia/Pancytopenia",
+          "basis": "Median survival 1.6 years; 25% AML transformation at 1.4 years. Hypomethylating agents (Azacitidine) and allogeneic stem cell transplant evaluation."
+        },
+        {
+          "stage": "Very High Risk (>6.0)",
+          "t": "Blasts >10%",
+          "n": "Cytogenetics Very Poor",
+          "m": "Severe Pancytopenia",
+          "basis": "Median survival 0.8 years; 25% AML evolution at 0.7 years. Immediate allogeneic stem cell transplantation evaluation or Azacitidine + clinical trials."
+        }
+      ],
+      "regionalNodes": "N/A for MDS. Evaluation focuses on bone marrow aspirate, core biopsy, and flow cytometry.",
+      "histologicGrade": "WHO 2022 / ICC classifications (MDS with low blasts, MDS with increased blasts MDS-IB1/IB2, MDS with bi-allelic TP53 inactivation, MDS with mutated SF3B1).",
+      "histopathologicTypes": "Myelodysplastic syndromes, MDS/MPN overlap syndromes (CMML, aCML).",
+      "prognosticFactors": [
+        "Molecular genetics by NGS (IPSS-M): TP53 multi-hit, ASXL1, RUNX1, EZH2, SRSF2, U2AF1 confer adverse prognosis; SF3B1 favorable",
+        "Serum ferritin and transfusion dependence burden",
+        "Bone marrow fibrosis (grade 2-3)",
+        "Age and performance status"
+      ]
+    },
+    {
+      "version": "IPSS 1997 (historical)",
+      "seeded": false
+    }
+  ]
+}

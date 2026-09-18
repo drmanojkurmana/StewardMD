@@ -3,9 +3,10 @@
 import { createCollector, PHASE_AGENT_READ } from '../discovery.mjs';
 import { guidedPrompt, REASSURANCE } from './onboard.mjs';
 import { explorePhone, probePhone } from './explore.mjs';
-import { deepCrawlClinical, captureView, enrichView, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
+import { deepCrawlClinical, captureView, enrichView, exploreDetailOf, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
 import { verifyViews } from './verify.mjs';
-import { createProofBook } from './prove.mjs';
+import { createProofBook, navToReplayEntries, INJECT_REPLAY_SRC } from './prove.mjs';
+import { PATIENT_KEY, VISIT_KEY } from './adapter-runtime.mjs';
 /* THE CLIENT THE CRAWL ACTUALLY NEEDS, re-exported from the one module the app imports.
  * connect-agent-onboarding.js calls engine.createPluginClient(); it lived only in plugin-client.mjs
  * and was never re-exported here, so that call returned undefined, the RAW Capacitor plugin was
@@ -15,6 +16,18 @@ export { createPluginClient } from './plugin-client.mjs';
 // NB: HTML operation inference (infer-html.mjs) runs SERVER-SIDE in the broker's discovery route, not
 // on the phone. The phone only crawls and sends the observed view STRUCTURE; the server infers the
 // adapter from it (same split as compile/validate). Keeping the manifest modules off the phone bundle.
+
+/* RE-ARM AFTER NAVIGATION (FIX A). GUIDE_SOURCES.arm/.armGuide (deep-crawl.mjs) are evaluated once per
+ * ask (askOne, below) and die with the document: a doctor who navigates during a guided ask silently
+ * loses tap-to-point and the green outline, with nothing telling them why. connect-agent-onboarding.js
+ * re-evaluates this on every native `navigated` event while an ask is on screen, best-effort. */
+export const GUIDE_ARM = GUIDE_SOURCES.arm + ';' + GUIDE_SOURCES.armGuide;
+/* THE TAP HANDLER ALONE. CRAWL_ARM_OBSERVER sets window.__smdProveMark, the floor prove.mjs uses to
+ * decide which requests belong to this action, so re-running the full arm THROWS AWAY every request the
+ * doctor has already made: they open the lab list, tap Done, and are told none of the requests returned
+ * the lab results (owner's iPhone, 2026-09-18). Only the click/point handler dies with the document, so
+ * only that is re-applied while a question is on screen. */
+export const GUIDE_ARM_TAP = GUIDE_SOURCES.armGuide;
 
 function browserOf(plugin) {
   if (plugin && plugin.platform === 'android') return 'phone-android';
@@ -42,7 +55,39 @@ const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[typ
 /* MANUAL MODE: the doctor drives, the agent reads over their shoulder. One ask per resource, in the
  * order a ward round reads a chart. Each ask has "Not in my EMR" in the browser header (the native
  * guideSkip event) so a hospital without, say, radiology never blocks the run. */
-export const ASK_ORDER = Object.freeze(['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history']);
+/* FEWEST TAPS TO A USABLE CONNECTION. Approval needs the ward list, labs and its report, radiology and
+ * its report, and the drug chart; patient details, notes, the discharge summary and visit history are
+ * worth having but the gate does not require them. Asking for patient details and notes first spent two
+ * of the doctor's taps before anything approvable existed (owner's live run, 2026-09-18). The required
+ * screens come first, so a doctor who stops early still ends up with an adapter that can be approved. */
+export const ASK_ORDER = Object.freeze(['worklist', 'labs', 'radiology', 'medications', 'patient', 'notes', 'discharge', 'history']);
+
+/* A SECOND LOOK MAY ONLY ADD. "Look again" used to assign the new walk's views straight over the old
+ * list, so a walk that came back with less silently destroyed the screens the doctor had just
+ * demonstrated - on GHIS a run with labs and radiology proven came back with both "absent", because
+ * neither is reachable by the walk alone (owner's iPhone, 2026-09-16). Keyed on resource + path so a
+ * genuinely better capture of the SAME view still replaces nothing and simply is not duplicated. */
+/* Same resource+path proven twice with different patient keys (GHIS ver_b27ed367, 2026-09-17): the
+ * crawl's Administration > Lab reports click proved OTLabPrintsSecretary/?id=undefined (a page-side JS
+ * bug -- paramsOf recorded the id as {constant:'undefined'}) while the doctor's own guided walk proved
+ * the same path with id traced to the worklist row. Keying merge on resource+path alone kept whichever
+ * arrived first, which on that run was the crawl's wrong constant-id view -- every patient's labs read
+ * would have replayed id=undefined. A view whose data call's patient/visit key is traced to a row now
+ * beats one whose key is {constant}/{empty}/{unmapped}; when neither or both are traced, first still wins. */
+const tracedPatientKey = (v) => (Array.isArray(v && v.endpoints) ? v.endpoints : []).some((e) => e && e.role === 'data' && e.params &&
+  Object.keys(e.params).some((k) => (PATIENT_KEY.test(k) || VISIT_KEY.test(k)) && e.params[k] && e.params[k].from));
+export function mergeObservedViews(existing, incoming) {
+  const keyOf = (v) => String((v && (v.resourceHint || v.resource)) || '') + '|' + String((v && v.pathTemplate) || '');
+  const merged = Array.isArray(existing) ? existing.slice() : [];
+  const indexOf = new Map(merged.map((v, i) => [keyOf(v), i]));
+  for (const v of (Array.isArray(incoming) ? incoming : [])) {
+    const k = keyOf(v);
+    if (!indexOf.has(k)) { indexOf.set(k, merged.length); merged.push(v); continue; }
+    const i = indexOf.get(k);
+    if (!tracedPatientKey(merged[i]) && tracedPatientKey(v)) merged[i] = v;
+  }
+  return merged;
+}
 /* MANUAL MODE: the doctor drives using the universal 6-tap script (onboard.mjs: the six steps
  * plus the three follow-up screens). One plain sentence per ask, each ending with the reassurance
  * that the AI learns the layout automatically. The sentences themselves live in onboard.mjs so
@@ -75,7 +120,7 @@ export const ASK_PROMPTS = Object.freeze({
  * next }`: async advisors answering from screen STRUCTURE only (see functions/_connect/agent/brain.js);
  * any of them may reject or return null and the deterministic rules stand.
  */
-export async function runPhoneDiscovery({ plugin, api, session, deployment, startUrl, onProgress, askDoctor, stopSignal, caps, mode = 'auto', brain = null, compact = false } = {}) {
+export async function runPhoneDiscovery({ plugin, api, session, deployment, startUrl, onProgress, askDoctor, stopSignal, finishSignal, skipSignal, redoSignal, caps, mode = 'auto', brain = null, compact = false } = {}) {
   if (!plugin) throw new Error('runPhoneDiscovery requires a plugin client');
   if (!api || typeof api.plan !== 'function' || typeof api.discovery !== 'function' || typeof api.evidence !== 'function') {
     throw new Error('runPhoneDiscovery requires api.plan, api.discovery and api.evidence');
@@ -99,7 +144,20 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   } catch { /* no current URL: fall back to the typed address */ }
 
   const notify = (phase, extra = {}) => { try { onProgress?.({ phase, mode, ...extra }); } catch { /* never let UI feedback break discovery */ } };
-  const stopped = () => typeof stopSignal === 'function' && !!stopSignal();
+  /* SAVE WHAT YOU HAVE. A run that stalls late (a verify call that never returns) used to leave the
+   * doctor a frozen bar and one button that THREW THE WHOLE CRAWL AWAY, so a run that had already
+   * learned the EMR looked identical to one that had failed (owner, iPhone, 2026-09-15). `finishSignal`
+   * is the doctor saying "stop looking, keep what you found": every stop check below honours it, so the
+   * crawl, the verification and the guided asks all break out and the run falls THROUGH to the
+   * discovery/evidence save with whatever was learned. Distinct from `stopSignal`, which is the
+   * destructive Stop and tears the session down. */
+  const finishing = () => typeof finishSignal === 'function' && !!finishSignal();
+  const stopped = () => (typeof stopSignal === 'function' && !!stopSignal()) || finishing();
+  /* The doctor's two mid-run controls, as counts rather than flags so one tap means one step:
+   * `skipAt` abandons the step being worked on, `redoAt` asks for another walk of the hospital. */
+  const skipAt = () => (typeof skipSignal === 'function' ? Number(skipSignal()) || 0 : 0);
+  const redoAt = () => (typeof redoSignal === 'function' ? Number(redoSignal()) || 0 : 0);
+  let redoMark = redoAt();
   /* `compact` (auto mode with the game on screen): the hospital browser takes the top half only while
    * the agent drives, so the sheet's progress and game stay visible; a guided ask is always full size. */
   const setMode = async (m, banner) => { if (typeof plugin.setMode === 'function') await plugin.setMode({ mode: m, banner, origins, compact: !!compact && m === 'agent' }).catch(() => {}); };
@@ -165,6 +223,20 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
       if (!answer || !answer.done) break;
       let guidedPath = [];
       try { guidedPath = JSON.parse((await plugin.evaluate({ expression: GUIDE_SOURCES.guidePath }))?.result || '[]'); } catch { guidedPath = []; }
+      /* DRAIN -> REPLAY ENTRIES -> INJECT, BEFORE captureView. captureView (deep-crawl.mjs) itself calls
+       * plugin.drainRequests() to build view.endpoints, which DRAINS AND CLEARS the same native request
+       * log this block reads. Doing this after captureView (as it used to) meant a doctor's page-load
+       * navigation (GHIS radiology: GET /Radio/Home?recordNo=... is a document load, not XHR) was
+       * already gone from the log, so `nav` was always empty and INJECT_REPLAY_SRC was never even
+       * evaluated. Same order deep-crawl.mjs's exploreDetailOf already uses. Found 2026-09-17. */
+      if (typeof plugin.drainRequests === 'function') {
+        try {
+          const drained = await plugin.drainRequests();
+          let pageOrigin = null; try { const cur = await plugin.currentUrl(); pageOrigin = new URL(typeof cur === 'string' ? cur : cur && cur.url).origin; } catch { pageOrigin = null; }
+          const nav = navToReplayEntries(drained, { pageOrigin, allowedOrigins: origins });
+          if (nav.length) await plugin.evaluate({ expression: '(' + INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+        } catch { /* best effort */ }
+      }
       let view = null;
       try { view = await captureView({ client: plugin, resourceHint: gap, blockOnly: gap === 'patient' }); } catch { view = null; }
       if (!view || !view.rowsSelector) {
@@ -175,11 +247,31 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
         prompt = 'I could not read a table on that screen. Open the ' + GAP_NAMES[gap] + ' for a patient, tap inside the list so it turns green, then tap Done.';
         continue;
       }
+      /* AN EMPTY LIST IS THE RIGHT SCREEN FOR THE WRONG PATIENT. A table with no data rows (buildTableView:
+       * singleRecord) proves nothing, and the old re-ask ("none of the requests returned the radiology
+       * reports") read as a wrong screen when the doctor had opened the right one for a patient who has
+       * none yet (live GHIS, 2026-09-17). Say so and ask for a patient who has some; no proof is spent. */
+      if (view.singleRecord && !view.block) {
+        await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
+        prompt = 'This patient has no ' + GAP_NAMES[gap] + ' yet. Open the ' + GAP_NAMES[gap] + ' of a patient who has some, tap inside the list so it turns green, then tap Done.';
+        continue;
+      }
       view.guided = true;
       if (Array.isArray(guidedPath) && guidedPath.length) view.guidedPath = guidedPath.slice(0, 20).map((s) => String(s).slice(0, 120));
       const verdict = await enrichView(view, brain, { ask: gap, keepHint: true });
       await book.prove({ client: plugin, view, label: 'the doctor showed the ' + gap + ' screen' });
+      /* ONE LEVEL DEEPER ON WHAT THE DOCTOR SHOWED. The crawl opens a row of every list it finds, but a
+       * screen that only arrived because the doctor demonstrated it never got that treatment, so its
+       * detail call stayed unknown and the completeness gate reported "<kind>-detail: absent" forever.
+       * GHIS radiology is the case that forces this: its module is not linked from the patient chart,
+       * so the crawl can never see it and the ask is the ONLY way radiology-detail can be learned. */
       await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
+      if (view.proof && view.proof.status === 'proven') {
+        try {
+          const deeper = await exploreDetailOf({ client: plugin, view, book, origins, waitMs: caps?.verifyWaitMs ?? 1200 });
+          if (deeper) { observedViews.push(deeper); notify('CAPTURED', { gap: gap + '-detail', step, total, found, looking: looking() }); }
+        } catch { /* the list itself still counts; a detail we could not open is not a failed ask */ }
+      }
       if (verdict && verdict.resource && verdict.resource !== 'none' && verdict.resource !== gap && Number(verdict.confidence) >= 0.8) {
         warnings.push('the ' + gap + ' screen looks like ' + verdict.resource + ' to the model');
       }
@@ -204,7 +296,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     // The touch overlay is armed ONLY while the agent clicks autonomously (here and in the crawl), never
     // while waiting for the doctor.
     await setMode('agent');
-    explored = await explorePhone({ client: plugin, collector, planner, startUrl: url, caps, stopSignal });
+    explored = await explorePhone({ client: plugin, collector, planner, startUrl: url, caps, stopSignal: stopped });
     notify('EXPLORED', { steps: explored.steps.length, events: collector.raw().length });
   }
 
@@ -221,7 +313,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     // yields no html ops.
     try {
       const crawl = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain, book,
+        client: plugin, caps: Object.assign({ exploreDetails: true, origins }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = crawl.observedViews || [];
@@ -238,9 +330,34 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   let verification = { patients: [], checks: [], failed: [] };
   const runVerification = async () => {
     if (!observedViews.length || crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell') return;
+    /* The doctor asked to keep what was found: skip proving it rather than sit in a verify call that
+     * is not returning. The views are still saved; they are saved UNPROVEN, and say so. */
+    if (finishing()) { warnings.push('saved at your request before every screen was double-checked'); return; }
     notify('VERIFYING', { found, looking: looking(), checking: 'worklist' });
     try {
-      verification = await verifyViews({ plugin, origin: origins[0], views: observedViews, brain, book, stopped, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) });
+      /* VERIFICATION MAY NEVER COST THE RUN. Proving endpoints is worth doing and worth abandoning:
+       * on a real hospital one slow screen (GHIS medications) never came back, and because the save
+       * happens AFTER this, nothing was ever written - every job of 2026-09-15 ended with phone_state
+       * 0 bytes and no adapter. verifyViews records each view's result on the view as it goes, so
+       * whatever finished inside the budget is kept; the rest stay unproven and are read from their
+       * page. Abandoning the wait does not cancel the in-flight call, and does not need to: the run
+       * moves on to write the adapter. */
+      /* 150s proved far too tight on a real hospital: GHIS has nine resources to check and the cap fired
+       * before a single endpoint was proven, so the run saved an adapter that could read nothing
+       * (owner's iPhone, 2026-09-15). The cap exists to stop a hang, not to rush the proving. */
+      const budgetMs = caps?.verifyBudgetMs ?? 420000;
+      let timer = null;
+      const budget = new Promise((resolve) => { timer = setTimeout(() => resolve('__timeout__'), budgetMs); });
+      const outcome = await Promise.race([
+        verifyViews({ plugin, origin: origins[0], views: observedViews, brain, book, stopped, skipAt, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) }),
+        budget,
+      ]);
+      if (timer) clearTimeout(timer);
+      if (outcome === '__timeout__') {
+        warnings.push('checking the endpoints took too long, so what was not checked will be read from its page');
+        return;
+      }
+      verification = outcome;
     } catch (e) {
       if (e && e.name === 'NotSignedIn') { crawlStop = 'login-required'; warnings.push(e.message); return; }
       warnings.push('verification could not run: ' + String((e && e.message) || e).slice(0, 120));
@@ -260,7 +377,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     await setMode('agent');
     try {
       const again = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain, book,
+        client: plugin, caps: Object.assign({ exploreDetails: true, origins }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = again.observedViews || [];
@@ -276,7 +393,9 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   if (typeof askDoctor === 'function' && crawlStop !== 'login-required' && crawlStop !== 'session-expired-or-shell') {
     const unproven = verification.failed.filter((r) => r !== 'worklist' || !verification.patients.length);
     // What the agent found but could not prove comes first: the doctor's tap there is worth most.
-    const gaps = manual ? ASK_ORDER.slice() : [...new Set([...unproven, ...looking()])].slice(0, MAX_ASKS + unproven.length);
+    const askRank = (g) => { const i = ASK_ORDER.indexOf(g); return i < 0 ? ASK_ORDER.length : i; };
+    const gaps = manual ? ASK_ORDER.slice()
+      : [...new Set([...unproven, ...looking()])].sort((a, b) => askRank(a) - askRank(b)).slice(0, MAX_ASKS + unproven.length);
     const prompts = manual ? ASK_PROMPTS : GAP_PROMPTS;
     for (let i = 0; i < gaps.length; i += 1) {
       if (stopped()) break;
@@ -287,12 +406,54 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   // What the doctor showed (or manual mode captured) is proven the same way, once.
   if (manual || asked.length) await runVerification();
 
+  /* LOOK AGAIN. The doctor can send the agent back over the hospital when the first walk missed
+   * something (a tab that needed a moment, a screen they have since opened). Bounded to two extra
+   * walks so a stuck finger cannot loop the run, and anything already found survives a walk that
+   * comes back with less. */
+  for (let redos = 0; redos < 2 && !manual && redoAt() > redoMark && !stopped(); redos += 1) {
+    redoMark = redoAt();
+    await setMode('agent');
+    try {
+      const again = await deepCrawlClinical({
+        client: plugin, caps: Object.assign({ exploreDetails: true, origins }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
+        onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
+      });
+      /* MERGE, NEVER REPLACE. "Look again" used to overwrite observedViews with whatever the new walk
+       * returned, which threw away every screen the DOCTOR had just demonstrated in the guided asks:
+       * on GHIS a run that had labs + radiology proven came back with both "absent" because the walk
+       * cannot reach them on its own (owner's iPhone, 2026-09-16). A second look may only ADD. */
+      if (Array.isArray(again.observedViews) && again.observedViews.length) {
+        observedViews = mergeObservedViews(observedViews, again.observedViews);
+        found = [...new Set([...(found || []), ...(again.found || [])])];
+        crawlStop = again.stopReason;
+      }
+    } catch { break; }
+    await runVerification();
+  }
+
   // Nothing discovered is a failure with its reason, never an "adapter created".
   if (!observedViews.length) {
     await collector.detach().catch(() => {});
     throw new Error('nothing was discovered (' + (crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell' ? 'the browser was not on the EMR after sign-in' : (crawlStop || 'no clinical screen found')) + ')');
   }
-  const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews });
+  /* SCRUB THE HUMAN-READABLE REASON BEFORE IT LEAVES THE PHONE. verify.mjs writes sentences like
+   * "127 rows through the page"; the server's PHI gate rejects any verified.reason with a 3+ digit run
+   * or an @ (it cannot tell a row count from a patient id), so a ward list of 100+ patients failed the
+   * whole save with "verified reason invalid" (owner, iPhone GHIS, 2026-09-15). The count is not lost:
+   * the server keeps it as the integer `rows`. Digits -> #, any address -> [email]. */
+  const scrubReason = (r) => typeof r === 'string' ? r.replace(/\S+@\S+/g, '[email]').replace(/\d{3,}/g, '#').slice(0, 200) : r;
+  for (const v of observedViews) { if (v && v.verified && typeof v.verified.reason === 'string') v.verified.reason = scrubReason(v.verified.reason); }
+  /* THE SERVER REFUSES MORE THAN 40 VIEWS OUTRIGHT (cleanObservedViews, functions/api/connect/agent),
+   * and mergeObservedViews only ever ADDS ("look again" may not delete a demonstrated view), so a long
+   * run with several redo walks can grow past that cap. api.discovery is not wrapped in a try below, so
+   * an unhandled throw there loses the ENTIRE run. Trim to 40 first: proven views are worth the most,
+   * so they are kept ahead of everything else, and each group otherwise keeps its original order. */
+  if (observedViews.length > 40) {
+    const proven = observedViews.filter((v) => v && v.proof && v.proof.status === 'proven');
+    const rest = observedViews.filter((v) => !(v && v.proof && v.proof.status === 'proven'));
+    observedViews = proven.concat(rest).slice(0, 40);
+  }
+  const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews, proofs: book.trace });
   notify('COMPILING', { steps: explored.steps.length, events: collector.raw().length, found });
 
   const probeList = Array.isArray(discoveryResult?.probes) ? discoveryResult.probes : [];

@@ -1,0 +1,86 @@
+{
+  "id": "rectal-dostarlimab",
+  "diseaseId": "rectal",
+  "name": "Dostarlimab Monotherapy (dMMR/MSI-H Locally Advanced Rectal)",
+  "version": "1.0",
+  "lifecycleState": "active",
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 9,
+  "caps": "none",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Rectal Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS Landmark Regimen: Cercek et al. NEJM 2022 (dMMR/MSI-H non-operative cCR)",
+    "approval": null
+  },
+  "biomarkers": {
+    "MMR": "dMMR",
+    "MSI": "MSI-H"
+  },
+  "stage": [
+    "II",
+    "III"
+  ],
+  "treatmentSetting": [
+    "definitive",
+    "neoadjuvant"
+  ],
+  "histology": "rectal adenocarcinoma (dMMR/MSI-H)",
+  "premedications": [
+    {
+      "name": "Acetaminophen",
+      "dose": "650 mg PO",
+      "notes": "Optional prior to infusion"
+    },
+    {
+      "name": "Diphenhydramine",
+      "dose": "25-50 mg IV/PO",
+      "notes": "Optional prior to infusion"
+    }
+  ],
+  "supportiveCare": [
+    "Immune-related adverse events (irAE) monitoring: thyroid panel q6-12w, pituitary, hepatic, renal, pulmonary (pneumonitis), colon (colitis).",
+    "Routine surveillance: MRI pelvis, endoscopy, and ctDNA every 3-4 months during watch-and-wait period upon cCR."
+  ],
+  "monitoring": [
+    "CBC, CMP, TSH/free T4 before each cycle",
+    "Clinical assessment for diarrhea/colitis, rash, cough/shortness of breath"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "Grade 2 immune-mediated pneumonitis, colitis, or hepatitis",
+      "action": "withhold",
+      "text": "Withhold dostarlimab until resolution to Grade 0-1. Administer systemic corticosteroids (prednisone 1-2 mg/kg/day or equivalent) tapered over at least 1 month."
+    },
+    {
+      "condition": "Grade 3-4 immune-mediated toxicity",
+      "action": "discontinue",
+      "text": "Permanently discontinue dostarlimab for Grade 4 toxicities or recurrent Grade 3 irAEs (except well-managed endocrinopathies on replacement hormone)."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "dostarlimab",
+      "name": "Dostarlimab-gxly",
+      "basis": "flat",
+      "dosePerUnit": 500,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Dostarlimab 500 mg IV over 30 minutes every 21 days for 9 cycles (total duration 6 months). For locally advanced stage II/III dMMR/MSI-H rectal cancer; landmark Cercek et al. NEJM trial demonstrated 100% clinical complete response allowing organ preservation without radiation or surgery."
+    }
+  ]
+}

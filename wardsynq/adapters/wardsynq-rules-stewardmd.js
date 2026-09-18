@@ -85,6 +85,16 @@ const DOSE_LIMITS_SEED = Object.freeze({
 });
 
 /**
+ * Pregnancy and lactation guidance, per generic: { pregnancy?: {level, text}, lactation?: {level, text} }, level
+ * one of the engine's SEVERITY values (wardsynq-safety.js checkPregnancyLactation). SHIPPED EMPTY ON PURPOSE:
+ * no guidance is written here without a pharmacy and obstetric source, and an empty table is an honest "no
+ * rules loaded" (the order screen says so) where a guessed one would not be.
+ *
+ * UNAPPROVED. Each entry added here is listed on Admin > Clinical seed data (seed-signoff.js) for sign-off.
+ */
+const PREGNANCY_LACTATION_SEED = Object.freeze({});
+
+/**
  * Builds a compiled WardSynQ rule pack from StewardMD's data files.
  *
  * @param {{interactionRulesPath?: string, allergySeedPath?: string, doseLimits?: object,
@@ -152,6 +162,7 @@ function buildRulePack(raw, allergySeed, opts) {
     crossReactivity: allergySeed.crossReactivity || [],
     doseLimits: opts.doseLimits || (includeSeeds ? DOSE_LIMITS_SEED : {}),
     renalAdjustments: opts.renalAdjustments || {},
+    pregnancyLactation: opts.pregnancyLactation || (includeSeeds ? PREGNANCY_LACTATION_SEED : {}),
   });
 }
 
@@ -408,4 +419,4 @@ function mapInteractionRule(rule) {
   };
 }
 
-export { loadStewardMDRulePack, buildRulePack, mapInteractionRule, buildFirstWordAliases, buildBrandAliases, DOSE_LIMITS_SEED, SEVERITY_MAP };
+export { loadStewardMDRulePack, buildRulePack, mapInteractionRule, buildFirstWordAliases, buildBrandAliases, DOSE_LIMITS_SEED, PREGNANCY_LACTATION_SEED, SEVERITY_MAP };

@@ -1,0 +1,665 @@
+{
+  "guideline": "bcell",
+  "title": "B-Cell Lymphomas",
+  "subtitle": "Follicular, Mantle Cell, Marginal Zone, Burkitt, and Large B-Cell Pathways",
+  "navigatorVersion": "3.0.0",
+  "diseaseId": "bcell_lymphoma",
+  "matchDisease": false,
+  "status": "draft",
+  "provenanceNote": "Clinical algorithms extracted from NCCN Guidelines Version 4.2026 for B-Cell Lymphomas.",
+  "sourceNote": "NCCN Guidelines Version 4.2026 - B-Cell Lymphomas (BCEL-1, FOLL-1, MANT-1, MZL-1, BURK-1)",
+  "startNodeIds": [
+    "n_bcell_entry"
+  ],
+  "footnotes": {
+    "fn_hbv": "Hepatitis B screening (HBsAg and anti-HBc) is mandatory prior to initiating anti-CD20 monoclonal antibody therapy.",
+    "fn_mcl_tp53": "TP53 mutation status is mandatory in MCL prior to induction to identify patients requiring chemo-free BTKi regimens."
+  },
+  "nodes": [
+    {
+      "id": "n_bcell_entry",
+      "linkId": "bcell_entry",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical Presentation",
+      "title": "B-Cell Lymphomas: Clinical Presentation & Diagnostic Suspicion",
+      "section": "Diagnosis",
+      "description": "Patients presenting with persistent painless lymphadenopathy, splenomegaly, extranodal mass lesions, or systemic B-symptoms.",
+      "path": "B-Cell / Presentation",
+      "pills": [
+        "lymphoma",
+        "B-cell",
+        "lymphadenopathy",
+        "B-symptoms"
+      ],
+      "required": true,
+      "bullets": [
+        "Clinical presentation: painless, rubbery peripheral lymphadenopathy (cervical, axillary, inguinal), mediastinal or retroperitoneal mass, splenomegaly, or extranodal involvement (GI tract, skin, thyroid, bone).",
+        "B-Symptoms: Unexplained fever >38\u00b0C, drenching night sweats, or unexplained weight loss >10% of body weight over 6 months."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Suspicion of lymphoma - Proceed to mandatory diagnostic workup",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_bcell_workup",
+      "linkId": "bcell_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic Workup",
+      "title": "B-Cell Lymphomas: Biopsy, Pathology, Imaging, and Pre-Treatment Checklist",
+      "section": "Workup",
+      "description": "Excisional lymph node biopsy, comprehensive IHC/FISH panel, whole-body FDG-PET/CT staging, and HBV screening.",
+      "path": "B-Cell / Workup",
+      "pills": [
+        "workup",
+        "excisional-biopsy",
+        "PET-CT",
+        "IHC",
+        "FISH",
+        "HBV"
+      ],
+      "required": true,
+      "bullets": [
+        "Excisional or Incisional Biopsy (Preferred): Complete lymph node excision is strongly recommended to evaluate tissue architecture; core needle biopsy is acceptable ONLY when lymph nodes are inaccessible for surgical excision. Fine needle aspiration (FNA) alone is INADEQUATE for initial diagnosis.",
+        "Comprehensive Immunohistochemistry (IHC) Panel: CD20, CD3, CD5, CD10, BCL2, BCL6, Cyclin D1, SOX11, Ki-67, MYC, IRF4/MUM1. Flow cytometric immunophenotyping to demonstrate light chain restriction (kappa/lambda).",
+        "Molecular Cytogenetics & FISH: FISH for IGH::BCL2 t(14;18) (follicular), CCND1::IGH t(11;14) (mantle cell), MYC rearrangement (Burkitt / double-hit), and BCL6 rearrangement.",
+        "Staging Imaging: Whole-body FDG-PET/CT (skull base to mid-thigh) is the gold standard for staging FDG-avid lymphomas (Lugano classification) and selecting post-treatment response (Deauville 5-point scale). Diagnostic CT neck/chest/abdomen/pelvis with IV contrast.",
+        "Laboratory Workup: CBC with differential, CMP (renal function, electrolytes, LFTs, uric acid), baseline serum LDH (critical prognostic biomarker), and beta-2 microglobulin.",
+        "Mandatory Hepatitis B Screening: HBsAg and anti-HBc total antibody testing mandatory prior to any anti-CD20 therapy (Rituximab, Obinutuzumab); prophylactic antiviral therapy (Entecavir) mandatory if positive to prevent fatal hepatic reactivation.",
+        "Infectious disease screening: Hepatitis C antibody, HIV-1/2 serology.",
+        "Cardiac Assessment: Transthoracic echocardiogram or MUGA scan to document baseline LVEF prior to anthracycline (doxorubicin) chemotherapy.",
+        "Pregnancy test and fertility counseling in patients of reproductive age prior to cytotoxic therapy."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup completed - Classify histologic subtype",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_bcell_subtypes",
+      "linkId": "bcell_subtypes",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Histologic Subtype",
+      "title": "B-Cell Lymphomas: Major Histopathologic Subtypes",
+      "section": "Subtype & Risk",
+      "description": "Select confirmed diagnosis per 2022 WHO / ICC lymphoma classification.",
+      "path": "B-Cell / Subtype",
+      "pills": [
+        "FL",
+        "MCL",
+        "MZL",
+        "Burkitt",
+        "DLBCL"
+      ],
+      "required": true,
+      "bullets": [
+        "Follicular Lymphoma (FL): Indolent germinal center B-cell lymphoma; grades 1, 2, 3A termed classic FL (cFL).",
+        "Mantle Cell Lymphoma (MCL): Cyclin D1+ / t(11;14)+ / SOX11+; aggressive clinical course.",
+        "Marginal Zone Lymphoma (MZL): Extranodal MALT, Nodal MZL, or Splenic MZL.",
+        "Burkitt Lymphoma (BL): Highly aggressive, starry sky morphology, MYC translocation, Ki-67 ~100%.",
+        "Diffuse Large B-Cell Lymphoma (DLBCL) / High-Grade B-Cell (HGBL): Most common aggressive lymphoma."
+      ],
+      "options": [
+        {
+          "id": "sub_fl",
+          "label": "Follicular Lymphoma (FL / Classic FL Grades 1\u20133A)",
+          "sets": {
+            "subtype": "fl"
+          },
+          "pills": [
+            "Follicular"
+          ]
+        },
+        {
+          "id": "sub_mcl",
+          "label": "Mantle Cell Lymphoma (MCL)",
+          "sets": {
+            "subtype": "mcl"
+          },
+          "pills": [
+            "Mantle Cell"
+          ]
+        },
+        {
+          "id": "sub_mzl",
+          "label": "Marginal Zone Lymphoma (MZL: MALT / Nodal / Splenic)",
+          "sets": {
+            "subtype": "mzl"
+          },
+          "pills": [
+            "Marginal Zone"
+          ]
+        },
+        {
+          "id": "sub_burkitt",
+          "label": "Burkitt Lymphoma",
+          "sets": {
+            "subtype": "burkitt"
+          },
+          "pills": [
+            "Burkitt"
+          ]
+        },
+        {
+          "id": "sub_dlbcl",
+          "label": "Diffuse Large B-Cell (DLBCL) / High-Grade B-Cell (HGBL)",
+          "sets": {
+            "subtype": "dlbcl"
+          },
+          "pills": [
+            "DLBCL/HGBL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_bcell_fl_stage",
+      "linkId": "bcell_fl_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "FL Stage & Burden",
+      "title": "Follicular Lymphoma: Stage & GELF Tumor Burden",
+      "section": "Subtype & Risk",
+      "description": "Distinguish early localized disease from advanced stage or high tumor burden (GELF criteria).",
+      "path": "B-Cell / Follicular / Stage",
+      "pills": [
+        "FL",
+        "stage",
+        "GELF"
+      ],
+      "required": true,
+      "bullets": [
+        "Early Stage (Stage I or contiguous Stage II): Confined to a single radiation port without systemic symptoms.",
+        "Advanced Stage (Stage III\u2013IV or non-contiguous Stage II): Evaluate GELF tumor burden criteria (bulky mass >=7 cm, >=3 nodal sites each >=3 cm, symptomatic splenomegaly, organ compression, pleural effusion/ascites, cytopenias)."
+      ],
+      "options": [
+        {
+          "id": "fl_early",
+          "label": "Stage I or Contiguous Stage II (Non-bulky, Localized)",
+          "sets": {
+            "fl_burden": "early"
+          },
+          "pills": [
+            "Stage I-II"
+          ]
+        },
+        {
+          "id": "fl_adv_low",
+          "label": "Advanced Stage (Stage III\u2013IV), Low Tumor Burden (GELF Negative)",
+          "sets": {
+            "fl_burden": "adv_low"
+          },
+          "pills": [
+            "Stage III-IV",
+            "Low Burden"
+          ]
+        },
+        {
+          "id": "fl_adv_high",
+          "label": "Advanced Stage (Stage III\u2013IV), High Tumor Burden (GELF Positive / Symptomatic)",
+          "sets": {
+            "fl_burden": "adv_high"
+          },
+          "pills": [
+            "Stage III-IV",
+            "High Burden"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_bcell_fl_early_tx",
+      "linkId": "bcell_fl_early_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Early FL Treatment",
+      "title": "Stage I\u2013II Follicular Lymphoma: Definitive Radiation or Observation",
+      "section": "Primary Treatment",
+      "description": "Curative-intent local radiation therapy or active surveillance for localized disease.",
+      "path": "B-Cell / Follicular / Early Tx",
+      "pills": [
+        "FL",
+        "ISRT",
+        "radiation",
+        "curative"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Involved-Site Radiation Therapy (ISRT, Preferred): 24\u201330 Gy to involved nodal region; delivers >90% local control and long-term disease-free survival in localized Stage I FL.",
+        "Observation / Active Surveillance: Acceptable in asymptomatic patients when ISRT would entail significant morbidity.",
+        "Systemic Immunochemotherapy +/- ISRT: Option for bulky Stage II disease (e.g. Bendamustine + Rituximab).",
+        "Surveillance: Clinical exam and labs every 3\u20136 months for 5 years, then annually."
+      ]
+    },
+    {
+      "id": "n_bcell_fl_low_tx",
+      "linkId": "bcell_fl_low_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Low-Burden FL Watch & Wait",
+      "title": "Advanced Low-Burden FL: Active Surveillance (Watch and Wait)",
+      "section": "Primary Treatment",
+      "description": "Evidence-based deferred therapy for asymptomatic patients without GELF criteria.",
+      "path": "B-Cell / Follicular / Low Burden Tx",
+      "pills": [
+        "FL",
+        "watch-and-wait",
+        "observation",
+        "rituximab"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Watchful Waiting / Active Surveillance (Preferred): Deferring treatment until GELF criteria or symptoms develop does NOT compromise overall survival and avoids chemotherapy toxicity.",
+        "Single-Agent Rituximab (Optional): Rituximab 375 mg/m2 weekly x 4 doses; can be considered for patients with disease-related anxiety or wishing to avoid chemo.",
+        "Follow-up: Physical examination, CBC, CMP, and LDH every 3\u20136 months; cross-sectional imaging only if clinical symptoms or exam suggests progression."
+      ]
+    },
+    {
+      "id": "n_bcell_fl_high_tx",
+      "linkId": "bcell_fl_high_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "High-Burden FL Frontline",
+      "title": "Advanced High-Burden FL: Frontline Chemoimmunotherapy & Maintenance",
+      "section": "Primary Treatment",
+      "description": "Frontline regimens for symptomatic, bulky, or GELF-positive follicular lymphoma.",
+      "path": "B-Cell / Follicular / High Burden Tx",
+      "pills": [
+        "FL",
+        "BR",
+        "R-CHOP",
+        "R2",
+        "obinutuzumab"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "rchop"
+      ],
+      "bullets": [
+        "Preferred First-Line Regimens:",
+        "\u2022 Bendamustine + Rituximab (BR): Bendamustine 90 mg/m2 IV days 1 & 2 + Rituximab 375 mg/m2 day 1 q28d x 6 cycles. Superior PFS and less alopecia/neuropathy than R-CHOP (StiL trial).",
+        "\u2022 Bendamustine + Obinutuzumab (G-Bendamustine): Demonstrated superior PFS in GALLIUM trial; requires close infection prophylaxis.",
+        "\u2022 Lenalidomide + Rituximab (R2): Chemo-free oral doublet; Lenalidomide 20 mg PO days 1-21 + Rituximab weekly x 4 in cycle 1 then q4w (RELEVANCE trial).",
+        "\u2022 R-CHOP (rchop): Rituximab + Cyclophosphamide, Doxorubicin, Vincristine, Prednisone x 6 cycles (favored if suspicion of histologic transformation to large cell).",
+        "Maintenance Therapy: In patients responding to induction, Rituximab maintenance (375 mg/m2 every 8-12 weeks for 2 years) prolongs progression-free survival (PRIMA trial).",
+        "Infection Prophylaxis: VZV prophylaxis (acyclovir) and PJP prophylaxis (Bactrim) mandatory during and for 6 months after bendamustine."
+      ]
+    },
+    {
+      "id": "n_bcell_mcl_tp53",
+      "linkId": "bcell_mcl_tp53",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MCL TP53 Mutation Status",
+      "title": "Mantle Cell Lymphoma: TP53 Mutation & Fitness Stratification",
+      "section": "Subtype & Risk",
+      "description": "Mandatory testing for TP53 mutation or deletion, which predicts chemoresistance and guides targeted frontline therapy.",
+      "path": "B-Cell / MCL / TP53",
+      "pills": [
+        "MCL",
+        "TP53",
+        "BTKi",
+        "ASCT"
+      ],
+      "required": true,
+      "bullets": [
+        "TP53 Mutated (or 17p deleted): Chemoresistant biology with poor outcomes after standard cytarabine/ASCT regimens; chemotherapy-free BTK inhibitor combinations preferred.",
+        "TP53 Wild-Type: Standard intensive cytarabine/ASCT or non-intensive chemoimmunotherapy based on patient age and performance status."
+      ],
+      "options": [
+        {
+          "id": "mcl_tp53_mut",
+          "label": "TP53 Mutated / Del(17p) Positive MCL",
+          "sets": {
+            "tp53": "mutated"
+          },
+          "pills": [
+            "TP53 Mutated"
+          ]
+        },
+        {
+          "id": "mcl_fit",
+          "label": "TP53 Wild-Type: Fit for Intensive Therapy (Age <65, Good Performance)",
+          "sets": {
+            "tp53": "wt",
+            "fitness": "fit"
+          },
+          "pills": [
+            "TP53 WT",
+            "Fit/<65"
+          ]
+        },
+        {
+          "id": "mcl_unfit",
+          "label": "TP53 Wild-Type: Unfit / Older Adults (Age >=65 or Comorbidities)",
+          "sets": {
+            "tp53": "wt",
+            "fitness": "unfit"
+          },
+          "pills": [
+            "TP53 WT",
+            "Unfit/>=65"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_bcell_mcl_tp53_tx",
+      "linkId": "bcell_mcl_tp53_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "TP53-Mutated MCL Frontline",
+      "title": "TP53-Mutated MCL: Targeted Chemotherapy-Free Regimens",
+      "section": "Primary Treatment",
+      "description": "Non-chemotherapy BTK inhibitor combinations for TP53-aberrant mantle cell lymphoma.",
+      "path": "B-Cell / MCL / TP53 Mutated Tx",
+      "pills": [
+        "MCL",
+        "TP53",
+        "zanubrutinib",
+        "acalabrutinib",
+        "venetoclax"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Chemo-free Triplet (BOVen / Preferred): Zanubrutinib (or Acalabrutinib) + Venetoclax + Obinutuzumab (or Rituximab); produces high rates of undetectable MRD in frontline TP53-mutated MCL.",
+        "BTK Inhibitor + Venetoclax: Ibrutinib or Zanubrutinib combined with Venetoclax.",
+        "Avoid standard cytotoxic ASCT: Conventional high-dose chemotherapy + autologous HCT fails to achieve durable remission in TP53-mutated MCL.",
+        "Allogeneic HCT Consideration: Consider allogeneic stem cell transplantation in eligible patients achieving remission with targeted therapy.",
+        "Enrollment in clinical trials strongly encouraged."
+      ]
+    },
+    {
+      "id": "n_bcell_mcl_fit_tx",
+      "linkId": "bcell_mcl_fit_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MCL Fit Intensive Frontline",
+      "title": "Fit TP53-WT MCL: Cytarabine Induction, ASCT Consolidation & Rituximab Maintenance",
+      "section": "Primary Treatment",
+      "description": "Standard intensive curative-intent strategy for young, fit mantle cell lymphoma patients.",
+      "path": "B-Cell / MCL / Fit Tx",
+      "pills": [
+        "MCL",
+        "cytarabine",
+        "ASCT",
+        "maintenance",
+        "rituximab"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "dlbcl-beam"
+      ],
+      "bullets": [
+        "High-Dose Cytarabine-Containing Induction (Preferred):",
+        "\u2022 Alternating R-CHOP / R-DHAP (LyMa trial / European MCL Network): 3 cycles R-CHOP alternating with 3 cycles R-DHAP (high-dose cytarabine).",
+        "\u2022 Nordic MCL2 Regimen: Dose-intensified R-CHOP alternating with high-dose cytarabine.",
+        "\u2022 Hyper-CVAD + Rituximab: Alternating with high-dose methotrexate and cytarabine.",
+        "Consolidative Autologous Stem Cell Transplant (ASCT): High-dose BEAM (dlbcl-beam) conditioning with autologous rescue in first complete remission (CR1).",
+        "Post-ASCT Maintenance: Rituximab 375 mg/m2 IV every 8 weeks for 3 years (significantly prolongs event-free and overall survival per LyMa trial).",
+        "Addition of BTK inhibitor: Incorporation of Zanubrutinib/Acalabrutinib into induction/maintenance per emerging TRIANGLE trial data."
+      ]
+    },
+    {
+      "id": "n_bcell_mcl_unfit_tx",
+      "linkId": "bcell_mcl_unfit_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MCL Unfit Frontline",
+      "title": "Unfit / Older TP53-WT MCL: Less Intensive Chemoimmunotherapy & BTKi",
+      "section": "Primary Treatment",
+      "description": "Dose-tolerable chemoimmunotherapy followed by maintenance for older adults.",
+      "path": "B-Cell / MCL / Unfit Tx",
+      "pills": [
+        "MCL",
+        "BR",
+        "bortezomib",
+        "maintenance",
+        "elderly"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Preferred First-Line Regimens:",
+        "\u2022 Bendamustine + Rituximab (BR): Bendamustine 90 mg/m2 days 1 & 2 + Rituximab 375 mg/m2 day 1 q28d x 6 cycles.",
+        "\u2022 VR-CAP: Bortezomib, Rituximab, Cyclophosphamide, Doxorubicin, Prednisone (substituting vincristine with bortezomib; LyMa/E1411 standard).",
+        "\u2022 R-mini-CHOP: Attenuated dose for frail patients aged >80 years.",
+        "Maintenance Therapy: Rituximab maintenance (375 mg/m2 every 8-12 weeks for 2 years) or until progression.",
+        "Second-Line / Relapse: Covalent BTK inhibitors (Zanubrutinib, Acalabrutinib), non-covalent BTKi (Pirtobrutinib), or CAR T-cell therapy (Brexucabtagene autoleucel)."
+      ]
+    },
+    {
+      "id": "n_bcell_mzl_tx",
+      "linkId": "bcell_mzl_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Marginal Zone Therapy",
+      "title": "Marginal Zone Lymphoma (MZL): MALT, Splenic, and Nodal Management",
+      "section": "Primary Treatment",
+      "description": "Etiology-directed treatment (H. pylori eradication) and systemic immunotherapy for MZL.",
+      "path": "B-Cell / MZL / Therapy",
+      "pills": [
+        "MZL",
+        "MALT",
+        "H-pylori",
+        "rituximab",
+        "BR"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Gastric MALT Lymphoma: Mandatory Helicobacter pylori testing (biopsy, breath test, stool antigen); first-line treatment is antibiotic eradication therapy. Re-endoscopy at 3 months; if persistent MALT and H. pylori-negative, administer ISRT (24\u201330 Gy).",
+        "Nongastric Extranodal MALT: Local ISRT (24 Gy) produces high cure rates; reserve systemic therapy for disseminated disease.",
+        "Splenic MZL: Test for Hepatitis C virus (HCV treatment can induce lymphoma remission); for symptomatic splenomegaly/cytopenias, Rituximab monotherapy (375 mg/m2 weekly x 4) or splenectomy.",
+        "Systemic / Disseminated MZL: Managed similar to follicular lymphoma: Bendamustine + Rituximab (BR), single-agent Rituximab, or Lenalidomide + Rituximab (R2)."
+      ]
+    },
+    {
+      "id": "n_bcell_burkitt_tx",
+      "linkId": "bcell_burkitt_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Burkitt Lymphoma Regimens",
+      "title": "Burkitt Lymphoma: Intensive Chemoimmunotherapy & CNS Prophylaxis",
+      "section": "Primary Treatment",
+      "description": "High-intensity multiagent protocols curative for Burkitt lymphoma.",
+      "path": "B-Cell / Burkitt / Treatment",
+      "pills": [
+        "Burkitt",
+        "DA-EPOCH-R",
+        "CODOX-M",
+        "Hyper-CVAD",
+        "CNS"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "dlbcl-da-epoch-r"
+      ],
+      "bullets": [
+        "Mandatory Emergency TLS Prophylaxis: Aggressive IV hydration, Rasburicase (recombinant urate oxidase), and inpatient telemetry prior to starting therapy.",
+        "Preferred First-Line Regimens:",
+        "\u2022 Dose-Adjusted EPOCH + Rituximab (dlbcl-da-epoch-r): Etoposide, prednisone, vincristine, cyclophosphamide, doxorubicin + rituximab; highly effective with lower treatment-related mortality in both adults and elderly (NCI protocol).",
+        "\u2022 CODOX-M / IVAC + Rituximab: Cyclophosphamide, vincristine, doxorubicin, high-dose methotrexate alternating with ifosfamide, etoposide, high-dose cytarabine.",
+        "\u2022 Hyper-CVAD + Rituximab: Fractionated cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with methotrexate and cytarabine.",
+        "CNS Prophylaxis (Mandatory): Systemic high-dose methotrexate/cytarabine combined with intrathecal methotrexate or triple IT therapy (methotrexate, cytarabine, corticosteroid).",
+        "Avoid standard R-CHOP: R-CHOP is INADEQUATE for Burkitt lymphoma and results in unacceptably high relapse rates."
+      ]
+    },
+    {
+      "id": "n_bcell_dlbcl_tx",
+      "linkId": "bcell_dlbcl_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "DLBCL / HGBL Management",
+      "title": "Diffuse Large B-Cell & High-Grade B-Cell Lymphomas: Frontline & Novel Regimens",
+      "section": "Primary Treatment",
+      "description": "Curative-intent frontline chemoimmunotherapy and targeted bispecifics / CAR-T.",
+      "path": "B-Cell / DLBCL / Treatment",
+      "pills": [
+        "DLBCL",
+        "Pola-R-CHP",
+        "R-CHOP",
+        "CAR-T",
+        "bispecifics"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "dlbcl-pola-r-chp",
+        "rchop",
+        "dlbcl-epcoritamab",
+        "dlbcl-glofitamab"
+      ],
+      "bullets": [
+        "Preferred First-Line Regimens:",
+        "\u2022 Pola-R-CHP (dlbcl-pola-r-chp): Polatuzumab vedotin (CD79b ADC) + Rituximab, Cyclophosphamide, Doxorubicin, Prednisone x 6 cycles; Category 1 preferred for IPI >=2 (POLARIX trial).",
+        "\u2022 R-CHOP (rchop): Category 1 standard for IPI 0-1 or low-risk disease.",
+        "High-Grade B-Cell Lymphoma with MYC and BCL2/BCL6 (Double-Hit / Triple-Hit):",
+        "\u2022 Dose-Adjusted EPOCH-R (dlbcl-da-epoch-r) is preferred over R-CHOP.",
+        "Relapsed / Refractory Disease (<12 months or refractory):",
+        "\u2022 CD19 CAR T-Cell Therapy: Axicabtagene ciloleucel or Lisocabtagene maraleucel (Category 1 preferred over salvage chemo/ASCT per ZUMA-7 and TRANSFORM trials).",
+        "\u2022 CD20xCD3 Bispecific Antibodies: Epcoritamab (dlbcl-epcoritamab) or Glofitamab (dlbcl-glofitamab) for >=2 prior lines.",
+        "\u2022 Tafasitamab + Lenalidomide (dlbcl-tafa-len) or Loncastuximab tesirine (dlbcl-loncastuximab)."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_bcell_entry_to_workup",
+      "from": "n_bcell_entry",
+      "to": "n_bcell_workup",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_bcell_workup_to_subtypes",
+      "from": "n_bcell_workup",
+      "to": "n_bcell_subtypes",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_bcell_sub_to_fl",
+      "from": "n_bcell_subtypes",
+      "to": "n_bcell_fl_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sub_fl"
+      ]
+    },
+    {
+      "id": "l_bcell_sub_to_mcl",
+      "from": "n_bcell_subtypes",
+      "to": "n_bcell_mcl_tp53",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sub_mcl"
+      ]
+    },
+    {
+      "id": "l_bcell_sub_to_mzl",
+      "from": "n_bcell_subtypes",
+      "to": "n_bcell_mzl_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sub_mzl"
+      ]
+    },
+    {
+      "id": "l_bcell_sub_to_burkitt",
+      "from": "n_bcell_subtypes",
+      "to": "n_bcell_burkitt_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sub_burkitt"
+      ]
+    },
+    {
+      "id": "l_bcell_sub_to_dlbcl",
+      "from": "n_bcell_subtypes",
+      "to": "n_bcell_dlbcl_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sub_dlbcl"
+      ]
+    },
+    {
+      "id": "l_bcell_fl_to_early",
+      "from": "n_bcell_fl_stage",
+      "to": "n_bcell_fl_early_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "fl_early"
+      ]
+    },
+    {
+      "id": "l_bcell_fl_to_low",
+      "from": "n_bcell_fl_stage",
+      "to": "n_bcell_fl_low_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "fl_adv_low"
+      ]
+    },
+    {
+      "id": "l_bcell_fl_to_high",
+      "from": "n_bcell_fl_stage",
+      "to": "n_bcell_fl_high_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "fl_adv_high"
+      ]
+    },
+    {
+      "id": "l_bcell_mcl_to_tp53mut",
+      "from": "n_bcell_mcl_tp53",
+      "to": "n_bcell_mcl_tp53_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mcl_tp53_mut"
+      ]
+    },
+    {
+      "id": "l_bcell_mcl_to_fit",
+      "from": "n_bcell_mcl_tp53",
+      "to": "n_bcell_mcl_fit_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mcl_fit"
+      ]
+    },
+    {
+      "id": "l_bcell_mcl_to_unfit",
+      "from": "n_bcell_mcl_tp53",
+      "to": "n_bcell_mcl_unfit_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mcl_unfit"
+      ]
+    }
+  ]
+}

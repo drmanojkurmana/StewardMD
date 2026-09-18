@@ -118,7 +118,9 @@ function encounterStatusFor(ticketStatus) {
 /** PURE. Epoch-ms (this codebase's `now()` convention) or an ISO string, to ISO. `null` if neither. */
 function toIso(v) {
   if (v == null || v === "") return null;
-  if (typeof v === "number" && Number.isFinite(v) && v > 0) return new Date(v).toISOString();
+  /* The queue writes 0 for a time not yet reached. A number that is not a positive epoch is no time at all; before
+   * 2026-09-17 a 0 fell through to Date.parse("0"), which reads as the year 2000. */
+  if (typeof v === "number") return Number.isFinite(v) && v > 0 ? new Date(v).toISOString() : null;
   const parsed = Date.parse(String(v));
   return Number.isNaN(parsed) ? null : new Date(parsed).toISOString();
 }
@@ -149,6 +151,10 @@ function encounterFromTicket(input) {
   });
   enc.location = { facilityId: input.tenantId || null, ward: ticket.department || null, bed: ticket.roomId || null };
   enc.attendingId = input.attendingId || null;
+  /* P3 theatre-opd-access (2026-09-17): when the consultant's consultation began, as the ticket recorded it (the move
+   * into in_consultation), so the OPD waiting time survives the ticket's expiry. periodStart is the arrival. A ticket sent
+   * back to the waiting hall drops its consult start, and so does this; a close keeps the last one recorded. */
+  enc.consultStartAt = toIso(ticket.consultStartAt);
   return enc;
 }
 
@@ -158,6 +164,8 @@ function sameEncounter(a, b) {
   return a.status === b.status && a.patientId === b.patientId
     && (a.periodEnd || null) === (b.periodEnd || null)
     && (a.attendingId || null) === (b.attendingId || null)
+    // An encounter written before consultStartAt existed is not "changed" by the field appearing.
+    && (a.consultStartAt === undefined || (a.consultStartAt || null) === (b.consultStartAt || null))
     && JSON.stringify(a.location || null) === JSON.stringify(b.location || null)
     && JSON.stringify(a.identifiers || []) === JSON.stringify(b.identifiers || []);
 }

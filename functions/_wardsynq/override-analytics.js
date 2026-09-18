@@ -296,8 +296,9 @@ async function overrideReport(request, env, ctx) {
   try {
     const pid = str(ctx.patientId);
     [rows, firings] = await Promise.all([
-      pid ? svc.byPatient(TYPE, pid) : svc.list(TYPE, 500),
-      pid ? svc.byPatient(FIRING_TYPE, pid) : svc.list(FIRING_TYPE, 500),
+      // R4-2: a rate over every override and firing (listAll, paged; was the oldest 500), refused past 50,000.
+      pid ? svc.byPatient(TYPE, pid) : svc.listAll(TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows),
+      pid ? svc.byPatient(FIRING_TYPE, pid) : svc.listAll(FIRING_TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows),
     ]);
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), report: null }; }
 
