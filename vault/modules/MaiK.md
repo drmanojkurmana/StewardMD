@@ -14,12 +14,18 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   DECORATES `window.SMD_AI` rather than branching in home.js. Pref `stewardmd.maikEngine`, default `cloud`
 - `maik-models.js` / `maik-local.js` — on-device model packs (resumable Range download) + llama.cpp
   inference via `local-plugins/capacitor-llama` (mainline llama.cpp b10502 xcframework). See
-  `docs/MAIK_OFFLINE_RUNBOOK.md`. Eight packs (2026-09-03): `maik-lite` (our fine-tune, default),
-  `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers, `maik-apex`,
-  `bonsai-27b`. ONLY MaiK Lite reads the on-device book (`kb/ai/maik-lite-rag.js` BM25 + evidence
-  gate, `kb/ai/maik-lite-kb-store.js` 38 MB asset; `maik-local.js` `ragEligible`); every other pack,
-  Bonsai included, answers ungrounded from its own weights (owner, 2026-09-03). Grounded answers
-  cite only "StewardMD Knowledge Base - based on standard medical resources", never a page.
+  `docs/MAIK_OFFLINE_RUNBOOK.md`. Nine packs (2026-09-18): `maik-lite` (our fine-tune, default),
+  `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers, `medmo-4b`
+  (**MAiK Cortex**, text-only), `maik-apex`, `bonsai-27b`. EVERY text pack reads the on-device book
+  (`kb/ai/maik-lite-rag.js` BM25 retrieval, `kb/ai/maik-lite-kb-store.js` 38 MB asset): `ragEligible`
+  in `maik-local.js` is capability-based and reads `CAPS[pack].kb` (changed 2026-09-18 from
+  Lite-only). The whole-answer wording gate was replaced for these packs by claim-level grounding
+  (`kb/ai/maik-grounding.js`): each factual claim is verified against the retrieved passages and an
+  unsupported one is removed or qualified, never the whole answer. Grounded answers cite only
+  "StewardMD Knowledge Base - based on standard medical resources", never a page.
+- `kb/ai/drug-dose.js` (`window.SMD_DOSE`) — dose questions are answered from the drug database
+  (`window.MEDAPI`), short-circuited in `maik-engine.js route()` before the engine choice, so no
+  model supplies a dose figure on any engine. Fails open to the normal grounded answer.
 - **Offline stand-in** (`maik-engine.js` `effective()`, 2026-09-03): pref `cloud` + `navigator.onLine`
   false + a ready local pack → the on-device model answers. Flag `smd_maik_offline_local` ("0" off).
 - **What the engine routes** (2026-09-04): explain, explainGrounded, explainGroundedStream, refine,

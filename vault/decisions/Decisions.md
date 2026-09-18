@@ -5,6 +5,117 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-18 · A dose question is a database lookup, not a model question
+
+**Owner:** "tell me dose of ondansetron … we already have the drug database it can redirect … dose of
+parecetmal it should understand correct spelling" — and, on the drug source: "check drug database
+medapi, all drugs in the world are there."
+
+**Decision.** `kb/ai/drug-dose.js` (`window.SMD_DOSE`) intercepts dose-intent questions in
+`maik-engine.js route()` — BEFORE the engine choice, so cloud and on-device behave identically — and
+answers from `window.MEDAPI`: `searchCompositions` / `searchBrands` resolve the molecule, `structured`
+supplies the figures (`gold.dosage` rows, else `adult_dose` / `ped_dose` / `renal_adjust` /
+`hepatic_adjust` / `pregnancy`). **No model is in the loop for the numbers**, so a dose cannot be
+invented. The adult answer also carries the renal and hepatic lines, because a dose question is
+rarely only about the adult dose.
+
+**Spelling.** The full-text search finds nothing for "parecetmal", so the router re-searches on the
+first 4 then 3 letters — a typo is almost never in them — and fuzzy-matches inside that short
+candidate list with the existing `DrugFuzzy` (Scan-Meds'), widened to distance 3 for a TYPED name.
+A corrected or brand-resolved name is always STATED back ("You typed …", "Pantocid is Pantoprazole"),
+never silently substituted.
+
+**Trade-off / status.** Fails OPEN at every step: no dose intent, no confident molecule, or no dose
+text in the record returns null and the normal grounded answer runs. Online only — the offline drug DB
+carries brands and compositions, not the structured label — so offline the KB-grounded model answers
+as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `test/maik-engine.test.mjs`
+(4, including "the on-device model is never asked for the number"), and the real-browser
+`test/run-maik-dose.mjs` (9 checks against the shipped bundle).
+
+## 2026-09-18 · MedMO-4B ships as MAiK Cortex, RAG-connected like every other text pack
+
+**Decision.** The `medmo-4b` pack is labelled **MAiK Cortex** in the offline model list; `actual`
+keeps the honest provenance (MedMO-4B, MBZUAI, Qwen3-VL-4B base, Q4_K_M). Its `CAPS.kb` is true, which
+is exactly what the capability-based `maik-local.ragEligible()` reads, so every Cortex answer goes
+through retrieval and the claim-level grounding verifier (`kb/ai/maik-grounding.js`) — unsupported
+statements are removed or qualified, never the whole answer, and the evidence gate is untouched.
+
+**Trade-off / status.** The pack id stays `medmo-4b` so existing downloads and prefs keep working;
+only the visible label changed. Still UNVERIFIED on device: a qwen3vl-architecture GGUF loading
+text-only in the plugin's llama.cpp has not been run on a phone, and the per-model grounding battery
+(`bench/rag-grounding/run.mjs --live`) has not been run for it. Pinned in `test/maik-models.test.mjs`.
+
+## 2026-09-18 · On-device MaiK: conversation continuity by default (three live failures)
+
+**Owner:** "I can't treat every question as a new question." Live: "FUO" then "tell me the exact
+definition" got "what definition?"; "treatment of hypertension" then "tell me doses" gave doses for
+drugs the model had not named; a correction ("wrong, it's nitrofurantoin") started a new conversation.
+
+**Root causes, in order of weight:** (1) home.js attaches history as `{q, a}` pairs (`_maikTurns`,
+the cloud's shape) but `maik-local.js buildPrompt()` read `{role, text}`, so every turn rendered as an
+empty "Doctor:" line: the model never saw a previous turn, whatever the follow-up detector said.
+(2) `isFollowUp()` only knew a short aspect word list, so "exact definition" and any correction that
+named a drug were treated as new subjects. (3) The previous answer was clipped to 180 characters, which
+lost the drug list a "tell me doses" refers to. (4) Retrieval used only the current question, so a
+follow-up had no topic anchor, grounded nothing, and the answer came from the model's weights.
+
+**Fixes (maik-local.js, tests in test/maik-continuity.test.mjs):** `histTurns()` reads both shapes.
+`continues(q, hist)` makes continuity the default: a question starts fresh only when it names a NEW
+subject (a content word that is not filler, aspect, or a reference to the previous turn, and appears
+nowhere in the previous exchange); a correction always continues. The fever -> "Polycystic Kidney
+Disease" topic-bleed regression that made history opt-in stays fixed and pinned. `carry()` keeps the
+previous answer's opening line and its bullet/figure lines (the drug list) up to 700 chars, dropping
+citations and footer lines. `ragQuestion()` retrieves on the previous question plus the follow-up, so
+"tell me doses" is grounded on the hypertension passages and checked claim by claim. Prefill cost of
+the carried answer is accepted: continuity was the ask.
+
+## 2026-09-18 · On-device RAG for every text pack; the whole-answer gate replaced by claim-level grounding
+
+**Decision (owner):** RAG eligibility is a CAPABILITY (`maik-models.js CAPS[id].kb`, read by
+`maik-local.js ragEligible()`), not the `packId === "maik-lite"` allow-list, and every text pack now
+has `kb: true`, including the new text-only `medmo-4b` (MBZUAI MedMO-4B Q4_K_M, 2,716,064,480 bytes,
+no vision projector published). This deliberately supersedes the 2026-09-03 reversal that made Bonsai
+ungrounded: that reversal was a reaction to the GATE, not to grounding itself.
+
+**Why the old gate lost half of a larger model's answers:** `evidenceGate` (kept in
+`kb/ai/maik-lite-rag.js` for `webAnswer` and as the fallback when the new module is absent) failed
+the WHOLE answer when any number or drug-suffixed token was not literally in the passages: "1 g" for
+"1000 mg", "twice daily", "7-10 days", an alternative named in passing. Paraphrase was punished as
+hallucination.
+
+**What replaced it:** `kb/ai/maik-grounding.js` (`window.SMD_MAIK_GROUND`, ES5, deterministic, no
+dependencies). The answer is split into claims; each claim is verified on FACTS: numbers are
+unit-normalised (mass to mg, frequency/route words to one token so bd == twice daily == every 12
+hours), a drug+dose pair must co-occur in ONE passage (a dose from passage A on a drug from passage B
+is not support), a different dose for that drug in the evidence is a CONTRADICTION (removed, never
+qualified), prose claims need concept overlap with a passage (stemmed, UK/US, abbreviations expanded
+through the retrieval module's own table), never phrase overlap. Figures from the clinician's own
+question stay allowed, as before. Outcomes per claim: supported (with [n] provenance to the passage),
+clinician, unsupported (left out; or under "Not in the StewardMD Knowledge Base (general model
+knowledge, unverified):" only when `localStorage smd_maik_general_knowledge=1`, off by default),
+contradicted (left out), meta (verify line etc., kept, never cited). If NOTHING is supported the
+model gets ONE regeneration constrained to the reference material (`_regen`), and only then does the
+reference passage stand in for the answer. The gate was not weakened: nothing the passages do not
+support is ever shown as Knowledge-Base-backed, and a count of left-out statements is printed.
+
+**Measured** (`test/maik-grounding-verifier.test.mjs`, `bench/rag-grounding/run.mjs`, 31 gold-labelled
+claims across supported paraphrase, unsupported, partial, multi-source, conflicting passages,
+numerical/dosage, terminology): valid grounded claims accepted 100%, false rejection 0%, unsupported
+blocked 100%, precision 1.0, recall 1.0; every contradicted dose classed as contradicted, not merely
+unsupported. The two paraphrases the old gate rejected are accepted by name in the suite.
+
+**NOT measured yet:** per-model behaviour on real answers (MaiK Lite, MedMO-4B, MedGemma, Bonsai).
+`bench/rag-grounding/run.mjs --live` asks each installed pack on the connected phone and records the
+answers; `--answers <file>` replays a recording. No phone was attached when this shipped, so the
+per-model table is empty until someone runs it. Per-model "false rejection" additionally needs a
+clinician to gold-label each free-form answer; the battery prints what was removed for that review
+rather than guessing. `medmo-4b` loading text-only (qwen3vl GGUF, no mmproj) in the plugin's
+llama.cpp is also unverified on device.
+
+**Trade-off accepted:** concept-overlap support (COV_MIN 0.5 of a claim's stemmed content tokens in one
+passage) is a heuristic; it errs toward leaving a correct prose sentence out, never toward keeping an
+unsupported dose in. Tune COV_MIN from the live battery, not from intuition.
+
 ## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
 
 **Decision:** `recommendFor()` now recommends Private Device OCR - relabeled "Hybrid" in the UI whenever

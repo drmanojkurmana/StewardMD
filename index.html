@@ -2138,6 +2138,9 @@ window.openExternal = function (u) {
 <script src="/drugs.js?v=gold978-sheet1-universal3" defer></script>
 <!-- lazy loaded: interaction-rules -->
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
+<!-- Dose router: a "dose of X" question is answered from the drug database (MEDAPI), never by a
+     model. Loads before maik-engine.js, which short-circuits to it; falls open to the normal answer. -->
+<script defer src="/kb/ai/drug-dose.js?v=dose1"></script>
 <!-- ONE image/PDF compressor for every vision path (Scan-Meds, ICU snapshot, ABG, SknX, PDF reports).
      Vision tokens scale with pixel DIMENSIONS, not file bytes, so the long-edge cap is the token lever and
      JPEG quality is only a bytes lever. pdfParts() reads a PDF's text layer instead of OCR-ing a rasterised
@@ -2176,18 +2179,21 @@ window.openExternal = function (u) {
 <!-- MaiK Answer Engine chooser (KB only · Cloud · On-device). DECORATES window.SMD_AI, so it must
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
-<script src="/maik-engine.js?v=hardlocal3" defer></script>
+<script src="/maik-engine.js?v=hardlocal3-dose1" defer></script>
 <!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
-<script src="/maik-models.js?v=hardlocal3" defer></script>
+<script src="/maik-models.js?v=hardlocal3-ground1" defer></script>
 <!-- MaiK Lite on-device RAG (window.SMD_MAIK_RAG / SMD_MAIK_KB_STORE): BM25 over the book chunks +
      evidence gate, ported from the server pipeline, so MaiK Lite's answers are checked against the
      actual book text instead of trusting its own recollection. Loaded before maik-local.js, which
      reads these globals lazily (only when a maik-lite question is actually asked). -->
 <script src="/kb/ai/maik-lite-rag.js?v=rag1" defer></script>
+<!-- Claim-level grounding verifier (2026-09-18): checks each statement of an on-device answer against the
+     retrieved passages on facts (doses, drugs, figures), not wording. Loaded before maik-local.js. -->
+<script src="/kb/ai/maik-grounding.js?v=ground1" defer></script>
 <script src="/kb/ai/maik-lite-kb-store.js?v=rag1" defer></script>
-<script src="/maik-local.js?v=hardlocal3-opdcols1" defer></script>
+<script src="/maik-local.js?v=hardlocal3-opdcols1-cont1" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
