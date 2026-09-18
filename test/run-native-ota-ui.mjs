@@ -259,15 +259,23 @@ try {
   ok(JSON.stringify(ladder) === JSON.stringify(["1.2", "1.3", "1.9", "2.0", "2.2", "1.1"]),
      `the version ladder reads 1.2, 1.3 … 1.9, then 2.0, 2.2, and the built-in bundle is 1.1 (got ${JSON.stringify(ladder)})`);
 
-  /* ── stale bundles ── a failed 48MB download unpacks to ~123MB that nothing will ever load. */
+  /* ── stale bundles ── a failed 48MB download unpacks to ~123MB that nothing will ever load.
+   * The purge must go by STATUS, not by "isn't the current one": current() reports {bundle,native}
+   * and gives NO handle on what next() has queued, so a keep-list built from it would eventually
+   * delete the bundle the silent auto-update path had lined up for the next restart. */
   await J(`window.__calls = [];
-    window.__bundles = [{id:"keep-me"},{id:"queued"},{id:"dead-1"},{id:"dead-2"},{id:"builtin"}];
-    window.__current = { bundle: { id: "keep-me" }, next: { id: "queued" } };
+    window.__bundles = [
+      {id:"running", status:"success"}, {id:"queued-by-next", status:"pending"},
+      {id:"in-flight", status:"downloading"}, {id:"dead-1", status:"error"},
+      {id:"dead-2", status:"deleted"}, {id:"builtin", status:"error"}];
     return 1;`);
   const purge = await J(`return SMD_OTA.purgeOld().then(function(r){ return JSON.stringify({ r: r, calls: window.__calls }); });`);
   const deleted = (purge.calls || []).filter(c => c[0] === "delete").map(c => c[1].id).sort();
   ok(JSON.stringify(deleted) === JSON.stringify(["dead-1", "dead-2"]),
-     `purgeOld deletes only the bundles nothing will load again (deleted ${JSON.stringify(deleted)})`);
+     `purgeOld deletes only failed bundles (deleted ${JSON.stringify(deleted)})`);
+  ok(!deleted.includes("queued-by-next"),
+     `...and never the bundle next() queued for the silent auto-update path`);
+  ok(!deleted.includes("builtin"), `...and never the built-in bundle, whatever status it reports`);
   ok(purge.r && purge.r.removed === 2, `...and reports how many it reclaimed (got ${JSON.stringify(purge.r)})`);
 
   console.log(fails === 0 ? "\nALL GREEN — the OTA client honours its contract, and never applies anything the user or their own auto-update choice didn't ask for" : `\n${fails} FAILED`);

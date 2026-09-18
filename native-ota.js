@@ -151,24 +151,28 @@
     return v > 0 ? tenthsToLabel(LADDER_BASE_TENTHS + (v - LADDER_BASE)) : tenthsToLabel(BUILTIN_TENTHS);
   }
 
-  /* Purge every bundle that is neither running nor queued. A failed 48MB download unpacks to ~123MB
-   * of loose files, and the plugin only auto-deletes the one bundle it just replaced — so repeated
-   * failures pile up copies that nothing will ever load. Fire-and-forget: reclaiming space must
-   * never be able to fail a launch. */
+  /* Reclaim the space a FAILED download leaves behind — a 48MB bundle unpacks to ~123MB of loose
+   * files, and autoDeletePrevious only drops the one bundle just replaced, so repeated failures
+   * piled up copies nothing will ever load.
+   *
+   * Deletes strictly by STATUS, never by "isn't the current one". current() returns {bundle,native}
+   * with NO handle on what next() has queued, so a keep-list built from it would eventually eat a
+   * bundle the silent auto-update path had lined up for the next restart. 'pending' (queued by
+   * next()), 'downloading' (in flight) and 'success' (usable) are all left alone.
+   * Fire-and-forget: reclaiming space must never be able to fail a launch. */
+  var DOOMED_STATUS = { error: 1, deleted: 1 };
   function purgeOld() {
     var p = plugin();
     if (!p || !p.list || !p.delete) return Promise.resolve({ removed: 0 });
-    return Promise.all([p.list(), p.current().then(null, function () { return null; })]).then(function (r) {
-      var bundles = (r[0] && r[0].bundles) || [], cur = r[1] || {};
-      var keep = {};
-      if (cur.bundle && cur.bundle.id) keep[cur.bundle.id] = 1;
-      if (cur.next && cur.next.id) keep[cur.next.id] = 1;
-      var doomed = bundles.filter(function (b) { return b && b.id && b.id !== "builtin" && !keep[b.id]; });
+    return p.list().then(function (r) {
+      var doomed = ((r && r.bundles) || []).filter(function (b) {
+        return b && b.id && b.id !== "builtin" && DOOMED_STATUS[String(b.status || "").toLowerCase()];
+      });
       return Promise.all(doomed.map(function (b) {
         return p.delete({ id: b.id }).then(function () { return 1; }, function () { return 0; });
       })).then(function (oks) {
         var n = oks.reduce(function (a, b) { return a + b; }, 0);
-        try { if (n) console.info("[ota] purged " + n + " stale bundle(s)"); } catch (e) {}
+        try { if (n) console.info("[ota] purged " + n + " failed bundle(s)"); } catch (e) {}
         return { removed: n };
       });
     }, function () { return { removed: 0 }; });
