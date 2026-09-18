@@ -1135,7 +1135,17 @@
    * should be. Same fail-open contract: rxIssueVerification never rejects, and an out-of-scope or
    * offline prescription still exports, just without a QR (and rxNoQrWhy says which). */
   function exportRx(kind, topic, regNo, signImg){
-    if(!window.html2canvas){ rxToast("Export engine still loading — try again"); return; }
+    /* The raster/PDF engines load on demand (pdf-engines.js). This used to read window.html2canvas
+     * directly and tell the doctor to "try again" whenever Export was reached before the eagerly
+     * deferred 551 KB had parsed - a race that awaiting the loader removes. If the load genuinely
+     * fails, the same message is shown, so the failure mode is unchanged. */
+    var _e = (window.SMD_PDF_ENGINES && window.SMD_PDF_ENGINES.ensure) ? window.SMD_PDF_ENGINES.ensure() : Promise.resolve(!!window.html2canvas);
+    _e.then(function (ok) {
+      if(!ok || !window.html2canvas){ rxToast("Export engine unavailable - check your connection and try again"); return; }
+      exportRxReady(kind, topic, regNo, signImg);
+    });
+  }
+  function exportRxReady(kind, topic, regNo, signImg){
     var d=collectRx()||{}, lines=d.lines;
     rxIssueVerification(lines, d.name).then(function(rxv){
       if(!rxv){ var why=rxNoQrWhy(lines); if(why) rxToast(why); }
@@ -1147,7 +1157,8 @@
    * straight through the QR and left half of one on each page, and only the LAST page carried it at
    * all - so page 1 of a two-page prescription was unverifiable paper. */
   function rxQrStamp(rec){
-    if(!rec || !rec.code || !window.html2canvas) return Promise.resolve(null);
+    if(!rec || !rec.code) return Promise.resolve(null);
+    if(!window.html2canvas) return Promise.resolve(null);   // exportRx ensured the engines; absent => fail open, no QR
     var n=document.createElement("div");
     n.style.cssText="position:fixed;left:-9999px;top:0;width:700px;background:#fff;z-index:-1";
     n.innerHTML=rxDocQrBlock(rec, true);

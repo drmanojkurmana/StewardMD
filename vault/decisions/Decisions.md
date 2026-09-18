@@ -5,6 +5,50 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-18 · Deferring a payload without deferring the contract (PDF engines off cold start)
+
+**Measured first, because the received wisdom was wrong.** `stewardmd.in` is a MARKETING PAGE (3
+scripts, App Store links); `/home.js` 404s there. The app is a Capacitor bundle read off LOCAL DISK.
+So compression, CDN, `modulepreload` and service-worker *network* strategy do not apply to real
+users at all. The only cold-start cost that is real is **V8 parse+compile of the bundle**: 13.4 MB
+across 268 files, 205 ms on desktop node (several times that on a mid-range phone).
+
+**The pattern that makes deferral safe here: defer the PAYLOAD, never the CONTRACT.** The globals
+keep their exact names and shapes; the feature `await`s a cached-promise loader before first use;
+every pre-existing "engine unavailable" guard stays as the fail-safe. Because the bundle is on local
+disk, "lazy" costs a file read plus parse (**measured: 44 ms**), not a download. That is what makes
+the trade nearly free in THIS app and is exactly why it would not be free in a web app.
+
+**First application: `pdf-engines.js`.** vendor-html2canvas (194 KB) + vendor-jspdf (357 KB) = 551 KB
+parsed at every launch for two features most sessions never reach (prescription export, native
+HTML->PDF). Now loaded on demand by `SMD_PDF_ENGINES.ensure()`. **13.4 MB -> 12.9 MB, 205 ms -> 176 ms.**
+
+**It also fixed a live race.** `prescription.js` read `window.html2canvas` directly and told the
+doctor *"Export engine still loading - try again"* whenever Export was reached before the eagerly
+deferred 551 KB had parsed. Awaiting the loader removes that window rather than apologising for it.
+
+**A collision this nearly caused, worth remembering:** `native-bridge.js` already owns
+`window.SMD_PDF` (its `fromHtml` renderer, used by MaiK/onco/reports) and loads FIRST. Naming the
+loader `SMD_PDF` would have silently replaced it. Hence `SMD_PDF_ENGINES`, pinned by a test.
+
+**The ordered plan for the rest, by win over risk:**
+
+| Tier | Target | Win | Why it is safe, or not |
+|---|---|---|---|
+| done | vendor jspdf + html2canvas | 551 KB | call sites already guarded; no clinical content |
+| next | `hospitals-in.js` (249 KB), `followcare-i18n.js` (173 KB) | 422 KB | pure data, single consumer each, count is assertable |
+| then | `kardiox-content-pack.js` (1.88 MB) + `kardiox-content.js` (508 KB) | 2.4 MB | biggest win, but it CONCATS 1041 lessons into `SMD_KARDIOX_CONTENT.ecgs` at load; needs a test asserting the atlas still reports 1141 or it truncates silently. `index.html` already calls this out: CliniX fetches its content lazily *"deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load"* |
+| **never** | `interaction-rules.js` (880 KB) | - | a drug-safety engine must be present anywhere a drug appears. Deferring it risks a missed interaction warning. **Do not lazy-load a safety engine.** |
+
+**Rejected, with measurements:** debouncing the search inputs. They are undebounced, but ONCQIS
+search is **1-5 ms/keystroke** and the 2,405-row hospital picker is **0.4-1.7 ms** (60-row cap). A
+120 ms debounce on a 2 ms operation adds lag for no gain.
+
+**Status:** `test/pdf-engines.test.mjs` 7/7 (single injection under concurrency, never rejects,
+retryable, no SMD_PDF clobber); `test/run-pdf-lazy-ui.mjs` 13/13 in a real browser, including
+rendering an actual PDF after the lazy load. Suite 3210 pass; 4 failures all reproduce on clean
+`origin/main` (followcare-voice-server, opd-mrn-alloc, and two in entitlement-trial).
+
 ## 2026-09-02 · A named score is answered by its calculator, not by the model; the tool chips were dead
 
 **Reported with a screenshot:** "HACOR score" in MaiK (Cloud) spent a paid Gemini turn and answered

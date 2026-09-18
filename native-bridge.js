@@ -93,7 +93,11 @@
   // render the doc offscreen at A4 width, rasterize, paginate into a PDF, then share (native) or download (web).
   // Rejects if the vendored engines aren't loaded, so callers keep their existing HTML/text fallback = no regression.
   function pdfFromHtmlJs(html, name, title) {
-    return new Promise(function (resolve, reject) {
+    // The engines are loaded on demand (pdf-engines.js), so ensure them before reading the globals.
+    // ensure() never rejects; a failed load leaves them absent and the existing guard below rejects
+    // with the same "pdf-engine-unavailable" the callers' HTML/text fallback already handles.
+    var _ready = (window.SMD_PDF_ENGINES && window.SMD_PDF_ENGINES.ensure) ? window.SMD_PDF_ENGINES.ensure() : Promise.resolve(true);
+    return _ready.then(function () { return new Promise(function (resolve, reject) {
       var H = window.html2canvas, JS = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
       if (!H || !JS) { reject(new Error("pdf-engine-unavailable")); return; }
       var s = String(html == null ? "" : html);
@@ -120,7 +124,7 @@
           try { var a = document.createElement("a"); a.href = uri; a.download = name + ".pdf"; document.body.appendChild(a); a.click(); a.remove(); resolve(); } catch (e) { reject(e); }
         }
       }).catch(function (e) { try { host.remove(); } catch (x) {} reject(e); });
-    });
+    }); });
   }
   window.SMD_PDF = { fromHtml: pdfFromHtmlJs };   // reusable everywhere (MaiK, onco, reports)
 
