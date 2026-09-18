@@ -17,7 +17,10 @@ const PAGE_BYTES = 400 * 1024;
 // stock photos (diabetes.org "co-worker giving a high five", IDSA branding photo) were being picked.
 const JUNK = /logo|icon|sprite|avatar|badge|banner|button|pixel|tracking|spacer|arrow|social|share|\.svg(\?|$)|\.gif(\?|$)|1x1|blank\.|\/stat\?|jsdisabled|\/styles\/|stock|hero|branding|program_card|placeholder/i;
 // Journal figure file names: AAFP "p747-f2-jpg.jpg", PMC "fped-09-780356-g0001.jpg".
-const FIGURE_HINT = /algorithm|flowchart|flow-chart|figure|fig[-_]?\d|[-_]f\d{1,2}[-_.]|[-_]g\d{3,}\b|chart|diagram|pathway|criteria|table|schema|ecg|ekg|xray|x-ray|ct-|mri|scan/i;
+const FIGURE_HINT = /algorithm|flowchart|flow-chart|figure|fig[-_]?\d|[-_][ft]\d{1,2}[-_.]|[-_]g\d{3,}\b|chart|diagram|pathway|criteria|table|schema|ecg|ekg|xray|x-ray|ct-|mri|scan/i;
+// Not worth a page read for FIGURES (production trace, 2026-09-18): UpToDate is paywalled and
+// serves zero images to us; Medscape answers the Worker with 403. Both stay trusted for research.
+const NO_FIGURES = /(^|\.)(uptodate\.com|medscape\.com)$/i;
 // Markup that wraps a real figure on the sites we read (live pages, 2026-09-18): <figure>, PMC's
 // "obj_head"/"graphic", Medscape's "inlineImage" + "::figure" comment, AAFP's "__figure" class.
 const FIGURE_CTX = /<figure\b|figcaption|figure|inlineimage|img-box|obj_head|class="graphic/i;
@@ -91,15 +94,26 @@ export async function findFigures(env, topic, max = 3, opts = {}) {
   if (!q) return [];
   let pages = [];
   try { pages = await tinyfishSearch(env, q); } catch (e) { pages = []; }
-  pages = (pages || []).filter((p) => p && /^https:\/\//i.test(p.url) && !/\.pdf(\?|$)/i.test(p.url)).slice(0, 5);
+  // Up to five page reads, chosen from up to eight results after dropping what can never carry a
+  // topic figure: PDFs, untrusted hosts, paywalled/blocking hosts, and HOMEPAGES (a search that
+  // falls back to "aasld.org" or "gastro.org" offers only their promo banners: never a figure).
   const debug = [];
-  const found = await Promise.all(pages.map(async (p) => {
+  const eligible = [];
+  for (const p of (pages || []).slice(0, 8)) {
+    if (!p || !/^https:\/\//i.test(p.url)) continue;
     const d = { url: p.url };
     debug.push(d);
-    if (!isTrustedUrl(p.url)) { d.skip = "untrusted"; return null; }
+    let u; try { u = new URL(p.url); } catch (e) { d.skip = "bad-url"; continue; }
+    if (/\.pdf(\?|$)/i.test(u.pathname)) { d.skip = "pdf"; continue; }
+    if (!isTrustedUrl(p.url)) { d.skip = "untrusted"; continue; }
+    if (NO_FIGURES.test(u.hostname)) { d.skip = "no-figures-host"; continue; }
+    if (u.pathname === "/" || u.pathname === "") { d.skip = "homepage"; continue; }
+    if (eligible.length < 5) eligible.push({ p, d });
+  }
+  const found = await Promise.all(eligible.map(async ({ p, d }) => {
     const host = new URL(p.url).hostname;
     try {
-      const r = await fetchWithTimeout(p.url, { headers: PAGE_HEADERS, redirect: "follow" }, 6000);
+      const r = await fetchWithTimeout(p.url, { headers: PAGE_HEADERS, redirect: "follow" }, 9000);
       d.status = r.status; d.type = (r.headers.get("content-type") || "").slice(0, 40);
       if (!r.ok || !/text\/html/i.test(d.type)) return null;
       const html = (await r.text()).slice(0, PAGE_BYTES);
