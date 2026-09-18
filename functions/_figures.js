@@ -16,7 +16,11 @@ const PAGE_BYTES = 400 * 1024;
 // Live check 2026-09-18: NCBI's <noscript> stat beacon (/stat?jsdisabled=...) and Drupal "styles"
 // stock photos (diabetes.org "co-worker giving a high five", IDSA branding photo) were being picked.
 const JUNK = /logo|icon|sprite|avatar|badge|banner|button|pixel|tracking|spacer|arrow|social|share|\.svg(\?|$)|\.gif(\?|$)|1x1|blank\.|\/stat\?|jsdisabled|\/styles\/|stock|hero|branding|program_card|placeholder/i;
-const FIGURE_HINT = /algorithm|flowchart|flow-chart|figure|fig[-_]?\d|chart|diagram|pathway|criteria|table|schema|ecg|ekg|xray|x-ray|ct-|mri|scan/i;
+// Journal figure file names: AAFP "p747-f2-jpg.jpg", PMC "fped-09-780356-g0001.jpg".
+const FIGURE_HINT = /algorithm|flowchart|flow-chart|figure|fig[-_]?\d|[-_]f\d{1,2}[-_.]|[-_]g\d{3,}\b|chart|diagram|pathway|criteria|table|schema|ecg|ekg|xray|x-ray|ct-|mri|scan/i;
+// Markup that wraps a real figure on the sites we read (live pages, 2026-09-18): <figure>, PMC's
+// "obj_head"/"graphic", Medscape's "inlineImage" + "::figure" comment, AAFP's "__figure" class.
+const FIGURE_CTX = /<figure\b|figcaption|figure|inlineimage|img-box|obj_head|class="graphic/i;
 const STOP = /^(?:the|of|and|for|in|on|with|to|a|an|is|are|vs|or|workup|work-up|management|treatment|approach|evaluation)$/i;
 
 function attr(tag, name) {
@@ -48,9 +52,11 @@ export function pickFigure(html, pageUrl, topic) {
     if ((w && w < 200) || (hh && hh < 120)) continue;
     // Context: the 600 characters before the tag (a <figure>, a heading, a caption class).
     const before = h.slice(Math.max(0, m.index - 600), m.index);
-    // The image ITSELF must name the topic or look like a figure. Surrounding page text only adds
-    // score: a stock photo sitting under a paragraph about DKA is not a DKA figure.
-    const own = 3 * hit(alt + " " + title) + 2 * hit(src) + ((FIGURE_HINT.test(src) || FIGURE_HINT.test(alt)) ? 2 : 0);
+    // The image ITSELF must name the topic, look like a figure, or sit in figure markup (the 200
+    // characters before it). Plain page text only adds score: a stock photo under a paragraph about
+    // DKA is not a DKA figure, but an untitled image inside <figure> on a hematuria article is.
+    const own = 3 * hit(alt + " " + title) + 2 * hit(src) + ((FIGURE_HINT.test(src) || FIGURE_HINT.test(alt)) ? 2 : 0) +
+                (FIGURE_CTX.test(before.slice(-200)) ? 2 : 0);
     if (own <= 0) continue;
     let score = own;
     score += hit(before);
