@@ -40,12 +40,17 @@ llama.cpp rejects PTQ1_0/PQ2_0 as unknown types and lacks the Hadamard activatio
 `capacitor-llama` plugin links mainline b10502. No mainline g64 file was published (the 8B ternary
 has one, which is why `bonsai-ternary-8b` works). There is no Bonsai 2 at 8B or 4B.
 
-**Decision.** No pack change. Shipping a 5.9 GB download that cannot load is the one failure the
-picker must never produce. Documented in `maik-models.js` above the `bonsai-27b` pack.
+**Decision (same day, owner: "go ahead").** Move `local-plugins/capacitor-llama` to PrismML's fork,
+release `prism-b10685-7dffb15` (mainline b10685 base, so a superset of b10502: every existing pack is
+a plain GGUF and keeps loading). iOS: `Package.swift` binaryTarget now points at the fork's
+xcframework (322,127,363 B, checksum `c9c83d40…`; same `build-apple/llama.xcframework/` layout, and
+it adds simulator slices). Android: the `llama-cpp` submodule URL is the fork and the pointer is the
+tag's commit `7dffb15`. New pack `bonsai2-27b` ("MAiK Bonsai Max 2", PTQ1_0, 5,946,648,928 B, sha256
+`53107f53…`), tier 5.5, 12 GB floor, text-only for now (the repo's Q8_0 mmproj is noted, not wired).
 
-**Path to adopt.** Move the plugin to PrismML's fork (`github.com/PrismML-Eng/llama.cpp`): new iOS
-xcframework and Android submodule, then re-verify every existing pack on both phones. Or wait for
-mainline llama.cpp to carry the types. Either is a separate engineering task; logged in Roadmap.
+**Verification status.** Both apps were rebuilt against the fork. Still to prove on a phone: an
+existing pack (Lite, Cortex, Bonsai 8B) answering on the fork runtime, then the 5.95 GB pack itself
+loading on a 12 GB device. Until that is done the new pack should not be pushed to devices.
 
 ## 2026-09-18 · A dose question is a database lookup, not a model question
 

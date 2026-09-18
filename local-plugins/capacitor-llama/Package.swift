@@ -16,14 +16,14 @@ import PackageDescription
 // `npx cap sync`. The real 16.4 floor is enforced by the app build setting + the framework's own
 // min-OS at link time.
 //
-// SLICES: the b10502 xcframework ships ios-arm64 (device) and macos-arm64_x86_64 ONLY. There is NO
-// iOS SIMULATOR slice, so a build for the simulator will fail to link. Test on a real device (which
-// is the documented practice for this repo's native work anyway).
+// SLICES: the PrismML prism-b10685 xcframework ships ios-arm64 (device), ios simulator, macos, tvOS
+// and visionOS. (The mainline b10502 zip it replaced had NO simulator slice.) Real-device testing is
+// still the documented practice for this repo's native work.
 //
 // The url + checksum are PINNED. checksum == `swift package compute-checksum <zip>` == the SHA-256
-// of the release zip (computed 2026-08-20 against
-// github.com/ggml-org/llama.cpp/releases/download/b10502/llama-b10502-xcframework.zip, 78,745,806 bytes).
-// The Android side vendors the SAME tag as a submodule, so both platforms run identical inference code.
+// of the release zip (computed 2026-09-19 against the PrismML release below, 322,127,363 bytes; the
+// mainline b10502 zip before it was 78,745,806 bytes, checksum f81c3c17...).
+// The Android side vendors the SAME fork tag as a submodule, so both platforms run identical inference code.
 let package = Package(
     name: "StewardmdCapacitorLlama",
     platforms: [.iOS(.v15)],
@@ -36,10 +36,16 @@ let package = Package(
         .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", from: "8.0.0")
     ],
     targets: [
+        // 2026-09-19 (owner): moved from mainline b10502 to PrismML's fork, release
+        // prism-b10685-7dffb15 (mainline b10685 base + the ternary PTQ1_0/PQ2_0 types and the Hadamard
+        // activation runtime that Ternary Bonsai 2 needs; every earlier pack is a plain GGUF and loads
+        // unchanged). Same zip layout as mainline (build-apple/llama.xcframework/) with ios-arm64,
+        // macos, PLUS ios simulator, tvOS and visionOS slices. 322,127,363 bytes; checksum is the
+        // SHA-256 of the release zip. Android vendors the SAME fork tag as its submodule.
         .binaryTarget(
             name: "LlamaFramework",
-            url: "https://github.com/ggml-org/llama.cpp/releases/download/b10502/llama-b10502-xcframework.zip",
-            checksum: "f81c3c17f5e97fd2a004937d3dc56268fe009e1b1952f77f8e7a0b6032493803"
+            url: "https://github.com/PrismML-Eng/llama.cpp/releases/download/prism-b10685-7dffb15/llama-prism-b10685-7dffb15-xcframework.zip",
+            checksum: "c9c83d407299ebeb2c0c349cedd932e927f8d00340e9903f4d8d1d63829e652c"
         ),
         .target(
             name: "LlamaPlugin",
