@@ -619,18 +619,42 @@
     var floor = topic.length ? 0.6 * topic[0][0] : 0;
     return { topic: topic.filter(function (e) { return e[0] >= floor; }).slice(0, 3).map(function (e) { return e[1]; }), drugs: drugs, mods: mods };
   }
-  function retrieveGrounding(packId, question) {
+  /* TWO RAGS, CHAINED (owner, 2026-09-19: "use both"). The cloud package's topicMatch is the
+   * ROUTER: StewardRAG.buildPackage() runs on the phone and already knows WHICH disease a question
+   * is about (name/alias/coverage tiers, refuses to pick a wrong disease). The on-device book is the
+   * CORPUS: a full textbook, far bigger than the disease index. Before this, the local engine
+   * discarded the router's verdict and let BM25 match words in chunks, which is how "melena workup"
+   * was grounded on a dermatitis chunk that contained "workup". Now the router's disease name is
+   * added to the query AND becomes a required anchor, so the book is searched for chunks about that
+   * disease. Router says "none": the question's own anchors apply as before. */
+  var ROUTER_STOP = /^(?:disease|diseases|disorder|syndrome|acute|chronic|severe|infection|infections|management|treatment|fever|upper|lower|primary|secondary|with|and|the)$/;
+  function routerTopic(pkg) {
+    var tm = pkg && pkg.topicMatch;
+    if (!tm) return "";
+    if (tm.matched === true) return String(tm.grounded || tm.topic || "");
+    if (tm.mode === "assume") return String((tm.assume && tm.assume.name) || tm.nearest || "");
+    return "";
+  }
+  function routerToks(topic) {
+    return String(topic || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/)
+      .filter(function (t) { return t.length >= 4 && !ROUTER_STOP.test(t); }).slice(0, 4);
+  }
+  function retrieveGrounding(packId, question, topic) {
     if (!ragEligible(packId) || !question) return Promise.resolve(null);
     var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
     var KB = (typeof window !== "undefined") && window.SMD_MAIK_KB_STORE;
     if (!RAG || !KB) return Promise.resolve(null);
+    var rt = routerToks(topic);
     return KB.loadBook(RAG).then(function (bk) {
       // Search wider than we keep: the anchored passages are often ranks 2-6 behind a glossary
-      // chapter that matches every word. Same BM25 pass, only the sort tail is longer.
-      var hits = bk.search(question, RAG.TOPK * 3);
+      // chapter that matches every word. Same BM25 pass, only the sort tail is longer. The router's
+      // disease name rides along in the query so its chunks rank.
+      var hits = bk.search(rt.length ? question + " " + rt.join(" ") : question, RAG.TOPK * 3);
       if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
       var A = anchorsFor(bk, RAG, question);
       if (!A || !A.topic) A = { topic: A || [], drugs: [], mods: [] };
+      // Router anchors first: a kept passage must mention the disease the question is about.
+      if (rt.length) A.topic = rt.concat(A.topic.filter(function (t) { return rt.indexOf(t) < 0; }));
       var need = A.topic.length ? A.topic : A.drugs;
       // Owner report (2026-09-11): "Teach me Pneumonia atoz" and "Can I learn a new medical topic
       // today" both had NO real topic or drug anchor (every content word was generic filler, or "atoz"
@@ -686,7 +710,7 @@
     // A greeting is not a question: no retrieval, so no "Source:" line on a hello (owner
     // screenshot, 2026-09-04).
     var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded)) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
-      : retrieveGrounding(packId, ragQuestion(pkg));
+      : retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg));
 
     return groundingP.then(function (grounding) {
     // Queued like every other local generation, and NOT background: the clinician is watching this
@@ -843,7 +867,10 @@
           } else {
             text = g.text;
             if (g.general) text += "\n\n" + GENERAL_HEAD + "\n" + g.general;
-            if (g.removed.length) text += "\n\nLeft out: " + g.removed.length + " statement" + (g.removed.length === 1 ? "" : "s") + " the Knowledge Base did not support.";
+            // The count of removed statements is a verdict on the pipeline, not clinical content; it
+            // used to be printed inside the answer ("Left out: 3 statements ..."). It now travels in
+            // result.grounding.removed and the UI shows it in the small perf/meta line (owner audit,
+            // 2026-09-19: offline answers should read like MaiK's, not like a log).
             text += "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
           }
           groundingOut = { verdict: g.verdict, stats: g.stats, claims: g.claims, removed: g.removed, citations: g.citations };
@@ -2035,7 +2062,7 @@
     translate: tracked(translate),
     sanitizeAssessment: sanitizeAssessment, sanitizeScribe: sanitizeScribe, scribeMerge: scribeMerge, sanitizeSurgxNote: sanitizeSurgxNote, NEVER_AI_FILLABLE: NEVER_AI_FILLABLE,
     sanitizeIcd: sanitizeIcd, sanitizeReasoning: sanitizeReasoning, sanitizeMaikNext: sanitizeMaikNext, sanitizeMaikExtract: sanitizeMaikExtract, sanitizeAdvisory: sanitizeAdvisory,
-    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, continues: continues, carry: carry, ragQuestion: ragQuestion, answer: tracked(answer), available: available, currentPack: currentPack,
+    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, continues: continues, carry: carry, ragQuestion: ragQuestion, routerTopic: routerTopic, routerToks: routerToks, answer: tracked(answer), available: available, currentPack: currentPack,
     isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,

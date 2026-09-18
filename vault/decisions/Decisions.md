@@ -29,6 +29,31 @@ figure pages like the UNC AUA algorithm do), and the rule is the OCR rule: show 
 a wrong image. No KV cache of results by the owner's instruction, so each answer costs one TinyFish
 query plus up to five page reads. Shipped behind the flag. Tests: `test/maik-figures.test.mjs`.
 
+## 2026-09-19 · Offline MaiK must reply like MaiK: audit findings and what shipped
+
+**Owner:** "audit offline AI models, they should reply like MaiK native models."
+
+**Finding.** The on-device models were wrapped in a second, weaker MaiK: (1) `maik-local.js`
+discarded the cloud package's `topicMatch` and re-retrieved from the book by word overlap, so
+"melena workup" grounded on a dermatitis chunk containing "workup"; (2) answers carried pipeline
+verdicts ("Left out: 3 statements") in the clinical text; (3) `_brainAugment` skipped the local
+engine entirely, so no follow-up chips, workflow steps or tool launchers; (4) 20 to 70 s per answer
+on Lite; (5) Cortex leaked its SFT template and once returned nothing; (6) duplicated render and an
+export full of button labels; (7) the per-model battery had never been run.
+
+**Shipped.** (1) Two RAGs chained: the cloud topic match is the ROUTER (which disease), the
+on-device book is the CORPUS; the router's disease name rides in the BM25 query and is a required
+anchor (`retrieveGrounding(packId, question, topic)`, `test/maik-rag-router.test.mjs`).
+(2) Verdict moved to `result.grounding.removed` and the meta line. (3) Chips, workflow and tools
+render on device; only page-cited verify lines stay off. (6) Export strips all UI. Earlier the same
+day: greetings never hit a model, leaked-template guard, continuity on every engine, dose follow-up
+section fix.
+
+**Open.** (4) Latency: fewer passages, prefix-stable prompt for KV reuse, token streaming in the UI.
+(5) Explicit ChatML wrapper for Cortex when the GGUF has no template; make `EMPTY_ANSWER` visibly
+render. (6) The duplicated dengue render (replay + final on the local path) needs a repro.
+(7) Run `bench/rag-grounding/run.mjs --live` on the phone as the gate for every offline change.
+
 ## 2026-09-19 · Ternary Bonsai 2 27B: not shippable on our llama.cpp; pack stays on Bonsai 27B v1
 
 **Owner:** update the Bonsai packs to PrismML's 17 Sep 2026 release (Ternary Bonsai 2 27B, Qwen3.8-27B
@@ -40,12 +65,17 @@ llama.cpp rejects PTQ1_0/PQ2_0 as unknown types and lacks the Hadamard activatio
 `capacitor-llama` plugin links mainline b10502. No mainline g64 file was published (the 8B ternary
 has one, which is why `bonsai-ternary-8b` works). There is no Bonsai 2 at 8B or 4B.
 
-**Decision.** No pack change. Shipping a 5.9 GB download that cannot load is the one failure the
-picker must never produce. Documented in `maik-models.js` above the `bonsai-27b` pack.
+**Decision (same day, owner: "go ahead").** Move `local-plugins/capacitor-llama` to PrismML's fork,
+release `prism-b10685-7dffb15` (mainline b10685 base, so a superset of b10502: every existing pack is
+a plain GGUF and keeps loading). iOS: `Package.swift` binaryTarget now points at the fork's
+xcframework (322,127,363 B, checksum `c9c83d40…`; same `build-apple/llama.xcframework/` layout, and
+it adds simulator slices). Android: the `llama-cpp` submodule URL is the fork and the pointer is the
+tag's commit `7dffb15`. New pack `bonsai2-27b` ("MAiK Bonsai Max 2", PTQ1_0, 5,946,648,928 B, sha256
+`53107f53…`), tier 5.5, 12 GB floor, text-only for now (the repo's Q8_0 mmproj is noted, not wired).
 
-**Path to adopt.** Move the plugin to PrismML's fork (`github.com/PrismML-Eng/llama.cpp`): new iOS
-xcframework and Android submodule, then re-verify every existing pack on both phones. Or wait for
-mainline llama.cpp to carry the types. Either is a separate engineering task; logged in Roadmap.
+**Verification status.** Both apps were rebuilt against the fork. Still to prove on a phone: an
+existing pack (Lite, Cortex, Bonsai 8B) answering on the fork runtime, then the 5.95 GB pack itself
+loading on a 12 GB device. Until that is done the new pack should not be pushed to devices.
 
 ## 2026-09-18 · A dose question is a database lookup, not a model question
 

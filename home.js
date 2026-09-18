@@ -6183,13 +6183,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             // (pp.152-153)" - Harrison's fever-of-unknown-origin chapter - hanging under an answer
             // about treating simple fever, on an engine whose own disclaimer says "no sources".
             // Same borrowed-authority problem the citation-stripping in maik-local.js exists to stop.
-            try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective() === "local") return; } catch (e) {}
+            // 2026-09-19 (owner audit: "offline should reply like MaiK"): on-device used to skip ALL of
+            // this. Only the page-cited verify lines were the borrowed-authority problem; the follow-up
+            // chips, workflow steps and tool launchers are engine-agnostic and cost nothing, so they
+            // now render on every engine and only the verify lines stay off for local.
+            var _augLocal = false;
+            try { _augLocal = !!(window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective() === "local"); } catch (e) {}
             try {
               var res = MaiKBrain.resolve(question, { disease: (_maikTopic && _maikTopic.topic) || null, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null });
               // proactive safety
-              (MaiKCopilot.safetyScan(res, {}) || []).forEach(function (a) { var w = document.createElement("div"); w.className = "maik-verify"; w.textContent = (a.level === "warn" ? "⚠ " : "") + a.msg; host.appendChild(w); });
+              if (!_augLocal) (MaiKCopilot.safetyScan(res, {}) || []).forEach(function (a) { var w = document.createElement("div"); w.className = "maik-verify"; w.textContent = (a.level === "warn" ? "⚠ " : "") + a.msg; host.appendChild(w); });
               // evidence contradiction (from the enriched package)
-              if (p && p._brainContradictions && p._brainContradictions.length) { var c = p._brainContradictions[0]; var wc = document.createElement("div"); wc.className = "maik-verify"; wc.textContent = "Sources differ: " + c.reason + "; confirm against your local protocol."; host.appendChild(wc); }
+              if (!_augLocal && p && p._brainContradictions && p._brainContradictions.length) { var c = p._brainContradictions[0]; var wc = document.createElement("div"); wc.className = "maik-verify"; wc.textContent = "Sources differ: " + c.reason + "; confirm against your local protocol."; host.appendChild(wc); }
               // clinical workflow (ordered next steps)
               var wf = MaiKCopilot.workflow(res);
               if (wf && wf.steps.length) {
@@ -6336,7 +6341,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   // animation, not generation. Calling that "first token" hid where the time actually went.
                   var _replayed = !!(r && r.replayed);
                   el.textContent = "⏱ " + (ttft ? ((_replayed ? "answer " : "first token ") + ttft + "s · ") : "") +
-                    (_replayed ? "shown " : "full answer ") + total + "s" + (r && r.mode ? " · " + r.mode : "");
+                    (_replayed ? "shown " : "full answer ") + total + "s" + (r && r.mode ? " · " + r.mode : "") +
+                    ((r && r.grounding && r.grounding.removed && r.grounding.removed.length) ? " · " + r.grounding.removed.length + " unsupported statement" + (r.grounding.removed.length === 1 ? "" : "s") + " left out" : "");
                   _h.appendChild(el);
                   try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
                 }
@@ -6546,7 +6552,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       Array.prototype.forEach.call(nodes, function (n) {
         if (n.querySelector && n.querySelector(".maik-thinking")) return;         // skip an in-flight bubble
         var you = n.classList.contains("you"), who = you ? "You" : "MaiK", el = n;
-        if (!you) { try { el = n.cloneNode(true); Array.prototype.forEach.call(el.querySelectorAll(".maik-attr,.maik-refine,.maik-followups,.maik-tools"), function (x) { x.remove(); }); } catch (e) { el = n; } }
+        // Export carries the clinical text only: chips, buttons, feedback, perf line, figure strip,
+        // sources and the per-bubble disclaimer are UI (owner PDF export, 2026-09-19, read
+        // "Know more →℞ Create prescription ... CopyRegenerateEditYesNo⏱ first token 7.2s").
+        if (!you) { try { el = n.cloneNode(true); Array.prototype.forEach.call(el.querySelectorAll(".maik-attr,.maik-refine,.maik-followups,.maik-tools,.maik-fb,.maik-src,.maik-edu,.maik-know,.maik-more,.maik-perf,.maik-figs,.maik-chip,.maik-fu,.maik-webbusy,button"), function (x) { x.remove(); }); } catch (e) { el = n; } }
         var t = (el.textContent || "").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
         if (!t) return;
         out.push(who + ": " + t);
