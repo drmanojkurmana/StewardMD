@@ -72,7 +72,10 @@ export function pickFigure(html, pageUrl, topic) {
     // A page built around one figure often carries it as og:image; only when it names the topic.
     const og = /<meta\b[^>]*property\s*=\s*["']og:image["'][^>]*>/i.exec(h);
     const ogSrc = og ? absolute(attr(og[0], "content"), pageUrl) : "";
-    if (ogSrc && !JUNK.test(ogSrc) && (hit(ogSrc) || FIGURE_HINT.test(ogSrc))) best = { img: ogSrc, alt: "", score: 1 };
+    // Must look like an image file: aafp.org's og:image for its pancreatitis review was the article
+    // URL itself (text/html), which would have rendered as a broken card (production, 2026-09-18).
+    const looksImage = /\.(?:jpe?g|png|webp)(?:\?|$)/i.test(ogSrc) || /\/(?:image|images|media|img)\//i.test(ogSrc);
+    if (ogSrc && looksImage && !JUNK.test(ogSrc) && (hit(ogSrc) || FIGURE_HINT.test(ogSrc))) best = { img: ogSrc, alt: "", score: 1 };
   }
   return best;
 }
@@ -92,13 +95,23 @@ const PAGE_HEADERS = {
 export async function findFigures(env, topic, max = 3, opts = {}) {
   const q = String(topic || "").trim().slice(0, 200);
   if (!q) return [];
-  let pages = [];
-  try { pages = await tinyfishSearch(env, q); } catch (e) { pages = []; }
   // Up to five page reads, chosen from up to eight results after dropping what can never carry a
   // topic figure: PDFs, untrusted hosts, paywalled/blocking hosts, and HOMEPAGES (a search that
   // falls back to "aasld.org" or "gastro.org" offers only their promo banners: never a figure).
+  // When a search yields ONLY such results (TinyFish sometimes answers a short topic with bare
+  // site suggestions: "hyperkalemia ECG changes" -> litfl.com, pmc.ncbi.nlm.nih.gov), one reworded
+  // retry asks for article pages before giving up. TinyFish search costs no credits.
   const debug = [];
   const eligible = [];
+  const queries = [q, q + " review article"];
+  for (const query of queries) {
+    if (eligible.length) break;
+    let pages = [];
+    try { pages = await tinyfishSearch(env, query); } catch (e) { pages = []; }
+    if (query !== q) debug.push({ retry: query, results: (pages || []).length });
+    sift(pages);
+  }
+  function sift(pages) {
   for (const p of (pages || []).slice(0, 8)) {
     if (!p || !/^https:\/\//i.test(p.url)) continue;
     const d = { url: p.url };
@@ -109,6 +122,7 @@ export async function findFigures(env, topic, max = 3, opts = {}) {
     if (NO_FIGURES.test(u.hostname)) { d.skip = "no-figures-host"; continue; }
     if (u.pathname === "/" || u.pathname === "") { d.skip = "homepage"; continue; }
     if (eligible.length < 5) eligible.push({ p, d });
+  }
   }
   const found = await Promise.all(eligible.map(async ({ p, d }) => {
     const host = new URL(p.url).hostname;
