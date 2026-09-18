@@ -5317,9 +5317,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
        * everything MaiK could do, which is what made it read as a bot rather than an assistant.
        */
       if (byeHit || (casualHit && isShort && greetOnly)) {
-        var _eng = "cloud";
-        try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective) _eng = window.SMD_MAIK_ENGINE.effective(); } catch (e) {}
-        if (_eng === "local") return { kind: "clinical" };          // free and offline: let it answer
+        // On-device used to be exempted ("free and offline: let it answer in its own voice"). Owner
+        // transcripts 2026-09-19: MaiK Lite took 7 to 9 s to say hello, wrapped in the clinical
+        // disclaimer and answer chips, and MAiK Cortex answered "Hi" with a leaked training template
+        // ("##Instruction: ... ##Options:"). A greeting is never worth a model call on any engine.
         if (byeHit) return { kind: "casual", reply: "Goodbye." };
         return { kind: "casual", reply: "Hello. What would you like to look at?" };
       }
@@ -5830,7 +5831,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
       // Phase 2 — numbered sources footer (matches the [n] markers). Prefer the package's own
       // numbered list (identical numbering to what the model was given) so citations line up.
-      var srcArr = (pkg && pkg.sources && pkg.sources.length) ? pkg.sources.map(function (s) { return s.title; })
+      // A drug-database answer has exactly one source; the KB titles the package carried would be
+      // borrowed authority (owner transcript 2026-09-19: "4 sources" under an ondansetron dose).
+      var srcArr = (r && r.engine === "drugdb") ? ["StewardMD Drugs Database (official label)"]
+        : (pkg && pkg.sources && pkg.sources.length) ? pkg.sources.map(function (s) { return s.title; })
         : ((window.SMD_MaiK && SMD_MaiK.sourceList) ? SMD_MaiK.sourceList(pkg).map(function (s) { return s.title; })
           : ((window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : []));
       var bookSvg = MK.book;
@@ -6486,6 +6490,22 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       var route = maikRoute(q, active);
       if (route.kind === "casual") { bubble("ai", '<div class="maik-welcome">' + maikEscH(route.reply) + '</div>'); return; }
+      // CONTINUITY on every engine (owner, 2026-09-19: "no one should feel every question is a new
+      // question"). maikResolveFollowup() knows the common follow-up shapes; anything else that arrives
+      // while a topic is live, is short, and names no KB topic of its own ("Just tell me which
+      // investigations should I send? In one line") is a follow-up on that topic: the topic goes into
+      // the question the model sees AND into retrieval, so the KB passage is about hematuria, not about
+      // whichever chapter happens to contain the word "send".
+      if (maikV2() && route.kind === "clinical" && _maikTopic && _maikTopic.topic && (!_maikTopic.ts || (Date.now() - _maikTopic.ts) < 30 * 60 * 1000)) {
+        var _fwc = maikNorm(q).split(" ").filter(Boolean).length;
+        var _own = false;
+        try { if (window.MaiKKB && MaiKKB.resolveTarget) { var _t = MaiKKB.resolveTarget(maikNorm(q), { question: maikNorm(q), grounding: [], topicMatch: { matched: false } }); _own = !!(_t && _t.confident); } } catch (e) {}
+        if (!_own && _fwc <= 14) {
+          var _fq = _maikTopic.topic + ": " + q.replace(/\?+$/, "").trim();
+          var _fdepth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
+          runClinical(_fq, _maikTopic.topic + " " + q, _fdepth, active, _maikTopic.topic); return;
+        }
+      }
       if (route.kind === "help") {
         var h = bubble("ai", '<div class="maik-welcome"><b>Ask Maik</b> is StewardMD’s clinical knowledge assistant. I can:<br>• answer general clinical & drug questions (grounded in StewardMD’s knowledge base)<br>• point you to the calculators and drug reference<br>• add commentary once you’ve run a patient assessment.<br><br>To assess a patient, start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings.</div>');
         [["Ask a clinical question", function () { qEl.value = "How do we treat DKA?"; try { qEl.focus(); } catch (e) {} }], ["Start Dx My Patient", function () { close(); try { openDxChooser(); } catch (e) {} }]].forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.style.margin = "8px 6px 0 0"; b.textContent = c[0]; b.addEventListener("click", c[1]); h.appendChild(b); }); scroll(); return;

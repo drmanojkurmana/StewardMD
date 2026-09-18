@@ -80,6 +80,11 @@ try {
   r = await ask("Glasgow-Blatchford");
   chk('"Glasgow-Blatchford" mid-topic → 1 call in the topic\'s context (not the clarifier)', r.prov===1 && /cholangitis/i.test(r.q) && /glasgow/i.test(r.q), "prov="+r.prov+" q="+JSON.stringify(r.q));
   chk('  no "Could you tell me the condition" clarifier', !/tell me the condition/i.test(r.last), "reply="+JSON.stringify(r.last.slice(0,60)));
+  // Owner transcript 2026-09-19 (MaiK Lite): this exact follow-up after a hematuria answer retrieved a
+  // mitochondrial-disease passage because the sentence names no disease. Mid-topic, it must be asked
+  // and retrieved IN the topic on every engine.
+  r = await ask("Just tell me which investigations should I send? In one line");
+  chk('"which investigations should I send" mid-topic → 1 call, question AND retrieval carry the topic', r.prov===1 && /cholangitis/i.test(r.q) && /cholangitis/i.test(r.retrieval), "prov="+r.prov+" q="+JSON.stringify(r.q)+" retrieval="+JSON.stringify(r.retrieval));
   // casual after a topic must stay casual and not hijack via follow-up
   r = await ask("thanks");
   chk('"thanks" after a topic → 0 provider calls (casual, not follow-up)', r.prov===0, "prov="+r.prov);

@@ -58,10 +58,25 @@
     for (var i = 0; i < SECTIONS.length; i++) if (SECTIONS[i].re.test(q)) return SECTIONS[i].key;
     return "adult";
   }
+  // Abbreviations clinicians type for a molecule (owner transcript, 2026-09-19: "Dose of Pcm?").
+  var ABBR = { pcm: "paracetamol", pct: "paracetamol", apap: "paracetamol", asa: "aspirin", mtx: "methotrexate", hcq: "hydroxychloroquine", inh: "isoniazid", rif: "rifampicin", pza: "pyrazinamide", emb: "ethambutol", ldn: "naltrexone" };
+  // home.js rewrites a bare "<drug> dose" follow-up into "<Population> dosing of <drug> for <topic> - dose,
+  // route, titration and renal-adjustment principles. Verify locally." That frame named "renal", so the
+  // renal section was shown instead of the adult dose (owner transcript, 2026-09-19). The leading
+  // population word is authoritative; the frame after the dash is not part of the ask.
+  var REWRITE = /^\s*(adult|paediatric|pediatric|renal-adjusted|hepatic-adjusted|pregnancy)\s+(?:first-line\s+drug\s+and\s+)?dos(?:e|ing)\s+(?:of\s+)?(.+?)(?:\s+for\s+.+)?$/i;
+  var POP = { adult: "adult", paediatric: "ped", pediatric: "ped", "renal-adjusted": "renal", "hepatic-adjusted": "hepatic", pregnancy: "pregnancy" };
+
   // -> { name, section } for a dose question, else null.
   function intent(q) {
     var s = String(q || "").trim();
+    s = s.split(/\s+[—–-]\s+/)[0].trim();            // drop a " - dose, route, ..." frame
     if (!s || s.length > 160) return null;
+    var rw = REWRITE.exec(s);
+    if (rw) {
+      var rname = base(rw[2].replace(/[?.!,;:]+/g, " ").trim()).split(/\s+/).slice(0, 3).join(" ");
+      if (rname) return { name: ABBR[rname.toLowerCase()] || rname, section: POP[rw[1].toLowerCase()] || "adult" };
+    }
     if (!/\bdos(?:e|es|ing|age)\b|\bhow\s+much\b/i.test(s)) return null;
     for (var i = 0; i < ASKS.length; i++) {
       var m = ASKS[i].exec(s);
@@ -76,9 +91,14 @@
       // contains the word "dose" ("dose of steroids in septic shock with vasopressors").
       if (!name || name.length < 3 || name.split(/\s+/).length > 3) continue;
       if (!/[a-z]/i.test(name)) continue;
+      // Leading request words are stripped ("Tell me Ondansetron dose" -> "Ondansetron"); one left in
+      // the middle means the capture is a sentence, not a drug.
       var toks = name.split(/\s+/);
-      for (var k = 0; k < toks.length; k++) if (NOT_A_DRUG.test(toks[k])) { name = ""; break; }
-      if (!name) continue;
+      while (toks.length && NOT_A_DRUG.test(toks[0])) toks.shift();
+      for (var k = 0; k < toks.length; k++) if (NOT_A_DRUG.test(toks[k])) { toks = []; break; }
+      name = toks.join(" ");
+      if (!name || name.length < 3) continue;
+      name = ABBR[name.toLowerCase()] || name;
       return { name: name, section: sectionOf(s) };
     }
     return null;

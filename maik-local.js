@@ -780,6 +780,11 @@
       }).then(function (r) {
         if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
+        // A leaked fine-tuning template is not an answer. MAiK Cortex (MedMO-4B) answered "Hi" with
+        // "##Instruction: If you are a doctor... Question: ... ##Options:" (owner transcript,
+        // 2026-09-19): the model continued its SFT format instead of replying. Treat it as empty so the
+        // one retry below runs, and never render it.
+        if (/^\s*#{1,3}\s*(?:instruction|question|options)\b/i.test(text) || /##\s*(?:options|instruction)\s*:/i.test(text)) text = "";
         // Everything the model produced was reasoning (unterminated think block ate the
         // budget). Measured on-device 2026-08-31: a second pass with sampling jitter and a
         // directness nudge recovers most of these, so retry ONCE before surfacing an error.
