@@ -932,7 +932,10 @@
       '<button id="smd-connect-signedin" class="smd-connect-btn primary" type="button" style="width:100%">I have signed in, continue</button>' +
       '<div class="smd-connect-row"><button id="smd-connect-retryopen" class="smd-connect-btn" type="button">Try again</button>' +
       '<button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
-    setStatus("", S.statusText || "Opening the hospital website. Sign in, and the agent will notice on its own.");
+    /* Never head a fresh sign-in with the LAST attempt's failure. Coming back here after a failed
+     * discovery replayed "Discovery could not complete: observedViews: proof status invalid" above
+     * the words "Sign in to <hospital>", which reads as though signing in had just failed. */
+    setStatus("", (S.statusKind === "bad" ? "" : S.statusText) || "Opening the hospital website. Sign in, and the agent will notice on its own.");
     b.querySelector("#smd-connect-cancel").onclick = cancelSession;
     b.querySelector("#smd-connect-signedin").onclick = function () {
       if (S && !S.loginHandled) { S.loginHandled = true; stopPhoneSignInPoll(); doHandoff(); }
@@ -948,10 +951,23 @@
   }
 
   function openLoginPlugin() {
-    if (S.loginOpened) return;
-    S.loginOpened = true;
     var plugin = getPlugin();
     if (!plugin) { setStatus("bad", "The in-app browser is unavailable on this device."); return; }
+    /* THE FLAG IS NOT THE BROWSER. S.loginOpened records only that we once ASKED to open it. A
+     * session that comes BACK to this screen — discovery failed, the doctor tapped Try again, the
+     * job was resumed — still carries it set, so the open was skipped and the doctor was told to
+     * "sign in inside the hospital website that just opened" with nothing open at all. Observed on
+     * the owner's iPhone 2026-09-18: screen=login, currentUrl() answering "not-open", and only the
+     * Try again button (which clears the flag by hand) could recover it.
+     * Ask the browser what is true instead of trusting the flag. */
+    if (S.loginOpened) {
+      var reopen = function () { if (S) { S.loginOpened = false; openLoginPlugin(); } };
+      try {
+        Promise.resolve(plugin.currentUrl()).then(function (r) { if (!(r && r.url)) reopen(); }, reopen);
+      } catch (e) { reopen(); }
+      return;
+    }
+    S.loginOpened = true;
     var host = hostOf(S.selected.emrUrl);
     bindPluginListeners(plugin);
     loadPhoneEngine().then(function (engine) {
@@ -2076,6 +2092,9 @@
     __reloadConnections: function () { if (S) loadConnections(); },
     __setState: function (patch) { if (!S) return; for (var k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) S[k] = patch[k]; },
     __paintProgress: function () { if (S && S.screen === "progress") { renderProgress(); } },
+    /* Test-only: re-enter the sign-in screen the way a resumed or retried session does, so the
+     * "open the hospital website again if it is not actually open" repair is provable. */
+    __paintLogin: function () { if (S && S.screen === "login") { renderLogin(); } },
     __publishBanner: function () { publishBannerProgress(); },
     __debug: function () {
       if (!S) return { open: !!overlay() };
