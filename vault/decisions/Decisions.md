@@ -5,6 +5,30 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-18 · Related figures under a MaiK answer: a search result, never hosted or generated
+
+**Owner:** show the image a trusted medical page carries for the topic "just like Google", with the
+link below it, without spending tokens; "we never host, cache or regenerate, we just show the search
+result image and the link which on click takes them there." TinyFish is already paid for and already
+restricted to `TRUSTED_MEDICAL_DOMAINS`, so it is the search; Google image search was considered and
+not adopted (new vendor, new key, per-query cost).
+
+**Decision.** `GET /api/ai/figures?q=<topic>` (`functions/_figures.js`): TinyFish returns the
+trusted pages (its results carry title/snippet/url only, no images), the function reads each page's
+HTML once and `pickFigure()` chooses the figure the page is built around (alt/caption/src matching
+the topic, `<figure>` context, size; logos, icons, banners, pixels and SVG/GIF rejected; `og:image`
+only when it names the topic). Only URLs leave the function. The client (`home.js
+maikFiguresStrip`) shows up to three cards under the answer, image loaded by the phone straight from
+the source with `referrerpolicy="no-referrer"`, caption = site + title, tap opens the source page. A
+hotlink the source blocks removes its own card. Cloud engine and online only; flag
+`smd_maik_figures` ("0" off). Zero model tokens: the query is the canonical topic the client already
+computed.
+
+**Trade-off / status.** Hit rate will be uneven (long articles seldom expose their figure; single-
+figure pages like the UNC AUA algorithm do), and the rule is the OCR rule: show nothing rather than
+a wrong image. No KV cache of results by the owner's instruction, so each answer costs one TinyFish
+query plus up to five page reads. Shipped behind the flag. Tests: `test/maik-figures.test.mjs`.
+
 ## 2026-09-18 · A dose question is a database lookup, not a model question
 
 **Owner:** "tell me dose of ondansetron … we already have the drug database it can redirect … dose of

@@ -4622,6 +4622,14 @@ body.dark .maik-b.ai{box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .maik-cite{color:var(--mk-acc);font-weight:700;font-size:.7em;vertical-align:super}
 .maik-note{font:500 11.5px/1.45 'Inter';color:var(--mk-mut);margin-top:6px}
 .maik-src{margin-top:9px;padding-top:8px;border-top:1px solid var(--mk-bd);display:flex;align-items:center;gap:6px;font:600 10.5px 'Inter';color:var(--mk-teal)}
+.maik-figs{margin-top:10px;padding-top:8px;border-top:1px solid var(--mk-bd)}
+.maik-figs-h{font:600 10.5px 'Inter';color:var(--mk-teal);margin-bottom:6px}
+.maik-figs-row{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.maik-figs-row::-webkit-scrollbar{display:none}
+.maik-fig{flex:0 0 auto;width:220px;max-width:80%;display:block;text-decoration:none;color:inherit;border:1px solid var(--mk-bd);border-radius:10px;overflow:hidden;background:var(--panel,#fff)}
+.maik-fig img{display:block;width:100%;height:140px;object-fit:cover;background:#f1f5f4}
+.maik-fig-cap{display:block;padding:6px 8px;font:500 11px/1.35 'Inter';color:var(--slate-soft,#5a7184);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.maik-fig-cap b{color:var(--mk-teal);font-weight:700}
 .maik-followups{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
 .maik-fu{font:600 12px/1 'Inter';color:var(--mk-ink);background:var(--mk-bg);border:1px solid var(--mk-bd);border-radius:11px;padding:8px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .14s ease,border-color .14s,box-shadow .14s,background .14s,color .14s}
 .maik-fu:hover{border-color:var(--mk-teal);color:var(--mk-teal);box-shadow:0 5px 16px var(--mk-glow);transform:translateY(-1px)}
@@ -5596,6 +5604,32 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (!chips.length) return "";
       return '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' + chips.slice(0, 2).join("") + '</div>';
     }
+    function maikFiguresOn() { try { return localStorage.getItem("smd_maik_figures") !== "0"; } catch (e) { return true; } }
+    function maikFiguresStrip(bubble, topic) {
+      if (!maikFiguresOn() || !topic || !(window.SMD_AI && SMD_AI.figures)) return;
+      if (typeof navigator !== "undefined" && navigator.onLine === false) return;
+      var E = window.SMD_MAIK_ENGINE; if (E && E.effective && E.effective() !== "cloud") return;   // never on device / KB-only
+      SMD_AI.figures(String(topic).slice(0, 200)).then(function (res) {
+        var figs = (res && res.figures) || [];
+        if (!figs.length || !bubble || !bubble.isConnected) return;
+        var cards = figs.filter(function (f) { return f && /^https:\/\//.test(f.img || "") && /^https:\/\//.test(f.page || ""); }).slice(0, 3).map(function (f) {
+          return '<a class="maik-fig" href="' + maikEscH(f.page) + '" target="_blank" rel="noopener noreferrer">' +
+            '<img src="' + maikEscH(f.img) + '" alt="' + maikEscH(f.title || f.site || "") + '" loading="lazy" referrerpolicy="no-referrer">' +
+            '<span class="maik-fig-cap"><b>' + maikEscH(f.site || "") + '</b> ' + maikEscH((f.title || "").slice(0, 80)) + ' \u2197</span></a>';
+        }).join("");
+        if (!cards) return;
+        var strip = document.createElement("div"); strip.className = "maik-figs";
+        strip.innerHTML = '<div class="maik-figs-h">Related figures from trusted sources</div><div class="maik-figs-row">' + cards + '</div>';
+        // A hotlink the source blocks removes its own card; an empty strip removes itself.
+        strip.querySelectorAll("img").forEach(function (im) {
+          im.addEventListener("error", function () { var a = im.closest(".maik-fig"); if (a) a.remove(); if (!strip.querySelector(".maik-fig")) strip.remove(); _persist(); });
+        });
+        var before = bubble.querySelector(".maik-refine, .maik-followups");
+        bubble.insertBefore(strip, before || null);
+        _persist();
+        function _persist() { try { var lb = document.getElementById("maikBody") || body; if (lb) { _maikBodyHTML = lb.innerHTML; maikSaveThread(_maikBodyHTML); } } catch (e) {} }
+      }).catch(function () {});
+    }
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
       // The provider call has returned and we are rendering the interactive answer, so clear the busy
       // guard NOW rather than in the trailing .then(). On native the answer is revealed via a
@@ -5728,6 +5762,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // UpToDate-style LLM refinement chips first (primary), then the KB-derived follow-ups.
       var refineHTML = maikRefineHTML(question, _refine.chips);
       if (refineHTML) think.insertAdjacentHTML("beforeend", refineHTML);
+      // Related figures (owner, 2026-09-18): the search-result image from a trusted medical page with
+      // the link below it, like Google. Cloud engine + online only; a plain GET with no model behind
+      // it (SMD_AI.figures -> /api/ai/figures -> TinyFish). The image is loaded by the phone straight
+      // from the source site: nothing hosted, cached or regenerated by us. Hidden when nothing fits,
+      // and any image that fails to load removes its own card, so a broken hotlink never shows.
+      try { maikFiguresStrip(think, topicLabel || question); } catch (e) {}
       var chipsHTML = maikFollowupsHTML(pkg, question, assume);
       if (chipsHTML) think.insertAdjacentHTML("beforeend", chipsHTML);
       // Phase 4 — contextual "open in app" tool chips (interactions / calculators / Drug Index).
