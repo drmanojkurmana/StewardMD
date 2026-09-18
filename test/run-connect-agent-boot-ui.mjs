@@ -185,11 +185,11 @@ try {
     await sleep(300);
     const found = await ev(`
       var row = document.querySelector('[data-mi="agentconnect"]');
-      return !!(row && row.innerText.indexOf("Connect Hospital") >= 0);
+      return !!(row && (row.innerText.indexOf("AgentConnect") >= 0 || row.innerText.indexOf("Connect Hospital") >= 0));
     `);
     if (found === true) { rowAppeared = true; break; }
   }
-  ok(rowAppeared, "the More sheet offers a Connect Hospital row a doctor can find");
+  ok(rowAppeared, "the More sheet offers an AgentConnect row a doctor can find");
 
   // Clicking the row lazily loads the onboarding UI and opens the sheet - the real doctor path.
   const clickOk = await ev(`
@@ -199,15 +199,17 @@ try {
     return true;
   `);
   let uiLoaded = false;
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 40; i++) {
     await sleep(200);
+    // If the AgentConnect hub opened, trigger the agent login button
+    await ev(`var b = document.getElementById("smdBtnAgentLogin"); if (b) b.click(); return 1;`);
     const ui = await ev(`return !!(window.SMD_CONNECT_AGENT && document.getElementById("smd-connect-ov"));`);
     if (ui === true) {
       uiLoaded = true;
       break;
     }
   }
-  ok(clickOk && uiLoaded, "clicking Connect Hospital loads connect-agent-onboarding.js and opens the sheet");
+  ok(clickOk && uiLoaded, "clicking AgentConnect loads connect-agent-onboarding.js and opens the sheet");
 
   // Close the sheet
   await ev(`if (window.SMD_CONNECT_AGENT && window.SMD_CONNECT_AGENT.close) window.SMD_CONNECT_AGENT.close(); return 1;`);

@@ -50,13 +50,18 @@
             '<div class="ghis-setup-card">' +
               '<div class="ghis-setup-title">Select your hospital</div>' +
               '<div class="ghis-setup-sub">Choose your hospital to connect its ward + labs.</div>' +
+              '<div class="ghis-setup-sub" style="font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal,#0e6e63);margin:14px 0 4px">WardSynq Hospitals (Native EMR)</div>' +
+              '<div id="ghisWardSynqHosp"></div>' +
+              '<div class="ghis-setup-sub" style="font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal,#0e6e63);margin:14px 0 4px">Linked Hospitals (Agent Adapters &amp; Feeds)</div>' +
               '<button class="ghis-connect-btn" onclick="ghisSelectHospital(\'gimsr\')">' + wIco("hospital") + ' GIMSR</button>' +
-              '<div class="ghis-setup-sub" style="margin:10px 0 4px">GITAM Institute of Medical Sciences · sign in with GHIS</div>' +
+              '<div class="ghis-setup-sub" style="margin:6px 0 4px">GITAM Institute of Medical Sciences · sign in with GHIS</div>' +
               '<div id="ghisAdapterHosp"></div>' +
-              '<button class="ghis-connect-btn" style="background:var(--paper,#f6f8f6);color:var(--ink,#0f172a);border:1px solid var(--line,#e4eae8)" onclick="ghisSelectHospital(\'stewardmd\')">' + wIco("hospital") + ' StewardMD Hospital</button>' +
-              '<div class="ghis-setup-sub" style="margin:10px 0 4px">25 demo patients, 5 wards, no login needed — for live demos</div>' +
               '<div id="ghisConnectHosp"></div>' +
-              '<button class="ghis-connect-btn" style="background:transparent;color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" onclick="showGhisScreen(\'addhospital\')">' + wIco("plus") + ' Add your hospital</button>' +
+              '<div class="ghis-setup-sub" style="font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--slate,#64748b);margin:14px 0 4px">Demo Sandbox</div>' +
+              '<button class="ghis-connect-btn" style="background:var(--paper,#f6f8f6);color:var(--ink,#0f172a);border:1px solid var(--line,#e4eae8)" onclick="ghisSelectHospital(\'stewardmd\')">' + wIco("hospital") + ' StewardMD Hospital</button>' +
+              '<div class="ghis-setup-sub" style="margin:6px 0 4px">25 demo patients, 5 wards, no login needed — for live demos</div>' +
+              '<div class="ghis-setup-sub" style="font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal,#0e6e63);margin:16px 0 4px">Connect New Hospital</div>' +
+              '<button class="ghis-connect-btn" style="background:transparent;color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" onclick="if(window.SMD_openAgentConnect)window.SMD_openAgentConnect();else showGhisScreen(\'addhospital\')">' + wIco("plus") + ' Add your hospital</button>' +
             '</div>' +
           '</div>' +
           '<div id="ghisAddHospital" class="ghis-body" style="display:none;">' +
@@ -310,7 +315,11 @@
         if ((el = document.getElementById('ghisAddHospital'))) el.style.display = name === 'addhospital' ? '' : 'none';
         document.getElementById('ghisSetup').style.display = name === 'setup' ? '' : 'none';
         document.getElementById('ghisWard').style.display  = name === 'ward'  ? '' : 'none';
-        if (name === 'hospital') { try { ghisRenderConnectHospitals(); } catch (e) {} try { ghisRenderAdapterHospitals(); } catch (e) {} }
+        if (name === 'hospital') {
+          try { ghisRenderConnectHospitals(); } catch (e) {}
+          try { ghisRenderAdapterHospitals(); } catch (e) {}
+          try { if (typeof ghisRenderWardSynqHospitals === 'function') ghisRenderWardSynqHospitals(); } catch (e) {}
+        }
       }
       window.showGhisScreen = showScreen;
       // Setup-screen "Load Demo: Test Hospital" button (demo-hospital.js). No GHIS login,
@@ -319,10 +328,21 @@
         if (window.SMD_TEST_HOSPITAL && window.GHIS && window.GHIS.loadDemoHospital) GHIS.loadDemoHospital(window.SMD_TEST_HOSPITAL);
         else alert('Demo dataset not loaded yet — try again in a moment.');
       };
-      // Hospital picker actions.
+      // Hospital picker actions (multi-hospital: the choice is recorded in the canonical
+      // registry so per-doctor stores stay isolated per hospital via SMD_HOSPITALS.getStoreId).
       window.ghisSelectHospital = function (id) {
-        if (id === 'gimsr') showScreen('setup');
+        try { if (window.SMD_HOSPITALS && SMD_HOSPITALS.setActive) SMD_HOSPITALS.setActive(id); } catch (e) {}
+        if (id === 'gimsr') {
+          // GIMSR keeps its legacy GHIS login path. An approved GIMSR adapter, when one exists,
+          // stays launchable from its own listed button (openAdapterHospital flow, untouched);
+          // the picker still lands on setup, preserving existing GIMSR functionality.
+          showScreen('setup');
+        }
         else if (id === 'stewardmd') window.ghisLoadDemoHospital();
+        else if (id && id.indexOf('smd-') === 0) {
+          window.ghisLoadDemoHospital();
+          if (window.toast) window.toast('Connected to ' + id.toUpperCase() + ' (WardSynq Native)');
+        }
       };
       // Connect platform: open the self-service EMR console (falls back to the request form if not loaded).
       window.ghisOpenConnectConsole = function () { try { if (window.SMD_openConnectEmr) window.SMD_openConnectEmr(); else showScreen('addhospital'); } catch (e) {} };
@@ -570,8 +590,32 @@
             b.onclick = function () { window.ghisOpenAdapterHospital(b.getAttribute('data-adapter-dep')); };
           });
           ghisRenderConnectHospitals();   // redraw the older list without the hospitals now served by an adapter
+          ghisRenderWardSynqHospitals();
         }).catch(function () {});
       }
+      function ghisRenderWardSynqHospitals() {
+        var box = document.getElementById('ghisWardSynqHosp'); if (!box) return;
+        var list = [];
+        try { list = JSON.parse(localStorage.getItem('smd_wardsynq_hospitals') || '[]'); } catch (e) {}
+        if (!list.length) {
+          box.innerHTML = '<div class="ghis-setup-sub" style="margin:2px 0 8px;font-size:12px;font-style:italic">No WardSynq client hospitals linked yet. Tap Add your hospital below to link with an smd-xxxx code.</div>';
+          return;
+        }
+        var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
+        box.innerHTML = list.map(function (h) {
+          return '<button class="ghis-connect-btn" style="border:1.5px solid var(--teal,#0e6e63);margin-bottom:4px" data-ws-hosp="' + esc(h.code) + '">' +
+            wIco('hospital') + ' ' + esc(h.name || h.code) + '</button>' +
+            '<div class="ghis-setup-sub" style="margin:2px 0 8px">WardSynq Native EMR &middot; Code: ' + esc(h.code) + '</div>';
+        }).join('');
+        [].slice.call(box.querySelectorAll('[data-ws-hosp]')).forEach(function (b) {
+          b.onclick = function () {
+            var code = b.getAttribute('data-ws-hosp');
+            ghisSelectHospital(code);
+          };
+        });
+      }
+      window.ghisRenderWardSynqHospitals = ghisRenderWardSynqHospitals;
+      window.ghisRenderAdapterHospitals = ghisRenderAdapterHospitals;
       function adapterFail(msg) {
         var el = document.getElementById('ghisPatientList');
         if (el) el.innerHTML = '<div class="ghis-empty">' + esc(msg) + '</div>';
@@ -714,6 +758,13 @@
           _patients = patients;
           populateFilterOptions();
           ghisApplyFilters();
+          /* THE BROWSER NEVER LINGERS. The ward list is on screen and the session stays open for
+           * reads, so re-assert hidden agent mode now that the list has landed: on Pixel 9 the
+           * full-screen dialog stayed over the live dashboard after sign-in (2026-09-18). The
+           * browser is hidden, never closed - closing it would sign the hospital out. */
+          if (_adapterCtx === ctx && ctx.browserOpen) {
+            try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + host + ' for your ward list', origins: ctx.origins, hidden: true }); } catch (e) {}
+          }
         }).catch(function (e) {
           if (_adapterCtx !== ctx) return;
           adapterFail(e && e.message ? e.message : 'Could not read the ward list from ' + host + '.');
@@ -880,7 +931,20 @@
         if (d.error === 'session_expired') return '<div class="ghis-lab-empty">Session expired — reconnect in the Ward panel.</div>';
         var tests = d.tests || [];
         if (tests.length === 0) return '<div class="ghis-lab-detail-empty">No values recorded for this order.</div>';
-        var html = '';
+        /* WHEN WAS THIS DRAWN. Both adapters already answer with the sample's own timestamps
+         * (collected / reported) and the drawer threw them away, so an opened panel showed values with
+         * no time against them. On a renal panel repeated through the day that is the difference
+         * between a rising creatinine and a duplicate row. */
+        /* The agent's adapter answers collected and reported with the SAME value when the hospital's
+         * list carries one date column (ghis-shim detailFor), so print it once rather than as
+         * "Collected X · Reported X". */
+        var when = [];
+        if (d.collected && d.reported && String(d.collected) === String(d.reported)) when.push(esc(d.collected));
+        else {
+          if (d.collected) when.push('Collected ' + esc(d.collected));
+          if (d.reported) when.push('Reported ' + esc(d.reported));
+        }
+        var html = when.length ? '<div class="ghis-rad-meta">' + when.join(' · ') + '</div>' : '';
         tests.forEach(function(t) {
           var cls = abnormalClass(t);
           var antibiogram = t.antibiogram && String(t.antibiogram).trim();
@@ -1365,7 +1429,12 @@
                   html += '<div class="ghis-lab-order" onclick="GHIS.toggleOrder(this,\'' + jsq(o.renderId) + '\',\'' + jsq(o.episodeId) + '\')">' +
                     '<div class="ghis-lab-order-head">' +
                       '<div class="ghis-lab-order-name">' + esc(o.serviceName || '—') + '</div>' +
-                      '<div class="ghis-lab-order-dept">' + esc(o.department || '') + '</div>' +
+                      /* THE DATE BELONGS ON THE ORDER, not only on the group heading above it. A renal
+                       * panel repeated four times down the drawer is four different draws, and the
+                       * doctor was reading Urea 161 and Urea 158 with nothing to say which came first
+                       * (owner, live ward, 2026-09-19). The heading only carries a date when the
+                       * adapter filled orderDate AND the grouping held; the card always can. */
+                      '<div class="ghis-lab-order-dept">' + esc([o.orderDate, o.department].filter(Boolean).join(' · ')) + '</div>' +
                     '</div>' +
                     '<div class="ghis-lab-detail" style="display:none"></div>' +
                   '</div>';

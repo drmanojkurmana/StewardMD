@@ -458,3 +458,18 @@ test('ASK_ORDER asks for what approval needs first', async () => {
   assert.equal(ASK_ORDER[0], 'worklist', 'the ward list is still first');
   for (const r of REQUIRED.concat(OPTIONAL)) assert.ok(ASK_ORDER.includes(r), 'still asks for ' + r);
 });
+
+
+/* THE DETAIL NOBODY COULD SUPPLY. Run 6 finished looking healthy - 763 real patients, five of the six
+ * gate resources proven - and was then refused approval: "no proven backend request for labs-detail".
+ * The doctor could not have fixed it even if they had wanted to, because labs-detail had no prompt and
+ * is not in ASK_ORDER, so it could never be asked. The agent opening the row itself stays the primary
+ * path; this is the one extra tap, spent only when that path did not work on this hospital. */
+test('a detail the agent could not chain is a question the doctor can answer', () => {
+  for (const res of ['labs-detail', 'radiology-detail']) {
+    assert.ok(GAP_PROMPTS[res], res + ' must be askable, or the run is refused for something nobody can supply');
+    assert.match(GAP_PROMPTS[res], /tap Done/, res + ' prompt follows the same shape as every other ask');
+    assert.ok(!/—/.test(GAP_PROMPTS[res]), 'no em-dash in app-facing text');
+  }
+  assert.match(GAP_PROMPTS['labs-detail'], /one lab report/i, 'it asks for ONE report, not the whole list again');
+});

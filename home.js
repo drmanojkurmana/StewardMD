@@ -544,7 +544,8 @@
     logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>',
     // App Lock — PIN keypad + biometric fingerprint (no emoji in security UI).
     keypad: '<circle cx="7" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="18" r="1.3" fill="currentColor" stroke="none"/>',
-    fingerprint: '<path d="M12 3a7 7 0 0 0-7 7c0 3 .5 5.5 1.5 8"/><path d="M12 3a7 7 0 0 1 7 7c0 1.5-.1 2.8-.3 4"/><path d="M8.5 18.5C7.4 16 7 13.5 7 11a5 5 0 0 1 10 0v2"/><path d="M15.5 20c.6-1.2 1-2.5 1.3-4"/><path d="M9.5 20.5C8.3 17.8 7.8 14.8 8 12a4 4 0 0 1 8 0v1.5"/><path d="M12 12v2.5"/>'
+    fingerprint: '<path d="M12 3a7 7 0 0 0-7 7c0 3 .5 5.5 1.5 8"/><path d="M12 3a7 7 0 0 1 7 7c0 1.5-.1 2.8-.3 4"/><path d="M8.5 18.5C7.4 16 7 13.5 7 11a5 5 0 0 1 10 0v2"/><path d="M15.5 20c.6-1.2 1-2.5 1.3-4"/><path d="M9.5 20.5C8.3 17.8 7.8 14.8 8 12a4 4 0 0 1 8 0v1.5"/><path d="M12 12v2.5"/>',
+    hub: '<circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M12 9V6M12 15v3M10 10.5 6.5 7.5M14 10.5l3.5-3M10 13.5l-3.5 3M14 13.5l3.5 3"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
@@ -775,6 +776,245 @@
     if (card) { card.click(); return; }
     var ms = document.getElementById("modeSelect"); if (ms) ms.classList.remove("hidden");
   }
+
+  // Unified AgentConnect Hub: single modal offering Doctor EMR Web Login (AI Agent),
+  // Direct Protocol & IT Feeds (Connect EMR), and WardSynq Hospital ID (smd-xxxx).
+  function openAgentConnectHub(initialTab) {
+    try {
+      var ex = document.getElementById("smdAgentConnectOverlay");
+      if (ex && ex.parentNode) ex.parentNode.removeChild(ex);
+      var previousFocus = document.activeElement, previousOverflow = document.body.style.overflow;
+      var ov = document.createElement("div");
+      ov.id = "smdAgentConnectOverlay";
+      ov.setAttribute("role", "dialog");
+      ov.setAttribute("aria-modal", "true");
+      ov.setAttribute("aria-label", "AgentConnect Hub");
+      ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,#0b1016);display:flex;flex-direction:column;font-family:var(--sans,-apple-system,BlinkMacSystemFont,system-ui,sans-serif);color:var(--ink,#17252b);overflow:hidden";
+
+      var bar = document.createElement("div");
+      bar.style.cssText = "display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 12px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e2e8f0);box-shadow:0 1px 4px rgba(0,0,0,0.06);flex-shrink:0";
+
+      var titleBox = document.createElement("div");
+      titleBox.style.cssText = "flex:1;min-width:0";
+      titleBox.innerHTML = '<div style="font:800 18px var(--hfont,sans-serif);letter-spacing:-0.02em;color:var(--ink,#0f172a);display:flex;align-items:center;gap:8px">' +
+        '<span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;background:var(--teal,#0e6e63);color:#fff;box-shadow:0 2px 6px rgba(14,110,99,0.25)">' +
+        '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>' +
+        '</span>AgentConnect</div>' +
+        '<div style="font:500 12.5px var(--sans,sans-serif);color:var(--slate,#64748b);margin-top:2px">Connect your hospital\'s EMR to StewardMD</div>';
+
+      var closeBtn = document.createElement("button");
+      closeBtn.type = "button";
+      closeBtn.textContent = "Done";
+      closeBtn.style.cssText = "background:var(--panel,#fff);color:var(--ink,#17252b);border:1px solid var(--line,#dfe6e4);border-radius:12px;min-height:42px;padding:8px 20px;font:600 14px var(--sans,sans-serif);cursor:pointer;flex-shrink:0";
+
+      function closeHub() {
+        if (ov.parentNode) ov.parentNode.removeChild(ov);
+        document.body.style.overflow = previousOverflow;
+        if (previousFocus && previousFocus.isConnected) previousFocus.focus();
+      }
+      closeBtn.onclick = closeHub;
+
+      ov.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { e.preventDefault(); closeHub(); }
+      });
+
+      var scroll = document.createElement("div");
+      scroll.style.cssText = "flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:20px 16px calc(env(safe-area-inset-bottom,0px) + 32px);max-width:760px;margin:0 auto;width:100%;box-sizing:border-box";
+
+      var intro = document.createElement("div");
+      intro.style.cssText = "margin-bottom:20px;text-align:center";
+      intro.innerHTML = '<div style="font:700 13px var(--sans,sans-serif);color:var(--teal,#0e6e63);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Unified Hospital Link</div>' +
+        '<div style="font:800 22px var(--hfont,sans-serif);color:var(--ink,#0f172a);letter-spacing:-0.02em">Choose how your hospital connects</div>' +
+        '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--slate,#64748b);margin-top:6px;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.5">Link your hospital\'s EMR to auto-sync inpatient ward lists, real-time lab reports, and vitals directly into StewardMD.</div>';
+      scroll.appendChild(intro);
+
+      // Pathway 1: EMR Website Login (Connect Agent)
+      var card1 = document.createElement("div");
+      card1.style.cssText = "background:var(--panel,#fff);border:1.5px solid var(--teal,#0e6e63);border-radius:18px;padding:20px;margin-bottom:18px;box-shadow:0 4px 16px rgba(14,110,99,0.08);position:relative";
+      card1.innerHTML =
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
+          '<span style="background:var(--teal,#0e6e63);color:#fff;font:700 11px var(--sans,sans-serif);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:6px">RECOMMENDED &middot; ZERO IT SETUP</span>' +
+          '<span style="font:600 12px var(--sans,sans-serif);color:var(--slate,#64748b);margin-left:auto">Doctor Self-Service</span>' +
+        '</div>' +
+        '<div style="font:800 18px var(--hfont,sans-serif);color:var(--ink,#0f172a);letter-spacing:-0.01em;display:flex;align-items:center;gap:8px">' +
+          'Connect by EMR Website Login' +
+        '</div>' +
+        '<div style="font:600 13.5px var(--sans,sans-serif);color:var(--teal,#0e6e63);margin:4px 0 10px">Sign in to your hospital portal &mdash; AI agent does the rest</div>' +
+        '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--ink,#334155);line-height:1.55;margin-bottom:14px">' +
+          'Sign in to your hospital\'s web portal or HIS in a private, encrypted in-app browser. Our AI agent autonomously explores your hospital screens, discovers patient rosters and lab results, and creates a verified read-only adapter tailored to your hospital. Zero changes to your hospital\'s EMR and no IT approvals required.' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:16px">' +
+          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> 100% Private In-App Login</div>' +
+          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Autonomous Screen Discovery</div>' +
+          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Verified with Real Patients</div>' +
+        '</div>' +
+        '<button id="smdBtnAgentLogin" type="button" style="width:100%;min-height:46px;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:12px;font:700 15px var(--sans,sans-serif);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 2px 8px rgba(14,110,99,0.3)">' +
+          '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>' +
+          'Start EMR Web Login &amp; Discovery' +
+        '</button>';
+      scroll.appendChild(card1);
+
+      // Pathway 2: Direct Protocol & IT Feeds (Connect EMR)
+      var card2 = document.createElement("div");
+      card2.style.cssText = "background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:18px;padding:20px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,0.04)";
+      card2.innerHTML =
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
+          '<span style="background:var(--panel,#f1f5f9);color:var(--slate,#475569);border:1px solid var(--line,#cbd5e1);font:700 11px var(--sans,sans-serif);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:6px">HOSPITAL IT &amp; INFORMATICS</span>' +
+          '<span style="font:600 12px var(--sans,sans-serif);color:var(--slate,#64748b);margin-left:auto">Standards-Based</span>' +
+        '</div>' +
+        '<div style="font:800 18px var(--hfont,sans-serif);color:var(--ink,#0f172a);letter-spacing:-0.01em">' +
+          'Direct Protocol &amp; IT Feeds' +
+        '</div>' +
+        '<div style="font:600 13.5px var(--sans,sans-serif);color:var(--slate,#64748b);margin:4px 0 10px">Connect your hospital\'s IT feeds directly via standard clinical APIs</div>' +
+        '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--ink,#334155);line-height:1.55;margin-bottom:14px">' +
+          'Select the protocol or interface your hospital\'s IT or LIS team supports. StewardMD integrates with 8 standard connection types:' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-bottom:16px" id="smdProtoGrid">' +
+          '<button type="button" data-proto="fhir" style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;text-align:left;cursor:pointer;font-family:inherit"><div style="font:700 13px var(--sans,sans-serif);color:var(--ink,#0f172a)">FHIR (R4)</div><div style="font:500 11px var(--sans,sans-serif);color:var(--slate,#64748b)">Token / SMART</div></button>' +
+          '<button type="button" data-proto="hl7" style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;text-align:left;cursor:pointer;font-family:inherit"><div style="font:700 13px var(--sans,sans-serif);color:var(--ink,#0f172a)">HL7 v2 Feed</div><div style="font:500 11px var(--sans,sans-serif);color:var(--slate,#64748b)">MLLP / TLS feed</div></button>' +
+          '<button type="button" data-proto="webhook" style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;text-align:left;cursor:pointer;font-family:inherit"><div style="font:700 13px var(--sans,sans-serif);color:var(--ink,#0f172a)">Webhook Push</div><div style="font:500 11px var(--sans,sans-serif);color:var(--slate,#64748b)">FHIR push hook</div></button>' +
+          '<button type="button" data-proto="rest" style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;text-align:left;cursor:pointer;font-family:inherit"><div style="font:700 13px var(--sans,sans-serif);color:var(--ink,#0f172a)">REST JSON API</div><div style="font:500 11px var(--sans,sans-serif);color:var(--slate,#64748b)">HTTP REST LIS</div></button>' +
+          '<button type="button" data-proto="dicom" style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;text-align:left;cursor:pointer;font-family:inherit"><div style="font:700 13px var(--sans,sans-serif);color:var(--ink,#0f172a)">DICOMweb</div><div style="font:500 11px var(--sans,sans-serif);color:var(--slate,#64748b)">Imaging metadata</div></button>' +
+          '<button type="button" data-proto="graphql" style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;text-align:left;cursor:pointer;font-family:inherit"><div style="font:700 13px var(--sans,sans-serif);color:var(--ink,#0f172a)">GraphQL API</div><div style="font:500 11px var(--sans,sans-serif);color:var(--slate,#64748b)">GraphQL lab query</div></button>' +
+          '<button type="button" data-proto="sql" style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;text-align:left;cursor:pointer;font-family:inherit"><div style="font:700 13px var(--sans,sans-serif);color:var(--ink,#0f172a)">SQL DB Feed</div><div style="font:500 11px var(--sans,sans-serif);color:var(--slate,#64748b)">PostgreSQL/MySQL</div></button>' +
+          '<button type="button" data-proto="csv" style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;text-align:left;cursor:pointer;font-family:inherit"><div style="font:700 13px var(--sans,sans-serif);color:var(--ink,#0f172a)">CSV / Flat File</div><div style="font:500 11px var(--sans,sans-serif);color:var(--slate,#64748b)">One-shot import</div></button>' +
+        '</div>' +
+        '<button id="smdBtnAllProtos" type="button" style="width:100%;min-height:42px;background:var(--paper,#f1f5f9);color:var(--ink,#0f172a);border:1px solid var(--line,#cbd5e1);border-radius:12px;font:600 14px var(--sans,sans-serif);cursor:pointer">' +
+          'Open EMR Integration Console (Connect EMR)' +
+        '</button>';
+      scroll.appendChild(card2);
+
+      // Pathway 3: WardSynq Native Hospital ID (`smd-xxxx`)
+      var card3 = document.createElement("div");
+      card3.style.cssText = "background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:18px;padding:20px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,0.04)";
+      card3.innerHTML =
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
+          '<span style="background:rgba(14,110,99,0.1);color:var(--teal,#0e6e63);border:1px solid rgba(14,110,99,0.25);font:700 11px var(--sans,sans-serif);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:6px">WARDSYNQ CLIENT HOSPITALS</span>' +
+          '<span style="font:600 12px var(--sans,sans-serif);color:var(--slate,#64748b);margin-left:auto">Native EMR</span>' +
+        '</div>' +
+        '<div style="font:800 18px var(--hfont,sans-serif);color:var(--ink,#0f172a);letter-spacing:-0.01em">' +
+          'WardSynq Hospital Code Link' +
+        '</div>' +
+        '<div style="font:600 13.5px var(--sans,sans-serif);color:var(--slate,#64748b);margin:4px 0 10px">For hospitals &amp; clinics running StewardMD native WardSynq EMR</div>' +
+        '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--ink,#334155);line-height:1.55;margin-bottom:12px">' +
+          'If your institution has purchased or deployed WardSynq, enter your assigned hospital or clinic ID (e.g. <code>smd-metro</code>, <code>smd-kims</code>) to link your institution.' +
+        '</div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">' +
+          '<input id="smdWardSynqInput" placeholder="e.g. smd-metro or smd-kims" style="flex:1;min-width:200px;border:1px solid var(--line,#cbd5e1);border-radius:11px;padding:11px 14px;font:600 14px monospace;background:var(--paper,#f8fafc);color:var(--ink,#0f172a)" autocapitalize="none" spellcheck="false">' +
+          '<button id="smdBtnLinkWardSynq" type="button" style="min-height:44px;padding:8px 20px;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:11px;font:700 14px var(--sans,sans-serif);cursor:pointer">Link Hospital</button>' +
+        '</div>' +
+        '<div id="smdWardSynqMsg" style="margin-top:10px;font:600 13px var(--sans,sans-serif);display:none"></div>' +
+        '<div id="smdWardSynqList" style="margin-top:12px"></div>';
+      scroll.appendChild(card3);
+
+      ov.appendChild(bar);
+      bar.appendChild(titleBox);
+      bar.appendChild(closeBtn);
+      ov.appendChild(scroll);
+      document.body.appendChild(ov);
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+
+      // Event handlers
+      var btnAgent = card1.querySelector("#smdBtnAgentLogin");
+      if (btnAgent) {
+        btnAgent.onclick = function () {
+          closeHub();
+          setTimeout(function () {
+            if (window.SMD_CONNECT_AGENT_BOOT && SMD_CONNECT_AGENT_BOOT.open) {
+              SMD_CONNECT_AGENT_BOOT.open().catch(function (e) {
+                if (window.toast) toast("Connect Hospital unavailable: " + (e && e.message ? e.message : "load failed"));
+              });
+            } else if (window.toast) { toast("Connect Agent is not enabled"); }
+          }, 100);
+        };
+      }
+
+      var protoGrid = card2.querySelector("#smdProtoGrid");
+      if (protoGrid) {
+        protoGrid.querySelectorAll("[data-proto]").forEach(function (b) {
+          b.onclick = function () {
+            var proto = b.getAttribute("data-proto");
+            closeHub();
+            setTimeout(function () { ACT.connect(proto); }, 100);
+          };
+        });
+      }
+
+      var btnAllProtos = card2.querySelector("#smdBtnAllProtos");
+      if (btnAllProtos) {
+        btnAllProtos.onclick = function () {
+          closeHub();
+          setTimeout(function () { ACT.connect(); }, 100);
+        };
+      }
+
+      function renderWardSynqList() {
+        var listBox = card3.querySelector("#smdWardSynqList");
+        if (!listBox) return;
+        var list = [];
+        try { list = JSON.parse(localStorage.getItem("smd_wardsynq_hospitals") || "[]"); } catch (e) {}
+        if (!list.length) { listBox.innerHTML = ""; return; }
+        listBox.innerHTML = '<div style="font:700 12px var(--sans,sans-serif);color:var(--slate,#64748b);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">Your Linked WardSynq Hospitals</div>' +
+          list.map(function (h, idx) {
+            return '<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;margin-bottom:6px">' +
+              '<div style="flex:1"><b style="font-size:13.5px">' + (h.name || h.code) + '</b> <span style="font-family:monospace;font-size:12px;color:var(--teal,#0e6e63);margin-left:4px">(' + h.code + ')</span></div>' +
+              '<button type="button" data-ws-open="' + h.code + '" style="background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:8px;padding:6px 12px;font:700 12px var(--sans,sans-serif);cursor:pointer">Open in Ward Sync</button>' +
+              '<button type="button" data-ws-del="' + idx + '" style="background:none;border:none;color:var(--red,#ef4444);font:600 16px sans-serif;cursor:pointer;padding:4px 8px">&times;</button>' +
+            '</div>';
+          }).join("");
+        listBox.querySelectorAll("[data-ws-open]").forEach(function (b) {
+          b.onclick = function () {
+            closeHub();
+            setTimeout(function () {
+              ACT.ward();
+              if (window.ghisSelectHospital) window.ghisSelectHospital(b.getAttribute("data-ws-open"));
+            }, 100);
+          };
+        });
+        listBox.querySelectorAll("[data-ws-del]").forEach(function (b) {
+          b.onclick = function () {
+            var i = parseInt(b.getAttribute("data-ws-del"), 10);
+            list.splice(i, 1);
+            try { localStorage.setItem("smd_wardsynq_hospitals", JSON.stringify(list)); } catch (e) {}
+            renderWardSynqList();
+            if (window.ghisRenderAdapterHospitals) window.ghisRenderAdapterHospitals();
+          };
+        });
+      }
+      renderWardSynqList();
+
+      var btnLinkWs = card3.querySelector("#smdBtnLinkWardSynq");
+      var wsInput = card3.querySelector("#smdWardSynqInput");
+      var wsMsg = card3.querySelector("#smdWardSynqMsg");
+      if (btnLinkWs && wsInput) {
+        btnLinkWs.onclick = function () {
+          var code = (wsInput.value || "").trim().toLowerCase();
+          if (!code) {
+            wsMsg.style.display = "block"; wsMsg.style.color = "var(--red,#ef4444)";
+            wsMsg.textContent = "Please enter a hospital or clinic code (e.g. smd-metro).";
+            return;
+          }
+          if (code.indexOf("smd-") !== 0) code = "smd-" + code;
+          var hName = code.replace(/^smd-/, "").toUpperCase() + " Hospital (WardSynq)";
+          var list = [];
+          try { list = JSON.parse(localStorage.getItem("smd_wardsynq_hospitals") || "[]"); } catch (e) {}
+          if (!list.some(function (x) { return x.code === code; })) {
+            list.push({ code: code, name: hName, linkedAt: Date.now() });
+            try { localStorage.setItem("smd_wardsynq_hospitals", JSON.stringify(list)); } catch (e) {}
+          }
+          wsInput.value = "";
+          wsMsg.style.display = "block"; wsMsg.style.color = "var(--teal,#0e6e63)";
+          wsMsg.innerHTML = '&check; Linked <b>' + hName + '</b> successfully! Ward units and beds are now available in Ward Sync.';
+          renderWardSynqList();
+          if (window.ghisRenderAdapterHospitals) window.ghisRenderAdapterHospitals();
+        };
+      }
+    } catch (e) {
+      if (window.toast) toast("AgentConnect failed to open: " + (e && e.message ? e.message : e));
+    }
+  }
+
   // --- action delegates. Overlay screens (drawer/search/calculators/drugs/guidelines/about) layer OVER the v2 home
   //     (higher z-index) and return to it when closed — so we DON'T hide the home for them. Only in-shell flows hide it. ---
   var ACT = {
@@ -878,13 +1118,10 @@
         (govschemesOn() ? tile("hospital", "Scheme Search", "Package codes and rates", "govschemes") : "") +
         tile("search", "Search ICD", "ICD-10 / ICD-11 diagnosis codes", "icdsearch") +
         '</div></section><div class="rds-hospital-connect">' +
-        tile("share", "Connect", "Link your hospital EMR", "connect") +
-        // Agent Connect: the doctor onboards their OWN hospital by signing in to its EMR themselves.
-        // Same flag as the boot module (smd_connect_agent, default OFF) - the boot module owns that
-        // check and only publishes SMD_CONNECT_AGENT_BOOT when it passes, so the tile cannot appear
-        // without it and the flag logic is not duplicated here.
+        // AgentConnect: unified onboarding hub for doctor EMR login, IT protocol feeds, and WardSynq hospital ID.
         ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
-          ? tile("hospital", "Connect Hospital", "Onboard your hospital EMR", "agentconnect") : "") +
+          ? tile("hub", "AgentConnect", "Connect your hospital's EMR", "agentconnect")
+          : tile("hub", "Connect EMR", "Link your hospital", "connect")) +
         '</div></div>');
       sheetEl().classList.add("rds-hospital-sheet");
       sheetEl().setAttribute("aria-labelledby", "rdsHospitalTitle");
@@ -897,8 +1134,8 @@
             if (a === "rxverify") { ACT.prescriptionVerify(); return; }
             if (a === "govschemes") { ACT.govschemes(); return; }
             if (a === "icdsearch") { ACT.icdsearch(); return; }
-            if (a === "agentconnect") { ACT.agentconnect(); return; }
-            ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)();
+            if (a === "agentconnect" || a === "connect") { ACT.agentconnect(); return; }
+            ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.agentconnect)();
           }, 70);
         });
       });
@@ -980,12 +1217,9 @@
       if (window.INSULIN && INSULIN.open) INSULIN.open(); else toast("Insulin calculator loading…");
     },
     hospadmin: function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); },
-    connect: function () {
-      // Owner-only in-app EMR onboarding console (StewardMD Connect). Opens the bundled connect-emr.html in a
-      // full-screen same-origin overlay so it runs INSIDE the app (no browser). The console detects the native
-      // origin and calls the absolute stewardmd.in API; the server re-checks owner + RBAC on every request.
-      // Open to ANY signed-in user (P1 self-service): the console handles sign-in + create-your-hospital, and
-      // the server enforces membership/RBAC on every call. Not owner-gated anymore.
+    connect: function (protocol) {
+      // In-app EMR onboarding console (StewardMD Connect). Opens the bundled connect-emr.html in a
+      // full-screen same-origin overlay. Optionally deep-links to a specific protocol feed (e.g. ?type=rest).
       try {
         var ex = document.getElementById("smdConnectOverlay"); if (ex) return;
         var previousFocus=document.activeElement, previousOverflow=document.body.style.overflow;
@@ -995,11 +1229,13 @@
         var bar = document.createElement("div");
         bar.style.cssText = "display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;background:var(--panel,#111820);border-bottom:1px solid var(--line,#22303c)";
         var t = document.createElement("div"); t.textContent = "Connect EMR"; t.style.cssText = "flex:1;font:800 15px var(--hfont,sans-serif);color:var(--ink,#e8eef4)";
-        var x = document.createElement("button"); x.textContent = "Done"; x.type="button"; x.style.cssText = "background:var(--panel,#fff);color:var(--ink,#17252b);border:1px solid var(--line,#dfe6e4);border-radius:12px;min-height:44px;padding:8px 18px;font:600 15px -apple-system,system-ui";
+        var x = document.createElement("button"); x.textContent = "Done"; x.type="button"; x.style.cssText = "background:var(--panel,#fff);color:var(--ink,#17252b);border:1px solid var(--line,#dfe6e4);border-radius:12px;min-height:44px;padding:8px 18px;font:600 15px -apple-system,system-ui;cursor:pointer";
         function closeConnect(){if(ov.parentNode)ov.parentNode.removeChild(ov);document.body.style.overflow=previousOverflow;if(previousFocus&&previousFocus.isConnected)previousFocus.focus();}
         x.onclick=closeConnect;
         ov.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();closeConnect();}else if(e.key==="Tab"&&e.shiftKey&&e.target===x){e.preventDefault();fr.focus();}});
-        var fr = document.createElement("iframe"); fr.src = "connect-emr.html?v=conn3-calm"; fr.title="EMR connection settings";
+        var src = "connect-emr.html?v=conn3-calm";
+        if (protocol && typeof protocol === "string") src += "&type=" + encodeURIComponent(protocol) + "&section=onboard";
+        var fr = document.createElement("iframe"); fr.src = src; fr.title="EMR connection settings";
         fr.style.cssText = "flex:1;min-height:0;width:100%;border:0;background:var(--panel,#fff)";
         fr.onload=function(){try{fr.contentDocument.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();closeConnect();}else if(e.key==="Tab"){var controls=[].slice.call(fr.contentDocument.querySelectorAll('button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),textarea:not(:disabled)')).filter(function(n){return n.getClientRects().length;});if((e.shiftKey&&e.target===controls[0])||(!e.shiftKey&&e.target===controls[controls.length-1])){e.preventDefault();x.focus();}}});}catch(e){}};
         bar.appendChild(t); bar.appendChild(x); ov.appendChild(bar); ov.appendChild(fr);
@@ -1008,23 +1244,22 @@
       } catch (e) { if (window.toast) toast("Connect failed to open"); }
     },
     connectpatient: function () { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(); else toast("Connect patient loading…"); } catch (e) {} },
-    // Agent Connect: doctor-driven hospital onboarding. The boot module (connect-agent-boot.js) owns
-    // the smd_connect_agent flag check and the lazy load of the onboarding UI; this only opens it.
-    agentconnect: function () {
+    // AgentConnect: unified hospital onboarding hub. Brings together EMR Website Login (AI Agent),
+    // direct protocol feeds (FHIR, HL7, Webhook, REST, DICOM, GraphQL, SQL), and WardSynq hospital IDs.
+    agentconnect: function (initialTab) {
       try {
-        if (window.SMD_CONNECT_AGENT_BOOT && SMD_CONNECT_AGENT_BOOT.open) {
-          SMD_CONNECT_AGENT_BOOT.open().catch(function (e) {
-            if (window.toast) toast("Connect Hospital unavailable: " + (e && e.message ? e.message : "load failed"));
-          });
-        } else if (window.toast) { toast("Connect Hospital is not enabled"); }
-      } catch (e) { if (window.toast) toast("Connect Hospital unavailable"); }
+        openAgentConnectHub(initialTab);
+      } catch (e) {
+        if (window.toast) toast("AgentConnect unavailable: " + (e && e.message ? e.message : e));
+      }
     },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); },
     maitri: function () { if (window.FollowCare && FollowCare.maitri) FollowCare.maitri(); else if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("MAiTRI loading…"); },
     customizetools: function () { openToolsCustomize(); }
   };
   // Globals so other modules (e.g. Ward Sync / ghis-ward.js) can open the Connect surfaces directly.
-  try { window.SMD_openConnectEmr = function () { try { ACT.connect(); } catch (e) {} }; } catch (e) {}
+  try { window.SMD_openConnectEmr = function (proto) { try { ACT.connect(proto); } catch (e) {} }; } catch (e) {}
+  try { window.SMD_openAgentConnect = function (tab) { try { ACT.agentconnect(tab); } catch (e) {} }; } catch (e) {}
   try { window.SMD_openConnectPatient = function (tid, pid, cid, nm) { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(tid, pid, cid, nm); } catch (e) {} }; } catch (e) {}
   // Deep-link router for widget taps + Control Center controls (stewardmd://<route>). native-bridge.js
   // forwards the URL here on appUrlOpen / cold-launch. Maps each route to the matching ACT opener.
@@ -1710,8 +1945,7 @@
     { act: "icdsearch", ic: "search", tt: "Search ICD", sub: "ICD-10 / ICD-11 diagnosis codes", defOn: true },
     { act: "icu", ic: "monitor_heart", tt: "ICU & Ward", sub: "Critical care", defOn: false },
     { act: "ward", ic: "bed", tt: "Ward Sync", sub: "Inpatient GHIS", defOn: false },
-    { act: "connect", ic: "hub", tt: "Connect EMR", sub: "Link your hospital", defOn: false },
-    { act: "agentconnect", ic: "local_hospital", tt: "Connect Hospital", sub: "Onboard your EMR", defOn: true },
+    { act: "agentconnect", ic: "hub", tt: "AgentConnect", sub: "Connect your hospital's EMR", defOn: true },
     { act: "startcase", ic: "stethoscope", tt: "Start Case", sub: "Assessment", defOn: false },
     { act: "reasoning", ic: "neurology", tt: "Dx Patient", sub: "Differential", defOn: false },
     { act: "askai", ic: "auto_awesome", tt: "Ask MaiK", sub: "AI assistant", defOn: false },
@@ -1722,7 +1956,11 @@
     { act: "syndromes", ic: "coronavirus", tt: "Syndromes", sub: "Reference", defOn: false },
     { act: "antibiogram", ic: "biotech", tt: "Antibiogram", sub: "Local resistance", defOn: false },
   ];
-  function homeToolByAct(a) { for (var i = 0; i < HOME_TOOLS.length; i++) if (HOME_TOOLS[i].act === a) return HOME_TOOLS[i]; return null; }
+  function homeToolByAct(a) {
+    if (a === "connect") a = "agentconnect";
+    for (var i = 0; i < HOME_TOOLS.length; i++) if (HOME_TOOLS[i].act === a) return HOME_TOOLS[i];
+    return null;
+  }
   var _reorderMode = false, _pressT = null;
   var DRAG_DOTS = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="9" cy="6" r="1.5"/><circle cx="15" cy="6" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="18" r="1.5"/><circle cx="15" cy="18" r="1.5"/></svg>';
   function toolOrderKey() { return "smd_home_tools_order"; }
@@ -2300,12 +2538,10 @@
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("trend", "AI Usage", "MaiK Tokens, today&rsquo;s spend &amp; rate card", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
-      mi("framework", "Connect EMR", "Onboard a hospital or EMR", "connect") +
-      // Agent Connect: the doctor onboards their OWN hospital by signing in to its EMR themselves,
-      // rather than an admin wiring a connection up front. Flag-gated by the boot module
-      // (smd_connect_agent, default OFF), which only publishes SMD_CONNECT_AGENT_BOOT when it passes.
+      // AgentConnect: unified onboarding hub for doctor EMR login, IT protocol feeds, and WardSynq hospital ID.
       ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
-        ? mi("hospital", "Connect Hospital", "Onboard your hospital by signing in yourself", "agentconnect") : "") +
+        ? mi("hub", "AgentConnect", "Connect your hospital's EMR", "agentconnect")
+        : mi("hub", "Connect EMR", "Onboard a hospital or EMR", "connect")) +
       mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
@@ -2341,6 +2577,7 @@
         if (a === "privacy") { closeSheet(); if (typeof openModal === "function") openModal("privacyModal"); return; }
         if (a === "terms") { closeSheet(); if (typeof openModal === "function") openModal("termsModal"); return; }
         closeSheet();
+        if (a === "connect") a = "agentconnect";
         if (ACT[a]) ACT[a]();
       });
     });
