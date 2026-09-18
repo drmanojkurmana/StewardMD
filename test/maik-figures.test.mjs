@@ -33,9 +33,31 @@ test("a page with only logos, icons and an unrelated og:image yields NOTHING (no
   assert.equal(pickFigure(junk, PAGE, "hematuria workup"), null);
 });
 
-test("og:image is accepted only when it names the topic or is plainly a figure", () => {
+test("og:image is accepted only when it names the topic or is plainly a figure, AND looks like an image file", () => {
   assert.equal(pickFigure('<meta property="og:image" content="/media/hematuria-algorithm.png">', PAGE, "hematuria").img, "https://www.med.unc.edu/media/hematuria-algorithm.png");
   assert.equal(pickFigure('<meta property="og:image" content="/media/hero.jpg">', PAGE, "hematuria"), null);
+  // aafp.org (production, 2026-09-18): og:image was the article URL itself, text/html -> broken card.
+  assert.equal(pickFigure('<meta property="og:image" content="https://www.aafp.org/afp/2022/0700/acute-pancreatitis">', "https://www.aafp.org/afp/2022/0700/acute-pancreatitis.html", "acute pancreatitis management"), null);
+});
+
+test("when a search returns only homepages, ONE reworded retry runs before giving up (hyperkalemia ECG, production 2026-09-18)", async () => {
+  const searches = []; const realFetch = global.fetch;
+  global.fetch = async (url) => {
+    const u = String(url);
+    if (u.startsWith("https://api.search.tinyfish.ai")) {
+      const query = new URL(u).searchParams.get("query"); searches.push(query);
+      const deep = /review article/.test(query);
+      return { ok: true, json: async () => ({ results: deep
+        ? [{ title: "Hyperkalaemia ECG Library", url: "https://litfl.com/hyperkalaemia-ecg-library/", snippet: "s" }]
+        : [{ title: "LITFL", url: "https://litfl.com", snippet: "s" }, { title: "PMC", url: "https://pmc.ncbi.nlm.nih.gov", snippet: "s" }] }) };
+    }
+    return { ok: true, status: 200, headers: { get: () => "text/html" }, text: async () => '<figure><img src="/wp-content/uploads/ECG-Hyperkalaemia-peaked-T.jpg" alt="Hyperkalaemia ECG" width="1024"></figure>' };
+  };
+  try {
+    const r = await findFigures({ TINYFISH_API_KEY: "k" }, "hyperkalemia ECG changes");
+    assert.deepEqual(searches, ["hyperkalemia ECG changes", "hyperkalemia ECG changes review article"]);
+    assert.equal(r.length, 1); assert.match(r[0].img, /ECG-Hyperkalaemia-peaked-T\.jpg$/);
+  } finally { global.fetch = realFetch; }
 });
 
 test("findFigures: untrusted pages and PDFs are skipped before any fetch; no key -> []", async () => {
