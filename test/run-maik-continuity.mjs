@@ -70,9 +70,16 @@ try {
   r = await ask("what antibiotics?");
   chk('"what antibiotics?" → 1 call, empiric-therapy for cholangitis', r.prov===1 && /cholangitis/i.test(r.q) && /antimicrobial|antibiotic|empiric/i.test(r.q), "q="+JSON.stringify(r.q));
   // bare "dose?" with no prior specific drug → clarify, no call
+  // Owner, 2026-09-04: a bare "dose?" right after a treatment answer means the first-line drug for
+  // the topic we are on; asking "which drug?" back was the most assistant-unlike reply in the live
+  // battery. So: ONE call, for the first-line drug of the current topic.
   r = await ask("dose?");
-  chk('"dose?" (no drug) → 0 provider calls (clarify)', r.prov===0, "prov="+r.prov);
-  chk('  clarify asks which drug', /which drug/i.test(r.last), "reply="+JSON.stringify(r.last.slice(0,50)));
+  chk('"dose?" (no drug) → 1 call, first-line drug for the topic', r.prov===1 && /first-line drug and dose for .*cholangitis/i.test(r.q), "prov="+r.prov+" q="+JSON.stringify(r.q));
+  // Owner screenshot, 2026-09-18: a short unrecognised phrase mid-conversation (the app's own
+  // "Glasgow-Blatchford" workflow chip) must be asked IN the topic, never answered with the clarifier.
+  r = await ask("Glasgow-Blatchford");
+  chk('"Glasgow-Blatchford" mid-topic → 1 call in the topic\'s context (not the clarifier)', r.prov===1 && /cholangitis/i.test(r.q) && /glasgow/i.test(r.q), "prov="+r.prov+" q="+JSON.stringify(r.q));
+  chk('  no "Could you tell me the condition" clarifier', !/tell me the condition/i.test(r.last), "reply="+JSON.stringify(r.last.slice(0,60)));
   // casual after a topic must stay casual and not hijack via follow-up
   r = await ask("thanks");
   chk('"thanks" after a topic → 0 provider calls (casual, not follow-up)', r.prov===0, "prov="+r.prov);

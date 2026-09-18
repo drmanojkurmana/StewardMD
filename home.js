@@ -6192,7 +6192,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 var box = document.createElement("div"); box.className = "maik-refine";
                 var lbl = document.createElement("div"); lbl.className = "maik-refine-lbl"; lbl.textContent = "Clinical workflow: next steps"; box.appendChild(lbl);
                 var row = document.createElement("div"); row.className = "maik-followups";
-                var base = (res.primary && res.primary.canonicalName) ? res.primary.canonicalName + " " : "";
+                // A workflow step tapped on its own ("Glasgow-Blatchford") reached send() as a bare
+                // two-word query and got the clarifier (owner screenshot, 2026-09-18). Carry the topic:
+                // the resolved disease, else the conversation topic, else the question itself.
+                var base = (res.primary && res.primary.canonicalName) ? res.primary.canonicalName + " " : (((_maikTopic && _maikTopic.topic) || question || "") + " ");
+                base = base.trim() ? base.trim() + ": " : "";
                 wf.steps.slice(0, 6).forEach(function (s) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = s; b.addEventListener("click", function () { try { qEl.value = base + s; } catch (e) {} send(); }); row.appendChild(b); });
                 box.appendChild(row); host.appendChild(box);
               }
@@ -6491,7 +6495,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var b = document.createElement("button"); b.className = "maik-chip"; b.style.marginTop = "8px"; b.textContent = "Open Dx My Patient";
         b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
       }
-      if (route.kind === "clarify") { bubble("ai", '<div class="maik-welcome">Could you tell me the condition, symptoms, or what aspect you’d like to review? For example: “how to treat DKA?” or “signs of meningitis”.</div>'); return; }
+      if (route.kind === "clarify") {
+        // Mid-conversation, a short unrecognised phrase ("Glasgow-Blatchford", "Rockall", "endoscopy
+        // timing") is about the topic we are on, not a new question with a missing subject. Ask it in
+        // that context instead of asking the doctor what they meant (owner screenshot, 2026-09-18).
+        if (maikV2() && _maikTopic && _maikTopic.topic && (!_maikTopic.ts || (Date.now() - _maikTopic.ts) < 30 * 60 * 1000)) {
+          var _cq = _maikTopic.topic + ": " + q.replace(/\?+$/, "").trim();
+          runClinical(_cq, _maikTopic.topic + " " + q, "concise", active, _maikTopic.topic); return;
+        }
+        bubble("ai", '<div class="maik-welcome">Could you tell me the condition, symptoms, or what aspect you’d like to review? For example: “how to treat DKA?” or “signs of meningitis”.</div>'); return;
+      }
       var _lk = maikDoseLookup(q);
       if (_lk) { maikDoseCard(_lk, q); return; }
       var topic = maikV2() ? maikCanonTopic(q) : q;
