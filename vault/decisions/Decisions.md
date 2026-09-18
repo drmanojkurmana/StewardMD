@@ -29,6 +29,31 @@ figure pages like the UNC AUA algorithm do), and the rule is the OCR rule: show 
 a wrong image. No KV cache of results by the owner's instruction, so each answer costs one TinyFish
 query plus up to five page reads. Shipped behind the flag. Tests: `test/maik-figures.test.mjs`.
 
+## 2026-09-19 · Offline MaiK must reply like MaiK: audit findings and what shipped
+
+**Owner:** "audit offline AI models, they should reply like MaiK native models."
+
+**Finding.** The on-device models were wrapped in a second, weaker MaiK: (1) `maik-local.js`
+discarded the cloud package's `topicMatch` and re-retrieved from the book by word overlap, so
+"melena workup" grounded on a dermatitis chunk containing "workup"; (2) answers carried pipeline
+verdicts ("Left out: 3 statements") in the clinical text; (3) `_brainAugment` skipped the local
+engine entirely, so no follow-up chips, workflow steps or tool launchers; (4) 20 to 70 s per answer
+on Lite; (5) Cortex leaked its SFT template and once returned nothing; (6) duplicated render and an
+export full of button labels; (7) the per-model battery had never been run.
+
+**Shipped.** (1) Two RAGs chained: the cloud topic match is the ROUTER (which disease), the
+on-device book is the CORPUS; the router's disease name rides in the BM25 query and is a required
+anchor (`retrieveGrounding(packId, question, topic)`, `test/maik-rag-router.test.mjs`).
+(2) Verdict moved to `result.grounding.removed` and the meta line. (3) Chips, workflow and tools
+render on device; only page-cited verify lines stay off. (6) Export strips all UI. Earlier the same
+day: greetings never hit a model, leaked-template guard, continuity on every engine, dose follow-up
+section fix.
+
+**Open.** (4) Latency: fewer passages, prefix-stable prompt for KV reuse, token streaming in the UI.
+(5) Explicit ChatML wrapper for Cortex when the GGUF has no template; make `EMPTY_ANSWER` visibly
+render. (6) The duplicated dengue render (replay + final on the local path) needs a repro.
+(7) Run `bench/rag-grounding/run.mjs --live` on the phone as the gate for every offline change.
+
 ## 2026-09-19 · Ternary Bonsai 2 27B: not shippable on our llama.cpp; pack stays on Bonsai 27B v1
 
 **Owner:** update the Bonsai packs to PrismML's 17 Sep 2026 release (Ternary Bonsai 2 27B, Qwen3.8-27B
