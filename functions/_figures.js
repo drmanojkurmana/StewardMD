@@ -10,17 +10,13 @@
  * renders without a strip, exactly as before.
  */
 import { fetchWithTimeout } from "./_fetch.js";
-import { tinyfishSearch, TRUSTED_MEDICAL_DOMAINS } from "./_search.js";
+import { tinyfishSearch, isTrustedUrl } from "./_search.js";
 
 const PAGE_BYTES = 400 * 1024;
 const JUNK = /logo|icon|sprite|avatar|badge|banner|button|pixel|tracking|spacer|arrow|social|share|\.svg(\?|$)|\.gif(\?|$)|1x1|blank\./i;
 const FIGURE_HINT = /algorithm|flowchart|flow-chart|figure|fig[-_]?\d|chart|diagram|pathway|criteria|table|schema|ecg|ekg|xray|x-ray|ct-|mri|scan/i;
 const STOP = /^(?:the|of|and|for|in|on|with|to|a|an|is|are|vs|or|workup|work-up|management|treatment|approach|evaluation)$/i;
 
-function trusted(host) {
-  host = String(host || "").toLowerCase();
-  return TRUSTED_MEDICAL_DOMAINS.some((d) => host === d || host.endsWith("." + d)) || /\.edu$/.test(host) || /\.ac\.[a-z]{2}$/.test(host);
-}
 function attr(tag, name) {
   const m = new RegExp("\\b" + name + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))", "i").exec(tag);
   return m ? (m[1] ?? m[2] ?? m[3] ?? "") : "";
@@ -77,9 +73,8 @@ export async function findFigures(env, topic, max = 3) {
   try { pages = await tinyfishSearch(env, q); } catch (e) { pages = []; }
   pages = (pages || []).filter((p) => p && /^https:\/\//i.test(p.url) && !/\.pdf(\?|$)/i.test(p.url)).slice(0, 5);
   const found = await Promise.all(pages.map(async (p) => {
-    let host = "";
-    try { host = new URL(p.url).hostname; } catch (e) { return null; }
-    if (!trusted(host)) return null;
+    if (!isTrustedUrl(p.url)) return null;
+    const host = new URL(p.url).hostname;
     try {
       const r = await fetchWithTimeout(p.url, { headers: { "Accept": "text/html", "User-Agent": "Mozilla/5.0 (StewardMD figure lookup)" }, redirect: "follow" }, 6000);
       if (!r.ok || !/text\/html/i.test(r.headers.get("content-type") || "")) return null;

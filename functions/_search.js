@@ -45,22 +45,42 @@ export const TRUSTED_MEDICAL_DOMAINS = [
   "entnet.org", "aao.org", "psychiatry.org", "asahq.org"
 ];
 
+/* True when a URL is on a trusted domain (or an academic .edu / .ac.xx host). The post-filter
+ * behind the fallback below, and reused by functions/_figures.js. */
+export function isTrustedUrl(url) {
+  let host = "";
+  try { host = new URL(String(url || "")).hostname.toLowerCase(); } catch (e) { return false; }
+  return TRUSTED_MEDICAL_DOMAINS.some((d) => host === d || host.endsWith("." + d)) || /\.edu$/.test(host) || /\.ac\.[a-z]{2}$/.test(host);
+}
+
+async function tinyfishRaw(env, query, restrict) {
+  const key = env && env.TINYFISH_API_KEY;
+  const url = "https://api.search.tinyfish.ai?query=" + encodeURIComponent(String(query).slice(0, 300)) +
+    (restrict ? "&include_domains=" + encodeURIComponent(TRUSTED_MEDICAL_DOMAINS.join(",")) : "");
+  const r = await fetchWithTimeout(url, { headers: { "X-API-Key": key }, redirect: "follow" });
+  if (!r.ok) return [];
+  const j = await r.json();
+  return ((j && j.results) || []).map((x) => ({
+    title: String(x.title || "").slice(0, 200),
+    snippet: String(x.snippet || "").slice(0, 400),
+    url: String(x.url || "").slice(0, 500),
+    site: String(x.site_name || "").slice(0, 120),
+  })).filter((x) => x.title || x.snippet);
+}
+
+/* Trusted-only search. First with TinyFish's `include_domains` (server-side allow-list); if that
+ * comes back EMPTY, once more without it and filtered here by isTrustedUrl(), so the guarantee is
+ * the same either way: nothing outside the list is ever returned. Added 2026-09-18 after the live
+ * check found every restricted query returning nothing (include_domains is undocumented upstream
+ * and the 87-domain list may exceed what it honours); the fallback costs one extra call only on a
+ * miss, and TinyFish search does not consume API credits. */
 export async function tinyfishSearch(env, query) {
   const key = env && env.TINYFISH_API_KEY;
   if (!key || !query) return [];
   try {
-    const r = await fetchWithTimeout("https://api.search.tinyfish.ai?query=" + encodeURIComponent(String(query).slice(0, 300)) +
-      "&include_domains=" + encodeURIComponent(TRUSTED_MEDICAL_DOMAINS.join(",")), {
-      headers: { "X-API-Key": key },
-      redirect: "follow",
-    });
-    if (!r.ok) return [];
-    const j = await r.json();
-    return ((j && j.results) || []).slice(0, 8).map((x) => ({
-      title: String(x.title || "").slice(0, 200),
-      snippet: String(x.snippet || "").slice(0, 400),
-      url: String(x.url || "").slice(0, 500),
-      site: String(x.site_name || "").slice(0, 120),
-    })).filter((x) => x.title || x.snippet);
+    const first = await tinyfishRaw(env, query, true);
+    if (first.length) return first.slice(0, 8);
+    const second = await tinyfishRaw(env, query, false);
+    return second.filter((x) => isTrustedUrl(x.url)).slice(0, 8);
   } catch (e) { return []; }
 }
