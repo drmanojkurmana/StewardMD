@@ -55,6 +55,7 @@ class FlakyRepository extends MemoryRepository {
   async latest(...a) { if (this.down && !this.failWritesOnly) throw new Error("record store unavailable"); return super.latest(...a); }
   async list(...a) { if (this.down && !this.failWritesOnly) throw new Error("record store unavailable"); return super.list(...a); }
   async latestByType(...a) { if (this.down && !this.failWritesOnly) throw new Error("record store unavailable"); return super.latestByType(...a); }
+  async pageByType(...a) { if (this.down && !this.failWritesOnly) throw new Error("record store unavailable"); return super.pageByType(...a); }
   async byPatient(...a) { if (this.down && !this.failWritesOnly) throw new Error("record store unavailable"); return super.byPatient(...a); }
   async append(...a) { if (this.down) throw new Error("record store unavailable"); return super.append(...a); }
 }

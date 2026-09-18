@@ -28,6 +28,7 @@ import { RecordService } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { Appointment, appointmentIdFor, overlaps, HOLDS_SLOT, TYPE as APPT } from "./scheduling.js";
 import { blackedOutBy } from "./blackout.js";
+import { readClashDiary, readRecentWrites } from "./read-window.js";
 
 const HOLD = "_wardsynq_slot_hold";
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -88,7 +89,15 @@ const holdId = (clinicianId, startAt) => `hold-${slug(clinicianId)}-${slug(start
 
 async function diary(ctx, session) {
   const svc = svcFor(ctx, session);
-  const [appointments, blackouts] = await Promise.all([svc.list(APPT, 1000), svc.list("Blackout", 500).catch(() => [])]);
+  /* R4-2 read every appointment the hospital had ever made (service.listAll, paged, 50,000 ceiling),
+   * because an Appointment keeps where it stands in `state` and the store's roster filter is on
+   * `status`, so R5-2's open-state read could not be used here either.
+   * R6-4 bounds it with the period read instead of adding a `states` filter to the port: the portal
+   * only ever shows and books slots from now forward (publishedSlots, mineOf), so the diary it needs
+   * is the clash window from now - read-window.js readClashDiary holds the window and the reason for
+   * its stop test. The Blackout read is unchanged. Past the ceiling the read still throws and nothing
+   * is offered or booked: a portal that guessed would offer a slot somebody already holds. */
+  const [appointments, blackouts] = await Promise.all([readClashDiary(svc, APPT, { fromMs: Date.now(), max: 50000, throwOnTruncate: true }).then((g) => g.rows), svc.listAll("Blackout", { max: 50000, throwOnTruncate: true }).then((g) => g.rows, (e) => { if (e && e.name === "ListCeilingError") throw e; return []; })]);
   return { svc, appointments: (appointments || []).filter(Boolean), blackouts: blackouts || [] };
 }
 
@@ -153,6 +162,20 @@ async function bookOnline(ctx, session) {
   const id = appointmentIdFor(slot.clinicianId, slot.startAt, str(session.patientId));
   const c = await claim(ctx, slot, id, by);
   if (!c.ok) return c;
+  /* THE LAST LOOK BEFORE THE APPEND. The hold above settles two patients racing for the SAME instant.
+   * It does not settle an appointment amended while the diary was being read: the newest-first cursor
+   * can walk past a record that moved (repository.js:302-306), and that one could overlap this slot
+   * from a different start time. One page of the newest writes is re-read and tested again, and the
+   * hold is released if it turns out the time is taken. */
+  let late;
+  try { late = await readRecentWrites(d.svc, APPT); }
+  catch { late = null; }
+  if (late === null || !freeSlots([slot], late, d.blackouts).length) {
+    try { await release(ctx, slot.clinicianId, slot.startAt, by); } catch { /* the desk sees a held slot with no appointment */ }
+    return late === null
+      ? refuse(502, "record_read_failed", "The appointment could not be booked. Nothing was booked; try again.")
+      : refuse(409, "slot_taken", "That time has just been taken. Choose another.");
+  }
   let current = null;
   try { current = await d.svc.get(APPT, id); } catch { current = null; }
   const at = new Date().toISOString();

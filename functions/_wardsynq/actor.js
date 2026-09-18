@@ -110,7 +110,11 @@ const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassG
   "ApgarScore",
   // AdmissionTimes (admission-times.js), 2026-09-17: writing down when the patient reached the ward bed is the receiving
   // nurse's own bedside act. Marking the initial assessment is emr.treat, gated on its route.
-  "AdmissionTimes"]);
+  "AdmissionTimes",
+  // The dialysis unit (dialysis.js), 2026-09-17: a haemodialysis session's weights, pressures and ultrafiltration, the
+  // dialyzer reuse log and the patient's serology group are charted by the dialysis nurse at the machine, the same
+  // bedside act as a vital sign; a doctor holds them through EMR_TREAT.
+  "DialysisSession", "DialyzerEvent", "DialysisSerology"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
@@ -611,8 +615,10 @@ function grantForCaps(caps) {
   const DISCHARGE = [
     [CAPS.QUEUE_ADD, ["DischargeMilestone", "TransferCentreRequest"], ["DischargeMilestone", "TransferCentreRequest"]],
     [CAPS.ORDER_VERIFY, ["DischargeMilestone"], ["DischargeMilestone"]],
-    [CAPS.BILLING_CHARGE, ["DischargeMilestone"], ["DischargeMilestone"]],
-    [CAPS.BILLING_VIEW, ["DischargeMilestone"], []],
+    /* ExpectedDischarge joined 2026-09-17 (cashless desk, claims-ops.js cashlessWorklist): the TPA desk reads the treating
+     * team's stated date to see an approval that runs out before it. Read only; the date stays emr.treat's to set. */
+    [CAPS.BILLING_CHARGE, ["DischargeMilestone", "ExpectedDischarge"], ["DischargeMilestone"]],
+    [CAPS.BILLING_VIEW, ["DischargeMilestone", "ExpectedDischarge"], []],
   ];
   for (const [cap, canRead, canWrite] of DISCHARGE) {
     if (!has(cap) || !grant) continue;

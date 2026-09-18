@@ -19,7 +19,7 @@
  */
 
 import { listWards, listBeds, getBed, updateBed } from "../_opd_org_store.js";
-import { str, baseOf, offOf, newId, openSvc, writeFailure, readFailure, spread } from "./support-common.js";
+import { str, baseOf, offOf, newId, openSvc, writeFailure, readFailure, spread, readAllOf } from "./support-common.js";
 
 const TASK_TYPE = "HousekeepingTask";
 const KINDS = Object.freeze(["bed-clean", "terminal-clean", "spill", "room-clean"]);
@@ -67,7 +67,7 @@ function turnaround(tasks, fromMs, toMs) {
   return { inspected: done.length, byKind: group((t) => t.kind), byWard: group((t) => t.wardName) };
 }
 
-async function readTasks(svc) { return (await svc.list(TASK_TYPE, 5000)) || []; }
+async function readTasks(svc) { return readAllOf(svc, TASK_TYPE); }
 
 /** The open housekeeping work for the hospital. */
 async function housekeepingBoard(request, env, ctx) {

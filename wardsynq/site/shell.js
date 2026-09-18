@@ -103,8 +103,14 @@
     return headers().then(function (h) {
       return fetchRetry(url, body === undefined ? { headers: h, credentials: "include" } : { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) });
     }).then(function (r) { return r.json().catch(function () { return { ok: false, error: "bad_response", status: r.status }; }); })
+      .then(censusAnswer)
       .catch(function (e) { return { ok: false, error: "network", detail: String(e && e.message || e) }; });
   }
+  /* R4-5: a census read (ward list, ED list) answers 503 error "too_many_open" when more stays are open than it can read
+   * whole. The transport gives it the same translated sentence ward.js shows (same key), so a page showing the server's
+   * message says it; pages with their own "could not be loaded" text use WSQ.tooManyOpen(r) first. */
+  function tooManyOpenText() { return T(null, "ward.too-many-open-stays", "Too many open stays to show safely. Close visits that are finished (discharge or end them), or contact support."); }
+  function censusAnswer(j) { if (j && j.error === "too_many_open") j.message = j.detail = tooManyOpenText(); return j; }
   /** download("/ward/fhir/$export-file/j/Patient-1.ndjson?orgId=o", "Patient-1.ndjson") -> {ok} or {ok:false, message}.
    *  The bytes are fetched with this session's credentials and saved from a local object URL, so the page
    *  never holds a link that works without them. A refusal comes back as the server's own words. */
@@ -610,6 +616,9 @@
        * invented. */
       tile({ go: "ward:labboard", icon: "science", title: T(null, "site.shell.home.tile.labboard.title", "Laboratory"), sub: T(null, "site.shell.home.tile.labboard.sub", "Specimens, bench worklist, results and release"), need: ["emr.view", "lab.result"], liveId: "lvLab" }),
       tile({ go: "ward:radboard", icon: "radiology", title: T(null, "site.shell.home.tile.radboard.title", "Radiology"), sub: T(null, "site.shell.home.tile.radboard.sub", "Imaging worklist, acquisition, reporting"), need: ["emr.view", "lab.result"], liveId: "lvRad" }),
+      /* The dialysis unit (R3-4): schedule by station, sessions, dialyzer reuse and URR. Reading it is emr.view; recording is
+       * emr.vitals on the server. */
+      tile({ go: "dialysis", icon: "water_drop", title: T(null, "site.shell.home.tile.dialysis.title", "Dialysis unit"), sub: T(null, "site.shell.home.tile.dialysis.sub", "Stations, haemodialysis sessions, dialyzer reuse and URR"), need: "emr.view" }),
       tile({ go: "ward:surgeryboard", icon: "surgical", title: T(null, "site.shell.home.tile.surgeryboard.title", "Theatre"), sub: T(null, "site.shell.home.tile.surgeryboard.sub", "Cases, WHO checklist, anaesthesia, implants"), need: "emr.view" }),
       /* order.dispense, NOT emr.view, and this one locked the pharmacist out of pharmacy.
        * The stock reads and writes behind this tile are gated ORDER_DISPENSE server-side
@@ -743,7 +752,7 @@
       s.innerHTML = '<span class="spin"></span>';
       api(p).then(function (r) {
         if (refused(r)) { s.textContent = ""; s.className = "live"; return; }
-        var v = f(r); s.textContent = v.text; s.className = "live" + (v.stop ? " stop" : "");
+        var v = r && r.error === "too_many_open" ? { text: tooManyOpenText(), stop: true } : f(r); s.textContent = v.text; s.className = "live" + (v.stop ? " stop" : "");
       });
     };
     var unavailable = function () { return T(null, "site.shell.home.live.unavailable", "unavailable"); };
@@ -755,7 +764,7 @@
   } };
 
   // ---- registry + boot ------------------------------------------------------------------------------------
-  G.WSQ = { page: function (name, def) { PAGES[name] = def; }, t: function (key, vars, en) { return T(null, key, en, vars); }, tSafe: function (key, vars, en) { return TS(null, key, en, vars); }, en: function (html) { return EN(null, html); }, api: api, download: download, esc: esc, ms: ms, go: go, can: can, state: st, toast: toast, render: render, _signInError: signInError };
+  G.WSQ = { page: function (name, def) { PAGES[name] = def; }, tooManyOpen: function (r) { return r && r.error === "too_many_open" ? tooManyOpenText() : ""; }, t: function (key, vars, en) { return T(null, key, en, vars); }, tSafe: function (key, vars, en) { return TS(null, key, en, vars); }, en: function (html) { return EN(null, html); }, api: api, download: download, esc: esc, ms: ms, go: go, can: can, state: st, toast: toast, render: render, _signInError: signInError };
 
   function boot() {
     st.tokType = lsGet(LS.tt); st.tok = lsGet(LS.tok); st.orgId = lsGet(LS.hosp);

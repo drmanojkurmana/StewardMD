@@ -33,13 +33,18 @@
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { chainState, approvalCovers, levelsFor, amountOf } from "./verification.js";
+import { chainState, approvalCovers, levelsFor, amountOf, allVerifications } from "./verification.js";
 import { levelsFrom, quantityOf, returnableFrom, MOVE_TYPE as STOCK_TYPE } from "./stock.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
+/* Orders, receipts, approvals and suppliers are read whole (service.listAll, paged): a receipt or approval missed by a
+ * short read makes an order look outstanding or unapproved. Past READ_MAX the read throws ListCeilingError (409 below).
+ * ponytail: each page re-groups every version; a by-order index (or audit O20) is the upgrade. */
+const READ_MAX = 50000;
+const every = async (svc, type) => (await svc.listAll(type, { max: READ_MAX, throwOnTruncate: true })).rows;
 const key = (v) => str(v).toUpperCase();
 const PO_TYPE = "PurchaseOrder";
 const VENDOR_TYPE = "Vendor";
@@ -195,9 +200,12 @@ async function raisePurchaseOrder(request, env, ctx) {
       ...(str(ctx.note) ? { note: str(ctx.note) } : {}),
       /* Raised from a stores indent's back-order (stores.js): the indent it will fill, so the store can see why. */
       ...(str(ctx.indentId) ? { indentId: str(ctx.indentId) } : {}),
+      /* R3-1: the store it is bought for (free text, as a receipt's location is). Reorder drafts count what is still to
+       * arrive only against this store; an order that names none counts against every store holding the item. */
+      ...(str(ctx.location) ? { location: str(ctx.location) } : {}),
     };
     const out = await svc.put(po, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, purchaseOrderId: id, vendor, lines, totalPaise: poTotalPaise(po),
+    return { ...base, ok: true, written: 1, purchaseOrderId: id, vendor, lines, totalPaise: poTotalPaise(po), location: po.location || null,
       /* Said on the way out, because an order that looks placed and is only raised is how a ward
        * ends up waiting for stock nobody ever bought. */
       state: "awaiting-approval",
@@ -275,8 +283,8 @@ async function receiveGoods(request, env, ctx) {
 async function approvalFor(svc, poId, ctx) {
   let rows;
   try {
-    const all = await svc.list("Verification", 500);
-    rows = (all || []).filter((r) => r && (str(r.subjectId) === poId) && str(r.subjectType) === PO_TYPE);
+    const all = await allVerifications(svc);
+    rows = all.filter((r) => r && (str(r.subjectId) === poId) && str(r.subjectType) === PO_TYPE);
   } catch { return null; }
   if (!rows.length) return null;
   const requestId = str((rows.find((r) => str(r.kind) === "request") || {}).id);
@@ -295,8 +303,8 @@ async function readOrder(svc, poId, ctx) {
   let po, moves;
   try {
     po = await svc.get(PO_TYPE, poId);
-    const all = await svc.list(MOVE_TYPE, 1000);
-    moves = (all || []).filter((m) => m && str(m.purchaseOrderId) === poId);
+    const all = await every(svc, MOVE_TYPE);
+    moves = all.filter((m) => m && str(m.purchaseOrderId) === poId);
   } catch { return null; }
   if (!po) return null;
   const approval = await approvalFor(svc, poId, ctx);
@@ -315,11 +323,9 @@ async function listPurchaseOrders(request, env, ctx) {
 
   let pos, moves, verifs;
   try {
-    pos = (await svc.list(PO_TYPE, 200)) || [];
-    moves = (await svc.list(MOVE_TYPE, 1000)) || [];
-    verifs = (await svc.list("Verification", 500)) || [];
+    [pos, moves, verifs] = await Promise.all([every(svc, PO_TYPE), every(svc, MOVE_TYPE), every(svc, "Verification")]);
   } catch (e) {
-    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), orders: [] };
+    return { ...base, ...readFailure(e), orders: [] };
   }
 
   return { ...base, ok: true, orders: ordersFrom(pos, moves, verifs, ctx) };
@@ -338,6 +344,7 @@ function ordersFrom(pos, moves, verifs, ctx) {
     const approval = chain.length ? chainState(chain, want) : { state: "none", approvals: 0, required: want, approvers: [] };
     return { purchaseOrderId: id, vendor: str(po.vendor), raisedBy: str(po.raisedBy), raisedAt: str(po.raisedAt),
       ...(str(po.indentId) ? { indentId: str(po.indentId) } : {}),
+      location: str(po.location) || null,
       totalPaise: poTotalPaise(po), ...orderState(po, mine, approval), approval };
   }).sort((a, b) => str(b.raisedAt).localeCompare(str(a.raisedAt)));
 }
@@ -362,7 +369,9 @@ const DAY_MS = 86400000;
 const isDate = (v) => /^\d{4}-\d{2}-\d{2}$/.test(str(v)) && Number.isFinite(Date.parse(str(v)));
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
 const vendorIdFor = (name) => (slug(name) ? `wsq-vendor-${slug(name)}` : null);
-const readFailure = (e) => ({ ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", detail: str(e && e.message) });
+const readFailure = (e) => e instanceof ListCeilingError
+  ? { ok: false, status: 409, error: "too_many_records", detail: "More stock, order or approval records exist than can be read at once, so nothing is shown rather than a short list." }
+  : { ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", detail: str(e && e.message) };
 
 /** PURE. Each order line priced above an in-date contract with the same supplier, item and unit, on `onDate`. */
 function contractWarnings(po, vendors, onDate) {
@@ -429,7 +438,7 @@ async function purchaseOrderPriceChecks(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return error;
   try {
-    const vendors = (await svc.list(VENDOR_TYPE, 500)) || [];
+    const vendors = await every(svc, VENDOR_TYPE);
     const checks = {};
     for (const id of ids) {
       const po = await svc.get(PO_TYPE, id);
@@ -450,7 +459,7 @@ async function supplyChainOverview(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
   let moves, pos, vendors;
-  try { [moves, pos, vendors] = await Promise.all([svc.list(STOCK_TYPE, 1000), svc.list(PO_TYPE, 200), svc.list(VENDOR_TYPE, 500)]); }
+  try { [moves, pos, vendors] = await Promise.all([every(svc, STOCK_TYPE), every(svc, PO_TYPE), every(svc, VENDOR_TYPE)]); }
   catch (e) { return { ...base, ...readFailure(e) }; }
   moves = (moves || []).filter(Boolean);
   const poVendor = new Map((pos || []).filter(Boolean).map((p) => [str(p.id), str(p.vendor)]));
@@ -499,11 +508,12 @@ function readReorderPolicy(wsqCfg) {
 }
 
 /**
- * PURE. One draft per (item, store, unit). movements/dispenses as stock.js reads them; onOrder: Map "ITEM|UNIT" -> quantity
- * still to arrive on orders that are not cancelled, rejected or received (an order carries no store, so it counts
- * against each store holding that item, and the screen says so).
+ * PURE. One draft per (item, store, unit). movements/dispenses as stock.js reads them. What is still to arrive on orders
+ * that are not cancelled, rejected or received: onOrderAt Map "ITEM|STORE|UNIT" for orders naming a store, counted only
+ * against that store; onOrder Map "ITEM|UNIT" for orders naming none, counted against each store holding the item
+ * (onOrderNoStore on the row, so the screen can say so).
  */
-function reorderSuggestionsFrom({ movements, dispenses, onOrder, policy, now }) {
+function reorderSuggestionsFrom({ movements, dispenses, onOrder, onOrderAt, policy, now }) {
   const nowMs = Date.parse(str(now)) || Date.now();
   const since = nowMs - policy.windowDays * DAY_MS;
   const { levels } = levelsFrom(movements, dispenses);
@@ -539,8 +549,9 @@ function reorderSuggestionsFrom({ movements, dispenses, onOrder, policy, now }) 
   return levels.map((r) => {
     const s = stat.get(k3(r.code, r.location, r.unit)) || { first: Infinity, used: 0 };
     const daysOfData = Number.isFinite(s.first) ? Math.floor((nowMs - s.first) / DAY_MS) : 0;
-    const ordered = (onOrder && onOrder.get(`${key(r.code)}|${key(r.unit)}`)) || 0;
-    const row = { code: r.code, display: r.display, location: r.location, unit: r.unit, level: r.level, onOrder: ordered, daysOfData, used: s.used,
+    const noStore = (onOrder && onOrder.get(`${key(r.code)}|${key(r.unit)}`)) || 0;
+    const ordered = ((onOrderAt && onOrderAt.get(k3(r.code, r.location, r.unit))) || 0) + noStore;
+    const row = { code: r.code, display: r.display, location: r.location, unit: r.unit, level: r.level, onOrder: ordered, ...(noStore ? { onOrderNoStore: noStore } : {}), daysOfData, used: s.used,
       windowDays: policy.windowDays, leadTimeDays: policy.leadTimeDays, safetyDays: policy.safetyDays };
     if (r.level < 0) return { ...row, refused: "negative_level" };
     if (daysOfData < policy.minDataDays) return { ...row, refused: "insufficient_data", minDataDays: policy.minDataDays };
@@ -562,21 +573,23 @@ async function reorderSuggestions(request, env, ctx) {
   if (!ctx.policy) return { ...base, ok: true, configured: false, suggestions: [], detail: "Reorder suggestions are not configured: the hospital has not set the window, lead time, safety days and minimum days of data (Admin)." };
   let moves, dispenses, pos, verifs, items;
   try {
-    [moves, dispenses, pos, verifs, items] = await Promise.all([svc.list(STOCK_TYPE, 1000), ctx.storesOnly ? [] : svc.list("MedicationDispense", 1000),
-      svc.list(PO_TYPE, 200), svc.list("Verification", 500), ctx.storesOnly ? svc.list("StoreItem", 1000) : null]);
+    [moves, dispenses, pos, verifs, items] = await Promise.all([every(svc, STOCK_TYPE), ctx.storesOnly ? [] : every(svc, "MedicationDispense"),
+      every(svc, PO_TYPE), every(svc, "Verification"), ctx.storesOnly ? every(svc, "StoreItem") : null]);
   } catch (e) {
+    /* A suggestion from a partial ledger is wrong in a direction nobody can see, so none is made. */
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 409, error: "too_many_records", detail: "More stock or order records exist than can be read at once, so usage cannot be worked out safely. No suggestion was made.", suggestions: [] };
     return { ...base, ...readFailure(e), suggestions: [] };
   }
-  /* A suggestion from a partial ledger is wrong in a direction nobody can see, so none is made. */
-  if ((moves || []).length >= 1000 || (dispenses || []).length >= 1000 || (pos || []).length >= 200) {
-    return { ...base, ok: false, status: 409, error: "too_many_records", detail: "More stock or order records exist than can be read at once, so usage cannot be worked out safely. No suggestion was made.", suggestions: [] };
-  }
-  const onOrder = new Map();
+  const onOrder = new Map(), onOrderAt = new Map();
   for (const o of ordersFrom((pos || []).filter(Boolean), (moves || []).filter((m) => m && str(m.purchaseOrderId)), (verifs || []).filter(Boolean), ctx)) {
     if (!["open", "part-received", "awaiting-approval"].includes(o.state)) continue;
-    for (const l of o.lines) if (l.outstanding > 0) { const k = `${key(l.item)}|${key(l.unit)}`; onOrder.set(k, (onOrder.get(k) || 0) + l.outstanding); }
+    for (const l of o.lines) {
+      if (!(l.outstanding > 0)) continue;
+      const [map, k] = o.location ? [onOrderAt, `${key(l.item)}|${key(o.location)}|${key(l.unit)}`] : [onOrder, `${key(l.item)}|${key(l.unit)}`];
+      map.set(k, (map.get(k) || 0) + l.outstanding);
+    }
   }
-  let suggestions = reorderSuggestionsFrom({ movements: (moves || []).filter(Boolean), dispenses: (dispenses || []).filter(Boolean), onOrder, policy: ctx.policy, now: ctx.now });
+  let suggestions = reorderSuggestionsFrom({ movements: (moves || []).filter(Boolean), dispenses: (dispenses || []).filter(Boolean), onOrder, onOrderAt, policy: ctx.policy, now: ctx.now });
   if (ctx.storesOnly) { const codes = new Set((items || []).map((i) => key(i && i.code))); suggestions = suggestions.filter((r) => codes.has(key(r.code))); }
   return { ...base, ok: true, configured: true, policy: ctx.policy, suggestions, draft: true };
 }

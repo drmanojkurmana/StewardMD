@@ -1,0 +1,109 @@
+{
+  "site": "lymphoma_lugano",
+  "name": "Lymphoma - Lugano / Ann Arbor Staging",
+  "system": "Oncology / Haematologic (Clinical)",
+  "versions": [
+    {
+      "version": "Lugano Classification (2014)",
+      "seeded": true,
+      "provenance": "Lugano Classification for evaluation and staging of Hodgkin and Non-Hodgkin Lymphoma (incorporating Ann Arbor with Cotswolds modifications); licensed clinical reference.",
+      "introduction": "Lymphoma staging uses the Lugano Classification, adapted from the Ann Arbor system with Cotswolds modifications. Staging reflects anatomical nodal distribution across the diaphragm, contiguous or non-contiguous extralymphatic organ involvement (E), spleen involvement (S), bulky disease (X), and systemic B-symptoms (fever, drenching night sweats, weight loss). Fluorodeoxyglucose (FDG) PET-CT is the standard imaging modality.",
+      "t": [
+        {
+          "code": "Stage I",
+          "label": "Involvement of a single lymph node region (I) or localized involvement of a single extralymphatic site in absence of nodal involvement (IE)"
+        },
+        {
+          "code": "Stage II",
+          "label": "Involvement of two or more lymph node regions on the SAME side of the diaphragm (II), or localized contiguous extralymphatic site with regional nodes on the same side (IIE)"
+        },
+        {
+          "code": "Stage III",
+          "label": "Involvement of lymph node regions on BOTH sides of the diaphragm (III), optionally involving spleen (IIIS)"
+        },
+        {
+          "code": "Stage IV",
+          "label": "Multifocal or diffuse involvement of one or more extralymphatic organs (e.g., bone marrow, liver, lung, pleura, CSF) with or without associated nodal disease"
+        }
+      ],
+      "n": [
+        {
+          "code": "Substage A",
+          "label": "Absence of constitutional systemic B symptoms"
+        },
+        {
+          "code": "Substage B",
+          "label": "Presence of B symptoms: unexplained fever >38C, drenching night sweats, or unexplained weight loss >10% of body weight over 6 months"
+        }
+      ],
+      "m": [
+        {
+          "code": "Non-Bulky",
+          "label": "Maximum tumor diameter < 10 cm"
+        },
+        {
+          "code": "Bulky Disease (X)",
+          "label": "Single mass >= 10 cm in diameter OR mediastinal mass occupying > 1/3 of the maximum transthoracic diameter on chest radiograph"
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "I",
+          "t": "Single node region or single IE site",
+          "n": "A or B",
+          "m": "Non-bulky",
+          "basis": "Limited stage disease. Potential candidate for abbreviated chemo + involved-site radiation (ISRT) in Hodgkin, or R-CHOP x3-4 + ISRT in aggressive NHL."
+        },
+        {
+          "stage": "I-Bulky",
+          "t": "Single node region",
+          "n": "A or B",
+          "m": "Bulky mass >=10 cm",
+          "basis": "Bulky localized lymphoma requiring full systemic therapy cycles."
+        },
+        {
+          "stage": "II",
+          "t": ">=2 node regions on SAME side of diaphragm",
+          "n": "A or B",
+          "m": "Non-bulky",
+          "basis": "Limited stage disease if non-bulky and without adverse features."
+        },
+        {
+          "stage": "II-Bulky",
+          "t": ">=2 node regions on SAME side of diaphragm",
+          "n": "A or B",
+          "m": "Bulky mass >=10 cm",
+          "basis": "Treated as advanced-stage disease in most modern protocols."
+        },
+        {
+          "stage": "III",
+          "t": "Node regions on BOTH sides of diaphragm",
+          "n": "A or B",
+          "m": "Any bulk",
+          "basis": "Advanced-stage lymphoma requiring full systemic immunochemotherapy (e.g. 6 cycles R-CHOP or Pola-R-CHP for DLBCL; A+AVD or ABVD for Hodgkin)."
+        },
+        {
+          "stage": "IV",
+          "t": "Diffuse / disseminated extralymphatic organ involvement",
+          "n": "A or B",
+          "m": "Any bulk",
+          "basis": "Advanced-stage lymphoma requiring full systemic therapy; CNS prophylaxis evaluation indicated in high-risk DLBCL."
+        }
+      ],
+      "regionalNodes": "Lymph node chains: cervical, supraclavicular, axillary, mediastinal, hilar, mesenteric, para-aortic, iliac, inguinal. Waldeyer ring and spleen are considered lymphatic tissue.",
+      "histologicGrade": "Defined by WHO/ICC classification (e.g. FL Grade 1-3A vs 3B; DLBCL COO by Hans algorithm ABC/non-GCB vs GCB).",
+      "histopathologicTypes": "Diffuse large B-cell lymphoma (DLBCL), Follicular lymphoma, Classic Hodgkin lymphoma (nodular sclerosis, mixed cellularity, lymphocyte-rich, lymphocyte-depleted), Mantle cell lymphoma, Marginal zone lymphoma, T-cell lymphomas.",
+      "prognosticFactors": [
+        "International Prognostic Index (IPI / R-IPI) for DLBCL: Age >60, Stage III-IV, elevated LDH, ECOG PS >=2, >1 extranodal site",
+        "FLIPI for Follicular Lymphoma: Age >=60, Stage III-IV, Hb <12 g/dL, >4 nodal areas, elevated serum LDH",
+        "IPS for Advanced Hodgkin Lymphoma: Albumin <4 g/dL, Hb <10.5 g/dL, Male, Stage IV, Age >=45, WBC >=15,000/mcL, Lymphocytes <600/mcL",
+        "Double-hit / Triple-hit biology: MYC and BCL2 and/or BCL6 gene rearrangements",
+        "PET-CT response by Deauville 5-point scale (Lugano response criteria)"
+      ]
+    },
+    {
+      "version": "Ann Arbor 1971 (historical)",
+      "seeded": false
+    }
+  ]
+}

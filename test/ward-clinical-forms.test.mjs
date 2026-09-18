@@ -89,6 +89,23 @@ test("an order finding is labelled by what the server does; a hard stop has no P
   assert.match(reason, /data-w-act="moconfirm"/); assert.match(reason, /id="wMoOverride"/);
 });
 
+/* R5-1: the hospital's own reminders, and the case where they could not be evaluated at all. A silent
+ * card reads as "nothing to say", which is exactly what an unreadable Observation list is not. */
+test("a hospital advisory is shown as the hospital's, and one that could NOT be checked says so", () => {
+  const W = load();
+  const order = { drug: "Gentamicin", dose: { value: 240, unit: "mg" }, frequency: "OD" };
+  const safety = { checked: true, blocks: [], overridables: [], warnings: [] };
+  const fired = W._render(chart({ moReview: { order, safety, advisories: [{ id: "nephrotoxic-in-aki", message: "Creatinine is above 200. Review the dose.", action: "Discuss with the renal team.", source: "hospital-advisory", blocking: false }] } }));
+  assert.match(fired, /<b>Hospital advisory<\/b> <span lang="en">Creatinine is above 200/);
+  assert.ok(!/could not be checked for this patient/.test(fired));
+
+  const blind = W._render(chart({ moReview: { order, safety, advisories: [], advisoriesUnavailable: { reason: "record_read_failed" } } }));
+  assert.match(blind, /prescribing reminders could not be checked for this patient/);
+  assert.match(blind, /Do not read this as no warnings/);
+  // The medicine is never withheld over it: the prescriber can still proceed.
+  assert.match(blind, /data-w-act="moconfirm"/);
+});
+
 test("NEWS2 names what was not recorded in words; the flowsheet shows mmHg and °C", () => {
   const W = load();
   const n = { tool: "NEWS2", score: { scorable: false, code: "INCOMPLETE", total: 0, missing: ["respiratoryRate", "oxygenSaturation", "supplementalOxygen", "systolicBloodPressure", "pulse", "consciousness", "temperature"],

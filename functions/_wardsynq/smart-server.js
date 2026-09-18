@@ -700,11 +700,28 @@ async function token(request, env, ctx) {
       /* A ROTATED TOKEN PRESENTED AGAIN. Either the client lost track, or somebody else has a copy.
        * The server cannot tell which, so the whole family dies: every live token descended from the
        * same authorisation is revoked, and the person authorises again. */
-      let family = [];
-      try { family = ((await svc.list(GRANT_TYPE, 1000)) || []).filter((x) => x && x.familyId === g.familyId && !x.revokedAt && (x.kind === "refresh" || x.kind === "token")); } catch { family = []; }
-      for (const x of [...family, ...(g.familyId ? [] : [])]) { try { const { meta, version, ...rest } = x; await svc.put({ ...rest, revokedAt: now.toISOString(), revokedBy: "smart:refresh-reuse" }, { expectedVersion: version }); } catch { /* best effort, one by one */ } }
-      try { const fam = await svc.get(GRANT_TYPE, g.familyId); if (fam && !fam.revokedAt) { const { meta, version, ...rest } = fam; await svc.put({ ...rest, revokedAt: now.toISOString(), revokedBy: "smart:refresh-reuse" }, { expectedVersion: version }); } } catch { /* the first token of the family */ }
-      await audit(ctx, "smart.refresh.reuse", { actor: g.subject, scope: { clientId: client.clientId, family: g.familyId } });
+      let family = null;
+      // R4-2: every grant (listAll, paged; the old 1,000 were the OLDEST, so a newer token in the family survived revocation).
+      /* R5-4: a family that could not be READ is not an empty family. `catch { family = [] }` here
+       * made an unreadable or truncated list look like "nothing left to revoke", so the live sibling
+       * tokens of a stolen refresh token kept working while this endpoint reported the ordinary
+       * refusal. An unreadable read now refuses the revocation instead of under-revoking it. */
+      try { family = (await svc.listAll(GRANT_TYPE, { max: 100000, throwOnTruncate: true })).rows.filter((x) => x && x.familyId === g.familyId && !x.revokedAt && (x.kind === "refresh" || x.kind === "token")); } catch { family = null; }
+      let revokeFailed = family === null;
+      const revoke = async (x) => {
+        if (!x || x.revokedAt) return;
+        try { const { meta, version, ...rest } = x; await svc.put({ ...rest, revokedAt: now.toISOString(), revokedBy: "smart:refresh-reuse" }, { expectedVersion: version }); }
+        catch { revokeFailed = true; }
+      };
+      /* Whatever the list did, the token in hand and the first token of the family are addressable by
+       * id, so those two are revoked even when the family could not be listed. */
+      for (const x of family || [g]) await revoke(x);
+      try { await revoke(await svc.get(GRANT_TYPE, g.familyId)); } catch { revokeFailed = true; }
+      await audit(ctx, "smart.refresh.reuse", { actor: g.subject, scope: { clientId: client.clientId, family: g.familyId, revoked: revokeFailed ? "incomplete" : "all" }, outcome: revokeFailed ? "error" : "ok" });
+      /* The exchange is refused either way. When the cascade could not complete, the caller is told
+       * the truth (a 503 the client retries) rather than the flat invalid_grant that would read as
+       * "handled": an operator watching the audit trail must be able to see a family still live. */
+      if (revokeFailed) return oauthError(503, "temporarily_unavailable", "this token was refused and the tokens issued alongside it could not all be revoked; the application must be authorised again");
       return deny;
     }
     if (!grantLive(g, now.toISOString()).ok) return deny;
@@ -809,7 +826,7 @@ async function revoke(request, env, ctx) {
     const { meta, version, ...rest } = g;
     await svc.put({ ...rest, revokedAt: now, revokedBy: by }, { expectedVersion: version });
     if (g.kind === "refresh" && g.familyId) {
-      const family = ((await svc.list(GRANT_TYPE, 1000)) || []).filter((x) => x && x.familyId === g.familyId && !x.revokedAt && x.id !== g.id);
+      const family = (await svc.listAll(GRANT_TYPE, { max: 100000, throwOnTruncate: true })).rows.filter((x) => x && x.familyId === g.familyId && !x.revokedAt && x.id !== g.id);
       for (const x of family) { try { const { meta: xm, version: xv, ...xr } = x; await svc.put({ ...xr, revokedAt: now, revokedBy: by }, { expectedVersion: xv }); } catch { /* one by one */ } }
     }
   } catch { return oauthError(500, "server_error", "could not record the revocation"); }

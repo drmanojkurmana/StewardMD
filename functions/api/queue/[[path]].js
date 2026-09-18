@@ -29,7 +29,7 @@ import * as ROSTER from "../../_roster_store.js";
 import * as ACCOUNTS from "../../_accounts_store.js";
 import * as FORMS from "../../_forms_store.js";
 import * as PATHWAYS from "../../_pathways_store.js";
-import { submitFormResponse, patientFormResponses } from "../../_wardsynq/form-response.js";
+import { submitFormResponse, patientFormResponses, intakeResponses, reviewIntake, intakeSettings } from "../../_wardsynq/form-response.js";
 import { vaccineCatalogue, buildImmunisation } from "../../_vaccines.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
@@ -100,7 +100,7 @@ import {
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
 import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary, readDischargeChecklist } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
-import { marSchedule } from "../../_wardsynq/mar-schedule.js";
+import { marSchedule, zoneOffsetAt } from "../../_wardsynq/mar-schedule.js";
 import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
 import { bufferReadAudits } from "../../_wardsynq/repository.js";
 import { membersForIds, staffIdentity, idsParam } from "../../_wardsynq/staff-identity.js";
@@ -185,6 +185,8 @@ import { buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport, roster
 import * as GROUP from "../../_hospital_group_store.js";
 import { hospitalCounts } from "../../_wardsynq/hospital-group.js";
 import * as CLINICAL from "../../_wardsynq/clinical-settings.js";
+import * as FORMULARY from "../../_wardsynq/formulary-settings.js";
+import * as CONTENT from "../../_wardsynq/clinical-content-settings.js";
 import { readGstSettings, validateGstSettings, changedGstKeys } from "../../_wardsynq/gst-settings.js";
 import * as SEED from "../../_wardsynq/seed-signoff.js";
 import * as SEEDSTORE from "../../_seed_signoff_store.js";
@@ -202,9 +204,12 @@ import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from ".
 import { registryReport } from "../../_wardsynq/registry.js";
 import { chartWound, listWounds } from "../../_wardsynq/wound.js";
 import { bookResource, setBookingState, resourceSchedule } from "../../_wardsynq/resource-booking.js";
+import { dialysisUnit, dialysisPatient, recordSerology, bookStation, saveSession as saveDialysisSession, dialyzerEvent, validateDialysisSettings, readDialysisSettings } from "../../_wardsynq/dialysis.js";
 import { blockPeriod, cancelBlackout, listBlackouts } from "../../_wardsynq/blackout.js";
 import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
+import { scanOrderClosures, closeOrderBacklog } from "../../_wardsynq/order-backfill.js";
+import { scanSourceClosures, closeSourceTerminal } from "../../_wardsynq/source-order-close.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
 import { raisePurchaseOrder, receiveGoods, listPurchaseOrders, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview, validateReorderPolicy, readReorderPolicy, reorderSuggestions } from "../../_wardsynq/purchasing.js";
@@ -256,7 +261,7 @@ import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
 import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList, raiseEstimate } from "../../_wardsynq/billing.js";
-import { rcmSettings, validateRcmSettings, claimChecks, preAuthEvent, claimEvidence, saveClaimEvidence, rcmWorklists } from "../../_wardsynq/claims-ops.js";
+import { rcmSettings, validateRcmSettings, claimChecks, preAuthEvent, claimEvidence, saveClaimEvidence, rcmWorklists, cashlessStays } from "../../_wardsynq/claims-ops.js";
 import { requestRelease, authorizeRelease, denyRelease, cancelRelease, fulfillRelease, readRoi, roiRequestsForPatient } from "../../_wardsynq/roi.js";
 import { patientCopy, releaseToPatient, releaseDocumentToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
@@ -1183,6 +1188,12 @@ export async function onRequest(context) {
         // A group recommendation is copied into hospitals on adoption, so it may not carry an unbuilt level-2 ward rule either.
         const groupWardRule = level2WardRuleRefusal(p && p.criticalEscalation);
         if (groupWardRule) return refuse(422, "level2_ward_rule_not_built", groupWardRule);
+        // R3-2: a recommended formulary is copied into hospitals on adoption, so it passes the same check as the hospital's own.
+        if (p && p.formulary != null && (!Array.isArray(p.formulary) || FORMULARY.checkFormulary(p.formulary).problems.length))
+          return refuse(422, "invalid_formulary", "The recommended formulary has entries a hospital could not use (a restriction nobody can clear, a name or code used twice, or a value that cannot be read). Nothing was saved.");
+        // R4-4: recommended critical limits, delta limits, autoverification, MAR times and note templates pass the hospital's own check.
+        const badContent = p ? CONTENT.CONTENT_KEYS.filter((k) => p[k] != null && CONTENT.checkContent(k, p[k]).problems.length) : [];
+        if (badContent.length) return refuse(422, "invalid_clinical_content", "The recommendation has settings a hospital could not use (" + badContent.join(", ") + "). Nothing was saved.");
         return json({ ok: true, group: await GROUP.setPolicy(env, g, p, actor.id) }, 200, request);
       }
       if (sub === "overview") {
@@ -1236,6 +1247,11 @@ export async function onRequest(context) {
         if (!l || l.state !== "member") return refuse(409, "not_a_member", "This hospital is not a member of that group.");
         const [gr, o] = await Promise.all([GROUP.getGroup(env, arg("groupId")), ORG.getOrg(env, arg("orgId"))]);
         if (!gr || !o) return refuse(404, "not_found", "The group or the hospital could not be found.");
+        // A recommendation saved before the formulary was checked is refused here rather than copied in unchecked (R3-2).
+        if (gr.policy && gr.policy.formulary != null && (!Array.isArray(gr.policy.formulary) || FORMULARY.checkFormulary(gr.policy.formulary).problems.length))
+          return refuse(422, "invalid_formulary", "The group's recommended formulary has entries this hospital could not use, so nothing was adopted. Ask the group to correct it.");
+        const badAdopt = gr.policy ? CONTENT.CONTENT_KEYS.filter((k) => gr.policy[k] != null && CONTENT.checkContent(k, gr.policy[k]).problems.length) : [];
+        if (badAdopt.length) return refuse(422, "invalid_clinical_content", "The group's recommended " + badAdopt.join(", ") + " could not be used by this hospital, so nothing was adopted. Ask the group to correct it.");
         return done(await GROUP.adoptPolicy(env, o, gr, actor.id));
       }
     }
@@ -1343,6 +1359,11 @@ export async function onRequest(context) {
         "store-consumption": CAPS.STORES_MANAGE,
         /* Biomedical assets (assets.js). Anyone on the floor may see the register and report a fault; the register,
          * schedules and job cards are the engineer's. */
+        /* The dialysis unit (dialysis.js). Reading the schedule and a patient's dialysis record is reading the chart; the
+         * session, the dialyzer log, the serology group and putting a patient on a station are the dialysis nurse's bedside
+         * charting, emr.vitals, which the doctor holds too. The unit's settings are staff.admin on /org/dialysis-settings. */
+        "dialysis-unit": CAPS.EMR_VIEW, "dialysis-patient": CAPS.EMR_VIEW,
+        "dialysis-session": CAPS.EMR_VITALS, "dialyzer-event": CAPS.EMR_VITALS, "dialysis-serology": CAPS.EMR_VITALS, "dialysis-book": CAPS.EMR_VITALS,
         assets: CAPS.DEPT_REQUEST, "equipment-complaint": CAPS.DEPT_REQUEST,
         asset: CAPS.ASSET_MANAGE, "asset-event": CAPS.ASSET_MANAGE, "maintenance-schedule": CAPS.ASSET_MANAGE,
         "job-card": CAPS.ASSET_MANAGE, "job-card-update": CAPS.ASSET_MANAGE,
@@ -1396,6 +1417,17 @@ export async function onRequest(context) {
         /* Hospital-loaded code sets (code-sets.js): loading a licensed release is hospital administration
          * (staff.admin); seeing what is loaded and searching it is anyone who reads the chart (emr.view). */
         "code-set-import": CAPS.STAFF_ADMIN, "code-sets": CAPS.EMR_VIEW, "code-search": CAPS.EMR_VIEW,
+        /* Closing the orders this hospital resulted before a result closed anything (order-backfill.js).
+         * staff.admin, both halves: it is a maintenance job over the whole archive, not a clinical act,
+         * and the dry run reads every open order in the hospital rather than one patient's chart. The
+         * write it performs is the ordinary order closure, through the closure actor, on this admin's
+         * authority and with their id on every version. */
+        "order-backfill-scan": CAPS.STAFF_ADMIN, "order-backfill-close": CAPS.STAFF_ADMIN,
+        /* R6-3: closing INGESTED orders the sending system has finished with (source-order-close.js).
+         * Same capability and for the same reasons: a maintenance pass over the whole archive whose
+         * dry run reads every open order in the hospital. The adapter that sent them may not close
+         * an order; this admin, through the local closure actor, may. */
+        "source-order-scan": CAPS.STAFF_ADMIN, "source-order-close": CAPS.STAFF_ADMIN,
         /* A hospital's own licensed growth tables (growth-tables.js): loading or withdrawing them is hospital
          * administration; which reference the chart uses is readable by anyone who can see the chart. */
         "growth-table-import": CAPS.STAFF_ADMIN, "growth-tables": CAPS.EMR_VIEW,
@@ -1455,6 +1487,9 @@ export async function onRequest(context) {
         "nursing-task-act": CAPS.EMR_VITALS, "obs-frequency": CAPS.EMR_VITALS,
         // Completed hospital forms: nurses document them too (FormResponse is in the nurse write scope).
         "form-responses": CAPS.EMR_VIEW, "form-submit": CAPS.EMR_VITALS,
+        /* Pre-admission forms a patient filled in on the portal. Reading them is chart access; accepting or returning one is a
+         * clinician's act (it says a clinician read what the patient reported), emr.treat. */
+        "intake-responses": CAPS.EMR_VIEW, "intake-review": CAPS.EMR_TREAT,
         "document-upload": CAPS.EMR_TREAT, "document-withdraw": CAPS.EMR_TREAT, "document-purge": CAPS.STAFF_ADMIN,
         // Releasing a document version to the patient portal is the same act as handing over the patient's copy.
         "document-release": CAPS.EMR_TREAT,
@@ -1826,7 +1861,7 @@ export async function onRequest(context) {
         "claim-estimate": CAPS.BILLING_CHARGE,
         /* rcm-claims-ops (claims-ops.js): reading the checklist, the evidence pack and the desk's lists is reading bills;
          * a payer query or enhancement on a pre-authorisation and saving an evidence pack change a claim record. */
-        "claim-checks": CAPS.BILLING_VIEW, "rcm-worklists": CAPS.BILLING_VIEW, "preauth-event": CAPS.BILLING_CHARGE,
+        "claim-checks": CAPS.BILLING_VIEW, "rcm-worklists": CAPS.BILLING_VIEW, "cashless-stays": CAPS.BILLING_VIEW, "preauth-event": CAPS.BILLING_CHARGE,
         "claim-evidence": method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW,
         // TASK 4.9: a third-party record request is a records-custody function, not clinical or
         // billing work - staff.admin, the same authority every other org-administration action in
@@ -2289,6 +2324,18 @@ export async function onRequest(context) {
         const r = await listImmunizations(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* ---- the dialysis unit (R3-4, dialysis.js) ---- */
+      if (sub === "dialysis-unit" && method === "GET") { const r = await dialysisUnit(request, env, { ...deps, date: url.searchParams.get("date") || "" }); return json(r, r.ok ? 200 : (r.status || 502), request); }
+      if (sub === "dialysis-patient" && method === "GET") { const r = await dialysisPatient(request, env, { ...deps, mrn: url.searchParams.get("mrn") || "", patientId: url.searchParams.get("patientId") || "" }); return json(r, r.ok ? 200 : (r.status || 502), request); }
+      if (sub === "dialysis-serology" && method === "POST") { const r = await recordSerology(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, group: body.group, testedOn: body.testedOn, note: body.note, idempotencyKey: body.idempotencyKey || null }); return json(r, r.ok ? 200 : (r.status || 502), request); }
+      if (sub === "dialysis-book" && method === "POST") { const r = await bookStation(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, encounterId: body.encounterId, stationId: body.stationId, startAt: body.startAt, minutes: body.minutes, idempotencyKey: body.idempotencyKey || null }); return json(r, r.ok ? 200 : (r.status || 502), request); }
+      if (sub === "dialysis-session" && method === "POST") {
+        const f = {};
+        for (const k of ["sessionId", "expectedVersion", "mrn", "patientId", "encounterId", "stationId", "accessType", "startAt", "endAt", "preWeightKg", "postWeightKg", "preBp", "postBp", "targetUfMl", "achievedUfMl", "weightReason", "dialyzerId", "complications", "nurse", "doctor", "preUrea", "postUrea"]) if (body[k] !== undefined) f[k] = body[k];
+        const r = await saveDialysisSession(request, env, { ...deps, ...f, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "dialyzer-event" && method === "POST") { const r = await dialyzerEvent(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, dialyzerId: body.dialyzerId, kind: body.kind, reason: body.reason, idempotencyKey: body.idempotencyKey || null }); return json(r, r.ok ? 200 : (r.status || 502), request); }
       /* ---- general stores, biomedical assets, blood bank (2026-09-16) ---- */
       {
         const R = (r) => json(r, r.ok ? 200 : (r.status || 502), request);
@@ -2388,7 +2435,7 @@ export async function onRequest(context) {
         return supportOut(await mortuaryBoard(request, env, { ...deps, chambers, registerMlc: byPatient }));
       }
       if (sub === "purchase-order" && method === "POST") {
-        const r = await raisePurchaseOrder(request, env, { ...deps, vendor: body.vendor, lines: body.lines, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        const r = await raisePurchaseOrder(request, env, { ...deps, vendor: body.vendor, lines: body.lines, note: body.note, location: body.location, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "goods-receive" && method === "POST") {
@@ -2548,6 +2595,14 @@ export async function onRequest(context) {
       if (sub === "form-submit" && method === "POST") {
         const definition = await FORMS.publishedVersion(env, wOrgId, body.formKey, body.formVersion);
         const r = await submitFormResponse(request, env, { ...deps, definition, patientId: body.patientId, encounterId: body.encounterId, answers: body.answers, department: body.department, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "intake-responses" && method === "GET") {
+        const r = await intakeResponses(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", requestId: url.searchParams.get("requestId") || "", appointmentId: url.searchParams.get("appointmentId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "intake-review" && method === "POST") {
+        const r = await reviewIntake(request, env, { ...deps, responseId: body.responseId, version: body.version, decision: body.decision, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "referrals" && method === "GET") {
@@ -3018,7 +3073,7 @@ export async function onRequest(context) {
         if (!kindCap) return json({ ok: false, error: "unknown_kind", message: "Choose what the file holds: patients, prices or suppliers." }, 422, request);
         const kAz = await ORG.authorizeOrg(env, actor, wOrgId, kindCap);
         if (!kAz.ok) return json(azRefusal(kAz), 403, request);
-        const r = await importLegacy(request, env, { ...deps, kind: body.kind, csv: body.csv, mapping: body.mapping, commit: body.commit === true, confirmCount: body.confirmCount, planId: body.planId,
+        const r = await importLegacy(request, env, { ...deps, kind: body.kind, csv: body.csv, mapping: body.mapping, run: body.run, commit: body.commit === true, confirmCount: body.confirmCount, planId: body.planId,
           region: (wOrg && wOrg.region) || undefined, externalMrn: !!(wsqCfg && wsqCfg.externalMrn),
           patients: { byMrn: (mrn) => PAT.getPatient(env, wOrgId, mrn), mobileTaken: (mobile) => PAT.mobileDuplicateOf(env, wOrgId, mobile), register: (b) => PAT.registerPatient(env, wOrg, b, actor.id || "") },
           // The Price list is the one table the invoice paths read (wsqTariff); without its store there is nowhere to import to.
@@ -3529,6 +3584,18 @@ export async function onRequest(context) {
           : sub === "preauth-event" && method === "POST" ? await preAuthEvent(request, env, { ...deps, preAuthId: body.preAuthId, action: body.action, text: body.text, receivedAt: body.receivedAt, answer: body.answer, queryId: body.queryId,
             requestedAmount: body.requestedAmount, reason: body.reason, enhancementId: body.enhancementId, state: body.state, approvedAmount: body.approvedAmount, note: body.note, decidedAt: body.decidedAt, payers, idempotencyKey: body.idempotencyKey || null })
           : { ok: false, status: 404, error: "not_found" };
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* R3-5 cashless desk (claims-ops.js cashlessStays): open stays on an insurer, TPA or scheme payer whose pre-authorisation
+       * needs action. The running bill of a stay with no bill yet is charge capture against the price list, read once. */
+      if (sub === "cashless-stays" && method === "GET") {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
+        let tf = null;
+        const chargesFor = async (patientId, encounterId) => {
+          if (!tf) tf = await wsqTariff(env, wOrgId, wsqCfg);
+          return tf.error ? null : chargesForPatient(request, env, { ...deps, patientId, encounterId, tariff: tf.table });
+        };
+        const r = await cashlessStays(request, env, { ...deps, payers, chargesFor });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "preauth" && method === "POST") {
@@ -4134,6 +4201,27 @@ export async function onRequest(context) {
       if (sub === "investigation" && method === "POST") {
         const cat = await wsqInvestigationCatalogue(env, wOrgId, wsqCfg);
         const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, other: body.other === true, coding: body.coding, catalogue: cat.entries, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* The backfill, in two steps that cannot be collapsed into one: the scan writes nothing and says
+       * what it would close, and the close takes the order ids that scan handed back. Both are batched
+       * with the store's own cursor, so neither depends on how much history the hospital holds. */
+      if (sub === "order-backfill-scan" && method === "POST") {
+        const r = await scanOrderClosures(request, env, { ...deps, cursor: body.cursor, limit: body.limit });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "order-backfill-close" && method === "POST") {
+        const r = await closeOrderBacklog(request, env, { ...deps, orderIds: body.orderIds });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* R6-3: the same two steps for orders another system sent and has since finished. The scan
+       * writes nothing and names the sender's word per order; the close takes the ids it handed back. */
+      if (sub === "source-order-scan" && method === "POST") {
+        const r = await scanSourceClosures(request, env, { ...deps, cursor: body.cursor, limit: body.limit });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "source-order-close" && method === "POST") {
+        const r = await closeSourceTerminal(request, env, { ...deps, orderIds: body.orderIds });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "investigation-catalogue" && method === "GET") {
@@ -5395,7 +5483,7 @@ export async function onRequest(context) {
       if (sub === "patient" && method === "GET") { const p = await BILL.getPatient(env, bOrg, url.searchParams.get("id") || ""); return json(p ? Object.assign({ ok: true }, p) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "order" && method === "POST") return json(await BILL.createOrder(env, bOrg, body, aid), 200, request);
       if (sub === "orders" && method === "GET") return json({ ok: true, orders: await BILL.ordersForPatient(env, bOrg, url.searchParams.get("patientId") || "", url.searchParams.get("status") || "") }, 200, request);
-      if (sub === "queue" && method === "GET") return json({ ok: true, orders: await BILL.billingQueue(env, bOrg) }, 200, request);
+      if (sub === "queue" && method === "GET") return json({ ok: true, ...(await BILL.billingQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
       if (sub === "tariff" && method === "GET") return json({ ok: true, items: await BILL.listTariff(env, bOrg) }, 200, request);
       if (sub === "tariff" && method === "POST") return json(await BILL.upsertTariff(env, bOrg, body, aid), 200, request);
       if (sub === "invoice" && method === "POST") {
@@ -5419,7 +5507,7 @@ export async function onRequest(context) {
       }
       if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid), 200, request);
-      if (sub === "pharmacy" && method === "GET") return json({ ok: true, orders: await BILL.pharmacyQueue(env, bOrg) }, 200, request);
+      if (sub === "pharmacy" && method === "GET") return json({ ok: true, ...(await BILL.pharmacyQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
       if (sub === "dispense" && method === "POST") return json(await BILL.dispenseOrder(env, bOrg, body.orderId || "", aid), 200, request);
       return json({ ok: false, error: "not_found" }, 404, request);
     }
@@ -5625,6 +5713,45 @@ export async function onRequest(context) {
       }
       return json({ ok: false, error: "not_found" }, 404, request);
     }
+    /* R4-4: critical limits, delta limits, autoverification, MAR times and note templates (clinical-content-settings.js), one card
+     * each on Admin > Hospital. The formulary pattern: a dry run item by item, any problem refuses the whole save, a commit writes
+     * only the dry run's result (confirmCount, planId) with a reason and the name of who signed the values off, audited and read
+     * back. staff.admin AND the key's clinical capability (CAP_FOR). /org/update refuses these keys. */
+    if (seg === "org" && sub === "clinical-settings" && parts[2]) {
+      const key = parts[2];
+      if (!CONTENT.CONTENT_KEYS.includes(key) || parts[3]) return json({ ok: false, error: "not_found" }, 404, request);
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      if (capsFor(az.role).indexOf(CONTENT.CAP_FOR[key]) < 0) return json({ ok: false, error: "forbidden", role: az.role, need: [CAPS.STAFF_ADMIN, CONTENT.CAP_FOR[key]], message: 'Your role here is "' + az.role + '", which cannot change this setting. It needs staff administration and ' + CONTENT.CAP_FOR[key] + " (the admin role)." }, 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Clinical settings belong to a WardSynQ hospital." }, 409, request);
+      const w = o.wardsynq || {};
+      const signOff = (w[CONTENT.SIGNOFF_KEY] && w[CONTENT.SIGNOFF_KEY][key]) || null;
+      if (method === "GET") {
+        const chk = CONTENT.checkContent(key, w[key]);
+        return json({ ok: true, key, configured: w[key] != null, saved: w[key] == null ? CONTENT.emptyOf(key) : w[key], problems: chk.problems, signOff, reference: CONTENT.referenceFor(key) }, 200, request);
+      }
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      if (cb.value === undefined) return json({ ok: false, error: "value_required", message: "Send the whole setting. Nothing was saved." }, 422, request);
+      const plan = await CONTENT.planContent(key, w[key], cb.value);
+      const report = { step: "preview", key, planId: plan.planId, counts: plan.counts, changeCount: plan.changeCount, rows: plan.rows };
+      if (!plan.ok) return json({ ok: false, error: "invalid_clinical_content", message: "Nothing was saved. Every item with a problem is listed with the reason; correct them and run the dry run again.", ...report }, 422, request);
+      if (cb.commit !== true) return json({ ok: true, ...report }, 200, request);
+      if (!plan.changeCount) return json({ ok: true, ...report, step: "done", written: 0 }, 200, request);
+      const reason = String(cb.reason || "").trim().slice(0, 200), signedOffBy = String(cb.signedOffBy || "").trim().slice(0, 120);
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why this setting is being changed. Nothing was saved.", ...report }, 422, request);
+      if (!signedOffBy) return json({ ok: false, error: "signoff_required", message: "Name who signed these values off clinically (a person and role, or a committee). Nothing was saved.", ...report }, 422, request);
+      if (Number(cb.confirmCount) !== plan.changeCount || String(cb.planId || "") !== plan.planId) return json({ ok: false, error: "preview_changed", message: "The setting or the changes differ from the dry run. Run the dry run again; nothing was saved.", ...report }, 409, request);
+      const record = { signedOffBy, reason, by: actor.id, at: new Date().toISOString(), planId: plan.planId };
+      await ORG.updateOrg(env, orgId, { wardsynq: { [key]: plan.value, [CONTENT.SIGNOFF_KEY]: { ...(w[CONTENT.SIGNOFF_KEY] || {}), [key]: record } } }, actor.id,
+        { action: "org:clinical_content", meta: CONTENT.auditMeta(key, plan, reason, signedOffBy) });
+      const back = ((await ORG.getOrg(env, orgId)) || {}).wardsynq || {};
+      if (JSON.stringify(back[key]) !== JSON.stringify(plan.value) || !back[CONTENT.SIGNOFF_KEY] || JSON.stringify(back[CONTENT.SIGNOFF_KEY][key]) !== JSON.stringify(record))
+        return json({ ok: false, error: "not_saved", message: "The setting did not read back as sent, so do not rely on it. Open it again and check." }, 502, request);
+      return json({ ok: true, ...report, step: "done", written: plan.changeCount, signOff: record }, 200, request);
+    }
     /* D11 A: the hospital's clinical settings template (Admin Center > Hospital). staff.admin reads and saves;
      * only a WardSynQ hospital has these settings. The read is what the screen shows as "what is saved". */
     if (seg === "org" && sub === "clinical-settings") {
@@ -5740,6 +5867,29 @@ export async function onRequest(context) {
     /* gst-packages: the hospital's GST settings where the law is not settled (functions/_wardsynq/gst-settings.js), on
      * Admin > Price list. staff.admin reads and saves; a choice other than the review's default needs the chartered
      * accountant's opinion reference and date, every change needs a reason, and the audit row names the settings changed. */
+    /* R4-5 follow-up: patient forms before a booked appointment (form-response.js intakeSettings), on Admin > Hospital. Off
+     * unless set. staff.admin reads and saves with a reason; the audit names the change. /org/update refuses wardsynq.intake. */
+    if (seg === "org" && sub === "intake-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Intake settings belong to a WardSynQ hospital." }, 409, request);
+      const before = intakeSettings(o.wardsynq && o.wardsynq.intake);
+      if (method === "GET") return json({ ok: true, settings: before }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const v = cb.settings && cb.settings.forAppointments;
+      if (typeof v !== "boolean") return json({ ok: false, error: "invalid_intake_settings", message: "Say whether patient forms are offered before an appointment (true) or not (false). Nothing was saved." }, 422, request);
+      if (v === before.forAppointments) return json({ ok: true, changed: [], settings: before }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the intake settings are being changed. Nothing was saved." }, 422, request);
+      const value = { ...((o.wardsynq && o.wardsynq.intake) || {}), forAppointments: v };
+      await ORG.updateOrg(env, orgId, { wardsynq: { intake: value } }, actor.id, { action: "org:intake_settings", meta: JSON.stringify({ changed: ["forAppointments"], to: v, reason: reason.slice(0, 80) }) });
+      const saved = intakeSettings((((await ORG.getOrg(env, orgId)) || {}).wardsynq || {}).intake);
+      if (saved.forAppointments !== v) return json({ ok: false, error: "not_saved", message: "The setting did not read back as sent, so do not rely on it. Try again." }, 502, request);
+      return json({ ok: true, changed: ["forAppointments"], settings: saved }, 200, request);
+    }
     if (seg === "org" && sub === "gst-settings") {
       const cb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || cb.orgId || "";
@@ -5765,6 +5915,29 @@ export async function onRequest(context) {
      * audit row names what changed. */
     /* R2-4: the hospital's reorder suggestion numbers (purchasing.js readReorderPolicy): window, lead time, safety days and
      * minimum days of data, all four or none, no default. staff.admin reads and saves with a reason; the audit names the change. */
+    /* R3-4: the dialysis unit's stations, serology groups and dialyzer reuse maximum (dialysis.js), on the Dialysis unit
+     * screen. No default for any of them (owner item O13). staff.admin reads and saves with a reason; the audit names what changed. */
+    if (seg === "org" && sub === "dialysis-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Dialysis settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, settings: readDialysisSettings(o.wardsynq) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateDialysisSettings(cb.settings);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_dialysis_settings", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const before = (o.wardsynq && o.wardsynq.dialysis) || {};
+      const changed = ["stations", "serologyGroups", "maxReuses"].filter((k) => JSON.stringify(before[k] == null ? null : before[k]) !== JSON.stringify(value[k] == null ? null : value[k]));
+      if (!changed.length) return json({ ok: true, changed: [], settings: readDialysisSettings(o.wardsynq) }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the dialysis settings are being changed. Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { dialysis: value } }, actor.id, { action: "org:dialysis_settings", meta: JSON.stringify({ changed, reason: reason.slice(0, 80) }) });
+      const back = ((await ORG.getOrg(env, orgId)) || {}).wardsynq;
+      if (JSON.stringify((back && back.dialysis) || null) !== JSON.stringify(value)) return json({ ok: false, error: "not_saved", message: "The settings did not read back as sent, so do not rely on them. Try again." }, 502, request);
+      return json({ ok: true, changed, settings: readDialysisSettings(back) }, 200, request);
+    }
     if (seg === "org" && sub === "reorder-policy") {
       const cb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || cb.orgId || "";
@@ -5785,6 +5958,59 @@ export async function onRequest(context) {
       const back = readReorderPolicy((await ORG.getOrg(env, orgId) || {}).wardsynq);
       if (JSON.stringify(back) !== JSON.stringify(value)) return json({ ok: false, error: "not_saved", message: "The settings did not read back as sent, so do not rely on them. Try again." }, 502, request);
       return json({ ok: true, changed, policy: back }, 200, request);
+    }
+    /* R3-2: the hospital's formulary (formulary-settings.js), on Admin > Hospital. The editor (POST /org/formulary, the whole
+     * list) and the CSV load (POST /org/formulary-import) both dry run first, row by row; a commit writes only the dry run's
+     * result (confirmCount, planId), refuses the whole save on any problem, needs a reason, and its audit row names the
+     * entries. staff.admin AND order.verify: no formulary capability exists, and this pair is admin (and the owner) without
+     * hr, which holds staff.admin and has no business with what the pharmacy stocks and restricts. /org/update refuses the key. */
+    if (seg === "org" && (sub === "formulary" || sub === "formulary-import")) {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      if (capsFor(az.role).indexOf(CAPS.ORDER_VERIFY) < 0) return json({ ok: false, error: "forbidden", role: az.role, message: 'Your role here is "' + az.role + '", which cannot change the formulary. It needs both staff administration and pharmacy verification (the admin role).' }, 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The formulary belongs to a WardSynQ hospital." }, 409, request);
+      const w = o.wardsynq || {};
+      const current = Array.isArray(w.formulary) ? w.formulary : [];
+      const flagNow = w.requireReasonOffFormulary === true;
+      if (method === "GET" && sub === "formulary") {
+        const chk = FORMULARY.checkFormulary(current);
+        return json({ ok: true, entries: chk.entries, requireReasonOffFormulary: flagNow, problems: chk.problems, maxEntries: FORMULARY.MAX_ENTRIES }, 200, request);
+      }
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      let plan, rows, fileProblems = false;
+      if (sub === "formulary") {
+        if (!Array.isArray(cb.entries)) return json({ ok: false, error: "entries_required", message: "Send the whole formulary as a list. Nothing was saved." }, 422, request);
+        plan = await FORMULARY.planFormulary(current, cb.entries, flagNow, cb.requireReasonOffFormulary === undefined ? flagNow : cb.requireReasonOffFormulary === true);
+        rows = plan.rows.filter((r) => r.status !== "unchanged");
+      } else {
+        const read = FORMULARY.readFormularyCsv(cb.csv, cb.mapping, cb.mode, current);
+        if (read.error) return json({ ok: false, error: read.error, message: read.message }, read.status, request);
+        if (read.step === "map") return json({ ok: true, ...read }, 200, request);
+        plan = await FORMULARY.planFormulary(current, read.list, flagNow, flagNow);
+        // Every file row, in file order; an entry already on the list appears only when it has a problem of its own.
+        rows = plan.rows.map((r) => {
+          const row = read.sourceRow[r.index], extra = row == null ? [] : read.rowProblems.get(row) || [];
+          if (extra.length) fileProblems = true;
+          return { ...r, row, ...(extra.length ? { status: "invalid", problems: [...extra, ...(r.problems || [])] } : {}) };
+        }).filter((r) => r.row != null || r.status === "invalid").sort((a, b) => (a.row == null ? 0 : a.row) - (b.row == null ? 0 : b.row));
+      }
+      const report = { step: "preview", planId: plan.planId, counts: plan.counts, changeCount: plan.changeCount, rows, removed: plan.removed, requireReasonOffFormulary: plan.requireReasonOffFormulary,
+        ...(plan.problems.some((p) => p.index < 0) ? { listProblems: plan.problems.filter((p) => p.index < 0) } : {}) };
+      if (!plan.ok || fileProblems) return json({ ok: false, error: "invalid_formulary", message: "Nothing was saved. Every entry with a problem is listed with the reason; correct them and run the dry run again.", ...report }, 422, request);
+      if (cb.commit !== true) return json({ ok: true, ...report }, 200, request);
+      if (!plan.changeCount) return json({ ok: true, ...report, step: "done", written: 0 }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the formulary is being changed. Nothing was saved.", ...report }, 422, request);
+      if (Number(cb.confirmCount) !== plan.changeCount || String(cb.planId || "") !== plan.planId) return json({ ok: false, error: "preview_changed", message: "The formulary or the changes differ from the dry run. Run the dry run again; nothing was saved.", ...report }, 409, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { formulary: plan.entries, requireReasonOffFormulary: plan.requireReasonOffFormulary } }, actor.id,
+        { action: "org:formulary", meta: FORMULARY.auditMeta(plan, reason, sub === "formulary" ? "editor" : "csv-" + cb.mode) });
+      const back = ((await ORG.getOrg(env, orgId)) || {}).wardsynq || {};
+      if (JSON.stringify(back.formulary || []) !== JSON.stringify(plan.entries) || (back.requireReasonOffFormulary === true) !== plan.requireReasonOffFormulary)
+        return json({ ok: false, error: "not_saved", message: "The formulary did not read back as sent, so do not rely on it. Open it again and check." }, 502, request);
+      return json({ ok: true, ...report, step: "done", written: plan.changeCount }, 200, request);
     }
     if (seg === "org" && sub === "rcm-settings") {
       const cb = method === "POST" ? await readBody(request) : {};
@@ -6071,7 +6297,14 @@ export async function onRequest(context) {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.ANALYTICS_VIEW);
       const analytics = await Q.analytics(env, s);
-      try { const rev = await BILL.revenueToday(env, s.orgId || s.hospitalId); if (rev) Object.assign(analytics, rev); } catch (e) {}   // clinic revenue dashboard: today's paid total (null when billing off)
+      /* Clinic revenue dashboard: today's paid total on the hospital's clock (null when billing off). A read that fails
+       * says so on the tile (revenueUnread) instead of the tile quietly disappearing. */
+      try {
+        const rOrg = BILL.billingEnabled(env) ? await ORG.getOrg(env, s.orgId || s.hospitalId) : null, rc = (rOrg && rOrg.wardsynq) || {};
+        const tzOff = rc.timeZone ? zoneOffsetAt(rc.timeZone, Date.now()) : null;
+        const rev = await BILL.revenueToday(env, s.orgId || s.hospitalId, Number.isFinite(tzOff) ? tzOff : Number.isFinite(rc.utcOffsetMinutes) ? rc.utcOffsetMinutes : undefined);
+        if (rev) Object.assign(analytics, rev);
+      } catch (e) { analytics.revenueUnread = true; }
       return json({ ok: true, analytics: analytics }, 200, request);
     }
 
@@ -6173,6 +6406,16 @@ export async function onRequest(context) {
         /* Owner decision 2026-09-14: an external ABDM invoice is a clinical document; no other handling is built. */
         const invoiceRefusal = externalInvoiceHandlingRefusal(body.wardsynq);
         if (invoiceRefusal) return json({ ok: false, error: "abdm_invoice_handling_not_built", message: invoiceRefusal }, 422, request);
+        /* R3-2: the formulary is saved only through /org/formulary and /org/formulary-import (dry run, checked, reason, audited). */
+        const wb = body.wardsynq;
+        if (wb && typeof wb === "object" && ("formulary" in wb || "requireReasonOffFormulary" in wb))
+          return json({ ok: false, error: "use_formulary_route", message: "The formulary is changed on Admin Center > Hospital > Formulary (POST /org/formulary), where it is checked and audited. Nothing was saved." }, 422, request);
+        /* R4-4: the same for critical limits, delta limits, autoverification, MAR times, note templates and their sign-off record. */
+        if (wb && typeof wb === "object" && CONTENT.CONTENT_KEYS.concat(CONTENT.SIGNOFF_KEY).some((k) => k in wb))
+          return json({ ok: false, error: "use_clinical_settings_route", message: "Critical limits, delta limits, autoverification, MAR times and note templates are changed on Admin Center > Hospital (POST /org/clinical-settings/<setting>), where they are checked, signed off and audited. Nothing was saved." }, 422, request);
+        /* R4-5 follow-up: forms before an appointment are switched on Admin > Hospital (POST /org/intake-settings), with a reason. */
+        if (wb && typeof wb === "object" && "intake" in wb)
+          return json({ ok: false, error: "use_intake_settings_route", message: "Patient forms before an appointment are switched on Admin Center > Hospital (POST /org/intake-settings), where the change is recorded with its reason. Nothing was saved." }, 422, request);
         /* Owner decision 2026-09-15: level 2 tells the on-duty ward team by a named rule; only the rules built may be saved. */
         const wardRuleRefusal = level2WardRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
         if (wardRuleRefusal) return json({ ok: false, error: "level2_ward_rule_not_built", message: wardRuleRefusal }, 422, request);

@@ -254,6 +254,12 @@ function mapSccmBundle(bundle) {
       id: sourceId(system, "sr", s.id), patientId: patient.id, encounterId: encRef(s.encounter),
       code: k.code || k.display, category, priority: ["routine", "urgent", "stat"].includes(s.priority) ? s.priority : (s.priority === "asap" ? "urgent" : "routine"),
       requesterId: `external:${system}`, status: "draft",
+      /* R5-2 TRIED to file an order the sender calls finished as finished, so that the status-scoped
+       * worklists (ward-order.js OPEN_ORDER_STATUSES) would stop carrying other hospitals' dead orders
+       * for ever, and REVERTED it: an adapter actor holds the DRAFT tier and the governed store
+       * refuses it any other status ("adapter actor ... holds draft and cannot commit a ServiceRequest
+       * with status revoked"), so the whole transaction is rejected and the cancellation never lands.
+       * Closing an external order needs an actor that may, which is a governance change, not this. */
       source: src("sr", s.id),
     });
     req.codeSystem = k.system || "unspecified";

@@ -17,7 +17,8 @@ if (canMock) {
   mock.module(new URL("../../../functions/_fbfirestore.js", import.meta.url).href, { namedExports: {
     async fsQuery(env, coll, opts) {
       queried.push({ coll, opts });
-      return TICKETS.filter((t) => t.fields[opts.where.field] === opts.where.value)
+      // Equality filters ANDed (one object or an array), as _fbfirestore.js fsQuery.
+      return TICKETS.filter((t) => [].concat(opts.where).every((w) => t.fields[w.field] === w.value))
         .map((t) => ({ id: t.id, fields: { ...t.fields } }));
     },
     async fsGet() { return null; },
@@ -47,7 +48,7 @@ test("returns the mobile from the patient's MOST RECENT ticket", { skip }, async
 });
 
 test("a colliding MR# at ANOTHER hospital is never returned", { skip }, async () => {
-  // fsQuery takes one field filter, so the org filter is applied in JS. If it ever stops being applied,
+  // The org is both a query filter and checked in JS. If it ever stops being applied,
   // this returns a stranger's phone number - which is why the test exists.
   TICKETS.length = 0;
   TICKETS.push(ticket("other", "another-hospital", "MR-1", "9999999999", 9000));   // newer, wrong org

@@ -173,7 +173,7 @@
     c.api("/ward/staff-message-people" + q).then(function (r) { set("ibPeopleBox", peopleHtml(c, r && r.ok ? r : { ok: false })); });
     c.api("/ward/list" + q).then(function (w) {
       var sel = document.getElementById("ibAbout"); if (!sel) return;
-      if (!w || !w.ok) { set("ibNewOut", '<div class="msg err">' + TS(c, "site.inbasket.patientsFailed", "The ward list could not be loaded, so only unit threads can be started now.") + "</div>"); return; }
+      if (!w || !w.ok) { set("ibNewOut", '<div class="msg err">' + (WSQ.tooManyOpen(w) ? c.esc(WSQ.tooManyOpen(w)) : TS(c, "site.inbasket.patientsFailed", "The ward list could not be loaded, so only unit threads can be started now.")) + "</div>"); return; }
       (w.patients || []).forEach(function (p, ix) {
         S.patients.push(p);
         var o = document.createElement("option"); o.value = String(ix); o.textContent = (p.name || p.patientId) + (p.ward ? " - " + p.ward + (p.bed ? " " + p.bed : "") : ""); sel.appendChild(o);

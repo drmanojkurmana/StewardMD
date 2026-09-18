@@ -1,0 +1,192 @@
+{
+  "site": "biliary",
+  "name": "Biliary tract (cholangiocarcinoma + gallbladder)",
+  "system": "Oncology / Gastrointestinal",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Biliary tract cancers comprise intrahepatic cholangiocarcinoma, perihilar (Klatskin) cholangiocarcinoma, distal cholangiocarcinoma and gallbladder carcinoma, each with its own 8th-edition T definitions in one file. Intrahepatic disease is staged like liver tumours (number, vascular invasion, visceral-peritoneum perforation); perihilar and distal disease by bile-duct wall invasion and vascular involvement (unilateral vs bilateral portal or hepatic artery); gallbladder by wall-layer invasion (peritoneal vs hepatic side T2a/T2b matters for prognosis). Nodal positivity is N1 (1-3 nodes) or N2 (4 or more) except perihilar/distal schemes.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Carcinoma in situ / high-grade dysplasia",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Intrahepatic: solitary tumour 5 cm or smaller without vascular invasion; Gallbladder: invasion of lamina propria",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Intrahepatic: solitary tumour larger than 5 cm without vascular invasion; Gallbladder: invasion of muscle layer",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2a",
+          "label": "Gallbladder: invasion of peritoneal-side connective tissue without serosal perforation; Distal bile duct: invasion 5-12 mm beyond duct wall",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2b",
+          "label": "Gallbladder: invasion of hepatic-side connective tissue without liver invasion; Perihilar: beyond duct wall into surrounding fat",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Intrahepatic: solitary tumour with intrahepatic vascular invasion, or multiple tumours with or without vascular invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Intrahepatic: tumour perforating the visceral peritoneum; Perihilar: unilateral portal vein or hepatic artery invasion; Distal: invasion beyond duct wall over 12 mm; Gallbladder: serosal perforation and/or direct liver or single extrahepatic organ invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Intrahepatic: direct invasion of extrahepatic structures; Perihilar: main portal vein, bilateral secondary biliary radicles, or unilateral secondary radicle with contralateral vascular invasion; Distal: coeliac, SMA or common hepatic artery invasion; Gallbladder: main portal/hepatic artery invasion or two or more extrahepatic organs",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Metastasis in 1 to 3 regional lymph nodes (perihilar/distal: nodes along bile duct, portal, hepatic artery)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Metastasis in 4 or more regional lymph nodes (intrahepatic/gallbladder schemes)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "In situ",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA",
+          "t": "T1a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Small confined tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T1b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Vascular invasion or limited local spread, node negative",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Advanced local invasion, node negative",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T1, T2 or T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "1-3 positive nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "Locally very advanced",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Extensive nodal disease (4+ nodes)",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Hilar, pericholedochal, portal, hepatic artery, posterior pancreaticoduodenal and (for gallbladder/distal) anterior pancreaticoduodenal nodes. Coeliac, para-aortic and distant nodes are M1.",
+      "histologicGrade": "Well differentiated (G1), moderately differentiated (G2), poorly differentiated (G3); large-duct vs small-duct intrahepatic subtypes carry different biology. Gallbladder T2a (peritoneal) vs T2b (hepatic) is reported because hepatic-side tumours behave worse.",
+      "histopathologicTypes": "Adenocarcinoma (most cases, tubular/papillary); intraductal papillary neoplasm with associated invasion; mucinous, signet-ring and adenosquamous variants; gallbladder: biliary-type adenocarcinoma, intestinal-type, neuroendocrine carcinoma (separate system).",
+      "prognosticFactors": [
+        "Anatomic subtype (intrahepatic vs perihilar vs distal vs gallbladder)",
+        "Margin status (R0 is the dominant curative factor)",
+        "Nodal burden (N1 vs N2)",
+        "Vascular invasion",
+        "Perineural invasion",
+        "CA 19-9 level",
+        "IDH1 mutation and FGFR2 fusion (intrahepatic, therapeutic)",
+        "Primary sclerosing cholangitis / choledochal cyst background"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

@@ -189,7 +189,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Transanal Local Excision (TAMIS) or TME Surgery (LAR/APR) + Observation",
-      "protocolRefs": []
+      "protocolRefs": [
+        "modified-folfox-6"
+      ]
     },
     {
       "id": "n_dmmr_tnt_tx",
@@ -226,7 +228,9 @@
         "Immune-related adverse event monitoring (colitis, hepatitis, pneumonitis, endocrinopathies) throughout PD-1 therapy; physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Dostarlimab 500 mg IV q3w x 6 months -> Watch-and-Wait Organ Preservation for cCR",
-      "protocolRefs": []
+      "protocolRefs": [
+        "rectal-dostarlimab"
+      ]
     },
     {
       "id": "n_pmmr_tnt_tx",
@@ -263,7 +267,10 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Total Neoadjuvant Therapy (TNT: mFOLFOX6/CAPOX + LCRT 50.4 Gy) -> Watch-and-Wait vs TME",
-      "protocolRefs": []
+      "protocolRefs": [
+        "modified-folfox-6",
+        "folfox-4"
+      ]
     },
     {
       "id": "n_metastatic_tx",
@@ -299,7 +306,11 @@
         "Reassess resectability every 8 to 12 weeks on systemic therapy; offer clinical trial enrollment at every line. Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "FOLFOX/FOLFIRI +/- Biologic -> Resection of Oligometastases or Palliative Chemotherapy",
-      "protocolRefs": []
+      "protocolRefs": [
+        "modified-folfox-6",
+        "folfiri",
+        "gi-crc-msi-pembro"
+      ]
     }
   ],
   "links": [
@@ -365,6 +376,10 @@
     }
   ],
   "protocolRefs": [
+    "folfiri",
+    "folfox-4",
+    "gi-crc-msi-pembro",
+    "modified-folfox-6",
     "rectal-dostarlimab"
   ]
 }

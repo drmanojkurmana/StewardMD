@@ -276,3 +276,25 @@ test("lab stock: the laboratory counts its reagents at the Laboratory location o
   assert.equal(lv.expiring[0].batch, "GL-77");
   assert.equal((await as(null, "/ward/stock?orgId=" + ORG_ID + "&location=Laboratory")).__status, 401);
 });
+
+test("R5-4: the QC screen's truncation warning names BOTH reads, because a truncated action read changes what a block is", async () => {
+  const w = await ready();
+  /* Both the runs and the corrective actions are read newest-first under the same ceiling. The
+   * warning used to mention the charts only, so a hospital past the ceiling on ACTIONS - where a
+   * block from an older rejected run cannot be weighed at all - was told nothing. */
+  const real = H.RECORD.latestByType.bind(H.RECORD);
+  const many = (n, row) => Array.from({ length: n }, (_, i) => ({ ...row, id: `${row.resourceType}-${i}` }));
+  H.RECORD.latestByType = async (tenantId, type, limit, opts) => {
+    if (type === "_wardsynq_qc_action") return many(1000, { resourceType: "_wardsynq_qc_action", version: 1, analyserId: w.analyserId, test: "Potassium", action: "recalibrated", recordedAt: "2026-01-01T00:00:00.000Z" });
+    return real(tenantId, type, limit, opts);
+  };
+  const view = await as(LAB, "/ward/lab-qc?orgId=" + ORG_ID);
+  H.RECORD.latestByType = real;
+  assert.equal(view.__status, 200, view.__text);
+  assert.equal(view.truncated, true, "a ceiling that was reached is said, not left to the reader");
+  assert.match(view.truncatedWarning, /corrective actions were read/);
+  assert.match(view.truncatedWarning, /block from a rejected run older than that is not listed/);
+
+  const clean = await as(LAB, "/ward/lab-qc?orgId=" + ORG_ID);
+  assert.equal(clean.truncated, undefined, "and nothing is said when nothing was truncated");
+});

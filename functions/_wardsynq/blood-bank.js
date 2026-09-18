@@ -38,7 +38,7 @@
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { DONATION_TYPES, HB_METHODS, donorCriteriaFor, screeningFailures, discretionary, deferralFor, meets } from "./donor-criteria.js";
@@ -49,7 +49,11 @@ import {
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const up = (v) => str(v).toUpperCase();
-const READ_CAP = 1000;
+/* Every record of a kind is read (service.listAll, paged, oldest first). Past READ_CAP the NEWEST are the ones not read:
+ * a register or board says so (truncated), a write that checks against the records refuses (409 too_many_records).
+ * ponytail: each page re-groups every version; audit O20 (a latest-version table) is the upgrade if paging is slow. */
+const READ_CAP = 50000;
+const every = async (svc, type) => (await svc.listAll(type, { max: READ_CAP, throwOnTruncate: true })).rows;
 const DAY = 86400000;
 
 const TTI = Object.freeze(["hiv", "hbv", "hcv", "syphilis", "malaria"]);
@@ -85,6 +89,7 @@ function writeFailure(e) {
 }
 function readFailure(e) {
   if (e instanceof GovernanceError) return { ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
+  if (e instanceof ListCeilingError) return { ok: false, status: 409, error: "too_many_records", detail: str(e.message) };
   return { ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
 }
 const baseOf = (ctx) => ({ mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null });
@@ -257,13 +262,15 @@ function inventoryOf(statuses) {
   return [...rows.values()].sort((a, b) => a.component.localeCompare(b.component) || a.group.localeCompare(b.group));
 }
 
-async function readBank(svc) {
+/* strict: a write checks against these records, so past the ceiling it throws (409) instead of flagging truncated. */
+async function readBank(svc, strict) {
   const types = ["BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent", "TransfusionEpisode", "BloodSample", "DonorNotification"];
-  const rows = await Promise.all(types.map((t) => svc.list(t, READ_CAP)));
+  const got = await Promise.all(types.map((t) => svc.listAll(t, { max: READ_CAP, throwOnTruncate: !!strict })));
+  const rows = got.map((g) => g.rows);
   const out = {};
   const appended = new Set(["BloodUnitEvent", "BloodTestResult", "DonorScreening", "DonorNotification"]);
   types.forEach((t, i) => { out[t] = appended.has(t) ? (rows[i] || []).filter(Boolean) : latest(rows[i]); });
-  out.truncated = rows.some((r) => (r || []).length >= READ_CAP);
+  out.truncated = got.some((g) => g.truncated);
   return out;
 }
 
@@ -299,7 +306,7 @@ async function bloodBankOverview(request, env, ctx) {
     inventory: inventoryOf(units),
     expiryAlerts: units.filter((u) => (u.status === "available" || u.status === "reserved") && Date.parse(u.expiresAt) <= soon)
       .concat(units.filter((u) => u.status === "expired" || u.status === "reactive")),
-    ...(b.truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} blood bank records of one kind exist and only the latest ${READ_CAP} were read, so this inventory may be incomplete. Check the shelf.` } : {}),
+    ...(b.truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} blood bank records of one kind exist and the newest were not read, so this inventory may be incomplete. Check the shelf.` } : {}),
   };
 }
 
@@ -359,7 +366,7 @@ async function screenDonor(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let donor, screenings, donations;
-  try { [donor, screenings, donations] = await Promise.all([svc.get("BloodDonor", donorId), svc.list("DonorScreening", READ_CAP), svc.list("BloodDonation", READ_CAP)]); }
+  try { [donor, screenings, donations] = await Promise.all([svc.get("BloodDonor", donorId), every(svc, "DonorScreening"), every(svc, "BloodDonation")]); }
   catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   if (!donor) return refusal(base, 404, "donor_not_found");
   const now = new Date().toISOString();
@@ -419,7 +426,7 @@ async function recordDonation(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let screening, donations;
-  try { [screening, donations] = await Promise.all([svc.get("DonorScreening", str(ctx.screeningId)), svc.list("BloodDonation", READ_CAP)]); }
+  try { [screening, donations] = await Promise.all([svc.get("DonorScreening", str(ctx.screeningId)), every(svc, "BloodDonation")]); }
   catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   const now = new Date().toISOString();
   if (!screening || screening.outcome !== "eligible") return refusal(base, 409, "no_eligible_screening", "A donation is collected only against an eligible screening.");
@@ -479,7 +486,7 @@ async function recordBloodTests(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let donation, prior;
-  try { [donation, prior] = await Promise.all([svc.get("BloodDonation", str(ctx.donationId)), svc.list("BloodTestResult", READ_CAP)]); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+  try { [donation, prior] = await Promise.all([svc.get("BloodDonation", str(ctx.donationId)), every(svc, "BloodTestResult")]); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   if (!donation) return { ...base, ok: false, status: 404, error: "donation_not_found", written: 0 };
   const now = new Date().toISOString();
   const record = { resourceType: "BloodTestResult", id: `wsq-bloodtest-${crypto.randomUUID()}`, donationId: donation.id, tti, methods, nat: nat || null, abo: up(ctx.abo), rhD: str(ctx.rhD),
@@ -562,7 +569,7 @@ async function poolUnits(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let b;
-  try { b = await readBank(svc); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+  try { b = await readBank(svc, true); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   const now = new Date().toISOString();
   const statuses = unitStatuses(b.BloodUnit, b.BloodDonation, b.BloodTestResult, b.BloodUnitEvent, b.TransfusionEpisode, now, { natRequired: bloodCentreSettings(ctx.wsqCfg).natRequired });
   const units = ids.map((id) => statuses.find((u) => u.unitId === id));
@@ -613,7 +620,7 @@ async function discardSample(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let b;
-  try { b = await readBank(svc); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+  try { b = await readBank(svc, true); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   const now = new Date().toISOString(), set = bloodCentreSettings(ctx.wsqCfg);
   const sample = b.BloodSample.find((s) => s.id === str(ctx.sampleId));
   if (!sample) return refusal(base, 404, "sample_not_found");
@@ -647,7 +654,7 @@ async function recordDonorNotification(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let donation, results;
-  try { [donation, results] = await Promise.all([svc.get("BloodDonation", str(ctx.donationId)), svc.list("BloodTestResult", READ_CAP)]); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+  try { [donation, results] = await Promise.all([svc.get("BloodDonation", str(ctx.donationId)), every(svc, "BloodTestResult")]); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   if (!donation) return refusal(base, 404, "donation_not_found");
   if (donationTests(donation.id, results).state !== "reactive") return refusal(base, 409, "donation_not_reactive", "Notification and counselling are recorded for a reactive donation only.");
   const now = new Date().toISOString();
@@ -669,7 +676,7 @@ async function bloodUnitEvent(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let b;
-  try { b = await readBank(svc); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+  try { b = await readBank(svc, true); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   const now = new Date().toISOString();
   const unit = unitStatuses(b.BloodUnit, b.BloodDonation, b.BloodTestResult, b.BloodUnitEvent, b.TransfusionEpisode, now, { natRequired: bloodCentreSettings(ctx.wsqCfg).natRequired }).find((u) => u.unitId === str(ctx.unitId));
   if (!unit) return { ...base, ok: false, status: 404, error: "unit_not_found", written: 0 };
@@ -694,7 +701,7 @@ async function bloodUnitGate(request, env, ctx, stage) {
   if (error) return { ...base, ...error };
   let b, episode = null;
   try {
-    b = await readBank(svc);
+    b = await readBank(svc, true);
     if (str(ctx.episodeId)) episode = await svc.get("TransfusionEpisode", str(ctx.episodeId));
   } catch (e) { return { ...base, ...readFailure(e), error: "inventory_unreadable", detail: "The blood bank inventory could not be read, so this unit cannot be checked against it. Nothing was recorded." }; }
   const unitNumber = stage === "issue" ? up(episode && episode.crossmatch && episode.crossmatch.unitId) : up(ctx.unitId);

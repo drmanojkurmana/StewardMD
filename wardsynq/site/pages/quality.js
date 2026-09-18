@@ -140,8 +140,7 @@
     var dot = d.dot ? (d.dot.computable ? "<p>" + esc(T(c, "site.qual.abg.dot", "Antibiotic days of therapy: {n} over {bd} bed-days", { n: d.dot.numerator, bd: d.dot.denominator })) + (d.dot.rate != null ? " · " + esc(T(c, "site.qual.abg.dotRate", "{r} per 1000", { r: d.dot.rate })) : "") + "</p>"
       : '<div class="msg note">' + TS(c, "site.qual.abg.dotNot", "Days of therapy not computable:") + " " + EN(c, esc(d.dot.reason || "")) + "</div>") : "";
     if (!d.computable) return '<div class="msg note">' + esc(T(c, "site.qual.abg.notConfigured", "The minimum number of isolates is not configured. An administrator sets it in Admin, clinical settings (CLSI M39 recommends 30).")) + "</div>" + dot;
-    var head = "<p>" + esc(T(c, "site.qual.abg.summary", "{from} to {to}: {n} first isolates from {r} final reports, {dup} repeat isolates left out. Minimum {min} isolates.", { from: d.period.from, to: d.period.to, n: d.firstIsolates, r: d.reportsUsed, dup: d.duplicatesExcluded, min: d.minIsolates })) + "</p>" +
-      (d.truncated ? '<div class="msg warn">' + esc(T(c, "site.qual.abg.truncated", "More reports exist than were read; the oldest may be missing.")) + "</div>" : "");
+    var head = "<p>" + esc(T(c, "site.qual.abg.summary", "{from} to {to}: {n} first isolates from {r} final reports, {dup} repeat isolates left out. Minimum {min} isolates.", { from: d.period.from, to: d.period.to, n: d.firstIsolates, r: d.reportsUsed, dup: d.duplicatesExcluded, min: d.minIsolates })) + "</p>";
     var body = !d.organisms.length ? "<p>" + esc(T(c, "site.qual.abg.none", "No final cultures with organisms in this period.")) + "</p>" : d.organisms.map(function (o) {
       return '<div class="card"><h3>' + EN(c, esc(o.organism)) + " · " + esc(T(c, "site.qual.abg.isolates", "{n} isolates", { n: o.isolates })) + "</h3>" +
         (o.insufficient ? "<p>" + esc(T(c, "site.qual.abg.insufficient", "Too few isolates for a percentage.")) + "</p>"
@@ -302,7 +301,8 @@
     el.innerHTML = head + '<div class="tabs" role="tablist">' + tabs.map(function (t) { return '<button type="button" role="tab" data-qtab="' + t + '" aria-selected="' + (t === g.tab) + '">' + esc(tabLabel(c, t)) + "</button>"; }).join("") + '</div><div id="qBody"></div>';
     el.querySelectorAll("[data-qtab]").forEach(function (b) { b.onclick = function () { g.tab = b.getAttribute("data-qtab"); WSQ.render("quality"); }; });
     var body = document.getElementById("qBody");
-    var set = function (html) { body.innerHTML = html; };
+    /* A read past the server's ceiling holds the oldest records only (service.listAll): said above every tab's figures. */
+    var set = function (html) { body.innerHTML = (data && data.ok && data.truncated ? '<div class="msg warn">' + esc(T(c, "site.qual.truncated", "More records exist than can be read at once; the newest were not read, so this may be incomplete.")) + "</div>" : "") + html; };
     var data = null;
     var paint = function () {
       var m = g.tab === "abg" ? "" : monthRow(c, "qMonth", month);

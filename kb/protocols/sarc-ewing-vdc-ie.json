@@ -1,0 +1,132 @@
+{
+  "id": "sarc-ewing-vdc-ie",
+  "diseaseId": "bone",
+  "name": "Interval-Compressed VDC / IE (Ewing Sarcoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 14,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bone Cancer v1.2026"
+  },
+  "stage": [
+    "localized",
+    "metastatic"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant"
+  ],
+  "histology": "Ewing sarcoma / PNET",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "0.15 mg/kg IV",
+      "notes": "Prior to chemotherapy"
+    },
+    {
+      "name": "Mesna",
+      "dose": "Equal to 100% of ifosfamide dose",
+      "notes": "Divided IV doses or continuous infusion for uroprotection"
+    }
+  ],
+  "supportiveCare": [
+    "Filgrastim (G-CSF) or pegfilgrastim mandatory after every cycle for 14-day interval compression",
+    "Hydration 2-3 L/m2/day during ifosfamide"
+  ],
+  "monitoring": [
+    "CBC with diff, CMP, urinalysis (check for hematuria)",
+    "Echocardiogram"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "vincristine",
+      "name": "vinCRIStine",
+      "basis": "bsa",
+      "dosePerUnit": 1.5,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": 2
+      },
+      "notes": "vinCRIStine 1.5 mg/m2 (cap 2 mg) IV push on Day 1 of VDC cycles."
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "cumulativeLifetime": {
+          "warn": 375,
+          "hard": 450,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "DOXOrubicin 75 mg/m2 IV over 48 hours or continuous infusion on VDC cycles."
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 1200,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Cyclophosphamide 1200 mg/m2 IV over 1 hour with Mesna on VDC cycles."
+    },
+    {
+      "id": "ifosfamide",
+      "name": "Ifosfamide",
+      "basis": "bsa",
+      "dosePerUnit": 1800,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "notes": "Ifosfamide 1800 mg/m2/day IV over 1 hour with Mesna on Days 1-5 of IE cycles."
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "notes": "Etoposide 100 mg/m2/day IV over 2 hours on Days 1-5 of IE cycles."
+    }
+  ]
+}

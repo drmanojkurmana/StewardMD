@@ -259,6 +259,10 @@
         "Axillary staging: SLNB is NOT indicated for pure DCIS treated with BCS unless invasive disease is suspected.",
         "Systemic Therapy: No endocrine therapy, chemotherapy, or HER2-targeted therapy.",
         "Surveillance: Physical exam every 6-12 months for 5 years, then annually; annual bilateral diagnostic mammography."
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole"
       ]
     },
     {
@@ -312,14 +316,14 @@
       "required": true,
       "bullets": [
         "PREOPERATIVE (NEOADJUVANT) THERAPY IS PREFERRED (NCCN BINV-L) FOR:",
-        "\u2022 HER2-positive breast cancer if >=cT2 (tumor >2 cm) OR >=cN1 (clinically node-positive).",
-        "\u2022 Triple-Negative Breast Cancer (TNBC) if >=cT1c (tumor >1 cm) OR >=cN1.",
-        "\u2022 Locally advanced / inoperable tumors (cT4, bulky cN2, cN3) to render operable.",
-        "\u2022 Large tumor relative to breast size in a patient desiring breast conservation.",
-        "\u2022 cN+ disease likely to convert to cN0 (enabling Targeted Axillary Dissection [TAD] and avoiding morbid ALND).",
+        "• HER2-positive breast cancer if >=cT2 (tumor >2 cm) OR >=cN1 (clinically node-positive).",
+        "• Triple-Negative Breast Cancer (TNBC) if >=cT1c (tumor >1 cm) OR >=cN1.",
+        "• Locally advanced / inoperable tumors (cT4, bulky cN2, cN3) to render operable.",
+        "• Large tumor relative to breast size in a patient desiring breast conservation.",
+        "• cN+ disease likely to convert to cN0 (enabling Targeted Axillary Dissection [TAD] and avoiding morbid ALND).",
         "UPFRONT SURGERY IS PREFERRED FOR:",
-        "\u2022 Clinically node-negative HR+/HER2- early tumors (cT1N0) where upfront genomics (21-gene Oncotype DX) guide adjuvant chemo vs endocrine alone.",
-        "\u2022 Tumors with extensive in situ component where invasive extent is poorly delineated."
+        "• Clinically node-negative HR+/HER2- early tumors (cT1N0) where upfront genomics (21-gene Oncotype DX) guide adjuvant chemo vs endocrine alone.",
+        "• Tumors with extensive in situ component where invasive extent is poorly delineated."
       ],
       "options": [
         {
@@ -416,6 +420,10 @@
           "label": "Proceed to Adjuvant Systemic Therapy Subtype Selection",
           "setsValue": null
         }
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole"
       ]
     },
     {
@@ -437,10 +445,10 @@
       "bullets": [
         "Surgical Margins: Clear margins required. Re-excision preferred for positive margins; if impossible, deliver PMRT + comprehensive RNI.",
         "Post-Mastectomy Radiation Therapy (PMRT) Indications (BINV-3):",
-        "\u2022 >=4 positive axillary nodes (pN2-3): PMRT to chest wall + comprehensive RNI is MANDATORY (Category 1).",
-        "\u2022 1-3 positive axillary nodes (pN1): STRONGLY CONSIDER PMRT to chest wall + comprehensive RNI (EBCTCG meta-analysis shows recurrence and mortality reduction).",
-        "\u2022 Node-negative and pT3 (>5 cm): CONSIDER PMRT to chest wall +/- comprehensive RNI.",
-        "\u2022 Node-negative, <=pT2 (<=5 cm) with clear margins: PMRT is NOT indicated.",
+        "• >=4 positive axillary nodes (pN2-3): PMRT to chest wall + comprehensive RNI is MANDATORY (Category 1).",
+        "• 1-3 positive axillary nodes (pN1): STRONGLY CONSIDER PMRT to chest wall + comprehensive RNI (EBCTCG meta-analysis shows recurrence and mortality reduction).",
+        "• Node-negative and pT3 (>5 cm): CONSIDER PMRT to chest wall +/- comprehensive RNI.",
+        "• Node-negative, <=pT2 (<=5 cm) with clear margins: PMRT is NOT indicated.",
         "Breast Reconstruction: Immediate or delayed tissue expander/implant, autologous DIEP/TRAM/LD flap. If PMRT planned, delayed-immediate or autologous reconstruction preferred to reduce capsular contracture."
       ],
       "options": [
@@ -449,6 +457,10 @@
           "label": "Proceed to Adjuvant Systemic Therapy Subtype Selection",
           "setsValue": null
         }
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole"
       ]
     },
     {
@@ -756,7 +768,7 @@
       "nodeType": "end",
       "template": "end",
       "name": "TNBC Residual Plan",
-      "title": "TNBC with Residual Disease: Capecitabine + Pembrolizumab \u00b1 Olaparib",
+      "title": "TNBC with Residual Disease: Capecitabine + Pembrolizumab ± Olaparib",
       "section": "Adjuvant Escalation",
       "description": "Category 1 escalation protocol for residual triple-negative breast cancer.",
       "path": "Breast / Post-Neoadjuvant / TNBC Residual",
@@ -785,7 +797,7 @@
       "nodeType": "end",
       "template": "end",
       "name": "HR+ Residual Plan",
-      "title": "HR+/HER2- with Residual Disease: Endocrine + CDK4/6i \u00b1 Olaparib",
+      "title": "HR+/HER2- with Residual Disease: Endocrine + CDK4/6i ± Olaparib",
       "section": "Adjuvant Escalation",
       "description": "Escalated adjuvant protocol for residual HR+/HER2- disease.",
       "path": "Breast / Post-Neoadjuvant / HR+ Residual",
@@ -949,8 +961,8 @@
       "bullets": [
         "pT1a pN0 (<=0.5 cm): Adjuvant endocrine therapy alone (Category 2B). Chemotherapy is not recommended.",
         "pT1b-T3, pN0 or pN1 (1-3 positive nodes) -> 21-Gene Oncotype DX RS (Category 1):",
-        "\u2022 Recurrence Score < 26: Adjuvant Endocrine Therapy alone (Category 1). TAILORx and RxPONDER prove NO chemotherapy benefit.",
-        "\u2022 Recurrence Score >= 26: Adjuvant Chemotherapy (Dose-Dense AC-T or TC) followed by Endocrine Therapy (Category 1).",
+        "• Recurrence Score < 26: Adjuvant Endocrine Therapy alone (Category 1). TAILORx and RxPONDER prove NO chemotherapy benefit.",
+        "• Recurrence Score >= 26: Adjuvant Chemotherapy (Dose-Dense AC-T or TC) followed by Endocrine Therapy (Category 1).",
         "pN2-3 (>=4 positive nodes): Adjuvant Chemotherapy followed by Endocrine Therapy (Category 1).",
         "CDK4/6 Inhibitor Escalation: 2 years of Abemaciclib (monarchE, Category 1 preferred) or 3 years of Ribociclib (NATALEE, Category 1) for eligible high-risk patients (>=4 nodes, or 1-3 nodes with grade 3 or >=5 cm).",
         "Adjuvant Olaparib: 1 year for germline BRCA1/2 PV with >=4 positive nodes (OlympiA, Category 1)."
@@ -1237,7 +1249,7 @@
       "nodeType": "end",
       "template": "end",
       "name": "Postmenopausal Endocrine",
-      "title": "Adjuvant Endocrine (Postmenopausal) \u00b1 CDK4/6 Inhibitor",
+      "title": "Adjuvant Endocrine (Postmenopausal) ± CDK4/6 Inhibitor",
       "section": "Endocrine Therapy",
       "description": "Category 1 adjuvant endocrine protocol for postmenopausal patients.",
       "path": "Breast / Endocrine / Postmenopausal",
@@ -1272,7 +1284,7 @@
       "nodeType": "end",
       "template": "end",
       "name": "Premenopausal Endocrine",
-      "title": "Adjuvant Endocrine (Premenopausal): Tamoxifen vs OFS + AI \u00b1 CDK4/6i",
+      "title": "Adjuvant Endocrine (Premenopausal): Tamoxifen vs OFS + AI ± CDK4/6i",
       "section": "Endocrine Therapy",
       "description": "Category 1 adjuvant endocrine protocol for premenopausal patients.",
       "path": "Breast / Endocrine / Premenopausal",
@@ -1323,6 +1335,10 @@
         "WHAT NOT TO DO IN ASYMPTOMATIC PATIENTS (NCCN BINV-17, Category 1): Routine CBC, LFTs, tumor markers (CEA, CA 15-3, CA 27.29), CT scans, bone scans, and PET/CT scans are NOT recommended in the absence of signs/symptoms of recurrence (no survival advantage and potential harm from false-positives).",
         "Lymphedema Management: Educate on symptoms, early referral for compression garments and decongestive physical therapy.",
         "Cardiovascular Monitoring: Follow LVEF every 3 months during active anti-HER2 therapy; long-term monitoring if anthracycline-treated."
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole"
       ]
     },
     {
@@ -1922,7 +1938,7 @@
       "nodeType": "end",
       "template": "end",
       "name": "Phyllodes Protocol",
-      "title": "Phyllodes Tumor: Wide Surgical Excision (\u22651 cm Margins)",
+      "title": "Phyllodes Tumor: Wide Surgical Excision (≥1 cm Margins)",
       "section": "Special Presentations",
       "description": "Surgical resection guidelines for benign, borderline, and malignant phyllodes tumors.",
       "path": "Breast / Special / Phyllodes",
@@ -1937,6 +1953,10 @@
         "Axillary Staging: SLNB and ALND are NOT indicated (phyllodes tumors metastasize hematogenously, rarely to lymph nodes).",
         "Adjuvant Systemic Therapy: Chemotherapy and endocrine therapy have NO proven benefit and are not recommended.",
         "Radiation Therapy: Consider chest wall / breast RT for large (>5 cm) malignant phyllodes tumors with narrow margins."
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole"
       ]
     },
     {
@@ -1960,8 +1980,8 @@
       "bullets": [
         "Workup: Full-thickness skin biopsy of involved nipple-areolar complex (NAC); bilateral mammogram + ultrasound; breast MRI to detect occult parenchymal disease.",
         "Surgical Options:",
-        "\u2022 Central lumpectomy including total resection of NAC with clear margins + Whole-Breast RT (Category 1).",
-        "\u2022 Total Mastectomy including NAC +/- SLNB +/- breast reconstruction.",
+        "• Central lumpectomy including total resection of NAC with clear margins + Whole-Breast RT (Category 1).",
+        "• Total Mastectomy including NAC +/- SLNB +/- breast reconstruction.",
         "Axillary Management: Perform SLNB if underlying invasive cancer is present, or if mastectomy is performed.",
         "Systemic Therapy: Governed by the stage and ER/PR/HER2 receptor status of the underlying parenchymal malignancy."
       ],
@@ -2584,5 +2604,33 @@
         "wildtype"
       ]
     }
+  ],
+  "protocolRefs": [
+    "breast-abemaciclib-adjuvant",
+    "breast-ac",
+    "breast-ac-th",
+    "breast-anastrozole",
+    "breast-capecitabine",
+    "breast-capivasertib-fulvestrant",
+    "breast-carbo-paclitaxel",
+    "breast-cdk46-ai",
+    "breast-ddac-t",
+    "breast-elacestrant",
+    "breast-exemestane",
+    "breast-fulvestrant",
+    "breast-inavolisib-palbo-fulv",
+    "breast-letrozole",
+    "breast-olaparib-adjuvant",
+    "breast-paclitaxel-trastuzumab",
+    "breast-pembro-chemo-mbc",
+    "breast-pembro-chemo-tnbc",
+    "breast-ribociclib-adjuvant",
+    "breast-sacituzumab-govitecan",
+    "breast-tamoxifen",
+    "breast-tc",
+    "breast-tch",
+    "breast-tchp",
+    "breast-tdm1",
+    "breast-tdxd"
   ]
 }

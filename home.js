@@ -1068,6 +1068,7 @@
     atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
+    staging: function () { if (window.SMD_ONCOSTAGING && SMD_ONCOSTAGING.openList) SMD_ONCOSTAGING.openList(); else toast("Cancer Staging loading…"); },
     // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
     // launch the existing module (OPD queue, ICU, Ward Sync, FollowCare).
     hospital: function () {
@@ -1929,6 +1930,8 @@
       eligible: function () { try { if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool) return SMD_QUEUE_FLAGS.bool("smd_onco_home"); return localStorage.getItem("smd_onco_home") !== "0"; } catch (e) { return true; } } },
     { act: "oncotree", ic: "account_tree", tt: "OncoTree", sub: "Cancer pathway navigator", feat: true, anim: "oncotree",
       eligible: function () { try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
+    { act: "staging", ic: "stairs", tt: "Cancer Staging", sub: "AJCC/TNM 32 Sites", feat: true, defOn: true,
+      eligible: function () { return true; } },
     { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
@@ -4895,6 +4898,14 @@ body.dark .maik-b.ai{box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .maik-cite{color:var(--mk-acc);font-weight:700;font-size:.7em;vertical-align:super}
 .maik-note{font:500 11.5px/1.45 'Inter';color:var(--mk-mut);margin-top:6px}
 .maik-src{margin-top:9px;padding-top:8px;border-top:1px solid var(--mk-bd);display:flex;align-items:center;gap:6px;font:600 10.5px 'Inter';color:var(--mk-teal)}
+.maik-figs{margin-top:10px;padding-top:8px;border-top:1px solid var(--mk-bd)}
+.maik-figs-h{font:600 10.5px 'Inter';color:var(--mk-teal);margin-bottom:6px}
+.maik-figs-row{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.maik-figs-row::-webkit-scrollbar{display:none}
+.maik-fig{flex:0 0 auto;width:220px;max-width:80%;display:block;text-decoration:none;color:inherit;border:1px solid var(--mk-bd);border-radius:10px;overflow:hidden;background:var(--panel,#fff)}
+.maik-fig img{display:block;width:100%;height:140px;object-fit:cover;background:#f1f5f4}
+.maik-fig-cap{display:block;padding:6px 8px;font:500 11px/1.35 'Inter';color:var(--slate-soft,#5a7184);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.maik-fig-cap b{color:var(--mk-teal);font-weight:700}
 .maik-followups{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
 .maik-fu{font:600 12px/1 'Inter';color:var(--mk-ink);background:var(--mk-bg);border:1px solid var(--mk-bd);border-radius:11px;padding:8px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .14s ease,border-color .14s,box-shadow .14s,background .14s,color .14s}
 .maik-fu:hover{border-color:var(--mk-teal);color:var(--mk-teal);box-shadow:0 5px 16px var(--mk-glow);transform:translateY(-1px)}
@@ -5543,9 +5554,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
        * everything MaiK could do, which is what made it read as a bot rather than an assistant.
        */
       if (byeHit || (casualHit && isShort && greetOnly)) {
-        var _eng = "cloud";
-        try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective) _eng = window.SMD_MAIK_ENGINE.effective(); } catch (e) {}
-        if (_eng === "local") return { kind: "clinical" };          // free and offline: let it answer
+        // On-device used to be exempted ("free and offline: let it answer in its own voice"). Owner
+        // transcripts 2026-09-19: MaiK Lite took 7 to 9 s to say hello, wrapped in the clinical
+        // disclaimer and answer chips, and MAiK Cortex answered "Hi" with a leaked training template
+        // ("##Instruction: ... ##Options:"). A greeting is never worth a model call on any engine.
         if (byeHit) return { kind: "casual", reply: "Goodbye." };
         return { kind: "casual", reply: "Hello. What would you like to look at?" };
       }
@@ -5934,6 +5946,32 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (!chips.length) return "";
       return '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' + chips.slice(0, 2).join("") + '</div>';
     }
+    function maikFiguresOn() { try { return localStorage.getItem("smd_maik_figures") !== "0"; } catch (e) { return true; } }
+    function maikFiguresStrip(bubble, topic) {
+      if (!maikFiguresOn() || !topic || !(window.SMD_AI && SMD_AI.figures)) return;
+      if (typeof navigator !== "undefined" && navigator.onLine === false) return;
+      var E = window.SMD_MAIK_ENGINE; if (E && E.effective && E.effective() !== "cloud") return;   // never on device / KB-only
+      SMD_AI.figures(String(topic).slice(0, 200)).then(function (res) {
+        var figs = (res && res.figures) || [];
+        if (!figs.length || !bubble || !bubble.isConnected) return;
+        var cards = figs.filter(function (f) { return f && /^https:\/\//.test(f.img || "") && /^https:\/\//.test(f.page || ""); }).slice(0, 3).map(function (f) {
+          return '<a class="maik-fig" href="' + maikEscH(f.page) + '" target="_blank" rel="noopener noreferrer">' +
+            '<img src="' + maikEscH(f.img) + '" alt="' + maikEscH(f.title || f.site || "") + '" loading="lazy" referrerpolicy="no-referrer">' +
+            '<span class="maik-fig-cap"><b>' + maikEscH(f.site || "") + '</b> ' + maikEscH((f.title || "").slice(0, 80)) + ' \u2197</span></a>';
+        }).join("");
+        if (!cards) return;
+        var strip = document.createElement("div"); strip.className = "maik-figs";
+        strip.innerHTML = '<div class="maik-figs-h">Related figures from trusted sources</div><div class="maik-figs-row">' + cards + '</div>';
+        // A hotlink the source blocks removes its own card; an empty strip removes itself.
+        strip.querySelectorAll("img").forEach(function (im) {
+          im.addEventListener("error", function () { var a = im.closest(".maik-fig"); if (a) a.remove(); if (!strip.querySelector(".maik-fig")) strip.remove(); _persist(); });
+        });
+        var before = bubble.querySelector(".maik-refine, .maik-followups");
+        bubble.insertBefore(strip, before || null);
+        _persist();
+        function _persist() { try { var lb = document.getElementById("maikBody") || body; if (lb) { _maikBodyHTML = lb.innerHTML; maikSaveThread(_maikBodyHTML); } } catch (e) {} }
+      }).catch(function () {});
+    }
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
       // The provider call has returned and we are rendering the interactive answer, so clear the busy
       // guard NOW rather than in the trailing .then(). On native the answer is revealed via a
@@ -6030,7 +6068,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
       // Phase 2 — numbered sources footer (matches the [n] markers). Prefer the package's own
       // numbered list (identical numbering to what the model was given) so citations line up.
-      var srcArr = (pkg && pkg.sources && pkg.sources.length) ? pkg.sources.map(function (s) { return s.title; })
+      // A drug-database answer has exactly one source; the KB titles the package carried would be
+      // borrowed authority (owner transcript 2026-09-19: "4 sources" under an ondansetron dose).
+      var srcArr = (r && r.engine === "drugdb") ? ["StewardMD Drugs Database (official label)"]
+        : (pkg && pkg.sources && pkg.sources.length) ? pkg.sources.map(function (s) { return s.title; })
         : ((window.SMD_MaiK && SMD_MaiK.sourceList) ? SMD_MaiK.sourceList(pkg).map(function (s) { return s.title; })
           : ((window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : []));
       var bookSvg = MK.book;
@@ -6067,6 +6108,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // UpToDate-style LLM refinement chips first (primary), then the KB-derived follow-ups.
       var refineHTML = maikRefineHTML(question, _refine.chips);
       if (refineHTML) think.insertAdjacentHTML("beforeend", refineHTML);
+      // Related figures (owner, 2026-09-18): the search-result image from a trusted medical page with
+      // the link below it, like Google. Cloud engine + online only; a plain GET with no model behind
+      // it (SMD_AI.figures -> /api/ai/figures -> TinyFish). The image is loaded by the phone straight
+      // from the source site: nothing hosted, cached or regenerated by us. Hidden when nothing fits,
+      // and any image that fails to load removes its own card, so a broken hotlink never shows.
+      try { maikFiguresStrip(think, topicLabel || question); } catch (e) {}
       var chipsHTML = maikFollowupsHTML(pkg, question, assume);
       if (chipsHTML) think.insertAdjacentHTML("beforeend", chipsHTML);
       // Phase 4 — contextual "open in app" tool chips (interactions / calculators / Drug Index).
@@ -6373,20 +6420,29 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             // (pp.152-153)" - Harrison's fever-of-unknown-origin chapter - hanging under an answer
             // about treating simple fever, on an engine whose own disclaimer says "no sources".
             // Same borrowed-authority problem the citation-stripping in maik-local.js exists to stop.
-            try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective() === "local") return; } catch (e) {}
+            // 2026-09-19 (owner audit: "offline should reply like MaiK"): on-device used to skip ALL of
+            // this. Only the page-cited verify lines were the borrowed-authority problem; the follow-up
+            // chips, workflow steps and tool launchers are engine-agnostic and cost nothing, so they
+            // now render on every engine and only the verify lines stay off for local.
+            var _augLocal = false;
+            try { _augLocal = !!(window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective() === "local"); } catch (e) {}
             try {
               var res = MaiKBrain.resolve(question, { disease: (_maikTopic && _maikTopic.topic) || null, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null });
               // proactive safety
-              (MaiKCopilot.safetyScan(res, {}) || []).forEach(function (a) { var w = document.createElement("div"); w.className = "maik-verify"; w.textContent = (a.level === "warn" ? "⚠ " : "") + a.msg; host.appendChild(w); });
+              if (!_augLocal) (MaiKCopilot.safetyScan(res, {}) || []).forEach(function (a) { var w = document.createElement("div"); w.className = "maik-verify"; w.textContent = (a.level === "warn" ? "⚠ " : "") + a.msg; host.appendChild(w); });
               // evidence contradiction (from the enriched package)
-              if (p && p._brainContradictions && p._brainContradictions.length) { var c = p._brainContradictions[0]; var wc = document.createElement("div"); wc.className = "maik-verify"; wc.textContent = "Sources differ: " + c.reason + "; confirm against your local protocol."; host.appendChild(wc); }
+              if (!_augLocal && p && p._brainContradictions && p._brainContradictions.length) { var c = p._brainContradictions[0]; var wc = document.createElement("div"); wc.className = "maik-verify"; wc.textContent = "Sources differ: " + c.reason + "; confirm against your local protocol."; host.appendChild(wc); }
               // clinical workflow (ordered next steps)
               var wf = MaiKCopilot.workflow(res);
               if (wf && wf.steps.length) {
                 var box = document.createElement("div"); box.className = "maik-refine";
                 var lbl = document.createElement("div"); lbl.className = "maik-refine-lbl"; lbl.textContent = "Clinical workflow: next steps"; box.appendChild(lbl);
                 var row = document.createElement("div"); row.className = "maik-followups";
-                var base = (res.primary && res.primary.canonicalName) ? res.primary.canonicalName + " " : "";
+                // A workflow step tapped on its own ("Glasgow-Blatchford") reached send() as a bare
+                // two-word query and got the clarifier (owner screenshot, 2026-09-18). Carry the topic:
+                // the resolved disease, else the conversation topic, else the question itself.
+                var base = (res.primary && res.primary.canonicalName) ? res.primary.canonicalName + " " : (((_maikTopic && _maikTopic.topic) || question || "") + " ");
+                base = base.trim() ? base.trim() + ": " : "";
                 wf.steps.slice(0, 6).forEach(function (s) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = s; b.addEventListener("click", function () { try { qEl.value = base + s; } catch (e) {} send(); }); row.appendChild(b); });
                 box.appendChild(row); host.appendChild(box);
               }
@@ -6522,7 +6578,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   // animation, not generation. Calling that "first token" hid where the time actually went.
                   var _replayed = !!(r && r.replayed);
                   el.textContent = "⏱ " + (ttft ? ((_replayed ? "answer " : "first token ") + ttft + "s · ") : "") +
-                    (_replayed ? "shown " : "full answer ") + total + "s" + (r && r.mode ? " · " + r.mode : "");
+                    (_replayed ? "shown " : "full answer ") + total + "s" + (r && r.mode ? " · " + r.mode : "") +
+                    ((r && r.grounding && r.grounding.removed && r.grounding.removed.length) ? " · " + r.grounding.removed.length + " unsupported statement" + (r.grounding.removed.length === 1 ? "" : "s") + " left out" : "");
                   _h.appendChild(el);
                   try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
                 }
@@ -6676,6 +6733,22 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       var route = maikRoute(q, active);
       if (route.kind === "casual") { bubble("ai", '<div class="maik-welcome">' + maikEscH(route.reply) + '</div>'); return; }
+      // CONTINUITY on every engine (owner, 2026-09-19: "no one should feel every question is a new
+      // question"). maikResolveFollowup() knows the common follow-up shapes; anything else that arrives
+      // while a topic is live, is short, and names no KB topic of its own ("Just tell me which
+      // investigations should I send? In one line") is a follow-up on that topic: the topic goes into
+      // the question the model sees AND into retrieval, so the KB passage is about hematuria, not about
+      // whichever chapter happens to contain the word "send".
+      if (maikV2() && route.kind === "clinical" && _maikTopic && _maikTopic.topic && (!_maikTopic.ts || (Date.now() - _maikTopic.ts) < 30 * 60 * 1000)) {
+        var _fwc = maikNorm(q).split(" ").filter(Boolean).length;
+        var _own = false;
+        try { if (window.MaiKKB && MaiKKB.resolveTarget) { var _t = MaiKKB.resolveTarget(maikNorm(q), { question: maikNorm(q), grounding: [], topicMatch: { matched: false } }); _own = !!(_t && _t.confident); } } catch (e) {}
+        if (!_own && _fwc <= 14) {
+          var _fq = _maikTopic.topic + ": " + q.replace(/\?+$/, "").trim();
+          var _fdepth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
+          runClinical(_fq, _maikTopic.topic + " " + q, _fdepth, active, _maikTopic.topic); return;
+        }
+      }
       if (route.kind === "help") {
         var h = bubble("ai", '<div class="maik-welcome"><b>Ask Maik</b> is StewardMD’s clinical knowledge assistant. I can:<br>• answer general clinical & drug questions (grounded in StewardMD’s knowledge base)<br>• point you to the calculators and drug reference<br>• add commentary once you’ve run a patient assessment.<br><br>To assess a patient, start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings.</div>');
         [["Ask a clinical question", function () { qEl.value = "How do we treat DKA?"; try { qEl.focus(); } catch (e) {} }], ["Start Dx My Patient", function () { close(); try { openDxChooser(); } catch (e) {} }]].forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.style.margin = "8px 6px 0 0"; b.textContent = c[0]; b.addEventListener("click", c[1]); h.appendChild(b); }); scroll(); return;
@@ -6685,7 +6758,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var b = document.createElement("button"); b.className = "maik-chip"; b.style.marginTop = "8px"; b.textContent = "Open Dx My Patient";
         b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
       }
-      if (route.kind === "clarify") { bubble("ai", '<div class="maik-welcome">Could you tell me the condition, symptoms, or what aspect you’d like to review? For example: “how to treat DKA?” or “signs of meningitis”.</div>'); return; }
+      if (route.kind === "clarify") {
+        // Mid-conversation, a short unrecognised phrase ("Glasgow-Blatchford", "Rockall", "endoscopy
+        // timing") is about the topic we are on, not a new question with a missing subject. Ask it in
+        // that context instead of asking the doctor what they meant (owner screenshot, 2026-09-18).
+        if (maikV2() && _maikTopic && _maikTopic.topic && (!_maikTopic.ts || (Date.now() - _maikTopic.ts) < 30 * 60 * 1000)) {
+          var _cq = _maikTopic.topic + ": " + q.replace(/\?+$/, "").trim();
+          runClinical(_cq, _maikTopic.topic + " " + q, "concise", active, _maikTopic.topic); return;
+        }
+        bubble("ai", '<div class="maik-welcome">Could you tell me the condition, symptoms, or what aspect you’d like to review? For example: “how to treat DKA?” or “signs of meningitis”.</div>'); return;
+      }
       var _lk = maikDoseLookup(q);
       if (_lk) { maikDoseCard(_lk, q); return; }
       var topic = maikV2() ? maikCanonTopic(q) : q;
@@ -6707,7 +6789,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       Array.prototype.forEach.call(nodes, function (n) {
         if (n.querySelector && n.querySelector(".maik-thinking")) return;         // skip an in-flight bubble
         var you = n.classList.contains("you"), who = you ? "You" : "MaiK", el = n;
-        if (!you) { try { el = n.cloneNode(true); Array.prototype.forEach.call(el.querySelectorAll(".maik-attr,.maik-refine,.maik-followups,.maik-tools"), function (x) { x.remove(); }); } catch (e) { el = n; } }
+        // Export carries the clinical text only: chips, buttons, feedback, perf line, figure strip,
+        // sources and the per-bubble disclaimer are UI (owner PDF export, 2026-09-19, read
+        // "Know more →℞ Create prescription ... CopyRegenerateEditYesNo⏱ first token 7.2s").
+        if (!you) { try { el = n.cloneNode(true); Array.prototype.forEach.call(el.querySelectorAll(".maik-attr,.maik-refine,.maik-followups,.maik-tools,.maik-fb,.maik-src,.maik-edu,.maik-know,.maik-more,.maik-perf,.maik-figs,.maik-chip,.maik-fu,.maik-webbusy,button"), function (x) { x.remove(); }); } catch (e) { el = n; } }
         var t = (el.textContent || "").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
         if (!t) return;
         out.push(who + ": " + t);

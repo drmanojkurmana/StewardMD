@@ -9,7 +9,7 @@
  * and the record already carries every time these measures need: a stay's start and end, a report's
  * release, a loop's acknowledgement. A stored snapshot would be a second source of truth that drifts
  * from the record the day somebody corrects a discharge time. The costs are stated, not hidden: reads
- * are capped (READ_CAP per type, the store's roster ceiling) and a capped read marks every bucket
+ * are capped (READ_CAP per type, a paged whole-type read) and a capped read marks every bucket
  * partial. Most measures attribute a stay to the ward on its CURRENT version; bed occupancy and length of
  * stay by ward (G7) read each stay's version history, which IS its movement history (migrate-inpatient.js),
  * and split it across the wards it passed through. Occupancy's available beds come from the bed registry's
@@ -31,6 +31,7 @@
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
+import { readWindowed } from "./read-window.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { INPATIENT, DEATH } from "./quality.js";
 import { percentile } from "./digital-twin.js";
@@ -44,7 +45,9 @@ const DAY = 86400000;
 const round = (v, dp) => (v == null ? null : Math.round(v * 10 ** dp) / 10 ** dp);
 
 /** The store's roster ceiling. A type at this count was cut short and every bucket says partial. */
-const READ_CAP = 1000;
+/* Every record of a source type is read (service.listAll, paged, oldest first). Past READ_CAP the newest are not read and
+ * every bucket is marked partial. ponytail: each page re-groups every version; audit O20 if paging is slow. */
+const READ_CAP = 50000;
 /** Record ids returned for one bucket and ward. More than this is counted and marked truncated. */
 const EVENTS_CAP = 200;
 const MAX_BUCKETS = 400;
@@ -550,9 +553,13 @@ async function run(request, env, ctx, eventsFor) {
   if (error) return { ...base, ...error };
 
   const rows = {}, unreadable = {}, capped = [];
+  /* R5-3: the chart's own range is the read's range for every source type whose records cannot belong to a bucket
+   * written after them (read-window.js). Stays, requests and the patient master are still read whole: a stay open
+   * across the range is what an occupancy bucket is made of. */
+  const since = bk.buckets.length ? bk.buckets[0].startMs : null;
   let refused = false;
   await Promise.all(def.sources.map(async (t) => {
-    try { rows[t] = (await svc.list(t, READ_CAP)) || []; if (rows[t].length >= READ_CAP) capped.push(t); }
+    try { const got = await readWindowed(svc, t, { sinceMs: since, max: READ_CAP }); rows[t] = got.rows; if (got.truncated) capped.push(t); }
     catch (e) { refused = refused || e instanceof GovernanceError; unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : "read failed"; rows[t] = []; }
   }));
   /* The event list names records. A reader who may not read a source type is refused outright, the way
@@ -582,7 +589,7 @@ async function run(request, env, ctx, eventsFor) {
     range: { from: ctx.from, to: ctx.to, timeZone: bk.clock.timeZone, utcOffsetMinutes: bk.clock.offset },
     groupBy: str(ctx.groupBy) || null,
     truncated: capped.length > 0, capped, unreadable: Object.keys(unreadable), readCap: READ_CAP,
-    ...(capped.length ? { warning: `Only the first ${READ_CAP} ${capped.join(", ")} records were read, so every bucket may be short. Treat these numbers as a floor.` } : {}),
+    ...(capped.length ? { warning: `Only the first ${READ_CAP} ${capped.join(", ")} records were read (the newest were not), so every bucket may be short. Treat these numbers as a floor.` } : {}),
     series: eventsFor ? undefined : r.series,
     ...(eventsFor ? { key: eventsFor.key, ward: eventsFor.group, events: r.events, reason: r.blocked } : {}),
   };

@@ -1,0 +1,66 @@
+{
+  "id": "skin-merkel-avelumab",
+  "diseaseId": "merkel",
+  "name": "Avelumab Monotherapy (Metastatic / Locally Advanced Merkel Cell Carcinoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "disease-control",
+    "curative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 12,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Merkel Cell Carcinoma v1.2026"
+  },
+  "stage": [
+    "III",
+    "IV",
+    "metastatic"
+  ],
+  "treatmentSetting": [
+    "first-line"
+  ],
+  "histology": "Merkel cell carcinoma (neuroendocrine carcinoma of skin)",
+  "premedications": [
+    {
+      "name": "Diphenhydramine",
+      "dose": "25-50 mg IV/PO",
+      "notes": "Mandatory for first 4 infusions"
+    },
+    {
+      "name": "Acetaminophen",
+      "dose": "650 mg PO",
+      "notes": "Mandatory for first 4 infusions"
+    }
+  ],
+  "supportiveCare": [
+    "Monitor for immune-related adverse events (colitis, pneumonitis, thyroid, hepatitis)"
+  ],
+  "monitoring": [
+    "TSH, free T4, CMP, CBC every 2-4 weeks",
+    "Tumor restaging CT/PET every 8-12 weeks"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "avelumab",
+      "name": "Avelumab",
+      "basis": "flat",
+      "dosePerUnit": 800,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Avelumab 800 mg IV over 60 minutes every 2 weeks until disease progression or unacceptable toxicity (JAVELIN Merkel 200 trial)."
+    }
+  ]
+}

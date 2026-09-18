@@ -36,7 +36,7 @@
       "required": true,
       "bullets": [
         "Clinical presentation: painless, rubbery peripheral lymphadenopathy (cervical, axillary, inguinal), mediastinal or retroperitoneal mass, splenomegaly, or extranodal involvement (GI tract, skin, thyroid, bone).",
-        "B-Symptoms: Unexplained fever >38\u00b0C, drenching night sweats, or unexplained weight loss >10% of body weight over 6 months."
+        "B-Symptoms: Unexplained fever >38°C, drenching night sweats, or unexplained weight loss >10% of body weight over 6 months."
       ],
       "options": [
         {
@@ -114,7 +114,7 @@
       "options": [
         {
           "id": "sub_fl",
-          "label": "Follicular Lymphoma (FL / Classic FL Grades 1\u20133A)",
+          "label": "Follicular Lymphoma (FL / Classic FL Grades 1–3A)",
           "sets": {
             "subtype": "fl"
           },
@@ -183,7 +183,7 @@
       "required": true,
       "bullets": [
         "Early Stage (Stage I or contiguous Stage II): Confined to a single radiation port without systemic symptoms.",
-        "Advanced Stage (Stage III\u2013IV or non-contiguous Stage II): Evaluate GELF tumor burden criteria (bulky mass >=7 cm, >=3 nodal sites each >=3 cm, symptomatic splenomegaly, organ compression, pleural effusion/ascites, cytopenias)."
+        "Advanced Stage (Stage III–IV or non-contiguous Stage II): Evaluate GELF tumor burden criteria (bulky mass >=7 cm, >=3 nodal sites each >=3 cm, symptomatic splenomegaly, organ compression, pleural effusion/ascites, cytopenias)."
       ],
       "options": [
         {
@@ -198,7 +198,7 @@
         },
         {
           "id": "fl_adv_low",
-          "label": "Advanced Stage (Stage III\u2013IV), Low Tumor Burden (GELF Negative)",
+          "label": "Advanced Stage (Stage III–IV), Low Tumor Burden (GELF Negative)",
           "sets": {
             "fl_burden": "adv_low"
           },
@@ -209,7 +209,7 @@
         },
         {
           "id": "fl_adv_high",
-          "label": "Advanced Stage (Stage III\u2013IV), High Tumor Burden (GELF Positive / Symptomatic)",
+          "label": "Advanced Stage (Stage III–IV), High Tumor Burden (GELF Positive / Symptomatic)",
           "sets": {
             "fl_burden": "adv_high"
           },
@@ -227,7 +227,7 @@
       "nodeType": "end",
       "template": "end",
       "name": "Early FL Treatment",
-      "title": "Stage I\u2013II Follicular Lymphoma: Definitive Radiation or Observation",
+      "title": "Stage I–II Follicular Lymphoma: Definitive Radiation or Observation",
       "section": "Primary Treatment",
       "description": "Curative-intent local radiation therapy or active surveillance for localized disease.",
       "path": "B-Cell / Follicular / Early Tx",
@@ -239,10 +239,10 @@
       ],
       "showsRecommendation": true,
       "bullets": [
-        "Involved-Site Radiation Therapy (ISRT, Preferred): 24\u201330 Gy to involved nodal region; delivers >90% local control and long-term disease-free survival in localized Stage I FL.",
+        "Involved-Site Radiation Therapy (ISRT, Preferred): 24–30 Gy to involved nodal region; delivers >90% local control and long-term disease-free survival in localized Stage I FL.",
         "Observation / Active Surveillance: Acceptable in asymptomatic patients when ISRT would entail significant morbidity.",
         "Systemic Immunochemotherapy +/- ISRT: Option for bulky Stage II disease (e.g. Bendamustine + Rituximab).",
-        "Surveillance: Clinical exam and labs every 3\u20136 months for 5 years, then annually."
+        "Surveillance: Clinical exam and labs every 3–6 months for 5 years, then annually."
       ]
     },
     {
@@ -266,7 +266,7 @@
       "bullets": [
         "Watchful Waiting / Active Surveillance (Preferred): Deferring treatment until GELF criteria or symptoms develop does NOT compromise overall survival and avoids chemotherapy toxicity.",
         "Single-Agent Rituximab (Optional): Rituximab 375 mg/m2 weekly x 4 doses; can be considered for patients with disease-related anxiety or wishing to avoid chemo.",
-        "Follow-up: Physical examination, CBC, CMP, and LDH every 3\u20136 months; cross-sectional imaging only if clinical symptoms or exam suggests progression."
+        "Follow-up: Physical examination, CBC, CMP, and LDH every 3–6 months; cross-sectional imaging only if clinical symptoms or exam suggests progression."
       ]
     },
     {
@@ -293,10 +293,10 @@
       ],
       "bullets": [
         "Preferred First-Line Regimens:",
-        "\u2022 Bendamustine + Rituximab (BR): Bendamustine 90 mg/m2 IV days 1 & 2 + Rituximab 375 mg/m2 day 1 q28d x 6 cycles. Superior PFS and less alopecia/neuropathy than R-CHOP (StiL trial).",
-        "\u2022 Bendamustine + Obinutuzumab (G-Bendamustine): Demonstrated superior PFS in GALLIUM trial; requires close infection prophylaxis.",
-        "\u2022 Lenalidomide + Rituximab (R2): Chemo-free oral doublet; Lenalidomide 20 mg PO days 1-21 + Rituximab weekly x 4 in cycle 1 then q4w (RELEVANCE trial).",
-        "\u2022 R-CHOP (rchop): Rituximab + Cyclophosphamide, Doxorubicin, Vincristine, Prednisone x 6 cycles (favored if suspicion of histologic transformation to large cell).",
+        "• Bendamustine + Rituximab (BR): Bendamustine 90 mg/m2 IV days 1 & 2 + Rituximab 375 mg/m2 day 1 q28d x 6 cycles. Superior PFS and less alopecia/neuropathy than R-CHOP (StiL trial).",
+        "• Bendamustine + Obinutuzumab (G-Bendamustine): Demonstrated superior PFS in GALLIUM trial; requires close infection prophylaxis.",
+        "• Lenalidomide + Rituximab (R2): Chemo-free oral doublet; Lenalidomide 20 mg PO days 1-21 + Rituximab weekly x 4 in cycle 1 then q4w (RELEVANCE trial).",
+        "• R-CHOP (rchop): Rituximab + Cyclophosphamide, Doxorubicin, Vincristine, Prednisone x 6 cycles (favored if suspicion of histologic transformation to large cell).",
         "Maintenance Therapy: In patients responding to induction, Rituximab maintenance (375 mg/m2 every 8-12 weeks for 2 years) prolongs progression-free survival (PRIMA trial).",
         "Infection Prophylaxis: VZV prophylaxis (acyclovir) and PJP prophylaxis (Bactrim) mandatory during and for 6 months after bendamustine."
       ]
@@ -385,6 +385,9 @@
         "Avoid standard cytotoxic ASCT: Conventional high-dose chemotherapy + autologous HCT fails to achieve durable remission in TP53-mutated MCL.",
         "Allogeneic HCT Consideration: Consider allogeneic stem cell transplantation in eligible patients achieving remission with targeted therapy.",
         "Enrollment in clinical trials strongly encouraged."
+      ],
+      "protocolRefs": [
+        "rchop"
       ]
     },
     {
@@ -411,9 +414,9 @@
       ],
       "bullets": [
         "High-Dose Cytarabine-Containing Induction (Preferred):",
-        "\u2022 Alternating R-CHOP / R-DHAP (LyMa trial / European MCL Network): 3 cycles R-CHOP alternating with 3 cycles R-DHAP (high-dose cytarabine).",
-        "\u2022 Nordic MCL2 Regimen: Dose-intensified R-CHOP alternating with high-dose cytarabine.",
-        "\u2022 Hyper-CVAD + Rituximab: Alternating with high-dose methotrexate and cytarabine.",
+        "• Alternating R-CHOP / R-DHAP (LyMa trial / European MCL Network): 3 cycles R-CHOP alternating with 3 cycles R-DHAP (high-dose cytarabine).",
+        "• Nordic MCL2 Regimen: Dose-intensified R-CHOP alternating with high-dose cytarabine.",
+        "• Hyper-CVAD + Rituximab: Alternating with high-dose methotrexate and cytarabine.",
         "Consolidative Autologous Stem Cell Transplant (ASCT): High-dose BEAM (dlbcl-beam) conditioning with autologous rescue in first complete remission (CR1).",
         "Post-ASCT Maintenance: Rituximab 375 mg/m2 IV every 8 weeks for 3 years (significantly prolongs event-free and overall survival per LyMa trial).",
         "Addition of BTK inhibitor: Incorporation of Zanubrutinib/Acalabrutinib into induction/maintenance per emerging TRIANGLE trial data."
@@ -440,11 +443,15 @@
       "showsRecommendation": true,
       "bullets": [
         "Preferred First-Line Regimens:",
-        "\u2022 Bendamustine + Rituximab (BR): Bendamustine 90 mg/m2 days 1 & 2 + Rituximab 375 mg/m2 day 1 q28d x 6 cycles.",
-        "\u2022 VR-CAP: Bortezomib, Rituximab, Cyclophosphamide, Doxorubicin, Prednisone (substituting vincristine with bortezomib; LyMa/E1411 standard).",
-        "\u2022 R-mini-CHOP: Attenuated dose for frail patients aged >80 years.",
+        "• Bendamustine + Rituximab (BR): Bendamustine 90 mg/m2 days 1 & 2 + Rituximab 375 mg/m2 day 1 q28d x 6 cycles.",
+        "• VR-CAP: Bortezomib, Rituximab, Cyclophosphamide, Doxorubicin, Prednisone (substituting vincristine with bortezomib; LyMa/E1411 standard).",
+        "• R-mini-CHOP: Attenuated dose for frail patients aged >80 years.",
         "Maintenance Therapy: Rituximab maintenance (375 mg/m2 every 8-12 weeks for 2 years) or until progression.",
         "Second-Line / Relapse: Covalent BTK inhibitors (Zanubrutinib, Acalabrutinib), non-covalent BTKi (Pirtobrutinib), or CAR T-cell therapy (Brexucabtagene autoleucel)."
+      ],
+      "protocolRefs": [
+        "rchop",
+        "dlbcl-beam"
       ]
     },
     {
@@ -467,10 +474,14 @@
       ],
       "showsRecommendation": true,
       "bullets": [
-        "Gastric MALT Lymphoma: Mandatory Helicobacter pylori testing (biopsy, breath test, stool antigen); first-line treatment is antibiotic eradication therapy. Re-endoscopy at 3 months; if persistent MALT and H. pylori-negative, administer ISRT (24\u201330 Gy).",
+        "Gastric MALT Lymphoma: Mandatory Helicobacter pylori testing (biopsy, breath test, stool antigen); first-line treatment is antibiotic eradication therapy. Re-endoscopy at 3 months; if persistent MALT and H. pylori-negative, administer ISRT (24–30 Gy).",
         "Nongastric Extranodal MALT: Local ISRT (24 Gy) produces high cure rates; reserve systemic therapy for disseminated disease.",
         "Splenic MZL: Test for Hepatitis C virus (HCV treatment can induce lymphoma remission); for symptomatic splenomegaly/cytopenias, Rituximab monotherapy (375 mg/m2 weekly x 4) or splenectomy.",
         "Systemic / Disseminated MZL: Managed similar to follicular lymphoma: Bendamustine + Rituximab (BR), single-agent Rituximab, or Lenalidomide + Rituximab (R2)."
+      ],
+      "protocolRefs": [
+        "rchop",
+        "dlbcl-beam"
       ]
     },
     {
@@ -498,9 +509,9 @@
       "bullets": [
         "Mandatory Emergency TLS Prophylaxis: Aggressive IV hydration, Rasburicase (recombinant urate oxidase), and inpatient telemetry prior to starting therapy.",
         "Preferred First-Line Regimens:",
-        "\u2022 Dose-Adjusted EPOCH + Rituximab (dlbcl-da-epoch-r): Etoposide, prednisone, vincristine, cyclophosphamide, doxorubicin + rituximab; highly effective with lower treatment-related mortality in both adults and elderly (NCI protocol).",
-        "\u2022 CODOX-M / IVAC + Rituximab: Cyclophosphamide, vincristine, doxorubicin, high-dose methotrexate alternating with ifosfamide, etoposide, high-dose cytarabine.",
-        "\u2022 Hyper-CVAD + Rituximab: Fractionated cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with methotrexate and cytarabine.",
+        "• Dose-Adjusted EPOCH + Rituximab (dlbcl-da-epoch-r): Etoposide, prednisone, vincristine, cyclophosphamide, doxorubicin + rituximab; highly effective with lower treatment-related mortality in both adults and elderly (NCI protocol).",
+        "• CODOX-M / IVAC + Rituximab: Cyclophosphamide, vincristine, doxorubicin, high-dose methotrexate alternating with ifosfamide, etoposide, high-dose cytarabine.",
+        "• Hyper-CVAD + Rituximab: Fractionated cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with methotrexate and cytarabine.",
         "CNS Prophylaxis (Mandatory): Systemic high-dose methotrexate/cytarabine combined with intrathecal methotrexate or triple IT therapy (methotrexate, cytarabine, corticosteroid).",
         "Avoid standard R-CHOP: R-CHOP is INADEQUATE for Burkitt lymphoma and results in unacceptably high relapse rates."
       ]
@@ -532,14 +543,14 @@
       ],
       "bullets": [
         "Preferred First-Line Regimens:",
-        "\u2022 Pola-R-CHP (dlbcl-pola-r-chp): Polatuzumab vedotin (CD79b ADC) + Rituximab, Cyclophosphamide, Doxorubicin, Prednisone x 6 cycles; Category 1 preferred for IPI >=2 (POLARIX trial).",
-        "\u2022 R-CHOP (rchop): Category 1 standard for IPI 0-1 or low-risk disease.",
+        "• Pola-R-CHP (dlbcl-pola-r-chp): Polatuzumab vedotin (CD79b ADC) + Rituximab, Cyclophosphamide, Doxorubicin, Prednisone x 6 cycles; Category 1 preferred for IPI >=2 (POLARIX trial).",
+        "• R-CHOP (rchop): Category 1 standard for IPI 0-1 or low-risk disease.",
         "High-Grade B-Cell Lymphoma with MYC and BCL2/BCL6 (Double-Hit / Triple-Hit):",
-        "\u2022 Dose-Adjusted EPOCH-R (dlbcl-da-epoch-r) is preferred over R-CHOP.",
+        "• Dose-Adjusted EPOCH-R (dlbcl-da-epoch-r) is preferred over R-CHOP.",
         "Relapsed / Refractory Disease (<12 months or refractory):",
-        "\u2022 CD19 CAR T-Cell Therapy: Axicabtagene ciloleucel or Lisocabtagene maraleucel (Category 1 preferred over salvage chemo/ASCT per ZUMA-7 and TRANSFORM trials).",
-        "\u2022 CD20xCD3 Bispecific Antibodies: Epcoritamab (dlbcl-epcoritamab) or Glofitamab (dlbcl-glofitamab) for >=2 prior lines.",
-        "\u2022 Tafasitamab + Lenalidomide (dlbcl-tafa-len) or Loncastuximab tesirine (dlbcl-loncastuximab)."
+        "• CD19 CAR T-Cell Therapy: Axicabtagene ciloleucel or Lisocabtagene maraleucel (Category 1 preferred over salvage chemo/ASCT per ZUMA-7 and TRANSFORM trials).",
+        "• CD20xCD3 Bispecific Antibodies: Epcoritamab (dlbcl-epcoritamab) or Glofitamab (dlbcl-glofitamab) for >=2 prior lines.",
+        "• Tafasitamab + Lenalidomide (dlbcl-tafa-len) or Loncastuximab tesirine (dlbcl-loncastuximab)."
       ]
     }
   ],
@@ -661,5 +672,13 @@
         "mcl_unfit"
       ]
     }
+  ],
+  "protocolRefs": [
+    "dlbcl-beam",
+    "dlbcl-da-epoch-r",
+    "dlbcl-epcoritamab",
+    "dlbcl-glofitamab",
+    "dlbcl-pola-r-chp",
+    "rchop"
   ]
 }

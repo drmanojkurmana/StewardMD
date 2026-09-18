@@ -32,9 +32,9 @@
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService, isExternalRecord } from "./service.js";
+import { RecordService, isExternalRecord, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { priorityRank } from "./ward-order.js";
+import { priorityRank, OPEN_ORDER_STATUSES, isOpenOrder } from "./ward-order.js";
 import { effectiveCategory } from "./investigation-catalogue.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -133,6 +133,28 @@ function collectionState(specimens) {
    * doing again and nobody is going to be told by a result arriving. */
   const failed = rows.sort((a, b) => String(b.failedAt || "").localeCompare(String(a.failedAt || "")))[0];
   return { state: "failed", attempts: rows.length, reason: failed.failureReason || null, detail: "Every attempt failed. This sample still needs taking." };
+}
+
+/* A whole-type read (service.listAll, paged) is still right for the monthly rejection count below: that
+ * figure IS a history, and it says so when it is truncated. It is wrong for a bench worklist, which is
+ * about the work in front of the hospital - see collectionList for what replaced it and why. */
+const WORKLIST_MAX = 50000;
+const ceilingRefusal = (e) => ({ ok: false, status: 503, error: e.code, detail: str(e.message) });
+
+/**
+ * The records of one type belonging to a bounded set of patients, through the caller's own governed
+ * read, eight at a time (as service.histories() fans out). A read that FAILS throws: a collection
+ * worklist that quietly dropped one patient's specimens would tell a phlebotomist to go and bleed
+ * somebody who has already been bled.
+ */
+async function byPatients(svc, type, patientIds) {
+  const ids = [...new Set((patientIds || []).map(str).filter(Boolean))];
+  const out = [];
+  for (let i = 0; i < ids.length; i += 8) {
+    const got = await Promise.all(ids.slice(i, i + 8).map((pid) => svc.byPatient(type, pid)));
+    for (const rows of got) for (const r of rows || []) out.push(r);
+  }
+  return out;
 }
 
 async function open(request, env, ctx, need) {
@@ -350,13 +372,30 @@ async function collectionList(request, env, ctx) {
 
   let orders, specimens;
   try {
-    [orders, specimens] = hospitalWide
-      ? await Promise.all([svc.list("ServiceRequest", 300), svc.list(TYPE, 300).catch(() => [])])
-      : await Promise.all([
+    if (hospitalWide) {
+      /* R5-2: THE OPEN ORDERS, not every order this hospital has ever placed. Reading the whole type
+       * (and the whole specimen archive beside it) grew with history: tens of thousands of parsed
+       * records in one Worker within weeks on a busy hospital, and the board then failed with a 500
+       * rather than the designed message. Releasing a result now closes the order it answers
+       * (ward-order.js closeOrderOnResult), so this read is bounded by the samples still owed. Past
+       * OPEN_CENSUS_MAX it refuses out loud (503) - orders nobody has ever resulted, which a
+       * laboratory has to see rather than have hidden behind a short list.
+       * ponytail: the per-page group-by inside the store is unchanged (audit O20). */
+      orders = await svc.listByStatus("ServiceRequest", OPEN_ORDER_STATUSES);
+      /* Only these orders' patients. SpecimenCollection carries `state`, not `status`, so the store
+       * cannot filter it (repository pageByType reads $.status) - but nothing here needs the archive:
+       * a specimen matters for exactly one question, which is where the orders ON THIS LIST stand. */
+      specimens = await byPatients(svc, TYPE, orders.map((o) => o && o.patientId));
+    } else {
+      [orders, specimens] = await Promise.all([
         svc.byPatient("ServiceRequest", patientId),
-        svc.byPatient(TYPE, patientId).catch(() => []),
+        /* R6-2: a failed specimen read is the 502 below, never an empty set. Swallowed, it read as
+         * "nothing has been collected" and sent a phlebotomist back to a patient already bled. */
+        svc.byPatient(TYPE, patientId),
       ]);
+    }
   } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...ceilingRefusal(e), requests: [] };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), requests: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), requests: [] };
   }
@@ -370,7 +409,8 @@ async function collectionList(request, env, ctx) {
 
   const requests = (orders || [])
     // An order another hospital placed is on this chart for the record, not for this ward's phlebotomist.
-    .filter((o) => o && o.status !== "revoked" && o.status !== "completed" && !isExternalRecord(o))
+    // isOpenOrder is the SAME open/closed vocabulary the status-scoped read above asks the store for.
+    .filter((o) => o && isOpenOrder(o) && !isExternalRecord(o))
     .map((o) => ({
       serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: (o.category || effectiveCategory(o) === "imaging") ? effectiveCategory(o) : null,
       // Carried so a hospital-wide caller can say WHOSE specimen this is. Harmless per-patient
@@ -410,9 +450,8 @@ async function rejectionStats(request, env, ctx) {
   if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) return { ...base, ok: false, status: 422, error: "bad_month", detail: "month is YYYY-MM" };
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
-  const CAP = 1000;
-  let rows;
-  try { rows = (await svc.list(TYPE, CAP)) || []; }
+  let rows, truncated;
+  try { ({ rows, truncated } = await svc.listAll(TYPE, { max: WORKLIST_MAX })); }
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
@@ -442,7 +481,7 @@ async function rejectionStats(request, env, ctx) {
     ...base, ok: true, month, rejected: rejected.length, collected, reasons: REJECTION_REASONS,
     byReason, byWard: Object.keys(byWard).sort().map((w) => ({ ward: w || null, total: byWard[w], byReason: table[w] })),
     ...(wardUnreadable ? { wardUnreadable } : {}),
-    ...(rows.length >= CAP ? { partial: true, partialWarning: `Only the latest ${CAP} specimens were counted; this month's figures may be low.` } : {}),
+    ...(truncated ? { partial: true, partialWarning: `More than ${WORKLIST_MAX} specimens exist and the newest were not counted; this month's figures may be low.` } : {}),
   };
 }
 

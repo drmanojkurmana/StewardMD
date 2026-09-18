@@ -31,7 +31,7 @@
 
 import { ClinicalStore } from "../../wardsynq/wardsynq-store.js";
 import { GovernedStore, GovernanceError, canRead } from "../../wardsynq/wardsynq-actors.js";
-import { VersionConflictError, assertRepository } from "./repository.js";
+import { VersionConflictError, RepositoryError, assertRepository } from "./repository.js";
 import { patientIdentifierKeys } from "./identity-key.js";
 import { actorFromConnectRole, aiActorFor, isAiOrigin } from "./actor.js";
 import { stageWebhookEvents } from "./webhook-events.js";
@@ -83,6 +83,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* The blood bank's registers (blood-bank.js). A unit's status (quarantine, available, reserved, issued, discarded,
    * expired) is derived from its tests, its events and the transfusion episodes that name it, never stored. */
   "BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent",
+  /* The dialysis unit (dialysis.js): a haemodialysis session, each first use, reuse and discard of a dialyzer, and the
+   * patient's serology group as the unit names it. URR is computed on read from the session's urea inputs, never stored. */
+  "DialysisSession", "DialyzerEvent", "DialysisSerology",
   /* Pilot and recipient samples with their discard log, and the confidential notification of a reactive donor
    * (legal opinion 2026-09-17, G.5.5 and G.5.8). */
   "BloodSample", "DonorNotification",
@@ -586,6 +589,31 @@ class IdempotencyConflictError extends VersionConflictError {
   }
 }
 
+/**
+ * A paged read met more records than its stated ceiling (R4-1, 2026-09-17).
+ *
+ * Every roster read used to be capped at 1,000 records, OLDEST first, and said nothing: past that the
+ * newest admission was the one missing from the ward list and the bed check. A census now either reads
+ * every record it asked for or throws this; it never answers short. code "too_many_open" from
+ * listByStatus, "too_many_records" from listAll when the caller asked it to throw.
+ */
+class ListCeilingError extends Error {
+  constructor(code, resourceType, max) {
+    super(`more than ${max} ${resourceType} records matched; the read was refused rather than shortened`);
+    this.name = "ListCeilingError";
+    this.code = code;
+    this.resourceType = resourceType;
+    this.max = max;
+  }
+}
+/* The hard ceilings. OPEN_CENSUS_MAX: open records of one type (every stay, ED visit and OPD visit not yet
+ * closed) - far past any single hospital's beds, so reaching it means stale open visits, which must be seen.
+ * LIST_ALL_MAX: a whole-type read held in one Worker's memory; LIST_ALL_DEFAULT when the caller names none. */
+const OPEN_CENSUS_MAX = 5000;
+const LIST_ALL_MAX = 100000;
+const LIST_ALL_DEFAULT = 50000;
+const PAGE = 1000;
+
 /** Who a record is about. A Patient's own subject is its id. */
 const subjectOf = (r) => (r && (r.patientId || (r.resourceType === "Patient" ? r.id : null))) || null;
 
@@ -647,6 +675,45 @@ const actorForMembership = actorFromConnectRole;
 function externallyOwned(record) {
   const sys = record && record.meta && record.meta.source && record.meta.source.system;
   return !!sys && sys !== NATIVE_SYSTEM;
+}
+
+/* R6-3. The closed order vocabulary, which MUST stay identical to ward-order.js
+ * CLOSED_ORDER_STATUSES; it is spelled again here because ward-order.js imports this file and the
+ * import cannot go the other way. test/wardsynq-source-order-close.test.mjs pins the two equal. */
+const SOURCE_TERMINAL_STATUSES = Object.freeze(["completed", "revoked", "cancelled"]);
+/** PURE. Which fields a source-terminal closure is allowed to differ in. Nothing clinical. */
+const CLOSURE_FIELDS = Object.freeze(["status", "completedAt", "completedBy", "completedOn", "version", "meta", "writtenBy"]);
+
+/**
+ * R6-3. THE ONE EXCEPTION TO EXTERNAL AUTHORITY, and it is deliberately the narrowest one that
+ * closes the gap it exists for.
+ *
+ * An order ingested from a laboratory or an EMR lands as `draft` (the adapter ceiling), and its
+ * sender's own word for it travels beside it as `externalStatus`. When that word is terminal the
+ * work is finished upstream, but nothing in WardSynQ may say so: the record is externally owned, so
+ * every native write to it is refused, and the order sits in the open census for ever until
+ * listByStatus hits OPEN_CENSUS_MAX and the boards refuse.
+ *
+ * THE SENDER'S ASSERTION ALONE NEVER CLOSES ANYTHING. What closes it is a local, governed,
+ * audited pass (source-order-close.js) run by a person, writing through the order closure actor.
+ * This function only says whether THAT write is the one being attempted, and it checks the whole of
+ * it: the closure role and its own roleSource, the type, the sender's terminal word on the record
+ * as stored (never on the incoming entity), the status being written, and that NOTHING else on the
+ * record changes. A write that differs anywhere else is still refused, so this cannot become a
+ * general door onto another system's records.
+ */
+function sourceTerminalClosure(svc, current, entity, opts) {
+  if (!opts || opts.sourceTerminalClosure !== true) return false;
+  if (svc.role !== "wardsynq-order-closure" || svc.roleSource !== "wardsynq-source-terminal") return false;
+  if (current.resourceType !== "ServiceRequest" || entity.resourceType !== "ServiceRequest") return false;
+  // The sender's word, as the STORE holds it. An incoming entity does not get to assert it.
+  if (!SOURCE_TERMINAL_STATUSES.includes(String(current.externalStatus == null ? "" : current.externalStatus).trim())) return false;
+  if (String(entity.status || "").trim() !== "completed") return false;
+  for (const k of new Set([...Object.keys(current), ...Object.keys(entity)])) {
+    if (CLOSURE_FIELDS.includes(k)) continue;
+    if (JSON.stringify(current[k]) !== JSON.stringify(entity[k])) return false;
+  }
+  return true;
 }
 
 class RecordService {
@@ -778,12 +845,142 @@ class RecordService {
    * A roster: the latest version of every record of one type in this tenant. Capped, and audited
    * as a list rather than a read, because a ward list is the one legitimate cross-patient query.
    */
-  async list(resourceType, limit) {
+  async list(resourceType, limit, opts) {
     this._assertType(resourceType);
     this.governed._assertRead(this.actor, resourceType);
-    const rows = await this.repository.latestByType(this.tenantId, resourceType, limit);
+    // opts.newest: the most recently written first (the repository port's own option); oldest first otherwise.
+    const rows = await this.repository.latestByType(this.tenantId, resourceType, limit, opts && opts.newest ? { newest: true } : undefined);
     await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, limit: Number(limit) || null }, resourceCounts: { [resourceType]: rows.length } }));
     return rows;
+  }
+
+  /* Pages the port's pageByType until the last page or until more than `max` distinct ids are held.
+   * A record amended between pages is met again later and the later copy wins (see pageByType). */
+  async _pageAll(resourceType, statuses, max) {
+    if (typeof this.repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+    const byId = new Map();
+    let after = 0, pages = 0;
+    for (;;) {
+      const page = await this.repository.pageByType(this.tenantId, resourceType, { afterSeq: after, limit: PAGE, ...(statuses ? { statuses } : {}) });
+      pages += 1;
+      for (const r of page.records || []) if (r && r.id != null) { byId.delete(r.id); byId.set(r.id, r); }
+      if (page.next == null || byId.size > max) return { rows: [...byId.values()], pages };
+      after = page.next;
+    }
+  }
+
+  /**
+   * THE OPEN CENSUS: the latest version of every record of one type whose status is one of `statuses`
+   * (an Encounter's "in-progress"), however much closed history the hospital holds. Oldest first.
+   * Governed and audited exactly as list(). More than `max` (default and ceiling OPEN_CENSUS_MAX) throws
+   * ListCeilingError code "too_many_open": a bed check or ward list must never run on a short census.
+   */
+  async listByStatus(resourceType, statuses, max) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const want = (Array.isArray(statuses) ? statuses : [statuses]).filter((x) => typeof x === "string" && x);
+    const cap = Math.max(1, Math.min(OPEN_CENSUS_MAX, Number(max) || OPEN_CENSUS_MAX));
+    const got = want.length ? await this._pageAll(resourceType, want, cap) : { rows: [], pages: 0 };
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, statuses: want, pages: got.pages }, resourceCounts: { [resourceType]: Math.min(got.rows.length, cap) } }));
+    if (got.rows.length > cap) throw new ListCeilingError("too_many_open", resourceType, cap);
+    return got.rows;
+  }
+
+  /**
+   * ONE PAGE of the open-status read above, at the store's own cursor, for a job that cannot hold the
+   * whole set in one request: `afterSeq` is the previous page's `next`, and `next` is null on the last
+   * page. Governed and audited exactly as listByStatus.
+   *
+   * Deliberately NOT capped by OPEN_CENSUS_MAX, and that is the whole point of it: the one caller is
+   * the backfill that exists BECAUSE a hospital is past that ceiling (order-backfill.js), and a read
+   * that refused there could never be the read that fixes it. The bound is the page instead - it holds
+   * `limit` records and hands back a cursor, so no amount of history changes what one request costs.
+   *
+   * -> { rows, next }
+   */
+  async pageByStatus(resourceType, statuses, opts) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    if (typeof this.repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+    const want = (Array.isArray(statuses) ? statuses : [statuses]).filter((x) => typeof x === "string" && x);
+    if (!want.length) return { rows: [], next: null };
+    const limit = Math.max(1, Math.min(PAGE, Number(opts && opts.limit) || PAGE));
+    const page = await this.repository.pageByType(this.tenantId, resourceType, { afterSeq: Math.max(0, Number(opts && opts.afterSeq) || 0), limit, statuses: want });
+    const rows = page.records || [];
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, statuses: want, page: true, afterSeq: Math.max(0, Number(opts && opts.afterSeq) || 0) }, resourceCounts: { [resourceType]: rows.length } }));
+    return { rows, next: page.next == null ? null : page.next };
+  }
+
+  /**
+   * EVERY record of one type (latest version each), oldest first, paged. For a count, a sum or a ledger.
+   * opts.max: the caller's ceiling (default LIST_ALL_DEFAULT, never above LIST_ALL_MAX).
+   * -> { rows, truncated }: past max, rows holds the oldest max and truncated is true - or, with
+   * opts.throwOnTruncate, ListCeilingError code "too_many_records" is thrown instead. A caller that sums
+   * or counts must say so when truncated is true; it must never present the figure as complete.
+   */
+  async listAll(resourceType, opts) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const cap = Math.max(1, Math.min(LIST_ALL_MAX, Number(opts && opts.max) || LIST_ALL_DEFAULT));
+    const got = await this._pageAll(resourceType, null, cap);
+    const truncated = got.rows.length > cap;
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, all: true, pages: got.pages, truncated }, resourceCounts: { [resourceType]: Math.min(got.rows.length, cap) } }));
+    if (truncated && opts && opts.throwOnTruncate) throw new ListCeilingError("too_many_records", resourceType, cap);
+    return { rows: truncated ? got.rows.slice(0, cap) : got.rows, truncated };
+  }
+
+  /* Pages the port's pageByType NEWEST first until `stopWhen` has answered true for every record of a
+   * whole page (the caller's window is behind us), the type runs out, or more than `max` ids are held.
+   * Rows come back OLDEST first, exactly as listAll hands them over, so a caller only changes which
+   * records it is given, never how it reads them. */
+  async _pageBack(resourceType, stopWhen, max) {
+    if (typeof this.repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+    const byId = new Map();
+    let before = null, pages = 0;
+    for (;;) {
+      const page = await this.repository.pageByType(this.tenantId, resourceType, { newest: true, limit: PAGE, ...(before == null ? {} : { beforeSeq: before }) });
+      pages += 1;
+      const records = page.records || [];
+      let anyInside = false;
+      for (const r of records) {
+        if (!r || r.id == null) continue;
+        if (!stopWhen(r)) anyInside = true;
+        if (!byId.has(r.id)) byId.set(r.id, r);   // newest first: the first copy seen is the latest one
+      }
+      if (page.next == null || byId.size > max || (records.length && !anyInside)) {
+        return { rows: [...byId.values()].reverse(), pages };
+      }
+      before = page.next;
+    }
+  }
+
+  /**
+   * THE PERIOD READ (R5-3): every record of one type that can still fall inside the caller's window,
+   * oldest first. `stopWhen(record)` answers true when a record is entirely behind the window; the read
+   * walks back from the newest record and stops at the first whole page of those. A month report then
+   * reads a month, not the hospital's whole history of the type.
+   *
+   * opts.max, opts.throwOnTruncate and the { rows, truncated } answer are listAll's, unchanged, and so
+   * are the grant check and the single audited list row.
+   *
+   * TWO HONEST LIMITS, both stated where a caller can see them:
+   *  - the stop is per PAGE, and a page is 1,000 records, so the window is only ever over-read;
+   *  - `stopWhen` must decide from the record itself. A record that can still belong to the window after
+   *    its last write - an open stay, a line still in place, a future booking, a master record other
+   *    records point at - would be walked past. read-window.js names those types and reads them whole.
+   */
+  async listSince(resourceType, opts) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const stopWhen = opts && typeof opts.stopWhen === "function" ? opts.stopWhen : () => false;
+    const cap = Math.max(1, Math.min(LIST_ALL_MAX, Number(opts && opts.max) || LIST_ALL_DEFAULT));
+    const got = await this._pageBack(resourceType, stopWhen, cap);
+    const truncated = got.rows.length > cap;
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, since: true, pages: got.pages, truncated }, resourceCounts: { [resourceType]: Math.min(got.rows.length, cap) } }));
+    if (truncated && opts && opts.throwOnTruncate) throw new ListCeilingError("too_many_records", resourceType, cap);
+    /* Past the ceiling the NEWEST are kept: a period read that must shorten must keep the end of the
+     * window it was asked for, the opposite of listAll's oldest-first truncation. */
+    return { rows: truncated ? got.rows.slice(got.rows.length - cap) : got.rows, truncated };
   }
 
   /**
@@ -960,7 +1157,7 @@ class RecordService {
     // Authority. A record another system owns is corrected by that system, through its connector,
     // not by the native door. This holds in BOTH modes: a lab result a LIS reported is not edited by
     // hand in a system-of-record deployment either.
-    if (current && externallyOwned(current)) {
+    if (current && externallyOwned(current) && !sourceTerminalClosure(this, current, entity, opts)) {
       throw new AuthorityError(
         `${entity.resourceType}/${entity.id} is owned by ${current.meta.source.system}; changes to it arrive through that system's connector`,
         "EXTERNAL_AUTHORITY", { system: current.meta.source.system, current }
@@ -1068,6 +1265,7 @@ class RecordService {
 
 export {
   RESOURCE_TYPES, BLOOD_CENTRE_ONLY, bloodCentreOnlyReadable, MODE, NATIVE_SYSTEM, isExternalRecord,
-  AuthorityError, RecordRequestError, IdempotencyConflictError,
+  AuthorityError, RecordRequestError, IdempotencyConflictError, ListCeilingError, OPEN_CENSUS_MAX, LIST_ALL_MAX, LIST_ALL_DEFAULT,
+  SOURCE_TERMINAL_STATUSES,
   TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
 };

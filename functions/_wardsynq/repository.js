@@ -25,6 +25,16 @@
  *                                                                           events through it instead of the newest N of
  *                                                                           everything; an implementation without it gets
  *                                                                           the old newest-N scan (see outbox.js).
+ *   pageByType(tenantId, resourceType, {afterSeq, limit, statuses, newest, beforeSeq}) -> {records, next}
+ *                                                                           OPTIONAL, latest per id,
+ *                                                                           OLDEST first, one page after the afterSeq
+ *                                                                           cursor; statuses (optional) keeps only ids whose
+ *                                                                           latest body status is one of them; next is the
+ *                                                                           cursor for the following page, null on the last.
+ *                                                                           newest: true reverses it (newest first, beforeSeq
+ *                                                                           the cursor) so a period read can stop early.
+ *                                                                           service.js listByStatus/listAll/listSince page
+ *                                                                           through it.
  *   pageByIdPrefix(tenantId, resourceType, prefix, {limit, before}) -> {records, next}   OPTIONAL, latest per id
  *                                                                           whose id starts with prefix, newest first,
  *                                                                           one page; next is the cursor for the page after
@@ -265,6 +275,37 @@ class MemoryRepository {
     const rows = [...byId.values()];
     if (opts && opts.newest) rows.sort((a, b) => b.seq - a.seq);
     return rows.slice(0, max).map((r) => clone(r.body));
+  }
+
+  /**
+   * OPTIONAL (see the port contract above): one page, oldest first, of the latest version of each id
+   * written after `afterSeq`, optionally only those whose status is one of `statuses`.
+   *
+   * The cursor is the seq of each id's LATEST version, so a record amended between two pages moves
+   * forward and is met again on a later page (the reader keeps the last copy by id); it can never move
+   * back behind the cursor, so paging to the end misses nothing.
+   *
+   * R5-3: `newest: true` reverses it - newest first, `beforeSeq` the cursor - so a period-scoped read
+   * can start at the newest record and stop when it has walked past its window (service.listSince).
+   * The amendment rule reverses with it: a record amended DURING a newest-first read moves forward,
+   * past a cursor already handed out, so that read can miss it. A month report is read in one pass of
+   * a few pages and that race is the price of not reading the whole type; a read that must not miss a
+   * concurrent amendment (a ledger, a count that must balance) stays on the oldest-first cursor.
+   */
+  async pageByType(tenantId, resourceType, opts) {
+    const max = rosterLimit(opts && opts.limit), desc = !!(opts && opts.newest);
+    const after = Number(opts && opts.afterSeq) || 0;
+    const before = Number(opts && opts.beforeSeq) || Infinity;
+    const want = opts && Array.isArray(opts.statuses) ? new Set(opts.statuses.filter((s) => typeof s === "string")) : null;
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
+      byId.set(r.id, r);
+    }
+    const rows = [...byId.values()]
+      .filter((r) => (desc ? r.seq < before : r.seq > after) && (!want || want.has(r.body && r.body.status)))
+      .sort((a, b) => (desc ? b.seq - a.seq : a.seq - b.seq));
+    return { records: rows.slice(0, max).map((r) => clone(r.body)), next: rows.length > max ? rows[max - 1].seq : null };
   }
 
   /**
@@ -560,4 +601,25 @@ function bufferReadAudits(repository) {
 }
 const AUDIT_FLUSH_BATCH = 40;
 
-export { VersionConflictError, IdentityConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit, AUDIT_READ_MAX, bufferReadAudits };
+/**
+ * R4-2: every latest record of one type straight from the port, for a service read with no clinical actor (the
+ * escalation timer, a group's counts). The same paging as RecordService._pageAll: pageByType pages of 1,000, oldest first,
+ * a record amended between pages kept at its later copy. Stops once more than `max` ids are held.
+ * -> { rows, capped }: capped true means the NEWEST records past max were not read, and the caller must say so.
+ * ponytail: each page re-groups every version of the type (audit O20 is the upgrade).
+ */
+async function pagedLatest(repository, tenantId, resourceType, opts) {
+  if (typeof repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+  const max = Math.max(1, Number(opts && opts.max) || 50000), statuses = opts && opts.statuses;
+  const byId = new Map();
+  let after = 0;
+  for (;;) {
+    const page = await repository.pageByType(tenantId, resourceType, { afterSeq: after, limit: MAX_ROSTER, ...(statuses ? { statuses } : {}) });
+    for (const r of page.records || []) if (r && r.id != null) { byId.delete(r.id); byId.set(r.id, r); }
+    if (byId.size > max) return { rows: [...byId.values()].slice(0, max), capped: true };
+    if (page.next == null) return { rows: [...byId.values()], capped: false };
+    after = page.next;
+  }
+}
+
+export { VersionConflictError, IdentityConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit, AUDIT_READ_MAX, bufferReadAudits, pagedLatest };

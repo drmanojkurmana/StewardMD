@@ -35,6 +35,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { readOrNull, unavailable } from "./unreadable.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "ImagingProtocol";
@@ -112,27 +113,33 @@ async function protocolContext(request, env, ctx) {
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), request: null }; }
   if (!sr) return { ...base, ok: false, status: 404, error: "request_not_found", serviceRequestId, request: null };
 
-  let allergies = [], observations = [];
-  try {
-    [allergies, observations] = await Promise.all([
-      svc.byPatient("AllergyIntolerance", sr.patientId).catch(() => []),
-      svc.byPatient("Observation", sr.patientId).catch(() => []),
-    ]);
-  } catch (e) { /* the context is shown with what could be read; the gaps are named below */ }
+  /* R6-1, 2026-09-18: these two reads used to carry `.catch(() => [])`, so an unreadable allergy
+   * list arrived here as an empty one and this screen said "No contrast reaction is recorded" about
+   * a patient whose record was never read. null is the read that did not happen. */
+  const failures = [];
+  const [allergies, observations] = await Promise.all([
+    readOrNull(svc.byPatient("AllergyIntolerance", sr.patientId), "AllergyIntolerance", failures),
+    readOrNull(svc.byPatient("Observation", sr.patientId), "Observation", failures),
+  ]);
+  const notAvailable = unavailable(failures);
 
-  const contrastAllergies = (allergies || []).filter(isContrastAllergy)
+  const contrastAllergies = allergies === null ? null : allergies.filter(isContrastAllergy)
     .map((a) => ({ substance: a.substance, reaction: a.reaction || null, severity: a.severity || null, criticality: a.criticality || null }));
 
   return {
     ...base, ok: true,
     request: { id: sr.id, version: sr.version, code: sr.code, display: sr.display || sr.code, patientId: sr.patientId, priority: sr.priority || null, reason: sr.reason || null },
+    // null on either of these means NOT READ, and the screen says so where the result would sit.
     contrastAllergies,
-    renal: latestCreatinine(observations, ctx.now),
+    renal: observations === null ? null : latestCreatinine(observations, ctx.now),
+    ...(notAvailable ? { notChecked: notAvailable.notChecked, notCheckedReason: notAvailable.reason } : {}),
     /* Said whether or not anything was found. A radiologist who only sees this section when it has
      * content learns to read its absence as "checked and clear". */
-    note: contrastAllergies.length
-      ? "A CONTRAST REACTION IS RECORDED for this patient. Protocolling contrast anyway requires a reason, which is kept on the record."
-      : "No contrast reaction is recorded. That is what the record holds, not a guarantee that none happened elsewhere.",
+    note: contrastAllergies === null
+      ? "THE ALLERGY RECORD COULD NOT BE READ for this patient. That is not the same as no contrast reaction being recorded, and it is not a clear check."
+      : contrastAllergies.length
+        ? "A CONTRAST REACTION IS RECORDED for this patient. Protocolling contrast anyway requires a reason, which is kept on the record."
+        : "No contrast reaction is recorded. That is what the record holds, not a guarantee that none happened elsewhere.",
     computed: "Nothing here computes an eGFR. Turning a creatinine into a filtration rate needs age, sex and a formula whose variants disagree, and a number this system invented would be trusted as though a laboratory had issued it.",
   };
 }
@@ -158,23 +165,26 @@ async function recordProtocol(request, env, ctx) {
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!sr) return { ...base, ok: false, status: 404, error: "request_not_found", serviceRequestId, written: 0 };
 
-  let allergies = [], observations = [];
-  try {
-    [allergies, observations] = await Promise.all([
-      svc.byPatient("AllergyIntolerance", sr.patientId).catch(() => []),
-      svc.byPatient("Observation", sr.patientId).catch(() => []),
-    ]);
-  } catch (e) {
-    /* FAIL CLOSED on the allergy read. Protocolling contrast without having been able to check for a
-     * previous reaction is the exact situation this file exists to prevent, and proceeding with an
-     * empty list would look identical to proceeding with a clear one. */
-    if (contrast) return { ...base, ok: false, status: 502, error: "allergy_read_failed", written: 0,
-      detail: "The allergy record could not be read, so a contrast protocol cannot be recorded. An unreadable allergy list is not a clear one." };
+  /* FAIL CLOSED ON THE ALLERGY READ - and until R6-1 (2026-09-18) this could not happen, because
+   * both reads carried their own `.catch(() => [])` and the Promise.all therefore never rejected:
+   * the refusal below was unreachable code and a contrast protocol was recorded against an allergy
+   * list nobody had read. The per-read catches are gone; the failure is named instead. */
+  const failures = [];
+  const [allergies, observations] = await Promise.all([
+    readOrNull(svc.byPatient("AllergyIntolerance", sr.patientId), "AllergyIntolerance", failures),
+    readOrNull(svc.byPatient("Observation", sr.patientId), "Observation", failures),
+  ]);
+  if (contrast && failures.length) {
+    return { ...base, ok: false, status: 502, error: "clinical_read_failed", written: 0,
+      notChecked: failures.map((f) => f.type),
+      detail: failures.some((f) => f.type === "AllergyIntolerance")
+        ? "The allergy record could not be read, so a contrast protocol cannot be recorded. An unreadable allergy list is not a clear one."
+        : "The renal results could not be read, so a contrast protocol cannot be recorded. An unreadable creatinine is not a normal one." };
   }
 
-  const contrastAllergies = (allergies || []).filter(isContrastAllergy);
+  const contrastAllergies = allergies === null ? null : allergies.filter(isContrastAllergy);
   const contrastReason = str(ctx.contrastReason);
-  if (contrast && contrastAllergies.length && !contrastReason) {
+  if (contrast && contrastAllergies && contrastAllergies.length && !contrastReason) {
     return {
       ...base, ok: false, status: 422, error: "contrast_reason_required", written: 0,
       contrastAllergies: contrastAllergies.map((a) => ({ substance: a.substance, reaction: a.reaction || null, severity: a.severity || null })),
@@ -183,7 +193,8 @@ async function recordProtocol(request, env, ctx) {
   }
 
   const at = str(ctx.at) || new Date().toISOString();
-  const renal = latestCreatinine(observations, at);
+  // null, not "NO CREATININE IS RECORDED": a read that failed never becomes a fact about the patient.
+  const renal = observations === null ? null : latestCreatinine(observations, at);
   const id = `wsq-proto-${str(serviceRequestId).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-v${Number(sr.version)}`;
 
   const record = {
@@ -198,7 +209,10 @@ async function recordProtocol(request, env, ctx) {
     /* WHAT WAS ON SCREEN, kept. Not so the radiologist can be blamed - so that a later reader can
      * tell a decision made with the creatinine in front of them from one made without it. */
     renalAtProtocol: renal,
-    contrastAllergiesAtProtocol: contrastAllergies.map((a) => ({ substance: a.substance, reaction: a.reaction || null, severity: a.severity || null })),
+    contrastAllergiesAtProtocol: contrastAllergies === null ? null : contrastAllergies.map((a) => ({ substance: a.substance, reaction: a.reaction || null, severity: a.severity || null })),
+    /* Which of the two reads did not happen, kept ON the record. A later reader can otherwise not
+     * tell a protocol decided with the allergy list in front of them from one decided without it. */
+    notCheckedAtProtocol: failures.length ? failures.map((f) => f.type) : null,
     notes: str(ctx.notes) || null,
     protocolledBy: resolved.actor.id, at,
     source: { system: "wardsynq-native", sourceId: `imaging-protocol:${id}` },
@@ -209,10 +223,13 @@ async function recordProtocol(request, env, ctx) {
     return {
       ...base, ok: true, written: 1, protocolId: id, serviceRequestId, requestVersion: Number(sr.version),
       contrast, recordVersion: out.record.version, protocolRecord: record, actor: resolved.actor.id,
-      ...(contrast && !renal.known ? {
+      // A protocol recorded without contrast, but with a read that failed, says which one.
+      ...(failures.length ? { notChecked: failures.map((f) => f.type),
+        notCheckedWarning: "This protocol was recorded without part of the record being readable. It is not a checked-and-clear protocol." } : {}),
+      ...(contrast && renal && !renal.known ? {
         renalWarning: "Contrast was protocolled with NO creatinine on record. Renal function is unknown, which is not the same as normal.",
       } : {}),
-      ...(contrast && renal.known && renal.ageDays >= 7 ? {
+      ...(contrast && renal && renal.known && renal.ageDays >= 7 ? {
         renalWarning: `Contrast was protocolled against a creatinine ${renal.ageDays} days old. It describes the patient then, not now.`,
       } : {}),
       note: "A protocol, not a scan. Nothing has been performed and no report exists: the study still has to happen.",

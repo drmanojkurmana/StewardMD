@@ -1,0 +1,81 @@
+[
+  { "id": "sp1", "category": "supported-paraphrase", "question": "Treatment of CAP?",
+    "passages": [{ "text": "Amoxicillin 500 mg orally three times daily for 7 days is first-line for uncomplicated community-acquired pneumonia in outpatients." }],
+    "claims": [
+      { "text": "Start amoxicillin 500 mg PO tid for a week.", "gold": "supported", "refs": [1] },
+      { "text": "First-line treatment is amoxicillin.", "gold": "supported", "refs": [1] },
+      { "text": "Outpatients with uncomplicated CAP get oral amoxicillin.", "gold": "supported", "refs": [1] }
+    ] },
+  { "id": "sp2", "category": "supported-paraphrase", "question": "",
+    "passages": [{ "text": "Amoxicillin 1000 mg bd is the high-dose regimen where pneumococcal resistance is common." }],
+    "claims": [
+      { "text": "Give 1 g of amoxicillin twice daily where resistance is common.", "gold": "supported", "refs": [1] },
+      { "text": "High-dose amoxicillin is 1 g every 12 hours.", "gold": "supported", "refs": [1] }
+    ] },
+  { "id": "sp3", "category": "supported-paraphrase", "question": "",
+    "passages": [{ "text": "Transfusion is indicated when hemoglobin falls below 7 g/dL in stable patients." }],
+    "claims": [
+      { "text": "Haemoglobin under 7 g/dL should prompt transfusion in a stable patient.", "gold": "supported", "refs": [1] }
+    ] },
+
+  { "id": "un1", "category": "unsupported", "question": "Treatment of CAP?",
+    "passages": [{ "text": "Amoxicillin 500 mg orally three times daily for 7 days is first-line for uncomplicated community-acquired pneumonia in outpatients." }],
+    "claims": [
+      { "text": "Add azithromycin 500 mg daily for atypical cover.", "gold": "unsupported" },
+      { "text": "Corticosteroids shorten hospital stay in all pneumonia cases.", "gold": "unsupported" },
+      { "text": "Levofloxacin 750 mg once daily is an equivalent option.", "gold": "unsupported" }
+    ] },
+  { "id": "un2", "category": "unsupported", "question": "He weighs 70 kg.",
+    "passages": [{ "text": "Vancomycin 15 mg/kg IV every 12 hours, adjusted to trough levels." }],
+    "claims": [
+      { "text": "Give vancomycin 1050 mg IV bd.", "gold": "unsupported" }
+    ] },
+
+  { "id": "pa1", "category": "partial", "question": "Treatment of CAP?",
+    "passages": [{ "text": "Amoxicillin 500 mg orally three times daily for 5 to 7 days is first-line. Doxycycline is an alternative for penicillin allergy." }],
+    "claims": [
+      { "text": "Amoxicillin 500 mg PO tid for 5-7 days is first-line.", "gold": "supported", "refs": [1] },
+      { "text": "Doxycycline is the choice in penicillin allergy.", "gold": "supported", "refs": [1] },
+      { "text": "Add azithromycin 500 mg daily for atypical cover.", "gold": "unsupported" },
+      { "text": "Verify against local protocol.", "gold": "meta" }
+    ] },
+
+  { "id": "ms1", "category": "multi-source", "question": "",
+    "passages": [{ "text": "Amoxicillin 500 mg orally three times daily is first-line for outpatient pneumonia." },
+                 { "text": "Treat uncomplicated pneumonia for 5 to 7 days and reassess at 48 to 72 hours." }],
+    "claims": [
+      { "text": "Amoxicillin 500 mg tid for 5-7 days.", "gold": "supported", "refs": [1, 2] },
+      { "text": "Reassess the pneumonia patient at 48-72 hours.", "gold": "supported", "refs": [2] },
+      { "text": "Amoxicillin 500 mg tid for 14 days.", "gold": "unsupported" }
+    ] },
+
+  { "id": "cf1", "category": "conflicting", "question": "",
+    "passages": [{ "text": "Amoxicillin 500 mg three times daily for mild pneumonia." },
+                 { "text": "High-dose amoxicillin 875 mg twice daily is used where resistance is common." }],
+    "claims": [
+      { "text": "Amoxicillin 875 mg bd where resistance is common.", "gold": "supported", "refs": [2] },
+      { "text": "Amoxicillin 500 mg tid for mild disease.", "gold": "supported", "refs": [1] },
+      { "text": "Amoxicillin 1 g tid.", "gold": "contradicted" },
+      { "text": "Amoxicillin 500 mg or 875 mg depending on resistance.", "gold": "supported", "refs": [1, 2] }
+    ] },
+
+  { "id": "nd1", "category": "numerical-dosage", "question": "Creatinine is 2.1 mg/dL.",
+    "passages": [{ "text": "Ceftriaxone 2 g IV once daily; vancomycin 15 to 20 mg/kg IV every 12 hours, adjusted to levels." }],
+    "claims": [
+      { "text": "Ceftriaxone 2 g IV q24h.", "gold": "supported", "refs": [1] },
+      { "text": "Ceftriaxone 2000 mg intravenously daily.", "gold": "supported", "refs": [1] },
+      { "text": "Ceftriaxone 4 g IV daily.", "gold": "contradicted" },
+      { "text": "Vancomycin 15 mg/kg IV bd.", "gold": "supported", "refs": [1] },
+      { "text": "Vancomycin 25 mg/kg IV.", "gold": "contradicted" },
+      { "text": "With creatinine 2.1 mg/dL, adjust vancomycin to levels.", "gold": "supported", "refs": [1] },
+      { "text": "Vancomycin 15 mg/kg every 8 hours.", "gold": "supported", "refs": [1] }
+    ] },
+
+  { "id": "tm1", "category": "terminology", "question": "",
+    "passages": [{ "text": "Pulmonary embolism is treated with low-molecular-weight heparin; anticoagulation continues for at least 3 months." }],
+    "claims": [
+      { "text": "Anticoagulate PE with LMWH for 3 months.", "gold": "supported", "refs": [1] },
+      { "text": "Rx of PE: LMWH.", "gold": "supported", "refs": [1] },
+      { "text": "DVT prophylaxis uses UFH.", "gold": "unsupported" }
+    ] }
+]

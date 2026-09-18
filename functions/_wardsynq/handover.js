@@ -249,7 +249,7 @@ async function listHandovers(request, env, ctx) {
   try {
     rows = str(ctx.patientId)
       ? await svc.byPatient(TYPE, str(ctx.patientId))
-      : await svc.list(TYPE, 200);
+      : (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; // R4-2: every record (listAll, paged; was the oldest N), past 50,000 refused rather than short
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), handovers: [] }; }
 
   const want = str(ctx.state) || "waiting";

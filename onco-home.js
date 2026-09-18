@@ -263,6 +263,7 @@
   function quickActionsHtml() {
     return '<div class="oh-quick">' +
       '<button class="oh-qa" data-oh-act="oncotree-open">' + ms("account_tree") + "OncoTree</button>" +
+      '<button class="oh-qa" data-oh-act="staging-open">' + ms("stairs") + "Staging</button>" +
       '<button class="oh-qa" data-oh-act="protocol-open">' + ms("clinical_notes") + "Protocols</button>" +
       '<button class="oh-qa" data-oh-act="calc-cat">' + ms("calculate") + "Calculators</button>" +
       '<button class="oh-qa" data-oh-act="drug-browse">' + ms("pill") + "Drugs</button>" +
@@ -416,7 +417,8 @@
     return favSection() + contextStrip(state.ctx) + quickActionsHtml() + gridHtml();
   }
 
-  function renderResults() { var box = document.getElementById("ohResults"); if (box) box.innerHTML = bodyHtml(st); }
+  function backLabel() { return st.mode ? "&lsaquo; Back" : "&lsaquo; Close"; }
+  function renderResults() { var box = document.getElementById("ohResults"); if (box) box.innerHTML = bodyHtml(st); var el = document.getElementById("smdOncoHome"); var back = el && el.querySelector ? el.querySelector(".oh-back") : null; if (back) back.innerHTML = backLabel(); }
 
   // Protocols now open through the ONE universal sheet (SMD_PROTOSHEET), which carries its own
   // Ward Sync fetch + Assign handoff - so no separate per-patient matrix jump lives here.
@@ -452,11 +454,11 @@
       try { G.toast && G.toast(label + " is still loading - try again in a moment."); } catch (e3) {}
       return false;
     }
-    if (verb === "close") { close(); return; }
+    if (verb === "close") { if (st.mode) { st.mode = null; renderResults(); return; } close(); return; }
     if (verb === "calc-cat") { openOverlay("Calculators", G.MEDCALC && G.MEDCALC.openList, function () { G.MEDCALC.openList("Oncology"); }); return; }
     if (verb === "calc") { openOverlay("Calculators", G.MEDCALC && G.MEDCALC.open, function () { G.MEDCALC.open(arg); }); return; }
     if (verb === "kb-browse") { st.mode = (st.mode === "kb") ? null : "kb"; renderResults(); return; }
-    if (verb === "kb") { openOverlay("The knowledge base", G.DX && G.DX.openRef, function () { G.DX.openRef(arg); }); return; }
+    if (verb === "kb") { openOverlay("The knowledge base", G.DX && G.DX.openRef, function () { G.DX.openRef(arg, { from: "onco-home", standalone: true, onBack: function () { foreground(); } }); }); return; }
     if (verb === "home-dash") { st.mode = null; renderResults(); return; }
     // Drug tile -> the in-overlay onco drug view, which offers BOTH "Interaction check"
     // (-> MEDDRUGS.openInteractions) and "Full formulary" (-> MEDDRUGS.openList). Search-result drug
@@ -487,7 +489,7 @@
   function paintShell() {
     var el = rootEl();
     el.innerHTML =
-      '<div class="oh-top"><button class="oh-back" data-oh-act="close" aria-label="Close">&lsaquo; Close</button>' +
+      '<div class="oh-top"><button class="oh-back" data-oh-act="close" aria-label="Close">' + backLabel() + '</button>' +
       '<div class="oh-title">ONCQIS</div><span style="width:64px"></span></div>' +
       '<div class="oh-body">' + heroHtml() +
       '<input id="ohSearch" class="oh-search" type="text" placeholder="Explore tools, drugs and content" autocomplete="off" value="' + esc(st.q) + '">' +
@@ -537,6 +539,6 @@
     }
   } catch (e) {}
 
-  G.SMD_ONCOHOME = { open: open, close: close, search: search, _render: bodyHtml, _kbIndex: kbIndex, _oncoSupportive: oncoSupportive, _protoBadge: protoBadge, _st: st, _version: "1.0" };
+  G.SMD_ONCOHOME = { open: open, close: close, foreground: foreground, search: search, _render: bodyHtml, _kbIndex: kbIndex, _oncoSupportive: oncoSupportive, _protoBadge: protoBadge, _st: st, _version: "1.0" };
   if (typeof module !== "undefined" && module.exports) module.exports = { search: search, _render: bodyHtml, _oncoSupportive: oncoSupportive, _protoBadge: protoBadge };
 })();

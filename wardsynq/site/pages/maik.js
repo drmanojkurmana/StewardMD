@@ -120,8 +120,8 @@
       if (e && e.ok) (e.patients || []).forEach(function (p) { rows.push({ patientId: p.patientId, encounterId: p.encounterId, name: p.name || p.display || p.patientId, where: "ED" }); });
       S.patients = rows;
       if (!rows.length) {
-        var listErr = (w && w.error) || (e && e.error);
-        list.innerHTML = '<div class="msg note">' + ((w && !w.ok) || (e && !e.ok) ? (listErr ? EN(c, esc(listErr)) : esc(T(c, "site.maik.listsUnreadable", "The lists could not be read."))) : esc(T(c, "site.maik.noPatients", "No admitted or ED patients right now. MaiK works on a live encounter."))) + "</div>";
+        var listErr = (w && w.error) || (e && e.error), census = WSQ.tooManyOpen(w) || WSQ.tooManyOpen(e);
+        list.innerHTML = '<div class="msg note">' + ((w && !w.ok) || (e && !e.ok) ? (census ? esc(census) : listErr ? EN(c, esc(listErr)) : esc(T(c, "site.maik.listsUnreadable", "The lists could not be read."))) : esc(T(c, "site.maik.noPatients", "No admitted or ED patients right now. MaiK works on a live encounter."))) + "</div>";
         return;
       }
       list.innerHTML = '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.maik.colPatient", "Patient")) + '</th><th>' + esc(T(c, "site.maik.colWhere", "Where")) + '</th><th></th></tr></thead><tbody>' + rows.map(function (p, ix) {

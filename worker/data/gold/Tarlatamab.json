@@ -1,0 +1,91 @@
+{
+  "generic": "Tarlatamab",
+  "cls": "DLL3 x CD3 bispecific T-cell engager (BiTE)",
+  "pharm": "Bispecific delta-like ligand 3 (DLL3)-directed CD3 T-cell engager for extensive-stage small cell lung cancer",
+  "tags": ["Extensive-stage small cell lung cancer", "DLL3 x CD3 BiTE T-cell engager", "Boxed warning: cytokine release syndrome (CRS)", "Boxed warning: neurologic toxicity including ICANS", "Step-up dosing with hospitalization"],
+  "quick": [
+    ["Adult dose", "Step-up 1 mg IV Day 1, then 10 mg IV Day 8, then 10 mg IV every 2 weeks"],
+    ["Meal", "Not applicable (IV); maintain hydration"],
+    ["Pregnancy", "Can cause fetal harm; verify status and use effective contraception"],
+    ["Lactation", "Do not breastfeed during treatment"],
+    ["Renal", "No established adjustment; monitor during CRS with hypotension"],
+    ["Hepatic", "No established adjustment; monitor LFTs for hepatotoxicity"],
+    ["Alcohol", "No specific restriction; avoid excess during CRS-risk periods"],
+    ["Monitoring", "CRS and ICANS/neurotoxicity, CBC, LFTs, infection; 22-24 h observation after step-up doses"]
+  ],
+  "summary": "Tarlatamab (Imdelltra) is a DLL3 x CD3 bispecific T-cell engager (BiTE) granted accelerated approval in 2024 for adults with extensive-stage small cell lung cancer (ES-SCLC) with disease progression on or after platinum chemotherapy. It binds DLL3 on tumor cells and CD3 on T cells to drive T-cell-mediated tumor killing. Dosing uses step-up infusions of 1 mg on Day 1 and 10 mg on Day 8, then 10 mg IV every 2 weeks; at that dose the objective response rate was 40% with a median duration of response of 9.7 months. It carries a boxed warning for cytokine release syndrome (CRS), including life-threatening or fatal reactions, and neurologic toxicity including ICANS, with mandatory 22- to 24-hour monitoring after each step-up dose. Additional risks include cytopenias, serious infections, hepatotoxicity, hypersensitivity, and embryo-fetal toxicity.",
+  "indications": [
+    "Treatment of adults with extensive-stage small cell lung cancer (ES-SCLC) with disease progression on or after platinum chemotherapy"
+  ],
+  "dosage": [
+    {"c": "Step-up dose 1 (Cycle 1 Day 1)", "r": "Adult IV", "d": "1 mg IV over 1 hour", "t": "Single infusion Cycle 1 Day 1", "n": "Monitor for 22 to 24 hours after the infusion in an appropriate healthcare setting"},
+    {"c": "Step-up dose 2 (Cycle 1 Day 8)", "r": "Adult IV", "d": "10 mg IV", "t": "Single infusion Cycle 1 Day 8", "n": "Monitor for 22 to 24 hours after the infusion; remain within 1 hour of care for 48 hours after each step-up dose"},
+    {"c": "Maintenance dosing", "r": "Adult IV", "d": "10 mg IV every 2 weeks", "t": "Every 2 weeks starting Cycle 1 Day 15", "n": "Continue until disease progression or unacceptable toxicity"},
+    {"c": "Toxicity-related withholding", "r": "Adult IV", "d": "Withhold until CRS, ICANS, or neurologic toxicity resolves per labeling", "t": "As needed", "n": "Permanently discontinue for severe, recurrent, or life-threatening events per labeling"}
+  ],
+  "admin": [
+    "Give only by intravenous infusion; use the step-up dosing schedule to reduce the incidence and severity of CRS",
+    "Give required premedication before step-up doses per labeling and have CRS and neurotoxicity management available",
+    "Monitor patients for 22 to 24 hours after Cycle 1 Day 1 and Cycle 1 Day 8 infusions in an appropriate healthcare setting",
+    "Advise patients to remain within 1 hour of an appropriate healthcare setting for 48 hours from the start of each step-up infusion",
+    "Withhold the next dose for CRS, ICANS, or neurologic toxicity per labeling; permanently discontinue for severe or recurrent events"
+  ],
+  "moa": "Tarlatamab is a bispecific T-cell engager (BiTE) that binds delta-like ligand 3 (DLL3), a protein expressed on the surface of most small cell lung cancer cells with limited normal-tissue expression, and CD3 on T cells. By linking T cells to DLL3-expressing tumor cells, it activates T cells and triggers release of cytotoxic mediators that kill the tumor cells. Step-up dosing is used to reduce the incidence and severity of cytokine release syndrome during initial T-cell activation.",
+  "contra": {
+    "absolute": ["Known serious hypersensitivity to tarlatamab or any excipient"],
+    "relative": ["Active serious infection (initiate only after infection is controlled)", "History of significant neurologic disease (may complicate ICANS assessment)", "Pregnancy and breastfeeding (embryo-fetal risk; avoid)"],
+    "monitor": ["Concomitant myelosuppressive or hepatotoxic therapy", "Live vaccines during treatment (immunosuppression and cytopenias)"]
+  },
+  "preg": "Based on its mechanism of T-cell activation, tarlatamab can cause fetal harm. Verify pregnancy status before starting in females of reproductive potential and advise effective contraception during treatment.",
+  "lact": "There are no data on the presence of tarlatamab in human milk or its effects on the breastfed infant or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment.",
+  "renal": "No dose adjustment is established for renal impairment. Monitor closely during CRS episodes with hypotension, which can reduce renal perfusion, and adjust supportive care as needed.",
+  "hepatic": "No established dose adjustment; hepatotoxicity is reported, so monitor liver function tests and withhold or discontinue for significant transaminase or bilirubin elevation per labeling.",
+  "interactions": {
+    "major": ["Myelosuppressive chemotherapy and other marrow-toxic agents (additive cytopenias and infection risk; monitor CBC closely)", "Live vaccines (risk of vaccine-related infection during immunosuppression; avoid)"],
+    "moderate": ["Hepatotoxic drugs (additive liver injury risk; monitor liver function tests)", "Sedating or neurotoxic drugs around step-up dosing (may confound ICANS assessment; monitor neurologic status)"],
+    "minor": ["No clinically significant CYP-mediated interactions are expected for this antibody therapy"],
+    "food": "Not applicable (IV administration); maintain adequate hydration.",
+    "alcohol": "No specific interaction is described; avoid excess alcohol during CRS-risk periods and cytopenias.",
+    "diagnostics": "Monitor CBC with differential and liver function tests; monitor neurologic status and CRS signs as clinically indicated."
+  },
+  "se": {
+    "common": ["Cytokine release syndrome (fever, hypotension, hypoxia)", "Fatigue", "Decreased appetite and nausea", "Cytopenias (neutropenia, anemia, thrombocytopenia)", "Infections", "Elevated liver transaminases"],
+    "serious": ["Cytokine release syndrome, including life-threatening or fatal reactions (BOXED WARNING)", "Neurologic toxicity including immune effector cell-associated neurotoxicity syndrome (ICANS) (BOXED WARNING)", "Serious infections", "Cytopenias", "Hepatotoxicity", "Hypersensitivity reactions"],
+    "rare": ["Fatal CRS", "Severe hepatotoxicity"],
+    "emergency": ["Fever with low blood pressure or trouble breathing during or after infusion (possible CRS) - seek emergency care", "Confusion, trouble speaking, severe sleepiness, seizure, or loss of consciousness (possible ICANS) - seek emergency care", "Fever with chills during low blood counts (possible serious infection) - seek urgent care"]
+  },
+  "monitoring": [
+    "CRS signs and symptoms (fever, hypotension, hypoxia) with 22- to 24-hour observation after each step-up dose",
+    "Neurologic status for ICANS and other neurotoxicity (confusion, aphasia, altered consciousness, seizures)",
+    "Complete blood counts with differential for cytopenias",
+    "Liver function tests for hepatotoxicity",
+    "Signs of infection and hypersensitivity during infusion"
+  ],
+  "counsel": [
+    "CRS and neurologic toxicity including ICANS can be life-threatening; seek emergency care for fever, trouble breathing, confusion, trouble speaking, severe sleepiness, seizures, or loss of consciousness",
+    "You will be closely monitored for 22 to 24 hours after each of the first two step-up doses and must stay within 1 hour of the hospital for 48 hours after each",
+    "Report signs of infection at once (fever, chills, cough); low blood counts are common and you will have frequent blood tests",
+    "Tell your team about liver symptoms (yellowing of skin or eyes, dark urine, right-sided abdominal pain) and all other medicines and vaccines",
+    "Use effective contraception during treatment and tell your doctor if you are pregnant, plan pregnancy, or are breastfeeding"
+  ],
+  "pk": [
+    ["Onset", "T-cell activation and cytokine release can begin within hours of the first step-up infusion"],
+    ["Peak", "At the end of the IV infusion"],
+    ["Half-life", "Prolonged, consistent with a bispecific T-cell engager protein; supports every-2-week maintenance dosing"],
+    ["Duration", "Pharmacodynamic effect persists between doses with 10 mg every-2-week maintenance"],
+    ["Storage", "Refrigerate per labeling; do not freeze; protect from light; use reconstituted and diluted solutions within labeled time limits"]
+  ],
+  "pearls": [
+    "Boxed warning: CRS including fatal reactions and neurologic toxicity including ICANS; first BiTE T-cell engager approved for ES-SCLC",
+    "Mandatory 22- to 24-hour monitoring after Cycle 1 Day 1 (1 mg) and Day 8 (10 mg), plus 48-hour proximity to care after each step-up dose",
+    "Maintenance is 10 mg IV every 2 weeks, with a 40% response rate and 9.7-month median duration of response at that dose",
+    "Step-up dosing is essential to reduce CRS incidence and severity; withhold or permanently discontinue per labeling for CRS or ICANS",
+    "Monitor blood counts, liver function, and infection throughout therapy; embryo-fetal toxicity requires contraception"
+  ],
+  "missed": "Tarlatamab is given on a supervised infusion schedule, so there is no patient-managed missed dose. If an infusion visit is missed, contact the oncology team to reschedule; do not attempt to make up doses independently, as step-up and timing rules affect CRS risk.",
+  "overdose": "There is no specific antidote for tarlatamab overdose. Exaggerated CRS, neurologic toxicity, cytopenias, or infection may occur. Withhold treatment and provide intensive supportive care with monitoring for CRS, neurologic status, blood counts, liver function, and infection. Contact Poison Help (1-800-222-1222).",
+  "refs": [
+    ["FDA Prescribing Information: Tarlatamab / IMDELLTRA (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tarlatamab%22"],
+    ["DailyMed - Tarlatamab (IMDELLTRA)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=tarlatamab"]
+  ]
+}

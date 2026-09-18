@@ -46,10 +46,10 @@ import { makeProvisionalIdentity } from "../../wardsynq/wardsynq-mpi.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { patientIdForMrn } from "./opd-identity.js";
-import { admitPatient } from "./migrate-inpatient.js";
+import { admitPatient, patientsFor } from "./migrate-inpatient.js";
 
 const ED = "ED";
 const OPEN = "in-progress";
@@ -116,7 +116,9 @@ async function edArrival(request, env, ctx) {
  *  then open the encounter under the same mrn. */
 async function arriveUnknown(svc, resolved, base, arrival, arrivedAt, ctx) {
   let candidates;
-  try { candidates = await svc.list("Patient", 1000); }
+  // R4-2: the NEWEST 1,000 registrations hold today's provisional MRNs (the old read was the oldest 1,000). The count only
+  // picks where to start; a taken sequence is still refused by the write and the next is tried.
+  try { candidates = await svc.list("Patient", 1000, { newest: true }); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
   let start = 1;
@@ -326,8 +328,10 @@ async function listEd(request, env, ctx) {
   if (error) return { ...base, ...error, patients: [] };
 
   let encounters;
-  try { encounters = await svc.list("Encounter", 200); }
+  // R4-1: every open encounter (was the oldest 200, so the newest arrivals were missing from the ED board).
+  try { encounters = await svc.listByStatus("Encounter", [OPEN]); }
   catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: "too_many_open", detail: str(e.message), patients: [] };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), detail: str(e.message), patients: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), patients: [] };
   }
@@ -335,7 +339,7 @@ async function listEd(request, env, ctx) {
   /* BUG-MU06NW2S-8D53: the board drew the patient's sex in bold from a field this list never sent, so it
    * never appeared. One roster read, joined in memory as listWard does; unreadable leaves name and sex null. */
   let byId = new Map();
-  try { byId = new Map(((await svc.list("Patient", 400)) || []).filter((p) => p && p.id).map((p) => [p.id, p])); } catch { /* rows still shown */ }
+  try { byId = await patientsFor(svc, (encounters || []).filter((e) => e && e.class === ED).map((e) => e.patientId)); } catch { /* rows still shown */ }
   const patients = (encounters || [])
     .filter((e) => e && e.class === ED && e.status === OPEN)
     .map((e) => ({

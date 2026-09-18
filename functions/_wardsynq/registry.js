@@ -137,6 +137,8 @@ async function open(request, env, ctx, need) {
 }
 
 /** ctx: { migration, registries, registryId?, overdueOnly?, now?, actorDeps, recordDeps } */
+const READ_MAX = 50000;
+
 async function registryReport(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -150,13 +152,22 @@ async function registryReport(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, registries: [] };
 
-  let conditions, observations, patients;
+  /* Every record of each type, NEWEST FIRST (service.listSince with no stop test: it walks back from the newest record
+   * and, past READ_MAX, keeps the newest). R6-5: this used to be listAll, which keeps the OLDEST READ_MAX, so a hospital
+   * past the ceiling silently dropped its most recent patients and its most recent results - the population most likely
+   * to need recall, and the records that decide whether anybody is overdue. Past the ceiling it is now the OLDEST that
+   * are not read, and truncated says so in those words.
+   * NOT period-scoped (readWindowed), deliberately: a registry asks for each patient's LAST qualifying record, so a
+   * window would turn "reviewed three years ago" into "never reviewed" - the most overdue state there is.
+   * A store that cannot page backwards still reads whole, oldest first. An observation or patient read that fails is
+   * named (unreadable), never taken as none. */
+  let conditions, observations, patients, truncated = false;
+  const unreadable = [];
+  const newestFirst = (t) => (typeof svc.listSince === "function" ? svc.listSince(t, { max: READ_MAX }) : svc.listAll(t, { max: READ_MAX }));
+  const all = (t, soft) => newestFirst(t).then((g) => { if (g.truncated) truncated = true; return g.rows; },
+    (e) => { if (!soft) throw e; unreadable.push(t); return []; });
   try {
-    [conditions, observations, patients] = await Promise.all([
-      svc.list("Condition", 2000),
-      svc.list("Observation", 5000).catch(() => []),
-      svc.list("Patient", 2000).catch(() => []),
-    ]);
+    [conditions, observations, patients] = await Promise.all([all("Condition"), all("Observation", true), all("Patient", true)]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), registries: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), registries: [] };
@@ -206,7 +217,7 @@ async function registryReport(request, env, ctx) {
   }
 
   return {
-    ...base, ok: true, registries: out,
+    ...base, ok: true, registries: out, truncated, ...(unreadable.length ? { unreadable } : {}),
     ...(defs.problems ? { problems: defs.problems } : {}),
     /* Stated, because this is the one report in WardSynQ that names people. */
     note: "A registry NAMES PATIENTS - that is what makes a recall possible. Membership is derived "

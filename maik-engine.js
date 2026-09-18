@@ -430,8 +430,35 @@
     return Promise.resolve(window.SMD_MAIK_LOCAL.answer(pkg, o, onDelta));
   }
 
+  // ── DOSE SHORT-CIRCUIT (owner, 2026-09-18) ──
+  // "dose of ondansetron" is a lookup in the app's own drug database, not a question for a model.
+  // It runs BEFORE the engine choice, so cloud and on-device behave identically and neither can
+  // invent a figure. kb/ai/drug-dose.js resolves the molecule (spelling included) and formats the
+  // official-label dose; anything it cannot answer returns null and the normal path runs.
+  function questionOf(kind, args) {
+    if (kind === "explain") return String(args[1] || "");
+    var pkg = args[0];
+    if (typeof pkg === "string") return pkg;
+    return String((pkg && (pkg.question || pkg.q)) || "");
+  }
+  function doseAnswer(kind, args) {
+    var D = window.SMD_DOSE;
+    if (!D || !/^explain/.test(kind)) return null;
+    var q = questionOf(kind, args);
+    if (!q || !D.intent(q)) return null;                       // synchronous gate: not a dose ask
+    return Promise.resolve(D.answer(q)).catch(function () { return null; });
+  }
+
   // ── ROUTER ──
   function route(kind, orig, self, args) {
+    var dose = doseAnswer(kind, args);
+    if (!dose) return route0(kind, orig, self, args);
+    return dose.then(function (r) {
+      if (!r) return route0(kind, orig, self, args);           // fails open: model answers instead
+      return { text: r.text, engine: "drugdb", drug: r.drug, section: r.section, grounded: true };
+    });
+  }
+  function route0(kind, orig, self, args) {
     var e = effective();
     if (e === "cloud") return orig.apply(self, args);                                   // CLOUD MODE: untouched
     if (kind === "refine") return Promise.resolve(null);                                 // no local router; callers treat null as "no refinement"

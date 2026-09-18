@@ -503,6 +503,10 @@
         "Adjuvant chemotherapy is not indicated for completely resected stage IA disease",
         "Reassess for adjuvant targeted therapy only if a driver was found and residual risk is high",
         "Then enter surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "lung-osimertinib",
+        "lung-cis-pemetrexed"
       ]
     },
     {
@@ -702,6 +706,10 @@
         "Anatomic (lobectomy) resection with mediastinal nodal dissection",
         "Confirm final pathologic stage, margins and driver status",
         "Then choose adjuvant systemic therapy by risk and driver (next step)"
+      ],
+      "protocolRefs": [
+        "lung-osimertinib",
+        "lung-cis-pemetrexed"
       ]
     },
     {
@@ -874,7 +882,11 @@
         "Palliative radiation for symptomatic local sites as needed"
       ],
       "linkTo": "n_nsclc_biomarker",
-      "linkLabel": "Enter the metastatic driver-directed pathway"
+      "linkLabel": "Enter the metastatic driver-directed pathway",
+      "protocolRefs": [
+        "lung-osimertinib",
+        "lung-cis-pemetrexed"
+      ]
     },
     {
       "id": "n_nsclc_biomarker",
@@ -1979,6 +1991,10 @@
         "Best supportive and palliative care for poor performance status (ECOG >= 3)",
         "Palliative radiation for symptomatic local sites (bone, brain, airway)",
         "Refer to clinical trials for novel agents where eligible"
+      ],
+      "protocolRefs": [
+        "lung-osimertinib",
+        "lung-cis-pemetrexed"
       ]
     },
     {
@@ -2004,7 +2020,11 @@
         "Biopsy suspected recurrence and re-profile molecular markers"
       ],
       "linkTo": "n_nsclc_biomarker",
-      "linkLabel": "If recurrence / metastatic disease: enter the driver-directed metastatic pathway"
+      "linkLabel": "If recurrence / metastatic disease: enter the driver-directed metastatic pathway",
+      "protocolRefs": [
+        "lung-osimertinib",
+        "lung-cis-pemetrexed"
+      ]
     },
     {
       "id": "n_sclc_workup",
@@ -2210,6 +2230,10 @@
         "Prophylactic cranial irradiation for responders, or MRI surveillance as an alternative",
         "Discuss the neurocognitive trade-off of PCI with the patient",
         "Then enter surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "lung-osimertinib",
+        "lung-cis-pemetrexed"
       ]
     },
     {
@@ -2235,7 +2259,11 @@
         "Palliative radiation for symptomatic sites"
       ],
       "linkTo": "n_sclc_relapse_q",
-      "linkLabel": "Enter the relapsed-SCLC pathway"
+      "linkLabel": "Enter the relapsed-SCLC pathway",
+      "protocolRefs": [
+        "lung-osimertinib",
+        "lung-cis-pemetrexed"
+      ]
     },
     {
       "id": "n_tx_sclc_es",
@@ -2455,7 +2483,11 @@
         "Smoking cessation support at every visit"
       ],
       "linkTo": "n_sclc_relapse_q",
-      "linkLabel": "On relapse: enter the relapsed-SCLC pathway"
+      "linkLabel": "On relapse: enter the relapsed-SCLC pathway",
+      "protocolRefs": [
+        "lung-osimertinib",
+        "lung-cis-pemetrexed"
+      ]
     },
     {
       "id": "n_meso_workup",
@@ -2797,6 +2829,10 @@
         "Best supportive and palliative care for poor performance status",
         "Pleural effusion control (indwelling catheter or pleurodesis) for symptoms",
         "Early palliative-care integration and clinical trials where eligible"
+      ],
+      "protocolRefs": [
+        "lung-osimertinib",
+        "lung-cis-pemetrexed"
       ]
     }
   ],
@@ -3589,5 +3625,31 @@
       ],
       "linkCategory": "conditional"
     }
+  ],
+  "protocolRefs": [
+    "lung-alectinib",
+    "lung-alk-tki-other",
+    "lung-capmatinib",
+    "lung-carbo-paclitaxel",
+    "lung-carbo-pemetrexed",
+    "lung-cis-gemcitabine",
+    "lung-cis-pemetrexed",
+    "lung-dabrafenib-trametinib",
+    "lung-docetaxel",
+    "lung-durvalumab-consolidation",
+    "lung-keynote189",
+    "lung-keynote407",
+    "lung-lorlatinib",
+    "lung-osimertinib",
+    "lung-pembro-mono",
+    "lung-pembrolizumab-adjuvant",
+    "lung-selpercatinib",
+    "lung-sotorasib",
+    "meso-cis-pemetrexed",
+    "meso-nivo-ipi",
+    "sclc-atezolizumab",
+    "sclc-durvalumab",
+    "sclc-platinum-etoposide",
+    "sclc-topotecan"
   ]
 }

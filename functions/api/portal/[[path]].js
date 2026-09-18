@@ -32,6 +32,8 @@ import { getPreference, setPreference } from "../../_wardsynq/patient-messaging.
 import { feedbackSettings, openSurvey, submitSurvey, pendingSurveys } from "../../_wardsynq/patient-feedback.js";
 import { queueEnabled } from "../../_queue.js";
 import { listSessions, listTickets, opdDate } from "../../_queue_engine.js";
+import { listDefinitions as listFormDefinitions, publishedVersion as publishedFormVersion } from "../../_forms_store.js";
+import { portalIntake, portalSubmitIntake } from "../../_wardsynq/form-response.js";
 
 function corsHeaders(request) {
   const origin = (request && request.headers && request.headers.get("Origin")) || "";
@@ -139,6 +141,26 @@ export async function onRequest(context) {
       return json(r, r.ok ? 200 : (r.status || 502), request);
     }
     const r = await requestAppointment(request, env, { ...deps, patientId: session.patientId, actorId: session.readerId, reason: body.reason, preference: body.preference });
+    return json(r, r.ok ? 200 : (r.status || 502), request);
+  }
+
+  /* PRE-ADMISSION INTAKE (form-response.js). Session first, patient from the grant, the grant's "forms" section. Only a
+   * published form marked for patients, only for the patient's own planned admission; what is sent stays labelled as
+   * the patient's until a clinician reviews it, and nothing is copied into the chart. */
+  if (sub === "intake-forms" || sub === "intake-submit") {
+    const session = await sessionPatient({ ...deps, grantId: body.grantId, token: body.token });
+    if (!session.ok) return json({ ok: false, error: session.error, detail: session.detail || null }, session.status || 401, request);
+    let r;
+    if (sub === "intake-forms") {
+      let published = null;
+      try { published = (await listFormDefinitions(env, org.id)).published; } catch (_) { published = null; }
+      r = await portalIntake({ ...deps, published, intake: cfg && cfg.intake }, session);
+    } else {
+      let definition = null;
+      try { definition = str(body.formKey) && Number.isInteger(Number(body.formVersion)) ? await publishedFormVersion(env, org.id, str(body.formKey), Number(body.formVersion)) : null; }
+      catch (_) { return json({ ok: false, error: "forms_read_failed", written: 0 }, 502, request); }
+      r = await portalSubmitIntake({ ...deps, definition, requestId: body.requestId, appointmentId: body.appointmentId, answers: body.answers, intake: cfg && cfg.intake }, session);
+    }
     return json(r, r.ok ? 200 : (r.status || 502), request);
   }
 

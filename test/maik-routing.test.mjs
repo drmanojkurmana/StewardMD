@@ -74,6 +74,20 @@ await expect("clostridum infection", /difficile|clostridioides/i, "RESOLVER 'clo
 { const r = await routeOf("wibblewobble floxytron"); ok(r.mode === "none", "SAFE resolver leaves true gibberish as none (not force-matched)  →  [" + r.mode + "]"); }
 { const r = await routeOf("clostridiym"); ok(r.mode === "assume", "RESOLVER typo lands as ASSUME (stated assumption + refine chip), not silent match  →  [" + r.mode + "]"); }
 
+// --- FIX (owner screenshot, 2026-09-18): "melena workup" grounded CONFIDENTLY on Exfoliative
+//     dermatitis because "workup" is in that entry's NAME; "melena" alone fuzzy-resolved to
+//     "Mal de Meleda". Question-frame words are not name hits; GI-bleed signs alias to the UGIB entry;
+//     a real clinical word is never typo-corrected into a disease name. ---
+await expect("melena workup", /peptic ulcer|upper gi bleed/i, "FIX 'melena workup' → UGIB entry");
+await forbid("melena workup", /dermatitis|erythroderma/i, "FIX 'melena workup' NOT exfoliative dermatitis (name contains 'workup')");
+await expect("malena workup", /peptic ulcer|upper gi bleed/i, "FIX 'malena workup' (misspelling) → UGIB entry");
+await expect("melena", /peptic ulcer|upper gi bleed/i, "FIX bare 'melena' → UGIB entry (alias-seeded)");
+await forbid("melena", /meleda/i, "FIX 'melena' NOT fuzzy-corrected to Mal de Meleda");
+await expect("hematemesis and melena management", /peptic ulcer|upper gi bleed/i, "FIX 'hematemesis and melena' → UGIB entry");
+await forbid("fever workup", /dermatitis|erythroderma/i, "SAFE 'fever workup' does not land on the entry whose name says 'workup'");
+{ const r = await routeOf("chest pain workup"); ok(!/dermatitis|erythroderma/i.test(r.name), "SAFE 'chest pain workup' not erythroderma  →  " + (r.name || "(none)") + " [" + r.mode + "]"); }
+await expect("erythroderma workup", /dermatitis|erythroderma/i, "SAFE 'erythroderma workup' still reaches exfoliative dermatitis (by its real name)");
+
 // --- SAFE: a lone body-only hit must NOT confidently ground a wrong disease ---
 await forbid("high fever what to do", /tick|relapsing/i, "SAFE 'high fever what to do' NOT grounded on Tick-borne relapsing fever");
 

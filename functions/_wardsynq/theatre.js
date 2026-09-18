@@ -122,7 +122,8 @@ async function createTheatreSession(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let existing;
-  try { existing = (await svc.list(TYPE, 1000)) || []; }
+  // R4-2: every session (listAll, paged; the old read was the OLDEST 1,000, so a clash with a newer session was not seen).
+  try { existing = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; }
   catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", written: 0 }; }
   const id = sessionIdFor(theatreId, startAt);
   const current = existing.find((s) => s && s.id === id);
@@ -269,8 +270,9 @@ async function theatreUtilisation(request, env, ctx) {
   if (error) return { ...base, ...error, theatres: null };
   const rows = {}, unreadable = {};
   await Promise.all([TYPE, "ResourceBooking", "SurgicalCase"].map(async (t) => {
-    try { rows[t] = ((await svc.list(t, 2000)) || []).filter(Boolean); }
-    catch (e) { rows[t] = []; unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : "read failed"; }
+    // Every record (service.listAll, paged; the old read was the OLDEST 2,000): past 50,000 it throws (ListCeilingError) rather than answer short. ponytail: audit O20 is the upgrade if paging is slow.
+    try { rows[t] = (await svc.listAll(t, { max: 50000, throwOnTruncate: true })).rows.filter(Boolean); }
+    catch (e) { rows[t] = []; unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : e && e.name === "ListCeilingError" ? "more records than can be read at once; the newest were not read" : "read failed"; }
   }));
   /* Sessions and bookings are what utilisation is divided by and from: without them there is no figure to show. */
   if (unreadable[TYPE] || unreadable.ResourceBooking) return { ...base, ok: false, status: unreadable[TYPE] === "not readable with this role" ? 403 : 502, error: "record_read_failed", detail: "The theatre sessions or bookings could not be read, so no utilisation is shown.", theatres: null };

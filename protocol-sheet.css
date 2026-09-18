@@ -69,6 +69,10 @@ body.dark .ps-overlay, body.v3-dark .ps-overlay, html.dark .ps-overlay { --ps-in
 /* Structured form cards: iOS glass/border treatment, labels sit ABOVE every input/value so
    nothing truncates horizontally on narrow phones. */
 .ps-cards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 14px; }
+.ps-cards-col2 { display: flex; flex-direction: column; gap: 10px; }
+@media (min-width: 640px) {
+  .ps-cards { grid-template-columns: 1.15fr 1fr; }
+}
 .ps-card { background: color-mix(in srgb, var(--ps-primary) 3%, var(--ps-card)); border: 1px solid var(--ps-line); border-radius: 12px; padding: 12px 14px; }
 .ps-card-h { font: 800 10.5px system-ui; text-transform: uppercase; letter-spacing: .06em; color: var(--ps-primary); margin-bottom: 10px; }
 .ps-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
@@ -187,10 +191,134 @@ body.dark .ps-warns { color: #fbbf24; background: #3a2e05; border-color: #78350f
 .ps-overlay * { box-sizing: border-box; }
 
 /* ---------- PRINT (Save as PDF) : isolate the sheet, format A4 ---------- */
+
+/* --- Enhanced Custom Branding, Dosage Overrides, Toxicity Antidotes & Multilingual Oral Care --- */
+.ps-inst-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ps-inst-logo-custom { background: transparent !important; overflow: hidden; }
+.ps-inst-logo-img { max-width: 44px; max-height: 44px; object-fit: contain; }
+.ps-inst-editbtn { display: inline-flex; align-items: center; gap: 5px; background: color-mix(in srgb, var(--ps-primary) 10%, var(--ps-card)); color: var(--ps-primary); border: 1px solid color-mix(in srgb, var(--ps-primary) 28%, transparent); border-radius: 8px; font: 700 11px system-ui; padding: 5px 9px; cursor: pointer; transition: .15s ease; white-space: nowrap; }
+.ps-inst-editbtn:active { transform: scale(0.97); }
+
+.ps-dname-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.ps-dose-val-row { display: flex; align-items: center; gap: 6px; }
+.ps-dose-edit-btn { display: inline-flex; align-items: center; gap: 3px; background: color-mix(in srgb, var(--ps-primary) 10%, var(--ps-card)); color: var(--ps-primary); border: 1px solid color-mix(in srgb, var(--ps-primary) 25%, transparent); border-radius: 6px; font: 700 10.5px system-ui; padding: 2px 6px; cursor: pointer; vertical-align: middle; }
+.ps-dose-edit-btn .material-symbols-rounded { font-size: 13px; }
+.ps-dose-edit-btn:active { transform: scale(0.96); }
+
+.ps-adjusted-badge { background: #0284c7 !important; }
+.ps-docadded-badge { background: #4f46e5 !important; }
+.ps-orig-footnote { font-size: 9.5px; color: #b45309; font-weight: 600; margin-top: 3px; background: color-mix(in srgb, #f59e0b 12%, var(--ps-card)); border-radius: 4px; padding: 2px 6px; display: inline-block; }
+body.dark .ps-orig-footnote { color: #fcd34d; background: rgba(245, 158, 11, 0.2); }
+.ps-drug-del-btn, .ps-tox-del-btn { padding: 2px 4px; font-size: 11px; margin-left: auto; }
+.ps-danger-link { color: var(--ps-danger) !important; }
+
+.ps-table-actions { margin-top: 10px; display: flex; justify-content: flex-end; }
+.ps-btn-sm { min-height: 36px !important; font-size: 12.5px !important; padding: 4px 12px !important; border-radius: 9px !important; }
+
+/* Toxicity & Antidote callouts */
+.ps-tox-section { border: 1px solid #fed7aa; background: color-mix(in srgb, #ea580c 4%, var(--ps-card)); border-radius: 12px; padding: 12px 14px; margin-top: 14px; }
+body.dark .ps-tox-section { border-color: #7c2d12; background: rgba(124, 45, 18, 0.15); }
+.ps-tox-header { color: #ea580c !important; border-bottom-color: #fed7aa !important; }
+body.dark .ps-tox-header { color: #fdba74 !important; border-bottom-color: #7c2d12 !important; }
+.ps-tox-card { background: var(--ps-card); border: 1px solid #ffedd5; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+body.dark .ps-tox-card { background: #1a1512; border-color: #431407; }
+.ps-tox-card:last-child { margin-bottom: 0; }
+.ps-tox-card-h { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+.ps-tox-drug { font: 800 10.5px system-ui; text-transform: uppercase; color: #c2410c; background: #ffedd5; padding: 2px 6px; border-radius: 5px; display: inline-flex; align-items: center; gap: 4px; }
+body.dark .ps-tox-drug { color: #fdba74; background: #431407; }
+.ps-tox-drug .material-symbols-rounded { font-size: 14px; }
+.ps-tox-title { font: 800 13px system-ui; color: var(--ps-ink); }
+.ps-tox-symptoms { font-size: 11.5px; color: var(--ps-muted); margin-bottom: 5px; line-height: 1.4; }
+.ps-tox-treatment { font-size: 11.5px; color: var(--ps-primary); line-height: 1.45; font-weight: 600; background: color-mix(in srgb, var(--ps-primary) 6%, var(--ps-card)); padding: 6px 9px; border-radius: 7px; border-left: 3px solid var(--ps-primary); }
+.ps-tox-actions { margin-top: 10px; display: flex; justify-content: flex-end; }
+.ps-tox-empty { font-size: 11.5px; color: var(--ps-muted); font-style: italic; padding: 4px 0; }
+
+/* Multilingual Oral Tablet instructions */
+.ps-oral-card { border: 1px solid #bfdbfe; background: color-mix(in srgb, #2563eb 4%, var(--ps-card)); border-radius: 12px; padding: 12px 14px; margin-top: 14px; }
+body.dark .ps-oral-card { border-color: #1e3a8a; background: rgba(30, 58, 138, 0.15); }
+.ps-oral-header { color: #1d4ed8 !important; border-bottom-color: #bfdbfe !important; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+body.dark .ps-oral-header { color: #93c5fd !important; border-bottom-color: #1e3a8a !important; }
+.ps-lang-picker { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.ps-lang-lbl { font: 600 10.5px system-ui; color: var(--ps-muted); margin-right: 2px; }
+.ps-lang-btn { background: var(--ps-card); border: 1px solid var(--ps-line); border-radius: 6px; font: 700 10.5px system-ui; padding: 3px 7px; color: var(--ps-ink); cursor: pointer; transition: .12s; }
+.ps-lang-btn.active { background: #2563eb; color: #fff; border-color: #2563eb; }
+.ps-oral-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 8px; }
+.ps-oral-bilingual { grid-template-columns: 1fr 1fr; }
+@media (max-width: 640px) { .ps-oral-bilingual { grid-template-columns: 1fr; } }
+.ps-oral-col { background: var(--ps-card); border: 1px solid var(--ps-line); border-radius: 9px; padding: 10px 12px; }
+.ps-oral-lang-title { font: 800 11.5px system-ui; color: #2563eb; display: flex; align-items: center; gap: 5px; margin-bottom: 8px; }
+.ps-oral-lang-title .material-symbols-rounded { font-size: 16px; }
+body.dark .ps-oral-lang-title { color: #60a5fa; }
+.ps-oral-list { margin: 0; padding-left: 18px; }
+.ps-oral-list li { font-size: 11.5px; line-height: 1.45; margin: 4px 0; color: var(--ps-ink); }
+.ps-oral-alert { color: var(--ps-danger) !important; font-weight: 700; }
+
+/* Doctor Clinical Notes */
+.ps-doctor-notes-card { border: 1px solid var(--ps-line); background: color-mix(in srgb, var(--ps-primary) 3%, var(--ps-card)); border-radius: 12px; padding: 12px 14px; margin-top: 14px; }
+.ps-doc-notes-h { color: var(--ps-primary) !important; }
+.ps-note-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.ps-note-chip { background: var(--ps-card); border: 1px solid color-mix(in srgb, var(--ps-primary) 30%, var(--ps-line)); border-radius: 999px; font: 600 10.5px system-ui; color: var(--ps-primary); padding: 3px 9px; cursor: pointer; transition: .12s; }
+.ps-note-chip:hover { background: color-mix(in srgb, var(--ps-primary) 10%, var(--ps-card)); }
+.ps-note-chip:active { transform: scale(0.96); }
+.ps-note-textarea { width: 100%; min-height: 80px; border: 1px solid var(--ps-line); border-radius: 9px; padding: 8px 10px; font: 500 12.5px system-ui; background: var(--ps-card); color: var(--ps-ink); resize: vertical; outline: none; }
+.ps-note-textarea:focus { border-color: var(--ps-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ps-primary) 18%, transparent); }
+.ps-note-footer { display: flex; align-items: center; justify-content: flex-end; margin-top: 6px; }
+.ps-note-toggle { display: inline-flex; align-items: center; gap: 6px; font: 600 11px system-ui; color: var(--ps-muted); cursor: pointer; }
+.ps-note-display { font-size: 11.5px; line-height: 1.5; color: var(--ps-ink); white-space: pre-line; background: var(--ps-card); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--ps-line); }
+
+/* Print Footer on Sheet */
+.ps-foot-print { margin-top: 16px; padding-top: 12px; border-top: 1.5px solid var(--ps-primary); display: flex; flex-direction: column; gap: 6px; }
+.ps-foot-brand { display: flex; align-items: center; gap: 8px; }
+.ps-foot-logo { color: var(--ps-primary); display: flex; align-items: center; }
+.ps-foot-brandtext { display: flex; flex-direction: column; line-height: 1.2; }
+.ps-foot-brandtext b { font: 800 12px system-ui; color: var(--ps-primary); }
+.ps-foot-brandtext span { font: 500 9.5px system-ui; color: var(--ps-muted); }
+.ps-foot-disclaimer { font-size: 9px; color: var(--ps-muted); line-height: 1.35; background: color-mix(in srgb, var(--ps-primary) 4%, var(--ps-card)); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--ps-line); }
+.ps-foot-meta { font-size: 8.5px; color: var(--ps-muted); text-align: center; letter-spacing: .02em; }
+
+/* Modals */
+.ps-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 16000; display: flex; align-items: center; justify-content: center; padding: 16px; animation: psFadeIn .18s ease; }
+@keyframes psFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.ps-modal-card { background: var(--ps-card); border: 1px solid var(--ps-line); border-radius: 16px; width: 100%; max-width: 480px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3); overflow: hidden; animation: psPopIn .2s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes psPopIn { from { transform: scale(0.95); } to { transform: scale(1); } }
+.ps-modal-h { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--ps-line); }
+.ps-modal-title { font: 800 15px system-ui; color: var(--ps-ink); display: flex; align-items: center; gap: 8px; }
+.ps-modal-title .material-symbols-rounded { font-size: 20px; color: var(--ps-primary); }
+.ps-modal-close { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--ps-muted); border-radius: 6px; padding: 4px; display: grid; place-items: center; }
+.ps-modal-close:active { background: color-mix(in srgb, var(--ps-ink) 10%, transparent); }
+.ps-modal-body { padding: 16px 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.ps-modal-foot { padding: 12px 18px; border-top: 1px solid var(--ps-line); display: flex; justify-content: flex-end; gap: 10px; background: color-mix(in srgb, var(--ps-primary) 3%, var(--ps-card)); }
+.ps-modal-label { display: flex; flex-direction: column; gap: 5px; font-size: 11.5px; font-weight: 700; color: var(--ps-muted); }
+.ps-modal-label span, .ps-modal-label-span { font: 700 11px system-ui; color: var(--ps-muted); }
+.ps-modal-label input, .ps-modal-label select, .ps-modal-label textarea { width: 100%; min-height: 40px; border: 1px solid var(--ps-line); border-radius: 9px; padding: 8px 12px; font: 600 13px system-ui; background: var(--ps-card); color: var(--ps-ink); outline: none; }
+.ps-modal-label textarea { min-height: 64px; resize: vertical; }
+.ps-modal-label input:focus, .ps-modal-label select:focus, .ps-modal-label textarea:focus { border-color: var(--ps-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ps-primary) 18%, transparent); }
+.ps-modal-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ps-modal-info { background: color-mix(in srgb, var(--ps-primary) 8%, var(--ps-card)); border: 1px solid color-mix(in srgb, var(--ps-primary) 22%, transparent); border-radius: 9px; padding: 8px 12px; font-size: 12px; color: var(--ps-ink); }
+.ps-modal-subinfo { font-size: 10.5px; color: var(--ps-primary); margin-top: 2px; }
+.ps-quick-pct-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: -4px; }
+.ps-quick-lbl { font: 600 10px system-ui; color: var(--ps-muted); }
+.ps-pct-btn { background: color-mix(in srgb, var(--ps-primary) 10%, var(--ps-card)); color: var(--ps-primary); border: 1px solid color-mix(in srgb, var(--ps-primary) 30%, transparent); border-radius: 6px; font: 700 10.5px system-ui; padding: 3px 8px; cursor: pointer; }
+.ps-pct-btn:active { transform: scale(0.96); }
+.ps-pct-btn.on { background: var(--ps-primary); color: #fff; border-color: var(--ps-primary); }
+.ps-page { box-sizing: border-box; width: 100%; border: 1.5px solid var(--ps-primary, #0f766e); border-radius: 6px; padding: 16px 20px; margin-bottom: 16px; }
+.ps-page-break-deliberate { display: none; }
+.ps-page2-header { display: none; }
+.ps-quick-reasons { display: flex; flex-wrap: wrap; gap: 4px; margin-top: -4px; }
+.ps-reason-chip { background: var(--ps-card); border: 1px solid var(--ps-line); border-radius: 6px; font: 600 10px system-ui; color: var(--ps-muted); padding: 2px 7px; cursor: pointer; }
+.ps-reason-chip:active { transform: scale(0.96); }
+.ps-brand-logo-section { display: flex; flex-direction: column; gap: 8px; }
+.ps-brand-logo-preview-wrap { border: 1px dashed var(--ps-line); border-radius: 10px; padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: color-mix(in srgb, var(--ps-primary) 2%, var(--ps-card)); }
+.ps-brand-logo-preview { max-width: 60px; max-height: 60px; object-fit: contain; }
+.ps-brand-logo-placeholder { display: flex; align-items: center; gap: 8px; color: var(--ps-muted); font-size: 11px; }
+.ps-brand-logo-placeholder .material-symbols-rounded { font-size: 24px; }
+.ps-file-input { display: none; }
+.ps-brand-logo-upload-wrap { display: flex; }
+
 @media print {
   body.ps-open > *:not(.ps-overlay) { display: none !important; }
   .ps-overlay { position: static !important; display: block !important; background: #fff !important; --ps-card: #fff; --ps-ink: #000; --ps-muted: #333; --ps-line: #999; }
-  .ps-header, .ps-actionbar, .ps-sig-actions, .ps-vh, .ps-verify .ps-chk input, .ps-emr-bar { display: none !important; }
+  .ps-header, .ps-actionbar, .ps-sig-actions, .ps-vh, .ps-verify .ps-chk input, .ps-emr-bar, .ps-modal-backdrop, .ps-table-actions, .ps-dose-edit-btn, .ps-inst-editbtn, .ps-lang-picker, .ps-tox-actions, .ps-note-chips, .ps-drug-del-btn, .ps-tox-del-btn, .ps-note-footer { display: none !important; }
   .ps-wrap { height: auto !important; }
   .ps-scroll { overflow: visible !important; padding: 0 !important; }
   .ps-sheet { border: none !important; box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; padding: 8mm 6mm !important; }
@@ -199,5 +327,12 @@ body.dark .ps-warns { color: #fbbf24; background: #3a2e05; border-color: #78350f
   .ps-table th, .ps-table td { border: 1px solid #666 !important; }
   .ps-chk-box { border-color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .ps-sig-pad canvas { border: 1px solid #000 !important; }
+  .ps-page-break-auto, .ps-page { page-break-inside: avoid; break-inside: avoid; }
+  .ps-page-break-deliberate { display: block !important; page-break-before: always !important; break-before: page !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
+  .ps-page2-header { display: flex !important; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #0f766e; padding-bottom: 5px; margin-bottom: 12px; font-size: 8.5pt; color: #64748b; font-weight: 600; }
+  .ps-cards { grid-template-columns: 1.15fr 1fr !important; }
+  .ps-cards-col2 { display: flex !important; flex-direction: column !important; gap: 8px !important; }
+  .ps-table td, .ps-table th, .ps-table tr { page-break-inside: avoid !important; break-inside: avoid !important; }
   @page { size: A4; margin: 8mm; }
 }
+

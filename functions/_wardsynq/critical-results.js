@@ -155,7 +155,6 @@ function classify(obs, limits) {
 }
 
 /** PURE. One loop per (report, analyte): a re-ingested result reopens nothing and duplicates nothing. */
-const LIST_CAP = 500;
 
 function loopIdFor(reportId, code) {
   const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -436,7 +435,7 @@ async function listCriticalLoops(request, env, ctx) {
   try {
     rows = str(ctx.patientId)
       ? await svc.byPatient("CriticalResultLoop", str(ctx.patientId))
-      : await svc.list("CriticalResultLoop", LIST_CAP);
+      : (await svc.listAll("CriticalResultLoop", { max: 50000, throwOnTruncate: true })).rows; // R4-2: every record (listAll, paged; was the oldest N), past 50,000 refused rather than short
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), loops: [] }; }
 
   const nowMs = Date.parse(str(ctx.now)) || Date.now();
@@ -456,9 +455,7 @@ async function listCriticalLoops(request, env, ctx) {
   }
   /* LT-26: ONE definition of "open critical results": state open, not yet acknowledged. The Map tile and the ward
    * home already counted that; the boards counted every loop not closed. `open` is that number, for every screen. */
-  const truncated = !str(ctx.patientId) && (rows || []).length >= LIST_CAP;
-  return { ...base, ok: true, loops, open: loops.filter((l) => l.state === "open").length,
-    ...(truncated ? { partial: true, partialWarning: `Only the first ${LIST_CAP} critical results were read; there may be more.` } : {}) };
+  return { ...base, ok: true, loops, open: loops.filter((l) => l.state === "open").length };
 }
 
 export {

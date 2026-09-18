@@ -1,0 +1,133 @@
+{
+  "site": "gist",
+  "name": "Gastrointestinal stromal tumour (GIST)",
+  "system": "Oncology / Gastrointestinal",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "GIST is staged with site-aware 8th-edition TNM (gastric vs small intestinal) layered on mitotic-rate risk stratification (Miettinen/AFIP and modified NIH criteria). T is size-based (2, 5 and 10 cm cutoffs) and identical across sites, but a small-bowel GIST of the same size and mitotic rate carries substantially higher risk than a gastric one, so primary site and mitotic index (5 or fewer vs more than 5 mitoses per 5 sq mm, formerly per 50 HPF) determine adjuvant imatinib decisions. Nodal metastasis is rare; tumour rupture upstages prognosis to high risk regardless of size.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour 2 cm or smaller in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour larger than 2 cm up to 5 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour larger than 5 cm up to 10 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumour larger than 10 cm in greatest dimension",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis (the usual case)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Regional lymph node metastasis (rare; seen with SDH-deficient and paediatric-type GIST)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis (liver and peritoneum most common; lung/bone rare)",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "I",
+          "t": "T1 or T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Gastric, low mitotic rate: very low/low risk",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Gastric intermediate risk (size 5-10 cm, low mitoses)",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T4",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Gastric high risk by size; small-bowel T3-T4 upstaged by site",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "any T",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Any nodal metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis; tumour rupture behaves as high risk",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Perigastric, periduodenal, mesenteric and omental nodes draining the primary site; nodal sampling is not routine because spread is haematogenous/peritoneal. Distant peritoneal and hepatic deposits are M1.",
+      "histologicGrade": "Mitotic index, not classic G1-G3: 5 or fewer vs more than 5 mitoses per 5 sq mm (reported alongside total area counted). Tumour rupture (spontaneous or intraoperative) is recorded as an independent high-risk event.",
+      "histopathologicTypes": "Spindle-cell (most common), epithelioid (often PDGFRA-mutant or SDH-deficient), and mixed subtypes. Molecular: KIT exon 11/9, PDGFRA (including D842V), SDH-deficient (including Carney triad/Carney-Stratakis), NF1-associated, BRAF-mutant, NTRK-rearranged.",
+      "prognosticFactors": [
+        "Primary site (gastric favourable vs small bowel/rectal higher risk)",
+        "Mitotic index (5 per 5 sq mm cutoff)",
+        "Tumour size (2/5/10 cm cutoffs)",
+        "Tumour rupture",
+        "KIT vs PDGFRA D842V vs SDH-deficient genotype (imatinib sensitivity)",
+        "Margin status and completeness of resection"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

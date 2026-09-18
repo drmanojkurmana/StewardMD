@@ -5,6 +5,189 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-18 · Related figures under a MaiK answer: a search result, never hosted or generated
+
+**Owner:** show the image a trusted medical page carries for the topic "just like Google", with the
+link below it, without spending tokens; "we never host, cache or regenerate, we just show the search
+result image and the link which on click takes them there." TinyFish is already paid for and already
+restricted to `TRUSTED_MEDICAL_DOMAINS`, so it is the search; Google image search was considered and
+not adopted (new vendor, new key, per-query cost).
+
+**Decision.** `GET /api/ai/figures?q=<topic>` (`functions/_figures.js`): TinyFish returns the
+trusted pages (its results carry title/snippet/url only, no images), the function reads each page's
+HTML once and `pickFigure()` chooses the figure the page is built around (alt/caption/src matching
+the topic, `<figure>` context, size; logos, icons, banners, pixels and SVG/GIF rejected; `og:image`
+only when it names the topic). Only URLs leave the function. The client (`home.js
+maikFiguresStrip`) shows up to three cards under the answer, image loaded by the phone straight from
+the source with `referrerpolicy="no-referrer"`, caption = site + title, tap opens the source page. A
+hotlink the source blocks removes its own card. Cloud engine and online only; flag
+`smd_maik_figures` ("0" off). Zero model tokens: the query is the canonical topic the client already
+computed.
+
+**Trade-off / status.** Hit rate will be uneven (long articles seldom expose their figure; single-
+figure pages like the UNC AUA algorithm do), and the rule is the OCR rule: show nothing rather than
+a wrong image. No KV cache of results by the owner's instruction, so each answer costs one TinyFish
+query plus up to five page reads. Shipped behind the flag. Tests: `test/maik-figures.test.mjs`.
+
+## 2026-09-19 · Offline MaiK must reply like MaiK: audit findings and what shipped
+
+**Owner:** "audit offline AI models, they should reply like MaiK native models."
+
+**Finding.** The on-device models were wrapped in a second, weaker MaiK: (1) `maik-local.js`
+discarded the cloud package's `topicMatch` and re-retrieved from the book by word overlap, so
+"melena workup" grounded on a dermatitis chunk containing "workup"; (2) answers carried pipeline
+verdicts ("Left out: 3 statements") in the clinical text; (3) `_brainAugment` skipped the local
+engine entirely, so no follow-up chips, workflow steps or tool launchers; (4) 20 to 70 s per answer
+on Lite; (5) Cortex leaked its SFT template and once returned nothing; (6) duplicated render and an
+export full of button labels; (7) the per-model battery had never been run.
+
+**Shipped.** (1) Two RAGs chained: the cloud topic match is the ROUTER (which disease), the
+on-device book is the CORPUS; the router's disease name rides in the BM25 query and is a required
+anchor (`retrieveGrounding(packId, question, topic)`, `test/maik-rag-router.test.mjs`).
+(2) Verdict moved to `result.grounding.removed` and the meta line. (3) Chips, workflow and tools
+render on device; only page-cited verify lines stay off. (6) Export strips all UI. Earlier the same
+day: greetings never hit a model, leaked-template guard, continuity on every engine, dose follow-up
+section fix.
+
+**Open.** (4) Latency: fewer passages, prefix-stable prompt for KV reuse, token streaming in the UI.
+(5) Explicit ChatML wrapper for Cortex when the GGUF has no template; make `EMPTY_ANSWER` visibly
+render. (6) The duplicated dengue render (replay + final on the local path) needs a repro.
+(7) Run `bench/rag-grounding/run.mjs --live` on the phone as the gate for every offline change.
+
+## 2026-09-19 · Ternary Bonsai 2 27B: not shippable on our llama.cpp; pack stays on Bonsai 27B v1
+
+**Owner:** update the Bonsai packs to PrismML's 17 Sep 2026 release (Ternary Bonsai 2 27B, Qwen3.8-27B
+base, 98.2% of full precision, 5.9 GB class, Apache 2.0).
+
+**Finding.** Every official GGUF (`prism-ml/Ternary-Bonsai-2-27B-gguf`: PTQ1_0 5.95 GB, PQ2_0 7.21 GB;
+`-gguf-dev`: Q2_0 "prism-fork-required" 7.63 GB) is a fork-only type. The model card states stock
+llama.cpp rejects PTQ1_0/PQ2_0 as unknown types and lacks the Hadamard activation runtime. Our
+`capacitor-llama` plugin links mainline b10502. No mainline g64 file was published (the 8B ternary
+has one, which is why `bonsai-ternary-8b` works). There is no Bonsai 2 at 8B or 4B.
+
+**Decision (same day, owner: "go ahead").** Move `local-plugins/capacitor-llama` to PrismML's fork,
+release `prism-b10685-7dffb15` (mainline b10685 base, so a superset of b10502: every existing pack is
+a plain GGUF and keeps loading). iOS: `Package.swift` binaryTarget now points at the fork's
+xcframework (322,127,363 B, checksum `c9c83d40…`; same `build-apple/llama.xcframework/` layout, and
+it adds simulator slices). Android: the `llama-cpp` submodule URL is the fork and the pointer is the
+tag's commit `7dffb15`. New pack `bonsai2-27b` ("MAiK Bonsai Max 2", PTQ1_0, 5,946,648,928 B, sha256
+`53107f53…`), tier 5.5, 12 GB floor, text-only for now (the repo's Q8_0 mmproj is noted, not wired).
+
+**Verification status.** Both apps were rebuilt against the fork. Still to prove on a phone: an
+existing pack (Lite, Cortex, Bonsai 8B) answering on the fork runtime, then the 5.95 GB pack itself
+loading on a 12 GB device. Until that is done the new pack should not be pushed to devices.
+
+## 2026-09-18 · A dose question is a database lookup, not a model question
+
+**Owner:** "tell me dose of ondansetron … we already have the drug database it can redirect … dose of
+parecetmal it should understand correct spelling" — and, on the drug source: "check drug database
+medapi, all drugs in the world are there."
+
+**Decision.** `kb/ai/drug-dose.js` (`window.SMD_DOSE`) intercepts dose-intent questions in
+`maik-engine.js route()` — BEFORE the engine choice, so cloud and on-device behave identically — and
+answers from `window.MEDAPI`: `searchCompositions` / `searchBrands` resolve the molecule, `structured`
+supplies the figures (`gold.dosage` rows, else `adult_dose` / `ped_dose` / `renal_adjust` /
+`hepatic_adjust` / `pregnancy`). **No model is in the loop for the numbers**, so a dose cannot be
+invented. The adult answer also carries the renal and hepatic lines, because a dose question is
+rarely only about the adult dose.
+
+**Spelling.** The full-text search finds nothing for "parecetmal", so the router re-searches on the
+first 4 then 3 letters — a typo is almost never in them — and fuzzy-matches inside that short
+candidate list with the existing `DrugFuzzy` (Scan-Meds'), widened to distance 3 for a TYPED name.
+A corrected or brand-resolved name is always STATED back ("You typed …", "Pantocid is Pantoprazole"),
+never silently substituted.
+
+**Trade-off / status.** Fails OPEN at every step: no dose intent, no confident molecule, or no dose
+text in the record returns null and the normal grounded answer runs. Online only — the offline drug DB
+carries brands and compositions, not the structured label — so offline the KB-grounded model answers
+as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `test/maik-engine.test.mjs`
+(4, including "the on-device model is never asked for the number"), and the real-browser
+`test/run-maik-dose.mjs` (9 checks against the shipped bundle).
+
+## 2026-09-18 · MedMO-4B ships as MAiK Cortex, RAG-connected like every other text pack
+
+**Decision.** The `medmo-4b` pack is labelled **MAiK Cortex** in the offline model list; `actual`
+keeps the honest provenance (MedMO-4B, MBZUAI, Qwen3-VL-4B base, Q4_K_M). Its `CAPS.kb` is true, which
+is exactly what the capability-based `maik-local.ragEligible()` reads, so every Cortex answer goes
+through retrieval and the claim-level grounding verifier (`kb/ai/maik-grounding.js`) — unsupported
+statements are removed or qualified, never the whole answer, and the evidence gate is untouched.
+
+**Trade-off / status.** The pack id stays `medmo-4b` so existing downloads and prefs keep working;
+only the visible label changed. Still UNVERIFIED on device: a qwen3vl-architecture GGUF loading
+text-only in the plugin's llama.cpp has not been run on a phone, and the per-model grounding battery
+(`bench/rag-grounding/run.mjs --live`) has not been run for it. Pinned in `test/maik-models.test.mjs`.
+
+## 2026-09-18 · On-device MaiK: conversation continuity by default (three live failures)
+
+**Owner:** "I can't treat every question as a new question." Live: "FUO" then "tell me the exact
+definition" got "what definition?"; "treatment of hypertension" then "tell me doses" gave doses for
+drugs the model had not named; a correction ("wrong, it's nitrofurantoin") started a new conversation.
+
+**Root causes, in order of weight:** (1) home.js attaches history as `{q, a}` pairs (`_maikTurns`,
+the cloud's shape) but `maik-local.js buildPrompt()` read `{role, text}`, so every turn rendered as an
+empty "Doctor:" line: the model never saw a previous turn, whatever the follow-up detector said.
+(2) `isFollowUp()` only knew a short aspect word list, so "exact definition" and any correction that
+named a drug were treated as new subjects. (3) The previous answer was clipped to 180 characters, which
+lost the drug list a "tell me doses" refers to. (4) Retrieval used only the current question, so a
+follow-up had no topic anchor, grounded nothing, and the answer came from the model's weights.
+
+**Fixes (maik-local.js, tests in test/maik-continuity.test.mjs):** `histTurns()` reads both shapes.
+`continues(q, hist)` makes continuity the default: a question starts fresh only when it names a NEW
+subject (a content word that is not filler, aspect, or a reference to the previous turn, and appears
+nowhere in the previous exchange); a correction always continues. The fever -> "Polycystic Kidney
+Disease" topic-bleed regression that made history opt-in stays fixed and pinned. `carry()` keeps the
+previous answer's opening line and its bullet/figure lines (the drug list) up to 700 chars, dropping
+citations and footer lines. `ragQuestion()` retrieves on the previous question plus the follow-up, so
+"tell me doses" is grounded on the hypertension passages and checked claim by claim. Prefill cost of
+the carried answer is accepted: continuity was the ask.
+
+## 2026-09-18 · On-device RAG for every text pack; the whole-answer gate replaced by claim-level grounding
+
+**Decision (owner):** RAG eligibility is a CAPABILITY (`maik-models.js CAPS[id].kb`, read by
+`maik-local.js ragEligible()`), not the `packId === "maik-lite"` allow-list, and every text pack now
+has `kb: true`, including the new text-only `medmo-4b` (MBZUAI MedMO-4B Q4_K_M, 2,716,064,480 bytes,
+no vision projector published). This deliberately supersedes the 2026-09-03 reversal that made Bonsai
+ungrounded: that reversal was a reaction to the GATE, not to grounding itself.
+
+**Why the old gate lost half of a larger model's answers:** `evidenceGate` (kept in
+`kb/ai/maik-lite-rag.js` for `webAnswer` and as the fallback when the new module is absent) failed
+the WHOLE answer when any number or drug-suffixed token was not literally in the passages: "1 g" for
+"1000 mg", "twice daily", "7-10 days", an alternative named in passing. Paraphrase was punished as
+hallucination.
+
+**What replaced it:** `kb/ai/maik-grounding.js` (`window.SMD_MAIK_GROUND`, ES5, deterministic, no
+dependencies). The answer is split into claims; each claim is verified on FACTS: numbers are
+unit-normalised (mass to mg, frequency/route words to one token so bd == twice daily == every 12
+hours), a drug+dose pair must co-occur in ONE passage (a dose from passage A on a drug from passage B
+is not support), a different dose for that drug in the evidence is a CONTRADICTION (removed, never
+qualified), prose claims need concept overlap with a passage (stemmed, UK/US, abbreviations expanded
+through the retrieval module's own table), never phrase overlap. Figures from the clinician's own
+question stay allowed, as before. Outcomes per claim: supported (with [n] provenance to the passage),
+clinician, unsupported (left out; or under "Not in the StewardMD Knowledge Base (general model
+knowledge, unverified):" only when `localStorage smd_maik_general_knowledge=1`, off by default),
+contradicted (left out), meta (verify line etc., kept, never cited). If NOTHING is supported the
+model gets ONE regeneration constrained to the reference material (`_regen`), and only then does the
+reference passage stand in for the answer. The gate was not weakened: nothing the passages do not
+support is ever shown as Knowledge-Base-backed, and a count of left-out statements is printed.
+
+**Measured** (`test/maik-grounding-verifier.test.mjs`, `bench/rag-grounding/run.mjs`, 31 gold-labelled
+claims across supported paraphrase, unsupported, partial, multi-source, conflicting passages,
+numerical/dosage, terminology): valid grounded claims accepted 100%, false rejection 0%, unsupported
+blocked 100%, precision 1.0, recall 1.0; every contradicted dose classed as contradicted, not merely
+unsupported. The two paraphrases the old gate rejected are accepted by name in the suite.
+
+**NOT measured yet:** per-model behaviour on real answers (MaiK Lite, MedMO-4B, MedGemma, Bonsai).
+`bench/rag-grounding/run.mjs --live` asks each installed pack on the connected phone and records the
+answers; `--answers <file>` replays a recording. No phone was attached when this shipped, so the
+per-model table is empty until someone runs it. Per-model "false rejection" additionally needs a
+clinician to gold-label each free-form answer; the battery prints what was removed for that review
+rather than guessing. `medmo-4b` loading text-only (qwen3vl GGUF, no mmproj) in the plugin's
+llama.cpp is also unverified on device.
+
+**Trade-off accepted:** concept-overlap support (COV_MIN 0.5 of a claim's stemmed content tokens in one
+passage) is a heuristic; it errs toward leaving a correct prose sentence out, never toward keeping an
+unsupported dose in. Tune COV_MIN from the live battery, not from intuition.
+
 ## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
 
 **Decision:** `recommendFor()` now recommends Private Device OCR - relabeled "Hybrid" in the UI whenever
@@ -7814,3 +7997,517 @@ of compliance.js is untouched.
   a 12-digit Aadhaar-shaped value in name or address refuses the row and is masked in the mapping sample.
 - ponytail ceilings: 100 patients / 500 prices / 500 suppliers per run (Worker request budget); a Price list or supplier
   list of 500 or more cannot rule out a match and refuses the commit.
+
+## 2026-09-17 Scale ceilings: whole Price list, station queues by status, imports in runs, orders name a store (branch scale-ceilings, R3-1)
+
+- Firestore filters: several EQUALITY filters in one runQuery (compositeFilter AND) are served by merging the automatic
+  single-field indexes; no composite index is added (Firestore "Index overview": compound equality queries run on
+  single-field indexes). Ordering stays on __name__ only, which needs no index. `fsQuery` opts.where now takes one
+  `{field, value}` or an array. firestore.indexes.json has no exemption for q_orders or q_tariff fields.
+- Paging lives in `_clinic_billing_store.js` (`readAll`, pages of 500 by document name) rather than a new
+  `_fbfirestore.js` export, because 119 test files mock that module's named exports.
+- Price list (`listTariff`): every page; past 20,000 rows it THROWS, so wsqTariff and the catalogue say "could not be
+  read" instead of billing the rest as "no price set". A partial Price list is never returned.
+- Station queues (`billingQueue` by orgId+status ordered; `pharmacyQueue` by orgId+status paid+kind medication): every
+  page up to 5,000, then `truncated: true` and the cap, shown on /clinic-billing ("Showing the first N only"). The JS
+  state filter stays. `ordersForPatient` also pages (it stopped at 200) and throws past 5,000.
+  DEVIATION: /clinic-billing is the untranslated StewardMD station page (no i18n catalog), so its note is English like
+  the rest of that page.
+- Legacy import: the Price list is read whole and suppliers are looked up by id (`RecordService.histories`), so the
+  "500 or more refuses the commit" ceiling and `store_too_large_to_check` are gone. Per-run row caps stay (Worker
+  budget); a larger file is sent whole with `run {from,to}` and the Import screen runs it part by part (dry runs, one
+  merged report, commits run by run with each run's planId; a stop names what was imported and a new dry run adds only
+  what is missing). Repeats are checked across the whole file. The name + date of birth pool stays 500 (no name/DOB
+  index exists; identifiers only), and is now actually the NEWEST 500 as the screen said (`RecordService.list` opts.newest;
+  it was oldest first).
+- Purchase orders: optional `location` (free text, as a receipt's location is; not validated against StoreLocation
+  because pharmacy locations are free text). An indent back-order is raised for the indent's central store. Reorder
+  drafts count outstanding only against the order's store; an order naming no store keeps counting against every store
+  holding the item and is marked (`onOrderNoStore`).
+- Not changed: `revenueToday` still reads the newest 1,000 invoices of the org (dashboard tile, not a bill).
+
+## 2026-09-17 Formulary screen: editor and CSV load through one checked door (branch formulary-screen, R3-2)
+- Routes: GET/POST /org/formulary (editor, whole list) and POST /org/formulary-import (CSV: map, then dry run with an
+  explicit mode merge or replace). Both dry run first with a row-by-row report; a commit needs a reason, confirmCount equal
+  to the dry run's change count and its planId (which covers the list as it stood), and any problem refuses the whole save.
+- /org/update refuses wardsynq.formulary and requireReasonOffFormulary (422 use_formulary_route). A group recommendation
+  carrying a formulary is checked when set and again on adoption.
+- Capability: no pharmacy or formulary capability exists (verified in _queue_roles.js). Chosen: staff.admin AND
+  order.verify, which is the admin role and the owner; hr (staff.admin only) and pharmacy (order.verify only) get 403.
+  A pharmacist who should edit the formulary needs the admin role until a formulary.manage capability is decided.
+- Retire: an entry with retired:true stays stored and matches no order (formulary.js resolveFormulary skips it);
+  controlled-drugs.js still reads its controlled flag.
+- Audit: one org chain row (org:formulary) in the same commit as the change, naming added (+), changed (~) and removed (-)
+  entries by drug or code with counts, reason and plan id. ponytail: the chain keeps 200 characters of meta, so a large
+  load names its first entries and counts the rest.
+- ponytail ceilings: 3000 entries (the list lives in the org document, 1 MiB shared with every setting); a 2 MB CSV.
+- No formulary content ships.
+
+## 2026-09-17 Dialysis unit: stations, haemodialysis sessions, dialyzer reuse, URR (branch dialysis-unit, R3-4)
+
+- functions/_wardsynq/dialysis.js; screen wardsynq/site/pages/dialysis.js (home map, Clinical, "Dialysis unit").
+- Settings `wardsynq.dialysis` {stations[{id,name,serologyGroup}], serologyGroups[], maxReuses}, no default for any (owner
+  O13). GET/POST /org/dialysis-settings, staff.admin, reason required, audit names what changed; validated on save and on
+  every read. Unset serology groups = no segregation check, and the booking says "not-configured". Unset maximum = a reuse
+  cannot be recorded. When groups are set every station must name one; a patient with no recorded group is refused.
+- DEVIATION from the brief ("stations are hospital resources"): stations live in the dialysis settings, not in
+  `wardsynq.resources`, because that list has no screen. They are still booked through resource-booking.js bookResource
+  (same clash refusal), as resource ids `dialysis-<id>`; the generic /ward/book-resource does not know them, so the
+  serology check cannot be bypassed. resource-booking.js unchanged. Stations do not show on the Scheduling screen.
+- Records (emr.vitals write scope, VITALS_TYPES): DialysisSession (versioned; fields not sent keep their value),
+  DialyzerEvent (first-use / reuse / discard with reason), DialysisSerology (group from the unit's list, test date).
+  Routes: GET /ward/dialysis-unit and /ward/dialysis-patient (emr.view); POST /ward/dialysis-session, /ward/dialyzer-event,
+  /ward/dialysis-serology, /ward/dialysis-book (emr.vitals). Cashier 403.
+- Post weight above pre with achieved UF > 0 is refused until the nurse gives a reason. Anticoagulation stays in orders and
+  eMAR. Urea is a linked laboratory Observation of the same patient or a value with unit and source.
+- URR = (pre - post) / pre x 100, one decimal, computed on read with inputs shown; missing input, different units or a
+  non-positive pre urea is "not computable", never 0. Citation: Lowrie and Lew, Am J Kidney Dis 1990;15(5):458-82; NKF KDOQI
+  haemodialysis adequacy 2015 update, Am J Kidney Dis 2015;66(5):884-930 (both checked on PubMed). Kt/V not built (owner O12).
+- ponytail ceilings: reads cap at 1000 records per type with a truncation warning; serology group "tag" is exact string
+  match; a station needs a group whenever groups are set (no untagged general station).
+
+## 2026-09-17 Cashless desk: stays whose pre-authorisation needs action (branch cashless-desk, R3-5)
+- Separate route GET /ward/cashless-stays (billing.view), not a seventh list inside /ward/rcm-worklists: it runs charge
+  capture per stay, and the claims desk must stay readable when that fails. ward.js loads both into the Claims desk.
+- A stay is listed when it is open (in-progress, an admission class), its StayPayer names a payer whose contract kind is
+  insurer, TPA or government scheme (a payer not in the list or with no kind recorded stays on and says so; corporate and
+  other are off), and one of: no pre-authorisation, requested (hours since recorded), refused, expired (state, or
+  validUntil before today on the hospital's clock), validUntil before the ExpectedDischarge date, approved amount not
+  recorded, approved amount below the running bill, the bill or discharge date unreadable, or an open payer query.
+- DEVIATION from the brief ("expected discharge date (DischargeMilestone if recorded)"): DischargeMilestone has no expected
+  date; the treating team's date is the ExpectedDischarge record. billing.view and billing.charge now READ ExpectedDischarge
+  (actor.js DISCHARGE block; test/wardsynq-record-service pinned). No write widened.
+- Which pre-authorisation: PreAuthorisation carries no encounterId. The one the stay's active package links wins; else the
+  newest by decidedAt of the patient's for this payer (or the insurer a TPA acts for, or none named) recorded after the
+  patient's previous stay ended. ponytail: two separately authorised treatments on one stay show the newer only.
+- Running bill: charged total of live bills raised for the stay; with none, the charge-capture total now (stated as not yet
+  billed, with the count of unpriced items). Unreadable anything is said, never zero. Capture runs for 50 stays per load.
+- Nothing is sent to a payer.
+
+## 2026-09-17 Pre-admission intake on the portal (branch pre-admission-intake, R3-3)
+
+- A form definition may say `audience: "patient"` (wardsynq-forms.js). Absent means staff. A patient form cannot name
+  staff roles. WardSynQ ships no questions: the hospital writes the form in Admin > Forms (JSON) and publishes it.
+- Portal routes POST /api/portal/intake-forms and /api/portal/intake-submit: session first, patient from the grant, new
+  grant section `forms` (a proxy needs it granted). Forms are listed and accepted only while the patient holds a waiting
+  AdmissionRequest with `plannedFor`; the submit names the request, checked to be the session patient's. A staff form
+  is refused 403 `not_for_patients`.
+- Stored as FormResponse `wsq-intake-<formKey>-<requestId>` with `origin: "patient"` and `reviewState`
+  submitted/accepted/returned. DEVIATION from the brief's `source: "patient"`: `source` on a record is its provenance
+  system; AppointmentRequest already marks a patient's own request with `origin: "patient"`. No terminology codes are
+  attached to patient answers. A resubmit is a new version until accepted; returned reopens it.
+- Staff: GET /ward/intake-responses (emr.view), POST /ward/intake-review (emr.treat, accept or return with a reason,
+  must name the version read). Accepting writes that FormResponse only; nothing goes into allergies, medicines or
+  problems. pathways.js never counts a patient-origin FormResponse as an assessment step, even once accepted.
+- Screen: ward.js bed waiting list (planned date input on "Ask for a bed"; "Pre-admission forms" on a planned row).
+- Privacy: portal access for a child is already gated at enrolment (DPDP r.10 via privacy-law.js childGate); intake is
+  for the patient's own care, so no second gate. The section points to the hospital's privacy notice on the same page.
+  Nothing leaves WardSynQ.
+- Not built: offering forms for a booked appointment (the brief's optional hospital setting); no setting exists, so it
+  behaves as off. Staff form-submit still accepts a patient-audience form as a staff-completed response.
+
+## 2026-09-17 Shared Firestore stores read every page with a ceiling (branch shared-store-caps, R4-3)
+
+- `readAll` moved from `_clinic_billing_store.js` to `functions/_fs_read_all.js` (re-exported by billing), plus
+  `readAllOrThrow` (507 past the ceiling). A new module rather than an import of billing: billing imports the queue
+  engine, and the org, queue and accounts stores need the helper too.
+- Read whole, throwing past the ceiling (never a partial list): beds (10,000), wards, rooms, departments (5,000 each,
+  also the queue engine's token department read), queue tickets per session, ABDM share tickets, staff mappings,
+  sessions (5,000), a patient's tickets for the ABDM link OTP mobile, chart of accounts (5,000).
+- `listSessions` asks by hospitalId AND date (it read the hospital's first 200 sessions ever and filtered by day).
+- Events timeline: verified that `q_events` rows carry no session field (`_q_audit_chain.js eventFields`: ts,
+  hospitalId, ticketId, actor, action, meta). Asked per ticket by hospitalId AND ticketId, 10 queries at a time. Not
+  adding a session field: the chain row's field list is hashed and fixed.
+- `revenueToday`: DEVIATION from the brief's "query paid invoices by orgId+status". Paid invoices grow forever, so that
+  query would reach any ceiling and fail for good. `payInvoice` now stores `paidUtcDay`; the hospital's local day
+  touches at most two UTC dates, each asked by orgId AND paidUtcDay, bounded by paidAt. Clock: `wardsynq.timeZone`
+  (offset at now), else `utcOffsetMinutes`, else IST. Invoices paid before this deploy have no `paidUtcDay`, so only
+  the deploy day's total can be short. A failed read shows "Could not be read" on the doctor app's Revenue today tile
+  (queue.js is the untranslated StewardMD OPD app, not a WardSynQ screen) instead of the tile vanishing.
+- Not changed: accounts `entriesFor` (SCAN 2,000 per period, already flags `partial`), StewardMD followcare and PG log.
+
+## 2026-09-17 Clinical content editors: critical limits, delta limits, autoverify, MAR times, note templates (branch clinical-settings-editors, R4-4)
+- Routes: GET/POST /org/clinical-settings/<setting> for criticalLimits, deltaLimits, autoVerify, marTimes, noteTemplates
+  (functions/_wardsynq/clinical-content-settings.js). The formulary pattern: dry run item by item, any problem refuses the
+  whole save, commit needs confirmCount, planId, a reason and signedOffBy, audited (org:clinical_content) and read back.
+- DEVIATION from the brief: functions/_wardsynq/clinical-settings.js already exists (D11 A, /org/clinical-settings with no
+  suffix), so the new module is clinical-content-settings.js; the suffixed route sits in front of the existing one.
+- Sign-off: wardsynq.clinicalContentSignOff[setting] = { signedOffBy, reason, by, at, planId }, whitelisted in _opd_org.js,
+  written only by this route and shown on the card.
+- /org/update refuses the five keys and clinicalContentSignOff (422 use_clinical_settings_route). A group recommendation
+  carrying any of them is checked when set and again on adoption.
+- Capability: staff.admin AND lab.result (critical, delta, autoverify), order.verify (MAR times), emr.treat (note templates).
+  No settings capability exists; today that is the admin role and the owner only.
+- Checks are the consumers' own readings made strict: codes must be LAB_CODE_SEED codes (a local-name test cannot be
+  configured here); critical limits need a unit and low below high; MAR times HH:MM, in order, and exactly the frequency's
+  default count (the 1-0-1 notation takes TDS times by position); resolveTemplate problems refused.
+- DEVIATION from the brief: "a delta limit without unit" is not checked because lab-delta.js limitFor has no unit field
+  (the change is in the result's own unit and mismatched units are never compared); adding one would store a value nothing reads.
+- Empty is "not configured" exactly as today; the draft starts from what is saved, never from a default. No clinical values ship.
+
+## 2026-09-17 Open census by status and a paged whole-type read (branch census-by-status, R4-1)
+
+- Problem: every roster read (`service.list`) was clamped to 1,000 records, oldest first, and silent. The ward list,
+  nurse worklist, bed board, admission bed clash (200), transfer (200), patient flow, ICU occupancy, ED board, theatre
+  list, downtime pack, waiting list and emergency reconciliation all read encounters that way, discharged stays and OPD
+  visits included (OPD visits ARE Encounters, class OPD, via migrate-encounter.js).
+- Port: new OPTIONAL `pageByType(tenantId, type, {afterSeq, limit, statuses})` -> `{records, next}`, oldest first by
+  each id's latest seq, one page of at most 1,000. Memory and D1; the on-premise sqlite adapter is a binding into
+  D1Repository, so it has it too. An id amended between pages is met again later; the reader keeps the later copy.
+- Service: `listByStatus(type, statuses, max)` pages the open records only, ceiling `OPEN_CENSUS_MAX` 5,000, past it
+  throws `ListCeilingError` code `too_many_open` (never a short census). `listAll(type, {max, throwOnTruncate})` pages
+  every record, default 50,000, hard ceiling 100,000; past max returns `{rows (oldest max), truncated: true}` or throws
+  `too_many_records`. Both govern and audit exactly as `list` (one record.list row). A store without pageByType refuses.
+- Callers moved: the Encounter reads named above now use listByStatus("in-progress"); emergency reconciliation uses
+  listAll (an override outlives the stay) and refuses past the ceiling. A census refusal answers 503 `too_many_open`,
+  written 0: an admission or transfer is refused, not made on a short read. Ward and ED boards name patients from the
+  newest 1,000 Patients plus a read by id for any missing (the oldest-first roster left new patients nameless).
+- Checked, audit uncertainty: `checkMasterBed` reads the bed's administrative state only, not occupancy; occupancy is the
+  census scan plus the bed claim. A stay without a claim (imported, migrated, moved by transfer) is seen by the scan only.
+- ponytail: D1 re-groups every version of the type per page (same GROUP BY as latestByType). The open census is one
+  page; a whole-type read is N/1,000 pages. A latest-version flag or table (audit O20) is the upgrade if that is slow.
+- Left for R4-2: counting and summing callers (quality, security-review, analytics-extract, discharge-milestones,
+  reports, fhir-group, hospital-group and the ledgers) still use list(); they move to listAll. Open OPD visits that never
+  close count against the 5,000 open ceiling; reaching it is visible (503), not silent.
+
+## 2026-09-17 Whole-type reads for reports, registers, ledgers and worklists (branch whole-type-reads, R4-2)
+
+- Problem: after R4-1 about 150 callers still used `service.list(type, N)`, which serves the OLDEST min(N, 1,000) records.
+  Callers asking for 2,000 or 5,000 compared against their own number, so `truncated` never fired; ledgers refused at
+  1,000; worklists capped at 200 to 500 never showed a new item; warnings said "only the latest were read".
+- Rule applied (per caller): a count, sum, ledger, clash check or worklist reads every record through `service.listAll`
+  (ceiling 50,000 per module unless stated; Patient reads 100,000). Past the ceiling a ledger, clash check, worklist or
+  refusal-bearing report throws `ListCeilingError` and answers 409 or 503 with nothing written; a read-only return or
+  register reports `truncated` with "the newest were not read". Open things with a real `status` field read by status
+  (`listByStatus`): results awaiting verification and cultures in progress (preliminary), ward dashboard open stays,
+  doses in flight and active orders, HIM open stays, FHIR Group census, group counts. Snapshots of "now" (digital twin live
+  sections, backup and restore evidence, MaiK interaction list, patient name pools) read the NEWEST N via
+  `list(..., {newest: true})` and keep their capped flags. A patient's dialyzer events read by index (`byPatient`).
+- Actor-less service reads (escalation timer, hospital group counts) page through `repository.js pagedLatest`. The
+  escalation timer read the oldest 500 loops: past that no new critical result was escalated. `StagedRepository` now
+  passes `pageByType` through with its staged records on the last page.
+- Screens: the quality and governance page notes are new translated keys (`site.qual.truncated`,
+  `site.gov.truncatedNewest`), replacing keys whose English said the oldest were missing. Server warning strings shown
+  through EN() (stores, blood bank, dialysis, registers, mortuary) follow the existing pattern and were reworded. ward.js
+  was not touched (R4-5): `ward.dc-truncated` and `ward.rcm-truncated` still say "latest"; they fire only past 50,000.
+  Access times past the ceiling show "could not be read" on the ward screen (the read is refused, not shown short).
+- Kept as bounded by nature: fleet vehicles, saved reports, privacy notice versions, feed source grants, outbound
+  destinations, leaflet library, advisory sample, lab QC and analyser reads (newest first; Westgard needs recent points),
+  FHIR search pool (stated in the bundle), legacy import name pool (newest).
+- ponytail: every whole-type read re-groups all versions per page and holds up to 50,000 rows in a Worker. High-volume
+  types (MedicationAdministration, DiagnosticReport, ServiceRequest, Appointment) reach the ceiling within weeks to months
+  at a busy hospital and then refuse or flag visibly. The upgrade is audit O20 (a latest-version table) plus period or
+  owner indexes (by clinician, by resource, by order); not built here.
+- Not done: patient-flow.js order, MAR, request, problem and report reads (still the oldest 1,000, `.catch(() => [])`),
+  digital-twin as-of reconstruction reads (500), Form 3E not exercised by a route test.
+
+## 2026-09-17 Small closures: census refusal on screen, PO store, forms before an appointment (branch small-closures, R4-5)
+
+- Census 503: ward.js turns any answer with error `too_many_open` into one translated sentence in the transport
+  (apiGet/apiPost set message and detail), so every screen that already shows the server's message says the same
+  thing. A failed ward list or downtime pack now says not loaded instead of "no patients" / "Preparing the pack".
+  Twin sections keep a thrown error's code (digital-twin.js section); the waiting list reports `admittedCheckError`.
+  The ICU card's `encounterReadCapped` check was dead after R4-1 and is removed; `recordsCapped` still warns.
+- PO store: the audit said "StoreLocation names". The reorder drafts match an order's `location` against stock ledger
+  locations (StockMovement.location), not StoreLocation records (stores.manage), so the form offers the stores the
+  hospital's stock is held in (GET /ward/stock, same capability as the PO route); free text stays allowed.
+- Appointment intake: setting `wardsynq.intake.forAppointments` (absent or anything but true = off) and a form flag
+  `forAppointments: true` (patient forms only). A FormResponse carries `appointmentId` instead of `admissionRequestId`;
+  review, origin and "never the chart" are unchanged. The portal UI is wardsynq/site/portal.js (the brief named
+  portal.html). No settings screen: the flag is set through /org/update (admin settings screens belong to R4-4).
+
+## 2026-09-17 Merge of whole-type-reads and small-closures, with two follow-ups (wardsynq-product)
+
+- `ward.dc-truncated` and `ward.rcm-truncated` English now say the newest records were not read (R4-2 reads oldest-first
+  pages up to a ceiling). Language files keep their older wording until retranslated.
+- Appointment intake switch: GET/POST `/org/intake-settings` (staff.admin, reason required on a change, audited as
+  `org:intake_settings`, read back), a card on Admin > Hospital under the clinical settings. `/org/update` now refuses
+  `wardsynq.intake` (422 `use_intake_settings_route`). A dedicated route rather than a key on `/org/clinical-settings`:
+  that route takes no reason and its read shape is asserted whole by existing tests.
+- Site pages: shell.js's transport gives a 503 `too_many_open` the ward.js sentence (key `ward.too-many-open-stays`, shared
+  catalog); the home ward and ED tiles, MaiK patient list, In-basket patient picker and the support diet and transport
+  pickers show it before their own "could not be loaded" text (`WSQ.tooManyOpen(r)`).
+
+## 2026-09-17 No silent empty clinical reads (branch no-silent-empty-clinical, R5-1)
+
+- break-glass.js `openEmergencyChart`: a per-type read failure sets `chart[type] = null` and pushes the type onto
+  `unreadableTypes` (the abdm-chart.js pattern), returned on GET /ward/emergency-chart. The break-glass screen names
+  those parts above the chart. It used to be `chart[type] = []`, so an allergy list the store refused rendered exactly
+  like "no known allergies" mid-emergency. The chart is NOT refused wholesale: the readable parts still arrive.
+- migrate-inpatient.js prescribing advisories: the Observation and Condition reads lost their `.catch(() => [])` and
+  the outer `catch { advisories = [] }` now sets `advisories = null` plus `advisoriesUnavailable {reason, detail}` on
+  both the checkOnly and the written response. The prescribe screen shows that and no longer treats such an order as
+  clean, so the review card is always seen. The order is still written: a hospital advisory is not the safety engine
+  (that one already refuses on `safety.checked === false`), and losing a hospital's own reminder must not cost a
+  patient their medicine. Advisories that DID fire are now rendered too; they were computed and never shown.
+- patient-flow.js companion reads: MedicationOrder / MedicationAdministration / ServiceRequest move to `listByStatus`
+  on the statuses `pendingItems()` selects (ORDER_OPEN / ADMIN_OPEN / SR_OPEN in that file). Condition cannot be
+  status-scoped - it carries `clinicalStatus`, not `status`, and `pageByType` filters `body.status` - and
+  DiagnosticReport cannot either, because a RELEASED report is what decides a request is done; both are `listAll`
+  with `max: 50000`. Truncation of either makes `openItems: false` per stay, `dischargeCandidates: null` and
+  `openItemsUnknown: [types]`, which the screen states. Doses are matched to a stay by patientId rather than by a
+  join onto the (now active-only) orders.
+- Two swallows found in the same files by the sweep: patient-flow's bed master read is `null` rather than `[]` on
+  failure (`beds.states: null`, said on screen; a histogram of zeros reads as "no bed blocked, none in cleaning"),
+  and bedBoard's ward master read sets `wardsUnread: true` rather than falling back silently to the configured list.
+- Not done here: R5-3 owns the port, so a `clinicalStatus` predicate for Condition and a period-scoped read for
+  DiagnosticReport are the real narrowings and are left to it. The ABDM chart screen already renders its
+  `unreadableTypes` (ward.js abdmRecordsView) - it names no types, but it is not silent, so it was left alone.
+
+## 2026-09-17 A month's report reads a month (branch period-scoped-reports, R5-3)
+
+- Port: `pageByType` gains `newest: true` with a `beforeSeq` cursor (memory and D1; repository-sqlite.js is a binding
+  over D1Repository, so it needed no change). The oldest-first cursor is untouched, so every existing caller is
+  unaffected. Newest-first reverses the amendment rule: a record amended DURING the read moves ahead of a cursor
+  already handed out and can be missed, so ledgers and counts that must balance stay on the oldest-first cursor.
+- Service: `listSince(type, {stopWhen, max, throwOnTruncate})` walks back and stops at the first whole page whose
+  records are all behind the window. Same grant check, same single audited list row and the same `{rows, truncated}`
+  answer as `listAll`, oldest first - except that a truncated period read keeps the NEWEST records, because the end
+  of the window is what the caller asked for.
+- `read-window.js` holds the one clinical decision: which types may be read as a period. A record is judged behind the
+  window by the LATEST instant anywhere in its body (its own times, and meta.recordedAt, which every canonical record
+  carries); a record naming no instant is never judged behind. Types whose records can belong to a month they hold no
+  timestamp in are read whole - an open stay, a line still in place, a booking or request for a later date, and the
+  masters other records point at (SPANNING_TYPES). A 90-day lookback covers a child record dated just before its
+  parent (a pre-anaesthetic check, the request behind a report).
+- Moved: compliance.js (NABH and HMIS), infection-control.js (the measured types, not the case register),
+  quality-registers.js (audits, drills, ADRs, ED reviews; not the templates and not an unrestored stock-out),
+  access-times.js (the diagnostic counter), trends.js, quality.js. NOT registry.js: a chronic-disease registry needs
+  each patient's LAST qualifying observation at any age, so a period read would turn "current" into "never". The audit
+  named it; the code says otherwise.
+- Honest limit, stated in repository-d1.js and in each module: the status and seq predicates sit OUTSIDE the derived
+  `MAX(version) GROUP BY id`, so a page still costs a whole-type group-by. What this removes is pages, rows returned,
+  parsed bodies and isolate memory - the memory and time cliff at roughly 25-50k records - not the per-page scan.
+  O20 (a latest-version flag or table in the schema) remains the owner's decision and the only fix for the scan.
+- Measured on the seeded tenant in test/wardsynq-repository-window.test.mjs: a one-month NABH table over 3,004
+  DiagnosticReports asks the port for 2 pages of that type instead of 4, and stays at 2 however much older history
+  the hospital holds.
+
+## 2026-09-18 The last capped reads, and an unreadable token family (R5-4, branch remaining-caps)
+
+- A read that fails must not answer with a plausible empty value. Two swallows removed rather than widened:
+  digital-twin's notification-reliability read (a failed BreakGlassGrant/CriticalResultLoop read now makes that
+  section `unavailable` with its reason instead of a delivery rate over an empty sample), and smart-server's
+  refresh-reuse revocation.
+- SMART refresh reuse: an unreadable token family, or any revocation write that fails, now REFUSES the revocation.
+  The token in hand and the family root are still revoked by id (both addressable without the list), the audit row
+  carries `revoked: "incomplete"` with `outcome: "error"`, and the endpoint answers 503 `temporarily_unavailable`
+  rather than the flat 400 `invalid_grant` that reads as handled. Accepted cost: a reuse against a broken store is
+  distinguishable from a random bad token, which needs possession of a real rotated token to observe.
+- The digital twin's point-in-time rebuild reads the NEWEST 500 per type, not the oldest. The bound stays 500
+  because each record read costs one further history read; the screen already said "only the latest 500 checked",
+  which is now true. Raising it is an O20 question, not a constant to bump.
+- Ceilings that were reached are stated in the same sentence as what they cost: lab-qc's QC screen names both the
+  runs and the corrective actions read (a truncated action read changes what a block IS, not just what a chart
+  shows), and security-review counts a ward history not read past HISTORY_READ_MAX separately from one that could
+  not be read.
+
+## 2026-09-18 Status-scoped worklists, and the order closure they needed first (branch status-scoped-worklists, R5-2)
+
+- The audit's premise did not hold: `service.listByStatus` bounds a worklist only if something closes an order,
+  and NOTHING in the tree ever did. Every native ServiceRequest was written `active` and stayed `active` after its
+  result was filed, so "open orders" and "every order this hospital has ever placed" were the same set. Converting
+  the reads alone would have refused (503 at OPEN_CENSUS_MAX 5,000) where the old read still worked. So the closure
+  came first: `ward-order.js closeOrderOnResult()`, called by `lab-result.js releaseResult` (any report) and
+  `radiology-report.js reportImaging` (final or corrected only, matching the rule dicom.js's worklist already
+  applied). It never throws - a result on the chart is on the chart - and the response carries `orderClosed`.
+- It writes through its OWN actor, scoped to ServiceRequest and stamped with the releasing person's id (the pattern
+  online-booking.js uses for the portal), because the laboratory grant deliberately cannot write a ServiceRequest:
+  widening actor.js would open order CREATION to a role, which is the billing hazard that grant's comments cite.
+- Converted: `lab-result.js pendingRequests` (hospital scope), `specimen.js collectionList` (hospital scope),
+  `dicom.js imagingWorklist`. Each reads open orders by status, then the reports or specimens of only THOSE orders'
+  patients (governed `byPatient`, eight at a time) instead of the whole type. `specimen.js rejectionStats` keeps
+  `listAll`: a monthly count IS a history and flags its own truncation.
+- `ward-order.js` owns the vocabulary: OPEN_ORDER_STATUSES / CLOSED_ORDER_STATUSES / isOpenOrder. That list is a
+  safety boundary - a status in neither would silently drop an order off every board - and
+  test/wardsynq-ward-order.test.mjs pins it against every writer (native, hl7-normalize ORC maps, SCCM draft).
+- NOT converted, and the reason: Appointment, AppointmentRequest and SpecimenCollection keep where they stand in
+  `state`, not `status`, and `pageByType` filters `$.status` only. Mirroring `state` into `status` on new writes
+  would leave every appointment already in the diary invisible to the filter - a double booking. So scheduling.js
+  and online-booking.js still read `listAll`; the port change (a named field, or `states` beside `statuses`) is
+  R5-3's, and the blocker is written out in both files.
+- Also not done: an order the SENDER closed still lands as `draft`. Filing it closed was tried and reverted - an
+  adapter actor holds the draft tier and the governed store refuses it any other status, rejecting the whole
+  transaction, so a cancellation would never land. An integration-mode hospital's external orders therefore still
+  accumulate against the open census. Closing them needs an actor that may, which is a governance change.
+- Existing tenants: orders resulted BEFORE this branch stay `active` and count against the 5,000 open census. A
+  hospital past that sees a visible 503 on these three boards until a backfill closes them. No backfill is built
+  (it is a resumable job, not a request-scoped read).
+
+## 2026-09-18 The backfill that closes orders resulted before anything closed one (branch order-close-backfill, R5-3)
+
+- The gap R5-2 wrote down: an existing hospital's orders were resulted while NOTHING in the tree closed an
+  order, so they are all still `active`. They count against OPEN_CENSUS_MAX (5,000) and the lab, specimen and
+  imaging boards - now status-scoped reads - answer 503 `too_many_open` on a hospital that has simply been
+  open for a while. `functions/_wardsynq/order-backfill.js` closes them.
+- SAME CLOSURE, NOT A SECOND ONE. Every order goes through `ward-order.js closeOrderOnResult()`: same writer,
+  same `completed` status, same append-only new version, same governed audited put, the releasing person's id
+  stamped on it. The one added field is `completedOn: "backfill"` (a new optional `deps.on`, default
+  `"result"`), so an auditor can tell a retrospective tidy-up from a result being filed. A second closure path
+  with its own vocabulary is how a board ends up showing an order nobody can explain.
+- THE RELEASE RULE IS THE LIVE PATH'S, read off the order's effective category: any DiagnosticReport for a
+  laboratory order (lab-result.js closes on any release), final or corrected only for imaging
+  (radiology-report.js, and dicom.js's worklist). Never closed: an order with no report (the test is genuinely
+  owed - closing it is a missed result), an imaging order read only preliminarily, an order another system
+  owns (the adapter draft tier R5-2 documented; that still needs a governance change, not a job).
+- TWO STEPS, AND THEY DO NOT COLLAPSE. `POST /ward/order-backfill-scan` writes nothing and answers with the
+  order ids it would close plus a grouped tally of why the rest stay open; `POST /ward/order-backfill-close`
+  takes those ids and re-checks every one from the store before writing, so a stale list cannot close an order
+  whose situation has changed. Both staff.admin. Re-running writes nothing: a closed order is not in the
+  store's open page any more and is refused by name if it is sent again.
+- RESUMABLE, via `service.pageByStatus()` - one page of the open-status read at the store's own cursor
+  (repository pageByType), governed and audited exactly as listByStatus. It is deliberately NOT capped by
+  OPEN_CENSUS_MAX: a read that refused past the ceiling could never be the read that fixes being past it. The
+  bound is the page (default 100 orders) instead, so no amount of history changes what one request costs.
+- Screen: Admin Center > Close finished orders (wardsynq/site/pages/admin.js, `orderBackfill` tab). It drives
+  batch after batch and shows the remaining count as it goes. A batch that fails STOPS the run and says so -
+  "could not be read" and "nothing left to do" are different sentences on a screen whose whole job is to say
+  how much work is left.
+- Not done: no cron or scheduled runner (the job is admin-triggered on purpose; the person who starts it is
+  the person it is audited to), and no total-remaining figure before a full scan pass - the count comes from
+  the scan itself, batch by batch, because counting the archive is the same walk as scanning it.
+
+## 2026-09-18 - A safety check that could not read the record says so (R6-1, no-unchecked-safety)
+- THE BUG, stated once: `svc.byPatient("AllergyIntolerance", id).catch(() => [])` inside a safety path. The
+  store faults, the check receives an empty list, and a patient with a documented penicillin allergy is
+  presented to the prescriber, the pharmacist or the radiologist as a patient with no allergy. Worse, the
+  per-read catch swallowed the failure before the file's own outer catch could see it, so the degraded branch
+  in rx-safety.js and the fail-closed contrast refusal in radiology-protocol.js were unreachable code.
+- THE SHAPE is R5-1's, not a new one (break-glass.js `unreadableTypes`, migrate-inpatient.js
+  `advisoriesUnavailable`): null is a read that did not happen, [] is a read that happened and found nothing.
+  `functions/_wardsynq/unreadable.js` holds the two helpers - `readOrNull(promise, type, failures)` and
+  `unavailable(failures) -> { notChecked: [type], reason }` - so the verdict shape is one contract the tests
+  and the screens can both pin.
+- REPORT OR REFUSE, per path, decided by whether the function is allowed to stop the clinician:
+  - rx-safety.js NEVER gates (unapproved content, its own header): it reports `notChecked` on the verdict and
+    the prescribe confirm names the record it could not read, first, before any finding.
+  - radiology-protocol.js protocol CONTEXT reports (`contrastAllergies: null`, `renal: null`, `notChecked`);
+    recording a CONTRAST protocol refuses 502 `clinical_read_failed` (renamed from `allergy_read_failed`,
+    which now also covers the renal Observation). A non-contrast protocol is still recordable and carries
+    `notCheckedAtProtocol` on the record itself.
+  - pharmacy-verify.js: the allergy read reports (the orders stay on screen), the MedicationVerification read
+    refuses - an unreadable verification list made every order read as `unverified`, which hides exactly the
+    stale-verification state the file exists to show.
+  - pharmacy-dispense.js and icu-care.js refuse: issuing stock against a verification nobody could read, or
+    dropping a running pressor because its drug name did not load, are not states worth reporting around.
+- NOT DONE HERE, by the conflict map: patient-record.js, chart-completion.js, billing.js, hl7v2.js,
+  lab-result.js, specimen.js (R6-2), the ingest files (R6-3), scheduling/online-booking (R6-4), registry.js
+  (R6-5). migrate-emar.js's bedsideSafetyCheck already reports NOT_CHECKED_* itself and was left alone.
+
+## 2026-09-18 R6-3: an order the SENDING system has finished is closed here, by a local actor
+
+Round 6 audit §2(b): an ingested ServiceRequest lands as `draft` (service.js `governedForIngest` writes as the
+adapter actor, and the adapter ceiling caps it there), so if its result is filed upstream nothing in WardSynQ
+ever closes it. `draft` is an OPEN status, so every order a real LIS feed ever sent counts against
+OPEN_CENSUS_MAX (5,000) for ever, and the day that is reached the laboratory, specimen and imaging boards
+refuse. Branch `external-order-closure`.
+
+- THE ADAPTER CEILING IS NOT MOVED. An adapter still writes `draft` and still may not assert a clinical
+  status; the governance test is unchanged and still passing.
+- THE SENDER'S ASSERTION WAS ALREADY PRESERVED, so no ingest change was needed. The audit proposed a new
+  `meta.sourceStatus`; the code already carries the sender's own word as `externalStatus`
+  (wardsynq-sccm-adapter.js, from FHIR `ServiceRequest.status` or the HL7 ORC, on both the FHIR and HL7
+  doors), audited with the rest of the record and never read as the record's own status. Adding a second
+  field for the same fact would have been a second source of truth. Followed the code; fhir-inbound.js and
+  hl7-normalize.js are untouched, and a test pins the adapter's behaviour so it stays that way.
+- THE CLOSING WRITE IS LOCAL AND GOVERNED, never the adapter's. `functions/_wardsynq/source-order-close.js`
+  is shaped exactly like `order-backfill.js` - dry run first, one page per request at the store's own cursor,
+  resumable, safe to run twice, nothing partial reported as success - and closes through
+  `closeOrderOnResult()` with a new `deps.on: "source-terminal"` (`roleSource: "wardsynq-source-terminal"`),
+  on the authority of the administrator who pressed the button, whose id lands on the new version. The
+  record keeps `externalStatus` and `meta.source` and gains `completedOn: "source-terminal"`, so the audit
+  trail says the assertion came from outside and the closure was made here.
+- ONE NARROW EXCEPTION TO EXTERNAL AUTHORITY, in `service.js sourceTerminalClosure()`: that role AND that
+  roleSource, ServiceRequest only, the sender's terminal word as the STORE holds it (never as the incoming
+  entity asserts it), the status being written is `completed`, and every other field on the record must be
+  byte-identical. Anything else is still refused with EXTERNAL_AUTHORITY, so this cannot widen into a general
+  door onto another system's records. The terminal vocabulary is `CLOSED_ORDER_STATUSES` and is spelled twice
+  (ward-order.js imports service.js, so the import cannot go the other way); the test pins the two equal.
+- An order whose sender says `active`, says `unknown`, or says nothing is never closed. Neither is this
+  hospital's own order: those are order-backfill.js's, closed on a filed result.
+- The closing version KEEPS `meta`. The two native paths delete it, which for an externally owned record
+  would leave the new version with no `meta.source` at all - read everywhere as "this hospital owns it", so
+  tidying the order would quietly transfer another system's record to us.
+- CORRECTION TO THE AUDIT: it says an ingested order "appears on the board". It does not. specimen.js and
+  lab-result.js both drop `isExternalRecord`, so another system's order was never on this ward's collection
+  or pending-tests boards. What it does is sit in the OPEN CENSUS, which is what refuses. The test asserts
+  the census, and asserts the boards do not change.
+- Screen: Admin Center > Close finished orders now carries both panels - the existing result backfill and
+  "Close orders another system has finished" - each with its own state. Routes
+  `POST /api/queue/ward/source-order-scan` and `POST /api/queue/ward/source-order-close`, both staff.admin.
+  The scan names the sending system per order, so an administrator can see whose "finished" they are acting on.
+- Not done: no cron (admin-triggered on purpose, as the backfill is), and no per-adapter policy for which
+  senders may be trusted - every connected system's terminal word counts the same today. If one hospital
+  finds a feed whose `completed` is unreliable, that is a per-adapter setting and a new decision.
+
+## 2026-09-18 A clash check reads the clash window, not the hospital's whole diary (R6-4, branch booking-and-registry-reads)
+- THE PROBLEM WAS NOT `state` VS `status`. R5-2 could not put the two clash reads (scheduling.js
+  bookAppointment, online-booking.js diary) on the open-status read because an Appointment keeps where it
+  stands in `state` and the store filters on `status`, and mirroring `state` into `status` would have left
+  the hospital's existing diary with no status and a clash check that skipped it. The conclusion drawn then
+  was "the port needs a `states` filter first". That is NOT what was built.
+- A CLASH IS TIME-BOUNDED BY DEFINITION, so the period read R5-3 already shipped (service.listSince,
+  pageByType newest/beforeSeq) bounds it with no port change, no schema change and no new filter on three
+  adapters: read newest first and stop once a whole page is behind the window. read-window.js
+  `readClashDiary` holds the window (the longest permitted appointment, 480 minutes, plus a week of margin).
+  A `states` filter stays the upgrade if a state query that is NOT time-bounded ever appears.
+- THE STOP TEST LOOKS AT TWO THINGS, and this is the part worth remembering: the read pages by WRITE order,
+  the window is on `startAt`. A booking made long ago for a date inside the window has an old seq, so a stop
+  on `startAt` alone would walk past it and book over it. A record is behind the window only when its slot is
+  older than the floor AND it was last written longer ago than the longest lead a booking is made with
+  (WRITE_LOOKBACK_MS, 400 days). An appointment booked further ahead than that and never touched since is the
+  stated residual, and it is outside any real outpatient diary.
+- THE AMENDMENT RACE IS NOT ACCEPTED HERE. pageByType's newest-first cursor can miss a record amended during
+  the read (repository.js:302-306); on a month report that is the documented price, on a clash check it is a
+  double booking. An amendment lands at the very top of the write order, so ONE page of the newest records is
+  re-read after the decision and before the append (read-window.js `readRecentWrites`) and tested with the
+  same overlap rule; in the portal that re-read runs after the slot hold is claimed and releases the hold if
+  the time turns out to be taken. Bound: 1,000 writes landing inside one clash read would push an amendment
+  off that page; a per-clinician id range seek is the upgrade.
+- Unchanged: the Blackout read (a standing period, not a slot), listSchedule's diary read (it is asked for
+  arbitrary past date ranges), and the 50,000 ceiling with throwOnTruncate - a diary that cannot be bounded
+  still refuses rather than booking on a short read.
+
+## 2026-09-18 The recall registry reads the newest first (R6-5, same branch)
+- registry.js read the whole history of Condition, Observation and Patient oldest-first, so past READ_MAX the
+  records dropped were the NEWEST - the patients most likely to need recall, and the ones whose latest
+  qualifying result decides whether they are overdue. It now reads newest-first (service.listSince with no
+  stop test, which keeps the newest past the ceiling) and the truncation sentence says the oldest were not
+  read.
+- NOT period-scoped, deliberately: a registry asks for each patient's LAST qualifying record, so a period
+  read would turn "reviewed three years ago" into "never reviewed" - the most overdue state there is.
+
+## 2026-09-18 - R6-2: a chart that could not be read is never drawn as a chart with nothing in it (branch no-silent-empty-chart)
+
+R5-1 fixed this swallow in three files; the audit found it in about fifteen. This branch takes the six
+it owns (patient-record.js, chart-completion.js, billing.js pre-auth, hl7v2.js, lab-result.js,
+specimen.js). The rule, unchanged from R5-1: a read that FAILED and a read that came back EMPTY are
+different facts and are never rendered the same way.
+
+- SHAPE, per site, chosen by what the caller can honestly do with a partial answer:
+  - `patient-record.js assemble()` - per-type `null` plus `unreadableTypes`, the break-glass.js pattern
+    verbatim. Six of seven types failing independently is the common case and blanking the whole chart
+    for one of them would be its own lie.
+  - `chart-completion.js` - per-detector, so one unreadable section is `unknownSections: [{type, reason}]`
+    and the other six checks still run. The audit asks for a completion percentage; this file computes
+    none (it is a deficiency queue), so the count of unknown sections is what is reported instead.
+  - `billing.js claimsForPatient` - `preAuthorisations: null` beside the three lists R5-4 already did,
+    and every payer rule that turns on a pre-authorisation is reported UNCHECKED rather than as "none
+    recorded", which is what the rule engine would otherwise state as a fact.
+  - `hl7v2.js`, `lab-result.js`, `specimen.js` - REFUSED (the 502 the surrounding code already returns).
+    An outbound ORU with no OBX is filed by the receiver as a report with no results, and an empty
+    laboratory or phlebotomy board is read as work already done. There is no partial answer worth giving.
+- A HANDOVER IS NOT RECORDED OFF A CHART THAT COULD NOT BE READ. `releaseToPatient` refuses with 502 and
+  writes nothing: its receipt counts allergies, medicines and diagnoses, and a zero taken from a failed
+  read is an answerable written statement that the patient was handed a page with none.
+- WITH THE CRITICAL-RESULT LOOPS UNREADABLE, NO RESULT IS RELEASED. Releasability is "no OPEN loop covers
+  this report"; unreadable loops used to mean no loops, which is the potassium-of-7.2 failure the file's
+  own header is about.
+- Screens: ward Patient copy names the unreadable parts above the chart and draws each missing section as
+  unknown rather than empty (the second-language aside is DROPPED for such a section rather than printing
+  the catalog's "nothing recorded" in the patient's own language - a new print-lang.js catalog word was
+  not invented for it); Chart check will not print "Nothing outstanding" while a section is unknown; the
+  TPA screen says the pre-authorisations could not be read; the patient portal reuses its own existing
+  `section(..., "failed", ...)` state.
+- Not done here: `patient-access.js:441` (the portal's own PatientMessage read) and the sites owned by
+  R6-1/R6-3/R6-4/R6-5.

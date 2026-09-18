@@ -1,0 +1,208 @@
+{
+  "site": "larynx",
+  "name": "Larynx",
+  "system": "Oncology / Head and neck",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Laryngeal squamous cell carcinoma is staged by subsite: supraglottis (epiglottis, aryepiglottic folds, arytenoids, false cords, ventricle), glottis (true cords, commissures) and subglottis. T reflects vocal-cord mobility (normal, impaired, fixed) and cartilage invasion: inner cortex of thyroid cartilage is T3, while invasion through the outer cortex or into extralaryngeal tissues is T4a; pre-epiglottic space invasion upstages supraglottic tumours. Nodal staging follows the head-and-neck ENE scheme; glottic cancers metastasise late because the cords are lymphatic-poor.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Carcinoma in situ",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour limited to one subsite with normal vocal-cord mobility (glottis: limited to cord(s) with normal mobility; T1a one cord, T1b both cords)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour invades more than one adjacent subsite (e.g. supraglottis plus glottis) or has impaired vocal-cord mobility, without fixation",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour limited to larynx with vocal-cord fixation, and/or invasion of postcricoid area, pre-epiglottic space, paraglottic space, and/or inner cortex of thyroid cartilage",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4a",
+          "label": "Moderately advanced disease: invasion through outer cortex of thyroid cartilage and/or into extralaryngeal tissues (trachea, strap muscles, thyroid gland, oesophagus)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4b",
+          "label": "Very advanced disease: invasion of prevertebral space, encasement of carotid artery, or invasion of mediastinal structures",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Single ipsilateral node 3 cm or smaller, extranodal extension negative (ENE-)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2a",
+          "label": "Single ipsilateral node larger than 3 cm up to 6 cm, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2b",
+          "label": "Multiple ipsilateral nodes 6 cm or smaller, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2c",
+          "label": "Bilateral or contralateral nodes 6 cm or smaller, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3a",
+          "label": "Any node larger than 6 cm, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3b",
+          "label": "Any node with clinically overt extranodal extension (ENE+)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "In situ",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T1, T2 or T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Single small node, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4a",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T1-T4a",
+          "n": "N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "N3",
+          "m": "M0",
+          "basis": "ENE+ or node over 6 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "T4b",
+          "n": "any N",
+          "m": "M0",
+          "basis": "Unresectable local disease",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVC",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Levels II, III and IV (jugular chain) and VI (prelaryngeal/Delphian, pretracheal, paratracheal); supraglottic tumours also drain to levels I and V. Bilateral or contralateral nodes upstage to N2c.",
+      "histologicGrade": "Well differentiated (G1), moderately differentiated (G2), poorly differentiated (G3); transglottic spread and cartilage invasion are reported independently of grade.",
+      "histopathologicTypes": "Conventional squamous cell carcinoma; verrucous carcinoma (rare, pushing front); basaloid, papillary and spindle-cell (sarcomatoid) variants; neuroendocrine carcinoma and minor salivary tumours of the larynx are staged by their own systems.",
+      "prognosticFactors": [
+        "Vocal-cord mobility (normal vs impaired vs fixed)",
+        "Cartilage invasion (inner vs through outer cortex)",
+        "Extranodal extension (ENE)",
+        "Subsite (glottic tumours present early, supraglottic spread silently)",
+        "Tobacco and alcohol exposure",
+        "Performance status and larynx-preservation candidacy"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

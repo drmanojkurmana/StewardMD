@@ -89,9 +89,11 @@ test("indent golden path: POST /api/queue/ward/indent, /ward/indent-decide, /war
   const po = await as(U.STORE, "/ward/store-purchase-order", "POST", { orgId: ORG, indentId: r.indentId, vendor: "Acme Supplies" });
   assert.equal(po.__status, 200, JSON.stringify(po));
   assert.deepEqual(po.lines.map((l) => [l.item, l.quantity]), [["GLOVE-M", 10], ["BEDSHEET", 6]]);
+  assert.equal(po.location, "CS", "R3-1: bought for the central store the indent is issued from");
   const pos = await as(U.STORE, `/ward/purchase-orders?orgId=${ORG}`);
   assert.equal(pos.__status, 200, "the store keeper reads the purchasing list");
   assert.equal(pos.orders[0].indentId, r.indentId);
+  assert.equal(pos.orders[0].location, "CS");
 
   assert.equal((await as(U.NURSE, "/ward/indent-close", "POST", { orgId: ORG, indentId: r.indentId, reason: "x" })).__status, 403);
   const close = await as(U.STORE, "/ward/indent-close", "POST", { orgId: ORG, indentId: r.indentId, reason: "Bed sheets discontinued" });

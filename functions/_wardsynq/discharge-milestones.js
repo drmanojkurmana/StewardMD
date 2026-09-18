@@ -33,6 +33,7 @@ import { dischargeSummaryIdFor } from "./migrate-discharge.js";
 import { patientLabels, labelKey } from "./patient-label.js";
 
 const DMS_TYPE = "DischargeMilestone";
+const READ_MAX = 50000;
 const STEPS = Object.freeze(["advised", "pharmacy-cleared", "bill-ready", "tpa-final-requested", "tpa-final-received", "summary-signed", "left"]);
 const RECORDED_STEPS = Object.freeze(STEPS.filter((s) => s !== "summary-signed"));
 const SKEW_MS = 5 * 60000;
@@ -250,14 +251,16 @@ async function dischargeProgress(request, env, ctx) {
   const nowMs = ms(ctx.now) || Date.now();
   const days = Math.min(90, Math.max(1, Number(ctx.days) || 30));
 
-  let rows;
-  // ponytail: one capped list of the latest version of every stay's milestones; archive by month if a hospital outgrows it.
-  try { rows = (await svc.list(DMS_TYPE, 2000)).filter(Boolean); }
+  let rows, truncated = false;
+  /* Every stay's milestones (service.listAll, oldest first). Past READ_MAX the newest discharges are the ones not read and
+   * truncated says so. ponytail: archive by month (or audit O20's latest-version table) if a hospital outgrows it. */
+  try { const got = await svc.listAll(DMS_TYPE, { max: READ_MAX }); rows = got.rows.filter(Boolean); truncated = got.truncated; }
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", inProgress: null, turnaround: null };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "Discharge progress could not be read. Do not read this as no discharges.", inProgress: null, turnaround: null };
   }
-  const encounters = await svc.list("Encounter", 2000).then((e) => new Map((e || []).filter(Boolean).map((x) => [x.id, x])), () => false);
+  // An encounter read past the ceiling would leave the newest stays without a ward: unread (false), not missing.
+  const encounters = await svc.listAll("Encounter", { max: READ_MAX, throwOnTruncate: true }).then((e) => new Map(e.rows.filter(Boolean).map((x) => [x.id, x])), () => false);
   const signed = rows.length ? await signedAtByEncounter(svc, rows.map((r) => r.encounterId)) : new Map();
   const stays = rows.map((record) => {
     const encounter = encounters === false ? false : (encounters.get(record.encounterId) || null);
@@ -284,7 +287,7 @@ async function dischargeProgress(request, env, ctx) {
     ...base, ok: true, days, computedAt: new Date(nowMs).toISOString(), inProgress, inProgressTotal: open.length,
     turnaround: turnaround(stays, nowMs - days * 86400000, nowMs),
     unreadable: { stays: encounters === false, summaries: signed === false },
-    truncated: rows.length >= 2000,
+    truncated,
     note: "Times as recorded by the people who did each step. Turnaround is the median minutes from discharge advised; a step nobody recorded is counted as not recorded, not as zero.",
   };
 }

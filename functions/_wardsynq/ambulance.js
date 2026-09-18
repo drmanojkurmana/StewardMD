@@ -18,7 +18,7 @@
  */
 
 import { ADMISSION_CLASSES } from "./migrate-inpatient.js";
-import { str, slug, baseOf, offOf, isoOk, newId, openSvc, writeFailure, readFailure } from "./support-common.js";
+import { str, slug, baseOf, offOf, isoOk, newId, openSvc, writeFailure, readFailure, readAllOf } from "./support-common.js";
 
 const VEHICLE_TYPE = "AmbulanceVehicle";
 const TRIP_TYPE = "AmbulanceTrip";
@@ -128,7 +128,7 @@ async function tripStep(request, env, ctx) {
         crew: crew.map((identity) => ({ identity, onRota: onDuty ? onDuty.has(identity) : null })), dispatchedBy: resolved.actor.id });
       /* The same vehicle on two live trips is refused: one ambulance cannot be in two places. */
       try {
-        const busy = ((await svc.list(TRIP_TYPE, 2000)) || []).find((x) => x.id !== trip.id && x.vehicleId === v.id && ["dispatched", "arrived", "departed"].includes(x.state));
+        const busy = (await readAllOf(svc, TRIP_TYPE)).find((x) => x.id !== trip.id && x.vehicleId === v.id && ["dispatched", "arrived", "departed"].includes(x.state));
         if (busy) return { ...base, ok: false, status: 409, error: "vehicle_on_trip", tripId: busy.id, detail: "This ambulance is already on a trip.", written: 0 };
       } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
     }
@@ -154,7 +154,8 @@ async function transportBoard(request, env, ctx) {
   const { svc, error } = await openSvc(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
   let vehicles, trips;
-  try { [vehicles, trips] = await Promise.all([svc.list(VEHICLE_TYPE, 500), svc.list(TRIP_TYPE, 5000)]); }
+  // Vehicles: the hospital's fleet, bounded by nature (500). Trips grow every day: every one is read (support-common READ_MAX).
+  try { [vehicles, trips] = await Promise.all([svc.list(VEHICLE_TYPE, 500), readAllOf(svc, TRIP_TYPE)]); }
   catch (e) { return { ...base, ...readFailure(e) }; }
   const nowMs = Date.now();
   const byCall = (a, b) => str(b.times && b.times.call).localeCompare(str(a.times && a.times.call));

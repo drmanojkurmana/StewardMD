@@ -13,11 +13,13 @@
  * THE ID IS A HASH OF THE WARD NAME (ward-<16 hex>), because a ward name is free text and a FHIR id is
  * [A-Za-z0-9.-]{1,64}. The name travels as Group.name.
  *
- * NOTHING IS PRETENDED COMPLETE. The census reads the newest SEARCH_POOL encounters; when that cap is
- * reached the search Bundle says so, and a group export refuses rather than exporting part of a ward.
+ * NOTHING IS PRETENDED COMPLETE. The census is every open encounter (service.listByStatus, R4-2; it used to be the
+ * OLDEST SEARCH_POOL encounters of every status, so a new admission was in no Group). More open encounters than the
+ * open-census ceiling refuses the census (422 too-costly) rather than state part of a ward as the ward.
  */
 
-import { open, operationOutcome, SEARCH_POOL } from "./fhir.js";
+import { open, operationOutcome } from "./fhir.js";
+import { ListCeilingError } from "./service.js";
 import { fhirId, sha256Hex } from "./fhir-id.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -52,7 +54,7 @@ function fhirGroup(g) {
 }
 
 /**
- * The census, read as the requester. Returns { groups, capped } or { error: { status, outcome } }.
+ * The census, read as the requester. Returns { groups } or { error: { status, outcome } }.
  * ctx: { migration, actorDeps, recordDeps, actorOverride? }
  */
 async function readCensus(request, env, ctx) {
@@ -61,9 +63,12 @@ async function readCensus(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx);
   if (error) return { error: { status: error.status, outcome: operationOutcome("error", error.status === 401 ? "login" : "forbidden", error.detail || error.error) } };
   let rows;
-  try { rows = (await svc.list("Encounter", SEARCH_POOL)) || []; }
-  catch (e) { return { error: { status: 403, outcome: operationOutcome("error", "forbidden", `a Group is the ward census, which needs Encounter read: ${str(e && e.message)}`) } }; }
-  return { groups: censusOf(rows), capped: rows.length >= SEARCH_POOL };
+  try { rows = await svc.listByStatus("Encounter", ["in-progress"]); }
+  catch (e) {
+    if (e instanceof ListCeilingError) return { error: { status: 422, outcome: operationOutcome("error", "too-costly", `more than ${e.max} encounters are open, so no ward membership can be stated as complete; use Patient/$export with _type and _since`) } };
+    return { error: { status: 403, outcome: operationOutcome("error", "forbidden", `a Group is the ward census, which needs Encounter read: ${str(e && e.message)}`) } };
+  }
+  return { groups: censusOf(rows) };
 }
 
 /** GET Group and Group/{id}. Returns { obj, status } like dispatchRead. */
@@ -74,7 +79,6 @@ async function groups(request, env, ctx, url) {
   if (id) {
     const g = c.groups.get(id);
     if (!g) return { obj: operationOutcome("error", "not-found", "no such Group: a Group here is a ward with at least one open encounter"), status: 404 };
-    if (c.capped) return { obj: operationOutcome("error", "too-costly", `the ward census reads the most recent ${SEARCH_POOL} encounters and this hospital has more, so no membership can be stated as complete`), status: 422 };
     return { obj: fhirGroup(g), status: 200 };
   }
   for (const k of url.searchParams.keys()) {
@@ -83,7 +87,6 @@ async function groups(request, env, ctx, url) {
   const name = str(url.searchParams.get("name")).toLowerCase();
   const list = [...c.groups.values()].filter((g) => !name || g.ward.toLowerCase().includes(name)).sort((a, b) => a.ward.localeCompare(b.ward)).map(fhirGroup);
   const entry = list.map((r) => ({ fullUrl: `${str(ctx.base)}/Group/${r.id}`, resource: r, search: { mode: "match" } }));
-  if (c.capped) entry.push({ resource: operationOutcome("warning", "too-costly", `The ward census considered the most recent ${SEARCH_POOL} encounters only; membership may be incomplete.`), search: { mode: "outcome" } });
   return { obj: { resourceType: "Bundle", type: "searchset", total: list.length, entry }, status: 200 };
 }
 
@@ -97,7 +100,6 @@ async function groupMembers(request, env, ctx, groupId) {
   if (c.error) return c;
   const g = c.groups.get(str(groupId));
   if (!g) return { error: { status: 404, outcome: operationOutcome("error", "not-found", "no such Group: a Group here is a ward with at least one open encounter") } };
-  if (c.capped) return { error: { status: 422, outcome: operationOutcome("error", "too-costly", `the ward census reads the most recent ${SEARCH_POOL} encounters and this hospital has more, so the Group cannot be exported as complete; use Patient/$export with _type and _since`) } };
   return { ward: g.ward, patientIds: [...g.patientIds].sort() };
 }
 

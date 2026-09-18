@@ -46,6 +46,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 // pharmacist verifying an order was, until now, reading the raw allergy list unassisted; this
 // gives them the exact interaction/dose/allergy verdict the engine already computes for the ward.
 import { bedsideSafetyCheck } from "./migrate-emar.js";
+import { readOrNull, unavailable } from "./unreadable.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "MedicationVerification";
@@ -202,16 +203,24 @@ async function verificationQueue(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, orders: [] };
 
+  /* NEITHER OF THESE READS MAY FAIL QUIETLY (R6-1, 2026-09-18).
+   *  - the verification rows decide every row's state, and an unreadable list made every order read
+   *    as `unverified` - including one verified against an OLDER version, which is the one state
+   *    this file exists to show. It is a refusal now, not a guess.
+   *  - the allergies travel WITH the queue, because a pharmacist who has to go and look them up
+   *    separately is a pharmacist who sometimes will not, and this is the check they are here to
+   *    make. A failed allergy read leaves the orders on screen but never an empty allergy list:
+   *    `allergies: null` plus a named `allergiesUnavailable`, which the screen says out loud. */
   let orders, verifications, allergies;
+  const failures = [];
   try {
     [orders, verifications, allergies] = await Promise.all([
       svc.byPatient("MedicationOrder", patientId),
-      svc.byPatient(TYPE, patientId).catch(() => []),
-      // The allergies travel WITH the queue. A pharmacist who has to go and look them up separately
-      // is a pharmacist who sometimes will not, and this is the check they are here to make.
-      svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
+      svc.byPatient(TYPE, patientId),
+      readOrNull(svc.byPatient("AllergyIntolerance", patientId), "AllergyIntolerance", failures),
     ]);
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), orders: [] }; }
+  const allergiesUnavailable = unavailable(failures);
 
   const active = (orders || []).filter((o) => o && o.status === "active");
   // TASK 3.3: the SAME engine the bedside hook runs, once per queued order. Never a second engine,
@@ -240,7 +249,9 @@ async function verificationQueue(request, env, ctx) {
   rows.sort((a, b) => (RANK[a.state] - RANK[b.state]) || String(a.drug).localeCompare(String(b.drug)));
   return {
     ...base, ok: true, patientId, orders: rows,
-    allergies: (allergies || []).map((a) => ({ substance: a.substance, severity: a.severity || null, criticality: a.criticality || null, verifiedBy: a.verifiedBy || null })),
+    // null = the allergy list could not be read. [] = it was read and the patient has none recorded.
+    allergies: allergies === null ? null : allergies.map((a) => ({ substance: a.substance, severity: a.severity || null, criticality: a.criticality || null, verifiedBy: a.verifiedBy || null })),
+    ...(allergiesUnavailable ? { allergiesUnavailable } : {}),
     unverified: rows.filter((r) => r.state !== "verified").length,
   };
 }

@@ -422,7 +422,10 @@
         "Reconsider surgery only if later downsizing restores an R0 option"
       ],
       "linkTo": "n_met_mutation",
-      "linkLabel": "Continue in the advanced-disease pathway (systemic sequencing)"
+      "linkLabel": "Continue in the advanced-disease pathway (systemic sequencing)",
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_neoadj_surgery",
@@ -450,6 +453,9 @@
         "Proceed to R0 resection if achievable; neoadjuvant imatinib offers no benefit for D842V",
         "For D842V requiring downsizing, consider avapritinib in a trial / expert setting (no dose card here - guidance only)",
         "Re-stage after multidisciplinary review, then stratify recurrence risk (next step)"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib"
       ]
     },
     {
@@ -575,6 +581,9 @@
         "No adjuvant imatinib",
         "History, exam and abdominopelvic CT every 6 months for 5 years, then annually",
         "Return to the recurrence pathway on any new lesion (next step is the surveillance schedule)"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib"
       ]
     },
     {
@@ -683,6 +692,9 @@
         "No adjuvant imatinib for gastric, intact, lower-risk intermediate tumors or D842V",
         "CT abdomen / pelvis every 3-6 months for the first years",
         "Enter the recurrence pathway on any new lesion (next step is the surveillance schedule)"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib"
       ]
     },
     {
@@ -841,7 +853,10 @@
         "Refer to a GIST expert center where available"
       ],
       "linkTo": "n_met_mutation",
-      "linkLabel": "If recurrence: enter the advanced-disease pathway"
+      "linkLabel": "If recurrence: enter the advanced-disease pathway",
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_tx_adj_wt",
@@ -868,7 +883,10 @@
         "Surveillance CT or MRI on an individualized schedule"
       ],
       "linkTo": "n_met_mutation",
-      "linkLabel": "If recurrence: enter the advanced-disease pathway"
+      "linkLabel": "If recurrence: enter the advanced-disease pathway",
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_adj_completion",
@@ -941,6 +959,9 @@
         "Continue CT surveillance - recurrence risk rises in the first years after stopping imatinib",
         "Re-confirm genotype at any relapse to guide re-treatment",
         "Proceed to the standard surveillance schedule (next step)"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib"
       ]
     },
     {
@@ -971,7 +992,10 @@
         "Re-confirm genotype; consider resection of isolated recurrence"
       ],
       "linkTo": "n_met_mutation",
-      "linkLabel": "Continue in the advanced-disease pathway (systemic sequencing)"
+      "linkLabel": "Continue in the advanced-disease pathway (systemic sequencing)",
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_met_mutation",
@@ -1263,6 +1287,10 @@
         "Enroll in a clinical trial where available - the preferred option",
         "A multikinase TKI (e.g. sunitinib, regorafenib, ripretinib) may be tried, though D842V benefit is limited",
         "Continue best supportive care; consider local therapy for symptomatic sites"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib",
+        "gist-avapritinib"
       ]
     },
     {
@@ -1332,6 +1360,10 @@
         "Standard KIT-targeted TKIs are usually ineffective; sunitinib or regorafenib may give some benefit",
         "Enroll in a clinical trial; surgery for symptomatic / oligometastatic disease",
         "Often indolent - a watchful approach can be appropriate"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib",
+        "gist-avapritinib"
       ]
     },
     {
@@ -1358,6 +1390,10 @@
         "BRAF V600E: consider BRAF-directed therapy (guidance - no GIST-dose card here)",
         "NF1-associated: KIT-targeted TKIs are typically ineffective; surgery for resectable disease",
         "Multikinase TKIs (sunitinib, regorafenib) are options on progression"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib",
+        "gist-avapritinib"
       ]
     },
     {
@@ -1922,6 +1958,10 @@
         "Rechallenge with a previously effective TKI can give transient palliative benefit",
         "Continue best supportive care; local therapy for symptomatic sites",
         "Re-confirm genotype (resistance mutations) to match any available targeted trial"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib",
+        "gist-avapritinib"
       ]
     },
     {
@@ -2076,7 +2116,11 @@
         "Any new lesion returns to the recurrence / advanced pathway"
       ],
       "linkTo": "n_recurrence",
-      "linkLabel": "If recurrence is detected: go to the Recurrence pathway"
+      "linkLabel": "If recurrence is detected: go to the Recurrence pathway",
+      "protocolRefs": [
+        "gi-gist-imatinib",
+        "gist-avapritinib"
+      ]
     }
   ],
   "links": [
@@ -2615,5 +2659,12 @@
       "to": "n_surveillance",
       "linkCategory": "conditional"
     }
+  ],
+  "protocolRefs": [
+    "gi-gist-imatinib",
+    "gi-gist-regorafenib",
+    "gi-gist-sunitinib",
+    "gist-avapritinib",
+    "gist-ripretinib"
   ]
 }

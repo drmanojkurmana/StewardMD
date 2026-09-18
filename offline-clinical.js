@@ -20,7 +20,7 @@
   var isNative = !!(C && typeof C.isNativePlatform === "function" && C.isNativePlatform());
   if (!isNative) { window.SMD_OFFLINE_CLINICAL = { isNative: false }; return; }
 
-  var VER = "gold239";                            // bump with the bundle so a cached gz is busted
+  var VER = "gold240";                            // bump with the bundle so a cached gz is busted
   var URL_GZ = "/offline-clinical.json.gz?v=" + VER;
   var FLAG = "stewardmd_offline_clinical";        // "0" disables
   var _data = null;      // { v, struct:{comp:{gold|fields}}, mono:{comp:{…}} }

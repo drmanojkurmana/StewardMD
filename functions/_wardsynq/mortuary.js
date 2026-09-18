@@ -22,7 +22,7 @@
  * Magistrate inquiry papers are recorded on the case, with their reference.
  */
 
-import { str, baseOf, offOf, openSvc, writeFailure, readFailure } from "./support-common.js";
+import { str, baseOf, offOf, openSvc, writeFailure, readFailure, readAllOf } from "./support-common.js";
 
 const CASE_TYPE = "MortuaryCase";
 const caseIdFor = (patientId) => `wsq-mort-${str(patientId)}`;
@@ -71,7 +71,8 @@ function chamberClash(cases, chamber, selfId) {
   return (cases || []).find((x) => x && x.id !== selfId && x.state !== "released" && str(x.chamber) === str(chamber)) || null;
 }
 
-async function readAll(svc) { return (await svc.list(CASE_TYPE, 2000)) || []; }
+/* Every case (service.listAll). Past the ceiling it throws: a chamber clash or release checked on a short read is unsafe. */
+async function readAll(svc) { return readAllOf(svc, CASE_TYPE); }
 
 /** Receives a body. ctx: { patientId, encounterId, broughtBy, identifiedBy, chamber, belongings, chambers } */
 async function receiveBody(request, env, ctx) {
@@ -180,8 +181,12 @@ async function mortuaryBoard(request, env, ctx) {
   const { svc, error } = await openSvc(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
   let cases, patients;
-  try { cases = await readAll(svc); patients = (await svc.list("Patient", 5000)) || []; }
+  /* Patients: only for names and deaths with no body received. Past the ceiling the newest charts are not read, so
+   * the board still shows the bodies held and says the awaiting list may be short. */
+  try { cases = await readAll(svc); patients = await svc.listAll("Patient", { max: 100000 }); }
   catch (e) { return { ...base, ...readFailure(e) }; }
+  const patientsTruncated = patients.truncated;
+  patients = patients.rows;
   const byId = new Map(patients.map((p) => [p.id, p]));
   const who = (id) => { const p = byId.get(id); return p ? { name: p.name || p.display || null, mrn: p.mrn || null } : { name: null, mrn: null }; };
   const received = new Set(cases.map((c) => str(c.patientId)));
@@ -189,7 +194,10 @@ async function mortuaryBoard(request, env, ctx) {
   const held = cases.filter((c) => c.state !== "released").map((c) => ({ ...c, ...who(c.patientId), /* What this body's release will ask for beyond the receiver and the death certificate. */
     releaseNeeds: releaseMissing(c, {}, ctx.registerMlc ? ctx.registerMlc.get(str(c.patientId)) : undefined).filter((m) => ["police_noc", "mlc_status_confirmed", "post_mortem_report", "post_mortem_decision", "belongings_handed_over", "inquest_papers"].includes(m)) }));
   return { ...base, ok: true,
-    ...(ctx.registerMlc ? {} : { warnings: ["The medico-legal register could not be read, so what a release needs for a medico-legal case may be missing here. Release still checks it."] }),
+    ...((!ctx.registerMlc || patientsTruncated) ? { warnings: [
+      ...(ctx.registerMlc ? [] : ["The medico-legal register could not be read, so what a release needs for a medico-legal case may be missing here. Release still checks it."]),
+      ...(patientsTruncated ? ["More patient records exist than can be read at once; the newest were not read, so a recent death may be missing from those awaiting a body and some names may be blank."] : []),
+    ] } : {}),
     held: held.sort((a, b) => str(a.receivedAt).localeCompare(str(b.receivedAt))),
     released: cases.filter((c) => c.state === "released").sort((a, b) => str(b.release && b.release.at).localeCompare(str(a.release && a.release.at))).slice(0, 50).map((c) => ({ ...c, ...who(c.patientId) })),
     chambers: chambers.map((ch) => { const c = held.find((x) => str(x.chamber) === ch); return { chamber: ch, caseId: c ? c.id : null }; }),

@@ -28,13 +28,13 @@ import { Encounter, MedicationOrder } from "../../wardsynq/wardsynq-model.js";
 import { GovernanceError, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { vitalsToObservations, VITAL_CODES, displayUnit } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
-import { chainState, approvalCovers, levelsFor } from "./verification.js";
+import { chainState, approvalCovers, levelsFor, allVerifications } from "./verification.js";
 import { orderEntrySafety } from "./migrate-emar.js";
 import { verificationState } from "./pharmacy-verify.js";
 
@@ -56,8 +56,8 @@ async function verifyApprovalRef(svc, ref, drug, ctx) {
   try {
     // Every record in the chain carries the request's id, so the chain is the request plus every
     // decision pointing back at it.
-    const all = await svc.list("Verification", 500);
-    rows = (all || []).filter((r) => r && (str(r.id) === ref || str(r.parentVerificationId) === ref));
+    const all = await allVerifications(svc);
+    rows = all.filter((r) => r && (str(r.id) === ref || str(r.parentVerificationId) === ref));
   } catch { return false; }
   if (!rows.length) return false;
   /* How many people this hospital wants on a restricted-drug approval, read the same way the approval
@@ -93,6 +93,13 @@ const ADMISSION_CLASSES = Object.freeze([IPD, ICU, MATERNITY, PEDIATRICS, NICU])
 const OPEN = "in-progress";
 
 const str = (v) => (v == null ? "" : String(v).trim());
+
+/* R4-1: every OPEN encounter, however many closed stays and OPD visits the hospital has on record. It used
+ * to be list("Encounter", 200..1000), oldest first: past that the newest admission was the one a ward list
+ * left off and a bed check did not see. More open than the service's ceiling throws ListCeilingError. */
+const openEncounters = (svc) => svc.listByStatus("Encounter", [OPEN]);
+/** The refusal for a census that could not be read whole. Never a short list, never an admission. */
+const censusRefusal = (e) => ({ ok: false, status: 503, error: "too_many_open", detail: str(e.message) });
 
 /** Builds the per-request governed service, or a shaped refusal. Never throws. */
 async function openService(request, env, ctx, need) {
@@ -190,10 +197,13 @@ async function admitPatient(request, env, ctx) {
    * patient on a ward awaiting one. */
   let admissionOverride = null;
   if (candidate.location.bed) {
-    let openEncounters;
-    try { openEncounters = await svc.list("Encounter", 200); }
-    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
-    const clash = (openEncounters || []).find((e) => e && e.id !== candidate.id && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, candidate.location));
+    let open;
+    try { open = await openEncounters(svc); }
+    catch (e) {
+      if (e instanceof ListCeilingError) return { ...base, ...censusRefusal(e), written: 0 };
+      return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+    }
+    const clash = (open || []).find((e) => e && e.id !== candidate.id && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, candidate.location));
     if (clash) return bedOccupied(base, candidate);
 
     // TASK 4.2: the bed's own administrative state (blocked/cleaning/maintenance) and any stated
@@ -294,7 +304,8 @@ async function checkMasterBed(env, orgId, wardName, bedName, patientSex, relaxed
 async function bedOverrideActive(svc, wanted) {
   if (!wanted) return null;
   let rows;
-  try { rows = await svc.list("EmergencyActivation", 50); } catch { return null; }
+  // Every activation (the old read was the oldest 50, so a new declaration was never seen); a failed read is no override.
+  try { rows = (await svc.listAll("EmergencyActivation", { max: 50000, throwOnTruncate: true })).rows; } catch { return null; }
   const nowMs = Date.now();
   const matches = (rows || []).filter((a) => a && emergencyIsActive(a, nowMs) && (a.relaxations || []).includes(EMERGENCY_BED_RELAXATION));
   matches.sort((a, b) => String(b.declaredAt || "").localeCompare(String(a.declaredAt || "")));
@@ -396,6 +407,22 @@ async function releaseBedClaim(svc, candidate) {
  * A caller with no read grant gets a refusal, not an empty list — an empty ward and a forbidden ward
  * must never look the same to a nurse.
  */
+/**
+ * Patient id -> Patient for these ids. The newest 1,000 patients in one read (an admitted patient is almost
+ * always a recently registered one), then a read by id for any still missing: a roster read alone, oldest
+ * first, left the newest patients on a ward list nameless once a hospital passed 1,000 patients.
+ */
+async function patientsFor(svc, ids) {
+  const want = [...new Set((ids || []).filter(Boolean))];
+  const byId = new Map(((await svc.list("Patient", 1000, { newest: true })) || []).filter((p) => p && p.id).map((p) => [p.id, p]));
+  const missing = want.filter((id) => !byId.has(id));
+  for (let i = 0; i < missing.length; i += 8) {
+    const got = await Promise.all(missing.slice(i, i + 8).map((id) => svc.get("Patient", id).catch(() => null)));
+    got.forEach((p) => { if (p && p.id) byId.set(p.id, p); });
+  }
+  return byId;
+}
+
 /* Ward name -> its department's name, from the hospital's own master data (Admin, departments and wards).
  * A ward with no department, or departments that cannot be read, is simply absent: never guessed. */
 async function departmentNames(env, orgId, wards) {
@@ -416,11 +443,11 @@ async function listWard(request, env, ctx) {
   if (error) return { ...base, ...error, patients: [] };
 
   let encounters;
-  /* LT-21: this read 200 encounters, oldest first, every discharged stay included, and said nothing when there
-   * were more: the newest admissions were the ones silently left off the ward list and the nurse worklist. */
-  const ENCOUNTER_CAP = 1000;
-  try { encounters = await svc.list("Encounter", ENCOUNTER_CAP); }
+  /* LT-21 then R4-1: this read the OLDEST 200, then 1,000, encounters with every discharged stay included, so the
+   * newest admissions were the ones left off the ward list and the nurse worklist. It reads the open ones only. */
+  try { encounters = await openEncounters(svc); }
   catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...censusRefusal(e), patients: [] };
     /* A SCOPE REFUSAL IS A 403, NOT A SERVER ERROR. A role can hold queue.view (which opens this
      * route) and still have no read scope on Encounter - pharmacy is exactly that - and answering
      * 502 told the caller the server was broken when in fact it had simply said no. */
@@ -445,10 +472,8 @@ async function listWard(request, env, ctx) {
    * that cannot be read stays null and the caller falls back as before - a missing name must never
    * turn a readable ward list into an error. */
   let byId = new Map();
-  try {
-    const roster = await svc.list("Patient", ENCOUNTER_CAP);
-    byId = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
-  } catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
+  try { byId = await patientsFor(svc, open.map((e) => e.patientId)); }
+  catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
   /* Each stay's expected discharge date (expected-discharge.js), with overdue worked out on the hospital's clock.
    * null = none set; false on the row = could not be read, which the screen must not show as "none set". */
   let edds = null;
@@ -474,8 +499,7 @@ async function listWard(request, env, ctx) {
   /* The hospital's country, so the ward screen can LABEL a temperature box with the unit this
    * server will store it in. Without it the two were inferred separately and disagreed: the box
    * said Fahrenheit, the server stored Celsius, and 98.6 went into the record as 98.6 Cel. */
-  return { ...base, ok: true, patients, region: str(ctx.region) || "IN",
-    ...((encounters || []).length >= ENCOUNTER_CAP ? { partial: true, partialWarning: `Only the first ${ENCOUNTER_CAP} stays on record were read; an admitted patient may be missing from this list.` } : {}) };
+  return { ...base, ok: true, patients, region: str(ctx.region) || "IN" };
 }
 
 /**
@@ -676,23 +700,32 @@ async function createWardMedicationOrder(request, env, ctx) {
   if (fStatus.satisfiedBy === "approval") candidate.restrictionApprovalRef = str(ctx.approvalRef);
 
   /* THE HOSPITAL'S OWN ADVISORIES, evaluated AFTER the formulary and unable to affect the write.
-   * They are read from records the ward already has, and a failure to read them costs the prescriber
-   * nothing: an advisory that could not be computed is simply absent, and losing a hospital's own
-   * reminder must never cost a patient their medicine. */
-  let advisories = [];
+   * They are read from records the ward already has, and a failure to read them never costs the
+   * prescriber their medicine - but it is SAID (R5-1, 2026-09-17). Until now a failed Observation or
+   * Condition read became `[]` and then no advisories at all, which on screen is indistinguishable
+   * from "this hospital's reminders found nothing about this drug for this patient". The read is
+   * either done or reported as not done; it is never quietly skipped.
+   * `advisories: null` = could not be evaluated, [] = evaluated and nothing fired. */
+  let advisories = [], advisoriesUnavailable = null;
   try {
     const compiled = compileAdvisories(ctx.advisories);
     if (compiled.rules.length) {
       const [obsRows, probRows] = await Promise.all([
-        svc.byPatient("Observation", candidate.patientId).catch(() => []),
-        svc.byPatient("Condition", candidate.patientId).catch(() => []),
+        svc.byPatient("Observation", candidate.patientId),
+        svc.byPatient("Condition", candidate.patientId),
       ]);
       advisories = evaluateAdvisories({
         compiled, drug: candidate.drug, observations: obsRows || [], problems: probRows || [],
         ageYears: ctx.ageYears, nowMs: Date.now(),
       });
     }
-  } catch { advisories = []; }
+  } catch (e) {
+    advisories = null;
+    advisoriesUnavailable = {
+      reason: e instanceof GovernanceError ? "permission" : "record_read_failed",
+      detail: str(e && e.message),
+    };
+  }
 
   let current;
   try { current = await svc.get("MedicationOrder", candidate.id); }
@@ -707,7 +740,8 @@ async function createWardMedicationOrder(request, env, ctx) {
   let safety = await orderEntrySafety(svc, ctx.rulePack || null, candidate, [], safetyOpts);
   if (ctx.checkOnly === true) {
     return { ...base, ok: true, written: 0, checkOnly: true, drug: candidate.drug, safety, formulary: fStatus.state,
-      ...(advisories.length ? { advisories } : {}), ...(replaces ? { replaces } : {}), actor: resolved.actor.id, role: resolved.role };
+      ...(advisories && advisories.length ? { advisories } : {}), ...(advisoriesUnavailable ? { advisoriesUnavailable } : {}),
+      ...(replaces ? { replaces } : {}), actor: resolved.actor.id, role: resolved.role };
   }
   /* A hard stop is refused whatever reason comes with it, and nothing is written (orderEntrySafety,
    * ORDER_ENTRY_HARD_STOPS). Every other finding stays reported and proceeds with a reason. */
@@ -759,7 +793,10 @@ async function createWardMedicationOrder(request, env, ctx) {
     safety, ...(replaces ? { replaced: replaces } : {}),
     /* The hospital's own advice, alongside the safety engine's findings and never mixed into them.
      * Every entry carries source:"hospital-advisory" and blocking:false. */
-    ...(advisories.length ? { advisories } : {}),
+    ...(advisories && advisories.length ? { advisories } : {}),
+    // The hospital's reminders could not be evaluated at all: said on the order's own response, so
+    // nothing downstream reads their absence as "nothing to say".
+    ...(advisoriesUnavailable ? { advisoriesUnavailable } : {}),
     formulary: fStatus.state,
     // `fired` is included: an evaluation where the rule was RESPECTED writes a firing and no
     // override, and leaving that off the response made the denominator invisible to the caller.
@@ -806,8 +843,11 @@ async function transferPatient(request, env, ctx) {
   let current, all;
   try {
     current = await svc.get("Encounter", encounterId);
-    all = await svc.list("Encounter", 200);
-  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    all = await openEncounters(svc);
+  } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...censusRefusal(e), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+  }
 
   if (!current) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId, written: 0 };
   if (!ADMISSION_CLASSES.includes(current.class)) return { ...base, ok: false, status: 409, error: "not_an_admission", detail: "only an inpatient or ICU stay can be transferred", encounterId, written: 0 };
@@ -905,8 +945,9 @@ async function bedBoard(request, env, ctx) {
   if (error) return { ...base, ...error, wards: [] };
 
   let encounters;
-  try { encounters = await svc.list("Encounter", 200); }
+  try { encounters = await openEncounters(svc); }
   catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...censusRefusal(e), wards: [] };
     /* A REFUSAL IS NOT A SERVER FAULT, and calling it one made this screen unreadable.
      *
      * Every exception here became a 502 "record_read_failed". When the exception is the record
@@ -935,10 +976,13 @@ async function bedBoard(request, env, ctx) {
   const deptOf = new Map();       // ward name -> its department's name, from the hospital's own master data
   const canonical = new Map();    // lowercased ward name or code -> the ward's own name (LT-03)
   const retired = new Set();      // lowercased names and codes of wards the hospital has turned off
-  let masterKnown = false, bedsUnread = false;
+  let masterKnown = false, bedsUnread = false, wardsUnread = false;
   if (ctx.orgId) {
     let allWards = [];
-    try { allWards = await listWards(env, ctx.orgId); } catch { allWards = []; }
+    /* R5-1: a ward master that could NOT be read used to become [], which is indistinguishable from a
+     * hospital that has configured no wards - the board then silently fell back to the old config list
+     * with no ward states, no departments and no retired wards. Said now, on the response. */
+    try { allWards = await listWards(env, ctx.orgId); } catch { allWards = []; wardsUnread = true; }
     const masterWards = allWards.filter((w) => w.active);
     for (const w of allWards.filter((x) => !x.active)) { retired.add(str(w.name).toLowerCase()); if (str(w.code)) retired.add(str(w.code).toLowerCase()); }
     /* BUG-MU06Z46U-DMDX / BUG-MU08T4RL-GU0N: admitting and transferring pick a department by picking one of
@@ -990,7 +1034,7 @@ async function bedBoard(request, env, ctx) {
    * back exactly as before - a missing name must never turn a readable board into an error. */
   let nameById = new Map();
   try {
-    const roster = await svc.list("Patient", 400);
+    const roster = await svc.list("Patient", 1000, { newest: true }); // R4-2: the newest (was the oldest 400)
     nameById = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
   } catch (e) { /* the beds are still worth showing; the tiles simply carry no name */ }
 
@@ -1034,6 +1078,8 @@ async function bedBoard(request, env, ctx) {
     ...base, ok: true, wards,
     // Stated, so "0 free" is never confused with "we do not know what beds exist".
     bedsConfigured: !!cfg,
+    // And "this hospital lists no wards" is never confused with "the ward list could not be read".
+    ...(wardsUnread ? { wardsUnread: true } : {}),
   };
 }
 
@@ -1398,7 +1444,7 @@ async function patientTimeline(request, env, ctx) {
 }
 
 export {
-  IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN,
+  IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN, patientsFor,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
   recordWardVitals, orderFromWardRequest, createWardMedicationOrder, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
   sameBed, transferPatient, bedBoard,

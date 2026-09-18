@@ -154,8 +154,11 @@ async function bookResource(request, env, ctx) {
   const id = bookingIdFor(resourceId, startAt);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
+  /* R4-2: every appointment/booking and blackout (service.listAll, paged). The old reads were the OLDEST 500, so a clash
+   * with a newer booking or leave was not seen. Past 50,000 the read throws and nothing is booked (502 with the reason).
+   * ponytail: a by-clinician or by-resource index is the upgrade; audit O20 for the paging cost. */
   let existing, blackouts;
-  try { [existing, blackouts] = await Promise.all([svc.list(TYPE, 500), svc.list("Blackout", 500).catch(() => [])]); existing = existing || []; }
+  try { [existing, blackouts] = await Promise.all([svc.listAll(TYPE, { max: 50000, throwOnTruncate: true }).then((g) => g.rows), svc.listAll("Blackout", { max: 50000, throwOnTruncate: true }).then((g) => g.rows, (e) => { if (e && e.name === "ListCeilingError") throw e; return []; })]); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
   // A BLACKOUT IS A REFUSAL, NEVER AN OVERRIDE - the same rule scheduling.js applies to a
@@ -178,7 +181,7 @@ async function bookResource(request, env, ctx) {
    * they are free is how a surgeon's list is taken from under them. */
   if (resource.kind === "theatre") {
     let sessions;
-    try { sessions = (await svc.list("TheatreSession", 1000)) || []; }
+    try { sessions = (await svc.listAll("TheatreSession", { max: 50000, throwOnTruncate: true })).rows; }
     catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The theatre sessions could not be read, so the theatre was not booked.", written: 0 }; }
     const held = heldSessionFor(sessions, candidate, candidate.sessionOwnerId, theatreSettings(ctx.theatre), Date.now());
     if (held) {
@@ -251,7 +254,7 @@ async function resourceSchedule(request, env, ctx) {
   if (error) return { ...base, ...error, resources: [] };
 
   let rows;
-  try { rows = (await svc.list(TYPE, 1000)) || []; }
+  try { rows = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; } // every booking (the old read was the oldest 1,000)
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), resources: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), resources: [] };

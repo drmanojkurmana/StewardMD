@@ -40,7 +40,7 @@
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { witnessOrRefusal } from "./controlled-drugs.js";
 
@@ -288,15 +288,13 @@ async function reconcileCount(request, env, ctx) {
   try {
     [movements, dispenses] = await Promise.all([
       /* No catch: an empty read here would post a wrong adjustment into the permanent record. */
-      svc.list(MOVE_TYPE, READ_CAP),
-      svc.list("MedicationDispense", READ_CAP),
+      ledger(svc, MOVE_TYPE),
+      ledger(svc, "MedicationDispense"),
     ]);
   } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...tooMany("the expected level cannot be worked out safely. Nothing was posted."), written: 0 };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
-  }
-  if ((movements || []).length >= READ_CAP || (dispenses || []).length >= READ_CAP) {
-    return { ...base, ok: false, status: 409, error: "too_many_records", detail: `More than ${READ_CAP} stock records exist, so the expected level cannot be worked out safely. Nothing was posted.`, written: 0 };
   }
 
   const computed = levelsFrom((movements || []).filter(Boolean), (dispenses || []).filter(Boolean));
@@ -472,7 +470,12 @@ async function recordMovement(request, env, ctx) {
   }
 }
 
-const READ_CAP = 1000;
+/* A ledger is never computed from a short read. Every movement and dispense is read (service.listAll, paged); past
+ * READ_CAP the read throws ListCeilingError and the caller refuses with 409 too_many_records, as it did at the old 1,000.
+ * ponytail: each page re-groups every version; audit O20 (a latest-version table) or a per-item ledger index is the upgrade. */
+const READ_CAP = 50000;
+const ledger = async (svc, type) => (await svc.listAll(type, { max: READ_CAP, throwOnTruncate: true })).rows;
+const tooMany = (what) => ({ ok: false, status: 409, error: "too_many_records", detail: `More than ${READ_CAP} stock records exist, so ${what}` });
 
 /**
  * PURE. How much of one receipt can still go back: what it brought in, less every earlier return naming it.
@@ -514,16 +517,14 @@ async function returnToSupplier(request, env, ctx) {
 
   let receipt, movements, po = null;
   try {
-    [receipt, movements] = await Promise.all([svc.get(MOVE_TYPE, receiptId), svc.list(MOVE_TYPE, READ_CAP)]);
+    [receipt, movements] = await Promise.all([svc.get(MOVE_TYPE, receiptId), ledger(svc, MOVE_TYPE)]);
     if (receipt && str(receipt.purchaseOrderId)) po = await svc.get("PurchaseOrder", str(receipt.purchaseOrderId));
   } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...tooMany("earlier returns against this receipt cannot all be read. Nothing was recorded."), written: 0 };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
   }
   if (!receipt || str(receipt.kind) !== "receipt") return { ...base, ok: false, status: 404, error: "receipt_not_found", detail: "There is no receipt with that reference.", written: 0 };
-  if ((movements || []).length >= READ_CAP) {
-    return { ...base, ok: false, status: 409, error: "too_many_records", detail: `More than ${READ_CAP} stock records exist, so earlier returns against this receipt cannot all be read. Nothing was recorded.`, written: 0 };
-  }
   const left = returnableFrom(receipt, movements);
   if (!left) return { ...base, ok: false, status: 422, error: "receipt_not_countable", detail: "This receipt has no usable quantity, so nothing can be returned against it.", written: 0 };
   if (value > left.remaining) {
@@ -557,13 +558,11 @@ async function stockFefo(request, env, ctx) {
   if (error) return { ...base, ...error };
   let movements, dispenses;
   try {
-    [movements, dispenses] = await Promise.all([svc.list(MOVE_TYPE, READ_CAP), svc.list("MedicationDispense", READ_CAP)]);
+    [movements, dispenses] = await Promise.all([ledger(svc, MOVE_TYPE), ledger(svc, "MedicationDispense")]);
   } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...tooMany("batch counts cannot be worked out safely here. Pick from the shelf by expiry date.") };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
-  }
-  if ((movements || []).length >= READ_CAP || (dispenses || []).length >= READ_CAP) {
-    return { ...base, ok: false, status: 409, error: "too_many_records", detail: `More than ${READ_CAP} stock records exist, so batch counts cannot be worked out safely here. Pick from the shelf by expiry date.` };
   }
   const sug = fefoSuggestion(batchBalances((movements || []).filter(Boolean), (dispenses || []).filter(Boolean), code, unit), quantity, ctx.now);
   if (!sug.ok) return { ...base, ok: false, status: 409, error: sug.reason, detail: sug.detail };
@@ -585,10 +584,12 @@ async function stockLevels(request, env, ctx) {
   try {
     [movements, dispenses] = await Promise.all([
       /* No catch: a dispense read that failed and came back as [] would make every level too high. */
-      svc.list(MOVE_TYPE, READ_CAP),
-      ctx.noDispenses === true ? [] : svc.list("MedicationDispense", READ_CAP),
+      ledger(svc, MOVE_TYPE),
+      ctx.noDispenses === true ? [] : ledger(svc, "MedicationDispense"),
     ]);
   } catch (e) {
+    /* A level from a short read is a wrong level: refused, where it used to be shown with a warning. */
+    if (e instanceof ListCeilingError) return { ...base, ...tooMany("the levels cannot be worked out safely."), levels: [] };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), levels: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), levels: [] };
   }
@@ -601,10 +602,8 @@ async function stockLevels(request, env, ctx) {
   const expiring = nearExpiry((movements || []).filter(Boolean), ctx.nearExpiryDays, ctx.now)
     .filter((r) => !where || key(r.location) === key(where));
 
-  const truncated = (movements || []).length >= READ_CAP || (dispenses || []).length >= READ_CAP;
   return {
     ...base, ok: true,
-    ...(truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} stock records exist and only the latest ${READ_CAP} of each kind were read, so these levels may be wrong.` } : {}),
     levels: levels.sort((a, b) => String(a.display).localeCompare(String(b.display))),
     belowReorder: flagged.belowReorder,
     negative: flagged.negative,

@@ -101,13 +101,15 @@
       ["hrAttendance", "nav.admin.hrAttendance"], ["hrCredentials", "nav.admin.hrCredentials"], ["hrTraining", "nav.admin.hrTraining"],
       ["patientComms", "nav.admin.patientComms"], ["onlineBooking", "nav.admin.onlineBooking"], ["patientFeedback", "nav.admin.patientFeedback"],
       // R2-5: patients, prices and suppliers from the system being replaced (legacy-import.js).
-      ["legacyImport", "nav.admin.legacyImport"]);
+      ["legacyImport", "nav.admin.legacyImport"],
+      // R5-3: closing orders this hospital resulted before anything closed one (order-backfill.js).
+      ["orderBackfill", "nav.admin.orderBackfill"]);
     // #/admin/tariff opens that tab: the cashier's "no price set" message links straight to the Price list (LT-30).
     // Applied once per arrival, so the tab buttons still work while the address says /tariff.
     if (st.page === "admin" && st.arg && st._adminArg !== st.arg && tabs.some(function (t) { return t[0] === st.arg; })) st._adminTab = st.arg;
     st._adminArg = st.page === "admin" ? st.arg : "";
     var tab = st._adminTab || "hospital";
-    if (["seed", "maik", "security", "health", "export", "fhir", "integrations", "bugs", "governance", "legal", "hrAttendance", "hrCredentials", "hrTraining", "patientComms", "onlineBooking", "patientFeedback", "legacyImport"].indexOf(tab) >= 0 && !c.isWardsynq()) tab = "hospital";
+    if (["seed", "maik", "security", "health", "export", "fhir", "integrations", "bugs", "governance", "legal", "hrAttendance", "hrCredentials", "hrTraining", "patientComms", "onlineBooking", "patientFeedback", "legacyImport", "orderBackfill"].indexOf(tab) >= 0 && !c.isWardsynq()) tab = "hospital";
     var navTr = c.navTr || function (k) { return k; };
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.admin.title", "Admin Center")) + '</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist" lang="' + c.esc(c.navLang || "en") + '">' + tabs.map(function (t) {
@@ -117,7 +119,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, legacyImport: renderImport, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs,
+    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, legacyImport: renderImport, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs, orderBackfill: renderOrderClosures,
       // Privacy and compliance is its own page (pages/governance.js); the tab is the Admin Center's door to it.
       governance: function () { st._adminTab = "hospital"; WSQ.go("governance"); },
       legal: function (x, y) { return WSQ._legal.render(x, y); },
@@ -285,7 +287,7 @@
       }).join("");
     };
     h += '<div class="card"><h2>' + esc(T(c, "site.admin.import.mapTitle", "Match the columns")) + "</h2>" +
-      '<p class="quiet">' + esc(T(c, "site.admin.import.rows", "{n} rows in the file. One run takes at most {cap}; split a larger file.", { n: m.rowCount, cap: m.rowCap })) + "</p><div class=\"row\">" +
+      '<p class="quiet">' + esc(T(c, "site.admin.import.rowsRuns", "{n} rows in the file. They are checked and imported in {runs} parts of at most {cap} rows each, one after another.", { n: m.rowCount, cap: m.rowCap, runs: importRuns(m.rowCount, m.rowCap).length })) + "</p><div class=\"row\">" +
       m.fields.required.concat(m.fields.optional).map(function (f) {
         var req = m.fields.required.indexOf(f) >= 0;
         return '<label class="f"><span>' + esc(importFieldLabel(c, f)) + (req ? " " + esc(T(c, "site.admin.import.required", "(required)")) : "") + '</span><select data-imp-field="' + f + '">' + opts(f) + "</select></label>";
@@ -300,6 +302,7 @@
     if (pv === false) return h + '<div class="msg err">' + esc(T(c, "site.admin.import.failed", "The dry run could not be completed. Nothing was imported.")) + "</div></div>";
     if (!pv.ok && !pv.rows) return h + '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div></div>";
     if (!pv.ok) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+    if (pv.stopped) h += '<div class="msg err">' + esc(T(c, "site.admin.import.stopped", "{n} rows were imported before part {part} of {parts} stopped. Run the dry run again: what was imported shows as already here, and importing adds only what is missing.", pv.stopped)) + "</div>";
     var n = pv.counts || {};
     if (pv.step === "done" && pv.ok) h += '<div class="msg ok">' + esc(T(c, "site.admin.import.done", "Imported {n}. Every row below is as it was saved.", { n: pv.written })) + "</div>";
     h += "<p>" + [["create", "ok"], ["matched", ""], ["duplicate", "warn"], ["invalid", "stop"]].map(function (x) {
@@ -316,13 +319,27 @@
         return '<tr><td class="mono">' + esc(String(r.row)) + "</td><td>" + EN(c, esc(r.label || "")) + "</td><td>" + esc(importStatusLabel(c, r.status)) + "</td><td>" + why + "</td></tr>";
       }).join("") + "</tbody></table></div>";
     if (pv.step === "preview" && pv.ok) {
-      h += n.create ? '<button type="button" class="btn" data-imp="commit" data-count="' + esc(String(n.create)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.import.commit", "Import these {n} rows", { n: n.create })) + "</button>" +
-        (pv.partial ? '<div class="msg err">' + esc(T(c, "site.admin.import.partial", "What is already held could not be read in full, so this file cannot be imported.")) + "</div>" : "")
+      h += n.create ? '<button type="button" class="btn" data-imp="commit" data-count="' + esc(String(n.create)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.import.commit", "Import these {n} rows", { n: n.create })) + "</button>"
         : '<p class="quiet">' + esc(T(c, "site.admin.import.nothing", "Nothing in this file would be added.")) + "</p>";
     }
     return h + '<div id="admImpDoneMsg" aria-live="polite"></div></div>';
   }
   WSQ._importHtml = importHtml;
+  /* R3-1: a file larger than one run is checked and imported in successive runs of at most rowCap rows (the server's
+   * `run`), each with its own dry-run plan. The parts' reports are shown as one; row numbers are the file's own. */
+  function importRuns(rowCount, cap) {
+    var out = [], n = Number(rowCount) || 0, k = Number(cap) || 1;
+    for (var f = 0; f < n; f += k) out.push({ from: f, to: Math.min(n, f + k) });
+    return out;
+  }
+  function importMerge(parts) {
+    var first = parts[0] || {}, counts = { create: 0, matched: 0, duplicate: 0, invalid: 0 }, rows = [];
+    parts.forEach(function (p) { Object.keys(counts).forEach(function (k) { counts[k] += (p.counts && p.counts[k]) || 0; }); rows = rows.concat(p.rows || []); });
+    return { ok: true, step: "preview", kind: first.kind, rowCount: first.rowCount, rowCap: first.rowCap, counts: counts, rows: rows,
+      planId: parts.map(function (p) { return p.planId; }).join(","), namePoolPartial: parts.some(function (p) { return p.namePoolPartial; }),
+      runs: parts.map(function (p) { return { run: p.run, planId: p.planId, create: (p.counts && p.counts.create) || 0 }; }) };
+  }
+  WSQ._importRuns = importRuns; WSQ._importMerge = importMerge;
   function renderImport(c, body) {
     var s = c.state._import = c.state._import || { kind: "patients", csv: "", map: null, mapping: null, preview: null };
     var draw = function () { body.innerHTML = importHtml(c, s); };
@@ -354,15 +371,405 @@
         reader.readAsText(file);
         return;
       }
-      if (act === "dry" || act === "commit") {
-        if (act === "dry") s.mapping = mapping();
+      if (act === "dry") {
+        s.mapping = mapping(); b.disabled = true;
+        var runs = importRuns(s.map.rowCount, s.map.rowCap), parts = [];
+        var dryNext = function (i) {
+          if (i >= runs.length) { s.preview = importMerge(parts); draw(); return; }
+          progress(i, runs.length);
+          send({ mapping: s.mapping, run: runs[i] }).then(function (r) {
+            if (!r || !r.ok) { s.preview = r || false; draw(); return; }
+            parts.push(r); dryNext(i + 1);
+          }, function () { s.preview = false; draw(); });
+        };
+        dryNext(0);
+        return;
+      }
+      if (act === "commit") {
         b.disabled = true;
-        var extra = { mapping: s.mapping };
-        if (act === "commit") { extra.commit = true; extra.confirmCount = Number(b.getAttribute("data-count")); extra.planId = b.getAttribute("data-plan"); }
-        send(extra).then(function (r) { s.preview = r || false; draw(); }, function () { s.preview = false; draw(); });
+        var pv = s.preview, todo = (pv.runs || []).filter(function (x) { return x.create > 0; }), written = 0;
+        var byRow = {}; pv.rows.forEach(function (r, i) { byRow[r.row] = i; });
+        var keep = function (r) { ((r && r.rows) || []).forEach(function (x) { if (byRow[x.row] != null) pv.rows[byRow[x.row]] = x; }); };
+        var commitNext = function (i) {
+          if (i >= todo.length) { pv.step = "done"; pv.written = written; s.preview = pv; draw(); return; }
+          progress(i, todo.length);
+          var stop = function (r) {
+            s.preview = { ok: false, message: r ? r.message : "", error: r ? r.error : "", counts: pv.counts, rows: pv.rows, stopped: { n: written, part: i + 1, parts: todo.length } };
+            draw();
+          };
+          send({ mapping: s.mapping, run: todo[i].run, commit: true, confirmCount: todo[i].create, planId: todo[i].planId }).then(function (r) {
+            written += (r && Number(r.written)) || 0; keep(r);
+            if (!r || !r.ok) return stop(r);
+            commitNext(i + 1);
+          }, function () { stop(null); });
+        };
+        commitNext(0);
+      }
+    };
+    var progress = function (i, n) {
+      var m = document.getElementById("admImpMsg");
+      if (m) m.innerHTML = '<p class="quiet">' + c.esc(T(c, "site.admin.import.part", "Working on part {i} of {n}. Keep this page open.", { i: i + 1, n: n })) + "</p>";
+    };
+    draw();
+  }
+
+  // ---- Formulary (R3-2, functions/_wardsynq/formulary-settings.js) ------------------------------------------------
+  /* What this hospital stocks and restricts, edited here or loaded from a CSV. Every change is a dry run first: the server
+   * lists each entry (or file row) as added, changed, removed or refused with its reason, and Save sends exactly that plan
+   * back (count and plan id) with a reason. Any refused entry stops the whole save. Drug names, codes, specialties and
+   * approvers are the hospital's own values and are never translated.
+   * s.r: undefined = loading, null = could not be loaded, else the saved list. s.pv / s.csvPv: null = not run, false = the
+   * request failed, else the server's report. s.draft is the list being edited, saved only through its dry run. */
+  var FML_FIELDS = ["drug", "code", "aliases", "restricted", "requiresApproval", "restrictedTo", "approvedBy", "note", "controlled"];
+  var FML_BOOL = { restricted: 1, requiresApproval: 1, controlled: 1 };
+  var FML_LIST = { aliases: 1, restrictedTo: 1 };
+  function fmlFieldLabel(c, f) {
+    return { drug: T(c, "site.admin.fml.f.drug", "Drug name"), code: T(c, "site.admin.fml.f.code", "Code"), aliases: T(c, "site.admin.fml.f.aliases", "Other names, separated by ;"),
+      restricted: T(c, "site.admin.fml.f.restricted", "Restricted"), requiresApproval: T(c, "site.admin.fml.f.requiresApproval", "Needs an approval"),
+      restrictedTo: T(c, "site.admin.fml.f.restrictedTo", "Specialties that may prescribe it, separated by ;"), approvedBy: T(c, "site.admin.fml.f.approvedBy", "Who approves"),
+      note: T(c, "site.admin.fml.f.note", "Note shown with a refusal"), controlled: T(c, "site.admin.fml.f.controlled", "Controlled drug") }[f] || f;
+  }
+  function fmlStatusLabel(c, st) {
+    return { add: T(c, "site.admin.fml.stAdd", "Will be added"), change: T(c, "site.admin.fml.stChange", "Will be changed"), unchanged: T(c, "site.admin.fml.stUnchanged", "Left as it is"),
+      invalid: T(c, "site.admin.fml.stInvalid", "Refused"), remove: T(c, "site.admin.fml.stRemove", "Will be removed"), setting: T(c, "site.admin.fml.stSetting", "Reason switch changed") }[st] || st;
+  }
+  // Returns HTML: translated reason, or the server's English when the code is not known here.
+  function fmlReason(c, p) {
+    var t = { no_drug_or_code: T(c, "site.admin.fml.r.noDrug", "An entry needs a drug name or a code."),
+      restriction_has_no_route: T(c, "site.admin.fml.r.noRoute", "A restricted drug needs an approval or at least one specialty that may prescribe it, or nobody could ever order it."),
+      duplicate: T(c, "site.admin.fml.r.duplicate", "Another entry already uses this name, alias or code."), too_long: T(c, "site.admin.fml.r.tooLong", "A value is longer than allowed."),
+      too_many: T(c, "site.admin.fml.r.tooMany", "More than 20 other names or specialties on one entry."), bad_yes_no: T(c, "site.admin.fml.r.yesNo", "Use yes or no."),
+      bad_value: T(c, "site.admin.fml.r.badValue", "This value could not be read."), too_many_entries: T(c, "site.admin.fml.r.tooManyEntries", "The formulary has more entries than this hospital's settings can hold.") }[p.reason];
+    return (p.field ? c.esc(fmlFieldLabel(c, p.field)) + ": " : "") + (t ? c.esc(t) : EN(c, c.esc(p.message || p.reason))) + (p.clash ? " " + EN(c, c.esc(p.clash)) : "");
+  }
+  function fmlReportHtml(c, pv, act) {
+    var esc = c.esc;
+    var h = "<h3>" + esc(T(c, "site.admin.fml.reportTitle", "Dry run result")) + "</h3>";
+    if (pv === false) return h + '<div class="msg err">' + esc(T(c, "site.admin.fml.dryFailed", "The dry run could not be completed. Nothing was saved.")) + "</div>";
+    if (!pv.rows) return h + '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+    if (!pv.ok) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+    if (pv.ok && pv.step === "done") h += '<div class="msg ok">' + esc(T(c, "site.admin.fml.saved", "Saved {n} changes. The formulary above is what the server now holds.", { n: pv.written })) + "</div>";
+    var n = pv.counts || {};
+    h += "<p>" + ["add", "change", "remove", "invalid", "setting"].map(function (k) { return '<span class="pill' + (k === "invalid" ? " stop" : "") + '">' + esc(fmlStatusLabel(c, k)) + ": " + esc(String(n[k] || 0)) + "</span>"; }).join(" ") + "</p>";
+    (pv.listProblems || []).forEach(function (p) { h += '<div class="msg err">' + fmlReason(c, p) + "</div>"; });
+    if (pv.rows.length) h += '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.fml.colRow", "Row")) + "</th><th>" + esc(T(c, "site.admin.fml.colDrug", "Drug")) + "</th><th>" + esc(T(c, "site.admin.fml.colResult", "Result")) + "</th><th>" + esc(T(c, "site.admin.fml.colWhy", "Why")) + "</th></tr></thead><tbody>" +
+      pv.rows.map(function (r) {
+        // The file row number, the entry's place in the editor's list, or an entry already on the list (CSV merge).
+        var where = r.row != null ? String(r.row) : r.row === undefined ? String(r.index + 1) : T(c, "site.admin.fml.onList", "On the list");
+        return '<tr><td class="mono">' + esc(where) + "</td><td>" + EN(c, esc(r.label || "")) + "</td><td>" + esc(fmlStatusLabel(c, r.status)) + "</td><td>" +
+          (r.problems || []).map(function (p) { return fmlReason(c, p); }).join("<br>") + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+    if ((pv.removed || []).length) h += "<p>" + esc(fmlStatusLabel(c, "remove")) + ": " + EN(c, esc(pv.removed.join(", "))) + "</p>";
+    if (pv.ok && pv.step === "preview") {
+      h += pv.changeCount ? '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.fml.reason", "Why the formulary is changing (required)")) + '</span><input data-fml-reason="' + act + '" maxlength="200"></label>' +
+        '<button type="button" class="btn" data-fml="' + act + '-commit" data-count="' + esc(String(pv.changeCount)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.fml.commit", "Save these {n} changes", { n: pv.changeCount })) + "</button></div>"
+        : '<p class="quiet">' + esc(T(c, "site.admin.fml.nothing", "Nothing would change.")) + "</p>";
+    }
+    return h;
+  }
+  function fmlText(e, f) { var v = e && e[f]; return FML_LIST[f] ? (v || []).join("; ") : v == null ? "" : String(v); }
+  function formularyHtml(c, s) {
+    var esc = c.esc, r = s.r;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.fml.title", "Formulary")) + "</h2>";
+    if (!c.can("order.verify")) return h + '<div class="msg note">' + esc(T(c, "site.admin.fml.noAccess", "Changing the formulary needs both staff administration and pharmacy verification. Your role does not include both.")) + "</div></div>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.fml.loading", "Loading the formulary...")) + "</p></div>";
+    if (r === null) return h + '<div class="msg err">' + esc(T(c, "site.admin.fml.loadFailed", "The formulary could not be loaded. Do not read this as no formulary configured.")) + "</div></div>";
+    h += '<p class="quiet">' + esc(T(c, "site.admin.fml.intro", "What this hospital stocks and what it restricts. A drug not on the list is flagged on the order, never blocked; a restricted one is blocked until its approval or specialty is given. Retired entries stay listed and match no order. Nothing ships with WardSynQ: the list is this hospital's own.")) + "</p>";
+    if ((r.problems || []).length) h += '<div class="msg err">' + esc(T(c, "site.admin.fml.savedProblems", "The saved formulary has {n} problems ordering cannot use. Correct them before saving any change.", { n: r.problems.length })) + "</div>";
+    h += '<label class="f"><span><input type="checkbox" id="fmlReason"' + (s.draft.requireReasonOffFormulary ? " checked" : "") + "> " + esc(T(c, "site.admin.fml.requireReason", "Require a reason when a drug not on the formulary is ordered")) + "</span></label>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.fml.search", "Search")) + '</span><input id="fmlSearch" value="' + esc(s.q || "") + '"></label>' +
+      '<button type="button" class="btn ghost" data-fml="new">' + esc(T(c, "site.admin.fml.add", "Add an entry")) + "</button></div>";
+    if (s.edit != null) {
+      var e = s.edit >= 0 ? s.draft.entries[s.edit] : {};
+      h += '<div class="card"><div class="row">' + FML_FIELDS.map(function (f) {
+        return FML_BOOL[f] ? '<label class="f"><span><input type="checkbox" data-fml-f="' + f + '"' + (e[f] === true ? " checked" : "") + "> " + esc(fmlFieldLabel(c, f)) + "</span></label>"
+          : '<label class="f"><span>' + esc(fmlFieldLabel(c, f)) + '</span><input data-fml-f="' + f + '" value="' + esc(fmlText(e, f)) + '"></label>';
+      }).join("") + '</div><button type="button" class="btn" data-fml="apply">' + esc(T(c, "site.admin.fml.apply", "Put in the draft")) + '</button> <button type="button" class="btn ghost" data-fml="cancel">' + esc(T(c, "site.admin.fml.cancel", "Cancel")) + "</button>" +
+        '<p class="quiet">' + esc(T(c, "site.admin.fml.draftNote", "The draft is checked and saved only by the dry run below.")) + "</p></div>";
+    }
+    var q = String(s.q || "").toLowerCase();
+    var shown = s.draft.entries.map(function (x, i) { return [x, i]; }).filter(function (p) { return !q || [p[0].drug, p[0].code].concat(p[0].aliases || []).join(" ").toLowerCase().indexOf(q) >= 0; });
+    h += s.draft.entries.length ? '<div class="tbl"><table><thead><tr><th>' + esc(fmlFieldLabel(c, "drug")) + "</th><th>" + esc(fmlFieldLabel(c, "code")) + "</th><th>" + esc(T(c, "site.admin.fml.colRule", "Rule")) + "</th><th></th></tr></thead><tbody>" +
+      shown.map(function (p) {
+        var x = p[0], rule = [];
+        if (x.restricted) rule.push(esc(T(c, "site.admin.fml.restrictedShort", "Restricted")) + (x.requiresApproval ? " " + esc(T(c, "site.admin.fml.approvalShort", "(approval)")) : "") + ((x.restrictedTo || []).length ? " " + EN(c, esc(x.restrictedTo.join(", "))) : ""));
+        if (x.controlled) rule.push(esc(T(c, "site.admin.fml.controlledShort", "Controlled")));
+        if (x.retired) rule.push(esc(T(c, "site.admin.fml.retiredShort", "Retired")));
+        return "<tr><td>" + EN(c, esc(x.drug || "")) + ((x.aliases || []).length ? ' <span class="quiet">' + EN(c, esc(x.aliases.join(", "))) + "</span>" : "") + '</td><td class="mono">' + EN(c, esc(x.code || "")) + "</td><td>" + rule.join(", ") + "</td><td>" +
+          '<button type="button" class="btn ghost" data-fml="edit" data-i="' + p[1] + '">' + esc(T(c, "site.admin.fml.edit", "Edit")) + '</button> <button type="button" class="btn ghost" data-fml="retire" data-i="' + p[1] + '">' + esc(x.retired ? T(c, "site.admin.fml.restore", "Put back on the formulary") : T(c, "site.admin.fml.retire", "Retire")) + "</button></td></tr>";
+      }).join("") + "</tbody></table></div>" : '<p class="quiet">' + esc(T(c, "site.admin.fml.empty", "No formulary is configured. Orders are not checked against one until entries are saved.")) + "</p>";
+    h += '<button type="button" class="btn" data-fml="dry">' + esc(T(c, "site.admin.fml.dryRun", "Dry run the changes")) + "</button>";
+    if (s.pv != null) h += fmlReportHtml(c, s.pv, "ed");
+    h += "<h3>" + esc(T(c, "site.admin.fml.csvTitle", "Load from a CSV file")) + '</h3><div class="row"><label class="f"><span>' + esc(T(c, "site.admin.fml.file", "CSV file")) + '</span><input id="fmlFile" type="file" accept=".csv,text/csv"></label>' +
+      '<button type="button" class="btn ghost" data-fml="read">' + esc(T(c, "site.admin.fml.read", "Read the file")) + "</button></div>";
+    if (s.map) {
+      h += '<p class="quiet">' + esc(T(c, "site.admin.fml.rows", "{n} rows in the file.", { n: s.map.rowCount })) + '</p><div class="row">' + s.map.fields.map(function (f) {
+        var cur = s.mapping && s.mapping[f] != null ? String(s.mapping[f]) : "";
+        return '<label class="f"><span>' + esc(fmlFieldLabel(c, f)) + '</span><select data-fml-col="' + f + '"><option value="">' + esc(T(c, "site.admin.fml.notInFile", "Not in the file")) + "</option>" +
+          (s.map.headers || []).map(function (hd, i) { return '<option value="' + i + '"' + (cur === String(i) ? " selected" : "") + ">" + EN(c, esc(hd || T(c, "site.admin.fml.column", "Column {n}", { n: i + 1 }))) + "</option>"; }).join("") + "</select></label>";
+      }).join("") + "</div>" +
+        '<p class="quiet">' + esc(T(c, "site.admin.fml.yesNoNote", "Restricted, needs an approval and controlled read yes or no. Lists are separated by ;.")) + "</p>" +
+        '<div class="row"><label class="f"><span><input type="radio" name="fmlMode" value="merge"' + (s.mode === "merge" ? " checked" : "") + "> " + esc(T(c, "site.admin.fml.merge", "Add to the formulary: a row replaces the entry with the same code or name, every other entry stays")) + "</span></label>" +
+        '<label class="f"><span><input type="radio" name="fmlMode" value="replace"' + (s.mode === "replace" ? " checked" : "") + "> " + esc(T(c, "site.admin.fml.replace", "Replace the formulary: the file becomes the whole list, and entries not in it are removed")) + "</span></label></div>" +
+        '<button type="button" class="btn" data-fml="csv-dry">' + esc(T(c, "site.admin.fml.dryRun", "Dry run the changes")) + "</button>";
+      if (s.csvPv != null) h += fmlReportHtml(c, s.csvPv, "csv");
+    }
+    return h + '<div id="fmlMsg" aria-live="polite"></div></div>';
+  }
+  WSQ._formularyHtml = formularyHtml;
+  function wireFormulary(c) {
+    var box = document.getElementById("fmlCard");
+    if (!box) return;
+    var s = { r: undefined, draft: { entries: [], requireReasonOffFormulary: false }, edit: null, q: "", pv: null, csv: "", map: null, mapping: null, mode: "", csvPv: null };
+    var draw = function () { box.innerHTML = formularyHtml(c, s); };
+    var load = function () {
+      return c.api("/org/formulary?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+        s.r = r && r.ok ? r : null;
+        if (s.r) s.draft = { entries: JSON.parse(JSON.stringify(s.r.entries || [])), requireReasonOffFormulary: s.r.requireReasonOffFormulary === true };
+        draw();
+      }, function () { s.r = null; draw(); });
+    };
+    var say = function (text) { var m = document.getElementById("fmlMsg"); if (m) m.innerHTML = '<div class="msg err">' + EN(c, c.esc(text)) + "</div>"; };
+    var reasonOf = function (act) { var e = box.querySelector('[data-fml-reason="' + act + '"]'); return e ? String(e.value || "").trim() : ""; };
+    var edSend = function (extra) { return c.api("/org/formulary", Object.assign({ orgId: c.state.orgId, entries: s.draft.entries, requireReasonOffFormulary: s.draft.requireReasonOffFormulary }, extra || {})); };
+    var csvSend = function (extra) { return c.api("/org/formulary-import", Object.assign({ orgId: c.state.orgId, csv: s.csv }, extra || {})); };
+    box.onchange = function (ev) {
+      var t = ev.target || {};
+      if (t.id === "fmlSearch") { s.q = t.value; draw(); }
+      if (t.id === "fmlReason") { s.draft.requireReasonOffFormulary = !!t.checked; s.pv = null; }
+      if (t.name === "fmlMode") { s.mode = t.value; s.csvPv = null; }
+    };
+    box.onclick = function (ev) {
+      var b = ev.target.closest && ev.target.closest("[data-fml]"); if (!b) return;
+      var act = b.getAttribute("data-fml"), i = Number(b.getAttribute("data-i"));
+      if (act === "new") { s.edit = -1; draw(); return; }
+      if (act === "edit") { s.edit = i; draw(); return; }
+      if (act === "cancel") { s.edit = null; draw(); return; }
+      if (act === "retire") { var x = s.draft.entries[i]; if (x.retired) delete x.retired; else x.retired = true; s.pv = null; draw(); return; }
+      if (act === "apply") {
+        var old = s.edit >= 0 ? s.draft.entries[s.edit] : {}, e = old.retired ? { retired: true } : {};
+        box.querySelectorAll("[data-fml-f]").forEach(function (el) {
+          var f = el.getAttribute("data-fml-f");
+          if (FML_BOOL[f]) { if (el.checked) e[f] = true; }
+          else if (FML_LIST[f]) { var l = String(el.value || "").split(/[;|]/).map(function (v) { return v.trim(); }).filter(Boolean); if (l.length) e[f] = l; }
+          else if (String(el.value || "").trim()) e[f] = String(el.value).trim();
+        });
+        if (s.edit >= 0) s.draft.entries[s.edit] = e; else s.draft.entries.push(e);
+        s.edit = null; s.pv = null; draw(); return;
+      }
+      if (act === "dry") { b.disabled = true; edSend().then(function (r) { s.pv = r || false; draw(); }, function () { s.pv = false; draw(); }); return; }
+      if (act === "ed-commit" || act === "csv-commit") {
+        var csvAct = act === "csv-commit", reason = reasonOf(csvAct ? "csv" : "ed");
+        if (!reason) { say(T(c, "site.admin.fml.reasonFirst", "Say why the formulary is changing first.")); return; }
+        b.disabled = true;
+        var extra = { commit: true, reason: reason, confirmCount: Number(b.getAttribute("data-count")), planId: b.getAttribute("data-plan") };
+        var p = csvAct ? csvSend(Object.assign(extra, { mapping: s.mapping, mode: s.mode })) : edSend(extra);
+        p.then(function (r) {
+          if (csvAct) s.csvPv = r || false; else s.pv = r || false;
+          // After a save the list is read again, so what is shown is what the server holds, never the draft.
+          if (r && r.ok && r.step === "done") return load();
+          draw();
+        }, function () { if (csvAct) s.csvPv = false; else s.pv = false; draw(); });
+        return;
+      }
+      if (act === "read") {
+        var f = document.getElementById("fmlFile"), file = f && f.files && f.files[0];
+        if (!file) { say(T(c, "site.admin.fml.chooseFile", "Choose the CSV file first.")); return; }
+        var reader = new FileReader();
+        reader.onload = function () {
+          s.csv = String(reader.result || ""); s.map = null; s.mapping = null; s.csvPv = null;
+          csvSend().then(function (r) {
+            if (!r || !r.ok) { draw(); say(refusal(c, r)); return; }
+            s.map = r; draw();
+          }, function () { draw(); say(T(c, "site.admin.fml.readFailed", "The file could not be read by the server. Nothing was saved.")); });
+        };
+        reader.readAsText(file);
+        return;
+      }
+      if (act === "csv-dry") {
+        var mp = {};
+        box.querySelectorAll("[data-fml-col]").forEach(function (el) { if (el.value !== "") mp[el.getAttribute("data-fml-col")] = Number(el.value); });
+        s.mapping = mp;
+        if (!s.mode) { say(T(c, "site.admin.fml.chooseMode", "Choose whether the file is added to the formulary or replaces it.")); return; }
+        b.disabled = true;
+        csvSend({ mapping: mp, mode: s.mode }).then(function (r) { s.csvPv = r || false; draw(); }, function () { s.csvPv = false; draw(); });
       }
     };
     draw();
+    if (c.can("order.verify")) load();
+  }
+
+  // ---- Critical limits, delta limits, autoverification, MAR times, note templates (R4-4) --------------------------------------
+  /* One card per setting, each through GET/POST /org/clinical-settings/<setting> (functions/_wardsynq/clinical-content-settings.js).
+   * The formulary card's pattern: the draft is a table of rows, Dry run sends it whole, the server lists each item as added,
+   * changed, removed or refused with its reason, and Save sends exactly that plan back (count and plan id) with a reason and who
+   * signed the values off. The draft starts from what is SAVED, never from a built-in default: empty is "not configured".
+   * Codes, units, times, template text and names are the hospital's own values and are never translated.
+   * s.r: undefined = loading, null = could not be loaded, else the server's read. s.pv: null = not run, false = failed, else the report. */
+  var CCS_KEYS = ["criticalLimits", "deltaLimits", "autoVerify", "marTimes", "noteTemplates"];
+  var CCS_CAP = { criticalLimits: "lab.result", deltaLimits: "lab.result", autoVerify: "lab.result", marTimes: "order.verify", noteTemplates: "emr.treat" };
+  var CCS_COLS = { criticalLimits: ["code", "display", "unit", "low", "high"], deltaLimits: ["code", "maxAbsolute", "maxPercent", "withinHours"], autoVerify: ["code"], marTimes: ["frequency", "times"], noteTemplates: ["id", "name", "noteType", "sections"] };
+  function ccsText(c, key) {
+    return {
+      criticalLimits: [T(c, "site.admin.ccs.critical.title", "Critical limits"), T(c, "site.admin.ccs.critical.intro", "The low and high values at or beyond which a laboratory result opens a critical result loop. The laboratory's own critical flag always counts as well. An analyte not listed here uses the built-in adult default shown below."), T(c, "site.admin.ccs.critical.empty", "No critical limits are saved for this hospital. The built-in adult defaults below apply until limits are saved.")],
+      deltaLimits: [T(c, "site.admin.ccs.delta.title", "Delta check limits"), T(c, "site.admin.ccs.delta.intro", "The largest change from the patient's previous result, as a value in the result's own unit or as a percentage, before a result is flagged for a sample identity check. A result is never withheld. Results in different units are not compared. The previous result counts for 72 hours unless another window is given."), T(c, "site.admin.ccs.delta.empty", "No delta limits are saved. Results are not delta checked, and each result says so.")],
+      autoVerify: [T(c, "site.admin.ccs.auto.title", "Autoverification"), T(c, "site.admin.ccs.auto.intro", "Tests that may be released without a human look when the result is numeric, inside its reference range, not flagged critical by the laboratory and has no delta breach. Anything else is looked at."), T(c, "site.admin.ccs.auto.empty", "Autoverification is not configured. Every result is looked at.")],
+      marTimes: [T(c, "site.admin.ccs.mar.title", "Medication round times"), T(c, "site.admin.ccs.mar.intro", "The clock times a named frequency is due, on the 24 hour clock, in order through the day. TDS and QID times also place the 1-0-1 and 1-0-0-1 notations. A frequency not listed here uses the built-in round shown below."), T(c, "site.admin.ccs.mar.empty", "No round times are saved. The built-in round below applies until times are saved.")],
+      noteTemplates: [T(c, "site.admin.ccs.notes.title", "Note templates"), T(c, "site.admin.ccs.notes.intro", "The headings of this hospital's clinical notes. A section asks a question and never carries default text. One section per line: key | title | question | required. A template with the id of a built-in note replaces it."), T(c, "site.admin.ccs.notes.empty", "No note templates are saved. The built-in notes are offered until templates are saved.")],
+    }[key];
+  }
+  function ccsColLabel(c, col) {
+    return { code: T(c, "site.admin.ccs.col.code", "Test code"), display: T(c, "site.admin.ccs.col.display", "Name shown"), unit: T(c, "site.admin.ccs.col.unit", "Unit"), low: T(c, "site.admin.ccs.col.low", "Low limit"), high: T(c, "site.admin.ccs.col.high", "High limit"),
+      maxAbsolute: T(c, "site.admin.ccs.col.maxAbsolute", "Largest change (value)"), maxPercent: T(c, "site.admin.ccs.col.maxPercent", "Largest change (%)"), withinHours: T(c, "site.admin.ccs.col.withinHours", "Previous result within (hours)"),
+      frequency: T(c, "site.admin.ccs.col.frequency", "Frequency"), times: T(c, "site.admin.ccs.col.times", "Times, separated by commas"),
+      id: T(c, "site.admin.ccs.col.id", "Template id"), name: T(c, "site.admin.ccs.col.name", "Template name"), noteType: T(c, "site.admin.ccs.col.noteType", "Note type"), sections: T(c, "site.admin.ccs.col.sections", "Sections, one per line") }[col] || col;
+  }
+  function ccsReason(c, p) {
+    var t = { not_an_object: T(c, "site.admin.ccs.r.shape", "This could not be read."), unknown_code: T(c, "site.admin.ccs.r.unknownCode", "No laboratory result carries this code, so the rule would never be applied."),
+      unit_required: T(c, "site.admin.ccs.r.unit", "Give the unit the limit is written in."), no_bound: T(c, "site.admin.ccs.r.noBound", "Give a low limit, a high limit or both."),
+      bad_number: T(c, "site.admin.ccs.r.number", "A value is not a number above zero."), low_not_below_high: T(c, "site.admin.ccs.r.lowHigh", "The low limit must be below the high limit."),
+      no_threshold: T(c, "site.admin.ccs.r.noThreshold", "Give a largest change as a value, as a percentage, or both."), enabled_not_yes_no: T(c, "site.admin.ccs.r.onOff", "Say whether autoverification is on or off."),
+      enabled_without_codes: T(c, "site.admin.ccs.r.noCodes", "Autoverification is on but no test is listed. Turn it off or list the tests."), duplicate: T(c, "site.admin.ccs.r.duplicate", "This is listed twice."),
+      unknown_frequency: T(c, "site.admin.ccs.r.frequency", "This is not a frequency the medication round schedules (OD, BD, TDS, QID, OM, HS)."), bad_time: T(c, "site.admin.ccs.r.time", "A time must be written as HH:MM on the 24 hour clock."),
+      wrong_count: T(c, "site.admin.ccs.r.count", "The number of times must match the frequency ({n} here).", { n: p.expected }), times_out_of_order: T(c, "site.admin.ccs.r.order", "Give the times in order through the day."),
+      template_incomplete: T(c, "site.admin.ccs.r.templateIncomplete", "A template needs an id and a name."), template_empty: T(c, "site.admin.ccs.r.templateEmpty", "A template needs at least one section."),
+      no_key: T(c, "site.admin.ccs.r.noKey", "A section needs a key or a title."), default_text_not_allowed: T(c, "site.admin.ccs.r.defaultText", "A section may carry a question, never default text."),
+      too_long: T(c, "site.admin.ccs.r.tooLong", "A value is longer than 200 characters."), too_many: T(c, "site.admin.ccs.r.tooMany", "More templates or sections than this setting can hold.") }[p.reason];
+    return (t ? c.esc(t) : EN(c, c.esc(p.message || p.reason))) + (p.section ? " " + EN(c, c.esc(p.section)) : "");
+  }
+  // The saved value as editable rows of strings; and back. Numbers stay strings until the server checks them.
+  function ccsRows(key, v) {
+    var s = function (x) { return x == null ? "" : String(x); };
+    if (key === "noteTemplates") return (v || []).map(function (t) { return { id: s(t.id), name: s(t.name), noteType: s(t.noteType), sections: (t.sections || []).map(function (x) { return [s(x.key), s(x.title), s(x.prompt), x.required ? "required" : ""].join(" | ").replace(/( \| )+$/, ""); }).join("\n") }; });
+    if (key === "autoVerify") return ((v && v.codes) || []).map(function (code) { return { code: code }; });
+    return Object.keys(v || {}).map(function (k) {
+      var x = v[k];
+      if (key === "marTimes") return { frequency: k, times: (x || []).join(", ") };
+      var row = { code: k };
+      CCS_COLS[key].slice(1).forEach(function (col) { row[col] = s(x && x[col]); });
+      return row;
+    });
+  }
+  function ccsValue(key, rows, enabled) {
+    var tr = function (x) { return String(x == null ? "" : x).trim(); };
+    if (key === "autoVerify") return { enabled: !!enabled, codes: rows.map(function (r) { return tr(r.code); }).filter(Boolean) };
+    if (key === "noteTemplates") return rows.map(function (r) {
+      var t = { id: tr(r.id), name: tr(r.name) };
+      if (tr(r.noteType)) t.noteType = tr(r.noteType);
+      t.sections = String(r.sections || "").split("\n").map(tr).filter(Boolean).map(function (line) {
+        var p = line.split("|").map(tr), sec = { key: p[0], title: p[1] || p[0] };
+        if (p[2]) sec.prompt = p[2];
+        if (/^(required|yes)$/i.test(p[3] || "")) sec.required = true;
+        return sec;
+      });
+      return t;
+    });
+    var out = {};
+    rows.forEach(function (r) {
+      var k = tr(key === "marTimes" ? r.frequency : r.code);
+      if (!k) return;
+      if (key === "marTimes") { out[k] = tr(r.times).split(",").map(tr).filter(Boolean); return; }
+      var x = {};
+      CCS_COLS[key].slice(1).forEach(function (col) { if (tr(r[col])) x[col] = tr(r[col]); });
+      out[k] = x;
+    });
+    return out;
+  }
+  function ccsStatusLabel(c, st) {
+    return { add: T(c, "site.admin.fml.stAdd", "Will be added"), change: T(c, "site.admin.fml.stChange", "Will be changed"), unchanged: T(c, "site.admin.fml.stUnchanged", "Left as it is"), invalid: T(c, "site.admin.fml.stInvalid", "Refused"), remove: T(c, "site.admin.fml.stRemove", "Will be removed") }[st] || st;
+  }
+  function ccsHtml(c, key, s) {
+    var esc = c.esc, r = s.r, text = ccsText(c, key);
+    var h = '<div class="card"><h2>' + esc(text[0]) + "</h2>";
+    if (!c.can(CCS_CAP[key])) return h + '<div class="msg note">' + esc(T(c, "site.admin.ccs.noAccess", "Changing this setting needs staff administration and the clinical capability that uses it ({cap}). Your role does not include both.", { cap: CCS_CAP[key] })) + "</div></div>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.ccs.loading", "Loading...")) + "</p></div>";
+    if (r === null) return h + '<div class="msg err">' + esc(T(c, "site.admin.ccs.loadFailed", "This setting could not be loaded. Do not read this as not configured.")) + "</div></div>";
+    h += '<p class="quiet">' + esc(text[1]) + "</p>";
+    if (!r.configured) h += '<div class="msg note">' + esc(text[2]) + "</div>";
+    if ((r.problems || []).length) h += '<div class="msg err">' + esc(T(c, "site.admin.ccs.savedProblems", "The saved setting has {n} problems. Correct them before saving any change.", { n: r.problems.length })) + "</div>";
+    if (r.signOff) h += '<p class="quiet">' + esc(T(c, "site.admin.ccs.lastSaved", "Last saved {at}.", { at: String(r.signOff.at || "").slice(0, 16).replace("T", " ") })) + " " + esc(T(c, "site.admin.ccs.signedOffBy", "Signed off by:")) + " " + EN(c, esc(r.signOff.signedOffBy)) + ". " + esc(T(c, "site.admin.ccs.why", "Reason:")) + " " + EN(c, esc(r.signOff.reason)) + "</p>";
+    var ref = r.reference || {};
+    if (key === "autoVerify") h += '<label class="f"><span><input type="checkbox" data-ccs-on' + (s.enabled ? " checked" : "") + "> " + esc(T(c, "site.admin.ccs.auto.on", "Autoverification on for the tests listed")) + "</span></label>";
+    var cols = CCS_COLS[key];
+    h += '<div class="tbl"><table><thead><tr>' + cols.map(function (col) { return "<th>" + esc(ccsColLabel(c, col)) + "</th>"; }).join("") + "<th></th></tr></thead><tbody>" +
+      s.rows.map(function (row, i) {
+        return "<tr>" + cols.map(function (col) {
+          var v = row[col] == null ? "" : String(row[col]);
+          if (col === "code" && ref.knownCodes) return '<td><select data-ccs-f="' + col + '" data-i="' + i + '"><option value=""></option>' + Object.keys(ref.knownCodes).map(function (k) { return '<option value="' + esc(k) + '"' + (k === v ? " selected" : "") + ">" + EN(c, esc(k + " " + ref.knownCodes[k])) + "</option>"; }).join("") + "</select></td>";
+          if (col === "frequency") return '<td><select data-ccs-f="' + col + '" data-i="' + i + '"><option value=""></option>' + Object.keys(ref.frequencies || {}).map(function (k) { return '<option value="' + esc(k) + '"' + (k === v ? " selected" : "") + ">" + EN(c, esc(k)) + "</option>"; }).join("") + "</select></td>";
+          if (col === "sections") return '<td><textarea rows="3" data-ccs-f="' + col + '" data-i="' + i + '">' + esc(v) + "</textarea></td>";
+          return '<td><input data-ccs-f="' + col + '" data-i="' + i + '" value="' + esc(v) + '"></td>';
+        }).join("") + '<td><button type="button" class="btn ghost" data-ccs="del" data-i="' + i + '">' + esc(T(c, "site.admin.ccs.remove", "Remove")) + "</button></td></tr>";
+      }).join("") + "</tbody></table></div>" +
+      '<div class="row"><button type="button" class="btn ghost" data-ccs="add">' + esc(T(c, "site.admin.ccs.addRow", "Add a row")) + '</button> <button type="button" class="btn" data-ccs="dry">' + esc(T(c, "site.admin.fml.dryRun", "Dry run the changes")) + "</button></div>";
+    if (ref.defaults) {
+      h += "<details><summary>" + esc(T(c, "site.admin.ccs.defaults", "Built-in values that apply where nothing is saved")) + '</summary><pre class="mono" style="white-space:pre-wrap">' +
+        EN(c, esc(Object.keys(ref.defaults).map(function (k) { var d = ref.defaults[k]; return Array.isArray(d) ? k + ": " + d.join(", ") : k + " " + d.display + ": " + (d.low == null ? "" : "<= " + d.low + " ") + (d.high == null ? "" : ">= " + d.high + " ") + d.unit; }).join("\n"))) + "</pre></details>";
+    }
+    if (ref.builtIn) h += '<p class="quiet">' + esc(T(c, "site.admin.ccs.builtIn", "Built-in notes:")) + " " + EN(c, esc(ref.builtIn.map(function (b) { return b.id; }).join(", "))) + "</p>";
+    var pv = s.pv;
+    if (pv != null) {
+      h += "<h3>" + esc(T(c, "site.admin.fml.reportTitle", "Dry run result")) + "</h3>";
+      if (pv === false) h += '<div class="msg err">' + esc(T(c, "site.admin.fml.dryFailed", "The dry run could not be completed. Nothing was saved.")) + "</div>";
+      else if (!pv.rows) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+      else {
+        if (!pv.ok) h += '<div class="msg err">' + EN(c, esc(refusal(c, pv))) + "</div>";
+        if (pv.ok && pv.step === "done") h += '<div class="msg ok">' + esc(T(c, "site.admin.ccs.saved", "Saved {n} changes. The table above is what the server now holds.", { n: pv.written })) + "</div>";
+        var n = pv.counts || {};
+        h += "<p>" + ["add", "change", "remove", "invalid"].map(function (k) { return '<span class="pill' + (k === "invalid" ? " stop" : "") + '">' + esc(ccsStatusLabel(c, k)) + ": " + esc(String(n[k] || 0)) + "</span>"; }).join(" ") + "</p>";
+        var shown = pv.rows.filter(function (x) { return x.status !== "unchanged"; });
+        if (shown.length) h += '<div class="tbl"><table><tbody>' + shown.map(function (x) { return '<tr><td class="mono">' + EN(c, esc(x.item)) + "</td><td>" + esc(ccsStatusLabel(c, x.status)) + "</td><td>" + (x.problems || []).map(function (p) { return ccsReason(c, p); }).join("<br>") + "</td></tr>"; }).join("") + "</tbody></table></div>";
+        if (pv.ok && pv.step === "preview") {
+          h += pv.changeCount ? '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.ccs.reason", "Why this is changing (required)")) + '</span><input data-ccs-reason maxlength="200"></label>' +
+            '<label class="f"><span>' + esc(T(c, "site.admin.ccs.signOff", "Signed off clinically by (name and role, or committee; required)")) + '</span><input data-ccs-signoff maxlength="120"></label>' +
+            '<button type="button" class="btn" data-ccs="commit" data-count="' + esc(String(pv.changeCount)) + '" data-plan="' + esc(pv.planId) + '">' + esc(T(c, "site.admin.fml.commit", "Save these {n} changes", { n: pv.changeCount })) + "</button></div>"
+            : '<p class="quiet">' + esc(T(c, "site.admin.fml.nothing", "Nothing would change.")) + "</p>";
+        }
+      }
+    }
+    return h + '<div data-ccs-msg aria-live="polite"></div></div>';
+  }
+  WSQ._ccs = { html: ccsHtml, rows: ccsRows, value: ccsValue, keys: CCS_KEYS };
+  function wireContentSetting(c, key) {
+    var box = document.getElementById("ccsCard-" + key);
+    if (!box) return;
+    var s = { r: undefined, rows: [], enabled: false, pv: null };
+    var draw = function () { box.innerHTML = ccsHtml(c, key, s); };
+    var load = function () {
+      return c.api("/org/clinical-settings/" + key + "?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+        s.r = r && r.ok ? r : null;
+        if (s.r) { s.rows = ccsRows(key, s.r.saved); s.enabled = !!(s.r.saved && s.r.saved.enabled === true); }
+        draw();
+      }, function () { s.r = null; draw(); });
+    };
+    var send = function (extra) { return c.api("/org/clinical-settings/" + key, Object.assign({ orgId: c.state.orgId, value: ccsValue(key, s.rows, s.enabled) }, extra || {})); };
+    box.onchange = box.oninput = function (ev) {
+      var t = ev.target || {};
+      if (t.hasAttribute && t.hasAttribute("data-ccs-on")) { s.enabled = !!t.checked; s.pv = null; return; }
+      var f = t.getAttribute && t.getAttribute("data-ccs-f");
+      if (f) { s.rows[Number(t.getAttribute("data-i"))][f] = t.value; if (s.pv && ev.type === "change") { s.pv = null; draw(); } }
+    };
+    box.onclick = function (ev) {
+      var b = ev.target.closest && ev.target.closest("[data-ccs]"); if (!b) return;
+      var act = b.getAttribute("data-ccs");
+      if (act === "add") { s.rows.push({}); s.pv = null; draw(); return; }
+      if (act === "del") { s.rows.splice(Number(b.getAttribute("data-i")), 1); s.pv = null; draw(); return; }
+      if (act === "dry") { b.disabled = true; send().then(function (r) { s.pv = r || false; draw(); }, function () { s.pv = false; draw(); }); return; }
+      if (act === "commit") {
+        var reason = String((box.querySelector("[data-ccs-reason]") || {}).value || "").trim(), by = String((box.querySelector("[data-ccs-signoff]") || {}).value || "").trim();
+        var m = box.querySelector("[data-ccs-msg]");
+        if (!reason || !by) { if (m) m.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.ccs.reasonFirst", "Say why this is changing and who signed it off first.")) + "</div>"; return; }
+        b.disabled = true;
+        send({ commit: true, reason: reason, signedOffBy: by, confirmCount: Number(b.getAttribute("data-count")), planId: b.getAttribute("data-plan") }).then(function (r) {
+          s.pv = r || false;
+          // After a save the setting is read again, so the table shows what the server holds, never the draft.
+          if (r && r.ok && r.step === "done") return load();
+          draw();
+        }, function () { s.pv = false; draw(); });
+      }
+    };
+    draw();
+    if (c.can(CCS_CAP[key])) load();
   }
 
   // ---- Clinical seed data (D10) ------------------------------------------------------------------
@@ -820,6 +1227,31 @@
     draw(undefined);
     c.api("/org/clinical-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
   }
+  /* PATIENT FORMS BEFORE AN APPOINTMENT (R4-5, functions/_wardsynq/form-response.js intakeSettings): one switch through
+   * GET/POST /org/intake-settings, with a reason. Off unless saved on; a failed load is said, never read as off. */
+  function renderIntakeSettings(c, host) {
+    if (!host) return;
+    var title = "<h2>" + c.esc(T(c, "site.admin.intake.title", "Patient forms before an appointment")) + "</h2>";
+    var failed = function () { host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + c.esc(T(c, "site.admin.intake.loadFailed", "The setting could not be loaded. Do not read this as off.")) + "</div></div>"; };
+    host.innerHTML = '<div class="card">' + title + '<span class="spin"></span></div>';
+    return c.api("/org/intake-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok || !r.settings) { failed(); return; }
+      host.innerHTML = '<div class="card">' + title +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.intake.intro", "When on, a patient with a booked appointment still to come is offered the patient forms marked for appointments on the portal. Staff review the answers; nothing is written into the chart. Every change is recorded with its reason.")) + "</p>" +
+        '<label class="f"><span><input type="checkbox" id="admIntakeAppt"' + (r.settings.forAppointments ? " checked" : "") + "> " + c.esc(T(c, "site.admin.intake.forAppointments", "Offer patient forms before a booked appointment")) + "</span></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.intake.reason", "Why is this setting changing?")) + '</span><input id="admIntakeReason"></label>' +
+        '<button type="button" class="btn" id="admIntakeSave">' + c.esc(T(c, "site.admin.intake.save", "Save")) + '</button><div id="admIntakeMsg"></div></div>';
+      document.getElementById("admIntakeSave").onclick = function () {
+        var out = document.getElementById("admIntakeMsg");
+        out.innerHTML = '<span class="spin"></span>';
+        c.api("/org/intake-settings", { orgId: c.state.orgId, settings: { forAppointments: document.getElementById("admIntakeAppt").checked }, reason: document.getElementById("admIntakeReason").value.trim() }).then(function (x) {
+          if (!x || !x.ok) { out.innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, x))) + "</div>"; return; }
+          c.toast(x.changed && x.changed.length ? T(c, "site.admin.saved", "Saved.") : T(c, "site.admin.intake.nothingChanged", "Nothing changed.")); renderIntakeSettings(c, host);
+        }, function () { out.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.intake.noResponse", "No response from the server. The setting may not have been saved; reload to check.")) + "</div>"; });
+      };
+    }, failed);
+  }
+  WSQ._intakeSettings = renderIntakeSettings;
   /* BLOOD DONOR CRITERIA (functions/_wardsynq/blood-bank.js, owner decision 2026-09-17). WHO 2012 by default; this
    * hospital may only make a criterion stricter. The table is the blood bank page's own (WSQ._bloodbank), so both
    * screens name each criterion and its source the same way. r: undefined = loading, null = could not be loaded (said,
@@ -1056,7 +1488,7 @@
       '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.countryNote", "The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.")) + '</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.hospital.needsWardsynq", "Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.")) + '</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="intakeCard"></div><div id="fmlCard"></div>' + CCS_KEYS.map(function (k) { return '<div id="ccsCard-' + k + '"></div>'; }).join("") + '<div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
       /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
       (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
         ? '<div class="card"><h2>' + c.esc(T(c, "site.admin.hospital.removeTitle", "Remove this hospital")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.hospital.removeIntro", "Removes it from every hospital list. Patient records, documents and the audit trail are kept.")) + '</p>' +
@@ -1079,6 +1511,9 @@
       });
     };
     wireClinicalSettings(c);
+    renderIntakeSettings(c, document.getElementById("intakeCard"));
+    wireFormulary(c);
+    CCS_KEYS.forEach(function (k) { wireContentSetting(c, k); });
     wireDonorCriteria(c); wireBloodCentre(c);
     wireNoteWriters(c);
     wirePrintLang(c);
@@ -2821,6 +3256,226 @@
       var again = document.getElementById("healthRecheck");
       if (again) again.onclick = function () { WSQ.render("admin"); };
     }, function () { body.innerHTML = systemHealthHtml(c, { failed: true, message: T(c, "site.admin.err.noResponse", "No response from the server.") }); });
+  }
+
+  // ---- Close finished orders (order-backfill.js) ----------------------------------------------
+  /* Orders this hospital resulted before a released result closed anything are still open, count
+   * against the 5,000 open-order ceiling, and make the laboratory, specimen and imaging boards refuse
+   * with "too many open" until something closes them. This screen runs that job.
+   *
+   * TWO STEPS THAT CANNOT BE COLLAPSED. Check writes nothing and says what would close and why the
+   * rest would not; Close then sends back exactly the order ids that check handed over, and the
+   * server re-checks every one of them before writing. The state below is the honest middle: `ids`
+   * null = not checked yet, and a failure sets `failed` rather than leaving a count that would read
+   * as "nothing left to do".
+   */
+  function backfillHtml(c, s) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.orderBackfill.title", "Close finished orders")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.orderBackfill.intro", "Investigation orders resulted before this hospital was updated were never marked finished, so they still count as work in front of the laboratory and radiology. Checking reads the orders and writes nothing. Closing marks only the orders whose result is already on the chart; an order with no result, an imaging study with only a preliminary report, and an order another system owns are all left alone.")) + "</p>";
+    if (s.failed) {
+      h += '<div class="msg err">' + esc(T(c, "site.admin.orderBackfill.failed", "The job stopped because something could not be read or written. This is not the same as there being nothing left to do; what is reported below is only what was reached before it stopped.")) + " " + EN(c, esc(s.failMsg || "")) + "</div>";
+    }
+    if (s.busy) h += '<p><span class="spin"></span> ' + esc(s.busy) + "</p>";
+    if (s.ids === null && !s.busy && !s.failed) h += "<p>" + esc(T(c, "site.admin.orderBackfill.notCheckedYet", "Nothing has been checked yet.")) + "</p>";
+    if (s.scanned) {
+      h += "<p>" + esc(T(c, "site.admin.orderBackfill.scanned", "Open orders looked at: {n}", { n: s.scanned })) + "<br>" +
+        "<b>" + esc(T(c, "site.admin.orderBackfill.remaining", "Still to close: {n}", { n: (s.ids || []).length })) + "</b>" +
+        (s.closed ? "<br>" + esc(T(c, "site.admin.orderBackfill.closedSoFar", "Closed so far: {n}", { n: s.closed })) : "") + "</p>";
+      var reasons = [
+        ["no_report", T(c, "site.admin.orderBackfill.reason.noReport", "no result on the chart, so the test is still owed")],
+        ["report_preliminary", T(c, "site.admin.orderBackfill.reason.preliminary", "imaging read only preliminarily, so the final report is still owed")],
+        ["external_order", T(c, "site.admin.orderBackfill.reason.external", "placed by another system, which owns them")],
+        ["report_read_failed", T(c, "site.admin.orderBackfill.reason.readFailed", "their results could not be read, so nothing was decided about them")],
+        ["already_closed", T(c, "site.admin.orderBackfill.reason.alreadyClosed", "already finished, and left exactly as they are")],
+      ].filter(function (r) { return (s.stayOpen || {})[r[0]]; });
+      if (reasons.length) {
+        h += "<p>" + esc(T(c, "site.admin.orderBackfill.stayOpenLead", "Staying open:")) + '</p><ul class="quiet">' + reasons.map(function (r) {
+          return "<li>" + esc(String(s.stayOpen[r[0]])) + " " + esc(r[1]) + "</li>";
+        }).join("") + "</ul>";
+      }
+      if (s.partial) h += '<div class="msg warn">' + esc(T(c, "site.admin.orderBackfill.partial", "Some results could not be read, so this count is not the whole picture. Check again once the record store is answering.")) + "</div>";
+    }
+    if (s.doneClosing && !s.failed) {
+      h += '<div class="msg ok">' + esc(s.closed
+        ? T(c, "site.admin.orderBackfill.finished", "{n} orders are now marked finished. The laboratory, specimen and imaging boards show only current work.", { n: s.closed })
+        : T(c, "site.admin.orderBackfill.nothingToClose", "There was nothing to close. Every finished order is already marked finished.")) + "</div>";
+    }
+    h += '<div class="row"><button class="btn" type="button" id="obCheck"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.orderBackfill.check", "Check what would close")) + "</button>" +
+      ((s.ids && s.ids.length) ? '<button class="btn" type="button" id="obClose"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.orderBackfill.close", "Close {n} finished orders", { n: s.ids.length })) + "</button>" : "") +
+      "</div></div>";
+    return h;
+  }
+
+  function renderOrderBackfill(c, body) {
+    var s = { ids: null, scanned: 0, closed: 0, stayOpen: {}, busy: "", failed: false, failMsg: "", partial: false, doneClosing: false };
+    var orgQ = { orgId: c.state.orgId };
+    function paint() {
+      body.innerHTML = backfillHtml(c, s);
+      var chk = document.getElementById("obCheck"); if (chk) chk.onclick = check;
+      var cls = document.getElementById("obClose"); if (cls) cls.onclick = closeAll;
+    }
+    function stop(r) {
+      s.busy = ""; s.failed = true; s.failMsg = refusal(c, r); paint();
+    }
+    /* One batch at a time, each starting where the last one stopped: a hospital's archive is far more
+     * than one request can hold, and the server hands back the cursor for the next page. */
+    function check() {
+      s.ids = []; s.scanned = 0; s.closed = 0; s.stayOpen = {}; s.failed = false; s.partial = false; s.doneClosing = false;
+      var step = function (cursor) {
+        s.busy = T(c, "site.admin.orderBackfill.checking", "Checking orders ({n} looked at so far)...", { n: s.scanned });
+        paint();
+        return c.api("/ward/order-backfill-scan", { orgId: orgQ.orgId, cursor: cursor }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.scanned += r.scanned;
+          s.ids = s.ids.concat(r.orderIds || []);
+          Object.keys(r.stayOpen || {}).forEach(function (k) { s.stayOpen[k] = (s.stayOpen[k] || 0) + r.stayOpen[k]; });
+          if (r.partial) s.partial = true;
+          if (!r.done) return step(r.nextCursor);
+          s.busy = ""; paint();
+        }, function () { stop(null); });
+      };
+      return step(0);
+    }
+    /* Only the ids the check handed back, in the batches it handed them back in. An order the server
+     * no longer agrees about is skipped there, not here: this screen is not the authority. */
+    function closeAll() {
+      var todo = s.ids.slice(), BATCH = 100;
+      s.failed = false;
+      var step = function () {
+        if (!todo.length) { s.busy = ""; s.ids = []; s.doneClosing = true; paint(); return; }
+        s.busy = T(c, "site.admin.orderBackfill.closing", "Closing orders ({n} of {total} done)...", { n: s.closed, total: s.closed + todo.length });
+        paint();
+        var batch = todo.splice(0, BATCH);
+        return c.api("/ward/order-backfill-close", { orgId: orgQ.orgId, orderIds: batch }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.closed += r.closed;
+          // What is left to do is what is left to do: the button never offers a count already spent.
+          s.ids = todo.slice();
+          // Anything the server would not close stops the run and is said out loud, never dropped.
+          if (r.incomplete) { s.busy = ""; s.failed = true; s.failMsg = T(c, "site.admin.orderBackfill.someRefused", "{n} orders could not be closed and are listed on the server response. Check again to see where they stand.", { n: r.failures.length }); paint(); return; }
+          return step();
+        }, function () { stop(null); });
+      };
+      return step();
+    }
+    paint();
+    return check();
+  }
+
+  // ---- R6-3: close the orders the SENDING system has finished (source-order-close.js) ---------
+  /* The other half of the same problem, and a different job. An order another system sent lands as a
+   * draft here (an adapter may not assert a clinical status) and never leaves the open census, even
+   * once that system has finished with it - so this hospital walks towards the ceiling at which its
+   * boards refuse. The sender's own word for the order is kept beside it at ingest; this closes the
+   * ones it calls finished, and nothing it calls active.
+   *
+   * Two steps, for the same reason as above: `ids` null = nothing checked yet, a failure sets
+   * `failed`, and a count is never shown as if it were the whole picture when a read stopped.
+   */
+  function sourceOrdersHtml(c, s) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.sourceOrders.title", "Close orders another system has finished")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.sourceOrders.intro", "Orders sent by a laboratory system or another hospital are recorded here as drafts, because a connected system may not set a clinical status in WardSynQ. When the result is filed at that end, nothing here ever marks the order finished and it counts as open work for ever. Checking reads the orders and writes nothing. Closing marks only the orders the sending system itself calls finished; an order it still calls active, one it says nothing about, and this hospital's own orders are all left alone.")) + "</p>";
+    if (s.failed) {
+      h += '<div class="msg err">' + esc(T(c, "site.admin.sourceOrders.failed", "The job stopped because something could not be read or written. This is not the same as there being nothing left to do; what is reported below is only what was reached before it stopped.")) + " " + EN(c, esc(s.failMsg || "")) + "</div>";
+    }
+    if (s.busy) h += '<p><span class="spin"></span> ' + esc(s.busy) + "</p>";
+    if (s.ids === null && !s.busy && !s.failed) h += "<p>" + esc(T(c, "site.admin.sourceOrders.notCheckedYet", "Nothing has been checked yet.")) + "</p>";
+    if (s.scanned) {
+      h += "<p>" + esc(T(c, "site.admin.sourceOrders.scanned", "Open orders looked at: {n}", { n: s.scanned })) + "<br>" +
+        "<b>" + esc(T(c, "site.admin.sourceOrders.remaining", "Still to close: {n}", { n: (s.ids || []).length })) + "</b>" +
+        (s.closed ? "<br>" + esc(T(c, "site.admin.sourceOrders.closedSoFar", "Closed so far: {n}", { n: s.closed })) : "") + "</p>";
+      var reasons = [
+        ["source_active", T(c, "site.admin.sourceOrders.reason.sourceActive", "the sending system still calls them open, or has not said")],
+        ["native_order", T(c, "site.admin.sourceOrders.reason.native", "this hospital's own orders, which are closed when their result is filed")],
+        ["already_closed", T(c, "site.admin.sourceOrders.reason.alreadyClosed", "already finished, and left exactly as they are")]
+      ].filter(function (r) { return (s.stayOpen || {})[r[0]]; });
+      if (reasons.length) {
+        h += "<p>" + esc(T(c, "site.admin.sourceOrders.stayOpenLead", "Staying open:")) + '</p><ul class="quiet">' + reasons.map(function (r) {
+          return "<li>" + esc(String(s.stayOpen[r[0]])) + " " + esc(r[1]) + "</li>";
+        }).join("") + "</ul>";
+      }
+      /* WHOSE word this hospital would be acting on, by system: an administrator can check that the
+       * feed named here is one whose finished really means finished. */
+      var bySystem = {};
+      (s.orders || []).forEach(function (o) { bySystem[o.system || "?"] = (bySystem[o.system || "?"] || 0) + 1; });
+      var systems = Object.keys(bySystem);
+      if (systems.length) {
+        h += "<p>" + esc(T(c, "site.admin.sourceOrders.sendersLead", "Marked finished by:")) + '</p><ul class="quiet">' + systems.map(function (k) {
+          return "<li>" + EN(c, esc(k)) + ": " + esc(String(bySystem[k])) + "</li>";
+        }).join("") + "</ul>";
+      }
+    }
+    if (s.doneClosing && !s.failed) {
+      h += '<div class="msg ok">' + esc(s.closed
+        ? T(c, "site.admin.sourceOrders.finished", "{n} orders are now marked finished. Each one still says which system sent it and what that system called it.", { n: s.closed })
+        : T(c, "site.admin.sourceOrders.nothingToClose", "There was nothing to close. No order from a connected system is waiting to be marked finished.")) + "</div>";
+    }
+    h += '<div class="row"><button class="btn" type="button" id="socCheck"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.sourceOrders.check", "Check what would close")) + "</button>" +
+      ((s.ids && s.ids.length) ? '<button class="btn" type="button" id="socClose"' + (s.busy ? " disabled" : "") + ">" + esc(T(c, "site.admin.sourceOrders.close", "Close {n} finished orders", { n: s.ids.length })) + "</button>" : "") +
+      "</div></div>";
+    return h;
+  }
+
+  function renderSourceOrders(c, body) {
+    var s = { ids: null, orders: [], scanned: 0, closed: 0, stayOpen: {}, busy: "", failed: false, failMsg: "", doneClosing: false };
+    var orgQ = { orgId: c.state.orgId };
+    function paint() {
+      body.innerHTML = sourceOrdersHtml(c, s);
+      var chk = document.getElementById("socCheck"); if (chk) chk.onclick = check;
+      var cls = document.getElementById("socClose"); if (cls) cls.onclick = closeAll;
+    }
+    function stop(r) { s.busy = ""; s.failed = true; s.failMsg = refusal(c, r); paint(); }
+    function check() {
+      s.ids = []; s.orders = []; s.scanned = 0; s.closed = 0; s.stayOpen = {}; s.failed = false; s.doneClosing = false;
+      var step = function (cursor) {
+        s.busy = T(c, "site.admin.sourceOrders.checking", "Checking orders ({n} looked at so far)...", { n: s.scanned });
+        paint();
+        return c.api("/ward/source-order-scan", { orgId: orgQ.orgId, cursor: cursor }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.scanned += r.scanned;
+          s.ids = s.ids.concat(r.orderIds || []);
+          s.orders = s.orders.concat(r.orders || []);
+          Object.keys(r.stayOpen || {}).forEach(function (k) { s.stayOpen[k] = (s.stayOpen[k] || 0) + r.stayOpen[k]; });
+          if (!r.done) return step(r.nextCursor);
+          s.busy = ""; paint();
+        }, function () { stop(null); });
+      };
+      return step(0);
+    }
+    /* Only the ids the check handed back. An order the server no longer agrees about is skipped
+     * there, not here: this screen is not the authority, and neither is the sending system. */
+    function closeAll() {
+      var todo = s.ids.slice(), BATCH = 100;
+      s.failed = false;
+      var step = function () {
+        if (!todo.length) { s.busy = ""; s.ids = []; s.orders = []; s.doneClosing = true; paint(); return; }
+        s.busy = T(c, "site.admin.sourceOrders.closing", "Closing orders ({n} of {total} done)...", { n: s.closed, total: s.closed + todo.length });
+        paint();
+        var batch = todo.splice(0, BATCH);
+        return c.api("/ward/source-order-close", { orgId: orgQ.orgId, orderIds: batch }).then(function (r) {
+          if (!r || !r.ok) return stop(r);
+          s.closed += r.closed;
+          s.ids = todo.slice();
+          if (r.incomplete) { s.busy = ""; s.failed = true; s.failMsg = T(c, "site.admin.sourceOrders.someRefused", "{n} orders could not be closed and are listed on the server response. Check again to see where they stand.", { n: r.failures.length }); paint(); return; }
+          return step();
+        }, function () { stop(null); });
+      };
+      return step();
+    }
+    paint();
+    return check();
+  }
+
+  /* Both closure jobs on one screen: they answer the same question - which orders are still open and
+   * should not be - from the two ends an order can arrive from. Each panel owns its own state. */
+  function renderOrderClosures(c, body) {
+    body.innerHTML = '<div id="obPanel"></div><div id="socPanel"></div>';
+    return Promise.all([
+      renderOrderBackfill(c, document.getElementById("obPanel")),
+      renderSourceOrders(c, document.getElementById("socPanel"))
+    ]);
   }
 
   // ---- Integrations > Webhooks (P2.13) --------------------------------------------------------

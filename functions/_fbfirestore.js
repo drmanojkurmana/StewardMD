@@ -13,9 +13,9 @@
  *                                       "precondition" when a currentDocument guard fails
  *                                       (this is how single-use activation stays exactly-once).
  *   • wCreate / wUpdate / wDelete     → build the write objects for fsCommit.
- *   • fsQuery(env, collection, opts)  → runQuery with an optional single-field equality
- *                                       filter (uses Firestore's automatic single-field index,
- *                                       so NO composite index is ever required).
+ *   • fsQuery(env, collection, opts)  → runQuery with optional equality filters (served by
+ *                                       Firestore's automatic single-field indexes, merged when
+ *                                       there are several, so NO composite index is required).
  *
  * Values use a minimal typed encoding (string / integer / double / bool / null). Timestamps
  * are stored as integer ms-epoch to avoid RFC3339 formatting — the admin renders via Date(ms).
@@ -151,11 +151,13 @@ export async function fsQuery(env, collectionId, opts) {
   opts = opts || {};
   const tok = await fsToken(env);
   const structuredQuery = { from: [{ collectionId }] };
-  if (opts.where && opts.where.field) {
-    structuredQuery.where = {
-      fieldFilter: { field: { fieldPath: opts.where.field }, op: "EQUAL", value: encodeValue(opts.where.value) },
-    };
-  }
+  /* opts.where is one { field, value } or an array of them, ANDed. Equality-only filters are served by merging the
+   * automatic single-field indexes, so several of them still need no composite index (Firestore "Index overview":
+   * compound equality queries run on single-field indexes). Ordering by anything but __name__ would need one. */
+  const eqs = (Array.isArray(opts.where) ? opts.where : [opts.where]).filter((w) => w && w.field)
+    .map((w) => ({ fieldFilter: { field: { fieldPath: w.field }, op: "EQUAL", value: encodeValue(w.value) } }));
+  if (eqs.length === 1) structuredQuery.where = eqs[0];
+  else if (eqs.length > 1) structuredQuery.where = { compositeFilter: { op: "AND", filters: eqs } };
   if (opts.limit) structuredQuery.limit = opts.limit;
   /* Paging: opts.startAfter is the full `name` of the last document of the previous page. Ordered by document name,
    * which an equality filter can use without a composite index. */

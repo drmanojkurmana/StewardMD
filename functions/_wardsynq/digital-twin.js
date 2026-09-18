@@ -92,7 +92,14 @@ const NOT_BUILT = Object.freeze({
 
 /* ---- P1.13 command-center helpers. PURE, exported for tests. -------------------------------------- */
 
+/* R4-2: a live section reads the NEWEST LIST_CAP records of a type ({ newest: true }), not the oldest: a snapshot of "now"
+ * (outstanding specimens, doses in 12 hours, the last 7 days of results) lives in the newest records, and the oldest-first
+ * read stopped seeing today once a hospital passed the cap. Past the cap the section still says capped. */
 const LIST_CAP = 1000;
+const NEWEST = { newest: true };
+/* R5-4: the point-in-time rebuild's per-type bound. Each record read costs one further history read,
+ * so this is a real ceiling, stated on the screen, not a number to raise quietly. */
+const AS_OF_CAP = 500;
 const HOUR = 3600000;
 
 /** PURE. Nearest-rank percentile of a numeric list; null for an empty list, never 0. */
@@ -210,7 +217,7 @@ async function section(label, dataSource, fn, request, env, ctx) {
   } catch (e) {
     return {
       status: "unavailable", freshness: FRESHNESS.UNAVAILABLE, label, dataSource,
-      error: "threw", detail: str(e && e.message) || "the read failed", data: null,
+      error: (e && typeof e.code === "string" && e.code) || "threw", detail: str(e && e.message) || "the read failed", data: null,
     };
   }
 }
@@ -258,7 +265,7 @@ async function buildTwinSnapshot(request, env, ctx) {
       repository: c.recordDeps.repository, pseudonym: c.recordDeps.pseudonym,
       tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source,
     });
-    const rows = await svc.list("SpecimenCollection", 1000);
+    const rows = await svc.list("SpecimenCollection", LIST_CAP, NEWEST);
     const outstanding = (rows || []).filter(Boolean).filter(isOutstanding);
     return { ok: true, generatedAt: new Date().toISOString(), outstanding: outstanding.length, checked: (rows || []).length,
       drill: { outstanding: drillList(outstanding.map((x) => ({ patientId: x.patientId, encounterId: x.encounterId }))) } };
@@ -305,16 +312,17 @@ async function buildTwinSnapshot(request, env, ctx) {
    * "recorded" counts: no record means not known, never "not on one". */
   const icu = await section("icu", ["Encounter", "IcuRecord", "MedicationOrder"], async (rq, e, c) => {
     const svc = await openSvc(rq, e, c);
-    const encounters = (await svc.list("Encounter", 500)) || [];
+    // R4-1: the open stays only, read whole (a census past the ceiling throws and the section says unavailable).
+    const encounters = (await svc.listByStatus("Encounter", [OPEN])) || [];
     const open = encounters.filter((x) => x && x.class === "ICU" && x.status === OPEN);
     const ids = new Set(open.map((x) => x.id));
-    const [icuRecords, orders] = await Promise.all([svc.list("IcuRecord", LIST_CAP), svc.list("MedicationOrder", LIST_CAP)]);
+    const [icuRecords, orders] = await Promise.all([svc.list("IcuRecord", LIST_CAP, NEWEST), svc.list("MedicationOrder", LIST_CAP, NEWEST)]);
     const ventIds = new Set((icuRecords || []).filter((r) => r && r.kind === "ventilator" && ids.has(r.encounterId) && nowMs - Date.parse(r.at || "") <= 12 * HOUR).map((r) => r.encounterId));
     const pressorIds = new Set((orders || []).filter((o) => o && o.status === "active" && ids.has(o.encounterId) && isVasoactive(o.drug || o.display || o.code)).map((o) => o.encounterId));
     const rowsOf = (set) => open.filter((x) => set.has(x.id)).map((x) => ({ patientId: x.patientId, encounterId: x.id, ward: x.location && x.location.ward, bed: x.location && x.location.bed }));
     return {
       ok: true, generatedAt: new Date().toISOString(),
-      occupied: open.length, encounterReadCapped: encounters.length >= 500,
+      occupied: open.length,
       ventilatedRecorded: ventIds.size, vasopressorsRecorded: pressorIds.size,
       recordsCapped: (icuRecords || []).length >= LIST_CAP || (orders || []).length >= LIST_CAP,
       drill: { occupied: drillList(rowsOf(ids)), ventilated: drillList(rowsOf(ventIds)), vasopressors: drillList(rowsOf(pressorIds)) },
@@ -346,7 +354,7 @@ async function buildTwinSnapshot(request, env, ctx) {
   /* Lab TAT and the radiology backlog share one read of requests and reports. */
   const diagRead = (async () => {
     const svc = await openSvc(request, env, ctx);
-    const [requests, reports] = await Promise.all([svc.list("ServiceRequest", LIST_CAP), svc.list("DiagnosticReport", LIST_CAP)]);
+    const [requests, reports] = await Promise.all([svc.list("ServiceRequest", LIST_CAP, NEWEST), svc.list("DiagnosticReport", LIST_CAP, NEWEST)]);
     return { requests: requests || [], reports: reports || [] };
   })();
   diagRead.catch(() => {});
@@ -434,7 +442,12 @@ async function reconstructTwinAsOf(request, env, ctx, atIso) {
   const asOf = {};
   for (const type of RECONSTRUCTED_TYPES) {
     let ids;
-    try { ids = (await svc.list(type, 500)) || []; }
+    /* R5-4: the NEWEST AS_OF_CAP, not the oldest. This walks each record's own version history, so the
+     * bound cannot be lifted by reading more (it would be AS_OF_CAP history reads more); what it can
+     * do is read the end of the type a reconstruction is actually asked about. Past the cap the
+     * OLDEST records were not read, and `capped` says so - the screen prints "only the latest 500
+     * checked". */
+    try { ids = (await svc.list(type, AS_OF_CAP, NEWEST)) || []; }
     catch { asOf[type] = { status: "unavailable" }; continue; }
     const rows = [];
     let unreadable = 0;
@@ -452,8 +465,8 @@ async function reconstructTwinAsOf(request, env, ctx, atIso) {
       if (asOfVersion) rows.push(asOfVersion);
     }
     asOf[type] = unreadable
-      ? { status: "partial", count: rows.length, unreadable, records: rows }
-      : { status: "ok", count: rows.length, ...(ids.length >= 500 ? { status: "partial", capped: true } : {}), records: rows };
+      ? { status: "partial", count: rows.length, unreadable, ...(ids.length >= AS_OF_CAP ? { capped: true } : {}), records: rows }
+      : { status: "ok", count: rows.length, ...(ids.length >= AS_OF_CAP ? { status: "partial", capped: true } : {}), records: rows };
   }
 
   return {
@@ -514,7 +527,7 @@ async function operationalHealthReport(request, env, ctx) {
    * near-misses this file did not invent a category for; they were always on the record. */
   let ai = { status: "unavailable", error: null };
   try {
-    const interactions = (await svc.list("MaiKInteraction", 1000)) || [];
+    const interactions = (await svc.list("MaiKInteraction", LIST_CAP, NEWEST)) || [];
     const withheld = interactions.filter((i) => i && i.security && i.security.released === false).length;
     const injectionSignals = interactions.reduce((n, i) => n + ((i && i.security && i.security.injectionFindings) || []).length, 0);
     ai = { status: "ok", interactionsSampled: interactions.length, withheldRate: rate(withheld, interactions.length), injectionSignalsObserved: injectionSignals };
@@ -526,8 +539,10 @@ async function operationalHealthReport(request, env, ctx) {
   let notifications = { status: "unavailable", error: null };
   try {
     const [grants, loops] = await Promise.all([
-      svc.list("BreakGlassGrant", 500).catch(() => []),
-      svc.list("CriticalResultLoop", 500).catch(() => []),
+      /* R5-4: no .catch(() => []) here. A read that failed is not a hospital with no notifications:
+       * it falls to the outer catch and the section reports unavailable with the reason. */
+      svc.list("BreakGlassGrant", 500, NEWEST),
+      svc.list("CriticalResultLoop", 500, NEWEST),
     ]);
     const attempts = [...grants, ...loops].filter((r) => r && r.notification && r.notification.attempted);
     const delivered = attempts.filter((r) => r.notification.delivered === true).length;
@@ -549,7 +564,7 @@ async function operationalHealthReport(request, env, ctx) {
    * backup meets its objective AND a successful restore test is recorded; never inferred. */
   let dataProtectionStatus = { status: "unavailable", error: null };
   try {
-    const [runs, tests] = await Promise.all([svc.list(BACKUP_RUN_TYPE, 50), svc.list(RESTORE_TYPE, 200)]);
+    const [runs, tests] = await Promise.all([svc.list(BACKUP_RUN_TYPE, 50, NEWEST), svc.list(RESTORE_TYPE, 200, NEWEST)]);
     dataProtectionStatus = dataProtection(runs, tests, ctx.rpoMinutes, new Date().toISOString());
   } catch (e) { dataProtectionStatus = { status: "unavailable", error: str(e && e.message) }; }
 

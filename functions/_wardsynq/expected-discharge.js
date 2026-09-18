@@ -71,9 +71,10 @@ function eddStatus(record, today) {
 
 /** Every stay's current expected date, keyed by encounter. Throws when it cannot be read. */
 async function expectedDischargeMap(svc) {
-  // ponytail: one capped list read; a hospital with more than 2000 stated dates ever needs a by-encounter index.
-  const rows = await svc.list(EDD_TYPE, 2000);
-  return new Map((rows || []).filter((r) => r && r.encounterId).map((r) => [r.encounterId, r]));
+  // Every stated date (service.listAll); past the ceiling it throws (a short map would drop the newest stays' dates).
+  // ponytail: a by-encounter index is the upgrade when a hospital nears 50,000 stated dates.
+  const { rows } = await svc.listAll(EDD_TYPE, { max: 50000, throwOnTruncate: true });
+  return new Map(rows.filter((r) => r && r.encounterId).map((r) => [r.encounterId, r]));
 }
 
 /**

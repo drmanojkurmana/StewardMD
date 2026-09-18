@@ -23,7 +23,9 @@ import { csvRows } from "./compliance.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "SavedReport";
-const ROW_LIMIT = 5000, SHOW_LIMIT = 500;
+/* ROW_LIMIT: every record of the dataset's type is read (service.listAll, paged, oldest first); past it the newest are
+ * not read and truncated says so. ponytail: audit O20 is the upgrade if paging is slow. */
+const ROW_LIMIT = 50000, SHOW_LIMIT = 500;
 const day = (t) => str(t).slice(0, 10) || null;
 const losDays = (e) => { const a = Date.parse(e.periodStart || ""), b = Date.parse(e.periodEnd || ""); return Number.isFinite(a) && Number.isFinite(b) && b >= a ? Math.round(((b - a) / 86400000) * 10) / 10 : null; };
 const recon = (inv) => { try { return reconciliationOf(inv); } catch (e) { return {}; } };
@@ -159,9 +161,10 @@ async function execute(request, env, ctx, rawSpec) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return error;
   let records;
-  try { records = await svc.list(v.dataset.type, ROW_LIMIT); }
+  let truncated;
+  try { ({ rows: records, truncated } = await svc.listAll(v.dataset.type, { max: ROW_LIMIT })); }
   catch (e) { return { ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed" }; }
-  return { ok: true, spec: v.spec, truncated: records.length >= ROW_LIMIT, ...runSpec(v.dataset, v.spec, records) };
+  return { ok: true, spec: v.spec, truncated, ...runSpec(v.dataset, v.spec, records) };
 }
 
 /** ctx: { migration, spec, hasCap, actorDeps, recordDeps } */

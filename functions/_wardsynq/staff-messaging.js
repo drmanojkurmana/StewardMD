@@ -44,8 +44,9 @@ const MAX_BODY = 2000;
 const MAX_SUBJECT = 120;
 /* ponytail: a named address is for a few colleagues; a larger group is a role. */
 const MAX_PEOPLE = 20;
-/* ponytail: one page of the newest messages and read marks per inbox load; an index by thread and reader when a
- * hospital outgrows it. A full page is reported as partial, never as everything. */
+/* R4-2: a hospital-wide inbox reads every message and read mark (listAll, paged; the old page of 500 was the OLDEST,
+ * not the newest). Past 50,000 the inbox refuses. ponytail: an index by thread and reader when a hospital outgrows it.
+ * SCAN stays exported for callers that page on their own. */
 const SCAN = 500;
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -201,14 +202,14 @@ async function listMessagePeople(request, env, ctx) {
 
 /** Read marks for these threads by this reader: Map(threadId -> lastReadAt). Throws when unreadable. */
 async function myReads(svc, me, patientId) {
-  const rows = patientId ? await svc.byPatient(READ, patientId) : await svc.list(READ, SCAN);
+  const rows = patientId ? await svc.byPatient(READ, patientId) : (await svc.listAll(READ, { max: 50000, throwOnTruncate: true })).rows; // R4-2: every record (listAll, paged; was the oldest N), past 50,000 refused rather than short
   const out = new Map();
   for (const r of rows || []) if (r && r.readerId === me) out.set(r.threadId, r.lastReadAt);
-  return { reads: out, partial: !patientId && (rows || []).length >= SCAN };
+  return { reads: out };
 }
 /** Everybody's read marks on one thread: Map(readerId -> lastReadAt). */
 async function threadReads(svc, msg) {
-  const rows = msg.patientId ? await svc.byPatient(READ, msg.patientId) : await svc.list(READ, SCAN);
+  const rows = msg.patientId ? await svc.byPatient(READ, msg.patientId) : (await svc.listAll(READ, { max: 50000, throwOnTruncate: true })).rows;
   return new Map((rows || []).filter((r) => r && r.threadId === msg.threadId).map((r) => [r.readerId, r.lastReadAt]));
 }
 
@@ -396,14 +397,13 @@ async function listStaffMessages(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
   const patientId = str(ctx.patientId), unit = str(ctx.unit), me = resolved.actor.id;
-  let rows, partial = false;
+  let rows;
   if (patientId) {
     const g = await patientGate(svc, patientId);
     if (!g.ok) return { ...base, ...g };
     try { rows = await svc.byPatient(MSG, patientId); } catch { return { ...base, ok: false, status: 502, error: "record_read_failed" }; }
   } else {
-    try { rows = await svc.list(MSG, SCAN); } catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed" }; }
-    partial = (rows || []).length >= SCAN;
+    try { rows = (await svc.listAll(MSG, { max: 50000, throwOnTruncate: true })).rows; } catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed" }; }
     const scopeRead = resolved.actor.scope && resolved.actor.scope.read;
     const seesPatients = scopeRead === null || (Array.isArray(scopeRead) && scopeRead.includes("Patient"));
     rows = (rows || []).filter((m) => m && (m.patientId ? seesPatients : true) && (!unit || m.unit === unit));
@@ -414,8 +414,7 @@ async function listStaffMessages(request, env, ctx) {
   if (ctx.view === "mine") threads = threads.filter((t) => t.forMe);
   const labels = await patientLabels(svc, threads.filter((t) => t.patientId));
   for (const t of threads) if (t.patientId) t.patient = labels.get(labelKey(t)) || null;
-  return { ...base, ok: true, me, role: resolved.role || null, threads, unread: threads.reduce((n, t) => n + t.unread, 0),
-    ...(partial || reads.partial ? { partial: true, warning: `Only the newest ${SCAN} messages were checked. Older threads may be missing.` } : {}) };
+  return { ...base, ok: true, me, role: resolved.role || null, threads, unread: threads.reduce((n, t) => n + t.unread, 0) };
 }
 
 export {

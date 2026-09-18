@@ -40,3 +40,23 @@ test("import screen in English: no markers, no dashes, and nothing added is said
   assert.match(none, /Nothing in this file would be added\./);
   assert.doesNotMatch(none, /[–—]/);
 });
+
+test("R3-1 import screen: a 250-row file runs in three parts, the parts' reports read as one, and a stopped import says how to resume", () => {
+  const { win } = loadSite({ lang: "xx", pages: ["admin.js"] });
+  const c = ctxOf(win), W = win.WSQ;
+  assert.deepEqual(JSON.parse(JSON.stringify(W._importRuns(250, 100))), [{ from: 0, to: 100 }, { from: 100, to: 200 }, { from: 200, to: 250 }]);
+  assert.equal(W._importRuns(0, 100).length, 0);
+  const part = (from, create, dup) => ({ ok: true, step: "preview", kind: "patients", rowCount: 250, rowCap: 100, run: { from, to: from + 1 }, planId: "p" + from, counts: { create, matched: 0, duplicate: dup, invalid: 0 }, rows: [{ row: from + 2, status: create ? "create" : "duplicate", label: "L-" + from }] });
+  const merged = W._importMerge([part(0, 1, 0), part(100, 0, 1), part(200, 1, 0)]);
+  assert.deepEqual(JSON.parse(JSON.stringify(merged.counts)), { create: 2, matched: 0, duplicate: 1, invalid: 0 });
+  assert.deepEqual(merged.rows.map((r) => r.row), [2, 102, 202]);
+  assert.deepEqual(merged.runs.map((r) => [r.planId, r.create]), [["p0", 1], ["p100", 0], ["p200", 1]]);
+  const mapped = W._importHtml(c, { kind: "patients", map: { ...MAP, rowCount: 250 }, mapping: {}, preview: null });
+  assert.equal(leftovers(mapped, ["HIS No", "Patient Name"]).length, 0, JSON.stringify(leftovers(mapped, ["HIS No", "Patient Name"])));
+  const pv = W._importHtml(c, { kind: "patients", map: MAP, mapping: {}, preview: merged });
+  assert.match(pv, /data-imp="commit" data-count="2"/);
+  const stopped = W._importHtml(c, { kind: "patients", map: MAP, mapping: {}, preview: { ok: false, message: "The import stopped at row 133 after 31 of 100.", counts: merged.counts, rows: merged.rows, stopped: { n: 131, part: 2, parts: 3 } } });
+  const DATA = ["HIS No", "Patient Name", "L-0", "L-100", "L-200", "The import stopped at row 133 after 31 of 100.", "0", "1", "2", "102", "202"];
+  assert.equal(leftovers(stopped, DATA).length, 0, JSON.stringify(leftovers(stopped, DATA)));
+  assert.match(stopped, /msg err/); assert.doesNotMatch(stopped, /data-imp="commit"/, "a stopped import offers no import until a new dry run");
+});
