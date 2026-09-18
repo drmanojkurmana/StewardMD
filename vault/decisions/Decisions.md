@@ -8546,3 +8546,17 @@ different facts and are never rendered the same way.
   `section(..., "failed", ...)` state.
 - Not done here: `patient-access.js:441` (the portal's own PatientMessage read) and the sites owned by
   R6-1/R6-3/R6-4/R6-5.
+## 2026-09-18 Purchase tier is separate from verification role (ROLE_GATES_ON)
+
+- Entitlement records now carry `tier` + `tierExp` (what was PAID for: free|trainee|coresident|pro|physician|
+  physicianpro) alongside `role` (WHO they are, from verification). One Trainee price, three trainee roles: PG
+  Logbook needs the role, Scribe needs the tier, Ward Sync needs both. `fulfilPurchase()` used to discard the plan
+  key and grant a flat Pro, so ₹199 and ₹2,499 bought the same thing.
+- Money rule in `purchasePatch()`: a purchase may upgrade and may extend, never downgrade an active higher tier and
+  never shorten an expiry (Trainee bought on top of Physician Pro, or a replayed webhook, must not shrink anything).
+  `tierExp: null` = forever (owner comp) and stays null.
+- Onco add-on (`oncoAddonExp`) is buyable by any tier; the oncology AI extras get a 3-day trial per account started on
+  FIRST USE (`oncoTrialStart`), not signup. ONCQIS/OncoTree reference stays free forever and is not in the matrix.
+- The role x tier matrix in `_features.js` is INERT unless `ROLE_GATES_ON=1` (on top of the existing `FEATURES_ON`);
+  with it off `featureAllowed()` behaves exactly as before. Per-user `featureFlags` and `FEATURE_<KEY>_DEFAULT_ON`
+  still override the matrix. Route-by-route rollout is a later step.

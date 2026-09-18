@@ -25,7 +25,8 @@ import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
 import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
 import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool, addTokens, inrToMt, MT_PER_INR, tokenPackFor } from "../../_credits.js";
-import { getEntitlement, clinicLimit, deviceLimit } from "../../_entitlements.js";
+import { getEntitlement, clinicLimit, deviceLimit, recordTierPurchase, effectiveTierFor, oncoAddonActive } from "../../_entitlements.js";
+import { oncoTrialState } from "../../_features.js";
 import { deviceLockOn } from "../../_devices.js";
 import { cfgPrice, warmBillingCfg, getBillingCfg, setBillingCfg } from "../../_billingcfg.js";
 
@@ -115,8 +116,24 @@ export async function fulfilPurchase(env, uid, planKey, months, source, deps) {
     const r = await addTokens(kv, "em:" + u.email, p.mt);
     return { ok: true, tokens: p.mt, balanceInr: r.balance, email: u.email };
   }
-  const g = await grant(env, uid, { months: Math.max(1, +months || 1), source });
-  return Object.assign({ ok: true }, g);
+  const m = Math.max(1, +months || 1);
+  const g = await grant(env, uid, { months: m, source });
+  // Record WHICH plan was bought (tier / onco add-on). Best-effort: the Pro grant above is the money
+  // path and must not fail because the entitlement store blinked — the tier can be reconciled later.
+  let tier = null;
+  try { tier = await (deps && deps.recordTierPurchase || recordTierPurchase)(env, uid, planKey, { months: m }, deps); } catch (e) {}
+  return Object.assign({ ok: true }, g, tier ? { tier: tier.tier || null, tierExp: tier.tierExp } : {});
+}
+
+// App Store / Play product id -> the same plan key the web checkout issues.
+// in.stewardmd.<tier>.<monthly|annual> and in.stewardmd.addon.<name>; token packs keep their own
+// (consumable) id shape handled at the IAP route.
+export function planKeyFromProductId(productId) {
+  const m = /^in\.stewardmd\.([a-z]+)\.([a-z]+)$/.exec(String(productId || "").toLowerCase());
+  if (!m) return null;
+  if (m[1] === "addon") return "addon:" + m[2];
+  if (m[2] !== "monthly" && m[2] !== "annual") return null;
+  return m[1] + ":" + m[2];
 }
 
 async function hmacSha256Hex(secret, message) {
@@ -208,12 +225,17 @@ export async function onRequest(context) {
         const who = await usageIdentify(request, env);
         if (who && who.email) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); }
       } catch (e) {}
-      try { const ent = uid ? await getEntitlement(env, uid) : null; role = ent && ent.role; } catch (e) {}
+      let ent = null;
+      try { ent = uid ? await getEntitlement(env, uid) : null; role = ent && ent.role; } catch (e) {}
       try { const who = await usageIdentify(request, env); if (who && who.email) costCap = await dailyCostCap(env, usageKv(env), who.email, role); } catch (e) {}
       return json(Object.assign({
         signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env),
         tokens: inrToMt(credits), costCapMt: inrToMt(costCap), mtPerInr: MT_PER_INR,   // MaiK Tokens = what the UI shows
         role: role || null, clinicLimit: clinicLimit(env, role), deviceLimit: deviceLimit(env, role), deviceLockOn: deviceLockOn(env),
+        // Purchase-derived ladder, so the client can render what was actually bought. The onco trial
+        // end is advisory only — the trial clock starts server-side on first oncology-AI use.
+        tier: effectiveTierFor(ent), tierExp: (ent && ent.tierExp) || null,
+        oncoAddon: oncoAddonActive(ent), oncoTrialEndsAt: (ent && ent.oncoTrialStart) ? oncoTrialState(ent).endsAt : null,
       }, state));
     }
     // ---- owner billing overview: provider config (booleans, never secrets) + flags + founding + plans ----
@@ -265,7 +287,10 @@ export async function onRequest(context) {
         if (!f.ok) return json({ ok: false, valid: true, reason: f.reason }, 502);
         return json({ ok: true, valid: true, platform: platform, tokens: f.tokens, balanceMt: inrToMt(f.balanceInr) });
       }
-      const g = await grantPro(env, uid, { days: daysFromExpiry(v.expiresAt), source: "iap-" + platform });
+      const days = daysFromExpiry(v.expiresAt);
+      const g = await grantPro(env, uid, { days: days, source: "iap-" + platform });
+      // Same as the webhook path: the store productId, never the client, says which plan this was.
+      try { await recordTierPurchase(env, uid, planKeyFromProductId(body.productId), { days: days }); } catch (e) {}
       return json(Object.assign({ ok: true, valid: true, platform: platform, expiresAt: v.expiresAt || null }, g));
     }
 
