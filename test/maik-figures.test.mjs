@@ -22,6 +22,13 @@ test("picks the figure the page is built around, not the logo, the banner or the
   assert.match(f.alt, /Microhematuria Evaluation Algorithm/);
 });
 
+test("an empty src never resolves to the page itself; a srcset-only image uses its first candidate (aafp.org, production 2026-09-18)", () => {
+  const page = "https://www.aafp.org/afp/2022/0700/acute-pancreatitis.html";
+  const tag = '<div class="aafp-article__figure"><img class="aafp-image__image" src="" srcset="https://dgnvxbcc3-res.cloudinary.com/image/upload/w_384/Journals/AFP/2022/0700/p1-f1-jpg.jpg 384w, https://dgnvxbcc3-res.cloudinary.com/image/upload/w_768/Journals/AFP/2022/0700/p1-f1-jpg.jpg 768w" alt="" width="1500"></div>';
+  assert.equal(pickFigure(tag, page, "acute pancreatitis management").img, "https://dgnvxbcc3-res.cloudinary.com/image/upload/w_384/Journals/AFP/2022/0700/p1-f1-jpg.jpg");
+  assert.equal(pickFigure('<figure><img src="" alt="Figure 1" width="900"></figure>', page, "acute pancreatitis management"), null, "no usable source -> nothing, never the page url");
+});
+
 test("relative and data-src URLs resolve against the page; http images are dropped", () => {
   const f = pickFigure('<img data-src="../x/algorithm-hematuria.png" alt="hematuria algorithm" width="800">', PAGE, "hematuria");
   assert.equal(f.img, "https://www.med.unc.edu/medclerk/education/grading/x/algorithm-hematuria.png");

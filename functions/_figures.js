@@ -34,8 +34,12 @@ function topicTokens(topic) {
   return String(topic || "").toLowerCase().split(/[^a-z0-9]+/).filter((t) => t.length > 2 && !STOP.test(t));
 }
 function absolute(src, pageUrl) {
-  try { const u = new URL(src, pageUrl); return u.protocol === "https:" ? u.href : ""; } catch (e) { return ""; }
+  src = String(src || "").trim();
+  if (!src) return "";   // an empty src resolves to the PAGE url: aafp.org's srcset-only images did exactly that
+  try { const u = new URL(src, pageUrl); return (u.protocol === "https:" && u.href !== String(pageUrl)) ? u.href : ""; } catch (e) { return ""; }
 }
+// First candidate of a srcset / data-srcset ("url 384w, url 768w, ...").
+function firstSrcset(v) { const m = /^\s*([^\s,]+)/.exec(String(v || "")); return m ? m[1] : ""; }
 
 /* Pure: the best figure on one page for one topic, or null. Exported for the unit test. */
 export function pickFigure(html, pageUrl, topic) {
@@ -47,7 +51,7 @@ export function pickFigure(html, pageUrl, topic) {
   let m;
   while ((m = re.exec(h))) {
     const tag = m[0];
-    const src = absolute(attr(tag, "data-src") || attr(tag, "src"), pageUrl);
+    const src = absolute(attr(tag, "data-src") || attr(tag, "src") || firstSrcset(attr(tag, "data-srcset") || attr(tag, "srcset")), pageUrl);
     if (!src || JUNK.test(src)) continue;
     const alt = attr(tag, "alt"), title = attr(tag, "title");
     if (JUNK.test(alt)) continue;
