@@ -47,9 +47,16 @@ export const GAP_PROMPTS = Object.freeze({
   radiology: 'I could not find the radiology reports. Open them and tap inside so they turn green, then tap Done. ' + REASSURANCE,
   discharge: 'I could not find the discharge summary. Open it and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
   history: 'I could not find the visit history. Open it and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
+  /* THE ONE EXTRA TAP, AND ONLY WHEN IT IS EARNED. The agent opens a row of a proven list itself to
+   * learn the report behind it; when that does not work on this hospital, the alternative used to be
+   * a run that finished looking healthy and was then refused approval for a detail nobody could
+   * supply. Asked only if the list proved and its detail did not, so a hospital where the chain works
+   * is never asked at all. */
+  'labs-detail': 'I found your lab list but not the report behind it. Open one lab report and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
+  'radiology-detail': 'I found your scan list but not the report behind it. Open one scan report and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
 });
 const MAX_ASKS = 4;
-const GAP_NAMES = Object.freeze({ worklist: 'patient list', patient: 'patient details', notes: 'clinical notes', labs: 'lab results', radiology: 'radiology reports', medications: 'medication chart', discharge: 'discharge summary', history: 'visit history' });
+const GAP_NAMES = Object.freeze({ worklist: 'patient list', patient: 'patient details', notes: 'clinical notes', labs: 'lab results', radiology: 'radiology reports', medications: 'medication chart', discharge: 'discharge summary', history: 'visit history', 'labs-detail': 'lab report', 'radiology-detail': 'scan report' });
 const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[type=\"password\"]')?'1':'0'})()";
 
 /* MANUAL MODE: the doctor drives, the agent reads over their shoulder. One ask per resource, in the
@@ -393,7 +400,16 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   if (typeof askDoctor === 'function' && crawlStop !== 'login-required' && crawlStop !== 'session-expired-or-shell') {
     const unproven = verification.failed.filter((r) => r !== 'worklist' || !verification.patients.length);
     // What the agent found but could not prove comes first: the doctor's tap there is worth most.
-    const askRank = (g) => { const i = ASK_ORDER.indexOf(g); return i < 0 ? ASK_ORDER.length : i; };
+    /* A detail follows the list it belongs to: "open the lab list", then "open one lab report", so the
+     * doctor is already standing on the screen the second question is about. Without this a bare
+     * indexOf sent every "-detail" to the back of the queue, behind unrelated resources. */
+    const askRank = (g) => {
+      const i = ASK_ORDER.indexOf(g);
+      if (i >= 0) return i;
+      const m = /^(.+)-detail$/.exec(g);
+      const p = m ? ASK_ORDER.indexOf(m[1]) : -1;
+      return p >= 0 ? p + 0.5 : ASK_ORDER.length;
+    };
     const gaps = manual ? ASK_ORDER.slice()
       : [...new Set([...unproven, ...looking()])].sort((a, b) => askRank(a) - askRank(b)).slice(0, MAX_ASKS + unproven.length);
     const prompts = manual ? ASK_PROMPTS : GAP_PROMPTS;
