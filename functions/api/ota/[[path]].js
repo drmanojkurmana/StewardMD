@@ -67,8 +67,30 @@ export async function onRequest(context) {
   if (method === "GET" && seg[0] === "file" && seg[1]) {
     const hash = String(seg[1]).toLowerCase();
     if (!HASH_RE.test(hash)) return json({ error: "bad-hash" }, 400);
-    const obj = await OTA.getFile(r2, hash);
-    if (!obj) return json({ error: "not-found" }, 404);
+    /* RESUMABLE. A ~48MB bundle served as one un-resumable stream meant any drop restarted from zero
+     * and the phone reported "download failed" (owner's iPhone, 2026-09-18). A Range request is now
+     * answered 206 from R2, and Accept-Ranges is always advertised so the updater knows it may resume. */
+    const head = await OTA.getFile(r2, hash);
+    if (!head) return json({ error: "not-found" }, 404);
+    const wanted = OTA.parseRange(request.headers.get("Range"), head.size);
+    if (wanted) {
+      const part = await OTA.getFile(r2, hash, { range: wanted });
+      if (part) {
+        const end = wanted.offset + wanted.length - 1;
+        return new Response(part.body, {
+          status: 206,
+          headers: {
+            "Content-Type": head.httpMetadata?.contentType || "application/octet-stream",
+            "Content-Length": String(wanted.length),
+            "Content-Range": "bytes " + wanted.offset + "-" + end + "/" + head.size,
+            "Accept-Ranges": "bytes",
+            "Cache-Control": "public, max-age=31536000, immutable",
+            "ETag": '"' + hash + '"',
+          },
+        });
+      }
+    }
+    const obj = head;
     // Content-addressed by definition — this exact hash can only ever mean this exact content, so
     // it is safe (and correct) to tell every cache in the path to keep it forever.
     return new Response(obj.body, {
@@ -77,6 +99,7 @@ export async function onRequest(context) {
         "Content-Type": obj.httpMetadata?.contentType || "application/octet-stream",
         "Content-Length": String(obj.size),
         "Cache-Control": "public, max-age=31536000, immutable",
+        "Accept-Ranges": "bytes",
         "ETag": `"${hash}"`,
       },
     });
