@@ -4495,6 +4495,14 @@
     // one grounded call, short answer; only invoked on an explicit user tap.
     // `mode` is optional. Omit for the classic web-research path; pass "evidence-review" for MaiK
     // Research Mode (trusted medical-literature synthesis, PubMed-grounded, 2/day + cached server-side).
+    // Related figures for an answered topic: GET, no model, no tokens (functions/_figures.js).
+    // Returns { figures: [{ img, page, site, title }] }; never rejects, so the strip is optional.
+    figures: function (topic) {
+      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ figures: [] });
+      var q = String(topic || "").slice(0, 200); if (!q) return Promise.resolve({ figures: [] });
+      var p = aiHeaders().then(function (h) { return fetch(b + "/figures?q=" + encodeURIComponent(q), { headers: h }); }).then(function (r) { return r.json(); }).catch(function () { return { figures: [] }; });
+      return raceTimeout(p, 15000, { figures: [] });
+    },
     research: function (question, mode, history) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       var q = String(question || "").slice(0, 500); if (!q) return Promise.resolve({ error: "no-question" });
