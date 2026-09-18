@@ -105,7 +105,8 @@
     if (body.tier) return "in.stewardmd." + (TIER_IAP[body.tier] || body.tier) + "." + (body.cycle === "annual" ? "annual" : "monthly");
     if (body.addon === "onco") return "in.stewardmd.onco.monthly";
     if (body.pack) return "in.stewardmd.tokens." + body.pack;
-    if (body.quotaPack) return "in.stewardmd." + body.quotaPack;   // care.25 / scribe.50 …
+    if (body.quotaPack) return "in.stewardmd." + body.quotaPack;   // care.25 / scribe.50 / msg.100 …
+    if (body.msgTier) return "in.stewardmd.msg." + body.msgTier + ".monthly";   // Clinic Messaging
     return null;
   }
 
@@ -312,6 +313,7 @@
         if (k === "buy-addon") return doBuy({ addon: b.getAttribute("data-addon") }, b);
         if (k === "token") return doBuy({ pack: b.getAttribute("data-pack") }, b);
         if (k === "qpack") return doBuy({ quotaPack: b.getAttribute("data-qpack") }, b);
+        if (k === "msgtier") return doBuy({ msgTier: b.getAttribute("data-msgtier") }, b);
         if (k === "redeem") return redeem();
         if (k === "ailimit-upgrade") { close(); return openPaywall(); }
       };
@@ -426,7 +428,8 @@
   function openTopUp(info) {
     info = info || {}; close();
     var c = info.copy || {}, packs = info.packs || [];
-    var title = info.feature === "scribe" ? "MaiK Voice Scribe consults" : "Patient credits";
+    var title = info.feature === "scribe" ? "MaiK Voice Scribe consults" : info.feature === "msg" ? "Clinic Messaging" : "Patient credits";
+    var unitWord = info.feature === "scribe" ? "consults" : "patients";
     var lines = (c.lines || []).map(function (t) {
       return '<div style="font:500 13px/1.6 var(--sans);color:var(--slate,#2d4356);margin-top:4px">' + esc(t) + '</div>';
     }).join("");
@@ -436,18 +439,40 @@
      * SMS/WhatsApp/email nudge is permitted (Apple's 2021 anti-steering settlement) and lives
      * server-side in functions/_quota.js webUpsellSms(), which never ships in the app bundle. */
     var webOk = plat() !== "ios";
+    /* One everyday-spend comparison per price (owner-approved). The server owns the map in
+     * functions/_quota.js COMPARE, keyed by pack / tier, so there is exactly one place to edit it and
+     * a price with no line renders nothing rather than getting one invented for it here. */
+    var cmp = function (t) {
+      return t ? '<div data-pp-compare="1" style="margin-top:5px;font:500 9.5px/1.35 var(--sans);color:var(--slate-soft)">' + esc(t) + '</div>' : '';
+    };
+    /* Clinic Messaging subscriptions. Same anti-steering gate as the packs: on iOS the store price is
+     * the only price that may render, and no stewardmd.in link may render at all. */
+    var tiers = (info.tiers || []).map(function (t) {
+      var web = webOk && t.webAmount > 0 && t.webAmount < t.amount ? t.webAmount : 0;
+      return '<button data-pp="msgtier" data-msgtier="' + esc(t.key) + '" style="width:100%;text-align:left;border:2px solid ' + (t.popular ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';border-radius:12px;padding:11px 13px;background:var(--panel,#fff);cursor:pointer;margin-top:8px">' +
+        '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">' +
+        '<div style="font:800 14px var(--sans);color:var(--ink)">' + esc(t.label) + '</div>' +
+        '<div style="font:800 14px var(--sans);color:var(--teal,#0e6e63)">' + inr(web || t.amount) + '<span style="font:600 10px var(--sans);color:var(--slate-soft)"> a month</span></div>' +
+        '</div>' +
+        '<div style="margin-top:3px;font:500 11.5px/1.45 var(--sans);color:var(--slate,#2d4356)">' + esc(t.units) + ' patients a month. ' + esc(t.line || "") + '</div>' +
+        cmp(t.compare) +
+        '</button>';
+    }).join("");
     var cards = packs.map(function (p) {
       var web = webOk && p.webAmount > 0 && p.webAmount < p.amount ? p.webAmount : 0;
       return '<button data-pp="qpack" data-qpack="' + esc(p.key) + '" style="flex:1;text-align:left;border:2px solid ' + (p.popular ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';border-radius:12px;padding:11px;background:var(--panel,#fff);cursor:pointer">' +
         '<div style="font:800 17px var(--sans);color:var(--ink)">' + esc(p.units) + '</div>' +
-        '<div style="font:500 9.5px var(--sans);color:var(--slate-soft)">' + (info.feature === "scribe" ? "consults" : "patients") + '</div>' +
+        '<div style="font:500 9.5px var(--sans);color:var(--slate-soft)">' + unitWord + '</div>' +
         '<div style="margin-top:6px;font:800 13px var(--sans);color:var(--teal,#0e6e63)">' + inr(web || p.amount) + '</div>' +
         (p.perUnit > 0 ? '<div style="font:500 9.5px var(--sans);color:var(--slate-soft)">' + esc("₹" + (web ? Math.round(web / 100 / p.units) : p.perUnit)) + ' each</div>' : '') +
+        cmp(p.compare) +
         '</button>';
     }).join("");
     var inner = header(title) +
+      (c.alert ? '<div style="padding:6px 18px 0"><div style="padding:11px 13px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:700 12.5px/1.5 var(--sans);color:var(--ink)">' + esc(c.alert) + '</div></div>' : '') +
       '<div style="padding:6px 18px 2px"><div style="font:800 17px/1.4 var(--serif,Georgia,serif);color:var(--ink)">' + esc(c.headline || "") + '</div>' + lines + '</div>' +
       (c.price ? '<div style="padding:10px 18px 2px"><div style="padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 13px/1.5 var(--sans);color:var(--teal,#0e6e63)">' + esc(c.price) + '</div></div>' : '') +
+      (tiers ? '<div style="padding:8px 18px 2px">' + tiers + '</div>' : '') +
       (cards ? '<div style="padding:12px 18px 2px;display:flex;gap:8px">' + cards + '</div>' : '') +
       '<div style="padding:10px 18px 22px;font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center">' + esc(c.expiry || "") + '</div>';
     var div = document.createElement("div");
@@ -490,6 +515,14 @@
         var p = _origFetch.apply(this, arguments);
         try {
           var url = (typeof input === "string" ? input : (input && input.url)) || "";
+          /* The OPD queue never 402s - running out of Clinic Messaging must not block the queue - so
+           * it reports a spent allowance as `msgQuota` on an ordinary 200 and the sheet opens off that. */
+          if (url.indexOf("/api/queue/") > -1) {
+            return p.then(function (r) {
+              if (r && r.status === 200) { try { r.clone().json().then(function (d) { if (d && d.msgQuota && d.msgQuota.error === "quota-exhausted") openTopUp(d.msgQuota); }, function () {}); } catch (e) {} }
+              return r;
+            });
+          }
           if (url.indexOf("/api/ai/") > -1 || url.indexOf("/api/followcare/") > -1) {
             return p.then(function (r) {
               if (r && r.status === 429) { try { r.clone().json().then(function (d) { if (d && d.reason === "ai-cost-cap") openAiLimit(d); }, function () {}); } catch (e) {} }

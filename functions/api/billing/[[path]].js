@@ -25,11 +25,12 @@ import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
 import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
 import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool, addTokens, inrToMt, MT_PER_INR, tokenPackFor } from "../../_credits.js";
-import { getEntitlement, clinicLimit, deviceLimit, recordTierPurchase, effectiveTierFor, oncoAddonActive } from "../../_entitlements.js";
+import { getEntitlement, writeEntitlement, clinicLimit, deviceLimit, recordTierPurchase, effectiveTierFor, oncoAddonActive } from "../../_entitlements.js";
 import { oncoTrialState } from "../../_features.js";
 import { deviceLockOn } from "../../_devices.js";
 import { cfgPrice, warmBillingCfg, getBillingCfg, setBillingCfg } from "../../_billingcfg.js";
-import { quotaOn, quotaKv, quotaPacks, quotaPackFor, packKeyForProduct, credit as quotaCredit, state as quotaState } from "../../_quota.js";
+import { quotaOn, quotaKv, quotaPacks, quotaPackFor, packKeyForProduct, credit as quotaCredit, state as quotaState,
+  msgTiers, msgTierFromPlanKey, msgTierKeyForProduct, msgPurchasePatch } from "../../_quota.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
@@ -69,6 +70,10 @@ function plans(env) {
       onco: { amount: P("ONCO_ADDON_MONTHLY", 8900), label: "Physician Onco" },
       clinic: { amount: P("CLINIC_ADDON_MONTHLY", 13900), label: "Extra clinic" },
     },
+    // Clinic Messaging — an add-on-shaped section, but real auto-renewable subscriptions in their own
+    // App Store group so they stack on whatever base plan the doctor already holds. Units + product
+    // ids live in functions/_quota.js, which is also what meters them.
+    msgTiers: msgTiers(env),
     tokens: {
       boost: { mt: 50000, amount: P("TOKENS_BOOST", 4900), label: "Boost" },
       plus: { mt: 250000, amount: P("TOKENS_PLUS", 19900), regular: P("TOKENS_PLUS_REGULAR", 24500), label: "Plus", popular: true },
@@ -89,6 +94,7 @@ export function selectAmount(env, body) {
     const t = P.tiers[b.tier], annual = b.cycle === "annual" && t.annual;
     return { amount: annual ? t.annual : t.amount, months: annual ? 12 : 1, key: b.tier + ":" + (annual ? "annual" : "monthly"), label: t.label };
   }
+  if (b.msgTier && P.msgTiers[b.msgTier]) { const m = P.msgTiers[b.msgTier]; return { amount: m.amount, months: 1, key: "msgtier:" + b.msgTier, label: m.label }; }
   if (b.quotaPack && P.packs[b.quotaPack]) { const q = P.packs[b.quotaPack]; return { amount: q.amount, months: 0, units: q.units, key: "pack:" + b.quotaPack, label: q.label }; }
   if (b.pack && P.tokens[b.pack]) { const k = P.tokens[b.pack]; return { amount: k.amount, months: 0, mt: k.mt, key: "tokens:" + b.pack, label: k.label + " tokens" }; }
   if (b.addon && P.addons[b.addon]) { const a = P.addons[b.addon]; return { amount: a.amount, months: 1, key: "addon:" + b.addon, label: a.label }; }
@@ -113,6 +119,19 @@ export async function fulfilPurchase(env, uid, planKey, months, source, deps) {
   const grant = (deps && deps.grantPro) || grantPro;
   // Quota packs (patient credits / Scribe consults) — units re-read from the server price table, never
   // from the payment note. Keyed by uid, which is what functions/_quota.js meters.
+  /* Clinic Messaging subscription. It buys a MONTHLY ALLOWANCE, not Pro and not a plan tier, so it
+   * must not fall through to grantPro() below — that was the exact bug the token packs had. Recorded
+   * on the entitlement as msgTier / msgTierExp; the patch is pure and upgrade-only (see _quota.js). */
+  if (msgTierFromPlanKey(planKey)) {
+    const getEnt = (deps && deps.getEntitlement) || getEntitlement;
+    const putEnt = (deps && deps.writeEntitlement) || writeEntitlement;
+    let rec = null;
+    try { rec = await getEnt(env, uid); } catch (e) { rec = null; }
+    const patch = msgPurchasePatch(rec, planKey, months, Date.now());
+    if (!patch) return { ok: false, reason: "unknown-msg-tier" };
+    await putEnt(env, uid, patch);
+    return { ok: true, msgTier: patch.msgTier, msgTierExp: patch.msgTierExp };
+  }
   const qpack = quotaPackFor(planKey);
   if (qpack) {
     const q = quotaPacks(env)[qpack];
@@ -248,7 +267,15 @@ export async function onRequest(context) {
       if (quotaOn(env) && uid) {
         try {
           const qkv = quotaKv(env);
-          quota = { care: await quotaState(env, qkv, uid, "care", { role }), scribe: await quotaState(env, qkv, uid, "scribe", { role }) };
+          // The msg meter also needs the Clinic Messaging subscription off the entitlement, because
+          // its allowance is included + tier. Re-read here rather than threaded through: one doc.
+          let ment = null;
+          try { ment = await getEntitlement(env, uid); } catch (e) { ment = null; }
+          quota = {
+            care: await quotaState(env, qkv, uid, "care", { role }),
+            scribe: await quotaState(env, qkv, uid, "scribe", { role }),
+            msg: await quotaState(env, qkv, uid, "msg", { role, msgTier: ment && ment.msgTier, msgTierExp: ment && ment.msgTierExp }),
+          };
         } catch (e) { quota = null; }
       }
       return json(Object.assign({
@@ -306,6 +333,13 @@ export async function onRequest(context) {
       // Consumable MaiK Token packs (in.stewardmd.tokens.<pack>) are NOT subscriptions: they have no
       // expiry, so the days-from-expiry grant below would have handed out Pro instead of tokens.
       // Consumable quota packs (in.stewardmd.care.N / in.stewardmd.scribe.N) — same non-subscription path.
+      // Clinic Messaging subscriptions (in.stewardmd.msg.small|big.monthly) grant an allowance, not Pro.
+      const iapMsg = msgTierKeyForProduct(body.productId);
+      if (iapMsg) {
+        const f = await fulfilPurchase(env, uid, iapMsg, 1, "iap-" + platform);
+        if (!f || !f.ok) return json({ ok: false, error: (f && f.reason) || "fulfil-failed" }, 500);
+        return json({ ok: true, valid: true, platform: platform, msgTier: f.msgTier, msgTierExp: f.msgTierExp });
+      }
       const iapQuota = packKeyForProduct(body.productId);
       if (iapQuota) {
         const f = await fulfilPurchase(env, uid, iapQuota, 0, "iap-" + platform);

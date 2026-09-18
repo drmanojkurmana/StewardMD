@@ -12,7 +12,7 @@ import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { quotaRefusal } from "../functions/_quota.js";
+import { quotaRefusal, COMPARE } from "../functions/_quota.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const BASE = (process.env.BASE || "http://localhost:8994/").replace(/\/?$/, "/");
@@ -66,12 +66,17 @@ const SCRIBE = JSON.stringify(quotaRefusal({}, "scribe"));
 // The same care refusal once a server actually has a count, and once it has none to give.
 const CARE7 = JSON.stringify(quotaRefusal({}, "care", { unheardCount: 7 }));
 const CARE0 = JSON.stringify(quotaRefusal({}, "care", { unheardCount: 0 }));
+// Clinic Messaging: the body the OPD queue hands back on an ordinary 200 once the allowance is gone.
+const MSG = JSON.stringify(quotaRefusal({}, "msg"));
 
 const sheetText = () => ev(`var p=document.getElementById("proPay"); return p ? p.innerText : null;`);
 const close = () => ev(`var p=document.getElementById("proPay"); if(p){ var c=p.querySelector('[data-pp="close"]'); if(c) c.click(); } return 1;`);
 // One refusing call through the REAL wrapped fetch — this is what the app does when a quota runs out.
 const refuse = (body) => ev(`window.__402 = ${body};
   return fetch("/api/followcare/enroll", { method: "POST" }).then(function(){ return 1; });`);
+// The queue's own path: a 200 carrying msgQuota. The queue itself keeps working; the sheet opens.
+const queueOut = (body) => ev(`window.__queue = ${body};
+  return fetch("/api/queue/live?roomId=r1").then(function(){ return 1; });`);
 
 try {
   if (!await connect()) throw new Error("could not attach to Chrome");
@@ -163,6 +168,60 @@ try {
   const sp = JSON.parse(await ev(`var b=[].slice.call(document.querySelectorAll('#proPay [data-pp="qpack"]'));
     return JSON.stringify(b.map(function(x){ return x.getAttribute("data-qpack"); }));`) || "[]");
   ok(sp.sort().join(",") === "scribe.250,scribe.50", "the Scribe sheet offers only the Scribe packs");
+
+  // ── Clinic Messaging: the queue keeps running, the sheet sells the tiers and the pack ──
+  await close();
+  await ev(`window.__402 = null; return 1;`);
+  await queueOut(MSG);
+  await sleep(400);
+  ok(await ev(`return !!document.getElementById("proPay");`) === true, "a 200 from /api/queue/ carrying msgQuota opens the top-up sheet without the queue ever refusing");
+  const m = String(await sheetText() || "");
+  ok(/Clinic Messaging/.test(m), "the sheet is titled Clinic Messaging");
+  ok(/Patients who know where they stand do not crowd your desk\./.test(m), "renders the owner-approved headline");
+  ok(/Your queue has gone quiet for patients\. Keep them informed\./.test(m), "leads with the out-of-allowance line");
+  ok(/Improves follow-up\. Builds clinic trust\. Runs itself\./.test(m), "renders the benefit line");
+  ok(/A clinic that keeps people informed is the clinic they recommend\./.test(m), "renders the recommendation line");
+  ok(/Fewer no-shows\. A calmer waiting room\. A front desk that answers fewer calls\./.test(m), "renders the waiting-room line");
+  ok(/₹5 a patient\. Less than the chai they drink while they wait\./.test(m), "renders the per-patient price line");
+  ok(/100 patients\. Never expires\./.test(m), "says the pack never expires");
+  ok(!/—/.test(m), "no em-dash on the Clinic Messaging sheet");
+  ok(!/\d+\s?%|fewer no-shows by|study|survey|proven/i.test(m), "no invented statistic or evidence claim");
+  ok(!/today only|last chance|expires in|hurry/i.test(m), "no countdown");
+
+  const tiers = JSON.parse(await ev(`var b=[].slice.call(document.querySelectorAll('#proPay [data-pp="msgtier"]'));
+    return JSON.stringify(b.map(function(x){ return { k: x.getAttribute("data-msgtier"), t: x.innerText.replace(/\\s+/g," ").trim() }; }));`) || "[]");
+  ok(tiers.length === 2, `both Clinic Messaging tiers are offered (got ${tiers.length})`);
+  ok(tiers.map(x => x.k).join(",") === "small,big", "the buttons carry the server tier keys small / big");
+  const tierTxt = tiers.map(x => x.t).join(" | ");
+  ok(/Clinic Messaging, Small/.test(tierTxt) && /Clinic Messaging, Big/.test(tierTxt), "both tiers are named");
+  ok(/150 patients a month\. For a clinic seeing up to 6 patients a day\./.test(tierTxt), "the Small line is the owner's");
+  ok(/600 patients a month\. For a busy OPD, up to 24 patients a day\./.test(tierTxt), "the Big line is the owner's");
+  // No Capacitor on this page, so plat() === "web": the web prices are the ones a browser may see.
+  ok(/₹659/.test(tierTxt) && /₹2,649/.test(tierTxt), `the web tier prices render (got ${JSON.stringify(tiers.map(x => x.t))})`);
+  const mPacks = JSON.parse(await ev(`var b=[].slice.call(document.querySelectorAll('#proPay [data-pp="qpack"]'));
+    return JSON.stringify(b.map(function(x){ return { k: x.getAttribute("data-qpack"), t: x.innerText.replace(/\\s+/g," ").trim() }; }));`) || "[]");
+  ok(mPacks.length === 1 && mPacks[0].k === "msg.100", "the queue pack is offered, and only it");
+  ok(/100 patients ₹549/.test(mPacks[0].t), `the web ₹549 / 100-patient pack is priced on the card (got ${JSON.stringify(mPacks[0].t)})`);
+
+  // ── the everyday-spend comparison renders against every price, from the one server map ──
+  ok(mPacks[0].t.indexOf(COMPARE["msg.100"]) > -1, "the queue pack carries its comparison line");
+  ok(tiers[0].t.indexOf(COMPARE["msg.small"]) > -1, "Small carries its comparison line");
+  ok(tiers[1].t.indexOf(COMPARE["msg.big"]) > -1, "Big carries its comparison line");
+  ok((m.match(/Less than/g) || []).length === 4, "one comparison per price, and the price line's own, with none invented");
+
+  // ── ANTI-STEERING on the Clinic Messaging sheet too ──
+  await close();
+  await ev(`window.Capacitor = { getPlatform: function(){ return "ios"; } }; return 1;`);
+  await queueOut(MSG);
+  await sleep(400);
+  const mios = String(await sheetText() || "");
+  ok(/₹749/.test(mios) && /₹2,999/.test(mios) && /₹599/.test(mios), "iOS renders the App Store prices 749 / 2,999 / 599");
+  ok(!/659|2,649|549/.test(mios), "iOS renders NO web price on the Clinic Messaging sheet");
+  const miosHtml = String(await ev(`var p=document.getElementById("proPay"); return p ? p.outerHTML : "";`) || "");
+  ok(!/stewardmd\.in|65900|264900|54900|₹659|₹2,649|₹549/.test(miosHtml), "not even the MARKUP carries a web price or purchase URL");
+  ok(/Less than a day of tea and snacks for the waiting room\./.test(mios), "the comparison lines survive the iOS gate");
+  await ev(`try { delete window.Capacitor; } catch(e) { window.Capacitor = undefined; } return 1;`);
+  await ev(`window.__queue = null; return 1;`);
 
   // ── closing works, and an ordinary 200 never opens it ──
   await close();
