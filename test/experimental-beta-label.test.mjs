@@ -82,7 +82,11 @@ test("the home tile carries a persistent BETA badge on every path", () => {
 
 test("Physician Pro paywall copy still says the imaging AI is in beta", () => {
   const pw = read("pro-paywall.js");
-  const line = pw.split("\n").find((l) => l.trim().startsWith("physicianpro:"));
+  // #1138 rebuilt the sheet, so several maps now carry a physicianpro: key (benefit, spend,
+  // per-day note, blurb). The beta status belongs to the FEATURE blurb - find that map, not the
+  // first physicianpro: line in the file.
+  const blurb = pw.slice(pw.indexOf("var TIER_BLURB"));
+  const line = blurb.split("\n").find((l) => l.trim().startsWith("physicianpro:"));
   assert.ok(line, "physicianpro paywall blurb not found");
   assert.match(line, /in beta/i, "paywall sells early access without saying beta: " + line.trim());
 });
