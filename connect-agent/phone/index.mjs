@@ -55,7 +55,12 @@ const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[typ
 /* MANUAL MODE: the doctor drives, the agent reads over their shoulder. One ask per resource, in the
  * order a ward round reads a chart. Each ask has "Not in my EMR" in the browser header (the native
  * guideSkip event) so a hospital without, say, radiology never blocks the run. */
-export const ASK_ORDER = Object.freeze(['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history']);
+/* FEWEST TAPS TO A USABLE CONNECTION. Approval needs the ward list, labs and its report, radiology and
+ * its report, and the drug chart; patient details, notes, the discharge summary and visit history are
+ * worth having but the gate does not require them. Asking for patient details and notes first spent two
+ * of the doctor's taps before anything approvable existed (owner's live run, 2026-09-18). The required
+ * screens come first, so a doctor who stops early still ends up with an adapter that can be approved. */
+export const ASK_ORDER = Object.freeze(['worklist', 'labs', 'radiology', 'medications', 'patient', 'notes', 'discharge', 'history']);
 
 /* A SECOND LOOK MAY ONLY ADD. "Look again" used to assign the new walk's views straight over the old
  * list, so a walk that came back with less silently destroyed the screens the doctor had just
@@ -388,7 +393,9 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   if (typeof askDoctor === 'function' && crawlStop !== 'login-required' && crawlStop !== 'session-expired-or-shell') {
     const unproven = verification.failed.filter((r) => r !== 'worklist' || !verification.patients.length);
     // What the agent found but could not prove comes first: the doctor's tap there is worth most.
-    const gaps = manual ? ASK_ORDER.slice() : [...new Set([...unproven, ...looking()])].slice(0, MAX_ASKS + unproven.length);
+    const askRank = (g) => { const i = ASK_ORDER.indexOf(g); return i < 0 ? ASK_ORDER.length : i; };
+    const gaps = manual ? ASK_ORDER.slice()
+      : [...new Set([...unproven, ...looking()])].sort((a, b) => askRank(a) - askRank(b)).slice(0, MAX_ASKS + unproven.length);
     const prompts = manual ? ASK_PROMPTS : GAP_PROMPTS;
     for (let i = 0; i < gaps.length; i += 1) {
       if (stopped()) break;
