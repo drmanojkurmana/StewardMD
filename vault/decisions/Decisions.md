@@ -8614,3 +8614,133 @@ different facts and are never rendered the same way.
   no em-dash. The "N patients have not heard from you" line renders only with a real server number.
 - Not wired: the ROLE_GATES_ON access matrix (separate branch), an `unheardCount` source for that line, and
   the scheduler's own MAiTRI calls (they continue an already-paid episode).
+
+## 2026-09-18 — The "N patients have not heard from you" nudge stays unwired: there is no honest source
+
+Investigated whether the `unheardCount` line in `quotaCopy()` (`functions/_quota.js`) can be made real.
+It cannot, today. Not wiring it is the decision, not an omission. The sentence tells a clinician they
+neglected patients; a wrong number there is worse than no sentence, so it renders only from a real count.
+
+The sentence needs three facts joined: (1) a patient this doctor discharged, (2) in this calendar month,
+(3) with no FollowCare episode. Four stores were checked and none carries all three.
+
+- **`q_tickets` / `q_sessions` (Firestore, OPD queue).** Has the doctor (`q_sessions.doctorUid`,
+  `_queue_engine.js:23,33`), a completion time (`consultEndAt`, `:209`) and a joinable patient key
+  (`decPHI(encMobile)` reproduces FollowCare's `patientKeyHash`). **Killed by retention:** every ticket
+  and session carries `expiresAt` = end of visit day (`_queue_engine.js:36,171`) under a Firestore TTL
+  policy (`docs/queue/smart-opd-queue-design.md:120`, `QUEUE_RETENTION_DAYS` default 2). A month of
+  tickets does not exist to be counted. Also: an OPD visit is not a discharge.
+- **WardSynQ `Encounter` (D1 `wardsynq_record`).** The only durable discharge record: `attendingId` =
+  the syncing session's `doctorUid` (`_wardsynq/migrate-encounter.js:153,191`), `periodEnd` = the real
+  discharge time (`migrate-discharge.js:576-584`), not TTL'd. **Fails on both remaining counts.**
+  (a) Neither `attendingId` nor `periodEnd` is indexed - they live inside the JSON body, and the only
+  read paths are by patient, by id prefix, or a whole-type tenant scan (`db/wardsynq_schema.sql:32-33`,
+  `repository-d1.js:163-168`). One doctor's month = a tenant-wide Encounter scan. (b) **There is no join
+  key to FollowCare.** The Encounter's `patientId` is a pseudonym derived from the MRN
+  (`_wardsynq/opd-identity.js:18-20`); the identity index knows mrn / abha / ticket / ghis-episode and
+  no phone at all (`_wardsynq/identity-key.js:39-51`), and the `Patient` model has no phone field.
+  FollowCare keys patients by `patientKeyHash(hospitalId, last-10-of-phone)` (`_followcare.js:118-126`).
+  Nothing can decide whether a discharged patient already has an episode. Also gated: nothing is written
+  unless the tenant has WardSynQ migration on (`migrate-encounter.js:180`).
+- **`q_patients` / `q_patient_index`.** A registry, not a visit log: org-scoped, no doctor uid, no visit
+  or discharge timestamp.
+- **`fc_episodes`.** Has all four properties (`doctorUid`, `dischargeMs`, an equality-indexed per-doctor
+  query at `_followcare.js:470`, `patientKeyHash`) and is therefore circular: it only knows the patients
+  who already have an episode, which is the set the sentence subtracts.
+
+Second tenant problem even if a join existed: FollowCare's `hospitalId` comes from the doctor's
+self-declared `fc_doctors` binding (`_followcare.js:482`), the OPD org id comes from the org store. The
+two namespaces are not the same string, so the hash would not match even with the phone in hand.
+
+**What would have to be recorded first** (any one of these unblocks it):
+1. The discharge/visit-completion event carries the patient's phone-derived `patientKeyHash` under the
+   same tenant id FollowCare uses - i.e. `patientKeyHash` written onto the WardSynQ `Encounter` (or its
+   identity index gains a phone system) at admission/registration. It is a non-reversible hash, so this
+   adds no new PHI at rest.
+2. **Or** a small per-doctor monthly counter maintained at the discharge write itself: increment
+   `nudge:<uid>:<YYYY-MM>` on discharge, decrement on FollowCare enrol when the episode's
+   `patientKeyHash` matches. O(1) per event, no scan, no month-long retention needed, and the paywall
+   reads one KV key. This is the cheaper option and the one to build.
+
+Either way the count is then folded into the `quota` block of `/api/billing/status` and passed to
+`quotaCopy()`. Until then `unheardCount` is never supplied and the line never renders.
+
+Hardened meanwhile (`functions/_quota.js`): the guard is now `Number.isInteger(n) && n > 0` with **no**
+coercion, so `true`, `"5"`, `Infinity`, `NaN`, `2.7` and `-3` all produce no sentence rather than
+"1 patients discharged this month have not heard from you." Pinned by `test/quota-meters.test.mjs`
+(21 tests, +2) and `test/run-quota-topup-ui.mjs` (27 browser checks, +7: the nudge renders verbatim from
+a real count, exactly once, leading the deck, with no identifier, and vanishes at 0).
+
+## 2026-09-18 — Credit model: one credit = one bounded EPISODE; new prices; web pricing kept out of iOS
+
+Owner decisions, implemented on `nudge-unheard-count`. Still fully inert behind `QUOTA_METERS_ON`.
+
+**1. One credit = one bounded episode, charged once at enrol.** An episode is day 0 the 7-day
+FollowCare SMS/WhatsApp check-in course, day 3 a MAiTRI call *only* if the patient has not responded,
+day 7 a MAiTRI call *only* if there is still no response, plus feedback capture, the ambulance alert by
+WhatsApp/SMS, the doctor-app alert and in-app patient messaging. At most two calls, both conditional on
+non-response. Nothing else in the episode deducts.
+
+This made `followcare/voice/call` a **bug, not a gap**: it was deducting a second credit for the
+doctor-initiated MAiTRI call. That route 404s without an existing `episodeId`, so every call it can
+place belongs to an episode already paid for at enrol - the deduction was double-charging the doctor
+for what they had bought. Removed (`functions/api/followcare/[[path]].js:415`). `enroll` is now the
+only care deduction in the codebase, and `test/quota-meters.test.mjs` asserts exactly that by counting
+the `careCredit(` call sites in the router and asserting the scheduler dispatch path never imports the
+meter. The scheduler-initiated calls that were already unmetered were correct all along.
+
+**2. New prices** (verified live in App Store Connect): `in.stewardmd.care.25` ₹2,499 (was ₹1,099),
+`in.stewardmd.care.100` ₹8,999 (was ₹3,499). Scribe unchanged at ₹999 / ₹3,999. Per-patient copy is
+₹100 and ₹90, and `perUnit` is **derived** from `amount / units` rather than typed, so the two cannot
+drift apart. Rationale in the code: an episode costs us ~₹32 worst case (SMS ₹10 + up to two calls at
+₹10 + ~₹2 of alerts) and ~₹19 typical, so ₹100 holds 55% margin even for a patient who needs both calls.
+
+**3. Web pricing, and why it never appears on iOS.** `quotaPacks()` now carries `amount` (store) and
+`webAmount` (web): care.25 ₹2,199, care.100 ₹7,999. The discount is funded by the payment fee we save
+(Razorpay ~2% against Apple's 15%), not out of margin. Scribe deliberately has **no** `webAmount`, so
+nothing can advertise a discount that does not exist.
+
+The India storefront's anti-steering rules make a "cheaper on the web" hint anywhere in the iOS app a
+straight rejection, and this app is mid-submission. Apple's 2021 anti-steering settlement permits
+telling users about other payment methods *outside* the app, with consent. So the two halves are
+separated **structurally**, not by discipline:
+- The outbound SMS/WhatsApp/email copy is `webUpsellSms()` in `functions/_quota.js`. `functions/` is
+  excluded from the app bundle by `scripts/build-www.sh`, so that string physically cannot reach an
+  iOS screen.
+- The sheet renderer gates every web price on `var webOk = plat() !== "ios";`
+  (`pro-paywall.js` `openTopUp`). On iOS the card shows the App Store price and the store-derived
+  per-patient figure; on the web it shows the web price and the web-derived figure. There is no
+  comparison shown anywhere, on either platform, so there is nothing to steer with.
+
+Asserted three ways: a node test that the in-app refusal copy contains no web price, no `stewardmd.in`,
+and no steering wording, that `pro-paywall.js` reads `webAmount` only behind the platform gate and
+ships no purchase URL; and a headless-Chrome test that re-renders the *same* sheet with
+`Capacitor.getPlatform() === "ios"` and asserts ₹2,499 / ₹8,999 are shown while `2,199`, `7,999`,
+`219900`, `799900` and `stewardmd.in` appear nowhere in the sheet's **markup**, not merely its text.
+
+Tests: `test/quota-meters.test.mjs` 24/24 (+3), `test/run-quota-topup-ui.mjs` 36/36 browser checks (+9).
+
+## 2026-09-18 — Product name is "MaiK Voice Scribe" in every user-facing string
+
+Owner correction. Renamed in the three places a doctor can read it:
+- `functions/_quota.js` pack labels: `"50 Scribe consults"` -> `"50 MaiK Voice Scribe consults"`,
+  `"250 Scribe consults"` -> `"250 MaiK Voice Scribe consults"`. These are what `plans().packs` serves
+  (`plans()` just returns `quotaPacks(env)`), so the paywall, the /billing/plans response and the 402
+  refusal body all pick the new name up from one place.
+- `pro-paywall.js` top-up sheet title: `"MaiK Scribe consults"` -> `"MaiK Voice Scribe consults"`.
+- `pro-paywall.js` Physician tier blurb: `"... FollowCare · Scribe · unlimited billing"` ->
+  `"... FollowCare · MaiK Voice Scribe · unlimited billing"`.
+
+`quotaCopy("scribe")` needed NO change: its approved copy never names the product. The headline
+("Not just a note. A second pair of eyes."), the five lines, the price line and "Consults never expire."
+are unchanged, as instructed.
+
+NOT renamed, deliberately: the internal feature key `"scribe"`, the KV key prefix `quota:scribe:*`, and
+the product ids `in.stewardmd.scribe.50|250`. Renaming any of those orphans every existing purchase and
+every live counter. The App Store display names are the owner's to change in App Store Connect;
+`iap.js` product ids untouched (its only "Scribe" mention is a code comment).
+
+Guarded by a test that walks every user-facing string in the 402 body and asserts that wherever the
+word "Scribe" appears it is preceded by "MaiK Voice", which catches a bare "Scribe", the old
+"MaiK Scribe", and any future half-rename; plus a bundle check that neither old spelling survives in
+`pro-paywall.js`, and a browser check on the rendered sheet.

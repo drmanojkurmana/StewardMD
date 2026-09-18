@@ -10,8 +10,11 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   state, consume, credit, includedFor, quotaPacks, quotaPackFor, packKeyForProduct,
-  quotaRefusal, quotaCopy, consumeScribeSession, quotaOn,
+  quotaRefusal, quotaCopy, consumeScribeSession, quotaOn, webUpsellSms,
 } from "../functions/_quota.js";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+const src = (rel) => readFileSync(fileURLToPath(new URL("../" + rel, import.meta.url)), "utf8");
 import { selectAmount, fulfilPurchase } from "../functions/api/billing/[[path]].js";
 
 function fakeKv(seed = {}) {
@@ -126,7 +129,7 @@ test("the refusal payload is a renderable 402 body carrying the packs and the va
   assert.ok(r.packs.every((p) => p.amount > 0 && p.units > 0 && p.product.startsWith("in.stewardmd.care.")));
   // owner-approved benefit headline + price line, verbatim
   assert.equal(r.copy.headline, "The clinic that calls is the clinic they come back to.");
-  assert.equal(r.copy.price, "₹44 per patient. One patient who comes back pays for 15 follow-ups.");
+  assert.equal(r.copy.price, "₹100 per patient, or ₹90 in the 100 pack. One patient who comes back pays for the pack.");
   assert.equal(r.copy.expiry, "Credits never expire.");
 });
 
@@ -161,6 +164,33 @@ test('the "have not heard from you" line is absent unless a real count is suppli
   assert.equal(five[0], "5 patients discharged this month have not heard from you.");
 });
 
+/* This sentence tells a clinician they neglected patients. A wrong number is worse than no sentence,
+   so anything that is not a real positive integer must produce NO sentence rather than a guess.
+   NOTHING computes unheardCount today (2026-09-18 decision note) so it never renders in production. */
+test("only a real positive integer renders the unheard-patients line", () => {
+  const line = (v) => quotaCopy("care", { unheardCount: v }).lines.join(" | ");
+  for (const v of [undefined, null, 0, -1, -3, "", " ", "abc", "12 or so", "5", NaN, Infinity, -Infinity, 2.7, 0.4, {}, [], true, "7 patients"]) {
+    assert.ok(!/have not heard from you/.test(line(v)), "must not render for: " + String(v));
+  }
+  for (const v of [1, 7, 250]) {
+    assert.match(line(v), /have not heard from you/, "must render for: " + v);
+  }
+  const l = quotaCopy("care", { unheardCount: 1 }).lines;
+  assert.equal(l[0], "1 patients discharged this month have not heard from you.");
+  assert.equal(l.filter((x) => /have not heard from you/.test(x)).length, 1, "rendered exactly once");
+});
+
+test("the refusal body carries the count as a bare number and no patient identifier", () => {
+  const body = quotaRefusal({}, "care", { unheardCount: 4, doctorUid: "fbuid-123" });
+  assert.equal(body.copy.lines[0], "4 patients discharged this month have not heard from you.");
+  const json = JSON.stringify(body);
+  // Nothing that could identify a patient (or leak the doctor's uid) may ride the payload.
+  for (const leak of [/fbuid-123/, /\bmrn\b/i, /episodeId/, /patientKeyHash/, /phone/i, /mobile/i, /\b\d{10}\b/]) {
+    assert.ok(!leak.test(json), "refusal payload leaks: " + leak);
+  }
+  assert.deepEqual(Object.keys(body).sort(), ["copy", "error", "feature", "packs", "remaining"]);
+});
+
 test("no clinical outcome claims and no em-dash in any quota copy", () => {
   const all = ["care", "scribe"].map((f) => {
     const c = quotaCopy(f, { unheardCount: 5 });
@@ -172,11 +202,138 @@ test("no clinical outcome claims and no em-dash in any quota copy", () => {
   }
 });
 
+// ---------------- product name: "MaiK Voice Scribe" ----------------
+
+/* Owner, 2026-09-18: the product is "MaiK Voice Scribe". Every user-facing string says so; the
+   internal feature key "scribe" and the product ids in.stewardmd.scribe.* deliberately do NOT change
+   (renaming them would orphan existing purchases and every KV counter). */
+test('user-facing copy names the product "MaiK Voice Scribe"; internal keys stay "scribe"', () => {
+  const p = quotaPacks({});
+  assert.equal(p["scribe.50"].label, "50 MaiK Voice Scribe consults");
+  assert.equal(p["scribe.250"].label, "250 MaiK Voice Scribe consults");
+
+  // Internal identifiers untouched.
+  assert.equal(p["scribe.50"].feature, "scribe");
+  assert.equal(p["scribe.50"].product, "in.stewardmd.scribe.50");
+  assert.equal(p["scribe.250"].product, "in.stewardmd.scribe.250");
+  assert.equal(quotaPackFor("pack:scribe.50"), "scribe.50");
+  assert.equal(packKeyForProduct("in.stewardmd.scribe.250"), "pack:scribe.250");
+
+  /* Every user-facing string in the 402 body: wherever the word Scribe appears it must be the full
+     product name. Catches "MaiK Scribe", a bare "Scribe", and any future half-rename. */
+  const body = quotaRefusal({}, "scribe");
+  const facing = [body.copy.headline, body.copy.price, body.copy.expiry]
+    .concat(body.copy.lines).concat(body.packs.map((x) => x.label)).join(" | ");
+  for (const m of facing.matchAll(/Scribe/g)) {
+    assert.equal(facing.slice(Math.max(0, m.index - 11), m.index + 6), "MaiK Voice Scribe",
+      "a user-facing string says Scribe without the full product name: " + facing);
+  }
+  assert.ok(!/MaiK Scribe/.test(facing), "the old name must not survive anywhere user-facing");
+
+  // The approved copy itself is unchanged: only the name moved.
+  assert.equal(body.copy.headline, "Not just a note. A second pair of eyes.");
+  assert.equal(body.copy.expiry, "Consults never expire.");
+  assert.match(body.copy.price, /^₹20 a consult\./);
+
+  // The sheet title and the tier blurb in the app bundle carry the new name and not the old one.
+  const paywall = src("pro-paywall.js");
+  assert.match(paywall, /"MaiK Voice Scribe consults"/, "the top-up sheet title must use the full name");
+  assert.ok(!/"MaiK Scribe|· Scribe ·/.test(paywall), "the old name must not survive in the app bundle");
+});
+
+// ---------------- one credit = one bounded episode ----------------
+
+/* Owner-decided 2026-09-18: a credit buys an EPISODE (7-day check-in course, plus a day-3 and a day-7
+   MAiTRI call only if the patient has not responded, plus alerts, feedback and in-app messaging), and
+   the episode is charged ONCE at enrol. Charging again for a call inside it is double-charging. */
+test("an episode deducts once at enrol; the day-3 and day-7 calls inside it never deduct again", async () => {
+  const kv = fakeKv();
+  const at = (now) => ({ role: "physician", now });
+  const day0 = Date.parse("2026-09-02T09:00:00Z");
+
+  // enrol: the one and only deduction for this episode
+  const enrol = await consume(env, kv, UID, "care", at(day0));
+  assert.equal(enrol.ok, true);
+  assert.equal((await state(env, kv, UID, "care", at(day0))).usedThisMonth, 1);
+
+  /* The two in-episode calls are placed by the scheduler / the doctor-initiated voice route, and
+     NEITHER touches the meter. Proven structurally rather than by re-running the meter: a KV spy
+     cannot see a call that never happens, so assert the call sites instead. */
+  const before = new Map(kv.m);
+  const route = src("functions/api/followcare/[[path]].js");
+  const sites = (route.match(/await careCredit\(/g) || []).length;
+  assert.equal(sites, 1, "exactly one care deduction site must exist in the FollowCare router");
+  assert.ok(/seg === "enroll"[\s\S]{0,1400}?await careCredit\(/.test(route), "the one deduction site is enroll");
+  assert.ok(!/isVoice && seg === "call"[\s\S]{0,900}?await careCredit\(/.test(route),
+    "the doctor-initiated MAiTRI call must NOT deduct: it belongs to an episode already paid for");
+  const dispatch = src("functions/_followcare_dispatch.js");
+  assert.ok(!/_quota|consume\(/.test(dispatch), "the scheduler dispatch path must never import or call the meter");
+
+  // a second and a third call inside the same episode leave the wallet exactly where enrol left it
+  assert.deepEqual([...kv.m], [...before], "no meter write happened for the in-episode calls");
+  assert.equal((await state(env, kv, UID, "care", at(day0))).usedThisMonth, 1, "still one credit spent");
+
+  // a NEW episode for the same patient next month is a new credit, on the new month's counter
+  const oct = Date.parse("2026-10-02T09:00:00Z");
+  assert.equal((await state(env, kv, UID, "care", at(oct))).usedThisMonth, 0, "the month counter reset");
+  const again = await consume(env, kv, UID, "care", at(oct));
+  assert.equal(again.ok, true);
+  assert.equal((await state(env, kv, UID, "care", at(oct))).usedThisMonth, 1, "next month's episode deducts");
+  assert.equal((await state(env, kv, UID, "care", at(day0))).usedThisMonth, 1, "September is untouched");
+});
+
+// ---------------- prices (App Store Connect verified 2026-09-18) + web pricing ----------------
+test("care packs are ₹2,499 / ₹8,999 in the store and ₹2,199 / ₹7,999 on the web; Scribe unchanged", () => {
+  const p = quotaPacks({});
+  assert.equal(p["care.25"].amount, 249900);
+  assert.equal(p["care.100"].amount, 899900);
+  assert.equal(p["care.25"].webAmount, 219900);
+  assert.equal(p["care.100"].webAmount, 799900);
+  assert.equal(p["scribe.50"].amount, 99900);
+  assert.equal(p["scribe.250"].amount, 399900);
+  // Scribe has no web price, so nothing can advertise a discount that does not exist.
+  assert.equal(p["scribe.50"].webAmount, undefined);
+  assert.equal(p["scribe.250"].webAmount, undefined);
+  // Per-patient figures are derived from the amount so they cannot drift out of step with it.
+  assert.equal(p["care.25"].perUnit, 100, "₹100 per patient");
+  assert.equal(p["care.100"].perUnit, 90, "₹90 per patient in the bigger pack");
+  for (const k of Object.keys(p)) assert.ok(!p[k].webAmount || p[k].webAmount < p[k].amount, "a web price is never dearer: " + k);
+});
+
+/* ANTI-STEERING. The iOS app is mid-submission in the India storefront, where a "cheaper on the web"
+   hint on any screen is a straight rejection. Two independent guarantees, both asserted here:
+   (1) the outbound copy lives in functions/, which scripts/build-www.sh excludes from the app bundle,
+   (2) the sheet renderer gates every web price on plat() !== "ios". */
+test("no web price and no stewardmd.in purchase URL can render inside the iOS app", () => {
+  // (1) the web-price copy is server-side only and never reaches www/
+  const build = src("scripts/build-www.sh");
+  assert.match(build, /functions/, "build-www.sh must account for functions/");
+  const nudge = webUpsellSms({}, "care.25");
+  assert.match(nudge.text, /stewardmd\.in/);
+  assert.match(nudge.url, /^https:\/\/stewardmd\.in\//);
+  assert.equal(nudge.amount, 219900);
+  assert.equal(webUpsellSms({}, "scribe.50"), null, "no web nudge for a pack with no web price");
+  assert.equal(webUpsellSms({}, "nope"), null);
+
+  // (2) nothing the iOS sheet is fed can carry the pitch: the refusal copy names no web price or URL
+  const body = quotaRefusal({}, "care");
+  const rendered = [body.copy.headline, body.copy.price, body.copy.expiry].concat(body.copy.lines).join(" ");
+  for (const banned of [/stewardmd\.in/i, /on the web/i, /cheaper (on|at|via|in your browser)/i, /2,199/, /7,999/, /website/i, /browser/i]) {
+    assert.ok(!banned.test(rendered), "steering copy present in the in-app sheet: " + banned);
+  }
+
+  // (3) the renderer itself: every web price is behind plat() !== "ios", and the bundle has no buy URL
+  const paywall = src("pro-paywall.js");
+  assert.match(paywall, /var webOk = plat\(\) !== "ios";/, "the web price must be gated on the platform");
+  assert.ok(/webOk && p\.webAmount/.test(paywall), "webAmount may only be read through that gate");
+  assert.ok(!/stewardmd\.in\/billing/.test(paywall), "no purchase URL may ship in the app bundle");
+});
+
 // ---------------- pack purchase: BOTH payment paths ----------------
 test("pack prices and product ids match App Store Connect", () => {
   const p = quotaPacks(env);
-  assert.equal(p["care.25"].amount, 109900);
-  assert.equal(p["care.100"].amount, 349900);
+  assert.equal(p["care.25"].amount, 249900);
+  assert.equal(p["care.100"].amount, 899900);
   assert.equal(p["scribe.50"].amount, 99900);
   assert.equal(p["scribe.250"].amount, 399900);
   assert.equal(p["care.25"].product, "in.stewardmd.care.25");
@@ -186,7 +343,7 @@ test("pack prices and product ids match App Store Connect", () => {
 test("Razorpay path: selectAmount -> captured note -> fulfilPurchase credits the pack", async () => {
   const kv = fakeKv();
   const sel = selectAmount(env, { quotaPack: "care.100" });
-  assert.equal(sel.amount, 349900);
+  assert.equal(sel.amount, 899900);
   assert.equal(sel.months, 0, "a pack buys no subscription months");
   assert.equal(sel.key, "pack:care.100");
   assert.equal(quotaPackFor(sel.key), "care.100");

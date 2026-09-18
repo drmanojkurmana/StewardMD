@@ -1,8 +1,19 @@
 /* StewardMD — per-patient quota meters (FollowCare/MAiTRI "care" credits + MaiK Scribe consults).
  *
- * WHY: FollowCare (7 SMS over 7 days) and a MAiTRI recovery call each cost us ₹10, so they share ONE
- * wallet: 1 patient credit = one MAiTRI call OR one 7-day FollowCare SMS course. A Scribe consult
- * costs us ₹3-5. Both are real rupees per use, so they are metered rather than "unlimited".
+ * ONE CREDIT = ONE PATIENT EPISODE (owner-decided 2026-09-18). An episode is BOUNDED, not open-ended:
+ *   day 0  the 7-day FollowCare SMS / WhatsApp check-in course
+ *   day 3  a MAiTRI call ONLY if the patient has not responded to the check-in
+ *   day 7  a MAiTRI call ONLY if there is still no response
+ * and, in the same credit, feedback capture, the ambulance alert by WhatsApp/SMS, the doctor-app alert,
+ * and in-app patient messaging. So at most TWO calls per episode, both conditional on non-response.
+ *
+ * THE EPISODE IS CHARGED ONCE, AT ENROL, AND NEVER AGAIN. Every later event in it - scheduler call,
+ * doctor-initiated call, alert, message - belongs to an episode already paid for and must NOT deduct.
+ * `followcare/enroll` is therefore the ONLY care deduction point in the codebase; test/quota-meters
+ * asserts that, because a second deduction inside one episode is double-charging a doctor.
+ *
+ * COST (worst case per episode): SMS ₹10 + up to two calls at ₹10 + ~₹2 of alerts = ~₹32; ~₹19 typical.
+ * A Scribe consult costs ₹3-5. Both are real rupees per use, so they are metered rather than "unlimited".
  *
  * FLAG: everything here is inert unless env QUOTA_METERS_ON === "1". With the flag off quotaOn()
  * is false, every call site skips the meter, and behaviour is byte-for-byte as before.
@@ -49,14 +60,35 @@ export function includedFor(env, role, feature) {
   return feature === "care" ? n("QUOTA_CARE_INCLUDED", 5) : n("QUOTA_SCRIBE_INCLUDED", 50);
 }
 
-// ---- top-up packs (App Store Connect product ids are authoritative; see docs/IOS-IAP-PRODUCTS.md) ----
+/* ---- top-up packs (App Store Connect product ids are authoritative; see docs/IOS-IAP-PRODUCTS.md) ----
+ *
+ * PRICES verified live in App Store Connect 2026-09-18: care.25 ₹2,499, care.100 ₹8,999 (Scribe
+ * unchanged). An episode costs us ~₹32 worst case and ~₹19 typical, so ₹100 per patient holds 55%
+ * margin even for a patient who needs both calls.
+ *
+ * `amount` is the STORE price. `webAmount` is the web (Razorpay) price, lower because Razorpay costs
+ * us ~2% against Apple's 15%: the discount is funded by the fee we save, not out of margin.
+ *
+ * ANTI-STEERING (compliance, not preference): the web price and any stewardmd.in purchase link must
+ * NEVER be rendered inside the iOS app - no banner, no hint, no link, on any screen including the
+ * top-up sheet. In the India storefront that is a straight App Store rejection, and this app is
+ * mid-submission. Apple's 2021 anti-steering settlement permits telling users about other payment
+ * methods OUTSIDE the app, with consent, which is why webUpsellSms() below lives in functions/ (never
+ * bundled into www/ - see scripts/build-www.sh, which excludes functions/) and the client gates on
+ * plat() !== "ios". Both halves are asserted by tests. */
 export function quotaPacks(env) {
   const P = (k, d) => cfgPrice(env, k, d);   // live KV price override > env > default, same as plans()
+  const per = (amount, units) => Math.round(amount / 100 / units);   // "₹100 per patient", derived so it cannot drift
+  const pack = (o) => Object.assign(o, { perUnit: per(o.amount, o.units) });
   return {
-    "care.25": { feature: "care", units: 25, amount: P("PACK_CARE_25", 109900), label: "25 patient credits", product: "in.stewardmd.care.25" },
-    "care.100": { feature: "care", units: 100, amount: P("PACK_CARE_100", 349900), label: "100 patient credits", product: "in.stewardmd.care.100", popular: true },
-    "scribe.50": { feature: "scribe", units: 50, amount: P("PACK_SCRIBE_50", 99900), label: "50 Scribe consults", product: "in.stewardmd.scribe.50" },
-    "scribe.250": { feature: "scribe", units: 250, amount: P("PACK_SCRIBE_250", 399900), label: "250 Scribe consults", product: "in.stewardmd.scribe.250", popular: true },
+    "care.25": pack({ feature: "care", units: 25, amount: P("PACK_CARE_25", 249900), webAmount: P("PACK_CARE_25_WEB", 219900), label: "25 patient credits", product: "in.stewardmd.care.25" }),
+    "care.100": pack({ feature: "care", units: 100, amount: P("PACK_CARE_100", 899900), webAmount: P("PACK_CARE_100_WEB", 799900), label: "100 patient credits", product: "in.stewardmd.care.100", popular: true }),
+    /* The product is "MaiK Voice Scribe" in every user-facing string (owner, 2026-09-18). The INTERNAL
+     * key stays "scribe" and the product ids stay in.stewardmd.scribe.* - renaming those would orphan
+     * every existing purchase and every KV counter. The App Store display names are changed separately
+     * in App Store Connect, not here. */
+    "scribe.50": pack({ feature: "scribe", units: 50, amount: P("PACK_SCRIBE_50", 99900), label: "50 MaiK Voice Scribe consults", product: "in.stewardmd.scribe.50" }),
+    "scribe.250": pack({ feature: "scribe", units: 250, amount: P("PACK_SCRIBE_250", 399900), label: "250 MaiK Voice Scribe consults", product: "in.stewardmd.scribe.250", popular: true }),
   };
 }
 // Selection key "pack:care.25" -> "care.25". Mirrors tokenPackFor() in _credits.js.
@@ -152,13 +184,34 @@ export function quotaCopy(feature, opts) {
     "Every recovery call comes back to you as a summary you can act on.",
     "Cheaper than an hour of staff time. It never forgets a patient.",
   ];
-  const n = Math.floor(+o.unheardCount || 0);
-  if (n > 0) lines.unshift(n + " patients discharged this month have not heard from you.");
+  /* A real positive integer or nothing. Infinity, NaN and "12 or so" are not counts, and this line
+   * tells a clinician they neglected patients: a wrong number here is worse than no line at all.
+   * NOTHING computes unheardCount today (see the 2026-09-18 decision note) so it never renders. */
+  const n = o.unheardCount;   // no coercion: Number.isInteger rejects "5", true, null, NaN and Infinity outright
+  if (Number.isInteger(n) && n > 0) lines.unshift(n + " patients discharged this month have not heard from you.");
   return {
     headline: "The clinic that calls is the clinic they come back to.",
     lines,
-    price: "₹44 per patient. One patient who comes back pays for 15 follow-ups.",
+    price: "₹100 per patient, or ₹90 in the 100 pack. One patient who comes back pays for the pack.",
     expiry: "Credits never expire.",
+  };
+}
+
+/* Outbound web-price nudge for SMS / WhatsApp / email. SERVER SIDE ONLY, and that placement is the
+ * compliance boundary, not a convenience: scripts/build-www.sh excludes functions/ from the app
+ * bundle, so this copy physically cannot reach an iOS screen. Sending it outside the app is what
+ * Apple's 2021 anti-steering settlement permits; rendering it inside the app is what gets the India
+ * storefront build rejected. Consent-gated at the send site, like every other outbound message.
+ * Returns null for a pack with no web price (Scribe: store price only). */
+export function webUpsellSms(env, packKey) {
+  const p = quotaPacks(env)[String(packKey || "")];
+  if (!p || !(p.webAmount > 0) || p.webAmount >= p.amount) return null;
+  const inr = (paise) => "₹" + Math.round(paise / 100).toLocaleString("en-IN");
+  return {
+    packKey, amount: p.webAmount,
+    text: "StewardMD: " + p.units + " patient credits are " + inr(p.webAmount) + " on stewardmd.in, against "
+      + inr(p.amount) + " in the app. Credits never expire. Reply STOP to opt out.",
+    url: "https://stewardmd.in/billing?pack=" + packKey,
   };
 }
 

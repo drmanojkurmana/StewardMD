@@ -426,15 +426,24 @@
   function openTopUp(info) {
     info = info || {}; close();
     var c = info.copy || {}, packs = info.packs || [];
-    var title = info.feature === "scribe" ? "MaiK Scribe consults" : "Patient credits";
+    var title = info.feature === "scribe" ? "MaiK Voice Scribe consults" : "Patient credits";
     var lines = (c.lines || []).map(function (t) {
       return '<div style="font:500 13px/1.6 var(--sans);color:var(--slate,#2d4356);margin-top:4px">' + esc(t) + '</div>';
     }).join("");
+    /* ANTI-STEERING: on iOS the store price is the ONLY price that may appear, and no stewardmd.in
+     * purchase link may appear at all. Not a style choice - in the India storefront a "cheaper on the
+     * web" hint is a straight App Store rejection, and this app is mid-submission. The outbound
+     * SMS/WhatsApp/email nudge is permitted (Apple's 2021 anti-steering settlement) and lives
+     * server-side in functions/_quota.js webUpsellSms(), which never ships in the app bundle. */
+    var webOk = plat() !== "ios";
     var cards = packs.map(function (p) {
+      var web = webOk && p.webAmount > 0 && p.webAmount < p.amount ? p.webAmount : 0;
       return '<button data-pp="qpack" data-qpack="' + esc(p.key) + '" style="flex:1;text-align:left;border:2px solid ' + (p.popular ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';border-radius:12px;padding:11px;background:var(--panel,#fff);cursor:pointer">' +
         '<div style="font:800 17px var(--sans);color:var(--ink)">' + esc(p.units) + '</div>' +
         '<div style="font:500 9.5px var(--sans);color:var(--slate-soft)">' + (info.feature === "scribe" ? "consults" : "patients") + '</div>' +
-        '<div style="margin-top:6px;font:800 13px var(--sans);color:var(--teal,#0e6e63)">' + inr(p.amount) + '</div></button>';
+        '<div style="margin-top:6px;font:800 13px var(--sans);color:var(--teal,#0e6e63)">' + inr(web || p.amount) + '</div>' +
+        (p.perUnit > 0 ? '<div style="font:500 9.5px var(--sans);color:var(--slate-soft)">' + esc("₹" + (web ? Math.round(web / 100 / p.units) : p.perUnit)) + ' each</div>' : '') +
+        '</button>';
     }).join("");
     var inner = header(title) +
       '<div style="padding:6px 18px 2px"><div style="font:800 17px/1.4 var(--serif,Georgia,serif);color:var(--ink)">' + esc(c.headline || "") + '</div>' + lines + '</div>' +
