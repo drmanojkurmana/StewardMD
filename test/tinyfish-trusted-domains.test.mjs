@@ -27,10 +27,10 @@ test("the domain list names real health authorities, journals and guideline bodi
 });
 
 test("every TinyFish request carries include_domains with the trusted list, url-encoded", async () => {
-  const s = stubFetch({ ok: true, json: async () => ({ results: [] }) });
+  const s = stubFetch({ ok: true, json: async () => ({ results: [{ title: "NICE", url: "https://www.nice.org.uk/x", snippet: "s" }] }) });
   try {
     await tinyfishSearch({ TINYFISH_API_KEY: "k" }, "amoxicillin dose adult");
-    assert.equal(s.calls.length, 1);
+    assert.equal(s.calls.length, 1, "a restricted hit needs no second call");
     const url = s.calls[0].url;
     assert.ok(url.includes("include_domains="), "request is missing include_domains");
     const params = new URL(url).searchParams;
@@ -54,4 +54,22 @@ test("a non-ok response still returns [] (best-effort, never throws)", async () 
     const r = await tinyfishSearch({ TINYFISH_API_KEY: "k" }, "q");
     assert.deepEqual(r, []);
   } finally { s.restore(); }
+});
+
+test("FALLBACK (2026-09-18): an empty restricted search retries unrestricted and keeps ONLY trusted URLs", async () => {
+  let n = 0; const calls = [];
+  const realFetch = global.fetch;
+  global.fetch = async (url) => { calls.push(url); n++; return { ok: true, json: async () => (n === 1 ? { results: [] } : { results: [
+    { title: "AASLD guideline", url: "https://www.aasld.org/practice-guidelines/x", snippet: "s", site_name: "aasld.org" },
+    { title: "Forum post", url: "https://www.reddit.com/r/medicine/x", snippet: "s", site_name: "reddit.com" },
+    { title: "Healthline", url: "https://www.healthline.com/x", snippet: "s", site_name: "healthline.com" },
+    { title: "UNC", url: "https://www.med.unc.edu/x", snippet: "s", site_name: "med.unc.edu" }
+  ] }) }; };
+  try {
+    const r = await tinyfishSearch({ TINYFISH_API_KEY: "k" }, "melena workup");
+    assert.equal(calls.length, 2);
+    assert.ok(calls[0].includes("include_domains="), "first call restricted");
+    assert.ok(!calls[1].includes("include_domains="), "second call unrestricted");
+    assert.deepEqual(r.map((x) => x.site), ["aasld.org", "med.unc.edu"], "forum and lay sites filtered out; .edu kept");
+  } finally { global.fetch = realFetch; }
 });
