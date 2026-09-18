@@ -258,7 +258,10 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Concurrent ChemoRT (>=50 Gy) or P-GEMOX / SMILE (L-Asparaginase Regimens)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "heme-alcl-bv-chp",
+        "heme-ptcl-choep"
+      ]
     },
     {
       "id": "n_relapsed_tx",
@@ -294,7 +297,10 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Targeted Epigenetic Salvage (Brentuximab / Romidepsin / Pralatrexate) -> Allogeneic HCT",
-      "protocolRefs": []
+      "protocolRefs": [
+        "heme-alcl-bv-chp",
+        "heme-ptcl-choep"
+      ]
     }
   ],
   "links": [
@@ -358,5 +364,9 @@
         "relapsed"
       ]
     }
+  ],
+  "protocolRefs": [
+    "heme-alcl-bv-chp",
+    "heme-ptcl-choep"
   ]
 }

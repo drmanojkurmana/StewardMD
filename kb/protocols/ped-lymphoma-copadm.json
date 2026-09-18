@@ -1,0 +1,120 @@
+{
+  "id": "ped-lymphoma-copadm",
+  "diseaseId": "pediatric_lymphoma",
+  "name": "LMB96 Group B: Rituximab + COPADM (Pediatric Burkitt / DLBCL)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pediatric B-Cell Lymphoma v1.2026"
+  },
+  "stage": [
+    "Group B",
+    "III",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "induction",
+    "consolidation"
+  ],
+  "histology": "Burkitt lymphoma / Diffuse large B-cell lymphoma",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "0.15 mg/kg IV",
+      "notes": "Prior to chemotherapy"
+    }
+  ],
+  "supportiveCare": [
+    "Intensive TLS management",
+    "Leucovorin rescue starting 24h after methotrexate"
+  ],
+  "monitoring": [
+    "CBC, CMP, Methotrexate clearance levels"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Rituximab 375 mg/m2 IV Day 1."
+    },
+    {
+      "id": "vincristine",
+      "name": "vinCRIStine",
+      "basis": "bsa",
+      "dosePerUnit": 2,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": 2
+      },
+      "notes": "vinCRIStine 2 mg/m2 (cap 2 mg) IV push on Day 1. IV only."
+    },
+    {
+      "id": "methotrexate",
+      "name": "Methotrexate (Intermediate-Dose)",
+      "basis": "bsa",
+      "dosePerUnit": 3000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Methotrexate 3 g/m2 IV over 4 hours with alkalinized hydration and leucovorin rescue."
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 500,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        2,
+        3,
+        4
+      ],
+      "notes": "Cyclophosphamide 500 mg/m2/day IV with Mesna on Days 2-4."
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 60,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        2
+      ],
+      "caps": {
+        "cumulativeLifetime": {
+          "warn": 250,
+          "hard": 350,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "DOXOrubicin 60 mg/m2 IV on Day 2."
+    }
+  ]
+}

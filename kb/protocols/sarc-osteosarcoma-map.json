@@ -1,0 +1,105 @@
+{
+  "id": "sarc-osteosarcoma-map",
+  "diseaseId": "bone",
+  "name": "MAP: High-Dose Methotrexate + DOXOrubicin + CISplatin (Osteosarcoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 35,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bone Cancer v1.2026"
+  },
+  "stage": [
+    "localized",
+    "metastatic"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant"
+  ],
+  "histology": "high-grade osteosarcoma",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "16 mg IV",
+      "notes": "Prior to cisplatin/doxorubicin"
+    },
+    {
+      "name": "Aprepitant",
+      "dose": "125 mg d1, 80 mg d2-3",
+      "notes": "For high emetogenicity"
+    },
+    {
+      "name": "Sodium bicarbonate",
+      "dose": "Urine alkalinization pH >= 7.0",
+      "notes": "Mandatory for high-dose methotrexate"
+    }
+  ],
+  "supportiveCare": [
+    "Vigorous hydration with sodium bicarbonate for urine pH >= 7.0 before, during, and after HD-MTX",
+    "Leucovorin calcium rescue 15 mg/m2 IV/PO q6h starting at hour 24-36 until MTX level < 0.1 mcmol/L"
+  ],
+  "monitoring": [
+    "Serum methotrexate levels at 24, 48, 72 hours until cleared",
+    "Audiometry baseline and post-cisplatin",
+    "Echocardiogram"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal (CrCl >= 70 mL/min)",
+    "liver"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "methotrexate",
+      "name": "High-Dose Methotrexate",
+      "basis": "bsa",
+      "dosePerUnit": 12000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Methotrexate 12 g/m2 (cap 20 g) IV over 4 hours with vigorous alkalinized hydration and leucovorin rescue."
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 37.5,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2
+      ],
+      "caps": {
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "DOXOrubicin 37.5 mg/m2/day continuous IV infusion on Days 1-2 (total 75 mg/m2)."
+    },
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 60,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2
+      ],
+      "notes": "CISplatin 60 mg/m2/day continuous IV infusion on Days 1-2 (total 120 mg/m2) with pre- and post-hydration."
+    }
+  ]
+}

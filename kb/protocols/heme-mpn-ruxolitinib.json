@@ -1,0 +1,82 @@
+{
+  "id": "heme-mpn-ruxolitinib",
+  "diseaseId": "mpn",
+  "name": "Ruxolitinib (JAK1/2 Inhibitor for Myelofibrosis / Polycythemia Vera)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "disease-control",
+    "symptom-relief"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 12,
+  "caps": "drug",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Myeloproliferative Neoplasms v1.2026"
+  },
+  "stage": [
+    "intermediate-2",
+    "high-risk",
+    "hydroxyurea-resistant"
+  ],
+  "treatmentSetting": [
+    "first-line",
+    "second-line"
+  ],
+  "histology": "primary myelofibrosis / post-PV MF / post-ET MF / polycythemia vera",
+  "premedications": [],
+  "supportiveCare": [
+    "Monitor and manage dose-dependent thrombocytopenia and anemia",
+    "Screen for latent tuberculosis and viral hepatitis prior to initiation"
+  ],
+  "monitoring": [
+    "CBC with differential every 2-4 weeks until stable, then monthly",
+    "Spleen size palpation and MPN-SAF symptom score assessment"
+  ],
+  "clearanceChecks": [
+    "Platelets >= 50,000/mcL"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "ruxolitinib",
+      "name": "Ruxolitinib",
+      "basis": "flat",
+      "dosePerUnit": 20,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "notes": "Ruxolitinib 20 mg PO twice daily (if baseline platelets > 200k/mcL) or 15 mg PO twice daily (platelets 100-200k) or 5 mg BID (platelets 50-100k)."
+    }
+  ]
+}

@@ -117,16 +117,16 @@
       "required": true,
       "bullets": [
         "Mayo 2004 / European Modification Staging System:",
-        "\u2022 Stage I: NT-proBNP <332 ng/L and cTnT <0.035 mcg/L (good prognosis).",
-        "\u2022 Stage II: Either NT-proBNP >=332 ng/L or cTnT >=0.035 mcg/L.",
-        "\u2022 Stage IIIa: Both NT-proBNP >=332 ng/L and cTnT >=0.035 mcg/L, with NT-proBNP <8500 ng/L.",
-        "\u2022 Stage IIIb: Very high cardiac risk (NT-proBNP >=8500 ng/L); prone to early fatal arrhythmias and cardiogenic shock.",
+        "• Stage I: NT-proBNP <332 ng/L and cTnT <0.035 mcg/L (good prognosis).",
+        "• Stage II: Either NT-proBNP >=332 ng/L or cTnT >=0.035 mcg/L.",
+        "• Stage IIIa: Both NT-proBNP >=332 ng/L and cTnT >=0.035 mcg/L, with NT-proBNP <8500 ng/L.",
+        "• Stage IIIb: Very high cardiac risk (NT-proBNP >=8500 ng/L); prone to early fatal arrhythmias and cardiogenic shock.",
         "Mayo 2012 Staging: Incorporates dFLC >=180 mg/L as 3rd prognostic factor (Stage I: 0 points, Stage II: 1 point, Stage III: 2 points, Stage IV: 3 points)."
       ],
       "options": [
         {
           "id": "stage_1_3a",
-          "label": "Mayo Stage I\u2013IIIa (Standard to Intermediate Cardiac Risk, NT-proBNP <8500 ng/L)",
+          "label": "Mayo Stage I–IIIa (Standard to Intermediate Cardiac Risk, NT-proBNP <8500 ng/L)",
           "sets": {
             "mayo_stage": "stage_1_3a"
           },
@@ -155,7 +155,7 @@
       "nodeType": "question",
       "template": "main",
       "name": "Autologous HCT Eligibility",
-      "title": "Mayo Stage I\u2013IIIa: Evaluation for Autologous Stem Cell Transplant",
+      "title": "Mayo Stage I–IIIa: Evaluation for Autologous Stem Cell Transplant",
       "section": "Primary Treatment",
       "description": "Rigorous multidisciplinary evaluation to determine candidacy for high-dose melphalan with autologous HCT.",
       "path": "Amyloidosis / HCT Candidacy",
@@ -167,11 +167,11 @@
       "required": true,
       "bullets": [
         "HCT Eligibility Criteria:",
-        "\u2022 Age <=65-70 years, ECOG performance status 0-2.",
-        "\u2022 NYHA Functional Class I-II (compensated cardiac function).",
-        "\u2022 Cardiac biomarkers: NT-proBNP <5000 ng/L and Troponin T <0.06 mcg/L.",
-        "\u2022 Preserved organ function: LVEF >=40-45%, DLCO >=50%, eGFR >=30-50 mL/min.",
-        "\u2022 Definite Exclusions: Medically refractory ventricular/atrial arrhythmias, recurrent pleural effusions, uncompensated heart failure, refractory orthostatic hypotension, Factor X level <25% with bleeding, or extensive bleeding gastrointestinal involvement."
+        "• Age <=65-70 years, ECOG performance status 0-2.",
+        "• NYHA Functional Class I-II (compensated cardiac function).",
+        "• Cardiac biomarkers: NT-proBNP <5000 ng/L and Troponin T <0.06 mcg/L.",
+        "• Preserved organ function: LVEF >=40-45%, DLCO >=50%, eGFR >=30-50 mL/min.",
+        "• Definite Exclusions: Medically refractory ventricular/atrial arrhythmias, recurrent pleural effusions, uncompensated heart failure, refractory orthostatic hypotension, Factor X level <25% with bleeding, or extensive bleeding gastrointestinal involvement."
       ],
       "options": [
         {
@@ -220,8 +220,8 @@
       "bullets": [
         "Preferred Induction (2-4 cycles): Daratumumab + Bortezomib + Cyclophosphamide + Dexamethasone (Dara-CyBorD / ANDROMEDA regimen, rare-amyloidosis-dara-cybord). Rapidly reduces clonal light chain burden.",
         "Response-adapted HCT strategy:",
-        "\u2022 If complete hematologic response (CR, normal FLC ratio and dFLC <10 mg/L) achieved after induction, autologous HCT may be deferred with stem cell harvest and cryopreservation for future relapse.",
-        "\u2022 If persistent clonal disease / less than CR: Proceed to Autologous HCT with high-dose Melphalan (140-200 mg/m2 risk-adapted based on age and renal function).",
+        "• If complete hematologic response (CR, normal FLC ratio and dFLC <10 mg/L) achieved after induction, autologous HCT may be deferred with stem cell harvest and cryopreservation for future relapse.",
+        "• If persistent clonal disease / less than CR: Proceed to Autologous HCT with high-dose Melphalan (140-200 mg/m2 risk-adapted based on age and renal function).",
         "Stem cell mobilization: G-CSF +/- Plerixafor; avoid aggressive fluid overhydration and monitor for volume overload.",
         "Post-HCT Maintenance: Single-agent Daratumumab SC monthly may be continued to complete up to 24 cycles per ANDROMEDA trial protocol.",
         "Supportive care: VZV antiviral prophylaxis (acyclovir/valacyclovir), antibacterial prophylaxis during neutropenia, and type/screen maintenance."
@@ -234,7 +234,7 @@
       "nodeType": "end",
       "template": "end",
       "name": "Non-Transplant Primary Tx",
-      "title": "HCT-Ineligible (Mayo Stage I\u2013IIIa): Daratumumab-CyBorD Therapy",
+      "title": "HCT-Ineligible (Mayo Stage I–IIIa): Daratumumab-CyBorD Therapy",
       "section": "Primary Treatment",
       "description": "Category 1 standard of care for non-transplant candidates.",
       "path": "Amyloidosis / Non-Transplant / Therapy",
@@ -250,8 +250,8 @@
       ],
       "bullets": [
         "Category 1 Preferred Standard: Daratumumab + Bortezomib + Cyclophosphamide + Dexamethasone (Dara-CyBorD, rare-amyloidosis-dara-cybord).",
-        "\u2022 Schedule: Daratumumab 1800 mg SC weekly (cycles 1-2), every 2 weeks (cycles 3-6); Bortezomib 1.3 mg/m2 SC weekly; Cyclophosphamide 300 mg/m2 PO weekly (max 500 mg); Dexamethasone 20-40 mg PO weekly for 6 cycles.",
-        "\u2022 Maintenance: Single-agent subcutaneous Daratumumab 1800 mg every 4 weeks for up to 24 total cycles (ANDROMEDA trial showed 53% hematologic CR rate and superior organ-free survival).",
+        "• Schedule: Daratumumab 1800 mg SC weekly (cycles 1-2), every 2 weeks (cycles 3-6); Bortezomib 1.3 mg/m2 SC weekly; Cyclophosphamide 300 mg/m2 PO weekly (max 500 mg); Dexamethasone 20-40 mg PO weekly for 6 cycles.",
+        "• Maintenance: Single-agent subcutaneous Daratumumab 1800 mg every 4 weeks for up to 24 total cycles (ANDROMEDA trial showed 53% hematologic CR rate and superior organ-free survival).",
         "Neuropathy dose adjustments: For patients with significant peripheral or autonomic neuropathy, bortezomib should be dose-reduced (1.0 or 0.7 mg/m2) or discontinued; alternative regimens include Daratumumab-dexamethasone or Lenalidomide/dexamethasone.",
         "VZV Prophylaxis: Mandatory acyclovir or valacyclovir throughout proteasome inhibitor and daratumumab therapy."
       ]
@@ -277,14 +277,17 @@
       "bullets": [
         "Urgent multidisciplinary amyloidosis / advanced heart failure center management.",
         "Dose-Modified Systemic Therapy:",
-        "\u2022 Dose-modified Dara-CyBorD: Attenuated weekly bortezomib (0.7-1.0 mg/m2 SC) + cyclophosphamide (reduced or omitted) + low-dose dexamethasone (10-20 mg weekly).",
-        "\u2022 Single-agent subcutaneous Daratumumab (1800 mg SC with pre-medication): High efficacy with minimal myocardial toxicity.",
+        "• Dose-modified Dara-CyBorD: Attenuated weekly bortezomib (0.7-1.0 mg/m2 SC) + cyclophosphamide (reduced or omitted) + low-dose dexamethasone (10-20 mg weekly).",
+        "• Single-agent subcutaneous Daratumumab (1800 mg SC with pre-medication): High efficacy with minimal myocardial toxicity.",
         "Hemodynamic & Heart Failure Management:",
-        "\u2022 Judicious loop diuretics (bumetanide, torsemide, furosemide) combined with mineralocorticoid receptor antagonists (spironolactone).",
-        "\u2022 CONTRAINDICATED DRUGS: Avoid standard heart failure therapies such as beta-blockers, ACE inhibitors, ARBs, and calcium channel blockers (diltiazem, verapamil); these cause profound refractory hypotension and heart block due to fixed stroke volume.",
-        "\u2022 Midodrine or fludrocortisone for refractory orthostatic hypotension.",
-        "\u2022 Implantable cardioverter-defibrillator (ICD) / Pacemaker: Considered for high-grade AV block or sustained ventricular arrhythmias.",
-        "\u2022 Cardiac transplantation evaluation: In highly selected young patients with isolated end-stage cardiac amyloidosis."
+        "• Judicious loop diuretics (bumetanide, torsemide, furosemide) combined with mineralocorticoid receptor antagonists (spironolactone).",
+        "• CONTRAINDICATED DRUGS: Avoid standard heart failure therapies such as beta-blockers, ACE inhibitors, ARBs, and calcium channel blockers (diltiazem, verapamil); these cause profound refractory hypotension and heart block due to fixed stroke volume.",
+        "• Midodrine or fludrocortisone for refractory orthostatic hypotension.",
+        "• Implantable cardioverter-defibrillator (ICD) / Pacemaker: Considered for high-grade AV block or sustained ventricular arrhythmias.",
+        "• Cardiac transplantation evaluation: In highly selected young patients with isolated end-stage cardiac amyloidosis."
+      ],
+      "protocolRefs": [
+        "rare-amyloidosis-dara-cybord"
       ]
     },
     {
@@ -310,11 +313,14 @@
         "Venetoclax (+/- Dexamethasone): Highly active in patients with t(11;14) translocation (present in ~50% of AL amyloidosis); produces deep hematologic responses in relapsed disease.",
         "Daratumumab-based Therapy: If daratumumab was not administered frontline, single-agent daratumumab or Dara-combinations are strongly recommended.",
         "Immunomodulatory Drugs (IMiDs):",
-        "\u2022 Pomalidomide (2-4 mg daily days 1-21 q28d) + Dexamethasone: Well-tolerated in bortezomib/daratumumab-refractory disease.",
-        "\u2022 Lenalidomide (start at low dose 10-15 mg daily days 1-21 q28d) + Dexamethasone.",
+        "• Pomalidomide (2-4 mg daily days 1-21 q28d) + Dexamethasone: Well-tolerated in bortezomib/daratumumab-refractory disease.",
+        "• Lenalidomide (start at low dose 10-15 mg daily days 1-21 q28d) + Dexamethasone.",
         "Oral Proteasome Inhibitors: Ixazomib + Dexamethasone (+/- Cyclophosphamide) - advantageous in patients with mild peripheral neuropathy.",
         "Second Autologous HCT: High-dose melphalan can be considered in eligible patients who achieved prolonged initial remission (>3-5 years) after primary transplant.",
         "Organ Response Monitoring: Monitor sFLC, NT-proBNP, and 24-hour urine protein monthly during salvage therapy."
+      ],
+      "protocolRefs": [
+        "rare-amyloidosis-dara-cybord"
       ]
     }
   ],
@@ -382,5 +388,8 @@
         "relapsed_refractory"
       ]
     }
+  ],
+  "protocolRefs": [
+    "rare-amyloidosis-dara-cybord"
   ]
 }

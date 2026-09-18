@@ -517,6 +517,10 @@
             "VenO"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -630,6 +634,10 @@
             "CIT"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -767,6 +775,10 @@
             "intolerance"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -899,6 +911,10 @@
             "MRD+"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -927,6 +943,10 @@
         "Longest expected treatment-free interval; standard surveillance schedule",
         "Fixed-duration venetoclax retreatment is effective at a later relapse after a durable remission",
         "Re-test del(17p)/TP53 only at the time of a future progression"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -955,6 +975,10 @@
         "Monitor more closely - detectable MRD predicts an earlier relapse",
         "Plan the next line (BTK inhibitor or venetoclax-based therapy) for when iwCLL progression criteria are met",
         "Re-test del(17p)/TP53 at the time of clinical progression"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -975,6 +999,10 @@
         "Vaccinate (non-live); avoid live vaccines; expect blunted responses on anti-CD20 therapy",
         "Manage treatment-emergent autoimmune cytopenias; recognize tumor flare / lymphocytosis with BTK inhibitors",
         "Tumor-lysis monitoring during venetoclax ramp-up; cardiovascular monitoring on BTK inhibitors"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -997,7 +1025,11 @@
         "At clinical relapse, re-test del(17p)/TP53 and re-stage before choosing next-line therapy"
       ],
       "linkTo": "n_rr_workup",
-      "linkLabel": "On relapse: enter the relapsed / refractory pathway"
+      "linkLabel": "On relapse: enter the relapsed / refractory pathway",
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
+      ]
     },
     {
       "id": "n_rr_workup",
@@ -1152,6 +1184,10 @@
             "cellular"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -1256,6 +1292,10 @@
             "refractory"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -1309,7 +1349,10 @@
         "Enroll on a clinical trial where available",
         "Coordinate at a cellular-therapy / transplant center; reassess del(17p) / TP53 and Richter exclusion before referral"
       ],
-      "protocolRefs": []
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
+      ]
     },
     {
       "id": "n_tx_rr_postveno",
@@ -2002,5 +2045,16 @@
       ],
       "linkCategory": "conditional"
     }
+  ],
+  "protocolRefs": [
+    "cll-acalabrutinib",
+    "cll-br",
+    "cll-fcr",
+    "cll-pirtobrutinib",
+    "cll-venetoclax-rituximab",
+    "cll-veno-obinutuzumab",
+    "dlbcl-pola-r-chp",
+    "hodgkin-abvd",
+    "rchop"
   ]
 }

@@ -254,6 +254,9 @@
           "label": "Induction administered - Proceed to post-induction response & MRD evaluation",
           "setsValue": null
         }
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -286,6 +289,9 @@
           "label": "Induction administered - Proceed to post-induction response & MRD evaluation",
           "setsValue": null
         }
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -370,6 +376,9 @@
         "Maintenance therapy: TKI daily (ponatinib 15 mg daily or dasatinib 100-140 mg daily) for a minimum of 5 years (or indefinitely), with or without POMP maintenance (mercaptopurine daily, methotrexate weekly, vincristine + prednisone monthly pulses) for 2-3 years.",
         "Intrathecal CNS prophylaxis: Continue IT chemotherapy as scheduled per protocol (minimum 8-12 total doses across induction, consolidation, and early maintenance).",
         "Molecular monitoring: Serial quantitative RT-PCR for BCR::ABL1 every 3 months for at least 3-5 years."
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -396,6 +405,9 @@
         "Blinatumomab + TKI (Preferred): Initiate blinatumomab (continuous IV infusion x 28-day cycle) in combination with active TKI to eradicate residual clone.",
         "Allogeneic HCT: Strongly recommended for all eligible patients once MRD clearance or lowest possible disease burden is attained.",
         "Alternative intensification: Multiagent chemotherapy consolidation (high-dose methotrexate/cytarabine) + TKI if blinatumomab unavailable."
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -424,7 +436,7 @@
       "options": [
         {
           "id": "phneg_aya",
-          "label": "AYA (Age 15\u201339 years) without substantial comorbidities",
+          "label": "AYA (Age 15–39 years) without substantial comorbidities",
           "sets": {
             "age_group": "aya"
           },
@@ -436,7 +448,7 @@
         },
         {
           "id": "phneg_adult",
-          "label": "Adults (Age 40\u201364 years) without substantial comorbidities",
+          "label": "Adults (Age 40–64 years) without substantial comorbidities",
           "sets": {
             "age_group": "adult"
           },
@@ -491,6 +503,9 @@
           "label": "Induction completed - Proceed to response and MRD assessment",
           "setsValue": null
         }
+      ],
+      "protocolRefs": [
+        "ped-all-induction"
       ]
     },
     {
@@ -500,7 +515,7 @@
       "nodeType": "question",
       "template": "main",
       "name": "Ph- Adult Induction",
-      "title": "Ph- B-ALL: Adult Multiagent Frontline Regimens (Age 40\u201364)",
+      "title": "Ph- B-ALL: Adult Multiagent Frontline Regimens (Age 40–64)",
       "section": "Primary Treatment",
       "description": "Multiagent induction backbones with incorporation of immunotherapy.",
       "path": "ALL / Ph- B-ALL / Adult Induction",
@@ -523,6 +538,9 @@
           "label": "Induction completed - Proceed to response and MRD assessment",
           "setsValue": null
         }
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -555,6 +573,9 @@
           "label": "Induction completed - Proceed to response and MRD assessment",
           "setsValue": null
         }
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -639,6 +660,9 @@
         "Allogeneic HCT Consideration: Strongly favored in first CR (CR1) for patients with poor-risk genetics: hypodiploidy (<44 chromosomes), KMT2A rearrangement (t(4;11)), TP53 mutation, Ph-like signature, or complex karyotype (>=5 abnormalities).",
         "Standard Maintenance: POMP regimen (daily oral 6-mercaptopurine 50-75 mg/m2, weekly oral methotrexate 20 mg/m2, monthly pulses of IV vincristine and oral prednisone) for 2 to 3 years total duration.",
         "CNS Surveillance & Prophylaxis: Complete full course of planned intrathecal chemotherapy injections during consolidation and early maintenance."
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -664,6 +688,9 @@
         "Monitor & Manage Cytokine Release Syndrome (CRS) and ICANS: Premedicate with dexamethasone; hold infusion and administer tocilizumab +/- dexamethasone if grade >=2 CRS occurs.",
         "Allogeneic HCT (Strongly Recommended): Consolidate with myeloablative or reduced-intensity allogeneic HCT upon achieving MRD-negative status.",
         "Alternative if blinatumomab contraindicated or unavailable: Multiagent chemotherapy intensification (e.g., high-dose cytarabine + fludarabine) or Inotuzumab ozogamicin."
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -685,14 +712,14 @@
       ],
       "required": true,
       "bullets": [
-        "AYA (15\u201339 years) without substantial comorbidities: pediatric-inspired regimens with augmented asparaginase and nelarabine for intermediate/high risk.",
-        "Adults 40\u201364 years: intensive adult protocols (Hyper-CVAD +/- nelarabine or dose-adjusted GRAALL-2014).",
+        "AYA (15–39 years) without substantial comorbidities: pediatric-inspired regimens with augmented asparaginase and nelarabine for intermediate/high risk.",
+        "Adults 40–64 years: intensive adult protocols (Hyper-CVAD +/- nelarabine or dose-adjusted GRAALL-2014).",
         "Adults >=65 years or with substantial comorbidities: dose-attenuated multiagent regimens or clinical trials."
       ],
       "options": [
         {
           "id": "t_aya",
-          "label": "AYA (Age 15\u201339 years) without substantial comorbidities",
+          "label": "AYA (Age 15–39 years) without substantial comorbidities",
           "sets": {
             "cohort": "t_aya"
           },
@@ -703,7 +730,7 @@
         },
         {
           "id": "t_adult",
-          "label": "Adults (Age 40\u201364 years) without substantial comorbidities",
+          "label": "Adults (Age 40–64 years) without substantial comorbidities",
           "sets": {
             "cohort": "t_adult"
           },
@@ -757,6 +784,9 @@
           "label": "Induction completed - Proceed to response and MRD assessment",
           "setsValue": null
         }
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -840,6 +870,9 @@
         "Allogeneic HCT in CR1: Strongly favored for patients with Early T-cell Precursor (ETP-ALL), poor cytogenetics (e.g. complex, MLL-r), or unfavorable molecular profile (NOTCH1/FBXW7 wild-type or PTEN mutations).",
         "Nelarabine incorporation: If not administered during induction, consider adding nelarabine blocks during consolidation for young adults with CNS risk.",
         "Surveillance: Serial marrow/MRD monitoring at months 3, 6, 12, 18, and 24."
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -865,6 +898,9 @@
         "Allogeneic HCT (Mandatory): Consolidate with allogeneic hematopoietic cell transplant immediately once MRD negative status or minimum residual burden is reached.",
         "Alternative regimens: High-dose cytarabine + fludarabine (FLAG-IDA) or venetoclax + decitabine/azacitidine under clinical trial or compassionate use.",
         "Clinical Trial: Strongly consider enrolling on investigational cellular or targeted therapy protocols."
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -948,6 +984,9 @@
         "Inotuzumab ozogamicin (CD22 ADC): Highly effective in CD22+ relapsed disease; monitor hepatic function and limit to 2-3 cycles if preceding allogeneic HCT.",
         "CAR T-Cell Therapy (Brexucabtagene autoleucel): FDA-approved for adult relapsed/refractory B-ALL; tisagenlecleucel for patients aged <=25 years.",
         "Allogeneic HCT / DLI: Second allogeneic HCT or donor lymphocyte infusion (DLI) for eligible patients achieving subsequent remission."
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -971,14 +1010,17 @@
       "showsRecommendation": true,
       "bullets": [
         "Targeted Immunotherapy (Preferred over cytotoxic chemotherapy):",
-        "\u2022 Blinatumomab (CD19 BiTE): Continuous IV infusion x 28-day cycles; superior OS and response compared to standard salvage chemo (TOWER trial).",
-        "\u2022 Inotuzumab ozogamicin (CD22 ADC): 0.8 mg/m2 day 1, 0.5 mg/m2 days 8 & 15; superior CR rate over chemo (INO-VATE trial). Administer ursodiol and avoid dual-alkylator conditioning if bridging to HCT to prevent sinusoidal obstruction syndrome (SOS/VOD).",
+        "• Blinatumomab (CD19 BiTE): Continuous IV infusion x 28-day cycles; superior OS and response compared to standard salvage chemo (TOWER trial).",
+        "• Inotuzumab ozogamicin (CD22 ADC): 0.8 mg/m2 day 1, 0.5 mg/m2 days 8 & 15; superior CR rate over chemo (INO-VATE trial). Administer ursodiol and avoid dual-alkylator conditioning if bridging to HCT to prevent sinusoidal obstruction syndrome (SOS/VOD).",
         "Chimeric Antigen Receptor (CAR) T-Cell Therapy:",
-        "\u2022 Brexucabtagene autoleucel (Tecartus): Indicated for adult relapsed/refractory B-ALL.",
-        "\u2022 Tisagenlecleucel (Kymriah): Indicated for pediatric and young adult patients <=25 years.",
-        "\u2022 Obecabtagene autoleucel (Apceth): Low-affinity CD19 CAR T-cell with reduced CRS profile.",
+        "• Brexucabtagene autoleucel (Tecartus): Indicated for adult relapsed/refractory B-ALL.",
+        "• Tisagenlecleucel (Kymriah): Indicated for pediatric and young adult patients <=25 years.",
+        "• Obecabtagene autoleucel (Apceth): Low-affinity CD19 CAR T-cell with reduced CRS profile.",
         "Cytotoxic Salvage Regimens (if immunotherapy unavailable or as bridge): FLAG-IDA (fludarabine, cytarabine, idarubicin, G-CSF), mini-hyper-CVD + inotuzumab, or CLAG-M.",
         "Allogeneic HCT: Essential consolidative therapy following attainment of second remission (CR2)."
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     },
     {
@@ -1002,11 +1044,14 @@
       "bullets": [
         "Nelarabine-based Therapy (Preferred): Nelarabine single agent (1500 mg/m2 days 1, 3, 5 every 21 days) or combination Nelarabine + Etoposide + Cyclophosphamide.",
         "Targeted / Novel Approaches:",
-        "\u2022 Daratumumab (anti-CD38 monoclonal antibody): Promising activity in CD38-expressing relapsed/refractory T-ALL and ETP-ALL.",
-        "\u2022 Venetoclax + Decitabine or Azacitidine: BCL-2 inhibition active in early T-cell precursor (ETP) and immature T-ALL phenotypes.",
-        "\u2022 Menin inhibitors (e.g. revumenib): For KMT2A-rearranged cases.",
+        "• Daratumumab (anti-CD38 monoclonal antibody): Promising activity in CD38-expressing relapsed/refractory T-ALL and ETP-ALL.",
+        "• Venetoclax + Decitabine or Azacitidine: BCL-2 inhibition active in early T-cell precursor (ETP) and immature T-ALL phenotypes.",
+        "• Menin inhibitors (e.g. revumenib): For KMT2A-rearranged cases.",
         "Intensive Cytotoxic Chemotherapy: Augmented hyper-CVAD, FLAG-IDA, or clofarabine-based combinations.",
         "Allogeneic HCT: Immediate HLA-matched donor mobilization to proceed to transplant upon attaining remission."
+      ],
+      "protocolRefs": [
+        "all-hypercvad"
       ]
     }
   ],
@@ -1299,5 +1344,9 @@
         "rr_tcell"
       ]
     }
+  ],
+  "protocolRefs": [
+    "all-hypercvad",
+    "ped-all-induction"
   ]
 }

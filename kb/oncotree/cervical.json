@@ -709,6 +709,9 @@
         "Adjuvant pelvic external-beam radiation for Sedlis-type intermediate-risk features",
         "Concurrent chemotherapy may be added for higher intermediate-risk combinations",
         "Then surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "cervical-cisplatin-weekly"
       ]
     },
     {
@@ -879,6 +882,10 @@
         "Salvage hysterectomy or pelvic exenteration for isolated, resectable central residual disease",
         "Brachytherapy / boost if the definitive dose was not completed and tissue tolerance allows",
         "Systemic therapy if unresectable or distant disease emerges; then surveillance if controlled"
+      ],
+      "protocolRefs": [
+        "cervical-cisplatin-weekly",
+        "cervical-pembrolizumab"
       ]
     },
     {
@@ -901,7 +908,11 @@
         "Address treatment sequelae: vaginal health, ovarian / sexual function, lymphedema"
       ],
       "linkTo": "n_recur_pathway",
-      "linkLabel": "If recurrence is detected: go to the Recurrence pathway"
+      "linkLabel": "If recurrence is detected: go to the Recurrence pathway",
+      "protocolRefs": [
+        "cervical-cisplatin-weekly",
+        "cervical-pembrolizumab"
+      ]
     },
     {
       "id": "n_recur_pathway",
@@ -984,6 +995,10 @@
         "Radical hysterectomy may suffice for a small central recurrence in selected cases",
         "Requires fitness assessment and reconstructive / stoma planning",
         "Systemic therapy if unresectable or distant disease is found"
+      ],
+      "protocolRefs": [
+        "cervical-cisplatin-weekly",
+        "cervical-pembrolizumab"
       ]
     },
     {
@@ -1027,6 +1042,10 @@
         "Stereotactic body radiation or metastasectomy to limited sites (e.g. isolated lung / node)",
         "Add first-line systemic therapy directed by PD-L1 (next step)",
         "Reassess for disseminated progression at follow-up"
+      ],
+      "protocolRefs": [
+        "cervical-cisplatin-weekly",
+        "cervical-pembrolizumab"
       ]
     },
     {
@@ -1354,6 +1373,10 @@
         "Prioritize trials of novel ADCs, bispecifics, or targeted agents matched to molecular profiling",
         "Broad molecular profiling (NGS) to identify actionable alterations",
         "Maintain supportive care in parallel"
+      ],
+      "protocolRefs": [
+        "cervical-cisplatin-weekly",
+        "cervical-pembrolizumab"
       ]
     },
     {
@@ -1374,6 +1397,10 @@
         "Palliative radiation for bleeding, pain, or obstructive symptoms",
         "Manage pain, fistula, renal obstruction (nephrostomy / stent), and psychosocial needs",
         "Early palliative-care and goals-of-care discussion"
+      ],
+      "protocolRefs": [
+        "cervical-cisplatin-weekly",
+        "cervical-pembrolizumab"
       ]
     },
     {
@@ -2053,5 +2080,14 @@
       ],
       "linkCategory": "conditional"
     }
+  ],
+  "protocolRefs": [
+    "cervical-cisplatin-weekly",
+    "cervical-pembrolizumab",
+    "cervical-tisotumab-vedotin",
+    "gyn-carbo-paclitaxel",
+    "gyn-carbo-paclitaxel-bev",
+    "sclc-platinum-etoposide",
+    "sclc-topotecan"
   ]
 }
