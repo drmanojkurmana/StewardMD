@@ -35,7 +35,9 @@
     coresident: "2 accounts · shared AI pool · 4 imaging/day each",
     pro: "Imaging AI · Patient Summary · Research · Lab Watch · Ultra voice",
     physician: "Your clinic (own Drive) · FollowCare · Scribe · unlimited billing",
-    physicianpro: "Cloud clinic (we host) · more AI",
+    // "in beta" is not marketing softener, it is the honest status: these four models are clinically
+    // unvalidated (docs/fundx/VALIDATION-PROGRAM.md). Do not drop it from this line.
+    physicianpro: "Cloud clinic (we host) · more AI · OncoTree + ONCQIS included · Early access to ThoreX, KardiQ X, SknX and FundX imaging AI, in beta",
   };
   var TIER_IAP = { student: "trainee", coresident: "coresident", pro: "pro", physician: "physician", physicianpro: "physicianpro" };
   function iosNativeIap() { return plat() === "ios" && window.SMD_IAP && typeof SMD_IAP.purchase === "function"; }

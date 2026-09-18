@@ -862,3 +862,13 @@ html body.rds-on .icd-card-code, html body.rds-on .icd-dcode, html body.rds-on .
 html body.rds-on .icd-card-sys, html body.rds-on .gs-pill { border-radius: var(--rds-r-pill); background: var(--rds-primary-soft); color: var(--rds-primary-2); font-family: var(--rds-font); }
 html body.rds-on .icd-card-ch, html body.rds-on .gs-amt.unset { color: var(--rds-muted); font-family: var(--rds-font); }
 html body.rds-on #csOverlay, html body.rds-on #eceOverlay, html body.rds-on #abgOverlay, html body.rds-on #feaOverlay { background: var(--rds-bg); }
+
+/* BETA chip on the experimental imaging-AI tiles (ThoreX / KardiQ X / SknX / FundX). These models
+   are clinically unvalidated, so the chip is unconditional: it renders on every path that shows the
+   tile (access code, tester flag, Physician Pro early access) and cannot be dismissed. */
+#homeV2.rnav .rnav-tile { position: relative; }
+#homeV2.rnav .rnav-tile-beta {
+  position: absolute; top: 6px; right: 6px; z-index: 2;
+  font: 800 9px/1 var(--rds-font); letter-spacing: .06em; text-transform: uppercase;
+  padding: 3px 5px; border-radius: 999px; color: #7a4a00; background: #ffd27a; border: 1px solid rgba(0,0,0,.08);
+}
