@@ -336,7 +336,7 @@ function cleanObservedViews(raw) {
     }
     if (v.proof !== undefined) {
       const p = cleanProofCounts(v.proof, ["json", "html"], "proof");
-      if (["proven", "unproven", "no-requests", "no-screen-values", "signed-out", "error"].indexOf(v.proof.status) < 0) throw new OnboardError("invalid", "observedViews: proof status invalid");
+      if (["proven", "unproven", "no-requests", "no-screen-values", "signed-out", "error", "no-headers", "no-rows"].indexOf(v.proof.status) < 0) throw new OnboardError("invalid", "observedViews: proof status invalid");
       p.status = v.proof.status;
       if (v.proof.tried !== undefined) { if (!Number.isInteger(v.proof.tried) || v.proof.tried < 0 || v.proof.tried > 50) throw new OnboardError("invalid", "observedViews: proof tried invalid"); p.tried = v.proof.tried; }
       if (v.proof.brain !== undefined) { if (typeof v.proof.brain !== "boolean") throw new OnboardError("invalid", "observedViews: proof brain invalid"); p.brain = v.proof.brain; }

@@ -469,6 +469,13 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     const rest = observedViews.filter((v) => !(v && v.proof && v.proof.status === 'proven'));
     observedViews = proven.concat(rest).slice(0, 40);
   }
+  // Map non-legacy statuses (like 'no-headers', 'no-rows') to 'unproven' so existing/live server broker validations never reject the payload
+  const LEGACY_SERVER_SAFE_STATUSES = new Set(['proven', 'unproven', 'no-requests', 'no-screen-values', 'signed-out', 'error']);
+  for (const v of observedViews) {
+    if (v && v.proof && !LEGACY_SERVER_SAFE_STATUSES.has(v.proof.status)) {
+      v.proof.status = 'unproven';
+    }
+  }
   const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews, proofs: book.trace });
   notify('COMPILING', { steps: explored.steps.length, events: collector.raw().length, found });
 

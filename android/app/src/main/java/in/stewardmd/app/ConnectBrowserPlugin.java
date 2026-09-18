@@ -480,6 +480,7 @@ public class ConnectBrowserPlugin extends Plugin {
 
         TextView titleLabel = new TextView(activity);
         titleLabel.setText(hostTitle);
+        titleLabel.setTextColor(Color.parseColor("#14202B"));
         titleLabel.setTextSize(15);
         titleLabel.setTypeface(null, Typeface.BOLD);
         titleLabel.setGravity(Gravity.CENTER);
@@ -488,7 +489,7 @@ public class ConnectBrowserPlugin extends Plugin {
 
         subtitleLabel = new TextView(activity);
         subtitleLabel.setTextSize(11);
-        subtitleLabel.setTextColor(Color.DKGRAY);
+        subtitleLabel.setTextColor(Color.parseColor("#5A7184"));
         subtitleLabel.setGravity(Gravity.CENTER);
 
         titleBox.addView(titleLabel);
@@ -549,19 +550,28 @@ public class ConnectBrowserPlugin extends Plugin {
         LinearLayout banner = new LinearLayout(activity);
         banner.setOrientation(LinearLayout.HORIZONTAL);
         banner.setGravity(Gravity.CENTER_VERTICAL);
-        banner.setBackgroundColor(Color.parseColor("#FF9500"));
-        banner.setPadding(pad, dp(activity, 6), pad, dp(activity, 6));
+        banner.setBackgroundColor(Color.parseColor("#0E7C66"));
+        banner.setPadding(pad, dp(activity, 8), pad, dp(activity, 8));
         banner.setVisibility(View.GONE);
         bannerView = banner;
 
         bannerLabel = new TextView(activity);
         bannerLabel.setTextColor(Color.WHITE);
         bannerLabel.setTextSize(13);
+        bannerLabel.setTypeface(null, Typeface.BOLD);
 
         Button stopButton = new Button(activity);
         stopButton.setText("Stop");
         stopButton.setTextColor(Color.WHITE);
-        stopButton.setBackgroundColor(Color.TRANSPARENT);
+        stopButton.setTextSize(12);
+        stopButton.setTypeface(null, Typeface.BOLD);
+        android.graphics.drawable.GradientDrawable stopBg = new android.graphics.drawable.GradientDrawable();
+        stopBg.setColor(Color.parseColor("#AB1C2C"));
+        stopBg.setCornerRadius(dp(activity, 14));
+        stopButton.setBackground(stopBg);
+        stopButton.setPadding(dp(activity, 14), dp(activity, 4), dp(activity, 14), dp(activity, 4));
+        stopButton.setMinWidth(0);
+        stopButton.setMinimumWidth(0);
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
