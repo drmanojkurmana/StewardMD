@@ -145,9 +145,6 @@
       "#sbMenu[data-sbr]{padding:12px 10px 8px}",
       "#sbMenu[data-sbr] .sbr-sec{padding:14px 14px 5px;font:700 11px/1.2 var(--sans,system-ui);letter-spacing:.075em;text-transform:uppercase;color:var(--slate-soft,#5a7184)}",
       "#sbMenu[data-sbr] .sbr-sec:first-child{padding-top:4px}",
-      "#sbMenu[data-sbr] .sbr-ver{display:flex;align-items:baseline;gap:7px;padding:2px 14px 10px;margin-bottom:2px;border-bottom:1px solid var(--line,#d7dee3);font:600 12px/1.3 var(--sans,system-ui);color:var(--slate-soft,#5a7184)}",
-      "#sbMenu[data-sbr] .sbr-ver b{font:800 15px/1.2 var(--sans,system-ui);color:var(--teal,#0e6e63);letter-spacing:.01em}",
-      "#sbMenu[data-sbr] .sbr-ver span{margin-left:auto;font:500 10.5px/1.3 var(--sans,system-ui);opacity:.8}",
       "#sbMenu[data-sbr] .sbr-row{position:relative;display:flex;align-items:center;gap:12px;width:100%;padding:8px 14px;margin-top:1px;border:none;border-radius:9px;background:none;cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 14px/1.3 var(--sans,system-ui)}",
       "#sbMenu[data-sbr] .sbr-row:hover{background:var(--paper,#eef2f0)}",
       "#sbMenu[data-sbr] .sbr-ic{width:19px;height:19px;flex:0 0 auto;color:var(--slate-soft,#5a7184)}",
@@ -444,23 +441,24 @@
         '<span class="sbr-lbl">' + (name || "Choose specialty") + '</span><span class="sbr-chev">▾</span></button>';
   }
   /* WHICH VERSION AM I ON? — the first question on every support call, and after an OTA the answer
-   * differs from phone to phone. Pinned at the top of the sidebar so it is never hunted for: the
-   * readable ladder number big, and the exact bundle the device is actually running beside it. */
-  function verHTML() {
-    var label = "", exact = "";
+   * differs from phone to phone. The drawer header carried a hard-coded "v10.0" (index.html) that
+   * had nothing to do with the bundle the phone was actually running; a stale version is worse than
+   * none, because it is believed. It sits at the very top of the drawer, above #sbMenu, so it is
+   * also the one spot no menu rebuild can push down — write the live number there.
+   * The exact bundle goes in the tooltip; Settings prints it in full. */
+  function paintHeaderVersion() {
     try {
-      if (!(window.SMD_OTA && SMD_OTA.versionLabel)) return "";
-      label = SMD_OTA.versionLabel();
-      var v = SMD_OTA.currentVersion();
-      exact = v ? "bundle " + v : "built-in";
-    } catch (e) { return ""; }
-    if (!label) return "";
-    return '<div class="sbr-ver">StewardMD <b>' + label + '</b><span>' + exact + '</span></div>';
+      var el = document.querySelector("#sbDrawer .sb-head .sb-ver");
+      if (!el || !(window.SMD_OTA && SMD_OTA.versionLabel)) return;
+      var cur = null; try { cur = SMD_OTA.currentVersion(); } catch (e) {}
+      el.textContent = "v" + SMD_OTA.versionLabel();
+      el.title = cur ? "Bundle " + cur : "Built-in bundle";
+    } catch (e) {}
   }
   function build(menu) {
+    paintHeaderVersion();
     menu.setAttribute("data-sbr", "1");
     menu.innerHTML =
-      verHTML() +
       wsRow() +
       '<div class="sbr-sec">Tools</div>' +
       row("drugs", "pills", "Drugs Database") +

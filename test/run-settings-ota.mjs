@@ -74,6 +74,20 @@ try {
   // The readable ladder number is what the doctor says out loud; the bundle number is what we debug.
   ok(withPlugin.statusText === "Version 1.2 (bundle 94)", `shows the exact running version (got "${withPlugin.statusText}")`);
   ok(withPlugin.hasCheck && withPlugin.hasInstall, "Check for updates and Download & install controls are both present");
+
+  /* The drawer header shipped a hard-coded "v10.0" that had nothing to do with the running bundle —
+   * on the owner's iPhone it read v10.0 while the phone was on OTA bundle 90. A stale version is
+   * worse than none because it is believed, and the header is the one spot above #sbMenu that no
+   * menu rebuild (home.js / verify.js both prepend into it) can push out of view. */
+  await ev(`try { if (window.SB && SB.open) SB.open(); } catch (e) {} return 1;`);
+  await sleep(300);
+  const hdr = await J(`
+    var el = document.querySelector("#sbDrawer .sb-head .sb-ver");
+    return JSON.stringify({ text: el ? el.textContent : null, title: el ? el.title : null,
+      hasSB: !!(window.SB && window.SB.open), menuBuilt: !!document.querySelector("#sbMenu[data-sbr]") });
+  `);
+  ok(hdr.text === "v1.2", `the sidebar header shows the live version, not the hard-coded v10.0 (got "${hdr.text}")`);
+  ok(hdr.title === "Bundle 94", `...with the exact bundle in its tooltip (got "${hdr.title}")`);
   ok(withPlugin.installHidden === true, "Download & install starts hidden until a check finds something");
 
   // ---- Automatic-updates toggle actually calls SMD_OTA.setAuto ----
