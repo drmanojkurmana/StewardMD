@@ -34,6 +34,17 @@ test("intent: the shapes clinicians type, and the section they asked for", () =>
   assert.deepEqual(D.intent("how much paracetamol can I give"), { name: "paracetamol", section: "adult" });
 });
 
+test("OWNER TRANSCRIPT 2026-09-19: the home.js follow-up rewrite, abbreviations, and leading request words", () => {
+  // "Ondansetron dose" mid-conversation arrives rewritten; the frame's "renal-adjustment principles"
+  // must not turn an adult-dose ask into the renal section.
+  assert.deepEqual(D.intent("Adult dosing of Ondansetron for dose of Pcm — dose, route, titration and renal-adjustment principles. Verify locally."), { name: "Ondansetron", section: "adult" });
+  assert.deepEqual(D.intent("Paediatric dosing of paracetamol for fever — dose, route, titration and renal-adjustment principles. Verify locally."), { name: "paracetamol", section: "ped" });
+  assert.deepEqual(D.intent("Renal-adjusted dosing of vancomycin for sepsis — dose, route, titration and renal-adjustment principles. Verify locally."), { name: "vancomycin", section: "renal" });
+  assert.deepEqual(D.intent("Dose of Pcm?"), { name: "paracetamol", section: "adult" });
+  assert.deepEqual(D.intent("Tell me Ondansetron dose"), { name: "Ondansetron", section: "adult" });
+  assert.deepEqual(D.intent("give me the dose of mtx"), { name: "methotrexate", section: "adult" });
+});
+
 test("NOT a database lookup: a clinical question that merely contains the word dose falls through", async () => {
   assert.equal(D.intent("treatment of hypertension"), null);
   assert.equal(D.intent("tell me doses"), null, "a bare follow-up carries no drug; continuity handles it");
