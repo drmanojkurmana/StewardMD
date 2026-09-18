@@ -56,6 +56,9 @@ const BOOT = `
     next: function (opts) { window.__calls.push(["next", opts]); return Promise.resolve({}); },
     reset: function () { window.__calls.push(["reset"]); return Promise.resolve(); },
     addListener: function (name, cb) { window.__downloadListeners.push(name); return Promise.resolve({ remove: function () {} }); },
+    list: function () { window.__calls.push(["list"]); return Promise.resolve({ bundles: window.__bundles || [] }); },
+    current: function () { window.__calls.push(["current"]); return Promise.resolve(window.__current || { bundle: { id: "builtin" } }); },
+    delete: function (opts) { window.__calls.push(["delete", opts]); return Promise.resolve(); },
   };
   var FAKE_APP = {
     getInfo: function () { return Promise.resolve({ build: "7", version: "2.1" }); },
@@ -233,6 +236,47 @@ try {
      `...only a fixed code (got: ${leakStr})`);
   ok(/unauthorized/.test(leakStr),
      `...and a 403 is classified rather than passed through (got: ${leakStr})`);
+
+  /* ── the bug that made every update fail on the owner's iPhone, 2026-09-18 ──
+   * @capgo/capacitor-updater caps a WHOLE bundle download at responseTimeout+5 seconds and, when it
+   * fires, rejects with "Timed out downloading bundle from <url>". The classifier only matched the
+   * one-word "timeout", so a plainly slow connection fell through to the generic code and the
+   * settings screen read "Install failed - download-failed", which tells the doctor nothing. */
+  await J(`window.__calls = [];
+    window.__downloadResult = Promise.reject(new Error(
+      "Failed to download from: https://stewardmd.in/api/ota/file/abc - Timed out downloading bundle from https://stewardmd.in/api/ota/file/abc"));
+    return 1;`);
+  const slow = await J(`return window.SMD_OTA.install(
+      { version: "9.9.9", zipUrl: "https://stewardmd.in/api/ota/file/abc", zipHash: "h" }, null, true)
+    .then(function (r) { return JSON.stringify(r); });`);
+  const slowStr = typeof slow === "string" ? slow : JSON.stringify(slow);
+  ok(/"error":"network"/.test(slowStr),
+     `a cancelled-because-slow download is classified "network", not the generic fallback (got: ${slowStr})`);
+  ok(!/stewardmd\.in|https?:\/\//.test(slowStr), `...still without leaking the endpoint (got: ${slowStr})`);
+
+  /* ── the version the doctor reads out loud ── one tenth per release, rolling over at .9. */
+  const ladder = await J(`return JSON.stringify([95,96,101,102,105].map(function(v){return SMD_OTA.versionLabel(v)}).concat([SMD_OTA.versionLabel(0)]));`);
+  ok(JSON.stringify(ladder) === JSON.stringify(["1.3", "1.4", "1.9", "2.0", "2.3", "1.2"]),
+     `the version ladder reads 1.3, 1.4 … then rolls 1.9 over to 2.0, 2.1, 2.3 — and the built-in bundle this ships in is 1.2 (got ${JSON.stringify(ladder)})`);
+
+  /* ── stale bundles ── a failed 48MB download unpacks to ~123MB that nothing will ever load.
+   * The purge must go by STATUS, not by "isn't the current one": current() reports {bundle,native}
+   * and gives NO handle on what next() has queued, so a keep-list built from it would eventually
+   * delete the bundle the silent auto-update path had lined up for the next restart. */
+  await J(`window.__calls = [];
+    window.__bundles = [
+      {id:"running", status:"success"}, {id:"queued-by-next", status:"pending"},
+      {id:"in-flight", status:"downloading"}, {id:"dead-1", status:"error"},
+      {id:"dead-2", status:"deleted"}, {id:"builtin", status:"error"}];
+    return 1;`);
+  const purge = await J(`return SMD_OTA.purgeOld().then(function(r){ return JSON.stringify({ r: r, calls: window.__calls }); });`);
+  const deleted = (purge.calls || []).filter(c => c[0] === "delete").map(c => c[1].id).sort();
+  ok(JSON.stringify(deleted) === JSON.stringify(["dead-1", "dead-2"]),
+     `purgeOld deletes only failed bundles (deleted ${JSON.stringify(deleted)})`);
+  ok(!deleted.includes("queued-by-next"),
+     `...and never the bundle next() queued for the silent auto-update path`);
+  ok(!deleted.includes("builtin"), `...and never the built-in bundle, whatever status it reports`);
+  ok(purge.r && purge.r.removed === 2, `...and reports how many it reclaimed (got ${JSON.stringify(purge.r)})`);
 
   console.log(fails === 0 ? "\nALL GREEN — the OTA client honours its contract, and never applies anything the user or their own auto-update choice didn't ask for" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
