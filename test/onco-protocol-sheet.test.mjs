@@ -148,10 +148,10 @@ test('PRINTABLE TEMPLATE: buildExportHtml outputs professional A4 record with al
   assert.ok(html.includes('ONC-9842'), 'Must display MRN');
 });
 
-test('ALL 281 PROTOCOLS IN KB ARE VALID & PRINTABLE', () => {
+test('ALL PROTOCOLS IN KB ARE VALID & PRINTABLE', () => {
   const { API } = loadSheetEnv();
   const protoFiles = readdirSync(join(ROOT, 'kb/protocols')).filter(f => f.endsWith('.json') && f !== 'index.json');
-  assert.equal(protoFiles.length, 281, 'Must have exactly 281 protocol files');
+  assert.ok(protoFiles.length >= 281, `Must have at least 281 protocol files (found ${protoFiles.length})`);
 
   const testPatient = {
     caseNo: 'TEST-001',
@@ -411,4 +411,46 @@ test("MODAL EVENT DELEGATION & NO STOPPROPAGATION: modal cards allow click event
   assert.ok(shell.includes('data-ps-act="save-add-drug"'), "Must render save custom drug button");
   assert.ok(shell.includes('data-ps-act="save-add-tox"'), "Must render save toxicity button");
 });
+
+test("ONCOTREE PROTOCOL COVERAGE: all 65 oncotree guidelines have protocol coverage and neuroblastoma resolves protocols", () => {
+  const otFiles = readdirSync(join(ROOT, "kb/oncotree")).filter(f => f.endsWith(".json"));
+  assert.equal(otFiles.length, 65, "Must have exactly 65 OncoTree guideline files");
+
+  const protoFiles = new Set(readdirSync(join(ROOT, "kb/protocols")).filter(f => f.endsWith(".json")).map(f => f.replace(".json", "")));
+
+  for (const f of otFiles) {
+    const ot = JSON.parse(readFileSync(join(ROOT, "kb/oncotree", f), "utf8"));
+    const endNodes = (ot.nodes || []).filter(n => n.nodeType === "end" || n.nodeCategory === "treatment" || n.showsRecommendation);
+    assert.ok(endNodes.length > 0, `${f} must have treatment/end nodes`);
+
+    // Ensure at least one treatment node has protocolRefs and that all referenced protocols exist in kb/protocols
+    let withRefs = 0;
+    for (const n of endNodes) {
+      if (n.protocolRefs && n.protocolRefs.length > 0) {
+        withRefs++;
+        for (const r of n.protocolRefs) {
+          assert.ok(protoFiles.has(r), `Protocol ref ${r} in ${f} (node ${n.id}) must exist in kb/protocols/`);
+        }
+      }
+    }
+    assert.ok(withRefs > 0, `Guideline ${f} must have protocols attached to treatment nodes`);
+  }
+
+  // Explicit verification of Neuroblastoma resolution
+  const nb = JSON.parse(readFileSync(join(ROOT, "kb/oncotree/neuroblastoma.json"), "utf8"));
+  const highRiskNode = nb.nodes.find(n => n.id === "n_high_risk_tx");
+  assert.ok(highRiskNode, "Neuroblastoma must have n_high_risk_tx node");
+  assert.ok(highRiskNode.protocolRefs.includes("peds-neuroblastoma-dinutuximab"), "Must reference dinutuximab protocol");
+  assert.ok(highRiskNode.protocolRefs.includes("ped-neuroblastoma-highrisk"), "Must reference high-risk induction protocol");
+
+  const intRiskNode = nb.nodes.find(n => n.id === "n_int_risk_tx");
+  assert.ok(intRiskNode.protocolRefs.includes("peds-neuroblastoma-anbl0531"), "Must reference ANBL0531 intermediate risk protocol");
+
+  const lowRiskNode = nb.nodes.find(n => n.id === "n_low_risk_tx");
+  assert.ok(lowRiskNode.protocolRefs.includes("peds-neuroblastoma-lowrisk"), "Must reference low-risk protocol");
+
+  const relapsedNode = nb.nodes.find(n => n.id === "n_relapsed_tx");
+  assert.ok(relapsedNode.protocolRefs.includes("peds-neuroblastoma-dit"), "Must reference D-I/T relapsed protocol");
+});
+
 

@@ -177,7 +177,9 @@
         "COG low-risk cohort evidence: surgery alone or observation achieves 5-year overall survival above 95% for L1 non-MYCN and asymptomatic MS disease; avoid overtreatment because late effects exceed disease risk in this group.",
         "Surveillance after resection or during observation: cross-sectional imaging of the primary bed, urine catecholamines, and MIBG only if initially avid; escalate to the intermediate-risk pathway on symptomatic progression or unfavorable biology revision. Physician decides; dose engine calculates patient-specific doses."
       ],
-      "protocolRefs": [],
+      "protocolRefs": [
+        "peds-neuroblastoma-lowrisk"
+      ],
       "regimenSummary": "Surgical Resection Alone or Active Observation (OS >95%)"
     },
     {
@@ -210,7 +212,9 @@
         "COG ANBL0531 trial evidence: risk-adapted moderate chemotherapy with surgery achieved 3-year event-free survival above 85-90% for L2 non-MYCN and infant stage M non-MYCN cohorts with reduced cumulative anthracycline and alkylator exposure versus high-risk regimens.",
         "Monitoring: audiometry (carboplatin ototoxicity), echocardiography (doxorubicin cardiotoxicity), CBC with growth-factor support per cycle, and urine HVA/VMA plus cross-sectional imaging every 2 cycles; stem-cell harvest is not required. Physician decides; dose engine calculates patient-specific doses."
       ],
-      "protocolRefs": [],
+      "protocolRefs": [
+        "peds-neuroblastoma-anbl0531"
+      ],
       "regimenSummary": "Moderate Chemotherapy (Carbo/Etop/Cyclo/Dox) x 2-8 cycles + Delayed Resection"
     },
     {
@@ -243,7 +247,10 @@
         "ALK-aberrant tumors: add the ALK inhibitor Lorlatinib 95 mg/m2 PO once daily (adult equivalent 100 mg daily) concurrently with maintenance and continue until progression or unacceptable toxicity, per COG ANBL1531 ALK stratum; monitor lipids, edema, CNS effects, and cardiac conduction.",
         "COG ANBL0032/ANBL1531 trial evidence: dose-intensive induction plus ASCR plus RT plus Dinutuximab/GM-CSF/Isotretinoin maintenance significantly improved EFS and OS over isotretinoin alone and remains the high-risk standard. Physician decides; dose engine calculates patient-specific doses."
       ],
-      "protocolRefs": [],
+      "protocolRefs": [
+        "peds-neuroblastoma-dinutuximab",
+        "ped-neuroblastoma-highrisk"
+      ],
       "regimenSummary": "Intensive 3-Phase: Dose-Intensive Induction -> Tandem ASCR + RT -> Dinutuximab + GM-CSF + Isotretinoin"
     },
     {
@@ -253,14 +260,13 @@
       "nodeType": "end",
       "template": "treatment",
       "name": "Relapsed Refractory Treatment",
-      "title": "Relapsed / Refractory Neuroblastoma: Chemoimmunotherapy or MIBG or ALK Therapy",
+      "title": "Relapsed / Refractory Neuroblastoma: Chemoimmunotherapy or Targeted Therapy",
       "section": "Treatment",
-      "description": "Salvage therapy for relapsed or refractory neuroblastoma: chemoimmunotherapy backbone with MIBG and ALK-directed alternatives by avidity and genotype.",
-      "path": "Neuroblastoma / Relapsed Refractory / Treatment",
+      "description": "Second-line systemic chemoimmunotherapy, targeted radiopharmaceutical therapy, or ALK inhibition for relapsed or refractory neuroblastoma.",
+      "path": "Neuroblastoma / Relapsed / Treatment",
       "pills": [
         "neuroblastoma",
         "relapsed",
-        "refractory",
         "treatment"
       ],
       "showsRecommendation": true,
@@ -271,13 +277,15 @@
         "e"
       ],
       "bullets": [
-        "Chemoimmunotherapy backbone (D-I/T) per COG ANBL1221: Dinutuximab 17.5 mg/m2/d IV days 2-5 plus Irinotecan 50 mg/m2/d IV days 1-5 plus Temozolomide 100-150 mg/m2/d PO days 1-5 every 21-28 days with GM-CSF support; give cefixime or cefpodoxime prophylaxis for irinotecan-associated diarrhea, antiemetics, and opioid premedication for Dinutuximab pain.",
-        "131I-MIBG therapy for MIBG-avid relapsed disease: weight-based 131I-MIBG (typically 12-18 mCi/kg) with potassium iodide thyroid blockade, stem-cell availability, and isolation precautions; combine with myeloablative chemotherapy and ASCR at experienced centers for isolated MIBG-persistent sites.",
-        "Targeted ALK inhibitor Lorlatinib 95 mg/m2 PO once daily for ALK-mutant or ALK-amplified tumors (F1174, R1275, F1245 hotspot mutations or amplification by NGS/FISH); continue until progression; monitor hyperlipidemia, weight gain, peripheral edema, CNS effects, and AV block with ECG and lipid panels.",
-        "COG ANBL1221 trial evidence: Dinutuximab plus Irinotecan plus Temozolomide produced superior objective response rates versus Temozolomide plus Irinotecan alone in relapsed/refractory neuroblastoma and is the preferred salvage backbone; re-biopsy and repeat MYCN/ALK testing at relapse because clonal evolution is common.",
-        "Re-stage with MIBG or FDG-PET, bilateral marrow, urine HVA/VMA, and cross-sectional imaging every 2-3 cycles; prioritize clinical trial enrollment (anti-GD2 combinations, ALK inhibitors, CAR-T) at every relapse step. Physician decides; dose engine calculates patient-specific doses."
+        "First-line relapse chemoimmunotherapy per COG ANBL1221: Dinutuximab 17.5 mg/m2/d IV days 2-5 plus Irinotecan 50 mg/m2/d IV days 1-5 plus Temozolomide 100 mg/m2/d PO days 1-5 (D-I/T regimen) every 21 days with mandatory opioid infusion and diarrhea prophylaxis; significantly superior response and progression-free survival over irinotecan/temozolomide alone in relapsed neuroblastoma.",
+        "Targeted radiopharmaceutical therapy for MIBG-avid relapsed/refractory disease: 131I-MIBG therapy (high-dose with autologous stem-cell rescue or dosimetry-guided dosing) to deliver targeted internal beta radiation to disseminated neuroblastoma deposits.",
+        "Targeted kinase inhibition for ALK-mutated or ALK-amplified neuroblastoma: Lorlatinib 95 mg/m2 PO once daily (per COG ANBL1531) or Crizotinib; achieve systemic kinase inhibition with central nervous system penetration in refractory ALK-driven disease.",
+        "Secondary options: Topotecan plus Cyclophosphamide (TC relapse schedule), Cyclophosphamide plus Topotecan plus Vincristine, or clinical trial enrollment. Physician decides; dose engine calculates patient-specific doses."
       ],
-      "protocolRefs": [],
+      "protocolRefs": [
+        "peds-neuroblastoma-dit",
+        "peds-neuroblastoma-dinutuximab"
+      ],
       "regimenSummary": "Dinutuximab + Irinotecan + Temozolomide (D-I/T) or 131I-MIBG"
     }
   ],
@@ -344,6 +352,10 @@
     }
   ],
   "protocolRefs": [
-    "peds-neuroblastoma-dinutuximab"
+    "peds-neuroblastoma-lowrisk",
+    "peds-neuroblastoma-anbl0531",
+    "peds-neuroblastoma-dinutuximab",
+    "ped-neuroblastoma-highrisk",
+    "peds-neuroblastoma-dit"
   ]
 }

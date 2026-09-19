@@ -199,7 +199,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "3-Drug Induction -> BFM Consolidation -> Maintenance (6-MP + MTX)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "ped-all-induction"
+      ]
     },
     {
       "id": "n_ball_hr_tx",
@@ -236,7 +238,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "4-Drug Induction -> Augmented BFM Consolidation +/- Blinatumomab -> HCT",
-      "protocolRefs": []
+      "protocolRefs": [
+        "ped-all-induction"
+      ]
     },
     {
       "id": "n_ph_pos_tx",
@@ -273,7 +277,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Multiagent Chemotherapy + Continuous Dasatinib 60 mg/m2 PO daily -> HCT",
-      "protocolRefs": []
+      "protocolRefs": [
+        "ped-all-induction"
+      ]
     },
     {
       "id": "n_tall_tx",
@@ -310,7 +316,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "4-Drug Induction -> High-Dose MTX + Nelarabine (COG AALL0434) + Maintenance",
-      "protocolRefs": []
+      "protocolRefs": [
+        "ped-all-induction"
+      ]
     },
     {
       "id": "n_relapsed_tx",
@@ -347,7 +355,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Tisagenlecleucel CAR T-cell Therapy or Blinatumomab / Inotuzumab -> Allogeneic HCT",
-      "protocolRefs": []
+      "protocolRefs": [
+        "ped-all-induction"
+      ]
     }
   ],
   "links": [
@@ -423,5 +433,8 @@
         "relapsed"
       ]
     }
+  ],
+  "protocolRefs": [
+    "ped-all-induction"
   ]
 }

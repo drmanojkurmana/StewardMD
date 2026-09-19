@@ -1,0 +1,82 @@
+{
+  "id": "rare-occult-carbo-paclitaxel",
+  "diseaseId": "occult_primary",
+  "name": "Empiric Carboplatin + Paclitaxel (Carcinoma of Unknown Primary - CUP)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative",
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Occult Primary (CUP) v1.2026"
+  },
+  "stage": [
+    "disseminated"
+  ],
+  "treatmentSetting": [
+    "first-line",
+    "empiric"
+  ],
+  "histology": "adenocarcinoma or poorly differentiated carcinoma of unknown primary",
+  "premedications": [
+    {
+      "name": "Dexamethasone",
+      "dose": "20 mg PO",
+      "notes": "12 and 6 hours prior to paclitaxel"
+    },
+    {
+      "name": "Diphenhydramine",
+      "dose": "50 mg IV",
+      "notes": "30 min prior to paclitaxel"
+    },
+    {
+      "name": "Famotidine",
+      "dose": "20 mg IV",
+      "notes": "30 min prior to paclitaxel"
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetics with 5-HT3 antagonist",
+    "Monitor for peripheral neuropathy and taxane hypersensitivity"
+  ],
+  "monitoring": [
+    "CBC with differential prior to each cycle",
+    "CMP, liver enzymes, creatinine"
+  ],
+  "clearanceChecks": [
+    "ANC >= 1500/mcL, Platelets >= 100,000/mcL",
+    "Renal function for carboplatin Calvert AUC"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 175,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "PACLitaxel 175 mg/m2 IV over 3 hours on Day 1."
+    },
+    {
+      "id": "carboplatin",
+      "name": "Carboplatin",
+      "basis": "auc",
+      "dosePerUnit": 5,
+      "unit": "AUC",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Carboplatin AUC 5 IV over 30-60 minutes on Day 1 (Calvert formula CrCl)."
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "id": "ped-cns-medulloblastoma",
+  "diseaseId": "pediatric_cns",
+  "name": "Adjuvant Pack: Cisplatin + Lomustine (CCNU) + Vincristine (Pediatric Medulloblastoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 42,
+  "cycles": 8,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pediatric CNS Tumors v1.2026"
+  },
+  "stage": [
+    "average-risk",
+    "high-risk"
+  ],
+  "treatmentSetting": [
+    "adjuvant-post-csi"
+  ],
+  "histology": "medulloblastoma (classic, desmoplastic, or large cell/anaplastic)",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "0.15 mg/kg IV",
+      "notes": "Prior to cisplatin"
+    }
+  ],
+  "supportiveCare": [
+    "Pre- and post-hydration with mannitol/furosemide as needed",
+    "Audiometry monitoring for cisplatin"
+  ],
+  "monitoring": [
+    "CBC with differential weekly (CCNU has delayed 4-6 week platelet/WBC nadir)",
+    "BUN/creatinine, electrolytes"
+  ],
+  "clearanceChecks": [
+    "ANC >= 1500/mcL, Platelets >= 100,000/mcL",
+    "Renal function normal for age"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "CISplatin 75 mg/m2 IV over 6 hours with vigorous hydration on Day 1."
+    },
+    {
+      "id": "lomustine",
+      "name": "Lomustine (CCNU)",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [
+        1
+      ],
+      "notes": "Lomustine 75 mg/m2 PO once on Day 1 at bedtime (delayed myelosuppression nadir at week 4-5)."
+    },
+    {
+      "id": "vincristine",
+      "name": "vinCRIStine",
+      "basis": "bsa",
+      "dosePerUnit": 1.5,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "caps": {
+        "perDose": 2
+      },
+      "notes": "vinCRIStine 1.5 mg/m2 (cap 2 mg) IV push on Days 1, 8, 15. Fatal if given intrathecally. IV only."
+    }
+  ]
+}

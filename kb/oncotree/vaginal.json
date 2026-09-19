@@ -165,7 +165,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Radical Vaginectomy or Definitive EBRT (45 Gy) + Image-Guided Brachytherapy (IGBT)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "gyn-vaginal-cisplatin-rt"
+      ]
     },
     {
       "id": "n_locally_advanced_tx",
@@ -201,7 +203,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Definitive Concurrent ChemoRT (Pelvic EBRT + Weekly Cisplatin 40 mg/m2) + Interstitial IGBT",
-      "protocolRefs": []
+      "protocolRefs": [
+        "gyn-vaginal-cisplatin-rt"
+      ]
     },
     {
       "id": "n_metastatic_tx",
@@ -236,7 +240,10 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Platinum + Paclitaxel + Pembrolizumab +/- Bevacizumab (KEYNOTE-826 extrapolated)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "cervical-pembrolizumab",
+        "gyn-vaginal-cisplatin-rt"
+      ]
     }
   ],
   "links": [
@@ -288,5 +295,9 @@
         "metastatic"
       ]
     }
+  ],
+  "protocolRefs": [
+    "cervical-pembrolizumab",
+    "gyn-vaginal-cisplatin-rt"
   ]
 }

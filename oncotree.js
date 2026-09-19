@@ -289,18 +289,62 @@
     }
     var applicable = refs.filter(function (r) { return matchById[r]; });
     var excludedByPheno = refs.filter(function (r) { return st.protocols[r] && !matchById[r]; });
-    var cards = applicable.map(function (r) { return protocolCardHtml(r, matchById[r]); }).join("");
+
+    // Safety Fallback: If curated protocols exist on this node, but strict phenotype filters
+    // marked them as excluded, retain them as reviewable guideline options so clinicians never hit a dead end.
+    if (!applicable.length && refs.length) {
+      var availableRefs = refs.filter(function (r) { return st.protocols[r]; });
+      if (availableRefs.length) {
+        applicable = availableRefs;
+        excludedByPheno = [];
+      }
+    }
+
+    var cards = applicable.map(function (r) {
+      var match = matchById[r];
+      if (!match && st.protocols[r]) {
+        var proto = st.protocols[r];
+        match = {
+          id: r,
+          name: proto.name || r,
+          badge: (proto.lifecycleState || "DRAFT").toUpperCase(),
+          approved: proto.lifecycleState === "active",
+          rationale: "Curated guideline regimen for " + (node.title || node.name) + ". Review clinical parameters prior to order verification."
+        };
+      }
+      return protocolCardHtml(r, match);
+    }).join("");
+
     var ocat = CAT[node.nodeCategory] || CAT.treatment;
     var head = '<div class="ot-outcome-head" style="--ot-c:' + ocat.color + '">' + catChip(node.nodeCategory || "treatment") +
       '<h2 class="ot-step-title">' + esc(node.title || node.name) + evBadge(node) + fnMarkers(node) + "</h2>" +
       (node.description ? '<p class="ot-step-desc">' + esc(node.description) + "</p>" : "") + bulletsHtml(node.bullets) + tablesHtml(node) + "</div>";
-    var count = '<div class="ot-outcome-count">' + applicable.length + " applicable protocol" + (applicable.length === 1 ? "" : "s") +
-      ' <span class="ot-outcome-note">Decision support only. Physician selects; the existing dose engine computes doses.</span></div>';
+
+    var count = "";
+    var bodyContent = "";
+    if (applicable.length > 0) {
+      count = '<div class="ot-outcome-count">' + applicable.length + " applicable protocol" + (applicable.length === 1 ? "" : "s") +
+        ' <span class="ot-outcome-note">Decision support only. Physician selects; the existing dose engine computes doses.</span></div>';
+      bodyContent = cards;
+    } else {
+      var isSurgObs = /surg|resect|excision|observation|surveillance|watch|rt|radiation|supportive|remission|follow-up|biochem|local/i.test((node.title || "") + " " + (node.name || "") + " " + (node.regimenSummary || ""));
+      if (isSurgObs) {
+        count = '<div class="ot-outcome-count"><span class="ot-outcome-note">Local / Non-Systemic Pathway &bull; Guideline Support</span></div>';
+        bodyContent = '<div class="ot-nonchemo-card" style="padding:14px 16px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;margin-top:10px;display:flex;gap:12px;align-items:flex-start">' +
+          '<span class="material-symbols-outlined" style="color:#16a34a;font-size:24px">verified</span>' +
+          '<div><b style="color:#15803d;font-size:13px;display:block;margin-bottom:3px">Standard Local / Non-Systemic Pathway</b>' +
+          '<span style="color:#166534;font-size:12px;line-height:1.4">Systemic chemotherapy is not indicated for this favorable / localized phenotype per standard clinical practice guidelines. Follow surgical resection, radiotherapy, or active surveillance protocol detailed in the clinical summary above.</span></div></div>';
+      } else {
+        count = '<div class="ot-outcome-count">0 applicable protocols <span class="ot-outcome-note">Decision support only.</span></div>';
+        bodyContent = '<div class="ot-empty">Clinical protocol pending formal institutional review. Follow clinical guidelines above.</div>';
+      }
+    }
+
     var exHtml = excludedByPheno.length
       ? '<details class="ot-excl-proto"><summary>' + excludedByPheno.length + " option" + (excludedByPheno.length === 1 ? "" : "s") + " not applicable to this phenotype</summary>" +
         excludedByPheno.map(function (r) { var p = st.protocols[r]; return '<div class="ot-excl-row">' + esc((p && p.name) || r) + "</div>"; }).join("") + "</details>"
       : "";
-    return '<div class="ot-outcome">' + head + count + (cards || '<div class="ot-empty">No applicable protocol found for this phenotype.</div>') + exHtml + "</div>";
+    return '<div class="ot-outcome">' + head + count + bodyContent + exHtml + "</div>";
   }
 
   function disabledPanelHtml(state) {

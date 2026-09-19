@@ -1,0 +1,86 @@
+{
+  "id": "wm-drc",
+  "diseaseId": "waldenstrom",
+  "name": "DRC: Dexamethasone + Rituximab + Cyclophosphamide (Waldenström Macroglobulinemia)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative",
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Waldenström Macroglobulinemia v1.2026"
+  },
+  "stage": [
+    "symptomatic"
+  ],
+  "treatmentSetting": [
+    "first-line"
+  ],
+  "histology": "lymphoplasmacytic lymphoma",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "8 mg PO",
+      "notes": "Prior to cyclophosphamide"
+    }
+  ],
+  "supportiveCare": [
+    "Hydration",
+    "Allopurinol for TLS prophylaxis"
+  ],
+  "monitoring": [
+    "CBC, CMP, Serum IgM"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "dexamethasone",
+      "name": "Dexamethasone",
+      "basis": "flat",
+      "dosePerUnit": 20,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Dexamethasone 20 mg IV on Day 1 prior to rituximab."
+    },
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Rituximab 375 mg/m2 IV on Day 1."
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "notes": "Cyclophosphamide 100 mg/m2 PO twice daily on Days 1-5."
+    }
+  ]
+}

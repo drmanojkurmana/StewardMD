@@ -117,22 +117,30 @@
     st.id = "smd-connect-css";
     st.textContent = [
       ".smd-connect-ov{position:fixed;inset:0;z-index:100000;background:rgba(7,17,25,.48);display:flex;align-items:flex-end;justify-content:center;padding:0}",
+      ".smd-connect-ov{position:fixed;inset:0;z-index:99998;display:flex;align-items:flex-end;justify-content:center;background:rgba(7,17,25,.48);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}",
       ".smd-connect-sheet{width:min(620px,100vw);max-height:92vh;display:flex;flex-direction:column;background:var(--panel,#fff);color:var(--ink,#14202b);border-radius:22px 22px 0 0;box-shadow:0 -18px 60px rgba(0,0,0,.22);font-family:var(--sans,system-ui);will-change:transform}",
+      ".smd-connect-ov[data-compact=\"true\"]{top:52%;height:48%;bottom:0;inset:52% 0 0 0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;align-items:stretch}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-sheet{height:100%;max-height:100%;border-radius:18px 18px 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.15);border-top:1px solid rgba(14,124,102,.25)}",
       ".smd-connect-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:0.75rem;padding:0.625rem 1rem calc(0.625rem + env(safe-area-inset-top));background:rgba(255,255,255,.6);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-top:1px solid rgba(255,255,255,.4);border-radius:22px 22px 0 0;touch-action:none;cursor:grab}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-bar{padding:0.5rem 1rem;border-radius:18px 18px 0 0;background:rgba(255,255,255,.95)}",
       ".smd-connect-grip{position:absolute;top:0.375rem;left:50%;width:2.5rem;height:0.25rem;margin-left:-1.25rem;border-radius:999px;background:var(--line,#d7dee3)}",
       ".smd-connect-title{font-size:1.0625rem;font-weight:800;line-height:1.2;letter-spacing:0}",
       ".smd-connect-sub{font-size:0.75rem;color:var(--slate-soft,#5a7184);margin-top:0.125rem;line-height:1.4;letter-spacing:0}",
       ".smd-connect-x{margin-left:auto;border:0;background:none;color:var(--slate-soft,#5a7184);font-size:1.5rem;line-height:1;min-width:2.75rem;min-height:2.75rem;cursor:pointer;border-radius:0.625rem}",
       ".smd-connect-body{overflow:auto;padding:0 1.125rem calc(1.5rem + env(safe-area-inset-bottom))}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-body{flex:1;overflow-y:auto;padding:0.25rem 1rem calc(0.5rem + env(safe-area-inset-bottom,0px))}",
       ".smd-connect-display{font-size:1.5rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin:1rem 0 0.25rem}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-display{font-size:1.125rem;font-weight:700;margin:0.375rem 0 0.125rem}",
       ".smd-connect-lead{font-size:0.875rem;line-height:1.5;letter-spacing:0;color:var(--slate,#2d4356);margin:0.25rem 0 0}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-lead{font-size:0.8125rem;margin:0 0 0.375rem}",
       ".smd-connect-card{border:1px solid var(--line,#d7dee3);border-radius:0.875rem;padding:0.875rem;margin:0.625rem 0;background:var(--paper,#f6f7f5)}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-card{padding:0.6875rem;margin:0.25rem 0 0.375rem;border-radius:0.75rem;box-shadow:0 1px 3px rgba(0,0,0,.04)}",
       ".smd-connect-label{display:block;font-size:0.75rem;font-weight:800;margin:0 0 0.375rem;letter-spacing:0}",
       ".smd-connect-input{width:100%;box-sizing:border-box;border:1px solid var(--line,#d7dee3);border-radius:0.625rem;padding:0.6875rem 0.75rem;background:var(--panel,#fff);color:var(--ink,#14202b);font:500 0.875rem var(--sans,system-ui);min-height:2.75rem}",
       ".smd-connect-row{display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;margin-top:0.625rem}",
-      ".smd-connect-btn{border:1px solid var(--line,#d7dee3);border-radius:0.625rem;padding:0.625rem 0.8125rem;background:var(--panel,#fff);color:var(--ink,#14202b);font:700 0.8125rem var(--sans,system-ui);cursor:pointer;min-height:2.75rem;letter-spacing:0}",
-      ".smd-connect-btn.primary{background:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);color:#fff}",
-      ".smd-connect-btn.danger{color:var(--red,#ab1c2c);border-color:var(--red-line,#efa9b1)}",
+      ".smd-connect-btn{border:1px solid var(--line,#d7dee3);border-radius:0.625rem;padding:0.5625rem 0.8125rem;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 0.8125rem var(--sans,system-ui);cursor:pointer;min-height:2.5rem;letter-spacing:0;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(0,0,0,.05);transition:all 120ms ease-out}",
+      ".smd-connect-btn.primary{background:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);color:#fff;box-shadow:0 1px 3px rgba(14,124,102,.25)}",
+      ".smd-connect-btn.danger{color:var(--red,#ab1c2c);border-color:var(--red-line,#efa9b1);background:rgba(171,28,44,.04)}",
       ".smd-connect-btn:disabled{opacity:.5;cursor:not-allowed}",
       ".smd-connect-btn:active{transform:scale(.97);transition:transform 100ms ease-out}",
       ".smd-connect-x:active{background:var(--paper,#f6f7f5)}",
@@ -153,6 +161,8 @@
       ".smd-connect-status.done{color:var(--green,#1c7a4a);font-weight:700}",
       ".smd-connect-status.warn{color:var(--amber,#92620a);font-weight:700}",
       ".smd-connect-status.bad{color:var(--red,#ab1c2c);font-weight:700}",
+      ".smd-connect-status:empty,#smd-connect-status:empty{display:none}",
+      ".smd-connect-ov[data-compact=\"true\"] #smd-connect-status-wrap{display:none!important}",
       ".smd-connect-stages{list-style:none;margin:0.625rem 0 0;padding:0;font-size:0.875rem;line-height:1.5}",
       ".smd-connect-stages li{display:flex;gap:0.625rem;align-items:baseline;padding:0.375rem 0;border-bottom:1px solid var(--line,#d7dee3);color:var(--slate-soft,#5a7184)}",
       ".smd-connect-stages li.on{color:var(--ink,#14202b);font-weight:700}",
@@ -160,42 +170,38 @@
       ".smd-connect-dot{flex:0 0 auto;width:0.625rem;height:0.625rem;border-radius:50%;background:var(--line,#d7dee3);transform:translateY(-0.0625rem)}",
       ".smd-connect-stages li.on .smd-connect-dot{background:var(--teal,#0e6e63)}",
       ".smd-connect-stages li.ok .smd-connect-dot{background:var(--green,#1c7a4a)}",
-      ".smd-connect-note{font-size:0.6875rem;line-height:1.5;letter-spacing:0;color:var(--slate-soft,#5a7184);margin-top:0.625rem}",
-      ".smd-connect-counts{display:flex;justify-content:space-between;margin-top:0}",
-      // The progress bar: a filled track that animates its width, so a run that is moving looks
-      // like it is moving. prefers-reduced-motion drops the animation, never the bar.
-      ".smd-connect-snake{display:flex;flex-direction:column;align-items:center;max-width:320px;margin:0.375rem auto}.smd-connect-snake canvas{max-width:100%;height:auto}",
+      ".smd-connect-note{font-size:0.6875rem;line-height:1.45;letter-spacing:0;color:var(--slate-soft,#5a7184);margin-top:0.375rem}",
+      ".smd-agent-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.5rem;padding-top:0.375rem;border-top:1px solid var(--line,#e2e8f0)}",
+      ".smd-connect-counts{display:flex;flex-direction:column;gap:0.125rem;background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:0.5rem;padding:0.375rem 0.625rem}",
+      ".smd-connect-counts span{font-size:0.6875rem;color:var(--slate-soft,#5a7184);font-weight:600;text-transform:uppercase;letter-spacing:0.03em}",
+      ".smd-connect-counts strong{font-size:1rem;color:var(--ink,#14202b);font-weight:700}",
+      ".smd-connect-snake{display:none!important}",
       ".smd-connect-modes{margin-top:0.75rem}.smd-connect-modes .smd-connect-checkrow{margin-top:0.5rem}.smd-connect-modes strong{color:var(--ink,#14202b)}",
       ".smd-connect-remove{min-height:2rem;padding:0.25rem 0.625rem;margin-left:0.5rem;font-size:0.75rem}",
-      ".smd-connect-prog{height:8px;border-radius:999px;background:rgba(20,32,43,.10);overflow:hidden;margin:2px 0 10px}",
-      ".smd-connect-prog>i{display:block;height:100%;border-radius:999px;background:#0E7C66;width:2%;transition:width .5s ease}",
+      ".smd-connect-prog{height:6px;border-radius:999px;background:rgba(20,32,43,.08);overflow:hidden;margin:2px 0 8px}",
+      ".smd-connect-prog>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#0E7C66 0%,#14B8A6 100%);width:2%;transition:width .5s ease}",
       "@media (prefers-reduced-motion: reduce){.smd-connect-prog>i{transition:none}}",
-      "#smd-connect-activity{flex:1;min-width:0}",
-      "#smd-connect-eta{white-space:nowrap;margin-left:10px;font-weight:600}",
+      "#smd-connect-activity{flex:1;min-width:0;font-size:0.8125rem;font-weight:600;color:var(--ink,#14202b)}",
+      "#smd-connect-eta{white-space:nowrap;margin-left:8px;font-weight:700;font-size:0.75rem;color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee);padding:2px 7px;border-radius:6px}",
       ".smd-connect-ov[data-motion=\"fade\"] .smd-connect-sheet{transition:opacity 160ms ease;transform:none!important}",
       "@media (prefers-reduced-motion: reduce){.smd-connect-sheet{transition:opacity 160ms ease;transform:none!important}.smd-connect-btn:active,.smd-connect-hosp:active,.smd-connect-x:active{transform:none}}",
       "@media (prefers-reduced-transparency: reduce){.smd-connect-bar{background:var(--panel,#fff);backdrop-filter:none;-webkit-backdrop-filter:none}.smd-connect-ov{background:rgba(7,17,25,.72)}}",
       "body.dark .smd-connect-ov{background:rgba(0,0,0,.65)}",
       "body.dark .smd-connect-bar{background:rgba(19,32,48,.72)}",
       "body.dark .smd-connect-hosp{background:var(--panel)}",
-      /* THE AGENT CONSOLE. While the agent reads, the hospital takes the top of the screen and this
-       * takes the bottom: what it is doing now, what it has found, and controls that actually reach
-       * the engine. Every control is a real signal, never decoration. */
-      ".smd-agent{display:flex;flex-direction:column;gap:0.625rem}",
-      ".smd-agent-now{display:flex;align-items:flex-start;gap:0.5rem}",
-      ".smd-agent-dot{flex:none;width:0.5rem;height:0.5rem;margin-top:0.375rem;border-radius:999px;background:#0E7C66;animation:smd-agent-pulse 1.6s ease-in-out infinite}",
-      ".smd-agent-dot.stalled{background:var(--amber,#b26a00);animation:none}",
-      "@keyframes smd-agent-pulse{0%,100%{opacity:1}50%{opacity:.35}}",
+      ".smd-agent{display:flex;flex-direction:column;gap:0.5rem}",
+      ".smd-agent-now{display:flex;align-items:center;gap:0.5rem}",
+      ".smd-agent-dot{flex:none;width:0.5rem;height:0.5rem;border-radius:999px;background:#0E7C66;box-shadow:0 0 0 3px rgba(14,124,102,.2);animation:smd-agent-pulse 1.6s ease-in-out infinite}",
+      ".smd-agent-dot.stalled{background:var(--amber,#b26a00);box-shadow:0 0 0 3px rgba(178,106,0,.2);animation:none}",
+      "@keyframes smd-agent-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.85)}}",
       "@media (prefers-reduced-motion: reduce){.smd-agent-dot{animation:none}}",
-      ".smd-agent-act{flex:1;min-width:0;font-weight:600;color:var(--ink,#14202b);line-height:1.45}",
+      ".smd-agent-act{flex:1;min-width:0;font-weight:600;color:var(--ink,#14202b);line-height:1.4}",
       ".smd-agent-sub{font-size:0.75rem;color:var(--muted-ink,#5b6b7a);margin-top:0.125rem;font-weight:400}",
-      ".smd-agent-chips{display:flex;flex-wrap:wrap;gap:0.375rem}",
-      ".smd-agent-chip{display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;border:1px solid var(--line,#d7dee3);color:var(--muted-ink,#5b6b7a);background:var(--panel,#fff)}",
-      ".smd-agent-chip.done{color:#0b5f52;border-color:rgba(14,124,102,.35);background:rgba(14,124,102,.08)}",
+      ".smd-agent-chips{display:flex;flex-wrap:wrap;gap:0.375rem;margin:0.25rem 0}",
+      ".smd-agent-chip{display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.5rem;border-radius:6px;font-size:0.6875rem;font-weight:600;border:1px solid var(--line,#d7dee3);color:var(--muted-ink,#5b6b7a);background:var(--panel,#fff)}",
+      ".smd-agent-chip.done{color:#0b5f52;border-color:rgba(14,124,102,.35);background:rgba(14,124,102,.08);font-weight:700}",
       ".smd-agent-chip svg{flex:none;width:0.75rem;height:0.75rem}",
-      /* The control bar pins to the bottom of the sheet: the agent can be stopped at any moment without
-       * scrolling, and the status and the game scroll underneath it. */
-      ".smd-agent-bar{position:sticky;bottom:0;z-index:3;background:var(--panel,#fff);border-top:1px solid var(--line,#d7dee3);padding:0.625rem 0 calc(0.625rem + env(safe-area-inset-bottom,0px));margin-top:0.5rem;display:flex;flex-direction:column;gap:0.5rem}",
+      ".smd-agent-bar{position:sticky;bottom:0;z-index:3;background:var(--panel,#fff);border-top:1px solid var(--line,#d7dee3);padding:0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom,0px));margin-top:0.375rem;display:flex;flex-direction:column;gap:0.375rem}",
       "body.dark .smd-agent-bar{background:var(--panel,#131f2f)}",
       ".smd-agent-acts{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}",
       ".smd-agent-acts .smd-connect-btn{width:100%}",
@@ -502,6 +508,11 @@
   function show(screen) {
     if (S && S.snake && screen !== "progress") stopSnake();
     if (S) S.screen = screen;
+    var ov = overlay();
+    if (ov) {
+      if (screen === "progress" && wantsCompact()) ov.setAttribute("data-compact", "true");
+      else ov.removeAttribute("data-compact");
+    }
     var render = {
       connections: renderConnections,
       url: renderUrl,
@@ -932,7 +943,10 @@
       '<button id="smd-connect-signedin" class="smd-connect-btn primary" type="button" style="width:100%">I have signed in, continue</button>' +
       '<div class="smd-connect-row"><button id="smd-connect-retryopen" class="smd-connect-btn" type="button">Try again</button>' +
       '<button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
-    setStatus("", S.statusText || "Opening the hospital website. Sign in, and the agent will notice on its own.");
+    /* Never head a fresh sign-in with the LAST attempt's failure. Coming back here after a failed
+     * discovery replayed "Discovery could not complete: observedViews: proof status invalid" above
+     * the words "Sign in to <hospital>", which reads as though signing in had just failed. */
+    setStatus("", (S.statusKind === "bad" ? "" : S.statusText) || "Opening the hospital website. Sign in, and the agent will notice on its own.");
     b.querySelector("#smd-connect-cancel").onclick = cancelSession;
     b.querySelector("#smd-connect-signedin").onclick = function () {
       if (S && !S.loginHandled) { S.loginHandled = true; stopPhoneSignInPoll(); doHandoff(); }
@@ -948,10 +962,23 @@
   }
 
   function openLoginPlugin() {
-    if (S.loginOpened) return;
-    S.loginOpened = true;
     var plugin = getPlugin();
     if (!plugin) { setStatus("bad", "The in-app browser is unavailable on this device."); return; }
+    /* THE FLAG IS NOT THE BROWSER. S.loginOpened records only that we once ASKED to open it. A
+     * session that comes BACK to this screen — discovery failed, the doctor tapped Try again, the
+     * job was resumed — still carries it set, so the open was skipped and the doctor was told to
+     * "sign in inside the hospital website that just opened" with nothing open at all. Observed on
+     * the owner's iPhone 2026-09-18: screen=login, currentUrl() answering "not-open", and only the
+     * Try again button (which clears the flag by hand) could recover it.
+     * Ask the browser what is true instead of trusting the flag. */
+    if (S.loginOpened) {
+      var reopen = function () { if (S) { S.loginOpened = false; openLoginPlugin(); } };
+      try {
+        Promise.resolve(plugin.currentUrl()).then(function (r) { if (!(r && r.url)) reopen(); }, reopen);
+      } catch (e) { reopen(); }
+      return;
+    }
+    S.loginOpened = true;
     var host = hostOf(S.selected.emrUrl);
     bindPluginListeners(plugin);
     loadPhoneEngine().then(function (engine) {
@@ -1288,6 +1315,8 @@
     S.lastProgressAt = Date.now();         // the clock the stall watchdog divides by
     S.guide = null;
     S.guideResolve = null;
+    S.statusText = "";
+    setStatus("", "");
     show("progress");
     loadPhoneEngine().then(function (engine) {
       if (!engine || !engine.runPhoneDiscovery) throw new Error("engine-unavailable");
@@ -1541,15 +1570,19 @@
   /* WHAT IT HAS AND WHAT IS LEFT, at a glance. SVG tick, never an emoji. */
   var TICK_SVG = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function agentChips(c) {
-    var out = "", i, n;
+    var out = "", i, n, seen = {};
     var found = c.found || [], looking = c.looking || [];
     for (i = 0; i < found.length; i++) {
       n = VIEW_NAMES[found[i]] || found[i];
+      if (!n || seen[n]) continue;
+      seen[n] = true;
       out += '<span class="smd-agent-chip done">' + TICK_SVG + esc(n) + "</span>";
     }
     for (i = 0; i < looking.length; i++) {
       n = VIEW_NAMES[looking[i]];
-      if (n) out += '<span class="smd-agent-chip">' + esc(n) + "</span>";
+      if (!n || seen[n]) continue;
+      seen[n] = true;
+      out += '<span class="smd-agent-chip">' + esc(n) + "</span>";
     }
     return out ? '<div class="smd-agent-chips" aria-label="What the agent has found so far">' + out + "</div>" : "";
   }
@@ -1565,8 +1598,10 @@
     return '<div class="smd-connect-card smd-agent">' +
       progressBar() +
       agentChips(c) +
+      '<div class="smd-agent-stats">' +
       '<div class="smd-connect-row smd-connect-counts"><span>Pages visited</span><strong id="smd-connect-pages">' + c.pages + '</strong></div>' +
       '<div class="smd-connect-row smd-connect-counts"><span>Requests observed</span><strong id="smd-connect-reqs">' + c.requests + '</strong></div>' +
+      '</div>' +
       '</div>';
   }
 
@@ -1580,7 +1615,7 @@
       '<p id="smd-connect-phase" class="smd-connect-lead">' + phaseLabel(S.guide ? "ASKING" : c.phase) + '</p>' +
       '<div id="smd-connect-detail">' + progressDetail() + '</div>' +
       '<div class="smd-connect-note">' + (isManual() ? "Keep your phone unlocked and StewardMD open until every step is answered." : "Keep your phone unlocked and StewardMD open. Locking the screen stops the agent. This takes a few minutes.") + '</div>' +
-      (isManual() ? "" : '<div id="smd-connect-snake" class="smd-connect-snake" aria-label="A small game while you wait"></div>') +
+      (isManual() ? "" : '<div id="smd-connect-snake" class="smd-connect-snake" style="display:none;" aria-hidden="true"></div>') +
       /* CONTROLS THAT REACH THE ENGINE. Each one is a real signal the run checks, never decoration:
        * a control the doctor can press that does nothing is worse than no control at all.
        *
@@ -1669,10 +1704,7 @@
   function mountSnake(el) {
     if (!el) return;
     stopSnake();
-    loadSnake().then(function (game) {
-      if (!game || !S || S.screen !== "progress" || !el.isConnected) return;
-      try { S.snake = game.mount(el, {}); } catch (e) { S.snake = null; }
-    });
+    // Snake game visuals are suppressed in production UI for a clean clinical presentation
   }
   function stopSnake() {
     if (S && S.snake) { try { S.snake.stop(); } catch (e) {} S.snake = null; }
@@ -2051,7 +2083,7 @@
       '<div class="smd-connect-sub">Sign in yourself. StewardMD reads only.</div></div>' +
       '<button class="smd-connect-x" type="button" aria-label="Close">×</button></div>' +
       '<div class="smd-connect-body" id="smd-connect-body"></div>' +
-      '<div style="padding:0 1.125rem calc(1rem + env(safe-area-inset-bottom))"><div id="smd-connect-status" class="smd-connect-status" role="status" aria-live="polite"></div></div>' +
+      '<div id="smd-connect-status-wrap" style="padding:0 1.125rem calc(1rem + env(safe-area-inset-bottom))"><div id="smd-connect-status" class="smd-connect-status" role="status" aria-live="polite"></div></div>' +
       '</section>';
     document.body.appendChild(ov);
     ov.querySelector(".smd-connect-x").onclick = function () { close(); };
@@ -2076,6 +2108,9 @@
     __reloadConnections: function () { if (S) loadConnections(); },
     __setState: function (patch) { if (!S) return; for (var k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) S[k] = patch[k]; },
     __paintProgress: function () { if (S && S.screen === "progress") { renderProgress(); } },
+    /* Test-only: re-enter the sign-in screen the way a resumed or retried session does, so the
+     * "open the hospital website again if it is not actually open" repair is provable. */
+    __paintLogin: function () { if (S && S.screen === "login") { renderLogin(); } },
     __publishBanner: function () { publishBannerProgress(); },
     __debug: function () {
       if (!S) return { open: !!overlay() };

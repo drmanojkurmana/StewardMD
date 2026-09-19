@@ -1,0 +1,119 @@
+{
+  "id": "peds-neuroblastoma-dit",
+  "diseaseId": "neuroblastoma",
+  "name": "Dinutuximab + Irinotecan + Temozolomide (D-I/T) (Relapsed/Refractory Neuroblastoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pediatric Neuroblastoma v2.2026",
+    "textbook": "Principles and Practice of Pediatric Oncology, 8th ed."
+  },
+  "institution": {
+    "provenance": "COG ANBL1221 Randomized Phase II Study (Mody et al. Lancet Oncol 2017)",
+    "approval": null
+  },
+  "stage": [
+    "relapsed",
+    "refractory"
+  ],
+  "treatmentSetting": [
+    "salvage",
+    "second-line"
+  ],
+  "histology": "neuroblastoma (relapsed or refractory)",
+  "premedications": [
+    {
+      "name": "Hydromorphone or Morphine continuous IV",
+      "dose": "Opioid continuous infusion",
+      "notes": "Mandatory: continuous opioid infusion during dinutuximab for neuropathic pain control"
+    },
+    {
+      "name": "Diphenhydramine",
+      "dose": "0.5-1 mg/kg IV (max 50 mg)",
+      "notes": "Administer 30 minutes prior to dinutuximab"
+    },
+    {
+      "name": "Acetaminophen",
+      "dose": "10-15 mg/kg PO/IV (max 650 mg)",
+      "notes": "Administer 30 minutes prior to dinutuximab"
+    },
+    {
+      "name": "Cefixime or Ciprofloxacin",
+      "dose": "Per pediatric infectious disease guidelines",
+      "notes": "Prophylaxis against irinotecan-induced bacterial translocation/diarrhea"
+    }
+  ],
+  "supportiveCare": [
+    "Loperamide at first sign of loose stool after irinotecan (pediatric weight-tiered dosing)",
+    "Filgrastim (G-CSF) 5 mcg/kg/day SC starting day 7 until count recovery",
+    "Hydration and monitoring for capillary leak syndrome"
+  ],
+  "monitoring": [
+    "Vitals q15m during first hour of dinutuximab, then q30m-1h",
+    "CBC with differential twice weekly",
+    "CMP and electrolytes every 2-3 days during inpatient chemoimmunotherapy"
+  ],
+  "clearanceChecks": [
+    "ANC >= 750/mcL, Platelets >= 50,000/mcL",
+    "Serum creatinine <= 1.5x ULN",
+    "Direct bilirubin <= 1.5x ULN, AST/ALT <= 3x ULN"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "irinotecan",
+      "name": "Irinotecan",
+      "basis": "bsa",
+      "dosePerUnit": 50,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "notes": "Irinotecan 50 mg/m2/day IV over 90 minutes on Days 1-5."
+    },
+    {
+      "id": "temozolomide",
+      "name": "Temozolomide",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "notes": "Temozolomide 100 mg/m2/day PO once daily on Days 1-5 (administered on an empty stomach at bedtime or 1 hour before dinutuximab)."
+    },
+    {
+      "id": "dinutuximab",
+      "name": "Dinutuximab",
+      "basis": "bsa",
+      "dosePerUnit": 17.5,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "notes": "Dinutuximab 17.5 mg/m2/day continuous IV infusion over 10-20 hours on Days 2-5 (total 70 mg/m2/cycle) with concurrent opioid analgesia per COG ANBL1221."
+    }
+  ]
+}

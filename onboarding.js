@@ -381,6 +381,7 @@
           (_step > 0 ? '<button class="smdt-b gho" data-t="back">Back</button>' : "") +
           '<button class="smdt-b pri" data-t="next">' + esc(s.cta || (last ? "Done" : "Next")) + "</button>" +
         "</div>");
+    _card.style.visibility = "visible";
     // tap steps let the user touch the real/demo control; non-tap steps block the backdrop.
     _block.style.display = tap ? "none" : "block";
     var spot = positionSpot(tgt); positionCard(spot);
@@ -406,6 +407,9 @@
     var s = _run.steps[i];
     _settled = false;   // suppress the re-sync loop until this step has painted
     showChromeForRun();
+    // The card is shown but EMPTY until the controller has opened the step's screen (a sheet, MaiK,
+    // the sidebar): keep it invisible in that gap so no blank box flashes over the animation.
+    if (_card) _card.style.visibility = "hidden";
     // hide card until the target screen is ready to avoid a flash on the wrong screen
     _run.enter(s, function () {
       // Real-UI step whose element isn't present → skip it (in the current direction) rather than
@@ -757,6 +761,7 @@
           card(obIco("grid"), "App overview", "Find your way around home · 1 min", "app") +
           card(obIco("heart"), "ICU Dashboard", "The full clinical workflow · 2 min", "icu") +
         "</div>" +
+        guideCardsHTML() +
       "</div>";
     _replayEl.style.display = "flex";
     _replayEl.onclick = function (e) {
@@ -765,6 +770,7 @@
       if (v === "welcome") showWelcome(true);
       else if (v === "app") startAppTour();
       else if (v === "icu") startIcuTour();
+      else if (v && v.indexOf("guide:") === 0) startGuide(v.slice(6));
     };
   }
   function closeReplay() { if (_replayEl) { _replayEl.style.display = "none"; _replayEl.onclick = null; } }
@@ -836,15 +842,177 @@
     try { if (localStorage.getItem("stewardmd_icu_seen") !== "1") localStorage.setItem("stewardmd_icu_seen", "1"); } catch (e) {}
   }
 
+  // ---- FEATURE GUIDES (2026-09-19) --------------------------------------------------------
+  // Owner: "the guide should run on the screen, like the app tours". Eight walkthroughs on the same
+  // spotlight engine as the App / ICU tours, one per module group, that OPEN the real screens
+  // (Hospital sheet, MaiK, Calculators, Drugs, the sidebar, More) and spotlight the real controls.
+  // Every step is optional: a control that is not on this build (a gated module, a hidden tile)
+  // is skipped, never shown as a coach-mark over nothing. `screen` tells the controller where the
+  // control lives; gotoScreen() closes whatever is open and opens that screen before the step paints.
+  // Copy rule: no em-dash (CLAUDE.md). Nothing here changes app state beyond opening/closing screens.
+  var GUIDES = [
+    { id: "home", icon: "grid", name: "Home and navigation", sub: "Where everything starts · 1 min", steps: [
+      { screen: "home", sel: '[data-act="startcase"],.rnav-qa', title: "Start a case", body: "Tap Start case to open a structured clinical decision: findings in, differential and management out. Everything you save lands in My Cases." },
+      { screen: "home", sel: '[data-act="reasoning"]', title: "Dx Patient: the live differential", body: "Dx Patient is the reasoning engine. Add findings and watch the differential re-rank as you go. It works offline." },
+      { screen: "home", sel: '[data-act="search"]', title: "One search for everything", body: "Search syndromes, drugs, calculators and tools from one box and jump straight to the matching screen." },
+      { screen: "home", sel: '[data-act="cases"]', title: "My Cases", body: "Every assessment you saved, reopened with all findings and the full recommendation restored. Cases sync across devices on Pro." },
+      { screen: "home", sel: '[data-act="askai"]', title: "MaiK, your AI resident", body: "The centre button opens MaiK. Ask the case, dictate a note, attach an image. Named scores open their calculator for free." },
+      { screen: "home", sel: '[data-act="hospital"]', title: "Hospital: the patient hub", body: "ICU and Ward, Ward Sync, OPD Queue, FollowCare, Prescription and Connect all live under Hospital." },
+      { screen: "home", sel: '[data-act="notifications"]', title: "Alerts", body: "Lab Watch results, referrals, unit activity and updates arrive here. Allow notifications the first time the app asks." },
+      { screen: "home", sel: '[data-act="menu"]', title: "The sidebar", body: "Calculators, Drugs, Guidelines, RadioAnatome, My Clinic, Experimental Features and Settings. Tap the menu icon any time." },
+      { screen: "home", sel: '[data-act="more"]', title: "More", body: "Profile and StewardMD ID, Subscription, AI Usage, NMC eLOGBook, notification preferences, display, help and this guide." },
+      { screen: "home", sel: '[data-act="theme"]', title: "Dark or light", body: "Tap the sun or moon to switch. Appearance and fonts live in Settings; the choice is remembered." }
+    ] },
+    { id: "reasoning", icon: "brain", name: "Clinical reasoning", sub: "Differential, syndromes, antibiogram · 1 min", steps: [
+      { screen: "dx", sel: "#dxAddNew", title: "Reason from the bedside", body: "Add General findings, pick the involved system, then its findings. The differential appears once three meaningful findings are in (or one highly specific one)." },
+      { screen: "dx", sel: "#dxAddNew", title: "Read a card like a consultant", body: "Infectious and Non-infectious cards, each with a Clinical Confidence Score. Expand one for Supporting, Contradictory and Missing findings, red flags and investigations. It is weighted evidence, not a probability." },
+      { screen: "dx", sel: "#dxImportPt", title: "Import the patient", body: "Pull labs, imaging and cultures from Ward Sync straight into the case, then add symptoms on top." },
+      { screen: "home", sel: '[data-act="syndromes"]', title: "Syndromes", body: "Start from the syndrome instead: empiric to definitive therapy, likely organisms, coverage, dose, route, duration and de-escalation, with the hospital policy and AWaRe class on every drug." },
+      { screen: "home", sel: '[data-act="antibiogram"]', title: "Antibiogram", body: "Local susceptibility by organism and specimen. The ICMR antibiogram is built in when no local one is loaded." },
+      { screen: "home", sel: '[data-act="guidelines"]', title: "Guidelines and protocols", body: "Surviving Sepsis, IDSA, ICMR, WHO, GOLD, NICE and more, offline. Every recommendation in the app carries its source badge." },
+      { screen: "home", sel: null, title: "The antibiotic gate", cta: "Done", body: "Before any antibiotic is suggested the case is graded from Infection very likely to Non-infectious favoured. Antibiotics surface only when infection genuinely leads, with sepsis and febrile-neutropenia safety rules. StewardMD supports the decision; you make it." }
+    ] },
+    { id: "maik", icon: "spark", name: "MaiK AI", sub: "Ask, dictate, attach, review · 1 min", steps: [
+      { screen: "maik", sel: "#maikQ", title: "Ask the case", body: "Type a plain-language question. With a case open MaiK reads it. Name a score (HACOR, CURB-65, qSOFA) and the calculator opens instead of a model answer: zero tokens." },
+      { screen: "maik", sel: "#maikSend", title: "Send", body: "Answers are grounded in the StewardMD Knowledge Base with the citation beside the claim. Chips under an answer open the calculator, the Drug Index or a follow-up." },
+      { screen: "maik", sel: "#maikMic", title: "Dictate: MaiK Scribe", body: "Hold the microphone and speak the history and examination. A structured note comes back to review, edit and sign. Read every line before it enters the record." },
+      { screen: "maik", sel: "#maikImg,#maikExtract", title: "Attach an image", body: "With an on-device model loaded a camera button appears here: photograph an ECG, a chest film, a fundus or a lesion and ask about it. Imaging AI is decision support: it never makes the diagnosis." },
+      { screen: "maik", sel: "#maikResearch", title: "Evidence Review", body: "A cited answer on a management question, references listed, each one openable to the source passage." },
+      { screen: "maik", sel: "#maikExtract", title: "Extract findings", body: "Turn a pasted vignette or a dictated history into structured findings for the reasoning engine." },
+      { screen: "maik", sel: "#maikNew,#maikMenu", title: "Threads", body: "Start a new thread for a new patient; earlier threads stay in the side list. Free accounts have a monthly AI allowance; Pro removes the cap." }
+    ] },
+    { id: "drugs", icon: "pills", name: "Drugs and prescribing", sub: "Database, interactions, dosing, Rx · 1 min", steps: [
+      { screen: "drugs", sel: '[data-mi="db"]', title: "Drug Database", body: "Brands, doses, spectrum and cautions, offline. Renal, hepatic and QT flags appear on advice." },
+      { screen: "drugs", sel: '[data-mi="ix"]', title: "Interaction Checker", body: "Add two or more drugs and read the interactions with severity and what to do. Scan-Meds can fill this list from a photo of the strips." },
+      { screen: "dosing", sel: '[data-mi="ins"]', title: "Insulin", body: "Bolus, correction and basal dosing, sliding scales, a regimen library and conversions. Ask MaiK inside it to fill the form; it never answers the dose for you." },
+      { screen: "dosing", sel: '[data-mi="ely"]', title: "Electrolyte correction", body: "Sodium, potassium, calcium, magnesium and phosphate correction with the ICU rates and the safety limits shown." },
+      { screen: "hospital", sel: '[data-mi="rx"]', title: "Prescription: Create", body: "Database-driven dosing and a clean printable prescription, exported as PDF or image. Requires a verified registration." },
+      { screen: "hospital", sel: '[data-mi="rxverify"]', title: "Prescription: Verify", body: "Check a prescription written elsewhere for interactions and dose ranges. Anyone can verify; only verified doctors can create." }
+    ] },
+    { id: "calculators", icon: "calc", name: "Calculators", sub: "Hundreds of scores, by name · 30s", steps: [
+      { screen: "calc", sel: "#mcSearch", title: "Search by name", body: "CURB-65, HACOR, CrCl, MELD, CHA2DS2-VASc. Type the name; the calculator opens with its inputs, interpretation and citation." },
+      { screen: "calc", sel: ".mc-cats", title: "Browse by category", body: "Swipe the category rail: cardiology, critical care, renal, hepatology, neurology and more." },
+      { screen: "calc", sel: ".mc-list,.mc-body", title: "Fill and read", body: "Enter the values; the score, the band and the source appear below. Age fields expect a plausible age and say so rather than returning a wrong number." },
+      { screen: "calc", sel: null, title: "Ask MaiK by name", cta: "Done", body: "In MaiK, typing a score's name opens the same calculator and costs nothing. Related calculators also appear on diagnosis cards when they matter." }
+    ] },
+    { id: "hospital", icon: "hospital", name: "Hospital: ICU, Ward, clinic", sub: "Ward Sync, Lab Watch, OPD, FollowCare · 1 min", steps: [
+      { screen: "hospital", sel: '[data-mi="icu"]', title: "ICU and Ward", body: "Critical care and inpatient boards shared with the team: MAP, lactate, urine output, drips, tasks, rounds and handover." },
+      { screen: "hospital", sel: '[data-mi="ward"]', title: "Ward Sync and Lab Watch", body: "Your live inpatient list with labs and radiology from the hospital system. Tap Watch labs on an admission for an alert the moment a critical result lands, even with the app closed." },
+      { screen: "hospital", sel: '[data-mi="opd"]', title: "OPD Queue", body: "Tokens, live wait times and a display board from any phone in the clinic. Use My Clinic for the visit note." },
+      { screen: "hospital", sel: '[data-mi="followcare"]', title: "FollowCare", body: "Scheduled WhatsApp or SMS check-ins after discharge, escalated to you when a reply is worrying. It never changes a prescription, never diagnoses and never stops a medicine." },
+      { screen: "hospital", sel: '[data-mi="oncotree"]', title: "OncoTree", body: "Walk the cancer pathway for the tumour type." },
+      { screen: "hospital", sel: '[data-mi="protocol"]', title: "Protocol", body: "Assign a treatment protocol to a patient and track the cycles." },
+      { screen: "hospital", sel: '[data-mi="connect"]', title: "Connect", body: "Link the app to the hospital's system. Once linked, Ward Sync, lab orders and My Clinic work for that hospital." },
+      { screen: "hospital", sel: null, title: "Take the ICU walkthrough", cta: "Start ICU tour", then: "icu", body: "The ICU tour opens the real dashboard on a demo patient and walks board, patient, monitoring, rounds and handover end to end." }
+    ] },
+    { id: "imaging", icon: "scan", name: "Imaging AI and learning", sub: "KardiQ X, ThoreX, FundX, SknX, CliniX, SURGX, Logbook · 1 min", steps: [
+      { screen: "sidebar", sel: '[data-sbr-act="settings"]', title: "Settings, then Experimental Features", body: "The Beta modules live under Settings: the four image readers, CliniX for students and SURGX for surgeons. Each is decision support under clinical evaluation." },
+      { screen: "sidebar-exp", sel: '[data-sbr-tg="kardiox"]', title: "KardiQ X: the ECG", body: "Photograph the 12-lead flat and in good light. Rhythm, intervals and the STEMI question, with the confidence shown. Treat a flag as a prompt to look, not a result to act on." },
+      { screen: "sidebar-exp", sel: '[data-sbr-tg="thorex"]', title: "ThoreX: the chest film", body: "On-device chest radiograph interpretation: consolidation, effusion, pneumothorax, cardiomegaly, flagged for your review." },
+      { screen: "sidebar-exp", sel: '[data-sbr-tg="fundx"]', title: "FundX: the retina", body: "Smartphone fundus imaging support with retinal red flags and referral advice." },
+      { screen: "sidebar-exp", sel: '[data-sbr-tg="sknx"]', title: "SknX: the lesion", body: "A lesion photo with a scale reference, a short history, and a differential with the next step." },
+      { screen: "sidebar-exp", sel: '[data-sbr-tg="clinix"]', title: "CliniX for students", body: "Clinical learning and bedside skills, step by step. Content is pending release sign-off; treat it as draft." },
+      { screen: "sidebar-exp", sel: '[data-sbr-tg="surgx"]', title: "SURGX for surgeons", body: "Notes, protocols, procedures, evidence and a case mentor. Notes are encrypted on this device and never leave it; export before you reinstall." },
+      { screen: "sidebar", sel: '[data-sbr-act="atlas"]', title: "RadioAnatome", body: "Labelled radiological anatomy for reference and teaching. The ECG atlas lives inside KardiQ X, under Learn." },
+      { screen: "more", sel: '[data-mi="pglog"]', title: "NMC eLOGBook", body: "The PG digital logbook under PGMER-2023: log cases as they happen, submit the week, your guide authenticates monthly, export in the council's format." }
+    ] },
+    { id: "account", icon: "user", name: "Account and settings", sub: "Verification, Pro, alerts, help · 1 min", steps: [
+      { screen: "more", sel: '[data-mi="account"]', title: "Profile and StewardMD ID", body: "Your permanent SMD-XXXXXX handle, the registration status and your professional details. Colleagues add you to a unit by this ID." },
+      { screen: "more", sel: '[data-mi="account"]', title: "Verification", body: "Upload the NMC or State Medical Council certificate, or the registration number with a photo ID. Verified doctors unlock prescribing and get Pro free for 7 days. Your mobile number is verified by a WhatsApp code, SMS as backup." },
+      { screen: "more", sel: '[data-mi="subscription"]', title: "Subscription", body: "Trainee, Co-Resident, Pro, Physician and yearly plans, quoted per day. The clinical engine, calculators, drugs and reference stay free forever." },
+      { screen: "more", sel: '[data-mi="aiusage"]', title: "AI Usage", body: "MaiK tokens used today, the remaining allowance and the top-up packs." },
+      { screen: "more", sel: '[data-mi="notifprefs"]', title: "Notification preferences", body: "Choose what reaches you: tasks, labs, guidelines, unit activity. Critical and overdue alerts always come through." },
+      { screen: "more", sel: '[data-mi="display"]', title: "Display and accessibility", body: "Font size, density and auto-fit. Themes and typefaces, including Atkinson Hyperlegible and Lexend, are under Appearance in the sidebar." },
+      { screen: "more", sel: '[data-mi="help"]', title: "Help and support", body: "Contact the team and track your requests. Feature news email can be switched off with the Unsubscribe button in any such email; account notices always arrive." },
+      { screen: "more", sel: '[data-mi="disclaimer"]', title: "The rules the app follows", body: "Clinical decision support and an educational aid: verify every dose and recommendation against the primary source. No confirmed diagnoses. Patient details never leave the device in notifications, SMS or logs." }
+    ] }
+  ];
+
+  var _gScreen = null;
+  function gHomeAct(act) {
+    var b = firstPresent('[data-act="' + act + '"]', document.getElementById("homeV2") || document);
+    if (b) { try { b.click(); return true; } catch (e) {} }
+    return false;
+  }
+  function gCloseAll() {
+    try { var s = document.getElementById("hvSheet"), sc = document.getElementById("hvScrim"); if (s) s.classList.remove("on"); if (sc) sc.classList.remove("on"); document.body.classList.remove("hv-sheet-open"); } catch (e) {}
+    try { var mc = document.getElementById("maikClose"); if (mc && visible(mc)) mc.click(); } catch (e) {}
+    try { if (window.MEDCALC && MEDCALC.close) MEDCALC.close(); } catch (e) {}
+    try { var ovs = document.querySelectorAll(".sbr-set-ov"); for (var i = ovs.length - 1; i >= 0; i--) ovs[i].remove(); } catch (e) {}
+    try { if (window.SB && SB.close) SB.close(); } catch (e) {}
+    _gScreen = null;
+  }
+  // Open the screen a step lives on. Same screen as the previous step: nothing moves.
+  function gotoScreen(name, cb) {
+    if (_gScreen === name) { cb(); return; }
+    var wasOpen = _gScreen != null;
+    gCloseAll();
+    setTimeout(function () {
+      _gScreen = name;
+      if (name === "home") { cb(); return; }
+      if (name === "hospital") gHomeAct("hospital");
+      else if (name === "drugs") gHomeAct("drugmenu");
+      else if (name === "dosing") gHomeAct("dosing");
+      else if (name === "more") gHomeAct("more");
+      else if (name === "dx") gHomeAct("reasoning");
+      else if (name === "maik") { try { if (window.SMD_askMaik) SMD_askMaik(""); } catch (e) {} }
+      else if (name === "calc") { try { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); } catch (e) {} }
+      else if (name === "sidebar" || name === "sidebar-exp") {
+        try { if (window.SB && SB.open) SB.open(); } catch (e) {}
+        // The Experimental Features page is a page inside Settings (sidebar-redesign.js): open
+        // Settings from the drawer, then Experimental from Settings. Both stack as .sbr-set-ov.
+        if (name === "sidebar-exp") setTimeout(function () {
+          var st = firstPresent('#sbDrawer [data-sbr-act="settings"]'); if (st) { try { st.click(); } catch (e) {} }
+          setTimeout(function () { var x = firstPresent('.sbr-set-ov [data-sbr-act="experimental"]'); if (x) { try { x.click(); } catch (e) {} } }, 300);
+        }, 260);
+      }
+      setTimeout(cb, name === "sidebar-exp" ? 1000 : 420);
+    }, wasOpen ? 340 : 60);
+  }
+  function guideScope(s) {
+    if (s.screen === "sidebar-exp") return document.querySelector(".sbr-exp-ov") || document.querySelector(".sbr-set-ov") || document.getElementById("sbDrawer") || document;
+    if (s.screen === "sidebar") return document.getElementById("sbDrawer") || document;
+    if (s.screen === "maik") return document.getElementById("maikSheet") || document;
+    if (s.screen === "calc") return document.getElementById("mcOverlay") || document;
+    if (s.screen === "hospital" || s.screen === "drugs" || s.screen === "dosing" || s.screen === "more" || s.screen === "dx") return document.getElementById("hvSheet") || document;
+    return document.getElementById("homeV2") || document;
+  }
+  function guideController(g) {
+    var steps = g.steps.map(function (s) { return s.sel ? Object.assign({ optional: true }, s) : s; });
+    return {
+      id: "guide:" + g.id, icon: obIco(g.icon), live: false, steps: steps,
+      scope: function () { return document; },
+      resolve: function (s) { return s.sel ? firstPresent(s.sel, guideScope(s)) : null; },
+      enter: function (s, cb) { gotoScreen(s.screen || "home", cb); },
+      onDomTap: function () { return false; },
+      finish: function () { gCloseAll(); }
+    };
+  }
+  function guideById(id) { for (var i = 0; i < GUIDES.length; i++) if (GUIDES[i].id === id) return GUIDES[i]; return null; }
+  function startGuide(id) {
+    var g = guideById(id); if (!g) { openReplay(); return; }
+    markLaunch();
+    startRun(guideController(g), 0);
+  }
+  function guideCardsHTML() {
+    var h = '<div class="smdt-rp-h">Feature guides</div><p class="smdt-rp-p">Each guide opens the real screens and points at the real controls. Skip any time; nothing you have entered is changed.</p><div class="smdt-rp-list">';
+    for (var i = 0; i < GUIDES.length; i++) {
+      var g = GUIDES[i];
+      h += '<div class="smdt-rp-card"><span class="e">' + obIco(g.icon) + '</span><div class="m"><div class="n">' + esc(g.name) + '</div><div class="s">' + esc(g.sub) + '</div></div><button class="smdt-rp-go" data-rp="guide:' + esc(g.id) + '">Start</button></div>';
+    }
+    return h + "</div>";
+  }
+
   // ---- public API --------------------------------------------------------------------------
   window.SMD_TOUR = {
-    // start(id) — 'welcome' | 'app' | 'icu'. Any other value (incl. legacy {replay:true}) opens the chooser.
+    // start(id) — 'welcome' | 'app' | 'icu' | 'guide:<id>'. Any other value (incl. legacy {replay:true}) opens the chooser.
     start: function (opts) {
       try {
         var id = typeof opts === "string" ? opts : (opts && opts.tour);
         if (id === "welcome") return showWelcome(true);
         if (id === "app") return startAppTour();
         if (id === "icu") return startIcuTour();
+        if (id && String(id).indexOf("guide:") === 0) return startGuide(String(id).slice(6));
         return openReplay();
       } catch (e) {}
     },
@@ -852,6 +1020,9 @@
     welcome: function () { try { showWelcome(true); } catch (e) {} },
     app: function () { try { startAppTour(); } catch (e) {} },
     icu: function () { try { startIcuTour(); } catch (e) {} },
+    // Feature guides (2026-09-19): guide(id) starts one; guides() lists { id, name, sub, steps }.
+    guide: function (id) { try { startGuide(id); } catch (e) {} },
+    guides: function () { return GUIDES.map(function (g) { return { id: g.id, name: g.name, sub: g.sub, steps: g.steps.length }; }); },
     maybeAuto: maybeAuto,
     reset: function () { try { localStorage.removeItem(skey()); } catch (e) {} },
     version: TOUR_VERSION

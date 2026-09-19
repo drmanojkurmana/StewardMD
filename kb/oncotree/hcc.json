@@ -8,12 +8,26 @@
   "status": "draft",
   "provenanceNote": "Comprehensive NCCN v2.2026 (NCCN Guidelines Version 2.2026) clinical navigator for Hepatocellular Carcinoma. Full pathway: diagnostic workup (ACR LI-RADS imaging, AFP, Child-Pugh / ALBI, variceal screening, viral serologies) -> diagnostic confirmation -> Child-Pugh + performance status -> BCLC stage -> stage-directed arms, each refined by response / line of therapy before a recommendation. Curative arms: resection for solitary tumor without vascular invasion with preserved function, liver transplantation within Milan criteria (solitary <= 5 cm, or up to 3 lesions each <= 3 cm, no macrovascular invasion or extrahepatic spread), thermal ablation (RFA / MWA) for tumors <= 3 cm (Category 1), and downstaging toward transplant. Intermediate BCLC B: TACE or Y-90 radioembolization, then response / refractoriness triage. Advanced disease: preferred Category 1 first-line atezolizumab + bevacizumab (IMbrave150; variceal screening required) or durvalumab + tremelimumab STRIDE single high-dose priming (HIMALAYA; preferred when bevacizumab / bleeding risk contraindicated), with lenvatinib (REFLECT) or sorafenib (SHARP) as Category 1 alternatives when immunotherapy is contraindicated; biomarker-directed subsequent lines cabozantinib (CELESTIAL), regorafenib post-sorafenib (RESORCE), ramucirumab for AFP >= 400 ng/mL (REACH-2), or nivolumab + ipilimumab. Regimen options reference existing StewardMD Standard Protocols where available; agents without a matching protocol are shown as checklist guidance with NO dose. Workup / staging / surveillance wording is standard oncology, not proprietary guideline text. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
   "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Hepatocellular Carcinoma Version 2.2026 (August 14, 2026).",
-  "startNodeIds": ["n_workup"],
+  "startNodeIds": [
+    "n_workup"
+  ],
   "footnotes": {
-    "a": { "text": "Preferred Category 1 first-line options for advanced Child-Pugh A disease with adequate performance status: atezolizumab + bevacizumab (IMbrave150) or durvalumab + tremelimumab STRIDE single high-dose priming (HIMALAYA; preferred when bevacizumab / bleeding risk is contraindicated). Screen for and manage esophageal varices before starting any bevacizumab-containing regimen because of the anti-VEGF bleeding risk.", "evidence": "1" },
-    "b": { "text": "Systemic therapy data are strongest in Child-Pugh A. Child-Pugh B is under-represented in trials; treat selectively with close monitoring and avoid systemic anticancer therapy in decompensated (Child-Pugh C) liver disease.", "evidence": "2A" },
-    "c": { "text": "Using ACR LI-RADS criteria on multiphase contrast CT or dynamic contrast liver MRI: LR-5 is definitive for HCC without biopsy in patients with cirrhosis or chronic HBV. Biopsy is reserved for indeterminate lesions or a non-cirrhotic, non-HBV liver.", "evidence": "2A" },
-    "d": { "text": "Transplant candidacy is generally judged against accepted size / number thresholds (e.g. Milan criteria); tumors beyond criteria may be considered for downstaging before listing, with a defined observation interval to select favorable biology.", "evidence": "2A" }
+    "a": {
+      "text": "Preferred Category 1 first-line options for advanced Child-Pugh A disease with adequate performance status: atezolizumab + bevacizumab (IMbrave150) or durvalumab + tremelimumab STRIDE single high-dose priming (HIMALAYA; preferred when bevacizumab / bleeding risk is contraindicated). Screen for and manage esophageal varices before starting any bevacizumab-containing regimen because of the anti-VEGF bleeding risk.",
+      "evidence": "1"
+    },
+    "b": {
+      "text": "Systemic therapy data are strongest in Child-Pugh A. Child-Pugh B is under-represented in trials; treat selectively with close monitoring and avoid systemic anticancer therapy in decompensated (Child-Pugh C) liver disease.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Using ACR LI-RADS criteria on multiphase contrast CT or dynamic contrast liver MRI: LR-5 is definitive for HCC without biopsy in patients with cirrhosis or chronic HBV. Biopsy is reserved for indeterminate lesions or a non-cirrhotic, non-HBV liver.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Transplant candidacy is generally judged against accepted size / number thresholds (e.g. Milan criteria); tumors beyond criteria may be considered for downstaging before listing, with a defined observation interval to select favorable biology.",
+      "evidence": "2A"
+    }
   },
   "nodes": [
     {
@@ -25,17 +39,38 @@
       "description": "Baseline evaluation before staging: confirm the lesion, characterize liver function, and assess extent.",
       "path": "HCC / Workup",
       "section": "Workup",
-      "pills": ["workup"],
+      "pills": [
+        "workup"
+      ],
       "required": true,
       "bullets": [
-        { "label": "Multiphase contrast CT or dynamic contrast liver MRI using ACR LI-RADS criteria", "sub": "LR-5 is definitive for HCC without biopsy in cirrhosis or chronic HBV; chest CT for extent; assess portal vein for tumor thrombus" },
-        { "label": "Serum Alpha-Fetoprotein (AFP) baseline quantification", "sub": "repeat for trend at each restaging; AFP >= 400 ng/mL selects ramucirumab in later lines" },
-        { "label": "Liver function assessment: Child-Pugh class (A, B, C) and ALBI score (albumin-bilirubin)", "sub": "portal hypertension signs: splenomegaly, ascites, thrombocytopenia <100k; ICG clearance or HVPG where resection is planned" },
-        { "label": "Screening upper endoscopy (EGD) within 6 months with banding of high-risk varices", "sub": "required before starting VEGF inhibitors (bevacizumab) because of bleeding risk" },
-        { "label": "Viral hepatitis serologies with HBV DNA and HCV RNA", "sub": "start or continue antiviral suppression therapy; hepatology co-management" }
+        {
+          "label": "Multiphase contrast CT or dynamic contrast liver MRI using ACR LI-RADS criteria",
+          "sub": "LR-5 is definitive for HCC without biopsy in cirrhosis or chronic HBV; chest CT for extent; assess portal vein for tumor thrombus"
+        },
+        {
+          "label": "Serum Alpha-Fetoprotein (AFP) baseline quantification",
+          "sub": "repeat for trend at each restaging; AFP >= 400 ng/mL selects ramucirumab in later lines"
+        },
+        {
+          "label": "Liver function assessment: Child-Pugh class (A, B, C) and ALBI score (albumin-bilirubin)",
+          "sub": "portal hypertension signs: splenomegaly, ascites, thrombocytopenia <100k; ICG clearance or HVPG where resection is planned"
+        },
+        {
+          "label": "Screening upper endoscopy (EGD) within 6 months with banding of high-risk varices",
+          "sub": "required before starting VEGF inhibitors (bevacizumab) because of bleeding risk"
+        },
+        {
+          "label": "Viral hepatitis serologies with HBV DNA and HCV RNA",
+          "sub": "start or continue antiviral suppression therapy; hepatology co-management"
+        }
       ],
       "options": [
-        { "id": "continue", "label": "Diagnostic Workup Reviewed — Proceed to BCLC Staging & Functional Assessment", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to BCLC Staging & Functional Assessment",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -47,12 +82,41 @@
       "description": "Select the current clinical situation to enter the correct pathway.",
       "path": "HCC / Presentation",
       "section": "Staging",
-      "pills": ["presentation"],
+      "pills": [
+        "presentation"
+      ],
       "required": true,
       "options": [
-        { "id": "new_dx", "label": "Newly diagnosed / suspected HCC", "sets": { "phase": "new" }, "pills": ["new"] },
-        { "id": "recurrence", "label": "Recurrence after prior curative therapy", "sets": { "phase": "recurrence" }, "pills": ["recurrence"] },
-        { "id": "followup", "label": "Post-treatment surveillance / follow-up", "sets": { "phase": "followup" }, "pills": ["surveillance"] }
+        {
+          "id": "new_dx",
+          "label": "Newly diagnosed / suspected HCC",
+          "sets": {
+            "phase": "new"
+          },
+          "pills": [
+            "new"
+          ]
+        },
+        {
+          "id": "recurrence",
+          "label": "Recurrence after prior curative therapy",
+          "sets": {
+            "phase": "recurrence"
+          },
+          "pills": [
+            "recurrence"
+          ]
+        },
+        {
+          "id": "followup",
+          "label": "Post-treatment surveillance / follow-up",
+          "sets": {
+            "phase": "followup"
+          },
+          "pills": [
+            "surveillance"
+          ]
+        }
       ]
     },
     {
@@ -64,18 +128,49 @@
       "description": "In an at-risk cirrhotic liver, imaging alone can confirm HCC; otherwise biopsy is needed.",
       "path": "HCC / Diagnosis",
       "section": "Workup",
-      "pills": ["diagnosis"],
+      "pills": [
+        "diagnosis"
+      ],
       "required": true,
-      "footnotes": ["c"],
+      "footnotes": [
+        "c"
+      ],
       "bullets": [
         "ACR LI-RADS 5 (arterial hyperenhancement with washout) on multiphase CT or dynamic MRI is definitive for HCC without biopsy in cirrhosis or chronic HBV",
         "Biopsy for indeterminate lesions or a non-cirrhotic, non-HBV liver",
         "Re-enter staging once the diagnosis is established"
       ],
       "options": [
-        { "id": "radiologic", "label": "Radiologic diagnosis (LI-RADS 5, at-risk liver)", "sets": { "dxMode": "imaging" }, "pills": ["imaging"] },
-        { "id": "biopsy_confirmed", "label": "Biopsy-confirmed HCC", "sets": { "dxMode": "biopsy" }, "pills": ["biopsy"] },
-        { "id": "indeterminate", "label": "Indeterminate lesion", "sets": { "dxMode": "indeterminate" }, "pills": ["indeterminate"] }
+        {
+          "id": "radiologic",
+          "label": "Radiologic diagnosis (LI-RADS 5, at-risk liver)",
+          "sets": {
+            "dxMode": "imaging"
+          },
+          "pills": [
+            "imaging"
+          ]
+        },
+        {
+          "id": "biopsy_confirmed",
+          "label": "Biopsy-confirmed HCC",
+          "sets": {
+            "dxMode": "biopsy"
+          },
+          "pills": [
+            "biopsy"
+          ]
+        },
+        {
+          "id": "indeterminate",
+          "label": "Indeterminate lesion",
+          "sets": {
+            "dxMode": "indeterminate"
+          },
+          "pills": [
+            "indeterminate"
+          ]
+        }
       ]
     },
     {
@@ -87,10 +182,16 @@
       "description": "Resolve the diagnosis before committing to cancer-directed therapy.",
       "path": "HCC / Diagnosis / Indeterminate",
       "section": "Workup",
-      "pills": ["indeterminate"],
+      "pills": [
+        "indeterminate"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["c"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
       "bullets": [
         "Image-guided core biopsy of the indeterminate lesion",
         "Alternatively short-interval repeat multiphasic imaging to reassess LI-RADS category",
@@ -106,9 +207,14 @@
       "description": "Underlying liver reserve and performance status constrain every treatment decision in HCC.",
       "path": "HCC / Liver function",
       "section": "Staging",
-      "pills": ["Child-Pugh", "PS"],
+      "pills": [
+        "Child-Pugh",
+        "PS"
+      ],
       "required": true,
-      "footnotes": ["b"],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Grade liver reserve by Child-Pugh class (A, B, C) and ALBI score (albumin-bilirubin)",
         "Record portal hypertension signs: splenomegaly, ascites, thrombocytopenia <100k, known varices",
@@ -117,20 +223,77 @@
       "tables": [
         {
           "title": "Child-Pugh scoring (5-6 = A, 7-9 = B, 10-15 = C)",
-          "headers": ["Parameter", "1 point", "2 points", "3 points"],
+          "headers": [
+            "Parameter",
+            "1 point",
+            "2 points",
+            "3 points"
+          ],
           "rows": [
-            ["Bilirubin (mg/dL)", "< 2", "2-3", "> 3"],
-            ["Albumin (g/dL)", "> 3.5", "2.8-3.5", "< 2.8"],
-            ["INR", "< 1.7", "1.7-2.3", "> 2.3"],
-            ["Ascites", "None", "Mild", "Moderate-severe"],
-            ["Encephalopathy", "None", "Grade 1-2", "Grade 3-4"]
+            [
+              "Bilirubin (mg/dL)",
+              "< 2",
+              "2-3",
+              "> 3"
+            ],
+            [
+              "Albumin (g/dL)",
+              "> 3.5",
+              "2.8-3.5",
+              "< 2.8"
+            ],
+            [
+              "INR",
+              "< 1.7",
+              "1.7-2.3",
+              "> 2.3"
+            ],
+            [
+              "Ascites",
+              "None",
+              "Mild",
+              "Moderate-severe"
+            ],
+            [
+              "Encephalopathy",
+              "None",
+              "Grade 1-2",
+              "Grade 3-4"
+            ]
           ]
         }
       ],
       "options": [
-        { "id": "cp_a", "label": "Child-Pugh A, good PS", "sets": { "childPugh": "A" }, "pills": ["CP-A"] },
-        { "id": "cp_b", "label": "Child-Pugh B (treat selectively, close monitoring)", "sets": { "childPugh": "B" }, "pills": ["CP-B"] },
-        { "id": "cp_c", "label": "Child-Pugh C or poor PS / decompensated", "sets": { "childPugh": "C" }, "pills": ["CP-C"] }
+        {
+          "id": "cp_a",
+          "label": "Child-Pugh A, good PS",
+          "sets": {
+            "childPugh": "A"
+          },
+          "pills": [
+            "CP-A"
+          ]
+        },
+        {
+          "id": "cp_b",
+          "label": "Child-Pugh B (treat selectively, close monitoring)",
+          "sets": {
+            "childPugh": "B"
+          },
+          "pills": [
+            "CP-B"
+          ]
+        },
+        {
+          "id": "cp_c",
+          "label": "Child-Pugh C or poor PS / decompensated",
+          "sets": {
+            "childPugh": "C"
+          },
+          "pills": [
+            "CP-C"
+          ]
+        }
       ]
     },
     {
@@ -142,10 +305,17 @@
       "description": "Child-Pugh C or terminal-stage disease: prioritize liver transplant evaluation where feasible, otherwise best supportive care.",
       "path": "HCC / Supportive",
       "section": "Treatment",
-      "pills": ["CP-C", "supportive"],
+      "pills": [
+        "CP-C",
+        "supportive"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["d"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
       "bullets": [
         "Liver transplant evaluation if tumor burden and candidacy allow (best option for decompensated cirrhosis with limited tumor)",
         "Otherwise best supportive / palliative care and symptom control",
@@ -162,25 +332,83 @@
       "description": "Assign the Barcelona Clinic Liver Cancer stage from tumor burden, vascular invasion / spread, and performance status.",
       "path": "HCC / BCLC",
       "section": "Staging",
-      "pills": ["BCLC"],
+      "pills": [
+        "BCLC"
+      ],
       "required": true,
       "tables": [
         {
           "title": "BCLC stage summary (simplified)",
-          "headers": ["Stage", "Tumor burden", "Typical first choice"],
+          "headers": [
+            "Stage",
+            "Tumor burden",
+            "Typical first choice"
+          ],
           "rows": [
-            ["0 / A (very early / early)", "Single, or up to 3 nodules <= 3 cm, no vascular invasion", "Resection / ablation / transplant"],
-            ["B (intermediate)", "Multinodular, liver-confined, no vascular invasion", "TACE (or radioembolization)"],
-            ["C (advanced)", "Portal vein tumor thrombus and/or extrahepatic spread", "Systemic therapy"],
-            ["D (terminal)", "Poor PS or decompensated liver", "Supportive care / transplant if eligible"]
+            [
+              "0 / A (very early / early)",
+              "Single, or up to 3 nodules <= 3 cm, no vascular invasion",
+              "Resection / ablation / transplant"
+            ],
+            [
+              "B (intermediate)",
+              "Multinodular, liver-confined, no vascular invasion",
+              "TACE (or radioembolization)"
+            ],
+            [
+              "C (advanced)",
+              "Portal vein tumor thrombus and/or extrahepatic spread",
+              "Systemic therapy"
+            ],
+            [
+              "D (terminal)",
+              "Poor PS or decompensated liver",
+              "Supportive care / transplant if eligible"
+            ]
           ]
         }
       ],
       "options": [
-        { "id": "bclc_0a", "label": "BCLC 0 / A (very early / early)", "sets": { "bclc": "0A" }, "pills": ["0/A"] },
-        { "id": "bclc_b", "label": "BCLC B (intermediate, multinodular)", "sets": { "bclc": "B" }, "pills": ["B"] },
-        { "id": "bclc_c", "label": "BCLC C (vascular invasion / extrahepatic spread)", "sets": { "bclc": "C" }, "pills": ["C"] },
-        { "id": "bclc_d", "label": "BCLC D (terminal)", "sets": { "bclc": "D" }, "pills": ["D"] }
+        {
+          "id": "bclc_0a",
+          "label": "BCLC 0 / A (very early / early)",
+          "sets": {
+            "bclc": "0A"
+          },
+          "pills": [
+            "0/A"
+          ]
+        },
+        {
+          "id": "bclc_b",
+          "label": "BCLC B (intermediate, multinodular)",
+          "sets": {
+            "bclc": "B"
+          },
+          "pills": [
+            "B"
+          ]
+        },
+        {
+          "id": "bclc_c",
+          "label": "BCLC C (vascular invasion / extrahepatic spread)",
+          "sets": {
+            "bclc": "C"
+          },
+          "pills": [
+            "C"
+          ]
+        },
+        {
+          "id": "bclc_d",
+          "label": "BCLC D (terminal)",
+          "sets": {
+            "bclc": "D"
+          },
+          "pills": [
+            "D"
+          ]
+        }
       ]
     },
     {
@@ -192,20 +420,73 @@
       "description": "Choose among curative options by resectability, liver reserve, portal hypertension, and transplant candidacy.",
       "path": "HCC / Early / Options",
       "section": "Treatment",
-      "pills": ["0/A", "curative"],
+      "pills": [
+        "0/A",
+        "curative"
+      ],
       "required": true,
-      "footnotes": ["d"],
+      "footnotes": [
+        "d"
+      ],
       "bullets": [
-        { "label": "Resection", "sub": "solitary tumor without vascular invasion, Child-Pugh A with normal bilirubin, ICG clearance or HVPG <= 10 mmHg" },
-        { "label": "Thermal ablation (RFA or MWA)", "sub": "tumors <= 3 cm, Category 1; non-surgical candidate or alternative to resection" },
-        { "label": "Transplant", "sub": "within Milan criteria, especially with impaired liver function" },
-        { "label": "Downstaging / bridging", "sub": "beyond criteria but a potential transplant candidate" }
+        {
+          "label": "Resection",
+          "sub": "solitary tumor without vascular invasion, Child-Pugh A with normal bilirubin, ICG clearance or HVPG <= 10 mmHg"
+        },
+        {
+          "label": "Thermal ablation (RFA or MWA)",
+          "sub": "tumors <= 3 cm, Category 1; non-surgical candidate or alternative to resection"
+        },
+        {
+          "label": "Transplant",
+          "sub": "within Milan criteria, especially with impaired liver function"
+        },
+        {
+          "label": "Downstaging / bridging",
+          "sub": "beyond criteria but a potential transplant candidate"
+        }
       ],
       "options": [
-        { "id": "resectable", "label": "Surgical candidate (resectable)", "sets": { "earlyPlan": "resection" }, "pills": ["resection"] },
-        { "id": "transplant", "label": "Transplant candidate (within criteria)", "sets": { "earlyPlan": "transplant" }, "pills": ["transplant"] },
-        { "id": "ablation", "label": "Ablation candidate (small, non-surgical)", "sets": { "earlyPlan": "ablation" }, "pills": ["ablation"] },
-        { "id": "downstage", "label": "Beyond criteria - consider downstaging", "sets": { "earlyPlan": "downstage" }, "pills": ["downstage"] }
+        {
+          "id": "resectable",
+          "label": "Surgical candidate (resectable)",
+          "sets": {
+            "earlyPlan": "resection"
+          },
+          "pills": [
+            "resection"
+          ]
+        },
+        {
+          "id": "transplant",
+          "label": "Transplant candidate (within criteria)",
+          "sets": {
+            "earlyPlan": "transplant"
+          },
+          "pills": [
+            "transplant"
+          ]
+        },
+        {
+          "id": "ablation",
+          "label": "Ablation candidate (small, non-surgical)",
+          "sets": {
+            "earlyPlan": "ablation"
+          },
+          "pills": [
+            "ablation"
+          ]
+        },
+        {
+          "id": "downstage",
+          "label": "Beyond criteria - consider downstaging",
+          "sets": {
+            "earlyPlan": "downstage"
+          },
+          "pills": [
+            "downstage"
+          ]
+        }
       ]
     },
     {
@@ -217,9 +498,14 @@
       "description": "Preferred curative option for a solitary tumor without vascular invasion and well-preserved liver function (Child-Pugh A, normal bilirubin, ICG clearance or HVPG <= 10 mmHg). Next: assess pathology-based recurrence risk.",
       "path": "HCC / Early / Resection",
       "section": "Treatment",
-      "pills": ["resection", "curative"],
+      "pills": [
+        "resection",
+        "curative"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
+      "evidenceCategory": [
+        "2A"
+      ],
       "bullets": [
         "Solitary tumor without macrovascular invasion; anatomic partial hepatectomy with an adequate future liver remnant",
         "Confirm Child-Pugh A with normal bilirubin and ICG clearance, or HVPG <= 10 mmHg (no clinically significant portal hypertension)",
@@ -236,17 +522,39 @@
       "description": "Pathologic high-risk features (microvascular invasion, poor differentiation, large size / satellites, close margin) identify patients for adjuvant systemic therapy on protocol; others enter surveillance.",
       "path": "HCC / Early / Resection / Risk",
       "section": "Treatment",
-      "pills": ["adjuvant"],
+      "pills": [
+        "adjuvant"
+      ],
       "required": true,
-      "footnotes": ["a"],
+      "footnotes": [
+        "a"
+      ],
       "bullets": [
         "High-risk: microvascular invasion, poor differentiation, tumor > 5 cm or satellite nodules, narrow margin",
         "Low-risk: single small tumor, no vascular invasion, wide margin",
         "Adjuvant atezolizumab + bevacizumab may reduce recurrence in high-risk resected disease (IMbrave050-type data; still maturing)"
       ],
       "options": [
-        { "id": "high_risk", "label": "High recurrence-risk pathology", "sets": { "recurRisk": "high" }, "pills": ["high risk"] },
-        { "id": "low_risk", "label": "Low recurrence-risk pathology", "sets": { "recurRisk": "low" }, "pills": ["low risk"] }
+        {
+          "id": "high_risk",
+          "label": "High recurrence-risk pathology",
+          "sets": {
+            "recurRisk": "high"
+          },
+          "pills": [
+            "high risk"
+          ]
+        },
+        {
+          "id": "low_risk",
+          "label": "Low recurrence-risk pathology",
+          "sets": {
+            "recurRisk": "low"
+          },
+          "pills": [
+            "low risk"
+          ]
+        }
       ]
     },
     {
@@ -258,17 +566,27 @@
       "description": "High-risk resected disease: consider adjuvant immunotherapy-based systemic therapy, then surveillance.",
       "path": "HCC / Early / Resection / Adjuvant",
       "section": "Treatment",
-      "pills": ["adjuvant", "high risk"],
+      "pills": [
+        "adjuvant",
+        "high risk"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2B"],
-      "footnotes": ["a", "b"],
+      "evidenceCategory": [
+        "2B"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
       "bullets": [
         "Adjuvant atezolizumab + bevacizumab in Child-Pugh A high-risk resected disease (evidence still maturing; discuss uncertainty)",
         "Screen for and manage varices before the anti-VEGF component; monitor for immune-related adverse events",
         "Continue antiviral therapy and hepatology co-management",
         "Dose protocol referenced below (adjuvant fixed-duration schedule); then enter surveillance"
       ],
-      "protocolRefs": ["hcc-atezo-bev"]
+      "protocolRefs": [
+        "hcc-atezo-bev"
+      ]
     },
     {
       "id": "n_tx_transplant",
@@ -279,15 +597,25 @@
       "description": "Curative for early HCC within Milan criteria (solitary <= 5 cm, or up to 3 lesions each <= 3 cm, without macrovascular invasion or extrahepatic spread), treating both tumor and underlying cirrhosis. Then post-transplant surveillance.",
       "path": "HCC / Early / Transplant",
       "section": "Treatment",
-      "pills": ["transplant", "curative"],
+      "pills": [
+        "transplant",
+        "curative"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["d"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
       "bullets": [
         "List if within Milan criteria: solitary <= 5 cm, or up to 3 lesions each <= 3 cm, without macrovascular invasion or extrahepatic spread",
         "Bridging therapy (ablation, TACE or radioembolization) to prevent dropout while waiting",
         "Preferred over resection when liver function is impaired",
         "Lifelong immunosuppression; then post-transplant surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "hcc-atezo-bev"
       ]
     },
     {
@@ -299,14 +627,22 @@
       "description": "Curative-intent thermal ablation (RFA or MWA) for tumors <= 3 cm (Category 1), especially when surgery is not suitable. Next: confirm complete ablation on response imaging.",
       "path": "HCC / Early / Ablation",
       "section": "Treatment",
-      "pills": ["ablation", "curative"],
+      "pills": [
+        "ablation",
+        "curative"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
+      "evidenceCategory": [
+        "1"
+      ],
       "bullets": [
         "Radiofrequency ablation (RFA) or microwave ablation (MWA) for tumors <= 3 cm (Category 1)",
         "Comparable to resection for very small tumors in non-surgical candidates",
         "Consider combining with TACE for tumors in the 3-5 cm range",
         "Then assess ablation response (next step)"
+      ],
+      "protocolRefs": [
+        "hcc-atezo-bev"
       ]
     },
     {
@@ -318,7 +654,9 @@
       "description": "Post-ablation multiphasic imaging distinguishes complete ablation from residual viable tumor at the treated margin.",
       "path": "HCC / Early / Ablation / Response",
       "section": "Treatment",
-      "pills": ["response"],
+      "pills": [
+        "response"
+      ],
       "required": true,
       "bullets": [
         "Complete ablation: no nodular arterial enhancement at the treated margin",
@@ -326,8 +664,26 @@
         "Re-ablation is often feasible for isolated residual disease"
       ],
       "options": [
-        { "id": "complete", "label": "Complete ablation", "sets": { "ablationResp": "complete" }, "pills": ["complete"] },
-        { "id": "residual", "label": "Residual / local progression", "sets": { "ablationResp": "residual" }, "pills": ["residual"] }
+        {
+          "id": "complete",
+          "label": "Complete ablation",
+          "sets": {
+            "ablationResp": "complete"
+          },
+          "pills": [
+            "complete"
+          ]
+        },
+        {
+          "id": "residual",
+          "label": "Residual / local progression",
+          "sets": {
+            "ablationResp": "residual"
+          },
+          "pills": [
+            "residual"
+          ]
+        }
       ]
     },
     {
@@ -339,14 +695,22 @@
       "description": "Isolated residual or locally progressive tumor after ablation: repeat ablation or locoregional therapy, then surveillance.",
       "path": "HCC / Early / Ablation / Repeat",
       "section": "Treatment",
-      "pills": ["residual", "ablation"],
+      "pills": [
+        "residual",
+        "ablation"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
+      "evidenceCategory": [
+        "2A"
+      ],
       "bullets": [
         "Repeat ablation for a residual nodule amenable to a further session",
         "TACE for a residual lesion less suited to re-ablation",
         "Re-confirm Child-Pugh A function before re-treatment",
         "Then enter surveillance"
+      ],
+      "protocolRefs": [
+        "hcc-atezo-bev"
       ]
     },
     {
@@ -358,17 +722,26 @@
       "description": "Tumor beyond transplant criteria in an otherwise eligible patient: locoregional therapy to shrink burden into criteria. Next: reassess against criteria.",
       "path": "HCC / Early / Downstage",
       "section": "Treatment",
-      "pills": ["downstage"],
+      "pills": [
+        "downstage"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["d"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
       "bullets": [
         "TACE or radioembolization (Y90) to reduce tumor burden",
         "Enforce a defined observation interval to select favorable biology",
         "Reassess resectability / transplant criteria after treatment",
         "Then re-stage against criteria (next step)"
       ],
-      "protocolRefs": ["hcc-tace", "hcc-y90-radioembolization"]
+      "protocolRefs": [
+        "hcc-tace",
+        "hcc-y90-radioembolization"
+      ]
     },
     {
       "id": "n_downstage_response",
@@ -379,17 +752,39 @@
       "description": "Re-imaging after downstaging determines whether tumor burden is now within transplant / resection criteria, or has failed to respond.",
       "path": "HCC / Early / Downstage / Response",
       "section": "Treatment",
-      "pills": ["response"],
+      "pills": [
+        "response"
+      ],
       "required": true,
-      "footnotes": ["d"],
+      "footnotes": [
+        "d"
+      ],
       "bullets": [
         "Within criteria and stable through the observation interval: proceed to listing / resection",
         "No response or continued progression: treat as advanced disease",
         "Re-check liver function and AFP trend before listing"
       ],
       "options": [
-        { "id": "within_criteria", "label": "Downstaged into criteria", "sets": { "downstageResp": "within" }, "pills": ["within criteria"] },
-        { "id": "no_response", "label": "No response / progression", "sets": { "downstageResp": "progression" }, "pills": ["progression"] }
+        {
+          "id": "within_criteria",
+          "label": "Downstaged into criteria",
+          "sets": {
+            "downstageResp": "within"
+          },
+          "pills": [
+            "within criteria"
+          ]
+        },
+        {
+          "id": "no_response",
+          "label": "No response / progression",
+          "sets": {
+            "downstageResp": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
       ]
     },
     {
@@ -401,15 +796,26 @@
       "description": "Tumor downstaged into criteria and stable through observation: list for transplant (or resect if now feasible), then surveillance.",
       "path": "HCC / Early / Downstage / List",
       "section": "Treatment",
-      "pills": ["transplant", "curative"],
+      "pills": [
+        "transplant",
+        "curative"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["d"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
       "bullets": [
         "List for liver transplant once within criteria and biologically stable",
         "Resection instead if the downstaged tumor is now resectable with adequate remnant",
         "Continue bridging locoregional therapy to prevent waitlist dropout",
         "Then enter surveillance"
+      ],
+      "protocolRefs": [
+        "hcc-atezo-bev",
+        "hcc-tace"
       ]
     },
     {
@@ -421,17 +827,55 @@
       "description": "Unresectable intermediate (BCLC B), liver-confined multinodular disease without vascular invasion: transarterial locoregional therapy, or systemic if unsuitable.",
       "path": "HCC / Intermediate / Options",
       "section": "Treatment",
-      "pills": ["B"],
+      "pills": [
+        "B"
+      ],
       "required": true,
       "bullets": [
-        { "label": "TACE", "sub": "preserved function, liver-confined, amenable arterial supply" },
-        { "label": "Radioembolization (Y90)", "sub": "selected lobar / segmental disease" },
-        { "label": "Systemic", "sub": "diffuse / bulky bilobar disease or TACE-unsuitable" }
+        {
+          "label": "TACE",
+          "sub": "preserved function, liver-confined, amenable arterial supply"
+        },
+        {
+          "label": "Radioembolization (Y90)",
+          "sub": "selected lobar / segmental disease"
+        },
+        {
+          "label": "Systemic",
+          "sub": "diffuse / bulky bilobar disease or TACE-unsuitable"
+        }
       ],
       "options": [
-        { "id": "tace", "label": "TACE candidate", "sets": { "interPlan": "tace" }, "pills": ["TACE"] },
-        { "id": "y90", "label": "Radioembolization (Y90) candidate", "sets": { "interPlan": "y90" }, "pills": ["Y90"] },
-        { "id": "systemic", "label": "TACE-unsuitable - systemic therapy", "sets": { "interPlan": "systemic" }, "pills": ["systemic"] }
+        {
+          "id": "tace",
+          "label": "TACE candidate",
+          "sets": {
+            "interPlan": "tace"
+          },
+          "pills": [
+            "TACE"
+          ]
+        },
+        {
+          "id": "y90",
+          "label": "Radioembolization (Y90) candidate",
+          "sets": {
+            "interPlan": "y90"
+          },
+          "pills": [
+            "Y90"
+          ]
+        },
+        {
+          "id": "systemic",
+          "label": "TACE-unsuitable - systemic therapy",
+          "sets": {
+            "interPlan": "systemic"
+          },
+          "pills": [
+            "systemic"
+          ]
+        }
       ]
     },
     {
@@ -443,16 +887,22 @@
       "description": "Standard first choice for unresectable intermediate (BCLC B), liver-confined multinodular HCC without vascular invasion. Next: assess response and refractoriness.",
       "path": "HCC / Intermediate / TACE",
       "section": "Treatment",
-      "pills": ["TACE"],
+      "pills": [
+        "TACE"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
+      "evidenceCategory": [
+        "1"
+      ],
       "bullets": [
         "Transarterial chemoembolization with selective / superselective delivery to preserve non-tumor parenchyma",
         "Repeat on-demand for viable disease; reassess response by imaging",
         "Continue liver-function monitoring between sessions",
         "Then assess response / refractoriness (next step)"
       ],
-      "protocolRefs": ["hcc-tace"]
+      "protocolRefs": [
+        "hcc-tace"
+      ]
     },
     {
       "id": "n_tx_y90",
@@ -463,16 +913,22 @@
       "description": "Selective internal radiation (transarterial radioembolization, TARE) for suitable unresectable intermediate (BCLC B) disease or as a bridging / downstaging tool. Next: assess response.",
       "path": "HCC / Intermediate / Y90",
       "section": "Treatment",
-      "pills": ["Y90"],
+      "pills": [
+        "Y90"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
+      "evidenceCategory": [
+        "2A"
+      ],
       "bullets": [
         "Pre-treatment mapping angiography and lung-shunt assessment",
         "Lobar or segmental (radiation-segmentectomy) delivery",
         "Option for bridging / downstaging toward transplant or resection",
         "Then assess response / refractoriness (next step)"
       ],
-      "protocolRefs": ["hcc-y90-radioembolization"]
+      "protocolRefs": [
+        "hcc-y90-radioembolization"
+      ]
     },
     {
       "id": "n_tace_response",
@@ -483,17 +939,39 @@
       "description": "Response imaging after locoregional therapy decides between continued locoregional treatment and a switch to systemic therapy for refractory / untreatable-progression disease.",
       "path": "HCC / Intermediate / Response",
       "section": "Treatment",
-      "pills": ["response"],
+      "pills": [
+        "response"
+      ],
       "required": true,
-      "footnotes": ["b"],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Objective response / durable control: continue on-demand locoregional therapy",
         "TACE-refractory / untreatable progression, or declining liver function: switch to systemic therapy",
         "Avoid repeating locoregional therapy that would compromise liver reserve"
       ],
       "options": [
-        { "id": "response_ongoing", "label": "Response / durable control", "sets": { "locoResp": "response" }, "pills": ["response"] },
-        { "id": "tace_refractory", "label": "Refractory / untreatable progression", "sets": { "locoResp": "refractory" }, "pills": ["refractory"] }
+        {
+          "id": "response_ongoing",
+          "label": "Response / durable control",
+          "sets": {
+            "locoResp": "response"
+          },
+          "pills": [
+            "response"
+          ]
+        },
+        {
+          "id": "tace_refractory",
+          "label": "Refractory / untreatable progression",
+          "sets": {
+            "locoResp": "refractory"
+          },
+          "pills": [
+            "refractory"
+          ]
+        }
       ]
     },
     {
@@ -505,16 +983,24 @@
       "description": "Disease responding to TACE / Y90 with preserved liver function: continue on-demand locoregional therapy, then surveillance.",
       "path": "HCC / Intermediate / Continue",
       "section": "Treatment",
-      "pills": ["response", "TACE"],
+      "pills": [
+        "response",
+        "TACE"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
+      "evidenceCategory": [
+        "1"
+      ],
       "bullets": [
         "Repeat TACE / Y90 on-demand for viable disease",
         "Reassess liver function before each session; stop if reserve declines",
         "Consider adding systemic therapy for bilobar / progressive disease per multidisciplinary review",
         "Then enter surveillance"
       ],
-      "protocolRefs": ["hcc-tace", "hcc-y90-radioembolization"]
+      "protocolRefs": [
+        "hcc-tace",
+        "hcc-y90-radioembolization"
+      ]
     },
     {
       "id": "n_sys_1l",
@@ -525,18 +1011,60 @@
       "description": "For advanced / progressing disease with preserved liver function (Child-Pugh A), select the first-line backbone by immunotherapy eligibility and bleeding / autoimmune contraindications.",
       "path": "HCC / Systemic / 1L",
       "section": "Treatment",
-      "pills": ["systemic", "1L"],
+      "pills": [
+        "systemic",
+        "1L"
+      ],
       "required": true,
-      "footnotes": ["a", "b"],
+      "footnotes": [
+        "a",
+        "b"
+      ],
       "bullets": [
-        { "label": "Atezolizumab + bevacizumab (IMbrave150) - preferred Category 1", "sub": "Child-Pugh A; screen and treat varices first (anti-VEGF bleeding risk)" },
-        { "label": "Durvalumab + tremelimumab STRIDE (HIMALAYA) - preferred Category 1", "sub": "single high-dose tremelimumab priming; preferred when bevacizumab / bleeding risk is contraindicated" },
-        { "label": "Lenvatinib (REFLECT) or sorafenib (SHARP) - Category 1 alternatives", "sub": "when immunotherapy is contraindicated; Child-Pugh A" }
+        {
+          "label": "Atezolizumab + bevacizumab (IMbrave150) - preferred Category 1",
+          "sub": "Child-Pugh A; screen and treat varices first (anti-VEGF bleeding risk)"
+        },
+        {
+          "label": "Durvalumab + tremelimumab STRIDE (HIMALAYA) - preferred Category 1",
+          "sub": "single high-dose tremelimumab priming; preferred when bevacizumab / bleeding risk is contraindicated"
+        },
+        {
+          "label": "Lenvatinib (REFLECT) or sorafenib (SHARP) - Category 1 alternatives",
+          "sub": "when immunotherapy is contraindicated; Child-Pugh A"
+        }
       ],
       "options": [
-        { "id": "atezobev", "label": "IO-eligible, no bleeding risk (atezo + bev, IMbrave150)", "sets": { "firstLine": "atezobev" }, "pills": ["atezo-bev"] },
-        { "id": "durvatreme", "label": "IO-eligible but anti-VEGF contraindicated (durva + treme STRIDE)", "sets": { "firstLine": "durvatreme" }, "pills": ["durva-treme"] },
-        { "id": "tki", "label": "IO-ineligible - TKI (lenvatinib or sorafenib)", "sets": { "firstLine": "tki" }, "pills": ["TKI"] }
+        {
+          "id": "atezobev",
+          "label": "IO-eligible, no bleeding risk (atezo + bev, IMbrave150)",
+          "sets": {
+            "firstLine": "atezobev"
+          },
+          "pills": [
+            "atezo-bev"
+          ]
+        },
+        {
+          "id": "durvatreme",
+          "label": "IO-eligible but anti-VEGF contraindicated (durva + treme STRIDE)",
+          "sets": {
+            "firstLine": "durvatreme"
+          },
+          "pills": [
+            "durva-treme"
+          ]
+        },
+        {
+          "id": "tki",
+          "label": "IO-ineligible - TKI (lenvatinib or sorafenib)",
+          "sets": {
+            "firstLine": "tki"
+          },
+          "pills": [
+            "TKI"
+          ]
+        }
       ]
     },
     {
@@ -548,17 +1076,27 @@
       "description": "Preferred Category 1 first-line regimen (IMbrave150) for advanced HCC in Child-Pugh A patients without contraindications; requires variceal screening. Next: on-progression assessment.",
       "path": "HCC / Systemic / 1L / Atezo-bev",
       "section": "Treatment",
-      "pills": ["atezo-bev", "1L"],
+      "pills": [
+        "atezo-bev",
+        "1L"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["a", "b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
       "bullets": [
         "Preferred Category 1 first-line backbone per IMbrave150; confirm Child-Pugh A and adequate performance status",
         "Screening upper endoscopy (EGD) within 6 months with banding of high-risk varices before starting (bevacizumab bleeding risk)",
         "Monitor for immune-related adverse events, proteinuria and hypertension",
         "Dose protocol referenced below; then reassess on progression (next step)"
       ],
-      "protocolRefs": ["hcc-atezo-bev"]
+      "protocolRefs": [
+        "hcc-atezo-bev"
+      ]
     },
     {
       "id": "n_tx_durvatreme",
@@ -569,17 +1107,27 @@
       "description": "Preferred Category 1 first-line dual checkpoint option (HIMALAYA STRIDE single high-dose priming regimen); preferred when bevacizumab / bleeding risk is contraindicated. Next: on-progression assessment.",
       "path": "HCC / Systemic / 1L / Durva-treme",
       "section": "Treatment",
-      "pills": ["durva-treme", "1L"],
+      "pills": [
+        "durva-treme",
+        "1L"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["a", "b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
       "bullets": [
         "Preferred Category 1 per HIMALAYA: single high-dose (priming) dose of tremelimumab added to durvalumab, then durvalumab maintenance (STRIDE regimen)",
         "Preferred when bevacizumab is contraindicated or bleeding risk is high; avoids anti-VEGF bleeding risk",
         "Confirm Child-Pugh A and adequate performance status; monitor for immune-related adverse events",
         "Dose protocol referenced below; then reassess on progression (next step)"
       ],
-      "protocolRefs": ["hcc-durva-treme"]
+      "protocolRefs": [
+        "hcc-durva-treme"
+      ]
     },
     {
       "id": "n_tki_choice",
@@ -590,17 +1138,40 @@
       "description": "When immunotherapy is contraindicated, choose the Category 1 oral multikinase inhibitor: lenvatinib (REFLECT) or sorafenib (SHARP).",
       "path": "HCC / Systemic / 1L / TKI",
       "section": "Treatment",
-      "pills": ["TKI", "1L"],
+      "pills": [
+        "TKI",
+        "1L"
+      ],
       "required": true,
-      "footnotes": ["b"],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Lenvatinib (REFLECT): weight-based dosing, often higher response rate",
         "Sorafenib (SHARP): the reference first-line multikinase inhibitor",
         "Confirm Child-Pugh A function before either"
       ],
       "options": [
-        { "id": "lenva", "label": "Lenvatinib", "sets": { "tki": "lenvatinib" }, "pills": ["lenvatinib"] },
-        { "id": "sora", "label": "Sorafenib", "sets": { "tki": "sorafenib" }, "pills": ["sorafenib"] }
+        {
+          "id": "lenva",
+          "label": "Lenvatinib",
+          "sets": {
+            "tki": "lenvatinib"
+          },
+          "pills": [
+            "lenvatinib"
+          ]
+        },
+        {
+          "id": "sora",
+          "label": "Sorafenib",
+          "sets": {
+            "tki": "sorafenib"
+          },
+          "pills": [
+            "sorafenib"
+          ]
+        }
       ]
     },
     {
@@ -612,17 +1183,26 @@
       "description": "Oral multikinase inhibitor, non-inferior first-line TKI alternative to sorafenib (REFLECT, Category 1). Next: on-progression assessment.",
       "path": "HCC / Systemic / 1L / Lenvatinib",
       "section": "Treatment",
-      "pills": ["lenvatinib", "1L"],
+      "pills": [
+        "lenvatinib",
+        "1L"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Category 1 alternative per REFLECT; weight-based dosing; monitor blood pressure and thyroid function",
         "Often preferred over sorafenib for a higher response rate",
         "Confirm Child-Pugh A function; dose modify for toxicity",
         "Dose protocol referenced below; then reassess on progression (next step)"
       ],
-      "protocolRefs": ["hcc-lenvatinib"]
+      "protocolRefs": [
+        "hcc-lenvatinib"
+      ]
     },
     {
       "id": "n_tx_sorafenib",
@@ -633,17 +1213,26 @@
       "description": "The reference first-line multikinase inhibitor for advanced HCC (SHARP, Category 1). Next: on-progression assessment.",
       "path": "HCC / Systemic / 1L / Sorafenib",
       "section": "Treatment",
-      "pills": ["sorafenib", "1L"],
+      "pills": [
+        "sorafenib",
+        "1L"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Category 1 alternative per SHARP; monitor for hand-foot skin reaction, diarrhea, hypertension",
         "Confirm Child-Pugh A function; dose modify for toxicity",
         "Dose protocol referenced below",
         "Then reassess on progression (next step)"
       ],
-      "protocolRefs": ["gi-hcc-sorafenib"]
+      "protocolRefs": [
+        "gi-hcc-sorafenib"
+      ]
     },
     {
       "id": "n_prog_1l",
@@ -654,18 +1243,49 @@
       "description": "Restaging after first-line systemic therapy directs continued treatment, a switch to second-line, or a tolerability-driven switch.",
       "path": "HCC / Systemic / 1L / On progression",
       "section": "Treatment",
-      "pills": ["sequencing"],
+      "pills": [
+        "sequencing"
+      ],
       "required": true,
-      "footnotes": ["b"],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Ongoing response / stable disease: continue first-line therapy",
         "Radiographic progression: move to a second-line agent selected by the prior drug and AFP",
         "Unacceptable toxicity with disease control: switch to a better-tolerated agent"
       ],
       "options": [
-        { "id": "ongoing_response", "label": "Ongoing response / stable", "sets": { "line1Outcome": "response" }, "pills": ["response"] },
-        { "id": "progression", "label": "Progression - go to second line", "sets": { "line1Outcome": "progression" }, "pills": ["progression"] },
-        { "id": "intolerance", "label": "Intolerance with disease control", "sets": { "line1Outcome": "intolerance" }, "pills": ["intolerance"] }
+        {
+          "id": "ongoing_response",
+          "label": "Ongoing response / stable",
+          "sets": {
+            "line1Outcome": "response"
+          },
+          "pills": [
+            "response"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Progression - go to second line",
+          "sets": {
+            "line1Outcome": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        },
+        {
+          "id": "intolerance",
+          "label": "Intolerance with disease control",
+          "sets": {
+            "line1Outcome": "intolerance"
+          },
+          "pills": [
+            "intolerance"
+          ]
+        }
       ]
     },
     {
@@ -677,17 +1297,29 @@
       "description": "Continued benefit from first-line systemic therapy: maintain treatment with monitoring, then surveillance.",
       "path": "HCC / Systemic / 1L / Continue",
       "section": "Treatment",
-      "pills": ["response", "1L"],
+      "pills": [
+        "response",
+        "1L"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Continue the first-line regimen while benefit and tolerability persist",
         "Restage every 8-12 weeks; monitor liver function and AFP trend",
         "Manage immune-related or TKI toxicities with dose modification / supportive care",
         "Then enter surveillance"
       ],
-      "protocolRefs": ["hcc-atezo-bev", "hcc-durva-treme", "hcc-lenvatinib", "gi-hcc-sorafenib"]
+      "protocolRefs": [
+        "hcc-atezo-bev",
+        "hcc-durva-treme",
+        "hcc-lenvatinib",
+        "gi-hcc-sorafenib"
+      ]
     },
     {
       "id": "n_tx_switch_intol",
@@ -698,17 +1330,28 @@
       "description": "Disease controlled but first-line therapy not tolerated: switch to a better-tolerated agent, then reassess as a subsequent line.",
       "path": "HCC / Systemic / 1L / Switch",
       "section": "Treatment",
-      "pills": ["intolerance"],
+      "pills": [
+        "intolerance"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Switch to an alternative first-line agent with a different toxicity profile (e.g. IO to TKI or between TKIs)",
         "Optimize supportive care and dose before abandoning an effective class",
         "Re-confirm Child-Pugh A function",
         "Then follow the second-line selection pathway (next step)"
       ],
-      "protocolRefs": ["hcc-atezo-bev", "hcc-durva-treme", "hcc-lenvatinib", "gi-hcc-sorafenib"]
+      "protocolRefs": [
+        "hcc-atezo-bev",
+        "hcc-durva-treme",
+        "hcc-lenvatinib",
+        "gi-hcc-sorafenib"
+      ]
     },
     {
       "id": "n_sys_2l",
@@ -719,26 +1362,82 @@
       "description": "After first-line progression in Child-Pugh A disease, select by the prior agent, AFP level, and immunotherapy eligibility.",
       "path": "HCC / Systemic / 2L",
       "section": "Treatment",
-      "pills": ["2L"],
+      "pills": [
+        "2L"
+      ],
       "required": true,
-      "footnotes": ["b"],
+      "footnotes": [
+        "b"
+      ],
       "tables": [
         {
           "title": "Second-line direction",
-          "headers": ["Situation", "Option"],
+          "headers": [
+            "Situation",
+            "Option"
+          ],
           "rows": [
-            ["Progressed on / tolerated sorafenib (RESORCE, Category 1)", "Regorafenib"],
-            ["Any prior systemic, broad (CELESTIAL, Category 1)", "Cabozantinib"],
-            ["AFP >= 400 ng/mL (REACH-2, Category 1)", "Ramucirumab"],
-            ["Prior TKI, IO-eligible", "Nivolumab + ipilimumab"]
+            [
+              "Progressed on / tolerated sorafenib (RESORCE, Category 1)",
+              "Regorafenib"
+            ],
+            [
+              "Any prior systemic, broad (CELESTIAL, Category 1)",
+              "Cabozantinib"
+            ],
+            [
+              "AFP >= 400 ng/mL (REACH-2, Category 1)",
+              "Ramucirumab"
+            ],
+            [
+              "Prior TKI, IO-eligible",
+              "Nivolumab + ipilimumab"
+            ]
           ]
         }
       ],
       "options": [
-        { "id": "post_sora", "label": "Prior sorafenib tolerated (regorafenib, RESORCE)", "sets": { "secondLine": "regorafenib" }, "pills": ["regorafenib"] },
-        { "id": "general", "label": "General second-line TKI (cabozantinib, CELESTIAL)", "sets": { "secondLine": "cabozantinib" }, "pills": ["cabozantinib"] },
-        { "id": "afp_high", "label": "AFP >= 400 ng/mL (ramucirumab, REACH-2)", "sets": { "secondLine": "ramucirumab", "biomarkers.AFP": "high" }, "pills": ["AFP high"] },
-        { "id": "io_doublet", "label": "Dual checkpoint inhibitor (nivolumab + ipilimumab)", "sets": { "secondLine": "nivoipi" }, "pills": ["nivo-ipi"] }
+        {
+          "id": "post_sora",
+          "label": "Prior sorafenib tolerated (regorafenib, RESORCE)",
+          "sets": {
+            "secondLine": "regorafenib"
+          },
+          "pills": [
+            "regorafenib"
+          ]
+        },
+        {
+          "id": "general",
+          "label": "General second-line TKI (cabozantinib, CELESTIAL)",
+          "sets": {
+            "secondLine": "cabozantinib"
+          },
+          "pills": [
+            "cabozantinib"
+          ]
+        },
+        {
+          "id": "afp_high",
+          "label": "AFP >= 400 ng/mL (ramucirumab, REACH-2)",
+          "sets": {
+            "secondLine": "ramucirumab",
+            "biomarkers.AFP": "high"
+          },
+          "pills": [
+            "AFP high"
+          ]
+        },
+        {
+          "id": "io_doublet",
+          "label": "Dual checkpoint inhibitor (nivolumab + ipilimumab)",
+          "sets": {
+            "secondLine": "nivoipi"
+          },
+          "pills": [
+            "nivo-ipi"
+          ]
+        }
       ]
     },
     {
@@ -750,17 +1449,26 @@
       "description": "Category 1 for patients who tolerated and then progressed on sorafenib (RESORCE). Next: on-progression assessment.",
       "path": "HCC / Systemic / 2L / Regorafenib",
       "section": "Treatment",
-      "pills": ["regorafenib", "2L"],
+      "pills": [
+        "regorafenib",
+        "2L"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Category 1 per RESORCE, indicated specifically after sorafenib tolerance and progression",
         "Monitor for hand-foot skin reaction, hypertension, hepatotoxicity",
         "Confirm Child-Pugh A function",
         "Dose protocol referenced below; then reassess on progression (next step)"
       ],
-      "protocolRefs": ["hcc-regorafenib"]
+      "protocolRefs": [
+        "hcc-regorafenib"
+      ]
     },
     {
       "id": "n_tx_cabozantinib",
@@ -771,17 +1479,26 @@
       "description": "Multikinase inhibitor active after prior systemic therapy (CELESTIAL, Category 1). Next: on-progression assessment.",
       "path": "HCC / Systemic / 2L / Cabozantinib",
       "section": "Treatment",
-      "pills": ["cabozantinib", "2L"],
+      "pills": [
+        "cabozantinib",
+        "2L"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Category 1 per CELESTIAL; option after progression on one or two prior systemic agents",
         "Monitor for hand-foot skin reaction, diarrhea, hypertension",
         "Confirm Child-Pugh A function",
         "Dose protocol referenced below; then reassess on progression (next step)"
       ],
-      "protocolRefs": ["hcc-cabozantinib"]
+      "protocolRefs": [
+        "hcc-cabozantinib"
+      ]
     },
     {
       "id": "n_tx_ramucirumab",
@@ -792,17 +1509,26 @@
       "description": "Biomarker-directed anti-VEGFR2 antibody (REACH-2, Category 1) for patients with baseline AFP at or above 400 ng/mL after first-line therapy. Next: on-progression assessment.",
       "path": "HCC / Systemic / 2L / Ramucirumab",
       "section": "Treatment",
-      "pills": ["ramucirumab", "AFP high"],
+      "pills": [
+        "ramucirumab",
+        "AFP high"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Biomarker-selected: baseline AFP >= 400 ng/mL (REACH-2, Category 1)",
         "Monitor for hypertension and proteinuria",
         "Confirm Child-Pugh A function",
         "Dose protocol referenced below; then reassess on progression (next step)"
       ],
-      "protocolRefs": ["hcc-ramucirumab"]
+      "protocolRefs": [
+        "hcc-ramucirumab"
+      ]
     },
     {
       "id": "n_tx_nivoipi",
@@ -813,17 +1539,27 @@
       "description": "Dual checkpoint inhibitor option after prior systemic therapy in IO-eligible Child-Pugh A disease. Next: on-progression assessment.",
       "path": "HCC / Systemic / 2L / Nivo-ipi",
       "section": "Treatment",
-      "pills": ["nivo-ipi", "2L"],
+      "pills": [
+        "nivo-ipi",
+        "2L"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Nivolumab + ipilimumab dual checkpoint blockade after progression on prior systemic therapy (including prior TKI) in IO-eligible disease",
         "Confirm Child-Pugh A function and adequate performance status; exclude active autoimmune disease and prior severe immune-related toxicity",
         "Monitor closely for immune-related adverse events: colitis, hepatitis, pneumonitis, endocrinopathies",
         "Checklist guidance only (no StewardMD dose protocol for this doublet in HCC); then reassess on progression (next step)"
       ],
-      "protocolRefs": []
+      "protocolRefs": [
+        "hcc-atezo-bev",
+        "hcc-tace"
+      ]
     },
     {
       "id": "n_prog_2l",
@@ -834,17 +1570,39 @@
       "description": "Restaging after second-line therapy directs a further systemic line versus transition to best supportive care, gated by liver function and performance status.",
       "path": "HCC / Systemic / 2L / On progression",
       "section": "Treatment",
-      "pills": ["sequencing"],
+      "pills": [
+        "sequencing"
+      ],
       "required": true,
-      "footnotes": ["b"],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Preserved Child-Pugh A and good PS: sequence a not-yet-used agent or trial",
         "Declining liver function or poor PS: transition to best supportive care",
         "Reassess AFP trend and symptom burden at each restaging"
       ],
       "options": [
-        { "id": "progression", "label": "Fit for further systemic therapy", "sets": { "line2Outcome": "further" }, "pills": ["further line"] },
-        { "id": "decline", "label": "Declining function / poor PS", "sets": { "line2Outcome": "supportive" }, "pills": ["supportive"] }
+        {
+          "id": "progression",
+          "label": "Fit for further systemic therapy",
+          "sets": {
+            "line2Outcome": "further"
+          },
+          "pills": [
+            "further line"
+          ]
+        },
+        {
+          "id": "decline",
+          "label": "Declining function / poor PS",
+          "sets": {
+            "line2Outcome": "supportive"
+          },
+          "pills": [
+            "supportive"
+          ]
+        }
       ]
     },
     {
@@ -856,17 +1614,26 @@
       "description": "Sequential single-agent therapy after two prior lines in a fit patient, or a clinical trial.",
       "path": "HCC / Systemic / 3L",
       "section": "Treatment",
-      "pills": ["3L"],
+      "pills": [
+        "3L"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2B"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "2B"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Sequence a not-yet-used TKI (regorafenib / cabozantinib) or checkpoint inhibitor per prior exposure",
         "Clinical trial where available",
         "Reassess liver function and performance status before each new line",
         "Transition to best supportive care when Child-Pugh declines or PS is poor"
       ],
-      "protocolRefs": ["hcc-regorafenib", "hcc-cabozantinib"]
+      "protocolRefs": [
+        "hcc-regorafenib",
+        "hcc-cabozantinib"
+      ]
     },
     {
       "id": "n_tx_bsc_late",
@@ -877,15 +1644,25 @@
       "description": "Declining liver function or performance status after systemic therapy: prioritize symptom control and quality of life.",
       "path": "HCC / Systemic / Supportive",
       "section": "Treatment",
-      "pills": ["supportive"],
+      "pills": [
+        "supportive"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Best supportive / palliative care with early palliative-care involvement",
         "Manage ascites, encephalopathy, pain and nutrition; hepatology co-management",
         "Further anticancer therapy is generally inappropriate once Child-Pugh C or poor PS",
         "Advance-care planning and caregiver support"
+      ],
+      "protocolRefs": [
+        "hcc-atezo-bev",
+        "hcc-tace"
       ]
     },
     {
@@ -897,7 +1674,9 @@
       "description": "Recurrence after resection, ablation or transplant: re-stage and treat by pattern.",
       "path": "HCC / Recurrence",
       "section": "Recurrence",
-      "pills": ["recurrence"],
+      "pills": [
+        "recurrence"
+      ],
       "required": true,
       "bullets": [
         "Re-image liver and chest; recheck AFP and liver function",
@@ -905,8 +1684,26 @@
         "Diffuse or extrahepatic recurrence is treated as advanced disease"
       ],
       "options": [
-        { "id": "local", "label": "Localized intrahepatic recurrence", "sets": { "recPattern": "local" }, "pills": ["local"] },
-        { "id": "advanced", "label": "Diffuse / extrahepatic recurrence", "sets": { "recPattern": "advanced" }, "pills": ["advanced"] }
+        {
+          "id": "local",
+          "label": "Localized intrahepatic recurrence",
+          "sets": {
+            "recPattern": "local"
+          },
+          "pills": [
+            "local"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Diffuse / extrahepatic recurrence",
+          "sets": {
+            "recPattern": "advanced"
+          },
+          "pills": [
+            "advanced"
+          ]
+        }
       ]
     },
     {
@@ -918,15 +1715,26 @@
       "description": "Curative or locoregional re-treatment for isolated intrahepatic recurrence with preserved function, then surveillance.",
       "path": "HCC / Recurrence / Local",
       "section": "Recurrence",
-      "pills": ["local", "recurrence"],
+      "pills": [
+        "local",
+        "recurrence"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["d"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
       "bullets": [
         "Re-resection or ablation for isolated resectable / ablatable recurrence",
         "Salvage transplant in selected candidates within criteria",
         "TACE / radioembolization for multifocal but liver-confined recurrence",
         "Then resume surveillance"
+      ],
+      "protocolRefs": [
+        "hcc-atezo-bev",
+        "hcc-tace"
       ]
     },
     {
@@ -938,9 +1746,13 @@
       "description": "Monitoring cadence after curative or locoregional therapy; escalate on recurrence.",
       "path": "HCC / Surveillance",
       "section": "Surveillance",
-      "pills": ["surveillance"],
+      "pills": [
+        "surveillance"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
+      "evidenceCategory": [
+        "2A"
+      ],
       "bullets": [
         "Multiphasic CT / MRI and AFP every 3-6 months for the first 2 years, then every 6-12 months",
         "Ongoing screening of the cirrhotic remnant liver for new primaries",
@@ -948,94 +1760,555 @@
         "A confirmed new lesion or rising AFP enters the recurrence pathway"
       ],
       "linkTo": "n_recurrence",
-      "linkLabel": "If recurrence is detected: go to the Recurrence pathway"
+      "linkLabel": "If recurrence is detected: go to the Recurrence pathway",
+      "protocolRefs": [
+        "hcc-atezo-bev",
+        "hcc-tace"
+      ]
     }
   ],
   "links": [
-    { "id": "l_wk", "from": "n_workup", "to": "n_presentation", "fromOptions": ["continue"], "linkCategory": "conditional" },
-
-    { "id": "l_pres_new", "from": "n_presentation", "to": "n_dx", "fromOptions": ["new_dx"], "linkCategory": "conditional" },
-    { "id": "l_pres_rec", "from": "n_presentation", "to": "n_recurrence", "fromOptions": ["recurrence"], "linkCategory": "conditional" },
-    { "id": "l_pres_fu", "from": "n_presentation", "to": "n_surveillance", "fromOptions": ["followup"], "linkCategory": "conditional" },
-
-    { "id": "l_dx_img", "from": "n_dx", "to": "n_liver_function", "fromOptions": ["radiologic"], "linkCategory": "conditional" },
-    { "id": "l_dx_bx", "from": "n_dx", "to": "n_liver_function", "fromOptions": ["biopsy_confirmed"], "linkCategory": "conditional" },
-    { "id": "l_dx_ind", "from": "n_dx", "to": "n_biopsy", "fromOptions": ["indeterminate"], "linkCategory": "conditional" },
-
-    { "id": "l_lf_a", "from": "n_liver_function", "to": "n_bclc", "fromOptions": ["cp_a"], "linkCategory": "conditional" },
-    { "id": "l_lf_b", "from": "n_liver_function", "to": "n_bclc", "fromOptions": ["cp_b"], "linkCategory": "conditional" },
-    { "id": "l_lf_c", "from": "n_liver_function", "to": "n_bsc", "fromOptions": ["cp_c"], "linkCategory": "conditional" },
-
-    { "id": "l_bclc_0a", "from": "n_bclc", "to": "n_early_options", "fromOptions": ["bclc_0a"], "linkCategory": "conditional" },
-    { "id": "l_bclc_b", "from": "n_bclc", "to": "n_intermediate", "fromOptions": ["bclc_b"], "linkCategory": "conditional" },
-    { "id": "l_bclc_c", "from": "n_bclc", "to": "n_sys_1l", "fromOptions": ["bclc_c"], "linkCategory": "conditional" },
-    { "id": "l_bclc_d", "from": "n_bclc", "to": "n_bsc", "fromOptions": ["bclc_d"], "linkCategory": "conditional" },
-
-    { "id": "l_early_res", "from": "n_early_options", "to": "n_tx_resection", "fromOptions": ["resectable"], "linkCategory": "conditional" },
-    { "id": "l_early_tx", "from": "n_early_options", "to": "n_tx_transplant", "fromOptions": ["transplant"], "linkCategory": "conditional" },
-    { "id": "l_early_abl", "from": "n_early_options", "to": "n_tx_ablation", "fromOptions": ["ablation"], "linkCategory": "conditional" },
-    { "id": "l_early_ds", "from": "n_early_options", "to": "n_tx_downstage", "fromOptions": ["downstage"], "linkCategory": "conditional" },
-
-    { "id": "l_res_path", "from": "n_tx_resection", "to": "n_resection_path", "linkCategory": "conditional" },
-    { "id": "l_respath_high", "from": "n_resection_path", "to": "n_tx_adjuvant", "fromOptions": ["high_risk"], "linkCategory": "conditional" },
-    { "id": "l_respath_low", "from": "n_resection_path", "to": "n_surveillance", "fromOptions": ["low_risk"], "linkCategory": "conditional" },
-    { "id": "l_adj_surv", "from": "n_tx_adjuvant", "to": "n_surveillance", "linkCategory": "conditional" },
-
-    { "id": "l_tx_surv", "from": "n_tx_transplant", "to": "n_surveillance", "linkCategory": "conditional" },
-
-    { "id": "l_abl_resp", "from": "n_tx_ablation", "to": "n_ablation_response", "linkCategory": "conditional" },
-    { "id": "l_ablresp_comp", "from": "n_ablation_response", "to": "n_surveillance", "fromOptions": ["complete"], "linkCategory": "conditional" },
-    { "id": "l_ablresp_res", "from": "n_ablation_response", "to": "n_tx_repeat_ablation", "fromOptions": ["residual"], "linkCategory": "conditional" },
-    { "id": "l_reabl_surv", "from": "n_tx_repeat_ablation", "to": "n_surveillance", "linkCategory": "conditional" },
-
-    { "id": "l_ds_resp", "from": "n_tx_downstage", "to": "n_downstage_response", "linkCategory": "conditional" },
-    { "id": "l_dsresp_in", "from": "n_downstage_response", "to": "n_tx_transplant_list", "fromOptions": ["within_criteria"], "linkCategory": "conditional" },
-    { "id": "l_dsresp_no", "from": "n_downstage_response", "to": "n_sys_1l", "fromOptions": ["no_response"], "linkCategory": "conditional" },
-    { "id": "l_txlist_surv", "from": "n_tx_transplant_list", "to": "n_surveillance", "linkCategory": "conditional" },
-
-    { "id": "l_inter_tace", "from": "n_intermediate", "to": "n_tx_tace", "fromOptions": ["tace"], "linkCategory": "conditional" },
-    { "id": "l_inter_y90", "from": "n_intermediate", "to": "n_tx_y90", "fromOptions": ["y90"], "linkCategory": "conditional" },
-    { "id": "l_inter_sys", "from": "n_intermediate", "to": "n_sys_1l", "fromOptions": ["systemic"], "linkCategory": "conditional" },
-
-    { "id": "l_tace_resp", "from": "n_tx_tace", "to": "n_tace_response", "linkCategory": "conditional" },
-    { "id": "l_y90_resp", "from": "n_tx_y90", "to": "n_tace_response", "linkCategory": "conditional" },
-    { "id": "l_taceresp_cont", "from": "n_tace_response", "to": "n_tx_tace_continue", "fromOptions": ["response_ongoing"], "linkCategory": "conditional" },
-    { "id": "l_taceresp_ref", "from": "n_tace_response", "to": "n_sys_1l", "fromOptions": ["tace_refractory"], "linkCategory": "conditional" },
-    { "id": "l_tacecont_surv", "from": "n_tx_tace_continue", "to": "n_surveillance", "linkCategory": "conditional" },
-
-    { "id": "l_1l_ab", "from": "n_sys_1l", "to": "n_tx_atezobev", "fromOptions": ["atezobev"], "linkCategory": "conditional" },
-    { "id": "l_1l_dt", "from": "n_sys_1l", "to": "n_tx_durvatreme", "fromOptions": ["durvatreme"], "linkCategory": "conditional" },
-    { "id": "l_1l_tki", "from": "n_sys_1l", "to": "n_tki_choice", "fromOptions": ["tki"], "linkCategory": "conditional" },
-
-    { "id": "l_tki_lenva", "from": "n_tki_choice", "to": "n_tx_lenvatinib", "fromOptions": ["lenva"], "linkCategory": "conditional" },
-    { "id": "l_tki_sora", "from": "n_tki_choice", "to": "n_tx_sorafenib", "fromOptions": ["sora"], "linkCategory": "conditional" },
-
-    { "id": "l_ab_prog", "from": "n_tx_atezobev", "to": "n_prog_1l", "linkCategory": "conditional" },
-    { "id": "l_dt_prog", "from": "n_tx_durvatreme", "to": "n_prog_1l", "linkCategory": "conditional" },
-    { "id": "l_lenva_prog", "from": "n_tx_lenvatinib", "to": "n_prog_1l", "linkCategory": "conditional" },
-    { "id": "l_sora_prog", "from": "n_tx_sorafenib", "to": "n_prog_1l", "linkCategory": "conditional" },
-
-    { "id": "l_prog1_cont", "from": "n_prog_1l", "to": "n_tx_continue_1l", "fromOptions": ["ongoing_response"], "linkCategory": "conditional" },
-    { "id": "l_prog1_prog", "from": "n_prog_1l", "to": "n_sys_2l", "fromOptions": ["progression"], "linkCategory": "conditional" },
-    { "id": "l_prog1_intol", "from": "n_prog_1l", "to": "n_tx_switch_intol", "fromOptions": ["intolerance"], "linkCategory": "conditional" },
-    { "id": "l_cont1_surv", "from": "n_tx_continue_1l", "to": "n_surveillance", "linkCategory": "conditional" },
-    { "id": "l_intol_2l", "from": "n_tx_switch_intol", "to": "n_sys_2l", "linkCategory": "conditional" },
-
-    { "id": "l_2l_rego", "from": "n_sys_2l", "to": "n_tx_regorafenib", "fromOptions": ["post_sora"], "linkCategory": "conditional" },
-    { "id": "l_2l_cabo", "from": "n_sys_2l", "to": "n_tx_cabozantinib", "fromOptions": ["general"], "linkCategory": "conditional" },
-    { "id": "l_2l_ram", "from": "n_sys_2l", "to": "n_tx_ramucirumab", "fromOptions": ["afp_high"], "linkCategory": "conditional" },
-    { "id": "l_2l_nivoipi", "from": "n_sys_2l", "to": "n_tx_nivoipi", "fromOptions": ["io_doublet"], "linkCategory": "conditional" },
-
-    { "id": "l_rego_prog", "from": "n_tx_regorafenib", "to": "n_prog_2l", "linkCategory": "conditional" },
-    { "id": "l_cabo_prog", "from": "n_tx_cabozantinib", "to": "n_prog_2l", "linkCategory": "conditional" },
-    { "id": "l_ram_prog", "from": "n_tx_ramucirumab", "to": "n_prog_2l", "linkCategory": "conditional" },
-    { "id": "l_nivoipi_prog", "from": "n_tx_nivoipi", "to": "n_prog_2l", "linkCategory": "conditional" },
-
-    { "id": "l_prog2_prog", "from": "n_prog_2l", "to": "n_tx_systemic_3l", "fromOptions": ["progression"], "linkCategory": "conditional" },
-    { "id": "l_prog2_bsc", "from": "n_prog_2l", "to": "n_tx_bsc_late", "fromOptions": ["decline"], "linkCategory": "conditional" },
-
-    { "id": "l_rec_local", "from": "n_recurrence", "to": "n_tx_repeat_local", "fromOptions": ["local"], "linkCategory": "conditional" },
-    { "id": "l_rec_adv", "from": "n_recurrence", "to": "n_sys_1l", "fromOptions": ["advanced"], "linkCategory": "conditional" },
-    { "id": "l_replocal_surv", "from": "n_tx_repeat_local", "to": "n_surveillance", "linkCategory": "conditional" }
+    {
+      "id": "l_wk",
+      "from": "n_workup",
+      "to": "n_presentation",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pres_new",
+      "from": "n_presentation",
+      "to": "n_dx",
+      "fromOptions": [
+        "new_dx"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pres_rec",
+      "from": "n_presentation",
+      "to": "n_recurrence",
+      "fromOptions": [
+        "recurrence"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pres_fu",
+      "from": "n_presentation",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "followup"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_dx_img",
+      "from": "n_dx",
+      "to": "n_liver_function",
+      "fromOptions": [
+        "radiologic"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_dx_bx",
+      "from": "n_dx",
+      "to": "n_liver_function",
+      "fromOptions": [
+        "biopsy_confirmed"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_dx_ind",
+      "from": "n_dx",
+      "to": "n_biopsy",
+      "fromOptions": [
+        "indeterminate"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lf_a",
+      "from": "n_liver_function",
+      "to": "n_bclc",
+      "fromOptions": [
+        "cp_a"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lf_b",
+      "from": "n_liver_function",
+      "to": "n_bclc",
+      "fromOptions": [
+        "cp_b"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lf_c",
+      "from": "n_liver_function",
+      "to": "n_bsc",
+      "fromOptions": [
+        "cp_c"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bclc_0a",
+      "from": "n_bclc",
+      "to": "n_early_options",
+      "fromOptions": [
+        "bclc_0a"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bclc_b",
+      "from": "n_bclc",
+      "to": "n_intermediate",
+      "fromOptions": [
+        "bclc_b"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bclc_c",
+      "from": "n_bclc",
+      "to": "n_sys_1l",
+      "fromOptions": [
+        "bclc_c"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bclc_d",
+      "from": "n_bclc",
+      "to": "n_bsc",
+      "fromOptions": [
+        "bclc_d"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_early_res",
+      "from": "n_early_options",
+      "to": "n_tx_resection",
+      "fromOptions": [
+        "resectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_early_tx",
+      "from": "n_early_options",
+      "to": "n_tx_transplant",
+      "fromOptions": [
+        "transplant"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_early_abl",
+      "from": "n_early_options",
+      "to": "n_tx_ablation",
+      "fromOptions": [
+        "ablation"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_early_ds",
+      "from": "n_early_options",
+      "to": "n_tx_downstage",
+      "fromOptions": [
+        "downstage"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_res_path",
+      "from": "n_tx_resection",
+      "to": "n_resection_path",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_respath_high",
+      "from": "n_resection_path",
+      "to": "n_tx_adjuvant",
+      "fromOptions": [
+        "high_risk"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_respath_low",
+      "from": "n_resection_path",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "low_risk"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_surv",
+      "from": "n_tx_adjuvant",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_tx_surv",
+      "from": "n_tx_transplant",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_abl_resp",
+      "from": "n_tx_ablation",
+      "to": "n_ablation_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ablresp_comp",
+      "from": "n_ablation_response",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "complete"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ablresp_res",
+      "from": "n_ablation_response",
+      "to": "n_tx_repeat_ablation",
+      "fromOptions": [
+        "residual"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_reabl_surv",
+      "from": "n_tx_repeat_ablation",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ds_resp",
+      "from": "n_tx_downstage",
+      "to": "n_downstage_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_dsresp_in",
+      "from": "n_downstage_response",
+      "to": "n_tx_transplant_list",
+      "fromOptions": [
+        "within_criteria"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_dsresp_no",
+      "from": "n_downstage_response",
+      "to": "n_sys_1l",
+      "fromOptions": [
+        "no_response"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_txlist_surv",
+      "from": "n_tx_transplant_list",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_inter_tace",
+      "from": "n_intermediate",
+      "to": "n_tx_tace",
+      "fromOptions": [
+        "tace"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_inter_y90",
+      "from": "n_intermediate",
+      "to": "n_tx_y90",
+      "fromOptions": [
+        "y90"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_inter_sys",
+      "from": "n_intermediate",
+      "to": "n_sys_1l",
+      "fromOptions": [
+        "systemic"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_tace_resp",
+      "from": "n_tx_tace",
+      "to": "n_tace_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_y90_resp",
+      "from": "n_tx_y90",
+      "to": "n_tace_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_taceresp_cont",
+      "from": "n_tace_response",
+      "to": "n_tx_tace_continue",
+      "fromOptions": [
+        "response_ongoing"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_taceresp_ref",
+      "from": "n_tace_response",
+      "to": "n_sys_1l",
+      "fromOptions": [
+        "tace_refractory"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_tacecont_surv",
+      "from": "n_tx_tace_continue",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_1l_ab",
+      "from": "n_sys_1l",
+      "to": "n_tx_atezobev",
+      "fromOptions": [
+        "atezobev"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_1l_dt",
+      "from": "n_sys_1l",
+      "to": "n_tx_durvatreme",
+      "fromOptions": [
+        "durvatreme"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_1l_tki",
+      "from": "n_sys_1l",
+      "to": "n_tki_choice",
+      "fromOptions": [
+        "tki"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_tki_lenva",
+      "from": "n_tki_choice",
+      "to": "n_tx_lenvatinib",
+      "fromOptions": [
+        "lenva"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_tki_sora",
+      "from": "n_tki_choice",
+      "to": "n_tx_sorafenib",
+      "fromOptions": [
+        "sora"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ab_prog",
+      "from": "n_tx_atezobev",
+      "to": "n_prog_1l",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_dt_prog",
+      "from": "n_tx_durvatreme",
+      "to": "n_prog_1l",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lenva_prog",
+      "from": "n_tx_lenvatinib",
+      "to": "n_prog_1l",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_sora_prog",
+      "from": "n_tx_sorafenib",
+      "to": "n_prog_1l",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prog1_cont",
+      "from": "n_prog_1l",
+      "to": "n_tx_continue_1l",
+      "fromOptions": [
+        "ongoing_response"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prog1_prog",
+      "from": "n_prog_1l",
+      "to": "n_sys_2l",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prog1_intol",
+      "from": "n_prog_1l",
+      "to": "n_tx_switch_intol",
+      "fromOptions": [
+        "intolerance"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_cont1_surv",
+      "from": "n_tx_continue_1l",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_intol_2l",
+      "from": "n_tx_switch_intol",
+      "to": "n_sys_2l",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2l_rego",
+      "from": "n_sys_2l",
+      "to": "n_tx_regorafenib",
+      "fromOptions": [
+        "post_sora"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2l_cabo",
+      "from": "n_sys_2l",
+      "to": "n_tx_cabozantinib",
+      "fromOptions": [
+        "general"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2l_ram",
+      "from": "n_sys_2l",
+      "to": "n_tx_ramucirumab",
+      "fromOptions": [
+        "afp_high"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2l_nivoipi",
+      "from": "n_sys_2l",
+      "to": "n_tx_nivoipi",
+      "fromOptions": [
+        "io_doublet"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rego_prog",
+      "from": "n_tx_regorafenib",
+      "to": "n_prog_2l",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_cabo_prog",
+      "from": "n_tx_cabozantinib",
+      "to": "n_prog_2l",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ram_prog",
+      "from": "n_tx_ramucirumab",
+      "to": "n_prog_2l",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_nivoipi_prog",
+      "from": "n_tx_nivoipi",
+      "to": "n_prog_2l",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prog2_prog",
+      "from": "n_prog_2l",
+      "to": "n_tx_systemic_3l",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prog2_bsc",
+      "from": "n_prog_2l",
+      "to": "n_tx_bsc_late",
+      "fromOptions": [
+        "decline"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rec_local",
+      "from": "n_recurrence",
+      "to": "n_tx_repeat_local",
+      "fromOptions": [
+        "local"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rec_adv",
+      "from": "n_recurrence",
+      "to": "n_sys_1l",
+      "fromOptions": [
+        "advanced"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_replocal_surv",
+      "from": "n_tx_repeat_local",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    }
+  ],
+  "protocolRefs": [
+    "gi-hcc-sorafenib",
+    "hcc-atezo-bev",
+    "hcc-cabozantinib",
+    "hcc-durva-treme",
+    "hcc-lenvatinib",
+    "hcc-ramucirumab",
+    "hcc-regorafenib",
+    "hcc-tace",
+    "hcc-y90-radioembolization"
   ]
 }

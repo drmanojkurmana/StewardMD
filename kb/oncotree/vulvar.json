@@ -183,7 +183,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Radical Local Excision with >=1cm Margins (No Groin Dissection Required)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "gyn-vulvar-cisplatin-rt"
+      ]
     },
     {
       "id": "n_stage_ib_ii_tx",
@@ -220,7 +222,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Radical Local Excision + Sentinel Lymph Node Biopsy (SLNB) or Inguinofemoral Dissection",
-      "protocolRefs": []
+      "protocolRefs": [
+        "gyn-vulvar-cisplatin-rt"
+      ]
     },
     {
       "id": "n_locally_advanced_tx",
@@ -255,7 +259,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Definitive Concurrent ChemoRT (Pelvic/Groin EBRT + Weekly Cisplatin 40 mg/m2)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "gyn-vulvar-cisplatin-rt"
+      ]
     },
     {
       "id": "n_metastatic_tx",
@@ -291,7 +297,10 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Carboplatin/Cisplatin + Paclitaxel + Pembrolizumab +/- Bevacizumab",
-      "protocolRefs": []
+      "protocolRefs": [
+        "cervical-pembrolizumab",
+        "gyn-vulvar-cisplatin-rt"
+      ]
     }
   ],
   "links": [
@@ -355,5 +364,9 @@
         "metastatic"
       ]
     }
+  ],
+  "protocolRefs": [
+    "cervical-pembrolizumab",
+    "gyn-vulvar-cisplatin-rt"
   ]
 }

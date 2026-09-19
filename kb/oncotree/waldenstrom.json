@@ -1,7 +1,7 @@
 {
   "guideline": "waldenstrom",
   "id": "waldenstrom",
-  "title": "Waldenstr\u00f6m Macroglobulinemia",
+  "title": "Waldenström Macroglobulinemia",
   "category": "Hematologic Malignancies",
   "version": "1.2027",
   "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2027)",
@@ -96,7 +96,7 @@
       "options": [
         {
           "id": "asymptomatic",
-          "label": "Asymptomatic / Smoldering Waldenstr\u00f6m Macroglobulinemia (No cytopenias, neuropathy, or hyperviscosity)",
+          "label": "Asymptomatic / Smoldering Waldenström Macroglobulinemia (No cytopenias, neuropathy, or hyperviscosity)",
           "sets": {
             "phase": "asymptomatic"
           },
@@ -136,7 +136,7 @@
         },
         {
           "id": "relapsed",
-          "label": "Relapsed or Refractory Waldenstr\u00f6m Macroglobulinemia",
+          "label": "Relapsed or Refractory Waldenström Macroglobulinemia",
           "sets": {
             "phase": "relapsed_refractory"
           },
@@ -181,7 +181,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Active Surveillance (Watch and Wait) with Serial CBC/IgM Monitoring",
-      "protocolRefs": []
+      "protocolRefs": [
+        "waldenstrom-zanubrutinib"
+      ]
     },
     {
       "id": "n_btki_1l_tx",
@@ -217,7 +219,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Zanubrutinib 160 mg PO BID (or Ibrutinib 420 mg) +/- Rituximab",
-      "protocolRefs": []
+      "protocolRefs": [
+        "waldenstrom-zanubrutinib"
+      ]
     },
     {
       "id": "n_chemoimmuno_1l_tx",
@@ -253,7 +257,10 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Bendamustine + Rituximab (BR) x 4-6 cycles or DRC x 6 cycles",
-      "protocolRefs": []
+      "protocolRefs": [
+        "wm-bendamustine-rituximab",
+        "wm-drc"
+      ]
     },
     {
       "id": "n_relapsed_tx",
@@ -288,7 +295,10 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Pirtobrutinib (Non-Covalent BTKi) or Venetoclax 800 mg Daily -> Autologous HCT",
-      "protocolRefs": []
+      "protocolRefs": [
+        "waldenstrom-zanubrutinib",
+        "wm-bendamustine-rituximab"
+      ]
     }
   ],
   "links": [
@@ -354,6 +364,8 @@
     }
   ],
   "protocolRefs": [
-    "waldenstrom-zanubrutinib"
+    "waldenstrom-zanubrutinib",
+    "wm-bendamustine-rituximab",
+    "wm-drc"
   ]
 }

@@ -378,6 +378,33 @@ try {
   `) === true, "plugin.open receives the https EMR URL, deployment origins, and deployment id as storeId");
   ok(await ev(noDash) === true, "login copy has no em-dash");
 
+  /* 4a. THE FLAG IS NOT THE BROWSER. Coming back to sign-in after a failed discovery, S.loginOpened
+   * is still set from the first attempt, so openLoginPlugin() returned early and the hospital website
+   * was never opened — the doctor read "Sign in yourself inside the hospital website that just
+   * opened" with nothing open. Seen on the owner's iPhone 2026-09-18: screen=login, currentUrl()
+   * answering "not-open", recoverable only by hand via Try again. And the sign-in screen replayed the
+   * previous attempt's error ("Discovery could not complete..."), which reads as if signing in failed. */
+  await ev(`window.__pluginCalls.length = 0;
+    delete window.Capacitor.Plugins.ConnectBrowser.currentUrl;
+    window.Capacitor.Plugins.ConnectBrowser.currentUrl = function () { return Promise.reject(new Error("not-open")); };
+    window.SMD_CONNECT_AGENT.__setState({ statusKind: "bad", statusText: "Discovery could not complete: observedViews: proof status invalid. You can try again." });
+    window.SMD_CONNECT_AGENT.__paintLogin(); return 1;`);
+  ok(await waitFor(`return window.__pluginCalls.filter(function(c){return c.m==="open";}).length>=1;`, 6000),
+     "returning to sign-in with the hospital browser shut opens it again, instead of trusting the stale flag");
+  ok(await ev(`var t=(document.getElementById("smd-connect-status")||{}).textContent||""; return t.indexOf("Discovery could not complete")<0 && t.length>0;`) === true,
+     "...and the fresh sign-in screen does not replay the previous attempt's failure");
+  // a browser that IS open must not be opened a second time
+  await ev(`window.__pluginCalls.length = 0;
+    delete window.Capacitor.Plugins.ConnectBrowser.currentUrl;
+    window.Capacitor.Plugins.ConnectBrowser.currentUrl = function () { return Promise.resolve({ url: "https://emr.newcity.example/login", title: "" }); };
+    window.SMD_CONNECT_AGENT.__paintLogin(); return 1;`);
+  await new Promise((r) => setTimeout(r, 1200));
+  ok(await ev(`return window.__pluginCalls.filter(function(c){return c.m==="open";}).length===0;`) === true,
+     "...but a hospital browser that is already open is never re-opened underneath the doctor");
+  await ev(`delete window.Capacitor.Plugins.ConnectBrowser.currentUrl;
+    window.Capacitor.Plugins.ConnectBrowser.currentUrl = function () { return Promise.resolve({ url: "", title: "" }); };
+    window.SMD_CONNECT_AGENT.__setState({ statusKind: "", statusText: "" }); return 1;`);
+
   /* 4b. AN SSO HOSPITAL MOVES BEFORE THE DOCTOR IS IN. The sign-in poll sees no password box on the
    * module chooser at another host. Movement alone must never be read as a completed sign in: on GIMSR
    * that would hand the browser to the agent while the doctor is still choosing a module. */

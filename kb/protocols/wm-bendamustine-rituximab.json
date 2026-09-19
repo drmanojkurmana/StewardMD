@@ -1,0 +1,81 @@
+{
+  "id": "wm-bendamustine-rituximab",
+  "diseaseId": "waldenstrom",
+  "name": "Bendamustine + Rituximab (BR) (Waldenström Macroglobulinemia)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Waldenström Macroglobulinemia v1.2026",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer, 12th ed."
+  },
+  "stage": [
+    "symptomatic"
+  ],
+  "treatmentSetting": [
+    "first-line",
+    "salvage"
+  ],
+  "histology": "lymphoplasmacytic lymphoma / Waldenström macroglobulinemia",
+  "premedications": [
+    {
+      "name": "Acetaminophen",
+      "dose": "650 mg PO",
+      "notes": "30 min prior to rituximab"
+    },
+    {
+      "name": "Diphenhydramine",
+      "dose": "25-50 mg IV/PO",
+      "notes": "30 min prior to rituximab"
+    }
+  ],
+  "supportiveCare": [
+    "PJP and VZV prophylaxis",
+    "Prehydration and TLS prophylaxis"
+  ],
+  "monitoring": [
+    "CBC weekly",
+    "Serum IgM and SPEP/IFE each cycle",
+    "Serum viscosity for hyperviscosity syndrome"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "bendamustine",
+      "name": "Bendamustine",
+      "basis": "bsa",
+      "dosePerUnit": 90,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2
+      ],
+      "notes": "Bendamustine 90 mg/m2 IV over 30-60 min on Days 1 and 2."
+    },
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Rituximab 375 mg/m2 IV on Day 1. Caution with IgM flare; plasmapheresis indicated if IgM > 4000 mg/dL or symptomatic hyperviscosity."
+    }
+  ]
+}

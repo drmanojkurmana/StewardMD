@@ -181,3 +181,40 @@ test('verifyViews explores the detail chain for a list the doctor showed, not on
   await verifyViews({ plugin, origin: ORIGIN, views, brain, book, parseHtml: miniParse });
   assert.ok(labs.chain, 'the chain was attempted for the list the doctor showed');
 });
+
+
+/* SILENCE WAS THE BUG. Run 6 (owner's iPhone, 2026-09-18) finished looking healthy - 763 real patients,
+ * five of the six gate resources proven - and was then refused approval: "not endpoint-complete: no
+ * proven backend request for labs-detail". The chain block only ever pushed to `checks`, so a lab list
+ * that proved while its detail did not never reached `failed`, never became a gap, and the doctor was
+ * never asked. Reporting the miss is what lets the run ask for it instead of failing at the very end. */
+test('a proven list whose detail never proved is reported, so it can be asked for', async () => {
+  const plugin = {
+    async navigate() {}, async wait() {},
+    async currentUrl() { return { url: ORIGIN + '/Lab/Home' }; },
+    async drainRequests() { return { requests: [] }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: JSON.stringify({ __RequestVerificationToken: 't' }) };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '[]' };
+      const reply = (o) => ({ result: JSON.stringify(Object.assign({ status: 200, contentType: 'application/json', url: req.url }, o)) });
+      if (req.url.indexOf('/GetIPWL') >= 0) return reply({ text: JSON.stringify([{ patientId: 'MR1', patientFirstName: 'A', episodeId: 'V1' }]) });
+      if (req.url.indexOf('/GetSearchPatientId') >= 0) {
+        return reply({ contentType: 'text/html', text: '<table><tr><th>Order ID</th><th>Test</th></tr><tr><td>OR1</td><td>CBC</td></tr></table>' });
+      }
+      return reply({ text: '' });
+    },
+  };
+  const views = [
+    { resourceHint: 'worklist', pathTemplate: ORIGIN + '/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['Patient ID'], endpoints: [{ method: 'GET', path: '/Doctor/Home/GetIPWL?Type&start&length' }] },
+    { resourceHint: 'labs', pathTemplate: ORIGIN + '/Lab/Home', rowsSelector: '#example15 tbody tr', headers: ['Order ID', 'Test'], proof: { status: 'proven' }, searched: true,
+      endpoints: [{ method: 'POST', path: '/Lab/Home/GetSearchPatientId', role: 'data', bodyKeys: ['patient_id'], params: { patient_id: { from: 'worklist', field: 'patientId' } } }] },
+  ];
+  const book = { prove: async () => null, note: () => {} };
+  const brain = { verify: async (p) => ({ ok: true, resource: p.resource, confidence: 0.9, reason: 'looks right', suggestion: 'ok' }) };
+  const out = await verifyViews({ plugin, origin: ORIGIN, views, brain, book, parseHtml: miniParse });
+  assert.ok(out.failed.includes('labs-detail'),
+    'labs proved but no labs-detail did, so it must be reported as missing: ' + JSON.stringify(out.failed));
+  assert.ok(!out.failed.includes('radiology-detail'),
+    'a detail whose parent list never proved is not the doctor\'s problem to fix: ' + JSON.stringify(out.failed));
+});

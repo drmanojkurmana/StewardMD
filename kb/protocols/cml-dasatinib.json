@@ -1,0 +1,83 @@
+{
+  "id": "cml-dasatinib",
+  "diseaseId": "cml",
+  "name": "Dasatinib 100 mg (Chronic Myeloid Leukemia - Second-Generation TKI)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "disease-control",
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 12,
+  "caps": "drug",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Chronic Myeloid Leukemia v1.2026"
+  },
+  "stage": [
+    "chronic-phase",
+    "accelerated-phase",
+    "blast-phase"
+  ],
+  "treatmentSetting": [
+    "first-line",
+    "second-line"
+  ],
+  "histology": "chronic myeloid leukemia (BCR::ABL1 positive)",
+  "premedications": [],
+  "supportiveCare": [
+    "Monitor for pleural effusion, fluid retention, and pulmonary arterial hypertension"
+  ],
+  "monitoring": [
+    "Chest X-ray for pleural effusion",
+    "BCR::ABL1 RT-PCR q3m",
+    "CBC, CMP"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "cardiac"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "dasatinib",
+      "name": "Dasatinib",
+      "basis": "flat",
+      "dosePerUnit": 100,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "notes": "Dasatinib 100 mg PO once daily continuously. For accelerated or blast phase, dose is 140 mg PO once daily."
+    }
+  ]
+}

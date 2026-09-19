@@ -8,7 +8,7 @@
 
 import { captureView } from './deep-crawl.mjs';
 
-const GIMSR_HOSTS = ['gimsrlogin.gitam.edu', 'ghis.gitam.edu'];
+export const GIMSR_HOSTS = ['gimsrlogin.gitam.edu', 'ghis.gitam.edu'];
 
 /* READ-TIME SELF-REPAIR. When an approved adapter reads zero rows, the doctor is asked this once, in
  * the browser header; the screen they land on is captured (structure only) and read right away, and
@@ -317,8 +317,41 @@ export function viewOrigin(view, fallback) {
   return fallback;
 }
 
+/* MULTI-HOSPITAL DATA ORIGIN. An approved adapter may declare where its data lives:
+ * view.dataOrigin (the data host outright) or view.redirectOriginMap ({ loginHost: dataHost }).
+ * Either wins over the recorded path; otherwise the view's own host stands, with the standing
+ * GIMSR alias (sign-in on gimsrlogin, data on ghis) preserved. viewOrigin() above is unchanged
+ * for backwards compatibility; this is the resolver the read paths use. */
+export function resolveDataOrigin(view, origins, fallback) {
+  try {
+    const d = view && (view.dataOrigin || view.data_origin);
+    if (d) {
+      try { return new URL(String(d)).origin; } catch { /* relative-ish: fall through */ }
+      if (typeof d === 'string' && d) return d.replace(/\/$/, '');
+    }
+    const map = view && (view.redirectOriginMap || view.redirect_origin_map);
+    if (map && typeof map === 'object') {
+      const cands = [];
+      if (fallback) cands.push(fallback);
+      if (Array.isArray(origins)) cands.push(...origins);
+      else if (origins) cands.push(origins);
+      try { cands.push(new URL(String((view && (view.pathTemplate || view.path)) || '')).origin); } catch { /* relative */ }
+      for (const c of cands) {
+        let h = '';
+        try { h = new URL(String(c)).host; } catch { h = String(c || ''); }
+        if (h && map[h]) {
+          try { return new URL(String(map[h])).origin; } catch { return String(map[h]); }
+        }
+      }
+    }
+  } catch { /* fall through to the default below */ }
+  const base = viewOrigin(view, fallback);
+  if (isGimsrOrigin(base)) return 'https://ghis.gitam.edu';
+  return base;
+}
+
 export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitMs = 20000, pollMs = 1000, navigate = true, toggleAll = false }) {
-  origin = viewOrigin(view, origin);
+  origin = resolveDataOrigin(view, null, origin);
   if (navigate) {
     /* Already on the page (the doctor signed in and landed on it): reading it as it stands keeps the
      * context the EMR set for them; a reload from the address bar can lose it. */
@@ -466,7 +499,7 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
   if (activation.endpoints.length) {
     const ar = await import('./adapter-runtime.mjs');
     try {
-      await ar.executeProven({ plugin, origin: viewOrigin(activation.view, origin), view: { pathTemplate: activation.view.pathTemplate, resourceHint: 'patient', proof: { status: 'proven' }, endpoints: activation.endpoints }, patient });
+      await ar.executeProven({ plugin, origin: resolveDataOrigin(activation.view, null, origin), view: { pathTemplate: activation.view.pathTemplate, resourceHint: 'patient', proof: { status: 'proven' }, endpoints: activation.endpoints }, patient });
     } catch (e) {
       /* An activation this patient's row cannot fill (UnscopedRequest), or one the hospital refused or
        * redirected: the reads still go out and answer for themselves. A session that is really gone
@@ -485,7 +518,7 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
      * (2026-09-15). The hand-built adapter never loads a page either. */
     if (!provenView(v)) { out.push({ resource: r, unreadable: 'not-proven' }); return out; }
     let replayed = null;
-    const vo = viewOrigin(v, origin);
+    const vo = resolveDataOrigin(v, null, origin);
     try { replayed = await replayFirst({ plugin, origin: vo, view: afterActivation(v), patient, onRead }); } catch (e) {
       /* A REDIRECT FROM ONE CALL IS THAT CALL'S ANSWER. GHIS answers GetInitialAssessmentnew with a 302
        * to SSO in every session (the hand-built adapter notes it and reads the rest regardless). One
@@ -513,7 +546,7 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
           let got = null;
           /* A row whose chain key is missing is skipped, not guessed at and not fatal: the other rows
            * of this list are still read (adapter-runtime brokenChainField). */
-          try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) {
+          try { got = await ar.executeView({ plugin, origin: resolveDataOrigin(d, null, origin), view: d, patient, parentRow: row }); } catch (e) {
             if (e && e.name === 'NotSignedIn') return { stop: true };   // the detail chain stops; the list itself was read
             got = null;
           }

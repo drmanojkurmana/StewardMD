@@ -226,12 +226,12 @@
       "showsRecommendation": true,
       "bullets": [
         "Category 1 Preferred Frontline Regimen: MAP Regimen (High-Dose Methotrexate, Doxorubicin [Adriamycin], Cisplatin).",
-        "\u2022 High-Dose Methotrexate (12 g/m2 IV with leucovorin rescue and urine alkalinization), Cisplatin (100-120 mg/m2), and Doxorubicin (75 mg/m2) for 2 to 3 preoperative cycles (~10 weeks).",
+        "• High-Dose Methotrexate (12 g/m2 IV with leucovorin rescue and urine alkalinization), Cisplatin (100-120 mg/m2), and Doxorubicin (75 mg/m2) for 2 to 3 preoperative cycles (~10 weeks).",
         "Definitive Surgical Resection (Limb Salvage vs Amputation):",
-        "\u2022 Wide surgical resection with negative margins (R0) and complete removal of biopsy tract; endoprosthetic reconstruction, allograft, or rotationplasty.",
+        "• Wide surgical resection with negative margins (R0) and complete removal of biopsy tract; endoprosthetic reconstruction, allograft, or rotationplasty.",
         "Pathologic Necrosis Assessment (Huvos Grading):",
-        "\u2022 Good histologic response (>=90% tumor necrosis): Resume and complete planned postoperative adjuvant MAP chemotherapy for a total of 29-32 weeks.",
-        "\u2022 Poor histologic response (<90% tumor necrosis): Complete remaining adjuvant MAP cycles; addition of ifosfamide and etoposide (MAPIE) has been utilized, though EURAMOS-1 showed equivalent survival.",
+        "• Good histologic response (>=90% tumor necrosis): Resume and complete planned postoperative adjuvant MAP chemotherapy for a total of 29-32 weeks.",
+        "• Poor histologic response (<90% tumor necrosis): Complete remaining adjuvant MAP cycles; addition of ifosfamide and etoposide (MAPIE) has been utilized, though EURAMOS-1 showed equivalent survival.",
         "Surveillance: Physical exam, local MRI/radiographs, and chest imaging (CT/x-ray) every 3 months for 2 years, every 6 months for years 3-5, then annually up to 10 years."
       ]
     },
@@ -257,9 +257,9 @@
         "First-Line Intensive Chemotherapy: MAP (Methotrexate, Doxorubicin, Cisplatin) or Cisplatin + Doxorubicin + Ifosfamide.",
         "Surgical Metastasectomy (Potentially Curative): For patients with resectable pulmonary metastases achieving primary disease control, complete surgical resection of all lung metastases (thoracotomy/video-assisted thoracoscopy with wedge resections) yields long-term 5-year survival ~30-40%.",
         "Subsequent Lines / Refractory Disease:",
-        "\u2022 Targeted Multikinase Inhibitors: Regorafenib (160 mg daily days 1-21 q28d) or Cabozantinib (60 mg daily) significantly prolong progression-free survival in relapsed/refractory osteosarcoma (REGOBONE / CABONE trials).",
-        "\u2022 Cytotoxic Salvage: Gemcitabine + Docetaxel, Ifosfamide + Etoposide, or High-Dose Ifosfamide.",
-        "\u2022 Bone-targeting radiopharmaceuticals: Radium-223 or Samarium-153 for widespread painful osteoblastic skeletal metastases."
+        "• Targeted Multikinase Inhibitors: Regorafenib (160 mg daily days 1-21 q28d) or Cabozantinib (60 mg daily) significantly prolong progression-free survival in relapsed/refractory osteosarcoma (REGOBONE / CABONE trials).",
+        "• Cytotoxic Salvage: Gemcitabine + Docetaxel, Ifosfamide + Etoposide, or High-Dose Ifosfamide.",
+        "• Bone-targeting radiopharmaceuticals: Radium-223 or Samarium-153 for widespread painful osteoblastic skeletal metastases."
       ]
     },
     {
@@ -282,14 +282,17 @@
       "showsRecommendation": true,
       "bullets": [
         "Category 1 Preferred First-Line Strategy: Interval-Compressed VDC/IE (AEWS0031 trial):",
-        "\u2022 Vincristine (2 mg/m2), Doxorubicin (75 mg/m2), and Cyclophosphamide (1200 mg/m2 with mesna) alternating with Ifosfamide (1800 mg/m2/d x 5 with mesna) and Etoposide (100 mg/m2/d x 5).",
-        "\u2022 Administered every 14 days with mandatory G-CSF / filgrastim support; interval compression significantly improves event-free and overall survival compared to standard 3-week scheduling.",
+        "• Vincristine (2 mg/m2), Doxorubicin (75 mg/m2), and Cyclophosphamide (1200 mg/m2 with mesna) alternating with Ifosfamide (1800 mg/m2/d x 5 with mesna) and Etoposide (100 mg/m2/d x 5).",
+        "• Administered every 14 days with mandatory G-CSF / filgrastim support; interval compression significantly improves event-free and overall survival compared to standard 3-week scheduling.",
         "Neoadjuvant Phase: 9 to 12 weeks of VDC/IE prior to local control evaluation.",
         "Local Control Modality (Week 12-14):",
-        "\u2022 Complete surgical resection with negative margins (preferred when functionally feasible).",
-        "\u2022 Definitive Radiation Therapy (50.4\u201355.8 Gy) for surgically unresectable lesions or positive surgical margins.",
+        "• Complete surgical resection with negative margins (preferred when functionally feasible).",
+        "• Definitive Radiation Therapy (50.4–55.8 Gy) for surgically unresectable lesions or positive surgical margins.",
         "Consolidation Phase: Complete remaining cycles of interval-compressed VDC/IE (total of 14-17 cycles, ~28-30 weeks of therapy).",
         "Relapsed/Refractory Options: Topotecan + Cyclophosphamide, Irinotecan + Temozolomide, High-dose Ifosfamide, Cabozantinib, or Lenvatinib."
+      ],
+      "protocolRefs": [
+        "sarc-ewing-vdc-ie"
       ]
     },
     {
@@ -316,7 +319,7 @@
       "options": [
         {
           "id": "chondro_conv",
-          "label": "Conventional Chondrosarcoma (Grades 1\u20133, Clear Cell)",
+          "label": "Conventional Chondrosarcoma (Grades 1–3, Clear Cell)",
           "sets": {
             "chondro_type": "conventional"
           },
@@ -359,9 +362,12 @@
         "Primary Curative Modality: Complete en bloc wide surgical excision with negative margins (R0 resection). Intralesional curettage with local adjuvant (phenol/cryotherapy) only acceptable for select low-grade intraosseous (ACT) appendicular lesions.",
         "Chemotherapy & Radiation Resistance: Conventional cytotoxic chemotherapy has NO proven efficacy in conventional chondrosarcoma and is NOT routinely recommended.",
         "Unresectable / Advanced / Metastatic Disease Management:",
-        "\u2022 Ivosidenib (500 mg PO daily): Targeted IDH1 inhibitor; highly effective in chondrosarcoma harboring susceptible IDH1 mutations (~50% of central chondrosarcomas).",
-        "\u2022 Multikinase Inhibitors: Pazopanib (800 mg daily) or Dasatinib.",
-        "\u2022 High-dose Particle Radiation (Proton or Carbon Ion RT) for anatomically unresectable skull base or axial lesions."
+        "• Ivosidenib (500 mg PO daily): Targeted IDH1 inhibitor; highly effective in chondrosarcoma harboring susceptible IDH1 mutations (~50% of central chondrosarcomas).",
+        "• Multikinase Inhibitors: Pazopanib (800 mg daily) or Dasatinib.",
+        "• High-dose Particle Radiation (Proton or Carbon Ion RT) for anatomically unresectable skull base or axial lesions."
+      ],
+      "protocolRefs": [
+        "sarc-osteosarcoma-map"
       ]
     },
     {
@@ -384,9 +390,12 @@
       "showsRecommendation": true,
       "bullets": [
         "Systemic Chemotherapy: Administer multiagent systemic chemotherapy directed at the high-grade sarcoma component per osteosarcoma protocols:",
-        "\u2022 Cisplatin + Doxorubicin, or MAP (Methotrexate, Doxorubicin, Cisplatin), or AIM (Doxorubicin, Ifosfamide, Mesna).",
+        "• Cisplatin + Doxorubicin, or MAP (Methotrexate, Doxorubicin, Cisplatin), or AIM (Doxorubicin, Ifosfamide, Mesna).",
         "Surgical Resection: Radical en bloc resection of the primary tumor with wide margins; amputation may be necessary for large invasive lesions with vascular involvement.",
         "Poor overall prognosis: Median survival remains guarded (<1-2 years); early multidisciplinary goals-of-care discussion and clinical trial consideration recommended."
+      ],
+      "protocolRefs": [
+        "sarc-osteosarcoma-map"
       ]
     },
     {
@@ -409,13 +418,16 @@
       "showsRecommendation": true,
       "bullets": [
         "Targeted RANKL Inhibition with Denosumab (Preferred Medical Therapy):",
-        "\u2022 Dose: 120 mg SC on days 1, 8, 15 of cycle 1, then 120 mg SC every 4 weeks.",
-        "\u2022 Indications: Unresectable tumors, sacral/spine lesions, or as preoperative downstaging therapy to reduce surgical morbidity and allow joint-preserving resection.",
-        "\u2022 Toxicity monitoring: Baseline dental examination prior to therapy to prevent osteonecrosis of the jaw (ONJ); daily calcium (500-1000 mg) and vitamin D (400-800 IU) supplementation to prevent hypocalcemia.",
+        "• Dose: 120 mg SC on days 1, 8, 15 of cycle 1, then 120 mg SC every 4 weeks.",
+        "• Indications: Unresectable tumors, sacral/spine lesions, or as preoperative downstaging therapy to reduce surgical morbidity and allow joint-preserving resection.",
+        "• Toxicity monitoring: Baseline dental examination prior to therapy to prevent osteonecrosis of the jaw (ONJ); daily calcium (500-1000 mg) and vitamin D (400-800 IU) supplementation to prevent hypocalcemia.",
         "Surgical Treatment:",
-        "\u2022 Resectable lesions: Extensive intralesional curettage with high-speed burr drilling, supplemented with local chemical/thermal adjuvants (liquid nitrogen, phenol, or polymethylmethacrylate [PMMA] bone cement) and bone grafting.",
-        "\u2022 En bloc wide resection reserved for joint destruction or malignant transformation.",
+        "• Resectable lesions: Extensive intralesional curettage with high-speed burr drilling, supplemented with local chemical/thermal adjuvants (liquid nitrogen, phenol, or polymethylmethacrylate [PMMA] bone cement) and bone grafting.",
+        "• En bloc wide resection reserved for joint destruction or malignant transformation.",
         "Malignant GCTB (Rare ~1-2%): Treat as conventional high-grade osteosarcoma."
+      ],
+      "protocolRefs": [
+        "sarc-osteosarcoma-map"
       ]
     },
     {
@@ -439,12 +451,15 @@
       "bullets": [
         "Definitive Surgical Resection: En bloc wide surgical resection with negative margins (sacrectomy, mobile spine spondylectomy, or skull base endoscopic approach); positive margins carry high risk of local recurrence.",
         "Advanced Radiation Therapy (Proton Beam / Carbon Ion Therapy):",
-        "\u2022 High doses (70\u201374 Gy RBE) required due to radioresistance; proton beam or carbon ion RT provides sharp dose fall-off sparing spinal cord and rectum.",
-        "\u2022 Indicated postoperatively for positive/close surgical margins or as definitive primary therapy for inoperable tumors.",
+        "• High doses (70–74 Gy RBE) required due to radioresistance; proton beam or carbon ion RT provides sharp dose fall-off sparing spinal cord and rectum.",
+        "• Indicated postoperatively for positive/close surgical margins or as definitive primary therapy for inoperable tumors.",
         "Systemic Therapy for Unresectable / Metastatic Disease:",
-        "\u2022 Imatinib (400-800 mg daily; PDGFRB-directed) +/- Everolimus.",
-        "\u2022 Dasatinib, Sunitinib, or Lapatinib (for EGFR-expressing chordomas).",
-        "\u2022 Dedifferentiated chordomas: Doxorubicin + Ifosfamide (AIM regimen)."
+        "• Imatinib (400-800 mg daily; PDGFRB-directed) +/- Everolimus.",
+        "• Dasatinib, Sunitinib, or Lapatinib (for EGFR-expressing chordomas).",
+        "• Dedifferentiated chordomas: Doxorubicin + Ifosfamide (AIM regimen)."
+      ],
+      "protocolRefs": [
+        "sarc-osteosarcoma-map"
       ]
     }
   ],
@@ -548,5 +563,9 @@
         "chondro_dediff"
       ]
     }
+  ],
+  "protocolRefs": [
+    "sarc-ewing-vdc-ie",
+    "sarc-osteosarcoma-map"
   ]
 }

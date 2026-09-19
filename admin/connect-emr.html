@@ -1828,6 +1828,15 @@
   $("members").addEventListener("click",function(e){ var b=e.target.closest("[data-remove]"); if(!b) return; doRemoveMember(b.getAttribute("data-remove")); });
   $("membersReload").onclick=loadMembers;
   buildNav();
+  try {
+    var _q = new URLSearchParams(location.search);
+    var _t = _q.get("type");
+    if (_t && ["fhir","csv","hl7","webhook","rest","dicom","graphql","sql"].indexOf(_t) >= 0) {
+      if ($("aType")) { $("aType").value = _t; applyType(); }
+    }
+    var _sec = _q.get("section");
+    if (_sec) setSection(_sec);
+  } catch (e) {}
 
   // ---- controls ----
   $("tenantSel").onchange=onTenantChange;

@@ -475,7 +475,10 @@
         "Multidisciplinary re-review before the next line of therapy"
       ],
       "linkTo": "n_met_histo",
-      "linkLabel": "Go to histology-directed systemic therapy"
+      "linkLabel": "Go to histology-directed systemic therapy",
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
+      ]
     },
     {
       "id": "n_ext_upfront_margin",
@@ -707,7 +710,10 @@
         "Multidisciplinary re-review before the next line"
       ],
       "linkTo": "n_met_histo",
-      "linkLabel": "Go to histology-directed systemic therapy"
+      "linkLabel": "Go to histology-directed systemic therapy",
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
+      ]
     },
     {
       "id": "n_rp_wk",
@@ -840,6 +846,9 @@
         "Preoperative radiation is selective / investigational and not routine; discuss at a sarcoma multidisciplinary meeting",
         "Adjuvant chemotherapy is not standard for resected retroperitoneal sarcoma",
         "Then surveillance (dedifferentiated liposarcoma and high-grade tumors recur locally)"
+      ],
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
       ]
     },
     {
@@ -936,6 +945,9 @@
         "Adjuvant chemotherapy is not standard even after preoperative therapy",
         "Consider intraoperative / postoperative radiation only within a protocol",
         "Then surveillance"
+      ],
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
       ]
     },
     {
@@ -965,7 +977,10 @@
         "Best supportive care if performance status is poor"
       ],
       "linkTo": "n_met_histo",
-      "linkLabel": "Go to histology-directed systemic therapy"
+      "linkLabel": "Go to histology-directed systemic therapy",
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
+      ]
     },
     {
       "id": "n_tx_rp_unresect",
@@ -994,7 +1009,10 @@
         "Best supportive care if performance status is poor"
       ],
       "linkTo": "n_met_histo",
-      "linkLabel": "Go to histology-directed systemic therapy"
+      "linkLabel": "Go to histology-directed systemic therapy",
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
+      ]
     },
     {
       "id": "n_met_wk",
@@ -1078,6 +1096,9 @@
         "Best supportive / palliative care with early palliative-care involvement",
         "Palliative radiation or surgery for local symptoms (pain, bleeding, cord/organ compression)",
         "Consider a gentle single-agent or reduced-intensity regimen only if performance status improves"
+      ],
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
       ]
     },
     {
@@ -1876,7 +1897,11 @@
         "Educate the patient on new mass, pain, or pulmonary symptoms between visits"
       ],
       "linkTo": "n_recur",
-      "linkLabel": "If recurrence is detected: go to the Recurrence pathway"
+      "linkLabel": "If recurrence is detected: go to the Recurrence pathway",
+      "protocolRefs": [
+        "sarc-sts-doxorubicin",
+        "gyn-uterine-lms-doxorubicin"
+      ]
     },
     {
       "id": "n_recur",
@@ -2018,7 +2043,11 @@
         "Palliative measures for local symptoms"
       ],
       "linkTo": "n_met_histo",
-      "linkLabel": "Go to histology-directed systemic therapy"
+      "linkLabel": "Go to histology-directed systemic therapy",
+      "protocolRefs": [
+        "sarc-sts-doxorubicin",
+        "gyn-uterine-lms-doxorubicin"
+      ]
     }
   ],
   "links": [
@@ -2541,5 +2570,15 @@
       ],
       "linkCategory": "conditional"
     }
+  ],
+  "protocolRefs": [
+    "gu-rcc-pazopanib",
+    "gyn-uterine-lms-doxorubicin",
+    "gyn-uterine-lms-gem-docetaxel",
+    "sarc-eribulin",
+    "sarc-kaposi-liposomal-doxorubicin",
+    "sarc-paclitaxel-weekly",
+    "sarc-sts-doxorubicin",
+    "sarc-trabectedin"
   ]
 }
