@@ -317,10 +317,22 @@ function load(env = {}) {
   E.setPref("rag");
   ok("KB-only names the knowledge base", /knowledge base/i.test(E.discLabel()) && !/^Grounded/.test(E.discLabel()));
   E.selectOption("local:maik-mxcore");
+  // On-device now splits by the RAG link (owner, 2026-09-19). This assertion used to read
+  // "on-device says it is on-device with no sources" unconditionally, which was written when the
+  // on-device engine was ungrounded by design. With the book connected that sentence is false, so
+  // the check is now per-state: claim sources only when the book was actually read.
+  E.setRagLinked(true);
+  const dOn = E.discLabel();
+  ok("on-device (KB connected) does NOT claim cloud-style grounded", !/^Grounded/i.test(dOn));
+  ok("on-device (KB connected) is on-device and names the knowledge base", /On-device/i.test(dOn) && /knowledge base/i.test(dOn));
+  ok("on-device (KB connected) does NOT claim it read nothing", !/no sources/i.test(dOn));
+
+  E.setRagLinked(false);
   const d = E.discLabel();
   ok("on-device does NOT claim grounded", !/Grounded/i.test(d));
-  ok("on-device says it is on-device with no sources", /On-device/i.test(d) && /no sources/i.test(d));
-  ok("every variant still tells the clinician to verify", /verify independently/i.test(d));
+  ok("on-device (KB disconnected) says it is on-device with no sources", /On-device/i.test(d) && /no sources/i.test(d));
+  ok("every variant still tells the clinician to verify", /verify independently/i.test(d) && /verify independently/i.test(dOn));
+  E.setRagLinked(true);   // leave the default restored for any later block
 }
 
 // ── no upstream model name anywhere the clinician can see ──

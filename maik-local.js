@@ -12,30 +12,55 @@
  *
  * CONTEXT BUDGET is the whole design constraint. The server prompt-builder can spend a huge context
  * on grounding; we have n_ctx 4096 total, shared between prompt and answer, because the KV cache is
- * what gets an 8 GB iPhone killed. So the package is clipped HARD (see PROMPT_CHAR_BUDGET) and the
- * most decision-relevant evidence goes first — grounding chunks are already page-cited and ranked,
- * retrieved chunks are already cross-encoder re-ranked by the caller.
+ * what gets an 8 GB iPhone killed. So the package is clipped HARD and the most decision-relevant
+ * evidence goes first — grounding chunks are already page-cited and ranked, retrieved chunks are
+ * already cross-encoder re-ranked by the caller.
+ *
+ * Where the clipping actually happens, because there is no single PROMPT_CHAR_BUDGET constant (an
+ * earlier version of this header named one that never existed):
+ *   answer()        — retrieveGrounding() caps evidence at TOPK(3) passages x 700 chars, history at
+ *                     HISTORY_TURNS(2) x HISTORY_CLIP(180) with CARRY_CAP(700) on the last reply.
+ *                     Worst case lands ~1300 prompt tokens, so nPredict 768 still fits 4096.
+ *                     NOTE: this path does NOT call windowBudget() — the caps above are the budget.
+ *   every long-text path (summary/assess/scribe/reason/imaging/correlate) — windowBudget() +
+ *                     splitWindows(), which DO clamp against n_ctx because their input is unbounded.
+ * test/maik-prompt-budget.test.mjs pins the answer() side so it cannot silently regrow.
  * ======================================================================== */
 (function () {
   "use strict";
 
-  /* UNGROUNDED BY DESIGN.
+  /* GROUNDED ON-DEVICE, AND THE LATENCY THAT BUYS (owner, 2026-09-18).
    *
-   * The on-device engine answers from MedGemma's OWN weights and touches no StewardMD data. That is
-   * the product decision, and it is what makes it fast: grounding was 94% of time-to-first-word on a
-   * Pixel 9 (1799 prompt tokens -> 130 s of prefill at a flat ~14 tok/s). A question-only prompt is
-   * ~100 tokens, so first token lands in seconds rather than a minute.
+   * SUPERSEDED: this block used to read "UNGROUNDED BY DESIGN - the on-device engine answers from
+   * MedGemma's OWN weights and touches no StewardMD data". That is no longer true and has not been
+   * since the owner asked for the book to ship on-device ("SHIP OUR RAG PLUS EXISTING BOTH RAGS
+   * BM25"). The note is kept because the NUMBER in it still governs every prompt decision here.
    *
-   * It also removes a failure mode rather than adding one. When retrieval missed - "pyogenic liver
-   * abscess" resolves to LIVER_ABSCESS by FALLBACK while AMOEBIC_LIVER_ABSCESS is an exact match -
-   * the model was handed amoebic chunks labelled "primary source" and dutifully answered
-   * metronidazole for a pyogenic abscess. Grounding is only a safety net when retrieval is right;
-   * when it is wrong it is an amplifier pointed the wrong way.
+   * What that number was: grounding measured 94% of time-to-first-word on a Pixel 9 - 1799 prompt
+   * tokens at a flat ~14 tok/s prefill, so ~130 s before the first word. An ungrounded prompt is
+   * ~100 tokens and lands in seconds. Prefill cost IS the on-device latency story; decode is not.
    *
-   * The division of labour is now explicit:
+   * Why we took the cost anyway: ungrounded, the model answers from weights alone and can be
+   * confidently wrong with no way for the reader to check it. Two RAGs now chain instead - the cloud
+   * router picks the disease, the on-device BM25 book supplies the passages, and retrieveGrounding()
+   * requires the router's disease as an ANCHOR before a passage may be kept. That anchor rule is the
+   * answer to the failure that motivated going ungrounded in the first place: "pyogenic liver
+   * abscess" resolved to LIVER_ABSCESS by FALLBACK while AMOEBIC_LIVER_ABSCESS was an exact match,
+   * and the model dutifully answered metronidazole for a pyogenic abscess. Grounding is only a
+   * safety net when retrieval is right; when it is wrong it is an amplifier pointed the wrong way.
+   * Zero anchored passages therefore means "not grounded", never "grounded in the wrong chapter".
+   *
+   * The current division of labour:
    *   KB only    - StewardMD knowledge base, grounded, cited
    *   MaiK Cloud - Gemini, grounded with the same KB package
-   *   On-device  - the model's own knowledge, fast, offline, CAN BE WRONG (accepted tradeoff)
+   *   On-device  - the model's weights PLUS the on-device book, anchor-gated and claim-checked
+   *
+   * BUDGET, so the 94% never comes back: evidence is TOPK(3) passages clipped to 700 chars each,
+   * ~525 tokens, on top of a ~250-token pack system prompt. Anything that grows the prompt is a
+   * latency change first and a quality change second - measure prefill before and after, do not
+   * reason about it. The ~14 tok/s figure above PREDATES the batched-prefill wiring in
+   * LlamaPlugin.java (nBatch/nUbatch 512, nThreadsBatch = all cores), so it is a ceiling on how bad
+   * this can be, not a current reading. Re-measure on device before trading quality away for speed.
    *
    * Conversation history IS kept: it is the clinician's own turns, not a StewardMD resource, and
    * without it a bare follow-up ("and the dose?") is meaningless. Two turns, tightly clipped.
@@ -547,8 +572,20 @@
    * larger model's answers for paraphrase; the claim-level verifier removes that reason. A harness
    * with no registry keeps the old behaviour. */
   function ragEligible(packId) {
+    // The clinician's own switch comes first: unlinked means the book is disconnected, so no pack
+    // retrieves however capable it is (maik-engine.js KEY_RAG_LINK). Absent engine = linked, so a
+    // test harness with no engine module keeps the grounded behaviour.
+    if (!ragLinkedPref()) return false;
     try { var M = models(); if (M && M.caps) { var c = M.caps(packId); return !!(c && c.kb); } } catch (e) {}
     return packId === "maik-lite";
+  }
+  /** Reads the engine's RAG link switch; defaults to CONNECTED when the engine is not present. */
+  function ragLinkedPref() {
+    try {
+      var E = (typeof window !== "undefined") && window.SMD_MAIK_ENGINE;
+      if (E && typeof E.ragLinked === "function") return E.ragLinked();
+      return localStorage.getItem("smd_maik_rag_linked") !== "0";
+    } catch (e) { return true; }
   }
   // General model knowledge next to a grounded answer is a PRODUCT switch, off by default: unsupported
   // claims are left out unless the owner turns this on, and then they appear under their own heading,
