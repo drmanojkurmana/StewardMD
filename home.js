@@ -4794,7 +4794,7 @@
           // IMAGE, on-device engines only. Rendered hidden and revealed by maikSyncImageBtn() once
           // the selected engine is on-device AND that pack can see AND its projector is downloaded.
           // Cloud/KB answers have no image path, so showing it there would be a dead button.
-          '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image offline" aria-label="Read an image with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
+          '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image or PDF offline" aria-label="Read an image or PDF with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
           '<input type="file" id="maikImgFile" accept="image/*,application/pdf" hidden>' +
           '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask MaiK…"></textarea>' +
           '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '</button>' +
@@ -6463,7 +6463,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // "MaiK took too long" hang that hit every signed-in account except the already-warm ones.
           // If grounding doesn't finish in time, send the question WITHOUT KB grounding (the server's
           // general-knowledge mode still answers) so the clinician always gets a reply instead of a hang.
-          var groundP = window.StewardRAG
+          /* RAG DISCONNECTED: don't build a package nobody will read (owner, 2026-09-20).
+           *
+           * With the Knowledge Base unlinked the on-device engine grounds on nothing, so
+           * StewardRAG.ready() + buildPackage() is pure cost: it warms a 20 MB disease index and
+           * makes a /api/retrieve round trip whose result is then discarded. Worse, it is cost on
+           * the ONE path that is supposed to be fastest and to work with no network.
+           *
+           * The stand-in is the SAME shape the timeout/reject arms already return, so nothing
+           * downstream needs to know. topicMatch stays absent, which matters: the web-research
+           * tier below fires on `tm && tm.matched === false`, so a null topicMatch skips it rather
+           * than sending an offline clinician to a tier that needs the network.
+           */
+          var _ragOff = false;
+          try {
+            var _E = window.SMD_MAIK_ENGINE;
+            _ragOff = !!(_E && _E.effective && _E.effective() === "local" && _E.ragLinked && !_E.ragLinked());
+          } catch (e) {}
+          var groundP = _ragOff
+            ? Promise.resolve({ question: question, grounding: [] })
+            : window.StewardRAG
             ? Promise.resolve(StewardRAG.ready()).then(function () { return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question }); })
             : Promise.reject(new Error("no-kb"));
           return Promise.race([
@@ -7511,11 +7530,49 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       });
     }
 
+    /* LOAD pdf.js ON DEMAND (owner, 2026-09-20: "picture upload button also accept pdf files").
+     *
+     * PDF staging was already written, but this function only ever READ window.pdfjsLib and gave up
+     * if it was absent - and nothing in the MaiK path ever loads it. pdf.js is lazy-loaded by icu.js
+     * and medlist.js, so attaching a PDF here worked ONLY if the clinician happened to have opened
+     * ICU or MedList earlier in the same session, and otherwise failed with "Could not read that
+     * PDF." That is why the button looked like it did not accept PDFs at all.
+     *
+     * Same loader the other two use: the LOCAL vendor copy first (offline is the whole point of the
+     * on-device model), CDN only as a fallback for a web session where the bundle is absent. Cached
+     * on window so a second PDF in the same session costs nothing.
+     */
+    var PDFJS_L = "/vendor/pdfjs/pdf.min.js", PDFJS_LW = "/vendor/pdfjs/pdf.worker.min.js";
+    var PDFJS_C = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+    var PDFJS_CW = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    function maikLoadPdfJs() {
+      if (window.pdfjsLib) {
+        try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_LW; } catch (e) {}
+        return Promise.resolve(window.pdfjsLib);
+      }
+      return new Promise(function (res, rej) {
+        function load(src, worker, next) {
+          var s = document.createElement("script");
+          s.src = src;
+          s.onload = function () {
+            try {
+              var lib = window.pdfjsLib;
+              if (!lib) throw new Error("pdf-empty");
+              lib.GlobalWorkerOptions.workerSrc = worker;
+              res(lib);
+            } catch (e) { if (next) next(); else rej(e); }
+          };
+          s.onerror = function () { if (next) next(); else rej(new Error("pdf-load")); };
+          document.head.appendChild(s);
+        }
+        load(PDFJS_L, PDFJS_LW, function () { load(PDFJS_C, PDFJS_CW, null); });
+      });
+    }
+
     /** Rasterise page 1 of a PDF to a JPEG data URL, since the vision encoder needs pixels. */
     function maikPdfFirstPageDataUrl(file) {
-      var lib = window.pdfjsLib || null;
-      if (!lib) return Promise.reject(new Error("no pdf renderer"));
-      return file.arrayBuffer().then(function (buf) {
+      var lib = null;
+      return maikLoadPdfJs().then(function (l) { lib = l; return file.arrayBuffer(); }).then(function (buf) {
         return lib.getDocument({ data: new Uint8Array(buf) }).promise;
       }).then(function (doc) { return doc.getPage(1); }).then(function (page) {
         // ~1600 px on the long edge: enough for the model to read printed lab values, small enough
