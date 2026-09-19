@@ -4,7 +4,7 @@ import assert from "node:assert";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { buildState, fromIcuState, toMs, UNUSABLE } from "../medcore/medcore-state.js";
+import { buildState, fromIcuState, fromWardSynQ, toMs, UNUSABLE } from "../medcore/medcore-state.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DEPS = {
@@ -161,4 +161,87 @@ test("state: toMs refuses the adapter's deliberate non-date", () => {
   assert.equal(toMs(""), null);
   assert.equal(toMs(NOW), NOW);
   assert.equal(toMs("2026-09-19T10:04:00Z"), NOW);
+});
+
+/* ---------------------------------------------------------------- the WardSynQ adapter (step 8) */
+
+const CODES = JSON.parse(readFileSync(join(ROOT, "medcore/data/obs-codes.json"), "utf8"));
+const WDEPS = Object.assign({ codes: CODES }, DEPS);
+
+function obsVersion(code, value, unit, effectiveAt, recordedAt, extra) {
+  return Object.assign({
+    resourceType: "Observation", id: "o-" + code, patientId: "p1", category: "laboratory",
+    code: code, codeSystem: "unspecified", value: value, unit: unit,
+    meta: { effectiveAt: new Date(effectiveAt).toISOString(), recordedAt: new Date(recordedAt).toISOString() }
+  }, extra || {});
+}
+
+test("wardsynq: a correction recorded AFTER the question is invisible, as it was to the clinician", async () => {
+  // The module note's own example: potassium drawn at 14:00, reported 4.0 at 15:00, corrected to
+  // 6.5 at 17:00. Asked at 16:00 the answer is 4.0; asked now it is 6.5.
+  const drawn = Date.parse("2026-09-19T14:00:00Z");
+  const versions = [
+    obsVersion("potassium", 4.0, "mmol/L", drawn, Date.parse("2026-09-19T15:00:00Z")),
+    obsVersion("potassium", 6.5, "mmol/L", drawn, Date.parse("2026-09-19T17:00:00Z"))
+  ];
+  const at16 = fromWardSynQ(WDEPS, { observations: [versions], patient: { ageYears: 60 } },
+    { asOf: Date.parse("2026-09-19T16:00:00Z") });
+  assert.equal(at16.params.k.value, 4.0, "the correction had not been made yet");
+
+  const at18 = fromWardSynQ(WDEPS, { observations: [versions], patient: { ageYears: 60 } },
+    { asOf: Date.parse("2026-09-19T18:00:00Z") });
+  assert.equal(at18.params.k.value, 6.5, "and now it has");
+
+  // The same answers when wardsynq-temporal.js resolves it, which is the production path.
+  const temporal = await import("../wardsynq/wardsynq-temporal.js");
+  const withReal = fromWardSynQ(Object.assign({ temporal }, WDEPS),
+    { observations: [versions], patient: { ageYears: 60 } },
+    { asOf: Date.parse("2026-09-19T16:00:00Z") });
+  assert.equal(withReal.params.k.value, 4.0, "wardsynq-temporal.js agrees");
+});
+
+test("wardsynq: artefact and unvetted device readings are refused", () => {
+  const t = NOW - 600000;
+  const s = fromWardSynQ(WDEPS, {
+    patient: { ageYears: 60 },
+    observations: [
+      [obsVersion("heart-rate", 38, "bpm", t, t, { category: "device", artifact: true, scoreEligible: false })],
+      [obsVersion("spo2", 99, "%", t, t, { category: "device", scoreEligible: null })],
+      [obsVersion("respiratory-rate", 22, "/min", t, t, { category: "device", scoreEligible: true })]
+    ]
+  }, { asOf: NOW });
+  assert.equal(s.params.hr, undefined, "a detached lead must never reach a score");
+  assert.equal(s.params.spo2, undefined, "not assessed is not the same as passed");
+  assert.equal(s.params.rr.value, 22, "a vetted device reading is fine");
+  assert.deepEqual(s.provenance.excluded.map((e) => e.reason).sort(), ["ARTIFACT", "NOT_SCORE_ELIGIBLE"]);
+});
+
+test("wardsynq: an unlabelled value is refused, because WardSynQ declares no unit convention", () => {
+  const t = NOW - 600000;
+  const s = fromWardSynQ(WDEPS, {
+    patient: { ageYears: 60 },
+    observations: [[obsVersion("creatinine", 2.1, null, t, t)]]
+  }, { asOf: NOW });
+  assert.equal(s.params.creat.usable, false);
+  assert.equal(s.params.creat.refusal, "UNIT_REQUIRED");
+});
+
+test("wardsynq: an unmapped code is recorded, never silently dropped", () => {
+  const t = NOW - 600000;
+  const s = fromWardSynQ(WDEPS, {
+    patient: { ageYears: 60 },
+    observations: [[obsVersion("procalcitonin", 3.2, "ng/mL", t, t)]]
+  }, { asOf: NOW });
+  assert.deepEqual(s.provenance.unmapped, ["procalcitonin"]);
+  assert.equal(Object.keys(s.params).length, 0);
+});
+
+test("wardsynq: the code table refuses to guess a coded system", () => {
+  assert.equal(CODES.approvalStatus, "unapproved");
+  assert.ok(/ADAPTER work/.test(CODES.note), "the note must say whose job a coded system is");
+  for (const p of Object.values(CODES.codes)) {
+    assert.ok(DEPS.unitTable.params[p], p + " must be a real Medical Core parameter");
+  }
+  assert.throws(() => fromWardSynQ({ unitTable: DEPS.unitTable, freshness: DEPS.freshness }, {}, { asOf: NOW }),
+    /observation-code table is required/);
 });
