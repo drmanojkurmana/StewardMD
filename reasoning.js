@@ -2739,6 +2739,28 @@
   // Self-contained reference panel for ANY disease (whether or not it is in the
   // current differential) — reuses the #dxMgmt panel. Shows the Harrison reference
   // and an action to open the full stewardship/management page.
+  /* Does a real KB reference page exist for this id?
+   *
+   * openDiseaseRef() falls back to `name = id` when nothing resolves, which renders a page titled
+   * with a raw slug and almost no content. That is fine as a last resort for a link the clinician
+   * chose, but NOT as the basis for offering one: home.js's "Read more in StewardMD KB" chip must
+   * never promise a page that turns out to be a stub. Measured on the shipped bundles, 251 of the
+   * 5,055 disease docs (5%) have no enrichment record - TUMOR_LYSIS_SYNDROME and acute_limb_ischemia
+   * among them - so this is a real gap, not a theoretical one.
+   *
+   * Deliberately the SAME three lookups openDiseaseRef() itself uses, so the offer and the page can
+   * never disagree about what exists.
+   */
+  function hasDiseaseRef(id) {
+    if (!id) return false;
+    try {
+      if ((window.SYNDROMES || {})[id]) return true;
+      if ((DDX_NI || []).some(function (d) { return d.id === id; })) return true;
+      var H = window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId && window.KB_ENRICHMENT.byId[id];
+      return !!H;
+    } catch (e) { return false; }
+  }
+
   function openDiseaseRef(id, opts) {
     kbSaveList("recent", [id].concat(kbReadList("recent").filter(function (x) { return x !== id; })).slice(0, 12));
     try { if (window.SMD_KU) SMD_KU.emit("read", id); } catch (e) {}   // KU: reading clinical content
@@ -3787,6 +3809,8 @@
     // StewardMD KB" chip under a MaiK answer - the same screen the Knowledge Library opens, so
     // there is one disease page in the app rather than a second, drifting copy of it.
     openDiseaseRef: openDiseaseRef,
+    // Guard for the offer: only show the chip when a real page exists behind it.
+    hasDiseaseRef: hasDiseaseRef,
     flag: reasonV2,
     setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} try { smdProgressiveFindings(); } catch (e) {} },
     // specificity-aware ranking flag (smd_rank_v2, default ON) — instantly reversible.

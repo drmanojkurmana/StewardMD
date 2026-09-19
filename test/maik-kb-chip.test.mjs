@@ -29,12 +29,25 @@ test("the KB disease id is captured in send(), BEFORE the on-device engine strip
   assert.match(LOCAL, /pkg\.grounding = \[\]/, "maik-local.js still strips grounding before render");
 });
 
-test("the chip renders only when a disease id was actually captured", () => {
+test("the chip renders only when a REAL KB page exists behind it", () => {
   const i = HOME.indexOf('data-kb-more="');
   assert.ok(i > 0, "the chip exists");
-  const block = HOME.slice(Math.max(0, i - 700), i + 400);
-  assert.match(block, /if \(_maikKbId\)/, "guarded on a real id - never a dead link");
+  const block = HOME.slice(Math.max(0, i - 900), i + 400);
+  assert.match(block, /if \(_kbOk\)/, "guarded on an openable page, not merely on having an id");
+  assert.match(block, /hasDiseaseRef/, "asks the KB whether a page exists");
   assert.match(block, /Read more in StewardMD KB/, "states where it goes");
+  // Cannot verify -> do not promise. A missing guard must fail closed, not open.
+  assert.match(block, /\? *false/, "fails closed when the reference module is absent");
+});
+
+test("the existence check uses the SAME lookups as the page it offers", () => {
+  const i = REASON.indexOf("function hasDiseaseRef");
+  assert.ok(i > 0, "the guard exists");
+  const guard = REASON.slice(i, i + 700);
+  for (const src of ["SYNDROMES", "DDX_NI", "KB_ENRICHMENT"]) {
+    assert.ok(guard.includes(src), `checks ${src}, the same source openDiseaseRef resolves from`);
+  }
+  assert.match(REASON, /hasDiseaseRef: hasDiseaseRef/, "exported for home.js");
 });
 
 test("it opens the curated record and never silently does nothing", () => {

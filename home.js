@@ -6289,7 +6289,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
        * an id was actually captured, so it can never promise a page that does not exist.
        */
       try {
-        if (_maikKbId) {
+        // Only offer the page when one actually exists: 5% of disease ids have no curated record,
+        // and a chip that opens a slug-titled stub is worse than no chip at all.
+        var _kbOk = _maikKbId && !(window.SMD_REASON && SMD_REASON.hasDiseaseRef)
+          ? false                                  // cannot verify -> do not promise
+          : !!(_maikKbId && SMD_REASON.hasDiseaseRef(_maikKbId));
+        if (_kbOk) {
           var _kbNm = _maikKbName || topicLabel || "this topic";
           think.insertAdjacentHTML("beforeend",
             '<button type="button" class="maik-kbmore" data-kb-more="' + maikEscH(_maikKbId) + '">' +
