@@ -52,9 +52,48 @@ same split before it replaces it. Parity vectors are what will catch the two sco
 A failing artifact is still exported, because "it failed the calibration gate" is a result the next
 person needs. It simply cannot be loaded.
 
+## THE TEST SPLIT IS READ ONCE
+
+Not a style preference. While fixing the calibration failure below I looked at one cohort's test
+slope, changed the model, and looked again - four times. Every one of those looks leaked test
+information into model selection, and by the fourth the number was partly a description of my own
+tuning. Model decisions belong on train and validation; the test split is read to REPORT, not to
+steer. When it has been read and the model then changes, the honest move is a fresh cohort (a new
+seed here, a new site or period on real data), which is what the clean read below is.
+
 ## Current state, honestly
 
-The only data available is synthetic. On it the pipeline runs end to end and the model **fails the
-calibration gate** (slope ~0.69, overconfident, at ~2.4 events per variable). That is the system
-working: it produced a model and refused it. No artifact built here may reach a clinician, by
-construction rather than by policy - see `medcore/medcore-models.js` and `test/medcore-models.test.mjs`.
+The only data available is synthetic.
+
+**The failure, and what was wrong.** The first run failed the calibration gate at slope 0.69, and
+the diagnosis had three parts:
+
+1. **The calibrator collapsed.** Isotonic fitted on ~52 validation positives degenerated into a step
+   function: 61 of 64 points mapped to exactly 0 and two to exactly 1. Twenty-one test points
+   predicted at 0.99 had an observed event rate of 0.19.
+2. **The slope estimator hid it.** Probabilities of exactly 0 have no logit, so those rows were
+   dropped and the slope reported anyway - computed on 454 of 1126 rows. 60% of the test set
+   silently excluded, and the number that came back was flattering.
+3. **2.4 events per variable.** 132 positives against 55 features.
+
+**The fixes.** Both calibrators are now fitted and the winner chosen by cross-validated log loss
+inside validation; every probability is clamped away from 0 and 1. The slope estimator refuses to
+report a biased estimate (>5% excluded) and carries a bootstrap interval. The feature count is
+budgeted from the positives at ten per variable, and events-per-variable is its own gate, because
+the precondition should fail directly rather than turn up later disguised as overconfidence. L2 is
+tuned on a held-out slice of train rather than hardcoded at a 3 nobody had justified.
+
+**The clean read** (seed 90210, a cohort never tuned against, read once):
+
+```
+AUROC 0.960  AUPRC 0.499  ECE 0.008  slope 1.037 (95% CI 0.968 to 1.078)
+at the same alert budget as the incumbent: 19 missed vs 64, sensitivity 0.94
+frequency-only probe 0.566
+ALL 7 GATES PASS
+```
+
+**What that does and does not mean.** It means the pipeline is sound: it caught a real defect,
+refused a real model, and passes once the defect is fixed. It does not mean anything clinical. The
+data is synthetic, so the model recovered a latent variable the generator wrote in - a fact about
+`synth/generate.mjs`, not about patients. No artifact built here may reach a clinician, by
+construction rather than policy: see `medcore/medcore-models.js` and `test/medcore-models.test.mjs`.

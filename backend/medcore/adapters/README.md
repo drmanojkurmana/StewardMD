@@ -27,10 +27,24 @@ the synthetic cohort. That work is an adapter and nothing else. What it must do:
    field you cannot establish is OMITTED, not defaulted: `medcore-outcomes.js` then refuses the
    question instead of asking it on a guess.
 
-## External validity, stated once so it is not forgotten
+## Two populations, both first-class
 
-A model trained on a US ICU dataset is a model about US ICU patients, their case mix, their staffing
-ratios, their assays and their charting habits. It is a fine way to prove this pipeline and a poor
-way to predict deterioration on an Indian ward. Nothing trained on such an extract may go in front
-of a clinician here without revalidation on local data; that is the same gate the plan already sets,
-and a public dataset does not move it.
+StewardMD is built for the US and for India. Neither is "the real population" and neither is the
+exception, so external validity is not a caveat about one of them - it is a measurement, and the
+pipeline takes it as one.
+
+**Site and region are gated subgroups.** Every extract row carries `site` and `region`, they flow
+into `strata`, and the subgroup gate covers them exactly as it covers age and sex: no subgroup may
+sit more than 0.10 AUROC below overall. A model that works in one country's ICUs and fails in the
+other's wards does not pass, and it fails for the same reason and through the same mechanism as a
+model that works for men and fails for women.
+
+What still differs between sources, and what an adapter must therefore preserve rather than smooth
+over: case mix, staffing ratios (which is the measurement-frequency shortcut's fuel), assay methods
+and reference ranges, charting habits, and which events are even recorded. Those are why the
+subgroup gate exists. They are not a reason to prefer one source.
+
+**The clinical gate is unchanged and applies to both.** A model validated on US ICU data is
+evidence about US ICU patients until it has been validated on Indian ward data, and the reverse
+holds exactly as strongly. Nothing reaches a clinician in either country without local validation
+and a named approver there.

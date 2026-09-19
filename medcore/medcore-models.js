@@ -63,19 +63,36 @@ export function score(artifact, values) {
   return calibrate(artifact.calibration, sigmoid(z));
 }
 
+/**
+ * Applies the artifact's calibration. Two kinds exist because the trainer CHOOSES between them by
+ * cross-validated log loss, so this must implement both or an artifact silently mis-scores - which
+ * the parity vectors would catch, and which is exactly what they are for.
+ *
+ * Nothing is ever returned as exactly 0 or 1. A calibrator fitted on a finite validation set cannot
+ * justify impossibility or certainty, and an isotonic map that saturates to those values is a
+ * measured defect in this repository's history rather than a hypothetical one.
+ */
 export function calibrate(cal, p) {
-  if (!cal || !Array.isArray(cal.points) || !cal.points.length) return p;
+  if (!cal) return p;
+  const eps = typeof cal.eps === "number" ? cal.eps : 1e-4;
+  const clamp = (x) => Math.min(1 - eps, Math.max(eps, x));
+  if (cal.kind === "platt") {
+    const q = Math.min(1 - 1e-6, Math.max(1e-6, p));
+    const z = cal.a + cal.b * Math.log(q / (1 - q));
+    return clamp(round6(1 / (1 + Math.exp(-z))));
+  }
+  if (!Array.isArray(cal.points) || !cal.points.length) return clamp(p);
   const pts = cal.points;
-  if (p <= pts[0].x) return pts[0].y;
-  if (p >= pts[pts.length - 1].x) return pts[pts.length - 1].y;
+  if (p <= pts[0].x) return clamp(pts[0].y);
+  if (p >= pts[pts.length - 1].x) return clamp(pts[pts.length - 1].y);
   for (let i = 1; i < pts.length; i++) {
     if (p <= pts[i].x) {
       const a = pts[i - 1], b = pts[i];
       const t = b.x === a.x ? 0 : (p - a.x) / (b.x - a.x);
-      return round6(a.y + t * (b.y - a.y));
+      return clamp(round6(a.y + t * (b.y - a.y)));
     }
   }
-  return p;
+  return clamp(p);
 }
 
 export function oodDistance(artifact, values) {

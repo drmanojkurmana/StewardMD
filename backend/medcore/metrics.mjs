@@ -64,11 +64,33 @@ export function ece(pairs, bins) {
   return { ece: round4(total), table };
 }
 
-/** Calibration slope and intercept: logistic recalibration of the logit. Slope 1, intercept 0 is
- *  perfect. Slope below 1 means overconfident, which is the failure that matters clinically. */
+/**
+ * Calibration slope and intercept: logistic recalibration of the logit. Slope 1, intercept 0 is
+ * perfect. Slope below 1 means overconfident, which is the failure that matters clinically.
+ *
+ * IT REFUSES A BIASED ESTIMATE. A probability of exactly 0 or 1 has no logit, so such rows cannot
+ * enter the fit - and an earlier version simply dropped them and reported the slope anyway. On a
+ * saturating isotonic calibrator that silently threw away 60% of the test set and returned a number
+ * computed on the surviving 40%, which is how the saturation stayed hidden while the slope looked
+ * merely disappointing. Dropping a few ties is fine; dropping a third of the data is a different
+ * measurement, so beyond a stated tolerance this returns null plus the reason.
+ */
 export function calibrationCurve(pairs, opts) {
+  const o = opts || {};
+  const tolerance = typeof o.maxExcludedFraction === "number" ? o.maxExcludedFraction : 0.05;
   const rows = pairs.filter((r) => r.p > 1e-6 && r.p < 1 - 1e-6);
-  if (rows.length < 20) return { slope: null, intercept: null, n: rows.length };
+  const excluded = pairs.length - rows.length;
+  const excludedFraction = pairs.length ? excluded / pairs.length : 0;
+  const base = { nTotal: pairs.length, n: rows.length, excluded, excludedFraction: round4(excludedFraction) };
+  if (excludedFraction > tolerance) {
+    return Object.assign({
+      slope: null, intercept: null, usable: false,
+      refusal: "TOO_MANY_SATURATED_PROBABILITIES",
+      detail: "a calibrator emitting exactly 0 or 1 removed " + Math.round(excludedFraction * 100) +
+        "% of the rows; the slope over the remainder would be a different measurement"
+    }, base);
+  }
+  if (rows.length < 20) return Object.assign({ slope: null, intercept: null, usable: false, refusal: "TOO_FEW_ROWS" }, base);
   const x = rows.map((r) => Math.log(r.p / (1 - r.p)));
   const y = rows.map((r) => r.y);
   let a = 0, b = 1;                                        // intercept, slope
@@ -81,7 +103,50 @@ export function calibrationCurve(pairs, opts) {
     }
     a -= lr * ga / x.length; b -= lr * gb / x.length;
   }
-  return { slope: round4(b), intercept: round4(a), n: rows.length };
+  const out = Object.assign({ slope: round4(b), intercept: round4(a), usable: true, refusal: null }, base);
+  if (o.bootstrap) out.slopeCI = bootstrapSlopeCI(rows, o.bootstrap, o.seed || 1);
+  return out;
+}
+
+/**
+ * A percentile bootstrap interval for the slope. It changes no gate - the gate stays on the point
+ * estimate, which is the conservative choice - but a slope of 0.8992 against a floor of 0.9 is a
+ * distinction of 0.0008 on an estimate whose interval is typically two orders of magnitude wider,
+ * and a reader who cannot see that will draw a conclusion the data does not support.
+ */
+export function bootstrapSlopeCI(rows, draws, seed) {
+  let a = (seed >>> 0) || 1;
+  const rnd = () => { a ^= a << 13; a ^= a >>> 17; a ^= a << 5; return ((a >>> 0) % 1000000) / 1000000; };
+  const slopes = [];
+  for (let d = 0; d < draws; d++) {
+    const sample = new Array(rows.length);
+    for (let i = 0; i < rows.length; i++) sample[i] = rows[Math.floor(rnd() * rows.length)];
+    if (!sample.some((r) => r.y === 1) || !sample.some((r) => r.y === 0)) continue;
+    const fit = fitSlope(sample);
+    if (fit !== null) slopes.push(fit);
+  }
+  if (slopes.length < Math.max(10, draws / 4)) return null;
+  slopes.sort((x, y) => x - y);
+  return {
+    lo: round4(slopes[Math.floor(slopes.length * 0.025)]),
+    hi: round4(slopes[Math.floor(slopes.length * 0.975)]),
+    draws: slopes.length
+  };
+}
+
+function fitSlope(rows) {
+  const x = rows.map((r) => Math.log(r.p / (1 - r.p)));
+  const y = rows.map((r) => r.y);
+  let a = 0, b = 1;
+  for (let it = 0; it < 600; it++) {
+    let ga = 0, gb = 0;
+    for (let i = 0; i < x.length; i++) {
+      const p = 1 / (1 + Math.exp(-(a + b * x[i]))), e = p - y[i];
+      ga += e; gb += e * x[i];
+    }
+    a -= 0.05 * ga / x.length; b -= 0.05 * gb / x.length;
+  }
+  return isFinite(b) ? b : null;
 }
 
 /** Coverage versus error: keep the most confident fraction and measure the error there. Abstention

@@ -133,7 +133,10 @@ export function featurizeEncounter(enc, packs, opt) {
           : state.demographics.ageYears < 45 ? "<45" : state.demographics.ageYears < 65 ? "45-64"
             : state.demographics.ageYears < 80 ? "65-79" : "80+",
         sex: state.demographics.sex,
-        completeness: completenessQuartile(f.values)
+        completeness: completenessQuartile(f.values),
+        // Both target populations are gated subgroups, not a caveat (adapters/README.md).
+        site: enc.site || "unknown",
+        region: enc.region || "unknown"
       },
       synthetic: !!enc.provenance.synthetic
     });

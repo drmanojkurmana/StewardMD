@@ -19,6 +19,13 @@
  *     because a patient already on a pressor was excluded from the risk set).
  *  3. CALIBRATION IS FITTED ON VALIDATION, NEVER ON TRAIN OR TEST. Fitting it on train reports the
  *     model's own optimism back to itself; fitting it on test is cheating.
+ *  4. THE CALIBRATOR IS CHOSEN, NOT DECREED, AND IT NEVER EMITS CERTAINTY. Isotonic is flexible and
+ *     at small sample sizes it degenerates: fitted on ~50 positives it collapsed to a step function
+ *     where 61 of 64 points mapped to EXACTLY 0 and two to EXACTLY 1, and 21 test points predicted
+ *     at 0.99 had an observed event rate of 0.19. So both isotonic and Platt are fitted and the
+ *     winner is picked by cross-validated log loss INSIDE the validation split (picking on the data
+ *     a calibrator was fitted to would always choose the more flexible one), and every probability
+ *     is clamped away from 0 and 1. A model is never entitled to say impossible or certain.
  *
  * node --test test/medcore-learn.test.mjs
  */
@@ -121,20 +128,26 @@ export function fitIsotonic(pairs) {
   return { kind: "isotonic", points: thinned };
 }
 
-/** Applies the calibration map, interpolating linearly between its points. */
-export function applyCalibration(cal, p) {
-  if (!cal || !cal.points || !cal.points.length) return p;
+/** Applies the calibration map (isotonic points or Platt parameters), clamped away from 0 and 1. */
+export function applyCalibration(cal, p, eps) {
+  const e = typeof eps === "number" ? eps : (cal && typeof cal.eps === "number" ? cal.eps : 1e-4);
+  if (!cal) return clampP(p, e);
+  if (cal.kind === "platt") {
+    const z = cal.a + cal.b * logit(clampP(p, 1e-6));
+    return clampP(r6(1 / (1 + Math.exp(-z))), e);
+  }
+  if (!cal.points || !cal.points.length) return clampP(p, e);
   const pts = cal.points;
-  if (p <= pts[0].x) return pts[0].y;
-  if (p >= pts[pts.length - 1].x) return pts[pts.length - 1].y;
+  if (p <= pts[0].x) return clampP(pts[0].y, e);
+  if (p >= pts[pts.length - 1].x) return clampP(pts[pts.length - 1].y, e);
   for (let i = 1; i < pts.length; i++) {
     if (p <= pts[i].x) {
       const a = pts[i - 1], b = pts[i];
       const t = b.x === a.x ? 0 : (p - a.x) / (b.x - a.x);
-      return r6(a.y + t * (b.y - a.y));
+      return clampP(r6(a.y + t * (b.y - a.y)), e);
     }
   }
-  return p;
+  return clampP(p, e);
 }
 
 /** Mahalanobis-lite out-of-distribution distance: standardised squared distance on the diagonal.
@@ -158,3 +171,166 @@ export function oodDistance(model, values) {
 function dot(a, b) { let s = 0; for (let i = 0; i < a.length; i++) s += a[i] * b[i]; return s; }
 function r6(n) { return Math.round(n * 1e6) / 1e6; }
 function mapVals(o, f) { const out = {}; for (const k of Object.keys(o)) out[k] = f(o[k]); return out; }
+
+
+/* ------------------------------------------------------------------ calibration, chosen not decreed */
+
+/** Platt scaling: a two-parameter logistic on the logit. Rigid, which is the point at small n. */
+export function fitPlatt(pairs, opts) {
+  const rows = pairs.filter((r) => isFinite(r.p));
+  if (rows.length < 10) return { kind: "platt", a: 0, b: 1 };
+  const lr = (opts && opts.lr) || 0.1;
+  const iters = (opts && opts.iters) || 4000;
+  const x = rows.map((r) => logit(clampP(r.p, 1e-6)));
+  const y = rows.map((r) => r.y);
+  let a = 0, b = 1;
+  for (let it = 0; it < iters; it++) {
+    let ga = 0, gb = 0;
+    for (let i = 0; i < x.length; i++) {
+      const p = 1 / (1 + Math.exp(-(a + b * x[i]))), e = p - y[i];
+      ga += e; gb += e * x[i];
+    }
+    a -= lr * ga / x.length; b -= lr * gb / x.length;
+  }
+  return { kind: "platt", a: r6(a), b: r6(b) };
+}
+
+/**
+ * Fits isotonic and Platt on `pairs`, picks by k-fold cross-validated log loss WITHIN pairs, then
+ * refits the winner on all of them. Returns the calibration map plus the comparison, because the
+ * loser's score is how the next person knows the choice was real.
+ */
+export function fitCalibrator(pairs, opts) {
+  const o = opts || {};
+  const folds = o.folds || 5;
+  const eps = calibrationEps(pairs.length, o.eps);
+  const rows = pairs.slice();
+  // Deterministic interleave rather than a shuffle: same input, same folds, same winner.
+  const foldOf = (i) => i % folds;
+
+  const score = { isotonic: 0, platt: 0 };
+  const counted = { isotonic: 0, platt: 0 };
+  for (let f = 0; f < folds; f++) {
+    const fit = rows.filter((_, i) => foldOf(i) !== f);
+    const held = rows.filter((_, i) => foldOf(i) === f);
+    if (!held.length || !fit.length) continue;
+    const iso = fitIsotonic(fit), pl = fitPlatt(fit);
+    for (const r of held) {
+      score.isotonic += logLoss(r.y, applyCalibration(iso, r.p, eps));
+      score.platt += logLoss(r.y, applyCalibration(pl, r.p, eps));
+      counted.isotonic++; counted.platt++;
+    }
+  }
+  const mean = (k) => (counted[k] ? score[k] / counted[k] : Infinity);
+  const chosen = mean("platt") <= mean("isotonic") ? "platt" : "isotonic";
+  const cal = chosen === "platt" ? fitPlatt(rows) : fitIsotonic(rows);
+  cal.eps = eps;
+  cal.selection = {
+    chosen, folds,
+    logLoss: { platt: r6(mean("platt")), isotonic: r6(mean("isotonic")) },
+    n: rows.length
+  };
+  return cal;
+}
+
+/** The smallest probability the validation set can justify. With n points, a rate below about 1/n
+ *  is not measured, it is asserted, so nothing is emitted outside [eps, 1-eps]. */
+export function calibrationEps(nVal, override) {
+  if (typeof override === "number") return override;
+  return Math.min(0.01, Math.max(1e-4, 1 / (2 * Math.max(1, nVal))));
+}
+
+function logLoss(y, p) {
+  const q = Math.min(1 - 1e-12, Math.max(1e-12, p));
+  return -(y * Math.log(q) + (1 - y) * Math.log(1 - q));
+}
+function logit(p) { return Math.log(p / (1 - p)); }
+function clampP(p, e) { return Math.min(1 - e, Math.max(e, p)); }
+
+/* ------------------------------------------------------------------ feature count vs events */
+
+/**
+ * Keeps only as many features as the positives can support. Ten events per variable is the usual
+ * floor; below it a model memorises the training set and reports that memory back as confidence,
+ * which is exactly the overconfidence the calibration gate catches after the fact.
+ *
+ * Ranking is univariate |point-biserial correlation| computed on TRAIN ONLY. Crude, stated to be,
+ * and vastly better than keeping 55 features for 132 events.
+ */
+export function selectFeatures(rows, featureIds, opts) {
+  const o = opts || {};
+  const targetEpv = o.targetEpv || 10;
+  const minFeatures = o.minFeatures || 5;
+  const positives = rows.filter((r) => r.label === 1).length;
+  const budget = Math.max(minFeatures, Math.floor(positives / targetEpv));
+  if (featureIds.length <= budget) {
+    return { featureIds: featureIds.slice(), budget, positives, dropped: [], ranked: null };
+  }
+  const scored = featureIds.map((id) => ({ id, r: Math.abs(pointBiserial(rows, id)) }))
+    .sort((a, b) => (isFinite(b.r) ? b.r : -1) - (isFinite(a.r) ? a.r : -1));
+  const kept = scored.slice(0, budget).map((s) => s.id);
+  return {
+    featureIds: kept, budget, positives,
+    dropped: scored.slice(budget).map((s) => s.id),
+    ranked: scored.slice(0, budget).map((s) => ({ id: s.id, r: r6(s.r) }))
+  };
+}
+
+function pointBiserial(rows, id) {
+  const xs = [], ys = [];
+  for (const r of rows) {
+    const v = r.values[id];
+    if (typeof v !== "number" || !isFinite(v)) continue;
+    xs.push(v); ys.push(r.label);
+  }
+  if (xs.length < 10) return 0;
+  const mx = mean(xs), my = mean(ys);
+  let num = 0, dx = 0, dy = 0;
+  for (let i = 0; i < xs.length; i++) {
+    num += (xs[i] - mx) * (ys[i] - my);
+    dx += (xs[i] - mx) * (xs[i] - mx);
+    dy += (ys[i] - my) * (ys[i] - my);
+  }
+  const den = Math.sqrt(dx * dy);
+  return den > 1e-12 ? num / den : 0;
+}
+function mean(a) { return a.reduce((x, y) => x + y, 0) / a.length; }
+
+
+/**
+ * Picks the L2 strength by held-out log loss INSIDE train, so validation stays untouched for
+ * calibration. Stronger regularisation shrinks the coefficients, which makes the logits less
+ * extreme, which is the direct lever on an overconfident calibration slope - the failure this
+ * pipeline kept reporting while L2 sat at a hardcoded 3 that nobody had justified.
+ *
+ * The sweep is deliberately coarse and short (fewer iterations), then the winner is refit properly:
+ * choosing between orders of magnitude does not need a converged fit, and pretending otherwise
+ * would make the sweep cost more than the model.
+ */
+export function tuneL2(rows, featureIds, opts) {
+  const o = opts || {};
+  const grid = o.grid || [0.3, 1, 3, 10, 30, 100, 300];
+  const sweepIters = o.sweepIters || 800;
+  const holdout = o.holdout || 0.25;
+  const cut = Math.floor(rows.length * (1 - holdout));
+  // Deterministic interleave, not a shuffle: same rows in, same split, same winner.
+  const fit = rows.filter((_, i) => i % 4 !== 3);
+  const held = rows.filter((_, i) => i % 4 === 3);
+  if (held.length < 50 || fit.filter((r) => r.label === 1).length < 10) {
+    return { l2: o.fallback === undefined ? 3 : o.fallback, tried: [], reason: "TOO_FEW_ROWS_TO_TUNE" };
+  }
+  const tried = [];
+  let best = null;
+  for (const l2 of grid) {
+    const m = fitLogistic(fit, { featureIds, l2, iters: sweepIters });
+    let ll = 0;
+    for (const r of held) {
+      const p = Math.min(1 - 1e-12, Math.max(1e-12, scoreLogistic(m, r.values)));
+      ll += -(r.label * Math.log(p) + (1 - r.label) * Math.log(1 - p));
+    }
+    const mean = ll / held.length;
+    tried.push({ l2, logLoss: Math.round(mean * 1e6) / 1e6 });
+    if (!best || mean < best.logLoss) best = { l2, logLoss: mean };
+  }
+  return { l2: best.l2, tried, heldOut: held.length, reason: null, cut };
+}
