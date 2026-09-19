@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your record</title>
+<!-- The patient's own page. Deliberately the plainest thing in this repository: no framework, no
+     analytics, no third-party anything, and nothing that phones anywhere except this hospital's own
+     API. A page a patient opens to read their diagnoses is not a place for a tracking script.
+
+     IT STORES NOTHING. The session token lives in a variable for as long as the tab is open and is
+     never written to localStorage or a cookie: a shared or borrowed phone is the normal case here,
+     not the edge case, and a token that survives closing the tab is a chart the next person opens.
+
+     NOINDEX, because a patient record page has no business in a search index.
+
+     IT IS NOT IN THE NATIVE BUNDLE, deliberately. scripts/build-www.sh copies the clinician app into
+     www/ for iOS and Android; this page is served from the Pages deployment and opened in a browser
+     by a patient. StewardMD's native app is clinician-only and shipping a patient login inside it
+     would be a second door into the same binary. -->
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --bg: #f7f7f5; --fg: #16181d; --muted: #5b6270; --line: #e0e2e6;
+    --card: #ffffff; --warn-bg: #fff6e5; --warn-fg: #6b4a00; --warn-line: #d9a441;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #14161a; --fg: #eceef2; --muted: #99a1b0; --line: #2a2e36;
+            --card: #1b1e24; --warn-bg: #2e2513; --warn-fg: #f0cf8a; --warn-line: #8a6a1f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 20px 16px 64px; }
+  h1 { font-size: 21px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 0 0 10px; }
+  p.sub { color: var(--muted); margin: 0 0 20px; font-size: 14px; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { border-top: 1px solid var(--line); padding: 9px 0; }
+  li:first-child { border-top: 0; }
+  .small { color: var(--muted); font-size: 13px; }
+  label { display: block; font-size: 14px; margin: 12px 0 4px; }
+  input, textarea { width: 100%; padding: 11px 12px; font-size: 17px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--fg); font-family: inherit; }
+  button { margin-top: 16px; width: 100%; padding: 13px; font-size: 16px; font-weight: 600; border: 0; border-radius: 10px; background: #1f6feb; color: #fff; }
+  button[disabled] { opacity: .55; }
+  .note { background: var(--warn-bg); color: var(--warn-fg); border-left: 3px solid var(--warn-line); padding: 10px 12px; border-radius: 0 10px 10px 0; margin: 0 0 12px; font-size: 14px; }
+  .err { color: #b4232c; font-size: 14px; margin-top: 12px; }
+  @media (prefers-color-scheme: dark) { .err { color: #ff8b8b; } }
+</style>
+</head>
+<body>
+<main id="app"><p class="sub">Loading…</p></main>
+<script>
+(function () {
+  "use strict";
+  var app = document.getElementById("app");
+  /* In memory only, for the life of this tab. Never localStorage, never a cookie: a borrowed or
+     shared phone is the normal case for this page, and a token that outlives the tab is a chart the
+     next person to pick it up can open. */
+  var session = null;
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function qs(name) {
+    var m = new RegExp("[?&]" + name + "=([^&]*)").exec(location.search);
+    return m ? decodeURIComponent(m[1].replace(/\+/g, " ")) : "";
+  }
+  function post(path, body) {
+    return fetch("/api/portal/" + path, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body), credentials: "omit", cache: "no-store"
+    }).then(function (r) { return r.json().catch(function () { return { ok: false }; }); });
+  }
+
+  var ORG = qs("org"), GRANT = qs("grant");
+
+  function signIn(err) {
+    app.innerHTML =
+      '<h1>Your record</h1>' +
+      '<p class="sub">Enter the code your care team gave you.</p>' +
+      '<section>' +
+      (ORG ? "" : '<label for="org">Hospital code</label><input id="org" autocomplete="off" inputmode="text">') +
+      (GRANT ? "" : '<label for="grant">Reference</label><input id="grant" autocomplete="off" inputmode="text">') +
+      '<label for="code">Access code</label>' +
+      // A numeric keypad, because the code is digits and read aloud across a desk.
+      '<input id="code" autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]*">' +
+      '<button id="go">Open my record</button>' +
+      (err ? '<p class="err">' + esc(err) + "</p>" : "") +
+      "</section>" +
+      '<p class="small">This code works once and expires. If it does not work, ask your care team for a new one.</p>';
+
+    document.getElementById("go").onclick = function () {
+      var org = ORG || (document.getElementById("org") || {}).value || "";
+      var grant = GRANT || (document.getElementById("grant") || {}).value || "";
+      var code = (document.getElementById("code") || {}).value || "";
+      if (!org || !grant || !code) return signIn("Fill in every box.");
+      this.disabled = true;
+      post("redeem", { orgId: org.trim(), grantId: grant.trim(), code: code.trim() }).then(function (r) {
+        if (!r || !r.ok) return signIn((r && r.detail) || "That code is not valid.");
+        session = { orgId: org.trim(), grantId: grant.trim(), token: r.token };
+        load();
+      }).catch(function () { signIn("Could not reach the hospital. Try again."); });
+    };
+  }
+
+  function list(items, empty, fn) {
+    if (!items || !items.length) return '<p class="small">' + esc(empty) + "</p>";
+    return "<ul>" + items.map(fn).join("") + "</ul>";
+  }
+
+  function show(r) {
+    var d = r.document || {}, p = d.patient || {};
+    app.innerHTML =
+      "<h1>" + esc(p.name || "Your record") + "</h1>" +
+      '<p class="sub">' + esc(p.mrn || "") + (p.dob ? " &middot; " + esc(p.dob) : "") + "</p>" +
+      (r.statements || []).map(function (s) { return '<p class="note">' + esc(s) + "</p>"; }).join("") +
+
+      "<section><h2>Allergies</h2>" +
+      // Never filtered by anything, and an empty list is said in words: a blank allergy block reads
+      // as "no known allergies" to every clinician this page is ever shown to.
+      (d.allergies && d.allergies.length
+        ? list(d.allergies, "", function (a) { return "<li><b>" + esc(a.substance) + "</b>" + (a.reaction ? ' <span class="small">(' + esc(a.reaction) + ")</span>" : "") + "</li>"; })
+        : '<p class="small">No allergies are recorded for you. Tell your care team if you know of any.</p>') +
+      "</section>" +
+
+      "<section><h2>Your diagnoses</h2>" +
+      list(d.diagnoses, "No diagnoses are recorded.", function (x) {
+        return "<li><b>" + esc(x.display) + "</b>" + (x.note ? '<div class="small">' + esc(x.note) + "</div>" : "") + "</li>";
+      }) + "</section>" +
+
+      "<section><h2>Your medicines</h2>" +
+      list(d.medicines, "No medicines are recorded.", function (m) {
+        var dose = m.dose && m.dose.value != null ? " " + esc(m.dose.value) + (m.dose.unit ? " " + esc(m.dose.unit) : "") : "";
+        return "<li><b>" + esc(m.drug) + "</b>" + dose + (m.frequency ? '<div class="small">' + esc(m.frequency) + "</div>" : "") + "</li>";
+      }) + "</section>" +
+
+      "<section><h2>Your results</h2>" +
+      list(d.results, "No results are ready to be given to you yet.", function (x) {
+        return "<li><b>" + esc(x.name) + "</b>" + (x.conclusion ? "<div>" + esc(x.conclusion) + "</div>" : "") +
+          '<div class="small">' + esc(x.reportedAt || "") + "</div></li>";
+      }) + "</section>" +
+
+      // Withheld items are ON the page, in the patient's own words. A result left off silently reads
+      // as a test nobody did, which is more reassuring than the truth.
+      ((d.withheldResults || []).length
+        ? "<section><h2>Not included here</h2>" +
+          list(d.withheldResults, "", function (w) { return "<li>" + esc(w.say) + "</li>"; }) + "</section>"
+        : "") +
+
+      "<section><h2>Next appointments</h2>" +
+      list(d.appointments, "No appointment is booked.", function (a) {
+        return "<li>" + esc(a.at || "") + (a.with ? " &middot; " + esc(a.with) : "") + "</li>";
+      }) + "</section>" +
+
+      // Messages the patient sent, and any reply. Without this the portal is a place messages go and
+      // never come back, and "nobody has answered" is indistinguishable from "it went somewhere else".
+      ((r.messages || []).length
+        ? "<section><h2>Your messages</h2>" +
+          list(r.messages, "", function (m) {
+            return "<li><div>" + esc(m.body) + '</div><div class="small">' + esc(m.sentAt || "") + "</div>" +
+              (m.reply
+                ? "<div><b>Reply:</b> " + esc(m.reply) + '</div><div class="small">' + esc(m.answeredAt || "") + "</div>"
+                : '<div class="small">No reply yet.</div>') + "</li>";
+          }) + "</section>"
+        : "") +
+
+      // Asking for something. The emergency warning sits ABOVE the boxes, not under the send button:
+      // the person about to type "my chest hurts" is the one who most needs to read it first.
+      '<section><h2>Ask your care team</h2>' +
+      '<p class="note" id="urgent">' + esc(r.notEmergency || "") + "</p>" +
+      '<label for="msg">A question for your team</label>' +
+      '<textarea id="msg" rows="4" maxlength="2000"></textarea>' +
+      '<button id="send">Send message</button>' +
+      '<label for="apt">Or ask for an appointment - say briefly what it is for</label>' +
+      '<input id="apt" autocomplete="off">' +
+      '<button id="askapt">Request an appointment</button>' +
+      '<p id="said" class="small"></p></section>' +
+
+      '<p class="small">' + esc(r.note || "") + " This page keeps nothing on your phone. Close the tab to sign out.</p>";
+
+    var said = document.getElementById("said");
+    function after(res, fallback) {
+      // Never "booked" and never "answered": both are things a person still has to do.
+      said.textContent = (res && res.ok) ? (res.note || fallback) : ((res && res.detail) || "That did not send. Try again.");
+    }
+    document.getElementById("send").onclick = function () {
+      var b = document.getElementById("msg").value.trim();
+      if (!b) { said.textContent = "Write your question first."; return; }
+      this.disabled = true;
+      var btn = this;
+      post("message", { orgId: session.orgId, grantId: session.grantId, token: session.token, body: b })
+        .then(function (res) { btn.disabled = false; if (res && res.ok) document.getElementById("msg").value = ""; after(res, "Sent."); })
+        .catch(function () { btn.disabled = false; said.textContent = "Could not reach the hospital."; });
+    };
+    document.getElementById("askapt").onclick = function () {
+      var why = document.getElementById("apt").value.trim();
+      if (!why) { said.textContent = "Say briefly what the appointment is for."; return; }
+      this.disabled = true;
+      var btn = this;
+      post("appointment-request", { orgId: session.orgId, grantId: session.grantId, token: session.token, reason: why })
+        .then(function (res) { btn.disabled = false; if (res && res.ok) document.getElementById("apt").value = ""; after(res, "Requested."); })
+        .catch(function () { btn.disabled = false; said.textContent = "Could not reach the hospital."; });
+    };
+  }
+
+  function load() {
+    if (!session) return signIn("");
+    app.innerHTML = '<p class="sub">Opening your record…</p>';
+    post("record", { orgId: session.orgId, grantId: session.grantId, token: session.token }).then(function (r) {
+      if (!r || !r.ok) { session = null; return signIn((r && r.detail) || "This session has ended."); }
+      show(r);
+    }).catch(function () { session = null; signIn("Could not reach the hospital. Try again."); });
+  }
+
+  signIn("");
+})();
+</script>
+</body>
+</html>

@@ -302,6 +302,15 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-fmic .material-symbols-outlined { font-size: 20px; }
 #smdOpdEmr .oe-fmic:hover { background: var(--sc-high); }
 #smdOpdEmr .oe-fmic.on { background: var(--error); color: var(--on-error); border-color: var(--error); animation: oe-fmic-pulse 1.2s ease-in-out infinite; }
+/* MaiK ICD-suggestion panel, under the provisional diagnosis field only */
+#smdOpdEmr .oe-icdsug { margin-top: 8px; }
+#smdOpdEmr .oe-icdsug:empty { margin-top: 0; }
+#smdOpdEmr .oe-icdsug-hint { font: 500 12.5px var(--font); color: var(--muted); padding: 8px 2px; }
+#smdOpdEmr .oe-icdsug-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 10px; padding: 8px 10px; margin-bottom: 6px; }
+#smdOpdEmr .oe-icdsug-code { font: 800 12px monospace; color: var(--ink); }
+#smdOpdEmr .oe-icdsug-sys { font: 700 9.5px var(--font); background: var(--sc-high); color: var(--primary); border-radius: 6px; padding: 2px 6px; }
+#smdOpdEmr .oe-icdsug-title { font: 500 12.5px var(--font); color: var(--ink); flex: 1; min-width: 100px; }
+#smdOpdEmr .oe-icdsug-accept { border: none; background: var(--primary); color: var(--on-primary, #fff); font: 700 11.5px var(--font); border-radius: 8px; padding: 6px 10px; cursor: pointer; min-height: 32px; }
 /* Dictation status strip — the only honest signal on a record-then-transcribe engine, which produces
    no partials. Sits above the save bar so it survives scrolling. */
 #smdOpdEmr .oe-fmicbar { position: fixed; left: 12px; right: 12px; bottom: 86px; z-index: 40; display: none;

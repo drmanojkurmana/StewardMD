@@ -1,0 +1,25 @@
+The audit log's own id column turned a one-line row into forty
+
+Signed in as supervisor and opened Audit and security -> Record changes. A
+row for a bed-claim event ("wsq-bed-claim-general-medicine-a-gma-01" under
+Id) rendered as one character per line, stretching that single row from the
+top of the screen to past the bottom, so reading the log meant scrolling
+through dozens of one-letter lines to reach the next row.
+
+.tbl exists so a wide table scrolls sideways instead of squeezing its
+columns - but a plain <table> is width:100%, and a browser auto-sizes
+columns to fill that 100% rather than ever actually overflowing the .tbl
+box, so the scrollbar .tbl was built for never engaged. Once the id column
+was squeezed down to a sliver, .mono's word-break:break-word had nothing
+short enough left to break at and wrapped the id one character at a time.
+
+.tbl table now takes width:max-content (never narrower than the box, via
+min-width:100%), so the table sizes to what its content actually needs and
+a table wider than its box now genuinely overflows - which is what .tbl's
+own scrollbar was there to catch in the first place. Every other table using
+.tbl gets the same fix for free; nothing here is specific to the audit page.
+
+Found by opening Audit and security as supervisor.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

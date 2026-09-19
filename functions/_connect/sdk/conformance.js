@@ -30,7 +30,11 @@ async function produce(connector, descriptor, opts, ctx) {
   if (descriptor.profile === "pull") { const raw = await connector.fetchPatient(ctx, (opts.fixtures || {}).patientRef); return connector.normalize(ctx, raw); }
   const r = await connector.ingest(ctx, (opts.fixtures || {}).rawEvent); return r ? r.bundle : null;
 }
-const ctxOf = (opts, over = {}) => makeCtx(Object.assign({ fetch: opts.fetch }, (opts.fixtures || {}).scope ? { scope: opts.fixtures.scope } : {}, over));
+// opts.exec is additive and opt-in (see interfaces.js's runConformance for the identical pattern and
+// why): only the browser-session connector needs it; every other connector type never sets it.
+const ctxOf = (opts, over = {}) => makeCtx(Object.assign(
+  { fetch: opts.fetch, config: opts.exec ? { exec: opts.exec } : undefined },
+  (opts.fixtures || {}).scope ? { scope: opts.fixtures.scope } : {}, over));
 
 export async function runConformance(connector, opts = {}) {
   const checks = [];

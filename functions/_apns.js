@@ -57,9 +57,27 @@ async function providerJwt(env) {
   return _tok;
 }
 
+/* The two APNs hosts, addressable per token rather than only per deployment.
+ *
+ * A token is only valid against the environment the BUILD was signed for: a Debug or development
+ * build registers a sandbox token, a TestFlight or App Store build a production one. APNS_ENV picks
+ * one host for the whole deployment, so a development device on a production deployment gets
+ * BadDeviceToken and, worse, gets PRUNED - which reads exactly like "push is broken" rather than
+ * "wrong environment for this build". Callers can now name the host for one token. */
+const APNS_HOSTS = Object.freeze({
+  production: "https://api.push.apple.com",
+  sandbox: "https://api.sandbox.push.apple.com",
+});
+
+/** The deployment default, unchanged: whatever APNS_ENV says, production unless told otherwise. */
+export function apnsDefaultEnvName(env) {
+  return (env.APNS_ENV === "sandbox" || env.APNS_ENV === "development") ? "sandbox" : "production";
+}
+
 /* Send one alert to one iOS device token.
- * Returns { ok } on success or { prune } when Apple says the token is dead. */
-export async function sendApns(env, deviceToken, msg, topic) {
+ * Returns { ok } on success or { prune } when Apple says the token is dead.
+ * `apnsEnv` ("production" | "sandbox") overrides the deployment default for THIS token only. */
+export async function sendApns(env, deviceToken, msg, topic, apnsEnv) {
   const jwt = await providerJwt(env);
   const payload = {
     aps: {
@@ -70,8 +88,24 @@ export async function sendApns(env, deviceToken, msg, topic) {
     url: msg.url || "/",
   };
   if (msg.route) payload.route = msg.route;   // watch deep-link target (e.g. "tasks")
+  // Custom data, carried as top-level keys alongside `aps` - which is where APNs puts them and
+  // where Capacitor reads them back into notification.data on the device.
+  //
+  // This was silently dropped until a device test caught it: the endpoint sent a noticeId, the
+  // handset received a push containing only { aps, url }, and the WardSynQ receipt had nothing to
+  // identify itself with. An escalation whose identity does not survive the transport cannot be
+  // acknowledged, so the loop could never close. `aps` and `url` are protected from being
+  // overwritten by a caller's key of the same name.
+  if (msg.data && typeof msg.data === "object") {
+    for (const k of Object.keys(msg.data)) {
+      if (k === "aps" || k === "url") continue;
+      payload[k] = msg.data[k];
+    }
+    if (msg.data.url) payload.url = msg.data.url;
+  }
   const body = JSON.stringify(payload);
-  const res = await fetch(apnsHost(env) + "/3/device/" + deviceToken, {
+  const host = APNS_HOSTS[apnsEnv] || apnsHost(env);
+  const res = await fetch(host + "/3/device/" + deviceToken, {
     method: "POST",
     headers: {
       "authorization": "bearer " + jwt,
@@ -81,9 +115,13 @@ export async function sendApns(env, deviceToken, msg, topic) {
     },
     body,
   });
-  if (res.ok) return { ok: true };
+  if (res.ok) return { ok: true, apnsEnv: apnsEnv || apnsDefaultEnvName(env) };
   let reason = ""; try { reason = (await res.json()).reason || ""; } catch (e) {}
-  // 410 Unregistered, or 400 BadDeviceToken/DeviceTokenNotForTopic → stop sending to it.
-  const prune = res.status === 410 || reason === "BadDeviceToken" || reason === "Unregistered" || reason === "DeviceTokenNotForTopic";
-  return { ok: false, status: res.status, reason, prune };
+  // 410 Unregistered means the app was uninstalled: dead on BOTH hosts, prune it.
+  const unregistered = res.status === 410 || reason === "Unregistered";
+  // These two mean "not valid HERE", which is a different claim and is the one that used to destroy
+  // a perfectly good development token. It is reported separately so the caller can try the other
+  // host before deciding the device is gone.
+  const wrongEnvironment = reason === "BadDeviceToken" || reason === "DeviceTokenNotForTopic";
+  return { ok: false, status: res.status, reason, prune: unregistered, wrongEnvironment };
 }

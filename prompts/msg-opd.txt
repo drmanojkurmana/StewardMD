@@ -1,0 +1,20 @@
+Every OPD sign-out ended on a red "[object PointerEvent]"
+
+logout(msg) takes a message and passes it to renderLogin, which prints it as the
+error line. It was wired straight to onclick, so the browser handed it the click
+event instead of a message and the sign-in page greeted the person with
+"[object PointerEvent]" in red. Every ordinary sign-out, every time. Wrapped, so
+logout is called with nothing to say.
+
+AND NO MEMBER OF STAFF COULD SIGN IN HERE EITHER. The OPD door carried the same
+bug the wardsynq.com door did: it chose between the two sign-in routes by looking
+for an "@" in the ID, so anything shaped like an email went down the
+email+password path, silently ignoring the clinic code just typed and offering
+the PIN as a password. Every staff ID seeded so far IS an email address, so the
+door answered "Wrong email or password" to people whose clinic code, staff ID and
+PIN were all correct. The clinic code decides now, not the shape of the ID.
+
+Found by signing out of a lab technician's session and landing here.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

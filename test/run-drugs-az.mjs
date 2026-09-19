@@ -82,6 +82,14 @@ try {
   if (!ready) throw new Error("MEDDB not loaded");
   await ev(`["smdBootSplash","introPoster","splash","accountGate","introOverlay"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
 
+  // Legacy formulary entry points must open the same universal database.
+  await ev(`MEDDRUGS.openList(); return 1;`); await sleep(600);
+  ok(await ev(`return !!document.querySelector('#dbOverlay.on') && !document.getElementById('mdOverlay');`) === true,
+    "legacy Drug Doses entry opens Drugs Database without creating a second module");
+  await ev(`MEDDRUGS.close(); return 1;`);
+  ok(await ev(`return !document.querySelector('#dbOverlay.on') && !document.body.classList.contains('db-lock');`) === true,
+    "legacy close releases the universal database and its scroll lock");
+
   // 1) the landing view is the A-Z browse, not an empty search box
   await ev(`MEDDB.openList(); return 1;`); await sleep(600);
   const L = JSON.parse(await ev(`

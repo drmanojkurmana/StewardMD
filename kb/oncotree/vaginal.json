@@ -1,0 +1,303 @@
+{
+  "guideline": "vaginal",
+  "id": "vaginal",
+  "title": "Vaginal Cancer",
+  "category": "Gynecologic Oncology",
+  "version": "2.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "vaginal_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Vaginal Cancer. Covers complete clinical algorithm: Diagnostic Workup (pelvic speculum and bimanual rectovaginal EUA mapping tumor epicenter and distance from introitus, biopsy confirming primary invasive vaginal carcinoma with cervical primary excluded, high-resolution pelvic MRI with contrast, whole-body FDG-PET/CT or contrast CT chest/abdomen/pelvis, cystoscopy and proctosigmoidoscopy for stage II or higher disease abutting anterior or posterior wall, biomarker testing for PD-L1 CPS, MMR/MSI, and high-risk HPV) -> FIGO Stage Stratification (Stage I confined to vaginal wall vs Stage II-IVa locoregionally advanced with paravaginal, pelvic sidewall, or regional nodal disease vs Stage IVb distant metastatic or incurable recurrent) -> Stage I local therapy (radical vaginectomy or radical hysterectomy with bilateral pelvic lymphadenectomy for upper-third favorable surgical candidates, or definitive EBRT plus image-guided brachytherapy for most patients) -> Locoregionally advanced definitive concurrent chemoradiotherapy (pelvic EBRT with weekly cisplatin followed by interstitial or intracavitary IGBT boost) -> Metastatic first-line systemic chemoimmunotherapy (platinum plus paclitaxel plus pembrolizumab with or without bevacizumab per KEYNOTE-826 extrapolated data; second-line tisotumab vedotin or pembrolizumab monotherapy for MSI-H, TMB-H, or PD-L1 CPS >=1). References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Vaginal Cancer Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Primary vaginal carcinoma requires exclusion of cervical primary extension: tumor epicenter must map to the vagina with no gross cervical involvement, and pathology must confirm invasive vaginal histology (squamous cell carcinoma in over 80% of cases, adenocarcinoma, clear cell carcinoma, or melanoma).",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "High-resolution pelvic MRI with contrast is optimal for depth of paravaginal invasion, pelvic sidewall involvement, and bladder or rectal wall abutment; whole-body FDG-PET/CT stages regional lymphadenopathy and distant metastases. Cystoscopy and proctosigmoidoscopy apply to stage II or higher tumors abutting the anterior or posterior vaginal wall.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Stage I definitive radiotherapy: pelvic EBRT 45 Gy followed by image-guided brachytherapy (intracavitary cylinder or interstitial needle implant) to a cumulative EQD2 of at least 70-75 Gy to the primary tumor volume.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Locoregionally advanced definitive concurrent chemoradiotherapy: pelvic EBRT 45-50.4 Gy (add bilateral inguinofemoral nodal fields when the lower third of the vagina is involved) with concurrent weekly cisplatin 40 mg/m2 IV during EBRT for 5-6 doses, followed by interstitial or intracavitary IGBT boost to cumulative EQD2 of at least 80-85 Gy; boost PET-positive nodes to 60-66 Gy.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Metastatic first-line systemic therapy extrapolates KEYNOTE-826 cervical data: cisplatin 50 mg/m2 (or carboplatin AUC 4-5) plus paclitaxel 175 mg/m2 plus pembrolizumab 200 mg IV every 3 weeks (or 400 mg every 6 weeks) with or without bevacizumab 15 mg/kg IV every 3 weeks; second-line options are tisotumab vedotin 2.0 mg/kg IV every 3 weeks (antibody-drug conjugate) or pembrolizumab monotherapy for MSI-H, TMB-H, or PD-L1 CPS >=1 disease.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "vaginal_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Vaginal Cancer: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before FIGO stage stratification. Map the tumor epicenter, confirm primary invasive vaginal histology with cervical primary excluded, stage local and distant extent with MRI and PET/CT, scope adjacent organs for stage II or higher disease, and test predictive biomarkers.",
+      "path": "Vaginal Cancer / Workup",
+      "pills": [
+        "vaginal",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Careful pelvic speculum and bimanual rectovaginal examination under anesthesia (EUA) mapping exact tumor epicenter and distance from introitus",
+        "Biopsy confirming primary invasive vaginal carcinoma (squamous cell carcinoma >80%, adenocarcinoma, clear cell, melanoma) while excluding cervical primary extension",
+        "High-resolution pelvic MRI with contrast (optimal for depth of paravaginal invasion, pelvic sidewall, and bladder/rectal involvement)",
+        "Whole-body FDG-PET/CT (or CT chest/abdomen/pelvis with IV contrast) to assess regional lymphadenopathy and distant metastatic disease",
+        "Cystoscopy and proctosigmoidoscopy for stage II or higher tumors abutting the anterior or posterior vaginal wall",
+        "Biomarker testing on tumor tissue: PD-L1 IHC (CPS), MMR/MSI, and high-risk HPV testing"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to FIGO Stage Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage",
+      "linkId": "vaginal_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "FIGO Stage Stratification",
+      "title": "Vaginal Cancer: FIGO Stage Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign FIGO stage from confinement to the vaginal wall, paravaginal or pelvic sidewall extension, regional nodal status, and distant spread; the group selects the Stage I local-therapy, locoregionally advanced chemoradiotherapy, or metastatic systemic-therapy pathway.",
+      "path": "Vaginal Cancer / Stage Stratification",
+      "pills": [
+        "vaginal",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "FIGO Stage I: tumor confined strictly to the vaginal wall or mucosa with no paravaginal extension.",
+        "FIGO Stage II-IVa locoregionally advanced: paravaginal tissue involvement, pelvic sidewall extension, bladder or rectal mucosal involvement without fistula beyond vagina, or regional lymph node involvement.",
+        "FIGO Stage IVb distant metastatic or incurable recurrent: spread beyond the pelvis to distant organs or non-regional nodes, or recurrence not amenable to curative local therapy."
+      ],
+      "options": [
+        {
+          "id": "stage_i",
+          "label": "FIGO Stage I Vaginal Cancer (Confined strictly to vaginal wall / mucosa)",
+          "sets": {
+            "stage": "stage_i"
+          },
+          "pills": [
+            "vaginal",
+            "stage I"
+          ]
+        },
+        {
+          "id": "locally_advanced",
+          "label": "FIGO Stage II-IVa Locoregionally Advanced Vaginal Cancer (Paravaginal, pelvic sidewall, or regional nodes)",
+          "sets": {
+            "stage": "locally_advanced"
+          },
+          "pills": [
+            "vaginal",
+            "locally advanced",
+            "stage II-IVa"
+          ]
+        },
+        {
+          "id": "metastatic",
+          "label": "Distant Metastatic or Incurable Recurrent Vaginal Cancer (FIGO Stage IVb)",
+          "sets": {
+            "stage": "metastatic"
+          },
+          "pills": [
+            "vaginal",
+            "metastatic",
+            "stage IVb"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_stage_i_tx",
+      "linkId": "vaginal_stage_i_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Stage I Treatment",
+      "title": "Stage I: Radical Vaginectomy or Definitive EBRT Plus Brachytherapy",
+      "section": "Treatment",
+      "description": "Local therapy for FIGO Stage I disease confined to the vagina: radical surgery for favorable upper-third surgical candidates, or definitive EBRT plus image-guided brachytherapy as standard for most patients.",
+      "path": "Vaginal Cancer / Stage I / Treatment",
+      "pills": [
+        "vaginal",
+        "stage I",
+        "local"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "c"
+      ],
+      "bullets": [
+        "Upper 1/3 vagina (favorable surgical candidate): radical vaginectomy or radical hysterectomy with bilateral pelvic lymphadenectomy.",
+        "Definitive radiotherapy (standard for most patients): external beam radiation therapy (EBRT: 45 Gy to pelvis) plus image-guided brachytherapy (IGBT: intracavitary cylinder or interstitial needle implant delivering cumulative EQD2 >=70-75 Gy).",
+        "Select surgical candidates by upper-vaginal location, small tumor size, and fitness for radical pelvic surgery with lymphadenectomy; all others proceed to definitive radiotherapy.",
+        "Surveillance after definitive local therapy: pelvic examination with speculum and bimanual rectovaginal assessment plus cross-sectional imaging for symptoms or high-risk pathology.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Radical Vaginectomy or Definitive EBRT (45 Gy) + Image-Guided Brachytherapy (IGBT)",
+      "protocolRefs": [
+        "gyn-vaginal-cisplatin-rt"
+      ]
+    },
+    {
+      "id": "n_locally_advanced_tx",
+      "linkId": "vaginal_locally_advanced_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Locoregionally Advanced Treatment",
+      "title": "Stage II-IVa: Definitive Concurrent Chemoradiotherapy Plus IGBT",
+      "section": "Treatment",
+      "description": "Definitive concurrent chemoradiotherapy for locoregionally advanced vaginal cancer: pelvic EBRT with weekly cisplatin followed by interstitial or intracavitary IGBT boost, with nodal boost for PET-positive lymph nodes.",
+      "path": "Vaginal Cancer / Locoregionally Advanced / Treatment",
+      "pills": [
+        "vaginal",
+        "locally advanced",
+        "stage II-IVa",
+        "chemoradiation"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "d"
+      ],
+      "bullets": [
+        "Definitive concurrent chemoradiotherapy: pelvic EBRT (45-50.4 Gy to pelvis; add bilateral inguinofemoral nodal fields if lower 1/3 vagina involved) with concurrent weekly cisplatin (40 mg/m2 IV weekly during EBRT x 5-6 doses).",
+        "Follow EBRT with interstitial or intracavitary image-guided brachytherapy (IGBT boost achieving cumulative EQD2 >=80-85 Gy to primary tumor volume).",
+        "Nodal boost to 60-66 Gy for PET-positive lymph nodes.",
+        "Monitor renal function, audiologic status, and hematologic counts on weekly cisplatin; coordinate across gynecologic oncology, medical oncology, and radiation oncology.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Definitive Concurrent ChemoRT (Pelvic EBRT + Weekly Cisplatin 40 mg/m2) + Interstitial IGBT",
+      "protocolRefs": [
+        "gyn-vaginal-cisplatin-rt"
+      ]
+    },
+    {
+      "id": "n_metastatic_tx",
+      "linkId": "vaginal_metastatic_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Metastatic Treatment",
+      "title": "Stage IVb: First-Line Systemic Chemoimmunotherapy Then ADC or Pembrolizumab",
+      "section": "Treatment",
+      "description": "First-line platinum, paclitaxel, and pembrolizumab with or without bevacizumab for distant metastatic or incurable recurrent vaginal cancer, followed by tisotumab vedotin or pembrolizumab monotherapy for biomarker-selected disease.",
+      "path": "Vaginal Cancer / Metastatic / Systemic Therapy",
+      "pills": [
+        "vaginal",
+        "metastatic",
+        "stage IVb",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "First-line systemic chemoimmunotherapy: cisplatin 50 mg/m2 (or carboplatin AUC 4-5) plus paclitaxel 175 mg/m2 plus pembrolizumab 200 mg IV q3w (or 400 mg q6w) with or without bevacizumab 15 mg/kg IV q3w (KEYNOTE-826 data).",
+        "Second-line: tisotumab vedotin 2.0 mg/kg IV q3w (antibody-drug conjugate, ADC) or pembrolizumab monotherapy (for MSI-H, TMB-H, or PD-L1 CPS >=1).",
+        "Establish PD-L1 CPS, MMR/MSI, TMB, and high-risk HPV status at diagnosis of metastatic disease to set immunotherapy eligibility; offer clinical trial enrollment at every line.",
+        "Stage with cross-sectional imaging at baseline and every 8-12 weeks on systemic therapy; monitor for immune-related adverse events on pembrolizumab and ocular, bleeding, and neuropathy signals on tisotumab vedotin.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Platinum + Paclitaxel + Pembrolizumab +/- Bevacizumab (KEYNOTE-826 extrapolated)",
+      "protocolRefs": [
+        "cervical-pembrolizumab",
+        "gyn-vaginal-cisplatin-rt"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_stage",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_stage",
+      "toNodeId": "n_stage",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_i",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_stage_i_tx",
+      "toNodeId": "n_stage_i_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "stage_i",
+      "fromOptions": [
+        "stage_i"
+      ]
+    },
+    {
+      "id": "l_stage_locally_advanced",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_locally_advanced_tx",
+      "toNodeId": "n_locally_advanced_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "locally_advanced",
+      "fromOptions": [
+        "locally_advanced"
+      ]
+    },
+    {
+      "id": "l_stage_metastatic",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_metastatic_tx",
+      "toNodeId": "n_metastatic_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "metastatic",
+      "fromOptions": [
+        "metastatic"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "cervical-pembrolizumab",
+    "gyn-vaginal-cisplatin-rt"
+  ]
+}

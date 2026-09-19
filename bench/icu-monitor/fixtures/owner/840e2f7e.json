@@ -1,0 +1,85 @@
+{
+  "id": "owner-840e2f7e",
+  "manufacturer": "meditec",
+  "layout": "multipara-right-column",
+  "difficulty": [
+    "product-photo",
+    "low-resolution",
+    "demo-watermark"
+  ],
+  "image": "840e2f7e.jpg",
+  "imageSize": {
+    "w": 447,
+    "h": 447
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 60
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 98
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 120,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 80,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 90,
+      "source": "NIBP"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 27
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 60
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "ambiguous",
+      "why": "large 39.0 beside Temp with small T1 37.0 / TD 2.0; which is current is unclear",
+      "value": 39.0
+    },
+    "etco2": {
+      "status": "visible",
+      "value": 38
+    },
+    "art": {
+      "status": "ambiguous",
+      "why": "small P1/P2 readouts unreadable at 447 px"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 120,
+        "dbp": 80,
+        "map": 90
+      }
+    }
+  },
+  "distractors": {
+    "demoOverlay": "DEMO over ECG",
+    "pi": 4.12,
+    "clock": "12:04:29 AM",
+    "co2Sub": [
+      3,
+      20
+    ],
+    "banner": "No Patient Admitted"
+  },
+  "notes": "Meditec England product photo (447x447). DEMO box covers the ECG waveform, not values."
+}

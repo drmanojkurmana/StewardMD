@@ -1,0 +1,24 @@
+feat: catch finished-but-unreachable code automatically
+
+Eight modules were found by hand this session that were fully built, correct and
+tested, but that no screen ever called. Finding the ninth by hand is not a plan.
+
+scripts/wardsynq-reachability.mjs pulls every route out of the router, discovers
+every screen that talks to the API (discovered, not hardcoded, so a new screen file
+is covered automatically), and reports any route nothing calls. It runs as part of
+the normal test suite.
+
+The first run is the uncomfortable part: of 291 routes, 206 have a screen, 20 are
+machine-to-machine by design (HL7 in, outbound messages, scheduled backups, the
+patient's own app), and 65 are finished backend work with no way for anyone to reach
+it - care plans, handover, wound care, medication reconciliation, order sets, patient
+record merge, break-glass access, infusions, and more.
+
+Those 65 are recorded as a baseline worklist rather than ignored. The checker fails
+the build on any NEW unreachable route, and also fails when a listed gap gets wired
+up and the list is not trimmed, so the number can only go down. That is the whole
+point: today's debt is visible and fixed in place, and tomorrow cannot quietly add
+to it.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

@@ -1,0 +1,115 @@
+/* wardsynq/ui/record-deployment.js — one way for a WardSynQ surface to open the shared record.
+ *
+ * The workstation (wardsynq-app.js) and the bedside surface (opd-boot.js) both need the same three
+ * things before they can chart: a store that is the hospital's record rather than this browser's, an
+ * actor the server will recognise, and the patient. This builds them, once, the same way, so the
+ * hospital PC and the doctor's phone (wardsynq-record-boot.js does the identical thing for mobile)
+ * are provably two interfaces to one record and not two implementations of the idea.
+ *
+ * The store returned is GOVERNED. The raw ClinicalStore is not handed out, for the reason stated in
+ * wardsynq-actors.js: an enforcement point off the path enforces nothing.
+ */
+
+import { ClinicalStore } from "../wardsynq-store.js";
+import { RemoteBackend } from "../wardsynq-store-remote.js";
+import { GovernedStore, makeActor, KIND, TIER } from "../wardsynq-actors.js";
+import { ClinicalEventBus } from "../wardsynq-events.js";
+
+/**
+ * @param {{tenantId: string, token?: () => Promise<string|null>, baseUrl?: string, bus?: object,
+ *   nodeId?: string, onDenied?: Function}} opts
+ * @returns {Promise<{tenantId, mode, role, descriptor, actor, bus, backend, store, governed, session}>}
+ */
+async function openRecordDeployment(opts) {
+  opts = opts || {};
+  // A hospital staff session (wardsynq.com / OPD console sign-in) is the same localStorage key
+  // ward.js reads; it travels as X-Staff-Token. Absent on a doctor's account session.
+  const staffToken = opts.staffToken || (async () => { if (signInKind() === "account") return null; try { return localStorage.getItem("smd_opd_staff_tok") || null; } catch { return null; } });
+  const backend = new RemoteBackend({ tenantId: opts.tenantId, token: opts.token, staffToken, baseUrl: opts.baseUrl || "" });
+  const bus = opts.bus || new ClinicalEventBus({ nodeId: opts.nodeId || "workstation" });
+  const store = new ClinicalStore({ backend, bus });
+  await store.open();                                 // the server decides whether this client may open
+  const d = backend.descriptor;
+  // Mirror the SERVER-derived actor so client-side governance and the signature identity agree
+  // with what the door verifies. The credential itself never travels; canSign says the server holds one.
+  const actor = makeActor({
+    id: d.actor.id, kind: KIND.HUMAN,
+    tier: d.actor.tier === TIER.EXECUTE ? TIER.EXECUTE : TIER.READ,
+    display: d.actor.display, credential: d.actor.canSign ? "held-by-server" : null,
+  });
+  const governed = new GovernedStore({ store, bus, onDenied: opts.onDenied || null });
+  return {
+    tenantId: d.tenantId, mode: d.mode, role: d.role, descriptor: d,
+    actor, bus, backend, store: governed, governed,
+    session: (patientId) => governed.session(actor, patientId),
+  };
+}
+
+/** Reads `?record=<tenantId>` (and `&patient=<id>`), the opt-in every WardSynQ page shares. */
+function recordParams(search) {
+  const q = new URLSearchParams(search || (typeof location !== "undefined" ? location.search : ""));
+  const tenantId = (q.get("record") || "").trim();
+  if (!tenantId || tenantId === "none" || tenantId === "null" || tenantId === "undefined" || q.get("demo") === "1") {
+    return null;
+  }
+  return { tenantId, patientId: q.get("patient") || null };
+}
+
+/* The bearer the StewardMD shell exposes, when this page runs inside it. Null on a bare hospital PC
+ * with Access.
+ *
+ * TWO SHAPES, BECAUSE TWO SHELLS PUBLISH TWO DIFFERENT ONES. This read `SMD_AUTH.currentUser` only,
+ * which is the shape the native StewardMD app exposes. wardsynq.com's own shell (wardsynq/site/
+ * shell.js) publishes `SMD_AUTH.token()` instead, and has since it was written. So on wardsynq.com
+ * this returned null for a fully signed-in doctor, every call went out with no bearer, and the
+ * order-safety workstation opened onto "record service refused to open (401). Safety checking is
+ * unavailable, so ordering is disabled." with the drug field, Sign order, Notes and Handover all
+ * disabled. Found 2026-09-12 by clicking Ward on the live site. Accepting both shapes is the fix:
+ * neither shell is wrong, they were simply never reconciled. */
+/* WHICH SIGN-IN, NOT WHICHEVER TOKEN IS STORED (hospital-auth.js, S3 design 2.3). The site shell and
+ * the OPD console record the sign-in the person chose in "smd_opd_toktype": "staff" for a hospital
+ * staff session, "account" (shell) or "firebase" (OPD console) for a StewardMD account. A browser can
+ * hold both - an account left signed in to Firebase and a staff session on top of it - and the server
+ * prefers a bearer, so sending both acted as whichever account Firebase still remembered rather than
+ * as the person signed in to this hospital. The chosen sign-in now travels alone; with no record of a
+ * choice (the StewardMD app, older sessions) both are sent exactly as before. */
+function signInKind() {
+  let t = "";
+  try { t = (typeof localStorage !== "undefined" && localStorage.getItem("smd_opd_toktype")) || ""; } catch {}
+  if (t === "account" || t === "firebase") return "account";
+  if (t === "staff") return "staff";
+  return "";
+}
+
+async function shellToken() {
+  if (signInKind() === "staff") return null;
+  try {
+    const a = typeof window !== "undefined" ? window.SMD_AUTH : null;
+    if (a && a.ready && typeof a.ready.then === "function") {
+      try { await a.ready; } catch {}
+    }
+    let tok = null;
+    if (a && typeof a.token === "function") {
+      try { tok = await a.token(); } catch {}
+    }
+    if (!tok && a && a.currentUser && typeof a.currentUser.getIdToken === "function") {
+      try { tok = await a.currentUser.getIdToken(); } catch {}
+    }
+    if (!tok && typeof window !== "undefined" && window.firebase && typeof window.firebase.auth === "function") {
+      try {
+        const u = window.firebase.auth().currentUser;
+        if (u && typeof u.getIdToken === "function") tok = await u.getIdToken();
+      } catch {}
+    }
+    if (!tok && signInKind() !== "account" && typeof localStorage !== "undefined") {
+      try {
+        tok = localStorage.getItem("smd_opd_staff_tok") || null;
+      } catch {}
+    }
+    return tok || null;
+  } catch {
+    return null;
+  }
+}
+
+export { openRecordDeployment, recordParams, shellToken, signInKind };

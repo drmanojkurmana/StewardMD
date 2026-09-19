@@ -1,0 +1,84 @@
+{
+  "id": "owner-img_8377",
+  "manufacturer": "ventilator-other",
+  "layout": "niv-vent-right-column",
+  "difficulty": [
+    "real-photo",
+    "ventilator",
+    "tilt",
+    "glare",
+    "set-vs-measured"
+  ],
+  "image": "img_8377.jpg",
+  "imageSize": {
+    "w": 4284,
+    "h": 5712
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "not_applicable"
+    },
+    "spo2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "not_applicable"
+    },
+    "dbp": {
+      "status": "not_applicable"
+    },
+    "map": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 18
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_applicable"
+    }
+  },
+  "distractors": {
+    "setRR": 18,
+    "rrLimits": [
+      30,
+      5
+    ],
+    "ppeak": 24,
+    "pmean": 11,
+    "peep": 7.8,
+    "ie": "1:3.8",
+    "o2conc": "8 (alarm tile)",
+    "mve": 6.2,
+    "vti": 340,
+    "vte": 336,
+    "cdyn": 21.8,
+    "settings": {
+      "o2": 100,
+      "peep": 8.0,
+      "rr": 18,
+      "pcAbovePeep": 15
+    },
+    "clock": "15:43",
+    "banner": "O2 concentration low",
+    "bedLabel": "MICU37"
+  },
+  "notes": "Same ventilator family as MICU41, strongly tilted. Set RR equals measured RR (18), so a set/measured mix-up would not show as a wrong value."
+}

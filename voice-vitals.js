@@ -99,6 +99,12 @@
     m = raw.match(/\b(?:rr|resp(?:iratory)?\s*rate|respiration)\b\s*(?:is|of|was|=|:|at)?\s*(\d{1,2})\b/);
     if (m && inRange(num(m[1]), 4, 80)) push("rr", num(m[1]), m[0], 0.9);
 
+    m = raw.match(/\b(?:spo2|sp\s*o2|saturation|sats?|o2\s*sat(?:uration)?|oximetry)\b\s*(?:is|of|=|:)?\s*(\d{2,3})\s*(?:%|percent)?/);
+    if (m && inRange(num(m[1]), 50, 100)) push("spo2", num(m[1]), m[0], 0.95);
+
+    m = raw.match(/\b(?:grbs|rbs|blood\s*sugar|cbg|capillary\s*(?:blood\s*)?glucose)\b\s*(?:is|of|=|:)?\s*(\d{2,3})\s*(?:mg(?:\/dl)?)?/);
+    if (m && inRange(num(m[1]), 20, 600)) push("grbs", num(m[1]), m[0], 0.9);
+
     // Temperature → GHIS wants °F. Convert if spoken in °C or a plausible C value.
     m = raw.match(/\b(?:temp(?:erature)?|febrile\s*at)\b\s*(?:is|of|was|=|:)?\s*(\d{2,3}(?:\.\d)?)\s*(?:°|deg(?:ree)?s?)?\s*(c|celsius|centigrade|f|fahrenheit)?/);
     if (m) { var tv = num(m[1]), unit = m[2] || "";

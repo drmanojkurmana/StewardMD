@@ -1,0 +1,107 @@
+{
+  "id": "philips-mp40-perspective-mild",
+  "manufacturer": "philips-intellivue",
+  "layout": "right-column-limits-left",
+  "difficulty": [
+    "perturbed",
+    "perspective"
+  ],
+  "image": "philips-mp40-perspective-mild.jpg",
+  "imageSize": {
+    "w": 900,
+    "h": 1600
+  },
+  "synthetic": false,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 105
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 100
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 149,
+      "source": "ART"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 66,
+      "source": "ART"
+    },
+    "map": {
+      "status": "visible",
+      "value": 98,
+      "source": "ART"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 22
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 105
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 0
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 149,
+        "dbp": 66,
+        "map": 98
+      }
+    },
+    "nibp": {
+      "status": "not_visible",
+      "why": "NBP in Auto mode with limits 160/90 shown, no measurement on screen"
+    },
+    "st": {
+      "status": "visible",
+      "value": {
+        "I": 0.0,
+        "II": 0.5,
+        "III": 0.5
+      }
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ],
+      "nibp": [
+        160,
+        90
+      ]
+    },
+    "clock": "20:38",
+    "banner": "** RR HIGH",
+    "rhythm": "Sinus Tach"
+  },
+  "notes": "Derived from the owner's real MP40 photo by perturb.py; truth changed only for fields listed in the perturbation's overrides.",
+  "group": "perturbed-real",
+  "derivedFrom": "philips-mp40-owner-900px",
+  "perturbation": {
+    "perspective": 0.06
+  }
+}

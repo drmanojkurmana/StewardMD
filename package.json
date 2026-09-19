@@ -5,7 +5,7 @@
   "description": "StewardMD — native iOS + Android app wrapper (Capacitor) around the StewardMD PWA. The web app itself is buildless static files at the repo root; scripts/build-www.sh assembles the runtime bundle into www/.",
   "scripts": {
     "postinstall": "patch-package",
-    "test": "for f in test/*.test.mjs test/connect/*.test.mjs test/connect/*/*.test.mjs rx-build.test.mjs; do echo \"→ $f\"; node --experimental-test-module-mocks \"$f\" || exit 1; done",
+    "test": "fails=''; for f in test/*.test.mjs test/connect/*.test.mjs test/connect/*/*.test.mjs test/connect-agent/*.test.mjs rx-build.test.mjs; do echo \"→ $f\"; node --experimental-test-module-mocks --experimental-sqlite \"$f\" || fails=\"$fails $f\"; done; if [ -n \"$fails\" ]; then echo \"FAILED:$fails\"; exit 1; fi",
     "eval:maik": "node --max-old-space-size=4096 scripts/maik-eval.mjs",
     "eval:maik:answers": "node scripts/maik-answer-eval.mjs",
     "build:www": "bash scripts/build-www.sh",
@@ -20,6 +20,7 @@
     "@capacitor-community/text-to-speech": "^8.0.2",
     "@capacitor-firebase/app-check": "^8.3.0",
     "@capacitor-firebase/authentication": "^8.3.0",
+    "@capacitor-mlkit/text-recognition": "^8.2.1",
     "@capacitor/android": "^8.4.1",
     "@capacitor/app": "^8.1.0",
     "@capacitor/barcode-scanner": "^3.1.1",
@@ -38,6 +39,7 @@
     "@capawesome/capacitor-file-picker": "^8.0.3",
     "@capgo/capacitor-updater": "^8.51.14",
     "@stewardmd/capacitor-app-orientation": "file:local-plugins/capacitor-app-orientation",
+    "@stewardmd/capacitor-connect-browser": "file:local-plugins/capacitor-connect-browser",
     "@stewardmd/capacitor-ecg-digitiser": "file:local-plugins/capacitor-ecg-digitiser",
     "@stewardmd/capacitor-fundx-depth": "file:local-plugins/capacitor-fundx-depth",
     "@stewardmd/capacitor-iap": "file:local-plugins/capacitor-iap",
@@ -52,5 +54,9 @@
   },
   "devDependencies": {
     "patch-package": "^8.0.1"
+  },
+  "overrides": {
+    "@xmldom/xmldom": "0.9.12",
+    "brace-expansion": "5.0.9"
   }
 }

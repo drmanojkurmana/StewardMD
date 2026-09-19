@@ -1,0 +1,43 @@
+fix: the consultation form was wiped by its own repaints, and add code lookup
+
+Two real defects in the consultation screen, both found by rendering it rather than by
+reading it - node --check sees neither.
+
+THE FORM DID NOT SURVIVE A REPAINT. The screen is one long form rebuilt from scratch on
+every paint, so a doctor who typed the vitals, the drug and half the note and then pressed
+anything at all watched the lot vanish. Every validation message did it too: being told "a
+prescription needs the drug, the dose and the unit" also cleared the observations already
+entered. Values are now snapshotted off the DOM before a repaint and rendered back in, and
+the snapshot is taken BEFORE the checks that complain.
+
+THE DROPDOWNS SNAPPED BACK TO THEIR FIRST OPTION. A select rebuilt without a selected
+attribute reads back as its first entry, which on the oxygen box turns "on oxygen" into
+"not recorded" - a patient on oxygen silently becoming one who is not, and a NEWS2 score
+computed from it that is wrong in the reassuring direction.
+
+The draft is deliberately short-lived: cleared on save, on leaving the screen, and by
+close(). A half-typed consultation that outlives its patient is how one patient's findings
+end up in another's chart.
+
+Also fixed while testing: the render helpers were reading module state rather than the
+state handed to _render, so the screen and the state it claimed to show could disagree.
+Rendering is now a pure function of its argument, which is what let these be tested at all.
+
+Added the diagnosis code lookup the screen was missing - the same search the chart's own
+diagnosis box uses, offered and never required. Nothing auto-selects, not even on a single
+result: one result is not the same as the right one.
+
+On terminology more broadly: the plan called for a concept-mapping layer next, and that is
+being skipped deliberately. The validation path against an external terminology server
+already exists in terminology.js and is already wired into the FHIR inbound and
+$validate-code routes. What is missing is populated content - ICD/SNOMED/LOINC releases -
+which is a licensing and data problem, not a code one. The audit's own finding was that
+OpenMRS ships this machinery with zero content; building an empty copy here would be
+another finished module nobody can reach, which is the exact thing the reachability
+checker was added to prevent.
+
+Tests: 8 new, rendering the consultation, approvals and purchasing screens for real.
+Suite 5787 passing, 0 failing.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

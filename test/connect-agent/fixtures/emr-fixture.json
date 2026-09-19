@@ -1,0 +1,40 @@
+{
+  "name": "synthetic-emr-read-fixture",
+  "note": "Synthetic only. No real patient, no real hospital, no credentials. Values are invented for test arithmetic.",
+  "tenantId": "t-synthetic",
+  "params": { "patientId": "pt-1" },
+  "routes": {
+    "GET /api/patients": { "status": 200, "body": { "items": [{ "id": "pt-1", "name": "Synthetic Testpatient" }] } },
+    "GET /api/patients/pt-1": { "status": 200, "body": { "id": "pt-1", "name": "Synthetic Testpatient", "gender": "female" } },
+    "GET /api/patients/pt-1/medications?page=1": {
+      "status": 200,
+      "body": { "items": [
+        { "id": "mx-1", "drug": "Metformin", "dose": "500 mg BID", "status": "active" },
+        { "id": "mx-2", "drug": "Enalapril", "status": "active" }
+      ] }
+    },
+    "GET /api/patients/pt-1/medications?page=2": { "status": 200, "body": { "items": [] } },
+    "GET /api/patients/pt-1/allergies": {
+      "status": 200,
+      "body": { "items": [{ "id": "al-1", "allergen": "Penicillin", "status": "active", "criticality": "high" }] }
+    },
+    "GET /api/patients/pt-1/results?page=1": {
+      "status": 200,
+      "body": { "items": [
+        { "id": "ob-1", "test": "Haemoglobin", "value": "9.4", "unit": "g/dL", "refLow": 12, "refHigh": 15, "resultedAt": "2026-09-01T10:30:00", "status": "final" },
+        { "id": "ob-2", "test": "Creatinine", "value": "1.8", "unit": "mg/dL", "refLow": 0.6, "refHigh": 1.2, "resultedAt": "2026-09-01T10:31:00", "status": "final" }
+      ] }
+    },
+    "GET /api/patients/pt-1/results?page=2": {
+      "status": 200,
+      "body": { "items": [
+        { "id": "ob-3", "test": "Potassium", "value": "5.1", "unit": "mmol/L", "refLow": 3.5, "refHigh": 5.1, "resultedAt": "2026-09-01 11:00", "status": "final" }
+      ] }
+    },
+    "GET /api/patients/pt-1/results?page=3": { "status": 200, "body": { "items": [] } },
+    "GET /api/patients/pt-1/encounters": {
+      "status": 200,
+      "body": { "items": [{ "id": "en-1", "status": "finished", "class": "inpatient", "start": "2026-08-30T09:00:00", "end": "2026-09-02T14:00:00" }] }
+    }
+  }
+}

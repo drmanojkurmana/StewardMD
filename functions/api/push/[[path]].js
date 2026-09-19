@@ -7,14 +7,30 @@
  *   POST /api/push/unregister-native body={ token }                   -> { ok }        (native app)
  *   POST /api/push/send             (admin token) -> { web, native }  (manual test blast — both channels)
  *
+ * WardSynQ hospital alerts (S3 P0), each authenticated by the HOSPITAL credential (a StewardMD account
+ * that is a member, or a staff session), identity always derived on the server, never from the body:
+ *   POST /api/push/register-member   body={ orgId, token, platform? }  -> bind this device to the member
+ *   POST /api/push/unregister-member body={ orgId, token }             -> sign-out: this device only, unbound
+ *   GET  /api/push/notice/<nid>?orgId=<workplace>                     -> detail, for an addressee in that hospital only
+ *   POST /api/push/notice/<nid>/decline  body={ reason? }             -> "I cannot attend": next tier now
+ *   POST /api/push/wardsynq-receipt  body={ noticeId, kind }          -> v2 notices: onto the loop record
+ *
  * Subscribing/registering is open to any user (it's their own device opting in). Sending is
  * gated by the same UPDATES_ADMIN_TOKEN as the notifications API.
  */
 import { saveSubscription, deleteSubscription, sendPushToAll, pushEnabled } from "../../_webpush.js";
-import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
+import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled, listNativeTokens, tokenId, nativeTokensById } from "../../_nativepush.js";
+import { identify as identifyAccount } from "../../_usage.js";
+import { verifyStaffSession, sessionRevoked } from "../../_opd_auth.js";
+import * as ORG from "../../_opd_org_store.js";
+import { CAPS } from "../../_queue_roles.js";
+import { recordDeps } from "../../_wardsynq/deps.js";
+import { directoryFromEnv, notifyDepsFor } from "../../_wardsynq/alert-deps.js";
+import { readNotice, receiptNotice, declineNotice } from "../../_wardsynq/push-alerts.js";
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { escalateOverdueTask, sweepOverdue, isGroupMember, notifyNewInstruction, notifyCriticalValue, remindTask } from "../../_taskpush.js";
+import { saveReceipt, listReceipts } from "../../_wardsynq_receipts.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -27,6 +43,33 @@ function adminOK(request, env) {
   if (got.length !== want.length) return false;
   let d = 0; for (let i = 0; i < got.length; i++) d |= got.charCodeAt(i) ^ want.charCodeAt(i);
   return d === 0;
+}
+
+/* WHO IS ASKING, AS A MEMBER OF THIS HOSPITAL. The same two credentials the ward accepts, with the same
+ * revocation check (a reset PIN ends its sessions here too). Returns { status } on refusal, else the
+ * identity forms this caller may be addressed by: the membership identity first, then the account id. */
+async function hospitalCaller(request, env, orgId, cap) {
+  let actor = null;
+  const who = await identifyAccount(request, env);
+  if (who && !who.guest && who.id) actor = { kind: "firebase", id: who.id, email: who.email || "" };
+  else if (env.QUEUE_STAFF_ENABLED === "1") {
+    const tok = request.headers.get("X-Staff-Token") || "";
+    const ss = tok ? await verifyStaffSession(env, tok, Date.now()) : null;
+    if (ss) {
+      const m = await ORG.getMemberAuth(env, ss.orgId, ss.identity);
+      if (m && !sessionRevoked(ss, m)) actor = { kind: "staff", id: ss.identity, orgId: ss.orgId };
+    }
+  }
+  if (!actor) return { status: 401, error: "auth_required" };
+  if (!orgId) return { status: 400, error: "org_required" };
+  const az = await ORG.authorizeOrg(env, actor, orgId, cap);
+  if (!az.ok) return { status: az.reason === "org_not_found" ? 404 : 403, error: az.reason || "forbidden" };
+  let ids = [actor.id];
+  if (actor.kind === "firebase" && !az.owner) {
+    const m = (await ORG.getMembership(env, orgId, actor.id)) || (actor.email ? await ORG.getMembership(env, orgId, actor.email) : null);
+    if (m && m.identity) ids = [m.identity, actor.id];
+  }
+  return { actor, ids: [...new Set(ids)] };
 }
 
 export async function onRequest(context) {
@@ -58,7 +101,16 @@ export async function onRequest(context) {
     // else's account and receive their patients' lab alerts. Guests get uid=null
     // (broadcast updates only, never per-patient alerts).
     const uid = await identify(request, env);
-    const okSave = await saveNativeToken(env, { token: body.token, platform: body.platform, uid, workspaces: cleanWorkspaces(body.workspaces) });
+    // Device identity, captured for IDENTIFICATION ONLY. Nothing below changes who a push is sent
+    // to: fan-out is still every active token for the account. This exists so a human can later
+    // look at a list and say which handset a registration belongs to, which was impossible before -
+    // six iOS tokens on one account were indistinguishable from six different iPhones, so nothing
+    // could be safely pruned.
+    const okSave = await saveNativeToken(env, {
+      token: body.token, platform: body.platform, uid,
+      workspaces: cleanWorkspaces(body.workspaces),
+      device: body.device,
+    });
     return okSave ? json({ ok: true, scoped: !!uid }) : json({ error: "store-unavailable" }, 501);
   }
   if (method === "POST" && seg === "unregister-native") {
@@ -122,6 +174,144 @@ export async function onRequest(context) {
     if (!(await isGroupMember(env, gid, uid))) return json({ error: "not-a-member" }, 403);
     const res = await notifyCriticalValue(env, gid, pid, uid, { label: body.label, value: body.value, unit: body.unit, bed: body.bed, reason: body.reason });
     return json(res || { error: "failed" });
+  }
+  // ── WardSynQ escalation channel (HAZ-DET-01) ────────────────────────────────────────────────
+  // Additive: nothing above this block changes. A WardSynQ notice is pushed to the caller's OWN
+  // registered devices, and the handset posts back a receipt so "delivered" can mean a phone
+  // actually has it rather than a gateway having accepted bytes.
+  if (method === "POST" && seg === "wardsynq-alert") {
+    if (!nativePushEnabled(env)) return json({ error: "push-disabled" }, 501);
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    if (!body.title) return json({ error: "bad-args" }, 400);
+    const data = body.data || {};
+    if (!data.noticeId) return json({ error: "no-notice-id" }, 400);
+    // Scoped to the caller's own devices. Fanning a clinical alert to a whole unit is a policy
+    // decision that belongs to the escalation ladder, not to a transport endpoint.
+    const res = await sendNativeToAll(env, {
+      title: String(body.title).slice(0, 200),
+      body: String(body.body || "").slice(0, 500),
+      data,
+    }, { uid });
+    // `sent` counts gateway acceptances. It is reported as such and the client turns it into SENT,
+    // never DELIVERED.
+    return json({ sent: res.sent || 0, total: res.total || 0 });
+  }
+  // The caller's OWN registered devices. Read-only, and deliberately so: this exists to make the
+  // registrations identifiable, not to remove them. The token itself is never returned - it is a
+  // device credential, and an 8-character fingerprint is enough to tell two rows apart.
+  if (method === "GET" && seg === "devices") {
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    const all = await listNativeTokens(env);
+    const mine = all.filter((t) => t.uid === uid).map((t) => ({
+      fingerprint: String(t.token || "").slice(0, 8),
+      platform: t.platform,
+      apnsEnv: t.apnsEnv || null,
+      lastSeen: t.ts ? new Date(t.ts).toISOString() : null,
+      firstSeen: (t.device && t.device.firstSeen) || null,
+      label: (t.device && t.device.label) || null,
+      model: (t.device && t.device.model) || null,
+      osVersion: (t.device && t.device.osVersion) || null,
+      appVersion: (t.device && t.device.appVersion) || null,
+      installId: (t.device && t.device.installId) || null,
+      // Registrations made before identity was captured. Stated rather than left as blanks, so a
+      // reader does not mistake "we never recorded this" for "this device reported nothing".
+      identified: !!(t.device && t.device.installId),
+    })).sort((a, b) => String(b.lastSeen).localeCompare(String(a.lastSeen)));
+    return json({ devices: mine, total: mine.length });
+  }
+  // ── WardSynQ hospital alerts (S3 P0) ─────────────────────────────────────────────────────────
+  /* Bind this phone to the caller's membership of one hospital, so the escalation ladder can reach a
+   * nurse who signs in with a PIN. The identity comes from the credential; the body names only the
+   * hospital and the device. Audited under the hospital with the device fingerprint. */
+  if (method === "POST" && seg === "register-member") {
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    const who = await hospitalCaller(request, env, String(body.orgId || ""), CAPS.EMR_VIEW);
+    if (who.status) return json({ ok: false, error: who.error }, who.status);
+    const token = typeof body.token === "string" ? body.token.trim() : "";
+    if (!token || token.length > 4096) return json({ ok: false, error: "no-token" }, 400);
+    const dir = directoryFromEnv(env);
+    if (!dir) return json({ ok: false, error: "store-unavailable" }, 501);
+    const tid = await tokenId(token);
+    // The account-scoped record is left exactly as register-native wrote it; created only if absent.
+    if (!(await nativeTokensById(env, [tid])).length) {
+      if (!body.platform) return json({ ok: false, error: "no-platform" }, 400);
+      if (!(await saveNativeToken(env, { token, platform: body.platform, uid: null, device: body.device }))) return json({ ok: false, error: "store-unavailable" }, 501);
+    }
+    try { await dir.bind(body.orgId, who.ids, tid); }
+    catch (e) { return json({ ok: false, error: "bind_failed" }, 502); }
+    await ORG.auditLogin(env, body.orgId, who.ids[0], "push:device_bound", "device " + tid.slice(0, 8));
+    return json({ ok: true, orgId: String(body.orgId), identity: who.ids[0], device: tid.slice(0, 8) });
+  }
+  /* S3 P1: signing out of a hospital on this phone. Only THIS device leaves THIS caller's bindings at that
+   * hospital; called with the credential still valid, before the app forgets it. Audited like the bind. */
+  if (method === "POST" && seg === "unregister-member") {
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    const who = await hospitalCaller(request, env, String(body.orgId || ""), CAPS.EMR_VIEW);
+    if (who.status) return json({ ok: false, error: who.error }, who.status);
+    const token = typeof body.token === "string" ? body.token.trim() : "";
+    if (!token || token.length > 4096) return json({ ok: false, error: "no-token" }, 400);
+    const dir = directoryFromEnv(env);
+    if (!dir) return json({ ok: false, error: "store-unavailable" }, 501);
+    const tid = await tokenId(token);
+    let out;
+    try { out = await dir.release(body.orgId, who.ids, tid); }
+    catch (e) { return json({ ok: false, error: "unbind_failed" }, 502); }
+    await ORG.auditLogin(env, body.orgId, who.ids[0], "push:device_unbound", "device " + tid.slice(0, 8));
+    return json({ ok: true, orgId: String(body.orgId), removed: out.removed });
+  }
+  /* The notice behind a thin push. Anyone it was not addressed to, in any hospital, gets 404 whatever
+   * the reason, so an nid confirms nothing (design 3.4).
+   * GET names the hospital the phone is working in (?orgId=, the workplace). A notice from any other
+   * hospital is 404 before its membership, loop or patient is read and before any read-log row: an
+   * account that belongs to two hospitals never releases one hospital's detail inside the other. */
+  if (seg.indexOf("notice/") === 0) {
+    const [, nid, action] = seg.split("/");
+    const dir = directoryFromEnv(env);
+    const pointer = dir ? await dir.getNotice(nid) : null;
+    const workplace = method === "GET" && !action ? new URL(request.url).searchParams.get("orgId") || "" : null;
+    const inWorkplace = !!pointer && (workplace === null || workplace === String(pointer.orgId));
+    const who = await hospitalCaller(request, env, inWorkplace ? pointer.orgId : "", CAPS.EMR_VIEW);
+    if (who.status === 401) return json({ ok: false, error: who.error }, 401);
+    if (!inWorkplace || who.status) return json({ ok: false, error: "not_found" }, 404);
+    const org = await ORG.getOrg(env, pointer.orgId);
+    if (!org || String(org.connectTenantId || "") !== String(pointer.tenantId)) return json({ ok: false, error: "not_found" }, 404);
+    const ctx = { repository: recordDeps(env, pointer.tenantId).repository, tenantId: pointer.tenantId, nid, pointer, callerIds: who.ids.map((i) => pointer.orgId + "~" + i), actorId: who.actor.id, orgName: org.name || null, policy: (org.wardsynq && org.wardsynq.criticalEscalation) || null };
+    if (method === "GET" && !action) { const r = await readNotice(ctx); return json(r, r.ok ? 200 : r.status || 502); }
+    if (method === "POST" && action === "decline") {
+      let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      const r = await declineNotice({ ...ctx, reason: body.reason, notifyDeps: notifyDepsFor(env, org, pointer.tenantId, ctx.repository) });
+      return json(r, r.ok ? 200 : r.status || 502);
+    }
+    return json({ ok: false, error: "not_found" }, 404);
+  }
+  // The handset confirming what actually happened to it: received, opened, acknowledged.
+  if (method === "POST" && seg === "wardsynq-receipt") {
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    /* A v2 notice (one the server sent): the receipt goes on the loop record, from an addressee only.
+     * Anything else is the older self-push path, unchanged below. */
+    const dirR = directoryFromEnv(env);
+    const pointerR = dirR && typeof body.noticeId === "string" ? await dirR.getNotice(body.noticeId) : null;
+    if (pointerR) {
+      const who = await hospitalCaller(request, env, pointerR.orgId, CAPS.EMR_VIEW);
+      if (who.status === 401) return json({ ok: false, error: who.error }, 401);
+      if (who.status) return json({ ok: false, error: "not_found" }, 404);
+      const r = await receiptNotice({ repository: recordDeps(env, pointerR.tenantId).repository, tenantId: pointerR.tenantId, nid: body.noticeId, pointer: pointerR, callerIds: who.ids.map((i) => pointerR.orgId + "~" + i), actorId: who.actor.id, kind: body.kind, device: body.device });
+      return json(r, r.ok ? 200 : r.status || 502);
+    }
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    const out = await saveReceipt(env, uid, body);
+    return json(out, out.ok ? 200 : 400);
+  }
+  // The workstation that raised the alert, polling those receipts back.
+  if (method === "GET" && seg === "wardsynq-receipts") {
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    const since = new URL(request.url).searchParams.get("since") || null;
+    return json({ receipts: await listReceipts(env, uid, since) });
   }
   // On-demand "nudge": re-push a task's reminder to the unit's executor roles. Member-triggered;
   // remindTask enforces that the caller holds an instructing role.

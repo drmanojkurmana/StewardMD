@@ -1,0 +1,422 @@
+{
+  "guideline": "occult_primary",
+  "id": "occult_primary",
+  "title": "Occult Primary (CUP)",
+  "category": "Solid Tumors",
+  "version": "2.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "occult_primary",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Occult Primary (Carcinoma of Unknown Primary / CUP). Covers complete clinical algorithm: Diagnostic Workup (comprehensive H&P including breasts, skin, mucosal head/neck, testes, digital rectal and pelvic exams; contrast CT chest/abdomen/pelvis with diagnostic mammography and breast MRI for women with axillary adenopathy; core needle or excisional biopsy with adequate tissue for histology and biomarker profiling; stepwise IHC panel CK7/CK20/TTF-1/CDX2/GATA3/PAX8/PSA/p40-p63/neuroendocrine/S100-SOX10; comprehensive NGS molecular profiling for MSI/MMR, TMB, NTRK, BRAF V600E, RET, HER2; directed endoscopy and FDG-PET/CT for suspected localized primary) -> Favorable Subgroup vs True CUP Stratification (isolated axillary adenopathy in female managed as occult breast cancer; isolated cervical squamous adenopathy managed as occult head and neck cancer; peritoneal carcinomatosis in female managed as ovarian/primary peritoneal serous carcinoma) -> Disseminated CUP routing (biomarker-directed targeted therapy for MSI-H, TMB-H, BRAF V600E, NTRK fusion, HER2-positive disease; empiric platinum-based doublet chemotherapy for true CUP without actionable biomarker). References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Occult Primary Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Adequate tissue architecture is required for CUP lineage assignment: core needle or excisional biopsy is preferred over fine-needle aspiration, because cytology alone cannot reliably support the stepwise IHC panel or provide sufficient material for comprehensive molecular profiling.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "The stepwise IHC panel (CK7, CK20, TTF-1, CDX2, GATA3, PAX8, PSA, p40/p63, synaptophysin/chromogranin, S100/SOX10) narrows the putative primary: TTF-1 points to lung or thyroid, CDX2/CK20 to lower gastrointestinal, GATA3 to breast or urothelial, PAX8 to gynecologic or renal, PSA to prostate, p40/p63 to squamous, neuroendocrine markers to neuroendocrine carcinoma, and S100/SOX10 to melanoma.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Comprehensive molecular profiling with NGS plus MSI/MMR and TMB testing is recommended for disseminated CUP because tumor-agnostic targets (MSI-H/dMMR, TMB-H, NTRK fusions, BRAF V600E, RET fusions, HER2 amplification) select biomarker-directed therapies with response rates that exceed empiric chemotherapy in these subsets.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Favorable CUP subgroups (isolated axillary adenocarcinoma in women, isolated cervical squamous cell carcinoma, peritoneal serous carcinomatosis in women) are managed per the guidelines of their putative primary sites, with outcomes that approximate stage-matched primary-site disease rather than disseminated CUP.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Empiric platinum-based doublet chemotherapy remains the standard for disseminated true CUP without an actionable biomarker: carboplatin plus paclitaxel, gemcitabine plus cisplatin (or carboplatin), or mFOLFOX6 for a gastrointestinal IHC profile (CK20 positive, CDX2 positive).",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "occult_primary_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Occult Primary: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before favorable-subgroup vs true CUP stratification. Confirm tissue diagnosis with lineage IHC, establish systemic extent, and profile actionable genomic targets.",
+      "path": "Occult Primary / Workup",
+      "pills": [
+        "CUP",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Comprehensive history and physical examination: breasts, skin, mucosal head and neck, testes, digital rectal examination, and pelvic examination, with review of prior malignancies, resected lesions, and family cancer history.",
+        "Contrast-enhanced CT of chest, abdomen, and pelvis; diagnostic mammography and breast MRI for women with axillary adenopathy.",
+        "Core needle or excisional biopsy (avoid cytology alone): adequate tissue for histology and biomarker profiling.",
+        "Stepwise IHC panel: CK7, CK20, TTF-1, CDX2, GATA3, PAX8, PSA, p40/p63, synaptophysin/chromogranin, S100/SOX10.",
+        "Comprehensive molecular profiling: NGS for actionable targets (MSI/MMR, TMB, NTRK, BRAF V600E, RET, HER2).",
+        "Directed endoscopy and FDG-PET/CT when clinical or anatomic presentation suggests localized primary site."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Favorable Subgroup vs True CUP Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_presentation",
+      "linkId": "occult_primary_presentation",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Presentation Stratification",
+      "title": "Occult Primary: Favorable Subgroup vs True CUP Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign the presentation pattern from anatomic distribution, histology, sex-specific findings, and genomic biomarker status; pattern selects the site-directed or disseminated pathway.",
+      "path": "Occult Primary / Stratification",
+      "pills": [
+        "CUP",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Favorable subgroups mirror a putative primary site and are managed per that site: isolated axillary adenocarcinoma in a woman (breast), isolated cervical squamous cell carcinoma (head and neck), peritoneal serous carcinomatosis in a woman (ovarian/primary peritoneal).",
+        "Disseminated CUP with an actionable genomic biomarker (MSI-H/dMMR, TMB-H, BRAF V600E, NTRK fusion, RET fusion, HER2-positive) is routed to biomarker-directed targeted therapy.",
+        "Disseminated true CUP without an actionable biomarker is routed to empiric platinum-based doublet chemotherapy selected by histology and IHC profile."
+      ],
+      "options": [
+        {
+          "id": "axillary_female",
+          "label": "Favorable Subgroup: Isolated Axillary Adenopathy in Female (Adenocarcinoma)",
+          "sets": {
+            "presentation": "axillary_female"
+          },
+          "pills": [
+            "CUP",
+            "axillary",
+            "favorable"
+          ]
+        },
+        {
+          "id": "cervical_sqcc",
+          "label": "Favorable Subgroup: Isolated Cervical Lymphadenopathy (Squamous Cell Carcinoma)",
+          "sets": {
+            "presentation": "cervical_sqcc"
+          },
+          "pills": [
+            "CUP",
+            "cervical",
+            "favorable"
+          ]
+        },
+        {
+          "id": "peritoneal_female",
+          "label": "Favorable Subgroup: Peritoneal Carcinomatosis in Female (Serous Adenocarcinoma)",
+          "sets": {
+            "presentation": "peritoneal_female"
+          },
+          "pills": [
+            "CUP",
+            "peritoneal",
+            "favorable"
+          ]
+        },
+        {
+          "id": "actionable_biomarker",
+          "label": "Disseminated CUP with Actionable Genomic Biomarker (MSI-H, TMB-H, BRAF, NTRK, HER2)",
+          "sets": {
+            "presentation": "actionable_biomarker"
+          },
+          "pills": [
+            "CUP",
+            "disseminated",
+            "biomarker-directed"
+          ]
+        },
+        {
+          "id": "disseminated_empiric",
+          "label": "Disseminated True CUP without Actionable Biomarker (Empiric Systemic Therapy)",
+          "sets": {
+            "presentation": "disseminated_empiric"
+          },
+          "pills": [
+            "CUP",
+            "disseminated",
+            "empiric"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_axillary_female_tx",
+      "linkId": "occult_primary_axillary_female_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Axillary Female Treatment",
+      "title": "Isolated Axillary Adenopathy in Female: Manage as Occult Breast Cancer",
+      "section": "Treatment",
+      "description": "Site-directed multimodal therapy for isolated axillary adenocarcinoma in a woman, managed as stage II/III occult breast cancer per NCCN Breast Guidelines.",
+      "path": "Occult Primary / Favorable / Axillary Female / Treatment",
+      "pills": [
+        "CUP",
+        "axillary",
+        "favorable",
+        "breast"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Manage as stage II/III occult breast cancer per NCCN Breast Guidelines: breast MRI first; if MRI is negative, consider blind lumpectomy (upper-outer quadrant) or whole-breast radiotherapy to address the occult primary.",
+        "Axillary management: axillary lymph node dissection (ALND) for clinically involved nodes, or sentinel lymph node biopsy (SLNB) in selected limited-burden presentations per breast surgical criteria.",
+        "Systemic therapy (neoadjuvant or adjuvant chemotherapy) per stage II/III breast cancer indications; add endocrine therapy if ER/PR positive.",
+        "Add HER2-targeted therapy if HER2 positive, coordinated with the breast medical oncology pathway.",
+        "Surveillance after definitive therapy mirrors stage-matched breast cancer: clinical examination, annual breast imaging, and cross-sectional imaging for symptoms."
+      ],
+      "regimenSummary": "Multimodal Breast Cancer Management: ALND + Whole Breast RT +/- Systemic Therapy",
+      "protocolRefs": [
+        "rare-occult-carbo-paclitaxel"
+      ]
+    },
+    {
+      "id": "n_cervical_sqcc_tx",
+      "linkId": "occult_primary_cervical_sqcc_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Cervical SqCC Treatment",
+      "title": "Isolated Cervical Lymphadenopathy: Manage as Occult Head and Neck SqCC",
+      "section": "Treatment",
+      "description": "Site-directed therapy for isolated cervical squamous cell carcinoma, managed as occult head and neck primary with panendoscopy, tonsillectomy, and definitive chemoRT or risk-adapted surgery.",
+      "path": "Occult Primary / Favorable / Cervical SqCC / Treatment",
+      "pills": [
+        "CUP",
+        "cervical",
+        "favorable",
+        "head and neck"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Manage as occult head and neck squamous cell carcinoma: HPV/p16 and EBV testing on nodal tissue to guide the putative primary site (oropharynx vs nasopharynx).",
+        "Panendoscopy with directed biopsies plus bilateral palatine tonsillectomy and lingual tonsillectomy to locate the occult primary.",
+        "Definitive radiotherapy to the bilateral neck and putative primary sites (oropharynx, nasopharynx) with concurrent cisplatin 100 mg/m2 IV every 3 weeks or 40 mg/m2 IV weekly.",
+        "Alternative: neck dissection followed by risk-adapted adjuvant radiotherapy or concurrent chemoRT for extracapsular extension, positive margins, or multiple involved nodes.",
+        "Surveillance mirrors head and neck cancer: neck examination and imaging, HPV/p16-directed follow-up, and speech/swallow and dental monitoring after chemoRT."
+      ],
+      "regimenSummary": "Head & Neck Protocol: Panendoscopy/Tonsillectomy + Definitive ChemoRT",
+      "protocolRefs": [
+        "rare-occult-carbo-paclitaxel"
+      ]
+    },
+    {
+      "id": "n_peritoneal_female_tx",
+      "linkId": "occult_primary_peritoneal_female_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Peritoneal Female Treatment",
+      "title": "Peritoneal Carcinomatosis in Female: Manage as Ovarian/Primary Peritoneal Carcinoma",
+      "section": "Treatment",
+      "description": "Site-directed therapy for peritoneal serous carcinomatosis in a woman, managed as epithelial ovarian or primary peritoneal serous adenocarcinoma with cytoreduction and platinum-taxane chemotherapy.",
+      "path": "Occult Primary / Favorable / Peritoneal Female / Treatment",
+      "pills": [
+        "CUP",
+        "peritoneal",
+        "favorable",
+        "ovarian"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Manage as epithelial ovarian or primary peritoneal serous adenocarcinoma: maximal cytoreductive surgery by gynecologic oncology with the goal of no visible residual disease.",
+        "Adjuvant chemotherapy: carboplatin AUC 5-6 plus paclitaxel 175 mg/m2 IV every 21 days for 6 cycles, with growth-factor and hypersensitivity support per labeling.",
+        "Consider bevacizumab added to chemotherapy with bevacizumab maintenance for high-risk bulky or suboptimally debulked disease.",
+        "PARP inhibitor maintenance per BRCA and HRD status after platinum response; test germline and somatic BRCA plus HRD at diagnosis.",
+        "Surveillance mirrors ovarian cancer: CA-125, clinical examination, and cross-sectional imaging for symptoms or marker rise."
+      ],
+      "regimenSummary": "Carboplatin + Paclitaxel x 6 cycles +/- Bevacizumab & PARP Maintenance",
+      "protocolRefs": [
+        "rare-occult-carbo-paclitaxel"
+      ]
+    },
+    {
+      "id": "n_actionable_biomarker_tx",
+      "linkId": "occult_primary_actionable_biomarker_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Biomarker-Directed Treatment",
+      "title": "Disseminated CUP with Actionable Biomarker: Targeted Therapy",
+      "section": "Treatment",
+      "description": "Biomarker-directed targeted therapy for disseminated CUP carrying a tumor-agnostic actionable alteration, prioritized over empiric chemotherapy.",
+      "path": "Occult Primary / Disseminated / Biomarker-Directed / Treatment",
+      "pills": [
+        "CUP",
+        "disseminated",
+        "biomarker-directed",
+        "targeted"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "MSI-H/dMMR or TMB 10 mut/Mb or higher: pembrolizumab 200 mg IV every 3 weeks or 400 mg IV every 6 weeks (KEYNOTE-158 tumor-agnostic indication) with immune-related adverse event monitoring.",
+        "NTRK gene fusion positive: larotrectinib 100 mg PO twice daily or entrectinib 600 mg PO daily with response assessment every 8-12 weeks.",
+        "BRAF V600E mutant: dabrafenib 150 mg PO twice daily plus trametinib 2 mg PO daily (ROAR basket and NCI-MATCH evidence) with cardiac, ocular, and pyrexia monitoring.",
+        "HER2 positive (IHC 3+ or amplified): trastuzumab deruxtecan, or pertuzumab plus trastuzumab, per HER2-positive tumor-agnostic and breast/gastrointestinal evidence with cardiac monitoring.",
+        "Reassess for clinical trial enrollment at every line; route progression without remaining targets to the empiric doublet pathway."
+      ],
+      "regimenSummary": "Biomarker-Directed Targeted Therapy (Pembrolizumab / Larotrectinib / Dabrafenib+Trametinib)",
+      "protocolRefs": [
+        "rare-occult-carbo-paclitaxel"
+      ]
+    },
+    {
+      "id": "n_disseminated_empiric_tx",
+      "linkId": "occult_primary_disseminated_empiric_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Empiric Doublet Treatment",
+      "title": "Disseminated True CUP: Empiric Platinum-Based Doublet Chemotherapy",
+      "section": "Treatment",
+      "description": "Empiric platinum-based doublet chemotherapy for disseminated true CUP without an actionable biomarker, selected by histology and IHC profile.",
+      "path": "Occult Primary / Disseminated / Empiric / Treatment",
+      "pills": [
+        "CUP",
+        "disseminated",
+        "empiric",
+        "chemotherapy"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Regimen 1: carboplatin AUC 5-6 day 1 plus paclitaxel 175-200 mg/m2 day 1 every 21 days, preferred for undifferentiated or lung-profile adenocarcinoma.",
+        "Regimen 2: gemcitabine 1000 mg/m2 days 1 and 8 plus cisplatin 75 mg/m2 day 1 every 21 days (or carboplatin AUC 5 where cisplatin is unsuitable), preferred for squamous or urothelial-profile disease.",
+        "Regimen 3 (gastrointestinal profile, CK20 positive or CDX2 positive): mFOLFOX6 (oxaliplatin 85 mg/m2, leucovorin 400 mg/m2, 5-FU 400 mg/m2 bolus then 2400 mg/m2 46-hour continuous infusion every 14 days).",
+        "Assess response with cross-sectional imaging every 6-9 weeks; continue effective therapy until progression or unacceptable toxicity and prioritize clinical trial enrollment at every line."
+      ],
+      "regimenSummary": "Empiric Doublet: Carboplatin + Paclitaxel or Gemcitabine + Cisplatin or mFOLFOX6",
+      "protocolRefs": [
+        "rare-occult-carbo-paclitaxel"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_presentation",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_presentation",
+      "toNodeId": "n_presentation",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_presentation_axillary",
+      "from": "n_presentation",
+      "fromNodeId": "n_presentation",
+      "to": "n_axillary_female_tx",
+      "toNodeId": "n_axillary_female_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "axillary_female",
+      "fromOptions": [
+        "axillary_female"
+      ]
+    },
+    {
+      "id": "l_presentation_cervical",
+      "from": "n_presentation",
+      "fromNodeId": "n_presentation",
+      "to": "n_cervical_sqcc_tx",
+      "toNodeId": "n_cervical_sqcc_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "cervical_sqcc",
+      "fromOptions": [
+        "cervical_sqcc"
+      ]
+    },
+    {
+      "id": "l_presentation_peritoneal",
+      "from": "n_presentation",
+      "fromNodeId": "n_presentation",
+      "to": "n_peritoneal_female_tx",
+      "toNodeId": "n_peritoneal_female_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "peritoneal_female",
+      "fromOptions": [
+        "peritoneal_female"
+      ]
+    },
+    {
+      "id": "l_presentation_biomarker",
+      "from": "n_presentation",
+      "fromNodeId": "n_presentation",
+      "to": "n_actionable_biomarker_tx",
+      "toNodeId": "n_actionable_biomarker_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "actionable_biomarker",
+      "fromOptions": [
+        "actionable_biomarker"
+      ]
+    },
+    {
+      "id": "l_presentation_empiric",
+      "from": "n_presentation",
+      "fromNodeId": "n_presentation",
+      "to": "n_disseminated_empiric_tx",
+      "toNodeId": "n_disseminated_empiric_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "disseminated_empiric",
+      "fromOptions": [
+        "disseminated_empiric"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "rare-occult-carbo-paclitaxel"
+  ]
+}

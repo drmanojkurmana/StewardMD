@@ -5,6 +5,39 @@ flag: smd_sknx (client, def:false) + v2beta access + smd_sknx_rx (Phase 3, def:f
 ---
 # SknX
 
+## 2026-09-10 Calm clarity UI
+
+- Selected the calm, Apple-inspired direction: system typography, translucent navigation, restrained
+  teal, grouped surfaces, generous spacing and one dominant action per step.
+- Capture now leads with the camera, keeps library/files secondary, and groups the photo-quality tips.
+  Review presents image and clinical context as a continuous task; processing uses one grouped status
+  surface; results lead with a quieter ranked differential and readable evidence sections.
+- Added the missing scoped Material Symbols declaration so the bundled offline icon font renders glyphs
+  instead of raw names such as `photo_camera` in native or disconnected use.
+- No inference, referral, evidence, history, storage or prescription gate changed. Verification remains
+  `node --test test/sknx-*.test.mjs`, then build and `node test/run-sknx-ui.mjs`.
+
+## 2026-09-06 UI refresh (local branch `codex/sknx-ux-refresh`)
+
+- Capture now leads to a photo review with optional clinical history, then an explicit Analyze action.
+- Review preserves history across retries/refinement. Back to review and close invalidate pending UI
+  callbacks; they do not abort an already-issued remote inference request. Object URLs are revoked
+  when replacing a photo, starting a fresh case, closing, or signing out.
+- Results retain the differential-first ordering and existing clinical gates, with report/history
+  navigation, readable confidence labels (neutral colour, not severity), larger controls, dark mode,
+  keyboard focus management and reduced-motion support.
+- The module locks the document while open and uses one contained internal scroll region, preventing
+  iOS elastic pull-down from exposing the underlying app or bottom navigation.
+- Save status reflects a successful local-storage write. A failed write returns null and can be retried.
+- `sknx-mark.svg` is the original vector SknX brand mark, used in the module and the home tool tile.
+- Verification: `node --test test/sknx-*.test.mjs`; build then `node test/run-sknx-ui.mjs`.
+  `SKNX_SHOTS=/tmp/stewardmd-sknx-ux` exports browser screenshots using synthetic test images.
+
+**Historical notes below are out of date for feature defaults:** this checkout's `sknx-flags.js`
+defaults module, cloud, Rx and realvision ON with existing owner-waiver comments. This UI refresh
+does not change those flags or assert clinical approval. The browser harness explicitly disables
+realvision/cloud via query overrides for mock tests. `sknx-store.js` uses localStorage, not encryption.
+
 On-device dermatology (lesion/rash) decision support. ThoreX sibling. Mock-first; educational, clinician-only.
 Design spec: `docs/superpowers/specs/2026-08-03-sknx-ai-design.md`. Plans: `docs/superpowers/plans/2026-08-03-sknx-ai-phase1.md`, `...-phase2.md`, `2026-08-04-sknx-ai-phase3.md`.
 

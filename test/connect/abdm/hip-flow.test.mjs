@@ -18,6 +18,7 @@
 //     the composed no-(key,iv)-reuse proof;
 //   * flag OFF -> 404, no push, yet the Stage-4 HIU consume path still routes (zero regression);
 //   * a tampered pushed ciphertext -> the mock HIU's openEntry fails closed (GCM auth).
+import { readDhPublicKey } from "../../../functions/_connect/abdm/fidelius.js";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { handleIngress } from "../../../functions/_connect/abdm/ingress.js";
@@ -136,7 +137,7 @@ test("1. happy path: mock HIU decrypts every page to the NDHM Bundle; re-normali
   assert.equal(h.mock.pushedPages.length, 2, "one page pushed per care-context");
   for (const { body } of h.mock.pushedPages) {
     assert.equal(body.entries.length, 1, "EXACTLY one entry per keyMaterial (nonce-safe wire shape)");
-    assert.ok(body.keyMaterial && body.keyMaterial.dhPublicKey && body.keyMaterial.nonce, "carries the HIP public keyMaterial");
+    assert.ok(body.keyMaterial && readDhPublicKey(body.keyMaterial.dhPublicKey) && body.keyMaterial.nonce, "carries the HIP public keyMaterial");
   }
 
   // (5) the mock HIU decrypts EVERY page to the expected NDHM Bundle (Composition-first, unique id, author/custodian).
@@ -230,7 +231,7 @@ test("4. multi-record serve -> N pages, N DISTINCT keyMaterials + N DISTINCT ivs
   assert.equal(h.mock.pushedPages.length, refs.length, "N pages for N records");
 
   // N DISTINCT keyMaterials (a fresh HIP ephemeral per page) — the R1 fresh-material guarantee at the wire.
-  const pubs = h.mock.pushedPages.map((p) => p.body.keyMaterial.dhPublicKey);
+  const pubs = h.mock.pushedPages.map((p) => readDhPublicKey(p.body.keyMaterial.dhPublicKey));
   const kmNonces = h.mock.pushedPages.map((p) => p.body.keyMaterial.nonce);
   assert.equal(new Set(pubs).size, refs.length, "N DISTINCT HIP ephemeral public keys");
   assert.equal(new Set(kmNonces).size, refs.length, "N DISTINCT HIP nonces");

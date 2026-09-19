@@ -4,6 +4,87 @@
   "gapMessage": "Staging for this cancer site is being added.",
   "sites": [
     {
+      "id": "bclc_hcc",
+      "name": "Liver (HCC) - BCLC 2022 Staging",
+      "system": "Clinical System / BCLC (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "liver",
+      "status": "scaffold",
+      "file": "bclc_hcc.json"
+    },
+    {
+      "id": "myeloma_riss",
+      "name": "Multiple Myeloma - R-ISS / R2-ISS Staging",
+      "system": "Clinical System / IMWG (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "myeloma",
+      "status": "scaffold",
+      "file": "myeloma_riss.json"
+    },
+    {
+      "id": "lymphoma_lugano",
+      "name": "Lymphoma - Lugano / Ann Arbor Staging",
+      "system": "Clinical System / Lugano (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "nhl",
+      "status": "scaffold",
+      "file": "lymphoma_lugano.json"
+    },
+    {
+      "id": "cll_rai_binet",
+      "name": "CLL - Rai & Binet Staging Systems",
+      "system": "Clinical System / iwCLL (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "nhl",
+      "status": "scaffold",
+      "file": "cll_rai_binet.json"
+    },
+    {
+      "id": "cervix_figo",
+      "name": "Cervix - FIGO 2018 Staging System",
+      "system": "Clinical System / FIGO (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "cervix",
+      "status": "scaffold",
+      "file": "cervix_figo.json"
+    },
+    {
+      "id": "endometrium_figo",
+      "name": "Endometrium - FIGO 2023 Molecular Staging",
+      "system": "Clinical System / FIGO (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "endometrium",
+      "status": "scaffold",
+      "file": "endometrium_figo.json"
+    },
+    {
+      "id": "prostate_nccn",
+      "name": "Prostate - NCCN Risk Stratification",
+      "system": "Clinical System / NCCN (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "prostate",
+      "status": "scaffold",
+      "file": "prostate_nccn.json"
+    },
+    {
+      "id": "gist_afip",
+      "name": "GIST - Modified NIH / AFIP Risk Criteria",
+      "system": "Clinical System / AFIP (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "gist",
+      "status": "scaffold",
+      "file": "gist_afip.json"
+    },
+    {
+      "id": "mds_ipssr",
+      "name": "MDS - IPSS-R Prognostic Staging",
+      "system": "Clinical System / IPSS-R (Standard of Care)",
+      "type": "clinical",
+      "pairedSite": "nhl",
+      "status": "scaffold",
+      "file": "mds_ipssr.json"
+    },
+    {
       "id": "bladder",
       "name": "Bladder (urothelial)",
       "system": "Oncology / Bladder (urothelial)",
@@ -119,37 +200,113 @@
       "id": "anus",
       "name": "Anus",
       "system": "Oncology / Gastrointestinal",
-      "status": "gap"
+      "status": "scaffold",
+      "file": "anus.json"
     },
     {
       "id": "nasopharynx",
       "name": "Nasopharynx",
       "system": "Oncology / Head and neck",
-      "status": "gap"
+      "status": "scaffold",
+      "file": "nasopharynx.json"
     },
     {
       "id": "oral_cavity",
       "name": "Oral cavity",
       "system": "Oncology / Head and neck",
-      "status": "gap"
+      "status": "scaffold",
+      "file": "oral_cavity.json"
     },
     {
       "id": "larynx",
       "name": "Larynx",
       "system": "Oncology / Head and neck",
-      "status": "gap"
+      "status": "scaffold",
+      "file": "larynx.json"
     },
     {
       "id": "soft_tissue_sarcoma",
       "name": "Soft tissue sarcoma",
       "system": "Oncology / Sarcoma",
-      "status": "gap"
+      "status": "scaffold",
+      "file": "soft_tissue_sarcoma.json"
     },
     {
       "id": "nhl",
       "name": "Non-Hodgkin lymphoma",
       "system": "Oncology / Haematologic",
-      "status": "gap"
+      "status": "scaffold",
+      "file": "nhl.json"
+    },
+    {
+      "id": "hodgkin",
+      "name": "Hodgkin lymphoma",
+      "system": "Oncology / Haematologic",
+      "status": "scaffold",
+      "file": "hodgkin.json"
+    },
+    {
+      "id": "myeloma",
+      "name": "Multiple myeloma",
+      "system": "Oncology / Haematologic",
+      "status": "scaffold",
+      "file": "myeloma.json"
+    },
+    {
+      "id": "biliary",
+      "name": "Biliary tract (cholangiocarcinoma + gallbladder)",
+      "system": "Oncology / Gastrointestinal",
+      "status": "scaffold",
+      "file": "biliary.json"
+    },
+    {
+      "id": "gist",
+      "name": "Gastrointestinal stromal tumour (GIST)",
+      "system": "Oncology / Gastrointestinal",
+      "status": "scaffold",
+      "file": "gist.json"
+    },
+    {
+      "id": "neuroendocrine",
+      "name": "Neuroendocrine tumours (pancreatic + GI)",
+      "system": "Oncology / Gastrointestinal",
+      "status": "scaffold",
+      "file": "neuroendocrine.json"
+    },
+    {
+      "id": "bone",
+      "name": "Primary bone sarcoma",
+      "system": "Oncology / Sarcoma",
+      "status": "scaffold",
+      "file": "bone.json"
+    },
+    {
+      "id": "skin_scc",
+      "name": "Cutaneous squamous cell carcinoma",
+      "system": "Oncology / Skin",
+      "status": "scaffold",
+      "file": "skin_scc.json"
+    },
+    {
+      "id": "oropharynx",
+      "name": "Oropharynx",
+      "system": "Oncology / Head and neck",
+      "status": "scaffold",
+      "file": "oropharynx.json"
+    },
+    {
+      "id": "hypopharynx",
+      "name": "Hypopharynx",
+      "system": "Oncology / Head and neck",
+      "status": "scaffold",
+      "file": "hypopharynx.json"
+    },
+    {
+      "id": "thymic",
+      "name": "Thymoma and thymic carcinoma",
+      "system": "Oncology / Thoracic",
+      "status": "scaffold",
+      "file": "thymic.json"
     }
   ]
 }

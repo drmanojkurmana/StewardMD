@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ: emergency bed-override golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the emergency bed-override golden path: with NO emergency
+ * declared, the admit panel offers no override checkbox at all; once a real emergency naming the
+ * "bed-assignment-conflict-override" relaxation is active, the SAME admit panel shows it, and
+ * ticking it sends emergencyOverride:true on the real /ward/admit call - against an in-memory stub
+ * server. Proves the CLIENT half; the server-side enforcement itself is proven for real in
+ * test/wardsynq-adt-bed-master.test.mjs's own EMERGENCY OVERRIDE tests. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var EMERGENCY_ON = false;
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, bedsConfigured: true, wards: [{ ward: "Medical A", bedsKnown: true, occupied: [], free: ["5"], unplaced: [] }] });
+  if (u.indexOf("/ward/emergency-status") >= 0) {
+    return reply({ ok: true, any: EMERGENCY_ON, active: EMERGENCY_ON ? [{ activationId: "wsq-emergency-1", kind: "mass-casualty", reason: "Multi-vehicle collision.", relaxations: ["bed-assignment-conflict-override"], declaredAt: "2026-09-09T09:00:00.000Z", expiresAt: "2026-09-09T13:00:00.000Z" }] : [] });
+  }
+  if (u.indexOf("/patient/get") >= 0) return reply({ ok: true, patient: { name: "Override Testcase", mrn: "SMD-H1-EM01" } });
+  if (u.indexOf("/ward/admit") >= 0 && (opts && opts.method) === "POST") return reply({ ok: true, written: 1, encounterId: "enc-1", patientId: "pat-1" });
+
+  if (u.indexOf("/ward/cosign-queue") >= 0) return reply({ ok: true, notes: [], waiting: 0, mine: [], unsubmitted: 0, canSign: false });
+  if (u.indexOf("/ward/quality") >= 0) return reply({ ok: true, measures: [] });
+  if (u.indexOf("/ward/overrides") >= 0) return reply({ ok: true, report: { overrides: [] } });
+  if (u.indexOf("/ward/fhir-exceptions") >= 0) return reply({ ok: true, exceptions: [] });
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+window.__setEmergency = function (on) { EMERGENCY_ON = on; };
+</script>
+</body></html>

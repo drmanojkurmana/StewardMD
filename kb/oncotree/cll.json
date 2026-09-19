@@ -1,13 +1,13 @@
 {
   "guideline": "cll",
   "title": "Chronic Lymphocytic Leukemia",
-  "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "2.0.0",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
   "diseaseId": "cll_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. CLL/SLL pathway: presentation -> workup -> Rai/Binet staging -> iwCLL treatment indication (watch-and-wait vs treat) -> TP53 (del(17p)/TP53) and IGHV risk stratification -> first-line targeted therapy (covalent/non-covalent BTKi vs venetoclax-obinutuzumab vs select chemoimmunotherapy) -> response / tolerability adaptation (BTKi continuation vs intolerance switch; post-venetoclax MRD assessment) -> surveillance -> relapsed/refractory pathway by prior therapy class with line-of-therapy sequencing (post-BTKi venetoclax / non-covalent BTKi / cellular therapy) and Richter transformation (histology and fitness sub-tree). Structural pathway only; no proprietary guideline text reproduced, no doses invented. The only StewardMD dose protocol that clinically matches a CLL-pathway leaf is R-CHOP for DLBCL-type Richter transformation; all CLL-directed agents (BTK inhibitors, venetoclax, obinutuzumab, FCR/BR) have no existing dose protocol and are given as checklist guidance without doses. DRAFT - not clinically activated; the physician decides.",
-  "sourceNote": "Structural pathway consistent with standard oncology references (NCCN / iwCLL / DeVita / Harrison). No CLL dose regimens are asserted; agents are named as classes for clinician selection. R-CHOP is referenced only for DLBCL-type Richter transformation.",
+  "provenanceNote": "DRAFT decision support structured in accordance with NCCN Guidelines Version 2.2026 - physician decides. CLL/SLL pathway: presentation -> exhaustive diagnostic workup (flow immunophenotype, FISH/TP53/IGHV, DAT, hepatitis serologies, TLS risk) -> Rai/Binet staging -> iwCLL treatment indication (watch-and-wait vs treat) -> TP53 (del(17p)/TP53) and IGHV risk stratification -> first-line targeted therapy with preferred second-generation covalent BTK inhibitors (zanubrutinib, acalabrutinib +/- obinutuzumab) or fixed-duration venetoclax + obinutuzumab (12 months); chemoimmunotherapy strictly contraindicated in del(17p)/TP53-aberrant disease -> response / tolerability adaptation (BTKi continuation vs intolerance switch; post-venetoclax MRD assessment) -> surveillance -> relapsed/refractory pathway by prior therapy class (post-covalent BTKi: pirtobrutinib non-covalent BTKi or venetoclax + rituximab; post-venetoclax: covalent BTKi or pirtobrutinib; double-refractory: lisocabtagene maraleucel [Breyanzi] CAR-T or allogeneic HCT) and Richter transformation (DLBCL variant: R-CHOP / Pola-R-CHP then allogeneic HCT). Structural pathway only; no proprietary guideline text reproduced. DRAFT - not clinically activated; the physician decides.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Chronic Lymphocytic Leukemia / Small Lymphocytic Lymphoma Version 2.2026 (December 22, 2025).",
   "startNodeIds": [
     "n_presentation"
   ],
@@ -100,7 +100,7 @@
       "name": "Workup",
       "title": "Diagnostic workup",
       "section": "Workup",
-      "description": "Confirm the diagnosis and establish baseline disease burden and biology.",
+      "description": "Confirm the diagnosis and establish baseline disease burden and biology. Complete every item before triaging to watch-and-wait versus treatment.",
       "path": "CLL / Workup",
       "pills": [
         "workup"
@@ -113,18 +113,18 @@
       "bullets": [
         "History and physical; palpate all nodal areas, liver and spleen; note B-symptoms and performance status",
         "CBC with differential and peripheral smear (smudge cells); confirm clonal B-lymphocytosis >= 5 x 10^9/L for CLL",
-        "Flow-cytometry immunophenotype: CD19+ CD5+ CD23+, dim surface immunoglobulin, kappa/lambda restriction",
+        "Peripheral blood flow cytometry immunophenotyping: CD5+, CD19+, CD20 dim, CD23+, surface immunoglobulin dim, CD79b dim/negative, FMC7 negative, with kappa/lambda restriction",
         "SLL if nodal/tissue disease without the required blood lymphocytosis (lymph-node biopsy)",
-        "Prognostic testing: FISH panel (del(13q), trisomy 12, del(11q), del(17p)), TP53 sequencing, IGHV mutation status",
-        {
-          "label": "Baseline labs",
-          "sub": "LDH, beta-2-microglobulin, comprehensive metabolic panel, immunoglobulins, DAT, hepatitis B/C and HIV serology before therapy"
-        }
+        "Mandatory molecular testing: interphase FISH panel for del(17p) TP53, del(11q) ATM, trisomy 12, del(13q); TP53 gene sequencing (mandatory prior to EVERY line of therapy); IGHV mutation status (<2% deviation from germline = mutated, >=2% = unmutated)",
+        "CBC with differential, comprehensive metabolic panel, uric acid, LDH, beta-2-microglobulin, direct antiglobulin test (DAT) for autoimmune hemolytic anemia, quantitative immunoglobulins",
+        "Viral serologies before anti-CD20 therapy: hepatitis B (HBsAg, anti-HBc) and hepatitis C; HIV serology",
+        "Tumor-lysis-syndrome (TLS) risk stratification prior to venetoclax initiation",
+        "Asymptomatic Rai 0-II / Binet A-B without an iwCLL treatment indication: watch and wait with observation every 3-6 months"
       ],
       "options": [
         {
           "id": "continue",
-          "label": "Workup reviewed - continue",
+          "label": "Diagnostic Workup Reviewed - Proceed to Active Disease Triage",
           "setsValue": null
         }
       ]
@@ -332,7 +332,7 @@
       "name": "TP53-aberrant regimen",
       "title": "First-line, TP53-aberrant: targeted regimen choice",
       "section": "Treatment",
-      "description": "TP53-aberrant CLL is treated with continuous BTK inhibition or fixed-duration venetoclax-based therapy; chemoimmunotherapy is not used.",
+      "description": "TP53-aberrant CLL (del(17p) and/or TP53 mutation) is treated with a preferred second-generation covalent BTK inhibitor (zanubrutinib, acalabrutinib +/- obinutuzumab) or fixed-duration venetoclax + obinutuzumab (12 months). Chemoimmunotherapy (FCR/BR) is strictly contraindicated.",
       "path": "CLL / First-line / TP53-aberrant",
       "pills": [
         "TP53 aberrant"
@@ -375,7 +375,7 @@
       "name": "TP53 aberrant - BTKi",
       "title": "First-line TP53-aberrant: continuous BTK inhibitor",
       "section": "Treatment",
-      "description": "A covalent second-generation BTK inhibitor is preferred for its cardiovascular tolerability; continue until progression or intolerance.",
+      "description": "A preferred second-generation covalent BTK inhibitor (zanubrutinib, or acalabrutinib +/- obinutuzumab) is a Category 1 standard for TP53-aberrant disease; continue until progression or intolerance.",
       "path": "CLL / First-line / TP53 / BTKi",
       "pills": [
         "TP53 aberrant",
@@ -390,10 +390,11 @@
         "b"
       ],
       "bullets": [
-        "Covalent BTK inhibitor (acalabrutinib or zanubrutinib preferred over ibrutinib for atrial fibrillation and hypertension risk)",
+        "Preferred second-generation covalent BTK inhibitor: zanubrutinib, or acalabrutinib +/- obinutuzumab (both preferred over ibrutinib for atrial fibrillation and hypertension risk)",
         "Continuous therapy until progression or unacceptable toxicity",
         "Baseline and on-treatment cardiovascular review (blood pressure, atrial fibrillation, bleeding risk); reconcile anticoagulants and CYP3A interactions",
-        "This is a preferred option even with TP53 aberration (activity is largely independent of TP53)",
+        "Category 1 standard for del(17p) / TP53-mutated disease; activity is largely independent of TP53",
+        "Chemoimmunotherapy (FCR/BR) is strictly contraindicated with del(17p) / TP53 mutation",
         "Then assess response and tolerability at the next step"
       ],
       "protocolRefs": [
@@ -407,7 +408,7 @@
       "name": "TP53 aberrant - VenO",
       "title": "First-line TP53-aberrant: venetoclax-obinutuzumab (fixed duration)",
       "section": "Treatment",
-      "description": "Fixed-duration venetoclax with obinutuzumab is an option offering a time-limited, chemotherapy-free course.",
+      "description": "Fixed-duration venetoclax + obinutuzumab (12 months) is a Category 1 time-limited, chemotherapy-free standard for TP53-aberrant disease.",
       "path": "CLL / First-line / TP53 / VenO",
       "pills": [
         "TP53 aberrant",
@@ -423,10 +424,11 @@
         "c"
       ],
       "bullets": [
-        "Venetoclax with obinutuzumab, given as a fixed-duration (approximately 12-month) course",
-        "Mandatory tumor-lysis-syndrome risk assessment, hydration and weekly venetoclax dose ramp-up",
+        "Venetoclax + obinutuzumab, fixed duration of 12 months (Category 1 standard)",
+        "Mandatory tumor-lysis-syndrome risk stratification before initiation, with hydration and weekly venetoclax dose ramp-up",
         "Obinutuzumab: infusion-reaction premedication and hepatitis B reactivation prophylaxis if HBcAb-positive",
         "Durable remissions are shorter with TP53 aberration than in TP53 wild-type disease - plan close follow-up",
+        "Chemoimmunotherapy (FCR/BR) is strictly contraindicated with del(17p) / TP53 mutation",
         "Then complete-of-course response / MRD assessment at the next step"
       ],
       "protocolRefs": [
@@ -482,7 +484,7 @@
       "name": "IGHV-unmutated regimen",
       "title": "First-line, TP53-WT / IGHV-unmutated: regimen choice",
       "section": "Treatment",
-      "description": "IGHV-unmutated disease favors targeted therapy over chemoimmunotherapy; choose continuous BTK inhibition or fixed-duration venetoclax-obinutuzumab.",
+      "description": "IGHV-unmutated disease without del(17p)/TP53 aberration: Category 1 standards are zanubrutinib, acalabrutinib (+/- obinutuzumab), or fixed-duration venetoclax + obinutuzumab (12 months). Chemoimmunotherapy is not preferred.",
       "path": "CLL / First-line / IGHV-unmutated",
       "pills": [
         "IGHV unmut"
@@ -515,6 +517,10 @@
             "VenO"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -524,7 +530,7 @@
       "name": "IGHV-unmut - BTKi",
       "title": "First-line IGHV-unmutated: continuous BTK inhibitor",
       "section": "Treatment",
-      "description": "Continuous covalent BTK inhibition, preferred class for the tolerability profile.",
+      "description": "Preferred second-generation covalent BTK inhibitor (zanubrutinib, or acalabrutinib +/- obinutuzumab), a Category 1 standard for IGHV-unmutated disease.",
       "path": "CLL / First-line / IGHV-unmut / BTKi",
       "pills": [
         "IGHV unmut",
@@ -536,7 +542,7 @@
         "1"
       ],
       "bullets": [
-        "Covalent BTK inhibitor (acalabrutinib or zanubrutinib preferred over ibrutinib)",
+        "Preferred second-generation covalent BTK inhibitor: zanubrutinib, or acalabrutinib +/- obinutuzumab (both preferred over ibrutinib)",
         "Continuous until progression or intolerance",
         "Cardiovascular and bleeding surveillance; manage drug interactions",
         "Avoid chemoimmunotherapy given the short benefit in IGHV-unmutated disease",
@@ -553,7 +559,7 @@
       "name": "IGHV-unmut - VenO",
       "title": "First-line IGHV-unmutated: venetoclax-obinutuzumab (fixed duration)",
       "section": "Treatment",
-      "description": "Fixed-duration chemotherapy-free option with high rates of undetectable measurable residual disease.",
+      "description": "Fixed-duration venetoclax + obinutuzumab (12 months), a Category 1 chemotherapy-free standard with high rates of undetectable measurable residual disease.",
       "path": "CLL / First-line / IGHV-unmut / VenO",
       "pills": [
         "IGHV unmut",
@@ -568,9 +574,9 @@
         "c"
       ],
       "bullets": [
-        "Venetoclax + obinutuzumab, fixed-duration (approximately 12 months)",
-        "Tumor-lysis prophylaxis with staged venetoclax ramp-up",
-        "Hepatitis B reactivation prophylaxis with the anti-CD20 antibody",
+        "Venetoclax + obinutuzumab, fixed duration of 12 months (Category 1 standard)",
+        "Tumor-lysis-syndrome risk stratification before initiation, with hydration and staged venetoclax ramp-up",
+        "Hepatitis B (HBsAg, anti-HBc) screening and reactivation prophylaxis with the anti-CD20 antibody",
         "Time-limited course is attractive; IGHV-unmutated remissions run shorter than IGHV-mutated",
         "Then complete-of-course response / MRD assessment at the next step"
       ],
@@ -585,7 +591,7 @@
       "name": "IGHV-mutated regimen",
       "title": "First-line, TP53-WT / IGHV-mutated: regimen choice",
       "section": "Treatment",
-      "description": "Targeted therapy is preferred, but time-limited chemoimmunotherapy remains a reasonable option for fit, younger IGHV-mutated patients who prefer a finite course.",
+      "description": "Without del(17p)/TP53 aberration and IGHV-mutated: Category 1 standards are zanubrutinib, acalabrutinib (+/- obinutuzumab), or fixed-duration venetoclax + obinutuzumab (12 months). FCR remains an option only in young, fit patients who prefer a finite chemoimmunotherapy course.",
       "path": "CLL / First-line / IGHV-mutated",
       "pills": [
         "IGHV mut"
@@ -628,6 +634,10 @@
             "CIT"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -637,7 +647,7 @@
       "name": "IGHV-mut - BTKi",
       "title": "First-line IGHV-mutated: continuous BTK inhibitor",
       "section": "Treatment",
-      "description": "Continuous covalent BTK inhibition.",
+      "description": "Preferred second-generation covalent BTK inhibitor (zanubrutinib, or acalabrutinib +/- obinutuzumab), a Category 1 standard for IGHV-mutated disease.",
       "path": "CLL / First-line / IGHV-mut / BTKi",
       "pills": [
         "IGHV mut",
@@ -649,7 +659,7 @@
         "1"
       ],
       "bullets": [
-        "Covalent BTK inhibitor (acalabrutinib or zanubrutinib preferred)",
+        "Preferred second-generation covalent BTK inhibitor: zanubrutinib, or acalabrutinib +/- obinutuzumab",
         "Continuous until progression or intolerance",
         "Cardiovascular / bleeding monitoring and interaction review",
         "Then assess response and tolerability at the next step"
@@ -665,7 +675,7 @@
       "name": "IGHV-mut - VenO",
       "title": "First-line IGHV-mutated: venetoclax-obinutuzumab (fixed duration)",
       "section": "Treatment",
-      "description": "Fixed-duration chemotherapy-free therapy; IGHV-mutated disease achieves particularly durable remissions.",
+      "description": "Fixed-duration venetoclax + obinutuzumab (12 months), a Category 1 standard; IGHV-mutated disease achieves particularly durable remissions.",
       "path": "CLL / First-line / IGHV-mut / VenO",
       "pills": [
         "IGHV mut",
@@ -680,9 +690,9 @@
         "c"
       ],
       "bullets": [
-        "Venetoclax + obinutuzumab, fixed-duration (approximately 12 months)",
-        "Tumor-lysis prophylaxis and staged ramp-up",
-        "Hepatitis B reactivation prophylaxis with the anti-CD20 antibody",
+        "Venetoclax + obinutuzumab, fixed duration of 12 months (Category 1 standard)",
+        "Tumor-lysis-syndrome risk stratification before initiation, with hydration and staged ramp-up",
+        "Hepatitis B (HBsAg, anti-HBc) screening and reactivation prophylaxis with the anti-CD20 antibody",
         "IGHV-mutated disease typically reaches deep, durable undetectable-MRD remissions",
         "Then complete-of-course response / MRD assessment at the next step"
       ],
@@ -697,7 +707,7 @@
       "name": "IGHV-mut - CIT",
       "title": "First-line IGHV-mutated: chemoimmunotherapy (select patients)",
       "section": "Treatment",
-      "description": "Time-limited chemoimmunotherapy remains an option only in young, fit, TP53-WT / IGHV-mutated patients; targeted therapy is otherwise preferred.",
+      "description": "FCR in young, fit, TP53-WT / IGHV-mutated patients only; targeted therapy (zanubrutinib, acalabrutinib, or venetoclax + obinutuzumab) is otherwise preferred.",
       "path": "CLL / First-line / IGHV-mut / CIT",
       "pills": [
         "IGHV mut",
@@ -713,10 +723,10 @@
         "d"
       ],
       "bullets": [
-        "Fit patient: fludarabine-cyclophosphamide-rituximab (FCR) can give long remissions in IGHV-mutated disease",
-        "Less fit / older: bendamustine-rituximab (BR)",
-        "Only if TP53 wild-type; never use chemoimmunotherapy with del(17p) / TP53 mutation",
-        "Counsel on infection risk, cytopenias, and a small risk of therapy-related myeloid neoplasm; targeted therapy is the preferred alternative",
+        "Young, fit patient: fludarabine-cyclophosphamide-rituximab (FCR) can give long remissions in TP53-WT / IGHV-mutated disease",
+        "Less fit / older: bendamustine-rituximab (BR) only where targeted therapy is unavailable or unsuitable",
+        "Only if TP53 wild-type (no del(17p), no TP53 mutation); chemoimmunotherapy (FCR/BR) is strictly contraindicated with del(17p) / TP53 mutation",
+        "Counsel on infection risk, cytopenias, and a small risk of therapy-related myeloid neoplasm; zanubrutinib, acalabrutinib, or venetoclax + obinutuzumab is the preferred alternative",
         "Then move to supportive care and surveillance"
       ],
       "protocolRefs": [
@@ -765,6 +775,10 @@
             "intolerance"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -897,6 +911,10 @@
             "MRD+"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -925,6 +943,10 @@
         "Longest expected treatment-free interval; standard surveillance schedule",
         "Fixed-duration venetoclax retreatment is effective at a later relapse after a durable remission",
         "Re-test del(17p)/TP53 only at the time of a future progression"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -953,6 +975,10 @@
         "Monitor more closely - detectable MRD predicts an earlier relapse",
         "Plan the next line (BTK inhibitor or venetoclax-based therapy) for when iwCLL progression criteria are met",
         "Re-test del(17p)/TP53 at the time of clinical progression"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -973,6 +999,10 @@
         "Vaccinate (non-live); avoid live vaccines; expect blunted responses on anti-CD20 therapy",
         "Manage treatment-emergent autoimmune cytopenias; recognize tumor flare / lymphocytosis with BTK inhibitors",
         "Tumor-lysis monitoring during venetoclax ramp-up; cardiovascular monitoring on BTK inhibitors"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -995,7 +1025,11 @@
         "At clinical relapse, re-test del(17p)/TP53 and re-stage before choosing next-line therapy"
       ],
       "linkTo": "n_rr_workup",
-      "linkLabel": "On relapse: enter the relapsed / refractory pathway"
+      "linkLabel": "On relapse: enter the relapsed / refractory pathway",
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
+      ]
     },
     {
       "id": "n_rr_workup",
@@ -1108,7 +1142,7 @@
       "name": "After BTKi",
       "title": "Relapse after a covalent BTK inhibitor: next class",
       "section": "Recurrence",
-      "description": "After progression on a covalent BTK inhibitor, switch mechanism to venetoclax-based therapy, a non-covalent BTK inhibitor, or cellular therapy in multiply-refractory disease.",
+      "description": "After progression on a covalent BTK inhibitor (ibrutinib, acalabrutinib, or zanubrutinib), switch mechanism to pirtobrutinib (non-covalent BTKi) or venetoclax + rituximab (MURANO fixed 24-month course), or cellular therapy in double-refractory disease.",
       "path": "CLL / Relapse / Post-BTKi",
       "pills": [
         "post-BTKi"
@@ -1150,6 +1184,10 @@
             "cellular"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -1159,7 +1197,7 @@
       "name": "Venetoclax after BTKi",
       "title": "Post-BTKi: venetoclax-based therapy",
       "section": "Recurrence",
-      "description": "Switching to venetoclax (with or without an anti-CD20 antibody) after covalent BTK-inhibitor failure.",
+      "description": "Venetoclax + rituximab (MURANO fixed 24-month course) after covalent BTK-inhibitor (ibrutinib / acalabrutinib / zanubrutinib) failure.",
       "path": "CLL / Relapse / Post-BTKi / Venetoclax",
       "pills": [
         "post-BTKi",
@@ -1174,10 +1212,10 @@
         "c"
       ],
       "bullets": [
-        "Venetoclax +/- rituximab; effective after BTK-inhibitor progression (non-cross-resistant mechanism)",
-        "Tumor-lysis risk assessment and weekly ramp-up",
-        "Consider continuous vs fixed-duration by prior exposure and remission depth",
-        "On later progression, a non-covalent BTK inhibitor or cellular therapy is the next step"
+        "Venetoclax + rituximab per MURANO: fixed-duration 24-month course; effective after covalent BTK-inhibitor (ibrutinib / acalabrutinib / zanubrutinib) progression (non-cross-resistant mechanism)",
+        "Tumor-lysis-syndrome risk stratification before initiation, with hydration and weekly venetoclax ramp-up",
+        "Hepatitis B (HBsAg, anti-HBc) screening and reactivation prophylaxis with rituximab",
+        "On later progression, pirtobrutinib or cellular therapy (lisocabtagene maraleucel / allogeneic HCT) is the next step"
       ],
       "linkTo": "n_cart",
       "linkLabel": "If subsequently double-refractory: consider cellular therapy",
@@ -1192,7 +1230,7 @@
       "name": "Non-covalent BTKi",
       "title": "Post-BTKi: non-covalent BTK inhibitor",
       "section": "Recurrence",
-      "description": "A non-covalent (reversible) BTK inhibitor retains activity after covalent BTK-inhibitor failure, including with BTK C481 resistance mutations.",
+      "description": "Pirtobrutinib 200 mg PO daily, a non-covalent (reversible) BTK inhibitor that retains activity after covalent BTK-inhibitor (ibrutinib / acalabrutinib / zanubrutinib) failure, including with BTK C481 resistance mutations.",
       "path": "CLL / Relapse / Post-BTKi / Non-covalent",
       "pills": [
         "post-BTKi",
@@ -1207,9 +1245,9 @@
         "g"
       ],
       "bullets": [
-        "Non-covalent BTK inhibitor (e.g. pirtobrutinib) - active after covalent BTK-inhibitor progression or intolerance",
+        "Pirtobrutinib 200 mg PO daily - non-covalent (reversible) BTK inhibitor active after covalent BTK-inhibitor (ibrutinib / acalabrutinib / zanubrutinib) progression or intolerance, including with BTK C481S resistance mutation",
         "Useful bridge when venetoclax is unsuitable or already used",
-        "Continue until progression or intolerance",
+        "Continue until progression or intolerance; monitor blood counts, infection and bleeding risk",
         "Then reassess response versus further progression at the next step"
       ],
       "protocolRefs": [
@@ -1254,6 +1292,10 @@
             "refractory"
           ]
         }
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -1288,10 +1330,10 @@
       "id": "n_cart",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Cellular therapy",
-      "title": "Double-refractory: CAR-T / allogeneic transplant",
+      "name": "Cellular therapy (Breyanzi / allo-HCT)",
+      "title": "Double-refractory (BTKi and BCL2i): lisocabtagene maraleucel (Breyanzi) CAR-T or allogeneic HCT",
       "section": "Recurrence",
-      "description": "For disease refractory to both BTK inhibitors and venetoclax, consider cellular therapy in appropriate candidates.",
+      "description": "For disease refractory to both a BTK inhibitor (covalent or pirtobrutinib) and venetoclax (double-refractory CLL/SLL), lisocabtagene maraleucel (Breyanzi) CAR-T or allogeneic HCT in appropriate candidates.",
       "path": "CLL / Relapse / Cellular",
       "pills": [
         "cellular",
@@ -1302,10 +1344,14 @@
         "2B"
       ],
       "bullets": [
-        "CD19 CAR-T is an option for BTK-inhibitor and venetoclax double-refractory CLL in fit patients",
-        "Allogeneic transplant for selected younger, fit patients with high-risk refractory disease",
+        "Lisocabtagene maraleucel (Breyanzi), anti-CD19 CAR-T, for BTK-inhibitor and venetoclax (BCL2i) double-refractory CLL/SLL in fit patients - leukapherese and refer early given manufacturing lead time",
+        "Allogeneic HCT for selected younger, fit patients with high-risk refractory disease, including as consolidation after CAR-T response",
         "Enroll on a clinical trial where available",
-        "Coordinate at a cellular-therapy / transplant center"
+        "Coordinate at a cellular-therapy / transplant center; reassess del(17p) / TP53 and Richter exclusion before referral"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab"
       ]
     },
     {
@@ -1315,7 +1361,7 @@
       "name": "After venetoclax",
       "title": "Relapse after fixed-duration venetoclax",
       "section": "Recurrence",
-      "description": "After a fixed-duration venetoclax course, options depend on remission duration and prior BTK-inhibitor exposure.",
+      "description": "After a fixed-duration venetoclax course: covalent BTK inhibitor (if BTK-inhibitor-naive) or pirtobrutinib (non-covalent BTKi 200 mg PO daily); venetoclax retreatment is reasonable after a long remission.",
       "path": "CLL / Relapse / Post-venetoclax",
       "pills": [
         "post-venetoclax",
@@ -1329,9 +1375,9 @@
         "c"
       ],
       "bullets": [
-        "BTK inhibitor (covalent if BTK-inhibitor-naive; otherwise non-covalent) as the mechanism switch",
+        "Covalent BTK inhibitor (zanubrutinib, or acalabrutinib +/- obinutuzumab) if BTK-inhibitor-naive; otherwise pirtobrutinib 200 mg PO daily (non-covalent BTKi)",
         "Venetoclax retreatment is reasonable after a long remission from a prior fixed-duration course",
-        "Re-test TP53; consider CAR-T / transplant if also BTK-inhibitor-refractory",
+        "Re-test del(17p) / TP53 by FISH and sequencing; consider lisocabtagene maraleucel (Breyanzi) CAR-T / allogeneic HCT if also BTK-inhibitor-refractory",
         "Clinical trial where available"
       ],
       "linkTo": "n_cart",
@@ -1530,7 +1576,7 @@
       "name": "DLBCL Richter - fit",
       "title": "DLBCL-type Richter (fit): immunochemotherapy + transplant consolidation",
       "section": "Recurrence",
-      "description": "Anthracycline-based immunochemotherapy with transplant consolidation in responders; enroll on a trial wherever possible.",
+      "description": "DLBCL-variant Richter (fit): R-CHOP or Pola-R-CHP, then allogeneic HCT consolidation in responders; enroll on a trial wherever possible.",
       "path": "CLL / Richter / DLBCL / Fit",
       "pills": [
         "Richter",
@@ -1546,14 +1592,15 @@
         "f"
       ],
       "bullets": [
-        "Anthracycline-based immunochemotherapy (R-CHOP-type) for the diffuse large B-cell histology",
-        "Consolidate responders with allogeneic (or autologous) transplant given the high relapse risk",
+        "R-CHOP or polatuzumab-based Pola-R-CHP for the diffuse large B-cell histology",
+        "Consolidate responders with allogeneic HCT given the high relapse risk",
         "Prioritize a clinical trial - outcomes with standard chemotherapy are poor, especially in clonally related disease",
         "CNS-risk assessment and prophylaxis as for high-risk aggressive lymphoma",
         "Continue supportive / infection prophylaxis and manage the underlying CLL"
       ],
       "protocolRefs": [
-        "rchop"
+        "rchop",
+        "dlbcl-pola-r-chp"
       ]
     },
     {
@@ -1998,5 +2045,16 @@
       ],
       "linkCategory": "conditional"
     }
+  ],
+  "protocolRefs": [
+    "cll-acalabrutinib",
+    "cll-br",
+    "cll-fcr",
+    "cll-pirtobrutinib",
+    "cll-venetoclax-rituximab",
+    "cll-veno-obinutuzumab",
+    "dlbcl-pola-r-chp",
+    "hodgkin-abvd",
+    "rchop"
   ]
 }

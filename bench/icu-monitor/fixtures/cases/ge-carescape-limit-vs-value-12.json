@@ -1,0 +1,94 @@
+{
+  "id": "ge-carescape-limit-vs-value-12",
+  "manufacturer": "ge-carescape",
+  "layout": "right-column-label-above",
+  "difficulty": [
+    "clean"
+  ],
+  "image": "ge-carescape-limit-vs-value-12.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 90
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 94
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 90
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 0
+    },
+    "rr": {
+      "status": "visible",
+      "value": 14
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 108,
+        "dbp": 64,
+        "map": 79
+      }
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 108,
+        "dbp": 64,
+        "map": 79
+      }
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 108,
+      "source": "ART"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 64,
+      "source": "ART"
+    },
+    "map": {
+      "status": "visible",
+      "value": 79,
+      "source": "ART"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        150,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "09:14"
+  },
+  "notes": "alarm limits 150/50 (HR) and 100 (SpO2) are plausible-looking numbers but are LIMITS, not the current reading."
+}

@@ -2,10 +2,10 @@
 .mkp-overlay {
   --mkp-ink: #14202b; --mkp-muted: #5a7184; --mkp-line: #d7dee3; --mkp-bg: #f4f6f5; --mkp-card: #ffffff;
   --mkp-primary: #0e6e63; --mkp-danger: #c0392b;
-  position: fixed; inset: 0; z-index: 72; display: none; background: var(--mkp-bg);
+  position: fixed; inset: 0; z-index: 15000; display: none; background: var(--mkp-bg);
   font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--mkp-ink);
 }
-body.dark .mkp-overlay { --mkp-ink: #eceef2; --mkp-muted: #9aa0ab; --mkp-line: #2a2d34; --mkp-bg: #0e0f12; --mkp-card: #16181d; --mkp-primary: #4fd1c5; }
+body.dark .mkp-overlay, body.v3-dark .mkp-overlay, html.dark .mkp-overlay { --mkp-ink: #eceef2; --mkp-muted: #9aa0ab; --mkp-line: #2a2d34; --mkp-bg: #0e0f12; --mkp-card: #16181d; --mkp-primary: #4fd1c5; }
 .mkp-overlay .material-symbols-outlined { font-family: 'Material Symbols Outlined'; line-height: 1; vertical-align: middle; }
 .mkp-wrap { display: flex; flex-direction: column; height: 100%; }
 .mkp-overlay * { box-sizing: border-box; }

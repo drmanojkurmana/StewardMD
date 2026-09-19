@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ ward: held-from-other-systems harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js against a stubbed transport: every call it makes is answered from here and
+ * recorded, so the delegated click handler, the DOM value reading and the settle/paint cycle run
+ * in a real browser. No network, no server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+var EXC = { ok: true, open: [
+  { id: "wsq-xchg-1", source: "fhir-partner-his", reason: "identity-probable-duplicate", detail: "no identifier matched, but a local patient resembles this one", patientId: null,
+    raisedAt: "2026-09-08T10:00:00.000Z", entityRefs: ["Patient/HIS-PAT-77", "Observation/HIS-OBS-1"],
+    candidates: [{ id: "wsq-pat-1", mrn: "SMD-WARD01-00001", score: 0.91, band: "probable" }, { id: "wsq-pat-2", mrn: "SMD-WARD01-00002", score: 0.62, band: "possible" }], conflict: null },
+  { id: "wsq-xchg-2", source: "fhir-partner-his", reason: "conflict-local-authoritative", detail: "this hospital authored the current version", patientId: "wsq-pat-1",
+    raisedAt: "2026-09-08T10:05:00.000Z", entityRefs: ["Observation/HIS-OBS-2"], candidates: null, conflict: { resourceType: "Observation", id: "wsq-obs-9", version: 3, source: "wardsynq-native" } }
+] };
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/fhir-exceptions") >= 0) return reply(EXC);
+  if (u.indexOf("/ward/fhir-exception-resolve") >= 0) {
+    if (body && body.resolution === "keep-local") return reply({ ok: false, error: "forbidden", message: "Your role here is \"nurse\", which cannot decide this. Ask the owner to change it." });
+    EXC = { ok: true, open: EXC.open.filter(function (x) { return x.id !== (body && body.exceptionId); }) };
+    return reply({ ok: true, resolution: body.resolution, written: body.resolution === "link" ? 2 : 0 });
+  }
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

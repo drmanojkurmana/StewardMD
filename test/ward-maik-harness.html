@@ -1,0 +1,64 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ ward: MaiK card harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* TASK 8.5. The REAL ward.js against a stubbed transport: the delegated click handlers, the
+ * prompt-for-a-reason refusal, the edit textarea read from the real DOM and the repaint cycle all
+ * run in a real browser against the real stylesheet. No network, no server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENTS = [
+  { encounterId: "enc-1", patientId: "pat-1", ward: "Ward A", bed: "07", admittedAt: "2026-09-07T04:00:00.000Z" },
+  { encounterId: "enc-2", patientId: "pat-2", ward: "Ward A", bed: "08", admittedAt: "2026-09-07T05:00:00.000Z" }
+];
+
+function interaction(over) {
+  return Object.assign({
+    id: "wsq-ai-pat-1-abc", patientId: "pat-1", task: "draft-note",
+    model: { provider: "local-openai", model: "ward-model-7b", version: "ward-model-7b-q4" },
+    generated: true, latencyMs: 900,
+    output: "Ward round. Comfortable overnight.",
+    contextProvenance: [{ resourceType: "Patient", id: "pat-1", version: 1 }],
+    contextDocuments: [{ id: "ClinicalNote/n1", origin: "fhir-partner-his", trust: "retrieved" }],
+    security: { documentsIncluded: 1, rejected: [], injectionFindings: [{ id: "ClinicalNote/n1", signals: ["ignore-previous"] }], outputViolations: [], released: true },
+    uncertainty: null,
+    review: { state: "pending", by: null, at: null, reason: null, editedOutput: null },
+    preview: { resourceType: "ClinicalNote", id: "wsq-ai-pat-1-abc-note", authorId: "ai:maik", signedBy: null, aiDrafted: true,
+      note: "Accepting writes this note UNSIGNED and authored by MaiK. It becomes your own words only when you sign it, through the ordinary note path." },
+    resultingChanges: []
+  }, over || {});
+}
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj, status) { return Promise.resolve({ ok: (status || 200) < 400, status: status || 200, json: function () { return Promise.resolve(obj); } }); };
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: PATIENTS });
+  if (u.indexOf("/ward/maik-ask") >= 0) {
+    // The hospital has approved no provider for the SECOND patient, to prove the refusal renders.
+    if (body && body.patientId === "pat-2") {
+      return reply({ ok: false, error: "no_phi_approved_model",
+        detail: "this request carries patient data and this hospital has approved no model provider to receive it. Nothing was sent." }, 409);
+    }
+    return reply({ ok: true, interaction: interaction({ task: body.task }) });
+  }
+  if (u.indexOf("/ward/maik-review") >= 0) {
+    if (body.decision === "rejected" && !body.reason) return reply({ ok: false, error: "reason_required" }, 422);
+    return reply({ ok: true, interaction: interaction({
+      review: { state: body.decision, by: "cfa:doctor", at: "2026-09-09T10:00:00Z", reason: body.reason || null, editedOutput: body.editedOutput || null },
+      resultingChanges: body.decision === "rejected" ? [] : [{ resourceType: "ClinicalNote", id: "wsq-ai-pat-1-abc-note", version: 1, unsigned: true }]
+    }) });
+  }
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

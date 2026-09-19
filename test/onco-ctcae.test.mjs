@@ -33,49 +33,53 @@ test("gap message is a fixed string, shared by the engine and the catalog", () =
   assert.equal(catalog.gapMessage, ENG.GAP_MESSAGE);
 });
 
-test("resolve(): seeded v5.0 -> seeded; un-seeded v4.03 -> honest gap; unknown/null -> gap", () => {
+test("resolve(): seeded v5.0 and v4.03 -> seeded; unknown/null -> gap", () => {
   assert.equal(ENG.resolve(catalog, "CTCAE v5.0").status, "seeded");
-  const g = ENG.resolve(catalog, "CTCAE v4.03");
-  assert.equal(g.status, "gap");
-  assert.equal(g.message, catalog.gapMessage);
+  assert.equal(ENG.resolve(catalog, "CTCAE v4.03").status, "seeded");
   assert.equal(ENG.resolve(catalog, "CTCAE v9.9").status, "gap");
   assert.equal(ENG.resolve(null, "CTCAE v5.0").status, "gap");
   assert.equal(ENG.resolve({}, "CTCAE v5.0").status, "gap");
 });
 
-test("version toggle: exactly one seeded (v5.0) and one honest gap (v4.03) edition, v4 deltas NOT guessed", () => {
+test("version toggle: both v5.0 and v4.03 are seeded with official NCI provenance", () => {
   assert.ok(catalog.versions.length >= 2);
   const seeded = catalog.versions.filter((v) => v.seeded);
-  const gaps = catalog.versions.filter((v) => !v.seeded);
-  assert.equal(seeded.length, 1);
-  assert.ok(gaps.length >= 1);
-  assert.equal(seeded[0].version, "CTCAE v5.0");
-  assert.ok(gaps.some((v) => v.version === "CTCAE v4.03"), "v4.03 must be a present-but-unseeded gap");
-  // resolveVersion finds by name
+  assert.ok(seeded.some((v) => v.version === "CTCAE v5.0"));
+  assert.ok(seeded.some((v) => v.version === "CTCAE v4.03"));
   assert.equal(ENG.resolveVersion(catalog, "CTCAE v5.0").version, "CTCAE v5.0");
+  assert.equal(ENG.resolveVersion(catalog, "CTCAE v4.03").version, "CTCAE v4.03");
   assert.equal(ENG.resolveVersion(catalog, "nope"), null);
 });
 
-test("the seeded catalog PASSES the fabrication auditor (every AE R1-flagged + CTCAE v5.0-cited)", () => {
+test("the seeded catalog PASSES the fabrication auditor (every AE R1-flagged + CTCAE-cited)", () => {
   const res = ENG.auditFabricationSafe(catalog);
   assert.ok(res.ok, "catalog failed the audit: " + JSON.stringify(res.problems));
 });
 
-test("the seeded set is the curated common chemo/IO AEs (accuracy over coverage)", () => {
-  const ids = catalog.aes.map((a) => a.id).sort();
-  assert.deepEqual(ids, EXPECTED_AES.slice().sort());
-  assert.ok(catalog.aes.length <= 20, "keep the seeded set small/curated: " + catalog.aes.length);
+test("the seeded set covers comprehensive common chemo/IO/targeted therapy AEs", () => {
+  const ids = catalog.aes.map((a) => a.id);
+  assert.ok(ids.length >= 35, "expected expanded comprehensive AE catalog: " + ids.length);
+  EXPECTED_AES.forEach((id) => {
+    assert.ok(ids.includes(id), "must include core AE: " + id);
+  });
 });
 
 test("every seeded grade is EITHER a non-empty string OR an honest null (never invented, never empty)", () => {
   catalog.aes.forEach((ae) => {
     assert.equal(ae.requiresR1Verification, true, ae.id + " must be R1-flagged");
-    assert.match(ae.source, /CTCAE v5\.0/, ae.id + " must cite CTCAE v5.0");
+    assert.match(ae.source, /CTCAE v(4\.03|5\.0)/, ae.id + " must cite CTCAE");
     ["1", "2", "3", "4", "5"].forEach((k) => {
       assert.ok(Object.prototype.hasOwnProperty.call(ae.grades, k), ae.id + " missing grade " + k);
       const v = ae.grades[k];
       assert.ok(v === null || (typeof v === "string" && v.trim().length > 0), ae.id + " grade " + k + " must be a non-empty string or null");
     });
+    if (ae.grades_v4) {
+      ["1", "2", "3", "4", "5"].forEach((k) => {
+        assert.ok(Object.prototype.hasOwnProperty.call(ae.grades_v4, k), ae.id + " missing v4 grade " + k);
+        const v4 = ae.grades_v4[k];
+        assert.ok(v4 === null || (typeof v4 === "string" && v4.trim().length > 0), ae.id + " v4 grade " + k + " must be a non-empty string or null");
+      });
+    }
   });
 });
 
@@ -93,7 +97,7 @@ test("auditAE FAILS CLOSED if a grade is present-but-empty (missing value, not a
   assert.equal(ENG.auditAE(bad).ok, false);
 });
 
-test("auditAE FAILS CLOSED if the source is not CTCAE v5.0 (R1 gate removed per owner directive)", () => {
+test("auditAE FAILS CLOSED if the source is not CTCAE (R1 gate removed per owner directive)", () => {
   const b = JSON.parse(JSON.stringify(ENG.findAE(catalog, "anemia")));
   b.source = "made up";
   assert.equal(ENG.auditAE(b).ok, false);

@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ ward: MaiK CDS harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* TASK 8.9. The REAL ward.js against a stubbed transport, so the delegated clicks, the repaint
+ * cycle, the per-order scoping of an explanation and the verbatim rendering of a fail-closed refusal
+ * all run in a real browser against the real stylesheet. No network, no server.
+ *
+ * Two orders, deliberately: ord-1 has a real allergy finding and MaiK explains it; ord-2 is the drug
+ * the content cannot resolve, where the server refuses and the screen must say so rather than show
+ * an empty panel. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENTS = [{ encounterId: "enc-1", patientId: "pat-1", ward: "Ward A", bed: "07", admittedAt: "2026-09-07T04:00:00.000Z" }];
+
+var FINDING = { code: "ALLERGY_CLASS", severity: "contraindicated", disposition: "overridable",
+  message: "amoxicillin belongs to penicillins, which the patient is documented allergic to (penicillin)." };
+
+var QUEUE = { ok: true, unverified: 2,
+  allergies: [{ substance: "penicillin", severity: "severe" }],
+  orders: [
+    { orderId: "ord-1", drug: "amoxicillin", state: "unverified",
+      safety: { blocks: [FINDING], warnings: [], findings: [FINDING] } },
+    { orderId: "ord-2", drug: "zzz-unlisted-compound", state: "unverified",
+      safety: { blocks: [], warnings: [{ code: "NOT_CHECKED_DRUG", message: "this drug was not recognised, so no check ran for it" }], findings: [] } }
+  ] };
+
+function interaction(over) {
+  return Object.assign({
+    id: "wsq-maik-cds-pat-1-abc", patientId: "pat-1", task: "explain",
+    model: { provider: "local-openai", model: "ward-model-7b", version: "ward-model-7b-q4" },
+    generated: true, latencyMs: 800,
+    review: { state: "pending", by: null, at: null, reason: null, editedOutput: null },
+    resultingChanges: []
+  }, over || {});
+}
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj, status) { return Promise.resolve({ ok: (status || 200) < 400, status: status || 200, json: function () { return Promise.resolve(obj); } }); };
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: PATIENTS });
+  if (u.indexOf("/ward/verification-queue") >= 0) return reply(QUEUE);
+  if (u.indexOf("/ward/dispenses") >= 0) return reply({ ok: true, dispenses: [] });
+  if (u.indexOf("/ward/maik-explain-safety") >= 0) {
+    /* THE FAIL-CLOSED CASE, as the real route returns it: an unresolved drug is refused, and the
+     * refusal is the sentence that must survive to the screen unflattened. */
+    if (body && body.orderId === "ord-2") {
+      return reply({ ok: false, error: "not_checked",
+        detail: '"zzz-unlisted-compound" is not recognised by this hospital\'s decision-support content, so no allergy, interaction or dose check ran for it. There is no verdict to explain, and this is not a clean result.',
+        deterministic: { unresolvedDrug: true, findings: [], rulePackVersion: "stewardmd-1.0.0+seed+brands", unapproved: true },
+        explanation: null }, 409);
+    }
+    return reply({ ok: true, explained: true,
+      deterministic: { allowed: false, findings: [FINDING], blocks: [FINDING], warnings: [], unresolvedDrug: false,
+        rulePackVersion: "stewardmd-1.0.0+seed+brands", unapproved: true },
+      explanation: "Amoxicillin is a penicillin. This patient is documented anaphylactic to penicillin, so this order carries a contraindicated allergy finding.",
+      withheld: null, interaction: interaction(),
+      decision: { state: "pending", overridesNothing: true,
+        note: "Reviewing this explanation records what you thought of MaiK's words. It does not override, accept or dismiss any deterministic finding." } });
+  }
+  if (u.indexOf("/ward/maik-review") >= 0) {
+    if (body.decision === "rejected" && !body.reason) return reply({ ok: false, error: "reason_required" }, 422);
+    return reply({ ok: true, interaction: interaction({
+      review: { state: body.decision, by: "cfa:doctor", at: "2026-09-09T10:00:00Z", reason: body.reason || null, editedOutput: null },
+      resultingChanges: [] }) });
+  }
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

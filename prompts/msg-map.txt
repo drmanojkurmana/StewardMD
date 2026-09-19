@@ -1,0 +1,27 @@
+The map led every role with the doctor's tiles
+
+Every role opened the identical map in the identical order. A billing clerk's
+first screen was eleven clinical tiles she cannot use - ward, emergency, critical
+results, laboratory, radiology, theatre, pharmacy - with her own work below the
+fold. The pharmacist's was the same, and the lab technician's. The product knew
+exactly which tiles it had just greyed out, and still led with them.
+
+Within a section the tiles a person can open now sort above the ones they cannot.
+Nothing is hidden: a locked tile still appears and still names the role that would
+open it, so the map stays a complete map of the hospital rather than quietly
+shrinking around whoever is signed in. The order inside each group is untouched,
+so a doctor, who can open everything, sees exactly what they saw before.
+
+AND THREE TILES WERE OFFERING WHAT THE SERVER WOULD REFUSE. Inpatient ward,
+Admission and bed board and Emergency department asked for queue.view, which
+nearly every role holds - so billing, pharmacy and the laboratory were each shown
+those three as their FIRST three tiles, and every one of those screens then turned
+them away. The reads behind them need a record scope on Encounter, granted by
+emr.view and separately by transfusion.issue so the blood bank can identify whose
+episode it holds. Naming both keeps it honest in each direction: nothing offered
+that the server refuses, nothing hidden from a role that genuinely gets in.
+
+Billing now opens on Scheduling and the OPD desk.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

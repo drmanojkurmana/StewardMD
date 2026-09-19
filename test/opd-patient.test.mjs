@@ -127,6 +127,37 @@ test("personal clinic: we allocate, and a typed hospital number is kept only as 
   assert.equal(r3.mrn, "SMD-CZWRWH-00042");
 });
 
+test("externalMrn OFF: unchanged, byte-identical to the existing minting behaviour", () => {
+  const off = resolveMrn("native", "E1234567");
+  const offFlag = resolveMrn("native", "E1234567", false);
+  assert.deepEqual(off, offFlag);
+  assert.equal(off.mrSource, "stewardmd");
+  assert.equal(off.needsAllocation, true, "a non-SMD- number is still just a reference, we still mint");
+  assert.equal(off.mrn, "");
+  assert.equal(off.hospitalRef, "E1234567");
+});
+
+test("externalMrn ON: a hospital's own MRN IS the MRN, never demoted to hospitalRef", () => {
+  const r = resolveMrn("native", "E1234567", true);
+  assert.equal(r.mrSource, "stewardmd");
+  assert.equal(r.needsAllocation, false, "we do not mint over a number the hospital already issued");
+  assert.equal(r.mrn, "E1234567");
+  assert.equal(r.hospitalRef, "", "not a reference - it IS the identity now");
+});
+
+test("externalMrn ON: a blank/whitespace MRN still falls back to minting, never writes an empty MRN", () => {
+  const empty = resolveMrn("native", "", true);
+  assert.equal(empty.needsAllocation, true);
+  assert.equal(empty.mrn, "");
+  const ws = resolveMrn("native", "   ", true);
+  assert.equal(ws.needsAllocation, true);
+  assert.equal(ws.mrn, "");
+});
+
+test("externalMrn is native-only: ghis/connect already supply their own MRN either way", () => {
+  assert.deepEqual(resolveMrn("ghis", "MRN-99", true), resolveMrn("ghis", "MRN-99", false));
+});
+
 test("hospital workplace: we NEVER mint an MR; no number yet means provisional", () => {
   const withMr = resolveMrn("ghis", "MRN-99");
   assert.equal(withMr.mrSource, "ghis");
@@ -179,6 +210,20 @@ test("optional fields are validated only when supplied", () => {
   const okPin = validateRegistration({ ...GOOD, pincode: "530045" }, NOW);
   assert.ok(okPin.ok);
   assert.equal(okPin.patient.pincode, "530045");
+});
+
+test("postcode length comes from the region, not a hardcoded 6 (was India-only)", () => {
+  const US = { ...GOOD, mobile: "4155550142" };
+  assert.ok(validateRegistration({ ...US, pincode: "90210" }, NOW, "US").ok, "a plain 5-digit ZIP");
+  assert.ok(validateRegistration({ ...US, pincode: "90210-1234" }, NOW, "US").ok, "ZIP+4");
+  const badUs = validateRegistration({ ...US, pincode: "530045" }, NOW, "US");
+  assert.equal(badUs.ok, false, "a 6-digit Indian PIN is not a US ZIP");
+  assert.match(badUs.errors.pincode, /ZIP/);
+
+  assert.ok(validateRegistration({ ...GOOD, pincode: "530045" }, NOW, "IN").ok);
+  const badIn = validateRegistration({ ...GOOD, pincode: "90210" }, NOW, "IN");
+  assert.equal(badIn.ok, false, "a 5-digit US ZIP is not a valid Indian PIN");
+  assert.match(badIn.errors.pincode, /PIN/);
 });
 
 test("SAFETY: ABHA identifiers without recorded consent are never linkable", () => {

@@ -381,7 +381,9 @@ test("AUTHORISE: the route is write-gated like the save", () => {
 });
 
 test("AUTHORISE: the consult finishes only after GHIS confirms", () => {
-  const fn = OPD.slice(OPD.indexOf("function authoriseConsult"), OPD.indexOf("function endConsult"));
+  // Sliced from the GHIS-specific body (after the 2026-09-06 WardSynQ-native early-return branch,
+  // which has its own postWrite-free endConsult() call and would otherwise confuse this ordering check).
+  const fn = OPD.slice(OPD.indexOf("if (!oeDocId())"), OPD.indexOf("function endConsult"));
   assert.match(fn, /postWrite\("\/assessment-authorize"/, "calls the endpoint");
   assert.match(fn, /endConsult\(\)/, "…and ends the consult in the success callback");
   assert.ok(fn.indexOf("endConsult()") > fn.indexOf("postWrite"),

@@ -1,0 +1,48 @@
+feat(P0.4): the safety inbox - what needs a person, across the ward
+
+NOT A NEW SOURCE OF TRUTH AND NOT A DASHBOARD. Every item already existed somewhere: an
+open critical-result loop in critical-results.js, an unsigned note in note-cosign.js, an
+undecided medicine in med-reconciliation.js, an overdue reassessment in risk-assessment.js
+and the rest of chart-completion.js's detectors, which are imported and reused rather than
+reimplemented.
+
+Why it had to exist: those facts were reachable ONE PATIENT AT A TIME, which is the wrong
+shape for the question actually being asked. A doctor coming on shift does not ask "is
+patient 7's note signed"; they ask "what needs me, now, anywhere on this ward". Answering
+that by opening thirty charts is how the answer stops being looked for.
+
+ROLE-TAILORED, NEVER ROLE-HIDDEN. Ordering is by the hospital's own `responsibleRole` on
+the rule, not a judgement made here. But the filter is a convenience and never a
+permission: what a person may READ is the record service's grant as everywhere else, and a
+patient a reader may not read never enters this file. Filtering can only narrow what the
+reader was already entitled to see. An item nobody owns is shown to EVERYBODY rather than
+to nobody - an unowned safety item appearing in no inbox is the exact failure this removes.
+
+THE MOST IMPORTANT BEHAVIOUR IS ABOUT INCOMPLETENESS. A safety inbox that quietly dropped
+the patients it could not read, or stopped at its scan cap without saying so, reads as a
+quiet ward - worse than having no inbox at all. So:
+  - patients whose charts could not be read are NAMED, never skipped silently
+  - a ward past the cap says "this list is incomplete - do not read it as a quiet ward"
+  - the warning renders ABOVE the list, asserted by a test on the ordering
+  - an empty-but-incomplete list says "the check was incomplete" and is forbidden by test
+    from saying "nothing outstanding"
+  - a failed LOAD sets the same sentence rather than leaving an empty screen
+  - every role sees the WARD total alongside their own, so a quiet inbox is never mistaken
+    for a quiet ward
+
+Critical results are listed independently of the hospital's chart-completion config: a
+hospital with an empty config still has critical results, and that must not depend on
+somebody having configured a rule.
+
+It leads to the action. Acknowledging a critical result is done from the row, and now
+reloads whichever list the person is actually looking at - doing it from the inbox used to
+reload the criticals board and leave the acted-on row sitting there.
+
+Tests: 25 - 15 on the module (role ownership, ordering, the cap, named failures, an
+unowned item reaching everybody) and 10 rendering the screen, including that an incomplete
+check can never render as all-clear.
+
+Suite 5896 passing, 0 failing. Reachability: 305 routes, 220 reachable.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

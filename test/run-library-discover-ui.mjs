@@ -1,0 +1,93 @@
+import { spawn } from 'node:child_process';
+import { setTimeout as sleep } from 'node:timers/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+const repo=fileURLToPath(new URL('../',import.meta.url));
+const server=spawn('node',[repo+'test/serve.mjs',repo,'9032'],{stdio:'ignore'});
+const chrome=spawn('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',['--headless=new','--remote-debugging-port=9432',`--user-data-dir=/tmp/library-chrome-${process.pid}`,'--no-first-run','--disable-gpu'],{stdio:'ignore'});
+let ws,sid,id=0,failures=0;const pending=new Map();
+const call=(method,params={})=>new Promise(resolve=>{const n=++id;pending.set(n,resolve);ws.send(JSON.stringify({id:n,method,params,sessionId:sid}));});
+const ev=async expression=>{const r=await call('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.result?.exceptionDetails)throw Error(JSON.stringify(r.result.exceptionDetails));return r.result?.result?.value;};
+const ok=(pass,label)=>{console.log(`${pass?'PASS':'FAIL'} ${label}`);if(!pass)failures++;};
+async function shot(name){await sleep(200);await mkdir('/tmp/stewardmd-library',{recursive:true});const r=await call('Page.captureScreenshot',{format:'png'});await writeFile(`/tmp/stewardmd-library/${name}.png`,Buffer.from(r.result.data,'base64'));}
+try{
+ let version;for(let i=0;i<60;i++){try{version=await(await fetch('http://localhost:9432/json/version')).json();break;}catch{await sleep(200);}}
+ ws=new WebSocket(version.webSocketDebuggerUrl);await new Promise(r=>ws.onopen=r);ws.onmessage=e=>{const m=JSON.parse(e.data);if(pending.has(m.id)){pending.get(m.id)(m);pending.delete(m.id);}};
+ const created=await call('Target.createTarget',{url:'about:blank'});sid=(await call('Target.attachToTarget',{targetId:created.result.targetId,flatten:true})).result.sessionId;
+ await call('Page.navigate',{url:'http://localhost:9032/'});
+ for(let i=0;i<100;i++){if(await ev('!!window.SB?.__smdKbWrapped && Object.keys(window.KB_ENRICHMENT?.byId||{}).length>4000'))break;await sleep(250);}
+ await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(k=>document.getElementById(k)?.remove());document.body.classList.remove('dark');SB.openRef('syndromes');document.activeElement?.blur()`);
+ console.log('Catalog:',await ev(`Object.keys(KB_ENRICHMENT.byId).length`));
+ ok(await ev(`document.querySelector('.kblib-intro').textContent.includes('4,800+')`),'catalog breadth is prominent');
+ ok(await ev(`document.querySelectorAll('.kblib-tiles [data-br]').length===new Set(Object.values(KB_ENRICHMENT.byId).map(x=>x.system)).size`) || await ev(`document.querySelectorAll('.kblib-tiles [data-br]').length>=10`),'medical branches are available');
+ ok(await ev(`getComputedStyle(document.querySelector('#sbrefOverlay')).overflow==='hidden' && getComputedStyle(document.querySelector('#sbrefBody')).overflowY==='auto'`),'library uses a pinned app shell with internal scrolling');
+ ok(await ev(`Math.abs(document.querySelector('#sbrefOverlay').getBoundingClientRect().bottom-innerHeight)<=1`),'library fills the visible viewport');
+ ok(await ev(`!document.querySelector('#smdTopBack') || getComputedStyle(document.querySelector('#smdTopBack')).visibility==='hidden'`),'library suppresses the underlying global back control');
+ for(const width of [320,390,768,1280]){await call('Emulation.setDeviceMetricsOverride',{width,height:844,deviceScaleFactor:1,mobile:width<700});ok(await ev(`document.querySelector('#sbrefOverlay').scrollWidth<=innerWidth`),`no overflow at ${width}px`);if(width===390)await shot('discover-mobile');if(width===1280)await shot('discover-desktop');}
+ await ev(`document.querySelector('.kblib-tiles [data-br="Cardiology"]').click()`);
+ ok(await ev(`document.querySelector('#kblibResultsTitle').textContent==='Cardiology' && document.querySelector('#kblibDiscovery').hidden`),'branch selection opens focused index');
+ const first=await ev(`document.querySelectorAll('#kblibGrid .kblib-row').length`);
+ await ev(`document.querySelector('#kblibMore').click()`);
+ ok(await ev(`document.querySelectorAll('#kblibGrid .kblib-row').length`)>first,'more entries are reachable');
+ await ev(`document.querySelector('#kblibClear').click();const q=document.querySelector('#kblibQ');q.value='COPD';q.dispatchEvent(new Event('input',{bubbles:true}));`);
+ ok(await ev(`document.querySelector('#kblibGrid').textContent.toLowerCase().includes('obstructive')`),'abbreviation search still works');
+ await ev(`q.value='zzzzzzzzzzzz';q.dispatchEvent(new Event('input',{bubbles:true}));`);
+ ok(await ev(`document.querySelector('#kblibGrid').textContent.includes('No matches') && document.querySelector('#kblibMore').hidden`),'empty search has clear feedback');
+ await ev(`document.querySelector('#kblibClear').click();document.querySelector('.kblib-f[data-cls="inf"]').click()`);
+ ok(await ev(`Array.from(document.querySelectorAll('#kblibGrid .kblib-row')).every(x=>x.classList.contains('inf'))`),'infective filter preserved');
+ await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
+ await ev(`SB.openRef('antibiogram')`);await sleep(100);
+ ok(await ev(`document.querySelector('#sbrefTitle').textContent==='Knowledge Library' && document.querySelector('.kblib-tool-antibiogram h1').textContent==='Antibiogram'`),'Antibiogram uses the Knowledge Library hierarchy');
+ ok(await ev(`document.querySelectorAll('.kblib-tool-antibiogram .sbref-row').length>3`),'Antibiogram data remains available');
+ await ev(`document.querySelectorAll('.sbref-row input')[0].click();document.querySelectorAll('.sbref-row input')[1].click()`);
+ ok(await ev(`document.querySelectorAll('.kblib-compare-results>div').length===2`),'two antibiotics can be compared');
+ ok(await ev(`(()=>{const rows=[...document.querySelectorAll('.kblib-tool-antibiogram .sbref-row')],q=document.querySelector('#kblibToolSearch');q.value=rows[0].textContent.trim().slice(0,5);q.dispatchEvent(new Event('input',{bubbles:true}));return rows.some(x=>!x.hidden)&&rows.some(x=>x.hidden)})()`),'Antibiogram search filters antibiotics');
+ await shot('antibiogram-mobile');
+ await ev(`SB.openRef('aware')`);await sleep(100);
+ ok(await ev(`document.querySelector('#sbrefBody').scrollTop===0 && Math.abs(document.querySelector('#sbrefOverlay').getBoundingClientRect().top)<=1`),'AWaRe starts at the top of its app surface');
+ ok(await ev(`document.querySelectorAll('.kblib-tool-aware .aware-card').length===3`),'AWaRe groups retain their clinical content');
+ ok(await ev(`document.querySelector('.kblib-tool-aware .kblib-tool-intro').textContent.includes('WHO stewardship')`),'AWaRe has clear collection context');
+ await shot('aware-mobile');
+ await ev(`SB.openRef('guidelines')`);await sleep(100);
+ ok(await ev(`document.querySelector('#sbrefBody').scrollTop===0 && Math.abs(document.querySelector('#sbrefOverlay').getBoundingClientRect().top)<=1`),'Guidelines starts at the top of its app surface');
+ const guidelineTotal=await ev(`document.querySelectorAll('.kblib-tool-guidelines .sbref-gl').length`);
+ ok(guidelineTotal>20,'Guideline source breadth remains available');
+ await shot('guidelines-mobile');
+ await ev(`(()=>{const search=document.querySelector('#kblibToolSearch');search.value='malaria';search.dispatchEvent(new Event('input',{bubbles:true}))})()`);
+ ok(await ev(`document.querySelectorAll('.kblib-tool-guidelines .sbref-gl:not([hidden])').length>0 && document.querySelectorAll('.kblib-tool-guidelines .sbref-gl:not([hidden])').length<${guidelineTotal}`),'Guideline search narrows official sources');
+ ok(await ev(`document.querySelector('#sbrefOverlay').scrollTop===0 && getComputedStyle(document.querySelector('#sbrefOverlay')).overflow==='hidden' && getComputedStyle(document.querySelector('#sbrefBody')).overflowY==='auto'`),'only library content scrolls, not the full-screen layer');
+ await ev(`document.body.classList.add('dark');SB.openRef('syndromes');document.querySelector('#kblibClear').click()`);
+ await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});await shot('discover-dark');
+ const diseaseName=await ev(`document.querySelector('#kblibGrid .kblib-name').textContent`);
+ const returnScroll=await ev(`document.querySelector('#sbrefBody').scrollTop=500;document.querySelector('#sbrefBody').scrollTop`);
+ await ev(`document.querySelector('#kblibGrid .kblib-row').click()`);
+ ok(await ev(`document.querySelector('#dxMgmt').classList.contains('on') && document.querySelector('#dxOverlay').classList.contains('dx-reference-mode')`),'reader is present immediately without an intermediate Dx screen');
+ await sleep(250);
+ ok(await ev(`document.querySelector('#dxOverlay').textContent`).then(t=>t.includes(diseaseName)),'disease entry opens existing reference');
+ ok(await ev(`document.querySelector('#dxMgmt').classList.contains('dx-reader') && document.querySelector('.dx-reader-brand strong').textContent==='Knowledge Library'`),'disease entry uses the shared Knowledge Library reader');
+ ok(await ev(`(()=>{const panel=document.querySelector('#dxMgmt'),body=panel.querySelector('.dx-mgmt-body'),r=panel.getBoundingClientRect();return getComputedStyle(panel).position==='fixed'&&getComputedStyle(panel).overflow==='hidden'&&getComputedStyle(body).overflowY==='auto'&&Math.abs(r.height-innerHeight)<=1})()`),'disease reader remains a pinned full-screen app surface');
+ ok(await ev(`document.querySelector('#dxMgmt').scrollWidth<=innerWidth && document.querySelector('.dx-mgmt-name').textContent.trim()===${JSON.stringify(diseaseName)}`),'disease reader retains its title without horizontal overflow');
+ await shot('disease-reader-mobile');
+ await ev(`document.querySelector('.dx-reader-favourite').click()`);
+ ok(await ev(`document.querySelector('.dx-reader-favourite').getAttribute('aria-pressed')==='true'`),'disease can be saved as a favourite');
+ ok(await ev(`!!document.querySelector('.dx-reader-glance')`),'disease reader provides at-a-glance reference sections');
+ await ev(`document.querySelector('#dxMgmtBack').click()`);
+ ok(await ev(`document.querySelector('#sbrefBody').scrollTop===${returnScroll}`),'returning restores the exact library scroll position');
+ ok(await ev(`document.querySelector('.kblib-personal').textContent.includes(${JSON.stringify(diseaseName)})`),'saved and recent diseases appear in your library');
+ await ev(`KB_ENRICHMENT.byId.__citation_test={name:'Reference formatting check',source:'Verified textbook',clinicalPearls:['Dose 5 mg (p.1537). Duration 3 weeks (p.21 context; reference section). Threshold (<45 mg/dL).'],prognosis:'Review in 3-8 weeks (p.252, p.272-273).'};DX.openRef('__citation_test')`);
+ ok(await ev(`(()=>{const t=document.querySelector('#dxMgmt').textContent;return !/p\\.1537|p\\.21|p\\.252|p\\.272|paraphras|page-cited/.test(t)&&t.includes('5 mg')&&t.includes('3-8 weeks')&&t.includes('<45 mg/dL')&&t.includes('Reference:Verified textbook')&&t.includes('Know more')})()`),'expanded references omit page citations and retain clinical numbers and true attribution');
+ await ev(`delete KB_ENRICHMENT.byId.__citation_test`);
+ if(process.env.LIBRARY_REFERENCE_SHOTS){
+  console.log('Preview disease:',await ev(`(()=>{const id=Object.keys(KB_ENRICHMENT.byId).find(id=>/acute bronchitis/i.test(KB_ENRICHMENT.byId[id].name));if(!id)throw new Error('Acute bronchitis unavailable');document.body.classList.remove('dark');DX.openRef(id);return id})()`));
+  await sleep(300);
+  await ev(`document.querySelector('.ev-wrap[data-ev-src="harrison"]').classList.remove('ev-open');document.querySelector('.ev-top').scrollIntoView({block:'center'})`);
+  await sleep(300);await shot('reference-read-more-mobile');
+  await ev(`document.querySelector('.ev-wrap[data-ev-src="harrison"]').classList.add('ev-open');document.querySelector('.ev-full').classList.add('ev-open')`);
+  await sleep(300);
+  await ev(`document.querySelector('.ev-full').scrollIntoView({block:'start'})`);
+  await shot('reference-details-mobile');
+  await ev(`document.querySelector('.ev-cite').scrollIntoView({block:'end'})`);
+  await shot('reference-footer-mobile');
+ }
+ console.log(failures?`${failures} failures`:'All library checks pass');
+}catch(e){console.error(e);failures++;}finally{ws?.close();chrome.kill();server.kill();process.exitCode=failures?1:0;}

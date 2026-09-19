@@ -1,0 +1,684 @@
+{
+  "guideline": "mastocytosis",
+  "title": "Systemic Mastocytosis",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 3.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "systemic_mastocytosis",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 3.2026 clinical navigator for Systemic Mastocytosis (SM). Covers complete clinical algorithm: Diagnostic Workup (bone marrow biopsy with tryptase/CD117/CD25/CD2 IHC, baseline serum tryptase, high-sensitivity KIT D816V mutation allele-specific PCR/ddPCR, myeloid NGS panel for ASXL1, SRSF2, TET2) -> WHO Diagnostic Criteria (Major + 1 minor OR 3 minor) -> B-Findings (burden: BM mast cells >30%, serum tryptase >200 ng/mL, organomegaly without dysfunction) & C-Findings (cytopenias ANC<1k, Hb<10, Plt<100k; hepatomegaly with liver dysfunction/ascites; skeletal osteolyses with fractures; malabsorption) -> Disease Classification: Indolent Systemic Mastocytosis (ISM, 0 C-findings) vs Smoldering SM (SSM, 2+ B-findings, 0 C-findings) -> Advanced Systemic Mastocytosis (AdvSM: Aggressive SM ASM, SM with Associated Hematologic Neoplasm SM-AHN, Mast Cell Leukemia MCL) -> Targeted Therapies: Avapritinib 25 mg daily (rare-mastocytosis-avapritinib Category 1 Preferred for severe/refractory ISM), Avapritinib 200 mg daily (Category 1 Preferred for AdvSM with pre-treatment platelet count >=50k), Midostaurin 100 mg BID with food (rare-mastocytosis-midostaurin Category 1 Preferred for AdvSM with severe thrombocytopenia or avapritinib contraindication), Cladribine, Allogeneic HCT evaluation for fit AdvSM/MCL. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Systemic Mastocytosis Version 3.2026 (July 2026).",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "WHO diagnostic criteria for SM: Major criterion (multifocal dense infiltrates of >=15 mast cells in aggregates in bone marrow or extracutaneous tissue) plus >=1 minor criterion, OR >=3 minor criteria. Minor criteria include atypical spindle-shaped mast cells, aberrant CD25/CD2 expression, KIT D816V mutation, and baseline serum tryptase >20 ng/mL (in absence of myeloid neoplasm).",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Avapritinib 25 mg orally once daily is the Category 1 preferred therapy for moderate-to-severe ISM refractory to mediator-directed therapy, based on the PIONEER trial; FDA approved for ISM. Dose engine calculates patient-specific doses; physician decides.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "Avapritinib 200 mg orally once daily is the Category 1 preferred therapy for AdvSM with pre-treatment platelet count >=50 x 10^9/L, based on the EXPLORER and PATHFINDER trials. Obtain baseline head CT/MRI to rule out intracranial hemorrhage risk before starting.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "Midostaurin 100 mg orally twice daily with food is the Category 1 preferred therapy for AdvSM with severe thrombocytopenia (platelets <50 x 10^9/L), intracranial bleeding risk, or avapritinib contraindication.",
+      "evidence": "1"
+    },
+    "e": {
+      "text": "Allogeneic hematopoietic cell transplantation (HCT) evaluation is recommended for fit patients with AdvSM or mast cell leukemia, particularly refractory disease or rapid progression after KIT inhibitor therapy.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "mastocytosis_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic Workup",
+      "title": "Systemic Mastocytosis: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete diagnostic workup before WHO classification. Secure bone marrow tissue with definitive IHC, run mandatory ultra-sensitive KIT D816V testing, and stage organ burden.",
+      "path": "Systemic Mastocytosis / Workup",
+      "pills": [
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete history (flushing, pruritus, anaphylaxis, syncope, abdominal pain, diarrhea, bone pain) and physical examination (urticaria pigmentosa / maculopapular cutaneous mastocytosis).",
+        "Bone marrow aspirate and trephine core biopsy: morphologic examination with Wright-Giemsa and aspirate smears for atypical spindle-shaped mast cells.",
+        "Immunohistochemistry panel: tryptase, CD117 (KIT), CD25, CD2, CD30. WHO major criterion: multifocal dense infiltrates of >=15 mast cells in aggregates.",
+        "Baseline serum total tryptase (ideally >20 ng/mL minor criterion in absence of myeloid neoplasm; consider hereditary alpha-tryptasemia HaT genotyping if tryptase elevated).",
+        "Molecular testing: mandatory ultra-sensitive KIT D816V mutation assay (ASO-qPCR or ddPCR, limit of detection <=0.01% in bone marrow or peripheral blood). Broad myeloid NGS (ASXL1, SRSF2, TET2, RUNX1, CBL, EZH2, NRAS/KRAS) for mutation-enhanced prognostic scoring (MARS / IPSM).",
+        "Baseline organ assessment: CBC with differential, CMP (LFTs, albumin, renal), DEXA scan for osteopenia/osteoporosis, abdominal ultrasound or CT for hepatosplenomegaly and lymphadenopathy."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Subtype & Risk Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_subtype",
+      "linkId": "mastocytosis_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Disease Classification",
+      "title": "Systemic Mastocytosis: Subtype & Risk Stratification",
+      "section": "Diagnosis",
+      "description": "Step 2: Apply WHO diagnostic criteria, then count B-findings (disease burden without dysfunction) and C-findings (organ dysfunction requiring cytoreduction) to classify ISM vs SSM vs AdvSM.",
+      "path": "Systemic Mastocytosis / Classification",
+      "pills": [
+        "classification"
+      ],
+      "required": true,
+      "bullets": [
+        "WHO diagnosis requires Major + >=1 minor criterion OR >=3 minor criteria (major: multifocal dense aggregates of >=15 mast cells; minors: atypical morphology, aberrant CD25/CD2, KIT D816V, tryptase >20 ng/mL).",
+        "B-findings (burden, function preserved): bone marrow mast cells >30%, serum tryptase >200 ng/mL, organomegaly (hepato/splenomegaly, lymphadenopathy) without dysfunction.",
+        "C-findings (dysfunction, treat): cytopenias (ANC <1k, Hb <10 g/dL, platelets <100k), hepatomegaly with liver dysfunction or ascites, skeletal osteolyses with fractures, malabsorption with weight loss.",
+        "Indolent SM (ISM): SM criteria met, 0 C-findings. Smoldering SM (SSM): >=2 B-findings, 0 C-findings. AdvSM: >=1 C-finding present (ASM, SM-AHN, MCL) or >=20% mast cells on bone marrow smear (MCL).",
+        "Prognostic layering: mutation-enhanced scores (MARS / IPSM) using ASXL1, SRSF2, TET2 and cytopenias guide intensity of surveillance and transplant referral."
+      ],
+      "options": [
+        {
+          "id": "ism",
+          "label": "Indolent SM (ISM, no C-findings)",
+          "sets": {
+            "subtype": "ism"
+          },
+          "pills": [
+            "ISM"
+          ]
+        },
+        {
+          "id": "ssm",
+          "label": "Smoldering SM (SSM, 2+ B-findings, no C-findings)",
+          "sets": {
+            "subtype": "ssm"
+          },
+          "pills": [
+            "SSM"
+          ]
+        },
+        {
+          "id": "advsm",
+          "label": "Advanced SM (AdvSM: ASM, SM-AHN, MCL)",
+          "sets": {
+            "subtype": "advsm"
+          },
+          "pills": [
+            "AdvSM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_ism_symptoms",
+      "linkId": "mastocytosis_ism_symptoms",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "ISM Symptom Burden",
+      "title": "ISM: Mediator Symptom Burden",
+      "section": "Staging",
+      "description": "ISM confirmed (no C-findings). Grade mediator-release symptom burden and response to symptom-directed therapy to select continued mediator control versus KIT inhibitor therapy.",
+      "path": "Systemic Mastocytosis / ISM / Symptoms",
+      "pills": [
+        "ISM",
+        "symptoms"
+      ],
+      "required": true,
+      "bullets": [
+        "Mild or controlled symptoms: flushing, pruritus, GI cramping, or infrequent anaphylaxis controlled on H1/H2 blockade and trigger avoidance.",
+        "Moderate-to-severe symptoms refractory to mediator therapy: recurrent anaphylaxis, syncope, malabsorption, or bone pain persisting despite optimized H1/H2 antihistamines, leukotriene blockade, and cromolyn.",
+        "Reconfirm 0 C-findings and review tryptase trend before escalating; ISM with rising burden warrants re-biopsy to exclude progression toward SSM or AdvSM."
+      ],
+      "options": [
+        {
+          "id": "mild",
+          "label": "Mild / controlled on mediator therapy",
+          "sets": {
+            "ism_burden": "mild"
+          },
+          "pills": [
+            "ISM",
+            "mild"
+          ]
+        },
+        {
+          "id": "modsevere",
+          "label": "Moderate-to-severe, refractory to mediator therapy",
+          "sets": {
+            "ism_burden": "modsevere"
+          },
+          "pills": [
+            "ISM",
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_ism_mild",
+      "linkId": "mastocytosis_tx_ism_mild",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "ISM Mild Treatment",
+      "title": "ISM, Mild Symptoms: Mediator-Directed Therapy",
+      "section": "Treatment",
+      "description": "Symptom-directed mediator therapy with anaphylaxis preparedness and bone-health surveillance; no cytoreduction indicated without C-findings.",
+      "path": "Systemic Mastocytosis / ISM / Mild",
+      "pills": [
+        "ISM",
+        "mild",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "H1 antihistamines (e.g. cetirizine or loratadine) plus H2 antihistamines (e.g. famotidine) as the backbone of mediator blockade.",
+        "Add leukotriene inhibitor (montelukast) and oral sodium cromolyn for GI symptoms; topical steroids or calcineurin inhibitors for cutaneous lesions.",
+        "Epinephrine auto-injector for every patient plus an anaphylaxis action plan; premedication before anesthesia, surgery, and iodinated contrast.",
+        "Bone health: calcium/vitamin D, repeat DEXA, and antiresorptive therapy for osteoporosis; avoid NSAID and alcohol triggers where identified.",
+        "Surveillance: annual tryptase, CBC, CMP, and symptom review; re-biopsy and re-stage promptly if cytopenias, organomegaly, or tryptase doubling suggest progression."
+      ]
+    },
+    {
+      "id": "n_tx_ism_ava25",
+      "linkId": "mastocytosis_tx_ism_ava25",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "ISM Refractory Treatment",
+      "title": "ISM, Moderate-to-Severe Refractory: Avapritinib 25 mg Daily",
+      "section": "Treatment",
+      "description": "KIT inhibitor therapy for ISM with moderate-to-severe symptoms refractory to optimized mediator-directed therapy.",
+      "path": "Systemic Mastocytosis / ISM / Refractory",
+      "pills": [
+        "ISM",
+        "refractory",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Avapritinib 25 mg orally once daily, Category 1 Preferred based on the PIONEER trial and FDA approved for ISM; dose engine calculates patient-specific doses and physician decides.",
+        "Continue background best supportive mediator therapy during initiation; taper antihistamines only after sustained symptom response.",
+        "Monitor platelets, hemoglobin, edema, and cognitive effects; hold and dose-modify per protocol for cytopenias or intracranial symptoms.",
+        "Response assessment: validated symptom scores (ISM-SAF), serum tryptase, KIT D816V allele burden, and bone marrow mast cell burden at restaging.",
+        "Re-stage for AdvSM (CBC, CMP, imaging, marrow) if cytopenias or organ dysfunction emerge on therapy."
+      ],
+      "protocolRefs": [
+        "rare-mastocytosis-avapritinib"
+      ]
+    },
+    {
+      "id": "n_ssm_mgmt",
+      "linkId": "mastocytosis_ssm_mgmt",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "SSM Management",
+      "title": "SSM: Monitoring vs Progression",
+      "section": "Staging",
+      "description": "SSM confirmed (>=2 B-findings, 0 C-findings). Distinguish stable high-burden disease on close monitoring from progression toward AdvSM requiring cytoreduction.",
+      "path": "Systemic Mastocytosis / SSM / Management",
+      "pills": [
+        "SSM",
+        "monitoring"
+      ],
+      "required": true,
+      "bullets": [
+        "Stable SSM: high mast cell burden (tryptase >200 ng/mL, marrow >30%, organomegaly) but preserved counts, liver function, albumin, and weight.",
+        "Progression toward AdvSM: new cytopenia (ANC <1k, Hb <10, platelets <100k), liver dysfunction or ascites, weight loss with malabsorption, or pathologic fracture.",
+        "Any suspected C-finding triggers prompt re-biopsy, organ restaging, and AdvSM pathway entry; do not start cytoreduction on B-findings alone."
+      ],
+      "options": [
+        {
+          "id": "stable",
+          "label": "Stable: close monitoring, no C-findings",
+          "sets": {
+            "ssm_course": "stable"
+          },
+          "pills": [
+            "SSM",
+            "stable"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Progression: emerging C-finding or rapid burden rise",
+          "sets": {
+            "ssm_course": "progression"
+          },
+          "pills": [
+            "SSM",
+            "progression"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_ssm_monitor",
+      "linkId": "mastocytosis_tx_ssm_monitor",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "template": "end",
+      "name": "SSM Monitoring",
+      "title": "SSM, Stable: Close Monitoring + Mediator Therapy",
+      "section": "Surveillance",
+      "description": "Active surveillance of high-burden smoldering disease with mediator control; cytoreduction reserved for documented progression.",
+      "path": "Systemic Mastocytosis / SSM / Monitoring",
+      "pills": [
+        "SSM",
+        "stable",
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Mediator-targeted therapy as in ISM (H1/H2 antihistamines, leukotriene inhibitor, cromolyn, epinephrine auto-injector) for symptom control.",
+        "Surveillance every 3-6 months: CBC with differential, CMP with albumin, serum tryptase, KIT D816V allele burden; annual marrow, DEXA, and abdominal imaging.",
+        "Track MARS / IPSM variables (age, counts, ASXL1/SRSF2/TET2 status) at each visit; rising score prompts earlier restaging.",
+        "Consider cytoreduction only if a C-finding is documented or burden rises rapidly; stable B-findings alone do not mandate KIT inhibitor therapy.",
+        "Counsel on progression symptoms (bleeding, jaundice, ascites, weight loss, fractures) with an explicit return-precautions plan."
+      ],
+      "protocolRefs": [
+        "rare-mastocytosis-avapritinib"
+      ]
+    },
+    {
+      "id": "n_tx_ssm_progress",
+      "linkId": "mastocytosis_tx_ssm_progress",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "SSM Progression Treatment",
+      "title": "SSM With Progression: Re-stage as AdvSM, Consider Cytoreduction",
+      "section": "Treatment",
+      "description": "Documented or imminent C-finding in SSM: re-stage through the AdvSM pathway and consider cytoreductive therapy.",
+      "path": "Systemic Mastocytosis / SSM / Progression",
+      "pills": [
+        "SSM",
+        "progression",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Urgent re-staging: repeat marrow with KIT D816V quantification, CBC/CMP, tryptase, and abdominal imaging to confirm the C-finding.",
+        "Enter the AdvSM pathway (platelet-stratified KIT inhibitor selection); SSM with a confirmed C-finding is managed as AdvSM.",
+        "Bone-directed therapy for new osteolysis or fracture; GI and nutrition support for emerging malabsorption.",
+        "Early HCT referral for fit patients whose trajectory suggests aggressive disease, especially with high-risk myeloid co-mutations.",
+        "Do not delay AdvSM therapy while awaiting full NGS if a C-finding is clinically evident; send NGS in parallel."
+      ],
+      "protocolRefs": [
+        "rare-mastocytosis-avapritinib"
+      ]
+    },
+    {
+      "id": "n_advsm_subtype",
+      "linkId": "mastocytosis_advsm_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "AdvSM Subtype",
+      "title": "AdvSM: ASM vs SM-AHN vs MCL",
+      "section": "Staging",
+      "description": "AdvSM confirmed (>=1 C-finding or >=20% mast cells on marrow smear). Subclassify to co-manage the associated neoplasm and set transplant urgency.",
+      "path": "Systemic Mastocytosis / AdvSM / Subtype",
+      "pills": [
+        "AdvSM",
+        "subtype"
+      ],
+      "required": true,
+      "bullets": [
+        "Aggressive SM (ASM): >=1 C-finding (cytopenias, liver dysfunction/ascites, osteolysis with fracture, malabsorption) without associated hematologic neoplasm or leukemic mast cells.",
+        "SM with associated hematologic neoplasm (SM-AHN): SM plus a WHO-defined myeloid neoplasm (most often CMML, MDS/MPN, or AML); treat the AHN per its own guideline in parallel with mast cell-directed therapy.",
+        "Mast cell leukemia (MCL): >=20% mast cells on bone marrow smear, with or without circulating mast cells (leukemic vs aleukemic); most urgent transplant referral.",
+        "All three subtypes proceed to platelet-stratified KIT inhibitor selection; subtype determines co-therapy and HCT timing, not the KIT inhibitor branch."
+      ],
+      "options": [
+        {
+          "id": "asm",
+          "label": "Aggressive SM (ASM)",
+          "sets": {
+            "advsm_entity": "asm"
+          },
+          "pills": [
+            "ASM"
+          ]
+        },
+        {
+          "id": "smahn",
+          "label": "SM with associated hematologic neoplasm (SM-AHN)",
+          "sets": {
+            "advsm_entity": "smahn"
+          },
+          "pills": [
+            "SM-AHN"
+          ]
+        },
+        {
+          "id": "mcl",
+          "label": "Mast cell leukemia (MCL, >=20% mast cells on smear)",
+          "sets": {
+            "advsm_entity": "mcl"
+          },
+          "pills": [
+            "MCL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_advsm_platelets",
+      "linkId": "mastocytosis_advsm_platelets",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "AdvSM Platelet Stratification",
+      "title": "AdvSM: Platelet & Bleeding-Risk Stratification",
+      "section": "Staging",
+      "description": "Pre-treatment platelet count and intracranial bleeding risk determine avapritinib eligibility versus midostaurin; refractory or rapidly progressive disease routes to salvage and HCT.",
+      "path": "Systemic Mastocytosis / AdvSM / Platelets",
+      "pills": [
+        "AdvSM",
+        "platelets"
+      ],
+      "required": true,
+      "bullets": [
+        "Platelets >=50 x 10^9/L without intracranial bleeding risk: avapritinib-eligible; obtain baseline head CT/MRI first.",
+        "Platelets <50 x 10^9/L, intracranial bleeding risk, or avapritinib contraindication: midostaurin pathway with food.",
+        "Refractory to KIT inhibitor or rapid progression (worsening C-findings, leukemic expansion): salvage with cladribine and urgent HCT evaluation."
+      ],
+      "options": [
+        {
+          "id": "ge50",
+          "label": "Platelets >=50 x 10^9/L, no bleeding risk",
+          "sets": {
+            "platelets": "ge50"
+          },
+          "pills": [
+            "platelets-ok"
+          ]
+        },
+        {
+          "id": "lt50",
+          "label": "Platelets <50 x 10^9/L or bleeding risk / avapritinib contraindicated",
+          "sets": {
+            "platelets": "lt50"
+          },
+          "pills": [
+            "thrombocytopenia"
+          ]
+        },
+        {
+          "id": "refractory",
+          "label": "Refractory / rapid progression on or after KIT inhibitor",
+          "sets": {
+            "platelets": "refractory"
+          },
+          "pills": [
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_advsm_ava200",
+      "linkId": "mastocytosis_tx_advsm_ava200",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "AdvSM Avapritinib Treatment",
+      "title": "AdvSM, Platelets >=50: Avapritinib 200 mg Daily",
+      "section": "Treatment",
+      "description": "First-line KIT D816V inhibitor for AdvSM with adequate platelets and no intracranial bleeding risk.",
+      "path": "Systemic Mastocytosis / AdvSM / Avapritinib",
+      "pills": [
+        "AdvSM",
+        "avapritinib",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Avapritinib 200 mg orally once daily, Category 1 Preferred per EXPLORER and PATHFINDER trials; dose engine calculates patient-specific doses and physician decides.",
+        "Mandatory baseline head CT/MRI to rule out intracranial hemorrhage risk; hold for platelet fall below 50 x 10^9/L or any intracranial symptoms.",
+        "For SM-AHN, treat the associated hematologic neoplasm per its own guideline in parallel (hypomethylating agent, AML-type, or CMML-directed therapy as indicated).",
+        "Response assessment: marrow mast cell burden, serum tryptase, KIT D816V allele burden, C-finding resolution, and spleen/liver volume.",
+        "Fit patients, especially MCL: parallel allogeneic HCT referral at initiation; avapritinib response can serve as a bridge to transplant."
+      ],
+      "protocolRefs": [
+        "rare-mastocytosis-avapritinib"
+      ]
+    },
+    {
+      "id": "n_tx_advsm_mido",
+      "linkId": "mastocytosis_tx_advsm_mido",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "AdvSM Midostaurin Treatment",
+      "title": "AdvSM, Severe Thrombocytopenia: Midostaurin 100 mg BID",
+      "section": "Treatment",
+      "description": "KIT inhibitor therapy for AdvSM with severe thrombocytopenia, bleeding risk, or avapritinib contraindication.",
+      "path": "Systemic Mastocytosis / AdvSM / Midostaurin",
+      "pills": [
+        "AdvSM",
+        "midostaurin",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Midostaurin 100 mg orally twice daily with food, Category 1 Preferred for AdvSM with severe thrombocytopenia or avapritinib contraindication; dose engine calculates patient-specific doses and physician decides.",
+        "Antiemetic premedication and GI prophylaxis; monitor QTc, LFTs, cytopenias, and pulmonary symptoms during therapy.",
+        "For SM-AHN, treat the associated hematologic neoplasm per its own guideline in parallel with mast cell-directed therapy.",
+        "Response assessment: marrow mast cell burden, serum tryptase, KIT D816V allele burden, and C-finding resolution; reassess platelets for potential avapritinib switch if counts recover and bleeding risk resolves.",
+        "Fit patients with persistent C-findings: maintain parallel allogeneic HCT referral."
+      ],
+      "protocolRefs": [
+        "rare-mastocytosis-midostaurin"
+      ]
+    },
+    {
+      "id": "n_tx_advsm_salvage",
+      "linkId": "mastocytosis_tx_advsm_salvage",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "AdvSM Salvage Treatment",
+      "title": "AdvSM Refractory / Rapid Progression: Cladribine + HCT Evaluation",
+      "section": "Treatment",
+      "description": "Salvage cytoreduction and urgent transplant evaluation for KIT inhibitor-refractory or rapidly progressive AdvSM and MCL.",
+      "path": "Systemic Mastocytosis / AdvSM / Salvage",
+      "pills": [
+        "AdvSM",
+        "refractory",
+        "salvage"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Cladribine (2-CdA) cytoreduction for refractory or rapidly progressive disease, with infection prophylaxis and cytopenia support; dose engine calculates patient-specific doses and physician decides.",
+        "Urgent allogeneic HCT evaluation for fit patients, especially MCL and SM-AHN with high-risk co-mutations; donor search at salvage decision, not after response.",
+        "Re-biopsy with repeat KIT and myeloid NGS to exclude clonal evolution of the AHN component; redirect AHN therapy if the non-mast-cell clone drives progression.",
+        "Bridge leukemic MCL with cytoreduction while completing transplant workup; enroll in clinical trial where available.",
+        "Best supportive care discussion, including mediator control and bone protection, runs in parallel with salvage planning."
+      ],
+      "protocolRefs": [
+        "rare-mastocytosis-avapritinib",
+        "rare-mastocytosis-midostaurin"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_subtype",
+      "from": "n_workup",
+      "to": "n_subtype",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_subtype_ism",
+      "from": "n_subtype",
+      "to": "n_ism_symptoms",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "ism"
+      ]
+    },
+    {
+      "id": "l_subtype_ssm",
+      "from": "n_subtype",
+      "to": "n_ssm_mgmt",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "ssm"
+      ]
+    },
+    {
+      "id": "l_subtype_advsm",
+      "from": "n_subtype",
+      "to": "n_advsm_subtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "advsm"
+      ]
+    },
+    {
+      "id": "l_ism_mild",
+      "from": "n_ism_symptoms",
+      "to": "n_tx_ism_mild",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mild"
+      ]
+    },
+    {
+      "id": "l_ism_modsevere",
+      "from": "n_ism_symptoms",
+      "to": "n_tx_ism_ava25",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "modsevere"
+      ]
+    },
+    {
+      "id": "l_ssm_stable",
+      "from": "n_ssm_mgmt",
+      "to": "n_tx_ssm_monitor",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "stable"
+      ]
+    },
+    {
+      "id": "l_ssm_progression",
+      "from": "n_ssm_mgmt",
+      "to": "n_tx_ssm_progress",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "progression"
+      ]
+    },
+    {
+      "id": "l_advsm_asm",
+      "from": "n_advsm_subtype",
+      "to": "n_advsm_platelets",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "asm"
+      ]
+    },
+    {
+      "id": "l_advsm_smahn",
+      "from": "n_advsm_subtype",
+      "to": "n_advsm_platelets",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "smahn"
+      ]
+    },
+    {
+      "id": "l_advsm_mcl",
+      "from": "n_advsm_subtype",
+      "to": "n_advsm_platelets",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mcl"
+      ]
+    },
+    {
+      "id": "l_plt_ge50",
+      "from": "n_advsm_platelets",
+      "to": "n_tx_advsm_ava200",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "ge50"
+      ]
+    },
+    {
+      "id": "l_plt_lt50",
+      "from": "n_advsm_platelets",
+      "to": "n_tx_advsm_mido",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "lt50"
+      ]
+    },
+    {
+      "id": "l_plt_refractory",
+      "from": "n_advsm_platelets",
+      "to": "n_tx_advsm_salvage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "refractory"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "rare-mastocytosis-avapritinib",
+    "rare-mastocytosis-midostaurin"
+  ]
+}

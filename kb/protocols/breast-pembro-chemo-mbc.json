@@ -1,0 +1,136 @@
+{
+  "id": "breast-pembro-chemo-mbc",
+  "diseaseId": "breast_cancer",
+  "name": "Pembrolizumab + Chemotherapy (KEYNOTE-355 metastatic TNBC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "Cycled every 21 days until disease progression or unacceptable toxicity (up to 24 months / 35 cycles for pembrolizumab). Chemotherapy partner schedule depends on agent selected.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
+    "primaryStudy": "KEYNOTE-355: Cortes J, Cescon DW, Rugo HS, et al. Lancet 2020;396:1817-1828; N Engl J Med 2022;387:217-226",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-Q 3, 14 of 15)",
+    "approval": null
+  },
+  "biomarkers": {
+    "ER": "negative",
+    "PR": "negative",
+    "HER2": "negative",
+    "PDL1": "positive",
+    "note": "Requires locally recurrent inoperable or metastatic TNBC (ER-negative, PR-negative, HER2-negative) with PD-L1 expression combined positive score (CPS) \u226510 using the 22C3 pharmDx assay. Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-Q (3 of 15 and 14 of 15) (Category 1, Preferred)."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "invasive breast carcinoma (triple-negative)",
+  "premedications": [
+    {
+      "name": "Taxane premedication (if paclitaxel partner)",
+      "notes": "Dexamethasone 20 mg PO ~12h and 6h prior, plus diphenhydramine 50 mg IV and famotidine 20 mg IV 30-60 min prior to paclitaxel."
+    },
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Moderate emetic risk for carboplatin/gemcitabine partner; low emetic risk for single-agent taxane partner."
+    }
+  ],
+  "supportiveCare": [
+    "Immune-related adverse event (irAE) monitoring: screen for pneumonitis, colitis, hepatitis, endocrinopathies (hypo/hyperthyroidism, hypophysitis, adrenal insufficiency), nephritis, and severe skin reactions.",
+    "Steroid guidance for irAE: withhold pembrolizumab for Grade 2 irAEs; initiate systemic corticosteroids (prednisone 1-2 mg/kg/day equivalent) for Grade \u22652 irAEs. Permanently discontinue for Grade 3-4 irAEs (except manageable endocrinopathies).",
+    "Taxane neuropathy: assess peripheral neuropathy before each cycle."
+  ],
+  "monitoring": [
+    "Thyroid function tests (TSH, free T4) at baseline, every 3-6 weeks during treatment, and as clinically indicated",
+    "Liver function tests (ALT, AST, bilirubin) and renal function tests before each cycle",
+    "CBC with differential before each cycle",
+    "Monitor for pulmonary symptoms (cough, shortness of breath) and gastrointestinal symptoms (diarrhea, abdominal pain)"
+  ],
+  "clearanceChecks": [
+    "CBC / absolute neutrophil count (ANC \u2265 1500/mcL, platelets \u2265 100,000/mcL)",
+    "liver function tests (ALT/AST \u2264 2.5x ULN or \u2264 5x ULN if liver metastases)",
+    "serum creatinine / renal function",
+    "thyroid and endocrine status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "immune-mediated pneumonitis grade 2",
+      "drug": "pembrolizumab",
+      "action": "hold",
+      "text": "Withhold pembrolizumab. Administer systemic corticosteroids (1 to 2 mg/kg/day prednisone equivalent) followed by taper. Resume when recovered to grade \u2264 1 after steroid taper. Discontinue permanently for Grade 3 or 4 pneumonitis."
+    },
+    {
+      "condition": "immune-mediated colitis grade 2 or 3",
+      "drug": "pembrolizumab",
+      "action": "hold/discontinue",
+      "text": "Withhold pembrolizumab for Grade 2 or 3; initiate systemic corticosteroids. Resume if improves to Grade \u2264 1. Permanently discontinue for Grade 4 colitis or recurrence."
+    },
+    {
+      "condition": "neutropenia ANC < 1000/mcL on treatment day",
+      "drug": "chemotherapy partner",
+      "action": "delay",
+      "text": "Hold chemotherapy partner until ANC \u2265 1000/mcL and platelets \u2265 75,000/mcL. Dose reduce chemotherapy partner per package insert."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 14 of 15. Pembrolizumab 200 mg IV Day 1 every 21 days (or 400 mg IV every 42 days), in combination with chemotherapy partner.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "locator": "BINV-Q 3 and 14 of 15 (KEYNOTE-355)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 90,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Preferred taxane partner: PACLitaxel 90 mg/m2 IV on Days 1, 8, and 15 every 28 days (or nab-paclitaxel 100 mg/m2 d1, 8, 15 q28d; or gemcitabine 1000 mg/m2 + carboplatin AUC 2 d1, 8 q21d per KEYNOTE-355).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "locator": "BINV-Q 14 of 15",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    }
+  ]
+}

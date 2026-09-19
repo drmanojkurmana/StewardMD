@@ -1,0 +1,429 @@
+{
+  "guideline": "pediatric_cns",
+  "id": "pediatric_cns",
+  "title": "Pediatric Central Nervous System Tumors",
+  "category": "Pediatric Oncology",
+  "version": "1.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "pediatric_central_nervous_system_tumors",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2026 clinical navigator for Pediatric Central Nervous System Tumors. Covers complete clinical algorithm: Diagnostic Workup (multiplanar brain MRI with gadolinium, total neuraxis spine staging MRI, lumbar puncture for CSF cytology, maximal safe surgical resection with neuropathology consultation, integrated WHO 5th ed. neuropathology with molecular subgroups and methylation profiling, baseline audiology plus endocrine plus neurocognitive evaluation) -> Tumor Subtype and Risk Stratification (Average-Risk Medulloblastoma vs High-Risk Medulloblastoma vs Pediatric Low-Grade Glioma vs Diffuse Midline Glioma / Pediatric High-Grade Glioma vs Pediatric Ependymoma) -> Average-Risk Medulloblastoma standard CSI 23.4 Gy plus boost with maintenance chemotherapy (COG A9961 / ACNS0331) -> High-Risk Medulloblastoma high-dose CSI 36-39.6 Gy plus intensive chemotherapy (COG ACNS0332) -> pLGG resection or carboplatin/vincristine vs BRAF/MEK targeted therapy -> DMG/HGG focal radiotherapy 54-59.4 Gy plus ONC201 / targeted clinical trials with early palliative care -> Ependymoma maximal resection plus focal conformal radiotherapy 54-59.4 Gy. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Pediatric Central Nervous System Tumors Version 1.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Spine staging MRI should be obtained prior to surgery or at least 10-14 days postoperatively to avoid false-positive postoperative blood-product artifact; lumbar puncture for CSF cytology should be performed at least 14 days post-op to evaluate leptomeningeal dissemination.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Average-risk medulloblastoma requires all of: age 3 years or older, M0 negative spine MRI and CSF cytology, less than 1.5 cm2 residual tumor, and non-MYC amplified biology; any M+ dissemination, 1.5 cm2 or greater residual, or MYC amplification escalates to high-risk therapy.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Posterior fossa syndrome, ototoxicity (cisplatin), nephrotoxicity, myelosuppression, and neurocognitive sequelae of CSI require baseline audiology, renal function, CBC, endocrine panel, and neurocognitive testing with longitudinal surveillance during and after therapy.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Pediatric low-grade glioma: radiation therapy is withheld whenever feasible to spare neurocognitive morbidity; BRAF V600E-mutated tumors use dabrafenib plus trametinib and BRAF::KIAA1549 fusion tumors use tovorafenib or selumetinib per molecular testing.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Diffuse midline glioma H3 K27M-altered and pediatric high-grade glioma carry a poor prognosis despite focal radiotherapy 54-59.4 Gy; enroll in a clinical trial with blood-brain barrier penetrant agents (ONC201 / dordaviprone for H3 K27M) and integrate early palliative and supportive neuro-oncology care.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Ependymoma outcome depends on extent of resection: re-resection is advocated when safe to achieve gross total resection before postoperative focal conformal radiotherapy 54-59.4 Gy; CSI is reserved strictly for proven leptomeningeal metastasis (M+) and chemotherapy is used primarily in infants under 12-18 months to delay radiotherapy.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "pediatric_cns_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Pediatric CNS Tumors: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before tumor subtype and risk stratification. Confirm total neuraxis staging, CSF status, maximal safe resection, integrated neuropathology, and baseline function.",
+      "path": "Pediatric Central Nervous System Tumors / Workup",
+      "pills": [
+        "pediatric CNS",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "High-resolution multiplanar MRI of the brain with and without gadolinium contrast (T1, T2, FLAIR, DWI, 3D T1-post)",
+        "Total neuraxis spine staging MRI with and without contrast prior to surgery or >=10-14 days postoperatively",
+        "Lumbar puncture for CSF cytology (performed at least 14 days post-op to evaluate leptomeningeal dissemination)",
+        "Maximal safe surgical resection with image guidance and intraoperative neuropathology consultation",
+        "Integrated neuropathology: WHO 5th ed. classification, molecular subgroups (WNT, SHH, Group 3/4), DNA methylation profiling, H3 K27M, and BRAF alterations",
+        "Baseline audiology, endocrine panel (growth hormone, thyroid, adrenal axis), and neurocognitive evaluation"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Tumor Subtype and Risk Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_subtype_risk",
+      "linkId": "pediatric_cns_subtype_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Tumor Subtype and Risk Stratification",
+      "title": "Pediatric CNS Tumors: Tumor Subtype and Risk Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign the tumor subtype and risk group from age, M status, residual disease, histology, and molecular drivers; the group selects the medulloblastoma, pLGG, DMG/HGG, or ependymoma pathway.",
+      "path": "Pediatric Central Nervous System Tumors / Tumor Subtype and Risk Stratification",
+      "pills": [
+        "pediatric CNS",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Average-Risk Medulloblastoma: age 3 years or older, M0 negative spine MRI and CSF cytology, less than 1.5 cm2 residual, non-MYC amplified.",
+        "High-Risk Medulloblastoma: age 3 years or older with M+ dissemination, 1.5 cm2 or greater residual, or MYC amplification.",
+        "Pediatric Low-Grade Glioma (pLGG): pilocytic astrocytoma, ganglioglioma, or BRAF-altered glioma with indolent biology.",
+        "Diffuse Midline Glioma (DMG) / Pediatric High-Grade Glioma: H3 K27M-altered midline glioma or histologically high-grade glioma.",
+        "Pediatric Ependymoma: posterior fossa or supratentorial ependymoma stratified by extent of resection and M status."
+      ],
+      "options": [
+        {
+          "id": "medullo_ar",
+          "label": "Average-Risk Medulloblastoma (Age >=3 yrs, M0 negative spine/CSF, <1.5 cm2 residual, non-MYC)",
+          "sets": {
+            "subtype": "medulloblastoma",
+            "risk": "average"
+          },
+          "pills": [
+            "medulloblastoma",
+            "average-risk"
+          ]
+        },
+        {
+          "id": "medullo_hr",
+          "label": "High-Risk Medulloblastoma (Age >=3 yrs with M+ dissemination, >=1.5 cm2 residual, or MYC amplification)",
+          "sets": {
+            "subtype": "medulloblastoma",
+            "risk": "high"
+          },
+          "pills": [
+            "medulloblastoma",
+            "high-risk"
+          ]
+        },
+        {
+          "id": "plgg",
+          "label": "Pediatric Low-Grade Glioma (pLGG: Pilocytic Astrocytoma, Ganglioglioma, BRAF-altered)",
+          "sets": {
+            "subtype": "plgg"
+          },
+          "pills": [
+            "pLGG",
+            "low-grade glioma"
+          ]
+        },
+        {
+          "id": "dmg_hgg",
+          "label": "Diffuse Midline Glioma (DMG) / Pediatric High-Grade Glioma (H3 K27M altered)",
+          "sets": {
+            "subtype": "dmg_hgg"
+          },
+          "pills": [
+            "DMG",
+            "high-grade glioma",
+            "H3 K27M"
+          ]
+        },
+        {
+          "id": "ependymoma",
+          "label": "Pediatric Ependymoma (Posterior Fossa or Supratentorial)",
+          "sets": {
+            "subtype": "ependymoma"
+          },
+          "pills": [
+            "ependymoma"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_medullo_ar_tx",
+      "linkId": "pediatric_cns_medullo_ar_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Average-Risk Medulloblastoma Treatment",
+      "title": "Average-Risk Medulloblastoma: Standard CSI Plus Adjuvant Chemotherapy",
+      "section": "Treatment",
+      "description": "Standard-dose craniospinal irradiation with tumor bed boost followed by maintenance multi-agent chemotherapy for average-risk medulloblastoma (COG A9961 / ACNS0331).",
+      "path": "Pediatric Central Nervous System Tumors / Average-Risk Medulloblastoma / Treatment",
+      "pills": [
+        "medulloblastoma",
+        "average-risk",
+        "CSI",
+        "chemotherapy"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "Craniospinal irradiation (CSI) 23.4 Gy with posterior fossa / tumor bed boost to 54-55.8 Gy per COG A9961 / ACNS0331.",
+        "Maintenance multi-agent chemotherapy: Cisplatin 75 mg/m2 plus Lomustine (CCNU) 75 mg/m2 plus Vincristine 1.5 mg/m2 alternating with Cyclophosphamide 1000 mg/m2/day for 6-9 cycles.",
+        "Expected outcome: 5-year overall survival above 80-85% for fully staged average-risk disease completing combined-modality therapy.",
+        "Supportive care: audiology and renal monitoring on cisplatin, CBC with dose holds, neuropathy assessment on vincristine, growth and endocrine surveillance after CSI.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Standard CSI (23.4 Gy + Boost) + Adjuvant Chemotherapy (Cisplatin/CCNU/Vincristine)",
+      "protocolRefs": [
+        "ped-cns-medulloblastoma"
+      ]
+    },
+    {
+      "id": "n_medullo_hr_tx",
+      "linkId": "pediatric_cns_medullo_hr_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "High-Risk Medulloblastoma Treatment",
+      "title": "High-Risk Medulloblastoma: High-Dose CSI Plus Intensive Chemotherapy",
+      "section": "Treatment",
+      "description": "High-dose craniospinal irradiation with tumor bed and metastatic site boost plus intensive maintenance chemotherapy for high-risk medulloblastoma (COG ACNS0332).",
+      "path": "Pediatric Central Nervous System Tumors / High-Risk Medulloblastoma / Treatment",
+      "pills": [
+        "medulloblastoma",
+        "high-risk",
+        "CSI",
+        "chemotherapy"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "High-dose craniospinal irradiation (CSI) 36-39.6 Gy with tumor bed and metastatic site boost to 54-55.8 Gy.",
+        "Intensive maintenance chemotherapy: Cisplatin plus Etoposide plus Cyclophosphamide plus Vincristine with or without radiosensitizing daily Carboplatin during RT per COG ACNS0332.",
+        "Restage neuraxis MRI and CSF cytology after chemoradiotherapy; consider stem-cell-supported or trial intensification for residual or progressive metastatic disease.",
+        "Supportive care: heightened myelosuppression, ototoxicity, nephrotoxicity, and neurocognitive monitoring with baseline and serial audiology, endocrine, and neurocognitive evaluation.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "High-Dose CSI (36 Gy + Boost) + Intensive Multiagent Chemotherapy (COG ACNS0332)",
+      "protocolRefs": [
+        "ped-cns-medulloblastoma"
+      ]
+    },
+    {
+      "id": "n_plgg_tx",
+      "linkId": "pediatric_cns_plgg_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Pediatric Low-Grade Glioma Treatment",
+      "title": "pLGG: Resection or Carboplatin/Vincristine vs BRAF/MEK Targeted Therapy",
+      "section": "Treatment",
+      "description": "Surgery-first management for pediatric low-grade glioma with carboplatin plus vincristine or BRAF/MEK targeted therapy for unresectable or progressive disease; radiation withheld to spare neurocognition.",
+      "path": "Pediatric Central Nervous System Tumors / Pediatric Low-Grade Glioma / Treatment",
+      "pills": [
+        "pLGG",
+        "low-grade glioma",
+        "targeted therapy"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Complete surgical resection with observation alone when gross total resection is achieved without adjuvant therapy.",
+        "For unresectable, incompletely resected, or progressive tumors: first-line chemotherapy with Carboplatin plus Vincristine (Packer regimen).",
+        "Targeted therapy by molecular driver: Dabrafenib plus Trametinib for BRAF V600E mutation, or Tovorafenib / Selumetinib for BRAF::KIAA1549 fusion.",
+        "Radiation therapy withheld whenever feasible to spare neurocognitive morbidity; reserve for select refractory cases after multidisciplinary review.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Surgical Resection Alone or Carboplatin/Vincristine vs Targeted BRAF/MEK Inhibitors",
+      "protocolRefs": [
+        "ped-cns-medulloblastoma"
+      ]
+    },
+    {
+      "id": "n_dmg_hgg_tx",
+      "linkId": "pediatric_cns_dmg_hgg_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "DMG / Pediatric High-Grade Glioma Treatment",
+      "title": "DMG/HGG: Focal Radiotherapy Plus Targeted Clinical Trials",
+      "section": "Treatment",
+      "description": "Focal conformal radiotherapy with clinical trial integration of blood-brain barrier penetrant targeted agents for diffuse midline and pediatric high-grade glioma, with re-irradiation and early palliative care.",
+      "path": "Pediatric Central Nervous System Tumors / DMG-HGG / Treatment",
+      "pills": [
+        "DMG",
+        "high-grade glioma",
+        "H3 K27M",
+        "radiotherapy"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Focal external beam radiotherapy 54 to 59.4 Gy in 1.8 Gy fractions to the primary tumor volume.",
+        "Integration of clinical trials with blood-brain barrier penetrant targeted agents (ONC201 / dordaviprone for H3 K27M mutant DMG).",
+        "Re-irradiation for symptomatic progression in selected patients after multidisciplinary neuro-oncology review.",
+        "Early palliative and supportive neuro-oncology care integrated from diagnosis for symptom management and family support.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Focal Conformal Radiotherapy (54-59.4 Gy) +/- ONC201 / Targeted Clinical Trials",
+      "protocolRefs": [
+        "ped-cns-medulloblastoma"
+      ]
+    },
+    {
+      "id": "n_ependymoma_tx",
+      "linkId": "pediatric_cns_ependymoma_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Pediatric Ependymoma Treatment",
+      "title": "Ependymoma: Maximal Resection Plus Focal Conformal Radiotherapy",
+      "section": "Treatment",
+      "description": "Maximal safe resection with re-resection when feasible followed by postoperative focal conformal radiotherapy for pediatric ependymoma; CSI only for proven leptomeningeal metastasis.",
+      "path": "Pediatric Central Nervous System Tumors / Ependymoma / Treatment",
+      "pills": [
+        "ependymoma",
+        "surgery",
+        "radiotherapy"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "f"
+      ],
+      "bullets": [
+        "Maximal safe surgical resection with re-resection advocated when safe to achieve gross total resection.",
+        "Postoperative focal conformal radiotherapy 54 to 59.4 Gy to the tumor bed with 5-10 mm margin.",
+        "CSI reserved strictly for proven leptomeningeal metastasis (M+); standard M0 disease does not receive CSI.",
+        "Chemotherapy used primarily for infants under 12-18 months to delay radiotherapy, with deferred focal RT on progression or with age.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Maximal Gross Total Resection + Postoperative Focal Conformal Radiotherapy (54-59.4 Gy)",
+      "protocolRefs": [
+        "ped-cns-medulloblastoma"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_subtype",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_subtype_risk",
+      "toNodeId": "n_subtype_risk",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_subtype_medullo_ar",
+      "from": "n_subtype_risk",
+      "fromNodeId": "n_subtype_risk",
+      "to": "n_medullo_ar_tx",
+      "toNodeId": "n_medullo_ar_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "medullo_ar",
+      "fromOptions": [
+        "medullo_ar"
+      ]
+    },
+    {
+      "id": "l_subtype_medullo_hr",
+      "from": "n_subtype_risk",
+      "fromNodeId": "n_subtype_risk",
+      "to": "n_medullo_hr_tx",
+      "toNodeId": "n_medullo_hr_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "medullo_hr",
+      "fromOptions": [
+        "medullo_hr"
+      ]
+    },
+    {
+      "id": "l_subtype_plgg",
+      "from": "n_subtype_risk",
+      "fromNodeId": "n_subtype_risk",
+      "to": "n_plgg_tx",
+      "toNodeId": "n_plgg_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "plgg",
+      "fromOptions": [
+        "plgg"
+      ]
+    },
+    {
+      "id": "l_subtype_dmg_hgg",
+      "from": "n_subtype_risk",
+      "fromNodeId": "n_subtype_risk",
+      "to": "n_dmg_hgg_tx",
+      "toNodeId": "n_dmg_hgg_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "dmg_hgg",
+      "fromOptions": [
+        "dmg_hgg"
+      ]
+    },
+    {
+      "id": "l_subtype_ependymoma",
+      "from": "n_subtype_risk",
+      "fromNodeId": "n_subtype_risk",
+      "to": "n_ependymoma_tx",
+      "toNodeId": "n_ependymoma_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "ependymoma",
+      "fromOptions": [
+        "ependymoma"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "ped-cns-medulloblastoma"
+  ]
+}

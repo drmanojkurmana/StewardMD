@@ -38,7 +38,7 @@ async function initialAuthHeader(ctx) {
 }
 
 export const fhirR4Connector = {
-  meta: { id: "fhir-r4", name: "FHIR R4 (SMART-on-FHIR)", version: "1.0", profile: "pull", kinds: ["fhir-r4"], sccmVersion: "1.0" },
+  meta: { id: "fhir-r4", name: "FHIR R4 (SMART-on-FHIR)", version: "1.0", profile: "pull", kinds: ["fhir-r4"], sccmVersion: "1.1" },
 
   authenticate: async (ctx) => {
     if (!smartOn(ctx)) return { ok: true };                                            // sandbox: token (if any) via secrets("bearer")

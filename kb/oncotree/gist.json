@@ -1,20 +1,41 @@
 {
   "guideline": "gist",
   "title": "Gastrointestinal Stromal Tumor (GIST)",
-  "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "2.0.0",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2026)",
+  "navigatorVersion": "3.2.0",
   "diseaseId": "gist_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "ONCOTREE navigator DRAFT for GIST. Full pathway: workup and molecular typing -> clinical state (localized / unresectable-metastatic / progressed / recurrence / surveillance). Localized branch routes resectability -> mutation-directed neoadjuvant with a response gate -> surgery -> recurrence-risk stratification -> mutation-directed adjuvant with a completion gate -> surveillance. Advanced branch is a genotype-selected first line followed by a response / line-of-therapy sub-tree (first line -> response -> dose-escalate vs switch -> second-line sunitinib -> third-line regorafenib -> fourth-line ripretinib -> beyond). Systemic leaves reference existing StewardMD Standard Protocols by id where a GIST-specific dose card exists (imatinib / sunitinib / regorafenib); avapritinib and ripretinib are shown as guidance because the library holds no GIST-dose card for them. Structural pathway consistent with standard oncology references; original wording, no proprietary guideline text reproduced. DRAFT - not clinically activated; the physician decides and the dose engine computes patient doses.",
-  "sourceNote": "Structural pathway consistent with standard oncology references for GIST (NCCN / DeVita / Harrison). Original wording. Systemic-therapy leaves reference existing StewardMD Standard Protocols; the dose engine computes patient doses. No proprietary guideline text reproduced. Invents no dose or regimen.",
-  "startNodeIds": ["n_workup"],
+  "provenanceNote": "NCCN Guidelines Version 1.2026 clinical navigator for Gastrointestinal Stromal Tumors (GIST). Implements Workup First diagnostic checklists with mandatory KIT/PDGFRA mutational triage, modified NIH/Miettinen recurrence-risk stratification, 36-month adjuvant imatinib 400 mg daily for high-risk resected GIST (Category 1 preferred, SSGXVII/AIO trial), Avapritinib 300 mg daily as Category 1 preferred frontline for PDGFRA exon 18 D842V mutation (NAVIGATOR trial), 1L Imatinib 400 mg daily with dose escalation to 800 mg daily for KIT exon 9 mutation, 2L Sunitinib, 3L Regorafenib (GRID trial, Category 1), and 4L Ripretinib 150 mg daily (INVICTUS trial, Category 1). Systemic-therapy leaves reference existing StewardMD Standard Protocols (gi-gist-imatinib, gist-avapritinib, gi-gist-sunitinib, gi-gist-regorafenib, gist-ripretinib); the dose engine computes patient doses. DRAFT - clinical decision support; physician decides.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Gastrointestinal Stromal Tumors Version 1.2026 (January 13, 2026).",
+  "startNodeIds": [
+    "n_workup"
+  ],
   "footnotes": {
-    "a": { "text": "Recurrence risk is estimated from tumor size, mitotic rate (per 5 sq mm / 50 HPF) and primary site; non-gastric (small-bowel, rectal) sites and tumor rupture carry higher risk at equal size and mitotic count.", "evidence": "2A" },
-    "b": { "text": "For resected high-risk KIT-mutant GIST, adjuvant imatinib for at least 3 years improves recurrence-free and overall survival versus shorter courses.", "evidence": "1" },
-    "c": { "text": "PDGFRA exon 18 D842V is intrinsically imatinib-resistant; avapritinib is the preferred agent and imatinib offers no benefit. No GIST-dose card exists in this library for avapritinib, so it is shown as guidance.", "evidence": "2A" },
-    "d": { "text": "Mutation testing (KIT exons 9/11/13/17, PDGFRA exon 18 including D842V, and SDHB IHC where KIT/PDGFRA wild-type) should precede any systemic decision, since genotype predicts TKI sensitivity and starting dose.", "evidence": "2A" },
-    "e": { "text": "Assess TKI response by CT: a fall in tumor density (Choi-type response) can indicate benefit even without RECIST shrinkage; confirm true progression and rule out non-adherence before changing lines.", "evidence": "2A" }
+    "a": {
+      "text": "Recurrence risk is estimated from tumor size, mitotic rate (per 5 sq mm / 50 HPF) and primary site; non-gastric (small-bowel, rectal) sites and tumor rupture carry higher risk at equal size and mitotic count.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "For resected high-risk GIST, adjuvant imatinib 400 mg daily for 36 months (3 years) is Category 1 preferred per the SSGXVII/AIO trial, improving recurrence-free and overall survival versus 12 months.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "PDGFRA exon 18 D842V is intrinsically imatinib-resistant; avapritinib 300 mg daily is the Category 1 preferred frontline agent (NAVIGATOR trial). Dosing per StewardMD Standard Protocol gist-avapritinib.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "Mandatory molecular testing before any systemic decision: KIT exons 9, 11, 13, 17 and PDGFRA exons 12, 14, 18 (specifically D842V); in KIT/PDGFRA wild-type GIST add SDH subunit IHC (SDHA/B/C/D loss), BRAF V600E, and NTRK fusions. Genotype predicts TKI sensitivity and starting dose.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Assess TKI response by CT: a fall in tumor density (Choi-type response) can indicate benefit even without RECIST shrinkage; confirm true progression and rule out non-adherence before changing lines.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "After imatinib and sunitinib, regorafenib 160 mg daily 3 weeks on / 1 week off is Category 1 third line (GRID trial); after three prior TKIs, ripretinib 150 mg daily is Category 1 fourth line (INVICTUS trial).",
+      "evidence": "1"
+    }
   },
   "nodes": [
     {
@@ -28,19 +49,47 @@
       "section": "Workup",
       "description": "Confirm GIST histology, define extent, and obtain molecular status before any treatment decision.",
       "path": "GIST / Workup",
-      "pills": ["workup"],
+      "pills": [
+        "workup"
+      ],
       "required": true,
-      "footnotes": ["d"],
+      "footnotes": [
+        "d"
+      ],
       "bullets": [
-        { "label": "History, exam, performance status; GI bleeding / mass / obstruction symptoms" },
-        { "label": "Contrast CT of abdomen and pelvis; chest imaging for staging", "sub": "MRI for rectal / pelvic primaries" },
-        { "label": "Biopsy with immunohistochemistry", "sub": "CD117 (KIT) and/or DOG1 positive; report mitotic rate per 5 sq mm" },
-        { "label": "Endoscopic ultrasound-guided biopsy for gastric / esophagogastric lesions when feasible" },
-        { "label": "Molecular testing before systemic therapy", "sub": "KIT (9, 11, 13, 17), PDGFRA (exon 18 incl. D842V); SDHB IHC if KIT/PDGFRA wild-type" },
-        { "label": "Multidisciplinary review with a sarcoma / GIST-experienced team" }
+        {
+          "label": "Contrast-enhanced CT of abdomen and pelvis to define primary size, extent, and metastases",
+          "sub": "Chest imaging to complete staging; MRI for rectal or pelvic primaries"
+        },
+        {
+          "label": "Endoscopic ultrasound (EUS) with core needle biopsy for gastrointestinal submucosal masses",
+          "sub": "IHC: CD117 (KIT) and/or DOG1 positive confirms GIST; report mitotic rate"
+        },
+        {
+          "label": "Mandatory molecular mutational testing before any systemic decision",
+          "sub": "KIT exons 9, 11, 13, 17; PDGFRA exons 12, 14, 18, specifically evaluating for D842V"
+        },
+        {
+          "label": "In KIT/PDGFRA wild-type GIST: SDH subunit IHC (loss of SDHA, SDHB, SDHC, or SDHD)",
+          "sub": "Plus BRAF V600E and NTRK fusion testing"
+        },
+        {
+          "label": "High-risk pathology documentation on every case",
+          "sub": "Tumor size, mitotic rate per 50 HPF (or per 5 mm2), anatomic primary site (gastric vs non-gastric/small bowel), and presence of tumor rupture"
+        },
+        {
+          "label": "History, exam, performance status; GI bleeding, mass, or obstruction symptoms"
+        },
+        {
+          "label": "Multidisciplinary review with a sarcoma or GIST-experienced team"
+        }
       ],
       "options": [
-        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Risk Stratification & Mutational Triage",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -54,14 +103,61 @@
       "section": "Staging",
       "description": "Choose the current clinical state; this selects the pathway (localized surgery, advanced systemic, progression sequencing, recurrence, or surveillance).",
       "path": "GIST / State",
-      "pills": ["disease state"],
+      "pills": [
+        "disease state"
+      ],
       "required": true,
       "options": [
-        { "id": "localized", "label": "Localized, no metastases", "sets": { "diseaseState": "localized" }, "pills": ["localized"] },
-        { "id": "met_naive", "label": "Unresectable / metastatic, treatment-naive", "sets": { "diseaseState": "metastatic" }, "pills": ["metastatic"] },
-        { "id": "met_progressed", "label": "Metastatic, already progressed on prior TKI", "sets": { "diseaseState": "progressed" }, "pills": ["progression"] },
-        { "id": "recurrence", "label": "Recurrence after prior resection", "sets": { "diseaseState": "recurrence" }, "pills": ["recurrence"] },
-        { "id": "followup", "label": "Post-treatment surveillance", "sets": { "diseaseState": "followup" }, "pills": ["surveillance"] }
+        {
+          "id": "localized",
+          "label": "Localized, no metastases",
+          "sets": {
+            "diseaseState": "localized"
+          },
+          "pills": [
+            "localized"
+          ]
+        },
+        {
+          "id": "met_naive",
+          "label": "Unresectable / metastatic, treatment-naive",
+          "sets": {
+            "diseaseState": "metastatic"
+          },
+          "pills": [
+            "metastatic"
+          ]
+        },
+        {
+          "id": "met_progressed",
+          "label": "Metastatic, already progressed on prior TKI",
+          "sets": {
+            "diseaseState": "progressed"
+          },
+          "pills": [
+            "progression"
+          ]
+        },
+        {
+          "id": "recurrence",
+          "label": "Recurrence after prior resection",
+          "sets": {
+            "diseaseState": "recurrence"
+          },
+          "pills": [
+            "recurrence"
+          ]
+        },
+        {
+          "id": "followup",
+          "label": "Post-treatment surveillance",
+          "sets": {
+            "diseaseState": "followup"
+          },
+          "pills": [
+            "surveillance"
+          ]
+        }
       ]
     },
     {
@@ -75,7 +171,9 @@
       "section": "Staging",
       "description": "Decide whether complete (R0) resection is achievable now with acceptable, function-preserving morbidity.",
       "path": "GIST / Localized / Resectability",
-      "pills": ["resectability"],
+      "pills": [
+        "resectability"
+      ],
       "required": true,
       "bullets": [
         "Tumors < 2 cm without high-risk EUS features may be observed with periodic endoscopy",
@@ -83,9 +181,36 @@
         "Avoid tumor rupture at surgery - rupture upstages any GIST to high recurrence risk"
       ],
       "options": [
-        { "id": "observe_small", "label": "Very small (< 2 cm) incidental gastric, no high-risk EUS features", "sets": { "resectable": "observe" }, "pills": ["observe"] },
-        { "id": "resectable", "label": "Upfront complete resection feasible", "sets": { "resectable": "yes" }, "pills": ["resectable"] },
-        { "id": "marginal", "label": "Marginally resectable - would benefit from downsizing", "sets": { "resectable": "marginal" }, "pills": ["borderline"] }
+        {
+          "id": "observe_small",
+          "label": "Very small (< 2 cm) incidental gastric, no high-risk EUS features",
+          "sets": {
+            "resectable": "observe"
+          },
+          "pills": [
+            "observe"
+          ]
+        },
+        {
+          "id": "resectable",
+          "label": "Upfront complete resection feasible",
+          "sets": {
+            "resectable": "yes"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "marginal",
+          "label": "Marginally resectable - would benefit from downsizing",
+          "sets": {
+            "resectable": "marginal"
+          },
+          "pills": [
+            "borderline"
+          ]
+        }
       ]
     },
     {
@@ -99,9 +224,14 @@
       "section": "Surveillance",
       "description": "Sub-2 cm gastric GIST without high-risk features may be followed rather than resected.",
       "path": "GIST / Localized / Observe",
-      "pills": ["observe", "surveillance"],
+      "pills": [
+        "observe",
+        "surveillance"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
+      "evidenceCategory": [
+        "2A"
+      ],
       "bullets": [
         "Periodic endoscopic ultrasound to track size and echofeatures",
         "Resect on growth, symptoms, or new high-risk features (irregular margin, cystic spaces, heterogeneity)",
@@ -119,12 +249,36 @@
       "section": "Treatment",
       "description": "Genotype predicts whether neoadjuvant imatinib will shrink the tumor before surgery.",
       "path": "GIST / Localized / Neoadjuvant",
-      "pills": ["neoadjuvant", "biomarker"],
+      "pills": [
+        "neoadjuvant",
+        "biomarker"
+      ],
       "required": true,
-      "footnotes": ["c", "d"],
+      "footnotes": [
+        "c",
+        "d"
+      ],
       "options": [
-        { "id": "kit_sensitive", "label": "KIT exon 11 / 9 (imatinib-sensitive)", "sets": { "biomarkers.KIT": "sensitive" }, "pills": ["KIT+"] },
-        { "id": "resistant", "label": "PDGFRA D842V or imatinib-resistant genotype", "sets": { "biomarkers.PDGFRA": "D842V" }, "pills": ["resistant"] }
+        {
+          "id": "kit_sensitive",
+          "label": "KIT exon 11 / 9 (imatinib-sensitive)",
+          "sets": {
+            "biomarkers.KIT": "sensitive"
+          },
+          "pills": [
+            "KIT+"
+          ]
+        },
+        {
+          "id": "resistant",
+          "label": "PDGFRA D842V or imatinib-resistant genotype",
+          "sets": {
+            "biomarkers.PDGFRA": "D842V"
+          },
+          "pills": [
+            "resistant"
+          ]
+        }
       ]
     },
     {
@@ -138,17 +292,28 @@
       "section": "Treatment",
       "description": "Imatinib to best radiologic response, then reassess for function-preserving resection.",
       "path": "GIST / Localized / Neoadjuvant imatinib",
-      "pills": ["neoadjuvant", "KIT+", "treatment"],
+      "pills": [
+        "neoadjuvant",
+        "KIT+",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["d", "e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d",
+        "e"
+      ],
       "bullets": [
         "Imatinib until best radiologic response, typically 6-12 months, monitored by CT",
         "Confirm KIT sensitivity on the molecular report before starting",
         "Do not wait for progression - operate at maximal response (next step is the response gate)",
         "Continue imatinib perioperatively; resume the adjuvant course after recovery"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_neoadj_response",
@@ -161,13 +326,44 @@
       "section": "Treatment",
       "description": "Restage after neoadjuvant imatinib; response determines whether resection now proceeds.",
       "path": "GIST / Localized / Neoadjuvant / Response",
-      "pills": ["restaging"],
+      "pills": [
+        "restaging"
+      ],
       "required": true,
-      "footnotes": ["e"],
+      "footnotes": [
+        "e"
+      ],
       "options": [
-        { "id": "responded", "label": "Responded - now resectable / organ-preserving", "sets": { "neoResponse": "responded" }, "pills": ["response"] },
-        { "id": "stable", "label": "Stable at best response - resectable", "sets": { "neoResponse": "stable" }, "pills": ["stable"] },
-        { "id": "progressed", "label": "Progressed / still unresectable", "sets": { "neoResponse": "progressed" }, "pills": ["progression"] }
+        {
+          "id": "responded",
+          "label": "Responded - now resectable / organ-preserving",
+          "sets": {
+            "neoResponse": "responded"
+          },
+          "pills": [
+            "response"
+          ]
+        },
+        {
+          "id": "stable",
+          "label": "Stable at best response - resectable",
+          "sets": {
+            "neoResponse": "stable"
+          },
+          "pills": [
+            "stable"
+          ]
+        },
+        {
+          "id": "progressed",
+          "label": "Progressed / still unresectable",
+          "sets": {
+            "neoResponse": "progressed"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
       ]
     },
     {
@@ -181,15 +377,22 @@
       "section": "Treatment",
       "description": "Function-preserving resection at maximal response, then recurrence-risk stratification for adjuvant therapy.",
       "path": "GIST / Localized / Neoadjuvant / Resect",
-      "pills": ["surgery", "treatment"],
+      "pills": [
+        "surgery",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
+      "evidenceCategory": [
+        "2A"
+      ],
       "bullets": [
         "Complete (R0) resection at maximal response; avoid tumor rupture",
         "Resume imatinib after recovery; total peri-operative plus adjuvant exposure is individualized",
         "Then stratify residual recurrence risk to set adjuvant duration (next step)"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_tx_neoadj_prog",
@@ -202,17 +405,27 @@
       "section": "Treatment",
       "description": "Progression or persistent unresectability converts management to the advanced-disease pathway.",
       "path": "GIST / Localized / Neoadjuvant / Progression",
-      "pills": ["progression", "treatment"],
+      "pills": [
+        "progression",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
         "Re-confirm genotype and adherence; rule out pseudo-progression by density before switching",
         "Manage as unresectable / metastatic GIST - move to the advanced systemic pathway",
         "Reconsider surgery only if later downsizing restores an R0 option"
       ],
       "linkTo": "n_met_mutation",
-      "linkLabel": "Continue in the advanced-disease pathway (systemic sequencing)"
+      "linkLabel": "Continue in the advanced-disease pathway (systemic sequencing)",
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_neoadj_surgery",
@@ -225,14 +438,24 @@
       "section": "Treatment",
       "description": "Imatinib is unlikely to downsize a D842V / resistant tumor; plan resection directly, then stratify risk.",
       "path": "GIST / Localized / Upfront surgery",
-      "pills": ["resistant", "treatment"],
+      "pills": [
+        "resistant",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["c"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
       "bullets": [
         "Proceed to R0 resection if achievable; neoadjuvant imatinib offers no benefit for D842V",
         "For D842V requiring downsizing, consider avapritinib in a trial / expert setting (no dose card here - guidance only)",
         "Re-stage after multidisciplinary review, then stratify recurrence risk (next step)"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib"
       ]
     },
     {
@@ -244,28 +467,95 @@
       "name": "Recurrence-risk stratification",
       "title": "Resected localized GIST: recurrence-risk stratification",
       "section": "Staging",
-      "description": "After complete resection, estimate recurrence risk from size, mitotic rate and site to decide on adjuvant therapy.",
+      "description": "After complete resection, estimate recurrence risk by modified NIH / Miettinen criteria (size, mitotic rate, site, rupture) to decide on adjuvant therapy. High risk: tumor > 5 cm with > 5 mitoses per 50 HPF, or tumor > 10 cm at any mitotic rate, or tumor rupture at any size.",
       "path": "GIST / Localized / Risk",
-      "pills": ["risk"],
+      "pills": [
+        "risk"
+      ],
       "required": true,
-      "footnotes": ["a"],
+      "footnotes": [
+        "a"
+      ],
       "tables": [
         {
           "title": "Risk of recurrence by size, mitotic rate and site (approximate)",
-          "headers": ["Size", "Mitotic rate", "Gastric", "Non-gastric"],
+          "headers": [
+            "Size",
+            "Mitotic rate",
+            "Gastric",
+            "Non-gastric"
+          ],
           "rows": [
-            ["<= 2 cm", "<= 5 / 5 sq mm", "Very low / none", "Low"],
-            ["2-5 cm", "<= 5 / 5 sq mm", "Low", "Intermediate"],
-            ["5-10 cm", "<= 5 / 5 sq mm", "Intermediate", "High"],
-            ["> 5 cm", "> 5 / 5 sq mm", "High", "High"],
-            ["Any (ruptured)", "Any", "High", "High"]
+            [
+              "<= 2 cm",
+              "<= 5 / 50 HPF",
+              "Very low / none",
+              "Low"
+            ],
+            [
+              "2-5 cm",
+              "<= 5 / 50 HPF",
+              "Low",
+              "Intermediate"
+            ],
+            [
+              "5-10 cm",
+              "<= 5 / 50 HPF",
+              "Intermediate",
+              "High"
+            ],
+            [
+              "> 5 cm",
+              "> 5 / 50 HPF",
+              "High",
+              "High"
+            ],
+            [
+              "> 10 cm",
+              "Any",
+              "High",
+              "High"
+            ],
+            [
+              "Any (ruptured)",
+              "Any",
+              "High",
+              "High"
+            ]
           ]
         }
       ],
       "options": [
-        { "id": "low", "label": "Very-low / low risk", "sets": { "riskGroup": "low" }, "pills": ["low risk"] },
-        { "id": "intermediate", "label": "Intermediate risk", "sets": { "riskGroup": "intermediate" }, "pills": ["intermediate"] },
-        { "id": "high", "label": "High risk", "sets": { "riskGroup": "high" }, "pills": ["high risk"] }
+        {
+          "id": "low",
+          "label": "Very-low / low risk",
+          "sets": {
+            "riskGroup": "low"
+          },
+          "pills": [
+            "low risk"
+          ]
+        },
+        {
+          "id": "intermediate",
+          "label": "Intermediate risk",
+          "sets": {
+            "riskGroup": "intermediate"
+          },
+          "pills": [
+            "intermediate"
+          ]
+        },
+        {
+          "id": "high",
+          "label": "High risk",
+          "sets": {
+            "riskGroup": "high"
+          },
+          "pills": [
+            "high risk"
+          ]
+        }
       ]
     },
     {
@@ -279,13 +569,21 @@
       "section": "Surveillance",
       "description": "Complete resection with low recurrence risk; adjuvant TKI is not indicated.",
       "path": "GIST / Localized / Low risk",
-      "pills": ["low risk", "surveillance"],
+      "pills": [
+        "low risk",
+        "surveillance"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
+      "evidenceCategory": [
+        "2A"
+      ],
       "bullets": [
         "No adjuvant imatinib",
         "History, exam and abdominopelvic CT every 6 months for 5 years, then annually",
         "Return to the recurrence pathway on any new lesion (next step is the surveillance schedule)"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib"
       ]
     },
     {
@@ -299,17 +597,41 @@
       "section": "Treatment",
       "description": "Adjuvant imatinib is discretionary at intermediate risk; weigh site, mutation, rupture and patient factors.",
       "path": "GIST / Localized / Intermediate / Decision",
-      "pills": ["intermediate"],
+      "pills": [
+        "intermediate"
+      ],
       "required": true,
-      "footnotes": ["a", "b", "c"],
+      "footnotes": [
+        "a",
+        "b",
+        "c"
+      ],
       "bullets": [
         "Non-gastric primary or tumor rupture pushes risk toward the high-risk group - favor adjuvant imatinib",
         "Confirm KIT sensitivity first; PDGFRA D842V derives no benefit and should be observed",
         "Gastric, intact, KIT exon 11 intermediate tumors are reasonable to observe"
       ],
       "options": [
-        { "id": "give", "label": "Give adjuvant imatinib (higher-risk features)", "sets": { "adjuvant": "yes" }, "pills": ["adjuvant"] },
-        { "id": "observe", "label": "Observe (lower-risk features / D842V)", "sets": { "adjuvant": "no" }, "pills": ["observe"] }
+        {
+          "id": "give",
+          "label": "Give adjuvant imatinib (higher-risk features)",
+          "sets": {
+            "adjuvant": "yes"
+          },
+          "pills": [
+            "adjuvant"
+          ]
+        },
+        {
+          "id": "observe",
+          "label": "Observe (lower-risk features / D842V)",
+          "sets": {
+            "adjuvant": "no"
+          },
+          "pills": [
+            "observe"
+          ]
+        }
       ]
     },
     {
@@ -323,16 +645,26 @@
       "section": "Treatment",
       "description": "Adjuvant imatinib chosen for higher-risk intermediate features; then a completion gate.",
       "path": "GIST / Localized / Intermediate / Adjuvant",
-      "pills": ["intermediate", "adjuvant", "treatment"],
+      "pills": [
+        "intermediate",
+        "adjuvant",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
-        "Adjuvant imatinib, standard starting dose; typical duration at least 3 years",
+        "Adjuvant imatinib 400 mg daily; typical duration at least 3 years for higher-risk intermediate features",
         "Confirm KIT sensitivity before starting; monitor tolerance and adherence",
         "Surveillance CT during and after therapy (next step is the completion gate)"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_int_observe",
@@ -345,14 +677,24 @@
       "section": "Surveillance",
       "description": "Lower-risk intermediate features (or D842V) followed without adjuvant TKI.",
       "path": "GIST / Localized / Intermediate / Observe",
-      "pills": ["intermediate", "surveillance"],
+      "pills": [
+        "intermediate",
+        "surveillance"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["c"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
       "bullets": [
         "No adjuvant imatinib for gastric, intact, lower-risk intermediate tumors or D842V",
         "CT abdomen / pelvis every 3-6 months for the first years",
         "Enter the recurrence pathway on any new lesion (next step is the surveillance schedule)"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib"
       ]
     },
     {
@@ -366,14 +708,57 @@
       "section": "Treatment",
       "description": "Adjuvant benefit depends on genotype; select the mutation class.",
       "path": "GIST / Localized / Adjuvant",
-      "pills": ["adjuvant", "biomarker"],
+      "pills": [
+        "adjuvant",
+        "biomarker"
+      ],
       "required": true,
-      "footnotes": ["b", "c", "d"],
+      "footnotes": [
+        "b",
+        "c",
+        "d"
+      ],
       "options": [
-        { "id": "kit11", "label": "KIT exon 11", "sets": { "biomarkers.KIT": "exon11" }, "pills": ["KIT ex11"] },
-        { "id": "kit9", "label": "KIT exon 9", "sets": { "biomarkers.KIT": "exon9" }, "pills": ["KIT ex9"] },
-        { "id": "d842v", "label": "PDGFRA exon 18 D842V", "sets": { "biomarkers.PDGFRA": "D842V" }, "pills": ["D842V"] },
-        { "id": "wt", "label": "KIT/PDGFRA wild-type / SDH-deficient", "sets": { "biomarkers.type": "wildtype" }, "pills": ["wild-type"] }
+        {
+          "id": "kit11",
+          "label": "KIT exon 11",
+          "sets": {
+            "biomarkers.KIT": "exon11"
+          },
+          "pills": [
+            "KIT ex11"
+          ]
+        },
+        {
+          "id": "kit9",
+          "label": "KIT exon 9",
+          "sets": {
+            "biomarkers.KIT": "exon9"
+          },
+          "pills": [
+            "KIT ex9"
+          ]
+        },
+        {
+          "id": "d842v",
+          "label": "PDGFRA exon 18 D842V",
+          "sets": {
+            "biomarkers.PDGFRA": "D842V"
+          },
+          "pills": [
+            "D842V"
+          ]
+        },
+        {
+          "id": "wt",
+          "label": "KIT/PDGFRA wild-type / SDH-deficient",
+          "sets": {
+            "biomarkers.type": "wildtype"
+          },
+          "pills": [
+            "wild-type"
+          ]
+        }
       ]
     },
     {
@@ -387,16 +772,26 @@
       "section": "Treatment",
       "description": "Standard adjuvant therapy for the most imatinib-sensitive genotype; then a completion gate.",
       "path": "GIST / Localized / Adjuvant imatinib",
-      "pills": ["KIT ex11", "adjuvant", "treatment"],
-      "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["b"],
-      "bullets": [
-        "Adjuvant imatinib for at least 3 years at standard starting dose",
-        "Monitor tolerance, adherence, and for surveillance CT during and after therapy",
-        "Longer duration is under study for the highest-risk cases (next step is the completion gate)"
+      "pills": [
+        "KIT ex11",
+        "adjuvant",
+        "treatment"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Adjuvant imatinib 400 mg daily for 36 months (3 years; Category 1 preferred per the SSGXVII/AIO trial)",
+        "Monitor tolerance, adherence, and surveillance CT during and after therapy",
+        "Recurrences cluster after stopping; restage periodically (next step is the completion gate)"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_tx_adj_imatinib_ex9",
@@ -409,16 +804,26 @@
       "section": "Treatment",
       "description": "Exon 9 tumors are imatinib-sensitive but often need a higher daily dose; adjuvant course still >= 3 years.",
       "path": "GIST / Localized / Adjuvant imatinib ex9",
-      "pills": ["KIT ex9", "adjuvant", "treatment"],
+      "pills": [
+        "KIT ex9",
+        "adjuvant",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
-        "Adjuvant imatinib for at least 3 years; exon 9 disease may warrant a higher daily dose - the dose engine computes it",
+        "Adjuvant imatinib for 36 months (3 years); standard starting dose is 400 mg daily and exon 9 disease may warrant a higher daily dose per physician judgment, the dose engine computes it",
         "Monitor the added toxicity of higher dosing",
         "Surveillance CT during and after therapy (next step is the completion gate)"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_tx_adj_none",
@@ -431,17 +836,27 @@
       "section": "Surveillance",
       "description": "D842V is imatinib-resistant; adjuvant imatinib is not indicated.",
       "path": "GIST / Localized / D842V",
-      "pills": ["D842V", "surveillance"],
+      "pills": [
+        "D842V",
+        "surveillance"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["c"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
       "bullets": [
-        "No adjuvant imatinib - the genotype predicts resistance",
-        "Close surveillance CT; avapritinib is the active agent if disease recurs (enter the advanced pathway)",
+        "No adjuvant imatinib: PDGFRA exon 18 D842V confers inherent imatinib resistance, so adjuvant imatinib is omitted",
+        "Close surveillance CT; avapritinib 300 mg daily is the Category 1 preferred agent if disease recurs (enter the advanced pathway)",
         "Refer to a GIST expert center where available"
       ],
       "linkTo": "n_met_mutation",
-      "linkLabel": "If recurrence: enter the advanced-disease pathway"
+      "linkLabel": "If recurrence: enter the advanced-disease pathway",
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_tx_adj_wt",
@@ -454,16 +869,24 @@
       "section": "Surveillance",
       "description": "Adjuvant imatinib is generally not beneficial for wild-type / SDH-deficient GIST.",
       "path": "GIST / Localized / Wild-type",
-      "pills": ["wild-type", "surveillance"],
+      "pills": [
+        "wild-type",
+        "surveillance"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2B"],
+      "evidenceCategory": [
+        "2B"
+      ],
       "bullets": [
-        "Adjuvant imatinib is not routinely recommended - limited benefit in wild-type / SDH-deficient disease",
-        "Refer to an expert center; consider SDH-deficient / syndromic workup (Carney triad, Carney-Stratakis, NF1)",
-        "Surveillance CT / MRI on an individualized schedule"
+        "No routine adjuvant imatinib: SDH-deficient GIST carries inherent imatinib resistance and wild-type disease shows limited benefit",
+        "Refer to an expert center; consider SDH-deficient or syndromic workup (Carney triad, Carney-Stratakis, NF1)",
+        "Surveillance CT or MRI on an individualized schedule"
       ],
       "linkTo": "n_met_mutation",
-      "linkLabel": "If recurrence: enter the advanced-disease pathway"
+      "linkLabel": "If recurrence: enter the advanced-disease pathway",
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_adj_completion",
@@ -476,16 +899,39 @@
       "section": "Treatment",
       "description": "Adjuvant imatinib delays but does not eliminate recurrence; track completion and watch for relapse (often on stopping).",
       "path": "GIST / Localized / Adjuvant / Completion",
-      "pills": ["adjuvant"],
+      "pills": [
+        "adjuvant"
+      ],
       "required": true,
-      "footnotes": ["b", "e"],
+      "footnotes": [
+        "b",
+        "e"
+      ],
       "bullets": [
         "Complete the planned course (>= 3 years); recurrences cluster after stopping",
         "Restage periodically; any new lesion is treated as advanced disease"
       ],
       "options": [
-        { "id": "completed", "label": "Course completed, no recurrence", "sets": { "adjOutcome": "completed" }, "pills": ["completed"] },
-        { "id": "recurred", "label": "Recurrence on / after adjuvant imatinib", "sets": { "adjOutcome": "recurred" }, "pills": ["recurrence"] }
+        {
+          "id": "completed",
+          "label": "Course completed, no recurrence",
+          "sets": {
+            "adjOutcome": "completed"
+          },
+          "pills": [
+            "completed"
+          ]
+        },
+        {
+          "id": "recurred",
+          "label": "Recurrence on / after adjuvant imatinib",
+          "sets": {
+            "adjOutcome": "recurred"
+          },
+          "pills": [
+            "recurrence"
+          ]
+        }
       ]
     },
     {
@@ -499,14 +945,23 @@
       "section": "Surveillance",
       "description": "Planned adjuvant course completed without relapse; move to long-term surveillance.",
       "path": "GIST / Localized / Adjuvant / Completed",
-      "pills": ["surveillance"],
+      "pills": [
+        "surveillance"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Continue CT surveillance - recurrence risk rises in the first years after stopping imatinib",
         "Re-confirm genotype at any relapse to guide re-treatment",
         "Proceed to the standard surveillance schedule (next step)"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib"
       ]
     },
     {
@@ -520,17 +975,27 @@
       "section": "Treatment",
       "description": "Relapse while on or after adjuvant imatinib is managed as advanced disease, informed by timing.",
       "path": "GIST / Localized / Adjuvant / Recurrence",
-      "pills": ["recurrence", "treatment"],
+      "pills": [
+        "recurrence",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
         "Relapse off imatinib: rechallenge with imatinib is often effective - re-enter the advanced pathway",
         "Relapse on adjuvant imatinib: treat as imatinib-refractory and advance the line of therapy",
         "Re-confirm genotype; consider resection of isolated recurrence"
       ],
       "linkTo": "n_met_mutation",
-      "linkLabel": "Continue in the advanced-disease pathway (systemic sequencing)"
+      "linkLabel": "Continue in the advanced-disease pathway (systemic sequencing)",
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_met_mutation",
@@ -543,26 +1008,88 @@
       "section": "Treatment",
       "description": "Genotype selects the first-line agent and starting dose for advanced GIST.",
       "path": "GIST / Advanced / Biomarker",
-      "pills": ["metastatic", "biomarker"],
+      "pills": [
+        "metastatic",
+        "biomarker"
+      ],
       "required": true,
-      "footnotes": ["c", "d"],
+      "footnotes": [
+        "c",
+        "d"
+      ],
       "tables": [
         {
           "title": "First-line systemic therapy by mutation",
-          "headers": ["Genotype", "Preferred first line", "Note"],
+          "headers": [
+            "Genotype",
+            "Preferred first line",
+            "Note"
+          ],
           "rows": [
-            ["KIT exon 11", "Imatinib", "Most sensitive; standard dose"],
-            ["KIT exon 9", "Imatinib", "Consider higher daily dose"],
-            ["PDGFRA D842V", "Avapritinib", "Imatinib-resistant"],
-            ["KIT/PDGFRA wild-type / SDH-deficient", "Imatinib trial or referral", "Often TKI-refractory; expert center"]
+            [
+              "KIT exon 11",
+              "Imatinib 400 mg daily",
+              "Most sensitive; standard dose"
+            ],
+            [
+              "KIT exon 9",
+              "Imatinib, escalated to 800 mg daily",
+              "Higher daily dose per protocol"
+            ],
+            [
+              "PDGFRA D842V",
+              "Avapritinib 300 mg daily, Category 1 preferred (NAVIGATOR)",
+              "Imatinib-resistant; omit imatinib"
+            ],
+            [
+              "KIT/PDGFRA wild-type / SDH-deficient",
+              "Imatinib trial or referral",
+              "Often TKI-refractory; expert center"
+            ]
           ]
         }
       ],
       "options": [
-        { "id": "kit11", "label": "KIT exon 11", "sets": { "biomarkers.KIT": "exon11" }, "pills": ["KIT ex11"] },
-        { "id": "kit9", "label": "KIT exon 9", "sets": { "biomarkers.KIT": "exon9" }, "pills": ["KIT ex9"] },
-        { "id": "d842v", "label": "PDGFRA D842V", "sets": { "biomarkers.PDGFRA": "D842V" }, "pills": ["D842V"] },
-        { "id": "wt", "label": "Wild-type / SDH-deficient", "sets": { "biomarkers.type": "wildtype" }, "pills": ["wild-type"] }
+        {
+          "id": "kit11",
+          "label": "KIT exon 11",
+          "sets": {
+            "biomarkers.KIT": "exon11"
+          },
+          "pills": [
+            "KIT ex11"
+          ]
+        },
+        {
+          "id": "kit9",
+          "label": "KIT exon 9",
+          "sets": {
+            "biomarkers.KIT": "exon9"
+          },
+          "pills": [
+            "KIT ex9"
+          ]
+        },
+        {
+          "id": "d842v",
+          "label": "PDGFRA D842V",
+          "sets": {
+            "biomarkers.PDGFRA": "D842V"
+          },
+          "pills": [
+            "D842V"
+          ]
+        },
+        {
+          "id": "wt",
+          "label": "Wild-type / SDH-deficient",
+          "sets": {
+            "biomarkers.type": "wildtype"
+          },
+          "pills": [
+            "wild-type"
+          ]
+        }
       ]
     },
     {
@@ -576,17 +1103,27 @@
       "section": "Treatment",
       "description": "Imatinib is standard first-line for advanced KIT-mutant GIST; continue until progression or intolerance.",
       "path": "GIST / Advanced / 1L imatinib",
-      "pills": ["KIT ex11", "1st line", "treatment"],
+      "pills": [
+        "KIT ex11",
+        "1st line",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
-        "Imatinib continuously until progression or unacceptable toxicity",
+        "Imatinib 400 mg daily continuously until progression or unacceptable toxicity",
         "Assess response by CT; a fall in density can indicate response without shrinkage",
-        "Consider metastasectomy of residual / oligometastatic disease at best response in selected patients",
+        "Consider metastasectomy of residual or oligometastatic disease at best response in selected patients",
         "On any change, use the response gate (next step)"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_tx_met_imatinib_ex9",
@@ -599,16 +1136,26 @@
       "section": "Treatment",
       "description": "Exon 9 disease responds to imatinib, generally at a higher daily dose.",
       "path": "GIST / Advanced / 1L imatinib ex9",
-      "pills": ["KIT ex9", "1st line", "treatment"],
+      "pills": [
+        "KIT ex9",
+        "1st line",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
-        "Imatinib first-line; exon 9 tumors often benefit from a higher daily dose - the dose engine computes it",
+        "Imatinib 400 mg daily to start, escalated to 800 mg daily for KIT exon 9 mutation; the dose engine computes the regimen",
         "Monitor the additional toxicity of higher dosing",
         "Assess response by CT; then use the response gate (next step)"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_tx_met_avapritinib",
@@ -621,17 +1168,27 @@
       "section": "Treatment",
       "description": "D842V is imatinib-resistant; avapritinib is the preferred first-line agent.",
       "path": "GIST / Advanced / 1L avapritinib",
-      "pills": ["D842V", "1st line", "treatment"],
+      "pills": [
+        "D842V",
+        "1st line",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["c"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c"
+      ],
       "bullets": [
-        "Avapritinib for PDGFRA exon 18 D842V-mutant advanced GIST",
-        "No GIST-dose card in this library - shown as guidance; the physician arranges the regimen",
+        "Avapritinib 300 mg daily as Category 1 preferred frontline for PDGFRA exon 18 D842V-mutant advanced GIST (NAVIGATOR trial)",
+        "Dosing per StewardMD Standard Protocol gist-avapritinib; the dose engine computes patient doses",
         "Monitor for cognitive effects and intracranial bleeding per label",
         "Do not use imatinib for D842V (next step is the response gate)"
       ],
-      "protocolRefs": ["gist-avapritinib"]
+      "protocolRefs": [
+        "gist-avapritinib"
+      ]
     },
     {
       "id": "n_d842v_response",
@@ -644,12 +1201,35 @@
       "section": "Treatment",
       "description": "Track disease on avapritinib; progression on a D842V-active agent means limited standard options.",
       "path": "GIST / Advanced / D842V / Response",
-      "pills": ["D842V", "sequencing"],
+      "pills": [
+        "D842V",
+        "sequencing"
+      ],
       "required": true,
-      "footnotes": ["e"],
+      "footnotes": [
+        "e"
+      ],
       "options": [
-        { "id": "controlled", "label": "Response / disease controlled", "sets": { "d842vResponse": "controlled" }, "pills": ["controlled"] },
-        { "id": "progression", "label": "Progression on avapritinib", "sets": { "d842vResponse": "progression" }, "pills": ["progression"] }
+        {
+          "id": "controlled",
+          "label": "Response / disease controlled",
+          "sets": {
+            "d842vResponse": "controlled"
+          },
+          "pills": [
+            "controlled"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Progression on avapritinib",
+          "sets": {
+            "d842vResponse": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
       ]
     },
     {
@@ -663,16 +1243,25 @@
       "section": "Treatment",
       "description": "Maintain avapritinib while the disease responds.",
       "path": "GIST / Advanced / D842V / Maintain",
-      "pills": ["D842V", "treatment"],
+      "pills": [
+        "D842V",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["c"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
       "bullets": [
-        "Continue avapritinib; monitor for cognitive effects and bleeding",
+        "Continue avapritinib 300 mg daily while disease is controlled; monitor for cognitive effects and bleeding",
         "Consider metastasectomy of oligometastatic residual disease in selected patients",
         "Restage on schedule; switch only on confirmed progression"
       ],
-      "protocolRefs": ["gist-avapritinib"]
+      "protocolRefs": [
+        "gist-avapritinib"
+      ]
     },
     {
       "id": "n_tx_avap_prog",
@@ -685,13 +1274,23 @@
       "section": "Treatment",
       "description": "Few standard options remain after a D842V-active agent; prioritize trials.",
       "path": "GIST / Advanced / D842V / Progression",
-      "pills": ["D842V", "progression", "treatment"],
+      "pills": [
+        "D842V",
+        "progression",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2B"],
+      "evidenceCategory": [
+        "2B"
+      ],
       "bullets": [
         "Enroll in a clinical trial where available - the preferred option",
         "A multikinase TKI (e.g. sunitinib, regorafenib, ripretinib) may be tried, though D842V benefit is limited",
         "Continue best supportive care; consider local therapy for symptomatic sites"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib",
+        "gist-avapritinib"
       ]
     },
     {
@@ -705,15 +1304,36 @@
       "section": "Treatment",
       "description": "KIT/PDGFRA wild-type GIST is heterogeneous; sub-classification changes workup and referral.",
       "path": "GIST / Advanced / Wild-type / Subtype",
-      "pills": ["wild-type", "biomarker"],
+      "pills": [
+        "wild-type",
+        "biomarker"
+      ],
       "required": true,
       "bullets": [
         "SDH-deficient (SDHB IHC loss): younger patients, gastric, multifocal; Carney triad / Carney-Stratakis",
         "NF1-associated or BRAF-mutant: distinct biology and drug sensitivity"
       ],
       "options": [
-        { "id": "sdh", "label": "SDH-deficient (SDHB IHC loss)", "sets": { "biomarkers.SDH": "deficient" }, "pills": ["SDH-def"] },
-        { "id": "other_wt", "label": "NF1 / BRAF / other wild-type", "sets": { "biomarkers.type": "wildtype_other" }, "pills": ["NF1/BRAF"] }
+        {
+          "id": "sdh",
+          "label": "SDH-deficient (SDHB IHC loss)",
+          "sets": {
+            "biomarkers.SDH": "deficient"
+          },
+          "pills": [
+            "SDH-def"
+          ]
+        },
+        {
+          "id": "other_wt",
+          "label": "NF1 / BRAF / other wild-type",
+          "sets": {
+            "biomarkers.type": "wildtype_other"
+          },
+          "pills": [
+            "NF1/BRAF"
+          ]
+        }
       ]
     },
     {
@@ -727,14 +1347,23 @@
       "section": "Treatment",
       "description": "SDH-deficient disease is typically TKI-refractory and indolent; manage at an expert center.",
       "path": "GIST / Advanced / SDH-deficient",
-      "pills": ["SDH-def", "treatment"],
+      "pills": [
+        "SDH-def",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2B"],
+      "evidenceCategory": [
+        "2B"
+      ],
       "bullets": [
         "Refer to a sarcoma expert center; genetic counseling (SDHx germline, Carney triad / Carney-Stratakis)",
         "Standard KIT-targeted TKIs are usually ineffective; sunitinib or regorafenib may give some benefit",
         "Enroll in a clinical trial; surgery for symptomatic / oligometastatic disease",
         "Often indolent - a watchful approach can be appropriate"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib",
+        "gist-avapritinib"
       ]
     },
     {
@@ -748,14 +1377,23 @@
       "section": "Treatment",
       "description": "Non-SDH wild-type GIST is often TKI-refractory; pursue trials and any actionable target.",
       "path": "GIST / Advanced / Wild-type / Other",
-      "pills": ["wild-type", "treatment"],
+      "pills": [
+        "wild-type",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2B"],
+      "evidenceCategory": [
+        "2B"
+      ],
       "bullets": [
         "Refer to a GIST expert center; enroll in a clinical trial where possible",
         "BRAF V600E: consider BRAF-directed therapy (guidance - no GIST-dose card here)",
         "NF1-associated: KIT-targeted TKIs are typically ineffective; surgery for resectable disease",
         "Multikinase TKIs (sunitinib, regorafenib) are options on progression"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib",
+        "gist-avapritinib"
       ]
     },
     {
@@ -769,17 +1407,48 @@
       "section": "Treatment",
       "description": "Track disease on first-line imatinib; the pattern of progression (focal vs generalized) drives the next move.",
       "path": "GIST / Advanced / 1L / Response",
-      "pills": ["sequencing"],
+      "pills": [
+        "sequencing"
+      ],
       "required": true,
-      "footnotes": ["e"],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
         "Confirm true progression by CT (size and density); rule out non-adherence",
         "Limited / focal progression is treated locally while continuing imatinib"
       ],
       "options": [
-        { "id": "durable", "label": "Durable response / stable disease", "sets": { "line1": "response" }, "pills": ["response"] },
-        { "id": "focal", "label": "Limited / focal progression (rest controlled)", "sets": { "line1": "focal" }, "pills": ["focal"] },
-        { "id": "general", "label": "Generalized progression on imatinib", "sets": { "line1": "general" }, "pills": ["progression"] }
+        {
+          "id": "durable",
+          "label": "Durable response / stable disease",
+          "sets": {
+            "line1": "response"
+          },
+          "pills": [
+            "response"
+          ]
+        },
+        {
+          "id": "focal",
+          "label": "Limited / focal progression (rest controlled)",
+          "sets": {
+            "line1": "focal"
+          },
+          "pills": [
+            "focal"
+          ]
+        },
+        {
+          "id": "general",
+          "label": "Generalized progression on imatinib",
+          "sets": {
+            "line1": "general"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
       ]
     },
     {
@@ -793,16 +1462,25 @@
       "section": "Treatment",
       "description": "Maintain first-line imatinib while the disease responds; consider surgery of residual disease.",
       "path": "GIST / Advanced / 1L / Maintain",
-      "pills": ["1st line", "treatment"],
+      "pills": [
+        "1st line",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
         "Continue imatinib indefinitely - stopping in responders leads to rapid regrowth",
         "Consider metastasectomy of residual / oligometastatic disease at best response in selected patients",
         "Restage on schedule; return to the response gate on any change"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_tx_focal",
@@ -815,16 +1493,25 @@
       "section": "Treatment",
       "description": "For focal progression with otherwise controlled disease, treat the progressing site and stay on imatinib.",
       "path": "GIST / Advanced / 1L / Focal",
-      "pills": ["focal", "treatment"],
+      "pills": [
+        "focal",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
         "Resection, ablation (RFA), or radiotherapy to the progressing lesion",
         "Continue imatinib - most disease remains sensitive",
         "Switch systemic lines only when progression becomes generalized"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_2l_decision",
@@ -837,24 +1524,68 @@
       "section": "Treatment",
       "description": "At generalized imatinib progression, either escalate the imatinib dose (esp. exon 9 / limited progression) or switch to second-line sunitinib.",
       "path": "GIST / Advanced / 2L / Decision",
-      "pills": ["sequencing"],
+      "pills": [
+        "sequencing"
+      ],
       "required": true,
       "tables": [
         {
           "title": "Sequential systemic therapy for advanced KIT-mutant GIST",
-          "headers": ["Line", "Agent", "Setting"],
+          "headers": [
+            "Line",
+            "Agent",
+            "Setting"
+          ],
           "rows": [
-            ["1st", "Imatinib", "KIT exon 11 / 9 (exon 9 higher dose)"],
-            ["1st (interim)", "Imatinib dose escalation", "Exon 9 or limited progression"],
-            ["2nd", "Sunitinib", "Imatinib progression / intolerance"],
-            ["3rd", "Regorafenib", "Post-imatinib and sunitinib"],
-            ["4th", "Ripretinib", "Post three prior TKIs"]
+            [
+              "1st",
+              "Imatinib 400 mg daily (KIT exon 11; exon 9 escalated to 800 mg)",
+              "Genotype-selected first line"
+            ],
+            [
+              "1st (interim)",
+              "Imatinib dose escalation to 800 mg daily",
+              "Exon 9 or limited progression"
+            ],
+            [
+              "2nd",
+              "Sunitinib 50 mg daily 4/2 or 37.5 mg continuous",
+              "Imatinib progression / intolerance"
+            ],
+            [
+              "3rd",
+              "Regorafenib 160 mg daily 3/1 (GRID, Category 1)",
+              "Post-imatinib and sunitinib"
+            ],
+            [
+              "4th",
+              "Ripretinib 150 mg daily (INVICTUS, Category 1)",
+              "Post three prior TKIs"
+            ]
           ]
         }
       ],
       "options": [
-        { "id": "escalate", "label": "Escalate imatinib dose (exon 9 / limited progression)", "sets": { "line2": "escalate" }, "pills": ["dose-escalate"] },
-        { "id": "switch", "label": "Switch to second-line sunitinib", "sets": { "line2": "switch" }, "pills": ["switch"] }
+        {
+          "id": "escalate",
+          "label": "Escalate imatinib dose (exon 9 / limited progression)",
+          "sets": {
+            "line2": "escalate"
+          },
+          "pills": [
+            "dose-escalate"
+          ]
+        },
+        {
+          "id": "switch",
+          "label": "Switch to second-line sunitinib",
+          "sets": {
+            "line2": "switch"
+          },
+          "pills": [
+            "switch"
+          ]
+        }
       ]
     },
     {
@@ -868,16 +1599,25 @@
       "section": "Treatment",
       "description": "Higher-dose imatinib can recapture control, especially in exon 9 disease, before switching agents.",
       "path": "GIST / Advanced / 2L / Escalate",
-      "pills": ["dose-escalate", "treatment"],
+      "pills": [
+        "dose-escalate",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
-        "Escalate the imatinib daily dose - the dose engine computes it; monitor added toxicity",
-        "Most useful for exon 9 tumors and for limited progression",
+        "Escalate imatinib to 800 mg daily (400 mg twice daily), most useful for exon 9 tumors and limited progression; the dose engine computes it",
+        "Monitor added toxicity at the higher dose",
         "On further progression, switch to second-line sunitinib (next step)"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_tx_sunitinib",
@@ -890,16 +1630,25 @@
       "section": "Treatment",
       "description": "Standard second-line therapy after imatinib failure or intolerance.",
       "path": "GIST / Advanced / 2L sunitinib",
-      "pills": ["2nd line", "treatment"],
+      "pills": [
+        "2nd line",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
-        "Sunitinib after imatinib progression or intolerance",
+        "Sunitinib 50 mg daily for 4 weeks on followed by 2 weeks off (6-week cycle), or 37.5 mg daily continuous dosing, after imatinib progression or intolerance",
         "Monitor blood pressure, thyroid function, and hand-foot syndrome",
         "Assess response by CT; on progression use the second-line response gate (next step)"
       ],
-      "protocolRefs": ["gi-gist-sunitinib"]
+      "protocolRefs": [
+        "gi-gist-sunitinib"
+      ]
     },
     {
       "id": "n_2l_response",
@@ -912,12 +1661,34 @@
       "section": "Treatment",
       "description": "Continue sunitinib while controlled; advance to third-line regorafenib on progression.",
       "path": "GIST / Advanced / 2L / Response",
-      "pills": ["sequencing"],
+      "pills": [
+        "sequencing"
+      ],
       "required": true,
-      "footnotes": ["e"],
+      "footnotes": [
+        "e"
+      ],
       "options": [
-        { "id": "controlled", "label": "Response / disease controlled", "sets": { "line2r": "controlled" }, "pills": ["controlled"] },
-        { "id": "progression", "label": "Progression on sunitinib", "sets": { "line2r": "progression" }, "pills": ["progression"] }
+        {
+          "id": "controlled",
+          "label": "Response / disease controlled",
+          "sets": {
+            "line2r": "controlled"
+          },
+          "pills": [
+            "controlled"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Progression on sunitinib",
+          "sets": {
+            "line2r": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
       ]
     },
     {
@@ -931,16 +1702,25 @@
       "section": "Treatment",
       "description": "Maintain sunitinib while the disease responds.",
       "path": "GIST / Advanced / 2L / Maintain",
-      "pills": ["2nd line", "treatment"],
+      "pills": [
+        "2nd line",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
-        "Continue sunitinib; manage hypertension, hypothyroidism, and hand-foot syndrome",
+        "Continue sunitinib (50 mg daily 4 weeks on / 2 weeks off, or 37.5 mg daily continuous) while disease is controlled; manage hypertension, hypothyroidism, and hand-foot syndrome",
         "Consider local therapy for a single progressing site while continuing sunitinib",
         "Restage on schedule; advance the line only on generalized progression"
       ],
-      "protocolRefs": ["gi-gist-sunitinib"]
+      "protocolRefs": [
+        "gi-gist-sunitinib"
+      ]
     },
     {
       "id": "n_tx_regorafenib",
@@ -953,16 +1733,26 @@
       "section": "Treatment",
       "description": "Standard third-line therapy after imatinib and sunitinib.",
       "path": "GIST / Advanced / 3L regorafenib",
-      "pills": ["3rd line", "treatment"],
+      "pills": [
+        "3rd line",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "e",
+        "f"
+      ],
       "bullets": [
-        "Regorafenib after progression on imatinib and sunitinib",
+        "Regorafenib 160 mg daily for 3 weeks on followed by 1 week off (28-day cycle) after progression on imatinib and sunitinib; Category 1 third line (GRID trial)",
         "Monitor blood pressure, hand-foot skin reaction, and liver function",
         "Assess response by CT; on progression use the third-line response gate (next step)"
       ],
-      "protocolRefs": ["gi-gist-regorafenib"]
+      "protocolRefs": [
+        "gi-gist-regorafenib"
+      ]
     },
     {
       "id": "n_3l_response",
@@ -975,12 +1765,34 @@
       "section": "Treatment",
       "description": "Continue regorafenib while controlled; advance to fourth-line ripretinib on progression.",
       "path": "GIST / Advanced / 3L / Response",
-      "pills": ["sequencing"],
+      "pills": [
+        "sequencing"
+      ],
       "required": true,
-      "footnotes": ["e"],
+      "footnotes": [
+        "e"
+      ],
       "options": [
-        { "id": "controlled", "label": "Response / disease controlled", "sets": { "line3r": "controlled" }, "pills": ["controlled"] },
-        { "id": "progression", "label": "Progression on regorafenib", "sets": { "line3r": "progression" }, "pills": ["progression"] }
+        {
+          "id": "controlled",
+          "label": "Response / disease controlled",
+          "sets": {
+            "line3r": "controlled"
+          },
+          "pills": [
+            "controlled"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Progression on regorafenib",
+          "sets": {
+            "line3r": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
       ]
     },
     {
@@ -994,16 +1806,25 @@
       "section": "Treatment",
       "description": "Maintain regorafenib while the disease responds.",
       "path": "GIST / Advanced / 3L / Maintain",
-      "pills": ["3rd line", "treatment"],
+      "pills": [
+        "3rd line",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
-        "Continue regorafenib; manage hypertension, hand-foot skin reaction, and hepatotoxicity",
-        "Dose interruptions / reductions per tolerance keep patients on therapy",
+        "Continue regorafenib 160 mg daily 3 weeks on / 1 week off while disease is controlled; manage hypertension, hand-foot skin reaction, and hepatotoxicity",
+        "Dose interruptions or reductions per tolerance keep patients on therapy",
         "Restage on schedule; advance the line only on progression"
       ],
-      "protocolRefs": ["gi-gist-regorafenib"]
+      "protocolRefs": [
+        "gi-gist-regorafenib"
+      ]
     },
     {
       "id": "n_tx_ripretinib",
@@ -1016,17 +1837,27 @@
       "section": "Treatment",
       "description": "Switch-control TKI after three prior lines (imatinib, sunitinib, regorafenib).",
       "path": "GIST / Advanced / 4L ripretinib",
-      "pills": ["4th line", "treatment"],
+      "pills": [
+        "4th line",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "e",
+        "f"
+      ],
       "bullets": [
-        "Ripretinib after imatinib, sunitinib and regorafenib",
-        "No GIST-dose card in this library - shown as guidance; the physician arranges the regimen",
+        "Ripretinib 150 mg daily after imatinib, sunitinib, and regorafenib; Category 1 fourth line (INVICTUS trial)",
+        "Dosing per StewardMD Standard Protocol gist-ripretinib; the dose engine computes patient doses",
         "Monitor for alopecia, hand-foot syndrome, and hypertension",
         "Assess response by CT; on progression use the fourth-line gate (next step)"
       ],
-      "protocolRefs": ["gist-ripretinib"]
+      "protocolRefs": [
+        "gist-ripretinib"
+      ]
     },
     {
       "id": "n_4l_response",
@@ -1039,12 +1870,34 @@
       "section": "Treatment",
       "description": "Continue ripretinib while controlled; beyond progression, options are trials and palliation.",
       "path": "GIST / Advanced / 4L / Response",
-      "pills": ["sequencing"],
+      "pills": [
+        "sequencing"
+      ],
       "required": true,
-      "footnotes": ["e"],
+      "footnotes": [
+        "e"
+      ],
       "options": [
-        { "id": "controlled", "label": "Response / disease controlled", "sets": { "line4r": "controlled" }, "pills": ["controlled"] },
-        { "id": "progression", "label": "Progression on ripretinib", "sets": { "line4r": "progression" }, "pills": ["progression"] }
+        {
+          "id": "controlled",
+          "label": "Response / disease controlled",
+          "sets": {
+            "line4r": "controlled"
+          },
+          "pills": [
+            "controlled"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Progression on ripretinib",
+          "sets": {
+            "line4r": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
       ]
     },
     {
@@ -1058,16 +1911,25 @@
       "section": "Treatment",
       "description": "Maintain ripretinib while the disease responds.",
       "path": "GIST / Advanced / 4L / Maintain",
-      "pills": ["4th line", "treatment"],
-      "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
-      "bullets": [
-        "Continue ripretinib; manage alopecia, hand-foot syndrome, and hypertension",
-        "Consider local therapy for a single progressing site while continuing therapy",
-        "Restage on schedule; move to trials / palliation only on generalized progression"
+      "pills": [
+        "4th line",
+        "treatment"
       ],
-      "protocolRefs": ["gist-ripretinib"]
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Continue ripretinib 150 mg daily while disease is controlled; manage alopecia, hand-foot syndrome, and hypertension",
+        "Consider local therapy for a single progressing site while continuing therapy",
+        "Restage on schedule; move to trials or palliation only on generalized progression"
+      ],
+      "protocolRefs": [
+        "gist-ripretinib"
+      ]
     },
     {
       "id": "n_tx_beyond",
@@ -1080,15 +1942,26 @@
       "section": "Treatment",
       "description": "After four TKI lines, prioritize clinical trials; TKI rechallenge and supportive care are palliative options.",
       "path": "GIST / Advanced / Beyond 4L",
-      "pills": ["refractory", "treatment"],
+      "pills": [
+        "refractory",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2B"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2B"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
         "Enroll in a clinical trial where available - the preferred option",
         "Rechallenge with a previously effective TKI can give transient palliative benefit",
         "Continue best supportive care; local therapy for symptomatic sites",
         "Re-confirm genotype (resistance mutations) to match any available targeted trial"
+      ],
+      "protocolRefs": [
+        "gi-gist-imatinib",
+        "gist-avapritinib"
       ]
     },
     {
@@ -1102,17 +1975,48 @@
       "section": "Treatment",
       "description": "For patients presenting after prior TKI failure, enter the sequence at the appropriate next line.",
       "path": "GIST / Advanced / Prior line",
-      "pills": ["sequencing"],
+      "pills": [
+        "sequencing"
+      ],
       "required": true,
-      "footnotes": ["e"],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
         "Confirm true progression and adherence on the last TKI before advancing",
         "Re-confirm genotype; consider trials at every line"
       ],
       "options": [
-        { "id": "post_imatinib", "label": "Progressed on imatinib", "sets": { "prior": "imatinib" }, "pills": ["post-imatinib"] },
-        { "id": "post_sunitinib", "label": "Progressed on sunitinib", "sets": { "prior": "sunitinib" }, "pills": ["post-sunitinib"] },
-        { "id": "post_regorafenib", "label": "Progressed on regorafenib", "sets": { "prior": "regorafenib" }, "pills": ["post-regorafenib"] }
+        {
+          "id": "post_imatinib",
+          "label": "Progressed on imatinib",
+          "sets": {
+            "prior": "imatinib"
+          },
+          "pills": [
+            "post-imatinib"
+          ]
+        },
+        {
+          "id": "post_sunitinib",
+          "label": "Progressed on sunitinib",
+          "sets": {
+            "prior": "sunitinib"
+          },
+          "pills": [
+            "post-sunitinib"
+          ]
+        },
+        {
+          "id": "post_regorafenib",
+          "label": "Progressed on regorafenib",
+          "sets": {
+            "prior": "regorafenib"
+          },
+          "pills": [
+            "post-regorafenib"
+          ]
+        }
       ]
     },
     {
@@ -1126,15 +2030,37 @@
       "section": "Recurrence",
       "description": "Distinguish resectable local recurrence from disseminated disease.",
       "path": "GIST / Recurrence",
-      "pills": ["recurrence"],
+      "pills": [
+        "recurrence"
+      ],
       "required": true,
       "bullets": [
-        "Re-image (CT chest / abdomen / pelvis) and re-confirm mutation status if not already known",
+        "Re-image with contrast-enhanced CT of chest, abdomen, and pelvis; EUS with core needle biopsy for a new gastrointestinal submucosal lesion",
+        "Re-confirm molecular status if not already known: KIT exons 9, 11, 13, 17 and PDGFRA exons 12, 14, 18 including D842V; in wild-type disease add SDH subunit IHC, BRAF V600E, and NTRK fusions",
+        "Document tumor size, mitotic rate per 50 HPF (or per 5 mm2), primary site (gastric vs non-gastric/small bowel), and any tumor rupture",
         "Most recurrences are treated as advanced disease with systemic TKI"
       ],
       "options": [
-        { "id": "resectable_rec", "label": "Isolated, resectable recurrence", "sets": { "recurrence": "resectable" }, "pills": ["resectable"] },
-        { "id": "systemic_rec", "label": "Unresectable / metastatic recurrence", "sets": { "recurrence": "systemic" }, "pills": ["metastatic"] }
+        {
+          "id": "resectable_rec",
+          "label": "Isolated, resectable recurrence",
+          "sets": {
+            "recurrence": "resectable"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "systemic_rec",
+          "label": "Unresectable / metastatic recurrence",
+          "sets": {
+            "recurrence": "systemic"
+          },
+          "pills": [
+            "metastatic"
+          ]
+        }
       ]
     },
     {
@@ -1148,15 +2074,22 @@
       "section": "Recurrence",
       "description": "Resection of isolated recurrence, usually combined with a TKI, then surveillance.",
       "path": "GIST / Recurrence / Resect",
-      "pills": ["resectable", "treatment"],
+      "pills": [
+        "resectable",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
+      "evidenceCategory": [
+        "2A"
+      ],
       "bullets": [
         "Resect isolated recurrence when complete removal is feasible",
         "Start / resume imatinib for KIT-sensitive disease - most recurrent GIST behaves as advanced disease",
         "Enter surveillance after treatment (next step)"
       ],
-      "protocolRefs": ["gi-gist-imatinib"]
+      "protocolRefs": [
+        "gi-gist-imatinib"
+      ]
     },
     {
       "id": "n_surveillance",
@@ -1169,9 +2102,13 @@
       "section": "Surveillance",
       "description": "Follow-up cadence after resection or during / after systemic therapy.",
       "path": "GIST / Surveillance",
-      "pills": ["surveillance"],
+      "pills": [
+        "surveillance"
+      ],
       "showsRecommendation": true,
-      "footnotes": ["a"],
+      "footnotes": [
+        "a"
+      ],
       "bullets": [
         "After resection of higher-risk GIST: CT abdomen / pelvis every 3-6 months for 3-5 years, then annually to 10 years",
         "Low-risk resected GIST: less frequent imaging, individualized",
@@ -1179,89 +2116,555 @@
         "Any new lesion returns to the recurrence / advanced pathway"
       ],
       "linkTo": "n_recurrence",
-      "linkLabel": "If recurrence is detected: go to the Recurrence pathway"
+      "linkLabel": "If recurrence is detected: go to the Recurrence pathway",
+      "protocolRefs": [
+        "gi-gist-imatinib",
+        "gist-avapritinib"
+      ]
     }
   ],
   "links": [
-    { "id": "l_wk", "from": "n_workup", "to": "n_presentation", "fromOptions": ["continue"], "linkCategory": "conditional" },
-
-    { "id": "l_pr_loc", "from": "n_presentation", "to": "n_resectability", "fromOptions": ["localized"], "linkCategory": "conditional" },
-    { "id": "l_pr_metn", "from": "n_presentation", "to": "n_met_mutation", "fromOptions": ["met_naive"], "linkCategory": "conditional" },
-    { "id": "l_pr_metp", "from": "n_presentation", "to": "n_prior_line", "fromOptions": ["met_progressed"], "linkCategory": "conditional" },
-    { "id": "l_pr_rec", "from": "n_presentation", "to": "n_recurrence", "fromOptions": ["recurrence"], "linkCategory": "conditional" },
-    { "id": "l_pr_fu", "from": "n_presentation", "to": "n_surveillance", "fromOptions": ["followup"], "linkCategory": "conditional" },
-
-    { "id": "l_res_small", "from": "n_resectability", "to": "n_tx_observe_small", "fromOptions": ["observe_small"], "linkCategory": "conditional" },
-    { "id": "l_res_ok", "from": "n_resectability", "to": "n_resect_risk", "fromOptions": ["resectable"], "linkCategory": "conditional" },
-    { "id": "l_res_marg", "from": "n_resectability", "to": "n_neoadj_mutation", "fromOptions": ["marginal"], "linkCategory": "conditional" },
-
-    { "id": "l_neo_sens", "from": "n_neoadj_mutation", "to": "n_tx_neoadj", "fromOptions": ["kit_sensitive"], "linkCategory": "conditional" },
-    { "id": "l_neo_res", "from": "n_neoadj_mutation", "to": "n_neoadj_surgery", "fromOptions": ["resistant"], "linkCategory": "conditional" },
-    { "id": "l_neo_resp", "from": "n_tx_neoadj", "to": "n_neoadj_response", "linkCategory": "conditional" },
-    { "id": "l_neor_resect", "from": "n_neoadj_response", "to": "n_tx_neoadj_resect", "fromOptions": ["responded", "stable"], "linkCategory": "conditional" },
-    { "id": "l_neor_prog", "from": "n_neoadj_response", "to": "n_tx_neoadj_prog", "fromOptions": ["progressed"], "linkCategory": "conditional" },
-    { "id": "l_neoresect_risk", "from": "n_tx_neoadj_resect", "to": "n_resect_risk", "linkCategory": "conditional" },
-    { "id": "l_neosurg_risk", "from": "n_neoadj_surgery", "to": "n_resect_risk", "linkCategory": "conditional" },
-
-    { "id": "l_rr_low", "from": "n_resect_risk", "to": "n_tx_low", "fromOptions": ["low"], "linkCategory": "conditional" },
-    { "id": "l_rr_int", "from": "n_resect_risk", "to": "n_int_decision", "fromOptions": ["intermediate"], "linkCategory": "conditional" },
-    { "id": "l_rr_high", "from": "n_resect_risk", "to": "n_adj_mutation", "fromOptions": ["high"], "linkCategory": "conditional" },
-
-    { "id": "l_int_give", "from": "n_int_decision", "to": "n_tx_adj_ima_int", "fromOptions": ["give"], "linkCategory": "conditional" },
-    { "id": "l_int_obs", "from": "n_int_decision", "to": "n_int_observe", "fromOptions": ["observe"], "linkCategory": "conditional" },
-    { "id": "l_intgive_comp", "from": "n_tx_adj_ima_int", "to": "n_adj_completion", "linkCategory": "conditional" },
-    { "id": "l_intobs_surv", "from": "n_int_observe", "to": "n_surveillance", "linkCategory": "conditional" },
-
-    { "id": "l_adj_k11", "from": "n_adj_mutation", "to": "n_tx_adj_imatinib", "fromOptions": ["kit11"], "linkCategory": "conditional" },
-    { "id": "l_adj_k9", "from": "n_adj_mutation", "to": "n_tx_adj_imatinib_ex9", "fromOptions": ["kit9"], "linkCategory": "conditional" },
-    { "id": "l_adj_d842", "from": "n_adj_mutation", "to": "n_tx_adj_none", "fromOptions": ["d842v"], "linkCategory": "conditional" },
-    { "id": "l_adj_wt", "from": "n_adj_mutation", "to": "n_tx_adj_wt", "fromOptions": ["wt"], "linkCategory": "conditional" },
-    { "id": "l_adjk11_comp", "from": "n_tx_adj_imatinib", "to": "n_adj_completion", "linkCategory": "conditional" },
-    { "id": "l_adjk9_comp", "from": "n_tx_adj_imatinib_ex9", "to": "n_adj_completion", "linkCategory": "conditional" },
-    { "id": "l_comp_done", "from": "n_adj_completion", "to": "n_tx_adj_done_surv", "fromOptions": ["completed"], "linkCategory": "conditional" },
-    { "id": "l_comp_recur", "from": "n_adj_completion", "to": "n_tx_adj_recur", "fromOptions": ["recurred"], "linkCategory": "conditional" },
-    { "id": "l_low_surv", "from": "n_tx_low", "to": "n_surveillance", "linkCategory": "conditional" },
-    { "id": "l_done_surv", "from": "n_tx_adj_done_surv", "to": "n_surveillance", "linkCategory": "conditional" },
-
-    { "id": "l_met_k11", "from": "n_met_mutation", "to": "n_tx_met_imatinib", "fromOptions": ["kit11"], "linkCategory": "conditional" },
-    { "id": "l_met_k9", "from": "n_met_mutation", "to": "n_tx_met_imatinib_ex9", "fromOptions": ["kit9"], "linkCategory": "conditional" },
-    { "id": "l_met_d842", "from": "n_met_mutation", "to": "n_tx_met_avapritinib", "fromOptions": ["d842v"], "linkCategory": "conditional" },
-    { "id": "l_met_wt", "from": "n_met_mutation", "to": "n_wt_subtype", "fromOptions": ["wt"], "linkCategory": "conditional" },
-
-    { "id": "l_wt_sdh", "from": "n_wt_subtype", "to": "n_tx_sdh", "fromOptions": ["sdh"], "linkCategory": "conditional" },
-    { "id": "l_wt_other", "from": "n_wt_subtype", "to": "n_tx_met_wt", "fromOptions": ["other_wt"], "linkCategory": "conditional" },
-
-    { "id": "l_met_1lr_a", "from": "n_tx_met_imatinib", "to": "n_1l_response", "linkCategory": "conditional" },
-    { "id": "l_met_1lr_b", "from": "n_tx_met_imatinib_ex9", "to": "n_1l_response", "linkCategory": "conditional" },
-    { "id": "l_avap_resp", "from": "n_tx_met_avapritinib", "to": "n_d842v_response", "linkCategory": "conditional" },
-    { "id": "l_d842_ctrl", "from": "n_d842v_response", "to": "n_tx_avap_maintain", "fromOptions": ["controlled"], "linkCategory": "conditional" },
-    { "id": "l_d842_prog", "from": "n_d842v_response", "to": "n_tx_avap_prog", "fromOptions": ["progression"], "linkCategory": "conditional" },
-
-    { "id": "l_1l_dur", "from": "n_1l_response", "to": "n_tx_1l_maintain", "fromOptions": ["durable"], "linkCategory": "conditional" },
-    { "id": "l_1l_focal", "from": "n_1l_response", "to": "n_tx_focal", "fromOptions": ["focal"], "linkCategory": "conditional" },
-    { "id": "l_1l_gen", "from": "n_1l_response", "to": "n_2l_decision", "fromOptions": ["general"], "linkCategory": "conditional" },
-
-    { "id": "l_2l_esc", "from": "n_2l_decision", "to": "n_tx_ima_escalate", "fromOptions": ["escalate"], "linkCategory": "conditional" },
-    { "id": "l_2l_sw", "from": "n_2l_decision", "to": "n_tx_sunitinib", "fromOptions": ["switch"], "linkCategory": "conditional" },
-    { "id": "l_esc_sun", "from": "n_tx_ima_escalate", "to": "n_tx_sunitinib", "linkCategory": "conditional" },
-    { "id": "l_sun_resp", "from": "n_tx_sunitinib", "to": "n_2l_response", "linkCategory": "conditional" },
-    { "id": "l_2lr_ctrl", "from": "n_2l_response", "to": "n_tx_sun_maintain", "fromOptions": ["controlled"], "linkCategory": "conditional" },
-    { "id": "l_2lr_prog", "from": "n_2l_response", "to": "n_tx_regorafenib", "fromOptions": ["progression"], "linkCategory": "conditional" },
-
-    { "id": "l_reg_resp", "from": "n_tx_regorafenib", "to": "n_3l_response", "linkCategory": "conditional" },
-    { "id": "l_3lr_ctrl", "from": "n_3l_response", "to": "n_tx_reg_maintain", "fromOptions": ["controlled"], "linkCategory": "conditional" },
-    { "id": "l_3lr_prog", "from": "n_3l_response", "to": "n_tx_ripretinib", "fromOptions": ["progression"], "linkCategory": "conditional" },
-
-    { "id": "l_rip_resp", "from": "n_tx_ripretinib", "to": "n_4l_response", "linkCategory": "conditional" },
-    { "id": "l_4lr_ctrl", "from": "n_4l_response", "to": "n_tx_rip_maintain", "fromOptions": ["controlled"], "linkCategory": "conditional" },
-    { "id": "l_4lr_prog", "from": "n_4l_response", "to": "n_tx_beyond", "fromOptions": ["progression"], "linkCategory": "conditional" },
-
-    { "id": "l_prior_ima", "from": "n_prior_line", "to": "n_2l_decision", "fromOptions": ["post_imatinib"], "linkCategory": "conditional" },
-    { "id": "l_prior_sun", "from": "n_prior_line", "to": "n_tx_regorafenib", "fromOptions": ["post_sunitinib"], "linkCategory": "conditional" },
-    { "id": "l_prior_reg", "from": "n_prior_line", "to": "n_tx_ripretinib", "fromOptions": ["post_regorafenib"], "linkCategory": "conditional" },
-
-    { "id": "l_rec_res", "from": "n_recurrence", "to": "n_tx_recur_resect", "fromOptions": ["resectable_rec"], "linkCategory": "conditional" },
-    { "id": "l_rec_sys", "from": "n_recurrence", "to": "n_met_mutation", "fromOptions": ["systemic_rec"], "linkCategory": "conditional" },
-    { "id": "l_recres_surv", "from": "n_tx_recur_resect", "to": "n_surveillance", "linkCategory": "conditional" }
+    {
+      "id": "l_wk",
+      "from": "n_workup",
+      "to": "n_presentation",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pr_loc",
+      "from": "n_presentation",
+      "to": "n_resectability",
+      "fromOptions": [
+        "localized"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pr_metn",
+      "from": "n_presentation",
+      "to": "n_met_mutation",
+      "fromOptions": [
+        "met_naive"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pr_metp",
+      "from": "n_presentation",
+      "to": "n_prior_line",
+      "fromOptions": [
+        "met_progressed"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pr_rec",
+      "from": "n_presentation",
+      "to": "n_recurrence",
+      "fromOptions": [
+        "recurrence"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pr_fu",
+      "from": "n_presentation",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "followup"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_res_small",
+      "from": "n_resectability",
+      "to": "n_tx_observe_small",
+      "fromOptions": [
+        "observe_small"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_res_ok",
+      "from": "n_resectability",
+      "to": "n_resect_risk",
+      "fromOptions": [
+        "resectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_res_marg",
+      "from": "n_resectability",
+      "to": "n_neoadj_mutation",
+      "fromOptions": [
+        "marginal"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neo_sens",
+      "from": "n_neoadj_mutation",
+      "to": "n_tx_neoadj",
+      "fromOptions": [
+        "kit_sensitive"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neo_res",
+      "from": "n_neoadj_mutation",
+      "to": "n_neoadj_surgery",
+      "fromOptions": [
+        "resistant"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neo_resp",
+      "from": "n_tx_neoadj",
+      "to": "n_neoadj_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neor_resect",
+      "from": "n_neoadj_response",
+      "to": "n_tx_neoadj_resect",
+      "fromOptions": [
+        "responded",
+        "stable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neor_prog",
+      "from": "n_neoadj_response",
+      "to": "n_tx_neoadj_prog",
+      "fromOptions": [
+        "progressed"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neoresect_risk",
+      "from": "n_tx_neoadj_resect",
+      "to": "n_resect_risk",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neosurg_risk",
+      "from": "n_neoadj_surgery",
+      "to": "n_resect_risk",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rr_low",
+      "from": "n_resect_risk",
+      "to": "n_tx_low",
+      "fromOptions": [
+        "low"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rr_int",
+      "from": "n_resect_risk",
+      "to": "n_int_decision",
+      "fromOptions": [
+        "intermediate"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rr_high",
+      "from": "n_resect_risk",
+      "to": "n_adj_mutation",
+      "fromOptions": [
+        "high"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_int_give",
+      "from": "n_int_decision",
+      "to": "n_tx_adj_ima_int",
+      "fromOptions": [
+        "give"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_int_obs",
+      "from": "n_int_decision",
+      "to": "n_int_observe",
+      "fromOptions": [
+        "observe"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_intgive_comp",
+      "from": "n_tx_adj_ima_int",
+      "to": "n_adj_completion",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_intobs_surv",
+      "from": "n_int_observe",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_k11",
+      "from": "n_adj_mutation",
+      "to": "n_tx_adj_imatinib",
+      "fromOptions": [
+        "kit11"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_k9",
+      "from": "n_adj_mutation",
+      "to": "n_tx_adj_imatinib_ex9",
+      "fromOptions": [
+        "kit9"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_d842",
+      "from": "n_adj_mutation",
+      "to": "n_tx_adj_none",
+      "fromOptions": [
+        "d842v"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_wt",
+      "from": "n_adj_mutation",
+      "to": "n_tx_adj_wt",
+      "fromOptions": [
+        "wt"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adjk11_comp",
+      "from": "n_tx_adj_imatinib",
+      "to": "n_adj_completion",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adjk9_comp",
+      "from": "n_tx_adj_imatinib_ex9",
+      "to": "n_adj_completion",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_comp_done",
+      "from": "n_adj_completion",
+      "to": "n_tx_adj_done_surv",
+      "fromOptions": [
+        "completed"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_comp_recur",
+      "from": "n_adj_completion",
+      "to": "n_tx_adj_recur",
+      "fromOptions": [
+        "recurred"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_low_surv",
+      "from": "n_tx_low",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_done_surv",
+      "from": "n_tx_adj_done_surv",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_met_k11",
+      "from": "n_met_mutation",
+      "to": "n_tx_met_imatinib",
+      "fromOptions": [
+        "kit11"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_met_k9",
+      "from": "n_met_mutation",
+      "to": "n_tx_met_imatinib_ex9",
+      "fromOptions": [
+        "kit9"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_met_d842",
+      "from": "n_met_mutation",
+      "to": "n_tx_met_avapritinib",
+      "fromOptions": [
+        "d842v"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_met_wt",
+      "from": "n_met_mutation",
+      "to": "n_wt_subtype",
+      "fromOptions": [
+        "wt"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_wt_sdh",
+      "from": "n_wt_subtype",
+      "to": "n_tx_sdh",
+      "fromOptions": [
+        "sdh"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_wt_other",
+      "from": "n_wt_subtype",
+      "to": "n_tx_met_wt",
+      "fromOptions": [
+        "other_wt"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_met_1lr_a",
+      "from": "n_tx_met_imatinib",
+      "to": "n_1l_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_met_1lr_b",
+      "from": "n_tx_met_imatinib_ex9",
+      "to": "n_1l_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_avap_resp",
+      "from": "n_tx_met_avapritinib",
+      "to": "n_d842v_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_d842_ctrl",
+      "from": "n_d842v_response",
+      "to": "n_tx_avap_maintain",
+      "fromOptions": [
+        "controlled"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_d842_prog",
+      "from": "n_d842v_response",
+      "to": "n_tx_avap_prog",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_1l_dur",
+      "from": "n_1l_response",
+      "to": "n_tx_1l_maintain",
+      "fromOptions": [
+        "durable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_1l_focal",
+      "from": "n_1l_response",
+      "to": "n_tx_focal",
+      "fromOptions": [
+        "focal"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_1l_gen",
+      "from": "n_1l_response",
+      "to": "n_2l_decision",
+      "fromOptions": [
+        "general"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2l_esc",
+      "from": "n_2l_decision",
+      "to": "n_tx_ima_escalate",
+      "fromOptions": [
+        "escalate"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2l_sw",
+      "from": "n_2l_decision",
+      "to": "n_tx_sunitinib",
+      "fromOptions": [
+        "switch"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_esc_sun",
+      "from": "n_tx_ima_escalate",
+      "to": "n_tx_sunitinib",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_sun_resp",
+      "from": "n_tx_sunitinib",
+      "to": "n_2l_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2lr_ctrl",
+      "from": "n_2l_response",
+      "to": "n_tx_sun_maintain",
+      "fromOptions": [
+        "controlled"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2lr_prog",
+      "from": "n_2l_response",
+      "to": "n_tx_regorafenib",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_reg_resp",
+      "from": "n_tx_regorafenib",
+      "to": "n_3l_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_3lr_ctrl",
+      "from": "n_3l_response",
+      "to": "n_tx_reg_maintain",
+      "fromOptions": [
+        "controlled"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_3lr_prog",
+      "from": "n_3l_response",
+      "to": "n_tx_ripretinib",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rip_resp",
+      "from": "n_tx_ripretinib",
+      "to": "n_4l_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_4lr_ctrl",
+      "from": "n_4l_response",
+      "to": "n_tx_rip_maintain",
+      "fromOptions": [
+        "controlled"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_4lr_prog",
+      "from": "n_4l_response",
+      "to": "n_tx_beyond",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prior_ima",
+      "from": "n_prior_line",
+      "to": "n_2l_decision",
+      "fromOptions": [
+        "post_imatinib"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prior_sun",
+      "from": "n_prior_line",
+      "to": "n_tx_regorafenib",
+      "fromOptions": [
+        "post_sunitinib"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prior_reg",
+      "from": "n_prior_line",
+      "to": "n_tx_ripretinib",
+      "fromOptions": [
+        "post_regorafenib"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rec_res",
+      "from": "n_recurrence",
+      "to": "n_tx_recur_resect",
+      "fromOptions": [
+        "resectable_rec"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rec_sys",
+      "from": "n_recurrence",
+      "to": "n_met_mutation",
+      "fromOptions": [
+        "systemic_rec"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_recres_surv",
+      "from": "n_tx_recur_resect",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    }
+  ],
+  "protocolRefs": [
+    "gi-gist-imatinib",
+    "gi-gist-regorafenib",
+    "gi-gist-sunitinib",
+    "gist-avapritinib",
+    "gist-ripretinib"
   ]
 }

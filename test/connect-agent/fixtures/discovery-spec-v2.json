@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "browser": "camofox",
+  "startOrigin": "http://127.0.0.1:8099",
+  "allowedOrigins": ["http://127.0.0.1:8099"],
+  "generatedAt": "2026-09-10T00:00:00.000Z",
+  "discoveryMode": "read-observe-only",
+  "events": [
+    {
+      "method": "GET", "path": "/api/patients", "origin": "http://127.0.0.1:8099",
+      "queryKeys": [], "status": 200, "contentType": "application/json",
+      "responseShape": { "type": "object", "keys": { "items": { "type": "array", "sample": { "type": "object", "keys": { "id": "string", "name": "string" } } } } }
+    },
+    {
+      "method": "GET", "path": "/api/patients/{id}", "origin": "http://127.0.0.1:8099",
+      "queryKeys": [], "status": 200, "contentType": "application/json",
+      "responseShape": { "type": "object", "keys": { "id": "string", "name": "string", "gender": "string" } }
+    },
+    {
+      "method": "GET", "path": "/api/patients/{id}/medications", "origin": "http://127.0.0.1:8099",
+      "queryKeys": ["page"], "status": 200, "contentType": "application/json",
+      "responseShape": { "type": "object", "keys": { "items": { "type": "array", "sample": { "type": "object", "keys": { "id": "string", "drug": "string", "dose": "string", "status": "string" } } } } }
+    },
+    {
+      "method": "GET", "path": "/api/patients/{id}/allergies", "origin": "http://127.0.0.1:8099",
+      "queryKeys": [], "status": 200, "contentType": "application/json",
+      "responseShape": { "type": "object", "keys": { "items": { "type": "array", "sample": { "type": "object", "keys": { "id": "string", "allergen": "string", "status": "string", "criticality": "string" } } } } }
+    },
+    {
+      "method": "GET", "path": "/api/patients/{id}/results", "origin": "http://127.0.0.1:8099",
+      "queryKeys": ["page"], "status": 200, "contentType": "application/json",
+      "responseShape": { "type": "object", "keys": { "items": { "type": "array", "sample": { "type": "object", "keys": { "id": "string", "test": "string", "value": "string", "unit": "string", "refLow": "number", "refHigh": "number", "resultedAt": "string", "status": "string" } } } } }
+    },
+    {
+      "method": "GET", "path": "/api/patients/{id}/encounters", "origin": "http://127.0.0.1:8099",
+      "queryKeys": [], "status": 200, "contentType": "application/json",
+      "responseShape": { "type": "object", "keys": { "items": { "type": "array", "sample": { "type": "object", "keys": { "id": "string", "status": "string", "start": "string", "end": "string" } } } } }
+    },
+    {
+      "method": "POST", "path": "/api/patients/{id}/discharge", "origin": "http://127.0.0.1:8099",
+      "queryKeys": [], "status": 200, "contentType": "application/json", "responseShape": null
+    },
+    {
+      "method": "GET", "path": "/api/reports/render", "origin": "http://127.0.0.1:8099",
+      "queryKeys": [], "status": 200, "contentType": "text/html; charset=utf-8", "responseShape": null
+    },
+    {
+      "method": "GET", "path": "/api/settings/theme", "origin": "http://127.0.0.1:8099",
+      "queryKeys": [], "status": 200, "contentType": "application/json",
+      "responseShape": { "type": "object", "keys": { "items": { "type": "array", "sample": { "type": "object", "keys": { "id": "string", "palette": "string" } } } } }
+    },
+    {
+      "method": "GET", "path": "/api/patients/{id}/vitals", "origin": "http://127.0.0.1:8099",
+      "queryKeys": [], "status": 401, "contentType": "application/json", "responseShape": null
+    }
+  ]
+}

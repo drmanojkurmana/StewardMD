@@ -1,0 +1,90 @@
+{
+  "id": "owner-img_7945",
+  "manufacturer": "ventilator-other",
+  "layout": "maquet-servo-i",
+  "difficulty": [
+    "real-photo",
+    "ventilator",
+    "set-vs-measured",
+    "glare",
+    "possible-patient-name"
+  ],
+  "image": "img_7945.jpg",
+  "imageSize": {
+    "w": 5712,
+    "h": 4284
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "not_applicable"
+    },
+    "spo2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "not_applicable"
+    },
+    "dbp": {
+      "status": "not_applicable"
+    },
+    "map": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 35
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_applicable"
+    }
+  },
+  "distractors": {
+    "simvRate": 12,
+    "rrLimits": [
+      30,
+      5
+    ],
+    "ppeak": 24,
+    "pmean": 15,
+    "peep": 5,
+    "o2": 40,
+    "o2Limits": [
+      45,
+      35
+    ],
+    "tiTtot": 0.57,
+    "mve": 12.0,
+    "vti": 386,
+    "vte": 354,
+    "settings": {
+      "o2": 40,
+      "peep": 5,
+      "simvRate": 12,
+      "pcAbovePeep": 20
+    },
+    "datetime": "05-05 09:22",
+    "banner": [
+      "Respiratory Rate: High",
+      "Check battery status"
+    ],
+    "bedLabel": "07"
+  },
+  "notes": "Maquet Servo-i, SIMV (Press. Contr.) + PS. Header patient-name/ID field reads [redacted] (FLAGGED: possible patient identifier in the photo). RR (b/min) 35 measured; SIMV rate 12 is a setting."
+}

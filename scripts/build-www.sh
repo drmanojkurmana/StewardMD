@@ -25,6 +25,20 @@ for f in *.js; do
     *) cp "$f" "$WWW/" ;;
   esac
 done
+# Multi-hospital core (window.SMD_HOSPITALS, loaded by index.html before
+# connect-agent-boot.js). The *.js loop above already copies it; this explicit
+# guard keeps the native bundle complete even if that loop ever gains excludes.
+[ -f hospital-registry.js ] && cp hospital-registry.js "$WWW/"
+
+# ── 2a. Root ES modules. prescription.js dynamic-imports /rx-build.mjs at runtime, so the native
+# bundle needs it too; the *.js loop above never matched .mjs, which left that import unresolvable
+# inside the app. ─────────────────────────────────────────────────────────────
+for f in *.mjs; do
+  case "$f" in
+    *.test.mjs) : ;;          # node tests are not web assets
+    *) cp "$f" "$WWW/" ;;
+  esac
+done
 
 # ── 2b. Stylesheets (buildless CSS referenced by index.html / home.js) ────────
 # index.html + home.js load /ui-v3.css at runtime (the whole .v3/.v4 home layout
@@ -38,6 +52,18 @@ done
 # offline / in the native app where the CDN is unreachable (see loadPdfJs in
 # icu.js / medlist.js, which try /vendor/pdfjs/ before the CDN fallback). ──────
 [ -d vendor ] && cp -R vendor "$WWW/"
+
+# ── 2e. Connect Hospital phone discovery engine (ES modules loaded via dynamic
+# import() in the app WebView; connect-agent-onboarding.js is the only caller).
+# Only the phone-runtime pieces ship: the phone engine itself, plus the shared
+# discovery/policy/camofox-transport modules connect-agent/phone/** imports from.
+if [ -d connect-agent/phone ]; then
+  mkdir -p "$WWW/connect-agent/phone"
+  cp connect-agent/phone/*.mjs "$WWW/connect-agent/phone/"
+fi
+for f in connect-agent/discovery.mjs connect-agent/policy.mjs connect-agent/camofox-client.mjs; do
+  [ -f "$f" ] && mkdir -p "$WWW/connect-agent" && cp "$f" "$WWW/connect-agent/"
+done
 
 # ── 3. Manifest + service worker ──────────────────────────────────────────────
 [ -f site.webmanifest ] && cp site.webmanifest "$WWW/"
@@ -67,6 +93,23 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # offline-clinical.js). Built by scripts/build-offline-clinical.mjs. ────────────
 [ -f data/offline-clinical.json.gz ] && cp data/offline-clinical.json.gz "$WWW/"
 
+# ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
+# The EMR surface and the modules it imports. Copied WHOLE rather than cherry-picked:
+# these are native ES modules that import each other by relative path, so a partial
+# copy produces a surface that loads until it reaches the one module nobody listed.
+#
+# NOTE: shipping these files does NOT make WardSynQ reachable to a user. Nothing in
+# the StewardMD app links to wardsynq.html and no flag turns it on; it is present so
+# the offline shell and the assets are cached and testable, not so a clinician can
+# open it. Reachability is a separate, deliberate decision that has not been taken.
+if [ -d wardsynq ]; then
+  mkdir -p "$WWW/wardsynq"
+  cp -R wardsynq/. "$WWW/wardsynq/"
+  # Test fixtures and seed data used only by node --test are not runtime assets.
+  rm -rf "$WWW/wardsynq/data/"*.seed.json.bak 2>/dev/null || true
+  echo "  wardsynq: $(find "$WWW/wardsynq" -type f | wc -l | tr -d ' ') files"
+fi
+
 # ── 5. Knowledge base — RUNTIME pieces only ───────────────────────────────────
 # Loaded by index.html + steward-ai.browser.js; the 13 MB kb.index.json and all
 # source/dev dirs (diseases, reference, validation, tools, schema, manifest…) are
@@ -93,6 +136,12 @@ if [ -d atlas ]; then
   mkdir -p "$WWW/atlas"
   cp atlas/modules.json "$WWW/atlas/" 2>/dev/null || true
   for d in atlas/*/; do [ -f "$d/atlas.json" ] && mkdir -p "$WWW/$d" && cp "$d/atlas.json" "$WWW/$d"; done
+  # 3D layer (atlas3d.js): ship the manifest + canonical index, NOT the 31 MB of .bin.gz
+  # geometry -- atlas3d.js dataUrl() fetches those from the live origin natively.
+  if [ -d atlas/3d ]; then
+    mkdir -p "$WWW/atlas/3d"
+    cp atlas/3d/manifest.json atlas/3d/index.json "$WWW/atlas/3d/" 2>/dev/null || true
+  fi
 fi
 [ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"
 # CliniX clinical-learning content (catalog + skill packs + disease pathways + the media licence
@@ -102,6 +151,13 @@ fi
 # assets/kardiox-learn/, they stay on Pages and clinix-content.js cxMedia() rewrites their URLs
 # natively, so the native bundle never carries them.
 [ -d clinix ] && mkdir -p "$WWW/clinix" && cp -R clinix/. "$WWW/clinix/"
+
+# Offline ICD-10 index (icd/icd10.min.json, built by scripts/icd/build-offline-index.mjs) - the
+# on-device fallback icd.js's window.SMD_ICD.localSearch() serves when maik-engine.js
+# icdCandidates() can't reach /api/icd/search. Same rule and failure mode as clinix above: the
+# root *.js glob copies icd.js, DATA DIRECTORIES ARE NOT COPIED - without this line the offline
+# ICD lookup silently returns nothing on-device.
+[ -d icd ] && mkdir -p "$WWW/icd" && cp -R icd/. "$WWW/icd/"
 
 # SURGX content (protocols / procedures / steps / cases / evidence / media manifest). Same rule and
 # the same failure mode as clinix above: root *.js and *.css are globbed, DATA DIRECTORIES ARE NOT.

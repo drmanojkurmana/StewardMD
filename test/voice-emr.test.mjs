@@ -26,13 +26,15 @@ test("vitals: BP slash + labeled 'by' both parse to systolic/diastolic", () => {
     { bpSys: 130, bpDia: 80, pulse: 88 });
 });
 
-test("vitals: pulse / RR / GCS / temperature", () => {
-  const f = fields("pulse rate 77 regular, respiratory rate 18, GCS 15, temperature 101 F");
+test("vitals: pulse / RR / GCS / temperature / SpO2 / GRBS", () => {
+  const f = fields("pulse rate 77 regular, respiratory rate 18, GCS 15, temperature 101 F, SpO2 98%, GRBS 110");
   assert.equal(f.pulse, 77);
   assert.equal(f.pulseRhythm, "Regular");
   assert.equal(f.rr, 18);
   assert.equal(f.gcs, 15);
   assert.equal(f.temp, 101);
+  assert.equal(f.spo2, 98);
+  assert.equal(f.grbs, 110);
 });
 
 test("vitals: Celsius temperature is converted to °F (GHIS unit)", () => {

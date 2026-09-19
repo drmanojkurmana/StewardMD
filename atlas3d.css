@@ -1,0 +1,112 @@
+/* atlas3d.css — RadioAnatome 3D Anatomy layer. Sits on top of the atlas overlay (z 880) and
+   reuses its header/sheet/chip classes so safe-area insets and the dialog spring come free. */
+.a3d-overlay { z-index: 890; background: #121416; }
+.a3d-overlay .atlas-top { flex: 0 0 auto; }
+
+.a3d-search { position: relative; padding: 4px 12px 0; flex: 0 0 auto; }
+.a3d-search input {
+  width: 100%; box-sizing: border-box; padding: 9px 12px; border-radius: 10px;
+  border: 1px solid #333; background: #1c1e21; color: #f2f2f2; font-size: 15px;
+  -webkit-appearance: none; appearance: none;
+}
+.a3d-search input:focus { outline: 2px solid #43d9c6; outline-offset: 1px; }
+.a3d-results {
+  position: absolute; left: 12px; right: 12px; top: 46px; z-index: 8; max-height: 46vh; overflow-y: auto;
+  background: #1c1e21; border: 1px solid #333; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.5);
+}
+.a3d-hit {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%;
+  padding: 10px 12px; border: 0; border-bottom: 1px solid #2a2d31; background: transparent; color: #eee;
+  font-size: 14px; text-align: left; cursor: pointer; min-height: 44px;
+}
+.a3d-hit:last-child { border-bottom: 0; }
+.a3d-hit small { color: #9aa; flex: 0 0 auto; }
+
+.a3d-chips { padding: 2px 12px; flex: 0 0 auto; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.a3d-chips::-webkit-scrollbar { display: none; }
+.a3d-chips .atlas-chip { margin: 4px 0; }
+
+.a3d-stage { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; }
+#a3dCanvas { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+.a3d-progress {
+  position: absolute; left: 50%; top: 12px; transform: translateX(-50%); z-index: 4;
+  padding: 6px 12px; border-radius: 999px; background: rgba(0,0,0,.65); color: #eee; font-size: 13px; white-space: nowrap;
+}
+.a3d-progress.err { background: #7a2b2b; white-space: normal; max-width: 90%; text-align: center; }
+
+.a3d-bar {
+  flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 8px 12px; overflow-x: auto; scrollbar-width: none;
+  background: #141414; border-top: 1px solid #222;
+}
+.a3d-bar::-webkit-scrollbar { display: none; }
+.a3d-btn {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: 10px;
+  border: 1px solid #333; background: #1c1e21; color: #eee; font-size: 14px; cursor: pointer;
+}
+.a3d-btn svg { width: 16px; height: 16px; }
+.a3d-btn.on { background: #f2f2f2; color: #111; border-color: #f2f2f2; }
+.a3d-btn[disabled] { opacity: .45; cursor: default; }
+.a3d-explode { flex: 1 1 120px; display: flex; align-items: center; gap: 8px; color: #bbb; font-size: 13px; min-width: 120px; }
+.a3d-explode input { flex: 1 1 auto; min-width: 60px; accent-color: #43d9c6; }
+
+.a3d-src { display: flex; gap: 6px; padding: 6px 12px 0; flex: 0 0 auto; }
+.a3d-srcbtn { flex: 1 1 0; min-height: 36px; border-radius: 10px; border: 1px solid #333; background: #1c1e21; color: #ddd; font-size: 14px; cursor: pointer; }
+.a3d-srcbtn.on { background: #43d9c6; color: #062; border-color: #43d9c6; font-weight: 700; }
+.a3d-label {
+  position: absolute; z-index: 3; transform: translate(-50%, -140%); pointer-events: none;
+  padding: 4px 10px; border-radius: 999px; background: rgba(6,102,90,.85); color: #fff; font-size: 13px; font-weight: 600; white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.a3d-label::after { content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: 10px; background: rgba(67,217,198,.9); transform: translateX(-50%); }
+.a3d-slice { flex: 1 0 100%; display: flex; align-items: center; gap: 8px; padding-bottom: 6px; color: #ddd; font-size: 13px; }
+.a3d-slice span { flex: 0 0 auto; min-width: 74px; }
+.a3d-slice input { flex: 1 1 auto; min-width: 60px; accent-color: #43d9c6; }
+.a3d-btn.sm { min-height: 32px; padding: 0 10px; font-size: 13px; }
+.a3d-bar { flex-wrap: wrap; }
+.a3d-linkrow { display: flex; gap: 6px; }
+.a3d-linkrow .a3d-link:first-child { flex: 1 1 auto; }
+.a3d-link.a3d-plane { flex: 0 0 auto; display: inline-flex; align-items: center; background: #1f3d3a; border-color: #2c4b48; color: #9fe; font-size: 13px; padding: 8px 10px; }
+.a3d-srcnote { color: #9fe; font-size: 13px; }
+.atlas-pill.live { background: #1f3d3a; color: #9fe; }
+.a3d-hit.canon span::before { content: "CT"; display: inline-block; margin-right: 8px; padding: 1px 6px; border-radius: 6px; background: #43d9c6; color: #062; font-size: 11px; font-weight: 700; }
+
+/* Sheet: peek tall enough to show the CT / MRI rows; tap the handle or title for full height */
+.a3d-sheet.on { height: min(330px, 46%); }
+.a3d-sheet.full { height: 92%; }
+.a3d-sheet .atlas-grab, .a3d-sheet .atlas-sheet-ttl { cursor: pointer; }
+
+/* Sheet extras */
+.a3d-sheet .atlas-pill.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+.a3d-canon { color: #bbb; font-size: 13px; margin: 0 0 10px; }
+.a3d-canon b { color: #fff; }
+.a3d-links { display: flex; flex-direction: column; gap: 8px; }
+.a3d-link {
+  display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 10px; width: 100%; min-height: 48px;
+  padding: 8px 12px; border-radius: 12px; border: 1px solid #3a3a3a; background: #333; color: #f2f2f2; text-align: left; cursor: pointer; font-size: 14px;
+}
+.a3d-link b { display: inline-block; padding: 3px 0; border-radius: 6px; background: #43d9c6; color: #062; text-align: center; font-size: 12px; font-weight: 700; }
+.a3d-link small { color: #aaa; }
+.a3d-lat { display: flex; gap: 8px; margin-top: 12px; }
+.a3d-tree { background: transparent; border: 0; color: #eee; font-size: 14px; padding: 6px 0; text-align: left; cursor: pointer; min-height: 40px; }
+.a3d-tree small { color: #9aa; margin-left: 6px; }
+
+/* Panels (Layers, About) sit above the stage like the atlas info screen */
+.a3d-panel { position: absolute; inset: 0; z-index: 7; background: #121416; display: flex; flex-direction: column; }
+.a3d-sys { list-style: none; margin: 0; padding: 0; }
+.a3d-sys li { border-bottom: 1px solid #222; }
+.a3d-sys label { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 4px 0; font-size: 15px; cursor: pointer; }
+.a3d-sys input { width: 20px; height: 20px; accent-color: #43d9c6; }
+.a3d-sys i { width: 14px; height: 14px; border-radius: 50%; flex: 0 0 auto; }
+.a3d-sys small { margin-left: auto; color: #9aa; }
+
+/* Catalog entry card in the RadioAnatome catalog */
+.atlas-3d-card {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 64px; margin: 8px 0 4px;
+  padding: 10px 14px; border-radius: 14px; border: 1px solid #2c4b48; text-align: left; cursor: pointer;
+  background: linear-gradient(135deg, #16302d, #1a1c1f); color: #f2f2f2;
+}
+.atlas-3d-card b { display: block; font-size: 16px; }
+.atlas-3d-card span { display: block; color: #9cc; font-size: 13px; }
+.atlas-3d-card i { width: 40px; height: 40px; border-radius: 12px; background: #43d9c6; color: #062; display: inline-flex; align-items: center; justify-content: center; font-style: normal; font-weight: 800; flex: 0 0 auto; }
+
+@media (prefers-reduced-motion: reduce) { .a3d-overlay.on { animation: none; } }

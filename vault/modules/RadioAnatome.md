@@ -11,6 +11,7 @@ built only from licence-cleared sources.
 - **Plans:** `docs/superpowers/plans/2026-08-17-anatomy-atlas-viewer.md` · `…-pipeline.md`
 - **Tests:** `test/atlas-layout.test.mjs` (74) · `test/atlas-data.test.mjs` (143) · `atlas-pipeline/test_pipeline.py` (203)
 - **Modules:** 10 — head/thorax/abdomen CT in axial + coronal + sagittal (1249 verified pins), plus brain T1 MRI images awaiting authoring
+- **3D layer:** [[RadioAnatome 3D]] — BodyParts3D reference body on the same ontology; "3D Anatomy" card in the catalog, "3D" pill on a slice sheet, `ATLAS.openAt(module, sid, slice)` deep link used by its CT/MRI rows, `ATLAS.back()` unwinds the 3D layer first
 
 ## Gotchas
 

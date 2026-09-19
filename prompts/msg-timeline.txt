@@ -1,0 +1,65 @@
+feat: the timeline becomes the whole clinical story, readable and filterable
+
+The timeline said "progress note drafted" and stopped there - so the one thing a doctor
+picking up an unfamiliar patient most needs, what the last doctor actually thought, was
+the one thing the history would not show them. They had to open every note in turn to
+find out. It also said WHAT happened and almost never WHO did it, and it covered about
+half of what happens to a patient.
+
+WHAT WAS WRITTEN. A note's own sections are on the timeline now, headings included,
+because a heading is how a reader tells an examination finding from a plan. Nothing is
+summarised, shortened or rephrased - it is the clinician's words or it is nothing.
+
+WHO DID IT. Every record carries writtenBy, stamped by the store rather than supplied by
+the caller, so this is the session that actually wrote it and not a claim. The
+role-specific fields win where they exist, because a prescription's prescriber and an
+order's requester are the person answerable for it, which is not always the session that
+saved the row. Rows now read "dr.mehta wrote a progress note" and "dr.mehta ordered CBC".
+An account id that cannot be turned into words stays "a clinician account" rather than
+being dressed up as a name.
+
+THE WHOLE STORY, not notes and vitals. Added: procedures (operation, anaesthetic,
+implant, delivery), critical events, dispensing, medicines reconciliation, specimen
+collection, admission requests, allergies, resuscitation, hospital emergencies,
+break-glass access, and billing. Admitted, moved and discharged are said as three
+different things rather than as one status word - and a ward stay is ADMITTED while an
+outpatient visit CHECKS IN, because one word for both reads wrong in whichever half it
+does not belong to.
+
+AN ORDER AND ITS RESULT, JOINED. DiagnosticReport already carries the ServiceRequest it
+answers, so an investigation now says whether the report is back and offers a button that
+opens it; one still waiting says so in those words instead of looking identical to the
+finished one. A corrected report supersedes the preliminary one. Imaging answers its
+order the same way.
+
+FILTERS, by kind and by date, with counts. A kind with nothing in it is not offered at
+all - thirteen chips of which nine are empty is a worse screen than four that mean
+something. The active filter is filled, not outlined, and is restated in words above the
+list, because a filter a reader does not notice is a reader looking at an incomplete
+history without knowing it. The glance card on the chart is deliberately never filtered.
+
+EXPAND AND COLLAPSE. Collapsed is the default and the preview is the real first line
+rather than an ellipsis, so a whole stay's assessments can be skimmed without opening one.
+
+COLOUR, under this file's own rule about colour. ward.css says why the primary action
+here is near-ink and not a brand colour: an interface where colour means "clickable" has
+spent the association that must stay free for "clinically abnormal". A thirteen-colour
+timeline would spend it far more thoroughly, and the one genuinely red thing on a chart
+would stop being seen. So kinds are separated by weight in the same ink, real colour is
+spent only on an unacknowledged critical result and an allergy, and the category is
+written on every row in words - the edge groups, the word explains.
+
+Money is the one deliberate narrowing: a bill says WHAT was billed and never how much.
+The amounts live on the billing screen, which has its own permission; a clinical history
+quietly carrying a patient's money would put it on every clinical reader's screen. Tested.
+
+Two bugs caught while building: "Open the report" pointed at an investigations view that
+does not exist (results are a card on the chart), which would have shown a blank screen;
+and the report id was being dropped in the results mapping, so nothing could be picked
+out to open.
+
+Tests: 23 new - 14 on the builder, 9 rendering the page for real. Suite 5810 passing, 0
+failing.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

@@ -1,0 +1,356 @@
+{
+  "guideline": "basal_cell",
+  "id": "basal_cell",
+  "title": "Basal Cell Skin Cancer",
+  "category": "Skin Cancer",
+  "version": "2.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "basal_cell_carcinoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Basal Cell Skin Cancer (BCC). Covers complete clinical algorithm: Diagnostic Workup (full-body skin exam with dermoscopy, shave/punch/excisional biopsy, Area H/M/L risk stratification by location and size, clinical margin assessment, indolent vs aggressive histologic subtyping, high-risk clinical features) -> Risk Stratification (Low-Risk vs High-Risk vs Locally Advanced laBCC vs Metastatic mBCC) -> Low-Risk local therapy (standard 4 mm excision, curettage and electrodesiccation, topical 5-FU/imiquimod or PDT, RT for nonsurgical candidates) -> High-Risk margin-controlled surgery (Mohs micrographic surgery or CCPDMA excision, wider excision with frozen/permanent section, adjuvant or definitive RT) -> laBCC systemic therapy (first-line Hedgehog inhibitor vismodegib 150 mg PO daily or sonidegib 200 mg PO daily; second-line cemiplimab 350 mg IV q3w) -> mBCC systemic therapy (first-line vismodegib; second-line cemiplimab; palliative cisplatin-based chemotherapy consideration). References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Basal Cell Skin Cancer Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Area H (mask area of face including central face, eyelids, eyebrows, periorbital skin, nose, lips, chin, mandible, preauricular and postauricular skin, temples, ears, genitalia, hands, feet): high-risk at any size. Area M (cheeks, forehead, scalp, neck, pretibial): high-risk at 10 mm or larger. Area L (trunk and extremities excluding pretibial, hands, feet): high-risk at 20 mm or larger.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Aggressive histologic subtypes (infiltrative, micronodular, morpheaform, basosquamous, sclerosing) behave as high-risk disease regardless of size or location and require margin-controlled surgery; indolent subtypes (superficial, nodular) with well-defined borders and small size qualify for low-risk local options.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Standard excision of low-risk BCC uses 4 mm clinical margins with postoperative margin assessment; curettage and electrodesiccation is reserved for low-risk non-hair-bearing lesions outside Area H; topical 5-fluorouracil, imiquimod, and photodynamic therapy apply to superficial BCC in nonsurgical candidates with counseling on lower cure rates and need for follow-up.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Hedgehog pathway inhibitors (vismodegib 150 mg PO once daily per ERIVANCE/STEVIE; sonidegib 200 mg PO once daily per BOLT) are first-line systemic therapy for laBCC and mBCC; both are teratogenic, so pregnancy must be excluded with strict contraception during and after therapy, and patients must be monitored for muscle spasms, alopecia, and dysgeusia.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Cemiplimab 350 mg IV every 3 weeks (anti-PD-1, EMPOWER-BCC 1) is second-line systemic therapy for laBCC or mBCC after progression on or intolerance to a Hedgehog pathway inhibitor; cisplatin-based chemotherapy is a palliative multidisciplinary consideration for metastatic disease.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "basal_cell_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Basal Cell Skin Cancer: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before risk stratification. Confirm tissue diagnosis, map location against Area H/M/L size thresholds, assess margins and histology, and flag high-risk clinical features.",
+      "path": "Basal Cell Skin Cancer / Workup",
+      "pills": [
+        "BCC",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete full-body skin examination with dermoscopy, documenting lesion size in millimeters, anatomic location, borders, ulceration, and photography of the index lesion.",
+        "Biopsy of suspicious lesion: shave, punch, or excisional biopsy with pathology documenting BCC subtype, differentiation, and perineural involvement where present.",
+        "Risk stratification by location and size: Area H (mask area of face, genitalia, hands, feet) is high-risk at any size; Area M (cheeks, forehead, scalp, neck) is high-risk at 10 mm or larger; Area L (trunk and extremities) is high-risk at 20 mm or larger.",
+        "Clinical margin assessment: well-defined borders versus poorly defined borders, including assessment for subclinical extension and fixation to deeper structures.",
+        "Histologic subtype: indolent (superficial, nodular) versus aggressive (infiltrative, micronodular, morpheaform, basosquamous, sclerosing).",
+        "High-risk clinical features: immunosuppressed patient, site of prior radiation therapy, perineural involvement, or recurrent lesion after prior treatment."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Risk Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_risk_strat",
+      "linkId": "basal_cell_risk_strat",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Risk Stratification",
+      "title": "Basal Cell Skin Cancer: Risk Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign the risk group from Area H/M/L location-size criteria, margin definition, histology, recurrence, and extent of invasion; risk group selects the local or systemic pathway.",
+      "path": "Basal Cell Skin Cancer / Risk Stratification",
+      "pills": [
+        "BCC",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Low-risk BCC: Area L smaller than 20 mm or Area M smaller than 10 mm, well-defined borders, primary lesion, non-aggressive histology, immunocompetent host, no prior radiation at the site.",
+        "High-risk BCC: Area H at any size, Area M 10 mm or larger, Area L 20 mm or larger, recurrent lesion, aggressive histology, poorly defined borders, perineural involvement, immunosuppression, or prior radiation at the site.",
+        "Locally advanced BCC (laBCC): extensive invasion into adjacent structures such that curative surgery or radiation therapy is not feasible or would cause unacceptable morbidity.",
+        "Metastatic BCC (mBCC): histologically confirmed nodal or distant organ metastases on clinical examination and cross-sectional imaging."
+      ],
+      "options": [
+        {
+          "id": "low",
+          "label": "Low-Risk Basal Cell Carcinoma (Area L <20mm, Area M <10mm, well-defined, primary, non-aggressive histology)",
+          "sets": {
+            "risk": "low"
+          },
+          "pills": [
+            "BCC",
+            "low-risk"
+          ]
+        },
+        {
+          "id": "high",
+          "label": "High-Risk Basal Cell Carcinoma (Area H any size, Area M >=10mm, Area L >=20mm, recurrent, aggressive histology, or poorly defined)",
+          "sets": {
+            "risk": "high"
+          },
+          "pills": [
+            "BCC",
+            "high-risk"
+          ]
+        },
+        {
+          "id": "labcc",
+          "label": "Locally Advanced Basal Cell Carcinoma (laBCC: extensive invasion, not amenable to curative surgery or RT)",
+          "sets": {
+            "risk": "locally_advanced"
+          },
+          "pills": [
+            "BCC",
+            "laBCC"
+          ]
+        },
+        {
+          "id": "mbcc",
+          "label": "Metastatic Basal Cell Carcinoma (mBCC: nodal or distant organ metastases)",
+          "sets": {
+            "risk": "metastatic"
+          },
+          "pills": [
+            "BCC",
+            "mBCC"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_low_risk_tx",
+      "linkId": "basal_cell_low_risk_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Low-Risk Treatment",
+      "title": "Low-Risk BCC: Standard Excision, C&D, Topical Therapy, or RT",
+      "section": "Treatment",
+      "description": "Definitive local therapy for low-risk BCC: margin-assessed excision, curettage and electrodesiccation for selected lesions, topical or PDT options for superficial disease in nonsurgical candidates, or radiation when surgery is contraindicated.",
+      "path": "Basal Cell Skin Cancer / Low-Risk / Treatment",
+      "pills": [
+        "BCC",
+        "low-risk",
+        "local"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "Standard surgical excision with 4 mm clinical margins and postoperative margin assessment; re-excise for positive margins.",
+        "Curettage and electrodesiccation (C&D) for low-risk superficial non-hair-bearing lesions outside Area H in appropriate candidates.",
+        "Topical therapy or photodynamic therapy (PDT) for superficial BCC in nonsurgical candidates: 5-fluorouracil 5% cream twice daily for 6-12 weeks, or imiquimod 5% cream 5 times per week for 6 weeks; counsel on lower cure rates and schedule close follow-up.",
+        "Radiation therapy (RT) as primary treatment when surgery is contraindicated or declined; confirm suitability with radiation oncology.",
+        "Surveillance after definitive local therapy: full skin examination with dermoscopy at least annually, sun-protection counseling, and prompt biopsy of new or changing lesions."
+      ],
+      "regimenSummary": "Standard 4mm Excision or C&D or Topical 5-FU/Imiquimod",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_high_risk_tx",
+      "linkId": "basal_cell_high_risk_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "High-Risk Treatment",
+      "title": "High-Risk BCC: Mohs or CCPDMA Excision With RT Options",
+      "section": "Treatment",
+      "description": "Margin-controlled surgery is preferred for high-risk BCC to conserve tissue and confirm complete removal; wider excision with section control and adjuvant or definitive radiation cover the remaining scenarios.",
+      "path": "Basal Cell Skin Cancer / High-Risk / Treatment",
+      "pills": [
+        "BCC",
+        "high-risk",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Mohs micrographic surgery (MMS) preferred for tissue conservation and complete margin control, especially for Area H lesions and recurrent or aggressive-histology disease.",
+        "Surgical excision with complete circumferential peripheral and deep margin assessment (CCPDMA) as an alternative margin-controlled technique where Mohs expertise is unavailable.",
+        "Surgical excision with wider clinical margins (at least 4-6 mm) plus intraoperative frozen section or permanent-section margin analysis when Mohs or CCPDMA cannot be performed.",
+        "Adjuvant radiation therapy (RT) when margins are positive and re-excision is not feasible; definitive primary RT for nonsurgical candidates after multidisciplinary evaluation.",
+        "Surveillance after definitive therapy: skin and regional examination every 6-12 months for 2 years then annually, with a low threshold for re-biopsy of the treatment field."
+      ],
+      "regimenSummary": "Mohs Micrographic Surgery (MMS) or CCPDMA Excision",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_labcc_tx",
+      "linkId": "basal_cell_labcc_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Locally Advanced Treatment",
+      "title": "laBCC: Hedgehog Inhibitor Then Cemiplimab",
+      "section": "Treatment",
+      "description": "First-line systemic therapy for locally advanced BCC is a Hedgehog pathway inhibitor; cemiplimab follows for progression on or intolerance to Hedgehog inhibition.",
+      "path": "Basal Cell Skin Cancer / Locally Advanced / Systemic Therapy",
+      "pills": [
+        "BCC",
+        "laBCC",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d",
+        "e"
+      ],
+      "bullets": [
+        "First-line Hedgehog pathway inhibitor: vismodegib 150 mg PO once daily (ERIVANCE and STEVIE trials) or sonidegib 200 mg PO once daily (BOLT trial); continue until disease progression or unacceptable toxicity.",
+        "WARNING: Hedgehog pathway inhibitors are teratogenic. Exclude pregnancy before starting, require strict contraception during and after therapy per labeling, and counsel against blood donation during treatment.",
+        "Monitor on Hedgehog therapy for muscle spasms, alopecia, dysgeusia, weight loss, and fatigue; interrupt or discontinue for intolerable toxicity per labeling.",
+        "Second-line for progression on or intolerance to a Hedgehog inhibitor: cemiplimab 350 mg IV every 3 weeks (anti-PD-1, EMPOWER-BCC 1 trial) with immune-related adverse event monitoring.",
+        "Reassess surgical or RT candidacy at response; involve multidisciplinary dermatology, surgery, radiation oncology, and medical oncology throughout."
+      ],
+      "regimenSummary": "Vismodegib 150 mg PO Daily (or Sonidegib 200 mg); 2L Cemiplimab 350 mg IV q3w",
+      "protocolRefs": [
+        "skin-bcc-vismodegib"
+      ]
+    },
+    {
+      "id": "n_mbcc_tx",
+      "linkId": "basal_cell_mbcc_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Metastatic Treatment",
+      "title": "mBCC: Vismodegib Then Cemiplimab",
+      "section": "Treatment",
+      "description": "First-line systemic therapy for metastatic BCC is Hedgehog inhibition with vismodegib; cemiplimab follows for progression or intolerance, with palliative chemotherapy as a multidisciplinary consideration.",
+      "path": "Basal Cell Skin Cancer / Metastatic / Systemic Therapy",
+      "pills": [
+        "BCC",
+        "mBCC",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d",
+        "e"
+      ],
+      "bullets": [
+        "First-line Hedgehog inhibitor: vismodegib 150 mg PO once daily (ERIVANCE trial, confirmed objective responses in metastatic disease); continue until progression or unacceptable toxicity.",
+        "Apply the same teratogenicity precautions as in laBCC: exclude pregnancy, require strict contraception, and monitor for muscle spasms, alopecia, and dysgeusia.",
+        "Second-line for progression on or intolerance to Hedgehog inhibitor: cemiplimab 350 mg IV every 3 weeks (anti-PD-1, EMPOWER-BCC 1) with immune-related adverse event monitoring.",
+        "Multidisciplinary consideration of cisplatin-based chemotherapy for palliation in selected metastatic patients, particularly after checkpoint inhibitor progression.",
+        "Stage with cross-sectional imaging at baseline and every 8-12 weeks on systemic therapy; offer clinical trial enrollment at every line."
+      ],
+      "regimenSummary": "Vismodegib 150 mg PO Daily -> Cemiplimab 350 mg IV q3w",
+      "protocolRefs": [
+        "skin-bcc-vismodegib"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_risk",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_risk_strat",
+      "toNodeId": "n_risk_strat",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_risk_low",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_low_risk_tx",
+      "toNodeId": "n_low_risk_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "low",
+      "fromOptions": [
+        "low"
+      ]
+    },
+    {
+      "id": "l_risk_high",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_high_risk_tx",
+      "toNodeId": "n_high_risk_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "high",
+      "fromOptions": [
+        "high"
+      ]
+    },
+    {
+      "id": "l_risk_labcc",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_labcc_tx",
+      "toNodeId": "n_labcc_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "labcc",
+      "fromOptions": [
+        "labcc"
+      ]
+    },
+    {
+      "id": "l_risk_mbcc",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_mbcc_tx",
+      "toNodeId": "n_mbcc_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "mbcc",
+      "fromOptions": [
+        "mbcc"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "skin-bcc-vismodegib"
+  ]
+}

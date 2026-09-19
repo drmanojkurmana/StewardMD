@@ -50,6 +50,42 @@ The clinical position is unchanged by the flag: each module is still clinically 
 regulatory-pending, and the in-module wording that says so must stay. Set `def:false` in the relevant
 `*-flags.js` to close one again; `?kardiox=0` / `?thorex=0` / `?fundx=0` disables per device.
 
+## WardSynQ — three flags, all OFF, added 2026-09-05
+
+Registry: `wardsynq-flags.js` (repo root), read as query param → localStorage → default. Not in the
+2026-08-26 generated count above, which predates them.
+
+| Flag | State | What turning it on does |
+|---|---|---|
+| `smd_wardsynq` | OFF | The WardSynQ surfaces. Nothing in WardSynQ is clinically approved. |
+| `smd_wardsynq_shadow` | OFF | Observation only. A GHIS bundle already ingested by the legacy path is additionally mapped through the WardSynQ adapter and the result COUNTED AND DISCARDED — no store, no event bus, no chart, no safety state. Not loading the file removes the change entirely. |
+| `smd_wardsynq_cutover` | OFF | **The one to be careful with.** Routes the live mobile path onto the adapter. Do not enable on a real clinical device: no clinical content in WardSynQ is approved, and the adapter has never seen a real GHIS bundle in anger. |
+
+**Added 2026-09-06, the Clinical Record Service.** Not in the registry above; three separate switches,
+each OFF/absent by default:
+
+| Switch | Where | What it does |
+|---|---|---|
+| `WARDSYNQ_RECORD=1` | Pages env var (server) | Serves `/api/wardsynq/*`. Unset, every route is 404. The schema must be applied first (see [[Infra]]). |
+| `?record=<tenantId>` (`&patient=<id>` on the bedside page) | `wardsynq.html`, `opd.html` | The surface charts into the hospital's shared record instead of this browser's memory. Without it the pages behave exactly as before, demo cohort and all. |
+| `?wardsynq_record=<tenantId>` / `localStorage smd_wardsynq_record_tenant` | StewardMD Mobile (`wardsynq-record-boot.js`) | The phone opens the same record and exposes it as `window.SMD_WARDSYNQ_RECORD`. Nothing in the shipped app reads it yet. `?wardsynq_record=off` forgets it. |
+| `settings.wardsynq.migrations.vitals` = `off` / `shadow` / `authoritative` | `connect_tenant` row, per hospital | The nurse-vitals dual-write (`functions/_wardsynq/migrate-vitals.js`). Default `off`. Needs `WARDSYNQ_RECORD=1` AND `q_orgs.connectTenantId` on the OPD org besides. `shadow` cannot fail a save; `authoritative` can. |
+
+On the NATIVE app there is no address bar, so the query param is unreachable — set the flag with
+`SMD_WARDSYNQ_FLAGS.set('smd_wardsynq_shadow', true)` in the WebView console, then reload. A
+reinstall clears `localStorage`, so a flag does NOT survive one.
+
+`smd_wsq_push` (default OFF, `wardsynq-flags.js`) gates the phone side of S3 critical-result alerts
+(2026-09-14, S3 P1): binding the phone to a hospital identity, and `wardsynq-alert-ui.js` taking a v2
+push. Off, a v2 push shows as its thin notification text (ward and bed only) and nothing is bound, so
+no alert reaches the phone to be left unanswered. The old v1 self-push screen had no runtime sender
+and was removed.
+
+**One thing is deliberately NOT behind a flag**, because gating it off produces a worse failure than
+leaving it present:
+- `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
+  a patient record" surface rather than a plausible-looking drug round.
+
 ## Everything, by module
 
 ### CliniX  <sub>5 ON · 2 OFF</sub>
@@ -63,6 +99,16 @@ regulatory-pending, and the in-module wording that says so must stay. Set `def:f
 | `smd_clinix_viva_voice` | **ON** | Spoken viva: MaiK speaks the question aloud (native TTS) and the student answers by |
 | `smd_clinix_uncleared_media` | OFF | **NEVER, LEGAL.** The repo's own text: 'Authoring escape hatch: render media whose licence is not cleared. NEVER ship on.' |
 | `smd_clinix_viva_tier` | `"mbbs"` | Viva difficulty tier (mbbs | pg). |
+
+### RxChoice  <sub>3 ON · 2 OFF</sub>  <small>(added 2026-09-11; counts above predate it)</small>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_rxchoice` | **ON** | Master flag for the opt-in "Same Prescription. Smarter Price." panel. OFF restores the pre-RxChoice prescription pad exactly (no button, no PDF section). PUBLIC-RELEASE-GATE: def:TRUE for dev/testing. |
+| `smd_rxchoice_price` | **ON** | Show course-level cost on the cards. OFF = products only, no rupee figures. MRP is the Drug Database list price, never a live pharmacy quote. |
+| `smd_rxchoice_pdf` | **ON** | Append the RxChoice section (four options + final selected product) under the unchanged conventional prescription. |
+| `smd_rxchoice_ai_normalization` | OFF | **Keep OFF unless there is a reason.** Even on, AI may only normalize free text BEFORE the deterministic lookup - eligibility, matching, pricing and ranking stay deterministic regardless. The deterministic composition/brand index already resolves every line the pad can produce. |
+| `smd_rxchoice_patient_selection` | OFF | Phase 2. A patient must never introduce a product the doctor did not approve; MVP is doctor approval only. |
 
 ### FollowCare  <sub>6 ON · 2 OFF</sub>
 
@@ -103,6 +149,12 @@ regulatory-pending, and the in-module wording that says so must stay. Set `def:f
 | `smd_fundx_sensors` | OFF | **INCOMPLETE.** IMU sensor fusion. |
 | `smd_fundx_spatial_ar` | OFF | **INCOMPLETE.** True 3D AR corridor, iOS + ARKit only. |
 | `smd_fundx_telemetry` | OFF | **PRIVACY DEFAULT.** Acquisition telemetry. No PHI, but off unless wanted. |
+
+### Government Health Schemes  <sub>0 ON · 1 OFF</sub>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_govt_schemes` | OFF | **OWNER DECISION.** Government Health Schemes module master flag. DEFAULT OFF on purpose: scheme rates/codes are unverified government reference data until an admin review pass exists (vault/decisions 2026-09-02). Turn on per device with `?gs=1`. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 

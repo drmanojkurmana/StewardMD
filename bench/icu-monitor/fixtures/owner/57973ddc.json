@@ -1,0 +1,75 @@
+{
+  "id": "owner-57973ddc",
+  "manufacturer": "anaesthesia-machine",
+  "layout": "anaesthesia-vent-panel",
+  "difficulty": [
+    "stock-photo",
+    "anaesthesia",
+    "low-resolution",
+    "set-vs-measured"
+  ],
+  "image": "57973ddc.jpg",
+  "imageSize": {
+    "w": 469,
+    "h": 612
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "not_applicable"
+    },
+    "spo2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "not_applicable"
+    },
+    "dbp": {
+      "status": "not_applicable"
+    },
+    "map": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "ambiguous",
+      "why": "measured 'RR /min 12' label too small to read with certainty at 469 px; settings row also RR 12",
+      "value": 12
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_applicable"
+    }
+  },
+  "distractors": {
+    "setRR": 12,
+    "ppeak": 15,
+    "peep": 2,
+    "mv": 5.0,
+    "tv": 400,
+    "mode": "VCV",
+    "ie": "1:2",
+    "flows": {
+      "air": 1.5,
+      "n2o": 0.0,
+      "o2": 1.5
+    },
+    "totalFlow": 3.0,
+    "fio2": 61
+  },
+  "notes": "Anaesthesia workstation screen (stock-style photo, no visible watermark). All values tiny."
+}

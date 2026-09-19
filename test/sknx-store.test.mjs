@@ -12,6 +12,11 @@ test("save/list/get roundtrip via an injected store", () => {
   assert.equal(STORE.get(id, s).differential[0].label, "psoriasis");
 });
 
+test("save reports storage failure instead of claiming success", () => {
+  const s = { getItem: () => null, setItem: () => { throw new Error("QuotaExceededError"); } };
+  assert.equal(STORE.save({ differential: [], at: 10 }, s), null);
+});
+
 test("handle corrupt/non-array stored values gracefully", () => {
   // Test with "null" string
   const mem1 = {}; const s1 = { getItem: (k) => (k in mem1 ? mem1[k] : null), setItem: (k, v) => { mem1[k] = v; } };

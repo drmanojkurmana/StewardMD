@@ -195,12 +195,14 @@ final class LlamaEngine {
                   nPredict: Int32,
                   temperature: Float,
                   seed: UInt32,
+                  prefillEmptyThink: Bool = false,
                   onToken: ((String) -> Void)?,
                   completion: @escaping (Result<String, Error>) -> Void) {
         work.async { [weak self] in
             guard let self else { return }
             do { completion(.success(try self.generateSync(system: system, user: user, nPredict: nPredict,
-                                                           temperature: temperature, seed: seed, onToken: onToken))) }
+                                                           temperature: temperature, seed: seed,
+                                                           prefillEmptyThink: prefillEmptyThink, onToken: onToken))) }
             catch { completion(.failure(error)) }
         }
     }
@@ -234,6 +236,7 @@ final class LlamaEngine {
 
     private func generateSync(system: String, user: String, nPredict: Int32,
                               temperature: Float, seed: UInt32,
+                              prefillEmptyThink: Bool = false,
                               onToken: ((String) -> Void)?,
                               imagePaths: [String] = [], mmprojPath: String = "") throws -> String {
         lock.lock()
@@ -266,8 +269,23 @@ final class LlamaEngine {
         // life of the app is what gets an 8 GB phone killed, and image questions are occasional.
         defer { vision?.free() }
 
-        let prompt = Self.applyTemplate(model: m, system: system, user: userText)
+        var prompt = Self.applyTemplate(model: m, system: system, user: userText)
             ?? ((system.isEmpty ? "" : system + "\n\n") + userText)
+        /* Close the thinking block from the ASSISTANT side, not the user's question.
+         *
+         * FOUND LIVE 2026-08-31 -> 2026-09-03: buildPrompt() in maik-local.js used to push
+         * "<think>\n\n</think>" as part of the QUESTION text, on the theory that this engine sends a
+         * raw completion with no chat template. It does not - applyTemplate() above wraps the whole
+         * question (empty-think tag included) inside the USER turn, so the "closed" block landed as
+         * noise inside the doctor's question while the actual assistant turn still opened blank,
+         * fixing nothing. This is why MaiK Lite kept blanking or looping on fresh, re-verified v4
+         * weights after every other explanation had been ruled out.
+         *
+         * The only place a prefill can actually pre-empt the model's own thinking is appended HERE,
+         * after applyTemplate has already opened "<|im_start|>assistant\n" - so generation resumes
+         * from a point where the empty think block already happened, with no decision left to make.
+         */
+        if prefillEmptyThink { prompt += "<think>\n\n</think>\n\n" }
 
         // Tokenise (negative return = required capacity). Skipped entirely on the image path, where
         // mtmd owns tokenisation because it has to interleave text tokens with image embeddings.

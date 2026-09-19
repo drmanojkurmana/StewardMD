@@ -28,7 +28,11 @@ function load(env = {}) {
       explainGrounded: (...a) => { calls.push(["explainGrounded", a]); return Promise.resolve({ text: "CLOUD grounded" }); },
       explainGroundedStream: (...a) => { calls.push(["explainGroundedStream", a]); return Promise.resolve({ text: "CLOUD stream" }); },
       refine: (...a) => { calls.push(["refine", a]); return Promise.resolve({ topic: "CLOUD refine" }); },
-      route: function (q) { return this.refine(q); }
+      route: function (q) { return this.refine(q); },
+      vivaJudge: (...a) => { calls.push(["vivaJudge", a]); return Promise.resolve({ verdict: "correct", feedback: "CLOUD judge" }); },
+      extract: (...a) => { calls.push(["extract", a]); return Promise.resolve({ kind: a[1], engine: "cloud" }); },
+      research: (...a) => { calls.push(["research", a]); return Promise.resolve({ text: "CLOUD web answer", mode: a[1] === "evidence-review" ? "evidence-review" : "web-tinyfish", sources: [] }); },
+      researchSnippets: (...a) => { calls.push(["researchSnippets", a]); return Promise.resolve({ sources: [{ title: "Snippet source", url: "https://x.test", site: "X", snippet: "..." }] }); }
     }
   };
   if (env.gate || env.pro !== undefined) win.SMD_PRO = {
@@ -37,7 +41,12 @@ function load(env = {}) {
   };
   if (env.xaccess) win.SMD_XACCESS = { isActiveCached: () => true, devBypass: () => true };
   if (env.runtime) {
-    win.SMD_MAIK_LOCAL = { answer: (...a) => { calls.push(["local", a]); return Promise.resolve({ text: "LOCAL answer" }); } };
+    win.SMD_MAIK_LOCAL = {
+      answer: (...a) => { calls.push(["local", a]); return Promise.resolve({ text: "LOCAL answer" }); },
+      vivaJudge: (...a) => { calls.push(["localViva", a]); return Promise.resolve({ verdict: "partial", feedback: "LOCAL judge", engine: "local" }); },
+      opdSuggest: (...a) => { calls.push(["localOpd", a]); return Promise.resolve({ kind: "opd-suggest", provisionalDx: "LOCAL dx", ddx: [], engine: "local" }); },
+      webAnswer: (...a) => { calls.push(["localWebAnswer", a]); return Promise.resolve({ text: "LOCAL web answer", sources: a[1] || [], engine: "local", mode: "web-local" }); }
+    };
   }
   // Model module stub shaped like the real SMD_MAIK_MODELS so the settings section renders.
   if (env.pack !== undefined || env.models) {
@@ -610,6 +619,123 @@ ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slic
   // --mk-* only exists inside #maikSheet; using it in the Settings surface silently falls back.
   const settingsFn = SRC.slice(SRC.indexOf("function settingsHTML"), SRC.indexOf("function modelRowHTML"));
   ok("the Settings surface does not rely on the sheet-scoped --mk-* palette", !/var\(--mk-/.test(settingsFn));
+}
+
+// ── Offline stand-in for MaiK Cloud (owner decision, 2026-09-03) ──────────────────────────────────
+// A clinician on the cloud engine with no network gets the installed on-device model instead of a
+// failed call. The PREFERENCE stays "cloud"; only the effective engine changes, and only while offline.
+{
+  const on = load({ gate: true, runtime: true, pack: true });
+  on.win.navigator = { onLine: false };
+  ok("cloud pref + no network + local ready = the on-device model answers", on.E.effective() === "local");
+  on.ls.setItem("smd_maik_offline_local", "0");
+  ok("the flag turns the stand-in off", on.E.effective() === "cloud");
+  on.ls.setItem("smd_maik_offline_local", "1");
+  on.win.navigator = { onLine: true };
+  ok("network back = cloud again, nothing to undo", on.E.effective() === "cloud");
+  const noPack = load({ gate: true, runtime: true, pack: false });
+  noPack.win.navigator = { onLine: false };
+  ok("offline with no installed pack stays on cloud (fails honestly) rather than pretending", noPack.E.effective() === "cloud");
+  const noNav = load({ gate: true, runtime: true, pack: true });
+  ok("no navigator at all (web build, old WebView) never triggers the stand-in", noNav.E.effective() === "cloud");
+}
+
+// ── structured calls on device (owner, 2026-09-04): viva judge and OPD differential ─────────────────
+{
+  const loc = load({ gate: true, runtime: true, pack: true });
+  loc.ls.setItem("stewardmd.maikEngine", "local");
+  const v = await loc.win.SMD_AI.vivaJudge("Q", "K", "A");
+  ok("local engine: the viva judge runs on device", v.engine === "local" && v.verdict === "partial" && loc.calls.some((c) => c[0] === "localViva"));
+  const o = await loc.win.SMD_AI.extract("complaint text", "opd-suggest");
+  ok("local engine: the OPD differential runs on device", o.engine === "local" && loc.calls.some((c) => c[0] === "localOpd"));
+  // HARD POLICY (2026-09-11): a kind with no local implementation is REFUSED with a structured
+  // reason, never sent to the cloud while the picker says "On-device". (Before this date it fell
+  // through to Gemini; test/maik-policy.test.mjs covers the full matrix.)
+  const voice = await loc.win.SMD_AI.extract("dictation", "voice");
+  ok("an extract kind with no local implementation is refused, not sent to the cloud", voice.error === "LOCAL_CAPABILITY_REQUIRED" && !loc.calls.some((c) => c[0] === "extract"));
+  const cl = load({ gate: true, runtime: true, pack: true });
+  const v2 = await cl.win.SMD_AI.vivaJudge("Q", "K", "A");
+  ok("cloud pref: viva judge stays on the cloud", v2.feedback === "CLOUD judge");
+  const o2 = await cl.win.SMD_AI.extract("complaint text", "opd-suggest");
+  ok("cloud pref: OPD differential stays on the cloud", o2.engine === "cloud");
+  const rag = load({ gate: true, runtime: true, pack: true });
+  rag.ls.setItem("stewardmd.maikEngine", "rag");
+  const v3 = await rag.win.SMD_AI.vivaJudge("Q", "K", "A");
+  ok("KB-only pref: no model to judge with and no spend either, so a kb-only error (the caller shows it)", v3.error === "kb-only" && !rag.calls.some((c) => c[0] === "vivaJudge"));
+}
+
+// ── web research (owner, 2026-09-04): the local engine fetches snippets for free, then the
+// on-device model writes the answer - Gemini writes it only when MaiK Cloud is selected ─────────────
+{
+  const loc = load({ gate: true, runtime: true, pack: true });
+  loc.ls.setItem("stewardmd.maikEngine", "local");
+  const r = await loc.win.SMD_AI.research("Treatment of pneumonia");
+  ok("local engine: snippets were fetched with no Gemini call, and the on-device model wrote the answer",
+     r.engine === "local" && r.text === "LOCAL web answer" && loc.calls.some((c) => c[0] === "researchSnippets") && !loc.calls.some((c) => c[0] === "research"));
+  ok("the fetched sources were the ones handed to the local model", r.sources[0].title === "Snippet source");
+
+  const cl = load({ gate: true, runtime: true, pack: true });
+  const rc = await cl.win.SMD_AI.research("Treatment of pneumonia");
+  ok("cloud pref: research stays on the cloud path (Gemini pays for the conversion)", rc.text === "CLOUD web answer" && cl.calls.some((c) => c[0] === "research"));
+
+  const rag = load({ gate: true, runtime: true, pack: true });
+  rag.ls.setItem("stewardmd.maikEngine", "rag");
+  const rr = await rag.win.SMD_AI.research("Treatment of pneumonia");
+  ok("KB-only pref: research makes no AI call; the KB-only notice is rendered as the answer", rr.engine === "rag" && !rag.calls.some((c) => c[0] === "research"));
+
+  // Evidence Review is a distinct paid PubMed-synthesis feature. It is never diverted to the
+  // on-device model, and since 2026-09-11 it is not silently sent to the cloud from the local
+  // engine either: it is refused as a Cloud-only feature with cloud offered explicitly.
+  const locER = load({ gate: true, runtime: true, pack: true });
+  locER.ls.setItem("stewardmd.maikEngine", "local");
+  const er = await locER.win.SMD_AI.research("Best evidence for X", "evidence-review");
+  ok("Evidence Review on the local engine is refused as Cloud-only, never run on device or silently on the cloud",
+     er.error === "LOCAL_CAPABILITY_REQUIRED" && er.cloudOnly === true && !locER.calls.some((c) => c[0] === "researchSnippets" || c[0] === "research"));
+
+  // A local engine without a webAnswer implementation (older bundle) must not throw, and since
+  // 2026-09-11 must not fall through to the cloud either: a structured refusal.
+  const locNoWeb = load({ gate: true, runtime: true, pack: true });
+  delete locNoWeb.win.SMD_MAIK_LOCAL.webAnswer;
+  locNoWeb.ls.setItem("stewardmd.maikEngine", "local");
+  const rnw = await locNoWeb.win.SMD_AI.research("Treatment of pneumonia");
+  ok("no local webAnswer -> a structured refusal, not a silent cloud call", rnw.error === "LOCAL_CAPABILITY_REQUIRED" && !locNoWeb.calls.some((c) => c[0] === "research"));
+}
+
+// ── DOSE SHORT-CIRCUIT (owner, 2026-09-18): "dose of X" is answered from the drug database, so no
+// model call leaves at all - on ANY engine, cloud included - and a dose can never be invented. ─────
+{
+  const { createRequire } = await import("node:module");
+  const req = createRequire(import.meta.url);
+  // In the browser the module reads window.MEDAPI itself; under node it takes them as deps, so the
+  // engine sees the same { intent, answer } surface it calls in production.
+  const D0 = req("../kb/ai/drug-dose.js"), FZ = req("../kb/ai/drug-fuzzy.js");
+  const MEDAPI = {
+    searchCompositions: async (q) => ({ results: /^ondan|^onda|^ond/i.test(q) ? [{ composition: "Ondansetron" }] : [] }),
+    searchBrands: async () => ({ results: [] }),
+    structured: async (n) => (/ondansetron/i.test(n) ? { found: true, data: { adult_dose: "8 mg IV 8-hourly." } } : { found: false })
+  };
+  const DOSE = { intent: D0.intent, answer: (q) => D0.answer(q, { MEDAPI, DrugFuzzy: FZ }) };
+  const cloud = load({ gate: true, runtime: true, pack: true });
+  cloud.win.SMD_DOSE = DOSE;
+  const d = await cloud.win.SMD_AI.explainGrounded({ question: "dose of ondansetron" }, {});
+  ok("cloud engine: a dose question is answered from the drug database, with NO model call",
+     d.engine === "drugdb" && /8 mg IV 8-hourly/.test(d.text) && !cloud.calls.some((c) => c[0] === "explainGrounded"));
+
+  // Fails OPEN: a dose question the database cannot answer must still reach the normal engine.
+  const miss = load({ gate: true, runtime: true, pack: true });
+  miss.win.SMD_DOSE = DOSE;
+  const m = await miss.win.SMD_AI.explainGrounded({ question: "dose of zzzqqxdrug" }, {});
+  ok("a dose the database cannot answer falls through to the normal answer", m.text === "CLOUD grounded" && miss.calls.some((c) => c[0] === "explainGrounded"));
+
+  // And on device: same short-circuit, so the on-device model is never asked to recall a number.
+  const loc = load({ gate: true, runtime: true, pack: true });
+  loc.win.SMD_DOSE = DOSE;
+  loc.ls.setItem("stewardmd.maikEngine", "local");
+  const ld = await loc.win.SMD_AI.explainGrounded({ question: "dose of ondansetron" }, {});
+  ok("local engine: the same database answer, the on-device model is not asked for the number",
+     ld.engine === "drugdb" && !loc.calls.some((c) => c[0] === "local"));
+  const lq = await loc.win.SMD_AI.explainGrounded({ question: "treatment of pneumonia" }, {});
+  ok("a non-dose question is untouched by the dose router", lq.text === "LOCAL answer" && loc.calls.some((c) => c[0] === "local"));
 }
 
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);

@@ -288,6 +288,10 @@
     var f = opts.fetchImpl || (typeof fetch === "function" ? fetch : null);
     var pass = { provider: "offline", differential: differential || [], rationale: null, advisory: null };
     if (!f || !(differential && differential.length)) return Promise.resolve(pass);
+    // Answer-engine policy (2026-09-11): the re-rank is a Gemini call and runs automatically when a
+    // case has history, so it must honour the Local/KB-only engine like every other cloud AI path.
+    // The deterministic differential passes through unchanged.
+    try { if (typeof window !== "undefined" && window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.cloudAllowed && !window.SMD_MAIK_ENGINE.cloudAllowed()) return Promise.resolve(pass); } catch (e) {}
     return idToken().then(function (tok) {
       var headers = { "Content-Type": "application/json" };
       if (tok) headers.Authorization = "Bearer " + tok;

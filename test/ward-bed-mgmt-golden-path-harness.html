@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ TASK 4.3: bed-management golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the bed-management golden path (ward list -> Bed management
+ * button -> a ward's real beds, with state, restrictions and isolation shown -> change a bed's
+ * state -> a server-side conflict is shown, not silently swallowed) against an in-memory stub
+ * server whose response shapes are confirmed against functions/_opd_org_store.js/_opd_org.js and
+ * the real persistence proof in test/opd-org-store-ward-bed.test.mjs, which proves the CAS
+ * concurrency guard for real. This proves the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var BEDS = [
+  { id: "bed-1", orgId: "org-harness", wardId: "ward-1", name: "1", state: "available", genderRestriction: null, isolation: false, active: true },
+  { id: "bed-2", orgId: "org-harness", wardId: "ward-1", name: "2", state: "maintenance", genderRestriction: "female", isolation: true, active: true },
+];
+var NEXT_UPDATE_CONFLICTS = false;
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, wards: [] });
+
+  if (u.indexOf("/bed/update") >= 0 && (opts && opts.method) === "POST") {
+    if (NEXT_UPDATE_CONFLICTS) { NEXT_UPDATE_CONFLICTS = false; return reply({ ok: false, error: "bed_changed", message: "This bed changed under you - reload it and try again." }); }
+    var b = BEDS.filter(function (x) { return x.id === body.bedId; })[0];
+    if (b) b.state = body.state;
+    return reply({ ok: true, bed: b });
+  }
+  if (u.indexOf("/wards?") >= 0) return reply({ ok: true, wards: [{ id: "ward-1", orgId: "org-harness", name: "Medical A", type: "general", active: true }] });
+  if (u.indexOf("/beds?") >= 0) return reply({ ok: true, beds: BEDS });
+
+  return reply({ ok: true });
+};
+window.__forceNextConflict = function () { NEXT_UPDATE_CONFLICTS = true; };
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

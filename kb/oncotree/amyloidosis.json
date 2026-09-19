@@ -1,0 +1,395 @@
+{
+  "guideline": "amyloidosis",
+  "title": "Systemic Light Chain Amyloidosis (AL)",
+  "subtitle": "Mayo Cardiac Staging, Daratumumab-CyBorD, and Autologous HCT Pathways",
+  "navigatorVersion": "3.0.0",
+  "diseaseId": "amyloidosis",
+  "matchDisease": false,
+  "status": "draft",
+  "provenanceNote": "Clinical algorithms extracted from NCCN Guidelines Version 2.2026 for Systemic Light Chain Amyloidosis.",
+  "sourceNote": "NCCN Guidelines Version 2.2026 - Systemic Light Chain Amyloidosis (AMYL-1 to AMYL-4, AMYL-A to AMYL-D)",
+  "startNodeIds": [
+    "n_amyl_entry"
+  ],
+  "footnotes": {
+    "fn_dara_cybord": "Daratumumab + CyBorD (ANDROMEDA regimen) is the category 1 standard of care for newly diagnosed AL amyloidosis.",
+    "fn_cardiac": "Cardiac staging by Mayo 2004/2012 criteria governs transplant eligibility and systemic therapy dosing."
+  },
+  "nodes": [
+    {
+      "id": "n_amyl_entry",
+      "linkId": "amyl_entry",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical Suspicion",
+      "title": "Systemic Light Chain (AL) Amyloidosis: Clinical Presentation",
+      "section": "Diagnosis",
+      "description": "Multisystem disorder caused by tissue deposition of misfolded monoclonal immunoglobulin light chain amyloid fibrils.",
+      "path": "Amyloidosis / Presentation",
+      "pills": [
+        "AL-amyloidosis",
+        "light-chain",
+        "plasma-cell"
+      ],
+      "required": true,
+      "bullets": [
+        "Cardinal clinical presentations: unexplained nephrotic-range proteinuria or renal failure, heart failure with preserved ejection fraction (HFpEF) and thickened ventricular walls, hepatomegaly without imaging explanation, non-diabetic peripheral/autonomic neuropathy, macroglossia, or spontaneous periorbital ecchymoses ('raccoon eyes').",
+        "Urgent evaluation required: Early diagnosis is vital because delayed identification results in irreversible end-organ damage (particularly cardiac failure)."
+      ],
+      "options": [
+        {
+          "id": "newly_diagnosed",
+          "label": "Newly Diagnosed AL Amyloidosis (Evaluation & Staging)",
+          "sets": {
+            "setting": "newly_diagnosed"
+          },
+          "pills": [
+            "Newly diagnosed"
+          ]
+        },
+        {
+          "id": "relapsed_refractory",
+          "label": "Previously Treated / Relapsed or Refractory Disease",
+          "sets": {
+            "setting": "relapsed"
+          },
+          "pills": [
+            "R/R"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_amyl_workup",
+      "linkId": "amyl_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic Workup",
+      "title": "AL Amyloidosis: Mandatory Laboratory, Tissue Biopsy, and Staging Checklist",
+      "section": "Workup",
+      "description": "Establish presence of monoclonal light chain, confirm amyloid fibrils by Congo Red tissue staining/mass spectrometry, and assess organ involvement.",
+      "path": "Amyloidosis / Workup",
+      "pills": [
+        "workup",
+        "sFLC",
+        "Congo-Red",
+        "mass-spec",
+        "biomarkers"
+      ],
+      "required": true,
+      "bullets": [
+        "Serum and Urine Monoclonal Protein Studies: Serum free light chain (sFLC) assay with kappa/lambda ratio and dFLC (difference between involved and uninvolved FLC); serum protein electrophoresis (SPEP) and immunofixation (SIFE); 24-hour urine for total protein, electrophoresis (UPEP), and immunofixation (UIFE).",
+        "Tissue Biopsy & Definitive Typing: Abdominal subcutaneous fat pad aspirate and/or involved organ biopsy (kidney, bone marrow, salivary gland, rectum, heart). Congo Red staining demonstrating characteristic apple-green birefringence under polarized light.",
+        "Mandatory Mass Spectrometry Typing: Liquid chromatography-tandem mass spectrometry (LC-MS/MS) on Congo-red positive tissue to definitively identify amyloid protein subunit (distinguish AL from ATTR or AA amyloidosis).",
+        "Bone Marrow Examination: Aspirate and core biopsy with plasma cell immunohistochemistry and interphase FISH (specifically checking for t(11;14) translocation, present in ~50% of AL amyloidosis).",
+        "Cardiac Staging Biomarkers: High-sensitivity Cardiac Troponin T (hs-cTnT) or Troponin I (cTnI), and N-terminal pro-B-type natriuretic peptide (NT-proBNP) or BNP (baseline mandatory for Mayo staging).",
+        "Cardiovascular Imaging: 12-lead ECG (low voltage in limb leads discrepant with echocardiographic ventricular thickening); Transthoracic Echocardiogram with global longitudinal strain (apical sparing pattern); Cardiac MRI (diffuse subendocardial or transmural late gadolinium enhancement).",
+        "Renal & Coagulation Assessment: BUN, serum creatinine, eGFR, 24-hour urine protein quantification; PT/INR, PTT, and Factor X activity (Factor X deficiency can cause catastrophic hemorrhage in AL amyloidosis).",
+        "Blood Bank Typing Alert: Perform blood typing and indirect Coombs test PRIOR to initiating anti-CD38 monoclonal antibody therapy (Daratumumab)."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup completed - Perform Mayo cardiac risk staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_amyl_staging",
+      "linkId": "amyl_staging",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Mayo Cardiac Staging",
+      "title": "AL Amyloidosis: Mayo Cardiac Prognostic Staging",
+      "section": "Subtype & Risk",
+      "description": "Stratification based on cardiac biomarkers (hs-cTnT >=40 pg/mL, NT-proBNP >=1800 ng/L, dFLC >=180 mg/L).",
+      "path": "Amyloidosis / Staging",
+      "pills": [
+        "Mayo-stage",
+        "NT-proBNP",
+        "troponin",
+        "risk-stratification"
+      ],
+      "required": true,
+      "bullets": [
+        "Mayo 2004 / European Modification Staging System:",
+        "• Stage I: NT-proBNP <332 ng/L and cTnT <0.035 mcg/L (good prognosis).",
+        "• Stage II: Either NT-proBNP >=332 ng/L or cTnT >=0.035 mcg/L.",
+        "• Stage IIIa: Both NT-proBNP >=332 ng/L and cTnT >=0.035 mcg/L, with NT-proBNP <8500 ng/L.",
+        "• Stage IIIb: Very high cardiac risk (NT-proBNP >=8500 ng/L); prone to early fatal arrhythmias and cardiogenic shock.",
+        "Mayo 2012 Staging: Incorporates dFLC >=180 mg/L as 3rd prognostic factor (Stage I: 0 points, Stage II: 1 point, Stage III: 2 points, Stage IV: 3 points)."
+      ],
+      "options": [
+        {
+          "id": "stage_1_3a",
+          "label": "Mayo Stage I–IIIa (Standard to Intermediate Cardiac Risk, NT-proBNP <8500 ng/L)",
+          "sets": {
+            "mayo_stage": "stage_1_3a"
+          },
+          "pills": [
+            "Stage I-IIIa",
+            "Standard/Intermediate"
+          ]
+        },
+        {
+          "id": "stage_3b",
+          "label": "Mayo Stage IIIb (Advanced High-Risk Cardiac Amyloidosis, NT-proBNP >=8500 ng/L)",
+          "sets": {
+            "mayo_stage": "stage_3b"
+          },
+          "pills": [
+            "Stage IIIb",
+            "Advanced Cardiac"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_amyl_hct_candidacy",
+      "linkId": "amyl_hct_candidacy",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Autologous HCT Eligibility",
+      "title": "Mayo Stage I–IIIa: Evaluation for Autologous Stem Cell Transplant",
+      "section": "Primary Treatment",
+      "description": "Rigorous multidisciplinary evaluation to determine candidacy for high-dose melphalan with autologous HCT.",
+      "path": "Amyloidosis / HCT Candidacy",
+      "pills": [
+        "HCT-eligibility",
+        "transplant",
+        "melphalan"
+      ],
+      "required": true,
+      "bullets": [
+        "HCT Eligibility Criteria:",
+        "• Age <=65-70 years, ECOG performance status 0-2.",
+        "• NYHA Functional Class I-II (compensated cardiac function).",
+        "• Cardiac biomarkers: NT-proBNP <5000 ng/L and Troponin T <0.06 mcg/L.",
+        "• Preserved organ function: LVEF >=40-45%, DLCO >=50%, eGFR >=30-50 mL/min.",
+        "• Definite Exclusions: Medically refractory ventricular/atrial arrhythmias, recurrent pleural effusions, uncompensated heart failure, refractory orthostatic hypotension, Factor X level <25% with bleeding, or extensive bleeding gastrointestinal involvement."
+      ],
+      "options": [
+        {
+          "id": "hct_eligible",
+          "label": "Eligible for Autologous Stem Cell Transplantation",
+          "sets": {
+            "hct_status": "eligible"
+          },
+          "pills": [
+            "HCT Eligible"
+          ]
+        },
+        {
+          "id": "hct_ineligible",
+          "label": "Ineligible for Autologous Stem Cell Transplantation",
+          "sets": {
+            "hct_status": "ineligible"
+          },
+          "pills": [
+            "HCT Ineligible"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_amyl_tx_hct_eligible",
+      "linkId": "amyl_tx_hct_eligible",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HCT-Eligible Therapy",
+      "title": "HCT-Eligible AL Amyloidosis: Induction & Autologous HCT",
+      "section": "Primary Treatment",
+      "description": "Frontline Daratumumab-CyBorD induction followed by consolidative autologous HCT or deferred HCT.",
+      "path": "Amyloidosis / HCT / Therapy",
+      "pills": [
+        "HCT",
+        "dara-cybord",
+        "melphalan",
+        "curative-intent"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "rare-amyloidosis-dara-cybord"
+      ],
+      "bullets": [
+        "Preferred Induction (2-4 cycles): Daratumumab + Bortezomib + Cyclophosphamide + Dexamethasone (Dara-CyBorD / ANDROMEDA regimen, rare-amyloidosis-dara-cybord). Rapidly reduces clonal light chain burden.",
+        "Response-adapted HCT strategy:",
+        "• If complete hematologic response (CR, normal FLC ratio and dFLC <10 mg/L) achieved after induction, autologous HCT may be deferred with stem cell harvest and cryopreservation for future relapse.",
+        "• If persistent clonal disease / less than CR: Proceed to Autologous HCT with high-dose Melphalan (140-200 mg/m2 risk-adapted based on age and renal function).",
+        "Stem cell mobilization: G-CSF +/- Plerixafor; avoid aggressive fluid overhydration and monitor for volume overload.",
+        "Post-HCT Maintenance: Single-agent Daratumumab SC monthly may be continued to complete up to 24 cycles per ANDROMEDA trial protocol.",
+        "Supportive care: VZV antiviral prophylaxis (acyclovir/valacyclovir), antibacterial prophylaxis during neutropenia, and type/screen maintenance."
+      ]
+    },
+    {
+      "id": "n_amyl_tx_nontransplant",
+      "linkId": "amyl_tx_nontransplant",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Non-Transplant Primary Tx",
+      "title": "HCT-Ineligible (Mayo Stage I–IIIa): Daratumumab-CyBorD Therapy",
+      "section": "Primary Treatment",
+      "description": "Category 1 standard of care for non-transplant candidates.",
+      "path": "Amyloidosis / Non-Transplant / Therapy",
+      "pills": [
+        "Dara-CyBorD",
+        "ANDROMEDA",
+        "non-transplant",
+        "first-line"
+      ],
+      "showsRecommendation": true,
+      "protocolRefs": [
+        "rare-amyloidosis-dara-cybord"
+      ],
+      "bullets": [
+        "Category 1 Preferred Standard: Daratumumab + Bortezomib + Cyclophosphamide + Dexamethasone (Dara-CyBorD, rare-amyloidosis-dara-cybord).",
+        "• Schedule: Daratumumab 1800 mg SC weekly (cycles 1-2), every 2 weeks (cycles 3-6); Bortezomib 1.3 mg/m2 SC weekly; Cyclophosphamide 300 mg/m2 PO weekly (max 500 mg); Dexamethasone 20-40 mg PO weekly for 6 cycles.",
+        "• Maintenance: Single-agent subcutaneous Daratumumab 1800 mg every 4 weeks for up to 24 total cycles (ANDROMEDA trial showed 53% hematologic CR rate and superior organ-free survival).",
+        "Neuropathy dose adjustments: For patients with significant peripheral or autonomic neuropathy, bortezomib should be dose-reduced (1.0 or 0.7 mg/m2) or discontinued; alternative regimens include Daratumumab-dexamethasone or Lenalidomide/dexamethasone.",
+        "VZV Prophylaxis: Mandatory acyclovir or valacyclovir throughout proteasome inhibitor and daratumumab therapy."
+      ]
+    },
+    {
+      "id": "n_amyl_tx_stage3b",
+      "linkId": "amyl_tx_stage3b",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Stage IIIb Advanced Cardiac",
+      "title": "Mayo Stage IIIb: Attenuated Therapy & Advanced Cardiac Support",
+      "section": "Primary Treatment",
+      "description": "Dose-modified regimens and specialized cardiac management for severe cardiac amyloidosis.",
+      "path": "Amyloidosis / Stage IIIb / Therapy",
+      "pills": [
+        "Stage IIIb",
+        "cardiac-amyloidosis",
+        "dose-modified",
+        "supportive"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Urgent multidisciplinary amyloidosis / advanced heart failure center management.",
+        "Dose-Modified Systemic Therapy:",
+        "• Dose-modified Dara-CyBorD: Attenuated weekly bortezomib (0.7-1.0 mg/m2 SC) + cyclophosphamide (reduced or omitted) + low-dose dexamethasone (10-20 mg weekly).",
+        "• Single-agent subcutaneous Daratumumab (1800 mg SC with pre-medication): High efficacy with minimal myocardial toxicity.",
+        "Hemodynamic & Heart Failure Management:",
+        "• Judicious loop diuretics (bumetanide, torsemide, furosemide) combined with mineralocorticoid receptor antagonists (spironolactone).",
+        "• CONTRAINDICATED DRUGS: Avoid standard heart failure therapies such as beta-blockers, ACE inhibitors, ARBs, and calcium channel blockers (diltiazem, verapamil); these cause profound refractory hypotension and heart block due to fixed stroke volume.",
+        "• Midodrine or fludrocortisone for refractory orthostatic hypotension.",
+        "• Implantable cardioverter-defibrillator (ICD) / Pacemaker: Considered for high-grade AV block or sustained ventricular arrhythmias.",
+        "• Cardiac transplantation evaluation: In highly selected young patients with isolated end-stage cardiac amyloidosis."
+      ],
+      "protocolRefs": [
+        "rare-amyloidosis-dara-cybord"
+      ]
+    },
+    {
+      "id": "n_amyl_rr_therapy",
+      "linkId": "amyl_rr_therapy",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Relapsed/Refractory AL",
+      "title": "Relapsed / Refractory AL Amyloidosis: Targeted & Novel Regimens",
+      "section": "Relapsed / Refractory",
+      "description": "Therapy tailored to prior drug exposure, t(11;14) genetics, and organ tolerance.",
+      "path": "Amyloidosis / R/R / Therapy",
+      "pills": [
+        "R/R",
+        "venetoclax",
+        "pomalidomide",
+        "daratumumab",
+        "salvage"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Venetoclax (+/- Dexamethasone): Highly active in patients with t(11;14) translocation (present in ~50% of AL amyloidosis); produces deep hematologic responses in relapsed disease.",
+        "Daratumumab-based Therapy: If daratumumab was not administered frontline, single-agent daratumumab or Dara-combinations are strongly recommended.",
+        "Immunomodulatory Drugs (IMiDs):",
+        "• Pomalidomide (2-4 mg daily days 1-21 q28d) + Dexamethasone: Well-tolerated in bortezomib/daratumumab-refractory disease.",
+        "• Lenalidomide (start at low dose 10-15 mg daily days 1-21 q28d) + Dexamethasone.",
+        "Oral Proteasome Inhibitors: Ixazomib + Dexamethasone (+/- Cyclophosphamide) - advantageous in patients with mild peripheral neuropathy.",
+        "Second Autologous HCT: High-dose melphalan can be considered in eligible patients who achieved prolonged initial remission (>3-5 years) after primary transplant.",
+        "Organ Response Monitoring: Monitor sFLC, NT-proBNP, and 24-hour urine protein monthly during salvage therapy."
+      ],
+      "protocolRefs": [
+        "rare-amyloidosis-dara-cybord"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_amyl_entry_to_new",
+      "from": "n_amyl_entry",
+      "to": "n_amyl_workup",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "newly_diagnosed"
+      ]
+    },
+    {
+      "id": "l_amyl_workup_to_staging",
+      "from": "n_amyl_workup",
+      "to": "n_amyl_staging",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_amyl_stage_to_candidacy",
+      "from": "n_amyl_staging",
+      "to": "n_amyl_hct_candidacy",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "stage_1_3a"
+      ]
+    },
+    {
+      "id": "l_amyl_stage_to_stage3b",
+      "from": "n_amyl_staging",
+      "to": "n_amyl_tx_stage3b",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "stage_3b"
+      ]
+    },
+    {
+      "id": "l_amyl_cand_to_hct",
+      "from": "n_amyl_hct_candidacy",
+      "to": "n_amyl_tx_hct_eligible",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "hct_eligible"
+      ]
+    },
+    {
+      "id": "l_amyl_cand_to_nontransplant",
+      "from": "n_amyl_hct_candidacy",
+      "to": "n_amyl_tx_nontransplant",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "hct_ineligible"
+      ]
+    },
+    {
+      "id": "l_amyl_entry_to_rr",
+      "from": "n_amyl_entry",
+      "to": "n_amyl_rr_therapy",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "relapsed_refractory"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "rare-amyloidosis-dara-cybord"
+  ]
+}

@@ -19,143 +19,200 @@
   .ms{font-family:'Material Symbols Rounded';font-weight:400;line-height:1;vertical-align:middle;-webkit-font-feature-settings:'liga';font-size:18px;user-select:none;flex:none}
   .ms.sm{font-size:15px}.ms.lg{font-size:22px}
 
-  :root{--tl:#0e6e63;--tl-d:#0b5c56;--tl-soft:#e3f1ee;
-    --ink:#14202b;--mut:#5a7184;--line:#d7dee3;--bg:#f6f7f5;--card:#fff;--btn:#eef1f4;
-    --amber:#92620a;--amber-soft:#fdf1dd;--amber-line:#f2d8a8;
-    --red:#ab1c2c;--red-soft:#fbe9ea;--red-line:#f0c2c6;
-    --ok:#1c7a4a;--ok-soft:#e2f2ea;--indigo:#3730a3;--indigo-soft:#eef2ff;--slate:#94a3b8;
-    --r:14px;--sh:0 1px 3px rgba(15,23,42,.08),0 1px 2px rgba(15,23,42,.04);--sh-lg:0 12px 34px rgba(15,23,42,.20);
-    --ease:cubic-bezier(.2,.7,.2,1);--dur:.5s}
-  @media (prefers-color-scheme:dark){:root{--tl:#3fc7b3;--tl-d:#2fb3a0;--tl-soft:#0d2e2a;
-    --ink:#eaf0f2;--mut:#a9bcc3;--line:#31424a;--bg:#0f1a1e;--card:#18242a;--btn:#223038;
-    --amber:#e0a94a;--amber-soft:#2a2113;--amber-line:#5a4620;
-    --red:#f0868f;--red-soft:#2c1518;--red-line:#5a2a30;
-    --ok:#5bd08f;--ok-soft:#12261b;--indigo:#b9c0ff;--indigo-soft:#1c2140;--slate:#64748b;
-    --sh:0 1px 3px rgba(0,0,0,.45);--sh-lg:0 12px 34px rgba(0,0,0,.55)}}
+  :root{
+    --tl:#0e6e63;--tl-d:#0b5c56;--tl-soft:rgba(14,110,99,.08);--tl-border:rgba(14,110,99,.22);--tl-glow:rgba(14,110,99,.18);
+    --ink:#0f172a;--ink-sec:#334155;--mut:#64748b;--line:#e2e8f0;--bg:#f8fafc;--card:#ffffff;--btn:#f1f5f9;
+    --amber:#b45309;--amber-soft:rgba(217,119,6,.10);--amber-line:rgba(217,119,6,.28);
+    --red:#e11d48;--red-soft:rgba(225,29,72,.10);--red-line:rgba(225,29,72,.28);
+    --ok:#15803d;--ok-soft:rgba(21,128,61,.10);--ok-line:rgba(21,128,61,.28);
+    --indigo:#4338ca;--indigo-soft:rgba(67,56,202,.08);--indigo-line:rgba(67,56,202,.22);--slate:#64748b;
+    --r:16px;--r-sm:10px;
+    --sh:0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);
+    --sh-md:0 4px 12px -2px rgba(15,23,42,.08),0 2px 6px -2px rgba(15,23,42,.04);
+    --sh-lg:0 20px 40px -10px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05);
+    --ease:cubic-bezier(.16,1,.3,1);--dur:.24s}
+  @media (prefers-color-scheme:dark){:root{
+    --tl:#3fc7b3;--tl-d:#2fb3a0;--tl-soft:rgba(63,199,179,.12);--tl-border:rgba(63,199,179,.28);--tl-glow:rgba(63,199,179,.22);
+    --ink:#f1f5f9;--ink-sec:#cbd5e1;--mut:#94a3b8;--line:#223832;--bg:#091412;--card:#111e1b;--btn:#172824;
+    --amber:#fbbf24;--amber-soft:rgba(251,191,36,.12);--amber-line:rgba(251,191,36,.30);
+    --red:#fb7185;--red-soft:rgba(251,113,133,.12);--red-line:rgba(251,113,133,.30);
+    --ok:#4ade80;--ok-soft:rgba(74,222,128,.12);--ok-line:rgba(74,222,128,.30);
+    --indigo:#a5b4fc;--indigo-soft:rgba(165,180,252,.12);--indigo-line:rgba(165,180,252,.28);--slate:#94a3b8;
+    --sh:0 1px 3px rgba(0,0,0,.35);
+    --sh-md:0 4px 14px -2px rgba(0,0,0,.45);
+    --sh-lg:0 24px 50px -10px rgba(0,0,0,.70),0 0 0 1px rgba(255,255,255,.06)}}
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
   body{font:15px/1.45 'Inter Variable',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
-  button{font:inherit;cursor:pointer;border:0;border-radius:10px;transition:transform .12s var(--ease),background .15s,box-shadow .15s}
-  button:active{transform:scale(.97)}
-  input,select{font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:10px;width:100%;background:var(--card);color:var(--ink);transition:border-color .15s,box-shadow .15s}
-  input:focus,select:focus{outline:0;border-color:var(--tl);box-shadow:0 0 0 3px var(--tl-soft)}
-  .wrap{max-width:1200px;margin:0 auto;padding:16px}
+  button{font:inherit;cursor:pointer;border:0;border-radius:var(--r-sm);transition:transform .12s var(--ease),background .15s ease,box-shadow .15s ease,border-color .15s ease}
+  button:active{transform:scale(.96)}
+  button:focus-visible{outline:2px solid var(--tl);outline-offset:2px}
+  input,select{font:inherit;padding:12px 14px;border:1.5px solid var(--line);border-radius:11px;width:100%;background:var(--card);color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease}
+  input:focus,select:focus{outline:0;border-color:var(--tl);box-shadow:0 0 0 3.5px var(--tl-glow)}
+  .wrap{max-width:1260px;margin:0 auto;padding:16px}
   /* header */
-  header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--card) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--card) 85%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   header .wrap{display:flex;align-items:center;gap:12px;padding:12px 16px}
-  .brand{font-weight:800;font-size:19px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}.brand span{color:var(--tl)}
+  .brand{font-weight:800;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}.brand span{color:var(--tl)}
   .brand .mk{width:22px;height:22px;background:var(--tl);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;flex:none}
   .brand .clogo{height:24px;width:auto;max-width:130px;object-fit:contain}
   .role{margin-left:auto;font-size:13px;color:var(--mut);display:flex;gap:10px;align-items:center}
-  .pw{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--mut)}
+  .pw{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}
   .pw .m{width:13px;height:13px;background:var(--mut);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}
-  .chip{background:var(--tl-soft);color:var(--tl-d);padding:4px 10px;border-radius:999px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.02em}
-  .ghost{background:var(--btn);color:var(--ink);padding:8px 12px}
-  .ghost:hover{background:var(--line)}
+  .chip{background:var(--tl-soft);color:var(--tl);border:1px solid var(--tl-border);padding:3px 10px;border-radius:999px;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+  .ghost{background:var(--btn);color:var(--ink);padding:8px 14px;border:1px solid var(--line);font-weight:600;font-size:13.5px}
+  .ghost:hover{background:var(--line);border-color:var(--mut)}
   /* login */
-  .login{max-width:380px;margin:8vh auto;background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:26px;animation:rise .45s var(--ease) both}
-  .login h1{margin:0 0 4px;font-size:22px;letter-spacing:-.01em}.login p{margin:0 0 18px;color:var(--mut)}
+  .login{max-width:400px;margin:8vh auto;background:var(--card);border-radius:var(--r);box-shadow:var(--sh-lg);border:1px solid var(--line);padding:28px;animation:rise .38s var(--ease) both}
+  .login h1{margin:0 0 4px;font-size:22px;letter-spacing:-.02em}.login p{margin:0 0 18px;color:var(--mut);font-size:14px}
   .login label{display:block;font-weight:600;font-size:13px;margin:12px 0 6px}
-  .btn{background:var(--tl);color:#fff;padding:13px 16px;font-weight:700;width:100%;margin-top:16px}
-  .btn:hover{box-shadow:0 4px 14px var(--tl-soft)}
-  .btn:active{background:var(--tl-d)}
-  .err{color:var(--red);font-size:13px;margin-top:10px;min-height:16px}
+  .btn{background:var(--tl);color:#fff;padding:13px 18px;font-weight:700;width:100%;margin-top:16px;box-shadow:0 2px 8px var(--tl-glow);border:1.5px solid transparent}
+  .btn:hover{background:var(--tl-d);box-shadow:0 4px 14px var(--tl-glow)}
+  .btn:active{transform:scale(.97)}
+  @media (prefers-color-scheme:dark){.btn{color:#04322c}}
+  .err{color:var(--red);font-size:13px;margin-top:10px;min-height:16px;font-weight:600}
   .ltabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
-  .lt{background:var(--btn);color:var(--mut);padding:7px 10px;font-size:12px;font-weight:700;border-radius:8px}
-  .lt.on{background:var(--tl-soft);color:var(--tl-d)}
+  .lt{background:var(--btn);color:var(--mut);padding:8px 12px;font-size:12.5px;font-weight:700;border-radius:8px;border:1px solid var(--line)}
+  .lt.on{background:var(--tl);color:#fff;border-color:var(--tl)}
+  @media (prefers-color-scheme:dark){.lt.on{color:#04322c}}
   /* clinic picker */
-  .crow{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--card);transition:box-shadow .15s,transform .15s}
-  .crow:hover{box-shadow:var(--sh);transform:translateY(-1px)}
-  .cinfo{flex:1;min-width:0}.cinfo b{display:block;font-size:16px;line-height:1.2}.cinfo .t{font-size:12px;color:var(--mut)}
+  .crow{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--card);transition:box-shadow .15s ease,transform .15s ease}
+  .crow:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
+  .cinfo{flex:1;min-width:0}.cinfo b{display:block;font-size:16px;line-height:1.2;color:var(--ink)}.cinfo .t{font-size:12.5px;color:var(--mut);margin-top:2px}
   .cact{display:flex;gap:8px;flex-shrink:0}
-  .cact .cbtn{width:auto;margin:0;padding:9px 16px}
-  .cact .del{padding:9px 12px;color:var(--red);background:var(--red-soft)}
-  /* board */
-  .toolbar{display:flex;gap:10px;align-items:center;margin:14px 0;flex-wrap:wrap}
-  .toolbar .grow{flex:1}
-  .docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
-  .doc{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s,transform .18s}
-  .doc:hover{box-shadow:var(--sh-lg);transform:translateY(-2px)}
-  .doc>h2{margin:0;padding:14px 16px;font-size:16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
-  .doc>h2 small{margin-left:auto;font-weight:600;color:var(--mut);font-size:12px}
-  .rows{padding:8px;display:flex;flex-direction:column;gap:8px;min-height:60px}
-  .empty{color:var(--mut);text-align:center;padding:22px 8px;font-size:14px;display:flex;flex-direction:column;align-items:center;gap:8px}
-  .empty .ms{font-size:30px;color:var(--line)}
-  .row{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--card);transition:box-shadow .15s,border-color .15s}
-  .row:hover{box-shadow:var(--sh)}
+  .cact .cbtn{width:auto;margin:0;padding:9px 18px}
+  .cact .del{padding:9px 12px;color:var(--red);background:var(--red-soft);border:1px solid var(--red-line)}
+  /* board toolbar */
+  .toolbar{display:flex;gap:10px;align-items:center;margin:16px 0 18px;flex-wrap:wrap}
+  .toolbar .grow{flex:1;font-size:14px;color:var(--mut)}
+  .toolbar .grow b{color:var(--ink);font-size:16px}
+  #walk{background:var(--tl);color:#fff;font-weight:700;border-color:var(--tl);box-shadow:0 2px 8px var(--tl-glow)}
+  #walk:hover{background:var(--tl-d);box-shadow:0 4px 12px var(--tl-glow)}
+  @media (prefers-color-scheme:dark){#walk{color:#04322c}}
+  .docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+  .doc{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s ease,transform .18s ease}
+  .doc:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
+  .doc>h2{margin:0;padding:14px 18px;font-size:16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;background:var(--btn)}
+  .doc>h2 small{margin-left:auto;font-weight:700;color:var(--mut);font-size:12px}
+  .rows{padding:10px;display:flex;flex-direction:column;gap:10px;min-height:60px}
+  .empty{color:var(--mut);text-align:center;padding:26px 12px;font-size:13.5px;display:flex;flex-direction:column;align-items:center;gap:8px;line-height:1.5}
+  .empty .ms{font-size:32px;color:var(--line)}
+  .row{border:1px solid var(--line);border-radius:13px;padding:12px 14px;background:var(--card);transition:box-shadow .15s ease,border-color .15s ease}
+  .row:hover{box-shadow:var(--sh-md)}
   .row.p2{border-color:var(--red-line);background:var(--red-soft)}.row.p1{border-color:var(--amber-line);background:var(--amber-soft)}
-  .row .top{display:flex;align-items:center;gap:8px}
-  .pos{width:26px;height:26px;border-radius:8px;background:var(--tl);color:#fff;font-weight:800;display:grid;place-items:center;font-size:13px;flex:none}
+  .row .top{display:flex;align-items:center;gap:10px}
+  .pos{width:28px;height:28px;border-radius:8px;background:var(--tl);color:#fff;font-weight:800;display:grid;place-items:center;font-size:13px;flex:none}
+  @media (prefers-color-scheme:dark){.pos{color:#04322c}}
   .pos.consult{background:var(--ok)}
-  .nm{font-weight:700}.mrn{color:var(--mut);font-weight:600;font-size:12px;margin-left:4px}
+  .tok{display:inline-block;min-width:28px;padding:1px 7px;margin-right:6px;border-radius:6px;background:var(--ink);color:#fff;font:800 14px/1.5 ui-monospace,monospace;text-align:center}
+  .nm{font-weight:700;font-size:14.5px;color:var(--ink)}.mrn{color:var(--mut);font-weight:600;font-size:12px;margin-left:4px;font-family:ui-monospace,monospace}
   .meta{color:var(--mut);font-size:12px;margin-top:2px}
-  .st{margin-left:auto;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--tl-d);display:flex;align-items:center;gap:4px}
-  .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-  .acts button{background:var(--btn);color:var(--ink);padding:8px 11px;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:5px}
-  .acts button:hover{background:var(--line)}
-  .acts button.pri{background:var(--tl);color:#fff}
+  .st{margin-left:auto;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--tl);display:flex;align-items:center;gap:4px}
+  .acts{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+  .acts button{background:var(--btn);color:var(--ink);padding:7px 12px;font-weight:600;font-size:12.5px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:4px;border-radius:8px}
+  .acts button:hover{background:var(--line);border-color:var(--mut)}
+  .acts button.pri{background:var(--tl);color:#fff;border-color:var(--tl);font-weight:700}
   .acts button.pri:hover{background:var(--tl-d)}
-  .acts button.warn{background:var(--red-soft);color:var(--red)}
-  .acts button.rm{background:var(--red-soft);color:var(--red)}
+  @media (prefers-color-scheme:dark){.acts button.pri{color:#04322c}}
+  .acts button.warn{background:var(--red-soft);color:var(--red);border-color:var(--red-line)}
+  .acts button.rm{background:var(--red-soft);color:var(--red);border-color:var(--red-line)}
   .acts button.rm:hover{background:var(--red);color:#fff}
-  .btn.danger{background:var(--red)}
-  .btn.danger:hover{box-shadow:0 4px 14px rgba(171,28,44,.35)}
+  .btn.danger{background:var(--red);color:#fff}
+  .btn.danger:hover{box-shadow:0 4px 14px rgba(225,29,72,.35)}
   /* modal (animated bottom sheet) */
-  .scrim{position:fixed;inset:0;background:rgba(6,20,28,.5);display:flex;align-items:flex-end;justify-content:center;z-index:20;opacity:0;visibility:hidden;transition:opacity .28s var(--ease),visibility .28s}
+  .scrim{position:fixed;inset:0;background:rgba(6,18,16,.65);display:flex;align-items:flex-end;justify-content:center;z-index:20;opacity:0;visibility:hidden;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:opacity .24s var(--ease),visibility .24s}
   .scrim.on{opacity:1;visibility:visible}
-  .sheet{background:var(--card);color:var(--ink);width:100%;max-width:480px;border-radius:18px 18px 0 0;padding:20px;max-height:88vh;overflow:auto;box-shadow:var(--sh-lg);transform:translateY(100%);transition:transform .32s var(--ease)}
+  .sheet{background:var(--card);color:var(--ink);width:100%;max-width:500px;border-radius:22px 22px 0 0;padding:22px;max-height:88vh;overflow:auto;box-shadow:var(--sh-lg);border:1px solid var(--line);transform:translateY(100%);transition:transform .28s var(--ease)}
   .scrim.on .sheet{transform:none}
-  @media(min-width:600px){.scrim{align-items:center}.sheet{border-radius:18px;transform:translateY(14px) scale(.98)}}
-  .sheet h3{margin:0 0 12px}
+  @media(min-width:600px){.scrim{align-items:center}.sheet{border-radius:20px;transform:translateY(14px) scale(.98)}}
+  .sheet h3{margin:0 0 12px;font-size:18px;letter-spacing:-.01em}
   .cats{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-  .cats button{background:var(--btn);color:var(--ink);padding:9px 13px;font-weight:600;border:2px solid transparent}
-  .cats button.on{border-color:var(--tl);background:var(--tl-soft);color:var(--tl-d)}
-  .sheet .row2{display:flex;gap:10px;margin-top:16px}.sheet .row2 button{flex:1;padding:13px}
-  .cancel{background:var(--btn);color:var(--ink)}
-  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(8px);background:var(--ink);color:var(--card);padding:11px 16px;border-radius:10px;z-index:40;opacity:0;transition:.24s var(--ease);max-width:90%;box-shadow:var(--sh-lg)}
+  .cats button{background:var(--btn);color:var(--ink);padding:9px 14px;font-weight:600;font-size:13px;border:1.5px solid var(--line);border-radius:10px}
+  .cats button.on{border-color:var(--tl);background:var(--tl-soft);color:var(--tl);font-weight:700}
+  .sheet .row2{display:flex;gap:12px;margin-top:18px}.sheet .row2 button{flex:1;padding:13px;font-weight:700}
+  .cancel{background:var(--btn);color:var(--ink);border:1.5px solid var(--line)}
+  .cancel:hover{background:var(--line)}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(8px);background:var(--ink);color:var(--card);padding:12px 18px;border-radius:12px;font-weight:600;font-size:13.5px;z-index:40;opacity:0;transition:.24s var(--ease);max-width:90%;box-shadow:var(--sh-lg)}
   .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
   .drawer{padding:6px 0}
-  .ev{border-left:3px solid var(--line);padding:8px 0 8px 12px;margin-left:4px}
+  .ev{border-left:3px solid var(--tl);padding:8px 0 8px 12px;margin-left:4px}
   .ev b{color:var(--ink)}.ev .t{color:var(--mut);font-size:12px}
-  .link{word-break:break-all;background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:10px;font-size:13px;margin-top:8px}
-  /* skeleton shimmer for loading states */
+  .link{word-break:break-all;background:var(--btn);border:1.5px dashed var(--line);border-radius:10px;padding:12px;font-size:13px;font-family:ui-monospace,monospace;margin-top:8px}
+  /* Vital signs read back from the clinical record (opd.html openNotes). One card per set of readings. */
+  .vs{margin:2px 0 14px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+  .vs h4{margin:0 0 2px;font-size:13.5px;display:flex;align-items:center;gap:8px}
+  .vs h4 .src{margin-left:auto;font-weight:600;font-size:11.5px;color:var(--mut)}
+  .vs .st{font-size:12px;color:var(--mut);margin:0 0 8px}
+  .vs-set{padding:8px 0;border-top:1px solid var(--line)}
+  .vs-set:first-of-type{border-top:0}
+  .vs-set .w{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:6px}
+  .vs-set .w b{color:var(--ink);font-weight:600}
+  .vs-set .w .now{background:var(--ok-soft);color:var(--ok);border:1px solid var(--ok-line);padding:1px 8px;border-radius:999px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+  .vs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px 10px}
+  .vs-v{display:flex;flex-direction:column;gap:1px}
+  .vs-v .n{font-size:11px;color:var(--mut)}
+  .vs-v .x{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+  .vs-v .x small{font-size:11px;font-weight:600;color:var(--mut);margin-left:3px}
+  .vs .note{font-size:12.5px;color:var(--ink-sec);margin-top:6px;white-space:pre-wrap}
+  /* The doctor's assessment, read from the clinical record. Same card language as vital signs. */
+  .asn-set{padding:8px 0;border-top:1px solid var(--line)}
+  .asn-set:first-of-type{border-top:0}
+  .asn-sec{margin:6px 0}
+  .asn-sec .n{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.03em;font-weight:700}
+  .asn-sec .x{font-size:13px;color:var(--ink);white-space:pre-wrap;margin-top:2px}
+  /* An ordered investigation. Emergency is the ONE thing that must read at a glance. */
+  .asn-pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;border:1px solid var(--line);color:var(--mut);background:var(--btn)}
+  .asn-pill.stat{color:var(--red);background:var(--red-soft);border-color:var(--red-line)}
+  /* A prescription's lifecycle: active, discontinued, and an AI draft that is none of a clinician's. */
+  .asn-pill.rx-on{color:var(--ok);background:var(--ok-soft);border-color:var(--ok-line)}
+  .asn-pill.rx-off{color:var(--red);background:var(--red-soft);border-color:var(--red-line);text-decoration:line-through}
+  .asn-pill.rx-ai{color:var(--amber);background:var(--amber-soft);border-color:var(--amber-line)}
+  /* A result's own status - distinct from the pills above so a doctor never confuses "final result"
+     with "active prescription" at a glance, even though both borrow the same green. */
+  .asn-pill.dr-final{color:var(--ok);background:var(--ok-soft);border-color:var(--ok-line)}
+  .asn-pill.dr-prelim{color:var(--amber);background:var(--amber-soft);border-color:var(--amber-line)}
+  /* skeleton shimmer */
   .skel{background:linear-gradient(90deg,var(--btn) 25%,var(--line) 37%,var(--btn) 63%);background-size:400% 100%;animation:sh 1.4s ease infinite;border-radius:10px}
-  /* nurse station */
-  .rstat{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;padding:3px 9px;border-radius:999px;margin-left:auto}
-  .rstat.normal{background:var(--ok-soft);color:var(--ok)}.rstat.moderate{background:var(--amber-soft);color:var(--amber)}
-  .rstat.busy{background:var(--red-soft);color:var(--red)}.rstat.unavailable{background:var(--btn);color:var(--mut)}
-  .poolwrap{background:var(--card);border:1px solid var(--tl);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:16px;overflow:hidden}
-  .poolwrap>h2{margin:0;padding:14px 16px;font-size:16px;border-bottom:1px solid var(--line);background:var(--tl-soft)}
-  .assignbtn{background:var(--tl);color:#fff;padding:9px 14px;font-weight:700;font-size:13px;margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:5px}
+  /* nurse station status pills */
+  .rstat{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 10px;border-radius:999px;margin-left:auto;border:1px solid transparent}
+  .rstat.normal{background:var(--ok-soft);color:var(--ok);border-color:var(--ok-line)}.rstat.moderate{background:var(--amber-soft);color:var(--amber);border-color:var(--amber-line)}
+  .rstat.busy{background:var(--red-soft);color:var(--red);border-color:var(--red-line)}.rstat.unavailable{background:var(--btn);color:var(--mut);border-color:var(--line)}
+  .poolwrap{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:16px;overflow:hidden}
+  .poolwrap>h2{margin:0;padding:14px 18px;font-size:16px;border-bottom:1px solid var(--line);background:var(--tl-soft)}
+  .assignbtn{background:var(--tl);color:#fff;padding:11px 16px;font-weight:700;font-size:13.5px;margin-left:auto;flex:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:10px;box-shadow:0 2px 6px var(--tl-glow)}
   .assignbtn:hover{background:var(--tl-d)}
+  .assignbtn:hover .ms{transform:translateX(3px)}
+  .assignbtn .ms{transition:transform .15s ease}
+  @media (prefers-color-scheme:dark){.assignbtn{color:#04322c}}
   /* central-routing control (GIMSR two-nurse station): routing inbox + room wall */
-  .tot{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-  .tot .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 16px;box-shadow:var(--sh);font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.02em;font-weight:700}
-  .tot .kpi b{display:block;font-size:24px;color:var(--ink);font-weight:800;font-variant-numeric:tabular-nums}
-  .ctl{display:grid;grid-template-columns:360px 1fr;gap:16px;align-items:start}
+  .tot{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+  .tot .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 18px;box-shadow:var(--sh);font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;font-weight:700;flex:1;min-width:140px;transition:box-shadow .15s ease}
+  .tot .kpi:hover{box-shadow:var(--sh-md)}
+  .tot .kpi b{display:block;font-size:26px;color:var(--ink);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1;margin-bottom:2px}
+  .ctl{display:grid;grid-template-columns:360px 1fr;gap:18px;align-items:start}
   @media(max-width:860px){.ctl{grid-template-columns:1fr}}
-  .pool{background:var(--card);border:2px solid var(--tl);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+  .pool{background:var(--card);border:1.5px solid var(--tl-border);border-radius:var(--r);box-shadow:var(--sh-md);overflow:hidden}
   @media(min-width:861px){.pool{position:sticky;top:74px}}
-  .pool>h3{margin:0;padding:13px 15px;font-size:15px;background:var(--tl-soft);color:var(--tl-d);border-bottom:1px solid var(--line)}
-  .pool .rows{padding:8px;display:flex;flex-direction:column;gap:8px;max-height:72vh;overflow:auto}
-  .pcard{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--card);transition:box-shadow .15s}
-  .pcard:hover{box-shadow:var(--sh)}
+  .pool>h3{margin:0;padding:14px 16px;font-size:15px;font-weight:700;background:var(--tl-soft);color:var(--tl);border-bottom:1px solid var(--tl-border);letter-spacing:-.01em}
+  .pool .rows{padding:10px;display:flex;flex-direction:column;gap:10px;max-height:72vh;overflow:auto}
+  .pcard{border:1.5px solid var(--line);border-radius:13px;padding:12px 14px;background:var(--card);transition:box-shadow .15s ease,transform .12s ease}
+  .pcard:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
   .pcard.urg{border-color:var(--red-line);background:var(--red-soft)}
-  .dept{display:inline-block;background:var(--indigo-soft);color:var(--indigo);font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px}
-  .wt{font-size:12px;color:var(--mut)} .wt.late{color:var(--red);font-weight:800}
-  .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
-  .rcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s,transform .18s}
-  .rcard:hover{box-shadow:var(--sh-lg);transform:translateY(-2px)}
-  .rcard.busy{border-top:3px solid var(--red)} .rcard.moderate{border-top:3px solid var(--amber)} .rcard.normal{border-top:3px solid var(--ok)} .rcard.unavailable{border-top:3px solid var(--slate)}
-  .rcard>h3{margin:0;padding:12px 14px;font-size:15px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
-  .rcard .docline{padding:7px 14px;font-size:12px;color:var(--mut);border-bottom:1px solid var(--line);display:flex;gap:7px;align-items:center}
+  .dept{display:inline-block;background:var(--indigo-soft);color:var(--indigo);border:1px solid var(--indigo-line);font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px}
+  .wt{font-size:12px;color:var(--mut);font-weight:600} .wt.late{color:var(--red);font-weight:800}
+  .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+  .rcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s ease,transform .18s ease}
+  .rcard:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
+  .rcard.busy{border-top:3.5px solid var(--red)} .rcard.moderate{border-top:3.5px solid var(--amber)} .rcard.normal{border-top:3.5px solid var(--ok)} .rcard.unavailable{border-top:3.5px solid var(--slate)}
+  .rcard>h3{margin:0;padding:13px 16px;font-size:15.5px;font-weight:700;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);background:var(--card)}
+  .rcard .docline{padding:8px 16px;font-size:12px;color:var(--mut);border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;background:var(--btn)}
   .dot2{width:8px;height:8px;border-radius:50%;background:var(--slate);flex:none} .dot2.on{background:var(--ok)}
   @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   @keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-<link rel="stylesheet" href="/patient-register.css?v=preg1">
-<script src="/patient-register.js?v=preg1" defer></script>
+<link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
+<script src="/patient-register.js?v=preg5-abdm" defer></script>
 </head>
 <body>
 <div id="app"></div>
@@ -171,8 +228,16 @@
   // to YESTERDAY's session while the doctor's app read TODAY's, and console-added patients simply never
   // appeared. Same clinic, same room, different bucket.
   function istDay(){ return new Date(Date.now()+19800000).toISOString().slice(0,10); }
-  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:istDay()};
+  /* ONE ACCOUNT SIGN-IN, TWO SPELLINGS (LT-01, live test 2026-09-15). wardsynq.com (wardsynq/site/shell.js)
+   * records a StewardMD account sign-in as "account"; this console wrote and read only "firebase". A
+   * doctor signed in on wardsynq.com who opened the OPD desk therefore arrived with tokType "account",
+   * no staff token, and was shown this page's sign-in wall. Same Firebase project, same origin, same
+   * persisted session: both spellings mean "use the account's ID token". The server still verifies it. */
+  function ttNorm(t){ return t==="account"?"firebase":(t||""); }
+  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:ttNorm(localStorage.getItem(LS_TT)), who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:istDay()};
   var app=document.getElementById("app"), scrim=document.getElementById("scrim"), sheet=document.getElementById("sheet"), toastEl=document.getElementById("toast");
+  // The OPD token (called out in the waiting hall). A ticket registered before tokens existed has none.
+  var tok=function(t){return t&&t.token?'<span class="tok" title="Token">'+esc(t.token)+'</span>':"";};
   var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});};
   var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
   function fbAuth(){ try{ return (window.firebase&&firebase.auth)?firebase.auth():null; }catch(e){ return null; } }
@@ -210,13 +275,28 @@
   function doStaffLogin(){
     var id=document.getElementById("sid").value.trim(), pw=document.getElementById("spw").value;
     if(!id||!pw){err("Enter your staff ID (or email) and PIN (or password).");return;}
-    var isEmail=id.indexOf("@")>-1;
+    /* THE CLINIC CODE DECIDES, NOT THE SHAPE OF THE ID. This read only for an "@" and sent anything
+     * containing one down the email+password door, ignoring the clinic code just typed and offering
+     * the PIN as a password. Every staff ID seeded so far IS an email address, so the staff door
+     * answered "Wrong email or password" to people whose code, ID and PIN were all correct. Same
+     * bug, same fix as wardsynq/site/shell.js. */
+    var hasAt=id.indexOf("@")>-1;
+    var codeTyped=(document.getElementById("sorg")&&document.getElementById("sorg").value.trim())||"";
+    var isEmail=!codeTyped&&hasAt;
     id=id.toLowerCase();   // staff IDs + emails are case-insensitive; the doctor app stores them lowercase, and mobile keyboards auto-capitalize - so normalize to match
-    if(!isEmail && !document.getElementById("sorg").value.trim()){err("Enter your clinic code (or sign in with your email).");return;}
+    if(!hasAt && !codeTyped){err("Enter your clinic code (or sign in with your email).");return;}
     err("Signing in…");
     var url=isEmail?"/api/queue/auth/email":"/api/queue/auth/pin";
-    var body=isEmail?{email:id,password:pw}:{clinicCode:document.getElementById("sorg").value.trim(),identity:id,pin:pw};
+    var body=isEmail?{email:id,password:pw}:{clinicCode:codeTyped,identity:id,pin:pw};
     fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
+      // Two-step sign-in: the PIN/password was right; ask for the phone's code and pass the answer through.
+      if(!r||r.error!=="mfa_required") return r;
+      var code=""; try{ code=prompt((r.message||"Enter the 6-digit code from your authenticator app.")+"\n\nLost your phone? Enter a backup code instead.")||""; }catch(e){}
+      if(!code.trim()) return {cancelled:true};
+      return fetch("/api/queue/auth/mfa",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({challenge:r.challenge,code:code.trim()})}).then(function(x){return x.json();});
+    }).then(function(r){
+      if(r&&r.cancelled){ err("Sign-in cancelled."); return; }
+      if(r&&(r.error==="wrong_code"||r.error==="challenge_expired")){ err(r.error==="wrong_code"?"That code did not match. Sign in again and use the newest code.":"That took too long. Sign in again."); return; }
       if(!r||!r.ok){ err(r&&r.error==="locked"?"Too many attempts. Try again later.":(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":(isEmail?"Wrong email or password.":"Wrong clinic code, staff ID or PIN."))); return; }
       onLogin("staff",r.token,r.orgId);
     }).catch(function(){err("Could not reach the server.");});
@@ -243,11 +323,16 @@
     app.innerHTML='<div class="login"><p>Loading…</p></div>';
     api("whoami").then(function(r){
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout("Your session ended. Please sign in again.");return;} renderLogin("Session expired. Sign in again."); return; }
+      // The hospital requires two-step sign-in for this role and it is not set up: every other request would be refused.
+      if(r.twoStepRequired){ app.innerHTML='<div class="login"><h3>Two-step sign-in required</h3><p>Your hospital requires two-step sign-in for your role. Set it up at <a href="https://wardsynq.com/#/security">wardsynq.com, Sign-in security</a>, then sign in here again.</p><button class="btn" id="tsOut">Sign out</button></div>'; document.getElementById("tsOut").onclick=function(){logout("");}; return; }
       st.who=r; st.smdId=r.smdId||""; st.billingOn=!!r.billing; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
       // ANY StewardMD account can own a clinic. No clinic yet -> the create-clinic wizard (never a shared board).
       // A StewardMD account can own SEVERAL clinics: none -> wizard; one -> open it; many -> the picker.
       if(r.kind==="firebase"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; st.ownsOrg=true;
         if(!list.length){ openWizard(); return; }
+        // Came from wardsynq.com with a hospital already chosen: open that one, not the picker.
+        var wp=wardsynqOrg(), chosen=wp&&list.filter(function(c){return c.id===wp;})[0];
+        if(chosen){ openClinic(chosen); return; }
         if(list.length===1){ openClinic(list[0]); return; }
         renderClinics(list);
       }); return; }
@@ -262,7 +347,11 @@
     }).catch(function(){ renderLogin("Could not reach the server. Check your connection and try again."); });
   }
   // ---- multi-clinic manager: one StewardMD account can own several clinics (open / add / delete) ----
-  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; if(c.id) localStorage.setItem(LS_HOSP,c.id); loadDash(); }
+  function wardsynqOrg(){ var w=""; try{ w=localStorage.getItem("smd_opd_workplace")||""; }catch(e){} return w.indexOf("wardsynq:")===0?w.slice(9):""; }
+  /* The role is hospital-scoped: an account's whoami without a hospital is its global role, which hid
+   * the admin controls from a hospital admin. Ask again for the opened hospital, as shell.js does. */
+  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; if(c.id) localStorage.setItem(LS_HOSP,c.id);
+    api("whoami?orgId="+encodeURIComponent(c.id)).then(function(r){ if(r&&r.ok) st.who=r; },function(){}).then(function(){ loadDash(); }); }
   function openClinics(){
     app.innerHTML='<div class="login"><p>Loading your clinics…</p></div>';
     api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; if(!list.length){ openWizard(); return; } renderClinics(list); })
@@ -280,11 +369,18 @@
     Array.prototype.forEach.call(app.querySelectorAll("[data-open]"),function(b){b.onclick=function(){ openClinic({id:b.getAttribute("data-open"),code:b.getAttribute("data-code")}); };});
     Array.prototype.forEach.call(app.querySelectorAll("[data-del]"),function(b){b.onclick=function(){ delClinic(b.getAttribute("data-del"),b.getAttribute("data-name")); };});
     document.getElementById("newc").onclick=openWizard;
-    document.getElementById("lo2").onclick=logout;
+    /* WRAPPED, because logout(msg) takes a MESSAGE. Wired straight to onclick the browser hands it
+     * the click event instead, which flows to renderLogin(msg) and renders as the error line
+     * "[object PointerEvent]" - so every ordinary sign-out finished on a red error nobody could
+     * read or explain. Found 2026-09-12 signing out of the OPD console. */
+    document.getElementById("lo2").onclick=function(){logout();};
   }
   function delClinic(id,name){
-    if(!confirm('Delete "'+name+'"? Its queue and rooms will be removed. This cannot be undone.')) return;
-    api("org/delete",{method:"POST",body:{orgId:id}}).then(function(r){
+    if(!confirm('Remove "'+name+'"? It leaves your clinic list. Patient records and the audit trail are kept.')) return;
+    /* The server removes a clinic only for its owner and only with the word DELETE (BUG-MU2PHANW). */
+    var typed=prompt('Type DELETE to remove "'+name+'"');
+    if(typed!=="DELETE"){ if(typed!==null) toast("Nothing was removed. Type DELETE exactly."); return; }
+    api("org/delete",{method:"POST",body:{orgId:id,confirm:typed}}).then(function(r){
       if(!r||!r.ok){ toast(r&&r.error?friendly(r.error):"Could not delete the clinic"); return; }
       toast("Clinic deleted"); openClinics();
     }).catch(function(){ toast("Could not reach the server"); });
@@ -323,9 +419,11 @@
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="disp">Display</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="brand">Branding</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
+        (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+inner+'</div>';
-    document.getElementById("lo").onclick=logout;
+    var nsb=document.getElementById("noshows"); if(nsb) nsb.onclick=openNoShows;
+    document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
@@ -335,6 +433,33 @@
     var brd=document.getElementById("brand"); if(brd) brd.onclick=openBranding;
   }
   function refresh(){ st.opd?loadDash():loadBoard(); }
+  /* D13: RECALL NO-SHOWS. Every queue in this hospital today; a patient marked no-show in the last 4 hours
+   * (and before the session ended) goes back to waiting with the SAME token, at the head of their priority
+   * band. A reason is required and recorded with who and when. A failed load is said, never "nobody". */
+  function openNoShows(){
+    open('<h3>No-shows you can recall</h3><div id="nsl"><div class="empty">Loading...</div></div><div class="row2"><button class="cancel" id="cx">Close</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    api("no-show/list?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
+      var el=sheet.querySelector("#nsl"); if(!el) return;
+      if(!r||!r.ok){ el.innerHTML='<div class="empty">The no-shows could not be loaded ('+esc((r&&(r.message||r.error))||"no response")+'). Do not read this as none.</div>'; return; }
+      var list=r.noShows||[];
+      if(!list.length){ el.innerHTML='<div class="empty">No one marked no-show in the last 4 hours.</div>'; return; }
+      var hm=function(ms){ return new Date(ms).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}); };
+      el.innerHTML=list.map(function(t){ return '<div class="ev"><b>'+tok(t)+esc(t.name||"Patient")+'</b> <span class="t">'+esc(t.department||"")+' · marked '+hm(t.noShowAt)+' · recall until '+hm(t.recallableUntil)+'</span>'+
+        (can("queue.reorder")?'<input class="nsr" data-t="'+esc(t.id)+'" placeholder="Why recalled (required)" style="margin:6px 0">'+
+        '<div class="row2"><button class="cancel" data-nsr="waiting" data-s="'+esc(t.sessionId)+'" data-t="'+esc(t.id)+'">Back to waiting</button><button class="btn" data-nsr="called" data-s="'+esc(t.sessionId)+'" data-t="'+esc(t.id)+'" style="margin:0">Call now</button></div>':'<div class="t">Recalling needs the queue.reorder permission.</div>')+'</div>'; }).join("");
+      Array.prototype.forEach.call(el.querySelectorAll("[data-nsr]"),function(b){ b.onclick=function(){
+        var tid=b.getAttribute("data-t"), inp=el.querySelector('.nsr[data-t="'+tid+'"]'), why=inp?inp.value.trim():"";
+        if(why.length<3){ toast("Say why the patient is recalled"); if(inp) inp.focus(); return; }
+        b.disabled=true;
+        api("no-show/recall",{method:"POST",body:{sessionId:b.getAttribute("data-s"),ticketId:tid,reason:why,to:b.getAttribute("data-nsr")}}).then(function(x){
+          b.disabled=false;
+          if(!x||!x.ok){ toast("Not recalled: "+((x&&(x.message||x.error))||"no response")); return; }
+          toast("Recalled with the same token"); openNoShows(); refresh();
+        },function(){ b.disabled=false; toast("Not recalled: the server could not be reached."); });
+      }; });
+    },function(){ var el=sheet.querySelector("#nsl"); if(el) el.innerHTML='<div class="empty">The no-shows could not be loaded (no connection). Do not read this as none.</div>'; });
+  }
   // Owner/admin: mint the login-free waiting-room display link for a wall TV/tablet.
   function openDisplayLink(){
     api("display-link",{method:"POST",body:{orgId:st.orgId}}).then(function(r){
@@ -401,6 +526,7 @@
     var b=[];
     if(!consult&&can("queue.status")) b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>');
     if(!consult&&can("queue.status")) b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>');
+    if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">No-show</button>');
     if(can("queue.reorder")&&i>0) b.push('<button data-a="up" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▲</button>');
     if(can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
     if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
@@ -412,7 +538,7 @@
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');   // nurse records BP/temp/SpO2 etc. onto the encounter timeline
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
       '<div class="st">'+esc(t.status.replace(/_/g," "))+'</div></div>'+
       '<div class="acts">'+b.join("")+'</div></div>';
@@ -424,6 +550,7 @@
         if(a==="call") post("status",{sessionId:sid,ticketId:tid,status:"called"});
         else if(a==="start") post("status",{sessionId:sid,ticketId:tid,status:"in_consultation"});
         else if(a==="sendback") post("status",{sessionId:sid,ticketId:tid,status:"waiting"});
+        else if(a==="noshow") openNoShowMark(sid,tid,btn.getAttribute("data-n"));
         else if(a==="prio") post("priority",{sessionId:sid,ticketId:tid,priority:+btn.getAttribute("data-p")});
         else if(a==="up") openMove(sid,tid,+btn.getAttribute("data-i")-1);
         else if(a==="down") openMove(sid,tid,+btn.getAttribute("data-i")+1);
@@ -437,7 +564,7 @@
     });
   }
   function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||refresh)(r); }); }
-  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope."}[e]||e; }
+  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why."}[e]||e; }
 
   // ---- reorder-with-reason modal (anti-misuse) ----
   var CATS=["Elderly","Bedridden","Disabled","Acutely unwell","Urgent","Other"];
@@ -457,6 +584,11 @@
     };
   }
   // ---- remove-patient modal (mistaken / duplicate / wrongly-routed entry) ----
+  function openNoShowMark(sid,tid,name){
+    open('<h3>Mark '+esc(name||"patient")+' as no-show?</h3><p class="t">Called and did not come. The token is kept: for 4 hours the patient can be recalled from <b>No-shows</b>.</p><div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Mark no-show</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){ close(); post("status",{sessionId:sid,ticketId:tid,status:"no_show"}); };
+  }
   function openRemove(sid,tid,name){
     open('<h3>Remove patient</h3><p style="color:var(--mut);margin:0 0 10px">Remove <b>'+esc(name||"this patient")+'</b> from the queue? Use this for a mistaken, duplicate, or wrongly-routed entry — it is recorded in the audit trail. To send them to another doctor instead, use <b>Move to doctor</b>.</p>'+
       '<div class="row2"><button class="cancel" id="cx">Keep in queue</button><button class="btn danger" id="ok" style="margin:0">Remove patient</button></div>');
@@ -494,8 +626,28 @@
     api("checkout",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
       if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Checkout failed");return;}
       refresh();
-      if(r.timelineUrl){ open('<h3>Patient checked out</h3><p style="color:var(--mut)">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary (valid 7 days):")+'</p><div class="link">'+esc(r.timelineUrl)+'</div><div class="row2"><button class="btn" id="cx" style="margin:0">Done</button></div>'); sheet.querySelector("#cx").onclick=close; }
+      var nx=(r.tickets||[]).filter(function(x){return x.status==="called";})[0];
+      if(nx&&nx.token) toast("Now calling token "+nx.token);
+      if(r.timelineUrl){
+        open('<h3>Patient checked out</h3><p style="color:var(--mut)">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary:")+'</p><div class="link">'+esc(r.timelineUrl)+'</div>'+
+          '<p id="lx" style="color:var(--mut)">'+linkUntil(r.linkExpiresAt)+'</p>'+
+          '<div class="row2">'+(can("emr.treat")?'<button class="cancel" id="ext" style="margin:0">Keep open 30 days</button>':'')+'<button class="btn" id="cx" style="margin:0">Done</button></div>');
+        sheet.querySelector("#cx").onclick=close;
+        var ext=sheet.querySelector("#ext");
+        if(ext) ext.onclick=function(){ extendLink(sid,tid,ext); };
+      }
     });
+  }
+  function linkUntil(ms){ return ms?"The patient can open it until "+new Date(ms).toLocaleDateString([],{day:"numeric",month:"short",year:"numeric"})+".":"The link expiry date is not known."; }
+  // The date shown only changes when the server says the extension was saved.
+  function extendLink(sid,tid,btn){
+    btn.disabled=true; btn.textContent="Saving…";
+    api("timeline/extend",{method:"POST",body:{sessionId:sid,ticketId:tid,days:30}}).then(function(r){
+      var lx=sheet.querySelector("#lx");
+      if(!r||!r.ok){ btn.disabled=false; btn.textContent="Keep open 30 days"; toast(r&&r.error==="not_ready"?"This visit is not closed yet.":r&&r.error?friendly(r.error):"Could not extend the link. The old date still applies."); return; }
+      if(lx) lx.textContent=linkUntil(r.linkExpiresAt);
+      btn.textContent="Extended";
+    }).catch(function(){ btn.disabled=false; btn.textContent="Keep open 30 days"; toast("Could not extend the link. The old date still applies."); });
   }
   // ---- audit drawer ----
   function openAudit(sid){
@@ -514,6 +666,286 @@
 
   // ---- clinical notes drawer (READ-ONLY; staff can view + download, never edit) ----
   var NOTE_KIND={vitals:"Vitals",note:"Clinical note",assessment:"Assessment",meds:"Medication",order:"Investigation",checkout:"Visit closed"};
+  // ---- vital signs from the WardSynQ clinical record ----------------------------------------
+  // The timeline above is the visit's narrative. Where a clinic has opted its tenant in
+  // (settings.wardsynq.migrations.vitals), the nurse's vitals ALSO land in the clinical record as
+  // coded observations (LOINC, units as entered). This reads them back with the same credentials the
+  // console already holds, through the record's own door, which decides who may see them. Nothing
+  // here duplicates the timeline: the timeline keeps its text line, the record shows the values.
+  var VITAL_LABEL={"8480-6":"BP",  "8462-4":"BP", "8867-4":"Pulse","8310-5":"Temp","59408-5":"SpO2","9279-1":"Resp","29463-7":"Weight"};
+  var VITAL_ORDER=["bp","8867-4","8310-5","59408-5","9279-1","29463-7"];
+  var VITAL_UNIT={"mm[Hg]":"mmHg","/min":"/min","[degF]":"°F","Cel":"°C","%":"%","kg":"kg"};
+  // PURE. Observations -> sets of readings, one per recorded moment, newest first. Systolic and
+  // diastolic pair into one "BP 142/91". `thisVisit` is set from the observation's source ticket.
+  function vitalSets(observations,ticketId){
+    var by={}, order=[];
+    (observations||[]).forEach(function(o){
+      if(!o||o.category!=="vital-signs"||typeof o.value!=="number") return;
+      var at=(o.meta&&o.meta.effectiveAt)||(o.meta&&o.meta.recordedAt)||""; var src=(o.meta&&o.meta.source&&o.meta.source.sourceId)||"";
+      var key=at+"|"+src; if(!by[key]){ by[key]={at:at,thisVisit:!!ticketId&&src==="opd-ticket:"+ticketId,values:{},note:o.sourceText||"",by:(o.writtenBy&&o.writtenBy.id)||""}; order.push(key); }
+      var set=by[key];
+      if(o.code==="8480-6"||o.code==="8462-4"){ set.values.bp=set.values.bp||{unit:o.unit}; set.values.bp[o.code==="8480-6"?"s":"d"]=o.value; }
+      else set.values[o.code]={v:o.value,unit:o.unit};
+      if(o.sourceText&&!set.note) set.note=o.sourceText;
+    });
+    return order.map(function(k){return by[k];}).sort(function(a,b){return String(b.at).localeCompare(String(a.at));});
+  }
+  function renderVitalSets(sets,fetchedAt){
+    var when=function(iso){ var d=new Date(iso); return isNaN(d)?"":d.toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}); };
+    var cell=function(n,x,u){ return '<div class="vs-v"><span class="n">'+n+'</span><span class="x">'+esc(x)+(u?'<small>'+esc(u)+'</small>':'')+'</span></div>'; };
+    var body=sets.slice(0,6).map(function(st){
+      var v=st.values, cells=[];
+      VITAL_ORDER.forEach(function(k){
+        if(k==="bp"){ if(v.bp&&(v.bp.s!=null||v.bp.d!=null)) cells.push(cell("BP",(v.bp.s!=null?v.bp.s:"?")+"/"+(v.bp.d!=null?v.bp.d:"?"),VITAL_UNIT[v.bp.unit]||v.bp.unit||"")); }
+        else if(v[k]) cells.push(cell(VITAL_LABEL[k]||k,String(v[k].v),VITAL_UNIT[v[k].unit]||v[k].unit||""));
+      });
+      return '<div class="vs-set"><div class="w"><b>'+when(st.at)+'</b>'+(st.thisVisit?'<span class="now">This visit</span>':'')+'</div><div class="vs-grid">'+cells.join("")+'</div>'+(st.note?'<div class="note">'+esc(st.note)+'</div>':'')+'</div>';
+    }).join("");
+    var more=sets.length>6?'<p class="st" style="margin:8px 0 0">'+(sets.length-6)+' earlier '+(sets.length-6===1?'set':'sets')+' of readings in the record.</p>':'';
+    return '<h4>Vital signs<span class="src">Clinical record</span></h4><p class="st">Read from the clinical record'+(fetchedAt?' · '+when(fetchedAt):'')+'</p>'+body+more;
+  }
+  // The record's door answers for itself; each answer is a different sentence for the doctor.
+  function recordVitalsBlock(rec,onDone){
+    var box=document.createElement("div"); box.className="vs"; box.setAttribute("aria-live","polite");
+    box.innerHTML='<h4>Vital signs<span class="src">Clinical record</span></h4><p class="st">Loading from the clinical record…</p>';
+    if(!rec.patientId){ box.innerHTML='<h4>Vital signs<span class="src">Clinical record</span></h4><p class="st">This patient has no medical record number, so vitals cannot be filed in the clinical record for this visit.</p>'; onDone&&onDone(); return box; }
+    var h={}; var url="/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/Observation";
+    var go=function(){
+      return fetch(url,{headers:h}).then(function(r){ return r.json().catch(function(){return null;}).then(function(j){ return {status:r.status,body:j}; }); })
+        .then(function(x){
+          var sets=(x.status===200&&x.body&&x.body.ok)?vitalSets(x.body.records,rec.ticketId):null;
+          if(sets){ box.innerHTML=sets.length?renderVitalSets(sets,new Date().toISOString()):'<h4>Vital signs<span class="src">Clinical record</span></h4><p class="st">No vital signs in the clinical record for this patient yet. Nurse-recorded vitals appear here once saved.</p>'; }
+          else if(x.status===403) box.innerHTML='<h4>Vital signs<span class="src">Clinical record</span></h4><p class="st">Your role cannot view the clinical record. The visit timeline above is still available.</p>';
+          else if(x.status===401) box.innerHTML='<h4>Vital signs<span class="src">Clinical record</span></h4><p class="st">Sign in again to read the clinical record.</p>';
+          else if(x.status===404) box.innerHTML='<h4>Vital signs<span class="src">Clinical record</span></h4><p class="st">The clinical record is not available for this clinic right now. The visit timeline above is unaffected.</p>';
+          else box.innerHTML='<h4>Vital signs<span class="src">Clinical record</span></h4><p class="st">Could not reach the clinical record. Showing the visit timeline only; the values are safe in the record and will appear when it is reachable.</p>';
+        })
+        .catch(function(){ box.innerHTML='<h4>Vital signs<span class="src">Clinical record</span></h4><p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>'; })
+        .then(function(){ onDone&&onDone(); });
+    };
+    if(st.tokType==="firebase") fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return go(); });
+    else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
+    return box;
+  }
+  // ---- the doctor's assessment, from the WardSynQ clinical record --------------------------------
+  // Same idea as vital signs above, reading the SAME generic record endpoint for a different
+  // resource type. The note's four SOAP sections are what functions/_wardsynq/migrate-assessment.js
+  // groups a much larger GHIS intake form into; nothing here re-derives that grouping.
+  var SOAP_LABEL={subjective:"Subjective",objective:"Objective",assessment:"Assessment",plan:"Plan"};
+  // `records` is one row per DISTINCT note (one per encounter), each already at its current latest
+  // version — the record's own append-only history of EARLIER drafts of any one note lives behind
+  // it, not shown here; this card is "what does the record say now", not a version browser.
+  function renderNotes(records){
+    var when=function(iso){ var d=new Date(iso); return isNaN(d)?"":d.toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}); };
+    var sorted=records.slice().sort(function(a,b){ return String((b.meta&&b.meta.recordedAt)||"").localeCompare(String((a.meta&&a.meta.recordedAt)||"")); });
+    var body=sorted.slice(0,5).map(function(n){
+      var secs=["subjective","objective","assessment","plan"].map(function(k){
+        var v=(n.sections||{})[k]; if(!v) return "";
+        return '<div class="asn-sec"><span class="n">'+SOAP_LABEL[k]+'</span><div class="x">'+esc(v)+'</div></div>';
+      }).join("");
+      var when2=when(n.meta&&n.meta.recordedAt);
+      var by=n.writtenBy?esc(n.writtenBy.id):(n.authorId?esc(n.authorId):"");
+      // Signed is a fact the record holds, not a badge the console decides. Shown only when present.
+      var signed=n.signedBy?'<span class="now">Signed by '+esc(n.signedBy)+'</span>':'<span style="color:var(--mut)">Unsigned</span>';
+      return '<div class="asn-set"><div class="w" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:6px;flex-wrap:wrap"><b style="color:var(--ink)">'+when2+'</b>'+(by?' · '+by:'')+(n.version>1?' · v'+n.version:'')+signed+'</div>'+(secs||'<p class="st">No sections recorded.</p>')+'</div>';
+    }).join("");
+    var more=sorted.length>5?'<p class="st" style="margin:8px 0 0">'+(sorted.length-5)+' earlier '+(sorted.length-5===1?"assessment":"assessments")+' in the record.</p>':'';
+    return '<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Read from the clinical record</p>'+body+more;
+  }
+  function recordAssessmentBlock(rec,onDone){
+    var box=document.createElement("div"); box.className="vs"; box.setAttribute("aria-live","polite");
+    box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Loading from the clinical record…</p>';
+    if(!rec.patientId){ box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">This patient has no medical record number, so an assessment cannot be filed in the clinical record for this visit.</p>'; onDone&&onDone(); return box; }
+    var h={}; var url="/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/ClinicalNote";
+    var go=function(){
+      return fetch(url,{headers:h}).then(function(r){ return r.json().catch(function(){return null;}).then(function(j){ return {status:r.status,body:j}; }); })
+        .then(function(x){
+          if(x.status===200&&x.body&&x.body.ok){
+            var records=x.body.records||[];
+            box.innerHTML=records.length?renderNotes(records):'<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">No assessment in the clinical record for this patient yet.</p>';
+          }
+          else if(x.status===403) box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Your role cannot view the clinical record. The visit timeline above is still available.</p>';
+          else if(x.status===401) box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Sign in again to read the clinical record.</p>';
+          else if(x.status===404) box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">The clinical record is not available for this clinic right now. The visit timeline above is unaffected.</p>';
+          else box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>';
+        })
+        .catch(function(){ box.innerHTML='<h4>Assessment<span class="src">Clinical record</span></h4><p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>'; })
+        .then(function(){ onDone&&onDone(); });
+    };
+    if(st.tokType==="firebase") fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return go(); });
+    else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
+    return box;
+  }
+  // ---- the doctor's investigation orders, from the WardSynQ clinical record ---------------------
+  // The same generic record endpoint a third time, for a third resource type. These are ORDERS —
+  // what was asked for. Results are NOT here: functions/_wardsynq/migrate-inv-order.js migrates the
+  // request only and nothing writes DiagnosticReport yet, so this card must not imply a result exists.
+  var ORDER_STATUS={active:"Ordered",completed:"Completed",revoked:"Cancelled",draft:"Draft","on-hold":"On hold"};
+  function ordHead(){ return '<h4>Investigations<span class="src">Clinical record</span></h4>'; }
+  function renderOrders(records){
+    var when=function(iso){ var d=new Date(iso); return isNaN(d)?"":d.toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}); };
+    var sorted=records.slice().sort(function(a,b){ return String((b.meta&&b.meta.recordedAt)||"").localeCompare(String((a.meta&&a.meta.recordedAt)||"")); });
+    var body=sorted.slice(0,8).map(function(o){
+      // `display` is the service NAME, `code` is GHIS's own service id. Lead with the name and fall
+      // back to the id, never the reverse — "LAB1118" alone means nothing to whoever reads the ward.
+      var title=esc(o.display||o.code||"Investigation");
+      var pills=(o.priority==="stat"?'<span class="asn-pill stat">Emergency</span> ':'')
+        +'<span class="asn-pill">'+esc(ORDER_STATUS[o.status]||o.status||"")+'</span>';
+      var by=o.requesterId?esc(o.requesterId):"";
+      return '<div class="asn-set"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:4px"><b style="color:var(--ink)">'+when(o.meta&&o.meta.recordedAt)+'</b>'+(by?' · '+by:'')+'</div>'
+        +'<div class="asn-sec"><div class="x" style="font-weight:600">'+title+'</div>'
+        +'<div style="margin-top:4px">'+pills+(o.display&&o.code?' <span class="n" style="text-transform:none">'+esc(o.code)+'</span>':'')+'</div>'
+        +(o.reason?'<div class="x" style="margin-top:4px">For: '+esc(o.reason)+'</div>':'')
+        +'</div></div>';
+    }).join("");
+    var more=sorted.length>8?'<p class="st" style="margin:8px 0 0">'+(sorted.length-8)+' earlier '+(sorted.length-8===1?"order":"orders")+' in the record.</p>':'';
+    return ordHead()+'<p class="st">Ordered for this patient. Results are not recorded here.</p>'+body+more;
+  }
+  function recordOrdersBlock(rec,onDone){
+    var box=document.createElement("div"); box.className="vs"; box.setAttribute("aria-live","polite");
+    box.innerHTML=ordHead()+'<p class="st">Loading from the clinical record…</p>';
+    if(!rec.patientId){ box.innerHTML=ordHead()+'<p class="st">This patient has no medical record number, so investigations cannot be filed in the clinical record for this visit.</p>'; onDone&&onDone(); return box; }
+    var h={}; var url="/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/ServiceRequest";
+    var go=function(){
+      return fetch(url,{headers:h}).then(function(r){ return r.json().catch(function(){return null;}).then(function(j){ return {status:r.status,body:j}; }); })
+        .then(function(x){
+          if(x.status===200&&x.body&&x.body.ok){
+            var records=x.body.records||[];
+            box.innerHTML=records.length?renderOrders(records):ordHead()+'<p class="st">No investigations in the clinical record for this patient yet.</p>';
+          }
+          else if(x.status===403) box.innerHTML=ordHead()+'<p class="st">Your role cannot view the clinical record. The visit timeline above is still available.</p>';
+          else if(x.status===401) box.innerHTML=ordHead()+'<p class="st">Sign in again to read the clinical record.</p>';
+          else if(x.status===404) box.innerHTML=ordHead()+'<p class="st">The clinical record is not available for this clinic right now. The visit timeline above is unaffected.</p>';
+          else box.innerHTML=ordHead()+'<p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>';
+        })
+        .catch(function(){ box.innerHTML=ordHead()+'<p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>'; })
+        .then(function(){ onDone&&onDone(); });
+    };
+    if(st.tokType==="firebase") fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return go(); });
+    else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
+    return box;
+  }
+  // ---- the doctor's prescriptions, from the WardSynQ clinical record ---------------------------
+  // The same generic record endpoint a fourth time. These are ORDERS - what was prescribed. Nothing
+  // here is dispensing or administration: functions/_wardsynq/migrate-prescription.js writes the
+  // MedicationOrder only, nothing writes MedicationAdministration, so this card must never read as
+  // "the patient received this dose".
+  var RX_STATUS={active:"Active",draft:"Draft, unsigned",cancelled:"Discontinued","on-hold":"On hold",completed:"Completed"};
+  function rxHead(){ return '<h4>Medications<span class="src">Clinical record</span></h4>'; }
+  function renderRx(records){
+    var when=function(iso){ var d=new Date(iso); return isNaN(d)?"":d.toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}); };
+    var sorted=records.slice().sort(function(a,b){ return String((b.meta&&b.meta.recordedAt)||"").localeCompare(String((a.meta&&a.meta.recordedAt)||"")); });
+    var body=sorted.slice(0,8).map(function(m){
+      // Clinically important first, in the order a prescription is read aloud:
+      // drug -> dose/strength -> route -> frequency -> duration -> instructions.
+      var line=[m.route,m.form,m.quantity,m.frequency,m.duration].filter(Boolean).map(esc).join(" · ");
+      var st2=String(m.status||"");
+      var cls=st2==="active"?"rx-on":st2==="cancelled"?"rx-off":"";
+      var pills='<span class="asn-pill '+cls+'">'+esc(RX_STATUS[st2]||st2)+'</span>';
+      // An AI-suggested draft must never be mistaken for a clinician's prescription.
+      if(m.aiDrafted) pills+=' <span class="asn-pill rx-ai">AI draft</span>';
+      var by=m.signedBy?("Signed by "+esc(m.signedBy)):(m.prescriberId?("Entered by "+esc(m.prescriberId)+", unsigned"):"");
+      return '<div class="asn-set"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:4px"><b style="color:var(--ink)">'+when(m.meta&&m.meta.recordedAt)+'</b>'+(m.version>1?' · v'+m.version:'')+'</div>'
+        +'<div class="asn-sec"><div class="x" style="font-weight:600">'+esc(m.drug||m.drugCode||"Medication")+'</div>'
+        +(m.genericName?'<div class="n" style="text-transform:none;margin-top:1px">'+esc(m.genericName)+'</div>':'')
+        +(line?'<div class="x" style="margin-top:3px">'+line+'</div>':'')
+        +'<div style="margin-top:4px">'+pills+'</div>'
+        +(m.instructions?'<div class="x" style="margin-top:4px">'+esc(m.instructions)+'</div>':'')
+        +(by?'<div class="n" style="text-transform:none;margin-top:3px">'+by+'</div>':'')
+        +'</div></div>';
+    }).join("");
+    var more=sorted.length>8?'<p class="st" style="margin:8px 0 0">'+(sorted.length-8)+' earlier '+(sorted.length-8===1?"medication":"medications")+' in the record.</p>':'';
+    return rxHead()+'<p class="st">Prescribed for this patient. Dispensing and administration are not recorded here.</p>'+body+more;
+  }
+  function recordRxBlock(rec,onDone){
+    var box=document.createElement("div"); box.className="vs"; box.setAttribute("aria-live","polite");
+    box.innerHTML=rxHead()+'<p class="st">Loading from the clinical record…</p>';
+    if(!rec.patientId){ box.innerHTML=rxHead()+'<p class="st">This patient has no medical record number, so medications cannot be filed in the clinical record for this visit.</p>'; onDone&&onDone(); return box; }
+    var h={}; var url="/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/MedicationOrder";
+    var go=function(){
+      return fetch(url,{headers:h}).then(function(r){ return r.json().catch(function(){return null;}).then(function(j){ return {status:r.status,body:j}; }); })
+        .then(function(x){
+          if(x.status===200&&x.body&&x.body.ok){
+            var records=x.body.records||[];
+            box.innerHTML=records.length?renderRx(records):rxHead()+'<p class="st">No medications in the clinical record for this patient yet.</p>';
+          }
+          else if(x.status===403) box.innerHTML=rxHead()+'<p class="st">Your role cannot view the clinical record. The visit timeline above is still available.</p>';
+          else if(x.status===401) box.innerHTML=rxHead()+'<p class="st">Sign in again to read the clinical record.</p>';
+          else if(x.status===404) box.innerHTML=rxHead()+'<p class="st">The clinical record is not available for this clinic right now. The visit timeline above is unaffected.</p>';
+          else box.innerHTML=rxHead()+'<p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>';
+        })
+        .catch(function(){ box.innerHTML=rxHead()+'<p class="st">Could not reach the clinical record. Showing the visit timeline only.</p>'; })
+        .then(function(){ onDone&&onDone(); });
+    };
+    if(st.tokType==="firebase") fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return go(); });
+    else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
+    return box;
+  }
+  // ---- lab + radiology RESULTS, from the WardSynQ clinical record ------------------------------
+  // Shown ONLY when the server says results are explicitly enabled for this tenant (r.record.results
+  // - the one card gated narrower than the rest, on purpose: see the GET timeline handler). GHIS
+  // stays what the doctor tapped to view the result; this card is a second, read-only confirmation
+  // of the SAME result now filed on the canonical record, never a competing or duplicate source.
+  function drHead(){ return '<h4>Results<span class="src">Clinical record</span></h4>'; }
+  function renderResults(reports,obsById){
+    var when=function(iso){ var d=new Date(iso); return isNaN(d)?"":d.toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}); };
+    var sorted=reports.slice().sort(function(a,b){ return String((b.meta&&b.meta.effectiveAt)||"").localeCompare(String((a.meta&&a.meta.effectiveAt)||"")); });
+    var body=sorted.slice(0,8).map(function(r){
+      var isFinal=r.status==="final";
+      var pill='<span class="asn-pill '+(isFinal?"dr-final":"dr-prelim")+'">'+esc(isFinal?"Final":(r.status==="cancelled"?"Cancelled":"Preliminary"))+'</span>';
+      var srcLabel=r.sourceKind==="radiology"?"Radiology":"Laboratory";
+      var by=r.sourceKind==="radiology"&&r.sourceReportedBy?(" · Reported by "+esc(r.sourceReportedBy)):"";
+      var head='<div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:4px"><b style="color:var(--ink)">'+when(r.meta&&r.meta.effectiveAt)+'</b> · '+esc(srcLabel)+by+'</div>';
+      var body2;
+      if(r.sourceKind==="radiology"){
+        body2=r.conclusion?'<div class="x">'+esc(r.conclusion)+'</div>':'<p class="st" style="margin:2px 0 0">No report text yet.</p>';
+      }else{
+        var tests=(r.resultObservationIds||[]).map(function(id){ return obsById[id]; }).filter(Boolean);
+        body2=tests.length?tests.map(function(o){
+          var val=(o.sourceValue!=null?o.sourceValue:o.value)+(o.unit?(" "+esc(o.unit)):"");
+          var rng=o.referenceRange&&(o.referenceRange.text||o.referenceRange.low!=null||o.referenceRange.high!=null)
+            ?(' <span class="n" style="text-transform:none">('+(o.referenceRange.text||[o.referenceRange.low,o.referenceRange.high].filter(function(v){return v!=null;}).join(" - "))+')</span>'):"";
+          var crit=o.sourceCritical?' <span class="asn-pill stat">Critical</span>':"";
+          return '<div style="display:flex;justify-content:space-between;gap:8px;margin-top:2px"><span class="x">'+esc(o.sourceTestName||o.code)+'</span><span class="x">'+esc(val)+rng+crit+'</span></div>';
+        }).join(""):'<p class="st" style="margin:2px 0 0">No structured values recorded.</p>';
+      }
+      return '<div class="asn-set">'+head+'<div class="asn-sec"><div class="x" style="font-weight:600">'+esc(r.code)+'</div>'+pill+'<div style="margin-top:4px">'+body2+'</div></div></div>';
+    }).join("");
+    var more=sorted.length>8?'<p class="st" style="margin:8px 0 0">'+(sorted.length-8)+' earlier '+(sorted.length-8===1?"result":"results")+' in the record.</p>':'';
+    return drHead()+body+more;
+  }
+  function recordResultsBlock(rec,onDone){
+    var box=document.createElement("div"); box.className="vs"; box.setAttribute("aria-live","polite");
+    box.innerHTML=drHead()+'<p class="st">Loading from the clinical record…</p>';
+    if(!rec.patientId){ box.innerHTML=drHead()+'<p class="st">This patient has no medical record number, so results cannot be filed in the clinical record for this visit.</p>'; onDone&&onDone(); return box; }
+    var h={};
+    var drUrl="/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/DiagnosticReport";
+    var obsUrl="/api/wardsynq/"+encodeURIComponent(rec.tenantId)+"/patient/"+encodeURIComponent(rec.patientId)+"/Observation";
+    var getJson=function(url){ return fetch(url,{headers:h}).then(function(r){ return r.json().catch(function(){return null;}).then(function(j){ return {status:r.status,body:j}; }); }); };
+    var go=function(){
+      return getJson(drUrl).then(function(x){
+          if(x.status===200&&x.body&&x.body.ok){
+            var records=x.body.records||[];
+            var needsObs=records.some(function(r){ return (r.resultObservationIds||[]).length; });
+            var withObs=needsObs?getJson(obsUrl):Promise.resolve({status:200,body:{records:[]}});
+            return withObs.then(function(ox){
+              var obsById={};
+              ((ox.body&&ox.body.records)||[]).forEach(function(o){ if(o.category==="laboratory") obsById[o.id]=o; });
+              box.innerHTML=records.length?renderResults(records,obsById):drHead()+'<p class="st">No results in the clinical record for this patient yet.</p>';
+            });
+          }
+          else if(x.status===403) box.innerHTML=drHead()+'<p class="st">Your role cannot view the clinical record. The visit timeline above is still available.</p>';
+          else if(x.status===401) box.innerHTML=drHead()+'<p class="st">Sign in again to read the clinical record.</p>';
+          else if(x.status===404) box.innerHTML=drHead()+'<p class="st">The clinical record is not available for this clinic right now. The visit timeline above is unaffected.</p>';
+          else box.innerHTML=drHead()+'<p class="st">Could not reach the clinical record. Showing GHIS results only.</p>';
+        })
+        .catch(function(){ box.innerHTML=drHead()+'<p class="st">Could not reach the clinical record. Showing GHIS results only.</p>'; })
+        .then(function(){ onDone&&onDone(); });
+    };
+    if(st.tokType==="firebase") fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return go(); });
+    else { if(st.tok) h["X-Staff-Token"]=st.tok; go(); }
+    return box;
+  }
   function openNotes(sid,tid,name){
     open('<h3>Clinical notes'+(name?' - '+esc(name):'')+'</h3><p class="t" style="margin:-6px 0 10px">View only. Doctors record notes; you can read and download.</p><div class="drawer" id="nd">Loading…</div><div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dl" style="margin:0" disabled>Download</button></div>');
     sheet.querySelector("#cx").onclick=close;
@@ -521,12 +953,27 @@
       var el=sheet.querySelector("#nd"); if(!el) return;
       if(!r||!r.ok){ el.innerHTML='<div class="empty">'+((r&&(r.error==="forbidden"||r.error==="out_of_scope"))?"You don't have permission to view these notes.":"Could not load the notes.")+'</div>'; return; }
       var tl=r.timeline||{}, entries=tl.entries||[];
-      if(!entries.length){ el.innerHTML='<div class="empty">No clinical notes recorded for this visit yet.</div>'; return; }
-      el.innerHTML=entries.map(function(e){
+      el.innerHTML=entries.length ? entries.map(function(e){
         var when=new Date(e.ts).toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
         return '<div class="ev"><div><b>'+esc(NOTE_KIND[e.kind]||e.kind||"Note")+'</b> <span class="t">'+when+(e.by?" · "+esc(e.by):"")+'</span></div><div style="white-space:pre-wrap;margin-top:2px">'+esc(e.text||"")+'</div></div>';
-      }).join("");
-      var dl=sheet.querySelector("#dl"); if(dl){ dl.disabled=false; dl.onclick=function(){ downloadNotes(name,tl); }; }
+      }).join("") : '<div class="empty">No clinical notes recorded for this visit yet.</div>';
+      // The record's vital signs sit ABOVE the narrative, and only where the server says the clinic
+      // has a record to read. With the tenant off (every clinic today) there is no `record` key and
+      // this drawer is exactly what it was.
+      // Each prepends, so these run in REVERSE of the order they end up reading in: vital signs,
+      // then the assessment, then what was ordered off the back of it, then what came back for
+      // those orders, then what was prescribed, then the narrative timeline. The results card is
+      // its own key (r.record.results) — see the GET timeline handler — appearing only when the
+      // tenant has explicitly enabled reading results back, unlike the other four which appear
+      // whenever the tenant's record is reachable at all.
+      if(r.record&&r.record.tenantId){
+        el.insertBefore(recordRxBlock(r.record),el.firstChild);
+        if(r.record.results) el.insertBefore(recordResultsBlock(r.record),el.firstChild);
+        el.insertBefore(recordOrdersBlock(r.record),el.firstChild);
+        el.insertBefore(recordAssessmentBlock(r.record),el.firstChild);
+        el.insertBefore(recordVitalsBlock(r.record),el.firstChild);
+      }
+      var dl=sheet.querySelector("#dl"); if(dl){ dl.disabled=!entries.length; dl.onclick=function(){ downloadNotes(name,tl); }; }
     };
     if(st.orgId==="demo"){ var n=Date.now(); show({ok:true,timeline:{mrnLast4:"4821",entries:[
       {ts:n-40*60000,kind:"vitals",by:"Sister Anu",text:"BP 128/82 · Temp 98.4°F · SpO2 98% · Pulse 78/min"},
@@ -572,10 +1019,14 @@
       if(pin && !/^\d{4,6}$/.test(pin)){toast("PIN must be 4 to 6 digits");return;}
       api("member",{method:"POST",body:{orgId:st.orgId,identity:id,role:role}}).then(function(r){
         if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;}
+        // Each step's refusal stops the chain and is shown. This said "Saved" even when the PIN or
+        // password had been refused, so staff were handed a sign-in that did not exist.
+        var step=function(what,path,body){return function(){return api(path,{method:"POST",body:body}).then(function(x){ if(!x||!x.ok) throw new Error(what+" not set: "+((x&&(x.message||friendly(x.error)))||"no response")); });};};
         var chain=Promise.resolve();
-        if(pin) chain=chain.then(function(){return api("member/pin",{method:"POST",body:{orgId:st.orgId,identity:id,pin:pin}});});
-        if(em&&pw) chain=chain.then(function(){return api("member/password",{method:"POST",body:{orgId:st.orgId,identity:id,email:em,password:pw}});});
-        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); });
+        if(pin) chain=chain.then(step("PIN","member/pin",{orgId:st.orgId,identity:id,pin:pin}));
+        if(em&&pw) chain=chain.then(step("Password","member/password",{orgId:st.orgId,identity:id,email:em,password:pw}));
+        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); })
+          .catch(function(e){ loadStaffList(); toast(e.message); });
       });
     };
     loadStaffList();
@@ -606,7 +1057,7 @@
     rooms.forEach(function(rm){ inRooms+=rm.waiting||0; (rm.tickets||[]).forEach(function(t){ if(t.status==="in_consultation") consulting++; }); });
     // routing inbox
     var poolRows=pool.length? pool.map(function(t){ var w=waitMin(t), urg=t.priority>=2;
-      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+'</div>'+
+      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+'</div>'+
         '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">waited '+w+'m</span></div>'+
         (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="width:100%;margin-left:0;margin-top:4px">Route to a room <span class="ms sm">chevron_right</span></button>':"")+'</div>';
     }).join("") : '<div class="empty">No one waiting to be routed.'+(can("queue.add")?'<br>Tap <b>+ Walk-in</b> to register an arrival.':"")+'</div>';
@@ -631,6 +1082,7 @@
     var consult=t.status==="in_consultation"; var cls=t.priority>=2?"p2":(t.priority>=1?"p1":"");
     var b=[];
     if(!consult&&can("queue.status")){ b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>'); b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>'); }
+    if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">No-show</button>');   // D13: called and did not come; recallable with the same token
     if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
     if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear":"Urgent")+'</button>');
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // room -> waiting hall (in_consultation -> waiting)
@@ -638,7 +1090,7 @@
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
   }
   // Nurse records vitals -> a compact timeline entry (kind:"vitals", EMR_VITALS cap). This is the nurse's
@@ -666,7 +1118,10 @@
       var note=g("vnote"); if(note) p.push(note);
       if(!p.length){toast("Enter at least one value");return;}
       close();
-      post("timeline",{sessionId:sid,ticketId:tid,kind:"vitals",text:p.join(" · ")});
+      // The structured values travel WITH the text. The timeline keeps the line; the WardSynQ record
+      // (where a tenant has opted in) gets coded observations, as reported, unit and all.
+      var vitals={sbp:bps,dbp:bpd,pulse:g("vpr"),temp:g("vtemp"),tempUnit:"F",spo2:g("vspo2"),rr:g("vrr"),weight:g("vwt"),note:note};
+      post("timeline",{sessionId:sid,ticketId:tid,kind:"vitals",text:p.join(" · "),vitals:vitals});
     };
   }
   function openAssignRoom(tid){
@@ -674,10 +1129,11 @@
     var dept=(pt.department||"").toLowerCase();
     // GIMSR routing: matching-department rooms first, then the rest; shortest queue reads at a glance.
     var rooms=((st.opd&&st.opd.rooms)||[]).filter(function(r){return r.doctorUid;});
-    var match=function(r){ return dept && String(r.room.department||"").toLowerCase()===dept; };
+    // D7: by department id when both carry one (a renamed department still matches), else by name.
+    var match=function(r){ if(pt.departmentId&&r.room.departmentId) return pt.departmentId===r.room.departmentId; return dept && String(r.room.department||"").toLowerCase()===dept; };
     rooms.sort(function(a,b){ return (match(b)?1:0)-(match(a)?1:0) || (a.waiting||0)-(b.waiting||0); });
     var opts=rooms.map(function(r){return '<option value="'+esc(r.room.id)+'">'+(match(r)?"✓ ":"")+esc(r.room.name||"Room")+(r.room.department?" ("+esc(r.room.department)+")":"")+' - '+esc(STATUS_LABEL[r.status]||r.status)+' · '+r.waiting+' waiting</option>';}).join("");
-    open('<h3>Route '+esc(pt.name||"patient")+'</h3><p class="t" style="margin:0 0 8px">'+(dept?"Billed department: <b>"+esc(pt.department)+"</b> - matching rooms first.":"Pick the consulting room.")+'</p>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available. Assign a doctor to a room in <b>Rooms</b> first.</div>')+
+    open('<h3>Route '+esc(pt.name||"patient")+'</h3><p class="t" style="margin:0 0 8px">'+(dept?"Billed department: <b>"+esc(pt.department)+"</b> - matching rooms first."+(pt.token?" A room in another department keeps token "+esc(pt.token)+".":""):"Pick the consulting room.")+'</p>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available. Assign a doctor to a room in <b>Rooms</b> first.</div>')+
       (can("queue.priority")?'<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px"><input type="checkbox" id="urg"> Urgent (front of the room queue)</label>':'')+   // only roles with the priority right may mark urgent (reception cannot)
       '<input id="arz" placeholder="Optional note" style="margin-top:6px">'+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Assign</button></div>');
@@ -696,16 +1152,27 @@
     // The server validates and issues the MR number; this only carries the answers.
     if(!(window.SMD_PATIENTREG&&SMD_PATIENTREG.open)){ toast("Patient check-in is unavailable."); return; }
     var mode=(st.opd&&st.opd.mode==="connect")?"connect":"native";
-    SMD_PATIENTREG.open({
-      mode: mode,
-      clinicName: st.orgCode||"Check-in",
-      submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; return api("patient/register",{method:"POST",body:b}); },
-      onAdded: function(r){
-        // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
-        api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",
-          mrn:r.mrn,visitType:(r.patient&&r.patient.visitType)==="followup"?"followup":"new",date:st.date}})
-          .then(function(){ toast("Added - "+r.mrn); refresh(); });
-      }
+    // D7: the hospital's departments and token numbering first, so the desk picks the department the
+    // token is numbered in. A failed load is said on the sheet (departments:null), never an empty list.
+    api("org?orgId="+encodeURIComponent(st.orgId)).then(function(o){ return o&&o.ok?o:null; },function(){ return null; }).then(function(o){
+      var perDept=!!(o&&o.org&&o.org.tokens&&o.org.tokens.scope==="department");
+      SMD_PATIENTREG.open({
+        mode: mode,
+        clinicName: st.orgCode||"Check-in",
+        departments: o?(o.departments||[]):null,
+        departmentRequired: perDept,
+        submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; b.forQueue="pool"; return api("patient/register",{method:"POST",body:b}); },
+        onAdded: function(r,sent){
+          // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
+          api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",
+            mrn:r.mrn,visitType:(r.patient&&r.patient.visitType)==="followup"?"followup":"new",date:st.date,departmentId:(sent&&sent.departmentId)||""}})
+            .then(function(q){
+              // A refused queue add is never shown as added: the patient is registered but has no token.
+              if(!q||!q.ok){ toast("Registered "+r.mrn+" but NOT queued: "+((q&&q.message)||(q&&q.error)||"no response")); refresh(); return; }
+              toast("Added - "+r.mrn+(q.ticket&&q.ticket.token?" - token "+q.ticket.token:"")); refresh();
+            },function(){ toast("Registered "+r.mrn+" but NOT queued: the server could not be reached."); });
+        }
+      });
     });
   }
 
@@ -736,11 +1203,19 @@
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
       '<input id="nrn" placeholder="New room name (e.g. Room 1 / Cardiology)" style="margin-bottom:8px">'+
       '<input id="nrnum" placeholder="Room number (optional)">'+
+      // D7: the room's department. Patients registered into this room are numbered in it.
+      '<select id="nrdept" style="margin-top:8px"><option value="">Department: loading...</option></select>'+
       '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Add room</button></div></div>');
+    api("org?orgId="+encodeURIComponent(st.orgId)).then(function(o){
+      var sel=sheet.querySelector("#nrdept"); if(!sel) return;
+      if(!o||!o.ok){ sel.innerHTML='<option value="">Departments could not be loaded (room added without one)</option>'; return; }
+      var ds=(o.departments||[]).filter(function(d){return d.active!==false;});
+      sel.innerHTML='<option value="">'+(ds.length?"No department":"No departments set up")+'</option>'+ds.map(function(d){return '<option value="'+esc(d.id)+'">'+esc(d.name)+'</option>';}).join("");
+    },function(){ var sel=sheet.querySelector("#nrdept"); if(sel) sel.innerHTML='<option value="">Departments could not be loaded (room added without one)</option>'; });
     sheet.querySelector("#cx").onclick=close;
     sheet.querySelector("#ok").onclick=function(){
       var n=sheet.querySelector("#nrn").value.trim(); if(!n){toast("Enter a room name");return;}
-      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),assignment:{mode:"primary",primary:meUid(),doctors:[meUid()]}}}).then(function(r){
+      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),departmentId:sheet.querySelector("#nrdept").value||null,assignment:{mode:"primary",primary:meUid(),doctors:[meUid()]}}}).then(function(r){
         if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} toast("Room added (assigned to you)"); sheet.querySelector("#nrn").value="";sheet.querySelector("#nrnum").value=""; loadRoomsList();
       });
     };
@@ -752,7 +1227,7 @@
       var el=sheet.querySelector("#rlist"); if(!el) return;
       var rooms=(r&&r.rooms)||[];
       el.innerHTML=rooms.length? rooms.map(function(rm){
-        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(rm.name||"Room")+'</b>'+(rm.number?' <span class="t">#'+esc(rm.number)+'</span>':'')+'<div class="t">'+esc(roomDoctorLabel(rm))+'</div></div>'+
+        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(rm.name||"Room")+'</b>'+(rm.number?' <span class="t">#'+esc(rm.number)+'</span>':'')+'<div class="t">'+esc(roomDoctorLabel(rm))+(rm.department?" · "+esc(rm.department):"")+'</div></div>'+
           '<button class="cancel" data-assign="'+esc(rm.id)+'" style="padding:6px 10px">Assign</button></div>';
       }).join("") : '<div class="empty">No rooms yet. Add one below.</div>';
       Array.prototype.forEach.call(el.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openRoomAssign(b.getAttribute("data-assign"));};});
@@ -804,9 +1279,15 @@
     sheet.querySelector("#ok").onclick=function(){
       var id=sheet.querySelector("#wri").value.trim(), pin=sheet.querySelector("#wrp").value.trim();
       if(!id){close();loadDash();return;}
-      api("member",{method:"POST",body:{orgId:orgId,identity:id,role:"reception"}}).then(function(){
+      // A refused member or PIN keeps the sheet open with the reason, instead of "Clinic ready".
+      api("member",{method:"POST",body:{orgId:orgId,identity:id,role:"reception"}}).then(function(r){
+        if(!r||!r.ok){toast((r&&(r.message||friendly(r.error)))||"Could not add the receptionist");return;}
         var done=function(){close();toast("Clinic ready");loadDash();};
-        pin?api("member/pin",{method:"POST",body:{orgId:orgId,identity:id,pin:pin}}).then(done):done();
+        if(!pin) return done();
+        api("member/pin",{method:"POST",body:{orgId:orgId,identity:id,pin:pin}}).then(function(p){
+          if(!p||!p.ok){toast("PIN not set: "+((p&&(p.message||friendly(p.error)))||"no response"));return;}
+          done();
+        });
       });
     };
   }
@@ -858,5 +1339,6 @@
 })();
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
+<script src="/wardsynq/site/bug-reporter.js?v=4"></script>
 </body>
 </html>

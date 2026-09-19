@@ -1,0 +1,37 @@
+The laboratory and radiology had no front door
+
+Every other department on the map has one: theatre, pharmacy stock, the ED,
+critical results. Labs and imaging existed only as buttons buried inside a single
+patient's chart, so a technician signing in landed on a map with nothing on it
+they could do and no way to see their own department's workload.
+
+THE BENCH COULD NOT BE ASKED A HOSPITAL-WIDE QUESTION. collectionList() and
+pendingRequests() were per-patient and answered 422 without a patientId, so the
+only way to assemble a worklist was to fan them out across the whole admitted
+census: eighty patients, two requests each, every refresh. digital-twin.js says
+as much in its own comment and settles for a bare count because of it. Both now
+take scope=hospital, and the opt-in is an EXPLICIT WORD rather than a missing
+parameter: on a read that returns every patient in the building, a client bug
+that drops patientId must not be the thing that unlocks it. Rows carry patientId
+so a department board can say whose specimen it is.
+
+NAMES, NOT RECORD IDS. Every row joins the ward roster, which already holds name
+and MRN. A tube identified only by opd-pat-smd-demo-00020 cannot be checked
+against a wristband. Where the join misses the row says so instead of printing
+the id and calling it a name.
+
+Both tiles are gated emr.view, and the laboratory one for the same reason the
+imaging worklist already is: lab.result deliberately cannot read Patient at all,
+so gating the board on it would have looked stricter and shipped a worklist with
+no identity on it. Widening lab.result for the convenience of one screen would
+overturn a considered boundary, so it was not done. The consequence needs an
+owner's decision rather than a guess: the lab role holds only queue.view and
+lab.result, so a bench technician still does not see the tile.
+
+Radiology board contributed on branch synergy/radboard. It found that nothing
+distinguishes "awaiting acquisition" from "acquired, awaiting report" (landing a
+study never writes back to the ServiceRequest) so it renders one honest
+Requested section rather than inventing a split the data cannot support.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

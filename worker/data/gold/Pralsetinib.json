@@ -1,0 +1,87 @@
+{
+  "generic": "Pralsetinib",
+  "cls": "Antineoplastic - highly selective RET kinase inhibitor",
+  "pharm": "Selective rearranged during transfection (RET) kinase inhibitor; blocks RET fusion and mutant signaling to inhibit tumor cell proliferation in RET-driven cancers",
+  "tags": ["Rx only", "Oral RET inhibitor", "RET fusion-positive NSCLC", "RET fusion-positive thyroid cancer", "ILD/pneumonitis", "Embryo-fetal toxicity"],
+  "quick": [
+    ["Adult dose", "400 mg orally once daily on an empty stomach"],
+    ["Meal", "Empty stomach: no food for at least 2 hours before and at least 1 hour after the dose"],
+    ["Pregnancy", "Can cause fetal harm; avoid - use effective nonhormonal contraception"],
+    ["Lactation", "Do not breastfeed during treatment and for 1 week after the last dose"],
+    ["Renal", "No adjustment in mild impairment; not established in moderate-severe"],
+    ["Hepatic", "No adjustment in mild impairment; not established in moderate-severe"],
+    ["Alcohol", "No specific interaction; limit due to hepatic and GI effects"],
+    ["Monitoring", "Blood pressure, LFTs, pulmonary symptoms, bleeding, wound healing, pregnancy status"]
+  ],
+  "summary": "Pralsetinib (Gavreto) is a highly selective RET kinase inhibitor for RET fusion-positive non-small cell lung cancer (NSCLC) and RET fusion-positive thyroid cancer. It potently inhibits RET fusions and resistance-relevant RET alterations while sparing most off-target kinases. The adult dose is 400 mg orally once daily taken on an empty stomach. Major serious risks include interstitial lung disease/pneumonitis, hypertension, hepatotoxicity, hemorrhagic events, tumor lysis syndrome, impaired wound healing, and embryo-fetal toxicity. It is a CYP3A and P-gp substrate with dose adjustments for interacting drugs.",
+  "indications": [
+    "Treatment of adult patients with metastatic RET fusion-positive NSCLC",
+    "Treatment of adult and pediatric patients 12 years and older with advanced or metastatic RET fusion-positive thyroid cancer who require systemic therapy and who are radioactive iodine-refractory (if radioactive iodine is appropriate)"
+  ],
+  "dosage": [
+    {"c": "Standard adult dose (RET fusion-positive NSCLC or thyroid cancer)", "r": "Adult oral", "d": "400 mg once daily", "t": "Once daily on an empty stomach", "n": "Continue until disease progression or unacceptable toxicity; confirm RET fusion before starting"},
+    {"c": "Dose reduction levels (toxicity)", "r": "Adult oral", "d": "First reduction 300 mg once daily, then 200 mg once daily, then 100 mg once daily", "t": "Once daily", "n": "Permanently discontinue if unable to tolerate 100 mg once daily"},
+    {"c": "With strong CYP3A inhibitor or combined P-gp and strong CYP3A inhibitor", "r": "Adult oral", "d": "Reduce current dose (400 mg to 200 mg; 300 mg to 200 mg; 200 mg to 100 mg once daily)", "t": "During coadministration", "n": "Resume prior dose 3 to 5 half-lives after stopping the inhibitor; avoid combination where possible"},
+    {"c": "With strong CYP3A inducer", "r": "Adult oral", "d": "Increase current dose (400 mg to 600 mg; 300 mg to 500 mg; 200 mg to 300 mg once daily)", "t": "During coadministration", "n": "Resume prior dose 7 to 14 days after stopping the inducer; avoid combination where possible"}
+  ],
+  "admin": [
+    "Take 400 mg by mouth once daily on an empty stomach with no food for at least 2 hours before and at least 1 hour after the dose",
+    "Swallow capsules whole with water; do not crush, chew, or open",
+    "Take at about the same time each day; confirm RET fusion status with a validated test before starting",
+    "Withhold for at least 5 days before elective surgery and for at least 2 weeks after major surgery until wounds heal; safety of resuming after wound complications is not established",
+    "Monitor blood pressure, liver tests, pulmonary status, and bleeding during treatment"
+  ],
+  "moa": "Pralsetinib is a potent, selective inhibitor of rearranged during transfection (RET) kinase, including oncogenic RET fusions and activating RET mutations. By occupying the ATP-binding pocket of RET, it blocks autophosphorylation and downstream signaling through MAPK and PI3K/AKT pathways, inhibiting proliferation and survival of RET-driven tumor cells. It has activity against predicted gatekeeper resistance variants and relative selectivity over VEGFR and other kinases, which shapes its toxicity profile.",
+  "contra": {
+    "absolute": ["Known serious hypersensitivity to pralsetinib or any excipient"],
+    "relative": ["Pregnancy and breastfeeding (embryo-fetal toxicity; avoid)", "Prior or active interstitial lung disease/pneumonitis", "Uncontrolled hypertension", "Active significant bleeding risk or recent hemoptysis", "Recent major surgery or unhealed wounds", "Tumor at high risk of lysis (bulky or rapidly proliferative disease)"],
+    "monitor": ["Respiratory symptoms for ILD/pneumonitis", "Blood pressure", "Liver function tests (ALT, AST)", "Signs of hemorrhage", "Tumor lysis labs (uric acid, electrolytes, renal function)", "Wound healing around surgery"]
+  },
+  "preg": "Based on mechanism and animal data, pralsetinib can cause fetal harm including malformations and embryolethality at exposures below the human 400 mg dose. Verify pregnancy status before starting. Advise females of reproductive potential to use effective nonhormonal contraception during treatment and for 2 weeks after the last dose. Advise males with female partners of reproductive potential to use effective contraception during treatment and for 1 week after the last dose.",
+  "lact": "There are no data on pralsetinib in human milk or its effects on the breastfed child or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 1 week after the final dose.",
+  "renal": "No dose adjustment is recommended for mild renal impairment. Pralsetinib has not been adequately studied in moderate to severe renal impairment; use with caution and monitor closely for toxicity.",
+  "hepatic": "No dose adjustment is recommended for mild hepatic impairment. Pralsetinib has not been adequately studied in moderate to severe hepatic impairment; use with caution with close monitoring of liver tests and adverse reactions.",
+  "interactions": {
+    "major": ["Strong CYP3A inhibitors (e.g., ketoconazole, itraconazole, clarithromycin) - increase pralsetinib exposure; reduce pralsetinib dose", "Combined P-gp and strong CYP3A inhibitors (e.g., itraconazole) - increase exposure; reduce pralsetinib dose", "Strong CYP3A inducers (e.g., rifampin, carbamazepine, phenytoin, St John's wort) - decrease exposure and efficacy; avoid, or increase pralsetinib dose if unavoidable"],
+    "moderate": ["Moderate CYP3A inducers - may reduce exposure; monitor efficacy", "Agents that increase bleeding risk (anticoagulants, antiplatelets, NSAIDs) - additive hemorrhage risk; monitor closely"],
+    "minor": ["Acid-reducing agents - no major interaction described; maintain empty-stomach dosing"],
+    "food": "Take on an empty stomach; food increases exposure and toxicity risk. No food for at least 2 hours before and at least 1 hour after dosing.",
+    "alcohol": "No specific interaction described; limit alcohol because of hepatotoxicity and bleeding risk.",
+    "diagnostics": "Monitor ALT/AST, blood pressure, and tumor lysis labs (potassium, uric acid, phosphate, calcium, creatinine); evaluate new pulmonary infiltrates."
+  },
+  "se": {
+    "common": ["Fatigue", "Constipation", "Musculoskeletal pain", "Hypertension", "Diarrhea", "Dry mouth", "Headache", "Cough", "Edema", "Decreased appetite", "Dizziness", "Anemia, leukopenia, neutropenia, thrombocytopenia", "Increased AST/ALT"],
+    "serious": ["Interstitial lung disease/pneumonitis", "Hypertension including hypertensive crisis", "Hepatotoxicity", "Hemorrhagic events including severe and fatal hemorrhage", "Tumor lysis syndrome", "Impaired wound healing", "Embryo-fetal toxicity"],
+    "rare": ["Pneumocystis pneumonia and other severe infections in clinical experience", "Severe cutaneous reactions reported with RET inhibitor class"],
+    "emergency": ["New or worsening dyspnea, cough, or fever (possible pneumonitis) - seek urgent evaluation", "Severe headache, chest pain, or neurologic symptoms (hypertensive crisis)", "Active bleeding, hemoptysis, hematuria, or melena", "Oliguria with nausea, muscle cramps, or palpitations (tumor lysis syndrome)"]
+  },
+  "monitoring": ["Blood pressure at baseline, after 1 week, then at least monthly", "Liver function (ALT, AST) at baseline, every 2 weeks for the first 3 months, then monthly", "Pulmonary symptoms and imaging for ILD/pneumonitis; withhold for new respiratory symptoms", "Complete blood count and tumor lysis labs in high-risk patients", "Pregnancy status before starting; bleeding and wound healing around procedures"],
+  "counsel": [
+    "Take on a completely empty stomach: nothing to eat for 2 hours before and 1 hour after each dose, at the same time daily",
+    "Report new cough, shortness of breath, or fever right away (possible lung inflammation)",
+    "Report unusual bleeding, coughing or vomiting blood, black stools, or blood in urine",
+    "Tell your team about scheduled surgery or dental procedures; you will need to pause treatment around surgery for wound healing",
+    "Use effective nonhormonal birth control during treatment and for 2 weeks after the last dose (partners: 1 week for males); do not breastfeed",
+    "Tell your doctor about all medicines including antifungals, antibiotics, seizure drugs, herbal products, and blood thinners"
+  ],
+  "pk": [
+    ["Onset", "Target inhibition within hours of dosing; radiographic responses typically develop over weeks"],
+    ["Peak", "Median Tmax about 2 to 4 hours after oral dosing on an empty stomach"],
+    ["Half-life", "Mean elimination half-life about 15 to 22 hours, supporting once-daily dosing"],
+    ["Duration", "Steady state within about 1 week of once-daily dosing"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted); protect from moisture in original container"]
+  ],
+  "pearls": [
+    "Confirm RET fusion with a validated test before starting; active in both NSCLC and RET fusion-positive thyroid cancer",
+    "Empty-stomach dosing is strict (2 hours before, 1 hour after) because food raises exposure",
+    "Withhold at least 5 days before elective surgery and at least 2 weeks after major surgery until wounds heal",
+    "ILD/pneumonitis, hypertension, hepatotoxicity, hemorrhage, and tumor lysis syndrome drive dose holds and reductions (400 to 300 to 200 to 100 mg)",
+    "CYP3A/P-gp substrate: reduce dose with strong CYP3A or combined P-gp/strong CYP3A inhibitors; increase dose if a strong inducer cannot be avoided"
+  ],
+  "missed": "If a dose is missed, take it as soon as possible on the same day. Resume the regular schedule the next day. Do not take two doses on the same day to make up for a missed dose. If vomiting occurs after a dose, do not take an extra dose; take the next dose at the regular time.",
+  "overdose": "There is no specific antidote for pralsetinib overdose. Expected effects reflect exaggerated toxicities including hypertension, hepatotoxicity, cytopenias, hemorrhage, and pneumonitis. Withhold drug, provide supportive care with blood pressure control, liver and pulmonary monitoring, blood counts, and bleeding management. Contact Poison Help (1-800-222-1222).",
+  "refs": [
+    ["FDA Prescribing Information: Pralsetinib (Gavreto) (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22pralsetinib%22"],
+    ["DailyMed - Pralsetinib (Gavreto)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=pralsetinib"]
+  ]
+}

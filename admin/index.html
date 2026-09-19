@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>StewardMD — App Manager</title>
+<title>StewardMD | Administration</title>
 <style>
   :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0e6e63;--tls:#d8efeb;--red:#dc2626;--amb:#b45309;--grn:#15803d;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
   @media(prefers-color-scheme:dark){:root{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}}
@@ -78,6 +78,7 @@
     .main{padding:16px 14px 70px}
   }
 </style>
+<link rel="stylesheet" href="/admin/dashboard.css?v=admin1">
 </head>
 <body>
   <div class="app">
@@ -90,9 +91,11 @@
         <a data-p="support">💬 Support tickets <span class="b" id="navSupport">0</span></a>
         <a data-p="userctl">👤 User control</a>
         <a data-p="aictl">🧠 AI control</a>
+        <a data-p="audit">Admin activity</a>
         <a data-p="config">🎛️ Remote config</a>
         <a data-p="crashes">🐞 Crashes <span class="b" id="navCrash">0</span></a>
         <a data-p="analytics">📈 Analytics</a>
+        <a data-p="feedback">👍 MaiK feedback <span class="b" id="navFb">0</span></a>
         <div class="grp">Content</div>
         <a data-p="notif">🔔 Publish &amp; notify</a>
         <a data-p="sources">📚 Medical sources</a>
@@ -127,18 +130,18 @@
           <div class="sc"><div class="n" id="ovVerif">—</div><div class="l">Pending verifications</div></div>
           <div class="sc"><div class="n" id="ovNotif">—</div><div class="l">Live notifications</div></div>
           <div class="sc"><div class="n" id="ovAiReq">—</div><div class="l">AI requests today</div></div>
-          <div class="sc"><div class="n" id="ovAiCost">—</div><div class="l">AI cost today</div></div>
+          <div class="sc"><div class="n" id="ovAiCost">—</div><div class="l">Estimated AI cost today</div></div>
           <div class="sc"><div class="n" id="ovPush" style="font-size:15px;padding-top:6px">—</div><div class="l">Push channels</div></div>
         </div>
         <div class="card">
-          <b>Quick actions</b>
+          <b>Quick actions</b><button class="ghost" id="ovRefresh" style="float:right">Refresh dashboard</button>
           <div class="qa">
             <button class="primary" data-go="notif">🔔 Publish an update</button>
             <button class="ghost" data-go="verif">🩺 Review verifications</button>
-            <button class="ghost" data-go="sources">↻ Run crawl now</button>
+            <button class="ghost" data-go="sources">Manage medical sources</button>
             <button class="ghost" data-go="push">📣 Push blast</button>
           </div>
-          <div class="hint" id="ovMsg" style="margin-top:12px"></div>
+          <div class="qa"><button class="ghost" data-go="support">Open support tickets: <strong id="ovSupport">…</strong></button><button class="ghost" data-go="crashes">Reported errors: <strong id="ovErrors">…</strong></button></div><div class="hint" role="status" id="ovMsg" style="margin-top:12px"></div>
         </div>
       </div>
 
@@ -537,12 +540,24 @@
         </div>
       </div>
 
+      <div class="pane" id="pane-audit" data-need-auth>
+        <div class="card"><b>Recent admin activity</b><button class="ghost" id="auditReload" style="float:right">Refresh</button>
+          <p class="hint">The latest 60 recorded AI and fleet-control changes. Release history is available under App updates. This is a recent activity log, not a complete compliance archive.</p>
+          <label for="auditFilter">Filter activity</label><input id="auditFilter" type="search" placeholder="Search action, actor, or detail">
+          <div class="msg" id="auditMsg"></div><div id="auditList"></div>
+        </div>
+      </div>
+
       <!-- REMOTE CONFIG -->
       <div class="pane" id="pane-config" data-need-auth>
         <div class="card">
           <div style="display:flex;align-items:center"><b style="flex:1">Remote config (fleet controls)</b><button class="ghost" id="cfgReload" style="padding:7px 11px">Reload</button></div>
           <div class="hint" style="margin:4px 0 8px">Force-upgrade (minimum native build), maintenance mode, and in-app banners. Applies to all devices within ~60s.</div>
-          <label for="cfgJson">Config JSON</label>
+          <div class="chk"><input id="cfgMaintenance" type="checkbox"><label for="cfgMaintenance">Enable maintenance mode for all devices</label></div>
+          <label for="cfgMaintenanceMessage">Maintenance message</label><input id="cfgMaintenanceMessage" maxlength="300" placeholder="What should doctors know?">
+          <div class="row"><div><label for="cfgMinimumBuild">Minimum supported native build</label><input id="cfgMinimumBuild" type="number" min="0" step="1" placeholder="0 = no minimum"></div><div><label for="cfgUpgradeUrl">Update destination</label><input id="cfgUpgradeUrl" type="url" maxlength="300" placeholder="https://…"></div></div>
+          <p class="hint">Changes apply fleet-wide when saved. Existing banners and feature flags are preserved. Use the advanced editor for those settings.</p>
+          <label for="cfgJson">Advanced configuration JSON</label>
           <textarea id="cfgJson" style="min-height:220px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px" spellcheck="false"></textarea>
           <div style="margin-top:12px;display:flex;gap:8px"><button class="primary" id="cfgSave">Save config</button></div>
           <div class="msg" id="cfgMsg"></div>
@@ -566,6 +581,17 @@
           <div class="msg" id="anMsg"></div><div id="anBox" style="margin-top:12px"></div>
         </div>
       </div>
+
+      <!-- MAIK FEEDBACK -->
+      <div class="pane" id="pane-feedback" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">"Was this helpful?" feedback</b><button class="ghost" id="fbReload" style="padding:7px 11px">Reload</button><button class="ghost" id="fbClear" style="padding:7px 11px;color:var(--red);border-color:var(--red)">Clear log</button></div>
+          <div class="hint" style="margin:4px 0 4px">Every Yes/No tap on a MaiK answer, and the doctor's own reason when they say No. Anonymous — no identity, no patient detail.</div>
+          <div class="msg" id="fbMsg"></div>
+          <div id="fbAgg" style="display:flex;gap:18px;margin:10px 0;font:600 13px var(--sans,system-ui)"></div>
+          <div id="fbBox"></div>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -577,8 +603,8 @@
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
   var vFilter="pending", activePane="overview", _aiStructured=null;
-  var PANES=["overview","support","userctl","aictl","config","crashes","analytics","notif","sources","logs","verif","pro","ota","push","watch","ai","kardiox","xa","tenants"];
-  var TITLES={overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",ota:"App updates (OTA)",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features",tenants:"Medical colleges"};
+  var PANES=["audit","overview","support","userctl","aictl","config","crashes","analytics","feedback","notif","sources","logs","verif","pro","ota","push","watch","ai","kardiox","xa","tenants"];
+  var TITLES={audit:"Admin activity",overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",feedback:"MaiK feedback",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",ota:"App updates (OTA)",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features",tenants:"Medical colleges"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
@@ -628,16 +654,36 @@
 
   // ---- Overview ----
   function setN(id,v){ var el=$(id); if(el)el.textContent=v; }
+  var ovSequence=0;
   function ovLoad(){
-    say("ovMsg","","");
-    fetch("/api/push/status").then(function(r){return r.json();}).then(function(d){ setN("ovPush",(d.enabled?"Web ✓":"Web ✕")+" · "+(d.native?"Native ✓":"Native ✕")); }).catch(function(){});
-    api("/api/ai/admin").then(function(x){ if(x.s===200&&x.d&&x.d.enabled!==false){var day=x.d.daily||{}; setN("ovAiReq",day.requests||0); setN("ovAiCost","₹"+(day.estCostInr||0));} }).catch(function(){});
-    api("/api/verifications?status=pending").then(function(x){ if(x.s===200){var n=((x.d&&x.d.doctors)||[]).length; setN("ovVerif",n); var b=$("navVerif"); if(b){b.textContent=n;b.classList.toggle("on",n>0);}} }).catch(function(){});
-    fetch("/api/updates?limit=100").then(function(r){return r.json();}).then(function(j){ setN("ovNotif",((j&&j.items)||[]).length); }).catch(function(){});
-    api("/api/ai/admin/support?status=open").then(function(x){ if(x.s===200){ var n=((x.d&&x.d.tickets)||[]).length; var b=$("navSupport"); if(b){b.textContent=n;b.classList.toggle("on",n>0);} } }).catch(function(){});
-    api("/api/ai/admin/clientlog").then(function(x){ if(x.s===200){ var n=((x.d&&x.d.errors)||[]).length; var b=$("navCrash"); if(b){b.textContent=n;b.classList.toggle("on",n>0);} } }).catch(function(){});
+    var seq=++ovSequence, failed=0, finished=0;
+    say("ovMsg","","Refreshing dashboard…");
+    ["ovPush","ovAiReq","ovAiCost","ovVerif","ovNotif","ovSupport","ovErrors"].forEach(function(id){setN(id,"…");});
+    function load(path,secured,ids,render){
+      var request=secured?api(path):fetch(path).then(function(r){return r.json().then(function(d){return {s:r.status,d:d};});});
+      request.then(function(x){
+        if(seq!==ovSequence||!(auth&&auth.currentUser))return;
+        if(x.s!==200)throw new Error(String(x.s));
+        render(x.d||{});
+      }).catch(function(e){
+        if(seq!==ovSequence||!(auth&&auth.currentUser))return;
+        failed++;ids.forEach(function(id){setN(id,"Unavailable");});
+      }).then(function(){
+        if(seq!==ovSequence||!(auth&&auth.currentUser))return;
+        finished++;
+        if(finished===6)say("ovMsg",failed?"err":"",failed?"Some dashboard data could not be loaded. Check your owner access or connection, then refresh.":"Updated "+new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})+". AI cost is an estimate.");
+      });
+    }
+    function badge(id,n){var b=$(id);if(b){b.textContent=n;b.classList.toggle("on",n>0);}}
+    load("/api/push/status",false,["ovPush"],function(d){setN("ovPush",(d.enabled?"Web on":"Web off")+" · "+(d.native?"Native on":"Native off"));});
+    load("/api/ai/admin",true,["ovAiReq","ovAiCost"],function(d){if(d.enabled===false){setN("ovAiReq","Disabled");setN("ovAiCost","Unavailable");return;}var day=d.daily||{};setN("ovAiReq",day.requests||0);setN("ovAiCost","₹"+(day.estCostInr||0));});
+    load("/api/verifications?status=pending",true,["ovVerif"],function(d){var n=(d.doctors||[]).length;setN("ovVerif",n);badge("navVerif",n);});
+    load("/api/updates?limit=100",false,["ovNotif"],function(d){setN("ovNotif",(d.items||[]).length);});
+    load("/api/ai/admin/support?status=open",true,["ovSupport"],function(d){var n=(d.tickets||[]).length;setN("ovSupport",n);badge("navSupport",n);});
+    load("/api/ai/admin/clientlog",true,["ovErrors"],function(d){var n=(d.errors||[]).length;setN("ovErrors",n);badge("navCrash",n);});
   }
-  document.querySelectorAll("[data-go]").forEach(function(b){ b.onclick=function(){ var p=b.getAttribute("data-go"); if(p==="sources"){goPane("sources");setTimeout(function(){var s=$("sSync");if(s)s.click();},200);} else goPane(p); }; });
+  $("ovRefresh").onclick=ovLoad;
+  document.querySelectorAll("[data-go]").forEach(function(b){ b.onclick=function(){ goPane(b.getAttribute("data-go")); }; });
 
   // ---- AI push box ----
   function aiRunClassify(pushNow){
@@ -1129,9 +1175,25 @@
   $("aicBudgetSave").onclick=function(){ say("aicBudgetMsg","","Saving…"); api(AI+"/budget",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({inr:$("aicBudget").value})}).then(function(r){ if(r.s===200)say("aicBudgetMsg","ok","✅ Saved"); else say("aicBudgetMsg","err","Failed: "+(r.d&&r.d.error||r.s)); }); };
 
   // ---- Remote config ----
-  function cfgLoad(){ say("cfgMsg","","Loading…"); api(AI+"/config").then(function(x){ if(x.s!==200){ say("cfgMsg","err",forbid(x)); return; } say("cfgMsg","",""); $("cfgJson").value=JSON.stringify(x.d.config||{},null,2); }).catch(function(){ say("cfgMsg","err","Failed."); }); }
+  var auditRows=[],auditSeq=0;
+  function auditRender(){var q=$("auditFilter").value.toLowerCase().trim();var rows=auditRows.filter(function(a){return [a.action,a.detail,a.by].join(" ").toLowerCase().indexOf(q)>=0;});$("auditList").innerHTML=rows.length?rows.map(function(a){return '<div class="item"><div class="title">'+esc(a.action)+'</div><div class="body">'+esc(a.detail)+'</div><div class="meta">'+esc(a.by||"Admin")+' · '+esc(a.ts?new Date(a.ts).toLocaleString():"Time unavailable")+'</div></div>';}).join(""):'<p class="hint">'+(q?"No activity matches this filter.":"No recorded activity available.")+'</p>';}
+  function auditLoad(){var seq=++auditSeq;auditRows=[];$("auditList").textContent="";say("auditMsg","","Loading activity…");api("/api/ai/admin/audit").then(function(x){if(seq!==auditSeq||!(auth&&auth.currentUser))return;if(x.s!==200){say("auditMsg","err",forbid(x));return;}auditRows=Array.isArray(x.d.audit)?x.d.audit:[];auditRender();say("auditMsg","","Showing "+auditRows.length+" recorded changes.");}).catch(function(){if(seq===auditSeq)say("auditMsg","err","Activity could not be loaded. Try Refresh.");});}
+  $("auditReload").onclick=auditLoad;$("auditFilter").oninput=auditRender;
+  function cfgSyncFields(){try{var c=JSON.parse($("cfgJson").value);$("cfgMaintenance").checked=!!(c.maintenance&&c.maintenance.on);$("cfgMaintenanceMessage").value=c.maintenance&&c.maintenance.message||"";$("cfgMinimumBuild").value=c.minBuild==null?"":c.minBuild;$("cfgUpgradeUrl").value=c.upgradeUrl||"";}catch(e){}}
+  function cfgFieldsToJson(){try{var c=JSON.parse($("cfgJson").value);if(!c||Array.isArray(c)||typeof c!=="object")throw new Error("object required");c.maintenance={on:$("cfgMaintenance").checked,message:$("cfgMaintenanceMessage").value};c.minBuild=$("cfgMinimumBuild").value===""?0:Number($("cfgMinimumBuild").value);c.upgradeUrl=$("cfgUpgradeUrl").value;$("cfgJson").value=JSON.stringify(c,null,2);say("cfgMsg","","Unsaved changes. Review and save to apply.");}catch(e){say("cfgMsg","err","Fix the advanced JSON before changing these controls.");cfgSyncFields();}}
+  ["cfgMaintenance","cfgMaintenanceMessage","cfgMinimumBuild","cfgUpgradeUrl"].forEach(function(id){$(id).oninput=cfgFieldsToJson;});
+  $("cfgJson").oninput=cfgSyncFields;
+  function cfgLoad(){ say("cfgMsg","","Loading…"); api(AI+"/config").then(function(x){ if(x.s!==200){ say("cfgMsg","err",forbid(x)); return; } say("cfgMsg","",""); $("cfgJson").value=JSON.stringify(x.d.config||{},null,2);cfgSyncFields(); }).catch(function(){ say("cfgMsg","err","Failed."); }); }
   $("cfgReload").onclick=cfgLoad;
-  $("cfgSave").onclick=function(){ var body; try{ body=JSON.parse($("cfgJson").value); }catch(e){ say("cfgMsg","err","Invalid JSON: "+e.message); return; } say("cfgMsg","","Saving…"); api(AI+"/config",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){ if(r.s===200&&r.d.ok){ say("cfgMsg","ok","✅ Saved"); $("cfgJson").value=JSON.stringify(r.d.config||{},null,2); } else say("cfgMsg","err","Failed: "+(r.d&&r.d.error||r.s)); }); };
+  $("cfgSave").onclick=function(){
+    var body;
+    try{body=JSON.parse($("cfgJson").value);if(!body||Array.isArray(body)||typeof body!=="object")throw new Error("Configuration must be an object");if(body.minBuild!=null&&(!Number.isInteger(Number(body.minBuild))||Number(body.minBuild)<0))throw new Error("Minimum build must be a non-negative whole number");}catch(e){say("cfgMsg","err","Invalid configuration: "+e.message);return;}
+    $("cfgSave").disabled=true;say("cfgMsg","","Saving…");
+    api(AI+"/config",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){
+      if(r.s===200&&r.d.ok){say("cfgMsg","ok","Saved. Fleet configuration updated.");$("cfgJson").value=JSON.stringify(r.d.config||{},null,2);cfgSyncFields();}
+      else say("cfgMsg","err","Could not save: "+(r.d&&r.d.error||r.s));
+    }).catch(function(){say("cfgMsg","err","Could not confirm the save. Reload configuration to check before trying again.");}).then(function(){$("cfgSave").disabled=false;});
+  };
 
   // ---- Crashes ----
   function crLoad(){ say("crMsg","","Loading…"); api(AI+"/clientlog").then(function(x){ if(x.s!==200){ say("crMsg","err",forbid(x)); return; } say("crMsg","",""); var errs=(x.d&&x.d.errors)||[]; var nb=$("navCrash"); if(nb){ nb.textContent=errs.length; nb.classList.toggle("on",errs.length>0); }
@@ -1148,7 +1210,25 @@
   }).catch(function(){ say("anMsg","err","Failed."); }); }
   $("anReload").onclick=anLoad;
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
+  // ---- MaiK feedback ("Was this helpful?") ----
+  function fbLoad(){ say("fbMsg","","Loading…"); api(AI+"/maik-feedback").then(function(x){ if(x.s!==200){ say("fbMsg","err",forbid(x)); return; } say("fbMsg","","");
+    var d=x.d||{}, agg=d.agg||{up:0,down:0,withReason:0,total:0}, entries=d.entries||[];
+    var nb=$("navFb"); if(nb){ nb.textContent=agg.total||0; nb.classList.toggle("on",(agg.down||0)>0); }
+    var pct=agg.total?Math.round(100*(agg.up||0)/agg.total):0;
+    $("fbAgg").innerHTML='<span>👍 '+esc(String(agg.up||0))+'</span><span>👎 '+esc(String(agg.down||0))+'</span><span style="color:var(--mut)">'+esc(String(pct))+'% helpful</span><span style="color:var(--mut)">'+esc(String(agg.withReason||0))+' with a reason</span>';
+    if(!entries.length){ $("fbBox").innerHTML='<div class="hint">No feedback yet.</div>'; return; }
+    $("fbBox").innerHTML=entries.map(function(e){
+      var when=e.ts?new Date(e.ts).toLocaleString():"";
+      var tag=e.helpful==="down"?'<span class="pill" style="color:var(--red);border-color:var(--red);pointer-events:none">No</span>':'<span class="pill on" style="pointer-events:none">Yes</span>';
+      return '<div style="padding:9px 0;border-bottom:1px solid var(--line)"><div style="display:flex;gap:8px;align-items:center">'+tag+'<b style="flex:1;word-break:break-word">'+esc(e.question||"(no question)")+'</b></div>'
+        +(e.reason?'<div style="margin-top:4px;word-break:break-word">"'+esc(e.reason)+'"</div>':'')
+        +'<div class="hint" style="word-break:break-word;margin-top:2px">'+esc([e.engine,e.pack,when].filter(Boolean).join(" · "))+'</div></div>';
+    }).join("");
+  }).catch(function(){ say("fbMsg","err","Failed."); }); }
+  $("fbReload").onclick=fbLoad;
+  $("fbClear").onclick=function(){ if(!confirm("Clear all MaiK feedback?"))return; api(AI+"/maik-feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"}).then(function(){ fbLoad(); }); };
+
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="audit")auditLoad(); else if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="feedback")fbLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
 
   // ---- Medical colleges (tenant provisioning; owner-gated /api/tenants) ----
   function tnRow(t){
@@ -1357,5 +1437,6 @@
   else { $("who").textContent="Firebase failed to load."; }
 })();
 </script>
+<script src="/admin/dashboard.js?v=admin1"></script>
 </body>
 </html>

@@ -199,3 +199,12 @@ body.atlas-lock { overflow: hidden; }
   .atlas-overlay.on { animation: none; }
   .atlas-sheet { transition: none; }
 }
+
+
+/* iPad / Tablet layout expansions */
+@media (min-width: 768px) {
+  .atlas-app { max-width: 820px; margin: 0 auto; }
+}
+@media (min-width: 1024px) {
+  .atlas-app { max-width: 960px; }
+}

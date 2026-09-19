@@ -1,0 +1,974 @@
+{
+  "guideline": "gtn",
+  "title": "Gestational Trophoblastic Neoplasia",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "gestational_trophoblastic_neoplasia",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Gestational Trophoblastic Neoplasia (Molar pregnancy, Post-molar GTN, Invasive Mole, Choriocarcinoma, PSTT, and ETT). Implements Workup First diagnostic checklists (serial quantitative hCG curves, pelvic Doppler US, chest CT, brain MRI for choriocarcinoma, biopsy contraindication for vaginal mets), FIGO/WHO prognostic risk scoring (0-6 Low Risk vs >=7 High Risk), single-agent Methotrexate for Low Risk, multi-agent EMA-CO for High Risk, and primary surgical hysterectomy for PSTT/ETT. References StewardMD ONCQIS Standard Protocols. DRAFT - clinical decision support; physician decides.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Gestational Trophoblastic Neoplasia Version 2.2026 (November 21, 2025).",
+  "startNodeIds": [
+    "n_presentation"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Post-molar GTN is diagnosed by FIGO 2000 criteria: serum hCG plateau across 4 values over 3 weeks, rise of 10% or more across 3 values over 2 weeks, persistence of elevated hCG for 6 months or longer after evacuation, or histologic choriocarcinoma. Serial quantitative hCG with a log-linear curve is mandatory; do not delay treatment for repeat imaging once criteria are met.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "FIGO anatomic stage (I-IV) combined with the modified WHO prognostic score (age, antecedent pregnancy, interval from index pregnancy, pretreatment hCG, largest tumor size, site and number of metastases, prior failed chemotherapy) stratifies GTN: score 0-6 is Low Risk, score 7 or higher (or any Stage IV) is High Risk. Score 5-6 with extensive disease may behave as high risk; manage at a trophoblastic disease center.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "EMA-CO (etoposide, methotrexate with folinic acid rescue, dactinomycin alternating with cyclophosphamide and vincristine) is the Category 1 preferred multi-agent regimen for High-Risk GTN, with complete remission rates of 80-90% when given until hCG normalization plus 2-3 consolidation cycles (6-8 weeks).",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "Consolidation chemotherapy after first hCG normalization (<5 mIU/mL) is standard: 1-2 cycles for Low-Risk GTN on single-agent therapy and 2-3 cycles (6-8 weeks) for High-Risk GTN on EMA-CO. Omitting consolidation increases relapse risk. Maintain reliable contraception for 12 months after hCG normalization.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Biopsy of vaginal, cervical, or other clinically evident GTN metastases is CONTRAINDICATED: these lesions are extremely vascular and biopsy can precipitate life-threatening hemorrhage. Diagnosis rests on hCG kinetics, imaging, and antecedent pregnancy history, not tissue.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Pembrolizumab (anti-PD-1) is a Category 2A option for relapsed or refractory High-Risk GTN and for advanced PSTT/ETT, reflecting uniformly high PD-L1 expression in trophoblastic tumors. EP-EMA (etoposide, cisplatin with etoposide, methotrexate, dactinomycin) and TP/TE (paclitaxel/cisplatin alternating with paclitaxel/etoposide) are alternative multi-agent salvage regimens.",
+      "evidence": "2A"
+    },
+    "g": {
+      "text": "PSTT and ETT are slow-growing, relatively chemoresistant intermediate-trophoblast tumors that predominantly secrete human placental lactogen (hPL) with only low-level hCG; hCG alone cannot be used to exclude them. Stage I disease is treated primarily with surgery (total hysterectomy with pelvic lymphadenectomy, as nodal spread occurs). An interval of 48 months or more from the antecedent pregnancy predicts poor outcome and mandates multi-agent chemotherapy.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_presentation",
+      "linkId": "gtn_presentation",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical Presentation",
+      "title": "GTN Clinical Presentation: Molar Pregnancy, Post-Molar GTN, or PSTT/ETT",
+      "section": "Diagnosis",
+      "description": "Step 1: Clinical Presentation. Select the confirmed or suspected presentation. Each arm opens with a mandatory diagnostic workup checklist before FIGO staging and WHO risk scoring.",
+      "path": "GTN / Presentation",
+      "pills": [
+        "presentation"
+      ],
+      "required": true,
+      "bullets": [
+        "Molar pregnancy: complete mole (diandric diploid, diffuse hydropic villi, high GTN risk 15-20%) vs partial mole (diandric triploid, focal changes, risk 1-5%); suction evacuation is preferred management.",
+        "Post-molar GTN (invasive mole or choriocarcinoma): suspect with hCG plateau across 4 values over 3 weeks, rise of 10% or more across 3 values over 2 weeks, or persistence beyond 6 months after evacuation (FIGO criteria, footnote a).",
+        "PSTT/ETT: suspect with persistent low-level hCG, abnormal bleeding months to years after any pregnancy (including term delivery), and relatively chemoresistant slow-growing disease (footnote g)."
+      ],
+      "options": [
+        {
+          "id": "molar",
+          "label": "Suspected or confirmed molar pregnancy (complete or partial hydatidiform mole)",
+          "sets": {
+            "presentation": "molar"
+          },
+          "pills": [
+            "molar pregnancy"
+          ]
+        },
+        {
+          "id": "postmolar",
+          "label": "Post-molar surveillance or suspected GTN after evacuation (plateau/rising hCG, invasive mole, choriocarcinoma)",
+          "sets": {
+            "presentation": "postmolar_gtn"
+          },
+          "pills": [
+            "post-molar GTN"
+          ]
+        },
+        {
+          "id": "pstt",
+          "label": "Suspected PSTT or ETT (low hCG, long interval from pregnancy, atypical bleeding)",
+          "sets": {
+            "presentation": "pstt_ett"
+          },
+          "pills": [
+            "PSTT/ETT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_molar_wk",
+      "linkId": "gtn_molar_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Molar Pregnancy Workup",
+      "title": "Molar Pregnancy: Diagnostic Workup and Evacuation Checklist",
+      "section": "Workup",
+      "description": "Complete evacuation workup and establish the post-evacuation hCG surveillance baseline that determines whether GTN criteria are met.",
+      "path": "GTN / Molar / Workup",
+      "pills": [
+        "molar pregnancy",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Histopathology review of evacuation products with ploidy/genotyping where available: complete mole (diandric diploid) vs partial mole (diandric triploid); document RhD status and give anti-D immunoglobulin when indicated.",
+        "Suction evacuation is the preferred uterine evacuation method; obtain pre-evacuation quantitative serum hCG, CBC with differential, renal and hepatic function panels.",
+        "Serial serum quantitative hCG (mandatory log-linear curve) after evacuation: plateau across 4 values over 3 weeks, or rise of 10% or more across 3 values over 2 weeks, or persistence for 6 months or longer confirms GTN per FIGO criteria (footnote a).",
+        "Pelvic Doppler ultrasound to assess retained products of conception, myometrial invasion, and uterine vascular malformations or arteriovenous shunting.",
+        "Staging imaging at baseline: chest CT or CXR (pulmonary metastases are the most common distant site); contrast CT of abdomen/pelvis for hepatic or visceral disease when hCG is markedly elevated or GTN is confirmed.",
+        "Brain MRI with contrast is mandatory for choriocarcinoma histology or extensive pulmonary metastases before chemotherapy selection (conditions high-dose methotrexate and intrathecal therapy).",
+        "Biopsy of vaginal or cervical metastases is CONTRAINDICATED due to extreme vascularity and life-threatening hemorrhage risk; diagnosis rests on hCG kinetics and imaging (footnote e).",
+        "Counsel on reliable contraception for 12 months after hCG normalization; register with a trophoblastic disease surveillance program when available."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to FIGO Staging and WHO Risk Scoring",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_postmolar_wk",
+      "linkId": "gtn_postmolar_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Post-Molar GTN Workup",
+      "title": "Suspected Post-Molar GTN: Diagnostic Workup and Staging Checklist",
+      "section": "Workup",
+      "description": "Confirm GTN by FIGO hCG criteria, complete metastatic staging, and collect every WHO prognostic scoring variable before treatment selection.",
+      "path": "GTN / Post-Molar / Workup",
+      "pills": [
+        "post-molar GTN",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Serial serum quantitative hCG (mandatory log-linear curve): plateau across 4 values over 3 weeks, or rise of 10% or more across 3 values over 2 weeks, or persistence for 6 months or longer after evacuation confirms GTN per FIGO criteria; histologic choriocarcinoma is GTN by definition (footnote a).",
+        "Record all WHO scoring inputs: maternal age, antecedent pregnancy type (mole, abortion, term), interval from index pregnancy in months, pretreatment hCG level, largest tumor size including uterus, site of metastases, number of metastases, and any prior failed chemotherapy (footnote b).",
+        "Pelvic Doppler ultrasound to assess myometrial invasion, uterine tumor volume, and vascular malformations or arteriovenous shunting.",
+        "Staging imaging: chest CT or CXR (pulmonary metastases are the most common distant site); contrast CT of abdomen/pelvis for hepatic, gastrointestinal, or other visceral disease.",
+        "Brain MRI with contrast is mandatory for choriocarcinoma histology or extensive pulmonary metastases; concurrent liver and brain disease is common in high-burden choriocarcinoma.",
+        "Biopsy of vaginal or cervical metastases is CONTRAINDICATED due to extreme vascularity and life-threatening hemorrhage risk; do not delay chemotherapy for tissue confirmation (footnote e).",
+        "Assessment of renal and hepatic function (methotrexate and dactinomycin clearance), CBC with differential (myelosuppression baseline), and pregnancy exclusion for the current cycle; type and screen given bleeding risk."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to FIGO Staging and WHO Risk Scoring",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_pstt_wk",
+      "linkId": "gtn_pstt_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "PSTT/ETT Workup",
+      "title": "Suspected PSTT or ETT: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "PSTT and ETT produce predominantly hPL with only low-level hCG and are relatively chemoresistant; workup centers on histology, pregnancy interval, and surgical resectability.",
+      "path": "GTN / PSTT-ETT / Workup",
+      "pills": [
+        "PSTT/ETT",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Histopathology with immunohistochemistry is required: PSTT shows sheets of intermediate trophoblast positive for hPL and HSD3B1 with focal hCG; ETT shows nested epithelioid growth, frequently p63 positive. Expert gynecologic pathology review is recommended.",
+        "Serum hCG is typically only low-level positive (these tumors predominantly produce human placental lactogen, hPL); a low hCG never excludes PSTT/ETT and hCG kinetics do not follow post-molar GTN curves (footnote g).",
+        "Document the interval from the antecedent pregnancy in months: an interval of 48 months or more is the dominant adverse predictor and mandates multi-agent chemotherapy even with apparently limited disease.",
+        "Pelvic imaging (Doppler ultrasound and contrast MRI pelvis) to delineate myometrial invasion depth, uterine tumor volume, and pelvic nodal enlargement; unlike other GTN, PSTT/ETT spread lymphatically, so assess pelvic lymph nodes explicitly.",
+        "Staging imaging: chest CT or CXR for pulmonary metastases; contrast CT of abdomen/pelvis for visceral disease; brain MRI with contrast when metastatic disease is confirmed or choriocarcinoma coexists.",
+        "Biopsy of vaginal or cervical metastases is CONTRAINDICATED due to extreme vascularity and life-threatening hemorrhage risk (footnote e); central pathology review of prior uterine specimens is preferred over re-biopsy of vascular lesions.",
+        "Assessment of renal and hepatic function, CBC with differential; surgical resectability assessment (uterine conservation is not oncologically safe except in highly selected fertility-preservation referrals)."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to FIGO Staging and WHO Risk Scoring",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_figo_risk",
+      "linkId": "gtn_figo_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "FIGO Stage and WHO Risk Score",
+      "title": "FIGO Staging and WHO Prognostic Scoring: Low Risk (0-6) vs High Risk (7 or Higher)",
+      "section": "Staging",
+      "description": "Assign FIGO anatomic stage I-IV and compute the modified WHO prognostic score. The score selects single-agent therapy (0-6) vs multi-agent EMA-CO (7 or higher or Stage IV); PSTT/ETT follows a surgical pathway.",
+      "path": "GTN / Staging / FIGO-WHO",
+      "pills": [
+        "FIGO stage",
+        "WHO score"
+      ],
+      "required": true,
+      "bullets": [
+        "FIGO anatomic stage: Stage I disease confined to uterus; Stage II extension to adnexa, vagina, or broad ligament; Stage III pulmonary metastases with or without genital tract involvement; Stage IV all other metastases (liver, brain, gastrointestinal).",
+        "WHO score inputs (footnote b): age (<40 = 0, 40 or older = 1, 50 or older = 2); antecedent pregnancy (mole = 0, abortion = 1, term = 2); interval from index pregnancy (<4 mo = 0, 4-6 mo = 1, 7-12 mo = 2, >12 mo = 4); pretreatment hCG; largest tumor size; site and number of metastases; prior failed chemotherapy.",
+        "Score 0-6 (Stage I-III): LOW RISK. Single-agent chemotherapy (methotrexate preferred, dactinomycin alternative) with 1-2 consolidation cycles after hCG normalization (footnote d).",
+        "Score 7 or higher, or any Stage IV: HIGH RISK. Multi-agent EMA-CO Category 1 preferred with 2-3 consolidation cycles (6-8 weeks) after hCG normalization (footnote c).",
+        "PSTT/ETT histology (any score): separate surgical pathway. Stage I disease is treated primarily with hysterectomy plus nodal assessment; advanced disease or interval of 48 months or more needs multi-agent chemotherapy (footnote g)."
+      ],
+      "options": [
+        {
+          "id": "low",
+          "label": "Low Risk: FIGO Stage I-III, WHO score 0-6",
+          "sets": {
+            "risk": "low"
+          },
+          "pills": [
+            "low risk",
+            "WHO 0-6"
+          ]
+        },
+        {
+          "id": "high",
+          "label": "High Risk: WHO score 7 or higher, or FIGO Stage IV",
+          "sets": {
+            "risk": "high"
+          },
+          "pills": [
+            "high risk",
+            "WHO 7+"
+          ]
+        },
+        {
+          "id": "pstt",
+          "label": "PSTT or ETT histology (surgical pathway regardless of score)",
+          "sets": {
+            "risk": "pstt_ett"
+          },
+          "pills": [
+            "PSTT/ETT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_lowrisk_first",
+      "linkId": "gtn_lowrisk_first",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Low-Risk First-Line Choice",
+      "title": "Low-Risk GTN (WHO 0-6): First-Line Single-Agent Selection",
+      "section": "Treatment",
+      "description": "Select first-line single-agent chemotherapy for Low-Risk GTN. Methotrexate is preferred; dactinomycin is the standard alternative, especially with hepatic dysfunction or MTX contraindications.",
+      "path": "GTN / Low Risk / First-Line",
+      "pills": [
+        "low risk",
+        "single-agent"
+      ],
+      "required": true,
+      "bullets": [
+        "Preferred: methotrexate single-agent schedules include 8-day MTX with leucovorin (folinic acid) rescue, 5-day intramuscular MTX, or weekly intramuscular MTX; choice follows local protocol availability and prior tolerance.",
+        "Alternative: pulsed dactinomycin (actinomycin D) 1.25 mg/m2 IV every 2 weeks; preferred when methotrexate is contraindicated (hepatic dysfunction, pleural effusion or ascites with third-spacing, MTX allergy, or patient preference for fewer visits).",
+        "Check hCG every 1-2 weeks on therapy; treatment continues until serum hCG normalizes below 5 mIU/mL and then consolidation of 1-2 cycles follows (footnote d).",
+        "Resistance definition: hCG plateau over 3 consecutive values or rise over 2 consecutive values on single-agent therapy, or intolerable toxicity; reassess with restaging (chest CT, pelvic Doppler US, brain MRI if indicated) before switching."
+      ],
+      "options": [
+        {
+          "id": "mtx",
+          "label": "Methotrexate single-agent (preferred first-line for Low Risk)",
+          "sets": {
+            "lowrisk_regimen": "mtx"
+          },
+          "pills": [
+            "low risk",
+            "methotrexate"
+          ]
+        },
+        {
+          "id": "actd",
+          "label": "Dactinomycin (actinomycin D) pulsed single-agent (alternative first-line)",
+          "sets": {
+            "lowrisk_regimen": "actd"
+          },
+          "pills": [
+            "low risk",
+            "dactinomycin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_lowrisk_mtx_response",
+      "linkId": "gtn_lowrisk_mtx_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Methotrexate Response",
+      "title": "Low-Risk GTN on Methotrexate: hCG Response Assessment",
+      "section": "Treatment",
+      "description": "Classify hCG response on methotrexate: normalization triggers consolidation and surveillance, while plateau or rise defines single-agent resistance requiring switch.",
+      "path": "GTN / Low Risk / MTX Response",
+      "pills": [
+        "low risk",
+        "methotrexate",
+        "response"
+      ],
+      "required": true,
+      "bullets": [
+        "Normalization: serum hCG below 5 mIU/mL. Continue methotrexate for 1-2 consolidation cycles after first normal hCG, then enter monthly hCG surveillance for 12 months with reliable contraception (footnote d).",
+        "Resistance or failure: hCG plateau across 3 consecutive values, rise across 2 consecutive values, new metastases, or intolerable toxicity. Restage (chest CT, pelvic Doppler US, brain MRI for high-burden or choriocarcinoma histology) and switch therapy.",
+        "Post-switch options: dactinomycin if methotrexate was first-line and disease burden remains low-risk; multi-agent EMA-CO if WHO score rises to 7 or higher, Stage IV disease emerges, or dactinomycin also fails."
+      ],
+      "options": [
+        {
+          "id": "normalized",
+          "label": "hCG normalized below 5 mIU/mL on methotrexate (proceed to consolidation)",
+          "sets": {
+            "mtx_response": "normalized"
+          },
+          "pills": [
+            "hCG normalized"
+          ]
+        },
+        {
+          "id": "resistant",
+          "label": "Resistant: hCG plateau/rise or toxicity on methotrexate (switch required)",
+          "sets": {
+            "mtx_response": "resistant"
+          },
+          "pills": [
+            "MTX resistant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_lowrisk_actd_response",
+      "linkId": "gtn_lowrisk_actd_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Dactinomycin Response",
+      "title": "Low-Risk GTN on Dactinomycin: hCG Response Assessment",
+      "section": "Treatment",
+      "description": "Classify hCG response on dactinomycin: normalization triggers consolidation and surveillance, while plateau or rise requires escalation to multi-agent therapy.",
+      "path": "GTN / Low Risk / ActD Response",
+      "pills": [
+        "low risk",
+        "dactinomycin",
+        "response"
+      ],
+      "required": true,
+      "bullets": [
+        "Normalization: serum hCG below 5 mIU/mL. Continue dactinomycin for 1-2 consolidation cycles after first normal hCG, then enter monthly hCG surveillance for 12 months with reliable contraception (footnote d).",
+        "Resistance or failure: hCG plateau across 3 consecutive values, rise across 2 consecutive values, or new metastases. Restage fully (chest CT, pelvic Doppler US, brain MRI when indicated) and escalate.",
+        "Post-dactinomycin failure usually mandates multi-agent EMA-CO rather than methotrexate rechallenge, particularly if the WHO score has risen or metastatic burden increased."
+      ],
+      "options": [
+        {
+          "id": "normalized",
+          "label": "hCG normalized below 5 mIU/mL on dactinomycin (proceed to consolidation)",
+          "sets": {
+            "actd_response": "normalized"
+          },
+          "pills": [
+            "hCG normalized"
+          ]
+        },
+        {
+          "id": "resistant",
+          "label": "Resistant: hCG plateau/rise on dactinomycin (escalation required)",
+          "sets": {
+            "actd_response": "resistant"
+          },
+          "pills": [
+            "ActD resistant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_low_mtx_cure",
+      "linkId": "gtn_tx_low_mtx_cure",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Low-Risk MTX Remission",
+      "title": "Low-Risk GTN, MTX Responsive: Single-Agent Methotrexate with Consolidation",
+      "section": "Treatment",
+      "description": "Curative single-agent methotrexate for Low-Risk GTN with hCG normalization, followed by consolidation and structured surveillance.",
+      "path": "GTN / Low Risk / MTX Remission",
+      "pills": [
+        "low risk",
+        "methotrexate",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Regimen: single-agent methotrexate (8-day MTX with leucovorin rescue, or 5-day intramuscular, or weekly intramuscular per ONCQIS protocol gyn-gtn-methotrexate); near-100% cure rate in compliant Low-Risk GTN.",
+        "Continue methotrexate for 1-2 consolidation cycles after first normal serum hCG below 5 mIU/mL; do not stop at first normalization (footnote d).",
+        "Surveillance: quantitative serum hCG monthly for 12 months after normalization, then per local protocol; reliable contraception for 12 months; prompt re-evaluation for any hCG rise (relapse is usually still curable with escalation).",
+        "Referral to a trophoblastic disease center is recommended if hCG kinetics become atypical or consolidation cannot be completed."
+      ],
+      "protocolRefs": [
+        "gyn-gtn-methotrexate"
+      ]
+    },
+    {
+      "id": "n_tx_low_mtx_fail",
+      "linkId": "gtn_tx_low_mtx_fail",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Low-Risk MTX Resistance",
+      "title": "Low-Risk GTN, MTX Resistant: Switch to Dactinomycin or EMA-CO",
+      "section": "Treatment",
+      "description": "Salvage after first-line methotrexate failure: switch single agent or escalate to multi-agent therapy based on restaged WHO score.",
+      "path": "GTN / Low Risk / MTX Resistance",
+      "pills": [
+        "low risk",
+        "MTX resistant",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Restage completely before switching: repeat WHO score, chest CT, pelvic Doppler US, and brain MRI with contrast when burden is high or histology is choriocarcinoma.",
+        "If disease remains low-risk (WHO 0-6, Stage I-III): switch to pulsed dactinomycin (actinomycin D) 1.25 mg/m2 IV every 2 weeks until hCG normalization plus 1-2 consolidation cycles.",
+        "Escalate directly to multi-agent EMA-CO (ONCQIS protocol gyn-gtn-emaco) if the WHO score is now 7 or higher, Stage IV disease is found, dactinomycin is contraindicated, or single-agent switch is judged unsafe.",
+        "Manage at or in consultation with a trophoblastic disease center; enroll in a clinical trial when available."
+      ],
+      "protocolRefs": [
+        "gyn-gtn-methotrexate"
+      ]
+    },
+    {
+      "id": "n_tx_low_actd_cure",
+      "linkId": "gtn_tx_low_actd_cure",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Low-Risk ActD Remission",
+      "title": "Low-Risk GTN, ActD Responsive: Single-Agent Dactinomycin with Consolidation",
+      "section": "Treatment",
+      "description": "Curative single-agent dactinomycin for Low-Risk GTN with hCG normalization, followed by consolidation and structured surveillance.",
+      "path": "GTN / Low Risk / ActD Remission",
+      "pills": [
+        "low risk",
+        "dactinomycin",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Regimen: pulsed dactinomycin (actinomycin D) 1.25 mg/m2 IV every 2 weeks until serum hCG normalizes below 5 mIU/mL; response rates of 70-90% as first-line single-agent therapy in Low-Risk GTN.",
+        "Continue dactinomycin for 1-2 consolidation cycles after first normal hCG; do not stop at first normalization (footnote d).",
+        "Surveillance: quantitative serum hCG monthly for 12 months after normalization; reliable contraception for 12 months; re-evaluate promptly for any hCG rise.",
+        "Vesicant precautions apply: secure peripheral or central access, extravasation protocol available, antiemetic prophylaxis, and CBC monitoring for myelosuppression."
+      ],
+      "protocolRefs": [
+        "gyn-gtn-methotrexate"
+      ]
+    },
+    {
+      "id": "n_tx_low_actd_fail",
+      "linkId": "gtn_tx_low_actd_fail",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Low-Risk ActD Resistance",
+      "title": "Low-Risk GTN, ActD Resistant: Escalate to Multi-Agent EMA-CO",
+      "section": "Treatment",
+      "description": "Escalation after dactinomycin failure: multi-agent EMA-CO with full restaging at a trophoblastic disease center.",
+      "path": "GTN / Low Risk / ActD Resistance",
+      "pills": [
+        "low risk",
+        "ActD resistant",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Restage completely: repeat WHO score, chest CT, pelvic Doppler US, and brain MRI with contrast when metastatic burden is significant or histology is choriocarcinoma.",
+        "Escalate to multi-agent EMA-CO (ONCQIS protocol gyn-gtn-emaco): etoposide, methotrexate with folinic acid rescue, and dactinomycin alternating with cyclophosphamide and vincristine, until hCG normalization plus 2-3 consolidation cycles (6-8 weeks).",
+        "Methotrexate rechallenge after dactinomycin failure is generally not preferred; proceed to EMA-CO, particularly when the WHO score has risen or disease burden increased.",
+        "Manage at a trophoblastic disease center; consider clinical trial enrollment."
+      ],
+      "protocolRefs": [
+        "gyn-gtn-emaco"
+      ]
+    },
+    {
+      "id": "n_highrisk_cns",
+      "linkId": "gtn_highrisk_cns",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "High-Risk CNS Assessment",
+      "title": "High-Risk GTN: Central Nervous System Involvement Assessment",
+      "section": "Treatment",
+      "description": "Determine whether brain metastases are present: CNS disease changes methotrexate dosing (high-dose systemic plus intrathecal) and adds a radiosurgery option.",
+      "path": "GTN / High Risk / CNS",
+      "pills": [
+        "high risk",
+        "CNS"
+      ],
+      "required": true,
+      "bullets": [
+        "Brain MRI with contrast is mandatory for choriocarcinoma histology, extensive pulmonary metastases, or any neurologic symptom before starting EMA-CO; concurrent liver and brain metastases are common in high-burden disease.",
+        "CNS-positive disease requires high-dose methotrexate (1,000 mg/m2) with folinic acid rescue plus intrathecal methotrexate within the EMA-CO backbone, or concurrent stereotactic radiosurgery (SRS) per multidisciplinary neuro-oncology planning.",
+        "CNS-negative High-Risk GTN proceeds directly to standard EMA-CO with hCG surveillance every cycle and consolidation of 2-3 cycles (6-8 weeks) after normalization (footnote c)."
+      ],
+      "options": [
+        {
+          "id": "no_cns",
+          "label": "No brain metastases on contrast MRI (standard EMA-CO pathway)",
+          "sets": {
+            "cns": "negative"
+          },
+          "pills": [
+            "high risk",
+            "CNS negative"
+          ]
+        },
+        {
+          "id": "cns",
+          "label": "Brain metastases present (CNS-directed pathway)",
+          "sets": {
+            "cns": "positive"
+          },
+          "pills": [
+            "high risk",
+            "brain metastases"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_highrisk_response",
+      "linkId": "gtn_highrisk_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "EMA-CO Response",
+      "title": "High-Risk GTN on EMA-CO: Remission vs Relapsed or Refractory Disease",
+      "section": "Treatment",
+      "description": "Classify response to EMA-CO: sustained hCG normalization completes consolidation and surveillance, while plateau, rise, or relapse triggers salvage multi-agent therapy or immunotherapy.",
+      "path": "GTN / High Risk / Response",
+      "pills": [
+        "high risk",
+        "EMA-CO",
+        "response"
+      ],
+      "required": true,
+      "bullets": [
+        "Remission: serum hCG below 5 mIU/mL on EMA-CO. Continue EMA-CO for 2-3 consolidation cycles (6-8 weeks) after first normalization, then monthly hCG surveillance with contraception for 12-24 months (footnote c, footnote d).",
+        "Relapsed or refractory: hCG plateau or rise on EMA-CO, new metastatic lesions, or hCG re-elevation after prior normalization. Restage fully including brain MRI and consider surgical resection of isolated chemoresistant foci.",
+        "Salvage options (footnote f): EP-EMA (etoposide, cisplatin with etoposide, methotrexate, dactinomycin), TP/TE (paclitaxel/cisplatin alternating with paclitaxel/etoposide), or pembrolizumab anti-PD-1 Category 2A; high-dose chemotherapy with stem-cell support in selected patients at experienced centers."
+      ],
+      "options": [
+        {
+          "id": "remission",
+          "label": "Remission: hCG normalized on EMA-CO (complete consolidation)",
+          "sets": {
+            "emaco_response": "remission"
+          },
+          "pills": [
+            "EMA-CO remission"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed or refractory: hCG plateau/rise or new lesions (salvage required)",
+          "sets": {
+            "emaco_response": "relapsed_refractory"
+          },
+          "pills": [
+            "relapsed",
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_high_remission",
+      "linkId": "gtn_tx_high_remission",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "High-Risk EMA-CO Remission",
+      "title": "High-Risk GTN in Remission: EMA-CO with Consolidation",
+      "section": "Treatment",
+      "description": "Curative multi-agent EMA-CO Category 1 preferred for High-Risk GTN with hCG normalization, followed by extended consolidation and long surveillance.",
+      "path": "GTN / High Risk / EMA-CO Remission",
+      "pills": [
+        "high risk",
+        "EMA-CO",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Regimen: EMA-CO Category 1 preferred (etoposide, methotrexate with folinic acid rescue, dactinomycin on days 1-2 alternating with cyclophosphamide and vincristine on day 8, every 2 weeks) per ONCQIS protocol gyn-gtn-emaco; complete remission in 80-90% of High-Risk GTN (footnote c).",
+        "Continue EMA-CO for 2-3 consolidation cycles (6-8 weeks) after first normal serum hCG below 5 mIU/mL; use G-CSF support to maintain dose intensity and monitor CBC, renal, and hepatic function each cycle.",
+        "Surveillance: quantitative serum hCG monthly for 12-24 months after normalization with reliable contraception; late relapse, though uncommon, remains curable with salvage therapy when detected early.",
+        "Manage at a trophoblastic disease center; consider clinical trial enrollment."
+      ],
+      "protocolRefs": [
+        "gyn-gtn-emaco"
+      ]
+    },
+    {
+      "id": "n_tx_high_brain",
+      "linkId": "gtn_tx_high_brain",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "High-Risk Brain Metastases",
+      "title": "High-Risk GTN with Brain Metastases: EMA-CO with CNS-Directed Therapy",
+      "section": "Treatment",
+      "description": "EMA-CO backbone with high-dose systemic methotrexate, intrathecal therapy, and radiosurgery options for GTN brain metastases.",
+      "path": "GTN / High Risk / Brain Metastases",
+      "pills": [
+        "high risk",
+        "brain metastases",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Backbone: EMA-CO per ONCQIS protocol gyn-gtn-emaco, with methotrexate intensified to high-dose 1,000 mg/m2 with folinic acid rescue for blood-brain barrier penetration.",
+        "Intrathecal methotrexate concurrent with systemic therapy until hCG normalization plus consolidation; coordinate dosing and leucovorin rescue with neuro-oncology and pharmacy.",
+        "Concurrent stereotactic radiosurgery (SRS) is an alternative or adjunct for limited brain lesions; whole-brain radiotherapy is now generally reserved for refractory or hemorrhagic presentations after multidisciplinary review.",
+        "Continue systemic EMA-CO until hCG normalization plus 2-3 consolidation cycles (6-8 weeks); monthly hCG and interval brain MRI surveillance thereafter with contraception for 12-24 months."
+      ],
+      "protocolRefs": [
+        "gyn-gtn-emaco"
+      ]
+    },
+    {
+      "id": "n_tx_high_salvage",
+      "linkId": "gtn_tx_high_salvage",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Relapsed High-Risk Salvage",
+      "title": "Relapsed or Refractory High-Risk GTN: Salvage Multi-Agent Therapy or Immunotherapy",
+      "section": "Treatment",
+      "description": "Salvage for EMA-CO failure: EP-EMA or TP/TE multi-agent regimens, pembrolizumab immunotherapy, resectable-focus surgery, and trial enrollment at an experienced center.",
+      "path": "GTN / High Risk / Salvage",
+      "pills": [
+        "high risk",
+        "relapsed",
+        "refractory",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "EP-EMA: etoposide and cisplatin alternating with etoposide, methotrexate, and dactinomycin; a standard salvage multi-agent regimen after EMA-CO failure (footnote f).",
+        "TP/TE: paclitaxel/cisplatin alternating with paclitaxel/etoposide; alternative salvage regimen, particularly with significant prior toxicity or when EP-EMA is unsuitable.",
+        "Pembrolizumab (anti-PD-1) Category 2A for relapsed or refractory High-Risk GTN, reflecting high PD-L1 expression in trophoblastic tumors; durable responses reported in chemorefractory disease (footnote f).",
+        "Resect isolated chemoresistant foci (uterine or pulmonary) when hCG plateaus with anatomically limited disease; consider high-dose chemotherapy with stem-cell support in selected patients; prioritize clinical trial enrollment at a trophoblastic disease center."
+      ],
+      "protocolRefs": [
+        "gyn-gtn-methotrexate",
+        "gyn-gtn-emaco"
+      ]
+    },
+    {
+      "id": "n_pstt_stage",
+      "linkId": "gtn_pstt_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "PSTT/ETT Stage",
+      "title": "PSTT or ETT: Localized (Stage I) vs Advanced or Long-Interval Disease",
+      "section": "Treatment",
+      "description": "Stage PSTT/ETT anatomically and by pregnancy interval: Stage I confined disease is primarily surgical, while metastatic disease or an interval of 48 months or more requires multi-agent chemotherapy.",
+      "path": "GTN / PSTT-ETT / Stage",
+      "pills": [
+        "PSTT/ETT",
+        "stage"
+      ],
+      "required": true,
+      "bullets": [
+        "Stage I (disease confined to uterus, short interval from antecedent pregnancy): primary treatment is total abdominal hysterectomy with pelvic lymphadenectomy, since PSTT/ETT metastasize lymphatically unlike other GTN (footnote g).",
+        "Ovarian conservation is acceptable in young patients with clinically normal ovaries; uterine preservation (fertility-sparing) is not standard and only in exceptional referral-center protocols.",
+        "Advanced or metastatic disease, or any interval of 48 months or more from the antecedent pregnancy: multi-agent chemotherapy with EP-EMA or EMA-CO, with pembrolizumab as a Category 2A adjunct or salvage option (footnote f, footnote g).",
+        "Resect residual or isolated chemoresistant disease surgically whenever feasible; hCG plus clinical and imaging surveillance follows, since low-level hCG is an insensitive marker in PSTT/ETT."
+      ],
+      "options": [
+        {
+          "id": "stage1",
+          "label": "Stage I confined to uterus (surgical management)",
+          "sets": {
+            "pstt_stage": "I"
+          },
+          "pills": [
+            "PSTT/ETT",
+            "stage I"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Advanced/metastatic disease or interval 48 months or more (multi-agent chemotherapy)",
+          "sets": {
+            "pstt_stage": "advanced"
+          },
+          "pills": [
+            "PSTT/ETT",
+            "advanced"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_pstt_local",
+      "linkId": "gtn_tx_pstt_local",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "PSTT/ETT Localized Surgery",
+      "title": "Stage I PSTT or ETT: Total Hysterectomy with Pelvic Lymphadenectomy",
+      "section": "Treatment",
+      "description": "Primary surgical cure for localized PSTT/ETT with nodal staging; adjuvant chemotherapy is reserved for high-risk features such as long pregnancy interval.",
+      "path": "GTN / PSTT-ETT / Local Surgery",
+      "pills": [
+        "PSTT/ETT",
+        "stage I",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Surgery: total abdominal (or minimally invasive per oncology judgment) hysterectomy with pelvic lymphadenectomy; nodal assessment is required because PSTT/ETT spread via lymphatics (footnote g).",
+        "Ovarian conservation is acceptable in young patients with clinically normal ovaries; avoid morcellation and confirm negative margins with expert pathology review.",
+        "Adjuvant multi-agent chemotherapy (EP-EMA or EMA-CO) is considered for high-risk features: interval of 48 months or more from antecedent pregnancy, deep myometrial invasion, serosal involvement, or positive nodes.",
+        "Surveillance: serial hCG (low-level marker in PSTT/ETT) with pelvic imaging and chest CT at intervals; counsel that these tumors are relatively chemoresistant, so complete primary resection is the curative step."
+      ],
+      "protocolRefs": [
+        "gyn-gtn-methotrexate",
+        "gyn-gtn-emaco"
+      ]
+    },
+    {
+      "id": "n_tx_pstt_adv",
+      "linkId": "gtn_tx_pstt_adv",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "PSTT/ETT Advanced Therapy",
+      "title": "Advanced PSTT or ETT: Multi-Agent Chemotherapy with Surgical Consolidation",
+      "section": "Treatment",
+      "description": "Multi-agent chemotherapy (EP-EMA or EMA-CO) with pembrolizumab options and surgical consolidation for advanced or long-interval PSTT/ETT.",
+      "path": "GTN / PSTT-ETT / Advanced Therapy",
+      "pills": [
+        "PSTT/ETT",
+        "advanced",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Multi-agent chemotherapy: EP-EMA (etoposide, cisplatin with etoposide, methotrexate, dactinomycin) is commonly preferred for PSTT/ETT; EMA-CO per ONCQIS protocol gyn-gtn-emaco is the alternative multi-agent backbone (footnote c, footnote g).",
+        "Pembrolizumab (anti-PD-1) Category 2A as adjunct or salvage for advanced or chemorefractory PSTT/ETT, reflecting high PD-L1 expression; durable remissions reported (footnote f).",
+        "An interval of 48 months or more from the antecedent pregnancy predicts poor outcome: treat aggressively with multi-agent chemotherapy from the outset and plan surgical consolidation of residual disease.",
+        "Resect residual uterine or metastatic foci whenever feasible after chemotherapy response; manage at a trophoblastic disease center with clinical trial priority; hCG plus imaging surveillance thereafter."
+      ],
+      "protocolRefs": [
+        "gyn-gtn-emaco"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_pres_molar",
+      "from": "n_presentation",
+      "to": "n_molar_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "molar"
+      ]
+    },
+    {
+      "id": "l_pres_postmolar",
+      "from": "n_presentation",
+      "to": "n_postmolar_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "postmolar"
+      ]
+    },
+    {
+      "id": "l_pres_pstt",
+      "from": "n_presentation",
+      "to": "n_pstt_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pstt"
+      ]
+    },
+    {
+      "id": "l_molar_wk_figo",
+      "from": "n_molar_wk",
+      "to": "n_figo_risk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_postmolar_wk_figo",
+      "from": "n_postmolar_wk",
+      "to": "n_figo_risk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_pstt_wk_stage",
+      "from": "n_pstt_wk",
+      "to": "n_pstt_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_figo_low",
+      "from": "n_figo_risk",
+      "to": "n_lowrisk_first",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "low"
+      ]
+    },
+    {
+      "id": "l_figo_high",
+      "from": "n_figo_risk",
+      "to": "n_highrisk_cns",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "high"
+      ]
+    },
+    {
+      "id": "l_figo_pstt",
+      "from": "n_figo_risk",
+      "to": "n_pstt_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pstt"
+      ]
+    },
+    {
+      "id": "l_low_mtx",
+      "from": "n_lowrisk_first",
+      "to": "n_lowrisk_mtx_response",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mtx"
+      ]
+    },
+    {
+      "id": "l_low_actd",
+      "from": "n_lowrisk_first",
+      "to": "n_lowrisk_actd_response",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "actd"
+      ]
+    },
+    {
+      "id": "l_mtx_normalized",
+      "from": "n_lowrisk_mtx_response",
+      "to": "n_tx_low_mtx_cure",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "normalized"
+      ]
+    },
+    {
+      "id": "l_mtx_resistant",
+      "from": "n_lowrisk_mtx_response",
+      "to": "n_tx_low_mtx_fail",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "resistant"
+      ]
+    },
+    {
+      "id": "l_actd_normalized",
+      "from": "n_lowrisk_actd_response",
+      "to": "n_tx_low_actd_cure",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "normalized"
+      ]
+    },
+    {
+      "id": "l_actd_resistant",
+      "from": "n_lowrisk_actd_response",
+      "to": "n_tx_low_actd_fail",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "resistant"
+      ]
+    },
+    {
+      "id": "l_cns_negative",
+      "from": "n_highrisk_cns",
+      "to": "n_highrisk_response",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "no_cns"
+      ]
+    },
+    {
+      "id": "l_cns_positive",
+      "from": "n_highrisk_cns",
+      "to": "n_tx_high_brain",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "cns"
+      ]
+    },
+    {
+      "id": "l_hr_remission",
+      "from": "n_highrisk_response",
+      "to": "n_tx_high_remission",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "remission"
+      ]
+    },
+    {
+      "id": "l_hr_relapsed",
+      "from": "n_highrisk_response",
+      "to": "n_tx_high_salvage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "relapsed"
+      ]
+    },
+    {
+      "id": "l_pstt_stage1",
+      "from": "n_pstt_stage",
+      "to": "n_tx_pstt_local",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "stage1"
+      ]
+    },
+    {
+      "id": "l_pstt_advanced",
+      "from": "n_pstt_stage",
+      "to": "n_tx_pstt_adv",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "advanced"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "gyn-gtn-emaco",
+    "gyn-gtn-methotrexate"
+  ]
+}

@@ -91,9 +91,9 @@ try {
   ok(await ev(`return window.__medDrugsInteractionsCalls;`) === 1, "the Interaction check reuses the real MEDDRUGS.openInteractions()");
   await ev(`document.querySelector('[data-oh-act="home-dash"]').click(); return 1;`); await sleep(120);
 
-  // ---- Protocol reference view: read-only DRAFT badge ----
-  ok(await ev(`return !!document.querySelector('[data-oh-act="protoref-open"]');`) === true, "the Protocol Reference card appears (flag on)");
-  await ev(`document.querySelector('[data-oh-act="protoref-open"]').click(); return 1;`);
+  // ---- Protocol reference view: read-only DRAFT badge (ONE unified card opens the library) ----
+  ok(await ev(`return !!document.querySelector('[data-oh-act="protocol-open"]');`) === true, "the Treatment Protocols card appears (unified protocol system)");
+  await ev(`document.querySelector('[data-oh-act="protocol-open"]').click(); return 1;`);
   await sleep(200);
   const proto = (await ev(`return document.getElementById("ohResults").textContent || "";`)) || "";
   ok(/DRAFT - not activated/.test(proto), "the protocol reference shows the honest 'DRAFT - not activated' badge");

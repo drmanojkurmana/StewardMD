@@ -209,26 +209,47 @@ async function handleBrandSearch(url, env) {
   const match = q.length >= 2 ? ftsQuery(q) : null;
   if (!match) return json({ query: q, count: 0, results: [] }, { ttl: TTL.search });
   const ql = q.toLowerCase();
+  const cleanQ = ql.replace(/[-_/,+]/g, " ").replace(/\s+/g, " ").trim();
   try {
-    const { results } = await env.DB.prepare(
-      `SELECT d.id, d.brand, d.composition, d.class, d.manufacturer, d.mrp, d.form, d.pack, d.discontinued
-         FROM drugs_fts f JOIN drugs d ON d.id = f.rowid
-        WHERE drugs_fts MATCH ?1 ORDER BY rank LIMIT 300`
-    ).bind(match).all();
+    let dbResults = [];
+    try {
+      // Direct column-targeted FTS search so thousands of composition hits never crowd out brand hits
+      const { results: bResults } = await env.DB.prepare(
+        `SELECT d.id, d.brand, d.composition, d.class, d.manufacturer, d.mrp, d.form, d.pack, d.discontinued
+           FROM drugs_fts f JOIN drugs d ON d.id = f.rowid
+          WHERE drugs_fts MATCH ?1 ORDER BY rank LIMIT 300`
+      ).bind(`brand : (${match})`).all();
+      dbResults = bResults || [];
+    } catch (_) {
+      dbResults = [];
+    }
+    if (!dbResults.length) {
+      const { results: allResults } = await env.DB.prepare(
+        `SELECT d.id, d.brand, d.composition, d.class, d.manufacturer, d.mrp, d.form, d.pack, d.discontinued
+           FROM drugs_fts f JOIN drugs d ON d.id = f.rowid
+          WHERE drugs_fts MATCH ?1 ORDER BY rank LIMIT 300`
+      ).bind(match).all();
+      dbResults = allResults || [];
+    }
     // Keep only rows whose BRAND name actually matches (drop molecule-only FTS hits,
     // where the token matched the composition column). Prefix hits rank above
     // substring hits, live drugs above discontinued; dedupe by brand id.
     const seen = new Set(), scored = [];
-    for (const r of results) {
+    for (const r of dbResults) {
       const bl = String(r.brand || "").toLowerCase();
+      const cleanB = bl.replace(/[-_/,+]/g, " ").replace(/\s+/g, " ").trim();
       let s;
-      if (bl.startsWith(ql)) s = 0;
-      else if (bl.indexOf(ql) !== -1) s = 1;
+      if (cleanB === cleanQ) s = 0;
+      else if (cleanB.startsWith(cleanQ + " ") || cleanB.startsWith(cleanQ)) s = 1;
+      else if (cleanB.indexOf(" " + cleanQ + " ") !== -1 || cleanB.indexOf(cleanQ) !== -1) s = 2;
+      else if (bl.startsWith(ql)) s = 3;
+      else if (bl.indexOf(ql) !== -1) s = 4;
       else continue;
       if (seen.has(r.id)) continue; seen.add(r.id);
       scored.push({ r: r, s: s });
     }
     scored.sort((a, b) => (a.s - b.s) || ((a.r.discontinued ? 1 : 0) - (b.r.discontinued ? 1 : 0)) ||
+      String(a.r.brand).length - String(b.r.brand).length ||
       String(a.r.brand).localeCompare(String(b.r.brand)));
     const out = scored.slice(0, limit).map((x) => x.r);
     return json({ query: q, count: out.length, results: out }, { ttl: TTL.search });
@@ -404,15 +425,24 @@ export default {
   //                     reminders, escalate missed check-ins, run the retention sweep — plus the AI
   //                     voice-fallback morning window (run-voice; no-op until a hospital enables voice).
   //   "30 11 * * *"   → FollowCare AI voice-fallback evening window (17:00 IST) (run-voice).
+  //   "*/5 * * * *"   → WardSynQ tick for every hospital (S3 P0): escalate unacknowledged critical results,
+  //                     push the next tier, SMS fallback, drain the outbox. POSTs /api/queue/ops/tick-all.
   //   "0 * * * *"     → Connect ABDM reconciliation GC sweep (hourly): erase expired/terminal ephemeral
   //                     keys + push-buffers. Flag-gated + no-op-safe + fail-safe on the Pages side, so it
   //                     is a cheap 404 while Connect is unprovisioned/flag-OFF.
+  //                     Also the WardSynQ scheduled backup (POSTs /api/queue/ops/backup-all): each hospital with a
+  //                     backup destination gets its daily backup on the first run of the UTC day, retried hourly.
   // All delegate to Pages Functions with the shared admin token. Best-effort.
   async scheduled(event, env, ctx) {
     if (!env.UPDATES_ADMIN_TOKEN) return;
     const post = (p) => fetch("https://stewardmd.in" + p, { method: "POST", headers: { "X-Admin-Token": env.UPDATES_ADMIN_TOKEN } }).catch(() => {});
+    if (event.cron === "*/5 * * * *") {
+      ctx.waitUntil(post("/api/queue/ops/tick-all"));     // WardSynQ: escalation that does not wait for ward traffic
+      return;
+    }
     if (event.cron === "0 * * * *") {
       ctx.waitUntil(post("/api/connect/admin/sweep"));     // Connect ABDM reconciliation GC (flag-gated, no-op-safe, fail-safe)
+      ctx.waitUntil(post("/api/queue/ops/backup-all"));    // WardSynQ: daily per-hospital backup, retried hourly until done (a no-op when not due)
       return;
     }
     if (event.cron === "*/15 * * * *") {

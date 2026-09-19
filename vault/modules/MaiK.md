@@ -12,12 +12,49 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 - `home.js` — the MaiK sheet + `runClinical()` (the ask flow), Aurora UI, sidebar
 - `maik-engine.js` (`window.SMD_MAIK_ENGINE`) — answer-engine picker (KB only / Cloud / On-device);
   DECORATES `window.SMD_AI` rather than branching in home.js. Pref `stewardmd.maikEngine`, default `cloud`
-- `maik-models.js` / `maik-local.js` — on-device model pack (resumable Range download) + llama.cpp
-  inference via `local-plugins/capacitor-llama`. See `docs/MAIK_OFFLINE_RUNBOOK.md`
+- `maik-models.js` / `maik-local.js` — on-device model packs (resumable Range download) + llama.cpp
+  inference via `local-plugins/capacitor-llama` (mainline llama.cpp b10502 xcframework). See
+  `docs/MAIK_OFFLINE_RUNBOOK.md`. Nine packs (2026-09-18): `maik-lite` (our fine-tune, default),
+  `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers, `medmo-4b`
+  (**MAiK Cortex**, text-only), `maik-apex`, `bonsai-27b`. EVERY text pack reads the on-device book
+  (`kb/ai/maik-lite-rag.js` BM25 retrieval, `kb/ai/maik-lite-kb-store.js` 38 MB asset): `ragEligible`
+  in `maik-local.js` is capability-based and reads `CAPS[pack].kb` (changed 2026-09-18 from
+  Lite-only). The whole-answer wording gate was replaced for these packs by claim-level grounding
+  (`kb/ai/maik-grounding.js`): each factual claim is verified against the retrieved passages and an
+  unsupported one is removed or qualified, never the whole answer. Grounded answers cite only
+  "StewardMD Knowledge Base - based on standard medical resources", never a page.
+- `kb/ai/drug-dose.js` (`window.SMD_DOSE`) — dose questions are answered from the drug database
+  (`window.MEDAPI`), short-circuited in `maik-engine.js route()` before the engine choice, so no
+  model supplies a dose figure on any engine. Fails open to the normal grounded answer.
+- **Offline stand-in** (`maik-engine.js` `effective()`, 2026-09-03): pref `cloud` + `navigator.onLine`
+  false + a ready local pack → the on-device model answers. Flag `smd_maik_offline_local` ("0" off).
+- **What the engine routes** (2026-09-04): explain, explainGrounded, explainGroundedStream, refine,
+  vivaJudge (CliniX viva examiner) and extract kind `opd-suggest` (OPD "Ask MaiK Pro" differential),
+  the last two via `maik-local.js` `vivaJudge()`/`opdSuggest()` (server prompts + whitelisting
+  ported). Still cloud-only: every other extract kind (voice, translate, MaiK Ask), vision/OCR,
+  transcribe, ICU correlate/evidence/imagingSummary.
+- **"Research on the web" is cloud (Gemini) ONLY on MaiK Cloud** (2026-09-04, owner: "cant charge
+  them for snippet conversion"): on the local engine, `SMD_AI.researchSnippets()` fetches TinyFish's
+  raw sources for free (`/research` with `snippetsOnly:true`, no Gemini, no quota) and
+  `maik-local.js` `webAnswer()` writes the prose on device, gated by the same `evidenceGate` the
+  book RAG uses. Evidence Review (`mode:"evidence-review"`) is untouched, always cloud. The
+  server's own Gemini-grounded fallback for a TinyFish miss is gone; a miss is now an honest
+  "no results" (no more `RESEARCH_SYS`/`web-grounded`).
+- **Model lifecycle** (2026-09-04): warmed when the MaiK sheet opens (`openAskAi`), released 20 s
+  after `close()` or 3 min idle with the sheet open, never mid-generation. No warm-up at app start.
 - `kb/ai/maik-kb.js` (`window.MaiKKB`) — deterministic KB answer engine (canonical+fuzzy+abbrev, 85% gate)
 - `functions/api/ai/[[path]].js` — server: `/refine` (router), `/explain` (Gemini), `/research` (web)
 - `kb/ai/steward-ai.browser.js` — client SDK helpers. NOTE: `window.SMD_AI` itself is defined in
   `reasoning.js:3771` and that is its ONLY assignment (verified 2026-08-20) — this file does not set it
+- **Chat skin** (2026-09-04): `body.mkchat`, default ON, `?mkchat=0` off / `?mkchat=1` on (key
+  `smd_mkchat`). Presentation-only CSS in home.js (block "MaiK CHAT skin"): unboxed assistant prose,
+  no per-answer MAIK label or disclaimer line (the banner is the one disclaimer), 15px text, quiet
+  outline chips, no skeleton bars. Independent of the older off-by-default `body.mk2` skin.
+- **"Was this helpful?" feedback** (2026-09-04): `home.js` `_answerFeedback` posts to
+  `/api/maik-feedback` (`functions/_maik_feedback.js`, anonymous, KV ring buffer + aggregate); a "No"
+  asks why and amends the same entry if the doctor types a reason. Admin: stewardmd.in/admin →
+  "MaiK feedback" pane, `admin/maik-feedback` in `functions/api/ai/[[path]].js` (owner-gated, the
+  only place the free-text reasons are readable).
 
 ## Flow detail
 `send()` → local `maikRoute` → `runClinical()`: [[MaiK Intent Firewall]] gate → clinical-dialogue → instant KB → `/refine` router → KB retry → `/explain` Gemini.
@@ -111,3 +148,29 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
   `test/device/maik-bench.html` in a throwaway build; its control arm proves the buffering.
 - Stream deadlines: connect 10s / idle 10s / total 25s. A deadline-closed stream sets
   `stalled:true` and the client MUST refuse it — otherwise a truncated clinical answer looks whole.
+
+## UI polish (2026-09-12)
+
+2026-09-14 composer correction: MaiK occupies the full viewport. The composer reserves a 64px text row and a 44px tool row; longer drafts scroll within the field instead of resizing it. Extract findings now occupies an accessible brain-icon button in the reserved tool row. Typing focus uses a caret without a rectangular outline; button keyboard-focus indicators remain. Browser checks confirmed identical composer dimensions before/after multiline typing at 390x844, plus visible send controls at 320x500. Physical phone keyboard verification remains outstanding.
+
+- `maik-polish.css` is an additive layer scoped to `#maikSheet.maik-polished`: system typography, grouped quick actions, larger controls, visible keyboard focus, and a wrapping composer on narrow screens.
+- Original color/white MaiK wordmarks remain in the header and welcome view. The live doctor and its existing animation/interaction engine are preserved; horizontal stage clipping prevents off-screen travel from widening the sheet.
+- Existing engine selection, clinical disclaimer, local/cloud routing and conversation actions are unchanged. Cache tokens in `index.html` and `sw.js` include `mkpolish1`.
+
+## Restored answer tools and action layout (2026-09-13)
+
+Copilot tool chips now persist their kind/argument as attributes and launch through the body click delegate, so they work after reopening saved conversation HTML. Older calculator chips resolve by an exact registered title match. MaiK closes before the target opens. Answer tools use full-width rows; ratings share one row and Copy/Regenerate/Edit use a separate equal-width row in `maik-polish.css`.
+
+## Top-right model navigation (2026-09-14)
+The original wordmark and engine selector share the first header row. Conversation actions have a compact second row, preserving all original handlers and the live doctor. Responsive grid slots constrain long model names. Touch feedback respects reduced motion.
+
+## Startup motion (2026-09-14)
+The existing 107px solid StewardMD mark remains present throughout startup. Light and dark appearance each use the owner's selected animation below. Reduced-motion users see only the static mark.
+
+Selected modes: light uses variant 5, Quiet Focus (a gentle focus reveal followed by a masked silver reflection); dark uses variant 1, Pearl Circuit (a pearl-white contour over a pale teal mask that deepens as drawing completes). No background halo. Drawing completes in 1.12 seconds so the luminous finish appears before the personalised-screen transition at 1.56 seconds. Logo dimensions remain 107px; reduced-motion suppresses overlays and immediately shows the static mark. All motion waits for the native splash handoff class.
+
+## September 2026 atmospheric backgrounds
+
+`maik-atmosphere.js` / `.css` mount decorative Aurora and Letter Glitch canvases on the MaiK sheet. Light uses a pure white base and green/white/orange stops; Graphite uses saffron/green/navy. The existing `maikSetSendMode` controls the generation effect, including stop/error/completion. No prompts or patient text enter the renderer. Motion pauses when hidden, is static under Reduce Motion, and releases WebGL/listeners when the sheet closes or is replaced. The existing Medibot artwork, size, and animation remain unchanged. React Bits attribution is in `licenses/react-bits.txt`.
+
+The atmosphere refinement softens Aurora and gives messages and composer translucent, blurred surfaces. The engine-aware verification notice now sits beneath the composer in the footer; its wording still follows the selected engine. Original bot unchanged.

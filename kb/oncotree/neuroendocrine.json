@@ -1,0 +1,882 @@
+{
+  "guideline": "neuroendocrine",
+  "id": "neuroendocrine",
+  "title": "Neuroendocrine and Adrenal Tumors",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2026)",
+  "category": "Solid Tumors",
+  "version": "1.2026",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "diseaseId": "neuroendocrine_adrenal_tumors",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2026 clinical navigator for Neuroendocrine and Adrenal Tumors. Covers complete clinical algorithm: Diagnostic Workup (SSTR PET imaging with 68Ga-DOTATATE or 64Cu-DOTATATE, multiphase contrast CT/MRI with dedicated liver MRI, WHO grade by Ki-67 index and mitotic rate, functional hormone evaluation, carcinoid heart disease screening echocardiogram, genetic counseling for MEN1/VHL/NF1/RET/SDHx) -> Subtype Stratification (GI-NET vs Pancreatic NET vs High-Grade NEC vs Pheochromocytoma-Paraganglioma) -> GI-NET: surgical resection with mesenteric lymphadenectomy for locoregional disease, SSA or surveillance for indolent SSTR-positive metastatic disease, SSA plus Lu-177 dotatate and everolimus for progressive disease (NETTER-1, RADIANT-4, PROMID, CLARINET) -> Pancreatic NET: Whipple or distal pancreatectomy for resectable disease, SSA plus everolimus (RADIANT-3), sunitinib, CAPTEM, or PRRT for advanced disease -> High-Grade NEC: multimodality platinum-etoposide plus surgery or chemoradiation for locoregional disease, platinum-etoposide first-line with FOLFOX/FOLFIRI second-line for metastatic disease -> PPGL: alpha-blockade then adrenalectomy for localized disease, MIBG I-131 or Lu-177 dotatate or CVD for metastatic disease. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Neuroendocrine and Adrenal Tumors Version 1.2026.",
+  "rootNodeId": "n_workup",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "SSTR imaging with 68Ga-DOTATATE or 64Cu-DOTATATE PET/CT or PET/MRI is preferred for staging well-differentiated NET and for selecting PRRT candidates; Octreoscan (111In-pentetreotide) is used only when SSTR PET is unavailable. FDG PET is reserved for high-grade or SSTR-negative disease.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "WHO grading of gastroenteropancreatic NET uses Ki-67 proliferation index and mitotic rate: G1 (Ki-67 below 3%), G2 (Ki-67 3-20%), G3 NET (Ki-67 above 20%, well-differentiated), and NEC (poorly differentiated high-grade carcinoma, usually Ki-67 above 55%). Grade drives systemic therapy selection.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "PROMID (octreotide LAR) and CLARINET (lanreotide) demonstrated antiproliferative benefit of somatostatin analogues in advanced well-differentiated SSTR-positive NET; NETTER-1 demonstrated progression-free survival benefit of Lutetium Lu 177 dotatate (7.4 GBq every 8 weeks x 4 with amino acid renal protection) in progressive SSTR-positive midgut NET; RADIANT-4 demonstrated benefit of everolimus 10 mg daily in advanced nonfunctional GI and lung NET.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "RADIANT-3 demonstrated progression-free survival benefit of everolimus 10 mg daily in advanced pancreatic NET. Sunitinib 37.5 mg daily, capecitabine plus temozolomide (CAPTEM), and PRRT with Lu-177 dotatate are additional options for progressive well-differentiated pancreatic NET.",
+      "evidence": "1"
+    },
+    "e": {
+      "text": "Metastatic high-grade poorly differentiated NEC is treated with small-cell-like platinum doublets: cisplatin 75-100 mg/m2 or carboplatin AUC 5-6 on day 1 plus etoposide 100 mg/m2 on days 1-3 every 21 days first-line, then FOLFOX, FOLFIRI, or irinotecan plus temozolomide second-line.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Localized pheochromocytoma or paraganglioma requires preoperative alpha-adrenergic blockade (phenoxybenzamine 10 mg BID titrated for 10-14 days) followed by beta-blockade only after adequate alpha-blockade, to prevent perioperative hypertensive crisis during laparoscopic adrenalectomy or resection.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "neuroendocrine_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Neuroendocrine and Adrenal Tumors: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the diagnostic workup before subtype stratification. Confirm SSTR status, anatomic extent, WHO grade, hormonal function, cardiac involvement, and hereditary risk.",
+      "path": "Neuroendocrine and Adrenal Tumors / Workup",
+      "pills": [
+        "NET",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "SSTR imaging: 68Ga-DOTATATE or 64Cu-DOTATATE PET/CT or PET/MRI (or Octreoscan if PET unavailable) to stage disease, confirm somatostatin receptor status, and select candidates for SSA therapy and PRRT.",
+        "Multiphase contrast CT/MRI of abdomen/pelvis for primary tumor and nodal staging; multiphase liver MRI for hepatic metastases, which are the dominant metastatic site and determine resectability and liver-directed options.",
+        "Histopathology: WHO grade by Ki-67 index and mitotic rate - G1 (Ki-67 below 3%), G2 (Ki-67 3-20%), G3 NET (Ki-67 above 20%, well-differentiated), NEC (poorly differentiated high-grade); include chromogranin A and synaptophysin IHC.",
+        "Functional hormone evaluation: 24h urinary 5-HIAA and serotonin for carcinoid syndrome; gastrin, insulin, glucagon, and VIP for pancreatic NET syndromes; fractionated plasma or urinary metanephrines for pheochromocytoma/paraganglioma.",
+        "Carcinoid heart disease screening: baseline echocardiogram with Doppler in carcinoid syndrome to assess tricuspid and pulmonic valve fibrosis before serotonin-lowering or surgical therapy.",
+        "Genetic counseling and testing for MEN1, VHL, NF1, RET, and SDHx mutations when indicated by young onset, multifocal disease, family history, or syndromic features (parathyroid, pituitary, hemangioblastoma, medullary thyroid, paraganglioma clusters)."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Subtype Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_subtype",
+      "linkId": "neuroendocrine_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "staging",
+      "name": "Subtype Stratification",
+      "title": "Neuroendocrine Tumors: Subtype Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Classify into one of the four major clinical groupings; subtype plus grade and extent determines the surgical versus systemic pathway.",
+      "path": "Neuroendocrine and Adrenal Tumors / Subtype",
+      "pills": [
+        "NET",
+        "subtyping"
+      ],
+      "required": true,
+      "bullets": [
+        "Gastrointestinal NET (stomach, small bowel, appendix, colon, rectum): typically well-differentiated G1/G2; midgut primaries often present with mesenteric nodal masses and liver metastases; carcinoid syndrome is most common with small bowel primaries.",
+        "Pancreatic NET: functional (insulinoma, gastrinoma, glucagonoma, VIPoma) versus nonfunctional; grade G1-G3 well-differentiated; surgical approach depends on location within the pancreas and size.",
+        "High-grade poorly differentiated NEC (any site): aggressive small-cell or large-cell morphology; managed with small-cell-like platinum doublets, not SSA or PRRT pathways.",
+        "Pheochromocytoma and paraganglioma (PPGL): catecholamine-secreting adrenal or extra-adrenal tumors; perioperative alpha-blockade is mandatory and SDHx testing guides surveillance."
+      ],
+      "options": [
+        {
+          "id": "gi_net",
+          "label": "Gastrointestinal Neuroendocrine Tumor (GI-NET: Stomach, Small Bowel, Appendix, Colon, Rectum)",
+          "sets": {
+            "subtype": "gi_net"
+          },
+          "pills": [
+            "GI-NET"
+          ]
+        },
+        {
+          "id": "pnet",
+          "label": "Pancreatic Neuroendocrine Tumor (pNET)",
+          "sets": {
+            "subtype": "pnet"
+          },
+          "pills": [
+            "pNET"
+          ]
+        },
+        {
+          "id": "nec",
+          "label": "High-Grade Poorly Differentiated Neuroendocrine Carcinoma (NEC)",
+          "sets": {
+            "subtype": "nec"
+          },
+          "pills": [
+            "NEC"
+          ]
+        },
+        {
+          "id": "ppgl",
+          "label": "Pheochromocytoma and Paraganglioma (PPGL)",
+          "sets": {
+            "subtype": "ppgl"
+          },
+          "pills": [
+            "PPGL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_gi_net_stage",
+      "linkId": "neuroendocrine_gi_net_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "staging",
+      "name": "GI-NET Stage",
+      "title": "GI-NET: Extent and Pace Stratification",
+      "section": "Staging",
+      "description": "Assign resectability, SSTR status, symptom burden, and pace of disease. Locoregional G1/G2 disease goes to surgery; indolent SSTR-positive metastatic disease is observed or controlled with SSA; progressive or symptomatic disease adds PRRT and everolimus.",
+      "path": "Neuroendocrine and Adrenal Tumors / GI-NET / Stage",
+      "pills": [
+        "GI-NET",
+        "staging"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Localized and resectable locoregional G1/G2 NET: primary with regional nodes and no distant spread, amenable to complete resection with mesenteric lymphadenectomy.",
+        "Metastatic or unresectable SSTR-positive indolent G1 disease: asymptomatic, low hepatic burden, radiographically stable; SSA-naive or controlled.",
+        "Metastatic, progressive, or symptomatic SSTR-positive GI-NET: radiographic progression, carcinoid syndrome despite SSA, or high hepatic burden requiring tumor control."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Localized / Resectable (Locoregional G1/G2 NET)",
+          "sets": {
+            "gi_stage": "resectable"
+          },
+          "pills": [
+            "GI-NET",
+            "resectable"
+          ]
+        },
+        {
+          "id": "indolent",
+          "label": "Metastatic / Unresectable SSTR-Positive Indolent G1 (Asymptomatic, low hepatic burden)",
+          "sets": {
+            "gi_stage": "indolent"
+          },
+          "pills": [
+            "GI-NET",
+            "SSTR-positive",
+            "indolent"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Metastatic / Progressive / Symptomatic SSTR-Positive GI-NET",
+          "sets": {
+            "gi_stage": "advanced"
+          },
+          "pills": [
+            "GI-NET",
+            "SSTR-positive",
+            "progressive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_pnet_stage",
+      "linkId": "neuroendocrine_pnet_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "staging",
+      "name": "pNET Stage",
+      "title": "Pancreatic NET: Resectability Stratification",
+      "section": "Staging",
+      "description": "Assign resectability of the pancreatic primary. Localized disease goes to pancreas surgery; advanced or metastatic well-differentiated G1-G3 disease follows the systemic sequence of SSA, everolimus, sunitinib, CAPTEM, and PRRT.",
+      "path": "Neuroendocrine and Adrenal Tumors / pNET / Stage",
+      "pills": [
+        "pNET",
+        "staging"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Localized and resectable pancreatic NET: confined to the pancreas with resectable nodes and no distant metastases; surgical approach depends on head versus body/tail location and functional syndrome.",
+        "Advanced or metastatic pancreatic NET, well-differentiated G1-G3: unresectable locally advanced or distant metastatic disease, including progressive functional tumors requiring both hormone and tumor control."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Localized / Resectable Pancreatic NET",
+          "sets": {
+            "pnet_stage": "resectable"
+          },
+          "pills": [
+            "pNET",
+            "resectable"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Advanced / Metastatic Pancreatic NET (Well-Differentiated G1-G3)",
+          "sets": {
+            "pnet_stage": "advanced"
+          },
+          "pills": [
+            "pNET",
+            "advanced"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_nec_stage",
+      "linkId": "neuroendocrine_nec_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "staging",
+      "name": "NEC Stage",
+      "title": "High-Grade NEC: Extent Stratification",
+      "section": "Staging",
+      "description": "Confirm poorly differentiated high-grade histology, then assign locoregional versus metastatic extent. Locoregional disease is managed with multimodality platinum-based therapy plus surgery or radiation; metastatic disease is managed with systemic platinum doublets.",
+      "path": "Neuroendocrine and Adrenal Tumors / NEC / Stage",
+      "pills": [
+        "NEC",
+        "staging"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Locoregional or resectable high-grade NEC: confined disease with no distant metastases where combined surgery, radiation, and perioperative chemotherapy are feasible.",
+        "Metastatic high-grade NEC: distant spread confirmed on cross-sectional and functional imaging; systemic platinum-etoposide is the backbone with second-line cytotoxic options."
+      ],
+      "options": [
+        {
+          "id": "locoregional",
+          "label": "Locoregional / Resectable High-Grade NEC",
+          "sets": {
+            "nec_stage": "locoregional"
+          },
+          "pills": [
+            "NEC",
+            "locoregional"
+          ]
+        },
+        {
+          "id": "metastatic",
+          "label": "Metastatic High-Grade Neuroendocrine Carcinoma",
+          "sets": {
+            "nec_stage": "metastatic"
+          },
+          "pills": [
+            "NEC",
+            "metastatic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_ppgl_stage",
+      "linkId": "neuroendocrine_ppgl_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "staging",
+      "name": "PPGL Stage",
+      "title": "PPGL: Resectability Stratification",
+      "section": "Staging",
+      "description": "Assign resectability after biochemical confirmation with fractionated metanephrines and anatomic plus functional imaging. Localized disease goes to alpha-blockade then surgery; metastatic or inoperable disease goes to radionuclide therapy or CVD chemotherapy.",
+      "path": "Neuroendocrine and Adrenal Tumors / PPGL / Stage",
+      "pills": [
+        "PPGL",
+        "staging"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Localized and resectable pheochromocytoma or paraganglioma: adrenal-confined or resectable extra-adrenal tumor without distant spread, after adequate preoperative alpha-blockade.",
+        "Metastatic or inoperable PPGL: distant metastases or locally invasive disease not amenable to complete resection; therapy selected by MIBG avidity, SSTR avidity, and pace of progression."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Localized / Resectable Pheochromocytoma or Paraganglioma",
+          "sets": {
+            "ppgl_stage": "resectable"
+          },
+          "pills": [
+            "PPGL",
+            "resectable"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Metastatic / Inoperable PPGL",
+          "sets": {
+            "ppgl_stage": "advanced"
+          },
+          "pills": [
+            "PPGL",
+            "metastatic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_gi_resectable_tx",
+      "linkId": "neuroendocrine_gi_resectable_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "GI-NET Resectable Surgery",
+      "title": "Locoregional GI-NET: Surgical Resection With Mesenteric Lymphadenectomy",
+      "section": "Treatment",
+      "description": "Definitive surgical therapy for localized or resectable locoregional G1/G2 GI-NET with curative intent and nodal clearance.",
+      "path": "Neuroendocrine and Adrenal Tumors / GI-NET / Resectable / Surgery",
+      "pills": [
+        "GI-NET",
+        "resectable",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Surgical resection of the primary tumor with formal mesenteric lymphadenectomy and clearance of the root-of-mesentery nodal basin where involved; obtain negative margins with en bloc resection of adherent structures.",
+        "Small bowel primary: segmental resection with wide mesenteric nodal harvest; palpate the entire small bowel for multifocal primaries at operation.",
+        "Cholecystectomy if considering long-term SSA therapy, to prevent SSA-associated cholelithiasis and cholecystitis during subsequent systemic treatment.",
+        "Appendiceal NET 2 cm or larger, or with mesoappendiceal invasion or high grade: right hemicolectomy with ileocolic lymphadenectomy; rectal NET with adverse features: oncologic low anterior or abdominoperineal resection per size and depth.",
+        "Surveillance after resection: cross-sectional imaging plus chromogranin A and syndrome-specific markers every 6-12 months; SSTR imaging for suspected recurrence.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Surgical resection with mesenteric lymphadenectomy; cholecystectomy if considering long-term SSA.",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_gi_indolent_tx",
+      "linkId": "neuroendocrine_gi_indolent_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "GI-NET Indolent SSA",
+      "title": "Indolent SSTR-Positive Metastatic GI-NET: Surveillance or Somatostatin Analog",
+      "section": "Treatment",
+      "description": "Antiproliferative and antisecretory management of asymptomatic low-burden SSTR-positive metastatic G1 GI-NET with SSA per PROMID and CLARINET.",
+      "path": "Neuroendocrine and Adrenal Tumors / GI-NET / Indolent / SSA",
+      "pills": [
+        "GI-NET",
+        "SSTR-positive",
+        "indolent",
+        "SSA"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a",
+        "c"
+      ],
+      "bullets": [
+        "Active surveillance is acceptable for selected asymptomatic patients with low hepatic burden and radiographically stable disease, with serial imaging and biomarkers every 3-6 months.",
+        "Somatostatin Analog (SSA): Octreotide LAR 30 mg IM every 4 weeks or Lanreotide 120 mg SC every 4 weeks for tumor control and carcinoid symptom control (PROMID and CLARINET trials).",
+        "Monitor bowel function, glycemic control, thyroid function, gallbladder sludge or stones, and vitamin B12 during chronic SSA therapy; supplement pancreatic enzymes for steatorrhea.",
+        "Escalate to the progressive pathway (add Lu-177 dotatate or everolimus) on radiographic progression, worsening carcinoid syndrome, or rising hepatic burden.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Active surveillance or SSA: Octreotide LAR 30 mg IM q4w or Lanreotide 120 mg SC q4w (PROMID/CLARINET).",
+      "protocolRefs": [
+        "gi-net-ssa"
+      ]
+    },
+    {
+      "id": "n_gi_adv_tx",
+      "linkId": "neuroendocrine_gi_adv_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "GI-NET Advanced Systemic",
+      "title": "Progressive or Symptomatic SSTR-Positive GI-NET: SSA Plus PRRT and Everolimus",
+      "section": "Treatment",
+      "description": "Tumor-control therapy for metastatic, progressive, or symptomatic SSTR-positive GI-NET: continued SSA plus peptide receptor radionuclide therapy and everolimus per NETTER-1 and RADIANT-4.",
+      "path": "Neuroendocrine and Adrenal Tumors / GI-NET / Advanced / Systemic",
+      "pills": [
+        "GI-NET",
+        "SSTR-positive",
+        "progressive",
+        "PRRT"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a",
+        "c"
+      ],
+      "bullets": [
+        "Continue SSA (Octreotide LAR 30 mg IM every 4 weeks or Lanreotide 120 mg SC every 4 weeks) for hormonal control alongside tumor-directed therapy.",
+        "Lutetium Lu 177 Dotatate 7.4 GBq IV every 8 weeks for 4 cycles with amino acid renal protection (NETTER-1 trial) for SSTR-avid progressive midgut NET; confirm avidity on DOTATATE PET and monitor CBC, renal function, and hepatic function.",
+        "Everolimus 10 mg PO daily (RADIANT-4 trial) for progressive nonfunctional GI-NET; monitor stomatitis, pneumonitis, hyperglycemia, hyperlipidemia, and immunosuppression.",
+        "Liver-directed therapy (embolization, ablation, or resection) for liver-dominant progression after multidisciplinary review; short-acting octreotide cover for carcinoid crisis risk during procedures.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "SSA continuation plus Lutetium Lu 177 Dotatate 7.4 GBq q8w x 4 (NETTER-1) and Everolimus 10 mg daily (RADIANT-4).",
+      "protocolRefs": [
+        "gi-net-ssa",
+        "gi-net-lu177-dotatate",
+        "gi-net-everolimus"
+      ]
+    },
+    {
+      "id": "n_pnet_resectable_tx",
+      "linkId": "neuroendocrine_pnet_resectable_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "pNET Resectable Surgery",
+      "title": "Localized Resectable pNET: Pancreatic Resection",
+      "section": "Treatment",
+      "description": "Definitive surgical therapy for localized resectable pancreatic NET selected by tumor location, size, and functional syndrome.",
+      "path": "Neuroendocrine and Adrenal Tumors / pNET / Resectable / Surgery",
+      "pills": [
+        "pNET",
+        "resectable",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Pancreaticoduodenectomy (Whipple procedure) for head or uncinate tumors with regional lymphadenectomy; pylorus-preserving technique where oncologically appropriate.",
+        "Distal pancreatectomy with splenectomy for body or tail tumors; spleen-preserving approach only when nodal clearance is not compromised.",
+        "Enucleation for small localized insulinomas distant from the main pancreatic duct after localization with endoscopic ultrasound and DOTATATE imaging.",
+        "Perioperative control of functional syndromes (acid suppression for gastrinoma, glucose management for insulinoma, octreotide for VIPoma or glucagonoma) with endocrinology input.",
+        "Surveillance after resection: cross-sectional imaging plus chromogranin A and syndrome-specific hormones every 6-12 months; SSTR imaging for suspected recurrence.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Pancreaticoduodenectomy (Whipple) or Distal Pancreatectomy with splenectomy; enucleation for small insulinomas.",
+      "protocolRefs": [
+        "gi-net-ssa",
+        "gi-net-lu177-dotatate"
+      ]
+    },
+    {
+      "id": "n_pnet_adv_tx",
+      "linkId": "neuroendocrine_pnet_adv_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "pNET Advanced Systemic",
+      "title": "Advanced or Metastatic pNET: SSA, Everolimus, Sunitinib, CAPTEM, and PRRT",
+      "section": "Treatment",
+      "description": "Sequenced systemic therapy for advanced or metastatic well-differentiated G1-G3 pancreatic NET: SSA backbone plus everolimus (RADIANT-3), sunitinib, CAPTEM, and Lu-177 dotatate PRRT.",
+      "path": "Neuroendocrine and Adrenal Tumors / pNET / Advanced / Systemic",
+      "pills": [
+        "pNET",
+        "advanced",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a",
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "SSA backbone: Octreotide LAR 30 mg IM every 4 weeks or Lanreotide 120 mg SC every 4 weeks for SSTR-positive disease and hormonal symptom control.",
+        "Everolimus 10 mg PO daily (RADIANT-3 trial) for progressive pancreatic NET; monitor stomatitis, pneumonitis, metabolic effects, and infection risk.",
+        "Sunitinib 37.5 mg PO daily for progressive well-differentiated pancreatic NET; monitor hypertension, hand-foot syndrome, thyroid function, cardiac function, and bleeding risk.",
+        "Capecitabine plus Temozolomide (CAPTEM) for higher-burden or more rapidly progressive disease, particularly Ki-67 in the upper G2 to G3 range; monitor myelosuppression and hepatic function.",
+        "PRRT with Lu-177 Dotatate 7.4 GBq every 8 weeks for 4 cycles with amino acid renal protection for SSTR-avid progressive disease after DOTATATE confirmation.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "SSA plus Everolimus 10 mg daily (RADIANT-3), Sunitinib 37.5 mg daily, CAPTEM, and Lu-177 Dotatate PRRT sequenced by burden and pace.",
+      "protocolRefs": [
+        "gi-net-ssa",
+        "gi-net-everolimus",
+        "gi-net-captem",
+        "gi-net-lu177-dotatate"
+      ]
+    },
+    {
+      "id": "n_nec_locoregional_tx",
+      "linkId": "neuroendocrine_nec_locoregional_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "NEC Locoregional Multimodality",
+      "title": "Locoregional High-Grade NEC: Multimodality Platinum Therapy Plus Surgery or Radiation",
+      "section": "Treatment",
+      "description": "Curative-intent multimodality therapy for locoregional resectable high-grade poorly differentiated NEC combining platinum-etoposide with resection or chemoradiation.",
+      "path": "Neuroendocrine and Adrenal Tumors / NEC / Locoregional / Multimodality",
+      "pills": [
+        "NEC",
+        "locoregional",
+        "multimodality"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "e"
+      ],
+      "bullets": [
+        "Neoadjuvant or adjuvant platinum plus etoposide (cisplatin 75-100 mg/m2 or carboplatin AUC 5-6 day 1 plus etoposide 100 mg/m2 days 1-3 every 21 days) around surgical resection for resectable disease.",
+        "Concurrent chemoradiation with platinum-etoposide as definitive therapy where resection is not feasible or margins would be positive, particularly for head/neck, esophageal, or anorectal primaries.",
+        "Surgical resection with oncologic lymphadenectomy after response assessment in converted or borderline disease; restage with cross-sectional imaging before operation.",
+        "Prophylactic growth factor support and antiemetic prophylaxis per emetogenicity; monitor renal function, hearing, cytopenias, and performance status through combined therapy.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Multimodality therapy: chemoradiation or neoadjuvant/adjuvant Platinum plus Etoposide plus surgical resection.",
+      "protocolRefs": [
+        "gi-net-ssa",
+        "gi-net-lu177-dotatate"
+      ]
+    },
+    {
+      "id": "n_nec_metastatic_tx",
+      "linkId": "neuroendocrine_nec_metastatic_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "NEC Metastatic Systemic",
+      "title": "Metastatic High-Grade NEC: Platinum-Etoposide Then FOLFOX or FOLFIRI",
+      "section": "Treatment",
+      "description": "Palliative systemic therapy for metastatic high-grade poorly differentiated NEC: first-line platinum-etoposide, then FOLFOX, FOLFIRI, or irinotecan plus temozolomide.",
+      "path": "Neuroendocrine and Adrenal Tumors / NEC / Metastatic / Systemic",
+      "pills": [
+        "NEC",
+        "metastatic",
+        "chemotherapy"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "First-line: Cisplatin 75-100 mg/m2 day 1 or Carboplatin AUC 5-6 day 1 plus Etoposide 100 mg/m2 days 1-3 every 21 days; assess response every 2-3 cycles with cross-sectional imaging.",
+        "Second-line: FOLFOX (fluorouracil, leucovorin, oxaliplatin) or FOLFIRI (fluorouracil, leucovorin, irinotecan) or Irinotecan plus Temozolomide on progression or platinum intolerance.",
+        "Palliate symptomatic sites in parallel: consider radiation for painful bone lesions, brain metastases, or obstructing primaries while effective systemic therapy continues.",
+        "Prioritize clinical trial enrollment at every line, including immunotherapy and DLL3-directed studies where available.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "1L Cisplatin or Carboplatin plus Etoposide q21d; 2L FOLFOX or FOLFIRI or Irinotecan plus Temozolomide.",
+      "protocolRefs": [
+        "gi-net-ssa",
+        "gi-net-lu177-dotatate"
+      ]
+    },
+    {
+      "id": "n_ppgl_resectable_tx",
+      "linkId": "neuroendocrine_ppgl_resectable_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "PPGL Resectable Surgery",
+      "title": "Localized PPGL: Alpha-Blockade Then Adrenalectomy or Resection",
+      "section": "Treatment",
+      "description": "Definitive surgical therapy for localized pheochromocytoma or paraganglioma after mandatory preoperative alpha-adrenergic blockade.",
+      "path": "Neuroendocrine and Adrenal Tumors / PPGL / Resectable / Surgery",
+      "pills": [
+        "PPGL",
+        "resectable",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "Preoperative alpha-adrenergic blockade: phenoxybenzamine 10 mg BID titrated for 10-14 days to orthostatic blood pressure control and nasal stuffiness; add beta-blockade only after adequate alpha-blockade for reflex tachycardia.",
+        "Volume expansion with salt loading and hydration in the days before surgery to counteract chronic vasoconstriction and prevent post-resection hypotension.",
+        "Laparoscopic adrenalectomy for adrenal pheochromocytoma; organ-sparing cortical-sparing approach for bilateral or hereditary disease; complete resection with vascular control for paraganglioma.",
+        "Intraoperative arterial pressure monitoring with anesthesia prepared for catecholamine surges during tumor manipulation and hypotension after venous ligation.",
+        "Postoperative metanephrine surveillance plus SDHx-directed imaging schedule; lifelong follow-up for recurrence, especially in paraganglioma and SDHB carriers.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Preoperative alpha-adrenergic blockade (phenoxybenzamine 10 mg BID for 10-14 days) then beta-blockade; laparoscopic adrenalectomy or resection.",
+      "protocolRefs": [
+        "gi-net-ssa",
+        "gi-net-lu177-dotatate"
+      ]
+    },
+    {
+      "id": "n_ppgl_adv_tx",
+      "linkId": "neuroendocrine_ppgl_adv_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "PPGL Advanced Systemic",
+      "title": "Metastatic or Inoperable PPGL: MIBG, Lu-177 Dotatate, or CVD",
+      "section": "Treatment",
+      "description": "Systemic and radionuclide therapy for metastatic or inoperable PPGL selected by MIBG avidity, SSTR avidity, and pace of progression.",
+      "path": "Neuroendocrine and Adrenal Tumors / PPGL / Advanced / Systemic",
+      "pills": [
+        "PPGL",
+        "metastatic",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "MIBG I-131 iobenguane for MIBG-avid disease confirmed on diagnostic MIBG scintigraphy; monitor myelosuppression, thyroid blockade compliance, hypertension, and renal function.",
+        "Lu-177 dotatate for SSTR-avid disease confirmed on DOTATATE PET, particularly MIBG-negative or rapidly accessible lesions; monitor CBC and renal function with amino acid protection.",
+        "CVD regimen (Cyclophosphamide, Vincristine, Dacarbazine) for progressive, high-burden, or radionuclide-ineligible disease; monitor neuropathy, myelosuppression, and bladder toxicity.",
+        "Continue alpha-blockade for catecholamine excess throughout systemic therapy; control hypertension before each radionuclide or cytotoxic cycle.",
+        "Prioritize clinical trial enrollment, including HIF-2 alpha and tyrosine kinase inhibitor studies for cluster 1 (SDHx/VHL) disease.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "MIBG I-131 iobenguane if MIBG-avid, or Lu-177 dotatate if SSTR-avid, or CVD (Cyclophosphamide, Vincristine, Dacarbazine) for progressive disease.",
+      "protocolRefs": [
+        "gi-net-ssa",
+        "gi-net-lu177-dotatate"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_wk_subtype",
+      "from": "n_workup",
+      "to": "n_subtype",
+      "fromNodeId": "n_workup",
+      "toNodeId": "n_subtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ],
+      "triggerOptionId": "continue",
+      "template": "staging"
+    },
+    {
+      "id": "l_subtype_gi",
+      "from": "n_subtype",
+      "to": "n_gi_net_stage",
+      "fromNodeId": "n_subtype",
+      "toNodeId": "n_gi_net_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "gi_net"
+      ],
+      "triggerOptionId": "gi_net",
+      "template": "staging"
+    },
+    {
+      "id": "l_subtype_pnet",
+      "from": "n_subtype",
+      "to": "n_pnet_stage",
+      "fromNodeId": "n_subtype",
+      "toNodeId": "n_pnet_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pnet"
+      ],
+      "triggerOptionId": "pnet",
+      "template": "staging"
+    },
+    {
+      "id": "l_subtype_nec",
+      "from": "n_subtype",
+      "to": "n_nec_stage",
+      "fromNodeId": "n_subtype",
+      "toNodeId": "n_nec_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "nec"
+      ],
+      "triggerOptionId": "nec",
+      "template": "staging"
+    },
+    {
+      "id": "l_subtype_ppgl",
+      "from": "n_subtype",
+      "to": "n_ppgl_stage",
+      "fromNodeId": "n_subtype",
+      "toNodeId": "n_ppgl_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "ppgl"
+      ],
+      "triggerOptionId": "ppgl",
+      "template": "staging"
+    },
+    {
+      "id": "l_gi_resectable",
+      "from": "n_gi_net_stage",
+      "to": "n_gi_resectable_tx",
+      "fromNodeId": "n_gi_net_stage",
+      "toNodeId": "n_gi_resectable_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "resectable"
+      ],
+      "triggerOptionId": "resectable",
+      "template": "treatment"
+    },
+    {
+      "id": "l_gi_indolent",
+      "from": "n_gi_net_stage",
+      "to": "n_gi_indolent_tx",
+      "fromNodeId": "n_gi_net_stage",
+      "toNodeId": "n_gi_indolent_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "indolent"
+      ],
+      "triggerOptionId": "indolent",
+      "template": "treatment"
+    },
+    {
+      "id": "l_gi_advanced",
+      "from": "n_gi_net_stage",
+      "to": "n_gi_adv_tx",
+      "fromNodeId": "n_gi_net_stage",
+      "toNodeId": "n_gi_adv_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "advanced"
+      ],
+      "triggerOptionId": "advanced",
+      "template": "treatment"
+    },
+    {
+      "id": "l_pnet_resectable",
+      "from": "n_pnet_stage",
+      "to": "n_pnet_resectable_tx",
+      "fromNodeId": "n_pnet_stage",
+      "toNodeId": "n_pnet_resectable_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "resectable"
+      ],
+      "triggerOptionId": "resectable",
+      "template": "treatment"
+    },
+    {
+      "id": "l_pnet_advanced",
+      "from": "n_pnet_stage",
+      "to": "n_pnet_adv_tx",
+      "fromNodeId": "n_pnet_stage",
+      "toNodeId": "n_pnet_adv_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "advanced"
+      ],
+      "triggerOptionId": "advanced",
+      "template": "treatment"
+    },
+    {
+      "id": "l_nec_locoregional",
+      "from": "n_nec_stage",
+      "to": "n_nec_locoregional_tx",
+      "fromNodeId": "n_nec_stage",
+      "toNodeId": "n_nec_locoregional_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "locoregional"
+      ],
+      "triggerOptionId": "locoregional",
+      "template": "treatment"
+    },
+    {
+      "id": "l_nec_metastatic",
+      "from": "n_nec_stage",
+      "to": "n_nec_metastatic_tx",
+      "fromNodeId": "n_nec_stage",
+      "toNodeId": "n_nec_metastatic_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "metastatic"
+      ],
+      "triggerOptionId": "metastatic",
+      "template": "treatment"
+    },
+    {
+      "id": "l_ppgl_resectable",
+      "from": "n_ppgl_stage",
+      "to": "n_ppgl_resectable_tx",
+      "fromNodeId": "n_ppgl_stage",
+      "toNodeId": "n_ppgl_resectable_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "resectable"
+      ],
+      "triggerOptionId": "resectable",
+      "template": "treatment"
+    },
+    {
+      "id": "l_ppgl_advanced",
+      "from": "n_ppgl_stage",
+      "to": "n_ppgl_adv_tx",
+      "fromNodeId": "n_ppgl_stage",
+      "toNodeId": "n_ppgl_adv_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "advanced"
+      ],
+      "triggerOptionId": "advanced",
+      "template": "treatment"
+    }
+  ],
+  "protocolRefs": [
+    "gi-net-captem",
+    "gi-net-everolimus",
+    "gi-net-lu177-dotatate",
+    "gi-net-ssa"
+  ]
+}

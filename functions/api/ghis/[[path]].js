@@ -24,7 +24,6 @@
 
 import { identify } from '../../_fbauth.js';
 import { getCred } from '../../_watch.js';
-import { requirePro, needsProBody } from '../../_entitlement.js';
 
 const GHIS = 'https://ghis.gitam.edu';
 const SSO  = 'https://gimsrlogin.gitam.edu';
@@ -1065,9 +1064,9 @@ export async function onRequest(context) {
 
     // ---- login ----
     if (seg === 'login' && request.method === 'POST') {
-      // Ward Sync is a Pro feature (the launch promo keeps this open for everyone until 15 Sep 2026).
-      const _pg = await requirePro(env, request);
-      if (!_pg.ok) return json(needsProBody(_pg, { feature: 'ward-sync' }), 402);
+      // NO PRO GATE (owner decision O1, 2026-09-14): Ward Sync is the doctor's hospital workplace, and the
+      // hospital's own credentials checked below are the entitlement. Hospital staff never meet the
+      // personal Pro paywall inside their hospital workplace, before or after the launch promo ends.
       const body = await request.json().catch(() => ({}));
       if (!body.userId || !body.password) return json({ error: 'missing_credentials' }, 400);
       let sess;

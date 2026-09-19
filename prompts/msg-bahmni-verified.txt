@@ -1,0 +1,27 @@
+docs: correct the Bahmni audit against actual cloned source (87 tool calls, 14 repos)
+
+Replaces the narrative-knowledge version of the Bahmni section in OPENMRS_BAHMNI_AUDIT.md with a
+fully source-verified one: 160 repos enumerated via the GitHub API, 14 cloned and read, every
+claim carries a file path.
+
+Confirms almost every earlier judgment call, sharper: pharmacy dispensing and inventory both live
+in a separate Odoo install, not any OpenMRS module (a repo-wide search for "dispens" in
+bahmni-core turns up nothing but a unit field); billing is 100% delegated to Odoo with zero Java
+billing code anywhere; radiology has no RIS at all, just a hyperlink-builder to an external PACS
+viewer. All three make WardSynQ's own (post-fix) domain logic for those same problems genuinely
+more built than Bahmni's actual answer, which in each case is "integrate a different system."
+
+One real correction to the licensing story: confirmed, per actual LICENSE file (not GitHub's
+license-detection API, which gets several of these wrong), that bahmni-core and bedmanagement -
+exactly the backend pieces most worth reusing headlessly - are AGPL-3.0. The frontend pieces are
+the more permissive MPL-2.0. This inverts the technical instinct exactly backwards and is now the
+central fact driving the "reuse the idea, not the code" recommendation.
+
+One new concrete idea worth adopting, found in this pass: BahmniEncounterTransaction, a single
+composite write per consultation instead of several independent API calls - added to
+REUSE_VS_REBUILD.md as a native pattern worth copying, since this session's own bug hunt found the
+exact class of race condition (the shared error-slot bug, ward.js) that a composite write would
+have prevented.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

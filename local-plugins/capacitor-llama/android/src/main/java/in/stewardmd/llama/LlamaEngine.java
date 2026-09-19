@@ -80,6 +80,12 @@ public final class LlamaEngine {
      */
     public String generate(String system, String user, int nPredict, float temp, int seed, LlamaNative.TokenSink sink)
             throws LlamaException {
+        return generate(system, user, nPredict, temp, seed, false, sink);
+    }
+
+    public String generate(String system, String user, int nPredict, float temp, int seed,
+                            boolean prefillEmptyThink, LlamaNative.TokenSink sink)
+            throws LlamaException {
         long m, c;
         synchronized (lock) {
             if (model == 0 || ctx == 0) throw new LlamaException(LlamaErr.MODEL_MISSING, "model not loaded");
@@ -93,6 +99,12 @@ public final class LlamaEngine {
                 // No template in the GGUF — send the plain turn rather than inventing markers.
                 prompt = ((system == null || system.isEmpty()) ? "" : system + "\n\n") + (user == null ? "" : user);
             }
+            /* Close the thinking block from the ASSISTANT side. Mirrors LlamaEngine.swift - see its
+             * comment for the full story: appending the empty think tag to the QUESTION text (the
+             * old maik-local.js approach) lands inside the USER turn once a template is applied,
+             * fixing nothing. Only appending it HERE, after the template has opened the assistant
+             * turn, actually pre-empts the model's own thinking. */
+            if (prefillEmptyThink) prompt = prompt + "<think>\n\n</think>\n\n";
             String out = LlamaNative.generate(c, m, prompt,
                     nPredict > 0 ? nPredict : DEFAULT_N_PREDICT, temp, seed, sink);
             if (out == null) throw new LlamaException(LlamaErr.GENERATION_FAILURE, "generation returned null");

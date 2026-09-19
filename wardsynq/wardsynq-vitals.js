@@ -1,0 +1,120 @@
+/* wardsynq/wardsynq-vitals.js — turning a pile of observations into the current value of a parameter.
+ *
+ * Both scoring charts need the same thing before they can score anything: the latest trustworthy
+ * value for each parameter. That sounds trivial and is where two real hazards live, so it is stated
+ * once here rather than twice, slightly differently, in two files.
+ *
+ *   1. ARTIFACT MUST NEVER REACH A SCORE. `scoreable()` is the IoMT filter's supported entry point
+ *      and it runs here, at the consumer, where forgetting it would be invisible. A detached lead
+ *      reading a pulse of 38 would otherwise call an emergency on a well patient, and the mirror
+ *      failure, a reassuring artefact, is worse.
+ *   2. A STALE OBSERVATION DOES NOT DESCRIBE A PATIENT NOW. A chart built from a six-hour-old blood
+ *      pressure produces a current-looking number about a patient who has since changed. Out-of-
+ *      window readings are REJECTED with the reason rather than quietly used, and the parameter is
+ *      then simply missing, which each chart handles in its own way.
+ *
+ * This file was extracted when the obstetric chart was added: NEWS2 gathered properly and MEOWS took
+ * a plain values object, so a MEOWS could be computed over stale or artefactual data with nothing to
+ * stop it. Two charts with two different ideas of what counts as a current observation is the same
+ * class of defect as two notification paths with two definitions of delivery.
+ *
+ * node --test test/wardsynq-deterioration.test.mjs
+ */
+
+import { scoreable } from "./wardsynq-iomt.js";
+
+/** How old a vital sign may be and still describe the patient now. A local policy, stated once. */
+const FRESHNESS_MS = 4 * 60 * 60 * 1000;
+
+/**
+ * Reduces observations to the latest trustworthy value for each named parameter.
+ *
+ * @param {object[]} observations
+ * @param {{codeMap: Record<string,string>, now?: string, freshnessMs?: number}} opts
+ *   `codeMap` maps an observation code (LOINC, or a bare parameter name) to a parameter key.
+ * @returns {{values: object, sources: object, rejected: {id, param, reason}[]}}
+ */
+function gatherVitals(observations, { codeMap, now, freshnessMs = FRESHNESS_MS } = {}) {
+  const nowMs = Date.parse(now || new Date().toISOString());
+  const values = {};
+  /* The unit each value was RECORDED in. It used to be discarded here, and a scorer that assumes
+   * one unit then reads a number charted in another - see scoreTemperature - produces a confident
+   * wrong answer rather than an obviously missing one. */
+  const units = {};
+  const sources = {};
+  const rejected = [];
+
+  for (const o of scoreable(observations)) {
+    if (!o || !o.code) continue;
+    const param = codeMap[o.code] || (Object.values(codeMap).includes(o.code) ? o.code : null);
+    if (!param) continue;
+
+    const at = Date.parse(o.effectiveAt || (o.meta && (o.meta.effectiveAt || o.meta.recordedAt)) || "");
+    if (!Number.isFinite(at)) {
+      rejected.push({ id: o.id, param, reason: "no effective time, so its age cannot be established" });
+      continue;
+    }
+    // A future-dated observation is refused before staleness is even considered. It arises from
+    // device clock skew or a feed with a timezone bug, and it is more dangerous than a stale one
+    // because it wins: "latest reading" logic ranks it above the correct current value, so the
+    // score is computed from a number describing a moment that has not happened. Found by an
+    // end-to-end scenario, and it is the same property wardsynq-simulation.js asserts as an
+    // invariant while this gatherer was not enforcing it.
+    if (at > nowMs) {
+      rejected.push({
+        id: o.id, param,
+        reason: `effective time is ${Math.round((at - nowMs) / 60000)} minutes in the future, so it cannot describe the patient now and must not outrank a current reading`,
+      });
+      continue;
+    }
+    if (nowMs - at > freshnessMs) {
+      rejected.push({
+        id: o.id, param,
+        reason: `recorded ${Math.round((nowMs - at) / 60000)} minutes ago, beyond the ${Math.round(freshnessMs / 60000)} minute freshness window`,
+      });
+      continue;
+    }
+    if (sources[param] && sources[param].at >= at) continue; // an older reading never replaces a newer one
+    values[param] = o.value;
+    /* THE UNIT TRAVELS WITH THE VALUE. It was dropped here, so a temperature charted in Fahrenheit
+     * reached NEWS2's Celsius bands as a bare number: 98.6 scored 2 ("above 39"), and so did a
+     * genuinely febrile 102 and a hypothermic 94. The temperature subscore was noise on every
+     * F-charted patient. Nothing here converts - see scoreTemperature, which refuses instead. */
+    units[param] = o.unit || null;
+    sources[param] = { id: o.id, at, atIso: new Date(at).toISOString(), code: o.code, unit: o.unit || null };
+  }
+  return { values, units, sources, rejected };
+}
+
+/**
+ * PURE. A recorded body weight in kilograms, or null when the unit is not one we can read.
+ *
+ * WHY THIS CONVERTS WHEN THE REST OF WARDSYNQ REFUSES TO. The rule elsewhere in this codebase is
+ * that a value in an unexpected unit is reported `uncomparable` rather than converted, and that rule
+ * is right for the cases it governs: a lab result in mg/dL against a reference range in mmol/L needs
+ * the analyte's molar mass, so "converting" means silently choosing a constant that depends on
+ * something the record may not even state. A temperature is refused for a related reason - see
+ * scoreTemperature in wardsynq-deterioration.js - because the safe fallback there is an INCOMPLETE
+ * score, which that chart already handles honestly.
+ *
+ * Body mass is not that. Pounds to kilograms is one exact constant, defined by international
+ * agreement, that depends on nothing about the patient. And the safe fallback is not available here:
+ * refusing a US hospital's weight would mean weight-based dosing simply never works there, which is
+ * worse than the problem it avoids.
+ *
+ * So: ONE conversion, in ONE place, exact, tested, and refusing anything it does not recognise
+ * rather than guessing. Every reader that needs kilograms comes through here instead of trusting a
+ * bare number, which is what let a pounds value be read as kilograms in the first place.
+ */
+const LB_TO_KG = 0.45359237;   // exact, by definition of the international avoirdupois pound
+function weightInKg(value, unit) {
+  if (typeof value !== "number" || !Number.isFinite(value)) return null;
+  const u = String(unit == null ? "" : unit).trim().toLowerCase();
+  // No unit recorded is kilograms: every weight written before units travelled has none, and they
+  // were all kilograms because that is the only unit the recorder could produce.
+  if (u === "" || u === "kg") return value;
+  if (u === "[lb_av]" || u === "lb" || u === "lbs") return value * LB_TO_KG;
+  return null;
+}
+
+export { FRESHNESS_MS, gatherVitals, weightInKg, LB_TO_KG };

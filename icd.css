@@ -1,0 +1,43 @@
+/* StewardMD — ICD Search (window.SMD_ICD). Full-screen overlay, same shape as govschemes.css
+ * (.gs-*) but its own class prefix (.icd-*). Uses the app's shared CSS variables
+ * (--ink/--slate/--line/--paper/--panel/--teal/--amber/--sans/--mono), so it inherits light/dark
+ * + appearance themes with no work here. */
+.icd-overlay{position:fixed;inset:0;z-index:882;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}
+.icd-overlay.on{display:flex;animation:icdIn .22s ease}
+@keyframes icdIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+body.icd-lock{overflow:hidden}
+
+.icd-top{position:sticky;top:0;display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e5e5e0);z-index:3}
+.icd-back{background:transparent;border:1px solid var(--teal,#0a9396);border-radius:9px;height:34px;padding:0 12px;font:600 13px var(--sans,system-ui);color:var(--teal,#0a9396);cursor:pointer;white-space:nowrap}
+.icd-title{flex:1;text-align:center;font:800 16px var(--sans,system-ui);color:var(--ink,#1a1a1a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icd-top-sp{width:64px;flex:0 0 auto}
+
+.icd-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:860px;margin:0 auto;width:100%;box-sizing:border-box;padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+.icd-ico{width:16px;height:16px;flex:0 0 auto;vertical-align:-3px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+
+.icd-searchbar{position:relative;margin-bottom:10px}
+.icd-search{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 14px 11px 40px;font:500 14px var(--sans,system-ui);background:var(--panel,#fff);color:var(--ink,#1a1a1a)}
+.icd-search:focus{outline:none;border-color:var(--teal,#0a9396)}
+.icd-search-ic{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--slate-soft,#888);pointer-events:none}
+
+.icd-row2{display:flex;gap:6px;margin-bottom:12px}
+.icd-sys{flex:1;min-height:38px;border:1.5px solid var(--line,#e5e5e0);border-radius:9px;background:var(--panel,#fff);color:var(--slate,#2d4356);font:700 12.5px var(--sans,system-ui);cursor:pointer}
+.icd-sys.on{background:var(--teal,#0a9396);border-color:var(--teal,#0a9396);color:#fff}
+
+.icd-hint,.icd-empty,.icd-err{font:500 13px var(--sans,system-ui);color:var(--slate-soft,#888);padding:22px 10px;text-align:center;line-height:1.5}
+.icd-err{color:var(--red,#ab1c2c)}
+
+.icd-card{display:block;width:100%;text-align:left;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:12px 13px;margin-bottom:9px;cursor:pointer;min-height:44px}
+.icd-card-code{display:flex;align-items:center;gap:8px;font:700 12px var(--mono,monospace);color:var(--slate,#2d4356);margin-bottom:5px}
+.icd-card-sys{font:700 9.5px var(--sans,system-ui);border-radius:6px;padding:2px 6px;background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);font-family:var(--sans,system-ui)}
+.icd-card-name{font:700 14px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.35}
+.icd-card-ch{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#888);margin-top:5px}
+
+.icd-dhead{margin-bottom:12px}
+.icd-dcode{display:flex;align-items:center;gap:8px;font:800 16px var(--mono,monospace);color:var(--slate,#2d4356);margin-bottom:8px}
+.icd-dname{font:800 19px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.3}
+.icd-src{font:500 12.5px var(--sans,system-ui);color:var(--slate,#2d4356);line-height:1.6;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 13px}
+
+/* ---- "Search ICD" trigger button, embedded in another form (OPD/EMR, ICU) ---- */
+.icd-pick-btn{display:inline-flex;align-items:center;gap:6px;min-height:36px;border:1.5px solid var(--teal,#0a9396);border-radius:9px;padding:0 12px;background:transparent;color:var(--teal,#0a9396);font:700 12.5px var(--sans,system-ui);cursor:pointer}
+.icd-pick-btn .icd-ico{width:15px;height:15px}

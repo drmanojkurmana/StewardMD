@@ -1,0 +1,457 @@
+{
+ "upstream": {
+  "repo": "https://github.com/ashemag/human-atlas",
+  "commit": "7a383d3ee2759e3ddf157c704fb8814fd0c50bcb",
+  "dataset": "BodyParts3D 4.0",
+  "licence": "CC BY 4.0",
+  "attribution": "BodyParts3D, \u00a9 The Database Center for Life Science licensed under CC Attribution 4.0 International",
+  "inputs": {
+   "body-0.bin": {
+    "bytes": 4019496,
+    "sha256": "b33b2b5aac20f35fbf6871f916607bf3c4d386321c8c0fdadcca6b5d24e3641e"
+   },
+   "body-1.bin": {
+    "bytes": 4526484,
+    "sha256": "aa077a4675f0d0dd3c9b0af39dc8cf6bcb348c3bf7d283478d4206ce30a5a0de"
+   },
+   "body-2.bin": {
+    "bytes": 4438056,
+    "sha256": "4b3acfc35b91e4427eaca0e3be897d33f144354342ae0e52a2328b582ca8bdbe"
+   },
+   "body-3.bin": {
+    "bytes": 4041436,
+    "sha256": "6febb76b50423331f66802a63bb43f04f99ce08129837015910eed43d0719268"
+   },
+   "body-4.bin": {
+    "bytes": 4020544,
+    "sha256": "0509e6c996fe5b935ace770a5dbf2d83a474330b7e541a844052a080bbf814bb"
+   },
+   "body-5.bin": {
+    "bytes": 4022564,
+    "sha256": "32a967198ffed45839968228898f3d246c67f86fb26892c3ae270be30e2f1149"
+   },
+   "body-6.bin": {
+    "bytes": 4035584,
+    "sha256": "1c98dae807210cc51a4abc806134727c9544155cad0cc328cf2e1ae1f954d3ff"
+   },
+   "body-7.bin": {
+    "bytes": 4006940,
+    "sha256": "06340f48478eb989cec117a558290c0cd54eeead9641b565cbb8aab255b4e56b"
+   },
+   "body-8.bin": {
+    "bytes": 4028452,
+    "sha256": "18beacfdeadc8ad483d692672aae165f4323704cd7a9bfcbebbd703f5e268e25"
+   },
+   "body-9.bin": {
+    "bytes": 4018260,
+    "sha256": "0aa8aa09a379a2d759872659a2ef68fc4510ee37e435c4ebc63ee679722a4547"
+   },
+   "body-10.bin": {
+    "bytes": 4046108,
+    "sha256": "4a959d998acd35cf88518a0f2f8ab99b42d9f69c7ce0d6a814df315eeac807ac"
+   },
+   "body-11.bin": {
+    "bytes": 4037528,
+    "sha256": "e8c1afe7f30fe710ad164ec9cd2287a32881606e7eb590af47d76b3f84405027"
+   },
+   "body-12.bin": {
+    "bytes": 4000292,
+    "sha256": "61a6c8da89bb20df50c575964ac81aa4090eabfc2cb27ad2155aea325f31c6c0"
+   },
+   "body-13.bin": {
+    "bytes": 4004548,
+    "sha256": "4c51b6be85d5b705d2b52b79b9ad1cdae0b65ad03c9402a2f2673c7633fd94f3"
+   },
+   "body-14.bin": {
+    "bytes": 2300452,
+    "sha256": "58604526a0cd9e7dca4d8587cd9a42f9dd03ec6c4ebbc22a9bf017b31246f7e7"
+   },
+   "atlas.json": {
+    "bytes": 1335285,
+    "sha256": "c359f4bcd2cba90b7411d66d5e9fc04dc81294d46cd5c1e8b212c824f2e5bbee"
+   }
+  }
+ },
+ "rejected": [
+  {
+   "id": "FJ2011",
+   "name": "Superior mesenteric artery",
+   "conceptId": "FMA14749",
+   "reason": "exact duplicate of FJ1928 (same name, same bounds)"
+  },
+  {
+   "id": "FJ2013",
+   "name": "Celiac artery",
+   "conceptId": "FMA50737",
+   "reason": "exact duplicate of FJ1846 (same name, same bounds)"
+  },
+  {
+   "id": "FJ2386",
+   "name": "Caudate lobe branch of right hepatic artery",
+   "conceptId": "FMA70447",
+   "reason": "exact duplicate of FJ1916 (same name, same bounds)"
+  },
+  {
+   "id": "FJ2394",
+   "name": "Right lobe branch of right hepatic artery",
+   "conceptId": "FMA71708",
+   "reason": "exact duplicate of FJ1924 (same name, same bounds)"
+  },
+  {
+   "id": "FJ2553",
+   "name": "Tendinous arch of levator ani",
+   "conceptId": "FMA46442",
+   "reason": "exact duplicate of FJ1465 (same name, same bounds)"
+  },
+  {
+   "id": "FJ2769",
+   "name": "Cricoid cartilage",
+   "conceptId": "FMA9615",
+   "reason": "exact duplicate of FJ2440 (same name, same bounds)"
+  },
+  {
+   "id": "FJ3201",
+   "name": "Hyoid bone",
+   "conceptId": "FMA52749",
+   "reason": "exact duplicate of FJ2772 (same name, same bounds)"
+  }
+ ],
+ "system_corrections": [
+  {
+   "id": "FJ1471",
+   "name": "Flexor retinaculum of right wrist",
+   "from": "sensory",
+   "to": "connective"
+  },
+  {
+   "id": "FJ1471M",
+   "name": "Flexor retinaculum of left wrist",
+   "from": "sensory",
+   "to": "connective"
+  },
+  {
+   "id": "FJ1730",
+   "name": "Third ventricle",
+   "from": "cardiac",
+   "to": "nervous"
+  },
+  {
+   "id": "FJ1731",
+   "name": "Fourth ventricle",
+   "from": "cardiac",
+   "to": "nervous"
+  },
+  {
+   "id": "FJ1752",
+   "name": "Interventricular foramen",
+   "from": "cardiac",
+   "to": "nervous"
+  },
+  {
+   "id": "FJ1755",
+   "name": "Choroid plexus of cerebral hemisphere",
+   "from": "sensory",
+   "to": "nervous"
+  },
+  {
+   "id": "FJ1767",
+   "name": "Left lateral ventricle",
+   "from": "cardiac",
+   "to": "nervous"
+  },
+  {
+   "id": "FJ1803",
+   "name": "Choroid plexus of cerebral hemisphere",
+   "from": "sensory",
+   "to": "nervous"
+  },
+  {
+   "id": "FJ1814",
+   "name": "Right lateral ventricle",
+   "from": "cardiac",
+   "to": "nervous"
+  },
+  {
+   "id": "FJ3265",
+   "name": "Left lacrimal bone",
+   "from": "sensory",
+   "to": "skeletal"
+  },
+  {
+   "id": "FJ3371",
+   "name": "Right lacrimal bone",
+   "from": "sensory",
+   "to": "skeletal"
+  }
+ ],
+ "outputs": {
+  "arterial-0.bin.gz": {
+   "bytes": 2030326,
+   "sha256": "9c01a66e69f0590e9e61f6eed454251c75f3d4c15df3961b2e78fbd71665311c"
+  },
+  "arterial-1.bin.gz": {
+   "bytes": 2116323,
+   "sha256": "1a102e8cd3aee1ece5f428cf510df1790c672490d2f54e7590dc3834a44dfc3a"
+  },
+  "arterial-2.bin.gz": {
+   "bytes": 119017,
+   "sha256": "aae842d01c3f95a230fc6508a7a33cd3ff82097baccbf8b1fefbefdd25fe4c7c"
+  },
+  "arterial-8.lo.bin.gz": {
+   "bytes": 2025513,
+   "sha256": "1a66467ab7caa98ae967ec2bde122a3197911dcf7aa37f53401db6e7d9b67e0d"
+  },
+  "arterial-9.lo.bin.gz": {
+   "bytes": 408826,
+   "sha256": "75840c5bbf108a04643109afedf7c93f32bbd3c1215f7d854ed94b7a088a678c"
+  },
+  "cardiac-0.bin.gz": {
+   "bytes": 510161,
+   "sha256": "44d45215266aa6e5be4c949873c90371ecd04c137e0cc7a48bcc671871878701"
+  },
+  "cardiac-6.lo.bin.gz": {
+   "bytes": 301327,
+   "sha256": "5f539f5bb47419e5008640c1ccb7323242f9acaec55e8255bd282eece32dbdd5"
+  },
+  "connective-0.bin.gz": {
+   "bytes": 698198,
+   "sha256": "56c0408cb8862d11b7787af24020fde935cc6083f8650bbd8c73310dbd52f871"
+  },
+  "connective-19.lo.bin.gz": {
+   "bytes": 464752,
+   "sha256": "1a98a3ed0c05530966628c750b7ec81d2a06c1e9fb8497e09d84f12974ca82a4"
+  },
+  "digestive-0.bin.gz": {
+   "bytes": 1367249,
+   "sha256": "a83e79c63ca45ca491c9dd2e12403b937c4638269f114f67fdcab7ebbb440eaa"
+  },
+  "digestive-13.lo.bin.gz": {
+   "bytes": 1087536,
+   "sha256": "1f414bf85a32856f14489a249a1deaac0f77696b9cddc1614bb8c9a94343a4d6"
+  },
+  "endocrine-0.bin.gz": {
+   "bytes": 58816,
+   "sha256": "cd171cb9998cc27f9f8039aee4119bc06032f2b2e72472e36bfef9a6b6f109e8"
+  },
+  "endocrine-16.lo.bin.gz": {
+   "bytes": 35295,
+   "sha256": "568387477836921edf39cbc3e7ecae6293e8e5e2034d23433b5051d43334ddb2"
+  },
+  "index.json": {
+   "bytes": 2066,
+   "sha256": "d1590515e6b9a40d270c63649b7cacb3d4ce7aab3adf81bbaba78adb909e2b56"
+  },
+  "integumentary-0.bin.gz": {
+   "bytes": 862436,
+   "sha256": "e46c5db395ab242a3bd96f0d275620abc6086e4d2d18456524ed4f8b2bd28bde"
+  },
+  "integumentary-18.lo.bin.gz": {
+   "bytes": 478309,
+   "sha256": "ba2a103311a58bffefd635c13a0cd6a65f01eb080c70ae3cd379c6e282ac4e20"
+  },
+  "live-arterial-0.bin.gz": {
+   "bytes": 121294,
+   "sha256": "68e05a455e376bd784b3055725593b52f27bff7fde45d25ad79ab6c31601aa3a"
+  },
+  "live-cardiac-1.bin.gz": {
+   "bytes": 37018,
+   "sha256": "0b45cd3e9ef407137375d841f5bfd38a07930fd3908fcd404c6fa6dc1086452e"
+  },
+  "live-digestive-2.bin.gz": {
+   "bytes": 1818349,
+   "sha256": "beda65b9c32f32f0287f22732fe7510b30bde70dc779b57143943ee53459b0ce"
+  },
+  "live-endocrine-3.bin.gz": {
+   "bytes": 16044,
+   "sha256": "4853a3cc709bca4361c95ae6d05a3d659b8653e47c025048aab27b56480dfaee"
+  },
+  "live-integumentary-4.bin.gz": {
+   "bytes": 450381,
+   "sha256": "930bd2e892ef8fe204a9cde428cb8a588948258dae3c87604a4c64b9f11347c9"
+  },
+  "live-lymphatic-5.bin.gz": {
+   "bytes": 156576,
+   "sha256": "17978fbf3c237b6c1555e5aa548425d0da5c32a4e94f8efa41820da0c0df1a20"
+  },
+  "live-muscular-6.bin.gz": {
+   "bytes": 1551976,
+   "sha256": "0d6e951fac7acbbdabd98f208406824ebc942d50fa1eeed25aa0cb39764d547e"
+  },
+  "live-nervous-7.bin.gz": {
+   "bytes": 68071,
+   "sha256": "c3c10e3b1ce3ef530f2fa48b530e81ccc672b42c7213e387f19a120f14eec4e5"
+  },
+  "live-reproductive-8.bin.gz": {
+   "bytes": 16233,
+   "sha256": "f6ec43a98e0617ab279abb006a6b9932aaed4b6080fd1a98183576dc57c05fcc"
+  },
+  "live-respiratory-9.bin.gz": {
+   "bytes": 490012,
+   "sha256": "9fa68cbc1fc84c200e2239a20064699b3e04eee25155d5e4322c0008f101c953"
+  },
+  "live-skeletal-10.bin.gz": {
+   "bytes": 1571919,
+   "sha256": "632256c9bdde4f57cd4addc17e909146c8ec82a31c2c692fa98641bdb2bedfc3"
+  },
+  "live-urinary-11.bin.gz": {
+   "bytes": 249996,
+   "sha256": "87d0c716a8912415bab52ecb86a094377ce392eb26626353ab1345a3887161b8"
+  },
+  "live-venous-12.bin.gz": {
+   "bytes": 179864,
+   "sha256": "8d8aa83581770556aa00cc5498d0bd24aaab35868d58f3f42801e1ce1280c4b9"
+  },
+  "live.json": {
+   "bytes": 32276,
+   "sha256": "675a2fa76470a8fb0bf074b57d9c50ca7cb1cf84c77396dde359f27e4e558422"
+  },
+  "lod.json": {
+   "bytes": 39451,
+   "sha256": "d1556371ace826065908de16adee5c4af5afba9a5306a8ada59630c996256794"
+  },
+  "lymphatic-0.bin.gz": {
+   "bytes": 36365,
+   "sha256": "5eaa7029c607957d498b32b3372a3801a729f4c0bea448e0b4364f09b3962b95"
+  },
+  "lymphatic-15.lo.bin.gz": {
+   "bytes": 23596,
+   "sha256": "4061e086bd265893d00474b94aa7749445e35565fc8093768f2f2e51bf49291f"
+  },
+  "manifest.json": {
+   "bytes": 759635,
+   "sha256": "2ed70d3ce76d172c3534a4ad954966a4247a7f721ead3995652276a769b9a408"
+  },
+  "muscular-0.bin.gz": {
+   "bytes": 1441698,
+   "sha256": "1abb64b26c279931d21f1ed8b8fdd93dbf678c179c5207ca7f56e448ad94aae6"
+  },
+  "muscular-1.bin.gz": {
+   "bytes": 1680420,
+   "sha256": "aadec5b1e25373e83dd3107f13d5c4186189ada5154bbb2247dbaffad0b33896"
+  },
+  "muscular-2.bin.gz": {
+   "bytes": 1915756,
+   "sha256": "5f5aabff4c9e7936a8777a0c4db17f7ef539f67f7560953b9af59ce678bd62c5"
+  },
+  "muscular-2.lo.bin.gz": {
+   "bytes": 1699856,
+   "sha256": "6915fc8d8982404de6016b140e2b800bd763bdc178db8c34d578d9dd870ae3d8"
+  },
+  "muscular-3.bin.gz": {
+   "bytes": 1751460,
+   "sha256": "796ce65b3bad54fb7d28571c060063c7db224800d67fcf3acf35514d9061dfad"
+  },
+  "muscular-3.lo.bin.gz": {
+   "bytes": 1783198,
+   "sha256": "0511f8ccd66198a070926dbe9fc67e4ce1592019037c3636daa3582c59adbaf9"
+  },
+  "muscular-4.bin.gz": {
+   "bytes": 1902664,
+   "sha256": "a06e571ff1ec89e8735cc92d5553abfac093eb559b61505748fdf4f6341ec0ce"
+  },
+  "muscular-4.lo.bin.gz": {
+   "bytes": 1651828,
+   "sha256": "988375bf2ee88a26d9c0d02bd588baf992c22085b506500e5ec89868777765d7"
+  },
+  "muscular-5.bin.gz": {
+   "bytes": 1487868,
+   "sha256": "68ddcdf0e8817bf1f791cc6c2d56b76189b13cc30693e7983772349f1fdf12bf"
+  },
+  "muscular-5.lo.bin.gz": {
+   "bytes": 1675560,
+   "sha256": "08b5ad24885eaedbcac4044d763723e388a7118af0e61256b8d85fd60528d387"
+  },
+  "nervous-0.bin.gz": {
+   "bytes": 2160135,
+   "sha256": "babe2f7892705b7a705336137c6dfb86b30ac1e8d1c4686ca6e53b74633ddb67"
+  },
+  "nervous-1.bin.gz": {
+   "bytes": 690406,
+   "sha256": "ebe2599be94db6ee0498564182bb43e2b57769e0313d62ac371e01b6e381dbf1"
+  },
+  "nervous-11.lo.bin.gz": {
+   "bytes": 1681123,
+   "sha256": "350a0641e647637e0879f5dc7f823f539bbae19dd90fbbf718cc0374cd902835"
+  },
+  "reproductive-0.bin.gz": {
+   "bytes": 87852,
+   "sha256": "a89e087fbe72c758ec180f08850fbce0da5ce16f57a808f889bd8d14d37b1c43"
+  },
+  "reproductive-17.lo.bin.gz": {
+   "bytes": 70454,
+   "sha256": "88c552d32dda6bd813ea2bde7f5acf3906b84c0e95b29ef893c0aca5a2f9cf54"
+  },
+  "respiratory-0.bin.gz": {
+   "bytes": 1087277,
+   "sha256": "babb69fb09e8e2a37281f9d762ce912a3e0ade587ada8669c511a188c3edb360"
+  },
+  "respiratory-12.lo.bin.gz": {
+   "bytes": 586893,
+   "sha256": "eec200c8427f44793186c62c5e3ac9a75764d9edbd247c7d3a7a8095275fd813"
+  },
+  "sensory-0.bin.gz": {
+   "bytes": 1360448,
+   "sha256": "e62e36568c4e4fd4ecf11ba9bd9ca5ced88f24d4b61f85ff3d8796d0d6d80111"
+  },
+  "sensory-7.lo.bin.gz": {
+   "bytes": 779707,
+   "sha256": "e76cff478b078d074d815e54e4af255f2980ca317545a692d19fd56a1f0530c6"
+  },
+  "skeletal-0.bin.gz": {
+   "bytes": 2017805,
+   "sha256": "4588308ce18f22d40ee3f077ab496f999b3608c63af14cd07f5bc05aeb1b2902"
+  },
+  "skeletal-0.lo.bin.gz": {
+   "bytes": 1937737,
+   "sha256": "3177b3d0e98bb57bdf546b80c9fa8335874532f0f4b6c7b68910f8c3254ae3a2"
+  },
+  "skeletal-1.bin.gz": {
+   "bytes": 2093720,
+   "sha256": "7d7c1e4ace4658a73b1885f5ea22b6c5e419fc1ac3953de8aff1e35f72feb5ec"
+  },
+  "skeletal-1.lo.bin.gz": {
+   "bytes": 912434,
+   "sha256": "a46e381e75e8ef1aa5a83b5c63fc6d35fe02253c670d9a91987e96595a103fa9"
+  },
+  "skeletal-2.bin.gz": {
+   "bytes": 375147,
+   "sha256": "256424fa1ae40df137cf58ea9f6c7a290cf86ca64030216683a516985e4c7c37"
+  },
+  "urinary-0.bin.gz": {
+   "bytes": 66082,
+   "sha256": "639a961aa0b836bfc3a9bb4f28ee4a0599cf25bf46bf763bced095c86e07460b"
+  },
+  "urinary-14.lo.bin.gz": {
+   "bytes": 35989,
+   "sha256": "fd47a284348cfd87670b13cac47c2fec0d12f3f3029408166078cd8abce99fec"
+  },
+  "venous-0.bin.gz": {
+   "bytes": 2168674,
+   "sha256": "a4fb7869b5e55a513ae48809217d141f786a85882bb721084024fd3e7f532327"
+  },
+  "venous-1.bin.gz": {
+   "bytes": 1709689,
+   "sha256": "2d2d7a9f464bdfb96a64e1c58654ca38882792b8b7bab275d5e5d9ac4fcd8725"
+  },
+  "venous-10.lo.bin.gz": {
+   "bytes": 1972832,
+   "sha256": "5a51f732e8d237c2316364b221bb65fa9d353d798e7599b49917dbae95bb781e"
+  }
+ },
+ "stats": {
+  "parts": 2227,
+  "live_parts": 66,
+  "rejected": 7,
+  "triangles": 2952014,
+  "vertices": 1779714,
+  "concepts": 3432,
+  "canonical": 86,
+  "mapped_full": 58,
+  "mapped_partial": 9,
+  "related_only": 6,
+  "container": 6,
+  "unmapped": 7,
+  "gz_bytes": 38523725,
+  "raw_bytes": 77719376
+ }
+}

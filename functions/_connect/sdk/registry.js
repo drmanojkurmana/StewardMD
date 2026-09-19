@@ -16,7 +16,7 @@ export function createRegistry(opts = {}) {
       assertConnector(connector);                          // structural (methods per profile, sccmVersion)
       const d = describe(connector);
       if (strict) assertDescriptor(d);                     // descriptor-level shape
-      if (connector.meta.sccmVersion !== "1.0") throw new Error("connector must declare sccmVersion 1.0");
+      if (!/^1\.\d+$/.test(String(connector.meta.sccmVersion || ""))) throw new Error("connector must declare an sccmVersion of 1.x"); // minors are additive
       if (map.has(d.id)) throw new Error("duplicate connector id: " + d.id);
       map.set(d.id, connector);
       return reg;                                          // chainable on success; any throw above => not added (fail-closed)

@@ -1,0 +1,360 @@
+{
+  "guideline": "penile",
+  "id": "penile",
+  "title": "Penile Cancer",
+  "category": "Urologic Oncology",
+  "version": "2.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "penile_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Penile Cancer. Covers complete clinical algorithm: Diagnostic Workup (penile and inguinofemoral examination, primary lesion biopsy with SCC subtype and grade, depth and corpus invasion imaging, abdominal and pelvic cross-sectional imaging for intermediate/high-risk disease, chest imaging for nodal-positive disease, FNA or core biopsy of suspicious inguinal nodes) -> Stage and Risk Stratification (Tis/Ta/T1a low-risk cN0 vs T1b/T2-T4 high-risk cN0 vs locally advanced cN1-cN3 regional nodal disease vs distant metastatic Stage IV/M1) -> Low-risk organ-preserving excision with inguinal surveillance -> High-risk cN0 penectomy with mandatory invasive inguinal nodal staging (DSNB or modified ILND) -> Regionally advanced neoadjuvant TIP x 4 cycles followed by bilateral ILND plus pelvic LND with adjuvant chemoradiotherapy for multiple nodes or ENE -> Metastatic first-line TIP or 5-FU plus cisplatin, second-line pembrolizumab for MSI-H/dMMR or TMB-H disease, and palliative radiotherapy. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Penile Cancer Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Inguinal nodal status is the strongest predictor of survival in penile SCC. Palpable nodes require ultrasound-guided FNA or core needle biopsy; clinically negative (cN0) intermediate/high-risk disease (T1b or higher, G2-G3, or LVI present) carries occult metastasis risk that mandates invasive staging with DSNB or modified ILND.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Organ-preserving surgery (wide local excision, glansectomy, Mohs micrographic surgery) is preferred for Tis/Ta/T1a low-risk disease with negative margins; topical 5-fluorouracil or imiquimod and laser ablation apply strictly to non-invasive Tis/Ta disease, with surveillance of cN0 inguinal regions.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "TIP neoadjuvant regimen: paclitaxel 175 mg/m2 day 1, ifosfamide 1200 mg/m2 days 1-3 with mesna uroprotection, cisplatin 25 mg/m2 days 1-3 every 21 days for 4 cycles, followed by consolidative bilateral radical inguinofemoral lymphadenectomy and pelvic lymph node dissection in responders.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Adjuvant chemoradiotherapy is indicated after lymphadenectomy for multiple positive inguinal nodes or extranodal extension (ENE); pelvic lymph node dissection is unilateral or bilateral based on inguinal burden and pelvic imaging.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Second-line pembrolizumab 200 mg IV every 3 weeks applies to MSI-H/dMMR or TMB 10 mut/Mb or higher metastatic penile SCC; cemiplimab and retifanlimab are alternative checkpoint options. Palliative radiotherapy addresses bone or symptomatic soft-tissue metastases.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "penile_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Penile Cancer: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before stage and risk stratification. Confirm tissue diagnosis with subtype and grade, assess depth of invasion, stage inguinal nodes with biopsy, and screen for pelvic and distant spread by risk group.",
+      "path": "Penile Cancer / Workup",
+      "pills": [
+        "penile",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete physical examination of penis, shaft, scrotum, perineum, and bilateral inguinofemoral lymph nodes",
+        "Biopsy of primary penile lesion (punch, core, or excisional) establishing histologic subtype (SCC, HPV-related vs non-HPV) and histologic grade",
+        "Evaluation of primary tumor depth and corpus cavernosum/spongiosum invasion (penile MRI or high-resolution ultrasound)",
+        "Cross-sectional abdominal and pelvic CT/MRI to evaluate pelvic and retroperitoneal lymphadenopathy in intermediate/high-risk disease",
+        "Chest CT or radiography for distant metastatic screening in patients with nodal involvement (>=cN1)",
+        "Ultrasound-guided FNA or core needle biopsy of any palpable or suspicious inguinal lymph nodes"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Stage and Risk Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage_risk",
+      "linkId": "penile_stage_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Stage and Risk Stratification",
+      "title": "Penile Cancer: Stage and Risk Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign stage and risk from T category, grade, LVI status, clinical nodal status, and distant spread; the group selects the organ-preserving, nodal-staging, neoadjuvant, or palliative systemic pathway.",
+      "path": "Penile Cancer / Stage and Risk Stratification",
+      "pills": [
+        "penile",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Low-risk non-invasive disease: Tis, Ta, or T1a penile SCC with cN0 nodes, G1 grade, and no lymphovascular invasion (LVI).",
+        "High-risk primary with negative nodes: T1b or T2-T4 penile SCC with cN0 inguinal nodes plus G2-G3 grade or LVI present.",
+        "Locally advanced or regional nodal disease: cN1-cN3 with palpable or biopsy-proven inguinal nodes, with or without pelvic nodal involvement.",
+        "Distant metastatic disease: Stage IV (M1) penile SCC with spread beyond regional nodes."
+      ],
+      "options": [
+        {
+          "id": "early_low",
+          "label": "Tis / Ta / T1a Low-Risk Non-Invasive Penile SCC (cN0, G1, no LVI)",
+          "sets": {
+            "stage": "early_low"
+          },
+          "pills": [
+            "penile",
+            "low-risk"
+          ]
+        },
+        {
+          "id": "highrisk_cn0",
+          "label": "T1b / T2-T4 with Clinically Negative Inguinal Nodes (cN0, G2-G3 or LVI present)",
+          "sets": {
+            "stage": "highrisk_cn0"
+          },
+          "pills": [
+            "penile",
+            "high-risk",
+            "cN0"
+          ]
+        },
+        {
+          "id": "regional",
+          "label": "Locally Advanced / Regional Nodal Disease (cN1-cN3: Palpable/proven inguinal or pelvic nodes)",
+          "sets": {
+            "stage": "regional"
+          },
+          "pills": [
+            "penile",
+            "locally advanced",
+            "cN1-cN3"
+          ]
+        },
+        {
+          "id": "metastatic",
+          "label": "Distant Metastatic Penile SCC (Stage IV / M1)",
+          "sets": {
+            "stage": "metastatic"
+          },
+          "pills": [
+            "penile",
+            "metastatic",
+            "M1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_early_stage_tx",
+      "linkId": "penile_early_stage_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Low-Risk Non-Invasive Treatment",
+      "title": "Tis/Ta/T1a Low-Risk: Organ-Preserving Excision With Inguinal Surveillance",
+      "section": "Treatment",
+      "description": "Organ-sparing local therapy for low-risk non-invasive penile SCC with surveillance of clinically negative inguinal nodes.",
+      "path": "Penile Cancer / Low-Risk Non-Invasive / Treatment",
+      "pills": [
+        "penile",
+        "low-risk",
+        "organ-preserving"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Organ-preserving excision with negative margins: wide local excision, glansectomy, or Mohs micrographic surgery selected by lesion size and location.",
+        "Topical therapy (5-fluorouracil 5% or imiquimod 5% cream) or laser ablation strictly for non-invasive Tis/Ta disease in selected patients.",
+        "Surveillance of clinically negative (cN0) inguinal lymph nodes with physical examination and ultrasound; occult metastasis risk below 15% in this group.",
+        "Re-biopsy for positive margins or recurrence; escalate to partial penectomy and invasive nodal staging on upstaging.",
+        "Surveillance after definitive local therapy: penile and inguinal examination with prompt biopsy of new or changing lesions."
+      ],
+      "regimenSummary": "Organ-Sparing Excision / Glansectomy + Inguinal Surveillance",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_highrisk_cn0_tx",
+      "linkId": "penile_highrisk_cn0_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "High-Risk cN0 Treatment",
+      "title": "T1b/T2-T4 cN0: Penectomy With Invasive Inguinal Nodal Staging",
+      "section": "Treatment",
+      "description": "Definitive primary surgery with mandatory invasive staging of clinically negative inguinal nodes for intermediate/high-risk disease.",
+      "path": "Penile Cancer / High-Risk cN0 / Treatment",
+      "pills": [
+        "penile",
+        "high-risk",
+        "cN0",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Definitive primary surgery: partial or total penectomy or wide excision with negative margins based on extent of invasion.",
+        "Mandatory invasive inguinal nodal staging: dynamic sentinel lymph node biopsy (DSNB) or modified bilateral inguinal lymph node dissection (ILND).",
+        "Superficial plus deep ILND with or without ipsilateral pelvic lymph node dissection if positive nodes are identified on staging.",
+        "Adjuvant therapy per pathology: chemoradiotherapy for multiple positive nodes or extranodal extension (ENE).",
+        "Surveillance after surgery: penile, inguinal, and pelvic examination with cross-sectional imaging for symptoms or high-risk pathology."
+      ],
+      "regimenSummary": "Partial/Total Penectomy + Bilateral Inguinal Nodal Staging (DSNB or ILND)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_regionally_advanced_tx",
+      "linkId": "penile_regionally_advanced_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Regionally Advanced Treatment",
+      "title": "cN1-cN3: Neoadjuvant TIP Followed by ILND and Pelvic LND",
+      "section": "Treatment",
+      "description": "Neoadjuvant TIP chemotherapy followed by consolidative bilateral inguinofemoral lymphadenectomy and pelvic lymph node dissection for regional nodal disease.",
+      "path": "Penile Cancer / Regionally Advanced / Treatment",
+      "pills": [
+        "penile",
+        "locally advanced",
+        "cN1-cN3",
+        "neoadjuvant"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "Neoadjuvant chemotherapy with 4 cycles of TIP (Paclitaxel 175 mg/m2 d1, Ifosfamide 1200 mg/m2 d1-3 with mesna uroprotection, Cisplatin 25 mg/m2 d1-3 q21d).",
+        "Restage inguinal and pelvic nodes after neoadjuvant therapy; proceed to bilateral radical inguinofemoral lymphadenectomy and unilateral or bilateral pelvic lymph node dissection for responders.",
+        "Adjuvant chemoradiotherapy for multiple positive nodes or extranodal extension (ENE) after lymphadenectomy.",
+        "Multidisciplinary coordination across urologic oncology, medical oncology, and radiation oncology with renal, audiologic, and neuropathy monitoring on TIP.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Neoadjuvant TIP (Paclitaxel/Ifosfamide/Cisplatin) x 4 cycles -> Bilateral ILND + Pelvic LND",
+      "protocolRefs": [
+        "gu-penile-tip"
+      ]
+    },
+    {
+      "id": "n_metastatic_tx",
+      "linkId": "penile_metastatic_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Metastatic Treatment",
+      "title": "Stage IV/M1: Systemic Chemotherapy Then Immunotherapy With Palliative RT",
+      "section": "Treatment",
+      "description": "First-line TIP chemotherapy with second-line checkpoint immunotherapy for biomarker-selected disease and palliative radiotherapy for symptomatic metastases.",
+      "path": "Penile Cancer / Metastatic / Systemic Therapy",
+      "pills": [
+        "penile",
+        "metastatic",
+        "M1",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "e"
+      ],
+      "bullets": [
+        "First-line systemic chemotherapy with TIP (Paclitaxel + Ifosfamide + Cisplatin) or 5-FU + Cisplatin selected by fitness, renal function, and prior exposure.",
+        "Second-line immunotherapy with Pembrolizumab (200 mg IV q3w for MSI-H/dMMR or TMB >= 10 mut/Mb) or Cemiplimab/Retifanlimab with immune-related adverse event monitoring.",
+        "Palliative radiotherapy for bone or symptomatic soft-tissue metastases for pain control and local symptom relief.",
+        "Molecular profiling for MSI/MMR and TMB at diagnosis of metastatic disease to establish immunotherapy eligibility; offer clinical trial enrollment at every line.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "1L TIP Chemotherapy -> 2L Pembrolizumab (MSI-H/TMB-H) / Palliative RT",
+      "protocolRefs": [
+        "gu-penile-tip"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_stage",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_stage_risk",
+      "toNodeId": "n_stage_risk",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_early",
+      "from": "n_stage_risk",
+      "fromNodeId": "n_stage_risk",
+      "to": "n_early_stage_tx",
+      "toNodeId": "n_early_stage_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "early_low",
+      "fromOptions": [
+        "early_low"
+      ]
+    },
+    {
+      "id": "l_stage_highrisk",
+      "from": "n_stage_risk",
+      "fromNodeId": "n_stage_risk",
+      "to": "n_highrisk_cn0_tx",
+      "toNodeId": "n_highrisk_cn0_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "highrisk_cn0",
+      "fromOptions": [
+        "highrisk_cn0"
+      ]
+    },
+    {
+      "id": "l_stage_regional",
+      "from": "n_stage_risk",
+      "fromNodeId": "n_stage_risk",
+      "to": "n_regionally_advanced_tx",
+      "toNodeId": "n_regionally_advanced_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "regional",
+      "fromOptions": [
+        "regional"
+      ]
+    },
+    {
+      "id": "l_stage_metastatic",
+      "from": "n_stage_risk",
+      "fromNodeId": "n_stage_risk",
+      "to": "n_metastatic_tx",
+      "toNodeId": "n_metastatic_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "metastatic",
+      "fromOptions": [
+        "metastatic"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "gu-penile-tip"
+  ]
+}

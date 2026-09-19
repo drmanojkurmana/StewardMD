@@ -339,7 +339,11 @@
     function cloudVisionCall() {
       try { window.__SMD_SCAN_DIAG = { stage: "cloud-image", source: "cloud" }; } catch (e) {}
       return window.SMD_AI.vision(imageDataUrl, "medication_list").then(function (r) {
-        if (!r || r.error) throw new Error((r && r.error) || "vision-failed");
+        if (!r || r.error) {
+          var ve = new Error((r && r.error) || "vision-failed"); ve.code = (r && r.error) || "vision-failed";
+          if (r && r.message && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only")) ve.userMessage = r.message;   // the engine refused for a named reason
+          throw ve;
+        }
         return fromFields((r.fields && typeof r.fields === "object") ? r.fields : r);
       });
     }
@@ -1164,9 +1168,9 @@
       scanProgressDone();
       if (!rows || !rows.length) { done("No medicines could be read confidently. Please enter them manually.", true); return; }
       _openScanReview(rows, dataUrl);
-    }).catch(function () {
+    }).catch(function (err) {
       if (settled) return; settled = true; clearTimeout(timer); _fsResume();
-      done("Could not read the image. Enter medicines manually.", true);
+      done((err && err.userMessage) ? err.userMessage + " Enter medicines manually, or use Private Device OCR." : "Could not read the image. Enter medicines manually.", true);
     });
   }
   // Clinician REVIEW — nothing is added until "Add selected". rows are candidate
@@ -1416,7 +1420,9 @@
   function runCheck() {
     if (!window.INTERACTIONS || typeof window.INTERACTIONS.checkInteractions !== "function") return;
     // Resolve any locally-unmapped brand via the catalogue API, THEN screen.
-    resolveUnresolvedViaApi().then(function () {
+    smdLazy('/interaction-rules.js?v=gold363').then(function() {
+      return resolveUnresolvedViaApi();
+    }).then(function () {
       _results = window.INTERACTIONS.checkInteractions(getList());
       _view = "results";
       _hideMinor = true;
@@ -1429,8 +1435,10 @@
   function recheckAfterEdit() {
     var resolved = getList().filter(function (m) { return m.generic && String(m.generic).trim(); });
     if (resolved.length >= 2 && window.INTERACTIONS && window.INTERACTIONS.checkInteractions) {
-      _results = window.INTERACTIONS.checkInteractions(getList());
-      _view = "results"; render();
+      smdLazy('/interaction-rules.js?v=gold363').then(function() {
+        _results = window.INTERACTIONS.checkInteractions(getList());
+        _view = "results"; render();
+      });
     } else {
       _view = "list"; render();
       toast("Fewer than 2 medicines left — add more to re-check.");

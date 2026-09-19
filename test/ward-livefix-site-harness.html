@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ bed board admit: live test LT-02 / LT-05 harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js on a hospital the size of the demo one (16 wards, a long ward list), against an in-memory
+ * stub of GET /ward/beds, GET /patient/get, POST /ward/admit and GET /ward/list whose shapes are the ones
+ * test/run-ward-icu-golden-path.mjs already relies on. Opened the way wardsynq.com opens it: #/ward/board,
+ * with a WSQ shell present. Drives test/run-ward-livefix-site-ui.mjs. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+window.WSQ = { state: {}, go: function (p) { window.__went = p; }, can: function () { return true; } };
+
+var WARDS = [];
+for (var i = 1; i <= 16; i++) WARDS.push("W" + (i < 10 ? "0" : "") + i);
+var ADMITTED = null;
+var ROSTER = [];
+for (var n = 0; n < 70; n++) ROSTER.push({ encounterId: "enc-" + n, patientId: "pat-" + n, name: "Roster Patient " + n, ward: WARDS[n % 16], bed: String(20 + n), admittedAt: "2026-09-15T08:00:00.000Z" });
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+  if (u.indexOf("/ward/beds") >= 0) {
+    return reply({ ok: true, bedsConfigured: true, wards: WARDS.map(function (w) {
+      var occ = ADMITTED && ADMITTED.ward === w ? [{ encounterId: ADMITTED.encounterId, patientId: ADMITTED.patientId, bed: ADMITTED.bed, name: "Test Patient QA-01" }] : [];
+      var free = []; for (var b = 1; b <= 12; b++) { var id = w + "-" + (b < 10 ? "0" : "") + b; if (!(ADMITTED && ADMITTED.bed === id)) free.push(id); }
+      return { ward: w, department: "Medicine", bedsKnown: true, occupied: occ, free: free, unplaced: [] };
+    }) });
+  }
+  if (u.indexOf("/patient/get") >= 0) return reply({ ok: true, patient: { mrn: "SMD-QA-01", name: "Test Patient QA-01", ageYears: 40, gender: "female" } });
+  if (u.indexOf("/ward/admit") >= 0 && (opts && opts.method) === "POST") {
+    ADMITTED = { encounterId: "enc-qa-01", patientId: "pat-qa-01", ward: body.ward, bed: body.bed };
+    return reply({ ok: true, written: 1, encounterId: ADMITTED.encounterId, patientId: ADMITTED.patientId, version: 1 });
+  }
+  if (u.indexOf("/ward/list") >= 0) {
+    var list = ROSTER.slice();
+    if (ADMITTED) list.push({ encounterId: ADMITTED.encounterId, patientId: ADMITTED.patientId, name: "Test Patient QA-01", ward: ADMITTED.ward, bed: ADMITTED.bed, admittedAt: "2026-09-15T17:00:00.000Z" });
+    return reply({ ok: true, patients: list });
+  }
+  if (u.indexOf("/ward/alert-cover") >= 0) return reply({ ok: true, shiftsDefined: 0, wards: WARDS.map(function (w) { return { ward: w, counts: { nurse: 0, resident: 0, consultant: 0 }, total: 0 }; }) });
+  if (u.indexOf("/roster/duty-status") >= 0) return reply({ ok: true, notWardTeam: true, status: null });
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>window.__ready = !!(window.WARD && window.WARD.open);</script>
+</body></html>

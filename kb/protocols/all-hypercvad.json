@@ -1,0 +1,124 @@
+{
+  "id": "all-hypercvad",
+  "diseaseId": "all",
+  "name": "Hyper-CVAD (Part A): Cyclophosphamide + Vincristine + DOXOrubicin + Dexamethasone",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 8,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Adult ALL v1.2026"
+  },
+  "stage": [
+    "Ph-negative",
+    "Ph-positive",
+    "induction"
+  ],
+  "treatmentSetting": [
+    "induction",
+    "consolidation"
+  ],
+  "histology": "B-ALL or T-ALL",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "16 mg IV",
+      "notes": "Prior to chemotherapy"
+    },
+    {
+      "name": "Mesna",
+      "dose": "600 mg/m2/day continuous IV on days 1-3",
+      "notes": "Uroprotection during cyclophosphamide"
+    }
+  ],
+  "supportiveCare": [
+    "Mandatory TLS prophylaxis with hydration and rasburicase or allopurinol",
+    "PJP and fungal prophylaxis with posaconazole / voriconazole",
+    "Filgrastim (G-CSF) 5 mcg/kg/day SC starting Day 5 until ANC recovery"
+  ],
+  "monitoring": [
+    "CBC with diff daily during inpatient admission",
+    "CMP, electrolytes, uric acid, phosphorus q12-24h during induction"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "cardiac"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 300,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "notes": "Cyclophosphamide 300 mg/m2 IV q12h x 6 doses (Days 1-3) with continuous Mesna."
+    },
+    {
+      "id": "vincristine",
+      "name": "vinCRIStine",
+      "basis": "bsa",
+      "dosePerUnit": 2,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        4,
+        11
+      ],
+      "caps": {
+        "perDose": 2
+      },
+      "notes": "vinCRIStine 2 mg flat IV push on Days 4 and 11. Fatal if given intrathecally. IV only."
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 50,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        4
+      ],
+      "caps": {
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "DOXOrubicin 50 mg/m2 IV over 24 hours on Day 4."
+    },
+    {
+      "id": "dexamethasone",
+      "name": "Dexamethasone",
+      "basis": "flat",
+      "dosePerUnit": 40,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12,
+        13,
+        14
+      ],
+      "notes": "Dexamethasone 40 mg PO or IV once daily on Days 1-4 and Days 11-14."
+    }
+  ]
+}

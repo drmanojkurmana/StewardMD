@@ -6,13 +6,15 @@
  * can't reach Firestore). Every DECISION (transitions, ordering, ETA, learning) is delegated to the
  * unit-tested _queue_eta.js, so the untested surface here is thin CRUD.
  */
-import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsGet, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { readAllOrThrow } from "./_fs_read_all.js";
 import { brandingFor } from "./_clinic_branding.js";
+import { writeOrgAudit, appendOrgAudit } from "./_q_audit_chain.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
-import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
+import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, recallRefusal, NO_SHOW_RECALL_MS, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 import { isRole } from "./_queue_roles.js";
-import { resolveRoomDoctor } from "./_opd_org.js";
+import { resolveRoomDoctor, tokenScope, tokenConfig, formatToken, resolveTokenDepartment, department as M_department } from "./_opd_org.js";
 
 const now = () => Date.now();
 const EMERGENCY_PAD_MIN = 10;
@@ -40,8 +42,11 @@ export async function getOrCreateSession(env, p) {
 export async function getSession(env, id) { const d = await fsGet(env, "q_sessions/" + id); return d ? withId(id, d.fields) : null; }
 export async function getTicket(env, id) { const d = await fsGet(env, "q_tickets/" + id); return d ? withId(id, d.fields) : null; }
 
+/* Lists here read every page (R4-3): one query of 500 tickets, 200 sessions or 200 staff used to be the whole answer.
+ * A session's queue is ordered and reflowed from its tickets, so a partial read throws (507) rather than reorder half. */
+export const LIST_CAP = 5000;
 export async function listTickets(env, sid) {
-  const rows = await fsQuery(env, "q_tickets", { where: { field: "sessionId", value: sid }, limit: 500 });
+  const rows = await readAllOrThrow(env, "q_tickets", { field: "sessionId", value: sid }, LIST_CAP, "tickets_too_many");
   return rows.map((r) => withId(r.id, r.fields));
 }
 // Doctor-facing view: decrypt name/mobile (the authed owner may see them). Never sent to a patient page.
@@ -49,7 +54,7 @@ export async function decorateForDoctor(env, tickets) {
   return Promise.all(tickets.map(async (t) => Object.assign({}, t, {
     name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined,
     ghisPatientId: t.ghisPatientId || "",   // full MR# for the View-EMR-profile action (smd_opd_emr)
-    roomId: t.roomId || "", department: t.department || ""   // OPD platform: room + department (Phase 4)
+    roomId: t.roomId || "", department: t.department || "", departmentId: t.departmentId || ""   // OPD platform: room + department (Phase 4); departmentId since D7
   })));
 }
 
@@ -94,8 +99,63 @@ export async function recompute(env, session, tickets) {
   return tickets;
 }
 
+// ---- OPD token number: allocated WITH the ticket, never after it -----------------------------------
+// Counter q_token_counters/<hospital>__<OPD day>__<scope>. The ticket create and the counter increment go
+// in ONE commit guarded on the counter being unchanged since it was read (compare-and-set), so a failed
+// commit neither burns a number nor leaves a ticket without one, and two desks registering at once can
+// never both take the same number: the loser re-reads and takes the next. The token is written only here,
+// so a move, reassignment, reprioritisation or recall keeps it, and a cancelled number is never reissued
+// (the counter only ever goes up). A new day is a new counter, so it starts again at 1.
+const TOKEN_TRIES = 5;
+/* D7: which department this ticket belongs to, decided here on the server from the picker's
+ * departmentId, the room, the ticket's own department name, then the session's (see _opd_org.js
+ * resolveTokenDepartment). The hospital's departments are read only when they can matter: department
+ * scope, or a picker id to check. A picker id that is not an active department of this hospital is
+ * refused rather than replaced by a guess. */
+async function tokenDepartment(env, session, body, org) {
+  let cfg = org && org.tokens;
+  if (!org) { const o = await fsGet(env, "q_orgs/" + sanitize(session.hospitalId)); cfg = o && o.fields && o.fields.tokens; }
+  cfg = tokenConfig(cfg);
+  const hosp = (org && org.id) || session.hospitalId || "";
+  if (!hosp || (cfg.scope !== "department" && !body.departmentId)) return { cfg, department: null };
+  const rows = await readAllOrThrow(env, "q_departments", { field: "orgId", value: sanitize(hosp) }, LIST_CAP, "departments_too_many");
+  const departments = rows.map((r) => M_department(withId(r.id, r.fields)));
+  let roomDepartmentId = "";
+  const roomId = body.roomId || session.roomId;
+  if (!body.departmentId && roomId) { const rm = await fsGet(env, "q_rooms/" + sanitize(roomId)); roomDepartmentId = (rm && rm.fields && rm.fields.orgId === hosp && rm.fields.departmentId) || ""; }
+  const r = resolveTokenDepartment(departments, cfg, { departmentId: body.departmentId, roomDepartmentId, department: body.department, sessionDepartment: session.department });
+  if (r.badId) throw Object.assign(new Error("department_not_found"), { status: 422, detail: "That department is not an active department of this hospital." });
+  return Object.assign({ cfg }, r);
+}
+async function allocateToken(env, session, f, id, cfg, dept, unmatched) {
+  const scope = tokenScope(cfg, dept);
+  // D14: refused before anything is read or written, so a refusal burns no number and leaves no ticket.
+  if (scope.error) throw Object.assign(new Error(scope.error), { status: 422, departmentName: scope.departmentName || unmatched || "" });
+  const hosp = session.hospitalId || ("doc-" + session.doctorUid);
+  const path = "q_token_counters/" + [hosp, session.date, scope.key].map(sanitize).join("__");
+  const legacyPath = scope.legacyKey ? "q_token_counters/" + [hosp, session.date, scope.legacyKey].map(sanitize).join("__") : "";
+  for (let i = 0; i < TOKEN_TRIES; i++) {
+    const d = await fsGet(env, path);
+    /* A department counter keyed by id that does not exist yet today may have a sequence already running
+     * under the name-slug key counters used before D7. Continue it, or the morning's C-001 is issued twice. */
+    let start = (d && d.fields && d.fields.n) || 0;
+    if (!d && legacyPath) { const old = await fsGet(env, legacyPath); start = (old && old.fields && old.fields.n) || 0; }
+    const n = (start | 0) + 1;
+    f.token = formatToken(scope.prefix, n); f.tokenNo = n; f.tokenScope = scope.key;
+    const counter = d
+      ? wUpdate(env, path, { n: n, updatedAt: now() }, { updateTime: d.updateTime })
+      : wCreate(env, path, { n: n, hospitalId: String(hosp), date: String(session.date || ""), scope: scope.key, createdAt: now(), expiresAt: endOfDayMs(session.date) + 2 * 86400e3 });
+    try { await fsCommit(env, [counter, wCreate(env, "q_tickets/" + id, f)]); return; }
+    catch (e) {
+      if (!(e && e.code === "precondition")) throw e;
+      await new Promise((r) => setTimeout(r, 3 + Math.floor(Math.random() * 12)));
+    }
+  }
+  throw Object.assign(new Error("token_contention"), { status: 409, detail: "Another desk registered at the same moment. Try again." });
+}
+
 // ---- add a ticket (manual or import) ------------------------------------------------------
-export async function addTicket(env, session, body, actor) {
+export async function addTicket(env, session, body, actor, org) {
   const id = newId();
   const f = {
     sessionId: session.id, hospitalId: session.hospitalId, status: "registered", position: 0,
@@ -110,8 +170,17 @@ export async function addTicket(env, session, body, actor) {
     registeredAt: now(), calledAt: 0, consultStartAt: 0, consultEndAt: 0, etaStart: 0, etaEnd: 0, etaConfidence: 0,
     createdAt: now(), updatedAt: now(), expiresAt: session.expiresAt
   };
-  await fsCommit(env, [wCreate(env, "q_tickets/" + id, f)]);
-  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType });
+  /* ABDM Scan and Share (functions/_wardsynq/abdm-share.js): the ABDM-verified profile the patient shared rides the
+   * ticket sealed like the name, so the desk can register them pre-filled. abdmShareOrg is the lookup key. */
+  if (body.abdmShare && typeof body.abdmShare === "object") {
+    f.abdmShareOrg = String(session.hospitalId || "");
+    f.encShare = await encPHI(env, JSON.stringify(body.abdmShare));
+  }
+  const td = await tokenDepartment(env, session, body, org);
+  // The ticket carries the resolved department's id and its CURRENT name; the name is display only.
+  if (td.department) { f.departmentId = td.department.id; f.department = td.department.name; }
+  await allocateToken(env, session, f, id, td.cfg, td.department, td.unmatched);
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + " token:" + f.token });
   await recompute(env, session);
   const ticket = withId(id, f);
   try { await notifyTicket(env, session, ticket, "registered", {}); } catch (e) {}   // best-effort SMS/WhatsApp
@@ -123,9 +192,12 @@ export async function setStatus(env, session, ticketId, to, actor) {
   const t = await getTicket(env, ticketId);
   if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
   const from = t.status;
+  // D13: out of no_show only through recallNoShow, which carries the reason, the capability and the window.
+  if (from === "no_show") throw Object.assign(new Error("use_recall"), { status: 400, detail: "A no-show is brought back with Recall, which records why." });
   if (!canTransition(from, to)) throw Object.assign(new Error("bad_transition"), { status: 400, detail: from + "->" + to });
   const patch = { status: to, updatedAt: now() };
   const sessPatch = {};
+  if (to === "no_show") patch.noShowAt = now();   // starts the recall window
   if (to === "called" && !t.calledAt) patch.calledAt = now();
   if (to === "in_consultation") { patch.consultStartAt = now(); if (!t.calledAt) patch.calledAt = now(); sessPatch.currentTicketId = ticketId; }
   // Send back to the waiting hall (doctor/nurse reroute from the consulting room): free the room, drop the
@@ -147,6 +219,41 @@ export async function setStatus(env, session, ticketId, to, actor) {
   await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: to, meta: from });
   if (to === "completed") { try { await notifyTicket(env, session, Object.assign({}, t, patch), "complete", {}); } catch (e) {} }
   return recompute(env, session);
+}
+
+/* ---- D13: recall a no-show with the SAME token ------------------------------------------------------
+ * The patient heard their number, was not there, and has now arrived. They go back to waiting (or straight
+ * to called) keeping the token, at the head of their own priority band (an emergency still comes first,
+ * and their priority is unchanged). A reason is mandatory. The ticket change and its audit row (who, when,
+ * why) are ONE commit guarded on the ticket being unchanged since it was read, so two desks recalling at
+ * once cannot both succeed and a recall without its audit row cannot exist. */
+export async function recallNoShow(env, session, ticketId, opts, actor) {
+  opts = opts || {};
+  const reason = String(opts.reason || "").trim().slice(0, 180);
+  const to = opts.to === "called" ? "called" : "waiting";
+  if (reason.length < 3) throw Object.assign(new Error("reason_required"), { status: 400, detail: "Say why the patient is recalled." });
+  const d = await fsGet(env, "q_tickets/" + ticketId);
+  const t = d ? withId(ticketId, d.fields) : null;
+  if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
+  const why = recallRefusal(t, session, now());
+  if (why) throw Object.assign(new Error(why), { status: 409 });
+  const band = orderQueue(await listTickets(env, session.id)).filter((x) => (x.priority || 0) === (t.priority || 0));
+  const head = band.length ? Math.min.apply(null, band.map((x) => (x.seq != null && isFinite(x.seq) ? x.seq : x.registeredAt || 0))) : (t.registeredAt || now());
+  const patch = { status: to, seq: head - 1000, calledAt: to === "called" ? now() : 0, recalledAt: now(), recallCount: (t.recallCount || 0) + 1, updatedAt: now() };
+  // The audit meta holds 200 characters; the reason is shortened to fit rather than cutting the JSON.
+  let meta, r = reason;
+  do { meta = JSON.stringify({ to, reason: r, noShowAt: t.noShowAt, token: t.token || "" }); r = r.slice(0, -10); } while (meta.length > 200);
+  const ev = { ts: now(), hospitalId: session.hospitalId || "", ticketId, actor: String(actor || ""), action: "recall_no_show", meta };
+  // G3: the recall and its hash-chained audit row in one commit; the ticket guard's refusal comes back as precondition.
+  try { await appendOrgAudit(env, ev, [wUpdate(env, "q_tickets/" + ticketId, patch, { updateTime: d.updateTime })]); }
+  catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("ticket_changed"), { status: 409, detail: "This patient changed while you were recalling them. Reload and try again." }); throw e; }
+  return recompute(env, session);
+}
+// The no-shows still inside their recall window, for the desk's and the doctor's "Recall no-shows" list.
+export async function recallableNoShows(env, session) {
+  const at = now();
+  return (await listTickets(env, session.id)).filter((t) => !recallRefusal(t, session, at))
+    .map((t) => Object.assign(t, { recallableUntil: Math.min(t.noShowAt + NO_SHOW_RECALL_MS, session.expiresAt || Infinity) }));
 }
 
 // DPDP erasure: kill the patient link (bump ver) AND wipe the encrypted name/mobile at rest. Used for an
@@ -211,14 +318,24 @@ export async function assignTicket(env, fromSession, ticketId, toDoctorUid, opts
 
 // ---- audit timeline: decode q_events for a session's tickets (newest first). NO PHI (ticketId +
 // masked mrnLast4 only). `meta` for move/assign is JSON; left as-is for the client to render. --------
+/* q_events rows carry no session field (_q_audit_chain.js eventFields: ts, hospitalId, ticketId, actor, action, meta),
+ * so each ticket's events are asked for by hospitalId AND ticketId, every page. It used to read the hospital's first
+ * 500 events of all kinds and filter, so once a hospital passed 500 events every timeline came back empty.
+ * ponytail: one query per ticket, EVENT_BATCH at a time; a session field on the chain row is the upgrade if a large
+ * session makes this slow. More than LIST_CAP events on one ticket throws rather than show part of its history. */
+const EVENT_BATCH = 10;
 export async function auditTimeline(env, session, limit) {
   const tickets = await listTickets(env, session.id);
   const byId = {}; tickets.forEach((t) => (byId[t.id] = t));
-  const ids = new Set(tickets.map((t) => t.id));
-  const rows = await fsQuery(env, "q_events", { where: { field: "hospitalId", value: session.hospitalId }, limit: 500 });
+  const rows = [];
+  for (let i = 0; i < tickets.length; i += EVENT_BATCH) {
+    const pages = await Promise.all(tickets.slice(i, i + EVENT_BATCH).map((t) =>
+      readAllOrThrow(env, "q_events", [{ field: "hospitalId", value: session.hospitalId }, { field: "ticketId", value: t.id }], LIST_CAP, "events_too_many")));
+    pages.forEach((p) => rows.push(...p));
+  }
   return rows
     .map((r) => withId(r.id, r.fields))
-    .filter((e) => e.ticketId && ids.has(e.ticketId))
+    .filter((e) => e.ticketId && byId[e.ticketId] && e.hospitalId === session.hospitalId)
     .sort((a, b) => (b.ts || 0) - (a.ts || 0))
     .slice(0, Math.max(1, Math.min(200, Number(limit) || 100)))
     .map((e) => ({ ts: e.ts, actor: e.actor, action: e.action, meta: e.meta,
@@ -252,12 +369,14 @@ export async function removeStaff(env, employeeId, actor) {
   return { ok: true };
 }
 export async function listStaff(env, hospitalId) {
-  const rows = await fsQuery(env, "q_staff", hospitalId ? { where: { field: "hospitalId", value: hospitalId }, limit: 200 } : { limit: 200 });
+  const rows = await readAllOrThrow(env, "q_staff", hospitalId ? { field: "hospitalId", value: hospitalId } : null, LIST_CAP, "staff_too_many");
   return rows.map((r) => withId(r.id, r.fields)).filter((s) => s.removedAt == null);
 }
 // ---- sessions for a hospital+day (the multi-doctor front-desk board) -------------------------------
 export async function listSessions(env, hospitalId, date) {
-  const rows = await fsQuery(env, "q_sessions", { where: { field: "hospitalId", value: hospitalId }, limit: 200 });
+  // By hospital AND day (both equality): the hospital's whole history used to fill the 200 first, so today's board went empty.
+  const where = [{ field: "hospitalId", value: hospitalId }, ...(date ? [{ field: "date", value: date }] : [])];
+  const rows = await readAllOrThrow(env, "q_sessions", where, LIST_CAP, "sessions_too_many");
   return rows.map((r) => withId(r.id, r.fields)).filter((s) => !date || s.date === date);
 }
 // Call the next queued patient (used by slide-to-checkout: close one -> call the next). No-op if none
@@ -274,7 +393,7 @@ export async function callNext(env, session, actor) {
 // untouched). Only the pool is a new, doctor-less holding session (doctorUid = POOL_DOCTOR). Assigning a
 // pool patient to a room = re-parent the ticket to the room-doctor's session — the proven mechanism.
 export const POOL_DOCTOR = "__pool__";
-const opdDate = (d) => { if (d) return String(d); try { return new Date(now() + 19800000).toISOString().slice(0, 10); } catch (e) { return ""; } }; // IST day
+export const opdDate = (d) => { if (d) return String(d); try { return new Date(now() + 19800000).toISOString().slice(0, 10); } catch (e) { return ""; } }; // IST day
 
 export async function getOrCreatePoolSession(env, org, date) {
   return getOrCreateSession(env, { hospitalId: org.id, doctorUid: POOL_DOCTOR, department: "", date: opdDate(date), source: "pool", doctorName: "Unassigned" });
@@ -282,13 +401,17 @@ export async function getOrCreatePoolSession(env, org, date) {
 // Register an unassigned (department-level) patient into the central pool.
 export async function addToPool(env, org, body, actor) {
   const pool = await getOrCreatePoolSession(env, org, body && body.date);
-  return addTicket(env, pool, body || {}, actor);
+  return addTicket(env, pool, body || {}, actor, org);
 }
 // The session backing a room = its resolved doctor's session (roomId stamped for the board label).
 export async function getOrCreateRoomSession(env, org, room, date, doctorName) {
   const doctorUid = resolveRoomDoctor(room);
   if (!doctorUid) return null;   // temporarily-unassigned room has no queue to route into
-  const s = await getOrCreateSession(env, { hospitalId: org.id, doctorUid: doctorUid, department: room.department || "", date: opdDate(date), source: "room", doctorName: doctorName || "" });
+  /* department "" ON PURPOSE. The session id is built from the department, and until 2026-09-14 a room's
+   * department always read as "" (M.room dropped it). Now that rooms carry their department name, passing
+   * it here would move every departmental room onto a NEW session id mid-day and strand the tickets
+   * already in the old one. The room's department reaches tickets through roomId -> room.departmentId. */
+  const s = await getOrCreateSession(env, { hospitalId: org.id, doctorUid: doctorUid, department: "", date: opdDate(date), source: "room", doctorName: doctorName || "" });
   if (s.roomId !== room.id) { try { await fsCommit(env, [wUpdate(env, "q_sessions/" + s.id, { roomId: room.id, updatedAt: now() })]); s.roomId = room.id; } catch (e) {} }
   return s;
 }
@@ -303,8 +426,10 @@ export async function assignToRoom(env, org, ticketId, room, opts, actor) {
   if (!doctorUid) throw Object.assign(new Error("room_unassigned"), { status: 400 });
   const target = await getOrCreateRoomSession(env, org, room, opts.date, opts.doctorName);
   const fromSessionId = t.sessionId;
+  /* A ticket moved into another department's room shows that department from now on, and KEEPS its token:
+   * the patient has already heard that number, and the counter it came from is not reopened. */
   await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, {
-    sessionId: target.id, roomId: room.id, department: room.department || t.department || "",
+    sessionId: target.id, roomId: room.id, department: room.department || t.department || "", departmentId: room.departmentId || t.departmentId || "",
     status: "registered", position: 0, seq: (t.registeredAt || now()), updatedAt: now(), expiresAt: target.expiresAt
   })]);
   if (opts.priority) { try { await setPriority(env, target, ticketId, opts.priority, actor); } catch (e) {} }   // priority -> front
@@ -359,7 +484,7 @@ export async function portalContext(env, token) {
     ok: true,
     clinicLogo: brand.clinicLogo || "", clinicName: brand.clinicName || "",
     department: session ? session.department : "", doctorName: session ? session.doctorName : "", doctorStatus: session ? session.doctorStatus : "consulting",
-    status: t.status, position: idx < 0 ? 0 : idx + 1, ahead: ahead,
+    status: t.status, position: idx < 0 ? 0 : idx + 1, ahead: ahead, token: t.token || "",
     etaStart: t.etaStart || 0, etaEnd: t.etaEnd || 0, confidence: t.etaConfidence || 0,
     journey: { registeredAt: t.registeredAt || 0, calledAt: t.calledAt || 0, consultStartAt: t.consultStartAt || 0, done: isTerminal(t.status) },
     lastUpdated: now()
@@ -367,8 +492,48 @@ export async function portalContext(env, token) {
 }
 
 // ---- append-only audit (PHI-free; fixed field allow-list) ---------------------------------
+// G3: each row is hash-chained per hospital (_q_audit_chain.js). Still best-effort; never blocks the action.
 export async function qAudit(env, ev) {
-  const id = newId();
-  const f = { ts: now(), hospitalId: ev.hospitalId || "", ticketId: ev.ticketId || "", actor: ev.actor || "", action: ev.action || "", meta: String(ev.meta == null ? "" : ev.meta).slice(0, 200) };
-  try { await fsCommit(env, [wCreate(env, "q_events/" + id, f)]); } catch (e) {}   // best-effort; never blocks the action
+  await writeOrgAudit(env, { ...ev, ts: now() });
+}
+
+// ---- ABDM Scan and Share: the tokens issued to shared profiles, and their registration ---------------
+/** Tickets issued to an ABDM profile share at this hospital that have not expired, newest first. */
+export async function listShareTickets(env, orgId) {
+  if (!orgId) return [];
+  const rows = await readAllOrThrow(env, "q_tickets", { field: "abdmShareOrg", value: String(orgId) }, LIST_CAP, "share_tickets_too_many");
+  const t = now();
+  return (rows || []).map((r) => withId(r.id, r.fields)).filter((x) => !x.expiresAt || x.expiresAt > t)
+    .sort((a, b) => (b.registeredAt || 0) - (a.registeredAt || 0));
+}
+/** The desk registered a shared profile as MR `mrn`: the ticket carries the number, the sealed profile is dropped
+ *  (the register now holds it), and the act is audited. Refuses a ticket of another hospital or one never shared. */
+export async function attachShareRegistration(env, org, ticketId, mrn, actor) {
+  const t = await getTicket(env, ticketId);
+  if (!t || t.abdmShareOrg !== String(org.id)) throw Object.assign(new Error("not_found"), { status: 404 });
+  if (t.ghisPatientId) throw Object.assign(new Error("already_registered"), { status: 409, mrn: t.ghisPatientId });
+  const m = String(mrn || "").trim();
+  if (!m) throw Object.assign(new Error("mrn_required"), { status: 422 });
+  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { ghisPatientId: m, mrnLast4: m.replace(/\D/g, "").slice(-4), encShare: "", shareRegisteredAt: now(), updatedAt: now() })]);
+  await qAudit(env, { hospitalId: org.id, ticketId, actor, action: "abdm_share_registered", meta: "" });
+  return Object.assign({}, t, { ghisPatientId: m, encShare: "" });
+}
+
+// ---- ABDM: the mobile to send a link OTP to ------------------------------------------------------
+// ABDM sends a pseudonymous patient reference, never a phone number, so the number is ours to find. The
+// most recent ticket for this MR# carries it under encPHI, which is the same number the queue already
+// texts. Returned for ONE send; never stored, never logged, never audited.
+//
+// Asked for by MR# AND hospital, every page (it read 50 tickets of the MR# and could miss the newest number); the org is
+// still checked in JS - it MUST be: another hospital's ticket for a colliding MR# would be somebody else's phone number.
+export async function findMobileByPatientId(env, hospitalId, patientId) {
+  if (!hospitalId || !patientId) return null;
+  const rows = await readAllOrThrow(env, "q_tickets", [{ field: "ghisPatientId", value: String(patientId) }, { field: "hospitalId", value: hospitalId }], LIST_CAP, "tickets_too_many");
+  const mine = (rows || []).filter((r) => r.fields && r.fields.hospitalId === hospitalId)
+    .sort((a, b) => (b.fields.registeredAt || 0) - (a.fields.registeredAt || 0));
+  for (const r of mine) {
+    const mobile = await decPHI(env, r.fields.encMobile);
+    if (mobile) return mobile;     // the newest ticket that actually has a number on it
+  }
+  return null;
 }

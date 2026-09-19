@@ -27,6 +27,12 @@ export const ACTIONS = Object.freeze([
   "context:load", "maik:attach",          // PHI — clinician only
   "ratelimit:write", "audit:read", "observability:read",
   "egress:baa",                            // owner only — flips egressBaaOk
+  // WardSynQ Clinical Record Service (functions/api/wardsynq). PHI: the clinical record itself.
+  // Clinician-only, like context:load; the actor CEILING in wardsynq-actors.js then decides what the
+  // clinician may commit. superadmin holds both here (every ACTION, per the matrix rule) but is
+  // built as a READ-tier actor by functions/_wardsynq/service.js, so a platform operator can look
+  // for support and cannot write a clinical record.
+  "record:read", "record:write",
 ]);
 
 // Owner is enumerated explicitly (NO implicit "owner => all" wildcard that could mask a bug).
@@ -50,6 +56,7 @@ export const ROLE_MATRIX = Object.freeze({
   clinician: Object.freeze([
     "tenant:read", "connector:read",
     "context:load", "maik:attach",
+    "record:read", "record:write",
   ]),
   auditor: Object.freeze([
     "tenant:read", "member:read", "connector:read",
@@ -70,6 +77,7 @@ export const ROLE_MATRIX = Object.freeze({
     "context:load", "maik:attach",
     "ratelimit:write", "audit:read", "observability:read",
     "egress:baa",
+    "record:read", "record:write",
   ]),
 });
 

@@ -1,0 +1,768 @@
+{
+  "guideline": "kaposi",
+  "title": "Kaposi Sarcoma",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "kaposi_sarcoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Kaposi Sarcoma (KS). Covers complete clinical algorithm: Diagnostic Workup (punch/excisional skin/mucosal biopsy with HHV-8 / LANA-1 IHC, HIV-1/2 screening, CD4 count, viral load, chest CT, fecal occult blood / endoscopy / bronchoscopy if symptomatic visceral involvement, KSHV-associated inflammatory cytokine syndrome KICS evaluation) -> Clinical Subtype Stratification (Classic/Mediterranean, Epidemic/HIV-associated, Endemic/African, Iatrogenic/Organ transplant-associated) -> ACTG Staging for HIV-KS (Good risk T0 I0 S0 vs Poor risk T1, I1, S1) -> Frontline Systemic Therapy: Optimize Antiretroviral Therapy (ART) for all HIV+ patients; Pegylated Liposomal Doxorubicin (sarc-kaposi-liposomal-doxorubicin Category 1 Preferred) for symptomatic, widespread, visceral, or rapidly progressive disease; Paclitaxel weekly (Category 1 Preferred) for advanced refractory; Local Therapy (intralesional vinblastine, topical alitretinoin, radiation therapy 20-30 Gy, surgical excision) for limited cutaneous disease; Second-line / Refractory: Pomalidomide, Lenalidomide, Gemcitabine, Etoposide; Iatrogenic KS management (calcineurin inhibitor reduction/switch to mTOR inhibitor Sirolimus). References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Kaposi Sarcoma Version 2.2026 (July 2026).",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Definitive KS diagnosis requires tissue: 3-4 mm punch biopsy or incisional/excisional biopsy extending into subcutaneous fat. Histology shows slit-like vascular channels, spindle cells, extravasated red cells, and hemosiderin; nuclear HHV-8 / LANA-1 immunohistochemistry exceeds 99% sensitivity and specificity and distinguishes KS from mimics (bacillary angiomatosis, pyogenic granuloma, angiosarcoma).",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Pegylated liposomal doxorubicin 20 mg/m2 IV every 2-3 weeks is the Category 1 preferred frontline systemic therapy for symptomatic, widespread, visceral, or rapidly progressive KS; weekly paclitaxel is the Category 1 preferred alternative, particularly for anthracycline-refractory or advanced disease.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "Initiate or optimize antiretroviral therapy (ART) in every HIV-positive KS patient regardless of CD4 count or disease extent; ART alone can regress limited disease. Monitor for immune reconstitution inflammatory syndrome KS flare (IRIS-KS) in the first months after ART initiation, especially with low baseline CD4, high viral load, or bulky disease.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "In iatrogenic/transplant-associated KS, taper calcineurin inhibitors (cyclosporine, tacrolimus) wherever graft function permits and consider conversion to an mTOR inhibitor (sirolimus or everolimus), which combines immunosuppressive activity with direct anti-KS antineoplastic and antiangiogenic effects. Coordinate every change with the transplant team.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Screen KS patients for KSHV/HHV-8 syndromes: multicentric Castleman disease (MCD) and KSHV-associated inflammatory cytokine syndrome (KICS) with serum HHV-8 viral load, IL-6, IL-10, ferritin, CRP, CBC for cytopenias, and spleen assessment; MCD/KICS with concurrent KS needs co-management of both conditions.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "kaposi_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic Workup",
+      "title": "Kaposi Sarcoma: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the diagnostic workup before subtype classification. Confirm tissue diagnosis with HHV-8 IHC, establish HIV/immune status, stage systemic and visceral extent, and screen for KSHV-associated syndromes.",
+      "path": "Kaposi Sarcoma / Workup",
+      "pills": [
+        "KS",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete skin, oral mucosa, ocular, lymph node, and genital examination with photo documentation of sentinel lesions; record lesion count, size, morphology (patch, plaque, nodule), edema, ulceration, and bleeding.",
+        "Diagnostic tissue biopsy: 3-4 mm punch biopsy or incisional/excisional biopsy extending into subcutaneous fat; mucosal or nodal lesions biopsied by the least morbid adequate technique.",
+        "Pathology and IHC: slit-like vascular channels, spindle cells, extravasated red blood cells, hemosiderin deposition; HHV-8 / LANA-1 nuclear IHC exceeds 99% sensitivity and specificity; exclude bacillary angiomatosis, pyogenic granuloma, and angiosarcoma.",
+        "HIV and immunologic testing: HIV-1/2 serology; CD4 count and percentage; HIV RNA viral load; medication and transplant history for iatrogenic immunosuppression (calcineurin inhibitors, corticosteroids).",
+        "Systemic staging: chest radiography or contrast-enhanced chest CT; fecal occult blood testing (FOBT) with upper endoscopy/colonoscopy when gastrointestinal symptoms, bleeding, or anemia are present; bronchoscopy for respiratory symptoms, hemoptysis, or pulmonary infiltrates.",
+        "KSHV/HHV-8 syndrome screening: evaluate for multicentric Castleman disease (MCD) and KSHV-associated inflammatory cytokine syndrome (KICS) with serum HHV-8 viral load, IL-6, IL-10, ferritin, CRP, CBC for cytopenias, and spleen assessment for splenomegaly; co-manage MCD/KICS when present."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Clinical Subtype Classification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_subtype",
+      "linkId": "kaposi_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical Subtype",
+      "title": "Kaposi Sarcoma: Clinical Subtype Classification",
+      "section": "Staging",
+      "description": "Workup complete. Classify into one of the four epidemiologic/clinical KS subtypes; subtype plus extent determines local versus systemic therapy.",
+      "path": "Kaposi Sarcoma / Subtype",
+      "pills": [
+        "KS",
+        "subtyping"
+      ],
+      "required": true,
+      "bullets": [
+        "Epidemic / HIV-associated KS: HIV-positive patient, often with low CD4 count and detectable viremia; aggressive mucocutaneous and visceral pattern; stage with ACTG criteria (Tumor, Immune, Systemic: good risk T0 I0 S0 versus poor risk any T1, I1, or S1).",
+        "Classic / Mediterranean KS: typically older men of Mediterranean, Eastern European, or Middle Eastern descent; indolent violaceous plaques and nodules of the lower extremities with chronic lymphedema.",
+        "Endemic / African KS: HIV-negative African patients; ranges from indolent cutaneous disease to aggressive lymphadenopathic and visceral forms, including florid disease in children.",
+        "Iatrogenic / Transplant-associated KS: chronically immunosuppressed patients (solid-organ transplant on calcineurin inhibitors, prolonged corticosteroids); often regresses when immunosuppression is tapered or converted to mTOR inhibition."
+      ],
+      "options": [
+        {
+          "id": "epidemic",
+          "label": "Epidemic / HIV-associated KS",
+          "sets": {
+            "subtype": "epidemic"
+          },
+          "pills": [
+            "KS",
+            "HIV-associated"
+          ]
+        },
+        {
+          "id": "classic",
+          "label": "Classic / Mediterranean KS",
+          "sets": {
+            "subtype": "classic"
+          },
+          "pills": [
+            "KS",
+            "classic"
+          ]
+        },
+        {
+          "id": "endemic",
+          "label": "Endemic / African KS",
+          "sets": {
+            "subtype": "endemic"
+          },
+          "pills": [
+            "KS",
+            "endemic"
+          ]
+        },
+        {
+          "id": "iatrogenic",
+          "label": "Iatrogenic / Transplant-associated KS",
+          "sets": {
+            "subtype": "iatrogenic"
+          },
+          "pills": [
+            "KS",
+            "iatrogenic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_hiv_extent",
+      "linkId": "kaposi_hiv_extent",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "HIV-KS Extent",
+      "title": "Epidemic (HIV-Associated) KS: Disease Extent and ACTG Risk",
+      "section": "Staging",
+      "description": "Stratify HIV-associated KS by symptoms, cutaneous burden, edema, and visceral involvement, mapped to ACTG stage. Extent selects ART-alone/local versus ART-plus-systemic-chemotherapy pathways.",
+      "path": "Kaposi Sarcoma / HIV-associated / Extent",
+      "pills": [
+        "KS",
+        "HIV-associated",
+        "extent"
+      ],
+      "required": true,
+      "bullets": [
+        "ACTG staging: Tumor (T0 confined to skin/minimal oral disease versus T1 tumor-associated edema, extensive oral, gastrointestinal, pulmonary, or other visceral involvement); Immune (I0 CD4 >= 150 cells/uL versus I1 CD4 < 150 cells/uL); Systemic (S0 no systemic illness versus S1 history of opportunistic infection, thrush, B symptoms, or poor performance status). Good risk is T0 I0 S0; poor risk is any T1, I1, or S1.",
+        "Limited disease: asymptomatic, limited cutaneous lesions without edema, ulceration, or visceral involvement; typically ACTG good risk (T0 I0 S0).",
+        "Advanced disease: symptomatic or extensive cutaneous disease, tumor-associated edema, ulcerated or bleeding lesions, pulmonary involvement (dyspnea, hemoptysis, infiltrates), or gastrointestinal involvement (bleeding, obstruction); generally ACTG poor risk (T1 and/or I1 and/or S1).",
+        "Refractory disease: progression on or within months of frontline pegylated liposomal doxorubicin despite optimized ART and adherence; confirm adherence, ART response (viral load, CD4 trend), and exclude IRIS-KS flare or MCD/KICS before relabeling as refractory."
+      ],
+      "options": [
+        {
+          "id": "limited",
+          "label": "Limited: asymptomatic limited cutaneous disease, no visceral involvement",
+          "sets": {
+            "hiv_extent": "limited"
+          },
+          "pills": [
+            "HIV-KS",
+            "limited"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Advanced: symptomatic, extensive cutaneous, edema, or visceral (pulmonary/GI) involvement",
+          "sets": {
+            "hiv_extent": "advanced"
+          },
+          "pills": [
+            "HIV-KS",
+            "advanced"
+          ]
+        },
+        {
+          "id": "refractory",
+          "label": "Refractory: progression on frontline liposomal anthracycline",
+          "sets": {
+            "hiv_extent": "refractory"
+          },
+          "pills": [
+            "HIV-KS",
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_hiv_limited",
+      "linkId": "kaposi_tx_hiv_limited",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HIV-KS Limited Treatment",
+      "title": "HIV-KS, Limited: Optimize ART With Observation or Local Therapy",
+      "section": "Treatment",
+      "description": "Immediate ART initiation or optimization is the backbone for limited HIV-associated KS; add local therapy only for cosmetically or functionally bothersome lesions.",
+      "path": "Kaposi Sarcoma / HIV-associated / Limited",
+      "pills": [
+        "HIV-KS",
+        "limited",
+        "ART"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Immediately initiate ART in treatment-naive patients or optimize the regimen with HIV specialist input in treatment-experienced patients (genotype resistance testing when viremia persists); ART alone induces regression of limited KS in a substantial proportion of patients.",
+        "Observe asymptomatic limited lesions once ART is optimized; reassess skin, mucosa, edema, CD4 count, and viral load every 4-8 weeks initially.",
+        "Local therapy for bothersome, bleeding, edematous, or cosmetically distressing lesions: intralesional vinblastine, topical alitretinoin 0.1% gel, low-dose radiotherapy (20-30 Gy), or surgical excision of isolated nodules.",
+        "Counsel on IRIS-KS flare in the first 2-3 months after ART initiation or switch (worsening edema, new nodules, airway or GI symptoms); distinguish flare from true progression before escalating to systemic chemotherapy.",
+        "Escalate to the advanced-disease systemic pathway for increasing lesion burden, new edema, ulceration, or any visceral symptom."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_hiv_advanced",
+      "linkId": "kaposi_tx_hiv_advanced",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HIV-KS Advanced Treatment",
+      "title": "HIV-KS, Advanced: ART Plus Liposomal Doxorubicin (Category 1 Preferred)",
+      "section": "Treatment",
+      "description": "ART optimization plus frontline systemic chemotherapy for symptomatic, widespread, edematous, or visceral HIV-associated KS.",
+      "path": "Kaposi Sarcoma / HIV-associated / Advanced",
+      "pills": [
+        "HIV-KS",
+        "advanced",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "Optimize ART in parallel with chemotherapy for every patient (initiate immediately if naive; resistance-test and switch if viremic); never delay ART for chemotherapy and never delay chemotherapy for ART response when visceral or rapidly progressive disease is present.",
+        "Pegylated liposomal doxorubicin 20 mg/m2 IV every 2-3 weeks (Category 1 preferred): indicated for symptomatic, widespread, edematous, pulmonary, gastrointestinal, or rapidly progressive disease; continue to maximal response plus 2 consolidation cycles, then stop and observe on ART.",
+        "Weekly paclitaxel 100 mg/m2 IV every 2 weeks (Category 1 preferred alternative): use for anthracycline contraindication (cardiac dysfunction, prior anthracycline maximum), patient preference, or access constraints; premedicate per taxane protocol and monitor neuropathy.",
+        "Pulmonary KS specifics: coordinate bronchoscopy findings with oncology and pulmonology; avoid diagnostic delay for hemoptysis or airway compromise; corticosteroids may flare KS, so use the lowest effective dose for the shortest duration when airway edema mandates them.",
+        "Response assessment every 2-3 cycles: lesion photography, edema and pain scores, chest imaging for pulmonary disease, endoscopy only for initially involved symptomatic GI sites, CD4 and viral load trends; dose engine calculates patient-specific doses from the referenced protocol."
+      ],
+      "protocolRefs": [
+        "sarc-kaposi-liposomal-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_tx_hiv_refractory",
+      "linkId": "kaposi_tx_hiv_refractory",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HIV-KS Refractory Treatment",
+      "title": "HIV-KS, Refractory: Second-Line Systemic Therapy",
+      "section": "Treatment",
+      "description": "Second-line and refractory options after progression on frontline liposomal anthracycline with optimized ART.",
+      "path": "Kaposi Sarcoma / HIV-associated / Refractory",
+      "pills": [
+        "HIV-KS",
+        "refractory",
+        "second-line"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "Weekly paclitaxel (Category 1 for anthracycline-refractory disease): preferred second-line after liposomal doxorubicin failure when not used frontline; monitor cumulative neuropathy, neutropenia, and hypersensitivity.",
+        "Pomalidomide 5 mg orally once daily on days 1-21 of a 28-day cycle: immunomodulatory option with demonstrated KS activity including in ART-controlled disease; thromboprophylaxis assessment, CBC monitoring, and strict pregnancy prevention required.",
+        "Lenalidomide: immunomodulatory alternative where pomalidomide is unavailable or intolerable, with the same thrombotic, hematologic, and teratogenicity precautions.",
+        "Gemcitabine: cytotoxic option for taxane- and anthracycline-exposed disease or when immunomodulatory agents are unsuitable; monitor myelosuppression, transaminitis, and pulmonary toxicity.",
+        "Before switching lines, confirm true progression (versus IRIS-KS flare), verify ART adherence and viral suppression, re-biopsy atypical or rapidly changing lesions, re-screen for MCD/KICS, and offer clinical trial enrollment at every refractory step."
+      ],
+      "protocolRefs": [
+        "sarc-kaposi-liposomal-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_classic_extent",
+      "linkId": "kaposi_classic_extent",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Classic KS Extent",
+      "title": "Classic / Mediterranean KS: Disease Extent",
+      "section": "Staging",
+      "description": "Stratify classic KS by cutaneous burden, symptoms, edema control, and visceral spread. Indolent limited disease stays local; extensive or visceral disease needs systemic therapy.",
+      "path": "Kaposi Sarcoma / Classic / Extent",
+      "pills": [
+        "KS",
+        "classic",
+        "extent"
+      ],
+      "required": true,
+      "bullets": [
+        "Limited disease: few patches or plaques confined to the lower extremities, minimal or compression-controlled edema, no ulceration, bleeding, pain, or functional impairment, and no visceral involvement.",
+        "Extensive or symptomatic disease: numerous or confluent plaques and nodules, progressive or refractory lymphedema, ulcerated or bleeding lesions, pain or gait limitation, rapid tempo, lymph node involvement, or any visceral spread.",
+        "Stage with contrast CT of involved regions and chest imaging when symptoms or extensive disease raise visceral concern; endoscopy or bronchoscopy only for localizing symptoms."
+      ],
+      "options": [
+        {
+          "id": "limited",
+          "label": "Limited: few lower-extremity lesions, controlled edema, no visceral disease",
+          "sets": {
+            "classic_extent": "limited"
+          },
+          "pills": [
+            "classic",
+            "limited"
+          ]
+        },
+        {
+          "id": "extensive",
+          "label": "Extensive or symptomatic: confluent, ulcerated, edematous, or visceral disease",
+          "sets": {
+            "classic_extent": "extensive"
+          },
+          "pills": [
+            "classic",
+            "extensive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_classic_limited",
+      "linkId": "kaposi_tx_classic_limited",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Classic KS Limited Treatment",
+      "title": "Classic KS, Limited: Local Therapy or Observation",
+      "section": "Treatment",
+      "description": "Limited classic KS is managed locally or observed; systemic therapy is reserved for progression to extensive disease.",
+      "path": "Kaposi Sarcoma / Classic / Limited",
+      "pills": [
+        "classic",
+        "limited",
+        "local"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Observation is appropriate for asymptomatic, stable, cosmetically acceptable lesions; examine skin, edema, and function every 3-6 months with serial photography.",
+        "Low-dose radiotherapy 20-30 Gy to symptomatic or cosmetically distressing plaques and nodules: high local response rates in classic KS; use electrons or photons with bolus per lesion depth and shield uninvolved skin.",
+        "Graduated compression stockings plus leg elevation, physiotherapy, and dermatologic skin care for chronic lymphedema and stasis changes of the lower extremities.",
+        "Intralesional vinblastine, topical alitretinoin 0.1% gel, or surgical excision for isolated painful, bleeding, or ulcerated nodules.",
+        "Escalate to systemic therapy for confluent spread beyond radiation fields, refractory edema, ulceration, functional loss, rapid tempo, or visceral involvement."
+      ],
+      "protocolRefs": [
+        "sarc-kaposi-liposomal-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_tx_classic_advanced",
+      "linkId": "kaposi_tx_classic_advanced",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Classic KS Advanced Treatment",
+      "title": "Classic KS, Extensive: Systemic Liposomal Doxorubicin or Paclitaxel",
+      "section": "Treatment",
+      "description": "Systemic chemotherapy for extensive, symptomatic, rapidly progressive, or visceral classic KS.",
+      "path": "Kaposi Sarcoma / Classic / Extensive",
+      "pills": [
+        "classic",
+        "extensive",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Pegylated liposomal doxorubicin 20 mg/m2 IV every 2-3 weeks (Category 1 preferred): frontline for extensive cutaneous, edematous, ulcerated, or visceral classic KS; continue to maximal response plus 2 consolidation cycles.",
+        "Weekly paclitaxel 100 mg/m2 IV every 2 weeks (Category 1 preferred alternative): use for anthracycline contraindication, cardiac comorbidity common in this elderly population, or prior anthracycline exposure; baseline cardiac assessment before anthracycline initiation.",
+        "Palliative radiotherapy to dominant painful, bleeding, or obstructive lesions may continue alongside systemic therapy for symptom control.",
+        "Response assessment every 2-3 cycles with lesion photography, edema and pain scores, and cross-sectional imaging of initially involved visceral sites; dose engine calculates patient-specific doses from the referenced protocol."
+      ],
+      "protocolRefs": [
+        "sarc-kaposi-liposomal-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_endemic_extent",
+      "linkId": "kaposi_endemic_extent",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Endemic KS Extent",
+      "title": "Endemic / African KS: Disease Pattern",
+      "section": "Staging",
+      "description": "Separate indolent cutaneous endemic KS, managed locally, from aggressive lymphadenopathic or visceral disease, which needs systemic chemotherapy.",
+      "path": "Kaposi Sarcoma / Endemic / Extent",
+      "pills": [
+        "KS",
+        "endemic",
+        "extent"
+      ],
+      "required": true,
+      "bullets": [
+        "Indolent cutaneous pattern: limited patches, plaques, or nodules without bulky lymphadenopathy, edema, ulceration, or visceral symptoms; chronic stable course.",
+        "Aggressive pattern: bulky or generalized lymphadenopathy (including florid lymphadenopathic disease in children), extensive or fungating skin disease, tumor-associated edema, or pulmonary/gastrointestinal visceral involvement.",
+        "Confirm HIV-negative status (HIV-1/2 serology) to hold the endemic classification; a positive result re-routes the patient to the epidemic pathway. Screen for MCD/KICS in aggressive presentations."
+      ],
+      "options": [
+        {
+          "id": "indolent",
+          "label": "Indolent cutaneous disease without nodal bulk or visceral spread",
+          "sets": {
+            "endemic_extent": "indolent"
+          },
+          "pills": [
+            "endemic",
+            "indolent"
+          ]
+        },
+        {
+          "id": "aggressive",
+          "label": "Aggressive: bulky lymphadenopathic, fungating, edematous, or visceral disease",
+          "sets": {
+            "endemic_extent": "aggressive"
+          },
+          "pills": [
+            "endemic",
+            "aggressive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_endemic_indolent",
+      "linkId": "kaposi_tx_endemic_indolent",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Endemic KS Indolent Treatment",
+      "title": "Endemic KS, Indolent: Local Therapy",
+      "section": "Treatment",
+      "description": "Indolent cutaneous endemic KS is managed with local measures; systemic therapy is reserved for progression.",
+      "path": "Kaposi Sarcoma / Endemic / Indolent",
+      "pills": [
+        "endemic",
+        "indolent",
+        "local"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Low-dose radiotherapy 20-30 Gy to symptomatic or cosmetically distressing lesions; single-fraction or hypofractionated schedules where radiotherapy access is limited.",
+        "Intralesional vinblastine, topical alitretinoin 0.1% gel, or surgical excision for isolated nodules; compression and elevation for lymphedema.",
+        "Observe stable asymptomatic lesions with regular skin, nodal, and symptom review; photograph sentinel lesions to detect tempo change early.",
+        "Escalate to systemic chemotherapy for nodal bulk, fungating spread, refractory edema, ulceration, functional loss, or any visceral symptom."
+      ],
+      "protocolRefs": [
+        "sarc-kaposi-liposomal-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_tx_endemic_aggressive",
+      "linkId": "kaposi_tx_endemic_aggressive",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Endemic KS Aggressive Treatment",
+      "title": "Endemic KS, Aggressive: Systemic Chemotherapy",
+      "section": "Treatment",
+      "description": "Systemic chemotherapy for lymphadenopathic, fungating, edematous, or visceral endemic KS.",
+      "path": "Kaposi Sarcoma / Endemic / Aggressive",
+      "pills": [
+        "endemic",
+        "aggressive",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Pegylated liposomal doxorubicin 20 mg/m2 IV every 2-3 weeks (Category 1 preferred): frontline for bulky nodal, visceral, or rapidly progressive endemic KS; dose engine calculates patient-specific doses from the referenced protocol.",
+        "Weekly paclitaxel 100 mg/m2 IV every 2 weeks (Category 1 preferred alternative): use for anthracycline contraindication or access constraints; premedicate per taxane protocol.",
+        "Etoposide (oral or intravenous): alternative where anthracyclines and taxanes are unavailable, unsuitable, or previously exhausted; monitor myelosuppression and gastrointestinal tolerance.",
+        "Pediatric lymphadenopathic endemic KS: involve pediatric oncology; prioritize anthracycline-based therapy with late-effect (cardiac, fertility) counseling and long-term follow-up.",
+        "Response assessment every 2-3 cycles with nodal measurements, lesion photography, edema scores, and imaging of initially involved visceral sites."
+      ],
+      "protocolRefs": [
+        "sarc-kaposi-liposomal-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_iatrogenic_mgmt",
+      "linkId": "kaposi_iatrogenic_mgmt",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Iatrogenic KS Management",
+      "title": "Iatrogenic / Transplant-Associated KS: Management Track",
+      "section": "Treatment",
+      "description": "Decide between immunosuppression taper with mTOR conversion for controllable disease and upfront systemic chemotherapy for visceral or life-threatening KS, always jointly with the transplant team.",
+      "path": "Kaposi Sarcoma / Iatrogenic / Management",
+      "pills": [
+        "KS",
+        "iatrogenic",
+        "management"
+      ],
+      "required": true,
+      "bullets": [
+        "Taper track: limited cutaneous or mucosal disease without visceral involvement, where graft function permits calcineurin inhibitor reduction and mTOR inhibitor conversion with close rejection surveillance.",
+        "Systemic-chemotherapy track: pulmonary or gastrointestinal visceral involvement, bulky or rapidly progressive disease, ulcerated or bleeding lesions unresponsive to taper, or any life-threatening presentation.",
+        "Every decision is co-made with the transplant team; document graft type, baseline function, rejection history, and the agreed immunosuppression floor before any change."
+      ],
+      "options": [
+        {
+          "id": "taper",
+          "label": "Controllable disease: taper immunosuppression and convert to mTOR inhibitor",
+          "sets": {
+            "iatrogenic_track": "taper"
+          },
+          "pills": [
+            "iatrogenic",
+            "taper"
+          ]
+        },
+        {
+          "id": "systemic",
+          "label": "Visceral, life-threatening, or taper-refractory disease: systemic chemotherapy",
+          "sets": {
+            "iatrogenic_track": "systemic"
+          },
+          "pills": [
+            "iatrogenic",
+            "systemic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_iatrogenic_taper",
+      "linkId": "kaposi_tx_iatrogenic_taper",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Iatrogenic KS Taper Treatment",
+      "title": "Iatrogenic KS: Reduce Immunosuppression, Convert to mTOR Inhibitor",
+      "section": "Treatment",
+      "description": "Immunosuppression manipulation is first therapy for controllable iatrogenic KS, with local therapy for residual lesions.",
+      "path": "Kaposi Sarcoma / Iatrogenic / Taper",
+      "pills": [
+        "iatrogenic",
+        "taper",
+        "mTOR"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Taper calcineurin inhibitors (cyclosporine, tacrolimus) to the lowest graft-safe level and reduce or withdraw corticosteroids where feasible; every step is directed jointly with the transplant team with graft-function and drug-level monitoring.",
+        "Convert to an mTOR inhibitor (sirolimus or everolimus), which provides dual immunosuppressive and anti-KS antineoplastic activity; monitor mTOR drug levels, lipids, proteinuria, cytopenias, and wound healing.",
+        "Add local therapy for residual or bothersome lesions: low-dose radiotherapy 20-30 Gy, intralesional vinblastine, topical alitretinoin 0.1% gel, or excision of isolated nodules.",
+        "Reassess skin, mucosa, graft function, and drug levels every 2-4 weeks; regression typically begins within weeks to months of conversion.",
+        "Escalate to systemic chemotherapy for new visceral symptoms, bulky progression, or failure to regress after 3 months of optimized taper and conversion."
+      ],
+      "protocolRefs": [
+        "sarc-kaposi-liposomal-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_tx_iatrogenic_systemic",
+      "linkId": "kaposi_tx_iatrogenic_systemic",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Iatrogenic KS Systemic Treatment",
+      "title": "Iatrogenic KS, Visceral: Systemic Liposomal Doxorubicin",
+      "section": "Treatment",
+      "description": "Systemic chemotherapy alongside graft-safe immunosuppression adjustment for visceral, life-threatening, or taper-refractory iatrogenic KS.",
+      "path": "Kaposi Sarcoma / Iatrogenic / Systemic",
+      "pills": [
+        "iatrogenic",
+        "systemic",
+        "visceral"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "d"
+      ],
+      "bullets": [
+        "Pegylated liposomal doxorubicin 20 mg/m2 IV every 2-3 weeks (Category 1 preferred): frontline for visceral, bulky, bleeding, or life-threatening iatrogenic KS; continue to maximal response plus 2 consolidation cycles.",
+        "Reduce calcineurin inhibitor exposure and convert toward mTOR inhibition in parallel wherever graft function permits; coordinate chemotherapy timing with transplant nephrology or hepatology and monitor graft function each cycle.",
+        "Weekly paclitaxel 100 mg/m2 IV every 2 weeks is the Category 1 preferred alternative for anthracycline contraindication or intolerance.",
+        "Response assessment every 2-3 cycles with lesion photography, edema scores, graft-function labs, mTOR/calcineurin drug levels, and imaging of initially involved visceral sites; dose engine calculates patient-specific doses from the referenced protocol."
+      ],
+      "protocolRefs": [
+        "sarc-kaposi-liposomal-doxorubicin"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_wk_subtype",
+      "from": "n_workup",
+      "to": "n_subtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_sub_epidemic",
+      "from": "n_subtype",
+      "to": "n_hiv_extent",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "epidemic"
+      ]
+    },
+    {
+      "id": "l_sub_classic",
+      "from": "n_subtype",
+      "to": "n_classic_extent",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "classic"
+      ]
+    },
+    {
+      "id": "l_sub_endemic",
+      "from": "n_subtype",
+      "to": "n_endemic_extent",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "endemic"
+      ]
+    },
+    {
+      "id": "l_sub_iatrogenic",
+      "from": "n_subtype",
+      "to": "n_iatrogenic_mgmt",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "iatrogenic"
+      ]
+    },
+    {
+      "id": "l_hiv_limited",
+      "from": "n_hiv_extent",
+      "to": "n_tx_hiv_limited",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "limited"
+      ]
+    },
+    {
+      "id": "l_hiv_advanced",
+      "from": "n_hiv_extent",
+      "to": "n_tx_hiv_advanced",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "advanced"
+      ]
+    },
+    {
+      "id": "l_hiv_refractory",
+      "from": "n_hiv_extent",
+      "to": "n_tx_hiv_refractory",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "refractory"
+      ]
+    },
+    {
+      "id": "l_classic_limited",
+      "from": "n_classic_extent",
+      "to": "n_tx_classic_limited",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "limited"
+      ]
+    },
+    {
+      "id": "l_classic_extensive",
+      "from": "n_classic_extent",
+      "to": "n_tx_classic_advanced",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "extensive"
+      ]
+    },
+    {
+      "id": "l_endemic_indolent",
+      "from": "n_endemic_extent",
+      "to": "n_tx_endemic_indolent",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "indolent"
+      ]
+    },
+    {
+      "id": "l_endemic_aggressive",
+      "from": "n_endemic_extent",
+      "to": "n_tx_endemic_aggressive",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "aggressive"
+      ]
+    },
+    {
+      "id": "l_iat_taper",
+      "from": "n_iatrogenic_mgmt",
+      "to": "n_tx_iatrogenic_taper",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "taper"
+      ]
+    },
+    {
+      "id": "l_iat_systemic",
+      "from": "n_iatrogenic_mgmt",
+      "to": "n_tx_iatrogenic_systemic",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "systemic"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "sarc-kaposi-liposomal-doxorubicin"
+  ]
+}

@@ -60,6 +60,9 @@ ok("home.js: 'Show more/less' handled via delegation (survives cache restore)",
   /closest\(["']\.maik-more["']\)/.test(home));
 ok("home.js: the fragile live-only 'Show more' listener is gone",
   !/mb\.addEventListener\(["']click["']/.test(home));
+// Selector widened 2026-09-03 to include [data-maik-tool] and [data-maik-refine] - without them the
+// "Open Drug Index" / calculators / interactions chips and the refine chips never reached the click
+// handler at all (found live on the owner's phone). Still one delegated listener, still data-maik-q.
 ok("home.js: follow-up chips still routed via delegated data-maik-q",
   // The selector may grow (tool / calculator chips were added to it on 2026-09-02); what this pins
   // is that data-maik-q and data-maik-web are still the delegated route, first in the list.

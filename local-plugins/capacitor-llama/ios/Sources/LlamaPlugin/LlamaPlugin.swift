@@ -289,14 +289,15 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         let temperature = Float(call.getDouble("temperature") ?? 0.0)   // greedy default
         let seed = UInt32(truncatingIfNeeded: call.getInt("seed") ?? 0)
         let stream = call.getBool("stream") ?? true
+        let prefillEmptyThink = call.getBool("prefillEmptyThink") ?? false
 
         let t0 = Date()
         let onToken: ((String) -> Void)? = stream
             ? { [weak self] piece in self?.notifyListeners("llamaToken", data: ["text": piece]) }
             : nil
 
-        engine.generate(system: system, user: prompt, nPredict: nPredict,
-                        temperature: temperature, seed: seed, onToken: onToken) { [weak self] result in
+        engine.generate(system: system, user: prompt, nPredict: nPredict, temperature: temperature,
+                        seed: seed, prefillEmptyThink: prefillEmptyThink, onToken: onToken) { [weak self] result in
             switch result {
             case .success(let text):
                 self?.armIdleRelease()

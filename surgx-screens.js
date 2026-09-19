@@ -782,6 +782,47 @@
     return renderCase(state.kase);
   }
 
+  /* One mentor turn. The prompt carries the case stem, what the trainee has answered so far and their
+   * question; mode "surgx-mentor" selects the persona (SURG_SYS on device; the surgx_case quota bucket
+   * on the cloud). Mirrors clinix-tutor.js: a grounded package when StewardRAG is present, a plain
+   * explain() otherwise, and { error } rendered as text, never swallowed. */
+  function askMentor() {
+    var k = state.kase; if (!k) return;
+    var ta = document.getElementById("sgxMentorQ");
+    var q = String((ta && ta.value) || "").trim().slice(0, 600);
+    state.mentor = { q: q, a: (state.mentor || {}).a, busy: false, err: "" };
+    if (!q) { toast("Type your question first."); return; }
+    var AI = window.SMD_AI;
+    if (!(AI && (AI.explainGrounded || AI.explain))) { state.mentor.err = "MaiK is not available on this build."; render(); return; }
+    var answered = (k.decisionPoints || []).filter(function (d) { return state.caseAnswers && state.caseAnswers[d.id]; }).map(function (d) {
+      var o = (d.options || []).filter(function (x) { return x.id === state.caseAnswers[d.id]; })[0];
+      return d.phase + ": asked '" + d.prompt + "', trainee chose '" + (o ? o.text : state.caseAnswers[d.id]) + "'" + (o && o.correct === false ? " (not the preferred option)" : "");
+    });
+    var prompt = "SURGICAL TEACHING CASE (simulated, not a real patient).\nLevel: " + String(k.level || "") + "\nStem: " + String(k.stem || "") +
+      (answered.length ? "\nDecisions so far:\n- " + answered.join("\n- ") : "") + "\n\nTrainee's question: " + q;
+    state.mentor.busy = true; render();
+    var me = state.mentor;
+    var call;
+    try {
+      if (window.StewardRAG && window.StewardRAG.buildPackage && AI.explainGrounded) {
+        call = Promise.resolve(window.StewardRAG.buildPackage({ infectious: [], nonInfectious: [] }, { question: prompt })).then(function (pkg) {
+          if (!pkg) return { error: "no-package" };
+          pkg.question = prompt;
+          return AI.explainGrounded(pkg, { depth: "concise", mode: "surgx-mentor" });
+        });
+      } else {
+        call = AI.explain(prompt, q);
+      }
+    } catch (e) { call = Promise.resolve({ error: "server" }); }
+    call.then(function (r) {
+      if (state.mentor !== me) return;
+      me.busy = false;
+      if (!r || r.error) { me.err = (r && r.message) || (r && r.error === "quota" ? "MaiK limit reached for today." : "The senior surgeon is unavailable right now."); }
+      else { me.a = String(r.text || "").trim(); me.err = ""; }
+      render();
+    }, function () { if (state.mentor === me) { me.busy = false; me.err = "The senior surgeon is unavailable right now."; render(); } });
+  }
+
   function renderCase(k) {
     var dps = k.decisionPoints || [];
     if (!dps.length) {
@@ -819,6 +860,19 @@
     });
 
     if (done) body += renderCaseResult(k, dps);
+
+    // Senior Surgeon Mode (2026-09-11): the "surgx-mentor" persona existed as a quota bucket and,
+    // since the hard Local policy, as an on-device system prompt, but had no screen. One question at
+    // a time, about THIS case, through the same SMD_AI transport as CliniX's tutor, so the answer
+    // engine chooser (Cloud / Local / KB-only) governs it like everything else.
+    var mt = state.mentor || {};
+    body += '<div class="sgx-card"><h4>' + ic("psychology") + " Ask the senior surgeon</h4>" +
+      '<div class="n">Challenge your plan on this case. Teaching and decision support only: no doses, no advice about a real patient.</div>' +
+      '<textarea id="sgxMentorQ" rows="2" placeholder="e.g. Would you convert to open here, and what would make you decide?">' + esc(mt.q || "") + "</textarea>" +
+      '<div class="sgx-btnrow"><button class="sgx-btn" data-sgx="mentor"' + (mt.busy ? " disabled" : "") + ">" + ic("auto_awesome") + (mt.busy ? " Thinking…" : " Ask") + "</button></div>" +
+      (mt.a ? '<div class="sgx-why"><div class="h">Senior surgeon</div>' + esc(mt.a).replace(/\n/g, "<br>") + "</div>" : "") +
+      (mt.err ? '<div class="n">' + esc(mt.err) + "</div>" : "") +
+      "</div>";
 
     body += '<div class="sgx-btnrow">' +
       '<button class="sgx-btn" data-sgx="caseReset">' + ic("restart_alt") + " Start again</button>" +
@@ -1046,6 +1100,39 @@
       state.note.values.date = todayISO();
       state.note.provenance.date = "auto";
     }
+  }
+
+  /* Dictation -> fields, through SMD_AI.extract("surgx-note"). The answer-engine chooser decides
+   * local or cloud (or refuses with a named reason). applyExtraction() in surgx-model.js is the
+   * ONLY path from a model's output into a note: schema, never-AI-fillable, confirmed-field and
+   * numeric guards, in that order. Everything that survives is amber until the surgeon confirms it. */
+  function structureNote() {
+    var n = state.note, schema = state.noteSchema, mm = M();
+    if (!n || !schema || !mm || !mm.applyExtraction) return;
+    var ta = document.getElementById("sgxDictation");
+    var text = String((ta && ta.value) || "").trim();
+    n.dictation = text;
+    if (!text) { toast("Type or paste what you did first."); return; }
+    var AI = window.SMD_AI;
+    if (!(AI && AI.extract)) { toast("MaiK is not available on this build."); return; }
+    var allowed = [];
+    (schema.sections || []).forEach(function (sec) { (sec.fields || []).forEach(function (f) { if (f && f.k && f.aiFillable !== false) allowed.push({ k: f.k, label: f.label || f.k }); }); });
+    n.structureNote = "Structuring your dictation…"; render();
+    AI.extract(text, "surgx-note", { allowedFields: allowed, noteType: schema.typeId || schema.title || "operative" }).then(function (r) {
+      if (state.note !== n) return;
+      if (!r || r.error) {
+        n.structureNote = (r && r.message) || (r && r.error === "quota" ? "MaiK limit reached for today." : "Could not structure this dictation.");
+        render(); return;
+      }
+      var res = mm.applyExtraction(schema.sections, n.values, n.provenance, r.fields || {}, text, "ai");
+      n.values = res.values; n.provenance = res.provenance;
+      n.audit = n.audit || []; n.audit.push({ a: "structure", applied: res.applied.map(function (x) { return x.k; }), rejected: res.rejected.length, engine: r.engine || "cloud" });
+      var parts = [res.applied.length + " field" + (res.applied.length === 1 ? "" : "s") + " filled from your dictation, amber until you confirm each"];
+      if (res.fabricated.length) parts.push(res.fabricated.length + " dropped for a number you did not say");
+      if ((r.dropped || []).length) parts.push(r.dropped.length + " not allowed for AI");
+      n.structureNote = parts.join(". ") + ".";
+      haptic("light"); render();
+    }, function () { if (state.note === n) { n.structureNote = "Could not structure this dictation."; render(); } });
   }
 
   function createNote(typeId, templateId) {
@@ -1316,6 +1403,17 @@
       body += "</div>";
     });
 
+    if (!n.finalized) {
+      // Dictation -> fields (2026-09-11). Until now the server's "surgx-note" structuring had no
+      // client caller at all. The text is kept on the note so a re-render does not lose it.
+      body += '<div class="sgx-card"><h4>Dictation</h4>' +
+        '<div class="n">Type or paste what you did. MaiK only decides which field each thing you said belongs in. It never adds a fact, ' +
+        'and a field with a number you did not say is dropped, not corrected.</div>' +
+        '<textarea id="sgxDictation" rows="4" placeholder="e.g. Under GA, supine, right subcostal incision. Findings: ...">' + esc(n.dictation || "") + '</textarea>' +
+        '<div class="sgx-btnrow"><button class="sgx-btn" data-sgx="notestructure">' + ic("auto_awesome") + " Structure with MaiK</button></div>" +
+        (n.structureNote ? '<div class="n">' + esc(n.structureNote) + "</div>" : "") +
+        "</div>";
+    }
     body += '<div class="sgx-card"><h4>Preview</h4><pre class="sgx-pre" id="sgxNotePreview">' +
       esc(mm.renderNoteText(schema.sections, n.values, n.provenance, {
         title: schema.title, finalized: n.finalized, finalizedBy: n.finalizedBy, finalizedAt: n.finalizedAt
@@ -1630,7 +1728,8 @@
         render();
         return;
       }
-      if (act === "caseReset") { state.caseAnswers = {}; render(); try { state.host.scrollTop = 0; } catch (er) {} return; }
+      if (act === "caseReset") { state.caseAnswers = {}; state.mentor = null; render(); try { state.host.scrollTop = 0; } catch (er) {} return; }
+      if (act === "mentor") { askMentor(); return; }
 
       // notes
       if (act === "newnote") { startNote(t.getAttribute("data-id")); return; }
@@ -1645,6 +1744,7 @@
         return;
       }
       if (act === "mknote") { createNote(t.getAttribute("data-t"), t.getAttribute("data-tpl")); return; }
+      if (act === "notestructure") { structureNote(); return; }
       if (act === "confirm") {
         var fk = t.getAttribute("data-k");
         if (!state.note) return;

@@ -1,0 +1,1271 @@
+/* functions/_wardsynq/service.js — the WardSynQ Clinical Record Service.
+ *
+ * This is the authoritative clinical record when WardSynQ is a hospital's EMR. It is the SAME
+ * ClinicalStore and the SAME GovernedStore that run in the browser today, instantiated here on the
+ * server per request, over a persistence port instead of IndexedDB. No clinical logic is
+ * re-implemented in this file: versioning, append-only history, provenance stamping and the actor
+ * ceilings all come from wardsynq/ unchanged. What this file adds is exactly what a device-local
+ * store cannot have:
+ *
+ *   TENANCY       every read and write is scoped to one hospital, decided from membership, never
+ *                 from the request body
+ *   IDENTITY      the actor is derived from the verified token and the membership role; a client's
+ *                 claim about who it is does not survive the door
+ *   CONCURRENCY   a write states the version it was derived from; a stale one is refused with the
+ *                 current record, never merged silently. The repository's unique key backs this up
+ *                 for the race the check cannot see.
+ *   IDEMPOTENCY   a retried write replays its original outcome instead of producing version N+2
+ *   AUDIT         every read and write of clinical content leaves a PHI-free row in the existing
+ *                 Connect audit trail, in the same atomic batch as the write it describes
+ *   AUTHORITY     in integration mode an external EMR owns what it owns: a record whose latest
+ *                 version came from another system is not overwritten through the native door
+ *
+ * TWO MODES, ONE CONTRACT. A tenant runs as SYSTEM-OF-RECORD (WardSynQ owns the record) or in
+ * INTEGRATION (an external EMR is authoritative for the data it owns and reaches WardSynQ through
+ * the connectors). Both modes use this service, this model and this store. The mode only changes
+ * which writes the native door accepts; it does not change what a record is.
+ *
+ * STATUS: IMPLEMENTED. Not clinically validated, not clinically approved, and the deployment modes
+ * other than Cloudflare D1 are a port contract, not an implementation.
+ */
+
+import { ClinicalStore } from "../../wardsynq/wardsynq-store.js";
+import { GovernedStore, GovernanceError, canRead } from "../../wardsynq/wardsynq-actors.js";
+import { VersionConflictError, RepositoryError, assertRepository } from "./repository.js";
+import { patientIdentifierKeys } from "./identity-key.js";
+import { actorFromConnectRole, aiActorFor, isAiOrigin } from "./actor.js";
+import { stageWebhookEvents } from "./webhook-events.js";
+
+/** The canonical resource types. Mirrors wardsynq-model.js; a type not listed here is refused. */
+const RESOURCE_TYPES = Object.freeze([
+  "Patient", "Encounter", "Condition", "AllergyIntolerance", "Observation",
+  "MedicationOrder", "MedicationAdministration", "ServiceRequest", "DiagnosticReport",
+  "CarePlan", "ClinicalNote",
+  /* The critical-result loop. NOT a clinical finding and deliberately not modelled as one: there is
+   * no FHIR type for "a named human must look at this", and dressing a workflow fact up as a
+   * clinical resource would put a process artefact where a reader expects a diagnosis. It lives
+   * here so it is versioned and append-only like everything else, which is what makes an
+   * acknowledgement impossible to edit away afterwards.
+   *
+   * No grant change accompanies this: EMR_TREAT already carries unrestricted write and EMR_VIEW
+   * unrestricted read, so a doctor can acknowledge and a nurse can see the list, which is the
+   * policy wanted. A nurse's write scope is enumerated and does not include this type. */
+  "CriticalResultLoop",
+  /* The shift handover. Also not a clinical finding, and deliberately not a ClinicalNote: that is a
+   * clinical DOCUMENT, and a nurse's write scope rightly excludes one. Widening that scope so a
+   * handover could be written would have let a nurse author a discharge summary too. Its own type,
+   * granted narrowly by EMR_VITALS - what the nurse records about their own patients. */
+  "ShiftHandover",
+  /* Pharmacy verification of an ORDER. Emphatically not a MedicationAdministration: granting
+   * pharmacy write on that would let the role post a fabricated "administered" row through the raw
+   * record API without going near a bedside. Its own type, granted only by ORDER_VERIFY. */
+  "MedicationVerification",
+  /* An approval, and every decision on it. Its own type for the same reason BreakGlassGrant is: the
+   * only thing an approval is worth is being legible afterwards, and one that could be edited or
+   * deleted would be worth nothing. Append-only is the whole feature - a withdrawal is a new row
+   * after the approval it withdraws, never an edit of it, so "it was approved and then taken back"
+   * stays readable forever. Nothing here confers any capability by existing; it is evidence that a
+   * decision was made, which formulary.js then reads before it lets a restricted drug through. */
+  "Verification",
+  /* A purchase order and the suppliers it is raised against. Commercial records, kept here for the
+   * same reason everything else is: append-only and versioned, so what was ordered, by whom, and
+   * what was approved cannot be edited after the fact. How much has ARRIVED is never stored on the
+   * order - it is summed from the receipts booked against it, the same discipline stock.js keeps
+   * for a stock level, so there is no counter to drift away from the events beneath it. */
+  "PurchaseOrder", "Vendor",
+  /* General stores (stores.js): the non-drug item master, store locations, a department's indent and the in-charge's
+   * decision on it, the department's acknowledgement of what arrived, and the store closing a back-order. What was
+   * ISSUED is never stored on the indent: it is the StockMovement transfers booked against it, summed on read. */
+  "StoreItem", "StoreLocation", "Indent", "IndentDecision", "IndentReceipt", "IndentClosure",
+  /* Biomedical assets (assets.js): the register, where each asset went and what state it is in, its maintenance
+   * schedules, and job cards with every step taken on them. Status and location are derived from the events. */
+  "Asset", "AssetEvent", "MaintenanceSchedule", "JobCard", "JobCardEvent",
+  /* The blood bank's registers (blood-bank.js). A unit's status (quarantine, available, reserved, issued, discarded,
+   * expired) is derived from its tests, its events and the transfusion episodes that name it, never stored. */
+  "BloodDonor", "DonorScreening", "BloodDonation", "BloodTestResult", "BloodUnit", "BloodUnitEvent",
+  /* The dialysis unit (dialysis.js): a haemodialysis session, each first use, reuse and discard of a dialyzer, and the
+   * patient's serology group as the unit names it. URR is computed on read from the session's urea inputs, never stored. */
+  "DialysisSession", "DialyzerEvent", "DialysisSerology",
+  /* Pilot and recipient samples with their discard log, and the confidential notification of a reactive donor
+   * (legal opinion 2026-09-17, G.5.5 and G.5.8). */
+  "BloodSample", "DonorNotification",
+  /* Hospital support services, 2026-09-16. A diet order is a clinical order and versioned like one; a
+   * meal round is the kitchen's prepared/delivered mark for one patient at one meal. CSSD keeps its set
+   * master, its steriliser loads with their indicator results, and one cycle per trip of a set through
+   * the department, so a failed load can be traced to every case its sets reached. A housekeeping task,
+   * an ambulance, a trip and a mortuary case are operational registers kept here for the same reason
+   * as the rest: append-only, so what was done, by whom and when cannot be edited afterwards. */
+  "DietOrder", "MealRound", "InstrumentSet", "SterilizerLoad", "CssdCycle", "HousekeepingTask",
+  "AmbulanceVehicle", "AmbulanceTrip", "MortuaryCase",
+  /* Who to ring about this patient. Its own record rather than fields on Patient, because a contact
+   * list changes on its own clock and an emergency contact quietly overwritten last month leaves
+   * nobody to call at the moment somebody has to be called. Append-only like everything else:
+   * removing a contact marks it inactive and keeps it. */
+  "RelatedPerson",
+  /* A procedure done in the emergency department (migrate-ed.js): what, where on the body, who did
+   * it, when, and what went wrong. Its own type, not a SurgicalCase: that is a theatre booking with a
+   * checklist, and a chest drain in resus has neither. No grant change: EMR_TREAT's unrestricted
+   * write covers recording one and EMR_VIEW's unrestricted read covers seeing it. */
+  "ProcedureRecord",
+  /* A break-glass declaration. The record OF an emergency access, not a clinical fact - and it is
+   * stored here precisely so it is append-only: a break-glass grant somebody could delete afterwards
+   * would defeat the entire mechanism, whose only value is being legible later. */
+  "BreakGlassGrant",
+  /* TASK 4.15: a hospital-wide emergency declaration - mass casualty, disaster, evacuation, surge,
+   * network outage. The same reasoning as BreakGlassGrant, at hospital scale: the record OF the
+   * declaration, append-only, never the source of any capability itself. Nothing in actor.js's
+   * grant logic reads this type; declaring one widens no role's read/write scope automatically -
+   * see emergency-mode.js's own header for why "do not create an unrestricted admin bypass" means
+   * this file grants nothing by existing. */
+  "EmergencyActivation",
+  /* Medicines reconciliation. A record of DECISIONS about medicines taken before admission - not a
+   * prescription and deliberately not modelled as one: deciding to continue a home medicine records
+   * the decision, and the inpatient order is still written through the ordering path with its own
+   * authority and its own safety checks. */
+  "MedicationReconciliation",
+  /* A patient identity link. A merge is a CLAIM that two records are one person, and it is stored
+   * as its own record precisely so it moves nothing: the two Patient records and every clinical row
+   * under them stay exactly as they are, which is what makes the claim retractable. */
+  "PatientLink",
+  /* A recorded CDSS override. The safety engine always required a reason to clear a warning and then
+   * discarded it, so nothing could answer which rules were being clicked through. Stored so a rule
+   * pack can be told; never aggregated by clinician. */
+  "SafetyOverride",
+  /* Which overridable rules fired on one order evaluation. The DENOMINATOR: an override count with
+   * no firing count is a fact about how busy the ward was, not about the rule. Kept as its own
+   * append-only fact rather than a counter, because a counter loses one of two concurrent orders and
+   * a lost firing silently lowers a rule's override rate - the direction that hides a bad rule. */
+  "SafetyFiring",
+  /* The pharmacy issued stock against an order. A SUPPLY fact and never a clinical one: it says
+   * medicine left the pharmacy, not that a patient received anything. Kept apart from
+   * MedicationAdministration on purpose - a system where "dispensed" can drift into "given" puts
+   * doses on charts that nobody administered. */
+  "MedicationDispense",
+  /* A sample somebody actually took, between the order and the result. Without it an order nobody
+   * collected looks exactly like one awaiting a result - both are "requested, no result yet" - and
+   * only one of them has a nurse who still has to go and do something. */
+  "SpecimenCollection",
+  /* A patient promised a bed. A waiting-list entry and NEVER a bed reservation: reserving a bed for
+   * somebody who is not in it makes the board show full while beds stand empty, and a ward that
+   * cannot trust the board stops reading it. */
+  "AdmissionRequest",
+  /* A wound, assessed over time. Its worst stage is carried forward and never lowered, and where it
+   * came from is set at the first assessment - a system that let either fall is one where a hospital
+   * stops having pressure ulcers. */
+  "WoundAssessment",
+  /* A room, a theatre or a scanner, booked. Unlike a clinician's diary this one CANNOT be
+   * overbooked: two patients do not fit inside one CT scanner, and a diary that says they do is
+   * worse than no diary because the ward acts on it. */
+  "ResourceBooking",
+  /* A change in an infusion's rate. The VOLUME is integrated from these and never stored, because a
+   * stored total stops being true the moment the pump changes - and an infusion that stops being
+   * charted is uncharted, not stopped. */
+  "InfusionRate",
+  /* The ICU bedside record (icu-care.js): a blood gas, a ventilator setting, a RASS, a round
+   * checklist. One type with a `kind`, append-only like every other chart entry, so a corrected gas
+   * is a new entry beside the wrong one rather than an edit of it. */
+  "IcuRecord",
+  /* That a value was DECISIVE for a named person at a time. Not a view log: a page rendering a
+   * hundred numbers has not shown a clinician a hundred numbers. It exists so that when a figure is
+   * later found to be wrong there is a list of people to tell - HAZ-FLUID-01's missing half. */
+  "ClinicalRead",
+  /* A record that an order set was applied, and exactly what landed and what did not. NOT the orders
+   * themselves - those go through the ordinary path and are ordinary orders. This is what makes a
+   * partial application visible, and what finds the patients a bad set touched. */
+  "OrderSetApplication",
+  /* What the patient agreed to, and what they REFUSED - which is a clinical fact, not an absent
+   * consent. Append-only so a withdrawal keeps the original grant: "they consented and later
+   * withdrew" and "they never consented" are different histories and only one is true. */
+  "PatientConsent",
+  /* The diary. An Appointment holds a slot; an AppointmentRequest is a follow-up somebody PROMISED
+   * and which stays visibly outstanding until a human books it - auto-booking would make the
+   * promise look kept when nobody had spoken to the patient. */
+  "Appointment", "AppointmentRequest",
+  // TASK 4.5: a clinician/resource is deliberately unavailable for a whole period (leave, a theatre
+  // closure) - a REFUSAL, never an override, unlike an appointment clash which a human may
+  // deliberately overbook. See blackout.js's own header for why this is never the same record as
+  // an Appointment/ResourceBooking clash.
+  "Blackout",
+  /* A scored nursing risk assessment. The score selects the ACTIONS, which are the only part that
+   * changes anything for the patient - so the actions and what was done about them live on the
+   * record beside the number. */
+  "RiskAssessment",
+  /* A vaccine given, or considered and deliberately not given. Append-only so an entry later found
+   * to be wrong is withdrawn as a new version and stays readable (immunization.js). */
+  "Immunization",
+  /* Sending a prescription somewhere, and knowing whether it arrived. A DELIVERY fact, never a
+   * clinical one: nothing here touches the MedicationOrder, because "we sent this" is a statement
+   * about a message, not about the treatment. */
+  "PrescriptionTransmission",
+  /* A coded claim. Stored here for one reason: append-only. The whole safety property of
+   * wardsynq-billing.js is that a claim's coding history survives - "we found more documentation"
+   * after a denial is the commonest shape of real upcoding, and a claim whose earlier coding could
+   * be edited away would make it invisible. It is a financial record and never a clinical one:
+   * nothing reads a Claim to decide anything about a patient. */
+  "Claim",
+  /* A payer's funding decision. Its own type precisely so it can never be mistaken for a clinical
+   * one - a refused pre-auth means the payer will not pay, and it does not mean the treatment is
+   * not indicated. Kept apart from the chart so nothing clinical can ever read it as an answer. */
+  "PreAuthorisation",
+  /* P1.5: a pre-admission cost estimate from the tariff. Financial, marked as an estimate on the record,
+   * and never read to decide anything clinical. Granted with Claim. */
+  "CostEstimate",
+  /* gap-claims-gst A (2026-09-16): an NHCX coverage eligibility check and the payer's answer to it
+   * (functions/_wardsynq/nhcx.js). Financial, append-only (the answer is a new version), granted with Claim. */
+  "CoverageEligibilityCheck",
+  /* gap-claims-gst-2 (2026-09-16): a package on an inpatient stay (functions/_wardsynq/packages.js), with a copy of the
+   * package version it was attached with and its pre-authorisation link. Financial, versioned, granted with Claim. */
+  "PackageAssignment",
+  /* gst-parties (2026-09-17): who settles an inpatient stay's bill (functions/_wardsynq/stay-payer.js), a reference to a
+   * payer contract or self-pay. Financial, versioned, granted with Claim. */
+  "StayPayer",
+  /* TASK 4.6: the charge-to-reconciliation ledger. Every discount/deposit/payment/refund/
+   * adjustment/write-off is an append to the SAME invoice record, never a mutation of its charge
+   * lines - "what was billed" and "what happened to the bill since" are different facts. A
+   * financial record, like Claim/PreAuthorisation, and never read to decide anything clinical. */
+  "Invoice",
+  /* TASK 4.9: a third-party request for a copy of a patient's record (HIM/ROI), distinct from the
+   * patient's own copy (PatientCopy is a receipt of a bedside handout; this is a tracked
+   * authorization + disclosure log for an attorney/other-provider/insurer/government-agency
+   * request). Append-only, one version per phase transition, the disclosure log counts what was
+   * sent and never re-stores the values. */
+  "ROIRequest",
+  /* That a patient was given their own copy of the record, by a named clinician, at a time. A
+   * RECEIPT and never a copy: it holds which results went and how many diagnoses, and none of their
+   * values - a frozen second copy of clinical data that no correction ever reaches is a liability,
+   * not a record. Append-only, because "you were given this" is exactly the claim that has to
+   * survive somebody wishing it had not been. */
+  "PatientRecordRelease",
+  /* That a backup run finished, and what sequence it covered. A RECEIPT written by the caller, never
+   * inferred from the export pages: a caller that stopped halfway holds a file that verifies and is
+   * short, and only the caller knows whether it actually stored the last page. Kept in the record
+   * itself so the recovery point is answerable from the same store a restore would rebuild. */
+  "BackupRun",
+  /* P2.17: a reviewer's recorded decision on a break-glass grant or privileged admin act, and a
+   * restore test somebody actually ran. Append-only receipts; neither changes anyone's access. */
+  "SecurityReview",
+  "RestoreTest",
+  /* A pharmacy stock movement. The LEVEL is summed from these and never stored as a counter, because
+   * a counter loses one of two concurrent updates and the direction it loses in is the one that says
+   * there is more stock than there is. Issues are deliberately NOT movements: the quantity that left
+   * the pharmacy is already a MedicationDispense, and two entries for one event can disagree. */
+  "StockMovement",
+  /* A patient's own access to their own record: who enrolled them, how they were identified, and the
+   * DIGESTS of the code and session token - never the secrets themselves, because a grant readable
+   * by staff must not be a way to become the patient. Append-only so a revocation cannot be deleted
+   * afterwards, which is the only thing that makes revocation mean anything. */
+  "PatientAccessGrant",
+  /* A message a patient sent to their care team. It carries the warning they were shown at the
+   * moment they sent it, stamped on the row: anybody reading this later - a clinician, an
+   * investigator - needs to know what the patient had been told about the channel. Nothing
+   * auto-replies to one, and a reply is written by a clinician's own actor. */
+  "PatientMessage",
+  /* What will actually be done in the scanner. Its own type because protocolling is the point where
+   * an imaging REQUEST becomes a drug administration - the contrast decision - and that decision has
+   * a different author, a different moment and different evidence from the request itself. Kept
+   * against the request VERSION, so a later change to the request cannot make it look as though the
+   * protocol was decided for a study nobody protocolled. */
+  "ImagingProtocol",
+  /* TASK 7.7: that a study EXISTS in a PACS, and what it is. Metadata only and deliberately so -
+   * there is no url, no instance list and no pixel data on the row, because a field holding a
+   * retrieve URL becomes the thing every viewer, cache and log copies a patient's images through.
+   * What the chart needs is that the scan happened, when, of what, and the accession number that
+   * finds it in the viewer the radiologist already has. Its value is the ORDER LINK: matched to the
+   * ServiceRequest sharing its accession number, so a request and its scan stop being two unrelated
+   * rows. Before this, imaging studies reaching the SCCM adapter were counted and DROPPED. */
+  "ImagingStudy",
+  /* Something another system sent that WardSynQ would not write silently: a patient who might be
+   * one of two people here, a probable duplicate, a record that would overwrite one this hospital
+   * authored, a resource type nothing maps. Held HERE, with the payload, rather than dropped or
+   * guessed at - because the failure mode of every interface is the message that vanished and the
+   * clinician who never knew it had been sent. Append-only, and resolved by a person. */
+  "ExchangeException",
+  "ExchangeMessage",
+  /* A person's decision that a patient in ANOTHER system is (or is not) a patient here. Recorded
+   * once, by name, and consulted before any probabilistic matching on every later message from that
+   * system for that patient - so the same look-alike is not held and decided again, and so the
+   * decision is on the record if it turns out to be wrong. Never made by software. */
+  "ExchangeIdentityDecision",
+  /* A SMART on FHIR grant: an authorization code, an access token, or a presented assertion id -
+   * each as a DIGEST, never the secret. Looked up by the digest of what the client presents, so a
+   * stolen table cannot be replayed as a token. Expiry is the record's, revocation is a new version
+   * that cannot be deleted, and every one names the person or system it acts as. */
+  "SmartGrant",
+  /* A time-critical resuscitation bundle (Code Sepsis / Code Blue / Code STEMI), the persisted state
+   * of wardsynq-emergency.js's EmergencyBundle. Its own type, not a CarePlan: a CarePlan is a plan a
+   * clinician wrote, and a bundle's elements, targets and time zero are the hospital's SEEDED,
+   * UNAPPROVED protocol content, never invented by a clinician on the screen. No grant change
+   * accompanies this: EMR_TREAT's unrestricted write already covers starting/marking a bundle (a
+   * "clinical commitment", per that file's own words - never started by a screen result alone), and
+   * EMR_VIEW's unrestricted read covers seeing one running. */
+  "ResusBundle",
+  /* A patient-device binding (HAZ-DEV-01, Task 2.2), the persisted state of wardsynq-iomt.js's
+   * DeviceGateway - keyed by deviceId, one open association at a time. Its own type, not folded
+   * into Observation: the association is the CLAIM that a monitor belongs to a patient, and the
+   * device readings it authorises are Observations in their own right, written separately, exactly
+   * like ResusBundle's elements are distinct from the bundle that governs them. Granted by
+   * EMR_VITALS (VITALS_TYPES in actor.js) - scanning a wristband and a device tag onto a patient is
+   * the nurse's own bedside act, the same authority as charting a vital. */
+  "DeviceAssociation",
+  /* The WHO Surgical Safety Checklist gate, the persisted state of wardsynq-surgical.js's
+   * SurgicalCase (Task 2.3). Its own type, not a CarePlan or a ClinicalNote: the checklist state,
+   * signatures and laterality chain are a safety-gate ledger, not a plan or a document. No grant
+   * change accompanies this: EMR_TREAT's unrestricted write already covers booking/checklisting a
+   * case (the same "clinical commitment" reasoning ResusBundle's own comment gives), and EMR_VIEW's
+   * unrestricted read covers seeing one. */
+  "SurgicalCase",
+  /* An anaesthesia record for one surgical case: induction/maintenance/emergence and the drugs
+   * actually given. Not a MedicationAdministration - those are for ordered ward medicines going
+   * through the five-rights eMAR; an anaesthetic is given directly by the anaesthetist inside a
+   * theatre already gated by the checklist above, a different authority and a different record. */
+  "AnesthesiaRecord",
+  /* Implant/prosthesis traceability (device, lot, serial, site) - explicitly absent before Task 2.3
+   * (wardsynq-surgical.js's own header names it as not modelled). A recall notice is only actionable
+   * against a hospital that can answer "which patients got lot X", so this is append-only and keyed
+   * to the case it was placed in. */
+  "ImplantRecord",
+  /* The pre-anaesthetic checkup for one surgical case (migrate-surgery.js recordPac): history, airway,
+   * ASA class, fasting, investigations reviewed, plan, consent for anaesthesia and the fitness decision.
+   * One record per case, a revision being a new version with a reason. The anaesthetist's clinical
+   * commitment, so EMR_TREAT's unrestricted write covers it; no grant change. */
+  "PreAnaestheticCheckup",
+  /* A stay's expected discharge date as the treating team states it (expected-discharge.js): one record per
+   * encounter, each change a new version with a reason. A plan, never a prediction. EMR_TREAT writes it. */
+  "ExpectedDischarge",
+  /* A request to move a patient to another ward or unit, and the receiving unit's answer (transfer-request.js):
+   * requested, accepted or declined, bed assigned, completed or cancelled, each step a new version. */
+  "TransferRequest",
+  /* One stay's discharge relay (discharge-milestones.js): advised, pharmacy cleared, bill ready, TPA final approval asked
+   * and received, left, each with who recorded it and when. Each step is written by the role whose act it is. */
+  "DischargeMilestone",
+  /* One stay's two NABH KPI 1 times (admission-times.js): when the patient reached the ward bed, recorded by the nurse
+   * (EMR_VITALS, VITALS_TYPES in actor.js), and which signed note a doctor marked as the initial assessment. */
+  "AdmissionTimes",
+  /* A patient another hospital asks us to take (transfer-centre.js): the call, the consultant's answer with the capacity
+   * of that moment, and the admission request it became. No patientId until the patient is registered and accepted. */
+  "TransferCentreRequest",
+  /* A hospital-loaded SNOMED CT / ICD-10 / LOINC release (code-sets.js): the import record (who, when, how many,
+   * the licence confirmation) and the codes in chunks. Hospital-wide, no patientId. Loaded from Admin. */
+  "CodeSetImport", "CodeSetChunk",
+  /* A hospital's own licensed growth reference tables (growth-tables.js): the import record (reference name, method,
+   * licence confirmation, withdrawn or not) and the LMS rows in chunks. Hospital-wide, no patientId. Loaded from Admin. */
+  "GrowthTableImport", "GrowthTableChunk",
+  /* Antenatal history and gestation (Task 2.4): gravida, para, LMP/EDD, risk factors. One current
+   * episode per patient, versioned like everything else - a delivery is the fact that changes para,
+   * recorded through migrate-maternity.js's recordDelivery(), never edited by hand elsewhere. */
+  "PregnancyEpisode",
+  /* What actually happened at delivery: mode, when, complications. Its own type, not a ClinicalNote -
+   * a delivery is a discrete clinical EVENT with a machine-readable mode, not free prose, and it is
+   * what maternityView() reads to resolve the real wardsynq-obstetrics.js obstetricState() (the
+   * postpartum/puerperium window) from the actual record rather than a caller's claim. */
+  "DeliveryRecord",
+  /* Blood loss, obstetric. Its own type because pphThresholdReached()'s quantitative-vs-visual
+   * distinction (wardsynq-obstetrics.js) is load-bearing: an Observation of value+unit alone loses
+   * the "how was this established" fact a PPH threshold decision refuses to answer without. */
+  "BloodLossRecord",
+  /* A clinical relationship between two DIFFERENT patients - mother and newborn, first user (Task
+   * 2.4). Never PatientLink: that type asserts "these two records are one person", which is exactly
+   * the wrong claim for two people. No grant change accompanies any of the four types above:
+   * EMR_TREAT's unrestricted write already covers them (the same "clinical commitment" reasoning
+   * ResusBundle and SurgicalCase's own comments already give), and EMR_VIEW's unrestricted read
+   * covers seeing one. */
+  "FamilyLink",
+  /* One minute's APGAR on a newborn's own chart (migrate-maternity.js recordApgar): five signs and the total
+   * worked out from them, one record per minute, a change being a new version with a reason. */
+  "ApgarScore",
+  /* A line, catheter or drain: site, type, when placed, when removed (Task 2.5). A placement log,
+   * not a protocol - it carries no judgement about when a line is indicated or how to care for it,
+   * the same restraint migrate-surgery.js's ImplantRecord already keeps for a prosthesis. No grant
+   * change accompanies this: EMR_TREAT's unrestricted write already covers it, matching
+   * ImplantRecord's own precedent - placing a line is a clinical commitment, not routine charting. */
+  "LineRecord",
+  /* The ONCqis bridge (Task 2.6). ONCqis (onco-*.js, functions/_onco_store.js) is a separate,
+   * owner-approved production oncology product with its own plan/cycle store, scoped only by
+   * hospitalId + a bare ghisPatientId - never linked to a canonical WardSynQ patient before this.
+   * OncologyLink names that join; it duplicates none of ONCqis's own staging/dosing/protocol
+   * content, only the identifying facts needed to resolve one system's plan against this record's
+   * patient. No grant change accompanies any of the three types below: EMR_TREAT's unrestricted
+   * write already covers them, the same "clinical commitment" reasoning ResusBundle/SurgicalCase/
+   * DeliveryRecord already establish - and deliberately NOT the oncqis_* roles, which
+   * functions/_wardsynq/actor.js still fences from every clinical capability; see that file's own
+   * comment on this task before changing it. */
+  "OncologyLink",
+  /* A CTCAE-graded adverse event. The grade is asserted here, never computed - onco-ctcae.js's own
+   * catalog and grading logic remain the sole authority for what a grade means. */
+  "AdverseEventRecord",
+  /* One cycle's chemotherapy administration, documented with the fields the audit for this task
+   * found nowhere else carries: dose lineage (BSA), premedication sequence, a structured
+   * extravasation field. It does not re-run wardsynq-meds.js's five-rights state machine - that
+   * machine is reused unchanged, through the existing /ward/mar door, for the bedside act itself. */
+  "ChemoAdministrationRecord",
+  /* The KardiQ X bridge (Task 2.7). KardiQ X (kardiox*.js) is an AI ECG-photo interpreter -
+   * self-declared "clinically unvalidated, regulatory-pending" (docs/ecg-engine-roadmap.md), unlike
+   * ONCqis's owner-approved production status. Its ECG records are local-only, encrypted, with no
+   * patientId and no server-side store at all - a genuinely disconnected record, the same failure
+   * mode OncologyLink closes for ONCqis. CardiologyLink names the join; it asserts no clinical
+   * identity beyond the caller-supplied identifying facts. No grant change: EMR_TREAT's unrestricted
+   * write covers it, the same precedent as OncologyLink. */
+  "CardiologyLink",
+  /* A resolved ECG: the AI verdict/HEART-TIMI score KardiQ X already computed, referenced here, not
+   * recomputed. Recorded with an explicit unvalidated:true provenance flag reflecting KardiQ X's own
+   * regulatory status - never presented as a validated clinical finding. */
+  "ECGReference",
+  /* TASK 3.5: the blood-bank bridge into wardsynq-transfusion.js (HAZ-BLD-01, safety-case verified).
+   * That module already implements ABO/RhD compatibility, crossmatch binding, and the two-person
+   * bedside check - it has no persistence of its own. Every phase transition
+   * (request/crossmatch/issue/bedside-check/start/observe/reaction/complete) is one version of ONE
+   * TransfusionEpisode record, the same append-only shape test/wardsynq-transfusion.test.mjs already
+   * proves against a bare store. No grant change: EMR_TREAT's unrestricted write covers it, the SAME
+   * precedent as ResusBundle/SurgicalCase/DeliveryRecord - role separation between blood-bank
+   * crossmatch/issue authority and ward-side bedside/administration authority is a real
+   * authorization decision this task states explicitly rather than making unilaterally, the same
+   * restraint migrate-oncology.js's header keeps about the oncqis_* role fence. */
+  "TransfusionEpisode",
+  /* TASK 5.14: a clinical incident, the persisted state of wardsynq-incidents.js's report/triage/
+   * RCA/CAPA/close lifecycle. Its own type: an incident is a report ABOUT the system, not a
+   * clinical fact about the patient it may name, and folding it into ClinicalNote would let a
+   * role with note-write silently author or edit an investigation's own conclusions. Its own
+   * capabilities (INCIDENT_REPORT to file, INCIDENT_INVESTIGATE to triage/RCA/CAPA/close) rather
+   * than EMR_TREAT, so filing a report never requires - or implies - clinical treatment
+   * authority, matching the "own authority" precedent ORDER_VERIFY/LAB_RESULT/TRANSFUSION_ISSUE
+   * already set. Append-only, one version per lifecycle transition, so an investigation's earlier
+   * conclusions cannot be edited away after the fact - the same property Claim's coding history
+   * and TransfusionEpisode's traceability already depend on. */
+  "IncidentReport",
+  /* Infection control and quality, 2026-09-17. A healthcare-associated infection case confirmed or ruled out by the
+   * infection control nurse against the CDC/NHSN definition (infection-control.js) and the review of one theatre case's
+   * prophylactic antibiotic; a suspected adverse drug reaction on the PvPI form, a hospital-authored audit checklist and
+   * each audit against it, a mock drill, an emergency medicine stock-out and a clinician's review of an emergency return
+   * within 72 hours (quality-registers.js). Append-only: a ruled-out case, a withdrawn confirmation or a corrected audit
+   * is a new version beside the old one. */
+  "HaiCase", "SurgicalProphylaxis", "AdverseDrugReaction", "QualityAuditTemplate", "QualityAudit", "MockDrill", "EmergencyStockOut", "EdReturnReview",
+  /* Theatre and outpatient access, 2026-09-17 (theatre.js, access-times.js). A block of theatre time held for a unit or a
+   * surgeon, released by a person or by the hospital's rule; and a patient's arrival at the laboratory or imaging counter
+   * with the time the test began. A release or a test start is a new version beside the first. */
+  "TheatreSession", "DiagnosticVisit",
+  /* TASK 6.14: a wristband/QR/NFC tag's own lifecycle - the persisted state of
+   * wardsynq-identity-tag.js's assign/verify/replace/deactivate/lost engine. Its own type, not a
+   * field mutation on Patient: wristbandBarcode has been comparable since early in this build, but a
+   * comparator that trusts whatever code is currently on the field is only as safe as the process
+   * that put it there. Multiple records ACCUMULATE per patient (one per tag ever issued), never
+   * overwritten - "which code named this patient, when, and what happened to the last one" is
+   * exactly the chain a wrong-patient investigation needs and a mutated field cannot answer.
+   * Granted by EMR_VITALS (VITALS_TYPES in actor.js), the same capability DeviceAssociation already
+   * uses - scanning a wristband onto a patient is the same kind of bedside act. */
+  "PatientTag",
+  /* A patient document's METADATA (documents.js). The bytes are never in the record: they are encrypted in
+   * an object store and this row points at them. Unrestricted EMR_TREAT write and EMR_VIEW read, like a
+   * ClinicalNote; a nurse's enumerated write scope does not include it. */
+  "DocumentReference",
+  // A referral and every step of it (referral.js). Written by prescribers (unrestricted EMR_TREAT), read by EMR_VIEW.
+  "Referral",
+  // A completed hospital-defined form (wardsynq-forms.js), naming the exact published version it answers.
+  "FormResponse",
+  /* The nursing command center (nursing.js): who is looking after a patient this shift, the shift's tasks,
+   * and how often observations are due. Workflow facts, append-only so a change of nurse or a cancelled
+   * task stays legible. Written through EMR_VITALS (VITALS_TYPES in actor.js). */
+  "NurseAssignment", "NursingTask", "ObservationFrequency",
+  /* TASK 7 STEP 1: a durable, admin-issued authorization saying "actor X may push data claiming to
+   * be source system Y". Closes a real vulnerability where any clinician holding emr.treat could
+   * declare an X-Source-System header naming ANY registered partner and every downstream
+   * ownership/provenance/MPI decision would believe it. Its own type, append-only like everything
+   * else - who may claim which external identity is exactly the kind of fact that must never be
+   * silently edited away. Granted no scope of its own: only `admin`'s pre-existing unrestricted
+   * write reaches it, so issuing a grant stays an administrative act by construction, not by a
+   * capability that could be widened by accident. See fhir-inbound.js's own header for the full
+   * design. */
+  "SourceSystemGrant",
+  /* TASK 7.4: where this hospital may send, and what it has sent. Two types, both append-only.
+   * OutboundDestination is the ALLOWLIST ITSELF - the only way a URL can be posted to is that an
+   * administrator wrote it down here, so no request can ever talk this server into exfiltrating a
+   * chart to an address of the caller's choosing. OutboundDelivery is the QUEUE: a delivery must
+   * outlive the isolate that created it, or an outage loses a discharge summary, and its history of
+   * attempts is the only honest answer to "did the other hospital actually receive it". Neither is
+   * granted a clinical scope: like SourceSystemGrant, only `admin`'s unrestricted write reaches
+   * them, so deciding where patient data leaves the building stays an administrative act by
+   * construction. See fhir-outbound.js's header. */
+  "OutboundDestination",
+  "OutboundDelivery",
+  /* TASK 8: one AI action, written down. Its own governed type because it is a fact ABOUT the record
+   * rather than a clinical finding in it - what a model was asked, which model answered, which row
+   * versions it was shown, what it said, and what a clinician then decided. A log line would have
+   * needed tenant isolation, an append-only history, an audit row and the patient compartment all
+   * inventing again; a record inherits them. Readable by exactly the people who may read the patient
+   * it is about, which is why patientId is on it. See maik-interaction.js. */
+  "MaiKInteraction",
+  /* TASK 10.17: the same governed-AI-action discipline as MaiKInteraction, for a question about the
+   * HOSPITAL rather than one patient's chart - no patientId, because there is no one patient. Readable
+   * under the same hospital-wide EMR_VIEW capability every other operational aggregate already uses
+   * (EMR_VIEW grants read:null, every type), never patient-compartmented since it carries no patient.
+   * See twin-copilot.js. */
+  "TwinInteraction",
+  /* P2.3: a clinician's acknowledgement of a computed surveillance signal (surveillance.js). Append-only,
+   * one record per acknowledgement, patient-compartmented. Signals themselves are computed, never stored.
+   * Written through EMR_VITALS (VITALS_TYPES in actor.js), the same authority as charting the obs it cites. */
+  "SurveillanceAcknowledgement",
+  /* P2.12 (pathways.js): a patient enrolled on one published pathway version, and each step override with its
+   * reason as its own record, never edited. Written through EMR_TREAT; no narrower grant writes either. */
+  "PathwayEnrolment", "PathwayStepOverride",
+  /* DPDP Act 2023 (dpdp.js), 2026-09-16: the hospital's privacy notice (one record per language, a version per
+   * edit), a patient's acknowledgement that they were given it, a data principal's request and its answer, and
+   * a personal data breach with its notification times. Append-only like everything else: "we answered on the
+   * 3rd" and "the Board was told at 14:00" are exactly the facts that must not be editable afterwards. */
+  "PrivacyNotice", "PrivacyAcknowledgement", "DataPrincipalRequest", "DataBreach",
+  /* 2026-09-17 (retention.js): a legal hold on a patient's record, placed with its reason and reference and lifted only
+   * with the reference to the disposal of the matter. Both are versions of one record. */
+  "LegalHold",
+  /* Compliance reporting, 2026-09-16: the hospital's own self-assessment against the NABH Digital Health
+   * Standards (compliance.js) and a saved report definition (report-builder.js). No patient on either. */
+  "DhsAssessment", "SavedReport",
+  /* Staff messaging, 2026-09-17 (staff-messaging.js): one message between staff about a patient or a unit, an edit or a
+   * recall as a new version, and each reader's last read of a thread. Patient-bound messages carry patientId, so they
+   * sit in the patient compartment and are read only after the patient is. */
+  "StaffMessage", "StaffMessageRead",
+  /* Patient education, 2026-09-17 (patient-education.js): a hospital-authored leaflet (no patient; a draft until a second
+   * clinician approves a version) and, per stay, the approved copies given to that patient (patient compartment). Written
+   * through EMR_TREAT, whose write scope is unconstrained; no narrower grant writes either. */
+  "EducationLeaflet", "EducationAttachment",
+]);
+
+/* BLOOD CENTRE ONLY (legal opinion 2026-09-17, G.5.8): donor deferral reasons (item 52 among them), infection results
+ * and the notification of a reactive donor are visible to blood centre staff only. A null read scope admits every type,
+ * so these are withheld from the change feed and the record door unless the reader's grant NAMES the type (the
+ * blood_bank role's does). The Blood bank routes, gated by transfusion.issue, still read them through list and get. */
+const BLOOD_CENTRE_ONLY = Object.freeze(["BloodDonor", "DonorScreening", "BloodTestResult", "DonorNotification", "BloodUnitEvent"]);
+function bloodCentreOnlyReadable(actor, resourceType) {
+  if (!BLOOD_CENTRE_ONLY.includes(resourceType)) return true;
+  const read = actor && actor.scope ? actor.scope.read : null;
+  return Array.isArray(read) && read.includes(resourceType);
+}
+
+const MODE =Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
+
+/** Provenance value the model stamps on records WardSynQ itself originated. */
+const NATIVE_SYSTEM = "wardsynq-native";
+
+/**
+ * PURE. Whether a record was imported from another system (a feed, a connector, an exchange partner)
+ * rather than authored here. THE ONE QUESTION every ward workflow must ask before acting on a row:
+ * a dose another hospital gave is not one this hospital bills, an order another hospital placed is
+ * not one this ward's phlebotomist collects, a result matched to a stranger's order is a wrong chart.
+ */
+function isExternalRecord(record) {
+  const sys = record && record.meta && record.meta.source && record.meta.source.system;
+  return !!sys && sys !== NATIVE_SYSTEM;
+}
+
+class AuthorityError extends Error {
+  constructor(message, code, detail) {
+    super(message);
+    this.name = "AuthorityError";
+    this.code = code || "EXTERNAL_AUTHORITY";
+    this.detail = detail || null;
+  }
+}
+
+class RecordRequestError extends Error {
+  constructor(message, code) {
+    super(message);
+    this.name = "RecordRequestError";
+    this.code = code || "BAD_REQUEST";
+  }
+}
+
+/**
+ * An idempotency key offered for a record it did not commit.
+ *
+ * A SUBCLASS OF VersionConflictError ON PURPOSE, and this is the whole reason it is one: every
+ * caller in this codebase - a hundred-odd route handlers - already writes
+ * `if (e instanceof VersionConflictError) return 409`, and a brand-new error class would fall past
+ * all of them into their generic 502 "record_write_failed" branch. A reused key is a caller's
+ * mistake, not the store's failure, so it must read as a conflict at every existing door without
+ * one of them being edited. Its own `code` is what distinguishes it for anybody who looks.
+ */
+class IdempotencyConflictError extends VersionConflictError {
+  constructor(detail) {
+    super("this idempotency key already committed a different record", detail);
+    this.name = "IdempotencyConflictError";
+    this.code = "IDEMPOTENCY_KEY_REUSED";
+  }
+}
+
+/**
+ * A paged read met more records than its stated ceiling (R4-1, 2026-09-17).
+ *
+ * Every roster read used to be capped at 1,000 records, OLDEST first, and said nothing: past that the
+ * newest admission was the one missing from the ward list and the bed check. A census now either reads
+ * every record it asked for or throws this; it never answers short. code "too_many_open" from
+ * listByStatus, "too_many_records" from listAll when the caller asked it to throw.
+ */
+class ListCeilingError extends Error {
+  constructor(code, resourceType, max) {
+    super(`more than ${max} ${resourceType} records matched; the read was refused rather than shortened`);
+    this.name = "ListCeilingError";
+    this.code = code;
+    this.resourceType = resourceType;
+    this.max = max;
+  }
+}
+/* The hard ceilings. OPEN_CENSUS_MAX: open records of one type (every stay, ED visit and OPD visit not yet
+ * closed) - far past any single hospital's beds, so reaching it means stale open visits, which must be seen.
+ * LIST_ALL_MAX: a whole-type read held in one Worker's memory; LIST_ALL_DEFAULT when the caller names none. */
+const OPEN_CENSUS_MAX = 5000;
+const LIST_ALL_MAX = 100000;
+const LIST_ALL_DEFAULT = 50000;
+const PAGE = 1000;
+
+/** Who a record is about. A Patient's own subject is its id. */
+const subjectOf = (r) => (r && (r.patientId || (r.resourceType === "Patient" ? r.id : null))) || null;
+
+/**
+ * The ClinicalStore backend over the persistence port, fixed to one tenant. This is the whole
+ * bridge: four methods the store already expects, each forwarding with the tenant prepended. The
+ * store cannot address another tenant because the backend has no parameter for one.
+ */
+class TenantBackend {
+  constructor(repository, tenantId) {
+    this.repository = assertRepository(repository);
+    this.tenantId = tenantId;
+    this._ctx = null;
+  }
+  async open() {}
+  async close() {}
+  get(resourceType, id) { return this.repository.latest(this.tenantId, resourceType, id); }
+  history(resourceType, id) { return this.repository.history(this.tenantId, resourceType, id); }
+  byPatient(resourceType, patientId) { return this.repository.byPatient(this.tenantId, resourceType, patientId); }
+
+  /** Context for the NEXT write only: idempotency key and the audit event to land with it. */
+  withWriteContext(ctx) { this._ctx = ctx || null; }
+
+  async write(records) {
+    const ctx = this._ctx || {};
+    this._ctx = null;
+    /* P2.13: every record write passes here, so this is where a webhook event is staged - in the same
+     * append, so it exists exactly when the write does (webhook-events.js). Events go FIRST: the
+     * idempotency key binds to the last record, which must stay the clinical one. */
+    const hooks = await stageWebhookEvents(this.repository, this.tenantId, records, this);
+    return this.repository.append(this.tenantId, [...hooks.events, ...records], {
+      idempotencyKey: ctx.idempotencyKey || null, audit: ctx.audit || null, ...(hooks.aliases.length ? { aliases: hooks.aliases } : {}) });
+  }
+}
+
+/**
+ * Reads the tenant's record policy out of connect_tenant.settings (JSON). Nothing here is a
+ * clinical rule; it is which system owns which records, and it is per hospital.
+ *
+ *   settings.wardsynq.recordMode      "system-of-record" (default) | "integration"
+ *   settings.wardsynq.externallyOwned resource types the external EMR creates; in integration mode
+ *                                     defaults to the identity and visit masters, Patient and
+ *                                     Encounter, which an existing EMR always owns. Configurable.
+ */
+function recordPolicy(tenant) {
+  let settings = {};
+  try { settings = typeof tenant.settings === "string" ? JSON.parse(tenant.settings || "{}") : (tenant.settings || {}); } catch { settings = {}; }
+  const ws = (settings && settings.wardsynq) || {};
+  const mode = ws.recordMode === MODE.INTEGRATION ? MODE.INTEGRATION : MODE.SYSTEM_OF_RECORD;
+  const externallyOwned = Array.isArray(ws.externallyOwned)
+    ? ws.externallyOwned.filter((t) => RESOURCE_TYPES.includes(t))
+    : (mode === MODE.INTEGRATION ? ["Patient", "Encounter"] : []);
+  return Object.freeze({ mode, externallyOwned: Object.freeze(externallyOwned) });
+}
+
+/** Kept under its first name. The mapping itself lives in actor.js, beside the OPD-role mapping. */
+const actorForMembership = actorFromConnectRole;
+
+function externallyOwned(record) {
+  const sys = record && record.meta && record.meta.source && record.meta.source.system;
+  return !!sys && sys !== NATIVE_SYSTEM;
+}
+
+/* R6-3. The closed order vocabulary, which MUST stay identical to ward-order.js
+ * CLOSED_ORDER_STATUSES; it is spelled again here because ward-order.js imports this file and the
+ * import cannot go the other way. test/wardsynq-source-order-close.test.mjs pins the two equal. */
+const SOURCE_TERMINAL_STATUSES = Object.freeze(["completed", "revoked", "cancelled"]);
+/** PURE. Which fields a source-terminal closure is allowed to differ in. Nothing clinical. */
+const CLOSURE_FIELDS = Object.freeze(["status", "completedAt", "completedBy", "completedOn", "version", "meta", "writtenBy"]);
+
+/**
+ * R6-3. THE ONE EXCEPTION TO EXTERNAL AUTHORITY, and it is deliberately the narrowest one that
+ * closes the gap it exists for.
+ *
+ * An order ingested from a laboratory or an EMR lands as `draft` (the adapter ceiling), and its
+ * sender's own word for it travels beside it as `externalStatus`. When that word is terminal the
+ * work is finished upstream, but nothing in WardSynQ may say so: the record is externally owned, so
+ * every native write to it is refused, and the order sits in the open census for ever until
+ * listByStatus hits OPEN_CENSUS_MAX and the boards refuse.
+ *
+ * THE SENDER'S ASSERTION ALONE NEVER CLOSES ANYTHING. What closes it is a local, governed,
+ * audited pass (source-order-close.js) run by a person, writing through the order closure actor.
+ * This function only says whether THAT write is the one being attempted, and it checks the whole of
+ * it: the closure role and its own roleSource, the type, the sender's terminal word on the record
+ * as stored (never on the incoming entity), the status being written, and that NOTHING else on the
+ * record changes. A write that differs anywhere else is still refused, so this cannot become a
+ * general door onto another system's records.
+ */
+function sourceTerminalClosure(svc, current, entity, opts) {
+  if (!opts || opts.sourceTerminalClosure !== true) return false;
+  if (svc.role !== "wardsynq-order-closure" || svc.roleSource !== "wardsynq-source-terminal") return false;
+  if (current.resourceType !== "ServiceRequest" || entity.resourceType !== "ServiceRequest") return false;
+  // The sender's word, as the STORE holds it. An incoming entity does not get to assert it.
+  if (!SOURCE_TERMINAL_STATUSES.includes(String(current.externalStatus == null ? "" : current.externalStatus).trim())) return false;
+  if (String(entity.status || "").trim() !== "completed") return false;
+  for (const k of new Set([...Object.keys(current), ...Object.keys(entity)])) {
+    if (CLOSURE_FIELDS.includes(k)) continue;
+    if (JSON.stringify(current[k]) !== JSON.stringify(entity[k])) return false;
+  }
+  return true;
+}
+
+class RecordService {
+  /**
+   * @param {{repository: object, tenant: {id: string, settings?: any}, actor: object, role: string,
+   *   bus?: object, pseudonym?: (patientId: string) => Promise<string|null>, now?: () => string}} deps
+   */
+  constructor(deps) {
+    deps = deps || {};
+    if (!deps.tenant || !deps.tenant.id) throw new RecordRequestError("a record service is always for one tenant", "NO_TENANT");
+    if (!deps.actor) throw new RecordRequestError("a record service is always for one actor", "NO_ACTOR");
+    this.tenant = deps.tenant;
+    this.tenantId = String(deps.tenant.id);
+    this.actor = deps.actor;
+    this.role = deps.role || null;
+    this.roleSource = deps.roleSource || null;
+    this.policy = recordPolicy(deps.tenant);
+    this.now = deps.now || (() => new Date().toISOString());
+    this.pseudonym = deps.pseudonym || (async () => null);
+    this.repository = assertRepository(deps.repository);
+    this.backend = new TenantBackend(this.repository, this.tenantId);
+    /* The raw store is a CONSTRUCTOR LOCAL, never a property. It used to be `this.store`, directly
+     * under a comment claiming it "is not exported from this object" - which it plainly was: every
+     * route handler holds a RecordService (openService() returns one), and ClinicalStore.put() takes
+     * no actor and performs none of authoriseWrite's checks - no EXECUTE ceiling, no
+     * signedBy-must-be-the-actor check, no credential check, no audit row. Nothing in the repository
+     * reached for it, so this closes a latent hole rather than fixing a live bypass, but it is the
+     * single invariant this layer exists to hold and a comment is not an access control. */
+    const store = new ClinicalStore({ backend: this.backend, bus: deps.bus || null });
+    // The only write path.
+    this.governed = new GovernedStore({ store, bus: deps.bus || null });
+  }
+
+  /** What a client needs to know before it writes: who the server thinks it is, and the mode. */
+  descriptor() {
+    const a = this.actor;
+    return {
+      service: "wardsynq-record",
+      tenantId: this.tenantId,
+      mode: this.policy.mode,
+      externallyOwned: [...this.policy.externallyOwned],
+      role: this.role,
+      roleSource: this.roleSource,
+      actor: {
+        id: a.id, kind: a.kind, tier: a.tier, display: a.display, canSign: !!a.credential,
+        // null = every type. A UI disables what the server will refuse rather than discovering it.
+        readable: a.scope.read === null ? null : [...a.scope.read],
+        writable: a.scope.write === null ? null : [...a.scope.write],
+      },
+      resourceTypes: [...RESOURCE_TYPES],
+    };
+  }
+
+  /** The types this actor may read, for chart and feed filtering. */
+  _readableTypes() { return RESOURCE_TYPES.filter((t) => canRead(this.actor, t)); }
+
+  async _audit(action, fields) {
+    const patientId = fields && fields.patientId;
+    // TASK 4.14: correlationId/deviceId/sessionId - the plan's minimum-audit fields this codebase
+    // had nowhere to put. Folded into the existing free-form `scope` blob under its own `request`
+    // key rather than a new column (see actor.js's requestContextOf() for why), so every audit
+    // event this file already writes carries them with no change to any of this file's callers.
+    const rc = this.actor && this.actor.requestContext;
+    let scope = (fields && fields.scope) || null;
+    /* P2.4: A WRITE A DEVICE HELD WHILE OFFLINE SAYS SO. Two times, and only one of them is trusted:
+     * `createdAt` is the device's clock, kept for display ("charted at the bedside at 10:02"), and
+     * `syncedAt` is this server's. The event's own `ts` stays the server's time, so nothing orders
+     * clinical truth by a clock the client controls. Writes only: a read is never "offline". */
+    const offline = rc && rc.offline;
+    if (offline && action !== "record.read" && action !== "record.list" && action !== "record.changes" && action !== "record.identity-lookup") {
+      scope = { ...(scope || {}), offline: { createdAt: offline.createdAt, syncedAt: this.now(), clientClock: true, ...(offline.conflictReason ? { conflictReason: offline.conflictReason } : {}) } };
+    }
+    let request = rc;
+    if (rc && rc.offline) { request = { ...rc }; delete request.offline; }
+    const event = {
+      ts: this.now(), actor: this.actor.id, connectorId: "wardsynq", action,
+      resourceCounts: (fields && fields.resourceCounts) || null,
+      scope: rc ? { ...(scope || {}), request } : scope,
+      patientRefHash: patientId ? await this.pseudonym(patientId) : null,
+      outcome: (fields && fields.outcome) || "ok",
+    };
+    return event;
+  }
+
+  _assertType(resourceType) {
+    if (!RESOURCE_TYPES.includes(resourceType)) throw new RecordRequestError(`unknown resource type "${resourceType}"`, "UNKNOWN_TYPE");
+  }
+
+  async get(resourceType, id) {
+    this._assertType(resourceType);
+    const rec = await this.governed.get(this.actor, resourceType, id);
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.read", { scope: { resourceType, id, found: !!rec }, patientId: rec && (rec.patientId || (resourceType === "Patient" ? rec.id : null)) }));
+    return rec;
+  }
+
+  async history(resourceType, id) {
+    this._assertType(resourceType);
+    const rows = await this.governed.history(this.actor, resourceType, id);
+    const last = rows[rows.length - 1];
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.read", { scope: { resourceType, id, history: true, versions: rows.length }, patientId: last && (last.patientId || (resourceType === "Patient" ? last.id : null)) }));
+    return rows;
+  }
+
+  async byPatient(resourceType, patientId) {
+    this._assertType(resourceType);
+    const rows = await this.governed.byPatient(this.actor, resourceType, patientId);
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.read", { scope: { resourceType, byPatient: true }, resourceCounts: { [resourceType]: rows.length }, patientId }));
+    return rows;
+  }
+
+  /**
+   * The version histories of many records of one type, for a measure over a roster (trends reads where
+   * each stay was, day by day). One read grant check and ONE audited list row, like list(), rather than
+   * a row per record. A history that could not be read is null in the answer, never an empty history.
+   */
+  async histories(resourceType, ids) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const list = [...new Set((ids || []).map(String))], out = new Map();
+    for (let i = 0; i < list.length; i += 8) {
+      const got = await Promise.allSettled(list.slice(i, i + 8).map((id) => this.repository.history(this.tenantId, resourceType, id)));
+      got.forEach((g, k) => out.set(list[i + k], g.status === "fulfilled" ? g.value : null));
+    }
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, history: true, records: list.length }, resourceCounts: { [resourceType]: list.length } }));
+    return out;
+  }
+
+  /**
+   * A roster: the latest version of every record of one type in this tenant. Capped, and audited
+   * as a list rather than a read, because a ward list is the one legitimate cross-patient query.
+   */
+  async list(resourceType, limit, opts) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    // opts.newest: the most recently written first (the repository port's own option); oldest first otherwise.
+    const rows = await this.repository.latestByType(this.tenantId, resourceType, limit, opts && opts.newest ? { newest: true } : undefined);
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, limit: Number(limit) || null }, resourceCounts: { [resourceType]: rows.length } }));
+    return rows;
+  }
+
+  /* Pages the port's pageByType until the last page or until more than `max` distinct ids are held.
+   * A record amended between pages is met again later and the later copy wins (see pageByType). */
+  async _pageAll(resourceType, statuses, max) {
+    if (typeof this.repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+    const byId = new Map();
+    let after = 0, pages = 0;
+    for (;;) {
+      const page = await this.repository.pageByType(this.tenantId, resourceType, { afterSeq: after, limit: PAGE, ...(statuses ? { statuses } : {}) });
+      pages += 1;
+      for (const r of page.records || []) if (r && r.id != null) { byId.delete(r.id); byId.set(r.id, r); }
+      if (page.next == null || byId.size > max) return { rows: [...byId.values()], pages };
+      after = page.next;
+    }
+  }
+
+  /**
+   * THE OPEN CENSUS: the latest version of every record of one type whose status is one of `statuses`
+   * (an Encounter's "in-progress"), however much closed history the hospital holds. Oldest first.
+   * Governed and audited exactly as list(). More than `max` (default and ceiling OPEN_CENSUS_MAX) throws
+   * ListCeilingError code "too_many_open": a bed check or ward list must never run on a short census.
+   */
+  async listByStatus(resourceType, statuses, max) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const want = (Array.isArray(statuses) ? statuses : [statuses]).filter((x) => typeof x === "string" && x);
+    const cap = Math.max(1, Math.min(OPEN_CENSUS_MAX, Number(max) || OPEN_CENSUS_MAX));
+    const got = want.length ? await this._pageAll(resourceType, want, cap) : { rows: [], pages: 0 };
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, statuses: want, pages: got.pages }, resourceCounts: { [resourceType]: Math.min(got.rows.length, cap) } }));
+    if (got.rows.length > cap) throw new ListCeilingError("too_many_open", resourceType, cap);
+    return got.rows;
+  }
+
+  /**
+   * ONE PAGE of the open-status read above, at the store's own cursor, for a job that cannot hold the
+   * whole set in one request: `afterSeq` is the previous page's `next`, and `next` is null on the last
+   * page. Governed and audited exactly as listByStatus.
+   *
+   * Deliberately NOT capped by OPEN_CENSUS_MAX, and that is the whole point of it: the one caller is
+   * the backfill that exists BECAUSE a hospital is past that ceiling (order-backfill.js), and a read
+   * that refused there could never be the read that fixes it. The bound is the page instead - it holds
+   * `limit` records and hands back a cursor, so no amount of history changes what one request costs.
+   *
+   * -> { rows, next }
+   */
+  async pageByStatus(resourceType, statuses, opts) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    if (typeof this.repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+    const want = (Array.isArray(statuses) ? statuses : [statuses]).filter((x) => typeof x === "string" && x);
+    if (!want.length) return { rows: [], next: null };
+    const limit = Math.max(1, Math.min(PAGE, Number(opts && opts.limit) || PAGE));
+    const page = await this.repository.pageByType(this.tenantId, resourceType, { afterSeq: Math.max(0, Number(opts && opts.afterSeq) || 0), limit, statuses: want });
+    const rows = page.records || [];
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, statuses: want, page: true, afterSeq: Math.max(0, Number(opts && opts.afterSeq) || 0) }, resourceCounts: { [resourceType]: rows.length } }));
+    return { rows, next: page.next == null ? null : page.next };
+  }
+
+  /**
+   * EVERY record of one type (latest version each), oldest first, paged. For a count, a sum or a ledger.
+   * opts.max: the caller's ceiling (default LIST_ALL_DEFAULT, never above LIST_ALL_MAX).
+   * -> { rows, truncated }: past max, rows holds the oldest max and truncated is true - or, with
+   * opts.throwOnTruncate, ListCeilingError code "too_many_records" is thrown instead. A caller that sums
+   * or counts must say so when truncated is true; it must never present the figure as complete.
+   */
+  async listAll(resourceType, opts) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const cap = Math.max(1, Math.min(LIST_ALL_MAX, Number(opts && opts.max) || LIST_ALL_DEFAULT));
+    const got = await this._pageAll(resourceType, null, cap);
+    const truncated = got.rows.length > cap;
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, all: true, pages: got.pages, truncated }, resourceCounts: { [resourceType]: Math.min(got.rows.length, cap) } }));
+    if (truncated && opts && opts.throwOnTruncate) throw new ListCeilingError("too_many_records", resourceType, cap);
+    return { rows: truncated ? got.rows.slice(0, cap) : got.rows, truncated };
+  }
+
+  /* Pages the port's pageByType NEWEST first until `stopWhen` has answered true for every record of a
+   * whole page (the caller's window is behind us), the type runs out, or more than `max` ids are held.
+   * Rows come back OLDEST first, exactly as listAll hands them over, so a caller only changes which
+   * records it is given, never how it reads them. */
+  async _pageBack(resourceType, stopWhen, max) {
+    if (typeof this.repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+    const byId = new Map();
+    let before = null, pages = 0;
+    for (;;) {
+      const page = await this.repository.pageByType(this.tenantId, resourceType, { newest: true, limit: PAGE, ...(before == null ? {} : { beforeSeq: before }) });
+      pages += 1;
+      const records = page.records || [];
+      let anyInside = false;
+      for (const r of records) {
+        if (!r || r.id == null) continue;
+        if (!stopWhen(r)) anyInside = true;
+        if (!byId.has(r.id)) byId.set(r.id, r);   // newest first: the first copy seen is the latest one
+      }
+      if (page.next == null || byId.size > max || (records.length && !anyInside)) {
+        return { rows: [...byId.values()].reverse(), pages };
+      }
+      before = page.next;
+    }
+  }
+
+  /**
+   * THE PERIOD READ (R5-3): every record of one type that can still fall inside the caller's window,
+   * oldest first. `stopWhen(record)` answers true when a record is entirely behind the window; the read
+   * walks back from the newest record and stops at the first whole page of those. A month report then
+   * reads a month, not the hospital's whole history of the type.
+   *
+   * opts.max, opts.throwOnTruncate and the { rows, truncated } answer are listAll's, unchanged, and so
+   * are the grant check and the single audited list row.
+   *
+   * TWO HONEST LIMITS, both stated where a caller can see them:
+   *  - the stop is per PAGE, and a page is 1,000 records, so the window is only ever over-read;
+   *  - `stopWhen` must decide from the record itself. A record that can still belong to the window after
+   *    its last write - an open stay, a line still in place, a future booking, a master record other
+   *    records point at - would be walked past. read-window.js names those types and reads them whole.
+   */
+  async listSince(resourceType, opts) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const stopWhen = opts && typeof opts.stopWhen === "function" ? opts.stopWhen : () => false;
+    const cap = Math.max(1, Math.min(LIST_ALL_MAX, Number(opts && opts.max) || LIST_ALL_DEFAULT));
+    const got = await this._pageBack(resourceType, stopWhen, cap);
+    const truncated = got.rows.length > cap;
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, since: true, pages: got.pages, truncated }, resourceCounts: { [resourceType]: Math.min(got.rows.length, cap) } }));
+    if (truncated && opts && opts.throwOnTruncate) throw new ListCeilingError("too_many_records", resourceType, cap);
+    /* Past the ceiling the NEWEST are kept: a period read that must shorten must keep the end of the
+     * window it was asked for, the opposite of listAll's oldest-first truncation. */
+    return { rows: truncated ? got.rows.slice(got.rows.length - cap) : got.rows, truncated };
+  }
+
+  /**
+   * Every local Patient that already carries one of this patient's identifiers.
+   *
+   * THE POINT IS WHAT THIS IS NOT. Identity reconciliation used to ask list("Patient", N) for a
+   * roster and scan it, so on a hospital with more patients than N a returning patient outside the
+   * roster was not found and a SECOND chart was created for them. This is an index seek whose cost
+   * is the number of identifiers offered - two or three - and is the same on a hospital of ten
+   * patients and a hospital of a hundred thousand.
+   *
+   * It answers with CANDIDATES, not with a decision. The decision stays where it was, in
+   * reconcileIdentity()'s own rules, which this only feeds.
+   *
+   * @param {object} patientLike anything with `mrn` and/or `identifiers[]`
+   * @returns {Promise<object[]>} matching Patients this actor may read
+   */
+  async findPatientsByIdentifier(patientLike) {
+    this._assertType("Patient");
+    this.governed._assertRead(this.actor, "Patient");
+    const keys = patientIdentifierKeys({ ...(patientLike || {}), resourceType: "Patient" });
+    if (!keys.length) return [];
+    const rows = await this.repository.patientsByIdentifier(this.tenantId, keys);
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.identity-lookup", {
+      // The KEYS are not logged, only how many were offered: an identifier is the patient.
+      scope: { identifiersOffered: keys.length }, resourceCounts: { Patient: rows.length },
+    }));
+    return rows;
+  }
+
+  /**
+   * The canonical id behind a published `wsq-<hash>` FHIR id, or null.
+   *
+   * Reading is NOT authorised here and deliberately so: this resolves an id to an id, discloses no
+   * record content, and every caller immediately does a governed get()/byPatient() that applies the
+   * actor's own read scope. Gating the lookup itself would only turn "you may not read this" into
+   * "no such resource", which is a worse answer to the same question.
+   */
+  async resolveIdHash(idHash) {
+    const hit = await this.repository.idByHash(this.tenantId, String(idHash || ""));
+    return hit || null;
+  }
+
+  /**
+   * A write refused by a rule of the caller's own (separation of duties), audited exactly as a
+   * governance refusal inside put() is: record.denied, outcome denied, nothing written. Throws when the
+   * audit row cannot be written, so a refusal is never silently unrecorded.
+   */
+  async auditDenied(resourceType, id, reasons, patientId) {
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.denied", {
+      scope: { resourceType, id, reasons: (reasons || []).map(String) }, patientId: patientId || null, outcome: "denied",
+    }));
+  }
+
+  /** The whole chart: latest version of every resource in the patient's compartment. */
+  async chart(patientId) {
+    const out = {};
+    const counts = {};
+    // Only the types this actor may read. A pharmacist's chart is the orders and nothing else, and
+    // the absence of a key says so rather than an empty list pretending the notes do not exist.
+    for (const t of this._readableTypes()) {
+      const rows = await this.governed.byPatient(this.actor, t, patientId);
+      out[t] = rows;
+      counts[t] = rows.length;
+    }
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.read", { scope: { chart: true }, resourceCounts: counts, patientId }));
+    return out;
+  }
+
+  /** Everything written to this tenant after a cursor. How a second client learns what changed. */
+  /** opts: { newest, before } for newest-first reading (repository changes()); omitted, the ascending sync feed. */
+  async changes(since, limit, opts) {
+    if (!this.governed) throw new RecordRequestError("no store", "NO_STORE");
+    // The governed store has no change feed of its own; this is a READ and is gated the same way.
+    this.governed._assertRead(this.actor);
+    const newest = !!(opts && opts.newest);
+    const raw = await this.repository.changes(this.tenantId, since, limit, newest ? { newest: true, before: opts.before } : undefined);
+    // The cursor advances over everything; the records handed back are only what may be read.
+    /* The statutory registers (registers.js) share this store as internal types and are NEVER handed out here: a null
+     * read scope admits every type, and a Form F, an MTP case or a medico-legal case must reach nobody except
+     * through its own register's route. */
+    /* The blood centre's confidential registers likewise reach only a grant that names them (bloodCentreOnlyReadable). */
+    const page = { records: raw.records.filter((r) => canRead(this.actor, r.resourceType) && !String(r.resourceType || "").startsWith("_wardsynq_register") && bloodCentreOnlyReadable(this.actor, r.resourceType)), cursor: raw.cursor };
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, ...(newest ? { newest: true, before: Number(opts.before) || null } : {}), cursor: page.cursor, withheld: raw.records.length - page.records.length }, resourceCounts: { records: page.records.length } }));
+    return page;
+  }
+
+  /**
+   * The outcome a committed idempotency key already produced, or null when the key is new. Bound to
+   * the type and subject it first committed for (see the note in put()).
+   *
+   * Exposed so a route that checks state BEFORE it writes (the eMAR state machine, a nursing task's
+   * expectedVersion) can answer a retried request with its original outcome. Without this a retry of
+   * an "administer" whose response was lost - exactly what an offline device replaying its queue
+   * sends - was refused as an illegal transition, and the nurse was told a recorded dose was not.
+   */
+  async replayFor(idempotencyKey, resourceType, subjectId, attemptedId) {
+    const key = idempotencyKey ? String(idempotencyKey) : null;
+    if (!key) return null;
+    const prior = await this.repository.recall(this.tenantId, key);
+    if (!prior) return null;
+    const versions = await this.repository.history(this.tenantId, prior.resourceType, prior.id);
+    const rec = versions.find((v) => v.version === prior.version) || null;
+    if (prior.resourceType !== resourceType || subjectOf(rec) !== (subjectId || null)) {
+      throw new IdempotencyConflictError({
+        idempotencyKey: key,
+        committed: { resourceType: prior.resourceType, id: prior.id },
+        attempted: { resourceType, id: attemptedId || null },
+      });
+    }
+    // Same key, same outcome. The record returned is the version that write produced, so a client
+    // that lost the first response sees exactly what it would have seen.
+    return { record: rec, replayed: true };
+  }
+
+  /**
+   * The native write door.
+   *
+   * @param {object} entity  a canonical entity (resourceType + id required)
+   * @param {{expectedVersion?: number|null, idempotencyKey?: string|null, activePatientId?: string|null,
+   *   origin?: {kind: string, id?: string}|null}} [opts]
+   *   origin  who produced the content. `{kind: "ai", id: "maik"}` (or an entity with aiDrafted: true)
+   *           makes the write an AI-kind actor's, delegated by this session's human, never the human's.
+   * @returns {Promise<{record: object, replayed: boolean, actor: {id, kind, tier, onBehalfOf}}>}
+   */
+  async put(entity, opts) {
+    opts = opts || {};
+    const writer = isAiOrigin(entity, opts.origin) ? aiActorFor(this.actor, opts.origin) : this.actor;
+    if (!entity || typeof entity !== "object") throw new RecordRequestError("a write needs an entity", "NO_ENTITY");
+    if (typeof entity.resourceType !== "string") throw new RecordRequestError("entity.resourceType is required", "NO_TYPE");
+    this._assertType(entity.resourceType);
+    if (typeof entity.id !== "string" || !entity.id.trim()) throw new RecordRequestError("entity.id is required", "NO_ID");
+
+    const key = opts.idempotencyKey ? String(opts.idempotencyKey) : null;
+    if (key) {
+      {
+        /* A KEY IS BOUND TO THE TYPE AND THE PATIENT IT FIRST COMMITTED FOR.
+         *
+         * Without this the recall matched on the key ALONE, and a client that reused one key across
+         * two writes - a key minted per retry-session rather than per request, the commonest way
+         * there is to get idempotency wrong - had its second write silently discarded and was handed
+         * the FIRST record back under `ok: true`. When the two writes were two different patients
+         * that is both a lost clinical write and another patient's record returned as the answer: a
+         * wrong-patient disclosure arriving down the success path, where nobody is looking for one.
+         *
+         * IT IS THE PATIENT AND NOT THE ID, and the difference is load-bearing. A retried POST must
+         * still replay, and several declarations mint an id from `new Date()` - activationIdFor() in
+         * emergency-mode.js, grantIdFor() in break-glass.js - so two retries milliseconds apart
+         * produce two different ids for one logical act. Binding to the id would turn every one of
+         * those honest retries into a refusal, and the second declaration of an emergency is not a
+         * thing to invent. Binding to the SUBJECT refuses what is actually dangerous - the same key
+         * carrying a different patient, or a different kind of record entirely - and leaves the
+         * retry alone.
+         *
+         * A Patient's own subject is its id: for that one type the record IS the person. */
+        const replay = await this.replayFor(key, entity.resourceType, subjectOf(entity), entity.id);
+        if (replay) return replay;
+      }
+    }
+
+    const current = await this.repository.latest(this.tenantId, entity.resourceType, entity.id);
+    const currentVersion = current ? current.version : 0;
+
+    // Concurrency, the visible half. A client that says which version it read is refused if that
+    // is no longer the latest, and is handed the latest so it can reconcile rather than guess.
+    if (opts.expectedVersion !== undefined && opts.expectedVersion !== null) {
+      const expected = Number(opts.expectedVersion);
+      if (!Number.isInteger(expected) || expected < 0) throw new RecordRequestError("expectedVersion must be a non-negative integer", "BAD_EXPECTED_VERSION");
+      if (expected !== currentVersion) {
+        throw new VersionConflictError(`expected version ${expected} but the record is at version ${currentVersion}`, { expectedVersion: expected, currentVersion, current });
+      }
+    }
+
+    // Authority. A record another system owns is corrected by that system, through its connector,
+    // not by the native door. This holds in BOTH modes: a lab result a LIS reported is not edited by
+    // hand in a system-of-record deployment either.
+    if (current && externallyOwned(current) && !sourceTerminalClosure(this, current, entity, opts)) {
+      throw new AuthorityError(
+        `${entity.resourceType}/${entity.id} is owned by ${current.meta.source.system}; changes to it arrive through that system's connector`,
+        "EXTERNAL_AUTHORITY", { system: current.meta.source.system, current }
+      );
+    }
+    // In integration mode, the external EMR creates the identity and visit masters. WardSynQ does
+    // not mint a patient the hospital's EMR does not know about.
+    if (!current && this.policy.mode === MODE.INTEGRATION && this.policy.externallyOwned.includes(entity.resourceType)) {
+      throw new AuthorityError(
+        `${entity.resourceType} records are created by the hospital's EMR in integration mode`,
+        "EXTERNAL_CREATE", { mode: this.policy.mode, externallyOwned: [...this.policy.externallyOwned] }
+      );
+    }
+
+    const patientId = entity.resourceType === "Patient" ? entity.id : (entity.patientId || null);
+    // The audit row lands in the SAME atomic append as the version it describes. The version it
+    // names is the one the store is about to assign, which the concurrency check above just fixed.
+    const auditEvent = await this._audit("record.write", {
+      scope: { resourceType: entity.resourceType, id: entity.id, version: currentVersion + 1, mode: this.policy.mode, idempotent: !!key,
+        ...(writer !== this.actor ? { writer: writer.id, writerKind: writer.kind, onBehalfOf: writer.onBehalfOf } : {}) },
+      resourceCounts: { [entity.resourceType]: 1 },
+      patientId,
+    });
+    this.backend.withWriteContext({ idempotencyKey: key, audit: auditEvent });
+
+    let saved;
+    try {
+      saved = await this.governed.put(writer, entity, { activePatientId: opts.activePatientId || null });
+    } catch (err) {
+      this.backend.withWriteContext(null);
+      if (err instanceof GovernanceError) {
+        await this.repository.auditOnly(this.tenantId, await this._audit("record.denied", {
+          scope: { resourceType: entity.resourceType, id: entity.id, reasons: err.reasons.map((r) => r.code),
+            ...(writer !== this.actor ? { writer: writer.id, writerKind: writer.kind, onBehalfOf: writer.onBehalfOf } : {}) },
+          patientId, outcome: "denied",
+        }));
+      }
+      throw err;
+    }
+    return { record: saved, replayed: false, actor: { id: writer.id, kind: writer.kind, tier: writer.tier, onBehalfOf: writer.onBehalfOf } };
+  }
+
+  /**
+   * The ingest door, for the Integration Hub. Hands back a governed handle that writes as whichever
+   * ADAPTER actor the hub supplies, with audit per entity. The hub enforces the adapter ceiling
+   * through the same GovernedStore, so an upstream EMR's "active order" lands as a draft here too.
+   */
+  governedForIngest(opts) {
+    opts = opts || {};
+    const self = this;
+    // The hub's own replay guard is per process, and on a server a process is one request. The
+    // durable version is the idempotency table: the source's event identity is recorded with the
+    // FIRST entity that lands, so a re-sent bundle is recognised by the next request too.
+    let pendingKey = opts.idempotencyKey ? String(opts.idempotencyKey) : null;
+    return {
+      /** True when this bundle has already landed. Checked by the route before the hub runs. */
+      alreadyIngested: async () => (pendingKey ? !!(await self.repository.recall(self.tenantId, pendingKey)) : false),
+      put: async (adapterActor, entity) => {
+        const patientId = entity.resourceType === "Patient" ? entity.id : (entity.patientId || null);
+        const current = await self.repository.latest(self.tenantId, entity.resourceType, entity.id);
+        const auditEvent = await self._audit("record.ingest", {
+          // opts.auditScope(entity): what the caller must say on this entity's audit row (the policy that decided it).
+          scope: { resourceType: entity.resourceType, id: entity.id, version: (current ? current.version : 0) + 1, system: entity.meta && entity.meta.source && entity.meta.source.system, ...((opts.auditScope && opts.auditScope(entity)) || {}) },
+          resourceCounts: { [entity.resourceType]: 1 }, patientId,
+        });
+        auditEvent.actor = adapterActor.id;
+        self.backend.withWriteContext({ audit: auditEvent, idempotencyKey: pendingKey });
+        try {
+          const saved = await self.governed.put(adapterActor, entity);
+          pendingKey = null;                    // recorded with this write; later entities carry no key
+          return saved;
+        } catch (err) {
+          self.backend.withWriteContext(null);
+          throw err;
+        }
+      },
+      /**
+       * Every entity in ONE append: one audit event naming them all, the idempotency key landing with
+       * them, and nothing landing unless everything does. The governed store authorises each first.
+       */
+      putMany: async (adapterActor, entities) => {
+        const list = Array.isArray(entities) ? entities : [];
+        if (!list.length) return [];
+        const counts = {};
+        for (const e of list) counts[e.resourceType] = (counts[e.resourceType] || 0) + 1;
+        const patients = new Set(list.map((e) => (e.resourceType === "Patient" ? e.id : e.patientId)).filter(Boolean));
+        const auditEvent = await self._audit("record.ingest", {
+          scope: { transaction: true, entities: list.map((e) => ({ resourceType: e.resourceType, id: e.id, system: e.meta && e.meta.source && e.meta.source.system })) },
+          resourceCounts: counts, patientId: patients.size === 1 ? [...patients][0] : null,
+        });
+        auditEvent.actor = adapterActor.id;
+        self.backend.withWriteContext({ audit: auditEvent, idempotencyKey: pendingKey });
+        try {
+          const saved = await self.governed.putMany(adapterActor, list);
+          pendingKey = null;
+          return saved;
+        } catch (err) {
+          self.backend.withWriteContext(null);
+          throw err;
+        }
+      },
+    };
+  }
+}
+
+export {
+  RESOURCE_TYPES, BLOOD_CENTRE_ONLY, bloodCentreOnlyReadable, MODE, NATIVE_SYSTEM, isExternalRecord,
+  AuthorityError, RecordRequestError, IdempotencyConflictError, ListCeilingError, OPEN_CENSUS_MAX, LIST_ALL_MAX, LIST_ALL_DEFAULT,
+  SOURCE_TERMINAL_STATUSES,
+  TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
+};

@@ -45,3 +45,7 @@ or import from Ward Sync → interaction/duplicate/QT/renal/bleeding checks.
 - `resolveGeneric` matches the CLINICAL layer — `normIngredient` before grouping (product vs clinical). Compositions bake strength inline.
 - run-drug-index / run-maik-explain unreliable in sandbox.
 Deps: [[AI Control Center]] (ocr cap) · [[Medical Knowledge Base]].
+
+## Single drug lookup surface (2026-09-10)
+- Removed the separate Drug Doses overlay. Drugs Database (`MEDDB`) is the single browse/dosing module.
+- `MEDDRUGS.openList/close` remain compatibility redirects for existing callers (including Oncology). Shared formulary data, matching, detail helpers, offline fallback, and Drug Interactions remain available.

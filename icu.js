@@ -40,7 +40,7 @@
 
   /* -------------------------------------------------- the data model shape */
   var DEFAULT_STATE = {
-    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "", mrn: "", doctor: "", dept: "", allergies: "", codeStatus: "" },
+    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "", mrn: "", doctor: "", dept: "", allergies: "", codeStatus: "", pastHistory: "" },
     vitals: [],                 // [{ ts, hr, sbp, dbp, map, rr, spo2, temp, uop, lactate, cvp, etco2, gcs }]
     labs: { recent: {}, trends: [] },  // recent: { na,k,cl,hco3,ca,mg,po4,glu,creat,alb,wbc,hb,plt,inr,ferritin,trig,fibrinogen,... }
     abg: {},                    // { ts, ph, paco2, pao2, hco3, fio2, lactate, be }
@@ -1168,6 +1168,21 @@
       // Explanatory copy is body text, not a label: regular weight, generous leading, muted.
       '.icu-doc-sub{font:400 13px/1.6 var(--font);color:var(--muted);margin:2px 0 12px}' +
       '.icu-dx-cc{font:600 14px/1.55 var(--font);color:var(--ink);margin:2px 0 12px;white-space:pre-wrap}.icu-dx-cur{font:700 16px var(--font);color:var(--ink);margin:2px 0 12px}' +
+      // ICD code badge, separate from the free-text diagnosis above - a small mono chip + system
+      // tag + title, with a remove (x) button. Never styled as clickable text (it isn't).
+      '.icu-dx-icd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:-4px 0 12px}' +
+      '.icu-icd-code{font:800 13px var(--mono,monospace);color:var(--ink)}' +
+      '.icu-icd-sys{font:700 10px var(--font);color:var(--primary);background:var(--sc-high);border-radius:6px;padding:2px 6px}' +
+      '.icu-icd-title{font:500 12.5px var(--font);color:var(--muted);flex:1;min-width:100px}' +
+      '.icu-icd-x{border:none;background:transparent;color:var(--muted);cursor:pointer;min-width:28px;min-height:28px;font-size:12px}' +
+      // MaiK ICD-suggestion rows (in the icd-suggest modal sheet) - same card/row shape as the
+      // existing icu-dx-hit rows, one Accept button per suggestion, nothing pre-selected.
+      '.icu-icd-sugrow{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px}' +
+      '.icu-icd-sugtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}' +
+      '.icu-icd-sugtitle{font:600 13.5px var(--font);color:var(--ink)}' +
+      '.icu-icd-sugwhy{font:400 12px/1.5 var(--font);color:var(--muted);margin-top:3px}' +
+      '.icu-icd-conf{font:700 10px var(--font);border-radius:6px;padding:2px 6px}' +
+      '.icu-icd-conf-high{background:#14532d;color:#fff}.icu-icd-conf-medium{background:#7c2d12;color:#fff}.icu-icd-conf-low{background:var(--panel2);color:var(--muted);border:1px solid var(--border)}' +
       '.icu-dx-results{margin-top:10px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}' +
       '.icu-dx-hint{font:600 12.5px var(--font);color:var(--muted);padding:8px 2px}' +
       '.icu-dx-hit{display:flex;align-items:center;gap:8px;text-align:left;width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:10px;padding:11px 13px;cursor:pointer;font:700 14px var(--font)}' +
@@ -1644,7 +1659,10 @@
     return "ok";
   }
   function renderLiveStatus() {
-    var lv = latestVitals(), L = _raw.labs.recent || {}, f = _raw.fluids || {};
+    // Forward-filled across the whole series (mergedVitals), NOT the single newest-timestamp row
+    // (latestVitals) — a sparse update (e.g. entering only BP) must not blank HR/SpO2/etc. tiles
+    // that were charted in an earlier, separate entry.
+    var lv = mergedVitals(_raw.vitals), L = _raw.labs.recent || {}, f = _raw.fluids || {};
     var mp = curMap();
     var pressors = (_raw.infusions || []).filter(function (i) { return isPressor(i.drug); });
     var cards = [
@@ -1809,7 +1827,7 @@
         importProgress("Compressing image…");
         compressImage(dataUrl, function (d, meta) {
           if (!d) return importProgress("Could not read this image.", true);
-          doOcr(kind, d, meta ? meta.kb + " KB" : "");
+          doOcr(kind, d, meta ? meta.kb + " KB" : "", dataUrl);
         });
       }).catch(function () { importDone(); });
       return;
@@ -1889,6 +1907,31 @@
   }
   // Map an engine result (fields keyed strictly) → the numeric field map the review uses.
   // Ingest mapping is UNCHANGED — values map by key exactly as before.
+  // Debug overlay (localStorage smd_icu_ocr_debug = "1"): draws the OCR boxes, labels, selected and
+  // rejected candidates and label→value lines over the thumbnail of the LAST monitor read, using the
+  // evidence reasoning.js parked in window.__SMD_ICU_OCR_LAST. Developer aid only; no effect otherwise.
+  function smdOcrOverlay(el) {
+    try {
+      if (localStorage.getItem("smd_icu_ocr_debug") !== "1") return;
+      var last = window.__SMD_ICU_OCR_LAST, M = window.SMD_ICU_MONITOR;
+      if (!last || !M || !el) return;
+      var img = el.querySelector(".icu-imp-thumb"); if (!img) return;
+      function draw() {
+        var w = img.naturalWidth || 1000, h = img.naturalHeight || 1000;
+        var wrap = document.createElement("div"); wrap.style.cssText = "position:relative;display:inline-block;max-width:100%;margin:0 16px";
+        img.parentNode.insertBefore(wrap, img); wrap.appendChild(img);
+        img.style.margin = "0"; img.style.maxHeight = "320px"; img.style.display = "block";
+        var holder = document.createElement("div"); holder.innerHTML = M.overlaySVG(last.result, last.boxes, w, h);
+        var svg = holder.firstChild; svg.setAttribute("width", "100%"); svg.setAttribute("height", "100%"); svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        svg.style.cssText = "position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none";
+        wrap.appendChild(svg);
+        var pre = document.createElement("pre"); pre.style.cssText = "font:10px/1.35 ui-monospace,Menlo,monospace;white-space:pre-wrap;max-height:220px;overflow:auto;margin:8px 16px;padding:8px;border-radius:8px;background:var(--panel2,#f6f7f9);color:var(--muted,#555)";
+        pre.textContent = M.explain(last.result, last.boxes);
+        wrap.parentNode.insertBefore(pre, wrap.nextSibling);
+      }
+      if (img.complete && img.naturalWidth) draw(); else img.addEventListener("load", draw, { once: true });
+    } catch (e) {}
+  }
   function extractOcrFields(r) {
     var fields = {};
     if (r && r.mode === "fields") {
@@ -1897,12 +1940,12 @@
     }
     return fields;
   }
-  function doOcr(kind, dataUrl, note) {
+  function doOcr(kind, dataUrl, note, original) {
     // Combined "all" → the engine returns SECTIONS ({labs,abg,vitals,ventilator}); route to the
     // grouped review so every category present in one image is captured at once (gold249).
     if (kind === "all") {
       if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process) {
-        SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: "all" }).then(function (r) {
+        SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: "all", original: original }).then(function (r) {
           importDone();
           if (!r || r.cancelled) return;
           openImportReviewAll(coerceSections(r && r.fields), dataUrl, (r && r.lines) || [], note, "Imported report");
@@ -1917,7 +1960,7 @@
     // the same { mode, fields, lines } shape the review already consumes. Falls back to the
     // legacy readImage path only if the module is somehow absent.
     if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process) {
-      SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: mapKind }).then(function (r) {
+      SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: mapKind, original: original }).then(function (r) {
         importDone();
         if (!r || r.cancelled) return;   // user cancelled — no dead end, just closes cleanly
         openImportReview(kind, extractOcrFields(r), dataUrl, (r && r.lines) || []);
@@ -1949,7 +1992,7 @@
     var showKeys = aiMode ? extracted : (IMPORT_FIELDS[kind] || IMPORT_FIELDS.labs);
     if (!showKeys.length && !lines.length) { importProgress("No values could be read — please enter values manually.", true); return; }
     var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
-    var L = _raw.labs.recent || {}, lastV = latestVitals();
+    var L = _raw.labs.recent || {}, lastV = mergedVitals(_raw.vitals);
     var rows = showKeys.map(function (k) {
       var val = fields[k] != null ? fields[k] : "";
       var cur = (kind === "labs") ? L[k] : (kind === "monitor") ? lastV[k] : (kind === "abg") ? (_raw.abg || {})[k] : (_raw.ventilator || {})[k];
@@ -1974,6 +2017,7 @@
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + rows + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">' + ico("check","✓") + ' Add to patient context</button></div></div>';
+    smdOcrOverlay(el);
     function close() { el.remove(); }
     var focused = el.querySelector("[data-impk]");
     el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });
@@ -2024,7 +2068,7 @@
     if (!hasVals && !lines.length) { importProgress("No values could be read — try a clearer photo, or enter values manually.", true); return; }
     var aiMode = hasVals;
     var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
-    var L = _raw.labs.recent || {}, lastV = latestVitals(), curAbg = _raw.abg || {}, curVent = _raw.ventilator || {};
+    var L = _raw.labs.recent || {}, lastV = mergedVitals(_raw.vitals), curAbg = _raw.abg || {}, curVent = _raw.ventilator || {};
     function curOf(sec, k) { return sec === "labs" ? L[k] : sec === "vitals" ? lastV[k] : sec === "abg" ? curAbg[k] : curVent[k]; }
     var groupsHTML = SEC_META.map(function (m) {
       var sec = m[0], vals = sections[sec] || {}, keys = Object.keys(vals);
@@ -2051,6 +2095,7 @@
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + groupsHTML + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">' + ico("check","✓") + ' Add to patient context</button></div></div>';
+    smdOcrOverlay(el);
     function close() { el.remove(); }
     var focused = el.querySelector("[data-impk]");
     el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });
@@ -2694,10 +2739,11 @@
     return parts.join("\n  ");
   }
   function buildSummary(st) {
-    var s = st || _raw, p = s.patient || {}, vits = s.vitals || [], lv = latestByTs(s.vitals), L = s.labs && s.labs.recent || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], goals = s.goals || [], infusions = s.infusions || [], out = [];   // BUG #6: latest vital by max ts, not last-pushed
+    var s = st || _raw, p = s.patient || {}, vits = s.vitals || [], lv = mergedVitals(s.vitals), L = s.labs && s.labs.recent || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], goals = s.goals || [], infusions = s.infusions || [], out = [];   // BUG #6: latest vital by max ts, not last-pushed
     out.push("STEWARDMD — DAILY ICU SUMMARY");
     out.push((p.name || "ICU patient") + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") + (p.bed ? " · Bed " + p.bed : "") + (p.icuDay != null ? " · ICU day " + p.icuDay : ""));
     if (p.diagnosis) out.push("Diagnosis: " + p.diagnosis);
+    if (p.pastHistory) out.push("Past history: " + p.pastHistory);
     var finds = s.findings || [];
     if (finds.length) out.push("CLINICAL FINDINGS: " + finds.map(function (c) { return findChipLabel(c); }).join("; "));
     out.push("");
@@ -2751,6 +2797,7 @@
     // BACKGROUND — complaints, structured findings, active infusions.
     var bg = [];
     if (p.complaints) bg.push(String(p.complaints));
+    if (p.pastHistory) bg.push("Past history: " + String(p.pastHistory));
     if (finds.length) bg.push("Findings: " + finds.slice(0, 8).map(function (c) { return findChipLabel(c); }).join(", "));
     if (infusions.length) bg.push("On " + infusions.map(function (i) { return i.drug; }).join(", "));
     // ASSESSMENT — current haemodynamics, ABG, key labs, trajectory.
@@ -3270,7 +3317,7 @@
       return out;
     },
     hemo: function () {
-      var lv = latestVitals(), h = interpretHemo(lv, _raw.infusions);
+      var lv = mergedVitals(_raw.vitals), h = interpretHemo(lv, _raw.infusions);
       return '<div class="icu-card"><h3>Hemodynamics</h3>' +
         row("MAP", h.map, "mmHg") + row("Shock index", h.si != null ? h.si.toFixed(2) : null) + row("Heart rate", lv.hr, "bpm") +
         row("BP", (lv.sbp != null ? lv.sbp + "/" + lv.dbp : null)) + row("Lactate", lv.lactate, "mmol/L") +
@@ -3283,7 +3330,7 @@
         '<button class="icu-btn" data-icu-act="calc:map">Open hemodynamic calculators</button>';
     },
     fluids: function () {
-      var f = _raw.fluids || {}, r = analyzeFluids(f, _raw.patient, latestVitals());
+      var f = _raw.fluids || {}, r = analyzeFluids(f, _raw.patient, mergedVitals(_raw.vitals));
       return '<div class="icu-card"><h3>Fluid Management</h3>' +
         row("Phase", r.phase) + row("Intake (24h)", f.intake24h, "mL") + row("Output (24h)", f.output24h, "mL") +
         row("Urine (24h)", f.urine24h, "mL") + r.rows.map(function (x) { return row(x[0], x[1]); }).join("") +
@@ -3539,8 +3586,13 @@
 
       // 5) Working diagnosis — set from the review’s suggestion (deterministic differential) or KB
       //    search. Once set, surface the advisory management brief + an applicable StewardMD protocol.
+      var dxIcd = p.diagnosisIcd;
+      var icdBadge = dxIcd ? '<div class="icu-dx-icd"><span class="icu-icd-code">' + esc(dxIcd.code) + '</span><span class="icu-icd-sys">' + esc(dxIcd.system) + '</span><span class="icu-icd-title">' + esc(dxIcd.title) + '</span>' +
+        '<button class="icu-icd-x" data-icu-act="icdclear" aria-label="Remove ICD code">' + ico("close", "✕") + "</button></div>" : "";
+      var icdBtnHTML = '<button class="icu-btn ghost" data-icu-act="icdsearch" style="margin-top:8px">' + ico("search", "🔎") + ' ' + (dxIcd ? "Change" : "Attach") + ' ICD-10 / ICD-11 code</button>' +
+        (window.SMD_AI ? '<button class="icu-btn ghost" data-icu-act="icdsuggest" style="margin-top:8px">' + ico("pulse", "✨") + ' Suggest ICD code <span class="icu-phase">MaiK</span></button>' : "");
       var wdx = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🩺") + ' Working diagnosis</div>' +
-        '<p class="icu-dx-cur">' + dxTxt + "</p>";
+        '<p class="icu-dx-cur">' + dxTxt + "</p>" + icdBadge;
       if (!hasDx) {
         wdx += '<p class="icu-doc-sub" style="margin:0 0 8px">Use your findings, labs and vitals to generate a working differential, or search the knowledge base.</p>' +
           (icuDxFlowOn() ? '<button class="icu-btn" data-icu-act="finddx">' + ico("pulse", "🩺") + ' Find working diagnosis</button>' +
@@ -3551,8 +3603,10 @@
         // Management / treatment considerations surface ONLY once a working diagnosis is selected, and stay advisory.
         wdx += (icuDxFlowOn() ? '<div class="icu-corr-note">' + ico("info", "ⓘ") + ' Management considerations for <b>' + esc(p.diagnosis) + '</b> are <b>advisory</b> — verify against local protocol, ICMR/guideline sources and your clinical judgement.</div>' : "") +
           dxManagementHTML(p.diagnosis) +
-          '<button class="icu-btn ghost" data-icu-act="dxsearch" style="margin-top:10px">' + ico("search", "🔎") + ' Change working diagnosis</button>';
+          '<button class="icu-btn ghost" data-icu-act="dxsearch" style="margin-top:10px">' + ico("search", "🔎") + ' Change working diagnosis</button>' +
+          icdBtnHTML;
       }
+      if (!hasDx) wdx += icdBtnHTML;
       wdx += "</div>";
       return out + wdx;
     },
@@ -3694,7 +3748,7 @@
   }
   // one-line vitals summary for the collapsed status on non-overview tabs
   function liveSummaryLine() {
-    var lv = latestVitals(), L = _raw.labs.recent || {}, mp = curMap();
+    var lv = mergedVitals(_raw.vitals), L = _raw.labs.recent || {}, mp = curMap();
     function v(x, u) { return (x == null || x === "") ? "—" : x + (u || ""); }
     return ico("pulse", "❤️") + ' Vitals &amp; status' +
       '<span class="vs-k">HR</span> ' + v(lv.hr) + '<span class="vs-k">MAP</span> ' + v(mp) +
@@ -3819,7 +3873,7 @@
   // Persistent one-line patient banner (A6): name · ICU day · MAP · lactate · pressors.
   function patientBanner() {
     if (!hasData()) return "";
-    var p = _raw.patient || {}, lv = latestVitals(), mp = curMap();
+    var p = _raw.patient || {}, lv = mergedVitals(_raw.vitals), mp = curMap();
     var press = (_raw.infusions || []).filter(function (i) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine/i.test(i.drug || ""); });
     var parts = ['<b>' + esc(p.name || "ICU patient") + "</b>"];
     if (p.icuDay != null) parts.push("ICU day " + esc(p.icuDay));
@@ -3928,7 +3982,7 @@
   // Acuity derived from RAW values WITHOUT calling recompute (entry.state.alerts is stripped on save).
   function v2Snapshot(st) {
     st = st || {};
-    var lv = latestByTs(st.vitals || []);
+    var lv = mergedVitals(st.vitals || []);   // forward-filled per field, NOT the newest-timestamp row: a sparse save (BP only) must not blank HR/SpO2/lactate on the header chips, the board card, or the severity ranking
     var mp = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
     var press = (st.infusions || []).filter(function (i) { return isPressor(i.drug); });
     var L = (st.labs && st.labs.recent) || {};
@@ -6049,7 +6103,9 @@
       { k: "icuDay", l: "ICU day", t: "number" }, { k: "hospital", l: "Hospital", t: "text" },
       { k: "allergies", l: "Allergies / ADR", t: "text", wide: true, ph: "e.g. Penicillin (rash); or Nil known" },
       { k: "codeStatus", l: "Resuscitation status", t: "select", opts: ["", "Full code", "DNR / DNAR", "DNI", "Comfort care only"] },
-      { k: "complaints", l: "Presenting complaints", t: "textarea", wide: true }, { k: "diagnosis", l: "Working diagnosis", t: "text", wide: true }, { k: "status", l: "Current status", t: "text", wide: true } ] },
+      { k: "complaints", l: "Presenting complaints", t: "textarea", wide: true },
+      { k: "pastHistory", l: "Past history / comorbidities", t: "textarea", wide: true },
+      { k: "diagnosis", l: "Working diagnosis", t: "text", wide: true }, { k: "status", l: "Current status", t: "text", wide: true } ] },
     monitor: { title: "Vitals (ICU monitor)", ingest: ingestMonitor, fields: [
       { k: "hr", l: "Heart rate", t: "number" }, { k: "sbp", l: "Systolic BP", t: "number" }, { k: "dbp", l: "Diastolic BP", t: "number" }, { k: "map", l: "MAP (optional)", t: "number" },
       { k: "rr", l: "Resp rate", t: "number" }, { k: "spo2", l: "SpO₂ %", t: "number" }, { k: "temp", l: "Temp °C", t: "number" }, { k: "uop", l: "Urine mL/h", t: "number" },
@@ -6207,7 +6263,7 @@
     // image via SMD_IMAGE_ENGINE. Hidden on web (no native capture/OCR).
     var canSnap = !!(window.SMD_IS_NATIVE && ((window.SMD_NATIVE && window.SMD_NATIVE.ocr) ||
       (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.aiAvailable && SMD_IMAGE_ENGINE.aiAvailable())));
-    var steps = [["📷", "ICU Monitor", "monitor", "pulse"], ["🩸", "ABG report", "abg", "abg"], ["🧪", "Laboratory Report", "labs", "flask"], ["🫁", "Ventilator", "ventilator", "lungs"], ["📋", "ICU Flow Sheet", "flowsheet", "droplet"]];
+    var steps = [["🧑", "Patient details / Case sheet", "patient", "user"], ["📷", "ICU Monitor", "monitor", "pulse"], ["🩸", "ABG report", "abg", "abg"], ["🧪", "Laboratory Report", "labs", "flask"], ["🫁", "Ventilator", "ventilator", "lungs"], ["📋", "ICU Flow Sheet", "flowsheet", "droplet"]];
     modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("camera", "📷") + ' ICU Snapshot</h3>' +
       '<div class="icu-steps">' + steps.map(function (s, i) {
         return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + ico(s[3], s[0]) + " Capture " + s[1] + "</div>" +
@@ -6217,7 +6273,7 @@
           "</div></div>";
       }).join("") + "</div>" +
       (canSnap
-        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">' + ico("camera", "📷") + ' Image Engine ready</span><p style="margin-top:8px">Capture any screen or report — you\'ll choose <b>Private Device OCR</b> (free, on-device) or <b>AI Vision</b> (Pro). Each capture reads the <b>whole report</b> and fills <b>every</b> relevant tab (an ABG slip fills both ABG <i>and</i> electrolytes). <b>Verify every value.</b></p></div>'
+        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">' + ico("camera", "📷") + ' Image Engine ready</span><p style="margin-top:8px">Capture any screen or report — you\'ll choose <b>Private Device OCR</b> (free, on-device) or <b>AI Vision</b> (Pro). A monitor/lab/ABG/ventilator photo reads the <b>whole report</b> and fills <b>every</b> relevant tab (an ABG slip fills both ABG <i>and</i> electrolytes); a case sheet / EMR screen photo reads name, age, sex, MRN, history and more into <b>Patient details</b> for you to review. <b>Verify every value.</b></p></div>'
         : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 Snapshot · mobile app only</span><p style="margin-top:8px">Capture ICU screens and have them read into the tabs. Available in the StewardMD iOS/Android app.</p></div>') +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
@@ -6228,8 +6284,27 @@
         if (r && r.lines && r.lines.length) { if (out) out.innerHTML = "Read on-device — couldn't auto-structure. Recognized: <span style=\"color:var(--muted)\">" + r.lines.slice(0, 8).map(function (s) { return String(s).replace(/[<>&]/g, ""); }).join(" · ") + "</span>. Tap ✎ to enter manually."; return true; }
         return false;
       }
-      function runSnap(kind, out, dataUrl) {
+      function runSnap(kind, out, dataUrl, original) {
         if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
+        // Patient details / EMR case sheet: its own schema (name/age/sex/history/etc. are mostly
+        // free text, not the numeric labs/vitals/ABG/vent set), so it gets a dedicated review sheet
+        // instead of the direct-apply-then-"verify in the tabs" flow the numeric kinds use below —
+        // misread identity/history text is worth a proper look before it lands on the patient.
+        if (kind === "patient") {
+          var runP = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process)
+            ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: "patient", original: original })
+            : ((window.SMD_AI && SMD_AI.readImage) ? SMD_AI.readImage(dataUrl, "patient") : Promise.reject(new Error("no-reader")));
+          runP.then(function (r) {
+            if (!r || r.cancelled) { if (out) out.textContent = ""; return; }
+            if (r.mode === "fields" && r.fields && Object.keys(r.fields).length) {
+              if (out) out.textContent = "✓ Read — review below.";
+              openPatientReview(r.fields, dataUrl);
+              return;
+            }
+            if (!linesMsg(out, r) && out) out.textContent = "Couldn't read that image — try again or enter manually.";
+          }).catch(function () { if (out) out.textContent = "Couldn't read this — enter manually."; });
+          return;
+        }
         // COMBINED extraction (gold250): whichever report the clinician taps (Monitor/ABG/Labs/
         // Ventilator), read the WHOLE image/report and route EVERY value to its own tab — so an
         // ABG slip fills the ABG tab (pH, PaCO₂, PaO₂, HCO₃, base excess, lactate) AND the
@@ -6237,9 +6312,9 @@
         // intake/output fields aren't in the combined set). Route via the clinician-controlled
         // Image Engine (device OCR vs AI Vision — choice preserved).
         var combined = (kind !== "flowsheet");
-        var useKind = combined ? "all" : "flowsheet";
+        var useKind = combined ? "all" : kind;
         var run = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process)
-          ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: useKind })
+          ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: useKind, original: original })
           : ((window.SMD_AI && SMD_AI.readImage) ? SMD_AI.readImage(dataUrl, useKind) : Promise.reject(new Error("no-reader")));
         run.then(function (r) {
           if (!r || r.cancelled) { if (out) out.textContent = ""; return; }
@@ -6273,7 +6348,7 @@
             var out = modalEl.querySelector('[data-out="' + kind + '"]');
             if (out) out.textContent = "✨ Reading…";
             window.SMD_NATIVE.pickImage({ prompt: true }).then(function (dataUrl) {
-              compressImage(dataUrl, function (d) { runSnap(kind, out, d); });
+              compressImage(dataUrl, function (d) { runSnap(kind, out, d, dataUrl); });
             }).catch(function () { if (out) out.textContent = ""; });
           });
         });
@@ -6289,6 +6364,58 @@
         });
       }
     }
+  }
+
+  /* ---- Patient / EMR case-sheet capture review (Snapshot → "Patient details / Case sheet") ----
+   * A photographed case sheet, admission note, ID band or EMR/EHR screen is read via the SAME
+   * clinician-controlled Image Engine (Private Device OCR vs AI Vision) the other Snapshot steps
+   * use, but is NOT routed through the numeric-only openImportReview sheet: name, sex, allergies,
+   * history etc. are free text, and identity/history data is worth a dedicated look before it lands
+   * on the patient record. Always shows the FULL patient-detail field set (like the manual "Patient
+   * details" form), pre-filled from whatever the capture read — any field it missed is simply blank
+   * for the clinician to fill in. Nothing writes to STATE.patient until "Save to patient" is tapped. */
+  var PATIENT_CAP_FIELDS = [
+    { k: "name", l: "Name / initials", t: "text" }, { k: "age", l: "Age", t: "number" }, { k: "sex", l: "Sex", t: "select", opts: ["", "M", "F", "Other"] },
+    { k: "weightKg", l: "Weight (kg)", t: "number" }, { k: "heightCm", l: "Height (cm)", t: "number" }, { k: "bed", l: "Bed", t: "text" },
+    { k: "mrn", l: "MR / UHID", t: "text" }, { k: "doctor", l: "Treating doctor", t: "text" }, { k: "dept", l: "Department / specialty", t: "text" },
+    { k: "hospital", l: "Hospital", t: "text" },
+    { k: "codeStatus", l: "Resuscitation status", t: "select", opts: ["", "Full code", "DNR / DNAR", "DNI", "Comfort care only"] },
+    { k: "allergies", l: "Allergies / ADR", t: "text", wide: true },
+    { k: "complaints", l: "Presenting complaints / history of present illness", t: "textarea", wide: true },
+    { k: "pastHistory", l: "Past history / comorbidities", t: "textarea", wide: true },
+    { k: "diagnosis", l: "Working / admitting diagnosis", t: "text", wide: true }
+  ];
+  function openPatientReview(fields, dataUrl) {
+    fields = fields || {};
+    ensureModal();
+    var rowsHTML = PATIENT_CAP_FIELDS.map(function (f) {
+      var v = fields[f.k] != null ? fields[f.k] : "";
+      var fid = "icupatcap-" + f.k, al = esc(f.l), attrs = ' id="' + fid + '" aria-label="' + al + '"';
+      var inp;
+      if (f.t === "select") inp = '<select data-pk="' + f.k + '"' + attrs + '>' + f.opts.map(function (o) { return '<option' + (String(o) === String(v) ? " selected" : "") + ">" + esc(o || "—") + "</option>"; }).join("") + "</select>";
+      else if (f.t === "textarea") inp = '<textarea data-pk="' + f.k + '"' + attrs + ' rows="3" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(v) + "</textarea>";
+      else inp = '<input data-pk="' + f.k + '"' + attrs + ' type="' + (f.t === "number" ? "number" : "text") + '" step="any"' + (f.t === "number" ? ' inputmode="decimal"' : "") + ' value="' + esc(v) + '">';
+      return '<div class="icu-fld" style="' + (f.wide ? "grid-column:1/-1" : "") + '"><label for="' + fid + '">' + al + "</label>" + inp + "</div>";
+    }).join("");
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("user", "🧑") + ' Review captured patient details</h3>' +
+      '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Read from the photo — verify every field (especially name, age, sex and MRN) before saving. Blank fields were not found; fill them in if you have them. Nothing is applied until you save.</p>' +
+      (dataUrl ? '<img src="' + dataUrl + '" style="max-width:100%;max-height:160px;border-radius:10px;margin-bottom:10px;display:block;object-fit:contain">' : "") +
+      '<div class="icu-grid2">' + rowsHTML + "</div>" +
+      '<button class="icu-btn" data-icu-act="savepatientcap">' + ico("check", "✓") + ' Save to patient</button><button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  function savePatientCapture() {
+    if (!modalEl) return;
+    var obj = {};
+    modalEl.querySelectorAll("[data-pk]").forEach(function (el) {
+      var k = el.getAttribute("data-pk"), val = el.value; if (val === "" || val == null) return;
+      obj[k] = (el.type === "number") ? num(val) : val;
+    });
+    closeForm();
+    if (!Object.keys(obj).length) return;
+    ingestPatient(obj);
+    if (window.toast) toast("Patient details saved from capture (" + Object.keys(obj).length + " field" + (Object.keys(obj).length === 1 ? "" : "s") + ") — verify in Patient details.");
+    paint();
   }
 
   function ensureModal() { if (!modalEl) { modalEl = document.createElement("div"); modalEl.className = "icu-modal"; modalEl.id = "icuModal"; modalEl.setAttribute("role", "dialog"); modalEl.setAttribute("aria-modal", "true"); document.body.appendChild(modalEl); modalEl.addEventListener("click", function (e) { if (e.target === modalEl) closeForm(); }); modalEl.addEventListener("click", onClick); } }
@@ -6360,7 +6487,7 @@
   ];
   // Auto-filled defaults from recorded data (used when the clinician hasn't edited that field yet).
   function dischargeDefaults(st) {
-    var s = st || _raw, p = s.patient || {}, lv = latestByTs(s.vitals), L = (s.labs && s.labs.recent) || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], infusions = s.infusions || [], tx = s.treatment || [];
+    var s = st || _raw, p = s.patient || {}, lv = mergedVitals(s.vitals), L = (s.labs && s.labs.recent) || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], infusions = s.infusions || [], tx = s.treatment || [];
     var d = {};
     var today = ""; try { today = new Date().toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" }); } catch (e) {}
     d.admitDate = "";
@@ -7025,6 +7152,67 @@
     closeForm();
     if (window.toast) toast("Working diagnosis set: " + name);
   }
+  // ICD code attached to the working diagnosis - a SEPARATE structured field (STATE.patient.diagnosisIcd),
+  // never concatenated into STATE.patient.diagnosis: that free-text field drives KB-name matching
+  // (dxManagementHTML / SMD_REASON) and a code+title string would break that match. window.SMD_ICD
+  // comes from icd.js (loaded default-on, no flag - see vault/modules/ICD Search.md).
+  function openIcuIcdPick() {
+    if (!window.SMD_ICD || !SMD_ICD.pick) { if (window.toast) toast("ICD search not available on this build."); return; }
+    SMD_ICD.pick(function (row) {
+      STATE.patient.diagnosisIcd = { system: row.system, code: row.code, title: row.title, id: row.id, at: nowTs() };
+      paint();
+      if (window.toast) toast("ICD code attached: " + row.code);
+    });
+  }
+  // MaiK-assisted ICD suggestion: sends the working diagnosis + present findings (no name/MR
+  // number - explicit consent tap first, same posture as opd-emr.js's Ask MaiK) to
+  // /api/ai/extract kind:"icd-suggest", which grounds the model against REAL candidate rows from
+  // the icd_codes table and re-validates every returned id server-side - the client never trusts
+  // a code string from the model directly, only the {id,system,code,title} the server already
+  // verified. Advisory only: each suggestion needs its own Accept tap, nothing auto-applied.
+  var _icuIcdSug = [];
+  function openIcuIcdSuggest() {
+    if (!window.SMD_AI || !SMD_AI.extract) { if (window.toast) toast("MaiK is not available on this build."); return; }
+    var p = _raw.patient;
+    var findings = (STATE.findings || []).filter(function (c) { return c.polarity !== "absent" && c.canonicalFindingId && c.canonicalFindingId.indexOf("note:") !== 0; })
+      .map(function (c) { return c.displayLabel; });
+    var text = (p.diagnosis ? "Working diagnosis: " + p.diagnosis + ". " : "") + (findings.length ? "Findings: " + findings.join(", ") + "." : "");
+    text = text.trim();
+    if (!text) { if (window.toast) toast("Add a working diagnosis or findings first, then suggest a code."); return; }
+    if (!window.confirm("Send this working diagnosis and findings (no name or MR number) to MaiK for ICD-10/11 code suggestions?")) return;
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("search", "🔎") + ' Suggested ICD codes <span class="icu-phase">MaiK</span></h3>' +
+      '<p class="icu-doc-sub">Decision support only. Review each suggestion before accepting — nothing is attached until you tap Accept.</p>' +
+      '<div id="icuIcdSugBody" class="icu-dx-results"><div class="icu-dx-hint">Asking MaiK…</div></div>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:10px">Close</button></div>';
+    modalEl.classList.add("on");
+    _icuIcdSug = [];
+    SMD_AI.extract(text, "icd-suggest").then(function (r) {
+      var body = modalEl.querySelector("#icuIcdSugBody"); if (!body) return;
+      if (!r || r.error) {
+        body.innerHTML = '<div class="icu-dx-hint">' + esc(r && r.error === "quota" ? (r.message || "MaiK is a StewardMD Pro feature.")
+          : (r && r.message && /^(LOCAL_CAPABILITY_REQUIRED|ICD_INDEX_OFFLINE|kb-only)$/.test(r.error)) ? r.message
+          : "Could not reach MaiK. Check your connection and try again.") + '</div>';
+        return;
+      }
+      _icuIcdSug = r.suggestions || [];
+      if (!_icuIcdSug.length) { body.innerHTML = '<div class="icu-dx-hint">No confident ICD match found for this text — try Search &amp; select instead.</div>'; return; }
+      body.innerHTML = _icuIcdSug.map(function (s, i) {
+        return '<div class="icu-icd-sugrow"><div class="icu-icd-sugtop"><span class="icu-icd-code">' + esc(s.code) + '</span><span class="icu-icd-sys">' + esc(s.system) + '</span>' +
+          '<span class="icu-icd-conf icu-icd-conf-' + esc(s.confidence) + '">' + esc(s.confidence) + ' confidence</span></div>' +
+          '<div class="icu-icd-sugtitle">' + esc(s.title) + '</div>' +
+          (s.why ? '<div class="icu-icd-sugwhy">' + esc(s.why) + '</div>' : "") +
+          '<button class="icu-btn" data-icu-act="icdaccept:' + i + '" style="margin-top:6px">' + ico("check", "✓") + ' Accept</button></div>';
+      }).join("");
+    });
+  }
+  function acceptIcuIcdSuggestion(i) {
+    var s = _icuIcdSug[i]; if (!s) return;
+    STATE.patient.diagnosisIcd = { system: s.system, code: s.code, title: s.title, id: s.id, at: nowTs(), source: "maik-suggest" };
+    closeForm();
+    paint();
+    if (window.toast) toast("ICD code attached: " + s.code);
+  }
   // Manual imaging note (idx null) or annotate/correct an existing record (idx set).
   function openImagingForm(id) {
     ensureModal();
@@ -7140,6 +7328,8 @@
     if (!res || res.error) {
       var msg = (res && res.error === "ai-off") ? "AI summary is turned off (cloud text disabled in Settings). Use the deterministic extract instead."
         : (res && res.error === "quota") ? "AI usage limit reached for now — try again later, or use the deterministic extract."
+        // The answer engine refused for a named reason (Local mode, model lacks the capability): say it.
+        : (res && res.message && (res.error === "LOCAL_CAPABILITY_REQUIRED" || res.error === "kb-only")) ? res.message + " The deterministic extract is unaffected."
         : "Couldn’t generate an AI summary right now. Use the deterministic extract instead.";
       return '<div class="icu-assist-msg">' + esc(msg) + "</div>";
     }
@@ -7273,7 +7463,7 @@
   }
   // Compact latest-vitals concept strings (numbers only — no identifiers). Feeds the unified context.
   function latestVitalsSummary() {
-    var v = latestByTs(_raw.vitals || []), out = [];
+    var v = mergedVitals(_raw.vitals || []), out = [];
     if (!v || !Object.keys(v).length) return out;
     if (v.sbp != null && v.dbp != null) { var mp = mapCalc(v.sbp, v.dbp); out.push("BP " + v.sbp + "/" + v.dbp + (mp != null ? " (MAP " + mp + ")" : "")); }
     if (v.hr != null) out.push("HR " + v.hr);
@@ -7290,6 +7480,7 @@
   function correlationEvidence() {
     var p = _raw.patient || {}, img = extractImagingConcepts(), crit = imagingCriticalFlags(), labs = extractLabConcepts(), clinical = [];
     if (p.complaints) clinical.push(String(p.complaints));
+    if (p.pastHistory) clinical.push("past history: " + String(p.pastHistory));
     if (p.diagnosis) clinical.push("working diagnosis: " + p.diagnosis);
     var findings = [], vitals = [];
     if (icuDxFlowOn()) {
@@ -7751,6 +7942,8 @@
       var msg = res && res.error === "ai-off" ? "Deep review is turned off (cloud text disabled in Settings)."
         : res && res.error === "quota" ? "AI usage limit reached — try again later. Your findings remain saved."
         : res && res.error === "timeout" ? "Deep review timed out. Your findings remain saved — tap Deep clinical review to retry, or review/edit the context."
+        // The answer engine refused for a named reason (Local mode, model lacks the capability): say it.
+        : res && res.message && (res.error === "LOCAL_CAPABILITY_REQUIRED" || res.error === "kb-only") ? res.message + " Your findings remain saved."
         : "Deep review could not be completed. Your findings remain saved. Retry, or review/edit the context.";
       return '<div class="icu-assist-msg">' + ico("warn", "⚠️") + " " + esc(msg) + "</div>";
     }
@@ -8208,10 +8401,10 @@
     ensureModal();
     var A = ' style="justify-content:flex-start;text-align:left"';
     modalEl.innerHTML = '<div class="icu-sheet"><h3>Add / import data</h3>' +
-      '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Enter, speak, or snap this patient’s vitals, labs, ABG or ventilator settings. Nothing is applied until you review it.</p>' +
+      '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Enter, speak, or snap this patient’s details, vitals, labs, ABG or ventilator settings — including a photo of a case sheet or EMR screen to autofill name, age, sex, history and more. Nothing is applied until you review it.</p>' +
       '<div class="icu-grid2">' +
         '<button class="icu-btn" data-icu-act="voice"' + A + '>' + ico("mic", "🎤") + ' Speak <span style="opacity:.8;font-weight:700">· MaiK Scribe</span></button>' +
-        '<button class="icu-btn ghost" data-icu-act="snapshot"' + A + '>' + ico("camera", "📷") + ' Snap a photo</button>' +
+        '<button class="icu-btn ghost" data-icu-act="snapshot"' + A + '>' + ico("camera", "📷") + ' Snap a photo <span style="opacity:.8;font-weight:700">· patient details, vitals, labs, ABG, vent</span></button>' +
         '<button class="icu-btn ghost" data-icu-act="impmethod:file"' + A + '>' + ico("upload", "📄") + ' Upload PDF / image</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch"' + A + '>' + ico("hospital", "🏥") + ' Import from ward</button>' +
       '</div>' +
@@ -8478,6 +8671,10 @@
       case "dxskip": _dxShow = false; paint(); break;
       case "dxadv": _dxAdvanced = true; paint(); break;
       case "pickdx": pickDiagnosis(decodeURIComponent(arg)); break;
+      case "icdsearch": openIcuIcdPick(); break;
+      case "icdclear": _raw.patient.diagnosisIcd = null; paint(); break;
+      case "icdsuggest": openIcuIcdSuggest(); break;
+      case "icdaccept": acceptIcuIcdSuggestion(+arg); break;
       case "imgfetch": imagingFetch(); break;
       case "imgadd": openImagingForm(null); break;
       case "imgassist": openImagingAssist(decodeURIComponent(arg)); break;
@@ -8563,6 +8760,7 @@
         break;
       }
       case "snapshot": openSnapshot(); break;
+      case "savepatientcap": savePatientCapture(); break;
       case "launch":
         if (arg === "elyte") launch(function () {
           if (!window.ELYTE) return;
@@ -9018,6 +9216,7 @@
     ingestReferral: function (entry) { if (!entry || !entry.state) return; var r = loadRoster(); r.push(entry); saveRoster(capTen(r)); try { ICU.open(); } catch (e) {} applyState(entry.state, entry.id); },
     ingestInfusion: ingestInfusion, _bridgeInfusion: bridgeInfusion, _bridgeInfusionFromCalc: bridgeInfusionFromCalc, _installInfBridge: installInfBridge, _infWeightBridge: infWeightBridge,
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, addWardPatientToRoster: addWardPatientToRoster, removeWardPatientFromRoster: removeWardPatientFromRoster, _buildWardState: buildWardState, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
+    _patientReview: openPatientReview, _savePatientCapture: savePatientCapture, _patientCapFields: PATIENT_CAP_FIELDS,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
     _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,
     openFindingPicker: openFindingPicker, _addFindingChip: addFindingChip, _applyFindState: applyFindState, _findStateOf: findStateOf, _vocabNlpCtx: vocabNlpCtx,

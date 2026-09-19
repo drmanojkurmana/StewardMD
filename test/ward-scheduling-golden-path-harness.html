@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ TASK 4.5: scheduling golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the scheduling golden path (ward list -> Scheduling button ->
+ * book an appointment -> a clash is refused -> a blackout is refused, no override -> cancel an
+ * appointment -> book/cancel a resource -> block/unblock a period) against an in-memory stub
+ * server whose response shapes are confirmed against functions/_wardsynq/scheduling.js,
+ * resource-booking.js and blackout.js, and the route-level proof in
+ * test/wardsynq-scheduling-blackout.test.mjs, which proves these same contracts persist for real.
+ * This proves the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+window.prompt = function () { return "Patient called to cancel."; };
+
+var APPTS = [];
+var RESOURCES = [{ id: "ct-1", name: "CT Scanner 1", kind: "equipment", location: null, bookings: [], booked: 0 }];
+var BLACKOUTS = [];
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, wards: [] });
+
+  if (u.indexOf("/ward/book-resource") >= 0 && (opts && opts.method) === "POST") {
+    var r = RESOURCES[0];
+    var clash = r.bookings.filter(function (b) { return b.state === "booked" && b.startAt === body.startAt; })[0];
+    if (clash) return reply({ ok: false, error: "resource_busy", detail: "CT Scanner 1 is already booked from " + clash.startAt + " for " + clash.minutes + " minutes." });
+    var bk = { bookingId: "res-" + (r.bookings.length + 1), startAt: body.startAt, minutes: body.minutes, purpose: body.purpose, state: "booked" };
+    r.bookings.push(bk); r.booked = r.bookings.filter(function (x) { return x.state === "booked"; }).length;
+    return reply({ ok: true, written: 1, bookingId: bk.bookingId });
+  }
+  if (u.indexOf("/ward/resource-state") >= 0 && (opts && opts.method) === "POST") {
+    var found = RESOURCES[0].bookings.filter(function (b) { return b.bookingId === body.bookingId; })[0];
+    if (found) found.state = "cancelled";
+    return reply({ ok: true, written: 1 });
+  }
+  if (u.indexOf("/ward/resource-schedule") >= 0) return reply({ ok: true, resources: RESOURCES, resourcesConfigured: true });
+
+  if (u.indexOf("/ward/block-period") >= 0 && (opts && opts.method) === "POST") {
+    var bo = { blackoutId: "bo-" + (BLACKOUTS.length + 1), clinicianId: body.clinicianId || null, resourceId: body.resourceId || null, from: body.from, to: body.to, reason: body.reason };
+    BLACKOUTS.push(bo);
+    return reply({ ok: true, written: 1, blackoutId: bo.blackoutId });
+  }
+  if (u.indexOf("/ward/cancel-blackout") >= 0 && (opts && opts.method) === "POST") {
+    BLACKOUTS = BLACKOUTS.filter(function (b) { return b.blackoutId !== body.blackoutId; });
+    return reply({ ok: true, written: 1 });
+  }
+  if (u.indexOf("/ward/blackouts") >= 0) return reply({ ok: true, blackouts: BLACKOUTS });
+
+  if (u.indexOf("/ward/book") >= 0 && (opts && opts.method) === "POST") {
+    var clinician = body.clinicianId;
+    var withinBlackout = BLACKOUTS.some(function (b) { return b.clinicianId === clinician && body.startAt >= b.from && body.startAt < b.to; });
+    if (withinBlackout && !body.overbook) return reply({ ok: false, error: "blacked_out", detail: clinician + " is unavailable for this period." });
+    if (withinBlackout && body.overbook) return reply({ ok: false, error: "blacked_out", detail: clinician + " is unavailable for this period." });
+    var apptClash = APPTS.filter(function (a) { return a.clinicianId === clinician && a.startAt === body.startAt && (a.state === "booked" || a.state === "arrived"); })[0];
+    if (apptClash && !body.overbook) return reply({ ok: false, error: "slot_taken", detail: clinician + " already has an appointment overlapping " + body.startAt });
+    var appt = { appointmentId: "appt-" + (APPTS.length + 1), patientId: body.patientId, clinicianId: clinician, startAt: body.startAt, minutes: body.minutes, reason: body.reason || null, state: "booked", overbooked: !!(apptClash && body.overbook), overbookReason: apptClash && body.overbook ? body.overbookReason : null };
+    APPTS.push(appt);
+    return reply({ ok: true, written: 1, appointmentId: appt.appointmentId });
+  }
+  if (u.indexOf("/ward/appointment") >= 0 && (opts && opts.method) === "POST") {
+    var target = APPTS.filter(function (a) { return a.appointmentId === body.appointmentId; })[0];
+    if (target) target.state = body.state;
+    return reply({ ok: true, written: 1 });
+  }
+  if (u.indexOf("/ward/diary") >= 0) {
+    var cid = (u.split("clinicianId=")[1] || "").split("&")[0];
+    var rows = cid ? APPTS.filter(function (a) { return a.clinicianId === decodeURIComponent(cid); }) : APPTS;
+    return reply({ ok: true, appointments: rows, recalls: [], unbookedRecalls: 0, overdueRecalls: 0 });
+  }
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

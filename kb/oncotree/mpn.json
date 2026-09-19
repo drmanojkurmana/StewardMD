@@ -1,0 +1,724 @@
+{
+  "guideline": "mpn",
+  "title": "Myeloproliferative Neoplasms",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "myeloproliferative_neoplasms",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for BCR::ABL1-Negative Myeloproliferative Neoplasms (MPN). Covers complete clinical algorithm: Diagnostic Workup (CBC with teardrop poikilocytosis and leukoerythroblastic picture, bone marrow aspirate/core with reticulin/trichrome fibrosis grading, driver mutation molecular testing for JAK2 V617F / exon 12, CALR exon 9, MPL W515, myeloid NGS panel for ASXL1, SRSF2, EZH2, IDH1/2, U2AF1, serum EPO level, abdominal ultrasound for splenomegaly) -> Entity Stratification: Primary Myelofibrosis (PMF) / Post-PV / Post-ET MF vs Polycythemia Vera (PV) vs Essential Thrombocythemia (ET) -> Myelofibrosis Risk Stratification (DIPSS / MIPSS70: Low, Intermediate-1, Intermediate-2, High): Intermediate-2 / High Risk -> Allogeneic HCT evaluation (only curative approach) + JAK Inhibitor therapy: Ruxolitinib 5-25 mg BID for symptomatic splenomegaly; Fedratinib 400 mg daily; Pacritinib 200 mg BID (preferred for severe thrombocytopenia platelets <50,000/mcL); Momelotinib 200 mg daily (preferred for intermediate/high risk MF with symptomatic anemia Hb <10 g/dL) -> Polycythemia Vera Risk Stratification: Low Risk (age <60 and no thrombosis history) -> Phlebotomy to maintain Hct <45% + Low-dose aspirin 81-100 mg daily; High Risk (age >=60 or prior arterial/venous thrombosis) -> Phlebotomy + Aspirin + Cytoreductive therapy: Hydroxyurea 500-1000 mg daily (Category 1) or Ropeginterferon alfa-2b (BESREMi Category 1); Ruxolitinib for hydroxyurea resistance or intolerance -> Essential Thrombocythemia: Risk-adapted therapy (Very Low, Low, Intermediate, High); Hydroxyurea or Anagrelide. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Myeloproliferative Neoplasms Version 2.2026 (July 2026).",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "DIPSS (Dynamic IPSS) uses age >65 years, WBC >25 x 10^9/L, hemoglobin <10 g/dL, circulating blasts >=1%, and constitutional symptoms; MIPSS70 adds high molecular risk mutations (ASXL1, SRSF2, EZH2, IDH1/2, U2AF1) and fibrosis grade. Low / Intermediate-1 disease is observed; Intermediate-2 / High disease is referred for allogeneic HCT evaluation.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "COMFORT-I/II trials: ruxolitinib achieved >=35% spleen volume reduction and constitutional symptom control in intermediate-2/high-risk MF; starting dose is set by baseline platelet count (5-25 mg BID). Fedratinib 400 mg daily is a Category 1 alternative including after ruxolitinib failure (JAKARTA/JAKARTA2).",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "PERSIST-1/2 trials: pacritinib 200 mg BID retained full-dose JAK2/IRAK1 inhibition in MF with severe thrombocytopenia (platelets <50 x 10^9/L) without myelosuppressive dose reductions. MOMENTUM trial: momelotinib 200 mg daily (dual ACVR1/JAK inhibition) improved anemia and transfusion independence while shrinking spleen in symptomatic anemic MF.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "CYTO-PV trial: maintaining hematocrit strictly below 45% with therapeutic phlebotomy reduces cardiovascular death and major thrombosis in PV. RESPONSE trial: ruxolitinib produced hematocrit control plus >=35% spleen reduction in hydroxyurea-resistant or intolerant PV.",
+      "evidence": "1"
+    },
+    "e": {
+      "text": "Allogeneic hematopoietic cell transplantation (HCT) is the only curative modality for myelofibrosis; HLA typing and unrelated-donor search should begin at Intermediate-2/High-risk assignment or at first sign of leukemic progression. JAK inhibitor therapy before HCT controls splenomegaly and symptoms but does not replace transplant evaluation.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "mpn_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Workup",
+      "title": "MPN: diagnostic workup",
+      "section": "Workup",
+      "description": "Confirm a BCR::ABL1-negative MPN and gather the morphology, molecular, and laboratory data that drive entity assignment and risk stratification.",
+      "path": "Myeloproliferative Neoplasms / Workup",
+      "pills": [
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete blood count (CBC) with differential and manual peripheral blood smear review: leukoerythroblastic picture, teardrop poikilocytes (dacryocytes), giant hypogranular platelets.",
+        "Bone marrow aspirate and trephine core biopsy: morphologic evaluation, cellularity, megakaryocyte clustering and atypia, reticulin and collagen silver staining with fibrosis grade MF-0 to MF-3.",
+        "Molecular driver testing: sequential or multiplex assay for JAK2 V617F (present in about 95% of PV and 55-60% of ET and PMF); if negative, test JAK2 exon 12 for suspected PV, or CALR exon 9 insertion/deletion and MPL codon 515 for ET and PMF. Triple-negative MPN requires deep evaluation to rule out reactive causes or other myeloid neoplasms.",
+        "Myeloid NGS prognostic panel: ASXL1, SRSF2, EZH2, IDH1/2, U2AF1 (high molecular risk mutations associated with accelerated leukemic transformation and inferior overall survival).",
+        "Laboratory baseline and organ imaging: serum erythropoietin (subnormal EPO is a major WHO criterion for PV), serum ferritin, iron panel, LDH, uric acid; abdominal ultrasound or CT to measure spleen volume and span in centimeters."
+      ],
+      "protocolRefs": [],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed - Proceed to MPN Subtype Classification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_subtype",
+      "linkId": "mpn_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MPN subtype",
+      "title": "MPN entity stratification (PMF / PV / ET)",
+      "section": "Classification",
+      "description": "Assign the WHO MPN entity from marrow morphology, fibrosis grade, driver mutation, hemoglobin/hematocrit, platelet count, and EPO level. Entity determines which risk model and therapy pathway applies.",
+      "path": "Myeloproliferative Neoplasms / Classification",
+      "pills": [
+        "classification"
+      ],
+      "required": true,
+      "bullets": [
+        "Myelofibrosis (primary MF, post-PV MF, post-ET MF): marrow fibrosis MF-1 or higher with megakaryocyte atypia, leukoerythroblastosis with dacryocytes, splenomegaly, and often anemia or leukocytosis.",
+        "Polycythemia vera: elevated hemoglobin/hematocrit with subnormal serum EPO, JAK2 V617F or exon 12 mutation, hypercellular marrow with panmyelosis.",
+        "Essential thrombocythemia: sustained thrombocytosis with megakaryocyte proliferation, JAK2 V617F, CALR exon 9, or MPL W515 driver (or triple-negative after exclusion of reactive causes), without significant fibrosis or PV features."
+      ],
+      "protocolRefs": [],
+      "options": [
+        {
+          "id": "mf",
+          "label": "Myelofibrosis (Primary, Post-PV, Post-ET)",
+          "sets": {
+            "subtype": "mf"
+          },
+          "pills": [
+            "MF"
+          ]
+        },
+        {
+          "id": "pv",
+          "label": "Polycythemia Vera (PV)",
+          "sets": {
+            "subtype": "pv"
+          },
+          "pills": [
+            "PV"
+          ]
+        },
+        {
+          "id": "et",
+          "label": "Essential Thrombocythemia (ET)",
+          "sets": {
+            "subtype": "et"
+          },
+          "pills": [
+            "ET"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_mf_risk",
+      "linkId": "mpn_mf_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MF risk",
+      "title": "Myelofibrosis risk stratification (DIPSS / MIPSS70)",
+      "section": "Risk Stratification",
+      "description": "Assign DIPSS / MIPSS70 risk from age, counts, blasts, symptoms, karyotype, fibrosis grade, and high molecular risk mutations. Risk separates observation from HCT evaluation plus JAK inhibitor therapy.",
+      "path": "Myeloproliferative Neoplasms / MF / Risk",
+      "pills": [
+        "MF",
+        "risk"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Low / Intermediate-1 risk, asymptomatic: observation with symptom-directed care and serial spleen, blood count, and symptom-burden monitoring.",
+        "Intermediate-2 / High risk (symptomatic disease, cytopenias, constitutional symptoms, circulating blasts, adverse karyotype, or high molecular risk mutations): allogeneic HCT evaluation plus JAK inhibitor therapy tailored to platelets and anemia."
+      ],
+      "protocolRefs": [],
+      "options": [
+        {
+          "id": "low",
+          "label": "Low / Intermediate-1 Risk (asymptomatic)",
+          "sets": {
+            "mf_risk": "low"
+          },
+          "pills": [
+            "low / int-1"
+          ]
+        },
+        {
+          "id": "high",
+          "label": "Intermediate-2 / High Risk (symptomatic, cytopenias, constitutional symptoms)",
+          "sets": {
+            "mf_risk": "high"
+          },
+          "pills": [
+            "int-2 / high"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_mf_symptom_profile",
+      "linkId": "mpn_mf_symptom_profile",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MF symptom profile",
+      "title": "Intermediate-2 / High-risk MF: cytopenia and symptom profile",
+      "section": "Risk Stratification",
+      "description": "Select the JAK inhibitor by the dominant clinical problem: severe thrombocytopenia, symptomatic anemia, or splenomegaly with constitutional symptoms and adequate platelets. All three arms include HCT evaluation.",
+      "path": "Myeloproliferative Neoplasms / MF / Symptom Profile",
+      "pills": [
+        "MF",
+        "int-2 / high"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b",
+        "c",
+        "e"
+      ],
+      "bullets": [
+        "Platelets below 50 x 10^9/L: pacritinib keeps full dose where other JAK inhibitors require myelosuppressive reductions.",
+        "Symptomatic anemia with hemoglobin below 10 g/dL with or without splenomegaly: momelotinib addresses anemia, transfusion burden, and spleen together.",
+        "Splenomegaly and constitutional symptoms with platelets at or above 50 x 10^9/L: ruxolitinib or fedratinib."
+      ],
+      "protocolRefs": [],
+      "options": [
+        {
+          "id": "severe_thrombocytopenia",
+          "label": "Platelets < 50 x 10^9/L (severe thrombocytopenia)",
+          "sets": {
+            "mf_profile": "severe_thrombocytopenia"
+          },
+          "pills": [
+            "platelets <50"
+          ]
+        },
+        {
+          "id": "anemia_predominant",
+          "label": "Symptomatic Anemia (Hb < 10 g/dL) with or without splenomegaly",
+          "sets": {
+            "mf_profile": "anemia_predominant"
+          },
+          "pills": [
+            "anemia"
+          ]
+        },
+        {
+          "id": "splenomegaly_general",
+          "label": "Splenomegaly and constitutional symptoms, platelets >= 50 x 10^9/L",
+          "sets": {
+            "mf_profile": "splenomegaly_general"
+          },
+          "pills": [
+            "splenomegaly"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_pv_risk",
+      "linkId": "mpn_pv_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "PV risk",
+      "title": "Polycythemia vera risk stratification",
+      "section": "Risk Stratification",
+      "description": "Assign PV thrombotic risk from age and thrombosis history. Low risk is managed with phlebotomy plus aspirin; high risk adds cytoreductive therapy.",
+      "path": "Myeloproliferative Neoplasms / PV / Risk",
+      "pills": [
+        "PV",
+        "risk"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Low risk: age below 60 years with NO history of arterial or venous thrombosis.",
+        "High risk: age 60 years or older, or any prior arterial or venous thrombosis."
+      ],
+      "protocolRefs": [],
+      "options": [
+        {
+          "id": "low_risk",
+          "label": "Low Risk (Age < 60 and NO history of thrombosis)",
+          "sets": {
+            "pv_risk": "low"
+          },
+          "pills": [
+            "low risk"
+          ]
+        },
+        {
+          "id": "high_risk",
+          "label": "High Risk (Age >= 60 or prior arterial/venous thrombosis)",
+          "sets": {
+            "pv_risk": "high"
+          },
+          "pills": [
+            "high risk"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_et_risk",
+      "linkId": "mpn_et_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "ET risk",
+      "title": "Essential thrombocythemia risk stratification",
+      "section": "Risk Stratification",
+      "description": "Assign ET thrombotic risk from age, thrombosis history, and JAK2 status. Very low / low risk is managed with observation or aspirin; intermediate / high risk adds cytoreduction.",
+      "path": "Myeloproliferative Neoplasms / ET / Risk",
+      "pills": [
+        "ET",
+        "risk"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Very low / low risk: age below 60, no prior thrombosis, JAK2-unmutated or mutated without additional risk factors.",
+        "Intermediate / high risk: age 60 or older, or any prior arterial or venous thrombosis."
+      ],
+      "protocolRefs": [],
+      "options": [
+        {
+          "id": "low_risk",
+          "label": "Very Low / Low Risk (Age < 60, no thrombosis)",
+          "sets": {
+            "et_risk": "low"
+          },
+          "pills": [
+            "low risk"
+          ]
+        },
+        {
+          "id": "high_risk",
+          "label": "Intermediate / High Risk (Age >= 60 or prior thrombosis)",
+          "sets": {
+            "et_risk": "high"
+          },
+          "pills": [
+            "high risk"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_mf_low",
+      "linkId": "tx_mpn_mf_low",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MF low-risk management",
+      "title": "Low / Intermediate-1 MF: observation and symptom-directed therapy",
+      "section": "Treatment",
+      "description": "Observation pathway for asymptomatic low / Intermediate-1 myelofibrosis with escalation triggers for progressive symptoms or splenomegaly.",
+      "path": "Myeloproliferative Neoplasms / MF / Low Risk / Observation",
+      "pills": [
+        "MF",
+        "low / int-1",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Observation (watch-and-wait) with serial CBC, spleen measurement, and validated symptom-burden assessment; repeat DIPSS / MIPSS70 on clinical change.",
+        "Symptom-directed therapy with low-dose aspirin for vasomotor or thrombotic symptoms when not contraindicated by bleeding risk or severe thrombocytopenia.",
+        "Consider pegylated interferon alfa or ruxolitinib for progressive symptoms or enlarging splenomegaly; re-stratify to the Intermediate-2 / High-risk pathway on progression.",
+        "Counsel on infection, bleeding, thrombosis, and leukemic-transformation warning signs at each visit.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "heme-mpn-ruxolitinib"
+      ]
+    },
+    {
+      "id": "n_tx_mf_pacritinib",
+      "linkId": "tx_mpn_mf_pacritinib",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MF pacritinib",
+      "title": "Intermediate-2 / High-risk MF with severe thrombocytopenia: pacritinib",
+      "section": "Treatment",
+      "description": "Category 1 preferred JAK inhibitor for MF with platelets below 50 x 10^9/L, with concurrent allogeneic HCT evaluation.",
+      "path": "Myeloproliferative Neoplasms / MF / High Risk / Pacritinib",
+      "pills": [
+        "MF",
+        "int-2 / high",
+        "platelets <50",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c",
+        "e"
+      ],
+      "bullets": [
+        "Pacritinib 200 mg PO BID, Category 1 Preferred for severe thrombocytopenia based on PERSIST-1/2 trials.",
+        "Full-dose JAK2/IRAK1 inhibition without myelosuppressive dose reductions; monitor CBC, coagulation, bleeding, QTc, and gastrointestinal tolerance.",
+        "Evaluate for allogeneic HCT in parallel: HLA typing and donor search at Intermediate-2/High-risk assignment (only curative approach).",
+        "Track spleen response and symptom burden; manage drug interactions before dose changes.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "heme-mpn-ruxolitinib"
+      ]
+    },
+    {
+      "id": "n_tx_mf_momelotinib",
+      "linkId": "tx_mpn_mf_momelotinib",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MF momelotinib",
+      "title": "Intermediate-2 / High-risk MF with symptomatic anemia: momelotinib",
+      "section": "Treatment",
+      "description": "Category 1 preferred JAK inhibitor for MF with symptomatic anemia (Hb below 10 g/dL), with concurrent allogeneic HCT evaluation.",
+      "path": "Myeloproliferative Neoplasms / MF / High Risk / Momelotinib",
+      "pills": [
+        "MF",
+        "int-2 / high",
+        "anemia",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c",
+        "e"
+      ],
+      "bullets": [
+        "Momelotinib 200 mg PO daily, Category 1 Preferred for symptomatic anemia based on the MOMENTUM trial.",
+        "Dual ACVR1/JAK inhibition improves anemia, reduces transfusion burden, and shrinks spleen; monitor hemoglobin, transfusion need, CBC, LFTs, and gastrointestinal tolerance.",
+        "Evaluate for allogeneic HCT in parallel: HLA typing and donor search at Intermediate-2/High-risk assignment (only curative approach).",
+        "Reassess iron status and bleeding sources before attributing persistent anemia to MF alone.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "heme-mpn-ruxolitinib"
+      ]
+    },
+    {
+      "id": "n_tx_mf_ruxolitinib",
+      "linkId": "tx_mpn_mf_ruxolitinib",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MF ruxolitinib",
+      "title": "Intermediate-2 / High-risk MF with splenomegaly: ruxolitinib or fedratinib",
+      "section": "Treatment",
+      "description": "Category 1 preferred JAK inhibitor therapy for splenomegaly and constitutional symptoms with platelets at or above 50 x 10^9/L, with concurrent allogeneic HCT evaluation.",
+      "path": "Myeloproliferative Neoplasms / MF / High Risk / Ruxolitinib",
+      "pills": [
+        "MF",
+        "int-2 / high",
+        "splenomegaly",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b",
+        "e"
+      ],
+      "bullets": [
+        "Ruxolitinib 5-25 mg PO BID based on baseline platelet count, Category 1 Preferred per COMFORT-I/II trials; monitor CBC, spleen volume, symptom score, lipids, and infection risk.",
+        "Alternative: fedratinib 400 mg PO daily, Category 1 (including after ruxolitinib failure); monitor thiamine, gastrointestinal tolerance, CBC, LFTs, and renal function.",
+        "Evaluate for allogeneic HCT in parallel: HLA typing and donor search at Intermediate-2/High-risk assignment (only curative approach).",
+        "Taper rather than abruptly stop JAK inhibitor therapy to avoid symptom-rebound cytokine flare.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "heme-mpn-ruxolitinib"
+      ]
+    },
+    {
+      "id": "n_tx_pv_low",
+      "linkId": "tx_mpn_pv_low",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "PV low-risk therapy",
+      "title": "Low-risk PV: phlebotomy plus low-dose aspirin",
+      "section": "Treatment",
+      "description": "Phlebotomy plus aspirin pathway for low-risk polycythemia vera (age below 60, no thrombosis history).",
+      "path": "Myeloproliferative Neoplasms / PV / Low Risk / Phlebotomy",
+      "pills": [
+        "PV",
+        "low risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Therapeutic phlebotomy to maintain hematocrit strictly below 45% (Hct <45%); monitor hematocrit, CBC, ferritin, and iron symptoms between sessions.",
+        "Low-dose aspirin 81-100 mg PO daily unless contraindicated by bleeding risk or aspirin intolerance.",
+        "Aggressive cardiovascular risk factor modification: blood pressure, lipids, diabetes control, smoking cessation, weight and activity counseling.",
+        "Escalate to the high-risk pathway with cytoreductive therapy on thrombosis, age transition to 60 or older, progressive leukocytosis or thrombocytosis, or enlarging splenomegaly.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "heme-mpn-ruxolitinib"
+      ]
+    },
+    {
+      "id": "n_tx_pv_high",
+      "linkId": "tx_mpn_pv_high",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "PV high-risk therapy",
+      "title": "High-risk PV: phlebotomy plus aspirin plus cytoreduction",
+      "section": "Treatment",
+      "description": "Cytoreductive pathway for high-risk polycythemia vera (age 60 or older, or prior arterial/venous thrombosis) with second-line ruxolitinib for hydroxyurea resistance or intolerance.",
+      "path": "Myeloproliferative Neoplasms / PV / High Risk / Cytoreduction",
+      "pills": [
+        "PV",
+        "high risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Phlebotomy to target hematocrit below 45% (Hct <45%) plus low-dose aspirin 81-100 mg PO daily as the backbone of high-risk care.",
+        "Cytoreductive therapy: hydroxyurea 500-1000 mg PO daily, Category 1 Preferred; monitor CBC, MCV, LFTs, renal function, skin and mucocutaneous tolerance, and fertility plans.",
+        "Alternative first-line cytoreduction: ropeginterferon alfa-2b (BESREMi), Category 1 Preferred, particularly for younger patients; monitor CBC, LFTs, thyroid function, mood, and autoimmune history.",
+        "Second-line: ruxolitinib for hydroxyurea resistance or intolerance per the RESPONSE trial (hematocrit control plus spleen reduction); monitor CBC and infection risk.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "heme-mpn-ruxolitinib"
+      ]
+    },
+    {
+      "id": "n_tx_et_low",
+      "linkId": "tx_mpn_et_low",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "ET low-risk therapy",
+      "title": "Very low / Low-risk ET: observation or low-dose aspirin",
+      "section": "Treatment",
+      "description": "Conservative pathway for very low / low-risk essential thrombocythemia (age below 60, no thrombosis history).",
+      "path": "Myeloproliferative Neoplasms / ET / Low Risk / Observation",
+      "pills": [
+        "ET",
+        "low risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Observation or low-dose aspirin 81 mg PO daily, selected by JAK2 status, cardiovascular risk, and bleeding history.",
+        "Monitor platelet count, CBC, vasomotor symptoms (erythromelalgia, headache, paresthesia), and acquired von Willebrand risk at extreme thrombocytosis.",
+        "Aggressive cardiovascular risk factor modification at each visit.",
+        "Escalate to cytoreduction on thrombosis, age transition to 60 or older, or progressive symptoms.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "heme-mpn-ruxolitinib"
+      ]
+    },
+    {
+      "id": "n_tx_et_high",
+      "linkId": "tx_mpn_et_high",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "ET high-risk therapy",
+      "title": "Intermediate / High-risk ET: aspirin plus cytoreduction",
+      "section": "Treatment",
+      "description": "Cytoreductive pathway for intermediate / high-risk essential thrombocythemia (age 60 or older, or prior thrombosis).",
+      "path": "Myeloproliferative Neoplasms / ET / High Risk / Cytoreduction",
+      "pills": [
+        "ET",
+        "high risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Low-dose aspirin 81-100 mg PO daily plus cytoreduction unless contraindicated by bleeding risk.",
+        "Hydroxyurea 500-1000 mg PO daily, Category 1 Preferred; monitor CBC, LFTs, renal function, and mucocutaneous tolerance.",
+        "Alternatives for younger or pregnant patients: anagrelide 0.5 mg PO QID with cardiac and platelet monitoring, or interferon alfa / peginterferon alfa (Pegasys) with CBC, LFT, thyroid, and mood monitoring.",
+        "Monitor platelet control, thrombotic and bleeding events, and fibrosis or leukemic-transformation signs on long-term therapy.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "heme-mpn-ruxolitinib"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_subtype",
+      "from": "n_workup",
+      "to": "n_subtype",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_subtype_mf",
+      "from": "n_subtype",
+      "to": "n_mf_risk",
+      "fromOptions": [
+        "mf"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_subtype_pv",
+      "from": "n_subtype",
+      "to": "n_pv_risk",
+      "fromOptions": [
+        "pv"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_subtype_et",
+      "from": "n_subtype",
+      "to": "n_et_risk",
+      "fromOptions": [
+        "et"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mfrisk_low",
+      "from": "n_mf_risk",
+      "to": "n_tx_mf_low",
+      "fromOptions": [
+        "low"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mfrisk_high",
+      "from": "n_mf_risk",
+      "to": "n_mf_symptom_profile",
+      "fromOptions": [
+        "high"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mfsymp_severe",
+      "from": "n_mf_symptom_profile",
+      "to": "n_tx_mf_pacritinib",
+      "fromOptions": [
+        "severe_thrombocytopenia"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mfsymp_anemia",
+      "from": "n_mf_symptom_profile",
+      "to": "n_tx_mf_momelotinib",
+      "fromOptions": [
+        "anemia_predominant"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mfsymp_spleen",
+      "from": "n_mf_symptom_profile",
+      "to": "n_tx_mf_ruxolitinib",
+      "fromOptions": [
+        "splenomegaly_general"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pv_low",
+      "from": "n_pv_risk",
+      "to": "n_tx_pv_low",
+      "fromOptions": [
+        "low_risk"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pv_high",
+      "from": "n_pv_risk",
+      "to": "n_tx_pv_high",
+      "fromOptions": [
+        "high_risk"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_et_low",
+      "from": "n_et_risk",
+      "to": "n_tx_et_low",
+      "fromOptions": [
+        "low_risk"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_et_high",
+      "from": "n_et_risk",
+      "to": "n_tx_et_high",
+      "fromOptions": [
+        "high_risk"
+      ],
+      "linkCategory": "conditional"
+    }
+  ],
+  "protocolRefs": [
+    "heme-mpn-ruxolitinib"
+  ]
+}

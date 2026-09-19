@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>ward roster harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>body{margin:0;font-family:system-ui}</style>
+</head><body>
+<div id="smdWard"></div>
+<script>
+/* Stubs ONLY the network. Six admissions across three wards and three admission classes, deliberately
+ * out of bed order, so grouping, ordering, chips and search each have something to prove. */
+window.__calls = [];
+var P = [
+  { encounterId: "e-b3", patientId: "p3", class: "IPD", name: "Ravi Kumar",    mrn: "MR3003", ward: "Medical B", bed: "3",  admittedAt: "2026-09-10T06:00:00.000Z" },
+  { encounterId: "e-a10", patientId: "p1", class: "ICU", name: "Asha Devi",    mrn: "MR1001", ward: "ICU",       bed: "10", admittedAt: "2026-09-11T06:00:00.000Z" },
+  { encounterId: "e-a2", patientId: "p2", class: "ICU", name: "Bhaskar Rao",   mrn: "MR2002", ward: "ICU",       bed: "2",  admittedAt: "2026-09-09T06:00:00.000Z" },
+  { encounterId: "e-m1", patientId: "p4", class: "IPD", name: "Sita Lakshmi",  mrn: "MR4004", ward: "Medical A", bed: "1",  admittedAt: "2026-09-08T06:00:00.000Z" },
+  { encounterId: "e-m12", patientId: "p5", class: "IPD", name: "Gopal Naidu",  mrn: "MR5005", ward: "Medical A", bed: "12", admittedAt: "2026-09-11T20:00:00.000Z" },
+  { encounterId: "e-mat", patientId: "p6", class: "MATERNITY", name: "Padma Rani", mrn: "MR6006", ward: "Medical A", bed: "4", admittedAt: "2026-09-12T00:00:00.000Z" }
+];
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: P, region: "IN" });
+  if (u.indexOf("/ward/emergency-status") >= 0) return reply({ ok: true, active: [], any: false });
+  if (u.indexOf("/ward/cosign-queue") >= 0) return reply({ ok: true, notes: [], waiting: 0, mine: [], unsubmitted: 0, canSign: false });
+  if (u.indexOf("/ward/quality") >= 0) return reply({ ok: true, measures: [] });
+  if (u.indexOf("/ward/overrides") >= 0) return reply({ ok: true, report: { overrides: [] } });
+  if (u.indexOf("/ward/fhir-exceptions") >= 0) return reply({ ok: true, exceptions: [] });
+  if (u.indexOf("/ward/outbox") >= 0) return reply({ ok: true, transmissions: [] });
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

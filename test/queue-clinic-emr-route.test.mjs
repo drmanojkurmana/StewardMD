@@ -105,6 +105,31 @@ test("no local store on the device -> decision-support only, still never GHIS", 
   assert.notEqual(opened[0].source, "ghis");
 });
 
+// 2026-09-06: the NATIVE WardSynQ hospital workplace (org.mode "wardsynq" — WardSynQ itself is the
+// EMR/HIS, no GHIS, no on-device clinic store). Reaches openTicketEmr the SAME way a GHIS/Connect
+// hospital ticket does (t.ghisPatientId set, not inClinicWorkplace()) — the ONLY difference is
+// st.openOpts.source, which must be threaded through as o.source so opd-emr.js does not default to "ghis".
+test("WardSynQ-native hospital: o.source is explicitly 'wardsynq', never left to default to ghis", () => {
+  const { Q, opened } = load({ orgId: null, ghisToken: null, openOpts: { hospitalId: "org_wsq_1", source: "wardsynq" },
+    tickets: [{ id: "t1", name: "Ramesh", ghisPatientId: "SMD-WSQ1-001", ghisEpisodeId: "", visitId: "" }] });
+  Q._openTicketEmr("t1", "assess");
+  assert.equal(opened.length, 1);
+  assert.equal(opened[0].source, "wardsynq", "must not fall through to the ghis default");
+  assert.equal(opened[0].patientId, "SMD-WSQ1-001");
+  assert.notEqual(opened[0].source, "ghis");
+});
+
+test("regression guard: GHIS and Connect hospital sessions still leave o.source unset (untouched)", () => {
+  const ghis = load({ orgId: null, ghisToken: "ghis-token", openOpts: {},
+    tickets: [{ id: "t1", name: "Ramesh", ghisPatientId: "MRN-99" }] });
+  ghis.Q._openTicketEmr("t1", "assess");
+  assert.equal(ghis.opened[0].source, undefined);
+  const connect = load({ orgId: null, ghisToken: null, openOpts: { hospitalId: "org_c1", source: "connect" },
+    tickets: [{ id: "t1", name: "Ramesh", ghisPatientId: "MRN-77" }] });
+  connect.Q._openTicketEmr("t1", "assess");
+  assert.equal(connect.opened[0].source, undefined, "connect hospitals are unaffected by the wardsynq addition");
+});
+
 /* The mechanism, asserted against opd-emr.js itself (unchanged by this fix): an openProfile call with no
  * `source` and no `noStore` goes to GHIS.ensureSession() and, when there is no session, returns WITHOUT
  * opening anything. That is precisely what the old queue routing handed it for a clinic patient. */

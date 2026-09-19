@@ -1,0 +1,431 @@
+{
+  "guideline": "pediatric_aml",
+  "id": "pediatric_aml",
+  "title": "Pediatric Acute Myeloid Leukemia",
+  "category": "Pediatric Hematology",
+  "version": "1.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "pediatric_acute_myeloid_leukemia",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2026 clinical navigator for Pediatric Acute Myeloid Leukemia. Covers complete clinical algorithm: Diagnostic Workup (bone marrow aspirate and biopsy with morphology, MPO staining and flow immunophenotyping, rapid PML::RARA testing to rule out APL, karyotype plus FISH plus NGS for CBF fusions, NPM1, CEBPA bZIP, FLT3, KMT2A and high-risk cytogenetics, diagnostic lumbar puncture with CSF cytology and concurrent IT cytarabine, baseline echocardiogram before anthracyclines, early HLA typing of patient, parents and siblings) -> Subtype and Risk Stratification (APL vs Low-Risk CBF vs Intermediate-Risk vs High-Risk vs Relapsed/Refractory) -> APL chemotherapy-free ATRA plus ATO per COG AAML1331 -> Low-Risk ADE plus gemtuzumab ozogamicin then HD-cytarabine consolidation without HCT in CR1 -> Intermediate-Risk ADE plus GO with flow MRD-guided consolidation versus matched sibling HCT -> High-Risk intensive induction plus FLT3 TKI with mandatory allogeneic HCT in CR1 -> Relapsed/Refractory FLAG-Ida or CPX-351 or targeted salvage (gilteritinib, revumenib) bridging to second HCT or CAR T-cell trials. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Pediatric Acute Myeloid Leukemia Version 1.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Suspected APL is a medical emergency: send rapid PML::RARA FISH/RT-PCR at presentation and start ATRA immediately when APL is suspected while awaiting confirmation, with aggressive coagulopathy support (cryoprecipitate to keep fibrinogen above 150 mg/dL, platelets above 50,000/uL).",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Core-binding factor AML [t(8;21)(q22;q22.1) RUNX1::RUNX1T1, inv(16)(p13.1q22) CBFB::MYH11], NPM1-mutant without FLT3-ITD high allelic ratio, and biallelic/bZIP CEBPA-mutant disease define low-risk pediatric AML treated with chemotherapy alone in CR1 (overall survival above 75-80%).",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Flow-cytometric minimal residual disease (MRD) threshold 0.1% (1 leukemic cell per 1,000 nucleated cells) after 2 induction cycles guides intermediate-risk disposition: MRD negative below 0.1% proceeds to HD-cytarabine consolidation with or without matched sibling donor HCT; persistent MRD 0.1% or higher allocates to allogeneic HCT from the best available donor.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "FLT3-mutated AML: FLT3-ITD high allelic ratio defines high-risk disease requiring TKI integration (sorafenib 200 mg/m2/day or midostaurin per protocol) plus mandatory allogeneic HCT in CR1; FLT3-ITD low allelic ratio without other high-risk features is managed on the intermediate-risk MRD-guided pathway.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Gemtuzumab ozogamicin (GO) 3 mg/m2 on day 6 of ADE induction (fractionated CD33-directed calicheamicin conjugate) improves event-free survival in CD33-positive CBF and intermediate-risk AML; monitor for sinusoidal obstruction syndrome (veno-occlusive disease), myelosuppression, and hepatotoxicity.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Relapsed or refractory AML: confirm FLT3 status (gilteritinib for FLT3-mutated relapse) and KMT2A rearrangement or NPM1 mutation (revumenib menin inhibitor) at relapse, restage marrow and CNS, and bridge second remission to allogeneic HCT or CAR T-cell clinical trials wherever available.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "pediatric_aml_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Pediatric AML: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before subtype and risk stratification. Confirm myeloid lineage by morphology and flow, immediately rule out APL with rapid PML::RARA testing, complete cytogenetic and molecular profiling, establish CNS status with concurrent intrathecal therapy, document cardiac function before anthracyclines, and HLA type the family early for transplant planning.",
+      "path": "Pediatric Acute Myeloid Leukemia / Workup",
+      "pills": [
+        "pediatric AML",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Diagnostic bone marrow aspirate and biopsy: morphology, myeloperoxidase (MPO) staining, and comprehensive flow cytometric immunophenotyping (CD33, CD34, CD117, CD13, CD14, HLA-DR)",
+        "Rapid PML::RARA testing (FISH / RT-PCR) to immediately identify or rule out Acute Promyelocytic Leukemia (APL)",
+        "Comprehensive cytogenetics and molecular testing: Karyotype, FISH, and NGS panel for CBF fusions [t(8;21), inv(16)], NPM1, CEBPA bZIP, FLT3 (ITD and TKD), KMT2A (11q23) rearrangements, monosomy 7/5q, inv(3)",
+        "Diagnostic lumbar puncture with CSF cytology for CNS involvement (CNS-1, CNS-2, CNS-3) with concurrent prophylactic intrathecal chemotherapy (IT Cytarabine)",
+        "Baseline echocardiogram for left ventricular function prior to anthracycline exposure",
+        "Early HLA typing of patient, biological parents, and full siblings for potential allogeneic hematopoietic cell transplantation (HCT)"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Subtype and Risk Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_risk_strat",
+      "linkId": "pediatric_aml_risk_strat",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Subtype and Risk Stratification",
+      "title": "Pediatric AML: Subtype and Risk Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign APL status, cytogenetic and molecular risk group, FLT3 allelic ratio, and remission/MRD response; the group selects the APL, low-risk, intermediate-risk, high-risk, or relapsed/refractory pathway.",
+      "path": "Pediatric Acute Myeloid Leukemia / Subtype and Risk Stratification",
+      "pills": [
+        "pediatric AML",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Acute Promyelocytic Leukemia (APL): t(15;17)(q24.1;q21.2) PML::RARA confirmed by FISH or RT-PCR; medical emergency managed with chemotherapy-free differentiating therapy.",
+        "Low-Risk / Core-Binding Factor AML: t(8;21), inv(16), NPM1-mutant without FLT3-ITD high allelic ratio, or CEBPA bZIP; chemotherapy alone in CR1 with overall survival above 75-80%.",
+        "Intermediate-Risk AML: normal cytogenetics, KMT2A-rearranged disease, or FLT3-ITD low allelic ratio; disposition guided by flow-cytometric MRD after 2 induction cycles.",
+        "High-Risk AML: monosomy 7, del(5q), inv(3), t(6;9), FLT3-ITD high allelic ratio, or induction failure; mandatory allogeneic HCT in CR1.",
+        "Relapsed or Refractory AML: primary induction failure or any relapse after frontline therapy; FLT3, KMT2A and NPM1 status determine targeted salvage before second HCT."
+      ],
+      "options": [
+        {
+          "id": "apl",
+          "label": "Acute Promyelocytic Leukemia (APL: t(15;17)(q24.1;q21.2) PML::RARA)",
+          "sets": {
+            "subtype": "apl",
+            "risk": "apl"
+          },
+          "pills": [
+            "AML",
+            "APL",
+            "PML::RARA"
+          ]
+        },
+        {
+          "id": "low",
+          "label": "Low-Risk / Core-Binding Factor AML (t(8;21), inv(16), NPM1-mutant without FLT3-ITD high, CEBPA bZIP)",
+          "sets": {
+            "subtype": "aml",
+            "risk": "low"
+          },
+          "pills": [
+            "AML",
+            "low-risk",
+            "CBF"
+          ]
+        },
+        {
+          "id": "int",
+          "label": "Intermediate-Risk AML (Normal cytogenetics, KMT2A-rearranged, FLT3-ITD low allelic ratio)",
+          "sets": {
+            "subtype": "aml",
+            "risk": "intermediate"
+          },
+          "pills": [
+            "AML",
+            "intermediate-risk"
+          ]
+        },
+        {
+          "id": "high",
+          "label": "High-Risk AML (Monosomy 7, del(5q), inv(3), t(6;9), FLT3-ITD high allelic ratio, or Induction failure)",
+          "sets": {
+            "subtype": "aml",
+            "risk": "high"
+          },
+          "pills": [
+            "AML",
+            "high-risk"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed or Refractory AML",
+          "sets": {
+            "setting": "relapsed_refractory"
+          },
+          "pills": [
+            "AML",
+            "relapsed",
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_apl_tx",
+      "linkId": "pediatric_aml_apl_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "APL Treatment",
+      "title": "APL: Chemotherapy-Free ATRA Plus Arsenic Trioxide (COG AAML1331)",
+      "section": "Treatment",
+      "description": "Chemotherapy-free differentiating therapy for PML::RARA-positive APL with differentiation syndrome prophylaxis and aggressive coagulopathy support; cure rate above 95%.",
+      "path": "Pediatric Acute Myeloid Leukemia / APL / Treatment",
+      "pills": [
+        "AML",
+        "APL",
+        "PML::RARA",
+        "ATRA",
+        "ATO"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Chemotherapy-free differentiating therapy per COG AAML1331: ATRA (all-trans retinoic acid 25 mg/m2/day PO divided BID) plus Arsenic Trioxide (ATO 0.15 mg/kg/day IV daily) until remission, then consolidation per protocol.",
+        "Prophylactic dexamethasone for differentiation syndrome (fever, weight gain, respiratory distress, effusions); hold differentiating agents and escalate steroids at first signs of moderate or severe syndrome.",
+        "Aggressive coagulopathy support from presentation: cryoprecipitate to keep fibrinogen above 150 mg/dL, platelets above 50,000/uL; avoid leukapheresis and monitor for hemorrhage and thrombosis.",
+        "Baseline and serial ECG for QTc prolongation on ATO with electrolyte repletion (potassium, magnesium), plus hepatic and neurologic monitoring; cure rate above 95% with this approach.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "ATRA + Arsenic Trioxide (ATO) Chemotherapy-Free Standard (COG AAML1331)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_low_risk_tx",
+      "linkId": "pediatric_aml_low_risk_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Low-Risk Treatment",
+      "title": "Low-Risk CBF AML: ADE Plus Gemtuzumab Then HD-Cytarabine x 3",
+      "section": "Treatment",
+      "description": "ADE induction with gemtuzumab ozogamicin followed by 3 cycles of high-dose cytarabine consolidation for low-risk core-binding factor AML; no allogeneic HCT in CR1 with chemotherapy survival above 75-80%.",
+      "path": "Pediatric Acute Myeloid Leukemia / Low-Risk / Treatment",
+      "pills": [
+        "AML",
+        "low-risk",
+        "CBF",
+        "induction"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "e"
+      ],
+      "bullets": [
+        "Induction ADE: Cytarabine 100 mg/m2/day continuous infusion days 1-10 plus Daunorubicin 50 mg/m2/day days 1, 3, 5 plus Etoposide 100 mg/m2/day days 1-5, with Gemtuzumab Ozogamicin (GO) 3 mg/m2 on day 6.",
+        "Consolidation: 3 cycles of High-Dose Cytarabine (HD-AraC 3 g/m2 every 12 hours days 1, 3, 5) with or without GO per protocol, with age-based intrathecal cytarabine per CNS status.",
+        "No allogeneic HCT in CR1 for low-risk CBF AML in first remission: chemotherapy overall survival above 75-80%; reserve HCT for persistent MRD, molecular relapse, or frank relapse.",
+        "Supportive care: TLS prophylaxis, anthracycline cardiac surveillance with serial echocardiograms, GO-associated sinusoidal obstruction syndrome and hepatotoxicity monitoring, and infection prophylaxis during neutropenia.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "ADE + Gemtuzumab Ozogamicin (GO) -> HD-Cytarabine Consolidation x 3 cycles",
+      "protocolRefs": [
+        "aml-7-3-gemtuzumab"
+      ]
+    },
+    {
+      "id": "n_int_risk_tx",
+      "linkId": "pediatric_aml_int_risk_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Intermediate-Risk Treatment",
+      "title": "Intermediate-Risk AML: ADE Plus GO With MRD-Guided Consolidation vs HCT",
+      "section": "Treatment",
+      "description": "ADE plus gemtuzumab induction with post-induction flow MRD triage: MRD negative below 0.1% after 2 cycles proceeds to HD-cytarabine consolidation with or without matched sibling HCT; persistent MRD allocates to allogeneic HCT from the best available donor.",
+      "path": "Pediatric Acute Myeloid Leukemia / Intermediate-Risk / Treatment",
+      "pills": [
+        "AML",
+        "intermediate-risk",
+        "MRD-guided"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "e"
+      ],
+      "bullets": [
+        "Induction ADE (or 7+3 backbone) plus Gemtuzumab Ozogamicin: Cytarabine plus Daunorubicin plus Etoposide with GO 3 mg/m2, with age-based intrathecal cytarabine per CNS status.",
+        "Post-induction response assessment with flow-cytometric MRD after 2 induction cycles using the 0.1% threshold.",
+        "If MRD negative (below 0.1%) after 2 induction cycles: proceed to HD-Cytarabine consolidation with or without Matched Sibling Donor HCT based on genetics, donor availability, and family preference.",
+        "If persistent MRD positive (0.1% or higher): allocate to Allogeneic HCT from the best available donor (matched sibling, matched unrelated donor, cord blood, or haploidentical family donor).",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "ADE + GO -> Flow MRD-Guided Consolidation vs Matched Sibling HCT",
+      "protocolRefs": [
+        "aml-7-3-gemtuzumab"
+      ]
+    },
+    {
+      "id": "n_high_risk_tx",
+      "linkId": "pediatric_aml_high_risk_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "High-Risk Treatment",
+      "title": "High-Risk AML: Intensive Induction Plus FLT3 TKI Then Mandatory HCT in CR1",
+      "section": "Treatment",
+      "description": "Intensive multi-agent induction with FLT3 TKI integration for FLT3-mutated disease, followed by mandatory allogeneic HCT in first complete remission from the best available donor.",
+      "path": "Pediatric Acute Myeloid Leukemia / High-Risk / Treatment",
+      "pills": [
+        "AML",
+        "high-risk",
+        "HCT",
+        "FLT3"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Intensive multi-agent induction: ADE or CLAG-M (cladribine plus high-dose cytarabine plus mitoxantrone with G-CSF) selected by fitness, prior exposure, and institutional protocol, with CNS-directed intrathecal therapy.",
+        "TKI integration for FLT3-mutated AML: Sorafenib 200 mg/m2/day or Midostaurin per protocol starting during induction and continuing through consolidation and post-HCT maintenance where tolerated.",
+        "Mandatory Allogeneic HCT in first complete remission (CR1) from matched sibling, matched unrelated donor (MUD), umbilical cord blood, or haploidentical family donor; do not delay donor search given early HLA typing at workup.",
+        "High-risk cytogenetics (monosomy 7, del(5q), inv(3), t(6;9)) and induction failure proceed to HCT even with MRD negativity; enroll in a clinical trial wherever available.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Intensive Induction +/- FLT3 TKI -> Mandatory Allogeneic HCT in CR1",
+      "protocolRefs": [
+        "aml-7-3-gemtuzumab"
+      ]
+    },
+    {
+      "id": "n_relapsed_tx",
+      "linkId": "pediatric_aml_relapsed_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Relapsed or Refractory Treatment",
+      "title": "Relapsed or Refractory AML: FLAG-Ida or CPX-351 or Targeted Salvage to HCT",
+      "section": "Treatment",
+      "description": "Re-induction salvage with FLAG-Ida or CPX-351, or targeted salvage with gilteritinib for FLT3-mutated relapse and revumenib for KMT2A-rearranged or NPM1-mutant relapse, bridging second remission to allogeneic HCT or CAR T-cell trials.",
+      "path": "Pediatric Acute Myeloid Leukemia / Relapsed or Refractory / Treatment",
+      "pills": [
+        "AML",
+        "relapsed",
+        "refractory",
+        "salvage"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "Re-induction salvage regimens: FLAG-Ida (Fludarabine plus High-Dose Cytarabine plus Idarubicin plus G-CSF) or CPX-351 (daunorubicin and cytarabine liposome) selected by prior anthracycline exposure, fitness, and remission duration.",
+        "Targeted salvage: Gilteritinib for FLT3-mutated relapse; Revumenib (menin inhibitor) for KMT2A-rearranged or NPM1-mutant relapse, with QTc, differentiation syndrome, and cytopenia monitoring.",
+        "Restage marrow with flow MRD plus repeat cytogenetics and NGS at relapse, and restage CNS with lumbar puncture; give CNS-directed intrathecal therapy for CNS-positive disease.",
+        "Bridge second remission to second Allogeneic HCT or CAR T-cell clinical trials; enroll in a clinical trial wherever available.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "FLAG-Ida / CPX-351 or Targeted Salvage (Gilteritinib / Revumenib) -> Bridge to HCT",
+      "protocolRefs": [
+        "aml-7-3-gemtuzumab"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_risk",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_risk_strat",
+      "toNodeId": "n_risk_strat",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_risk_apl",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_apl_tx",
+      "toNodeId": "n_apl_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "apl",
+      "fromOptions": [
+        "apl"
+      ]
+    },
+    {
+      "id": "l_risk_low",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_low_risk_tx",
+      "toNodeId": "n_low_risk_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "low",
+      "fromOptions": [
+        "low"
+      ]
+    },
+    {
+      "id": "l_risk_int",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_int_risk_tx",
+      "toNodeId": "n_int_risk_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "int",
+      "fromOptions": [
+        "int"
+      ]
+    },
+    {
+      "id": "l_risk_high",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_high_risk_tx",
+      "toNodeId": "n_high_risk_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "high",
+      "fromOptions": [
+        "high"
+      ]
+    },
+    {
+      "id": "l_risk_relapsed",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_relapsed_tx",
+      "toNodeId": "n_relapsed_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "relapsed",
+      "fromOptions": [
+        "relapsed"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "aml-7-3-gemtuzumab"
+  ]
+}

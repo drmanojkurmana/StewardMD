@@ -145,6 +145,20 @@ test("linking swaps the provisional for the real hospital MR and keeps the trail
   assert.equal(old.fields.supersededBy, "MRN-4471", "the old id still traces to the new one");
 });
 
+test("REGRESSION: linking onto a hospital MR that already belongs to someone refuses and overwrites nothing", async () => {
+  reset();
+  const ghis = { id: "org1", code: "SMD-CZWRWH", mode: "ghis" };
+  await registerPatient(ENV, ghis, GOOD, "doc1");
+  await registerPatient(ENV, ghis, { ...GOOD, name: "Ravi Menon", mobile: "9123456780" }, "doc1");
+  assert.ok((await linkHospitalMrn(ENV, "org1", "TMP-000001", "MRN-9", "ghis", "doc1")).ok);
+  const clash = await linkHospitalMrn(ENV, "org1", "TMP-000002", "MRN-9", "ghis", "doc1");
+  assert.equal(clash.ok, false);
+  assert.equal(clash.error, "mrn_in_use");
+  assert.equal((await getPatient(ENV, "org1", "MRN-9")).name, "Asha Kumar", "the first patient's record is untouched");
+  assert.ok(!docs.get("q_patients/org1__TMP-000002").fields.supersededBy, "the second provisional record is not marked linked");
+  assert.equal((await linkHospitalMrn(ENV, "org1", "TMP-000001", "MRN-10", "ghis", "doc1")).error, "already_linked");
+});
+
 test("a repeat mobile is reported as a possible duplicate, not silently merged or blocked", async () => {
   reset();
   const first = await registerPatient(ENV, ORG, GOOD, "doc1");

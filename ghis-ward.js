@@ -19,66 +19,74 @@
   var PANEL_HTML = "<div id=\"ghisPanel\">\n  <div class=\"ghis-header\">\n    <button class=\"ghis-back\" onclick=\"closeGHIS();try{window.SMD_showHome&&window.SMD_showHome()}catch(e){}\" aria-label=\"Back to home\">{{ic:back}}</button>\n    <div class=\"ghis-title\">{{ic:ward}} Ward Sync <span id=\"ghisConnDot\" class=\"ghis-dot ghis-dot-off\"></span></div>\n    <button class=\"ghis-refresh-btn\" id=\"ghisWatchedBtn\" onclick=\"if(window.SMD_WATCH&&window.SMD_WATCH.openManager)window.SMD_WATCH.openManager();else alert('Sign in with your Google/Apple account to see watched patients.')\" title=\"Lab Watch 24/7, background lab alerts\" aria-label=\"Lab Watch\">{{ic:bell}}</button>\n    <button class=\"ghis-refresh-btn\" id=\"ghisRefreshBtn\" onclick=\"ghisRefresh()\" title=\"Refresh\" aria-label=\"Refresh\">{{ic:refresh}}</button>\n  </div>\n\n  <div id=\"ghisSetup\" class=\"ghis-body\">\n    <div class=\"ghis-setup-card\">\n      <div class=\"ghis-setup-title\">Sign in to GHIS</div>\n      <div class=\"ghis-setup-sub\">Use your own GITAM HIS login.</div>\n      <input id=\"ghisUserId\" class=\"ghis-login-input\" type=\"text\" autocomplete=\"username\" placeholder=\"GHIS User ID\">\n      <input id=\"ghisPassword\" class=\"ghis-login-input\" type=\"password\" autocomplete=\"current-password\" placeholder=\"Password\"\n             onkeydown=\"if(event.key==='Enter') ghisConnect()\">\n      <div class=\"ghis-setup-sub\" style=\"margin:2px 0 12px\">Your password is used only to sign in and is never stored on our servers. If your session times out, just sign in again.</div>\n      <button class=\"ghis-connect-btn\" onclick=\"ghisConnect()\">Sign in</button>\n      <div id=\"ghisSetupError\" class=\"ghis-setup-error\"></div>\n    </div>\n  </div>\n\n  <div id=\"ghisWard\" class=\"ghis-body\" style=\"display:none;\">\n    <div id=\"ghisAddTarget\" style=\"display:none;align-items:center;box-sizing:border-box;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line,#e4eae8);border-radius:10px;background:var(--paper,#f6f8f6)\"></div>\n    <div class=\"ghis-filter-row\">\n      <input id=\"ghisSearchPt\" class=\"ghis-filter-input\" placeholder=\"Search patient ID or name…\" oninput=\"ghisApplyFilters()\" />\n      <button class=\"ghis-logout-btn\" onclick=\"ghisDisconnect()\" title=\"Sign out\" aria-label=\"Sign out\">{{ic:logout}}</button>\n    </div>\n    <div class=\"ghis-filter-row2\">\n      <select id=\"ghisFBranch\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by branch/department\"><option value=\"\">All branches</option></select>\n      <select id=\"ghisFDoctor\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by treating doctor\"><option value=\"\">All doctors</option></select>\n      <select id=\"ghisFGender\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by gender\"><option value=\"\">All genders</option><option value=\"m\">Male</option><option value=\"f\">Female</option></select>\n      <select id=\"ghisFSort\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Sort patients\"><option value=\"\">Default order</option><option value=\"name\">Name A–Z</option><option value=\"branch\">Branch</option><option value=\"doctor\">Doctor</option><option value=\"bed\">Bed</option></select>\n    </div>\n    <div id=\"ghisCount\" class=\"ghis-count\"></div>\n\n    <div id=\"ghisPatientList\" class=\"ghis-pt-list\"></div>\n\n    <div id=\"ghisLabDrawer\" class=\"ghis-lab-drawer\" style=\"display:none;\">\n      <div class=\"ghis-lab-header\">\n        <button class=\"ghis-back-sm\" onclick=\"closeLabDrawer()\">{{ic:back}} Back</button>\n        <div class=\"ghis-lab-title\" id=\"ghisLabTitle\"></div>\n      </div>\n      <div id=\"ghisLabBody\" class=\"ghis-lab-body\"></div>\n    </div>\n  </div>\n</div>";
 
   function inject() {
-    if (document.getElementById('ghisPanel')) return;
-    var style = document.createElement('style');
-    style.setAttribute('data-ghis', '1');
-    style.textContent = CSS;
-    document.head.appendChild(style);
+    var GHIS = window.GHIS = window.GHIS || {};
+    if (!document.getElementById('ghisPanel')) {
+      var style = document.createElement('style');
+      style.setAttribute('data-ghis', '1');
+      style.textContent = CSS;
+      document.head.appendChild(style);
 
-    var holder = document.createElement('div');
-    // Swap {{ic:name}} tokens for the app's shared SVG icon set (no emoji, per house style).
-    // "back" reuses the arrow icon flipped horizontally (no dedicated left-arrow in the set).
-    holder.innerHTML = PANEL_HTML.replace(/\{\{ic:([a-z]+)\}\}/g, function (_, n) {
-      if (n === 'back') return '<span class="ghis-flip">' + wIco('arrow') + '</span>';
-      return wIco(n);
-    });
-    while (holder.firstChild) document.body.appendChild(holder.firstChild);
+      var holder = document.createElement('div');
+      // Swap {{ic:name}} tokens for the app's shared SVG icon set (no emoji, per house style).
+      // "back" reuses the arrow icon flipped horizontally (no dedicated left-arrow in the set).
+      holder.innerHTML = PANEL_HTML.replace(/\{\{ic:([a-z]+)\}\}/g, function (_, n) {
+        if (n === 'back') return '<span class="ghis-flip">' + wIco('arrow') + '</span>';
+        return wIco(n);
+      });
+      while (holder.firstChild) document.body.appendChild(holder.firstChild);
 
-    // Hospital picker + "Add your hospital" request form, inserted BEFORE the GHIS login
-    // so Ward Sync first asks which hospital (GIMSR → GHIS login; others → request form).
-    (function () {
-      var setup = document.getElementById('ghisSetup');
-      if (!setup || document.getElementById('ghisHospital')) return;
-      var wrap = document.createElement('div');
-      wrap.innerHTML =
-        '<div id="ghisHospital" class="ghis-body">' +
-          '<div style="display:flex;background:var(--panel,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:12px;padding:4px;margin-bottom:16px;gap:4px">' +
-            '<div style="flex:1;text-align:center;padding:9px;border-radius:9px;background:var(--teal,#0e6e63);color:#fff;font-weight:700;font-size:13.5px">' + wIco("hospital") + ' Select hospital</div>' +
-            '<button onclick="ghisOpenMyWard()" style="flex:1;text-align:center;padding:9px;border-radius:9px;background:transparent;border:none;color:var(--slate,#64748b);font-weight:700;font-size:13.5px;font-family:inherit;cursor:pointer">' + wIco("pulse") + ' My Units</button>' +
+      // Hospital picker + "Add your hospital" request form, inserted BEFORE the GHIS login
+      // so Ward Sync first asks which hospital (GIMSR → GHIS login; others → request form).
+      (function () {
+        var setup = document.getElementById('ghisSetup');
+        if (!setup || document.getElementById('ghisHospital')) return;
+        var wrap = document.createElement('div');
+        wrap.innerHTML =
+          '<div id="ghisHospital" class="ghis-body">' +
+            '<div style="display:flex;background:var(--panel,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:12px;padding:4px;margin-bottom:16px;gap:4px">' +
+              '<div style="flex:1;text-align:center;padding:9px;border-radius:9px;background:var(--teal,#0e6e63);color:#fff;font-weight:700;font-size:13.5px">' + wIco("hospital") + ' Select hospital</div>' +
+              '<button onclick="ghisOpenMyWard()" style="flex:1;text-align:center;padding:9px;border-radius:9px;background:transparent;border:none;color:var(--slate,#64748b);font-weight:700;font-size:13.5px;font-family:inherit;cursor:pointer">' + wIco("pulse") + ' My Units</button>' +
+            '</div>' +
+            '<div class="ghis-setup-card">' +
+              '<div class="ghis-setup-title">Select your hospital</div>' +
+              '<div class="ghis-setup-sub">Choose your hospital to connect its ward + labs.</div>' +
+              '<div class="ghis-setup-sub" style="font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal,#0e6e63);margin:14px 0 4px">WardSynq Hospitals (Native EMR)</div>' +
+              '<div id="ghisWardSynqHosp"></div>' +
+              '<div class="ghis-setup-sub" style="font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal,#0e6e63);margin:14px 0 4px">Linked Hospitals (Agent Adapters &amp; Feeds)</div>' +
+              '<button class="ghis-connect-btn" onclick="ghisSelectHospital(\'gimsr\')">' + wIco("hospital") + ' GIMSR</button>' +
+              '<div class="ghis-setup-sub" style="margin:6px 0 4px">GITAM Institute of Medical Sciences · sign in with GHIS</div>' +
+              '<div id="ghisAdapterHosp"></div>' +
+              '<div id="ghisConnectHosp"></div>' +
+              '<div class="ghis-setup-sub" style="font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--slate,#64748b);margin:14px 0 4px">Demo Sandbox</div>' +
+              '<button class="ghis-connect-btn" style="background:var(--paper,#f6f8f6);color:var(--ink,#0f172a);border:1px solid var(--line,#e4eae8)" onclick="ghisSelectHospital(\'stewardmd\')">' + wIco("hospital") + ' StewardMD Hospital</button>' +
+              '<div class="ghis-setup-sub" style="margin:6px 0 4px">25 demo patients, 5 wards, no login needed — for live demos</div>' +
+              '<div class="ghis-setup-sub" style="font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal,#0e6e63);margin:16px 0 4px">Connect New Hospital</div>' +
+              '<button class="ghis-connect-btn" style="background:transparent;color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" onclick="if(window.SMD_openAgentConnect)window.SMD_openAgentConnect();else showGhisScreen(\'addhospital\')">' + wIco("plus") + ' Add your hospital</button>' +
+            '</div>' +
           '</div>' +
-          '<div class="ghis-setup-card">' +
-            '<div class="ghis-setup-title">Select your hospital</div>' +
-            '<div class="ghis-setup-sub">Choose your hospital to connect its ward + labs.</div>' +
-            '<button class="ghis-connect-btn" onclick="ghisSelectHospital(\'gimsr\')">' + wIco("hospital") + ' GIMSR</button>' +
-            '<div class="ghis-setup-sub" style="margin:10px 0 4px">GITAM Institute of Medical Sciences · sign in with GHIS</div>' +
-            '<button class="ghis-connect-btn" style="background:var(--paper,#f6f8f6);color:var(--ink,#0f172a);border:1px solid var(--line,#e4eae8)" onclick="ghisSelectHospital(\'stewardmd\')">' + wIco("hospital") + ' StewardMD Hospital</button>' +
-            '<div class="ghis-setup-sub" style="margin:10px 0 4px">25 demo patients, 5 wards, no login needed — for live demos</div>' +
-            '<div id="ghisConnectHosp"></div>' +
-            '<button class="ghis-connect-btn" style="background:transparent;color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" onclick="showGhisScreen(\'addhospital\')">' + wIco("plus") + ' Add your hospital</button>' +
-          '</div>' +
-        '</div>' +
-        '<div id="ghisAddHospital" class="ghis-body" style="display:none;">' +
-          '<div class="ghis-setup-card">' +
-            '<button class="ghis-back-sm" onclick="showGhisScreen(\'hospital\')">← Back</button>' +
-            '<div class="ghis-setup-title" style="margin-top:8px">Add your hospital</div>' +
-            '<button class="ghis-connect-btn" onclick="ghisOpenConnectConsole()">' + wIco("hospital") + ' Connect an EMR now (self-service)</button>' +
-            '<div class="ghis-setup-sub">Tell us your hospital + EMR and we\'ll set up Ward Sync for you.</div>' +
-            '<input id="ghReqHosp" class="ghis-login-input" placeholder="Hospital name">' +
-            '<input id="ghReqEmr" class="ghis-login-input" placeholder="EMR / HIS system (if known)">' +
-            '<input id="ghReqName" class="ghis-login-input" placeholder="Your name">' +
-            '<input id="ghReqEmail" class="ghis-login-input" type="email" placeholder="Your email">' +
-            '<textarea id="ghReqMsg" class="ghis-login-input" rows="3" placeholder="Contact person, API docs link, anything else…"></textarea>' +
-            '<button class="ghis-connect-btn" onclick="ghisSubmitHospitalRequest()">Send request</button>' +
-            '<div id="ghReqStatus" class="ghis-setup-sub" style="margin-top:8px"></div>' +
-          '</div>' +
-        '</div>';
-      while (wrap.firstChild) setup.parentNode.insertBefore(wrap.firstChild, setup);
-    })();
+          '<div id="ghisAddHospital" class="ghis-body" style="display:none;">' +
+            '<div class="ghis-setup-card">' +
+              '<button class="ghis-back-sm" onclick="showGhisScreen(\'hospital\')">← Back</button>' +
+              '<div class="ghis-setup-title" style="margin-top:8px">Add your hospital</div>' +
+              '<button class="ghis-connect-btn" onclick="ghisOpenConnectConsole()">' + wIco("hospital") + ' Connect an EMR now (self-service)</button>' +
+              '<div class="ghis-setup-sub">Tell us your hospital + EMR and we\'ll set up Ward Sync for you.</div>' +
+              '<input id="ghReqHosp" class="ghis-login-input" placeholder="Hospital name">' +
+              '<input id="ghReqEmr" class="ghis-login-input" placeholder="EMR / HIS system (if known)">' +
+              '<input id="ghReqName" class="ghis-login-input" placeholder="Your name">' +
+              '<input id="ghReqEmail" class="ghis-login-input" type="email" placeholder="Your email">' +
+              '<textarea id="ghReqMsg" class="ghis-login-input" rows="3" placeholder="Contact person, API docs link, anything else…"></textarea>' +
+              '<button class="ghis-connect-btn" onclick="ghisSubmitHospitalRequest()">Send request</button>' +
+              '<div id="ghReqStatus" class="ghis-setup-sub" style="margin-top:8px"></div>' +
+            '</div>' +
+          '</div>';
+        while (wrap.firstChild) setup.parentNode.insertBefore(wrap.firstChild, setup);
+      })();
+    }
 
     // Ward Sync now lives inside the Home "Hospital" hub tile, so the floating Ward FAB is retired to avoid
     // a duplicate entry point. Only mounted if a host explicitly opts in via window.GHIS_BUTTON_SELECTOR.
     var sel = window.GHIS_BUTTON_SELECTOR, host = sel ? document.querySelector(sel) : null;
-    if (host) {
+    if (host && !document.getElementById('ghisBtn')) {
       var btn = document.createElement('button');
       btn.id = 'ghisBtn'; btn.className = 'ghis-ward-fab'; btn.title = 'GHIS Ward Sync';
       btn.innerHTML = wIco("hospital") + ' Ward';
@@ -90,6 +98,11 @@
   }
 
   function initGHIS() {
+    if (window.__ghisInitDone) return;
+    window.__ghisInitDone = true;
+    function wIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+    var GHIS = window.GHIS = window.GHIS || {};
+
     /* ===== GHIS module (verbatim from StewardMD v4) ===== */
     (function() {
       // Backend: local Node proxy during dev (localhost), same-origin Cloudflare
@@ -104,6 +117,7 @@
         : '/api/ghis');
       var _patients = [];
       var _connectCtx = null;   // {tid,cid,name} when the roster is from a Connect (FHIR) hospital; null for GHIS
+      var _adapterCtx = null;   // {tid, conn, label, origin, replay, sessionId} when the roster came from an approved Connect Agent adapter
       var _addedPids = {};   // ward patientIds ticked "add to dashboard" this session (checkbox state)
       var _connected = false;
       // Set by GHIS.loadDemoHospital() (demo-hospital.js) to { patients:[raw shape], labsByPatientId }.
@@ -219,7 +233,47 @@
       }
       // NON-UI: resolve true if a live session is ready (silently refreshed, or re-logged-in from a
       // remembered device credential), false otherwise. Opens no panel — the caller owns the UI.
+      /* AN ADAPTER SESSION COUNTS AS A SESSION. The patient workspace (Assess) asks ensureSession
+       * before it opens; with an agent-built adapter there is no proxy token, so it reopened Ward
+       * Sync and Assess looked dead (owner, 2026-09-12). A ward read through an approved adapter
+       * keeps the doctor signed in for thirty minutes: the hospital cookies live in the native
+       * browser, and every read reopens it without a second login. */
+      /* ONE SESSION, HELD. The hand-built adapter (functions/api/ghis/[[path]].js) signs in once, keeps
+       * the cookie jar, and slides its session forward on every call so GHIS's ~20-minute idle window
+       * never passes. The phone does the same: the hidden browser stays open and signed in for the
+       * whole day, a keep-alive re-issues the ward list call every ten minutes, and every patient read
+       * goes through that one browser. Closing it after the ward list and reopening it per patient
+       * landed on the hospital signed out ("answered its login page", owner's iPhone, 2026-09-17). */
+      var ADAPTER_SESSION_MS = 24 * 60 * 60 * 1000;
+      var ADAPTER_KEEPALIVE_MS = 10 * 60 * 1000;
+      function adapterStopKeepAlive(ctx) { if (ctx && ctx.keepAlive) { clearInterval(ctx.keepAlive); ctx.keepAlive = null; } }
+      function adapterCloseBrowser(ctx, plugin) {
+        adapterStopKeepAlive(ctx);
+        if (!ctx) return;
+        ctx.browserOpen = false;
+        try { (plugin || connectPlugin()).close(); } catch (e) {}
+      }
+      function adapterStartKeepAlive(ctx, plugin, rt) {
+        adapterStopKeepAlive(ctx);
+        ctx.keepAlive = setInterval(function () {
+          if (_adapterCtx !== ctx || !ctx.browserOpen || ctx.reading) { if (_adapterCtx !== ctx) adapterStopKeepAlive(ctx); return; }
+          ctx.reading = true;
+          rt.readWorklist({ plugin: plugin, origin: ctx.origin, replay: ctx.replay }).then(function (patients) {
+            ctx.reading = false;
+            if (_adapterCtx !== ctx) return;
+            ctx.at = Date.now();
+            if (patients && patients.length) _patients = patients;
+          }, function (e) {
+            ctx.reading = false;
+            /* The hospital let the session go: say so quietly where the next read will show it; the
+             * browser is closed so the next open starts a fresh sign-in instead of reading nothing. */
+            if (/not signed in/i.test(String(e && e.message))) { ctx.signedOut = String(e.message); adapterCloseBrowser(ctx, plugin); }
+          });
+        }, ADAPTER_KEEPALIVE_MS);
+      }
+      function adapterSessionFresh() { return !!(_adapterCtx && _adapterCtx.at && (Date.now() - _adapterCtx.at) < ADAPTER_SESSION_MS); }
       function checkSession() {
+        if (adapterSessionFresh()) return Promise.resolve(true);
         if (!getToken()) return storedCredLogin();
         return fetch(PROXY + '/status', { headers: { 'Authorization': 'Bearer ' + getToken() } })
           .then(function (r) { return r.json(); })
@@ -261,7 +315,11 @@
         if ((el = document.getElementById('ghisAddHospital'))) el.style.display = name === 'addhospital' ? '' : 'none';
         document.getElementById('ghisSetup').style.display = name === 'setup' ? '' : 'none';
         document.getElementById('ghisWard').style.display  = name === 'ward'  ? '' : 'none';
-        if (name === 'hospital') { try { ghisRenderConnectHospitals(); } catch (e) {} }
+        if (name === 'hospital') {
+          try { ghisRenderConnectHospitals(); } catch (e) {}
+          try { ghisRenderAdapterHospitals(); } catch (e) {}
+          try { if (typeof ghisRenderWardSynqHospitals === 'function') ghisRenderWardSynqHospitals(); } catch (e) {}
+        }
       }
       window.showGhisScreen = showScreen;
       // Setup-screen "Load Demo: Test Hospital" button (demo-hospital.js). No GHIS login,
@@ -270,10 +328,21 @@
         if (window.SMD_TEST_HOSPITAL && window.GHIS && window.GHIS.loadDemoHospital) GHIS.loadDemoHospital(window.SMD_TEST_HOSPITAL);
         else alert('Demo dataset not loaded yet — try again in a moment.');
       };
-      // Hospital picker actions.
+      // Hospital picker actions (multi-hospital: the choice is recorded in the canonical
+      // registry so per-doctor stores stay isolated per hospital via SMD_HOSPITALS.getStoreId).
       window.ghisSelectHospital = function (id) {
-        if (id === 'gimsr') showScreen('setup');
+        try { if (window.SMD_HOSPITALS && SMD_HOSPITALS.setActive) SMD_HOSPITALS.setActive(id); } catch (e) {}
+        if (id === 'gimsr') {
+          // GIMSR keeps its legacy GHIS login path. An approved GIMSR adapter, when one exists,
+          // stays launchable from its own listed button (openAdapterHospital flow, untouched);
+          // the picker still lands on setup, preserving existing GIMSR functionality.
+          showScreen('setup');
+        }
         else if (id === 'stewardmd') window.ghisLoadDemoHospital();
+        else if (id && id.indexOf('smd-') === 0) {
+          window.ghisLoadDemoHospital();
+          if (window.toast) window.toast('Connected to ' + id.toUpperCase() + ' (WardSynq Native)');
+        }
       };
       // Connect platform: open the self-service EMR console (falls back to the request form if not loaded).
       window.ghisOpenConnectConsole = function () { try { if (window.SMD_openConnectEmr) window.SMD_openConnectEmr(); else showScreen('addhospital'); } catch (e) {} };
@@ -286,7 +355,8 @@
         if (!window.SMD_CONNECT || !SMD_CONNECT.tenants) return;
         SMD_CONNECT.tenants().then(function (ts) {
           box = document.getElementById('ghisConnectHosp');
-          if (!box || !ts || !ts.length) return;
+          ts = (ts || []).filter(function (t) { return !(window.__smdAdapterTenants || {})[t.tenantId]; });
+          if (!box || !ts.length) { if (box) box.innerHTML = ''; return; }
           var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
           box.innerHTML = '<div class="ghis-setup-sub" style="margin:12px 0 4px">Your connected hospitals · tap to load today\'s ward list</div>' +
             ts.map(function (t) { return '<button class="ghis-connect-btn" style="margin-top:6px" data-conn-tid="' + esc(t.tenantId) + '" data-conn-name="' + esc(t.name || t.tenantId) + '">' + wIco('hospital') + ' ' + esc(t.name || t.tenantId) + '</button>'; }).join('');
@@ -298,6 +368,408 @@
           });
         }).catch(function () {});
       }
+      // ── Connect Agent adapters as hospitals. An APPROVED adapter (Connect Hospital, deployment with an
+      // activeVersionId) is listed as a real hospital button next to GIMSR. Tapping it: create a phone
+      // session (the server reuses the active adapter), sign in inside the native ConnectBrowser, hand off,
+      // then the phone runtime (connect-agent/phone/runtime.mjs) reads the ward list from the hospital's
+      // own pages in the doctor's session. Cell text never leaves the phone.
+      // Absolute on native (SMD_API_BASE), relative on the web: a bare /api path is dead on iOS's capacitor:// origin.
+      var AGENT_BASE = (window.SMD_API_BASE || '') + '/api/connect/agent';
+      var _agentApi = function (path, tid, opts) {
+        var q = tid ? (path.indexOf('?') >= 0 ? '&' : '?') + 'tenant=' + encodeURIComponent(tid) : '';
+        var tok;
+        try { var u = window.SMD_AUTH && window.SMD_AUTH.currentUser; tok = (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); } catch (e) { tok = Promise.resolve(null); }
+        return tok.then(function (t) {
+          var h = { 'content-type': 'application/json' };
+          if (t) h.Authorization = 'Bearer ' + t;
+          return fetch(AGENT_BASE + path + q, { method: (opts && opts.method) || 'GET', headers: h, body: (opts && opts.body) || null, cache: 'no-store' });
+        }).then(function (r) {
+          return r.text().then(function (t) { var d = null; try { d = t ? JSON.parse(t) : null; } catch (e) { d = { ok: false, error: 'bad-response' }; } return { s: r.status, d: d }; });
+        }).catch(function () { return { s: 0, d: { ok: false, error: 'network' } }; });
+      };
+      function agentApi(path, tid, opts) { return _agentApi(path, tid, opts || {}); }
+      function agentReason(r, what) {
+        var d = r && r.d;
+        if (r && r.s === 0) return 'Network error while trying to ' + what + '.';
+        if (d && (d.detail || d.message || d.error)) return 'Could not ' + what + ': ' + (d.detail || d.message || d.error) + (r.s ? ' (HTTP ' + r.s + ')' : '') + '.';
+        return 'Could not ' + what + ' (HTTP ' + (r && r.s) + ').';
+      }
+      function loadWardRuntime() {
+        if (window.__SMD_WARD_RUNTIME_TEST__) return Promise.resolve(window.__SMD_WARD_RUNTIME_TEST__);
+        try { return (new Function('p', 'return import(p)'))('/connect-agent/phone/runtime.mjs'); } catch (e) { return Promise.reject(e); }
+      }
+      function connectPlugin() { try { return window.Capacitor.Plugins.ConnectBrowser || null; } catch (e) { return null; } }
+      /* THE ADAPTER ANSWERS THE GHIS PROXY. Every screen that reads a hospital (the lab and radiology
+       * drawers here, the patient workspace and its Assess tab, medication review) fetches
+       * PROXY + '/<endpoint>'. While an adapter session is fresh, those fetches are answered on the
+       * phone from the adapter's own views in the proxy's exact JSON shapes
+       * (connect-agent/phone/ghis-shim.mjs), so an agent-built adapter drives the same UI the
+       * hand-built GHIS integration does. Patient views are read once per patient through the
+       * native browser and cached for the session; nothing about a patient leaves the phone. */
+      function loadWardShim() {
+        if (window.__SMD_WARD_SHIM_TEST__) return Promise.resolve(window.__SMD_WARD_SHIM_TEST__);
+        try { return (new Function('p', 'return import(p)'))('/connect-agent/phone/ghis-shim.mjs'); } catch (e) { return Promise.reject(e); }
+      }
+      /* EVERY READ ENDS. Each hospital request is bounded (adapter-runtime FETCH_TIMEOUT_MS); this bounds
+       * the whole patient read, so a hospital that stops answering can never hold the drawer open for
+       * 30 minutes again (owner's iPhone, 2026-09-15). */
+      var ADAPTER_READ_DEADLINE_MS = 30000;
+      var READ_TIMED_OUT = 'The hospital did not answer in time, so the reading was stopped. Try again.';
+      var HIDDEN_REFUSED = 'This app version cannot read the hospital out of sight, so nothing was read. Update the app and try again.';
+      function withDeadline(promise, ms) {
+        return new Promise(function (resolve, reject) {
+          var t = setTimeout(function () { reject(new Error(READ_TIMED_OUT)); }, ms);
+          promise.then(function (v) { clearTimeout(t); resolve(v); }, function (e) { clearTimeout(t); reject(e); });
+        });
+      }
+      function adapterSections(patientId) {
+        var ctx = _adapterCtx, plugin = connectPlugin();
+        if (!ctx || !plugin) return Promise.reject(new Error('no adapter session'));
+        ctx.sections = ctx.sections || {};
+        if (ctx.sections[patientId]) return ctx.sections[patientId];
+        var p = null;
+        for (var i = 0; i < _patients.length; i++) if (String(_patients[i].patientId) === String(patientId)) p = _patients[i];
+        ctx.sections[patientId] = withDeadline(loadWardRuntime().then(function (rt) {
+          var reuse = ctx.browserOpen === true;
+          ctx.browserOpen = true;
+          var targetOrigin = ctx.origin;
+          if (ctx.origins && ctx.origins.length) {
+            for (var oi = 0; oi < ctx.origins.length; oi++) {
+              if (/ghis\.gitam\.edu/i.test(ctx.origins[oi])) { targetOrigin = ctx.origins[oi]; break; }
+            }
+          }
+          /* LAW III, ENFORCED HERE. The iPhone showed the hospital page over the whole screen during a
+           * patient read although hidden was asked for (2026-09-15): a build can carry a plugin that
+           * ignores the flag. The native side must confirm hidden, or nothing is read. */
+          var opening = reuse
+            ? Promise.resolve({ ok: true, hidden: true })
+            : plugin.open({ url: targetOrigin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '', hidden: true }).then(function (opened) {
+                if (!opened || opened.hidden !== true) throw new Error(HIDDEN_REFUSED);
+                return plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins, hidden: true });
+              });
+          return opening.then(function (moded) {
+            if (!moded || moded.hidden !== true) throw new Error(HIDDEN_REFUSED);
+            /* READ FROM THE HOSPITAL, NOT FROM A BLANK TAB. plugin.open resolves when the hidden tab exists,
+             * before its page has loaded; reading right away fired every request from about:blank and the
+             * drawer said "Load failed" for labs, medicines and radiology with no page host at all (owner's
+             * iPhone, 2026-09-17). The ward-list path waits for the page; this one now does too: up to
+             * thirty seconds for the hospital host with the document complete. A login form there means
+             * the session is gone, which is said as such. */
+            var wantHost = targetOrigin.replace(/^https?:\/\//, '');
+            var tries = 0;
+            function landed() {
+              return plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':document.readyState)+' '+location.host})()" })
+                .then(function (r) { return String((r && r.result) || '').split(' '); }, function () { return ['error', '']; })
+                .then(function (v) {
+                  if (v[0] === 'login') throw new Error('not signed in: ' + wantHost + ' answered its login page. Open Ward Sync again to sign in.');
+                  if (v[0] === 'complete' && v[1] === wantHost) return true;
+                  if (++tries >= 60) throw new Error('Could not reach ' + wantHost + ' in the in-app browser (the page did not load). Check the connection and try again.');
+                  return new Promise(function (res) { setTimeout(res, 500); }).then(landed);
+                });
+            }
+            return landed().then(function () {
+              return rt.readPatientDetails({ plugin: plugin, origin: targetOrigin, replay: ctx.replay, patient: p || { patientId: patientId } });
+            });
+          });
+        }), window.__SMD_ADAPTER_DEADLINE_MS__ || ADAPTER_READ_DEADLINE_MS).then(function (sections) {
+          /* The browser stays open and signed in for the next patient (one session, as the hand-built
+           * adapter keeps its cookie jar). */
+          ctx.at = Date.now();
+          return sections;
+        }, function (e) {
+          /* A read that failed or hung leaves the browser in an unknown state: close it so the next
+           * read opens afresh, and say when the session itself is gone. */
+          adapterCloseBrowser(ctx, plugin);
+          if (/not signed in/i.test(String(e && e.message))) ctx.signedOut = String(e.message);
+          delete ctx.sections[patientId];
+          throw e;
+        });
+        return ctx.sections[patientId];
+      }
+      function adapterServe(path, init) {
+        var method = (init && init.method) || 'GET';
+        return loadWardShim().then(function (shim) {
+          var pid = shim.patientIdOf(path) || (_adapterCtx && _adapterCtx.lastPatientId) || (GHIS._selectedPatient && GHIS._selectedPatient.patientId) || '';
+          if (!shim.needsPatientSections(path)) return shim.serveGhisProxy({ method: method, path: path, patients: _patients });
+          if (!pid) return { status: 400, body: { error: 'no_patient' } };
+          if (_adapterCtx) _adapterCtx.lastPatientId = pid;
+          var patient = null;
+          for (var i = 0; i < _patients.length; i++) if (String(_patients[i].patientId) === String(pid)) patient = _patients[i];
+          return adapterSections(pid).then(function (sections) {
+            return shim.serveGhisProxy({ method: method, path: path, patients: _patients, sections: sections, patient: patient || { patientId: pid, episodeId: pid } });
+          }, function (e) { return { status: 502, body: { error: 'adapter_read_failed', detail: String(e && e.message || e) } }; });
+        }).then(function (r) {
+          if (!r) return null;
+          return new Response(JSON.stringify(r.body), { status: r.status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+        });
+      }
+      /* ABSENT IS NOT NEGATIVE: a section the adapter could not read says why, never "none found". */
+      function notReadHtml(j) {
+        var why = j && (j.unreadable || (j.error === 'adapter_read_failed' ? (j.detail || 'The hospital could not be read.') : ''));
+        return why ? '<div class="ghis-lab-empty">' + esc(why) + '</div>' : '';
+      }
+      (function installAdapterProxy() {
+        if (window.__smdAdapterProxyInstalled) return;
+        window.__smdAdapterProxyInstalled = true;
+        var real = window.fetch;
+        if (typeof real !== 'function') return;
+        var abs = null; try { abs = new URL(PROXY, location.href).href; } catch (e) {}
+        window.fetch = function (input, init) {
+          try {
+            var u = typeof input === 'string' ? input : (input && input.url) || '';
+            var rel = null;
+            if (u.indexOf(PROXY + '/') === 0) rel = u.slice(PROXY.length);
+            else if (u === PROXY) rel = '/';
+            else if (abs && u.indexOf(abs + '/') === 0) rel = u.slice(abs.length);
+            else if (abs && u === abs) rel = '/';
+            else {
+              var m = u.match(/(?:\/api\/ghis|https?:\/\/[^\/]+\/api\/ghis)(?:(\/.*)|$)/);
+              if (m) rel = m[1] || '/';
+            }
+            if (rel && adapterSessionFresh()) {
+              var args = arguments;
+              return adapterServe(rel, init).then(function (res) { return res || real.apply(window, args); });
+            }
+          } catch (e) { /* fall through to the network */ }
+          return real.apply(window, arguments);
+        };
+        /* GOLD AUDIT (verification only, connect-agent/phone/gold-audit.mjs): the same proxy paths answered
+         * twice for the same patients, once by the hand-built GHIS proxy (the doctor's own GHIS sign-in in
+         * this app) and once by the approved adapter. Returns counts and names, never a value. Needs an
+         * adapter session open (the Connect Agent hospital's ward list loaded) and a GHIS sign-in. */
+        GHIS.goldAudit = function (opts) {
+          if (!_adapterCtx || !_adapterCtx.replay) return Promise.reject(new Error(_adapterCtx ? 'the Connect Agent ward list is still loading; wait for it, then run the audit' : 'open the Connect Agent hospital ward list first'));
+          var viaGold = function (path) {
+            var t = getToken();
+            if (!t) return Promise.reject(new Error('sign in to GHIS in Ward Sync first'));
+            return real.call(window, PROXY + path, { headers: { 'Authorization': 'Bearer ' + t } }).then(function (r) { return r.json(); });
+          };
+          var viaAdapter = function (path) { return adapterServe(path, { method: 'GET' }).then(function (r) { return r ? r.json() : null; }); };
+          return (new Function('p', 'return import(p)'))('/connect-agent/phone/gold-audit.mjs').then(function (m) {
+            return m.runGoldAudit({ replay: _adapterCtx.replay, gold: viaGold, adapter: viaAdapter, patientIds: (opts && opts.patientIds) || [] });
+          });
+        };
+      })();
+      var _adapterConns = {};
+      // The registry feed: every deployment with an active version across the doctor's tenants.
+      function ghisRenderAdapterHospitals() {
+        var box = document.getElementById('ghisAdapterHosp'); if (!box) return;
+        box.innerHTML = '';
+        Promise.all([loadWardRuntime(), agentApi('/tenants', '')]).then(function (res) {
+          var rt = res[0], r = res[1];
+          var tenants = (r.s === 200 && r.d && r.d.tenants) || [];
+          return Promise.all(tenants.map(function (t) {
+            return agentApi('/connections', t.tenantId).then(function (c) {
+              return ((c.s === 200 && c.d && c.d.connections) || []).filter(function (cn) {
+                var o = (cn.origins || [])[0];
+                return cn.activeVersionId && o;
+              }).map(function (cn) {
+                var lb = rt.hospitalLabel(t.name, cn.origins[0]);
+                /* GIMSR has its own built-in button above. Its approved adapter is still listed, labelled
+                 * so the two never read as one: the doctor can see which path they are taking. */
+                var gim = rt.isGimsrOrigin(cn.origins[0]);
+                return { tid: t.tenantId, tenantName: t.name || '', conn: cn, name: gim ? lb.name + ' (adapter)' : lb.name, subtitle: gim ? lb.subtitle + ' · read through the approved adapter' : lb.subtitle };
+              });
+            });
+          })).then(function (lists) { return [].concat.apply([], lists); });
+        }).then(function (items) {
+          box = document.getElementById('ghisAdapterHosp'); if (!box) return;
+          _adapterConns = {};
+          /* A tenant with an approved adapter is served by it. The older "Your connected hospitals"
+           * list (FHIR feeds) offered the SAME hospital a second time under a near-identical name, and
+           * the owner tapped that one and read "No FHIR connection on this hospital yet" as the adapter
+           * failing (2026-09-12). One hospital, one button. */
+          window.__smdAdapterTenants = {};
+          items.forEach(function (it) { window.__smdAdapterTenants[it.tid] = true; });
+          box.innerHTML = items.map(function (it) {
+            _adapterConns[it.conn.deploymentId] = it;
+            return '<button class="ghis-connect-btn" data-adapter-dep="' + esc(it.conn.deploymentId) + '">' + wIco('hospital') + ' ' + esc(it.name) + '</button>' +
+              '<div class="ghis-setup-sub" style="margin:10px 0 4px">' + esc(it.subtitle) + '</div>';
+          }).join('');
+          [].slice.call(box.querySelectorAll('[data-adapter-dep]')).forEach(function (b) {
+            b.onclick = function () { window.ghisOpenAdapterHospital(b.getAttribute('data-adapter-dep')); };
+          });
+          ghisRenderConnectHospitals();   // redraw the older list without the hospitals now served by an adapter
+          ghisRenderWardSynqHospitals();
+        }).catch(function () {});
+      }
+      function ghisRenderWardSynqHospitals() {
+        var box = document.getElementById('ghisWardSynqHosp'); if (!box) return;
+        var list = [];
+        try { list = JSON.parse(localStorage.getItem('smd_wardsynq_hospitals') || '[]'); } catch (e) {}
+        if (!list.length) {
+          box.innerHTML = '<div class="ghis-setup-sub" style="margin:2px 0 8px;font-size:12px;font-style:italic">No WardSynq client hospitals linked yet. Tap Add your hospital below to link with an smd-xxxx code.</div>';
+          return;
+        }
+        var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
+        box.innerHTML = list.map(function (h) {
+          return '<button class="ghis-connect-btn" style="border:1.5px solid var(--teal,#0e6e63);margin-bottom:4px" data-ws-hosp="' + esc(h.code) + '">' +
+            wIco('hospital') + ' ' + esc(h.name || h.code) + '</button>' +
+            '<div class="ghis-setup-sub" style="margin:2px 0 8px">WardSynq Native EMR &middot; Code: ' + esc(h.code) + '</div>';
+        }).join('');
+        [].slice.call(box.querySelectorAll('[data-ws-hosp]')).forEach(function (b) {
+          b.onclick = function () {
+            var code = b.getAttribute('data-ws-hosp');
+            ghisSelectHospital(code);
+          };
+        });
+      }
+      window.ghisRenderWardSynqHospitals = ghisRenderWardSynqHospitals;
+      window.ghisRenderAdapterHospitals = ghisRenderAdapterHospitals;
+      function adapterFail(msg) {
+        var el = document.getElementById('ghisPatientList');
+        if (el) el.innerHTML = '<div class="ghis-empty">' + esc(msg) + '</div>';
+        try { if (_adapterCtx && _adapterCtx.browserOpen) adapterCloseBrowser(_adapterCtx, connectPlugin()); } catch (e) {}
+      }
+      /* READ-TIME SELF-REPAIR. An approved adapter that reads zero rows is not the end: the browser
+       * goes back to the doctor with one ask in its header, the screen they show is captured (labels
+       * and selectors, never cells), read at once so THEY see their patients now, and posted as a
+       * corrected candidate for the owner to approve so the next doctor is never asked. */
+      function ghisSelfRepair(ctx, plugin, rt, err) {
+        var el = document.getElementById('ghisPatientList');
+        if (el) el.innerHTML = '<div class="ghis-loading">The adapter could not find your patients on ' + esc(ctx.host) + '. In the hospital screen, show me the list of all your patients, then tap Done.</div>';
+        return new Promise(function (resolve, reject) {
+          function off() { ctx.listeners.forEach(function (l) { try { l.remove(); } catch (e) {} }); ctx.listeners = []; }
+          try {
+            ctx.listeners.push(plugin.addListener('loggedIn', function () { off(); resolve(); }));
+            ctx.listeners.push(plugin.addListener('guideSkip', function () { off(); reject(new Error('You said ' + ctx.host + ' has no patient list screen. ' + err.message)); }));
+            ctx.listeners.push(plugin.addListener('stopped', function () { off(); reject(err); }));
+          } catch (e) {}
+          try { plugin.setMode({ mode: 'guide', banner: rt.REPAIR_ASK, origins: ctx.origins }); } catch (e) { reject(err); }
+        }).then(function () {
+          if (el) el.innerHTML = '<div class="ghis-loading">Reading the screen you showed me...</div>';
+          /* LAW III COVERS THE REPAIR READ TOO: the screen the doctor showed is read out of sight or
+           * not at all, exactly as adapterSections requires. */
+          return Promise.resolve(plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for your ward list', origins: ctx.origins, hidden: true })).then(function (moded) {
+            if (!moded || moded.hidden !== true) throw new Error(HIDDEN_REFUSED);
+            return rt.captureWorklist({ plugin: plugin });
+          });
+        }).then(function (view) {
+          return rt.reproveWorklist({ plugin: plugin, origin: ctx.origin, view: view }).then(function (proven) {
+            if (!proven) {
+              throw new Error('I could not find a data request behind your patient list on ' + ctx.host + '. This hospital needs a fresh Connect Hospital run so the agent can learn it. ' + err.message);
+            }
+            return rt.readWorklist({ plugin: plugin, origin: ctx.origin, replay: [proven] }).then(function (patients) {
+              if (!patients.length) throw new Error('The request I learned from that screen returned no patients. ' + err.message);
+              agentApi('/versions/' + encodeURIComponent(ctx.versionId) + '/repair', ctx.tid, { method: 'POST', body: JSON.stringify({ sessionId: ctx.sessionId, view: proven }) }).then(function (r) {
+                if (r.s === 200 && r.d && r.d.ok !== false) { try { if (window.toast) window.toast('Thanks. A corrected adapter was sent for approval.'); } catch (e) {} }
+              });
+              return patients;
+            });
+          });
+        });
+      }
+      // Login gate + reuse + read. Each failure names its reason.
+      window.ghisOpenAdapterHospital = function (depId) {
+        var it = _adapterConns[depId]; if (!it) return;
+        var conn = it.conn, origin = conn.origins[0], host = origin.replace(/^https?:\/\//, '');
+        var el = document.getElementById('ghisPatientList');
+        _connectCtx = null; _patients = [];
+        try { showScreen('ward'); } catch (e) {}
+        if (el) el.innerHTML = '<div class="ghis-loading">Signing in to ' + esc(host) + '...</div>';
+        var plugin = connectPlugin();
+        if (!plugin) { adapterFail('The in-app hospital browser is not available on this device (ConnectBrowser plugin missing).'); return; }
+        var ctx = { tid: it.tid, conn: conn, label: it.name, origin: origin, host: host, listeners: [], browserOpen: false };
+        _adapterCtx = ctx;
+        var rt;
+        function selfRepair(err) { return ghisSelfRepair(ctx, plugin, rt, err); }
+        loadWardRuntime().then(function (m) {
+          rt = m;
+          return agentApi('/sessions', it.tid, { method: 'POST', body: JSON.stringify({ emrUrl: origin, consent: { agreed: true }, runner: 'phone', purpose: 'read' }) });
+        }).then(function (r) {
+          if (r.s !== 200 || !r.d || r.d.ok === false) throw new Error(agentReason(r, 'start a session with ' + host));
+          if (!r.d.reuse || !r.d.deployment || !r.d.deployment.activeVersionId) throw new Error('The server did not reuse the approved adapter for ' + host + ' (reuse=' + String(!!r.d.reuse) + ', activeVersionId=' + String(r.d.deployment && r.d.deployment.activeVersionId) + ').');
+          ctx.sessionId = r.d.sessionId; ctx.versionId = r.d.deployment.activeVersionId; ctx.origins = r.d.deployment.origins || conn.origins;
+          return new Promise(function (resolve, reject) {
+            function off() { ctx.listeners.forEach(function (l) { try { l.remove(); } catch (e) {} }); ctx.listeners = []; }
+            try {
+              ctx.listeners.push(plugin.addListener('loggedIn', function () { off(); resolve(); }));
+              ctx.listeners.push(plugin.addListener('stopped', function () { off(); reject(new Error('Sign in to ' + host + ' was cancelled.')); }));
+            } catch (e) {}
+            ctx.browserOpen = true;
+            plugin.open({ url: origin, origins: ctx.origins, storeId: conn.deploymentId, title: host, initScript: '' })
+              .then(function () {
+                /* STILL SIGNED IN FROM LAST TIME: the hospital skips its login form (cookies live in
+                 * the native browser), so no password field ever appears and the auto sign-in
+                 * detection has nothing to see. Two quiet polls without a password field, after the
+                 * page has had time to load, count as signed in; the doctor never taps Done again
+                 * inside the thirty-minute window. */
+                var quiet = 0, polls = 0, lastState = '';
+                function look() {
+                  if (!ctx.listeners.length) return;   // already resolved or rejected
+                  plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':(document.readyState==='complete'?'ok':'blank'))+' '+location.host})()" })
+                    .then(function (r) { var v = String((r && r.result) || '').split(' '); lastState = v[0] || ''; if (v[0] === 'ok') quiet += (v[1] && v[1] !== host) ? 2 : 1; else quiet = 0; }, function () { lastState = 'error'; quiet = 0; })
+                    .then(function () {
+                      polls++;
+                      if (quiet >= 2 && ctx.listeners.length) { off(); resolve(); return; }
+                      if (polls < 40 && ctx.listeners.length) { setTimeout(look, 700); return; }   // ~28 s: a cold sign-in redirect chain on hospital wifi took longer than 8 s (owner, 2026-09-17)
+                      /* OUT OF POLLS IS AN ANSWER, NOT A WAIT. A login form on screen is the doctor's turn
+                       * (the loggedIn listener stays armed). Anything else after forty polls (about thirty seconds) means the
+                       * hospital page never loaded, and Ward Sync used to sit on "Signing in to ..." for
+                       * ever with nothing to tap (owner, 2026-09-17). Say so, so the doctor can retry. */
+                      if (lastState !== 'login' && ctx.listeners.length) { off(); reject(new Error('Could not reach ' + host + ' in the in-app browser (the page did not load). Check the connection and try again.')); }
+                    });
+                }
+                setTimeout(look, 1200);
+              })
+              .catch(function (e) { off(); reject(new Error('Could not open ' + host + ' in the in-app browser: ' + (e && e.message || e))); });
+          });
+        }).then(function () {
+          /* LET THE SIGN-IN LAND BEFORE READING. The plugin reports loggedIn the moment the password
+           * field disappears, which on GHIS is mid-redirect: the login host has accepted the password
+           * but the EMR host has not yet been handed the session. Reading then gets an empty, signed-out
+           * worklist that looks like a hospital with no patients (owner, 2026-09-12). Wait until the
+           * browser sits on a page without a password field, for up to fifteen seconds. */
+          var until = Date.now() + 15000;
+          function settled() {
+            return plugin.evaluate({ expression: "(function(){return document.querySelector('input[type=\"password\"]')?'login':'ok'})()" })
+              .then(function (r) { return !(r && String(r.result).indexOf('login') >= 0); }, function () { return false; });
+          }
+          function waitSignedIn() {
+            return settled().then(function (ok) {
+              if (ok) return new Promise(function (res) { setTimeout(res, 600); });   // quick beat for landing page
+              if (Date.now() > until) return;
+              return new Promise(function (res) { setTimeout(res, 600); }).then(waitSignedIn);
+            });
+          }
+          return waitSignedIn();
+        }).then(function () {
+          if (el) el.innerHTML = '<div class="ghis-loading">Reading ' + esc(host) + ' for your ward list...</div>';
+          return Promise.resolve(plugin.setMode({ mode: 'agent', banner: 'Reading ' + host + ' for your ward list', origins: ctx.origins, hidden: true })).then(function (moded) {
+            if (!moded || moded.hidden !== true) { ctx.browserOpen = false; try { plugin.close(); } catch (x) {} throw new Error(HIDDEN_REFUSED); }
+            return agentApi('/sessions/' + encodeURIComponent(ctx.sessionId) + '/handoff', it.tid, { method: 'POST', body: JSON.stringify({ visitedOrigins: [origin] }) });
+          });
+        }).then(function (r) {
+          if (r.s !== 200 || !r.d || r.d.ok === false) throw new Error(agentReason(r, 'confirm the sign in with ' + host));
+          return agentApi('/versions/' + encodeURIComponent(ctx.versionId), it.tid);
+        }).then(function (r) {
+          if (r.s !== 200 || !r.d) throw new Error(agentReason(r, 'load the approved adapter'));
+          ctx.replay = r.d.replay || [];
+          if (!ctx.replay.length) throw new Error('The approved adapter for ' + host + ' has no replay views (version ' + ctx.versionId + ').');
+          return rt.readWorklist({ plugin: plugin, origin: origin, replay: ctx.replay }).catch(function (e) {
+            if (!/no patient rows found/.test(String(e && e.message))) throw e;
+            return selfRepair(e);
+          });
+        }).then(function (patients) {
+          if (_adapterCtx !== ctx) { adapterCloseBrowser(ctx, plugin); return; }
+          ctx.at = Date.now();
+          adapterStartKeepAlive(ctx, plugin, rt);
+          _connected = true; try { dot(true); } catch (e) {}
+          _patients = patients;
+          populateFilterOptions();
+          ghisApplyFilters();
+          /* THE BROWSER NEVER LINGERS. The ward list is on screen and the session stays open for
+           * reads, so re-assert hidden agent mode now that the list has landed: on Pixel 9 the
+           * full-screen dialog stayed over the live dashboard after sign-in (2026-09-18). The
+           * browser is hidden, never closed - closing it would sign the hospital out. */
+          if (_adapterCtx === ctx && ctx.browserOpen) {
+            try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + host + ' for your ward list', origins: ctx.origins, hidden: true }); } catch (e) {}
+          }
+        }).catch(function (e) {
+          if (_adapterCtx !== ctx) return;
+          adapterFail(e && e.message ? e.message : 'Could not read the ward list from ' + host + '.');
+        });
+      };
       // "My Ward" tab — open the StewardMD ward dashboard (the ICU dashboard tuned for ward patients:
       // ventilator hidden, "Ward" labels, own patient list; Treatment / instructions / deep review /
       // imaging / discharge reused). The Ward Sync panel (z 18000) sits ABOVE the dashboard (z 10000),
@@ -459,7 +931,20 @@
         if (d.error === 'session_expired') return '<div class="ghis-lab-empty">Session expired — reconnect in the Ward panel.</div>';
         var tests = d.tests || [];
         if (tests.length === 0) return '<div class="ghis-lab-detail-empty">No values recorded for this order.</div>';
-        var html = '';
+        /* WHEN WAS THIS DRAWN. Both adapters already answer with the sample's own timestamps
+         * (collected / reported) and the drawer threw them away, so an opened panel showed values with
+         * no time against them. On a renal panel repeated through the day that is the difference
+         * between a rising creatinine and a duplicate row. */
+        /* The agent's adapter answers collected and reported with the SAME value when the hospital's
+         * list carries one date column (ghis-shim detailFor), so print it once rather than as
+         * "Collected X · Reported X". */
+        var when = [];
+        if (d.collected && d.reported && String(d.collected) === String(d.reported)) when.push(esc(d.collected));
+        else {
+          if (d.collected) when.push('Collected ' + esc(d.collected));
+          if (d.reported) when.push('Reported ' + esc(d.reported));
+        }
+        var html = when.length ? '<div class="ghis-rad-meta">' + when.join(' · ') + '</div>' : '';
         tests.forEach(function(t) {
           var cls = abnormalClass(t);
           var antibiogram = t.antibiogram && String(t.antibiogram).trim();
@@ -485,7 +970,8 @@
         return html;
       }
     
-      window.GHIS = {
+      Object.assign(GHIS, {
+        __setAgentApi: function (fn) { _agentApi = fn; },
         _patientId: null,
         // The patient currently opened in the ward drawer, used by the Drug-Interactions
         // "Fetch from Ward Sync" import to know whose medication history to pull. Kept
@@ -620,7 +1106,7 @@
           // lives in the dashboard (removed here).
           body.innerHTML =
             (lwOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0d5c54" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">' + wIco("bell") + ' Lab Watch — alerts on new labs</button>' : '') +
-            '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
+            '<div id="ghisMedSection"></div><div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
           drawer.style.display = '';
           // Open at the TOP. The drawer is position:absolute; inset:0 inside #ghisWard, which is a
           // scrolled container (the patient list). If the list is scrolled down when a patient is
@@ -633,6 +1119,7 @@
             if (ward) ward.scrollTop = 0;
             drawer.scrollTop = 0;
           } catch (e) {}
+          GHIS.loadMedications(patientId);
           GHIS.loadRadiology(patientId);
           GHIS.loadLabs(patientId);
         },
@@ -882,6 +1369,35 @@
             try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
           });
         },
+        loadMedications: function(patientId) {
+          var sec = document.getElementById('ghisMedSection');
+          if (!sec) return;
+          // Medications sit LAST in the drawer and fold shut: a 166-item chart pushed labs and imaging
+          // off the screen (owner, 2026-09-15). Labs and imaging are what the doctor opened this for.
+          try { if (sec.parentNode && sec.parentNode.lastElementChild !== sec) sec.parentNode.appendChild(sec); } catch (e) {}
+          authFetch('/medications?patientId=' + encodeURIComponent(patientId))
+            .then(function(j) {
+              var nr = notReadHtml(j);
+              if (nr) { sec.innerHTML = nr; return; }
+              var rows = (j && j.rows) || [];
+              if (rows.length === 0) { sec.innerHTML = ''; return; }
+              var html = '<details class="ghis-med-fold"><summary class="ghis-lab-section-title" style="cursor:pointer;list-style:none">' + wIco("pills") + ' Medications · ' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + ' <span style="font-weight:400;opacity:.6">(tap to expand)</span></summary>';
+              rows.forEach(function(m) {
+                var title = m.drugText || m.genericName || 'Medication';
+                var sub = [m.dosage, m.route, m.frequency, m.duration].filter(Boolean).join(' · ');
+                html += '<div class="ghis-lab-order">' +
+                  '<div class="ghis-lab-order-head">' +
+                    '<div class="ghis-lab-order-name">' + esc(title) + '</div>' +
+                    (m.dateTime ? '<div class="ghis-lab-order-dept">' + esc(m.dateTime) + '</div>' : '') +
+                  '</div>' +
+                  (sub ? '<div class="ghis-pt-meta" style="margin-top:4px">' + esc(sub) + '</div>' : '') +
+                '</div>';
+              });
+              html += '</details><div class="ghis-rad-divider"></div>';
+              sec.innerHTML = html;
+            })
+            .catch(function() { sec.innerHTML = ''; });
+        },
         loadLabs: function(patientId) {
           var body = document.getElementById('ghisLabSection');
           if (!body) return;
@@ -891,6 +1407,8 @@
                 body.innerHTML = '<div class="ghis-lab-empty">Your session expired — sign in again in the Ward panel.</div>';
                 return;
               }
+              var nr = notReadHtml(j);
+              if (nr) { body.innerHTML = nr; return; }
               var orders = (j && j.orders) || [];
               if (orders.length === 0) {
                 body.innerHTML = '<div class="ghis-lab-empty">No lab orders found for this patient.</div>';
@@ -911,7 +1429,12 @@
                   html += '<div class="ghis-lab-order" onclick="GHIS.toggleOrder(this,\'' + jsq(o.renderId) + '\',\'' + jsq(o.episodeId) + '\')">' +
                     '<div class="ghis-lab-order-head">' +
                       '<div class="ghis-lab-order-name">' + esc(o.serviceName || '—') + '</div>' +
-                      '<div class="ghis-lab-order-dept">' + esc(o.department || '') + '</div>' +
+                      /* THE DATE BELONGS ON THE ORDER, not only on the group heading above it. A renal
+                       * panel repeated four times down the drawer is four different draws, and the
+                       * doctor was reading Urea 161 and Urea 158 with nothing to say which came first
+                       * (owner, live ward, 2026-09-19). The heading only carries a date when the
+                       * adapter filled orderDate AND the grouping held; the card always can. */
+                      '<div class="ghis-lab-order-dept">' + esc([o.orderDate, o.department].filter(Boolean).join(' · ')) + '</div>' +
                     '</div>' +
                     '<div class="ghis-lab-detail" style="display:none"></div>' +
                   '</div>';
@@ -929,6 +1452,8 @@
           if (!sec) return;
           authFetch('/radiology?patientId=' + encodeURIComponent(patientId))
             .then(function(j) {
+              var nr = notReadHtml(j);
+              if (nr) { sec.innerHTML = nr; return; }
               var orders = (j && j.orders) || [];
               if (orders.length === 0) { sec.innerHTML = ''; return; }
               var html = '<div class="ghis-lab-section-title">' + wIco("xray") + ' Imaging · ' + orders.length + ' stud' + (orders.length === 1 ? 'y' : 'ies') + '</div>';
@@ -946,6 +1471,26 @@
             })
             .catch(function() { sec.innerHTML = ''; });
         },
+        // Structured radiology report: the adapter splits IMPRESSION / FINDINGS into
+        // sections; the Impression (the answer) leads, the rest follows in order. A flat
+        // report (no sections, e.g. hand-built GHIS) renders as one block exactly as before.
+        renderRadReport: function(d) {
+          d = d || {};
+          var meta = [];
+          if (d.reported) meta.push('Reported ' + esc(d.reported));
+          if (d.enteredBy) meta.push(esc(d.enteredBy));
+          var h = meta.length ? '<div class="ghis-rad-meta">' + meta.join(' · ') + '</div>' : '';
+          var secs = (d.sections && d.sections.length) ? d.sections : null;
+          if (!secs) return h + '<div class="ghis-rad-report">' + esc(d.report || 'No report text.') + '</div>';
+          var imp = null, rest = [];
+          secs.forEach(function(s) { if (!imp && s && s.heading === 'Impression') imp = s; else if (s && s.body) rest.push(s); });
+          if (imp) h += '<div class="ghis-lab-group-name">Impression</div><div class="ghis-lab-abx">' + esc(imp.body) + '</div>';
+          rest.forEach(function(s) {
+            h += '<div class="ghis-lab-group-name">' + esc(s.heading) + '</div>' +
+              '<div class="ghis-rad-report" style="margin-bottom:8px">' + esc(s.body) + '</div>';
+          });
+          return h;
+        },
         toggleRad: function(el, resultid, type) {
           var det = el.querySelector('.ghis-lab-detail');
           if (!det) return;
@@ -960,11 +1505,7 @@
           authFetch('/radiology-report?resultid=' + encodeURIComponent(resultid) + '&type=' + encodeURIComponent(type))
             .then(function(d) {
               if (d && d.error === 'session_expired') { det.innerHTML = '<div class="ghis-lab-detail-empty">Session expired — reconnect.</div>'; return; }
-              var meta = [];
-              if (d.reported) meta.push('Reported ' + esc(d.reported));
-              if (d.enteredBy) meta.push(esc(d.enteredBy));
-              det.innerHTML = (meta.length ? '<div class="ghis-rad-meta">' + meta.join(' · ') + '</div>' : '') +
-                '<div class="ghis-rad-report">' + esc(d.report || 'No report text.') + '</div>';
+              det.innerHTML = GHIS.renderRadReport(d);
               det.setAttribute('data-loaded', '1');
             })
             .catch(function(e) { det.innerHTML = '<div class="ghis-lab-detail-empty">Error: ' + esc(e.message) + '</div>'; });
@@ -1040,10 +1581,16 @@
             })).then(function() { return rows; });
           });
         }
-      };
+      });
     
       window.openGHIS = function() {
         document.getElementById('ghisPanel').classList.add('open');
+        // If an adapter session is fresh and patients are loaded, resume straight to the ward!
+        if (adapterSessionFresh() && _patients && _patients.length) {
+          _connected = true; try { dot(true); } catch (e) {}
+          showScreen('ward');
+          return;
+        }
         // No saved login? Ask which hospital first (GIMSR → GHIS login; others → request form).
         if (!getToken()) { showScreen('hospital'); return; }
         // Have a saved login? Verify the token and go straight to the ward.
@@ -1124,6 +1671,7 @@
       };
     
       window.ghisDisconnect = function() {
+        if (_adapterCtx) { var actx = _adapterCtx; _adapterCtx = null; adapterCloseBrowser(actx); _patients = []; try { GHIS.clearSelectedPatient(); } catch (e) {} showScreen('hospital'); return; }
         DEMO = null;
         var t = getToken();
         if (t) { fetch(PROXY + '/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + t } }).catch(function(){}); }
@@ -1137,6 +1685,7 @@
       };
     
       window.ghisRefresh = function() {
+        if (_adapterCtx) { window.ghisOpenAdapterHospital(_adapterCtx.conn.deploymentId); return; }
         if (_connectCtx) { window.ghisLoadConnectRoster(_connectCtx.tid, _connectCtx.name); return; }
         if (_connected) ghisLoadPatients();
       };
@@ -1162,7 +1711,7 @@
         }).catch(function () { if (el) el.innerHTML = '<div class="ghis-empty">Network error loading the ward list.</div>'; });
       };
       function ghisLoadPatients() {
-        _connectCtx = null;   // a GHIS roster load clears any Connect-hospital context
+        _connectCtx = null; _adapterCtx = null;   // a GHIS roster load clears any Connect-hospital context
         var el = document.getElementById('ghisPatientList');
         if (el) el.innerHTML = '<div class="ghis-loading">Loading ward patients…</div>';
         authFetch('/patients')

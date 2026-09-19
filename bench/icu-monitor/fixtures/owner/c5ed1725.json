@@ -1,0 +1,88 @@
+{
+  "id": "owner-c5ed1725",
+  "manufacturer": "nihon-kohden",
+  "layout": "vismo-large-hr-tile",
+  "difficulty": [
+    "real-photo",
+    "plastic-wrap-glare",
+    "exif-rotated",
+    "distance"
+  ],
+  "image": "c5ed1725.jpg",
+  "imageSize": {
+    "w": 3024,
+    "h": 4032
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 144
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 96
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 145,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 82,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 103,
+      "source": "NIBP"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 19
+    },
+    "pulse": {
+      "status": "not_visible",
+      "why": "no PR numeric on screen"
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 0
+    },
+    "temp": {
+      "status": "visible",
+      "value": 21.0
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 145,
+        "dbp": 82,
+        "map": 103
+      }
+    }
+  },
+  "distractors": {
+    "st2": -0.03,
+    "pi": 0.47,
+    "t2Limit": 38.0,
+    "nibpTime": "09:30",
+    "nibpInterval": "30 min",
+    "date": "18-08-2026 09:59",
+    "banner": "Tachycardia",
+    "hrLimits": [
+      140,
+      50
+    ],
+    "spo2Limit": 90
+  },
+  "notes": "Nihon Kohden Vismo wrapped in plastic film (reflection streaks over NIBP and SpO2). File stored 4032x3024 with EXIF orientation 6; upright 3024x4032. Temp is T2 21.0 C (small decimal point). RR labelled Imp-RR."
+}

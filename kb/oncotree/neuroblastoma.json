@@ -1,0 +1,361 @@
+{
+  "id": "neuroblastoma",
+  "guideline": "neuroblastoma",
+  "title": "Neuroblastoma",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "category": "Pediatric Oncology",
+  "version": "2.2026",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "neuroblastoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) Pediatric Neuroblastoma Version 2.2026 clinical navigator for Neuroblastoma. Covers complete clinical algorithm: Diagnostic Workup (urine HVA/VMA, primary CT/MRI with IDRF assessment, 123I-MIBG or FDG-PET staging, bilateral marrow, INPC Shimada histology, MYCN/1p/11q/ALK biology) -> INRG Risk Stratification (Low vs Intermediate vs High vs Relapsed/Refractory) -> Low-Risk surgery/observation -> Intermediate-Risk moderate chemotherapy per COG ANBL0531 -> High-Risk intensive 3-phase multimodality per COG ANBL0032/ANBL1531 with ASCR, RT, and anti-GD2 maintenance -> Relapsed/Refractory chemoimmunotherapy D-I/T or 131I-MIBG or Lorlatinib. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Pediatric Neuroblastoma Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "INRGSS stages disease by pre-treatment imaging: L1 is localized tumor without Image-Defined Risk Factors (IDRFs); L2 is locoregional tumor with one or more IDRFs; M is distant metastatic disease; MS is metastatic disease in infants with spread limited to skin, liver, and marrow (<10% involvement). IDRFs include vascular encasement, intraspinal extension, and infiltration of adjacent organs.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "MYCN amplification by FISH or NGS is the dominant adverse biologic driver: any MYCN-amplified tumor is high-risk regardless of stage, age, or histology. Segmental chromosomal alterations (1p loss, 11q loss, 17q gain) and unfavorable INPC/Shimada histology further refine risk within non-MYCN groups.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "COG ANBL0531 established risk-adapted moderate-intensity chemotherapy (Carboplatin, Etoposide, Cyclophosphamide, Doxorubicin) x 2-8 cycles with delayed resection for intermediate-risk neuroblastoma, achieving 3-year EFS above 85-90% while limiting cumulative toxicity.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "COG ANBL0032 established post-consolidation Dinutuximab plus GM-CSF plus Isotretinoin as standard maintenance for high-risk neuroblastoma after induction, ASCR, and radiotherapy, with significant EFS and OS improvement over isotretinoin alone.",
+      "evidence": "1"
+    },
+    "e": {
+      "text": "COG ANBL1221 established Dinutuximab plus Irinotecan plus Temozolomide (D-I/T) as active chemoimmunotherapy for relapsed or refractory neuroblastoma; 131I-MIBG therapy and the ALK inhibitor Lorlatinib are active alternatives for MIBG-avid and ALK-aberrant disease respectively.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "neuroblastoma_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Neuroblastoma: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the diagnostic workup before INRG risk stratification. Confirm catecholamine secretion, define local IDRF status, stage metastatic extent, and establish histology plus mandatory molecular biology.",
+      "path": "Neuroblastoma / Workup",
+      "pills": [
+        "neuroblastoma",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Urine catecholamine metabolites: quantitative spot or 24-hour urine homovanillic acid (HVA) and vanillylmandelic acid (VMA); elevated HVA/VMA supports sympathetic neural crest origin and provides a baseline disease marker.",
+        "Primary site cross-sectional imaging: contrast-enhanced CT or MRI of the primary site (neck, chest, abdomen, or pelvis) to measure tumor dimensions and determine Image-Defined Risk Factors (IDRFs) such as vascular encasement, intraspinal extension, and adjacent organ infiltration.",
+        "Metastatic staging: 123I-MIBG scintigraphy with thyroid protection by potassium iodide or SSKI before tracer administration; use 18F-FDG-PET/CT for MIBG-nonavid tumors or when MIBG is unavailable; add bilateral assessment of cortical bone and soft tissue sites.",
+        "Bilateral bone marrow aspirates and core biopsies for microscopic tumor infiltration: bilateral posterior iliac crest sampling with morphology plus immunohistochemistry to detect marrow involvement that upstages disease to M or MS.",
+        "Tumor histology: International Neuroblastoma Pathology Classification (INPC, Shimada system) evaluation with favorable vs unfavorable histology assignment, Schwannian stroma content (stroma-rich vs stroma-poor), differentiation grade, and Mitosis-Karyorrhexis Index (MKI: low, intermediate, or high).",
+        "Molecular biology: MYCN amplification status by FISH or NGS (mandatory for every case); segmental chromosomal alterations including 1p loss and 11q loss; ALK mutation and amplification testing to guide risk assignment and Lorlatinib eligibility."
+      ],
+      "protocolRefs": [],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to INRG Risk Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_risk_strat",
+      "linkId": "neuroblastoma_risk_strat",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "staging",
+      "name": "INRG Risk Stratification",
+      "title": "Neuroblastoma: INRG Risk Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign INRG risk from stage (L1/L2/M/MS), age, MYCN status, histology, and segmental biology; risk selects the low, intermediate, high, or relapsed treatment pathway.",
+      "path": "Neuroblastoma / Risk Stratification",
+      "pills": [
+        "neuroblastoma",
+        "risk"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Low risk: INRGSS L1 without IDRFs and non-MYCN-amplified, or asymptomatic infant stage MS/4S without organ compromise; favorable biology with expected 5-year OS above 95% on surgery or observation alone.",
+        "Intermediate risk: INRGSS L2 with IDRFs and non-MYCN-amplified, or infants under 18 months with stage M non-MYCN disease; requires moderate-intensity chemotherapy plus delayed resection per COG ANBL0531.",
+        "High risk: any MYCN-amplified tumor at any stage and any age, or stage M disease at age 18 months or older, or 12-18 month stage M with unfavorable features (diploidy, 1p/11q aberration, or unfavorable histology); requires intensive 3-phase multimodality therapy.",
+        "Relapsed or refractory: prior progression, inadequate response, or recurrence after completed therapy; route to chemoimmunotherapy, 131I-MIBG, or ALK-directed therapy rather than frontline risk pathways."
+      ],
+      "protocolRefs": [],
+      "options": [
+        {
+          "id": "low_risk",
+          "label": "Low-Risk Neuroblastoma (INRGSS L1 without IDRFs, non-MYCN, or asymptomatic infant MS/4S)",
+          "sets": {
+            "risk": "low"
+          },
+          "pills": [
+            "low-risk"
+          ]
+        },
+        {
+          "id": "int_risk",
+          "label": "Intermediate-Risk Neuroblastoma (INRGSS L2 with IDRFs non-MYCN, or infants <18 months stage M non-MYCN)",
+          "sets": {
+            "risk": "intermediate"
+          },
+          "pills": [
+            "intermediate-risk"
+          ]
+        },
+        {
+          "id": "high_risk",
+          "label": "High-Risk Neuroblastoma (Any MYCN-amplified tumor, or stage M age >=18 months, or 12-18 months unfavorable)",
+          "sets": {
+            "risk": "high"
+          },
+          "pills": [
+            "high-risk"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed / Refractory Neuroblastoma",
+          "sets": {
+            "risk": "relapsed"
+          },
+          "pills": [
+            "relapsed",
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_low_risk_tx",
+      "linkId": "neuroblastoma_tx_low_risk",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "Low-Risk Treatment",
+      "title": "Low-Risk Neuroblastoma: Resection or Observation",
+      "section": "Treatment",
+      "description": "Definitive management for low-risk neuroblastoma: surgical resection or active observation with chemotherapy reserved strictly for threatening symptoms.",
+      "path": "Neuroblastoma / Low Risk / Treatment",
+      "pills": [
+        "neuroblastoma",
+        "low-risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Complete or partial surgical resection of the primary tumor when excision is feasible without mutilation: L1 tumors without IDRFs undergo upfront resection with negative-margin intent; document residual disease and IDRF resolution postoperatively.",
+        "Active observation alone for asymptomatic perinatal adrenal neuroblastoma (small suprarenal mass in infants under 6 months) and for asymptomatic infant stage MS/4S without liver compromise, respiratory distress, or coagulopathy; serial ultrasound, urine HVA/VMA, and physical examination every 3-6 weeks initially.",
+        "Low-dose chemotherapy reserved strictly for symptomatic life- or organ-threatening complications (airway compression, spinal cord compression, bowel or bladder obstruction, massive hepatomegaly with respiratory compromise, or Kasabach-Merritt-like coagulopathy): Carboplatin plus Etoposide per infant dosing with weight-based adjustments.",
+        "COG low-risk cohort evidence: surgery alone or observation achieves 5-year overall survival above 95% for L1 non-MYCN and asymptomatic MS disease; avoid overtreatment because late effects exceed disease risk in this group.",
+        "Surveillance after resection or during observation: cross-sectional imaging of the primary bed, urine catecholamines, and MIBG only if initially avid; escalate to the intermediate-risk pathway on symptomatic progression or unfavorable biology revision. Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "peds-neuroblastoma-lowrisk"
+      ],
+      "regimenSummary": "Surgical Resection Alone or Active Observation (OS >95%)"
+    },
+    {
+      "id": "n_int_risk_tx",
+      "linkId": "neuroblastoma_tx_int_risk",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "Intermediate-Risk Treatment",
+      "title": "Intermediate-Risk Neuroblastoma: Moderate Chemotherapy Plus Delayed Resection",
+      "section": "Treatment",
+      "description": "Risk-adapted moderate-intensity chemotherapy followed by delayed resection for intermediate-risk neuroblastoma, with radiotherapy reserved for refractory progression.",
+      "path": "Neuroblastoma / Intermediate Risk / Treatment",
+      "pills": [
+        "neuroblastoma",
+        "intermediate-risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Risk-adapted moderate-intensity chemotherapy per COG ANBL0531: 2 to 8 cycles of Carboplatin 560 mg/m2 IV day 1, Etoposide 120 mg/m2/d IV days 1-3, Cyclophosphamide 1000 mg/m2 IV day 1, and Doxorubicin 30 mg/m2 IV day 1, given every 21 days with cycle number set by response and biology (favorable biology: 2-4 cycles; unfavorable features: up to 8 cycles).",
+        "Delayed surgical resection of the residual primary tumor after 2-4 cycles once IDRFs regress and the tumor is resectable without mutilation; attempt gross total resection greater than 90% while preserving encased vessels and organs.",
+        "Radiotherapy reserved only for persistent progressive disease unresponsive to chemotherapy and surgery: limited-field external beam RT per pediatric radiation oncology planning; routine adjuvant RT is not indicated in intermediate-risk disease.",
+        "COG ANBL0531 trial evidence: risk-adapted moderate chemotherapy with surgery achieved 3-year event-free survival above 85-90% for L2 non-MYCN and infant stage M non-MYCN cohorts with reduced cumulative anthracycline and alkylator exposure versus high-risk regimens.",
+        "Monitoring: audiometry (carboplatin ototoxicity), echocardiography (doxorubicin cardiotoxicity), CBC with growth-factor support per cycle, and urine HVA/VMA plus cross-sectional imaging every 2 cycles; stem-cell harvest is not required. Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "peds-neuroblastoma-anbl0531"
+      ],
+      "regimenSummary": "Moderate Chemotherapy (Carbo/Etop/Cyclo/Dox) x 2-8 cycles + Delayed Resection"
+    },
+    {
+      "id": "n_high_risk_tx",
+      "linkId": "neuroblastoma_tx_high_risk",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "High-Risk Treatment",
+      "title": "High-Risk Neuroblastoma: Intensive 3-Phase Multimodality Therapy",
+      "section": "Treatment",
+      "description": "Intensive 3-phase multimodality therapy for high-risk neuroblastoma: dose-intensive induction with resection, myeloablative consolidation with ASCR plus RT, then anti-GD2 post-consolidation maintenance.",
+      "path": "Neuroblastoma / High Risk / Treatment",
+      "pills": [
+        "neuroblastoma",
+        "high-risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Phase 1 (Induction): 5-6 cycles of dose-intensive chemotherapy per COG ANBL0032/ANBL1531: Cyclophosphamide 4000 mg/m2 with Mesna plus Vincristine 1.5 mg/m2 (cap 2 mg) plus Doxorubicin 75 mg/m2 alternating every 21 days with Cisplatin 200 mg/m2 over 4 days plus Etoposide 600 mg/m2 over 4 days; perform gross total tumor resection after 4-5 cycles when IDRFs permit; collect peripheral blood stem cells after cycle 2-3.",
+        "Phase 2 (Consolidation): single or tandem high-dose myeloablative chemotherapy with Autologous Stem Cell Rescue (ASCR): Carboplatin 425 mg/m2/d plus Etoposide 338 mg/m2/d plus Melphalan 70 mg/m2/d with stem-cell infusion, followed by 21.6 Gy external beam radiotherapy in 12 fractions of 1.8 Gy to the pre-operative primary bed and to MIBG-avid metastatic sites persisting after induction.",
+        "Phase 3 (Post-Consolidation Maintenance): anti-GD2 immunotherapy per COG ANBL0032: Dinutuximab 17.5 mg/m2/d IV over 10-20 hours on days 1-4 of each 28-day cycle x 5 cycles with GM-CSF 250 mcg/m2/d subcutaneously days 1-14 plus Isotretinoin (13-cis-retinoic acid) 160 mg/m2/d PO divided BID on days 1-14 every 28 days x 6 cycles; manage Dinutuximab neuropathic pain, capillary leak, and hypersensitivity with prehydration, opioids, and infusion-rate control.",
+        "ALK-aberrant tumors: add the ALK inhibitor Lorlatinib 95 mg/m2 PO once daily (adult equivalent 100 mg daily) concurrently with maintenance and continue until progression or unacceptable toxicity, per COG ANBL1531 ALK stratum; monitor lipids, edema, CNS effects, and cardiac conduction.",
+        "COG ANBL0032/ANBL1531 trial evidence: dose-intensive induction plus ASCR plus RT plus Dinutuximab/GM-CSF/Isotretinoin maintenance significantly improved EFS and OS over isotretinoin alone and remains the high-risk standard. Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "peds-neuroblastoma-dinutuximab",
+        "ped-neuroblastoma-highrisk"
+      ],
+      "regimenSummary": "Intensive 3-Phase: Dose-Intensive Induction -> Tandem ASCR + RT -> Dinutuximab + GM-CSF + Isotretinoin"
+    },
+    {
+      "id": "n_relapsed_tx",
+      "linkId": "neuroblastoma_tx_relapsed",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "treatment",
+      "name": "Relapsed Refractory Treatment",
+      "title": "Relapsed / Refractory Neuroblastoma: Chemoimmunotherapy or Targeted Therapy",
+      "section": "Treatment",
+      "description": "Second-line systemic chemoimmunotherapy, targeted radiopharmaceutical therapy, or ALK inhibition for relapsed or refractory neuroblastoma.",
+      "path": "Neuroblastoma / Relapsed / Treatment",
+      "pills": [
+        "neuroblastoma",
+        "relapsed",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "First-line relapse chemoimmunotherapy per COG ANBL1221: Dinutuximab 17.5 mg/m2/d IV days 2-5 plus Irinotecan 50 mg/m2/d IV days 1-5 plus Temozolomide 100 mg/m2/d PO days 1-5 (D-I/T regimen) every 21 days with mandatory opioid infusion and diarrhea prophylaxis; significantly superior response and progression-free survival over irinotecan/temozolomide alone in relapsed neuroblastoma.",
+        "Targeted radiopharmaceutical therapy for MIBG-avid relapsed/refractory disease: 131I-MIBG therapy (high-dose with autologous stem-cell rescue or dosimetry-guided dosing) to deliver targeted internal beta radiation to disseminated neuroblastoma deposits.",
+        "Targeted kinase inhibition for ALK-mutated or ALK-amplified neuroblastoma: Lorlatinib 95 mg/m2 PO once daily (per COG ANBL1531) or Crizotinib; achieve systemic kinase inhibition with central nervous system penetration in refractory ALK-driven disease.",
+        "Secondary options: Topotecan plus Cyclophosphamide (TC relapse schedule), Cyclophosphamide plus Topotecan plus Vincristine, or clinical trial enrollment. Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "peds-neuroblastoma-dit",
+        "peds-neuroblastoma-dinutuximab"
+      ],
+      "regimenSummary": "Dinutuximab + Irinotecan + Temozolomide (D-I/T) or 131I-MIBG"
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_risk",
+      "from": "n_workup",
+      "to": "n_risk_strat",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional",
+      "fromNodeId": "n_workup",
+      "toNodeId": "n_risk_strat",
+      "triggerOptionId": "continue"
+    },
+    {
+      "id": "l_risk_low",
+      "from": "n_risk_strat",
+      "to": "n_low_risk_tx",
+      "fromOptions": [
+        "low_risk"
+      ],
+      "linkCategory": "conditional",
+      "fromNodeId": "n_risk_strat",
+      "toNodeId": "n_low_risk_tx",
+      "triggerOptionId": "low_risk"
+    },
+    {
+      "id": "l_risk_int",
+      "from": "n_risk_strat",
+      "to": "n_int_risk_tx",
+      "fromOptions": [
+        "int_risk"
+      ],
+      "linkCategory": "conditional",
+      "fromNodeId": "n_risk_strat",
+      "toNodeId": "n_int_risk_tx",
+      "triggerOptionId": "int_risk"
+    },
+    {
+      "id": "l_risk_high",
+      "from": "n_risk_strat",
+      "to": "n_high_risk_tx",
+      "fromOptions": [
+        "high_risk"
+      ],
+      "linkCategory": "conditional",
+      "fromNodeId": "n_risk_strat",
+      "toNodeId": "n_high_risk_tx",
+      "triggerOptionId": "high_risk"
+    },
+    {
+      "id": "l_risk_relapsed",
+      "from": "n_risk_strat",
+      "to": "n_relapsed_tx",
+      "fromOptions": [
+        "relapsed"
+      ],
+      "linkCategory": "conditional",
+      "fromNodeId": "n_risk_strat",
+      "toNodeId": "n_relapsed_tx",
+      "triggerOptionId": "relapsed"
+    }
+  ],
+  "protocolRefs": [
+    "peds-neuroblastoma-lowrisk",
+    "peds-neuroblastoma-anbl0531",
+    "peds-neuroblastoma-dinutuximab",
+    "ped-neuroblastoma-highrisk",
+    "peds-neuroblastoma-dit"
+  ]
+}

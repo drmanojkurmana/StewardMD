@@ -55,6 +55,10 @@
   function ask(prompt, opts) {
     opts = opts || {};
     if (!on()) return Promise.reject(new Error("ai_off"));
+    // Answer-engine policy (2026-09-11): a raw fetch to an AI endpoint must still honour the
+    // Local/KB-only engine. (The server has no "maik" segment today, so this call 404s; the gate
+    // is here so a future backend cannot turn it into an ungated cloud call.)
+    try { if (G.SMD_MAIK_ENGINE && G.SMD_MAIK_ENGINE.cloudAllowed && !G.SMD_MAIK_ENGINE.cloudAllowed()) return Promise.reject(new Error("local-engine")); } catch (e) {}
     var ctrl = null;
     try { ctrl = new AbortController(); } catch (e) {}
     var timer = setTimeout(function () { try { ctrl && ctrl.abort(); } catch (e) {} }, opts.timeoutMs || 12000);

@@ -13,9 +13,9 @@
  *                                       "precondition" when a currentDocument guard fails
  *                                       (this is how single-use activation stays exactly-once).
  *   • wCreate / wUpdate / wDelete     → build the write objects for fsCommit.
- *   • fsQuery(env, collection, opts)  → runQuery with an optional single-field equality
- *                                       filter (uses Firestore's automatic single-field index,
- *                                       so NO composite index is ever required).
+ *   • fsQuery(env, collection, opts)  → runQuery with optional equality filters (served by
+ *                                       Firestore's automatic single-field indexes, merged when
+ *                                       there are several, so NO composite index is required).
  *
  * Values use a minimal typed encoding (string / integer / double / bool / null). Timestamps
  * are stored as integer ms-epoch to avoid RFC3339 formatting — the admin renders via Date(ms).
@@ -78,6 +78,28 @@ export async function fsGet(env, path) {
   return { id: docId(d.name), name: d.name, fields: decodeFields(d.fields), updateTime: d.updateTime };
 }
 
+// GET many documents in ONE request (documents:batchGet). Returns a Map path -> decoded doc, or null
+// for a path that does not exist. Throws on a failed request: a failed read is never "all missing".
+export async function fsBatchGet(env, paths) {
+  const list = (paths || []).map((p) => String(p).replace(/^\/+/, ""));
+  const out = new Map(list.map((p) => [p, null]));
+  if (!list.length) return out;
+  const tok = await fsToken(env);
+  const res = await fetch(fsUrl(env, ":batchGet"), {
+    method: "POST",
+    headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json" },
+    body: JSON.stringify({ documents: list.map((p) => fsDocName(env, p)) }),
+  });
+  if (!res.ok) throw Object.assign(new Error("fs_batch_get_failed"), { code: "fs_batch_get", status: res.status, detail: (await res.text()).slice(0, 300) });
+  const root = fsRoot(env) + "/";
+  for (const r of (await res.json()) || []) {
+    if (r && r.found && String(r.found.name).startsWith(root)) {
+      out.set(r.found.name.slice(root.length), { id: docId(r.found.name), name: r.found.name, fields: decodeFields(r.found.fields), updateTime: r.found.updateTime });
+    }
+  }
+  return out;
+}
+
 // ---- write builders --------------------------------------------------------------------
 // Create-if-absent: the whole doc is written only when it does not already exist. Used for
 // code generation (uniqueness) and the activation record.
@@ -129,12 +151,20 @@ export async function fsQuery(env, collectionId, opts) {
   opts = opts || {};
   const tok = await fsToken(env);
   const structuredQuery = { from: [{ collectionId }] };
-  if (opts.where && opts.where.field) {
-    structuredQuery.where = {
-      fieldFilter: { field: { fieldPath: opts.where.field }, op: "EQUAL", value: encodeValue(opts.where.value) },
-    };
-  }
+  /* opts.where is one { field, value } or an array of them, ANDed. Equality-only filters are served by merging the
+   * automatic single-field indexes, so several of them still need no composite index (Firestore "Index overview":
+   * compound equality queries run on single-field indexes). Ordering by anything but __name__ would need one. */
+  const eqs = (Array.isArray(opts.where) ? opts.where : [opts.where]).filter((w) => w && w.field)
+    .map((w) => ({ fieldFilter: { field: { fieldPath: w.field }, op: "EQUAL", value: encodeValue(w.value) } }));
+  if (eqs.length === 1) structuredQuery.where = eqs[0];
+  else if (eqs.length > 1) structuredQuery.where = { compositeFilter: { op: "AND", filters: eqs } };
   if (opts.limit) structuredQuery.limit = opts.limit;
+  /* Paging: opts.startAfter is the full `name` of the last document of the previous page. Ordered by document name,
+   * which an equality filter can use without a composite index. */
+  if (opts.startAfter) {
+    structuredQuery.orderBy = [{ field: { fieldPath: "__name__" }, direction: "ASCENDING" }];
+    structuredQuery.startAt = { values: [{ referenceValue: opts.startAfter }], before: false };
+  } else if (opts.orderByName) structuredQuery.orderBy = [{ field: { fieldPath: "__name__" }, direction: "ASCENDING" }];
   const res = await fetch(fsUrl(env, ":runQuery"), {
     method: "POST",
     headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json" },
@@ -143,6 +173,6 @@ export async function fsQuery(env, collectionId, opts) {
   if (!res.ok) throw Object.assign(new Error("fs_query_failed"), { code: "fs_query", status: res.status, detail: (await res.text()).slice(0, 300) });
   const rows = await res.json();
   const out = [];
-  (rows || []).forEach((r) => { if (r && r.document) out.push({ id: docId(r.document.name), name: r.document.name, fields: decodeFields(r.document.fields), updateTime: r.document.updateTime }); });
+  (rows || []).forEach((r) => { if (r && r.document) out.push({ id: docId(r.document.name), name: r.document.name, fields: decodeFields(r.document.fields), updateTime: r.document.updateTime, createTime: r.document.createTime }); });
   return out;
 }

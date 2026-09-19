@@ -763,3 +763,151 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
    reverts itself. 1300 stays far below the prescription pad (16000).
    The identical bug was found and fixed in SURGX on 2026-08-25. */
 html.cx-lock .mc-overlay { z-index: 1300; }
+
+#clinixRoot .cx-input {
+  transition: border-color var(--cx-dur, .2s) var(--cx-ease, ease), box-shadow var(--cx-dur, .2s) var(--cx-ease, ease);
+}
+#clinixRoot .cx-input:focus {
+  outline: none; border-color: var(--cx-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25);
+}
+
+/* ── Bedside Simulation Cockpit & Vitals Monitor ───────────────────────────── */
+
+#clinixRoot .cx-vitals-monitor {
+  display: flex; gap: 8px; overflow-x: auto; padding: 10px 14px;
+  background: var(--cx-surface-2); border-bottom: 1px solid var(--cx-line);
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+#clinixRoot .cx-vitals-monitor::-webkit-scrollbar { display: none; }
+
+#clinixRoot .cx-vital-pill {
+  flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;
+  padding: 6px 10px; background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r-ctl); min-width: 62px; text-align: center;
+}
+#clinixRoot .cx-vital-label { font-size: 10px; font-weight: 700; color: var(--cx-muted); letter-spacing: .04em; text-transform: uppercase; }
+#clinixRoot .cx-vital-val { font-size: 14px; font-weight: 700; color: var(--cx-ink); font-variant-numeric: tabular-nums; }
+#clinixRoot .cx-vital-val--alert { color: var(--cx-bad); }
+#clinixRoot .cx-vital-val--warn { color: var(--cx-warn); }
+
+#clinixRoot .cx-maneuver-bar {
+  display: flex; gap: 6px; overflow-x: auto; padding: 8px 14px;
+  background: var(--cx-surface); border-bottom: 1px solid var(--cx-line);
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+#clinixRoot .cx-maneuver-bar::-webkit-scrollbar { display: none; }
+#clinixRoot .cx-maneuver-btn {
+  flex: 0 0 auto; padding: 5px 11px; font-size: 11.5px; font-weight: 600;
+  border-radius: 14px; border: 1px solid var(--cx-line); background: var(--cx-surface-2);
+  color: var(--cx-muted); cursor: pointer; transition: all .15s ease;
+}
+#clinixRoot .cx-maneuver-btn--on {
+  background: var(--cx-primary); color: #fff; border-color: transparent;
+}
+
+#clinixRoot .cx-card-diag {
+  margin: 10px 0; padding: 12px 14px; background: var(--cx-surface);
+  border: 1px solid var(--cx-line); border-radius: var(--cx-r);
+}
+#clinixRoot .cx-card-diag-title {
+  display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--cx-ink); margin-bottom: 6px;
+}
+#clinixRoot .cx-card-diag-result { font-size: 13.5px; line-height: 1.5; color: var(--cx-ink); }
+#clinixRoot .cx-card-diag-note { margin-top: 6px; font-size: 12px; color: var(--cx-muted); line-height: 1.45; }
+
+/* ── Blind Examination & Synthesis Card ────────────────────────────────────── */
+
+#clinixRoot .cx-blind-banner {
+  display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+  background: var(--cx-teach-soft); border-bottom: 1px solid var(--cx-teach);
+  color: var(--cx-teach); font-size: 13px; font-weight: 600;
+}
+#clinixRoot .cx-synthesis-box {
+  margin: 14px 0; padding: 16px; background: var(--cx-surface);
+  border: 1px solid var(--cx-line); border-radius: var(--cx-r);
+}
+#clinixRoot .cx-synth-section { margin-bottom: 12px; }
+#clinixRoot .cx-synth-h { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--cx-muted); margin-bottom: 4px; }
+#clinixRoot .cx-synth-list { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.5; color: var(--cx-ink); }
+
+/* ── Physiology Sandbox ────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-physio-ctrl {
+  display: flex; flex-direction: column; gap: 4px; margin: 12px 0;
+}
+#clinixRoot .cx-physio-slider-row {
+  display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+}
+#clinixRoot .cx-physio-slider-val { font-weight: 700; color: var(--cx-primary); }
+#clinixRoot .cx-physio-range {
+  width: 100%; -webkit-appearance: none; height: 6px; border-radius: 3px; background: var(--cx-line); outline: none; margin: 6px 0;
+}
+#clinixRoot .cx-physio-range::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--cx-primary); cursor: pointer;
+}
+
+/* ── 10x Pedagogical Enrichment: Universal Bedside Cards ────────────────── */
+
+#clinixRoot .cx-teach-analogy {
+  margin: 14px 0; padding: 14px 16px; border-radius: var(--cx-r);
+  background: rgba(245, 158, 11, 0.08); border: 1.5px solid rgba(245, 158, 11, 0.35);
+  display: flex; flex-direction: column; gap: 6px;
+}
+#clinixRoot .cx-teach-analogy-h {
+  display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: #d97706;
+}
+#clinixRoot .cx-teach-analogy-p {
+  margin: 0; font-size: 14px; line-height: 1.55; color: var(--cx-ink); font-style: italic;
+}
+
+#clinixRoot .cx-teach-sensory {
+  margin: 14px 0; display: grid; grid-template-columns: 1fr; gap: 10px;
+}
+@media (min-width: 600px) {
+  #clinixRoot .cx-teach-sensory { grid-template-columns: 1fr 1fr; }
+}
+#clinixRoot .cx-sensory-box {
+  padding: 12px 14px; border-radius: var(--cx-r); border: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-sensory-norm {
+  background: rgba(16, 185, 129, 0.07); border-color: rgba(16, 185, 129, 0.3);
+}
+#clinixRoot .cx-sensory-norm .cx-sensory-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; color: #059669; margin-bottom: 4px;
+}
+#clinixRoot .cx-sensory-abnorm {
+  background: rgba(239, 68, 68, 0.07); border-color: rgba(239, 68, 68, 0.3);
+}
+#clinixRoot .cx-sensory-abnorm .cx-sensory-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; color: #dc2626; margin-bottom: 4px;
+}
+#clinixRoot .cx-sensory-b {
+  font-size: 13px; line-height: 1.45; color: var(--cx-ink); margin: 0;
+}
+
+#clinixRoot .cx-teach-traps {
+  margin: 14px 0; padding: 14px 16px; border-radius: var(--cx-r);
+  background: rgba(225, 29, 72, 0.07); border-left: 4px solid #e11d48;
+}
+#clinixRoot .cx-teach-traps-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: #be123c; margin-bottom: 6px;
+}
+#clinixRoot .cx-teach-traps-list {
+  margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: var(--cx-ink);
+}
+
+#clinixRoot .cx-teach-technique {
+  margin: 14px 0; padding: 14px 16px; border-radius: var(--cx-r);
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-teach-technique-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--cx-primary); margin-bottom: 8px;
+}
+#clinixRoot .cx-teach-technique-steps {
+  margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.55; color: var(--cx-ink);
+}

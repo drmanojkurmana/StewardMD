@@ -1041,35 +1041,38 @@
     root.innerHTML =
       '<div class="dx-top">' +
         '<button class="dx-back" id="dxClose" aria-label="Close reasoning">‹ Close</button>' +
-        '<div class="dx-title">Clinical Reasoning</div>' +
-        '<button class="dx-reset" id="dxReset" title="Start over">Reset</button>' +
+        '<div class="dx-title">Dx My Patient<span class="dx-brand-sub">Guided clinical consult</span></div>' +
+        '<button class="dx-reset" id="dxReset" title="Clear this case">Clear</button>' +
       '</div>' +
+      '<nav class="dx-work-nav" aria-label="Reasoning workspace"><button type="button" data-dx-jump="dxIntake">Findings <span id="dxFindingCount">0</span></button><button type="button" data-dx-jump="dxReview">Review differential <span aria-hidden="true">↓</span></button></nav>' +
       '<div class="dx-body">' +
-        '<div class="dx-discl">For clinical decision support only — not a diagnosis. The treating physician remains responsible for all clinical decisions; always verify against the patient.</div>' +
+        '<section class="dx-intake" id="dxIntake" aria-labelledby="dxIntakeTitle"><div class="dx-section-intro"><span class="dx-eyebrow">GUIDED CONSULT</span><h2 id="dxIntakeTitle">One useful question<br>at a time.</h2><p>Start with the presentation. Add confirmed findings, then explore what else to check.</p></div>' +
         '<div id="dxImported" class="dx-imported"></div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
-        '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">' + rIco("flask") + ' Advanced workspace ▾</button>' +
-        '<div id="dxAdv" class="dx-adv" style="display:none"></div>' +
         '<div class="dx-find-wrap">' +
           '<button id="dxSpeak" class="dx-speak" type="button" aria-label="Speak about your patient — MaiK Scribe">' + rIco("mic") + ' Speak about your patient <span class="dx-speak-tag">MaiK Scribe</span></button>' +
           '<div class="dx-search-box">' +
-            '<input id="dxSearch" class="dx-search" type="text" placeholder="Search findings (e.g. pap → Papilledema, dys → Dysuria/Dysphagia)…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list">' +
+            '<label class="dx-field-label" for="dxSearch">Find a symptom, sign or result</label><input id="dxSearch" class="dx-search" type="text" placeholder="Search findings, e.g. fever or dysuria" autocomplete="off" role="combobox" aria-controls="dxSearchDrop" aria-expanded="false" aria-autocomplete="list">' +
             '<div id="dxSearchDrop" class="dx-search-drop" role="listbox" style="display:none"></div>' +
           '</div>' +
-          '<div id="dxSel" class="dx-selected"></div>' +
           '<div id="dxSuggest" class="dx-suggest"></div>' +
-          '<div id="dxPicker" class="dx-picker"></div>' +
-        '</div>' +
+          '<div class="dx-field-label">Added to this case <span class="dx-inline-hint">Tap a finding to remove it</span></div><div id="dxSel" class="dx-selected"></div>' +
+          '<details class="dx-browse"><summary>Browse all findings by system</summary><div id="dxPicker" class="dx-picker"></div></details>' +
+        '</div><button id="dxAdvToggle" class="dx-adv-toggle" type="button">' + rIco("flask") + ' Case notes &amp; tools ▾</button><div id="dxAdv" class="dx-adv" style="display:none"></div></section>' +
+        '<section class="dx-review" id="dxReview" aria-labelledby="dxReviewTitle"><div class="dx-review-heading"><div><span class="dx-eyebrow">REVIEW &amp; REFINE</span><h2 id="dxReviewTitle">Your differential</h2></div><span class="dx-update-label">Updates with your findings</span></div><p class="dx-score-note">Scores rank the fit to entered findings. They are not calibrated disease probabilities.</p>' +
         '<div id="dxGate" class="dx-gate"></div>' +
         '<div id="dxPolicy" class="dx-policy-wrap"></div>' +
         '<div id="dxChanged" class="dx-changed" style="display:none"></div>' +
         '<div id="dxCompare" class="dx-compare"></div>' +
         '<div id="dxDom" class="dx-dom-wrap"></div>' +
         '<div id="dxCols" class="dx-cols"></div>' +
+        '<div class="dx-discl">Educational reasoning support, not a diagnosis. Verify findings, evidence and next steps against the patient and local guidance.</div></section>' +
       '</div>';
     document.body.appendChild(root);
     root.querySelector("#dxClose").addEventListener("click", close);
-    root.querySelector("#dxReset").addEventListener("click", resetAll);
+    root.querySelector("#dxReset").addEventListener("click", function () { if (!Object.keys(S.f).length || window.confirm("Clear the findings in this working case?")) resetAll(); });
+    root.querySelectorAll("[data-dx-jump]").forEach(function (b) { b.addEventListener("click", function () { showConsultPane(b.getAttribute("data-dx-jump")); }); });
+    root.addEventListener("keydown", function (e) { var h = e.target.closest && e.target.closest(".dx-row-head"); if (h && e.target === h && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); h.click(); } });
     root.querySelector("#dxAdvToggle").addEventListener("click", function () { S.advOpen = !S.advOpen; renderAdv(); });
     var dxSp = root.querySelector("#dxSpeak");
     if (dxSp) dxSp.addEventListener("click", function () {
@@ -1108,7 +1111,9 @@
   function renderSelected() {
     var el = root.querySelector("#dxSel");
     var keys = Object.keys(S.f);
-    if (!keys.length) { el.innerHTML = '<span class="dx-sel-empty">No findings yet — tap below to add.</span>'; return; }
+    root.classList.toggle("dx-has-case", keys.length > 0);
+    var count = root.querySelector("#dxFindingCount"); if (count) count.textContent = keys.length;
+    if (!keys.length) { el.innerHTML = '<span class="dx-sel-empty">No findings added yet. Search above or browse the systems below.</span>'; return; }
     // red-flag review alert for extracted emergency findings (from the NLP layer), still selected
     var rf = ((S._lastExtract && S._lastExtract.redFlags) || []).filter(function (k) { return S.f[k]; });
     var banner = rf.length ? '<div class="dx-redflag">' + rIco("warn") + ' Urgent red flags for review: ' + rf.map(function (k) { return esc(lbl(k)); }).join(" · ") + '</div>' : "";
@@ -1117,7 +1122,7 @@
       banner += '<div class="dx-redflag">' + rIco("warn") + ' Altered sensorium with a focal / seizure / pupillary sign — check glucose now and obtain urgent neuroimaging (CT/MRI) to exclude a structural or vascular emergency before diagnosing a primary infection.</div>';
     }
     el.innerHTML = banner + keys.map(function (k) {
-      return '<button class="dx-sel-chip" data-f="' + k + '">' + esc(lbl(k)) + ' ✕</button>';
+      return '<button class="dx-sel-chip" aria-label="Remove ' + esc(lbl(k)) + '" data-f="' + k + '">' + esc(lbl(k)) + ' ✕</button>';
     }).join("");
     el.querySelectorAll(".dx-sel-chip").forEach(function (b) {
       b.addEventListener("click", function () { delete S.f[b.getAttribute("data-f")]; recompute(); });
@@ -1248,13 +1253,25 @@
     var el = root.querySelector("#dxSuggest");
     if (!el) return;
     if (!Object.keys(S.f).length) { el.innerHTML = ""; return; }
-    var sug = suggestionKeys(d);
-    if (!sug.length) { el.innerHTML = ""; return; }
-    el.innerHTML = '<div class="dx-sugg-h">💡 Suggested next findings</div><div class="dx-chips">' +
-      sug.map(function (k) { return '<button class="dx-chip sug" data-f="' + k + '">+ ' + esc(LABEL[k]) + '</button>'; }).join("") + '</div>';
-    el.querySelectorAll(".dx-chip[data-f]").forEach(function (b) {
-      b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); });
-    });
+    var skipped = S.consultSkipped || [];
+    var sug = suggestionKeys(d).filter(function (k) { return skipped.indexOf(k) < 0; });
+    if (!sug.length) {
+      el.innerHTML = '<div class="dx-sugg-h">Ready to review?</div><p class="dx-suggest-note">No further suggestions in this set. You can still search for findings or review the differential.</p>' + (skipped.length ? '<button class="dx-chip" id="dxRevisit">Revisit skipped questions</button>' : '');
+      var revisit = el.querySelector("#dxRevisit"); if (revisit) revisit.onclick = function () { S.consultSkipped = []; renderSuggest(); };
+      return;
+    }
+    var key = sug[0];
+    el.innerHTML = '<div class="dx-eyebrow">CLARIFY THE CLINICAL PICTURE</div><h3 class="dx-question">Is this finding present?</h3><div class="dx-question-finding">' + esc(LABEL[key]) + '</div><p class="dx-suggest-note">Suggested from missing findings across the current differential. Verify before adding.</p><div class="dx-answer-row"><button class="dx-chip" data-confirm="' + key + '">Present · add</button><button class="dx-chip" id="dxSkipQuestion">Skip for now</button></div><p class="dx-question-foot">Skipping does not record absence or change the ranking.</p>';
+    el.querySelector("[data-confirm]").onclick = function () { addFinding(key); };
+    el.querySelector("#dxSkipQuestion").onclick = function () { S.consultSkipped = skipped.concat([key]); renderSuggest(); var next = el.querySelector("[data-confirm], #dxRevisit"); if (next) next.focus({ preventScroll: true }); };
+  }
+
+  function showConsultPane(id) {
+    if (!root) return;
+    root.querySelector("#dxIntake").hidden = id !== "dxIntake";
+    root.querySelector("#dxReview").hidden = id !== "dxReview";
+    root.querySelectorAll("[data-dx-jump]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-dx-jump") === id)); });
+    root.querySelector(".dx-body").scrollTop = 0;
   }
 
   /* ---- Advanced workspace: free-text, sessions, export/print, timeline ---- */
@@ -1477,12 +1494,13 @@
   }
   function renderAdv() {
     var el = root.querySelector("#dxAdv"); if (!el) return;
+    var previousNote = el.querySelector("#dxFreeText"); if (previousNote) S.noteDraft = previousNote.value;
     el.style.display = S.advOpen ? "" : "none";
-    var tog = root.querySelector("#dxAdvToggle"); if (tog) tog.innerHTML = rIco("flask") + " Advanced workspace " + (S.advOpen ? "▲" : "▾");
+    var tog = root.querySelector("#dxAdvToggle"); if (tog) { tog.innerHTML = rIco("flask") + " Case notes & tools " + (S.advOpen ? "▲" : "▾"); tog.setAttribute("aria-expanded", String(!!S.advOpen)); tog.setAttribute("aria-controls", "dxAdv"); }
     if (!S.advOpen) return;
     var sessions = loadSessions();
     el.innerHTML =
-      '<textarea id="dxFreeText" class="dx-free" rows="3" placeholder="Describe the case in plain text — e.g. 65M, 2 days fever, neck stiffness, photophobia, drowsy…"></textarea>' +
+      '<label class="dx-field-label" for="dxFreeText">Clinical summary</label><textarea id="dxFreeText" class="dx-free" rows="3" placeholder="Age, symptom onset, relevant history and examination. Avoid names and identifiers.">' + esc(S.noteDraft || "") + '</textarea>' +
       '<div class="dx-adv-row">' +
         '<button class="dx-adv-btn primary" id="dxExtract">' + rIco("spark") + ' Extract findings</button>' +
         '<button class="dx-adv-btn" id="dxSaveSess">' + rIco("save") + ' Save session</button>' +
@@ -1571,7 +1589,7 @@
   function medRe() { if (!_medRe) _medRe = new RegExp(MED_RULES.map(function (r) { return "(" + r.re + ")"; }).join("|"), "gi"); return _medRe; }
   function medFormat(text) {
     if (text == null) return "";
-    var s = esc(String(text));
+    var s = esc(stripCite(String(text)));
     return s.replace(medRe(), function () {
       var a = arguments;                       // [match, g1..gN, offset, string]
       for (var i = 0; i < MED_RULES.length; i++) if (a[i + 1] != null) {
@@ -1600,6 +1618,8 @@
   // like "(>45 mg/dL)" or "(meningoencephalitis)" are preserved.
   function stripCite(t) {
     return String(t == null ? "" : t)
+      .replace(/\s*\((?:pp?\.?\s*\d|Harrison)[^)]*\)/gi, "")
+      .replace(/\b(?:pages?\s+|pp?\.\s*)\d+(?:\s*[–-]\s*\d+)?(?:\s*,\s*(?:pp?\.\s*)?\d+(?:\s*[–-]\s*\d+)?)*\b/gi, "")
       .replace(/\s*\((?:Harrison[^)]*|pp?\.?\s*[\dIVXLC][\d,\s–\-]*)\)/g, "")
       .replace(/\s*\bHarrison(?:[’']s)?\s*22e(?:\s*pp?\.?\s*[\d,\s–\-]+)?/g, "")
       .replace(/\s*\bpp?\.\s*\d{2,4}(?:[–\-]\d{2,4})?(?:\s*,\s*\d{2,4}(?:[–\-]\d{2,4})?)*/g, "") // bare "p.818" / "pp. 1118-1125" (dot required → p.o./p53 safe)
@@ -1669,8 +1689,7 @@
     if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(e.severityClassification)) + '</p>';
     if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + medFormat(stripCite(e.prognosis)) + '</p>';
     if (cp) sections.push({ ic: rIco("trend"), title: "Course & prognosis", html: cp });
-    // Original Reference — VERBATIM detail with inline page citations preserved
-    // (distinct from the de-cited summary sections above; citations also in footer).
+    // Expanded clinical detail uses the same citation-free presentation as the summary.
     var rawUl = function (arr) { return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : ""; };
     var full = "";
     full += evSub("Clinical pearls", rawUl(pearls));
@@ -1683,16 +1702,22 @@
     if (e.severityClassification) full += '<div class="ev-subh">Severity</div><p>' + medFormat(e.severityClassification) + '</p>';
     if (e.prognosis) full += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
     if (!pearls.length && !sections.length) return null;
-    var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Standard internal-medicine reference";
-    var pages = evPages(e);
+    function referenceTitle(value) {
+      return String(value || "").replace(/Harrison(?:[’']s)?(?:\s+Principles of Internal Medicine)?/gi, "Harrison's Principles of Internal Medicine")
+        .replace(/\s*[,;·–-]?\s*\(?\d+(?:e\b|(?:st|nd|rd|th)\s+ed(?:ition)?\.?)[\s\S]*$/i, "")
+        .replace(/\s*\(?\bpp?\.\s*\d[\s\S]*$/i, "").replace(/[,;\s]+$/, "").trim();
+    }
+    var srcName = referenceTitle(e.source);
+    var references = (e.references || []).map(referenceTitle).filter(function (name, i, all) { return name && all.indexOf(name) === i; });
+    if (!references.length && srcName) references.push(srcName);
+    references = references.slice(0, 3);
     return {
       _id: id, srcKey: "harrison", icon: rIco("book"),
       sourceName: srcName,
-      edition: "22e", tag: "Primary Reference",
+      edition: "", tag: "",
       pages: "",                              // not in the header — references live in the footer
       pearls: pearls, sections: sections, fullHTML: full,
-      cite: '<strong>' + rIco("book") + ' ' + esc(srcName) + ' (22e)</strong>' + (pages.length ? ' — pp. ' + pages.join(", ") : "") +
-        '<br>Reference knowledge paraphrased &amp; page-cited. Not a treatment regimen — verify against full guidelines before acting.'
+      cite: references.length ? '<strong>Reference:</strong>' + references.map(function (name) { return '<div>' + esc(name) + '</div>'; }).join("") : ""
     };
   }
   /* FLAGSHIP CLINICIAN-CURATED BRIEFINGS — hand-authored high-yield blocks for
@@ -1951,6 +1976,9 @@
   function evBodyHTML(src) {
     // the clinician briefing belongs to the disease — show it once, in the primary (Harrison) panel.
     var h = '<div class="ev-body">' + (src.srcKey === "harrison" ? evBriefing(src._id) : "");
+    if (src.srcKey === "harrison" && src.fullHTML) {
+      return h + '<div class="ev-full">' + src.fullHTML + '</div><div class="ev-cite">' + src.cite + '</div></div>';
+    }
     if (src.pearls && src.pearls.length) {
       h += '<div class="ev-pearls"><div class="ev-pearls-h"><span class="ev-tick"></span>' + esc(src.pearlsLabel || "Key clinical pearls") + '</div>' +
         src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + rIco(k.ic) + '</span><div class="ev-pearl-bd"><span class="ev-pearl-tag ev-tag--' + k.a + '">' + k.label + '</span>' + medFormat(stripCite(p)) + '</div></div>'; }).join("") +
@@ -1963,7 +1991,7 @@
     });
     if (src.fullHTML) {
       h += '<div class="ev-sec ev-full"><button type="button" class="ev-sec-h">' +
-        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Original Reference</span><span class="ev-chev">⌄</span></button>' +
+        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Clinical details</span><span class="ev-chev">⌄</span></button>' +
         '<div class="ev-sec-p"><div class="ev-sec-in">' + src.fullHTML + '</div></div></div>';
     }
     h += '<div class="ev-cite">' + src.cite + '</div></div>';
@@ -1973,10 +2001,10 @@
     if (!src) return "";
     opts = opts || {};
     var open = !!opts.expanded;
-    var sub = [src.edition, src.tag, src.pages].filter(Boolean).join(" · ");
+    var sub = src.srcKey === "harrison" ? "Clinical details and key points" : [src.edition, src.tag].filter(Boolean).join(" · ");
     return '<div class="ev-wrap' + (open ? " ev-open" : "") + '" data-ev="' + src._id + '" data-ev-src="' + (src.srcKey || "harrison") + '">' +
-      '<button type="button" class="ev-top"><span class="ev-top-ic">' + src.icon + '</span>' +
-        '<span class="ev-top-main"><span class="ev-top-title">' + esc(src.sourceName) + '</span>' +
+      '<button type="button" class="ev-top" aria-expanded="' + open + '"><span class="ev-top-ic">' + src.icon + '</span>' +
+        '<span class="ev-top-main"><span class="ev-top-title">' + (src.srcKey === "harrison" ? "Know more" : esc(src.sourceName)) + '</span>' +
         (sub ? '<span class="ev-top-sub">' + esc(sub) + '</span>' : '') + '</span>' +
         '<span class="ev-chev ev-chev-top">⌄</span></button>' +
       '<div class="ev-panel"><div class="ev-panel-in">' + (open ? evBodyHTML(src) : '') + '</div></div></div>';
@@ -1999,7 +2027,7 @@
             if (src) { src.srcKey = k; pin.innerHTML = evBodyHTML(src); }
           } catch (e) {}
         }
-        wrap.classList.toggle("ev-open"); return;
+        wrap.classList.toggle("ev-open"); top.setAttribute("aria-expanded", String(wrap.classList.contains("ev-open"))); return;
       }
       var sh = t.closest(".ev-sec-h");
       if (sh && sh.parentNode) sh.parentNode.classList.toggle("ev-open");
@@ -2207,7 +2235,7 @@
       pearls: g.recs || [], sections: sections, fullHTML: "",
       cite: '<strong>' + rIco("book") + ' ' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</strong>' +
         (g.url ? '<br><a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">' + esc(g.url) + '</a>' : '') +
-        '<br>Key recommendations paraphrased for decision support — consult the full guideline before acting.'
+        '<br>Consult the full guideline before acting.'
     };
   }
   function evSanfordSrc(id) {
@@ -2255,15 +2283,15 @@
     if (p != null && p !== r.score) delta = r.score > p ? '<span class="dx-up">▲</span>' : '<span class="dx-down">▼</span>';
     else if (p == null && S.started && Object.keys(S.prev).length) delta = '<span class="dx-new">NEW</span>';
     var head =
-      '<div class="dx-row-head" data-id="' + r.id + '">' +
+      '<div class="dx-row-head" role="button" tabindex="0" aria-expanded="' + (!!open) + '" aria-label="Review ' + esc(r.name) + '" data-id="' + r.id + '">' +
         '<div class="dx-rank ' + cls + '">' + rank + '</div>' +
         '<div class="dx-row-main">' +
           '<div class="dx-row-name">' + esc(r.name) + ' ' + delta + (r.matched ? ' <span class="dx-met">criteria met</span>' : '') + (!r.inf && MIMIC[r.id] ? ' <span class="dx-mimic">↔ mimics ' + esc(MIMIC[r.id]) + '</span>' : '') + '</div>' +
           '<div class="dx-bar ' + cls + '"><span style="width:' + r.score + '%"></span></div>' +
           '<div class="dx-row-sys">' + esc(r.system) + '</div>' +
         '</div>' +
-        '<button class="dx-cmp' + (S.compare.indexOf(r.id) >= 0 ? " on" : "") + '" data-cmp="' + r.id + '" title="Add to compare">⚖</button>' +
-        '<div class="dx-score">' + r.score + '<small>/100</small></div>' +
+        '<button class="dx-cmp' + (S.compare.indexOf(r.id) >= 0 ? " on" : "") + '" aria-label="Compare ' + esc(r.name) + '" aria-pressed="' + (S.compare.indexOf(r.id) >= 0) + '" data-cmp="' + r.id + '" title="Add to compare">⚖</button>' +
+        '<div class="dx-score" aria-label="Ranking score ' + r.score + ' out of 100">' + r.score + '<small>/100</small></div>' +
       '</div>';
     if (!open) return '<div class="dx-card ' + cls + '">' + head + '</div>';
     function fl(keys, c, sign) { return keys.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") || '<span class="dx-none">—</span>'; }
@@ -2275,7 +2303,7 @@
       if (S.lastAddedKey && r.supporting && r.supporting.indexOf(S.lastAddedKey) >= 0) eff = ' · <span class="up">' + esc(S.lastAdded) + ' supports this</span>';
       else if (S.lastAddedKey && r.contra && r.contra.indexOf(S.lastAddedKey) >= 0) eff = ' · <span class="down">' + esc(S.lastAdded) + ' argues against this</span>';
       else if (S.lastAdded) eff = ' · after adding ' + esc(S.lastAdded);
-      confLine = '<div class="dx-conf">Confidence ' + pv + ' → ' + r.score + eff + '</div>';
+      confLine = '<div class="dx-conf">Ranking score ' + pv + ' → ' + r.score + eff + '</div>';
     }
     // Why-not-higher: name the actual competitor ranked immediately above (the
     // differential a consultant voices), then the contradictory / would-strengthen findings.
@@ -2544,8 +2572,8 @@
     }
     if (!ready) {
       gateEl.innerHTML = ""; polEl.innerHTML = ""; chEl.style.display = "none"; if (domEl) domEl.innerHTML = "";
-      colEl.innerHTML = '<div class="dx-threshold">🧩 Please add more clinical findings to improve diagnostic accuracy.' +
-        '<span>Add at least 3 findings (or one highly specific finding) to generate a reliable differential — use the suggestions above.</span></div>';
+      colEl.innerHTML = '<div class="dx-threshold">More clinical context is needed.' +
+        '<span>Add at least 3 findings, a highly specific finding, or findings that meet syndrome criteria. The differential is provisional and should be reviewed clinically.</span></div>';
       S.prev = {}; return;
     }
     if (domEl) {
@@ -2668,6 +2696,7 @@
     var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId && window.KB_ENRICHMENT.byId[r.id]) || null;
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
+    el.className = "dx-mgmt";
     var tx = (m && m.tx && m.tx.length) ? m.tx : ((r.mgmt && r.mgmt.length) ? r.mgmt : ((H && H.management && H.management.length) ? H.management : null));
     var ix = (m && m.ix && m.ix.length) ? m.ix : (r.inv && r.inv.length ? r.inv : ((H && H.additionalInvestigations) || []));
     var red = (r.red && r.red.length) ? r.red : ((H && H.redFlags) || []);
@@ -2685,7 +2714,6 @@
         (m && m.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(m.dispo) + '</p>' : '') +
         (red && red.length ? '<div class="dx-mgmt-sec red">Red flags</div><ul class="dx-mgmt-ul">' + red.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
         (m && m.src ? '<div class="dx-mgmt-src">Source: ' + esc(m.src) + '</div>' : '') +
-        '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only — provisional and aligned to standard guidelines / Harrison\'s 22e. Verify against full guidelines, local protocol and current prescribing references (doses, contraindications, renal/hepatic adjustment, pregnancy) before acting.</div>' +
       '</div>';
     el.innerHTML = html;
     el.classList.add("on");
@@ -2712,6 +2740,7 @@
   // current differential) — reuses the #dxMgmt panel. Shows the Harrison reference
   // and an action to open the full stewardship/management page.
   function openDiseaseRef(id, opts) {
+    kbSaveList("recent", [id].concat(kbReadList("recent").filter(function (x) { return x !== id; })).slice(0, 12));
     try { if (window.SMD_KU) SMD_KU.emit("read", id); } catch (e) {}   // KU: reading clinical content
     var syn = (window.SYNDROMES || {})[id];
     var ni = null; (DDX_NI || []).forEach(function (d) { if (d.id === id) ni = d; });
@@ -2735,27 +2764,86 @@
       : "";
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
-    el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">‹ Back</button></div>' +
+    el.className = "dx-mgmt dx-reader";
+    var backLabel = "‹ Back to differential";
+    if (opts && opts.from === "onco-home") backLabel = "‹ ONCQIS";
+    else if (opts && (opts.standalone || opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) backLabel = "‹ Library";
+    el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
+        '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
-        '<div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
+        '<section class="dx-reader-hero"><div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
-        (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') +
+        (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') + '</section>' +
+        '<div class="dx-reader-glance"><h3>At a glance</h3>' +
+          (reason ? '<p>' + medFormat(reason) + '</p>' : '') +
+          (H && H.redFlags && H.redFlags.length ? '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(H.redFlags, "danger") + '</section>' : '') +
+          (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
+          (briefTx && briefTx.length ? '<details><summary>Management</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
+        '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
         (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
         (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
-        '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only — reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
+        '</div>' +
       '</div>';
+    var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
+    function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.textContent = saved ? "★ Saved to favourites" : "☆ Add to favourites"; favourite.setAttribute("aria-pressed", String(saved)); }
+    favouritePaint();
+    favourite.addEventListener("click", function () { var list = kbReadList("favourites"), saved = list.indexOf(id) >= 0; if (kbSaveList("favourites", saved ? list.filter(function (x) { return x !== id; }) : list.concat(id))) favouritePaint(); else favourite.textContent = "Could not save. Try again."; });
+    el.querySelector(".dx-reader-hero").appendChild(favourite);
     el.classList.add("on"); el.scrollTop = 0;
     var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () {
       el.classList.remove("on");
-      // Opened standalone from the Knowledge Library / global search? The reasoning
-      // workspace was turned on ONLY to host this reference panel — so Back must exit
-      // it and return the user to the library they were browsing, NOT drop them into
-      // the (empty) clinical-reasoning view underneath.
+      if (opts && typeof opts.onBack === "function") {
+        try { close(); } catch (e) {}
+        try { opts.onBack(); } catch (e2) {}
+        return;
+      }
+      if ((opts && opts.from === "onco-home") || (window.SMD_ONCOHOME && document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on"))) {
+        try { close(); } catch (e) {}
+        try { if (window.SMD_ONCOHOME && SMD_ONCOHOME.foreground) SMD_ONCOHOME.foreground(); } catch (e) {}
+        return;
+      }
+      // Opened standalone from the Knowledge Library? Return cleanly to the library underneath
+      // without ever exposing the Clinical Reasoning workspace (#dxOverlay) or routing to home.
+      if (opts && (opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) {
+        if (root) {
+          root.classList.remove("on", "dx-reference-mode");
+          document.body.classList.remove("dx-lock");
+        }
+        var library = document.getElementById("sbrefOverlay");
+        if (library && library.classList.contains("open")) {
+          try {
+            // The just-viewed disease landed in recent/favourites AFTER the parked
+            // library DOM rendered: repaint ONLY the personal section so its counts
+            // stay correct, without a full re-render (which would lose focus).
+            // Repaint BEFORE restoring scroll: the fresh section changes the content
+            // height above the viewport, so scroll must be set last to land exact.
+            var personal = library.querySelector(".kblib-personal");
+            if (personal) {
+              var freshEntries = kbBuildIndex();
+              if (freshEntries && freshEntries.length) personal.outerHTML = kbPersonalHTML(freshEntries);
+            }
+          } catch (e) {}
+          if (_libReturnScroll !== null) {
+            var libraryBody = document.getElementById("sbrefBody");
+            if (libraryBody) libraryBody.scrollTop = _libReturnScroll;
+            _libReturnScroll = null;
+          }
+          document.body.style.overflow = "hidden";
+          return;
+        }
+        try { if (window.SB && SB.openRef) SB.openRef("syndromes"); } catch (e) {}
+        if (_libReturnScroll !== null) {
+          var lb = document.getElementById("sbrefBody");
+          if (lb) lb.scrollTop = _libReturnScroll;
+          _libReturnScroll = null;
+        }
+        return;
+      }
       if (opts && opts.standalone) {
         try { close(); } catch (e) {}
-        try { if (window.SB && SB.openRef) SB.openRef("syndromes"); } catch (e) {}
+        return;
       }
     });
     var sel = el.querySelector(".dx-select[data-sel]");
@@ -2766,18 +2854,19 @@
     });
   }
 
-  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
+  function resetAll() { S.consultSkipped = []; S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; S.noteDraft = ""; var note = root && root.querySelector("#dxFreeText"); if (note) note.value = ""; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open(opts) {
     ensureRoot();
-    if (opts && opts.workspace) { S.workspace = true; S.advOpen = true; }
+    root.classList.remove("dx-reference-mode");
+    if (opts && opts.workspace) { S.workspace = true; S.advOpen = false; }
     // Bridge: carry over findings already entered in the legacy checkbox wizard
     if (!Object.keys(S.f).length && typeof window.SMD_getFindings === "function") {
       try { var lf = window.SMD_getFindings(), n = 0; for (var k in lf) { if (lf[k] && VALID[k]) { S.f[k] = true; n++; } } if (n) { S.started = true; S.lastAdded = null; } } catch (e) {}
     }
-    root.classList.add("on"); document.body.classList.add("dx-lock"); recompute();
+    root.classList.add("on"); document.body.classList.add("dx-lock"); recompute(); showConsultPane("dxIntake");
     // focus the findings search so the clinician can start typing immediately
     // Native: skip programmatic focus — it pops the iOS keyboard with no user intent.
-    try { var sif = root.querySelector("#dxSearch"); if (sif && !window.SMD_IS_NATIVE) setTimeout(function () { try { sif.focus(); } catch (e) {} }, 60); } catch (e) {}
+    try { var sif = root.querySelector("#dxSearch"); if (sif && !window.SMD_IS_NATIVE && window.innerWidth >= 1024) setTimeout(function () { try { sif.focus({ preventScroll: true }); } catch (e) {} }, 60); } catch (e) {}
   }
   function openWorkspace() { if (!S._restoring) S._caseId = null; open({ workspace: true }); }
   // Reopen the workspace and restore a Recent-Cases snapshot (findings + case id) so
@@ -2798,7 +2887,7 @@
     // sync findings back to the legacy wizard (one source of truth)
     try { if (typeof window.SMD_setFindings === "function") window.SMD_setFindings(S.f); } catch (e) {}
     closeMgmt();
-    if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); }
+    if (root) { root.classList.remove("on", "dx-reference-mode"); document.body.classList.remove("dx-lock"); }
     // Reasoning was opened from the home (which hideV2()'d it) — restore the home shell,
     // otherwise closing falls through to the empty classic view (blank screen on native).
     try { if (window.SMD_setUI) window.SMD_setUI(true); } catch (e) {}
@@ -2902,7 +2991,6 @@
       ".dx-mgmt-ul{margin:0;padding-left:18px}",
       ".dx-mgmt-ul li{font:500 13.5px/1.5 var(--sans);color:var(--slate);margin:4px 0}",
       ".dx-mgmt-src{margin-top:18px;font:600 11.5px var(--sans);color:var(--slate-soft)}",
-      ".dx-mgmt-disc{margin-top:14px;padding:11px 13px;background:var(--panel);border:1px solid var(--line);border-radius:10px;font:500 11.5px/1.5 var(--sans);color:var(--slate-soft)}",
       ".dx-chip{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:6px 11px;font:600 12px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
       ".dx-chip:hover{border-color:var(--teal);color:var(--teal)}",
       ".dx-gate{margin:14px 0 8px}",
@@ -3164,14 +3252,37 @@
     return out.slice(0, limit || 40);
   }
   function kbOpen(id) {
+    var library = document.getElementById("sbrefOverlay"), libraryBody = document.getElementById("sbrefBody");
+    var fromLibrary = !!(library && library.classList.contains("open"));
+    _libReturnScroll = fromLibrary && libraryBody ? libraryBody.scrollTop : null;
     try { var bd = document.getElementById("spBackdrop"); if (bd) bd.classList.add("hidden"); } catch (e) {}
     try { var p = document.getElementById("smdSearchPanel"); if (p) p.classList.remove("open"); } catch (e) {}
-    try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {}
     try { document.body.style.overflow = ""; } catch (e) {}
     // ALWAYS open the Harrison evidence viewer (works for all 444, incl. the 51
     // infective syndromes). For infective diseases the viewer itself offers a button
     // to open the full antibiotic-stewardship console, so nothing is lost.
-    if (window.DX && DX.openRef) DX.openRef(id);
+    if (window.DX && DX.openRef) {
+      DX.openRef(id, {
+        from: fromLibrary ? "syndromes" : "search",
+        standalone: true
+      });
+      // Do NOT close #sbrefOverlay when opened from the Knowledge Library!
+      // #dxOverlay.dx-reference-mode is elevated to z-index: 900 !important,
+      // so #sbrefOverlay stays parked cleanly underneath. Tapping Back returns directly
+      // to the existing DOM and scroll position without re-rendering or touching Clinical Reasoning.
+      if (!fromLibrary) {
+        try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {}
+      }
+    }
+  }
+  function kbReadList(kind) { try { var list = JSON.parse(localStorage.getItem("smd_library_" + kind) || "[]"); return Array.isArray(list) ? list.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
+  function kbSaveList(kind, list) { try { localStorage.setItem("smd_library_" + kind, JSON.stringify(list)); return true; } catch (e) { return false; } }
+  function kbPersonalHTML(entries) {
+    var byId = {}; entries.forEach(function (d) { byId[d.id] = d; });
+    return '<section class="kblib-personal"><h2>Your library</h2><small>Saved on this device</small>' + ["favourites", "recent"].map(function (kind) {
+      var ids = kbReadList(kind).filter(function (id) { return !!byId[id]; });
+      return '<details' + (kind === "favourites" ? ' open' : '') + '><summary>' + (kind === "favourites" ? "Favourites" : "Recently viewed") + ' · ' + ids.length + '</summary>' + (ids.length ? ids.map(function (id) { return '<button type="button" class="kblib-row" data-kb="' + esc(id) + '">' + esc(byId[id].name) + '</button>'; }).join('') : '<p>' + (kind === "favourites" ? "Save a disease from its reference page for quick access." : "Diseases you open will appear here.") + '</p>') + '</details>';
+    }).join('') + '</section>';
   }
   // ---- recent search history (replaces the hardcoded #spChips example chips) --------------
   var SMD_RECENT_KEY = "smd_recent_searches", SMD_RECENT_MAX = 8;
@@ -3266,8 +3377,9 @@
     box.insertAdjacentHTML("afterbegin", html);
     box.querySelectorAll("#smdKbSec [data-kb]").forEach(function (b) { b.addEventListener("click", function () { kbOpen(b.getAttribute("data-kb")); }); });
   }
-  // ---- Knowledge Library: override window.SB.openRef for the syndromes tab ----
-  var _libState = { q: "", cls: "all", src: "all", branch: "all" };
+  // ---- Knowledge Library: upgrade all four reference tabs into one visual system ----
+  var _libReturnScroll = null;
+  var _libState = { q: "", cls: "all", src: "all", branch: "all", limit: 40 };
   function wireSyndromeLibrary() {
     if (!window.SB || typeof window.SB.openRef !== "function" || window.SB.__smdKbWrapped) return;
     var orig = window.SB.openRef;
@@ -3275,28 +3387,91 @@
     window.SB.openRef = function (tab) {
       var r = orig.apply(this, arguments);
       if (tab === "syndromes") { try { kbRenderLibrary(); } catch (e) {} }
+      else { try { kbPolishReference(tab); } catch (e) {} }
       return r;
     };
+    if (typeof window.SB.abgOrg === "function" && !window.SB.__smdAbgWrapped) {
+      var abgOrig = window.SB.abgOrg;
+      window.SB.__smdAbgWrapped = true;
+      window.SB.abgOrg = function () { var r = abgOrig.apply(this, arguments); try { kbPolishReference("antibiogram"); } catch (e) {} return r; };
+    }
+  }
+  function kbPolishReference(tab) {
+    var spec = {
+      antibiogram: { kicker: "National resistance intelligence", title: "Antibiogram", copy: "Compare ICMR AMRSN susceptibility data by organism. Your local hospital antibiogram should take priority when available.", search: "Search antibiotics" },
+      aware: { kicker: "WHO stewardship framework", title: "AWaRe classification", copy: "Understand Access, Watch and Reserve groups at a glance, then review the antibiotics available in StewardMD.", search: "Search classes or antibiotics" },
+      guidelines: { kicker: "Trusted clinical sources", title: "Guidelines & references", copy: "Browse official national and international guidance in one focused clinical index. Confirm the current published version before use.", search: "Search guidelines or organisations" }
+    }[tab];
+    var body = document.getElementById("sbrefBody"); if (!body || !spec) return;
+    body.scrollTop = 0;
+    body.className = "sbref-body kblib-tool-page kblib-tool-" + tab;
+    var title = document.getElementById("sbrefTitle"); if (title) title.textContent = "Knowledge Library";
+    var tabs = body.querySelector(".sbref-tabs"); if (!tabs) return;
+    Array.prototype.forEach.call(tabs.querySelectorAll(".sbref-tab"), function (button) {
+      button.type = "button";
+      if (button.classList.contains("active")) button.setAttribute("aria-current", "page");
+      else button.removeAttribute("aria-current");
+    });
+    var intro = document.createElement("div"); intro.className = "kblib-tool-intro";
+    intro.innerHTML = '<span class="kblib-tool-kicker">' + spec.kicker + '</span><h1>' + spec.title + '</h1><p>' + spec.copy + '</p>' +
+      '<label for="kblibToolSearch">Search this collection</label><input id="kblibToolSearch" class="kblib-tool-search" type="search" autocomplete="off" placeholder="' + spec.search + '"><div id="kblibToolCount" class="kblib-tool-count" role="status"></div>';
+    tabs.insertAdjacentElement("afterend", intro);
+    function paint() {
+      var q = String(intro.querySelector("input").value || "").trim().toLowerCase();
+      var nodes = tab === "antibiogram" ? body.querySelectorAll(".sbref-row") : tab === "aware" ? body.querySelectorAll(".aware-card") : body.querySelectorAll(".sbref-gl");
+      var shown = 0;
+      Array.prototype.forEach.call(nodes, function (node) { var on = !q || node.textContent.toLowerCase().indexOf(q) >= 0; node.hidden = !on; if (on) shown++; });
+      if (tab === "guidelines") Array.prototype.forEach.call(body.querySelectorAll(".sbref-sec"), function (sec) { var links = sec.querySelectorAll(".sbref-gl"); if (links.length) sec.hidden = !Array.prototype.some.call(links, function (link) { return !link.hidden; }); });
+      var count = document.getElementById("kblibToolCount");
+      if (count) count.textContent = shown ? (q ? "Showing " : "") + shown + (tab === "antibiogram" ? " antibiotics" : tab === "aware" ? " AWaRe groups" : " guideline sources") : "No matches. Try a broader search.";
+    }
+    intro.querySelector("input").addEventListener("input", paint);
+    if (tab === "antibiogram") {
+      var compare = document.createElement("section"); compare.className = "kblib-compare";
+      compare.innerHTML = '<h2>Compare antibiotics</h2><p>National data · ICMR AMRSN 2024</p><small>Hospital-specific data is not loaded in this view.</small><div class="kblib-compare-results" aria-live="polite">Select two or more antibiotics below.</div>';
+      intro.insertAdjacentElement("afterend", compare);
+      var rows = Array.prototype.slice.call(body.querySelectorAll('.sbref-row'));
+      rows.forEach(function (row) {
+        var name = row.firstElementChild, label = name.textContent, checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.setAttribute('aria-label', 'Compare ' + label);
+        name.prepend(checkbox);
+        checkbox.addEventListener('change', function () {
+          var selected = rows.filter(function (r) { return r.querySelector('input').checked; });
+          compare.querySelector('.kblib-compare-results').innerHTML = selected.length ? selected.map(function (r) { return '<div><strong>' + esc(r.firstElementChild.textContent) + '</strong><span>' + esc(r.lastElementChild.textContent || r.children[1].textContent) + '</span></div>'; }).join('') : 'Select two or more antibiotics below.';
+        });
+      });
+    }
+    paint();
   }
   function kbRenderLibrary() {
     var body = document.getElementById("sbrefBody"); if (!body) return;
+    body.scrollTop = 0;
+    body.className = "sbref-body";
     var sec = body.querySelector(".sbref-sec"); if (!sec) return;
+    sec.classList.add("kblib-discover");
     try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = "Knowledge Library"; } catch (e) {}
-    var branches = [], seen = {};
-    kbBuildIndex().forEach(function (d) { if (!seen[d.branch]) { seen[d.branch] = 1; branches.push(d.branch); } });
+    var branches = [], seen = {}, entries = kbBuildIndex();
+    entries.forEach(function (d) { if (!seen[d.branch]) { seen[d.branch] = 0; branches.push(d.branch); } seen[d.branch]++; });
     branches.sort();
-    var f = function (on, attr, val, label) { return '<button class="kblib-f' + (on ? " on" : "") + '" data-' + attr + '="' + val + '">' + label + '</button>'; };
+    var f = function (on, attr, val, label) { return '<button type="button" aria-pressed="' + on + '" class="kblib-f' + (on ? " on" : "") + '" data-' + attr + '="' + esc(val) + '">' + label + '</button>'; };
+    var featured = ["Cardiology", "Neurology", "Respiratory", "GI / Hepatology"].filter(function (b) { return !!seen[b]; });
+    var tile = function (b) { return f(_libState.branch === b, "br", b, '<span class="kblib-tile-icon" aria-hidden="true">' + rIco("book") + '</span><span>' + esc(b) + '</span><small>' + seen[b].toLocaleString() + ' entries</small>'); };
     sec.innerHTML =
-      '<input id="kblibQ" class="kblib-search" placeholder="Search any disease or clinical detail…" autocomplete="off" value="' + esc(_libState.q) + '">' +
-      '<div class="kblib-filters">' +
+      '<header class="kblib-intro"><span class="kblib-kicker">STEWARDMD · DISCOVER</span><h1>Knowledge Library</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
+      '<label class="kblib-search-label" for="kblibQ">Search the full library</label><input id="kblibQ" class="kblib-search" type="search" placeholder="Disease, syndrome or clinical detail" autocomplete="off" value="' + esc(_libState.q) + '">' +
+      kbPersonalHTML(entries) +
+      '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +
+      '<div class="kblib-section-heading"><h2>Explore a branch</h2><span>' + branches.length + ' branches</span></div><div class="kblib-tiles">' + featured.map(tile).join("") + '</div>' +
+      '<details class="kblib-all-branches"><summary>See all medical branches</summary><div class="kblib-tiles">' + branches.filter(function (b) { return featured.indexOf(b) < 0; }).map(tile).join("") + '</div></details></div>' +
+      '<div class="kblib-section-heading"><h2 id="kblibResultsTitle">Disease index</h2><button type="button" id="kblibClear" class="kblib-clear">Clear filters</button></div>' +
+      '<details class="kblib-refine"><summary>Refine by type, source or branch</summary><div class="kblib-filters">' +
         '<div class="kblib-grp"><span class="kblib-lbl">Type</span>' +
           f(_libState.cls === "all", "cls", "all", "All") + f(_libState.cls === "inf", "cls", "inf", '<span class="kbdot" style="color:#dc2626">●</span> Infective') + f(_libState.cls === "ni", "cls", "ni", '<span class="kbdot" style="color:#16a34a">●</span> Non-infective') + '</div>' +
         '<div class="kblib-grp"><span class="kblib-lbl">Source</span>' +
           f(_libState.src === "all", "src", "all", "All") + f(_libState.src === "dx", "src", "dx", "Diagnostic") + f(_libState.src === "ref", "src", "ref", "Reference") + '</div></div>' +
       '<div class="kblib-grp" style="margin:8px 0 4px"><span class="kblib-lbl">System</span>' +
         f(_libState.branch === "all", "br", "all", "All") +
-        branches.map(function (b) { return f(_libState.branch === b, "br", b, esc(b)); }).join("") + '</div>' +
-      '<div class="kblib-count" id="kblibCount"></div><div class="kblib-grid" id="kblibGrid"></div>';
+        branches.map(function (b) { return f(_libState.branch === b, "br", b, esc(b)); }).join("") + '</div></details>' +
+      '<div class="kblib-count" id="kblibCount" role="status"></div><div class="kblib-grid" id="kblibGrid"></div><button type="button" id="kblibMore" class="kblib-more">Show more diseases</button>';
     kbWireLibrary();   // ensure the (delegated) handlers exist
     kbPaintLibrary();  // fill the grid from current filters/search
     // No per-element addEventListener here: search/filter/card events are handled by ONE
@@ -3365,8 +3540,13 @@
     // tie-broken alphabetically; with no query keep the alphabetical index order.
     if (searching) scored.sort(function (a, b) { return b.s - a.s || (a.d.name < b.d.name ? -1 : a.d.name > b.d.name ? 1 : 0); });
     var res = scored.map(function (x) { return x.d; });
-    var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = res.length + " of " + all.length + " entries";
-    grid.innerHTML = res.slice(0, 400).map(function (d) {
+    var shown = Math.min(_libState.limit, res.length);
+    var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = 'Showing ' + shown + ' of ' + res.length.toLocaleString() + ' entries';
+    var discovery = document.getElementById("kblibDiscovery"); if (discovery) discovery.hidden = searching || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all";
+    var title = document.getElementById("kblibResultsTitle"); if (title) title.textContent = searching ? "Search results" : _libState.branch !== "all" ? _libState.branch : "Disease index";
+    var clear = document.getElementById("kblibClear"); if (clear) clear.hidden = !(_libState.q || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all");
+    var more = document.getElementById("kblibMore"); if (more) more.hidden = shown >= res.length;
+    grid.innerHTML = res.slice(0, _libState.limit).map(function (d) {
       return '<button class="kblib-row ' + d.cls + '" data-kb="' + d.id + '">' +
         '<div class="kblib-eye">' + (d.cls === "inf" ? "Infective" : "Non-infective") + '</div>' +
         '<div class="kblib-name">' + esc(d.name) + '</div>' +
@@ -3379,12 +3559,15 @@
   function kbWireLibrary() {
     if (window.__smdKbLibWired) return; window.__smdKbLibWired = true;
     document.addEventListener("input", function (e) {
-      if (e.target && e.target.id === "kblibQ") { _libState.q = String(e.target.value || "").trim(); kbPaintLibrary(); }
+      if (e.target && e.target.id === "kblibQ") { _libState.q = String(e.target.value || "").trim(); _libState.limit = 40; kbPaintLibrary(); }
     }, false);
     document.addEventListener("click", function (e) {
       var t = e.target; if (!t || !t.closest) return;
+      if (t.closest("#kblibMore")) { _libState.limit += 40; kbPaintLibrary(); return; }
+      if (t.closest("#kblibClear")) { _libState = { q: "", cls: "all", src: "all", branch: "all", limit: 40 }; kbRenderLibrary(); return; }
       var fb = t.closest(".kblib-f");
       if (fb) {
+        _libState.limit = 40;
         if (fb.hasAttribute("data-cls")) _libState.cls = fb.getAttribute("data-cls");
         if (fb.hasAttribute("data-src")) _libState.src = fb.getAttribute("data-src");
         if (fb.hasAttribute("data-br")) _libState.branch = fb.getAttribute("data-br");
@@ -3513,7 +3696,15 @@
     },
     // open ANY disease's reference panel from outside the reasoning workspace
     // (global search, knowledge library): open the panel, then show the ref.
-    openRef: function (id) { var wasOpen = !!(root && root.classList.contains("on")); try { open(); } catch (e) {} setTimeout(function () { try { openDiseaseRef(id, { standalone: !wasOpen }); } catch (e) {} }, 90); },
+    openRef: function (id, opts) {
+      opts = opts || {};
+      var isStandalone = opts.standalone !== undefined ? !!opts.standalone : (opts.from ? true : !(root && root.classList.contains("on")));
+      ensureRoot();
+      openDiseaseRef(id, Object.assign({ standalone: isStandalone }, opts));
+      root.classList.add("dx-reference-mode", "on");
+      document.body.classList.add("dx-lock");
+    },
+    _kbOpen: kbOpen, // test seam: Knowledge Library / global-search entry point (not user-facing API)
     _assess: function () {
       var d = differential(), g = gate(d), info = GATEINFO[g.cls];
       return { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name,
@@ -3612,7 +3803,17 @@
   // "localhost" — that must NOT take the dev branch (returns "" → every AI method
   // short-circuits to {error:"ai-off"} and the calls would hit https://localhost anyway).
   // Native uses /api/ai (native-bridge rewrites → stewardmd.in via CapacitorHttp → Vertex).
-  function aiBase() { var h = location.hostname; return window.AI_PROXY || ((!window.SMD_IS_NATIVE && (h === "localhost" || h === "127.0.0.1")) ? "" : "/api/ai"); }
+  /* TEST SWITCH (owner, 2026-09-11): "turn off Gemini and see what still works". Server-side that
+   * would mean pulling production credentials for everyone, so it is done per phone instead: with
+   * localStorage smd_ai_cloud_block = "1", EVERY cloud AI request built from this base goes to a dead
+   * path and fails loudly as { error: "server" }, and the attempt is counted. Every SMD_AI cloud
+   * method calls aiBase() first, so nothing can reach Gemini past this line. Web-snippet retrieval
+   * shares the base and is blocked too; that is the one known cost of the switch. */
+  function cloudBlocked() { try { return localStorage.getItem("smd_ai_cloud_block") === "1"; } catch (e) { return false; } }
+  function aiBase() {
+    if (cloudBlocked()) { try { window.__SMD_CLOUD_ATTEMPTS = (window.__SMD_CLOUD_ATTEMPTS || 0) + 1; } catch (e) {} return "/api/ai-blocked-by-test-switch"; }
+    var h = location.hostname; return window.AI_PROXY || ((!window.SMD_IS_NATIVE && (h === "localhost" || h === "127.0.0.1")) ? "" : "/api/ai");
+  }
   // Attach the Firebase ID token so the server can derive the user's identity for
   // usage metering / quotas (server verifies it; browser userId is never trusted).
   // No signed-in user → plain headers (server applies a small guest quota by IP).
@@ -3693,7 +3894,87 @@
   // On-device structuring: parse common labelled values from OCR text so AI Vision fills
   // fields even when the cloud is unavailable (offline / quota / endpoint not deployed).
   // Conservative — only clearly-matched values; the clinician verifies + taps the rest.
-  function parseFieldsOnDevice(text, kind) {
+  // Box-aware monitor read (2026-09-14, Philips MP40 owner test). Apple Vision returns one box per
+  // text line, NORMALIZED top-left {x,y,w,h}. On a monitor the VALUE is the tallest text near its
+  // label and the alarm limits beside it are small; flattened reading order cannot tell "HR 120 50
+  // 105" apart, box height can. Icons glue onto values ("*105", "2° 100"): keep the in-range number.
+  function parseMonitorBoxes(boxes) {
+    var out = {}, claimed = {}, B = [], valueH = 0, hrBox = null;
+    for (var i = 0; i < boxes.length; i++) {
+      var b = boxes[i]; if (!b || typeof b.text !== "string") continue;
+      var x = +b.x || 0, y = +b.y || 0, w = +b.w || 0, h = +b.h || 0;
+      B.push({ t: b.text, x: x, y: y, w: w, h: h, cx: x + w / 2, cy: y + h / 2, i: i });
+    }
+    // "20: 38" is the clock, not a value; "12.5 mm/s" is the sweep speed.
+    function nums(t) { return (String(t).replace(/\d{1,2}\s*:\s*\d{2}/g, " ").replace(/\d+(?:\.\d+)?\s*mm\/s/gi, " ").match(/\d{1,3}(?:\.\d)?/g) || []).map(parseFloat); }
+    // An alarm banner ("** RR HIGH", "*** APNEA") names a parameter without being its label.
+    function isBanner(t) { return /^\W*\*{1,3}\s*\w/.test(t) || /\b(?:HIGH|LOW|ALARM)\b/i.test(t); }
+    function pick(t, lo, hi, dec) { var n = nums(t), v = null; for (var k = 0; k < n.length; k++) if (n[k] >= lo && n[k] <= hi) v = n[k]; return v == null ? null : (dec ? v : Math.round(v)); }
+    function claim(b) { claimed[b.i] = 1; if (b.h > valueH) valueH = b.h; }
+    // 1) Blood pressure: the tallest "SSS/DD" box. MAP is the "(MM)" in the same box or just below it.
+    var bp = null;
+    B.forEach(function (b) { var m = b.t.match(/(\d{2,3})\s*\/\s*(\d{2,3})/); if (m && (!bp || b.h > bp.b.h)) bp = { b: b, s: +m[1], d: +m[2] }; });
+    if (bp && bp.s > bp.d && bp.s >= 50 && bp.s <= 260 && bp.d >= 20 && bp.d <= 160) {
+      out.sbp = bp.s; out.dbp = bp.d; claim(bp.b);
+      var same = bp.b.t.match(/\(\s*(\d{2,3})\s*\)/), mapBox = same ? { v: +same[1] } : null;
+      if (!mapBox) B.forEach(function (b) {
+        var m = b.t.match(/^\W*\(?\s*(\d{2,3})\s*\)\W*$/); if (!m) return;
+        var below = b.y >= bp.b.y && b.y <= bp.b.y + bp.b.h * 2.5, inCol = b.cx >= bp.b.x - 0.02 && b.cx <= bp.b.x + bp.b.w + 0.02;
+        if (below && inCol && (!mapBox || b.h > mapBox.b.h)) mapBox = { v: +m[1], b: b };
+      });
+      if (mapBox && mapBox.v > bp.d && mapBox.v < bp.s) { out.map = mapBox.v; if (mapBox.b) claim(mapBox.b); }
+    }
+    // 2) Labelled numerics: value = the tallest in-range numeric box just below / right of the label.
+    var LAB = [
+      ["hr",    /^\W*(?:HR|Heart\s*Rate)\W*/i,        25, 240],
+      ["spo2",  /Sp\s*[O0o]\s*[2zZ₂]/i,               50, 100],
+      ["pulse", /^\W*(?:Pulse|PR)\W*/i,               25, 240],
+      ["rr",    /^\W*(?:RR|Resp\w*|awRR)\W*/i,          4,  70],
+      ["temp",  /^\W*(?:Temp\w*|T1|Tcore)\W*/i,       34, 42.5, true],
+      ["cvp",   /^\W*CVP\W*/i,                         0,  30],
+      ["etco2", /^\W*(?:EtCO2|etCO₂|ETCO2)\W*/i,       5,  80],
+      ["map",   /^\W*(?:MAP|ABPm|Mean)\W*/i,          30, 180]
+    ];
+    LAB.forEach(function (L) {
+      var key = L[0], lo = L[2], hi = L[3], dec = L[4];
+      if (out[key] != null) return;
+      var lab = null;
+      B.forEach(function (b) { if (!claimed[b.i] && !isBanner(b.t) && L[1].test(b.t) && (!lab || b.y < lab.y)) lab = b; });
+      if (!lab) return;
+      var best = null;
+      B.forEach(function (b) {
+        if (claimed[b.i] || b === lab || b.h < lab.h * 0.8) return;   // a value is never smaller than its label
+        var dx = b.x - lab.x, dy = b.y - lab.y;
+        if (dx < -0.04 || dx > 0.30 || dy < -lab.h || dy > lab.h * 5 + 0.01) return;
+        var v = pick(b.t, lo, hi, dec); if (v == null) return;
+        if (!best || b.h > best.b.h + 1e-6 || (Math.abs(b.h - best.b.h) <= 1e-6 && dy < best.dy)) best = { b: b, v: v, dy: dy };
+      });
+      if (best) { out[key] = best.v; claim(best.b); if (key === "hr") hrBox = best.b; return; }
+      // label and value in ONE box ("PVC 0", "T 36.5"): only when it holds exactly one number
+      var own = nums(lab.t); if (own.length === 1) { var v1 = pick(lab.t, lo, hi, dec); if (v1 != null) { out[key] = v1; claim(lab); } }
+    });
+    // 3) The RR label is the one Vision drops most (small yellow text beside a big value). Below
+    // the pressure, in the same numeric column, one unclaimed integer of value-size in RR range and
+    // nothing else there → RR. ponytail: layout rule (HR/SpO2/BP/RR column), not colour; a monitor
+    // that stacks EtCO2 under BP unlabelled would need the colour channel to disambiguate.
+    // A bare value box: no word in it, at most two numbers (an icon or limit fragment fuses onto the
+    // value: "*105", "2° 100", "$22"), and the last number in range.
+    function valueLike(t, lo, hi) { var n = nums(t); return !/[A-Za-z]{2,}/.test(t) && n.length >= 1 && n.length <= 2 && n[n.length - 1] >= lo && n[n.length - 1] <= hi; }
+    function columnValue(lo, hi, yMin, yMax) {
+      var cands = B.filter(function (b) {
+        return !claimed[b.i] && b.h >= valueH * 0.6 && valueLike(b.t, lo, hi) && b.y > yMin && b.y < yMax && Math.abs(b.cx - bp.b.cx) < 0.12;
+      });
+      return cands.length === 1 ? cands[0] : null;
+    }
+    if (bp && valueH) {
+      if (out.rr == null) { var rb = columnValue(4, 70, bp.b.y, 2); if (rb) { out.rr = pick(rb.t, 4, 70); claim(rb); } }
+      // Same rule for SpO2: the small cyan label is dropped at some scales (2026-09-14: present at
+      // 900px, absent at 1800/2700px); its value sits between the HR value and the pressure.
+      if (out.spo2 == null && hrBox) { var sb = columnValue(50, 100, hrBox.y, bp.b.y); if (sb) { out.spo2 = pick(sb.t, 50, 100); claim(sb); } }
+    }
+    return out;
+  }
+  function parseFieldsOnDevice(text, kind, boxes) {
     var t = " " + String(text == null ? "" : text).replace(/[\n\r]+/g, " ") + " ";
     var out = {};
     function grab(re) { var m = t.match(re); return m ? parseFloat(m[1]) : null; }
@@ -3714,15 +3995,17 @@
       return null;
     }
     if (kind === "monitor" || kind === "vitals") {
+      // Boxes first (layout-aware); the text scan below only fills what the boxes left open.
+      if (boxes && boxes.length) { var pb = parseMonitorBoxes(boxes); for (var bk in pb) if (pb.hasOwnProperty(bk)) set(bk, pb[bk]); }
       var bp = t.match(/\b(\d{2,3})\s*\/\s*(\d{2,3})\b/);
-      if (bp) { set("sbp", parseFloat(bp[1])); set("dbp", parseFloat(bp[2])); }
-      set("map", near("MAP|MAD|mean", 30, 180));
-      set("hr", near("HR|PR|pulse|heart\\s*rate", 25, 240));
-      set("spo2", near("SpO2|SpO₂|SPO2|SaO2|sat", 50, 100));
-      set("rr", near("RR|RESP|resp\\w*", 4, 70));
-      set("temp", near("TEMP|temp\\w*|T1|T", 34, 42.5, true));
-      set("cvp", near("CVP", 0, 30));
-      set("etco2", near("EtCO2|ETCO2", 5, 80));
+      if (bp && out.sbp == null) { set("sbp", parseFloat(bp[1])); set("dbp", parseFloat(bp[2])); }
+      if (out.map == null) set("map", near("MAP|MAD|mean", 30, 180));
+      if (out.hr == null) set("hr", near("HR|PR|pulse|heart\\s*rate", 25, 240));
+      if (out.spo2 == null) set("spo2", near("SpO2|SpO₂|SPO2|SaO2|sat", 50, 100));
+      if (out.rr == null) set("rr", near("RR|RESP|resp\\w*", 4, 70));
+      if (out.temp == null) set("temp", near("TEMP|temp\\w*|T1|T", 34, 42.5, true));
+      if (out.cvp == null) set("cvp", near("CVP", 0, 30));
+      if (out.etco2 == null) set("etco2", near("EtCO2|ETCO2", 5, 80));
     } else if (kind === "abg") {
       set("ph", grab(/\b(?:pH)\D{0,3}(7\.\d{1,3})\b/i)); if (out.ph == null) set("ph", grab(/\b(7\.\d{2,3})\b/));   // analyzers report 3 decimals (7.250)
       set("paco2", grab(/\b(?:PaCO2|pCO2|PCO₂)\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
@@ -3752,12 +4035,38 @@
       set("rr", grab(/\b(?:RR|rate)\D{0,4}(\d{1,2})\b/i));
       set("peak", grab(/\b(?:Ppeak|peak|PIP)\D{0,4}(\d{1,2})\b/i));
       set("plateau", grab(/\b(?:Pplat|plat\w*)\D{0,4}(\d{1,2})\b/i));
+    } else if (kind === "patient") {
+      // Patient / EMR case-sheet capture — FREE, on-device path (label-based text grab; no
+      // network). Best-effort: real case sheets vary a lot in layout, so this covers the common
+      // labelled fields only (name/age/sex/MRN/hospital/bed/doctor/dept/allergies/diagnosis).
+      // AI Vision (Pro, cloud) reads the same photo with a real model and also gets the free-text
+      // history fields (complaints/past history) — offered as the alternative in the Image Engine
+      // chooser for a layout this can't parse.
+      var NEXT_LBL = "(?:Name|Age|Sex|Gender|MRN|UHID|Reg(?:istration)?\\s*No\\.?|Hospital|Bed|Ward|Doctor|Consultant|Dept|Department|Allerg\\w*|Diagnosis|Dx)\\s*[:\\-]";
+      function grabTxt(labels) {
+        var m = t.match(new RegExp("\\b(?:" + labels + ")\\s*[:\\-]\\s*", "i")); if (!m) return null;
+        var rest = t.slice(m.index + m[0].length);
+        var stop = rest.search(new RegExp(NEXT_LBL, "i"));
+        var val = (stop > 0 ? rest.slice(0, stop) : rest.slice(0, 60)).replace(/\s{2,}/g, " ").trim();
+        return val || null;
+      }
+      var pName = grabTxt("Name|Patient\\s*Name"); if (pName) out.name = pName;
+      var pAge = grab(/\bAge\D{0,3}(\d{1,3})\b/i); if (pAge != null && pAge > 0 && pAge < 130) out.age = pAge;
+      var pSex = t.match(/\b(?:Sex|Gender)\s*[:\-]?\s*(Male|Female|Other|M|F)\b/i);
+      if (pSex) out.sex = /^m/i.test(pSex[1]) ? "M" : /^f/i.test(pSex[1]) ? "F" : "Other";
+      var pMrn = grabTxt("MRN|UHID|Reg(?:istration)?\\s*No\\.?"); if (pMrn) out.mrn = pMrn;
+      var pHosp = grabTxt("Hospital"); if (pHosp) out.hospital = pHosp;
+      var pBed = grabTxt("Bed|Ward"); if (pBed) out.bed = pBed;
+      var pDoc = grabTxt("Doctor|Consultant"); if (pDoc) out.doctor = pDoc;
+      var pDept = grabTxt("Dept|Department"); if (pDept) out.dept = pDept;
+      var pAllergy = grabTxt("Allerg\\w*"); if (pAllergy) out.allergies = pAllergy;
+      var pDx = grabTxt("Diagnosis|Dx"); if (pDx) out.diagnosis = pDx;
     } else if (kind === "all") {
       // Combined extractor (gold249): parse EVERY category from one blob (a photo with a monitor
       // + ABG together, or multi-page PDF text) and return SECTIONS. Overlapping keys (hco3,
       // lactate, fio2, be, rr) are only kept in the ABG/ventilator section when that panel is
       // actually present — otherwise they belong to labs/vitals, so we don't invent a bogus section.
-      var _v = parseFieldsOnDevice(text, "vitals");
+      var _v = parseFieldsOnDevice(text, "vitals", boxes);
       var _g = parseFieldsOnDevice(text, "abg");
       var _l = parseFieldsOnDevice(text, "labs");
       var _vt = parseFieldsOnDevice(text, "ventilator");
@@ -3776,6 +4085,53 @@
     return out;
   }
   window.SMD_parseFields = parseFieldsOnDevice;
+  // Pixels of the ORIGINAL capture for the monitor parser's colour signal: decoded once onto a canvas
+  // (long edge capped to bound memory; boxes are normalized so the cap changes nothing else). Any
+  // failure resolves null and colour simply becomes a neutral signal. Nothing leaves the device.
+  function smdPixelSource(dataUrl) {
+    return new Promise(function (res) {
+      try {
+        var img = new Image();
+        img.onload = function () {
+          try {
+            var MAX = 2400, s = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight));
+            var w = Math.max(1, Math.round(img.naturalWidth * s)), h = Math.max(1, Math.round(img.naturalHeight * s));
+            var cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+            var ctx = cv.getContext("2d", { willReadFrequently: true }); ctx.drawImage(img, 0, 0, w, h);
+            var d = ctx.getImageData(0, 0, w, h).data;
+            res({ w: w, h: h, natW: img.naturalWidth, natH: img.naturalHeight, get: function (x, y) { if (x < 0 || y < 0 || x >= w || y >= h) return null; var i = (y * w + x) * 4; return [d[i], d[i + 1], d[i + 2]]; } });
+          } catch (e) { res(null); }
+        };
+        img.onerror = function () { res(null); };
+        img.src = dataUrl;
+      } catch (e) { res(null); }
+    });
+  }
+  // The monitor region of the ORIGINAL capture, enlarged by region.scale (monitorRegion already caps the
+  // long edge at ~3200 px), as a high-quality JPEG for the second on-device Vision pass. Resolves null on
+  // any failure: the full pass alone is then parsed, which is the v2.0 behaviour.
+  function smdCropDataUrl(dataUrl, region) {
+    return new Promise(function (res) {
+      try {
+        var img = new Image();
+        img.onload = function () {
+          try {
+            var sx = region.x * img.naturalWidth, sy = region.y * img.naturalHeight, sw = region.w * img.naturalWidth, sh = region.h * img.naturalHeight;
+            // maxLong: cap the output's long edge (AI Vision crop), never enlarging
+            var sc = region.maxLong ? Math.min(region.scale || 1, region.maxLong / Math.max(1, sw, sh)) : region.scale;
+            var ow = Math.max(1, Math.round(sw * sc)), oh = Math.max(1, Math.round(sh * sc));
+            var cv = document.createElement("canvas"); cv.width = ow; cv.height = oh;
+            var ctx = cv.getContext("2d"); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+            ctx.drawImage(img, sx, sy, sw, sh, 0, 0, ow, oh);
+            res(cv.toDataURL("image/jpeg", 0.92));
+          } catch (e) { res(null); }
+        };
+        img.onerror = function () { res(null); };
+        img.src = dataUrl;
+      } catch (e) { res(null); }
+    });
+  }
+  function assign2(a, b) { var o = {}, k; for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) o[k] = a[k]; for (k in b) if (Object.prototype.hasOwnProperty.call(b, k)) o[k] = b[k]; return o; }
   window.SMD_AI = {
     on: aiOn,
     setFlag: function (on) { try { localStorage.setItem("smd_ai", on ? "1" : "0"); } catch (e) {} try { smdRenderLive(); } catch (e) {} },
@@ -3789,6 +4145,8 @@
     // Fire-and-forget from the UI; never blocks or alters an answer. Inert until deliberately enabled.
     verifyGrounding: function (text, pkg) {
       try { if (localStorage.getItem("smd_maik_verify") !== "1") return Promise.resolve({ checked: false }); } catch (e) { return Promise.resolve({ checked: false }); }
+      // A server-side model check of the answer text: a cloud AI call, so it honours the engine policy.
+      try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.cloudAllowed && !window.SMD_MAIK_ENGINE.cloudAllowed()) return Promise.resolve({ checked: false }); } catch (e) {}
       var b = aiBase(); if (!b || !aiOn() || !text) return Promise.resolve({ checked: false });
       return aiHeaders().then(function (h) { return fetch(b + "/verify", { method: "POST", headers: h, body: JSON.stringify({ text: text, package: pkg || {} }) }); }).then(function (r) { return r.json(); }).catch(function () { return { checked: false }; });
     },
@@ -3880,10 +4238,11 @@
           var per = Math.max(1, Math.ceil(words.length / frames));
           var raf = window.requestAnimationFrame || function (f) { return setTimeout(f, 16); };
           var n = 0, acc = "";
+          var safety = setTimeout(function () { try { onDelta(full); } catch (e) {} resolve(res); }, 4500);
           (function tick() {
             for (var end = Math.min(words.length, n + per); n < end; n++) acc += words[n];
             try { onDelta(acc); } catch (e) {}
-            if (n >= words.length) return resolve(res);
+            if (n >= words.length) { clearTimeout(safety); return resolve(res); }
             raf(tick);
           })();
         });
@@ -4136,6 +4495,14 @@
     // one grounded call, short answer; only invoked on an explicit user tap.
     // `mode` is optional. Omit for the classic web-research path; pass "evidence-review" for MaiK
     // Research Mode (trusted medical-literature synthesis, PubMed-grounded, 2/day + cached server-side).
+    // Related figures for an answered topic: GET, no model, no tokens (functions/_figures.js).
+    // Returns { figures: [{ img, page, site, title }] }; never rejects, so the strip is optional.
+    figures: function (topic) {
+      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ figures: [] });
+      var q = String(topic || "").slice(0, 200); if (!q) return Promise.resolve({ figures: [] });
+      var p = aiHeaders().then(function (h) { return fetch(b + "/figures?q=" + encodeURIComponent(q), { headers: h }); }).then(function (r) { return r.json(); }).catch(function () { return { figures: [] }; });
+      return raceTimeout(p, 15000, { figures: [] });
+    },
     research: function (question, mode, history) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       var q = String(question || "").slice(0, 500); if (!q) return Promise.resolve({ error: "no-question" });
@@ -4152,6 +4519,19 @@
       var p = aiHeaders().then(function (h) { return fetch(b + "/research", { method: "POST", headers: h, body: JSON.stringify(payload) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
       return raceTimeout(p, mode ? 60000 : 45000, { error: "timeout" });
     },
+    // Raw web-search results, NO Gemini call (owner, 2026-09-04): the search itself (TinyFish) costs
+    // nothing server-side, so maik-engine.js's local-engine routing uses this to fetch sources, then
+    // has the ON-DEVICE model write the answer for free instead of paying for a cloud summary.
+    // Resolves { sources:[{title,url,site,snippet}] } | { error }. Not decorated/rerouted itself -
+    // called directly by maik-engine.js's route(), which is what decides cloud vs on-device.
+    researchSnippets: function (question, history) {
+      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
+      var q = String(question || "").slice(0, 500); if (!q) return Promise.resolve({ error: "no-question" });
+      var payload = { question: q, snippetsOnly: true };
+      if (Array.isArray(history) && history.length) payload.history = history.slice(-4).map(function (t) { return { q: String((t && t.q) || "").slice(0, 300), a: String((t && t.a) || "").slice(0, 300) }; });
+      var p = aiHeaders().then(function (h) { return fetch(b + "/research", { method: "POST", headers: h, body: JSON.stringify(payload) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return raceTimeout(p, 20000, { error: "timeout" });
+    },
     // Cloud extraction from OCR TEXT ONLY (never an image). POSTs the scrubbed text to
     // /api/ai/vision → { kind, fields }. 429/offline/off are surfaced as { error }.
     visionText: function (text, kind) {
@@ -4163,10 +4543,23 @@
     },
     // MaiK Scribe — extract structured data from a spoken transcript. kind ∈ ICU kinds → { fields };
     // "reasoning" (with catalog=[{key,label}]) → { findings, patient?, unmatched }. Never invents.
+    // Whole-timeline patient summary (module "summary", 15/day). Was a raw fetch in opd-emr.js, which
+    // is exactly how it slipped past the engine chooser; as an SMD_AI method it is routed like the rest.
+    summary: function (text) {
+      var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
+      var t = String(text == null ? "" : text).slice(0, 16000).trim(); if (!t) return Promise.resolve({ error: "no-text" });
+      return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/summary", { method: "POST", headers: h, credentials: "same-origin", body: JSON.stringify({ text: t }) }); })
+        .then(function (r) { return r.json().then(function (d) { return (r.ok && d && d.text) ? { text: d.text, mode: "summary" } : ((d && d.reason === "module-daily") ? { error: "quota", reason: "module-daily", over: true, message: d.message } : { error: (d && d.error) || "server" }); }, function () { return { error: "server" }; }); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; }), 60000, { error: "timeout" });
+    },
+    // `catalog` is the finding catalog (an array) for kind "reasoning"; an OBJECT carries per-kind
+    // options instead ({ allowedFields, noteType } for "surgx-note"), merged into the body as-is.
     extract: function (transcript, kind, catalog) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
       var t = String(transcript == null ? "" : transcript).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
-      var body = { transcript: t, kind: kind }; if (catalog) body.catalog = catalog;
+      var body = { transcript: t, kind: kind };
+      if (Array.isArray(catalog)) body.catalog = catalog;
+      else if (catalog && typeof catalog === "object") { for (var ok in catalog) if (Object.prototype.hasOwnProperty.call(catalog, ok) && !(ok in body)) body[ok] = catalog[ok]; }
       return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify(body) }); })
         .then(function (r) { if (r.status === 402 || r.status === 429) return r.json().then(function (j) { return { error: "quota", needsPro: r.status === 402, message: (j && j.message) || "" }; }, function () { return { error: "quota", needsPro: r.status === 402 }; }); if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
@@ -4216,18 +4609,112 @@
           return r.json();
         }).catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
+    // Crop of the original capture (normalized region, optional scale / maxLong) as a JPEG data URL, or null.
+    cropImage: function (dataUrl, region) { return smdCropDataUrl(dataUrl, region); },
     // Private Device OCR — device only, NEVER uploads. Native OCR (Apple Vision / ML Kit
     // bridge) → on-device field parse (labels + reading order preserved) + recognized lines
     // for tap-to-fill. Resolves { mode, fields, lines, source } | { error }.
     readImageLocal: function (dataUrl, kind) {
       if (!(window.SMD_NATIVE && window.SMD_NATIVE.ocr)) return Promise.resolve({ error: "ocr-unavailable" });
-      return window.SMD_NATIVE.ocr(dataUrl).then(function (o) {
+      // Vision's language correction is for words; on numeric screens it rewrites digits (0→O,
+      // 1→I, "PHILIPS"→"PHILIP!"), so it is off for every numeric kind and on for case sheets.
+      var numeric = /^(?:monitor|vitals|abg|labs|mapped|ventilator|all)$/.test(String(kind));
+      var monitorKind = /^(?:monitor|vitals|all)$/.test(String(kind));
+      return window.SMD_NATIVE.ocr(dataUrl, { languageCorrection: !numeric }).then(function (o) {
         var lines = (o && o.lines) || [];
+        var boxes = (o && o.boxes) || [];
         var text = (o && o.text) || lines.join("\n");
-        var fields = parseFieldsOnDevice(text, kind) || {};
-        return Object.keys(fields).length
-          ? { mode: "fields", fields: fields, lines: lines, source: "on-device" }
-          : { mode: "lines", lines: lines, source: "on-device" };
+        var V2 = window.SMD_ICU_MONITOR;
+        function pack(fields, extra) {
+          var r = Object.keys(fields).length ? { mode: "fields", fields: fields, lines: lines, boxes: boxes, source: "on-device" } : { mode: "lines", lines: lines, boxes: boxes, source: "on-device" };
+          if (extra) r.monitor = extra;
+          return r;
+        }
+        if (!(monitorKind && V2 && boxes.length)) {
+          var f0 = parseFieldsOnDevice(text, kind, boxes) || {};
+          // Vitals are never auto-filled from flattened text (2026-09-14): without boxes the monitor
+          // reading has no 2-D evidence, so the clinician types them. Labs/ABG/vent keep the text path.
+          if (kind === "all") delete f0.vitals; else if (monitorKind) f0 = {};
+          return pack(f0);
+        }
+        // Monitor kinds: the 2-D parser (icu-monitor-parser.js) over the boxes + the ORIGINAL pixels for
+        // colour and the image-quality gate. Two-scale (2026-09-14): Vision drops small labels at one
+        // scale, so the numeric region the first pass found is cropped from the ORIGINAL, enlarged, read
+        // again on-device and unioned with the first pass (digit disagreements block auto-fill). Only
+        // AUTO_ACCEPTED values are filled; NEEDS_REVIEW / NOT_FOUND stay blank with their evidence.
+        var fullObs = boxes.map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h, q: b.q }; });
+        var _tPass = Date.now();
+        return smdPixelSource(dataUrl).then(function (px) {
+          var imageSize = px ? { w: px.natW, h: px.natH } : null;
+          var region = null; try { region = imageSize ? V2.monitorRegion(fullObs, imageSize) : null; } catch (e) {}
+          var second = region ? smdCropDataUrl(dataUrl, region).then(function (cropUrl) {
+            if (!cropUrl) return { obs: fullObs, crop: null };
+            return window.SMD_NATIVE.ocr(cropUrl, { languageCorrection: false }).then(function (co) {
+              var cb = ((co && co.boxes) || []).map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h, q: b.q }; });
+              var merged = V2.mergeObservations(fullObs, V2.mapCropObservations(cb, region));
+              return { obs: merged, crop: { region: region, boxes: cb.length, notes: merged.notes || [] } };
+            }).catch(function () { return { obs: fullObs, crop: { region: region, error: "crop-ocr-failed" } }; });
+          }) : Promise.resolve({ obs: fullObs, crop: null });
+          return second.then(function (pass) {
+            // third, targeted read: large values the first two passes did not both read are re-read in a
+            // tight crop sized to the numerals; it can only confirm or conflict, never add a value
+            var creg = null; try { creg = (imageSize && pass.crop && !pass.crop.error) ? V2.confirmationRegion(pass.obs, imageSize) : null; } catch (e) {}
+            if (!creg) return { px: px, imageSize: imageSize, obs: pass.obs, crop: pass.crop };
+            return smdCropDataUrl(dataUrl, creg).then(function (url) {
+              if (!url) return { px: px, imageSize: imageSize, obs: pass.obs, crop: pass.crop };
+              return window.SMD_NATIVE.ocr(url, { languageCorrection: false }).then(function (co) {
+                var cb = ((co && co.boxes) || []).map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h }; });
+                return { px: px, imageSize: imageSize, obs: V2.applyConfirmation(pass.obs, V2.mapCropObservations(cb, creg)), crop: assign2(pass.crop, { confirm: { region: creg, boxes: cb.length } }) };
+              }).catch(function () { return { px: px, imageSize: imageSize, obs: pass.obs, crop: pass.crop }; });
+            });
+          });
+        }).then(function (ctx) {
+          // on-device vital-tile detector (Core ML): associates values whose label Vision could not read;
+          // unavailable on older builds / Android, where the parser behaves exactly as before
+          var dv = window.SMD_NATIVE.detectVitals ? window.SMD_NATIVE.detectVitals(dataUrl) : Promise.resolve({ available: false, detections: [] });
+          return dv.then(function (r) { ctx.detections = r && r.available ? r.detections : null; return ctx; }, function () { return ctx; });
+        }).then(function (ctx) {
+          // tile reads: a detected tile with no digits read gets two crops of its own; read A unions (values enter
+          // unconfirmed), read B can only confirm identical digits. Sequential, at most 4 tiles.
+          var tiles = []; try { tiles = ctx.detections && ctx.imageSize && ctx.crop && !ctx.crop.error ? V2.tileRegions(ctx.obs, ctx.detections, ctx.imageSize) : []; } catch (e) {}
+          function readCrop(reg) {
+            return smdCropDataUrl(dataUrl, reg).then(function (u) {
+              return u ? window.SMD_NATIVE.ocr(u, { languageCorrection: false }).then(function (co) { return V2.tileObservations(V2.mapCropObservations(((co && co.boxes) || []).map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h }; }), reg), reg); }) : null;
+            }).catch(function () { return null; });
+          }
+          return tiles.reduce(function (p, t) {
+            return p.then(function () {
+              return readCrop(t).then(function (a) {
+                if (!a) return;
+                ctx.obs = V2.mergeObservations(ctx.obs, a);
+                return readCrop(assign2(t, { scale: t.scaleB })).then(function (b) { if (b) ctx.obs = V2.applyConfirmation(ctx.obs, b); });
+              });
+            });
+          }, Promise.resolve()).then(function () { ctx.tiles = tiles.length; return ctx; });
+        }).then(function (ctx) {
+          // on-device digit reader: an independent second reader may confirm Vision's digits or flag a conflict,
+          // never add a value (applyDigitReads)
+          if (!window.SMD_NATIVE.readDigits) return ctx;
+          var dboxes = []; try { dboxes = V2.digitReadBoxes(ctx.obs); } catch (e) {}
+          return window.SMD_NATIVE.readDigits(dataUrl, dboxes).then(function (r) {
+            if (r && r.available && r.reads.length) { try { ctx.obs = V2.applyDigitReads(ctx.obs, r.reads); ctx.digitReads = r.reads.length; } catch (e) {} }
+            return ctx;
+          }, function () { return ctx; });
+        }).then(function (ctx) {
+          var px = ctx.px, obsM = ctx.obs;
+          var relaxed = false; try { relaxed = localStorage.getItem("smd_icu_unlabeled_auto") === "1"; } catch (e) {}
+          var res = V2.parseMonitor(obsM, { px: px, imageSize: ctx.imageSize, twoScale: { ran: !!(ctx.crop && !ctx.crop.error) }, unlabeledAuto: relaxed, detections: ctx.detections || undefined });
+          boxes = obsM;   // evidence and overlay refer to the merged observation list
+          var vitals = {}; Object.keys(res.values).forEach(function (k) { if (typeof res.values[k] === "number") vitals[k] = res.values[k]; });
+          var fields;
+          if (kind === "all") { fields = parseFieldsOnDevice(text, "all", boxes) || {}; if (Object.keys(vitals).length) fields.vitals = vitals; else delete fields.vitals; }
+          else fields = vitals;
+          var conf = {}; Object.keys(res.fields).forEach(function (k) { conf[k] = { status: res.fields[k].status, confidence: res.fields[k].confidence, suggested: res.fields[k].suggested == null ? null : res.fields[k].suggested, reason: res.fields[k].reason || null, source: res.fields[k].source || null, retake: !!res.fields[k].retake }; });
+          var dbg = false; try { dbg = localStorage.getItem("smd_icu_ocr_debug") === "1"; } catch (e) {}
+          if (dbg) { try { console.info("[ICU OCR]\n" + V2.explain(res, boxes)); } catch (e) {} window.__SMD_ICU_OCR_LAST = { result: res, boxes: boxes, image: dataUrl, kind: kind }; }
+          return pack(fields, { fields: conf, review: Object.keys(res.review), notFound: res.notFound, layout: res.layout, stats: assign2(res.stats, { totalMs: Date.now() - _tPass, twoScale: !!ctx.crop, crop: ctx.crop }), warnings: res.warnings, colour: !!px,
+            quality: { status: res.quality.status, issues: res.quality.issues }, sources: { art: res.fields.art ? { status: res.fields.art.status, value: res.fields.art.value, suggested: res.fields.art.suggested } : null, nibp: res.fields.nibp ? { status: res.fields.nibp.status, value: res.fields.nibp.value, suggested: res.fields.nibp.suggested } : null } });
+        });
       }).catch(function () { return { error: "ocr-failed" }; });
     },
     // On-device-first AI Vision (NATIVE only) — LEGACY combined path (on-device OCR + optional
@@ -4256,7 +4743,10 @@
           if (Object.keys(localFields).length) return { mode: "fields", fields: localFields, lines: lines, source: "on-device", reason: reason };
           return { mode: "lines", lines: lines, reason: reason };
         }
-        if (!visionAiOn() || !online) { diag({ stage: "on-device-only", ocrMs: ocrMs, lines: lines.length, reason: visionAiOn() ? "offline" : "ai-off" }); return onDevice(visionAiOn() ? "offline" : "ai-off"); }
+        // Local / KB-only engine (2026-09-11): the cloud stage is a cloud AI call, so it is off; the
+        // on-device fields ARE the result. Not an error: the deterministic parser did its job.
+        var cloudOk = true; try { cloudOk = !(window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.cloudAllowed) || window.SMD_MAIK_ENGINE.cloudAllowed(); } catch (e) {}
+        if (!visionAiOn() || !online || !cloudOk) { var why = !cloudOk ? "local-engine" : visionAiOn() ? "offline" : "ai-off"; diag({ stage: "on-device-only", ocrMs: ocrMs, lines: lines.length, reason: why }); return onDevice(why); }
         var scrubbed = redactPHI(text);
         var _tc = Date.now();
         return window.SMD_AI.visionText(scrubbed, kind).then(function (r) {

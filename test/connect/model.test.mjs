@@ -15,8 +15,10 @@ test("observation carries category + coded code + value", () => {
 
 test("bundle envelope pins sccmVersion and holds all resource arrays", () => {
   const b = bundle({ tenantId: "t1", patient: patient({ id: "p1" }), sourceConnector: "fhir-r4" });
-  assert.equal(b.sccmVersion, "1.0");
+  assert.equal(b.sccmVersion, "1.1");
   assert.deepEqual(b.conditions, []);
+  // 1.1 is additive: the three new collections are present and empty, so a 1.0 consumer reads unchanged.
+  assert.deepEqual([b.administrations, b.serviceRequests, b.consents], [[], [], []]);
   assert.equal(b.meta.sourceConnector, "fhir-r4");
 });
 

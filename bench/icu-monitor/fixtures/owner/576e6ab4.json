@@ -1,0 +1,100 @@
+{
+  "id": "owner-576e6ab4",
+  "manufacturer": "philips-g40e",
+  "layout": "g40e-12lead-nibp-trend",
+  "difficulty": [
+    "real-photo",
+    "distance",
+    "glass-reflection",
+    "trend-table"
+  ],
+  "image": "576e6ab4.jpg",
+  "imageSize": {
+    "w": 3520,
+    "h": 1980
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 173
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 94
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 112,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 53,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 81,
+      "source": "NIBP"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 53
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 53
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_visible",
+      "why": "T1 shows -"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 112,
+        "dbp": 53,
+        "map": 81
+      }
+    }
+  },
+  "distractors": {
+    "nibpTrend": {
+      "13:59": [
+        127,
+        77,
+        104
+      ],
+      "08:32": [
+        145,
+        98,
+        109
+      ],
+      "19:09": [
+        112,
+        53,
+        81
+      ]
+    },
+    "datetime": "2023-12-03 21:21:00",
+    "banner": [
+      "!!! Extreme Tachy",
+      "!! NIBP: DIA Low",
+      "CMS: network disconnect"
+    ],
+    "perf": 0.5,
+    "bedNumber": 31
+  },
+  "notes": "Monitor fills ~25% of a 3520x1980 frame, shot through a glass partition. Newest trend column repeats the current NIBP 112/53/81. PR 53 differs from HR 173."
+}

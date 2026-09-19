@@ -26,7 +26,16 @@
         "ct-abdomen-coronal",
         "ct-abdomen-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "region",
+        "fma": "FMA9577",
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "Container structure; FMA9577 'abdomen' in BP3D is a bag of wall muscles + hip bones, not a surface. Linked to the 3D region instead."
+      }
     },
     "ADRENAL_GLAND": {
       "canonical_id": "ADRENAL_GLAND",
@@ -37,6 +46,7 @@
         "adrenal_gland_right"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -57,7 +67,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The suprarenal glands are flattened bodies capping the upper poles of the kidneys."
+      "definition": "The suprarenal glands are flattened bodies capping the upper poles of the kidneys.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA9604",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA15630",
+        "right": "FMA15629",
+        "note": null
+      }
     },
     "AMYGDALA": {
       "canonical_id": "AMYGDALA",
@@ -68,6 +87,7 @@
         "fs_54"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -88,7 +108,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The amygdala is an almond-shaped grey mass forming the roof and anterior wall of the tip of the inferior (temporal) horn of the lateral ventricle, deep to the uncus in the anteromedial temporal lobe, immediately anterosuperior to the head of the hippocampus."
+      "definition": "The amygdala is an almond-shaped grey mass forming the roof and anterior wall of the tip of the inferior (temporal) horn of the lateral ventricle, deep to the uncus in the anteromedial temporal lobe, immediately anterosuperior to the head of the hippocampus.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA61841",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA72833",
+        "right": "FMA72832",
+        "note": null
+      }
     },
     "AORTA": {
       "canonical_id": "AORTA",
@@ -97,6 +126,7 @@
         "aorta"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -122,7 +152,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The abdominal aorta begins at the aortic hiatus of the diaphragm and divides into the common iliac arteries."
+      "definition": "The abdominal aorta begins at the aortic hiatus of the diaphragm and divides into the common iliac arteries.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA3734",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Whole aorta. The abdomen CT modules label only the abdominal segment (FMA3789); the whole vessel is shown so the correlation is not clipped."
+      }
     },
     "AUTOCHTHONOUS_BACK_MUSCLE": {
       "canonical_id": "AUTOCHTHONOUS_BACK_MUSCLE",
@@ -133,6 +172,7 @@
         "autochthonous-back-muscle"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -158,7 +198,21 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column."
+      "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA77177",
+        "fmas": [
+          "FMA77177",
+          "FMA77178",
+          "FMA77179",
+          "FMA22823"
+        ],
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "TotalSegmentator 'autochthon' = erector spinae (iliocostalis, longissimus, spinalis) + semispinalis. BP3D has no single 'erector spinae' concept."
+      }
     },
     "BRAIN": {
       "canonical_id": "BRAIN",
@@ -167,6 +221,7 @@
         "brain"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -183,7 +238,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA50801",
+        "fmas": null,
+        "coverage": "partial",
+        "left": null,
+        "right": null,
+        "note": "BP3D models gyri, nuclei, ventricles, brainstem and cerebellum, not a closed cerebral surface. Ventricles were mis-filed as 'cardiac' upstream and are relabelled nervous on import."
+      }
     },
     "BRAINSTEM": {
       "canonical_id": "BRAINSTEM",
@@ -193,6 +257,7 @@
         "fs_16"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -214,7 +279,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The brainstem comprises the midbrain, pons and medulla oblongata."
+      "definition": "The brainstem comprises the midbrain, pons and medulla oblongata.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA79876",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Midbrain + pons + medulla oblongata (+ peduncles, colliculi)."
+      }
     },
     "CAUDATE_NUCLEUS": {
       "canonical_id": "CAUDATE_NUCLEUS",
@@ -225,6 +299,7 @@
         "fs_50"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -246,7 +321,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The caudate nucleus is an elongated arched mass of grey matter closely related to the lateral ventricle throughout its length."
+      "definition": "The caudate nucleus is an elongated arched mass of grey matter closely related to the lateral ventricle throughout its length.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA61833",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA72827",
+        "right": "FMA72826",
+        "note": null
+      }
     },
     "CEREBELLAR_CORTEX": {
       "canonical_id": "CEREBELLAR_CORTEX",
@@ -277,7 +361,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The cerebellar cortex is the thin grey mantle covering the cerebellum, thrown into closely set transverse folia, which pack a surface area of roughly half that of the cerebral cortex into about a tenth of the volume."
+      "definition": "The cerebellar cortex is the thin grey mantle covering the cerebellum, thrown into closely set transverse folia, which pack a surface area of roughly half that of the cerebral cortex into about a tenth of the volume.",
+      "bp3d": {
+        "kind": "none",
+        "fma": null,
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "BP3D ships the cerebellum as one mesh (FMA67944); it is not split into cortex and white matter."
+      }
     },
     "CEREBELLAR_WHITE_MATTER": {
       "canonical_id": "CEREBELLAR_WHITE_MATTER",
@@ -308,7 +401,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The central white core of the cerebellum (corpus medullare), which sends a branching sheet into each folium; the branching pattern seen on a median section is termed the arbor vitae."
+      "definition": "The central white core of the cerebellum (corpus medullare), which sends a branching sheet into each folium; the branching pattern seen on a median section is termed the arbor vitae.",
+      "bp3d": {
+        "kind": "none",
+        "fma": null,
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "BP3D ships the cerebellum as one mesh (FMA67944); it is not split into cortex and white matter."
+      }
     },
     "CEREBELLUM": {
       "canonical_id": "CEREBELLUM",
@@ -317,6 +419,7 @@
         "cerebellum"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -334,7 +437,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The cerebellum occupies the posterior cranial fossa below the tentorium cerebelli."
+      "definition": "The cerebellum occupies the posterior cranial fossa below the tentorium cerebelli.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA67944",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "CEREBRAL_CORTEX": {
       "canonical_id": "CEREBRAL_CORTEX",
@@ -345,6 +457,7 @@
         "fs_42"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -366,7 +479,24 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The cerebral cortex is the layer of grey matter covering the surface of the cerebral hemispheres, thrown into folds forming the gyri, separated by sulci."
+      "definition": "The cerebral cortex is the layer of grey matter covering the surface of the cerebral hemispheres, thrown into folds forming the gyri, separated by sulci.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA242182",
+        "fmas": [
+          "FMA242182",
+          "FMA242180",
+          "FMA72974",
+          "FMA72973",
+          "FMA72972",
+          "FMA72971",
+          "FMA67325"
+        ],
+        "coverage": "partial",
+        "left": "FMA242182",
+        "right": "FMA242180",
+        "note": "BP3D has named gyri and lobes, not a continuous cortical ribbon. Frontal-lobe cortex concepts + parietal/temporal/occipital lobes are combined."
+      }
     },
     "CEREBRAL_WHITE_MATTER": {
       "canonical_id": "CEREBRAL_WHITE_MATTER",
@@ -377,6 +507,7 @@
         "fs_41"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -398,7 +529,19 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The white matter of the cerebrum consists of myelinated fibres: projection, commissural and association."
+      "definition": "The white matter of the cerebrum consists of myelinated fibres: projection, commissural and association.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA260794",
+        "fmas": [
+          "FMA260794",
+          "FMA260791"
+        ],
+        "coverage": "full",
+        "left": "FMA260794",
+        "right": "FMA260791",
+        "note": "White matter of each hemisphere plus the internal capsules (FMA241998 alone omits the capsules its lateral children include)."
+      }
     },
     "CERVICAL_VERTEBRA": {
       "canonical_id": "CERVICAL_VERTEBRA",
@@ -414,6 +557,7 @@
         "vertebrae_C7"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -433,7 +577,16 @@
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
-      "definition": "The cervical vertebrae are the smallest of the movable vertebrae and bear foramina in their transverse processes."
+      "definition": "The cervical vertebrae are the smallest of the movable vertebrae and bear foramina in their transverse processes.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA9915",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "C1-C7 as seven meshes."
+      }
     },
     "CLAVICLE": {
       "canonical_id": "CLAVICLE",
@@ -444,6 +597,7 @@
         "clavicula_right"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -462,7 +616,16 @@
       "modules": [
         "ct-wholebody-axial"
       ],
-      "definition": "The clavicle forms the anterior portion of the shoulder girdle."
+      "definition": "The clavicle forms the anterior portion of the shoulder girdle.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA13321",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA13323",
+        "right": "FMA13322",
+        "note": null
+      }
     },
     "COLON": {
       "canonical_id": "COLON",
@@ -471,6 +634,7 @@
         "colon"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -496,7 +660,22 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The colon extends from the caecum to the rectum and is distinguished by its haustra and taeniae coli."
+      "definition": "The colon extends from the caecum to the rectum and is distinguished by its haustra and taeniae coli.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA14541",
+        "fmas": [
+          "FMA14541",
+          "FMA14545",
+          "FMA14546",
+          "FMA14547",
+          "FMA14544"
+        ],
+        "coverage": "partial",
+        "left": null,
+        "right": null,
+        "note": "Cecum, ascending, transverse, descending colon and rectum. BP3D 4.0 isa set has no sigmoid colon mesh."
+      }
     },
     "CORONA_RADIATA": {
       "canonical_id": "CORONA_RADIATA",
@@ -519,7 +698,16 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": "The corona radiata is the fan-shaped mass of projection fibres passing between the internal capsule and the cerebral cortex."
+      "definition": "The corona radiata is the fan-shaped mass of projection fibres passing between the internal capsule and the cerebral cortex.",
+      "bp3d": {
+        "kind": "none",
+        "fma": null,
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "Not modelled in BP3D 4.0 (white matter is one mesh per hemisphere)."
+      }
     },
     "CORPUS_CALLOSUM": {
       "canonical_id": "CORPUS_CALLOSUM",
@@ -528,6 +716,7 @@
         "corpus-callosum"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -542,7 +731,16 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": "The corpus callosum is the great transverse commissure uniting the cerebral hemispheres."
+      "definition": "The corpus callosum is the great transverse commissure uniting the cerebral hemispheres.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA86464",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "DUODENUM": {
       "canonical_id": "DUODENUM",
@@ -551,6 +749,7 @@
         "duodenum"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -574,7 +773,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The duodenum is the shortest, widest and most fixed part of the small intestine, curved around the head of the pancreas."
+      "definition": "The duodenum is the shortest, widest and most fixed part of the small intestine, curved around the head of the pancreas.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7206",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "ESOPHAGUS": {
       "canonical_id": "ESOPHAGUS",
@@ -583,6 +791,7 @@
         "esophagus"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -603,7 +812,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The oesophagus is a muscular canal passing from the pharynx through the posterior mediastinum to the stomach."
+      "definition": "The oesophagus is a muscular canal passing from the pharynx through the posterior mediastinum to the stomach.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7131",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "FEMUR": {
       "canonical_id": "FEMUR",
@@ -614,6 +832,7 @@
         "femur_right"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -638,7 +857,16 @@
         "ct-pelvis-coronal",
         "ct-pelvis-sagittal"
       ],
-      "definition": "The femur is the longest and strongest bone in the skeleton."
+      "definition": "The femur is the longest and strongest bone in the skeleton.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA9611",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA24475",
+        "right": "FMA24474",
+        "note": null
+      }
     },
     "FIBULA": {
       "canonical_id": "FIBULA",
@@ -647,6 +875,7 @@
         "fibula"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -670,7 +899,16 @@
         "ct-knee-coronal",
         "ct-knee-sagittal"
       ],
-      "definition": "The fibula is the slender lateral bone of the leg, bearing little weight but giving attachment to muscles and forming the lateral malleolus at the ankle."
+      "definition": "The fibula is the slender lateral bone of the leg, bearing little weight but giving attachment to muscles and forming the lateral malleolus at the ankle.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA24479",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA24481",
+        "right": "FMA24480",
+        "note": null
+      }
     },
     "FOOT": {
       "canonical_id": "FOOT",
@@ -679,6 +917,7 @@
         "foot"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -695,7 +934,19 @@
         "ct-foot-coronal",
         "ct-foot-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA11344",
+        "fmas": [
+          "FMA11344",
+          "FMA11343"
+        ],
+        "coverage": "partial",
+        "left": "FMA11344",
+        "right": "FMA11343",
+        "note": "Skeleton of the foot (26 bones per side); the CT module's 'Foot' is the whole region."
+      }
     },
     "FORNIX": {
       "canonical_id": "FORNIX",
@@ -704,6 +955,7 @@
         "fornix"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -718,7 +970,16 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": "The fornix is a longitudinal, arch-shaped lamella of white substance situated below the corpus callosum, consisting of two symmetrical bands, one for either hemisphere."
+      "definition": "The fornix is a longitudinal, arch-shaped lamella of white substance situated below the corpus callosum, consisting of two symmetrical bands, one for either hemisphere.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA61965",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA72925",
+        "right": "FMA72924",
+        "note": null
+      }
     },
     "FOURTH_VENTRICLE": {
       "canonical_id": "FOURTH_VENTRICLE",
@@ -728,6 +989,7 @@
         "fs_15"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -749,7 +1011,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The fourth ventricle lies between the pons and medulla in front and the cerebellum behind."
+      "definition": "The fourth ventricle lies between the pons and medulla in front and the cerebellum behind.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA78469",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Mis-filed as 'cardiac' upstream; relabelled nervous on import."
+      }
     },
     "FRONTAL_LOBE": {
       "canonical_id": "FRONTAL_LOBE",
@@ -758,6 +1029,7 @@
         "frontal-lobe"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -772,7 +1044,19 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": "The frontal lobe lies in front of the central sulcus and above the lateral fissure."
+      "definition": "The frontal lobe lies in front of the central sulcus and above the lateral fissure.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA72970",
+        "fmas": [
+          "FMA72970",
+          "FMA72969"
+        ],
+        "coverage": "full",
+        "left": "FMA72970",
+        "right": "FMA72969",
+        "note": null
+      }
     },
     "GALLBLADDER": {
       "canonical_id": "GALLBLADDER",
@@ -781,6 +1065,7 @@
         "gallbladder"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -801,7 +1086,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The gallbladder is a pear-shaped reservoir for bile lodged in a fossa on the under surface of the liver."
+      "definition": "The gallbladder is a pear-shaped reservoir for bile lodged in a fossa on the under surface of the liver.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7202",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "GLOBUS_PALLIDUS": {
       "canonical_id": "GLOBUS_PALLIDUS",
@@ -812,6 +1106,7 @@
         "globus-pallidus"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -833,7 +1128,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The globus pallidus is the medial, paler part of the lentiform nucleus."
+      "definition": "The globus pallidus is the medial, paler part of the lentiform nucleus.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA61835",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA72831",
+        "right": "FMA72830",
+        "note": null
+      }
     },
     "GLUTEAL_MUSCLE": {
       "canonical_id": "GLUTEAL_MUSCLE",
@@ -848,6 +1152,7 @@
         "gluteus_minimus_right"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -868,7 +1173,20 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The gluteal muscles extend, abduct and rotate the thigh at the hip joint."
+      "definition": "The gluteal muscles extend, abduct and rotate the thigh at the hip joint.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA22314",
+        "fmas": [
+          "FMA22314",
+          "FMA22315",
+          "FMA22317"
+        ],
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Gluteus maximus, medius, minimus (both sides)."
+      }
     },
     "HAND": {
       "canonical_id": "HAND",
@@ -877,6 +1195,7 @@
         "hand"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -893,7 +1212,19 @@
         "ct-hand-coronal",
         "ct-hand-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA9714",
+        "fmas": [
+          "FMA9714",
+          "FMA9713"
+        ],
+        "coverage": "partial",
+        "left": "FMA9714",
+        "right": "FMA9713",
+        "note": "Skeleton of the hand; the CT module's 'Hand' is the whole region."
+      }
     },
     "HAND_BONE": {
       "canonical_id": "HAND_BONE",
@@ -902,6 +1233,7 @@
         "hand-bone"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -922,7 +1254,20 @@
         "ct-hand-coronal",
         "ct-hand-sagittal"
       ],
-      "definition": "The skeleton of the hand comprises the eight carpal bones of the wrist, five metacarpals, and fourteen phalanges - two in the thumb and three in each of the other digits."
+      "definition": "The skeleton of the hand comprises the eight carpal bones of the wrist, five metacarpals, and fourteen phalanges - two in the thumb and three in each of the other digits.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA23889",
+        "fmas": [
+          "FMA23889",
+          "FMA9612",
+          "FMA23914"
+        ],
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Carpal bones + metacarpals + phalanges of the fingers."
+      }
     },
     "HEAD": {
       "canonical_id": "HEAD",
@@ -947,7 +1292,16 @@
         "ct-head-coronal",
         "ct-head-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "region",
+        "fma": "FMA7154",
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "HEART": {
       "canonical_id": "HEART",
@@ -956,6 +1310,7 @@
         "heart"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -976,7 +1331,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The heart is a hollow muscular organ enclosed in the pericardium, occupying the middle mediastinum."
+      "definition": "The heart is a hollow muscular organ enclosed in the pericardium, occupying the middle mediastinum.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7088",
+        "fmas": null,
+        "coverage": "partial",
+        "left": null,
+        "right": null,
+        "note": "BP3D 4.0 isa set models chamber cavities, atrial walls, one ventricular wall and the valve leaflets; there is no single closed heart surface."
+      }
     },
     "HIPPOCAMPUS": {
       "canonical_id": "HIPPOCAMPUS",
@@ -987,6 +1351,7 @@
         "hippocampus"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1008,7 +1373,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The hippocampus is a curved elevation of grey matter in the floor of the temporal horn of the lateral ventricle."
+      "definition": "The hippocampus is a curved elevation of grey matter in the floor of the temporal horn of the lateral ventricle.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA62493",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA72714",
+        "right": "FMA72713",
+        "note": null
+      }
     },
     "HIP_BONE": {
       "canonical_id": "HIP_BONE",
@@ -1019,6 +1393,7 @@
         "hip_right"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1041,7 +1416,16 @@
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
-      "definition": "The hip bone is a large flattened irregular bone formed by the ilium, ischium and pubis."
+      "definition": "The hip bone is a large flattened irregular bone formed by the ilium, ischium and pubis.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA16585",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA16587",
+        "right": "FMA16586",
+        "note": null
+      }
     },
     "ILIAC_ARTERY": {
       "canonical_id": "ILIAC_ARTERY",
@@ -1052,6 +1436,7 @@
         "iliac_artery_right"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1072,7 +1457,20 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The common iliac arteries arise from the aortic bifurcation and divide into external and internal iliac arteries."
+      "definition": "The common iliac arteries arise from the aortic bifurcation and divide into external and internal iliac arteries.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA14764",
+        "fmas": [
+          "FMA14764",
+          "FMA18805",
+          "FMA18808"
+        ],
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Common + external + internal iliac arteries."
+      }
     },
     "ILIAC_VEIN": {
       "canonical_id": "ILIAC_VEIN",
@@ -1083,6 +1481,7 @@
         "iliac_vena_right"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1103,7 +1502,20 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The common iliac veins unite to form the inferior vena cava."
+      "definition": "The common iliac veins unite to form the inferior vena cava.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA14333",
+        "fmas": [
+          "FMA14333",
+          "FMA18883",
+          "FMA18884"
+        ],
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Common + external + internal iliac veins."
+      }
     },
     "ILIOPSOAS": {
       "canonical_id": "ILIOPSOAS",
@@ -1114,6 +1526,7 @@
         "iliopsoas_right"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1139,7 +1552,19 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The iliacus and psoas major act together as the chief flexor of the thigh at the hip."
+      "definition": "The iliacus and psoas major act together as the chief flexor of the thigh at the hip.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA18060",
+        "fmas": [
+          "FMA18060",
+          "FMA22310"
+        ],
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Psoas major + iliacus."
+      }
     },
     "INFERIOR_VENA_CAVA": {
       "canonical_id": "INFERIOR_VENA_CAVA",
@@ -1149,6 +1574,7 @@
         "inferior_vena_cava"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1169,7 +1595,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The inferior vena cava returns blood from the lower half of the body to the right atrium."
+      "definition": "The inferior vena cava returns blood from the lower half of the body to the right atrium.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA10951",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "INSULA": {
       "canonical_id": "INSULA",
@@ -1178,6 +1613,7 @@
         "insula"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1192,7 +1628,16 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": "The insula is the cortex buried in the depth of the lateral fissure, covered by the opercula."
+      "definition": "The insula is the cortex buried in the depth of the lateral fissure, covered by the opercula.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA67329",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA72978",
+        "right": "FMA72977",
+        "note": null
+      }
     },
     "INTERNAL_CAPSULE": {
       "canonical_id": "INTERNAL_CAPSULE",
@@ -1201,6 +1646,7 @@
         "internal-capsule"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1215,7 +1661,16 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": "The internal capsule is a broad band of white matter between the caudate nucleus and thalamus medially and the lentiform nucleus laterally."
+      "definition": "The internal capsule is a broad band of white matter between the caudate nucleus and thalamus medially and the lentiform nucleus laterally.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA61950",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA72907",
+        "right": "FMA72906",
+        "note": null
+      }
     },
     "KIDNEY": {
       "canonical_id": "KIDNEY",
@@ -1226,6 +1681,7 @@
         "kidney_right"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1246,7 +1702,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The kidneys are situated in the posterior part of the abdomen, one on either side of the vertebral column, behind the peritoneum."
+      "definition": "The kidneys are situated in the posterior part of the abdomen, one on either side of the vertebral column, behind the peritoneum.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7203",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA7205",
+        "right": "FMA7204",
+        "note": null
+      }
     },
     "LATERAL_VENTRICLE": {
       "canonical_id": "LATERAL_VENTRICLE",
@@ -1259,6 +1724,7 @@
         "lateral-ventricle"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1280,7 +1746,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The lateral ventricles are two irregular cavities within the cerebral hemispheres, communicating with the third ventricle through the interventricular foramina."
+      "definition": "The lateral ventricles are two irregular cavities within the cerebral hemispheres, communicating with the third ventricle through the interventricular foramina.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA78448",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA78450",
+        "right": "FMA78449",
+        "note": "Mis-filed as 'cardiac' upstream; relabelled nervous on import."
+      }
     },
     "LIVER": {
       "canonical_id": "LIVER",
@@ -1309,7 +1784,19 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The liver is the largest gland in the body, occupying the right hypochondrium and extending into the epigastrium."
+      "definition": "The liver is the largest gland in the body, occupying the right hypochondrium and extending into the epigastrium.",
+      "bp3d": {
+        "kind": "related",
+        "fma": "FMA13365",
+        "fmas": [
+          "FMA13365",
+          "FMA50735"
+        ],
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "BP3D 4.0 isa set has NO liver surface mesh: only the caudate lobe, the biliary tree and the intrahepatic vessels. Shown as related structures."
+      }
     },
     "LOWER_LIMB": {
       "canonical_id": "LOWER_LIMB",
@@ -1318,6 +1805,7 @@
         "lower-limb"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1334,7 +1822,19 @@
         "ct-knee-coronal",
         "ct-knee-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA7188",
+        "fmas": [
+          "FMA7188",
+          "FMA7187"
+        ],
+        "coverage": "partial",
+        "left": "FMA7188",
+        "right": "FMA7187",
+        "note": "Skeleton of the lower limb; the CT knee module's 'Lower limb' is the whole region."
+      }
     },
     "LOWER_LOBE_LEFT": {
       "canonical_id": "LOWER_LOBE_LEFT",
@@ -1364,7 +1864,18 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The lower lobe of the left lung lies posteroinferior to the oblique fissure."
+      "definition": "The lower lobe of the left lung lies posteroinferior to the oblique fissure.",
+      "bp3d": {
+        "kind": "related",
+        "fma": "FMA7371",
+        "fmas": [
+          "FMA7371"
+        ],
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "No lobe surface in BP3D 4.0 isa set; the lobe's segmental bronchial tree is shown as related."
+      }
     },
     "LOWER_LOBE_RIGHT": {
       "canonical_id": "LOWER_LOBE_RIGHT",
@@ -1394,7 +1905,18 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The lower lobe of the right lung lies below and behind the oblique fissure."
+      "definition": "The lower lobe of the right lung lies below and behind the oblique fissure.",
+      "bp3d": {
+        "kind": "related",
+        "fma": "FMA7337",
+        "fmas": [
+          "FMA7337"
+        ],
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "No lobe surface in BP3D 4.0 isa set; the lobe's segmental bronchial tree is shown as related."
+      }
     },
     "LUMBAR_VERTEBRA": {
       "canonical_id": "LUMBAR_VERTEBRA",
@@ -1408,6 +1930,7 @@
         "vertebrae_L5"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1430,7 +1953,16 @@
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
-      "definition": "The lumbar vertebrae are the largest segments of the movable part of the vertebral column."
+      "definition": "The lumbar vertebrae are the largest segments of the movable part of the vertebral column.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA9921",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "L1-L5 as five meshes."
+      }
     },
     "LUNG": {
       "canonical_id": "LUNG",
@@ -1461,6 +1993,18 @@
         "ct-thorax-sagittal"
       ],
       "definition": "The lungs are the essential organs of respiration, occupying the pleural cavities on either side of the mediastinum. Each is conical, with an apex reaching above the first rib and a concave base resting on the diaphragm.",
+      "bp3d": {
+        "kind": "related",
+        "fma": "FMA7310",
+        "fmas": [
+          "FMA7310",
+          "FMA7309"
+        ],
+        "coverage": "none",
+        "left": "FMA7310",
+        "right": "FMA7309",
+        "note": "No lung surface in BP3D 4.0 isa set; the bronchial tree is shown as related."
+      },
       "caveat": "whole organ only on cadaver CT; lobes need living aerated lung"
     },
     "METATARSAL": {
@@ -1470,6 +2014,7 @@
         "metatarsal"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1490,7 +2035,16 @@
         "ct-foot-coronal",
         "ct-foot-sagittal"
       ],
-      "definition": "The five metatarsal bones are long bones lying between the tarsus and the phalanges, forming the skeleton of the forefoot."
+      "definition": "The five metatarsal bones are long bones lying between the tarsus and the phalanges, forming the skeleton of the forefoot.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA24492",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "MIDDLE_LOBE_RIGHT": {
       "canonical_id": "MIDDLE_LOBE_RIGHT",
@@ -1520,7 +2074,18 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The middle lobe of the right lung is a wedge lying between the horizontal and oblique fissures."
+      "definition": "The middle lobe of the right lung is a wedge lying between the horizontal and oblique fissures.",
+      "bp3d": {
+        "kind": "related",
+        "fma": "FMA7383",
+        "fmas": [
+          "FMA7383"
+        ],
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "No lobe surface in BP3D 4.0 isa set; the lobe's segmental bronchial tree is shown as related."
+      }
     },
     "NUCLEUS_ACCUMBENS": {
       "canonical_id": "NUCLEUS_ACCUMBENS",
@@ -1551,7 +2116,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "A grey mass lying where the head of the caudate nucleus and the putamen become continuous beneath the anterior limb of the internal capsule, forming the ventral part of the striatum."
+      "definition": "A grey mass lying where the head of the caudate nucleus and the putamen become continuous beneath the anterior limb of the internal capsule, forming the ventral part of the striatum.",
+      "bp3d": {
+        "kind": "none",
+        "fma": null,
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "Not modelled in BP3D 4.0."
+      }
     },
     "OCCIPITAL_LOBE": {
       "canonical_id": "OCCIPITAL_LOBE",
@@ -1560,6 +2134,7 @@
         "occipital-lobe"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1574,7 +2149,16 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": "The occipital lobe forms the posterior extremity of the cerebral hemisphere, behind the parieto-occipital sulcus."
+      "definition": "The occipital lobe forms the posterior extremity of the cerebral hemisphere, behind the parieto-occipital sulcus.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA67325",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA72976",
+        "right": "FMA72975",
+        "note": null
+      }
     },
     "PANCREAS": {
       "canonical_id": "PANCREAS",
@@ -1583,6 +2167,7 @@
         "pancreas"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1603,7 +2188,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The pancreas is a compound racemose gland lying transversely across the posterior abdominal wall behind the stomach."
+      "definition": "The pancreas is a compound racemose gland lying transversely across the posterior abdominal wall behind the stomach.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7198",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Parenchyma + pancreatic duct tree."
+      }
     },
     "PARANASAL_SINUS": {
       "canonical_id": "PARANASAL_SINUS",
@@ -1633,7 +2227,16 @@
         "ct-head-coronal",
         "ct-head-sagittal"
       ],
-      "definition": "The paranasal sinuses are air-filled cavities within the frontal, maxillary, ethmoid and sphenoid bones, communicating with the nasal cavity and lined by mucous membrane. The mastoid air cells of the temporal bone are similarly pneumatised."
+      "definition": "The paranasal sinuses are air-filled cavities within the frontal, maxillary, ethmoid and sphenoid bones, communicating with the nasal cavity and lined by mucous membrane. The mastoid air cells of the temporal bone are similarly pneumatised.",
+      "bp3d": {
+        "kind": "none",
+        "fma": null,
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "BP3D models bones, not air spaces; no maxillary/frontal/sphenoid/ethmoid sinus cavities exist in the isa set."
+      }
     },
     "PARIETAL_LOBE": {
       "canonical_id": "PARIETAL_LOBE",
@@ -1642,6 +2245,7 @@
         "parietal-lobe"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1656,7 +2260,19 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": "The parietal lobe lies behind the central sulcus and in front of the parieto-occipital sulcus."
+      "definition": "The parietal lobe lies behind the central sulcus and in front of the parieto-occipital sulcus.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA72974",
+        "fmas": [
+          "FMA72974",
+          "FMA72973"
+        ],
+        "coverage": "full",
+        "left": "FMA72974",
+        "right": "FMA72973",
+        "note": null
+      }
     },
     "PELVIS": {
       "canonical_id": "PELVIS",
@@ -1681,7 +2297,16 @@
         "ct-pelvis-coronal",
         "ct-pelvis-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "region",
+        "fma": "FMA9578",
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "Container structure. The bony pelvis (FMA16580 = both hip bones + sacrum) is reachable through HIP_BONE and SACRUM."
+      }
     },
     "PHALANX_FOOT": {
       "canonical_id": "PHALANX_FOOT",
@@ -1690,6 +2315,7 @@
         "phalanx-foot"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1710,7 +2336,16 @@
         "ct-foot-coronal",
         "ct-foot-sagittal"
       ],
-      "definition": "The phalanges of the foot are fourteen in number, three for each of the lesser toes and two for the great toe."
+      "definition": "The phalanges of the foot are fourteen in number, three for each of the lesser toes and two for the great toe.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA24493",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "PORTAL_VEIN": {
       "canonical_id": "PORTAL_VEIN",
@@ -1720,6 +2355,7 @@
         "portal_vein_and_splenic_vein"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1740,7 +2376,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The portal vein conveys blood from the abdominal digestive tract and spleen to the liver."
+      "definition": "The portal vein conveys blood from the abdominal digestive tract and spleen to the liver.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA66645",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Pre-hepatic trunk + intrahepatic branches."
+      }
     },
     "PROSTATE": {
       "canonical_id": "PROSTATE",
@@ -1749,6 +2394,7 @@
         "prostate"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1769,7 +2415,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The prostate is a firm glandular body surrounding the commencement of the male urethra."
+      "definition": "The prostate is a firm glandular body surrounding the commencement of the male urethra.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA9600",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "PUTAMEN": {
       "canonical_id": "PUTAMEN",
@@ -1780,6 +2435,7 @@
         "putamen"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1801,7 +2457,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The putamen is the outer and larger part of the striatum, separated from the globus pallidus by a lamina of white matter."
+      "definition": "The putamen is the outer and larger part of the striatum, separated from the globus pallidus by a lamina of white matter.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA61834",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA72829",
+        "right": "FMA72828",
+        "note": null
+      }
     },
     "RIB": {
       "canonical_id": "RIB",
@@ -1834,6 +2499,7 @@
         "rib_right_9"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1857,7 +2523,16 @@
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
-      "definition": "The ribs are elastic arches of bone forming the greater part of the thoracic skeleton. They are twelve in number on either side, articulating behind with the vertebral column."
+      "definition": "The ribs are elastic arches of bone forming the greater part of the thoracic skeleton. They are twelve in number on either side, articulating behind with the vertebral column.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7574",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "24 ribs as individual meshes."
+      }
     },
     "SACRUM": {
       "canonical_id": "SACRUM",
@@ -1867,6 +2542,7 @@
         "vertebrae_S1"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1888,7 +2564,16 @@
         "ct-pelvis-sagittal",
         "ct-wholebody-coronal"
       ],
-      "definition": "The sacrum is a large triangular bone formed by the union of five vertebrae, wedged between the two hip bones."
+      "definition": "The sacrum is a large triangular bone formed by the union of five vertebrae, wedged between the two hip bones.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA16202",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "SKELETON": {
       "canonical_id": "SKELETON",
@@ -1912,7 +2597,16 @@
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "system",
+        "fma": "FMA23881",
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "SKULL": {
       "canonical_id": "SKULL",
@@ -1921,6 +2615,7 @@
         "skull"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1944,7 +2639,16 @@
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
-      "definition": "The skull is the skeleton of the head, comprising the cranium, which encloses the brain, and the mandible. Its bones are united by sutures except at the temporomandibular joint."
+      "definition": "The skull is the skeleton of the head, comprising the cranium, which encloses the brain, and the mandible. Its bones are united by sutures except at the temporomandibular joint.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA46565",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Cranial + facial bones (the upstream concept also lists eyeball parts, filtered out here)."
+      }
     },
     "SMALL_BOWEL": {
       "canonical_id": "SMALL_BOWEL",
@@ -1954,6 +2658,7 @@
         "small_bowel"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -1979,7 +2684,19 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The jejunum and ileum form the mesenteric portion of the small intestine, suspended by the mesentery."
+      "definition": "The jejunum and ileum form the mesenteric portion of the small intestine, suspended by the mesentery.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA7207",
+        "fmas": [
+          "FMA7207",
+          "FMA7208"
+        ],
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Jejunum + ileum. Duodenum is its own structure."
+      }
     },
     "SPINAL_CORD": {
       "canonical_id": "SPINAL_CORD",
@@ -1989,6 +2706,7 @@
         "spinal_cord"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2009,7 +2727,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The spinal cord is the elongated part of the central nervous system occupying the upper two-thirds of the vertebral canal."
+      "definition": "The spinal cord is the elongated part of the central nervous system occupying the upper two-thirds of the vertebral canal.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7647",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "SPLEEN": {
       "canonical_id": "SPLEEN",
@@ -2018,6 +2745,7 @@
         "spleen"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2038,7 +2766,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The spleen is a highly vascular organ situated in the left hypochondrium between the fundus of the stomach and the diaphragm."
+      "definition": "The spleen is a highly vascular organ situated in the left hypochondrium between the fundus of the stomach and the diaphragm.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7196",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "STERNUM": {
       "canonical_id": "STERNUM",
@@ -2047,6 +2784,7 @@
         "sternum"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2070,7 +2808,16 @@
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
-      "definition": "The sternum is a flat narrow bone forming the middle of the anterior wall of the thorax, consisting of the manubrium, the body and the xiphoid process."
+      "definition": "The sternum is a flat narrow bone forming the middle of the anterior wall of the thorax, consisting of the manubrium, the body and the xiphoid process.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7485",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Manubrium + body + xiphoid."
+      }
     },
     "STOMACH": {
       "canonical_id": "STOMACH",
@@ -2079,6 +2826,7 @@
         "stomach"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2099,7 +2847,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The stomach is the most dilated part of the digestive tube, lying between the oesophagus and the duodenum."
+      "definition": "The stomach is the most dilated part of the digestive tube, lying between the oesophagus and the duodenum.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7148",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "SUBARACHNOID_SPACE": {
       "canonical_id": "SUBARACHNOID_SPACE",
@@ -2122,7 +2879,16 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": "The subarachnoid space lies between the arachnoid mater and the pia mater and contains cerebrospinal fluid."
+      "definition": "The subarachnoid space lies between the arachnoid mater and the pia mater and contains cerebrospinal fluid.",
+      "bp3d": {
+        "kind": "none",
+        "fma": null,
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "BP3D models parenchyma and vessels, not CSF spaces."
+      }
     },
     "TARSAL": {
       "canonical_id": "TARSAL",
@@ -2131,6 +2897,7 @@
         "tarsal"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2151,7 +2918,16 @@
         "ct-foot-coronal",
         "ct-foot-sagittal"
       ],
-      "definition": "The tarsus consists of seven bones - the calcaneus, talus, navicular, cuboid and three cuneiforms - forming the posterior half of the foot and the ankle."
+      "definition": "The tarsus consists of seven bones - the calcaneus, talus, navicular, cuboid and three cuneiforms - forming the posterior half of the foot and the ankle.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA24491",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "TELENCEPHALON": {
       "canonical_id": "TELENCEPHALON",
@@ -2160,6 +2936,7 @@
         "telencephalon"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2174,7 +2951,16 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA62000",
+        "fmas": null,
+        "coverage": "partial",
+        "left": null,
+        "right": null,
+        "note": "Gyri, lobes, basal ganglia, white matter; no closed hemispheric surface."
+      }
     },
     "TEMPORAL_LOBE": {
       "canonical_id": "TEMPORAL_LOBE",
@@ -2183,6 +2969,7 @@
         "temporal-lobe"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2197,7 +2984,19 @@
       "modules": [
         "brain-mri-axial-t1"
       ],
-      "definition": "The temporal lobe lies below the lateral fissure and extends back to the occipital lobe."
+      "definition": "The temporal lobe lies below the lateral fissure and extends back to the occipital lobe.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA72972",
+        "fmas": [
+          "FMA72972",
+          "FMA72971"
+        ],
+        "coverage": "full",
+        "left": "FMA72972",
+        "right": "FMA72971",
+        "note": null
+      }
     },
     "THALAMUS": {
       "canonical_id": "THALAMUS",
@@ -2208,6 +3007,7 @@
         "thalamus"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2229,7 +3029,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The thalamus is a large ovoid mass of grey matter forming much of the lateral wall of the third ventricle."
+      "definition": "The thalamus is a large ovoid mass of grey matter forming much of the lateral wall of the third ventricle.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA62007",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA258716",
+        "right": "FMA258714",
+        "note": null
+      }
     },
     "THIRD_VENTRICLE": {
       "canonical_id": "THIRD_VENTRICLE",
@@ -2239,6 +3048,7 @@
         "third-ventricle"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2260,7 +3070,16 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "The third ventricle is a narrow median cleft between the two thalami."
+      "definition": "The third ventricle is a narrow median cleft between the two thalami.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA78454",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Mis-filed as 'cardiac' upstream; relabelled nervous on import."
+      }
     },
     "THORACIC_CAGE": {
       "canonical_id": "THORACIC_CAGE",
@@ -2269,6 +3088,7 @@
         "thoracic-cage"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2285,7 +3105,16 @@
         "ct-thorax-coronal",
         "ct-thorax-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA7480",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "Ribs + costal cartilages + sternum."
+      }
     },
     "THORACIC_VERTEBRA": {
       "canonical_id": "THORACIC_VERTEBRA",
@@ -2307,6 +3136,7 @@
         "vertebrae_T9"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2330,7 +3160,16 @@
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
-      "definition": "The thoracic vertebrae are twelve in number and are distinguished by the costal facets on the sides of their bodies for articulation with the heads of the ribs."
+      "definition": "The thoracic vertebrae are twelve in number and are distinguished by the costal facets on the sides of their bodies for articulation with the heads of the ribs.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA9139",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": "T1-T12 as twelve meshes."
+      }
     },
     "THORAX": {
       "canonical_id": "THORAX",
@@ -2355,7 +3194,16 @@
         "ct-thorax-coronal",
         "ct-thorax-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "region",
+        "fma": "FMA9576",
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "TIBIA": {
       "canonical_id": "TIBIA",
@@ -2364,6 +3212,7 @@
         "tibia"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2387,7 +3236,16 @@
         "ct-knee-coronal",
         "ct-knee-sagittal"
       ],
-      "definition": "The tibia is the medial and larger of the two bones of the leg, transmitting the weight of the body from the femur to the foot."
+      "definition": "The tibia is the medial and larger of the two bones of the leg, transmitting the weight of the body from the femur to the foot.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA24476",
+        "fmas": null,
+        "coverage": "full",
+        "left": "FMA24478",
+        "right": "FMA24477",
+        "note": null
+      }
     },
     "TORSO": {
       "canonical_id": "TORSO",
@@ -2412,7 +3270,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "region",
+        "fma": "FMA7181",
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "Container structure of the living-patient torso modules."
+      }
     },
     "UPPER_LOBE_LEFT": {
       "canonical_id": "UPPER_LOBE_LEFT",
@@ -2442,7 +3309,18 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The left lung is divided by the oblique fissure into an upper and a lower lobe; the upper lobe includes the lingula."
+      "definition": "The left lung is divided by the oblique fissure into an upper and a lower lobe; the upper lobe includes the lingula.",
+      "bp3d": {
+        "kind": "related",
+        "fma": "FMA7370",
+        "fmas": [
+          "FMA7370"
+        ],
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "No lobe surface in BP3D 4.0 isa set; the lobe's segmental bronchial tree is shown as related."
+      }
     },
     "URINARY_BLADDER": {
       "canonical_id": "URINARY_BLADDER",
@@ -2452,6 +3330,7 @@
         "urinary_bladder"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2472,7 +3351,16 @@
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
       ],
-      "definition": "The urinary bladder is a musculomembranous reservoir for urine situated in the pelvis behind the pubic symphysis."
+      "definition": "The urinary bladder is a musculomembranous reservoir for urine situated in the pelvis behind the pubic symphysis.",
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA15900",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     },
     "VENTRAL_DIENCEPHALON": {
       "canonical_id": "VENTRAL_DIENCEPHALON",
@@ -2483,6 +3371,7 @@
         "ventral-diencephalon"
       ],
       "modality": [
+        "3D",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2503,7 +3392,19 @@
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": "NOT a single named structure and NOT a Terminologia Anatomica term: this is the FreeSurfer \"ventral diencephalon\" segmentation label, a composite of the grey and white matter packed between the thalamus above, the internal capsule laterally and the midbrain below. It contains the hypothalamus, mammillary body and subthalamic nucleus (diencephalic), the geniculate bodies (metathalamic), the substantia nigra and red nucleus (which are MIDBRAIN, not diencephalon), the zona incerta, and fibre bundles including the medial lemniscus and lenticular fasciculus. It is shown as an aggregate because this segmentation cannot separate them: do not learn any one of these structures from this pin."
+      "definition": "NOT a single named structure and NOT a Terminologia Anatomica term: this is the FreeSurfer \"ventral diencephalon\" segmentation label, a composite of the grey and white matter packed between the thalamus above, the internal capsule laterally and the midbrain below. It contains the hypothalamus, mammillary body and subthalamic nucleus (diencephalic), the geniculate bodies (metathalamic), the substantia nigra and red nucleus (which are MIDBRAIN, not diencephalon), the zona incerta, and fibre bundles including the medial lemniscus and lenticular fasciculus. It is shown as an aggregate because this segmentation cannot separate them: do not learn any one of these structures from this pin.",
+      "bp3d": {
+        "kind": "composite",
+        "fma": "FMA62008",
+        "fmas": [
+          "FMA62008",
+          "FMA62001"
+        ],
+        "coverage": "partial",
+        "left": null,
+        "right": null,
+        "note": "SynthSeg's composite 'ventral DC' has no FMA equivalent; hypothalamus + diencephalon parts are shown."
+      }
     },
     "VERTEBRAL_CANAL": {
       "canonical_id": "VERTEBRAL_CANAL",
@@ -2533,7 +3434,16 @@
         "ct-thorax-coronal",
         "ct-thorax-sagittal"
       ],
-      "definition": "The vertebral canal is formed by the vertebral foramina in series and contains the spinal cord with its meninges and vessels."
+      "definition": "The vertebral canal is formed by the vertebral foramina in series and contains the spinal cord with its meninges and vessels.",
+      "bp3d": {
+        "kind": "none",
+        "fma": null,
+        "fmas": null,
+        "coverage": "none",
+        "left": null,
+        "right": null,
+        "note": "A space, not a structure, in BP3D. Use SPINAL_CORD and the vertebrae."
+      }
     },
     "VERTEBRAL_COLUMN": {
       "canonical_id": "VERTEBRAL_COLUMN",
@@ -2542,6 +3452,7 @@
         "vertebral-column"
       ],
       "modality": [
+        "3D",
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
@@ -2558,7 +3469,16 @@
         "ct-abdomen-coronal",
         "ct-abdomen-sagittal"
       ],
-      "definition": null
+      "definition": null,
+      "bp3d": {
+        "kind": "concept",
+        "fma": "FMA13478",
+        "fmas": null,
+        "coverage": "full",
+        "left": null,
+        "right": null,
+        "note": null
+      }
     }
   }
 }

@@ -1,0 +1,172 @@
+{
+  "site": "nasopharynx",
+  "name": "Nasopharynx",
+  "system": "Oncology / Head and neck",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Nasopharyngeal carcinoma (usually non-keratinising, EBV-associated) is staged separately from other head and neck sites because nodal spread is typically bilateral and retropharyngeal. The 8th edition keeps skull-base and cranial-nerve criteria for T3/T4, defines N by laterality, size (6 cm cutoff) and position relative to the caudal border of the cricoid cartilage instead of fixation, and drops supraclavicular-fossa terminology. EBV DNA level is a strong prognostic marker but is not part of the anatomic stage.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No tumour identified, but EBV-positive cervical node(s) involved",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour confined to nasopharynx, or extends to oropharynx and/or nasal cavity without parapharyngeal involvement",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour with parapharyngeal extension, and/or involvement of medial pterygoid, lateral pterygoid and/or prevertebral muscles",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour invades bony structures of skull base, cervical vertebra, pterygoid structures and/or paranasal sinuses",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumour with intracranial extension, cranial nerve involvement, hypopharynx, orbit, parotid gland and/or extensive soft-tissue infiltration beyond the lateral surface of the lateral pterygoid muscle",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Unilateral cervical node(s) 6 cm or smaller above the caudal border of the cricoid cartilage, and/or unilateral or bilateral retropharyngeal node(s) 6 cm or smaller",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Bilateral cervical node(s) 6 cm or smaller above the caudal border of the cricoid cartilage",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3a",
+          "label": "Cervical node(s) larger than 6 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3b",
+          "label": "Cervical node(s) extending below the caudal border of the cricoid cartilage",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T1 or T2",
+          "n": "N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T3",
+          "n": "N0, N1 or N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4",
+          "n": "any N",
+          "m": "M0",
+          "basis": "Very advanced local disease",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "any T",
+          "n": "N3",
+          "m": "M0",
+          "basis": "Very advanced nodal disease",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Retropharyngeal nodes and cervical levels I through V, including supraclavicular nodes; nodes below the caudal cricoid border upstage to N3b. Parotid nodes are non-regional.",
+      "histologicGrade": "Keratinising squamous cell carcinoma is graded G1 to G3; non-keratinising differentiated and undifferentiated carcinomas are conventionally not graded.",
+      "histopathologicTypes": "Keratinising squamous cell carcinoma; non-keratinising carcinoma, differentiated subtype; non-keratinising carcinoma, undifferentiated subtype (lymphoepithelial, EBV-associated); basaloid squamous cell carcinoma (rare).",
+      "prognosticFactors": [
+        "T category (skull-base/cranial-nerve invasion)",
+        "N category (bilaterality, size, level below cricoid)",
+        "Plasma EBV DNA load",
+        "Histologic subtype (keratinising vs non-keratinising)",
+        "Cranial nerve palsy",
+        "Age and performance status"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

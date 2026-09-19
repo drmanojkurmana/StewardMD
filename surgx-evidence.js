@@ -186,6 +186,7 @@
         .then(function (r) {
           if (!r) return { ok: false, reason: "unavailable" };
           if (r.over) return { ok: false, reason: "quota", message: r.message };
+          if (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only") return { ok: false, reason: "engine", message: r.message };
           if (!r.text) return { ok: false, reason: r.reason || "empty" };
           return { ok: true, text: String(r.text), sources: arr(r.sources), usage: r.usage || null, cached: !!r.cached };
         })

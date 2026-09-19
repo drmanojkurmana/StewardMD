@@ -57,6 +57,13 @@
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
     atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
+    // AgentConnect: unified hospital onboarding hub
+    agentconnect: function () {
+      if (window.SMD_openAgentConnect) return window.SMD_openAgentConnect();
+      var b = window.SMD_CONNECT_AGENT_BOOT;
+      if (b && b.open) b.open().catch(function (e) { toast("AgentConnect unavailable: " + (e && e.message ? e.message : "load failed")); });
+      else toast("AgentConnect is not enabled");
+    },
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     tour: function () { if (window.SMD_TOUR && SMD_TOUR.start) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); },
     feedback: function () {
@@ -185,6 +192,29 @@
       "#sbMenu[data-sbr] .sbr-adv button{color:#14202b}",
       "#sbMenu[data-sbr] .sbr-status{margin:16px 4px 6px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;gap:9px;color:#0b5a50;font:600 12.5px/1 var(--sans,system-ui)}",
       "#sbMenu[data-sbr] .sbr-status b{width:9px;height:9px;border-radius:50%;background:#12b886;display:inline-block;box-shadow:0 0 0 3px rgba(18,184,134,.2)}",
+      /* ── Dark mode overrides for liquid glass sidebar ── */
+      "body.dark #sbDrawer,body.v3-dark #sbDrawer{background:rgba(15,23,42,.92)!important;-webkit-backdrop-filter:blur(24px) saturate(1.8);backdrop-filter:blur(24px) saturate(1.8)}",
+      "body.dark #sbDrawer .sb-head,body.v3-dark #sbDrawer .sb-head{background:rgba(30,41,59,.7)!important;border-bottom:1px solid rgba(51,65,85,.6)!important}",
+      "body.dark #sbDrawer .sb-head *,body.v3-dark #sbDrawer .sb-head *{color:#f8fafc!important}",
+      "body.dark #sbDrawer .smd-sba,body.v3-dark #sbDrawer .smd-sba{background:rgba(30,41,59,.7)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(51,65,85,.8)!important;box-shadow:0 8px 22px -12px rgba(0,0,0,.6)!important}",
+      "body.dark #sbDrawer .smd-sba-name,body.v3-dark #sbDrawer .smd-sba-name{color:#f8fafc!important}",
+      "body.dark #sbDrawer .smd-sba-email,body.dark #sbDrawer .smd-sba-prov,body.v3-dark #sbDrawer .smd-sba-email,body.v3-dark #sbDrawer .smd-sba-prov{color:#94a3b8!important}",
+      "body.dark #sbDrawer .smd-sba-hosp,body.v3-dark #sbDrawer .smd-sba-hosp{color:#2dd4bf!important}",
+      "body.dark #sbDrawer .smd-sba-btn,body.v3-dark #sbDrawer .smd-sba-btn{background:rgba(20,184,166,.2)!important;color:#2dd4bf!important;border:1px solid rgba(20,184,166,.4)!important}",
+      "body.dark #sbMenu[data-sbr] .sbr-sec,body.v3-dark #sbMenu[data-sbr] .sbr-sec{color:#2dd4bf}",
+      "body.dark #sbMenu[data-sbr] .sbr-row,body.v3-dark #sbMenu[data-sbr] .sbr-row{color:#f8fafc}",
+      "body.dark #sbMenu[data-sbr] .sbr-row:hover,body.v3-dark #sbMenu[data-sbr] .sbr-row:hover{background:rgba(30,41,59,.6)}",
+      "body.dark #sbMenu[data-sbr] .sbr-ic,body.v3-dark #sbMenu[data-sbr] .sbr-ic{color:#2dd4bf}",
+      "body.dark #sbMenu[data-sbr] .sbr-badge,body.v3-dark #sbMenu[data-sbr] .sbr-badge{background:rgba(20,184,166,.25);color:#5eead4}",
+      "body.dark #sbMenu[data-sbr] .sbr-chev,body.v3-dark #sbMenu[data-sbr] .sbr-chev{color:#94a3b8}",
+      "body.dark #sbMenu[data-sbr] .sbr-card,body.v3-dark #sbMenu[data-sbr] .sbr-card{background:rgba(30,41,59,.55);border-color:rgba(51,65,85,.6)}",
+      "body.dark #sbMenu[data-sbr] .sbr-tg-t,body.v3-dark #sbMenu[data-sbr] .sbr-tg-t{color:#f8fafc}",
+      "body.dark #sbMenu[data-sbr] .sbr-tg-s,body.v3-dark #sbMenu[data-sbr] .sbr-tg-s{color:#94a3b8}",
+      "body.dark #sbMenu[data-sbr] .sbr-sw,body.v3-dark #sbMenu[data-sbr] .sbr-sw{background:#334155}",
+      "body.dark #sbMenu[data-sbr] .sbr-sw.on,body.v3-dark #sbMenu[data-sbr] .sbr-sw.on{background:#0d9488}",
+      "body.dark #sbMenu[data-sbr] .sbr-note,body.v3-dark #sbMenu[data-sbr] .sbr-note{color:#94a3b8}",
+      "body.dark #sbMenu[data-sbr] .sbr-adv button,body.v3-dark #sbMenu[data-sbr] .sbr-adv button{color:#f8fafc}",
+      "body.dark #sbMenu[data-sbr] .sbr-status,body.v3-dark #sbMenu[data-sbr] .sbr-status{background:rgba(30,41,59,.5);border-color:rgba(51,65,85,.6);color:#2dd4bf}",
       /* ── Settings page (dedicated full-screen module) ── */
       ".sbr-set-ov{position:fixed;inset:0;z-index:100200;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;font-family:var(--sans,system-ui,-apple-system,sans-serif);animation:sbrSetIn .18s ease}",
       // The settings page had NO box-sizing rule, so every `width:100%` row with padding
@@ -336,7 +366,12 @@
   function otaSectionHTML() {
     try { if (!(window.SMD_OTA && SMD_OTA.available())) return ""; } catch (e) { return ""; }
     var on = false; try { on = !!SMD_OTA.isAuto(); } catch (e) {}
-    var ver = "current"; try { ver = SMD_OTA.currentVersion() || "current"; } catch (e) {}
+    // Same decimal ladder the sidebar header shows (native-ota.js owns it), with the exact bundle
+    // number alongside — the ladder is what the doctor says out loud, the bundle is what we debug.
+    var ver = "", cur = null;
+    try { cur = SMD_OTA.currentVersion(); } catch (e) {}
+    try { ver = SMD_OTA.versionLabel ? SMD_OTA.versionLabel() : ""; } catch (e) {}
+    ver = ver ? (ver + (cur ? " (bundle " + cur + ")" : " (built-in)")) : (cur ? String(cur) : "current");
     return '<div class="sbr-sec">Software Update</div>' +
       '<div class="sbr-card"><div class="sbr-tg"><div class="sbr-tg-l"><span class="sbr-tg-t">Automatic updates</span>' +
         '<span class="sbr-tg-s">Fetch new versions in the background</span></div>' +
@@ -363,8 +398,9 @@
       checkBtn.disabled = true; if (statusEl) statusEl.textContent = "Checking…";
       SMD_OTA.check().then(function (r) {
         checkBtn.disabled = false; r = r || {};
-        if (r.status === "available") { pending = r; if (statusEl) statusEl.textContent = "Update available: v" + r.version; if (installBtn) installBtn.style.display = ""; }
-        else if (r.status === "uptodate") { pending = null; if (statusEl) statusEl.textContent = "You're up to date" + (r.current ? " (v" + r.current + ")" : ""); if (installBtn) installBtn.style.display = "none"; }
+        var lbl = function (v) { try { return SMD_OTA.versionLabel ? SMD_OTA.versionLabel(v) : String(v); } catch (e) { return String(v); } };
+        if (r.status === "available") { pending = r; if (statusEl) statusEl.textContent = "Update available: " + lbl(r.version); if (installBtn) installBtn.style.display = ""; }
+        else if (r.status === "uptodate") { pending = null; if (statusEl) statusEl.textContent = "You're up to date (" + lbl(r.current) + ")"; if (installBtn) installBtn.style.display = "none"; }
         else { if (statusEl) statusEl.textContent = "Couldn't check — " + (r.error || "try again"); }
       });
     });
@@ -373,7 +409,19 @@
       installBtn.disabled = true;
       SMD_OTA.install(pending, function (pct) { if (statusEl) statusEl.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
         if (res && res.ok) { if (statusEl) statusEl.textContent = "Update ready — reopening…"; }
-        else { installBtn.disabled = false; if (statusEl) statusEl.textContent = "Install failed — " + ((res && res.error) || "try again"); }
+        else {
+          installBtn.disabled = false;
+          // Phrase it from the failure CODE, same vocabulary as the update banner. The raw code was
+          // reaching the screen verbatim ("Install failed — download-failed"), which tells a doctor
+          // nothing about what to do next.
+          var code = res && res.error;
+          if (statusEl) statusEl.textContent =
+            code === "network" ? "Download failed — check connection and try again" :
+            code === "storage" ? "Not enough space to download the update" :
+            code === "checksum" ? "Update didn't verify — try again later" :
+            code === "missing" ? "That update is no longer available" :
+            "Couldn't apply the update — try again later";
+        }
       });
     });
   }
@@ -393,7 +441,23 @@
       '<button class="sbr-row" data-sbr-act="workspace">' + svg("steth") +
         '<span class="sbr-lbl">' + (name || "Choose specialty") + '</span><span class="sbr-chev">▾</span></button>';
   }
+  /* WHICH VERSION AM I ON? — the first question on every support call, and after an OTA the answer
+   * differs from phone to phone. The drawer header carried a hard-coded "v10.0" (index.html) that
+   * had nothing to do with the bundle the phone was actually running; a stale version is worse than
+   * none, because it is believed. It sits at the very top of the drawer, above #sbMenu, so it is
+   * also the one spot no menu rebuild can push down — write the live number there.
+   * The exact bundle goes in the tooltip; Settings prints it in full. */
+  function paintHeaderVersion() {
+    try {
+      var el = document.querySelector("#sbDrawer .sb-head .sb-ver");
+      if (!el || !(window.SMD_OTA && SMD_OTA.versionLabel)) return;
+      var cur = null; try { cur = SMD_OTA.currentVersion(); } catch (e) {}
+      el.textContent = "v" + SMD_OTA.versionLabel();
+      el.title = cur ? "Bundle " + cur : "Built-in bundle";
+    } catch (e) {}
+  }
   function build(menu) {
+    paintHeaderVersion();
     menu.setAttribute("data-sbr", "1");
     menu.innerHTML =
       wsRow() +
@@ -401,6 +465,7 @@
       row("drugs", "pills", "Drugs Database") +
       row("interactions", "interact", "Interaction Checker") +
       row("calculators", "calc", "Calculators") +
+      row("agentconnect", "steth", "AgentConnect") +
       (flag("smd_personal_clinic", false) ? row("clinic", "steth", "My Clinic") : "") +
       '<div class="sbr-sec">Reference &amp; Help</div>' +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
@@ -520,7 +585,7 @@
         xaRowHTML("fundx", "🔬", "FundX AI", "AI-guided retinal screening &amp; fundus imaging") +
         xaRowHTML("kardiox", "🫀", "KardiQ X AI", "On-device 12-lead ECG rhythm &amp; ischemia interpretation") +
         xaRowHTML("thorex", "🫁", "ThoreX AI", "On-device chest radiograph interpretation") +
-        xaRowHTML("sknx", "🧴", "SknX AI", "Skin lesion, rash &amp; dermatoscope analysis") +
+        xaRowHTML("sknx", '<img src="/sknx-mark.png?v=sx2" alt="" width="20" height="20" style="object-fit:contain;vertical-align:middle;display:inline-block;">', "SknX AI", "Skin lesion, rash &amp; dermatoscope analysis") +
       '</div>' +
 
       '<div class="sbr-sec">AI Diagnostic Modules</div>' +

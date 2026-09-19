@@ -1,0 +1,168 @@
+{
+  "site": "hodgkin",
+  "name": "Hodgkin lymphoma",
+  "system": "Oncology / Haematologic",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Hodgkin lymphoma uses the Lugano modification of Ann Arbor staging, mapped here onto T/N/M slots for the overlay engine. Stage depends on nodal regions relative to the diaphragm, contiguous extranodal (E) extension, bulky mediastinal disease (X: mass ratio over 0.33 of thoracic diameter, or any mass 10 cm or larger) and spleen (S) involvement; A/B records absence or presence of B symptoms. Most patients present with contiguous spread from cervical/supraclavicular nodes, and FDG-PET/CT is standard for staging and interim response (Deauville score).",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Extent of disease cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of lymphoma",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Involvement of a single lymphatic region (Stage I pattern)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Two or more lymphatic regions on the same side of the diaphragm (Stage II pattern)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Lymphatic regions on both sides of the diaphragm (Stage III pattern)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Diffuse extranodal dissemination (Stage IV pattern)",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Nodal regions cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No involved lymphatic region",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Single involved lymphatic region",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Two or more involved regions on the same side of the diaphragm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3",
+          "label": "Involved regions on both sides of the diaphragm, and/or splenic involvement (S)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No disseminated extranodal disease",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Disseminated extranodal disease (marrow, liver, lung, bone)",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "IA",
+          "t": "T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "One region, no B symptoms; IIA adds E or more regions same side",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "One region with B symptoms",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T2",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Same side of diaphragm, no B symptoms; add X if bulky",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T2",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Same side of diaphragm with B symptoms and/or bulky X",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T3",
+          "n": "N3",
+          "m": "M0",
+          "basis": "Both sides of diaphragm, no B symptoms",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T3",
+          "n": "N3",
+          "m": "M0",
+          "basis": "Both sides of diaphragm with B symptoms",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Disseminated disease, no B symptoms",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "T4",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Disseminated disease with B symptoms",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Cervical/supraclavicular, axillary, mediastinal/hilar, para-aortic, mesenteric, iliac and inguinal-femoral regions plus Waldeyer ring and spleen (S). A single extranodal extension (E) does not upstage to IV; diffuse extranodal disease does.",
+      "histologicGrade": "Classical Hodgkin lymphoma is not graded G1-G3; subtype (nodular sclerosis, mixed cellularity, lymphocyte-rich, lymphocyte-depleted) and nodular lymphocyte-predominant HL are the histologic classifiers. ESR, haemoglobin and albumin feed prognostic scores, not grade.",
+      "histopathologicTypes": "Classical Hodgkin lymphoma: nodular sclerosis, mixed cellularity, lymphocyte-rich, lymphocyte-depleted; nodular lymphocyte-predominant Hodgkin lymphoma (a distinct entity).",
+      "prognosticFactors": [
+        "Lugano stage with A/B symptoms",
+        "Bulky disease (X; mediastinal mass ratio over 0.33)",
+        "B symptoms (fever over 38 C, drenching sweats, weight loss over 10 percent in 6 months)",
+        "ESR, haemoglobin, albumin, lymphocyte count (Hasenclever/IPS factors in advanced disease)",
+        "Early vs advanced presentation (defines ABVD vs escalated BEACOPP pathways)",
+        "Interim PET Deauville score",
+        "Age and performance status"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

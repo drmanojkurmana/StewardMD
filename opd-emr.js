@@ -22,7 +22,8 @@
       '<button class="oe-close" data-oe-act="close" title="Close" aria-label="Close">' + ms("close") + "</button></header>";
   }
   function tabsNav(active) {
-    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCQIS", "vaccines"]];
+    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["note", "Note", "edit_note"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCQIS", "vaccines"]];
+    if (immunFlagOn()) defs.splice(3, 0, ["immun", "Immunisation", "vaccines"]);
     return '<nav class="oe-tabs">' + defs.map(function (t) {
       return '<button class="oe-tab' + (t[0] === active ? " on" : "") + '" data-oe-act="tab:' + t[0] + '">' + ms(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("") + "</nav>";
@@ -117,7 +118,7 @@
   // ordered, meds prescribed, notes, ER referral) — shown in the patient Profile, newest first. --------
   var TL_ICON = { note: "clinical_notes", medication: "medication", med: "medication", assessment: "assignment",
     investigation: "science", inv: "science", order: "science", vitals: "monitor_heart", checkout: "check_circle",
-    referral: "emergency", er: "emergency" };
+    referral: "emergency", er: "emergency", immunization: "vaccines" };
   function relTime(ts) {
     var d = now() - ts; if (!(d >= 0)) return "";
     var m = Math.floor(d / 60000); if (m < 1) return "just now"; if (m < 60) return m + "m ago";
@@ -223,8 +224,43 @@
       '<button class="oe-btn primary" data-oe-act="clinic-rx-add">' + ms("add") + "Add to record</button></div>";
     var list = (_localStore && _localStore.listPrescriptions) ? _localStore.listPrescriptions(st.patient.mrn) : [];
     var rows = list.map(function (x) { return '<div class="oe-row"><span class="oe-row-ic">' + ms("medication") + '</span><span class="oe-row-b"><span class="oe-row-t">' + esc([x.drug, x.dose].filter(Boolean).join(" ")) + '</span><span class="oe-row-s">' + esc([x.freq, x.duration, fmtClinicDate(x.ts), x.author].filter(Boolean).join(" · ")) + "</span></span></div>"; }).join("");
-    return form + section("pill", "Medications prescribed", list.length + " on record", rows, "No medications recorded yet.");
+    return form + section("pill", "Medications prescribed", list.length + " on record", rows, "No medications recorded yet.") + rxcButton();
   }
+  // ---- Immunisation capture -------------------------------------------------------------------------
+  // A vaccination is its own ABDM HI type (ImmunizationRecord), not a prescription, so it gets its own tab
+  // rather than being smuggled into Medications.
+  //
+  // The vaccine list is a plain <select> with two optgroups: browsers already give type-ahead inside a
+  // select, so there is no picker to build. Options come from the SERVER catalogue, which is generated from
+  // the NDHM IG's value set - the client never holds its own copy of a clinical code list.
+  function immunTab(st) {
+    var d = st.immunDraft || {}, cat = st.vaccineCatalogue;
+    if (!cat) return '<div class="oe-draft"><div class="oe-draft-h">' + ms("vaccines") + "<b>Record a vaccination</b></div>" +
+      '<p class="oe-note">Loading the vaccine list…</p></div>';
+    function opt(o, label) { return '<option value="' + esc(o.code) + '"' + (d.vaccineCode === o.code ? " selected" : "") + ">" + esc(label || o.display) + "</option>"; }
+    var sel = '<select class="oe-inp" data-oe-inp="imm-vac"><option value="">Select a vaccine…</option>' +
+      '<optgroup label="India immunisation schedule">' + cat.schedule.map(function (o) { return opt(o, o.label + " (" + o.display + ")"); }).join("") + "</optgroup>" +
+      '<optgroup label="All vaccines (' + cat.others.length + ')">' + cat.others.map(function (o) { return opt(o); }).join("") + "</optgroup></select>";
+    var form = '<div class="oe-draft"><div class="oe-draft-h">' + ms("vaccines") + "<b>Record a vaccination</b></div>" +
+      fieldRow("Vaccine", sel, true, !d.vaccineCode) +
+      fieldRow("Dose number", textInp("imm-dose", d.doseNumber, "e.g. 1")) +
+      fieldRow("Batch / lot no.", textInp("imm-lot", d.lotNumber, "Optional, from the vial")) +
+      fieldRow("Given on", textInp("imm-when", d.occurrenceDateTime, "Blank = now (YYYY-MM-DD)")) +
+      fieldRow("Note", textInp("imm-note", d.note, "Optional: site, reaction, who administered")) +
+      '<button class="oe-btn primary" data-oe-act="immun-add">' + ms("add") + "Record vaccination</button>" +
+      '<p class="oe-note">Site and route are recorded in the note for now: the NDHM guide fixes no code list for them, and a half-coded site is rejected by the national validator.</p></div>';
+    var given = (st.timeline || []).filter(function (e) { return e.kind === "immunization"; })
+      .sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+    var rows = given.map(function (e) {
+      var v = (e.data && e.data.vaccineCode) || {};
+      var meta = [e.data && e.data.doseNumber ? "dose " + e.data.doseNumber : "", e.data && e.data.lotNumber ? "lot " + e.data.lotNumber : "", relTime(e.ts), e.by].filter(Boolean).join(" · ");
+      return '<div class="oe-row"><span class="oe-row-ic">' + ms("vaccines") + '</span><span class="oe-row-b">' +
+        '<span class="oe-row-t">' + esc(v.display || e.text || "Vaccination") + '</span>' +
+        '<span class="oe-row-s">' + esc(meta) + "</span></span></div>";
+    }).join("");
+    return form + section("vaccines", "Vaccinations this visit", given.length + " recorded", rows, "No vaccination recorded in this visit yet.");
+  }
+
   function invTab(st) {
     if (usesLocal(st.source)) return clinicInvTab(st);
     var d = st.invDraft || {}, draft = "";
@@ -238,8 +274,15 @@
         '<button class="oe-toggle' + (d.emergency ? " on" : "") + '" data-oe-act="inv-emg">' + ms(d.emergency ? "check_box" : "check_box_outline_blank") + "Emergency</button>" +
         action + "</div>";
     }
+    var dictatedShelf = "";
+    if (st.dictatedInv && st.dictatedInv.length) {
+      dictatedShelf = '<div class="oe-vc-orders" style="margin:0 0 12px;background:#f8fafc;padding:9px 12px;border-radius:8px;border:1px solid #e2e8ec"><div class="oe-vc-orders-h" style="font-size:12px;font-weight:600;color:#475569;display:flex;gap:6px;align-items:center;margin-bottom:6px">' + ms("record_voice_over") + '<span>Dictated in consultation:</span></div><div class="oe-vc-chips" style="display:flex;flex-wrap:wrap;gap:6px">' +
+        st.dictatedInv.map(function (nm, i) {
+          return '<button class="oe-btn ghost" data-oe-act="ivorder:' + i + '" style="font-size:12px;padding:4px 9px;border-radius:6px;cursor:pointer" title="Search and order ' + esc(nm) + '">' + ms("add") + esc(nm) + '</button>';
+        }).join("") + '</div></div>';
+    }
     var existing = section("history", "Existing orders", "Investigations on record", (st.labs || []).map(labRow).join(""), "No investigations on record.");
-    return searchBox("inv", st.invQuery, "Search investigation services…") + '<div class="oe-searchout" id="oe-out-inv">' + resultList("inv", st.invResults) + searchStatus(st, "inv") + "</div>" + draft + existing;
+    return dictatedShelf + searchBox("inv", st.invQuery, "Search investigation services…") + '<div class="oe-searchout" id="oe-out-inv">' + resultList("inv", st.invResults) + searchStatus(st, "inv") + "</div>" + draft + existing;
   }
   function medsTab(st) {
     if (usesLocal(st.source)) return clinicMedsTab(st);
@@ -259,19 +302,21 @@
         action + "</div>";
     }
     var current = section("pill", "Current medications", "", (st.medications || []).map(medRow).join(""), "No current medications on record.");
-    return searchBox("med", st.medQuery, "Search medications…") + '<div class="oe-searchout" id="oe-out-med">' + resultList("med", st.medResults) + searchStatus(st, "med") + "</div>" + draft + current;
+    return searchBox("med", st.medQuery, "Search medications…") + '<div class="oe-searchout" id="oe-out-med">' + resultList("med", st.medResults) + searchStatus(st, "med") + "</div>" + draft + current + rxcButton();
   }
   // ---- GHIS Initial Assessment schema (field names VERBATIM from a live CreateinitialAssessmentnew capture,
   // 2026-08-07). `val.*` names keep their prefix; bare names get `assessment.` server-side. kind: text|number|
   // textarea|yesno(Y/N)|check(true/false)|select(rendered as a plain text input — no GHIS option values captured).
   // OMITTED radio groups (write field names NOT captured — do not guess): level of consciousness, neck stiffness,
   // dyspnoea, abdomen shape, pain scale, birth history, general condition, diet, menstrual status/cycles/flow.
-  function F(n, l, k, req, ph) { return { n: n, l: l, k: k || "text", r: !!req, p: ph || "" }; }
+  function F(n, l, k, req, ph, opts) { return { n: n, l: l, k: k || "text", r: !!req, p: ph || "", opts: opts || null }; }
   var ASSESS_SCHEMA = [
     { t: "History", i: "description", f: [
       F("Chief_complaints_duration", "Chief complaints", "textarea", true),
       F("History_present_illness", "Present history", "textarea", true),
-      F("History_past_illness", "Past history", "textarea", true) ] },
+      F("History_past_illness", "Past history", "textarea", true),
+      F("surgical_history", "Past surgical history / Operations", "textarea"),
+      F("home_medications", "Current / Home medications", "textarea") ] },
     { t: "Pre-admission investigation / treatment", i: "biotech", f: [
       F("val.investigation_desc", "Investigation"), F("val.investigation_diagnostic", "Diagnostics"), F("val.investigation_date", "Date"),
       F("val.treatment_received", "Treatment received"), F("val.treatment_received_date", "Date"), F("val.treatment_received_hospital", "Hospital") ] },
@@ -283,12 +328,23 @@
       F("Tuberculosis_yesNo", "Tuberculosis", "yesno"), F("Tuberculosis_details", "Tuberculosis details"),
       F("Thyroid_yesNo", "Thyroid disorder", "yesno"), F("Thyroid_details", "Thyroid details"),
       F("Epilepsy_yesNo", "Epilepsy", "yesno"), F("Epilepsy_details", "Epilepsy details"),
+      F("Renal_yesNo", "Kidney disease (CKD)", "yesno"), F("Renal_details", "Kidney details"),
+      F("Liver_yesNo", "Liver disease (CLD)", "yesno"), F("Liver_details", "Liver details"),
+      F("Cancer_yesNo", "Malignancy / Cancer", "yesno"), F("Cancer_details", "Cancer details"),
+      F("Cva_yesNo", "Stroke / CVA / TIA", "yesno"), F("Cva_details", "Stroke details"),
+      F("Dyslipidemia_yesNo", "Dyslipidemia", "yesno"), F("Dyslipidemia_details", "Lipid details"),
       F("Others_details", "Others") ] },
     { t: "Immunisation status", i: "vaccines", f: [
       F("immunization_status", "Immunisation status", "text", false, "IAP guidelines") ] },
     { t: "Personal history", i: "person", f: [
-      F("Single_married", "Marital status", "select"), F("No_of_children", "Children", "select"), F("Consanguinity", "Consanguinity", "select"),
-      F("Appetite", "Appetite", "select"), F("Bowels", "Bowels", "select"), F("Micturition", "Micturition", "select"),
+      F("Single_married", "Marital status", "select", false, "", ["", "Single", "Married", "Widowed", "Divorced"]),
+      F("No_of_children", "Children", "select", false, "", ["", "0", "1", "2", "3", "4+"]),
+      F("Consanguinity", "Consanguinity", "select", false, "", ["", "Non-consanguineous", "1st degree", "2nd degree"]),
+      F("Diet", "Diet", "select", false, "", ["", "Vegetarian", "Non-vegetarian", "Eggetarian"]),
+      F("Sleep", "Sleep", "select", false, "", ["", "Normal", "Disturbed", "Insomnia"]),
+      F("Appetite", "Appetite", "select", false, "", ["", "Normal", "Reduced", "Increased"]),
+      F("Bowels", "Bowels", "select", false, "", ["", "Regular", "Constipated", "Loose stools"]),
+      F("Micturition", "Micturition", "select", false, "", ["", "Normal", "Dysuria", "Frequency", "Hesitancy"]),
       F("Mic_abnorml_details", "Micturition details"), F("Known_allergies_details", "Known allergies"),
       F("Habitat_addiction_yesno", "Habits", "yesno"),
       F("Habitat_addiction_alcohol", "Alcohol", "check"), F("Habitat_addiction_smoking", "Smoking", "check"),
@@ -312,15 +368,25 @@
       F("breast_feeding", "Breast feeding"), F("feeding_duration", "Duration"), F("molar_pregnancy", "Molar pregnancy"),
       F("pregnancy_comlications", "Pregnancy complications"), F("contracception", "Contraception"), F("sterilization", "Sterilization") ] },
     { t: "Nutritional screening", i: "monitor_weight", f: [
-      F("Height", "Height (cms)", "number"), F("Weight", "Weight (kgs)", "number"), F("BMI", "BMI"), F("bsa", "BSA (m2)") ] },
+      F("Height", "Height (cms)", "number"), F("Weight", "Weight (kgs)", "number"), F("BMI", "BMI"), F("bsa", "BSA (m2)"),
+      F("waist_cm", "Waist circumference (cm)", "number"), F("muac_cm", "MUAC (cm)", "number") ] },
     { t: "Physical examination - vital parameters", i: "vital_signs", f: [
       F("Temp", "Temperature (F)", "number", true), F("BP_SYS", "BP systolic", "number", true), F("BP_dia", "BP diastolic", "number", true),
+      F("Pulse", "Pulse rate /min", "number", true), F("pulse_rhythm", "Pulse rhythm", "select", false, "", ["", "Regular", "Irregular"]),
+      F("respiratory", "Respiratory rate /min", "number", true),
+      F("spo2", "Oxygen saturation (%)", "number", false, "95-100%"),
+      F("grbs", "GRBS / Blood sugar (mg/dL)", "number", false, "mg/dL"),
+      F("pain_score", "Pain score (0-10)", "number", false, "0-10"),
+      F("general_condition", "General condition", "select", false, "", ["", "Good", "Fair", "Sick / Poor", "Moribund"]),
       F("Nutrtion", "Nutrition"), F("hydration", "Hydration"),
-      F("Pulse", "Pulse rate /min", "number", true), F("respiratory", "Respiratory rate /min", "number", true),
       F("pallor", "Pallor", "check"), F("icterus", "Icterus", "check"), F("cyanosis", "Cyanosis", "check"), F("clubbing", "Clubbing", "check"),
       F("Oedema", "Oedema", "check"), F("Lymphadenopathy", "Lymphadenopathy", "check"), F("Rash", "Rash", "check"), F("goitre", "Goitre", "check"),
       F("sys_examination", "Systemic examination", "textarea") ] },
     { t: "Examination", i: "stethoscope", f: [
+      F("respiratory_exam", "Respiratory system (air entry / sounds)", "textarea"),
+      F("cvs_exam", "Cardiovascular system (apex / sounds / murmurs)", "textarea"),
+      F("per_abdomen_exam", "Per abdomen (soft / distension / organomegaly)", "textarea"),
+      F("local_examination", "Local examination (site of lesion / wound)", "textarea"),
       F("cranial_nerves", "Cranial nerves"), F("sensory_sys", "Sensory system"), F("gait", "Gait"), F("motor_sys", "Motor system"),
       F("speech", "Speech"), F("reflexes", "Reflexes"), F("plantar", "Plantars"), F("glasgow_scale", "Glasgow scale"),
       F("cerebellar_sign", "Cerebellar signs"), F("cardiac_sound", "Cardiac sounds"), F("JVP", "JVP"),
@@ -332,8 +398,12 @@
       F("hernial_orifices", "Hernial orifices normal", "yesno"), F("hernial_orifices_details", "Hernial orifices details"),
       F("genital", "Genitalia"), F("external_genitilia_perineum", "External genital & perineum"), F("examination", "P/R examination") ] },
     { t: "Diagnosis & plan", i: "assignment_turned_in", f: [
-      F("provisional_diagnosis", "Provisional diagnosis", "textarea"), F("management_plan", "Management plan", "textarea"),
+      F("provisional_diagnosis", "Provisional diagnosis", "textarea"),
+      F("differential_diagnosis", "Differential diagnosis", "textarea"),
+      F("management_plan", "Management plan", "textarea"),
       F("refered_management_plan", "Referred to & management plan", "textarea"),
+      F("diet_lifestyle_advice", "Diet & lifestyle advice", "textarea"),
+      F("follow_up_advice", "Follow-up instructions", "textarea"),
       F("informany_attendant", "Informant name"), F("informant_relation", "Relation with attendant", "select") ] }
   ];
   function defVal(k) { return k === "yesno" ? "N" : (k === "check" ? "false" : ""); }
@@ -355,10 +425,34 @@
     var on = st.fieldMic === name;
     return '<button type="button" class="oe-fmic' + (on ? " on" : "") + '" data-oe-act="fieldmic:' + esc(name) + '" aria-label="Dictate this field" title="Dictate this field">' + ms(on ? "stop" : "mic") + "</button>";
   }
+  // "Search ICD" button, shown only on the provisional diagnosis field - picking a code appends
+  // "CODE - Title" as a new line rather than replacing whatever the doctor already typed, same
+  // additive behaviour as the per-field mic. window.SMD_ICD comes from icd.js (loaded default-on,
+  // no flag - see vault/modules/ICD Search.md).
+  function icdBtn(name) {
+    if (!G.SMD_ICD) return "";
+    return '<button type="button" class="oe-fmic oe-icdbtn" data-oe-act="icdsearch:' + esc(name) + '" aria-label="Search ICD" title="Search ICD-10 / ICD-11 code">' + ms("search") + "</button>";
+  }
+  // MaiK-assisted suggestion, same button-pair idea as icu.js: manual search stays a plain magnifier
+  // icon, MaiK suggestion gets its own icon so the two are never confused for the same action.
+  function icdSuggestBtn(name) {
+    if (!G.SMD_AI || !G.SMD_AI.extract) return "";
+    return '<button type="button" class="oe-fmic oe-icdbtn" data-oe-act="icdsuggest:' + esc(name) + '" aria-label="Suggest ICD code (MaiK)" title="Suggest ICD code (MaiK)">' + ms("auto_awesome") + "</button>";
+  }
   function assessField(f, vals) {
     var val = assessGet(vals, f), id = "assess:" + f.n, re = f.r && !val;
-    if (f.k === "textarea") return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + "</span>", f.r, re);
+    if (f.k === "textarea") {
+      var extra = f.n === "provisional_diagnosis" ? (icdBtn(f.n) + icdSuggestBtn(f.n)) : "";
+      var panel = f.n === "provisional_diagnosis" ? '<div class="oe-icdsug" id="oeIcdSug"></div>' : "";
+      return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + extra + "</span>" + panel, f.r, re);
+    }
     if (f.k === "yesno") return ynRow(f, val);
+    if (f.k === "select" && f.opts && f.opts.length) {
+      var optHtml = f.opts.map(function (o) {
+        return '<option value="' + esc(o) + '"' + (val === o ? ' selected' : '') + '>' + esc(o || '-- Select --') + '</option>';
+      }).join('');
+      return fieldRow(f.l, '<span class="oe-inp-wrap"><select class="oe-inp oe-sel" data-oe-inp="' + esc(id) + '">' + optHtml + '</select>' + fmicBtn(f.n) + '</span>', f.r, re);
+    }
     var type = f.k === "number" ? "number" : "text";
     return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
   }
@@ -373,7 +467,8 @@
     sec.f.forEach(function (f) { var v = assessGet(vals, f); var has = v && v !== "" && v !== "N" && v !== "false"; if (has) filled++; if (f.r) { reqN++; if (v) reqDone++; } });
     var badge = reqN ? '<span class="oe-req-badge ' + (reqDone >= reqN ? "done" : "pending") + '">' + reqDone + "/" + reqN + " required</span>"
       : (filled ? '<span class="oe-cnt">' + filled + "</span>" : "");
-    return '<details class="oe-acc"' + (open ? " open" : "") + '><summary class="oe-acc-h"><span class="oe-acc-ic">' + ms(sec.i) + '</span><span class="oe-acc-t">' + esc(sec.t) + "</span>" + badge + '<span class="oe-chev">' + ms("expand_more") + "</span></summary><div class=\"oe-acc-body\">" + html + "</div></details>";
+    var isOpen = open || filled > 0;
+    return '<details class="oe-acc"' + (isOpen ? " open" : "") + '><summary class="oe-acc-h"><span class="oe-acc-ic">' + ms(sec.i) + '</span><span class="oe-acc-t">' + esc(sec.t) + "</span>" + badge + '<span class="oe-chev">' + ms("expand_more") + "</span></summary><div class=\"oe-acc-body\">" + html + "</div></details>";
   }
   // pure payload builder: EVERY schema field -> string value (yesno Y/N, check true/false, empties ""). Exposed for tests.
   function buildAssessPayload(vals) {
@@ -398,18 +493,64 @@
   function fieldLabel(n) { return OPD_LABEL[n] || n; }
   var VOICE_MAP = {
     cc: "Chief_complaints_duration", presentHx: "History_present_illness", pastHx: "History_past_illness",
+    treatmentReceived: "val.treatment_received", homeMeds: "home_medications", surgicalHistory: "surgical_history",
     temp: "Temp", bpSys: "BP_SYS", bpDia: "BP_dia", pulse: "Pulse", rr: "respiratory",
+    spo2: "spo2", saturation: "spo2", grbs: "grbs", cbg: "grbs", rbs: "grbs",
+    pain: "pain_score", painScore: "pain_score",
+    pulseRhythm: "pulse_rhythm", genCondition: "general_condition",
     pallor: "pallor", icterus: "icterus", cyanosis: "cyanosis", clubbing: "clubbing",
     oedema: "Oedema", lymphadenopathy: "Lymphadenopathy", rash: "Rash", goitre: "goitre",
+    nutrition: "Nutrtion", hydration: "hydration",
     systemicExam: "sys_examination", gcs: "glasgow_scale", cardiacSounds: "cardiac_sound",
-    tenderness: "tenderness_yesNo", abdoMass: "palpable_mass_yesNo",
-    provisionalDx: "provisional_diagnosis", managementPlan: "management_plan",
-    heightCm: "Height", weightKg: "Weight",
-    dm: "Diabetes_yesNo", htn: "Hypertension_yesNo", cardiac: "Cardiac_yesNo",
-    asthma: "Bronchial_yesNo", tb: "Tuberculosis_yesNo", thyroid: "Thyroid_yesNo", epilepsy: "Epilepsy_yesNo",
-    habits: "Habitat_addiction_yesno", alcohol: "Habitat_addiction_alcohol", smoking: "Habitat_addiction_smoking",
+    respiratoryExam: "respiratory_exam", cvsExam: "cvs_exam", abdoExam: "per_abdomen_exam", localExam: "local_examination",
+    tenderness: "tenderness_yesNo", tendernessDetails: "tenderness_details",
+    abdoMass: "palpable_mass_yesNo", abdoMassDetails: "palpable_mass_details",
+    provisionalDx: "provisional_diagnosis", ddx: "differential_diagnosis", differentialDiagnosis: "differential_diagnosis",
+    managementPlan: "management_plan", advice: "follow_up_advice", lifestyleAdvice: "diet_lifestyle_advice",
+    heightCm: "Height", weightKg: "Weight", waistCm: "waist_cm", muacCm: "muac_cm",
+    dm: "Diabetes_yesNo", dmDetails: "Diabetes_details",
+    htn: "Hypertension_yesNo", htnDetails: "Hypertension_details",
+    cardiac: "Cardiac_yesNo", cardiacDetails: "Cardiac_details",
+    asthma: "Bronchial_yesNo", asthmaDetails: "Bronchial_details",
+    tb: "Tuberculosis_yesNo", tbDetails: "Tuberculosis_details",
+    thyroid: "Thyroid_yesNo", thyroidDetails: "Thyroid_details",
+    epilepsy: "Epilepsy_yesNo", epilepsyDetails: "Epilepsy_details",
+    ckd: "Renal_yesNo", ckdDetails: "Renal_details",
+    cld: "Liver_yesNo", cldDetails: "Liver_details",
+    cancer: "Cancer_yesNo", cancerDetails: "Cancer_details",
+    cva: "Cva_yesNo", cvaDetails: "Cva_details",
+    dyslipidemia: "Dyslipidemia_yesNo", dyslipidemiaDetails: "Dyslipidemia_details",
+    comorbidsNote: "Others_details",
+    familyHistory: "Family_history_yesno", familyDiabetes: "Family_history_diabetics",
+    familyHtn: "Family_history_hypertension", familyHeart: "Family_history_Heart",
+    familyCancer: "Family_history_cancer", familyTb: "Family_history_TB",
+    familyAsthma: "Family_history_asthma", familyDetails: "Family_history_othersdetails",
+    lmp: "LMP", immunization: "immunization_status",
+    diet: "Diet", sleep: "Sleep",
+    allergies: "Known_allergies_details",
+    habits: "Habitat_addiction_yesno", habitsDetails: "Habitat_addiction_others",
+    alcohol: "Habitat_addiction_alcohol", smoking: "Habitat_addiction_smoking",
     recDrug: "Habitat_addiction_drug", tobacco: "Habitat_addiction_tobacco"
   };
+  // Live BMI (kg/m^2) and Mosteller BSA (m^2):
+  // BMI = weight / (height/100)^2; BSA = sqrt((height * weight) / 3600). Returns null if either invalid.
+  function calcBmiBsa(heightCm, weightKg) {
+    var h = parseFloat(heightCm), w = parseFloat(weightKg);
+    if (!(h > 30 && h < 260 && w > 1 && w < 400)) return null;
+    var hm = h / 100;
+    var bmi = Math.round((w / (hm * hm)) * 10) / 10;
+    var bsa = Math.round(Math.sqrt((h * w) / 3600) * 100) / 100;
+    return { bmi: String(bmi), bsa: String(bsa) };
+  }
+  function autoComputeBmiBsa() {
+    if (!st || !st.assessVals) return;
+    var mBmi = calcBmiBsa(st.assessVals.Height, st.assessVals.Weight);
+    if (mBmi) {
+      st.assessTouched = st.assessTouched || {};
+      if (!st.assessTouched.BMI) { st.assessVals.BMI = mBmi.bmi; putVoiceDom("BMI"); }
+      if (!st.assessTouched.bsa) { st.assessVals.bsa = mBmi.bsa; putVoiceDom("bsa"); }
+    }
+  }
   // Alcohol quantification: "60 ml whisky" -> grams of ethanol + WHO standard drinks (10 g each).
   // grams = volume(ml) x ABV x 0.789 (ethanol density). Returns null if volume or drink-type is missing.
   var ALC_ABV = { whisky: .40, whiskey: .40, rum: .40, vodka: .40, brandy: .40, gin: .40, tequila: .40,
@@ -497,6 +638,13 @@
       if (wire == null) return;
       out[name] = wire; filled.push(name);
     });
+    if (out.Height && out.Weight) {
+      var b = calcBmiBsa(out.Height, out.Weight);
+      if (b) {
+        if (!touched.BMI && !out.BMI) { out.BMI = b.bmi; filled.push("BMI"); }
+        if (!touched.bsa && !out.bsa) { out.bsa = b.bsa; filled.push("bsa"); }
+      }
+    }
     return { vals: out, filled: filled, dropped: dropped, conflicts: conflicts };
   }
 
@@ -677,7 +825,37 @@
     var reqAll = 0, reqDone = 0;
     ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { if (f.r) { reqAll++; if (assessGet(vals, f)) reqDone++; } }); });
     var done = reqDone >= reqAll;
-    if (!st.writeOn) return '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
+
+    var redFlags = detectTriageRedFlags(vals);
+    var triageHtml = "";
+    if (redFlags.length) {
+      triageHtml = '<div class="oe-ai-redflags" style="border-left:4px solid #ef4444;background:#fef2f2;margin:8px 0;padding:10px 12px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:10px">' +
+        '<div style="display:flex;gap:8px;align-items:flex-start">' +
+          '<span class="oe-ico" style="color:#dc2626;font-size:22px">' + ms("warning") + '</span>' +
+          '<div><b style="color:#991b1b;font-size:13px">Emergency / Critical Triage Alert</b>' +
+            '<ul style="margin:4px 0 0;padding-left:18px;font-size:12.5px;color:#7f1d1d">' +
+              redFlags.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join("") +
+            '</ul>' +
+          '</div>' +
+        '</div>' +
+        '<button class="oe-btn" data-oe-act="consult-er" style="background:#dc2626;color:#fff;font-weight:600;padding:6px 12px;border-radius:6px;border:none;white-space:nowrap;cursor:pointer">' + ms("emergency") + 'Transfer to ER</button>' +
+      '</div>';
+    }
+
+    var conflicts = checkAllergyConflicts(vals.Known_allergies_details, vals.management_plan);
+    var allergyHtml = "";
+    if (conflicts.length) {
+      allergyHtml = '<div class="oe-ai-redflags" style="border-left:4px solid #f97316;background:#fff7ed;margin:8px 0;padding:10px 12px;border-radius:8px;display:flex;gap:8px;align-items:flex-start">' +
+        '<span class="oe-ico" style="color:#ea580c;font-size:22px">' + ms("medication") + '</span>' +
+        '<div><b style="color:#9a3412;font-size:13px">Drug-Allergy Conflict Warning</b>' +
+          '<div style="font-size:12.5px;color:#7c2d12;margin-top:2px">' +
+            conflicts.map(function (c) { return 'Patient has documented allergy to <b>' + esc(c.allergy) + '</b>, but <b>' + esc(c.drug) + '</b> was dictated in the management plan.'; }).join("<br>") +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    if (!st.writeOn) return triageHtml + allergyHtml + '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
     // Ask MaiK: its own glowing AI banner (Option C), separate from the save actions.
     var maikCta = (maikOn() && G.DX) ?
       '<button class="oe-maik-cta' + (st.maikBusy ? " busy" : "") + '" data-oe-act="assess-maik"' + (st.maikBusy ? " disabled" : "") + ' aria-label="Ask MaiK">' +
@@ -707,9 +885,10 @@
         : "";
       bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '" title="' + reqDone + " of " + reqAll + ' required fields filled">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + "/" + reqAll + "</span></div>" +
         '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save a blank assessment">' + ms("delete_sweep") + "Clear</button>" +
+        '<button class="oe-btn ghost" data-oe-act="rx-summary" title="View, print, or share patient consultation summary">' + ms("print") + "Summary</button>" +
         saveBtn + authBtn + "</div>";
     }
-    return consultBar(st) + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + triageHtml + allergyHtml + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // Oncology apply-protocol suggestion (near provisional diagnosis, above the accordion, same spot
   // as the other AI-assist panels): offers ONLY ACTIVE protocols already fetched into st.oncoProtocols
@@ -748,6 +927,7 @@
       '<button class="oe-btn primary" data-oe-act="consult-authorise">' + ms("verified") + "Authorise &amp; sign off</button>" +
       '<div class="oe-swipe" id="oeSwipe" role="button" tabindex="0" aria-label="Close consult — swipe, or press Enter"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
       '<button class="oe-btn" data-oe-act="rx-share">' + ms("share") + "Share prescription (WhatsApp / print)</button>" +
+      rxcButton() +
       '<button class="oe-btn" data-oe-act="rx-refer">' + ms("forward") + "Refer patient</button>" +
       '<button class="oe-btn" data-oe-act="rx-summary">' + ms("description") + "Visit summary</button>" +
       ((G.SMD_FOLLOWCARE && G.SMD_FOLLOWCARE.enabled && G.SMD_FOLLOWCARE.enabled()) ? '<button class="oe-btn" data-oe-act="rx-followup">' + ms("event_repeat") + "Set follow-up</button>" : "") +   // enrol this patient into FollowCare -> pulls them back for a check-in
@@ -862,8 +1042,10 @@
       if (active === "inv") body = head + invTab(st);
       else if (active === "meds") body = head + medsTab(st);
       else if (active === "assess") body = head + assessTab(st);
+      else if (active === "note") body = head + noteTab(st);
       else if (active === "protocol") body = head + protocolTab(st);
       else if (active === "onco") body = head + oncoTab(st);
+      else if (active === "immun") body = head + immunTab(st);
       else body = head + profileTab(st);
     }
     var app = '<div class="oe-app">' + header() + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>";
@@ -875,6 +1057,9 @@
   // ---- overlay + controller ----------------------------------------------------------------
   function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_emr")); } catch (e) { return false; } }
   function writeFlagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_emr_write")); } catch (e) { return false; } }
+  // Kill switch for immunisation capture. def:true, because this tab only exists inside the OPD EMR
+  // surface, which is itself gated. Turn it off with localStorage smd_opd_immunization=0.
+  function immunFlagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_immunization")); } catch (e) { return true; } }
   function oncoFlagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_protocols")); } catch (e) { return false; } }
   // EXPERIMENTAL test flag (default OFF): when ON, the workbench ALSO accepts experimental grounded
   // protocols (lifecycleState:draft + experimental:true). "active" is never set by promotion, so real
@@ -927,14 +1112,77 @@
   // the stewardmd.in base in-app (relative /api hits the Capacitor local origin). Best-effort; silent on failure.
   function qBase() { try { var h = (G.location && G.location.hostname) || ""; return /(^|\.)stewardmd\.in$/i.test(h) ? "" : "https://stewardmd.in"; } catch (e) { return "https://stewardmd.in"; } }
   function fbTok() { try { var u = (G.SMD_AUTH && G.SMD_AUTH.currentUser) || (G.firebase && G.firebase.auth && G.firebase.auth().currentUser); return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
-  function addToTimeline(kind, text) {
+  function addToTimeline(kind, text, vals, signOff, order, rx) {
     if (!st.ticketId || !st.sessionId || !text) return;   // only when opened from a queue ticket
     fbTok().then(function (t) {
       if (!t) return;
-      fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
-        body: JSON.stringify({ sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: String(text).slice(0, 1000) }) }).catch(function () {});
+      var body = { sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: String(text).slice(0, 1000) };
+      // The doctor's Authorise, only after GHIS confirmed it. Distinct from a content save on purpose:
+      // it carries no fields, and it must never be mistaken for one.
+      if (signOff) body.signOff = true;
+      // The structured fields travel WITH the summary text. The timeline keeps its text line; where
+      // a tenant has opted a clinical write into the WardSynQ record (currently: vitals, kind
+      // "assessment", an investigation order on a kind "note", and a prescription on a kind
+      // "medication"), the server maps the structured payload into the canonical record and the
+      // text line is untouched either way.
+      if (vals) body.vals = vals;
+      // What distinguishes an investigation order from every other kind:"note" line. Without it the
+      // server treats this as a plain note and files nothing, which is exactly the old behaviour.
+      if (order) body.order = order;
+      // Likewise for a prescription against every other kind:"medication" line.
+      if (rx) body.rx = rx;
+      fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (d) {
+          // Off/shadow (every tenant today): the response is {ok:true, ...} and nothing changes here.
+          // A tenant running the clinical record as authoritative can refuse this write; that must
+          // not vanish silently, or "authoritative" would mean nothing a doctor could act on.
+          if (d && d.ok === false && d.error === "record_refused") toast("Saved to " + emrLabel() + ". Could not also save to the clinical record - " + ((d.wardsynq && d.wardsynq.error) || "try again") + ".");
+        }).catch(function () {});
     }).catch(function () {});
   }
+  // The catalogue is static and public (no PHI, no session) - fetched once per app load and cached on st.
+  function loadVaccineCatalogue() {
+    if (st.vaccineCatalogue || st._vacLoading) return;
+    st._vacLoading = true;
+    fetch(qBase() + "/api/queue/vaccines")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { st._vacLoading = false; if (d && d.ok && d.catalogue) { st.vaccineCatalogue = d.catalogue; if (st.tab === "immun") paint(); } })
+      .catch(function () { st._vacLoading = false; });
+  }
+
+  // Record a vaccination. The server re-validates the code against the IG's value set and builds the
+  // stored payload, so this only has to send what the clinician chose - it never composes the coding
+  // itself. A rejected code surfaces as a message rather than a silent no-op.
+  function recordImmunisation() {
+    var d = st.immunDraft || {};
+    if (!d.vaccineCode) { toast("Choose a vaccine first."); return; }
+    if (!st.ticketId || !st.sessionId) { toast("Open the patient from the queue to record a vaccination."); return; }
+    if (!confirm("Record this vaccination in the patient's visit record?")) return;
+    fbTok().then(function (t) {
+      if (!t) { toast("Please sign in again."); return; }
+      return fetch(qBase() + "/api/queue/timeline", {
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
+        body: JSON.stringify({
+          sessionId: st.sessionId, ticketId: st.ticketId, kind: "immunization",
+          vaccineCode: d.vaccineCode, doseNumber: d.doseNumber, lotNumber: d.lotNumber,
+          occurrenceDateTime: d.occurrenceDateTime, note: d.note,
+        }),
+      }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); }).then(function (res) {
+        if (!res.ok || !res.j || !res.j.ok) {
+          var e = (res.j && res.j.error) || "failed";
+          toast(e === "unknown_vaccine_code" ? "That vaccine is not in the national code list."
+            : e === "future_date" ? "A vaccination cannot be dated in the future."
+            : e === "bad_dose" ? "Check the dose number."
+            : e === "bad_date" ? "Check the date."
+            : "Could not record the vaccination.");
+          return;
+        }
+        st.immunDraft = {}; loadTimeline(); toast("Vaccination recorded."); paint();
+      });
+    }).catch(function () { toast("Could not record the vaccination."); });
+  }
+
   function assessSummary(v) {
     v = v || {}; var p = [];
     if (v.Chief_complaints_duration) p.push("Complaints: " + v.Chief_complaints_duration);
@@ -1040,15 +1288,18 @@
       "</div></section>";
   }
   // Pro: send the whole timeline to MaiK for a deeper AI summary (module "summary", 15/day cap server-side).
+  // Through SMD_AI.summary (2026-09-11), never a raw fetch: the answer-engine chooser decides whether
+  // this runs on Gemini, on the on-device model (windowed over the 4K context), or is refused with a
+  // named reason. The raw fetch here was the one MaiK call the "On-device" picker could not see.
   function maikSummarise(tl) {
     var text = tl.map(function (e) { return fmtClinicDate(e.ts) + (e.by ? " (" + e.by + ")" : "") + ": " + String(e.text || "").replace(/\s*\n\s*/g, "; "); }).join("\n").slice(0, 14000);
-    var base = (typeof window !== "undefined" && window.AI_PROXY) || "/api/ai";
-    var tokP; try { var cu = window.SMD_AUTH && SMD_AUTH.currentUser; tokP = (cu && cu.getIdToken) ? cu.getIdToken() : Promise.resolve(null); } catch (e) { tokP = Promise.resolve(null); }
-    return tokP.then(function (t) {
-      var h = { "Content-Type": "application/json" }; if (t) h["Authorization"] = "Bearer " + t;
-      return fetch(base + "/summary", { method: "POST", headers: h, credentials: "same-origin", body: JSON.stringify({ text: text }) });
-    }).then(function (r) { return r ? r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: false, d: {} }; }) : { ok: false, d: {} }; })
-      .then(function (res) { return (res.ok && res.d.text) ? { text: res.d.text } : (res.d && res.d.reason === "module-daily" ? { over: true } : null); });
+    if (!(G.SMD_AI && G.SMD_AI.summary)) return Promise.resolve(null);
+    return G.SMD_AI.summary(text).then(function (r) {
+      if (r && r.text && !r.error) return { text: r.text, engine: r.engine || "cloud" };
+      if (r && r.error === "quota" && (r.reason === "module-daily" || r.over)) return { over: true };
+      if (r && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only")) return { capability: r.message || "On-device summary is not available with the selected model." };
+      return null;
+    }, function () { return null; });
   }
   function summariseClinic() {
     var tl = st.timeline || []; if (!tl.length) { toast("No consults to summarise yet."); return; }
@@ -1057,7 +1308,8 @@
       st.clinicSummary = { loading: true }; paint();
       maikSummarise(tl).then(function (r) {
         if (r && r.text) st.clinicSummary = { ai: true, text: r.text, consults: tl.length };
-        else { st.clinicSummary = buildClinicSummary(tl); if (st.clinicSummary && r && r.over) st.clinicSummary.capNote = "Daily MaiK summary limit reached (15/day) — showing the on-device overview."; }
+        else { st.clinicSummary = buildClinicSummary(tl); if (st.clinicSummary && r && r.over) st.clinicSummary.capNote = "Daily MaiK summary limit reached (15/day) — showing the on-device overview.";
+               else if (st.clinicSummary && r && r.capability) st.clinicSummary.capNote = r.capability + " Showing the deterministic overview."; }
         paint();
       }, function () { st.clinicSummary = buildClinicSummary(tl); paint(); });
       return;
@@ -1068,9 +1320,25 @@
   // free-text field edits update state silently (no repaint) so focus/caret are never lost mid-typing.
   function setField(inp, val) {
     var map = { "inv-dx": ["invDraft", "diagnosis"], "med-route": ["medDraft", "route"], "med-form": ["medDraft", "form"], "med-qty": ["medDraft", "qty"], "med-freq": ["medDraft", "frequency"], "med-dur": ["medDraft", "duration"], "med-remarks": ["medDraft", "remarks"],
-      "cinv-name": ["invDraft", "name"], "cinv-note": ["invDraft", "note"], "crx-drug": ["medDraft", "drug"], "crx-dose": ["medDraft", "dose"], "crx-freq": ["medDraft", "frequency"], "crx-dur": ["medDraft", "duration"], "crx-rem": ["medDraft", "remarks"] };
+      "cinv-name": ["invDraft", "name"], "cinv-note": ["invDraft", "note"], "crx-drug": ["medDraft", "drug"], "crx-dose": ["medDraft", "dose"], "crx-freq": ["medDraft", "frequency"], "crx-dur": ["medDraft", "duration"], "crx-rem": ["medDraft", "remarks"],
+      "imm-vac": ["immunDraft", "vaccineCode"], "imm-dose": ["immunDraft", "doseNumber"], "imm-lot": ["immunDraft", "lotNumber"],
+      "imm-when": ["immunDraft", "occurrenceDateTime"], "imm-note": ["immunDraft", "note"] };
     if (map[inp]) { st[map[inp][0]] = st[map[inp][0]] || {}; st[map[inp][0]][map[inp][1]] = val; return; }
-    if (inp.indexOf("assess:") === 0) { var an = inp.slice(7); st.assessVals = st.assessVals || {}; st.assessVals[an] = val; st.assessTouched = st.assessTouched || {}; st.assessTouched[an] = true; return; }
+    if (inp.indexOf("assess:") === 0) {
+      var an = inp.slice(7);
+      st.assessVals = st.assessVals || {};
+      st.assessVals[an] = val;
+      st.assessTouched = st.assessTouched || {};
+      st.assessTouched[an] = true;
+      if (an === "Height" || an === "Weight") {
+        var mBmi = calcBmiBsa(st.assessVals.Height, st.assessVals.Weight);
+        if (mBmi) {
+          if (!st.assessTouched.BMI) { st.assessVals.BMI = mBmi.bmi; putVoiceDom("BMI"); }
+          if (!st.assessTouched.bsa) { st.assessVals.bsa = mBmi.bsa; putVoiceDom("bsa"); }
+        }
+      }
+      return;
+    }
     // Oncology override staging (Phase 4): silent, no repaint (mirrors the assess: fields above) so
     // typing a dose/reason never loses focus. Nothing is recorded into st.oncoDraft.overrides until
     // the doctor taps "Save override" (oncoSaveOverride), which requires the reason to be non-empty.
@@ -1104,9 +1372,29 @@
     ekg: "electrocardiogram", cxr: "chest x ray", usg: "ultrasound", lipid: "lipid profile", "pt inr": "prothrombin",
     inr: "prothrombin", bun: "blood urea", "urine r/e": "urine routine", "2d echo": "echocardiogram" };
   function expandQuery(kind, q) { if (kind !== "inv") return q; var k = String(q || "").toLowerCase().trim(); return INV_ABBREV[k] || q; }
+  // WardSynQ-native hospital: the org's own billing-tariff catalog (kind:"investigation" or
+  // "medication" rows), Firebase-authed, via GET /api/queue/inv-catalog?kind=. Same catalog
+  // mechanism for both - investigation ordering and prescribing both need SOMETHING to search that
+  // isn't GHIS's, which is meaningless for a hospital with no GHIS.
+  function runWardsynqCatalogSearch(kind, q) {
+    var key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg", tariffKind = kind === "inv" ? "investigation" : "medication";
+    st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
+    fbTok().then(function (t) {
+      if (!t) { st[key] = []; st[mkey] = "login"; renderSearchOut(kind); return; }
+      fetch(qBase() + "/api/queue/inv-catalog?kind=" + tariffKind + "&sessionId=" + encodeURIComponent(st.sessionId || "") + "&q=" + encodeURIComponent(q), { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
+        .then(function (res) {
+          if (!res.ok || (res.d && res.d.error)) { st[key] = []; st[mkey] = "error"; }
+          else { st[key] = (res.d && res.d.rows) || []; st[mkey] = st[key].length ? "" : "none"; }
+          renderSearchOut(kind);
+        })
+        .catch(function () { st[key] = []; st[mkey] = "error"; renderSearchOut(kind); });
+    }).catch(function () { st[key] = []; st[mkey] = "error"; renderSearchOut(kind); });
+  }
   function runSearch(kind) {
     var q = kind === "inv" ? st.invQuery : st.medQuery, key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg";
     if (!q || q.length < 2) { st[key] = []; st[mkey] = ""; renderSearchOut(kind); return; }
+    if (st.source === "wardsynq") { runWardsynqCatalogSearch(kind, q); return; }
     // Search is a GHIS (hospital) lookup — needs a live Ward Sync session + is meaningless off-hospital.
     if (st.source && st.source !== "ghis") { st[key] = []; st[mkey] = "offghis"; renderSearchOut(kind); return; }
     st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
@@ -1145,6 +1433,22 @@
     if (cmd === "inv-clear") { st.invDraft = {}; paint(); return; }
     if (cmd === "inv-emg") { st.invDraft = st.invDraft || {}; st.invDraft.emergency = !st.invDraft.emergency; paint(); return; }
     if (cmd === "inv-order") return submitInvOrder();
+    if (cmd === "ivorder") {
+      var nm = st.dictatedInv && st.dictatedInv[+arg];
+      if (nm) {
+        switchTab("inv");
+        st.invQuery = expandQuery("inv", nm);
+        scheduleSearch("inv");
+      }
+      return;
+    }
+    if (cmd === "ivx") {
+      if (st.dictatedInv) {
+        st.dictatedInv.splice(+arg, 1);
+        paint();
+      }
+      return;
+    }
     if (cmd === "med-pick") { var m = st.medResults[+arg]; if (m) { st.medDraft = { drug: m, route: "", form: "", qty: "", frequency: "", duration: "", remarks: "" }; st.medResults = []; st.medQuery = ""; paint(); } return; }
     if (cmd === "med-clear") { st.medDraft = {}; paint(); return; }
     if (cmd === "med-rx") return submitPrescribe();
@@ -1167,6 +1471,7 @@
       try { if (_localStore && _localStore.addPrescription) _localStore.addPrescription(st.patient.mrn, { drug: rx.drug, dose: rx.dose, freq: rx.frequency, duration: rx.duration, remarks: rx.remarks }, { author: st.author || "" }); } catch (e) {}
       st.medDraft = {}; loadTimeline(); toast("Medication added to the record."); paint(); return;
     }
+    if (cmd === "immun-add") return recordImmunisation();
     if (cmd === "assess-maik") return askMaik();
     if (cmd === "maik-ask") return maikAsk();
     if (cmd === "assess-maik-pro") return askMaikPro();
@@ -1179,8 +1484,12 @@
     if (cmd === "scribe-accept") { var p = String(arg).split(":"); return scribeAccept(p[0], +p[1]); }
     if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
+    if (cmd === "icdsearch") return openIcdSearchForField(arg);
+    if (cmd === "icdsuggest") return openIcdSuggestForField(arg);
+    if (cmd === "icdaccept") return acceptIcdSuggestion(+arg);
     if (cmd === "consult-authorise") return authoriseConsult();
     if (cmd === "consult-er") return consultToER();
+    if (cmd === "rx-rxchoice") return openRxChoice(st);
     if (cmd === "rx-share") return shareRx();
     if (cmd === "rx-refer") return shareReferral();
     if (cmd === "rx-summary") return shareSummary();
@@ -1203,6 +1512,12 @@
     if (cmd === "onco-print") return oncoPrintProtocol();
     if (cmd === "ivx") { var xi = +arg, xn = (st.dictatedInv || [])[xi]; if (xn != null) { st.dictatedInv.splice(xi, 1); stripPlanLine(xn); paint(); } return; }
     if (cmd === "ivorder") { var on = (st.dictatedInv || [])[+arg]; if (on != null) { st.tab = "inv"; st.invQuery = on; paint(); runSearch("inv"); } return; }
+    /* Picking a template re-renders the headings and nothing else. Any text already typed under the
+     * previous template's headings is NOT carried across: the sections mean different things, and
+     * silently moving a paragraph from "Examination" to "Plan" would put words in a clinician's note
+     * that they did not write there. */
+    if (cmd === "ntpick") { st.noteTplId = (document.getElementById("oe-nt-pick") || {}).value || ""; st.noteMsg = ""; paint(); return; }
+    if (cmd === "ntsave") { saveNote(); return; }
     if (cmd === "notes-copy") return copyNotes();
     if (cmd === "notes-save") return saveNotesToHistory();
     if (cmd === "notes-clear") return clearNotes();
@@ -1271,7 +1586,7 @@
     switchTab("assess");
   }
 
-  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } }
+  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } if (t === "note") loadNoteTemplates(); if (t === "immun") loadVaccineCatalogue(); }
 
   // Tap a dose-matrix cell: build the drawer PURELY from the plan already in state - no fetch, no
   // write. drugId may itself contain ":" so re-join everything after the cycle number.
@@ -1382,6 +1697,102 @@
   }
   // Firebase-authed GET to the onco routes (mirrors oncoPost's auth, no body). Read-side counterpart
   // that lets a NURSE session (no EMR_TREAT) actually fetch a cycle - the gap this phase closes.
+  /* The OPD note composer, 2026-09-08. The server half has existed since #906/#932 - org templates
+   * that supply HEADINGS and never content, a composer that writes no text of its own, and a note
+   * that is never auto-signed - and it was reachable from the ward chart and from nowhere in OPD.
+   * This is the OPD screen for it, and it computes nothing: every rule belongs to note-templates.js.
+   *
+   * THE TEMPLATE SUPPLIES HEADINGS, NOT WORDS. Nothing here prefills a section, offers a default
+   * phrase or suggests text. A note whose sentences a system wrote is a note nobody actually
+   * examined the patient to produce, and the clinician's name goes on it regardless.
+   *
+   * A SECTION LEFT EMPTY IS RECORDED AS NOT RECORDED, by the server, in its own words - never as an
+   * empty string, which reads as "examined and normal" to the next person to open the chart. */
+  function wardGet(path) {
+    return fbTok().then(function (t) {
+      var h = {}; if (t) h.Authorization = "Bearer " + t;
+      return fetch(qBase() + "/api/queue/ward/" + path, { headers: h, credentials: "include" });
+    }).then(function (r) { return r.json().catch(function () { return {}; }); });
+  }
+  function wardPost(path, body) {
+    return fbTok().then(function (t) {
+      var h = { "Content-Type": "application/json" }; if (t) h.Authorization = "Bearer " + t;
+      return fetch(qBase() + "/api/queue/ward/" + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body) });
+    }).then(function (r) { return r.json().catch(function () { return {}; }); });
+  }
+
+  function loadNoteTemplates() {
+    if (st.tplLoaded || st.tplLoading) return;
+    st.tplLoading = true;
+    wardGet("templates?orgId=" + encodeURIComponent(st.hospitalId || "")).then(function (d) {
+      st.tplLoading = false; st.tplLoaded = true;
+      st.templates = (d && d.ok && d.templates) || [];
+      /* An empty list is STATED rather than shown as an empty dropdown: "this hospital has not
+       * configured any" and "they failed to load" look identical otherwise, and only one of them is
+       * something a clinician should wait for. */
+      st.tplErr = (d && d.ok) ? "" : ((d && d.detail) || "Templates could not be loaded.");
+      if (st.tab === "note") paint();
+    }).catch(function () {
+      st.tplLoading = false; st.tplLoaded = true; st.templates = [];
+      st.tplErr = "Templates could not be loaded.";
+      if (st.tab === "note") paint();
+    });
+  }
+
+  function saveNote() {
+    var tplId = st.noteTplId || "";
+    if (!tplId) { st.noteMsg = "Choose a template first."; paint(); return; }
+    /* A note belongs to a VISIT. Opened from a search rather than from the queue there is no ticket,
+     * so there is no encounter to file it against - and the server derives the encounter from the
+     * ticket precisely so this client never computes one. Refused with the reason rather than posted
+     * against a guessed id, which would file the note under an encounter that does not exist. */
+    if (!st.ticketId) { st.noteMsg = "This patient was not opened from today's queue, so there is no visit to file a note against. Open them from the queue."; paint(); return; }
+    var tpl = (st.templates || []).filter(function (t) { return t.id === tplId; })[0];
+    var sections = {};
+    ((tpl && tpl.sections) || []).forEach(function (s) {
+      var el = document.getElementById("oe-nt-" + s.key);
+      if (el && el.value.trim()) sections[s.key] = el.value.trim();
+    });
+    st.noteSaving = true; st.noteMsg = ""; paint();
+    wardPost("note", { orgId: st.hospitalId || "", templateId: tplId, ticketId: st.ticketId || "", sections: sections })
+      .then(function (d) {
+        st.noteSaving = false;
+        /* Never "signed". writeTemplatedNote does not sign, and a screen that said so would be
+         * claiming an authorisation the record does not carry. */
+        st.noteMsg = (d && d.ok) ? "Note saved to the record. It is not signed." : ((d && d.detail) || "The note was not saved.");
+        if (d && d.ok) st.noteSavedId = d.noteId || null;
+        paint();
+      })
+      .catch(function () { st.noteSaving = false; st.noteMsg = "The note was not saved."; paint(); });
+  }
+
+  function noteTab(st) {
+    if (st.tplLoading) return loadingBox("Loading templates…");
+    var tpl = (st.templates || []).filter(function (t) { return t.id === st.noteTplId; })[0];
+    var opts = '<option value="">Choose a template…</option>' +
+      (st.templates || []).map(function (t) {
+        return '<option value="' + esc(t.id) + '"' + (t.id === st.noteTplId ? " selected" : "") + ">" + esc(t.title || t.id) + "</option>";
+      }).join("");
+
+    var body = !st.templates || !st.templates.length
+      ? '<p class="oe-empty">' + esc(st.tplErr || "This hospital has not configured any note templates. Nothing here writes headings of its own.") + "</p>"
+      : '<label class="oe-field">Template<select id="oe-nt-pick" class="oe-inp" data-e-act="ntpick">' + opts + "</select></label>" +
+        (tpl
+          ? ((tpl.sections || []).map(function (s) {
+              return '<label class="oe-field">' + esc(s.title || s.key) + (s.required ? " *" : "") +
+                '<textarea id="oe-nt-' + esc(s.key) + '" class="oe-inp" rows="3"></textarea></label>';
+            }).join("") +
+            '<div class="oe-actions"><button class="oe-btn primary" data-e-act="ntsave"' + (st.noteSaving ? " disabled" : "") + ">" +
+            (st.noteSaving ? "Saving…" : "Save note") + "</button></div>" +
+            /* Said on the screen, every time, because it is the difference between a note and a
+             * signed note and nothing else on this page says which this is. */
+            '<p class="oe-note">' + ms("info") + "The headings come from your hospital. Nothing is written for you, a section you leave empty is recorded as not recorded, and saving does not sign the note.</p>")
+          : '<p class="oe-empty">Choose a template to see its headings.</p>') +
+        (st.noteMsg ? '<p class="oe-note">' + ms("info") + esc(st.noteMsg) + "</p>" : "");
+
+    return '<section class="oe-sec"><h3>Consultation note</h3>' + body + "</section>";
+  }
+
   function oncoGet(path) {
     return fbTok().then(function (t) {
       var h = {}; if (t) h.Authorization = "Bearer " + t;
@@ -1585,6 +1996,67 @@
   // print (the browser print dialog offers "Save as PDF"). Copied verbatim (~15 lines) from
   // thorex-screens.js's exportHtmlDoc - the ~15-line dual-path pipeline the plan called for reusing.
   // The native path is device-only (per the iOS build gotcha); this file only wires it, never tests it.
+  /* ── RxChoice™ in the OPD consult (rxchoice-ui.js, flag smd_rxchoice) ───────────────────────────
+   * The same opt-in layer the prescription pad offers, over the consult's OWN medication list. It
+   * reads what has been prescribed and shows products from the StewardMD Drug Database carrying the
+   * same therapy at different prices. It writes NOTHING back into the EMR: the OPD medication fields
+   * are a write-back surface that is server-gated (QUEUE_EMR_WRITE, with PRESCRIBE server-blocked),
+   * so a brand chosen here is recorded in the RxChoice audit trail and shown to the doctor, and the
+   * doctor changes the order themselves if they want it. Inert with the flag off: no button renders.
+   *
+   * In OPD a medication is a single text string ("Tab Paracetamol 650", or a GHIS drug name), which
+   * is also the product name, so it is passed as BOTH the drug and the brand - the brand-name
+   * endpoint is what resolves it to a database record. A line it cannot resolve says so per line. */
+  function rxcAvailable() { try { return !!(G.SMD_RXCHOICE_FLAGS && G.SMD_RXCHOICE_FLAGS.on() && G.SMD_RXCHOICE_UI && G.SMD_RXCHOICE_UI.available()); } catch (e) { return false; } }
+  function rxcButton() {
+    return rxcAvailable() ? '<button class="oe-btn" data-oe-act="rx-rxchoice">' + ms("savings") + "RxChoice\u2122 - same therapy, smarter price</button>" : "";
+  }
+  /* One RxChoice line per prescribed medication. Sources, in order: the assessment plan's "Rx:" lines
+   * (what the doctor wrote this visit), else the medication list on record, else the open draft. */
+  function rxcLines(st) {
+    var out = [];
+    var split = function (text) {
+      // "Tab Paracetamol 650 1 tab TDS 5 days" -> product text + the dose/freq/duration tail.
+      var t = String(text || "").trim(), low = t.toLowerCase();
+      var fm = low.match(/\b(od|bd|bid|tds|tid|qid|qds|hs|sos|prn|q4h|q6h|q8h|q12h)\b/);
+      var dm = low.match(/(\d+(?:\.\d+)?)\s*(days?|weeks?|months?)/);
+      var dzm = t.match(/(\d+(?:\.\d+)?\s*(?:ml|tabs?|tablets?|caps?|capsules?|puffs?|drops?))/i);
+      var head = t;
+      if (fm) head = t.slice(0, fm.index).trim();
+      head = head.replace(/(\d+(?:\.\d+)?\s*(?:ml|tabs?|tablets?|caps?|capsules?|puffs?|drops?))\s*$/i, "").trim();
+      return { product: head || t, dose: dzm ? dzm[1] : "", freq: fm ? fm[1].toUpperCase() : "", duration: dm ? (dm[1] + " " + dm[2]) : "" };
+    };
+    var plan = rxLinesFromPlan(st.assessVals || {}).rx;
+    plan.forEach(function (l) { var p = split(l); out.push({ drug: p.product, brand: p.product, dose: p.dose, freq: p.freq, duration: p.duration }); });
+    if (!out.length) (st.medications || []).forEach(function (m) {
+      var nm = String(m.drugText || m.drug || "").trim(); if (!nm) return;
+      out.push({ drug: nm, brand: nm, dose: m.dosage || m.dose || "", freq: m.frequency || "", duration: m.duration || "" });
+    });
+    // Clinic (local/shared) patients keep their prescriptions in the on-device store, not in GHIS.
+    if (!out.length && typeof usesLocal === "function" && usesLocal(st.source) && _localStore && _localStore.listPrescriptions) {
+      try {
+        (_localStore.listPrescriptions((st.patient || {}).mrn) || []).forEach(function (x) {
+          var nm = String(x.drug || "").trim(); if (!nm) return;
+          out.push({ drug: nm, brand: nm, dose: x.dose || "", freq: x.freq || "", duration: x.duration || "" });
+        });
+      } catch (e) {}
+    }
+    if (!out.length) {
+      var d = st.medDraft || {};
+      var nm2 = String((d.drug && d.drug.name) || d.drug || "").trim();
+      if (nm2) out.push({ drug: nm2, brand: nm2, dose: d.dose || d.qty || "", freq: d.frequency || "", duration: d.duration || "" });
+    }
+    return out;
+  }
+  function openRxChoice(st) {
+    if (!rxcAvailable()) return;
+    var lines = rxcLines(st);
+    if (!lines.length) { try { G.toast && G.toast("Prescribe a medication first"); } catch (e) {} return; }
+    // onSelect is deliberately absent: there is no EMR field for RxChoice to write. The panel records
+    // the doctor's choice in its own audit trail and shows it; the order itself stays the doctor's.
+    G.SMD_RXCHOICE_UI.open({ lines: lines, prescriptionId: (typeof oeDocId === "function" ? oeDocId() : null) || null });
+  }
+
   // ---- One-tap prescription sheet: build a branded Rx from the consult, share to WhatsApp / print / PDF.
   // Reuses oncoExportHtmlDoc (native real-PDF share sheet -> WhatsApp, else share-HTML, else web print). No
   // server, no PHI in logs: the doctor picks WhatsApp in the OS share sheet. ----
@@ -1673,6 +2145,19 @@
     var meds = parts.rx.length ? parts.rx : (st.medications || []).map(function (m) { return (m.drugText || m.drug || "") + [m.dosage, m.frequency, m.duration].filter(Boolean).map(function (x) { return " " + x; }).join(""); }).filter(Boolean);
     var row = function (t, val) { return val ? '<div class="vs-row"><span class="vs-k">' + t + "</span><div>" + e2(val).replace(/\n/g, "<br>") + "</div></div>" : ""; };
     var list = function (t, arr) { return arr && arr.length ? '<div class="vs-row"><span class="vs-k">' + t + '</span><ul style="margin:0;padding-left:18px">' + arr.map(function (x) { return "<li>" + e2(x) + "</li>"; }).join("") + "</ul></div>" : ""; };
+    var vit = [
+      v.Temp ? ("Temp: " + v.Temp + "°F") : "",
+      (v.BP_SYS && v.BP_dia) ? ("BP: " + v.BP_SYS + "/" + v.BP_dia + " mmHg") : "",
+      v.Pulse ? ("Pulse: " + v.Pulse + " /min") : "",
+      v.respiratory ? ("RR: " + v.respiratory + " /min") : "",
+      v.spo2 ? ("SpO2: " + v.spo2 + "%") : "",
+      v.grbs ? ("GRBS: " + v.grbs + " mg/dL") : "",
+      v.pain_score ? ("Pain: " + v.pain_score + "/10") : "",
+      v.Height ? ("Height: " + v.Height + " cm") : "",
+      v.Weight ? ("Weight: " + v.Weight + " kg") : "",
+      v.BMI ? ("BMI: " + v.BMI) : "",
+      v.bsa ? ("BSA: " + v.bsa + " m²") : ""
+    ].filter(Boolean).join(" · ");
     return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Visit summary</title><style>' +
       'body{font:14px/1.55 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;color:#14202b;margin:0;padding:24px;max-width:760px}' +
       '.vs-hd{border-bottom:3px solid #0e6e63;padding-bottom:12px;margin-bottom:14px}.vs-hd h1{font-size:20px;margin:0;color:#0e6e63}' +
@@ -1684,11 +2169,21 @@
       row("Patient", (p.name || "Patient") + (p.displayId || p.mrn ? "  (ID: " + (p.displayId || p.mrn) + ")" : "")) +
       row("Chief complaints", v.Chief_complaints_duration) +
       row("History", v.History_present_illness) +
+      row("Surgical History", v.surgical_history) +
+      row("Vitals & Nutrition", vit) +
+      row("Known Allergies", v.Known_allergies_details) +
+      row("Ongoing Medications", v.home_medications || v["val.treatment_received"]) +
       row("Diagnosis", v.provisional_diagnosis) +
+      row("Differential Diagnosis", v.differential_diagnosis) +
       list("Investigations", parts.ix) +
-      list("Medications", meds) +
+      list("Medications Prescribed", meds) +
       list("Advice", parts.adv) +
       row("Referral", v.refered_management_plan) +
+      '<div style="margin:16px 0;padding:10px 14px;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;font-size:12px;color:#991b1b">' +
+        '<b>Emergency Warning Signs / అత్యవసర సంకేతాలు:</b><br>' +
+        'Return immediately if you develop high fever, severe breathlessness, chest pain, confusion, or persistent vomiting.<br>' +
+        'తీవ్రమైన జ్వరం, శ్వాస ఆడకపోవడం, ఛాతీ నొప్పి లేదా వాంతులు వస్తే వెంటనే ఆసుపత్రికి రండి.' +
+      '</div>' +
       '<div class="vs-sign"><div class="ln">' + (doctor ? e2(doctor) : "Treating doctor") + "</div></div>" +
       '<div class="vs-foot">Electronically generated' + (doctor ? " by " + e2(doctor) : "") + (when ? " on " + e2(when) : "") + " via StewardMD &middot; a record of this consultation</div></body></html>";
   }
@@ -1699,14 +2194,34 @@
 
   function oncoExportHtmlDoc(html, filename, title) {
     var name = (filename || "StewardMD-Protocol-sheet").replace(/[^\w.-]+/g, "-");
+    toast("Building PDF...");
     if (G.SMD_IS_NATIVE) {
       var N = G.SMD_NATIVE;
       if (N && N.sharePdfFromHtml) {
-        toast("Building PDF...");
-        N.sharePdfFromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () { oncoShareHtml(html, name); });
+        N.sharePdfFromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () {
+          if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+            G.SMD_PDF.fromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () { toast("PDF export failed."); });
+          } else {
+            toast("PDF export unavailable.");
+          }
+        });
         return;
       }
-      oncoShareHtml(html, name);
+    }
+    if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+      G.SMD_PDF.fromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () {
+        try {
+          var ifr = document.createElement("iframe");
+          ifr.setAttribute("aria-hidden", "true");
+          ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
+          document.body.appendChild(ifr);
+          var d = ifr.contentWindow.document; d.open(); d.write(html); d.close();
+          setTimeout(function () {
+            try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {}
+            setTimeout(function () { try { ifr.remove(); } catch (e) {} }, 1500);
+          }, 350);
+        } catch (e) { toast("Export unavailable."); }
+      });
       return;
     }
     try {
@@ -1732,14 +2247,36 @@
     var a = ghisAuth(), url = kind === "lab"
       ? "/lab-detail?renderId=" + encodeURIComponent(parts[0] || "") + "&episodeId=" + encodeURIComponent(parts[1] || "")
       : "/radiology-report?resultid=" + encodeURIComponent(parts[0] || "") + "&type=" + encodeURIComponent(parts[1] || "manual");
+    // The order row this tap came from, so the mirror below (if this fetch succeeds) can send the
+    // SAME metadata the console already scraped, rather than re-deriving it from the URL parts.
+    var orderRow = kind === "lab"
+      ? (st.labs || []).filter(function (l) { return String(l.renderId || "") === parts[0] && String(l.episodeId || "") === parts[1]; })[0]
+      : (st.radiology || []).filter(function (o) { return String(o.resultid || "") === parts[0]; })[0];
     fetch(a.base + url, { headers: authHeaders(), credentials: "include" })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
       .then(function (res) {
         if (!st.report) return;
         if (!res.ok || res.d.error) { st.report.loading = false; st.report.err = res.d.error === "login_required" ? "Connect Ward Sync (GHIS) first." : "Could not load this report."; paint(); return; }
         st.report.loading = false; st.report.data = res.d; paint();
+        // Mirror what GHIS just answered into the clinical record, best-effort, after the fact.
+        // GHIS's read already happened and is unaffected by anything that follows; see
+        // functions/_wardsynq/migrate-results.js for why this is a READ mirror, not a write.
+        mirrorResult(kind === "lab" ? "lab" : "radiology", orderRow, res.d);
       })
       .catch(function () { if (st.report) { st.report.loading = false; st.report.err = "Could not load this report."; paint(); } });
+  }
+  // Fire-and-forget: post what GHIS just returned to the queue-session-authenticated mirror, so a
+  // tenant with the "results" migration on can file it as a WardSynQ DiagnosticReport. Off (every
+  // tenant today), the server does nothing with this and nothing here is visible to the doctor
+  // either way — no toast, no error surfaced, because a missed mirror changes no clinical behaviour:
+  // GHIS remains the source the doctor just read from.
+  function mirrorResult(source, orderRow, detail) {
+    if (!st.ticketId || !st.sessionId || !orderRow || !detail) return;
+    fbTok().then(function (t) {
+      if (!t) return;
+      var body = { sessionId: st.sessionId, ticketId: st.ticketId, source: source, order: orderRow, detail: detail };
+      fetch(qBase() + "/api/queue/result", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) }).catch(function () {});
+    }).catch(function () {});
   }
   // #156 — fetch every lab report for a repeated test name so labTrendPanel can trend its numeric analytes.
   // Reuses the /lab-detail endpoint per order. Patient-switch guarded. Flag-gated OFF (validate on device).
@@ -1813,7 +2350,10 @@
   // behind saveConsult in the injected store, so the EMR overlay stays storage-agnostic.
   function usesLocal(s) { return s === "local" || s === "shared"; }
   function loadProfile(opts) {
-    if (usesLocal(st.source)) { st.loading = false; paint(); return; }   // personal/shared clinic: no hospital profile/labs to fetch
+    // Personal/shared clinic: no hospital profile/labs to fetch. WardSynQ-native hospital: same - labs/
+    // radiology/medications are not migrated in this task, and there is no GHIS to fetch them from; the
+    // Profile tab must not show "Connect Ward Sync (GHIS) first" for a hospital that has no GHIS.
+    if (usesLocal(st.source) || st.source === "wardsynq") { st.loading = false; paint(); return; }
     var a = ghisAuth();
     var q = "?patientId=" + encodeURIComponent(opts.patientId || "") + "&recordNo=" + encodeURIComponent(opts.recordNo || "");
     var forPatient = st;   // guard: if the doctor opens another patient before this resolves, don't write A's labs onto B's chart
@@ -1829,7 +2369,10 @@
       .catch(function () { if (st !== forPatient) return; st.loading = false; st.error = "Could not load the patient profile."; paint(); });
   }
   function loadAssessment() {
-    if (usesLocal(st.source)) {   // personal/shared clinic: prefill from the on-device store (no GHIS fetch)
+    // Personal/shared clinic: prefill from the on-device store (no GHIS fetch). WardSynQ-native
+    // hospital: no on-device store either, and no GHIS draft to prefill from - a blank form for this
+    // encounter (the doctor's saved note is still readable afterward, via the visit timeline below).
+    if (usesLocal(st.source) || st.source === "wardsynq") {
       st.assessLoaded = true; st.assessLoading = false; st.assessErr = "";
       st.assessVals = (_localStore && _localStore.getConsult) ? (_localStore.getConsult(st.patient.mrn) || {}) : {};
       paint(); return;
@@ -1896,25 +2439,141 @@
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
         if (!res.ok || d.ok === false) { toast(ghisSay(d.resp)); return; }
         toast(okMsg);
-        if (tl && tl.text) { addToTimeline(tl.kind, tl.text); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
+        if (tl && tl.text) { addToTimeline(tl.kind, tl.text, tl.vals, tl.signOff, tl.order, tl.rx); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
         st.invDraft = {}; st.medDraft = {};
         if (onOk) try { onOk(); } catch (e) {}
         loadProfile({ patientId: st.patient.mrn || "", recordNo: st.recordNo || "" });
       })
       .catch(function () { toast("Could not complete the request. Please try again."); });
   }
+  // WardSynQ-native hospital (source "wardsynq"): the assessment write goes DIRECTLY to the WardSynQ
+  // record over the SAME /api/queue/timeline endpoint addToTimeline() already posts to for the GHIS
+  // shadow mirror - but here it IS the save, not a best-effort mirror: a refusal is reported to the
+  // doctor, never swallowed, and success means the WardSynQ record accepted it - no GHIS involved at
+  // all. Firebase-authed (qBase/fbTok, same as addToTimeline), never _localStore.
+  function wardsynqSay(d) {
+    var err = d && d.error;
+    if (err === "wardsynq_tenant_not_configured") return "WardSynQ is not fully set up for this hospital yet. Contact support.";
+    if (err === "record_refused") return "Could not save to the clinical record - " + ((d.wardsynq && d.wardsynq.error) || "try again") + ".";
+    if (err === "not_found") return "This visit could not be found. Reopen the patient from the queue and try again.";
+    return "Could not complete the request. Please try again.";
+  }
+  // General native-WardSynQ write: posts straight to the SAME /api/queue/timeline endpoint
+  // addToTimeline() uses for the GHIS shadow mirror, Firebase-authed - but here it IS the save, not a
+  // best-effort mirror. `extra` carries whatever structured payload this kind needs (vals/order/rx/
+  // signOff); success/failure is the WardSynQ record's own, never a GHIS response.
+  function postWardsynqTimeline(kind, text, extra, okMsg, onOk) {
+    if (!st.ticketId || !st.sessionId) { toast("Open this patient from the queue to save."); return; }
+    fbTok().then(function (t) {
+      if (!t) { toast("Sign in to WardSynQ first."); return; }
+      var body = Object.assign({ sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: text }, extra || {});
+      fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, d: d || {} }; }); })
+        .then(function (res) {
+          var d = res.d;
+          if (!res.ok || d.ok === false) { toast(wardsynqSay(d)); return; }
+          toast(okMsg);
+          setTimeout(loadTimeline, 600);
+          if (onOk) try { onOk(); } catch (e) {}
+        })
+        .catch(function () { toast("Could not complete the request. Please try again."); });
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+  function postWardsynqAssessment(vals, okMsg, signOff, onOk) {
+    var extra = {}; if (vals) extra.vals = vals; if (signOff) extra.signOff = true;
+    postWardsynqTimeline("assessment", assessSummary(st.assessVals), extra, okMsg, onOk);
+  }
+  // Advisory-only CDSS pre-check (functions/_wardsynq/rx-safety.js) - shown to the doctor BEFORE
+  // they confirm a native prescription. NEVER blocks: the promise always resolves to a safety
+  // object (possibly with findings, possibly degraded), never rejects, so a check that fails never
+  // stops the doctor from prescribing - it only stops them from prescribing UNINFORMED.
+  function checkWardsynqRxSafety(drug, generic) {
+    if (!st.ticketId || !st.sessionId) return Promise.resolve({ unapproved: true, findings: [], degraded: true });
+    return fbTok().then(function (t) {
+      if (!t) return { unapproved: true, findings: [], degraded: true };
+      var q = "sessionId=" + encodeURIComponent(st.sessionId) + "&ticketId=" + encodeURIComponent(st.ticketId) + "&drug=" + encodeURIComponent(drug || "") + "&generic=" + encodeURIComponent(generic || "");
+      return fetch(qBase() + "/api/queue/rx-safety?" + q, { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (d) { return (d && d.ok && d.safety) || { unapproved: true, findings: [], degraded: true }; })
+        .catch(function () { return { unapproved: true, findings: [], degraded: true }; });
+    }).catch(function () { return { unapproved: true, findings: [], degraded: true }; });
+  }
+  // Plain-text summary appended to the prescribe confirm() dialog. Labeled UNAPPROVED per this
+  // content's own governance status (vault/modules/WardSynQ.md) - never phrased as a cleared check.
+  function wardsynqSafetyNote(safety) {
+    if (!safety) return "";
+    if (safety.degraded) return "\n\nNOT CHECKED: decision support could not read this patient's record, so NO allergy or interaction check ran. An unreadable allergy list is not an empty one - check allergies yourself before prescribing.";
+    /* R6-1, 2026-09-18: one of the two reads failed. Until the server stopped swallowing it, this
+     * arrived as findings: [] and the doctor was told "no interaction or allergy match found" about
+     * a patient whose allergy record had never been read. Named, and said FIRST. */
+    var nc = (safety.notChecked || []);
+    if (nc.length) {
+      return "\n\nNOT CHECKED against: " + nc.map(function (t) {
+        return t === "AllergyIntolerance" ? "this patient's allergies" : t === "MedicationOrder" ? "this patient's other medicines" : t;
+      }).join(" and ") + " - that part of the record could not be read. It is not a clear check. Check it yourself before prescribing." +
+        ((safety.findings && safety.findings.length) ? "\n\nFrom what could be read:\n" + safety.findings.slice(0, 5).map(function (f) { return "- " + f.message; }).join("\n") : "");
+    }
+    // A drug the rule pack could not resolve was never checked against ANYTHING. Reporting "no
+    // interaction found" for it would be a clean bill of health for a check that never ran, which is
+    // exactly the distinction rx-safety.js reports `unresolvedDrug` for and which this function used
+    // to discard. Brand names are the common case ("Augmentin 625" does not resolve), and the
+    // patient may well be allergic to what is inside them - a penicillin, here.
+    if (safety.unresolvedDrug) return "\n\nNOT CHECKED: this drug was not recognised by the decision-support content, so NO interaction or allergy check ran for it. Check allergies and interactions yourself before prescribing.";
+    // Some of the patient's CURRENT medicines could not be resolved, so this order was never
+    // compared against them. Saying only "no interaction found" would overstate what ran.
+    var un = (safety.unresolvedActiveMeds || []);
+    var gap = un.length ? "\n\nNOT compared against: " + un.slice(0, 5).join(", ") + " (not recognised by the decision-support content). Check those yourself." : "";
+    if (!safety.findings || !safety.findings.length) return "\n\n(No interaction or allergy match found against this patient's record. Unapproved content, not a substitute for clinical judgment.)" + gap;
+    var lines = safety.findings.slice(0, 5).map(function (f) { return "- " + f.message; });
+    return "\n\nUNAPPROVED decision support flags:\n" + lines.join("\n") + gap + "\n\nUse clinical judgment. This does not block the prescription.";
+  }
   function confirmed(msg) { try { return !!(G.confirm && G.confirm(msg)); } catch (e) { return false; } }
   function submitInvOrder() {
     var d = st.invDraft || {}; if (!d.service) return;
+    var order = { serviceId: d.service.id, name: d.service.name || "", diagnosis: d.diagnosis || "", emergency: !!d.emergency };
+    var text = "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : "");
+    // WardSynQ-native hospital: straight to the WardSynQ record, no GHIS. Investigation orders carry
+    // no drug-dosing risk (unlike prescriptions), so unlike submitPrescribe this is safe to enable now.
+    if (st.source === "wardsynq") {
+      if (!confirmed('Order "' + d.service.name + '" for this patient?')) return;
+      postWardsynqTimeline("note", text, { order: order }, "Investigation ordered.", function () { st.invDraft = {}; paint(); });
+      return;
+    }
     if (!confirmed('Order "' + d.service.name + '" for this patient in GHIS?')) return;
+    // The timeline sentence is unchanged. `order` rides beside it so the server can file the SAME
+    // order structurally in the clinical record (functions/_wardsynq/migrate-inv-order.js) instead of
+    // re-parsing this sentence. Ignored entirely by clinics with the migration off, which is all of
+    // them today. Note `emergency` and `diagnosis` are carried here even though GHIS itself drops
+    // them - that is what makes the record keep what the doctor actually entered.
     postWrite("/inv-order", { serviceId: d.service.id, diagnosis: d.diagnosis || "", emergency: !!d.emergency }, "Investigation ordered.",
-      { kind: "note", text: "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : "") });
+      { kind: "note", text: text, order: order });
   }
   function submitPrescribe() {
     var d = st.medDraft || {}; if (!d.drug) return;
+    var rxText = [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "");
+    // WardSynQ-native hospital: straight to the WardSynQ record, with an advisory-only CDSS
+    // pre-check (functions/_wardsynq/rx-safety.js) shown BEFORE the doctor confirms. That check
+    // never blocks - see its header (unapproved clinical content) - it only informs.
+    if (st.source === "wardsynq") {
+      checkWardsynqRxSafety(d.drug.name, d.drug.name).then(function (safety) {
+        if (!confirmed('Prescribe "' + d.drug.name + '" for this patient?' + wardsynqSafetyNote(safety))) return;
+        postWardsynqTimeline("medication", rxText,
+          { rx: { drugId: d.drug.id, name: d.drug.name || "", generic: d.drug.name || "", drugCodeSystem: "wardsynq-tariff", route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" } },
+          "Prescribed.", function () { st.medDraft = {}; paint(); });
+      });
+      return;
+    }
     if (!confirmed('Prescribe "' + d.drug.name + '" for this patient in GHIS?')) return;
+    // The timeline sentence is unchanged. `rx` rides beside it so the server can file the SAME
+    // prescription structurally in the clinical record (functions/_wardsynq/migrate-prescription.js)
+    // instead of re-parsing this sentence. `generic` is the composition GHIS's own drug search
+    // returned; the safety engine indexes allergy classes and dose limits by generic, so it is
+    // carried rather than dropped. NOTE this whole call is inert today: /prescribe answers 501
+    // until QUEUE_EMR_PRESCRIBE_OK=1, and postWrite returns above without mirroring anything - so a
+    // prescription GHIS refused never reaches the record. That is deliberate, not a gap.
     postWrite("/prescribe", { drugId: d.drug.id, route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" }, "Prescription saved.",
-      { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "") });
+      { kind: "medication", text: rxText,
+        rx: { drugId: d.drug.id, name: d.drug.name || "", generic: d.drug.sub || "", route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" } });
   }
   function submitAssessment() {
     // An authorised record is locked in GHIS — a write would be rejected. Say so instead of failing.
@@ -1925,8 +2584,14 @@
       st.savedConsult = true; loadTimeline(); toast("Saved to " + emrLabel() + " on this device."); paint(); return;
     }
     if (!confirmed("Save this assessment to " + emrLabel() + "?")) return;
+    // WardSynQ-native hospital: straight to the WardSynQ record. No GHIS call - a WardSynQ write is
+    // the whole save, not a mirror of one, so its own success/failure is what the doctor sees.
+    if (st.source === "wardsynq") {
+      postWardsynqAssessment(buildAssessPayload(st.assessVals || {}), "Saved to " + emrLabel() + ".", false, function () { st.savedConsult = true; paint(); });
+      return;
+    }
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
-      { kind: "assessment", text: assessSummary(st.assessVals) }, function () { st.savedConsult = true; paint(); });
+      { kind: "assessment", text: assessSummary(st.assessVals), vals: buildAssessPayload(st.assessVals || {}) }, function () { st.savedConsult = true; paint(); });
   }
   // Clear every field and save the blank assessment to GHIS (deliberate wipe of the current Initial Assessment).
   function clearAssessment() {
@@ -1939,12 +2604,13 @@
       toast("Assessment cleared in " + emrLabel() + "."); paint(); return;
     }
     paint();
+    if (st.source === "wardsynq") { postWardsynqAssessment(buildAssessPayload({}), "Assessment cleared in " + emrLabel() + ".", false); return; }
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload({}) }, "Assessment cleared in " + emrLabel() + ".",
-      { kind: "assessment", text: "Assessment cleared" });
+      { kind: "assessment", text: "Assessment cleared", vals: buildAssessPayload({}) });
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
-  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "";
+  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "", _scribeCapToasted = "";
   // Clear the "Finishing your dictation…" state once the last chunk + refine have landed (or on a safety timeout).
   function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } _finishPending = false; if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
@@ -1960,6 +2626,63 @@
   // Which on-device model is transcribing right now (updates live as Auto mode adapts per chunk).
   function setModelChip(code) { st.voiceModel = code || ""; try { var e = document.getElementById("oeVcModel"); if (e && code) e.textContent = code; } catch (x) {} }
   function tickElapsed() { try { var e = document.getElementById("oeElapsed"); if (e) e.textContent = fmtElapsed(now() - (st.voiceStartedAt || now())); } catch (x) {} }
+  // Opens the ICD Search overlay in picker mode; the chosen code+title is appended as a new line
+  // to the named field (same DOM-patch path as voice dictation - putVoiceDom - so it doesn't lose
+  // scroll position or trigger a full repaint()).
+  function openIcdSearchForField(name) {
+    if (!G.SMD_ICD || !G.SMD_ICD.pick) { toast("ICD search not available on this build."); return; }
+    G.SMD_ICD.pick(function (row) {
+      st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+      var cur = st.assessVals[name] || "";
+      var line = esc2Line(row.code) + " - " + esc2Line(row.title);
+      st.assessVals[name] = cur ? (cur + (/\n$/.test(cur) ? "" : "\n") + line) : line;
+      st.assessTouched[name] = true;
+      putVoiceDom(name);
+    });
+  }
+  function esc2Line(s) { return String(s == null ? "" : s).replace(/[\r\n]+/g, " "); }
+  // MaiK-assisted ICD suggestion: sends chief complaint + present history + whatever's already
+  // typed in provisional diagnosis (no name/MR number - explicit consent tap first, same posture
+  // as askMaikPro above) to /api/ai/extract kind:"icd-suggest". The server grounds the model
+  // against real icd_codes rows and re-validates every id before it comes back - this client
+  // never trusts a code string directly from the model. Advisory only: each row needs its own
+  // Accept tap; nothing is written to the field until then.
+  var _oeIcdSug = [], _oeIcdSeq = 0, _oeIcdField = "provisional_diagnosis";
+  function openIcdSuggestForField(name) {
+    if (!(G.SMD_AI && G.SMD_AI.extract)) { toast("MaiK is not available on this build."); return; }
+    _oeIcdField = name || "provisional_diagnosis";
+    var v = st.assessVals || {};
+    var text = [v.provisional_diagnosis, v.Chief_complaints_duration, v.History_present_illness].filter(Boolean).join(". ").trim();
+    if (!text) { toast("Type the complaint, history or diagnosis first."); return; }
+    if (!confirmed("Send this text (no name or MR number) to MaiK for ICD-10/11 code suggestions?")) return;
+    var panel = document.querySelector("#smdOpdEmr #oeIcdSug"); if (!panel) return;
+    panel.innerHTML = '<div class="oe-icdsug-hint">Asking MaiK…</div>';
+    var mySeq = ++_oeIcdSeq;
+    G.SMD_AI.extract(text, "icd-suggest").then(function (r) {
+      if (mySeq !== _oeIcdSeq) return;
+      var p = document.querySelector("#smdOpdEmr #oeIcdSug"); if (!p) return;
+      if (!r || r.error) { p.innerHTML = '<div class="oe-icdsug-hint">' + esc(r && r.error === "quota" ? (r.message || "MaiK is a StewardMD Pro feature.") : (r && r.message && /^(LOCAL_CAPABILITY_REQUIRED|ICD_INDEX_OFFLINE|kb-only)$/.test(r.error)) ? r.message : "Could not reach MaiK. Try again.") + '</div>'; return; }
+      _oeIcdSug = r.suggestions || [];
+      if (!_oeIcdSug.length) { p.innerHTML = '<div class="oe-icdsug-hint">No confident ICD match found - try the search icon instead.</div>'; return; }
+      p.innerHTML = _oeIcdSug.map(function (s, i) {
+        return '<div class="oe-icdsug-row"><span class="oe-icdsug-code">' + esc(s.code) + '</span><span class="oe-icdsug-sys">' + esc(s.system) + '</span>' +
+          '<span class="oe-icdsug-title">' + esc(s.title) + '</span>' +
+          '<button type="button" class="oe-icdsug-accept" data-oe-act="icdaccept:' + i + '">Accept</button></div>';
+      }).join("");
+    });
+  }
+  function acceptIcdSuggestion(i) {
+    var s = _oeIcdSug[i]; if (!s) return;
+    var name = _oeIcdField;
+    st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+    var cur = st.assessVals[name] || "";
+    var line = esc2Line(s.code) + " - " + esc2Line(s.title);
+    st.assessVals[name] = cur ? (cur + (/\n$/.test(cur) ? "" : "\n") + line) : line;
+    st.assessTouched[name] = true;
+    putVoiceDom(name);
+    var p = document.querySelector("#smdOpdEmr #oeIcdSug"); if (p) p.innerHTML = "";
+    toast("ICD code added: " + s.code);
+  }
   function putVoiceDom(name) {
     try {
       var esc2 = (G.CSS && CSS.escape) ? CSS.escape(name) : name;
@@ -2047,12 +2770,103 @@
   function assessFindingsText(v) {
     v = v || {};
     var parts = [v.Chief_complaints_duration, v.History_present_illness, v.History_past_illness, v.sys_examination, v.provisional_diagnosis];
-    if (v.Diabetes_yesNo === "Y") parts.push("diabetes");
-    if (v.Hypertension_yesNo === "Y") parts.push("hypertension");
-    if (v.Cardiac_yesNo === "Y") parts.push("cardiac disease");
-    if (v.Bronchial_yesNo === "Y") parts.push("asthma");
-    if (v.Tuberculosis_yesNo === "Y") parts.push("tuberculosis");
+    if (v.surgical_history) parts.push("Surgical history: " + v.surgical_history);
+    if (v.home_medications) parts.push("Home medications: " + v.home_medications);
+    if (v["val.treatment_received"]) parts.push("Current medications: " + v["val.treatment_received"]);
+    if (v.Known_allergies_details) parts.push("Allergies: " + v.Known_allergies_details);
+    if (v.Diabetes_yesNo === "Y") parts.push(v.Diabetes_details ? ("diabetes: " + v.Diabetes_details) : "diabetes");
+    if (v.Hypertension_yesNo === "Y") parts.push(v.Hypertension_details ? ("hypertension: " + v.Hypertension_details) : "hypertension");
+    if (v.Cardiac_yesNo === "Y") parts.push(v.Cardiac_details ? ("cardiac disease: " + v.Cardiac_details) : "cardiac disease");
+    if (v.Bronchial_yesNo === "Y") parts.push(v.Bronchial_details ? ("asthma: " + v.Bronchial_details) : "asthma");
+    if (v.Tuberculosis_yesNo === "Y") parts.push(v.Tuberculosis_details ? ("tuberculosis: " + v.Tuberculosis_details) : "tuberculosis");
+    if (v.Thyroid_yesNo === "Y") parts.push(v.Thyroid_details ? ("thyroid disorder: " + v.Thyroid_details) : "thyroid disorder");
+    if (v.Epilepsy_yesNo === "Y") parts.push(v.Epilepsy_details ? ("epilepsy: " + v.Epilepsy_details) : "epilepsy");
+    if (v.Renal_yesNo === "Y") parts.push(v.Renal_details ? ("chronic kidney disease: " + v.Renal_details) : "chronic kidney disease");
+    if (v.Liver_yesNo === "Y") parts.push(v.Liver_details ? ("chronic liver disease: " + v.Liver_details) : "chronic liver disease");
+    if (v.Cancer_yesNo === "Y") parts.push(v.Cancer_details ? ("malignancy: " + v.Cancer_details) : "malignancy");
+    if (v.Cva_yesNo === "Y") parts.push(v.Cva_details ? ("stroke CVA: " + v.Cva_details) : "stroke CVA");
+    if (v.Dyslipidemia_yesNo === "Y") parts.push(v.Dyslipidemia_details ? ("dyslipidemia: " + v.Dyslipidemia_details) : "dyslipidemia");
+    if (v.Others_details) parts.push(v.Others_details);
+    if (v.Family_history_othersdetails) parts.push("Family history: " + v.Family_history_othersdetails);
+    if (v.respiratory_exam) parts.push("Respiratory: " + v.respiratory_exam);
+    if (v.cvs_exam) parts.push("CVS: " + v.cvs_exam);
+    if (v.per_abdomen_exam) parts.push("Abdomen: " + v.per_abdomen_exam);
+    if (v.local_examination) parts.push("Local exam: " + v.local_examination);
+    if (v.tenderness_yesNo === "Y") parts.push(v.tenderness_details ? ("abdominal tenderness: " + v.tenderness_details) : "abdominal tenderness");
+    if (v.palpable_mass_yesNo === "Y") parts.push(v.palpable_mass_details ? ("palpable mass: " + v.palpable_mass_details) : "palpable mass");
     return parts.filter(function (x) { return x && String(x).trim(); }).map(function (x) { return String(x).trim(); }).join(". ");
+  }
+
+  // Real-time Allergy Cross-Check: matches documented allergies against dictated management plans or rx lines.
+  var DRUG_ALLERGY_MAP = [
+    { key: "penicillin", names: ["penicillin", "amoxicillin", "ampicillin", "augmentin", "clavam", "mox", "amox", "piperacillin", "tazobactam"], label: "Penicillin class" },
+    { key: "cephalosporin", names: ["cephalosporin", "cefixime", "ceftriaxone", "cefotaxime", "cefuroxime", "cephalexin", "cefepime", "cefpodoxime"], label: "Cephalosporin class" },
+    { key: "sulfa", names: ["sulfa", "sulfonamide", "cotrimoxazole", "bactrim", "septra", "dapsone", "sulfamethoxazole"], label: "Sulfa drug class" },
+    { key: "nsaid", names: ["nsaid", "aspirin", "ibuprofen", "diclofenac", "aceclofenac", "naproxen", "piroxicam", "mefenamic", "ketorolac", "combiflam"], label: "NSAID class" },
+    { key: "fluoroquinolone", names: ["fluoroquinolone", "ciprofloxacin", "levofloxacin", "ofloxacin", "norfloxacin", "moxifloxacin"], label: "Fluoroquinolone class" },
+    { key: "macrolide", names: ["macrolide", "azithromycin", "clarithromycin", "erythromycin", "roxythromycin"], label: "Macrolide class" }
+  ];
+
+  function checkAllergyConflicts(allergiesText, planText) {
+    var aTxt = String(allergiesText || "").toLowerCase();
+    var pTxt = String(planText || "").toLowerCase();
+    if (!aTxt.trim() || !pTxt.trim()) return [];
+    var conflicts = [];
+    DRUG_ALLERGY_MAP.forEach(function (grp) {
+      var hitAllergy = false;
+      for (var i = 0; i < grp.names.length; i++) {
+        if (new RegExp("\\b" + grp.names[i] + "\\b").test(aTxt)) { hitAllergy = true; break; }
+      }
+      if (!hitAllergy) return;
+      for (var j = 0; j < grp.names.length; j++) {
+        var drg = grp.names[j];
+        if (new RegExp("\\b" + drg + "\\b").test(pTxt)) {
+          conflicts.push({ allergy: grp.label, drug: drg });
+          break;
+        }
+      }
+    });
+    return conflicts;
+  }
+
+  // Deterministic critical triage red-flag detection over vitals and provisional diagnosis.
+  function detectTriageRedFlags(vals) {
+    vals = vals || {};
+    var flags = [];
+    var sys = parseFloat(vals.BP_SYS), dia = parseFloat(vals.BP_dia);
+    if (sys > 0 && dia > 0) {
+      if (sys < 90 || dia < 50) flags.push("Hypotension / Shock: BP " + sys + "/" + dia + " mmHg");
+      else if (sys >= 200 || dia >= 120) flags.push("Hypertensive Crisis: BP " + sys + "/" + dia + " mmHg");
+    }
+    var pulse = parseFloat(vals.Pulse);
+    if (pulse > 0) {
+      if (pulse >= 140) flags.push("Severe Tachycardia: Pulse " + pulse + " /min");
+      else if (pulse <= 40) flags.push("Severe Bradycardia: Pulse " + pulse + " /min");
+    }
+    var rr = parseFloat(vals.respiratory);
+    if (rr > 0) {
+      if (rr >= 32) flags.push("Severe Tachypnoea: RR " + rr + " /min");
+      else if (rr <= 8) flags.push("Bradypnoea / Hypoventilation: RR " + rr + " /min");
+    }
+    var temp = parseFloat(vals.Temp);
+    if (temp >= 104) flags.push("Hyperpyrexia: Temp " + temp + "°F");
+    var spo2 = parseFloat(vals.spo2 || vals.Spo2 || vals.SPO2 || vals.saturation);
+    if (spo2 > 0 && spo2 < 90) flags.push("Critical Hypoxemia: SpO2 " + spo2 + "% (<90%)");
+    var grbs = parseFloat(vals.grbs || vals.blood_sugar || vals.rbs);
+    if (grbs > 0) {
+      if (grbs < 55) flags.push("Critical Hypoglycemia: GRBS " + grbs + " mg/dL (<55 mg/dL)");
+      else if (grbs >= 450) flags.push("Severe Hyperglycemia / DKA alert: GRBS " + grbs + " mg/dL (>=450 mg/dL)");
+    }
+
+    var dx = String(vals.provisional_diagnosis || "").toLowerCase();
+    var cc = String(vals.Chief_complaints_duration || "").toLowerCase();
+    var comb = dx + " " + cc;
+    if (/\b(?:stemi|acute mi|myocardial infarction|cardiogenic shock)\b/.test(comb)) flags.push("Acute Coronary Event / STEMI suspected");
+    if (/\banaphylax(?:is|tic)\b/.test(comb)) flags.push("Severe Anaphylaxis suspected");
+    if (/\b(?:status epilepticus|active seizure)\b/.test(comb)) flags.push("Status Epilepticus / Active Seizure");
+    if (/\b(?:acute stroke|ischemic stroke|hemorrhagic stroke)\b/.test(comb)) flags.push("Acute Stroke Protocol window");
+
+    return flags;
   }
 
   // Clear medical-term misspellings (NOT real words, so replacement is safe). Deliberately small and
@@ -2342,11 +3156,58 @@
   function assessProText(v) {
     v = v || {};
     function ln(lbl, val) { return (val && String(val).trim()) ? (lbl + ": " + String(val).trim()) : ""; }
-    var yn = function (k, lbl) { return v[k] === "Y" ? lbl : ""; };
-    var co = [yn("Diabetes_yesNo", "diabetes"), yn("Hypertension_yesNo", "hypertension"), yn("Cardiac_yesNo", "cardiac disease"), yn("Bronchial_yesNo", "asthma"), yn("Tuberculosis_yesNo", "TB"), yn("Thyroid_yesNo", "thyroid disorder"), yn("Epilepsy_yesNo", "epilepsy")].filter(Boolean).join(", ");
-    var vit = [v.Temp ? ("Temp " + v.Temp) : "", (v.BP_SYS && v.BP_dia) ? ("BP " + v.BP_SYS + "/" + v.BP_dia) : "", v.Pulse ? ("Pulse " + v.Pulse) : "", v.respiratory ? ("RR " + v.respiratory) : ""].filter(Boolean).join(", ");
-    return [ln("Chief complaint", v.Chief_complaints_duration), ln("History of present illness", v.History_present_illness), ln("Past history", v.History_past_illness),
-      co ? ("Comorbidities: " + co) : "", vit ? ("Vitals: " + vit) : "", ln("Systemic examination", v.sys_examination), ln("Provisional diagnosis (doctor)", v.provisional_diagnosis)].filter(Boolean).join("\n");
+    var yn = function (k, detKey, lbl) {
+      if (v[k] !== "Y") return "";
+      return (v[detKey] && String(v[detKey]).trim()) ? (lbl + " (" + String(v[detKey]).trim() + ")") : lbl;
+    };
+    var co = [
+      yn("Diabetes_yesNo", "Diabetes_details", "diabetes"),
+      yn("Hypertension_yesNo", "Hypertension_details", "hypertension"),
+      yn("Cardiac_yesNo", "Cardiac_details", "cardiac disease"),
+      yn("Bronchial_yesNo", "Bronchial_details", "asthma"),
+      yn("Tuberculosis_yesNo", "Tuberculosis_details", "TB"),
+      yn("Thyroid_yesNo", "Thyroid_details", "thyroid disorder"),
+      yn("Epilepsy_yesNo", "Epilepsy_details", "epilepsy"),
+      yn("Renal_yesNo", "Renal_details", "CKD"),
+      yn("Liver_yesNo", "Liver_details", "CLD/cirrhosis"),
+      yn("Cancer_yesNo", "Cancer_details", "cancer"),
+      yn("Cva_yesNo", "Cva_details", "stroke"),
+      yn("Dyslipidemia_yesNo", "Dyslipidemia_details", "dyslipidemia"),
+      (v.Others_details ? ("other: " + v.Others_details) : "")
+    ].filter(Boolean).join(", ");
+    var vit = [
+      v.Temp ? ("Temp " + v.Temp + "F") : "",
+      (v.BP_SYS && v.BP_dia) ? ("BP " + v.BP_SYS + "/" + v.BP_dia) : "",
+      v.Pulse ? ("Pulse " + v.Pulse) : "",
+      v.respiratory ? ("RR " + v.respiratory) : "",
+      v.spo2 ? ("SpO2 " + v.spo2 + "%") : "",
+      v.grbs ? ("GRBS " + v.grbs + " mg/dL") : "",
+      v.pain_score ? ("Pain " + v.pain_score + "/10") : "",
+      v.BMI ? ("BMI " + v.BMI) : ""
+    ].filter(Boolean).join(", ");
+    var exam = [
+      v.sys_examination || "",
+      v.respiratory_exam ? ("Chest: " + v.respiratory_exam) : "",
+      v.cvs_exam ? ("CVS: " + v.cvs_exam) : "",
+      v.per_abdomen_exam ? ("Abdomen: " + v.per_abdomen_exam) : "",
+      v.local_examination ? ("Local: " + v.local_examination) : "",
+      v.tenderness_yesNo === "Y" ? (v.tenderness_details ? ("Tenderness: " + v.tenderness_details) : "Tenderness: Yes") : "",
+      v.palpable_mass_yesNo === "Y" ? (v.palpable_mass_details ? ("Mass: " + v.palpable_mass_details) : "Mass: Yes") : ""
+    ].filter(Boolean).join("; ");
+    return [
+      ln("Chief complaint", v.Chief_complaints_duration),
+      ln("History of present illness", v.History_present_illness),
+      ln("Past history", v.History_past_illness),
+      ln("Surgical history", v.surgical_history),
+      ln("Ongoing medications", v.home_medications || v["val.treatment_received"]),
+      ln("Known allergies", v.Known_allergies_details),
+      co ? ("Comorbidities: " + co) : "",
+      vit ? ("Vitals: " + vit) : "",
+      exam ? ("Examination: " + exam) : "",
+      ln("Family history", v.Family_history_othersdetails),
+      ln("Provisional diagnosis (doctor)", v.provisional_diagnosis),
+      ln("Differential diagnosis", v.differential_diagnosis)
+    ].filter(Boolean).join("\n");
   }
 
   // Pro tier — send the (de-identified) assessment to Vertex for a deeper differential. Explicit action
@@ -2364,7 +3225,9 @@
       if (st !== forPatient) return;
       st.maikProBusy = false;
       if (!r || r.error || !(r.provisionalDx || (r.ddx && r.ddx.length))) {
-        toast(r && r.error === "quota" ? "Daily AI limit reached. Use the on-device result or try again tomorrow." : "MaiK Pro is unavailable right now; the on-device result stands.");
+        toast(r && r.error === "quota" ? "Daily AI limit reached. Use the on-device result or try again tomorrow."
+          : (r && r.message && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only")) ? r.message
+          : "MaiK Pro is unavailable right now; the on-device result stands.");
         paint(); return;
       }
       var ddx = (r.ddx || []).map(function (d) { return { label: cleanClinical(d.dx), dx: cleanClinical(d.dx), source: "ai", why: cleanClinical(d.why || "") }; }).filter(function (d) { return d.dx; });
@@ -2403,7 +3266,33 @@
     _lastRefinedTranscript = transcript;
     G.SMD_AI.extract(transcript, "opd-scribe").then(function (r) {
       if (r && r.error === "quota") { toast(r.message || "MaiK Scribe limit reached. Try again later."); try { stopVoice(); } catch (e) {} return; }
-      if (!r || r.error) { if (_finishPending) { try { toast("Could not draft the note from this dictation - the transcript is kept, try Stop again."); } catch (e) {} } return; }
+      // The engine refused for a named reason (Local mode, model lacks the capability): say it ONCE
+      // per session rather than on every refine tick, and keep dictating (the deterministic vitals
+      // extractor and the transcript are unaffected).
+      // A named refusal (Local mode, model lacks the capability): say it once per distinct reason.
+      // It used to be once per SESSION, so every later refine fell through to the generic message
+      // below and the actual reason was never seen again (owner report, 2026-09-11).
+      if (r && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only")) {
+        var cm = r.message || "On-device Scribe needs a different model.";
+        if (_scribeCapToasted !== cm) { _scribeCapToasted = cm; try { toast(cm); } catch (e) {} }
+        return;
+      }
+      // Anything else: say WHY. The generic line hid a real, actionable engine error (the on-device
+      // engine runs one generation at a time, so a refine landing on a busy engine reported "busy"
+      // and the doctor was told only that drafting failed).
+      if (!r || r.error) {
+        if (_finishPending) {
+          var e0 = String((r && r.error) || "");
+          var why = (r && r.error === "draft-unparsed" && r.message) ? r.message
+            : /busy|already running/i.test(e0) ? "MaiK was still drafting the previous part. Tap Stop again in a moment."
+            : /timed out/i.test(e0) ? "On-device drafting took too long and was stopped. The transcript is kept - tap Stop again, or switch to MaiK Cloud."
+            : /not-enough-memory|low-memory/i.test(e0) ? "Not enough free memory to draft on this phone right now. Close other apps and tap Stop again."
+            : e0 ? "Could not draft the note: " + e0 + ". The transcript is kept."
+            : "Could not draft the note from this dictation - the transcript is kept, try Stop again.";
+          try { toast(why); } catch (e) {}
+        }
+        return;
+      }
       var sg = r.suggestions || {};
       var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
         : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
@@ -2411,9 +3300,14 @@
       // Multilingual VITALS: the deterministic extractor (voice-vitals) is English-regex only, so a
       // Telugu/Hindi consult (native-script transcript) never matched "BP 120/80" etc. Re-run the SAME
       // deterministic extractor on the LLM's faithful English translation — still no LLM-invented numbers.
-      if (r.en && G.SMD_AMBIENT && G.SMD_AMBIENT.reduce) {
-        st.voiceTranscriptEn = r.en;                       // full English translation-so-far -> powers the Q&A speaker view
-        try { applyVoice(G.SMD_AMBIENT.reduce(r.en, { speaker: "doctor", state: {}, now: now() })); } catch (e) {}
+      var enText = (r && r.en) || transcript;
+      if (enText) {
+        if (r && r.en) st.voiceTranscriptEn = r.en;                       // full English translation-so-far -> powers the Q&A speaker view
+        var reducer = (G.SMD_AMBIENT && G.SMD_AMBIENT.reduce) ? G.SMD_AMBIENT.reduce
+          : ((G.SMD_VVITALS && G.SMD_EMRMAP) ? function (t, o) { return G.SMD_EMRMAP.merge(G.SMD_VVITALS.extract(t), o); } : null);
+        if (reducer) {
+          try { applyVoice(reducer(enText, { speaker: "doctor", state: {}, now: now() })); } catch (e) {}
+        }
       }
       // Alcohol: patient stated an amount -> tick Alcohol/Habits + write the amount with computed
       // grams of ethanol + WHO standard drinks into the details field (respecting a doctor edit).
@@ -2591,6 +3485,7 @@
     // auto-shown after a consult — the clinician taps "Ask MaiK" to pull them on demand.
     st.scribeStats = { filled: m.filled.length, suggestions: 0 };
     paint();
+    m.filled.forEach(putVoiceDom);
     return { filled: m.filled, dropped: m.dropped, conflicts: m.conflicts };
   }
 
@@ -2613,13 +3508,16 @@
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.visitId = opts.visitId || opts.episodeId || "";        // GHIS OPMR visit number — the Getopcard id for the history timeline
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
-    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device
+    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device | "wardsynq" (WardSynQ-native hospital)
     st.noStore = !!opts.noStore && !usesLocal(st.source);    // no hospital MRN + no local store: Ask MaiK decision-support only, nothing is saved
-    _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;
+    _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;   // "wardsynq" never gets a localStore - it writes to the WardSynQ record, not this device
     st.author = opts.author || "";                                          // who is documenting this consult (for the timeline footprint)
     if (_localStore && _localStore.startConsult) { try { _localStore.startConsult(st.patient.mrn); } catch (e) {} }   // each open = a new dated entry
-    st.emrLabel = opts.emrLabel || (st.source === "shared" ? "Shared Clinic" : (st.source === "local" ? "My Clinic" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS")));
-    st.writeOn = (usesLocal(st.source) || st.noStore) ? true : writeFlagOn();   // local/shared save is always allowed (on-device, no server gate)
+    st.emrLabel = opts.emrLabel || (st.source === "shared" ? "Shared Clinic" : (st.source === "local" ? "My Clinic" : (st.source === "wardsynq" ? "WardSynQ" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS"))));
+    // local/shared save is always allowed (on-device, no server gate); "wardsynq" likewise - its Save
+    // button must not depend on smd_opd_emr_write/QUEUE_EMR_WRITE, which gate GHIS write-back only and
+    // are meaningless for a hospital with no GHIS relationship at all.
+    st.writeOn = (usesLocal(st.source) || st.source === "wardsynq" || st.noStore) ? true : writeFlagOn();
     st.hospitalId = opts.hospitalId || opts.orgId || "";
     if (opts.oncoPlan) st.oncoPlan = opts.oncoPlan;            // test/Phase-4 seam: inject a treatment plan already in state
     if (opts.oncoCycle) st.oncoCycle = opts.oncoCycle;         // test/Phase-5 seam: inject a cycle already in state (nurse view)
@@ -2735,7 +3633,12 @@
         // GHIS + MaiK must be English — if the dictation is Telugu/Hindi, translate the final before filling.
         if (/[ऀ-ॿఀ-౿]/.test(s) && G.SMD_AI && G.SMD_AI.translate) {
           setVoiceStatus("Translating…");
-          G.SMD_AI.translate(s).then(function (r) { put((r && r.text && !r.error) ? r.text : s, true); setVoiceStatus(""); })
+          G.SMD_AI.translate(s).then(function (r) {
+            put((r && r.text && !r.error) ? r.text : s, true); setVoiceStatus("");
+            // Refused by the engine (Local mode, language not yet verified offline): the dictation is
+            // kept as spoken and the doctor is told why, instead of a silent native-script field.
+            if (r && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only") && r.message) { try { toast(r.message); } catch (e) {} }
+          })
             .catch(function () { put(s, true); setVoiceStatus(""); });
         } else { put(s, true); }
       },
@@ -2758,6 +3661,17 @@
    * this button can call it too. */
   function authoriseConsult() {
     if (st.assessAuthorized) { toast("This assessment is already authorised."); return; }
+    // WardSynQ-native hospital: there is no GHIS doc id (oeDocId()) to gate on - the WardSynQ save
+    // itself (st.savedConsult) is what "there is something to sign" means here.
+    if (st.source === "wardsynq") {
+      if (!st.savedConsult) { toast("Save the assessment first, then authorise it."); return; }
+      if (!confirmed("Authorise this assessment?\n\nIt is signed off in " + emrLabel() + ". The record is then LOCKED - you cannot edit or save it again.")) return;
+      postWardsynqAssessment(null, "Authorised in " + emrLabel() + ".", true, function () {
+        st.assessAuthorized = { by: st.author || "", on: "" };
+        endConsult();
+      });
+      return;
+    }
     if (!oeDocId()) { toast("Save the assessment first, then authorise it."); return; }
     // Spelled out because it is irreversible: GHIS locks the record on sign-off.
     if (!confirmed("Authorise this assessment?\n\nIt is signed off in " + emrLabel() + " and moves into Clinical notes. The record is then LOCKED - you cannot edit or save it again.")) return;
@@ -2766,10 +3680,12 @@
     postWrite("/assessment-authorize",
       { patientId: (st.patient && st.patient.mrn) || "", episodeId: st.episodeId || "", docId: oeDocId() },
       "Authorised in " + emrLabel() + ". It is now in Clinical notes.",
-      { kind: "assessment", text: "Authorised (signed off)" },
+      { kind: "assessment", text: "Authorised (signed off)", signOff: true },
       function () {
         // Reflect the lock immediately: GHIS will no longer accept a write for this record.
         st.assessAuthorized = { by: st.author || "", on: "" };
+        // The "Authorised by" line is a second timeline entry for the reader; it is NOT a second
+        // sign-off, so it carries neither fields nor the signOff flag and the record ignores it.
         try { addToTimeline("assessment", "Authorised by " + (st.author || "the doctor")); } catch (e) {}
         endConsult();
       });
@@ -2784,7 +3700,7 @@
     st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
     var cur = st.assessVals.refered_management_plan || "";
     if (!/emergency/i.test(cur)) { st.assessVals.refered_management_plan = (cur ? cur + " " : "") + "Refer to Emergency (ER)."; st.assessTouched.refered_management_plan = true; }
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Referred to Emergency (ER).", { kind: "assessment", text: "Referred to Emergency (ER)" });
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Referred to Emergency (ER).", { kind: "assessment", text: "Referred to Emergency (ER)", vals: buildAssessPayload(st.assessVals || {}) });
     // 2) escalate in the queue + end the consult (works even when the GHIS write is off)
     try { document.dispatchEvent(new CustomEvent("smd:consult-emergency", { detail: { ticketId: st.ticketId || "" } })); } catch (e) {}
     close();
@@ -2814,6 +3730,6 @@
   // preview for the open patient. Registered once; guarded (no-op unless a patient profile is open).
   try { if (typeof document !== "undefined") document.addEventListener("smd-oncotree-select", function (e) { try { receiveOncoTreeProtocol(e && e.detail); } catch (err) {} }); } catch (e) {}
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml };
 })();

@@ -1,0 +1,28 @@
+The Order safety workstation broke itself the instant a drug was typed
+
+Signed in as doctor and opened Order safety workstation. It looked fine at first - rules loaded,
+drug field enabled - but typing anything into the drug field threw "smdLazy is not defined" and
+the whole screen locked: the drug field went permanently disabled, the banner said "ordering is
+disabled", and the patient roster showed only "Unavailable." check() (which runs on every
+keystroke in the order form, and once synchronously during boot() as soon as the first patient is
+selected) called smdLazy('/interaction-rules.js?v=gold363') - StewardMD's own native app has a
+function by that name for lazily loading its interaction-rules bundle, but this file is not that
+app and never defines or loads it. Every call was a guaranteed ReferenceError. Called during
+boot()'s own patient-selection step, that throw propagated all the way out and aborted boot()
+itself, which is why the roster never rendered at all - not a load failure, a crash one keystroke
+in that looked identical to one.
+
+There was nothing left to lazy-load: the rule pack is already built and handed to the engine
+synchronously at the top of boot() (buildRulePack + `new SafetyEngine(...)`), before check() can
+ever run. Removed the smdLazy wrapper and evaluate directly - the precondition it was gating had
+already been met every single time.
+
+Verified live end to end as doctor: typed a drug and dose, findings rendered, sign stayed
+correctly enabled/disabled by the engine's own verdict, roster and patient identity rendered
+normally. No test in this repo exercised this file's check() (test/run-interactions.mjs, which
+does reference smdLazy, is StewardMD's native app's OWN interaction test - a different app,
+already defensive about smdLazy possibly being absent - so this defect had no automated coverage
+at all until this walkthrough found it live).
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

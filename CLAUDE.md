@@ -41,7 +41,7 @@ while the phone kept running the previous bundle; only the third took. After ins
 **No `.xcworkspace`** — this is Capacitor SPM, not CocoaPods. Build the `App` scheme of
 `ios/App/App.xcodeproj`; `-workspace ios/App/App.xcworkspace` fails with "does not exist".
 `xcode-select` points at CommandLineTools (no iOS SDK), so pass the real Xcode per-command:
-`export DEVELOPER_DIR="/Users/diwakarkumar/Downloads/Xcode-beta 2.app/Contents/Developer"` —
+`export DEVELOPER_DIR="/Applications/Xcode-beta 2.app/Contents/Developer"` —
 don't `xcode-select -s` (needs sudo, changes it for every other worktree/session).
 
 **Plugin symbols are NOT in `App.app/App`.** Xcode 16+ Debug builds put the code in

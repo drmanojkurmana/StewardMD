@@ -54,6 +54,13 @@ test("the infinite animations still exist to be guarded (the guard is not dead c
   assert.match(SRC, /\.mai-dot\{animation:maiPulse [^}]*infinite/);
 });
 
+test("Quiet Intelligence removes the ambient MAiTRI aura motion", () => {
+  const quiet = SRC.lastIndexOf(".fc-sheet.fcui2 .mai-aura");
+  const animated = SRC.indexOf(".mai-aura{position:absolute");
+  assert.ok(quiet > animated, "the quiet override must follow the legacy animated rule");
+  assert.match(SRC.slice(quiet, quiet + 320), /animation:none/, "quiet MAiTRI should not pulse continuously");
+});
+
 test("the 'soon' chip is not the brightest thing on a dark screen", () => {
   // Light amber (#ffe9c7) on a dark card, marking the LEAST important item.
   assert.match(SRC, /body\.dark \.fc-sheet \.fc-act \.fc-soon[^}]*\}/, "no dark rule for .fc-soon");
