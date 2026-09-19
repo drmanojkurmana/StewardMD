@@ -36,10 +36,13 @@ Six audit rounds against Epic, Oracle Health, athenaOne and Palantir, plus the e
 
 NABH: 30 of 32 indicators compute.
 
+7. Recall register screen (2026-09-19): `recallView` in `ward.js`, reached from Boards and tools, reads
+   `/ward/registries`. The last route without a screen; the reachability gate is now at zero on both lists
+   (`knownGaps` is empty) and `test/ward-recall-register-view.test.mjs` pins it.
+
 ## Open work that does NOT need the owner
 
-- **Recall register screen.** `functions/_wardsynq/registry.js` has no screen; recorded in
-  `scripts/wardsynq-reachability-allow.json` under `knownGaps`, so the gate reports "1 waiting for a screen".
+- Nothing. Every route has a screen and a test (`node scripts/wardsynq-reachability.mjs`).
 - Optional graph parsers: `graphifyy[sql]`, `graphifyy[terraform]` (SQL/HCL files contributed nothing).
 
 ## Needs the owner (do not guess these)
