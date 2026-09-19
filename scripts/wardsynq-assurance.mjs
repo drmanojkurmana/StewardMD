@@ -79,6 +79,8 @@ const SUITES = [
   "test/medcore-age.test.mjs",
   "test/medcore-shortcut.test.mjs",
   "test/medcore-labels.test.mjs",
+  "test/medcore-pipeline.test.mjs",
+  "test/medcore-models.test.mjs",
 ];
 
 /** Runs node --test with the TAP reporter and returns a flat list of {name, passed}. */

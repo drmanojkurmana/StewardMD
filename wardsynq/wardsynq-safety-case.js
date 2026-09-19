@@ -716,9 +716,17 @@ const HAZARDS = Object.freeze([
         "shortcut: no Medical Core module counts observations for a feature",
       ],
     },
+    verificationAlso: {
+      file: "test/medcore-pipeline.test.mjs",
+      tests: [
+        "pipeline: the banned shortcut features never enter the feature matrix",
+        "pipeline: training does not read the probe, and training features are the core list",
+        "pipeline: the frequency gate FIRES when the shortcut is the only signal",
+      ],
+    },
     residualRisk: "reduced for the named shortcuts; UNADDRESSED for a shortcut learned some other way, which only the frequency-only comparison can rule out",
     approver: "AI Clinical Governance Committee",
-    caveat: "PARTIAL, and deliberately so. The enforcement half is built and tested: no banned feature can be produced, and charting the same patient four times or forty gives identical physiological features. The other half cannot be run at all yet, because there is no dataset: the plan requires a frequency-only model to be trained and beaten by at least 0.05 AUROC before any model ships, and a feature list alone cannot prove the shortcut was not learned through some other correlate. There is no model in this repository, so nothing currently consumes these features in a clinical path.",
+    caveat: "PARTIAL, and deliberately so. Two of the three halves now exist. ENFORCEMENT: no banned feature can be produced, and charting the same patient four times or forty gives identical physiological features. THE GATE: backend/medcore/train.mjs trains a frequency-only probe on the shortcut alone and fails any model that does not beat it by 0.05 AUROC; test/medcore-pipeline.test.mjs constructs a cohort where the shortcut is the ONLY signal and asserts the gate refuses it, so the control has been watched firing rather than assumed to work. On the synthetic cohort the probe scores 0.63, and 0.75 when the cohort is generated with --frequency-bias, so it detects the shortcut being injected. WHAT IS STILL MISSING, and why this cannot be VERIFIED: all of that ran on SYNTHETIC data, whose observation schedule was written by the same author as the control. Nothing has been measured on a real ward, where the correlation between being watched closely and deteriorating is produced by clinicians rather than by a flag. Until the gate runs on a real extract this is a demonstrated mechanism, not evidence. No model consumes these features in any clinical path, and medcore-models.js refuses every synthetic-provenance artifact outright.",
   },
   {
     id: "HAZ-ML-02",
@@ -731,6 +739,15 @@ const HAZARDS = Object.freeze([
       adequacy: "partial",
       module: "medcore/medcore-outcomes.js",
       summary: "'This patient on noradrenaline did not start noradrenaline' is true, useless, and teaches a model that pressor use predicts not needing a pressor; run forward it reassures the clinician about the sickest patient in the unit. askable() excludes prevalent cases rather than labelling them 0, and riskSet() is the SAME function so the training set and the bedside cannot drift apart. An intervention nobody charted is UNKNOWN_STATUS, a refusal, never a no. inBlankingWindow() drops the declared hour before the event, where a pressor charted as prepared and a pre-intubation gas live; the window is one constant across all five outcomes and is never tuned as a hyperparameter, because tuning it is how the value that maximises the leak is found.",
+    },
+    verificationAlso: {
+      file: "test/medcore-pipeline.test.mjs",
+      tests: [
+        "pipeline: prevalent cases leave the risk set, they do not become negatives",
+        "pipeline: the treatment paradox is present in the data and labelled honestly",
+        "pipeline: the blanking window removes the hour before the event",
+        "pipeline: no prediction point can see its own future",
+      ],
     },
     verification: {
       file: "test/medcore-labels.test.mjs",
@@ -746,7 +763,7 @@ const HAZARDS = Object.freeze([
     },
     residualRisk: "reduced for prevalent cases and the preparation window; UNADDRESSED for the wider paradox, that every outcome in a record is contaminated by the care that was actually given",
     approver: "AI Clinical Governance Committee and the Critical Care lead",
-    caveat: "PARTIAL. The rules are implemented and tested against constructed states, and they are the same rules the bedside will use, but they have never been applied to a real dataset because there is no dataset. The deeper form of the hazard is not addressed by any code: a patient who deteriorated and was rescued is recorded as a patient who did not deteriorate, and no exclusion rule recovers that. The outcome definitions in medcore/data/outcomes.json are UNAPPROVED and no clinician has reviewed them.",
+    caveat: "PARTIAL. The rules are implemented, and they are now exercised end to end by a pipeline rather than only against constructed states: on a synthetic cohort with prevalent cases deliberately injected, not one prediction point for a patient already on a pressor survives into the training matrix, and the blanking window is asserted to have removed the preparation hour. They are the same functions the bedside uses, so the two cannot drift. TWO REASONS THIS IS NOT VERIFIED. First, it has never been applied to a real dataset, because there is no dataset. Second, and this no code addresses: the deeper form of the hazard is that a patient who deteriorated and WAS RESCUED is recorded as a patient who did not deteriorate. The synthetic cohort contains that contamination deliberately (a --rescue-rate of injected cases, labelled negative by construction, which the pipeline does not hide) precisely so the effect can be measured, but measuring it is not removing it, and on real data nobody knows its size. The outcome definitions in medcore/data/outcomes.json are UNAPPROVED and no clinician has reviewed them.",
   },
   {
     id: "HAZ-ML-03",
