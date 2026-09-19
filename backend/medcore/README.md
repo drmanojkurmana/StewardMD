@@ -9,7 +9,8 @@ extract (medcore-encounter/1)          SCHEMA.md
       v
 featurize.mjs      <- calls the SHIPPED medcore/medcore-state.js + medcore-features.js at asOf=t0
       v
-train.mjs          <- threshold baseline, logistic regression, isotonic calibration, the gates
+train.mjs          <- threshold baseline, then logistic regression, then the GBM (gbm.mjs);
+                      the calibrator is chosen, and the gates decide
       v
 export-artifact.mjs  -> artifact + parity vectors
       v
@@ -83,17 +84,49 @@ budgeted from the positives at ten per variable, and events-per-variable is its 
 the precondition should fail directly rather than turn up later disguised as overconfidence. L2 is
 tuned on a held-out slice of train rather than hardcoded at a 3 nobody had justified.
 
-**The clean read** (seed 90210, a cohort never tuned against, read once):
+## Stage 3: the GBM
+
+`gbm.mjs` is histogram gradient boosting, and it replaces the logistic baseline only when it beats
+it by 0.02 AUPRC **on validation** - picking a learner by its test score is how a pipeline launders
+model selection into a headline number. Three properties matter more here than accuracy:
+
+- **Missing is its own branch.** Bin 0 is reserved for "not recorded" and each split learns which
+  side it belongs on. The logistic baseline had to impute a median and hope; a tree can route on
+  "no lactate has been sent", which is what a clinician does with the same fact. Missingness on a
+  ward is not random.
+- **Clinical direction is enforced, not learned.** Monotone constraints (the `MONOTONE` table in
+  `train.mjs`, unapproved clinical content) forbid a rising lactate from lowering risk or a falling
+  MAP from raising it. Without them a tree will fit a fold where the sickest were rescued and
+  emerge saying a lactate of 8 is reassuring - defensible as statistics, indefensible at a bedside.
+  A test asserts the constraint holds on data that actively contradicts it. The implementation is
+  split-rejection, which guarantees direction within each split and does not propagate bounds along
+  a path the way a full implementation would; stated rather than implied.
+- **It stops.** Early stopping on validation, best iteration kept.
+
+## A correction about every slope figure before this
+
+The calibration slope was fitted by gradient descent that had not converged, and the symptom was
+unmissable once the bootstrap interval was printed beside it: **the interval did not contain its own
+point estimate**. It is now Newton-Raphson (IRLS), shared by the estimate and the bootstrap so they
+cannot disagree by construction. Slope numbers recorded before that fix (0.69, 0.86, 0.90, 1.04)
+came from the unconverged fit and should not be compared with later ones.
+
+**The clean read** (seed 31415, a cohort never trained or tested against, read once):
 
 ```
-AUROC 0.960  AUPRC 0.499  ECE 0.008  slope 1.037 (95% CI 0.968 to 1.078)
-at the same alert budget as the incumbent: 19 missed vs 64, sensitivity 0.94
-frequency-only probe 0.566
+stage     GBM (validation AUPRC 0.438 vs logistic, margin cleared)
+model     AUROC 0.958  AUPRC 0.438  Brier 0.028  ECE 0.013
+          slope 0.926 (95% CI 0.861 to 1.010)
+          at the same alert budget as the incumbent: 20 missed vs 45, sensitivity 0.934
+probe     0.594 (frequency only)
+worst subgroup: ageBand 80+ at 0.933 against 0.958 overall
 ALL 7 GATES PASS
 ```
 
-**What that does and does not mean.** It means the pipeline is sound: it caught a real defect,
-refused a real model, and passes once the defect is fixed. It does not mean anything clinical. The
-data is synthetic, so the model recovered a latent variable the generator wrote in - a fact about
-`synth/generate.mjs`, not about patients. No artifact built here may reach a clinician, by
+**What that does and does not mean.** It means the pipeline is sound: it caught three real defects
+(a collapsing calibrator, a slope estimator that hid it, an unconverged fit whose interval excluded
+its own estimate), refused a real model each time, and passes once they are fixed. It does not mean
+anything clinical. The data is synthetic, so what the model recovered is a latent variable the
+generator wrote in - a fact about `synth/generate.mjs`, not about patients. A better AUROC here is
+a better fit to my own fiction. No artifact built here may reach a clinician, by
 construction rather than policy: see `medcore/medcore-models.js` and `test/medcore-models.test.mjs`.
