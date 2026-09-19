@@ -88,6 +88,14 @@ Rules of the system: hairlines separate (not shadows); status colour is reserved
 bed tile is neutral); header chrome is FLAT `--primary2`, never a gradient; numbers use tabular
 figures; selection is colour + weight, press is brightness. See [[Decisions]] (2026-08-22).
 
+## Calculators
+CAM-ICU was added 2026-09-19 (`calculators.js`, id `camicu`), the one ICU score the file lacked. It
+is a SEQUENCE, not a sum: positive needs Feature 1 AND Feature 2 AND (3 OR 4), and at RASS −4/−5 the
+result is **UTA (unable to assess), never negative** — reporting "no delirium" for a patient nobody
+could assess is the false reassurance the instrument exists to prevent. Distinct from the general
+CAM (`cam`, Neurology, Inouye 1990), which needs a patient who can be interviewed; both stay
+reachable from `MEDCALC.find`. Test: `test/camicu.test.mjs`.
+
 ## Gotchas
 - Chips feed the engine with NO rebaseline (icu.js only).
 - SW-warmup flakiness in headless tests (warmup protocol).

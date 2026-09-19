@@ -93,9 +93,9 @@ engineering tasks.
       plausibility bounds), `freshness.json` (staleness windows), `change-bands.json` (what size of
       change is worth a clinician's attention).
 
-Engineering that IS still available without any of the above:
-- [ ] The missing **CAM-ICU** calculator in `calculators.js` (the only score from the original plan's
-      list this repo lacks). Unrelated to ML.
+- [x] The missing **CAM-ICU** calculator in `calculators.js` — added 2026-09-19 (Ely, JAMA 2001;
+      SCCM PADIS 2018). Distinct from the general CAM (Inouye 1990) already under Neurology, which
+      needs a patient who can be interviewed. Test: `test/camicu.test.mjs`.
 
 ## [[WardSynQ]] — blocked on people, not on code
 
