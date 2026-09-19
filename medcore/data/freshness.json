@@ -1,0 +1,16 @@
+{
+  "schema": "medcore-freshness/1",
+  "version": "1.0.0",
+  "approvalStatus": "unapproved",
+  "note": "How old an observation may be and still describe the patient NOW, in minutes, per parameter. A chart built from a six-hour-old blood pressure is a current-looking number about a patient who has since changed (wardsynq-deterioration.js, rule 2), so the vital signs are deliberately tighter than any lab. A parameter with no window declared here is treated as UNUSABLE rather than as fresh: forgetting to declare one must fail closed.",
+  "windows": {
+    "hr": 240, "sbp": 240, "dbp": 240, "map": 240, "spo2": 240, "rr": 240,
+    "temp": 240, "gcs": 240, "uop": 240, "fio2": 240,
+    "lactate": 360, "ph": 360, "pao2": 360, "paco2": 360, "hco3": 360,
+    "glucose": 480,
+    "creat": 1440, "urea": 1440, "na": 1440, "k": 1440, "cl": 1440,
+    "plt": 1440, "wbc": 1440, "hb": 1440, "inr": 1440, "bili": 1440, "albumin": 1440,
+    "crp": 2880,
+    "weight": 10080
+  }
+}
