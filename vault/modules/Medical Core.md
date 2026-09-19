@@ -10,10 +10,30 @@ flag: smd_medcore + smd_medcore_shadow (both default OFF)
 Steps 1 to 11 of the Implementation Order are DONE. The work can go no further than step 12, the
 data gate, which is not an engineering task.
 
-One deviation from the file table below: `medcore/medcore-outcomes.js` was added. The plan put the
+### Deviations from the file table below, all deliberate
+
+1. **`medcore/medcore-outcomes.js` was added.** The plan put the
 risk-set and blanking rules in `backend/medcore/` (training only), but the bedside needs the SAME
 rules to decide whether a decision may be produced about a patient at all, and two copies of a
 HAZ-ML-02 control is how one of them quietly stops matching. It is one function, used by both.
+
+2. **Parity vectors live INSIDE the artifact, not in `medcore/data/parity-vectors.json`.** The plan
+   had them as a separate file. Inside the artifact they travel with the model they describe and
+   gate its admission: `medcore-models.js` refuses an artifact whose vectors it cannot reproduce, so
+   a coefficient edited after training is caught at load. A separate file can be stale, replaced or
+   simply absent, and none of those would stop the model loading. Tested in
+   `test/medcore-models.test.mjs` rather than a dedicated `test/medcore-parity.test.mjs`.
+
+3. **`medcore/medcore-shadow.js`, `medcore/medcore-calibration.js` and `backend/medcore/gbm.mjs`,
+   `learn.mjs`, `metrics.mjs`, `paths.mjs` were added**, and `backend/medcore/` is Node rather than
+   Python: there is no numpy here, and the trainer then calls the app's own feature code, so
+   train/serve skew is not a bug class that exists. See the Decisions entry of 2026-09-19.
+
+4. **`bench/medcore/run.mjs` measures ablation**, which is what the plan wanted `--ablate` for. Its
+   first run is itself a HAZ-ML-01 result: removing the recency group costs **0.0000** AUROC and
+   removing presence costs nothing either, while removing vitals costs 0.051 and slopes 0.020. The
+   model is carried by physiology, not by how closely anyone was watched. Every ablation is scored
+   on validation; the test split is not read there.
 
 | Step | State | What exists |
 |---|---|---|

@@ -125,9 +125,21 @@ async function install() {
         outcomes: outcomesPack,
         artifacts: {},                    // nothing admissible exists yet, by design
         stateFor: function (payload) {
-          // The caller supplies the adapter from a bus event to a built state; without one there is
-          // nothing to evaluate, and inventing a state here would be inventing a patient.
-          try { return (API._stateFor ? API._stateFor(payload) : null); } catch (e) { return null; }
+          /* A caller-supplied adapter wins. Without one, the default is the patient currently open
+           * in the ICU workspace, because StewardMD is a single-patient mobile app and that is the
+           * only patient this device has a state for.
+           *
+           * ITS LIMITATION, STATED RATHER THAN DISCOVERED LATER: it cannot follow an event about a
+           * patient who is not the one on screen. On a device that is the honest answer - there is
+           * no state to build for anybody else - but it means a shadow run here observes one
+           * patient at a time, not a ward. A server-side shadow over the WardSynQ store is a
+           * different consumer and would supply its own adapter through setStateAdapter(). */
+          try {
+            if (API._stateFor) return API._stateFor(payload);
+            if (!window.ICU || typeof window.ICU.state !== "function") return null;
+            const asOf = (payload && (payload.at || payload.effectiveAt || payload.recordedAt)) || Date.now();
+            return API.state(window.ICU.state(), { asOf: asOf, subjectKey: "device-current" });
+          } catch (e) { return null; }
         }
       });
       API.shadow = shadow;
