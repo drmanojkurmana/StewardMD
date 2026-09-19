@@ -86,6 +86,32 @@ leaving it present:
 - `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
   a patient record" surface rather than a plausible-looking drug round.
 
+## Medical Core — two flags, both OFF, added 2026-09-19
+
+Registry: `medcore-flags.js` (repo root), read as query param → localStorage → default. Not in the
+2026-08-26 generated count above, which predates them. Plan: [[Medical Core]].
+
+**Nothing reads either flag yet.** They were created as step 1 of the Medical Core plan (the
+pre-integration step, tag `medcore-pre-integration`), deliberately BEFORE the code they gate, so that
+no later commit adds a switch and a clinical path in the same change. There is no `medcore/`
+runtime, no boot file, no event subscription and no panel, and `medcore-flags.js` is not loaded by
+`index.html`. Turning either flag on today does nothing at all. Pinned by
+`test/medcore-flags.test.mjs`, which fails the moment anything in the app reads them; the commit that
+wires the first consumer is the one that updates that test, naming it.
+
+| Flag | State | Why OFF today | What turning it on will eventually permit |
+|---|---|---|---|
+| `smd_medcore` | OFF | Master flag. There is no Medical Core code to reach: no state builder, no features, no model artifact, no validated outcome. Off must be a COMPLETE no-op — not loading the medcore files removes the feature entirely, with no edit to revert. | The deterministic feature layer first (Phase 1: patient state snapshot, "what changed", "missing information", unit and freshness checks), then, only after the Definition of Done in [[Medical Core]] is met, the single calibrated risk line as evidence for an EXISTING recognition prompt. Never its own alert. |
+| `smd_medcore_shadow` | OFF | Shadow evaluation of a model that does not exist. It also requires `smd_medcore`, which is off; consumers must ask `SMD_MEDCORE_FLAGS.shadowActive()` rather than reading this flag alone. | Running Medical Core decisions alongside the deterministic path for comparison only. Shadow means the output reaches NOBODY: no panel, no prompt, no notification, no clinician-visible log, as `wardsynq-mlops.js` requires of a model in shadow. The evaluator will be installed from OUTSIDE the host file (the `wardsynq-shadow.js` pattern), so not loading it removes the change completely. |
+
+Neither flag may move to ON in a release build until `scripts/wardsynq-assurance.mjs` reports
+HAZ-ML-01 to HAZ-ML-04 verified and a named clinician has approved `outcomes.json`. That is a
+clinical sign-off, not an engineering one, and no flag in this file can substitute for it.
+
+On the NATIVE app there is no address bar, so the query param is unreachable — set the flag with
+`SMD_MEDCORE_FLAGS.set('smd_medcore', true)` in the WebView console, then reload. A reinstall clears
+`localStorage`, so a flag does NOT survive one.
+
 ## Everything, by module
 
 ### CliniX  <sub>5 ON · 2 OFF</sub>
