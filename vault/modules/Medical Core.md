@@ -1,7 +1,7 @@
 ---
 tags: [module, clinical, ai]
 status: planned
-flag: smd_medcore (default OFF, not yet created)
+flag: smd_medcore + smd_medcore_shadow (both default OFF; registry created 2026-09-19, no consumer yet)
 ---
 # Medical Core — Final Implementation Plan
 
