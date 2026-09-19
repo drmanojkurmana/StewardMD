@@ -629,7 +629,49 @@
    * costs nothing, and cannot invent a symptom the author did not write - which matters more in a
    * simulated patient than anywhere else in CliniX, because an invented finding teaches a wrong
    * pattern. The tutor is a layer for unmatched questions, never the source of clinical fact. */
+  /* The lexicon (clinix-lexicon.js) understands how students actually type a question. It is
+   * resolved lazily and optionally: if it is not loaded, matchAsk falls back to the original
+   * whole-word cue test below, so a page that ships without it behaves exactly as before. */
+  var _lex = null, _lexTried = false;
+  function lexicon() {
+    if (_lexTried) return _lex;
+    _lexTried = true;
+    try { if (typeof window !== "undefined" && window.SMD_CLINIX_LEXICON) { _lex = window.SMD_CLINIX_LEXICON; return _lex; } } catch (e) {}
+    try { if (typeof require === "function") { _lex = require("./clinix-lexicon.js"); } } catch (e) {}
+    return _lex;
+  }
+  function setLexicon(l) { _lex = l; _lexTried = true; }
+
+  /* askTopics() is what the UI wants: the confident topic when there is one, and the near misses
+   * when there is not, so an unrecognised question can offer "did you mean" chips instead of a dead
+   * end. matchAsk() keeps its original { key, topic } shape for every existing caller. */
+  function askTopics(caseDef, text) {
+    if (!caseDef || !caseDef.history) return { key: null, topic: null, score: 0, suggestions: [] };
+    var L = lexicon();
+    if (L && L.match) {
+      var r = L.match(caseDef.history, text);
+      var sug = [];
+      for (var i = 0; i < r.suggestions.length; i++) {
+        sug.push({ key: r.suggestions[i].key, topic: r.suggestions[i].topic, score: r.suggestions[i].score });
+      }
+      return { key: r.key, topic: r.topic, score: r.score, confident: r.confident, suggestions: sug };
+    }
+    var legacy = legacyMatchAsk(caseDef, text);
+    return legacy
+      ? { key: legacy.key, topic: legacy.topic, score: 1, confident: true, suggestions: [] }
+      : { key: null, topic: null, score: 0, confident: false, suggestions: [] };
+  }
+
   function matchAsk(caseDef, text) {
+    var L = lexicon();
+    if (L && L.match) {
+      var r = L.match(caseDef && caseDef.history, text);
+      return r.key ? { key: r.key, topic: r.topic, score: r.score } : null;
+    }
+    return legacyMatchAsk(caseDef, text);
+  }
+
+  function legacyMatchAsk(caseDef, text) {
     var q = normalizeAnswer(text);
     if (!q || !caseDef || !caseDef.history) return null;
     // Pad so a cue matches whole words only: " colour " will not match inside "colourful", and a
@@ -871,6 +913,8 @@
 
     CASE_PHASES: CASE_PHASES,
     matchAsk: matchAsk,
+    askTopics: askTopics,
+    setLexicon: setLexicon,
     unmatchedReply: unmatchedReply,
     caseFinding: caseFinding,
     caseInvestigation: caseInvestigation,

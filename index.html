@@ -86,7 +86,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/thorex-screens.css?v=tx12">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx18-calm">
 <link rel="stylesheet" href="/insulin.css?v=ins15">
-<link rel="stylesheet" href="/clinix.css?v=cx18-prolock">
+<link rel="stylesheet" href="/clinix.css?v=cx19-sandbox1-prolock">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
 <link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
@@ -2099,8 +2099,6 @@ window.openExternal = function (u) {
 <script src="/nmc-register.js?v=gold1" defer></script>
 <!-- Prescription PDF/JPEG export libraries (html2canvas → canvas, jsPDF → PDF). Loaded before
      prescription.js; export is user-triggered so defer order is safe. -->
-<script src="/vendor-html2canvas.js?v=1" defer></script>
-<script src="/vendor-jspdf.js?v=1" defer></script>
 <script src="/rx-brand-match.js?v=rxb1" defer></script>
 <!-- RxChoice - cost-optimization layer over a FINISHED prescription. Load order matters: the flags
      registry and the deterministic core must exist before prescription.js renders its button, and
@@ -2132,7 +2130,7 @@ window.openExternal = function (u) {
 <script src="/applock.js?v=gold8" defer></script>
 <script src="/policy.js?v=gold363" defer></script>
 <script src="/features.js?v=gold997" defer></script>
-<script src="/calculators.js?v=gold1051-r1d-rail1" defer></script>
+<script src="/calculators.js?v=gold1051-r1d-rail1-find1" defer></script>
 <script src="/calc-links.js?v=gold400" defer></script>
 <script src="/icu-autoscores.js?v=gold403" defer></script>
 <script src="/drugs.js?v=gold978-sheet1-universal3" defer></script>
@@ -2166,7 +2164,7 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/reasoning-workspace.css?v=dxfit9">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall5">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
-<script src="/reasoning.js?v=hardlocal4-clinix1-figs1" defer></script>
+<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2179,7 +2177,7 @@ window.openExternal = function (u) {
 <!-- MaiK Answer Engine chooser (KB only · Cloud · On-device). DECORATES window.SMD_AI, so it must
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
-<script src="/maik-engine.js?v=hardlocal3-dose1" defer></script>
+<script src="/maik-engine.js?v=hardlocal3-dose1-raglink1" defer></script>
 <!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
@@ -2193,7 +2191,7 @@ window.openExternal = function (u) {
      retrieved passages on facts (doses, drugs, figures), not wording. Loaded before maik-local.js. -->
 <script src="/kb/ai/maik-grounding.js?v=ground1" defer></script>
 <script src="/kb/ai/maik-lite-kb-store.js?v=rag1" defer></script>
-<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1" defer></script>
+<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034-ugib1" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
@@ -2202,13 +2200,13 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-scope.js?v=scope-certain1" defer></script>
 <!-- MaiK Clinical Decision Engine (brain) + Evidence Engine. Deterministic, KB-first.
      Inert until flag smd_maik_brain (?brain=1); defining the globals is harmless when off. -->
-<script src="/kb/ai/ambig-abbrev.js?v=gold1057-lang" defer></script><script src="/kb/ai/maik-brain.js?v=brain-ambig1" defer></script>
+<script src="/kb/ai/ambig-abbrev.js?v=gold1057-lang" defer></script><script src="/kb/ai/maik-brain.js?v=brain-ambig1-find1" defer></script>
 <script src="/kb/ai/maik-evidence.js?v=gold1052-brain" defer></script>
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab39" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb"><script src="/maik-atmosphere.js?v=1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-betatiles1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/connect-agent-boot.js?v=cab40" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb"><script src="/maik-atmosphere.js?v=1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1" defer></script><script src="/profile-setup.js?v=pfs2-phv1" defer></script><script src="/phone-verify.js?v=phv2-slots" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2220,7 +2218,7 @@ window.openExternal = function (u) {
 <!-- Guided tour (SMD_TOUR): first-run interactive onboarding + one-time contextual tips.
      Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
      home.js + account.js so it can read the home DOM and the signed-in account. -->
-<script src="/onboarding.js?v=logo1003" defer></script>
+<script src="/onboarding.js?v=logo1003-guides1" defer></script>
 <!-- Global haptics (SMD_HAPTICS): tactile feedback on every interactive tap. Additive; uses
      @capacitor/haptics on native + navigator.vibrate fallback on web. Pref smd_haptics
      (default ON; ?haptics=0 disables). Loads after native-bridge so Capacitor.Plugins exists. -->
@@ -2419,17 +2417,23 @@ window.openExternal = function (u) {
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
 <script src="/clinix-flags.js?v=cx14-session" defer></script>
-<script src="/clinix-model.js?v=cx21-prolock" defer></script>
-<script src="/clinix-content.js?v=cx16-prolock" defer></script>
+<!-- The lexicon must be parsed before the model asks for it (the model resolves it lazily off
+     window, so order is for clarity, not correctness). clinix-dx.js holds the differential /
+     diagnosis pickers and the management MCQ; its 365-diagnosis vocabulary is NOT bundled and
+     is fetched from /clinix/dx-vocabulary.json on first use. -->
+<script src="/clinix-lexicon.js?v=cx-lex1" defer></script>
+<script src="/clinix-model.js?v=cx21-lex1-prolock" defer></script>
+<script src="/clinix-dx.js?v=cx-dx1" defer></script>
+<script src="/clinix-content.js?v=cx16-dxvocab-prolock" defer></script>
 <script src="/clinix-diagrams.js?v=cx13" defer></script>
 <script src="/clinix-audio.js?v=cx-stridor2" defer></script>
 <script src="/clinix-store.js?v=cx12" defer></script>
 <script src="/clinix-tutor.js?v=cx14" defer></script>
-<script src="/clinix-engine.js?v=cx10" defer></script>
-<script src="/clinix-physiology.js?v=cx10" defer></script>
+<script src="/clinix-engine.js?v=cx11-lex1" defer></script>
+<script src="/clinix-physiology.js?v=cx11-sandbox1" defer></script>
 <script src="/clinix-profile.js?v=cx10" defer></script>
 <script src="/clinix-examiner.js?v=cx10" defer></script>
-<script src="/clinix-screens.js?v=cx25-prolock" defer></script>
+<script src="/clinix-screens.js?v=cx26-sandbox1-prolock" defer></script>
 <script src="/clinix.js?v=cx12" defer></script>
 <!-- SURGX (SURGˣ) · Surgical Intelligence (additive, flag-gated smd_surgx; ON for testers, flip to
      false before any non-tester release - see surgx-flags.js). Scoped #surgxRoot + .sgx-* +
@@ -2523,13 +2527,13 @@ window.openExternal = function (u) {
      smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
      given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
 <!-- The patient portal's words and discharge renderer (window.WSQPortal): ward.js previews the portal with them. -->
-<script src="/wardsynq/site/i18n.js?v=62" defer></script>
+<script src="/wardsynq/site/i18n.js?v=63" defer></script>
 <script src="/wardsynq/site/print-lang.js?v=30" defer></script>
 <script src="/wardsynq/site/portal.js?v=44" defer></script>
 <!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
 <script src="/ward-offline.js?v=3" defer></script>
 <script src="/ward-labels.js?v=1" defer></script>
-<script src="/ward.js?v=ward74-merge-r6" defer></script>
+<script src="/ward.js?v=ward75-recall-r7" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
@@ -2648,7 +2652,7 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1-demohosp3-adapter18-endpointonly16"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1-demohosp3-adapter18-endpointonly16-labdates2-hospReg1"; document.body.appendChild(s); }
     // Offline "Test Hospital" demo dataset — 25 fictional patients, real-shaped labs, no GHIS
     // login needed. Loaded alongside ghis-ward.js so the setup screen's demo button works the
     // moment Ward Sync opens.

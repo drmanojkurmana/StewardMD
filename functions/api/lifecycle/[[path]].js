@@ -29,7 +29,10 @@ import { ownerOK } from "../../_adminauth.js";
 import {
   listLifecycleUids, sendProUpsellOnce, getLifecycle, decidePurge, markPurgeWarned, markPurged,
   purgeDays, warnDays, purgeEnabled, hardDeleteEnabled, purgeUserData,
+  promoSeriesEnabled, promoStartDays, promoEveryDays, sendPromoNext,
 } from "../../_lifecycle.js";
+import { PROMO_EDITIONS } from "../../_promo.js";
+import { warmBillingCfg } from "../../_billingcfg.js";
 import { getUserClaims, setUserDisabled, deleteUser } from "../../_fbadmin.js";
 import { emailVerifyReminder } from "../../_email.js";
 
@@ -50,6 +53,31 @@ async function upsellSweep(env) {
   }
   // Report the cap so a large backlog is never silently dropped — the next nightly run drains more.
   return { days, candidates: candidates.length, processed: batch.length, emailed, skipped, deferred: candidates.length - batch.length };
+}
+
+/* The promotional series. Report-only unless PROMO_SERIES_ON=1. Pre-filter from metadata: old
+ * enough, not unsubscribed, not finished, last edition long enough ago. decidePromo() re-checks
+ * everything against the record and claims, and skips anyone paying. */
+async function promoSweep(env, { dryRun } = {}) {
+  const now = Date.now();
+  const enabled = promoSeriesEnabled(env) && !dryRun;
+  const cap = Number(env.PROMO_MAX_PER_RUN) > 0 ? Number(env.PROMO_MAX_PER_RUN) : 300;
+  const start = now - promoStartDays(env) * DAY, every = now - promoEveryDays(env) * DAY;
+  const candidates = await listLifecycleUids(env, (md) =>
+    !!(md && md.firstSeen && md.firstSeen <= start && !md.unsubscribedAt && !md.purgedAt &&
+       (md.promoIdx || 0) < PROMO_EDITIONS.length && (!md.promoAt || md.promoAt <= every)));
+  const batch = candidates.slice(0, cap);
+  const out = { mode: enabled ? "send" : "report-only", candidates: candidates.length, processed: batch.length, emailed: 0, skipped: 0, deferred: candidates.length - batch.length, reasons: {} };
+  if (!enabled) return out;
+  // Prices in the copy come from the live billing config; warm it once per run.
+  try { await warmBillingCfg(env.CASES_KV || env.GHIS_KV, now); } catch (e) {}
+  for (const uid of batch) {
+    try {
+      const r = await sendPromoNext(env, uid, now);
+      if (r && r.sent) out.emailed++; else { out.skipped++; out.reasons[r.reason || "send-failed"] = (out.reasons[r.reason || "send-failed"] || 0) + 1; }
+    } catch (e) { out.skipped++; }
+  }
+  return out;
 }
 
 /* The unverified sweep. `force` (dryRun) makes it report without acting even when enabled. */
@@ -137,7 +165,10 @@ export async function onRequest(context) {
     // already earned by the time we get here.
     try { unverified = await unverifiedSweep(env, { dryRun }); }
     catch (e) { unverified = { error: String((e && e.message) || e) }; }
-    return json({ ok: true, ...upsell, unverified });
+    let promo;
+    try { promo = await promoSweep(env, { dryRun }); }
+    catch (e) { promo = { error: String((e && e.message) || e) }; }
+    return json({ ok: true, ...upsell, unverified, promo });
   }
 
   return json({ error: "not-found", seg }, 404);

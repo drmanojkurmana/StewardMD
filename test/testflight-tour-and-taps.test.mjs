@@ -64,7 +64,9 @@ ok("home.js: the fragile live-only 'Show more' listener is gone",
 // "Open Drug Index" / calculators / interactions chips and the refine chips never reached the click
 // handler at all (found live on the owner's phone). Still one delegated listener, still data-maik-q.
 ok("home.js: follow-up chips still routed via delegated data-maik-q",
-  /closest\(["']\[data-maik-q\],\[data-maik-web\],\[data-maik-tool\],\[data-maik-refine\]["']\)/.test(home));
+  // The selector may grow (tool / calculator chips were added to it on 2026-09-02); what this pins
+  // is that data-maik-q and data-maik-web are still the delegated route, first in the list.
+  /closest\(["']\[data-maik-q\],\[data-maik-web\][^"']*["']\)/.test(home));
 
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);

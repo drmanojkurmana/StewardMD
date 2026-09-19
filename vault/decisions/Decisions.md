@@ -5,6 +5,101 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-18 · Deferring a payload without deferring the contract (PDF engines off cold start)
+
+**Measured first, because the received wisdom was wrong.** `stewardmd.in` is a MARKETING PAGE (3
+scripts, App Store links); `/home.js` 404s there. The app is a Capacitor bundle read off LOCAL DISK.
+So compression, CDN, `modulepreload` and service-worker *network* strategy do not apply to real
+users at all. The only cold-start cost that is real is **V8 parse+compile of the bundle**: 13.4 MB
+across 268 files, 205 ms on desktop node (several times that on a mid-range phone).
+
+**The pattern that makes deferral safe here: defer the PAYLOAD, never the CONTRACT.** The globals
+keep their exact names and shapes; the feature `await`s a cached-promise loader before first use;
+every pre-existing "engine unavailable" guard stays as the fail-safe. Because the bundle is on local
+disk, "lazy" costs a file read plus parse (**measured: 44 ms**), not a download. That is what makes
+the trade nearly free in THIS app and is exactly why it would not be free in a web app.
+
+**Superseded on the 2026-09-19 merge:** `origin/main` had shipped the same deferral as `ensurePdfEngine()` in `native-bridge.js` + `window.smdLazy` in `prescription.js`; `pdf-engines.js` and its two tests were dropped in favour of main's version. The pattern below still holds.
+
+**First application: `pdf-engines.js` (dropped, see above).** vendor-html2canvas (194 KB) + vendor-jspdf (357 KB) = 551 KB
+parsed at every launch for two features most sessions never reach (prescription export, native
+HTML->PDF). Now loaded on demand by `SMD_PDF_ENGINES.ensure()`. **13.4 MB -> 12.9 MB, 205 ms -> 176 ms.**
+
+**It also fixed a live race.** `prescription.js` read `window.html2canvas` directly and told the
+doctor *"Export engine still loading - try again"* whenever Export was reached before the eagerly
+deferred 551 KB had parsed. Awaiting the loader removes that window rather than apologising for it.
+
+**A collision this nearly caused, worth remembering:** `native-bridge.js` already owns
+`window.SMD_PDF` (its `fromHtml` renderer, used by MaiK/onco/reports) and loads FIRST. Naming the
+loader `SMD_PDF` would have silently replaced it. Hence `SMD_PDF_ENGINES`, pinned by a test.
+
+**The ordered plan for the rest, by win over risk:**
+
+| Tier | Target | Win | Why it is safe, or not |
+|---|---|---|---|
+| done | vendor jspdf + html2canvas | 551 KB | call sites already guarded; no clinical content |
+| next | `hospitals-in.js` (249 KB), `followcare-i18n.js` (173 KB) | 422 KB | pure data, single consumer each, count is assertable |
+| then | `kardiox-content-pack.js` (1.88 MB) + `kardiox-content.js` (508 KB) | 2.4 MB | biggest win, but it CONCATS 1041 lessons into `SMD_KARDIOX_CONTENT.ecgs` at load; needs a test asserting the atlas still reports 1141 or it truncates silently. `index.html` already calls this out: CliniX fetches its content lazily *"deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load"* |
+| **never** | `interaction-rules.js` (880 KB) | - | a drug-safety engine must be present anywhere a drug appears. Deferring it risks a missed interaction warning. **Do not lazy-load a safety engine.** |
+
+**Rejected, with measurements:** debouncing the search inputs. They are undebounced, but ONCQIS
+search is **1-5 ms/keystroke** and the 2,405-row hospital picker is **0.4-1.7 ms** (60-row cap). A
+120 ms debounce on a 2 ms operation adds lag for no gain.
+
+**Status:** `test/pdf-engines.test.mjs` 7/7 (single injection under concurrency, never rejects,
+retryable, no SMD_PDF clobber); `test/run-pdf-lazy-ui.mjs` 13/13 in a real browser, including
+rendering an actual PDF after the lazy load. Suite 3210 pass; 4 failures all reproduce on clean
+`origin/main` (followcare-voice-server, opd-mrn-alloc, and two in entitlement-trial).
+
+## 2026-09-02 · A named score is answered by its calculator, not by the model; the tool chips were dead
+
+**Reported with a screenshot:** "HACOR score" in MaiK (Cloud) spent a paid Gemini turn and answered
+with a fabricated formula (`FiO2 × 100 / (PaO2/FiO2)` - HACOR is Heart rate, Acidosis, Consciousness,
+Oxygenation, Respiratory rate), while the "Open calculators" chip under the answer did nothing when
+tapped. Owner: "why didn't it redirect to our calculator, and these chips don't work."
+
+**Why the chip was dead.** `home.js`'s delegated chip handler resolved the tapped element with
+`closest("[data-maik-q],[data-maik-web]")` and returned when nothing matched. The tool chips carry
+only `data-maik-tool`, so every one of them ("Open calculators", "Open Drug Index", "Check
+interactions") fell through that early return; the `data-maik-tool` branch further down was
+unreachable. A comment elsewhere in the file still claimed those chips "always worked", which is how
+a dead code path stays dead: it was believed to be the working one. The selector now includes
+`data-maik-tool`, `data-maik-calc`, `data-maik-calcask`.
+
+**Why the tokens were spent.** Nothing resolved a score NAME against the calculator registry before
+the model was called. `MaiKBrain.suggestCalcs` maps conditions to scores (pneumonia → CURB-65) but
+had no idea what "HACOR" was, and `plan()`'s "pure score → no Gemini" flag is not consulted by
+`runClinical` anyway. (HACOR also did not exist in the registry: 430 calculators, no HACOR.)
+
+**Fix, four places.** (1) `calculators.js` `MEDCALC.find(query)`: resolve free text to ONE calculator
+by name. Conservative by construction: every significant word of the question must appear in the
+title (so "treatment of pneumonia" does not hit "CURB-65 (pneumonia)"), a real word must match (so
+"65" alone never does), the calculator's own name must be at least half covered, and two calculators
+that fit equally is "not sure" ("wells score" → null; "wells score for PE" → wells_pe). Digits split
+from letters and subscripts normalised so `curb65`, `CURB-65`, `CHA2DS2-VASc` all resolve. A short
+alias map covers spoken forms (`gcs`, `crcl`, `chads vasc`). (2) `home.js` `maikRoute()`: a
+`calculator` kind, checked before the patient-specific route, that requires either an exact name or
+a score cue word. The answer is a local card (what it is, what it needs, "Open <name>", "Ask MaiK
+anyway") - zero tokens, and the arithmetic is the registry's. `_maikSkipCalc` is a one-shot bypass
+for "Ask MaiK anyway", same pattern as `_maikDisambigResolved`. (3) `maikToolChipsHTML` names the
+calculator ("Open CURB-65" via `data-maik-calc`) when the question names one, generic list chip
+otherwise. (4) `MaiKBrain.suggestCalcs` puts a named calculator first, so the copilot's "Open in
+StewardMD" chips say its name. Plus a HACOR entry (Duan 2017, five bands, >5 = high risk of NIV
+failure) so the reported question has somewhere to land.
+
+**Trade-off:** a question that is ONLY a score name no longer gets a narrative from the model by
+default; it gets the calculator and an explicit "Ask MaiK anyway". That is the owner's stated
+preference ("rather than wasting tokens"). A false positive in `find()` would send a doctor to the
+wrong calculator, which is why it is conservative and every miss falls back to the old behaviour.
+
+**Status:** `test/calc-find.test.mjs` 9/9 (resolver + HACOR bands + threshold); `test/run-maik-calc-route-ui.mjs`
+22/22 in a real browser: the reported question routes to HACOR through the real send path with ZERO
+`/api/ai` calls, the previously-dead generic chip opens the list, the specific chip opens that
+calculator, delegation survives a thread restore, and "Ask MaiK anyway" bypasses exactly once.
+`maikRoute()` gained `typeof` guards because two structural suites evaluate it outside module scope.
+**Note:** the HACOR entry is new clinical content and is marked for clinician sign-off like the rest
+of the registry.
+
 ## 2026-09-18 · Related figures under a MaiK answer: a search result, never hosted or generated
 
 **Owner:** show the image a trusted medical page carries for the topic "just like Google", with the
@@ -2615,6 +2710,51 @@ Known gaps for a v3 pass (do not re-discover): the think habit is reduced, not e
 robust fix is a <think>-token ban at the native sampler (both platforms) or more discipline data;
 scope-refusal is enforced by the Intent Firewall (maik-scope.js) upstream, NOT by the model, which
 answered a football question in bare-model probes.
+
+## 2026-09-19 — One email template (premium, single column), unsubscribe everywhere it must be, promo series OFF, phone verified over WhatsApp
+
+**Email.** `functions/_email.js` is now a component kit (`headline`, `hero`, `tile`, `ctaRow`,
+`codeBox`, `facts`, `note`) plus one `renderEmail()` shell: soft grey page, white 600px column, the
+SD mark alone at the top, one big headline, one line, one pill button, tiles that make one point each,
+quiet footer. Every existing template (OTP, reset, temp password, verified, reminder, Pro, failed,
+welcome, upsell) was rewritten on it; no em-dash anywhere (pinned by test). `sendBranded(env, opts)`
+takes `kind:"marketing"` + `uid`: it then signs an unsubscribe token (`_unsub.js`, HMAC under
+`UNSUB_SECRET` falling back to `RESEND_API_KEY`), adds the footer Unsubscribe button + link and the
+RFC 8058 `List-Unsubscribe` / `List-Unsubscribe-Post: One-Click` headers. `/api/unsubscribe` (GET link,
+POST one-click, `resub=1` to undo) flips `unsubscribedAt` on the lifecycle record ONLY. Account notices
+(codes, verification, the day-5 removal warning) are transactional and deliberately never suppressed:
+nobody may lose an account because they unsubscribed from offers. Welcome + Pro upsell are marketing
+(unsubscribable); `sendProUpsellOnce` honours the opt-out without stamping `upsellAt`.
+
+**Prices in copy come from `_pricing.js`**, which reads the same `cfgPrice` the paywall reads (KV
+override > env > default) and rounds per-day figures UP, so a price change can never make an email
+understate the cost. Today: Pro 599/mo = 20/day, annual 4999 = 14/day, trainee 199 = 7/day.
+
+**Promo series** (`_promo.js`): seven editions, 2-3 features each, one hero figure, per-day price
+against a chai / bottle of water / pastry. `PROMO_SERIES_ON` is OFF: the nightly `/api/lifecycle/run`
+reports candidates but sends nothing until the owner turns it on. Starts day 5 (after the day-3
+upsell), one edition every 4 days, never to opt-outs or paying accounts. Owner preview:
+`GET /api/email-preview?kind=promo:maik` (owner auth), `POST` sends a real copy.
+
+**Phone verification** (owner: "ask every signup phone number verified by WhatsApp with backup
+SMS"). Server `_phone_otp.js` + `/api/auth/phone-start|phone-verify`, keyed `otp:phone:<uid>`, same
+rules as the email OTP (10-min TTL, 30 s throttle, 5 tries then the code burns) plus a per-number
+daily cap of 6 so our account cannot be used to SMS-bomb a number. Delivery reuses the FollowCare
+senders: WhatsApp first when a provider is configured, else SMS; 2Factor goes through its dedicated
+OTP API (pre-approved DLT OTP template), other providers through `sendSms`. A same-window resend
+by SMS carries the SAME code. Success sets the `phoneVerified` claim and stamps the lifecycle record.
+Client `phone-verify.js` asks after `profile-setup.js` saves (listens for `smd:profile-saved`), never
+stacks on the registration gate (`#verifyGate`, polls until hidden), "Later" snoozes per app-open.
+Nothing is gated on it yet; it is an ask, not a wall. Kill switches: `smd_phone_verify=0` (client),
+`PHONE_VERIFY_ON=0` (server).
+
+**Not done, deliberately:** an in-app "marketing emails" toggle (the email button + header suffice for
+now); `mark-teal.png` is in the repo but 404s on the live site, so the template uses `logo.png`.
+
+Tests: `test/email-template.test.mjs` (16), `test/phone-otp.test.mjs` (17),
+`test/run-phone-verify-ui.mjs` (35 in a real browser), `test/render-emails.mjs` renders every email
+to PNG for a human look. Guide: the Clinical UX Guide canvas (10 boards) was produced the same day.
+
 
 ## 2026-09-02 — MaiK Lite v3/v4: found and fixed WHY the think habit persisted, caution policy removed
 
@@ -8744,3 +8884,74 @@ Guarded by a test that walks every user-facing string in the 402 body and assert
 word "Scribe" appears it is preceded by "MaiK Voice", which catches a bare "Scribe", the old
 "MaiK Scribe", and any future half-rename; plus a bundle check that neither old spelling survives in
 `pro-paywall.js`, and a browser check on the rendered sheet.
+
+## 2026-09-19 — Feature guides run ON the screen (SMD_TOUR engine), and the OTP sheet is a designed screen
+
+**Owner: "the guide should run on the screen like the app tours".** The first attempt was a static
+canvas; the real thing is eight walkthroughs on the existing spotlight engine in `onboarding.js`
+(`GUIDES`, `guideController`, `startGuide`, `SMD_TOUR.guide(id)` / `guides()`, `start("guide:<id>")`):
+home, reasoning, maik, drugs, calculators, hospital, imaging, account. Each step names a `screen`;
+`gotoScreen()` closes whatever is open and opens that screen for real (Hospital / Drugs / Dosing /
+More / Dx sheets via the home `[data-act]` buttons, MaiK via `SMD_askMaik("")`, Calculators via
+`MEDCALC.openList()`, the sidebar via `SB.open()`, and Experimental via Settings then Experimental,
+because that page is a page inside Settings). Every targeted step is `optional`: a gated tile is
+skipped, never a coach-mark over nothing. Resolution is scoped to the screen on top (`guideScope`) so a
+drawer control behind an overlay is never spotlighted through it. The chooser (About & Help) lists
+them under "Feature guides"; the Hospital guide hands off to the ICU tour (`then:"icu"`).
+Engine tweak: the coach-mark is `visibility:hidden` between goStep and paint, so no empty box flashes
+while a sheet animates open (affects all tours, for the better).
+Copy rule holds: no em-dash in any guide string (test-pinned). `test/run-feature-guide-ui.mjs` drives
+all eight in a real browser; `test/feature-guide.test.mjs` pins shape and wiring.
+
+**OTP sheet redesign** (owner: "looks AI slop, make it premium"): `phone-verify.js` now renders six
+code slots with a marching-dot ring on the waiting slot, pop-in digits, a red shake on a wrong code,
+a green sweep on success, a resend countdown ring, a status row that says what the app is doing about
+the message (WebOTP on Android fills the code; the input is `autocomplete="one-time-code"` so the iOS
+keyboard offers it), inline SVG icons only, light and dark, reduced motion honoured. The one real
+input is a hidden `#phvCode` over the slots (so the harness and the keyboard both drive it). It also
+waits for the first-launch guided tour, not just the registration gate, before asking.
+
+
+**CliniX case simulation, 2026-09-19** (owner: *"each student talk english differently how will he
+ask exact question as we programmed? Fix that and in ddx,dx give him 100s of diagnosis and he will
+pickup one and give hints too, and plan also give mcq options so he will select"*). Four decisions:
+
+1. **The patient understands lay English, and still never improvises.** `clinix-lexicon.js` sits in
+   front of the cue matcher: contraction expansion, ~320 lay and Indian-English phrases, a synonym
+   map, stemming and a bounded fuzzy snap that requires the first TWO letters to match (one letter
+   turned "spell" into "swell"). Scoring uses cue specificity, a key-cue boost and a
+   document-frequency rarity TIEBREAK (rarity as a multiplier dragged every score under the
+   threshold). Above `ANSWER_AT` the patient answers; between `SUGGEST_AT` and `ANSWER_AT` it offers
+   a did-you-mean rather than guessing; below that it matches NOTHING and suggests nothing, because
+   a simulated patient answering small talk from a case script is inventing clinical content.
+   `clinix-model.js` keeps `legacyMatchAsk` and uses it when the lexicon is absent.
+2. **Marking counts CONCEPTS, not accept terms.** An accept list carrying "heart failure", "CCF" and
+   "cardiac failure" describes one concept; counting them separately told a student they had missed
+   two things when they had missed none. Missed terms are grouped by `conceptKey` (vocabulary entry,
+   else anglicised string) and a differential is scored on PICKS.
+3. **Breadth is not a differential.** 8+ picks, or unsupported guesses outnumbering supported ones,
+   is marked `shotgun` and fails even when the right answer is in the list. Missing the true
+   diagnosis fails regardless of how many other reasonable ones were named.
+4. **A harmful management choice is disqualifying, not a deduction**, and the result names the
+   option. A case whose model answer is keyword fragments rather than actions ("b12", "treatable",
+   "88" as a saturation target) keeps the written plan: an unanswerable two-option stub is worse
+   than a text box. `ataxia` is currently the only case on that path.
+
+**Physiology sandbox rebuilt** (owner: *"physiology sandbox doesnt work its 1/10 make it 10/10"*).
+Two independent defects, both real. (a) The engine was uncalibrated: nominal sliders gave 70/46 with
+a cardiac output of 3.0, and the Hill denominator was `26.6 * 1000` rather than
+`Math.pow(26.6, 2.7)`, so a PaO2 of 88 read as 87%. **The old test file pinned both as "observed"**,
+which is how they survived, and is the reason a test that pins behaviour must say whether that
+behaviour is CORRECT. (b) `onInput` called `repaint()`, replacing the `<input type=range>` mid-drag,
+so no slider moved. The readout and the controls are now separate regions and only the readout is
+rewritten while dragging; the same fix was applied to the plan MCQ, where a repaint per tick meant a
+student ticking four boxes kept only the first.
+
+The engine is physiology rather than fudge: ventricular-arterial coupling
+(`SV = (EDV - V0) * Ees / (Ees + Ea)`) on the cardiovascular side, and gas exchange solved by OXYGEN
+CONTENT on the respiratory side. Content-based solving is not a refinement, it is the only way a
+shunt behaves like a shunt (at 45% shunt, FiO2 1.0 barely moves the saturation) and that behaviour is
+the entire teaching point of the tab. Ventilation is a fixed point of the chemoreflex line against
+the CO2 hyperbola, subject to a mechanical ceiling, so "a normal CO2 in acute severe asthma" and
+"oxygen retains CO2 in COPD" both emerge instead of being hand-written. Waveforms are seeded SVG
+paths, so a repaint never reshuffles a trace.

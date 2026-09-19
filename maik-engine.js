@@ -38,9 +38,35 @@
   // rug from under the model currently answering. That exact confusion presented as "no answer".
   var KEY_PENDING = "stewardmd.maikPackPending";
 
+  /* RAG LINK (owner, 2026-09-19: "give option to link and unlink RAG to model").
+   *
+   * Whether a capable on-device pack reads the StewardMD book before answering. ON (default) is the
+   * shipped behaviour: retrieve, then check the answer claim by claim. OFF disconnects retrieval and
+   * the model answers from its own weights alone.
+   *
+   * DEFAULT ON, and it must stay that way. Unlinked is faster - retrieval adds ~393 prompt tokens,
+   * which is the whole on-device latency story - but an ungrounded 1.7B states a wrong regimen with
+   * total confidence. Speed is the clinician's call to make deliberately, never the default.
+   *
+   * This is a LINK switch, not a gate weakener: when RAG is connected the evidence gate still runs
+   * exactly as before. Disconnecting does not loosen grounding, it removes it, and discLabel() says
+   * so in the sheet header so the answer is never labelled with sources it did not read.
+   */
+  var KEY_RAG_LINK = "smd_maik_rag_linked";
+
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function lrem(k) { try { localStorage.removeItem(k); } catch (e) {} }
+
+  // ── RAG link (see KEY_RAG_LINK) ──
+  /** Is the Knowledge Base connected to the on-device model? Absent key = connected. */
+  function ragLinked() { return lget(KEY_RAG_LINK) !== "0"; }
+  /** Connect (true) or disconnect (false) the book. Returns the new state. */
+  function setRagLinked(on) {
+    if (on) lrem(KEY_RAG_LINK); else lset(KEY_RAG_LINK, "0");
+    try { syncDisc(); } catch (e) {}   // the header disclaimer changes meaning with this switch
+    return ragLinked();
+  }
 
   // ── preference ──
   function getPref() { var v = lget(KEY_ENGINE); return ENGINES[v] ? v : "cloud"; }
@@ -759,8 +785,39 @@
       deviceWarnHTML() +
       '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff)">' + rows + '</div>' +
       '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>' +
+      ragLinkHTML() +
       '<button type="button" class="smd-nav-btn" data-me-guide aria-expanded="false" style="margin:8px 0 0;width:100%">Which one should I download?</button>' +
       guideHTML();
+  }
+
+  /**
+   * Knowledge Base group for the on-device model: connect or disconnect the book.
+   *
+   * FIRST row in its own group on purpose (owner: "keep option above grounded on off toggle"), so a
+   * grounding switch lands underneath it rather than above. Reuses the app's .smd-nav-row / .smd-nav-sw
+   * switch markup so it is the same control the rest of Settings uses - same size, same 44px target,
+   * same role="switch" semantics - rather than a second bespoke toggle style.
+   *
+   * The sub-label states the trade in the clinician's terms and names the real cost of each side,
+   * because "RAG" is not a word at the bedside and the speed gain is genuine.
+   */
+  function ragLinkHTML() {
+    var on = ragLinked();
+    return '<div class="smd-nav-lbl" style="margin:16px 0 6px">Knowledge Base</div>' +
+      '<div style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);padding:2px 12px">' +
+        '<div class="smd-nav-row">' +
+          '<div class="smd-nav-rl">' +
+            '<div class="smd-nav-lbl">' + (on ? "Connected" : "Disconnected") + '</div>' +
+            '<div class="smd-nav-sub">' + (on
+              ? "The model reads the StewardMD Knowledge Base before answering and every claim is checked against it. Slower, and the safer default."
+              : "The model answers from its own training only. Faster, but nothing is checked against the Knowledge Base and no sources are shown.") +
+            '</div>' +
+          '</div>' +
+          '<button class="smd-nav-sw' + (on ? " on" : "") + '" data-me-rag="1" role="switch" aria-checked="' + on + '"' +
+            ' aria-label="Connect the Knowledge Base to the on-device model"><span></span></button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="smd-nav-note" style="margin-top:6px">Applies to on-device models that can read the Knowledge Base. MaiK Cloud and KB only are always grounded.</div>';
   }
 
   /**
@@ -945,6 +1002,14 @@
         rerender(b, root);
       });
     });
+    // Knowledge Base link. rerender() redraws the row so the label flips Connected/Disconnected and
+    // the sub-label swaps with it; setRagLinked() already re-syncs the sheet header disclaimer.
+    root.querySelectorAll("[data-me-rag]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        setRagLinked(!ragLinked());
+        rerender(b, root);
+      });
+    });
     // Capability-panel upgrade: the tap IS the approval. A "May run slowly" pack asks once more with
     // its limitation spelled out; a "Not for this phone" pack has no button at all.
     root.querySelectorAll("[data-me-upgrade]").forEach(function (b) {
@@ -1112,7 +1177,14 @@
   /** Header disclaimer text for the engine that will actually answer. */
   function discLabel() {
     var e = effective();
-    if (e === "local") return "On-device \u00b7 AI-generated, no sources, verify independently";
+    // On-device splits by the RAG link. The "no sources" wording was written when on-device was
+    // ungrounded by design; saying it while the pack IS reading the book understates the answer just
+    // as badly as claiming sources it never read would overstate it.
+    if (e === "local") {
+      return ragLinked()
+        ? "On-device \u00b7 StewardMD knowledge base, verify independently"
+        : "On-device \u00b7 AI-generated, no sources, verify independently";
+    }
     if (e === "rag") return "StewardMD knowledge base \u00b7 verify independently";
     return "Grounded \u00b7 AI-generated, verify independently";
   }
@@ -1297,6 +1369,8 @@
     options: options, currentOptionId: currentOptionId, chipLabel: chipLabel, chipHTML: chipHTML,
     selectOption: selectOption, adoptPackWhenReady: adoptPackWhenReady, pendingPack: pendingPack,
     discLabel: discLabel, syncDisc: syncDisc,
+    // RAG link: maik-local.js reads ragLinked() in ragEligible() to decide whether to retrieve.
+    KEY_RAG_LINK: KEY_RAG_LINK, ragLinked: ragLinked, setRagLinked: setRagLinked, ragLinkHTML: ragLinkHTML,
     warmIfLocal: warmIfLocal,
     // hard Local/Cloud policy + capability matcher (2026-09-11)
     KEY_HARD: KEY_HARD, hardLocal: hardLocal, policy: policy, policyReason: policyReason, cloudAllowed: cloudAllowed, REQ: REQ, LOCAL_IMPL: LOCAL_IMPL, FEATURE_LABEL: FEATURE_LABEL,

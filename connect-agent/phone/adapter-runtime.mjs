@@ -12,7 +12,7 @@
 // view lives on read from the DOM (runtime.mjs readView), which is the fallback, never the primary
 // path once an endpoint is known.
 
-import { READ_ROWS, isGimsrOrigin } from './runtime.mjs';
+import { READ_ROWS, isGimsrOrigin, resolveDataOrigin } from './runtime.mjs';
 
 export const TOKEN_KEY = /token|verification|csrf|xsrf|antiforgery|nonce/i;
 /* How long a page is given to settle after a move (the token inputs are server-rendered). */
@@ -543,8 +543,9 @@ async function onDataHost(plugin, view, patient, base) {
  * then the data call, every field filled from its proven source. No guessing among calls.
  */
 export async function executeProven({ plugin, origin, view, patient = null, parentRow = null, tokens = null, parseHtml = null, onCall = null, now }) {
-  let viewHost = origin;
-  try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
+  /* Multi-hospital: the adapter's declared dataOrigin / redirectOriginMap wins; the GIMSR
+   * sign-in->data alias is preserved inside resolveDataOrigin (and re-asserted below). */
+  let viewHost = resolveDataOrigin(view, null, origin);
   if (isGimsrOrigin(viewHost)) viewHost = 'https://ghis.gitam.edu';
   const base = String(viewHost || '').replace(/\/$/, '');
   await onDataHost(plugin, view, patient, base);
@@ -597,8 +598,7 @@ export async function executeView({ plugin, origin, view, patient, tokens = null
   // An adapter discovered before proof existed: the old ranked replay below.
   let plan = replayPlan(view, patient);
   if (!plan.calls.length && !plan.prerequisites.length) return null;   // a POST-only view (form search) is replayable too
-  let viewHost = origin;
-  try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
+  let viewHost = resolveDataOrigin(view, null, origin);
   if (isGimsrOrigin(viewHost)) viewHost = 'https://ghis.gitam.edu';
   const base = String(viewHost || '').replace(/\/$/, '');
   await onDataHost(plugin, view, patient, base);
