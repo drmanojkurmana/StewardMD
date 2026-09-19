@@ -131,3 +131,9 @@ test/wardsynq-maik-eval/results.*.json
 # wardsynq.com site build output (scripts/build-wardsynq-site.sh)
 /dist-wardsynq/
 debug-bugs*.jsonl
+
+# Medical Core training output: regenerate with `node backend/medcore/run.mjs`.
+# The dataset CARD (backend/medcore/cards/) is committed; the matrices and cohorts are not -
+# they are tens of MB, fully reproducible from a seed, and a synthetic cohort in git history is a
+# cohort somebody will eventually mistake for data.
+backend/medcore/out/
