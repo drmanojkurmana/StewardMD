@@ -13,6 +13,7 @@ import { generate } from "./synth/generate.mjs";
 import { featurizeEncounter, split, loadPacks } from "./featurize.mjs";
 import { run } from "./train.mjs";
 import { buildArtifact } from "./export-artifact.mjs";
+import { resolvePath, resolveOut } from "./paths.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 const arg = (n, d) => {
@@ -29,7 +30,7 @@ const packs = loadPacks();
 
 let encounters, opts;
 if (inPath) {
-  encounters = readFileSync(join(ROOT, String(inPath)), "utf8").trim().split("\n").map((l) => JSON.parse(l));
+  encounters = readFileSync(resolvePath(ROOT, String(inPath)), "utf8").trim().split("\n").map((l) => JSON.parse(l));
   opts = { dataset: encounters[0].provenance.dataset, source: String(inPath) };
 } else {
   const g = generate({
@@ -50,10 +51,8 @@ const rows = split(encounters, byEnc, {});
 const res = run({ rows, outcome });
 const artifact = buildArtifact(res, rows, { dataset: opts.dataset });
 
-mkdirSync(join(ROOT, outDir), { recursive: true });
-mkdirSync(join(ROOT, "backend/medcore/cards"), { recursive: true });
-writeFileSync(join(ROOT, outDir, `artifact-${outcome.toLowerCase()}.json`), JSON.stringify(artifact, null, 2));
-writeFileSync(join(ROOT, outDir, `report-${outcome.toLowerCase()}.json`), JSON.stringify(res, null, 2));
+writeFileSync(resolveOut(ROOT, join(outDir, `artifact-${outcome.toLowerCase()}.json`)), JSON.stringify(artifact, null, 2));
+writeFileSync(resolveOut(ROOT, join(outDir, `report-${outcome.toLowerCase()}.json`)), JSON.stringify(res, null, 2));
 
 /* The dataset card. Deliberately states what is NOT in the data as prominently as what is. */
 const reasons = {};
@@ -129,7 +128,7 @@ Events per variable ${res.counts.eventsPerVariable}.
 const cardName = inPath
   ? `${opts.dataset}-${outcome.toLowerCase()}.md`
   : `${opts.dataset}-${outcome.toLowerCase()}-n${opts.n}-seed${opts.seed}${opts.frequencyBias ? "-freqbias" : ""}.md`;
-writeFileSync(join(ROOT, "backend/medcore/cards", cardName), card);
+writeFileSync(resolveOut(ROOT, join("backend/medcore/cards", cardName)), card);
 
 console.log(`card     -> backend/medcore/cards/${cardName}`);
 console.log(`artifact -> ${outDir}/artifact-${outcome.toLowerCase()}.json`);

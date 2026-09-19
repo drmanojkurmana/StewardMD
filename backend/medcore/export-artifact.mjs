@@ -22,6 +22,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { scoreLogistic, applyCalibration, oodDistance } from "./learn.mjs";
 import { scoreGbm } from "./gbm.mjs";
+import { resolvePath, resolveOut } from "./paths.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 
@@ -75,13 +76,12 @@ function arg(name, def) {
 
 if (import.meta.url === "file://" + process.argv[1]) {
   const { run } = await import("./train.mjs");
-  const rows = readFileSync(join(ROOT, String(arg("in", "backend/medcore/out/matrix.jsonl"))), "utf8")
+  const rows = readFileSync(resolvePath(ROOT, String(arg("in", "backend/medcore/out/matrix.jsonl"))), "utf8")
     .trim().split("\n").map((l) => JSON.parse(l));
   const res = run({ rows, outcome: String(arg("outcome", "MC-3")) });
   const art = buildArtifact(res, rows, { dataset: String(arg("dataset", "medcore-synth-v1")) });
   const out = String(arg("out", "backend/medcore/out/artifact-mc3.json"));
-  mkdirSync(dirname(join(ROOT, out)), { recursive: true });
-  writeFileSync(join(ROOT, out), JSON.stringify(art, null, 2));
+  writeFileSync(resolveOut(ROOT, out), JSON.stringify(art, null, 2));
   console.log(`artifact -> ${out}`);
   console.log(`  ${art.id}@${art.version}  features ${art.model.featureIds.length}  parity vectors ${art.parityVectors.length}`);
   console.log(`  gates ${art.allGatesPass ? "ALL PASS" : "FAILED: " + Object.entries(art.gates).filter(([, g]) => !g.pass).map(([k]) => k).join(", ")}`);
