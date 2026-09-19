@@ -106,7 +106,9 @@ test("offlineScribeFallback: a successful on-device draft is applied with offlin
   const src = SRC.slice(SRC.indexOf("function offlineScribeFallback"), SRC.indexOf("function doRefine"));
   // applyIfFresh is applyScribeResult behind the stale-result guard (FIX 1); offline = true.
   assert.match(src, /applyIfFresh\(ticket, r, transcript, true\)/);
-  assert.match(SRC, /function applyIfFresh\(ticket, r, transcript, offline\) \{[\s\S]{0,200}applyScribeResult\(r, transcript, offline\);/);
+  // (the delta refine added an `isDelta` argument after `offline`; the offline flag must still be
+  // the one applyScribeResult receives.)
+  assert.match(SRC, /function applyIfFresh\(ticket, r, transcript, offline[^)]*\) \{[\s\S]{0,300}applyScribeResult\(r, transcript, offline[^)]*\);/);
 });
 
 test("applyScribeResult: passes the offline flag straight into _applyRefine's offlineDraft", () => {

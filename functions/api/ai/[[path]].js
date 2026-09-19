@@ -129,7 +129,7 @@ import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/ho
 import { tinyfishSearch } from "../../_search.js";
 import { findFigures } from "../../_figures.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
-import { scribeExtractPrompt, sanitizeScribeOutput, parseScribeJson, attachGrounding } from "./_opd-scribe.js";
+import { scribeExtractPrompt, sanitizeScribeOutput, parseScribeJson, attachGrounding, mergeScribeDraft, flagContradictions } from "./_opd-scribe.js";
 import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
 import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 import { icdSuggestPrompt, sanitizeIcdSuggest } from "./_icd-suggest.js";
@@ -2100,7 +2100,18 @@ export async function onRequest(context) {
         // template (the template registry mapping body.specialty -> this text lives elsewhere);
         // capped defensively since it comes from the request body.
         const specialtyPrompt = typeof body.specialtyPrompt === "string" ? body.specialtyPrompt.slice(0, 4000) : "";
-        const prompt = scribeExtractPrompt(transcript, specialtyPrompt ? { specialtyPrompt } : undefined);
+        // DELTA mode (body.delta + body.priorDraft): `transcript` is only the speech since the last
+        // call whose result the client actually applied, and priorDraft is the note built from the
+        // earlier speech. Cost then scales with consult length instead of its SQUARE. The prior draft
+        // arrives in the REQUEST BODY, so it goes through the same whitelist+cap as a model reply
+        // before it is ever put in a prompt. The client's FINAL (Pause/Stop) refine never sets this:
+        // that one still re-reads the whole transcript with no prior draft, and stays authoritative.
+        const _prior = body.delta ? sanitizeScribeOutput({
+          emrFields: (body.priorDraft && body.priorDraft.emrFields) || body.priorDraft || {},
+          suggestions: (body.priorDraft && body.priorDraft.suggestions) || {},
+        }) : null;
+        const _isDelta = !!(_prior && Object.keys(_prior.emrFields).length);
+        const prompt = scribeExtractPrompt(transcript, (specialtyPrompt || _isDelta) ? { specialtyPrompt, priorDraft: _isDelta ? _prior : null } : undefined);
         // OUT_BASE (1100) is calibrated for a CHAT answer. This reply is not one: it must carry a
         // faithful English translation of the WHOLE transcript ("en", ~1 token per 4 transcript
         // chars), PLUS every emrFields value, PLUS a verbatim source sentence for each populated
@@ -2120,8 +2131,20 @@ export async function onRequest(context) {
         // is withheld whenever it would be incomplete -- see attachGrounding. SCRIBE_GROUND="0"
         // (default ON) turns the whole signal off without touching the prompt.
         const _parsed = parseScribeJson(text);
-        const sanitized = attachGrounding(transcript, sanitizeScribeOutput(_parsed.parsed), {
-          truncated: _parsed.truncated || /MAX_TOKENS/i.test((_lastGenMeta && _lastGenMeta.finishReason) || ""),
+        const _truncated = _parsed.truncated || /MAX_TOKENS/i.test((_lastGenMeta && _lastGenMeta.finishReason) || "");
+        const _out = sanitizeScribeOutput(_parsed.parsed);
+        if (_isDelta) {
+          // Merge the delta into the running draft and return the WHOLE merged draft (same JSON
+          // shape), so the client applies it exactly as it applies a full refine. `en` is the delta's
+          // translation only -- the client accumulates it. Grounding is withheld: a sources map
+          // covering only the new speech would badge every earlier field as unsupported.
+          const contradictions = flagContradictions(transcript, _prior);
+          const merged = mergeScribeDraft(_prior, _out, { contradictions });
+          if (contradictions.length) merged.contradictions = contradictions;
+          return json({ kind: "opd-scribe", ...attachGrounding(transcript, merged, { truncated: _truncated, disabled: true }), mode: "opd-scribe", delta: true });
+        }
+        const sanitized = attachGrounding(transcript, _out, {
+          truncated: _truncated,
           disabled: String(env && env.SCRIBE_GROUND) === "0",
         });
         return json({ kind: "opd-scribe", ...sanitized, mode: "opd-scribe" });

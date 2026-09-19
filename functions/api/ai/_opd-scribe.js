@@ -34,10 +34,20 @@ const YES_NO_KEYS = new Set([
 
 export function scribeExtractPrompt(transcript, opts) {
   const specialtyPrompt = opts && typeof opts.specialtyPrompt === "string" ? opts.specialtyPrompt.trim() : "";
+  // DELTA mode (opts.priorDraft): the caller has already had the earlier speech extracted and is
+  // sending only what has been said since. The draft so far is bounded by the field list; the
+  // transcript is not, which is the whole point -- see the delta block at the end of this file.
+  const pd = opts && opts.priorDraft && typeof opts.priorDraft === "object"
+    ? (opts.priorDraft.emrFields && typeof opts.priorDraft.emrFields === "object" ? opts.priorDraft.emrFields : opts.priorDraft)
+    : null;
+  const priorJson = pd ? JSON.stringify(pd) : "";
+  const delta = !!priorJson && priorJson !== "{}";
   return "You are an expert OPD scribe turning a doctor-patient consultation transcript into a structured clinical note.\n" +
     "Return ONLY JSON: {\"en\":\"\", \"emrFields\":{...}, \"sources\":{\"<emrFieldKey>\":\"<verbatim transcript sentence>\"}, " +
     "\"suggestions\":{\"provisionalDx\":\"\",\"ddx\":[],\"investigations\":[]}}.\n" +
-    "\"en\" = a FAITHFUL English translation of the ENTIRE transcript, verbatim meaning, keeping ALL " +
+    (delta
+      ? "\"en\" = a FAITHFUL English translation of the NEW SPEECH below ONLY (not of the already-captured note), verbatim meaning, keeping ALL "
+      : "\"en\" = a FAITHFUL English translation of the ENTIRE transcript, verbatim meaning, keeping ALL ") +
     "spoken vitals/numbers/units exactly (e.g. 'BP 120/80, pulse 88, temp 101, SpO2 96') — this is used " +
     "for on-device structured extraction, so preserve numbers and clinical terms; do not summarise it.\n" +
     "OUTPUT LANGUAGE — CRITICAL: write EVERY emrFields value and EVERY suggestion in clear clinical ENGLISH. " +
@@ -81,11 +91,21 @@ export function scribeExtractPrompt(transcript, opts) {
     "SOURCES — CRITICAL: for every emrFields key you populate, add the SAME key to \"sources\" with one sentence copied " +
     "VERBATIM from the transcript that supports that field's content. Never paraphrase, translate or invent a source " +
     "sentence; if you cannot point to a supporting sentence, do not populate the field.\n" +
+    (delta
+      ? "ALREADY CAPTURED — CRITICAL: the note below was built from the EARLIER part of THIS SAME consultation. " +
+        "Output ONLY what the NEW SPEECH adds or corrects: include an emrFields key ONLY if the new speech says something " +
+        "about it, and NEVER repeat captured content unchanged. An OMITTED key means 'nothing new about this' — it never " +
+        "means 'clear it', so never output an empty value to erase something already captured. If the new speech CORRECTS " +
+        "or contradicts the captured note ('actually no fever', 'she stopped the metformin'), DO output the corrected value " +
+        "for that field.\n"
+      : "") +
     "RULES: use ONLY what is explicitly said; NEVER invent a diagnosis, symptom, finding, drug, dose or investigation. " +
     "PATIENT-REPORTED complaints/history go to presentHx/pastHx (never to vitals/exam or as confirmed findings). " +
     "ddx = a short reasonable differential FOR THE DOCTOR TO CONSIDER (label as consideration, not fact). " +
     "investigations = tests a clinician would reasonably consider for the stated picture. No prose outside JSON.\n\n" +
-    "=== TRANSCRIPT ===\n" + transcript;
+    (delta
+      ? "=== ALREADY CAPTURED (the note so far) ===\n" + priorJson + "\n\n=== NEW SPEECH ===\n" + transcript
+      : "=== TRANSCRIPT ===\n" + transcript);
 }
 
 export function sanitizeScribeOutput(parsed) {
@@ -215,6 +235,80 @@ export function flagContradictions(transcript, sanitized) {
       out.push({ field: key, term, reason });
     });
   });
+  return out;
+}
+
+/* ── incremental (delta) refine: merging one pass into the running draft ─────────────────────────
+ * The cloud refine used to re-read the WHOLE growing transcript every 45 s, so a consult's input
+ * cost grew with the SQUARE of its length. A background refine now sends only the speech since the
+ * last call whose result was actually applied, plus the draft so far (bounded by the field list),
+ * and this merges the reply back in.
+ *
+ * The merge semantics are maik-local.js scribeMerge/mergeText, deliberately duplicated rather than
+ * re-derived so the on-device and cloud engines agree (maik-local.js is an ES5 browser IIFE with no
+ * export the Worker could import, and it is not ours to edit). Keep the two in step.
+ *
+ * SAFETY (a dropped clinical fact is the failure mode here):
+ *   - an ABSENT or blank key in `next` means "nothing new about this" -> prev is kept, never cleared;
+ *   - a narrative field ACCUMULATES (token-containment dedupe), so a delta can never shorten one;
+ *   - a Yes/No field only flips Yes -> No when `opts.contradictions` (flagContradictions over the NEW
+ *     speech) shows the new speech really negates it. A small model re-emitting every key as "No" is
+ *     exactly how a stated history got erased in review; an explicit "actually no fever" still wins.
+ *   - `sources` is NOT merged: a citation map covering only the delta would badge every earlier field
+ *     as unsupported in the client's review panel, so the delta path withholds grounding entirely
+ *     (attachGrounding with disabled:true) and the final full refine produces the real one. */
+const SCRIBE_TEXT_CAP = 2000, SCRIBE_EN_CAP = 6000;
+function draftWords(s) { return (String(s || "").toLowerCase().match(/[a-z0-9]{3,}/g) || []); }
+function mostlyContained(a, b) {
+  const wb = draftWords(b); if (!wb.length) return true;
+  const have = new Set(draftWords(a));
+  let hit = 0; wb.forEach(w => { if (have.has(w)) hit++; });
+  return hit / wb.length >= 0.8;
+}
+function mergeText(a, b) {
+  a = a || ""; b = b || "";
+  if (!a) return b.slice(0, SCRIBE_TEXT_CAP);
+  if (!b || mostlyContained(a, b)) return a;
+  return (a + "; " + b).slice(0, SCRIBE_TEXT_CAP);
+}
+function unionList(a, b, cap) {
+  const seen = new Set(), out = [];
+  (a || []).concat(b || []).forEach(x => { const k = String(x).toLowerCase(); if (!seen.has(k)) { seen.add(k); out.push(x); } });
+  return out.slice(0, cap || 12);
+}
+export function mergeScribeDraft(prev, next, opts) {
+  prev = prev || {}; next = next || {};
+  const pf = prev.emrFields || {}, nf = next.emrFields || {};
+  const ps = prev.suggestions || {}, ns = next.suggestions || {};
+  // flagContradictions reports the field whose TEXT asserts the negated term, which for a comorbidity
+  // is the details sibling ("dmDetails: Type 2 DM on metformin" vs the bare "Yes" in dm). Map it back
+  // to its Yes/No key so "she stopped the metformin" can actually overturn dm.
+  const negated = new Set();
+  ((opts && opts.contradictions) || []).forEach(c => {
+    const f = c && c.field; if (!f) return;
+    negated.add(f);
+    if (/Details$/.test(f)) negated.add(f.replace(/Details$/, ""));
+  });
+  const out = { emrFields: {}, suggestions: { ddx: [], investigations: [] } };
+  EMR_FIELD_KEYS.forEach(k => { if (typeof pf[k] === "string" && pf[k]) out.emrFields[k] = pf[k]; });
+  EMR_FIELD_KEYS.forEach(k => {
+    const v = nf[k];
+    if (typeof v !== "string" || !v.trim()) return;          // absent/blank: nothing new, never a clear
+    if (YES_NO_KEYS.has(k)) {
+      // "No" may only overturn a recorded "Yes" when the new speech explicitly negates it.
+      if (v === "No" && out.emrFields[k] === "Yes" && !negated.has(k)) return;
+      out.emrFields[k] = v; return;
+    }
+    out.emrFields[k] = mergeText(out.emrFields[k], v);       // ADD/UPDATE only -- never shorter than prev
+  });
+  const en = mostlyContained(prev.en || "", next.en || "") ? (prev.en || "") : ((prev.en ? prev.en + " " : "") + (next.en || ""));
+  if (en) out.en = en.slice(0, SCRIBE_EN_CAP);
+  const alc = next.alcoholDetail || prev.alcoholDetail;
+  if (alc) out.alcoholDetail = alc;
+  const dx = ns.provisionalDx || ps.provisionalDx;
+  if (dx) out.suggestions.provisionalDx = dx;                // a single statement: the newest wins
+  out.suggestions.ddx = unionList(ps.ddx, ns.ddx);
+  out.suggestions.investigations = unionList(ps.investigations, ns.investigations);
   return out;
 }
 

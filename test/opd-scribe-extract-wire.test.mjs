@@ -73,6 +73,7 @@ function harness(reply, finishReason) {
     if (u.indexOf("generateContent") >= 0) {
       calls.gen++;
       try { calls.maxOutputTokens = JSON.parse(init.body).generationConfig.maxOutputTokens; } catch { /* not under test */ }
+      calls.body = String(init && init.body || "");
       return new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: reply }] }, finishReason: finishReason || "STOP" }] }),
         { status: 200, headers: { "content-type": "application/json" } });
     }
@@ -229,5 +230,93 @@ test("SCRIBE_GROUND=0 removes the signal, leaving the extraction intact", async 
     assert.equal(json.emrFields.cc, "Fever x 3 days, cough x 2 days");
     assert.equal(json.sources, undefined);
     assert.equal(json.ungroundedFields, undefined);
+  } finally { h.restore(); }
+});
+
+/* ── incremental (delta) refine, end to end ─────────────────────────────────────────────────── */
+
+const PRIOR = { cc: "Fever x 3 days", presentHx: "Fever for 3 days, no chills", dm: "Yes" };
+const DELTA_REPLY = JSON.stringify({
+  en: "And since this morning she has been vomiting.",
+  emrFields: { presentHx: "Vomiting twice since this morning" },
+  suggestions: { provisionalDx: "", ddx: [], investigations: ["CBC"] },
+});
+
+test("delta: only the new speech is prompted, the captured note rides along, and the WHOLE merged draft comes back", async () => {
+  const h = harness(DELTA_REPLY);
+  try {
+    const { json } = await extract(h, { sec: 45, transcript: "and since this morning she is vomiting", delta: 1, priorDraft: { emrFields: PRIOR } });
+    assert.match(h.calls.body, /=== ALREADY CAPTURED \(the note so far\) ===/);
+    assert.match(h.calls.body, /=== NEW SPEECH ===/);
+    assert.doesNotMatch(h.calls.body, /=== TRANSCRIPT ===/, "the whole transcript is NOT resent");
+    assert.equal(json.delta, true);
+    assert.equal(json.emrFields.cc, "Fever x 3 days", "an untouched field survives the delta");
+    assert.equal(json.emrFields.dm, "Yes");
+    assert.match(json.emrFields.presentHx, /Fever for 3 days/, "the earlier history is not shortened");
+    assert.match(json.emrFields.presentHx, /Vomiting twice/, "and the new history is added");
+    assert.equal(json.en, "And since this morning she has been vomiting.", "`en` covers the delta only - the client accumulates it");
+    assert.equal(json.sources, undefined, "grounding is withheld on a delta (a partial map would mis-badge earlier fields)");
+    assert.equal(json.ungroundedFields, undefined);
+    assert.equal(await secondsCharged(h.kv), 45, "the meter still charges the client's delta seconds");
+  } finally { h.restore(); }
+});
+
+test("delta: a reply that says nothing (or is unparseable) leaves the captured note exactly as it was", async () => {
+  for (const reply of ['{"emrFields":{}}', "the model answered in prose", '{"emrFields":{"cc":"","presentHx":"   "}}']) {
+    const h = harness(reply);
+    try {
+      const { json } = await extract(h, { sec: 45, transcript: "mm hmm", delta: 1, priorDraft: { emrFields: PRIOR } });
+      assert.deepEqual(json.emrFields, PRIOR, "nothing may be blanked by an empty delta (" + reply + ")");
+    } finally { h.restore(); }
+  }
+});
+
+test("delta: an explicit negation in the new speech can overturn a captured Yes, and is reported", async () => {
+  const reply = JSON.stringify({ en: "She stopped metformin last month.", emrFields: { dm: "No" }, suggestions: {} });
+  const h = harness(reply);
+  try {
+    const { json } = await extract(h, {
+      sec: 45, transcript: "actually she stopped metformin last month",
+      delta: 1, priorDraft: { emrFields: { dm: "Yes", dmDetails: "Type 2 DM on metformin 500mg BD" } },
+    });
+    assert.equal(json.emrFields.dm, "No", "the newer, explicit statement wins");
+    assert.equal(json.emrFields.dmDetails, "Type 2 DM on metformin 500mg BD", "but no text is deleted");
+    assert.ok((json.contradictions || []).some((c) => c.field === "dmDetails"), "and the client is told why: " + JSON.stringify(json.contradictions));
+  } finally { h.restore(); }
+});
+
+test("delta: a bare 'No' with no negation in the speech does NOT erase a captured history", async () => {
+  const reply = JSON.stringify({ en: "ok", emrFields: { dm: "No", htn: "No" }, suggestions: {} });
+  const h = harness(reply);
+  try {
+    const { json } = await extract(h, { sec: 45, transcript: "let us check the blood pressure", delta: 1, priorDraft: { emrFields: { dm: "Yes" } } });
+    assert.equal(json.emrFields.dm, "Yes", "a model re-emitting every key must not flip a stated history");
+    assert.equal(json.emrFields.htn, "No", "a key the draft did not have is simply recorded");
+  } finally { h.restore(); }
+});
+
+test("no delta flag, or an empty prior draft, is the full path unchanged (grounding and all)", async () => {
+  for (const body of [{ sec: 45 }, { sec: 45, delta: 1 }, { sec: 45, delta: 1, priorDraft: { emrFields: {} } }]) {
+    const h = harness(GOOD_REPLY);
+    try {
+      const { json } = await extract(h, body);
+      assert.match(h.calls.body, /=== TRANSCRIPT ===/);
+      assert.doesNotMatch(h.calls.body, /ALREADY CAPTURED/);
+      assert.equal(json.delta, undefined);
+      assert.ok(Array.isArray(json.ungroundedFields), "the full path still grounds: " + JSON.stringify(body));
+    } finally { h.restore(); }
+  }
+});
+
+test("a hostile priorDraft cannot reach the prompt unfiltered", async () => {
+  const h = harness(DELTA_REPLY);
+  try {
+    const { json } = await extract(h, {
+      sec: 45, transcript: "new speech", delta: 1,
+      priorDraft: { emrFields: { cc: "Fever", notAFieldAtAll: "a key that is not on the whitelist", presentHx: "y".repeat(9000) } },
+    });
+    assert.doesNotMatch(h.calls.body, /notAFieldAtAll/);
+    assert.equal(json.emrFields.notAFieldAtAll, undefined);
+    assert.ok(json.emrFields.presentHx.length <= 2000, "capped like any other field");
   } finally { h.restore(); }
 });

@@ -199,3 +199,49 @@ and what was done, all of it measured rather than argued:
 
 The audit's own caveat stands: the 5-10x low-end-Android multiplier behind item 2 is an estimate from
 a Mac baseline, not a device measurement. Confirm on hardware.
+
+## 2026-09-20 — the cloud refine became incremental (`smd_scribe_delta`, DEFAULT ON)
+
+Every refine used to resend the WHOLE growing transcript, so a consult's INPUT cost grew with the
+SQUARE of its length. A BACKGROUND refine now sends only the speech since the last call whose result
+was actually applied, plus the draft so far (bounded by the field list, not by consult length).
+
+**The FINAL refine (Pause/Stop) is deliberately unchanged**: whole transcript, no prior draft, a fresh
+authoritative extraction. That is the safety net that makes the delta path acceptable — do not
+"optimise" it. `smd_scribe_delta="off"` (localStorage only) restores full-transcript-every-time.
+
+Wire (`/api/ai/extract`, kind `opd-scribe`):
+- FULL (unchanged): `{ transcript: <whole>, sec, specialtyPrompt? }` -> `{ en, emrFields, sources?,
+  ungroundedFields?, suggestions, … }`.
+- DELTA: `{ transcript: <new speech only>, delta: 1, priorDraft: { emrFields }, sec, specialtyPrompt? }`
+  -> the same shape plus `delta: true`, where `emrFields` is the WHOLE merged draft, `en` is the
+  translation of the NEW speech only, and grounding (`sources`/`ungroundedFields`) is WITHHELD — a
+  citation map covering only the new speech would make opd-emr.js badge every earlier field
+  "not found in the recording".
+
+Key code:
+- `functions/api/ai/_opd-scribe.js` — `scribeExtractPrompt(t, {priorDraft})` (delta prompt; no
+  priorDraft is byte-identical to before) and the pure `mergeScribeDraft(prev, next, {contradictions})`.
+- `functions/api/ai/[[path]].js` — the delta branch; `priorDraft` is REQUEST-BODY input so it goes
+  through `sanitizeScribeOutput` (whitelist + 2000-char cap) before it reaches a prompt.
+- `opd-emr.js` — `scribeDeltaOn`, `_deltaPlan`/`_deltaPrep` (what to send), `_enAccum` (`en`
+  accumulates across deltas; a full pass still replaces it), `_draftAccum` (`st.scribeDraft`),
+  `_sentUpTo`/`_sentCovered` (advanced ONLY when a result is applied).
+
+Merge rules (a port of `maik-local.js` `scribeMerge`/`mergeText`, duplicated on purpose so the two
+engines agree; maik-local is a browser IIFE the Worker cannot import): absent/blank key = "nothing new"
+(never a clear); narrative fields ACCUMULATE with token-containment dedupe (so a delta can never
+shorten one); `Yes` -> `No` only when `flagContradictions` over the NEW speech shows it is really
+negated (a `xDetails` hit flips its `x` sibling); ddx/investigations unioned; latest provisionalDx wins.
+
+MEASURED (`node test/bench/scribe-delta-bench.mjs`, 700 transcript chars/min, a refine every 45 s):
+transcript characters sent per consult 14,525 -> 6,650 (5 min), 54,775 -> 13,825 (10 min),
+159,000 -> 21,650 (20 min, with today's 8000-char client cap). As a share of the WHOLE prompt the
+saving is smaller — 2% / 15% / 27% — because the ~5,200-char instruction preamble is resent on every
+call in both modes. That preamble is now the dominant input cost and is the next lever.
+
+Known, accepted: a sentence split across a delta boundary is seen only in its second half by the LIVE
+draft (no overlap is sent); the final full pass reads it whole. `SMD_AI.extract` still slices the
+transcript to 8000 chars, so the FINAL refine of a consult longer than ~11 minutes sees only its first
+8000 characters — that is pre-existing (reasoning.js) and unchanged here, but it is now the biggest
+remaining loss in the path. Tests: `test/opd-scribe-delta.test.mjs`, `test/opd-emr-scribe-delta.test.mjs`.

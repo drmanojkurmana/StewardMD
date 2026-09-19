@@ -1191,7 +1191,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, scribeFilledFields: [], scribeGround: null, scribeOfflineDraft: false, scribeReview: {}, scribeDrugFixes: [], scribeDrugFixUndone: {}, scribeDrugFixSrc: "", scribeRx: null, scribeSafety: null, scribeIcd: null, scribeSpeakerFix: {}, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, protoQuery: "", oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, scribeFilledFields: [], scribeGround: null, scribeOfflineDraft: false, scribeReview: {}, scribeDrugFixes: [], scribeDrugFixUndone: {}, scribeDrugFixSrc: "", scribeRx: null, scribeSafety: null, scribeIcd: null, scribeSpeakerFix: {}, scribeDraft: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, protoQuery: "", oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
   /* Keep the scroll position across a repaint.
    *
    * Every action in a consultation repaints the whole overlay with one innerHTML swap, and the new
@@ -1678,7 +1678,8 @@
     st.voiceTranscript = ""; st.voiceTranscriptEn = ""; st.scribeSuggestions = null; st.scribeStats = null; st.dictatedInv = []; st._notesSavedText = "";
     st.scribeFilledFields = []; st.scribeGround = null; st.scribeOfflineDraft = false; st.scribeReview = {};
     st.scribeDrugFixes = []; st.scribeDrugFixUndone = {}; st.scribeDrugFixSrc = ""; st.scribeRx = null; st.scribeSafety = null; st.scribeIcd = null; st.scribeSpeakerFix = {};
-    try { _lastFullTranscript = ""; _priorTranscript = ""; _lastRefinedTranscript = ""; } catch (e) {}
+    st.scribeDraft = null;                                   // and the delta refine starts from zero again
+    try { _lastFullTranscript = ""; _priorTranscript = ""; _lastRefinedTranscript = ""; _sentUpTo = 0; _sentCovered = ""; } catch (e) {}
     st.notesView = "raw";
     paint();
     try { toast("VoiceNote cleared"); } catch (e) {}
@@ -3505,10 +3506,10 @@
   // Never reset - a monotonic counter also discards a refine left in flight by a previous session.
   var _refineSeq = 0, _appliedSeq = 0;
   function _refineStale(ticket, appliedSeq) { return ticket < appliedSeq; }   // PURE, exposed for tests
-  function applyIfFresh(ticket, r, transcript, offline) {
+  function applyIfFresh(ticket, r, transcript, offline, isDelta) {
     if (_refineStale(ticket, _appliedSeq)) return false;
     _appliedSeq = ticket;
-    applyScribeResult(r, transcript, offline);
+    applyScribeResult(r, transcript, offline, isDelta);
     return true;
   }
   // FIX 3: a throw out of applyScribeResult (the rx / safety / ICD wiring, the grounder) is a BUG in
@@ -3544,6 +3545,63 @@
       if (isFinal) { try { toast("No internet connection, and the on-device draft did not work either. The transcript is kept - try again."); } catch (e) {} }
     });
   }
+  // ---- Incremental (delta) refine: smd_scribe_delta, DEFAULT ON ---------------------------------
+  // Every background refine used to resend the WHOLE growing transcript, so a consult's input cost
+  // grew with the SQUARE of its length (a 20-minute consult sent ~10x the text it needed to). A
+  // background refine now sends only the speech since the last call whose result was actually
+  // APPLIED, plus the draft so far — which is bounded by the field list, not by consult length.
+  // The FINAL refine (Pause/Stop) is deliberately untouched: whole transcript, no prior draft, a
+  // fresh authoritative extraction. That is the safety net that makes the delta path acceptable.
+  // OFF restores today's full-transcript-every-time behaviour exactly.
+  function scribeDeltaOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_delta") === "off") return false; } catch (e) {} return true; }
+  var _sentUpTo = 0, _sentCovered = "";   // chars of the PREPARED text already extracted AND applied
+  // PURE: what this refine should send. Falls back to the whole text whenever anything is off — a
+  // failed/stale/never-applied call leaves _sentUpTo where it was, so the speech it covered is
+  // resent by the next call. Losing speech is worse than resending it. Exposed for tests.
+  // The client clips a transcript before sending (reasoning.js SMD_AI.extract). Past this many
+  // characters a "full" send is not full at all: the tail is dropped, and the tail of a consult is
+  // where the diagnosis, the plan and the prescription are spoken. 16000 is the server's own
+  // MAX_IN_CHARS default (functions/api/ai/[[path]].js).
+  var SCRIBE_MAX_CHARS = 16000;
+  function _deltaPlan(text, covered, sentUpTo, opts) {
+    text = String(text == null ? "" : text);
+    var full = { delta: false, text: text, to: text.length };
+    if (!opts || !opts.flagOn || !opts.hasDraft) return full;
+    // A LONG final pass is the exception to "the final refine always sends everything": sending
+    // everything would silently drop the end of the consultation at the clip above, whereas the
+    // draft already holds what the earlier passes extracted. Delta plus that draft loses nothing.
+    if (opts.isFinal && !(text.length > (opts.maxChars || SCRIBE_MAX_CHARS) && sentUpTo)) return full;
+    if (!sentUpTo || sentUpTo > text.length) return full;
+    if (text.slice(0, sentUpTo) !== covered) return full;    // transcript edited or replaced: start clean
+    return { delta: true, text: text.slice(sentUpTo), to: text.length };
+  }
+  // PURE: accumulate the English translation across deltas. A delta's `en` covers only its own
+  // speech, so REPLACING would throw away every earlier translation — which both the VoiceNote Q&A
+  // view and the deterministic vitals extractor read. Exposed for tests.
+  function _enAccum(prev, add) {
+    prev = String(prev == null ? "" : prev); add = String(add == null ? "" : add).trim();
+    if (!add) return prev;
+    if (!prev) return add.slice(0, 24000);
+    if (prev.indexOf(add) >= 0) return prev;                 // a resent delta must not duplicate
+    return (prev + " " + add).slice(0, 24000);
+  }
+  // PURE: the running draft that rides up as priorDraft. ADD/UPDATE only — an absent or empty key
+  // never clears a field already captured. Exposed for tests.
+  function _draftAccum(prev, ef) {
+    var out = {}, k;
+    for (k in (prev || {})) if (Object.prototype.hasOwnProperty.call(prev, k)) out[k] = prev[k];
+    for (k in (ef || {})) if (Object.prototype.hasOwnProperty.call(ef, k) && ef[k]) out[k] = ef[k];
+    return out;
+  }
+  // Decide delta vs full for this send and attach the delta body keys. Kept out of doRefine's body
+  // (see the NOTE below about test/maik-local-queue.test.mjs reading its first 3000 characters).
+  function _deltaPrep(p, isFinal) {
+    var has = !!(st.scribeDraft && Object.keys(st.scribeDraft).length);
+    p.opts.maxChars = SCRIBE_MAX_CHARS;                      // raise the client clip to what the server accepts
+    var plan = _deltaPlan(p.text, _sentCovered, _sentUpTo, { flagOn: scribeDeltaOn(), isFinal: isFinal, hasDraft: has, maxChars: SCRIBE_MAX_CHARS });
+    if (plan.delta) { p.opts.delta = 1; p.opts.priorDraft = { emrFields: st.scribeDraft }; }
+    return plan;
+  }
   // `scribeSendPrep` (flag smd_scribe_clinical) decides what is actually SENT: the transcript with
   // misheard drug names corrected and the chosen specialty's prompt attached. Flag off or modules
   // absent -> the transcript unchanged and no extra body key. See its own comment below.
@@ -3556,8 +3614,9 @@
     if (_lastRefinedTranscript.indexOf(transcript) === 0) { finishProcessing(); return; }   // no new content since the last refine — genuinely nothing to say
     _lastRefinedTranscript = transcript;
     var ticket = ++_refineSeq, isFinal = _finishPending;   // captured at CALL time (see applyIfFresh)
-    var p = scribeSendPrep(transcript);
-    return G.SMD_AI.extract(p.text, "opd-scribe", p.opts).then(function (r) {
+    var p = scribeSendPrep(transcript), pl = _deltaPrep(p, isFinal);
+    if (pl.delta && !pl.text.trim()) { _unsendScribeSec(); finishProcessing(); return; }
+    return G.SMD_AI.extract(pl.text, "opd-scribe", p.opts).then(function (r) {
       if (r && r.error === "quota") { toast(r.message || "MaiK Scribe limit reached. Try again later."); try { stopVoice(); } catch (e) {} return; }
       // A named refusal (Local mode, model lacks the capability): say it once per distinct reason.
       // It used to be once per SESSION, so every later refine fell through to the generic message
@@ -3585,7 +3644,9 @@
         }
         return;
       }
-      applyIfFresh(ticket, r, transcript, false);
+      // The "sent up to" offset advances ONLY here, on a result that was really applied: a failed,
+      // timed-out or stale-discarded call leaves it where it was and its speech rides in the next call.
+      if (applyIfFresh(ticket, r, transcript, false, pl.delta)) { _sentUpTo = p.text.length; _sentCovered = p.text; }
     }, function (e) {
       // FIX 3: the REJECTION handler of the network call ONLY. It used to be a .catch chained AFTER
       // the handler above, so a throw inside applyScribeResult (a bug in the rx/safety/ICD wiring)
@@ -3598,8 +3659,12 @@
   // The successful-refine tail, shared by the cloud path and the item-13 offline fallback. `offline`
   // (item 13b) marks the draft as on-device so _applyRefine can flag it for the UI - a doctor must
   // never mistake a no-network draft for the full-quality cloud one.
-  function applyScribeResult(r, transcript, offline) {
+  function applyScribeResult(r, transcript, offline, isDelta) {
     var sg = r.suggestions || {};
+    // The running draft the NEXT delta sends up as priorDraft. Accumulated, never replaced, so an
+    // old worker that ignored `delta` (and answered about the delta text alone) degrades to a
+    // smaller prompt context rather than to a forgotten note.
+    st.scribeDraft = _draftAccum(st.scribeDraft, r.emrFields);
     var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
       : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
     // Item 14 seam: the server extract may (another agent is adding this) return which fields it
@@ -3615,7 +3680,10 @@
     // deterministic extractor on the LLM's faithful English translation — still no LLM-invented numbers.
     var enText = (r && r.en) || transcript;
     if (enText) {
-      if (r && r.en) st.voiceTranscriptEn = r.en;                       // full English translation-so-far -> powers the Q&A speaker view
+      // Full pass: `en` is the whole transcript translated, so it replaces (today's behaviour).
+      // Delta pass: `en` covers ONLY this delta's speech, so it is APPENDED — replacing would throw
+      // away the earlier translation the Q&A view and the vitals extractor both read.
+      if (r && r.en) st.voiceTranscriptEn = isDelta ? _enAccum(st.voiceTranscriptEn, r.en) : r.en;
       var reducer = (G.SMD_AMBIENT && G.SMD_AMBIENT.reduce) ? G.SMD_AMBIENT.reduce
         : ((G.SMD_VVITALS && G.SMD_EMRMAP) ? function (t, o) { return G.SMD_EMRMAP.merge(G.SMD_VVITALS.extract(t), o); } : null);
       if (reducer) {
@@ -4157,14 +4225,17 @@
   // audio captured, not by how often we call it (functions/_ai_usage.js scribeChargeSec), so this must
   // be the DELTA: every refine resends the whole growing transcript, and billing that in full would
   // charge the same minute again on every pass. Stamped only when a call is really sent.
-  var _lastScribeSentAt = 0;
+  var _lastScribeSentAt = 0, _prevScribeSentAt = 0;
   function scribeSec() {
     var t = now();
     var prev = _lastScribeSentAt || st.voiceStartedAt || t;
-    _lastScribeSentAt = t;
+    _prevScribeSentAt = _lastScribeSentAt; _lastScribeSentAt = t;
     var sec = Math.round((t - prev) / 1000);
     return (sec > 0 && sec < 3600) ? Math.min(sec, 300) : 0;   // the server clamps too; 0 = let it use its floor
   }
+  // A prepared send that is then ABANDONED (a delta with nothing new to say) must not consume the
+  // meter's clock: the seconds it covered belong to the next call that actually goes out.
+  function _unsendScribeSec() { _lastScribeSentAt = _prevScribeSentAt; }
 
   function scribeSendPrep(transcript) {
     var out = { text: transcript, opts: { sec: scribeSec() } };
@@ -4519,6 +4590,6 @@
   // support/debug screen) can read or wipe it without reaching into OPDEMR internals.
   G.SMD_SCRIBE_FEEDBACK = { list: scribeFeedbackRead, clear: function () { scribeFeedbackWrite([]); } };
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum };
 })();
