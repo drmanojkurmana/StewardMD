@@ -83,6 +83,7 @@ const SUITES = [
   "test/medcore-models.test.mjs",
   "test/medcore-gbm.test.mjs",
   "test/medcore-decide.test.mjs",
+  "test/medcore-shadow.test.mjs",
 ];
 
 /** Runs node --test with the TAP reporter and returns a flat list of {name, passed}. */

@@ -24,6 +24,7 @@
  */
 
 const FLAG = "smd_medcore";
+const SHADOW_FLAG = "smd_medcore_shadow";
 const PACK_V = "medcore1";
 
 let PACKS = null;
@@ -33,6 +34,14 @@ function flagOn() {
   try {
     const F = window.SMD_MEDCORE_FLAGS;
     return !!(F && F.bool && F.bool(FLAG));
+  } catch (e) { return false; }
+}
+
+/* The shadow flag is meaningless without the master flag, so nothing reads it alone. */
+function shadowOn() {
+  try {
+    const F = window.SMD_MEDCORE_FLAGS;
+    return !!(F && F.shadowActive && F.shadowActive());
   } catch (e) { return false; }
 }
 
@@ -97,6 +106,35 @@ async function install() {
 
     labelFor: missingMod.labelFor
   };
+
+  /* Shadow (smd_medcore_shadow, and only with smd_medcore). It reaches nobody: no panel, no prompt,
+   * no notification, no store, nothing emitted back onto the bus. Installed from outside, onto a
+   * bus the caller hands it, so not loading this file removes it completely.
+   *
+   * It has no artifacts to load. Every artifact that exists was trained on synthetic data and
+   * medcore-models.js refuses all of them, so a shadow run today records ABSTAIN with
+   * MODEL_UNAVAILABLE on every decision - which is the refusal working, not the wiring failing.
+   * When a real artifact exists, it is handed to attachShadow() and nothing else changes. */
+  if (shadowOn()) {
+    try {
+      const [shadowMod, outcomesPack] = await Promise.all([
+        import("/medcore/medcore-shadow.js"),
+        fetch("/medcore/data/outcomes.json?v=" + PACK_V).then((r) => r.json())
+      ]);
+      const shadow = shadowMod.createShadow({
+        outcomes: outcomesPack,
+        artifacts: {},                    // nothing admissible exists yet, by design
+        stateFor: function (payload) {
+          // The caller supplies the adapter from a bus event to a built state; without one there is
+          // nothing to evaluate, and inventing a state here would be inventing a patient.
+          try { return (API._stateFor ? API._stateFor(payload) : null); } catch (e) { return null; }
+        }
+      });
+      API.shadow = shadow;
+      API.attachShadow = function (bus, opts) { return shadow.attach(bus, opts); };
+      API.setStateAdapter = function (fn) { API._stateFor = fn; };
+    } catch (e) { /* a shadow that failed to install is a missing diagnostic, never a broken app */ }
+  }
 
   window.SMD_MEDCORE = API;
   try { window.dispatchEvent(new Event("smd:medcore-ready")); } catch (e) {}

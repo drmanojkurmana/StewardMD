@@ -30,7 +30,9 @@ HAZ-ML-02 control is how one of them quietly stops matching. It is one function,
 | 11 outcomes | done | `medcore/data/outcomes.json` (5 outcomes, unapproved) + `medcore/medcore-outcomes.js` + `test/medcore-labels.test.mjs`. HAZ-ML-02 |
 | 12 DATA GATE | **still BLOCKED for real data** | No hospital dataset, no access approval, no adjudication, no named clinical approver |
 | 13 to 17 | **built, exercised on synthetic data only** | `backend/medcore/` : extract schema, synthetic cohort, featurize-by-replay, threshold baseline + logistic + **GBM** (`gbm.mjs`, native missing branch, monotone constraints, early stopping), chosen calibrator, the Phase 4 gates, artifact export. App side: `medcore-models.js` (admits or refuses), `medcore-calibration.js` (confidence, OOD, abstention policy), `medcore-decide.js` (the typed decision) |
-| 18 to 21 | not started | Shadow wiring onward needs an artifact that passed its gates on REAL data. None exists, and `decide()` correctly abstains on every synthetic one |
+| 18 | **built** | `medcore/medcore-shadow.js` + the shadow half of `medcore-boot.js`. Attaches to a real `ClinicalEventBus`, debounces 60 s per patient on wall time, records statuses to a bounded ring buffer, emits nothing back, reaches nobody |
+| 19 | **wired, nothing to register** | The shadow hands an OK decision to `wardsynq-mlops.js` `recordShadowPrediction`. An abstention is never recorded as a prediction, and today every decision is an abstention |
+| 20 to 21 | not started | The shadow period and the clinician-visible evaluation need an artifact that passed its gates on REAL data. None exists, and `decide()` correctly abstains on every synthetic one |
 
 **What a clinician gets today, with the flag on:** two deterministic lists on the ICU overview,
 "what changed" and "missing information". No probability, no alert, no prediction, nothing written.
