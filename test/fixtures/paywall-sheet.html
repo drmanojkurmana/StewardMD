@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>paywall sheet fixture</title>
+<!-- Host page for test/run-paywall-ui.mjs: the REAL pro-paywall.js on a real page. Only the network
+     and the Firebase user are stubbed; /api/billing/plans answers with the server ladder shape
+     (paise), so every price, strike-through, SAVE% and per-day figure on screen is computed by the
+     shipping code from a payload, never hardcoded in the sheet. -->
+<style>
+  :root { --paper:#f6f7f5; --ink:#14202b; --panel:#fff; --line:#d7dee3; --slate:#2d4356; --slate-soft:#5a7184;
+          --teal:#0e6e63; --teal-soft:#e3f1ee; --gold:#b9852a; --green:#1c7a4a; --green-bg:#e7f5ec; --green-line:#aedcc1;
+          --sans: -apple-system, "Segoe UI", Roboto, system-ui, sans-serif; --serif: Georgia, "Times New Roman", serif; }
+  body { margin:0; font-family: var(--sans); background:#fff; }
+</style>
+<script>
+  window.PLANS = { plans: {
+    monthly: { months: 1, amount: 59900 }, annual: { months: 12, amount: 599000 },
+    tiers: {
+      student:      { amount: 19900, annual: 199000, regular:  39900, label: "Trainee", requiresVerify: true },
+      coresident:   { amount: 29900, annual: 299000, regular:  99900, seats: 2, label: "Co-Resident" },
+      pro:          { amount: 59900, annual: 599000, regular:  99900, label: "Pro", popular: true },
+      physician:    { amount: 74900, annual: 749000, regular: 149900, label: "Physician" },
+      physicianpro: { amount: 89900, annual: 899000, regular: 249900, label: "Physician Pro", premium: true }
+    },
+    addons: { onco: { amount: 8900, label: "Physician Onco" } },
+    tokens: { boost: { mt: 50000, amount: 4900 }, plus: { mt: 250000, amount: 19900, regular: 24500, popular: true }, power: { mt: 750000, amount: 49900, regular: 73500 } }
+  } };
+  window.STATUS = { signedIn: true, pro: false, promo: false, verified: true };
+  window.SMD_PRO = { isProSync: function () { return false; }, proState: function () { return window.STATUS; }, sync: function () { return Promise.resolve(window.STATUS); } };
+  window.SMD_AUTH = { currentUser: { getIdToken: function () { return Promise.resolve("tok"); } } };
+  window.toast = function () {};
+  window.fetch = function (url) {
+    var body = String(url).indexOf("/plans") > -1 ? window.PLANS : window.STATUS;
+    return Promise.resolve({ ok: true, status: 200, clone: function () { return this; }, json: function () { return Promise.resolve(body); } });
+  };
+</script>
+</head>
+<body>
+<main style="height:100vh;padding:20px;font:600 14px var(--sans);color:#5a7184">StewardMD (fixture)</main>
+<script src="/pro-paywall.js"></script>
+</body>
+</html>

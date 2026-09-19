@@ -1895,19 +1895,39 @@
     return '<button class="rnav-tile" data-act="' + act + '" aria-label="' + tt + '">' + ric(icon) +
       '<span class="rnav-tile-tt">' + tt + '</span><span class="rnav-tile-sub">' + sub + '</span></button>';
   }
+  /* Experimental imaging-AI tile gate (ThoreX / KardiQ X / SknX / FundX). Order is deliberate:
+   *   1. the module's own isOn() (the access-code / tester path)   — unchanged
+   *   2. ?thorex=1 / ?thorex=0 style query param                   — unchanged, still authoritative
+   *   3. localStorage "1" = on, any other explicit value = off     — unchanged, a tester's "0" wins
+   *   4. only when NOTHING above decided: Physician Pro early access (owner decision 2026-09-18).
+   * So a non-physicianpro account with no flag still sees no tile and fetches nothing, and a tester
+   * who deliberately turned a module off keeps it off. */
+  function earlyAccessTier() { try { return !!(window.SMD_PRO && window.SMD_PRO.tierSync) && window.SMD_PRO.tierSync() === "physicianpro"; } catch (e) { return false; } }
+  function expTileOn(lsKey, param, modName) {
+    try {
+      var mod = modName && window[modName];
+      if (mod && mod.isOn && mod.isOn()) return true;
+      var q = (location.search.match(new RegExp("[?&]" + param + "=([^&]+)")) || [])[1];
+      if (q != null) return (q === "1" || q === "on" || q === "true");
+      var v = localStorage.getItem(lsKey);
+      if (v === "1") return true;
+      if (v != null) return false;                 // tester turned it off explicitly
+      return earlyAccessTier();
+    } catch (e) { return false; }
+  }
   // ---- Home "Clinical tools" registry (data-driven so users can customise the grid) ----------
   // eligible(): flag/entitlement gate — a locked/off tool never shows and never appears in Customize.
   // defOn: shown by default; users show/hide via the "Add Tool" -> Customize sheet (saved on device,
   // key smd_home_tools). feat: dark "signature" badge. Icons are Material Symbols (ric).
   var HOME_TOOLS = [
-    { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, anim: "eye",
-      eligible: function () { try { var q = (location.search.match(/[?&]fundx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_fundx") === "1"); } catch (e) { return false; } } },
-    { act: "kardiox", ic: "cardiology", tt: "KardiQ X AI", sub: "ECG", feat: true, anim: "ecg",
-      eligible: function () { try { if (window.KARDIOX && KARDIOX.isOn) return KARDIOX.isOn(); var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") === "1"); } catch (e) { return false; } } },
-    { act: "thorex", ic: "pulmonology", tt: "ThoreX AI", sub: "Chest X-ray", feat: true, anim: "cxr",
-      eligible: function () { try { if (window.THOREX && THOREX.isOn) return THOREX.isOn(); var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); } catch (e) { return false; } } },
-    { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, anim: "derm",
-      eligible: function () { try { if (window.SKNX && SKNX.isOn) return SKNX.isOn(); var q = (location.search.match(/[?&]sknx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_sknx") === "1"); } catch (e) { return false; } } },
+    { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, beta: true, anim: "eye",
+      eligible: function () { return expTileOn("smd_fundx", "fundx", null); } },
+    { act: "kardiox", ic: "cardiology", tt: "KardiQ X AI", sub: "ECG", feat: true, beta: true, anim: "ecg",
+      eligible: function () { return expTileOn("smd_kardiox", "kardiox", "KARDIOX"); } },
+    { act: "thorex", ic: "pulmonology", tt: "ThoreX AI", sub: "Chest X-ray", feat: true, beta: true, anim: "cxr",
+      eligible: function () { return expTileOn("smd_thorex", "thorex", "THOREX"); } },
+    { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, beta: true, anim: "derm",
+      eligible: function () { return expTileOn("smd_sknx", "sknx", "SKNX"); } },
     { act: "clinix", ic: "school", anim: "clinix", tt: "CliniX", sub: "Clinical learning", feat: true,
       eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") === "1"); } catch (e) { return false; } } },
     // SURGX (SURGˣ) — Surgical Intelligence. eligible() reads localStorage DIRECTLY rather than
@@ -2098,8 +2118,11 @@
   };
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
-    return '<button class="rnav-tile' + (t.feat ? ' feat' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + '">' +
+    // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
+    // that renders it (access code, tester flag, Physician Pro early access). Not dismissible.
+    return '<button class="rnav-tile' + (t.feat ? ' feat' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + (t.beta ? ', beta' : '') + '">' +
       '<span class="rnav-badge">' + icon + '</span>' +
+      (t.beta ? '<span class="rnav-tile-beta">BETA</span>' : '') +
       '<span class="rnav-tile-tt">' + t.tt + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
   }
   function renderHomeToolsGrid() {
@@ -2109,6 +2132,9 @@
       '<span class="rnav-badge">' + ric("add") + '</span><span class="rnav-tile-tt">Add Tool</span><span class="rnav-tile-sub">Customize</span></button>';
     return html;
   }
+  // The tier verdict arrives from /api/billing/status after first paint, so a Physician Pro on a
+  // fresh device would otherwise not see the early-access tiles until the next launch.
+  try { window.addEventListener("smd:tier", function () { var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid(); }); } catch (e) {}
   function openToolsCustomize() {
     var rows = "", TOOLS = orderedHomeTools();
     for (var i = 0; i < TOOLS.length; i++) {

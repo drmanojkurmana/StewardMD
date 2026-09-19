@@ -68,7 +68,10 @@
   function loadProCacheRaw() { try { var v = localStorage.getItem(proCacheKey(uid())); return v === null ? null : v === "1"; } catch (e) { return null; } }
   function loadProCache() { var v = loadProCacheRaw(); return v === null ? false : v; }
   function saveProCache(v) { try { localStorage.setItem(proCacheKey(uid()), v ? "1" : "0"); } catch (e) {} }
-  var _pro = loadProCache(), _proState = null, _claimRefreshed = false;
+  function tierCacheKey(u) { return "smd_tier_last:" + (u || "anon"); }
+  function loadTierCache() { try { return localStorage.getItem(tierCacheKey(uid())) || ""; } catch (e) { return ""; } }
+  function saveTierCache(v) { try { localStorage.setItem(tierCacheKey(uid()), String(v || "")); } catch (e) {} }
+  var _pro = loadProCache(), _proState = null, _claimRefreshed = false, _tier = loadTierCache();
   var _proKnown = loadProCacheRaw() !== null;   // flips true on the first server answer
   function proKnown() { return _proKnown; }
   function apiUrl(p) { return (window.SMD_API_BASE || "") + p; }
@@ -79,6 +82,10 @@
       return fetch(apiUrl("/api/billing/status"), { headers: h }).then(function (r) { return r.json(); });
     }).then(function (d) {
       _proState = d || null;
+      if (d && typeof d.tier === "string") {
+        var wasTier = _tier; _tier = d.tier; saveTierCache(_tier);
+        if (wasTier !== _tier) { try { window.dispatchEvent(new CustomEvent("smd:tier", { detail: { tier: _tier } })); } catch (e) {} }
+      }
       if (d && typeof d.pro === "boolean") {
         var was = _pro;
         _pro = d.pro; saveProCache(_pro);                                          // only an explicit boolean flips the cache
@@ -105,6 +112,10 @@
     }, function () { return _proState; });                 // error → keep last known (fail-open)
   }
   function isProSync() { return _pro; }
+  /* Purchase tier, cached per uid like _pro above and for the same reason: gates that render
+   * synchronously on first paint (the home tool grid) must not wait for /api/billing/status.
+   * Unknown → "" (never guess a tier up). */
+  function tierSync() { return _tier; }
   function isPro() { return syncStatus().then(function () { return _pro; }); }
   function proState() { return _proState; }
   // onProChange: for surfaces that render a Pro gate synchronously and cannot poll. Fires only on an
@@ -115,8 +126,8 @@
     try { window.addEventListener("smd:pro", h); } catch (e) {}
     return function () { try { window.removeEventListener("smd:pro", h); } catch (e) {} };
   }
-  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, proState: proState, sync: syncStatus, onProChange: onProChange, proKnown: proKnown, TEST_PRO_EMAILS: [] };
-  onChange(function () { try { _pro = loadProCache(); _proKnown = loadProCacheRaw() !== null; } catch (e) {} try { syncStatus(); } catch (e) {} });   // reseed for this uid, then refresh
+  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, tierSync: tierSync, proState: proState, sync: syncStatus, onProChange: onProChange, proKnown: proKnown, TEST_PRO_EMAILS: [] };
+  onChange(function () { try { _pro = loadProCache(); _proKnown = loadProCacheRaw() !== null; _tier = loadTierCache(); } catch (e) {} try { syncStatus(); } catch (e) {} });   // reseed for this uid, then refresh
 
   /* -------- Anti-sharing device lock --------
    * Register this device on sign-in + resume. When the server (DEVICE_LOCK_ON) reports we are no longer

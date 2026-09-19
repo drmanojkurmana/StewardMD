@@ -282,6 +282,75 @@ llama.cpp is also unverified on device.
 **Trade-off accepted:** concept-overlap support (COV_MIN 0.5 of a claim's stemmed content tokens in one
 passage) is a heuristic; it errs toward leaving a correct prose sentence out, never toward keeping an
 unsupported dose in. Tune COV_MIN from the live battery, not from intuition.
+## 2026-09-18 · SUPERSEDES the entry below: ONCQIS is add-on only, SURGX is Pro and residents
+
+**Decision (owner):** ONCQIS and OncoTree are NOT free. Every account gets a **3 day trial**, after
+which they need the **Onco add-on (₹89/mo)**, which any tier may buy. SURGX is NOT free either: it is
+included with **Pro and above**, and with **resident** plans (trainee tier whose verified role is
+resident, plus Co-Resident). CliniX is unchanged: Respiratory free, the other systems Pro.
+
+**Still to build:** `onco` and `surgx` entries in the role x tier matrix (`functions/_features.js` on
+branch worktree-agent-aca63a9e6e54f1648), the 3-day onco trial clock, and the client gates. The copy
+in this branch (website + paywall) already states the new rule, so code and copy must land together
+or the site promises what the app refuses.
+
+## 2026-09-17 · ONCQIS and SURGX free; CliniX one system free, the rest Pro (SUPERSEDED 2026-09-18)
+
+**Decision (owner):** ONCQIS (oncology) and SURGX are included free on every account. CliniX gives
+Respiratory free and locks the other four systems (Cardiovascular, GIT and abdomen, Neurology, Short
+cases) behind Pro.
+
+**How:** ONCQIS and SURGX already had no Pro check in code; only copy changed (website pricing, in-app
+paywall blurbs, and the +₹89 OncoTree + ONCQIS add-on row removed). CliniX: `free: true` on the
+system in `clinix/manifest.json` (data, not code); pure `systemLocked()` / `openPackIds()` in
+`clinix-model.js`; enforced at every door in `clinix-screens.js` (system card, disease/module open,
+resume) and in `loadAllSkills(pro)` so a locked system's skills are not reachable through the skills
+library. Refusals route through `SMD_PRO_NOTICE` ("clinix"). `pro-notice.js` gained a `signin` reason
+so a signed-out reader is asked to sign in instead of being told their connection failed.
+
+**Trade-off:** client-side only. CliniX content ships inside the native bundle, so a determined user
+can read the JSON; same ceiling as every other client gate. Pro here is `SMD_PRO.isProSync()`, which
+with `VERIFY_REQUIRED_FOR_PRO` on (default) means verified (7-day free Pro) or paid; unverified
+signed-up users see the lock immediately, the launch promo does not open it.
+
+**Open for owner:** the App Store product `in.stewardmd.onco.monthly` (Onco add-on, READY_TO_SUBMIT)
+is now unsold; leave it out of the review submission or delete it. Website plan ladder
+(Student/Intern/Resident/Physician Pro/Onco+ at ₹129-799) still differs from the in-app/App Store
+ladder (Trainee/Co-Resident/Pro/Physician/Physician Pro at ₹199-2,499).
+## 2026-09-18 · The paywall sells three plans, and every number on it comes from the server
+
+**Decision:** `pro-paywall.js` opens on THREE cards (Pro / Physician / Physician Pro) with **Physician
+preselected** and the **Annual** cycle preselected. Trainee and Co-Resident sit behind a quiet
+"I’m a student or resident" link: self-selection keeps the default view premium without making a
+cheaper tier unbuyable (the link reveals them, a revealed tier never re-hides, and the CTA follows
+whatever is selected). Each card leads with a per-day figure ("₹21 a day. Less than a samosa, and it
+runs your clinic.") over one benefit line; a sticky bottom bar always names the tier, the amount and
+the period. The Onco add-on is back and is offered on EVERY tier, priced from `plans.addons.onco`.
+
+**Why the honesty rules shaped it more than the conversion playbook.** Three tactics were asked for
+and three were changed:
+1. **Strike-throughs and SAVE% come only from the server’s `regular`** (x12 on an annual card). No
+   `regular`, or one that is not higher, renders nothing. Inventing a "was" price is misleading-MRP
+   territory under Indian consumer law and fails App Store review.
+2. **The CTA does NOT say "Start 7 days free, then ₹7,499/year".** No purchase path here begins with
+   a free period: Razorpay charges on the spot and no StoreKit introductory offer is configured. The
+   bar reads "Subscribe to Physician · ₹7,490/year" with "Cancel anytime" under it. The free access
+   some accounts already hold is still stated by the banner, from `/api/billing/status`.
+3. **The add-on’s "3-day trial everyone gets" renders only if the server sends `addons.onco.trialDays`.**
+   Nothing server-side grants an onco trial today, so the sentence stays off until it does.
+No countdown, no scarcity, no clinical outcome claim, no statistic, and only assistive framing for
+MaiK Voice Scribe ("offers the differentials worth considering"), because a doctor who trusts the AI not to miss
+checks less carefully.
+
+**Trade-off:** the default view hides two real tiers behind a tap, and the strike-through disappears
+entirely if a KV price edit drops `regular`. Both are deliberate: reachable beats prominent, and a
+missing anchor beats a fabricated one.
+
+**Status:** `test/paywall-render.test.mjs` 17/17 (three-card default, preselection, reveal link,
+SAVE% from `regular`, no-`regular` → no strike, CTA text per selection, per-day maths both cycles,
+benefit lines, and every rupee on a card traced back to the payload), `paywall-interceptor` 4/4,
+`paywall-resync` 6/6, `pro-notice` 11/11, `no-ui-emoji` pass, and `test/run-paywall-ui.mjs` 28/28 in
+headless Chrome against `test/fixtures/paywall-sheet.html`.
 
 ## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
 
@@ -8651,6 +8720,170 @@ different facts and are never rendered the same way.
   `section(..., "failed", ...)` state.
 - Not done here: `patient-access.js:441` (the portal's own PatientMessage read) and the sites owned by
   R6-1/R6-3/R6-4/R6-5.
+## 2026-09-18 Purchase tier is separate from verification role (ROLE_GATES_ON)
+
+- Entitlement records now carry `tier` + `tierExp` (what was PAID for: free|trainee|coresident|pro|physician|
+  physicianpro) alongside `role` (WHO they are, from verification). One Trainee price, three trainee roles: PG
+  Logbook needs the role, Scribe needs the tier, Ward Sync needs both. `fulfilPurchase()` used to discard the plan
+  key and grant a flat Pro, so ₹199 and ₹2,499 bought the same thing.
+- Money rule in `purchasePatch()`: a purchase may upgrade and may extend, never downgrade an active higher tier and
+  never shorten an expiry (Trainee bought on top of Physician Pro, or a replayed webhook, must not shrink anything).
+  `tierExp: null` = forever (owner comp) and stays null.
+- Onco add-on (`oncoAddonExp`) is buyable by any tier; the oncology AI extras get a 3-day trial per account started on
+  FIRST USE (`oncoTrialStart`), not signup. ONCQIS/OncoTree reference stays free forever and is not in the matrix.
+- The role x tier matrix in `_features.js` is INERT unless `ROLE_GATES_ON=1` (on top of the existing `FEATURES_ON`);
+  with it off `featureAllowed()` behaves exactly as before. Per-user `featureFlags` and `FEATURE_<KEY>_DEFAULT_ON`
+  still override the matrix. Route-by-route rollout is a later step.
+## 2026-09-18 — Per-patient quota meters (FollowCare/MAiTRI + MaiK Scribe), flag `QUOTA_METERS_ON`
+- FollowCare (7 SMS over 7 days) and a MAiTRI recovery call each cost us ₹10, so they share ONE wallet:
+  1 patient credit = one MAiTRI call OR one 7-day FollowCare course. A Scribe consult costs ₹3-5.
+- `functions/_quota.js` is the meter. KV, keyed `quota:<feature>:<uid>:<YYYY-MM>` for the monthly included
+  allowance (Physician / Physician Pro only: 5 care + 50 scribe, calendar-month reset, NO roll-over) and
+  `quota:<feature>:<uid>:bal` for purchased packs, written with no TTL so purchased credits never expire.
+  Spend order is included first. Concurrency is best-effort read-modify-write, same as `_usage.js`; the
+  documented ceiling is at most one over-granted unit per concurrent burst (₹10), not worth a Durable Object.
+- Enforced only at real spend points: `followcare/enroll`, the doctor-initiated `followcare/voice/call`, and
+  the Scribe `extract` path. Refusal is a 402 `{error:"quota-exhausted", feature, remaining:0, packs, copy}`
+  that the client renders as a top-up sheet. Never a hard lock: one Scribe "consult" is a dictation SESSION
+  (rolling 45-min marker), so the ~120s refine loop is charged once and an open session is never refused.
+- Packs `in.stewardmd.care.25|100` and `in.stewardmd.scribe.50|250` live in `plans().packs` (cfgPrice
+  overridable) and are fulfilled by `fulfilPurchase()` on both the Razorpay and StoreKit paths.
+- Copy is owner-approved value framing and is asserted in tests: no clinical outcome claims, no promise that
+  Scribe cannot miss anything (false, contradicts the App Store "not a diagnostic device" listing, invites
+  CDSCO/FDA medical-device scope, and a doctor who believes it checks less carefully), no invented statistics,
+  no em-dash. The "N patients have not heard from you" line renders only with a real server number.
+- Not wired: the ROLE_GATES_ON access matrix (separate branch), an `unheardCount` source for that line, and
+  the scheduler's own MAiTRI calls (they continue an already-paid episode).
+
+## 2026-09-18 — The "N patients have not heard from you" nudge stays unwired: there is no honest source
+
+Investigated whether the `unheardCount` line in `quotaCopy()` (`functions/_quota.js`) can be made real.
+It cannot, today. Not wiring it is the decision, not an omission. The sentence tells a clinician they
+neglected patients; a wrong number there is worse than no sentence, so it renders only from a real count.
+
+The sentence needs three facts joined: (1) a patient this doctor discharged, (2) in this calendar month,
+(3) with no FollowCare episode. Four stores were checked and none carries all three.
+
+- **`q_tickets` / `q_sessions` (Firestore, OPD queue).** Has the doctor (`q_sessions.doctorUid`,
+  `_queue_engine.js:23,33`), a completion time (`consultEndAt`, `:209`) and a joinable patient key
+  (`decPHI(encMobile)` reproduces FollowCare's `patientKeyHash`). **Killed by retention:** every ticket
+  and session carries `expiresAt` = end of visit day (`_queue_engine.js:36,171`) under a Firestore TTL
+  policy (`docs/queue/smart-opd-queue-design.md:120`, `QUEUE_RETENTION_DAYS` default 2). A month of
+  tickets does not exist to be counted. Also: an OPD visit is not a discharge.
+- **WardSynQ `Encounter` (D1 `wardsynq_record`).** The only durable discharge record: `attendingId` =
+  the syncing session's `doctorUid` (`_wardsynq/migrate-encounter.js:153,191`), `periodEnd` = the real
+  discharge time (`migrate-discharge.js:576-584`), not TTL'd. **Fails on both remaining counts.**
+  (a) Neither `attendingId` nor `periodEnd` is indexed - they live inside the JSON body, and the only
+  read paths are by patient, by id prefix, or a whole-type tenant scan (`db/wardsynq_schema.sql:32-33`,
+  `repository-d1.js:163-168`). One doctor's month = a tenant-wide Encounter scan. (b) **There is no join
+  key to FollowCare.** The Encounter's `patientId` is a pseudonym derived from the MRN
+  (`_wardsynq/opd-identity.js:18-20`); the identity index knows mrn / abha / ticket / ghis-episode and
+  no phone at all (`_wardsynq/identity-key.js:39-51`), and the `Patient` model has no phone field.
+  FollowCare keys patients by `patientKeyHash(hospitalId, last-10-of-phone)` (`_followcare.js:118-126`).
+  Nothing can decide whether a discharged patient already has an episode. Also gated: nothing is written
+  unless the tenant has WardSynQ migration on (`migrate-encounter.js:180`).
+- **`q_patients` / `q_patient_index`.** A registry, not a visit log: org-scoped, no doctor uid, no visit
+  or discharge timestamp.
+- **`fc_episodes`.** Has all four properties (`doctorUid`, `dischargeMs`, an equality-indexed per-doctor
+  query at `_followcare.js:470`, `patientKeyHash`) and is therefore circular: it only knows the patients
+  who already have an episode, which is the set the sentence subtracts.
+
+Second tenant problem even if a join existed: FollowCare's `hospitalId` comes from the doctor's
+self-declared `fc_doctors` binding (`_followcare.js:482`), the OPD org id comes from the org store. The
+two namespaces are not the same string, so the hash would not match even with the phone in hand.
+
+**What would have to be recorded first** (any one of these unblocks it):
+1. The discharge/visit-completion event carries the patient's phone-derived `patientKeyHash` under the
+   same tenant id FollowCare uses - i.e. `patientKeyHash` written onto the WardSynQ `Encounter` (or its
+   identity index gains a phone system) at admission/registration. It is a non-reversible hash, so this
+   adds no new PHI at rest.
+2. **Or** a small per-doctor monthly counter maintained at the discharge write itself: increment
+   `nudge:<uid>:<YYYY-MM>` on discharge, decrement on FollowCare enrol when the episode's
+   `patientKeyHash` matches. O(1) per event, no scan, no month-long retention needed, and the paywall
+   reads one KV key. This is the cheaper option and the one to build.
+
+Either way the count is then folded into the `quota` block of `/api/billing/status` and passed to
+`quotaCopy()`. Until then `unheardCount` is never supplied and the line never renders.
+
+Hardened meanwhile (`functions/_quota.js`): the guard is now `Number.isInteger(n) && n > 0` with **no**
+coercion, so `true`, `"5"`, `Infinity`, `NaN`, `2.7` and `-3` all produce no sentence rather than
+"1 patients discharged this month have not heard from you." Pinned by `test/quota-meters.test.mjs`
+(21 tests, +2) and `test/run-quota-topup-ui.mjs` (27 browser checks, +7: the nudge renders verbatim from
+a real count, exactly once, leading the deck, with no identifier, and vanishes at 0).
+
+## 2026-09-18 — Credit model: one credit = one bounded EPISODE; new prices; web pricing kept out of iOS
+
+Owner decisions, implemented on `nudge-unheard-count`. Still fully inert behind `QUOTA_METERS_ON`.
+
+**1. One credit = one bounded episode, charged once at enrol.** An episode is day 0 the 7-day
+FollowCare SMS/WhatsApp check-in course, day 3 a MAiTRI call *only* if the patient has not responded,
+day 7 a MAiTRI call *only* if there is still no response, plus feedback capture, the ambulance alert by
+WhatsApp/SMS, the doctor-app alert and in-app patient messaging. At most two calls, both conditional on
+non-response. Nothing else in the episode deducts.
+
+This made `followcare/voice/call` a **bug, not a gap**: it was deducting a second credit for the
+doctor-initiated MAiTRI call. That route 404s without an existing `episodeId`, so every call it can
+place belongs to an episode already paid for at enrol - the deduction was double-charging the doctor
+for what they had bought. Removed (`functions/api/followcare/[[path]].js:415`). `enroll` is now the
+only care deduction in the codebase, and `test/quota-meters.test.mjs` asserts exactly that by counting
+the `careCredit(` call sites in the router and asserting the scheduler dispatch path never imports the
+meter. The scheduler-initiated calls that were already unmetered were correct all along.
+
+**2. New prices** (verified live in App Store Connect): `in.stewardmd.care.25` ₹2,499 (was ₹1,099),
+`in.stewardmd.care.100` ₹8,999 (was ₹3,499). Scribe unchanged at ₹999 / ₹3,999. Per-patient copy is
+₹100 and ₹90, and `perUnit` is **derived** from `amount / units` rather than typed, so the two cannot
+drift apart. Rationale in the code: an episode costs us ~₹32 worst case (SMS ₹10 + up to two calls at
+₹10 + ~₹2 of alerts) and ~₹19 typical, so ₹100 holds 55% margin even for a patient who needs both calls.
+
+**3. Web pricing, and why it never appears on iOS.** `quotaPacks()` now carries `amount` (store) and
+`webAmount` (web): care.25 ₹2,199, care.100 ₹7,999. The discount is funded by the payment fee we save
+(Razorpay ~2% against Apple's 15%), not out of margin. Scribe deliberately has **no** `webAmount`, so
+nothing can advertise a discount that does not exist.
+
+The India storefront's anti-steering rules make a "cheaper on the web" hint anywhere in the iOS app a
+straight rejection, and this app is mid-submission. Apple's 2021 anti-steering settlement permits
+telling users about other payment methods *outside* the app, with consent. So the two halves are
+separated **structurally**, not by discipline:
+- The outbound SMS/WhatsApp/email copy is `webUpsellSms()` in `functions/_quota.js`. `functions/` is
+  excluded from the app bundle by `scripts/build-www.sh`, so that string physically cannot reach an
+  iOS screen.
+- The sheet renderer gates every web price on `var webOk = plat() !== "ios";`
+  (`pro-paywall.js` `openTopUp`). On iOS the card shows the App Store price and the store-derived
+  per-patient figure; on the web it shows the web price and the web-derived figure. There is no
+  comparison shown anywhere, on either platform, so there is nothing to steer with.
+
+Asserted three ways: a node test that the in-app refusal copy contains no web price, no `stewardmd.in`,
+and no steering wording, that `pro-paywall.js` reads `webAmount` only behind the platform gate and
+ships no purchase URL; and a headless-Chrome test that re-renders the *same* sheet with
+`Capacitor.getPlatform() === "ios"` and asserts ₹2,499 / ₹8,999 are shown while `2,199`, `7,999`,
+`219900`, `799900` and `stewardmd.in` appear nowhere in the sheet's **markup**, not merely its text.
+
+Tests: `test/quota-meters.test.mjs` 24/24 (+3), `test/run-quota-topup-ui.mjs` 36/36 browser checks (+9).
+
+## 2026-09-18 — Product name is "MaiK Voice Scribe" in every user-facing string
+
+Owner correction. Renamed in the three places a doctor can read it:
+- `functions/_quota.js` pack labels: `"50 Scribe consults"` -> `"50 MaiK Voice Scribe consults"`,
+  `"250 Scribe consults"` -> `"250 MaiK Voice Scribe consults"`. These are what `plans().packs` serves
+  (`plans()` just returns `quotaPacks(env)`), so the paywall, the /billing/plans response and the 402
+  refusal body all pick the new name up from one place.
+- `pro-paywall.js` top-up sheet title: `"MaiK Scribe consults"` -> `"MaiK Voice Scribe consults"`.
+- `pro-paywall.js` Physician tier blurb: `"... FollowCare · Scribe · unlimited billing"` ->
+  `"... FollowCare · MaiK Voice Scribe · unlimited billing"`.
+
+`quotaCopy("scribe")` needed NO change: its approved copy never names the product. The headline
+("Not just a note. A second pair of eyes."), the five lines, the price line and "Consults never expire."
+are unchanged, as instructed.
+
+NOT renamed, deliberately: the internal feature key `"scribe"`, the KV key prefix `quota:scribe:*`, and
+the product ids `in.stewardmd.scribe.50|250`. Renaming any of those orphans every existing purchase and
+every live counter. The App Store display names are the owner's to change in App Store Connect;
+`iap.js` product ids untouched (its only "Scribe" mention is a code comment).
+
+Guarded by a test that walks every user-facing string in the 402 body and asserts that wherever the
+word "Scribe" appears it is preceded by "MaiK Voice", which catches a bare "Scribe", the old
+"MaiK Scribe", and any future half-rename; plus a bundle check that neither old spelling survives in
+`pro-paywall.js`, and a browser check on the rendered sheet.
 
 ## 2026-09-19 — Feature guides run ON the screen (SMD_TOUR engine), and the OTP sheet is a designed screen
 

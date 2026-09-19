@@ -688,6 +688,65 @@ try {
   await sleep(200);
   ok((await ev("!document.querySelector('#clinixRoot .cx-voice-btn--on')")) === true, "the voice toggle turns off and the UI reflects it");
 
+  /* ── 8b. PRO LOCK: Respiratory is free, every other system needs Pro ──── */
+  console.log("\n--- Pro lock ---");
+  // Each phase starts on a FRESH page with the saved lesson position set explicitly. Earlier sections
+  // leave a COPD position in this profile, and an in-flight resume from a reused page can land mid-test.
+  async function lockPage(pro, pos) {
+    await attach(BASE + "?clinix=1&clinixdraft=1");
+    for (let i = 0; i < 60; i++) { if (await ev("!!(window.SMD_PRO && SMD_PRO.onProChange && window.SMD_CLINIX_PROGRESS && window.SMD_CLINIX_SCREENS)")) break; await sleep(250); }
+    const set = await ev("(SMD_PRO.isProSync = () => " + (pro ? "true" : "false") + ", " +
+      (pos ? "SMD_CLINIX_PROGRESS.savePosition(" + JSON.stringify(pos) + ")" : "SMD_CLINIX_PROGRESS.clearPosition()") + ", SMD_PRO.isProSync())");
+    if (set !== pro) console.log("  setup: Pro override did not take", JSON.stringify(set));
+    await ev("window.CLINIX.open()");
+    for (let i = 0; i < 40; i++) { if (await ev("document.querySelectorAll('#clinixRoot .cx-sys').length >= 5")) break; await sleep(250); }
+  }
+  const noticeUp = async () => { for (let i = 0; i < 20; i++) { if (await ev("!!document.getElementById('smdProNotice')")) return true; await sleep(150); } return false; };
+
+  // Door 1: the system card.
+  await lockPage(false, null);
+  const cards = await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].map(b => ({ t: b.querySelector('.cx-sys-t').textContent, pro: !!b.querySelector('.cx-sys-pro') }))");
+  ok(cards && cards.length === 5, "all five systems are still listed without Pro (locked ones are shown, not hidden)");
+  ok(cards && cards.filter(c => !c.pro).map(c => c.t).join() === "Respiratory", "only Respiratory is unbadged for a non-Pro reader");
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Cardiovascular')).click()");
+  ok(await noticeUp(), "tapping a locked system explains itself instead of opening");
+  ok(/CliniX library/.test((await ev("(document.querySelector('#smdProNotice h3') || {}).textContent || ''")) || ""), "the notice names the CliniX library");
+  ok((await ev("!document.querySelector('#clinixRoot .cx-modcard')")) === true, "the locked system screen did not render");
+  await ev("(document.getElementById('smdProNotice').remove(), true)");
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
+  await sleep(300);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard') && !document.getElementById('smdProNotice')")) === true, "the free system still opens without Pro");
+
+  // Door 2: resume. A saved position inside a locked system must not reopen it.
+  await lockPage(false, { diseaseId: "rheumatic-heart-disease", chapterId: null, skillId: null, turnIndex: 0 });
+  for (let i = 0; i < 20; i++) { if (await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-resume\"]')")) break; await sleep(250); }
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-resume\"]').click()");
+  ok(await noticeUp(), "resuming into a locked system is refused with the notice");
+  await sleep(600);
+  ok((await ev("!document.querySelector('#clinixRoot .cx-rail-btn')")) === true, "the locked disease pathway did not render on resume");
+
+  // Door 3: the standalone skills library must not carry a locked system's skills.
+  await lockPage(false, null);
+  await ev("document.querySelector(\"#clinixRoot [data-act='cx-skills']\").click()");
+  for (let i = 0; i < 30; i++) { if (await ev("!!document.querySelector('#clinixRoot .cx-row--skill')")) break; await sleep(250); }
+  const libFree = await ev("[...document.querySelectorAll('#clinixRoot .cx-row--skill .cx-row-t')].map(x => x.textContent)");
+  ok(Array.isArray(libFree) && libFree.includes("Cough and sputum"), "the free system's skills are in the library");
+  ok(Array.isArray(libFree) && libFree.length > 0 && !libFree.includes("Chest pain"), "a locked system's skills are NOT in the library without Pro");
+
+  // Pro arriving while the library is open must unlock it live, with no relaunch.
+  await ev("(SMD_PRO.isProSync = () => true, window.dispatchEvent(new CustomEvent('smd:pro', { detail: { pro: true, known: true } })), true)");
+  for (let i = 0; i < 30; i++) { if (await ev("[...document.querySelectorAll('#clinixRoot .cx-row--skill .cx-row-t')].some(x => x.textContent === 'Chest pain')")) break; await sleep(250); }
+  ok((await ev("[...document.querySelectorAll('#clinixRoot .cx-row--skill .cx-row-t')].some(x => x.textContent === 'Chest pain')")) === true,
+    "becoming Pro reloads the open skills library with every system's skills");
+
+  // Pro: nothing locked.
+  await lockPage(true, null);
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-sys-pro').length")) === 0, "with Pro no system carries a lock badge");
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Cardiovascular')).click()");
+  await sleep(400);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard') && !document.getElementById('smdProNotice')")) === true,
+    "with Pro a formerly locked system opens normally");
+
   /* ── 9. No prescribing surface anywhere in CliniX ──────────────────────── */
   console.log("\n--- safety ---");
   ok((await ev("!document.querySelector('#clinixRoot [class*=\"rx\"], #clinixRoot [data-act*=\"rx\"]')")) === true,
