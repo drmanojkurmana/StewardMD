@@ -8720,3 +8720,45 @@ to-do list, and status colour is reserved for status.
 **Blocked, and not on code:** there is no dataset, no access approval, no adjudication process and
 no named clinician who can approve an outcome. Steps 13 onward of the plan cannot start until there
 is. See [[Medical Core]].
+
+## 2026-09-19 — Medical Core data: a public ICU dataset AND synthetic, with the objection built as a control
+
+**The question.** Step 12 of [[Medical Core]] is a data gate nothing engineering can open. Asked how
+to get past it, the owner chose both a credentialed public ICU dataset and synthetic data generated
+from the StewardMD Knowledge Base, having read the objection to the second.
+
+**The correction that preceded it.** We did not train MedPsy. `qvac/MedPsy-1.7B` is the upstream
+base; what StewardMD trained is MaiK Lite, a LoRA fine-tune of it on the KB corpus (a 42,176-chunk
+textbook JSONL plus SFT pairs). That corpus has no patients, no timestamps and no outcome events, so
+it cannot train a deterioration model at all. It remains what it already is in this architecture:
+the reasoning and evidence layer behind "Review with MaiK", and a drafting aid for the unapproved
+packs.
+
+**The objection, and what was done with it.** A model trained on textbook-derived vignettes learns
+the idealised presentation, which is exactly the patient who was never going to be missed; the
+patient this project exists for is the atypical one. Rather than record that as a caveat somebody
+later forgets, it is a control: `provenance.synthetic` propagates extract → matrix → artifact →
+loader, and `medcore/medcore-models.js` REFUSES a synthetic-provenance artifact for every clinical
+purpose, shadow included, with no flag, option or override. An approval field cannot launder it. A
+test asserts no app file ever asks for the one purpose it may load for.
+
+**What the synthetic cohort is actually for**, and it is worth more than training would have been:
+proving the controls detect the failures they claim to. HAZ-ML-01 and HAZ-ML-02 were both PARTIAL
+because their empirical half had never run. The generator now injects the frequency shortcut, the
+prevalent cases and the treatment paradox deliberately, and the gate is watched firing:
+`test/medcore-pipeline.test.mjs` builds a cohort where the shortcut is the ONLY signal and asserts
+the model is refused. They stay PARTIAL, because data whose observation schedule was written by the
+same author as the control is a demonstrated mechanism, not evidence from a ward.
+
+**The pipeline is Node, not Python.** No numpy or scikit-learn in the environment, and the better
+reason: the trainer calls the app's own `medcore-state.js` and `medcore-features.js` at `asOf = t0`,
+so train/serve skew is not a bug class that exists. A GBM belongs beside the logistic baseline when
+real data and a Python stack arrive; the matrix is already JSONL it can read, parity vectors are
+what will catch the two scorers drifting, and the plan requires it to beat the baseline first.
+
+**Reported as it came out:** on the synthetic cohort the model fails the calibration gate (slope
+0.69, 2.4 events per variable) and does not ship. The pipeline produced a model and refused it.
+
+**Unchanged:** the real data gate. A public dataset proves the pipeline; it does not make a US ICU
+model a predictor for an Indian ward, and nothing reaches a clinician without local revalidation and
+a named approver.

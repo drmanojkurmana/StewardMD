@@ -28,14 +28,37 @@ HAZ-ML-02 control is how one of them quietly stops matching. It is one function,
 | 9 features | done | `medcore/medcore-features.js` + the banned-feature list. HAZ-ML-01 |
 | 10 hazards | done | HAZ-ML-01..04 in `wardsynq/wardsynq-safety-case.js`, cross-referenced by `scripts/wardsynq-assurance.mjs` |
 | 11 outcomes | done | `medcore/data/outcomes.json` (5 outcomes, unapproved) + `medcore/medcore-outcomes.js` + `test/medcore-labels.test.mjs`. HAZ-ML-02 |
-| 12 DATA GATE | **BLOCKED** | No dataset, no access approval, no adjudication, no named clinical approver. Nothing past here is an engineering task |
-| 13 to 21 | not started | Everything from dataset construction onward waits on step 12 |
+| 12 DATA GATE | **still BLOCKED for real data** | No hospital dataset, no access approval, no adjudication, no named clinical approver |
+| 13 to 17 | **built, exercised on synthetic data only** | `backend/medcore/` : extract schema, synthetic cohort, featurize-by-replay, baselines, calibration, the Phase 4 gates, artifact export, and `medcore/medcore-models.js` which REFUSES every synthetic artifact for every clinical purpose |
+| 18 to 21 | not started | Shadow deployment onward needs an artifact that passed its gates on real data. None exists |
 
 **What a clinician gets today, with the flag on:** two deterministic lists on the ICU overview,
 "what changed" and "missing information". No probability, no alert, no prediction, nothing written.
 
-**What is NOT true today:** there is no model, no training data, no calibrated probability, no
-outcome anybody has approved, and no Medical Core signal reaches any alert, prompt or notification.
+**What is NOT true today:** there is no model a clinician may see, no real training data, no
+calibrated probability in the product, no outcome anybody has approved, and no Medical Core signal
+reaches any alert, prompt or notification.
+
+## The data decision (owner, 2026-09-19)
+
+Asked how to get past step 12, the owner chose BOTH a credentialed public ICU dataset AND synthetic
+data from the Knowledge Base, having read the objection to the second. The objection was therefore
+built as a control rather than left as a caveat:
+
+- `provenance.synthetic` propagates extract -> matrix -> artifact -> loader, and
+  `medcore/medcore-models.js` refuses a synthetic-provenance artifact for EVERY clinical purpose,
+  shadow included, with no flag or override. Pinned by `test/medcore-models.test.mjs`, which also
+  asserts no app file ever requests the one purpose synthetic may load for.
+- The synthetic cohort's real job is proving the controls fire. It injects the frequency shortcut
+  (`--frequency-bias`), prevalent cases (`--prevalent-rate`) and the treatment paradox
+  (`--rescue-rate`) deliberately, and the pipeline test constructs a cohort where the shortcut is
+  the only signal and asserts the gate refuses the model.
+- On the synthetic cohort the model **fails the calibration gate** (slope 0.69, 2.4 events per
+  variable) and does not ship. Reported as it came out.
+
+The public-dataset half is an adapter and nothing else: `backend/medcore/adapters/README.md` states
+what it must do, and states once that a US ICU model is a poor predictor of an Indian ward and does
+not move the clinical gate.
 
 Supersedes the external "StewardMD + MAiK Medical Core" plan. Written against the repo as it exists
 on 2026-09-19; the gap analysis that produced it is `MEDICAL_CORE_PLAN_REVIEW.md`.
