@@ -1,0 +1,75 @@
+{
+  "schema": "medcore-outcomes/1",
+  "version": "1.0.0",
+  "approvalStatus": "unapproved",
+  "note": "The five V1 outcomes. Every one is an event with a timestamp in the record, which is what makes it labellable at all; 'respiratory deterioration' is deliberately absent because it cannot be adjudicated consistently. NOTHING HERE IS APPROVED and nothing here is trained: these are definitions written so that a clinician can argue with them before any data is touched, and so the abstention rules can be enforced today.",
+  "blankingNote": "HAZ-ML-02, the treatment paradox. Two rules, not one. (1) A patient already receiving the treatment at t0 is OUT OF THE RISK SET, not a negative: 'this patient on noradrenaline will not start noradrenaline' is true, useless, and teaches the model that pressor use predicts not needing a pressor. (2) Features recorded inside blankingMin before the event are dropped, because preparation for the treatment contaminates the state - a pressor charted as prepared, a pre-intubation gas. The window is a declared constant and is never tuned as a hyperparameter.",
+  "outcomes": {
+    "MC-1": {
+      "label": "Unplanned ICU transfer or ICU review request",
+      "horizonHours": 24,
+      "population": "ward inpatient",
+      "minimumInputs": ["rr", "spo2", "hr", "sbp", "temp", "gcs"],
+      "maxUnusableInputs": 1,
+      "labelDefinition": "First ICU admission, or a documented request for ICU review, for a ward patient after t0 and within the horizon.",
+      "riskSetExclusions": ["alreadyInIcu", "electivePostOpAdmission", "admissionPlannedBeforeT0"],
+      "requiredKnown": [],
+      "blankingMin": 60,
+      "workflow": "Evidence for an existing wardsynq-recognition prompt to the ward registrar. Never its own alert.",
+      "approvalStatus": "unapproved"
+    },
+    "MC-2": {
+      "label": "Cardiac arrest or death",
+      "horizonHours": 24,
+      "population": "inpatient",
+      "minimumInputs": ["rr", "spo2", "hr", "sbp", "temp", "gcs"],
+      "maxUnusableInputs": 1,
+      "labelDefinition": "First in-hospital resuscitation call, or death, after t0 and within the horizon.",
+      "riskSetExclusions": ["dnrAtT0"],
+      "requiredKnown": ["resuscitationStatus"],
+      "censorNote": "A patient with a documented do-not-resuscitate decision at t0 is CENSORED, never labelled negative: they are not a patient in whom arrest was prevented.",
+      "blankingMin": 60,
+      "workflow": "Highest-weight evidence on the same prompt as MC-1. Never its own alert.",
+      "approvalStatus": "unapproved"
+    },
+    "MC-3": {
+      "label": "First vasopressor initiation",
+      "horizonHours": 12,
+      "population": "inpatient",
+      "minimumInputs": ["map", "hr"],
+      "maxUnusableInputs": 0,
+      "labelDefinition": "First vasopressor administration recorded in the eMAR after t0 and within the horizon.",
+      "riskSetExclusions": ["vasopressorActiveAtT0"],
+      "requiredKnown": ["vasopressor"],
+      "blankingMin": 60,
+      "workflow": "Evidence on a haemodynamic prompt. The deterministic shock rules remain authoritative.",
+      "approvalStatus": "unapproved"
+    },
+    "MC-4": {
+      "label": "First invasive or non-invasive ventilation",
+      "horizonHours": 24,
+      "population": "inpatient",
+      "minimumInputs": ["spo2", "rr"],
+      "maxUnusableInputs": 0,
+      "labelDefinition": "First recorded initiation of non-invasive ventilation or intubation after t0 and within the horizon.",
+      "riskSetExclusions": ["ventilatedAtT0"],
+      "requiredKnown": ["ventilation", "oxygen"],
+      "blankingMin": 60,
+      "workflow": "Evidence on a respiratory prompt.",
+      "approvalStatus": "unapproved"
+    },
+    "MC-5": {
+      "label": "AKI KDIGO stage 2 or worse",
+      "horizonHours": 48,
+      "population": "inpatient",
+      "minimumInputs": ["creat"],
+      "maxUnusableInputs": 0,
+      "labelDefinition": "KDIGO stage 2 or worse by the creatinine criterion, against the documented baseline, after t0 and within the horizon.",
+      "riskSetExclusions": ["aki2OrWorseAtT0", "onRrtAtT0"],
+      "requiredKnown": ["creatinineBaseline", "rrt"],
+      "blankingMin": 60,
+      "workflow": "Evidence on a renal prompt plus a drug-review nudge through the existing renal-dose logic.",
+      "approvalStatus": "unapproved"
+    }
+  }
+}
