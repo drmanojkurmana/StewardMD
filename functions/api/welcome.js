@@ -25,7 +25,7 @@ export async function onRequestPost({ request, env }) {
   if (!email) return J({ error: "no-email" }, 400);
   let name = p.name || "";
   try { const b = await request.json(); if (b && b.name) name = String(b.name).slice(0, 120); } catch (e) {}
-  await emailWelcome(env, { email, name });
+  await emailWelcome(env, { email, name, uid });
   // Record first sign-in so the day-3 Pro-upsell sweep can find non-verifiers (idempotent).
   try { await markFirstSeen(env, uid, { email, name }); } catch (e) {}
   return J({ ok: true });
