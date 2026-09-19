@@ -4151,6 +4151,9 @@
   // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
   // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
   var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
+  // The KB disease this answer was grounded on, captured in send() before maik-local.js strips
+  // pkg.grounding. Drives the "Read more in StewardMD KB" chip under the answer.
+  var _maikKbId = null, _maikKbName = "";
   var _maikDisambigResolved = false;  // set true for ONE send when the user just tapped a "Which did you mean?" chip → skip the never-guess re-ask (else it loops on its own answer, e.g. "Pulmonary" → pulmonary-anatomy chips)
   var _maikSkipCalc = false;          // set true for ONE send by "Ask MaiK anyway" on a calculator card → bypass the zero-token calculator route once
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
@@ -5219,6 +5222,24 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 /* Concise-first "Know more →" pill + the revealed tier-2 detail. */
 .maik-know{display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;max-width:100%;white-space:nowrap;margin:11px 0 2px;padding:8px 15px;border:1px solid var(--mk-teal);background:var(--mk-tsoft);color:var(--mk-teal);border-radius:999px;font:700 12.5px 'Inter';cursor:pointer;transition:background .15s,color .15s}
 .maik-know:hover{background:var(--mk-teal);color:#fff}
+/* "Read more in StewardMD KB" — the free, curated, offline route out of a generated answer.
+   It GLOWS (owner's word) because it has to win attention against the refine chips below it, which
+   look similar and cost tokens. The pulse runs three times and stops: a control that never stops
+   moving becomes furniture, and an indefinite animation next to clinical text is a distraction.
+   prefers-reduced-motion drops the animation and keeps the ring, so the emphasis survives. */
+.maik-kbmore{display:inline-flex;align-items:center;gap:9px;max-width:100%;margin:12px 0 2px;padding:10px 14px;
+ border:1px solid var(--mk-teal,#0e6e63);border-radius:13px;background:var(--mk-tsoft,#e6f4f1);
+ color:var(--mk-teal,#0e6e63);font:700 13px/1.25 var(--sans,system-ui);cursor:pointer;text-align:left;
+ box-shadow:0 0 0 0 rgba(14,110,99,.45);animation:maikKbGlow 2.1s ease-out 3}
+.maik-kbmore .maik-kbmore-ic{display:inline-flex;flex:0 0 auto;opacity:.95}
+.maik-kbmore .maik-kbmore-sub{display:block;font:600 11px/1.35 var(--sans,system-ui);color:var(--mk-mut,#5a7184);margin-top:2px;
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:210px}
+.maik-kbmore .maik-kbmore-go{flex:0 0 auto;margin-left:auto;padding-left:6px;font-weight:800}
+.maik-kbmore:active{transform:scale(.985)}
+.maik-kbmore:focus-visible{outline:2px solid var(--mk-teal,#0e6e63);outline-offset:2px}
+@keyframes maikKbGlow{0%{box-shadow:0 0 0 0 rgba(14,110,99,.45)}70%{box-shadow:0 0 0 9px rgba(14,110,99,0)}100%{box-shadow:0 0 0 0 rgba(14,110,99,0)}}
+@media (prefers-reduced-motion:reduce){.maik-kbmore{animation:none;box-shadow:0 0 0 3px rgba(14,110,99,.16)}}
+body.dark .maik-kbmore,body.v3-dark .maik-kbmore{background:rgba(14,110,99,.16)}
 .maik-detail{margin-top:6px;padding-top:10px;border-top:1px dashed var(--mk-bd)}
 .maik-detail[hidden]{display:none}
 /* generic chips still used by web-research / Rx / help / patient / extract replies */
@@ -6254,6 +6275,30 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // deterministic contextual follow-ups (0 tokens) — appended into the cached HTML; a single
       // delegated listener on the chat body handles taps even after cache restore.
       // UpToDate-style LLM refinement chips first (primary), then the KB-derived follow-ups.
+      /* READ MORE IN THE StewardMD KB (owner, 2026-09-20: "once i ask Myocardial Infarction why not
+       * show read more in StewardMD KB chip glowing below?").
+       *
+       * When the answer was grounded on a disease we hold a full curated record for, offer that
+       * record. This is the cheapest good answer in the app: openDiseaseRef() is local, instant,
+       * costs no tokens and works with no network, and for a named-disease question it is usually
+       * MORE complete than the generated prose above it - management brief, investigations,
+       * disposition, mimics, red flags, all curated rather than synthesised.
+       *
+       * Placed BEFORE the refine chips deliberately: those spend tokens, this does not, so the free
+       * and more authoritative route is the one under the reader's thumb first. It only renders when
+       * an id was actually captured, so it can never promise a page that does not exist.
+       */
+      try {
+        if (_maikKbId) {
+          var _kbNm = _maikKbName || topicLabel || "this topic";
+          think.insertAdjacentHTML("beforeend",
+            '<button type="button" class="maik-kbmore" data-kb-more="' + maikEscH(_maikKbId) + '">' +
+              '<span class="maik-kbmore-ic">' + MK.spark + '</span>' +
+              '<span>Read more in StewardMD KB<span class="maik-kbmore-sub">' + maikEscH(_kbNm) + '</span></span>' +
+              '<span class="maik-kbmore-go" aria-hidden="true">→</span>' +
+            '</button>');
+        }
+      } catch (e) {}
       var refineHTML = maikRefineHTML(question, _refine.chips);
       if (refineHTML) think.insertAdjacentHTML("beforeend", refineHTML);
       // Related figures (owner, 2026-09-18): the search-result image from a trusted medical page with
@@ -6492,6 +6537,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         })
         .then(function (pkg) {
           if (pkg && question) pkg.question = question;
+          /* CAPTURE THE KB DISEASE ID HERE, while the package still has one.
+           *
+           * The "Read more in StewardMD KB" chip needs the disease id, and this is the last point
+           * every engine still carries it: maik-local.js deliberately strips pkg.grounding before an
+           * on-device answer renders (an engine that read none of the KB must not display its
+           * citations), so reading it at render time would work on Cloud and silently never appear
+           * offline - the exact place the chip is most useful, because offline there is no web tier
+           * to fall back on.
+           */
+          try {
+            var _g0 = pkg && pkg.grounding && pkg.grounding[0];
+            _maikKbId = (_g0 && _g0.diseaseId) || null;
+            _maikKbName = (_g0 && _g0.diseaseName) || (_g0 && _g0.name) || "";
+          } catch (e) { _maikKbId = null; _maikKbName = ""; }
           var tm = (pkg && pkg.topicMatch) || null;
           // NONE tier: topic genuinely absent from the KB. MaiK answers every question, so
           // instead of dead-ending we AUTO-RUN web research (Google-grounded, clearly labelled
@@ -6717,7 +6776,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               var acts = document.createElement("span"); acts.className = "maik-acts";
               acts.appendChild(act("Copy", function () {
                 var txt = "";
-                try { var cl = host.cloneNode(true); Array.prototype.forEach.call(cl.querySelectorAll(".maik-fb,.maik-followups,.maik-tools,.maik-refine,.maik-chip,.maik-src,.maik-attr,.maik-edu,.maik-know,.maik-perf,.maik-webbusy"), function (x) { x.remove(); }); txt = cl.innerText.trim(); } catch (e) { try { txt = host.innerText; } catch (e2) {} }
+                try { var cl = host.cloneNode(true); Array.prototype.forEach.call(cl.querySelectorAll(".maik-fb,.maik-followups,.maik-tools,.maik-refine,.maik-chip,.maik-src,.maik-attr,.maik-edu,.maik-know,.maik-perf,.maik-webbusy,.maik-kbmore"), function (x) { x.remove(); }); txt = cl.innerText.trim(); } catch (e) { try { txt = host.innerText; } catch (e2) {} }
                 var okMsg = function () { try { toast("Copied"); } catch (e) {} };
                 try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(okMsg, okMsg); else okMsg(); } catch (e) { okMsg(); }
               }));
@@ -7302,6 +7361,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // from cache), so it keeps working when a saved conversation is reopened.
       // "Know more →": lazy mode fetches the tier-2 detail on demand; concise-first mode reveals the
       // detail already in the bubble. Delegated so it survives a cache-restored thread.
+      /* "Read more in StewardMD KB". Delegated like every other chip so it survives a thread being
+       * rebuilt from cache. Opens the curated disease reference: local, instant, no tokens, works
+       * offline. If reasoning.js is not loaded (it is lazy on some routes) the chip says so rather
+       * than doing nothing, because a dead control is worse than an honest one. */
+      var kbm = ev.target && ev.target.closest ? ev.target.closest("[data-kb-more]") : null;
+      if (kbm) {
+        var _kbid = kbm.getAttribute("data-kb-more");
+        try { if (window.SMD_HAPTICS && SMD_HAPTICS.tap) SMD_HAPTICS.tap(); } catch (e) {}
+        try {
+          if (window.SMD_REASON && SMD_REASON.openDiseaseRef && _kbid) SMD_REASON.openDiseaseRef(_kbid);
+          else toast("Knowledge Base reference is not available here.");
+        } catch (e) { toast("Could not open that Knowledge Base page."); }
+        return;
+      }
       var know = ev.target && ev.target.closest ? ev.target.closest(".maik-know") : null;
       if (know) {
         var kbub = know.closest(".maik-b.ai"); var kdet = kbub && kbub.querySelector(".maik-detail");
