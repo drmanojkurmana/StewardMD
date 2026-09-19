@@ -82,9 +82,18 @@
     vivaState: null,
     vivaCurrent: null,
     loading: false,
+    // Case reasoning stages. ddxPicks/dxPick/planPicks replaced three free-text boxes (owner,
+    // 2026-09-19: "in ddx, dx give him 100s of diagnosis and he will pickup one").
+    ddxPicks: [], dxPick: "", planPicks: [], planOpts: null,
+    ddxQuery: "", ddxSystem: "", ddxHintLevel: 0, caseSuggest: [],
+    dxVocab: null, dxVocabState: "",
     physioMode: "cvs",
-    physioCvs: { preload: 100, afterload: 100, contractility: 100, heartRate: 72, rhythm: "sinus", valve: "none" },
-    physioResp: { airwayResistance: 1.0, compliance: 1.0, deadSpaceFraction: 0.3, minuteVentilation: 6.0, fiO2: 0.21 }
+    physioPreset: "",
+    physioCvs: { preload: 100, afterload: 100, contractility: 100, heartRate: 72, rhythm: "sinus", valve: "none", severity: "moderate" },
+    physioResp: {
+      airwayResistance: 1.0, compliance: 1.0, deadSpaceFraction: 0.30,
+      shuntFraction: 0.02, respiratoryDrive: 100, fiO2: 0.21, baseExcess: 0
+    }
   };
 
   /* ── shared chrome ───────────────────────────────────────────────────────── */
@@ -990,7 +999,9 @@
     if (state.casePhase === "history") html += casePhaseHistory(cd);
     else if (state.casePhase === "examination") html += casePhaseExam(cd);
     else if (state.casePhase === "investigations") html += casePhaseIx(cd);
-    else html += casePhaseFreeText(cd);
+    else if (state.casePhase === "differential") html += casePhaseDdx(cd);
+    else if (state.casePhase === "diagnosis") html += casePhaseDx(cd);
+    else html += casePhasePlan(cd);
 
     host.innerHTML = html;
   }
@@ -1006,12 +1017,50 @@
         esc(t.a) + "</div>";
     }
     html += "</div>";
+    // A near miss offers the topics it nearly matched. The patient still says nothing new; the
+    // student is simply shown what they could have asked.
+    if (state.caseSuggest && state.caseSuggest.length) {
+      html += '<div class="cx-didyoumean"><span class="cx-dym-l">Did you mean</span>';
+      for (var sg = 0; sg < state.caseSuggest.length; sg++) {
+        var sk = state.caseSuggest[sg];
+        html += '<button type="button" class="cx-chip" data-act="cx-case-topic" data-id="' + esc(sk) + '">' + esc(prettySkill(sk)) + "</button>";
+      }
+      html += "</div>";
+    }
     html += '<div class="cx-tutor-input">' +
       '<textarea class="cx-input" id="cxCaseQ" rows="2" placeholder="Ask the patient a question"></textarea>' +
       '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-ask">Ask</button></div>';
-    html += '<div class="cx-case-count">' + state.caseTaken.asked.length + " topics covered</div>";
+    html += caseTopicChips(cd);
+    html += '<div class="cx-case-count">' + state.caseTaken.asked.length + " of " + caseTopicCount(cd) + " topics covered</div>";
     html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">Move to examination</button></div>';
     return html;
+  }
+
+  function caseTopicCount(cd) {
+    var n = 0;
+    for (var k in (cd.history || {})) if (Object.prototype.hasOwnProperty.call(cd.history, k)) n++;
+    return n;
+  }
+
+  /* The questions this patient can answer, as chips. Typing is still the point of the stage, and
+   * the chips are collapsed behind a toggle so they are a safety net rather than a menu to click
+   * through: a student who cannot phrase "orthopnoea" should not be stuck, but a student who can
+   * should not be handed the whole history either. Asked topics are shown ticked and inert. */
+  function caseTopicChips(cd) {
+    var open = !!state.caseChipsOpen;
+    var keys = [], k;
+    for (k in (cd.history || {})) if (Object.prototype.hasOwnProperty.call(cd.history, k)) keys.push(k);
+    if (!keys.length) return "";
+    var html = '<button type="button" class="cx-chips-toggle" data-act="cx-case-chips">' +
+      ic(open ? "expand_less" : "expand_more") + (open ? " Hide the question list" : " Stuck? See what you can ask") + "</button>";
+    if (!open) return html;
+    html += '<div class="cx-chips">';
+    for (var i = 0; i < keys.length; i++) {
+      var done = state.caseTaken.asked.indexOf(keys[i]) >= 0;
+      html += '<button type="button" class="cx-chip' + (done ? " cx-chip--done" : "") + '" data-act="cx-case-topic" data-id="' + esc(keys[i]) + '"' + (done ? " disabled" : "") + ">" +
+        (done ? ic("check") : "") + esc(prettySkill(keys[i])) + "</button>";
+    }
+    return html + "</div>";
   }
 
   function casePhaseExam(cd) {
@@ -1052,17 +1101,174 @@
     return html;
   }
 
-  function casePhaseFreeText(cd) {
-    var prompts = {
-      differential: { q: "What are your differentials, and what argues for or against each?", ph: "List them, most likely first", next: "Commit to a diagnosis" },
-      diagnosis: { q: "What is your diagnosis? Name it, grade it, and state the current state.", ph: "Your full diagnostic statement", next: "Give your management" },
-      management: { q: "How would you manage this patient right now?", ph: "Immediate management, then before discharge", next: "Finish the case" }
-    };
-    var p = prompts[state.casePhase] || prompts.differential;
-    var existing = state.caseTaken[state.casePhase] || "";
-    return '<div class="cx-turn"><p class="cx-q">' + esc(p.q) + "</p>" +
-      '<div class="cx-free"><textarea class="cx-input" id="cxCaseText" rows="5" placeholder="' + esc(p.ph) + '">' + esc(existing) + "</textarea></div></div>" +
-      '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">' + esc(p.next) + "</button></div>";
+  /* ── the differential and diagnosis pickers ─────────────────────────────────────────────────
+   * Free text was replaced here because it was being marked by keyword overlap: a student who wrote
+   * a good differential in their own words could be marked wrong, and one who wrote nothing useful
+   * could be marked right by accident. Picking from a named vocabulary makes the mark mean
+   * something, and makes the stage answerable by a student who knows the disease but not the exact
+   * phrase the marker wanted. Free text remains available as an escape hatch when the vocabulary
+   * cannot load, so a case can always be finished. */
+
+  function dxRow(name, sysName, picked, act) {
+    return '<button type="button" class="cx-dxrow' + (picked ? " cx-dxrow--on" : "") + '" data-act="' + act + '" data-id="' + esc(name) + '">' +
+      '<span class="cx-dxrow-ic">' + ic(picked ? "check_circle" : "radio_button_unchecked") + "</span>" +
+      '<span class="cx-dxrow-t">' + esc(name) + "</span>" +
+      (sysName ? '<span class="cx-dxrow-s">' + esc(sysName) + "</span>" : "") + "</button>";
+  }
+
+  function dxSystemName(vocab, id) {
+    var ss = (vocab && vocab.systems) || [];
+    for (var i = 0; i < ss.length; i++) if (ss[i].id === id) return ss[i].name;
+    return "";
+  }
+
+  // The rows for the current query and system filter. Rendered on its own so typing can repaint
+  // ONLY this list: re-rendering the whole stage would destroy the input the student is typing in.
+  function dxResultsHTML(multi) {
+    var vocab = state.dxVocab, dx = DX();
+    if (!vocab || !dx) return '<div class="cx-dx-loading">' + ic("hourglass_top") + " Loading the diagnosis list...</div>";
+    var q = state.ddxQuery || "";
+    var picks = multi ? state.ddxPicks : (state.dxPick ? [state.dxPick] : []);
+    var list = q
+      ? dx.search(vocab, q, { limit: 30, system: state.ddxSystem || "" })
+      : (state.ddxSystem ? dx.bySystem(vocab, state.ddxSystem, 30)
+                         : dx.shortlist(vocab, state.caseDef, caseSystemId(), 12));
+    if (!list.length) {
+      return '<div class="cx-dx-empty">Nothing matches &ldquo;' + esc(q) + '&rdquo;. Try a shorter word, or clear the system filter.</div>';
+    }
+    var html = "";
+    for (var i = 0; i < list.length; i++) {
+      var on = picks.indexOf(list[i].n) >= 0;
+      html += dxRow(list[i].n, dxSystemName(vocab, list[i].s), on, multi ? "cx-ddx-pick" : "cx-dx-pick");
+    }
+    return html;
+  }
+
+  function dxSystemBar() {
+    var vocab = state.dxVocab;
+    if (!vocab) return "";
+    var ss = vocab.systems || [];
+    var html = '<div class="cx-maneuver-bar cx-dx-sysbar">' +
+      '<button type="button" class="cx-maneuver-btn' + (state.ddxSystem ? "" : " cx-maneuver-btn--on") + '" data-act="cx-dx-system" data-id="">All</button>';
+    for (var i = 0; i < ss.length; i++) {
+      var on = state.ddxSystem === ss[i].id;
+      html += '<button type="button" class="cx-maneuver-btn' + (on ? " cx-maneuver-btn--on" : "") + '" data-act="cx-dx-system" data-id="' + esc(ss[i].id) + '">' + esc(ss[i].name) + "</button>";
+    }
+    return html + "</div>";
+  }
+
+  function dxHintBlock() {
+    var dx = DX();
+    if (!dx) return "";
+    var all = dx.hints(state.caseDef, state.dxVocab, caseSystemId());
+    if (!all.length) return "";
+    var shown = Math.min(state.ddxHintLevel || 0, all.length);
+    var html = '<div class="cx-hints">';
+    for (var i = 0; i < shown; i++) {
+      html += '<div class="cx-hint">' + ic("lightbulb") + "<span>" + esc(all[i].text) + "</span></div>";
+    }
+    if (shown < all.length) {
+      html += '<button type="button" class="cx-btn cx-btn--ghost cx-hint-btn" data-act="cx-dx-hint">' +
+        ic("lightbulb") + (shown ? " Another hint" : " Need a hint?") + "</button>";
+    }
+    if (shown) html += '<div class="cx-hint-note">Hints used: ' + shown + ". Your result says so.</div>";
+    return html + "</div>";
+  }
+
+  function caseFreeFallback(phase, q, ph, next) {
+    var existing = state.caseTaken[phase] || "";
+    return '<div class="cx-turn"><p class="cx-q">' + esc(q) + "</p>" +
+      '<div class="cx-notice cx-notice--review">' + ic("wifi_off") +
+      "<div><b>The diagnosis list could not load</b><span>Type your answer instead. You can still finish the case.</span></div></div>" +
+      '<div class="cx-free"><textarea class="cx-input" id="cxCaseText" rows="5" placeholder="' + esc(ph) + '">' + esc(existing) + "</textarea></div></div>" +
+      '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">' + esc(next) + "</button></div>";
+  }
+
+  function casePhaseDdx(cd) {
+    if (state.dxVocabState === "failed") {
+      return caseFreeFallback("differential", "What are your differentials, and what argues for or against each?", "List them, most likely first", "Commit to a diagnosis");
+    }
+    var html = '<div class="cx-turn"><p class="cx-q">What is your differential? Pick every diagnosis you would seriously consider.</p></div>';
+    html += '<div class="cx-picked" id="cxDdxPicked">' + ddxPickedHTML() + "</div>";
+    html += '<div class="cx-dx-search"><input class="cx-input" id="cxDdxQ" type="search" autocomplete="off" placeholder="Search 365 diagnoses" value="' + esc(state.ddxQuery || "") + '"></div>';
+    html += dxSystemBar();
+    html += '<div class="cx-dxlist" id="cxDxResults">' + dxResultsHTML(true) + "</div>";
+    html += dxHintBlock();
+    html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">Commit to a diagnosis</button></div>';
+    return html;
+  }
+
+  // The diagnosis stage shows the differential as chips; refresh them without a full repaint.
+  function repaintPickedChips() {
+    var host = document.querySelector(".cx-picked");
+    if (!host) return;
+    var html = "";
+    for (var i = 0; i < state.ddxPicks.length; i++) {
+      var on = state.dxPick === state.ddxPicks[i];
+      html += '<button type="button" class="cx-chip' + (on ? " cx-chip--on" : "") + '" data-act="cx-dx-pick" data-id="' + esc(state.ddxPicks[i]) + '">' + esc(state.ddxPicks[i]) + "</button>";
+    }
+    host.innerHTML = html;
+  }
+
+  function ddxPickedHTML() {
+    if (!state.ddxPicks.length) return '<span class="cx-picked-empty">Nothing picked yet. A differential of one is not a differential.</span>';
+    var html = "";
+    for (var i = 0; i < state.ddxPicks.length; i++) {
+      html += '<button type="button" class="cx-chip cx-chip--pick" data-act="cx-ddx-pick" data-id="' + esc(state.ddxPicks[i]) + '">' +
+        esc(state.ddxPicks[i]) + ic("close") + "</button>";
+    }
+    return html;
+  }
+
+  function casePhaseDx(cd) {
+    if (state.dxVocabState === "failed") {
+      return caseFreeFallback("diagnosis", "What is your diagnosis?", "Your full diagnostic statement", "Give your management");
+    }
+    var html = '<div class="cx-turn"><p class="cx-q">Of those, which ONE is your diagnosis?</p></div>';
+    if (state.ddxPicks.length) {
+      html += '<div class="cx-sec-h">Your differential</div><div class="cx-picked">';
+      for (var i = 0; i < state.ddxPicks.length; i++) {
+        var on = state.dxPick === state.ddxPicks[i];
+        html += '<button type="button" class="cx-chip' + (on ? " cx-chip--on" : "") + '" data-act="cx-dx-pick" data-id="' + esc(state.ddxPicks[i]) + '">' + esc(state.ddxPicks[i]) + "</button>";
+      }
+      html += "</div>";
+    }
+    html += '<div class="cx-sec-h">Or search the full list</div>';
+    html += '<div class="cx-dx-search"><input class="cx-input" id="cxDdxQ" type="search" autocomplete="off" placeholder="Search 365 diagnoses" value="' + esc(state.ddxQuery || "") + '"></div>';
+    html += '<div class="cx-dxlist" id="cxDxResults">' + dxResultsHTML(false) + "</div>";
+    html += dxHintBlock();
+    html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">Give your management</button></div>';
+    return html;
+  }
+
+  /* The management stage is select-all-that-apply, built from the case's OWN model answer plus
+   * distractors that are wrong for this case by construction (clinix-dx.js). Some options would
+   * actively harm the patient; choosing one is reported separately from simply missing a right
+   * answer, because they are different mistakes. */
+  function casePhasePlan(cd) {
+    var dx = DX();
+    if (!dx) {
+      return caseFreeFallback("management", "How would you manage this patient right now?", "Immediate management, then before discharge", "Finish the case");
+    }
+    if (!state.planOpts) state.planOpts = dx.planOptions(cd);
+    /* A case whose model answer is keyword fragments rather than actions cannot be turned into a
+     * fair multiple choice. Rather than show a two-option stub, that case keeps the written plan. */
+    if (!state.planOpts.length) {
+      return caseFreeFallback("management", "How would you manage this patient right now?", "Immediate management, then before discharge", "Finish the case");
+    }
+    var html = '<div class="cx-turn"><p class="cx-q">How would you manage this patient? Select everything you would do now.</p></div>';
+    html += '<div class="cx-mcq">';
+    for (var i = 0; i < state.planOpts.length; i++) {
+      var o = state.planOpts[i];
+      var on = state.planPicks.indexOf(o.id) >= 0;
+      html += '<button type="button" class="cx-mcq-opt' + (on ? " cx-mcq-opt--on" : "") + '" data-act="cx-plan-pick" data-id="' + esc(o.id) + '">' +
+        '<span class="cx-mcq-box">' + ic(on ? "check_box" : "check_box_outline_blank") + "</span>" +
+        '<span class="cx-mcq-t">' + esc(o.text) + "</span></button>";
+    }
+    html += "</div>";
+    html += '<div class="cx-case-count" id="cxPlanCount">' + state.planPicks.length + " selected</div>";
+    html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">Finish the case</button></div>';
+    return html;
   }
 
   function renderCaseResult(host, cd) {
@@ -1105,6 +1311,57 @@
       html += "</ul>";
     }
 
+    /* The reasoning stages, reported as parts. A single percentage would let a student who picked
+     * twenty diagnoses and happened to include the right one believe they had reasoned well. */
+    if (r.ddx) {
+      html += '<div class="cx-sec-h">Your differential</div>';
+      html += '<div class="cx-rows cx-rows--pad">';
+      html += caseMetric("On the model list", r.ddx.matched.length + " of " + (r.ddx.matched.length + r.ddx.extra.length) + " you picked",
+        (r.ddx.matched.length + r.ddx.extra.length) ? Math.round((r.ddx.matched.length / (r.ddx.matched.length + r.ddx.extra.length)) * 100) : 0);
+      html += "</div>";
+      if (!r.ddx.hasTruth) {
+        html += '<div class="cx-notice cx-notice--review">' + ic("error") +
+          "<div><b>The true diagnosis was never on your list</b><span>Everything downstream follows from the differential. A diagnosis you never considered is one you cannot reach.</span></div></div>";
+      }
+      if (r.ddx.shotgun) {
+        html += '<div class="cx-notice cx-notice--review">' + ic("checklist") +
+          "<div><b>That is a list, not a differential</b><span>Selecting nearly everything guarantees the right answer is in there and commits you to nothing. Narrow it to what the findings actually support.</span></div></div>";
+      }
+      if (r.ddx.missed.length) {
+        html += '<div class="cx-sec-h">Worth considering, and you did not</div><ul class="cx-misslist">';
+        for (var dmi = 0; dmi < r.ddx.missed.length; dmi++) html += "<li>" + esc(r.ddx.missed[dmi]) + "</li>";
+        html += "</ul>";
+      }
+      if (r.ddx.extra.length) {
+        html += '<div class="cx-sec-h">Not supported by this case</div><ul class="cx-misslist">';
+        for (var dei = 0; dei < r.ddx.extra.length; dei++) html += "<li>" + esc(r.ddx.extra[dei]) + "</li>";
+        html += "</ul>";
+      }
+      if (r.ddx.hintsUsed) html += '<div class="cx-hint-note">You used ' + r.ddx.hintsUsed + " hint" + (r.ddx.hintsUsed === 1 ? "" : "s") + " reaching this.</div>";
+    }
+
+    if (r.plan) {
+      html += '<div class="cx-sec-h">Your management plan</div>';
+      html += '<div class="cx-rows cx-rows--pad">' + caseMetric("Correct actions chosen", r.plan.right.length + " of " + r.plan.total, r.plan.pct) + "</div>";
+      if (r.plan.harmful.length) {
+        html += '<div class="cx-notice cx-notice--review">' + ic("dangerous") +
+          "<div><b>One of your choices would have harmed this patient</b><span>This is why the plan does not pass, whatever else was right.</span></div></div>";
+        html += '<div class="cx-mcq">';
+        for (var hi = 0; hi < r.plan.harmful.length; hi++) {
+          html += '<div class="cx-mcq-opt cx-mcq-opt--harm"><span class="cx-mcq-box">' + ic("dangerous") + '</span><span class="cx-mcq-t">' + esc(r.plan.harmful[hi].text) + "</span></div>";
+        }
+        html += "</div>";
+      }
+      if (r.plan.missed.length) {
+        html += '<div class="cx-sec-h">What you left out</div><div class="cx-mcq">';
+        for (var pmi = 0; pmi < r.plan.missed.length; pmi++) {
+          html += '<div class="cx-mcq-opt cx-mcq-opt--right"><span class="cx-mcq-box">' + ic("check") + '</span><span class="cx-mcq-t">' + esc(r.plan.missed[pmi].text) + "</span></div>";
+        }
+        html += "</div>";
+      }
+      if (r.plan.answer) html += '<div class="cx-turn"><p class="cx-body">' + esc(r.plan.answer) + "</p></div>";
+    }
+
     html += '<div class="cx-sec-h">The diagnosis</div><div class="cx-turn"><p class="cx-body">' + esc(cd.diagnosis.answer) + "</p></div>";
 
     if (cd.teachingPoints && cd.teachingPoints.length) {
@@ -1132,7 +1389,11 @@
     state.caseLog = [];
     state.caseReveal = {};
     state.caseResult = null;
-    state.caseTaken = { asked: [], examined: [], investigated: [], differential: null, diagnosis: null, management: null };
+    state.caseTaken = { asked: [], examined: [], investigated: [], differential: null, diagnosis: null, management: null,
+                        ddxPicks: null, dxPick: null, planPicks: null, hintsUsed: 0 };
+    state.ddxPicks = []; state.dxPick = ""; state.planPicks = []; state.planOpts = null;
+    state.ddxQuery = ""; state.ddxSystem = ""; state.ddxHintLevel = 0;
+    state.caseSuggest = []; state.caseChipsOpen = false;
     state.activeManeuver = "baseline";
     state.caseVitals = Object.assign({ hr: 78, bpSystolic: 124, bpDiastolic: 80, rr: 16, spo2: 96, temp: 36.8, gcs: 15 }, cd.initialVitals || {});
 
@@ -1149,19 +1410,50 @@
     go("case");
   }
 
+  /* The 365-diagnosis vocabulary is fetched the first time a student reaches the differential, not
+   * at launch: it is content, and CliniX's rule is that content is lazy. While it loads the picker
+   * shows a loading row rather than an empty box, and if it fails the stage falls back to free
+   * text so the case can always be finished. */
+  function ensureDxVocab(cb) {
+    if (state.dxVocab) { cb(state.dxVocab); return; }
+    if (state.dxVocabState === "loading") return;
+    state.dxVocabState = "loading";
+    var done = function (v) {
+      state.dxVocab = v || null;
+      state.dxVocabState = v ? "ready" : "failed";
+      repaint();
+      if (v) cb(v);
+    };
+    try {
+      if (C().loadDxVocab) { C().loadDxVocab().then(done, function () { done(null); }); return; }
+    } catch (e) {}
+    done(null);
+  }
+  function DX() { return window.SMD_CLINIX_DX || null; }
+  function caseSystemId() {
+    try { return (state.built && state.built.disease && state.built.disease.system) || (state.caseDef && state.caseDef.system) || ""; } catch (e) { return ""; }
+  }
+
   function caseAsk(text) {
     text = String(text || "").trim();
     if (!text) { toast("Type a question first"); return; }
     var cd = state.caseDef;
-    var hit = M().matchAsk(cd, text);
+    var res = M().askTopics ? M().askTopics(cd, text) : null;
+    var hit = res && res.key ? { key: res.key, topic: res.topic } : M().matchAsk(cd, text);
+    state.caseSuggest = [];
     if (hit) {
       state.caseLog.push({ q: text, a: hit.topic.reply });
       if (state.caseTaken.asked.indexOf(hit.key) < 0) state.caseTaken.asked.push(hit.key);
       haptic("tap");
     } else {
       // The patient does not improvise. An unscripted reply would be a clinical fact invented by a
-      // model, and a simulated patient that invents a symptom teaches a wrong pattern.
+      // model, and a simulated patient that invents a symptom teaches a wrong pattern. What IS new
+      // is that a near miss now offers the topics it nearly matched, so a student whose phrasing
+      // did not land is redirected instead of stonewalled.
       state.caseLog.push({ q: text, a: M().unmatchedReply(cd), unmatched: true });
+      if (res && res.suggestions && res.suggestions.length) {
+        for (var si = 0; si < res.suggestions.length; si++) state.caseSuggest.push(res.suggestions[si].key);
+      }
       haptic("warning");
     }
     repaint();
@@ -1169,22 +1461,81 @@
 
   function caseNext() {
     var order = ["history", "examination", "investigations", "differential", "diagnosis", "management"];
-    var el;
-    if (state.casePhase === "differential" || state.casePhase === "diagnosis" || state.casePhase === "management") {
+    var el, v;
+    /* Each reasoning stage records BOTH shapes: the structured picks the new marking uses, and the
+     * joined text the existing scoreCase() has always marked. Keeping the text means the old
+     * marking, and every test that pins it, still works while the picks carry the detail. */
+    if (state.casePhase === "differential") {
+      el = document.getElementById("cxCaseText");           // free-text fallback
+      if (el) {
+        v = String(el.value || "").trim();
+        if (!v) { toast("Write your answer first"); return; }
+        state.caseTaken.differential = v;
+      } else {
+        if (!state.ddxPicks.length) { toast("Pick at least one diagnosis"); return; }
+        state.caseTaken.ddxPicks = state.ddxPicks.slice();
+        state.caseTaken.differential = state.ddxPicks.join(", ");
+        state.caseTaken.hintsUsed = state.ddxHintLevel || 0;
+      }
+      state.ddxQuery = "";
+    } else if (state.casePhase === "diagnosis") {
       el = document.getElementById("cxCaseText");
-      var v = el ? String(el.value || "").trim() : "";
-      if (!v) { toast("Write your answer first"); return; }
-      state.caseTaken[state.casePhase] = v;
+      if (el) {
+        v = String(el.value || "").trim();
+        if (!v) { toast("Write your answer first"); return; }
+        state.caseTaken.diagnosis = v;
+      } else {
+        if (!state.dxPick) { toast("Choose one diagnosis"); return; }
+        state.caseTaken.dxPick = state.dxPick;
+        state.caseTaken.diagnosis = state.dxPick;
+      }
+      state.ddxQuery = "";
+    } else if (state.casePhase === "management") {
+      el = document.getElementById("cxCaseText");
+      if (el) {
+        v = String(el.value || "").trim();
+        if (!v) { toast("Write your answer first"); return; }
+        state.caseTaken.management = v;
+      } else {
+        if (!state.planPicks.length) { toast("Select what you would do"); return; }
+        state.caseTaken.planPicks = state.planPicks.slice();
+        var chosen = [];
+        for (var pi = 0; pi < (state.planOpts || []).length; pi++) {
+          if (state.planPicks.indexOf(state.planOpts[pi].id) >= 0) chosen.push(state.planOpts[pi].text);
+        }
+        state.caseTaken.management = chosen.join("; ");
+      }
     }
     var i = order.indexOf(state.casePhase);
     if (i < 0 || i >= order.length - 1) { finishCase(); return; }
     state.casePhase = order[i + 1];
+    // The vocabulary is content: fetch it when the student first needs it, not at launch.
+    if (state.casePhase === "differential" || state.casePhase === "diagnosis") ensureDxVocab(function () {});
     haptic("tap");
     repaint();
   }
 
   function finishCase() {
     var r = M().scoreCase(state.caseDef, state.caseTaken);
+    /* The picker stages are marked deterministically against the case's own model, and the result
+     * carries the parts rather than one number: which differentials landed, which were missed,
+     * whether the true diagnosis was ever considered, and whether the management plan contained
+     * anything that would have harmed the patient. */
+    var dx = DX();
+    if (dx && state.caseTaken.ddxPicks) {
+      r.ddx = dx.scoreDifferential(state.caseDef, state.caseTaken.ddxPicks, state.dxVocab, { hintsUsed: state.caseTaken.hintsUsed || 0 });
+    }
+    if (dx && state.caseTaken.dxPick) {
+      r.dxPick = dx.scoreDiagnosis(state.caseDef, state.caseTaken.dxPick, state.dxVocab);
+      // The picker is the authority when it was used: keyword marking of free text cannot see a
+      // synonym the vocabulary knows about ("CCF" for congestive cardiac failure).
+      if (r.dxPick.correct) r.diagnosis.correct = true;
+    }
+    if (dx && state.caseTaken.planPicks && state.planOpts) {
+      r.plan = dx.scorePlan(state.caseDef, state.caseTaken.planPicks, state.planOpts);
+    }
+    if (r.ddx && r.ddx.shotgun) r.verdict = r.verdict === "good" ? "right-answer-thin-workup" : r.verdict;
+    if (r.plan && r.plan.harmful.length) r.verdict = "incomplete";
     state.caseResult = r;
     if (P()) {
       // Choosing to examine a relevant finding is a real clinical decision, but tapping to reveal
@@ -1323,175 +1674,277 @@
     host.innerHTML = html;
   }
 
+  /* ── physiology sandbox ───────────────────────────────────────────────────
+   * Owner report, 2026-09-19: "physiology sandbox doesnt work its 1/10". Two things were wrong.
+   * The engine was uncalibrated (normal sliders gave a blood pressure of 70/46), and every slider
+   * move called repaint(), which rewrote the whole stage and destroyed the range input the student
+   * had their thumb on, so dragging did nothing. The engine is fixed in clinix-physiology.js; here
+   * the readout and the controls are separated, and only the readout is rewritten as you drag.
+   */
+
+  function PHYS() { return window.SMD_CLINIX_PHYSIOLOGY || null; }
+
+  function physioParams() {
+    var c = state.physioCvs;
+    return {
+      cvs: {
+        preload: c.preload, afterload: c.afterload, contractility: c.contractility,
+        heartRate: c.heartRate, rhythm: c.rhythm,
+        valveLesion: { type: c.valve, severity: c.severity || "moderate" }
+      },
+      resp: state.physioResp
+    };
+  }
+
+  /* The respiratory tab is fed the cardiac output from the cardiovascular tab, because a low output
+   * lowers mixed venous saturation and so deepens any shunt. Students should see that link. */
+  function physioResult() {
+    var P = PHYS(), p = physioParams();
+    if (!P) return null;
+    if (state.physioMode === "resp") {
+      var cvs = P.simulateCardiovascular(p.cvs);
+      var input = {};
+      for (var k in p.resp) if (Object.prototype.hasOwnProperty.call(p.resp, k)) input[k] = p.resp[k];
+      input.cardiacOutput = cvs.cardiacOutput;
+      return { mode: "resp", res: P.simulateRespiratory(input), params: input, cvs: cvs };
+    }
+    return { mode: "cvs", res: P.simulateCardiovascular(p.cvs), params: p.cvs };
+  }
+
+  function waveSvg(w) {
+    if (!w) return "";
+    return '<figure class="cx-wave"><svg viewBox="0 0 ' + w.w + ' ' + w.h + '" preserveAspectRatio="none" role="img" aria-label="' + esc(w.label) + '">' +
+      (w.midline ? '<line class="cx-wave-mid" x1="0" y1="' + w.midline + '" x2="' + w.w + '" y2="' + w.midline + '"></line>' : "") +
+      '<path class="cx-wave-path" d="' + w.d + '"></path></svg>' +
+      '<figcaption class="cx-wave-cap">' + esc(w.label) + "</figcaption></figure>";
+  }
+
+  function vitalPill(label, value, unit, tone) {
+    return '<div class="cx-vital-pill"><span class="cx-vital-label">' + esc(label) + "</span>" +
+      '<span class="cx-vital-val' + (tone ? " cx-vital-val--" + tone : "") + '">' + esc(String(value)) +
+      (unit ? " <small>" + esc(unit) + "</small>" : "") + "</span></div>";
+  }
+
+  function signList(title, items) {
+    if (!items || !items.length) return "";
+    var html = '<div class="cx-synthesis-box"><div class="cx-synth-h">' + esc(title) + '</div><ul class="cx-synth-list">';
+    for (var i = 0; i < items.length; i++) html += "<li>" + esc(items[i]) + "</li>";
+    return html + "</ul></div>";
+  }
+
+  function slider(param, label, value, min, max, step, readout) {
+    return '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row">' +
+      "<span>" + esc(label) + '</span><span class="cx-physio-slider-val" id="cxPv-' + param + '">' + esc(readout) + "</span></div>" +
+      '<input type="range" class="cx-physio-range" data-param="' + param + '" min="' + min + '" max="' + max +
+      '" step="' + step + '" value="' + value + '" aria-label="' + esc(label) + '"></div>';
+  }
+
+  function chipBar(act, options, current) {
+    var html = '<div class="cx-maneuver-bar">';
+    for (var i = 0; i < options.length; i++) {
+      var on = options[i].id === current;
+      html += '<button type="button" class="cx-maneuver-btn' + (on ? " cx-maneuver-btn--on" : "") +
+        '" data-act="' + act + '" data-id="' + esc(options[i].id) + '"' + (on ? ' aria-pressed="true"' : "") + ">" +
+        esc(options[i].label) + "</button>";
+    }
+    return html + "</div>";
+  }
+
+  function subBar(title, act, options, current) {
+    return '<div class="cx-physio-group"><span class="cx-physio-group-h">' + esc(title) + "</span>" +
+      chipBar(act, options, current) + "</div>";
+  }
+
+  /* The readout. Everything here is derived, so it is the only part that has to be redrawn while a
+   * slider is moving. */
+  function physioOutHTML() {
+    var P = PHYS(), out = physioResult();
+    if (!P || !out) return "";
+    var res = out.res, html = "";
+
+    html += '<div class="cx-physio-state cx-physio-state--' + esc(out.mode === "cvs" ? res.stateTone : (res.failureType !== "none" ? "bad" : res.workOfBreathing === "normal" ? "ok" : "warn")) + '">' +
+      '<div class="cx-physio-state-t">' + esc(out.mode === "cvs" ? res.stateLabel : res.abgInterpretation) + "</div>" +
+      (out.mode === "cvs" ? '<div class="cx-physio-state-s">' + esc(res.perfusion) + "</div>" : "") +
+      "</div>";
+
+    if (out.mode === "cvs") {
+      html += '<div class="cx-vitals-monitor">' +
+        vitalPill("HR", res.heartRate, "bpm", res.heartRate > 100 || res.heartRate < 50 ? "warn" : "") +
+        vitalPill("BP", res.bpSystolic + "/" + res.bpDiastolic, "", res.meanArterialPressure < 65 ? "alert" : (res.bpSystolic >= 140 ? "warn" : "")) +
+        vitalPill("MAP", res.meanArterialPressure, "mmHg", res.meanArterialPressure < 65 ? "alert" : "") +
+        vitalPill("CO", res.cardiacOutput, "L/min", res.cardiacOutput < 3.5 ? "alert" : "") +
+        vitalPill("SV", res.strokeVolume, "mL", res.strokeVolume < 40 ? "warn" : "") +
+        vitalPill("EF", res.ejectionFraction + "%", "", res.ejectionFraction < 40 ? "alert" : "") +
+        vitalPill("JVP", "+" + res.jvpHeightCm, "cm", res.jvpHeightCm >= 8 ? "warn" : "") +
+        vitalPill("PP", res.pulsePressure, "mmHg", res.pulsePressure < 25 || res.pulsePressure > 65 ? "warn" : "") +
+        "</div>";
+
+      var waves = P.cardiovascularWaves(out.params, res);
+      html += '<div class="cx-waves">';
+      for (var w = 0; w < waves.length; w++) html += waveSvg(waves[w]);
+      html += "</div>";
+
+      html += '<div class="cx-card-diag">' +
+        '<div class="cx-card-diag-title">' + ic("hearing") + " Auscultation and pulse</div>" +
+        '<div class="cx-physio-listen">' +
+        "<div><strong>Sound:</strong> " + esc(String(res.heartSoundKind).replace(/_/g, " ")) + "<br>" +
+        "<strong>Pulse:</strong> " + esc(String(res.pulseCharacter).replace(/_/g, " ")) +
+        (res.valveGradient ? "<br><strong>Peak gradient:</strong> " + res.valveGradient + " mmHg" : "") +
+        (res.regurgitantFraction ? "<br><strong>Regurgitant fraction:</strong> " + res.regurgitantFraction + "%" : "") +
+        "</div>" +
+        '<button type="button" class="cx-btn ' + (state.audioKind === res.audioKind ? "cx-btn--danger" : "cx-btn--primary") +
+        '" data-act="cx-physio-play" data-id="' + esc(res.audioKind) + '">' +
+        ic(state.audioKind === res.audioKind ? "stop" : "volume_up") + " " + (state.audioKind === res.audioKind ? "Stop" : "Listen") + "</button>" +
+        "</div>" + signList("At the bedside", res.clinicalSigns) + "</div>";
+
+      html += '<div class="cx-physio-nums">' +
+        '<span><b>EDV</b> ' + res.edv + " mL</span><span><b>ESV</b> " + res.esv + " mL</span>" +
+        "<span><b>SVR</b> " + res.svrDynes + " dyn s cm-5</span>" +
+        "<span><b>Ea</b> " + res.arterialElastance + "</span><span><b>Ees</b> " + res.ventricularElastance + "</span>" +
+        "</div>";
+    } else {
+      html += '<div class="cx-vitals-monitor">' +
+        vitalPill("RR", res.respiratoryRate, "/min", res.respiratoryRate > 24 || res.respiratoryRate < 10 ? "warn" : "") +
+        vitalPill("SpO2", res.spO2 + "%", "", res.spO2 < 90 ? "alert" : (res.spO2 < 94 ? "warn" : "")) +
+        vitalPill("PaO2", res.paO2, "mmHg", res.paO2 < 60 ? "alert" : "") +
+        vitalPill("PaCO2", res.paCO2, "mmHg", res.paCO2 > 50 || res.paCO2 < 30 ? "warn" : "") +
+        vitalPill("pH", res.pH, "", res.pH < 7.30 || res.pH > 7.50 ? "alert" : "") +
+        vitalPill("HCO3", res.hco3, "mmol/L", "") +
+        vitalPill("P/F", res.pfRatio, "", res.pfRatio < 200 ? "alert" : (res.pfRatio < 300 ? "warn" : "")) +
+        vitalPill("A-a", res.aaGradient, "mmHg", res.aaGradient > 25 ? "warn" : "") +
+        "</div>";
+
+      var rw = P.respiratoryWaves(out.params, res);
+      html += '<div class="cx-waves">';
+      for (var q = 0; q < rw.length; q++) html += waveSvg(rw[q]);
+      html += "</div>";
+
+      html += '<div class="cx-card-diag">' +
+        '<div class="cx-card-diag-title">' + ic("air") + " Mechanics and auscultation</div>" +
+        '<div class="cx-physio-listen">' +
+        "<div><strong>Breath sound:</strong> " + esc(String(res.breathSoundKind).replace(/_/g, " ")) + "<br>" +
+        "<strong>Work of breathing:</strong> " + esc(res.workOfBreathing) + "<br>" +
+        "<strong>Spirometry:</strong> FEV1 " + res.spirometry.fev1Pct + "% predicted, ratio " + res.spirometry.ratio +
+        " (" + esc(res.spirometry.pattern) + ")</div>" +
+        '<button type="button" class="cx-btn ' + (state.audioKind === res.audioKind ? "cx-btn--danger" : "cx-btn--primary") +
+        '" data-act="cx-physio-play" data-id="' + esc(res.audioKind) + '">' +
+        ic(state.audioKind === res.audioKind ? "stop" : "volume_up") + " " + (state.audioKind === res.audioKind ? "Stop" : "Listen") + "</button>" +
+        "</div>" + signList("At the bedside", res.clinicalSigns) + "</div>";
+
+      html += '<div class="cx-physio-nums">' +
+        "<span><b>Minute vol</b> " + res.minuteVentilation + " L/min of " + res.minuteVentilationMax + " possible</span>" +
+        "<span><b>Alveolar</b> " + res.alveolarVentilation + " L/min</span>" +
+        "<span><b>VT</b> " + res.tidalVolume + " mL</span>" +
+        "<span><b>EtCO2</b> " + res.etCO2 + " mmHg</span>" +
+        "<span><b>Shunt</b> " + res.shuntFraction + "%</span>" +
+        "<span><b>SvO2</b> " + res.svO2 + "%</span>" +
+        "</div>";
+    }
+
+    html += '<div class="cx-physio-why"><div class="cx-synth-h">Why the numbers moved</div><ul class="cx-synth-list">';
+    for (var e = 0; e < res.explain.length; e++) html += "<li>" + esc(res.explain[e]) + "</li>";
+    html += "</ul></div>";
+    return html;
+  }
+
+  function physioPresetHTML() {
+    var P = PHYS();
+    if (!P) return "";
+    var list = P.presetsFor(state.physioMode === "resp" ? "resp" : "cvs"), opts = [];
+    for (var i = 0; i < list.length; i++) opts.push({ id: list[i].id, label: list[i].label });
+    var html = subBar("Start from a real patient", "cx-physio-preset", opts, state.physioPreset);
+    var chosen = state.physioPreset ? P.preset(state.physioPreset) : null;
+    if (chosen) html += '<div class="cx-physio-note">' + esc(chosen.note) + "</div>";
+    return html;
+  }
+
+  function physioControlsHTML() {
+    var html = "";
+    if (state.physioMode === "cvs") {
+      var c = state.physioCvs;
+      html += '<div class="cx-sec"><div class="cx-sec-h">Haemodynamic variables</div>';
+      html += slider("preload", "Preload (venous return)", c.preload, 30, 220, 5, c.preload + "%");
+      html += slider("afterload", "Afterload (systemic vascular resistance)", c.afterload, 30, 220, 5, c.afterload + "%");
+      html += slider("contractility", "Contractility (inotropy)", c.contractility, 15, 200, 5, c.contractility + "%");
+      html += slider("heartRate", "Heart rate", c.heartRate, 30, 200, 2, c.heartRate + " bpm");
+      html += subBar("Rhythm", "cx-physio-rhythm", [
+        { id: "sinus", label: "Sinus" },
+        { id: "afib", label: "Atrial fibrillation" },
+        { id: "chb", label: "Complete heart block" }
+      ], c.rhythm);
+      html += subBar("Valve lesion", "cx-physio-valve", [
+        { id: "none", label: "None" }, { id: "as", label: "Aortic stenosis" },
+        { id: "ar", label: "Aortic regurgitation" }, { id: "ms", label: "Mitral stenosis" },
+        { id: "mr", label: "Mitral regurgitation" }, { id: "tr", label: "Tricuspid regurgitation" }
+      ], c.valve);
+      if (c.valve !== "none") {
+        html += subBar("Severity", "cx-physio-sev", [
+          { id: "mild", label: "Mild" }, { id: "moderate", label: "Moderate" }, { id: "severe", label: "Severe" }
+        ], c.severity || "moderate");
+      }
+      html += "</div>";
+    } else {
+      var r = state.physioResp;
+      html += '<div class="cx-sec"><div class="cx-sec-h">Pulmonary and ventilatory variables</div>';
+      html += slider("airwayResistance", "Airway resistance", r.airwayResistance, 0.5, 6.0, 0.1, r.airwayResistance.toFixed(1) + " cmH2O/L/s");
+      html += slider("compliance", "Lung compliance", r.compliance, 0.2, 2.0, 0.05, r.compliance.toFixed(2) + " L/cmH2O");
+      html += slider("deadSpaceFraction", "Dead space (VD/VT)", r.deadSpaceFraction, 0.1, 0.8, 0.01, Math.round(r.deadSpaceFraction * 100) + "%");
+      html += slider("shuntFraction", "Shunt (Qs/Qt)", r.shuntFraction, 0, 0.6, 0.01, Math.round(r.shuntFraction * 100) + "%");
+      html += slider("respiratoryDrive", "Central respiratory drive", r.respiratoryDrive, 0, 250, 5, r.respiratoryDrive + "%");
+      html += slider("fiO2", "Inspired oxygen (FiO2)", r.fiO2, 0.21, 1.0, 0.01, Math.round(r.fiO2 * 100) + "%");
+      html += slider("baseExcess", "Metabolic component (base excess)", r.baseExcess, -25, 20, 1, (r.baseExcess > 0 ? "+" : "") + r.baseExcess + " mmol/L");
+      html += "</div>";
+    }
+    return html;
+  }
+
+  function physioReadout(param, value) {
+    if (state.physioMode === "resp") {
+      if (param === "airwayResistance") return value.toFixed(1) + " cmH2O/L/s";
+      if (param === "compliance") return value.toFixed(2) + " L/cmH2O";
+      if (param === "deadSpaceFraction" || param === "shuntFraction" || param === "fiO2") return Math.round(value * 100) + "%";
+      if (param === "baseExcess") return (value > 0 ? "+" : "") + value + " mmol/L";
+      return value + "%";
+    }
+    return param === "heartRate" ? value + " bpm" : value + "%";
+  }
+
   function renderPhysiologySandbox(host) {
-    if (!window.SMD_CLINIX_PHYSIOLOGY) {
-      host.innerHTML = header("Physiology Sandbox", "Simulator") +
-        emptyState("tune", "Simulator unavailable", "The physiology engine is loading.");
+    if (!PHYS()) {
+      host.innerHTML = header("Physiology sandbox", "Simulator") +
+        emptyState("tune", "Simulator unavailable", "The physiology engine is still loading.");
       return;
     }
-    var mode = state.physioMode || "cvs";
-    var html = header("Physiology Sandbox", "Bedside hemodynamics & gas exchange");
+    host.innerHTML = header("Physiology sandbox", "Bedside haemodynamics and gas exchange") +
+      chipBar("cx-physio-mode", [
+        { id: "cvs", label: "Cardiovascular" }, { id: "resp", label: "Respiratory and ABG" }
+      ], state.physioMode) +
+      '<div id="cxPhysioPre">' + physioPresetHTML() + '</div>' +
+      '<div id="cxPhysioOut">' + physioOutHTML() + "</div>" +
+      physioControlsHTML() +
+      '<div class="cx-disclaimer">A teaching model, not a patient. The numbers are internally consistent, not a substitute for a measured blood gas or an echocardiogram.</div>';
 
-    html += '<div class="cx-physio-ctrl" style="margin-bottom: 16px;"><div class="cx-maneuver-bar">' +
-      '<button type="button" class="cx-maneuver-btn' + (mode === "cvs" ? " cx-maneuver-btn--on" : "") + '" data-act="cx-physio-mode" data-id="cvs">Cardiovascular & Auscultation</button>' +
-      '<button type="button" class="cx-maneuver-btn' + (mode === "resp" ? " cx-maneuver-btn--on" : "") + '" data-act="cx-physio-mode" data-id="resp">Respiratory & ABG</button>' +
-      '</div></div>';
-
-    if (mode === "cvs") {
-      var cvs = state.physioCvs;
-      var cvsRes = SMD_CLINIX_PHYSIOLOGY.simulateCardiovascular({
-        preload: cvs.preload,
-        afterload: cvs.afterload,
-        contractility: cvs.contractility,
-        heartRate: cvs.heartRate,
-        rhythm: cvs.rhythm,
-        valveLesion: { type: cvs.valve, severity: "moderate" }
-      });
-
-      if (window.SMD_CLINIX_WATCH && SMD_CLINIX_WATCH.publishPulse) {
-        try {
-          SMD_CLINIX_WATCH.publishPulse({
-            rate: cvs.heartRate,
-            rhythm: cvs.rhythm === "afib" ? "irregularly_irregular" : "regular",
-            character: cvsRes.pulseCharacter,
-            volume: cvsRes.pulsePressure > 60 ? "bounding" : cvsRes.pulsePressure < 25 ? "thready" : "normal"
-          });
-        } catch (e) {}
-      }
-
-      html += '<div class="cx-vitals-monitor" style="margin-bottom:12px;">' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">HR</span><span class="cx-vital-val">' + cvs.heartRate + ' <small>bpm</small></span></div>' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">BP</span><span class="cx-vital-val">' + cvsRes.bpSystolic + '/' + cvsRes.bpDiastolic + '</span></div>' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">MAP</span><span class="cx-vital-val">' + cvsRes.meanArterialPressure + ' <small>mmHg</small></span></div>' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">SV</span><span class="cx-vital-val">' + cvsRes.strokeVolume + ' <small>mL</small></span></div>' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">CO</span><span class="cx-vital-val">' + cvsRes.cardiacOutput + ' <small>L/min</small></span></div>' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">JVP</span><span class="cx-vital-val">+' + cvsRes.jvpHeightCm + ' <small>cm</small></span></div>' +
-        '</div>';
-
-      var playingSound = state.audioKind === cvsRes.heartSoundKind;
-      html += '<div class="cx-card-diag" style="margin-bottom:12px;">' +
-        '<div class="cx-card-diag-h">' + ic("hearing") + ' Bedside Auscultation & Pulse</div>' +
-        '<div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">' +
-        '<div><strong>Sound: </strong>' + esc(cvsRes.heartSoundKind.replace(/_/g, " ").toUpperCase()) + '<br>' +
-        '<strong>Pulse: </strong>' + esc(cvsRes.pulseCharacter.replace(/_/g, " ")) + '</div>' +
-        '<button type="button" class="cx-btn ' + (playingSound ? 'cx-btn--danger' : 'cx-btn--primary') + '" data-act="cx-physio-play-cvs" data-id="' + cvsRes.heartSoundKind + '">' +
-        ic(playingSound ? "stop" : "volume_up") + ' ' + (playingSound ? "Stop" : "Listen") + '</button>' +
-        '</div>';
-
-      if (cvsRes.clinicalSigns && cvsRes.clinicalSigns.length) {
-        html += '<div class="cx-synthesis-box" style="margin-top:10px;"><div class="cx-synth-h">Clinical Hallmarks</div>' +
-          '<ul class="cx-synth-list">';
-        for (var si = 0; si < cvsRes.clinicalSigns.length; si++) {
-          html += '<li>' + esc(cvsRes.clinicalSigns[si]) + '</li>';
-        }
-        html += '</ul></div>';
-      }
-      html += '</div>';
-
-      html += '<div class="cx-sec"><div class="cx-sec-h">Hemodynamic Variables</div>';
-
-      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Preload (EDV / venous return)</span><span class="cx-physio-slider-val">' + cvs.preload + '%</span></div>' +
-        '<input type="range" class="cx-physio-range" data-param="preload" min="50" max="200" step="5" value="' + cvs.preload + '"></div>';
-
-      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Afterload (SVR / arterial impedance)</span><span class="cx-physio-slider-val">' + cvs.afterload + '%</span></div>' +
-        '<input type="range" class="cx-physio-range" data-param="afterload" min="50" max="200" step="5" value="' + cvs.afterload + '"></div>';
-
-      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Myocardial Contractility (Inotropy)</span><span class="cx-physio-slider-val">' + cvs.contractility + '%</span></div>' +
-        '<input type="range" class="cx-physio-range" data-param="contractility" min="30" max="160" step="5" value="' + cvs.contractility + '"></div>';
-
-      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Heart Rate</span><span class="cx-physio-slider-val">' + cvs.heartRate + ' bpm</span></div>' +
-        '<input type="range" class="cx-physio-range" data-param="heartRate" min="40" max="180" step="2" value="' + cvs.heartRate + '"></div>';
-
-      html += '<div style="margin-top:12px;"><span style="font-size:12px; font-weight:700; color:var(--cx-muted); text-transform:uppercase;">Cardiac Rhythm</span>' +
-        '<div class="cx-maneuver-bar" style="margin-top:6px;">';
-      var rhythms = [
-        { id: "sinus", label: "Sinus" },
-        { id: "afib", label: "AFib (absent a wave)" },
-        { id: "chb", label: "Complete Heart Block (cannon a)" }
-      ];
-      for (var ri = 0; ri < rhythms.length; ri++) {
-        var rOn = cvs.rhythm === rhythms[ri].id;
-        html += '<button type="button" class="cx-maneuver-btn' + (rOn ? " cx-maneuver-btn--on" : "") + '" data-act="cx-physio-rhythm" data-id="' + rhythms[ri].id + '">' + esc(rhythms[ri].label) + '</button>';
-      }
-      html += '</div></div>';
-
-      html += '<div style="margin-top:12px;"><span style="font-size:12px; font-weight:700; color:var(--cx-muted); text-transform:uppercase;">Valvular Pathology</span>' +
-        '<div class="cx-maneuver-bar" style="margin-top:6px;">';
-      var valves = [
-        { id: "none", label: "None (Healthy)" },
-        { id: "as", label: "Aortic Stenosis" },
-        { id: "mr", label: "Mitral Regurgitation" },
-        { id: "ms", label: "Mitral Stenosis" },
-        { id: "ar", label: "Aortic Regurgitation" },
-        { id: "tr", label: "Tricuspid Regurgitation" }
-      ];
-      for (var vi = 0; vi < valves.length; vi++) {
-        var vOn = cvs.valve === valves[vi].id;
-        html += '<button type="button" class="cx-maneuver-btn' + (vOn ? " cx-maneuver-btn--on" : "") + '" data-act="cx-physio-valve" data-id="' + valves[vi].id + '">' + esc(valves[vi].label) + '</button>';
-      }
-      html += '</div></div>';
-
-      html += '</div>';
-    } else {
-      var resp = state.physioResp;
-      var respRes = SMD_CLINIX_PHYSIOLOGY.simulateRespiratory({
-        airwayResistance: resp.airwayResistance,
-        compliance: resp.compliance,
-        deadSpaceFraction: resp.deadSpaceFraction,
-        minuteVentilation: resp.minuteVentilation,
-        fiO2: resp.fiO2
-      });
-
-      html += '<div class="cx-vitals-monitor" style="margin-bottom:12px;">' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">RR</span><span class="cx-vital-val">' + respRes.respiratoryRate + ' <small>/min</small></span></div>' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">SpO2</span><span class="cx-vital-val">' + respRes.spO2 + '%</span></div>' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">PaO2</span><span class="cx-vital-val">' + respRes.paO2 + ' <small>mmHg</small></span></div>' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">PaCO2</span><span class="cx-vital-val">' + respRes.paCO2 + ' <small>mmHg</small></span></div>' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">pH</span><span class="cx-vital-val">' + respRes.pH.toFixed(2) + '</span></div>' +
-        '<div class="cx-vital-pill"><span class="cx-vital-label">WOB</span><span class="cx-vital-val">' + esc(respRes.workOfBreathing.toUpperCase()) + '</span></div>' +
-        '</div>';
-
-      var playingRespSound = state.audioKind === respRes.breathSoundKind;
-      html += '<div class="cx-card-diag" style="margin-bottom:12px;">' +
-        '<div class="cx-card-diag-h">' + ic("air") + ' Respiratory Mechanics & Auscultation</div>' +
-        '<div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">' +
-        '<div><strong>Breath Sound: </strong>' + esc(respRes.breathSoundKind.toUpperCase()) + '<br>' +
-        '<strong>Work of Breathing: </strong>' + esc(respRes.workOfBreathing) + '</div>' +
-        '<button type="button" class="cx-btn ' + (playingRespSound ? 'cx-btn--danger' : 'cx-btn--primary') + '" data-act="cx-physio-play-resp" data-id="' + respRes.breathSoundKind + '">' +
-        ic(playingRespSound ? "stop" : "volume_up") + ' ' + (playingRespSound ? "Stop" : "Listen") + '</button>' +
-        '</div>';
-
-      if (respRes.clinicalSigns && respRes.clinicalSigns.length) {
-        html += '<div class="cx-synthesis-box" style="margin-top:10px;"><div class="cx-synth-h">Clinical Hallmarks</div>' +
-          '<ul class="cx-synth-list">';
-        for (var rsi = 0; rsi < respRes.clinicalSigns.length; rsi++) {
-          html += '<li>' + esc(respRes.clinicalSigns[rsi]) + '</li>';
-        }
-        html += '</ul></div>';
-      }
-      html += '</div>';
-
-      html += '<div class="cx-sec"><div class="cx-sec-h">Pulmonary & Ventilatory Variables</div>';
-
-      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Airway Resistance (Raw)</span><span class="cx-physio-slider-val">' + resp.airwayResistance.toFixed(1) + ' cmH2O/L/s</span></div>' +
-        '<input type="range" class="cx-physio-range" data-param="airwayResistance" min="0.5" max="5.0" step="0.1" value="' + resp.airwayResistance + '"></div>';
-
-      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Lung Compliance (CL)</span><span class="cx-physio-slider-val">' + resp.compliance.toFixed(1) + ' L/cmH2O</span></div>' +
-        '<input type="range" class="cx-physio-range" data-param="compliance" min="0.2" max="2.0" step="0.1" value="' + resp.compliance + '"></div>';
-
-      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Minute Ventilation (VE)</span><span class="cx-physio-slider-val">' + resp.minuteVentilation.toFixed(1) + ' L/min</span></div>' +
-        '<input type="range" class="cx-physio-range" data-param="minuteVentilation" min="2.0" max="15.0" step="0.5" value="' + resp.minuteVentilation + '"></div>';
-
-      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Dead Space Fraction (VD/VT)</span><span class="cx-physio-slider-val">' + Math.round(resp.deadSpaceFraction * 100) + '%</span></div>' +
-        '<input type="range" class="cx-physio-range" data-param="deadSpaceFraction" min="0.1" max="0.7" step="0.05" value="' + resp.deadSpaceFraction + '"></div>';
-
-      html += '<div class="cx-physio-ctrl"><div class="cx-physio-slider-row"><span>Inspired Oxygen (FiO2)</span><span class="cx-physio-slider-val">' + Math.round(resp.fiO2 * 100) + '%</span></div>' +
-        '<input type="range" class="cx-physio-range" data-param="fiO2" min="0.21" max="1.00" step="0.05" value="' + resp.fiO2 + '"></div>';
-
-      html += '</div>';
+    if (window.SMD_CLINIX_WATCH && SMD_CLINIX_WATCH.publishPulse && state.physioMode === "cvs") {
+      try {
+        var r = physioResult().res;
+        SMD_CLINIX_WATCH.publishPulse({
+          rate: r.heartRate,
+          rhythm: state.physioCvs.rhythm === "afib" ? "irregularly_irregular" : "regular",
+          character: r.pulseCharacter,
+          volume: r.pulsePressure > 60 ? "bounding" : (r.pulsePressure < 25 ? "thready" : "normal")
+        });
+      } catch (e) {}
     }
+  }
 
-    host.innerHTML = html;
+  function applyPhysioPreset(id) {
+    var P = PHYS(), pre = P && P.preset(id);
+    if (!pre) return;
+    state.physioPreset = id;
+    var target = pre.mode === "resp" ? state.physioResp : state.physioCvs;
+    for (var k in pre.params) {
+      if (Object.prototype.hasOwnProperty.call(pre.params, k)) target[k] = pre.params[k];
+    }
   }
 
   /* ── router ──────────────────────────────────────────────────────────────── */
@@ -2215,6 +2668,58 @@
         haptic("tap"); repaint(); return;
       }
       case "cx-case-next": caseNext(); return;
+      case "cx-case-chips": state.caseChipsOpen = !state.caseChipsOpen; haptic("tap"); repaint(); return;
+      // Asking a topic by tapping its chip is the same event as typing the question: the patient
+      // answers from the script, and the topic is credited exactly once either way.
+      case "cx-case-topic": {
+        var tcd = state.caseDef, topic = tcd && tcd.history && tcd.history[id];
+        if (!topic) return;
+        state.caseSuggest = [];
+        state.caseLog.push({ q: prettySkill(id) + "?", a: topic.reply });
+        if (state.caseTaken.asked.indexOf(id) < 0) state.caseTaken.asked.push(id);
+        haptic("tap"); repaint(); return;
+      }
+      case "cx-ddx-pick": {
+        var at = state.ddxPicks.indexOf(id);
+        if (at >= 0) state.ddxPicks.splice(at, 1); else state.ddxPicks.push(id);
+        haptic("tap");
+        // Repaint only the two regions that changed. A full repaint would destroy the search input
+        // the student is typing in, which is the same defect the physiology sandbox had.
+        var pk = document.getElementById("cxDdxPicked"), rs = document.getElementById("cxDxResults");
+        if (pk && rs) { pk.innerHTML = ddxPickedHTML(); rs.innerHTML = dxResultsHTML(true); }
+        else repaint();
+        return;
+      }
+      case "cx-dx-pick": {
+        state.dxPick = (state.dxPick === id) ? "" : id;
+        haptic("tap");
+        var rs2 = document.getElementById("cxDxResults");
+        if (rs2) { rs2.innerHTML = dxResultsHTML(false); repaintPickedChips(); } else repaint();
+        return;
+      }
+      case "cx-dx-system": {
+        state.ddxSystem = id || "";
+        haptic("tap"); repaint(); return;
+      }
+      case "cx-dx-hint": {
+        var dxh = DX();
+        var maxH = dxh ? dxh.hints(state.caseDef, state.dxVocab, caseSystemId()).length : 0;
+        state.ddxHintLevel = Math.min((state.ddxHintLevel || 0) + 1, maxH);
+        haptic("tap"); repaint(); return;
+      }
+      case "cx-plan-pick": {
+        // Toggle in place. A repaint here replaced every option button, so a student ticking four
+        // boxes in quick succession lost all but the first: the later taps landed on dead nodes.
+        var pat = state.planPicks.indexOf(id);
+        var on = pat < 0;
+        if (on) state.planPicks.push(id); else state.planPicks.splice(pat, 1);
+        t.classList.toggle("cx-mcq-opt--on", on);
+        var box = t.querySelector(".cx-mcq-box .material-symbols-rounded");
+        if (box) box.textContent = on ? "check_box" : "check_box_outline_blank";
+        var pc = document.getElementById("cxPlanCount");
+        if (pc) pc.textContent = state.planPicks.length + " selected";
+        haptic("tap"); return;
+      }
       case "cx-case-retry": startCase(state.caseDef.id); return;
       case "cx-viva": haptic("tap"); startViva(); return;
       case "cx-viva-answer": {
@@ -2234,17 +2739,19 @@
         toast("Open a topic first, then choose a station or viva from its page"); return;
 
       case "cx-sandbox": haptic("tap"); go("sandbox"); return;
-      case "cx-physio-mode": state.physioMode = id; haptic("tap"); repaint(); return;
-      case "cx-physio-rhythm": state.physioCvs.rhythm = id; haptic("tap"); repaint(); return;
-      case "cx-physio-valve": state.physioCvs.valve = id; haptic("tap"); repaint(); return;
-      case "cx-physio-play-cvs":
-      case "cx-physio-play-resp": {
-        if (state.audioKind === id) {
-          stopAudio();
-        } else {
-          playAudio(id);
-        }
-        haptic("tap"); repaint(); return;
+      case "cx-physio-mode": state.physioMode = id; state.physioPreset = ""; haptic("tap"); repaint(); return;
+      case "cx-physio-preset": applyPhysioPreset(id); haptic("tap"); repaint(); return;
+      // Turning a slider by hand means the student is no longer on the preset, so drop the label
+      // rather than leave a teaching note describing numbers that are no longer on screen.
+      case "cx-physio-rhythm": state.physioCvs.rhythm = id; state.physioPreset = ""; haptic("tap"); repaint(); return;
+      case "cx-physio-valve": state.physioCvs.valve = id; state.physioPreset = ""; haptic("tap"); repaint(); return;
+      case "cx-physio-sev": state.physioCvs.severity = id; state.physioPreset = ""; haptic("tap"); repaint(); return;
+      case "cx-physio-play": {
+        if (state.audioKind === id) stopAudio(); else playAudio(id);
+        haptic("tap");
+        var po = document.getElementById("cxPhysioOut");
+        if (po) po.innerHTML = physioOutHTML(); else repaint();
+        return;
       }
 
       case "cx-resume": resume(); return;
@@ -2300,16 +2807,30 @@
 
   function onInput(e) {
     var t = e.target;
+    /* The diagnosis search. Repainting the whole stage on every keystroke would replace the input
+     * element mid-typing and drop the caret, so only the results list is rewritten. */
+    if (t && t.id === "cxDdxQ") {
+      state.ddxQuery = String(t.value || "");
+      var rs = document.getElementById("cxDxResults");
+      if (rs) rs.innerHTML = dxResultsHTML(state.casePhase === "differential");
+      return;
+    }
+    /* The physiology sliders. A full repaint replaces the range element the student has their
+     * thumb on, which is exactly why the sandbox felt dead: the drag was cancelled on the first
+     * input event. Patch the one readout and the derived panel, and leave the controls alone. */
     if (!t || !t.classList || !t.classList.contains("cx-physio-range")) return;
     var param = t.getAttribute("data-param");
     if (!param) return;
     var val = parseFloat(t.value);
-    if (state.physioMode === "resp") {
-      state.physioResp[param] = val;
-    } else {
-      state.physioCvs[param] = val;
-    }
-    repaint();
+    if (isNaN(val)) return;
+    if (state.physioMode === "resp") state.physioResp[param] = val; else state.physioCvs[param] = val;
+    state.physioPreset = "";
+    var lab = document.getElementById("cxPv-" + param);
+    if (lab) lab.textContent = physioReadout(param, val);
+    var pre = document.getElementById("cxPhysioPre");
+    if (pre) pre.innerHTML = physioPresetHTML();
+    var out = document.getElementById("cxPhysioOut");
+    if (out) out.innerHTML = physioOutHTML(); else repaint();
   }
 
   function init(root) {

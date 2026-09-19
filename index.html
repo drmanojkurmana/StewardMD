@@ -86,7 +86,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/thorex-screens.css?v=tx12">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx18-calm">
 <link rel="stylesheet" href="/insulin.css?v=ins15">
-<link rel="stylesheet" href="/clinix.css?v=cx17-annex">
+<link rel="stylesheet" href="/clinix.css?v=cx19-sandbox1">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
 <link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
@@ -2412,17 +2412,23 @@ window.openExternal = function (u) {
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
 <script src="/clinix-flags.js?v=cx14-session" defer></script>
-<script src="/clinix-model.js?v=cx20-annex" defer></script>
-<script src="/clinix-content.js?v=cx15-ver" defer></script>
+<!-- The lexicon must be parsed before the model asks for it (the model resolves it lazily off
+     window, so order is for clarity, not correctness). clinix-dx.js holds the differential /
+     diagnosis pickers and the management MCQ; its 365-diagnosis vocabulary is NOT bundled and
+     is fetched from /clinix/dx-vocabulary.json on first use. -->
+<script src="/clinix-lexicon.js?v=cx-lex1" defer></script>
+<script src="/clinix-model.js?v=cx21-lex1" defer></script>
+<script src="/clinix-dx.js?v=cx-dx1" defer></script>
+<script src="/clinix-content.js?v=cx16-dxvocab" defer></script>
 <script src="/clinix-diagrams.js?v=cx13" defer></script>
 <script src="/clinix-audio.js?v=cx-stridor2" defer></script>
 <script src="/clinix-store.js?v=cx12" defer></script>
 <script src="/clinix-tutor.js?v=cx14" defer></script>
-<script src="/clinix-engine.js?v=cx10" defer></script>
-<script src="/clinix-physiology.js?v=cx10" defer></script>
+<script src="/clinix-engine.js?v=cx11-lex1" defer></script>
+<script src="/clinix-physiology.js?v=cx11-sandbox1" defer></script>
 <script src="/clinix-profile.js?v=cx10" defer></script>
 <script src="/clinix-examiner.js?v=cx10" defer></script>
-<script src="/clinix-screens.js?v=cx24-session" defer></script>
+<script src="/clinix-screens.js?v=cx26-sandbox1" defer></script>
 <script src="/clinix.js?v=cx12" defer></script>
 <!-- SURGX (SURGˣ) · Surgical Intelligence (additive, flag-gated smd_surgx; ON for testers, flip to
      false before any non-tester release - see surgx-flags.js). Scoped #surgxRoot + .sgx-* +
