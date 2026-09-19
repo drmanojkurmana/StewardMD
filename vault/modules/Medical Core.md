@@ -7,7 +7,13 @@ flag: smd_medcore + smd_medcore_shadow (both default OFF)
 
 ## Status (2026-09-19)
 
-Steps 1 to 7 of the Implementation Order are DONE. The work can go no further than step 12, the data gate.
+Steps 1 to 11 of the Implementation Order are DONE. The work can go no further than step 12, the
+data gate, which is not an engineering task.
+
+One deviation from the file table below: `medcore/medcore-outcomes.js` was added. The plan put the
+risk-set and blanking rules in `backend/medcore/` (training only), but the bedside needs the SAME
+rules to decide whether a decision may be produced about a patient at all, and two copies of a
+HAZ-ML-02 control is how one of them quietly stops matching. It is one function, used by both.
 
 | Step | State | What exists |
 |---|---|---|
@@ -18,10 +24,10 @@ Steps 1 to 7 of the Implementation Order are DONE. The work can go no further th
 | 5 changes | done | `medcore/data/change-bands.json` + `medcore/medcore-changes.js` |
 | 6 panel | done | `medcore-boot.js`, one flag-gated card in `icu.js`, `index.html`, `scripts/build-www.sh`, `test/run-medcore-ui.mjs` (19 browser assertions) |
 | 7 Phase 1 ships | done | this note, `vault/Home.md`, `vault/Flags.md`, `vault/decisions/Decisions.md` |
-| 8 WardSynQ adapter | pending | `fromWardSynQ()` reading through `wardsynq-temporal.js` |
-| 9 features | pending | `medcore/medcore-features.js` + the banned-feature list. HAZ-ML-01 |
-| 10 hazards | pending | HAZ-ML-01..04 in `wardsynq/wardsynq-safety-case.js`, cross-referenced by `scripts/wardsynq-assurance.mjs` |
-| 11 outcomes | pending | `medcore/data/outcomes.json` (5 outcomes, unapproved) + `test/medcore-labels.test.mjs`. HAZ-ML-02 |
+| 8 WardSynQ adapter | done | `fromWardSynQ()` reading through `wardsynq-temporal.js` |
+| 9 features | done | `medcore/medcore-features.js` + the banned-feature list. HAZ-ML-01 |
+| 10 hazards | done | HAZ-ML-01..04 in `wardsynq/wardsynq-safety-case.js`, cross-referenced by `scripts/wardsynq-assurance.mjs` |
+| 11 outcomes | done | `medcore/data/outcomes.json` (5 outcomes, unapproved) + `medcore/medcore-outcomes.js` + `test/medcore-labels.test.mjs`. HAZ-ML-02 |
 | 12 DATA GATE | **BLOCKED** | No dataset, no access approval, no adjudication, no named clinical approver. Nothing past here is an engineering task |
 | 13 to 21 | not started | Everything from dataset construction onward waits on step 12 |
 
