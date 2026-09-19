@@ -1,0 +1,105 @@
+/* medcore-boot.js — the only thing that turns Medical Core on, and it does nothing by default.
+ *
+ * WHAT IT DOES. With `smd_medcore` on, it loads the three clinical packs (units, freshness, change
+ * bands), builds `window.SMD_MEDCORE`, and lets icu.js ask one question: given this ICU state and
+ * this instant, what changed and what is missing. That is the whole surface in Phase 1. There is no
+ * model, no probability, no prompt, no alert and no notification.
+ *
+ * WHY IT IS SAFE TO LOAD.
+ *  1. FLAG OFF IS A COMPLETE NO-OP. With the flag off this file fetches nothing, defines nothing on
+ *     window, and returns. Not loading it at all removes the feature entirely; there is no edit to
+ *     revert, which is the property wardsynq-shadow-boot.js was built around.
+ *  2. IT CANNOT THROW INTO THE APP. Every path is wrapped. A failure leaves `window.SMD_MEDCORE`
+ *     absent or its `summary()` returning null, and icu.js renders nothing. A defect here shows up
+ *     as a missing panel, never as a broken ward round.
+ *  3. IT WRITES NOTHING. No store, no chart, no event bus, no network beyond fetching its own
+ *     static packs, and no patient value leaves the device. Inference, when it exists, will run
+ *     here too, on artifacts fetched like these packs, for exactly that reason.
+ *  4. IT OWNS NO CLOCK POLICY. `summary()` takes `asOf` from the caller and passes it straight
+ *     through, so the leakage control in medcore-state.js is never bypassed by a convenience
+ *     default.
+ *
+ * Its inertness is asserted in test/medcore-flags.test.mjs (the flag guard precedes the first
+ * import and the first fetch); the real browser path is test/run-medcore-ui.mjs.
+ */
+
+const FLAG = "smd_medcore";
+const PACK_V = "medcore1";
+
+let PACKS = null;
+let loading = null;
+
+function flagOn() {
+  try {
+    const F = window.SMD_MEDCORE_FLAGS;
+    return !!(F && F.bool && F.bool(FLAG));
+  } catch (e) { return false; }
+}
+
+async function loadPacks() {
+  if (PACKS) return PACKS;
+  if (loading) return loading;
+  loading = (async () => {
+    const [units, freshness, bands] = await Promise.all([
+      fetch("/medcore/data/units.json?v=" + PACK_V).then((r) => r.json()),
+      fetch("/medcore/data/freshness.json?v=" + PACK_V).then((r) => r.json()),
+      fetch("/medcore/data/change-bands.json?v=" + PACK_V).then((r) => r.json())
+    ]);
+    PACKS = { unitTable: units, freshness: freshness, bands: bands };
+    return PACKS;
+  })();
+  return loading;
+}
+
+async function install() {
+  if (!flagOn()) return;                      // rule 1: nothing at all
+  const [state, changesMod, missingMod] = await Promise.all([
+    import("/medcore/medcore-state.js"),
+    import("/medcore/medcore-changes.js"),
+    import("/medcore/medcore-missing.js")
+  ]);
+  const packs = await loadPacks();
+  const deps = { unitTable: packs.unitTable, freshness: packs.freshness };
+
+  const API = {
+    version: "medcore-boot@1.0.0",
+    packs: function () {
+      return {
+        units: packs.unitTable.version, freshness: packs.freshness.version, bands: packs.bands.version,
+        approval: [packs.unitTable, packs.freshness, packs.bands].map((p) => p.approvalStatus)
+      };
+    },
+
+    /** Canonical state from today's ICU dashboard state. `asOf` is the caller's, never defaulted. */
+    state: function (icuState, opts) {
+      try { return state.fromIcuState(deps, icuState, opts || {}); } catch (e) { return null; }
+    },
+
+    /**
+     * The one call icu.js makes. Returns null on any failure, which renders as no panel.
+     * @param {object} icuState
+     * @param {{asOf:*, needs?:string[], scores?:Array, max?:number}} opts
+     */
+    summary: function (icuState, opts) {
+      try {
+        const o = opts || {};
+        const s = state.fromIcuState(deps, icuState, { asOf: o.asOf, subjectKey: o.subjectKey || null });
+        if (!s) return null;
+        return {
+          schema: "medcore-summary/1",
+          asOf: s.asOf,
+          changed: changesMod.changes(s, packs.bands, { max: o.max }),
+          missingInformation: missingMod.missing(s, { needs: o.needs, scores: o.scores }),
+          provenance: s.provenance
+        };
+      } catch (e) { return null; }
+    },
+
+    labelFor: missingMod.labelFor
+  };
+
+  window.SMD_MEDCORE = API;
+  try { window.dispatchEvent(new Event("smd:medcore-ready")); } catch (e) {}
+}
+
+install().catch(function () { /* rule 2: a failure is a missing panel, never a thrown error */ });

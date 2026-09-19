@@ -12,6 +12,9 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[MaiK Intent Firewall]] — clinician-only scope gate (allow-list)
 - [[AI Control Center]] — usage engine: per-module caps, model switch, admin console
 - [[Medical Knowledge Base]] — the KB / RAG brain + clinical content
+- [[Medical Core]] — the small ML decision layer under ICU/Ward. Phase 1 (deterministic: what
+  changed, missing information) is BUILT behind `smd_medcore`, default OFF. There is no model, no
+  dataset and no approved outcome; read the note before assuming otherwise.
 
 ### Clinical modules
 - [[Scan-Meds and Drug Index]] — prescription/med scan, drug DB, interactions

@@ -2254,6 +2254,13 @@ window.openExternal = function (u) {
      returned untouched.
 
      It does NOT read or enable smd_wardsynq_cutover. That is a separate flag and remains off. -->
+<!-- Medical Core (vault/modules/Medical Core.md). medcore-flags.js is the registry; both flags
+     default OFF. medcore-boot.js does nothing at all unless smd_medcore is on: with the flag off it
+     fetches nothing, defines nothing on window, and returns, so icu.js renders no panel. Phase 1 is
+     deterministic only - what changed and what is missing, computed on the device from the ICU state
+     the app already holds. No model, no probability, no alert, and no patient value leaves the phone. -->
+<script src="/medcore-flags.js?v=mc1" defer></script>
+<script type="module" src="/medcore-boot.js?v=mc1"></script>
 <script src="/wardsynq-flags.js?v=wsqp1" defer></script>
 <script type="module" src="/wardsynq-shadow-boot.js?v=wsq1"></script>
 <!-- WardSynQ Clinical Record: the doctor's phone opening the SAME record the hospital PC charts
