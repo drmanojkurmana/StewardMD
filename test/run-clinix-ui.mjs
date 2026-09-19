@@ -542,13 +542,23 @@ try {
   await ev("document.querySelector('#clinixRoot [data-act=\"cx-case-next\"]').click()");   // -> investigations
   await sleep(200);
   await ev("document.querySelector('#clinixRoot [data-act=\"cx-case-next\"]').click()");   // -> differential
-  await sleep(200);
-  await ev(`(function(){ document.getElementById('cxCaseText').value = 'COPD, heart failure, pneumonia'; document.querySelector('#clinixRoot [data-act="cx-case-next"]').click(); return true; })()`);
-  await sleep(200);   // -> diagnosis
-  await ev(`(function(){ document.getElementById('cxCaseText').value = 'COPD with an infective exacerbation'; document.querySelector('#clinixRoot [data-act="cx-case-next"]').click(); return true; })()`);
-  await sleep(200);   // -> management
-  await ev(`(function(){ document.getElementById('cxCaseText').value = 'bronchodilators, steroids, antibiotics'; document.querySelector('#clinixRoot [data-act="cx-case-next"]').click(); return true; })()`);
-  await sleep(300);   // finishCase() runs here
+  await sleep(300);
+  /* The three reasoning stages are pickers now, not text boxes (owner, 2026-09-19). Answer whichever
+   * shape is on screen: a case whose model answer cannot be turned into options still gets the
+   * written form, and this harness only cares that the case reaches finishCase(). */
+  for (const stage of ["differential", "diagnosis", "management"]) {
+    const answered = await ev(`(function(){
+      const txt = document.getElementById('cxCaseText');
+      if (txt) { txt.value = 'COPD with an infective exacerbation, treated with bronchodilators, steroids and antibiotics'; return "text"; }
+      const rows = [...document.querySelectorAll('#clinixRoot .cx-dxrow, #clinixRoot .cx-mcq-opt, #clinixRoot .cx-chip:not([disabled])')];
+      rows.slice(0, 3).forEach(function (r) { r.click(); });
+      return rows.length ? "picked" : "nothing";
+    })()`);
+    ok(answered !== "nothing", `the ${stage} stage offers a way to answer (${answered})`);
+    await sleep(250);
+    await ev("document.querySelector('#clinixRoot [data-act=\"cx-case-next\"]').click()");
+    await sleep(350);
+  }
   const examRecord = await ev(`(function(){
     const S = window.SMD_CLINIX_PROGRESS;
     if (!S || !S.get) return null;

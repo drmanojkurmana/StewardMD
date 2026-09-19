@@ -8678,3 +8678,47 @@ keyboard offers it), inline SVG icons only, light and dark, reduced motion honou
 input is a hidden `#phvCode` over the slots (so the harness and the keyboard both drive it). It also
 waits for the first-launch guided tour, not just the registration gate, before asking.
 
+
+**CliniX case simulation, 2026-09-19** (owner: *"each student talk english differently how will he
+ask exact question as we programmed? Fix that and in ddx,dx give him 100s of diagnosis and he will
+pickup one and give hints too, and plan also give mcq options so he will select"*). Four decisions:
+
+1. **The patient understands lay English, and still never improvises.** `clinix-lexicon.js` sits in
+   front of the cue matcher: contraction expansion, ~320 lay and Indian-English phrases, a synonym
+   map, stemming and a bounded fuzzy snap that requires the first TWO letters to match (one letter
+   turned "spell" into "swell"). Scoring uses cue specificity, a key-cue boost and a
+   document-frequency rarity TIEBREAK (rarity as a multiplier dragged every score under the
+   threshold). Above `ANSWER_AT` the patient answers; between `SUGGEST_AT` and `ANSWER_AT` it offers
+   a did-you-mean rather than guessing; below that it matches NOTHING and suggests nothing, because
+   a simulated patient answering small talk from a case script is inventing clinical content.
+   `clinix-model.js` keeps `legacyMatchAsk` and uses it when the lexicon is absent.
+2. **Marking counts CONCEPTS, not accept terms.** An accept list carrying "heart failure", "CCF" and
+   "cardiac failure" describes one concept; counting them separately told a student they had missed
+   two things when they had missed none. Missed terms are grouped by `conceptKey` (vocabulary entry,
+   else anglicised string) and a differential is scored on PICKS.
+3. **Breadth is not a differential.** 8+ picks, or unsupported guesses outnumbering supported ones,
+   is marked `shotgun` and fails even when the right answer is in the list. Missing the true
+   diagnosis fails regardless of how many other reasonable ones were named.
+4. **A harmful management choice is disqualifying, not a deduction**, and the result names the
+   option. A case whose model answer is keyword fragments rather than actions ("b12", "treatable",
+   "88" as a saturation target) keeps the written plan: an unanswerable two-option stub is worse
+   than a text box. `ataxia` is currently the only case on that path.
+
+**Physiology sandbox rebuilt** (owner: *"physiology sandbox doesnt work its 1/10 make it 10/10"*).
+Two independent defects, both real. (a) The engine was uncalibrated: nominal sliders gave 70/46 with
+a cardiac output of 3.0, and the Hill denominator was `26.6 * 1000` rather than
+`Math.pow(26.6, 2.7)`, so a PaO2 of 88 read as 87%. **The old test file pinned both as "observed"**,
+which is how they survived, and is the reason a test that pins behaviour must say whether that
+behaviour is CORRECT. (b) `onInput` called `repaint()`, replacing the `<input type=range>` mid-drag,
+so no slider moved. The readout and the controls are now separate regions and only the readout is
+rewritten while dragging; the same fix was applied to the plan MCQ, where a repaint per tick meant a
+student ticking four boxes kept only the first.
+
+The engine is physiology rather than fudge: ventricular-arterial coupling
+(`SV = (EDV - V0) * Ees / (Ees + Ea)`) on the cardiovascular side, and gas exchange solved by OXYGEN
+CONTENT on the respiratory side. Content-based solving is not a refinement, it is the only way a
+shunt behaves like a shunt (at 45% shunt, FiO2 1.0 barely moves the saturation) and that behaviour is
+the entire teaching point of the tab. Ventilation is a fixed point of the chemoreflex line against
+the CO2 hyperbola, subject to a mechanical ceiling, so "a normal CO2 in acute severe asthma" and
+"oxygen retains CO2 in COPD" both emerge instead of being hand-written. Waveforms are seeded SVG
+paths, so a repaint never reshuffles a trace.
