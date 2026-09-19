@@ -329,3 +329,109 @@ export function fromIcuState(deps, icuState, opts) {
     provenance: { sources: [SOURCE_ICU], unitNormalised: false, builtBy: "medcore-state@1.0.0/icu" }
   });
 }
+
+/**
+ * Adapter: WardSynQ canonical Observations, resolved bi-temporally.
+ *
+ * THIS IS WHERE THE LEAKAGE CONTROL BECOMES REAL. A WardSynQ record is append-only and versioned on
+ * two axes: when the fact became clinically true (`effectiveAt`) and when the system learned it
+ * (`recordedAt`). A potassium drawn at 14:00, reported normal at 15:00 and corrected to critical at
+ * 17:00 is TWO different answers depending on which question is asked, and a model trained on the
+ * 17:00 correction while claiming to predict from 16:00 has seen the future. `asOf()` from
+ * wardsynq-temporal.js resolves both axes at the SAME instant, so a correction recorded after the
+ * prediction point is invisible, exactly as it was to the clinician standing there.
+ *
+ * THREE THINGS IT REFUSES.
+ *  1. An observation flagged `artifact` by the IoMT quality filter. A detached lead reading a pulse
+ *     of 38 must never reach a score (HAZ-DEV-01), and the mirror failure, a reassuring artefact,
+ *     is worse.
+ *  2. A device observation whose `scoreEligible` is null. Null means NOT ASSESSED, and a reading
+ *     nothing has vetted has not passed. The canonical model states this and this adapter honours it.
+ *  3. An unlabelled value. WardSynQ is not a source whose unit convention is written down in this
+ *     repo, so `medcore-units.js` requires the unit, and a missing one is UNIT_REQUIRED rather than
+ *     an assumption.
+ *
+ * NOTHING IS SILENTLY DROPPED. An Observation whose `code` this layer cannot map keeps its code in
+ * `provenance.unmapped`, the same contract every adapter in the repo meets.
+ *
+ * @param {object} deps    { unitTable, freshness, codes }
+ * @param {object} input   { observations: Array<Array<Observation>|Observation>, patient,
+ *                           interventions, subjectKey }
+ * @param {{asOf:*, windows?:object}} opts
+ */
+export function fromWardSynQ(deps, input, opts) {
+  const o = opts || {};
+  const inp = input || {};
+  const codes = (deps && deps.codes && deps.codes.codes) || null;
+  if (!codes) throw new Error("medcore-state: an observation-code table is required");
+
+  const instant = toMs(o.asOf);
+  if (instant === null) throw new Error("medcore-state: asOf is required and must be a real instant");
+
+  const observations = [];
+  const unmapped = [];
+  const excluded = [];
+
+  for (const record of (inp.observations || [])) {
+    const versions = Array.isArray(record) ? record : [record];
+    if (!versions.length) continue;
+    // Both axes at the same instant: what was clinically true then, as it was known then.
+    const resolved = resolveAsOf(versions, instant, deps.temporal);
+    if (!resolved) continue;
+
+    if (resolved.artifact === true) { excluded.push({ code: resolved.code, reason: "ARTIFACT" }); continue; }
+    if (resolved.category === "device" && resolved.scoreEligible !== true) {
+      excluded.push({ code: resolved.code, reason: "NOT_SCORE_ELIGIBLE" });
+      continue;
+    }
+
+    const key = String(resolved.code || "").trim().toLowerCase();
+    const param = Object.prototype.hasOwnProperty.call(codes, key) ? codes[key] : null;
+    if (!param) { unmapped.push(resolved.code); continue; }
+
+    const meta = resolved.meta || {};
+    observations.push({
+      param: param,
+      value: resolved.value,
+      unit: resolved.unit,
+      at: meta.effectiveAt || meta.recordedAt,
+      source: "wardsynq"
+    });
+  }
+
+  return buildState(deps, {
+    observations: observations,
+    patient: inp.patient || {},
+    interventions: inp.interventions || {},
+    asOf: instant,
+    subjectKey: inp.subjectKey || null,
+    windows: o.windows,
+    provenance: {
+      sources: ["wardsynq"], unitNormalised: false,
+      builtBy: "medcore-state@1.0.0/wardsynq",
+      unmapped: unmapped, excluded: excluded
+    }
+  });
+}
+
+/* The bi-temporal resolution itself is wardsynq-temporal.js's job and is injected so this file stays
+ * pure and testable; the fallback is the same rule for the single-version case, stated once. */
+function resolveAsOf(versions, instant, temporal) {
+  if (temporal && typeof temporal.asOf === "function") {
+    return temporal.asOf(versions, { knownAt: instant, effectiveAt: instant });
+  }
+  let best = null;
+  for (const v of versions) {
+    const meta = (v && v.meta) || {};
+    const recorded = toMs(meta.recordedAt);
+    const effective = toMs(meta.effectiveAt) === null ? recorded : toMs(meta.effectiveAt);
+    if (recorded !== null && recorded > instant) continue;      // learned after the question
+    if (effective !== null && effective > instant) continue;    // true after the question
+    if (!best) { best = { v: v, effective: effective, recorded: recorded }; continue; }
+    if ((effective || 0) > (best.effective || 0) ||
+        ((effective || 0) === (best.effective || 0) && (recorded || 0) > (best.recorded || 0))) {
+      best = { v: v, effective: effective, recorded: recorded };
+    }
+  }
+  return best ? best.v : null;
+}
