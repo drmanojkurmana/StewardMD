@@ -142,6 +142,28 @@ test("the header disclaimer tells the truth in each state, and never says 'no so
   assert.doesNotMatch(off, /Knowledge Base/i, "disconnected: must not imply the KB was used");
 });
 
+/* REQUIREMENT 11 (owner, 2026-09-20): with the link off, buildPackage() must not run at all.
+ * home.js is a 9k-line UI module with no unit harness, so this asserts the guard at source level -
+ * the same approach maik-engine.test.mjs uses for its source invariants. What matters is that the
+ * short-circuit exists, is gated on BOTH "local" and "not linked", and yields the same shape the
+ * timeout/reject arms already return so nothing downstream changes behaviour. */
+test("RAG off short-circuits buildPackage in home.js and never fabricates a topicMatch", () => {
+  const HOME = readFileSync(new URL("../home.js", import.meta.url), "utf8");
+  const i = HOME.indexOf("var _ragOff");
+  assert.ok(i > 0, "the short-circuit guard exists");
+  const block = HOME.slice(i, i + 900);
+  assert.match(block, /effective\(\)\s*===\s*"local"/, "gated on the on-device engine");
+  assert.match(block, /ragLinked\s*&&\s*!_E\.ragLinked\(\)/, "gated on the link being OFF");
+  assert.match(block, /_ragOff[\s\S]{0,120}\?\s*Promise\.resolve\(\{ question: question, grounding: \[\] \}\)/,
+    "returns the existing no-KB stand-in shape rather than a new one");
+  // The stand-in must NOT carry a topicMatch: the web-research tier fires on `tm.matched === false`,
+  // so inventing one would send an offline clinician to a tier that needs the network.
+  assert.doesNotMatch(block.split("groundP")[1] || "", /topicMatch/,
+    "no topicMatch is fabricated for the ungrounded stand-in");
+  // And the real call must still be the fallback when the link is ON.
+  assert.match(block, /StewardRAG\.buildPackage/, "the linked path still builds the package");
+});
+
 test("the toggle renders as a real switch with the app's own markup and an accessible name", () => {
   const E = loadEngine();
   E.setRagLinked(true);
