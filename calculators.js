@@ -2737,6 +2737,43 @@
       return { v:(r>0?"+":"")+r, u:"", i:m[String(r)]+". Target is usually 0 to −2 unless deep sedation indicated. Ref: Sessler, AJRCCM 2002." };
     } },
 
+  /* CAM-ICU. The one score from the ICU set this file was missing, and delirium is the one that gets
+   * missed: it is common, it is independently associated with mortality and long-term cognitive
+   * impairment, and without a structured assessment most of it is never recorded at all.
+   *
+   * TWO PROPERTIES THIS IMPLEMENTATION INSISTS ON.
+   *  1. IT IS A SEQUENCE, NOT A SUM. CAM-ICU is positive only when Feature 1 AND Feature 2 are
+   *     present AND either Feature 3 or Feature 4 is. Adding the features up would make a patient
+   *     with disorganised thinking and no acute change "positive", which is a different patient.
+   *  2. A DEEPLY SEDATED PATIENT IS UNASSESSABLE, NOT NEGATIVE. At RASS -4 or -5 the assessment is
+   *     stopped and repeated later; reporting "no delirium" for a patient nobody could assess is
+   *     the exact false reassurance the instrument exists to prevent. */
+  { id:"camicu", cat:"Critical care", icon:"", title:"CAM-ICU (Confusion Assessment Method for the ICU)",
+    desc:"Structured delirium assessment for the ventilated or non-verbal ICU patient. Assess RASS first. Distinct from the general CAM (Inouye 1990, under Neurology), which needs a patient who can be interviewed.",
+    inputs:[
+      { id:"rass", label:"RASS at assessment", type:"select", opts:[
+        {v:"0",t:"−3 to +4 (patient is arousable — proceed)"},
+        {v:"1",t:"−4 or −5 (deep sedation / unarousable — stop and reassess later)"} ] },
+      { id:"f1", label:"Feature 1: acute change from baseline mental status, OR a fluctuating course in the last 24 h", type:"check" },
+      { id:"f2", label:"Feature 2: inattention (2 or more errors on the 10-letter ASE / picture test)", type:"check" },
+      { id:"f3", label:"Feature 3: altered level of consciousness (RASS anything other than 0)", type:"check" },
+      { id:"f4", label:"Feature 4: disorganised thinking (2 or more errors across the 4 questions and the command)", type:"check" }
+    ],
+    compute:function(v){
+      if (Number(v.rass) === 1) {
+        return { v:"UTA", u:"", i:"Unable to assess: at RASS −4 or −5 the patient cannot be assessed. This is NOT a negative result — stop and reassess when sedation lightens. Ref: Ely, JAMA 2001; SCCM PADIS 2018." };
+      }
+      var f1=!!v.f1, f2=!!v.f2, f3=!!v.f3, f4=!!v.f4;
+      var pos = f1 && f2 && (f3 || f4);
+      var why;
+      if (pos) why = "CAM-ICU POSITIVE — delirium present. Look for a cause (sepsis, hypoxia, pain, drugs, withdrawal, retention), review deliriogenic medication, and use non-pharmacological measures first.";
+      else if (!f1) why = "Negative: Feature 1 absent, so the assessment stops there — without an acute change or a fluctuating course CAM-ICU cannot be positive.";
+      else if (!f2) why = "Negative: Feature 1 present but Feature 2 (inattention) absent. Inattention is the cardinal feature and is required.";
+      else why = "Negative: Features 1 and 2 present but neither Feature 3 nor Feature 4. Re-assess if the picture changes.";
+      return { v: pos ? "Positive" : "Negative", u:"",
+        i: why + " Features: 1 " + (f1?"+":"−") + ", 2 " + (f2?"+":"−") + ", 3 " + (f3?"+":"−") + ", 4 " + (f4?"+":"−") + ". Ref: Ely, JAMA 2001; SCCM PADIS 2018." };
+    } },
+
   { id:"downes", cat:"Paediatrics", icon:"", title:"Downes Score (Neonatal Respiratory Distress)",
     desc:"Severity of respiratory distress in neonates.",
     inputs:[
