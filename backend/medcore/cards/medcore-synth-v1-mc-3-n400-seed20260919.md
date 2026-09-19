@@ -1,6 +1,6 @@
 # Dataset card: medcore-synth-v1 (MC-3)
 
-Generated 2026-09-19T14:30:17.577Z by `backend/medcore/run.mjs`.
+Generated 2026-09-19T15:13:49.288Z by `backend/medcore/run.mjs`.
 
 ## THIS DATA IS SYNTHETIC
 
@@ -48,7 +48,7 @@ Gates: missedEventsReduced25 FAIL, ece PASS, calibrationSlope PASS, eventsPerVar
 **Gated. This model does not ship.**
 
 Model AUROC 0.943, AUPRC 0.3841, ECE 0.0163,
-calibration slope 0.9327.
+calibration slope 0.9227.
 Baseline (threshold, NOT NEWS2) AUROC 0.9124.
 Frequency-only probe AUROC 0.6346.
 Events per variable 10.5556.

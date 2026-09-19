@@ -26,6 +26,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fitLogistic, scoreLogistic, fitCalibrator, applyCalibration, fitOod, oodDistance, selectFeatures, tuneL2 } from "./learn.mjs";
 import { auroc, auprc, brier, ece, calibrationCurve, selectiveRisk, atThreshold, thresholdForAlertBudget, round4 } from "./metrics.mjs";
+import { fitGbm, scoreGbm } from "./gbm.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 
@@ -43,6 +44,27 @@ export function coreFeatureIds() {
   return ids;
 }
 const PROBE_IDS = ["obs_count_24h", "distinct_rounds_24h", "mean_interval_min", "minutes_since_last"];
+
+/* Monotone constraints: the direction in which a feature may move predicted risk. CLINICAL CONTENT,
+ * unapproved, and owned by the critical-care lead rather than by this file. +1 means higher value
+ * may only raise risk, -1 means higher value may only lower it, absent means unconstrained.
+ *
+ * They exist because a tree will otherwise fit a fold in which the sickest patients happened to be
+ * rescued and emerge saying a lactate of 8 is reassuring. That is defensible as statistics and
+ * indefensible at a bedside, and no amount of AUROC makes it safe. Parameters where BOTH directions
+ * are dangerous (temperature, sodium, potassium) are deliberately left unconstrained. */
+export const MONOTONE = {
+  lactate_value: +1, lactate_d4h: +1, lactate_slope_per_h: +1,
+  creat_value: +1, creat_d4h: +1,
+  hr_value: +1, hr_d4h: +1,
+  rr_value: +1, rr_d4h: +1,
+  shock_index: +1,
+  map_value: -1, map_d4h: -1, map_slope_per_h: -1,
+  sbp_value: -1, sbp_d4h: -1,
+  spo2_value: -1, spo2_d4h: -1,
+  gcs_value: -1, gcs_d4h: -1,
+  uop_value: -1, uop_ml_kg_h: -1
+};
 
 /* The incumbent: single-parameter thresholds, the crude screen a ward already applies by eye.
  * NAMED HONESTLY - this is NOT NEWS2. Real NEWS2 lives in wardsynq-deterioration.js with its own
@@ -100,11 +122,33 @@ export function run(opts) {
   const tuned = opts.l2 === undefined
     ? tuneL2(train, selection.featureIds, {})
     : { l2: opts.l2, tried: [], reason: "FIXED_BY_CALLER" };
-  const model = fitLogistic(train, { featureIds: selection.featureIds, l2: tuned.l2 });
-  const rawVal = pairs(val, (r) => scoreLogistic(model, r.values));
+  const lrModel = fitLogistic(train, { featureIds: selection.featureIds, l2: tuned.l2 });
+
+  /* Stage 3: the GBM. It replaces the logistic baseline only if it BEATS it, and the comparison is
+   * made on VALIDATION, never on test - picking a learner by its test score is how a pipeline
+   * launders model selection into a headline number. */
+  const gbmModel = opts.skipGbm ? null : fitGbm(train, {
+    featureIds: selection.featureIds, valid: val, monotone: MONOTONE,
+    rounds: opts.gbmRounds || 400, lr: opts.gbmLr || 0.06, depth: opts.gbmDepth || 3
+  });
+  const valAuprc = (sc) => auprc(pairs(val, sc));
+  const lrValAuprc = valAuprc((r) => scoreLogistic(lrModel, r.values));
+  const gbmValAuprc = gbmModel ? valAuprc((r) => scoreGbm(gbmModel, r.values)) : null;
+  const margin = opts.gbmMargin === undefined ? 0.02 : opts.gbmMargin;
+  const useGbm = gbmModel !== null && gbmValAuprc !== null && (gbmValAuprc - lrValAuprc) >= margin;
+  const model = useGbm ? gbmModel : lrModel;
+  const rawScore = useGbm ? (v) => scoreGbm(gbmModel, v) : (v) => scoreLogistic(lrModel, v);
+  const stageChoice = {
+    chosen: useGbm ? "gbm" : "logistic",
+    validAuprc: { logistic: round4(lrValAuprc), gbm: round4(gbmValAuprc) },
+    requiredMargin: margin,
+    gbmStopped: gbmModel ? gbmModel.stopped : null
+  };
+
+  const rawVal = pairs(val, (r) => rawScore(r.values));
   const calibration = fitCalibrator(rawVal);
-  const ood = fitOod(model, train);
-  const score = (r) => applyCalibration(calibration, scoreLogistic(model, r.values));
+  const ood = fitOod(lrModel, train);      // the OOD distance stays on the standardised linear space
+  const score = (r) => applyCalibration(calibration, rawScore(r.values));
   const modelPairs = pairs(test, score);
   const modelThr = thresholdForAlertBudget(modelPairs, baseAt.alerts);
   const modelAt = atThreshold(modelPairs, modelThr);
@@ -162,10 +206,11 @@ export function run(opts) {
     },
     baseline: { kind: "threshold-baseline", auroc: round4(auroc(basePairs)), at: baseAt },
     model: {
-      kind: "logistic+isotonic",
+      kind: (useGbm ? "gbm" : "logistic") + "+" + (calibration.kind || "isotonic"),
       auroc: round4(overall), auprc: round4(auprc(modelPairs)), brier: round4(brier(modelPairs)),
       ece: cal.ece, calibration: curve, at: modelAt,
-      droppedFeatures: model.droppedFeatures, featureCount: model.featureIds.length,
+      droppedFeatures: lrModel.droppedFeatures, featureCount: model.featureIds.length,
+      stage: stageChoice,
       calibrator: calibration.selection || null,
       l2: { chosen: tuned.l2, tried: tuned.tried, reason: tuned.reason }
     },
@@ -177,7 +222,7 @@ export function run(opts) {
     probe: { kind: "frequency-only", auroc: round4(probeAuroc) },
     subgroups: sub, selectiveRisk: sel, reliability: cal.table,
     gates, allPass,
-    artifact: { model, calibration, ood }
+    artifact: { model, calibration, ood, linear: lrModel }
   };
 }
 
@@ -201,6 +246,10 @@ if (import.meta.url === "file://" + process.argv[1]) {
   console.log(`positives train ${res.counts.trainPositives}, test ${res.counts.testPositives}, events per variable ${res.counts.eventsPerVariable}`);
   console.log(`features  offered ${res.featureSelection.offered}, budget ${res.featureSelection.budget} (${res.featureSelection.positives} positives / 10 per variable), kept ${res.featureSelection.kept}`);
   console.log(`dropped (zero variance inside the risk set): ${res.model.droppedFeatures.join(", ") || "none"}`);
+  if (res.model.stage) {
+    const st = res.model.stage;
+    console.log(`stage     ${st.chosen.toUpperCase()} (validation AUPRC logistic ${st.validAuprc.logistic} vs gbm ${st.validAuprc.gbm}, margin required ${st.requiredMargin})${st.gbmStopped ? " gbm kept " + st.gbmStopped.keptTrees + " trees" : ""}`);
+  }
   if (res.model.l2) console.log(`L2        chosen ${res.model.l2.chosen} by held-out log loss inside train${res.model.l2.tried.length ? " (" + res.model.l2.tried.map((t) => t.l2 + ":" + t.logLoss).join(" ") + ")" : ""}`);
   if (res.model.calibrator) {
     const c = res.model.calibrator;

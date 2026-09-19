@@ -49,16 +49,44 @@ export const REFUSED = {
 
 function sigmoid(z) { return 1 / (1 + Math.exp(-z)); }
 
+const MISSING_BIN = 0;
+
+/** Which bin a value falls in. Bin 0 is reserved for "not recorded", which a tree ROUTES on rather
+ *  than imputing: missingness on a ward is not random, and filling a median pretends it is. */
+function binOf(binner, id, v) {
+  if (typeof v !== "number" || !isFinite(v)) return MISSING_BIN;
+  const e = (binner && binner.edges && binner.edges[id]) || [];
+  let lo = 0, hi = e.length;
+  while (lo < hi) { const m = (lo + hi) >> 1; if (v > e[m]) lo = m + 1; else hi = m; }
+  return 1 + lo;
+}
+
 /** The scorer. Byte-for-byte the arithmetic backend/medcore/learn.mjs uses; parity vectors are how
  *  that claim is checked rather than asserted. */
 export function score(artifact, values) {
   const m = artifact.model;
-  let z = m.intercept;
-  for (let i = 0; i < m.featureIds.length; i++) {
-    const id = m.featureIds[i];
-    const raw = values[id];
-    const v = (typeof raw === "number" && isFinite(raw)) ? raw : m.imputations[id];
-    z += m.coefficients[i] * ((v - m.means[id]) / m.sds[id]);
+  let z;
+  if (m.kind === "gbm") {
+    /* Two model kinds exist because the trainer CHOOSES between them on validation, so this must
+     * implement both or an artifact silently mis-scores. The parity vectors are exactly what would
+     * catch that, and are the reason this can be asserted rather than hoped. */
+    z = m.base;
+    for (const tree of m.trees) {
+      let node = tree;
+      while (node.leaf === undefined) {
+        const b = binOf(m.binner, m.featureIds[node.f], values[m.featureIds[node.f]]);
+        node = ((b === MISSING_BIN) ? node.missingLeft : b <= node.bin) ? node.l : node.r;
+      }
+      z += m.lr * node.leaf;
+    }
+  } else {
+    z = m.intercept;
+    for (let i = 0; i < m.featureIds.length; i++) {
+      const id = m.featureIds[i];
+      const raw = values[id];
+      const v = (typeof raw === "number" && isFinite(raw)) ? raw : m.imputations[id];
+      z += m.coefficients[i] * ((v - m.means[id]) / m.sds[id]);
+    }
   }
   return calibrate(artifact.calibration, sigmoid(z));
 }
@@ -96,7 +124,11 @@ export function calibrate(cal, p) {
 }
 
 export function oodDistance(artifact, values) {
-  const m = artifact.model;
+  /* Distance is defined on the standardised linear space, so a tree artifact carries the linear
+   * model alongside it purely for this. An artifact with no such space returns null rather than a
+   * number that would mean nothing. */
+  const m = artifact.model.kind === "gbm" ? artifact.linear : artifact.model;
+  if (!m || !m.featureIds || !m.means) return null;
   let s = 0;
   for (const id of m.featureIds) {
     const raw = values[id];

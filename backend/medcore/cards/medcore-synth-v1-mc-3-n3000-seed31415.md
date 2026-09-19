@@ -1,6 +1,6 @@
 # Dataset card: medcore-synth-v1 (MC-3)
 
-Generated 2026-09-19T14:31:21.713Z by `backend/medcore/run.mjs`.
+Generated 2026-09-19T15:14:54.504Z by `backend/medcore/run.mjs`.
 
 ## THIS DATA IS SYNTHETIC
 
@@ -18,12 +18,12 @@ exists.
 | | |
 |---|---|
 | encounters | 3000 |
-| prediction points | 38268 (grid 4 h) |
-| train / val / test | 23110 / 7450 / 7708 |
-| event rate | train 4.53%, val 4.44%, test 4.48% |
-| excluded from the risk set | 3509 {"EXCLUDED_FROM_RISK_SET":3509} |
-| injected prevalent cases | 242 (must be excluded, HAZ-ML-02) |
-| injected rescued cases | 187 (the treatment paradox, labelled negative by construction) |
+| prediction points | 38462 (grid 4 h) |
+| train / val / test | 22847 / 7709 / 7906 |
+| event rate | train 4.60%, val 4.86%, test 3.83% |
+| excluded from the risk set | 3677 {"EXCLUDED_FROM_RISK_SET":3677} |
+| injected prevalent cases | 250 (must be excluded, HAZ-ML-02) |
+| injected rescued cases | 229 (the treatment paradox, labelled negative by construction) |
 | frequency bias | off |
 
 ## Splitting
@@ -44,11 +44,11 @@ appears on both sides of a split.
 
 ## Result
 
-Gates: missedEventsReduced25 PASS, ece PASS, calibrationSlope FAIL, eventsPerVariable PASS, noSubgroupCollapse PASS, selectiveRiskFalls PASS, beatsFrequencyProbe PASS.
-**Gated. This model does not ship.**
+Gates: missedEventsReduced25 PASS, ece PASS, calibrationSlope PASS, eventsPerVariable PASS, noSubgroupCollapse PASS, selectiveRiskFalls PASS, beatsFrequencyProbe PASS.
+All gates pass.
 
-Model AUROC 0.9579, AUPRC 0.4977, ECE 0.0089,
-calibration slope 0.8996.
-Baseline (threshold, NOT NEWS2) AUROC 0.9141.
-Frequency-only probe AUROC 0.5911.
-Events per variable 19.0545.
+Model AUROC 0.9582, AUPRC 0.438, ECE 0.0133,
+calibration slope 0.9261.
+Baseline (threshold, NOT NEWS2) AUROC 0.9183.
+Frequency-only probe AUROC 0.5936.
+Events per variable 19.0909.

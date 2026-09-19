@@ -21,16 +21,21 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { scoreLogistic, applyCalibration, oodDistance } from "./learn.mjs";
+import { scoreGbm } from "./gbm.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 
 export function buildArtifact(res, rows, meta) {
-  const { model, calibration, ood } = res.artifact;
+  const { model, calibration, ood, linear } = res.artifact;
+  const raw = model.kind === "gbm" ? (v) => scoreGbm(model, v) : (v) => scoreLogistic(model, v);
   const sample = rows.filter((r) => r.split === "val").slice(0, 100);
+  /* Parity vectors carry the FULL feature values, not just the model's own ids: a tree routes on
+   * "not recorded" as a branch, so a vector that silently turned an absent feature into null would
+   * not reproduce the trainer's path. */
   const parityVectors = sample.map((r) => ({
     values: pick(r.values, model.featureIds),
-    p: applyCalibration(calibration, scoreLogistic(model, r.values)),
-    ood: oodDistance(model, r.values)
+    p: applyCalibration(calibration, raw(r.values)),
+    ood: linear ? oodDistance(linear, r.values) : null
   }));
 
   return {
@@ -40,7 +45,7 @@ export function buildArtifact(res, rows, meta) {
     outcome: res.outcome,
     featureSet: rows[0].featureSet,
     createdAt: (meta && meta.createdAt) || new Date().toISOString(),
-    model, calibration, ood,
+    model, calibration, ood, linear: linear || null,
     gates: res.gates,
     allGatesPass: res.allPass,
     metrics: {

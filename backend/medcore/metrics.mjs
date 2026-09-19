@@ -91,18 +91,8 @@ export function calibrationCurve(pairs, opts) {
     }, base);
   }
   if (rows.length < 20) return Object.assign({ slope: null, intercept: null, usable: false, refusal: "TOO_FEW_ROWS" }, base);
-  const x = rows.map((r) => Math.log(r.p / (1 - r.p)));
-  const y = rows.map((r) => r.y);
-  let a = 0, b = 1;                                        // intercept, slope
-  const lr = (opts && opts.lr) || 0.05;
-  for (let it = 0; it < 4000; it++) {
-    let ga = 0, gb = 0;
-    for (let i = 0; i < x.length; i++) {
-      const z = a + b * x[i], p = 1 / (1 + Math.exp(-z)), e = p - y[i];
-      ga += e; gb += e * x[i];
-    }
-    a -= lr * ga / x.length; b -= lr * gb / x.length;
-  }
+  const fit = irlsSlope(rows);
+  const a = fit.a, b = fit.b;
   const out = Object.assign({ slope: round4(b), intercept: round4(a), usable: true, refusal: null }, base);
   if (o.bootstrap) out.slopeCI = bootstrapSlopeCI(rows, o.bootstrap, o.seed || 1);
   return out;
@@ -134,19 +124,43 @@ export function bootstrapSlopeCI(rows, draws, seed) {
   };
 }
 
-function fitSlope(rows) {
+/**
+ * Two-parameter logistic recalibration by Newton-Raphson (IRLS). Exact 2x2 Hessian, so it converges
+ * in a handful of steps rather than thousands of gradient steps.
+ *
+ * IT REPLACED A GRADIENT DESCENT THAT WAS NOT CONVERGED, and the symptom was unmissable once
+ * printed: the bootstrap interval (600 steps per draw) did not contain the point estimate (4000
+ * steps). A confidence interval that excludes its own estimate is not a measurement, and this one
+ * was about to inform a decision on where a clinical gate should sit. Both now use this function,
+ * so the interval and the estimate cannot disagree by construction.
+ */
+export function irlsSlope(rows) {
   const x = rows.map((r) => Math.log(r.p / (1 - r.p)));
   const y = rows.map((r) => r.y);
   let a = 0, b = 1;
-  for (let it = 0; it < 600; it++) {
-    let ga = 0, gb = 0;
+  for (let it = 0; it < 50; it++) {
+    let g0 = 0, g1 = 0, h00 = 0, h01 = 0, h11 = 0;
     for (let i = 0; i < x.length; i++) {
-      const p = 1 / (1 + Math.exp(-(a + b * x[i]))), e = p - y[i];
-      ga += e; gb += e * x[i];
+      const p = 1 / (1 + Math.exp(-(a + b * x[i])));
+      const w = Math.max(1e-10, p * (1 - p));
+      const e = p - y[i];
+      g0 += e; g1 += e * x[i];
+      h00 += w; h01 += w * x[i]; h11 += w * x[i] * x[i];
     }
-    a -= 0.05 * ga / x.length; b -= 0.05 * gb / x.length;
+    const det = h00 * h11 - h01 * h01;
+    if (!isFinite(det) || Math.abs(det) < 1e-12) break;
+    const da = (h11 * g0 - h01 * g1) / det;
+    const db = (h00 * g1 - h01 * g0) / det;
+    a -= da; b -= db;
+    if (Math.abs(da) < 1e-10 && Math.abs(db) < 1e-10) break;    // converged
+    if (!isFinite(a) || !isFinite(b)) return { a: 0, b: NaN, converged: false };
   }
-  return isFinite(b) ? b : null;
+  return { a, b, converged: isFinite(b) };
+}
+
+function fitSlope(rows) {
+  const f = irlsSlope(rows);
+  return f.converged ? f.b : null;
 }
 
 /** Coverage versus error: keep the most confident fraction and measure the error there. Abstention
