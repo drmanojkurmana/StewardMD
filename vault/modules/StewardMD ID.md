@@ -53,7 +53,9 @@ for the unverified/pending reasons, so no call site can open the wrong door.
   `phoneVerified`, the record is `lifecycle:u:<uid>.phoneVerifiedAt`. Server routes live in
   `functions/api/auth/[[path]].js` BEFORE the `no-email-on-account` gate (Hide-My-Email accounts have
   a phone too). Delivery is the FollowCare WhatsApp/SMS senders; with neither configured the route
-  soft-fails `no-channel` and the sheet says "cannot send codes right now". See Decisions 2026-09-19.
+  soft-fails `no-channel` and the sheet says "cannot send codes right now". The sheet is the six-slot OTP
+  design (marching ring, pop-in digits, shake/sweep, WebOTP + one-time-code autofill); it waits for
+  `#verifyGate` AND the onboarding tour (`.smdt-wel`/`.smdt-card`). See Decisions 2026-09-19.
 - **Two client readers of "is this account Pro", and they can disagree.** `pro-badge.js` reads the
   `pro` CLAIM; `SMD_PRO_NOTICE.reason()` / the paywall's verify-bounce read the `/billing/status`
   payload `account.js` cached at sign-in. A verification landing mid-session must call

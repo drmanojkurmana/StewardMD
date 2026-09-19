@@ -80,7 +80,7 @@ try {
   let ready = false;
   for (let i = 0; i < 75; i++) { await sleep(400); if (await ev(`return !!(window.SMD_PHONE_VERIFY && window.SMD_PROFILE_SETUP)`) === true) { ready = true; break; } }
   ok(ready, "phone-verify.js and profile-setup.js load with the app");
-  await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{sessionStorage.clear();localStorage.removeItem("smd_phone_verified_u-doc-1");localStorage.removeItem("smd_phone_verify");}catch(e){} return 1;`);
+  await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{sessionStorage.clear();localStorage.removeItem("smd_phone_verified_u-doc-1");localStorage.removeItem("smd_phone_verify");localStorage.setItem("smd_onboarding_tour","0");}catch(e){} var w=document.querySelector(".smdt-wel"); if(w) w.style.display="none"; return 1;`);
 
   // ── the auto-prompt after sign-in ──
   // A real unverified account has the registration gate open at sign-in; the phone sheet must wait
@@ -93,6 +93,10 @@ try {
   await ev(`var g=document.getElementById("verifyGate"); if(g){ g.classList.add("hidden"); g.style.display="none"; } SMD_PHONE_VERIFY._reset(); return 1;`);
   await sleep(2200);
   ok(await on() === true, "and opens once the gate closes");
+  await ev(`SMD_PHONE_VERIFY.close(); SMD_PHONE_VERIFY._reset(); var w=document.createElement("div"); w.className="smdt-wel"; w.style.display="flex"; document.body.appendChild(w); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(1400);
+  ok(await on() === false, "while the first-launch guided tour is up the phone sheet waits");
+  await ev(`document.querySelector(".smdt-wel").remove(); return 1;`); await sleep(2200);
+  ok(await on() === true, "and opens once the tour is dismissed");
   // verify.js re-evaluates the stubbed (unverified) account and may re-show its gate; hide it again
   // so the geometry check measures the phone sheet itself, not that unrelated overlay.
   await ev(`var g=document.getElementById("verifyGate"); if(g){ g.classList.add("hidden"); g.style.display="none"; } return 1;`);
@@ -121,13 +125,25 @@ try {
   ok(await ev(`return window.__calls[0].auth;`) === "Bearer tok", "with the account's ID token");
   ok(/Sent by WhatsApp/.test(await text()) && /\*\*\*\*\*\*3210/.test(await text()), "the code step names WhatsApp and the masked number");
   ok(/Resend code in \d+s/.test(await text()), "resend is on a countdown");
+  ok(await ev(`var cd=document.querySelector("#phvResend .phv-cd"); return !!cd;`) === true, "with a countdown ring");
+  if (process.env.SHOT) { await ev(`document.body.classList.add("dark"); return 1;`); await sleep(250); const shot = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT.replace(/\.png$/, "-dark.png"), Buffer.from(shot.result.data, "base64")); await ev(`document.body.classList.remove("dark"); return 1;`); }
   if (process.env.SHOT) { const shot = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT, Buffer.from(shot.result.data, "base64")); }
 
   // ── wrong code, then right code ──
+  ok(await ev(`return document.querySelectorAll("#phvSlots .phv-slot").length;`) === 6 && await ev(`return document.querySelector("#phvSlots .phv-slot.on") && document.querySelector("#phvSlots .phv-slot.on").getAttribute("data-i");`) === "0", "six code slots, the first one waiting for a digit");
+  ok(await ev(`return document.getElementById("phvCode").getAttribute("autocomplete");`) === "one-time-code", "the input is marked one-time-code so the keyboard offers the SMS code");
+  await type("phvCode", "48"); await sleep(150);
+  ok(await ev(`var f=document.querySelectorAll("#phvSlots .phv-slot.filled"); var on=document.querySelector("#phvSlots .phv-slot.on"); return f.length===2 && f[0].innerText.trim()==="4" && f[1].innerText.trim()==="8" && on && on.getAttribute("data-i")==="2";`) === true, "typed digits fill the slots and the ring moves to the next one");
+  ok(await ev(`return !/[\u{1F300}-\u{1FAFF}]/u.test(document.getElementById("phvRoot").innerText) && document.querySelectorAll("#phvRoot svg").length >= 8;`) === true, "no emoji anywhere; icons are inline SVG");
+  if (process.env.SHOT) { const shot = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT.replace(/\.png$/, "-typing.png"), Buffer.from(shot.result.data, "base64")); }
   await type("phvCode", "000000"); await sleep(600);
   ok(/not right/.test(await text()) && /4 tries left/.test(await text()), "a wrong code shows the tries left");
+  ok(await ev(`var s=document.getElementById("phvSlots"); return s.classList.contains("bad") && document.getElementById("phvCode").value==="";`) === true, "the row shakes red and clears for another try");
   ok(await on() === true, "and the sheet stays open");
-  await type("phvCode", "482913"); await sleep(800);
+  await type("phvCode", "482913"); await sleep(300);
+  ok(await ev(`var s=document.getElementById("phvSlots"); return !!(s && s.classList.contains("ok"));`) === true, "the six slots sweep green on the right code");
+  if (process.env.SHOT) { const shot = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT.replace(/\.png$/, "-ok.png"), Buffer.from(shot.result.data, "base64")); }
+  await sleep(1200);
   ok(await on() === false, "six correct digits verify automatically and close the sheet");
   ok(await ev(`return window.__calls[window.__calls.length-1].path;`) === "phone-verify", "via /api/auth/phone-verify");
   ok(await ev(`return !!window.__saved.phoneVerifiedAt && window.__saved.phone === "+91 98765 43210";`) === true, "the profile records the verified number and time");

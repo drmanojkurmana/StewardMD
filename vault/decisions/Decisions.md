@@ -8651,3 +8651,30 @@ different facts and are never rendered the same way.
   `section(..., "failed", ...)` state.
 - Not done here: `patient-access.js:441` (the portal's own PatientMessage read) and the sites owned by
   R6-1/R6-3/R6-4/R6-5.
+
+## 2026-09-19 — Feature guides run ON the screen (SMD_TOUR engine), and the OTP sheet is a designed screen
+
+**Owner: "the guide should run on the screen like the app tours".** The first attempt was a static
+canvas; the real thing is eight walkthroughs on the existing spotlight engine in `onboarding.js`
+(`GUIDES`, `guideController`, `startGuide`, `SMD_TOUR.guide(id)` / `guides()`, `start("guide:<id>")`):
+home, reasoning, maik, drugs, calculators, hospital, imaging, account. Each step names a `screen`;
+`gotoScreen()` closes whatever is open and opens that screen for real (Hospital / Drugs / Dosing /
+More / Dx sheets via the home `[data-act]` buttons, MaiK via `SMD_askMaik("")`, Calculators via
+`MEDCALC.openList()`, the sidebar via `SB.open()`, and Experimental via Settings then Experimental,
+because that page is a page inside Settings). Every targeted step is `optional`: a gated tile is
+skipped, never a coach-mark over nothing. Resolution is scoped to the screen on top (`guideScope`) so a
+drawer control behind an overlay is never spotlighted through it. The chooser (About & Help) lists
+them under "Feature guides"; the Hospital guide hands off to the ICU tour (`then:"icu"`).
+Engine tweak: the coach-mark is `visibility:hidden` between goStep and paint, so no empty box flashes
+while a sheet animates open (affects all tours, for the better).
+Copy rule holds: no em-dash in any guide string (test-pinned). `test/run-feature-guide-ui.mjs` drives
+all eight in a real browser; `test/feature-guide.test.mjs` pins shape and wiring.
+
+**OTP sheet redesign** (owner: "looks AI slop, make it premium"): `phone-verify.js` now renders six
+code slots with a marching-dot ring on the waiting slot, pop-in digits, a red shake on a wrong code,
+a green sweep on success, a resend countdown ring, a status row that says what the app is doing about
+the message (WebOTP on Android fills the code; the input is `autocomplete="one-time-code"` so the iOS
+keyboard offers it), inline SVG icons only, light and dark, reduced motion honoured. The one real
+input is a hidden `#phvCode` over the slots (so the harness and the keyboard both drive it). It also
+waits for the first-launch guided tour, not just the registration gate, before asking.
+
