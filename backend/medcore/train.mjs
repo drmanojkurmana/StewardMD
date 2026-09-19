@@ -24,7 +24,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { fitLogistic, scoreLogistic, fitIsotonic, applyCalibration, fitOod, oodDistance } from "./learn.mjs";
+import { fitLogistic, scoreLogistic, fitCalibrator, applyCalibration, fitOod, oodDistance, selectFeatures, tuneL2 } from "./learn.mjs";
 import { auroc, auprc, brier, ece, calibrationCurve, selectiveRisk, atThreshold, thresholdForAlertBudget, round4 } from "./metrics.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -70,8 +70,9 @@ const pairs = (rows, score) => rows.map((r) => ({ y: r.label, p: score(r) }));
 
 function subgroupAuroc(rows, score) {
   const out = {};
-  for (const key of ["ageBand", "sex", "completeness"]) {
+  for (const key of ["ageBand", "sex", "completeness", "site", "region"]) {
     for (const level of Array.from(new Set(rows.map((r) => r.strata[key])))) {
+      if (level === undefined) continue;
       const sub = rows.filter((r) => r.strata[key] === level);
       const a = auroc(pairs(sub, score));
       if (a !== null && sub.length >= 30) out[key + "=" + level] = { n: sub.length, auroc: round4(a) };
@@ -93,10 +94,15 @@ export function run(opts) {
   const baseThr = thresholdForAlertBudget(basePairs, baseAlerts);
   const baseAt = atThreshold(basePairs, baseThr);
 
-  // 2. logistic regression, calibrated on VALIDATION only
-  const model = fitLogistic(train, { featureIds: coreFeatureIds(), l2: opts.l2 === undefined ? 3 : opts.l2 });
+  // 2. logistic regression, on as many features as the positives can support, calibrated on
+  //    VALIDATION only with the calibrator CHOSEN by cross-validated log loss inside that split.
+  const selection = selectFeatures(train, coreFeatureIds(), { targetEpv: opts.targetEpv || 10 });
+  const tuned = opts.l2 === undefined
+    ? tuneL2(train, selection.featureIds, {})
+    : { l2: opts.l2, tried: [], reason: "FIXED_BY_CALLER" };
+  const model = fitLogistic(train, { featureIds: selection.featureIds, l2: tuned.l2 });
   const rawVal = pairs(val, (r) => scoreLogistic(model, r.values));
-  const calibration = fitIsotonic(rawVal);
+  const calibration = fitCalibrator(rawVal);
   const ood = fitOod(model, train);
   const score = (r) => applyCalibration(calibration, scoreLogistic(model, r.values));
   const modelPairs = pairs(test, score);
@@ -108,7 +114,8 @@ export function run(opts) {
   const probePairs = pairs(test, (r) => scoreLogistic(probeModel, r.probe));
 
   const cal = ece(modelPairs, 10);
-  const curve = calibrationCurve(modelPairs);
+  const curve = calibrationCurve(modelPairs, { bootstrap: opts.bootstrap === undefined ? 200 : opts.bootstrap });
+  const epv = model.featureIds.length ? train.filter((r) => r.label === 1).length / model.featureIds.length : 0;
   const sub = subgroupAuroc(test, score);
   const sel = selectiveRisk(modelPairs);
   const overall = auroc(modelPairs);
@@ -120,7 +127,16 @@ export function run(opts) {
   const gates = {
     missedEventsReduced25: { pass: missedReduction !== null && missedReduction >= 0.25, value: round4(missedReduction) },
     ece: { pass: cal.ece !== null && cal.ece <= 0.05, value: cal.ece },
-    calibrationSlope: { pass: curve.slope !== null && curve.slope >= 0.9 && curve.slope <= 1.1, value: curve.slope },
+    /* A refused slope FAILS. A measurement that declined to be made is not a pass, and the
+     * refusal reason travels so the next person sees why rather than a bare null. */
+    calibrationSlope: {
+      pass: curve.usable === true && curve.slope >= 0.9 && curve.slope <= 1.1,
+      value: curve.usable ? curve.slope : { refusal: curve.refusal, excludedFraction: curve.excludedFraction }
+    },
+    /* Added after the first real run: at 2.4 events per variable the model memorised the training
+     * set and the calibration gate caught it only afterwards, as overconfidence. This catches the
+     * precondition directly, before the result has to be interpreted. */
+    eventsPerVariable: { pass: epv >= 10, value: round4(epv) },
     noSubgroupCollapse: {
       pass: !worstSub || (overall - worstSub[1].auroc) <= 0.10,
       value: worstSub ? { subgroup: worstSub[0], auroc: worstSub[1].auroc, overall: round4(overall) } : null
@@ -142,14 +158,21 @@ export function run(opts) {
       train: train.length, val: val.length, test: test.length,
       trainPositives: train.filter((r) => r.label === 1).length,
       testPositives: test.filter((r) => r.label === 1).length,
-      eventsPerVariable: round4(train.filter((r) => r.label === 1).length / model.featureIds.length)
+      eventsPerVariable: round4(epv)
     },
     baseline: { kind: "threshold-baseline", auroc: round4(auroc(basePairs)), at: baseAt },
     model: {
       kind: "logistic+isotonic",
       auroc: round4(overall), auprc: round4(auprc(modelPairs)), brier: round4(brier(modelPairs)),
       ece: cal.ece, calibration: curve, at: modelAt,
-      droppedFeatures: model.droppedFeatures, featureCount: model.featureIds.length
+      droppedFeatures: model.droppedFeatures, featureCount: model.featureIds.length,
+      calibrator: calibration.selection || null,
+      l2: { chosen: tuned.l2, tried: tuned.tried, reason: tuned.reason }
+    },
+    featureSelection: {
+      offered: coreFeatureIds().length, budget: selection.budget, positives: selection.positives,
+      kept: selection.featureIds.length, droppedForEpv: selection.dropped.length,
+      topRanked: selection.ranked ? selection.ranked.slice(0, 8) : null
     },
     probe: { kind: "frequency-only", auroc: round4(probeAuroc) },
     subgroups: sub, selectiveRisk: sel, reliability: cal.table,
@@ -176,9 +199,16 @@ if (import.meta.url === "file://" + process.argv[1]) {
   if (res.synthetic) console.log("*** SYNTHETIC DATA. Every number below is a statement about the PIPELINE, not about patients. ***");
   console.log(`points train ${res.counts.train} / val ${res.counts.val} / test ${res.counts.test}`);
   console.log(`positives train ${res.counts.trainPositives}, test ${res.counts.testPositives}, events per variable ${res.counts.eventsPerVariable}`);
+  console.log(`features  offered ${res.featureSelection.offered}, budget ${res.featureSelection.budget} (${res.featureSelection.positives} positives / 10 per variable), kept ${res.featureSelection.kept}`);
   console.log(`dropped (zero variance inside the risk set): ${res.model.droppedFeatures.join(", ") || "none"}`);
+  if (res.model.l2) console.log(`L2        chosen ${res.model.l2.chosen} by held-out log loss inside train${res.model.l2.tried.length ? " (" + res.model.l2.tried.map((t) => t.l2 + ":" + t.logLoss).join(" ") + ")" : ""}`);
+  if (res.model.calibrator) {
+    const c = res.model.calibrator;
+    console.log(`calibrator chosen ${c.chosen} by ${c.folds}-fold log loss on validation (platt ${c.logLoss.platt} vs isotonic ${c.logLoss.isotonic})`);
+  }
   console.log(`\nbaseline  AUROC ${res.baseline.auroc}  alerts ${res.baseline.at.alerts}  missed ${res.baseline.at.missed}  sens ${res.baseline.at.sensitivity}`);
-  console.log(`model     AUROC ${res.model.auroc}  AUPRC ${res.model.auprc}  Brier ${res.model.brier}  ECE ${res.model.ece}  slope ${res.model.calibration.slope}`);
+  const ci = res.model.calibration.slopeCI;
+  console.log(`model     AUROC ${res.model.auroc}  AUPRC ${res.model.auprc}  Brier ${res.model.brier}  ECE ${res.model.ece}  slope ${res.model.calibration.slope}${ci ? " (95% CI " + ci.lo + " to " + ci.hi + ")" : ""}`);
   console.log(`          at the SAME alert budget: alerts ${res.model.at.alerts}  missed ${res.model.at.missed}  sens ${res.model.at.sensitivity}  PPV ${res.model.at.ppv}`);
   console.log(`probe     AUROC ${res.probe.auroc}  (frequency only - if this is close, the model learned the ward's staffing)`);
   console.log("\ngates:");

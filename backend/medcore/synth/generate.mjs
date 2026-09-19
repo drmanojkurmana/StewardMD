@@ -111,7 +111,12 @@ function makeEncounter(r, i, opt) {
   const lengthH = Math.round(clamp(gauss(r, 60, 24), 12, 168));
   const admittedAt = Date.UTC(2026, 0, 1) + Math.floor(r() * 300) * 24 * HOUR;
   const dischargedAt = admittedAt + lengthH * HOUR;
-  const ageYears = Math.round(clamp(gauss(r, 61, 17), 17, 95));
+  /* Two populations, both first-class (see adapters/README.md). The generator emits both so the
+   * subgroup gate has something to gate on; the difference written in is small and is a placeholder
+   * for real case-mix and charting differences, not a claim about either country. */
+  const region = r() < 0.5 ? "US" : "IN";
+  const site = region + "-" + (1 + Math.floor(r() * 3));
+  const ageYears = Math.round(clamp(gauss(r, region === "US" ? 63 : 58, 17), 17, 95));
   const sex = r() < 0.54 ? "M" : "F";
   const weightKg = r2(clamp(gauss(r, sex === "M" ? 71 : 62, 12), 38, 130));
   const base = {
@@ -179,6 +184,7 @@ function makeEncounter(r, i, opt) {
     subjectKey: "s-" + String(i).padStart(5, "0"),
     admittedAt: new Date(admittedAt).toISOString(),
     dischargedAt: new Date(dischargedAt).toISOString(),
+    site, region,
     demographics: { ageYears, sex, weightKg },
     observations,
     interventions,

@@ -13,6 +13,10 @@ One JSON object per line (JSONL), one line per encounter.
   "subjectKey": "s-0001",          // opaque. NEVER an MRN, a name or a hospital number.
   "admittedAt": "2026-01-04T08:00:00Z",
   "dischargedAt": "2026-01-07T11:00:00Z",
+  "site": "US-2",                  // the unit or hospital. Gated as a subgroup, so it is required.
+  "region": "US",                  // "US" | "IN". StewardMD is built for both; neither is the
+  //                                  exception, and a model that works in one and fails in the
+  //                                  other fails the subgroup gate like any other collapse.
 
   "demographics": { "ageYears": 68, "sex": "M", "weightKg": 74 },
   //                ^ ageYears ONLY. There is no dob field in this schema and there must never be

@@ -105,8 +105,8 @@ test("pipeline: a run produces every gate, and a gate can fail", () => {
   const { rows } = matrix(COHORT);
   const res = run({ rows, outcome: "MC-3" });
   const names = Object.keys(res.gates).sort();
-  assert.deepEqual(names, ["beatsFrequencyProbe", "calibrationSlope", "ece", "missedEventsReduced25",
-    "noSubgroupCollapse", "selectiveRiskFalls"]);
+  assert.deepEqual(names, ["beatsFrequencyProbe", "calibrationSlope", "ece", "eventsPerVariable",
+    "missedEventsReduced25", "noSubgroupCollapse", "selectiveRiskFalls"]);
   assert.equal(typeof res.allPass, "boolean");
   assert.equal(res.synthetic, true);
   // A gate that cannot fail is decoration. On this deliberately tiny cohort at least one does.
