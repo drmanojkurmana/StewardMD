@@ -122,8 +122,15 @@ Baseline (threshold, NOT NEWS2) AUROC ${res.baseline.auroc}.
 Frequency-only probe AUROC ${res.probe.auroc}.
 Events per variable ${res.counts.eventsPerVariable}.
 `;
-writeFileSync(join(ROOT, "backend/medcore/cards", `${opts.dataset}-${outcome.toLowerCase()}.md`), card);
+/* The card name carries the cohort, because two runs are two populations. An earlier version keyed
+ * it on dataset and outcome alone, and a second run with a different n silently overwrote the
+ * first - which is precisely the "a number whose population nobody can look up" failure the card
+ * exists to prevent. Found by doing it. */
+const cardName = inPath
+  ? `${opts.dataset}-${outcome.toLowerCase()}.md`
+  : `${opts.dataset}-${outcome.toLowerCase()}-n${opts.n}-seed${opts.seed}${opts.frequencyBias ? "-freqbias" : ""}.md`;
+writeFileSync(join(ROOT, "backend/medcore/cards", cardName), card);
 
-console.log(`card     -> backend/medcore/cards/${opts.dataset}-${outcome.toLowerCase()}.md`);
+console.log(`card     -> backend/medcore/cards/${cardName}`);
 console.log(`artifact -> ${outDir}/artifact-${outcome.toLowerCase()}.json`);
 console.log(`gates    ${res.allPass ? "ALL PASS" : "FAILED: " + Object.entries(res.gates).filter(([, g]) => !g.pass).map(([k]) => k).join(", ")}`);
